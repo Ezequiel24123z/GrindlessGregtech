@@ -33,6 +33,7 @@ Gregtech Grindless es un pack de GregTech Modern (Minecraft 1.20.1, Forge) en el
 - **Texto:** los nombres de objetos y máquinas van en `en_us` (inglés) y `es_es` (español). Las misiones van solo en inglés.
 - **Integración:** las recetas de otros mods que rompan la progresión se rehacen para que pasen por máquinas de GregTech.
 - **Rhino (KubeJS 6):** dentro de funciones o callbacks que se ejecutan más de una vez, usa `var` y no `const`/`let`. Si no, salta "redeclaration of var".
+- **Nombres vanilla (KubeJS 2001.6.5):** algunos miembros cambian de nombre para los scripts y el de Mojang no existe: `getYRot`/`getXRot` son `getYaw`/`getPitch`, `getStringUUID` es `getStringUuid`, `tickCount` es `age` y `Level#getGameTime` es `getTime`; `Entity#level()` está oculto (usa `getLevel()`). Lista completa en `tools/test/README.md`. Lo que use un jugador se prueba en la suite `client`.
 
 ## packwiz
 
@@ -49,6 +50,7 @@ Gregtech Grindless es un pack de GregTech Modern (Minecraft 1.20.1, Forge) en el
   - Solo se escribe dentro de `D:\GregtechGrindless`.
   - Nunca se tocan la carpeta de PrismLauncher del usuario, `D:\Grindless` ni su `.minecraft`.
   - Solo una JVM a la vez; el banco usa un candado.
+  - Los clientes de prueba arrancan con todo el sonido a cero (`Set-GGClientOptions` en `tools/test/remote/gg-client.ps1`). El usuario los oye si no.
 - **Qué probar por tier (2-3 pruebas):**
   1. El pack arranca y crea mundo.
   2. Nuestros multibloques se forman y procesan.
