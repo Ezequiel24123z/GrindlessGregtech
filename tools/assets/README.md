@@ -7,14 +7,19 @@ Generadores de las texturas propias del pack. Todo es pixel art procedural de 16
 | `Pixel.Lib.ps1` | Librería común: lienzo ARGB, paletas (carácter → color), mapas de texto, contorno selectivo, escritor de PNG determinista (solo `IHDR`, `IDAT` y `IEND`, deflate sin compresión) y `.png.mcmeta`. |
 | `Build-SteamTextures.ps1` | Escribe las texturas de la era de vapor en `pack/kubejs/assets/grindless/textures/`. |
 | `Build-SteamPreview.ps1` | Hoja de revisión a x8 con las carcasas, los fotogramas y los objetos. Solo es una vista previa: no se publica. |
+| `Build-SteamContentTextures.ps1` | Escribe las caras del alto horno de vapor y de la batería de coque (vapor, plan del viaje) en `pack/kubejs/assets/grindless/textures/`. |
+| `Build-SteamContentPreview.ps1` | Hoja de revisión de esas dos caras: reposo, los 8 fotogramas, el emisivo y una pared 3x3 sobre ladrillo refractario y ladrillo de coque. Solo es una vista previa: no se publica. |
 | `Build-LVTextures.ps1` | Escribe las texturas de la era LV (perforadora, invernadero, horno de arco, simulador de criaturas, electrodo y modelos de criatura) en `pack/kubejs/assets/grindless/textures/`. |
 | `Build-LVPreview.ps1` | Hoja de revisión a x8 de la era LV: cada overlay sobre su carcasa o casco, todos los fotogramas, vista de cueva oscura y pared 3x3. Solo es una vista previa: no se publica. |
+| `Build-LVRoasterHeliostatTextures.ps1` | Escribe las texturas del LV reforzado: caras del tostador de sulfuros y de la torre solar de heliostatos, el espejo de heliostato (bloque) y el catalizador de contacto, en `pack/kubejs/assets/grindless/textures/`. |
 | `Build-MVTextures.ps1` | Escribe las texturas de la era MV (perforadora, invernadero, planta de mineral, biorrefinería y broca de acero vanádico) en `pack/kubejs/assets/grindless/textures/`. |
 | `Build-MVPreview.ps1` | Hoja de revisión a x8 de la era MV: cada overlay sobre su carcasa y sobre las cuatro carcasas MV, todos los fotogramas, vista de cueva oscura, pared 3x3 y la broca junto a las de bronce y acero. Solo es una vista previa: no se publica. |
 | `Build-HVTextures.ps1` | Escribe las texturas de la era HV (refinería, reformador, perforadora, invernadero, llave del End, catalizadores, broca de acero inoxidable y la antigua de titanio) en `pack/kubejs/assets/grindless/textures/`. |
 | `Build-HVPreview.ps1` | Hoja de revisión a x8 de la era HV: cada overlay sobre su carcasa y sobre cuatro carcasas, todos los fotogramas, vista de cueva oscura, pared 3x3, la llave del End junto a las del Vacío y el Llano y la progresión de brocas. Solo es una vista previa: no se publica. |
 | `Build-MoonTextures.ps1` | Escribe las texturas de la Luna, al final de HV (perforadora lunar, muestras de veta lunares y semilla cuántica lunar), en `pack/kubejs/assets/grindless/textures/`. |
 | `Build-MoonPreview.ps1` | Hoja de revisión a x8 de la Luna: la perforadora lunar sobre su carcasa y sobre cuatro carcasas, todos los fotogramas, vista de cueva oscura, pared 3x3, la familia de perforadoras de vapor a la Luna en fila, las muestras lunares teñidas junto a la de la Tierra y la semilla cuántica con todos sus fotogramas. Solo es una vista previa: no se publica. |
+| `Build-SyngasTextures.ps1` | Escribe las texturas de la planta de gas de síntesis de HV (cara del controlador y catalizador de desplazamiento) en `pack/kubejs/assets/grindless/textures/`; con `-Preview` deja además su hoja de revisión (no se publica). |
+| `Build-LaunchRoadTextures.ps1` | Escribe las texturas del camino al primer cohete (banco de pruebas de motores de MV, autoclave de composites de HV y sus piezas: propulsor calificado, motor sin probar, loseta ablativa y depósito envuelto) en `pack/kubejs/assets/grindless/textures/`. |
 | `Build-EVTextures.ps1` | Escribe las texturas de la era EV (planta de platino, perforadora, electrodo de platino y broca de acero de tungsteno) en `pack/kubejs/assets/grindless/textures/`. |
 | `Build-EVPreview.ps1` | Hoja de revisión a x8 de la era EV: cada overlay sobre su carcasa y sobre cuatro carcasas, todos los fotogramas, vista de cueva oscura, pared 3x3, el electrodo de platino junto al de grafito y la progresión de brocas. Solo es una vista previa: no se publica. |
 
@@ -56,6 +61,15 @@ Los overlays siguen la convención de las carcasas de GTM: fondo transparente, d
 - Las brocas (objetos) y la broca de la ventana usan el mismo sombreador (`Draw-Helix`): cono o cilindro iluminado desde arriba a la izquierda con una hélice. Con varios filetes y paso largo salen estrías inclinadas; en la ventana la fase avanza un cuarto por fotograma para que gire.
 - Cada archivo nuevo se anota en `CREDITS.md`, en la tabla «Assets».
 
+## Vapor: alto horno y batería de coque
+
+`Build-SteamContentTextures.ps1` (`-Only blast,battery`) usa el mismo método y las mismas comprobaciones que LV y MV: tamaño, alfa binario, sin negro puro, tiras de 8 fotogramas que cambian de verdad, anillo exterior de 1 px vacío y emisivo contenido en la capa de color. La paleta es la de vapor: bronce y latón, hierro remachado y luz cálida. `Build-SteamContentPreview.ps1 -Out <png>` dibuja la hoja de revisión; con `-Firebricks` y `-CokeBricks` usa las carcasas de GTM extraídas del jar (fuera del repo) en lugar de los ladrillos dibujados por código.
+
+| Archivo (bajo `textures/`) | Se dibujó sobre | Notas |
+|---|---|---|
+| `block/multiblock/steam_blast_furnace/` (`overlay_front`, `_active` y `_active_emissive`, con `.mcmeta`) | `gtceu:block/casings/solid/machine_primitive_bricks` (el controlador está en el etalaje de ladrillo refractario) | Manómetro del viento y volante de la válvula sobre la tubería anular de bronce, dos portavientos de bronce por los lados y una puerta de colada de hierro remachado con mirilla al baño y piquera con canal. 8 fotogramas, `frametime` 3: el baño hierve, sube una chispa, el chorro de colada late por el canal, la aguja tiembla con el viento y la lámpara pasa a verde. En reposo: costra oscura con dos brasas y la lámpara roja. El emisivo lleva el baño, la chispa, la colada y la lámpara. |
+| `block/multiblock/coking_battery/` (los mismos tres) | `gtceu:block/casings/solid/machine_coke_bricks` (el controlador es la puerta de una cámara) | Puerta de cámara de hierro colado entre dos montantes remachados, con dos barras de cierre con pestillos de latón y la boca de nivelación arriba. 8 fotogramas, `frametime` 4: las juntas de la puerta brillan (el coque de dentro está al rojo blanco), una onda más clara da la vuelta a la puerta, la boca parpadea y la lámpara pasa a verde. En reposo: juntas apagadas con dos brasas y la lámpara roja. El emisivo lleva las juntas, la boca y la lámpara. |
+
 ## Era LV
 
 Mismo método (`Pixel.Lib.ps1`, mapas de texto, paletas y sombreadores pequeños; nada copiado de GTM) con otra paleta: acero oscuro **neutro**, como los grises de los overlays de GTM sobre sus carcasas cálidas, con acentos pequeños y saturados (lámpara roja y verde, cinta amarilla y negra, naranja del cobre y de la colada).
@@ -88,6 +102,26 @@ powershell -NoProfile -ExecutionPolicy Bypass -File tools\assets\Build-LVPreview
 - Los marcos, la rampa de acero neutra (`$SteelSpec`, letras `A`-`J` de claro a oscuro) y las paletas de cada pieza están al principio de su bloque. Los mapas de texto (`$DrillBase`, `$GhBase`, `$SafBase`, `$SimBase`, `$MobRows`) se editan a mano; lo que se mueve (broca, plantas, baño, haz de escaneo) se dibuja por código fotograma a fotograma.
 - El ruido del baño del horno sale de `Get-Noise` (un hash de posición y fotograma), no de un generador aleatorio, para que la salida no cambie.
 - Los mismos píxeles-criatura sirven al holograma de la máquina y al núcleo del modelo (`$MobRows`): si se cambia la silueta cambian los dos.
+
+## LV reforzado: tostador de sulfuros y torre solar
+
+Mismo método y misma rampa de acero neutra que la era LV (`$SteelSpec`), con el panel de ventana de los controladores LV (`$PanelBase`).
+
+```powershell
+powershell -NoProfile -ExecutionPolicy Bypass -File tools\assets\Build-LVRoasterHeliostatTextures.ps1
+powershell -NoProfile -ExecutionPolicy Bypass -File tools\assets\Build-LVRoasterHeliostatTextures.ps1 -Only roaster,heliostat,mirror,catalyst -Credits
+```
+
+| Archivo (bajo `textures/`) | Se dibujó sobre | Notas |
+|---|---|---|
+| `block/multiblock/sulfide_roaster/` (`overlay_front`, `_active` y `_active_emissive`, con `.mcmeta`) | `machine_casing_heatproof` | Mirilla del tostador: conducto de gases arriba, lecho fluidizado de mena al rojo que burbujea, parrilla de toberas con chorros de aire azules y, en la base, el nivel de ácido de la torre de contacto y el LED. 8 fotogramas, `frametime` 3. En reposo: costra oscura con brasas. El emisivo lleva el lecho, las burbujas, los chorros y el LED. |
+| `block/multiblock/heliostat_tower/` (los mismos tres) | `machine_casing_solid_steel` | Pantalla del ordenador del campo: el sol cruza un cielo de día, la torre con el receptor encendido y dos filas de espejos que mandan sus rayos. 8 fotogramas, `frametime` 4. En reposo: cielo de noche con estrellas y el receptor frío. El emisivo lleva el sol, los espejos, los rayos, el receptor y el LED. |
+| `block/heliostat/mirror_top.png` | | Cara del espejo vista desde arriba (el modelo usa uv 1..15): marco de acero y cuatro facetas plateadas con el cielo y un brillo cada una. |
+| `block/heliostat/mirror_frame.png` | | Acero del espejo: filas 0-1, el canto del panel; el resto, la cercha de debajo, el poste y el pie (con remaches). |
+| `item/contact_catalyst.png` | | La "carga de catalizador en una copa" de los catalizadores HV, en una copa de acero LV con banda naranja: bolitas de vanadio amarillo-naranja y dos de diatomita clara. |
+
+- El modelo del espejo (`pack/kubejs/assets/grindless/models/block/heliostat/mirror.json`) es a mano: panel de 14 × 2 × 14 a media altura (deja huecos entre espejos en el campo), poste de 2 × 4 y pie de 8 × 1.
+- La comprobación final es la de la era LV: anillo exterior transparente en los overlays, emisivo dentro de la capa de color, sin negro puro; las texturas del espejo tienen que ser opacas enteras.
 
 ## Era MV
 
@@ -182,6 +216,45 @@ powershell -NoProfile -ExecutionPolicy Bypass -File tools\assets\Build-MoonPrevi
 - El grano del regolito y las arrugas de la manta dorada salen de `Get-Noise` (un hash de posición), no de un generador aleatorio.
 - La muestra lunar sigue la regla de la de vapor: el marco reserva la ventana con un marcador antes del contorno y la vacía después, y el núcleo (`$LunarCoreRows`) se edita como un mapa de texto.
 - La semilla es geometría: un círculo de vidrio iluminado desde arriba a la izquierda, el gas por distancia a la perla y las chispas en una órbita de radio 3 alrededor de `$SeedCx`, `$SeedCy`.
+
+## Planta de gas de síntesis (HV)
+
+`Build-SyngasTextures.ps1`: mismo método, mismas rampas y mismas comprobaciones que HV (las ayudas están copiadas para no tocar `Build-HVTextures.ps1`). Lleva su propia vista previa: `-Preview <png>` deja una hoja a x8 con la cara sobre una carcasa de inox limpio dibujada por código (reposo, los 8 fotogramas con su emisivo y la vista de cueva oscura) y el catalizador junto a los otros dos de HV.
+
+```powershell
+powershell -NoProfile -ExecutionPolicy Bypass -File tools\assets\Build-SyngasTextures.ps1
+powershell -NoProfile -ExecutionPolicy Bypass -File tools\assets\Build-SyngasTextures.ps1 -Only plant -Preview C:\ruta\syngas.png
+powershell -NoProfile -ExecutionPolicy Bypass -File tools\assets\Build-SyngasTextures.ps1 -Credits
+```
+
+| Archivo (bajo `textures/`) | Se dibujó sobre | Notas |
+|---|---|---|
+| `block/multiblock/syngas_plant/` (`overlay_front`, `_active` y `_active_emissive`, con `.mcmeta`) | `gtceu:block/casings/solid/machine_casing_clean_stainless_steel` (la de `hv/syngas_plant.js`) | La planta tal como la monta el multibloque, de izquierda a derecha: el gasificador (recipiente con revestimiento de ladrillo, el lecho de carbón ardiendo tras la ventana y la banda de bobinas de Kanthal), los dos tambores de desplazamiento con el catalizador de hierro y cromo y los marcos entre ellos, y la columna absorbedora con la mirilla de amina; un colector de tubo une las tres por arriba. En la base: franjas, una lámpara por gas (CO ámbar, hidrógeno azul, CO₂ pálido) y la de estado. 8 fotogramas, `frametime` 3: el lecho parpadea, brillan las bobinas, una bolita de gas corre por el colector, el catalizador reverbera, suben burbujas por la mirilla y laten las lámparas. En reposo: brasas, bobinas y catalizador fríos, líquido quieto y lámpara roja. El emisivo lleva el lecho, las bobinas, la bolita, los destellos del catalizador, las franjas y las lámparas. |
+| `item/shift_catalyst.png` | | La copa de los catalizadores de HV con banda roja ladrillo y bolitas de magnetita oscura y óxido de hierro rojizo, con dos de óxido de cromo verde. |
+
+- Las letras propias (ladrillo `k`-`l`, catalizador `m`-`q`, amina `r`-`u`, lámparas de gas `v`-`x`) están en `$SynPal`; el marco estático es `$SynBase` y lo demás se dibuja por código fotograma a fotograma. El lecho del gasificador usa `Get-Noise`.
+
+## Camino al primer cohete (MV y HV)
+
+`Build-LaunchRoadTextures.ps1`: mismo método, mismas rampas y mismas comprobaciones que MV y HV (las ayudas están copiadas para no tocar los demás scripts). El banco de pruebas es de MV (carcasa de aluminio, acentos azules y el panel de la perforadora MV); el autoclave es de HV (inox limpio, acentos naranjas y la franja de la refinería).
+
+```powershell
+powershell -NoProfile -ExecutionPolicy Bypass -File tools\assets\Build-LaunchRoadTextures.ps1
+powershell -NoProfile -ExecutionPolicy Bypass -File tools\assets\Build-LaunchRoadTextures.ps1 -Only stand,items
+powershell -NoProfile -ExecutionPolicy Bypass -File tools\assets\Build-LaunchRoadTextures.ps1 -Credits
+```
+
+- `-Only` admite `stand`, `autoclave` e `items` (también con coma y `-File`). `-Verbose` avisa si un dibujo posterior tapa un píxel emisivo: en el banco, el humo del foso tapa a propósito el borde de la llama en cuatro fotogramas.
+- La comprobación final es la de HV (tamaño, alfa binario, sin negro puro, `.mcmeta` de 4 a 8 fotogramas, anillo exterior vacío, emisivo contenido en la capa de color, animación que cambia de verdad), y la salida es idéntica byte a byte en cada ejecución.
+
+| Archivo (bajo `textures/`) | Se dibujó sobre | Notas |
+|---|---|---|
+| `block/multiblock/engine_test_stand/` (`overlay_front`, `_active` y `_active_emissive`, con `.mcmeta`) | `gtceu:block/casings/solid/machine_casing_frost_proof` (la de `launch_road/engine_test_stand.js`) | El banco tal como lo monta el multibloque: el tanque de arriba (mitad de RP-1 ámbar y mitad de LOX escarchada, con una costura en medio), la línea de alimentación hasta el motor, dos patas de celosía de aluminio en un foso de ladrillo refractario y el soporte con la tobera de cobre colgando entre ellas. Panel azul rayado y lámpara de estado en la base. 8 fotogramas, `frametime` 2: la llama de queroseno con un diamante de choque que baja por ella, el suelo del foso al rojo bajo la llama, bocanadas de escape que salen del foso por los dos lados, las luces de telemetría de las patas y un destello en la escarcha. En reposo: tobera fría, foso apagado y lámpara roja. El emisivo lleva la garganta, la llama, el suelo caliente, las luces de telemetría, las franjas y la lámpara. |
+| `block/multiblock/composite_autoclave/` (los mismos tres) | `.../machine_casing_clean_stainless_steel` (la de `launch_road/composite_autoclave.js`) | La puerta redonda de un recipiente a presión tumbado: puerta de inox iluminada desde arriba a la izquierda dentro de un anillo de cierre más oscuro con ocho tetones, y una mirilla en el centro. Franjas naranjas y lámpara de estado en la base. 8 fotogramas, `frametime` 4: la mirilla brilla con las resistencias de dentro (ruido por fotograma), la lámpara azul del nitrógeno late mientras hay presión y se encienden las franjas. En reposo: mirilla oscura, nitrógeno apagado y lámpara roja. El emisivo lleva la mirilla, la lámpara del nitrógeno, las franjas y la de estado. |
+| `item/qualified_power_thruster.png` | | Propulsor con tobera: anillo de admisión oscuro con el buje, cuerpo de aluminio sombreado como un cilindro y boquilla corta, con una etiqueta verde con una marca blanca colgada de un cordel (pasó su encendido). |
+| `item/untested_rocket_motor.png` | | Motor de cohete: placa de inyectores, cámara envuelta en lámina dorada de Kapton, garganta oscura y tobera de cobre abierta, con una etiqueta roja de "quitar antes de volar" colgando (todavía no se ha encendido). |
+| `item/ablative_heat_shield_tile.png` | | Loseta cuadrada con borde biselado de fibra de vidrio claro y un panal oscuro de resina carbonizada dentro, más oscuro hacia abajo a la derecha. |
+| `item/composite_overwrapped_tank.png` | | Depósito en forma de cápsula, de pie: cúpulas de inox arriba y abajo, válvula en lo alto y el cuerpo envuelto en para-aramida amarilla con un tejido en diagonal, sombreado como un cilindro. |
 
 ## Era EV
 
