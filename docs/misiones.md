@@ -254,11 +254,11 @@ Entran cuando su prueba pase y el coordinador lo diga; cada agente deja su lista
 | launch-road | Engine test stand, RP-1, propulsores cualificados (MV); autoclave de compuestos, losetas ablativas, tanques envueltos, motor sin probar y encendido estático (HV) | MV y HV | En HV van delante de las piezas del cohete: *Rocket Motors* pasa a depender del encendido estático y *Fuel Tanks* de los tanques envueltos. Sus ids, tareas y textos de pieza no cambian |
 | syngas | Syngas plant | HV | Fila de química, tras la refinería: hidrógeno y CO para el metanol y el amoniaco |
 
-### Vapor — «Steam Age: Escape Velocity» (`steam_age.snbt`, 41 misiones, 47 dependencias; hecho)
+### Vapor — «Steam Age: Escape Velocity» (`steam_age.snbt`, 45 misiones, 51 dependencias; hecho, con la fila del cielo y las máquinas de vapor nuevas)
 
 Solo falta la fila del cielo (por encima de la automatización) y las máquinas de steam-content, cuando pasen.
 
-### LV — «LV: The First Spark» (`lv_age.snbt`, 40 misiones, 46 dependencias)
+### LV — «LV: The First Spark» (`lv_age.snbt`, 51 misiones, 52 dependencias; hecho en la v0.5.1)
 
 - **Inicio:** *LV Factory* (id actual), depende de *LV Steam Turbine*. Línea del viaje: primera electricidad; el Nether pasa de viaje de ida y vuelta a sitio que se trabaja.
 - **Espina:** red LV (cable, búfer de baterías, escotilla de energía) → *LV Components* (motor, pistón, bomba, cinta, brazo) → *LV Assembler* → bobinas de cuproníquel → *Electric Blast Furnace* (gear 1,5) → *Aluminium* → *MV Machine Hull* → *LV to MV Transformer* (salida, rombo).
@@ -272,7 +272,7 @@ Solo falta la fila del cielo (por encima de la automatización) y las máquinas 
 - **AE2:** los pasos de AE2 que hoy viven en LV se quedan en LV como su rama (el usuario quiere AE2 entero en LV). La pestaña de AE2 empieza dependiendo del último de ellos y no los repite.
 - **Fuentes:** GTCP Modern `lv__low_voltage` (*Progressing Through LV*, *Electricity Generation*, *But what are Amps?*, *Battery Buffer*, *Machine Auto-Output Behaviour*, *Cover Behaviour*, *Programmed Circuits*, *What is this Mess?: Part Two*, *Cupronickel Coils*, *Gallium Arsenide*, *First MV Circuit!*); Monifactory `genesis` (*A Primer on Power*, *Battery Buffers*, *Charging Items*); Star Technology `industrial_revolution` para el tono.
 
-### MV — «MV: The Far End» (`mv_age.snbt`, 41 misiones, 49 dependencias)
+### MV — «MV: The Far End» (`mv_age.snbt`, 47 misiones, 60 dependencias; hecho en la v0.5.1)
 
 - **Inicio:** *MV Factory*, depende de *LV to MV Transformer* (hoy, de *Electric Blast Furnace*). Línea del viaje: el End, más allá del mundo.
 - **Espina:** cable de cobre y red MV → *MV Components* → cromo y aluminio → *Kanthal* → *Stainless Steel* → *Silicon Ingot* → *Silicon Boule* → *Silicon Wafers* → *Integrated Circuits* → *HV Machine Hull* → *MV to HV Transformer* → *Cleanroom* (salida).
@@ -286,7 +286,7 @@ Solo falta la fila del cielo (por encima de la automatización) y las máquinas 
 - **Arreglos de forma:** las líneas de 14 a 27 casillas desde *MV Grid*, *MV Components* y *Biorefinery* son las que cruzan todo el capítulo (y la fila del End).
 - **Fuentes:** GTCP Modern `mv__medium_voltage` (*Transformers*, *Kanthal Coils*, *Stainless Steel*, *Silicon Lottery*, *Moore's Law*, *Polyethylene*, *The Church of Diesel*, *Desulfurization*, *Distillery*, *Pyrolyse Oven*, *Greenhouse*, *Sulfuric Acid*, *Hydrochloric Acid*); Monifactory `groundwork` (silicio, Kanthal) para estructura.
 
-### HV — «HV: Moonshot» (`hv_age.snbt`, 35 misiones, 45 dependencias)
+### HV — «HV: Moonshot» (`hv_age.snbt`, 42 misiones, 51 dependencias; hecho en la v0.5.1)
 
 - **Inicio:** *HV Factory*, depende de *Cleanroom* (la salida de MV). Línea del viaje: la Luna, el primer sitio fuera de la Tierra.
 - **Espina:** red HV → *HV Components* → *Refinery* (gear 1,5) → craqueo y olefinas → PTFE → *Gasoline* (el reactor químico grande) → el cohete → *The Moon* (salida).
@@ -318,6 +318,8 @@ Las cinco están en el grupo *Quality of Life* y se escribieron antes de esta gu
 En las cinco: casi todas las recompensas son XP (poner algo pequeño y útil) y ninguna está enlazada con la era en que se abre. El texto pasa por las reglas de la sección 8.
 
 ## 16. Trozos para escribir en paralelo
+
+Hecho en la v0.5.1: los ocho trozos y las máquinas en camino. Seis escritores en paralelo con un modelo barato y, después, una revisión de la lógica de LV, MV y HV con un modelo más capaz. El modelo barato escribe bien, pero no razona la progresión: la espina y las dependencias de los capítulos de era necesitan siempre esa revisión.
 
 Un trozo es un capítulo y lo hace una sola persona. El contrato es esta guía y el linter:
 
