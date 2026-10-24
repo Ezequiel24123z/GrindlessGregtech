@@ -579,7 +579,7 @@
 			dependencies: ["78451687508D5888"]
 			description: [
 				"Crushed sapphire ore drops aluminium dust as a secondary. Sample the deep sapphire vein, drill it, and collect the dust."
-				"Dust becomes ingots in the Blast Furnace at 120 EU/t, which is MV current: the LV to MV Transformer at the end of this chapter feeds the furnace its MV hatch."
+				"Dust becomes ingots in the Blast Furnace. Give it two LV energy hatches and it reaches MV power, enough for this recipe."
 			]
 			icon: "gtceu:aluminium_ingot"
 			id: "7853BCDA154074E2"
@@ -625,7 +625,7 @@
 			dependencies: ["5C7A2E94B1D03F68"]
 			description: [
 				"The &6Electric Blast Furnace&r reaches heat nothing smaller can. The cupronickel coils set the temperature, and the aluminium recipe needs 1700 K."
-				"Build the coils into the structure, give it an energy hatch, and feed it aluminium dust."
+				"Build the coils into the structure and feed it aluminium dust. The trap: aluminium is an MV recipe, so the furnace needs two LV energy hatches, not one."
 			]
 			icon: "gtceu:electric_blast_furnace"
 			id: "78451687508D5888"
