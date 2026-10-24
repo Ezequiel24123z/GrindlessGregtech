@@ -18,3 +18,7 @@ Una línea por decisión. La más reciente, abajo.
 - 2026-10-24 · GTLCore queda fuera: está atado a GTM 1.4.4 y su licencia no es clara. GTL, GT Odyssey y GTNH sirven solo como fuente de ideas, sin copiar código, texto ni texturas.
 - 2026-10-24 · Gregicality Science y Gregicality Multiblocks (MIT) se pueden portar con atribución. De Gregicality legacy y Susy-Core (GPL-3.0) solo se toman ideas.
 - 2026-10-24 · Licencia del propio pack: pendiente de que la elija el usuario. Propuesta: LGPL-3.0 para el código y CC BY-SA 4.0 para las texturas.
+- 2026-10-24 · EMI queda fijado en 1.1.22: la 1.1.24 choca en el cliente con AllTheLeaks (mixin de `EmiPlugin` cargado demasiado pronto). AllTheLeaks se queda.
+- 2026-10-24 · Las pruebas de cliente usan OpenGL real por software (Mesa llvmpipe, en una copia privada del JDK en el PC de casa) y no el stub de LWJGL. Embeddium, ModernFix y LDLib no arrancan con el stub.
+- 2026-10-24 · La perforadora y el invernadero de vapor no usan agua ni fertilizante: la escotilla ULV de fluidos solo se fabrica en ensambladora (LV). Las variantes con fluido y con fertilizante llegan con las máquinas LV.
+- 2026-10-24 · Las vetas profundas (diamante, mica, redstone) solo se perforan con la broca de acero.

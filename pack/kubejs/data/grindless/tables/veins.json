@@ -1,0 +1,246 @@
+{
+  "_source": "GregTechCEu/GregTech-Modern tag v7.5.3-1.20.1: src/main/java/com/gregtechceu/gtceu/common/data/GTOres.java (Overworld > Stone and Deepslate sections). Colors: .color() of each material in common/data/materials/*.java.",
+  "_how_it_is_used": [
+    "Canonical vein table of the pack. Read by startup_scripts/grindless/lib/tables.js (global.grindless.tables.veins), which feeds the vein sample items, and by server_scripts/grindless/data/veins.js, which derives the recipe data. Electric drills of later tiers must read the same table.",
+    "id = GTM vein id without the '_vein' suffix ('magnetite_vein_ow' -> 'magnetite_ow'). The sample item is grindless:vein_sample_<id>.",
+    "gtm = GTM vein id (gtceu:<gtm> in GTRegistries.ORE_VEINS). layer = stone | deepslate. minY/maxY = heightRangeUniform. spawnWeight = GTM vein weight.",
+    "materials[].id = GTM material name. weight = layer weight (layered), block weight (dike, veined) or, for the classic generator (no weights in GTM), derived from its geometry.",
+    "veined veins: materials with rare=true show up with probability rareChance, the others share the rest by weight (GTM rareBlockChance).",
+    "colorMaterial = surface indicator rock of the vein in GTM; color = that material's GTM .color() (tint of the sample core).",
+    "steelOnly is NOT stored: it is derived as maxY < 0 (deep veins need the steel drill bit)."
+  ],
+  "veins": [
+    {
+      "id": "apatite", "gtm": "apatite_vein", "generator": "layered", "layer": "stone",
+      "minY": 10, "maxY": 80, "spawnWeight": 40,
+      "colorMaterial": "apatite", "color": "#06CDF1",
+      "materials": [
+        { "id": "apatite", "weight": 3 },
+        { "id": "tricalcium_phosphate", "weight": 2 },
+        { "id": "pyrochlore", "weight": 1 }
+      ]
+    },
+    {
+      "id": "cassiterite", "gtm": "cassiterite_vein", "generator": "veined", "layer": "stone",
+      "minY": 10, "maxY": 80, "spawnWeight": 80,
+      "colorMaterial": "cassiterite", "color": "#89847E",
+      "rareChance": 0.33,
+      "materials": [
+        { "id": "tin", "weight": 4 },
+        { "id": "cassiterite", "weight": 2, "rare": true }
+      ]
+    },
+    {
+      "id": "coal", "gtm": "coal_vein", "generator": "layered", "layer": "stone",
+      "minY": 10, "maxY": 140, "spawnWeight": 80,
+      "colorMaterial": "coal", "color": "#393E41",
+      "materials": [
+        { "id": "coal", "weight": 3 }
+      ]
+    },
+    {
+      "id": "copper_tin", "gtm": "copper_tin_vein", "generator": "veined", "layer": "stone",
+      "minY": -10, "maxY": 160, "spawnWeight": 50,
+      "colorMaterial": "chalcopyrite", "color": "#96C185",
+      "rareChance": 0.1,
+      "materials": [
+        { "id": "chalcopyrite", "weight": 5 },
+        { "id": "zeolite", "weight": 2 },
+        { "id": "cassiterite", "weight": 2 },
+        { "id": "realgar", "weight": 1, "rare": true }
+      ]
+    },
+    {
+      "id": "galena", "gtm": "galena_vein", "generator": "layered", "layer": "stone",
+      "minY": -15, "maxY": 45, "spawnWeight": 40,
+      "colorMaterial": "galena", "color": "#F3E8FA",
+      "materials": [
+        { "id": "galena", "weight": 3 },
+        { "id": "silver", "weight": 2 },
+        { "id": "lead", "weight": 1 }
+      ]
+    },
+    {
+      "id": "garnet_tin", "gtm": "garnet_tin_vein", "generator": "layered", "layer": "stone",
+      "minY": 30, "maxY": 60, "spawnWeight": 80,
+      "colorMaterial": "garnet_sand", "color": "#CC4C25",
+      "materials": [
+        { "id": "cassiterite_sand", "weight": 3 },
+        { "id": "garnet_sand", "weight": 2 },
+        { "id": "asbestos", "weight": 2 },
+        { "id": "diatomite", "weight": 1 }
+      ]
+    },
+    {
+      "id": "garnet", "gtm": "garnet_vein", "generator": "dike", "layer": "stone",
+      "minY": -10, "maxY": 50, "spawnWeight": 40,
+      "colorMaterial": "red_garnet", "color": "#950C15",
+      "materials": [
+        { "id": "red_garnet", "weight": 3 },
+        { "id": "yellow_garnet", "weight": 2 },
+        { "id": "amethyst", "weight": 2 },
+        { "id": "opal", "weight": 1 }
+      ]
+    },
+    {
+      "id": "iron", "gtm": "iron_vein", "generator": "veined", "layer": "stone",
+      "minY": -10, "maxY": 60, "spawnWeight": 120,
+      "colorMaterial": "goethite", "color": "#97873A",
+      "materials": [
+        { "id": "goethite", "weight": 5 },
+        { "id": "yellow_limonite", "weight": 2 },
+        { "id": "hematite", "weight": 2 },
+        { "id": "malachite", "weight": 1 }
+      ]
+    },
+    {
+      "id": "lubricant", "gtm": "lubricant_vein", "generator": "layered", "layer": "stone",
+      "minY": 0, "maxY": 50, "spawnWeight": 40,
+      "colorMaterial": "talc", "color": "#EBFFE9",
+      "materials": [
+        { "id": "soapstone", "weight": 3 },
+        { "id": "talc", "weight": 2 },
+        { "id": "glauconite_sand", "weight": 2 },
+        { "id": "pentlandite", "weight": 1 }
+      ]
+    },
+    {
+      "id": "magnetite_ow", "gtm": "magnetite_vein_ow", "generator": "layered", "layer": "stone",
+      "minY": 10, "maxY": 60, "spawnWeight": 80,
+      "colorMaterial": "magnetite", "color": "#9D9D9D",
+      "materials": [
+        { "id": "magnetite", "weight": 3 },
+        { "id": "vanadium_magnetite", "weight": 2 },
+        { "id": "gold", "weight": 1 }
+      ]
+    },
+    {
+      "id": "mineral_sand", "gtm": "mineral_sand_vein", "generator": "layered", "layer": "stone",
+      "minY": 15, "maxY": 60, "spawnWeight": 80,
+      "colorMaterial": "basaltic_mineral_sand", "color": "#5C5C5C",
+      "materials": [
+        { "id": "basaltic_mineral_sand", "weight": 3 },
+        { "id": "granitic_mineral_sand", "weight": 2 },
+        { "id": "fullers_earth", "weight": 2 },
+        { "id": "gypsum", "weight": 1 }
+      ]
+    },
+    {
+      "id": "nickel", "gtm": "nickel_vein", "generator": "layered", "layer": "stone",
+      "minY": -10, "maxY": 60, "spawnWeight": 40,
+      "colorMaterial": "nickel", "color": "#CCDFF5",
+      "materials": [
+        { "id": "garnierite", "weight": 3 },
+        { "id": "nickel", "weight": 2 },
+        { "id": "cobaltite", "weight": 2 },
+        { "id": "pentlandite", "weight": 1 }
+      ]
+    },
+    {
+      "id": "salts", "gtm": "salts_vein", "generator": "layered", "layer": "stone",
+      "minY": 30, "maxY": 70, "spawnWeight": 50,
+      "colorMaterial": "salt", "color": "#FAFAFA",
+      "materials": [
+        { "id": "rock_salt", "weight": 3 },
+        { "id": "salt", "weight": 2 },
+        { "id": "lepidolite", "weight": 1 },
+        { "id": "spodumene", "weight": 1 }
+      ]
+    },
+    {
+      "id": "oilsands", "gtm": "oilsands_vein", "generator": "layered", "layer": "stone",
+      "minY": 30, "maxY": 80, "spawnWeight": 40,
+      "colorMaterial": "oilsands", "color": "#E3C78A",
+      "materials": [
+        { "id": "oilsands", "weight": 7 }
+      ]
+    },
+    {
+      "id": "copper", "gtm": "copper_vein", "generator": "veined", "layer": "deepslate",
+      "minY": -40, "maxY": 10, "spawnWeight": 80,
+      "colorMaterial": "copper", "color": "#E77C56",
+      "materials": [
+        { "id": "chalcopyrite", "weight": 5 },
+        { "id": "iron", "weight": 2 },
+        { "id": "pyrite", "weight": 2 },
+        { "id": "copper", "weight": 2 }
+      ]
+    },
+    {
+      "id": "diamond", "gtm": "diamond_vein", "generator": "classic", "layer": "deepslate",
+      "minY": -55, "maxY": -30, "spawnWeight": 40,
+      "colorMaterial": "diamond", "color": "#C8FFFF",
+      "_note": "classic generator: GTM gives no weights. Derived from ClassicVeinGenerator: graphite fills the primary + secondary layers (the bulk), diamond only the 'between' layers at half density, coal is the 'sporadic' sprinkle at 1/6 density.",
+      "materials": [
+        { "id": "graphite", "weight": 8 },
+        { "id": "diamond", "weight": 1 },
+        { "id": "coal", "weight": 1 }
+      ]
+    },
+    {
+      "id": "lapis", "gtm": "lapis_vein", "generator": "dike", "layer": "deepslate",
+      "minY": -60, "maxY": 10, "spawnWeight": 40,
+      "colorMaterial": "lapis", "color": "#85A9FF",
+      "materials": [
+        { "id": "lazurite", "weight": 3 },
+        { "id": "sodalite", "weight": 2 },
+        { "id": "lapis", "weight": 2 },
+        { "id": "calcite", "weight": 1 }
+      ]
+    },
+    {
+      "id": "manganese_ow", "gtm": "manganese_vein_ow", "generator": "dike", "layer": "deepslate",
+      "minY": -30, "maxY": 0, "spawnWeight": 20,
+      "colorMaterial": "grossular", "color": "#FFB777",
+      "materials": [
+        { "id": "grossular", "weight": 3 },
+        { "id": "spessartine", "weight": 2 },
+        { "id": "pyrolusite", "weight": 2 },
+        { "id": "tantalite", "weight": 1 }
+      ]
+    },
+    {
+      "id": "mica", "gtm": "mica_vein", "generator": "layered", "layer": "deepslate",
+      "minY": -40, "maxY": -10, "spawnWeight": 20,
+      "colorMaterial": "mica", "color": "#ECFEFF",
+      "materials": [
+        { "id": "kyanite", "weight": 3 },
+        { "id": "mica", "weight": 2 },
+        { "id": "bauxite", "weight": 2 },
+        { "id": "pollucite", "weight": 1 }
+      ]
+    },
+    {
+      "id": "olivine", "gtm": "olivine_vein", "generator": "layered", "layer": "deepslate",
+      "minY": -20, "maxY": 10, "spawnWeight": 20,
+      "colorMaterial": "olivine", "color": "#A7E404",
+      "materials": [
+        { "id": "bentonite", "weight": 3 },
+        { "id": "magnesite", "weight": 2 },
+        { "id": "olivine", "weight": 2 },
+        { "id": "glauconite_sand", "weight": 1 }
+      ]
+    },
+    {
+      "id": "redstone_ow", "gtm": "redstone_vein_ow", "generator": "layered", "layer": "deepslate",
+      "minY": -65, "maxY": -10, "spawnWeight": 60,
+      "colorMaterial": "redstone", "color": "#FF0000",
+      "materials": [
+        { "id": "redstone", "weight": 3 },
+        { "id": "ruby", "weight": 2 },
+        { "id": "cinnabar", "weight": 1 }
+      ]
+    },
+    {
+      "id": "sapphire", "gtm": "sapphire_vein", "generator": "layered", "layer": "deepslate",
+      "minY": -40, "maxY": 0, "spawnWeight": 60,
+      "colorMaterial": "sapphire", "color": "#3235E3",
+      "materials": [
+        { "id": "almandine", "weight": 3 },
+        { "id": "pyrope", "weight": 2 },
+        { "id": "sapphire", "weight": 1 },
+        { "id": "green_sapphire", "weight": 1 }
+      ]
+    }
+  ]
+}
