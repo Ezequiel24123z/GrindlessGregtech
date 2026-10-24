@@ -53,7 +53,7 @@ AE2 es la columna entre planetas (decisión del usuario) y mejorarla es un objet
 - **Energía.** Túneles P2P de FE por el puente y convertidores de GTM a los dos lados (`gtceu:ev_16a_energy_converter`: 32 768 EU/t por pareja; verificar id y el impuesto de AE2 por FE). La Tierra cubre la noche lunar y el sobrante solar del día baja a casa.
 - **Pares sin viaje.** La mitad lunar de cada par nuevo la fabrica la propia base (con una pieza de la celda; se ajusta a la receta de HV): la red crece sola.
 - **Marte.** Primer par Tierra–Marte al final de la era. Su mitad marciana se monta allí en la primera visita, y una celda de energía de AE2 cargada en casa arranca ese lado (verificar).
-- **Objetivo de la era:** un segundo par Tierra–Luna hecho por la base, troncal de 64 canales o más, 32 768 EU/t cruzando y el par de Marte. Los cofres y tanques ender siguen sin cruzar.
+- **Objetivo de la era:** un segundo par Tierra–Luna hecho por la base, troncal de 64 canales o más, 32 768 EU/t cruzando y el par de Marte.
 
 ## Marte, al final de EV
 
@@ -166,7 +166,7 @@ Hecha y probada en el scratch (`scratch/ev-plant/src/`), sin aplicar. Qué gana:
 
 - **Escotillas ME (EV)** en todas nuestras máquinas, por las mismas habilidades que los buses normales. En la Luna y Marte son el enlace con casa.
 - **Super cofre y tanque EV** (campo generador MV): stock fuera de la red.
-- **AE2:** la base sigue entera desde LV; los coprocesadores grandes de los addons, con circuitos EV (ya decidido). Los cofres y tanques ender no cruzan planetas.
+- **AE2:** la base sigue entera desde LV; los coprocesadores grandes de los addons, con circuitos EV (ya decidido). Los objetos ender cruzan planetas sin límite (decisión del usuario).
 
 ## Puerta a IV
 

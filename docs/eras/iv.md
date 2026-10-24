@@ -155,7 +155,6 @@ EV deja la troncal de túneles P2P de ME, la energía como FE con convertidores 
 - **EU sin convertir:** túneles P2P de EU (`eup2p`) por el puente en lugar de FE con convertidores, sin el impuesto de AE2 y al amperaje de IV (verificar que cruzan dimensiones). Objetivo: 131 072 EU/t cruzando. El motor térmico manda a casa lo que sobra y el reactor cubre la noche de Mercurio.
 - **Capacidad:** MEGA (procesador del ensamblador de circuitos IV) y los coprocesadores de 32k de Expanded AE. La red guarda y fabrica con lo que llega de cinco mundos.
 - **La red alimenta la línea:** los buses de exportación de cada corte piden a todos los planetas a la vez.
-- Los cofres y tanques ender siguen sin cruzar.
 
 ## Líneas de proceso nuevas
 
