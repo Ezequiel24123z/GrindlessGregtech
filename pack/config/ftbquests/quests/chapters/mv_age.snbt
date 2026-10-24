@@ -9,10 +9,10 @@
 	quest_links: [ ]
 	quests: [
 		{
-			dependencies: ["78451687508D5888"]
+			dependencies: ["39A5A5CC76591697"]
 			description: [
 				"The blast furnace is running and MV parts are already crawling into the base. Hatches, hulls and circuits just step up a size."
-				"This is the biggest machine room yet - a flagship multiblock is coming that replaces half of it on its own."
+				"This is the biggest machine room yet. A flagship multiblock is coming that replaces half of it on its own."
 			]
 			icon: "gtceu:mv_machine_hull"
 			id: "055851443092A93B"
@@ -41,7 +41,7 @@
 			dependencies: ["7BA0CD6F048B3FDE"]
 			description: [
 				"The &6MV Energy Hatch&r feeds a multiblock controller same as before, just more amps. The &6MV Battery Buffer&r smooths the grid for single-block machines."
-				"Build them onto the LV to MV transformer from the gate - that is still where MV power comes from until the fuels arrive."
+				"Build them onto the LV to MV transformer from the gate. That is still where MV power comes from until the fuels arrive."
 			]
 			icon: "gtceu:mv_energy_input_hatch"
 			id: "483AF81AF99ECB93"
@@ -69,9 +69,9 @@
 			y: 0.0d
 		}
 		{
-			dependencies: ["483AF81AF99ECB93"]
+			dependencies: ["262640F3533EE2C3"]
 			description: [
-				"Ruby - the same deep redstone vein steam age taught you to drill - splits in the electrolyzer into chromium and aluminium."
+				"Ruby, the same deep redstone vein steam age taught you to drill, splits in the electrolyzer into chromium and aluminium."
 				"A second road to aluminium: bauxite from the mica vein, electrolyzed at MV power."
 			]
 			icon: "gtceu:chromium_ingot"
@@ -88,8 +88,8 @@
 		{
 			dependencies: ["3EB82BACA3DFF6DB"]
 			description: [
-				"Iron, aluminium and chromium melt together in the Kanthal EBF - two MV energy hatches now, not one, to reach the 480 EU/t Kanthal needs. A chemical bath and a wiremill turn the ingot into coil wire."
-				"&6Kanthal Coil Blocks&r push the blast furnace to an even higher heat - that is what silicon needs next, and what stainless steel needs too."
+				"Iron, aluminium and chromium melt together in the Kanthal EBF. Two MV energy hatches now, not one, to reach the 480 EU/t Kanthal needs. A chemical bath and a wiremill turn the ingot into coil wire."
+				"&6Kanthal Coil Blocks&r push the blast furnace to an even higher heat. That is what silicon needs next, and what stainless steel needs too."
 			]
 			icon: "gtceu:kanthal_coil_block"
 			id: "5DC39DF3C1563B6B"
@@ -102,7 +102,7 @@
 		{
 			dependencies: ["5DC39DF3C1563B6B"]
 			description: [
-				"Vanadium, chromium and seven parts steel smelt into &6Vanadium Steel&r - the only metal hard enough for the cutter's saw and the vein drill's new bit."
+				"Vanadium, chromium and seven parts steel smelt into &6Vanadium Steel&r. The only metal hard enough for the cutter's saw and the vein drill's new bit."
 			]
 			icon: "gtceu:vanadium_steel_ingot"
 			id: "74057E6BDC378944"
@@ -115,7 +115,7 @@
 		{
 			dependencies: ["74057E6BDC378944"]
 			description: [
-				"Iron, chromium, manganese and nickel, through the Kanthal EBF at a lower heat than Kanthal itself needs - &6Stainless Steel&r is what the HV hull and the hazmat suit are waiting on."
+				"Iron, chromium, manganese and nickel, through the Kanthal EBF at a lower heat than Kanthal itself needs. &6Stainless Steel&r is what the HV hull and the hazmat suit are waiting on."
 			]
 			icon: "gtceu:stainless_steel_ingot"
 			id: "24DEACCFA4DCD216"
@@ -126,7 +126,7 @@
 			y: -3.0d
 		}
 		{
-			dependencies: ["483AF81AF99ECB93"]
+			dependencies: ["262640F3533EE2C3"]
 			description: [
 				"Motor, piston, pump, arm and conveyor, one size up. The motor's coil is cupronickel now, wound around aluminium rods instead of iron."
 			]
@@ -145,10 +145,10 @@
 			y: 3.0d
 		}
 		{
-			dependencies: ["51BBBA6F37785CD7", "74057E6BDC378944"]
+			dependencies: ["51BBBA6F37785CD7"]
 			description: [
-				"The &6Cutter&r slices one ingot into several plates or wafers - only the saw inside it asks for vanadium steel instead of plain steel."
-				"The &6Laser Engraver&r burns a circuit pattern onto a wafer. Its emitter only lights up with a flawless emerald - the Nether's beryllium vein is the only place to find one without a trip to the End."
+				"The &6Cutter&r slices one ingot into several plates or wafers. Its saw is vanadium steel instead of plain steel, so keep a spare vanadium ingot close by."
+				"The &6Laser Engraver&r burns a circuit pattern onto a wafer. Its emitter only lights up with a flawless emerald. The Nether's beryllium vein is the only place to find one without a trip to the End."
 			]
 			icon: "gtceu:mv_laser_engraver"
 			id: "6213116B3B6723B8"
@@ -159,12 +159,12 @@
 			]
 			title: "MV Cutter and Laser Engraver"
 			x: 12.5d
-			y: 3.0d
+			y: 0.0d
 		}
 		{
 			dependencies: ["51BBBA6F37785CD7"]
 			description: [
-				"Macerator, ore washer, thermal centrifuge and centrifuge, one size up. Nothing new to learn here - just faster, and about to be replaced."
+				"Macerator, ore washer, thermal centrifuge and centrifuge, one size up. Nothing new to learn here: just faster, and about to be replaced."
 			]
 			icon: "gtceu:mv_macerator"
 			id: "0624908D6FDF0EF8"
@@ -183,7 +183,7 @@
 			dependencies: ["0624908D6FDF0EF8"]
 			description: [
 				"The &6Ore Plant&r is the whole chain in one box: crush, wash, roast and crush again, every secondary intact, without a single bus in between."
-				"One energy hatch runs several ores at once; a second hatch runs twice that. The recipe does not change - it just stops needing ten machines to run it."
+				"One energy hatch runs several ores at once; a second hatch runs twice that. The recipe does not change. It just stops needing ten machines to run it."
 			]
 			icon: "gtceu:ore_plant"
 			id: "3FCAFC1E38DD934C"
@@ -199,9 +199,9 @@
 			y: 3.0d
 		}
 		{
-			dependencies: ["74057E6BDC378944", "483AF81AF99ECB93"]
+			dependencies: ["3FCAFC1E38DD934C"]
 			description: [
-				"Same family as the LV drill, same vein table, same sample - just more bores per hatch and a vanadium steel bit instead of steel."
+				"Same family as the LV drill, same vein table, same sample, just more bores per hatch and a vanadium steel bit instead of steel."
 				"Everything the LV drill could reach, this one reaches faster, and it is the drill for the End veins."
 			]
 			icon: "gtceu:mv_vein_drill"
@@ -235,7 +235,7 @@
 			dependencies: ["3FCAFC1E38DD934C"]
 			description: [
 				"Stone dust stops being pure waste: the centrifuge now splits it into quartzite, feldspar, marble, biotite and sodalite."
-				"What is left over is a mixed metal residue, not worth separating yet. Keep it in a drawer - EV will want it."
+				"What is left over is a mixed metal residue, not worth separating yet. Keep it in a drawer. EV will want it."
 			]
 			icon: "gtceu:mv_centrifuge"
 			id: "793F6428373310F1"
@@ -246,9 +246,9 @@
 			y: 3.0d
 		}
 		{
-			dependencies: ["5DC39DF3C1563B6B"]
+			dependencies: ["24DEACCFA4DCD216"]
 			description: [
-				"Quartz sand and carbon melt in the Kanthal EBF at a heat only a Kanthal coil reaches - a hot silicon ingot, carbon monoxide coming off instead of dioxide this time."
+				"Quartz sand and carbon melt in the Kanthal EBF at a heat only a Kanthal coil reaches. A hot silicon ingot, carbon monoxide coming off instead of dioxide this time."
 				"That CO is worth keeping: a tank for now, methanol later."
 			]
 			icon: "gtceu:silicon_ingot"
@@ -262,7 +262,7 @@
 		{
 			dependencies: ["7C7BAECAD00C19E7"]
 			description: [
-				"Silicon dust and a pinch of gallium arsenide dust, melted again in the same furnace under circuit 2 - the &6Silicon Boule&r is a single crystal, the ancestor of every wafer you will cut."
+				"Silicon dust and a pinch of gallium arsenide dust, melted again in the same furnace under circuit 2. The &6Silicon Boule&r is a single crystal, the ancestor of every wafer you will cut."
 			]
 			icon: "gtceu:silicon_boule"
 			id: "12A688D7F923740B"
@@ -273,8 +273,8 @@
 			y: -3.0d
 		}
 		{
-			dependencies: ["12A688D7F923740B", "6213116B3B6723B8"]
-			description: ["The cutter you already own slices the boule into Silicon Wafers - sixteen from one boule, nothing wasted."]
+			dependencies: ["12A688D7F923740B"]
+			description: ["The cutter you already own slices the boule into Silicon Wafers: sixteen from one boule, nothing wasted."]
 			icon: "gtceu:silicon_wafer"
 			id: "086C8CD2541ED490"
 			rewards: [{ id: "0B53DE86A2D8D40B", type: "xp", xp: 30 }]
@@ -287,7 +287,7 @@
 			dependencies: ["086C8CD2541ED490"]
 			description: [
 				"Red lens in the laser engraver burns an ILC chip into a wafer; green lens burns a RAM chip. Same machine, same wafer, different light."
-				"Both feed every integrated circuit from here to HV - keep both in stock."
+				"Both feed every integrated circuit from here to HV. Keep both in stock."
 			]
 			icon: "gtceu:ilc_chip"
 			id: "4A6B8F971E17C847"
@@ -301,10 +301,10 @@
 			y: -3.0d
 		}
 		{
-			dependencies: ["51BBBA6F37785CD7", "483AF81AF99ECB93"]
+			dependencies: ["30D3D68203F455F9"]
 			description: [
 				"Same spec as the LV greenhouse, more bores per hatch. A carbon dioxide line is new: feed it in and every recipe yields half again as much, and gives back oxygen for the EBF."
-				"Logs, rubber resin and crops - everything pyrolysis, the brewery and the biorefinery are about to ask for."
+				"Logs, rubber resin and crops: everything pyrolysis, the brewery and the biorefinery are about to ask for."
 			]
 			icon: "gtceu:mv_greenhouse"
 			id: "3AE74DC5E01AD916"
@@ -336,7 +336,7 @@
 			dependencies: ["7168260562812CF8"]
 			description: [
 				"The silicon line's carbon monoxide and the greenhouse's carbon dioxide both end up here: hydrogen turns either one into methanol."
-				"Biodiesel, methyl acetate and MV generators all run on it - nothing about this gas goes to waste."
+				"Biodiesel, methyl acetate and MV generators all run on it. Nothing about this gas goes to waste."
 			]
 			icon: "gtceu:mv_chemical_reactor"
 			id: "48331D61E0C6B691"
@@ -350,7 +350,7 @@
 			dependencies: ["48331D61E0C6B691"]
 			description: [
 				"A still gives you one fraction at a time. The &6Biorefinery&r is a column that collects them all in one pass: ethanol, methanol, acetic acid, acetone, phenol, benzene, creosote."
-				"Not required - a distillery run one fraction at a time still reaches everywhere this chapter goes, just slower."
+				"Not required. A distillery run one fraction at a time still reaches everywhere this chapter goes, just slower."
 			]
 			icon: "gtceu:biorefinery"
 			id: "62C555A8293900FA"
@@ -364,9 +364,9 @@
 			y: 9.0d
 		}
 		{
-			dependencies: ["483AF81AF99ECB93"]
+			dependencies: ["30D3D68203F455F9"]
 			description: [
-				"GTM's own &6Fluid Drilling Rig&r prospects and drills oil, gas and brine on its own - the vein never runs dry, in the Overworld or in the Flatlands and Void alike, so one trip under the base is all you need."
+				"GTM's own &6Fluid Drilling Rig&r prospects and drills oil, gas and brine on its own. The vein never runs dry, in the Overworld or in the Flatlands and Void alike, so one trip under the base is all you need."
 				"Four frames, four circuits, four motors, four pumps and four vanadium steel gears: the first machine that asks for every line in this chapter at once."
 			]
 			icon: "gtceu:mv_fluid_drilling_rig"
@@ -383,7 +383,7 @@
 			dependencies: ["1A38798F23E8EA97"]
 			description: [
 				"Crude splits into fractions in the distillery; strip the sulfur out with hydrogen and the mixer turns the rest into diesel."
-				"No oil under the base? Seed oil and methanol make biodiesel instead - slower, but it runs the same generators."
+				"No oil under the base? Seed oil and methanol make biodiesel instead: slower, but it runs the same generators."
 			]
 			icon: "gtceu:mv_distillery"
 			id: "44031073B1E3A181"
@@ -396,7 +396,7 @@
 		{
 			dependencies: ["4A6B8F971E17C847"]
 			description: [
-				"Salt water from the fluid rig's brine deposit - or salt and water in a mixer if you are landlocked - electrolyzes at LV power into sodium hydroxide, chlorine and hydrogen."
+				"Salt water from the fluid rig's brine deposit, or salt and water in a mixer if you are landlocked, electrolyzes at LV power into sodium hydroxide, chlorine and hydrogen."
 				"All three get used again before this chapter ends: sodium hydroxide becomes persulfate, chlorine becomes PVC, hydrogen becomes methanol."
 			]
 			icon: "gtceu:lv_electrolyzer"
@@ -423,7 +423,7 @@
 		{
 			dependencies: ["0D69D5BBC371A5B7"]
 			description: [
-				"Chlorine from the brine line plus ethylene makes vinyl chloride; string enough of it together and you get PVC - the plates the hazmat suit is built from."
+				"Chlorine from the brine line plus ethylene makes vinyl chloride; string enough of it together and you get PVC: the plates the hazmat suit is built from."
 			]
 			icon: "gtceu:mv_mixer"
 			id: "0F6966AED46B5795"
@@ -436,7 +436,7 @@
 		{
 			dependencies: ["0F6966AED46B5795"]
 			description: [
-				"A silicon plate, fine tin wire and a splash of polyethylene make a &6Transistor&r. Carbon and a coil of wire make a &6Resistor&r - the plainest part in this whole chapter."
+				"A silicon plate, fine tin wire and a splash of polyethylene make a &6Transistor&r. Carbon and a coil of wire make a &6Resistor&r. The plainest part in this whole chapter."
 			]
 			icon: "gtceu:transistor"
 			id: "6A521D8B1437F9E4"
@@ -452,7 +452,7 @@
 		{
 			dependencies: ["6A521D8B1437F9E4"]
 			description: [
-				"An ILC chip and a board make a Basic Integrated Circuit; a better board and more of the same make the Good Integrated Circuit - the MV-tier chip."
+				"An ILC chip and a board make a Basic Integrated Circuit; a better board and more of the same make the Good Integrated Circuit: the MV-tier chip."
 				"Same circuit assembler as LV, just fed more inputs."
 			]
 			icon: "gtceu:good_integrated_circuit"
@@ -469,7 +469,7 @@
 		{
 			dependencies: ["1617CBC90D126D2F"]
 			description: [
-				"Two good boards, two ILC chips, two RAM chips, four transistors, electrum fine wire and annealed copper bolts off a GTM arc furnace - the &6Advanced Integrated Circuit&r is the HV circuit, and you can build it at MV power."
+				"Two good boards, two ILC chips, two RAM chips, four transistors, electrum fine wire and annealed copper bolts off a GTM arc furnace. The &6Advanced Integrated Circuit&r is the HV circuit, and you can build it at MV power."
 				"Eight of these and the HV gate stops asking anything of your circuit line."
 			]
 			icon: "gtceu:advanced_integrated_circuit"
@@ -481,7 +481,7 @@
 			y: -3.0d
 		}
 		{
-			dependencies: ["0F6966AED46B5795"]
+			dependencies: ["49BA4B42FA5DD586"]
 			description: [
 				"GTM's hazards stay on, and this chapter's chemistry pays for them: the &6Hazmat Suit&r is PVC plates, rubber, lead and glass, with a polyethylene and activated carbon filter in the mask."
 				"Pyrolysis with nitrogen in the hatch is where that activated carbon comes from."
@@ -497,12 +497,12 @@
 			]
 			title: "Hazmat Suit"
 			x: 45.0d
-			y: -3.0d
+			y: 0.0d
 		}
 		{
 			dependencies: ["49BA4B42FA5DD586", "7B6466252E0C044A"]
 			description: [
-				"Stainless steel casing, two polyethylene plates and two gold cables - the HV Machine Hull is one size up from MV, and every ingredient already has a line feeding it."
+				"Stainless steel casing, two polyethylene plates and two gold cables. The HV Machine Hull is one size up from MV, and every ingredient already has a line feeding it."
 			]
 			icon: "gtceu:hv_machine_hull"
 			id: "01AAEC5F1DC1C5EE"
@@ -527,7 +527,7 @@
 			dependencies: ["3AA2DBA360D83236"]
 			description: [
 				"Stainless steel rods, a double silver cable and a double electrum wire wind into the &6HV Motor&r. Stainless pipe and rubber rings make the &6HV Pump&r."
-				"Both are gate-only for this chapter - HV itself is next."
+				"Both are gate-only for this chapter. HV itself is next."
 			]
 			icon: "gtceu:hv_electric_motor"
 			id: "21B999C2D0EF51A9"
@@ -544,7 +544,7 @@
 			dependencies: ["21B999C2D0EF51A9"]
 			description: [
 				"None of this is required, but the network keeps growing: Applied Flux feeds it FE through an MV circuit, wireless terminals run off a GT battery and an MV circuit, and EnderChests or EnderTanks turn the simulator's pearls and your aluminium plates into portable storage."
-				"Pick whichever is useful - the core AE2 sub-tree from LV already does the job alone."
+				"Pick whichever is useful. The core AE2 sub-tree from LV already does the job alone."
 			]
 			icon: "ae2:controller"
 			id: "63CD92CD1D3FC989"
@@ -556,10 +556,10 @@
 			y: 0.0d
 		}
 		{
-			dependencies: ["21B999C2D0EF51A9", "62C555A8293900FA"]
+			dependencies: ["21B999C2D0EF51A9"]
 			description: [
-				"An HV hull, an HV circuit, three filters, two stainless rotors and two HV motors - the &6Cleanroom&r is the one room clean enough for HV wafers and chips."
-				"That is the MV chapter done. Metal, silicon, carbon and chlorine all stand on their own lines - HV just needs you to step inside."
+				"An HV hull, an HV circuit, three filters, two stainless rotors and two HV motors. The &6Cleanroom&r is the one room clean enough for HV wafers and chips."
+				"Metal, silicon, carbon and chlorine each have their own line now. HV just needs you to step inside."
 			]
 			icon: "gtceu:cleanroom"
 			id: "53336232501835EE"
@@ -573,6 +573,88 @@
 			title: "Cleanroom"
 			x: 55.0d
 			y: -1.5d
+		}
+		{
+			dependencies: ["101BAA038F0ACAA6", "1EEB24C2AB3EF4B0"]
+			description: [
+				"The &6Radio Telescope&r listens from above the base. It runs on LV power and a clear sky, and it is the first step toward the Moon."
+			]
+			icon: "gtceu:radio_telescope"
+			id: "1E1E4E32D9532D1A"
+			rewards: [{ id: "1B7C4D2A9E035F61", type: "xp", xp: 40 }]
+			shape: "gear"
+			size: 1.5d
+			tasks: [{ id: "5A0E7C41B2D93F18", item: "gtceu:radio_telescope", type: "item" }]
+			title: "Radio Telescope"
+			x: 2.5d
+			y: -6.0d
+		}
+		{
+			dependencies: ["1E1E4E32D9532D1A"]
+			description: [
+				"The telescope maps the Moon's face. The &6Lunar Landing-Site Chart&r marks where a rocket can set down, and HV's first launch needs it."
+			]
+			icon: "grindless:lunar_landing_chart"
+			id: "5C4613715A82BDBF"
+			rewards: [{ id: "2D91E6B4C7A08F13", type: "xp", xp: 60 }]
+			tasks: [{ id: "3F8A1D6C02B7E945", item: "grindless:lunar_landing_chart", type: "item" }]
+			title: "Lunar Landing-Site Chart"
+			x: 5.0d
+			y: -6.0d
+		}
+		{
+			dependencies: ["44031073B1E3A181"]
+			description: [
+				"The next cut of the same crude is kerosene. It is the base of the rocket fuel, so the distillery keeps running."
+			]
+			icon: "gtceu:kerosene_bucket"
+			id: "6E2B9F41C5A7D038"
+			rewards: [{ id: "7A4D2C90E61B53F8", type: "xp", xp: 30 }]
+			tasks: [{ id: "5C1F0A8E3B94D672", type: "checkmark" }]
+			title: "Kerosene"
+			x: 27.5d
+			y: 6.0d
+		}
+		{
+			dependencies: ["6E2B9F41C5A7D038"]
+			description: [
+				"Kerosene refined once more in the distillery gives RP-1. The static fire burns it, and so will the rocket."
+			]
+			icon: "gtceu:rp_1_rocket_fuel_bucket"
+			id: "4B8E1D73A0F25C69"
+			rewards: [{ id: "1D5E8B2A7C90F436", type: "xp", xp: 40 }]
+			tasks: [{ id: "2F6C9A40D7E18B35", type: "checkmark" }]
+			title: "RP-1"
+			x: 30.0d
+			y: 6.0d
+		}
+		{
+			dependencies: ["4B8E1D73A0F25C69"]
+			description: [
+				"Power thrusters, RP-1 and oxygen go into a static test. The ones that survive the fire come out as qualified power thrusters, and only those fly."
+			]
+			icon: "grindless:qualified_power_thruster"
+			id: "3A9D0C6F82B14E57"
+			rewards: [{ id: "5E0A7D3C1F92B684", type: "xp", xp: 50 }]
+			tasks: [{ count: 4L, id: "6C2F8E14B9A03D7B", item: "grindless:qualified_power_thruster", type: "item" }]
+			title: "Qualified Power Thrusters"
+			x: 32.5d
+			y: 6.0d
+		}
+		{
+			dependencies: ["3A9D0C6F82B14E57"]
+			description: [
+				"The engine test stand is a multiblock that fires a rocket engine on the ground. Every part the rocket carries is tested here first."
+			]
+			icon: "gtceu:engine_test_stand"
+			id: "115744A9113F8B38"
+			rewards: [{ id: "2B6F4C9E8D0A17E3", type: "xp", xp: 60 }]
+			shape: "gear"
+			size: 1.5d
+			tasks: [{ id: "7D3B0E92A6C41F58", item: "gtceu:engine_test_stand", type: "item" }]
+			title: "Engine Test Stand"
+			x: 35.0d
+			y: 6.0d
 		}
 		{
 			dependencies: ["51BBBA6F37785CD7", "47892302FAEA3244"]
