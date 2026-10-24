@@ -1,0 +1,330 @@
+hash-format = "sha256"
+
+[[files]]
+file = "config/ftbquests/quests/chapter_groups.snbt"
+hash = "7b568176d3a232003be0f8774964c76b310f5f52faf09dfa13b8d4b1c30601da"
+
+[[files]]
+file = "config/ftbquests/quests/chapters/steam_age.snbt"
+hash = "b43961c6399a0c3d164f37e5056e6de84498a17cf26a89d3d53f07ab1acf7d74"
+
+[[files]]
+file = "config/ftbquests/quests/chapters/welcome.snbt"
+hash = "bc645ca216abbef48494407f6539ef68b50f279a4d6a55ebd1c7ef5d212b74a6"
+
+[[files]]
+file = "config/ftbquests/quests/data.snbt"
+hash = "2791f469e47423518db67636d05116c6bc63d290198b227980e7d0da1919c086"
+
+[[files]]
+file = "kubejs/assets/grindless/lang/en_us.json"
+hash = "3b3964d1d84cf4d5a981703a0e2c5b37441638f410cc24cceef28618fa5423c3"
+
+[[files]]
+file = "kubejs/assets/grindless/lang/es_es.json"
+hash = "43c3aac99edd303e96a67555ad3f6a4dab77f3643255ec5252e23fc51f4b66ce"
+
+[[files]]
+file = "kubejs/assets/grindless/textures/block/multiblock/steam_greenhouse/overlay_front.png"
+hash = "4cda1da142d7d9c2d085dc726935545aa3be0a56f255548d5551031685213fd6"
+
+[[files]]
+file = "kubejs/assets/grindless/textures/block/multiblock/steam_greenhouse/overlay_front_active.png"
+hash = "d0dc678ede4e7c39d40e7447489b4c3daa27809cfaf866c3fa221c075f3fb0ca"
+
+[[files]]
+file = "kubejs/assets/grindless/textures/block/multiblock/steam_greenhouse/overlay_front_active.png.mcmeta"
+hash = "491ea51d46bc1f0c0ff11ed9293461cc67de293c7672abbc45f67563f8fe1f1a"
+
+[[files]]
+file = "kubejs/assets/grindless/textures/block/multiblock/steam_greenhouse/overlay_front_active_emissive.png"
+hash = "b71db0a1766bc2ffc6bc45bcd75fa2a79d06b5e99eb6f9f1ccf2bccd81ce9d1c"
+
+[[files]]
+file = "kubejs/assets/grindless/textures/block/multiblock/steam_greenhouse/overlay_front_active_emissive.png.mcmeta"
+hash = "491ea51d46bc1f0c0ff11ed9293461cc67de293c7672abbc45f67563f8fe1f1a"
+
+[[files]]
+file = "kubejs/assets/grindless/textures/block/multiblock/steam_vein_drill/overlay_front.png"
+hash = "732c1703ca5ca70a89973e6aa318a1931aa14caba24f2ca250c5596d797c900a"
+
+[[files]]
+file = "kubejs/assets/grindless/textures/block/multiblock/steam_vein_drill/overlay_front_active.png"
+hash = "00df2eae73693bb340c7fab0cd390fbc3beb50d42070269219707bca96dca513"
+
+[[files]]
+file = "kubejs/assets/grindless/textures/block/multiblock/steam_vein_drill/overlay_front_active.png.mcmeta"
+hash = "af915735740bd046c85e66fc03c47bb31517ef64f1721726151ea5de8cf121e3"
+
+[[files]]
+file = "kubejs/assets/grindless/textures/block/multiblock/steam_vein_drill/overlay_front_active_emissive.png"
+hash = "11e7be0d339758500f2b31449ecde36bb1307538b8ee9724f89555153fd2c251"
+
+[[files]]
+file = "kubejs/assets/grindless/textures/block/multiblock/steam_vein_drill/overlay_front_active_emissive.png.mcmeta"
+hash = "af915735740bd046c85e66fc03c47bb31517ef64f1721726151ea5de8cf121e3"
+
+[[files]]
+file = "kubejs/assets/grindless/textures/item/bronze_drill_bit.png"
+hash = "e448da2576e8a2f5bb45a5b24772889edd7c8d29a2e19b1818edd2981e62f615"
+
+[[files]]
+file = "kubejs/assets/grindless/textures/item/empty_vein_probe.png"
+hash = "720a9446724dbc1d07116fae943f663391ca1c5e894055474a28c006f6ecd809"
+
+[[files]]
+file = "kubejs/assets/grindless/textures/item/flat_key.png"
+hash = "44aa5fab8e5cb58c2f29e6f96ea5ff746a295ea54857b385a425e61f9177e5a5"
+
+[[files]]
+file = "kubejs/assets/grindless/textures/item/steel_drill_bit.png"
+hash = "cdd6b29afc44624d26b32697b1a6b757dc65e9dd339b3e45e8a660ebb525a285"
+
+[[files]]
+file = "kubejs/assets/grindless/textures/item/vein_sample_core.png"
+hash = "22ea45a1b00bc97fa5fb2f5874c30dd6d98a03a47917738f0de858e57635f24f"
+
+[[files]]
+file = "kubejs/assets/grindless/textures/item/vein_sample_frame.png"
+hash = "89f7a3fd6d64b96c32a9d28d9e44146769b17aad694d1c0bd598dddd1a961152"
+
+[[files]]
+file = "kubejs/assets/grindless/textures/item/void_key.png"
+hash = "3e3e508ada9975cc1d5c65b43fd2f83b5b03a3960dae7cc0f42540d318c58024"
+
+[[files]]
+file = "kubejs/client_scripts/grindless/dimensions_lang.js"
+hash = "07d3313c48d3bc168d3c0b72aff83cbedb228e5625eca8785e5b4c5efb0b49d2"
+
+[[files]]
+file = "kubejs/data/grindless/dimension/flat.json"
+hash = "d67053efde0918a90f0f97a9dd09116f4b9ee83cded5baaa0286ee979fd19e50"
+
+[[files]]
+file = "kubejs/data/grindless/dimension/void.json"
+hash = "d61e96cd1af1f59e22fea33a2059e7a70d4c050b6851bb726083faf4a9be5fa1"
+
+[[files]]
+file = "kubejs/data/grindless/dimension_type/building.json"
+hash = "e47663cad3be88f9983b691b50220da40c48250a259ae11bb549a41352102712"
+
+[[files]]
+file = "kubejs/data/grindless/tables/veins.json"
+hash = "eebb7c77c7def89c2a4593970852e1987049f9833d5cbaba03c94636332eaccc"
+
+[[files]]
+file = "kubejs/server_scripts/grindless/data/greenhouse.js"
+hash = "77e8c358f58dcddf5065ba5886f0266af155197149f59a349f153a6806b5f963"
+
+[[files]]
+file = "kubejs/server_scripts/grindless/data/veins.js"
+hash = "6552a5efd80939c4a1d725573819fd4f2dbb13349d738882ec51022a22a6abf5"
+
+[[files]]
+file = "kubejs/server_scripts/grindless/dimensions.js"
+hash = "35809218ffdbf0adeb1af536cce6427893ad473177f53b946bee4ef8926d2ef0"
+
+[[files]]
+file = "kubejs/server_scripts/grindless/quest_book.js"
+hash = "b44c1715f872a7f1c9abdbbd8bd76e6641799e585952f668f3986683118adb32"
+
+[[files]]
+file = "kubejs/server_scripts/grindless/steam/crafting.js"
+hash = "8b4b4f33c5d619e12486e56a27a243281befe58d796418f335be2f5d61cc350d"
+
+[[files]]
+file = "kubejs/server_scripts/grindless/steam/greenhouse.js"
+hash = "5b0de9d3e7f8b9086a863407b045573b3f04356bd5062bc1f916545ce9806024"
+
+[[files]]
+file = "kubejs/server_scripts/grindless/steam/vein_drilling.js"
+hash = "5547c185e38d18fe64b37420e97d20bc8337650ad15477c37fceb5ece1edf9c4"
+
+[[files]]
+file = "kubejs/startup_scripts/grindless/dimensions.js"
+hash = "db79b4299b12c8b9c872d7d02a39861ee44c71aa060679964b75830dd894f66d"
+
+[[files]]
+file = "kubejs/startup_scripts/grindless/lib/patterns.js"
+hash = "fdb4f71c8aa1cdbe93cd74b3194bc903870f41f6ce7cbf3c9fa16dc78d7b1e3c"
+
+[[files]]
+file = "kubejs/startup_scripts/grindless/lib/tables.js"
+hash = "05fc95ba3708aff1690713155bbce2990fc4387530fbb84d4b4b141aa1289a96"
+
+[[files]]
+file = "kubejs/startup_scripts/grindless/steam/items.js"
+hash = "76ac3d8aab4e1140283478c33c677ac50e56a6253e1824a160f231de970ae709"
+
+[[files]]
+file = "kubejs/startup_scripts/grindless/steam/machines.js"
+hash = "bf83b144960a3ee24c49099e3068dab0807e4cf735b979ea86c5d43deeaacb45"
+
+[[files]]
+file = "kubejs/startup_scripts/grindless/steam/recipe_types.js"
+hash = "ecd29a0fd2dbfaec5910bbb24bdfe38de2d4142ea3351a4c517a98de30f87bbd"
+
+[[files]]
+file = "mods/ae2.pw.toml"
+hash = "34c1975c251dea36264ca05724c2ece2d5d24e8c1bcb5fb31260ee92aa4e18a1"
+metafile = true
+
+[[files]]
+file = "mods/alltheleaks.pw.toml"
+hash = "907fb01eb072c653615fa0ebb32a62876d9ec1436b95a16c16c9b6dd297d5d6d"
+metafile = true
+
+[[files]]
+file = "mods/appleskin.pw.toml"
+hash = "d2040e30ca2ba4ae397fc32fa4e6bf44f7eb47a50670e83eac80c8ba2e9b9222"
+metafile = true
+
+[[files]]
+file = "mods/architectury-api.pw.toml"
+hash = "1c2419c98409933c8300270db6a88ffa177416d3404f17c0f2e7131b681c926f"
+metafile = true
+
+[[files]]
+file = "mods/badoptimizations.pw.toml"
+hash = "5c458dd488aacfbc120884df95fff7f58db965df5996581ebcf996d3d4dae037"
+metafile = true
+
+[[files]]
+file = "mods/clumps.pw.toml"
+hash = "a3933e757bcdc33cbae2124049d292dee30c13ae7dc4ae7d43029c00890fa84c"
+metafile = true
+
+[[files]]
+file = "mods/controlling.pw.toml"
+hash = "6dad188e89a1cd0065f7ef14ad40c5d15e6aad26152d2a8a6bf1f9ddbfbc1738"
+metafile = true
+
+[[files]]
+file = "mods/crafting-station-jei-edition-updated.pw.toml"
+hash = "b0d000721d93c942a8796693aae76ee28dc7072001b7765460d26efe3c1ab88e"
+metafile = true
+
+[[files]]
+file = "mods/dynamic-fps.pw.toml"
+hash = "c0463c3385867c19a9afceda246a7ed38b45c648cbd952a0d3990960f0bf5c5d"
+metafile = true
+
+[[files]]
+file = "mods/embeddium.pw.toml"
+hash = "ee33f4de6b59b1d5dbc4da150c974ff328091ca6071af77b78694d634dc46d37"
+metafile = true
+
+[[files]]
+file = "mods/emi.pw.toml"
+hash = "c55ad7fec700cca32b31de09bf02244f8a824222d74f7bf2111531c58ef582d1"
+metafile = true
+
+[[files]]
+file = "mods/entityculling.pw.toml"
+hash = "84b77ccf40446246f893f72032aa9875c2273b08af1a289d52ac9883f9d446ef"
+metafile = true
+
+[[files]]
+file = "mods/ferrite-core.pw.toml"
+hash = "b27ec36077871b83a88df4ed27f741be8bdb18b53e61728c0f7f490b308a877a"
+metafile = true
+
+[[files]]
+file = "mods/ftb-library-forge.pw.toml"
+hash = "9d5c234159f073ee8062df1092c9dc8c3b0dcfb8b28f6b29367abe429b0089ca"
+metafile = true
+
+[[files]]
+file = "mods/ftb-quests-forge.pw.toml"
+hash = "9c25a25ab822aac7cf5e77848c500632ad3806bd90f5ce38c5f21e27c8c4979f"
+metafile = true
+
+[[files]]
+file = "mods/ftb-teams-forge.pw.toml"
+hash = "b40bc0c93bed40c576bc2950c8aa2908fa33c9f9f64c4ba311c0e16d2ab6307b"
+metafile = true
+
+[[files]]
+file = "mods/ftb-xmod-compat.pw.toml"
+hash = "e7b7a16b60c291c86a80a762887d7871fe6006cdb45cbb9ddf920c6737541352"
+metafile = true
+
+[[files]]
+file = "mods/gregtechceu-modern.pw.toml"
+hash = "ff1c3dcdb25810de419ea4f9f78ee9e142820a05b7ad1efe9a27745dfe9e0af9"
+metafile = true
+
+[[files]]
+file = "mods/guideme.pw.toml"
+hash = "dfde061dce83f601d73e4f344c546957c4dfa74d850c31e0c76424c15d5e16d6"
+metafile = true
+
+[[files]]
+file = "mods/immediatelyfast.pw.toml"
+hash = "6492d13dab4af26bcc174b969b86c950474812917516186c1dac9edd09c64a82"
+metafile = true
+
+[[files]]
+file = "mods/jade.pw.toml"
+hash = "cc4dfa7c29839bb5b0c36306705f199205ff6e6f029232d20fbffff03ac422ce"
+metafile = true
+
+[[files]]
+file = "mods/jei.pw.toml"
+hash = "273135701941371c1ab76f04e0a2200ac74ef326f041695518f855c1ce6c82ea"
+metafile = true
+
+[[files]]
+file = "mods/kubejs.pw.toml"
+hash = "f0992ee5af4b033e9c03cc16ef74599de7262fd29ad976d0a7c22e3928770daf"
+metafile = true
+
+[[files]]
+file = "mods/modernfix.pw.toml"
+hash = "13920bd0aeb40d5690beb5c2b47ea5a7db6126f7d0939b4b009637af5537b6ea"
+metafile = true
+
+[[files]]
+file = "mods/mouse-tweaks.pw.toml"
+hash = "cdec4b411bf38f5e031eed5842b3845875f28d9c9386fc962a913a4ccc6bf31d"
+metafile = true
+
+[[files]]
+file = "mods/neruina.pw.toml"
+hash = "b8374d1d77b0c14b601b21be620c564144312033648c8f63856ec3542a7d9f5c"
+metafile = true
+
+[[files]]
+file = "mods/noisium.pw.toml"
+hash = "6c84b7221e9b6f56ade25ed5a3c7d145d9c78f789140fbacd74c5239a69457ad"
+metafile = true
+
+[[files]]
+file = "mods/packet-fixer.pw.toml"
+hash = "b8e3104d42c7d7cb90058c6fa988c0bbcb631f797f8f863821f0d912c01ba991"
+metafile = true
+
+[[files]]
+file = "mods/rhino.pw.toml"
+hash = "ec01b6f53880486af2f6b1c468e2dddaa8fbcad1ccc235c5d6d0eda7251d58a2"
+metafile = true
+
+[[files]]
+file = "mods/searchables.pw.toml"
+hash = "ecff33a5a60e8145d23fde7f5c374e4a5f68e61ad6a8c0a919a99467cf28be9b"
+metafile = true
+
+[[files]]
+file = "mods/spark.pw.toml"
+hash = "d249242966dc3cf97fbc5d2cf5ee16772010363956a289d4910c18753106fd6f"
+metafile = true
+
+[[files]]
+file = "mods/xaeros-minimap.pw.toml"
+hash = "265a00d70fed758ae8280bf47919b834587414bba29605a6caa72b2f3023049f"
+metafile = true
+
+[[files]]
+file = "mods/xaeros-world-map.pw.toml"
+hash = "f1b023762a03daf6c7607fdec741ffbb97c1d4c0288aa7d8a4dc4eedc8c0fc48"
+metafile = true

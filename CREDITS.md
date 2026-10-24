@@ -21,10 +21,36 @@ Las ideas no se copian como texto ni como código: se rehacen con nuestras regla
 | Una sola tabla de vetas para todos los tiers | Packs de la familia skyblock y GTE2 (tabla compartida de automatización de mineral) | Varias | El concepto. |
 | Invernadero de vapor con plantón como catalizador | Star Technology (Tree Synthesizer, semillas como catalizador), Monifactory (Greenhouse de MV), ejemplo de Greenhouse de la documentación de GTM | MIT / LGPL-3.0 / CC0 | El concepto, adelantado a la era de vapor. |
 
+## Misiones
+
+No se ha copiado texto literal de ningún libro. Se han adaptado convenciones de estructura y diseño de tareas.
+
+| Qué | De dónde sale | Licencia | Qué tomamos |
+|---|---|---|---|
+| Una misión por máquina; tareas opcionales hermanas para LP/HP; forma de engranaje solo para multibloques clave | Star Technology, `config/ftbquests/quests/chapters/early_game.snbt` | MIT | Convenciones de estructura |
+| Opciones base de `data.snbt`, un grupo de capítulos con nombre, premio pequeño por misión | Monifactory, `config/ftbquests/quests/data.snbt`, `chapter_groups.snbt`, `chapters/groundwork.snbt` | LGPL-3.0 | Convenciones de estructura y opciones (archivo derivado) |
+| Comprobación cruzada de IDs de GTM | TerraFirmaGreg | Sin licencia | Solo consulta |
+
 ## Assets
 
 Cada textura propia se anota aquí con su origen.
 
 | Archivo | Origen | Licencia |
 |---|---|---|
-| _(pendiente)_ | | |
+| `pack/kubejs/assets/grindless/textures/block/multiblock/steam_vein_drill/overlay_front.png` | Generada con tools/assets/Build-SteamTextures.ps1 (pixel art procedural, original) por agente de assets, 2026-10-24 | la del pack (pendiente; propuesta CC BY-SA 4.0) |
+| `pack/kubejs/assets/grindless/textures/block/multiblock/steam_vein_drill/overlay_front_active.png` | Generada con tools/assets/Build-SteamTextures.ps1 (pixel art procedural, original) por agente de assets, 2026-10-24 | la del pack (pendiente; propuesta CC BY-SA 4.0) |
+| `pack/kubejs/assets/grindless/textures/block/multiblock/steam_vein_drill/overlay_front_active.png.mcmeta` | Generada con tools/assets/Build-SteamTextures.ps1 (pixel art procedural, original) por agente de assets, 2026-10-24 | la del pack (pendiente; propuesta CC BY-SA 4.0) |
+| `pack/kubejs/assets/grindless/textures/block/multiblock/steam_vein_drill/overlay_front_active_emissive.png` | Generada con tools/assets/Build-SteamTextures.ps1 (pixel art procedural, original) por agente de assets, 2026-10-24 | la del pack (pendiente; propuesta CC BY-SA 4.0) |
+| `pack/kubejs/assets/grindless/textures/block/multiblock/steam_vein_drill/overlay_front_active_emissive.png.mcmeta` | Generada con tools/assets/Build-SteamTextures.ps1 (pixel art procedural, original) por agente de assets, 2026-10-24 | la del pack (pendiente; propuesta CC BY-SA 4.0) |
+| `pack/kubejs/assets/grindless/textures/block/multiblock/steam_greenhouse/overlay_front.png` | Generada con tools/assets/Build-SteamTextures.ps1 (pixel art procedural, original) por agente de assets, 2026-10-24 | la del pack (pendiente; propuesta CC BY-SA 4.0) |
+| `pack/kubejs/assets/grindless/textures/block/multiblock/steam_greenhouse/overlay_front_active.png` | Generada con tools/assets/Build-SteamTextures.ps1 (pixel art procedural, original) por agente de assets, 2026-10-24 | la del pack (pendiente; propuesta CC BY-SA 4.0) |
+| `pack/kubejs/assets/grindless/textures/block/multiblock/steam_greenhouse/overlay_front_active.png.mcmeta` | Generada con tools/assets/Build-SteamTextures.ps1 (pixel art procedural, original) por agente de assets, 2026-10-24 | la del pack (pendiente; propuesta CC BY-SA 4.0) |
+| `pack/kubejs/assets/grindless/textures/block/multiblock/steam_greenhouse/overlay_front_active_emissive.png` | Generada con tools/assets/Build-SteamTextures.ps1 (pixel art procedural, original) por agente de assets, 2026-10-24 | la del pack (pendiente; propuesta CC BY-SA 4.0) |
+| `pack/kubejs/assets/grindless/textures/block/multiblock/steam_greenhouse/overlay_front_active_emissive.png.mcmeta` | Generada con tools/assets/Build-SteamTextures.ps1 (pixel art procedural, original) por agente de assets, 2026-10-24 | la del pack (pendiente; propuesta CC BY-SA 4.0) |
+| `pack/kubejs/assets/grindless/textures/item/bronze_drill_bit.png` | Generada con tools/assets/Build-SteamTextures.ps1 (pixel art procedural, original) por agente de assets, 2026-10-24 | la del pack (pendiente; propuesta CC BY-SA 4.0) |
+| `pack/kubejs/assets/grindless/textures/item/steel_drill_bit.png` | Generada con tools/assets/Build-SteamTextures.ps1 (pixel art procedural, original) por agente de assets, 2026-10-24 | la del pack (pendiente; propuesta CC BY-SA 4.0) |
+| `pack/kubejs/assets/grindless/textures/item/empty_vein_probe.png` | Generada con tools/assets/Build-SteamTextures.ps1 (pixel art procedural, original) por agente de assets, 2026-10-24 | la del pack (pendiente; propuesta CC BY-SA 4.0) |
+| `pack/kubejs/assets/grindless/textures/item/vein_sample_frame.png` | Generada con tools/assets/Build-SteamTextures.ps1 (pixel art procedural, original) por agente de assets, 2026-10-24 | la del pack (pendiente; propuesta CC BY-SA 4.0) |
+| `pack/kubejs/assets/grindless/textures/item/vein_sample_core.png` | Generada con tools/assets/Build-SteamTextures.ps1 (pixel art procedural, original) por agente de assets, 2026-10-24 | la del pack (pendiente; propuesta CC BY-SA 4.0) |
+| `pack/kubejs/assets/grindless/textures/item/void_key.png` | Generada con tools/assets/Build-SteamTextures.ps1 (pixel art procedural, original) por agente de assets, 2026-10-24 | la del pack (pendiente; propuesta CC BY-SA 4.0) |
+| `pack/kubejs/assets/grindless/textures/item/flat_key.png` | Generada con tools/assets/Build-SteamTextures.ps1 (pixel art procedural, original) por agente de assets, 2026-10-24 | la del pack (pendiente; propuesta CC BY-SA 4.0) |

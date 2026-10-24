@@ -32,6 +32,7 @@ Gregtech Grindless es un pack de GregTech Modern (Minecraft 1.20.1, Forge) en el
 - **Datos:** las tablas (vetas, cultivos…) viven en archivos de datos y las recetas se generan desde ellas. No se escriben a mano recetas repetitivas.
 - **Texto:** los nombres de objetos y máquinas van en `en_us` (inglés) y `es_es` (español). Las misiones van solo en inglés.
 - **Integración:** las recetas de otros mods que rompan la progresión se rehacen para que pasen por máquinas de GregTech.
+- **Rhino (KubeJS 6):** dentro de funciones o callbacks que se ejecutan más de una vez, usa `var` y no `const`/`let`. Si no, salta "redeclaration of var".
 
 ## packwiz
 

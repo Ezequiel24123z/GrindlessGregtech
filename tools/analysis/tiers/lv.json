@@ -1,0 +1,51 @@
+{
+  "tier": "lv",
+  "title": "Era LV (esqueleto)",
+  "extends": "steam",
+  "inheritTargets": true,
+  "note": "Esqueleto de la era LV (docs/eras/lv.md): hereda el mundo, las máquinas y los objetivos del vapor, añade la energía como una clave eu:lv (la da la turbina de vapor LV con vapor) y todas las máquinas de un bloque gtceu:lv_* con los tipos de receta del registro, y comprueba que esas máquinas y sus piezas se pueden fabricar. No modela cables, escotillas ni amperios. PENDIENTE: la puerta a MV y los multibloques de la era (perforadora LV, invernadero LV, horno de arco sumergido) cuando existan.",
+
+  "world": [],
+  "machines": [],
+
+  "machinesFromRegistry": [
+    {
+      "prefix": "gtceu:lv_",
+      "maxEUt": 32,
+      "needs": ["eu:lv"],
+      "excludeTypes": ["gtceu:dummy", "gtceu:steam_turbine", "gtceu:combustion_generator", "gtceu:gas_turbine"]
+    }
+  ],
+
+  "synthetic": [
+    {
+      "id": "turbina-lv",
+      "machines": ["gtceu:lv_steam_turbine"],
+      "produces": ["eu:lv"],
+      "note": "La turbina de vapor LV (ya modelada en el vapor con needs de vapor) da energía LV."
+    }
+  ],
+
+  "targets": [
+    { "id": "escotilla-energia-lv", "label": "Escotilla de energía LV", "item": "gtceu:lv_energy_input_hatch" },
+    { "id": "buffer-bateria-lv", "label": "Búfer de baterías LV (4x)", "item": "gtceu:lv_battery_buffer_4x" },
+    { "id": "caldera-grande-bronce", "label": "Caldera grande de bronce", "item": "gtceu:bronze_large_boiler" },
+    { "id": "motor-lv", "label": "Motor eléctrico LV", "item": "gtceu:lv_electric_motor" },
+    { "id": "piston-lv", "label": "Pistón eléctrico LV", "item": "gtceu:lv_electric_piston" },
+    { "id": "bomba-lv", "label": "Bomba eléctrica LV", "item": "gtceu:lv_electric_pump" },
+    { "id": "cinta-lv", "label": "Cinta transportadora LV", "item": "gtceu:lv_conveyor_module" },
+    { "id": "brazo-lv", "label": "Brazo robótico LV", "item": "gtceu:lv_robot_arm" },
+    { "id": "macerador-lv", "label": "Macerador LV", "item": "gtceu:lv_macerator" },
+    { "id": "lavador-lv", "label": "Lavador de mineral LV", "item": "gtceu:lv_ore_washer" },
+    { "id": "centrifuga-lv", "label": "Centrífuga LV", "item": "gtceu:lv_centrifuge" },
+    { "id": "electrolizador-lv", "label": "Electrolizador LV", "item": "gtceu:lv_electrolyzer" },
+    { "id": "ensamblador-lv", "label": "Ensamblador LV", "item": "gtceu:lv_assembler" },
+    { "id": "ensamblador-circuitos-lv", "label": "Ensamblador de circuitos LV", "item": "gtceu:lv_circuit_assembler" },
+    { "id": "reactor-quimico-lv", "label": "Reactor químico LV", "item": "gtceu:lv_chemical_reactor" },
+    { "id": "energia-lv", "label": "Energía LV disponible", "item": "eu:lv" }
+  ],
+
+  "autoTargets": [
+    { "id": "auto-energia-lv", "label": "Energía LV sostenida (turbina de vapor)", "item": "eu:lv" }
+  ]
+}
