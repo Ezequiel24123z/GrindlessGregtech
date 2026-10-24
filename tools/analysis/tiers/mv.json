@@ -4,7 +4,7 @@
   "extends": "lv",
   "inheritTargets": true,
   "dropTargets": ["silicio-gt-no-antes-de-mv", "bobina-kanthal-no-antes-de-mv"],
-  "note": "Era MV según docs/eras/mv.md y sus \"Decisiones tomadas\" (que mandan): perforadora y invernadero MV (tope 16 de paralelos), planta de mineral (gtceu:ore_plant, tipo gtceu:ore_processing), biorrefinería (recortable: WARN si falta), broca de acero vanádico, perforadora de fluidos de GTM (gtceu:mv_fluid_drilling_rig) con las vetas de fluido infinitas por config, el End se queda en HV, sin blaze en MV. Hereda del LV el mundo, las máquinas y TODOS los objetivos (regresión), salvo las dos comprobaciones de fuga que en MV dejan de ser ciertas (silicio de GT y bobina Kanthal). Energía: eu:mv sale del transformador LV->MV (4 A -> 1 A) sobre la red LV, de la turbina de vapor MV o de los generadores de combustible; eu:hv, del transformador MV->HV; no se modelan cables, amperios ni baterías. Las máquinas de un bloque gtceu:mv_* (del registro) corren recetas de hasta 128 V; los multibloques eléctricos con 2 o más escotillas de energía del mismo nivel suben un escalón (GTM 7.5.3, WorkableElectricMultiblockMachine.getMaxVoltage): 2 escotillas MV = 512 V (HV), y por eso el EBF con 2 escotillas MV corre las recetas de 480 EU/t (acero inoxidable, Kanthal) que no caben en una máquina MV de un bloque; el EBF también depende de la bobina (cuproníquel 1 800 K, Kanthal 2 700 K, +100 K por escalón sobre MV). El petróleo sale de los yacimientos de fluido del volcado (fluid_veins.json) que admiten la dimensión de la fábrica, y solo se sostiene con worldgen.oreVeins.infiniteBedrockOresFluids = true (config.json). La escotilla de mantenimiento solo se exige con machines.enableMaintenance = true (también de config.json). El cromo sale del rubí por electrólisis: la planta no procesa gemas y la cromita solo está en el End. La escotilla de energía HV es opcional (WARN): pide un ensamblador HV y un chip LPIC de cámara limpia, o sea que ya es de HV.",
+  "note": "Era MV según docs/eras/mv.md y sus \"Decisiones tomadas\" (que mandan): perforadora y invernadero MV (tope 16 de paralelos), planta de mineral (gtceu:ore_plant, tipo gtceu:ore_processing), biorrefinería (recortable: WARN si falta), broca de acero vanádico, perforadora de fluidos de GTM (gtceu:mv_fluid_drilling_rig) con las vetas de fluido infinitas por config, y el End, que abre en MV (v0.5.0, DECISIONS 2026-10-24: «El End pasa a MV, sin ilmenita ni scheelita»): la llave del End, el ojo de ender y el blaze bajan a MV (docs/viaje.md, «Las vetas del End»), las menas del End son la regla menas-end (un viaje con la llave; solo las vetas con muestra en la tabla de la perforadora: veins_end.json sin la ilmenita, que se va a la Luna, ni la veta de scheelita, que se va a Marte), la perforadora MV corre las vetas del End con lodo y el End es un recurso de MV para la regla de eras. Hereda del LV el mundo, las máquinas y TODOS los objetivos (regresión), salvo las dos comprobaciones de fuga que en MV dejan de ser ciertas (silicio de GT y bobina Kanthal). Energía: eu:mv sale del transformador LV->MV (4 A -> 1 A) sobre la red LV, de la turbina de vapor MV o de los generadores de combustible; eu:hv, del transformador MV->HV; no se modelan cables, amperios ni baterías. Las máquinas de un bloque gtceu:mv_* (del registro) corren recetas de hasta 128 V; los multibloques eléctricos con 2 o más escotillas de energía del mismo nivel suben un escalón (GTM 7.5.3, WorkableElectricMultiblockMachine.getMaxVoltage): 2 escotillas MV = 512 V (HV), y por eso el EBF con 2 escotillas MV corre las recetas de 480 EU/t (acero inoxidable, Kanthal) que no caben en una máquina MV de un bloque; el EBF también depende de la bobina (cuproníquel 1 800 K, Kanthal 2 700 K, +100 K por escalón sobre MV). El petróleo sale de los yacimientos de fluido del volcado (fluid_veins.json) que admiten la dimensión de la fábrica, y solo se sostiene con worldgen.oreVeins.infiniteBedrockOresFluids = true (config.json). La escotilla de mantenimiento solo se exige con machines.enableMaintenance = true (también de config.json). El cromo sale del rubí por electrólisis: la planta no procesa gemas y la cromita solo está en el End. La escotilla de energía HV es opcional (WARN): pide un ensamblador HV y un chip LPIC de cámara limpia, o sea que ya es de HV.",
 
   "contexts": ["minecraft:overworld", "grindless:flat", "grindless:void"],
 
@@ -27,6 +27,16 @@
       "fromFluidVeins": { "fluids": ["gtceu:oil", "gtceu:oil_light", "gtceu:oil_medium", "gtceu:oil_heavy", "gtceu:natural_gas"] },
       "sustainedIf": { "config": "worldgen.oreVeins.infiniteBedrockOresFluids", "equals": true },
       "note": "Perforadora de fluidos de GTM (decisión 2): bombea el yacimiento del chunk (petróleo, petróleo ligero/medio/pesado, gas natural) y solo gasta EU. Cuenta lo que dice el volcado de yacimientos (fluid_veins.json): los de GTM filtran por dimensión (solo Overworld) y los de Llano/Vacío los añade el pack (dimensions_fluids.js). Sin la config de vetas infinitas el yacimiento se agota hasta su mínimo (WARN). La salmuera no se cuenta: su yacimiento solo sale en océanos; la sal sale del mezclador y la electrólisis."
+    },
+    {
+      "id": "menas-end",
+      "mode": "manual",
+      "bootstrap": true,
+      "needs": ["grindless:end_key"],
+      "template": "gtceu:raw_{m}",
+      "fromVeins": { "dimensions": ["minecraft:the_end"], "requireRecipe": { "type": "gtceu:vein_drilling", "input": "grindless:vein_sample_{id}" } },
+      "materials": [],
+      "note": "Viaje al End con la llave (MV): dos menas de cada veta que el pack ofrece a la perforadora (las que tienen muestra). Las menas salen del registro vivo de vetas (veins.json): si la veta de bauxita del End volviera a generar ilmenita, el viaje la daría y la comprobación ilmenita-no-sale-del-end fallaría. La muestra de la veta se hace con esas 2 menas, y después la perforadora MV (con lodo) las repone."
     }
   ],
 
@@ -118,7 +128,7 @@
         "gtceu:frostproof_machine_casing", "gtceu:aluminium_frame", "gtceu:steel_pipe_casing", "gtceu:mv_energy_input_hatch",
         "gtceu:mv_input_bus", "gtceu:mv_output_bus", "gtceu:mv_input_hatch"
       ],
-      "note": "Perforadora de vetas MV (escalón de familia): misma spec y misma tabla de vetas que la LV (el End se queda en HV), carcasa y marcos de aluminio, tope 16 de paralelos con escotilla MV y broca de acero vanádico."
+      "note": "Perforadora de vetas MV (escalón de familia): misma spec y misma tabla de vetas que la LV más la del End (veins_end.json, con lodo), carcasa y marcos de aluminio, tope 16 de paralelos con escotilla MV y broca de acero vanádico."
     },
     {
       "machine": "gtceu:mv_greenhouse",
@@ -159,6 +169,32 @@
         "gtceu:mv_output_bus"
       ],
       "note": "Biorrefinería (la pieza recortable del MV): columna de 3x3 con capas, una salida por capa; EU/t <= 120. Sin ella, las fracciones salen del alambique una por pasada."
+    },
+    {
+      "machine": "gtceu:radio_telescope",
+      "types": ["gtceu:radio_astronomy"],
+      "energy": { "voltage": 128 },
+      "needs": ["eu:mv"],
+      "partsFromStructure": true,
+      "partAbilities": { "energy_input": ["gtceu:mv_energy_input_hatch"] },
+      "parts": [
+        "gtceu:frostproof_machine_casing", "gtceu:aluminium_frame", "minecraft:lightning_rod", "gtceu:mv_energy_input_hatch", "gtceu:mv_input_bus",
+        "gtceu:mv_output_bus"
+      ],
+      "note": "Radiotelescopio (observatory/machines.js): tres antenas de marcos de aluminio con un pararrayos de antena cada una, un tendido de marcos y la caseta de carcasa de aluminio con las piezas; 120 EU/t. Sus condiciones (de noche, sin tormenta; con lluvia sí) no se modelan."
+    },
+    {
+      "machine": "gtceu:engine_test_stand",
+      "types": ["gtceu:static_fire"],
+      "energy": { "voltage": 128 },
+      "needs": ["eu:mv"],
+      "partsFromStructure": true,
+      "partAbilities": { "energy_input": ["gtceu:mv_energy_input_hatch"] },
+      "parts": [
+        "gtceu:frostproof_machine_casing", "gtceu:firebricks", "gtceu:aluminium_frame", "gtceu:heatproof_machine_casing", "gtceu:steel_pipe_casing",
+        "gtceu:mv_energy_input_hatch", "gtceu:mv_input_bus", "gtceu:mv_output_bus", "gtceu:mv_input_hatch", "gtceu:mv_output_hatch"
+      ],
+      "note": "Banco de pruebas de motores (launch_road/engine_test_stand.js, el camino al primer cohete): base de carcasa de aluminio alrededor de un foso de ladrillo refractario, cuatro patas de marco de aluminio, soporte de carcasa termorresistente, línea de tubo de acero y tanques de carcasa de aluminio; 1-2 escotillas de energía. En MV califica los propulsores de potencia (120 EU/t, RP-1 y oxígeno); el encendido del motor (480 EU/t) es de HV (hv.json)."
     }
   ],
 
@@ -257,6 +293,15 @@
     { "id": "invernadero-mv", "label": "Invernadero MV (nuestro)", "item": "gtceu:mv_greenhouse" },
     { "id": "planta-menas", "label": "Planta de mineral (nuestra)", "item": "gtceu:ore_plant" },
     { "id": "biorrefineria", "label": "Biorrefinería (nuestra, recortable)", "item": "gtceu:biorefinery", "optional": true },
+    { "id": "radiotelescopio", "label": "Radiotelescopio (nuestro)", "item": "gtceu:radio_telescope" },
+    { "id": "carta-alunizaje", "label": "Carta del lugar de alunizaje, del radiotelescopio (la que pedirá el primer cohete, HV)", "item": "grindless:lunar_landing_chart" },
+    { "id": "receta-carta-alunizaje", "label": "Radioastronomía: mapa y efemérides (no se gastan) + papel -> carta de alunizaje (de noche y sin tormenta: no modelado)", "kind": "recipe", "type": "gtceu:radio_astronomy", "output": "grindless:lunar_landing_chart", "input": ["grindless:lunar_map", "grindless:lunar_ephemeris"] },
+    { "id": "carta-alunizaje-solo-radiotelescopio", "label": "La carta de alunizaje solo sale del radiotelescopio (la copia pide una carta)", "item": "grindless:lunar_landing_chart", "without": ["operar:gtceu:radio_telescope"], "expect": "unreachable" },
+    { "id": "banco-pruebas-motores", "label": "Banco de pruebas de motores (nuestro, el camino al primer cohete)", "item": "gtceu:engine_test_stand" },
+    { "id": "rp1", "label": "RP-1 (queroseno de cohete: diésel -> queroseno -> RP-1 en el alambique, 120 EU/t)", "fluid": "gtceu:rp_1_rocket_fuel" },
+    { "id": "propulsor-calificado", "label": "Propulsor de potencia calificado (encendido estático MV: 4 propulsores + RP-1 + O2)", "item": "grindless:qualified_power_thruster" },
+    { "id": "receta-encendido-propulsores", "label": "Banco de pruebas: 4 propulsores de potencia + RP-1 + O2 -> 4 calificados + CO2 + agua", "kind": "recipe", "type": "gtceu:static_fire", "output": "grindless:qualified_power_thruster", "input": ["gtceu:power_thruster", "fluid:gtceu:rp_1_rocket_fuel"] },
+    { "id": "propulsor-calificado-solo-banco", "label": "El propulsor calificado solo sale del banco de pruebas", "item": "grindless:qualified_power_thruster", "without": ["operar:gtceu:engine_test_stand*"], "expect": "unreachable" },
     { "id": "broca-vanadica", "label": "Broca de acero vanádico", "item": "grindless:vanadium_steel_drill_bit" },
     { "id": "perforadora-fluidos-mv", "label": "Perforadora de fluidos MV (GTM)", "item": "gtceu:mv_fluid_drilling_rig" },
     { "id": "horno-pirolisis", "label": "Horno de pirólisis (GTM)", "item": "gtceu:pyrolyse_oven" },
@@ -322,9 +367,16 @@
     { "id": "transformador-mv-hv", "label": "Transformador MV -> HV (4 A -> 1 A)", "item": "gtceu:mv_transformer_4a" },
     { "id": "energia-hv", "label": "Energía HV disponible (transformador MV -> HV sobre la red MV)", "item": "eu:hv" },
 
-    { "id": "ojo-ender-no-antes-de-hv", "label": "El ojo de ender no sale antes de HV (decisión 5: sin blaze en MV)", "item": "minecraft:ender_eye", "expect": "unreachable" },
-    { "id": "polvo-blaze-no-antes-de-hv", "label": "El polvo de blaze no sale antes de HV (reactor químico HV)", "item": "minecraft:blaze_powder", "expect": "unreachable" },
-    { "id": "vara-blaze-no-antes-de-hv", "label": "La vara de blaze no sale antes de HV (simulador HV)", "item": "minecraft:blaze_rod", "expect": "unreachable" },
+    { "id": "llave-end", "label": "Llave del End (ojo de ender + palo + obsidiana), ya en MV", "item": "grindless:end_key" },
+    { "id": "ojo-ender", "label": "Ojo de ender en MV (blaze del simulador MV -> extractor -> baño químico)", "item": "minecraft:ender_eye" },
+    { "id": "ojo-ender-solo-por-gt", "label": "El ojo de ender solo sale por el baño químico de GT: sin él no hay receta vanilla ni otra", "item": "minecraft:ender_eye", "without": ["gtceu:chemical_bath/eye_of_ender"], "expect": "unreachable" },
+    { "id": "polvo-blaze", "label": "Polvo de blaze en MV", "item": "minecraft:blaze_powder" },
+    { "id": "blaze-liquido", "label": "Blaze líquido (extractor, 144 mB por polvo)", "fluid": "gtceu:blaze" },
+    { "id": "receta-blaze-simulador-mv", "label": "Simulador de criaturas MV: blaze -> varas de blaze", "kind": "recipe", "type": "gtceu:creature_simulation", "output": "minecraft:blaze_rod" },
+    { "id": "menas-end-con-llave", "label": "Menas del End (un viaje con la llave del End): cromita", "item": "gtceu:raw_chromite" },
+    { "id": "menas-end-sin-llave", "label": "Las menas del End no salen sin el viaje que exige la llave", "item": "gtceu:raw_chromite", "without": ["mundo:menas-end"], "expect": "unreachable" },
+    { "id": "ilmenita-no-sale-del-end", "label": "El End ya no da ilmenita: se va a la Luna (en MV no hay ninguna)", "item": "gtceu:raw_ilmenite", "expect": "unreachable" },
+    { "id": "scheelita-no-sale-del-end", "label": "El End ya no da scheelita ni tungstita: se van a Marte", "anyOf": ["gtceu:raw_scheelite", "gtceu:raw_tungstate"], "expect": "unreachable" },
 
     { "id": "cpu-16k", "label": "Almacenamiento de crafteo 16k (la CPU con la que se entra a MV)", "item": "ae2:16k_crafting_storage" },
     { "id": "cpu-64k", "label": "Almacenamiento de crafteo 64k (la CPU que fabrica el motor HV con patrones)", "item": "ae2:64k_crafting_storage" },
@@ -341,6 +393,16 @@
     { "id": "mejora-pila-2", "label": "Mejora de pila nivel 2 de la mochila (placas de aluminio)", "item": "sophisticatedbackpacks:stack_upgrade_tier_2" }
   ],
 
+  "targetsFromVeins": [
+    {
+      "idPrefix": "muestra-end-",
+      "labelPrefix": "Muestra de la veta del End",
+      "dimensions": ["minecraft:the_end"],
+      "requireRecipe": { "type": "gtceu:vein_drilling", "input": "grindless:vein_sample_{id}" },
+      "target": { "item": "grindless:vein_sample_{id}" }
+    }
+  ],
+
   "autoTargetsFromVeins": [
     {
       "idPrefix": "auto-perforacion-mv-",
@@ -348,6 +410,24 @@
       "dimensions": ["minecraft:overworld", "minecraft:the_nether"],
       "requireRecipe": { "type": "gtceu:vein_drilling", "input": "grindless:vein_sample_{id}" },
       "target": { "kind": "recipe", "type": "gtceu:vein_drilling", "input": ["grindless:vein_sample_{id}", "grindless:vanadium_steel_drill_bit"] }
+    },
+    {
+      "idPrefix": "auto-perforacion-mv-end-",
+      "labelPrefix": "Perforadora MV (sin las de vapor ni LV) con lodo: receta de la veta del End",
+      "dimensions": ["minecraft:the_end"],
+      "requireRecipe": { "type": "gtceu:vein_drilling", "input": "grindless:vein_sample_{id}" },
+      "without": ["operar:gtceu:steam_vein_drill", "operar:gtceu:lv_vein_drill"],
+      "target": { "kind": "recipe", "type": "gtceu:vein_drilling", "input": ["grindless:vein_sample_{id}", "fluid:gtceu:drilling_fluid"] }
+    },
+    {
+      "idPrefix": "auto-mena-end-",
+      "labelPrefix": "Menas exclusivas de la veta del End (con la perforadora MV)",
+      "dimensions": ["minecraft:the_end"],
+      "requireRecipe": { "type": "gtceu:vein_drilling", "input": "grindless:vein_sample_{id}" },
+      "without": ["operar:gtceu:steam_vein_drill", "operar:gtceu:lv_vein_drill"],
+      "exclusiveFrom": ["minecraft:overworld", "minecraft:the_nether"],
+      "template": "gtceu:raw_{m}",
+      "mode": "anyOf"
     }
   ],
 
@@ -410,7 +490,22 @@
     { "id": "auto-carbon-activado", "label": "Carbón activado", "item": "gtceu:activated_carbon_dust" },
     { "id": "auto-integrado-avanzado", "label": "Circuito integrado avanzado (HV)", "item": "gtceu:advanced_integrated_circuit" },
     { "id": "auto-traje-peto", "label": "Traje antipeligro (peto: placas de PVC, goma y filtro)", "item": "gtceu:hazmat_chestpiece" },
-    { "id": "auto-casco-hv", "label": "Casco HV", "item": "gtceu:hv_machine_hull" }
+    { "id": "auto-casco-hv", "label": "Casco HV", "item": "gtceu:hv_machine_hull" },
+
+    { "id": "auto-blaze-vara", "label": "Simulador MV: varas de blaze, receta usable y sostenible", "kind": "recipe", "type": "gtceu:creature_simulation", "output": "minecraft:blaze_rod" },
+    { "id": "auto-polvo-blaze", "label": "Polvo de blaze", "item": "minecraft:blaze_powder" },
+    { "id": "auto-rp1", "label": "RP-1 (del diésel del petróleo)", "fluid": "gtceu:rp_1_rocket_fuel" },
+    { "id": "auto-propulsor-calificado", "label": "Propulsor de potencia calificado (banco de pruebas con RP-1 y O2 del aire)", "item": "grindless:qualified_power_thruster" }
+  ],
+
+  "eraResources": [
+    {
+      "id": "end",
+      "era": "mv",
+      "label": "el End (sus vetas, con la llave del End)",
+      "dimensions": ["minecraft:the_end"],
+      "note": "v0.5.0: el End abre en MV. Nada del vapor ni del LV puede pedir lo que solo sale de allí."
+    }
   ],
 
   "eraItems": [
@@ -434,6 +529,9 @@
       ]
     },
     { "id": "mv-perforadora", "label": "Lo que pide la perforadora MV: la broca y las muestras de sus recetas", "inputsOf": ["grindless:vein_drilling/mv/*"] },
+    { "id": "mv-end", "label": "Lo que trae el End al MV: la llave del End y el modelo de blaze", "items": ["grindless:end_key", "grindless:creature_model_blaze"] },
+    { "id": "mv-observatorio", "label": "Radiotelescopio formado y la carta del lugar de alunizaje", "items": ["m:gtceu:radio_telescope", "grindless:lunar_landing_chart"] },
+    { "id": "mv-camino-cohete", "label": "El camino al primer cohete en MV: el banco de pruebas formado y los propulsores calificados", "items": ["m:gtceu:engine_test_stand", "grindless:qualified_power_thruster"] },
     {
       "id": "salida-mv",
       "era": "hv",

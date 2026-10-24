@@ -92,6 +92,95 @@ Qué gana: **recetas imposibles en pequeño**. En GTM el silicio pide 2 273 K y 
 
 Misma familia que la del vapor, descrita arriba. Gana ritmo y rendimiento con una entrada nueva, el lodo, que enlaza con su propio subproducto. Tiene el tamaño de la torre del vapor: no es "la misma receta en un cubo mayor", es un escalón de la familia con otra energía y otro lazo de materiales.
 
+### Tostador de sulfuros: `gtceu:sulfide_roaster` (LV reforzado)
+
+Qué gana: **pasos, calor de vuelta y plata en LV**. GTM tuesta los sulfuros en el EBF con 3 000 mB de oxígeno separado por polvo (120 EU/t, 120 t, 1 200 K) y deja el SO₂ para dos reactores químicos más (SO₂ + O₂ → SO₃; SO₃ + agua → ácido). En LV el oxígeno sale de la centrífuga de aire (1 000 mB por 10 000 de aire en 80 s): una sola tostación seguida pediría unas 40 centrífugas. El tostador lo hace todo en un ciclo y con aire.
+
+- **Tipo de receta:** `gtceu:sulfide_roasting` (`startup_scripts/grindless/lv/sulfide_roaster.js`, recetas en `server_scripts/grindless/lv/sulfide_roaster.js`).
+- **Estructura:** 5 × 7 × 3. Horno de carcasa termorresistente sobre cuatro patas de acero, parrilla de cajas de fuego de acero (GTM las enciende mientras trabaja), lecho fluidizado (aire) y una torre de contacto de acero encima. Exactamente 2 escotillas de energía, 1 bus de entrada, 2 escotillas de entrada (aire y agua), 1 bus de salida y 2 escotillas de salida (ácido y vapor).
+- **Recetas.** Las del EBF de GTM, con los mismos sólidos, la misma energía y el mismo tiempo (30 V × 4 A = 120 EU/t, 120 t). Se leyeron en el volcado de 0.4.1 y en `MachineRecipeLoader`, y la prueba las compara con el EBF en partida.
+
+  | Mena | Sólidos (iguales al EBF) | Ácido (mB) | Vapor (mB) | Aire (mB) | Agua (mB) |
+  |---|---|---|---|---|---|
+  | Esfalerita | zincita + 1/9 de ceniza | 1 000 | 3 200 | 15 000 | 1 020 |
+  | Pirita | hematita + 1/9 de ceniza | 2 000 | 6 400 | 15 000 | 2 040 |
+  | Galena | masicot + 6 pepitas de plata | 1 000 | 3 200 | 15 000 | 1 020 |
+  | Estibina | trióxido de antimonio + 1/9 de ceniza | 1 500 | 4 800 | 15 000 | 1 530 |
+  | Tetraedrita | óxido cúprico + 3 pizcas de trióxido de antimonio | 2 000 | 6 400 | 15 000 | 2 040 |
+  | Azufre (quemador) | — | 1 000 | 3 200 | 7 500 | 1 020 (30 EU/t, 60 t) |
+
+- **De dónde salen los números:**
+  - Aire: los 3 000 mB de oxígeno del EBF × 5, porque el aire es un quinto oxígeno. El convertidor usa el oxígeno que sobra de ese aire, como en una planta real, y el nitrógeno sale inerte con los gases de cola.
+  - Ácido: 1 mB por mB de SO₂ del EBF, con el agua 1:1 de GTM.
+  - Vapor: 3 200 mB por cada 1 000 de SO₂, más su agua a 1:160. Por una turbina LV vuelve entre el 11 % y el 22 % de la energía del ciclo.
+  - El quemador de azufre devuelve algo menos de lo que gasta: no es una fuente de energía.
+- **Catalizador:** `grindless:contact_catalyst`. Vanadio (centrífuga LV de la magnetita vanádica) + 4 de diatomita en el mezclador LV → 4. Se desgasta por probabilidad, en el 2 % de los ciclos.
+- **Subproductos y su destino:**
+  - Zincita, masicot, trióxido de antimonio y óxido cúprico → electrolizador LV: cinc, plomo, antimonio y cobre, y su oxígeno vuelve para el acero del EBF.
+  - Hematita → cualquier horno: hierro.
+  - Pepitas de plata → lingote, y de ahí a los espejos de la torre solar.
+  - Ceniza → fertilizante. Ácido → química de GT. Vapor → turbinas.
+  - El SO₂ nunca sale de la máquina.
+
+### Torre solar de heliostatos: `gtceu:heliostat_tower` (LV reforzado)
+
+Qué gana: **vapor sin combustible**. Es la primera central solar y el primer paso de la familia de energía: torre de heliostatos → campo solar lunar → estación solar orbital → Dyson. Ninguna máquina pequeña de LV saca vapor del sol en cantidad (la caldera solar de GTM da 120 mB por segundo).
+
+- **Tipo de receta:** `gtceu:solar_steam` (`startup_scripts/grindless/lv/heliostat_tower.js`, recetas en `server_scripts/grindless/lv/heliostat_tower.js`).
+- **Estructura:** 7 × 11 × 7.
+  - Una casa de bombas de 3 × 3 con el controlador en la puerta.
+  - Una torre de celosía de acero con el tubo ascendente dentro.
+  - Arriba, el receptor: 3 × 3 × 2 cajas de fuego de acero, que GTM enciende mientras trabaja, y un mástil.
+  - Detrás de la torre, 28 espejos de heliostato en cuatro filas de siete.
+  - 1 escotilla de energía, 1 de entrada y 1 de salida.
+- **Recetas:** 50 mB de agua o de agua destilada → 8 000 mB de vapor cada 10 t, es decir, **800 mB/t**. Consume 16 EU/t (motores de los espejos y bomba). Sin overclock ni paralelos: lo marca el campo, no la escotilla.
+- **La regla del sol** (la que gobernará las bases de la Luna y Mercurio):
+  - Un ciclo solo empieza si pasa en lo alto de la torre la misma prueba que la caldera solar de GTM (`GTUtil.canSeeSunClearly`: cielo abierto, de día, sin lluvia ni nieve encima, fuera del End) y si las cuatro esquinas del campo ven el cielo. Si no, el controlador dice "No llega el sol al receptor".
+  - La condición de día de GTM, que se ve en EMI, detiene el ciclo en curso al anochecer.
+  - En los desiertos no llueve. El Nether y el End nunca cuentan como día.
+- **Equilibrio frente a las calderas:**
+  - De día da lo que una caldera grande de bronce a todo fuego (800 mB/t, 12,5 turbinas LV), sin combustible ni línea de combustible.
+  - De noche o con lluvia no da nada. De media, algo menos de media caldera: el día de Minecraft es poco menos de la mitad del ciclo.
+  - La noche se cubre con el vapor del día guardado en tanques multibloque de GTM. El de acero guarda 1 000 000 mB, y una noche de 10 turbinas pide unos 8.
+  - Cuesta 28 espejos plateados (56 láminas de plata), la torre y las turbinas.
+- **Agua:** 1 mB de agua da 160 de vapor, como en las calderas grandes. La turbina LV devuelve 4 mB de agua destilada por cada 640 de vapor, justo lo que pide un ciclo, así que el circuito de agua se puede cerrar.
+- **Espejo:** `grindless:heliostat_mirror`, en el ensamblador LV: placa de acero, 2 láminas de plata, un panel de cristal y un engranaje pequeño de acero. La plata sale de la veta de galena o del tostador, así que las dos máquinas se cruzan.
+
+#### Decisiones tomadas (LV reforzado, 2026-10-24)
+
+1. Las tostaciones copian las del EBF de GTM sin tocar sus sólidos ni su energía. Solo cambian tres cosas: aire en vez de oxígeno, ácido en vez de SO₂ y vapor de vuelta.
+2. Aire = 5 × el oxígeno del EBF, y el convertidor usa el que sobra, sin aire extra.
+3. El tostador también quema azufre suelto, como una planta de ácido, con balance de energía negativo.
+4. El catalizador de contacto es vanadio sobre diatomita y se desgasta por probabilidad (2 %), como los electrodos y las brocas.
+5. Quedan fuera la calcopirita, la pentlandita y la cobaltita: el catálogo pedía estas cinco, y la cobaltita da trióxido de arsénico, que habría que contener.
+6. La torre solar da 800 mB/t de día, sin overclock.
+7. El sol se comprueba con la función de la caldera solar de GTM más las esquinas del campo. La lluvia solo cuenta en biomas donde llueve o nieva.
+8. La torre no tiene almacén propio: la noche se cubre con los tanques multibloque de GTM.
+9. El espejo es un bloque propio con modelo y texturas propios, y lleva plata.
+
+### Observatorio óptico: `gtceu:optical_observatory` (LV reforzado)
+
+Qué gana: es lo único que hace el **mapa fotográfico de la Luna** (`grindless:lunar_map`) y las **efemérides lunares** (`grindless:lunar_ephemeris`). Es el segundo paso de la familia del observatorio (`docs/viaje.md`) y gana cielo: ya no hace falta la altura.
+
+- **Tipo de receta:** `gtceu:astrophotography` (`startup_scripts/grindless/observatory/machines.js`, recetas en `server_scripts/grindless/observatory/recipes.js`).
+- **Receta:** el borrador de vapor, que no se gasta (es la carta para orientarse) + 4 placas fotográficas + 2 de papel → 1 mapa + 1 efemérides. 30 EU/t y 600 ticks (30 s).
+- **Placa fotográfica** (`grindless:photographic_plate`): ensamblador LV, 2 placas de vidrio + 1 montón pequeño de polvo de plata (la emulsión) → 2 placas, 16 EU/t y 100 ticks. La plata sale de la veta de galena o del tostador.
+- **Condiciones:** de noche y con el cielo despejado, a cualquier altura (las exposiciones largas vencen a la bruma). Si llueve a medias, espera y no pierde lo hecho.
+- **Estructura** (5 × 6 × 5):
+  - anillo de suelo de carcasa de acero macizo con las piezas: 1 o 2 escotillas de energía, un bus de entrada y otro de salida;
+  - dos hiladas de muro de ladrillo de piedra, con el controlador a la altura de los ojos;
+  - cúpula escalonada de carcasa de acero con la rendija abierta: sus dos casillas tienen que quedar vacías;
+  - dentro, el refractor: base de ladrillo, marco de acero, caja de engranajes de acero (el motor de seguimiento), dos tuberías de acero que asoman por la rendija y un vidrio arriba.
+- **Controlador:** vidrio, un sensor LV (el portaplacas), dos motores LV (el seguimiento), el casco LV, circuitos LV y placas de acero.
+- **Las cartas no se gastan.** El radiotelescopio (MV) lee el mapa y las efemérides sin gastarlos. Copias a mano: mapa + placa fotográfica → 2 (una copia por contacto) y efemérides + papel + polvo de carbón → 2.
+
+#### Decisiones tomadas (observatorio óptico, 2026-10-24)
+
+1. El mapa y las efemérides salen de la misma observación: es una noche de trabajo, no dos.
+2. El borrador de vapor no se gasta. Si el jugador pierde el mapa, no tiene que volver a vapor.
+3. La cúpula es de carcasa de acero y los muros de ladrillo de piedra: unas 30 carcasas, como el invernadero LV, para que la estructura no sea un muro de cantidad.
+4. La rendija se exige abierta (aire): es la forma del observatorio, no un coste.
+
 ### Descartadas
 
 - **Motor de vapor multibloque.** Es un hueco real de GTM (no hay generador multibloque en LV ni MV). Se descarta: LV se cubre con la caldera grande y las turbinas, y GTM trae turbinas grandes en EV. Si hiciera falta, entraría en MV con combustible procesado, no crudo.

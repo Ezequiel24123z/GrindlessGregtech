@@ -77,6 +77,18 @@
       ],
       "note": "Horno de arco sumergido: exactamente 2 escotillas de energía LV (su patrón), así que GTM lo trata como 128 V (MV); sus recetas piden 2 A de 32 V. Carcasa termorresistente, chimenea con silenciador, buses de entrada y salida y escotilla de fluidos."
     },
+    {
+      "machine": "gtceu:optical_observatory",
+      "types": ["gtceu:astrophotography"],
+      "energy": { "voltage": 32 },
+      "needs": ["eu:lv"],
+      "partsFromStructure": true,
+      "parts": [
+        "gtceu:solid_machine_casing", "minecraft:stone_bricks", "gtceu:steel_frame", "gtceu:steel_gearbox", "gtceu:steel_pipe_casing", "#forge:glass",
+        "gtceu:lv_energy_input_hatch", "gtceu:lv_input_bus", "gtceu:lv_output_bus"
+      ],
+      "note": "Observatorio óptico (observatory/machines.js): cúpula de acero con la rendija abierta sobre un muro de ladrillo de piedra, anillo de suelo de carcasa de acero con las piezas y un refractor (pilar, caja de engranajes, dos tuberías de acero y un vidrio). Sus condiciones (de noche, cielo despejado) no se modelan."
+    },
 
     {
       "machine": "gtceu:electric_blast_furnace",
@@ -90,6 +102,30 @@
         { "anyOf": ["gtceu:maintenance_hatch"], "onlyIf": { "config": "machines.enableMaintenance", "equals": true } }
       ],
       "note": "EBF de GTM: su patrón admite 1 o 2 escotillas de energía (autoAbilities); con 2 escotillas LV el multibloque cuenta como MV (128 V), sin ningún componente MV: es la vía canónica al aluminio. Con bobinas de cuproníquel (1800 K, receta de ensamblador a 30 EU/t) corre las recetas de hasta 128 V y 1800 K: aluminio (1700 K), acero, etc.; el silicio (2273 K) y los kanthal (ensamblador a 120 EU/t) no. Para tratarlo como solo LV, poner hatches 1."
+    },
+    {
+      "machine": "gtceu:sulfide_roaster",
+      "types": ["gtceu:sulfide_roasting"],
+      "energy": { "voltage": 32 },
+      "needs": ["eu:lv"],
+      "partsFromStructure": true,
+      "parts": [
+        "gtceu:heatproof_machine_casing", "gtceu:solid_machine_casing", "gtceu:steel_firebox_casing", "gtceu:steel_pipe_casing", "gtceu:steel_frame",
+        "gtceu:lv_energy_input_hatch", "gtceu:lv_input_bus", "gtceu:lv_input_hatch", "gtceu:lv_output_bus", "gtceu:lv_output_hatch"
+      ],
+      "note": "Tostador de sulfuros (LV reforzado, lv/sulfide_roaster.js): exactamente 2 escotillas de energía LV (su patrón), así que cuenta como 128 V; sus recetas son 4 A de 30 V. Las tostaciones del EBF de GTM con aire, el SO2 convertido en ácido sobre el catalizador de vanadio y vapor de vuelta, en una pasada."
+    },
+    {
+      "machine": "gtceu:heliostat_tower",
+      "types": ["gtceu:solar_steam"],
+      "energy": { "voltage": 32 },
+      "needs": ["eu:lv"],
+      "partsFromStructure": true,
+      "parts": [
+        "gtceu:solid_machine_casing", "gtceu:steel_firebox_casing", "gtceu:steel_pipe_casing", "gtceu:steel_frame", "grindless:heliostat_mirror",
+        "gtceu:lv_energy_input_hatch", "gtceu:lv_input_hatch", "gtceu:lv_output_hatch"
+      ],
+      "note": "Torre solar de heliostatos (lv/heliostat_tower.js): 28 espejos, receptor de cajas de fuego de acero y casa de bombas. Agua (o agua destilada) -> vapor, 16 EU/t; su condición de día y su comprobación de cielo abierto no se modelan."
     },
     { "machine": "gtceu:lv_1a_energy_converter", "types": [], "note": "Conversor EU -> FE de GTM (decisión 6): alimenta el aceptor de energía de AE2." },
     { "machine": "ae2:vibration_chamber", "types": [], "note": "Cámara de vibración de AE2: quema combustible y da energía de AE2 (decisión 6: al principio, con coque)." },
@@ -173,6 +209,13 @@
     { "id": "perforadora-lv", "label": "Perforadora de vetas LV (nuestra)", "item": "gtceu:lv_vein_drill" },
     { "id": "invernadero-lv", "label": "Invernadero LV (nuestro)", "item": "gtceu:lv_greenhouse" },
     { "id": "horno-arco", "label": "Horno de arco sumergido (nuestro)", "item": "gtceu:submerged_arc_furnace" },
+    { "id": "observatorio-optico", "label": "Observatorio óptico (nuestro)", "item": "gtceu:optical_observatory" },
+    { "id": "placa-fotografica", "label": "Placa fotográfica (ensamblador LV: placas de vidrio + plata)", "item": "grindless:photographic_plate" },
+    { "id": "mapa-lunar", "label": "Mapa fotográfico de la Luna, del observatorio óptico", "item": "grindless:lunar_map" },
+    { "id": "efemerides-lunares", "label": "Efemérides lunares, del observatorio óptico", "item": "grindless:lunar_ephemeris" },
+    { "id": "receta-mapa-lunar", "label": "Astrofotografía: el borrador (no se gasta) + placas + papel -> mapa y efemérides (de noche y despejado: no modelado)", "kind": "recipe", "type": "gtceu:astrophotography", "output": "grindless:lunar_map", "input": "grindless:lunar_chart_draft" },
+    { "id": "mapa-solo-observatorio", "label": "El mapa solo sale del observatorio óptico (la copia pide un mapa)", "item": "grindless:lunar_map", "without": ["operar:gtceu:optical_observatory"], "expect": "unreachable" },
+    { "id": "efemerides-solo-observatorio", "label": "Las efemérides solo salen del observatorio óptico (la copia pide unas)", "item": "grindless:lunar_ephemeris", "without": ["operar:gtceu:optical_observatory"], "expect": "unreachable" },
     { "id": "simulador-criaturas", "label": "Simulador de criaturas LV (nuestro)", "item": "gtceu:lv_creature_simulator" },
     { "id": "electrodo-grafito", "label": "Electrodo de grafito", "item": "grindless:graphite_electrode" },
     { "id": "modelo-en-blanco", "label": "Modelo de criatura en blanco", "item": "grindless:blank_creature_model" },
@@ -188,7 +231,15 @@
     { "id": "receta-polvo-cielo", "label": "Horno de arco: polvo del cielo", "kind": "recipe", "type": "gtceu:arc_smelting", "output": "ae2:sky_dust" },
     { "id": "receta-obsidiana-arco", "label": "Horno de arco: 32 adoquines + 4000 mB de agua + electrodo -> 4 obsidiana (2 A LV)", "kind": "recipe", "type": "gtceu:arc_smelting", "output": "minecraft:obsidian", "input": ["minecraft:cobblestone", "fluid:minecraft:water"] },
     { "id": "obsidiana", "label": "Obsidiana", "item": "minecraft:obsidian" },
+    { "id": "receta-perlita-tamiz", "label": "Tamiz LV: 3 polvos de basalto -> polvo de perlita + 2 de pedernal (30 EU/t, lv/perlite.js)", "kind": "recipe", "type": "gtceu:sifter", "output": "gtceu:perlite_dust", "input": "gtceu:basalt_dust" },
+    { "id": "perlita", "label": "Polvo de perlita (del basalto: arena mineral basáltica de la perforadora)", "item": "gtceu:perlite_dust" },
+    { "id": "receta-perlita-obsidiana", "label": "Electrolizador LV: 3 polvos de perlita -> 2 de polvo de obsidiana + agua (30 EU/t)", "kind": "recipe", "type": "gtceu:electrolyzer", "output": "gtceu:obsidian_dust", "input": "gtceu:perlite_dust" },
     { "id": "receta-perla-simulador", "label": "Simulador de criaturas: perla de ender", "kind": "recipe", "type": "gtceu:creature_simulation", "output": "minecraft:ender_pearl" },
+    { "id": "receta-tostacion-galena", "label": "Tostador de sulfuros: galena + aire -> masicot + 6 pepitas de plata + ácido (4 A LV)", "kind": "recipe", "type": "gtceu:sulfide_roasting", "output": "gtceu:silver_nugget", "input": "gtceu:galena_dust" },
+    { "id": "receta-acido-tostador", "label": "Tostador de sulfuros: pirita + aire + agua -> hematita + ácido sulfúrico + vapor, sin oxígeno separado", "kind": "recipe", "type": "gtceu:sulfide_roasting", "output": "fluid:gtceu:sulfuric_acid", "input": ["gtceu:pyrite_dust", "fluid:gtceu:air"] },
+    { "id": "catalizador-contacto", "label": "Catalizador de contacto de vanadio (mezclador: vanadio + diatomita)", "item": "grindless:contact_catalyst" },
+    { "id": "receta-vapor-solar", "label": "Torre solar de heliostatos: agua -> vapor de día (16 EU/t)", "kind": "recipe", "type": "gtceu:solar_steam", "output": "fluid:gtceu:steam", "input": "fluid:minecraft:water" },
+    { "id": "espejo-heliostato", "label": "Espejo de heliostato (ensamblador: acero, lámina de plata, cristal y engranaje)", "item": "grindless:heliostat_mirror" },
     { "id": "receta-perforacion-lodo", "label": "Perforadora LV con lodo de perforación", "kind": "recipe", "type": "gtceu:vein_drilling", "input": "fluid:gtceu:drilling_fluid" },
     { "id": "silicio-gt-no-antes-de-mv", "label": "El silicio de GT no sale antes de MV (decisión 2)", "item": "gtceu:silicon_ingot", "expect": "unreachable" },
     { "id": "receta-fluix-mezclador", "label": "Mezclador: certus cargado + redstone + cuarcita -> fluix (sin viaje al Nether)", "kind": "recipe", "type": "gtceu:mixer", "output": "ae2:fluix_crystal" },
@@ -265,10 +316,16 @@
     { "id": "auto-polvo-cielo", "label": "Polvo del cielo (horno de arco)", "item": "ae2:sky_dust" },
     { "id": "auto-obsidiana-receta", "label": "Horno de arco: receta de obsidiana (adoquín + agua) usable y sostenible", "kind": "recipe", "type": "gtceu:arc_smelting", "output": "minecraft:obsidian", "input": ["minecraft:cobblestone", "fluid:minecraft:water"] },
     { "id": "auto-obsidiana", "label": "Obsidiana (horno de arco)", "item": "minecraft:obsidian" },
+    { "id": "auto-perlita", "label": "Polvo de perlita (tamiz LV del polvo de basalto)", "item": "gtceu:perlite_dust" },
+    { "id": "auto-perlita-obsidiana", "label": "Electrolizador LV: perlita -> polvo de obsidiana, receta usable y sostenible", "kind": "recipe", "type": "gtceu:electrolyzer", "output": "gtceu:obsidian_dust", "input": "gtceu:perlite_dust" },
     { "id": "auto-lava-no-automatica", "label": "La lava no se produce sola (es combustible de caldera: sería un bucle de energía; solo el bloque puesto una vez junto a la trituradora)", "fluid": "minecraft:lava", "expect": "not-automatic" },
     { "id": "auto-nitrogeno", "label": "Nitrógeno (aire)", "fluid": "gtceu:nitrogen" },
     { "id": "auto-oxigeno", "label": "Oxígeno (aire)", "fluid": "gtceu:oxygen" },
     { "id": "auto-acido-sulfurico", "label": "Ácido sulfúrico", "fluid": "gtceu:sulfuric_acid" },
+    { "id": "auto-acido-tostador", "label": "Tostador de sulfuros: ácido con aire (sin centrífugas de aire), receta usable y sostenible", "kind": "recipe", "type": "gtceu:sulfide_roasting", "output": "fluid:gtceu:sulfuric_acid", "input": "fluid:gtceu:air" },
+    { "id": "auto-plata-tostador", "label": "Tostador de sulfuros: plata de la galena, receta usable y sostenible", "kind": "recipe", "type": "gtceu:sulfide_roasting", "output": "gtceu:silver_nugget" },
+    { "id": "auto-catalizador-contacto", "label": "Catalizador de contacto (vanadio de la magnetita vanádica + diatomita)", "item": "grindless:contact_catalyst" },
+    { "id": "auto-vapor-solar", "label": "Torre solar de heliostatos: vapor del agua de la bomba, receta usable y sostenible", "kind": "recipe", "type": "gtceu:solar_steam", "input": "fluid:minecraft:water" },
     { "id": "auto-fertilizante", "label": "Fertilizante", "item": "gtceu:fertilizer" },
     { "id": "auto-aire", "label": "Aire (colector de gas; en Llano y Vacío por las recetas del pack)", "fluid": "gtceu:air" },
     { "id": "auto-aluminio-polvo", "label": "Polvo de aluminio (cualquier vía)", "item": "gtceu:aluminium_dust" },
@@ -313,6 +370,16 @@
     },
     { "id": "lv-perforadora", "label": "Lo que pide la perforadora LV: la broca, el lodo y las muestras de sus recetas", "inputsOf": ["grindless:vein_drilling/lv/*"] },
     { "id": "lv-ae2", "label": "AE2 base (entero en LV, decisión del 2026-10-24)", "items": ["ae2:*"] },
+    {
+      "id": "lv-observatorio",
+      "label": "Observatorio óptico formado, placa fotográfica, mapa y efemérides lunares",
+      "items": ["m:gtceu:optical_observatory", "grindless:photographic_plate", "grindless:lunar_map", "grindless:lunar_ephemeris"]
+    },
+    {
+      "id": "lv-tostador-heliostatos",
+      "label": "LV reforzado: tostador de sulfuros y torre solar de heliostatos formados, su catalizador y sus espejos",
+      "items": ["m:gtceu:sulfide_roaster", "m:gtceu:heliostat_tower", "grindless:contact_catalyst", "grindless:heliostat_mirror"]
+    },
     {
       "id": "salida-lv",
       "era": "mv",

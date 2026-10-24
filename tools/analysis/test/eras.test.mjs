@@ -2,12 +2,13 @@
 // Mini pack: la Tierra da mena y bauxita; el acero sale de la mena; el titanio sale de la ilmenita, que solo se recoge en la Luna
 // (con el cohete); el End da su mena con la llave. Los objetos de cada era se comprueban con los recursos posteriores quitados.
 import assert from 'node:assert/strict';
+import fs from 'node:fs';
 import path from 'node:path';
 import { test } from 'node:test';
 import { fileURLToPath } from 'node:url';
 import { loadTierConfig } from '../lib/config.mjs';
 import { lfp, Graph } from '../lib/engine.mjs';
-import { gi, gt, mkDump, run, shaped } from './helpers.mjs';
+import { gi, gt, mkDump, run, shaped, verdicts } from './helpers.mjs';
 
 const TIERS = path.join(path.dirname(fileURLToPath(import.meta.url)), '..', 'tiers');
 const S = (id, inputs, result) => shaped(id, [Object.keys(inputs).join('')], Object.fromEntries(Object.entries(inputs).map(([k, v]) => [k, { item: v }])), result);
@@ -196,6 +197,74 @@ test('eras (onlyFrom): sin fugas, ninguna clave del titanio sale sin la Luna; co
   assert.match(r.text, /FAIL {2}ev: titanio solo sale de luna/);
 });
 
+// ---------------------------------------------------------------- base fuera de la fábrica: conditions.dimension.asKeysFor
+
+/** La perforadora lunar: su receta solo vale en la Luna (condición de dimensión) y el viaje (sintética) da la clave dim:t:luna. */
+function lunarPack({ asKeys = true } = {}) {
+  const moon = [{ type: 'dimension', dimension: 't:luna' }];
+  const recipes = [
+    S('t:ingot', { O: 't:ore' }, 't:ingot'),
+    S('t:steel_plate', { I: 't:ingot' }, 't:steel_plate'),
+    S('t:rocket', { P: 't:steel_plate' }, 't:rocket'),
+    S('t:lunar_drill', { P: 't:steel_plate' }, 't:lunar_drill'),
+    S('t:lunar_sample', { R: 't:raw_ilmenite' }, 't:lunar_sample'),
+    S('t:ti_dust', { R: 't:raw_ilmenite' }, 't:ti_dust'),
+    gt('t:lunar/ilmenite', 't:lunar', { ins: [gi('t:lunar_sample', 1, 0)], outs: [gi('t:raw_ilmenite')], conditions: moon }),
+  ];
+  const cfg = {
+    tier: 'hv',
+    eraOrder: ['steam', 'lv', 'mv', 'hv', 'ev', 'iv'],
+    unconditionalTypes: ['minecraft:crafting_shaped'],
+    ...(asKeys ? { conditions: { dimension: { asKeysFor: ['t:luna'] } } } : {}),
+    world: [
+      { id: 'tierra', mode: 'manual', bootstrap: true, items: ['t:ore'] },
+      { id: 'menas-luna', mode: 'manual', bootstrap: true, needs: ['dim:t:luna'], origin: ['t:luna'], items: ['t:raw_ilmenite'] },
+    ],
+    machines: [{ machine: 't:lunar_drill', types: ['t:lunar'] }],
+    synthetic: [{ id: 'viaje-luna', capital: ['t:rocket'], produces: ['dim:t:luna'] }],
+    targets: [
+      { id: 'ilmenita', item: 't:raw_ilmenite' },
+      { id: 'ilmenita-sin-viaje', item: 't:raw_ilmenite', without: ['sintética:viaje-luna'], expect: 'unreachable' },
+    ],
+    autoTargets: [
+      { id: 'auto-ilmenita', item: 't:raw_ilmenite' },
+      { id: 'auto-titanio', item: 't:ti_dust' },
+    ],
+    eraResources: [
+      { id: 'luna', era: 'ev', label: 'la Luna', dimensions: ['t:luna'] },
+      { id: 'titanio', era: 'ev', label: 'titanio', items: ['t:ti_*', 't:raw_ilmenite'], onlyFrom: ['luna'] },
+    ],
+    eraItems: [
+      { id: 'hv-objetos', era: 'hv', items: ['t:lunar_drill', 't:rocket'] },
+      { id: 'salida-hv', era: 'ev', items: ['t:ti_dust'] },
+    ],
+  };
+  return { dump: mkDump({ recipes, items: ['t:ore', 't:raw_ilmenite'] }), cfg };
+}
+
+test('asKeysFor: la receta que solo vale en la Luna pide la clave del viaje; con ella la ilmenita lunar se automatiza y sigue siendo de la Luna', () => {
+  const { dump, cfg } = lunarPack();
+  const r = run(dump, cfg);
+  assert.deepEqual(verdicts(r.out.gate), { ilmenita: 'PASS', 'ilmenita-sin-viaje': 'PASS' });
+  assert.deepEqual(verdicts(r.out.auto), { 'auto-ilmenita': 'PASS', 'auto-titanio': 'PASS' });
+  const rule = r.model.g.rules.find((x) => x.name === 't:lunar/ilmenite');
+  assert.ok(rule.slots.some((s) => s.cap && s.alts.some((a) => r.model.g.keyNames[a] === 'dim:t:luna')), 'la ranura de la condición es la clave del viaje');
+  assert.deepEqual(rule.meta.dims, ['t:luna']);
+  // la regla de eras y la exclusividad quitan la receta lunar junto con la Luna
+  assert.equal(r.out.eras.exclusive[0].verdict, 'PASS');
+  assert.deepEqual(verdictsOf(r), { 'hv-objetos': 'PASS', 'salida-hv': 'PASS' });
+  assert.equal(r.out.verdict, 'PASS');
+});
+
+test('asKeysFor: sin él, la receta lunar no vale en la fábrica de la Tierra y la ilmenita solo sale del viaje a mano', () => {
+  const { dump, cfg } = lunarPack({ asKeys: false });
+  const r = run(dump, cfg);
+  assert.equal(verdicts(r.out.gate).ilmenita, 'PASS');
+  assert.equal(verdicts(r.out.auto)['auto-ilmenita'], 'FAIL');
+  const rule = r.model.g.rules.find((x) => x.name === 't:lunar/ilmenite');
+  assert.ok(rule.slots.some((s) => s.dead && /solo vale en t:luna; la fábrica está en minecraft:overworld/.test(s.label)));
+});
+
 // ---------------------------------------------------------------- motor: claves quitadas de toda fuente
 
 test('lfp con `blocked`: la regla sigue dando sus otras salidas y los hechos quitados no cuentan', () => {
@@ -274,7 +343,7 @@ test('config: la capa tiers/next/ hace que toda la cadena herede de sus archivos
 // ---------------------------------------------------------------- configuraciones reales
 
 test('tiers reales: el orden de eras se hereda y cada recurso y grupo tiene una era del orden', () => {
-  for (const tier of ['steam', 'lv', 'mv', 'hv', 'next/mv', 'next/hv']) {
+  for (const tier of ['steam', 'lv', 'mv', 'hv']) {
     const { raw } = loadTierConfig({ tier }, TIERS);
     assert.ok(raw.eraOrder && raw.eraOrder.length >= 6, `${tier}: eraOrder`);
     for (const e of [...raw.eraResources, ...raw.eraItems]) assert.ok(raw.eraOrder.includes(e.era), `${tier}: ${e.id} tiene la era ${e.era}`);
@@ -283,21 +352,27 @@ test('tiers reales: el orden de eras se hereda y cada recurso y grupo tiene una 
   }
 });
 
-test('tiers reales (hv): el titanio y la Luna son de EV, el End de HV; la broca de inox, el cohete y el traje de GCYR son de HV (v0.4.1)', () => {
+test('tiers reales (hv): el titanio, el helio-3 y la Luna son de EV y solo salen de la Luna, el End de MV; la broca de inox, el cohete y el traje de GCYR son de HV (v0.5.0)', () => {
   const { raw } = loadTierConfig({ tier: 'hv' }, TIERS);
   const res = Object.fromEntries(raw.eraResources.map((r) => [r.id, r]));
   assert.equal(res.titanio.era, 'ev');
   assert.equal(res.luna.era, 'ev');
   assert.deepEqual(res.luna.dimensions, ['gcyr:luna']);
-  assert.equal(res.end.era, 'hv');
+  assert.equal(res.end.era, 'mv');
   assert.equal(res.nether.era, 'lv');
   for (const id of ['tungsteno', 'naquadah', 'iridio-osmio', 'marte', 'venus', 'mercurio']) assert.equal(res[id].era, 'iv', id);
-  assert.equal(res.titanio.onlyFrom, undefined, 'la exclusividad del titanio solo se activa en la versión siguiente');
+  assert.deepEqual(res.titanio.onlyFrom, ['luna']);
+  assert.deepEqual(res['helio-3'].onlyFrom, ['luna']);
   const items = Object.fromEntries(raw.eraItems.map((g) => [g.id, g]));
   for (const id of ['hv-cohete', 'hv-traje', 'hv-broca-inox']) assert.ok(!items[id].optional, `${id} ya llegó: no es opcional`);
   for (const it of ['gcyr:rocket_scanner', 'gcyr:launch_pad', 'gcyr:basic_fuel_tank', 'gcyr:basic_rocket_motor', 'gcyr:seat']) assert.ok(items['hv-cohete'].items.includes(it), it);
   assert.equal(items['salida-hv'].era, 'ev');
   assert.deepEqual(items['salida-hv'].items.slice(0, 3), ['gtceu:ev_machine_hull', 'gtceu:ev_electric_motor', 'gtceu:ev_electric_pump']);
+  // la base lunar es la salida a EV; el controlador de la perforadora lunar se fabrica en HV
+  assert.equal(items['salida-hv-luna'].era, 'ev');
+  assert.equal(items['hv-luna'].era, 'hv');
+  assert.ok(!items['hv-objetos'].items.includes('grindless:end_key'), 'la llave del End es del MV');
+  assert.equal(items['mv-end'].era, 'mv');
   assert.equal(items['hv-gtm'].era, 'hv');
   assert.equal(items['vapor-maquinas'].era, 'steam');
   assert.equal(items['salida-vapor'].era, 'lv');
@@ -305,31 +380,35 @@ test('tiers reales (hv): el titanio y la Luna son de EV, el End de HV; la broca 
   const named = [...raw.targets, ...raw.autoTargets, ...raw.autoTargetsFromVeins.map((s) => s.target || {})]
     .filter((t) => JSON.stringify([t.item, t.input]).includes('grindless:titanium_drill_bit'));
   assert.deepEqual(named.map((t) => [t.id, t.expect]), [['broca-titanio-no-se-fabrica', 'unreachable']]);
-  // las vetas se cuentan por las recetas de la perforadora, no por que exista su muestra
-  const veinSpecs = [raw.world.find((w) => w.id === 'menas-end').fromVeins, ...raw.targetsFromVeins, ...raw.autoTargetsFromVeins];
+  // las vetas se cuentan por las recetas de la perforadora (la de vetas o la lunar), no por que exista su muestra
+  const veinSpecs = [...raw.world.filter((w) => w.fromVeins).map((w) => w.fromVeins), ...raw.targetsFromVeins, ...raw.autoTargetsFromVeins];
   for (const s of veinSpecs.filter((x) => x.requireItem || x.requireRecipe)) {
     assert.equal(s.requireItem, undefined);
-    assert.deepEqual(s.requireRecipe, { type: 'gtceu:vein_drilling', input: 'grindless:vein_sample_{id}' });
+    const lunar = (s.dimensions || []).includes('gcyr:luna');
+    assert.deepEqual(s.requireRecipe, { type: lunar ? 'gtceu:lunar_drilling' : 'gtceu:vein_drilling', input: 'grindless:vein_sample_{id}' });
   }
 });
 
-test('tiers reales (next): el End pasa a MV, el titanio solo sale de la Luna y el cohete, el traje y la broca de inox siguen siendo de HV', () => {
-  const { raw: mv } = loadTierConfig({ tier: 'next/mv' }, TIERS);
-  const { raw: hv } = loadTierConfig({ tier: 'next/hv' }, TIERS);
-  assert.equal(mv.tier, 'mv');
-  assert.equal(hv.tier, 'hv');
+test('tiers reales (v0.5.0): el End está en MV, el viaje a la Luna da la clave de la base lunar y la capa tiers/next/ ya se fundió', () => {
+  const { raw: mv } = loadTierConfig({ tier: 'mv' }, TIERS);
+  const { raw: hv } = loadTierConfig({ tier: 'hv' }, TIERS);
   for (const cfg of [mv, hv]) {
-    const end = cfg.eraResources.find((r) => r.id === 'end');
-    assert.equal(end.era, 'mv');
+    assert.equal(cfg.eraResources.find((r) => r.id === 'end').era, 'mv');
     assert.ok(cfg.world.some((w) => w.id === 'menas-end'));
   }
-  const ti = hv.eraResources.find((r) => r.id === 'titanio');
-  assert.equal(ti.era, 'ev');
-  assert.deepEqual(ti.onlyFrom, ['luna']);
-  assert.ok(hv.world.some((w) => w.id === 'menas-luna' && w.fromVeins.dimensions.includes('gcyr:luna')));
-  const items = Object.fromEntries(hv.eraItems.map((g) => [g.id, g]));
-  for (const id of ['hv-cohete', 'hv-traje', 'hv-broca-inox']) assert.ok(!items[id].optional, id);
-  // la versión actual no cambia
-  const { raw: now } = loadTierConfig({ tier: 'mv' }, TIERS);
-  assert.ok(!now.world.some((w) => w.id === 'menas-end'));
+  const ids = (cfg) => cfg.targets.map((t) => t.id);
+  for (const id of ['llave-end', 'ojo-ender', 'menas-end-con-llave', 'ilmenita-no-sale-del-end', 'scheelita-no-sale-del-end']) assert.ok(ids(mv).includes(id), id);
+  // en HV la Luna también da ilmenita y cromita: esas dos comprobaciones del End dejan de valer
+  for (const id of ['ilmenita-no-sale-del-end', 'menas-end-sin-llave']) assert.ok(!ids(hv).includes(id), id);
+  assert.ok(!mv.world.some((w) => w.id === 'menas-luna'), 'el MV no llega a la Luna');
+  const luna = hv.world.find((w) => w.id === 'menas-luna');
+  assert.deepEqual(luna.needs, ['dim:gcyr:luna']);
+  assert.ok(luna.fromVeins.dimensions.includes('gcyr:luna'));
+  assert.deepEqual(hv.synthetic.find((s) => s.id === 'viaje-luna').produces, ['dim:gcyr:luna']);
+  assert.deepEqual(hv.conditions.dimension.asKeysFor, ['gcyr:luna']);
+  assert.equal(mv.conditions.dimension, undefined, 'en MV las recetas lunares siguen sin valer');
+  assert.ok(hv.machines.some((m) => m.machine === 'gtceu:lunar_drill' && m.types.includes('gtceu:lunar_drilling')));
+  assert.ok(hv.autoTargets.some((t) => t.id === 'auto-titanio' && !t.expect));
+  assert.ok(!hv.autoTargets.some((t) => t.id === 'auto-titanio-no-en-hv'));
+  assert.ok(!fs.existsSync(path.join(TIERS, 'next', 'hv.json')) && !fs.existsSync(path.join(TIERS, 'next', 'mv.json')));
 });

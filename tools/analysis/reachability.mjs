@@ -10,14 +10,14 @@ import { loadDump } from './lib/dump.mjs';
 import { buildModel } from './lib/model.mjs';
 import { runPasses } from './lib/analyze.mjs';
 import { analyze, renderText, summaryParts, toJson } from './lib/report.mjs';
-import { hiddenTable, obtainToJson, renderHiddenTable, renderObtainMarkdown, renderObtainText, runObtain } from './lib/obtain.mjs';
+import { ERA_IDS, hiddenTable, obtainToJson, renderHiddenTable, renderObtainMarkdown, renderObtainText, runObtain } from './lib/obtain.mjs';
 
 const here = path.dirname(fileURLToPath(import.meta.url));
 const PASSES = ['both', 'gate', 'auto', 'eras', 'obtain'];
 
 function usage() {
   return `Uso: node reachability.mjs --tier <steam|lv|mv|hv|next/hv> --dump <carpeta> [opciones]
-       node reachability.mjs --pass obtain --dump <carpeta> [--md <archivo>]
+       node reachability.mjs --pass obtain --dump <carpeta> [--md <archivo>] [--table <archivo>] [--implemented <era>]
   --tier <nombre>     config en tiers/<nombre>.json (o --config <ruta>); next/<tier> = la capa preparada de la versión siguiente
   --dump <carpeta>    volcado de gg_dump (recipes.json, tags.json, items.json, machines.json, veins.json, fluid_veins.json, config.json)
   --pass <both|gate|auto|eras|obtain>   qué paso ejecutar (por defecto both = los tres: puerta, automático y regla de eras;
@@ -28,6 +28,8 @@ function usage() {
   --md <archivo>      (obtain) guarda el informe en Markdown: tabla por clase, la lista A entera y las B y C compactas
   --table <archivo>   (obtain) escribe la tabla de ocultos del pack (kubejs/data/grindless/tables/hidden_until.json): grupos B con
                       su era y C con las recetas a quitar; conserva las recetas quitadas que ya listaba el archivo
+  --implemented <era> (obtain) era hasta la que está implementado el pack (IMPLEMENTED_ERA de integration/hidden.js), para mirar
+                      que todo lo C y lo B posterior esté oculto; por defecto la del volcado (info.json: hidden.implementedEra)
   --explain <texto>   imprime la derivación de los objetivos cuyo id/nombre contenga el texto (aunque den PASS)
   --verbose           imprime la derivación de todos los objetivos
   --quiet             solo veredicto y resumen
@@ -48,6 +50,7 @@ function parseArgs(argv) {
     else if (a === '--json') o.json = next();
     else if (a === '--md') o.md = next();
     else if (a === '--table') o.table = next();
+    else if (a === '--implemented') o.implemented = next();
     else if (a === '--explain') o.explain = next();
     else if (a === '--verbose') o.verbose = true;
     else if (a === '--quiet') o.quiet = true;
@@ -81,15 +84,17 @@ function runContext(raw, dump, o, dimension, file) {
 
 /**
  * Paso obtain: auditoría de lo que no se consigue nunca (lib/obtain.mjs). Usa la sección "obtain" del tier o, si no la trae,
- * tiers/obtain.json. Salida 0 = todo clasificado (PASS), 1 = hay grupos sin clasificar (FAIL).
+ * tiers/obtain.json. Salida 0 = todo clasificado y la ocultación del pack cuadra (PASS), 1 = hay grupos sin clasificar, algo
+ * oculto que se consigue o algo que tendría que estar oculto y se ve (FAIL).
  */
 function mainObtain(o, loaded) {
   const { raw, file } = loaded && loaded.raw.obtain ? loaded : loadTierConfig({ tier: 'obtain' }, path.join(here, 'tiers'));
   const dumpDir = path.resolve(o.dump);
   const dump = loadDump(dumpDir);
-  const res = runObtain(dump, raw);
+  if (o.implemented && !ERA_IDS.includes(o.implemented)) throw new Error(`--implemented ${o.implemented} no es una era (${ERA_IDS.join(', ')})`);
+  const res = runObtain(dump, raw, { implementedEra: o.implemented });
   const full = renderObtainText(res, file);
-  const keep = (l) => /^(===|Config|Auditados|CLASE|[ABC?] +\d|VEREDICTO)/.test(l);
+  const keep = (l) => /^(===|Config|Auditados|CLASE|[ABC?] +\d|Ocultos en el pack|  se consiguen pero|  tendrían que estar|VEREDICTO)/.test(l);
   const text = o.quiet ? full.split('\n').filter(keep).join('\n') + '\n' : full;
   process.stdout.write(text);
   if (o.out) fs.writeFileSync(path.resolve(o.out), text, 'utf8');

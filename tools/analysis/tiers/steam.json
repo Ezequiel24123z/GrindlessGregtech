@@ -265,7 +265,44 @@
       ],
       "note": "Igual: estructura del pack primero, `parts` de reserva (greenhousePattern: casco de vapor, cristal y suelo de tierra)."
     },
+    {
+      "machine": "gtceu:steam_observatory",
+      "types": ["gtceu:stargazing"],
+      "maxEUt": 32,
+      "needs": ["fluid:gtceu:steam"],
+      "partsFromStructure": true,
+      "parts": [
+        "gtceu:steam_machine_casing", "gtceu:steam_input_hatch", "gtceu:steam_input_bus", "gtceu:steam_output_bus", "minecraft:stone_bricks",
+        "gtceu:bronze_gearbox", "gtceu:bronze_frame", "gtceu:bronze_pipe_casing", "#forge:glass"
+      ],
+      "note": "Observatorio de relojería (observatory/machines.js): plataforma de casco de vapor con las piezas, pilar de ladrillo de piedra, caja de engranajes de bronce entre dos horquillas de marco y tubo de tuberías de bronce con un vidrio. Las condiciones de su receta (de noche, cielo despejado, controlador en Y 100 o más) no se modelan: el validador las da por cumplidas y las comprueba gg_test_observatory en partida."
+    },
 
+    {
+      "machine": "gtceu:steam_blast_furnace",
+      "types": ["gtceu:steelmaking"],
+      "maxEUt": 32,
+      "needs": ["fluid:gtceu:steam"],
+      "partsFromStructure": true,
+      "parts": [
+        "gtceu:steam_machine_casing", "gtceu:steam_input_hatch", "gtceu:steam_input_bus", "gtceu:steam_output_bus", "gtceu:firebricks",
+        ["gtceu:bronze_pipe_casing", "gtceu:steel_pipe_casing"], ["gtceu:bronze_frame", "gtceu:steel_frame"]
+      ],
+      "note": "Alto horno de vapor (steam/blast_furnace.js): crisol de casco de vapor con las piezas, etalaje y cuba de ladrillo refractario huecas, toberas y bajante de tuberías y cuatro postes de marco. Mena de hierro + coque + calcita -> acero + ceniza."
+    },
+    {
+      "machine": "gtceu:coking_battery",
+      "types": ["gtceu:coking"],
+      "maxEUt": 32,
+      "needs": ["fluid:gtceu:steam"],
+      "partsFromStructure": true,
+      "partAbilities": { "output_hatch": ["gtceu:ulv_output_hatch", "gtceu:lv_output_hatch"] },
+      "parts": [
+        "gtceu:steam_machine_casing", "gtceu:steam_input_hatch", "gtceu:steam_input_bus", "gtceu:steam_output_bus", "gtceu:coke_oven_bricks",
+        "gtceu:bronze_firebox_casing", ["gtceu:bronze_pipe_casing", "gtceu:steel_pipe_casing"], ["gtceu:ulv_output_hatch", "gtceu:lv_output_hatch"]
+      ],
+      "note": "Batería de coque con subproductos (steam/coking_battery.js): base y techo de casco de vapor con las piezas, cámaras de ladrillo de coque entre paredes de hogar de bronce y colector de gas de tuberías. Las dos escotillas de salida de fluidos son de GTM; la ULV tiene receta a mano en vapor (casco ULV + vidrio + resina)."
+    },
     {
       "machine": "gtceu:lv_steam_turbine",
       "types": ["gtceu:steam_turbine"],
@@ -317,12 +354,21 @@
     { "id": "macerador-hp", "label": "Macerador de alta presión (acero)", "item": "gtceu:hp_steam_macerator" },
     { "id": "perforadora", "label": "Perforadora de vetas a vapor (nuestra)", "item": "gtceu:steam_vein_drill" },
     { "id": "invernadero", "label": "Invernadero de vapor (nuestro)", "item": "gtceu:steam_greenhouse" },
+    { "id": "observatorio-vapor", "label": "Observatorio de relojería (nuestro)", "item": "gtceu:steam_observatory" },
+    { "id": "carta-lunar-borrador", "label": "Carta lunar (borrador), del observatorio de relojería", "item": "grindless:lunar_chart_draft" },
+    { "id": "receta-carta-borrador", "label": "Observación al ocular: papel + polvo de carbón -> borrador (de noche, despejado, Y 100+: condiciones no modeladas)", "kind": "recipe", "type": "gtceu:stargazing", "output": "grindless:lunar_chart_draft" },
+    { "id": "carta-borrador-solo-observatorio", "label": "El borrador solo sale del observatorio de relojería (la copia pide un borrador)", "item": "grindless:lunar_chart_draft", "without": ["operar:gtceu:steam_observatory"], "expect": "unreachable" },
     { "id": "casco-lv", "label": "Casco LV", "item": "gtceu:lv_machine_hull" },
     { "id": "cable-estano", "label": "Cable de estaño aislado", "item": "gtceu:tin_single_cable" },
     { "id": "circuito-lv", "label": "Primer circuito LV", "item": "gtceu:basic_electronic_circuit" },
     { "id": "turbina-lv", "label": "Turbina de vapor LV", "item": "gtceu:lv_steam_turbine" },
     { "id": "receta-coque", "label": "Receta de horno de coque -> coque", "kind": "recipe", "type": "gtceu:coke_oven", "output": "gtceu:coke_gem" },
     { "id": "receta-acero", "label": "Receta de alto horno primitivo -> acero", "kind": "recipe", "type": "gtceu:primitive_blast_furnace", "output": "gtceu:steel_ingot" },
+    { "id": "alto-horno-vapor", "label": "Alto horno de vapor (nuestro)", "item": "gtceu:steam_blast_furnace" },
+    { "id": "receta-acero-alto-horno-vapor", "label": "Alto horno de vapor: mena de hierro + coque + calcita -> acero + ceniza", "kind": "recipe", "type": "gtceu:steelmaking", "output": "gtceu:steel_ingot" },
+    { "id": "escotilla-salida-ulv", "label": "Escotilla ULV de salida de fluidos (a mano en vapor, para la batería de coque)", "item": "gtceu:ulv_output_hatch" },
+    { "id": "bateria-coque", "label": "Batería de coque con subproductos (nuestra)", "item": "gtceu:coking_battery" },
+    { "id": "receta-gas-de-hulla", "label": "Batería de coque: carbón -> coque + creosota + gas de hulla", "kind": "recipe", "type": "gtceu:coking", "output": "fluid:gtceu:coal_gas" },
     { "id": "turbina-genera", "label": "La turbina LV puede generar con vapor", "kind": "recipe", "type": "gtceu:steam_turbine" }
   ],
 
@@ -349,7 +395,11 @@
     { "id": "auto-perforacion", "label": "Receta de perforadora de vetas usable y sostenible", "kind": "recipe", "type": "gtceu:vein_drilling" },
     { "id": "auto-perforacion-combustible", "label": "Perforadora sostenida solo con calderas de combustible", "kind": "recipe", "type": "gtceu:vein_drilling", "without": ["sintética:caldera-solar"] },
     { "id": "auto-invernadero", "label": "Receta de invernadero usable y sostenible", "kind": "recipe", "type": "gtceu:greenhouse" },
-    { "id": "auto-invernadero-combustible", "label": "Invernadero sostenido solo con calderas de combustible", "kind": "recipe", "type": "gtceu:greenhouse", "without": ["sintética:caldera-solar"] }
+    { "id": "auto-invernadero-combustible", "label": "Invernadero sostenido solo con calderas de combustible", "kind": "recipe", "type": "gtceu:greenhouse", "without": ["sintética:caldera-solar"] },
+    { "id": "auto-acero-alto-horno-vapor", "label": "Acero del alto horno de vapor (mena, coque y calcita de la perforadora y la batería)", "kind": "recipe", "type": "gtceu:steelmaking", "output": "gtceu:steel_ingot" },
+    { "id": "auto-calcita", "label": "Calcita (fundente del alto horno de vapor, veta de lapislázuli)", "anyOf": ["gtceu:raw_calcite", "gtceu:calcite_dust"] },
+    { "id": "auto-gas-de-hulla", "label": "Gas de hulla (batería de coque)", "fluid": "gtceu:coal_gas" },
+    { "id": "auto-creosota", "label": "Creosota (horno y batería de coque)", "fluid": "gtceu:creosote" }
   ],
 
   "eraItems": [
@@ -364,6 +414,8 @@
     },
     { "id": "vapor-multibloques", "label": "Nuestra perforadora y nuestro invernadero de vapor, formados", "items": ["m:gtceu:steam_vein_drill", "m:gtceu:steam_greenhouse"] },
     { "id": "vapor-brocas", "label": "Brocas de bronce y de acero", "items": ["grindless:bronze_drill_bit", "grindless:steel_drill_bit"] },
+    { "id": "vapor-observatorio", "label": "Observatorio de relojería formado y su carta lunar (borrador)", "items": ["m:gtceu:steam_observatory", "grindless:lunar_chart_draft"] },
+    { "id": "vapor-alto-horno-bateria", "label": "Alto horno de vapor y batería de coque formados, y la escotilla ULV de salida de fluidos que pide la batería", "items": ["m:gtceu:steam_blast_furnace", "m:gtceu:coking_battery", "gtceu:ulv_output_hatch"] },
     {
       "id": "salida-vapor",
       "era": "lv",

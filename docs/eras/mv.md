@@ -9,13 +9,14 @@ Se entra con lo que deja LV: casco MV (`gtceu:mv_machine_hull`), escotilla de en
 1. **Red MV.** Cable de cobre con goma (9 de caucho crudo del invernadero + 1 azufre → 1 296 mB de goma), búfer, casco y escotillas MV sobre el transformador LV→MV (4 A → 1 A) de la puerta de LV. La central crece con calderas grandes de bronce (creosota, biomasa) y turbinas MV (`gtceu:mv_steam_turbine`) hasta que llegan los combustibles (paso 7).
 2. **Máquinas MV** (`gtceu:mv_<máquina>`). Motor (hilo doble de cuproníquel + varillas de aluminio), pistón, bomba, brazo y cinta (goma). Dos piezas cruzan líneas: el cortador pide sierra de acero vanádico y el grabador láser, un emisor con esmeralda sin tacha (veta de berilio del Nether).
 3. **Planta de mineral** (nuestra). Todo lo siguiente come metal: cromo, vanadio, níquel, manganeso, plata y oro. La planta procesa las menas enteras y reparte los secundarios.
-4. **Kanthal y aceros.** Rubí (veta profunda de redstone) → electrólisis → cromo y aluminio; el aluminio gana una segunda vía: bauxita de la veta de mica → electrólisis MV (60 EU/t: 15 bauxita → 6 aluminio + 1 rutilo + 9 000 mB de O₂), con rutilo de sobra para EV. Kanthal (hierro + aluminio + cromo, EBF de cuproníquel a 1 800 K) → baño químico MV → hilo → bobina Kanthal (2 700 K). Acero vanádico (vanadio + cromo + 7 de acero) e inoxidable (6 de hierro + cromo + manganeso + níquel, EBF a 1 700 K).
+4. **Kanthal y aceros.** Rubí (veta profunda de redstone) → electrólisis → cromo y aluminio; el aluminio gana una segunda vía: bauxita de la veta de mica → electrólisis MV (60 EU/t: 15 bauxita → 6 aluminio + 9 000 mB de O₂; sin rutilo desde la v0.5.0: el titanio solo sale de la Luna). Kanthal (hierro + aluminio + cromo, EBF de cuproníquel a 1 800 K) → baño químico MV → hilo → bobina Kanthal (2 700 K). Acero vanádico (vanadio + cromo + 7 de acero) e inoxidable (6 de hierro + cromo + manganeso + níquel, EBF a 1 700 K).
 5. **Silicio y obleas.** 3 SiO₂ + 2 carbono → lingote caliente (EBF Kanthal, 2 273 K, 120 EU/t, 2 000 mB de CO) → baño químico MV. Boule: 32 de polvo de silicio + 1 polvo pequeño de GaAs (EBF a 1 784 K, circuito 2). Cortadora MV (16 obleas) → grabador láser MV (lente roja = ILC, verde = RAM) → cortadora → chips.
 6. **Carbono renovable.** Invernadero MV → troncos y cultivos → pirólisis (`gtceu:pyrolyse_oven`), cervecería y fermentación → **biorrefinería** (nuestra): etanol, metanol, ácido acético, acetona, fenol, benceno, creosota.
 7. **Aceite y combustibles.** Perforadora de fluidos MV de GTM → alambique → desulfurar con H₂ → mezclador → diésel. Biodiésel de aceite de semilla y metanol. Generadores MV.
 8. **Polímeros.** Etanol + ácido sulfúrico → etileno → PE; salmuera → cloro → cloruro de vinilo → PVC; goma del invernadero.
 9. **Circuitos.** Tablero fenólico (polvo de madera + cola) → tablero bueno (plata + persulfato o FeCl₃), diodos con GaAs, transistores (silicio + estaño + PE), resistencias de carbón. ILC → integrado básico → integrado bueno (MV) → integrado avanzado (HV): 2 buenos + 2 ILC + 2 RAM + 4 transistores + 8 hilos finos de electrum + 8 pernos de cobre recocido (arco de GTM, verificar).
-10. **Salida.** Ver *Puerta a HV*.
+10. **El End (v0.5.0).** Varas de blaze del simulador MV → macerador → extractor (blaze líquido) → baño químico MV con una perla (120 EU/t) → ojo de ender → llave del End → un viaje por dos menas de cada veta → muestras → perforadora MV con broca vanádica y lodo: mena de aluminio, vanadio, cromita y oro, platino y paladio, y circón.
+11. **Salida.** Ver *Puerta a HV*.
 
 ## Generación automática de recursos
 
@@ -24,7 +25,7 @@ Mismo patrón que LV: un catalizador que no se gasta y entradas que salen de otr
 ### Perforadora de vetas MV (escalón de la familia)
 
 - **Registro:** `gtceu:mv_vein_drill`, tipo `gtceu:vein_drilling`, la misma spec de patrón y la misma tabla de vetas que LV (`lv/multis.js` y `lv/vein_drilling.js`); sin builder tiered de GTM, como LV.
-- **Decisión: el End se queda en HV.** MV no pide nada de allí: aluminio (zafiro o bauxita), cromo (rubí), vanadio (magnetita), esmeralda (berilio del Nether) y sal salen del Overworld y el Nether. Las vetas del End (bauxita, magnetita, naquadah, pechblenda, scheelita, sheldonita) o repiten lo que ya sale del Overworld o son materiales de HV–EV, y el viaje (ojo de ender, portal) pide equipo que MV aún no tiene.
+- **Decisión (v0.5.0): el End pasa a MV** (DECISIONS.md, 2026-10-24: así HV solo abre la Luna). El blaze (simulador MV) y el baño del ojo de ender (120 EU/t) son de MV; las recetas del End con broca vanádica y lodo están en `vein_drilling/mv/` (`hv/family_vein_drilling.js`). Merece el viaje: bauxita con mena de aluminio, magnetita con vanadio, cromita y oro, sheldonita con platino y paladio, y circón. Sin ilmenita (Luna) ni scheelita (Marte); naquadah y pechblenda esperan a IV.
 - **Gana al LV:** el mismo modificador de paralelos (`bores`: voltaje ÷ 8 EU/t) con tope 16 en vez de 8. Una escotilla MV (128 EU/t) llena las 16 corridas: ×6 sobre el vapor y el doble que la LV con dos escotillas. Y una broca de acero vanádico (`grindless:vanadium_steel_drill_bit`, ~1 % por ciclo; ~0,5 % con lodo) hecha con vanadio y cromo de la planta de mineral: la perforadora paga su propia broca. Si el balance pide menos, tope 8 y la ganancia queda en una escotilla y la broca.
 - **Cierra el círculo:** muestra y agua como en LV. El polvo de piedra deja de sobrar: lodo (LV) y el resto a la centrífuga (ver *Fluidos base*).
 
@@ -77,6 +78,47 @@ Qué gana: **rendimiento y pasos en uno**. El alambique saca una sola fracción 
 - **Estructura:** torre de 3×3 con 4–8 capas, carcasa `gtceu:solid_machine_casing` y tubos `gtceu:steel_pipe_casing`, una escotilla de salida por capa, escotilla de entrada, bus de salida (fertilizante, polvo de madera), energía MV. Usa la clase de la torre de GTM (verificar desde KubeJS).
 - **Por qué no es un cubo grande:** el alambique tiene 1 salida y la columna hasta 8, y no simplifica: obliga a dar destino a cada fracción. Ahí cruzan las líneas.
 - **Después:** en HV la torre de GTM hace lo mismo y más; la biorrefinería queda como versión barata. Sin ella, las fracciones salen del alambique una por pasada.
+
+### Banco de pruebas de motores: `gtceu:engine_test_stand` (el camino al primer cohete)
+
+Qué gana: **una receta imposible en pequeño**. Ninguna máquina hace un encendido estático, y ningún cohete vuela con un motor sin probar. Es el primer paso del primer cohete (`docs/viaje.md`: MV pone el banco y el radiotelescopio, HV vuela a la Luna): su trabajo de MV es la pieza que el motor de HV pedirá, y en HV el mismo banco prueba el motor entero (ver `hv.md`, *El primer cohete*).
+
+- **Tipo de receta:** `gtceu:static_fire` (nuevo). La pieza a probar entra por el bus, el combustible y el oxidante por los tanques, y el escape sale como CO₂ y agua, cada uno por su escotilla.
+- **MV, el racimo de propulsores:** 4 propulsores de potencia de GTM (`gtceu:power_thruster`: motor MV, aluminio, rotor de acero) + 200 mB de RP-1 + 300 mB de O₂ → 4 propulsores calificados (`grindless:qualified_power_thruster`) + 200 mB de CO₂ + 200 mB de agua. 300 t a 120 EU/t. Los cuatro de un motor se encienden juntos, como los motores de una etapa.
+- **El combustible es de MV:** el RP-1 es el queroseno de cohete (diésel → queroseno → RP-1, dos pasadas por el alambique con circuito 23 a 120 EU/t; recetas de GT--). Queroseno y oxígeno arden a CO₂ y agua. La refinería, el reformador y el combustible de cohete son de HV y no hacen falta aquí. Si GT-- saliera del pack, la prueba quema diésel.
+- **Estructura:** 5×6×5. Base de carcasa de aluminio a prueba de heladas alrededor de un foso de ladrillo refractario (`gtceu:firebricks`); el foso cruza el banco bajo el motor y sale al aire por los dos lados. Cuatro patas de marco de aluminio en el foso, el soporte del motor (carcasa termorresistente) colgando entre ellas sobre el foso y la línea de alimentación (carcasa de tubo de acero) bajando desde los tanques, que van arriba (carcasa de aluminio, criogénica como un tanque de LOX). En la base: 1–2 escotillas de energía, bus de entrada, bus de salida y 2 escotillas de salida (CO₂ y agua); en los tanques, 1–2 de entrada (combustible y oxidante).
+- **Controlador:** casco MV + 2 bombas MV (alimentan los tanques) + 2 sensores MV (la telemetría) + 4 circuitos MV, en la mesa de crafteo.
+- **Subproductos:** CO₂ → invernadero MV (+50 % y O₂ de vuelta) o metanol; agua → de vuelta a las bombas, o se tira (inerte).
+- **Por qué no es un cubo grande:** su tipo de receta no existe en ninguna máquina, no da paralelos ni descuento y pide dos fluidos y dos destinos para el escape.
+- **Decisiones tomadas (camino al cohete, 2026-10-24):**
+  1. El banco es de MV, como dice la tabla del viaje, y su primer trabajo es de MV: califica los propulsores que el motor de HV pedirá. No se mueve a HV.
+  2. Se califican de cuatro en cuatro (un motor) y sin azar: nada se rompe en la prueba.
+  3. El combustible de MV es el RP-1 de GT-- con oxígeno; el combustible de cohete de GTM (dimetilhidracina) queda para HV.
+  4. El escape va a dos escotillas obligatorias: CO₂ y agua tienen destino.
+
+### Radiotelescopio: `gtceu:radio_telescope` (camino al primer cohete)
+
+Qué gana: es lo único que hace la **carta del lugar de alunizaje** (`grindless:lunar_landing_chart`), la del primer viaje a la Luna al final de HV. Es el tercer paso de la familia del observatorio (`docs/viaje.md`) y gana cielo: la radio atraviesa las nubes y la lluvia.
+
+- **Tipo de receta:** `gtceu:radio_astronomy` (`startup_scripts/grindless/observatory/machines.js`, recetas en `server_scripts/grindless/observatory/recipes.js`).
+- **Receta:** el mapa fotográfico y las efemérides de LV, que no se gastan + 2 de papel → 1 carta del lugar de alunizaje. 120 EU/t y 600 ticks (30 s).
+- **Condiciones:**
+  - de noche: la Luna de Minecraft solo sale de noche y, con las efemérides, la antena la encuentra aunque las nubes la tapen;
+  - sin tormenta (nivel de tormenta por debajo de 0,2): los rayos tapan el eco del radar;
+  - con lluvia, sí.
+  - Si llega una tormenta a medias, espera y no pierde lo hecho.
+- **Estructura** (11 × 3 × 5):
+  - tres antenas de 3 × 3 de marcos de aluminio, con el borde un bloque más alto que el centro (un cuenco de malla), cada una sobre un pilar de marco;
+  - un pararrayos en el foco de cada antena (la bocina);
+  - un tendido de marcos de aluminio por el suelo hasta la caseta;
+  - la caseta, 5 × 2 × 2 de carcasa de aluminio a prueba de heladas, con el controlador y las piezas: 1 o 2 escotillas de energía (MV), un bus de entrada y otro de salida.
+- **Controlador:** marcos de aluminio, un emisor MV (el radar), dos sensores MV (los receptores), el casco MV, circuitos MV y placas de aluminio.
+- **La carta no se gasta y se copia:** carta + papel + polvo de carbón → 2.
+- **El cohete:** la carta se recomienda como ingrediente que se queda en la mesa (`keepIngredient`) en la receta del chip de identificación de GCYR (`gcyr:id_chip`), que lleva el destino del vuelo. Lo cablea el orquestador cuando llegue la Luna; este multibloque no toca GCYR.
+- **Decisiones tomadas (radiotelescopio, 2026-10-24):**
+  1. Cada paso de la familia libera una condición del cielo: vapor pide noche, cielo despejado y altura; LV, noche y cielo despejado; MV, noche y que no haya tormenta.
+  2. Los pararrayos son las antenas: atraen los rayos de las tormentas, justo cuando el radiotelescopio no trabaja.
+  3. El nombre de la carta lleva el sitio (`lunar_landing_chart`), para que las cartas de otros sitios no choquen con ella.
 
 ### Descartadas
 

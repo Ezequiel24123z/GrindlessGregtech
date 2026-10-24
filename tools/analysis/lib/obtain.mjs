@@ -88,13 +88,15 @@ export function obtainConfig(dump, raw) {
   }
   const world = [{ id: 'otros-mods', mode: 'auto', items: free, note: 'objetos y fluidos de los espacios de nombres no auditados' }];
 
-  // 2) vetas de las tablas de la perforadora en las dimensiones a las que se llega (requireRecipe: las que tienen receta)
+  // 2) vetas de las tablas de las perforadoras en las dimensiones a las que se llega (requireRecipe: las que tienen receta; una
+  // lista = varias perforadoras, p. ej. la de vetas y la lunar, cada una con su tipo de receta)
   const veins = ob.veins || {};
-  world.push({
-    id: 'vetas', mode: 'auto', template: 'gtceu:raw_{m}',
-    fromVeins: { dimensions: reach, ...(veins.requireRecipe ? { requireRecipe: veins.requireRecipe } : {}), ...(veins.requireItem ? { requireItem: veins.requireItem } : {}) },
-    note: 'menas crudas de las vetas de las tablas en las dimensiones a las que se llega',
-  });
+  const requireRecipes = Array.isArray(veins.requireRecipe) ? veins.requireRecipe : [veins.requireRecipe || null];
+  requireRecipes.forEach((rr, i) => world.push({
+    id: requireRecipes.length > 1 ? `vetas-${rr ? rr.type : i + 1}` : 'vetas', mode: 'auto', template: 'gtceu:raw_{m}',
+    fromVeins: { dimensions: reach, ...(rr ? { requireRecipe: rr } : {}), ...(veins.requireItem ? { requireItem: veins.requireItem } : {}) },
+    note: `menas crudas de las vetas de las tablas en las dimensiones a las que se llega${rr ? ` (con receta ${rr.type})` : ''}`,
+  }));
 
   // 3) yacimientos de fluidos (peso > 0) en esas dimensiones, con la perforadora de fluidos si está registrada
   const rigs = ob.fluidRigs || [...dump.machines.keys()].filter((m) => /fluid_drilling_rig$/.test(m)).sort();
@@ -175,7 +177,8 @@ export function obtainConfig(dump, raw) {
 
 /**
  * Fuentes de eras posteriores, en orden (`obtain.later`): dimensiones (sus vetas, todas, y las recetas con su condición),
- * vetas concretas (las del End apartadas en veins_excluded.json) y objetos sueltos. Cada etapa suma a las anteriores.
+ * vetas concretas (las del End apartadas en veins_excluded.json), materiales de veta sueltos (`materials`: sus menas crudas, para
+ * una veta que el pack ya quitó del mundo y no sale en veins.json) y objetos sueltos. Cada etapa suma a las anteriores.
  */
 function laterStages(dump, ob) {
   const out = [];
@@ -183,7 +186,7 @@ function laterStages(dump, ob) {
     const dims = asArray(s.dimensions);
     const veinIds = new Set(asArray(s.veins));
     const keys = dims.map((d) => 'dim:' + d);
-    const mats = new Set();
+    const mats = new Set(asArray(s.materials));
     for (const v of dump.veins || []) {
       if (veinIds.has(v.id) || (dims.length > 0 && v.dims.some((d) => dims.includes(d)))) for (const m of v.mats) mats.add(m);
     }
@@ -421,8 +424,12 @@ export function runObtain(dump, raw, opts = {}) {
   // regla C no lo tapa), luego las reglas C y al final las de reserva; si no, «?»
   const { classify, compiled } = makeClassifier(ob.classes);
   const creative = makeGlobMatcher(ob.creative || []);
-  const hidden = dump.tags.itemTags.get(HIDDEN_TAG);
-  const hiddenSet = hidden ? new Set(hidden) : null;
+  // lo que el pack ya oculta: objetos y fluidos de la etiqueta (una etiqueta de objetos vacía se vuelca como [minecraft:barrier])
+  const hiddenItems = dump.tags.itemTags.get(HIDDEN_TAG) || null;
+  const hiddenFluids = dump.tags.fluidTags.get(HIDDEN_TAG) || null;
+  const hiddenSet = hiddenItems || hiddenFluids
+    ? new Set([...(hiddenItems || []).filter((id) => id !== 'minecraft:barrier'), ...(hiddenFluids || []).map((f) => 'fluid:' + f)])
+    : null;
   const apply = (grp, rule, by) => {
     grp.cls = rule.class;
     grp.reason = rule.reason || '';
@@ -459,6 +466,28 @@ export function runObtain(dump, raw, opts = {}) {
     if (grp.cls === 'A') grp.until = null;
     if (grp.cls === 'B' && !ERA_IDS.includes(grp.until)) warnings.push(`${grp.id}: clase B sin «until» válido (la era en que llega: ${ERA_IDS.join(', ')}); la tabla de ocultos no lo puede ocultar`);
     grp.hidden = hiddenSet ? grp.keys.filter((k) => hiddenSet.has(k)).length : null;
+  }
+
+  // la ocultación del pack frente a la auditoría: nada que se consiga puede estar oculto (no se verían sus recetas) y, si se sabe
+  // hasta qué era está implementado el pack (opts.implementedEra o info.json: hidden.implementedEra, que vuelca
+  // integration/hidden.js), todo lo C y todo lo B de una era posterior tiene que estar oculto (si no, la tabla está vieja)
+  let hiding = null;
+  if (hiddenSet) {
+    const era = opts.implementedEra || (dump.info && dump.info.hidden && dump.info.hidden.implementedEra) || null;
+    const limit = ERA_IDS.indexOf(era);
+    const obtainable = [...hiddenSet].filter((k) => reachedIn(base, k)).sort();
+    let visible = null;
+    if (limit >= 0) {
+      visible = [];
+      for (const grp of neverGroups) {
+        if (grp.until !== 'never' && !(ERA_IDS.indexOf(grp.until) > limit)) continue;
+        for (const k of grp.keys) if (!hiddenSet.has(k)) visible.push({ key: k, group: grp.id, until: grp.until });
+      }
+    }
+    hiding = {
+      items: [...hiddenSet].filter((k) => !k.startsWith('fluid:')).length, fluids: [...hiddenSet].filter((k) => k.startsWith('fluid:')).length,
+      implementedEra: limit >= 0 ? era : null, obtainable, visible,
+    };
   }
 
   // qué se abriría si el material se consiguiera (solo los de clase A y los sin clasificar, que es donde se decide): una pasada
@@ -501,9 +530,10 @@ export function runObtain(dump, raw, opts = {}) {
   const allRecipes = new Set();
   for (const grp of neverGroups) for (const r of [...grp.uses, ...grp.makes]) allRecipes.add(r);
   const unusedRules = compiled.filter((c) => c.used === 0).map((c) => ({ index: c.idx, class: c.rule.class, reason: c.rule.reason || '', materials: asArray(c.rule.materials), items: asArray(c.rule.items) }));
-  const verdict = byClass['?'].groups > 0 ? 'FAIL' : 'PASS';
+  const hidingBad = !!hiding && (hiding.obtainable.length > 0 || (hiding.visible !== null && hiding.visible.length > 0));
+  const verdict = byClass['?'].groups > 0 || hidingBad ? 'FAIL' : 'PASS';
   return {
-    verdict, groups: neverGroups, byClass, later: stageInfo, unusedRules, warnings, model, base,
+    verdict, groups: neverGroups, byClass, later: stageInfo, unusedRules, warnings, model, base, hiding,
     stats: {
       audited: auditedIds.length, never: never.size, groups: neverGroups.length, recipes: allRecipes.size,
       full: neverGroups.filter((grp) => grp.full).length, partial: neverGroups.filter((grp) => !grp.full).length,
@@ -540,6 +570,30 @@ const short = (list, n) => (list.length <= n ? list.join(', ') : `${list.slice(0
 const ruleNames = (g, set, n) => short([...set].map((r) => g.rules[r].name).sort(), n);
 const givesText = (grp, n = 4) => short(grp.gives.map((o) => `${o.key}${o.reached ? '' : ' (nuevo)'}`), n);
 
+/** Por qué falla el paso: grupos sin clasificar y, si el volcado lo dice, una ocultación que no cuadra con la auditoría. */
+function failWhy(res) {
+  const why = [];
+  if (res.byClass['?'].groups > 0) why.push(`${res.byClass['?'].groups} grupos sin clasificar`);
+  if (res.hiding && res.hiding.obtainable.length > 0) why.push(`${res.hiding.obtainable.length} ocultos que se consiguen`);
+  if (res.hiding && res.hiding.visible && res.hiding.visible.length > 0) why.push(`${res.hiding.visible.length} sin ocultar`);
+  return why.join('; ');
+}
+
+/** Líneas de la ocultación del pack (etiqueta c:hidden_from_recipe_viewers) frente a la auditoría. */
+function hidingLines(res, n = 20) {
+  const h = res.hiding;
+  if (!h) return [];
+  const L = [`Ocultos en el pack (${HIDDEN_TAG}): ${h.items} objetos y ${h.fluids} fluidos; ${h.implementedEra
+    ? `implementado hasta ${h.implementedEra}`
+    : 'el volcado no dice hasta qué era está implementado (integration/hidden.js): no se mira lo que falta por ocultar'}`];
+  L.push(`  se consiguen pero están ocultos: ${h.obtainable.length}${h.obtainable.length > 0 ? ' — ' + short(h.obtainable, n) : ''}`);
+  if (h.visible) {
+    L.push(`  tendrían que estar ocultos (C, o B de una era posterior a ${h.implementedEra}) y se ven: ${h.visible.length}${h.visible.length > 0
+      ? ' — ' + short(h.visible.map((v) => `${v.key} (${v.group}, ${v.until})`), n) + ' (regenera la tabla de ocultos: --table)' : ''}`);
+  }
+  return L;
+}
+
 /** Informe de texto (consola y --out). */
 export function renderObtainText(res, file) {
   const L = [];
@@ -554,6 +608,10 @@ export function renderObtainText(res, file) {
   for (const c of ['A', 'B', 'C', '?']) {
     const b = res.byClass[c];
     L.push(`${c.padEnd(6)} ${String(b.groups).padStart(6)}  ${String(b.items).padStart(7)}  ${String(b.fluids).padStart(7)}  ${String(b.recipes).padStart(7)}`);
+  }
+  if (res.hiding) {
+    L.push('');
+    L.push(...hidingLines(res));
   }
   for (const c of ['A', 'B', 'C', '?']) {
     const list = res.groups.filter((grp) => grp.cls === c);
@@ -576,7 +634,7 @@ export function renderObtainText(res, file) {
     for (const w of res.warnings.slice(0, 30)) L.push('  ' + w);
   }
   L.push('');
-  L.push(`VEREDICTO: ${res.verdict}${res.verdict === 'FAIL' ? ` (${res.byClass['?'].groups} grupos sin clasificar)` : ''}`);
+  L.push(`VEREDICTO: ${res.verdict}${res.verdict === 'FAIL' ? ` (${failWhy(res)})` : ''}`);
   return L.join('\n') + '\n';
 }
 
@@ -585,7 +643,7 @@ export function obtainToJson(res) {
   const g = res.model.g;
   return {
     pass: 'obtain', verdict: res.verdict, stats: res.stats, byClass: res.byClass, later: res.later, unusedRules: res.unusedRules,
-    warnings: res.warnings,
+    warnings: res.warnings, hiding: res.hiding || null,
     groups: res.groups.map((grp) => ({
       id: grp.id, class: grp.cls, by: grp.by, reason: grp.reason, era: grp.era || '', until: grp.until || null, source: grp.source || '', full: grp.full,
       items: grp.keys, hidden: grp.hidden, later: grp.later || null,
@@ -638,6 +696,7 @@ export function hiddenTable(res, opts = {}) {
       fluids: grp.keys.filter((k) => k.startsWith('fluid:')).map((k) => k.slice(6)).sort(),
     };
     if (grp.cls === 'C') e.removeRecipes = grp.keepRecipes ? [] : [...new Set([...removeOf.get(grp), ...(previous.get(grp.id) || [])])].sort();
+    if (grp.keepRecipes) e.keepRecipes = true;
     return e;
   };
   const rank = (u) => (u === 'never' ? ERA_IDS.length : ERA_IDS.indexOf(u));
@@ -646,9 +705,10 @@ export function hiddenTable(res, opts = {}) {
   return {
     _source: `tools/analysis obtainability audit: node tools/analysis/reachability.mjs --pass obtain --dump <dump> --table <this file> (config tools/analysis/tiers/obtain.json${opts.dump ? `, dump ${opts.dump}` : ''}${opts.date ? `, ${opts.date}` : ''}). Do not edit by hand: change the audit config and regenerate.`,
     _how_it_is_used: [
-      'server_scripts/grindless/integration/hidden.js reads it. Every group whose `until` is above IMPLEMENTED_ERA (the constant at the top of hidden.js) or is "never" gets its items and fluids into the tag c:hidden_from_recipe_viewers: EMI drops them from its index and, with assets/grindless/index/stacks/hidden_from_recipe_viewers.json ("disable"), from every recipe it shows. Bumping IMPLEMENTED_ERA when an era lands shows that era\'s content again.',
+      'server_scripts/grindless/integration/hidden.js reads it. Every group whose `until` is above IMPLEMENTED_ERA (the constant at the top of hidden.js) or is "never" gets its items and fluids into the tags c:hidden_from_recipe_viewers (EMI drops them from its index) and grindless:hidden_with_recipes (assets/emi/index/stacks/grindless_hidden_with_recipes.json disables that tag in EMI: every recipe with one of them as input, output or catalyst disappears from EMI too). Bumping IMPLEMENTED_ERA when an era lands shows that era\'s content again.',
       'until = era id of docs/viaje.md (steam, lv, mv, hv, ev, iv, luv, zpm, uv, uhv, uev, uiv, uxv, opv, max) in which the group can first be obtained (class B of the audit: planets, the excluded End veins and everything that hangs on them). Its recipes stay on the server, only hidden.',
       'until = "never": junk (class C of the audit): hidden for good and its removeRecipes are removed from the server (recipes that only exist for it: an ingredient that only accepts junk, or junk as every output). Nothing is unregistered: old saves keep every id.',
+      'keepRecipes = true: a hidden item whose recipes stay, on the server and in EMI (the old items of earlier versions and their conversion into the new ones): only c:hidden_from_recipe_viewers.',
       'material = audit group: a GT material with all its forms (dust, ingot, plate, fluid, bucket...) or a single item; reason = why (from the audit config, in Spanish).',
       'Regenerating keeps the removeRecipes of the groups that are still junk (a dump taken with hidden.js active no longer has those recipes).',
     ],
@@ -690,7 +750,11 @@ export function renderObtainMarkdown(res, meta = {}) {
     L.push(`| ${c} | ${what[c]} | ${b.groups} | ${b.items} | ${b.fluids} | ${b.recipes} |`);
   }
   L.push('');
-  L.push(`Veredicto del paso: **${res.verdict}**${res.verdict === 'FAIL' ? ` (${res.byClass['?'].groups} grupos sin clasificar)` : ''}.${s.hiddenKnown ? '' : ` El volcado no trae la etiqueta \`${HIDDEN_TAG}\`: no se sabe qué está ya oculto.`}`);
+  L.push(`Veredicto del paso: **${res.verdict}**${res.verdict === 'FAIL' ? ` (${failWhy(res)})` : ''}.${s.hiddenKnown ? '' : ` El volcado no trae la etiqueta \`${HIDDEN_TAG}\`: no se sabe qué está ya oculto.`}`);
+  if (res.hiding) {
+    L.push('');
+    for (const line of hidingLines(res, 10)) L.push(line.startsWith('  ') ? `- ${line.trim()}` : line);
+  }
   L.push('');
   L.push('## A: merecen una fuente');
   L.push('');

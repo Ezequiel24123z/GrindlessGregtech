@@ -113,14 +113,16 @@
   }
 
   // Tags that analysis configs commonly name even when no recipe references them. c:hidden_from_recipe_viewers is the pack's
-  // "hidden in EMI" tag: the obtainability audit (tools/analysis, --pass obtain) uses it to tell what is already hidden.
+  // "hidden in EMI" tag: the obtainability audit (tools/analysis, --pass obtain) uses it to tell what is already hidden;
+  // grindless:hidden_with_recipes is the part of it whose recipes EMI hides too (integration/hidden.js).
   var SEED_TAGS = [
     'minecraft:logs', 'minecraft:logs_that_burn', 'minecraft:planks', 'minecraft:saplings', 'minecraft:leaves',
     'minecraft:sand', 'minecraft:coals', 'minecraft:flowers', 'minecraft:wool', 'minecraft:stone_crafting_materials',
     'minecraft:stone_tool_materials', 'minecraft:coal_ores', 'minecraft:iron_ores', 'minecraft:copper_ores',
     'forge:cobblestone', 'forge:stone', 'forge:sand', 'forge:gravel', 'forge:dirt', 'forge:ores', 'forge:raw_materials',
     'forge:seeds', 'forge:crops', 'forge:sugar_cane', 'forge:gems/coal', 'forge:rods/wooden', 'gtceu:fuels',
-    'gtceu:tools/hammers', 'gtceu:tools/files', 'gtceu:tools/mortars', 'gtceu:tools/saws', 'c:hidden_from_recipe_viewers'
+    'gtceu:tools/hammers', 'gtceu:tools/files', 'gtceu:tools/mortars', 'gtceu:tools/saws', 'c:hidden_from_recipe_viewers',
+    'grindless:hidden_with_recipes'
   ];
 
   // Tag ids referenced by any collected recipe ("tag":"x" ingredients, "#x" fluid conditions) plus the seeds.
@@ -316,6 +318,22 @@
     return { format: 'gg-structures-1', structures: out };
   }
 
+  // What integration/hidden.js hides (global.grindless.hidden): the analyzer's obtain pass checks the dump's
+  // c:hidden_from_recipe_viewers against its audit up to this era. Absent on packs without hidden.js.
+  function dumpHidden() {
+    var H = null;
+    try { H = global.grindless ? global.grindless.hidden : null; } catch (e) { H = null; }
+    if (H === null || H === undefined || H.implementedEra === undefined) return null;
+    var removed = H.removed || {};
+    return {
+      implementedEra: str(H.implementedEra),
+      groups: Number(H.hidden ? H.hidden.groups : 0),
+      items: Number(H.hidden && H.hidden.items ? H.hidden.items.length : 0),
+      fluids: Number(H.hidden && H.hidden.fluids ? H.hidden.fluids.length : 0),
+      removedRecipes: Number(removed.original || 0) + Number(removed.added || 0)
+    };
+  }
+
   function dumpInfo(counts, written) {
     var mods = [];
     try {
@@ -323,7 +341,7 @@
       each(P.getMods(), function (m) { mods.push(str(m.getModId()) + '@' + str(m.getVersion())); });
       mods.sort();
     } catch (e) { /* optional */ }
-    return {
+    var out = {
       format: 'gg-info-1',
       counts: counts,
       recipeTypes: state.types || {},
@@ -331,6 +349,10 @@
       written: written,
       mods: mods
     };
+    var hidden = null;
+    try { hidden = dumpHidden(); } catch (e) { hidden = null; }
+    if (hidden !== null) out.hidden = hidden;
+    return out;
   }
 
   // ---------------------------------------------------------------- output

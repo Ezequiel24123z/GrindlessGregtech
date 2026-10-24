@@ -50,7 +50,7 @@ function collectItems(x, out) {
 }
 
 /** Volcado en memoria; los objetos del registro salen de las propias recetas más `items`. */
-export function mkDump({ recipes = [], items = [], fluids = [], tagsItem = {}, tagsFluid = {}, machines = [], recipeTypes = [], veins = null, fluidVeins = null, config = null, structures = null } = {}) {
+export function mkDump({ recipes = [], items = [], fluids = [], tagsItem = {}, tagsFluid = {}, machines = [], recipeTypes = [], veins = null, fluidVeins = null, config = null, structures = null, info = null } = {}) {
   const all = new Set(items);
   collectItems(recipes.map((r) => r.json), all);
   return makeDump('(memoria)', {
@@ -62,7 +62,7 @@ export function mkDump({ recipes = [], items = [], fluids = [], tagsItem = {}, t
     fluidVeins: fluidVeins ? { veins: fluidVeins } : null,
     config: config ? { gtceu: config } : null,
     structures: structures ? { structures } : null,
-    info: null,
+    info,
   });
 }
 

@@ -3,27 +3,32 @@
   "title": "Era HV",
   "extends": "mv",
   "inheritTargets": true,
-  "dropTargets": ["ojo-ender-no-antes-de-hv", "polvo-blaze-no-antes-de-hv", "vara-blaze-no-antes-de-hv"],
-  "note": "Era HV según docs/eras/hv.md y sus \"Decisiones tomadas\" (que mandan), con el retoque de HV a inox (v0.4.1: HV sin titanio salvo la salida a EV): el End entra con las vetas de la tabla (GTM: bauxita_end, magnetita_end y sheldonita; GT Community Additions: zirconio; la de scheelita pasa a veins_excluded.json, camino de Marte, y las radiactivas esperan a IV), llave del End (un solo viaje con dos menas por veta), refinería (gtceu:refinery, tipo gtceu:refining, catalizador de cobalto y molibdeno) y reformador (gtceu:reformer, tipo gtceu:reforming, recortable: WARN si falta), perforadora e invernadero HV con la broca de acero inoxidable (la de titanio queda registrada, oculta, y se convierte 1:1 en la de inox), primer cohete y traje espacial de GCYR en HV (inox y kapton), ojo de ender SOLO por la vía de GT (polvo de blaze -> extractor -> baño químico; la receta vanilla se quita), titanio de Kroll solo para la salida a EV (casco, motor y bomba EV: en esta versión de transición, de la ilmenita del End y del rutilo de la bauxita; se enfría solo en el congelador de vacío, que pide 2 circuitos EV), circuitos EV de la cámara limpia, PTFE, epoxi, SBR y gasolina de GTM enteros. El AE2 base sigue entero en LV (se hereda su regresión) y el mantenimiento está apagado. Hereda del MV el mundo, las máquinas y TODOS los objetivos (regresión), salvo las tres comprobaciones de fuga que en HV dejan de valer (ojo de ender, polvo y vara de blaze). Energía: las máquinas de un bloque gtceu:hv_* (del registro) corren recetas de hasta 512 V; eu:ev sale del transformador HV -> EV sobre la red HV; no se modelan cables, amperios ni baterías. Multibloques de GTM (cámara limpia, congelador de vacío, craqueador, torre de destilación, reactor químico grande, EBF): su energía sigue la regla de GTM 7.5.3 (WorkableElectricMultiblockMachine.getMaxVoltage: 2 escotillas del mismo nivel suben un escalón), así que con 2 escotillas MV corren recetas de 480 EU/t y con 2 HV las de 1 920 EU/t. Los multibloques del pack exigen la escotilla HV (su diseño: 1-2 escotillas HV; el patrón admite cualquier nivel, pero el análisis sigue el diseño). Condición de cámara limpia (cleanroom): se cumple si la cámara limpia está construida y alimentada (se construye una vez); la estéril sigue sin soportarse (es de UV). Las menas del End no son un hecho del mundo: la regla `menas-end` exige la llave del End (un viaje) y sus menas valen como arranque, no como recurso repuesto; solo se cuentan las vetas que la tabla de la perforadora ofrece (las que tienen recetas de perforación; una muestra oculta de una veta apartada no cuenta). El balance de H2 es cualitativo (existe un camino sostenible de H2 con y sin reformador): no se modelan cantidades. Los vetos de las máquinas del pack por nombre de receta no se modelan: la perforadora y el invernadero HV se comprueban apagando las demás con `without` (operar:...). La escotilla de energía EV pide un ensamblador EV (1 920 EU/t) y un cortador EV, que son las dos únicas máquinas EV que se modelan.",
+  "dropTargets": ["ilmenita-no-sale-del-end", "menas-end-sin-llave"],
+  "note": "Era HV según docs/eras/hv.md y sus \"Decisiones tomadas\" (que mandan), en la versión de la Luna (v0.5.0: HV sin titanio salvo la salida a EV, el End ya en MV y la Luna al final de HV): refinería (gtceu:refinery, tipo gtceu:refining, catalizador de cobalto y molibdeno) y reformador (gtceu:reformer, tipo gtceu:reforming, recortable: WARN si falta), perforadora e invernadero HV con la broca de acero inoxidable (la de titanio queda registrada, oculta, y se convierte 1:1 en la de inox), primer cohete y traje espacial de GCYR en HV (inox y kapton), circuitos EV de la cámara limpia, PTFE, epoxi, SBR y gasolina de GTM enteros. La Luna (DECISIONS 2026-10-24, opción A): el viaje (sintética viaje-luna: el cohete, el traje, combustible de cohete y oxígeno) da la clave dim:gcyr:luna, que piden las menas lunares a mano (regla menas-luna: arranque, no recurso repuesto) y las recetas que solo valen en la Luna (conditions.dimension.asKeysFor: en vez de compararlas con la dimensión de la fábrica). La perforadora lunar (gtceu:lunar_drill, tipo gtceu:lunar_drilling, HV) trabaja allí con las muestras de veins_moon.json: ilmenita (el único titanio del pack) y regolito (helio-3, de día). El titanio de Kroll (ilmenita lunar -> rutilo -> TiCl4 -> EBF -> congelador de vacío, que pide 2 circuitos EV) es la salida a EV (casco, motor y bomba EV); el titanio y el helio-3 son de EV y solo salen de la Luna (comprobaciones de exclusividad onlyFrom). El AE2 base sigue entero en LV (se hereda su regresión) y el mantenimiento está apagado. Hereda del MV el mundo (con el End), las máquinas y TODOS los objetivos (regresión), salvo las dos comprobaciones del End que en HV dejan de valer porque la Luna también da ilmenita y cromita (ilmenita-no-sale-del-end y menas-end-sin-llave). Energía: las máquinas de un bloque gtceu:hv_* (del registro) corren recetas de hasta 512 V; eu:ev sale del transformador HV -> EV sobre la red HV; no se modelan cables, amperios ni baterías (tampoco el camino de la energía a la Luna: baterías a mano o el túnel P2P de EU por el puente cuántico de AE2). Multibloques de GTM (cámara limpia, congelador de vacío, craqueador, torre de destilación, reactor químico grande, EBF): su energía sigue la regla de GTM 7.5.3 (WorkableElectricMultiblockMachine.getMaxVoltage: 2 escotillas del mismo nivel suben un escalón), así que con 2 escotillas MV corren recetas de 480 EU/t y con 2 HV las de 1 920 EU/t. Los multibloques del pack exigen la escotilla HV (su diseño: 1-2 escotillas HV; el patrón admite cualquier nivel, pero el análisis sigue el diseño). Condición de cámara limpia (cleanroom): se cumple si la cámara limpia está construida y alimentada (se construye una vez); la estéril sigue sin soportarse (es de UV). Solo se cuentan las vetas que la tabla de la perforadora ofrece (las que tienen recetas de perforación; una muestra oculta de una veta apartada no cuenta). El balance de H2 es cualitativo (existe un camino sostenible de H2 con y sin reformador): no se modelan cantidades. Los vetos de las máquinas del pack por nombre de receta no se modelan: la perforadora y el invernadero HV se comprueban apagando las demás con `without` (operar:...). La escotilla de energía EV pide un ensamblador EV (1 920 EU/t) y un cortador EV, que son las dos únicas máquinas EV que se modelan.",
 
   "contexts": ["minecraft:overworld", "grindless:flat", "grindless:void"],
 
   "conditions": {
     "cleanroom": {
       "needsByField": { "field": "cleanroom", "map": { "cleanroom": ["run:gtceu:cleanroom"] } }
+    },
+    "dimension": {
+      "asKeysFor": ["gcyr:luna"],
+      "note": "La base lunar: una receta que solo vale en la Luna pide la clave dim:gcyr:luna (la da la sintética viaje-luna) en vez de compararse con la dimensión de la fábrica."
     }
   },
 
   "world": [
     {
-      "id": "menas-end",
+      "id": "menas-luna",
       "mode": "manual",
       "bootstrap": true,
-      "needs": ["grindless:end_key"],
+      "needs": ["dim:gcyr:luna"],
       "template": "gtceu:raw_{m}",
-      "fromVeins": { "dimensions": ["minecraft:the_end"], "requireRecipe": { "type": "gtceu:vein_drilling", "input": "grindless:vein_sample_{id}" } },
+      "fromVeins": { "dimensions": ["gcyr:luna"], "requireRecipe": { "type": "gtceu:lunar_drilling", "input": "grindless:vein_sample_{id}" } },
       "materials": [],
-      "note": "Decisión 2 y 4 de HV: la llave del End (ojo de ender + palo + obsidiana) lleva a una plataforma segura del End vanilla y vuelve; un viaje por 2 menas de cada veta que la tabla de la perforadora ofrece (bauxita_end con su ilmenita, magnetita_end, sheldonita y zirconio; la scheelita está apartada y las radiactivas esperan a IV): cuenta la veta si alguna receta de perforación toma su muestra. La muestra de la veta se hace con esas 2 menas, y después la perforadora HV (con lodo) las repone."
+      "items": ["gcyr:lunar_mare_regolith", "gcyr:moon_sand", "gcyr:moon_cobblestone"],
+      "note": "Decisión del 2026-10-24 (Luna, opción A): el primer viaje en cohete (la clave dim:gcyr:luna) trae a mano 2 menas de cada veta lunar que la tabla de la perforadora lunar ofrece (veins_moon.json; las vetas propias de GCYR están quitadas) y el regolito y la arena lunar de la superficie: con ellas se hacen las muestras y las patas de la perforadora lunar. Es arranque, no recurso repuesto: lo repone la perforadora lunar."
     }
   ],
 
@@ -168,6 +173,60 @@
         "gtceu:clean_machine_casing", "gtceu:hv_energy_input_hatch", "gtceu:hv_input_bus", "gtceu:hv_input_hatch", "gtceu:hv_output_hatch"
       ],
       "note": "Reformador catalítico (la pieza recortable del HV): 5x5x6 de carcasa limpia, una escotilla de entrada (nafta), tres de salida (benceno, tolueno, H2), bus de catalizador y una escotilla de energía HV. Si el H2 no cierra se quita y la refinería sigue con H2 de la electrólisis."
+    },
+    {
+      "machine": "gtceu:syngas_plant",
+      "types": ["gtceu:syngas"],
+      "energy": { "voltage": 512 },
+      "needs": ["eu:hv"],
+      "partsFromStructure": true,
+      "partAbilities": { "energy_input": ["gtceu:hv_energy_input_hatch"] },
+      "parts": [
+        "gtceu:clean_machine_casing", "gtceu:heatproof_machine_casing", "gtceu:kanthal_coil_block", "gtceu:steel_pipe_casing",
+        "gtceu:stainless_steel_frame", "gtceu:tempered_glass", "gtceu:hv_energy_input_hatch", "gtceu:hv_input_bus", "gtceu:hv_output_bus",
+        "gtceu:hv_input_hatch", "gtceu:hv_output_hatch"
+      ],
+      "note": "Planta de gas de síntesis (hv/syngas_plant.js): 9x7x3, gasificador de carcasa termorresistente con anillo de bobinas de Kanthal, dos tambores de desplazamiento de inox limpio con marcos de inox y columna absorbedora con mirilla de cristal templado; escotillas en el suelo (1-2 de energía HV, bus de carga y catalizador, bus de ceniza, 1-2 de entrada, 2-3 de salida; las `parts` son la reserva: mandan las de structures.json). Carbono en polvo o combustible pesado + vapor -> CO + H2, desplazamiento CO + vapor -> H2 + CO2 con catalizador de hierro y cromo; todo a 480 EU/t."
+    },
+    {
+      "machine": "gtceu:lunar_drill",
+      "types": ["gtceu:lunar_drilling"],
+      "energy": { "voltage": 512 },
+      "needs": ["eu:hv"],
+      "partsFromStructure": true,
+      "partAbilities": { "energy_input": ["gtceu:hv_energy_input_hatch"] },
+      "parts": [
+        "gtceu:clean_machine_casing", "gtceu:stainless_steel_frame", "gtceu:steel_pipe_casing", "minecraft:daylight_detector",
+        "gcyr:lunar_mare_regolith", "gtceu:hv_energy_input_hatch", "gtceu:hv_input_bus", "gtceu:hv_output_bus"
+      ],
+      "note": "Perforadora lunar (moon/lunar_drill.js): el escalón lunar de la familia de perforadoras, con otra forma (trípode con las patas sobre el regolito, alas solares de sensores de luz y mástil corto; las `parts` son la reserva: mandan las de structures.json). Solo trabaja en la Luna: todas sus recetas llevan .dimension('gcyr:luna'), que aquí pide la clave dim:gcyr:luna del viaje. Tabla veins_moon.json (ilmenita; regolito con helio-3, de día), broca de acero inoxidable, 8 EU/t y tope 32 con escotilla HV. Su energía en la Luna (baterías traídas a mano o la de la Tierra por el puente cuántico de AE2 con un túnel P2P de EU) se modela como eu:hv."
+    },
+    {
+      "id": "gtceu:engine_test_stand@hv",
+      "machine": "gtceu:engine_test_stand",
+      "types": ["gtceu:static_fire"],
+      "energy": { "voltage": 512 },
+      "needs": ["eu:hv"],
+      "partsFromStructure": true,
+      "partAbilities": { "energy_input": ["gtceu:hv_energy_input_hatch"] },
+      "parts": [
+        "gtceu:frostproof_machine_casing", "gtceu:firebricks", "gtceu:aluminium_frame", "gtceu:heatproof_machine_casing", "gtceu:steel_pipe_casing",
+        "gtceu:hv_energy_input_hatch", "gtceu:mv_input_bus", "gtceu:mv_output_bus", "gtceu:mv_input_hatch", "gtceu:mv_output_hatch"
+      ],
+      "note": "Banco de pruebas de motores (el de MV, mv.json) con una escotilla de energía HV (o dos MV, que GTM cuenta como HV): el encendido estático del motor de cohete sin probar con combustible de cohete (480 EU/t, 400 t) -> gcyr:basic_rocket_motor, la única fuente del motor (integration/gcyr_launch_road.js)."
+    },
+    {
+      "machine": "gtceu:composite_autoclave",
+      "types": ["gtceu:composite_curing"],
+      "energy": { "voltage": 512 },
+      "needs": ["eu:hv"],
+      "partsFromStructure": true,
+      "partAbilities": { "energy_input": ["gtceu:hv_energy_input_hatch"] },
+      "parts": [
+        "gtceu:clean_machine_casing", "gtceu:stainless_steel_frame", "gtceu:steel_pipe_casing", "gtceu:hv_energy_input_hatch", "gtceu:hv_input_bus",
+        "gtceu:hv_output_bus", "gtceu:hv_input_hatch"
+      ],
+      "note": "Autoclave de composites (launch_road/composite_autoclave.js, el camino al primer cohete): recipiente a presión tumbado de 5x7x4, carcasa octogonal de inox limpio sobre dos soportes de marco de inox, cámara vacía, línea de nitrógeno de tubo de acero; 1-2 escotillas de energía HV, bus de entrada y de salida y 2 escotillas de entrada (epoxi y nitrógeno). Cura a 480 EU/t las losetas ablativas (fibra de vidrio) y los depósitos envueltos (barril de inox + para-aramida)."
     }
   ],
 
@@ -207,6 +266,16 @@
       "consumes": ["eu:hv"],
       "produces": ["eu:ev"],
       "note": "Transformador HV -> EV de GTM sobre la red HV: la central HV de 8 192 EU/t o más (gasolina, calderas y turbinas grandes) sostiene EV."
+    },
+    {
+      "id": "viaje-luna",
+      "capital": [
+        "gcyr:rocket_scanner", "gcyr:launch_pad", "gtceu:stainless_steel_frame", "gcyr:basic_fuel_tank", "gcyr:basic_rocket_motor", "gcyr:seat",
+        "gcyr:id_chip", "gcyr:space_helmet", "gcyr:space_chestplate", "gcyr:space_leggings", "gcyr:space_boots"
+      ],
+      "consumes": ["fluid:gtceu:rocket_fuel", "fluid:gtceu:oxygen"],
+      "produces": ["dim:gcyr:luna"],
+      "note": "El viaje a la Luna (DECISIONS 2026-10-24, opción A; la prueba de vuelo es gg_test_gcyr_flight): el primer cohete de GCYR (escáner, plataforma con la torre de marcos de inox, depósitos, motor, asiento y el chip de destino), el traje con oxígeno en el peto (vacío, ahoga) y combustible de cohete (8 B para despegar hacia la Luna). Da la clave dim:gcyr:luna, que piden las menas lunares a mano (menas-luna) y las recetas que solo valen en la Luna (conditions.dimension.asKeysFor). Es capital: después del primer viaje las Waystones y los hogares cruzan gratis."
     }
   ],
 
@@ -225,30 +294,23 @@
 
     { "id": "ensamblador-hv", "label": "Ensamblador HV (480 EU/t: escotillas HV y refinería)", "item": "gtceu:hv_assembler" },
     { "id": "reactor-quimico-hv", "label": "Reactor químico HV (polvo de blaze, 480 EU/t)", "item": "gtceu:hv_chemical_reactor" },
-    { "id": "bano-quimico-hv", "label": "Baño químico HV (ojo de ender, 480 EU/t)", "item": "gtceu:hv_chemical_bath" },
+    { "id": "bano-quimico-hv", "label": "Baño químico HV", "item": "gtceu:hv_chemical_bath" },
     { "id": "cortador-hv", "label": "Cortador HV (chip LPIC de la cámara limpia)", "item": "gtceu:hv_cutter" },
     { "id": "grabador-laser-hv", "label": "Grabador láser HV", "item": "gtceu:hv_laser_engraver" },
-    { "id": "extractor-hv", "label": "Extractor HV (blaze líquido)", "item": "gtceu:hv_extractor" },
+    { "id": "extractor-hv", "label": "Extractor HV", "item": "gtceu:hv_extractor" },
     { "id": "mezclador-hv", "label": "Mezclador HV (catalizadores)", "item": "gtceu:hv_mixer" },
     { "id": "electrolizador-hv", "label": "Electrolizador HV", "item": "gtceu:hv_electrolyzer" },
     { "id": "alambique-hv", "label": "Alambique HV (refinería)", "item": "gtceu:hv_distillery" },
     { "id": "ensamblador-circuitos-hv", "label": "Ensamblador de circuitos HV", "item": "gtceu:hv_circuit_assembler" },
     { "id": "centrifuga-hv", "label": "Centrífuga HV", "item": "gtceu:hv_centrifuge" },
-    { "id": "simulador-criaturas-hv", "label": "Simulador de criaturas HV (el blaze)", "item": "gtceu:hv_creature_simulator" },
-    { "id": "receta-blaze-simulador", "label": "Simulador de criaturas HV: blaze -> varas de blaze", "kind": "recipe", "type": "gtceu:creature_simulation", "output": "minecraft:blaze_rod" },
+    { "id": "simulador-criaturas-hv", "label": "Simulador de criaturas HV", "item": "gtceu:hv_creature_simulator" },
     { "id": "sensor-hv", "label": "Sensor HV (pide ojo de ender)", "item": "gtceu:hv_sensor" },
     { "id": "emisor-hv", "label": "Emisor HV (pide ojo de ender)", "item": "gtceu:hv_emitter" },
     { "id": "piston-hv", "label": "Pistón eléctrico HV", "item": "gtceu:hv_electric_piston" },
     { "id": "brazo-hv", "label": "Brazo robótico HV", "item": "gtceu:hv_robot_arm" },
     { "id": "cinta-hv", "label": "Cinta transportadora HV", "item": "gtceu:hv_conveyor_module" },
 
-    { "id": "polvo-blaze", "label": "Polvo de blaze (carbono + azufre en el reactor químico, 480 EU/t)", "item": "minecraft:blaze_powder" },
-    { "id": "blaze-liquido", "label": "Blaze líquido (extractor, 144 mB por polvo)", "fluid": "gtceu:blaze" },
-    { "id": "ojo-ender", "label": "Ojo de ender (baño químico HV: blaze líquido + perla)", "item": "minecraft:ender_eye" },
-    { "id": "ojo-ender-solo-por-gt", "label": "El ojo de ender solo sale por el baño químico de GT: sin él no hay receta vanilla ni otra", "item": "minecraft:ender_eye", "without": ["gtceu:chemical_bath/eye_of_ender"], "expect": "unreachable" },
-    { "id": "llave-end", "label": "Llave del End (ojo de ender + palo + obsidiana)", "item": "grindless:end_key" },
-    { "id": "menas-end-con-llave", "label": "Menas del End (un viaje con la llave del End): cromita, que solo sale de la veta de magnetita del End", "item": "gtceu:raw_chromite" },
-    { "id": "menas-end-sin-llave", "label": "Las menas del End no salen sin el viaje que exige la llave", "item": "gtceu:raw_chromite", "without": ["mundo:menas-end"], "expect": "unreachable" },
+    { "id": "polvo-blaze-reactor", "label": "Reactor químico HV: carbono + azufre -> polvo de blaze (la otra vía, desde HV; 480 EU/t)", "kind": "recipe", "type": "gtceu:chemical_reactor", "output": "minecraft:blaze_powder" },
     { "id": "muestra-scheelita-no-se-fabrica", "label": "La veta de scheelita salió de la tabla del End (veins_excluded.json): su muestra ya no se fabrica (la que quede se convierte en una sonda vacía)", "item": "grindless:vein_sample_scheelite", "expect": "unreachable" },
 
     { "id": "camara-limpia", "label": "Cámara limpia (controlador: casco HV, circuito HV, filtros, rotores, motores HV)", "item": "gtceu:cleanroom" },
@@ -272,7 +334,7 @@
     { "id": "receta-aire-liquido", "label": "Congelador de vacío: aire -> aire líquido", "kind": "recipe", "type": "gtceu:vacuum_freezer", "output": "fluid:gtceu:liquid_air" },
     { "id": "receta-torre-aire-liquido", "label": "Torre de destilación: aire líquido -> N2, O2, argón...", "kind": "recipe", "type": "gtceu:distillation_tower", "input": "fluid:gtceu:liquid_air" },
 
-    { "id": "rutilo-polvo", "label": "Polvo de rutilo (de la bauxita de MV o de la ilmenita del End)", "item": "gtceu:rutile_dust" },
+    { "id": "rutilo-polvo", "label": "Polvo de rutilo (solo de la ilmenita lunar)", "item": "gtceu:rutile_dust" },
     { "id": "tetracloruro-titanio", "label": "Tetracloruro de titanio (2 C + rutilo + 4 000 mB de Cl2)", "fluid": "gtceu:titanium_tetrachloride" },
     { "id": "receta-titanio-kroll", "label": "EBF: TiCl4 + 2 Mg -> lingote caliente de titanio (2 141 K, 480 EU/t)", "kind": "recipe", "type": "gtceu:electric_blast_furnace", "output": "gtceu:hot_titanium_ingot", "input": "fluid:gtceu:titanium_tetrachloride" },
     { "id": "titanio-caliente", "label": "Lingote caliente de titanio", "item": "gtceu:hot_titanium_ingot" },
@@ -315,6 +377,10 @@
     { "id": "receta-invernadero-hv", "label": "Invernadero HV (solo él, sin los de vapor, LV y MV): una receta de cultivo", "kind": "recipe", "type": "gtceu:greenhouse", "without": ["operar:gtceu:steam_greenhouse", "operar:gtceu:lv_greenhouse", "operar:gtceu:mv_greenhouse"] },
     { "id": "receta-refino", "label": "Refinería: crudo + H2 -> 4 fracciones sin azufre", "kind": "recipe", "type": "gtceu:refining" },
     { "id": "receta-reformado", "label": "Reformador: nafta -> benceno + tolueno + H2", "kind": "recipe", "type": "gtceu:reforming", "optional": true },
+    { "id": "planta-gas-sintesis", "label": "Planta de gas de síntesis (nuestra): gasificación, desplazamiento y captura de CO2", "item": "gtceu:syngas_plant" },
+    { "id": "catalizador-desplazamiento", "label": "Catalizador de desplazamiento (magnetita + cromo)", "item": "grindless:shift_catalyst" },
+    { "id": "receta-desplazamiento-co", "label": "Planta de gas de síntesis (modo 4): CO sobrante + vapor -> H2 + CO2", "kind": "recipe", "type": "gtceu:syngas", "input": "fluid:gtceu:carbon_monoxide", "output": "fluid:gtceu:hydrogen" },
+    { "id": "receta-gasificacion", "label": "Planta de gas de síntesis (modo 1): carbono en polvo + vapor -> CO + H2", "kind": "recipe", "type": "gtceu:syngas", "output": "fluid:gtceu:carbon_monoxide", "input": "fluid:gtceu:steam" },
 
     { "id": "cohete-escaner", "label": "Escáner de cohetes de GCYR (HV: casco HV, placas de inox, circuitos HV)", "item": "gcyr:rocket_scanner" },
     { "id": "cohete-plataforma", "label": "Plataforma de lanzamiento de GCYR", "item": "gcyr:launch_pad" },
@@ -322,6 +388,29 @@
     { "id": "cohete-motor", "label": "Motor de cohete básico de GCYR", "item": "gcyr:basic_rocket_motor" },
     { "id": "cohete-asiento", "label": "Asiento de GCYR", "item": "gcyr:seat" },
     { "id": "traje-espacial", "label": "Traje espacial de GCYR, las cuatro piezas (HV: inox y kapton)", "allOf": ["gcyr:space_helmet", "gcyr:space_chestplate", "gcyr:space_leggings", "gcyr:space_boots"] },
+    { "id": "autoclave-composites", "label": "Autoclave de composites (nuestro, el camino al primer cohete)", "item": "gtceu:composite_autoclave" },
+    { "id": "loseta-ablativa", "label": "Loseta de escudo térmico ablativo (autoclave: fibra de vidrio + epoxi + N2)", "item": "grindless:ablative_heat_shield_tile" },
+    { "id": "deposito-envuelto", "label": "Depósito envuelto en composite (autoclave: barril de inox + para-aramida + epoxi + N2)", "item": "grindless:composite_overwrapped_tank" },
+    { "id": "motor-sin-probar", "label": "Motor de cohete sin probar (ensambladora HV: 4 propulsores calificados + 2 losetas + Kapton K + marco de inox)", "item": "grindless:untested_rocket_motor" },
+    { "id": "receta-encendido-motor", "label": "Banco de pruebas con escotilla HV: motor sin probar + combustible de cohete -> motor de cohete básico", "kind": "recipe", "type": "gtceu:static_fire", "output": "gcyr:basic_rocket_motor", "input": ["grindless:untested_rocket_motor", "fluid:gtceu:rocket_fuel"] },
+    { "id": "combustible-cohete", "label": "Combustible de cohete (dimetilhidracina + O2 o N2O4; 8 B para la Luna y 0,5 B por encendido estático)", "fluid": "gtceu:rocket_fuel" },
+    { "id": "cohete-chip-destino", "label": "Chip de destino de GCYR (lámina de hierro magnético + placa de PE + la carta de alunizaje, que no se gasta)", "item": "gcyr:id_chip" },
+    { "id": "motor-solo-del-banco", "label": "El motor de cohete básico solo sale del encendido estático: sin el banco de pruebas no hay motor", "item": "gcyr:basic_rocket_motor", "without": ["operar:gtceu:engine_test_stand*"], "expect": "unreachable" },
+    { "id": "motor-pide-propulsores-calificados", "label": "Sin el encendido MV de los propulsores no hay motor sin probar", "item": "grindless:untested_rocket_motor", "without": ["grindless:static_fire/power_thrusters"], "expect": "unreachable" },
+    { "id": "deposito-solo-del-autoclave", "label": "El depósito básico pide el autoclave de composites: sin él no hay depósito", "item": "gcyr:basic_fuel_tank", "without": ["operar:gtceu:composite_autoclave"], "expect": "unreachable" },
+    { "id": "chip-pide-carta", "label": "El chip de destino pide la carta de alunizaje: sin el radiotelescopio no hay chip", "item": "gcyr:id_chip", "without": ["operar:gtceu:radio_telescope"], "expect": "unreachable" },
+
+    { "id": "viaje-luna", "label": "El viaje a la Luna (cohete, traje con oxígeno y combustible de cohete): la clave dim:gcyr:luna", "item": "dim:gcyr:luna" },
+    { "id": "perforadora-lunar", "label": "Perforadora lunar (nuestra: trípode HV que solo trabaja en la Luna)", "item": "gtceu:lunar_drill" },
+    { "id": "perforadora-lunar-formada", "label": "Perforadora lunar formada en la Luna (patas sobre el regolito)", "item": "m:gtceu:lunar_drill" },
+    { "id": "menas-luna-con-cohete", "label": "Ilmenita lunar (un viaje en el primer cohete, al final de HV)", "item": "gtceu:raw_ilmenite" },
+    { "id": "menas-luna-sin-cohete", "label": "La ilmenita no sale sin el viaje a la Luna", "item": "gtceu:raw_ilmenite", "without": ["mundo:menas-luna"], "expect": "unreachable" },
+    { "id": "titanio-sin-viaje", "label": "Sin el viaje a la Luna no hay titanio (ni a mano ni con la perforadora lunar)", "item": "gtceu:titanium_ingot", "without": ["sintética:viaje-luna"], "expect": "unreachable" },
+    { "id": "receta-perforacion-lunar-ilmenita", "label": "Perforadora lunar: muestra de ilmenita -> ilmenita (solo en la Luna)", "kind": "recipe", "type": "gtceu:lunar_drilling", "output": "gtceu:raw_ilmenite" },
+    { "id": "muestra-regolito", "label": "Muestra de regolito (sonda + regolito + arena lunar)", "item": "grindless:vein_sample_regolith_moon" },
+    { "id": "helio-3", "label": "Helio-3 (regolito lunar, de día)", "fluid": "gtceu:helium_3" },
+    { "id": "receta-helio-3-regolito", "label": "Perforadora lunar: regolito -> helio-3 (solo en la Luna, de día)", "kind": "recipe", "type": "gtceu:lunar_drilling", "output": "fluid:gtceu:helium_3" },
+    { "id": "semilla-cuantica-lunar", "label": "Semilla cuántica lunar (reactor químico en la Luna: helio-3 + perla; la mitad lunar del puente cuántico de AE2)", "item": "grindless:lunar_quantum_seed" },
 
     { "id": "casco-ev", "label": "Casco EV (carcasa EV de 8 placas de titanio, 2 cables de aluminio, PE)", "item": "gtceu:ev_machine_hull" },
     { "id": "escotilla-energia-ev", "label": "Escotilla de energía EV (ensamblador EV a 1 920 EU/t + chip MPIC del cortador EV, con el casco EV)", "item": "gtceu:ev_energy_input_hatch" },
@@ -334,10 +423,10 @@
 
   "targetsFromVeins": [
     {
-      "idPrefix": "muestra-end-",
-      "labelPrefix": "Muestra de la veta del End",
-      "dimensions": ["minecraft:the_end"],
-      "requireRecipe": { "type": "gtceu:vein_drilling", "input": "grindless:vein_sample_{id}" },
+      "idPrefix": "muestra-luna-",
+      "labelPrefix": "Muestra de la veta lunar",
+      "dimensions": ["gcyr:luna"],
+      "requireRecipe": { "type": "gtceu:lunar_drilling", "input": "grindless:vein_sample_{id}" },
       "target": { "item": "grindless:vein_sample_{id}" }
     }
   ],
@@ -345,21 +434,11 @@
   "autoTargetsFromVeins": [
     {
       "idPrefix": "auto-perforacion-hv-end-",
-      "labelPrefix": "Perforadora HV (solo ella) con lodo: receta de la veta del End",
+      "labelPrefix": "Perforadora HV (sin las de vapor, LV ni MV) con lodo: receta de la veta del End",
       "dimensions": ["minecraft:the_end"],
       "requireRecipe": { "type": "gtceu:vein_drilling", "input": "grindless:vein_sample_{id}" },
       "without": ["operar:gtceu:steam_vein_drill", "operar:gtceu:lv_vein_drill", "operar:gtceu:mv_vein_drill"],
       "target": { "kind": "recipe", "type": "gtceu:vein_drilling", "input": ["grindless:vein_sample_{id}", "fluid:gtceu:drilling_fluid"] }
-    },
-    {
-      "idPrefix": "auto-mena-end-",
-      "labelPrefix": "Menas exclusivas de la veta del End (solo con la perforadora HV)",
-      "dimensions": ["minecraft:the_end"],
-      "requireRecipe": { "type": "gtceu:vein_drilling", "input": "grindless:vein_sample_{id}" },
-      "without": ["operar:gtceu:steam_vein_drill", "operar:gtceu:lv_vein_drill", "operar:gtceu:mv_vein_drill"],
-      "exclusiveFrom": ["minecraft:overworld", "minecraft:the_nether"],
-      "template": "gtceu:raw_{m}",
-      "mode": "anyOf"
     },
     {
       "idPrefix": "auto-perforacion-hv-inox-",
@@ -368,6 +447,13 @@
       "requireRecipe": { "type": "gtceu:vein_drilling", "input": "grindless:vein_sample_{id}" },
       "without": ["operar:gtceu:steam_vein_drill", "operar:gtceu:lv_vein_drill", "operar:gtceu:mv_vein_drill"],
       "target": { "kind": "recipe", "type": "gtceu:vein_drilling", "input": ["grindless:vein_sample_{id}", "grindless:stainless_steel_drill_bit"] }
+    },
+    {
+      "idPrefix": "auto-perforacion-lunar-",
+      "labelPrefix": "Perforadora lunar (en la Luna, broca de inox): receta de la veta lunar",
+      "dimensions": ["gcyr:luna"],
+      "requireRecipe": { "type": "gtceu:lunar_drilling", "input": "grindless:vein_sample_{id}" },
+      "target": { "kind": "recipe", "type": "gtceu:lunar_drilling", "input": ["grindless:vein_sample_{id}", "grindless:stainless_steel_drill_bit"] }
     }
   ],
 
@@ -400,6 +486,9 @@
     { "id": "auto-reformador", "label": "Reformador: receta usable y sostenible", "kind": "recipe", "type": "gtceu:reforming", "optional": true },
     { "id": "auto-reformador-hidrogeno", "label": "Reformador: nafta -> H2 (usable y sostenible)", "kind": "recipe", "type": "gtceu:reforming", "output": "fluid:gtceu:hydrogen", "optional": true },
     { "id": "auto-reformador-benceno", "label": "Reformador: nafta -> benceno (usable y sostenible)", "kind": "recipe", "type": "gtceu:reforming", "output": "fluid:gtceu:benzene", "optional": true },
+    { "id": "auto-planta-gas-sintesis-h2", "label": "Planta de gas de síntesis: carbono en polvo + vapor -> H2 (usable y sostenible)", "kind": "recipe", "type": "gtceu:syngas", "output": "fluid:gtceu:hydrogen" },
+    { "id": "auto-planta-gas-sintesis-pesado", "label": "Planta de gas de síntesis: el combustible pesado de la refinería -> H2 (usable y sostenible)", "kind": "recipe", "type": "gtceu:syngas", "input": "fluid:gtceu:heavy_fuel", "output": "fluid:gtceu:hydrogen" },
+    { "id": "auto-catalizador-desplazamiento", "label": "Catalizador de desplazamiento (magnetita y cromo)", "item": "grindless:shift_catalyst" },
 
     { "id": "auto-gasolina-cruda", "label": "Gasolina cruda", "fluid": "gtceu:raw_gasoline" },
     { "id": "auto-gasolina", "label": "Gasolina (el combustible de la central HV)", "fluid": "gtceu:gasoline" },
@@ -411,9 +500,13 @@
     { "id": "auto-sbr", "label": "SBR", "fluid": "gtceu:styrene_butadiene_rubber" },
     { "id": "auto-fluoruro-hidrogeno", "label": "Ácido fluorhídrico (topacio del Nether + H2)", "fluid": "gtceu:hydrofluoric_acid" },
 
-    { "id": "auto-titanio", "label": "Lingote de titanio (Kroll + congelador de vacío, lazo Mg/Cl2)", "item": "gtceu:titanium_ingot" },
-    { "id": "auto-tetracloruro-titanio", "label": "Tetracloruro de titanio", "fluid": "gtceu:titanium_tetrachloride" },
-    { "id": "auto-rutilo", "label": "Polvo de rutilo", "item": "gtceu:rutile_dust" },
+    { "id": "auto-titanio", "label": "Lingote de titanio (ilmenita de la perforadora lunar -> rutilo -> Kroll + congelador de vacío, lazo Mg/Cl2)", "item": "gtceu:titanium_ingot" },
+    { "id": "auto-titanio-sin-perforadora-lunar", "label": "Sin la perforadora lunar el titanio no se automatiza (las menas del viaje son arranque)", "item": "gtceu:titanium_ingot", "without": ["operar:gtceu:lunar_drill"], "expect": "not-automatic" },
+    { "id": "auto-tetracloruro-titanio", "label": "Tetracloruro de titanio (de la ilmenita lunar)", "fluid": "gtceu:titanium_tetrachloride" },
+    { "id": "auto-rutilo", "label": "Polvo de rutilo (de la ilmenita lunar)", "item": "gtceu:rutile_dust" },
+    { "id": "auto-ilmenita-lunar", "label": "Ilmenita lunar (perforadora lunar, en la Luna)", "item": "gtceu:raw_ilmenite" },
+    { "id": "auto-helio-3", "label": "Helio-3 (regolito: perforadora lunar, de día)", "fluid": "gtceu:helium_3" },
+    { "id": "auto-perforacion-lunar-regolito", "label": "Perforadora lunar: regolito -> helio-3, receta usable y sostenible", "kind": "recipe", "type": "gtceu:lunar_drilling", "input": "grindless:vein_sample_regolith_moon", "output": "fluid:gtceu:helium_3" },
     { "id": "auto-magnesio", "label": "Polvo de magnesio", "item": "gtceu:magnesium_dust" },
     { "id": "auto-sodio", "label": "Polvo de sodio", "item": "gtceu:sodium_dust" },
     { "id": "auto-nicromo", "label": "Lingote de nicromo", "item": "gtceu:nichrome_ingot" },
@@ -425,8 +518,6 @@
     { "id": "auto-aire-liquido", "label": "Aire líquido", "fluid": "gtceu:liquid_air" },
     { "id": "auto-receta-torre-aire-liquido", "label": "Torre de destilación: aire líquido, receta usable y sostenible", "kind": "recipe", "type": "gtceu:distillation_tower", "input": "fluid:gtceu:liquid_air" },
 
-    { "id": "auto-blaze-vara", "label": "Simulador HV: varas de blaze, receta usable y sostenible", "kind": "recipe", "type": "gtceu:creature_simulation", "output": "minecraft:blaze_rod" },
-    { "id": "auto-polvo-blaze", "label": "Polvo de blaze", "item": "minecraft:blaze_powder" },
     { "id": "auto-catalizador-hidrotratamiento", "label": "Catalizador de hidrotratamiento (cobalto, molibdeno y sílice)", "item": "grindless:hydrotreating_catalyst" },
     { "id": "auto-catalizador-reformado", "label": "Catalizador de reformado (platino del End y sílice)", "item": "grindless:reforming_catalyst", "optional": true },
     { "id": "auto-cobalto", "label": "Polvo de cobalto", "item": "gtceu:cobalt_dust" },
@@ -436,32 +527,28 @@
 
   "eraResources": [
     {
-      "id": "end",
-      "label": "el End (sus vetas, con la llave del End)",
-      "dimensions": ["minecraft:the_end"],
-      "note": "Hoy (v0.4.1) el End abre en HV (regla de mundo menas-end) y su ilmenita es, de transición, el titanio de la salida a EV. En la versión siguiente pasa a MV, sin ilmenita ni scheelita (tiers/next/)."
-    },
-    {
       "id": "luna",
       "era": "ev",
       "label": "la Luna",
       "dimensions": ["gcyr:luna"],
       "items": ["gcyr:moon_*", "gcyr:lunar_*", "gcyr:luna_marker", "gtceu:moon_*_ore", "gtca:moon_*_ore"],
-      "note": "Decisión del 2026-10-24 (Luna, opción A): el primer cohete llega a la Luna al final de HV y lo que sale de allí es de EV. Hoy ninguna fuente del modelo está en la Luna; la versión siguiente la añade (tiers/next/hv.json, mundo menas-luna)."
+      "note": "Decisión del 2026-10-24 (Luna, opción A): el primer cohete llega a la Luna al final de HV y lo que sale de allí es de EV: las menas del viaje (regla menas-luna) y las recetas que solo valen en la Luna (la perforadora lunar, la semilla cuántica)."
     },
     {
       "id": "titanio",
       "era": "ev",
       "label": "titanio (ilmenita lunar)",
       "items": ["gtceu:*titanium*", "gtca:*titanium*", "fluid:gtceu:*titanium*", "fluid:gtca:*titanium*", "gtceu:*ilmenite*", "gtceu:*rutile*"],
-      "note": "Decisiones del 2026-10-24: el titanio entra en EV y solo sale de la Luna; HV va sin titanio (máquinas, cascos, brocas, multibloques, cohete y traje, de acero inoxidable). Cuenta todo lo que es titanio, ilmenita o rutilo: también las aleaciones con titanio y las herramientas con cabezal de titanio."
+      "onlyFrom": ["luna"],
+      "note": "Decisiones del 2026-10-24: el titanio entra en EV y solo sale de la Luna; HV va sin titanio (máquinas, cascos, brocas, multibloques, cohete y traje, de acero inoxidable). Cuenta todo lo que es titanio, ilmenita o rutilo: también las aleaciones con titanio y las herramientas con cabezal de titanio. Exclusividad (v0.5.0): sin la Luna ninguna de esas claves se alcanza (fuera la ilmenita del End, el rutilo de la bauxita, la ilmenita de la mezcla de metales de GTM y los panales de titanio de Productive Bees)."
     },
     {
       "id": "helio-3",
       "era": "ev",
       "label": "helio-3 (de la Luna; se guarda para la fusión)",
       "items": ["fluid:gtceu:helium_3", "gtceu:helium_3_bucket"],
-      "note": "docs/viaje.md: lo que solo sale de la Luna es el titanio y el helio-3."
+      "onlyFrom": ["luna"],
+      "note": "docs/viaje.md: lo que solo sale de la Luna es el titanio y el helio-3 (del regolito, con la perforadora lunar de día). Exclusividad (v0.5.0): sin la Luna no se alcanza (fuera el del polvo de piedra del End)."
     },
     {
       "id": "marte",
@@ -490,20 +577,19 @@
       "id": "hv-multibloques",
       "label": "Multibloques del HV formados: los nuestros y los de GTM que modela el tier",
       "items": [
-        "m:gtceu:hv_vein_drill", "m:gtceu:hv_greenhouse", "m:gtceu:refinery", "m:gtceu:reformer", "m:gtceu:cleanroom", "m:gtceu:vacuum_freezer@mv2",
+        "m:gtceu:hv_vein_drill", "m:gtceu:hv_greenhouse", "m:gtceu:refinery", "m:gtceu:reformer", "m:gtceu:syngas_plant", "m:gtceu:cleanroom", "m:gtceu:vacuum_freezer@mv2",
         "m:gtceu:cracker@mv2", "m:gtceu:distillation_tower@mv2", "m:gtceu:large_chemical_reactor@mv2", "m:gtceu:electric_blast_furnace@hv-kanthal"
       ]
     },
     {
       "id": "hv-objetos",
-      "label": "Objetos del HV: llave del End, catalizadores, modelo de blaze y la central de vapor",
-      "items": [
-        "grindless:end_key", "grindless:hydrotreating_catalyst", "grindless:reforming_catalyst", "grindless:creature_model_blaze",
-        "gtceu:steel_large_boiler", "gtceu:steam_large_turbine"
-      ]
+      "label": "Objetos del HV: catalizadores y la central de vapor (la llave del End y el blaze pasan a MV)",
+      "items": ["grindless:hydrotreating_catalyst", "grindless:reforming_catalyst", "gtceu:steel_large_boiler", "gtceu:steam_large_turbine"]
     },
+    { "id": "hv-luna", "label": "Lo que el HV fabrica para la Luna: el controlador de la perforadora lunar", "items": ["gtceu:lunar_drill"] },
     { "id": "hv-perforadora", "label": "Lo que pide la perforadora HV: la broca y las muestras de sus recetas", "inputsOf": ["grindless:vein_drilling/hv/*"] },
     { "id": "hv-refineria", "label": "Lo que piden la refinería y el reformador", "inputsOf": ["grindless:refining/hv/*", "grindless:reforming/hv/*"] },
+    { "id": "hv-planta-gas-sintesis", "label": "Lo que pide la planta de gas de síntesis: la carga, el catalizador de desplazamiento y los fluidos", "inputsOf": ["grindless:syngas/hv/*"], "items": ["grindless:shift_catalyst"] },
     {
       "id": "hv-broca-inox",
       "label": "Broca de acero inoxidable (la broca HV, sin titanio)",
@@ -515,6 +601,15 @@
       "items": ["gcyr:basic_fuel_tank", "gcyr:basic_rocket_motor", "gcyr:seat", "gcyr:rocket_scanner", "gcyr:launch_pad"]
     },
     {
+      "id": "hv-camino-cohete",
+      "label": "El camino al primer cohete en HV: el autoclave y el banco con escotilla HV formados, sus piezas, el motor sin probar, el chip de destino y lo que piden el encendido y el curado",
+      "items": [
+        "m:gtceu:composite_autoclave", "m:gtceu:engine_test_stand@hv", "grindless:ablative_heat_shield_tile", "grindless:composite_overwrapped_tank",
+        "grindless:untested_rocket_motor", "gcyr:id_chip"
+      ],
+      "inputsOf": ["grindless:composite_curing/*", "grindless:static_fire/gcyr/*"]
+    },
+    {
       "id": "hv-traje",
       "label": "Traje espacial de GCYR (inox y kapton)",
       "items": ["gcyr:space_helmet", "gcyr:space_chestplate", "gcyr:space_leggings", "gcyr:space_boots"]
@@ -524,6 +619,12 @@
       "era": "ev",
       "label": "Salida de HV: la puerta a EV (casco, motor, bomba y escotilla de energía EV), que ya es de EV",
       "items": ["gtceu:ev_machine_hull", "gtceu:ev_electric_motor", "gtceu:ev_electric_pump", "gtceu:ev_energy_input_hatch"]
+    },
+    {
+      "id": "salida-hv-luna",
+      "era": "ev",
+      "label": "La base lunar, que ya es de EV: la perforadora lunar formada, sus muestras y la semilla cuántica (piden la Luna, no Marte)",
+      "items": ["m:gtceu:lunar_drill", "grindless:vein_sample_ilmenite_moon", "grindless:vein_sample_regolith_moon", "grindless:lunar_quantum_seed"]
     }
   ]
 }
