@@ -79,6 +79,13 @@ Gregtech Grindless es un pack de GregTech Modern (Minecraft 1.20.1, Forge) en el
   | multibloques EV | 1792–1855 |
   | planta IV | 2048–2111 |
   | multibloques IV | 2304–2367 |
+  | vuelo de GCYR | 2560–2623 |
+  | Luna | 2816–2879 |
+  | multibloques nuevos de vapor | 3072–3135 |
+  | multibloques nuevos de LV | 3328–3391 |
+  | observatorios | 3584–3647 |
+  | planta de gas de síntesis | 3840–3903 |
+  | camino al cohete | 4096–4159 |
 
   Para un test nuevo se sigue en saltos de 256.
 
