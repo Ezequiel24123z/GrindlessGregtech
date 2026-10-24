@@ -85,3 +85,4 @@ Gregtech Grindless es un pack de GregTech Modern (Minecraft 1.20.1, Forge) en el
 
 - Cuenta personal `Ezequiel24123z`, nunca la corporativa.
 - Commits pequeños y con mensaje claro.
+- **Versiones:** antes de etiquetar (`vX.Y.Z`), sube `version` en `pack/pack.toml` y pasa `tools/Update-PackIndex.ps1`. Solo se etiqueta lo que ha pasado las pruebas del tier.
