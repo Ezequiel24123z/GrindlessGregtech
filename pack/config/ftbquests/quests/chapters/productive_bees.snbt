@@ -4,7 +4,7 @@
 	filename: "productive_bees"
 	group: "7C6BF927E205E2F4"
 	icon: "productivebees:advanced_oak_beehive"
-	id: "DBDD771DEF56D318"
+	id: "5BDD771DEF56D318"
 	order_index: 2
 	quest_links: [ ]
 	quests: [
@@ -15,7 +15,7 @@
 			]
 			icon: "productivebees:advanced_oak_beehive"
 			id: "5DA5E1984F92A535"
-			rewards: [{ id: "E44A30768AACD3DA", type: "xp", xp: 10 }]
+			rewards: [{ id: "644A30768AACD3DA", type: "xp", xp: 10 }]
 			shape: "rsquare"
 			size: 1.5d
 			tasks: [{ id: "2C56B82A65BF6764", type: "checkmark" }]
@@ -29,7 +29,7 @@
 			icon: "productivebees:bee_cage"
 			id: "2F0252E6D86763C7"
 			rewards: [{ id: "688979A60EE9BD74", type: "xp", xp: 10 }]
-			tasks: [{ id: "D016AAFD29787D86", item: "productivebees:bee_cage", type: "item" }]
+			tasks: [{ id: "5016AAFD29787D86", item: "productivebees:bee_cage", type: "item" }]
 			title: "Bee Cage"
 			x: 2.5d
 			y: -1.5d
@@ -38,21 +38,21 @@
 			dependencies: ["5DA5E1984F92A535"]
 			description: ["Before MV, ordinary bees in a vanilla &6Beehive&r give honeycomb and honey bottles - enough for cages, treats and the hive that comes next."]
 			icon: "minecraft:beehive"
-			id: "A5CF38B8E88FD430"
-			rewards: [{ id: "D88D2D70B30349BF", type: "xp", xp: 10 }]
+			id: "25CF38B8E88FD430"
+			rewards: [{ id: "588D2D70B30349BF", type: "xp", xp: 10 }]
 			tasks: [
 				{ id: "324B467E6116D226", item: "minecraft:beehive", type: "item" }
-				{ count: 4L, id: "A113789933E5EB74", item: "minecraft:honeycomb", type: "item" }
+				{ count: 4L, id: "2113789933E5EB74", item: "minecraft:honeycomb", type: "item" }
 			]
 			title: "Honey First"
 			x: 2.5d
 			y: 1.5d
 		}
 		{
-			dependencies: ["A5CF38B8E88FD430"]
+			dependencies: ["25CF38B8E88FD430"]
 			description: ["A honeycomb and a honey bottle make a &6Honey Treat&r. Bees love them: they go into the base of every hive upgrade and can carry genes to the bee that eats them."]
 			icon: "productivebees:honey_treat"
-			id: "D4252DC8296A7B73"
+			id: "54252DC8296A7B73"
 			rewards: [{ id: "03C0A09155A76652", type: "xp", xp: 10 }]
 			tasks: [{ count: 4L, id: "3F14DD633EC86E7F", item: "productivebees:honey_treat", type: "item" }]
 			title: "Honey Treats"
@@ -60,7 +60,7 @@
 			y: 3.0d
 		}
 		{
-			dependencies: ["2F0252E6D86763C7", "A5CF38B8E88FD430"]
+			dependencies: ["2F0252E6D86763C7", "25CF38B8E88FD430"]
 			description: [
 				"Productive bees only work in an &6Advanced Beehive&r: a vanilla hive, honeycombs, shears and - here - an MV circuit where the campfire used to be."
 				"Bees fly out, gather and come back with combs; pipe or hopper them out of the hive."
@@ -81,17 +81,17 @@
 			icon: "productivebees:expansion_box_oak"
 			id: "6FD750400F90D01F"
 			optional: true
-			rewards: [{ id: "C96ADDA1D44249EC", type: "xp", xp: 10 }]
-			tasks: [{ icon: "productivebees:expansion_box_oak", id: "B0534EA43F8286FC", item: { Count: 1b, id: "itemfilters:or", tag: { items: [{ Count: 1b, id: "productivebees:expansion_box_oak" }, { Count: 1b, id: "productivebees:expansion_box_spruce" }, { Count: 1b, id: "productivebees:expansion_box_birch" }, { Count: 1b, id: "productivebees:expansion_box_jungle" }, { Count: 1b, id: "productivebees:expansion_box_acacia" }, { Count: 1b, id: "productivebees:expansion_box_dark_oak" }, { Count: 1b, id: "productivebees:expansion_box_mangrove" }, { Count: 1b, id: "productivebees:expansion_box_cherry" }, { Count: 1b, id: "productivebees:expansion_box_bamboo" }, { Count: 1b, id: "productivebees:expansion_box_crimson" }, { Count: 1b, id: "productivebees:expansion_box_warped" }] } }, title: "Any Expansion Box", type: "item" }]
+			rewards: [{ id: "496ADDA1D44249EC", type: "xp", xp: 10 }]
+			tasks: [{ icon: "productivebees:expansion_box_oak", id: "30534EA43F8286FC", item: { Count: 1b, id: "itemfilters:or", tag: { items: [{ Count: 1b, id: "productivebees:expansion_box_oak" }, { Count: 1b, id: "productivebees:expansion_box_spruce" }, { Count: 1b, id: "productivebees:expansion_box_birch" }, { Count: 1b, id: "productivebees:expansion_box_jungle" }, { Count: 1b, id: "productivebees:expansion_box_acacia" }, { Count: 1b, id: "productivebees:expansion_box_dark_oak" }, { Count: 1b, id: "productivebees:expansion_box_mangrove" }, { Count: 1b, id: "productivebees:expansion_box_cherry" }, { Count: 1b, id: "productivebees:expansion_box_bamboo" }, { Count: 1b, id: "productivebees:expansion_box_crimson" }, { Count: 1b, id: "productivebees:expansion_box_warped" }] } }, title: "Any Expansion Box", type: "item" }]
 			title: "Expansion Box"
 			x: 7.5d
 			y: -2.0d
 		}
 		{
-			dependencies: ["0CB810A94D49A9ED", "D4252DC8296A7B73"]
+			dependencies: ["0CB810A94D49A9ED", "54252DC8296A7B73"]
 			description: ["An &6Upgrade Base&r - emerald, diamond and a honey treat - turns into hive upgrades: time for faster combs, range for wider gathering, breeding so the hive raises its own bees, filter to keep only certain bees."]
 			icon: "productivebees:upgrade_time"
-			id: "D723368F9FCD9CCD"
+			id: "5723368F9FCD9CCD"
 			rewards: [{ id: "17126C26F217B992", type: "xp", xp: 15 }]
 			tasks: [
 				{ id: "0F15F23120921DBA", item: "productivebees:upgrade_base", type: "item" }
@@ -102,7 +102,7 @@
 			y: 0.0d
 		}
 		{
-			dependencies: ["D723368F9FCD9CCD"]
+			dependencies: ["5723368F9FCD9CCD"]
 			description: [
 				"New species come from two parents. EMI lists every pair under bee breeding, with the item each parent wants."
 				"The &6Breeding Chamber&r does it for you, on Forge Energy from a GregTech converter."
@@ -110,31 +110,31 @@
 			icon: "productivebees:breeding_chamber"
 			id: "2D77C658B8EDEDDA"
 			rewards: [{ id: "7ADD1301EEEA3AAD", type: "xp", xp: 15 }]
-			tasks: [{ id: "EF608F2B4D937EF7", item: "productivebees:breeding_chamber", type: "item" }]
+			tasks: [{ id: "6F608F2B4D937EF7", item: "productivebees:breeding_chamber", type: "item" }]
 			title: "Breeding"
 			x: 10.0d
 			y: 1.0d
 		}
 		{
-			dependencies: ["D723368F9FCD9CCD"]
-			description: ["The &6Simulator Upgrade&r keeps the bees inside the hive while they work: no bees roaming the base, none lost. It wants blaze rods, so it waits for HV."]
+			dependencies: ["5723368F9FCD9CCD"]
+			description: ["The &6Simulator Upgrade&r keeps the bees inside the hive while they work: no bees roaming the base, none lost. It wants blaze rods, so it waits for the blaze model in MV."]
 			icon: "productivebees:upgrade_simulator"
-			id: "CA802166B5E6F521"
+			id: "4A802166B5E6F521"
 			optional: true
-			rewards: [{ id: "94C03F59373D7D63", type: "xp", xp: 15 }]
-			subtitle: "HV"
-			tasks: [{ id: "CFB432E7EBF7D2CA", item: "productivebees:upgrade_simulator", type: "item" }]
+			rewards: [{ id: "14C03F59373D7D63", type: "xp", xp: 15 }]
+			subtitle: "MV"
+			tasks: [{ id: "4FB432E7EBF7D2CA", item: "productivebees:upgrade_simulator", type: "item" }]
 			title: "Simulated Hive"
 			x: 10.0d
 			y: -1.0d
 		}
 		{
-			dependencies: ["A5CF38B8E88FD430"]
+			dependencies: ["25CF38B8E88FD430"]
 			description: ["Productive Bees' own &6Centrifuge&r needs no power. It splits honeycomb and mob combs - bone, string, slime, rotten flesh, gunpowder - into wax, honey and their drop. Material combs will not go in; those belong to GregTech."]
 			icon: "productivebees:centrifuge"
 			id: "05376BE98BF2B1E4"
 			rewards: [{ id: "28DFD7C72AD21BBF", type: "xp", xp: 10 }]
-			tasks: [{ id: "EFEC6D629CF819F1", item: "productivebees:centrifuge", type: "item" }]
+			tasks: [{ id: "6FEC6D629CF819F1", item: "productivebees:centrifuge", type: "item" }]
 			title: "Bee Centrifuge"
 			x: 2.5d
 			y: 4.5d
@@ -146,7 +146,7 @@
 				"An MV centrifuge handles the Overworld and Nether materials."
 			]
 			icon: "gtceu:mv_centrifuge"
-			id: "BFFE7724EB772829"
+			id: "3FFE7724EB772829"
 			rewards: [{ id: "4D821722EAF25612", type: "xp", xp: 25 }]
 			subtitle: "MV"
 			tasks: [{ id: "097B58BF2448DDAF", item: "gtceu:mv_centrifuge", type: "item" }]
@@ -155,12 +155,15 @@
 			y: 6.0d
 		}
 		{
-			dependencies: ["BFFE7724EB772829"]
-			description: ["Every comb runs at the voltage of the era that opens its material, so the rarer metals need a bigger centrifuge - EMI shows the EU/t on each recipe. A few combs have no recipe at all: their material comes from a GregTech line instead."]
+			dependencies: ["3FFE7724EB772829"]
+			description: [
+				"Every comb runs at the voltage of the era that opens its material, so the rarer metals need a bigger centrifuge; EMI shows the EU/t on each recipe. A few combs have no recipe at all: their material comes from a GregTech line instead."
+				"Ilmenite and titanium combs only process in a centrifuge on the Moon."
+			]
 			icon: "gtceu:hv_centrifuge"
-			id: "89CF12D6CC25F7E0"
+			id: "09CF12D6CC25F7E0"
 			optional: true
-			rewards: [{ id: "C5EDC5C2AA9804F7", type: "xp", xp: 10 }]
+			rewards: [{ id: "45EDC5C2AA9804F7", type: "xp", xp: 10 }]
 			tasks: [{ id: "6813623D1FA46417", type: "checkmark" }]
 			title: "Later Combs"
 			x: 7.5d

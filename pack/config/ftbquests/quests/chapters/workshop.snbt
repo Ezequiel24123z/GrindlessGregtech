@@ -15,7 +15,7 @@
 			rewards: [{ id: "1EA6A8BC4B848345", type: "xp", xp: 10 }]
 			shape: "rsquare"
 			size: 1.5d
-			tasks: [{ id: "C0EE43DC78B10F71", type: "checkmark" }]
+			tasks: [{ id: "40EE43DC78B10F71", type: "checkmark" }]
 			title: "Workshop"
 			x: 0.0d
 			y: 0.0d
@@ -24,9 +24,9 @@
 			dependencies: ["7A5D031021239B63"]
 			description: ["A crafting table that keeps its grid when you walk away and shows the chests next to it in a side panel, so you craft straight out of them."]
 			icon: "craftingstationjei:crafting_station"
-			id: "D38F58BC7B0BA56A"
+			id: "538F58BC7B0BA56A"
 			rewards: [{ id: "088BCE69D3F9B69E", type: "xp", xp: 10 }]
-			tasks: [{ id: "951290762364990A", item: "craftingstationjei:crafting_station", type: "item" }]
+			tasks: [{ id: "151290762364990A", item: "craftingstationjei:crafting_station", type: "item" }]
 			title: "Crafting Station"
 			x: -2.5d
 			y: -2.0d
@@ -37,7 +37,7 @@
 			icon: "minecraft:iron_pickaxe"
 			id: "2AC55861A735E86D"
 			rewards: [{ id: "4B46EE2BDF08B7EB", type: "xp", xp: 10 }]
-			tasks: [{ id: "CDFF1C89F8BEEEC4", type: "checkmark" }]
+			tasks: [{ id: "4DFF1C89F8BEEEC4", type: "checkmark" }]
 			title: "FTB Ultimine"
 			x: -2.5d
 			y: 0.0d
@@ -46,10 +46,10 @@
 			dependencies: ["7A5D031021239B63"]
 			description: ["Sneak and right-click a chest with empty hands to pick it up, contents and all. GregTech machines, pipes and cables stay where they are - moving them would scramble their state."]
 			icon: "minecraft:chest"
-			id: "E956B217C8EEFF21"
+			id: "6956B217C8EEFF21"
 			optional: true
 			rewards: [{ id: "3BEA03A2F220C722", type: "xp", xp: 5 }]
-			tasks: [{ id: "E836C6359062B7B3", type: "checkmark" }]
+			tasks: [{ id: "6836C6359062B7B3", type: "checkmark" }]
 			title: "Carry On"
 			x: -2.5d
 			y: 2.0d
@@ -58,10 +58,10 @@
 			dependencies: ["7A5D031021239B63"]
 			description: ["Lines, walls, floors, cubes and mirrored copies in one click, from the blocks in your inventory. Pick a build mode from its radial menu - the key is in Controls."]
 			icon: "effortlessbuilding:randomizer_bag"
-			id: "C7149BDDA907D5FB"
+			id: "47149BDDA907D5FB"
 			optional: true
 			rewards: [{ id: "4DD3C7ECCC065FAD", type: "xp", xp: 5 }]
-			tasks: [{ id: "8F5F938293AFC584", type: "checkmark" }]
+			tasks: [{ id: "0F5F938293AFC584", type: "checkmark" }]
 			title: "Effortless Building"
 			x: -2.5d
 			y: -4.0d
@@ -70,12 +70,12 @@
 			dependencies: ["7A5D031021239B63"]
 			description: ["Chipped's workbenches and the Rechiseled chisel turn plain blocks into hundreds of variants, and Framed Blocks wraps any texture around stairs, slabs and doors. A factory doesn't have to look like a quarry."]
 			icon: "chipped:mason_table"
-			id: "82E012750B71A098"
+			id: "02E012750B71A098"
 			optional: true
-			rewards: [{ id: "C6C571A2D04A0BA9", type: "xp", xp: 10 }]
+			rewards: [{ id: "46C571A2D04A0BA9", type: "xp", xp: 10 }]
 			tasks: [
 				{ icon: "chipped:mason_table", id: "7FA91033C62A769B", item: { Count: 1b, id: "itemfilters:or", tag: { items: [{ Count: 1b, id: "chipped:botanist_workbench" }, { Count: 1b, id: "chipped:glassblower" }, { Count: 1b, id: "chipped:carpenters_table" }, { Count: 1b, id: "chipped:loom_table" }, { Count: 1b, id: "chipped:mason_table" }, { Count: 1b, id: "chipped:alchemy_bench" }, { Count: 1b, id: "chipped:tinkering_table" }] } }, title: "Any Chipped Workbench", type: "item" }
-				{ id: "EE0C2D02A8C70612", item: "rechiseled:chisel", optional_task: true, type: "item" }
+				{ id: "6E0C2D02A8C70612", item: "rechiseled:chisel", optional_task: true, type: "item" }
 			]
 			title: "Decoration"
 			x: -2.5d
@@ -86,8 +86,8 @@
 			description: ["Sneak-right-click an unformed multiblock controller with the &6Terminal&r and it builds the whole structure from the blocks in your inventory. Wrought iron, glass and a book - worth making the day you build your first multiblock."]
 			icon: "gtceu:terminal"
 			id: "519A1162AF5FB3F1"
-			rewards: [{ id: "FB4EC64C80C96334", type: "xp", xp: 15 }]
-			tasks: [{ id: "91262E8004B4C850", item: "gtceu:terminal", type: "item" }]
+			rewards: [{ id: "7B4EC64C80C96334", type: "xp", xp: 15 }]
+			tasks: [{ id: "11262E8004B4C850", item: "gtceu:terminal", type: "item" }]
 			title: "GregTech Terminal"
 			x: 2.5d
 			y: -2.0d
@@ -96,10 +96,10 @@
 			dependencies: ["519A1162AF5FB3F1"]
 			description: ["The &6Machine Memory Card&r copies one machine's settings and pastes them onto the next: set up one machine, then copy it down the row."]
 			icon: "gtceu:machine_memory_card"
-			id: "C5522DAFCB743B77"
+			id: "45522DAFCB743B77"
 			optional: true
 			rewards: [{ id: "3DD6ED690CD49F17", type: "xp", xp: 10 }]
-			tasks: [{ id: "FFD3773F533F7BB0", item: "gtceu:machine_memory_card", type: "item" }]
+			tasks: [{ id: "7FD3773F533F7BB0", item: "gtceu:machine_memory_card", type: "item" }]
 			title: "Machine Memory Card"
 			x: 2.5d
 			y: -4.0d
@@ -108,7 +108,7 @@
 			dependencies: ["519A1162AF5FB3F1"]
 			description: ["It sees every multiblock within 32 blocks and swaps their tiered parts - coils, buses, hatches, energy hatches - for better ones from your inventory or your ME network, in one go."]
 			icon: "gtceuterminal:multi_structure_manager"
-			id: "FCC8C0CC60DA1F5A"
+			id: "7CC8C0CC60DA1F5A"
 			rewards: [{ id: "285C0B7C21395A91", type: "xp", xp: 15 }]
 			subtitle: "MV"
 			tasks: [{ id: "0C66DF1CB1FE5E00", item: "gtceuterminal:multi_structure_manager", type: "item" }]
@@ -117,26 +117,26 @@
 			y: -2.0d
 		}
 		{
-			dependencies: ["FCC8C0CC60DA1F5A"]
+			dependencies: ["7CC8C0CC60DA1F5A"]
 			description: ["Sneak-right-click a controller and the whole multiblock comes back into your inventory - for the day the factory has to move."]
 			icon: "gtceuterminal:dismantler"
-			id: "A06E7E2BECEA4BEF"
+			id: "206E7E2BECEA4BEF"
 			optional: true
 			rewards: [{ id: "554EF78D648C48AE", type: "xp", xp: 10 }]
-			tasks: [{ id: "F8975A35C6EA5807", item: "gtceuterminal:dismantler", type: "item" }]
+			tasks: [{ id: "78975A35C6EA5807", item: "gtceuterminal:dismantler", type: "item" }]
 			title: "Dismantler"
 			x: 7.5d
 			y: -2.0d
 		}
 		{
-			dependencies: ["FCC8C0CC60DA1F5A"]
+			dependencies: ["7CC8C0CC60DA1F5A"]
 			description: ["Copies a finished multiblock into a named blueprint and pastes it again somewhere else, pulling the blocks from your inventory or your ME network."]
 			icon: "gtceuterminal:schematic_interface"
-			id: "CC3FBCB0D21BFCEB"
+			id: "4C3FBCB0D21BFCEB"
 			optional: true
-			rewards: [{ id: "C098ADB6D77C0D7A", type: "xp", xp: 10 }]
+			rewards: [{ id: "4098ADB6D77C0D7A", type: "xp", xp: 10 }]
 			subtitle: "EV"
-			tasks: [{ id: "E781F4E97A39D5FB", item: "gtceuterminal:schematic_interface", type: "item" }]
+			tasks: [{ id: "6781F4E97A39D5FB", item: "gtceuterminal:schematic_interface", type: "item" }]
 			title: "Schematic Interface"
 			x: 7.5d
 			y: -4.0d
@@ -146,10 +146,10 @@
 			description: ["Configurable pipes: per-side modes, filters, round robin and priorities, made faster with upgrades. They move items and fluids only - power stays on GregTech cables."]
 			icon: "pipez:item_pipe"
 			id: "3A3D42328C932C57"
-			rewards: [{ id: "A8E4EBF774070672", type: "xp", xp: 10 }]
+			rewards: [{ id: "28E4EBF774070672", type: "xp", xp: 10 }]
 			tasks: [
-				{ id: "AF8001BF0C3E7BAF", item: "pipez:item_pipe", type: "item" }
-				{ id: "80A179AB1EECD1C2", item: "pipez:fluid_pipe", optional_task: true, type: "item" }
+				{ id: "2F8001BF0C3E7BAF", item: "pipez:item_pipe", type: "item" }
+				{ id: "00A179AB1EECD1C2", item: "pipez:fluid_pipe", optional_task: true, type: "item" }
 			]
 			title: "Pipez"
 			x: 2.5d
@@ -159,7 +159,7 @@
 			dependencies: ["3A3D42328C932C57"]
 			description: ["&6Laser Nodes&r link to each other by laser and move items, fluids and redstone with the cards in their six sides - no pipe in between."]
 			icon: "laserio:laser_node"
-			id: "B8F0116F675C8697"
+			id: "38F0116F675C8697"
 			optional: true
 			rewards: [{ id: "2476EBE646595927", type: "xp", xp: 10 }]
 			tasks: [
@@ -171,14 +171,14 @@
 			y: 2.0d
 		}
 		{
-			dependencies: ["B8F0116F675C8697"]
+			dependencies: ["38F0116F675C8697"]
 			description: ["A &6Modular Router&r does whatever its modules say - send, pull, break, place, vacuum, activate - and speed and stack upgrades make it do it faster."]
 			icon: "modularrouters:modular_router"
-			id: "8823D5B993FC1E83"
+			id: "0823D5B993FC1E83"
 			optional: true
-			rewards: [{ id: "9C45194531C9D4B3", type: "xp", xp: 10 }]
+			rewards: [{ id: "1C45194531C9D4B3", type: "xp", xp: 10 }]
 			tasks: [
-				{ id: "FB5EEE1A5D4F8E64", item: "modularrouters:modular_router", type: "item" }
+				{ id: "7B5EEE1A5D4F8E64", item: "modularrouters:modular_router", type: "item" }
 				{ id: "7DFA27AE63D4B33A", item: "modularrouters:blank_module", type: "item" }
 			]
 			title: "Modular Routers"
