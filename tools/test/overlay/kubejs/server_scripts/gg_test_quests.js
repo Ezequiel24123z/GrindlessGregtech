@@ -60,7 +60,7 @@ function dumpToolbox() {
 // in the book. Update both numbers when a chapter changes (node tools/quests/lint.mjs prints them per chapter).
 var GG_QUESTS_EXPECTED = {
   storage: [21, 20],
-  applied_energistics: [40, 40],
+  applied_energistics: [40, 41],
   productive_bees: [12, 14],
   travel_and_teams: [16, 15],
   workshop: [15, 14],
