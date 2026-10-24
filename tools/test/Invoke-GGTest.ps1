@@ -5,7 +5,8 @@
 .DESCRIPTION
   1. tools\Update-PackIndex.ps1 (normalizes pack text files to UTF-8 no BOM + LF, then packwiz refresh)
   2. zips pack\ + tools\test\overlay\   3. uploads to the home test PC
-  4. runs the remote scripts over ssh (global lock: one Minecraft JVM at a time)
+  4. runs the remote scripts over ssh (slot semaphore: at most -Slots Minecraft JVMs at once on the test PC, default 2;
+     a second one only starts when enough RAM is free; -Slots 1 = one run at a time, as before)
   5. downloads results.zip and prints a concise PASS/FAIL summary (see Show-GGResults.ps1).
 
   Run it with:
@@ -17,6 +18,8 @@
   Client suite: -ClientRenderer mesa (default) runs the REAL client mod set on real LWJGL + Mesa llvmpipe software
   OpenGL; -ClientRenderer stub uses HeadlessMC's LWJGL stub (Embeddium, ModernFix and GTM's LDLib all fail under it:
   fallback for small packs only; by default it drops Embeddium from the test client, see -ClientExclude).
+  Server suite: after "Done" the harness waits -SettleSec (default 15, 0 = off) before RCON/-Commands, longer while a
+  datapack reload (e.g. the one Additional Placements triggers) is still running, so it cannot wipe what a test starts.
   Exit code: 0 PASS, 1 FAIL, 2 harness/infrastructure problem (no results).
 
 .EXAMPLE
@@ -43,6 +46,9 @@ param(
     [int]$CommandTimeoutSec = 300,
     [int]$ClientTimeoutSec = 1800,
     [int]$LockWaitMin = 120,
+    [ValidateRange(1, 4)][int]$Slots = 2,
+    [double]$SlotMinFreeGb = 9,
+    [ValidateRange(0, 600)][int]$SettleSec = 15,
     [string]$ServerXms = '4G',
     [string]$ServerXmx = '7G',
     [string[]]$ServerProp,
@@ -74,7 +80,11 @@ $runId = "$stamp-$Suite-$rand"
 $repoRoot = [IO.Path]::GetFullPath((J $PSScriptRoot '..\..'))
 if (-not $PackDir) { $PackDir = J $repoRoot 'pack' }
 if (-not $OverlayDir) { $OverlayDir = J $PSScriptRoot 'overlay' }
-if (-not $OutDir) { $OutDir = "C:\Users\EzequielC\.copilot\session-state\52ba6327-e548-48e7-aa57-41c2373d41c2\files\test-runs\$stamp-$Suite" }
+if (-not $OutDir) {
+    $OutDir = "C:\Users\EzequielC\.copilot\session-state\52ba6327-e548-48e7-aa57-41c2373d41c2\files\test-runs\$stamp-$Suite"
+    # several runs started in the same second (concurrent agents) must not share one output folder
+    if (DExists $OutDir) { $OutDir = "$OutDir-$rand" }
+}
 if (-not $PackwizExe) {
     $PackwizExe = 'C:\Users\EzequielC\.copilot\session-state\52ba6327-e548-48e7-aa57-41c2373d41c2\files\tools\packwiz\packwiz.exe'
     if (-not (FExists $PackwizExe)) {
@@ -281,7 +291,7 @@ foreach ($w in (Split-Multi $WaitForLog)) {
 if ($Suite -eq 'client' -and ($cmdList.Count -gt 0 -or $waitList.Count -gt 0)) {
     Write-Step 'NOTE: -Commands/-WaitForLog only apply to the server suite; ignored for -Suite client'
 }
-if ($KeepServerRunning) { Write-Step 'NOTE: -KeepServerRunning is not supported (one JVM at a time); the server is always stopped' }
+if ($KeepServerRunning) { Write-Step 'NOTE: -KeepServerRunning is not supported; the server is always stopped' }
 
 # -ClientRenderer mesa (default): the real client mod set on real LWJGL + Mesa llvmpipe software OpenGL.
 # -ClientRenderer stub: HeadlessMC's -lwjgl stub; its glFenceSync returns 0, which crashes Embeddium
@@ -312,6 +322,9 @@ $request = [ordered]@{
     clientRenderer    = $ClientRenderer
     clientExclude     = @($clientExcludeList)
     lockWaitMin       = $LockWaitMin
+    slots             = $Slots
+    slotMinFreeGb     = $SlotMinFreeGb
+    settleSec         = $SettleSec
     createdUtc        = [datetime]::UtcNow.ToString('o')
 }
 $requestJson = ConvertTo-Json -InputObject $request -Depth 6
@@ -387,14 +400,36 @@ if ($ok) {
         if ($names.Count -eq 0) { throw "no remote scripts in $remoteDir" }
         $script:remoteScriptsHash = (($sha.ComputeHash([Text.Encoding]::UTF8.GetBytes($all)) | ForEach-Object { $_.ToString('x2') }) -join '').Substring(0, 10)
         $rdir = "$remoteWin\tools\remote\$($script:remoteScriptsHash)"
-        $mk = Invoke-SshCapture "mkdir $remoteWin\incoming 2>nul & mkdir $rdir 2>nul & echo GGOK & dir /b $rdir"
+        $mk = Invoke-SshCapture "mkdir $remoteWin\incoming 2>nul & mkdir $remoteWin\tools\remote 2>nul & echo GGOK & dir /b $rdir 2>nul"
         if ($mk.Out -notmatch 'GGOK') { throw ("cannot reach the test PC over ssh ({0}): {1}" -f $mk.Code, (($mk.Err + ' ' + $mk.Out).Trim())) }
-        $present = @($mk.Out -split "[`r`n]+" | ForEach-Object { $_.Trim().ToLowerInvariant() })
+        $present = @($mk.Out -split "[`r`n]+" | ForEach-Object { $_.Trim().ToLowerInvariant() } | Where-Object { $_ -and $_ -ne 'ggok' })
         $missing = @($names | Where-Object { $present -notcontains $_.ToLowerInvariant() })
         $how = 'scripts already on the PC'
-        if ($missing.Count -gt 0) {
+        if ($missing.Count -gt 0 -and $present.Count -gt 0) {
+            # directory exists but is incomplete (interrupted upload): fill it in place
             Push-Location $remoteDir
             try { Invoke-Scp (@($names.ToArray()) + @("${RemoteHost}:$remoteFwd/tools/remote/$($script:remoteScriptsHash)/")) } finally { Pop-Location }
+            $how = "{0} script(s) uploaded" -f $names.Count
+        } elseif ($missing.Count -gt 0) {
+            # Upload into a private directory and rename it into place: the final directory only ever appears
+            # complete, and several runs uploading the same scripts at once cannot trip over each other.
+            $tmpLeaf = '{0}.up{1}' -f $script:remoteScriptsHash, ([guid]::NewGuid().ToString('N')).Substring(0, 6)
+            $mkt = Invoke-SshCapture "mkdir $remoteWin\tools\remote\$tmpLeaf & echo GGOK"
+            if ($mkt.Out -notmatch 'GGOK') { throw ("cannot create the upload directory on the test PC: {0}" -f (($mkt.Err + ' ' + $mkt.Out).Trim())) }
+            Push-Location $remoteDir
+            try { Invoke-Scp (@($names.ToArray()) + @("${RemoteHost}:$remoteFwd/tools/remote/$tmpLeaf/")) } finally { Pop-Location }
+            $fin = Invoke-SshCapture "ren $remoteWin\tools\remote\$tmpLeaf $($script:remoteScriptsHash) 2>nul || rmdir /s /q $remoteWin\tools\remote\$tmpLeaf & echo GGOK & dir /b $rdir"
+            if ($fin.Out -notmatch 'GGOK') { throw ("cannot finish the script upload on the test PC: {0}" -f (($fin.Err + ' ' + $fin.Out).Trim())) }
+            $have = @($fin.Out -split "[`r`n]+" | ForEach-Object { $_.Trim().ToLowerInvariant() })
+            $still = @($names | Where-Object { $have -notcontains $_.ToLowerInvariant() })
+            # the directory may have been created by a run that fills it the old way (mkdir + copy): give it a moment
+            for ($w = 0; $still.Count -gt 0 -and $w -lt 10; $w++) {
+                Start-Sleep -Seconds 3
+                $chk = Invoke-SshCapture "dir /b $rdir"
+                $have = @($chk.Out -split "[`r`n]+" | ForEach-Object { $_.Trim().ToLowerInvariant() })
+                $still = @($names | Where-Object { $have -notcontains $_.ToLowerInvariant() })
+            }
+            if ($still.Count -gt 0) { throw ("scripts are not complete on the test PC after the upload (missing: {0})" -f ($still -join ', ')) }
             $how = "{0} script(s) uploaded" -f $names.Count
         }
         Push-Location $OutDir
@@ -404,7 +439,7 @@ if ($ok) {
 }
 
 if ($ok) {
-    Write-Step 'running on the test PC (streaming remote log; waits if another run holds the lock) ...'
+    Write-Step 'running on the test PC (streaming remote log; waits for a free slot and enough free RAM if other runs hold them) ...'
     $remoteLog = J $OutDir 'remote-output.log'
     $rcmd = "powershell -NoProfile -ExecutionPolicy Bypass -File $remoteWin\tools\remote\$remoteScriptsHash\Run-GGTest.ps1 -RunId $runId"
     $sw = [Diagnostics.Stopwatch]::StartNew()

@@ -26,6 +26,10 @@ Las ideas no se copian como texto ni como código: se rehacen con nuestras regla
 | Simulador de criaturas con modelos que no se gastan y sin matar | Monifactory y Nomifactory (Deep Mob Learning); Hostile Neural Networks como alternativa descartada | LGPL-3.0 / MIT | El concepto. La implementación es nuestra. |
 | AE2 fabricada con máquinas GT (prensas en prensa de formado, sin meteoritos) | Star Technology | MIT | El concepto |
 | Horno de arco sumergido (silicio, polvo del cielo y obsidiana en LV) | Idea propia, a partir del hueco de silicio en LV que señala la investigación | — | — |
+| Planta de mineral (toda la cadena de GT en una pasada, misma energía) | GTMoreOreProcessing y GTE2 (Ore Processing Factory) | LGPL-3.0 | El concepto. Las recetas se componen desde las de GTM. |
+| Controlador fabricado con las máquinas que sustituye | Star Technology | MIT | El concepto |
+| Biorrefinería (columna de fracciones orgánicas) | Clase `DistillationTowerMachine` y recetas de la torre de GTM | LGPL-3.0 | Se reutilizan la clase y las recetas |
+| CO₂ en el invernadero (más producción, devuelve O₂) | Star Technology | MIT | El concepto |
 
 ## Misiones
 

@@ -24,12 +24,21 @@ if (-not $global:GG) {
         Incoming     = Join-Path $base 'incoming'
         LockPath     = Join-Path (Join-Path $base 'runs') '.lock'
         LockStaleMin = 60
+        RampSec      = 40
+        PollSec      = 15
         RunId        = ''
         RunDir       = ''
         ResultsDir   = ''
         RunLog       = ''
         Stages       = (New-Object System.Collections.ArrayList)
         HasLock      = $false
+        Slot         = -1
+        Slots        = 2
+        ReserveGb    = 0.0
+        JvmStarted   = ''
+        LockStarted  = ''
+        SlotOthers   = @()
+        SlotFree     = $null
         LastBeat     = [datetime]::MinValue
         StageStatus  = 'PASS'
         StageDetail  = ''
@@ -464,8 +473,8 @@ function Get-GGJava17 {
 }
 
 function Get-GGFreePort {
-    param([int]$Preferred)
-    for ($p = $Preferred; $p -lt ($Preferred + 100); $p++) {
+    param([int]$Preferred, [int]$Count = 100)
+    for ($p = $Preferred; $p -lt ($Preferred + $Count); $p++) {
         $l = $null
         try {
             $l = New-Object Net.Sockets.TcpListener([Net.IPAddress]::Loopback, $p)
@@ -476,6 +485,31 @@ function Get-GGFreePort {
     throw "no free TCP port near $Preferred"
 }
 
+# Server / RCON ports of this run. Every concurrent run holds a different slot, and each slot owns its own window of
+# ports (slot 0: 25565 and 25575 as always, slot 1: 25585 and 25595, ...), so two runs can never pick the same port.
+function Get-GGSlotPort {
+    param([ValidateSet('server', 'rcon')][string]$Kind)
+    $slot = [math]::Max(0, [int]$global:GG.Slot)
+    $base = 25565 + (20 * $slot)
+    if ($Kind -eq 'rcon') { $base += 10 }
+    return (Get-GGFreePort $base 10)
+}
+
+# Java -Xmx style size ("7G", "4096M") in GB.
+function ConvertTo-GGGb {
+    param([string]$Text, [double]$Default = 0)
+    if ($Text -match '^\s*(\d+(?:\.\d+)?)\s*([kKmMgG]?)') {
+        $n = [double]::Parse($Matches[1], [Globalization.CultureInfo]::InvariantCulture)
+        switch ($Matches[2].ToUpperInvariant()) {
+            'G' { return $n }
+            'M' { return ($n / 1024) }
+            'K' { return ($n / 1048576) }
+            default { return ($n / 1073741824) }
+        }
+    }
+    return $Default
+}
+
 # ---------------------------------------------------------------- process helpers
 
 function Stop-GGTree {
@@ -484,18 +518,101 @@ function Stop-GGTree {
     $global:LASTEXITCODE = 0
 }
 
-# Kills JVMs left behind by a crashed earlier run. Anchored on our own D: subfolders only, so the
-# user's launchers/instances (C:\...) are never matched.
-function Stop-GGOrphans {
-    $rx = '(?i)D:[\\/]+GregtechGrindless[\\/]+(runs|hmc|cache|sync)[\\/]'
-    $procs = @(Get-CimInstance Win32_Process -ErrorAction SilentlyContinue | Where-Object {
-            $_.ProcessId -ne $PID -and $_.CommandLine -and ($_.Name -match '^(java|javaw|headlessmc-launcher-windows-x64)\.exe$') -and ($_.CommandLine -match $rx)
+# ---- JVMs of runs that are gone ---------------------------------------------------------------------------------
+# A JVM belongs to a run when its command line names the run: client side (HeadlessMC and the game it starts) and
+# packwiz-installer carry ...\runs\<RunId>\..., the server JVM carries -Dgg.run=<RunId> (its other arguments are
+# relative). Only JVMs of runs that are not active are ever killed, so the JVM of the other slot is always safe.
+
+function Get-GGManagedProcesses {
+    return @(Get-CimInstance Win32_Process -ErrorAction SilentlyContinue | Where-Object {
+            $_.ProcessId -ne $PID -and $_.CommandLine -and ($_.Name -match '^(java|javaw|headlessmc-launcher-windows-x64)\.exe$')
         })
-    foreach ($p in $procs) {
-        Write-GGLog ("killing orphan {0} pid {1}" -f $p.Name, $p.ProcessId) 'WARN'
+}
+
+function Get-GGRunIdOfCommandLine {
+    param([string]$CommandLine)
+    $m = [regex]::Match($CommandLine, '(?i)-Dgg\.run=([A-Za-z0-9][A-Za-z0-9._-]*)')
+    if ($m.Success) { return $m.Groups[1].Value }
+    $m = [regex]::Match($CommandLine, '(?i)[\\/]runs[\\/]+([A-Za-z0-9][A-Za-z0-9._-]*)(?=[\\/"\s]|$)')
+    if ($m.Success) { return $m.Groups[1].Value }
+    return ''
+}
+
+# Which of the given processes are orphans? ProtectRunIds = this run plus every active holder. A process that is ours
+# (D:\GregtechGrindless\runs|hmc|cache|sync in its command line) but names no run (e.g. the Forge installer) is only an
+# orphan when nobody else is active (Alone), like the old one-lock behaviour.
+function Select-GGOrphans {
+    param($Procs, [string]$BaseRx, [string[]]$ProtectRunIds, [bool]$Alone)
+    foreach ($p in @($Procs)) {
+        $cl = [string]$p.CommandLine
+        $owner = Get-GGRunIdOfCommandLine $cl
+        if (-not $owner -and $cl -notmatch $BaseRx) { continue }
+        if ($owner) {
+            if ($ProtectRunIds -contains $owner) { continue }
+        } elseif (-not $Alone) { continue }
+        $p
+    }
+}
+
+function Get-GGBaseRegex {
+    $b = [regex]::Escape($global:GG.Base.TrimEnd('\', '/'))
+    return ('(?i)' + ($b -replace '\\\\', '[\\/]+') + '[\\/]+(runs|hmc|cache|sync)[\\/]')
+}
+
+# Kills the JVMs of runs that are no longer active. Anchored on our own D: subfolders / run ids only, so the user's
+# launchers/instances (C:\...) are never matched.
+function Stop-GGOrphans {
+    $others = @(Get-GGActiveSlots | Where-Object { [string]$_.Info.runId -ne [string]$global:GG.RunId })
+    if (@($others | Where-Object { $_.Info.corrupt }).Count -gt 0) {
+        Write-GGLog 'orphan sweep skipped: a slot file could not be read (it may be rewritten right now)' 'WARN'
+        return 0
+    }
+    $protect = @([string]$global:GG.RunId) + @($others | ForEach-Object { [string]$_.Info.runId })
+    $targets = @(Select-GGOrphans (Get-GGManagedProcesses) (Get-GGBaseRegex) $protect ($others.Count -eq 0))
+    foreach ($p in $targets) {
+        $owner = Get-GGRunIdOfCommandLine ([string]$p.CommandLine)
+        if (-not $owner) { $owner = '?' }
+        Write-GGLog ("killing orphan {0} pid {1} (run {2})" -f $p.Name, $p.ProcessId, $owner) 'WARN'
         Stop-GGTree $p.ProcessId
     }
-    return $procs.Count
+    return $targets.Count
+}
+
+# Kills what is left of ONE run (this run at the end of a suite, or a dead slot holder).
+function Stop-GGRunProcesses {
+    param([string]$RunId)
+    if (-not $RunId -or $RunId -eq '?') { return 0 }
+    $n = 0
+    foreach ($p in @(Get-GGManagedProcesses)) {
+        if ((Get-GGRunIdOfCommandLine ([string]$p.CommandLine)) -eq $RunId) {
+            Write-GGLog ("killing leftover {0} pid {1} of run {2}" -f $p.Name, $p.ProcessId, $RunId) 'WARN'
+            Stop-GGTree $p.ProcessId
+            $n++
+        }
+    }
+    return $n
+}
+
+# Named OS mutex around a resource that concurrent runs share (tool downloads, Forge install, a packwiz sync dir).
+function Invoke-GGExclusive {
+    param([string]$Name, [scriptblock]$Body, [int]$TimeoutSec = 3600)
+    $m = New-Object Threading.Mutex($false, ('Global\GGHarness-' + ($Name -replace '[^A-Za-z0-9_.-]', '_')))
+    $held = $false
+    $sw = [Diagnostics.Stopwatch]::StartNew()
+    $said = $false
+    try {
+        while (-not $held) {
+            try { $held = $m.WaitOne(15000) } catch [Threading.AbandonedMutexException] { $held = $true }
+            if ($held) { break }
+            if (-not $said) { Write-GGLog ("waiting for exclusive access to '{0}' (another run is using it)" -f $Name); $said = $true }
+            Update-GGLock
+            if ($sw.Elapsed.TotalSeconds -gt $TimeoutSec) { throw "timed out after ${TimeoutSec}s waiting for exclusive access to '$Name'" }
+        }
+        & $Body
+    } finally {
+        if ($held) { try { $m.ReleaseMutex() } catch {} }
+        $m.Dispose()
+    }
 }
 
 # Runs a short-lived tool to completion with output captured to files. Returns the exit code.
@@ -523,24 +640,43 @@ function Invoke-GGTool {
     return $code
 }
 
-# ---------------------------------------------------------------- global lock (one JVM at a time)
+# ---------------------------------------------------------------- slot semaphore (at most N Minecraft JVMs at once)
+#
+# A slot is a file created with CreateNew by the run that holds it: runs\.lock (slot 0, the historical single lock,
+# same JSON fields as ever) and runs\.lock.1, runs\.lock.2, ... Holders heartbeat their file (Update-GGLock); a file is
+# stale when its owner is gone or silent for LockStaleMin, and the next waiter reclaims it (and kills the dead run's JVMs).
+# Rules for taking a slot (evaluated by one waiter at a time, see the FIFO tickets below):
+#   - at most min(own -Slots, -Slots of every active holder) runs at once; a holder written by an older harness version
+#     (no "v" field) assumes it is alone, so it counts as exclusive;
+#   - the lowest free index below -Slots is used; the index also selects the run's server/RCON port window;
+#   - a run that would overlap another one needs free RAM >= MinFreeGb, where the RAM that runs still starting their
+#     JVM have yet to allocate (reserveGb, absorbed over RampSec after the JVM starts) is already subtracted.
+
+function Get-GGSlotPath {
+    param([int]$Index)
+    if ($Index -le 0) { return (Join-Path $global:GG.Runs '.lock') }
+    return (Join-Path $global:GG.Runs ('.lock.{0}' -f $Index))
+}
 
 function Get-GGLockInfo {
-    $p = $global:GG.LockPath
-    if (-not (Test-Path -LiteralPath $p)) { return $null }
+    param([string]$Path)
+    if (-not $Path) { $Path = $global:GG.LockPath }
+    if (-not [IO.File]::Exists($Path)) { return $null }
     try {
-        $o = (Read-GGSharedText $p) | ConvertFrom-Json
+        $o = (Read-GGSharedText $Path) | ConvertFrom-Json
         if ($o -and $o.pid) { return $o }
-    } catch {}
+    } catch {
+        if (-not [IO.File]::Exists($Path)) { return $null }
+    }
     return [pscustomobject]@{ pid = 0; corrupt = $true; runId = '?'; updated = '' }
 }
 
 function Test-GGLockStale {
-    param($Info)
-    $p = $global:GG.LockPath
+    param($Info, [string]$Path)
+    if (-not $Path) { $Path = $global:GG.LockPath }
     if (-not $Info) { return $true }
     if ($Info.corrupt) {
-        try { return (((Get-Date) - (Get-Item -LiteralPath $p).LastWriteTime).TotalMinutes -gt 5) } catch { return $true }
+        try { return (((Get-Date) - (Get-Item -LiteralPath $Path).LastWriteTime).TotalMinutes -gt 5) } catch { return $true }
     }
     $inv = [Globalization.CultureInfo]::InvariantCulture
     $rt = [Globalization.DateTimeStyles]::RoundtripKind
@@ -559,16 +695,129 @@ function Test-GGLockStale {
 
 function New-GGLockBody {
     $me = Get-Process -Id $PID
-    $now = [datetime]::UtcNow.ToString('o')
     $o = [ordered]@{
-        pid       = $PID
-        runId     = $global:GG.RunId
-        started   = $global:GG.LockStarted
-        updated   = $now
-        procStart = $me.StartTime.ToUniversalTime().ToString('o')
-        host      = $env:COMPUTERNAME
+        v          = 2
+        pid        = $PID
+        runId      = $global:GG.RunId
+        started    = $global:GG.LockStarted
+        updated    = [datetime]::UtcNow.ToString('o')
+        procStart  = $me.StartTime.ToUniversalTime().ToString('o')
+        host       = $env:COMPUTERNAME
+        slot       = [int]$global:GG.Slot
+        slots      = [int]$global:GG.Slots
+        reserveGb  = [double]$global:GG.ReserveGb
+        jvmStarted = [string]$global:GG.JvmStarted
     }
     return (ConvertTo-Json -InputObject $o)
+}
+
+# Rewrites the heartbeat/state of this run's slot file (temp file + Replace, so readers never see half a file).
+function Save-GGLockFile {
+    $p = $global:GG.LockPath
+    $body = New-GGLockBody
+    $utf8 = New-Object Text.UTF8Encoding($false)
+    $tmp = Join-Path $global:GG.Runs ('.slot-{0}.tmp' -f $PID)
+    try {
+        [IO.File]::WriteAllText($tmp, $body, $utf8)
+        [IO.File]::Replace($tmp, $p, [NullString]::Value)
+    } catch {
+        Remove-Item -LiteralPath $tmp -Force -ErrorAction SilentlyContinue
+        try { [IO.File]::WriteAllText($p, $body, $utf8) } catch {}
+    }
+}
+
+function Get-GGActiveSlots {
+    # Reclaims stale slot files (killing the JVMs of the dead run) and returns the active holders.
+    $active = @()
+    if (-not [IO.Directory]::Exists($global:GG.Runs)) { return $active }
+    foreach ($f in [IO.Directory]::GetFiles($global:GG.Runs, '.lock*')) {
+        $name = [IO.Path]::GetFileName($f)
+        $idx = -1
+        if ($name -eq '.lock') { $idx = 0 } elseif ($name -match '^\.lock\.(\d{1,2})$') { $idx = [int]$Matches[1] }
+        if ($idx -lt 0) { continue }
+        $info = Get-GGLockInfo $f
+        if (-not $info) { continue }
+        if (Test-GGLockStale $info $f) {
+            $again = Get-GGLockInfo $f
+            if ($again -and ([string]$again.runId -eq [string]$info.runId) -and ([int]$again.pid -eq [int]$info.pid)) {
+                Write-GGLog ("removing stale slot {0} (owner pid {1}, run {2}, updated {3})" -f $idx, $info.pid, $info.runId, $info.updated) 'WARN'
+                Remove-Item -LiteralPath $f -Force -ErrorAction SilentlyContinue
+                [void](Stop-GGRunProcesses ([string]$info.runId))
+            }
+            continue
+        }
+        $active += [pscustomobject]@{ Index = $idx; Path = $f; Info = $info }
+    }
+    return @($active)
+}
+
+# RAM a new JVM can get right now: Windows "Available" memory (free + reusable standby cache, what Task Manager shows as
+# Available). The bare free list (Win32_OperatingSystem.FreePhysicalMemory) is only ~7 GB on this 32 GB PC even when it is idle.
+function Get-GGFreeRamGb {
+    try {
+        $perf = Get-CimInstance Win32_PerfFormattedData_PerfOS_Memory -ErrorAction Stop
+        if ($perf -and $perf.AvailableMBytes) { return [math]::Round([double]$perf.AvailableMBytes / 1024, 1) }
+    } catch {}
+    try { return [math]::Round((Get-CimInstance Win32_OperatingSystem -ErrorAction Stop).FreePhysicalMemory / 1MB, 1) } catch { return 999.0 }
+}
+
+# How many runs may be active at once, given the holders that already are.
+function Get-GGSlotLimit {
+    param($Others, [int]$Slots)
+    $limit = $Slots
+    foreach ($h in @($Others)) {
+        if (-not $h.Info.v) { $limit = 1; continue }
+        $n = 0
+        try { $n = [int]$h.Info.slots } catch {}
+        if ($n -gt 0 -and $n -lt $limit) { $limit = $n }
+    }
+    return $limit
+}
+
+# RAM that the other holders are still going to allocate: their declared reserve until their JVM has been up RampSec.
+function Get-GGPendingRamGb {
+    param($Others)
+    $inv = [Globalization.CultureInfo]::InvariantCulture
+    $rt = [Globalization.DateTimeStyles]::RoundtripKind
+    $sum = 0.0
+    foreach ($h in @($Others)) {
+        $r = 0.0
+        try { $r = [double]$h.Info.reserveGb } catch {}
+        if ($r -le 0) { continue }
+        $factor = 1.0
+        if ($h.Info.jvmStarted) {
+            try {
+                $age = ([datetime]::UtcNow - [datetime]::Parse([string]$h.Info.jvmStarted, $inv, $rt).ToUniversalTime()).TotalSeconds
+                $factor = [math]::Max(0.0, 1.0 - ($age / [double]$global:GG.RampSec))
+            } catch { $factor = 0.0 }
+        }
+        $sum += $r * $factor
+    }
+    return $sum
+}
+
+# Can a new run start now? Returns @{ Index; Reason; Free; Pending }; Index -1 = no (Reason says why).
+function Get-GGSlotDecision {
+    param($Active, [int]$Slots, [double]$MinFreeGb)
+    $active = @($Active)
+    $who = (@($active | ForEach-Object { 'slot {0}: run {1} (pid {2}, since {3})' -f $_.Index, $_.Info.runId, $_.Info.pid, $_.Info.started }) -join '; ')
+    $limit = Get-GGSlotLimit $active $Slots
+    if ($active.Count + 1 -gt $limit) { return @{ Index = -1; Reason = ("all {0} slot(s) busy - {1}" -f $limit, $who) } }
+    $used = @($active | ForEach-Object { [int]$_.Index })
+    $idx = -1
+    for ($i = 0; $i -lt $Slots; $i++) { if ($used -notcontains $i) { $idx = $i; break } }
+    if ($idx -lt 0) { return @{ Index = -1; Reason = ("no free slot below {0} - {1}" -f $Slots, $who) } }
+    $free = $null
+    $pending = 0.0
+    if ($active.Count -gt 0 -and $MinFreeGb -gt 0) {
+        $free = Get-GGFreeRamGb
+        $pending = Get-GGPendingRamGb $active
+        $eff = [math]::Round($free - $pending, 1)
+        if ($eff -lt $MinFreeGb) {
+            return @{ Index = -1; Reason = ("waiting for RAM: {0} GB available - {1} GB still to be allocated by starting runs = {2} GB, {3} GB needed to share the PC - {4}" -f $free, [math]::Round($pending, 1), $eff, $MinFreeGb, $who) }
+        }
+    }
+    return @{ Index = $idx; Reason = ''; Free = $free; Pending = $pending }
 }
 
 # FIFO fairness: waiting runs keep a runs\<id>\.waiting ticket fresh (touched every poll); a run only tries to take
@@ -588,9 +837,14 @@ function Get-GGEarlierWaiters {
 }
 
 function Enter-GGLock {
-    param([int]$MaxWaitMin = 120)
+    param([int]$MaxWaitMin = 120, [int]$Slots = 2, [double]$MinFreeGb = 9, [double]$ReserveGb = 0)
     New-Item -ItemType Directory -Force -Path $global:GG.Runs | Out-Null
-    $p = $global:GG.LockPath
+    if ($Slots -lt 1) { $Slots = 1 }
+    $global:GG.Slots = $Slots
+    $global:GG.ReserveGb = $ReserveGb
+    $global:GG.JvmStarted = ''
+    $global:GG.SlotOthers = @()
+    $global:GG.SlotFree = $null
     $ticket = [IO.Path]::Combine($global:GG.RunDir, '.waiting')
     $deadline = (Get-Date).AddMinutes($MaxWaitMin)
     $lastMsg = [datetime]::MinValue
@@ -599,40 +853,63 @@ function Enter-GGLock {
         while ($true) {
             try { [IO.File]::WriteAllText($ticket, [datetime]::UtcNow.ToString('o')) } catch {}
             $earlier = @(Get-GGEarlierWaiters)
+            $why = ''
             if ($earlier.Count -eq 0) {
-                $fs = $null
-                try {
-                    $fs = New-Object IO.FileStream($p, [IO.FileMode]::CreateNew, [IO.FileAccess]::Write, ([IO.FileShare]::ReadWrite -bor [IO.FileShare]::Delete))
-                    $bytes = (New-Object Text.UTF8Encoding($false)).GetBytes((New-GGLockBody))
-                    $fs.Write($bytes, 0, $bytes.Length)
-                    $fs.Dispose(); $fs = $null
-                    $global:GG.HasLock = $true
-                    $global:GG.LastBeat = Get-Date
-                    return
-                } catch [IO.IOException], [UnauthorizedAccessException] {
-                    if ($fs) { $fs.Dispose() }
-                    $info = Get-GGLockInfo
-                    if (Test-GGLockStale $info) {
-                        $again = Get-GGLockInfo
-                        if ($again -and $info -and ([string]$again.runId -eq [string]$info.runId) -and ([int]$again.pid -eq [int]$info.pid)) {
-                            Write-GGLog ("removing stale lock (owner pid {0}, run {1}, updated {2})" -f $info.pid, $info.runId, $info.updated) 'WARN'
-                            Remove-Item -LiteralPath $p -Force -ErrorAction SilentlyContinue
+                $dec = Get-GGSlotDecision @(Get-GGActiveSlots) $Slots $MinFreeGb
+                if ($dec.Index -ge 0) {
+                    $path = Get-GGSlotPath $dec.Index
+                    $global:GG.Slot = $dec.Index
+                    $fs = $null
+                    $created = $false
+                    try {
+                        $fs = New-Object IO.FileStream($path, [IO.FileMode]::CreateNew, [IO.FileAccess]::Write, ([IO.FileShare]::ReadWrite -bor [IO.FileShare]::Delete))
+                        $bytes = (New-Object Text.UTF8Encoding($false)).GetBytes((New-GGLockBody))
+                        $fs.Write($bytes, 0, $bytes.Length)
+                        $fs.Dispose(); $fs = $null
+                        $created = $true
+                    } catch [IO.IOException], [UnauthorizedAccessException] {
+                        if ($fs) { $fs.Dispose() }
+                        $global:GG.Slot = -1
+                        $why = 'lost a race for the slot, retrying'
+                    }
+                    if ($created) {
+                        $global:GG.LockPath = $path
+                        $global:GG.HasLock = $true
+                        $global:GG.LastBeat = Get-Date
+                        # two runs may have taken different slots in the same instant: re-check the limits
+                        $others = @(Get-GGActiveSlots | Where-Object { [int]$_.Index -ne [int]$dec.Index })
+                        if ($others.Count + 1 -le (Get-GGSlotLimit $others $Slots)) {
+                            $global:GG.SlotOthers = @($others | ForEach-Object { [string]$_.Info.runId })
+                            $global:GG.SlotFree = $dec.Free
+                            return
                         }
+                        Remove-Item -LiteralPath $path -Force -ErrorAction SilentlyContinue
+                        $global:GG.HasLock = $false
+                        $global:GG.Slot = -1
+                        $global:GG.LockPath = Get-GGSlotPath 0
+                        $why = 'slot limit exceeded by a concurrent start, retrying'
+                        Start-Sleep -Seconds (Get-Random -Minimum 2 -Maximum 6)
                         continue
                     }
+                } else {
+                    $why = [string]$dec.Reason
                 }
             }
-            $holder = Get-GGLockInfo
-            if ((Get-Date) -gt $deadline) { throw "timed out after $MaxWaitMin min waiting for the test-PC lock (held by run $($holder.runId), pid $($holder.pid))" }
+            if ((Get-Date) -gt $deadline) {
+                $detail = $why
+                if ($earlier.Count -gt 0) { $detail = 'queued behind ' + ($earlier -join ', ') }
+                throw "timed out after $MaxWaitMin min waiting for a test-PC slot ($detail)"
+            }
             if (((Get-Date) - $lastMsg).TotalSeconds -ge 60) {
                 $lastMsg = Get-Date
                 if ($earlier.Count -gt 0) {
-                    Write-GGLog ("queued behind {0} earlier run(s) ({1}); lock held by run {2}" -f $earlier.Count, ($earlier -join ', '), $holder.runId)
+                    $holders = (@(Get-GGActiveSlots | ForEach-Object { 'run {0}' -f $_.Info.runId }) -join ', ')
+                    Write-GGLog ("queued behind {0} earlier run(s) ({1}); slots held by {2}" -f $earlier.Count, ($earlier -join ', '), $holders)
                 } else {
-                    Write-GGLog ("waiting for lock held by run {0} (pid {1}, since {2})" -f $holder.runId, $holder.pid, $holder.started)
+                    Write-GGLog ("waiting for a slot: {0}" -f $why)
                 }
             }
-            Start-Sleep -Seconds 15
+            Start-Sleep -Milliseconds ([int]($global:GG.PollSec * 1000))
         }
     } finally {
         Remove-Item -LiteralPath $ticket -Force -ErrorAction SilentlyContinue
@@ -643,13 +920,27 @@ function Update-GGLock {
     if (-not $global:GG.HasLock) { return }
     if (((Get-Date) - $global:GG.LastBeat).TotalSeconds -lt 30) { return }
     $global:GG.LastBeat = Get-Date
-    try { [IO.File]::WriteAllText($global:GG.LockPath, (New-GGLockBody), (New-Object Text.UTF8Encoding($false))) } catch {}
+    Save-GGLockFile
+}
+
+# Tells the other runs how much RAM this run is going to need: ReserveGb (its JVM's expected footprint; 0 once no JVM
+# will start any more) and whether a JVM of this run is up (True = one just started, False = it stopped).
+function Set-GGSlotState {
+    param($ReserveGb = $null, $JvmStarted = $null)
+    if ($null -ne $ReserveGb) { $global:GG.ReserveGb = [double]$ReserveGb }
+    if ($null -ne $JvmStarted) {
+        if ($JvmStarted) { $global:GG.JvmStarted = [datetime]::UtcNow.ToString('o') } else { $global:GG.JvmStarted = '' }
+    }
+    if ($global:GG.HasLock) {
+        $global:GG.LastBeat = Get-Date
+        Save-GGLockFile
+    }
 }
 
 function Exit-GGLock {
     if (-not $global:GG.HasLock) { return }
     try {
-        $info = Get-GGLockInfo
+        $info = Get-GGLockInfo $global:GG.LockPath
         if ($info -and ([int]$info.pid -eq $PID)) { Remove-Item -LiteralPath $global:GG.LockPath -Force -ErrorAction SilentlyContinue }
     } catch {}
     $global:GG.HasLock = $false

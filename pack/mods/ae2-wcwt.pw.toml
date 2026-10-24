@@ -1,0 +1,14 @@
+name = "AE2 WCWT"
+filename = "wcwt-1.20.1.11.jar"
+side = "both"
+pin = true
+
+[download]
+url = "https://cdn.modrinth.com/data/4inoel9g/versions/CaR5NsCp/wcwt-1.20.1.11.jar"
+hash-format = "sha512"
+hash = "81d8f595667b52f24aca98dcb1e55795196ad54c12214b51a2acd4a92f83d3516a4bca87d2adbc2e0bb3a38d10a0f1ad6e74d58a413a1f2ee94ef1e5a8127e76"
+
+[update]
+[update.modrinth]
+mod-id = "4inoel9g"
+version = "CaR5NsCp"

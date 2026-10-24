@@ -340,9 +340,11 @@
         Obj: Java.loadClass('com.google.gson.JsonObject'),
         Arr: Java.loadClass('com.google.gson.JsonArray'),
         Prim: Java.loadClass('com.google.gson.JsonPrimitive'),
+        Parser: null,
         Null: null
       };
       try { gsonClasses.Null = Java.loadClass('com.google.gson.JsonNull').INSTANCE; } catch (e) { /* falls back to "" */ }
+      try { gsonClasses.Parser = Java.loadClass('com.google.gson.JsonParser'); } catch (e) { /* booleans fall back to Rhino's pick */ }
     }
     return gsonClasses;
   }
@@ -354,7 +356,14 @@
     var i;
     if (t === 'string') return new G.Prim(x);
     if (t === 'number') return new G.Prim(x);
-    if (t === 'boolean') return new G.Prim(x);
+    if (t === 'boolean') {
+      // Rhino resolves new JsonPrimitive(<boolean>) to the String overload ("true" with quotes); parsing the literal gives the
+      // Boolean primitive. The analyzer reads either form.
+      if (G.Parser !== null && G.Parser !== undefined) {
+        try { return G.Parser.parseString(x ? 'true' : 'false'); } catch (e) { /* use the plain value */ }
+      }
+      return new G.Prim(x);
+    }
     if (x === null || x === undefined) return G.Null !== null && G.Null !== undefined ? G.Null : new G.Prim('');
     if (Array.isArray(x)) {
       var a = new G.Arr();

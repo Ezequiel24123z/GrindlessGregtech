@@ -101,7 +101,8 @@ export function buildModel(dump, rawCfg) {
   const st = { unresolved: new Set() };
   const stats = {
     recipes: dump.recipes.size, ignoredByType: {}, deadByType: {}, emptyIngredient: 0, badIngredient: 0,
-    templateMissing: 0, rules: 0, structureMachines: 0, structureMachineIds: [], rolledMachines: [], veinTargets: 0,
+    templateMissing: 0, rules: 0, structureMachines: 0, structureMachineIds: [], rolledMachines: [], veinTargets: 0, veinsWithoutItem: [],
+    partsNotRequired: [],
   };
 
   // 1) Recetas normalizadas
@@ -135,7 +136,9 @@ export function buildModel(dump, rawCfg) {
   // Interruptores de la config de GTM que lee el análisis (se vuelcan en config.json): clave -> valor (true/false/null).
   const usedConfig = new Map();
   const configWarned = new Set();
-  const configState = (spec, wid) => {
+  // `known` distingue "la config vale otra cosa" de "no se pudo leer": quien pide una pieza condicionada a la config la sigue exigiendo
+  // si no se puede leer (lo prudente), y quien pide un requisito lo da por no cumplido.
+  const configState = (spec, wid, whenUnknown = 'se trata como no cumplida') => {
     const key = spec.config;
     const want = spec.equals === undefined ? true : spec.equals;
     const have = dump.config ? dump.config[key] : undefined;
@@ -144,11 +147,11 @@ export function buildModel(dump, rawCfg) {
       const why = dump.config ? 'no se pudo leer en el volcado' : 'el volcado no trae config.json';
       if (!configWarned.has(key)) {
         configWarned.add(key);
-        warnings.push(`${wid}: no se puede comprobar la config ${key} (${why}); se trata como no cumplida`);
+        warnings.push(`${wid}: no se puede comprobar la config ${key} (${why}); ${whenUnknown}`);
       }
-      return { ok: false, text: `config ${key} desconocida (${why})` };
+      return { ok: false, known: false, text: `config ${key} desconocida (${why})` };
     }
-    return { ok: have === want, text: `config ${key} = ${have}, se pide ${want}` };
+    return { ok: have === want, known: true, have, text: `config ${key} = ${have}, se pide ${want}` };
   };
   // Yacimientos de fluidos (perforadora de fluidos de GTM): admite la dimensión si su filtro es null o la incluye.
   const fluidVeinInfo = new Map();
@@ -337,6 +340,15 @@ export function buildModel(dump, rawCfg) {
       }
     }
     for (const p of partSels) {
+      // {anyOf, onlyIf:{config,equals}}: pieza que GTM solo exige con ese valor de la config (p. ej. la escotilla de mantenimiento
+      // con machines.enableMaintenance); si la config no se puede leer se sigue exigiendo
+      if (p && typeof p === 'object' && !Array.isArray(p) && p.onlyIf) {
+        const r = configState(p.onlyIf, `parts de ${id}`, 'la pieza se sigue exigiendo');
+        if (r.known && !r.ok) {
+          stats.partsNotRequired.push({ machine: id, part: selLabel(p), why: `config ${p.onlyIf.config} = ${r.have}; solo se exige con ${p.onlyIf.equals === undefined ? true : p.onlyIf.equals}` });
+          continue;
+        }
+      }
       const keys = resolve(p, `parts de ${id}`);
       checkIds(keys.filter((k) => !k.startsWith('fluid:')), 'la parte');
       buildSlots.push(slotOf(keys, true, selLabel(p), 'part'));
@@ -421,11 +433,14 @@ export function buildModel(dump, rawCfg) {
   stats.rules = g.rules.length;
 
   // Objetivos generados a partir de las vetas del registro: uno por veta ("alguna mena de cada veta del Nether").
-  //   {idPrefix, labelPrefix, dimensions, layers?, exclusiveFrom?, without?, allowFinite?, optional?}  más una de estas formas:
+  //   {idPrefix, labelPrefix, dimensions, layers?, exclusiveFrom?, requireItem?, without?, allowFinite?, optional?}  más una de estas formas:
   //   - mena:  {template, overrides?, mode: 'anyOf'|'allOf'} -> objetivo sobre las menas crudas de la veta (si hay
   //            `exclusiveFrom`, solo las menas que no salen en las vetas de esas dimensiones; sin ninguna se salta la veta)
-  //   - receta: {target: {...}} -> el objeto se copia con {id} (id de la veta sin "_vein") y {short} (id sin espacio de
-  //            nombres) sustituidos en sus textos; p. ej. {kind:'recipe', type:'gtceu:vein_drilling', input:'grindless:vein_sample_{id}'}
+  //   - receta: {target: {...}} -> el objeto se copia con {id} (id de la veta sin el trozo "_vein": redstone_vein_ow -> redstone_ow)
+  //            y {short} (id sin espacio de nombres) sustituidos en sus textos; p. ej.
+  //            {kind:'recipe', type:'gtceu:vein_drilling', input:'grindless:vein_sample_{id}'}
+  //   `requireItem` (con {id}/{short}): las vetas cuyo objeto no existe (p. ej. la muestra de la tabla de la perforadora) no tienen
+  //   objetivo: son vetas de otros mods que el pack no ofrece a la perforadora; se listan en las notas del informe.
   const veinMats = (v) => v.mats.map((m) => (m.includes(':') ? m.split(':')[1] : m));
   const materialsIn = (dims) => {
     const set = new Set();
@@ -433,6 +448,7 @@ export function buildModel(dump, rawCfg) {
     for (const v of dump.veins || []) if (v.dims.some((d) => ds.has(d))) for (const m of veinMats(v)) set.add(m);
     return set;
   };
+  const bareVeinId = (short) => short.replace(/_vein(?=_|$)/, '');
   const veinTargets = (specs, which) => {
     const out = [];
     for (const spec of specs) {
@@ -453,10 +469,17 @@ export function buildModel(dump, rawCfg) {
         if (!v.dims.some((d) => dims.has(d))) continue;
         if (layers && !layers.has(v.layer)) continue;
         const short = v.id.includes(':') ? v.id.split(':')[1] : v.id;
+        if (spec.requireItem) {
+          const item = spec.requireItem.split('{id}').join(bareVeinId(short)).split('{short}').join(short);
+          if (!dump.items.has(item)) {
+            if (!stats.veinsWithoutItem.includes(v.id)) stats.veinsWithoutItem.push(v.id);
+            continue;
+          }
+        }
         const base = { id: `${spec.idPrefix || 'veta-'}${short}`, label: `${spec.labelPrefix || 'Veta'} ${short}`, ...extras };
         if (spec.target) {
           const fill = (x) => (typeof x === 'string'
-            ? x.split('{id}').join(short.replace(/_vein$/, '')).split('{short}').join(short)
+            ? x.split('{id}').join(bareVeinId(short)).split('{short}').join(short)
             : Array.isArray(x) ? x.map(fill) : x);
           const t = {};
           for (const [k, val] of Object.entries(spec.target)) t[k] = fill(val);

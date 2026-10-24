@@ -8,7 +8,12 @@
     "minecraft:crafting_shapeless",
     "gtceu:crafting_shaped_strict",
     "gtceu:crafting_shaped_energy_transfer",
-    "gtceu:crafting_shaped_fluid_container"
+    "gtceu:crafting_shaped_fluid_container",
+    "enderchests:crafting",
+    "endertanks:crafting",
+    "sophisticatedbackpacks:basic_backpack",
+    "sophisticatedbackpacks:backpack_upgrade",
+    "sophisticatedcore:upgrade_next_tier"
   ],
 
   "typeAliases": {

@@ -110,6 +110,74 @@ test('config.json: los booleanos escritos como texto por volcados antiguos se le
   assert.deepEqual(dump.config, { a: true, b: false, c: null, d: true, e: 5, f: 'otro' });
 });
 
+// ---------------------------------------------------------------- piezas que dependen de la config de GTM
+
+test('parts con onlyIf: GTM no exige la pieza cuando la config dice que no (mantenimiento) y se sigue exigiendo si no se puede leer', () => {
+  const recipes = [
+    shaped('t:ebf_recipe', ['H'], { H: { item: 't:hull' } }, 't:ebf'),
+    shaped('t:hull_recipe', ['I'], { I: { item: 't:ingot' } }, 't:hull'),
+  ];
+  const cfg = {
+    tier: 'mantenimiento',
+    unconditionalTypes: ['minecraft:crafting_shaped'],
+    world: [{ id: 'w', mode: 'manual', items: ['t:ingot'] }],
+    machines: [{
+      machine: 't:ebf', types: [],
+      parts: ['t:hull', { anyOf: ['t:maintenance'], onlyIf: { config: 'machines.enableMaintenance', equals: true } }],
+    }],
+    targets: [{ id: 'ebf', item: 'm:t:ebf' }],
+    autoTargets: [],
+  };
+  const dump = (config) => mkDump({ recipes, items: ['t:ingot', 't:ebf', 't:hull', 't:maintenance'], config });
+  // con mantenimiento la escotilla (que nadie fabrica) es obligatoria
+  const on = run(dump({ 'machines.enableMaintenance': true }), cfg);
+  assert.equal(on.out.verdict, 'FAIL');
+  assert.match(linesOf(on.out.gate, 'ebf'), /t:maintenance/);
+  assert.deepEqual(on.model.stats.partsNotRequired, []);
+  // sin mantenimiento la máquina se construye sin ella y el informe lo dice
+  const off = run(dump({ 'machines.enableMaintenance': false }), cfg);
+  assert.equal(off.out.verdict, 'PASS');
+  assert.equal(off.model.stats.partsNotRequired.length, 1);
+  assert.match(off.text, /pieza que la config de GTM no exige: .*machines\.enableMaintenance = false; solo se exige con true.* en t:ebf/);
+  // config ilegible o sin config.json: se sigue exigiendo y se avisa
+  const unknown = run(dump(null), cfg);
+  assert.equal(unknown.out.verdict, 'FAIL');
+  assert.match(unknown.model.warnings.join('\n'), /no se puede comprobar la config machines\.enableMaintenance \(el volcado no trae config\.json\); la pieza se sigue exigiendo/);
+});
+
+// ---------------------------------------------------------------- objetivos por veta con tabla de la perforadora
+
+test('objetivos por veta: requireItem salta las vetas sin objeto de la tabla (otros mods) y las lista; {id} quita "_vein" también en medio', () => {
+  const veins = [
+    { id: 'gtceu:redstone_vein_ow', layer: 'deepslate', dims: ['minecraft:overworld'], mats: ['gtceu:ruby'] },
+    { id: 'gtceu:topaz_vein', layer: 'netherrack', dims: ['minecraft:the_nether'], mats: ['gtceu:topaz'] },
+    { id: 'gtnn:apatite_vein_tf', layer: 'tf', dims: ['minecraft:overworld'], mats: ['gtceu:apatite'] },
+  ];
+  const recipes = [
+    gt('t:drill_ow', 'gtceu:vein_drilling', { ins: [gi('grindless:vein_sample_redstone_ow', 1, 0)], outs: [gi('gtceu:raw_ruby')] }),
+  ];
+  const cfg = {
+    tier: 'tabla',
+    machines: [{ machine: 't:drill', types: ['gtceu:vein_drilling'] }],
+    world: [{ id: 'w', mode: 'manual', bootstrap: true, items: ['t:drill', 'grindless:vein_sample_redstone_ow', 'grindless:vein_sample_topaz'] }],
+    targets: [],
+    autoTargets: [],
+    autoTargetsFromVeins: [{
+      idPrefix: 'p-', dimensions: ['minecraft:overworld', 'minecraft:the_nether'], requireItem: 'grindless:vein_sample_{id}',
+      target: { kind: 'recipe', type: 'gtceu:vein_drilling', input: 'grindless:vein_sample_{id}' },
+    }],
+  };
+  const dump = mkDump({ recipes, veins, items: ['t:drill', 'gtceu:raw_ruby', 'grindless:vein_sample_redstone_ow', 'grindless:vein_sample_topaz'] });
+  const r = run(dump, cfg);
+  assert.deepEqual(r.out.auto.map((x) => x.target.id), ['p-redstone_vein_ow', 'p-topaz_vein']);
+  assert.equal(r.out.auto[0].target.input, 'grindless:vein_sample_redstone_ow');
+  assert.equal(r.out.auto[0].verdict, 'PASS');
+  // la de la veta del Nether no tiene receta: FAIL; la del otro mod ni siquiera es un objetivo
+  assert.equal(r.out.auto[1].verdict, 'FAIL');
+  assert.deepEqual(r.model.stats.veinsWithoutItem, ['gtnn:apatite_vein_tf']);
+  assert.match(r.text, /vetas del registro sin objeto de la tabla de la perforadora \(otros mods; no se comprueban\): gtnn:apatite_vein_tf/);
+});
+
 // ---------------------------------------------------------------- motivo del bloqueo de un yacimiento
 
 test('un yacimiento que no admite la dimensión es la raíz que falta aunque otra receta lejana produzca el fluido', () => {

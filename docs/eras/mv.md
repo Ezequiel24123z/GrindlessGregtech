@@ -153,5 +153,8 @@ Créditos a anotar en `CREDITS.md`: planta de mineral (idea de GTMoreOreProcessi
 
 Se aprueban las seis propuestas, con estas precisiones:
 
+- **EBF en MV:** el Kanthal y el inoxidable piden 480 EU/t en el EBF, así que el EBF de MV lleva **dos escotillas MV** (suben un tier, como las dos LV llevaban al aluminio). Hay que decirlo en la ruta y en las misiones.
+- **Mantenimiento:** desactivado en todo el pack (ver `DECISIONS.md`). Los multibloques de GTM no piden escotilla de mantenimiento.
+
 - **Aceite en Llano y Vacío.** Si los yacimientos por datos de GTM no funcionan en dimensiones propias, se usa una muestra de yacimiento con nuestra perforadora (misma familia que las vetas). No se mete una perforadora de fluidos nueva.
 - **Productive Bees en MV.** Los panales solo dan materiales a través de máquinas GT (centrífuga y mezclador). Ninguna abeja da menas, lingotes ni polvos directamente. Es una segunda forma de automatizar, no un atajo.

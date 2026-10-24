@@ -58,6 +58,63 @@ function Get-GGFailureHint {
     return ($bits -join '; ')
 }
 
+# ---- post-boot settle -----------------------------------------------------------------------------------------------
+# Some mods (Additional Placements) reload the datapacks a few seconds after "Done"; that re-runs the KubeJS server
+# scripts and wipes whatever a test started right away. The settle stage reads the log after "Done" with these helpers:
+#   start of a reload  : "Reloading!" (vanilla /reload message), any line saying "reloading" (e.g. "reloading datapacks")
+#                        or KubeJS re-running its server scripts / recipe event (also true for a silent reload)
+#   end of a reload    : KubeJS "Server resource reload complete!" / "Reloaded with no KubeJS errors!"
+#   reload activity    : the lines a reload prints while it works (recipes, tags, advancements)
+
+function New-GGSettleState {
+    return @{ AfterDone = $false; Open = $false; Reloads = 0; LastAct = $null; Events = (New-Object System.Collections.ArrayList) }
+}
+
+# Feeds one log line, seen T seconds into the settle, to the state. Returns a message when a reload starts or ends.
+function Add-GGSettleLine {
+    param($S, [string]$Line, [double]$T)
+    if (-not $S.AfterDone) {
+        if ($Line -match 'Done \([\d.,]+s\)! For help, type "help"') { $S.AfterDone = $true }
+        return ''
+    }
+    $show = $Line
+    if ($show.Length -gt 160) { $show = $show.Substring(0, 160) }
+    if ($Line -match '(?i)resource reload complete|\breloaded\b') {
+        $msg = ''
+        if ($S.Open) { $msg = ('reload finished +{0:N1}s' -f $T) }
+        $S.Open = $false
+        $S.LastAct = $T
+        [void]$S.Events.Add(('+{0:N1}s end   {1}' -f $T, $show))
+        return $msg
+    }
+    if ($Line -match '(?i)\breloading\b|Loaded \d+/\d+ KubeJS server scripts|Initializing recipe event') {
+        # KubeJS reloads its server scripts first on EVERY reload, even a silent one that logs no "Reloading!" line
+        $msg = ''
+        if (-not $S.Open) { $S.Reloads++; $msg = ('datapack reload detected +{0:N1}s: {1}' -f $T, $show) }
+        $S.Open = $true
+        $S.LastAct = $T
+        [void]$S.Events.Add(('+{0:N1}s start {1}' -f $T, $show))
+        return $msg
+    }
+    if ($Line -match '(?i)Processing recipes|Posted recipe events|Clearing KubeJS recipe lists|Loaded \d+ advancements|Found \d+ recipes|Added \d+ recipes|\] Found \d+ tags') {
+        $S.LastAct = $T
+    }
+    return ''
+}
+
+# '' = keep waiting; otherwise 'quiet' (settled), 'noend' (reload announced, never reported complete) or 'cap'.
+function Get-GGSettleVerdict {
+    param($S, [double]$T, [double]$MinSec, [double]$QuietSec, [double]$GraceSec, [double]$CapSec)
+    $quiet = $T
+    if ($null -ne $S.LastAct) { $quiet = $T - $S.LastAct }
+    if ($T -ge $MinSec) {
+        if (-not $S.Open -and $quiet -ge $QuietSec) { return 'quiet' }
+        if ($S.Open -and $quiet -ge $GraceSec) { return 'noend' }
+    }
+    if ($T -gt $CapSec) { return 'cap' }
+    return ''
+}
+
 function Invoke-GGServerSuite {
     param($Req, [string]$PackToml, $PackInfo, [string]$PackKey)
 
@@ -88,8 +145,11 @@ function Invoke-GGServerSuite {
         if ($ok) {
             $ok = Invoke-GGStage 'sync-server' {
                 $how = Ensure-GGInstaller
-                $sync = Sync-GGPack 'server' $PackToml $PackKey $res
-                Copy-GGTree $sync $inst @() @('packwiz.json')
+                # the sync dir is shared by every run of this pack: one run at a time may update it and copy from it
+                Invoke-GGExclusive "sync-$PackKey-server" {
+                    $sync = Sync-GGPack 'server' $PackToml $PackKey $res
+                    Copy-GGTree $sync $inst @() @('packwiz.json')
+                }
                 $n = @(Get-ChildItem (Join-Path $inst 'mods') -Filter *.jar -File -ErrorAction SilentlyContinue).Count
                 $mb = Get-GGDirSizeMB (Join-Path $inst 'mods')
                 Set-GGStage 'PASS' ("{0} mod jars, {1} MB (installer {2})" -f $n, $mb, $how)
@@ -101,8 +161,8 @@ function Invoke-GGServerSuite {
                 $rel = @(Add-GGOverlay $overlay $inst)
                 [IO.File]::WriteAllLines((Join-Path $res 'overlay-files.txt'), [string[]]$rel)
                 foreach ($w in @('world', 'world_nether', 'world_the_end')) { Remove-GGTree (Join-Path $inst $w) }
-                $ctx.Port = Get-GGFreePort 25565
-                $ctx.RconPort = Get-GGFreePort 25575
+                $ctx.Port = Get-GGSlotPort 'server'
+                $ctx.RconPort = Get-GGSlotPort 'rcon'
                 $ctx.RconPw = ([guid]::NewGuid().ToString('N')).Substring(0, 20)
                 Set-Content -LiteralPath (Join-Path $inst 'eula.txt') -Value 'eula=true' -Encoding ASCII
                 Write-GGServerProperties (Join-Path $inst 'server.properties') $Req $ctx.Port $ctx.RconPort $ctx.RconPw
@@ -117,9 +177,11 @@ function Invoke-GGServerSuite {
             $freeGb = [math]::Round($os.FreePhysicalMemory / 1MB, 1)
             if ($freeGb -lt 9) { Write-GGLog "low free RAM: $freeGb GB (server uses up to $($Req.serverXmx))" 'WARN' }
             $ok = Invoke-GGStage 'boot' {
-                $argLine = "@user_jvm_args.txt @libraries/net/minecraftforge/forge/$($ctx.ForgeVer)/win_args.txt nogui"
+                # -Dgg.run names the run in the JVM's command line (the other arguments are relative), so JVMs of a dead run can be told apart from the other slot's
+                $argLine = "-Dgg.run=$($global:GG.RunId) @user_jvm_args.txt @libraries/net/minecraftforge/forge/$($ctx.ForgeVer)/win_args.txt nogui"
                 $g = [GGProc]::Start($ctx.Java, $argLine, $inst, (Join-Path $res 'server-stdout.log'), (Join-Path $res 'server-stderr.log'), $null)
                 $ctx.Proc = $g
+                Set-GGSlotState $null $true
                 Write-GGLog "server JVM started (pid $($g.Id)), free RAM $freeGb GB"
                 $tail = New-Object GGTail (Join-Path $inst 'logs\latest.log')
                 $doneRx = [regex]'Done \(([\d.,]+)s\)! For help, type "help"'
@@ -154,6 +216,49 @@ function Invoke-GGServerSuite {
                 }
                 Set-GGStage 'PASS' ("Done in {0}s (wall {1}s)" -f $bootSecs, [int]$sw.Elapsed.TotalSeconds)
                 $ctx.Booted = $true
+            }
+        }
+
+        if ($ok) {
+            # Mods such as Additional Placements reload the datapacks a few seconds after "Done". That re-runs the KubeJS
+            # server scripts and wipes anything a test started right away, so commands only run once the server is idle.
+            $ok = Invoke-GGStage 'settle' {
+                $minSettle = 15
+                if ($null -ne $Req.settleSec) { $minSettle = [int]$Req.settleSec }
+                if ($minSettle -le 0) { Set-GGStage 'SKIP' 'disabled (-SettleSec 0)'; return }
+                $quietSec = 4      # no reload activity for this long ...
+                $graceSec = 30     # ... or, if a reload was announced but never reported complete, this long
+                $capSec = $minSettle + 240
+                $tail = New-Object GGTail (Join-Path $inst 'logs\latest.log')
+                $state = New-GGSettleState
+                $verdict = ''
+                $sw = [Diagnostics.Stopwatch]::StartNew()
+                while ($true) {
+                    $exited = $ctx.Proc.HasExited
+                    foreach ($l in $tail.ReadNew()) {
+                        $msg = Add-GGSettleLine $state $l $sw.Elapsed.TotalSeconds
+                        if ($msg) { Write-GGLog "  $msg" }
+                    }
+                    if ($exited) {
+                        $hint = Get-GGFailureHint $res $inst
+                        throw ("server exited during the post-boot settle (code {0}). {1}" -f $ctx.Proc.ExitCode, $hint)
+                    }
+                    $verdict = Get-GGSettleVerdict $state $sw.Elapsed.TotalSeconds $minSettle $quietSec $graceSec $capSec
+                    if ($verdict) { break }
+                    Update-GGLock
+                    Start-Sleep -Milliseconds 500
+                }
+                $secs = $sw.Elapsed.TotalSeconds
+                [IO.File]::WriteAllLines((Join-Path $res 'settle.txt'), [string[]]@($state.Events.ToArray()))
+                $what = 'no datapack reload seen'
+                if ($state.Reloads -gt 0) { $what = "{0} datapack reload(s) seen, last activity +{1:N1}s" -f $state.Reloads, $state.LastAct }
+                if ($verdict -eq 'cap') {
+                    Set-GGStage 'WARN' ("gave up after {0:N1}s: a datapack reload was still running; commands may be wiped by it" -f $secs)
+                } else {
+                    $note = ''
+                    if ($verdict -eq 'noend') { $note = "; a 'Reloading' line was never followed by a completion line" }
+                    Set-GGStage 'PASS' ("settled {0:N1}s after Done ({1}{2})" -f $secs, $what, $note)
+                }
             }
         }
 
@@ -285,6 +390,7 @@ function Invoke-GGServerSuite {
                         }
                     }
                     $g.CloseLogs()
+                    Set-GGSlotState $null $false
                 })
             # KubeJS script errors only exist in its own logs (`/kubejs errors server` needs a player, RCON has none).
             [void](Invoke-GGStage 'kubejs-errors' { Invoke-GGKubeJsCheck $inst $res })

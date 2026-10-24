@@ -6,9 +6,9 @@
 //   gtceu:submerged_arc_furnace    3x5x3 heat-proof furnace with a muffler chimney, runs the new gtceu:arc_smelting
 //
 // The two shared types are WIDENED here (they were registered by the steam scripts with no fluid inputs and 2 item inputs):
-// vein_drilling gets 1 fluid input (drilling fluid), greenhouse gets 3 item inputs (catalyst + fertilizer + circuit) and 1
-// fluid input (water). The steam recipes are untouched. Widening is just GTRecipeType#setMaxIOSize on the registered type;
-// the recipe viewer UI is built lazily, so it sees the new sizes.
+// vein_drilling gets 1 fluid input (drilling fluid), greenhouse gets 3 item inputs (catalyst + fertilizer + circuit), 2 fluid
+// inputs (water + the CO2 of the MV greenhouse) and 1 fluid output (its O2). The steam recipes are untouched. Widening is just
+// GTRecipeType#setMaxIOSize on the registered type; the recipe viewer UI is built lazily, so it sees the new sizes.
 //
 // Electric multiblocks in GTM 7.5.3 do NOT speed up 8 EU/t recipes: the overclock logic treats ULV like LV, so a plain
 // LV multiblock would run the steam drill recipes slower than the steam drill (which runs 4 at once). The drill and the
@@ -17,6 +17,9 @@
 // overclock do the rest. It also makes the "better" recipe win when two recipes fit the inputs (GTM's lookup returns
 // whichever it meets first): a base recipe waits while drilling fluid is in the hatch (drill) or while a circuit
 // of 2 or more is in a bus (greenhouse), so the fluid / fertilizer variant is the one that runs.
+// `bores(veto, cap)` is shared as global.grindless.lv.bores (with the recipe-name rules in global.grindless.lv.rules) for the
+// MV machines (cap 16, startup_scripts/grindless/mv/) and the ore plant (cap 6). The LV machines skip the recipes under
+// <type>/mv/ (the vanadium steel bit and the CO2 variants are the MV machines' own).
 //
 // Lookup note (GTM's RecipeDB): a recipe whose ingredient list is a prefix of another recipe's list makes one of the two
 // disappear. The generated LV recipes therefore list the ingredient that the steam recipe does NOT start with first
@@ -145,18 +148,28 @@
     return LC
   }
 
-  // recipes generated for the LV machines live under <type>/lv/..., the steam ones directly under <type>/
+  // recipes generated for the LV machines live under <type>/lv/..., the MV ones under <type>/mv/, the steam ones directly under
+  // <type>/
   function recipePath(recipe) {
     return String(recipe.id.getPath())
   }
 
-  function isLvRecipe(recipe) {
-    return recipePath(recipe).indexOf('/lv/') >= 0
+  function isMvRecipe(recipe) {
+    return recipePath(recipe).indexOf('/mv/') >= 0
   }
 
+  // drilling recipes that use drilling fluid (LV and MV): .../<vein>_<bit>_fluid
+  function isFluidRecipe(recipe) {
+    return /_fluid$/.test(recipePath(recipe))
+  }
+
+  // greenhouse fertilizer variants: LV .../lv/<crop>_fertilizer, MV .../mv/<crop>_fertilizer_co2
   function isFertilizerRecipe(recipe) {
-    var path = recipePath(recipe)
-    return path.indexOf('/lv/') >= 0 && /_fertilizer$/.test(path)
+    return /\/(lv|mv)\/.+_fertilizer(_co2)?$/.test(recipePath(recipe))
+  }
+
+  function isCo2Recipe(recipe) {
+    return /\/mv\/.+_co2$/.test(recipePath(recipe))
   }
 
   function machineHasFluid(machine, fluidId) {
@@ -190,20 +203,24 @@
     return best
   }
 
+  // the LV machines do not take the MV recipes (vanadium bit, CO2 variants)
   function drillVeto(machine, recipe) {
-    return !isLvRecipe(recipe) && machineHasFluid(machine, 'gtceu:drilling_fluid')
+    return isMvRecipe(recipe) || (!isFluidRecipe(recipe) && machineHasFluid(machine, 'gtceu:drilling_fluid'))
   }
 
   function greenhouseVeto(machine, recipe) {
-    return !isFertilizerRecipe(recipe) && machineCircuit(machine) >= 2
+    return isMvRecipe(recipe) || (!isFertilizerRecipe(recipe) && machineCircuit(machine) >= 2)
   }
 
-  function bores(veto) {
+  // Runs as many copies of the recipe as the energy hatches allow (hatch voltage / EU per run), at most `cap` (8 by default;
+  // the MV machines pass 16, the ore plant 6), and then GTM's own overclock. `veto(machine, recipe)` = true skips a recipe.
+  function bores(veto, cap) {
+    var limit = cap || MAX_PARALLELS
     return function (machine, recipe) {
       try {
-        if (veto(machine, recipe)) return ModifierFunction.NULL
+        if (veto && veto(machine, recipe)) return ModifierFunction.NULL
         var c = lazy()
-        var runs = c.ParallelLogic.getParallelAmount(machine, recipe, MAX_PARALLELS)
+        var runs = c.ParallelLogic.getParallelAmount(machine, recipe, limit)
         if (runs < 1) return ModifierFunction.NULL
         var parallel = ModifierFunction.IDENTITY
         var scaled = recipe
@@ -222,6 +239,20 @@
         return ModifierFunction.IDENTITY
       }
     }
+  }
+
+  // shared with the MV machines (startup_scripts/grindless/mv/*.js read it inside their registry callbacks, which run after
+  // every startup script has been evaluated)
+  var shared = global.grindless.lv || (global.grindless.lv = {})
+  shared.bores = bores
+  shared.rules = {
+    recipePath: recipePath,
+    isMvRecipe: isMvRecipe,
+    isFluidRecipe: isFluidRecipe,
+    isFertilizerRecipe: isFertilizerRecipe,
+    isCo2Recipe: isCo2Recipe,
+    machineHasFluid: machineHasFluid,
+    machineCircuit: machineCircuit
   }
 
   // ---------------------------------------------------------------- recipe types
@@ -248,7 +279,8 @@
   GTCEuStartupEvents.registry('gtceu:machine', function (event) {
     // 10 item outputs: stone + up to 4 ores, each as a whole amount plus a chanced remainder (the 1.5x yields need more entries)
     widen('vein_drilling', 2, 10, 1, 0)
-    widen('greenhouse', 3, 6, 1, 0)
+    // greenhouse: 2 fluid inputs (water + the CO2 of the MV greenhouse) and 1 fluid output (its O2)
+    widen('greenhouse', 3, 6, 2, 1)
 
     Pat.register(DRILL, DRILL_SPEC)
     Pat.register(GREENHOUSE, GREENHOUSE_SPEC)

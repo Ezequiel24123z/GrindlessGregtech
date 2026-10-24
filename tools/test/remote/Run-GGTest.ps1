@@ -56,12 +56,26 @@ try {
 
         $ok = Invoke-GGStage 'lock' {
             $t0 = Get-Date
-            Enter-GGLock ([int]$req.lockWaitMin)
+            # how many JVMs may run at once (-Slots), the RAM needed to share the PC, and what this run will need
+            $slots = 2
+            if ($req.slots) { $slots = [int]$req.slots }
+            $minFree = 9.0
+            if ($null -ne $req.slotMinFreeGb) { $minFree = [double]$req.slotMinFreeGb }
+            $reserve = 0.0
+            $suiteName = [string]$req.suite
+            if ($suiteName -eq 'server' -or $suiteName -eq 'both') { $reserve = [math]::Max($reserve, 0.75 * (ConvertTo-GGGb ([string]$req.serverXmx) 7)) }
+            if ($suiteName -eq 'client' -or $suiteName -eq 'both') { $reserve = [math]::Max($reserve, 6.5) }
+            Enter-GGLock ([int]$req.lockWaitMin) $slots $minFree $reserve
             $killed = Stop-GGOrphans
             $freeGb = [math]::Round((Get-PSDrive D).Free / 1GB, 1)
             if ($freeGb -lt 10) { throw "only $freeGb GB free on D:" }
             $waited = [int]((Get-Date) - $t0).TotalSeconds
-            Set-GGStage 'PASS' ("acquired after {0}s; orphans killed {1}; D: free {2} GB" -f $waited, $killed, $freeGb)
+            $share = 'alone on the PC'
+            if (@($global:GG.SlotOthers).Count -gt 0) {
+                $share = 'sharing the PC with ' + (@($global:GG.SlotOthers) -join ', ')
+                if ($null -ne $global:GG.SlotFree) { $share += (' ({0} GB RAM available at acquire)' -f $global:GG.SlotFree) }
+            }
+            Set-GGStage 'PASS' ("acquired slot {0} (of {1}) after {2}s, {3}; orphans killed {4}; D: free {5} GB" -f $global:GG.Slot, $slots, $waited, $share, $killed, $freeGb)
         }
     }
 
@@ -73,6 +87,8 @@ try {
         if ($suite -eq 'client' -or $suite -eq 'both') {
             Invoke-GGClientSuite $req $packToml $packInfo $packKey
         }
+        # no JVM of this run is going to start any more: the other slot need not keep RAM free for it
+        Set-GGSlotState 0 $false
     }
 } catch {
     Add-GGStage 'harness' 'FAIL' 0 ($_.Exception.Message + ' @ ' + $_.InvocationInfo.PositionMessage)
@@ -102,6 +118,8 @@ try {
     } catch {
         Write-GGLog ("failed to build results zip: {0}" -f $_.Exception.Message) 'ERROR'
     }
+    # anything of THIS run still alive (never the other slot's JVM), then free the slot
+    try { [void](Stop-GGRunProcesses $RunId) } catch {}
     Exit-GGLock
     try { Remove-GGOldRuns 3 } catch {}
     [Console]::Out.WriteLine("GGRESULT|$RunId|$overall")

@@ -1,0 +1,14 @@
+name = "GT Community Additions"
+filename = "gtca-1.20.1-2.2.0.jar"
+side = "both"
+pin = true
+
+[download]
+url = "https://cdn.modrinth.com/data/jIPykDYO/versions/gYFIyWvD/gtca-1.20.1-2.2.0.jar"
+hash-format = "sha512"
+hash = "829c7981a31c35d395ecbd02d8bfd366df8ff6ccdea030076d1f57909119e52751fd38be110ab7f8c6c59a5b1e3f114fb4b1777d0d34a95743f82a750234ccc9"
+
+[update]
+[update.modrinth]
+mod-id = "jIPykDYO"
+version = "gYFIyWvD"

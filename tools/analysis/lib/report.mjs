@@ -210,6 +210,17 @@ export function renderText(model, res, out, opts = {}) {
   if (model.stats.configRead && model.stats.configRead.length > 0) {
     L.push(`  - config de GTM leída del volcado: ${model.stats.configRead.map((c) => `${c.key}=${c.value}`).join(', ')}`);
   }
+  if (model.stats.partsNotRequired.length > 0) {
+    const byWhy = new Map();
+    for (const p of model.stats.partsNotRequired) {
+      const k = `${p.part} (${p.why})`;
+      byWhy.set(k, [...(byWhy.get(k) || []), p.machine]);
+    }
+    for (const [k, machines] of byWhy) L.push(`  - pieza que la config de GTM no exige: ${k} en ${machines.join(', ')}`);
+  }
+  if (model.stats.veinsWithoutItem.length > 0) {
+    L.push(`  - vetas del registro sin objeto de la tabla de la perforadora (otros mods; no se comprueban): ${model.stats.veinsWithoutItem.join(', ')}`);
+  }
   L.push('  - análisis cualitativo: ignora cantidades, tiempos y rendimientos; las salidas con probabilidad cuentan como producidas.');
   L.push('');
   const parts = [];
@@ -231,7 +242,8 @@ export function toJson(model, res, out) {
     stats: {
       rules: g.rules.length, recipes: model.stats.recipes, deadByType: model.stats.deadByType, ignoredByType: model.stats.ignoredByType,
       structureMachines: model.stats.structureMachineIds, rolledMachines: model.stats.rolledMachines,
-      fluidVeins: model.stats.fluidVeins, configRead: model.stats.configRead,
+      fluidVeins: model.stats.fluidVeins, configRead: model.stats.configRead, veinsWithoutItem: model.stats.veinsWithoutItem,
+      partsNotRequired: model.stats.partsNotRequired,
     },
   };
 }
