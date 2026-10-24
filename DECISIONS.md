@@ -70,3 +70,4 @@ Una línea por decisión. La más reciente, abajo.
   - A: le damos una fuente (la perlita, del Nether en LV, cuya electrólisis automatiza el polvo de obsidiana).
   - B: su era aún no existe; se oculta en EMI hasta que llega (tabla `hidden_until.json` y una constante "implementado hasta"). La mayoría depende del naquadah de IV.
   - C: basura de mods que nunca se podrá conseguir; se oculta y salen sus recetas, pero los ids siguen registrados.
+- 2026-10-24 · GCYR se queda en 0.2.9 (la versión de desarrollo no arregla nada). El vuelo Tierra–Luna–Tierra funciona con jugador real. El fallo del escáner (#122: torre que crece después de formarse y plataforma asimétrica) y el cohete que quema a su piloto se arreglan con scripts propios en `space/`. El cuelgue al teletransportar (#91) no se reproduce.
