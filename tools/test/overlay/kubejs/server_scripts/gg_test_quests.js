@@ -61,12 +61,12 @@ function dumpToolbox() {
 var GG_QUESTS_EXPECTED = {
   storage: [21, 20],
   applied_energistics: [40, 40],
-  productive_bees: [12, 13],
+  productive_bees: [12, 14],
   travel_and_teams: [16, 15],
   workshop: [15, 14],
   welcome: [16, 15],
-  steam_age: [41, 47],
-  lv_age: [40, 46],
+  steam_age: [45, 51],
+  lv_age: [50, 51],
   mv_age: [41, 49],
   hv_age: [35, 45],
   ev_age: [12, 14]
