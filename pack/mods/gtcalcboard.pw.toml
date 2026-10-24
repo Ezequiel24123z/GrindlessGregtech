@@ -1,0 +1,14 @@
+name = "GregTech Calculator Board"
+filename = "gtcalcboard-1.20.1-2.4.3.jar"
+side = "client"
+pin = true
+
+[download]
+url = "https://cdn.modrinth.com/data/beYVVxDr/versions/NCeLT0JT/gtcalcboard-1.20.1-2.4.3.jar"
+hash-format = "sha512"
+hash = "0b1b8533b250c489af40f58ab687bc0d5598238aa14c9ff5da6f61152ede9870ec1d625131bfea1797914994d4865075eaea9108361d3738ed988537f38c0b57"
+
+[update]
+[update.modrinth]
+mod-id = "beYVVxDr"
+version = "NCeLT0JT"

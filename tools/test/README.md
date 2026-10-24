@@ -13,7 +13,7 @@ powershell -NoProfile -ExecutionPolicy Bypass -File tools\test\Invoke-GGTest.ps1
 |---|---|---|
 | `server` | Forge dedicado (mundo normal, semilla fija), arranca hasta `Done`, ejecuta `-Commands` por RCON, espera los `-WaitForLog`, para con `stop`. | Arranca, los comandos responden, los marcadores aparecen, parada limpia. |
 | `client` | HeadlessMC + mc-runtime-test: crea un mundo en un jugador y sale. El cliente es el **real** del pack (Embeddium, ImmediatelyFast, …) con OpenGL por software (ver "Cliente sin GPU"). | Salida 0, `Successfully finished.`, sin crash report. |
-| `both` | Servidor y luego cliente (una sola reserva del PC). | Los dos. |
+| `both` | Servidor y luego cliente (un solo slot del PC). | Los dos. |
 
 Parámetros útiles (todos opcionales):
 
@@ -21,6 +21,8 @@ Parámetros útiles (todos opcionales):
 - `-WaitForLog 'regex1;;regex2@@90'` expresiones que deben aparecer en `logs\kubejs\server.log` o `latest.log` (el `@@90` fija su plazo en segundos; por defecto `-WaitTimeoutSec 180`).
 - `-Flat` mundo plano; `-Seed`; `-ServerXms/-ServerXmx` (4G/7G); `-ServerProp 'difficulty=peaceful'`.
 - `-BootTimeoutSec` (900), `-ClientTimeoutSec` (1800), `-CommandTimeoutSec` (300), `-LockWaitMin` (120).
+- `-SettleSec` (15): tras `Done`, el servidor espera este mínimo antes de RCON/`-Commands`, y más mientras haya una recarga de datapacks en curso (p. ej. la que dispara Additional Placements ~2 s después de `Done` y que reinicia los scripts de KubeJS). Etapa propia `settle` (`results\server\settle.txt` lista lo detectado); `0` la desactiva. Si una recarga empieza más tarde que el mínimo, súbelo.
+- `-Slots` (2): cuántas JVM de Minecraft pueden correr a la vez en el PC; `-Slots 1` = una sola, como antes. `-SlotMinFreeGb` (9): RAM disponible necesaria para compartir el PC (ver "El PC de casa").
 - `-ClientRenderer mesa|stub` (por defecto `mesa`) y `-ClientExclude 'regex;;regex'` (solo útil con `stub`; ver abajo).
 - `-Strict` también falla con etapas WARN, líneas ERROR no permitidas o errores de KubeJS.
 - `-SkipRefresh` (solo si el índice ya está fresco: el banco lo comprueba antes de subir y avisa si no), `-PackDir`, `-OverlayDir`, `-OutDir`, `-ShowWarnings`.
@@ -45,7 +47,7 @@ El PC de casa se maneja por SSH (sesión 0 de Windows: sin monitor ni escritorio
 Sale por consola y se guarda en `-OutDir` (por defecto `…\files\test-runs\<fecha>-<suite>\`):
 
 - `summary.txt` / `summary.json`: etapas con estado y duración, líneas `GGTEST|`, crash reports (con la causa), errores de KubeJS, líneas `ERROR` que no están en `log-allowlist.txt`.
-- `results\server\` y `results\client\`: `logs\latest.log`, `debug.log`, `logs\kubejs\*.log`, `crash-reports\`, `hs_err\`, `kubejs-exported\` (lo que un test escriba en `kubejs/exported/`), `mods.txt`, `rcon.log`; en el cliente también `client-hmc-stdout.log` y, si se cuelga, `hang-jstack.txt`/`hang-jcmd.txt`. Ojo: HeadlessMC mata el juego en cuanto aparece un crash report, así que puede salir vacío (la causa se saca entonces del log).
+- `results\server\` y `results\client\`: `logs\latest.log`, `debug.log`, `logs\kubejs\*.log`, `crash-reports\`, `hs_err\`, `kubejs-exported\` (lo que un test escriba en `kubejs/exported/`), `mods.txt`, `rcon.log`, `settle.txt` (servidor); en el cliente también `client-hmc-stdout.log` y, si se cuelga, `hang-jstack.txt`/`hang-jcmd.txt`. Ojo: HeadlessMC mata el juego en cuanto aparece un crash report, así que puede salir vacío (la causa se saca entonces del log).
 - Código de salida: `0` PASS, `1` FAIL, `2` fallo del propio banco (sin resultados).
 
 FAIL si falla una etapa, hay crash report o alguna línea `GGTEST|…|FAIL`. Las etapas `WARN` (errores de KubeJS, parada forzada) no fallan salvo con `-Strict`.
@@ -67,10 +69,11 @@ Truco de KubeJS 6.5 (Rhino) observado aquí: dentro de manejadores de eventos, `
 ## El PC de casa
 
 - Solo se escribe en `D:\GregtechGrindless` (`tools`, `cache`, `sync`, `hmc`, `incoming`, `runs`). Nunca en PrismLauncher, `D:\Grindless` ni `.minecraft`.
-- **Una sola JVM a la vez**: `runs\.lock` guarda PID y hora (latido cada 30 s; caduca a los 60 min o si el PID ya no existe). Quien espera hace cola (FIFO) y consulta cada 15 s. Al coger el candado se matan JVM huérfanas de esas carpetas. Cualquier experimento a mano que use una JVM debe coger el mismo candado y llevar un plazo corto.
+- **Como máximo 2 JVM a la vez** (`-Slots`): cada ejecución coge un *slot*, un fichero `runs\.lock` (slot 0, el candado de siempre) o `runs\.lock.1`, `.lock.2`… con PID y hora (latido cada 30 s; caduca a los 60 min o si el PID ya no existe). Quien espera hace cola (FIFO) y consulta cada 15 s. Reglas: (1) hay un máximo de min(`-Slots` propio, `-Slots` de cada ejecución activa), y una ejecución de una versión antigua del banco cuenta como exclusiva; (2) para solapar con otra ejecución hace falta RAM **disponible** (la "Disponible" de Windows: libre + caché reutilizable; la lista de libres sola ronda 7 GB incluso en reposo) >= `-SlotMinFreeGb` (9 GB) **menos** lo que las ejecuciones que aún están arrancando su JVM todavía van a reservar (servidor 0,75·Xmx, cliente 6,5 GB; se descuenta durante 40 s tras arrancar la JVM, medido al coger el slot y repetido cada 15 s mientras se espera); (3) cada slot tiene su ventana de puertos (slot 0: servidor 25565 / RCON 25575; slot 1: 25585 / 25595; …), así que dos ejecuciones nunca comparten puerto.
+- **Huérfanos**: solo se matan JVM de ejecuciones cuyo slot está caducado (el servidor lleva `-Dgg.run=<id>` en su línea de comandos; el cliente y packwiz-installer llevan `runs\<id>\`). Nunca la JVM de otro slot activo ni procesos ajenos (PrismLauncher, `D:\Grindless`). Los recursos compartidos (descargas de `tools\`, instalación de Forge, el directorio `sync\<pack>-<lado>` y su copia) se protegen con un mutex del sistema; el cliente del slot N>0 usa su propio `hmc\slotN\` (config y `.minecraft` de HeadlessMC; la primera vez instala Forge de nuevo). Cualquier experimento a mano que use una JVM debe coger un slot y llevar un plazo corto.
 - Cachés: Forge por versión (`cache\forge-server`), mods por pack y lado (`sync\`, los descarga packwiz-installer una vez), cliente de HeadlessMC (`hmc\`), Mesa y su JDK privado (`tools\mesa`, `tools\jdk17-mesa`). Cada ejecución copia lo sincronizado a `runs\<id>\`; se conservan las 3 últimas.
 - Un mod de CurseForge sin distribución hace fallar `sync-*`: deja su jar en `D:\GregtechGrindless\cache\manual-mods\`.
-- Los scripts remotos (`tools/test/remote/*.ps1`) se copian en cada ejecución a `tools\remote\<hash>\`.
+- Los scripts remotos (`tools/test/remote/*.ps1`) se copian a `tools\remote\<hash>\` solo si faltan: se suben a una carpeta temporal y se renombra, así la carpeta final siempre está completa aunque varias ejecuciones suban a la vez.
 
 ## Archivos
 

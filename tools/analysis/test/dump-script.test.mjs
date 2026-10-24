@@ -283,6 +283,13 @@ test('gg_dump.js: un java.lang.Boolean de Rhino (objeto, no boolean) se escribe 
   assert.strictEqual(values['worldgen.oreVeins.infiniteBedrockOresFluids'], true);
   assert.strictEqual(values['machines.doBedrockOres'], false);
   assert.strictEqual(values['compat.energy.enableFEConverters'], false);
+
+  // con JsonParser disponible (servidor real) los booleanos se escriben como primitivo Boolean de Gson y no como String
+  const real = runScript(undefined, { ...classes, 'com.google.gson.JsonParser': { parseString: (s) => ({ parsedBoolean: s === 'true' }) } });
+  real.handlers.recipes({ originalRecipes: { values: () => [stick] }, addedRecipes: [] });
+  real.handlers['cmd:gg_dump']();
+  const parsed = real.written['kubejs/exported/config.json'].gtceu['machines.doBedrockOres'];
+  assert.deepEqual(parsed, { parsedBoolean: false });
 });
 
 test('gg_dump.js: sin las clases de GTM los yacimientos de fluidos y la config no se escriben y el volcado sigue valiendo', () => {

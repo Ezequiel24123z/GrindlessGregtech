@@ -87,7 +87,8 @@
       "needs": ["eu:lv"],
       "parts": [
         "gtceu:heatproof_machine_casing", "gtceu:cupronickel_coil_block", "gtceu:lv_energy_input_hatch", "gtceu:lv_input_bus",
-        "gtceu:lv_output_bus", "gtceu:lv_muffler_hatch", "gtceu:maintenance_hatch"
+        "gtceu:lv_output_bus", "gtceu:lv_muffler_hatch",
+        { "anyOf": ["gtceu:maintenance_hatch"], "onlyIf": { "config": "machines.enableMaintenance", "equals": true } }
       ],
       "note": "EBF de GTM: su patrón admite 1 o 2 escotillas de energía (autoAbilities); con 2 escotillas LV el multibloque cuenta como MV (128 V), sin ningún componente MV: es la vía canónica al aluminio. Con bobinas de cuproníquel (1800 K, receta de ensamblador a 30 EU/t) corre las recetas de hasta 128 V y 1800 K: aluminio (1700 K), acero, etc.; el silicio (2273 K) y los kanthal (ensamblador a 120 EU/t) no. Para tratarlo como solo LV, poner hatches 1."
     },
@@ -236,12 +237,14 @@
       "idPrefix": "auto-perforacion-nether-",
       "labelPrefix": "Perforadora LV con lodo: receta de la veta del Nether",
       "dimensions": ["minecraft:the_nether"],
+      "requireItem": "grindless:vein_sample_{id}",
       "target": { "kind": "recipe", "type": "gtceu:vein_drilling", "input": ["grindless:vein_sample_{id}", "fluid:gtceu:drilling_fluid"] }
     },
     {
       "idPrefix": "auto-mena-nether-",
       "labelPrefix": "Menas exclusivas de la veta del Nether",
       "dimensions": ["minecraft:the_nether"],
+      "requireItem": "grindless:vein_sample_{id}",
       "exclusiveFrom": ["minecraft:overworld"],
       "template": "gtceu:raw_{m}",
       "overrides": { "iron": "minecraft:raw_iron", "copper": "minecraft:raw_copper", "gold": "minecraft:raw_gold" },

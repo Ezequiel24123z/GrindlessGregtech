@@ -23,6 +23,14 @@
   var STEP = 10
   var FORM_TIMEOUT = 300
 
+  // The pack's Additional Placements mod rebuilds its block tags and reloads the datapacks (so these scripts too) a couple of
+  // seconds after the server is up; a test that is running then is lost and its static checks can see empty tags. The command
+  // therefore only leaves a request in `global` (it survives script reloads) and the tick handler starts the test once these scripts
+  // have been loaded for QUIET_MS.
+  var QUIET_MS = 10000
+  var LOADED_AT = Date.now()
+  var REQUEST = 'ggTestLvMultisRequest'
+
   var PART_BLOCKS = {
     energy_input: 'gtceu:lv_energy_input_hatch',
     input_bus: 'gtceu:lv_input_bus',
@@ -167,11 +175,12 @@
     var missingMachines = machines.filter(function (id) { return !GTRegistries.MACHINES.get(rl(id)) })
     var typesOk = !!drilling && !!greenhouse && !!arc && missingMachines.length === 0
     var widened = !!drilling && !!greenhouse && drilling.getMaxInputs(fc) === 1 && greenhouse.getMaxInputs(ic) === 3 &&
-      greenhouse.getMaxInputs(fc) === 1
+      greenhouse.getMaxInputs(fc) === 2 && greenhouse.getMaxOutputs(fc) === 1
     check(SCOPE, 'recipe_types', typesOk && widened,
       'arc_smelting=' + (arc ? 'registered' : 'missing') + ' machines=' + (missingMachines.length === 0 ? 'registered' : 'missing ' + missingMachines.join(',')) +
       ' vein_drilling fluid in=' + (drilling ? drilling.getMaxInputs(fc) : '?') + ' items out=' + (drilling ? drilling.getMaxOutputs(ic) : '?') +
-      ' greenhouse items in=' + (greenhouse ? greenhouse.getMaxInputs(ic) : '?') + ' fluid in=' + (greenhouse ? greenhouse.getMaxInputs(fc) : '?'))
+      ' greenhouse items in=' + (greenhouse ? greenhouse.getMaxInputs(ic) : '?') + ' fluid in=' + (greenhouse ? greenhouse.getMaxInputs(fc) : '?') +
+      ' fluid out=' + (greenhouse ? greenhouse.getMaxOutputs(fc) : '?'))
 
     var overworld = G.veinTable()
     var steelOnly = overworld.filter(function (v) { return v.steelOnly }).length
@@ -179,8 +188,14 @@
     var wantDrilling = steamDrilling * 2 + nether.length * 2
     var wantGreenhouse = G.greenhouse.entries.length * 2 + LV.greenhouseExtras.length * 2
     var wantArc = 4
-    var haveDrilling = drilling ? rm.getAllRecipesFor(drilling).size() : -1
-    var haveGreenhouse = greenhouse ? rm.getAllRecipesFor(greenhouse).size() : -1
+    // the MV scripts (server_scripts/grindless/mv/) add recipes of the same types under <type>/mv/: not counted here
+    var notMv = function (recipes) {
+      var n = 0
+      asArray(recipes).forEach(function (r) { if (String(r.id).indexOf('/mv/') < 0) n++ })
+      return n
+    }
+    var haveDrilling = drilling ? notMv(rm.getAllRecipesFor(drilling)) : -1
+    var haveGreenhouse = greenhouse ? notMv(rm.getAllRecipesFor(greenhouse)) : -1
     var haveArc = arc ? rm.getAllRecipesFor(arc).size() : -1
     check(SCOPE, 'recipes', haveDrilling === wantDrilling && haveGreenhouse === wantGreenhouse && haveArc === wantArc,
       'vein_drilling=' + haveDrilling + '/' + wantDrilling + ' greenhouse=' + haveGreenhouse + '/' + wantGreenhouse +
@@ -657,6 +672,16 @@
           var n = Object.keys(r.items).length
           return { ok: n === 0, detail: 'no recipe expected: output items=[' + itemSummary(r.items) + '] recipes seen=[' + seenIds(r) + ']' }
         }
+      },
+      {
+        // the vanadium steel bit is the MV drill's: its recipes (grindless:vein_drilling/mv/...) are vetoed here, with and without fluid
+        name: 'mv_bit_gated', ticks: 60,
+        items: [{ id: 'grindless:vein_sample_iron', n: 1 }, { id: 'grindless:vanadium_steel_drill_bit', n: 16 }], circuit: 0,
+        fluid: { id: 'gtceu:drilling_fluid', mb: 8000 },
+        verify: function (r) {
+          var n = Object.keys(r.items).length
+          return { ok: n === 0, detail: 'no recipe expected: output items=[' + itemSummary(r.items) + '] recipes seen=[' + seenIds(r) + ']' }
+        }
       }
     ]
   }
@@ -864,7 +889,7 @@
   ]
 
   function prepareWorld() {
-    for (var cx = 0; cx < 4; cx++) S.level.getChunk(cx, 0)
+    for (var cx = 16; cx < 20; cx++) S.level.getChunk(cx, 0)
     S.server.runCommandSilent('forceload add 256 0 319 15')
     var cleared = S.server.runCommandSilent('fill 256 98 0 319 112 15 air')
     note(SCOPE, 'AREA', 'chunks 16..19,0 generated and force-loaded, changed ' + cleared + ' blocks while clearing')
@@ -1049,6 +1074,18 @@
     step(now - S.tick0)
   }
 
+  function startIfRequested(server) {
+    if (global[REQUEST] !== true || (S !== null && !S.finished)) return
+    if (Date.now() - LOADED_AT < QUIET_MS) return
+    global[REQUEST] = false
+    try {
+      run(server)
+    } catch (e) {
+      check(SCOPE, 'run', false, 'exception: ' + e)
+      finish()
+    }
+  }
+
   function run(server) {
     var now = server.getTickCount()
     S = { server: server, level: server.overworld(), t: 0, tick0: now, nextAt: now + STEP, machines: [], finished: false }
@@ -1066,19 +1103,17 @@
     if (allDone()) finish()
   }
 
-  ServerEvents.tick(function () { onTick() })
+  ServerEvents.tick(function (event) {
+    startIfRequested(event.server)
+    onTick()
+  })
 
   ServerEvents.customCommand('gg_test_lv_multis', function (event) {
     if (S !== null && !S.finished) {
       note(SCOPE, 'run', 'a previous gg_test_lv_multis run is still in progress')
       return 0
     }
-    try {
-      run(event.getLevel().getServer())
-    } catch (e) {
-      check(SCOPE, 'run', false, 'exception: ' + e)
-      finish()
-    }
+    global[REQUEST] = true
     return 1
   })
 })()

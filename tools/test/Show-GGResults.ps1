@@ -222,6 +222,8 @@ if ($req) {
     $fl += "commands=$(@($req.commands).Count)"
     $fl += "waitForLog=$(@($req.waitForLog).Count)"
     if ($req.suite -ne 'server') { $fl += "client renderer=$($req.clientRenderer)" }
+    if ($req.suite -ne 'client' -and $null -ne $req.settleSec) { $fl += "settle=$($req.settleSec)s" }
+    if ($req.slots) { $fl += "slots=$($req.slots)" }
     Emit ('options: ' + ($fl -join ', '))
 }
 Emit "out: $OutDir"

@@ -28,3 +28,8 @@ Una línea por decisión. La más reciente, abajo.
 - 2026-10-24 · Las vetas del Nether solo se perforan en LV con lodo de perforación. Las del End se dejan para HV.
 - 2026-10-24 · Mods añadidos por lotes probados en servidor y cliente: rendimiento, QoL, almacenamiento/logística y decoración (150 en total). Yeetus Experimentus quita el aviso de ajustes experimentales; Carry On no puede coger bloques de GT; Reliable EMI queda fuera (no es compatible con EMI 1.1.22).
 - 2026-10-24 · Cada test de overlay usa su propia franja del Overworld (ver AGENTS.md), porque los tests corren a la vez en el mismo servidor.
+- 2026-10-24 · Mantenimiento de GTM desactivado (`machines.enableMaintenance: false`). Arreglar multibloques a mano de vez en cuando es justo la tarea manual repetida que el pack quita.
+- 2026-10-24 · El petróleo de GTM es infinito (`infiniteBedrockOresFluids`) y también hay yacimientos en el Llano y el Vacío.
+- 2026-10-24 · MV: la planta de mineral hace la cadena completa de GT en una pasada, con la misma energía y los mismos secundarios. Gana pasos, buses y sitio, no rendimiento. La biorrefinería reutiliza la torre de GTM solo para entradas orgánicas.
+- 2026-10-24 · El cuello de botella del mineral es el procesado, no la extracción: la perforadora siempre da de sobra.
+- 2026-10-24 · Terralith fuera (hace desaparecer las vetas de GT en sus biomas) y Additional Placements fuera (fuerza una recarga de datapacks de 10–40 s en cada mundo nuevo).

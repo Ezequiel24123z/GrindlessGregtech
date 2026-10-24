@@ -1,0 +1,14 @@
+name = "GregTech Modern Utilities"
+filename = "gtmutils-2.10.2.jar"
+side = "both"
+pin = true
+
+[download]
+url = "https://cdn.modrinth.com/data/KMnOsM3N/versions/IyQ8F7M8/gtmutils-2.10.2.jar"
+hash-format = "sha512"
+hash = "68090fad5b675562c540deb4e11981cffc48cfbc814cfb6b9555224e6dd050d0c88c12a7e56430fec75f1a559da9f2e1c8719274047f6af9c8e5335b9aafa55d"
+
+[update]
+[update.modrinth]
+mod-id = "KMnOsM3N"
+version = "IyQ8F7M8"

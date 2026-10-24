@@ -1,0 +1,14 @@
+name = "GT--"
+filename = "gtnn-1.20.1-1.3.10.jar"
+side = "both"
+pin = true
+
+[download]
+url = "https://cdn.modrinth.com/data/onpJaUJ0/versions/DypJcHuM/gtnn-1.20.1-1.3.10.jar"
+hash-format = "sha512"
+hash = "b663752f64aabb23d19ba1e0969dfa9b35fb15c9b4f39bef251082487de293ac9357adb44e008e636d76ed283d8d5ccd69909a60ce509c9be31d5b8676277c1b"
+
+[update]
+[update.modrinth]
+mod-id = "onpJaUJ0"
+version = "DypJcHuM"

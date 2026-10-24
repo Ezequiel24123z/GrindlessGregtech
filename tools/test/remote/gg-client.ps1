@@ -39,16 +39,24 @@ function Set-GGEarlyWindowOff {
 
 # HeadlessMC launcher + mc-runtime-test jar (cached in tools\) and the HMC config/home dir (one per renderer).
 # Renderer 'mesa' = real LWJGL on Mesa llvmpipe (private JDK copy, see Ensure-GGMesa); 'stub' = HeadlessMC's -lwjgl stub.
+# Slot 0 keeps the historical dirs (hmc\home-<renderer>, hmc\.minecraft); every other slot has its own copy under
+# hmc\slot<N>\, so two clients running at once never share (or rewrite) HeadlessMC's config or its game directory.
 function Ensure-GGHmc {
     param([string]$Mc, [string]$Renderer = 'mesa')
     $exe = Join-Path $global:GG.Tools 'headlessmc-launcher-windows-x64.exe'
-    $n1 = Get-GGFile $global:GGUrls.HmcExe $exe 50000000
     $mcrtName = "mc-runtime-test-$Mc-forge-5.0.1.jar"
     $mcrt = Join-Path $global:GG.Tools $mcrtName
     $url = "https://github.com/headlesshq/mc-runtime-test-mod/releases/download/$Mc-5.0.1/$mcrtName"
-    $n2 = Get-GGFile $url $mcrt 100000
-    $hmcHome = Join-Path $global:GG.Hmc "home-$Renderer"
-    $mcDir = Join-Path $global:GG.Hmc '.minecraft'
+    $dl = [bool](Invoke-GGExclusive 'tools' {
+            $n1 = Get-GGFile $global:GGUrls.HmcExe $exe 50000000
+            $n2 = Get-GGFile $url $mcrt 100000
+            ($n1 -or $n2)
+        })
+    $hmcRoot = $global:GG.Hmc
+    $slot = [math]::Max(0, [int]$global:GG.Slot)
+    if ($slot -gt 0) { $hmcRoot = Join-Path $global:GG.Hmc ('slot{0}' -f $slot) }
+    $hmcHome = Join-Path $hmcRoot "home-$Renderer"
+    $mcDir = Join-Path $hmcRoot '.minecraft'
     New-Item -ItemType Directory -Force -Path $hmcHome | Out-Null
     New-Item -ItemType Directory -Force -Path $mcDir | Out-Null
     $mesa = $null
@@ -65,9 +73,12 @@ function Ensure-GGHmc {
         'hmc.launcher.crash-report-watcher=true',
         'hmc.assets.dummy=true'
     )
-    [IO.File]::WriteAllLines((Join-Path $hmcHome 'config.properties'), [string[]]$cfg, (New-Object Text.UTF8Encoding($false)))
+    $cfgPath = Join-Path $hmcHome 'config.properties'
+    $want = ($cfg -join "`r`n") + "`r`n"
+    $have = ''
+    if (Test-Path -LiteralPath $cfgPath) { $have = [IO.File]::ReadAllText($cfgPath) }
+    if ($have -ne $want) { [IO.File]::WriteAllText($cfgPath, $want, (New-Object Text.UTF8Encoding($false))) }
     if ($Renderer -eq 'mesa') { Set-GGHmcRealAccount $hmcHome }
-    $dl = ($n1 -or $n2)
     if ($mesa -and -not $mesa.Cached) { $dl = $true }
     return @{ Exe = $exe; McRuntimeTest = $mcrt; Home = $hmcHome; McDir = $mcDir; Downloaded = $dl; Mesa = $mesa }
 }
@@ -201,8 +212,11 @@ function Invoke-GGClientSuite {
             $ok = Invoke-GGStage 'sync-client' {
                 Remove-GGTree $inst
                 New-Item -ItemType Directory -Force -Path $inst | Out-Null
-                $sync = Sync-GGPack 'client' $PackToml $PackKey $res
-                Copy-GGTree $sync $inst @() @('packwiz.json')
+                # the sync dir is shared by every run of this pack: one run at a time may update it and copy from it
+                Invoke-GGExclusive "sync-$PackKey-client" {
+                    $sync = Sync-GGPack 'client' $PackToml $PackKey $res
+                    Copy-GGTree $sync $inst @() @('packwiz.json')
+                }
                 $n = @(Get-ChildItem (Join-Path $inst 'mods') -Filter *.jar -File -ErrorAction SilentlyContinue).Count
                 $mb = Get-GGDirSizeMB (Join-Path $inst 'mods')
                 Set-GGStage 'PASS' ("{0} mod jars, {1} MB" -f $n, $mb)
@@ -250,6 +264,7 @@ function Invoke-GGClientSuite {
                 }
                 $g = [GGProc]::Start($ctx.Hmc.Exe, $argLine, $inst, (Join-Path $res 'client-hmc-stdout.log'), (Join-Path $res 'client-hmc-stderr.log'), $envs)
                 $ctx.Proc = $g
+                Set-GGSlotState $null $true
                 Write-GGLog "HeadlessMC started (pid $($g.Id), renderer $renderer), free RAM $freeGb GB; first run installs the Forge client (slow)"
                 $sw = [Diagnostics.Stopwatch]::StartNew()
                 $lastPrint = 0
@@ -308,8 +323,9 @@ function Invoke-GGClientSuite {
             if (-not $ctx.Proc.HasExited) { Stop-GGTree $ctx.Proc.Id; [void]$ctx.Proc.WaitForExit(15000) }
             $ctx.Proc.CloseLogs()
         }
-        # the game may outlive HeadlessMC; make sure nothing of ours is left running
-        [void](Stop-GGOrphans)
+        # the game may outlive HeadlessMC; make sure nothing of THIS run is left running (never another run's JVM)
+        [void](Stop-GGRunProcesses $global:GG.RunId)
+        Set-GGSlotState $null $false
         if (Test-Path (Join-Path $inst 'logs\kubejs')) { [void](Invoke-GGStage 'client-kubejs' { Invoke-GGKubeJsCheck $inst $res }) }
         Save-GGInstanceResults $inst $res
     }
