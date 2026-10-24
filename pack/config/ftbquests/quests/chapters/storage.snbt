@@ -307,7 +307,7 @@
 		{
 			dependencies: ["14177D50BDAA5C9C"]
 			description: [
-				"An ender pouch is a small personal inventory that opens anywhere. It is the cheap entry to ender storage: the same contents on every planet, with no link to set up."
+				"An ender pouch opens the ender chest with the same three-colour code, from anywhere and on any planet. It is the cheap way into ender storage."
 			]
 			icon: "enderchests:ender_pouch"
 			id: "13F136DFAF367A5A"
@@ -322,7 +322,7 @@
 		{
 			dependencies: ["13F136DFAF367A5A"]
 			description: [
-				"An ender chest works across planets. Its contents are the same wherever you open it, so a base on Mars can reach the stock you left on Earth."
+				"An ender chest works across planets. Its contents are the same wherever you open it, so a base on the Moon can reach the stock you left on Earth."
 				"For a whole network that moves items at speed, the AE2 bridge at EV is the industrial option. The ender chest is the cheap small link."
 			]
 			icon: "enderchests:ender_chest"
