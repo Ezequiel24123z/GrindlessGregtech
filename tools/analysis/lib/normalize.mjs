@@ -182,7 +182,12 @@ function normalizeGT(out, j, ctx) {
     }
   }
   for (const c of asArray((j.tickOutputs || {}).eu)) out.euOut = Math.max(out.euOut, euOf(c.content).voltage);
-  out.conditions = asArray(j.recipeConditions);
+  out.conditions = [...asArray(j.recipeConditions)];
+  // GT guarda la temperatura del horno de alto vacío en `data`, no en las condiciones
+  if (j.data && typeof j.data.ebf_temp === 'number') {
+    out.temp = j.data.ebf_temp;
+    out.conditions.push({ type: 'ebf_temp', temperature: j.data.ebf_temp });
+  }
   out.shape = 'gt';
   return out;
 }
@@ -222,7 +227,13 @@ function normalizeGeneric(out, j, ctx) {
       cap, consume: cap ? 0 : 1, bad: p.bad, tags: p.tags, ...extra,
     });
   };
-  if (j.pattern && j.key) {
+  if (out.type === 'ae2:inscriber' && j.ingredients && !Array.isArray(j.ingredients)) {
+    // AE2 15: en modo "inscribe" los moldes (arriba y abajo) no se gastan; en modo "press" se gastan los tres ingredientes.
+    for (const [slot, ing] of Object.entries(j.ingredients)) {
+      pushItem(ing, slot !== 'middle' && j.mode !== 'press' ? { cap: true, consume: 0, kind: 'molde' } : {});
+    }
+    out.shape = 'ae2-inscriber';
+  } else if (j.pattern && j.key) {
     const syms = new Set();
     for (const row of asArray(j.pattern)) for (const ch of String(row)) if (ch !== ' ') syms.add(ch);
     for (const s of syms) {
@@ -237,6 +248,14 @@ function normalizeGeneric(out, j, ctx) {
     if (j.ingredients && typeof j.ingredients === 'object') Object.values(j.ingredients).forEach((x) => pushItem(x));
     for (const k of ['ingredient', 'template', 'base', 'addition', 'input']) if (j[k] !== undefined) pushItem(j[k]);
     out.shape = 'generic';
+  }
+  if (out.type === 'ae2:transform' && j.circumstance) {
+    // Transformación en el mundo: los objetos se tiran a un fluido (agua) o se hacen explotar. El fluido hace de condición
+    // "junto a"; lo demás (explosión) cuenta como condición no soportada salvo que la configuración diga otra cosa.
+    const c = j.circumstance;
+    if (c.type === 'fluid' && c.tag) out.conditions.push({ type: 'adjacent_fluid', fluids: ['#' + c.tag] });
+    else if (c.type === 'fluid' && c.fluid) out.conditions.push({ type: 'adjacent_fluid', fluids: [c.fluid] });
+    else out.conditions.push({ type: `ae2_circumstance_${c.type}` });
   }
   for (const r of [...resultOf(j.result), ...resultOf(j.results), ...resultOf(j.output)]) {
     out.outputs.push({ key: r.key, chance: 1, count: r.count });

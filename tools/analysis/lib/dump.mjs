@@ -52,9 +52,18 @@ export function loadDump(dir) {
     tags: readIfExists(dir, 'tags.json', true),
     machines: readIfExists(dir, 'machines.json', false),
     veins: readIfExists(dir, 'veins.json', false),
+    fluidVeins: readIfExists(dir, 'fluid_veins.json', false),
+    config: readIfExists(dir, 'config.json', false),
+    structures: readIfExists(dir, 'structures.json', false),
     info: readIfExists(dir, 'info.json', false),
   };
   return makeDump(dir, docs);
+}
+
+function normalizeConfig(values) {
+  const out = {};
+  for (const [k, v] of Object.entries(values)) out[k] = v === 'true' ? true : v === 'false' ? false : v;
+  return out;
 }
 
 /** Construye el volcado a partir de los documentos ya leídos (también lo usan las pruebas, sin tocar el disco). */
@@ -94,5 +103,12 @@ export function makeDump(dir, docs) {
     machines,
     recipeTypes,
     veins: veinsDoc ? veinsDoc.veins || [] : null,
+    // yacimientos de fluidos de GT (perforadora de fluidos): [{id, fluid, weight, dims: [..] | null}]; null si no se volcaron
+    fluidVeins: docs.fluidVeins ? docs.fluidVeins.veins || [] : null,
+    // interruptores de la config de GTM que importan para la progresión: {"worldgen.oreVeins...": true|false|null}; null sin config.json
+    // (los primeros volcados escribían "true"/"false" como texto: se normalizan)
+    config: docs.config ? normalizeConfig(docs.config.gtceu || {}) : null,
+    // descripción en datos de los patrones de multibloque del pack (global.grindless.structures); vacío si no se volcó
+    structures: new Map(Object.entries((docs.structures && docs.structures.structures) || {})),
   };
 }

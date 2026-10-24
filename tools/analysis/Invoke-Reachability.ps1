@@ -10,13 +10,15 @@
 
   Codigo de salida: 0 = PASS, 1 = hay FAIL/WARN en el analisis, 2 = fallo de la herramienta (volcado, Node, datos).
 
-.PARAMETER Tier       Nombre del tier (tiers\<Tier>.json): steam, lv...
+.PARAMETER Tier       Nombre del tier (tiers\<Tier>.json): steam, lv, mv...
 .PARAMETER SkipDump   No arranca el servidor: reutiliza -DumpDir o, si falta, el ultimo volcado (out\latest.txt).
 .PARAMETER DumpDir    Carpeta con recipes.json, tags.json, items.json, machines.json, veins.json, info.json.
 .PARAMETER OutDir     Carpeta de salida (por defecto tools\analysis\out\<fecha>-<Tier>).
 .PARAMETER NodeExe    Ruta a node.exe. Si falta: $env:GG_NODE, node del PATH (>= 18), tools\analysis\.work\node y, en
                       ultimo caso, descarga un Node LTS portatil (zip oficial) en tools\analysis\.work\node.
 .PARAMETER Pass       both (por defecto), gate (solo la puerta) o auto (solo la generacion automatica).
+.PARAMETER Dimension  Dimension donde se hace la fabrica: all (por defecto: todas las de `contexts` del tier, p. ej. Overworld,
+                      Llano y Vacio), o un id como grindless:flat. Cambia el aire del colector y los yacimientos de fluidos.
 .PARAMETER Explain    Imprime la derivacion completa de los objetivos cuyo id/nombre contenga este texto.
 .PARAMETER Detail     Imprime la derivacion de todos los objetivos.
 .PARAMETER PackDir    Pack a subir (por defecto el del repo; se pasa tal cual a Invoke-GGTest.ps1).
@@ -35,6 +37,7 @@ param(
     [string]$OutDir,
     [string]$NodeExe,
     [ValidateSet('both', 'gate', 'auto')][string]$Pass = 'both',
+    [string]$Dimension = 'all',
     [string]$Explain,
     [switch]$Detail,
     [string]$PackDir,
@@ -185,7 +188,7 @@ if ($SkipDump) {
 }
 
 $report = Join-Path $OutDir "report-$Tier.txt"
-$aargs = @($Analyzer, '--tier', $Tier, '--dump', $DumpDir, '--pass', $Pass, '--out', $report, '--json', (Join-Path $OutDir "report-$Tier.json"))
+$aargs = @($Analyzer, '--tier', $Tier, '--dump', $DumpDir, '--pass', $Pass, '--dimension', $Dimension, '--out', $report, '--json', (Join-Path $OutDir "report-$Tier.json"))
 if ($Explain) { $aargs += @('--explain', $Explain) }
 if ($Detail) { $aargs += '--verbose' }
 Write-Step "Analisis: $Tier ($Pass)"

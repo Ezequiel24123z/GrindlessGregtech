@@ -24,7 +24,9 @@
     "minecraft:smithing_trim",
     "gtceu:crafting_tool_head_replace",
     "gtceu:crafting_facade_cover",
-    "ae2:*"
+    "ae2:entropy",
+    "ae2:matter_cannon",
+    "ae2:facade"
   ],
 
   "toolTags": [
@@ -44,7 +46,14 @@
     "adjacent_fluid": { "fluidsFrom": "fluids" },
     "cleanroom": { "unsupported": true },
     "research": { "unsupported": true },
+    "environmental_hazard": { "unsupported": true },
     "*": { "ignore": true }
+  },
+
+  "partAbilities": {
+    "steam": ["gtceu:steam_input_hatch"],
+    "steam_input_bus": ["gtceu:steam_input_bus"],
+    "steam_output_bus": ["gtceu:steam_output_bus"]
   },
 
   "world": [
@@ -230,22 +239,24 @@
       "types": ["gtceu:vein_drilling"],
       "maxEUt": 32,
       "needs": ["fluid:gtceu:steam"],
+      "partsFromStructure": true,
       "parts": [
         "gtceu:steam_machine_casing", "gtceu:steam_input_hatch", "gtceu:steam_input_bus", "gtceu:steam_output_bus",
         ["gtceu:bronze_pipe_casing", "gtceu:steel_pipe_casing"], ["gtceu:bronze_frame", "gtceu:steel_frame"]
       ],
-      "note": "Patrón de pack/kubejs/startup_scripts/grindless/steam/machines.js (veinDrillPattern)."
+      "note": "Las piezas salen de la estructura que vuelca el pack (structures.json); `parts` es la reserva si el volcado no la trae (patrón de machines.js, veinDrillPattern)."
     },
     {
       "machine": "gtceu:steam_greenhouse",
       "types": ["gtceu:greenhouse"],
       "maxEUt": 32,
       "needs": ["fluid:gtceu:steam"],
+      "partsFromStructure": true,
       "parts": [
         "gtceu:steam_machine_casing", "gtceu:steam_input_hatch", "gtceu:steam_input_bus", "gtceu:steam_output_bus",
         "#forge:glass", ["minecraft:dirt", "minecraft:grass_block"]
       ],
-      "note": "Patrón de machines.js (greenhousePattern): casco de vapor, cristal y suelo de tierra."
+      "note": "Igual: estructura del pack primero, `parts` de reserva (greenhousePattern: casco de vapor, cristal y suelo de tierra)."
     },
 
     {
@@ -313,7 +324,7 @@
     { "id": "auto-mena-cobre", "label": "Mena cruda de cobre (perforadora)", "anyOf": ["minecraft:raw_copper", "gtceu:raw_chalcopyrite", "gtceu:raw_malachite"] },
     { "id": "auto-mena-estano", "label": "Mena cruda de estaño (perforadora)", "anyOf": ["gtceu:raw_cassiterite", "gtceu:raw_tin"] },
     { "id": "auto-redstone", "label": "Redstone (circuito LV)", "item": "minecraft:redstone" },
-    { "id": "auto-troncos", "label": "Troncos (invernadero)", "anyOf": ["#minecraft:logs_that_burn"] },
+    { "id": "auto-troncos", "label": "Troncos (invernadero)", "anyOf": ["minecraft:oak_log", "minecraft:spruce_log", "minecraft:birch_log", "minecraft:jungle_log", "minecraft:acacia_log", "minecraft:dark_oak_log", "minecraft:mangrove_log", "minecraft:cherry_log", "gtceu:rubber_log"] },
     { "id": "auto-resina", "label": "Resina pegajosa (invernadero)", "item": "gtceu:sticky_resin" },
     { "id": "auto-adoquin", "label": "Adoquín (trituradora de rocas)", "item": "minecraft:cobblestone" },
     { "id": "auto-piedra", "label": "Piedra", "item": "minecraft:stone" },

@@ -12,7 +12,7 @@ Se entra con lo que deja el vapor: turbina de vapor LV (`gtceu:lv_steam_turbine`
 4. **Verde y criaturas.** Invernadero LV (nuestro) → biomasa → simulador de criaturas: huesos, hilo, slime, lana, cuero, plumas y perlas de ender.
 5. **Química pequeña.** Aire → N₂ y O₂; azufre → ácido sulfúrico; sal + ácido → bisulfato y HCl → persulfato y cloruro férrico; creosota → lubricante → lodo de perforación.
 6. **Circuitos de verdad.** Circuito electrónico LV en lote, placa buena, galio + arsénico → diodos → circuito electrónico MV.
-7. **Horno de arco y AE2.** El horno de arco sumergido (nuestro) da silicio, polvo del cielo y lava. Con cuarzo, silicio, cielo y perlas se monta AE2 entera.
+7. **Horno de arco y AE2.** El horno de arco sumergido (nuestro) da silicio, polvo del cielo y obsidiana. Con cuarzo, silicio, cielo y perlas se monta AE2 entera.
 8. **Aluminio.** Zafiro de veta profunda → electrolizador LV → aluminio → casco MV.
 9. **Salida.** Central LV con holgura, transformador LV→MV y EBF corriendo a 120 EU/t. Ver *Puerta a MV*.
 
@@ -39,7 +39,7 @@ Cada recurso tiene un catalizador que no se gasta y entradas que salen de otra l
 
 - **Elegido:** tipo de receta `gtceu:creature_simulation` y máquina `gtceu:lv_creature_simulator` (un bloque, LV–EV).
 - **Por qué no Hostile Neural Networks** (MIT, 1.20.1): (1) usa FE y queda fuera de las recetas de GT: sin circuito programado, escotillas ni categoría en EMI; (2) sus modelos se entrenan matando y habría que reescribirlos, como hizo Monifactory; (3) con tipo propio modelos y drops viven en una tabla (`mobs.json`) y cada ciclo gasta entradas reales; (4) una dependencia menos.
-- **Receta:** modelo (`grindless:creature_model_<id>`, no se gasta) + 100 mB de biomasa + el mineral de la criatura + circuito programado (elige la tirada). Salen los drops; la biomasa se consume y no hay subproducto.
+- **Receta:** modelo (`grindless:creature_model_<id>`, no se gasta) + biomasa + el mineral de la criatura + circuito programado (elige la tirada). La biomasa es 25 mB por ciclo de 10 s en LV, 50 para el enderman y el creeper y 100 para el blaze: un fermentador del mismo tier alimenta un simulador. Salen los drops; la biomasa se consume y no hay subproducto.
 - **Modelos:** el ensamblador los imprime con un modelo en blanco y 8 unidades del mineral que luego consumen. Nadie mata nada.
 
 | Modelo | Mineral por ciclo | Salida (orientativa, 10 s a 30 EU/t) |
@@ -59,10 +59,11 @@ Cada recurso tiene un catalizador que no se gasta y entradas que salen de otra l
 
 - **Agua:** bomba primitiva del vapor y `gtceu:lv_pump`. En Llano y Vacío cuenta el bioma (usar llanura).
 - **Aire:** `gtceu:lv_gas_collector` (10 000 mB por 200 t a 16 EU/t) y centrífuga: 3 900 mB de N₂ + 1 000 mB de O₂. El resto del aire es inerte y se vierte.
-- **Lava:** receta de roca fundida del horno de arco. Sirve para el triturador de rocas y para la obsidiana (solidificador).
+- **Lava:** se coloca una vez junto a la trituradora de rocas (no se gasta). No se fabrica: quemada en una caldera daría más energía de la que cuesta.
+- **Obsidiana:** horno de arco (adoquín fundido y templado con agua). Va al polvo del cielo.
 - **Sal y salmuera:** mezclador (sal + agua) y electrolizador.
 - **Aceite:** no hay en LV (la perforadora de fluidos de GTM es MV). El combustible de LV es lo que queman las calderas: biomasa, coque y creosota.
-- **Cierra el círculo:** colector y bomba solo gastan EU; la lava se coloca una vez o sale del horno de arco.
+- **Cierra el círculo:** colector y bomba solo gastan EU; la lava se coloca una vez.
 
 ### Piedra, arena, grava y arcilla
 
@@ -83,7 +84,7 @@ Qué gana: **recetas imposibles en pequeño**. En GTM el silicio pide 2 273 K y 
 - **Recetas** (orientativas, 64 EU/t y 200–300 t):
   1. **Silicio:** 3 arena de cuarzo + 2 coque en polvo → 1 lingote de silicio, ceniza (1/9) y 2 000 mB de CO₂ por la chimenea.
   2. **Impactita:** 4 obsidiana en polvo + 4 arena de cuarzo + 1 certus cargado → 4 polvo del cielo (`ae2:sky_dust`). Es roca fundida por un impacto, como las tectitas.
-  3. **Roca fundida:** 8 adoquines → 1 000 mB de lava.
+  3. **Obsidiana:** 32 adoquines + 4 000 mB de agua → 4 obsidiana (fundido y templado).
 - **Por qué no es un cubo grande:** ninguna máquina de un bloque tiene estas recetas y piden condiciones (dos escotillas, electrodos, chimenea), no cantidad. En MV el EBF con Kanthal llegará al silicio por otro camino.
 - **Subproductos:** el CO₂ es inerte y se ventea (con circuito 2 sale CO a un tanque, útil en MV para metanol); la ceniza va a fertilizante; la escoria de piedra va al lodo de perforación.
 
@@ -150,7 +151,7 @@ El polvo de piedra de GTM se separa en MV (`stone_dust_separation`, 120 EU/t). S
 | Casco MV (`gtceu:mv_machine_hull`) y escotilla de energía MV | el aluminio sale de la línea del zafiro sin pedir MV |
 | 8 circuitos electrónicos MV (`#gtceu:circuits/mv`, verificar) | placa buena y diodos con galio + arsénico funcionan |
 | Central LV de 512 EU/t o más (2 calderas grandes y ~16 turbinas, o biomasa), 2 búferes y transformador LV→MV (4 A → 1 A) | "sin ir justo": MV cabe con el búfer sobre el 50 % |
-| EBF (`gtceu:electric_blast_furnace`, cuproníquel) corriendo `steel_from_iron` (hierro + 200 mB de O₂, 120 EU/t) con el O₂ del colector | MV funciona de verdad y el EBF queda listo |
+| Escotilla de energía MV en el EBF (`gtceu:mv_energy_input_hatch`), alimentada por el transformador LV→MV, corriendo `steel_from_iron` (hierro + 200 mB de O₂, 120 EU/t) con el O₂ del colector | MV llega por cable de verdad, no con dos escotillas LV, y el EBF queda listo |
 | Red AE2 con controlador y una CPU de 16k que fabrica una pieza LV (el motor LV) con patrones | AE2 ya es la logística |
 | Mineral, invernadero y simulador 10 minutos sin tocarlos | la generación eléctrica se sostiene sola |
 
@@ -201,3 +202,18 @@ Mandan sobre lo de arriba cuando choquen.
    - La muestra se fabrica con dos menas de esa veta, así que basta un viaje: es exploración, no grind.
 5. **Primera perla de ender:** la da una misión de LV. Desde ahí, el simulador de criaturas la multiplica.
 6. **Energía de AE2:** cámara de vibración con coque al principio y conversor EU→FE de GTM si la configuración de 7.5.3 lo permite (verificar). La manivela solo sirve para arrancar.
+7. **El horno de arco no hace lava.** Sale más energía quemándola en una caldera de la que cuesta fabricarla. Hace **obsidiana** (adoquín fundido y templado con agua), que es lo que pide el polvo del cielo. Para la trituradora de rocas basta con colocar lava una vez.
+8. **Ritmo real de la perforadora LV:** con una escotilla, ×1,5 la de vapor; con dos, ×3. Lleva un modificador de paralelos propio (voltaje ÷ 8 EU/t, máximo 8), porque GTM no hace overclock a recetas de 8 EU/t.
+9. **El CO₂ del horno de arco** es inerte: el jugador pone el controlador en modo vaciar fluidos o lo guarda. Con el circuito 2 sale CO para MV.
+10. **AE2, cómo quedó:**
+    - Los 8 bloques de entrada se hacen en el ensamblador LV.
+    - Las prensas salen de la prensa de formado LV.
+    - El certus sale del autoclave de GT (da el cristal de AE2) o de la veta de certus del Nether con la perforadora LV.
+    - El certus cargado sale del cargador de AE2 o del polarizador LV; el fluix, de la transformación de AE2 o del mezclador LV.
+    - La cuarcita cuenta como cuarzo del Nether, así que el núcleo de aniquilación no obliga a ir al Nether.
+    - Las prensas no salen en los meteoritos y el convertidor EU→FE de GTM está activado.
+11. **Simulador de criaturas:**
+    - Cada tirada de botín tiene su circuito programado.
+    - Las criaturas pasivas imprimen su modelo con lo que comen (trigo, semillas o hilo).
+    - Creeper (pólvora) es de MV y Blaze (varas) de HV.
+    - Un fermentador LV alimenta un simulador LV a pleno ritmo (relación 1:1).

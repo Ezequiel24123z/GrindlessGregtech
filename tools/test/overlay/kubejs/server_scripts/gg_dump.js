@@ -5,7 +5,8 @@
 // This script loads LAST, so its ServerEvents.recipes handler sees the final recipe set (after the pack
 // scripts removed, changed or added recipes). Trigger the export through RCON:
 //   kubejs custom_command gg_dump
-// Files written to kubejs/exported/: recipes.json tags.json items.json machines.json veins.json info.json
+// Files written to kubejs/exported/: recipes.json tags.json items.json machines.json veins.json fluid_veins.json config.json
+//   structures.json info.json
 // Log markers (latest.log): GGTEST|dump|COLLECTED|..., GGTEST|dump|DONE|..., GGTEST|dump|FAIL|...
 //
 // recipes.json = {format, count, recipes:[ "<one JSON object per string>" ]}; each object is
@@ -232,6 +233,88 @@
     return { format: 'gg-veins-1', veins: veins };
   }
 
+  // GT bedrock fluid deposits (what the fluid drilling rig pumps): fluid, weight, yields and the dimensions where each can
+  // appear. GTM's rule is "dimension filter is null OR contains the dimension", so dims: null means every dimension and an
+  // empty list means none.
+  function dumpFluidVeins() {
+    var GTR = Java.loadClass('com.gregtechceu.gtceu.api.registry.GTRegistries');
+    var BI = Java.loadClass('net.minecraft.core.registries.BuiltInRegistries');
+    var veins = [];
+    each(GTR.BEDROCK_FLUID_DEFINITIONS.keys(), function (key) {
+      var def = GTR.BEDROCK_FLUID_DEFINITIONS.get(key);
+      var rec = { id: str(key), fluid: '', weight: 0, minYield: 0, maxYield: 0, depletedYield: 0, dims: null };
+      try { rec.weight = num(def.getWeight()); } catch (e1) { /* optional */ }
+      try { rec.minYield = num(def.getMinimumYield()); rec.maxYield = num(def.getMaximumYield()); } catch (e2) { /* optional */ }
+      try { rec.depletedYield = num(def.getDepletedYield()); } catch (e3) { /* optional */ }
+      try { rec.fluid = str(BI.FLUID.getKey(def.getStoredFluid().get())); } catch (e4) { rec.fluidError = str(e4); }
+      try {
+        var filter = def.getDimensionFilter();
+        if (filter !== null && filter !== undefined) {
+          rec.dims = [];
+          each(filter, function (d) { rec.dims.push(str(d.location())); });
+          rec.dims.sort();
+        }
+      } catch (e5) {
+        rec.dimsError = str(e5);
+      }
+      veins.push(rec);
+    });
+    veins.sort(function (a, b) { return a.id < b.id ? -1 : (a.id > b.id ? 1 : 0); });
+    return { format: 'gg-fluid-veins-1', veins: veins };
+  }
+
+  // The GTM config switches that decide progression (the analyzer's "requires"/"sustainedIf" read these). A value that
+  // cannot be read is null (unknown), never a guessed default.
+  var CONFIG_KEYS = [
+    ['worldgen.oreVeins.infiniteBedrockOresFluids', function (c) { return c.worldgen.oreVeins.infiniteBedrockOresFluids; }],
+    ['machines.enableMaintenance', function (c) { return c.machines.enableMaintenance; }],
+    ['machines.doBedrockOres', function (c) { return c.machines.doBedrockOres; }],
+    ['gameplay.hazardsEnabled', function (c) { return c.gameplay.hazardsEnabled; }],
+    ['compat.energy.enableFEConverters', function (c) { return c.compat.energy.enableFEConverters; }]
+  ];
+
+  // Rhino hands back a java.lang.Boolean/Number as an object (typeof 'object'), so JSON.stringify would turn it into a string.
+  function plainValue(v) {
+    if (v === null || v === undefined) return null;
+    if (typeof v === 'boolean' || typeof v === 'number') return v;
+    var s = String(v);
+    if (s === 'true') return true;
+    if (s === 'false') return false;
+    if (s !== '' && !isNaN(Number(s))) return Number(s);
+    return s;
+  }
+
+  function dumpConfig() {
+    var CH = Java.loadClass('com.gregtechceu.gtceu.config.ConfigHolder');
+    var inst = CH.INSTANCE;
+    var values = {};
+    CONFIG_KEYS.forEach(function (entry) {
+      try {
+        values[entry[0]] = plainValue(entry[1](inst));
+      } catch (e) {
+        values[entry[0]] = null;
+      }
+    });
+    return { format: 'gg-config-1', gtceu: values };
+  }
+
+  // Multiblock patterns of the pack: lib/patterns.js records a plain-data description of every pattern in
+  // global.grindless.structures (shared by all script types). The analyzer reads the parts each multiblock needs from
+  // here instead of keeping a hand-copied list.
+  function dumpStructures() {
+    var out = {};
+    var G = null;
+    try { G = global.grindless; } catch (e) { G = null; }
+    var found = G !== null && G !== undefined && G.structures !== undefined && G.structures !== null;
+    if (found) {
+      Object.keys(G.structures).forEach(function (id) {
+        out[id] = JSON.parse(JSON.stringify(G.structures[id]));
+      });
+    }
+    info('STRUCTURES|found=' + found + '|count=' + Object.keys(out).length);
+    return { format: 'gg-structures-1', structures: out };
+  }
+
   function dumpInfo(counts, written) {
     var mods = [];
     try {
@@ -256,8 +339,10 @@
       gsonClasses = {
         Obj: Java.loadClass('com.google.gson.JsonObject'),
         Arr: Java.loadClass('com.google.gson.JsonArray'),
-        Prim: Java.loadClass('com.google.gson.JsonPrimitive')
+        Prim: Java.loadClass('com.google.gson.JsonPrimitive'),
+        Null: null
       };
+      try { gsonClasses.Null = Java.loadClass('com.google.gson.JsonNull').INSTANCE; } catch (e) { /* falls back to "" */ }
     }
     return gsonClasses;
   }
@@ -270,7 +355,7 @@
     if (t === 'string') return new G.Prim(x);
     if (t === 'number') return new G.Prim(x);
     if (t === 'boolean') return new G.Prim(x);
-    if (x === null || x === undefined) return new G.Prim('');
+    if (x === null || x === undefined) return G.Null !== null && G.Null !== undefined ? G.Null : new G.Prim('');
     if (Array.isArray(x)) {
       var a = new G.Arr();
       for (i = 0; i < x.length; i++) a.add(toGson(x[i]));
@@ -348,6 +433,9 @@
     var items = step('items.json', dumpItems);
     var machines = step('machines.json', dumpMachines);
     var veins = step('veins.json', dumpVeins);
+    var fluidVeins = step('fluid_veins.json', dumpFluidVeins);
+    var gtConfig = step('config.json', dumpConfig);
+    var structures = step('structures.json', dumpStructures);
 
     if (tags) counts.itemTags = Object.keys(tags.item).length;
     if (tags) counts.fluidTags = Object.keys(tags.fluid).length;
@@ -356,6 +444,9 @@
     if (machines) counts.machines = machines.machines.length;
     if (machines) counts.recipeTypes = machines.recipeTypes.length;
     if (veins) counts.veins = veins.veins.length;
+    if (fluidVeins) counts.fluidVeins = fluidVeins.veins.length;
+    if (gtConfig) counts.config = Object.keys(gtConfig.gtceu).length;
+    if (structures) counts.structures = Object.keys(structures.structures).length;
     counts.veinDrilling = types['gtceu:vein_drilling'] || 0;
     counts.greenhouse = types['gtceu:greenhouse'] || 0;
 

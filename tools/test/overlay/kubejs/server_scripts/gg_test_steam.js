@@ -134,13 +134,24 @@
     check('steam', 'recipe_types', !!drilling && !!greenhouse,
       'vein_drilling=' + (drilling ? 'registered' : 'missing') + ' greenhouse=' + (greenhouse ? 'registered' : 'missing'))
 
-    var steelOnly = veins.filter(function (v) { return v.steelOnly }).length
-    var wantDrilling = veins.length * 2 - steelOnly
-    var wantGreenhouse = G.greenhouse.entries.length
-    var haveDrilling = drilling ? rm.getAllRecipesFor(drilling).size() : -1
-    var haveGreenhouse = greenhouse ? rm.getAllRecipesFor(greenhouse).size() : -1
-    check('steam', 'recipes', haveDrilling === wantDrilling && haveGreenhouse === wantGreenhouse,
-      'vein_drilling=' + haveDrilling + '/' + wantDrilling + ' greenhouse=' + haveGreenhouse + '/' + wantGreenhouse)
+    // only the steam-tier recipes (this pack's ids) are counted; other agents add recipes of the same types
+    var wantDrilling = []
+    veins.forEach(function (v) {
+      if (!v.steelOnly) wantDrilling.push('grindless:vein_drilling/' + v.id + '_bronze')
+      wantDrilling.push('grindless:vein_drilling/' + v.id + '_steel')
+    })
+    var wantGreenhouse = G.greenhouse.entries.map(function (e) { return 'grindless:greenhouse/' + e.id })
+    var absent = function (id) { return !rm.byKey(rl(id)).isPresent() }
+    var missingDrilling = wantDrilling.filter(absent)
+    var missingGreenhouse = wantGreenhouse.filter(absent)
+    check('steam', 'recipes', !!drilling && !!greenhouse && missingDrilling.length === 0 && missingGreenhouse.length === 0,
+      'vein_drilling=' + (wantDrilling.length - missingDrilling.length) + '/' + wantDrilling.length +
+      ' greenhouse=' + (wantGreenhouse.length - missingGreenhouse.length) + '/' + wantGreenhouse.length +
+      (missingDrilling.length + missingGreenhouse.length > 0 ? ' missing=' + missingDrilling.concat(missingGreenhouse).join(',') : ''))
+    var totalDrilling = drilling ? rm.getAllRecipesFor(drilling).size() : -1
+    var totalGreenhouse = greenhouse ? rm.getAllRecipesFor(greenhouse).size() : -1
+    note('steam', 'recipes_other', 'vein_drilling total=' + totalDrilling + ' (other tiers ' + (totalDrilling - wantDrilling.length + missingDrilling.length) +
+      ') greenhouse total=' + totalGreenhouse + ' (other tiers ' + (totalGreenhouse - wantGreenhouse.length + missingGreenhouse.length) + ')')
 
     var ids = ['grindless:crafting/bronze_drill_bit', 'grindless:crafting/steel_drill_bit',
       'grindless:crafting/empty_vein_probe', 'grindless:crafting/steam_vein_drill',

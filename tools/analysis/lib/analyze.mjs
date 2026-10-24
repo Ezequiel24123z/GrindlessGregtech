@@ -83,7 +83,12 @@ function recipeMatches(model, rule, t) {
   const g = model.g;
   if (rule.kind !== 'recipe' || rule.type !== t.type) return false;
   if (t.output && !rule.outs.some((o) => g.keyNames[o] === t.output)) return false;
-  if (t.input && !rule.slots.some((s) => s.alts.some((a) => g.keyNames[a] === t.input))) return false;
+  if (t.input && !asArray(t.input).every((inp) => rule.slots.some((s) => s.alts.some((a) => g.keyNames[a] === inp)))) return false;
+  if (t.dimension) {
+    const dims = rule.meta.dims || [];
+    if ((rule.meta.notDims || []).includes(t.dimension)) return false;
+    if (dims.length > 0 && !dims.includes(t.dimension)) return false;
+  }
   return true;
 }
 
@@ -94,6 +99,9 @@ function recipeMatches(model, rule, t) {
 export function evalTarget(model, res, t, mode) {
   const g = model.g;
   const view = mode === 'auto' ? res.viewFor(t.without) : null;
+  // Comprobaciones de fuga: en la puerta (expect "unreachable") no debe poder conseguirse ni a mano; en automático
+  // (expect "not-automatic") no debe poder sostenerse solo (puede existir como bloque puesto una vez, no como recurso repuesto).
+  const neg = (mode === 'gate' && t.expect === 'unreachable') || (mode === 'auto' && t.expect === 'not-automatic');
   const resolveKeys = (x) => asArray(x).flatMap((s) => model.resolve(s, `objetivo ${t.id}`));
   const statusOf = (k) => {
     if (mode === 'gate') return res.gate.reached[k] ? STATUS.MANUAL : STATUS.UNREACHABLE;
@@ -123,7 +131,7 @@ export function evalTarget(model, res, t, mode) {
     return { target: t, view, kind: 'allOf', ok: bad.length === 0, status: worst, keys, badKeys: bad, key: bad[0] ?? keys[0] };
   }
   if (items.length === 0) {
-    return { target: t, view, kind: 'item', ok: false, status: STATUS.UNREACHABLE, key: null, empty: true };
+    return { target: t, view, kind: 'item', ok: !!neg, status: STATUS.UNREACHABLE, key: null, empty: true, negative: neg };
   }
   let bestKey = null;
   let bestStatus = STATUS.UNREACHABLE;
@@ -138,6 +146,14 @@ export function evalTarget(model, res, t, mode) {
       bestStatus = s;
       bestLevel = lvl;
     }
+  }
+  if (neg) {
+    // Comprobación de fuga: el objeto NO debe poder conseguirse en este tier (p. ej. el silicio de GT antes de MV) o,
+    // en automático, no debe poder producirse solo (p. ej. la lava: es combustible de caldera, sería un bucle de energía).
+    const leaked = bestKey !== null && (mode === 'gate'
+      ? bestStatus !== STATUS.UNREACHABLE
+      : bestStatus === STATUS.SUSTAINED || bestStatus === STATUS.FINITE);
+    return { target: t, view, kind: 'item', ok: !leaked, status: bestStatus, key: bestKey, negative: true, candidates: items.length };
   }
   return { target: t, view, kind: t.fluid ? 'fluid' : 'item', ok: bestKey !== null && okStatus(bestStatus), status: bestStatus, key: bestKey, candidates: items.length };
 }

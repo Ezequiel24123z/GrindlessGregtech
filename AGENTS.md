@@ -55,6 +55,18 @@ Gregtech Grindless es un pack de GregTech Modern (Minecraft 1.20.1, Forge) en el
   3. Integración: las recetas existen, la generación automática funciona y la puerta al tier siguiente se puede fabricar.
 - **Si una prueba falla:** se arregla y se repite esa, no todas.
 - **Scripts de prueba:** van en `tools/test/overlay/` y no se publican con el pack.
+- **Zonas de prueba:** los tests se lanzan casi a la vez en el mismo servidor, así que cada uno construye y limpia solo su franja del Overworld (Y 98–112). Las franjas tienen 64 bloques de ancho en X y empiezan en Z 0:
+
+  | Test | X |
+  |---|---|
+  | vapor | 0–31 |
+  | criaturas | 64–95 |
+  | AE2 | 64–79, pero en Z 64–79 |
+  | multibloques LV | 256–319 |
+  | planta MV | 512–575 |
+  | multibloques MV | 768–831 |
+
+  Para un test nuevo se sigue en saltos de 256.
 
 ## Licencias
 

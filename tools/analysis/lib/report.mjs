@@ -1,7 +1,7 @@
 // Informe de texto y JSON.
 import { blockedRoots, blockedRuleTree, blockedTree, derivationTree, describeRule, keyName, renderTree } from './explain.mjs';
 import { blockerFor, evalTarget, STATUS } from './analyze.mjs';
-import { sortedEntries } from './util.mjs';
+import { asArray, sortedEntries } from './util.mjs';
 
 const MARK = { PASS: 'PASS', FAIL: 'FAIL', WARN: 'WARN' };
 
@@ -32,9 +32,13 @@ function closestRule(model, cache, res, mode, rules, view) {
 function verdictOf(result, mode) {
   const allowFinite = !!result.target.allowFinite;
   if (result.ok) return MARK.PASS;
+  // un objetivo opcional que no se cumple se avisa (WARN) pero no tumba el veredicto
+  if (result.target.optional) return MARK.WARN;
   if (mode === 'auto' && result.status === STATUS.FINITE) return allowFinite ? MARK.PASS : MARK.WARN;
   return MARK.FAIL;
 }
+
+const blocking = (r) => r.verdict === MARK.FAIL || (r.verdict === MARK.WARN && !r.target.optional);
 
 const STATUS_TEXT = {
   [STATUS.SUSTAINED]: 'se regenera sola',
@@ -59,6 +63,24 @@ function evaluateAll(model, res, targets, mode, cache, opts) {
     r.lines = [];
     const g = model.g;
     const view = r.view || res;
+    if (r.negative) {
+      // comprobación de fuga (expect: "unreachable" en la puerta, "not-automatic" en automático)
+      if (r.verdict === MARK.PASS) {
+        r.lines.push(mode === 'gate'
+          ? 'no se puede conseguir en este tier, como debe ser'
+          : `no se produce sola, como debe ser (${STATUS_TEXT[r.status] || r.status})`);
+      } else if (mode === 'gate') {
+        r.lines.push('FUGA: se puede conseguir en este tier y no debería. Así:');
+        const tree = derivationTree(model, res.gate, r.key);
+        r.lines.push(...renderTree(model, tree, { prefix: '    ', levels: true }).map((l) => '  ' + l));
+      } else {
+        r.lines.push('FUGA: se produce sola y no debería. Así:');
+        const tree = derivationTree(model, r.status === STATUS.SUSTAINED ? view.susInf.G : view.susAll.G, r.key);
+        r.lines.push(...renderTree(model, tree, { prefix: '    ' }).map((l) => '  ' + l));
+      }
+      out.push(r);
+      continue;
+    }
     if (r.verdict === MARK.PASS) {
       if (r.kind === 'recipe') {
         const first = r.hits[0];
@@ -70,15 +92,20 @@ function evaluateAll(model, res, targets, mode, cache, opts) {
         r.lines.push(sr >= 0 ? `se sostiene con ${describeRule(g, sr)}` : 'recurso permanente del mundo');
       } else if (r.key !== null) r.lines.push('recurso del mundo');
       if (opts.verbose || (opts.explain && matches(opts.explain, t, model, r))) {
-        const tree = derivationTree(model, mode === 'gate' ? res.gate : view.susInf.G, r.key);
+        const G = mode === 'gate' ? res.gate : view.susInf.G;
+        const tree = r.kind === 'recipe' ? derivationTree(model, G, null, undefined, r.hits[0]) : derivationTree(model, G, r.key);
         r.lines.push(...renderTree(model, tree, { prefix: '    ', levels: mode === 'gate' }).map((l) => '  ' + l));
       }
     } else {
       r.lines.push(STATUS_TEXT[r.status] || '');
+      if (t.optional) r.lines.push('(objetivo opcional: se avisa pero no tumba el veredicto)');
       if (r.kind === 'recipe') {
         const near = r.defined.length > 0 ? closestRule(model, cache, res, mode, r.defined, view) : -1;
-        if (r.defined.length === 0) r.lines.push(`no hay ninguna receta de tipo ${t.type}${t.output ? ' que produzca ' + t.output : ''} en el pack`);
-        else r.lines.push(`hay ${r.defined.length} receta(s) del tipo, pero ninguna se puede completar (la más cercana: ${describeRule(g, near)})`);
+        if (r.defined.length === 0) {
+          const withInput = t.input ? ' con entrada ' + asArray(t.input).join(' + ') : '';
+          const inDim = t.dimension ? ` (válida en ${t.dimension})` : '';
+          r.lines.push(`no hay ninguna receta de tipo ${t.type}${t.output ? ' que produzca ' + t.output : ''}${withInput}${inDim} en el pack`);
+        } else r.lines.push(`hay ${r.defined.length} receta(s) del tipo, pero ninguna se puede completar (la más cercana: ${describeRule(g, near)})`);
         if (near >= 0) {
           const bl = blockerFor(model, res, mode, cache, view);
           const tree = blockedRuleTree(model, bl, near);
@@ -119,10 +146,13 @@ export function analyze(model, res, opts = {}) {
   const gate = pass === 'auto' ? [] : evaluateAll(model, res, model.cfg.targets, 'gate', cache, opts);
   const auto = pass === 'gate' ? [] : evaluateAll(model, res, model.cfg.autoTargets, 'auto', cache, opts);
   const count = (arr, v) => arr.filter((x) => x.verdict === v).length;
-  const verdict = gate.every((r) => r.verdict === MARK.PASS) && auto.every((r) => r.verdict === MARK.PASS) ? 'PASS' : 'FAIL';
+  const verdict = gate.some(blocking) || auto.some(blocking) ? 'FAIL' : 'PASS';
   return {
     gate, auto, verdict,
-    counts: { gate: { pass: count(gate, 'PASS'), total: gate.length }, auto: { pass: count(auto, 'PASS'), warn: count(auto, 'WARN'), total: auto.length } },
+    counts: {
+      gate: { pass: count(gate, 'PASS'), warn: count(gate, 'WARN'), total: gate.length },
+      auto: { pass: count(auto, 'PASS'), warn: count(auto, 'WARN'), total: auto.length },
+    },
   };
 }
 
@@ -136,6 +166,7 @@ export function renderText(model, res, out, opts = {}) {
   L.push(`Modelo  : ${g.rules.length} reglas · ${g.nKeys} recursos · mundo: ${model.facts.manual.length} a mano, ${model.facts.auto.length} fijos, ${model.facts.bootstrap.length} de arranque`);
   const added = [...dump.recipes.values()].filter((r) => r.added).length;
   L.push(`          ${added} recetas añadidas por scripts del pack · tipos GT con recetas: ${[...new Set([...dump.recipes.values()].map((r) => r.type))].filter((t) => t === 'gtceu:vein_drilling' || t === 'gtceu:greenhouse').join(', ') || '(ni vein_drilling ni greenhouse)'}`);
+  L.push(`Contexto: la fábrica está en la dimensión ${cfg.contextDimension}`);
   if (model.warnings.length > 0) {
     L.push('');
     L.push(`AVISOS DE CONFIGURACIÓN (${model.warnings.length})`);
@@ -152,11 +183,12 @@ export function renderText(model, res, out, opts = {}) {
     }
   };
   if (opts.pass !== 'auto') {
-    section('PASO 1 · PUERTA — se permite recoger a mano para arrancar', out.gate, `${out.counts.gate.pass}/${out.counts.gate.total} PASS`);
+    section('PASO 1 · PUERTA — se permite recoger a mano para arrancar', out.gate,
+      `${out.counts.gate.pass}/${out.counts.gate.total} PASS${out.counts.gate.warn ? `, ${out.counts.gate.warn} avisos` : ''}`);
   }
   if (opts.pass !== 'gate') {
     section('PASO 2 · AUTOMÁTICO — sin recoger a mano salvo el arranque declarado', out.auto,
-      `${out.counts.auto.pass}/${out.counts.auto.total} PASS${out.counts.auto.warn ? `, ${out.counts.auto.warn} solo finitos` : ''}`);
+      `${out.counts.auto.pass}/${out.counts.auto.total} PASS${out.counts.auto.warn ? `, ${out.counts.auto.warn} avisos (fuente finita u opcional)` : ''}`);
   }
   L.push('');
   L.push('NOTAS');
@@ -166,11 +198,23 @@ export function renderText(model, res, out, opts = {}) {
   if (model.unresolved.length > 0) L.push('  - formas de ingrediente sin resolver: ' + model.unresolved.slice(0, 6).join(', '));
   if (dump.tags.missing.size > 0) L.push(`  - ${dump.tags.missing.size} etiquetas usadas por recetas no están en el volcado (se tratan como vacías)`);
   if (dump.tags.empty.size > 0) L.push(`  - ${dump.tags.empty.size} etiquetas existen pero están vacías en este pack`);
+  if (model.stats.structureMachines > 0) L.push(`  - piezas de multibloque leídas del patrón real del pack (structures.json): ${model.stats.structureMachineIds.join(', ')}`);
+  if (model.stats.rolledMachines.length > 0) {
+    const rolled = model.stats.rolledMachines.map((m) => `${m.machine} (${Number.isFinite(m.hatches) ? m.hatches : '2+'} escotilla(s) de ${m.voltage} V -> ${m.maxEUt} V)`);
+    L.push(`  - tensión máxima de multibloques (GTM 7.5.3: 2 o más escotillas del mismo nivel suben un escalón): ${rolled.join(', ')}`);
+  }
+  if (model.stats.fluidVeins && model.stats.fluidVeins.length > 0) {
+    const fv = model.stats.fluidVeins.map((v) => `${v.fluid} (${v.deposits.join(', ')})`);
+    L.push(`  - yacimientos de fluidos que admiten ${cfg.contextDimension}: ${fv.join(', ')}`);
+  }
+  if (model.stats.configRead && model.stats.configRead.length > 0) {
+    L.push(`  - config de GTM leída del volcado: ${model.stats.configRead.map((c) => `${c.key}=${c.value}`).join(', ')}`);
+  }
   L.push('  - análisis cualitativo: ignora cantidades, tiempos y rendimientos; las salidas con probabilidad cuentan como producidas.');
   L.push('');
   const parts = [];
-  if (opts.pass !== 'auto') parts.push(`puerta ${out.counts.gate.pass}/${out.counts.gate.total}`);
-  if (opts.pass !== 'gate') parts.push(`automático ${out.counts.auto.pass}/${out.counts.auto.total}${out.counts.auto.warn ? ` (+${out.counts.auto.warn} finitos)` : ''}`);
+  if (opts.pass !== 'auto') parts.push(`puerta ${out.counts.gate.pass}/${out.counts.gate.total}${out.counts.gate.warn ? ` (+${out.counts.gate.warn} avisos)` : ''}`);
+  if (opts.pass !== 'gate') parts.push(`automático ${out.counts.auto.pass}/${out.counts.auto.total}${out.counts.auto.warn ? ` (+${out.counts.auto.warn} avisos)` : ''}`);
   L.push(`VEREDICTO: ${out.verdict}  (${parts.join(' · ')})`);
   return L.join('\n') + '\n';
 }
@@ -184,6 +228,10 @@ export function toJson(model, res, out) {
   return {
     tier: model.cfg.tier, verdict: out.verdict, counts: out.counts, warnings: model.warnings,
     gate: out.gate.map(row), auto: out.auto.map(row),
-    stats: { rules: g.rules.length, recipes: model.stats.recipes, deadByType: model.stats.deadByType, ignoredByType: model.stats.ignoredByType },
+    stats: {
+      rules: g.rules.length, recipes: model.stats.recipes, deadByType: model.stats.deadByType, ignoredByType: model.stats.ignoredByType,
+      structureMachines: model.stats.structureMachineIds, rolledMachines: model.stats.rolledMachines,
+      fluidVeins: model.stats.fluidVeins, configRead: model.stats.configRead,
+    },
   };
 }
