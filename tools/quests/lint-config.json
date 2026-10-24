@@ -9,7 +9,9 @@
   "maxRewardEntries": 6,
   "direction": { "default": "ltr" },
   "allowRoots": {},
-  "allowLongEdges": [],
+  "allowLongEdges": [
+    { "from": "2EE2A70803F87897", "to": "70F4075BAF69DA99", "why": "Nichrome (hv_age): Black/Red Steel is a fixed early parent at x 10. Moving it closer would stretch its own edges, and the Nichrome id and dependencies are frozen for EV." }
+  ],
   "manyRewardsOk": [
     { "quest": "047B55ED9C952BC9", "why": "The Neutronium Toolbox (welcome): one reward per tool, on purpose (docs/misiones.md)." }
   ],
