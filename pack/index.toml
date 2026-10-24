@@ -10,7 +10,7 @@ hash = "de63e3cf6023cde07903b426e255f0690c7e3324c3e65a2da64bb7ff51cdad24"
 
 [[files]]
 file = "config/ftbquests/quests/chapters/applied_energistics.snbt"
-hash = "9c8940ba0bda9fa4ef46f974673c5d61dc340a96ad466e83aead5c295f53376b"
+hash = "ff110381a431586f21c8e677bbec2d206e532db214a3baf67816c8eaef82a4ca"
 
 [[files]]
 file = "config/ftbquests/quests/chapters/ev_age.snbt"
@@ -18,31 +18,31 @@ hash = "772c60b3e6f2d8f9153188fa69d8c9192dfbc47216417d4523ed96c3af8b6dc1"
 
 [[files]]
 file = "config/ftbquests/quests/chapters/hv_age.snbt"
-hash = "f87990d7ec2f72e7a3c9b871556254c6257e03f927609a9f18172ca9827b2bf4"
+hash = "25dbd8da60ba09c7271cd176387fcdb881ddff5c35d5950f1733b9648b6fd8f2"
 
 [[files]]
 file = "config/ftbquests/quests/chapters/lv_age.snbt"
-hash = "09562205681f5330af41582655ddee93b4194e5cfa048d3d5a74503985e7b88d"
+hash = "9d45c96ac653f08e5a0880c595a86871b5a7a2c4c54fa2c25a189a605d4b872f"
 
 [[files]]
 file = "config/ftbquests/quests/chapters/mv_age.snbt"
-hash = "eb6388d17f0178584cb85593cdd2f487e957ccc881c572cfef4bc4945c6d1acc"
+hash = "78058eafff90174e6bde8e40ccf52e176d5fa554f4dede4be9475d4a40f29d27"
 
 [[files]]
 file = "config/ftbquests/quests/chapters/productive_bees.snbt"
-hash = "2cc78926b7deb9ff844078e3746d5e23862f9146d9b8b14be027d6dbcc02c5c8"
+hash = "eb87ffb709a778e14f68f2c26935db135ed4f22efb485ca39f688d7d937ba3a2"
 
 [[files]]
 file = "config/ftbquests/quests/chapters/steam_age.snbt"
-hash = "7e4a8256f7439073ab9e42959c73b097dfc52515fdfe0d0324b66837f00cf84b"
+hash = "e23e374a742d6ea8f8bf738a1811ce5757d70b26ecfc710275ab51003695c993"
 
 [[files]]
 file = "config/ftbquests/quests/chapters/storage.snbt"
-hash = "d037c3ae61f0e332379be0f51e92a46cebff11a821c469f1f250b7a8284fb71b"
+hash = "c56359c8ce3a9ab1c61b1f5d7026a9b4e5e07b243ae4617817706a0d2ffd2a65"
 
 [[files]]
 file = "config/ftbquests/quests/chapters/travel_and_teams.snbt"
-hash = "d2efa77467660887feafce92fb6c9950694e1f814329562f580bf3d5f614d8c9"
+hash = "5b48248ddc7499f10a7142c1d7c97f8d522ae2781ec7d8faf5b9255ca4c98f07"
 
 [[files]]
 file = "config/ftbquests/quests/chapters/welcome.snbt"
@@ -50,7 +50,7 @@ hash = "3b86839ab4ac2a7765ae27d43021a42da9691d72ab03e82172d1045a8e3ea204"
 
 [[files]]
 file = "config/ftbquests/quests/chapters/workshop.snbt"
-hash = "7fff5f7b45c434545975228d1348ba851a24f3e79a34a279796147c2d982d5b4"
+hash = "b39f29654ad43a10e134f3872df7e63a2c0ab6979a833b252cee686ba9f5cd0c"
 
 [[files]]
 file = "config/ftbquests/quests/data.snbt"
