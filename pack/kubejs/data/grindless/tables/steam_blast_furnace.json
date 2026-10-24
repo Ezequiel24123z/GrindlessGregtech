@@ -1,0 +1,26 @@
+{
+  "_doc": [
+    "Feeds of the Steam Blast Furnace (gtceu:steam_blast_furnace, recipe type gtceu:steelmaking).",
+    "server_scripts/grindless/steam/blast_furnace.js makes one recipe per row: 4 of `input` + 4 coke + 1 flux -> 4 steel + 1 ash.",
+    "Only iron ores that GTM 7.5.3 smelts straight into iron (furnace recipes of their raw ore): the oxides and hydroxides of",
+    "the Steam Age veins (iron, magnetite, hematite, goethite, yellow limonite). Pyrite is a sulfide: it waits for the LV",
+    "sulfide roaster. Raw ore gives 1 steel, as smelting it gives 1 ingot; macerated first it gives 2 crushed ores and so",
+    "2 steel, the same value as GT's own furnace + Primitive Blast Furnace route.",
+    "`vein` is the steam drill vein that drills it (informative)."
+  ],
+  "feeds": [
+    { "id": "raw_iron", "input": "#forge:raw_materials/iron", "vein": "copper" },
+    { "id": "raw_magnetite", "input": "#forge:raw_materials/magnetite", "vein": "magnetite_ow" },
+    { "id": "raw_hematite", "input": "#forge:raw_materials/hematite", "vein": "iron" },
+    { "id": "raw_goethite", "input": "#forge:raw_materials/goethite", "vein": "iron" },
+    { "id": "raw_yellow_limonite", "input": "#forge:raw_materials/yellow_limonite", "vein": "iron" },
+    { "id": "crushed_iron", "input": "#forge:crushed_ores/iron" },
+    { "id": "crushed_magnetite", "input": "#forge:crushed_ores/magnetite" },
+    { "id": "crushed_hematite", "input": "#forge:crushed_ores/hematite" },
+    { "id": "crushed_goethite", "input": "#forge:crushed_ores/goethite" },
+    { "id": "crushed_yellow_limonite", "input": "#forge:crushed_ores/yellow_limonite" },
+    { "id": "iron_ingot", "input": "#forge:ingots/iron" },
+    { "id": "iron_dust", "input": "#forge:dusts/iron" }
+  ],
+  "fluxes": ["#forge:raw_materials/calcite", "#forge:dusts/calcite", "minecraft:calcite"]
+}
