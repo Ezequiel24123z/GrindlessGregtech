@@ -114,6 +114,24 @@ existing vein-drill multiblock design for every resource (GCYR's own ore gen mus
   [[#122]](https://github.com/Argent-Matter/gcyr/issues/122) — Rocket Scanner multiblock intermittently fails to
   capture the full built rocket ("disappears or builds partway"), core devs still diagnosing as of 2026-08-22.
   12 open issues total; 69 lifetime (mostly closed) — normal pre-1.0 churn, not abandonment.
+- **Checked in game (2026-10-24, GCYR 0.2.9 + GTM 7.5.3; test `tools/test/overlay/kubejs/server_scripts/gg_test_gcyr_flight.js`,
+  client suite = real client and player on the integrated server):
+  - **#91 does not reproduce.** Earth -> Moon -> Earth round trips: the server kept ticking (longest tick at a
+    teleport 2.4 s), the rider is still seated after every teleport, one rocket arrives and none stays behind. GCYR
+    still moves the riders twice (the rocket's `changeDimension` moves them, then `goToDestination` again; the
+    2026-09 dev snapshot keeps that code). A dedicated server with a remote client was not tested.
+  - **#122 reproduces, two causes, fixed in the pack** (`server_scripts/grindless/space/rocket_scanner.js`): the scanner
+    measures pad and tower only when the structure forms, so a tower that grows later is scanned at the old height (top
+    of the rocket left behind, seat popped off as an item) - the right-click on the controller now re-checks the
+    structure; an asymmetric pad is laid out mirrored (never forms facing N/S; forms facing E/W but "Build" scans the
+    mirrored area) - the right-click is refused with a message until the pad is symmetric.
+  - **Third bug: the climbing rocket burns its own rider** (`burnEntities`, 15 s of fire) when the rider's client is
+    a tick ahead, because vehicle movement is client-side: 19 of 20 health points leaving the Moon. Fixed in the pack
+    (`space/rocket_riders.js`: riders get fire resistance).
+  - **A suit without oxygen does not protect**: the `gcyr:is_spacesuit` tag is empty in 0.2.9. The chestplate holds
+    16 B of any `forge:oxygen` fluid (1 mB every 3 ticks, about 40 min); with it the full suit keeps 60-363 K (Moon
+    113 K). Launch needs 8 B in the tank for the Moon (2 basic tanks); a leg burns about 1.2 B. Landing needs Space
+    held (a rocket that hits the ground with fall distance > 48 explodes).
 
 ## 4. License verdicts (exact)
 
@@ -186,9 +204,9 @@ existing vein-drill multiblock design for every resource (GCYR's own ore gen mus
 
 - **Worldgen duplication** (§3) must be fixed before any Mars content ships, or the pack's core "unobtainable on
   Earth" rule is silently broken on day one.
-- **Two open, unresolved reliability bugs** at the rocket-launch/dimension-teleport boundary
-  ([#91](https://github.com/Argent-Matter/gcyr/issues/91), [#122](https://github.com/Argent-Matter/gcyr/issues/122))
-  — test thoroughly before gating quest progression on rocket launches; LGPL-3.0 means we can patch/fork if needed.
+- **Rocket reliability** ([#91](https://github.com/Argent-Matter/gcyr/issues/91), [#122](https://github.com/Argent-Matter/gcyr/issues/122)):
+  checked in game (section 3): #91 did not reproduce, #122 and the burning rider are fixed by pack scripts. Run
+  `gg_test_gcyr_flight` (client suite) again after any GCYR update; LGPL-3.0 means we can patch/fork if needed.
 - **Satellites/mining lasers are NYI** — don't schedule orbital-mining-without-landing content assuming GCYR ships
   it; budget for building it ourselves (§6).
 - **Proxima Centauri b (2nd system) is visibly less finished** (placeholder texture, `// TODO` comment found in

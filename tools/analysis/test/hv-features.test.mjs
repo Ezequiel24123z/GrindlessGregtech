@@ -13,14 +13,19 @@ const linesOf = (list, id) => list.find((r) => r.target.id === id).lines.join('\
 
 // ---------------------------------------------------------------- configuración real del tier
 
-test('tier hv: hereda del MV, quita las tres fugas que dejan de valer y la cámara limpia pasa de no soportada a exigir la máquina', () => {
+test('tier hv: hereda del MV, quita las dos comprobaciones del End que la Luna deja sin valor y la cámara limpia pasa de no soportada a exigir la máquina', () => {
   const { raw: mv } = loadTierConfig({ tier: 'mv' }, TIERS);
   const { raw: hv } = loadTierConfig({ tier: 'hv' }, TIERS);
   const ids = (cfg) => cfg.targets.map((t) => t.id);
-  for (const id of ['ojo-ender-no-antes-de-hv', 'polvo-blaze-no-antes-de-hv', 'vara-blaze-no-antes-de-hv']) {
+  // v0.5.0: el End (y con él el ojo de ender y el blaze) es del MV; en HV la Luna también da ilmenita y cromita
+  for (const id of ['ilmenita-no-sale-del-end', 'menas-end-sin-llave']) {
     assert.ok(ids(mv).includes(id), `${id} debería estar en el MV`);
     assert.ok(!ids(hv).includes(id), `${id} ya no vale en el HV`);
   }
+  for (const id of ['ojo-ender-no-antes-de-hv', 'polvo-blaze-no-antes-de-hv', 'vara-blaze-no-antes-de-hv']) {
+    assert.ok(!ids(mv).includes(id) && !ids(hv).includes(id), `${id}: el ojo de ender y el blaze ya son del MV`);
+  }
+  for (const id of ['llave-end', 'ojo-ender', 'menas-end-con-llave']) assert.ok(ids(hv).includes(id), `${id} se hereda del MV`);
   // la escotilla HV deja de ser opcional (el mismo id sustituye al del MV)
   assert.equal(mv.targets.find((t) => t.id === 'escotilla-energia-hv').optional, true);
   assert.ok(!hv.targets.find((t) => t.id === 'escotilla-energia-hv').optional);

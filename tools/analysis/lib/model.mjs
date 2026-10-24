@@ -495,9 +495,12 @@ export function buildModel(dump, rawCfg) {
       slots.push(slotOf(i.alts, !!i.cap, i.label, i.kind, !!i.cat));
     }
     for (const c of n.conditions) {
-      if (c.type === 'dimension' && typeof c.dimension === 'string' && cfg.conditions.dimension && cfg.conditions.dimension.asKeys) {
-        // auditoría de obtención: la receta pide la clave dim:<id>, un hecho para cada dimensión a la que se llega (y otra pasada
-        // añade las de las eras posteriores). La condición inversa ("fuera de X") se cumple en cualquier otra dimensión.
+      const dimCfg = cfg.conditions.dimension;
+      if (c.type === 'dimension' && typeof c.dimension === 'string' && dimCfg && (dimCfg.asKeys || asArray(dimCfg.asKeysFor).includes(c.dimension))) {
+        // auditoría de obtención (asKeys): la receta pide la clave dim:<id>, un hecho para cada dimensión a la que se llega (y otra
+        // pasada añade las de las eras posteriores). `asKeysFor: [ids]` hace lo mismo solo con esas dimensiones: una base fuera de
+        // la fábrica (la Luna), cuya clave da una regla del tier (el viaje). La condición inversa ("fuera de X") se cumple en
+        // cualquier otra dimensión.
         if (c.reverse !== true) slots.push(slotOf(['dim:' + c.dimension], true, `en ${c.dimension}`, 'cond'));
         continue;
       }
