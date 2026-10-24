@@ -1,0 +1,8 @@
+compat:
+  energy:
+    enableFEConverters: true
+worldgen:
+  oreVeins:
+    infiniteBedrockOresFluids: true
+machines:
+  enableMaintenance: false

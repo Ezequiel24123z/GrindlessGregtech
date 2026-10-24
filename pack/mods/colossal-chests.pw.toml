@@ -1,0 +1,14 @@
+name = "Colossal Chests"
+filename = "ColossalChests-1.20.1-1.8.7.jar"
+side = "both"
+pin = true
+
+[download]
+url = "https://cdn.modrinth.com/data/V8HM9qmm/versions/YQproBHx/ColossalChests-1.20.1-1.8.7.jar"
+hash-format = "sha512"
+hash = "7c6e776266057d25789c38a57ddd83ea2a13e181ef40bad21d9295186a5b2d61ea937584baa73e82113a1b2d3e74d7ff3e73d30e121d7601e355fb02cd77d517"
+
+[update]
+[update.modrinth]
+mod-id = "V8HM9qmm"
+version = "YQproBHx"

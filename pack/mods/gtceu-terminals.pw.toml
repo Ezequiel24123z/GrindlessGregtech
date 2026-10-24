@@ -1,0 +1,14 @@
+name = "Gregtech Terminals"
+filename = "gregtechterminals-6.8.5-fix.jar"
+side = "both"
+pin = true
+
+[download]
+url = "https://cdn.modrinth.com/data/jIBIhAO2/versions/9p3g1V5R/gregtechterminals-6.8.5-fix.jar"
+hash-format = "sha512"
+hash = "585c0355ca53851616670fd40474637a13ef46997f5c3ce4bb4c497958ed107be488848fbba7604062b74a51ed3baacf66a8ebd5985652368302ba6146f0a317"
+
+[update]
+[update.modrinth]
+mod-id = "jIBIhAO2"
+version = "9p3g1V5R"

@@ -1,0 +1,34 @@
+{
+  "_source": "GT-- (gtnn 1.3.10) registers these two Overworld veins in code (gtnn:kaolinite_vein, gtnn:wollastonite_vein; no datapack JSON). Every value below was read from the live vein registry (GTRegistries.ORE_VEINS) of the pack: heightRangeUniform, weight, layer and the layer patterns of the generator. Colors: .color() of each material in GTM's common/data/materials/*.java.",
+  "_how_it_is_used": [
+    "Same format as veins.json (read that file's notes), for the Overworld veins other mods add on top of GTM's 22 (that file belongs to the steam data and is not touched). Loaded by startup_scripts/grindless/lv/multis_items.js as global.grindless.tables.veins_overworld_extra: it feeds the sample items. server_scripts/grindless/lv/vein_drilling.js normalizes it (global.grindless.lv.extraVeins()), generates the steam recipes (same numbers as the steam table: bronze bit 2.5 ores per run and 10 % wear, steel bit 3.75 and 4 %) and, through allVeins(), every LV, MV and HV recipe; server_scripts/grindless/lv/crafting_multis.js crafts the samples.",
+    "id = vein id without namespace and without the '_vein' suffix ('kaolinite_vein' -> 'kaolinite'); the sample item is grindless:vein_sample_<id>. The pack validator (tools/analysis) looks for exactly that name for every registry vein. Ids do not clash with veins.json.",
+    "gtm = id in GTRegistries.ORE_VEINS; without a namespace it is gtceu:<gtm>, as in the other tables. layer = stone. minY/maxY = heightRangeUniform. spawnWeight = vein weight.",
+    "materials[].id = GTM material name; weight = layer weight of the layered generator. wollastonite_vein also lists andradite (weight 1) in GT--, but GTM has no andradite ore (no ore block, no raw_andradite item, only dust/gem), so that layer yields nothing and it is not listed.",
+    "colorMaterial = the vein's first material (neither vein has a surface indicator); color = that material's GTM .color() (tint of the sample core).",
+    "Both are plain Overworld stone veins: they are drilled by the Steam Vein Drill like the 22 of veins.json (no fluid needed), and by the LV, MV and HV drills with their fluid and better-bit variants. The sample is crafted with an empty vein probe and two raw ores of the vein (the two most common ones, or the next pair when another vein already uses it)."
+  ],
+  "veins": [
+    {
+      "id": "kaolinite", "gtm": "gtnn:kaolinite_vein", "generator": "layered", "layer": "stone",
+      "minY": 30, "maxY": 70, "spawnWeight": 60,
+      "colorMaterial": "kaolinite", "color": "#969090",
+      "materials": [
+        { "id": "kaolinite", "weight": 2 },
+        { "id": "zeolite", "weight": 2 },
+        { "id": "fullers_earth", "weight": 2 },
+        { "id": "glauconite_sand", "weight": 1 }
+      ]
+    },
+    {
+      "id": "wollastonite", "gtm": "gtnn:wollastonite_vein", "generator": "layered", "layer": "stone",
+      "minY": 120, "maxY": 200, "spawnWeight": 40,
+      "colorMaterial": "wollastonite", "color": "#C4CBCF",
+      "materials": [
+        { "id": "dolomite", "weight": 2 },
+        { "id": "wollastonite", "weight": 2 },
+        { "id": "trona", "weight": 2 }
+      ]
+    }
+  ]
+}

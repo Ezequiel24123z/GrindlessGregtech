@@ -1,0 +1,14 @@
+name = "GregTech Modern Quality of Life"
+filename = "gtmqol-0.0.7.2-st.jar"
+side = "client"
+pin = true
+
+[download]
+url = "https://cdn.modrinth.com/data/AjKh7xmz/versions/GF9jyPdr/gtmqol-0.0.7.2-st.jar"
+hash-format = "sha512"
+hash = "35076b8c83100df864d134b35d7b2579515e975579b1505548be7f931bd36aa4b6364e419c47f630e250784499a52dc2c46cb7611a4f79064b8abee98ce3290c"
+
+[update]
+[update.modrinth]
+mod-id = "AjKh7xmz"
+version = "GF9jyPdr"

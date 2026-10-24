@@ -1,0 +1,67 @@
+{
+  "_source": "GregTechCEu/GregTech-Modern tag v7.5.3-1.20.1: src/main/java/com/gregtechceu/gtceu/common/data/GTOres.java (End Vein section). Colors: .color() of each material in common/data/materials/*.java. zirconium: the GT Community Additions mod (gtca 2.2.0) registers it as gtceu:zirconium_vein; read from the live vein registry (GTRegistries.ORE_VEINS) like every other value of it.",
+  "_how_it_is_used": [
+    "Same format as veins.json (read that file's notes). Loaded by startup_scripts/grindless/hv/family_items.js as global.grindless.tables.veins_end: it feeds the End vein sample items. server_scripts/grindless/hv/family_vein_drilling.js derives the recipes (global.grindless.hv.endVeins()) and server_scripts/grindless/hv/family_crafting.js the sample recipes.",
+    "id = GTM vein id without the '_vein' suffix ('scheelite_vein' -> 'scheelite'; 'bauxite_vein_end' -> 'bauxite_end', 'magnetite_vein_end' -> 'magnetite_end': the Overworld table already has 'magnetite_ow'). The sample item is grindless:vein_sample_<id>. Ids do not clash with the Overworld or the Nether table.",
+    "gtm = GTM vein id (gtceu:<gtm> in GTRegistries.ORE_VEINS). layer = endstone. minY/maxY = heightRangeUniform (End). spawnWeight = GTM vein weight.",
+    "materials[].id = GTM material name; a material of an addon mod keeps its namespace ('gtca:red_zircon': raw ore item gtca:raw_red_zircon, tag forge:raw_materials/red_zircon, lang key material.gtca.red_zircon). weight = layer weight (layered) or block weight (dike). bauxite_vein_end also has a plain END_STONE layer (weight 2, size 1-6) in GTM: it is not an ore, so it is not listed; the drill gives end stone as the inert byproduct of every run instead.",
+    "colorMaterial = surface indicator rock of the vein in GTM; color = that material's GTM .color() (tint of the sample core).",
+    "Only the non-radioactive End veins are here: GTM's four (bauxite_end, magnetite_end, scheelite, sheldonite) and GT Community Additions' zirconium. GTM's other two, naquadah_vein (naquadah, plutonium 239) and pitchblende_vein_end (pitchblende, uraninite), are radioactive and nobody asks for them before IV: they stay in data/grindless/tables/veins_excluded.json until then and join this table (and a drill of that tier) later.",
+    "These recipes always need drilling fluid (gtceu:drilling_fluid), which the Steam Vein Drill cannot take, and are only run by the HV Vein Drill and better: they are the recipe ids grindless:vein_drilling/hv/..., which the LV and MV drills skip (see startup_scripts/grindless/lv/multis.js). They take the vanadium steel bit or the titanium bit. The sample is crafted with two raw ores of the vein, so one trip to the End is exploration, not grind. When the two most common ores are already the sample recipe of another vein (magnetite_end = Overworld magnetite_ow), the next most common pair is used."
+  ],
+  "veins": [
+    {
+      "id": "bauxite_end", "gtm": "bauxite_vein_end", "generator": "layered", "layer": "endstone",
+      "minY": 10, "maxY": 80, "spawnWeight": 40,
+      "colorMaterial": "bauxite", "color": "#CFB853",
+      "materials": [
+        { "id": "bauxite", "weight": 2 },
+        { "id": "ilmenite", "weight": 1 },
+        { "id": "aluminium", "weight": 1 }
+      ]
+    },
+    {
+      "id": "magnetite_end", "gtm": "magnetite_vein_end", "generator": "layered", "layer": "endstone",
+      "minY": 20, "maxY": 80, "spawnWeight": 30,
+      "colorMaterial": "magnetite", "color": "#9D9D9D",
+      "materials": [
+        { "id": "magnetite", "weight": 3 },
+        { "id": "vanadium_magnetite", "weight": 2 },
+        { "id": "chromite", "weight": 2 },
+        { "id": "gold", "weight": 1 }
+      ]
+    },
+    {
+      "id": "scheelite", "gtm": "scheelite_vein", "generator": "dike", "layer": "endstone",
+      "minY": 20, "maxY": 60, "spawnWeight": 20,
+      "colorMaterial": "scheelite", "color": "#D7E8B3",
+      "materials": [
+        { "id": "scheelite", "weight": 3 },
+        { "id": "tungstate", "weight": 2 },
+        { "id": "lithium", "weight": 1 }
+      ]
+    },
+    {
+      "id": "sheldonite", "gtm": "sheldonite_vein", "generator": "layered", "layer": "endstone",
+      "minY": 5, "maxY": 50, "spawnWeight": 10,
+      "colorMaterial": "platinum", "color": "#FFF4BA",
+      "materials": [
+        { "id": "bornite", "weight": 3 },
+        { "id": "cooperite", "weight": 2 },
+        { "id": "platinum", "weight": 2 },
+        { "id": "palladium", "weight": 1 }
+      ]
+    },
+    {
+      "id": "zirconium", "gtm": "zirconium_vein", "generator": "dike", "layer": "endstone",
+      "minY": 20, "maxY": 60, "spawnWeight": 15,
+      "colorMaterial": "gtca:red_zircon", "color": "#FC4444",
+      "materials": [
+        { "id": "gtca:red_fuchsite", "weight": 2 },
+        { "id": "gtca:red_zircon", "weight": 2 },
+        { "id": "gtca:fayalite", "weight": 1 },
+        { "id": "gtca:green_fuchsite", "weight": 2 }
+      ]
+    }
+  ]
+}

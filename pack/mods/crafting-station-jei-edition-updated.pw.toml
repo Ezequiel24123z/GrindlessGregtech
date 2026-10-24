@@ -1,0 +1,14 @@
+name = "Crafting Station: J/EMI Edition Updated"
+filename = "craftingstationjei-1.20.1-Forge-2.2.1.jar"
+side = "both"
+pin = true
+
+[download]
+url = "https://cdn.modrinth.com/data/rc8HlDUK/versions/6HnKGwNa/craftingstationjei-1.20.1-Forge-2.2.1.jar"
+hash-format = "sha512"
+hash = "df40766fddadc3ec659fc4e383c0a79c9e981212a3a5f48f457f5ccf33c31b931c1e8d89cf687375bf307c27434d4531fecfde37ff2850b45fff1ad803ed8200"
+
+[update]
+[update.modrinth]
+mod-id = "rc8HlDUK"
+version = "6HnKGwNa"

@@ -1,0 +1,40 @@
+# Benign ERROR/WARN lines ignored by the test summary (Show-GGResults.ps1).
+# One .NET regex per line; '#' starts a comment. A line is ignored when ANY regex matches it
+# (matched against the log line without its leading [timestamp]).
+# Keep this list SHORT and SPECIFIC: every entry hides a message from future runs.
+
+# --- offline / headless client (HeadlessMC + mc-runtime-test) ---
+Failed to retrieve profile key pair
+Failed to verify authentication
+Error starting SoundSystem\. Turning off sounds & music
+Couldn't save auto screenshot
+Missing sound for event: minecraft:
+Unable to parse the boolean system property 'java\.net\.preferIPv6Addresses'
+io exception while checking versions
+
+# --- offline dedicated server (online-mode=false) ---
+SERVER IS RUNNING IN OFFLINE/INSECURE MODE
+The server will make no attempt to authenticate usernames
+While this makes the game possible to play without internet access
+To change this, set "online-mode" to "true"
+
+# --- first boot of a fresh instance (configs are created/corrected on the first run, every run is fresh) ---
+Incorrect key .* was corrected from null to its default
+Configuration file .* is not correct\. Correcting
+is missing mods\.toml file
+Mod file .*[\\/]libraries[\\/]net[\\/]minecraftforge[\\/]
+Assets URL 'union:/.*' uses unexpected schema
+
+# --- KubeJS informational warnings ---
+Plugin dev\.latvian\.mods\.kubejs\..* (does not have required mod .* loaded|does not load on server side), skipping
+Due to the way Minecraft resource loading works, KubeJS' server\.log may not contain everything
+You can still see the full log \(including past reloads\) in your latest\.log file
+
+# --- optional integrations probing for classes of mods that are not installed ---
+Error loading class: .* \(java\.lang\.ClassNotFoundException: .*\)
+
+# --- dedicated server: Forge's DistCleaner meets client-only classes referenced from common mod code (harmless) ---
+RuntimeDistCleaner/DISTXFORM\]: Attempted to load class .* for invalid dist DEDICATED_SERVER
+
+# --- flat world (-Flat) ---
+No key layers in MapLike

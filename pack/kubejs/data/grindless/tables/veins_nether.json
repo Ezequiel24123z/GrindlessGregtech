@@ -1,0 +1,148 @@
+{
+  "_source": "GregTechCEu/GregTech-Modern tag v7.5.3-1.20.1: src/main/java/com/gregtechceu/gtceu/common/data/GTOres.java (Nether Vein section). Colors: .color() of each material in common/data/materials/*.java. germanite: the GT Community Additions mod (gtca 2.2.0) registers it as gtceu:germanite_vein; read from the live vein registry (GTRegistries.ORE_VEINS) like every other value of it.",
+  "_how_it_is_used": [
+    "Same format as veins.json (read that file's notes). Loaded by startup_scripts/grindless/lv/multis_items.js as global.grindless.tables.veins_nether: it feeds the Nether vein sample items. server_scripts/grindless/lv/vein_drilling.js derives the recipes from it.",
+    "id = GTM vein id without the '_vein' suffix ('banded_iron_vein' -> 'banded_iron'; GTM calls the certus vein 'certus_quartz' with no suffix). The sample item is grindless:vein_sample_<id>. Ids do not clash with the Overworld table (that one uses *_ow for the veins GTM duplicates, e.g. redstone_ow, manganese_ow).",
+    "gtm = GTM vein id (gtceu:<gtm> in GTRegistries.ORE_VEINS). layer = netherrack. minY/maxY = heightRangeUniform (Nether, 0..128). spawnWeight = GTM vein weight.",
+    "materials[].id = GTM material name (GTM's Limonite is 'yellow_limonite'); a material of an addon mod keeps its namespace ('gtca:germanite': raw ore item gtca:raw_germanite, tag forge:raw_materials/germanite, lang key material.gtca.germanite). weight = layer weight (layered), block weight (dike, veined). veined veins: materials with rare=true show up with probability rareChance, the others share the rest by weight (GTM rareBlockChance).",
+    "colorMaterial = surface indicator rock of the vein in GTM; color = that material's GTM .color() (tint of the sample core).",
+    "These recipes always need drilling fluid (gtceu:drilling_fluid), which the Steam Vein Drill cannot take: only the LV Vein Drill (and later electric drills) can drill the Nether table. The sample is crafted with two raw ores of the vein, so one trip to the Nether is exploration, not grind. When the two most common ores are already the sample recipe of another vein (banded_iron = Overworld iron, redstone = Overworld redstone_ow), server_scripts/grindless/lv/vein_drilling.js moves to the next most common pair."
+  ],
+  "veins": [
+    {
+      "id": "banded_iron", "gtm": "banded_iron_vein", "generator": "veined", "layer": "netherrack",
+      "minY": 20, "maxY": 40, "spawnWeight": 30,
+      "colorMaterial": "goethite", "color": "#97873A",
+      "rareChance": 0.075,
+      "materials": [
+        { "id": "goethite", "weight": 3 },
+        { "id": "yellow_limonite", "weight": 2 },
+        { "id": "hematite", "weight": 2 },
+        { "id": "gold", "weight": 1, "rare": true }
+      ]
+    },
+    {
+      "id": "beryllium", "gtm": "beryllium_vein", "generator": "dike", "layer": "netherrack",
+      "minY": 5, "maxY": 30, "spawnWeight": 30,
+      "colorMaterial": "beryllium", "color": "#73D73D",
+      "materials": [
+        { "id": "beryllium", "weight": 3 },
+        { "id": "emerald", "weight": 2 },
+        { "id": "thorium", "weight": 1 }
+      ]
+    },
+    {
+      "id": "certus_quartz", "gtm": "certus_quartz", "generator": "layered", "layer": "netherrack",
+      "minY": 80, "maxY": 120, "spawnWeight": 40,
+      "colorMaterial": "certus_quartz", "color": "#C2D6FF",
+      "materials": [
+        { "id": "quartzite", "weight": 3 },
+        { "id": "certus_quartz", "weight": 2 },
+        { "id": "barite", "weight": 1 }
+      ]
+    },
+    {
+      "id": "germanite", "gtm": "germanite_vein", "generator": "dike", "layer": "netherrack",
+      "minY": 10, "maxY": 40, "spawnWeight": 12,
+      "colorMaterial": "gtca:germanite", "color": "#464646",
+      "materials": [
+        { "id": "gtca:germanite", "weight": 3 },
+        { "id": "sphalerite", "weight": 1 },
+        { "id": "yellow_limonite", "weight": 1 }
+      ]
+    },
+    {
+      "id": "manganese", "gtm": "manganese_vein", "generator": "dike", "layer": "netherrack",
+      "minY": 20, "maxY": 30, "spawnWeight": 20,
+      "colorMaterial": "grossular", "color": "#FFB777",
+      "materials": [
+        { "id": "grossular", "weight": 3 },
+        { "id": "pyrolusite", "weight": 2 },
+        { "id": "tantalite", "weight": 1 }
+      ]
+    },
+    {
+      "id": "molybdenum", "gtm": "molybdenum_vein", "generator": "layered", "layer": "netherrack",
+      "minY": 20, "maxY": 50, "spawnWeight": 5,
+      "colorMaterial": "molybdenum", "color": "#C1C1CE",
+      "materials": [
+        { "id": "wulfenite", "weight": 3 },
+        { "id": "molybdenite", "weight": 2 },
+        { "id": "molybdenum", "weight": 1 },
+        { "id": "powellite", "weight": 1 }
+      ]
+    },
+    {
+      "id": "monazite", "gtm": "monazite_vein", "generator": "layered", "layer": "netherrack",
+      "minY": 20, "maxY": 40, "spawnWeight": 30,
+      "colorMaterial": "bastnasite", "color": "#CAAB60",
+      "materials": [
+        { "id": "bastnasite", "weight": 3 },
+        { "id": "monazite", "weight": 1 },
+        { "id": "neodymium", "weight": 1 }
+      ]
+    },
+    {
+      "id": "nether_quartz", "gtm": "nether_quartz_vein", "generator": "layered", "layer": "netherrack",
+      "minY": 40, "maxY": 80, "spawnWeight": 80,
+      "colorMaterial": "nether_quartz", "color": "#F8EFE3",
+      "materials": [
+        { "id": "nether_quartz", "weight": 3 },
+        { "id": "quartzite", "weight": 1 }
+      ]
+    },
+    {
+      "id": "redstone", "gtm": "redstone_vein", "generator": "layered", "layer": "netherrack",
+      "minY": 5, "maxY": 40, "spawnWeight": 60,
+      "colorMaterial": "redstone", "color": "#FF0000",
+      "materials": [
+        { "id": "redstone", "weight": 3 },
+        { "id": "ruby", "weight": 2 },
+        { "id": "cinnabar", "weight": 1 }
+      ]
+    },
+    {
+      "id": "saltpeter", "gtm": "saltpeter_vein", "generator": "layered", "layer": "netherrack",
+      "minY": 5, "maxY": 45, "spawnWeight": 40,
+      "colorMaterial": "saltpeter", "color": "#E6E6E6",
+      "materials": [
+        { "id": "saltpeter", "weight": 3 },
+        { "id": "diatomite", "weight": 2 },
+        { "id": "electrotine", "weight": 2 },
+        { "id": "alunite", "weight": 1 }
+      ]
+    },
+    {
+      "id": "sulfur", "gtm": "sulfur_vein", "generator": "layered", "layer": "netherrack",
+      "minY": 10, "maxY": 30, "spawnWeight": 100,
+      "colorMaterial": "sulfur", "color": "#FDFF31",
+      "materials": [
+        { "id": "sulfur", "weight": 3 },
+        { "id": "pyrite", "weight": 2 },
+        { "id": "sphalerite", "weight": 1 }
+      ]
+    },
+    {
+      "id": "tetrahedrite", "gtm": "tetrahedrite_vein", "generator": "veined", "layer": "netherrack",
+      "minY": 80, "maxY": 120, "spawnWeight": 70,
+      "colorMaterial": "tetrahedrite", "color": "#A3A09B",
+      "rareChance": 0.15,
+      "materials": [
+        { "id": "tetrahedrite", "weight": 4 },
+        { "id": "copper", "weight": 2 },
+        { "id": "stibnite", "weight": 1, "rare": true }
+      ]
+    },
+    {
+      "id": "topaz", "gtm": "topaz_vein", "generator": "layered", "layer": "netherrack",
+      "minY": 80, "maxY": 120, "spawnWeight": 70,
+      "colorMaterial": "topaz", "color": "#E8D73A",
+      "materials": [
+        { "id": "blue_topaz", "weight": 3 },
+        { "id": "topaz", "weight": 2 },
+        { "id": "chalcocite", "weight": 2 },
+        { "id": "bornite", "weight": 1 }
+      ]
+    }
+  ]
+}

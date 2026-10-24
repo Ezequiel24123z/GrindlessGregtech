@@ -1,0 +1,14 @@
+name = "GregTech Storage Drawers"
+filename = "gtstoragedrawers-1.20.1-1.0.2.jar"
+side = "both"
+pin = true
+
+[download]
+url = "https://cdn.modrinth.com/data/1mO2ZwEr/versions/PzjTcx40/gtstoragedrawers-1.20.1-1.0.2.jar"
+hash-format = "sha512"
+hash = "1d6f73e014d73f8a7e69b8bbd43727647c21b62c398c242d36202ce18bcbdf730b44b5fe29da2831631d00c7a651dce76014db6f7bacb1c220434735f74ca356"
+
+[update]
+[update.modrinth]
+mod-id = "1mO2ZwEr"
+version = "PzjTcx40"

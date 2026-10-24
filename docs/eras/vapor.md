@@ -50,7 +50,7 @@ Qué gana: madera, resina y comida sin talar ni plantar. Ninguna máquina de un 
 
 ## Subproductos
 
-- La piedra de la perforadora es inerte y se puede tirar. En LV también puede ir a la centrífuga.
+- La piedra de la perforadora es inerte y se puede tirar. En LV puede ir al lodo de perforación y en MV a la centrífuga, como hace GTM.
 - Los plantones sobrantes van a compostaje (bolas de planta en LV) o a biomasa más adelante.
 - La creosota del horno de coque es combustible o madera tratada. No se inventa ninguna receta solo para "aprovecharla".
 

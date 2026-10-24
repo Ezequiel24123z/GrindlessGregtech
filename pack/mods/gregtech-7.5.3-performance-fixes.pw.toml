@@ -1,0 +1,14 @@
+name = "GregTech  7.5.3 Performance Fixes"
+filename = "gtopt-0.1.4.jar"
+side = "both"
+pin = true
+
+[download]
+url = "https://cdn.modrinth.com/data/MMLK7xkj/versions/IchS8FaE/gtopt-0.1.4.jar"
+hash-format = "sha512"
+hash = "eccf163395c0b28e45647446002d4e972029a1690d556c32a90634decfa0b93b7fc032d43ad7120e5de9cd3ba7f9a9c19807818ee01224ccf1e49e850ef06304"
+
+[update]
+[update.modrinth]
+mod-id = "MMLK7xkj"
+version = "IchS8FaE"

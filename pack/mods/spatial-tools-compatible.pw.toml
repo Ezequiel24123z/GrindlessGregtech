@@ -1,0 +1,14 @@
+name = "Spatial Tools Compatible"
+filename = "spatialtoolscmp-1.12.4.jar"
+side = "both"
+pin = true
+
+[download]
+url = "https://cdn.modrinth.com/data/iKhNYcsL/versions/fQL6kBiv/spatialtoolscmp-1.12.4.jar"
+hash-format = "sha512"
+hash = "50e4e4dc41490dfc4df52799eb5152ee8dc1ddeb779d28acc09621f288d179bfa23947f3b17a1faaee652133668cddbad3f0949ad0c69b4f0d9938eaf4558984"
+
+[update]
+[update.modrinth]
+mod-id = "iKhNYcsL"
+version = "fQL6kBiv"

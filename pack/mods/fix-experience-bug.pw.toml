@@ -1,0 +1,14 @@
+name = "Fix Experience Bug"
+filename = "fixexperiencebug-1.20-46.2.2.jar"
+side = "both"
+pin = true
+
+[download]
+url = "https://cdn.modrinth.com/data/o1BM1Yuz/versions/8TypATac/fixexperiencebug-1.20-46.2.2.jar"
+hash-format = "sha512"
+hash = "1d1f7775dede5abf5c26a1c407055d406de8740671a446e643fb791c6897ad0a0d645dc3f880c9ea34b636c275472d8df1ef9c1bd4f1d48ff98f7e5b36a00275"
+
+[update]
+[update.modrinth]
+mod-id = "o1BM1Yuz"
+version = "8TypATac"

@@ -1,0 +1,14 @@
+name = "Fullblock Energistics"
+filename = "fulleng-forge-1.7.3-1.20.1.jar"
+side = "both"
+pin = true
+
+[download]
+url = "https://cdn.modrinth.com/data/24BlI6Ao/versions/GVhIUJHN/fulleng-forge-1.7.3-1.20.1.jar"
+hash-format = "sha512"
+hash = "eba02927b0ba5593a52032756e26dc88d07af419a7d1a3b8a00de47b1d720320e05cf9f068c9477624b46fc641f8b4a4d1fa6513f9a4d86d8066c3a01bf26547"
+
+[update]
+[update.modrinth]
+mod-id = "24BlI6Ao"
+version = "GVhIUJHN"
