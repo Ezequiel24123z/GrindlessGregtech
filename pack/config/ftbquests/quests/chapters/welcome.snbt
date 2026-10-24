@@ -1,0 +1,72 @@
+{
+	default_hide_dependency_lines: false
+	default_quest_shape: ""
+	filename: "welcome"
+	group: ""
+	icon: "ftbquests:book"
+	id: "AF8F1F5704361EE3"
+	order_index: 0
+	quest_links: [ ]
+	quests: [
+		{
+			description: [
+				"This book tracks what you have done and nudges you toward what comes next."
+				"Nothing in here is mandatory reading. Lose the book and you can always make another - it's cheap on purpose."
+			]
+			icon: "minecraft:bread"
+			id: "E9BDA9FBB0EB66F2"
+			rewards: [
+				{ count: 8, id: "A1A6FB493B3D6DA8", item: "minecraft:bread", type: "item" }
+				{ count: 16, id: "4FE190B37FB472CA", item: "minecraft:torch", type: "item" }
+			]
+			shape: "rsquare"
+			size: 1.5d
+			tasks: [{ id: "436062DAEF17D6AD", type: "checkmark" }]
+			title: "Arrival"
+			x: 0.0d
+			y: 0.0d
+		}
+		{
+			dependencies: ["E9BDA9FBB0EB66F2"]
+			description: [
+				"The &6Void Key&r drops you into an empty dimension with a small platform under your feet. Good for testing builds without touching your real base."
+				"Use the key again and you're back on the Overworld, right where you left."
+			]
+			icon: "grindless:void_key"
+			id: "F194C28F070B38A2"
+			rewards: [{ id: "B6BF9B1736D3E98E", item: "grindless:void_key", type: "item" }]
+			tasks: [{ id: "62E189D85E4FDE7D", type: "checkmark" }]
+			title: "Key to the Void"
+			x: 3.0d
+			y: -2.0d
+		}
+		{
+			dependencies: ["E9BDA9FBB0EB66F2"]
+			description: [
+				"The &6Flatland Key&r sends you to a stone world flattened out for building - no hills, no caves, just room for a factory."
+				"Same deal as the other key: use it again to come back to the Overworld."
+			]
+			icon: "grindless:flat_key"
+			id: "0348DB79BD43D043"
+			rewards: [{ id: "9AFB1627ED225273", item: "grindless:flat_key", type: "item" }]
+			tasks: [{ id: "821707FC93BB804C", type: "checkmark" }]
+			title: "Key to the Flatlands"
+			x: 3.0d
+			y: 2.0d
+		}
+		{
+			dependencies: ["E9BDA9FBB0EB66F2"]
+			description: [
+				"Press &6R&r or &6U&r on any item in EMI to see how it's made or what it's used for - GregTech recipes always point straight at the machine that runs them."
+				"That's really the whole trick to this pack: when in doubt, check EMI."
+			]
+			icon: "minecraft:enchanted_book"
+			id: "F1CCAD27C64BD720"
+			rewards: [{ id: "A3DF2A88BB12615B", type: "xp", xp: 20 }]
+			tasks: [{ id: "B0EDBCE0EB25BB90", type: "checkmark" }]
+			title: "Read the Recipes"
+			x: 3.0d
+			y: 0.0d
+		}
+	]
+}

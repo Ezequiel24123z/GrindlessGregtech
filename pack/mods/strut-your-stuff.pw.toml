@@ -1,0 +1,14 @@
+name = "Strut Your Stuff (Struts)"
+filename = "struts-1.1.1+mc1.20.1.jar"
+side = "both"
+pin = true
+
+[download]
+url = "https://cdn.modrinth.com/data/sHO3MhQx/versions/wQHaD7LI/struts-1.1.1%2Bmc1.20.1.jar"
+hash-format = "sha512"
+hash = "2bad0896df8b85f07327e3d8bba94abeed9ef4cf438988e03b60504cd40781c4acb6da550c78e887456a9d111a8281d25e1e11417c9c9a55c689e6511522bf20"
+
+[update]
+[update.modrinth]
+mod-id = "sHO3MhQx"
+version = "wQHaD7LI"

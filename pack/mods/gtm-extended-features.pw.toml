@@ -1,0 +1,14 @@
+name = "GTM Extended Features"
+filename = "extendedfeatures-3.0.0.jar"
+side = "both"
+pin = true
+
+[download]
+url = "https://cdn.modrinth.com/data/9MCfIDeI/versions/tscIYF44/extendedfeatures-3.0.0.jar"
+hash-format = "sha512"
+hash = "586b213c7ffba6b06a774955765c953bed56378d5d37b6caeb6a19c164949312d34ae45248c107062bdbe749ac0155d1d0ac6d967cff7afd736a11b2f10ceba9"
+
+[update]
+[update.modrinth]
+mod-id = "9MCfIDeI"
+version = "tscIYF44"

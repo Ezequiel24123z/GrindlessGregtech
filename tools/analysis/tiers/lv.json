@@ -1,0 +1,288 @@
+{
+  "tier": "lv",
+  "title": "Era LV",
+  "extends": "steam",
+  "inheritTargets": true,
+  "note": "Era LV según docs/eras/lv.md y sus \"Decisiones tomadas\" (que mandan): AE2 híbrido (solo se rehacen las entradas: silicio, prensas, piedra del cielo, controlador, unidad, aceptor, ensamblador molecular, interfaz, proveedor de patrones, inscriptor, cargador), ae2:silicon solo para AE2, el polvo de piedra no baja a LV, vetas de todas las dimensiones (la perforadora LV añade el Nether), la primera perla de ender la da una misión. Hereda el mundo, las máquinas y los objetivos del vapor. Energía: las máquinas de un bloque gtceu:lv_* (del registro) corren recetas de hasta 32 V; un multibloque eléctrico con 2 o más escotillas de energía LV cuenta como un escalón más, 128 V (MV), porque GTM 7.5.3 (WorkableElectricMultiblockMachine.getMaxVoltage) sube un nivel cuando hay varias escotillas del nivel más alto, cuenten los amperios que cuenten; por eso `energy` en cada multibloque (escotillas que admite su patrón: las del pack se leen de structures.json, las de GTM se declaran). La energía eu:lv la da la turbina de vapor LV; no se modelan cables, amperios ni baterías. Las piezas de los multibloques del pack se leen de structures.json (volcado de global.grindless.structures); las `parts` de aquí son la reserva por si falta.",
+
+  "unconditionalTypes": ["ae2:transform"],
+
+  "conditions": {
+    "ae2_circumstance_explosion": { "unsupported": true }
+  },
+
+  "contexts": ["minecraft:overworld", "grindless:flat", "grindless:void"],
+
+  "partAbilities": {
+    "energy_input": ["gtceu:lv_energy_input_hatch"],
+    "energy_output": ["gtceu:lv_energy_output_hatch"],
+    "input_bus": ["gtceu:lv_input_bus", "gtceu:ulv_input_bus"],
+    "output_bus": ["gtceu:lv_output_bus", "gtceu:ulv_output_bus"],
+    "input_hatch": ["gtceu:lv_input_hatch", "gtceu:ulv_input_hatch"],
+    "output_hatch": ["gtceu:lv_output_hatch", "gtceu:ulv_output_hatch"],
+    "muffler": ["gtceu:lv_muffler_hatch", "gtceu:ulv_muffler_hatch"],
+    "maintenance": ["gtceu:maintenance_hatch"]
+  },
+
+  "world": [
+    {
+      "id": "mision-perla",
+      "mode": "manual",
+      "bootstrap": true,
+      "items": ["minecraft:ender_pearl"],
+      "note": "Decisión 5: la primera perla de ender la da la misión \"Primera perla\" de LV (una sola, para imprimir el modelo de enderman). De ahí en adelante la multiplica el simulador de criaturas."
+    },
+    {
+      "id": "menas-nether",
+      "mode": "manual",
+      "bootstrap": true,
+      "template": "gtceu:raw_{m}",
+      "fromVeins": { "dimensions": ["minecraft:the_nether"] },
+      "materials": [],
+      "note": "Decisión 4: la muestra de una veta del Nether se fabrica con dos menas de esa veta, así que basta un viaje a mano (exploración, no grind); después la perforadora LV las repone."
+    }
+  ],
+
+  "machines": [
+    {
+      "machine": "gtceu:lv_vein_drill",
+      "types": ["gtceu:vein_drilling"],
+      "energy": { "voltage": 32 },
+      "needs": ["eu:lv"],
+      "partsFromStructure": true,
+      "parts": [
+        "gtceu:solid_machine_casing", "gtceu:steel_frame", "gtceu:steel_pipe_casing", "gtceu:lv_energy_input_hatch",
+        "gtceu:lv_input_bus", "gtceu:lv_output_bus", "gtceu:lv_input_hatch"
+      ],
+      "note": "Perforadora de vetas LV (docs/eras/lv.md): torre de acero, escotilla de energía LV (su patrón admite 1 o 2: con 2, 128 V), bus de entrada (muestra y broca), bus de salida y escotilla de fluidos (lodo)."
+    },
+    {
+      "machine": "gtceu:lv_greenhouse",
+      "types": ["gtceu:greenhouse"],
+      "energy": { "voltage": 32 },
+      "needs": ["eu:lv"],
+      "partsFromStructure": true,
+      "parts": ["gtceu:solid_machine_casing", "#forge:glass", "minecraft:dirt", "gtceu:lv_energy_input_hatch", "gtceu:lv_input_bus", "gtceu:lv_output_bus"],
+      "note": "Invernadero LV: casco de acero, vidrio, suelo de tierra y escotilla de energía LV (1 o 2 según su patrón)."
+    },
+    {
+      "machine": "gtceu:submerged_arc_furnace",
+      "types": ["gtceu:arc_smelting"],
+      "energy": { "voltage": 32 },
+      "needs": ["eu:lv"],
+      "partsFromStructure": true,
+      "parts": [
+        "gtceu:heatproof_machine_casing", "gtceu:lv_energy_input_hatch", "gtceu:lv_input_bus", "gtceu:lv_output_bus",
+        "gtceu:lv_input_hatch", "gtceu:lv_muffler_hatch"
+      ],
+      "note": "Horno de arco sumergido: exactamente 2 escotillas de energía LV (su patrón), así que GTM lo trata como 128 V (MV); sus recetas piden 2 A de 32 V. Carcasa termorresistente, chimenea con silenciador, buses de entrada y salida y escotilla de fluidos."
+    },
+
+    {
+      "machine": "gtceu:electric_blast_furnace",
+      "types": ["gtceu:electric_blast_furnace"],
+      "energy": { "voltage": 32, "hatches": 2 },
+      "coilTemp": 1800,
+      "needs": ["eu:lv"],
+      "parts": [
+        "gtceu:heatproof_machine_casing", "gtceu:cupronickel_coil_block", "gtceu:lv_energy_input_hatch", "gtceu:lv_input_bus",
+        "gtceu:lv_output_bus", "gtceu:lv_muffler_hatch",
+        { "anyOf": ["gtceu:maintenance_hatch"], "onlyIf": { "config": "machines.enableMaintenance", "equals": true } }
+      ],
+      "note": "EBF de GTM: su patrón admite 1 o 2 escotillas de energía (autoAbilities); con 2 escotillas LV el multibloque cuenta como MV (128 V), sin ningún componente MV: es la vía canónica al aluminio. Con bobinas de cuproníquel (1800 K, receta de ensamblador a 30 EU/t) corre las recetas de hasta 128 V y 1800 K: aluminio (1700 K), acero, etc.; el silicio (2273 K) y los kanthal (ensamblador a 120 EU/t) no. Para tratarlo como solo LV, poner hatches 1."
+    },
+    { "machine": "gtceu:lv_1a_energy_converter", "types": [], "note": "Conversor EU -> FE de GTM (decisión 6): alimenta el aceptor de energía de AE2." },
+    { "machine": "ae2:vibration_chamber", "types": [], "note": "Cámara de vibración de AE2: quema combustible y da energía de AE2 (decisión 6: al principio, con coque)." },
+    { "machine": "ae2:inscriber", "types": ["ae2:inscriber"], "needs": ["ae:power"], "note": "Decisión 1: el inscriptor se queda (se fabrica con piezas LV de GT)." },
+    { "machine": "ae2:charger", "types": ["ae2:charger"], "needs": ["ae:power"], "note": "Decisión 1: el cargador se queda (se fabrica con piezas LV de GT)." }
+  ],
+
+  "machinesFromRegistry": [
+    {
+      "prefix": "gtceu:lv_",
+      "maxEUt": 32,
+      "needs": ["eu:lv"],
+      "excludeTypes": ["gtceu:dummy", "gtceu:steam_turbine", "gtceu:combustion_generator", "gtceu:gas_turbine"]
+    }
+  ],
+
+  "synthetic": [
+    {
+      "id": "turbina-lv",
+      "machines": ["gtceu:lv_steam_turbine"],
+      "produces": ["eu:lv"],
+      "note": "La turbina de vapor LV (ya modelada en el vapor con needs de vapor) da energía LV."
+    },
+    {
+      "id": "ae-vibracion",
+      "machines": ["ae2:vibration_chamber"],
+      "consumes": [{ "fuelOf": "gtceu:steam_boiler", "kind": "item" }],
+      "produces": ["ae:power"],
+      "note": "Energía de AE2 con la cámara de vibración: coque, carbón, carbón vegetal, madera..."
+    },
+    {
+      "id": "ae-convertidor",
+      "machines": ["gtceu:lv_1a_energy_converter"],
+      "consumes": ["eu:lv"],
+      "capital": ["ae2:energy_acceptor"],
+      "produces": ["ae:power"],
+      "note": "Energía de AE2 desde la red LV: conversor EU -> FE de GTM + aceptor de energía de AE2."
+    }
+  ],
+
+  "targets": [
+    { "id": "escotilla-energia-lv", "label": "Escotilla de energía LV", "item": "gtceu:lv_energy_input_hatch" },
+    { "id": "buffer-bateria-lv", "label": "Búfer de baterías LV (4x)", "item": "gtceu:lv_battery_buffer_4x" },
+    { "id": "caldera-grande-bronce", "label": "Caldera grande de bronce", "item": "gtceu:bronze_large_boiler" },
+    { "id": "energia-lv", "label": "Energía LV disponible", "item": "eu:lv" },
+
+    { "id": "motor-lv", "label": "Motor eléctrico LV", "item": "gtceu:lv_electric_motor" },
+    { "id": "piston-lv", "label": "Pistón eléctrico LV", "item": "gtceu:lv_electric_piston" },
+    { "id": "bomba-lv", "label": "Bomba eléctrica LV", "item": "gtceu:lv_electric_pump" },
+    { "id": "cinta-lv", "label": "Cinta transportadora LV", "item": "gtceu:lv_conveyor_module" },
+    { "id": "brazo-lv", "label": "Brazo robótico LV", "item": "gtceu:lv_robot_arm" },
+    { "id": "sensor-lv", "label": "Sensor LV", "item": "gtceu:lv_sensor" },
+    { "id": "emisor-lv", "label": "Emisor LV", "item": "gtceu:lv_emitter" },
+
+    { "id": "macerador-lv", "label": "Macerador LV", "item": "gtceu:lv_macerator" },
+    { "id": "lavador-lv", "label": "Lavador de mineral LV", "item": "gtceu:lv_ore_washer" },
+    { "id": "centrifuga-lv", "label": "Centrífuga LV", "item": "gtceu:lv_centrifuge" },
+    { "id": "centrifuga-termica-lv", "label": "Centrífuga térmica LV", "item": "gtceu:lv_thermal_centrifuge" },
+    { "id": "electrolizador-lv", "label": "Electrolizador LV", "item": "gtceu:lv_electrolyzer" },
+    { "id": "mezclador-lv", "label": "Mezclador LV", "item": "gtceu:lv_mixer" },
+    { "id": "reactor-quimico-lv", "label": "Reactor químico LV", "item": "gtceu:lv_chemical_reactor" },
+    { "id": "ensamblador-lv", "label": "Ensamblador LV", "item": "gtceu:lv_assembler" },
+    { "id": "ensamblador-circuitos-lv", "label": "Ensamblador de circuitos LV", "item": "gtceu:lv_circuit_assembler" },
+    { "id": "prensa-formado-lv", "label": "Prensa de formado LV", "item": "gtceu:lv_forming_press" },
+    { "id": "polarizador-lv", "label": "Polarizador LV", "item": "gtceu:lv_polarizer" },
+    { "id": "autoclave-lv", "label": "Autoclave LV", "item": "gtceu:lv_autoclave" },
+    { "id": "bano-quimico-lv", "label": "Baño químico LV", "item": "gtceu:lv_chemical_bath" },
+    { "id": "empaquetadora-lv", "label": "Empaquetadora LV", "item": "gtceu:lv_packer" },
+    { "id": "cerveceria-lv", "label": "Cervecería LV", "item": "gtceu:lv_brewery" },
+    { "id": "fermentador-lv", "label": "Fermentador LV", "item": "gtceu:lv_fermenter" },
+    { "id": "alambique-lv", "label": "Alambique LV", "item": "gtceu:lv_distillery" },
+    { "id": "colector-gas-lv", "label": "Colector de gas LV", "item": "gtceu:lv_gas_collector" },
+    { "id": "trituradora-rocas-lv", "label": "Triturador de rocas LV", "item": "gtceu:lv_rock_crusher" },
+    { "id": "tamiz-lv", "label": "Tamiz LV", "item": "gtceu:lv_sifter" },
+    { "id": "solidificador-lv", "label": "Solidificador de fluidos LV", "item": "gtceu:lv_fluid_solidifier" },
+    { "id": "torno-lv", "label": "Torno LV (electrodos)", "item": "gtceu:lv_lathe" },
+    { "id": "martillo-lv", "label": "Martillo de forja LV", "item": "gtceu:lv_forge_hammer" },
+    { "id": "horno-electrico-lv", "label": "Horno eléctrico LV", "item": "gtceu:lv_electric_furnace" },
+    { "id": "convertidor-1a-lv", "label": "Conversor EU -> FE LV (1 A, decisión 6)", "item": "gtceu:lv_1a_energy_converter" },
+
+    { "id": "perforadora-lv", "label": "Perforadora de vetas LV (nuestra)", "item": "gtceu:lv_vein_drill" },
+    { "id": "invernadero-lv", "label": "Invernadero LV (nuestro)", "item": "gtceu:lv_greenhouse" },
+    { "id": "horno-arco", "label": "Horno de arco sumergido (nuestro)", "item": "gtceu:submerged_arc_furnace" },
+    { "id": "simulador-criaturas", "label": "Simulador de criaturas LV (nuestro)", "item": "gtceu:lv_creature_simulator" },
+    { "id": "electrodo-grafito", "label": "Electrodo de grafito", "item": "grindless:graphite_electrode" },
+    { "id": "modelo-en-blanco", "label": "Modelo de criatura en blanco", "item": "grindless:blank_creature_model" },
+    { "id": "modelo-esqueleto", "label": "Modelo de esqueleto", "item": "grindless:creature_model_skeleton" },
+    { "id": "modelo-arana", "label": "Modelo de araña", "item": "grindless:creature_model_spider" },
+    { "id": "modelo-slime", "label": "Modelo de slime", "item": "grindless:creature_model_slime" },
+    { "id": "modelo-oveja", "label": "Modelo de oveja", "item": "grindless:creature_model_sheep" },
+    { "id": "modelo-vaca", "label": "Modelo de vaca", "item": "grindless:creature_model_cow" },
+    { "id": "modelo-gallina", "label": "Modelo de gallina", "item": "grindless:creature_model_chicken" },
+    { "id": "modelo-enderman", "label": "Modelo de enderman (pide la perla de la misión)", "item": "grindless:creature_model_enderman" },
+
+    { "id": "receta-silicio-ae2", "label": "Horno de arco: arena de cuarzo + coque -> ae2:silicon", "kind": "recipe", "type": "gtceu:arc_smelting", "output": "ae2:silicon" },
+    { "id": "receta-polvo-cielo", "label": "Horno de arco: polvo del cielo", "kind": "recipe", "type": "gtceu:arc_smelting", "output": "ae2:sky_dust" },
+    { "id": "receta-obsidiana-arco", "label": "Horno de arco: 32 adoquines + 4000 mB de agua + electrodo -> 4 obsidiana (2 A LV)", "kind": "recipe", "type": "gtceu:arc_smelting", "output": "minecraft:obsidian", "input": ["minecraft:cobblestone", "fluid:minecraft:water"] },
+    { "id": "obsidiana", "label": "Obsidiana", "item": "minecraft:obsidian" },
+    { "id": "receta-perla-simulador", "label": "Simulador de criaturas: perla de ender", "kind": "recipe", "type": "gtceu:creature_simulation", "output": "minecraft:ender_pearl" },
+    { "id": "receta-perforacion-lodo", "label": "Perforadora LV con lodo de perforación", "kind": "recipe", "type": "gtceu:vein_drilling", "input": "fluid:gtceu:drilling_fluid" },
+    { "id": "silicio-gt-no-antes-de-mv", "label": "El silicio de GT no sale antes de MV (decisión 2)", "item": "gtceu:silicon_ingot", "expect": "unreachable" },
+    { "id": "receta-fluix-mezclador", "label": "Mezclador: certus cargado + redstone + cuarcita -> fluix (sin viaje al Nether)", "kind": "recipe", "type": "gtceu:mixer", "output": "ae2:fluix_crystal" },
+    { "id": "receta-aluminio-zafiro", "label": "Electrolizador LV: polvo de zafiro -> polvo de aluminio (30 EU/t)", "kind": "recipe", "type": "gtceu:electrolyzer", "output": "gtceu:aluminium_dust", "input": "gtceu:sapphire_dust" },
+    { "id": "receta-aluminio-ebf", "label": "EBF con 2 escotillas LV (cuenta como MV, 128 V): polvo de aluminio -> lingote (120 EU/t, 1700 K)", "kind": "recipe", "type": "gtceu:electric_blast_furnace", "output": "gtceu:aluminium_ingot" },
+    { "id": "bobina-kanthal-no-antes-de-mv", "label": "La bobina Kanthal no sale antes de MV (ensamblador a 120 EU/t)", "item": "gtceu:kanthal_coil_block", "expect": "unreachable" },
+
+    { "id": "silicio-ae2", "label": "Silicio de AE2", "item": "ae2:silicon" },
+    { "id": "prensa-silicio", "label": "Prensa de silicio", "item": "ae2:silicon_press" },
+    { "id": "prensa-logica", "label": "Prensa de procesador de lógica", "item": "ae2:logic_processor_press" },
+    { "id": "prensa-calculo", "label": "Prensa de procesador de cálculo", "item": "ae2:calculation_processor_press" },
+    { "id": "prensa-ingenieria", "label": "Prensa de procesador de ingeniería", "item": "ae2:engineering_processor_press" },
+    { "id": "cristal-certus", "label": "Cristal de cuarzo certus", "item": "ae2:certus_quartz_crystal" },
+    { "id": "cristal-certus-cargado", "label": "Cristal de certus cargado", "item": "ae2:charged_certus_quartz_crystal" },
+    { "id": "cristal-fluix", "label": "Cristal de fluix", "item": "ae2:fluix_crystal" },
+    { "id": "polvo-cielo", "label": "Polvo del cielo", "item": "ae2:sky_dust" },
+    { "id": "piedra-cielo", "label": "Piedra del cielo", "item": "ae2:sky_stone_block" },
+    { "id": "piedra-cielo-lisa", "label": "Piedra del cielo lisa", "item": "ae2:smooth_sky_stone_block" },
+    { "id": "procesador-logica", "label": "Procesador de lógica", "item": "ae2:logic_processor" },
+    { "id": "procesador-calculo", "label": "Procesador de cálculo", "item": "ae2:calculation_processor" },
+    { "id": "procesador-ingenieria", "label": "Procesador de ingeniería", "item": "ae2:engineering_processor" },
+    { "id": "inscriptor", "label": "Inscriptor de AE2", "item": "ae2:inscriber" },
+    { "id": "cargador", "label": "Cargador de AE2", "item": "ae2:charger" },
+    { "id": "controlador-ae2", "label": "Controlador de AE2", "item": "ae2:controller" },
+    { "id": "unidad-almacenamiento", "label": "Disco (ae2:drive)", "item": "ae2:drive" },
+    { "id": "ensamblador-molecular", "label": "Ensamblador molecular", "item": "ae2:molecular_assembler" },
+    { "id": "proveedor-patrones", "label": "Proveedor de patrones", "item": "ae2:pattern_provider" },
+    { "id": "interfaz-me", "label": "Interfaz ME", "item": "ae2:interface" },
+    { "id": "unidad-crafteo", "label": "Unidad de crafteo", "item": "ae2:crafting_unit" },
+    { "id": "aceptor-energia", "label": "Aceptor de energía", "item": "ae2:energy_acceptor" },
+    { "id": "camara-vibracion", "label": "Cámara de vibración", "item": "ae2:vibration_chamber" },
+    { "id": "componente-256k", "label": "Componente de celda 256k", "item": "ae2:cell_component_256k" },
+    { "id": "energia-ae2", "label": "Energía de AE2 disponible", "item": "ae:power" },
+
+    { "id": "aluminio-polvo", "label": "Polvo de aluminio (cualquier vía)", "item": "gtceu:aluminium_dust" },
+    { "id": "aluminio", "label": "Lingote de aluminio (polvo -> lingote solo en el EBF: 120 EU/t, 1700 K)", "item": "gtceu:aluminium_ingot" },
+    { "id": "casco-mv", "label": "Casco MV", "item": "gtceu:mv_machine_hull" },
+    { "id": "circuito-mv", "label": "Circuito electrónico MV (#gtceu:circuits/mv)", "item": "gtceu:good_electronic_circuit" },
+    { "id": "transformador-lv-mv", "label": "Transformador LV -> MV (4 A -> 1 A)", "item": "gtceu:lv_transformer_4a" },
+    { "id": "ebf", "label": "Horno de alto vacío eléctrico (EBF)", "item": "gtceu:electric_blast_furnace" }
+  ],
+
+  "autoTargetsFromVeins": [
+    {
+      "idPrefix": "auto-perforacion-nether-",
+      "labelPrefix": "Perforadora LV con lodo: receta de la veta del Nether",
+      "dimensions": ["minecraft:the_nether"],
+      "requireItem": "grindless:vein_sample_{id}",
+      "target": { "kind": "recipe", "type": "gtceu:vein_drilling", "input": ["grindless:vein_sample_{id}", "fluid:gtceu:drilling_fluid"] }
+    },
+    {
+      "idPrefix": "auto-mena-nether-",
+      "labelPrefix": "Menas exclusivas de la veta del Nether",
+      "dimensions": ["minecraft:the_nether"],
+      "requireItem": "grindless:vein_sample_{id}",
+      "exclusiveFrom": ["minecraft:overworld"],
+      "template": "gtceu:raw_{m}",
+      "mode": "anyOf"
+    }
+  ],
+
+  "autoTargets": [
+    { "id": "auto-energia-lv", "label": "Energía LV sostenida (turbina de vapor)", "item": "eu:lv" },
+    { "id": "auto-lodo-perforacion", "label": "Lodo de perforación", "fluid": "gtceu:drilling_fluid" },
+    { "id": "auto-perforacion-lodo", "label": "Perforadora con lodo: receta usable y sostenible", "kind": "recipe", "type": "gtceu:vein_drilling", "input": "fluid:gtceu:drilling_fluid" },
+    { "id": "auto-biomasa", "label": "Biomasa (invernadero + cervecería)", "fluid": "gtceu:biomass" },
+    { "id": "auto-perlas", "label": "Perlas de ender (simulador)", "item": "minecraft:ender_pearl" },
+    { "id": "auto-huesos", "label": "Huesos (simulador)", "item": "minecraft:bone" },
+    { "id": "auto-hilo", "label": "Hilo (simulador)", "item": "minecraft:string" },
+    { "id": "auto-slime", "label": "Bolas de slime (simulador)", "item": "minecraft:slime_ball" },
+    { "id": "auto-cuero", "label": "Cuero (simulador)", "item": "minecraft:leather" },
+    { "id": "auto-electrodo", "label": "Electrodos de grafito", "item": "grindless:graphite_electrode" },
+    { "id": "auto-silicio-ae2", "label": "Silicio de AE2 (horno de arco)", "item": "ae2:silicon" },
+    { "id": "auto-polvo-cielo", "label": "Polvo del cielo (horno de arco)", "item": "ae2:sky_dust" },
+    { "id": "auto-obsidiana-receta", "label": "Horno de arco: receta de obsidiana (adoquín + agua) usable y sostenible", "kind": "recipe", "type": "gtceu:arc_smelting", "output": "minecraft:obsidian", "input": ["minecraft:cobblestone", "fluid:minecraft:water"] },
+    { "id": "auto-obsidiana", "label": "Obsidiana (horno de arco)", "item": "minecraft:obsidian" },
+    { "id": "auto-lava-no-automatica", "label": "La lava no se produce sola (es combustible de caldera: sería un bucle de energía; solo el bloque puesto una vez junto a la trituradora)", "fluid": "minecraft:lava", "expect": "not-automatic" },
+    { "id": "auto-nitrogeno", "label": "Nitrógeno (aire)", "fluid": "gtceu:nitrogen" },
+    { "id": "auto-oxigeno", "label": "Oxígeno (aire)", "fluid": "gtceu:oxygen" },
+    { "id": "auto-acido-sulfurico", "label": "Ácido sulfúrico", "fluid": "gtceu:sulfuric_acid" },
+    { "id": "auto-fertilizante", "label": "Fertilizante", "item": "gtceu:fertilizer" },
+    { "id": "auto-aire", "label": "Aire (colector de gas; en Llano y Vacío por las recetas del pack)", "fluid": "gtceu:air" },
+    { "id": "auto-aluminio-polvo", "label": "Polvo de aluminio (cualquier vía)", "item": "gtceu:aluminium_dust" },
+    { "id": "auto-aluminio-zafiro", "label": "Electrolizador LV: zafiro -> aluminio, receta usable y sostenible", "kind": "recipe", "type": "gtceu:electrolyzer", "output": "gtceu:aluminium_dust", "input": "gtceu:sapphire_dust" },
+    { "id": "auto-aluminio-ebf", "label": "EBF (2 escotillas LV): polvo -> lingote de aluminio, receta usable y sostenible", "kind": "recipe", "type": "gtceu:electric_blast_furnace", "output": "gtceu:aluminium_ingot" },
+    { "id": "auto-aluminio", "label": "Lingote de aluminio", "item": "gtceu:aluminium_ingot" },
+    { "id": "auto-energia-ae2", "label": "Energía de AE2 sostenida", "item": "ae:power" },
+    { "id": "auto-energia-ae2-vibracion", "label": "Energía de AE2 solo con la cámara de vibración (sin conversor)", "item": "ae:power", "without": ["sintética:ae-convertidor"] },
+    { "id": "auto-energia-ae2-conversor", "label": "Energía de AE2 solo con el conversor EU -> FE (sin cámara de vibración)", "item": "ae:power", "without": ["sintética:ae-vibracion"] },
+    { "id": "auto-certus", "label": "Cristal de cuarzo certus", "item": "ae2:certus_quartz_crystal" },
+    { "id": "auto-fluix", "label": "Cristal de fluix", "item": "ae2:fluix_crystal" },
+    { "id": "auto-piedra-cielo-lisa", "label": "Piedra del cielo lisa (controlador)", "item": "ae2:smooth_sky_stone_block" },
+    { "id": "auto-procesador-logica", "label": "Procesadores de lógica", "item": "ae2:logic_processor" },
+    { "id": "auto-procesador-calculo", "label": "Procesadores de cálculo", "item": "ae2:calculation_processor" },
+    { "id": "auto-procesador-ingenieria", "label": "Procesadores de ingeniería", "item": "ae2:engineering_processor" }
+  ]
+}

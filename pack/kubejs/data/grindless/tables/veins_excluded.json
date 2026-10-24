@@ -1,0 +1,17 @@
+{
+  "_source": "The ore-vein registry of the pack (GTRegistries.ORE_VEINS: GTM 7.5.3, GT-- (gtnn), GT Community Additions (gtca), Gregicality Rocketry (gcyr)), as dumped by the validator (tools/analysis) and read live by the smoke test.",
+  "_how_it_is_used": [
+    "Only the smoke test reads this file (tools/test/overlay/kubejs/server_scripts/gg_test_hv_multis.js; run it alone with the command gg_test_vein_coverage). It walks the live vein registry and FAILs for every vein that can generate in a dimension of the server and has neither a sample item (grindless:vein_sample_<id without namespace and '_vein'>, the name the validator looks for) nor a gtceu:vein_drilling recipe that takes it, so a mod that adds veins is caught the day it is added. This file is the explicit list of the veins that are allowed to have neither. Nothing in the game reads it.",
+    "Veins that cannot generate anywhere in this server are exempt without being listed: the test works out live whether a dimension of the vein's filter is loaded AND its layer applies there. The 14 GT-- '*_tf' veins (apatite_tf ... sapphire_tf) use the 'tf' layer, which only applies in twilightforest:twilight_forest; this pack has no Twilight Forest, so they never generate (every ore of them also comes out of a vein that is covered, so nothing is lost). The day that dimension loads they FAIL until they have samples and recipes.",
+    "An entry must stay true: the test FAILs when an excluded vein is already covered (delete its entry) and notes entries whose vein no longer exists.",
+    "veins = exact registry ids. dimensions = a vein is excluded when EVERY dimension of its filter is in the list, so a vein that also generates in the Overworld, Nether or End can never hide here. until = the era that brings the vein into the drill tables.",
+    "When a tier takes one of these veins: add it to veins_overworld_extra.json / veins_nether.json / veins_end.json (or veins.json) and delete its entry here."
+  ],
+  "veins": [
+    { "id": "gtceu:naquadah_vein", "until": "IV", "reason": "End vein of naquadah and plutonium 239: radioactive, nobody asks for it before IV (docs/eras/hv.md, decisions)." },
+    { "id": "gtceu:pitchblende_vein_end", "until": "IV", "reason": "End vein of pitchblende and uraninite: radioactive, nobody asks for it before IV (docs/eras/hv.md, decisions)." }
+  ],
+  "dimensions": [
+    { "ids": ["gcyr:luna", "gcyr:mars", "gcyr:venus", "gcyr:mercury"], "until": "space", "reason": "Space dimensions of Gregicality Rocketry (12 veins: moon bauxite, Mars iron / copper / nickel / zinc / tungstate / rare earth, Venus iron / copper / sulfur / tungstotitanate, Mercury cinnabar). No drill of the vein family works off world yet." }
+  ]
+}

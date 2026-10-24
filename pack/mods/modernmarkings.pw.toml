@@ -1,0 +1,14 @@
+name = "ModernMarkings"
+filename = "ags_modernmarkings-0.4.4-1.20.1.jar"
+side = "both"
+pin = true
+
+[download]
+url = "https://cdn.modrinth.com/data/efD07SBK/versions/XA2b4xp4/ags_modernmarkings-0.4.4-1.20.1.jar"
+hash-format = "sha512"
+hash = "7200a2a67cabbc5c0e53f2ac1dda96a43ed29f6bc9b88794145043214e06074adf9834843a36653f4c937d6d45ef4fdc26c077cc2b14c5e7b323c5e4c97cab3c"
+
+[update]
+[update.modrinth]
+mod-id = "efD07SBK"
+version = "XA2b4xp4"
