@@ -130,8 +130,10 @@
   // the machines of the four addons that may be crafted after the audit
   var AUDITED = {}
   function audit(ns, names) { names.forEach(function (n) { AUDITED[ns + ':' + n] = true }) }
+  // gtca:space_elevator is not here since v0.5.0: its controller recipe takes piko wafer ICs, which nothing in the pack makes, so
+  // hidden.js removes that dead recipe and the elevator stays hidden until ZPM (hidden_until.json)
   audit('gtca', ['advanced_ebf', 'comet', 'isamill', 'flotation_cell_regulator', 'thermal_reactor', 'mega_lcr', 'mega_oil_cracking_unit',
-    'nano_forge', 'pcb_factory_mki', 'pcb_factory_mkii', 'pcb_factory_mkiii', 'space_elevator', 'tegmark_forge'])
+    'nano_forge', 'pcb_factory_mki', 'pcb_factory_mkii', 'pcb_factory_mkiii', 'tegmark_forge'])
   ;['ev', 'iv', 'luv', 'zpm', 'uv', 'uhv'].forEach(function (t) { audit('gtca', [t + '_matter_fabricator']) })
   audit('gtnn', ['catalyst_hatch', 'circuit_assembly_line', 'large_dehydrator', 'large_naquadah_reactor', 'exxonmobil_chemical_plant',
     'maceration_stack_controller', 'neutron_activator', 'neutron_sensor'])

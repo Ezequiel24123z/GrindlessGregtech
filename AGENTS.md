@@ -115,6 +115,7 @@ Gregtech Grindless es un pack de GregTech Modern (Minecraft 1.20.1, Forge) en el
 El usuario juega mientras se desarrolla.
 - **Rama `jugable`:** es su canal. Solo avanza a una etiqueta `vX.Y.Z` que haya pasado las pruebas: `git push origin vX.Y.Z^{commit}:refs/heads/jugable`.
 - **Al moverla:** se le manda un resumen corto con qué hay de nuevo y qué cambia en su partida.
+- **Versión en GitHub (lo pide el usuario):** cada etiqueta `vX.Y.Z` se publica como versión de GitHub. Lleva notas cortas en español (qué hay nuevo y qué cambia en la partida) y el zip de Prism fijado a esa versión (`Build-PrismInstance.ps1 -Channel vX.Y.Z`). También se actualiza la nota de `canal-jugable`.
 - **Instancia de Prism:** la genera `tools/prism/Build-PrismInstance.ps1` y está en la versión de GitHub `canal-jugable`. Se actualiza sola al arrancar con packwiz-installer-bootstrap, así que solo se rehace si cambian la URL del canal o el bootstrap.
 - **Partidas compatibles:**
   - No se quita un objeto, bloque o fluido registrado. Se deja registrado y oculto en EMI, con una receta que lo convierte 1:1 en su sustituto (como la broca de titanio).
