@@ -1,7 +1,7 @@
 // -----------------------------------------------------------------------------------------------
 // gtceu:vein_drilling recipes of the HV Vein Drill (gtceu:hv_vein_drill), generated from the vein tables. Every recipe lives under
-// grindless:vein_drilling/hv/...: the LV and MV drills skip those (startup_scripts/grindless/lv/multis.js), the HV drill and
-// every better one runs them next to the steam, LV and MV recipes.
+// grindless:vein_drilling/hv/... (except the End veins with the vanadium steel bit: mv/, see below): the LV and MV drills skip those
+// (startup_scripts/grindless/lv/multis.js), the HV drill and every better one runs them next to the steam, LV and MV recipes.
 //
 //   STAINLESS STEEL bit (grindless:stainless_steel_drill_bit)   every Overworld and Nether vein, like the vanadium steel bit of MV
 //       one step on (HV has no titanium, DECISIONS.md 2026-10-24: the old titanium bit only crafts into this one, hv/family_crafting.js):
@@ -9,11 +9,12 @@
 //       with drilling fluid (all veins):  5.625 ores per run (+50 %), wear 0.25 % per run (vanadium steel: 0.5 %), 50 mB per run
 //       The Nether veins still need drilling fluid, as in every tier.
 //   END veins (data/grindless/tables/veins_end.json, global.grindless.hv.endVeins()): four, GTM 7.5.3's bauxite_end, magnetite_end and
-//       sheldonite and GT Community Additions' zirconium (the scheelite vein waits for Mars and the radioactive ones for IV:
+//       sheldonite and GT Community Additions' zirconium (the scheelite vein went to Mars and the radioactive ones wait for IV:
 //       veins_excluded.json), with the vanadium steel bit and the
 //       stainless steel bit, ALWAYS with drilling fluid (same ores per run and wear as the line above, 5.625 ores and 0.5 % / 0.25 % wear).
-//       Inert byproduct: end stone. Only a drill of this tier can run them: the steam drill has no fluid hatch, the LV and MV drills
-//       skip every recipe under <type>/hv/ (startup_scripts/grindless/lv/multis.js).
+//       Inert byproduct: end stone. The End is MV (DECISIONS.md 2026-10-24): the vanadium steel bit recipes are
+//       grindless:vein_drilling/mv/<vein>_vanadium_steel_fluid, so the MV Vein Drill and better run them (the LV drill skips <type>/mv/,
+//       the steam drill has no fluid hatch); the stainless steel bit ones stay under hv/.
 //   200 ticks and 8 EU/t per run, like every drilling recipe; the HV drill runs up to 32 at once (one HV energy hatch).
 //
 // Lookup note (GTM's RecipeDB cannot keep a recipe whose ingredient list is a prefix of another's): the base recipes list the
@@ -44,8 +45,8 @@
       LV.allVeins().forEach(function (v) { taken[tools.pairKey(v.samplePair[0], v.samplePair[1])] = v.id })
       end = G.tables.veins_end.veins.map(function (vein) {
         var ores = tools.oresOf(vein)
-        // an ore marked "sample": false in the table is drilled but never one of the two raw ores of the sample recipe (the ilmenite
-        // of bauxite_end: titanium is an EV resource, so the HV sample is made from the vein's bauxite and aluminium)
+        // an ore marked "sample": false in the table is drilled but never one of the two raw ores of the sample recipe (v0.4.1 used it
+        // for the ilmenite of bauxite_end; since v0.5.0 the End has no ilmenite and no ore of the table carries the mark)
         var noSample = {}
         vein.materials.forEach(function (m) { if (m.sample === false) noSample[m.id] = true })
         var pair = tools.samplePairOf(ores.filter(function (o) { return !noSample[o.material] }), taken)
@@ -145,9 +146,9 @@
       recipe.EUt(drilling.eut).duration(drilling.duration)
     }
 
-    // with drilling fluid: +50 % ore, half the wear
-    var wet = function (vein, bit, name) {
-      var recipe = event.recipes.gtceu.vein_drilling('grindless:hv/' + vein.id + '_' + name + '_fluid')
+    // with drilling fluid: +50 % ore, half the wear (tier = the recipe folder: hv, or mv for the vanadium steel bit on the End veins)
+    var wet = function (vein, bit, name, tier) {
+      var recipe = event.recipes.gtceu.vein_drilling('grindless:' + (tier || 'hv') + '/' + vein.id + '_' + name + '_fluid')
         .chancedInput(bit.item, bit.wear, 0)
         .notConsumable(vein.sample)
         .inputFluids(Fluid.of(drilling.fluid, drilling.fluidMb))
@@ -169,22 +170,26 @@
       fluid++
     })
 
+    // the End is MV: its vanadium steel bit recipes live under mv/ (the MV drill runs them), the stainless steel ones under hv/
     var endFluid = 0
+    var endMv = 0
     HV.endVeins().forEach(function (vein) {
-      wet(vein, vanadium, 'vanadium_steel')
+      wet(vein, vanadium, 'vanadium_steel', 'mv')
       wet(vein, stainless, 'stainless_steel')
-      endFluid += 2
+      endMv++
+      endFluid++
     })
 
-    // published for the smoke test
+    // published for the smoke test (count = the recipes under hv/)
     HV.drilling = {
       bit: stainless.item,
       base: base,
       fluid: fluid,
       endFluid: endFluid,
+      endMv: endMv,
       count: base + fluid + endFluid
     }
     console.info('[grindless/hv] vein_drilling recipes: stainless steel bit ' + base + ' without fluid, ' + fluid + ' with fluid; End veins ' +
-      endFluid + ' (always with fluid)')
+      endFluid + ' with the stainless steel bit (hv/) and ' + endMv + ' with the vanadium steel bit (mv/), always with fluid')
   })
 })()

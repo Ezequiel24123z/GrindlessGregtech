@@ -3,7 +3,7 @@
   "_how_it_is_used": [
     "Canonical creature table of the pack. Read by startup_scripts/grindless/lv/creatures.js (global.grindless.tables.mobs): registers the model items; by server_scripts/grindless/lv/creatures.js: generates the gtceu:creature_simulation recipes and the assembler recipes that print the models; and by client_scripts/grindless/lv_creatures_lang.js: names. Nothing is hard-coded per creature anywhere else: to add one, add a row here.",
     "biomass.fluid = fluid every simulation cycle consumes (gtceu:biomass: the LV brewery makes it from greenhouse output, GTM recipes brewery/biomass_from_*). biomass.lv_brewery_mb_per_s = what ONE LV brewery makes: 20 mB per 8 s from a carrot (potato, cane...) or 100 mB per 40 s from a sapling = 2.5 mB/s. GTM does not overclock a 3 EU/t recipe in an LV machine and every tier above overclocks it once more, so a brewery makes 2.5 mB/s x 2^(tier-1).",
-    "mobs[].biomass_mb = biomass one cycle eats. The rule is that ONE brewery of the creature's tier keeps ONE simulator of that tier running at full speed (a same-tier brewery keeps up with any overclock too): biomass_mb x 20 / duration <= lv_brewery_mb_per_s x 2^(tier-1). Quantity never makes it harder: LV 25 mB per 10 s cycle, 50 mB for the 20 s enderman, 50 mB for the MV creeper, 100 mB for the HV blaze. The table check (server script) and the test (against GTM's real brewery recipes) enforce the rule.",
+    "mobs[].biomass_mb = biomass one cycle eats. The rule is that ONE brewery of the creature's tier keeps ONE simulator of that tier running at full speed (a same-tier brewery keeps up with any overclock too): biomass_mb x 20 / duration <= lv_brewery_mb_per_s x 2^(tier-1). Quantity never makes it harder: LV 25 mB per 10 s cycle, 50 mB for the 20 s enderman, 50 mB for the MV creeper and the MV blaze (50 x 20 / 200 = 5 mB/s, exactly what one MV brewery makes). The table check (server script) and the test (against GTM's real brewery recipes) enforce the rule.",
     "printing = the assembler recipe that turns grindless:blank_creature_model + the creature's print items into grindless:creature_model_<id>.",
     "mobs[].id: the model item is grindless:creature_model_<id>. tier: the lowest simulator tier that can run it (1 = LV, 2 = MV, 3 = HV, 4 = EV). It is enforced by eut: GTM refuses a recipe above the machine's voltage (LV 32, MV 128, HV 512, EV 2048), and higher tiers overclock lower recipes as usual. color: tint of the core layer of the model icon. name: display names (en_us / es_es).",
     "mineral: consumed on every cycle together with the biomass (omitted = nothing but biomass). The model itself is never used up.",
@@ -97,9 +97,9 @@
       ]
     },
     {
-      "id": "blaze", "tier": 3, "color": "#FFAA22",
+      "id": "blaze", "tier": 2, "color": "#FFAA22",
       "name": { "en_us": "Blaze", "es_es": "blaze" },
-      "eut": 480, "duration": 200, "biomass_mb": 100,
+      "eut": 120, "duration": 200, "biomass_mb": 50,
       "mineral": { "item": "gtceu:coal_dust", "n": 1 },
       "print": [ { "item": "gtceu:coal_dust", "n": 8 } ],
       "rolls": [

@@ -1,0 +1,40 @@
+{
+  "_source": "Earth sources of resources that belong to another world, in the pack as loaded at v0.4.0 (recipe dump of the release, files/test-runs/release-0.4.0): every recipe that gives a titanium-bearing material (titanium, rutile, ilmenite) or helium-3 without one going in, plus GTM's ore byproducts (common/data/materials/MaterialFlagAddition.java, GTM 7.5.3), and the tungstate of GTM's end stone dust. Recycling (an alloy or a part that already holds titanium) is not a source and stays.",
+  "_how_it_is_used": [
+    "DECISIONS.md 2026-10-24: titanium and helium-3 come only from the Moon (Lunar Drill, data/grindless/tables/veins_moon.json); tungsten comes from Mars (EV). This table lists what is cut on Earth; for = the world the resource belongs to.",
+    "byproducts: startup_scripts/grindless/moon/earth_byproducts.js sets these ore byproducts (GTCEuStartupEvents.materialModification, after GTM and every addon). GTM builds the ore chains from them (macerator, ore washer, thermal centrifuge, chemical bath, sifter) and the MV Ore Plant reads those chains, so neither gives rutile or ilmenite any more. aluminium was bauxite, bauxite, ilmenite, rutile; bauxite was grossular, rutile, gallium. The replacements are real companions of bauxite: its iron oxide (hematite, the red of red mud) and gallium.",
+    "strip: server_scripts/grindless/moon/offworld_only.js removes these recipes and adds them back with GTM's builder, the same inputs, chances, energy and time, without the listed outputs. The new id is grindless:<type>/offworld_only/<old path>. Destinations of what is left: unchanged. (Greate's copies of GT recipes follow: integration/greate.js only keeps copies of GT recipes that are loaded and unchanged.)",
+    "remove: recipes whose only purpose is a resource of another world. They go away.",
+    "combs: Productive Bees combs whose GT centrifuge recipe (integration/productivebees.js) only runs on the Moon (.dimension(dimension)): the bees can live on Earth, but their titanium only comes out on the Moon.",
+    "watched: what the smoke test (tools/test/overlay/kubejs/server_scripts/gg_test_moon.js) looks for. Every stripped recipe must be gone and its replacement must exist without the outputs, and no recipe of the loaded pack may give a watched output from inputs that hold none (inputPattern), except the Moon's own recipes (a dimension condition on the Moon) and the late lines named in allowedLate."
+  ],
+  "dimension": "gcyr:luna",
+  "watched": {
+    "items": ["gtceu:titanium_dust", "gtceu:small_titanium_dust", "gtceu:tiny_titanium_dust", "gtceu:rutile_dust", "gtceu:small_rutile_dust", "gtceu:tiny_rutile_dust", "gtceu:ilmenite_dust", "gtceu:small_ilmenite_dust", "gtceu:tiny_ilmenite_dust", "gtceu:raw_ilmenite", "gtceu:raw_titanium", "gtceu:raw_rutile", "gtceu:titanium_ingot"],
+    "fluids": ["gtceu:helium_3", "gtceu:titanium_tetrachloride", "gtceu:titanium"],
+    "inputPattern": "titan|rutile|ilmenite|helium_3"
+  },
+  "allowedLate": [
+    { "pattern": "naquad", "why": "IV naquadah lines: their titanium trifluoride is a byproduct of a later era (naquadah comes after the Moon)." },
+    { "pattern": "fusion_reactor/", "why": "LuV fusion makes plasmas, not ore." }
+  ],
+  "byproducts": {
+    "aluminium": ["bauxite", "bauxite", "gallium"],
+    "bauxite": ["grossular", "hematite", "gallium"]
+  },
+  "strip": [
+    { "for": "moon", "recipe": "gtceu:centrifuge/metal_mixture_separation", "outputs": ["gtceu:ilmenite_dust"], "why": "Metal mixture comes from centrifuged stone dust (LV): 5.75 % ilmenite was titanium from any stone." },
+    { "for": "moon", "recipe": "gtceu:centrifuge/sapphire_slurry_centrifuging", "outputs": ["gtceu:titanium_dust"], "why": "Gem slurries of Earth gems: 2 % titanium." },
+    { "for": "moon", "recipe": "gtceu:centrifuge/green_sapphire_slurry_centrifuging", "outputs": ["gtceu:titanium_dust"], "why": "Gem slurries of Earth gems: 2 % titanium." },
+    { "for": "moon", "recipe": "gtceu:centrifuge/ruby_slurry_centrifuging", "outputs": ["gtceu:titanium_dust"], "why": "Gem slurries of Earth gems: 2 % titanium." },
+    { "for": "moon", "recipe": "gtceu:electrolyzer/bauxite_electrolysis", "outputs": ["gtceu:rutile_dust"], "why": "Bauxite (End, MV) is aluminium oxide: 15 dust give 6 aluminium and 9 000 mB oxygen; the extra rutile was free titanium." },
+    { "for": "moon", "recipe": "gtceu:centrifuge/diluted_to_filtered", "outputs": ["gtceu:rutile_dust", "gtceu:ilmenite_dust"], "why": "GT Community Additions' bastnasite line (Earth monazite vein): its tailings gave rutile and ilmenite." },
+    { "for": "moon", "recipe": "gtceu:centrifuge/bauxite_sludge_centrifuge", "outputs": ["gtceu:rutile_dust"], "why": "Bayer red mud of Earth bauxite: 2 rutile per run." },
+    { "for": "moon", "recipe": "gtceu:distillation_tower/distill_liquid_nether_air", "fluids": ["gtceu:helium_3"], "why": "Liquid Nether air (EV): helium-3 is lunar." },
+    { "for": "mars", "recipe": "gtceu:centrifuge/endstone_separation", "outputs": ["gtceu:tungstate_dust"], "why": "End stone dust (the End is MV, and its veins give end stone): 4.45 % tungstate was tungsten before Mars. The sand, the platinum and the helium (helium-4, not helium-3) stay." }
+  ],
+  "remove": [
+    { "for": "moon", "recipe": "gtceu:centrifuge/helium_separation", "why": "Helium-4 -> helium-3 in a centrifuge: helium-3 is lunar (and fusion is LuV)." }
+  ],
+  "combs": ["ilmenite", "titanium"]
+}

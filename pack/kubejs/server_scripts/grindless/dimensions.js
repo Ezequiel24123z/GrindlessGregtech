@@ -281,9 +281,9 @@ function addKeyRecipes(event) {
         .id('grindless:void_key_from_flint')
     event.shapeless('grindless:flat_key', ['minecraft:flint', 'minecraft:stick', 'minecraft:dirt'])
         .id('grindless:flat_key_from_flint')
-    // Gated to HV: in this pack the Eye of Ender only comes from the HV blaze-powder-> extractor ->
-    // chemical bath route (docs/eras/hv.md), so reaching this recipe already implies HV machinery -
-    // no need to also demand an HV-tier part here on top of that.
+    // Gated to MV: in this pack the Eye of Ender only comes from GT's route (blaze rods of the MV creature simulator or the HV
+    // chemical reactor -> extractor -> MV chemical bath, server_scripts/grindless/hv/ender_eye.js), so reaching this recipe already
+    // implies MV machinery - the End is MV (DECISIONS.md 2026-10-24).
     event.shapeless('grindless:end_key', ['minecraft:ender_eye', 'minecraft:stick', 'minecraft:obsidian'])
         .id('grindless:end_key_from_ender_eye')
 }

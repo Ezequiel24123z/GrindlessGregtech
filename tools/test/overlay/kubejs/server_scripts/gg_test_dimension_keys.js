@@ -23,10 +23,10 @@
 //                                          startup_scripts/gg_test_dimension_keys.js) and leaves the player where it was
 //   all_keys
 //
-// TEST AREA: Overworld band X 2816-2879, Y 98-112, Z 0-15: it clears X 2843-2853 Z 3-13 Y 98-112 and puts a smooth stone
-// floor at Y 98 (X 2846-2850, Z 6-10); the player starts at 2848.5 99 8.5 and ends there, so the floor stays (the client
-// world is thrown away after the run). The keys themselves land on grindless:void 2848 64 8 (stone brick platform at Y 63),
-// grindless:flat 2848 64 8 and minecraft:the_end 2000 64 0.
+// TEST AREA: Overworld band X 4352-4415, Y 98-112, Z 0-15: it clears X 4379-4389 Z 3-13 Y 98-112 and puts a smooth stone
+// floor at Y 98 (X 4382-4386, Z 6-10); the player starts at 4384.5 99 8.5 and ends there, so the floor stays (the client
+// world is thrown away after the run). The keys themselves land on grindless:void 4384 64 8 (stone brick platform at Y 63),
+// grindless:flat 4384 64 8 and minecraft:the_end 2000 64 0.
 //
 // var + function everywhere: this Rhino throws "redeclaration of var" for const/let in functions that run more than once.
 ;(function () {
@@ -35,9 +35,9 @@
   var REQ = 'ggTestDimensionKeysRequest'
   var QUIET_MS = 10000
   var LOADED_AT = Date.now()
-  var AREA = { x0: 2843, x1: 2853, y0: 98, y1: 112, z0: 3, z1: 13 }
-  var FLOOR = { x0: 2846, x1: 2850, y: 98, z0: 6, z1: 10 }
-  var START = { x: 2848.5, y: 99, z: 8.5 }
+  var AREA = { x0: 4379, x1: 4389, y0: 98, y1: 112, z0: 3, z1: 13 }
+  var FLOOR = { x0: 4382, x1: 4386, y: 98, z0: 6, z1: 10 }
+  var START = { x: 4384.5, y: 99, z: 8.5 }
   var OVERWORLD = 'minecraft:overworld'
   var MISSING_DIM = 'grindless:no_such_dimension'
   var KEYS = [
