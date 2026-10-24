@@ -5,3 +5,5 @@ tools/bin/
 /*_src/
 /*.snbt
 /ftbquests_tree.txt
+
+tools/prism/out/
