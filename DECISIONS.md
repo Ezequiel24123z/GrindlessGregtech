@@ -49,3 +49,14 @@ Una línea por decisión. La más reciente, abajo.
 - 2026-10-24 · Las líneas de platino y naquadah de GT-- se quedan, porque nuestras plantas leen sus recetas. Salen sus 24 `pgs_from_*`, que daban platino desde menas de cobre y níquel en LV.
 - 2026-10-24 · GCYR no se toca hasta rediseñar el espacio.
 - 2026-10-24 · Pruebas: lo que ya pasó su prueba en partida no se vuelve a probar (lo pide el usuario). El contenido que solo usa un mecanismo ya probado se valida con el validador y comprobaciones estáticas. En partida se prueba solo lo nuevo o lo que cambia el mecanismo (AGENTS.md).
+- 2026-10-24 · Tabla de eras aprobada (`docs/viaje.md`): el pack es un viaje de la Tierra al agujero negro de Sagitario A*. Las eras T0–T14 de Grindless casan 1:1 con Vapor–MAX, y el final es el proyecto de MAX.
+- 2026-10-24 · Luna, opción A: el titanio entra en EV y sale solo de la Luna (ilmenita lunar). Se quita de la Tierra: la ilmenita de la veta del End y el rutilo de la bauxita.
+- 2026-10-24 · HV sin titanio: máquinas, cascos, brocas (la broca HV pasa a inox), multibloques y piezas del cohete y del traje de GCYR van con acero inoxidable.
+- 2026-10-24 · El End pasa a MV, sin ilmenita (se va a la Luna) ni scheelita (se va a Marte). Así HV solo abre la Luna.
+- 2026-10-24 · Validador: nada de una era puede pedir un recurso que sale en una era posterior.
+- 2026-10-24 · Kardashev I en ZPM, II en UHV y III en OpV.
+- 2026-10-24 · Viajes: la primera visita a cada planeta se hace en cohete. Después, las personas usan Waystones o los /home de FTB, sin coste extra. Que viajar sea gratis es intencional.
+- 2026-10-24 · AE2 es la columna del transporte entre planetas: materiales, fluidos y energía. El puente cuántico entre planetas lleva una mitad hecha en cada extremo, y la red entre planetas mejora con las eras. Los cofres y tanques ender no cruzan a otro planeta.
+- 2026-10-24 · Misiones: una pestaña por era (Vapor → MAX) que cuenta el viaje, y pestañas aparte para los mods de calidad de vida: almacenamiento, AE2 y addons, Productive Bees, Create/Greate si se quedan, Waystones/FTB… Se reutilizan misiones de packs cuya licencia lo permite; si no, se escriben. Todo en inglés.
+- 2026-10-24 · Contenido post-UHV: primero se reutiliza lo que existe en packs externos, Gregicality y packs antiguos con licencia que lo permita, incluidas texturas y código. Crearlo de cero es el último recurso.
+- 2026-10-24 · Trabajo autónomo (lo pide el usuario): el orquestador decide, lo apunta aquí y sigue. Solo avisa si algo bloquea de verdad.
