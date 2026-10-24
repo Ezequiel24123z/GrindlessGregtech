@@ -1,0 +1,514 @@
+{
+	default_hide_dependency_lines: false
+	default_quest_shape: ""
+	filename: "hv_age"
+	group: "3F021F40CD26BF57"
+	icon: "gtceu:refinery"
+	id: "7CD2454BDDCF0DD6"
+	order_index: 3
+	quest_links: [ ]
+	quests: [
+		{
+			dependencies: ["53336232501835EE"]
+			description: [
+				"The cleanroom is up and circuits just got a wall built around them. Everything past this gate either comes from inside that room or feeds it."
+				"HV is where the pack turns into a real GregTech pack: oil gets refined, not just burned, and titanium needs its own chain end to end."
+			]
+			icon: "gtceu:hv_machine_hull"
+			id: "B610F788A08B9FD3"
+			rewards: [{ id: "097536B58AB1C2EC", type: "xp", xp: 40 }]
+			shape: "rsquare"
+			size: 1.5d
+			tasks: [{ id: "E52DBE317E40AFE7", type: "checkmark" }]
+			title: "HV Factory"
+			x: 0.0d
+			y: 0.0d
+		}
+		{
+			dependencies: ["B610F788A08B9FD3"]
+			description: ["The &6HV Energy Hatch&r and &6HV Battery Buffer&r are the same idea at a bigger size - build them onto the MV to HV transformer from the gate."]
+			icon: "gtceu:hv_energy_input_hatch"
+			id: "402F2B16DAE481B7"
+			rewards: [{ id: "1AF584529AB814B3", type: "xp", xp: 30 }]
+			tasks: [
+				{ count: 2L, id: "5895EA447DCF5847", item: "gtceu:hv_energy_input_hatch", type: "item" }
+				{ id: "915A06EDFACFB98E", item: "gtceu:hv_battery_buffer_4x", type: "item" }
+			]
+			title: "HV Grid"
+			x: 2.5d
+			y: 0.0d
+		}
+		{
+			dependencies: ["402F2B16DAE481B7"]
+			description: [
+				"Steam power stops being one tiered block here: the &6Steel Large Boiler&r and the &6Large Steam Turbine&r are proper multiblocks, built once and fed forever."
+				"Creosote and biomass still light the fire - gasoline takes over the power plant later in this chapter."
+			]
+			icon: "gtceu:steam_large_turbine"
+			id: "134BDAC25F5824C1"
+			rewards: [{ id: "5FBBC7364C4A5A61", type: "xp", xp: 45 }]
+			tasks: [
+				{ id: "46D1E9A6AF89FC55", item: "gtceu:steel_large_boiler", type: "item" }
+				{ id: "E7BB0E16F80459A9", item: "gtceu:steam_large_turbine", type: "item" }
+			]
+			title: "Large Steel Boiler and Turbine"
+			x: 5.0d
+			y: 0.0d
+		}
+		{
+			dependencies: ["402F2B16DAE481B7"]
+			description: ["Motor, piston, pump, arm and conveyor, one more size up. Nothing new to learn - stainless steel instead of aluminium in most of them."]
+			icon: "gtceu:hv_electric_motor"
+			id: "DB595A919C80BFC0"
+			rewards: [{ id: "DB58F6733D9F1DB6", type: "xp", xp: 35 }]
+			tasks: [
+				{ id: "1259BDC6AE103E3A", item: "gtceu:hv_electric_motor", type: "item" }
+				{ id: "75481D84726D613B", item: "gtceu:hv_electric_piston", type: "item" }
+				{ id: "23DA5CC1B81AD05C", item: "gtceu:hv_electric_pump", type: "item" }
+				{ id: "5BC3088D093E5BCF", item: "gtceu:hv_robot_arm", type: "item" }
+				{ id: "E1D202ED6D17FF04", item: "gtceu:hv_conveyor_module", type: "item" }
+			]
+			title: "HV Components"
+			x: 7.5d
+			y: 0.0d
+		}
+		{
+			dependencies: ["DB595A919C80BFC0"]
+			description: [
+				"Carbon and sulfur make blaze powder in the chemical reactor; the extractor turns it into liquid blaze, and a chemical bath with the simulator's own ender pearl finishes the eye."
+				"The vanilla recipe is gone - blaze rods off the HV simulator are the other way in."
+			]
+			icon: "minecraft:ender_eye"
+			id: "3DDBE9267C197FEE"
+			rewards: [{ id: "455F4629A4E480F9", type: "xp", xp: 35 }]
+			tasks: [{ count: 4L, id: "27CDF7857BE02FBD", item: "minecraft:ender_eye", type: "item" }]
+			title: "Ender Eye"
+			x: 10.0d
+			y: -3.0d
+		}
+		{
+			dependencies: ["DB595A919C80BFC0"]
+			description: [
+				"Nickel, black bronze and steel melt into &6Black Steel&r; rose gold, brass, steel and black steel melt again into &6Red Steel&r, both through the Kanthal EBF and a chemical bath."
+				"Red steel is the only metal hard enough for the HV cutter's saw."
+			]
+			icon: "gtceu:red_steel_ingot"
+			id: "2EE2A70803F87897"
+			rewards: [{ id: "37DF63D19831DAD3", type: "xp", xp: 35 }]
+			tasks: [
+				{ count: 4L, id: "2D823876F35C5D3F", item: "gtceu:black_steel_ingot", type: "item" }
+				{ count: 4L, id: "95199CC371D9FAAF", item: "gtceu:red_steel_ingot", type: "item" }
+			]
+			title: "Black Steel and Red Steel"
+			x: 12.5d
+			y: -3.0d
+		}
+		{
+			dependencies: ["2EE2A70803F87897"]
+			description: ["The &6Cutter&r and &6Laser Engraver&r step up again - only the cutter's saw asks for red steel instead of vanadium steel this time."]
+			icon: "gtceu:hv_laser_engraver"
+			id: "F15BB49A8BCDE679"
+			rewards: [{ id: "AF1A3C944FB46257", type: "xp", xp: 35 }]
+			tasks: [
+				{ id: "98670943281B28B2", item: "gtceu:hv_cutter", type: "item" }
+				{ id: "4E6581D4A78F7BE3", item: "gtceu:hv_laser_engraver", type: "item" }
+			]
+			title: "HV Cutter and Laser Engraver"
+			x: 15.0d
+			y: -3.0d
+		}
+		{
+			dependencies: ["DB595A919C80BFC0", "402F2B16DAE481B7"]
+			description: [
+				"Same family, same vein table, more bores per hatch again."
+				"It is also the only drill that can ever reach the End veins - the lower tiers physically cannot run those recipes."
+			]
+			icon: "gtceu:hv_vein_drill"
+			id: "F21FA9268C278B3F"
+			rewards: [
+				{ id: "291D4CDF7933776F", type: "xp", xp: 60 }
+				{ count: 16, id: "3270F51E23F41A5D", item: "minecraft:torch", type: "item" }
+			]
+			shape: "gear"
+			size: 1.5d
+			tasks: [{ id: "BFA479D4D0FB6DE4", item: "gtceu:hv_vein_drill", type: "item" }]
+			title: "HV Vein Drill"
+			x: 10.0d
+			y: 3.0d
+		}
+		{
+			dependencies: ["F21FA9268C278B3F"]
+			description: ["The lightest, longest-lasting bit yet, made from the same titanium this chapter is about to give you. The vanadium steel bit still works until then."]
+			icon: "grindless:titanium_drill_bit"
+			id: "ACD2C8EF5A408796"
+			rewards: [{ id: "B96C938D1616ED8E", type: "xp", xp: 25 }]
+			tasks: [{ count: 4L, id: "C222DE23EA3992E8", item: "grindless:titanium_drill_bit", type: "item" }]
+			title: "Titanium Drill Bit"
+			x: 12.5d
+			y: 3.0d
+		}
+		{
+			dependencies: ["3DDBE9267C197FEE"]
+			description: [
+				"An ender eye crafts into the &6End Key&r - vanilla's portal still works, and the key drops you on a safe platform away from the central island and brings you back after."
+				"No need to fight the dragon. You are there for ore, not a trophy."
+			]
+			icon: "grindless:end_key"
+			id: "F56117B334515EA3"
+			rewards: [{ id: "1232F0B14764A6C8", type: "xp", xp: 30 }]
+			tasks: [{ id: "DAA55A133132E331", item: "grindless:end_key", type: "item" }]
+			title: "End Key"
+			x: 12.5d
+			y: -6.0d
+		}
+		{
+			dependencies: ["F56117B334515EA3", "ACD2C8EF5A408796"]
+			description: [
+				"Four veins, four samples, one trip: bauxite with ilmenite, magnetite with vanadium and gold, scheelite with tungsten, and sheldonite with platinum and palladium."
+				"The other two End veins are radioactive - nobody needs them before IV."
+			]
+			icon: "grindless:vein_sample_sheldonite"
+			id: "804525B795119B1B"
+			rewards: [{ id: "EBC885CD026BAD65", type: "xp", xp: 40 }]
+			tasks: [{ id: "8FB2F4B16F6C2B1E", type: "checkmark" }]
+			title: "End Veins"
+			x: 15.0d
+			y: -6.0d
+		}
+		{
+			dependencies: ["DB595A919C80BFC0", "402F2B16DAE481B7"]
+			description: ["Same spec, more bores - this is only the step up. HV asks for no more wood or crops than MV; the new carbon in this chapter comes from oil, not trees."]
+			icon: "gtceu:hv_greenhouse"
+			id: "BC06724477E3E0BB"
+			rewards: [
+				{ id: "35502C2CA21A059D", type: "xp", xp: 55 }
+				{ count: 4, id: "F689DD0946DD2CEE", item: "minecraft:wheat_seeds", type: "item" }
+			]
+			shape: "gear"
+			size: 1.5d
+			tasks: [{ id: "DDB8D7813E63F2DC", item: "gtceu:hv_greenhouse", type: "item" }]
+			title: "HV Greenhouse"
+			x: 15.0d
+			y: 3.0d
+		}
+		{
+			dependencies: ["DB595A919C80BFC0"]
+			description: [
+				"The &6Refinery&r takes crude and hydrogen in and gives every fraction out in one pass, desulfurized, where GTM's own tower needs four passes and still leaves sulfur in."
+				"A programmed circuit picks the job: plain refining, cracking with hydrogen, or cracking with steam into olefins and aromatics."
+			]
+			icon: "gtceu:refinery"
+			id: "5C5D6FB9ECB7BC51"
+			rewards: [
+				{ id: "012A2C94D6BE9D69", type: "xp", xp: 90 }
+				{ count: 16, id: "F4C549950BA61877", item: "minecraft:torch", type: "item" }
+			]
+			shape: "gear"
+			size: 1.75d
+			tasks: [{ id: "659FBFC6A4539F6D", item: "gtceu:refinery", type: "item" }]
+			title: "Refinery"
+			x: 17.5d
+			y: 0.0d
+		}
+		{
+			dependencies: ["5C5D6FB9ECB7BC51"]
+			description: [
+				"Cobalt, molybdenum and silica from sand, crossed with three different ore lines, make the &6Hydrotreating Catalyst&r the refinery burns through by chance."
+				"Cobalt rides the nickel vein, molybdenum the Nether one - keep both stocked."
+			]
+			icon: "grindless:hydrotreating_catalyst"
+			id: "E4F01001238ACD74"
+			rewards: [{ id: "7BB92FDB97461071", type: "xp", xp: 30 }]
+			tasks: [{ count: 4L, id: "F00AC5219F2F1ADB", item: "grindless:hydrotreating_catalyst", type: "item" }]
+			title: "Hydrotreating Catalyst"
+			x: 20.0d
+			y: 0.0d
+		}
+		{
+			dependencies: ["E4F01001238ACD74"]
+			description: [
+				"Circuit 3 and a splash of steam turn naphtha into ethylene, propene, butadiene and benzene in the same refinery - no separate cracker required."
+				"Hydrogen cracking (circuit 2) is the other mode: feed it back whatever fraction is piling up."
+			]
+			icon: "gtceu:refinery"
+			id: "1051C4B8835DB4A3"
+			rewards: [{ id: "C0F96569A80405B1", type: "xp", xp: 30 }]
+			tasks: [{ id: "5104D985778131A0", type: "checkmark" }]
+			title: "Cracking and Olefins"
+			x: 22.5d
+			y: 0.0d
+		}
+		{
+			dependencies: ["E4F01001238ACD74"]
+			description: [
+				"Natural gas desulfurizes straight into refinery gas; the distillery then pulls methane, ethane, propane, butane and helium out of it."
+				"Methane feeds the PTFE line a few steps from now - nothing here is wasted."
+			]
+			icon: "gtceu:mv_distillery"
+			id: "74B6466FA603FC14"
+			rewards: [{ id: "3A062C4CD7BE032D", type: "xp", xp: 25 }]
+			tasks: [{ id: "62A49DAE5A598587", type: "checkmark" }]
+			title: "Natural Gas and Refinery Gas"
+			x: 22.5d
+			y: -3.0d
+		}
+		{
+			dependencies: ["1051C4B8835DB4A3", "804525B795119B1B"]
+			description: [
+				"GTM never reforms naphtha - the &6Catalytic Reformer&r does, turning it into benzene, toluene and the hydrogen the refinery just spent."
+				"Not required: without it, the electrolyzer alone keeps the refinery in hydrogen, just with less margin."
+			]
+			icon: "gtceu:reformer"
+			id: "52781D6F5A69C4BE"
+			optional: true
+			rewards: [{ id: "C6D2EE333DEFD840", type: "xp", xp: 40 }]
+			shape: "gear"
+			size: 1.5d
+			tasks: [{ id: "BD77A53BF29A83F5", item: "gtceu:reformer", type: "item" }]
+			title: "Catalytic Reformer"
+			x: 25.0d
+			y: 0.0d
+		}
+		{
+			dependencies: ["52781D6F5A69C4BE"]
+			description: ["Platinum from the sheldonite vein, pressed onto silica - the &6Reforming Catalyst&r is the one thing in this chapter that only the End can supply."]
+			icon: "grindless:reforming_catalyst"
+			id: "045FA73ADE3D0624"
+			rewards: [{ id: "5669400C0C30D05F", type: "xp", xp: 30 }]
+			tasks: [{ count: 4L, id: "8CAB2A5FCAE4C6DC", item: "grindless:reforming_catalyst", type: "item" }]
+			title: "Reforming Catalyst"
+			x: 27.5d
+			y: 0.0d
+		}
+		{
+			dependencies: ["1051C4B8835DB4A3"]
+			description: ["Topaz, lepidolite or bastnasite give up fluorine; mixed with hydrogen in the chemical reactor it becomes hydrofluoric acid - the one ingredient PTFE cannot do without."]
+			icon: "gtceu:lv_chemical_reactor"
+			id: "7267E269B84470FF"
+			rewards: [{ id: "C8E8AC75F8251D19", type: "xp", xp: 25 }]
+			tasks: [{ id: "26D26CF3E5C118AD", type: "checkmark" }]
+			title: "Hydrofluoric Acid"
+			x: 25.0d
+			y: -3.0d
+		}
+		{
+			dependencies: ["7267E269B84470FF", "74B6466FA603FC14"]
+			description: [
+				"Methane and chlorine make chloroform; chloroform and hydrofluoric acid make TFE; TFE alone makes &6PTFE&r."
+				"Cast it into inert casing and pipe, and the large chemical reactor finally has walls that will not melt."
+			]
+			icon: "gtceu:inert_machine_casing"
+			id: "720331A06D7F2344"
+			rewards: [{ id: "2BA86A8E9940CABD", type: "xp", xp: 35 }]
+			tasks: [{ count: 8L, id: "AB26A5F014E45D2A", item: "gtceu:inert_machine_casing", type: "item" }]
+			title: "PTFE"
+			x: 27.5d
+			y: -3.0d
+		}
+		{
+			dependencies: ["1051C4B8835DB4A3"]
+			description: [
+				"Glycerol from MV's biodiesel line turns into epichlorohydrin; cumene from benzene and propene splits into phenol and acetone, and the three combine into epoxy."
+				"Styrene, butadiene and oxygen make raw SBR - vulcanize it with sulfur and it replaces rubber in every HV pump and conveyor."
+			]
+			icon: "gtceu:mv_mixer"
+			id: "47895685D763AE65"
+			rewards: [{ id: "C973030D0D5597E4", type: "xp", xp: 30 }]
+			tasks: [{ id: "EBA5CFB1330C9434", type: "checkmark" }]
+			title: "Epoxy and SBR"
+			x: 30.0d
+			y: 0.0d
+		}
+		{
+			dependencies: ["720331A06D7F2344", "47895685D763AE65"]
+			description: [
+				"The &6Large Chemical Reactor&r needs PTFE casing throughout - the first multiblock this chapter asks the plastics line to build."
+				"Naphtha, refinery gas, methanol and acetone cook into raw gasoline; a splash of toluene finishes it into the fuel that actually runs the HV plant."
+			]
+			icon: "gtceu:large_chemical_reactor"
+			id: "35719B747A75F7B6"
+			rewards: [{ id: "3EB45CE14A466656", type: "xp", xp: 55 }]
+			tasks: [{ id: "9E56A8818DE368EE", item: "gtceu:large_chemical_reactor", type: "item" }]
+			title: "Gasoline"
+			x: 32.5d
+			y: 0.0d
+		}
+		{
+			dependencies: ["F15BB49A8BCDE679"]
+			description: ["The cutter and laser engraver you already own slice and burn a boule into CPU wafers, the same way ILC and RAM were made in MV."]
+			icon: "gtceu:cpu_wafer"
+			id: "2267FA6D185D2882"
+			rewards: [{ id: "176F9BAA23F1A8F9", type: "xp", xp: 30 }]
+			tasks: [{ count: 4L, id: "A8566FCC6FBBF1B3", item: "gtceu:cpu_wafer", type: "item" }]
+			title: "CPU Wafer"
+			x: 17.5d
+			y: -6.0d
+		}
+		{
+			dependencies: ["2267FA6D185D2882"]
+			description: ["A plastic board, two microprocessors, inductors, capacitors and RAM solder into a &6Microprocessor Assembly&r - the last part before the cleanroom."]
+			icon: "gtceu:micro_processor_assembly"
+			id: "B7FCA61395646727"
+			rewards: [{ id: "4B3FF7686F5AC64C", type: "xp", xp: 35 }]
+			tasks: [{ count: 2L, id: "F5AE43FDB54724F1", item: "gtceu:micro_processor_assembly", type: "item" }]
+			title: "Microprocessor Assembly"
+			x: 20.0d
+			y: -6.0d
+		}
+		{
+			dependencies: ["B7FCA61395646727"]
+			description: [
+				"Two assemblies, diodes, RAM, electrum wire and a blue alloy of electrotine and silver - the &6Workstation&r is only built inside the cleanroom you already raised in MV."
+				"This is the wall GregTech warns you about: nothing past here runs without it."
+			]
+			icon: "gtceu:micro_processor_computer"
+			id: "D1DD45CBEDEE31D9"
+			rewards: [{ id: "B701FB44C4351347", type: "xp", xp: 50 }]
+			tasks: [{ id: "68F1C9AFFB461C1A", item: "gtceu:micro_processor_computer", type: "item" }]
+			title: "EV Workstation"
+			x: 22.5d
+			y: -6.0d
+		}
+		{
+			dependencies: ["D1DD45CBEDEE31D9"]
+			description: [
+				"The &6Vacuum Freezer&r itself is crafted with two workstations, not one - the first machine in the pack gated by circuits instead of power."
+				"It cools a hot ingot solid and, fed air, separates it into liquid oxygen and nitrogen."
+			]
+			icon: "gtceu:vacuum_freezer"
+			id: "53D1CE971F63D842"
+			rewards: [{ id: "B12C422590E22590", type: "xp", xp: 60 }]
+			size: 1.25d
+			tasks: [{ id: "0AEBA5F4B70C1D3E", item: "gtceu:vacuum_freezer", type: "item" }]
+			title: "Vacuum Freezer"
+			x: 25.0d
+			y: -6.0d
+		}
+		{
+			dependencies: ["53D1CE971F63D842", "804525B795119B1B"]
+			description: [
+				"Ilmenite from the End, or rutile from MV bauxite, turns into titanium tetrachloride with chlorine and carbon; the Kanthal EBF reduces it with magnesium into a hot ingot, and only the vacuum freezer cools it solid."
+				"The magnesium chloride left behind splits back into magnesium and salt with sodium - the salt feeds the electrolyzer again."
+			]
+			icon: "gtceu:titanium_ingot"
+			id: "94DF849D657D6AEF"
+			rewards: [{ id: "FEF3030512FB7BB2", type: "xp", xp: 55 }]
+			tasks: [{ count: 4L, id: "DF998A4F472AB2CF", item: "gtceu:titanium_ingot", type: "item" }]
+			title: "Titanium"
+			x: 27.5d
+			y: -6.0d
+		}
+		{
+			dependencies: ["53D1CE971F63D842", "2EE2A70803F87897"]
+			description: ["Nickel and chromium from the ore plant, smelted hot enough that only two HV hatches reach it, then cooled in the same freezer as titanium - &6Nichrome&r is the coil wire EV's own EBF will need."]
+			icon: "gtceu:nichrome_ingot"
+			id: "70F4075BAF69DA99"
+			rewards: [{ id: "DB177DB0EA38B7DC", type: "xp", xp: 40 }]
+			tasks: [{ count: 4L, id: "FFEDE320D91D5B65", item: "gtceu:nichrome_ingot", type: "item" }]
+			title: "Nichrome"
+			x: 30.0d
+			y: -6.0d
+		}
+		{
+			dependencies: ["94DF849D657D6AEF"]
+			description: ["Stainless steel and titanium drums hold far more fluid than any tank GTM gave you before - park one under every machine that floods a bus."]
+			icon: "gtceu:titanium_drum"
+			id: "471A024EBFCA8459"
+			rewards: [{ id: "E707FD083533EF59", type: "xp", xp: 30 }]
+			tasks: [
+				{ id: "B36736F34B2A70B0", item: "gtceu:stainless_steel_drum", type: "item" }
+				{ id: "F7B406FEED9779D8", item: "gtceu:titanium_drum", type: "item" }
+			]
+			title: "GT Drums"
+			x: 30.5d
+			y: -3.0d
+		}
+		{
+			dependencies: ["471A024EBFCA8459"]
+			description: ["The &6Super Chest&r and &6Super Tank&r hold millions of items or buckets apiece - the ore plant and the refinery finally have somewhere to dump a backlog."]
+			icon: "gtceu:hv_super_tank"
+			id: "82DC15B32EA52FEC"
+			rewards: [{ id: "8727FC45CCD3BAA4", type: "xp", xp: 35 }]
+			tasks: [
+				{ id: "883222AECEE29A71", item: "gtceu:hv_super_chest", type: "item" }
+				{ id: "2836F1DB768DD854", item: "gtceu:hv_super_tank", type: "item" }
+			]
+			title: "Super Chest and Tank"
+			x: 33.0d
+			y: -3.0d
+		}
+		{
+			dependencies: ["82DC15B32EA52FEC"]
+			description: [
+				"AE2 itself asks nothing new - it has been whole since LV. HV only opens the door for the bigger addons: Expanded AE's larger co-processors and, if it stays, Extended AE's wireless bus, both gated behind HV circuits and stainless steel."
+				"Entirely optional - the LV sub-tree already runs the whole factory."
+			]
+			icon: "ae2:controller"
+			id: "61928A6B7E8BCC95"
+			optional: true
+			rewards: [{ id: "DE985164B4B837AB", type: "xp", xp: 25 }]
+			tasks: [{ id: "2B10D5B1F47F2392", type: "checkmark" }]
+			title: "AE2 at HV"
+			x: 35.5d
+			y: -3.0d
+		}
+		{
+			dependencies: ["94DF849D657D6AEF", "35719B747A75F7B6"]
+			description: ["Eight titanium plates, two aluminium cables and a sheet of polyethylene - the &6EV Machine Hull&r is one size up, and every ingredient already has a line behind it."]
+			icon: "gtceu:ev_machine_hull"
+			id: "61ECF6270ECCE3C2"
+			rewards: [{ id: "6DE5A471269B3A5D", type: "xp", xp: 40 }]
+			tasks: [{ count: 2L, id: "93B7784B22044D02", item: "gtceu:ev_machine_hull", type: "item" }]
+			title: "EV Machine Hull"
+			x: 35.0d
+			y: 0.0d
+		}
+		{
+			dependencies: ["61ECF6270ECCE3C2"]
+			description: ["Same bridge as always, one size up: four HV amps in, one EV amp out, or the other way round."]
+			icon: "gtceu:hv_transformer_1a"
+			id: "E457FB82BC6D3618"
+			rewards: [{ id: "343DC485F998A708", type: "xp", xp: 45 }]
+			tasks: [{ id: "336CD67466A1FC2E", item: "gtceu:hv_transformer_1a", type: "item" }]
+			title: "HV to EV Transformer"
+			x: 37.5d
+			y: 0.0d
+		}
+		{
+			dependencies: ["E457FB82BC6D3618"]
+			description: [
+				"Titanium rods, a neodymium magnet and double aluminium cable wind into the &6EV Motor&r; a titanium pipe, a stainless rotor and rubber rings make the &6EV Pump&r."
+				"Neodymium rides the monazite vein in the Nether - gate-only parts, EV itself is next."
+			]
+			icon: "gtceu:ev_electric_motor"
+			id: "964F0808EF9DF557"
+			rewards: [{ id: "9B2016D2F9628E2F", type: "xp", xp: 45 }]
+			tasks: [
+				{ id: "8CB11B272083BF4F", item: "gtceu:ev_electric_motor", type: "item" }
+				{ id: "01D849EAF82915F5", item: "gtceu:ev_electric_pump", type: "item" }
+			]
+			title: "EV Motor and Pump"
+			x: 40.0d
+			y: 0.0d
+		}
+		{
+			dependencies: ["964F0808EF9DF557", "70F4075BAF69DA99"]
+			description: [
+				"Built with the same EV circuits as the freezer, the &6Distillation Tower&r is GTM's own column - it takes over crude oil and general chemistry in EV and, right now, separates liquid air into oxygen, nitrogen and the noble gases your refinery never touched."
+				"That is HV done. Oil, metal, circuits and the End all stand on their own lines - EV only needs you to flip the last switch."
+			]
+			icon: "gtceu:distillation_tower"
+			id: "3084C18A4334B401"
+			rewards: [
+				{ id: "663886DE4A6DDBC5", type: "xp", xp: 150 }
+				{ count: 16, id: "3206BC7E787A3152", item: "minecraft:torch", type: "item" }
+			]
+			shape: "diamond"
+			size: 1.75d
+			tasks: [{ id: "5463D5111EC8D608", item: "gtceu:distillation_tower", type: "item" }]
+			title: "Distillation Tower"
+			x: 42.5d
+			y: 0.0d
+		}
+	]
+}

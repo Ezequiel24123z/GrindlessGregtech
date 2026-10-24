@@ -1,12 +1,12 @@
 name = "Gregtech Grindless"
 author = "Ezequiel24123z"
-version = "0.3.0"
+version = "0.4.0"
 pack-format = "packwiz:1.1.0"
 
 [index]
 file = "index.toml"
 hash-format = "sha256"
-hash = "35dc2f8274e7a6f70e0ba222a8de10a2758ef27162e15b3693d18ef2ebb6a8ce"
+hash = "050337c0832ae37a230e87a81c58e948df00a22262d2b9338c8e66faeafd99bb"
 
 [versions]
 forge = "47.4.28"

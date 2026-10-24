@@ -9,7 +9,8 @@ Pack de GregTech enorme para Minecraft 1.20.1 (Forge) sobre GregTech Modern 7.5.
 | Vapor | Jugable desde `v0.1.0`: coque, bronce, vapor, acero, perforadora de vetas e invernadero de vapor propios, y puerta a LV. |
 | LV | Jugable desde `v0.2.0`: perforadora e invernadero LV, horno de arco sumergido, simulador de criaturas, AE2 entera en LV y 150 mods. |
 | MV | Jugable desde `v0.3.0`: planta de mineral, biorrefinería, perforadora e invernadero MV, petróleo infinito (también en el Llano y el Vacío) y 207 mods. |
-| HV | En desarrollo: refinería y reformador, perforadora HV con vetas del End e invernadero HV. |
+| HV | Jugable desde `v0.4.0`: refinería (destila, hidrotrata y craquea en una pasada), reformador, perforadora HV con vetas del End e invernadero HV. |
+| Lo que viene | El pack se convierte en un viaje hasta el agujero negro del centro de la galaxia. La primera parada es la Luna, al final de HV. |
 
 ## Cómo jugar (Prism Launcher)
 
@@ -18,7 +19,7 @@ Pack de GregTech enorme para Minecraft 1.20.1 (Forge) sobre GregTech Modern 7.5.
 3. En *Editar instancia → Ajustes → Comandos personalizados*, pon como comando previo al lanzamiento:
 
    ```
-   "$INST_JAVA" -jar packwiz-installer-bootstrap.jar https://raw.githubusercontent.com/Ezequiel24123z/GrindlessGregtech/v0.3.0/pack/pack.toml
+   "$INST_JAVA" -jar packwiz-installer-bootstrap.jar https://raw.githubusercontent.com/Ezequiel24123z/GrindlessGregtech/v0.4.0/pack/pack.toml
    ```
 
 4. Arranca. packwiz descarga los mods desde sus fuentes oficiales y los mantiene en la versión fijada.

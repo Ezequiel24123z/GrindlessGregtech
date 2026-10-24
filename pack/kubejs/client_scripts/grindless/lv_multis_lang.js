@@ -3,7 +3,8 @@
 //   gtceu:lv_vein_drill, gtceu:lv_greenhouse, gtceu:submerged_arc_furnace   (machine names + tooltips)
 //   gtceu:arc_smelting                                                      (recipe type name)
 //   grindless:graphite_electrode                                            (electrode)
-//   grindless:vein_sample_<nether vein>                                     (12 Nether vein samples)
+//   grindless:vein_sample_<nether vein>                                     (13 Nether vein samples)
+//   grindless:vein_sample_<extra overworld vein>                            (kaolinite, wollastonite: GT-- veins)
 //
 // Kept out of pack/kubejs/assets/grindless/lang/* (owned by another agent) - Minecraft merges lang entries from every
 // namespace/script, so ClientEvents.lang works fine regardless of where it is declared (same approach as dimensions_lang.js).
@@ -39,6 +40,7 @@ ClientEvents.lang('en_us', event => {
     add('item.grindless.vein_sample_banded_iron', 'Nether Banded Iron Vein Sample')
     add('item.grindless.vein_sample_beryllium', 'Nether Beryllium Vein Sample')
     add('item.grindless.vein_sample_certus_quartz', 'Nether Certus Quartz Vein Sample')
+    add('item.grindless.vein_sample_germanite', 'Nether Germanite Vein Sample')
     add('item.grindless.vein_sample_manganese', 'Nether Manganese Vein Sample')
     add('item.grindless.vein_sample_molybdenum', 'Nether Molybdenum Vein Sample')
     add('item.grindless.vein_sample_monazite', 'Nether Monazite Vein Sample')
@@ -48,6 +50,10 @@ ClientEvents.lang('en_us', event => {
     add('item.grindless.vein_sample_sulfur', 'Nether Sulfur Vein Sample')
     add('item.grindless.vein_sample_tetrahedrite', 'Nether Tetrahedrite Vein Sample')
     add('item.grindless.vein_sample_topaz', 'Nether Topaz Vein Sample')
+
+    // Overworld veins of other mods (GT--), drilled by the Steam Vein Drill like the ones of the steam table
+    add('item.grindless.vein_sample_kaolinite', 'Kaolinite Vein Sample')
+    add('item.grindless.vein_sample_wollastonite', 'Wollastonite Vein Sample')
 })
 
 ClientEvents.lang('es_es', event => {
@@ -82,6 +88,7 @@ ClientEvents.lang('es_es', event => {
     add('item.grindless.vein_sample_banded_iron', 'Muestra de veta de hierro bandeado del Nether')
     add('item.grindless.vein_sample_beryllium', 'Muestra de veta de berilio del Nether')
     add('item.grindless.vein_sample_certus_quartz', 'Muestra de veta de cuarzo certus del Nether')
+    add('item.grindless.vein_sample_germanite', 'Muestra de veta de germanita del Nether')
     add('item.grindless.vein_sample_manganese', 'Muestra de veta de manganeso del Nether')
     add('item.grindless.vein_sample_molybdenum', 'Muestra de veta de molibdeno del Nether')
     add('item.grindless.vein_sample_monazite', 'Muestra de veta de monacita del Nether')
@@ -91,4 +98,8 @@ ClientEvents.lang('es_es', event => {
     add('item.grindless.vein_sample_sulfur', 'Muestra de veta de azufre del Nether')
     add('item.grindless.vein_sample_tetrahedrite', 'Muestra de veta de tetraedrita del Nether')
     add('item.grindless.vein_sample_topaz', 'Muestra de veta de topacio del Nether')
+
+    // vetas del Overworld de otros mods (GT--), que perfora la perforadora de vetas de vapor igual que las de la tabla de vapor
+    add('item.grindless.vein_sample_kaolinite', 'Muestra de veta de caolinita')
+    add('item.grindless.vein_sample_wollastonite', 'Muestra de veta de wollastonita')
 })

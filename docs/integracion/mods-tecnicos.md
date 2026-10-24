@@ -173,3 +173,14 @@ Cada lote: 2–3 pruebas (AGENTS.md), un capítulo corto de misiones en inglés 
 11. **Pendiente del usuario:** (a) fisión nuclear: GTM no la trae y sus addons no cargan en 7.5.3; si la quiere, Mekanism Generators entra con todo lo demás oculto; (b) Ars Nouveau y PneumaticCraft; (c) Flux Networks y Re:Avaritia; (d) mods solo de CurseForge.
 
 Créditos a anotar en `CREDITS.md`: quitar el procesado de Create y rehacer andesita, mecanismo de precisión y carcasas en el ensamblador (Monifactory, LGPL-3.0); tiers de Greate y capacidad de SU por tier (TerraFirmaGreg, LGPL-3.0); listas de quitar y guardas `//requires` (Star Technology, MIT); magia como materia prima de cadenas GT y recetas de Ars y Occultism con piezas GT (Cosmic Frontiers, LGPL-3.0); Greate (MIT) como puente; descartado: el puente cinético en Java de CTNH (LGPL-3.0).
+
+## Decisiones tomadas (orquestador, 2026-10-24)
+
+Se aprueban las propuestas 1–10. La 11 queda así:
+
+- **(a) Fisión:** no entra por ahora. Si EV o IV la necesitan, será un multibloque nuestro y no Mekanism.
+- **(b) Ars Nouveau y PneumaticCraft:** después del lote D, si la magia técnica encaja.
+- **(c) Flux Networks y Re:Avaritia:** con el diseño de UHV+.
+- **(d) Mods solo de CurseForge:** entran únicamente si permiten distribución.
+
+Los lotes A–D los aplica el agente de lotes de mods en ese orden, cada uno probado sobre una copia antes de fusionarlo.

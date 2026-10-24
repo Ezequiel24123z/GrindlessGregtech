@@ -1,19 +1,20 @@
 // Gregtech Grindless - "Dimensiones de construcción"
 //
-// Behaviour for grindless:void_key / grindless:flat_key:
-//  - Used in the Overworld (or any other non-building dimension): remembers the return spot
-//    (dimension + xyz + rotation) and teleports to the matching building dimension.
-//  - Used again while inside that same building dimension: returns to the saved spot
+// Behaviour for grindless:void_key / grindless:flat_key / grindless:end_key:
+//  - Used outside its own target dimension (Overworld or anywhere else): remembers the return spot
+//    (dimension + xyz + rotation) and teleports to the matching target dimension.
+//  - Used again while inside that same target dimension: returns to the saved spot
 //    (falls back to the player's respawn point, then to the Overworld's world spawn).
-//  - Used for the *other* building dimension while already inside one of them: hops straight
-//    across (void <-> flat) without touching/overwriting the saved Overworld return point.
+//  - Used for a *different* travel dimension while already inside one of the three: hops straight
+//    across (void/flat/end) without touching/overwriting the original non-travel return point.
 //  - Never teleports into suffocation; always lands standing on solid ground (or on a small
-//    stone brick platform it creates once, in the Void, if there is nothing underneath yet).
+//    stone brick platform it creates once, if there is nothing underneath yet - the Void and the
+//    far-out End landing spot both need this; the Flat dimension never does).
 //  - All of this runs server-side only (ItemEvents.rightClicked registered from a server script),
 //    so it works in multiplayer and never no-ops silently on a client-only hook.
 //
-// Also: cheap recovery recipes for both keys, and (bonus) tries to make GTM's Overworld ore veins
-// generate underneath grindless:flat too.
+// Also: cheap recovery recipes for all three keys, and (bonus) tries to make GTM's Overworld ore
+// veins generate underneath grindless:flat too.
 //
 // NOTE ON `var` vs `const`/`let`: every function below only uses `var` for its own locals. KubeJS's
 // Rhino fork throws a "redeclaration of var X" TypeError the *second* time a function is invoked if
@@ -26,6 +27,7 @@
 
 const VOID_DIM = 'grindless:void'
 const FLAT_DIM = 'grindless:flat'
+const END_DIM = 'minecraft:the_end'
 const OVERWORLD_DIM = 'minecraft:overworld'
 const PD_KEY = 'grindless_dimensions'
 const COOLDOWN_TICKS = 20 // 1 second, on top of the vanilla item-cooldown overlay
@@ -34,13 +36,24 @@ const VOID_LANDING_Y = 64
 const FLAT_LANDING_Y = 64 // grindless:flat is identical in every chunk (5-layer flat preset), so the
                           // surface is always y=63 by construction: no need for a heightmap lookup,
                           // which is unreliable on a chunk that has not finished generating yet.
+const END_LANDING_X = 2000 // Far enough from the central island/dragon/void chasms around 0,0 that
+const END_LANDING_Z = 0    // real end stone there (if any) is just outer-island scenery, not danger;
+const END_LANDING_Y = 64   // fixed regardless of the player's Overworld position, unlike void/flat.
 const SAFE_Y_SEARCH_RANGE = 192
+const TRAVEL_DIMS = [VOID_DIM, FLAT_DIM, END_DIM]
 
 const $HashSet = Java.loadClass('java.util.HashSet')
 const $ResourceKey = Java.loadClass('net.minecraft.resources.ResourceKey')
 const $Registries = Java.loadClass('net.minecraft.core.registries.Registries')
 const $ResourceLocation = Java.loadClass('net.minecraft.resources.ResourceLocation')
 const $GTConfigHolder = Java.loadClass('com.gregtechceu.gtceu.config.ConfigHolder')
+
+function isTravelDim(dimId) {
+    for (var i = 0; i < TRAVEL_DIMS.length; i++) {
+        if (TRAVEL_DIMS[i] === dimId) return true
+    }
+    return false
+}
 
 // ---------------------------------------------------------------- persistent data helpers
 
@@ -107,12 +120,21 @@ function ensurePlatform(level, x, y, z) {
 }
 
 function computeLanding(targetLevel, targetDimId, x, z) {
-    var bx = Math.floor(x)
-    var bz = Math.floor(z)
-    var startY = targetDimId === VOID_DIM ? VOID_LANDING_Y : FLAT_LANDING_Y
+    var bx, bz, startY
+    if (targetDimId === END_DIM) {
+        // Fixed, player-independent landing spot: far from the central island regardless of where
+        // the player stood in the Overworld.
+        bx = END_LANDING_X
+        bz = END_LANDING_Z
+        startY = END_LANDING_Y
+    } else {
+        bx = Math.floor(x)
+        bz = Math.floor(z)
+        startY = targetDimId === VOID_DIM ? VOID_LANDING_Y : FLAT_LANDING_Y
+    }
 
     var y = findSafeY(targetLevel, bx, startY, bz)
-    if (targetDimId === VOID_DIM) {
+    if (targetDimId === VOID_DIM || targetDimId === END_DIM) {
         ensurePlatform(targetLevel, bx, y - 1, bz)
     }
     return { x: bx + 0.5, y: y, z: bz + 0.5 }
@@ -184,11 +206,11 @@ function handleKeyUse(player, targetDimId, item) {
     if (curDimId === targetDimId) {
         // already in that dimension -> go back to the saved Overworld (or wherever) return point
         handled = returnToSavedPosition(player, server)
-    } else if (curDimId === VOID_DIM || curDimId === FLAT_DIM) {
-        // hopping directly between the two building dimensions: keep the existing return point
+    } else if (isTravelDim(curDimId)) {
+        // hopping directly between two of the three travel dimensions: keep the existing return point
         handled = travelToBuildingDimension(player, server, targetDimId)
     } else {
-        // leaving the Overworld (or any other dimension) into a building dimension
+        // leaving the Overworld (or any other dimension) into a travel dimension
         saveReturnPoint(player, curDimId)
         handled = travelToBuildingDimension(player, server, targetDimId)
     }
@@ -203,6 +225,8 @@ ItemEvents.rightClicked('grindless:void_key', function (event) { onVoidKeyClicke
 
 ItemEvents.rightClicked('grindless:flat_key', function (event) { onFlatKeyClicked(event) })
 
+ItemEvents.rightClicked('grindless:end_key', function (event) { onEndKeyClicked(event) })
+
 function onVoidKeyClicked(event) {
     var player = event.getPlayer()
     if (!player) return
@@ -215,6 +239,12 @@ function onFlatKeyClicked(event) {
     handleKeyUse(player, FLAT_DIM, event.getItem().getItem())
 }
 
+function onEndKeyClicked(event) {
+    var player = event.getPlayer()
+    if (!player) return
+    handleKeyUse(player, END_DIM, event.getItem().getItem())
+}
+
 // ---------------------------------------------------------------- cheap recovery recipes
 
 ServerEvents.recipes(function (event) { addKeyRecipes(event) })
@@ -224,6 +254,11 @@ function addKeyRecipes(event) {
         .id('grindless:void_key_from_flint')
     event.shapeless('grindless:flat_key', ['minecraft:flint', 'minecraft:stick', 'minecraft:dirt'])
         .id('grindless:flat_key_from_flint')
+    // Gated to HV: in this pack the Eye of Ender only comes from the HV blaze-powder-> extractor ->
+    // chemical bath route (docs/eras/hv.md), so reaching this recipe already implies HV machinery -
+    // no need to also demand an HV-tier part here on top of that.
+    event.shapeless('grindless:end_key', ['minecraft:ender_eye', 'minecraft:stick', 'minecraft:obsidian'])
+        .id('grindless:end_key_from_ender_eye')
 }
 
 // ---------------------------------------------------------------- bonus: GT ore veins under grindless:flat

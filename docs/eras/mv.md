@@ -100,7 +100,7 @@ Qué gana: **rendimiento y pasos en uno**. El alambique saca una sola fracción 
 
 | Qué se construye | Qué prueba |
 |---|---|
-| Casco HV (`gtceu:hv_machine_hull`: carcasa HV de acero inoxidable, 2 placas de PE, 2 cables de oro) y escotilla de energía HV | el acero inoxidable y las placas de PE salen de sus líneas |
+| Casco HV (`gtceu:hv_machine_hull`: carcasa HV de acero inoxidable, 2 placas de PE, 2 cables de oro) | el acero inoxidable y las placas de PE salen de sus líneas (la escotilla de energía HV es el primer paso de HV: pide ensambladora de 480 EU/t, chip LPIC y cámara limpia) |
 | 8 circuitos integrados avanzados (`gtceu:advanced_integrated_circuit`, `#gtceu:circuits/hv`) | silicio → boule → obleas → ILC y RAM, transistores con PE, electrum, cobre recocido y tablero bueno con cola funcionan en lote |
 | Motor HV (varillas de inox, cable doble de plata, hilo doble de electrum) y bomba HV (tubo de inox, anillos de goma) | aleaciones, plata y goma sostenidas |
 | Traje antipeligro completo (`gtceu:hazmat_*`: placas de PVC, goma, plomo, vidrio y un filtro de máscara de PE y carbón activado) | la línea de PVC cierra el lazo del HCl y la pirólisis con N₂ da el carbón activado |

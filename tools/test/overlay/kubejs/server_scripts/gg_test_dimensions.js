@@ -35,9 +35,13 @@ function runDimensionsTest(event) {
     ggSafely('flat_key_item_registered', function () {
         ggCheck('flat_key_item_registered', Item.exists('grindless:flat_key'))
     })
+    ggSafely('end_key_item_registered', function () {
+        ggCheck('end_key_item_registered', Item.exists('grindless:end_key'))
+    })
 
     var voidLevel = null
     var flatLevel = null
+    var endLevel = null
     ggSafely('void_dimension_exists', function () {
         voidLevel = server.getLevel('grindless:void')
         ggCheck('void_dimension_exists', voidLevel != null)
@@ -45,6 +49,10 @@ function runDimensionsTest(event) {
     ggSafely('flat_dimension_exists', function () {
         flatLevel = server.getLevel('grindless:flat')
         ggCheck('flat_dimension_exists', flatLevel != null)
+    })
+    ggSafely('end_dimension_exists', function () {
+        endLevel = server.getLevel('minecraft:the_end')
+        ggCheck('end_dimension_exists', endLevel != null)
     })
 
     // Reading a block forces that chunk to load/generate first, so these checks double as the
@@ -151,6 +159,29 @@ function runDimensionsTest(event) {
         var ok = firstVoid.y === 64 && secondVoid.y === 64 && firstFlat.y === 64 && secondFlat.y === 64
         ggCheck('teleport_landing_logic_repeatable', ok,
             'void=' + firstVoid.y + '/' + secondVoid.y + ' flat=' + firstFlat.y + '/' + secondFlat.y)
+    })
+
+    // End key: the landing spot must be FIXED (x=2000,z=0) regardless of the player's own x/z - and
+    // still repeatable/safe like the other two. Two very different input x/z must still land at the
+    // same fixed spot.
+    ggSafely('end_landing_fixed_and_repeatable', function () {
+        if (!endLevel) throw 'minecraft:the_end missing'
+        var first = computeLanding(endLevel, 'minecraft:the_end', 123.0, -456.0)
+        var second = computeLanding(endLevel, 'minecraft:the_end', -8000.0, 500.0)
+        var ok = first.x === 2000.5 && first.z === 0.5 && second.x === 2000.5 && second.z === 0.5 && first.y === second.y
+        ggCheck('end_landing_fixed_and_repeatable', ok,
+            'first=' + first.x + ',' + first.y + ',' + first.z + ' second=' + second.x + ',' + second.y + ',' + second.z)
+    })
+
+    // The far-out End landing spot is essentially always void there, so this doubles as the
+    // "platform creation in the End" check requested for this task: computeLanding must have left a
+    // real block directly under the chosen landing spot (either our stone-brick platform, or real
+    // end stone/island terrain it correctly declined to overwrite).
+    ggSafely('end_platform_created', function () {
+        if (!endLevel) throw 'minecraft:the_end missing'
+        var landing = computeLanding(endLevel, 'minecraft:the_end', 0, 0)
+        var below = endLevel.getBlock(Math.floor(landing.x), landing.y - 1, Math.floor(landing.z))
+        ggCheck('end_platform_created', !below.getBlockState().isAir(), 'block=' + below.getId() + ' at y=' + (landing.y - 1))
     })
 
     console.log('GGTEST|dimensions|DONE')

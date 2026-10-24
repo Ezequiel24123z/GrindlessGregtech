@@ -6,6 +6,8 @@
 //   Submerged Arc Furnace    two graphite electrodes, steel plates, LV circuits, LV hull and three heat-proof casings
 //   Nether vein samples      empty vein probe + the two raw ores of the vein (shapeless, one recipe per Nether vein). The
 //                            pair is unique among ALL veins (global.grindless.lv.checkTables() checks it).
+//   Extra Overworld samples  the same for the Overworld veins of other mods (veins_overworld_extra.json: kaolinite, wollastonite),
+//                            which the steam crafting script does not know.
 //
 // event.recipes.gtceu.shaped: GTM's shaped recipe; lowercase letters are GT tool symbols (w = wrench) and the tool is
 // damaged, not consumed. Keys of ingredients are uppercase on purpose.
@@ -51,7 +53,15 @@
       }).id('grindless:crafting/submerged_arc_furnace')
     }
 
-    // ---- Nether vein samples
+    // ---- vein samples of the veins the steam table does not list: the Overworld ones of other mods, then the Nether ones
+    var extraCount = 0
+    LV.extraVeins().forEach(function (vein) {
+      event.shapeless(vein.sample, ['grindless:empty_vein_probe', vein.samplePair[0], vein.samplePair[1]])
+        .id('grindless:crafting/vein_sample/' + vein.id)
+      extraCount++
+    })
+    console.info('[grindless/lv] extra Overworld vein sample recipes: ' + extraCount)
+
     var count = 0
     LV.netherVeins().forEach(function (vein) {
       event.shapeless(vein.sample, ['grindless:empty_vein_probe', vein.samplePair[0], vein.samplePair[1]])

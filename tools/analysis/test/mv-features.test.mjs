@@ -13,7 +13,7 @@ const dups = (ids) => ids.filter((id, i) => ids.indexOf(id) !== i);
 
 // ---------------------------------------------------------------- configuración real de los tiers
 
-for (const tier of ['steam', 'lv', 'mv']) {
+for (const tier of ['steam', 'lv', 'mv', 'hv']) {
   test(`config del tier ${tier}: ids únicos, cada objetivo tiene una forma válida y los "without" apuntan a sintéticas que existen`, () => {
     const { raw } = loadTierConfig({ tier }, TIERS);
     assert.deepEqual(dups(raw.targets.map((t) => t.id)), [], 'ids de objetivos repetidos');
@@ -175,7 +175,7 @@ test('objetivos por veta: requireItem salta las vetas sin objeto de la tabla (ot
   // la de la veta del Nether no tiene receta: FAIL; la del otro mod ni siquiera es un objetivo
   assert.equal(r.out.auto[1].verdict, 'FAIL');
   assert.deepEqual(r.model.stats.veinsWithoutItem, ['gtnn:apatite_vein_tf']);
-  assert.match(r.text, /vetas del registro sin objeto de la tabla de la perforadora \(otros mods; no se comprueban\): gtnn:apatite_vein_tf/);
+  assert.match(r.text, /vetas del registro sin objeto de la tabla de la perforadora \(de otros mods o que el pack aún no ofrece.*; no se comprueban\): gtnn:apatite_vein_tf/);
 });
 
 // ---------------------------------------------------------------- motivo del bloqueo de un yacimiento

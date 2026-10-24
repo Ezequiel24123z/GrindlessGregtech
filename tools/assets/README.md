@@ -11,6 +11,10 @@ Generadores de las texturas propias del pack. Todo es pixel art procedural de 16
 | `Build-LVPreview.ps1` | Hoja de revisión a x8 de la era LV: cada overlay sobre su carcasa o casco, todos los fotogramas, vista de cueva oscura y pared 3x3. Solo es una vista previa: no se publica. |
 | `Build-MVTextures.ps1` | Escribe las texturas de la era MV (perforadora, invernadero, planta de mineral, biorrefinería y broca de acero vanádico) en `pack/kubejs/assets/grindless/textures/`. |
 | `Build-MVPreview.ps1` | Hoja de revisión a x8 de la era MV: cada overlay sobre su carcasa y sobre las cuatro carcasas MV, todos los fotogramas, vista de cueva oscura, pared 3x3 y la broca junto a las de bronce y acero. Solo es una vista previa: no se publica. |
+| `Build-HVTextures.ps1` | Escribe las texturas de la era HV (refinería, reformador, perforadora, invernadero, llave del End, catalizadores y broca de titanio) en `pack/kubejs/assets/grindless/textures/`. |
+| `Build-HVPreview.ps1` | Hoja de revisión a x8 de la era HV: cada overlay sobre su carcasa y sobre cuatro carcasas, todos los fotogramas, vista de cueva oscura, pared 3x3, la llave del End junto a las del Vacío y el Llano y la progresión de brocas. Solo es una vista previa: no se publica. |
+| `Build-EVTextures.ps1` | Escribe las texturas de la era EV (planta de platino, perforadora, electrodo de platino y broca de acero de tungsteno) en `pack/kubejs/assets/grindless/textures/`. |
+| `Build-EVPreview.ps1` | Hoja de revisión a x8 de la era EV: cada overlay sobre su carcasa y sobre cuatro carcasas, todos los fotogramas, vista de cueva oscura, pared 3x3, el electrodo de platino junto al de grafito y la progresión de brocas. Solo es una vista previa: no se publica. |
 
 ## Regenerar
 
@@ -112,3 +116,64 @@ powershell -NoProfile -ExecutionPolicy Bypass -File tools\assets\Build-MVPreview
 - La rampa de acero (`$SteelSpec`, letras `A`-`J`) y la azul MV (`$BlueSpec`, letras `a`-`g`) son comunes; las paletas de cada pieza están al principio de su bloque (`New-Pal` falla si una letra se repite). Los mapas de texto (`$DrillBase`, `$GhBase`, `$PlantBase`, `$BioBase`) se editan a mano; lo que se mueve se dibuja por código fotograma a fotograma (`Draw-Roller` para los rodillos de la planta).
 - El horno y la llama de la columna usan `Get-Noise` (un hash de posición y fotograma, no un generador aleatorio) para que la salida no cambie.
 - La broca usa el mismo sombreador (`Draw-Helix`) que las de vapor, en una copia local para no tocar `Build-SteamTextures.ps1`; solo cambian la rampa (`$RampVanadiumSteel`) y los parámetros.
+
+## Era HV
+
+Mismo método y la misma rampa de acero neutra que LV y MV (`$SteelSpec`). Lo que marca el escalón son los acentos **naranjas** (franjas de la base, lámparas y calor, `$OrangeSpec`) y, en la refinería y el reformador, un acero inoxidable limpio algo más frío y claro (`$StainSpec`).
+
+```powershell
+powershell -NoProfile -ExecutionPolicy Bypass -File tools\assets\Build-HVTextures.ps1
+powershell -NoProfile -ExecutionPolicy Bypass -File tools\assets\Build-HVTextures.ps1 -Only refinery,keys
+powershell -NoProfile -ExecutionPolicy Bypass -File tools\assets\Build-HVTextures.ps1 -Credits
+powershell -NoProfile -ExecutionPolicy Bypass -File tools\assets\Build-HVPreview.ps1 -Out C:\ruta\hv-assets.png -StainlessCasing C:\ruta\machine_casing_clean_stainless_steel.png -TitaniumCasing C:\ruta\machine_casing_stable_titanium.png -SteelCasing C:\ruta\machine_casing_solid_steel.png -HeatproofCasing C:\ruta\machine_casing_heatproof.png
+```
+
+- `-Only` admite `refinery`, `reformer`, `drill`, `greenhouse`, `keys`, `catalysts` y `bit` (también con coma y `-File`). `-Verbose` avisa si un dibujo posterior tapa un píxel emisivo.
+- La vista previa acepta `-Section refinery,reformer,drill,greenhouse,items` y `-Scale`. Las cuatro carcasas son solo contexto (cualquier PNG de 16x16, por ejemplo las de GTM extraídas del jar y guardadas fuera del repo); sin ellas se usan fondos dibujados por código. Además de su carcasa, cada overlay se ve sobre las cuatro (inoxidable limpio, titanio estable, acero macizo y termorresistente).
+- `docs/eras/hv.md` solo fija la carcasa de la refinería y del reformador (`gtceu:clean_machine_casing`). Para la perforadora y el invernadero se tomó la de titanio estable, la de la familia, como la de aluminio en MV. Todas las caras llevan marco oscuro propio y el anillo exterior de 1 px vacío, así que se leen igual en las demás.
+- La comprobación final es la de MV (tamaño, alfa binario, sin negro puro, `.mcmeta` de 4 a 8 fotogramas, anillo exterior vacío, emisivo contenido en la capa de color, animación que cambia de verdad). Todos los bucles son de 8 fotogramas con periodos que dividen a 8, y la salida es idéntica byte a byte en cada ejecución.
+
+| Archivo (bajo `textures/`) | Se dibujó sobre | Notas |
+|---|---|---|
+| `block/multiblock/refinery/` (`overlay_front`, `_active` y `_active_emissive`, con `.mcmeta`) | `gtceu:block/casings/solid/machine_casing_clean_stainless_steel` | El buque insignia de la era: columna de acero inoxidable con tres bandejas, un par de llaves en cada una (tuberías teñidas y una lámpara por fracción: gas, nafta y ligero, de arriba abajo) sobre un reactor ancho con la ventana del horno en tres paneles; vapor sobre la tapa, franjas de peligro y lámpara de estado en la base. 8 fotogramas, `frametime` 3: el horno chisporrotea, el faldón de la columna brilla, las lámparas laten y caen gotas, sale vapor. En reposo: brasas y lámpara roja. El emisivo lleva el horno, el faldón, las lámparas, las gotas, las franjas y la lámpara de estado. |
+| `block/multiblock/reformer/` (los mismos tres) | `.../machine_casing_clean_stainless_steel` | Recipiente vertical: tubería de entrada arriba, un lecho de pellets de catalizador con rejilla de soporte y destellos de platino, serpentines de calefacción naranjas a los lados y tres boquillas de salida abajo con una lámpara cada una (benceno, tolueno y H₂). 8 fotogramas, `frametime` 4: el brillo de los serpentines sube por los lados, un pellet de alimentación corre por la entrada y tres destellos de platino en cruz se encienden por turnos. En reposo: lecho frío y serpentines apagados. El emisivo lleva los serpentines, los destellos, la entrada, las lámparas, las franjas y la lámpara de estado. |
+| `block/multiblock/hv_vein_drill/` (los mismos tres) | `.../machine_casing_stable_titanium` | Torre de celosía cuyas patas alternan inoxidable y titanio alrededor de un cabezal motriz oscuro con ventana naranja; la broca de titanio muerde piedra del End (crema con vetas violeta y platino). Cable de potencia a la derecha (pulso naranja) y manguera de lodo a la izquierda (bolas marrones). 8 fotogramas, `frametime` 2: broca y sarta girando, chispas, balizas de la corona y del armazón alternas, pulso por el cable. El emisivo lleva la ventana, las balizas, la punta, las chispas, el pulso, las franjas y la lámpara. |
+| `block/multiblock/hv_greenhouse/` (los mismos tres) | `.../machine_casing_stable_titanium` | Tres lámparas cálidas de espectro completo sobre un panel de cristal con árbol, trigo y calabazas; boquillas de riego en el raíl, tubería de CO₂ por la base y el borde derecho y banda naranja. 8 fotogramas, `frametime` 4: balanceo, gotas de riego, bocanadas de gas, bolitas de luz por la tubería, parpadeo de las lámparas y destellos de crecimiento. En reposo: lámparas apagadas, cristal frío y plantas oscuras. El emisivo lleva las lámparas y su luz, la banda, las bolitas, los destellos y los LED. |
+| `item/end_key.png` | | Llave del End: la silueta de las del Vacío y el Llano (arco, collar, caña y paletón en C) en piedra del End, con un ojo de ender en el arco; el paletón enseña el End (piedra sobre obsidiana sobre vacío). |
+| `item/hydrotreating_catalyst.png` | | Copa de acero con banda azul y un montón de pellets de cobalto (azul), molibdeno (lila) y sílice (blanco). |
+| `item/reforming_catalyst.png` | | La misma copa con banda dorada y pellets de sílice (marfil) con unos pocos de platino y un destello. |
+| `item/titanium_drill_bit.png` | | No estaba en el encargo: la perforadora HV pide `grindless:titanium_drill_bit` y sin textura saldría la de «falta textura». Mismo sombreador que las otras brocas, con la rampa del titanio de GTM (lila rosado, `DCA0F0`). |
+
+### Cómo se retoca (HV)
+
+- Las rampas (`$SteelSpec` letras `A`-`J`, `$OrangeSpec` `a`-`g`, `$StainSpec` `0`-`6` y `$LampSpec` `M`-`S`) son comunes; las letras propias de cada pieza están al principio de su bloque (`New-Pal` falla si una letra se repite). Los mapas de texto (`$WindowBase`, `$HvDrillBase`, `$HgBase`, `$RfmBed`) se editan a mano; lo que se mueve se dibuja por código fotograma a fotograma.
+- El horno de la refinería usa `Get-Noise` (un hash de posición y fotograma, no un generador aleatorio) para que la salida no cambie.
+- Los pellets de los catalizadores son bolas de 2x2 con luz arriba a la izquierda (`New-Catalyst`): el tono de cada una sale de un hash de su posición, y la copa y el contorno son los mismos en los dos.
+
+## Era EV
+
+Mismo método y la misma rampa de acero neutra que en las eras anteriores (`$SteelSpec`). Lo que marca el escalón son los acentos **morados** (franjas de la base, lámparas y pulsos de corriente, `$PurpleSpec`) y el acero de tungsteno, azul violáceo (`$TungstenSpec`), de la torre de la perforadora.
+
+```powershell
+powershell -NoProfile -ExecutionPolicy Bypass -File tools\assets\Build-EVTextures.ps1
+powershell -NoProfile -ExecutionPolicy Bypass -File tools\assets\Build-EVTextures.ps1 -Only plant,electrode
+powershell -NoProfile -ExecutionPolicy Bypass -File tools\assets\Build-EVTextures.ps1 -Credits
+powershell -NoProfile -ExecutionPolicy Bypass -File tools\assets\Build-EVPreview.ps1 -Out C:\ruta\ev-assets.png -PtfeCasing C:\ruta\machine_casing_inert_ptfe.png -TitaniumCasing C:\ruta\machine_casing_stable_titanium.png -TungstenCasing C:\ruta\machine_casing_robust_tungstensteel.png -StainlessCasing C:\ruta\machine_casing_clean_stainless_steel.png
+```
+
+- `-Only` admite `plant`, `drill`, `electrode` y `bit` (también con coma y `-File`). `-Verbose` avisa si un dibujo posterior tapa un píxel emisivo.
+- La vista previa acepta `-Section plant,drill,items` y `-Scale`. Las cuatro carcasas son solo contexto (cualquier PNG de 16x16, por ejemplo las de GTM extraídas del jar y guardadas fuera del repo); sin ellas se usan fondos dibujados por código. Además de su carcasa, cada overlay se ve sobre las cuatro (PTFE inerte, titanio estable, acero de tungsteno y inoxidable limpio).
+- `docs/eras/ev.md` fija la carcasa inerte de PTFE (`gtceu:inert_machine_casing`) para la planta de platino y la estable (`gtceu:stable_machine_casing`, de titanio) para la perforadora. La planta se ve también sobre titanio y acero de tungsteno en la franja de carcasas. Todas las caras llevan marco oscuro propio y el anillo exterior de 1 px vacío, así que se leen igual en cualquiera.
+- La comprobación final es la de HV (tamaño, alfa binario, sin negro puro, `.mcmeta` de 4 a 8 fotogramas, anillo exterior vacío, emisivo contenido en la capa de color, animación que cambia de verdad). Todos los bucles son de 8 fotogramas con periodos que dividen a 8, y la salida es idéntica byte a byte en cada ejecución.
+
+| Archivo (bajo `textures/`) | Se dibujó sobre | Notas |
+|---|---|---|
+| `block/multiblock/platinum_plant/` (`overlay_front`, `_active` y `_active_emissive`, con `.mcmeta`) | `gtceu:block/casings/solid/machine_casing_inert_ptfe` | El buque insignia de la era: una celda de electrólisis de vidrio en el centro con dos electrodos de platino dentro de agua regia (burbujas que suben y esponja de platino en el fondo), una cuba de ácido a cada lado (nítrico a la izquierda, clorhídrico a la derecha) que alimenta la celda por tuberías de titanio, una tubería de inoxidable bajo las tres con acoples de titanio, cables de corriente hasta los terminales de los electrodos, franjas moradas y lámpara de estado. 8 fotogramas, `frametime` 3: los pulsos morados entran por los cables, el ácido corre hacia la celda, suben burbujas desde las puntas, corre corriente por los electrodos, tres destellos de platino en cruz se encienden por turnos, la esponja centellea y dos bolitas de luz recorren la tubería. En reposo: ácidos apagados, electrodos mates y lámpara roja. El emisivo lleva los pulsos, la superficie del agua regia y de las cubas, las burbujas, las puntas y la corriente de los electrodos, los destellos, la esponja, las bolitas, las franjas y la lámpara. |
+| `block/multiblock/ev_vein_drill/` (los mismos tres) | `.../machine_casing_stable_titanium` | Torre de acero de tungsteno (un mástil recto que se abre en A, con travesaños) alrededor de un cabezal motriz oscuro con ventana morada; la broca de acero de tungsteno muerde piedra del End rica en mena (scheelita naranja, platino blanco, sulfuros de latón y tungstato violeta). Cable de potencia (pulso morado) y manguera de lodo (bolas marrones) por el marco superior; franjas moradas y lámpara en la base. 8 fotogramas, `frametime` 2: broca y sarta girando (con una luz morada que baja por la sarta), chispas, balizas alternas en las puntas de las patas, pulso por el cable y un destello de platino en cruz cada cuatro fotogramas. El emisivo lleva la ventana, las balizas, la luz de la sarta, la punta, las chispas, el destello, el pulso, las franjas y la lámpara. |
+| `item/platinum_electrode.png` | | La varilla diagonal del electrodo de grafito, en platino: cuerpo brillante, el núcleo de titanio a la vista en el extremo cortado, y collar y rosca de titanio; un destello de platino al lado. |
+| `item/tungsten_steel_drill_bit.png` | | Broca helicoidal de acero de tungsteno (azul violáceo, `6464A0`, el color del material en GTM): un paso más allá de la de titanio, más ancha y con la punta más larga. Mismo sombreador (`Draw-Helix`) que las otras, en una copia local. |
+
+### Cómo se retoca (EV)
+
+- Las rampas (`$SteelSpec` letras `A`-`J`, `$PurpleSpec` `a`-`g`, `$StainSpec` `0`-`6`, `$LampSpec` `M`-`S` y `$TungstenSpec` `T`-`Y`) son comunes; las letras propias de cada pieza están al principio de su bloque (`New-Pal` falla si una letra se repite). Los mapas de texto (`$WindowBase`, `$EvDrillBase`) y las cadenas de tonos de cada líquido (`$PlatNitric`, `$PlatAqua`, `$PlatHcl`) y de la tubería (`$PlatPipe`) se editan a mano; lo que se mueve se dibuja por código fotograma a fotograma.
+- El electrodo reutiliza la geometría del de grafito de LV (varilla diagonal con cuatro píxeles por fila); cambian las rampas (platino y titanio) y el contorno, que ahora toma el tono de cada material.

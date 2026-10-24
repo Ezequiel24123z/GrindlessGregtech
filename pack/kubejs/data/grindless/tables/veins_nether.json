@@ -1,10 +1,10 @@
 {
-  "_source": "GregTechCEu/GregTech-Modern tag v7.5.3-1.20.1: src/main/java/com/gregtechceu/gtceu/common/data/GTOres.java (Nether Vein section). Colors: .color() of each material in common/data/materials/*.java.",
+  "_source": "GregTechCEu/GregTech-Modern tag v7.5.3-1.20.1: src/main/java/com/gregtechceu/gtceu/common/data/GTOres.java (Nether Vein section). Colors: .color() of each material in common/data/materials/*.java. germanite: the GT Community Additions mod (gtca 2.2.0) registers it as gtceu:germanite_vein; read from the live vein registry (GTRegistries.ORE_VEINS) like every other value of it.",
   "_how_it_is_used": [
     "Same format as veins.json (read that file's notes). Loaded by startup_scripts/grindless/lv/multis_items.js as global.grindless.tables.veins_nether: it feeds the Nether vein sample items. server_scripts/grindless/lv/vein_drilling.js derives the recipes from it.",
     "id = GTM vein id without the '_vein' suffix ('banded_iron_vein' -> 'banded_iron'; GTM calls the certus vein 'certus_quartz' with no suffix). The sample item is grindless:vein_sample_<id>. Ids do not clash with the Overworld table (that one uses *_ow for the veins GTM duplicates, e.g. redstone_ow, manganese_ow).",
     "gtm = GTM vein id (gtceu:<gtm> in GTRegistries.ORE_VEINS). layer = netherrack. minY/maxY = heightRangeUniform (Nether, 0..128). spawnWeight = GTM vein weight.",
-    "materials[].id = GTM material name (GTM's Limonite is 'yellow_limonite'). weight = layer weight (layered), block weight (dike, veined). veined veins: materials with rare=true show up with probability rareChance, the others share the rest by weight (GTM rareBlockChance).",
+    "materials[].id = GTM material name (GTM's Limonite is 'yellow_limonite'); a material of an addon mod keeps its namespace ('gtca:germanite': raw ore item gtca:raw_germanite, tag forge:raw_materials/germanite, lang key material.gtca.germanite). weight = layer weight (layered), block weight (dike, veined). veined veins: materials with rare=true show up with probability rareChance, the others share the rest by weight (GTM rareBlockChance).",
     "colorMaterial = surface indicator rock of the vein in GTM; color = that material's GTM .color() (tint of the sample core).",
     "These recipes always need drilling fluid (gtceu:drilling_fluid), which the Steam Vein Drill cannot take: only the LV Vein Drill (and later electric drills) can drill the Nether table. The sample is crafted with two raw ores of the vein, so one trip to the Nether is exploration, not grind. When the two most common ores are already the sample recipe of another vein (banded_iron = Overworld iron, redstone = Overworld redstone_ow), server_scripts/grindless/lv/vein_drilling.js moves to the next most common pair."
   ],
@@ -39,6 +39,16 @@
         { "id": "quartzite", "weight": 3 },
         { "id": "certus_quartz", "weight": 2 },
         { "id": "barite", "weight": 1 }
+      ]
+    },
+    {
+      "id": "germanite", "gtm": "germanite_vein", "generator": "dike", "layer": "netherrack",
+      "minY": 10, "maxY": 40, "spawnWeight": 12,
+      "colorMaterial": "gtca:germanite", "color": "#464646",
+      "materials": [
+        { "id": "gtca:germanite", "weight": 3 },
+        { "id": "sphalerite", "weight": 1 },
+        { "id": "yellow_limonite", "weight": 1 }
       ]
     },
     {

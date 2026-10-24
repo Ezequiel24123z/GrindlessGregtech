@@ -194,7 +194,7 @@
 
     var drillRecipes = drilling ? recipesOf(drilling) : []
     var greenRecipes = greenhouse ? recipesOf(greenhouse) : []
-    var overworld = G.veinTable().length
+    var overworld = LV.overworldVeins().length
     var nether = LV.netherVeins().length
     var wantDrilling = overworld + (overworld + nether)
     var wantGreenhouse = G.greenhouse.entries.length + LV.greenhouseExtras.length
@@ -699,6 +699,26 @@
         // the same Nether sample without fluid must not run
         name: 'nether_no_fluid', ticks: 60,
         items: [{ id: 'grindless:vein_sample_sulfur', n: 1 }, { id: BIT_VANADIUM, n: 16 }], circuit: 0, fluids: [],
+        verify: function (r) {
+          var n = Object.keys(r.items).length
+          return { ok: n === 0, detail: 'no recipe expected: output items=[' + itemSummary(r.items) + '] recipes seen=[' + seenIds(r) + ']' }
+        }
+      },
+      {
+        // the titanium bit is the HV drill's (grindless:vein_drilling/hv/...): vetoed here, with fluid
+        name: 'hv_bit_gated', ticks: 60,
+        items: [{ id: 'grindless:vein_sample_iron', n: 1 }, { id: 'grindless:titanium_drill_bit', n: 16 }], circuit: 0,
+        fluids: [{ id: DRILLING_FLUID, mb: 8000 }],
+        verify: function (r) {
+          var n = Object.keys(r.items).length
+          return { ok: n === 0, detail: 'no recipe expected: output items=[' + itemSummary(r.items) + '] recipes seen=[' + seenIds(r) + ']' }
+        }
+      },
+      {
+        // an End sample with the MV bit and fluid: the End recipes are the HV drill's, so nothing runs here
+        name: 'end_gated', ticks: 60,
+        items: [{ id: 'grindless:vein_sample_bauxite_end', n: 1 }, { id: BIT_VANADIUM, n: 16 }], circuit: 0,
+        fluids: [{ id: DRILLING_FLUID, mb: 8000 }],
         verify: function (r) {
           var n = Object.keys(r.items).length
           return { ok: n === 0, detail: 'no recipe expected: output items=[' + itemSummary(r.items) + '] recipes seen=[' + seenIds(r) + ']' }
