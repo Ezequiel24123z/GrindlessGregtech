@@ -25,7 +25,7 @@
 //     enderman_lv         LV: 2 obsidian + 50 mB -> 1 pearl in 20 s
 //     cow_mv              MV: circuit 2 (leather only, no beef), overclocked (duration < 200), 3 cycles
 //     creeper_mv          MV: runs the MV creature
-//     blaze_hv            HV: runs the HV creature
+//     blaze_mv            MV: runs the blaze (the End is MV since v0.5.0)
 //     creeper_lv_gate     LV simulator refuses the MV creature: nothing is made, nothing is consumed
 //     print_skeleton      LV assembler: blank model + 8 TCP -> the skeleton model
 //     brewery_lv|mv|hv    real breweries (carrots + water): 20 mB per 160 / 80 / 40 ticks = 2.5 / 5 / 10 mB/s, the biomass
@@ -699,7 +699,7 @@
       simSpec('enderman_lv', 'gtceu:lv_creature_simulator', 'enderman', 1, 1, 560, 68, 6),
       simSpec('cow_mv', 'gtceu:mv_creature_simulator', 'cow', 2, 3, 420, 70, 6),
       simSpec('creeper_mv', 'gtceu:mv_creature_simulator', 'creeper', 1, 1, 340, 72, 6),
-      simSpec('blaze_hv', 'gtceu:hv_creature_simulator', 'blaze', 1, 1, 340, 74, 6),
+      simSpec('blaze_mv', 'gtceu:mv_creature_simulator', 'blaze', 1, 1, 340, 74, 6),
       // a chanced drop: 4 cycles, the spider eye (33 %) may show up 0..4 times, the string always 6 per cycle
       simSpec('spider_mv', 'gtceu:mv_creature_simulator', 'spider', 1, 4, 520, 80, 6)
     ]

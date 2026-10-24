@@ -207,8 +207,9 @@
     var greenRecipes = greenhouse ? recipesOf(greenhouse) : []
     var overworld = LV.overworldVeins().length
     var nether = LV.netherVeins().length
-    // stainless steel bit: base on the Overworld veins + fluid on the Overworld and Nether ones; End: 2 bits with fluid per vein
-    var wantDrilling = overworld + (overworld + nether) + endVeins.length * 2
+    // stainless steel bit: base on the Overworld veins + fluid on the Overworld and Nether ones + fluid on the End ones (the End is MV
+    // since v0.5.0: its vanadium steel bit recipes live under mv/, HV.drilling.endMv)
+    var wantDrilling = overworld + (overworld + nether) + endVeins.length
     var haveDrilling = countWithPath(drillRecipes, 'vein_drilling/hv/')
     var haveGreenhouse = countWithPath(greenRecipes, 'greenhouse/hv/')
     check(SCOPE, 'recipes', haveDrilling === wantDrilling && haveGreenhouse === 0 && HV.drilling.count === wantDrilling,
@@ -217,12 +218,17 @@
 
     var tableProblems = HV.checkTables()
     var endIds = endVeins.map(function (v) { return v.id })
-    // v0.4.1: four End veins (the scheelite one waits for Mars), and the bauxite sample is made without its ilmenite (titanium is EV)
+    // v0.4.1: four End veins (the scheelite one waits for Mars), and the bauxite sample is made without its ilmenite; v0.5.0: no End
+    // vein has ilmenite at all (titanium only comes from the Moon)
     var bauxite = endVeins.filter(function (v) { return v.id === 'bauxite_end' })[0]
     var bauxitePair = bauxite ? bauxite.samplePair.join('+') : ''
+    var endTitanium = endVeins.filter(function (v) {
+      return v.ores.some(function (o) { return /ilmenite|rutile|titanium/.test(String(o.item)) })
+    }).map(function (v) { return v.id })
     check(SCOPE, 'end_table', tableProblems.length === 0 && endVeins.length >= 4 && endIds.indexOf('zirconium') >= 0 &&
-      endIds.indexOf('scheelite') < 0 && !!bauxite && bauxitePair.indexOf('ilmenite') < 0,
+      endIds.indexOf('scheelite') < 0 && !!bauxite && bauxitePair.indexOf('ilmenite') < 0 && endTitanium.length === 0,
       endVeins.map(function (v) { return v.id + ' y' + v.minY + '..' + v.maxY + ' ' + v.samplePair.join('+').replace(/#forge:raw_materials\//g, '') }).join('; ') +
+      (endTitanium.length > 0 ? ' titanium ores in ' + endTitanium.join(',') : '') +
       (tableProblems.length > 0 ? ' problems=' + tableProblems.join(' | ') : ''))
 
     var ids = ['grindless:crafting/hv_vein_drill', 'grindless:crafting/hv_greenhouse', 'grindless:crafting/stainless_steel_drill_bit',
@@ -264,7 +270,7 @@
       }
       var base = read('grindless:vein_drilling/hv/iron_stainless_steel')
       var wet = read('grindless:vein_drilling/hv/iron_stainless_steel_fluid')
-      var endVanadium = read('grindless:vein_drilling/hv/bauxite_end_vanadium_steel_fluid')
+      var endVanadium = read('grindless:vein_drilling/mv/bauxite_end_vanadium_steel_fluid')
       var endWet = read('grindless:vein_drilling/hv/sheldonite_stainless_steel_fluid')
       var vanadium = read('grindless:vein_drilling/mv/iron_vanadium_steel')
       // bit first in the fluid recipes, sample first in the base ones (see the lookup note of family_vein_drilling.js)
@@ -952,7 +958,7 @@
       {
         name: 'end_magnetite_vanadium', ticks: 260,
         items: drillItems('grindless:vein_sample_magnetite_end', BIT_VANADIUM), circuit: 0, fluids: fluid,
-        verify: veinVerify('magnetite_end', 'grindless:vein_drilling/hv/magnetite_end_vanadium_steel_fluid', 5, 50, 32)
+        verify: veinVerify('magnetite_end', 'grindless:vein_drilling/mv/magnetite_end_vanadium_steel_fluid', 5, 50, 32)
       },
       {
         name: 'end_sheldonite_stainless', ticks: 260,
@@ -1172,9 +1178,9 @@
         if (kind === 'bronze' && v.steelOnly) return
         var bit = kind === 'bronze' ? BIT_BRONZE : (kind === 'steel' ? BIT_STEEL : (kind === 'vanadium_steel' ? BIT_VANADIUM : BIT_STAINLESS))
         var items = [{ id: v.sample, n: 1 }, { id: bit, n: 4 }]
-        // recipe folder: steam recipes have none (base) or lv/ (fluid), the vanadium steel bit's mv/, the stainless steel bit's and
-        // everything on the End veins hv/
-        var tier = (v.end || kind === 'stainless_steel') ? 'hv' : (kind === 'vanadium_steel' ? 'mv' : 'lv')
+        // recipe folder: steam recipes have none (base) or lv/ (fluid), the vanadium steel bit's mv/ (End veins too: the End is MV),
+        // the stainless steel bit's hv/
+        var tier = kind === 'stainless_steel' ? 'hv' : (kind === 'vanadium_steel' ? 'mv' : 'lv')
         // Nether and End veins have no base recipe: they always need drilling fluid
         if (!v.nether && !v.end) {
           cases.push({ label: v.id + '+' + kind, items: items, circuit: 0, fluids: [],

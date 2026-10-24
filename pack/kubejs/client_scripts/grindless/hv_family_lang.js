@@ -13,7 +13,7 @@ ClientEvents.lang('en_us', event => {
     add('block.gtceu.hv_vein_drill', 'HV Vein Drill')
     add('block.gtceu.hv_greenhouse', 'HV Greenhouse')
 
-    add('grindless.machine.hv_vein_drill.tooltip.0', 'Drills the vein marked by the vein sample, over and over. It runs every Steam, LV and MV Vein Drill recipe, up to 32 at once, and the End veins no smaller drill can take (with drilling fluid).')
+    add('grindless.machine.hv_vein_drill.tooltip.0', 'Drills the vein marked by the vein sample, over and over. It runs every Steam, LV and MV Vein Drill recipe (the End veins too, with drilling fluid), up to 32 at once, and the stainless steel bit.')
     add('grindless.machine.hv_vein_drill.tooltip.1', 'Runs as many bores at once as its energy hatches allow (voltage / 8 EU/t, up to 32): one HV hatch fills all 32, a second one is a voltage tier up and halves the time.')
     add('grindless.machine.hv_vein_drill.tooltip.2', 'The stainless steel bit only works here and in better drills: it wears out in about 0.5% of the runs (0.25% with drilling fluid). End veins drill with the vanadium steel or the stainless steel bit. Drilling fluid in the fluid hatch: +50% ore.')
     add('grindless.machine.hv_vein_drill.tooltip.3', 'Needs 1 or 2 energy hatches, 1 input bus, 2 output buses and 1 input hatch.')
@@ -28,8 +28,8 @@ ClientEvents.lang('en_us', event => {
     add('item.grindless.titanium_drill_bit', 'Titanium Drill Bit (old)')
     add('tooltip.grindless.titanium_drill_bit', 'No drill takes it any more: HV bits are stainless steel now. Craft it into a stainless steel drill bit.')
 
-    add('tooltip.grindless.vein_sample.drill_hv', 'Put it in the input bus of the HV Vein Drill, with a vanadium steel or stainless steel drill bit in the bus and drilling fluid in its fluid hatch. It is never used up.')
-    add('tooltip.grindless.vein_sample.end', 'End vein: it only drills with drilling fluid, and only in the HV Vein Drill and better. Craft it with an empty vein probe and two raw ores of the vein: one trip to the End is enough.')
+    add('tooltip.grindless.vein_sample.drill_hv', 'Put it in the input bus of the MV Vein Drill (vanadium steel bit) or the HV one (vanadium steel or stainless steel bit), with drilling fluid in its fluid hatch. It is never used up.')
+    add('tooltip.grindless.vein_sample.end', 'End vein: it only drills with drilling fluid, in the MV Vein Drill and better. Craft it with an empty vein probe and two raw ores of the vein: one trip to the End is enough.')
 
     add('item.grindless.vein_sample_bauxite_end', 'End Bauxite Vein Sample')
     add('item.grindless.vein_sample_magnetite_end', 'End Magnetite Vein Sample')
@@ -45,7 +45,7 @@ ClientEvents.lang('es_es', event => {
     add('block.gtceu.hv_vein_drill', 'Perforadora de vetas HV')
     add('block.gtceu.hv_greenhouse', 'Invernadero HV')
 
-    add('grindless.machine.hv_vein_drill.tooltip.0', 'Perfora la veta que marca la muestra, una y otra vez. Hace todas las recetas de las perforadoras de vapor, LV y MV, hasta 32 a la vez, y las vetas del End que ninguna perforadora menor admite (con lodo de perforación).')
+    add('grindless.machine.hv_vein_drill.tooltip.0', 'Perfora la veta que marca la muestra, una y otra vez. Hace todas las recetas de las perforadoras de vapor, LV y MV (también las vetas del End, con lodo de perforación), hasta 32 a la vez, y la broca de acero inoxidable.')
     add('grindless.machine.hv_vein_drill.tooltip.1', 'Hace tantos ciclos a la vez como permitan sus escotillas de energía (voltaje / 8 EU/t, hasta 32): una escotilla HV llena los 32 y una segunda sube un escalón de voltaje y reduce el tiempo a la mitad.')
     add('grindless.machine.hv_vein_drill.tooltip.2', 'La broca de acero inoxidable solo funciona aquí y en perforadoras mejores: se gasta en cerca del 0,5 % de los ciclos (0,25 % con lodo de perforación). Las vetas del End se perforan con la broca de acero vanádico o la de acero inoxidable. Con lodo en la escotilla de fluidos: +50 % de mineral.')
     add('grindless.machine.hv_vein_drill.tooltip.3', 'Necesita 1 o 2 escotillas de energía, 1 bus de entrada, 2 buses de salida y 1 escotilla de entrada.')
@@ -60,8 +60,8 @@ ClientEvents.lang('es_es', event => {
     add('item.grindless.titanium_drill_bit', 'Broca de titanio (antigua)')
     add('tooltip.grindless.titanium_drill_bit', 'Ya no la admite ninguna perforadora: las brocas HV son de acero inoxidable. Fabrica con ella una broca de acero inoxidable.')
 
-    add('tooltip.grindless.vein_sample.drill_hv', 'Ponla en el bus de entrada de la perforadora de vetas HV, con una broca de acero vanádico o de acero inoxidable en el bus y lodo de perforación en su escotilla de fluidos. No se gasta.')
-    add('tooltip.grindless.vein_sample.end', 'Veta del End: solo se perfora con lodo de perforación, y solo con la perforadora de vetas HV y las mejores. Se hace con una sonda de vetas vacía y dos menas en bruto de la veta: basta un viaje al End.')
+    add('tooltip.grindless.vein_sample.drill_hv', 'Ponla en el bus de entrada de la perforadora de vetas MV (broca de acero vanádico) o de la HV (de acero vanádico o de acero inoxidable), con lodo de perforación en su escotilla de fluidos. No se gasta.')
+    add('tooltip.grindless.vein_sample.end', 'Veta del End: solo se perfora con lodo de perforación, con la perforadora de vetas MV y las mejores. Se hace con una sonda de vetas vacía y dos menas en bruto de la veta: basta un viaje al End.')
 
     add('item.grindless.vein_sample_bauxite_end', 'Muestra de veta de bauxita del End')
     add('item.grindless.vein_sample_magnetite_end', 'Muestra de veta de magnetita del End')
