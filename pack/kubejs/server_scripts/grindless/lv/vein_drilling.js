@@ -1,0 +1,184 @@
+// -----------------------------------------------------------------------------------------------
+// gtceu:vein_drilling recipes of the LV Vein Drill (gtceu:lv_vein_drill), generated from the vein tables:
+//   Overworld  kubejs/data/grindless/tables/veins.json         (global.grindless.veinTable(), from the steam data script)
+//   Nether     kubejs/data/grindless/tables/veins_nether.json  (global.grindless.tables.veins_nether, loaded by
+//                                                               startup_scripts/grindless/lv/multis_items.js)
+//
+// The LV drill runs the steam recipes unchanged (see startup_scripts/grindless/lv/multis.js: more runs at once, GTM's
+// overclock on top) and adds these, all of them with DRILLING FLUID (gtceu:drilling_fluid, 50 mB per run) as a fluid input:
+//   Overworld veins, drilling-fluid variant of every steam recipe:  +50 % ore and HALF the bit wear
+//       bronze bit: 3.75 ores per run (steam 2.5), wear 5 % (steam 10 %)
+//       steel bit:  5.625 ores per run (steam 3.75), wear 2 % (steam 4 %); deep veins (maxY < 0) still only take steel
+//   Nether veins (12, GTM 7.5.3): same numbers as the line above. The steam drill has no fluid hatch, so it can never run them.
+//       Inert byproduct: netherrack (macerates to netherrack dust, which GTM centrifuges).
+// The drilling fluid is made from the drill's own stone byproduct: 1 stone dust + 20 mB lubricant + 4 980 mB water -> 5 000 mB
+// (GTM mixer recipe), which is 100 runs of fluid for every cobblestone the drill gives.
+// 200 ticks and 8 EU/t per run, like the steam recipes (the machine runs up to 4-8 at once).
+//
+// The steam numbers below (wear, ores per run) mirror server_scripts/grindless/steam/vein_drilling.js; keep them in step.
+//
+// Lookup note (GTM's RecipeDB cannot keep a recipe whose ingredient list is a prefix of another's): the steam recipes list
+// the sample first and the bit second, so these list the BIT first, then the sample, then the fluid.
+//
+// Besides the recipes this file publishes global.grindless.lv.netherVeins() (normalized like global.grindless.veinTable())
+// and global.grindless.lv.checkTables() for crafting_multis.js and the smoke test.
+(function () {
+  const G = global.grindless
+  const LV = G.lv || (G.lv = {})
+
+  const FLUID = 'gtceu:drilling_fluid'
+  const FLUID_MB = 50
+  const DURATION = 200
+  const EUT = 8
+  const NETHER_STONE = 'minecraft:netherrack'
+
+  // wear: chance out of 10000 that the bit is used up in one run; perRun: raw ores per run
+  const BITS = {
+    bronze: { item: 'grindless:bronze_drill_bit', wear: 500, perRun: 3.75 },
+    steel: { item: 'grindless:steel_drill_bit', wear: 200, perRun: 5.625 }
+  }
+
+  LV.drilling = { fluid: FLUID, fluidMb: FLUID_MB, duration: DURATION, eut: EUT, bits: BITS }
+
+  // ---------------------------------------------------------------- Nether table (same maths as the steam data script)
+
+  function sharesOf(vein) {
+    var rare = vein.materials.filter(function (m) { return m.rare })
+    var common = vein.materials.filter(function (m) { return !m.rare })
+    var rareChance = rare.length > 0 ? (vein.rareChance || 0) : 0
+    var sum = function (list) { return list.reduce(function (s, m) { return s + m.weight }, 0) }
+    var sumCommon = sum(common)
+    var sumRare = sum(rare)
+    var byMaterial = {}
+    var order = []
+    vein.materials.forEach(function (m) {
+      var share = m.rare ? rareChance * m.weight / sumRare : (1 - rareChance) * m.weight / sumCommon
+      if (byMaterial[m.id] === undefined) {
+        byMaterial[m.id] = 0
+        order.push(m.id)
+      }
+      byMaterial[m.id] += share
+    })
+    return order.map(function (id, index) { return { material: id, share: byMaterial[id], index: index } })
+  }
+
+  function pairKey(a, b) {
+    return [a, b].sort().join(' + ')
+  }
+
+  // The two most common ores, unless that pair already crafts the sample of another vein: then the next best pair among the
+  // four most common ores (ordered by combined share, then by position). Deterministic.
+  function samplePairOf(ores, taken) {
+    var top = ores.slice(0, 4)
+    if (top.length === 1) return [top[0].tag, top[0].tag]
+    var candidates = []
+    for (var i = 0; i < top.length; i++) {
+      for (var j = i + 1; j < top.length; j++) {
+        candidates.push({ a: top[i].tag, b: top[j].tag, share: top[i].share + top[j].share, order: i * 10 + j })
+      }
+    }
+    candidates.sort(function (x, y) { return (y.share - x.share) || (x.order - y.order) })
+    for (var k = 0; k < candidates.length; k++) {
+      if (!taken[pairKey(candidates[k].a, candidates[k].b)]) return [candidates[k].a, candidates[k].b]
+    }
+    return [candidates[0].a, candidates[0].b]
+  }
+
+  var nether = null
+  LV.netherVeins = function () {
+    if (nether === null) {
+      var taken = {}
+      G.veinTable().forEach(function (v) { taken[pairKey(v.samplePair[0], v.samplePair[1])] = v.id })
+      nether = G.tables.veins_nether.veins.map(function (vein) {
+        var ores = sharesOf(vein)
+          .sort(function (a, b) { return (b.share - a.share) || (a.index - b.index) })
+          .map(function (o) {
+            return { material: o.material, item: G.rawItem(o.material), tag: G.rawTag(o.material), share: o.share }
+          })
+        var pair = samplePairOf(ores, taken)
+        taken[pairKey(pair[0], pair[1])] = vein.id
+        return {
+          id: vein.id,
+          gtm: vein.gtm,
+          layer: vein.layer,
+          minY: vein.minY,
+          maxY: vein.maxY,
+          spawnWeight: vein.spawnWeight,
+          color: vein.color,
+          nether: true,
+          steelOnly: false,
+          stone: NETHER_STONE,
+          sample: 'grindless:vein_sample_' + vein.id,
+          ores: ores,
+          samplePair: pair
+        }
+      })
+    }
+    return nether
+  }
+
+  // every vein the LV drill knows: Overworld first, then Nether
+  LV.allVeins = function () {
+    return G.veinTable().concat(LV.netherVeins())
+  }
+
+  // problems of the Nether table (empty list = fine); also used by the smoke test
+  LV.checkTables = function () {
+    var problems = []
+    var ids = {}
+    var pairs = {}
+    G.veinTable().forEach(function (v) {
+      ids[v.id] = true
+      pairs[pairKey(v.samplePair[0], v.samplePair[1])] = v.id
+    })
+    LV.netherVeins().forEach(function (v) {
+      if (ids[v.id]) problems.push('Nether vein id ' + v.id + ' is already an Overworld vein')
+      ids[v.id] = true
+      var total = v.ores.reduce(function (s, o) { return s + o.share }, 0)
+      if (Math.abs(total - 1) > 1e-9) problems.push(v.id + ': shares add up to ' + total)
+      var key = pairKey(v.samplePair[0], v.samplePair[1])
+      if (pairs[key]) problems.push('sample recipe of ' + v.id + ' is the same as the one of ' + pairs[key] + ' (' + key + ')')
+      pairs[key] = v.id
+      v.ores.forEach(function (o) {
+        if (!Item.exists(o.item)) problems.push(v.id + ': raw ore item ' + o.item + ' does not exist')
+      })
+      if (!Item.exists(v.sample)) problems.push(v.id + ': sample item ' + v.sample + ' is not registered (startup table out of sync?)')
+    })
+    return problems
+  }
+
+  // ---------------------------------------------------------------- recipes
+
+  // expected amount per run -> whole items + one chanced item for the fraction
+  function addOre(recipe, item, expected) {
+    var whole = Math.floor(expected + 1e-9)
+    var chance = Math.round((expected - whole) * 10000)
+    if (whole > 0) recipe.itemOutputs(whole + 'x ' + item)
+    if (chance >= 1) recipe.chancedOutput('1x ' + item, Math.min(chance, 9999), 0)
+  }
+
+  ServerEvents.recipes(function (event) {
+    LV.checkTables().forEach(function (problem) {
+      console.error('[grindless/lv] vein table: ' + problem)
+    })
+
+    var count = 0
+    LV.allVeins().forEach(function (vein) {
+      Object.keys(BITS).forEach(function (kind) {
+        if (kind === 'bronze' && vein.steelOnly) return
+        var bit = BITS[kind]
+        var recipe = event.recipes.gtceu.vein_drilling('grindless:lv/' + vein.id + '_' + kind + '_fluid')
+          .chancedInput(bit.item, bit.wear, 0)
+          .notConsumable(vein.sample)
+          .inputFluids(Fluid.of(FLUID, FLUID_MB))
+          .itemOutputs('1x ' + vein.stone)
+        vein.ores.forEach(function (ore) {
+          if (Item.exists(ore.item)) addOre(recipe, ore.item, ore.share * bit.perRun)
+        })
+        recipe.EUt(EUT).duration(DURATION)
+        count++
+      })
+    })
+    console.info('[grindless/lv] vein_drilling recipes with drilling fluid: ' + count)
+  })
+})()

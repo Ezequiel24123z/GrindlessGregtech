@@ -85,14 +85,21 @@ test('la configuración hija hereda del padre: listas sumadas, objetivos solo co
   const steam = loadTierConfig({ tier: 'steam' }, tiersDir).raw;
   const lv = loadTierConfig({ tier: 'lv' }, tiersDir).raw;
   assert.ok(steam.targets.length > 10);
-  assert.equal(lv.machines.length, steam.machines.length);
-  assert.equal(lv.world.length, steam.world.length);
-  assert.equal(lv.synthetic.length, steam.synthetic.length + 1);
+  assert.ok(lv.machines.length > steam.machines.length);
+  assert.ok(lv.world.length > steam.world.length);
+  assert.ok(lv.synthetic.length > steam.synthetic.length);
   assert.ok(lv.machinesFromRegistry.length >= 1);
   assert.ok(lv.targets.length > steam.targets.length, 'inheritTargets añade los del vapor');
+  assert.ok(lv.autoTargets.length > steam.autoTargets.length);
   assert.ok(lv.targets.some((t) => t.id === 'turbina-lv'));
+  assert.ok(lv.targets.some((t) => t.id === 'horno-arco'));
   assert.equal(lv.tier, 'lv');
   assert.equal(lv.typeAliases['gtceu:shaped'], 'minecraft:crafting_shaped');
+  // los mapas se combinan clave a clave
+  assert.deepEqual(lv.partAbilities.steam, steam.partAbilities.steam);
+  assert.ok(lv.partAbilities.energy_input);
+  assert.ok(lv.conditions.cleanroom && lv.conditions.ae2_circumstance_explosion);
+  assert.ok(lv.autoTargetsFromVeins.length >= 1);
 });
 
 test('los ids de los objetivos de cada tier son únicos', () => {
@@ -103,4 +110,17 @@ test('los ids de los objetivos de cada tier son únicos', () => {
       assert.equal(new Set(ids).size, ids.length, `${tier}: ids repetidos ${ids.filter((x, i) => ids.indexOf(x) !== i)}`);
     }
   }
+});
+
+test('los objetivos del LV nombran objetos o claves con el formato esperado', () => {
+  const lv = loadTierConfig({ tier: 'lv' }, tiersDir).raw;
+  const check = (list, expectValue) => {
+    for (const t of list) {
+      const keys = [t.item, t.fluid, t.output, t.input].flat().filter(Boolean);
+      for (const k of keys) assert.match(String(k), /^(fluid:)?[a-z0-9_.-]+:[a-z0-9_./-]+$/, `${t.id}: ${k}`);
+      if (t.expect !== undefined) assert.equal(t.expect, expectValue, `${t.id}: expect solo admite "${expectValue}" en esta lista`);
+    }
+  };
+  check(lv.targets, 'unreachable');
+  check(lv.autoTargets, 'not-automatic');
 });

@@ -26,9 +26,25 @@ function pickSlotKid(model, lf, r, s) {
  * Las ranuras de capital que el lfp dio por cumplidas de antemano se muestran como hojas ("se construye una vez") y las
  * tolerantes (combustible, catalizadores) como "cebado": se mantienen en el propio ciclo.
  */
-export function derivationTree(model, lf, key, lim = { depth: 5, kids: 5 }) {
+export function derivationTree(model, lf, key, lim = { depth: 5, kids: 5 }, fromRule = -1) {
   const g = model.g;
   const seen = new Set();
+  const expand = (node, r, depth) => {
+    node.kids = [];
+    const rule = g.rules[r];
+    for (let s = 0; s < rule.slots.length; s++) {
+      const slot = rule.slots[s];
+      const { kid, pre } = pickSlotKid(model, lf, r, s);
+      if (kid < 0 || slot.role === 'machine-built') continue;
+      if (pre && slot.cap) {
+        node.kids.push({ slot, child: { key: kid, depth: depth + 1, capital: true } });
+        continue;
+      }
+      const child = walk(kid, depth + 1);
+      if (pre && slot.tol) child.primed = true;
+      node.kids.push({ slot, child });
+    }
+  };
   const walk = (k, depth) => {
     const node = { key: k, depth };
     const r = lf.via[k];
@@ -47,22 +63,15 @@ export function derivationTree(model, lf, key, lim = { depth: 5, kids: 5 }) {
       return node;
     }
     seen.add(k);
-    node.kids = [];
-    const rule = g.rules[r];
-    for (let s = 0; s < rule.slots.length; s++) {
-      const slot = rule.slots[s];
-      const { kid, pre } = pickSlotKid(model, lf, r, s);
-      if (kid < 0 || slot.role === 'machine-built') continue;
-      if (pre && slot.cap) {
-        node.kids.push({ slot, child: { key: kid, depth: depth + 1, capital: true } });
-        continue;
-      }
-      const child = walk(kid, depth + 1);
-      if (pre && slot.tol) child.primed = true;
-      node.kids.push({ slot, child });
-    }
+    expand(node, r, depth);
     return node;
   };
+  if (fromRule >= 0) {
+    // raíz = una receta concreta (objetivos de tipo receta, que no tienen clave propia)
+    const root = { key: g.rules[fromRule].outs[0] ?? -1, depth: 0, rule: fromRule, ruleHead: true };
+    expand(root, fromRule, 0);
+    return root;
+  }
   return walk(key, 0);
 }
 
@@ -94,11 +103,13 @@ export function makeRootCost(model, enabled = null) {
   return (k) => {
     const hasProducer = g.producers(k).some((r) => !enabled || enabled[r] === 1);
     const manual = model.manualKeys.has(k);
-    if (hasProducer && !manual) return Infinity;
+    // un recurso que el mundo daría pero esta config/dimensión no deja es la raíz natural aunque tenga otras recetas lejanas
+    const disabled = model.disabledWorld.has(g.keyNames[k]);
+    if (hasProducer && !manual && !disabled) return Infinity;
     switch (rootReason(model, k).code) {
       case 'manual-only': return 1;
+      case 'disabled-world': return 1;
       case 'no-recipe': return 2;
-      case 'disabled-world': return 3;
       default: return 4;
     }
   };
@@ -197,13 +208,14 @@ export function renderTree(model, node, opts = {}) {
   const g = model.g;
   const lines = [];
   const walk = (n, prefix, slotLabel, depth) => {
-    if (!n.ruleRoot && keyName(g, n.key).startsWith('dead:')) {
+    if (!n.ruleRoot && !n.ruleHead && keyName(g, n.key).startsWith('dead:')) {
       lines.push(`${prefix}✗ ${n.root ? n.root.text : keyName(g, n.key).slice(5)}`);
       return;
     }
-    const nm = n.ruleRoot ? describeRule(g, n.rule) : keyName(g, n.key);
+    const nm = n.ruleRoot || n.ruleHead ? describeRule(g, n.rule) : keyName(g, n.key);
     let line = `${prefix}${slotLabel ? '[' + slotLabel + '] ' : ''}${nm}`;
     if (n.ruleRoot) line += '  ✗ le falta:';
+    else if (n.ruleHead) line += '  (receta usable, necesita:)';
     else if (n.fact) line += '  ← del mundo / arranque';
     else if (n.capital) line += '  ← capital (se construye una vez)';
     else if (n.rule !== undefined) line += `  ← ${describeRule(g, n.rule)}`;

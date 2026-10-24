@@ -16,7 +16,7 @@ export const gf = (fluid, amount = 1000, chance = 10000) => ({
 });
 
 /** Receta de máquina GT (inputs/outputs/tickInputs por capacidad). */
-export const gt = (id, type, { ins = [], outs = [], fins = [], fouts = [], eut = 8, conditions } = {}) => ({
+export const gt = (id, type, { ins = [], outs = [], fins = [], fouts = [], eut = 8, conditions, data } = {}) => ({
   id,
   type,
   json: {
@@ -25,6 +25,7 @@ export const gt = (id, type, { ins = [], outs = [], fins = [], fouts = [], eut =
     outputs: { item: outs, fluid: fouts },
     tickInputs: { eu: [{ content: eut, chance: 10000, maxChance: 10000, tierChanceBoost: 0 }] },
     ...(conditions ? { recipeConditions: conditions } : {}),
+    ...(data ? { data } : {}),
   },
 });
 
@@ -49,7 +50,7 @@ function collectItems(x, out) {
 }
 
 /** Volcado en memoria; los objetos del registro salen de las propias recetas más `items`. */
-export function mkDump({ recipes = [], items = [], fluids = [], tagsItem = {}, tagsFluid = {}, machines = [], recipeTypes = [], veins = null } = {}) {
+export function mkDump({ recipes = [], items = [], fluids = [], tagsItem = {}, tagsFluid = {}, machines = [], recipeTypes = [], veins = null, fluidVeins = null, config = null, structures = null } = {}) {
   const all = new Set(items);
   collectItems(recipes.map((r) => r.json), all);
   return makeDump('(memoria)', {
@@ -58,6 +59,9 @@ export function mkDump({ recipes = [], items = [], fluids = [], tagsItem = {}, t
     tags: { item: tagsItem, fluid: tagsFluid },
     machines: { machines, recipeTypes },
     veins: veins ? { veins } : null,
+    fluidVeins: fluidVeins ? { veins: fluidVeins } : null,
+    config: config ? { gtceu: config } : null,
+    structures: structures ? { structures } : null,
     info: null,
   });
 }

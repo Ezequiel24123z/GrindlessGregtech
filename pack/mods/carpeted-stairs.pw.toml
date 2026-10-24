@@ -1,0 +1,14 @@
+name = "Carpeted Stairs & Slabs"
+filename = "carpeted-1.20-1.4.jar"
+side = "both"
+pin = true
+
+[download]
+url = "https://cdn.modrinth.com/data/Ogzlp7me/versions/5v8AkQ8d/carpeted-1.20-1.4.jar"
+hash-format = "sha512"
+hash = "4c9932e314ed8b9db1947e5a1174d84261e2b1258224ec1583fe84c4b8451fa34e750a660113abd19a4866b06f48bc80dd266167a247a0b743afddc4e3a80d5c"
+
+[update]
+[update.modrinth]
+mod-id = "Ogzlp7me"
+version = "5v8AkQ8d"

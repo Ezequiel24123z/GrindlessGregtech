@@ -22,3 +22,9 @@ Una línea por decisión. La más reciente, abajo.
 - 2026-10-24 · Las pruebas de cliente usan OpenGL real por software (Mesa llvmpipe, en una copia privada del JDK en el PC de casa) y no el stub de LWJGL. Embeddium, ModernFix y LDLib no arrancan con el stub.
 - 2026-10-24 · La perforadora y el invernadero de vapor no usan agua ni fertilizante: la escotilla ULV de fluidos solo se fabrica en ensambladora (LV). Las variantes con fluido y con fertilizante llegan con las máquinas LV.
 - 2026-10-24 · Las vetas profundas (diamante, mica, redstone) solo se perforan con la broca de acero.
+- 2026-10-24 · AE2 en LV, híbrida: solo se rehacen sus entradas con máquinas GT LV. Las prensas salen de la prensa de formado y no de los meteoritos, y el silicio de AE2 sale del horno de arco sumergido. El resto de AE2 se queda como viene.
+- 2026-10-24 · El horno de arco sumergido hace obsidiana y no lava, porque la lava fabricada daba más energía en una caldera de la que costaba.
+- 2026-10-24 · Drops de criaturas con un tipo de receta propio (simulador de criaturas LV–EV). Los modelos se imprimen sin matar nada; la primera perla de ender la da una misión. Un fermentador alimenta un simulador.
+- 2026-10-24 · Las vetas del Nether solo se perforan en LV con lodo de perforación. Las del End se dejan para HV.
+- 2026-10-24 · Mods añadidos por lotes probados en servidor y cliente: rendimiento, QoL, almacenamiento/logística y decoración (150 en total). Yeetus Experimentus quita el aviso de ajustes experimentales; Carry On no puede coger bloques de GT; Reliable EMI queda fuera (no es compatible con EMI 1.1.22).
+- 2026-10-24 · Cada test de overlay usa su propia franja del Overworld (ver AGENTS.md), porque los tests corren a la vez en el mismo servidor.

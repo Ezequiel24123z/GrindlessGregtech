@@ -1,0 +1,209 @@
+{
+  "format": 1,
+  "note": "Data for server_scripts/grindless/integration/ae2.js (hybrid AE2 on LV, docs/eras/lv.md 'Decisiones tomadas' #1, #2 and #6). Only the ENTRY POINTS of AE2 are rewritten; every other AE2 recipe is left untouched. Item and recipe ids were checked against the AE2 15.4.11 jar and GTM 7.5.3. Inputs use KubeJS item strings ('Nx id' or 'Nx #tag'); fluids use GTM strings ('#tag amount' in mB). 'tags' are new item tags, 'extendTags' add members to existing ones: ae2:all_nether_quartz gets the quartzite gem, so AE2's annihilation core (needed by interface, pattern provider, molecular assembler, buses...) and light detector no longer ask for Nether quartz.",
+
+  "tags": {
+    "grindless:ae2/certus_quartz": ["ae2:certus_quartz_crystal", "gtceu:certus_quartz_gem"]
+  },
+
+  "extendTags": {
+    "ae2:all_nether_quartz": ["gtceu:quartzite_gem"]
+  },
+
+  "removeCookingOutputs": ["ae2:silicon"],
+
+  "recipes": [
+    {
+      "key": "inscriber",
+      "type": "assembler",
+      "eut": 16,
+      "duration": 200,
+      "in": ["gtceu:lv_machine_hull", "2x gtceu:lv_electric_piston", "#gtceu:circuits/lv", "2x #grindless:ae2/certus_quartz"],
+      "out": "ae2:inscriber",
+      "replaces": ["ae2:network/blocks/inscribers"]
+    },
+    {
+      "key": "charger",
+      "type": "assembler",
+      "eut": 16,
+      "duration": 200,
+      "in": ["gtceu:lv_machine_hull", "gtceu:lv_electric_motor", "#gtceu:circuits/lv", "#grindless:ae2/certus_quartz"],
+      "out": "ae2:charger",
+      "replaces": ["ae2:network/blocks/crystal_processing_charger"]
+    },
+    {
+      "key": "controller",
+      "type": "assembler",
+      "eut": 16,
+      "duration": 300,
+      "in": ["gtceu:lv_machine_hull", "4x ae2:smooth_sky_stone_block", "4x ae2:fluix_crystal", "ae2:engineering_processor"],
+      "out": "ae2:controller",
+      "replaces": ["ae2:network/blocks/controller"]
+    },
+    {
+      "key": "drive",
+      "type": "assembler",
+      "eut": 16,
+      "duration": 200,
+      "in": ["gtceu:lv_machine_hull", "2x ae2:engineering_processor", "2x ae2:fluix_glass_cable", "gtceu:lv_electric_motor"],
+      "out": "ae2:drive",
+      "replaces": ["ae2:network/blocks/storage_drive"]
+    },
+    {
+      "key": "energy_acceptor",
+      "type": "assembler",
+      "eut": 16,
+      "duration": 200,
+      "in": ["gtceu:lv_machine_hull", "4x ae2:quartz_glass", "2x gtceu:tin_single_cable", "#gtceu:circuits/lv"],
+      "out": "ae2:energy_acceptor",
+      "replaces": ["ae2:network/blocks/energy_energy_acceptor"],
+      "keeps": ["ae2:network/blocks/energy_energy_acceptor_alt"]
+    },
+    {
+      "key": "molecular_assembler",
+      "type": "assembler",
+      "eut": 16,
+      "duration": 300,
+      "in": ["gtceu:lv_machine_hull", "gtceu:lv_robot_arm", "ae2:annihilation_core", "ae2:formation_core", "2x ae2:quartz_glass", "minecraft:crafting_table"],
+      "out": "ae2:molecular_assembler",
+      "replaces": ["ae2:network/crafting/molecular_assembler"]
+    },
+    {
+      "key": "interface",
+      "type": "assembler",
+      "eut": 16,
+      "duration": 200,
+      "in": ["gtceu:lv_machine_hull", "ae2:annihilation_core", "ae2:formation_core", "#forge:glass", "#gtceu:circuits/lv"],
+      "out": "ae2:interface",
+      "replaces": ["ae2:network/blocks/interfaces_interface"],
+      "keeps": ["ae2:network/blocks/interfaces_interface_alt", "ae2:network/blocks/interfaces_interface_part"]
+    },
+    {
+      "key": "pattern_provider",
+      "type": "assembler",
+      "eut": 16,
+      "duration": 200,
+      "in": ["gtceu:lv_machine_hull", "ae2:annihilation_core", "ae2:formation_core", "minecraft:crafting_table", "#gtceu:circuits/lv"],
+      "out": "ae2:pattern_provider",
+      "replaces": ["ae2:network/blocks/pattern_providers_interface"],
+      "keeps": ["ae2:network/blocks/pattern_providers_interface_alt", "ae2:network/blocks/pattern_providers_interface_part"]
+    },
+
+    {
+      "key": "calculation_processor_press",
+      "type": "forming_press",
+      "eut": 16,
+      "duration": 100,
+      "in": ["#forge:plates/steel", "#grindless:ae2/certus_quartz"],
+      "out": "ae2:calculation_processor_press",
+      "replaces": ["ae2:inscriber/calculation_processor_press"]
+    },
+    {
+      "key": "engineering_processor_press",
+      "type": "forming_press",
+      "eut": 16,
+      "duration": 100,
+      "in": ["#forge:plates/steel", "#forge:gems/diamond"],
+      "out": "ae2:engineering_processor_press",
+      "replaces": ["ae2:inscriber/engineering_processor_press"]
+    },
+    {
+      "key": "logic_processor_press",
+      "type": "forming_press",
+      "eut": 16,
+      "duration": 100,
+      "in": ["#forge:plates/steel", "#forge:ingots/gold"],
+      "out": "ae2:logic_processor_press",
+      "replaces": ["ae2:inscriber/logic_processor_press"]
+    },
+    {
+      "key": "silicon_press",
+      "type": "forming_press",
+      "eut": 16,
+      "duration": 100,
+      "in": ["#forge:plates/steel", "#forge:silicon"],
+      "out": "ae2:silicon_press",
+      "replaces": ["ae2:inscriber/silicon_press"]
+    },
+
+    {
+      "key": "certus_quartz_crystal_water",
+      "type": "autoclave",
+      "eut": 24,
+      "duration": 1200,
+      "in": ["#forge:dusts/certus_quartz"],
+      "fluidIn": ["#forge:water 250"],
+      "chanced": [{ "item": "ae2:certus_quartz_crystal", "chance": 7500 }],
+      "replaces": ["gtceu:autoclave/autoclave_dust_certus_quartz_water"]
+    },
+    {
+      "key": "certus_quartz_crystal_distilled",
+      "type": "autoclave",
+      "eut": 24,
+      "duration": 600,
+      "in": ["#forge:dusts/certus_quartz"],
+      "fluidIn": ["#forge:distilled_water 50"],
+      "out": "ae2:certus_quartz_crystal",
+      "replaces": ["gtceu:autoclave/autoclave_dust_certus_quartz_distilled"]
+    },
+    {
+      "key": "charged_certus_quartz_crystal",
+      "type": "polarizer",
+      "eut": 16,
+      "duration": 200,
+      "in": ["#grindless:ae2/certus_quartz"],
+      "out": "ae2:charged_certus_quartz_crystal"
+    },
+    {
+      "key": "fluix_crystal",
+      "type": "mixer",
+      "eut": 16,
+      "duration": 200,
+      "in": ["ae2:charged_certus_quartz_crystal", "minecraft:redstone", "#forge:dusts/quartzite"],
+      "fluidIn": ["minecraft:water 100"],
+      "out": "2x ae2:fluix_crystal"
+    }
+  ],
+
+  "custom": [
+    {
+      "id": "grindless:ae2/inscriber/calculation_processor_print",
+      "replaces": ["ae2:inscriber/calculation_processor_print"],
+      "json": {
+        "type": "ae2:inscriber",
+        "ingredients": {
+          "middle": { "tag": "grindless:ae2/certus_quartz" },
+          "top": { "item": "ae2:calculation_processor_press" }
+        },
+        "mode": "inscribe",
+        "result": { "item": "ae2:printed_calculation_processor" }
+      }
+    },
+    {
+      "id": "grindless:ae2/charger/charged_certus_quartz_crystal",
+      "replaces": ["ae2:charger/charged_certus_quartz_crystal"],
+      "json": {
+        "type": "ae2:charger",
+        "ingredient": { "tag": "grindless:ae2/certus_quartz" },
+        "result": { "item": "ae2:charged_certus_quartz_crystal" }
+      }
+    },
+    {
+      "id": "grindless:ae2/crafting/quartz_block",
+      "replaces": ["ae2:decorative/quartz_block"],
+      "json": {
+        "type": "minecraft:crafting_shaped",
+        "category": "misc",
+        "key": { "a": { "tag": "grindless:ae2/certus_quartz" } },
+        "pattern": ["aa", "aa"],
+        "result": { "item": "ae2:quartz_block" },
+        "show_notification": true
+      }
+    }
+  ],
+
+  "removeOnly": [
+    { "id": "ae2:smelting/silicon_from_certus_quartz_dust", "why": "silicon only comes from the Submerged Arc Furnace (gtceu:arc_smelting)" },
+    { "id": "ae2:blasting/silicon_from_certus_quartz_dust", "why": "same shortcut, blasting version" }
+  ]
+}
