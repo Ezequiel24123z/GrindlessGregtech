@@ -449,7 +449,7 @@
 			]
 			title: "Launch Pad"
 			x: 18.0d
-			y: 3.0d
+			y: 1.5d
 		}
 		{
 			dependencies: ["35719B747A75F7B6"]
@@ -467,8 +467,8 @@
 				{ id: "2734B9A769F33E71", item: "gcyr:space_boots", type: "item" }
 			]
 			title: "Space Suit"
-			x: 18.0d
-			y: 1.5d
+			x: 24.0d
+			y: 4.5d
 		}
 		{
 			dependencies: ["5C1D3FB96A9FB74A", "4A6E81ABD8026025", "7B21622AADB1E1D1"]
@@ -503,7 +503,7 @@
 			y: 0.0d
 		}
 		{
-			dependencies: ["4A672DF7CF424623"]
+			dependencies: ["4A672DF7CF424623", "5615E54AF782990A"]
 			description: [
 				"Hold Space to brake on the way down: a hard landing blows the rocket up."
 				"Keep the chestplate topped up with oxygen on the surface, or you drown on the Moon. The EV tab starts here, at the lunar base."
