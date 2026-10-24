@@ -1,7 +1,9 @@
 # Builds the Prism Launcher instance of the playable channel: a zip the player imports once
 # (Prism: Add Instance > Import > zip). On every launch the instance updates itself from the
 # `jugable` branch with packwiz-installer-bootstrap (MIT), which only moves to tested releases.
-#   powershell -NoProfile -ExecutionPolicy Bypass -File tools\prism\Build-PrismInstance.ps1 [-Channel jugable] [-OutDir <dir>]
+# With a version tag as the channel (-Channel v0.5.0) it builds a fixed instance of that version, for the GitHub release
+# of each version: the tag never moves, so that instance never updates.
+#   powershell -NoProfile -ExecutionPolicy Bypass -File tools\prism\Build-PrismInstance.ps1 [-Channel jugable|vX.Y.Z] [-OutDir <dir>]
 param(
     [string]$Channel = 'jugable',
     [string]$OutDir = (Join-Path $PSScriptRoot 'out'),
@@ -12,8 +14,10 @@ $ErrorActionPreference = 'Stop'
 $repo = 'Ezequiel24123z/GrindlessGregtech'
 $packUrl = "https://raw.githubusercontent.com/$repo/$Channel/pack/pack.toml"
 $bootUrl = 'https://github.com/packwiz/packwiz-installer-bootstrap/releases/download/v0.0.3/packwiz-installer-bootstrap.jar'
-$name = 'Gregtech Grindless'
-$folder = 'GregtechGrindless'
+$pinned = $Channel -match '^v\d'
+$name = if ($pinned) { "Gregtech Grindless $Channel" } else { 'Gregtech Grindless' }
+$folder = if ($pinned) { "GregtechGrindless-$Channel" } else { 'GregtechGrindless' }
+$notes = if ($pinned) { "Gregtech Grindless ${Channel}: versión fija, no se actualiza. Para jugar al día, usa la instancia del canal jugable." } else { "Gregtech Grindless: canal $Channel. Se actualiza solo al arrancar (solo versiones probadas)." }
 
 $work = Join-Path ([IO.Path]::GetTempPath()) ("gg-prism-" + [guid]::NewGuid().ToString('N'))
 $inst = Join-Path $work $folder
@@ -38,7 +42,7 @@ $cfg = @(
     'OverrideMemory=true',
     "MinMemAlloc=$MinMemMb",
     "MaxMemAlloc=$MaxMemMb",
-    "notes=`"Gregtech Grindless: canal $Channel. Se actualiza solo al arrancar (solo versiones probadas).`""
+    "notes=`"$notes`""
 ) -join "`r`n"
 [IO.File]::WriteAllText((Join-Path $inst 'instance.cfg'), $cfg + "`r`n", $utf8)
 
