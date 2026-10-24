@@ -84,9 +84,13 @@ function Ensure-GGHmc {
 }
 
 # options.txt: keep what the pack ships, force the keys that would block or slow down a headless run.
+# The client runs on the user's own PC: every sound category is muted (he hears it otherwise).
 function Set-GGClientOptions {
     param([string]$Path, [string]$Renderer = 'mesa')
     $want = [ordered]@{ 'onboardAccessibility' = 'false'; 'pauseOnLostFocus' = 'false' }
+    foreach ($cat in 'master', 'music', 'record', 'weather', 'block', 'hostile', 'neutral', 'player', 'ambient', 'voice') {
+        $want["soundCategory_$cat"] = '0.0'
+    }
     if ($Renderer -eq 'mesa') {
         # software rendering: keep the frame cost low (the test only needs the world to load)
         $want['renderDistance'] = '4'
