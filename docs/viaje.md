@@ -98,7 +98,7 @@ Hoy HV abre el End y, con la Luna, abriría dos sitios. Propuesta: **el End pasa
   - Personas: la primera vez en cohete; después, Waystones o los /home de FTB, sin coste.
   - Materiales, fluidos y energía: AE2, con el puente cuántico entre planetas hecho con una mitad en cada extremo.
   - La red AE2 entre planetas mejora con las eras.
-  - Los cofres y tanques ender no cruzan a otro planeta.
+  - Los cofres, tanques y demás objetos ender funcionan entre planetas sin límite (el usuario, 2026-10-24: son un mod de calidad de vida precisamente para eso). AE2 es la columna industrial, no el único camino.
 - **Lo que sale de un planeta no existe en la Tierra.** El validador de recetas lo comprueba para cada recurso, incluidas abejas, subproductos y addons.
 
 ## De visitar a dominar
@@ -241,7 +241,7 @@ En inglés, un capítulo por era. Cada capítulo cuenta el paso que te acerca al
 7. **AE2 es la columna del transporte entre planetas:** materiales, fluidos y energía.
    - El puente cuántico entre planetas se fabrica con una mitad hecha en cada extremo, así que hay que ir una vez; después funciona solo.
    - La red entre planetas mejora con las eras (más canales, más capacidad, más energía) y es un objetivo en sí.
-   - Los cofres y tanques ender no cruzan a otro planeta.
+   - Los cofres y tanques ender no cruzan a otro planeta. *Cambiado el mismo día por el usuario: los objetos ender funcionan en todos los planetas, sin límite.*
 8. **Misiones.**
    - Una pestaña por era (Vapor → MAX) que cuenta el viaje.
    - Pestañas aparte para los mods de calidad de vida: almacenamiento, AE2 y addons, Productive Bees, Create/Greate si se quedan, Waystones/FTB…
