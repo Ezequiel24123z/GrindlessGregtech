@@ -705,9 +705,9 @@
         }
       },
       {
-        // the titanium bit is the HV drill's (grindless:vein_drilling/hv/...): vetoed here, with fluid
+        // the stainless steel bit is the HV drill's (grindless:vein_drilling/hv/...): vetoed here, with fluid
         name: 'hv_bit_gated', ticks: 60,
-        items: [{ id: 'grindless:vein_sample_iron', n: 1 }, { id: 'grindless:titanium_drill_bit', n: 16 }], circuit: 0,
+        items: [{ id: 'grindless:vein_sample_iron', n: 1 }, { id: 'grindless:stainless_steel_drill_bit', n: 16 }], circuit: 0,
         fluids: [{ id: DRILLING_FLUID, mb: 8000 }],
         verify: function (r) {
           var n = Object.keys(r.items).length

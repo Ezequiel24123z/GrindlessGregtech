@@ -15,8 +15,29 @@ function labelOf(tags, alts, fallback) {
   return alts.length === 1 ? alts[0] : `${alts[0]} (+${alts.length - 1})`;
 }
 
+/**
+ * Tipo que guarda el NBT de un objeto "configurable" (los panales, bloques de panal y huevos de Productive Bees llevan la abeja
+ * en EntityTag.type). El NBT llega como objeto o como texto SNBT/JSON: {EntityTag:{type:"productivebees:iron"}}.
+ */
+export function nbtType(nbt) {
+  if (!nbt) return null;
+  if (typeof nbt === 'object') return nbt.EntityTag && typeof nbt.EntityTag.type === 'string' ? nbt.EntityTag.type : null;
+  const m = /["']?type["']?\s*:\s*["']([^"']+)["']/.exec(String(nbt));
+  return m ? m[1] : null;
+}
+
+/**
+ * Clave de un objeto: con `nbtTyped` (Set de ids, solo la auditoría de obtención) los objetos de esa lista con un tipo en el NBT
+ * se separan por tipo ("productivebees:configurable_honeycomb#productivebees:iron"); el resto de análisis los junta en un id.
+ */
+export function itemKey(item, nbt, nbtTyped) {
+  if (!nbtTyped || !nbtTyped.has(item)) return item;
+  const t = nbtType(nbt);
+  return t ? `${item}#${t}` : item;
+}
+
 /** Ingrediente de objeto (vanilla, Forge o GT) -> {alts:[ids], tags:[...], count, circuit?, bad?}. */
-export function parseItemIngredient(j, tagIndex, st) {
+export function parseItemIngredient(j, tagIndex, st, nbtTyped = null) {
   const res = { alts: [], tags: [], count: 1 };
   const visit = (x) => {
     if (x === null || x === undefined) return;
@@ -60,7 +81,7 @@ export function parseItemIngredient(j, tagIndex, st) {
       default:
         break;
     }
-    if (typeof x.item === 'string') res.alts.push(x.item);
+    if (typeof x.item === 'string') res.alts.push(itemKey(x.item, x.nbt, nbtTyped));
     else if (typeof x.tag === 'string') {
       res.tags.push(x.tag);
       res.alts.push(...tagIndex.items(x.tag));
@@ -140,11 +161,12 @@ function pickOutput(parsed) {
 
 function normalizeGT(out, j, ctx) {
   const { tags, st } = ctx;
+  const nbtTyped = typedOf(ctx);
   const addIn = (cap, c) => {
     const chance = c.chance === undefined ? MAX_CHANCE : c.chance;
     const maxChance = c.maxChance || MAX_CHANCE;
     if (cap === 'item') {
-      const p = parseItemIngredient(c.content, tags, st);
+      const p = parseItemIngredient(c.content, tags, st, nbtTyped);
       out.inputs.push({
         kind: 'item', alts: p.alts, label: labelOf(p.tags, p.alts, p.bad), count: p.count,
         cap: chance === 0, cat: chance > 0 && chance < maxChance, consume: chance / maxChance, bad: p.bad, tags: p.tags,
@@ -161,7 +183,7 @@ function normalizeGT(out, j, ctx) {
     const chance = c.chance === undefined ? MAX_CHANCE : c.chance;
     const maxChance = c.maxChance || MAX_CHANCE;
     if (cap === 'item') {
-      const p = parseItemIngredient(c.content, tags, st);
+      const p = parseItemIngredient(c.content, tags, st, nbtTyped);
       const k = pickOutput(p);
       if (k) out.outputs.push({ key: k, chance: chance / maxChance, count: p.count });
       else out.warn.push('salida sin objeto: ' + labelOf(p.tags, p.alts, p.bad));
@@ -183,6 +205,8 @@ function normalizeGT(out, j, ctx) {
   }
   for (const c of asArray((j.tickOutputs || {}).eu)) out.euOut = Math.max(out.euOut, euOf(c.content).voltage);
   out.conditions = [...asArray(j.recipeConditions)];
+  // categoría de GT (p. ej. gtceu:macerator_recycling): distingue el reciclaje de un objeto de la receta que fabrica el material
+  if (typeof j.category === 'string') out.category = j.category;
   // GT guarda la temperatura del horno de alto vacío en `data`, no en las condiciones
   if (j.data && typeof j.data.ebf_temp === 'number') {
     out.temp = j.data.ebf_temp;
@@ -192,16 +216,29 @@ function normalizeGT(out, j, ctx) {
   return out;
 }
 
-function resultOf(r) {
+/** Set de ids con NBT por tipo (cfg.nbtTyped, solo la auditoría de obtención) o null. */
+const typedOf = (ctx) => (ctx.cfg && ctx.cfg.nbtTyped instanceof Set ? ctx.cfg.nbtTyped : null);
+
+/**
+ * Salida de una receta que no es de GT. Productive Bees anida el objeto ({item: {type: 'forge:nbt', item, nbt}} o
+ * {item: {tag}}); una salida por etiqueta da el primer miembro (lo que entrega el juego).
+ */
+function resultOf(r, ctx) {
   if (!r) return [];
   if (typeof r === 'string') return [{ key: r, count: 1 }];
-  if (Array.isArray(r)) return r.flatMap(resultOf);
+  if (Array.isArray(r)) return r.flatMap((x) => resultOf(x, ctx));
+  if (r.item && typeof r.item === 'object') return resultOf(r.item, ctx).map((o) => ({ ...o, count: r.count || o.count }));
+  if (typeof r.tag === 'string' && !r.item && !r.id) {
+    const first = ctx.tags.items(r.tag)[0];
+    return first ? [{ key: first, count: r.count || 1 }] : [];
+  }
   const id = r.item || r.id || (typeof r.result === 'string' ? r.result : null);
-  return id ? [{ key: id, count: r.count || 1 }] : [];
+  return id ? [{ key: itemKey(id, r.nbt, typedOf(ctx)), count: r.count || 1 }] : [];
 }
 
 function normalizeGeneric(out, j, ctx) {
   const { tags, st, cfg } = ctx;
+  const nbtTyped = typedOf(ctx);
   const toolTags = cfg.toolTagSet;
   const pushFluidContainer = (ing) => {
     // Receta con un recipiente lleno de fluido (cubo de agua, de creosota...): hace falta el fluido y algo donde llevarlo.
@@ -220,7 +257,7 @@ function normalizeGeneric(out, j, ctx) {
       pushFluidContainer(ing);
       return;
     }
-    const p = parseItemIngredient(ing, tags, st);
+    const p = parseItemIngredient(ing, tags, st, nbtTyped);
     const cap = p.tags.length > 0 && p.tags.every((t) => toolTags.has(t));
     out.inputs.push({
       kind: cap ? 'tool' : 'item', alts: p.alts, label: labelOf(p.tags, p.alts, p.bad), count: p.count,
@@ -257,9 +294,97 @@ function normalizeGeneric(out, j, ctx) {
     else if (c.type === 'fluid' && c.fluid) out.conditions.push({ type: 'adjacent_fluid', fluids: [c.fluid] });
     else out.conditions.push({ type: `ae2_circumstance_${c.type}` });
   }
-  for (const r of [...resultOf(j.result), ...resultOf(j.results), ...resultOf(j.output)]) {
+  for (const r of [...resultOf(j.result, ctx), ...resultOf(j.results, ctx), ...resultOf(j.output, ctx)]) {
     out.outputs.push({ key: r.key, chance: 1, count: r.count });
   }
+  return out;
+}
+
+/** Tipos de Productive Bees que se leen como reglas de abejas cuando la configuración pide `bees` (auditoría de obtención). */
+export const BEE_TYPES = new Set([
+  'productivebees:advanced_beehive', 'productivebees:bee_breeding', 'productivebees:bee_conversion', 'productivebees:bee_spawning',
+  'productivebees:bee_fishing', 'productivebees:block_conversion', 'productivebees:centrifuge', 'productivebees:bottler',
+]);
+export const beeKey = (id) => 'bee:' + id;
+
+/**
+ * Productive Bees: las abejas son claves "bee:<id>" (capital: no se gastan). La colmena da los panales de la abeja (un panal
+ * configurable sin NBT es el de la propia abeja), el cruce da crías, la conversión cambia una abeja con un objeto, los nidos
+ * sueltan abejas y la pesca las saca del agua (los biomas se dan por alcanzables).
+ */
+function normalizeBees(out, j, ctx) {
+  const { tags, st } = ctx;
+  const nbtTyped = typedOf(ctx);
+  const bee = (b) => (typeof b === 'string' ? b : b && typeof b.bee === 'string' ? b.bee : null);
+  const beeIn = (b) => {
+    const id = bee(b);
+    if (id) out.inputs.push({ kind: 'bee', alts: [beeKey(id)], label: 'abeja ' + id, count: 1, cap: true, consume: 0, tags: [] });
+    else out.warn.push('abeja sin id');
+  };
+  const beeOut = (b) => {
+    const id = bee(b);
+    if (id) out.outputs.push({ key: beeKey(id), chance: 1, count: 1 });
+  };
+  const itemIn = (ing, cap = false) => {
+    const p = parseItemIngredient(ing, tags, st, nbtTyped);
+    out.inputs.push({
+      kind: 'item', alts: p.alts, label: labelOf(p.tags, p.alts, p.bad), count: p.count, cap, consume: cap ? 0 : 1, bad: p.bad, tags: p.tags,
+    });
+  };
+  const fluidOut = (f, amount) => {
+    const id = f.fluid || (f.tag ? tags.fluids(f.tag)[0] : null);
+    if (id) out.outputs.push({ key: fluidKey(id), chance: 1, count: amount || 0 });
+  };
+  switch (out.type) {
+    case 'productivebees:advanced_beehive':
+      beeIn(j.ingredient);
+      for (const r of asArray(j.results)) {
+        for (const o of resultOf(r, ctx)) {
+          const key = nbtTyped && nbtTyped.has(o.key) && bee(j.ingredient) ? `${o.key}#${bee(j.ingredient)}` : o.key;
+          out.outputs.push({ key, chance: (r.chance || 100) / 100, count: o.count });
+        }
+      }
+      break;
+    case 'productivebees:bee_breeding':
+      beeIn(j.parent1);
+      beeIn(j.parent2);
+      asArray(j.offspring).forEach(beeOut);
+      break;
+    case 'productivebees:bee_conversion':
+      beeIn(j.source);
+      if (j.item) itemIn(j.item);
+      beeOut(j.result);
+      break;
+    case 'productivebees:bee_spawning':
+      itemIn(j.ingredient, true);
+      asArray(j.results).forEach(beeOut);
+      break;
+    case 'productivebees:bee_fishing':
+      beeOut(j.bee);
+      break;
+    case 'productivebees:block_conversion':
+      beeIn(j.bee);
+      if (j.from && j.from.Name) itemIn({ item: j.from.Name });
+      if (j.to && j.to.Name) out.outputs.push({ key: j.to.Name, chance: (j.chance || 100) / 100, count: 1 });
+      break;
+    case 'productivebees:centrifuge':
+      itemIn(j.ingredient);
+      for (const o of asArray(j.outputs)) {
+        if (o.fluid) fluidOut(o.fluid, o.amount);
+        else for (const r of resultOf(o, ctx)) out.outputs.push({ key: r.key, chance: (o.chance || 100) / 100, count: r.count });
+      }
+      break;
+    case 'productivebees:bottler': {
+      itemIn(j.input);
+      const p = parseFluidIngredient(j.fluid, tags, st);
+      out.inputs.push({ kind: 'fluid', alts: p.alts, label: 'fluid:' + labelOf(p.tags, p.alts.map((a) => a.slice(6)), p.bad), count: p.amount, cap: false, consume: 1, bad: p.bad, tags: p.tags });
+      for (const r of resultOf(j.output, ctx)) out.outputs.push({ key: r.key, chance: 1, count: r.count });
+      break;
+    }
+    default:
+      break;
+  }
+  out.shape = 'bees';
   return out;
 }
 
@@ -274,6 +399,7 @@ export function normalizeRecipe(rec, ctx) {
     conditions: [], shape: '', warn: [], otherCaps: new Set(),
   };
   const j = rec.json || {};
+  if (ctx.cfg && ctx.cfg.bees && BEE_TYPES.has(rec.type)) return normalizeBees(out, j, ctx);
   const gtLike = ctx.gtTypes.has(rec.type) || ctx.gtTypes.has(type) ||
     (!j.pattern && !Array.isArray(j.ingredients) && (j.inputs || j.outputs || j.tickInputs || j.tickOutputs));
   return gtLike ? normalizeGT(out, j, ctx) : normalizeGeneric(out, j, ctx);

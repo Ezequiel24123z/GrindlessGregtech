@@ -3,6 +3,8 @@
   "title": "Era de vapor",
   "note": "Puerta: coque -> bronce -> vapor -> acero -> turbina de vapor LV + primer circuito LV + casco LV (docs/eras/vapor.md). Fuentes: GregTech Modern 7.5.3 (GTMachines, GTMultiMachines, GTOres, FuelRecipes) y el volcado de gg_dump.js.",
 
+  "eraOrder": ["steam", "lv", "mv", "hv", "ev", "iv", "luv", "zpm", "uv", "uhv", "uev", "uiv", "uxv", "opv", "max"],
+
   "unconditionalTypes": [
     "minecraft:crafting_shaped",
     "minecraft:crafting_shapeless",
@@ -348,5 +350,25 @@
     { "id": "auto-perforacion-combustible", "label": "Perforadora sostenida solo con calderas de combustible", "kind": "recipe", "type": "gtceu:vein_drilling", "without": ["sintética:caldera-solar"] },
     { "id": "auto-invernadero", "label": "Receta de invernadero usable y sostenible", "kind": "recipe", "type": "gtceu:greenhouse" },
     { "id": "auto-invernadero-combustible", "label": "Invernadero sostenido solo con calderas de combustible", "kind": "recipe", "type": "gtceu:greenhouse", "without": ["sintética:caldera-solar"] }
+  ],
+
+  "eraItems": [
+    {
+      "id": "vapor-maquinas",
+      "label": "Máquinas de vapor de GTM y los multibloques primitivos",
+      "items": [
+        "gtceu:lp_steam_*", "gtceu:hp_steam_*", "gtceu:steam_grinder", "gtceu:steam_oven", "gtceu:steam_input_bus", "gtceu:steam_input_hatch",
+        "gtceu:steam_output_bus", "gtceu:steam_machine_casing", "gtceu:coke_oven", "gtceu:coke_oven_bricks", "gtceu:primitive_blast_furnace",
+        "gtceu:firebricks", "gtceu:primitive_pump", "gtceu:pump_deck", "gtceu:bronze_brick_casing", "gtceu:bronze_firebox_casing"
+      ]
+    },
+    { "id": "vapor-multibloques", "label": "Nuestra perforadora y nuestro invernadero de vapor, formados", "items": ["m:gtceu:steam_vein_drill", "m:gtceu:steam_greenhouse"] },
+    { "id": "vapor-brocas", "label": "Brocas de bronce y de acero", "items": ["grindless:bronze_drill_bit", "grindless:steel_drill_bit"] },
+    {
+      "id": "salida-vapor",
+      "era": "lv",
+      "label": "Salida del vapor: la puerta a LV (casco, circuito y turbina de vapor LV)",
+      "items": ["gtceu:lv_machine_hull", "gtceu:basic_electronic_circuit", "gtceu:lv_steam_turbine"]
+    }
   ]
 }

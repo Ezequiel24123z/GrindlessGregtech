@@ -28,6 +28,17 @@ export function prepareConfig(raw) {
     : t);
   cfg.targets = (raw.targets || []).map(fixTarget);
   cfg.autoTargets = (raw.autoTargets || []).map(fixTarget);
+  // Regla de eras (lib/eras.mjs): orden de las eras, recursos que trae cada una y objetos que le pertenecen.
+  cfg.era = raw.era || raw.tier;
+  cfg.eraOrder = raw.eraOrder || [];
+  cfg.eraResources = raw.eraResources || [];
+  cfg.eraItems = raw.eraItems || [];
+  // Auditoría de obtención (lib/obtain.mjs): objetos con NBT por tipo, recetas de abejas como reglas y claves/hechos sin objeto
+  // en el registro (dim:<id> de las dimensiones, bee:<id> de las abejas).
+  cfg.nbtTyped = raw.nbtTyped ? new Set(raw.nbtTyped) : null;
+  cfg.bees = !!raw.bees;
+  cfg.extraFacts = raw.extraFacts || [];
+  cfg.extraKeys = raw.extraKeys || [];
   return cfg;
 }
 
@@ -70,15 +81,20 @@ function makeResolver(dump, normList, warnings) {
   return { resolve, label };
 }
 
+/** Voltaje de cada nivel de GT (V[0] = ULV ... V[14] = MAX). */
+const V = [8, 32, 128, 512, 2048, 8192, 32768, 131072, 524288, 2097152, 8388608, 33554432, 134217728, 536870912, 2147483647];
+
 /** Material de una veta sin espacio de nombres si es de GT ("gtceu:iron" -> "iron"); el de un addon lo conserva ("gtca:red_zircon"). */
 const veinMaterialName = (m) => (m.startsWith('gtceu:') ? m.slice(6) : m);
+/** Id de una veta sin espacio de nombres ni el trozo "_vein" (también en medio): redstone_vein_ow -> redstone_ow. */
+const bareVeinId = (short) => short.replace(/_vein(?=_|$)/, '');
 
 /**
  * Materiales de las vetas que cumplen el filtro; sin veins.json se usa la lista de reserva.
- * `requireItem` (con {id}): solo las vetas cuyo objeto existe (la muestra de la tabla de la perforadora), p. ej. las vetas
- * del End que el pack ofrece y no las que registra GTM o un addon.
+ * `offered(veta, from)` aplica `requireItem`/`requireRecipe` (las vetas que la tabla de la perforadora ofrece), p. ej. las
+ * vetas del End que el pack ofrece y no las que registra GTM o un addon, ni las que el pack aparta.
  */
-function veinMaterials(dump, from, fallback) {
+function veinMaterials(dump, from, fallback, offered) {
   if (!dump.veins) return { mats: fallback || [], source: 'config' };
   const dims = new Set(from.dimensions || ['minecraft:overworld']);
   const layers = from.layers ? new Set(from.layers) : null;
@@ -86,10 +102,7 @@ function veinMaterials(dump, from, fallback) {
   for (const v of dump.veins) {
     if (!v.dims.some((d) => dims.has(d))) continue;
     if (layers && !layers.has(v.layer)) continue;
-    if (from.requireItem) {
-      const short = v.id.includes(':') ? v.id.split(':')[1] : v.id;
-      if (!dump.items.has(from.requireItem.split('{id}').join(short.replace(/_vein(?=_|$)/, '')).split('{short}').join(short))) continue;
-    }
+    if (!offered(v, from)) continue;
     for (const m of v.mats) mats.add(veinMaterialName(m));
   }
   return { mats: [...mats].sort(), source: 'veins.json' };
@@ -130,6 +143,26 @@ export function buildModel(dump, rawCfg) {
   }
   const { resolve, label: selLabel } = makeResolver(dump, norm, warnings);
 
+  // ¿La tabla de la perforadora ofrece la veta? `requireItem`: existe su objeto (la muestra). `requireRecipe: {type, input}`:
+  // alguna receta de ese tipo toma ese objeto como entrada; es lo que vale cuando el pack aparta una veta y deja su muestra
+  // registrada (oculta, se convierte en una sonda vacía) pero sin recetas de perforación. {id}/{short} como en los objetivos.
+  const recipeInputs = new Map();
+  const inputsOfType = (type) => {
+    if (!recipeInputs.has(type)) {
+      const set = new Set();
+      for (const n of norm) if (n.type === type) for (const i of n.inputs) for (const a of i.alts) set.add(a);
+      recipeInputs.set(type, set);
+    }
+    return recipeInputs.get(type);
+  };
+  const veinOffered = (v, spec) => {
+    const short = v.id.includes(':') ? v.id.split(':')[1] : v.id;
+    const fill = (s) => s.split('{id}').join(bareVeinId(short)).split('{short}').join(short);
+    if (spec.requireItem && !dump.items.has(fill(spec.requireItem))) return false;
+    if (spec.requireRecipe && !inputsOfType(spec.requireRecipe.type).has(fill(spec.requireRecipe.input))) return false;
+    return true;
+  };
+
   // Una ranura sin ninguna alternativa (etiqueta vacía, ninguna máquina del tier) se apoya en una clave "dead:" sin
   // productores: nunca se alcanza, pero en el análisis de bloqueo actúa como una raíz que se puede nombrar.
   // tol = ranura tolerante en la sostenibilidad: combustible de una máquina o catalizador que solo se gasta a veces.
@@ -141,6 +174,8 @@ export function buildModel(dump, rawCfg) {
 
   // 2) Mundo
   const facts = { manual: [], auto: [], bootstrap: [] };
+  // fuentes del mundo que aportan algo en este análisis, con su origen (regla de eras): {id, origin, keys, kind, rule?}
+  const worldSources = [];
   const manualRuleKeys = [];
   const worldInfo = [];
   const disabledWorld = new Map();
@@ -203,7 +238,7 @@ export function buildModel(dump, rawCfg) {
     let tplInfo = '';
     if (entry.template) {
       const from = entry.fromVeins
-        ? veinMaterials(dump, entry.fromVeins, entry.materials)
+        ? veinMaterials(dump, entry.fromVeins, entry.materials, veinOffered)
         : { mats: entry.materials || [], source: 'config' };
       const mats = [...new Set([...from.mats, ...(entry.extraMaterials || [])])];
       let missing = 0;
@@ -268,29 +303,40 @@ export function buildModel(dump, rawCfg) {
     }
     // sustainedIf: con la config cumplida la fuente no se agota; si no, solo da una cantidad finita (WARN)
     const sustained = entry.sustainedIf ? configState(entry.sustainedIf, wid).ok : true;
+    // origen de la fuente (dónde se recoge): `origin` o las dimensiones de sus vetas. La regla de eras quita las fuentes
+    // de una dimensión que es recurso de una era posterior (el viaje al End, a la Luna...).
+    const origin = entry.origin ? asArray(entry.origin) : entry.fromVeins ? asArray(entry.fromVeins.dimensions || ['minecraft:overworld']) : [];
+    const source = { id: wid, origin, keys };
     if (entry.mode === 'manual') {
       if (entry.needs && keys.length > 0) {
         // recolección a mano que exige antes un objeto que se fabrica (la llave del End): es una regla, no un hecho del mundo
         const slots = asArray(entry.needs).map((n) => slotOf(resolve(n, wid), true, selLabel(n), 'capital'));
-        addRule(`mundo:${wid}`, 'world-manual', 'world', slots, keys, { bootstrap: !!entry.bootstrap, note: entry.note || '' });
+        source.rule = addRule(`mundo:${wid}`, 'world-manual', 'world', slots, keys, { bootstrap: !!entry.bootstrap, note: entry.note || '' });
+        source.kind = 'rule';
         manualRuleKeys.push(...keys);
       } else {
+        source.kind = 'manual';
         facts.manual.push(...keys);
         if (entry.bootstrap) facts.bootstrap.push(...keys);
       }
     } else if (entry.via && entry.via.length > 0) {
       const slots = [slotOf(entry.via.map((v) => 'run:' + v), false, `máquina ${entry.via.join(' | ')}`, 'machine')];
-      addRule(`mundo:${wid}`, 'world-auto', 'world', slots, keys, { finite: !!entry.finite || !sustained, note: entry.note || '' });
+      source.rule = addRule(`mundo:${wid}`, 'world-auto', 'world', slots, keys, { finite: !!entry.finite || !sustained, note: entry.note || '' });
+      source.kind = 'rule';
     } else {
+      source.kind = 'auto';
       facts.auto.push(...keys);
     }
+    worldSources.push(source);
   });
   stats.fluidVeins = [...fluidVeinInfo.entries()].map(([fluid, ids]) => ({ fluid, deposits: ids }));
   stats.configRead = [...usedConfig.entries()].map(([key, value]) => ({ key, value }));
 
   // 3) Máquinas: m:<id> (se puede construir) y run:<id> (funciona: construida + lo que consume al operar)
   // machinesFromRegistry: añade en bloque las máquinas registradas con un prefijo (p. ej. todas las gtceu:lv_*) con sus
-  // tipos de receta reales; una entrada explícita de `machines` con el mismo id tiene prioridad.
+  // tipos de receta reales; una entrada explícita de `machines` con el mismo id tiene prioridad. `maxEUtByTier`: el tope de
+  // EU/t de cada máquina de un bloque es el voltaje de su propio nivel (V[tier] del registro; los multibloques, sin tope);
+  // `includeTypeless`: también las que no tienen tipo de receta (la perforadora de fluidos), para usarlas en `via`.
   const explicitIds = new Set(cfg.machines.map((e) => e.id || e.machine));
   const fromRegistry = [];
   for (const spec of cfg.machinesFromRegistry) {
@@ -300,9 +346,10 @@ export function buildModel(dump, rawCfg) {
       if (!mid.startsWith(spec.prefix) || excluded(mid) || explicitIds.has(mid)) continue;
       if (reg.mb && !spec.multiblocks) continue;
       const types = reg.types.filter((t) => !skipTypes.has(t));
-      if (types.length === 0) continue;
+      if (types.length === 0 && !spec.includeTypeless) continue;
       explicitIds.add(mid);
-      fromRegistry.push({ machine: mid, types, maxEUt: spec.maxEUt, needs: spec.needs, parts: spec.parts, note: `del registro (${spec.prefix}*)` });
+      const maxEUt = spec.maxEUtByTier ? (reg.mb ? undefined : V[Math.max(0, Math.min(V.length - 1, Number(reg.tier) || 0))]) : spec.maxEUt;
+      fromRegistry.push({ machine: mid, types, maxEUt, needs: spec.needs, parts: spec.parts, note: `del registro (${spec.prefix}*)` });
     }
   }
   stats.machinesFromRegistry = fromRegistry.length;
@@ -448,6 +495,12 @@ export function buildModel(dump, rawCfg) {
       slots.push(slotOf(i.alts, !!i.cap, i.label, i.kind, !!i.cat));
     }
     for (const c of n.conditions) {
+      if (c.type === 'dimension' && typeof c.dimension === 'string' && cfg.conditions.dimension && cfg.conditions.dimension.asKeys) {
+        // auditoría de obtención: la receta pide la clave dim:<id>, un hecho para cada dimensión a la que se llega (y otra pasada
+        // añade las de las eras posteriores). La condición inversa ("fuera de X") se cumple en cualquier otra dimensión.
+        if (c.reverse !== true) slots.push(slotOf(['dim:' + c.dimension], true, `en ${c.dimension}`, 'cond'));
+        continue;
+      }
       if (c.type === 'dimension' && typeof c.dimension === 'string' && !(cfg.conditions.dimension && cfg.conditions.dimension.ignore)) {
         // la fábrica está en una dimensión concreta (cfg.contextDimension): la receta solo vale donde dice su condición
         const here = c.dimension === ctxDim;
@@ -483,7 +536,7 @@ export function buildModel(dump, rawCfg) {
     }
     const dimConds = n.conditions.filter((c) => c.type === 'dimension' && typeof c.dimension === 'string');
     const rid = addRule(n.id, 'recipe', n.type, slots, n.outputs.map((o) => o.key), {
-      eut: n.eut, added: n.added, rawType: n.rawType, warn: n.warn,
+      eut: n.eut, added: n.added, rawType: n.rawType, warn: n.warn, category: n.category,
       dims: dimConds.filter((c) => c.reverse !== true).map((c) => c.dimension),
       notDims: dimConds.filter((c) => c.reverse === true).map((c) => c.dimension),
     });
@@ -492,7 +545,8 @@ export function buildModel(dump, rawCfg) {
   stats.rules = g.rules.length;
 
   // Objetivos generados a partir de las vetas del registro: uno por veta ("alguna mena de cada veta del Nether").
-  //   {idPrefix, labelPrefix, dimensions, layers?, exclusiveFrom?, requireItem?, without?, allowFinite?, optional?}  más una de estas formas:
+  //   {idPrefix, labelPrefix, dimensions, layers?, exclusiveFrom?, requireItem?, requireRecipe?, without?, allowFinite?, optional?}
+  //   más una de estas formas:
   //   - mena:  {template, mode: 'anyOf'|'allOf'} -> objetivo sobre las menas crudas de la veta (si hay `exclusiveFrom`, solo las
   //            menas que no salen en las vetas de esas dimensiones; sin ninguna se salta la veta). El objeto de cada mena se
   //            resuelve con el registro del volcado (espacio de nombres del material, plantilla, vanilla u otro mod); `overrides`
@@ -500,8 +554,9 @@ export function buildModel(dump, rawCfg) {
   //   - receta: {target: {...}} -> el objeto se copia con {id} (id de la veta sin el trozo "_vein": redstone_vein_ow -> redstone_ow)
   //            y {short} (id sin espacio de nombres) sustituidos en sus textos; p. ej.
   //            {kind:'recipe', type:'gtceu:vein_drilling', input:'grindless:vein_sample_{id}'}
-  //   `requireItem` (con {id}/{short}): las vetas cuyo objeto no existe (p. ej. la muestra de la tabla de la perforadora) no tienen
-  //   objetivo: son vetas de otros mods que el pack no ofrece a la perforadora; se listan en las notas del informe.
+  //   `requireRecipe` ({type, input} con {id}/{short}): solo las vetas que la tabla de la perforadora ofrece, es decir, las que
+  //   tienen una receta de ese tipo que toma su muestra; `requireItem` (más flojo): las que tienen el objeto. Las demás no tienen
+  //   objetivo (vetas de otros mods, apartadas en veins_excluded.json o que esperan a su era) y se listan en las notas.
   const veinMats = (v) => v.mats.map(veinMaterialName);
   const materialsIn = (dims) => {
     const set = new Set();
@@ -509,7 +564,6 @@ export function buildModel(dump, rawCfg) {
     for (const v of dump.veins || []) if (v.dims.some((d) => ds.has(d))) for (const m of veinMats(v)) set.add(m);
     return set;
   };
-  const bareVeinId = (short) => short.replace(/_vein(?=_|$)/, '');
   const veinTargets = (specs, which) => {
     const out = [];
     for (const spec of specs) {
@@ -530,12 +584,9 @@ export function buildModel(dump, rawCfg) {
         if (!v.dims.some((d) => dims.has(d))) continue;
         if (layers && !layers.has(v.layer)) continue;
         const short = v.id.includes(':') ? v.id.split(':')[1] : v.id;
-        if (spec.requireItem) {
-          const item = spec.requireItem.split('{id}').join(bareVeinId(short)).split('{short}').join(short);
-          if (!dump.items.has(item)) {
-            if (!stats.veinsWithoutItem.includes(v.id)) stats.veinsWithoutItem.push(v.id);
-            continue;
-          }
+        if (!veinOffered(v, spec)) {
+          if (!stats.veinsWithoutItem.includes(v.id)) stats.veinsWithoutItem.push(v.id);
+          continue;
         }
         const base = { id: `${spec.idPrefix || 'veta-'}${short}`, label: `${spec.labelPrefix || 'Veta'} ${short}`, ...extras };
         if (spec.target) {
@@ -594,12 +645,16 @@ export function buildModel(dump, rawCfg) {
     for (const k of targetKeys(t)) for (const kk of resolve(k, `objetivo ${t.id}`)) g.key(kk);
   }
   for (const k of [...facts.manual, ...facts.auto, ...facts.bootstrap]) g.key(k);
+  for (const k of cfg.extraFacts) facts.auto.push(k);
+  for (const k of [...cfg.extraFacts, ...cfg.extraKeys]) g.key(k);
   g.finalize();
+  for (const s of worldSources) s.keys = [...new Set(s.keys)].map((k) => g.keyIndex.get(k)).filter((k) => k !== undefined);
 
   const toIds = (arr) => [...new Set(arr)].map((k) => g.key(k));
   const factIds = { manual: toIds(facts.manual), auto: toIds(facts.auto), bootstrap: toIds(facts.bootstrap) };
   return {
     g, cfg, dump, warnings, stats, st, norm, resolve, selLabel, entriesById, typeIndex, ruleOfRecipe, disabledWorld, worldInfo, runnersOf,
+    worldSources,
     facts: factIds,
     manualKeys: new Set([...factIds.manual, ...toIds(manualRuleKeys)]),
     manualFactKeys: new Set(factIds.manual),

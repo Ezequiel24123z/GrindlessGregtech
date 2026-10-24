@@ -24,6 +24,11 @@
 // GTCEuServerEvents.oreVeins across GTM's own re-registration pass). `var` has always been
 // function-scoped with no such restriction, so it is used everywhere here instead. Top-level
 // `const`s (evaluated once, when the file itself loads) are unaffected and kept as `const`.
+//
+// NOTE ON VANILLA NAMES: KubeJS 2001.6.5 renames some vanilla members for scripts (@RemapForJS on its
+// mixins), and the Mojang name then does not exist at all: Entity#getYRot/getXRot are getYaw/getPitch,
+// Level#getGameTime is getTime, Entity#level() is hidden (use getLevel()). Calling getYRot() on a real
+// player threw "Cannot find function getYRot" and the keys did nothing (v0.4.0).
 
 const VOID_DIM = 'grindless:void'
 const FLAT_DIM = 'grindless:flat'
@@ -70,12 +75,12 @@ function getPD(player) {
 
 function isOnCooldown(player, level) {
     var pd = getPD(player)
-    return pd.contains('cooldown_until') && level.getGameTime() < pd.getLong('cooldown_until')
+    return pd.contains('cooldown_until') && level.getTime() < pd.getLong('cooldown_until')
 }
 
 function armCooldown(player, level) {
     updatePD(player, function (sub) {
-        sub.putLong('cooldown_until', level.getGameTime() + COOLDOWN_TICKS)
+        sub.putLong('cooldown_until', level.getTime() + COOLDOWN_TICKS)
     })
 }
 
@@ -85,8 +90,8 @@ function saveReturnPoint(player, dimId) {
         sub.putDouble('return_x', player.getX())
         sub.putDouble('return_y', player.getY())
         sub.putDouble('return_z', player.getZ())
-        sub.putFloat('return_yaw', player.getYRot())
-        sub.putFloat('return_pitch', player.getXRot())
+        sub.putFloat('return_yaw', player.getYaw())
+        sub.putFloat('return_pitch', player.getPitch())
     })
 }
 
@@ -157,11 +162,17 @@ function fallbackSpawn(player, server) {
 function teleportSafely(player, dimId, x, y, z, yaw, pitch) {
     try {
         player.teleportTo(dimId, x, y, z, yaw, pitch)
-        return true
     } catch (e) {
         console.error('[grindless] No se pudo teletransportar a ' + dimId + ': ' + e)
         return false
     }
+    // Another mod can cancel the teleport (Forge travel/teleport events) without throwing.
+    var arrivedDimId = player.getLevel().getDimension().toString()
+    if (arrivedDimId !== dimId) {
+        console.error('[grindless] El teletransporte a ' + dimId + ' no se completó: el jugador sigue en ' + arrivedDimId)
+        return false
+    }
+    return true
 }
 
 // ---------------------------------------------------------------- key behaviour
@@ -191,34 +202,50 @@ function travelToBuildingDimension(player, server, targetDimId) {
         return false
     }
     var landing = computeLanding(targetLevel, targetDimId, player.getX(), player.getZ())
-    return teleportSafely(player, targetDimId, landing.x, landing.y, landing.z, player.getYRot(), player.getXRot())
+    return teleportSafely(player, targetDimId, landing.x, landing.y, landing.z, player.getYaw(), player.getPitch())
 }
 
-function handleKeyUse(player, targetDimId, item) {
+/** true = the player was moved, false = the trip failed, null = ignored (still on cooldown). */
+function useTravelKey(player, targetDimId) {
     var level = player.getLevel()
     var server = player.getServer()
-    if (!level || !server) return
-    if (isOnCooldown(player, level)) return
+    if (!level || !server) return false
+    if (isOnCooldown(player, level)) return null
 
     var curDimId = level.getDimension().toString()
-    var handled
+    var moved
 
     if (curDimId === targetDimId) {
         // already in that dimension -> go back to the saved Overworld (or wherever) return point
-        handled = returnToSavedPosition(player, server)
+        moved = returnToSavedPosition(player, server)
     } else if (isTravelDim(curDimId)) {
         // hopping directly between two of the three travel dimensions: keep the existing return point
-        handled = travelToBuildingDimension(player, server, targetDimId)
+        moved = travelToBuildingDimension(player, server, targetDimId)
     } else {
         // leaving the Overworld (or any other dimension) into a travel dimension
         saveReturnPoint(player, curDimId)
-        handled = travelToBuildingDimension(player, server, targetDimId)
+        moved = travelToBuildingDimension(player, server, targetDimId)
     }
 
-    if (handled) {
-        armCooldown(player, level)
-        player.addItemCooldown(item, COOLDOWN_TICKS) // vanilla hotbar overlay, cosmetic on top of our own check
+    if (moved) armCooldown(player, level)
+    return moved
+}
+
+function handleKeyUse(player, targetDimId, item) {
+    var moved
+    try {
+        moved = useTravelKey(player, targetDimId)
+    } catch (e) {
+        console.error('[grindless] La llave hacia ' + targetDimId + ' ha fallado: ' + e)
+        moved = false
     }
+    if (moved === null) return
+    if (!moved) {
+        // never fail silently: the details are in logs/kubejs/server.log
+        player.setStatusMessage(Text.red(Text.translate('message.grindless.travel_key.failed')))
+        return
+    }
+    player.addItemCooldown(item, COOLDOWN_TICKS) // vanilla hotbar overlay, cosmetic on top of our own check
 }
 
 ItemEvents.rightClicked('grindless:void_key', function (event) { onVoidKeyClicked(event) })

@@ -96,8 +96,10 @@ export class Graph {
  *  tolOk   : si se da, las ranuras "tolerantes" (combustible de una máquina, catalizadores que solo se gastan a veces)
  *            se dan por cumplidas cuando alguna alternativa está en tolOk; así los bucles de arranque (el vapor mueve la
  *            perforadora que da el carbón que alimenta la caldera) no necesitan una entrada "pura".
+ *  blocked : Uint8Array de claves quitadas de toda fuente (regla de eras: los recursos de una era posterior); ninguna regla
+ *            las produce y ningún hecho las da, pero las reglas que las dan como subproducto siguen dando lo demás.
  */
-export function lfp(g, { facts, enabled = null, capOk = null, tolOk = null }) {
+export function lfp(g, { facts, enabled = null, capOk = null, tolOk = null, blocked = null }) {
   const nK = g.nKeys;
   const nR = g.rules.length;
   const nS = g.nSlots;
@@ -125,6 +127,7 @@ export function lfp(g, { facts, enabled = null, capOk = null, tolOk = null }) {
     }
     ruleLevel[r] = lvl + 1;
     for (const o of rule.outs) {
+      if (blocked && blocked[o]) continue;
       if (!reached[o]) {
         reached[o] = 1;
         level[o] = lvl + 1;
@@ -158,6 +161,7 @@ export function lfp(g, { facts, enabled = null, capOk = null, tolOk = null }) {
   }
   for (let r = 0; r < nR; r++) if (remaining[r] === 0) fire(r);
   for (const k of facts) {
+    if (blocked && blocked[k]) continue;
     if (!reached[k]) {
       reached[k] = 1;
       level[k] = 0;
@@ -338,8 +342,9 @@ class MinHeap {
 /**
  * Coste mínimo de "desbloquear" cada clave que no está en `mask`: una clave sin ninguna regla que la produzca (raíz)
  * cuesta 1 y una regla cuesta 1 + la suma de lo que le falta. `best[k]` es la regla de menor coste que produce k.
+ * `blocked`: claves que ninguna regla puede dar (quitadas de toda fuente); solo valen como raíz, con el coste de `rootCost`.
  */
-export function blockCosts(g, { mask, capMask = null, tolMask = null, enabled = null, rootCost = null }) {
+export function blockCosts(g, { mask, capMask = null, tolMask = null, enabled = null, rootCost = null, blocked = null }) {
   const nK = g.nKeys;
   const nR = g.rules.length;
   const cost = new Float64Array(nK).fill(Infinity);
@@ -367,6 +372,7 @@ export function blockCosts(g, { mask, capMask = null, tolMask = null, enabled = 
   const relax = (r) => {
     const rc = 1 + sum[r];
     for (const o of g.rules[r].outs) {
+      if (blocked && blocked[o]) continue;
       if (rc < cost[o]) {
         cost[o] = rc;
         best[o] = r;

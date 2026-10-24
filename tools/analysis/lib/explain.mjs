@@ -138,10 +138,15 @@ export function makeRootCost(model, enabled = null) {
   };
 }
 
-/** Árbol de bloqueo con la cadena más barata hasta las raíces que faltan (blocker = salida de blockerFor). */
+/**
+ * Árbol de bloqueo con la cadena más barata hasta las raíces que faltan (blocker = salida de blockerFor).
+ * `blocker.reasonOf(k)`, si existe, da el motivo de una raíz antes que `rootReason` (la regla de eras nombra así el recurso
+ * de una era posterior que tira de la cadena).
+ */
 export function blockedTree(model, blocker, key, lim = { depth: 8, kids: 4 }) {
   const g = model.g;
   const { cost, best, mask, capMask } = blocker;
+  const reasonOf = (k) => (blocker.reasonOf && blocker.reasonOf(k)) || rootReason(model, k);
   const expandRule = (node, r, depth, path) => {
     node.kids = [];
     const rule = g.rules[r];
@@ -167,12 +172,12 @@ export function blockedTree(model, blocker, key, lim = { depth: 8, kids: 4 }) {
     let r = best[k];
     if (r < 0) {
       if (cost[k] < Infinity) {
-        node.root = rootReason(model, k);
+        node.root = reasonOf(k);
         return node;
       }
       const prods = g.producers(k);
       if (prods.length === 0) {
-        node.root = rootReason(model, k);
+        node.root = reasonOf(k);
         return node;
       }
       // Sin ruta finita: solo quedan ciclos sin salida. Se sigue la receta con menos ranuras pendientes.

@@ -8,6 +8,9 @@
 // registered items, and (bonus, non-fatal) whether GT ore veins show up underground in
 // grindless:flat.
 //
+// It does NOT use the keys: there is no player in the server suite. The real right-click path (event,
+// handler, teleport, client) is covered by gg_test_dimension_keys.js in the client suite.
+//
 // Uses `var` + plain `function` everywhere (see the matching note in
 // server_scripts/grindless/dimensions.js): a const/let declared directly inside a function that
 // KubeJS/Rhino can end up invoking more than once in a session throws a "redeclaration of var X"
@@ -147,9 +150,8 @@ function runDimensionsTest(event) {
     // server_scripts share one global scope, so computeLanding (from dimensions.js) is callable
     // here directly without a real player. Calling it *twice* in a row specifically re-checks the
     // "redeclaration of var" Rhino bug this suite caught earlier (a function invoked more than
-    // once that declares its own locals): this is the real per-use teleport landing logic, not a
-    // fake stand-in, so a second clean call is good evidence the actual key-use path (which runs
-    // this same function on every right click) will not break on a second use either.
+    // once that declares its own locals). It only covers the landing helper: the rest of the key
+    // handler (player rotation, cooldown, teleport) needs a real player, see gg_test_dimension_keys.js.
     ggSafely('teleport_landing_logic_repeatable', function () {
         if (!voidLevel || !flatLevel) throw 'a dimension is missing'
         var firstVoid = computeLanding(voidLevel, 'grindless:void', 100.0, 100.0)

@@ -346,7 +346,7 @@
       "idPrefix": "auto-perforacion-mv-",
       "labelPrefix": "Perforadora MV con broca vanádica: receta de la veta",
       "dimensions": ["minecraft:overworld", "minecraft:the_nether"],
-      "requireItem": "grindless:vein_sample_{id}",
+      "requireRecipe": { "type": "gtceu:vein_drilling", "input": "grindless:vein_sample_{id}" },
       "target": { "kind": "recipe", "type": "gtceu:vein_drilling", "input": ["grindless:vein_sample_{id}", "grindless:vanadium_steel_drill_bit"] }
     }
   ],
@@ -411,5 +411,34 @@
     { "id": "auto-integrado-avanzado", "label": "Circuito integrado avanzado (HV)", "item": "gtceu:advanced_integrated_circuit" },
     { "id": "auto-traje-peto", "label": "Traje antipeligro (peto: placas de PVC, goma y filtro)", "item": "gtceu:hazmat_chestpiece" },
     { "id": "auto-casco-hv", "label": "Casco HV", "item": "gtceu:hv_machine_hull" }
+  ],
+
+  "eraItems": [
+    { "id": "mv-gtm", "label": "Máquinas, piezas y componentes MV de GTM (gtceu:mv_*)", "items": ["gtceu:mv_*"] },
+    {
+      "id": "mv-multibloques",
+      "label": "Multibloques del MV formados: los nuestros y los de GTM que modela el tier",
+      "items": [
+        "m:gtceu:mv_vein_drill", "m:gtceu:mv_greenhouse", "m:gtceu:ore_plant", "m:gtceu:biorefinery", "m:gtceu:pyrolyse_oven",
+        "m:gtceu:mv_fluid_drilling_rig", "m:gtceu:electric_blast_furnace@mv-cuproniquel", "m:gtceu:electric_blast_furnace@lv-kanthal",
+        "m:gtceu:electric_blast_furnace@mv-kanthal"
+      ]
+    },
+    {
+      "id": "mv-objetos",
+      "label": "Objetos del MV: broca vanádica, modelo de creeper, traje antipeligro y las puertas de los mods",
+      "items": [
+        "grindless:vanadium_steel_drill_bit", "grindless:creature_model_creeper", "gtceu:hazmat_headpiece", "gtceu:hazmat_chestpiece",
+        "gtceu:hazmat_leggings", "gtceu:hazmat_boots", "enderchests:ender_chest", "enderchests:ender_bag", "endertanks:ender_tank",
+        "endertanks:ender_bucket", "sophisticatedbackpacks:gold_backpack"
+      ]
+    },
+    { "id": "mv-perforadora", "label": "Lo que pide la perforadora MV: la broca y las muestras de sus recetas", "inputsOf": ["grindless:vein_drilling/mv/*"] },
+    {
+      "id": "salida-mv",
+      "era": "hv",
+      "label": "Salida de MV: la puerta a HV (casco, motor, bomba y circuito HV), que ya es de HV",
+      "items": ["gtceu:hv_machine_hull", "gtceu:hv_electric_motor", "gtceu:hv_electric_pump", "gtceu:advanced_integrated_circuit"]
+    }
   ]
 }

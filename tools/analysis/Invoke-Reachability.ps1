@@ -10,13 +10,17 @@
 
   Codigo de salida: 0 = PASS, 1 = hay FAIL/WARN en el analisis, 2 = fallo de la herramienta (volcado, Node, datos).
 
-.PARAMETER Tier       Nombre del tier (tiers\<Tier>.json): steam, lv, mv...
+.PARAMETER Tier       Nombre del tier (tiers\<Tier>.json): steam, lv, mv, hv... o next/<tier> para la capa preparada de la
+                      version siguiente (tiers\next\<tier>.json, sin activar).
 .PARAMETER SkipDump   No arranca el servidor: reutiliza -DumpDir o, si falta, el ultimo volcado (out\latest.txt).
 .PARAMETER DumpDir    Carpeta con recipes.json, tags.json, items.json, machines.json, veins.json, info.json.
 .PARAMETER OutDir     Carpeta de salida (por defecto tools\analysis\out\<fecha>-<Tier>).
 .PARAMETER NodeExe    Ruta a node.exe. Si falta: $env:GG_NODE, node del PATH (>= 18), tools\analysis\.work\node y, en
                       ultimo caso, descarga un Node LTS portatil (zip oficial) en tools\analysis\.work\node.
-.PARAMETER Pass       both (por defecto), gate (solo la puerta) o auto (solo la generacion automatica).
+.PARAMETER Pass       both (por defecto: puerta, automatico y regla de eras), gate (solo la puerta), auto (solo la generacion
+                      automatica), eras (solo la regla de eras: nada de una era pide un recurso de una era posterior) u obtain
+                      (auditoria de lo que no se consigue nunca, con tiers\obtain.json si el tier no trae seccion "obtain";
+                      ademas del texto y el JSON deja report-<Tier>.md). Con -Tier obtain el paso es siempre obtain.
 .PARAMETER Dimension  Dimension donde se hace la fabrica: all (por defecto: todas las de `contexts` del tier, p. ej. Overworld,
                       Llano y Vacio), o un id como grindless:flat. Cambia el aire del colector y los yacimientos de fluidos.
 .PARAMETER Explain    Imprime la derivacion completa de los objetivos cuyo id/nombre contenga este texto.
@@ -29,6 +33,8 @@
   powershell -NoProfile -ExecutionPolicy Bypass -File tools\analysis\Invoke-Reachability.ps1 -Tier steam
 .EXAMPLE
   powershell -NoProfile -ExecutionPolicy Bypass -File tools\analysis\Invoke-Reachability.ps1 -Tier steam -SkipDump -Explain perforadora
+.EXAMPLE
+  powershell -NoProfile -ExecutionPolicy Bypass -File tools\analysis\Invoke-Reachability.ps1 -Tier obtain -SkipDump -DumpDir <volcado>
 #>
 param(
     [Parameter(Mandatory = $true)][string]$Tier,
@@ -36,7 +42,7 @@ param(
     [string]$DumpDir,
     [string]$OutDir,
     [string]$NodeExe,
-    [ValidateSet('both', 'gate', 'auto')][string]$Pass = 'both',
+    [ValidateSet('both', 'gate', 'auto', 'eras', 'obtain')][string]$Pass = 'both',
     [string]$Dimension = 'all',
     [string]$Explain,
     [switch]$Detail,
@@ -54,6 +60,8 @@ $Analyzer = Join-Path $Here 'reachability.mjs'
 $Harness = Join-Path $Repo 'tools\test\Invoke-GGTest.ps1'
 $DumpScript = Join-Path $Repo 'tools\test\overlay\kubejs\server_scripts\gg_dump.js'
 $MinNodeMajor = 18
+# nombre del tier apto para rutas: next/hv -> next-hv
+$TierName = $Tier -replace '[\\/]', '-'
 
 function Write-Step([string]$msg) { Write-Host ("[reachability] " + $msg) -ForegroundColor Cyan }
 function Fail([string]$msg, [int]$code = 2) { Write-Host ("[reachability] ERROR: " + $msg) -ForegroundColor Red; exit $code }
@@ -117,7 +125,7 @@ function Test-DumpDir([string]$dir) {
 function Invoke-Dump([string]$runDir) {
     if (-not (Test-Path $Harness)) { Fail "no existe $Harness" }
     if (-not (Test-Path $DumpScript)) { Fail "no existe $DumpScript" }
-    $overlay = Join-Path $Work "overlay-$Tier"
+    $overlay = Join-Path $Work "overlay-$TierName"
     if (Test-Path $overlay) { Remove-Item $overlay -Recurse -Force }
     New-Item -ItemType Directory -Force -Path (Join-Path $overlay 'kubejs\server_scripts') | Out-Null
     New-Item -ItemType Directory -Force -Path (Join-Path $overlay 'kubejs\exported') | Out-Null
@@ -167,7 +175,7 @@ try { [Console]::OutputEncoding = [System.Text.Encoding]::UTF8; $OutputEncoding 
 
 if (-not (Test-Path $Analyzer)) { Fail "no existe $Analyzer" }
 if (-not (Test-Path (Join-Path $Here "tiers\$Tier.json"))) { Fail "no existe tiers\$Tier.json (tiers disponibles: $((Get-ChildItem (Join-Path $Here 'tiers') -Filter *.json).BaseName -join ', '))" }
-if (-not $OutDir) { $OutDir = Join-Path $OutRoot ((Get-Date -Format 'yyyyMMdd-HHmmss') + '-' + $Tier) }
+if (-not $OutDir) { $OutDir = Join-Path $OutRoot ((Get-Date -Format 'yyyyMMdd-HHmmss') + '-' + $TierName) }
 New-Item -ItemType Directory -Force -Path $OutDir | Out-Null
 
 $node = Resolve-Node
@@ -187,8 +195,9 @@ if ($SkipDump) {
     Set-Content -Path (Join-Path $OutRoot 'latest.txt') -Value $DumpDir -Encoding UTF8
 }
 
-$report = Join-Path $OutDir "report-$Tier.txt"
-$aargs = @($Analyzer, '--tier', $Tier, '--dump', $DumpDir, '--pass', $Pass, '--dimension', $Dimension, '--out', $report, '--json', (Join-Path $OutDir "report-$Tier.json"))
+$report = Join-Path $OutDir "report-$TierName.txt"
+$aargs = @($Analyzer, '--tier', $Tier, '--dump', $DumpDir, '--pass', $Pass, '--dimension', $Dimension, '--out', $report, '--json', (Join-Path $OutDir "report-$TierName.json"))
+if ($Pass -eq 'obtain' -or $Tier -eq 'obtain') { $aargs += @('--md', (Join-Path $OutDir "report-$TierName.md")) }
 if ($Explain) { $aargs += @('--explain', $Explain) }
 if ($Detail) { $aargs += '--verbose' }
 Write-Step "Analisis: $Tier ($Pass)"

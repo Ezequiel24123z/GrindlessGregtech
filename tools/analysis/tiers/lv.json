@@ -236,14 +236,14 @@
       "idPrefix": "auto-perforacion-nether-",
       "labelPrefix": "Perforadora LV con lodo: receta de la veta del Nether",
       "dimensions": ["minecraft:the_nether"],
-      "requireItem": "grindless:vein_sample_{id}",
+      "requireRecipe": { "type": "gtceu:vein_drilling", "input": "grindless:vein_sample_{id}" },
       "target": { "kind": "recipe", "type": "gtceu:vein_drilling", "input": ["grindless:vein_sample_{id}", "fluid:gtceu:drilling_fluid"] }
     },
     {
       "idPrefix": "auto-mena-nether-",
       "labelPrefix": "Menas exclusivas de la veta del Nether",
       "dimensions": ["minecraft:the_nether"],
-      "requireItem": "grindless:vein_sample_{id}",
+      "requireRecipe": { "type": "gtceu:vein_drilling", "input": "grindless:vein_sample_{id}" },
       "exclusiveFrom": ["minecraft:overworld"],
       "template": "gtceu:raw_{m}",
       "mode": "anyOf"
@@ -284,5 +284,40 @@
     { "id": "auto-procesador-logica", "label": "Procesadores de lógica", "item": "ae2:logic_processor" },
     { "id": "auto-procesador-calculo", "label": "Procesadores de cálculo", "item": "ae2:calculation_processor" },
     { "id": "auto-procesador-ingenieria", "label": "Procesadores de ingeniería", "item": "ae2:engineering_processor" }
+  ],
+
+  "eraResources": [
+    {
+      "id": "nether",
+      "label": "el Nether (sus vetas: un viaje a mano)",
+      "dimensions": ["minecraft:the_nether"],
+      "note": "LV abre el Nether (regla de mundo menas-nether): nada del vapor puede pedir lo que solo sale de allí."
+    }
+  ],
+
+  "eraItems": [
+    { "id": "lv-gtm", "label": "Máquinas, piezas y componentes LV de GTM (gtceu:lv_*)", "items": ["gtceu:lv_*"] },
+    {
+      "id": "lv-multibloques",
+      "label": "Multibloques del LV formados: nuestra perforadora, invernadero y horno de arco, y el EBF con 2 escotillas LV",
+      "items": ["m:gtceu:lv_vein_drill", "m:gtceu:lv_greenhouse", "m:gtceu:submerged_arc_furnace", "m:gtceu:electric_blast_furnace"]
+    },
+    {
+      "id": "lv-objetos",
+      "label": "Objetos del LV: electrodo, modelos de criatura del LV y caldera grande de bronce",
+      "items": [
+        "grindless:graphite_electrode", "grindless:blank_creature_model", "grindless:creature_model_skeleton", "grindless:creature_model_spider",
+        "grindless:creature_model_slime", "grindless:creature_model_sheep", "grindless:creature_model_cow", "grindless:creature_model_chicken",
+        "grindless:creature_model_enderman", "gtceu:bronze_large_boiler"
+      ]
+    },
+    { "id": "lv-perforadora", "label": "Lo que pide la perforadora LV: la broca, el lodo y las muestras de sus recetas", "inputsOf": ["grindless:vein_drilling/lv/*"] },
+    { "id": "lv-ae2", "label": "AE2 base (entero en LV, decisión del 2026-10-24)", "items": ["ae2:*"] },
+    {
+      "id": "salida-lv",
+      "era": "mv",
+      "label": "Salida de LV: la puerta a MV (casco y circuito MV), que ya es de MV",
+      "items": ["gtceu:mv_machine_hull", "gtceu:good_electronic_circuit"]
+    }
   ]
 }

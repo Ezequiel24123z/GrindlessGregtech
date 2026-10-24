@@ -1,6 +1,7 @@
 // Informe de texto y JSON.
 import { blockedRoots, blockedRuleTree, blockedTree, derivationTree, describeRule, keyName, machinelessTree, renderTree } from './explain.mjs';
 import { blockerFor, evalTarget, STATUS } from './analyze.mjs';
+import { evaluateEras } from './eras.mjs';
 import { asArray, sortedEntries } from './util.mjs';
 
 const MARK = { PASS: 'PASS', FAIL: 'FAIL', WARN: 'WARN' };
@@ -181,18 +182,25 @@ function matches(needle, t, model, r) {
     (r.key !== null && r.key !== undefined && keyName(model.g, r.key).toLowerCase().includes(n));
 }
 
+/** Pasos que se ejecutan: `both` (por defecto) = puerta, automático y eras; o solo `gate`, `auto` o `eras`. */
+export function passesOf(pass = 'both') {
+  return { gate: pass === 'both' || pass === 'gate', auto: pass === 'both' || pass === 'auto', eras: pass === 'both' || pass === 'eras' };
+}
+
 export function analyze(model, res, opts = {}) {
   const cache = new Map();
-  const pass = opts.pass || 'both';
-  const gate = pass === 'auto' ? [] : evaluateAll(model, res, model.cfg.targets, 'gate', cache, opts);
-  const auto = pass === 'gate' ? [] : evaluateAll(model, res, model.cfg.autoTargets, 'auto', cache, opts);
+  const run = passesOf(opts.pass);
+  const gate = run.gate ? evaluateAll(model, res, model.cfg.targets, 'gate', cache, opts) : [];
+  const auto = run.auto ? evaluateAll(model, res, model.cfg.autoTargets, 'auto', cache, opts) : [];
+  const eras = run.eras ? evaluateEras(model, res) : null;
   const count = (arr, v) => arr.filter((x) => x.verdict === v).length;
-  const verdict = gate.some(blocking) || auto.some(blocking) ? 'FAIL' : 'PASS';
+  const verdict = gate.some(blocking) || auto.some(blocking) || (eras && eras.verdict === 'FAIL') ? 'FAIL' : 'PASS';
   return {
-    gate, auto, verdict,
+    gate, auto, eras, verdict,
     counts: {
       gate: { pass: count(gate, 'PASS'), warn: count(gate, 'WARN'), total: gate.length },
       auto: { pass: count(auto, 'PASS'), warn: count(auto, 'WARN'), total: auto.length },
+      eras: eras && eras.active ? eras.counts : { pass: 0, warn: 0, total: 0 },
     },
   };
 }
@@ -225,13 +233,35 @@ export function renderText(model, res, out, opts = {}) {
       for (const l of rest) L.push('        ' + l);
     }
   };
-  if (opts.pass !== 'auto') {
+  const run = passesOf(opts.pass);
+  if (run.gate) {
     section('PASO 1 · PUERTA — se permite recoger a mano para arrancar', out.gate,
       `${out.counts.gate.pass}/${out.counts.gate.total} PASS${out.counts.gate.warn ? `, ${out.counts.gate.warn} avisos` : ''}`);
   }
-  if (opts.pass !== 'gate') {
+  if (run.auto) {
     section('PASO 2 · AUTOMÁTICO — sin recoger a mano salvo el arranque declarado', out.auto,
       `${out.counts.auto.pass}/${out.counts.auto.total} PASS${out.counts.auto.warn ? `, ${out.counts.auto.warn} avisos (fuente finita u opcional)` : ''}`);
+  }
+  if (run.eras && out.eras && out.eras.active) {
+    const e = out.eras;
+    L.push('');
+    L.push(`PASO 3 · ERAS — nada de una era pide un recurso que sale en una era posterior   [${e.counts.pass}/${e.counts.total} PASS${e.counts.warn ? `, ${e.counts.warn} avisos` : ''}]`);
+    L.push('  recursos por era (se quitan de toda fuente: vetas, subproductos, abejas, addons y las fuentes de su dimensión):');
+    for (const r of e.resources) {
+      const what = [];
+      if (r.keys > 0) what.push(`${r.keys} objetos y fluidos`);
+      if (r.dims.length > 0) what.push(`dimensión ${r.dims.join(', ')}${r.sources.length > 0 ? ` (fuentes del mundo: ${r.sources.join(', ')})` : ''}`);
+      if (r.onlyFrom.length > 0) what.push(`solo de ${r.onlyFrom.join(', ')}`);
+      L.push(`    ${r.era.padEnd(5)} ${r.label}: ${what.join(' · ') || '(nada)'}`);
+    }
+    for (const x of e.groups) {
+      L.push(`  ${x.verdict}  ${x.group.era}: ${x.group.label}${x.verdict === 'PASS' ? '  ·  ' + x.lines[0] : ''}`);
+      for (const l of x.verdict === 'PASS' ? x.lines.slice(1) : x.lines) L.push('        ' + l);
+    }
+    for (const x of e.exclusive) {
+      L.push(`  ${x.verdict}  ${x.resource.era}: ${x.resource.label} solo sale de ${x.resource.onlyFrom.join(', ')}${x.verdict === 'PASS' ? '  ·  ' + x.lines[0] : ''}`);
+      for (const l of x.verdict === 'PASS' ? x.lines.slice(1) : x.lines) L.push('        ' + l);
+    }
   }
   L.push('');
   L.push('NOTAS');
@@ -262,15 +292,23 @@ export function renderText(model, res, out, opts = {}) {
     for (const [k, machines] of byWhy) L.push(`  - pieza que la config de GTM no exige: ${k} en ${machines.join(', ')}`);
   }
   if (model.stats.veinsWithoutItem.length > 0) {
-    L.push(`  - vetas del registro sin objeto de la tabla de la perforadora (de otros mods o que el pack aún no ofrece, p. ej. las radiactivas del End; no se comprueban): ${model.stats.veinsWithoutItem.join(', ')}`);
+    L.push(`  - vetas del registro que la tabla de la perforadora no ofrece (sin muestra o sin receta de perforación: de otros mods, apartadas en veins_excluded.json o que esperan a su era; no se comprueban): ${model.stats.veinsWithoutItem.join(', ')}`);
   }
   L.push('  - análisis cualitativo: ignora cantidades, tiempos y rendimientos; las salidas con probabilidad cuentan como producidas.');
   L.push('');
-  const parts = [];
-  if (opts.pass !== 'auto') parts.push(`puerta ${out.counts.gate.pass}/${out.counts.gate.total}${out.counts.gate.warn ? ` (+${out.counts.gate.warn} avisos)` : ''}`);
-  if (opts.pass !== 'gate') parts.push(`automático ${out.counts.auto.pass}/${out.counts.auto.total}${out.counts.auto.warn ? ` (+${out.counts.auto.warn} avisos)` : ''}`);
-  L.push(`VEREDICTO: ${out.verdict}  (${parts.join(' · ')})`);
+  L.push(`VEREDICTO: ${out.verdict}  (${summaryParts(out, opts.pass).join(' · ')})`);
   return L.join('\n') + '\n';
+}
+
+/** Trozos del resumen ("puerta 3/3 · automático 2/2 · eras 5/5") según los pasos ejecutados. */
+export function summaryParts(out, pass) {
+  const run = passesOf(pass);
+  const c = out.counts;
+  const parts = [];
+  if (run.gate) parts.push(`puerta ${c.gate.pass}/${c.gate.total}${c.gate.warn ? ` (+${c.gate.warn} avisos)` : ''}`);
+  if (run.auto) parts.push(`automático ${c.auto.pass}/${c.auto.total}${c.auto.warn ? ` (+${c.auto.warn} avisos)` : ''}`);
+  if (run.eras && c.eras && c.eras.total > 0) parts.push(`eras ${c.eras.pass}/${c.eras.total}${c.eras.warn ? ` (+${c.eras.warn} avisos)` : ''}`);
+  return parts;
 }
 
 export function toJson(model, res, out) {
@@ -279,9 +317,20 @@ export function toJson(model, res, out) {
     id: r.target.id, label: r.target.label || r.target.id, verdict: r.verdict, status: r.status,
     key: r.key !== null && r.key !== undefined ? keyName(g, r.key) : null, without: r.target.without || null, detail: r.lines,
   });
+  const eras = out.eras && out.eras.active ? {
+    verdict: out.eras.verdict, counts: out.eras.counts, resources: out.eras.resources,
+    groups: out.eras.groups.map((x) => ({
+      id: x.group.id, era: x.group.era, label: x.group.label, optional: !!x.group.optional, verdict: x.verdict, counts: x.counts,
+      violations: x.violations, unreachable: x.unreachable, missing: x.missing, later: x.later, detail: x.lines,
+    })),
+    exclusive: out.eras.exclusive.map((x) => ({
+      id: x.resource.id, era: x.resource.era, label: x.resource.label, onlyFrom: x.resource.onlyFrom, verdict: x.verdict,
+      leaked: x.leaked, entries: x.entries, recycled: x.recycled || 0, detail: x.lines,
+    })),
+  } : null;
   return {
     tier: model.cfg.tier, verdict: out.verdict, counts: out.counts, warnings: model.warnings,
-    gate: out.gate.map(row), auto: out.auto.map(row),
+    gate: out.gate.map(row), auto: out.auto.map(row), eras,
     stats: {
       rules: g.rules.length, recipes: model.stats.recipes, deadByType: model.stats.deadByType, ignoredByType: model.stats.ignoredByType,
       structureMachines: model.stats.structureMachineIds, rolledMachines: model.stats.rolledMachines,

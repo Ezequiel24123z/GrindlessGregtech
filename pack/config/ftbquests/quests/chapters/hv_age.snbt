@@ -12,7 +12,7 @@
 			dependencies: ["53336232501835EE"]
 			description: [
 				"The cleanroom is up and circuits just got a wall built around them. Everything past this gate either comes from inside that room or feeds it."
-				"HV is where the pack turns into a real GregTech pack: oil gets refined, not just burned, and titanium needs its own chain end to end."
+				"HV is where the pack turns into a real GregTech pack: oil gets refined, not just burned, every machine is built from stainless steel, and titanium is the way out."
 			]
 			icon: "gtceu:hv_machine_hull"
 			id: "B610F788A08B9FD3"
@@ -138,12 +138,12 @@
 		}
 		{
 			dependencies: ["F21FA9268C278B3F"]
-			description: ["The lightest, longest-lasting bit yet, made from the same titanium this chapter is about to give you. The vanadium steel bit still works until then."]
-			icon: "grindless:titanium_drill_bit"
+			description: ["The longest-lasting bit yet, cut from the same stainless steel as every other HV part. The vanadium steel bit still works if you run out."]
+			icon: "grindless:stainless_steel_drill_bit"
 			id: "ACD2C8EF5A408796"
 			rewards: [{ id: "B96C938D1616ED8E", type: "xp", xp: 25 }]
-			tasks: [{ count: 4L, id: "C222DE23EA3992E8", item: "grindless:titanium_drill_bit", type: "item" }]
-			title: "Titanium Drill Bit"
+			tasks: [{ count: 4L, id: "C222DE23EA3992E8", item: "grindless:stainless_steel_drill_bit", type: "item" }]
+			title: "Stainless Steel Drill Bit"
 			x: 12.5d
 			y: 3.0d
 		}
@@ -164,8 +164,8 @@
 		{
 			dependencies: ["F56117B334515EA3", "ACD2C8EF5A408796"]
 			description: [
-				"Four veins, four samples, one trip: bauxite with ilmenite, magnetite with vanadium and gold, scheelite with tungsten, and sheldonite with platinum and palladium."
-				"The other two End veins are radioactive - nobody needs them before IV."
+				"Four veins, four samples, one trip: bauxite with aluminium (and some ilmenite), magnetite with vanadium and gold, sheldonite with platinum and palladium, and zircon."
+				"The End's scheelite waits for Mars, and its two radioactive veins for IV."
 			]
 			icon: "grindless:vein_sample_sheldonite"
 			id: "804525B795119B1B"
@@ -387,8 +387,8 @@
 		{
 			dependencies: ["53D1CE971F63D842", "804525B795119B1B"]
 			description: [
-				"Ilmenite from the End, or rutile from MV bauxite, turns into titanium tetrachloride with chlorine and carbon; the Kanthal EBF reduces it with magnesium into a hot ingot, and only the vacuum freezer cools it solid."
-				"The magnesium chloride left behind splits back into magnesium and salt with sodium - the salt feeds the electrolyzer again."
+				"Titanium is the way out of HV: nothing in this chapter is built from it, but the EV hull, motor and pump are. For now it comes from the ilmenite in the End's bauxite vein."
+				"Chlorine and carbon turn ilmenite into titanium tetrachloride; the Kanthal EBF reduces it with magnesium into a hot ingot, and only the vacuum freezer cools it solid. The magnesium chloride left behind splits back into magnesium and salt with sodium."
 			]
 			icon: "gtceu:titanium_ingot"
 			id: "94DF849D657D6AEF"
@@ -410,15 +410,12 @@
 			y: -6.0d
 		}
 		{
-			dependencies: ["94DF849D657D6AEF"]
-			description: ["Stainless steel and titanium drums hold far more fluid than any tank GTM gave you before - park one under every machine that floods a bus."]
-			icon: "gtceu:titanium_drum"
+			dependencies: ["35719B747A75F7B6"]
+			description: ["Stainless steel drums hold far more fluid than any tank GTM gave you before - park one under every machine that floods a bus."]
+			icon: "gtceu:stainless_steel_drum"
 			id: "471A024EBFCA8459"
 			rewards: [{ id: "E707FD083533EF59", type: "xp", xp: 30 }]
-			tasks: [
-				{ id: "B36736F34B2A70B0", item: "gtceu:stainless_steel_drum", type: "item" }
-				{ id: "F7B406FEED9779D8", item: "gtceu:titanium_drum", type: "item" }
-			]
+			tasks: [{ id: "B36736F34B2A70B0", item: "gtceu:stainless_steel_drum", type: "item" }]
 			title: "GT Drums"
 			x: 30.5d
 			y: -3.0d
@@ -454,7 +451,7 @@
 		}
 		{
 			dependencies: ["94DF849D657D6AEF", "35719B747A75F7B6"]
-			description: ["Eight titanium plates, two aluminium cables and a sheet of polyethylene - the &6EV Machine Hull&r is one size up, and every ingredient already has a line behind it."]
+			description: ["Eight titanium plates, two aluminium cables and a sheet of polyethylene make the &6EV Machine Hull&r. Titanium is the way out of HV, and this hull is the first thing it builds."]
 			icon: "gtceu:ev_machine_hull"
 			id: "61ECF6270ECCE3C2"
 			rewards: [{ id: "6DE5A471269B3A5D", type: "xp", xp: 40 }]
@@ -478,7 +475,7 @@
 			dependencies: ["E457FB82BC6D3618"]
 			description: [
 				"Titanium rods, a neodymium magnet and double aluminium cable wind into the &6EV Motor&r; a titanium pipe, a stainless rotor and rubber rings make the &6EV Pump&r."
-				"Neodymium rides the monazite vein in the Nether - gate-only parts, EV itself is next."
+				"Gate parts only: like the hull, they take titanium because titanium is the way out of HV. Neodymium rides the monazite vein in the Nether."
 			]
 			icon: "gtceu:ev_electric_motor"
 			id: "964F0808EF9DF557"
@@ -511,4 +508,5 @@
 			y: 0.0d
 		}
 	]
+	title: "HV: Moonshot"
 }

@@ -4,7 +4,7 @@
   "extends": "mv",
   "inheritTargets": true,
   "dropTargets": ["ojo-ender-no-antes-de-hv", "polvo-blaze-no-antes-de-hv", "vara-blaze-no-antes-de-hv"],
-  "note": "Era HV según docs/eras/hv.md y sus \"Decisiones tomadas\" (que mandan): el End entra con las vetas de la tabla (GTM: bauxita_end, magnetita_end, scheelita y sheldonita; GT Community Additions: zirconio; las radiactivas esperan a IV), llave del End (un solo viaje con dos menas por veta), refinería (gtceu:refinery, tipo gtceu:refining, catalizador de cobalto y molibdeno) y reformador (gtceu:reformer, tipo gtceu:reforming, recortable: WARN si falta), perforadora e invernadero HV, ojo de ender SOLO por la vía de GT (polvo de blaze -> extractor -> baño químico; la receta vanilla se quita), titanio de Kroll (se enfría solo en el congelador de vacío, que pide 2 circuitos EV), circuitos EV de la cámara limpia, PTFE, epoxi, SBR y gasolina de GTM enteros. El AE2 base sigue entero en LV (se hereda su regresión) y el mantenimiento está apagado. Hereda del MV el mundo, las máquinas y TODOS los objetivos (regresión), salvo las tres comprobaciones de fuga que en HV dejan de valer (ojo de ender, polvo y vara de blaze). Energía: las máquinas de un bloque gtceu:hv_* (del registro) corren recetas de hasta 512 V; eu:ev sale del transformador HV -> EV sobre la red HV; no se modelan cables, amperios ni baterías. Multibloques de GTM (cámara limpia, congelador de vacío, craqueador, torre de destilación, reactor químico grande, EBF): su energía sigue la regla de GTM 7.5.3 (WorkableElectricMultiblockMachine.getMaxVoltage: 2 escotillas del mismo nivel suben un escalón), así que con 2 escotillas MV corren recetas de 480 EU/t y con 2 HV las de 1 920 EU/t. Los multibloques del pack exigen la escotilla HV (su diseño: 1-2 escotillas HV; el patrón admite cualquier nivel, pero el análisis sigue el diseño). Condición de cámara limpia (cleanroom): se cumple si la cámara limpia está construida y alimentada (se construye una vez); la estéril sigue sin soportarse (es de UV). Las menas del End no son un hecho del mundo: la regla `menas-end` exige la llave del End (un viaje) y sus menas valen como arranque, no como recurso repuesto; solo se cuentan las vetas que el pack ofrece a la perforadora (las que tienen muestra). El balance de H2 es cualitativo (existe un camino sostenible de H2 con y sin reformador): no se modelan cantidades. Los vetos de las máquinas del pack por nombre de receta no se modelan: la perforadora y el invernadero HV se comprueban apagando las demás con `without` (operar:...). La escotilla de energía EV pide un ensamblador EV (1 920 EU/t) y un cortador EV, que son las dos únicas máquinas EV que se modelan.",
+  "note": "Era HV según docs/eras/hv.md y sus \"Decisiones tomadas\" (que mandan), con el retoque de HV a inox (v0.4.1: HV sin titanio salvo la salida a EV): el End entra con las vetas de la tabla (GTM: bauxita_end, magnetita_end y sheldonita; GT Community Additions: zirconio; la de scheelita pasa a veins_excluded.json, camino de Marte, y las radiactivas esperan a IV), llave del End (un solo viaje con dos menas por veta), refinería (gtceu:refinery, tipo gtceu:refining, catalizador de cobalto y molibdeno) y reformador (gtceu:reformer, tipo gtceu:reforming, recortable: WARN si falta), perforadora e invernadero HV con la broca de acero inoxidable (la de titanio queda registrada, oculta, y se convierte 1:1 en la de inox), primer cohete y traje espacial de GCYR en HV (inox y kapton), ojo de ender SOLO por la vía de GT (polvo de blaze -> extractor -> baño químico; la receta vanilla se quita), titanio de Kroll solo para la salida a EV (casco, motor y bomba EV: en esta versión de transición, de la ilmenita del End y del rutilo de la bauxita; se enfría solo en el congelador de vacío, que pide 2 circuitos EV), circuitos EV de la cámara limpia, PTFE, epoxi, SBR y gasolina de GTM enteros. El AE2 base sigue entero en LV (se hereda su regresión) y el mantenimiento está apagado. Hereda del MV el mundo, las máquinas y TODOS los objetivos (regresión), salvo las tres comprobaciones de fuga que en HV dejan de valer (ojo de ender, polvo y vara de blaze). Energía: las máquinas de un bloque gtceu:hv_* (del registro) corren recetas de hasta 512 V; eu:ev sale del transformador HV -> EV sobre la red HV; no se modelan cables, amperios ni baterías. Multibloques de GTM (cámara limpia, congelador de vacío, craqueador, torre de destilación, reactor químico grande, EBF): su energía sigue la regla de GTM 7.5.3 (WorkableElectricMultiblockMachine.getMaxVoltage: 2 escotillas del mismo nivel suben un escalón), así que con 2 escotillas MV corren recetas de 480 EU/t y con 2 HV las de 1 920 EU/t. Los multibloques del pack exigen la escotilla HV (su diseño: 1-2 escotillas HV; el patrón admite cualquier nivel, pero el análisis sigue el diseño). Condición de cámara limpia (cleanroom): se cumple si la cámara limpia está construida y alimentada (se construye una vez); la estéril sigue sin soportarse (es de UV). Las menas del End no son un hecho del mundo: la regla `menas-end` exige la llave del End (un viaje) y sus menas valen como arranque, no como recurso repuesto; solo se cuentan las vetas que la tabla de la perforadora ofrece (las que tienen recetas de perforación; una muestra oculta de una veta apartada no cuenta). El balance de H2 es cualitativo (existe un camino sostenible de H2 con y sin reformador): no se modelan cantidades. Los vetos de las máquinas del pack por nombre de receta no se modelan: la perforadora y el invernadero HV se comprueban apagando las demás con `without` (operar:...). La escotilla de energía EV pide un ensamblador EV (1 920 EU/t) y un cortador EV, que son las dos únicas máquinas EV que se modelan.",
 
   "contexts": ["minecraft:overworld", "grindless:flat", "grindless:void"],
 
@@ -21,9 +21,9 @@
       "bootstrap": true,
       "needs": ["grindless:end_key"],
       "template": "gtceu:raw_{m}",
-      "fromVeins": { "dimensions": ["minecraft:the_end"], "requireItem": "grindless:vein_sample_{id}" },
+      "fromVeins": { "dimensions": ["minecraft:the_end"], "requireRecipe": { "type": "gtceu:vein_drilling", "input": "grindless:vein_sample_{id}" } },
       "materials": [],
-      "note": "Decisión 2 y 4 de HV: la llave del End (ojo de ender + palo + obsidiana) lleva a una plataforma segura del End vanilla y vuelve; un viaje por 2 menas de cada veta que el pack ofrece (bauxita_end, magnetita_end, scheelita, sheldonita: las radiactivas esperan a IV). La muestra de la veta se hace con esas 2 menas, y después la perforadora HV (con lodo) las repone."
+      "note": "Decisión 2 y 4 de HV: la llave del End (ojo de ender + palo + obsidiana) lleva a una plataforma segura del End vanilla y vuelve; un viaje por 2 menas de cada veta que la tabla de la perforadora ofrece (bauxita_end con su ilmenita, magnetita_end, sheldonita y zirconio; la scheelita está apartada y las radiactivas esperan a IV): cuenta la veta si alguna receta de perforación toma su muestra. La muestra de la veta se hace con esas 2 menas, y después la perforadora HV (con lodo) las repone."
     }
   ],
 
@@ -125,10 +125,10 @@
       "partsFromStructure": true,
       "partAbilities": { "energy_input": ["gtceu:hv_energy_input_hatch"] },
       "parts": [
-        "gtceu:clean_machine_casing", "gtceu:stainless_steel_frame", "gtceu:titanium_pipe_casing", "gtceu:hv_energy_input_hatch",
-        "gtceu:hv_input_bus", "gtceu:hv_output_bus", "gtceu:hv_input_hatch", "gtceu:hv_output_hatch"
+        "gtceu:clean_machine_casing", "gtceu:stainless_steel_frame", "gtceu:steel_pipe_casing", "gtceu:hv_energy_input_hatch",
+        "gtceu:hv_input_bus", "gtceu:hv_output_bus", "gtceu:hv_input_hatch"
       ],
-      "note": "Perforadora de vetas HV (escalón de familia): misma spec y misma tabla que las de LV y MV más la tabla del End (veins_end.json); carcasa limpia, marcos de acero inoxidable, mástil de tubos de titanio, tope 32 de paralelos con escotilla HV y broca de titanio (o la vanádica)."
+      "note": "Perforadora de vetas HV (escalón de familia): misma spec y misma tabla que las de LV y MV más la tabla del End (veins_end.json); carcasa limpia, marcos de acero inoxidable y mástil de tubos de acero (las `parts` son la reserva: mandan las de structures.json), tope 32 de paralelos con escotilla HV y broca de acero inoxidable (o la vanádica en las vetas del End)."
     },
     {
       "machine": "gtceu:hv_greenhouse",
@@ -247,8 +247,9 @@
     { "id": "ojo-ender", "label": "Ojo de ender (baño químico HV: blaze líquido + perla)", "item": "minecraft:ender_eye" },
     { "id": "ojo-ender-solo-por-gt", "label": "El ojo de ender solo sale por el baño químico de GT: sin él no hay receta vanilla ni otra", "item": "minecraft:ender_eye", "without": ["gtceu:chemical_bath/eye_of_ender"], "expect": "unreachable" },
     { "id": "llave-end", "label": "Llave del End (ojo de ender + palo + obsidiana)", "item": "grindless:end_key" },
-    { "id": "menas-end-con-llave", "label": "Menas del End (un viaje con la llave del End)", "item": "gtceu:raw_scheelite" },
-    { "id": "menas-end-sin-llave", "label": "Las menas del End no salen sin el viaje que exige la llave", "item": "gtceu:raw_scheelite", "without": ["mundo:menas-end"], "expect": "unreachable" },
+    { "id": "menas-end-con-llave", "label": "Menas del End (un viaje con la llave del End): cromita, que solo sale de la veta de magnetita del End", "item": "gtceu:raw_chromite" },
+    { "id": "menas-end-sin-llave", "label": "Las menas del End no salen sin el viaje que exige la llave", "item": "gtceu:raw_chromite", "without": ["mundo:menas-end"], "expect": "unreachable" },
+    { "id": "muestra-scheelita-no-se-fabrica", "label": "La veta de scheelita salió de la tabla del End (veins_excluded.json): su muestra ya no se fabrica (la que quede se convierte en una sonda vacía)", "item": "grindless:vein_sample_scheelite", "expect": "unreachable" },
 
     { "id": "camara-limpia", "label": "Cámara limpia (controlador: casco HV, circuito HV, filtros, rotores, motores HV)", "item": "gtceu:cleanroom" },
     { "id": "camara-limpia-formada", "label": "Cámara limpia formada y alimentada (condición de las recetas)", "item": "run:gtceu:cleanroom" },
@@ -306,13 +307,21 @@
     { "id": "invernadero-hv", "label": "Invernadero HV (nuestro)", "item": "gtceu:hv_greenhouse" },
     { "id": "refineria", "label": "Refinería (nuestra)", "item": "gtceu:refinery" },
     { "id": "reformador", "label": "Reformador catalítico (nuestro, recortable)", "item": "gtceu:reformer", "optional": true },
-    { "id": "broca-titanio", "label": "Broca de titanio (con el titanio de Kroll)", "item": "grindless:titanium_drill_bit" },
+    { "id": "broca-inox", "label": "Broca de acero inoxidable (la broca de la perforadora HV)", "item": "grindless:stainless_steel_drill_bit" },
+    { "id": "broca-titanio-no-se-fabrica", "label": "La broca de titanio ya no se fabrica: queda registrada, oculta, y se convierte 1:1 en la de inox (HV sin titanio)", "item": "grindless:titanium_drill_bit", "expect": "unreachable" },
     { "id": "catalizador-hidrotratamiento", "label": "Catalizador de hidrotratamiento (cobalto + molibdeno + sílice)", "item": "grindless:hydrotreating_catalyst" },
     { "id": "catalizador-reformado", "label": "Catalizador de reformado (platino del End + sílice)", "item": "grindless:reforming_catalyst", "optional": true },
-    { "id": "receta-perforacion-broca-titanio", "label": "Perforadora HV (solo ella, sin las de vapor, LV y MV) con broca de titanio", "kind": "recipe", "type": "gtceu:vein_drilling", "input": "grindless:titanium_drill_bit", "without": ["operar:gtceu:steam_vein_drill", "operar:gtceu:lv_vein_drill", "operar:gtceu:mv_vein_drill"] },
+    { "id": "receta-perforacion-broca-inox", "label": "Perforadora HV (solo ella, sin las de vapor, LV y MV) con broca de acero inoxidable", "kind": "recipe", "type": "gtceu:vein_drilling", "input": "grindless:stainless_steel_drill_bit", "without": ["operar:gtceu:steam_vein_drill", "operar:gtceu:lv_vein_drill", "operar:gtceu:mv_vein_drill"] },
     { "id": "receta-invernadero-hv", "label": "Invernadero HV (solo él, sin los de vapor, LV y MV): una receta de cultivo", "kind": "recipe", "type": "gtceu:greenhouse", "without": ["operar:gtceu:steam_greenhouse", "operar:gtceu:lv_greenhouse", "operar:gtceu:mv_greenhouse"] },
     { "id": "receta-refino", "label": "Refinería: crudo + H2 -> 4 fracciones sin azufre", "kind": "recipe", "type": "gtceu:refining" },
     { "id": "receta-reformado", "label": "Reformador: nafta -> benceno + tolueno + H2", "kind": "recipe", "type": "gtceu:reforming", "optional": true },
+
+    { "id": "cohete-escaner", "label": "Escáner de cohetes de GCYR (HV: casco HV, placas de inox, circuitos HV)", "item": "gcyr:rocket_scanner" },
+    { "id": "cohete-plataforma", "label": "Plataforma de lanzamiento de GCYR", "item": "gcyr:launch_pad" },
+    { "id": "cohete-deposito", "label": "Depósito de combustible básico de GCYR", "item": "gcyr:basic_fuel_tank" },
+    { "id": "cohete-motor", "label": "Motor de cohete básico de GCYR", "item": "gcyr:basic_rocket_motor" },
+    { "id": "cohete-asiento", "label": "Asiento de GCYR", "item": "gcyr:seat" },
+    { "id": "traje-espacial", "label": "Traje espacial de GCYR, las cuatro piezas (HV: inox y kapton)", "allOf": ["gcyr:space_helmet", "gcyr:space_chestplate", "gcyr:space_leggings", "gcyr:space_boots"] },
 
     { "id": "casco-ev", "label": "Casco EV (carcasa EV de 8 placas de titanio, 2 cables de aluminio, PE)", "item": "gtceu:ev_machine_hull" },
     { "id": "escotilla-energia-ev", "label": "Escotilla de energía EV (ensamblador EV a 1 920 EU/t + chip MPIC del cortador EV, con el casco EV)", "item": "gtceu:ev_energy_input_hatch" },
@@ -328,7 +337,7 @@
       "idPrefix": "muestra-end-",
       "labelPrefix": "Muestra de la veta del End",
       "dimensions": ["minecraft:the_end"],
-      "requireItem": "grindless:vein_sample_{id}",
+      "requireRecipe": { "type": "gtceu:vein_drilling", "input": "grindless:vein_sample_{id}" },
       "target": { "item": "grindless:vein_sample_{id}" }
     }
   ],
@@ -338,7 +347,7 @@
       "idPrefix": "auto-perforacion-hv-end-",
       "labelPrefix": "Perforadora HV (solo ella) con lodo: receta de la veta del End",
       "dimensions": ["minecraft:the_end"],
-      "requireItem": "grindless:vein_sample_{id}",
+      "requireRecipe": { "type": "gtceu:vein_drilling", "input": "grindless:vein_sample_{id}" },
       "without": ["operar:gtceu:steam_vein_drill", "operar:gtceu:lv_vein_drill", "operar:gtceu:mv_vein_drill"],
       "target": { "kind": "recipe", "type": "gtceu:vein_drilling", "input": ["grindless:vein_sample_{id}", "fluid:gtceu:drilling_fluid"] }
     },
@@ -346,19 +355,19 @@
       "idPrefix": "auto-mena-end-",
       "labelPrefix": "Menas exclusivas de la veta del End (solo con la perforadora HV)",
       "dimensions": ["minecraft:the_end"],
-      "requireItem": "grindless:vein_sample_{id}",
+      "requireRecipe": { "type": "gtceu:vein_drilling", "input": "grindless:vein_sample_{id}" },
       "without": ["operar:gtceu:steam_vein_drill", "operar:gtceu:lv_vein_drill", "operar:gtceu:mv_vein_drill"],
       "exclusiveFrom": ["minecraft:overworld", "minecraft:the_nether"],
       "template": "gtceu:raw_{m}",
       "mode": "anyOf"
     },
     {
-      "idPrefix": "auto-perforacion-hv-titanio-",
-      "labelPrefix": "Perforadora HV (solo ella) con broca de titanio: receta de la veta",
+      "idPrefix": "auto-perforacion-hv-inox-",
+      "labelPrefix": "Perforadora HV (solo ella) con broca de acero inoxidable: receta de la veta",
       "dimensions": ["minecraft:overworld", "minecraft:the_nether"],
-      "requireItem": "grindless:vein_sample_{id}",
+      "requireRecipe": { "type": "gtceu:vein_drilling", "input": "grindless:vein_sample_{id}" },
       "without": ["operar:gtceu:steam_vein_drill", "operar:gtceu:lv_vein_drill", "operar:gtceu:mv_vein_drill"],
-      "target": { "kind": "recipe", "type": "gtceu:vein_drilling", "input": ["grindless:vein_sample_{id}", "grindless:titanium_drill_bit"] }
+      "target": { "kind": "recipe", "type": "gtceu:vein_drilling", "input": ["grindless:vein_sample_{id}", "grindless:stainless_steel_drill_bit"] }
     }
   ],
 
@@ -408,7 +417,7 @@
     { "id": "auto-magnesio", "label": "Polvo de magnesio", "item": "gtceu:magnesium_dust" },
     { "id": "auto-sodio", "label": "Polvo de sodio", "item": "gtceu:sodium_dust" },
     { "id": "auto-nicromo", "label": "Lingote de nicromo", "item": "gtceu:nichrome_ingot" },
-    { "id": "auto-broca-titanio", "label": "Broca de titanio (la perforadora paga su broca)", "item": "grindless:titanium_drill_bit" },
+    { "id": "auto-broca-inox", "label": "Broca de acero inoxidable (la perforadora paga su broca)", "item": "grindless:stainless_steel_drill_bit" },
     { "id": "auto-invernadero-hv", "label": "Invernadero HV (solo él, sin los de vapor, LV y MV): receta de cultivo usable y sostenible", "kind": "recipe", "type": "gtceu:greenhouse", "without": ["operar:gtceu:steam_greenhouse", "operar:gtceu:lv_greenhouse", "operar:gtceu:mv_greenhouse"] },
     { "id": "auto-circuito-ev", "label": "Estación de trabajo (circuito EV) con la cámara limpia", "item": "gtceu:micro_processor_computer" },
     { "id": "auto-receta-circuito-ev", "label": "Ensamblador de circuitos: estación de trabajo EV, receta usable y sostenible", "kind": "recipe", "type": "gtceu:circuit_assembler", "output": "gtceu:micro_processor_computer" },
@@ -423,5 +432,98 @@
     { "id": "auto-cobalto", "label": "Polvo de cobalto", "item": "gtceu:cobalt_dust" },
     { "id": "auto-molibdeno", "label": "Polvo de molibdeno", "item": "gtceu:molybdenum_dust" },
     { "id": "auto-platino", "label": "Polvo de platino (End)", "item": "gtceu:platinum_dust" }
+  ],
+
+  "eraResources": [
+    {
+      "id": "end",
+      "label": "el End (sus vetas, con la llave del End)",
+      "dimensions": ["minecraft:the_end"],
+      "note": "Hoy (v0.4.1) el End abre en HV (regla de mundo menas-end) y su ilmenita es, de transición, el titanio de la salida a EV. En la versión siguiente pasa a MV, sin ilmenita ni scheelita (tiers/next/)."
+    },
+    {
+      "id": "luna",
+      "era": "ev",
+      "label": "la Luna",
+      "dimensions": ["gcyr:luna"],
+      "items": ["gcyr:moon_*", "gcyr:lunar_*", "gcyr:luna_marker", "gtceu:moon_*_ore", "gtca:moon_*_ore"],
+      "note": "Decisión del 2026-10-24 (Luna, opción A): el primer cohete llega a la Luna al final de HV y lo que sale de allí es de EV. Hoy ninguna fuente del modelo está en la Luna; la versión siguiente la añade (tiers/next/hv.json, mundo menas-luna)."
+    },
+    {
+      "id": "titanio",
+      "era": "ev",
+      "label": "titanio (ilmenita lunar)",
+      "items": ["gtceu:*titanium*", "gtca:*titanium*", "fluid:gtceu:*titanium*", "fluid:gtca:*titanium*", "gtceu:*ilmenite*", "gtceu:*rutile*"],
+      "note": "Decisiones del 2026-10-24: el titanio entra en EV y solo sale de la Luna; HV va sin titanio (máquinas, cascos, brocas, multibloques, cohete y traje, de acero inoxidable). Cuenta todo lo que es titanio, ilmenita o rutilo: también las aleaciones con titanio y las herramientas con cabezal de titanio."
+    },
+    {
+      "id": "helio-3",
+      "era": "ev",
+      "label": "helio-3 (de la Luna; se guarda para la fusión)",
+      "items": ["fluid:gtceu:helium_3", "gtceu:helium_3_bucket"],
+      "note": "docs/viaje.md: lo que solo sale de la Luna es el titanio y el helio-3."
+    },
+    {
+      "id": "marte",
+      "era": "iv",
+      "label": "Marte",
+      "dimensions": ["gcyr:mars"],
+      "items": ["gcyr:mars_*", "gcyr:martian_*", "gtceu:mars_*_ore", "gtca:mars_*_ore"],
+      "note": "Marte llega al final de EV; como la Luna con el titanio, lo que trae es de la era siguiente (IV). Se revisa al diseñar EV."
+    },
+    {
+      "id": "tungsteno",
+      "era": "iv",
+      "label": "tungsteno (Marte, al final de EV)",
+      "items": ["*tungst*", "gtceu:*scheelite*"],
+      "note": "Abre IV (acero de tungsteno). Cuenta el tungsteno, la scheelita, la tungstita y lo que se hace con ellos (acero de tungsteno, carburos)."
+    },
+    { "id": "venus", "era": "iv", "label": "Venus", "dimensions": ["gcyr:venus"], "items": ["gcyr:venus_*", "gcyr:venusian_*", "gtceu:venus_*_ore", "gtca:venus_*_ore"] },
+    { "id": "naquadah", "era": "iv", "label": "naquadah (Venus)", "items": ["*naquad*"] },
+    { "id": "mercurio", "era": "iv", "label": "Mercurio", "dimensions": ["gcyr:mercury"], "items": ["gcyr:mercury_*", "gtceu:mercury_*_ore", "gtca:mercury_*_ore"] },
+    { "id": "iridio-osmio", "era": "iv", "label": "iridio y osmio (Mercurio)", "items": ["*iridium*", "*osmium*"] }
+  ],
+
+  "eraItems": [
+    { "id": "hv-gtm", "label": "Máquinas, piezas y componentes HV de GTM (gtceu:hv_*)", "items": ["gtceu:hv_*"] },
+    {
+      "id": "hv-multibloques",
+      "label": "Multibloques del HV formados: los nuestros y los de GTM que modela el tier",
+      "items": [
+        "m:gtceu:hv_vein_drill", "m:gtceu:hv_greenhouse", "m:gtceu:refinery", "m:gtceu:reformer", "m:gtceu:cleanroom", "m:gtceu:vacuum_freezer@mv2",
+        "m:gtceu:cracker@mv2", "m:gtceu:distillation_tower@mv2", "m:gtceu:large_chemical_reactor@mv2", "m:gtceu:electric_blast_furnace@hv-kanthal"
+      ]
+    },
+    {
+      "id": "hv-objetos",
+      "label": "Objetos del HV: llave del End, catalizadores, modelo de blaze y la central de vapor",
+      "items": [
+        "grindless:end_key", "grindless:hydrotreating_catalyst", "grindless:reforming_catalyst", "grindless:creature_model_blaze",
+        "gtceu:steel_large_boiler", "gtceu:steam_large_turbine"
+      ]
+    },
+    { "id": "hv-perforadora", "label": "Lo que pide la perforadora HV: la broca y las muestras de sus recetas", "inputsOf": ["grindless:vein_drilling/hv/*"] },
+    { "id": "hv-refineria", "label": "Lo que piden la refinería y el reformador", "inputsOf": ["grindless:refining/hv/*", "grindless:reforming/hv/*"] },
+    {
+      "id": "hv-broca-inox",
+      "label": "Broca de acero inoxidable (la broca HV, sin titanio)",
+      "items": ["grindless:stainless_steel_drill_bit"]
+    },
+    {
+      "id": "hv-cohete",
+      "label": "Primer cohete de GCYR: depósito, motor, asiento, escáner y plataforma (inox)",
+      "items": ["gcyr:basic_fuel_tank", "gcyr:basic_rocket_motor", "gcyr:seat", "gcyr:rocket_scanner", "gcyr:launch_pad"]
+    },
+    {
+      "id": "hv-traje",
+      "label": "Traje espacial de GCYR (inox y kapton)",
+      "items": ["gcyr:space_helmet", "gcyr:space_chestplate", "gcyr:space_leggings", "gcyr:space_boots"]
+    },
+    {
+      "id": "salida-hv",
+      "era": "ev",
+      "label": "Salida de HV: la puerta a EV (casco, motor, bomba y escotilla de energía EV), que ya es de EV",
+      "items": ["gtceu:ev_machine_hull", "gtceu:ev_electric_motor", "gtceu:ev_electric_pump", "gtceu:ev_energy_input_hatch"]
+    }
   ]
 }

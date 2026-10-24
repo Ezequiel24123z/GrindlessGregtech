@@ -8,6 +8,7 @@
     "When a tier takes one of these veins: add it to veins_overworld_extra.json / veins_nether.json / veins_end.json (or veins.json) and delete its entry here."
   ],
   "veins": [
+    { "id": "gtceu:scheelite_vein", "until": "Mars (end of EV)", "reason": "End vein of scheelite, tungstate and lithium. Tungsten comes from Mars (docs/viaje.md, DECISIONS.md 2026-10-24), so the vein left the End table in v0.4.1 with its drilling recipes; its sample stays registered for old saves (hidden in EMI, it crafts back into an empty vein probe, startup_scripts/grindless/hv/family_items.js) but no recipe takes it. Nothing up to HV needs the vein: lithium also comes from the salts vein (lepidolite, spodumene) and from clay." },
     { "id": "gtceu:naquadah_vein", "until": "IV", "reason": "End vein of naquadah and plutonium 239: radioactive, nobody asks for it before IV (docs/eras/hv.md, decisions)." },
     { "id": "gtceu:pitchblende_vein_end", "until": "IV", "reason": "End vein of pitchblende and uraninite: radioactive, nobody asks for it before IV (docs/eras/hv.md, decisions)." }
   ],

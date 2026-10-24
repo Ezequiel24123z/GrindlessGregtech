@@ -112,14 +112,15 @@
     return { format: 'gg-items-1', items: items, fluids: fluids };
   }
 
-  // Tags that analysis configs commonly name even when no recipe references them.
+  // Tags that analysis configs commonly name even when no recipe references them. c:hidden_from_recipe_viewers is the pack's
+  // "hidden in EMI" tag: the obtainability audit (tools/analysis, --pass obtain) uses it to tell what is already hidden.
   var SEED_TAGS = [
     'minecraft:logs', 'minecraft:logs_that_burn', 'minecraft:planks', 'minecraft:saplings', 'minecraft:leaves',
     'minecraft:sand', 'minecraft:coals', 'minecraft:flowers', 'minecraft:wool', 'minecraft:stone_crafting_materials',
     'minecraft:stone_tool_materials', 'minecraft:coal_ores', 'minecraft:iron_ores', 'minecraft:copper_ores',
     'forge:cobblestone', 'forge:stone', 'forge:sand', 'forge:gravel', 'forge:dirt', 'forge:ores', 'forge:raw_materials',
     'forge:seeds', 'forge:crops', 'forge:sugar_cane', 'forge:gems/coal', 'forge:rods/wooden', 'gtceu:fuels',
-    'gtceu:tools/hammers', 'gtceu:tools/files', 'gtceu:tools/mortars', 'gtceu:tools/saws'
+    'gtceu:tools/hammers', 'gtceu:tools/files', 'gtceu:tools/mortars', 'gtceu:tools/saws', 'c:hidden_from_recipe_viewers'
   ];
 
   // Tag ids referenced by any collected recipe ("tag":"x" ingredients, "#x" fluid conditions) plus the seeds.

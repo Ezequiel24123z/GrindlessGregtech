@@ -1,0 +1,85 @@
+{
+  "tier": "mv",
+  "title": "Era MV · versión siguiente (el End pasa a MV)",
+  "extends": "../mv",
+  "inheritTargets": true,
+  "dropTargets": ["ojo-ender-no-antes-de-hv", "polvo-blaze-no-antes-de-hv", "vara-blaze-no-antes-de-hv"],
+  "note": "CAPA PREPARADA Y SIN ACTIVAR para la versión siguiente (DECISIONS 2026-10-24: «El End pasa a MV, sin ilmenita (se va a la Luna) ni scheelita (se va a Marte). Así HV solo abre la Luna.»). Solo se usa a propósito: --tier next/mv (o -Tier next/mv). Hereda de tiers/mv.json y tiers/next/hv.json hereda de esta (ver README, «Versión siguiente»). Cambia: la llave del End, el ojo de ender y el blaze bajan a MV (docs/viaje.md, «Las vetas del End»); las menas del End son la regla menas-end (un viaje con la llave; solo las vetas con muestra en la tabla de la perforadora, veins_end.json sin la ilmenita y sin la veta de scheelita); la perforadora MV corre las vetas del End con lodo; el End es un recurso de MV para la regla de eras. Cuando el pack lleve el cambio, esta capa se funde en tiers/mv.json.",
+
+  "contexts": ["minecraft:overworld", "grindless:flat", "grindless:void"],
+
+  "world": [
+    {
+      "id": "menas-end",
+      "mode": "manual",
+      "bootstrap": true,
+      "needs": ["grindless:end_key"],
+      "template": "gtceu:raw_{m}",
+      "fromVeins": { "dimensions": ["minecraft:the_end"], "requireRecipe": { "type": "gtceu:vein_drilling", "input": "grindless:vein_sample_{id}" } },
+      "materials": [],
+      "note": "Viaje al End con la llave (MV): dos menas de cada veta que el pack ofrece a la perforadora (las que tienen muestra). Las menas salen del registro vivo de vetas (veins.json): si la veta de bauxita del End sigue generando ilmenita, el viaje la da y la comprobación ilmenita-no-sale-del-end falla."
+    }
+  ],
+
+  "targets": [
+    { "id": "llave-end", "label": "Llave del End (ojo de ender + palo + obsidiana), ya en MV", "item": "grindless:end_key" },
+    { "id": "ojo-ender", "label": "Ojo de ender en MV (blaze del simulador MV -> extractor -> baño químico)", "item": "minecraft:ender_eye" },
+    { "id": "ojo-ender-solo-por-gt", "label": "El ojo de ender solo sale por el baño químico de GT: sin él no hay receta vanilla ni otra", "item": "minecraft:ender_eye", "without": ["gtceu:chemical_bath/eye_of_ender"], "expect": "unreachable" },
+    { "id": "polvo-blaze", "label": "Polvo de blaze en MV", "item": "minecraft:blaze_powder" },
+    { "id": "receta-blaze-simulador-mv", "label": "Simulador de criaturas MV: blaze -> varas de blaze", "kind": "recipe", "type": "gtceu:creature_simulation", "output": "minecraft:blaze_rod" },
+    { "id": "menas-end-con-llave", "label": "Menas del End (un viaje con la llave del End): cromita", "item": "gtceu:raw_chromite" },
+    { "id": "menas-end-sin-llave", "label": "Las menas del End no salen sin el viaje que exige la llave", "item": "gtceu:raw_chromite", "without": ["mundo:menas-end"], "expect": "unreachable" },
+    { "id": "ilmenita-no-sale-del-end", "label": "El End ya no da ilmenita: se va a la Luna (en MV no hay ninguna)", "item": "gtceu:raw_ilmenite", "expect": "unreachable" },
+    { "id": "scheelita-no-sale-del-end", "label": "El End ya no da scheelita ni tungstita: se van a Marte", "anyOf": ["gtceu:raw_scheelite", "gtceu:raw_tungstate"], "expect": "unreachable" }
+  ],
+
+  "targetsFromVeins": [
+    {
+      "idPrefix": "muestra-end-",
+      "labelPrefix": "Muestra de la veta del End",
+      "dimensions": ["minecraft:the_end"],
+      "requireRecipe": { "type": "gtceu:vein_drilling", "input": "grindless:vein_sample_{id}" },
+      "target": { "item": "grindless:vein_sample_{id}" }
+    }
+  ],
+
+  "autoTargetsFromVeins": [
+    {
+      "idPrefix": "auto-perforacion-mv-end-",
+      "labelPrefix": "Perforadora MV (solo ella) con lodo: receta de la veta del End",
+      "dimensions": ["minecraft:the_end"],
+      "requireRecipe": { "type": "gtceu:vein_drilling", "input": "grindless:vein_sample_{id}" },
+      "without": ["operar:gtceu:steam_vein_drill", "operar:gtceu:lv_vein_drill"],
+      "target": { "kind": "recipe", "type": "gtceu:vein_drilling", "input": ["grindless:vein_sample_{id}", "fluid:gtceu:drilling_fluid"] }
+    },
+    {
+      "idPrefix": "auto-mena-end-",
+      "labelPrefix": "Menas exclusivas de la veta del End (con la perforadora MV)",
+      "dimensions": ["minecraft:the_end"],
+      "requireRecipe": { "type": "gtceu:vein_drilling", "input": "grindless:vein_sample_{id}" },
+      "without": ["operar:gtceu:steam_vein_drill", "operar:gtceu:lv_vein_drill"],
+      "exclusiveFrom": ["minecraft:overworld", "minecraft:the_nether"],
+      "template": "gtceu:raw_{m}",
+      "mode": "anyOf"
+    }
+  ],
+
+  "autoTargets": [
+    { "id": "auto-blaze-vara", "label": "Simulador MV: varas de blaze, receta usable y sostenible", "kind": "recipe", "type": "gtceu:creature_simulation", "output": "minecraft:blaze_rod" },
+    { "id": "auto-polvo-blaze", "label": "Polvo de blaze", "item": "minecraft:blaze_powder" }
+  ],
+
+  "eraResources": [
+    {
+      "id": "end",
+      "era": "mv",
+      "label": "el End (sus vetas, con la llave del End)",
+      "dimensions": ["minecraft:the_end"],
+      "note": "Versión siguiente: el End abre en MV. Nada del vapor ni del LV puede pedir lo que solo sale de allí."
+    }
+  ],
+
+  "eraItems": [
+    { "id": "mv-end", "label": "Lo que trae el End al MV: la llave del End y el modelo de blaze", "items": ["grindless:end_key", "grindless:creature_model_blaze"] }
+  ]
+}

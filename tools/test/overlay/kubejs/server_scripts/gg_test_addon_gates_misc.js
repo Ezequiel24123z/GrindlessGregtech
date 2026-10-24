@@ -155,8 +155,8 @@
     'gtceu:assembler/converter_64_a_lv', 'gtceu:assembler/omnibreaker', 'gtceu:assembler/me_tag_stocking_input_bus',
     'gtceuterminal:multi_structure_manager', 'gtceuterminal:dismantler', 'gtceuterminal:schematic_interface',
     'gtstoragedrawers:gtceu_rubber_full_drawers_1', 'gtstoragedrawers:gtceu_treated_trim',
-    'gcyr:assembler/basic_rocket_motor', 'gcyr:assembler/basic_fuel_tank', 'gcyr:shaped/rocket_scanner', 'gcyr:chemical_reactor/kapton_k',
-    'gcyr:assembler/launch_pad', 'gcyr:assembler/space_fabric',
+    'gcyr:assembler/basic_rocket_motor', 'gcyr:assembler/basic_fuel_tank', 'grindless:gcyr/rocket_scanner', 'gcyr:chemical_reactor/kapton_k',
+    'gcyr:assembler/launch_pad', 'grindless:assembler/gcyr/space_fabric',
     'gtceu:steam_turbine/steam', 'gtceu:combustion_generator/diesel', 'gtceu:gas_turbine/methane',
     'gtceu:large_chemical_reactor/polyethylene_from_tetrachloride_oxygen', 'gtceu:pyrolyse_oven/log_to_creosote',
     'gtceu:coke_oven/coal_to_coke', 'gtceu:shaped/large_chemical_reactor', 'gtceu:centrifuge/rare_earth_separation'
@@ -647,8 +647,8 @@
 
   function noteRocket(rm) {
     var parts = []
-    ;['gcyr:shaped/rocket_scanner', 'gcyr:assembler/basic_rocket_motor', 'gcyr:assembler/basic_fuel_tank', 'gcyr:assembler/advanced_rocket_motor',
-      'gcyr:assembler/advanced_fuel_tank', 'gcyr:assembler/elite_rocket_motor', 'gcyr:assembler/space_fabric',
+    ;['grindless:gcyr/rocket_scanner', 'gcyr:assembler/basic_rocket_motor', 'gcyr:assembler/basic_fuel_tank', 'gcyr:assembler/advanced_rocket_motor',
+      'gcyr:assembler/advanced_fuel_tank', 'gcyr:assembler/elite_rocket_motor', 'grindless:assembler/gcyr/space_fabric',
       'gcyr:shaped/space_station_packager'].forEach(function (id) {
       var r = rm.byKey(rl(id))
       if (!r.isPresent()) {
