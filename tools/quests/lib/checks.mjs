@@ -173,6 +173,20 @@ export function checkBook(book, cfg, options = {}) {
     for (const c of cross) add('info', 'cross-chapter', ch, c.to, `depends on "${questLabel(c.from)}" in chapter ${c.from.chapter.filename}`, c.from);
 
     // items
+    // Structure first (no dump needed): FTB Quests parses item ids and icons as resource locations, and a malformed one (an
+    // uppercase quest id where the item id goes, itemfilters without tag.value) crashes the server while it loads the book.
+    const RL = /^[a-z0-9_.-]+:[a-z0-9_.\/-]+$/;
+    for (const q of ch.quests) {
+      if (typeof q.icon === 'string' && !RL.test(q.icon)) add('error', 'item-format', ch, q, `icon "${q.icon}" is not a resource id`);
+      for (const t of [...q.tasks, ...q.rewards]) {
+        const it = t.item;
+        if (typeof it === 'string' && !RL.test(it)) add('error', 'item-format', ch, q, `item "${it}" is not a resource id`);
+        if (it && typeof it === 'object') {
+          if (typeof it.id !== 'string' || !RL.test(it.id)) add('error', 'item-format', ch, q, `item id ${JSON.stringify(it.id)} is not a resource id (write { Count: 1b, id: "namespace:path", tag: {...} })`);
+          else if (it.id === 'itemfilters:tag' && !(it.tag && typeof it.tag === 'object' && it.tag.value)) add('error', 'item-format', ch, q, 'itemfilters:tag needs tag: { value: "<tag>" }');
+        }
+      }
+    }
     if (options.items) {
       for (const q of ch.quests) {
         const ids = [...collectItemIds(q.icon ? { icon: q.icon } : null), ...collectItemIds(q.tasks), ...collectItemIds(q.rewards)];
