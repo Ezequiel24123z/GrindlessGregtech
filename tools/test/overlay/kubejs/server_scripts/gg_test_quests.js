@@ -68,7 +68,7 @@ var GG_QUESTS_EXPECTED = {
   steam_age: [45, 51],
   lv_age: [51, 52],
   mv_age: [41, 49],
-  hv_age: [35, 45],
+  hv_age: [42, 51],
   ev_age: [12, 14]
 }
 // chapters that sit outside every chapter group on purpose (shown above the groups)
