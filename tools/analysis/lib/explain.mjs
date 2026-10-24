@@ -9,6 +9,7 @@ export function describeRule(g, r) {
     case 'machine-build': return `construir ${rule.name.slice(10)}`;
     case 'machine-run': return `operar ${rule.name.slice(7)}`;
     case 'world-auto': return `${rule.name}${rule.meta.finite ? ' (finito)' : ''}`;
+    case 'world-manual': return `${rule.name} (a mano, un viaje)`;
     default: return rule.name;
   }
 }
@@ -75,6 +76,27 @@ export function derivationTree(model, lf, key, lim = { depth: 5, kids: 5 }, from
   return walk(key, 0);
 }
 
+/**
+ * Árbol de una receta de la que se ignora la máquina (objetivos `machineless`): las entradas y condiciones alcanzables en `lf`.
+ * `capMask`: en el paso automático, lo que se construye una vez (ranuras de capital).
+ */
+export function machinelessTree(model, lf, r, capMask = null) {
+  const g = model.g;
+  const rule = g.rules[r];
+  const root = { key: rule.outs[0] ?? -1, depth: 0, rule: r, ruleHead: true, note: 'entradas alcanzables; solo falta la máquina', kids: [] };
+  for (const slot of rule.slots) {
+    if (slot.role === 'machine') continue;
+    const reached = slot.alts.filter((a) => lf.reached[a] === 1).sort((a, b) => lf.level[a] - lf.level[b]);
+    if (reached.length > 0) {
+      root.kids.push({ slot, child: derivationTree(model, lf, reached[0]) });
+      continue;
+    }
+    const cap = capMask ? slot.alts.find((a) => capMask[a] === 1) : undefined;
+    if (cap !== undefined) root.kids.push({ slot, child: { key: cap, depth: 1, capital: true } });
+  }
+  return root;
+}
+
 function rootReason(model, key) {
   const g = model.g;
   const name = g.keyNames[key];
@@ -102,7 +124,8 @@ export function makeRootCost(model, enabled = null) {
   const g = model.g;
   return (k) => {
     const hasProducer = g.producers(k).some((r) => !enabled || enabled[r] === 1);
-    const manual = model.manualKeys.has(k);
+    // solo los hechos manuales del mundo son raíces por sí mismos; una mena que exige antes una llave tiene una regla productora
+    const manual = model.manualFactKeys ? model.manualFactKeys.has(k) : model.manualKeys.has(k);
     // un recurso que el mundo daría pero esta config/dimensión no deja es la raíz natural aunque tenga otras recetas lejanas
     const disabled = model.disabledWorld.has(g.keyNames[k]);
     if (hasProducer && !manual && !disabled) return Infinity;
@@ -215,7 +238,7 @@ export function renderTree(model, node, opts = {}) {
     const nm = n.ruleRoot || n.ruleHead ? describeRule(g, n.rule) : keyName(g, n.key);
     let line = `${prefix}${slotLabel ? '[' + slotLabel + '] ' : ''}${nm}`;
     if (n.ruleRoot) line += '  ✗ le falta:';
-    else if (n.ruleHead) line += '  (receta usable, necesita:)';
+    else if (n.ruleHead) line += n.note ? `  (${n.note})` : '  (receta usable, necesita:)';
     else if (n.fact) line += '  ← del mundo / arranque';
     else if (n.capital) line += '  ← capital (se construye una vez)';
     else if (n.rule !== undefined) line += `  ← ${describeRule(g, n.rule)}`;

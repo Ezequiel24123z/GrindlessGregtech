@@ -57,7 +57,7 @@
     maintenance: function () { return PartAbility.MAINTENANCE }
   }
 
-  const MAX_ROWS = 12
+  const MAX_ROWS = 16
 
   function fail(msg) {
     throw new Error('[grindless/patterns] ' + msg)
@@ -208,6 +208,13 @@
       case 8: return builder.aisle(rows[0], rows[1], rows[2], rows[3], rows[4], rows[5], rows[6], rows[7])
       case 9: return builder.aisle(rows[0], rows[1], rows[2], rows[3], rows[4], rows[5], rows[6], rows[7], rows[8])
       case 10: return builder.aisle(rows[0], rows[1], rows[2], rows[3], rows[4], rows[5], rows[6], rows[7], rows[8], rows[9])
+      // 11 to 16 rows: the Refinery (HV) is 16 rows tall
+      case 11: return builder.aisle(rows[0], rows[1], rows[2], rows[3], rows[4], rows[5], rows[6], rows[7], rows[8], rows[9], rows[10])
+      case 12: return builder.aisle(rows[0], rows[1], rows[2], rows[3], rows[4], rows[5], rows[6], rows[7], rows[8], rows[9], rows[10], rows[11])
+      case 13: return builder.aisle(rows[0], rows[1], rows[2], rows[3], rows[4], rows[5], rows[6], rows[7], rows[8], rows[9], rows[10], rows[11], rows[12])
+      case 14: return builder.aisle(rows[0], rows[1], rows[2], rows[3], rows[4], rows[5], rows[6], rows[7], rows[8], rows[9], rows[10], rows[11], rows[12], rows[13])
+      case 15: return builder.aisle(rows[0], rows[1], rows[2], rows[3], rows[4], rows[5], rows[6], rows[7], rows[8], rows[9], rows[10], rows[11], rows[12], rows[13], rows[14])
+      case 16: return builder.aisle(rows[0], rows[1], rows[2], rows[3], rows[4], rows[5], rows[6], rows[7], rows[8], rows[9], rows[10], rows[11], rows[12], rows[13], rows[14], rows[15])
       default: return fail('a slice can have 1 to ' + MAX_ROWS + ' rows (got ' + rows.length + ')')
     }
   }

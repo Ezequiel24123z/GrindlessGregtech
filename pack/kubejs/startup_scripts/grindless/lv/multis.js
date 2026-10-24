@@ -18,8 +18,9 @@
 // whichever it meets first): a base recipe waits while drilling fluid is in the hatch (drill) or while a circuit
 // of 2 or more is in a bus (greenhouse), so the fluid / fertilizer variant is the one that runs.
 // `bores(veto, cap)` is shared as global.grindless.lv.bores (with the recipe-name rules in global.grindless.lv.rules) for the
-// MV machines (cap 16, startup_scripts/grindless/mv/) and the ore plant (cap 6). The LV machines skip the recipes under
-// <type>/mv/ (the vanadium steel bit and the CO2 variants are the MV machines' own).
+// MV machines (cap 16, startup_scripts/grindless/mv/), the HV ones (cap 32, startup_scripts/grindless/hv/) and the ore plant
+// (cap 6). The LV machines skip the recipes under <type>/mv/ and <type>/hv/ (the vanadium steel bit and the CO2 variants are the
+// MV machines', the titanium bit and the End veins the HV drill's); the MV machines skip the <type>/hv/ ones.
 //
 // Lookup note (GTM's RecipeDB): a recipe whose ingredient list is a prefix of another recipe's list makes one of the two
 // disappear. The generated LV recipes therefore list the ingredient that the steam recipe does NOT start with first
@@ -148,14 +149,18 @@
     return LC
   }
 
-  // recipes generated for the LV machines live under <type>/lv/..., the MV ones under <type>/mv/, the steam ones directly under
-  // <type>/
+  // recipes generated for the LV machines live under <type>/lv/..., the MV ones under <type>/mv/, the HV ones under <type>/hv/,
+  // the steam ones directly under <type>/
   function recipePath(recipe) {
     return String(recipe.id.getPath())
   }
 
   function isMvRecipe(recipe) {
     return recipePath(recipe).indexOf('/mv/') >= 0
+  }
+
+  function isHvRecipe(recipe) {
+    return recipePath(recipe).indexOf('/hv/') >= 0
   }
 
   // drilling recipes that use drilling fluid (LV and MV): .../<vein>_<bit>_fluid
@@ -203,17 +208,18 @@
     return best
   }
 
-  // the LV machines do not take the MV recipes (vanadium bit, CO2 variants)
+  // the LV machines do not take the MV recipes (vanadium bit, CO2 variants) nor the HV ones (titanium bit, End veins)
   function drillVeto(machine, recipe) {
-    return isMvRecipe(recipe) || (!isFluidRecipe(recipe) && machineHasFluid(machine, 'gtceu:drilling_fluid'))
+    return isMvRecipe(recipe) || isHvRecipe(recipe) || (!isFluidRecipe(recipe) && machineHasFluid(machine, 'gtceu:drilling_fluid'))
   }
 
   function greenhouseVeto(machine, recipe) {
-    return isMvRecipe(recipe) || (!isFertilizerRecipe(recipe) && machineCircuit(machine) >= 2)
+    return isMvRecipe(recipe) || isHvRecipe(recipe) || (!isFertilizerRecipe(recipe) && machineCircuit(machine) >= 2)
   }
 
   // Runs as many copies of the recipe as the energy hatches allow (hatch voltage / EU per run), at most `cap` (8 by default;
-  // the MV machines pass 16, the ore plant 6), and then GTM's own overclock. `veto(machine, recipe)` = true skips a recipe.
+  // the MV machines pass 16, the HV ones 32, the ore plant 6), and then GTM's own overclock. `veto(machine, recipe)` = true skips
+  // a recipe.
   function bores(veto, cap) {
     var limit = cap || MAX_PARALLELS
     return function (machine, recipe) {
@@ -248,6 +254,7 @@
   shared.rules = {
     recipePath: recipePath,
     isMvRecipe: isMvRecipe,
+    isHvRecipe: isHvRecipe,
     isFluidRecipe: isFluidRecipe,
     isFertilizerRecipe: isFertilizerRecipe,
     isCo2Recipe: isCo2Recipe,

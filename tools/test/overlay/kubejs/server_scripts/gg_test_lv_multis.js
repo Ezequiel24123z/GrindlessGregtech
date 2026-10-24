@@ -124,9 +124,11 @@
     var LV = G.lv
     var rm = S.server.getRecipeManager()
     var nether = LV.netherVeins()
+    var extra = LV.extraVeins()
 
     var items = ['grindless:graphite_electrode']
     nether.forEach(function (v) { items.push(v.sample) })
+    extra.forEach(function (v) { items.push(v.sample) })
     var missingItems = items.filter(function (id) { return !Item.exists(id) })
     check(SCOPE, 'items', missingItems.length === 0,
       'count=' + items.length + (missingItems.length > 0 ? ' missing=' + missingItems.join(',') : ''))
@@ -151,7 +153,7 @@
       'count=' + fluids.length + (missingFluids.length > 0 ? ' missing=' + missingFluids.join(',') : ''))
 
     var tags = ['forge:plates/steel', 'forge:rods/steel', 'forge:glass', 'minecraft:saplings', 'gtceu:circuits/lv']
-    nether.forEach(function (v) {
+    nether.concat(extra).forEach(function (v) {
       v.ores.forEach(function (o) {
         var t = o.tag.substring(1)
         if (tags.indexOf(t) < 0) tags.push(t)
@@ -162,9 +164,12 @@
       'count=' + tags.length + (emptyTags.length > 0 ? ' empty=' + emptyTags.join(',') : ''))
 
     var problems = LV.checkTables()
-    check(SCOPE, 'tables', problems.length === 0,
-      'nether veins=' + nether.length + (problems.length > 0 ? ' problems=' + problems.join('; ') : '') +
-      ' pairs=[' + nether.map(function (v) { return v.id + ':' + v.samplePair.map(function (t) { return t.replace('#forge:raw_materials/', '') }).join('+') }).join(' ') + ']')
+    var pairsOf = function (list) {
+      return list.map(function (v) { return v.id + ':' + v.samplePair.map(function (t) { return t.replace('#forge:raw_materials/', '') }).join('+') }).join(' ')
+    }
+    check(SCOPE, 'tables', problems.length === 0 && nether.length >= 13 && extra.length >= 2,
+      'nether veins=' + nether.length + ' extra overworld veins=' + extra.length + (problems.length > 0 ? ' problems=' + problems.join('; ') : '') +
+      ' pairs=[' + pairsOf(extra) + ' ' + pairsOf(nether) + ']')
 
     var fc = lazy().FluidCap
     var ic = lazy().ItemCap
@@ -182,16 +187,20 @@
       ' greenhouse items in=' + (greenhouse ? greenhouse.getMaxInputs(ic) : '?') + ' fluid in=' + (greenhouse ? greenhouse.getMaxInputs(fc) : '?') +
       ' fluid out=' + (greenhouse ? greenhouse.getMaxOutputs(fc) : '?'))
 
-    var overworld = G.veinTable()
+    // the steam recipes (veins.json and the extra Overworld veins) and their drilling-fluid variants, then the Nether ones
+    var overworld = LV.overworldVeins()
     var steelOnly = overworld.filter(function (v) { return v.steelOnly }).length
     var steamDrilling = overworld.length * 2 - steelOnly
     var wantDrilling = steamDrilling * 2 + nether.length * 2
     var wantGreenhouse = G.greenhouse.entries.length * 2 + LV.greenhouseExtras.length * 2
     var wantArc = 4
-    // the MV scripts (server_scripts/grindless/mv/) add recipes of the same types under <type>/mv/: not counted here
+    // the MV and HV scripts (server_scripts/grindless/mv/, hv/) add recipes of the same types under <type>/mv/ and <type>/hv/: not counted here
     var notMv = function (recipes) {
       var n = 0
-      asArray(recipes).forEach(function (r) { if (String(r.id).indexOf('/mv/') < 0) n++ })
+      asArray(recipes).forEach(function (r) {
+        var id = String(r.id)
+        if (id.indexOf('/mv/') < 0 && id.indexOf('/hv/') < 0) n++
+      })
       return n
     }
     var haveDrilling = drilling ? notMv(rm.getAllRecipesFor(drilling)) : -1
@@ -204,6 +213,7 @@
     var ids = ['grindless:crafting/lv_vein_drill', 'grindless:crafting/lv_greenhouse', 'grindless:crafting/submerged_arc_furnace',
       'grindless:forming_press/graphite_electrode']
     nether.forEach(function (v) { ids.push('grindless:crafting/vein_sample/' + v.id) })
+    extra.forEach(function (v) { ids.push('grindless:crafting/vein_sample/' + v.id) })
     var missingRecipes = ids.filter(function (id) { return !rm.byKey(rl(id)).isPresent() })
     check(SCOPE, 'crafting', missingRecipes.length === 0,
       'count=' + ids.length + (missingRecipes.length > 0 ? ' missing=' + missingRecipes.join(',') : ''))
@@ -677,6 +687,26 @@
         // the vanadium steel bit is the MV drill's: its recipes (grindless:vein_drilling/mv/...) are vetoed here, with and without fluid
         name: 'mv_bit_gated', ticks: 60,
         items: [{ id: 'grindless:vein_sample_iron', n: 1 }, { id: 'grindless:vanadium_steel_drill_bit', n: 16 }], circuit: 0,
+        fluid: { id: 'gtceu:drilling_fluid', mb: 8000 },
+        verify: function (r) {
+          var n = Object.keys(r.items).length
+          return { ok: n === 0, detail: 'no recipe expected: output items=[' + itemSummary(r.items) + '] recipes seen=[' + seenIds(r) + ']' }
+        }
+      },
+      {
+        // the titanium bit is the HV drill's (grindless:vein_drilling/hv/...): vetoed here too
+        name: 'hv_bit_gated', ticks: 60,
+        items: [{ id: 'grindless:vein_sample_iron', n: 1 }, { id: 'grindless:titanium_drill_bit', n: 16 }], circuit: 0,
+        fluid: { id: 'gtceu:drilling_fluid', mb: 8000 },
+        verify: function (r) {
+          var n = Object.keys(r.items).length
+          return { ok: n === 0, detail: 'no recipe expected: output items=[' + itemSummary(r.items) + '] recipes seen=[' + seenIds(r) + ']' }
+        }
+      },
+      {
+        // an End sample with the vanadium steel bit: only the HV recipes exist for it, and they are the HV drill's
+        name: 'end_gated', ticks: 60,
+        items: [{ id: 'grindless:vein_sample_bauxite_end', n: 1 }, { id: 'grindless:vanadium_steel_drill_bit', n: 16 }], circuit: 0,
         fluid: { id: 'gtceu:drilling_fluid', mb: 8000 },
         verify: function (r) {
           var n = Object.keys(r.items).length

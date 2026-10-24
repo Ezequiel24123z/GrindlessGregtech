@@ -54,6 +54,12 @@ Gregtech Grindless es un pack de GregTech Modern (Minecraft 1.20.1, Forge) en el
   2. Nuestros multibloques se forman y procesan.
   3. Integración: las recetas existen, la generación automática funciona y la puerta al tier siguiente se puede fabricar.
 - **Si una prueba falla:** se arregla y se repite esa, no todas.
+- **No se vuelve a probar lo que ya está probado:**
+  - Si un mecanismo ya pasó su prueba en partida (un multibloque que forma y procesa, un tipo de receta, una tabla que genera recetas), el contenido nuevo que solo lo usa no se prueba otra vez en partida. Por ejemplo: más recetas en un multibloque o más filas en una tabla.
+  - Ese contenido se valida barato: el validador de recetas (`tools/analysis`), las comprobaciones estáticas y que el pack arranque sin errores de KubeJS.
+  - Se prueba en partida solo lo nuevo, lo que cambia el mecanismo o algo que ya falló antes.
+  - Antes de lanzar una prueba cara, hay que poder decir qué duda nueva resuelve.
+  - Al etiquetar una versión se pasan las pruebas de lo que ha cambiado y las del tier nuevo, no la batería entera.
 - **Scripts de prueba:** van en `tools/test/overlay/` y no se publican con el pack.
 - **Zonas de prueba:** los tests se lanzan casi a la vez en el mismo servidor, así que cada uno construye y limpia solo su franja del Overworld (Y 98–112). Las franjas tienen 64 bloques de ancho en X y empiezan en Z 0:
 
@@ -65,6 +71,12 @@ Gregtech Grindless es un pack de GregTech Modern (Minecraft 1.20.1, Forge) en el
   | multibloques LV | 256–319 |
   | planta MV | 512–575 |
   | multibloques MV | 768–831 |
+  | multibloques HV | 1024–1087 |
+  | refinería HV | 1280–1343 (Y 98–113) |
+  | planta EV | 1536–1599 |
+  | multibloques EV | 1792–1855 |
+  | planta IV | 2048–2111 |
+  | multibloques IV | 2304–2367 |
 
   Para un test nuevo se sigue en saltos de 256.
 

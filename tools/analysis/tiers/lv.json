@@ -37,7 +37,6 @@
       "mode": "manual",
       "bootstrap": true,
       "template": "gtceu:raw_{m}",
-      "overrides": { "iron": "minecraft:raw_iron", "copper": "minecraft:raw_copper", "gold": "minecraft:raw_gold" },
       "fromVeins": { "dimensions": ["minecraft:the_nether"] },
       "materials": [],
       "note": "Decisión 4: la muestra de una veta del Nether se fabrica con dos menas de esa veta, así que basta un viaje a mano (exploración, no grind); después la perforadora LV las repone."
@@ -247,7 +246,6 @@
       "requireItem": "grindless:vein_sample_{id}",
       "exclusiveFrom": ["minecraft:overworld"],
       "template": "gtceu:raw_{m}",
-      "overrides": { "iron": "minecraft:raw_iron", "copper": "minecraft:raw_copper", "gold": "minecraft:raw_gold" },
       "mode": "anyOf"
     }
   ],

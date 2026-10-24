@@ -1,5 +1,5 @@
 // Informe de texto y JSON.
-import { blockedRoots, blockedRuleTree, blockedTree, derivationTree, describeRule, keyName, renderTree } from './explain.mjs';
+import { blockedRoots, blockedRuleTree, blockedTree, derivationTree, describeRule, keyName, machinelessTree, renderTree } from './explain.mjs';
 import { blockerFor, evalTarget, STATUS } from './analyze.mjs';
 import { asArray, sortedEntries } from './util.mjs';
 
@@ -55,6 +55,41 @@ function targetTitle(model, result) {
   return `${t.label || t.id}${keys && t.label !== keys ? ` (${keys})` : ''}${without}`;
 }
 
+const WHY_TEXT = {
+  'sin-maquina': (n) => `${n} sin ninguna máquina registrada que las ejecute`,
+  eut: (n, t) => `${n} por encima de ${t.maxEUt} EU/t`,
+  entradas: (n) => `${n} con alguna entrada o condición inalcanzable`,
+};
+
+/** Líneas del resultado de una comprobación de fuga sobre recetas (expect + type/recipe, con o sin machineless). */
+function negativeRecipeLines(model, res, r, mode, view) {
+  const g = model.g;
+  const t = r.target;
+  const L = [];
+  const scope = [t.type ? `de tipo ${t.type}` : '', t.recipe ? `con id ${asArray(t.recipe).join(' | ')}` : '', t.output ? `que producen ${t.output}` : '']
+    .filter(Boolean).join(' ');
+  if (r.verdict === MARK.PASS) {
+    if (r.defined.length === 0) {
+      L.push(`no hay ninguna receta ${scope} en el pack (quitada o nunca existió), como debe ser`);
+      return L;
+    }
+    const why = Object.entries(r.why).map(([k, n]) => (WHY_TEXT[k] ? WHY_TEXT[k](n, t) : `${n} ${k}`));
+    L.push(`${r.defined.length} receta(s) ${scope} existen pero ninguna se puede usar en este tier${why.length > 0 ? ` (${why.join('; ')})` : ''}, como debe ser`);
+    return L;
+  }
+  L.push(`FUGA: ${r.hits.length} receta(s) ${scope} se pueden usar en este tier y no deberían: ${describeRule(g, r.hits[0])}${r.hits.length > 1 ? ` (+${r.hits.length - 1} más)` : ''}`);
+  const lf = mode === 'gate' ? view.gate : view.susInf.G;
+  const tree = t.machineless
+    ? machinelessTree(model, lf, r.hits[0], mode === 'auto' ? res.gate.reached : null)
+    : derivationTree(model, lf, null, undefined, r.hits[0]);
+  L.push(...renderTree(model, tree, { prefix: '    ', levels: mode === 'gate' }).map((l) => '  ' + l));
+  if (t.machineless) {
+    const runners = model.runnersOf(g.rules[r.hits[0]].type);
+    L.push(`  (solo lo impide que no se pueda construir ninguna de las máquinas registradas que la ejecutan: ${runners.slice(0, 4).join(', ')}${runners.length > 4 ? ' …' : ''})`);
+  }
+  return L;
+}
+
 function evaluateAll(model, res, targets, mode, cache, opts) {
   const out = [];
   for (const t of targets) {
@@ -63,6 +98,12 @@ function evaluateAll(model, res, targets, mode, cache, opts) {
     r.lines = [];
     const g = model.g;
     const view = r.view || res;
+    if (r.negative && r.kind === 'recipe') {
+      // fuga de una receta (o de un tipo de receta): PASS si ninguna coincidencia se puede usar en este tier
+      r.lines.push(...negativeRecipeLines(model, res, r, mode, view));
+      out.push(r);
+      continue;
+    }
     if (r.negative) {
       // comprobación de fuga (expect: "unreachable" en la puerta, "not-automatic" en automático)
       if (r.verdict === MARK.PASS) {
@@ -71,7 +112,7 @@ function evaluateAll(model, res, targets, mode, cache, opts) {
           : `no se produce sola, como debe ser (${STATUS_TEXT[r.status] || r.status})`);
       } else if (mode === 'gate') {
         r.lines.push('FUGA: se puede conseguir en este tier y no debería. Así:');
-        const tree = derivationTree(model, res.gate, r.key);
+        const tree = derivationTree(model, view.gate, r.key);
         r.lines.push(...renderTree(model, tree, { prefix: '    ', levels: true }).map((l) => '  ' + l));
       } else {
         r.lines.push('FUGA: se produce sola y no debería. Así:');
@@ -85,14 +126,14 @@ function evaluateAll(model, res, targets, mode, cache, opts) {
       if (r.kind === 'recipe') {
         const first = r.hits[0];
         r.lines.push(`receta usable: ${describeRule(g, first)}${r.hits.length > 1 ? ` (+${r.hits.length - 1} más)` : ''}`);
-      } else if (r.key !== null && mode === 'gate' && res.gate.via[r.key] >= 0) {
-        r.lines.push(`nivel ${res.gate.level[r.key]} · ${describeRule(g, res.gate.via[r.key])}`);
+      } else if (r.key !== null && mode === 'gate' && view.gate.via[r.key] >= 0) {
+        r.lines.push(`nivel ${view.gate.level[r.key]} · ${describeRule(g, view.gate.via[r.key])}`);
       } else if (r.key !== null && mode === 'auto') {
         const sr = view.susInf.supportRule[r.key];
         r.lines.push(sr >= 0 ? `se sostiene con ${describeRule(g, sr)}` : 'recurso permanente del mundo');
       } else if (r.key !== null) r.lines.push('recurso del mundo');
       if (opts.verbose || (opts.explain && matches(opts.explain, t, model, r))) {
-        const G = mode === 'gate' ? res.gate : view.susInf.G;
+        const G = mode === 'gate' ? view.gate : view.susInf.G;
         const tree = r.kind === 'recipe' ? derivationTree(model, G, null, undefined, r.hits[0]) : derivationTree(model, G, r.key);
         r.lines.push(...renderTree(model, tree, { prefix: '    ', levels: mode === 'gate' }).map((l) => '  ' + l));
       }
@@ -104,7 +145,7 @@ function evaluateAll(model, res, targets, mode, cache, opts) {
         if (r.defined.length === 0) {
           const withInput = t.input ? ' con entrada ' + asArray(t.input).join(' + ') : '';
           const inDim = t.dimension ? ` (válida en ${t.dimension})` : '';
-          r.lines.push(`no hay ninguna receta de tipo ${t.type}${t.output ? ' que produzca ' + t.output : ''}${withInput}${inDim} en el pack`);
+          r.lines.push(`no hay ninguna receta ${t.type ? 'de tipo ' + t.type : 'con id ' + asArray(t.recipe).join(' | ')}${t.type && t.recipe ? ' con id ' + asArray(t.recipe).join(' | ') : ''}${t.output ? ' que produzca ' + t.output : ''}${withInput}${inDim} en el pack`);
         } else r.lines.push(`hay ${r.defined.length} receta(s) del tipo, pero ninguna se puede completar (la más cercana: ${describeRule(g, near)})`);
         if (near >= 0) {
           const bl = blockerFor(model, res, mode, cache, view);
@@ -165,7 +206,9 @@ export function renderText(model, res, out, opts = {}) {
   L.push(`          ${dump.recipes.size} recetas · ${dump.items.size} objetos · ${dump.fluids.size} fluidos · ${dump.tags.itemTags.size} etiquetas de objeto${modInfo ? ' · ' + modInfo : ''}`);
   L.push(`Modelo  : ${g.rules.length} reglas · ${g.nKeys} recursos · mundo: ${model.facts.manual.length} a mano, ${model.facts.auto.length} fijos, ${model.facts.bootstrap.length} de arranque`);
   const added = [...dump.recipes.values()].filter((r) => r.added).length;
-  L.push(`          ${added} recetas añadidas por scripts del pack · tipos GT con recetas: ${[...new Set([...dump.recipes.values()].map((r) => r.type))].filter((t) => t === 'gtceu:vein_drilling' || t === 'gtceu:greenhouse').join(', ') || '(ni vein_drilling ni greenhouse)'}`);
+  const OUR_TYPES = ['gtceu:vein_drilling', 'gtceu:greenhouse', 'gtceu:ore_processing', 'gtceu:bio_distillation', 'gtceu:refining', 'gtceu:reforming', 'gtceu:pgm_refining'];
+  const typesWithRecipes = new Set([...dump.recipes.values()].map((r) => r.type));
+  L.push(`          ${added} recetas añadidas por scripts del pack · tipos propios del pack con recetas: ${OUR_TYPES.filter((t) => typesWithRecipes.has(t)).join(', ') || '(ninguno: ni vein_drilling ni greenhouse)'}`);
   L.push(`Contexto: la fábrica está en la dimensión ${cfg.contextDimension}`);
   if (model.warnings.length > 0) {
     L.push('');
@@ -219,7 +262,7 @@ export function renderText(model, res, out, opts = {}) {
     for (const [k, machines] of byWhy) L.push(`  - pieza que la config de GTM no exige: ${k} en ${machines.join(', ')}`);
   }
   if (model.stats.veinsWithoutItem.length > 0) {
-    L.push(`  - vetas del registro sin objeto de la tabla de la perforadora (otros mods; no se comprueban): ${model.stats.veinsWithoutItem.join(', ')}`);
+    L.push(`  - vetas del registro sin objeto de la tabla de la perforadora (de otros mods o que el pack aún no ofrece, p. ej. las radiactivas del End; no se comprueban): ${model.stats.veinsWithoutItem.join(', ')}`);
   }
   L.push('  - análisis cualitativo: ignora cantidades, tiempos y rendimientos; las salidas con probabilidad cuentan como producidas.');
   L.push('');
