@@ -10,8 +10,8 @@
 	quests: [
 		{
 			description: [
-				"The rule of the journey: the first trip to a new place is made the hard way - on foot, through a portal and, later on, by rocket. After that, going back is free."
-				"Waystones and FTB homes are how you go back."
+				"The first trip to each planet is by rocket. Once you have landed there, going back and forth costs nothing."
+				"Waystones and FTB homes do the rest."
 			]
 			icon: "waystones:waystone"
 			id: "12AEF6D64403D824"
@@ -25,37 +25,37 @@
 		}
 		{
 			dependencies: ["12AEF6D64403D824"]
-			description: ["Amethyst, an emerald and the ender pearls your creature simulator prints. The &6Warp Stone&r is the heart of every waystone - and on its own it is a pocket teleporter to any waystone you know, with a short cooldown."]
+			description: ["The &6Warp Stone&r is the core of every waystone. Carry one and you can warp to any waystone you have already used."]
 			icon: "waystones:warp_stone"
 			id: "4707632A61002DA6"
-			rewards: [{ id: "5C1D9D8F55B6D26F", type: "xp", xp: 15 }]
+			rewards: [{ id: "5C1D9D8F55B6D26F", type: "xp", xp: 15 }, { id: "3D6A1E9F0B72C584", item: "minecraft:ender_pearl", count: 2, type: "item" }]
 			tasks: [{ id: "62F517C7367C2D4F", item: "waystones:warp_stone", type: "item" }]
 			title: "Warp Stone"
 			x: 2.5d
-			y: -1.5d
+			y: 0.0d
 		}
 		{
 			dependencies: ["4707632A61002DA6"]
-			description: ["A warp stone in stone bricks and obsidian. Use a &6Waystone&r once to remember it, then use any waystone to jump to any other you know. Villages often have one already."]
+			description: ["Place a &6Waystone&r and use it once to remember the spot. Any waystone you know can take you to any other. Villages often have one already. After your first rocket trip to a planet, jumps cost no XP."]
 			icon: "waystones:waystone"
 			id: "6C51B805476EAF2E"
 			rewards: [{ id: "09BE8D8784D005BC", type: "xp", xp: 20 }]
 			tasks: [{ id: "46469F20236DF527", item: "waystones:waystone", type: "item" }]
 			title: "Waystones"
 			x: 5.0d
-			y: -1.5d
+			y: 0.0d
 		}
 		{
 			dependencies: ["4707632A61002DA6"]
-			description: ["Paper, gold and an ender pearl: a &6Warp Scroll&r is a one-use jump to any waystone you know - for the trip where the warp stone stayed at home."]
+			description: ["A &6Warp Scroll&r is a one-use jump to any waystone you know, for the trip where the warp stone stayed at home."]
 			icon: "waystones:warp_scroll"
 			id: "1566F6F63DFCB18E"
 			optional: true
 			rewards: [{ id: "4537643B393E7CD8", type: "xp", xp: 10 }]
 			tasks: [{ id: "100017B7FC4BEE7F", item: "waystones:warp_scroll", type: "item" }]
 			title: "Warp Scrolls"
-			x: 2.5d
-			y: -3.5d
+			x: 5.0d
+			y: -1.5d
 		}
 		{
 			dependencies: ["6C51B805476EAF2E"]
@@ -66,8 +66,8 @@
 			rewards: [{ id: "1D04742942B9BD90", type: "xp", xp: 10 }]
 			tasks: [{ id: "7C47583A2F86F94B", item: "waystones:sharestone", type: "item" }]
 			title: "Sharestones"
-			x: 5.0d
-			y: -3.5d
+			x: 7.5d
+			y: -1.5d
 		}
 		{
 			dependencies: ["6C51B805476EAF2E"]
@@ -79,11 +79,11 @@
 			tasks: [{ count: 2L, id: "70AA17481229BF3D", item: "waystones:warp_plate", type: "item" }]
 			title: "Warp Plates"
 			x: 7.5d
-			y: -3.5d
+			y: 1.5d
 		}
 		{
 			dependencies: ["6C51B805476EAF2E"]
-			description: ["From the Moon on, the first landing on each world is by rocket, as the era chapters tell. Once you have been, place a waystone: from then on the trip home is one click."]
+			description: ["Every world past Earth is reached first by rocket. Once you have landed, Traveler's Titles greets you with its name each time you arrive, and its waystones join the rest of your network."]
 			icon: "waystones:warp_stone"
 			id: "6E7F12273752EC74"
 			rewards: [{ id: "694201DD928B720B", type: "xp", xp: 20 }]
@@ -92,75 +92,75 @@
 			tasks: [{ id: "37B9D0EF3915D56B", type: "checkmark" }]
 			title: "Other Worlds"
 			x: 7.5d
-			y: -1.5d
+			y: 0.0d
 		}
 		{
 			dependencies: ["12AEF6D64403D824"]
-			description: ["Playing with friends? &6/ftbteams party create <name>&r makes a party and &6/ftbteams party invite <player>&r brings the others in. Quest progress, chunk claims and force-loaded chunks all belong to the team."]
+			description: ["Playing with friends? A team shares quest progress, chunk claims and force-loaded chunks. Create one with &6/ftbteams party create&r and add players with &6/ftbteams party invite&r."]
 			icon: "minecraft:player_head"
 			id: "4F6670F0CBAD4003"
 			rewards: [{ id: "431CD4020C3C03AE", type: "xp", xp: 10 }]
 			tasks: [{ id: "096E3EC935BBC87C", type: "checkmark" }]
 			title: "Teams"
 			x: 2.5d
-			y: 1.5d
+			y: 3.0d
 		}
 		{
 			dependencies: ["4F6670F0CBAD4003"]
-			description: ["In the &6FTB Chunks&r claim screen, reached from its map, drag with the left button to claim chunks and with the right button to unclaim them. Claimed chunks are safe from other players, explosions and mob griefing, and your allies can still build there."]
+			description: ["Open the &6FTB Chunks&r map and left-click to claim chunks, right-click to unclaim them. Claimed chunks keep other players out, and your team can still build there."]
 			icon: "minecraft:filled_map"
 			id: "163B6BC04C86A82F"
 			rewards: [{ id: "2D014075731A6F64", type: "xp", xp: 10 }]
 			tasks: [{ id: "73961D60089A3BFE", type: "checkmark" }]
 			title: "Claim Your Base"
 			x: 5.0d
-			y: 1.5d
+			y: 3.0d
 		}
 		{
 			dependencies: ["163B6BC04C86A82F"]
-			description: ["Hold Shift while you drag over claimed chunks in the same screen to force-load them, and the factory keeps running while you are elsewhere - up to 25 chunks a player by default. It works while someone from the team is online; running with everyone offline is a server setting."]
+			description: ["Force-load your claimed chunks so the factory keeps running while you are elsewhere. Each player has a chunk limit, so spend it on the machines that matter."]
 			icon: "minecraft:compass"
 			id: "519566BBE2C4D41C"
 			rewards: [{ id: "1B82C2023D6835DB", type: "xp", xp: 10 }]
 			tasks: [{ id: "2C03F17071955571", type: "checkmark" }]
 			title: "Force-Loading"
 			x: 7.5d
-			y: 1.5d
+			y: 3.0d
 		}
 		{
-			dependencies: ["12AEF6D64403D824"]
-			description: ["&6/sethome&r marks a spot and &6/home&r brings you back to it from anywhere, other dimensions included. &6/back&r returns you to where you last teleported or died, and &6/spawn&r to the world spawn. One home by default - waystones cover the rest."]
+			dependencies: ["4F6670F0CBAD4003"]
+			description: ["&6/sethome&r marks a spot and &6/home&r brings you back to it from anywhere, other dimensions included. &6/back&r returns you to where you last teleported or died, and &6/spawn&r to the world spawn. Every new world gives you ten FTB homes, and waystones cover the rest."]
 			icon: "minecraft:red_bed"
 			id: "5DE8DE1C904AF34B"
 			rewards: [{ id: "57CC98606B08728A", type: "xp", xp: 10 }]
 			tasks: [{ id: "74E29CF1BAFFE1C3", type: "checkmark" }]
 			title: "Homes"
-			x: 2.5d
-			y: 3.5d
+			x: 5.0d
+			y: 4.5d
 		}
 		{
 			dependencies: ["12AEF6D64403D824"]
-			description: ["Leather wings on a stick frame: deploy the &6Hang Glider&r and jump off something tall. The quickest way across a valley between two parts of the base."]
+			description: ["Deploy the &6Hang Glider&r and jump off something tall. It is the quickest way across a valley between two parts of the base."]
 			icon: "hangglider:hang_glider"
 			id: "108A377BAE71CCAC"
 			optional: true
 			rewards: [{ id: "22606DB25D25E40F", type: "xp", xp: 10 }]
 			tasks: [{ id: "04B66DE8EE4E4DF4", item: "hangglider:hang_glider", type: "item" }]
 			title: "Hang Glider"
-			x: -2.5d
+			x: 2.5d
 			y: -1.5d
 		}
 		{
-			dependencies: ["12AEF6D64403D824"]
-			description: ["Wool around an ender pearl. Stack two &6Elevators&r in a column with space between them: jump to go up, sneak to go down."]
+			dependencies: ["108A377BAE71CCAC"]
+			description: ["Stack two &6Elevators&r in a column with space between them: jump to go up, sneak to go down."]
 			icon: "elevatorid:elevator_white"
 			id: "76969ADCD80E372D"
 			optional: true
 			rewards: [{ id: "7FD01E48264DA278", type: "xp", xp: 10 }]
 			tasks: [{ count: 2L, icon: "elevatorid:elevator_white", id: "1237E3E0A6FB19DC", item: { Count: 1b, id: "itemfilters:tag", tag: { value: "elevatorid:elevators" } }, title: "Any Elevator", type: "item" }]
 			title: "Elevators"
-			x: -2.5d
-			y: 1.5d
+			x: 5.0d
+			y: -3.0d
 		}
 		{
 			dependencies: ["12AEF6D64403D824"]
@@ -171,32 +171,32 @@
 			rewards: [{ id: "77C5775A506EB26A", type: "xp", xp: 10 }]
 			tasks: [{ icon: "naturescompass:naturescompass", id: "510EAC69889A6EB6", item: { Count: 1b, id: "itemfilters:or", tag: { items: [{ Count: 1b, id: "naturescompass:naturescompass" }, { Count: 1b, id: "explorerscompass:explorerscompass" }] } }, title: "Either Compass", type: "item" }]
 			title: "Find Your Way"
-			x: -2.5d
-			y: -3.5d
+			x: 2.5d
+			y: -3.0d
 		}
 		{
-			dependencies: ["12AEF6D64403D824"]
-			description: ["A &6Mega Torch&r stops hostile mobs from spawning in a wide area around it. One per factory, and night stops being a problem."]
+			dependencies: ["519566BBE2C4D41C"]
+			description: ["A &6Mega Torch&r stops hostile mobs from spawning in a wide area around it, so the factory can run through the night."]
 			icon: "torchmaster:megatorch"
 			id: "18D17CBDBD8EA0B2"
 			optional: true
 			rewards: [{ id: "5BB4860262FED842", type: "xp", xp: 10 }]
 			tasks: [{ id: "3E14A280E80B080E", item: "torchmaster:megatorch", type: "item" }]
 			title: "Mega Torch"
-			x: -2.5d
-			y: 3.5d
+			x: 10.0d
+			y: 3.0d
 		}
 		{
-			dependencies: ["12AEF6D64403D824"]
-			description: ["Died? Your things wait in a &6corpse&r where you fell - open it to take everything back. &6/back&r gets you there."]
+			dependencies: ["5DE8DE1C904AF34B"]
+			description: ["Died? Your things wait in a &6corpse&r where you fell. Open it to take everything back. &6/back&r gets you there."]
 			icon: "minecraft:skeleton_skull"
 			id: "4F7C467145ED8D69"
 			optional: true
 			rewards: [{ id: "71C4454C9F898AE4", type: "xp", xp: 5 }]
 			tasks: [{ id: "2A4D3F28999A431C", type: "checkmark" }]
 			title: "Second Chances"
-			x: -5.0d
-			y: 0.0d
+			x: 7.5d
+			y: 4.5d
 		}
 	]
 	subtitle: ["Getting around, and not alone"]

@@ -10,9 +10,10 @@
 	quests: [
 		{
 			description: [
-				"AE2 is whole at LV in this pack - no meteorites, no presses to dig up. Its entry points run through GregTech machines; everything after them is plain AE2."
-				"Hold &6G&r over any AE2 item to open its guide page. The basics are here, the guide has the rest."
+				"The LV ME Interface and ME Terminal are the way in. From here the network grows into storage, crafting and the addons that tie it to GregTech."
+				"Hold &6G&r over any AE2 item to open its guide page. The guide has the details."
 			]
+			dependencies: ["09539172C5EF719B"]
 			icon: "ae2:controller"
 			id: "38EE187ED07F2279"
 			rewards: [
@@ -28,7 +29,7 @@
 		}
 		{
 			dependencies: ["38EE187ED07F2279"]
-			description: ["AE2's silicon comes from the &6Submerged Arc Furnace&r: quartz sand and coke dust under a graphite electrode. GregTech's own silicon ingot still waits for MV - the network only needs this one."]
+			description: ["The &6Submerged Arc Furnace&r makes the silicon AE2 uses. It is the first step of the crafting chain, and GregTech's own silicon ingot can wait."]
 			icon: "ae2:silicon"
 			id: "3AA242B7C5A510C3"
 			rewards: [{ id: "49271A078D4D50E7", type: "xp", xp: 15 }]
@@ -39,7 +40,7 @@
 		}
 		{
 			dependencies: ["38EE187ED07F2279"]
-			description: ["Certus dust grows into a crystal in the &6Autoclave&r - water works, distilled water is quicker. Most AE2 recipes take GregTech's certus gem as well."]
+			description: ["Certus dust grows into a crystal in the &6Autoclave&r. Most AE2 recipes also take GregTech's certus gem."]
 			icon: "ae2:certus_quartz_crystal"
 			id: "2355A754D6DF98A0"
 			rewards: [{ id: "1BE196B68912DDA3", type: "xp", xp: 15 }]
@@ -50,7 +51,7 @@
 		}
 		{
 			dependencies: ["3AA242B7C5A510C3"]
-			description: ["A steel plate plus certus, diamond, gold or silicon in the LV &6Forming Press&r stamps one of the four presses. They are never used up, and no meteorite hunt is needed."]
+			description: ["The LV &6Forming Press&r stamps each processor press from a plate and one of four materials. A press is never used up once it is made."]
 			icon: "ae2:logic_processor_press"
 			id: "5C4C635A051A37DE"
 			rewards: [{ id: "1B6D57D4DB10C490", type: "xp", xp: 15 }]
@@ -61,7 +62,7 @@
 		}
 		{
 			dependencies: ["2355A754D6DF98A0"]
-			description: ["The LV &6Polarizer&r charges certus with EU alone. The &6Mixer&r turns charged certus, redstone and quartzite dust into fluix with a splash of water - no trip to the Nether."]
+			description: ["The LV &6Polarizer&r charges certus with EU alone. The &6Mixer&r turns charged certus into fluix, with redstone and quartzite dust."]
 			icon: "ae2:fluix_crystal"
 			id: "2ADCAA7DB2333938"
 			rewards: [{ id: "32FBE183BD367123", type: "xp", xp: 15 }]
@@ -75,7 +76,7 @@
 		}
 		{
 			dependencies: ["5C4C635A051A37DE", "2ADCAA7DB2333938"]
-			description: ["Both come out of the LV &6Assembler&r: a machine hull, pistons or a motor, an LV circuit and certus. Once placed they work exactly as AE2 made them."]
+			description: ["Both are built in the LV &6Assembler&r. Once placed, they work the same as the AE2 versions."]
 			icon: "ae2:inscriber"
 			id: "5F5A231D0105D5C1"
 			rewards: [{ id: "5092627CAE00CCC2", type: "xp", xp: 20 }]
@@ -89,7 +90,7 @@
 		}
 		{
 			dependencies: ["5F5A231D0105D5C1"]
-			description: ["Print the circuit and the silicon in the inscriber, then press them together with redstone. Logic, calculation and engineering processors go into nearly every network part."]
+			description: ["The inscriber presses a circuit and silicon into processors. Logic, calculation and engineering processors go into nearly every network part."]
 			icon: "ae2:engineering_processor"
 			id: "2488399E0CDDE19C"
 			rewards: [{ id: "7391BB6408E3385B", type: "xp", xp: 20 }]
@@ -104,7 +105,7 @@
 		}
 		{
 			dependencies: ["2488399E0CDDE19C"]
-			description: ["The brain of the network: an LV hull, smooth sky stone, fluix and an engineering processor in the assembler. Each face of the controller sends out 32 channels, and almost every device on the network needs one."]
+			description: ["The brain of the network. Almost every device on the network needs a channel from the controller, so the cables and parts after it all run from here."]
 			icon: "ae2:controller"
 			id: "1099965F1BB5578D"
 			rewards: [{ id: "252D94B85F7AAB23", type: "xp", xp: 25 }]
@@ -116,7 +117,7 @@
 		{
 			dependencies: ["1099965F1BB5578D"]
 			description: [
-				"AE2 runs on its own energy, fed from Forge Energy. Put an &6Energy Acceptor&r against a GregTech &6Energy Converter&r switched to EU to FE with a soft mallet, and the grid powers the network."
+				"The network draws Forge Energy. Put an &6Energy Acceptor&r against a GregTech &6Energy Converter&r switched to EU to FE with a soft mallet, and the grid powers the network."
 				"An &6Energy Cell&r keeps it running through a short blackout."
 			]
 			icon: "ae2:energy_acceptor"
@@ -135,7 +136,7 @@
 			dependencies: ["6877CAA8988871F0"]
 			description: [
 				"&6Applied Flux&r stores Forge Energy in cells and moves it through the network: the &6Flux Accessor&r is its plug, and an Induction Card in an interface feeds the blocks around it."
-				"Its energy processor is an MV assembler recipe. EU still comes from GregTech converters - nothing here makes power."
+				"EU still comes from GregTech converters; nothing here makes power."
 			]
 			icon: "appflux:flux_accessor"
 			id: "52F7C6CE45331142"
@@ -152,7 +153,7 @@
 		{
 			dependencies: ["1099965F1BB5578D"]
 			description: [
-				"Glass, covered and smart cable carry 8 channels; dense cable carries 32. Smart cables light up to show how many they are using."
+				"Glass and covered cable carry the fewest channels, smart cable more, and dense smart cable the most. Smart cables light up to show how full they are."
 				"Run dense trunks from the controller and branch off with normal cable. When a device goes dark with power on, you are out of channels."
 			]
 			icon: "ae2:fluix_smart_cable"
@@ -163,12 +164,12 @@
 				{ icon: "ae2:fluix_smart_dense_cable", id: "2533A76FD449B96F", item: { Count: 1b, id: "itemfilters:tag", tag: { value: "ae2:smart_dense_cable" } }, optional_task: true, title: "Any ME Dense Smart Cable", type: "item" }
 			]
 			title: "Cables and Channels"
-			x: 12.5d
+			x: 15.0d
 			y: 2.5d
 		}
 		{
 			dependencies: ["1099965F1BB5578D"]
-			description: ["The &6ME Drive&r holds ten storage cells. A cell is a housing plus a component - 1k to start, and each size up takes three of the one below. Fluid cells work the same way."]
+			description: ["The &6ME Drive&r holds the storage cells. A cell is a housing plus a component, and the 1k cell is where every network starts. Fluid cells work the same way."]
 			icon: "ae2:drive"
 			id: "3D91EF1ABE20EB0D"
 			rewards: [{ id: "70991E501BE568FC", type: "xp", xp: 20 }]
@@ -182,7 +183,7 @@
 		}
 		{
 			dependencies: ["3D91EF1ABE20EB0D"]
-			description: ["Three 1k components, a calculation processor, quartz glass and redstone. Every size up follows the same pattern."]
+			description: ["The first component that holds more than the 1k cell. Every size up follows the same pattern."]
 			icon: "ae2:cell_component_4k"
 			id: "5563D90752E0F0D9"
 			rewards: [{ id: "7FB8865CC720FE43", type: "xp", xp: 10 }]
@@ -194,7 +195,7 @@
 		}
 		{
 			dependencies: ["5563D90752E0F0D9"]
-			description: ["Glowstone takes over from redstone here. An item cell holds up to 63 kinds of item, so partition cells in the Cell Workbench before one kind fills the drive."]
+			description: ["Each size up uses rarer parts. An item cell holds a limited number of kinds, so partition cells in the Cell Workbench before one kind fills the drive."]
 			icon: "ae2:cell_component_16k"
 			id: "4F014C18D925478E"
 			rewards: [{ id: "0CB8DCA3B2D1F431", type: "xp", xp: 10 }]
@@ -218,7 +219,7 @@
 		}
 		{
 			dependencies: ["27C9589C71D2ECEB"]
-			description: ["Sky dust takes over from glowstone, and this is the largest cell AE2 alone can make. Past it, MEGA Cells take over at IV."]
+			description: ["The largest cell plain AE2 makes. Past it, MEGA Cells take over at IV."]
 			icon: "ae2:cell_component_256k"
 			id: "1626F8CC75D6BBCD"
 			rewards: [{ id: "6149B3F1E2815B71", type: "xp", xp: 25 }]
@@ -244,7 +245,7 @@
 		}
 		{
 			dependencies: ["263BFD3AC4314340"]
-			description: ["Patterns store recipes. Encode &6crafting&r patterns for anything made on a crafting grid and &6processing&r patterns for anything a machine does - every GregTech recipe is a processing pattern."]
+			description: ["Patterns store recipes. Encode &6crafting&r patterns for anything made on a crafting grid and &6processing&r patterns for anything a machine does. Every GregTech recipe is a processing pattern."]
 			icon: "ae2:pattern_encoding_terminal"
 			id: "3F8B30362EE28B61"
 			rewards: [{ id: "0E43AF199C66A945", type: "xp", xp: 15 }]
@@ -347,7 +348,7 @@
 			y: 2.5d
 		}
 		{
-			dependencies: ["794F4E39DA21E1A2"]
+			dependencies: ["1099965F1BB5578D"]
 			description: ["The &6ME Interface&r keeps a few stacks of chosen items on hand for pipes and machines to take, and sends whatever it receives into the network."]
 			icon: "ae2:interface"
 			id: "7EBBE1CF534F29D6"
@@ -355,7 +356,7 @@
 			tasks: [{ id: "25137F2AC8EB51F6", item: "ae2:interface", type: "item" }]
 			title: "ME Interface"
 			x: 12.5d
-			y: 5.0d
+			y: 2.5d
 		}
 		{
 			dependencies: ["7EBBE1CF534F29D6"]
@@ -391,8 +392,8 @@
 		{
 			dependencies: ["7EBBE1CF534F29D6"]
 			description: [
-				"A &6P2P Tunnel&r sends one thing through a single channel: 32 channels, items, fluids, redstone or FE. Right-click a tunnel with what it should carry to retune it, and link the input to its outputs with a &6Memory Card&r."
-				"Tunnels never push or pull on their own - something has to feed the input."
+				"A &6P2P Tunnel&r sends one thing through a single channel: items, fluids, redstone or FE. Right-click a tunnel with what it should carry to retune it, and link the input to its outputs with a &6Memory Card&r."
+				"Tunnels never push or pull by themselves; something has to feed the input."
 			]
 			icon: "ae2:me_p2p_tunnel"
 			id: "2085F78EAB2C08E0"
@@ -403,7 +404,7 @@
 			]
 			title: "P2P Tunnels"
 			x: 12.5d
-			y: 7.5d
+			y: 5.5d
 		}
 		{
 			dependencies: ["2085F78EAB2C08E0"]
@@ -419,7 +420,7 @@
 		}
 		{
 			dependencies: ["2085F78EAB2C08E0"]
-			description: ["The &6Advanced Memory Card&r lists every P2P tunnel on the network and links, renames and retunes them from one screen - no more walking the cable."]
+			description: ["The &6Advanced Memory Card&r lists every P2P tunnel on the network and links, renames and retunes them from one screen, so nobody walks the cable."]
 			icon: "betterp2p:advanced_memory_card"
 			id: "43ED82AC7DACA796"
 			optional: true
@@ -427,7 +428,7 @@
 			tasks: [{ id: "5CB142A1AD3D13AB", item: "betterp2p:advanced_memory_card", type: "item" }]
 			title: "Better P2P"
 			x: 12.5d
-			y: 9.5d
+			y: 8.5d
 		}
 		{
 			dependencies: ["263BFD3AC4314340"]
@@ -441,11 +442,11 @@
 			]
 			title: "Wireless Access"
 			x: 20.0d
-			y: 5.0d
+			y: 3.5d
 		}
 		{
 			dependencies: ["7CD0184FBE907F0C"]
-			description: ["AE2WTLib adds wireless pattern encoding and pattern access terminals - each needs a GregTech MV battery and an MV circuit - and a &6Universal Terminal&r that merges them. The Wireless Comprehensive Work Terminal folds all four into one item."]
+			description: ["AE2WTLib adds wireless pattern encoding and pattern access terminals, plus a &6Universal Terminal&r that merges them. The Wireless Comprehensive Work Terminal folds all four into one item."]
 			icon: "ae2wtlib:wireless_universal_terminal"
 			id: "19A021F221E595D2"
 			rewards: [{ id: "3559F2DC375F5BB1", type: "xp", xp: 20 }]
@@ -475,7 +476,7 @@
 			y: 5.0d
 		}
 		{
-			dependencies: ["331CD545A1B1E755"]
+			dependencies: ["401395583FA0B7EA"]
 			description: ["ExtendedAE's bigger parts each take an HV circuit: the &6Extended Pattern Provider&r and &6Extended Interface&r have four times the slots, the &6Extended Drive&r twice the cells. Fewer blocks, fewer channels."]
 			icon: "expatternprovider:ex_pattern_provider"
 			id: "36995D579FF95FDB"
@@ -492,7 +493,7 @@
 		}
 		{
 			dependencies: ["36995D579FF95FDB"]
-			description: ["The &6Pattern Modifier&r multiplies or divides every pattern you load into it - feed a parallel multiblock a whole batch per push instead of one recipe at a time."]
+			description: ["The &6Pattern Modifier&r multiplies or divides every pattern you load into it. Feed a parallel multiblock a whole batch per push instead of one recipe at a time."]
 			icon: "expatternprovider:pattern_modifier"
 			id: "06BEE6F40C916AA1"
 			rewards: [{ id: "13AD955FAA008412", type: "xp", xp: 15 }]
@@ -504,7 +505,7 @@
 		}
 		{
 			dependencies: ["36995D579FF95FDB"]
-			description: ["A pair of &6Wireless Connectors&r carries channels across a short gap with no cable in between - same dimension, short range. Link the pair with the wireless tool."]
+			description: ["A pair of &6Wireless Connectors&r carries channels across a short gap with no cable in between. It works in the same dimension at short range. Link the pair with the wireless tool."]
 			icon: "expatternprovider:wireless_connect"
 			id: "5A3C748BF85596CF"
 			optional: true
@@ -537,8 +538,8 @@
 		{
 			dependencies: ["36995D579FF95FDB"]
 			description: [
-				"Expanded AE scales autocrafting. Its &6Expanded Crafting Unit&r (HV circuit) is the base of co-processors that double at every step; the x1k one needs an EV circuit, x32k an IV one and x1M a LuV one."
-				"The &6Expanded Pattern Provider&r is HV too; the Giga Pattern Provider waits for EV."
+				"Expanded AE scales autocrafting. Its &6Expanded Crafting Unit&r is the base of co-processors that double at every step, and each bigger one needs a better circuit."
+				"The &6Expanded Pattern Provider&r is the pattern side of the same upgrade."
 			]
 			icon: "expandedae:exp_crafting_unit"
 			id: "7478C96B907B506C"
@@ -566,13 +567,13 @@
 			]
 			title: "MEGA Cells"
 			x: 25.0d
-			y: -5.0d
+			y: -2.5d
 		}
 		{
 			dependencies: ["7478C96B907B506C"]
 			description: [
-				"One network per base is a good start. Carrying a network from one planet to another is a job for the lunar base, in the EV chapter."
-				"Until then, keep growing the network at home: everything it learns to do here, it will do there too. Ender chests and tanks carry a few stacks between planets; a factory's worth goes over the AE2 bridge."
+				"Each planet gets its own network. The Earth-Moon Bridge in the EV chapter is what joins them."
+				"Ender storage works across planets, so a chest on Earth can feed a network on the Moon. Keep growing the network at home first; what it learns here, it does there too."
 			]
 			icon: "ae2:quantum_ring"
 			id: "6DB0D0C11BE35CD7"
