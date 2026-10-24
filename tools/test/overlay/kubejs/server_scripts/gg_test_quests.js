@@ -66,7 +66,7 @@ var GG_QUESTS_EXPECTED = {
   workshop: [17, 16],
   welcome: [16, 15],
   steam_age: [45, 51],
-  lv_age: [50, 51],
+  lv_age: [51, 52],
   mv_age: [41, 49],
   hv_age: [35, 45],
   ev_age: [12, 14]
