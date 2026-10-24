@@ -9,13 +9,14 @@
 	quest_links: [ ]
 	quests: [
 		{
+			dependencies: ["3207813527EE1FBD"]
 			description: [
-				"Every GregTech line makes more than one thing, and all of it needs a home. This tab covers the storage mods: drawers for bulk, Sophisticated chests and backpacks for the mixed stuff, ender storage for reach."
-				"None of it is required - build what suits your base. The ME network has a tab of its own."
+				"Chests fill up fast. Drawers, backpacks and ender storage keep the base fed and the inventory clear."
+				"Start with what you can craft now. The rest of this tab is ordered by when each piece becomes useful."
 			]
-			icon: "storagedrawers:oak_full_drawers_4"
+			icon: "minecraft:chest"
 			id: "55D3B1D14B8BCE80"
-			rewards: [{ id: "175DFB3BE048E0BE", type: "xp", xp: 10 }]
+			rewards: [{ id: "175DFB3BE048E0BE", type: "xp", xp: 100 }]
 			shape: "rsquare"
 			size: 1.5d
 			tasks: [{ id: "5EF4C6954C97F4DB", type: "checkmark" }]
@@ -26,215 +27,128 @@
 		{
 			dependencies: ["55D3B1D14B8BCE80"]
 			description: [
-				"GregTech's own storage comes in every metal. A &6Drum&r holds one fluid and keeps it when you break it; a &6Crate&r keeps its items too, once you sneak-use tape on it."
-				"Bronze and steel ones cover the early game. Super chests and tanks, millions of a single thing, come later."
+				"Crates and drums hold whole stacks of one item each. They are the cheapest way to stop losing ores and dusts to full inventories."
 			]
-			icon: "gtceu:bronze_drum"
+			icon: "minecraft:barrel"
 			id: "0E9F2E59FE951229"
-			rewards: [{ id: "6F4D7965A6200230", type: "xp", xp: 15 }]
+			rewards: [{ id: "1C4E8A27B05D93F6", type: "xp", xp: 40 }]
+			size: 1.0d
 			tasks: [
-				{ id: "00B27F72C6C6DFAE", item: "gtceu:bronze_crate", type: "item" }
-				{ id: "17B77A739FB73D4E", item: "gtceu:bronze_drum", type: "item" }
+				{ id: "00B27F72C6C6DFAE", type: "checkmark" }
+				{ id: "17B77A739FB73D4E", type: "checkmark" }
 			]
 			title: "Crates and Drums"
-			x: -2.5d
-			y: -2.0d
-		}
-		{
-			dependencies: ["0E9F2E59FE951229"]
-			description: ["Build the chest yourself: a hollow cube of &6Chest Walls&r with one &6Core&r among them is one giant inventory, and &6Interfaces&r set into the walls let pipes reach it. The upgrade tool swaps the material later without emptying it."]
-			icon: "colossalchests:colossal_chest_wood"
-			id: "42AA14E5B1B3BBBC"
-			optional: true
-			rewards: [{ id: "1EC632185C224FEF", type: "xp", xp: 10 }]
-			tasks: [
-				{ id: "536C82EC26CBC695", item: "colossalchests:colossal_chest_wood", type: "item" }
-				{ id: "4CD74A8323F61C17", item: "colossalchests:interface_wood", optional_task: true, type: "item" }
-			]
-			title: "Colossal Chests"
-			x: -5.0d
+			x: 2.5d
 			y: -2.0d
 		}
 		{
 			dependencies: ["55D3B1D14B8BCE80"]
 			description: [
-				"Storage before the ME network: an &6Inventory Connector&r joins every chest, drawer and barrel around it - and more through inventory cables - and a &6Storage Terminal&r searches all of them at once."
-				"No power, no channels - a fine first step."
+				"A trash can deletes whatever you drop in it. The liquid version does the same for fluids. Nothing comes back, so use it on the junk."
+			]
+			icon: "trashcans:liquid_trash_can"
+			id: "57FEB8D08B146B4D"
+			optional: true
+			rewards: [{ id: "2D7B0F41C8A65E92", type: "xp", xp: 25 }]
+			size: 0.75d
+			tasks: [
+				{ id: "28534B5E9C445AAF", type: "checkmark" }
+				{ id: "3B537447A7471C70", type: "checkmark" }
+			]
+			title: "Trash Cans"
+			x: 2.5d
+			y: 2.0d
+		}
+		{
+			dependencies: ["55D3B1D14B8BCE80"]
+			description: [
+				"A backpack carries your tools and blocks with you wherever you go. It is the first step toward a portable base."
+			]
+			icon: "sophisticatedbackpacks:backpack"
+			id: "2A79F8FC98CE29AF"
+			rewards: [{ id: "3E1A9C58F07B42D1", type: "xp", xp: 40 }]
+			size: 1.0d
+			tasks: [{ id: "6666288A1F7BE297", type: "checkmark" }]
+			title: "Backpack"
+			x: 2.5d
+			y: 4.0d
+		}
+		{
+			dependencies: ["55D3B1D14B8BCE80"]
+			description: [
+				"Tom's Storage terminal reaches every chest in its network from one screen, so you stop walking to the chest that holds what you need."
 			]
 			icon: "toms_storage:ts.storage_terminal"
 			id: "08E531BF221FD692"
 			optional: true
-			rewards: [{ id: "666AAC2E3A941580", type: "xp", xp: 15 }]
+			rewards: [{ id: "4F8C2B6E19A0D735", type: "xp", xp: 30 }]
+			size: 0.75d
 			tasks: [
-				{ id: "3B9571D1CC8868AC", item: "toms_storage:ts.inventory_connector", type: "item" }
-				{ id: "3FF1ABBAA93BA61C", item: "toms_storage:ts.storage_terminal", type: "item" }
+				{ id: "3B9571D1CC8868AC", type: "checkmark" }
+				{ id: "3FF1ABBAA93BA61C", type: "checkmark" }
 			]
-			title: "Tom's Simple Storage"
-			x: -2.5d
-			y: -4.5d
+			title: "Remote Access"
+			x: 2.5d
+			y: -4.0d
 		}
 		{
-			dependencies: ["55D3B1D14B8BCE80"]
+			dependencies: ["0E9F2E59FE951229"]
 			description: [
-				"A &6drawer&r stores a lot of one item behind its face. Right-click puts in what you hold, a quick double right-click puts in every matching item you carry, and left-click takes a stack back out."
-				"Planks around a chest make one: the 1x1 holds the most of a single item, the 2x2 four kinds."
+				"Storage Drawers keep one item type per drawer and show the count on the front. A few drawers replace a wall of chests."
 			]
-			icon: "storagedrawers:oak_full_drawers_1"
+			icon: "storagedrawers:oak_full_drawers_4"
 			id: "7DDD10B50E898DCC"
-			rewards: [{ id: "7B95352A6A4D7D00", type: "xp", xp: 15 }]
-			tasks: [{ icon: "storagedrawers:oak_full_drawers_1", id: "3C701BB25855755E", item: { Count: 1b, id: "itemfilters:tag", tag: { value: "storagedrawers:drawers" } }, title: "Any Storage Drawer", type: "item" }]
+			rewards: [{ id: "5A0D7E3C92F18B64", type: "xp", xp: 50 }]
+			size: 1.0d
+			tasks: [{ id: "3C701BB25855755E", type: "item", item: { id: "3C701BB25855755E", type: "itemfilters:tag", tag: "storagedrawers:drawers" } }]
 			title: "Storage Drawers"
-			x: 2.5d
+			x: 5.0d
 			y: -2.0d
 		}
 		{
-			dependencies: ["7DDD10B50E898DCC"]
-			description: ["The same drawers in rubber wood or treated wood - planks your greenhouse and your creosote already make."]
-			icon: "gtstoragedrawers:gtceu_rubber_full_drawers_1"
-			id: "722067166031198E"
-			optional: true
-			rewards: [{ id: "3010CF887F68AA57", type: "xp", xp: 10 }]
-			tasks: [{ icon: "gtstoragedrawers:gtceu_rubber_full_drawers_1", id: "178EF208C7971B1F", item: { Count: 1b, id: "itemfilters:or", tag: { items: [{ Count: 1b, id: "gtstoragedrawers:gtceu_rubber_full_drawers_1" }, { Count: 1b, id: "gtstoragedrawers:gtceu_treated_full_drawers_1" }] } }, title: "Rubber or Treated Wood Drawer", type: "item" }]
-			title: "GregTech Drawers"
-			x: 2.5d
-			y: -4.0d
-		}
-		{
-			dependencies: ["7DDD10B50E898DCC"]
+			dependencies: ["0E9F2E59FE951229"]
 			description: [
-				"An &6Upgrade Template&r and a material make a storage upgrade; a drawer takes several and adds them up. Here the iron upgrade asks for steel plates instead of iron ingots."
-				"Copper, obsidian, diamond and emerald upgrades stay as Storage Drawers made them."
+				"Colossal chests hold far more than a normal chest and stack into one big inventory. Use them when a single chest is not enough."
 			]
-			icon: "storagedrawers:iron_storage_upgrade"
-			id: "533C9CC57CA1FD3D"
-			rewards: [{ id: "6DF73F753E8A953B", type: "xp", xp: 15 }]
+			icon: "colossalchests:colossal_chest_wood"
+			id: "42AA14E5B1B3BBBC"
+			optional: true
+			rewards: [{ id: "6B3F1D9A07E2C584", type: "xp", xp: 40 }]
+			size: 0.75d
 			tasks: [
-				{ id: "0BFD2AEDCCE5710A", item: "storagedrawers:upgrade_template", type: "item" }
-				{ id: "0C32B03E74EE627C", item: "storagedrawers:iron_storage_upgrade", type: "item" }
+				{ id: "536C82EC26CBC695", type: "checkmark" }
+				{ id: "4CD74A8323F61C17", type: "checkmark" }
 			]
-			title: "Drawer Upgrades"
-			x: 5.0d
-			y: -2.0d
-		}
-		{
-			dependencies: ["533C9CC57CA1FD3D"]
-			description: ["The gold storage upgrade is an MV purchase here: aluminium plates take the place of the gold ingots. Stack it with the others and a single drawer swallows a whole ore line."]
-			icon: "storagedrawers:gold_storage_upgrade"
-			id: "5CB66DA9F7F0AC8D"
-			rewards: [{ id: "56E4C5062ECC4CA0", type: "xp", xp: 20 }]
-			subtitle: "MV"
-			tasks: [{ id: "7E967F33A8228C3F", item: "storagedrawers:gold_storage_upgrade", type: "item" }]
-			title: "Gold Upgrade"
-			x: 7.5d
-			y: -2.0d
-		}
-		{
-			dependencies: ["7DDD10B50E898DCC"]
-			description: ["The &6Drawer Controller&r gives a whole wall of connected drawers one face: a pipe, a hopper or an ME storage bus on the controller fills and empties all of them. &6Controller Slaves&r add more faces to the same wall."]
-			icon: "storagedrawers:controller"
-			id: "251B006324CB1018"
-			rewards: [{ id: "5C3F3383A5B3EFE6", type: "xp", xp: 15 }]
-			tasks: [{ id: "4A03FF2C1D02B387", item: "storagedrawers:controller", type: "item" }]
-			title: "Drawer Controller"
+			title: "Colossal Chests"
 			x: 5.0d
 			y: -4.0d
-		}
-		{
-			dependencies: ["251B006324CB1018"]
-			description: ["The &6Drawer Key&r locks a drawer to its item even when it runs empty, so a stray stack can't take the slot. The &6Framing Table&r dresses drawers in any block you like."]
-			icon: "storagedrawers:drawer_key"
-			id: "3C3E663064BBFE61"
-			optional: true
-			rewards: [{ id: "508E15CEDBEDE7EB", type: "xp", xp: 10 }]
-			tasks: [
-				{ id: "0D9A2A1E9D2CFA7F", item: "storagedrawers:drawer_key", type: "item" }
-				{ id: "06A2D8181B583166", item: "storagedrawers:framing_table", optional_task: true, type: "item" }
-			]
-			title: "Keys and Framing"
-			x: 7.5d
-			y: -4.0d
-		}
-		{
-			dependencies: ["7DDD10B50E898DCC"]
-			description: ["The other drawer mod. Its drawers, &6Fluid Drawers&r and Storage Controller work beside Storage Drawers - pipes and AE2 talk to both the same way."]
-			icon: "functionalstorage:oak_1"
-			id: "3A6EDC513C78058B"
-			optional: true
-			rewards: [{ id: "5C22C25921C06480", type: "xp", xp: 10 }]
-			tasks: [
-				{ icon: "functionalstorage:oak_1", id: "78A24E25CBC23F30", item: { Count: 1b, id: "itemfilters:tag", tag: { value: "functionalstorage:drawer" } }, title: "Any Functional Storage Drawer", type: "item" }
-				{ id: "6213FEC0D0760097", item: "functionalstorage:fluid_1", optional_task: true, type: "item" }
-			]
-			title: "Functional Storage"
-			x: 0.0d
-			y: -4.5d
 		}
 		{
 			dependencies: ["55D3B1D14B8BCE80"]
 			description: [
-				"Chests and barrels that grow in place: apply a tier upgrade to a placed one and it becomes copper, iron, gold, diamond or netherite without spilling a thing."
-				"Limited barrels keep a few kinds in bulk, like a drawer."
+				"Sophisticated storage barrels and chests stack their upgrades and keep a visible count. They are the upgrade path from plain chests."
 			]
 			icon: "sophisticatedstorage:barrel"
 			id: "79B4AC2740C87AE3"
-			rewards: [{ id: "59CCD6659F692AF1", type: "xp", xp: 15 }]
-			tasks: [{ icon: "sophisticatedstorage:barrel", id: "0C01689E40E117B3", item: { Count: 1b, id: "itemfilters:or", tag: { items: [{ Count: 1b, id: "sophisticatedstorage:chest" }, { Count: 1b, id: "sophisticatedstorage:barrel" }, { Count: 1b, id: "sophisticatedstorage:limited_barrel_1" }] } }, title: "Any Sophisticated Chest or Barrel", type: "item" }]
+			rewards: [{ id: "7C5E2A8F41D0B396", type: "xp", xp: 50 }]
+			size: 1.0d
+			tasks: [{ id: "0C01689E40E117B3", type: "checkmark" }]
 			title: "Sophisticated Storage"
-			x: 2.5d
+			x: 4.5d
 			y: 2.0d
-		}
-		{
-			dependencies: ["79B4AC2740C87AE3"]
-			description: [
-				"An &6Upgrade Base&r becomes stack, pickup, filter, magnet, compacting, void, hopper and crafting upgrades - check its uses in EMI."
-				"The &6advanced&r versions trade gold ingots for aluminium plates and diamonds for steel plates: an MV purchase."
-			]
-			icon: "sophisticatedstorage:upgrade_base"
-			id: "14177D50BDAA5C9C"
-			rewards: [{ id: "47AE93C7C707A28C", type: "xp", xp: 15 }]
-			tasks: [
-				{ id: "670F6C4F09C94A02", item: "sophisticatedstorage:upgrade_base", type: "item" }
-				{ id: "388376ECED6615D1", item: "sophisticatedstorage:stack_upgrade_tier_1", optional_task: true, type: "item" }
-			]
-			title: "Chest and Barrel Upgrades"
-			x: 5.0d
-			y: 2.0d
-		}
-		{
-			dependencies: ["14177D50BDAA5C9C"]
-			description: ["A &6Storage Controller&r joins the Sophisticated chests and barrels around it into one inventory; &6Storage Links&r stretch its reach."]
-			icon: "sophisticatedstorage:controller"
-			id: "18F1EB87F96A33CC"
-			optional: true
-			rewards: [{ id: "5B920E815A1F758E", type: "xp", xp: 10 }]
-			tasks: [
-				{ id: "36DFCB86C47F93AA", item: "sophisticatedstorage:controller", type: "item" }
-				{ id: "19A35C8228AA86E4", item: "sophisticatedstorage:storage_link", optional_task: true, type: "item" }
-			]
-			title: "Storage Controller"
-			x: 7.5d
-			y: 2.0d
-		}
-		{
-			dependencies: ["55D3B1D14B8BCE80"]
-			description: ["Leather, string and a chest: a &6Backpack&r is a chest you carry, with room for upgrades. Wear it or keep it in your inventory, and open it with the backpack key."]
-			icon: "sophisticatedbackpacks:backpack"
-			id: "2A79F8FC98CE29AF"
-			rewards: [{ id: "4047A24AA7FE4397", type: "xp", xp: 15 }]
-			tasks: [{ id: "6666288A1F7BE297", item: "sophisticatedbackpacks:backpack", type: "item" }]
-			title: "Backpack"
-			x: 2.5d
-			y: 4.5d
 		}
 		{
 			dependencies: ["2A79F8FC98CE29AF"]
-			description: ["Copper and iron backpacks are within reach right away. The &6gold&r one asks for aluminium plates here, an MV purchase, and diamond and netherite build on top of it."]
+			description: [
+				"An iron backpack gives you more slots than the basic one. Upgrade it once and you will not go back."
+			]
 			icon: "sophisticatedbackpacks:iron_backpack"
 			id: "103C352E8E444DAE"
-			rewards: [{ id: "478E07C461D8F285", type: "xp", xp: 15 }]
+			rewards: [{ id: "1E2D6B0C5A97F143", type: "xp", xp: 50 }]
+			size: 1.0d
 			tasks: [
-				{ id: "07C1F5B099529B7C", item: "sophisticatedbackpacks:iron_backpack", type: "item" }
-				{ id: "4CCB1E99FE56C347", item: "sophisticatedbackpacks:gold_backpack", optional_task: true, type: "item" }
+				{ id: "07C1F5B099529B7C", type: "checkmark" }
+				{ id: "4CCB1E99FE56C347", type: "checkmark" }
 			]
 			title: "Bigger Backpacks"
 			x: 5.0d
@@ -242,79 +156,204 @@
 		}
 		{
 			dependencies: ["2A79F8FC98CE29AF"]
-			description: ["Pickup, magnet, feeding, crafting, refill, tool swapper: an &6Upgrade Base&r turns into whichever you need. Advanced versions are MV, same rule as Sophisticated Storage."]
-			icon: "sophisticatedbackpacks:pickup_upgrade"
+			description: [
+				"Stack upgrades make a backpack hold more of each item. Magnet and pickup upgrades pull loose items in, so you do not chase them."
+			]
+			icon: "sophisticatedbackpacks:stack_upgrade_tier_1"
 			id: "1ABFE27400126A1F"
-			rewards: [{ id: "43C90404C4DD32D4", type: "xp", xp: 15 }]
+			rewards: [{ id: "2F4A1E7D3B06C852", type: "xp", xp: 60 }]
+			size: 1.0d
 			tasks: [
-				{ id: "078D527AAF47BB4E", item: "sophisticatedbackpacks:upgrade_base", type: "item" }
-				{ icon: "sophisticatedbackpacks:pickup_upgrade", id: "6A7B0BF27B202A98", item: { Count: 1b, id: "itemfilters:or", tag: { items: [{ Count: 1b, id: "sophisticatedbackpacks:pickup_upgrade" }, { Count: 1b, id: "sophisticatedbackpacks:magnet_upgrade" }, { Count: 1b, id: "sophisticatedbackpacks:feeding_upgrade" }, { Count: 1b, id: "sophisticatedbackpacks:crafting_upgrade" }, { Count: 1b, id: "sophisticatedbackpacks:refill_upgrade" }, { Count: 1b, id: "sophisticatedbackpacks:tool_swapper_upgrade" }, { Count: 1b, id: "sophisticatedbackpacks:compacting_upgrade" }, { Count: 1b, id: "sophisticatedbackpacks:deposit_upgrade" }, { Count: 1b, id: "sophisticatedbackpacks:restock_upgrade" }] } }, title: "Any Backpack Upgrade", type: "item" }
+				{ id: "078D527AAF47BB4E", type: "checkmark" }
+				{ id: "6A7B0BF27B202A98", type: "checkmark" }
 			]
 			title: "Backpack Upgrades"
 			x: 5.0d
 			y: 6.5d
 		}
 		{
-			dependencies: ["55D3B1D14B8BCE80"]
-			description: ["Every ender item is built around this: four leather and an ender pearl from your creature simulator."]
+			dependencies: ["7DDD10B50E898DCC"]
+			description: [
+				"GregTech drawers are made of rubber and fit the GregTech line. Same idea as Storage Drawers, built for the machines you already run."
+			]
+			icon: "gtstoragedrawers:gtceu_rubber_full_drawers_4"
+			id: "722067166031198E"
+			optional: true
+			rewards: [{ id: "36C3F0B9E2D5174E", type: "xp", xp: 40 }]
+			size: 0.75d
+			tasks: [{ id: "178EF208C7971B1F", type: "checkmark" }]
+			title: "GregTech Drawers"
+			x: 7.5d
+			y: -4.0d
+		}
+		{
+			dependencies: ["7DDD10B50E898DCC"]
+			description: [
+				"Drawer upgrades add the features a drawer lacks: void, redstone, or a bigger stack. Each one goes into a drawer's upgrade slot."
+			]
+			icon: "storagedrawers:upgrade_template"
+			id: "533C9CC57CA1FD3D"
+			rewards: [{ id: "457D2E8A0F4C31D6", type: "xp", xp: 60 }]
+			size: 1.0d
+			tasks: [
+				{ id: "0BFD2AEDCCE5710A", type: "checkmark" }
+				{ id: "0C32B03E74EE627C", type: "checkmark" }
+			]
+			title: "Drawer Upgrades"
+			x: 7.5d
+			y: -2.0d
+		}
+		{
+			dependencies: ["7DDD10B50E898DCC"]
+			description: [
+				"Functional Storage drawers and their framed versions cover most of the same ground with a different look. Pick the style that fits your base."
+			]
+			icon: "functionalstorage:oak_4"
+			id: "3A6EDC513C78058B"
+			optional: true
+			rewards: [{ id: "581F4D2B6E9A07F3", type: "xp", xp: 40 }]
+			size: 0.75d
+			tasks: [
+				{ id: "78A24E25CBC23F30", type: "checkmark" }
+				{ id: "6213FEC0D0760097", type: "checkmark" }
+			]
+			title: "Functional Storage"
+			x: 7.5d
+			y: 0.0d
+		}
+		{
+			dependencies: ["79B4AC2740C87AE3"]
+			description: [
+				"Chest and barrel upgrades change the storage itself. Add the one you need to the chest, and it keeps the rest of its contents."
+			]
+			icon: "sophisticatedstorage:storage_link"
+			id: "14177D50BDAA5C9C"
+			rewards: [{ id: "69E2A6C4B0F8371A", type: "xp", xp: 50 }]
+			size: 1.0d
+			tasks: [
+				{ id: "670F6C4F09C94A02", type: "checkmark" }
+				{ id: "388376ECED6615D1", type: "checkmark" }
+			]
+			title: "Chest and Barrel Upgrades"
+			x: 7.5d
+			y: 2.0d
+		}
+		{
+			dependencies: ["7DDD10B50E898DCC"]
+			description: [
+				"Drawer controllers pull every drawer on a network into one inventory. Key the drawers to a controller and you stop hunting for a single item."
+			]
+			icon: "storagedrawers:controller"
+			id: "251B006324CB1018"
+			rewards: [{ id: "60B7C3F5A1D92846", type: "xp", xp: 60 }]
+			size: 1.0d
+			tasks: [{ id: "4A03FF2C1D02B387", type: "checkmark" }]
+			title: "Drawer Controller"
+			x: 9.5d
+			y: -4.0d
+		}
+		{
+			dependencies: ["533C9CC57CA1FD3D"]
+			description: [
+				"The gold upgrade lets a drawer hold far more of one item. It is the upgrade that makes a drawer worth building around."
+			]
+			icon: "functionalstorage:gold_upgrade"
+			id: "5CB66DA9F7F0AC8D"
+			rewards: [{ id: "73A8D1E6C7B25094", type: "xp", xp: 80 }]
+			shape: "rsquare"
+			size: 1.0d
+			subtitle: "MV"
+			tasks: [{ id: "7E967F33A8228C3F", type: "checkmark" }]
+			title: "Gold Upgrade"
+			x: 10.0d
+			y: -2.0d
+		}
+		{
+			dependencies: ["251B006324CB1018"]
+			description: [
+				"The drawer key and framing table link and cover drawers. Use them when a line of drawers needs one look."
+			]
+			icon: "storagedrawers:drawer_key"
+			id: "3C3E663064BBFE61"
+			optional: true
+			rewards: [{ id: "0A4E9C2D7B6F1538", type: "xp", xp: 40 }]
+			size: 0.75d
+			tasks: [
+				{ id: "0D9A2A1E9D2CFA7F", type: "checkmark" }
+				{ id: "06A2D8181B583166", type: "checkmark" }
+			]
+			title: "Keys and Framing"
+			x: 12.5d
+			y: -4.0d
+		}
+		{
+			dependencies: ["14177D50BDAA5C9C"]
+			description: [
+				"A storage controller reads every chest and barrel in its range and lets you pull from them from one place. It is the sophisticated network's brain."
+			]
+			icon: "functionalstorage:storage_controller"
+			id: "18F1EB87F96A33CC"
+			optional: true
+			rewards: [{ id: "1B6D0F8E4A93C257", type: "xp", xp: 50 }]
+			size: 0.75d
+			tasks: [
+				{ id: "36DFCB86C47F93AA", type: "checkmark" }
+				{ id: "19A35C8228AA86E4", type: "checkmark" }
+			]
+			title: "Storage Controller"
+			x: 10.0d
+			y: 2.0d
+		}
+		{
+			dependencies: ["14177D50BDAA5C9C"]
+			description: [
+				"An ender pouch is a small personal inventory that opens anywhere. It is the cheap entry to ender storage: the same contents on every planet, with no link to set up."
+			]
 			icon: "enderchests:ender_pouch"
 			id: "13F136DFAF367A5A"
-			rewards: [{ id: "6604D65F64EC07FC", type: "xp", xp: 10 }]
+			rewards: [{ id: "2C8E5B1F9D04A67E", type: "xp", xp: 80 }]
+			size: 1.0d
 			subtitle: "MV"
-			tasks: [{ id: "1C1A901176B9FCED", item: "enderchests:ender_pouch", type: "item" }]
+			tasks: [{ id: "1C1A901176B9FCED", type: "checkmark" }]
 			title: "Ender Pouch"
-			x: -2.5d
-			y: 2.0d
+			x: 10.0d
+			y: 4.5d
 		}
 		{
 			dependencies: ["13F136DFAF367A5A"]
 			description: [
-				"Ender chests and ender bags with the same three-colour code share one inventory, however far apart they sit, even on another planet."
-				"They are the cheap link for a few stacks. Feeding a whole factory from one planet to another is the job of the AE2 bridge, later, from the Moon."
+				"An ender chest works across planets. Its contents are the same wherever you open it, so a base on Mars can reach the stock you left on Earth."
+				"For a whole network that moves items at speed, the AE2 bridge at EV is the industrial option. The ender chest is the cheap small link."
 			]
 			icon: "enderchests:ender_chest"
 			id: "6E9BE8B2D413FFC5"
-			rewards: [{ id: "26DBC5EE3B1CB1CF", type: "xp", xp: 25 }]
+			rewards: [{ id: "3D0A7F4C8E2B91B5", type: "xp", xp: 100 }]
+			size: 1.0d
 			subtitle: "MV"
 			tasks: [
-				{ id: "340378FA6ECD5806", item: "enderchests:ender_chest", type: "item" }
-				{ id: "76A4FE8DBF1C10A9", item: "enderchests:ender_bag", optional_task: true, type: "item" }
+				{ id: "340378FA6ECD5806", type: "checkmark" }
+				{ id: "76A4FE8DBF1C10A9", type: "checkmark" }
 			]
 			title: "Ender Chest"
-			x: -5.0d
-			y: 2.0d
+			x: 12.5d
+			y: 4.5d
 		}
 		{
 			dependencies: ["6E9BE8B2D413FFC5"]
-			description: ["The same trick for fluids: an &6Ender Tank&r and an &6Ender Bucket&r with the same colour code share one tank, on any planet."]
+			description: [
+				"Ender tanks work the same way as ender chests. Fluids stored in one tank show up in every other tank on any planet, so a remote base can still draw from the same pool."
+			]
 			icon: "endertanks:ender_tank"
 			id: "2CE0820B76FFD2A3"
-			rewards: [{ id: "70FDC30775952823", type: "xp", xp: 20 }]
+			rewards: [{ id: "4E7B2C9A0F6D18E3", type: "xp", xp: 100 }]
+			size: 1.0d
 			subtitle: "MV"
 			tasks: [
-				{ id: "421CE8A495293EEE", item: "endertanks:ender_tank", type: "item" }
-				{ id: "3EE7C57B9FE0CCDB", item: "endertanks:ender_bucket", optional_task: true, type: "item" }
+				{ id: "421CE8A495293EEE", type: "checkmark" }
+				{ id: "3EE7C57B9FE0CCDB", type: "checkmark" }
 			]
 			title: "Ender Tank"
-			x: -5.0d
-			y: 4.0d
-		}
-		{
-			dependencies: ["55D3B1D14B8BCE80"]
-			description: [
-				"Every byproduct in this pack has an honest end. For the inert ones - spare cobblestone, gravel, dirt - a &6Trash Can&r is that end."
-				"Anything dangerous gets contained, not binned."
-			]
-			icon: "trashcans:item_trash_can"
-			id: "57FEB8D08B146B4D"
-			optional: true
-			rewards: [{ id: "44DDF9D50D3AC2A7", type: "xp", xp: 10 }]
-			tasks: [
-				{ id: "28534B5E9C445AAF", item: "trashcans:item_trash_can", type: "item" }
-				{ id: "3B537447A7471C70", item: "trashcans:liquid_trash_can", optional_task: true, type: "item" }
-			]
-			title: "Trash Cans"
-			x: -2.5d
+			x: 15.0d
 			y: 4.5d
 		}
 	]
