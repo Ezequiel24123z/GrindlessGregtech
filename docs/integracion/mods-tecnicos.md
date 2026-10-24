@@ -184,3 +184,22 @@ Se aprueban las propuestas 1–10. La 11 queda así:
 - **(d) Mods solo de CurseForge:** entran únicamente si permiten distribución.
 
 Los lotes A–D los aplica el agente de lotes de mods en ese orden, cada uno probado sobre una copia antes de fusionarlo.
+
+## Cambio del 2026-10-24 (tarde): los lotes A–D salen
+
+El pack pasa a ser un viaje al agujero negro (`docs/viaje.md`), y el usuario pide que cada mod tenga sentido en él y sea interesante.
+
+**Create y Greate salen.**
+- No procesan mineral.
+- Su energía no se convierte en EU.
+- AE2 ya hace la logística y el autocrafteo desde LV.
+- Greate duplica máquinas de GT con otra energía y copiaba recetas de GT antes que nuestros scripts.
+
+El lote A se probó y se fusionó en `main`, pero se revierte antes de la siguiente versión y nunca llegó al canal jugable.
+
+**Los lotes B, C y D tampoco entran:**
+- trenes;
+- Integrated Dynamics, Botany Pots y Productive Trees;
+- Botania y Occultism.
+
+Repiten lo que ya hacen GT, AE2 y nuestros invernaderos, o no encajan en el viaje. Lo que se quita en este documento sigue valiendo.
