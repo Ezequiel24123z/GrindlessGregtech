@@ -4,7 +4,7 @@
 	filename: "travel_and_teams"
 	group: "7C6BF927E205E2F4"
 	icon: "waystones:waystone"
-	id: "FA5A00D30C3EADB8"
+	id: "7A5A00D30C3EADB8"
 	order_index: 3
 	quest_links: [ ]
 	quests: [
@@ -28,7 +28,7 @@
 			description: ["Amethyst, an emerald and the ender pearls your creature simulator prints. The &6Warp Stone&r is the heart of every waystone - and on its own it is a pocket teleporter to any waystone you know, with a short cooldown."]
 			icon: "waystones:warp_stone"
 			id: "4707632A61002DA6"
-			rewards: [{ id: "DC1D9D8F55B6D26F", type: "xp", xp: 15 }]
+			rewards: [{ id: "5C1D9D8F55B6D26F", type: "xp", xp: 15 }]
 			tasks: [{ id: "62F517C7367C2D4F", item: "waystones:warp_stone", type: "item" }]
 			title: "Warp Stone"
 			x: 2.5d
@@ -39,8 +39,8 @@
 			description: ["A warp stone in stone bricks and obsidian. Use a &6Waystone&r once to remember it, then use any waystone to jump to any other you know. Villages often have one already."]
 			icon: "waystones:waystone"
 			id: "6C51B805476EAF2E"
-			rewards: [{ id: "89BE8D8784D005BC", type: "xp", xp: 20 }]
-			tasks: [{ id: "C6469F20236DF527", item: "waystones:waystone", type: "item" }]
+			rewards: [{ id: "09BE8D8784D005BC", type: "xp", xp: 20 }]
+			tasks: [{ id: "46469F20236DF527", item: "waystones:waystone", type: "item" }]
 			title: "Waystones"
 			x: 5.0d
 			y: -1.5d
@@ -49,9 +49,9 @@
 			dependencies: ["4707632A61002DA6"]
 			description: ["Paper, gold and an ender pearl: a &6Warp Scroll&r is a one-use jump to any waystone you know - for the trip where the warp stone stayed at home."]
 			icon: "waystones:warp_scroll"
-			id: "9566F6F63DFCB18E"
+			id: "1566F6F63DFCB18E"
 			optional: true
-			rewards: [{ id: "C537643B393E7CD8", type: "xp", xp: 10 }]
+			rewards: [{ id: "4537643B393E7CD8", type: "xp", xp: 10 }]
 			tasks: [{ id: "100017B7FC4BEE7F", item: "waystones:warp_scroll", type: "item" }]
 			title: "Warp Scrolls"
 			x: 2.5d
@@ -71,12 +71,12 @@
 		}
 		{
 			dependencies: ["6C51B805476EAF2E"]
-			description: ["Two &6Warp Plates&r linked by an attuned shard send whoever stands on one to the other - a doorway for short hops inside a base."]
+			description: ["Two &6Warp Plates&r linked by an attuned shard send whoever stands on one to the other, on this planet or another."]
 			icon: "waystones:warp_plate"
-			id: "C2D5B9B7A746FDCA"
+			id: "42D5B9B7A746FDCA"
 			optional: true
 			rewards: [{ id: "1A111E5BB9DB06E1", type: "xp", xp: 10 }]
-			tasks: [{ count: 2L, id: "F0AA17481229BF3D", item: "waystones:warp_plate", type: "item" }]
+			tasks: [{ count: 2L, id: "70AA17481229BF3D", item: "waystones:warp_plate", type: "item" }]
 			title: "Warp Plates"
 			x: 7.5d
 			y: -3.5d
@@ -85,11 +85,11 @@
 			dependencies: ["6C51B805476EAF2E"]
 			description: ["From the Moon on, the first landing on each world is by rocket, as the era chapters tell. Once you have been, place a waystone: from then on the trip home is one click."]
 			icon: "waystones:warp_stone"
-			id: "EE7F12273752EC74"
-			rewards: [{ id: "E94201DD928B720B", type: "xp", xp: 20 }]
+			id: "6E7F12273752EC74"
+			rewards: [{ id: "694201DD928B720B", type: "xp", xp: 20 }]
 			shape: "diamond"
 			size: 1.25d
-			tasks: [{ id: "B7B9D0EF3915D56B", type: "checkmark" }]
+			tasks: [{ id: "37B9D0EF3915D56B", type: "checkmark" }]
 			title: "Other Worlds"
 			x: 7.5d
 			y: -1.5d
@@ -110,7 +110,7 @@
 			description: ["In the &6FTB Chunks&r claim screen, reached from its map, drag with the left button to claim chunks and with the right button to unclaim them. Claimed chunks are safe from other players, explosions and mob griefing, and your allies can still build there."]
 			icon: "minecraft:filled_map"
 			id: "163B6BC04C86A82F"
-			rewards: [{ id: "AD014075731A6F64", type: "xp", xp: 10 }]
+			rewards: [{ id: "2D014075731A6F64", type: "xp", xp: 10 }]
 			tasks: [{ id: "73961D60089A3BFE", type: "checkmark" }]
 			title: "Claim Your Base"
 			x: 5.0d
@@ -120,9 +120,9 @@
 			dependencies: ["163B6BC04C86A82F"]
 			description: ["Hold Shift while you drag over claimed chunks in the same screen to force-load them, and the factory keeps running while you are elsewhere - up to 25 chunks a player by default. It works while someone from the team is online; running with everyone offline is a server setting."]
 			icon: "minecraft:compass"
-			id: "D19566BBE2C4D41C"
+			id: "519566BBE2C4D41C"
 			rewards: [{ id: "1B82C2023D6835DB", type: "xp", xp: 10 }]
-			tasks: [{ id: "AC03F17071955571", type: "checkmark" }]
+			tasks: [{ id: "2C03F17071955571", type: "checkmark" }]
 			title: "Force-Loading"
 			x: 7.5d
 			y: 1.5d
@@ -133,7 +133,7 @@
 			icon: "minecraft:red_bed"
 			id: "5DE8DE1C904AF34B"
 			rewards: [{ id: "57CC98606B08728A", type: "xp", xp: 10 }]
-			tasks: [{ id: "F4E29CF1BAFFE1C3", type: "checkmark" }]
+			tasks: [{ id: "74E29CF1BAFFE1C3", type: "checkmark" }]
 			title: "Homes"
 			x: 2.5d
 			y: 3.5d
@@ -142,7 +142,7 @@
 			dependencies: ["12AEF6D64403D824"]
 			description: ["Leather wings on a stick frame: deploy the &6Hang Glider&r and jump off something tall. The quickest way across a valley between two parts of the base."]
 			icon: "hangglider:hang_glider"
-			id: "908A377BAE71CCAC"
+			id: "108A377BAE71CCAC"
 			optional: true
 			rewards: [{ id: "22606DB25D25E40F", type: "xp", xp: 10 }]
 			tasks: [{ id: "04B66DE8EE4E4DF4", item: "hangglider:hang_glider", type: "item" }]
@@ -169,7 +169,7 @@
 			id: "0F671384B0300393"
 			optional: true
 			rewards: [{ id: "77C5775A506EB26A", type: "xp", xp: 10 }]
-			tasks: [{ icon: "naturescompass:naturescompass", id: "D10EAC69889A6EB6", item: { Count: 1b, id: "itemfilters:or", tag: { items: [{ Count: 1b, id: "naturescompass:naturescompass" }, { Count: 1b, id: "explorerscompass:explorerscompass" }] } }, title: "Either Compass", type: "item" }]
+			tasks: [{ icon: "naturescompass:naturescompass", id: "510EAC69889A6EB6", item: { Count: 1b, id: "itemfilters:or", tag: { items: [{ Count: 1b, id: "naturescompass:naturescompass" }, { Count: 1b, id: "explorerscompass:explorerscompass" }] } }, title: "Either Compass", type: "item" }]
 			title: "Find Your Way"
 			x: -2.5d
 			y: -3.5d
@@ -178,7 +178,7 @@
 			dependencies: ["12AEF6D64403D824"]
 			description: ["A &6Mega Torch&r stops hostile mobs from spawning in a wide area around it. One per factory, and night stops being a problem."]
 			icon: "torchmaster:megatorch"
-			id: "98D17CBDBD8EA0B2"
+			id: "18D17CBDBD8EA0B2"
 			optional: true
 			rewards: [{ id: "5BB4860262FED842", type: "xp", xp: 10 }]
 			tasks: [{ id: "3E14A280E80B080E", item: "torchmaster:megatorch", type: "item" }]

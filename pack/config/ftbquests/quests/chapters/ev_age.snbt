@@ -1,0 +1,202 @@
+{
+	autofocus_id: "7E510A95C066D14C"
+	default_hide_dependency_lines: false
+	default_quest_shape: ""
+	filename: "ev_age"
+	group: "3F021F40CD26BF57"
+	icon: "gtceu:lunar_drill"
+	id: "36522099DD26AB80"
+	order_index: 4
+	quest_links: [ ]
+	quests: [
+		{
+			dependencies: ["2897E3EB8159710C"]
+			description: [
+				"There is no air on the Moon and nothing burns, so the first power here is the batteries you brought."
+				"Ender chests and ender tanks work from here just as at home: the cheap link for a few stacks. A whole factory crosses over the AE2 bridge further down this tab."
+			]
+			icon: "gcyr:lunar_mare_regolith"
+			id: "7E510A95C066D14C"
+			rewards: [{ id: "073D0AACCEB758A2", type: "xp", xp: 40 }]
+			shape: "rsquare"
+			size: 1.5d
+			tasks: [{ id: "1C694669AF199258", type: "checkmark" }]
+			title: "Lunar Base"
+			x: 0.0d
+			y: 0.0d
+		}
+		{
+			dependencies: ["7E510A95C066D14C"]
+			description: [
+				"Place and activate a &6Waystone&r at the base. From then on waystones and /home carry you between Earth and the Moon; the rocket was only for the first trip."
+			]
+			icon: "waystones:waystone"
+			id: "72396893B6F91D23"
+			optional: true
+			rewards: [{ id: "029E7E7ABA6D2804", type: "xp", xp: 25 }]
+			shape: "circle"
+			size: 0.75d
+			tasks: [{ id: "7A7054C7DDBDED28", type: "checkmark" }]
+			title: "Waystone on the Moon"
+			x: 2.0d
+			y: -1.5d
+		}
+		{
+			dependencies: ["7E510A95C066D14C"]
+			description: [
+				"Raw ilmenite and raw olivine from a lunar vein make one sample; the two kinds of regolith, scooped up, make the other. Each needs an empty vein probe from Earth."
+			]
+			icon: "grindless:vein_sample_ilmenite_moon"
+			id: "65FD970F8628E474"
+			rewards: [{ id: "16857AADAB1453ED", type: "xp", xp: 40 }]
+			tasks: [
+				{ id: "050FFA47CAA5050F", item: "grindless:vein_sample_ilmenite_moon", type: "item" }
+				{ id: "5AB7933E30EF63DD", item: "grindless:vein_sample_regolith_moon", type: "item" }
+			]
+			title: "Lunar Samples"
+			x: 2.0d
+			y: 0.0d
+		}
+		{
+			dependencies: ["65FD970F8628E474"]
+			description: [
+				"Craft the &6Lunar Drill&r on Earth and build it here: it forms anywhere but only drills on the Moon."
+				"A sample and a stainless steel bit go in the input bus. Until the bridge to Earth is up, it runs on the batteries you brought."
+			]
+			icon: "gtceu:lunar_drill"
+			id: "246C8ADBADA728E9"
+			rewards: [
+				{ id: "7451BE7DAFCDCDCC", type: "xp", xp: 80 }
+				{ count: 2, id: "731EAC7375E702A5", item: "grindless:stainless_steel_drill_bit", type: "item" }
+			]
+			shape: "gear"
+			size: 1.5d
+			tasks: [{ id: "5B07A5D98BA69B39", item: "gtceu:lunar_drill", type: "item" }]
+			title: "Lunar Drill"
+			x: 4.0d
+			y: 0.0d
+		}
+		{
+			dependencies: ["246C8ADBADA728E9", "53D1CE971F63D842"]
+			description: [
+				"The Moon's ilmenite is the only titanium in the pack. At home the EBF turns it into rutile, chlorine and carbon make titanium tetrachloride, magnesium reduces that in the EBF, and the vacuum freezer cools the hot ingot."
+			]
+			icon: "gtceu:titanium_ingot"
+			id: "14DF849D657D6AEF"
+			rewards: [{ id: "7EF3030512FB7BB2", type: "xp", xp: 55 }]
+			tasks: [
+				{ id: "7D8636FA23850C39", item: "gtceu:raw_ilmenite", type: "item" }
+				{ id: "570EBC0CBD0365D1", item: "gtceu:rutile_dust", type: "item" }
+				{ id: "5F998A4F472AB2CF", item: "gtceu:titanium_ingot", type: "item" }
+			]
+			title: "Titanium"
+			x: 6.0d
+			y: 0.0d
+		}
+		{
+			dependencies: ["14DF849D657D6AEF"]
+			description: ["Lunar titanium goes first into the &6EV Machine Hull&r, and every EV machine starts from one."]
+			icon: "gtceu:ev_machine_hull"
+			id: "61ECF6270ECCE3C2"
+			rewards: [{ id: "6DE5A471269B3A5D", type: "xp", xp: 40 }]
+			tasks: [{ id: "13B7784B22044D02", item: "gtceu:ev_machine_hull", type: "item" }]
+			title: "EV Machine Hull"
+			x: 8.0d
+			y: 0.0d
+		}
+		{
+			dependencies: ["61ECF6270ECCE3C2"]
+			description: ["Same bridge as always, one size up: four HV amps in, one EV amp out, or the other way round."]
+			icon: "gtceu:hv_transformer_1a"
+			id: "6457FB82BC6D3618"
+			rewards: [{ id: "343DC485F998A708", type: "xp", xp: 45 }]
+			tasks: [{ id: "336CD67466A1FC2E", item: "gtceu:hv_transformer_1a", type: "item" }]
+			title: "HV to EV Transformer"
+			x: 10.0d
+			y: 0.0d
+		}
+		{
+			dependencies: ["6457FB82BC6D3618"]
+			description: [
+				"Titanium rods and a neodymium magnet wind into the &6EV Motor&r, and a titanium pipe goes into the &6EV Pump&r. Neodymium rides the monazite vein in the Nether."
+			]
+			icon: "gtceu:ev_electric_motor"
+			id: "164F0808EF9DF557"
+			rewards: [{ id: "1B2016D2F9628E2F", type: "xp", xp: 45 }]
+			tasks: [
+				{ id: "0CB11B272083BF4F", item: "gtceu:ev_electric_motor", type: "item" }
+				{ id: "01D849EAF82915F5", item: "gtceu:ev_electric_pump", type: "item" }
+			]
+			title: "EV Motor and Pump"
+			x: 12.0d
+			y: 0.0d
+		}
+		{
+			dependencies: ["164F0808EF9DF557", "70F4075BAF69DA99"]
+			description: [
+				"GTM's own &6Distillation Tower&r takes over crude oil in EV, and right now it splits liquid air into oxygen, nitrogen and the noble gases the refinery never touched."
+			]
+			icon: "gtceu:distillation_tower"
+			id: "3084C18A4334B401"
+			rewards: [
+				{ id: "663886DE4A6DDBC5", type: "xp", xp: 150 }
+				{ count: 16, id: "3206BC7E787A3152", item: "minecraft:torch", type: "item" }
+			]
+			shape: "gear"
+			size: 1.5d
+			tasks: [{ id: "5463D5111EC8D608", item: "gtceu:distillation_tower", type: "item" }]
+			title: "Distillation Tower"
+			x: 14.0d
+			y: 0.0d
+		}
+		{
+			dependencies: ["246C8ADBADA728E9"]
+			description: [
+				"The regolith sample gives &6Helium-3&r into an output hatch on the drill, and only by lunar day. Nothing burns it yet: keep it for the quantum seeds."
+			]
+			icon: "grindless:vein_sample_regolith_moon"
+			id: "1DC956E9F071636A"
+			rewards: [{ id: "3B994EBAA2AF1405", type: "xp", xp: 40 }]
+			tasks: [{ id: "3FFC2A59AF730E83", type: "checkmark" }]
+			title: "Helium-3"
+			x: 6.0d
+			y: 1.5d
+		}
+		{
+			dependencies: ["1DC956E9F071636A"]
+			description: [
+				"An ender pearl and helium-3 react into a &6Lunar Quantum Seed&r on the Moon; thrown into an explosion with an AE2 singularity, it gives an entangled pair."
+				"One goes in a quantum chamber at home, the other in one here, and both ends need chunk-loading. A pair made on Earth is pushed out of a lunar chamber."
+			]
+			icon: "ae2:quantum_link"
+			id: "366AB48E5BF50431"
+			rewards: [{ id: "7E388C5B6B30F54B", type: "xp", xp: 80 }]
+			shape: "gear"
+			size: 1.25d
+			tasks: [
+				{ id: "76B12CF105EBB9FF", item: "grindless:lunar_quantum_seed", type: "item" }
+				{ count: 2L, id: "7D3865E8AB3A4A6D", item: "ae2:quantum_entangled_singularity", type: "item" }
+				{ count: 2L, id: "105F48A9288461CC", item: "ae2:quantum_link", type: "item" }
+				{ count: 16L, id: "318D644FC6DE61F3", item: "ae2:quantum_ring", type: "item" }
+			]
+			title: "Earth-Moon Bridge"
+			x: 8.0d
+			y: 1.5d
+		}
+		{
+			dependencies: ["366AB48E5BF50431"]
+			description: [
+				"Two &6EU P2P Tunnels&r on one frequency: one against a cable at home, the other against the drill's energy hatch. The home power plant now runs the Moon."
+			]
+			icon: "eup2p:eu_p2p_tunnel"
+			id: "42BF2F77456F8773"
+			rewards: [{ id: "5D6B28FB61E42CBD", type: "xp", xp: 60 }]
+			tasks: [{ count: 2L, id: "751D67F4EBA6DE8C", item: "eup2p:eu_p2p_tunnel", type: "item" }]
+			title: "Power from Earth"
+			x: 10.0d
+			y: 1.5d
+		}
+	]
+	subtitle: ["The first base off Earth: titanium from the Moon, and a line back home."]
+	title: "EV: Lunar Base"
+}

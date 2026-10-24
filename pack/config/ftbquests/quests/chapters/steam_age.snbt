@@ -1,4 +1,5 @@
 {
+	autofocus_id: "3041A191AB566E3E"
 	default_hide_dependency_lines: false
 	default_quest_shape: ""
 	filename: "steam_age"
@@ -9,488 +10,659 @@
 	quest_links: [ ]
 	quests: [
 		{
+			dependencies: ["3207813527EE1FBD"]
 			description: [
-				"No electricity yet. GregTech's own tools and a little pickaxe work get the first batch of ore, logs and sand moving."
-				"This is the only time you will ever need to dig for something just because the game asked. Past this point, every resource gets a machine."
+				"Still on Earth, still no electricity. Fire boils water and steam drives bronze machines. By the end of this tab the drills and greenhouses work on their own and the first generator turns."
+				"Hand mining is fine until then; nothing after this tab needs it."
 			]
-			icon: "minecraft:raw_iron"
-			id: "B041A191AB566E3E"
+			icon: "gtceu:lp_steam_solid_boiler"
+			id: "3041A191AB566E3E"
 			rewards: [{ id: "52D5B636AC2AFE95", type: "xp", xp: 20 }]
 			shape: "rsquare"
 			size: 1.5d
 			tasks: [{ id: "410D4E9D93B2590D", type: "checkmark" }]
-			title: "First Steps"
+			title: "Steam Age"
 			x: 0.0d
 			y: 0.0d
 		}
 		{
-			dependencies: ["B041A191AB566E3E"]
-			description: ["Ordinary bricks hold the first ovens and boilers together. Any furnace turns clay into brick, steam-powered or not."]
-			icon: "minecraft:brick"
-			id: "A504804D432C502B"
+			dependencies: ["3041A191AB566E3E"]
+			description: [
+				"Clay balls smelt into bricks; craft them into brick blocks. The boiler and the bronze casings of the steam machines are built on them."
+			]
+			icon: "minecraft:bricks"
+			id: "2504804D432C502B"
 			rewards: [{ id: "2A35AC3AAAB1DF17", type: "xp", xp: 20 }]
 			tasks: [{ count: 16L, id: "71F99DC62AF5BF3C", item: "minecraft:brick", type: "item" }]
 			title: "Clay and Bricks"
-			x: 2.5d
+			x: 2.0d
 			y: 0.0d
 		}
 		{
-			dependencies: ["A504804D432C502B"]
+			dependencies: ["3041A191AB566E3E"]
 			description: [
-				"The &6Coke Oven&r bakes coal into coke and logs into charcoal, no power needed. &6Creosote&r drips out as a bonus - keep it, it burns well in the liquid boiler."
-				"Build it once and it keeps feeding the rest of the line: coke goes straight into the blast furnace later on."
+				"Saw a plank into a wooden form and cut a brick shape into it with the knife; the form stays in the grid. With it, clay and sand become coke clay. Smelt that into coke oven bricks and pack them into blocks."
+			]
+			icon: "gtceu:coke_oven_bricks"
+			id: "2FF295FBA78AF335"
+			rewards: [{ id: "6A7800690D415A43", type: "xp", xp: 25 }]
+			tasks: [
+				{ id: "1375061D838CBA5C", item: "gtceu:empty_wooden_form", type: "item" }
+				{ id: "798F691F46884A2A", item: "gtceu:brick_wooden_form", type: "item" }
+				{ id: "4089C686D0D31180", item: "gtceu:compressed_coke_clay", type: "item" }
+				{ id: "40B754DC855D6933", item: "gtceu:coke_oven_brick", type: "item" }
+				{ count: 25L, id: "46BC785D13A069E4", item: "gtceu:coke_oven_bricks", type: "item" }
+			]
+			title: "Coke Oven Bricks"
+			x: 2.0d
+			y: -1.5d
+		}
+		{
+			dependencies: ["2FF295FBA78AF335"]
+			description: [
+				"Your first multiblock: a hollow cube of bricks with the controller in one face. The controller's EMI page shows the shape."
+				"Coal becomes coke and logs become charcoal; a furnace can't make charcoal here. &6Creosote&r collects inside: boilers burn it and it soaks planks into treated wood."
 			]
 			icon: "gtceu:coke_oven"
 			id: "20A9578F6F706702"
-			rewards: [{ id: "AF8316F0B18FE31A", type: "xp", xp: 30 }]
+			rewards: [
+				{ id: "2F8316F0B18FE31A", type: "xp", xp: 30 }
+				{ count: 8, id: "4CEF32FF034FD548", item: "minecraft:coal", type: "item" }
+			]
 			shape: "gear"
+			size: 1.25d
 			tasks: [
-				{ id: "F4AB3375CC84D045", item: "gtceu:coke_oven", type: "item" }
+				{ id: "74AB3375CC84D045", item: "gtceu:coke_oven", type: "item" }
 				{ count: 8L, id: "160AC0E4D073488B", item: "gtceu:coke_gem", type: "item" }
 			]
 			title: "Coke Oven"
-			x: 5.0d
-			y: 0.0d
+			x: 4.0d
+			y: -1.5d
 		}
 		{
 			dependencies: ["20A9578F6F706702"]
 			description: [
-				"Bronze is just copper and tin, nothing exotic. A mortar and a casting mold get you plates and gears before you ever touch a real press."
-				"Every steam machine in this era is built out of it."
-			]
-			icon: "gtceu:bronze_ingot"
-			id: "3207813527EE1FBD"
-			rewards: [{ id: "128F3700BF8645B9", type: "xp", xp: 30 }]
-			tasks: [
-				{ count: 8L, id: "238008A7653A63DD", item: "gtceu:bronze_plate", type: "item" }
-				{ count: 4L, id: "3E324584142DDDCF", item: "gtceu:bronze_gear", type: "item" }
-			]
-			title: "Bronze"
-			x: 7.5d
-			y: 0.0d
-		}
-		{
-			dependencies: ["3207813527EE1FBD"]
-			description: [
-				"Coal or charcoal in, steam out. The &6Low-Pressure Solid Boiler&r is the heart of every machine you're about to build."
-				"Keep it fed and the whole line runs on its own."
-			]
-			icon: "gtceu:lp_steam_solid_boiler"
-			id: "ED923ADC90127182"
-			rewards: [{ id: "0348F0407B42C093", type: "xp", xp: 30 }]
-			shape: "gear"
-			tasks: [{ id: "C753776446D60E4F", item: "gtceu:lp_steam_solid_boiler", type: "item" }]
-			title: "Low-Pressure Boiler"
-			x: 10.0d
-			y: -3.0d
-		}
-		{
-			dependencies: ["3207813527EE1FBD"]
-			description: [
-				"No electric pump yet, so the &6Primitive Pump&r pulls water straight out of the world and into your boiler."
-				"Set it next to a lake or river and forget about buckets."
+				"Water without buckets. The pump makes it inside, a little faster in wet biomes, so no lake is needed."
+				"It is a small multiblock of treated wood with a pump hatch and pump decks; the controller's EMI page has the shape."
 			]
 			icon: "gtceu:primitive_pump"
 			id: "0E2E13522BA2A323"
 			rewards: [{ id: "413042DF78D6A4F5", type: "xp", xp: 20 }]
 			shape: "gear"
-			tasks: [{ id: "CAAD651868C2E72F", item: "gtceu:primitive_pump", type: "item" }]
+			size: 1.25d
+			tasks: [{ id: "4AAD651868C2E72F", item: "gtceu:primitive_pump", type: "item" }]
 			title: "Primitive Pump"
-			x: 10.0d
-			y: 3.0d
-		}
-		{
-			dependencies: ["ED923ADC90127182", "0E2E13522BA2A323"]
-			description: [
-				"The &6Macerator&r turns raw ore into crushed ore - better yield than a straight smelt, sometimes with a bonus material too."
-				"Crush it again for dust. Proper washing for the clean stuff is an upgrade for later."
-			]
-			icon: "gtceu:lp_steam_macerator"
-			id: "0238F574F77C30E5"
-			rewards: [{ id: "DB2F25CCB1188B32", type: "xp", xp: 30 }]
-			shape: "gear"
-			tasks: [{ id: "C82297E9CDFF2C7C", item: "gtceu:lp_steam_macerator", type: "item" }]
-			title: "Macerator"
-			x: 12.5d
-			y: -6.0d
-		}
-		{
-			dependencies: ["ED923ADC90127182", "0E2E13522BA2A323"]
-			description: ["Plates, compressed blocks, anything that needs squeezing instead of smelting goes through the &6Compressor&r."]
-			icon: "gtceu:lp_steam_compressor"
-			id: "EBB23A9836716A37"
-			rewards: [{ id: "1D0789B0F2987E54", type: "xp", xp: 25 }]
-			shape: "gear"
-			tasks: [{ id: "BCC85B833FE429F6", item: "gtceu:lp_steam_compressor", type: "item" }]
-			title: "Compressor"
-			x: 12.5d
+			x: 6.0d
 			y: -3.0d
 		}
 		{
-			dependencies: ["ED923ADC90127182", "0E2E13522BA2A323"]
-			description: ["The &6Forge Hammer&r shapes hot ingots the way an anvil would, just faster and without the swinging arm."]
-			icon: "gtceu:lp_steam_forge_hammer"
-			id: "15187E005F30E142"
-			rewards: [{ id: "B3ECC7FB7F419BC9", type: "xp", xp: 25 }]
-			shape: "gear"
-			tasks: [{ id: "3E50605DD26A6BFC", item: "gtceu:lp_steam_forge_hammer", type: "item" }]
-			title: "Forge Hammer"
-			x: 12.5d
+			dependencies: ["2504804D432C502B"]
+			description: [
+				"Bronze plates, bricks and a furnace. Fill it with water before the first fuel goes in: water poured into a dry, hot boiler blows it up."
+				"Steam comes out of every side except the bottom, so pipe the water in from below."
+			]
+			icon: "gtceu:lp_steam_solid_boiler"
+			id: "6D923ADC90127182"
+			rewards: [
+				{ id: "0348F0407B42C093", type: "xp", xp: 30 }
+				{ count: 8, id: "31391282AEDC2039", item: "minecraft:charcoal", type: "item" }
+			]
+			tasks: [{ id: "4753776446D60E4F", item: "gtceu:lp_steam_solid_boiler", type: "item" }]
+			title: "Low-Pressure Boiler"
+			x: 4.0d
 			y: 0.0d
 		}
 		{
-			dependencies: ["ED923ADC90127182", "0E2E13522BA2A323"]
-			description: ["The &6Extractor&r turns sticky resin into raw rubber - and it does the same with whole rubber logs, leaves or saplings if resin alone isn't enough."]
-			icon: "gtceu:lp_steam_extractor"
-			id: "E4373EE5BFA62739"
-			rewards: [{ id: "29189781B581B2F3", type: "xp", xp: 25 }]
-			shape: "gear"
-			tasks: [{ id: "A34AE2D4FC820309", item: "gtceu:lp_steam_extractor", type: "item" }]
-			title: "Extractor"
-			x: 12.5d
-			y: 3.0d
+			dependencies: ["6D923ADC90127182"]
+			description: [
+				"Every steam machine starts from a &6Bronze Machine Casing&r or a &6Bricked Bronze Casing&r, and drinks steam from a boiler or pipe next to it."
+				"After each cycle it vents steam out of the back: keep that side clear or it stops. Low-pressure machines run at half speed; the steel ones don't."
+			]
+			icon: "gtceu:bronze_machine_casing"
+			id: "4F0049B2E382BA8E"
+			rewards: [{ id: "3584CC34BCFF6E54", type: "xp", xp: 25 }]
+			tasks: [
+				{ id: "25ADC88A15337AD3", item: "gtceu:bronze_machine_casing", type: "item" }
+				{ id: "5EFEA10D880CB812", item: "gtceu:bronze_brick_casing", type: "item" }
+			]
+			title: "Steam Machines"
+			x: 6.0d
+			y: 0.0d
 		}
 		{
-			dependencies: ["ED923ADC90127182", "0E2E13522BA2A323"]
+			dependencies: ["4F0049B2E382BA8E"]
 			description: [
-				"The steam &6Furnace&r smelts like any other furnace, just faster with good fuel."
-				"The &6Alloy Smelter&r turns copper and tin dust straight into bronze ingots in one step - no separate mixing. Same trick works for red alloy, from copper and redstone dust."
+				"GregTech's miner digs out the ore under it, block by block, until the area is empty. Keep it: the vein drill later in this tab is built around one."
+			]
+			icon: "gtceu:lp_steam_miner"
+			id: "3E65A226A598A301"
+			rewards: [{ id: "000E98439123F51B", type: "xp", xp: 30 }]
+			tasks: [{ id: "07D15B562DFB45B0", item: "gtceu:lp_steam_miner", type: "item" }]
+			title: "Steam Miner"
+			x: 8.0d
+			y: -3.0d
+		}
+		{
+			dependencies: ["4F0049B2E382BA8E"]
+			description: [
+				"Grinds what the mortar did, much faster, but only the first output comes out. Ore byproducts wait for an HV macerator, so keep smelting raw ore for now."
+				"Its recipe needs diamonds from the deep veins."
+			]
+			icon: "gtceu:lp_steam_macerator"
+			id: "0238F574F77C30E5"
+			rewards: [{ id: "5B2F25CCB1188B32", type: "xp", xp: 30 }]
+			tasks: [{ id: "482297E9CDFF2C7C", item: "gtceu:lp_steam_macerator", type: "item" }]
+			title: "Steam Macerator"
+			x: 8.0d
+			y: -1.5d
+		}
+		{
+			dependencies: ["4F0049B2E382BA8E"]
+			description: [
+				"GregTech turns off packing nuggets into ingots or dust into plates by hand; the compressor does it. Wood dust becomes wood plates and fireclay becomes bricks ready to fire."
+			]
+			icon: "gtceu:lp_steam_compressor"
+			id: "6BB23A9836716A37"
+			rewards: [{ id: "1D0789B0F2987E54", type: "xp", xp: 25 }]
+			tasks: [{ id: "3CC85B833FE429F6", item: "gtceu:lp_steam_compressor", type: "item" }]
+			title: "Steam Compressor"
+			x: 8.0d
+			y: 0.0d
+		}
+		{
+			dependencies: ["4F0049B2E382BA8E"]
+			description: [
+				"Copper and tin in, bronze out, at a better ratio than mixing dust. It also makes red alloy, and with the right mold it casts glass, glass tubes and rubber sheets."
+				"The steam furnace is the plain smelter of the set."
 			]
 			icon: "gtceu:lp_steam_alloy_smelter"
 			id: "0B3A5E0D83643882"
 			rewards: [{ id: "6C4BDF67A0491A0F", type: "xp", xp: 35 }]
-			shape: "gear"
 			tasks: [
-				{ id: "2708C54E534B1E99", item: "gtceu:lp_steam_furnace", type: "item" }
 				{ id: "568FAC5542664DE3", item: "gtceu:lp_steam_alloy_smelter", type: "item" }
+				{ id: "2708C54E534B1E99", item: "gtceu:lp_steam_furnace", optional_task: true, type: "item" }
 			]
-			title: "Furnace and Alloy Smelter"
-			x: 12.5d
-			y: 6.0d
+			title: "Steam Alloy Smelter"
+			x: 8.0d
+			y: 1.5d
 		}
 		{
-			dependencies: ["E4373EE5BFA62739"]
+			dependencies: ["4F0049B2E382BA8E"]
 			description: [
-				"Rubber trees drip &6sticky resin&r on their own - no tapping tool needed, just pick it up."
-				"This is only to get started: the Steam Greenhouse later in this chapter grows rubber trees for you, resin included, so you won't be doing this by hand for long."
+				"With water on one side and lava on the other it makes cobblestone and stone without digging. EMI lists what else it can break out."
 			]
-			icon: "gtceu:sticky_resin"
-			id: "5DCCA11440887F89"
-			rewards: [{ id: "60A4085073C91D4B", type: "xp", xp: 25 }]
-			tasks: [{ count: 16L, id: "959456B66255575F", item: "gtceu:sticky_resin", type: "item" }]
-			title: "Rubber and Resin"
-			x: 15.0d
+			icon: "gtceu:lp_steam_rock_crusher"
+			id: "68EB76B726CD7484"
+			optional: true
+			rewards: [{ id: "00D8E81A9DDF7BA9", type: "xp", xp: 25 }]
+			size: 0.75d
+			tasks: [{ id: "4BA8B69D840E07D5", item: "gtceu:lp_steam_rock_crusher", type: "item" }]
+			title: "Steam Rock Crusher"
+			x: 8.0d
 			y: 3.0d
 		}
 		{
-			dependencies: ["0238F574F77C30E5", "EBB23A9836716A37", "15187E005F30E142", "0B3A5E0D83643882", "5DCCA11440887F89"]
+			dependencies: ["68EB76B726CD7484"]
 			description: [
-				"Every machine on this board is running. From here on, ore, wood and crops get pulled in by machines instead of your hands."
-				"Two tools make that possible: a drill that works a vein forever, and a greenhouse that never stops growing."
+				"More plates per ingot than the hand hammer, and it crushes cobblestone into gravel and gravel into sand. Behind a rock crusher that is sand for coke clay and glass that never runs out."
 			]
-			icon: "gtceu:steam_vein_drill"
-			id: "B557D15A5D2004C4"
-			rewards: [
-				{ id: "499C3B20D8C53E18", type: "xp", xp: 50 }
-				{ count: 8, id: "A1410F60279332F6", item: "minecraft:bread", type: "item" }
+			icon: "gtceu:lp_steam_forge_hammer"
+			id: "15187E005F30E142"
+			optional: true
+			rewards: [{ id: "33ECC7FB7F419BC9", type: "xp", xp: 25 }]
+			size: 0.75d
+			tasks: [{ id: "3E50605DD26A6BFC", item: "gtceu:lp_steam_forge_hammer", type: "item" }]
+			title: "Steam Forge Hammer"
+			x: 10.0d
+			y: 3.0d
+		}
+		{
+			dependencies: ["0238F574F77C30E5"]
+			description: [
+				"The &6Steam Grinder&r and &6Steam Oven&r are multiblock macerator and furnace: several items per cycle from one steam hatch. They keep no byproducts either."
 			]
-			shape: "rsquare"
-			size: 1.5d
-			tasks: [{ id: "59EBF6F3A0E28D4D", type: "checkmark" }]
-			title: "No More Pickaxe"
-			x: 17.5d
+			icon: "gtceu:steam_grinder"
+			id: "67124C424660DDAE"
+			optional: true
+			rewards: [{ id: "5F282F1DCDBBE785", type: "xp", xp: 30 }]
+			size: 0.75d
+			tasks: [
+				{ id: "430BBAA23DA7FB8D", item: "gtceu:steam_grinder", optional_task: true, type: "item" }
+				{ id: "733A302F2C306579", item: "gtceu:steam_oven", optional_task: true, type: "item" }
+			]
+			title: "Steam Multis"
+			x: 10.0d
+			y: -3.0d
+		}
+		{
+			dependencies: ["6BB23A9836716A37", "0238F574F77C30E5"]
+			description: [
+				"Grind clay and brick blocks into dust and mix them into fireclay. The compressor presses it, a furnace fires it, and firebricks take heat that would melt ordinary bricks."
+			]
+			icon: "gtceu:firebricks"
+			id: "7E4FF9E6FF9F495C"
+			rewards: [{ id: "6162F57F24166A2C", type: "xp", xp: 30 }]
+			tasks: [
+				{ id: "0042B4B912A67298", item: "gtceu:clay_dust", type: "item" }
+				{ id: "745EA8BD32C82370", item: "gtceu:brick_dust", type: "item" }
+				{ id: "596503EAECB53F55", item: "gtceu:fireclay_dust", type: "item" }
+				{ id: "058E00150C410DCB", item: "gtceu:compressed_fireclay", type: "item" }
+				{ id: "05EE67E923A1F3C0", item: "gtceu:firebrick", type: "item" }
+				{ count: 32L, id: "30FE470093309B75", item: "gtceu:firebricks", type: "item" }
+			]
+			title: "Firebricks"
+			x: 10.0d
 			y: 0.0d
 		}
 		{
-			dependencies: ["B557D15A5D2004C4"]
-			description: ["A probe of bronze and glass is the only tool that can read a vein. Empty, it doesn't do anything yet - it needs a sample first."]
-			icon: "grindless:empty_vein_probe"
-			id: "DDF70249D310BA55"
-			rewards: [{ id: "C5FD9A5114AE0F7F", type: "xp", xp: 25 }]
-			tasks: [{ id: "46595CCD8118CE7A", item: "grindless:empty_vein_probe", type: "item" }]
-			title: "Empty Vein Probe"
-			x: 20.0d
-			y: -4.0d
-		}
-		{
-			dependencies: ["DDF70249D310BA55"]
+			dependencies: ["6BB23A9836716A37"]
 			description: [
-				"Dunk the probe in raw ore from the vein you want and it locks onto that vein for good - the sample itself is never used up."
-				"One sample per vein, picked up once, either by hand or from the steam miner."
+				"Smelted iron nuggets come out as wrought iron nuggets, and the compressor packs them into ingots. Wrought iron turns into steel faster in the blast furnace, and every LV hull needs its plates."
 			]
-			icon: "grindless:empty_vein_probe"
-			id: "4B2FCEC042219588"
-			rewards: [{ id: "6200EA49FE45BD7E", type: "xp", xp: 25 }]
-			tasks: [{ id: "D7932E3FA6A788AC", type: "checkmark" }]
-			title: "Vein Sample"
-			x: 22.5d
-			y: -4.0d
+			icon: "gtceu:wrought_iron_ingot"
+			id: "2985D1F260EE851E"
+			rewards: [{ id: "77068FD9291EF2AB", type: "xp", xp: 20 }]
+			tasks: [
+				{ id: "44EC529548F6EB36", item: "gtceu:wrought_iron_nugget", type: "item" }
+				{ id: "4086942D4962E24A", item: "gtceu:wrought_iron_ingot", type: "item" }
+			]
+			title: "Wrought Iron"
+			x: 10.0d
+			y: 1.5d
 		}
 		{
-			dependencies: ["4B2FCEC042219588"]
-			description: ["Bronze bits wear out drilling, a bit at a time. Keep a few spares on hand so the drill never stalls for lack of one."]
-			icon: "grindless:bronze_drill_bit"
-			id: "54FC9D8B7F999601"
-			rewards: [{ id: "AF36C1C84B8AA4B0", type: "xp", xp: 20 }]
-			tasks: [{ count: 4L, id: "66FEC38CDE525717", item: "grindless:bronze_drill_bit", type: "item" }]
-			title: "Drill Bits"
-			x: 25.0d
-			y: -4.0d
-		}
-		{
-			dependencies: ["54FC9D8B7F999601"]
+			dependencies: ["7E4FF9E6FF9F495C"]
 			description: [
-				"Point a sample and a bit at a vein and the &6Steam Vein Drill&r pulls raw ore out of it for as long as you keep it fed."
-				"This is the machine that ends manual mining for good - no vein ever runs dry."
-			]
-			icon: "gtceu:steam_vein_drill"
-			id: "103C07A78792B593"
-			rewards: [
-				{ id: "81EFF2510A6E8A0D", type: "xp", xp: 60 }
-				{ count: 16, id: "2DFE667772A0BD6B", item: "minecraft:torch", type: "item" }
-			]
-			shape: "gear"
-			size: 1.5d
-			tasks: [{ id: "84DEFD03BAF635AB", item: "gtceu:steam_vein_drill", type: "item" }]
-			title: "Steam Vein Drill"
-			x: 27.5d
-			y: -4.0d
-		}
-		{
-			dependencies: ["B557D15A5D2004C4"]
-			description: [
-				"GregTech's own &6Steam Miner&r chews through a real ore vein block by block. Simple, but the vein runs out eventually."
-				"A fine early boost while the vein drill comes online."
-			]
-			icon: "gtceu:lp_steam_miner"
-			id: "BE65A226A598A301"
-			rewards: [{ id: "800E98439123F51B", type: "xp", xp: 30 }]
-			shape: "gear"
-			tasks: [{ id: "87D15B562DFB45B0", item: "gtceu:lp_steam_miner", type: "item" }]
-			title: "Steam Miner"
-			x: 20.0d
-			y: 4.0d
-		}
-		{
-			dependencies: ["B557D15A5D2004C4"]
-			description: [
-				"Plant a sapling or seed inside as a catalyst and the &6Steam Greenhouse&r keeps growing copies of it without ever using it up."
-				"Wood, rubber wood and crops, all on autopilot."
-			]
-			icon: "gtceu:steam_greenhouse"
-			id: "9AFD1F4557C5DA80"
-			rewards: [
-				{ id: "A1456737917678C3", type: "xp", xp: 50 }
-				{ count: 4, id: "BDF56AFED50E9079", item: "minecraft:wheat_seeds", type: "item" }
-			]
-			shape: "gear"
-			size: 1.5d
-			tasks: [{ id: "681EBC183F437749", item: "gtceu:steam_greenhouse", type: "item" }]
-			title: "Steam Greenhouse"
-			x: 22.5d
-			y: 7.0d
-		}
-		{
-			dependencies: ["B557D15A5D2004C4"]
-			description: ["Stone and cobble in, gravel and sand out, with water and lava running alongside. The &6Rock Crusher&r turns plain rock into something worth using."]
-			icon: "gtceu:lp_steam_rock_crusher"
-			id: "68EB76B726CD7484"
-			rewards: [{ id: "00D8E81A9DDF7BA9", type: "xp", xp: 25 }]
-			shape: "gear"
-			tasks: [{ id: "4BA8B69D840E07D5", item: "gtceu:lp_steam_rock_crusher", type: "item" }]
-			title: "Steam Rock Crusher"
-			x: 20.0d
-			y: 0.0d
-		}
-		{
-			dependencies: ["103C07A78792B593", "BE65A226A598A301"]
-			dependency_requirement: "one_completed"
-			description: [
-				"Coke and a steady draft of air let the &6Primitive Blast Furnace&r reach heat no steam machine alone can manage."
-				"It's the only way to turn iron into steel before you have real power."
+				"Iron or wrought iron with coke or coal becomes steel, slowly; wrought iron is quicker. If steel runs short, build a second furnace against the first: they can share a wall."
 			]
 			icon: "gtceu:primitive_blast_furnace"
 			id: "376295DE4FA3B31E"
 			rewards: [{ id: "2C462FC0FC9B6EA1", type: "xp", xp: 35 }]
 			shape: "gear"
+			size: 1.25d
 			tasks: [{ id: "74759AA68CA79F1D", item: "gtceu:primitive_blast_furnace", type: "item" }]
 			title: "Primitive Blast Furnace"
-			x: 25.0d
+			x: 12.0d
 			y: 0.0d
 		}
 		{
 			dependencies: ["376295DE4FA3B31E"]
-			description: ["Steel is what every high-pressure machine and the whole LV tier is waiting on. Stock up - you'll burn through it fast."]
+			description: [
+				"Steel opens the high-pressure machines, the casting molds and the whole LV tier. Keep a blast furnace running from now on."
+			]
 			icon: "gtceu:steel_ingot"
 			id: "33AF6A368B3587E0"
 			rewards: [{ id: "57EE27EA8875AE38", type: "xp", xp: 40 }]
-			tasks: [{ count: 16L, id: "ACA3C60C99A47B84", item: "gtceu:steel_ingot", type: "item" }]
+			tasks: [{ count: 16L, id: "2CA3C60C99A47B84", item: "gtceu:steel_ingot", type: "item" }]
 			title: "Steel"
-			x: 27.5d
+			x: 14.0d
 			y: 0.0d
 		}
 		{
-			dependencies: ["33AF6A368B3587E0", "54FC9D8B7F999601"]
+			dependencies: ["33AF6A368B3587E0"]
 			description: [
-				"Steel bits outlast bronze ones and are the only kind that can reach the deepest veins."
-				"Not required - a bronze bit still works fine on shallow ground."
+				"Steel and wrought iron versions of the steam machines, without the half-speed penalty. Upgrade the one your line waits on."
 			]
+			icon: "gtceu:hp_steam_macerator"
+			id: "43DE5CB313894C8C"
+			optional: true
+			rewards: [{ id: "43A3D409E7B2A5FA", type: "xp", xp: 40 }]
+			size: 0.75d
+			tasks: [
+				{ id: "12FF5C16B331FF3F", item: "gtceu:hp_steam_macerator", optional_task: true, type: "item" }
+				{ id: "0C9A945D243BAE40", item: "gtceu:hp_steam_compressor", optional_task: true, type: "item" }
+				{ id: "59BB04B02EE17220", item: "gtceu:hp_steam_forge_hammer", optional_task: true, type: "item" }
+				{ id: "1DFC9ECA5376ED5C", item: "gtceu:hp_steam_extractor", optional_task: true, type: "item" }
+				{ id: "3B081EAAEA440F8C", item: "gtceu:hp_steam_furnace", optional_task: true, type: "item" }
+				{ id: "639A4C8C399C4211", item: "gtceu:hp_steam_alloy_smelter", optional_task: true, type: "item" }
+			]
+			title: "High-Pressure Machines"
+			x: 16.0d
+			y: -1.5d
+		}
+		{
+			dependencies: ["33AF6A368B3587E0"]
+			description: ["Built from the steam miner, it digs a wider area faster. The ore under it still runs out."]
+			icon: "gtceu:hp_steam_miner"
+			id: "6E670D15F2DFA6EA"
+			optional: true
+			rewards: [{ id: "5B8EAFFE2F696429", type: "xp", xp: 25 }]
+			size: 0.75d
+			tasks: [{ id: "48F7AAFCD6BFCB2F", item: "gtceu:hp_steam_miner", type: "item" }]
+			title: "High-Pressure Miner"
+			x: 16.0d
+			y: -3.0d
+		}
+		{
+			dependencies: ["33AF6A368B3587E0"]
+			description: [
+				"Steel plates, a hammer and a file make an empty mold; where the hammer sits in the grid decides the shape. In the alloy smelter the block mold casts glass, the plate mold rubber sheets and the ball mold glass tubes."
+			]
+			icon: "gtceu:plate_casting_mold"
+			id: "6D95C40FFB75ABEB"
+			rewards: [{ id: "71A316942CE7B93D", type: "xp", xp: 30 }]
+			tasks: [
+				{ id: "55F67293B20529C3", item: "gtceu:empty_mold", type: "item" }
+				{ id: "05FBB202FAB1D73D", item: "gtceu:block_casting_mold", type: "item" }
+				{ id: "4F220D6CFE4C1956", item: "gtceu:plate_casting_mold", type: "item" }
+				{ id: "0E1D8ED73159C325", item: "gtceu:ball_casting_mold", type: "item" }
+			]
+			title: "Casting Molds"
+			x: 16.0d
+			y: 0.0d
+		}
+		{
+			dependencies: ["6D95C40FFB75ABEB"]
+			description: [
+				"Sand doesn't smelt into glass in GregTech. Grind sand into quartz sand, mix it with a little flint dust into glass dust, and cast that in the alloy smelter with the block mold."
+				"Glass opens the extractor, the vein probe and the greenhouse."
+			]
+			icon: "minecraft:glass"
+			id: "64A0425E87F233F6"
+			rewards: [{ count: 4, id: "47736A6945ECE04C", item: "minecraft:glass", type: "item" }]
+			tasks: [
+				{ id: "018B744EC3166BF6", item: "gtceu:quartz_sand_dust", type: "item" }
+				{ id: "573CDB7EADF7589F", item: "gtceu:glass_dust", type: "item" }
+				{ id: "21A61C6D87C21AE2", item: "minecraft:glass", type: "item" }
+			]
+			title: "Glass"
+			x: 18.0d
+			y: 0.0d
+		}
+		{
+			dependencies: ["64A0425E87F233F6"]
+			description: [
+				"Sticky resin goes in and raw rubber pulp comes out; rubber logs and saplings work too, more slowly. Rubber also needs sulfur, which is the next step."
+			]
+			icon: "gtceu:lp_steam_extractor"
+			id: "64373EE5BFA62739"
+			rewards: [{ id: "29189781B581B2F3", type: "xp", xp: 25 }]
+			tasks: [{ id: "234AE2D4FC820309", item: "gtceu:lp_steam_extractor", type: "item" }]
+			title: "Steam Extractor"
+			x: 20.0d
+			y: 0.0d
+		}
+		{
+			dependencies: ["64373EE5BFA62739"]
+			description: [
+				"Rubber needs sulfur, and this early the only source is sulfur ore in the Nether. Steel gives you a flint and steel for the portal; smelt the ore into dust."
+				"In LV a centrifuge gets sulfur out of the realgar in the copper-tin vein, and the Nether becomes a proper destination."
+			]
+			icon: "gtceu:sulfur_dust"
+			id: "221A824594716C2E"
+			rewards: [{ id: "4DA6B3951C5CCE1C", type: "xp", xp: 30 }]
+			tasks: [{ id: "20696957C9820316", item: "gtceu:sulfur_dust", type: "item" }]
+			title: "Sulfur from the Nether"
+			x: 22.0d
+			y: 0.0d
+		}
+		{
+			dependencies: ["221A824594716C2E"]
+			description: [
+				"Raw rubber pulp and sulfur in the alloy smelter make rubber ingots; ingots in the plate mold make sheets. Every cable needs a sheet of insulation."
+			]
+			icon: "gtceu:rubber_plate"
+			id: "61E429627580A285"
+			rewards: [{ id: "411B97BDD0C19199", type: "xp", xp: 30 }]
+			tasks: [
+				{ id: "4DD8562ADA32AC7D", item: "gtceu:raw_rubber_dust", type: "item" }
+				{ id: "1FF0BFF4B9C41FFA", item: "gtceu:rubber_ingot", type: "item" }
+				{ id: "737DC382A1303573", item: "gtceu:rubber_plate", type: "item" }
+			]
+			title: "Rubber Sheets"
+			x: 24.0d
+			y: 0.0d
+		}
+		{
+			dependencies: ["61E429627580A285"]
+			description: [
+				"A tin plate and the wire cutter give tin wire; wire plus a rubber sheet is a tin cable, the LV power line. Red alloy cable is made the same way and goes into circuits."
+			]
+			icon: "gtceu:tin_single_cable"
+			id: "5BA84FC1DC1C8912"
+			rewards: [{ id: "382DFB8999992BAC", type: "xp", xp: 25 }]
+			tasks: [{ count: 8L, id: "20248FA90E657CBB", item: "gtceu:tin_single_cable", type: "item" }]
+			title: "Insulated Cable"
+			x: 26.0d
+			y: 0.0d
+		}
+		{
+			dependencies: ["5BA84FC1DC1C8912"]
+			description: [
+				"An iron rod plus redstone dust in the grid makes a magnetic rod. Wind it with copper wire, add tin cables and iron rods, and it is a motor; nearly every LV machine has one."
+			]
+			icon: "gtceu:lv_electric_motor"
+			id: "2AEFA5A96D5BA55D"
+			rewards: [{ id: "27376BB009545BF4", type: "xp", xp: 30 }]
+			tasks: [
+				{ id: "3C266DF2A91AC483", item: "gtceu:magnetic_iron_rod", type: "item" }
+				{ id: "6ED6C37428C7D4F3", item: "gtceu:lv_electric_motor", type: "item" }
+			]
+			title: "LV Motor"
+			x: 28.0d
+			y: -1.5d
+		}
+		{
+			dependencies: ["5BA84FC1DC1C8912"]
+			description: [
+				"Steel plates and a wrench make the LV casing; wrought iron plates, a steel plate and tin cables turn it into a hull. Every LV machine starts as one."
+			]
+			icon: "gtceu:lv_machine_hull"
+			id: "6862838CB35D8296"
+			rewards: [{ id: "7E0CC46E3BF5F812", type: "xp", xp: 30 }]
+			tasks: [{ id: "54307AB204FD89FD", item: "gtceu:lv_machine_hull", type: "item" }]
+			title: "LV Machine Hull"
+			x: 28.0d
+			y: 0.0d
+		}
+		{
+			dependencies: ["64A0425E87F233F6"]
+			description: [
+				"Glass dust cast in the ball mold is a glass tube. Steel bolts on the ends and copper wire inside make the vacuum tube, the first electronic part."
+			]
+			icon: "gtceu:vacuum_tube"
+			id: "4A21D67EFA0E04C5"
+			rewards: [{ id: "6EDBD02B79B38D90", type: "xp", xp: 25 }]
+			tasks: [{ count: 2L, id: "3ED99B517FBD6417", item: "gtceu:vacuum_tube", type: "item" }]
+			title: "Vacuum Tubes"
+			x: 18.0d
+			y: 3.0d
+		}
+		{
+			dependencies: ["4A21D67EFA0E04C5"]
+			description: [
+				"Resistors take sticky resin, paper, copper wire and coal dust. For the board, coat a wood plate from the compressor in resin, then wrap it in copper wire."
+			]
+			icon: "gtceu:resin_printed_circuit_board"
+			id: "1861D320C9F055D2"
+			rewards: [{ id: "0D7381C6AD892F5B", type: "xp", xp: 25 }]
+			tasks: [
+				{ count: 2L, id: "2A14C6530C6DF63B", item: "gtceu:resistor", type: "item" }
+				{ id: "5702CAC6CB88D573", item: "gtceu:resin_printed_circuit_board", type: "item" }
+			]
+			title: "Resistors and Boards"
+			x: 20.0d
+			y: 3.0d
+		}
+		{
+			dependencies: ["1861D320C9F055D2"]
+			description: [
+				"Copper and redstone in the alloy smelter. Red alloy wire, insulated like tin cable, carries the signal inside the first circuits."
+			]
+			icon: "gtceu:red_alloy_ingot"
+			id: "30D4DD1212DB31E0"
+			rewards: [{ id: "56375B9B39F19228", type: "xp", xp: 25 }]
+			tasks: [{ id: "16CD5C26281202E7", item: "gtceu:red_alloy_ingot", type: "item" }]
+			title: "Red Alloy"
+			x: 22.0d
+			y: 3.0d
+		}
+		{
+			dependencies: ["30D4DD1212DB31E0", "5BA84FC1DC1C8912"]
+			description: [
+				"All the parts meet here. The &6Basic Electronic Circuit&r is the first LV circuit; the turbine and almost every LV machine need one."
+			]
+			icon: "gtceu:basic_electronic_circuit"
+			id: "59DE11D9BE2E0E47"
+			rewards: [{ id: "7E788BEAF5DACB6D", type: "xp", xp: 40 }]
+			shape: "gear"
+			size: 1.25d
+			tasks: [{ count: 2L, id: "52E895BDF72B86AC", item: "gtceu:basic_electronic_circuit", type: "item" }]
+			title: "LV Circuit"
+			x: 26.0d
+			y: 3.0d
+		}
+		{
+			dependencies: ["59DE11D9BE2E0E47"]
+			description: ["It needs LV circuits, so it comes late. One multiblock boiler does the work of a row of small ones."]
+			icon: "gtceu:bronze_large_boiler"
+			id: "36B68B4C2B1E0DBA"
+			optional: true
+			rewards: [{ id: "47536037A0E7A152", type: "xp", xp: 35 }]
+			size: 0.75d
+			tasks: [{ id: "1128EA2A780C9E3B", item: "gtceu:bronze_large_boiler", type: "item" }]
+			title: "Large Bronze Boiler"
+			x: 28.0d
+			y: 4.5d
+		}
+		{
+			dependencies: ["6862838CB35D8296", "2AEFA5A96D5BA55D", "59DE11D9BE2E0E47"]
+			description: [
+				"Steam in, LV electricity out: the &6Basic Steam Turbine Generator&r runs on the boilers you already have. That is the first power on Earth and the end of the steam age."
+				"Next tab: electric machines, and a real trip to the Nether."
+			]
+			icon: "gtceu:lv_steam_turbine"
+			id: "4996827E4BFC339E"
+			rewards: [
+				{ id: "7B0D5D25018EB656", type: "xp", xp: 100 }
+				{ count: 4, id: "2D54E246836CF089", item: "gtceu:tin_single_cable", type: "item" }
+			]
+			shape: "diamond"
+			size: 2.0d
+			tasks: [{ id: "1D440BC33682A584", item: "gtceu:lv_steam_turbine", type: "item" }]
+			title: "LV Steam Turbine"
+			x: 30.0d
+			y: 0.0d
+		}
+		{
+			dependencies: ["64A0425E87F233F6"]
+			description: [
+				"A glass house on a dirt floor. Put a sapling or seed in the input bus: it is never used up, and logs, sticky resin or crops come out every cycle."
+				"A rubber sapling keeps the resin coming."
+			]
+			icon: "gtceu:steam_greenhouse"
+			id: "1AFD1F4557C5DA80"
+			rewards: [
+				{ id: "21456737917678C3", type: "xp", xp: 50 }
+				{ count: 4, id: "3DF56AFED50E9079", item: "minecraft:wheat_seeds", type: "item" }
+			]
+			shape: "gear"
+			size: 1.25d
+			tasks: [{ id: "681EBC183F437749", item: "gtceu:steam_greenhouse", type: "item" }]
+			title: "Steam Greenhouse"
+			x: 22.0d
+			y: -1.5d
+		}
+		{
+			dependencies: ["64A0425E87F233F6"]
+			description: [
+				"Bronze plates and glass. Empty it does nothing; filled with ore from one vein it becomes that vein's sample."
+			]
+			icon: "grindless:empty_vein_probe"
+			id: "5DF70249D310BA55"
+			rewards: [{ id: "45FD9A5114AE0F7F", type: "xp", xp: 25 }]
+			tasks: [{ id: "46595CCD8118CE7A", item: "grindless:empty_vein_probe", type: "item" }]
+			title: "Empty Vein Probe"
+			x: 20.0d
+			y: -3.0d
+		}
+		{
+			dependencies: ["5DF70249D310BA55"]
+			description: [
+				"The probe plus raw ore from one vein makes that vein's sample; EMI shows which ores each vein takes. The drill reads the sample and never uses it up."
+			]
+			icon: "grindless:vein_sample_copper_tin"
+			id: "4B2FCEC042219588"
+			rewards: [{ id: "6200EA49FE45BD7E", type: "xp", xp: 25 }]
+			tasks: [
+				{
+					icon: "grindless:vein_sample_copper_tin"
+					id: "4054C0EB5D1893FC"
+					item: {
+						Count: 1b
+						id: "itemfilters:tag"
+						tag: { value: "grindless:vein_samples" }
+					}
+					title: "Any Vein Sample"
+					type: "item"
+				}
+			]
+			title: "Vein Sample"
+			x: 22.0d
+			y: -3.0d
+		}
+		{
+			dependencies: ["5DF70249D310BA55"]
+			description: [
+				"Bronze plates and rods, sharpened with the file. The drill wears a bit out now and then; keep spares in the input bus so it never stalls."
+			]
+			icon: "grindless:bronze_drill_bit"
+			id: "54FC9D8B7F999601"
+			rewards: [{ id: "2F36C1C84B8AA4B0", type: "xp", xp: 20 }]
+			tasks: [{ count: 4L, id: "66FEC38CDE525717", item: "grindless:bronze_drill_bit", type: "item" }]
+			title: "Drill Bits"
+			x: 22.0d
+			y: -4.5d
+		}
+		{
+			dependencies: ["4B2FCEC042219588", "54FC9D8B7F999601"]
+			description: [
+				"Built around the steam miner. A sample and bits in the input bus, steam in the hatch, and it pulls raw ore from that vein for as long as it runs. One drill per vein you need."
+				"From now on ore comes to you."
+			]
+			icon: "gtceu:steam_vein_drill"
+			id: "103C07A78792B593"
+			rewards: [
+				{ id: "01EFF2510A6E8A0D", type: "xp", xp: 60 }
+				{ count: 2, id: "2DFE667772A0BD6B", item: "grindless:bronze_drill_bit", type: "item" }
+			]
+			shape: "gear"
+			size: 1.5d
+			tasks: [{ id: "04DEFD03BAF635AB", item: "gtceu:steam_vein_drill", type: "item" }]
+			title: "Steam Vein Drill"
+			x: 24.0d
+			y: -3.0d
+		}
+		{
+			dependencies: ["54FC9D8B7F999601"]
+			description: ["Lasts much longer than bronze and is the only bit that reaches the deep veins: diamond, redstone and mica."]
 			icon: "grindless:steel_drill_bit"
 			id: "0634FBEA53408D40"
 			optional: true
 			rewards: [{ id: "25ED67CFD166C808", type: "xp", xp: 20 }]
+			size: 0.75d
 			tasks: [{ count: 4L, id: "68B43926030627EA", item: "grindless:steel_drill_bit", type: "item" }]
 			title: "Steel Drill Bit"
-			x: 30.0d
-			y: -6.0d
+			x: 24.0d
+			y: -4.5d
 		}
 		{
-			dependencies: ["33AF6A368B3587E0"]
-			description: [
-				"Every steam machine has a high-pressure twin that runs faster off the same bronze design, just built in steel."
-				"Upgrade whichever one is slowing your line down first - you don't need all six at once."
-			]
-			icon: "gtceu:hp_steam_macerator"
-			id: "43DE5CB313894C8C"
-			rewards: [{ id: "C3A3D409E7B2A5FA", type: "xp", xp: 40 }]
-			shape: "gear"
-			tasks: [
-				{ id: "12FF5C16B331FF3F", item: "gtceu:hp_steam_macerator", optional_task: true, type: "item" }
-				{ id: "8C9A945D243BAE40", item: "gtceu:hp_steam_compressor", optional_task: true, type: "item" }
-				{ id: "59BB04B02EE17220", item: "gtceu:hp_steam_forge_hammer", optional_task: true, type: "item" }
-				{ id: "1DFC9ECA5376ED5C", item: "gtceu:hp_steam_extractor", optional_task: true, type: "item" }
-				{ id: "BB081EAAEA440F8C", item: "gtceu:hp_steam_furnace", optional_task: true, type: "item" }
-				{ id: "E39A4C8C399C4211", item: "gtceu:hp_steam_alloy_smelter", optional_task: true, type: "item" }
-			]
-			title: "High-Pressure Machines"
-			x: 30.0d
-			y: 0.0d
-		}
-		{
-			dependencies: ["BE65A226A598A301", "33AF6A368B3587E0"]
-			description: ["The high-pressure miner digs a wider hole, faster. Same vein, same limit - it still runs out eventually."]
-			icon: "gtceu:hp_steam_miner"
-			id: "EE670D15F2DFA6EA"
-			optional: true
-			rewards: [{ id: "5B8EAFFE2F696429", type: "xp", xp: 25 }]
-			tasks: [{ id: "C8F7AAFCD6BFCB2F", item: "gtceu:hp_steam_miner", type: "item" }]
-			title: "High-Pressure Miner"
-			x: 32.5d
-			y: 4.0d
-		}
-		{
-			dependencies: ["ED923ADC90127182"]
-			description: [
-				"One big &6Bronze Large Boiler&r replaces a wall of small ones and burns fuel more efficiently per unit of steam."
-				"Worth building the moment your line needs more steam than one small boiler can give."
-			]
-			icon: "gtceu:bronze_large_boiler"
-			id: "36B68B4C2B1E0DBA"
-			rewards: [{ id: "47536037A0E7A152", type: "xp", xp: 35 }]
-			shape: "gear"
-			size: 1.25d
-			tasks: [{ id: "1128EA2A780C9E3B", item: "gtceu:bronze_large_boiler", type: "item" }]
-			title: "Bronze Large Boiler"
-			x: 30.0d
-			y: -3.0d
-		}
-		{
-			dependencies: ["43DE5CB313894C8C"]
-			description: [
-				"The &6Steam Grinder&r and &6Steam Oven&r are multiblock upgrades of the macerator and furnace - more of a bonus than a requirement."
-				"Build whichever matches the ore or food you're processing most."
-			]
-			icon: "gtceu:steam_grinder"
-			id: "E7124C424660DDAE"
-			rewards: [{ id: "5F282F1DCDBBE785", type: "xp", xp: 30 }]
-			shape: "gear"
-			tasks: [
-				{ id: "430BBAA23DA7FB8D", item: "gtceu:steam_grinder", optional_task: true, type: "item" }
-				{ id: "F33A302F2C306579", item: "gtceu:steam_oven", optional_task: true, type: "item" }
-			]
-			title: "Steam Multis"
-			x: 32.5d
-			y: 0.0d
-		}
-		{
-			dependencies: ["33AF6A368B3587E0"]
-			description: ["Glass, a hint of metal and a vacuum sealed inside - the &6Vacuum Tube&r is the first real electronic part you'll ever make."]
-			icon: "gtceu:vacuum_tube"
-			id: "4A21D67EFA0E04C5"
-			rewards: [{ id: "EEDBD02B79B38D90", type: "xp", xp: 25 }]
-			tasks: [{ count: 8L, id: "3ED99B517FBD6417", item: "gtceu:vacuum_tube", type: "item" }]
-			title: "Vacuum Tubes"
-			x: 30.0d
-			y: 3.0d
-		}
-		{
-			dependencies: ["5DCCA11440887F89", "33AF6A368B3587E0"]
-			description: ["A resin board gives the tubes and resistors somewhere to sit. Nothing fancy yet, just the base every circuit needs."]
-			icon: "gtceu:resin_printed_circuit_board"
-			id: "9861D320C9F055D2"
-			rewards: [{ id: "0D7381C6AD892F5B", type: "xp", xp: 25 }]
-			tasks: [
-				{ count: 4L, id: "5702CAC6CB88D573", item: "gtceu:resin_printed_circuit_board", type: "item" }
-				{ count: 4L, id: "AA14C6530C6DF63B", item: "gtceu:resistor", type: "item" }
-			]
-			title: "Circuit Boards"
-			x: 32.5d
-			y: 6.0d
-		}
-		{
-			dependencies: ["4A21D67EFA0E04C5", "9861D320C9F055D2"]
-			description: ["Solder the tubes onto the board and you get a &6Basic Electronic Circuit&r - the part every LV machine is built around."]
-			icon: "gtceu:basic_electronic_circuit"
-			id: "D9DE11D9BE2E0E47"
-			rewards: [{ id: "FE788BEAF5DACB6D", type: "xp", xp: 40 }]
-			shape: "gear"
-			tasks: [{ count: 4L, id: "D2E895BDF72B86AC", item: "gtceu:basic_electronic_circuit", type: "item" }]
-			title: "LV Circuit"
-			x: 35.0d
-			y: 4.5d
-		}
-		{
-			dependencies: ["3207813527EE1FBD", "5DCCA11440887F89"]
-			description: ["Tin carries current well enough for LV, and a skin of rubber keeps it from shorting against the frame. Simple, cheap, reliable."]
-			icon: "gtceu:tin_single_cable"
-			id: "DBA84FC1DC1C8912"
-			rewards: [{ id: "B82DFB8999992BAC", type: "xp", xp: 25 }]
-			tasks: [{ count: 8L, id: "A0248FA90E657CBB", item: "gtceu:tin_single_cable", type: "item" }]
-			title: "Insulated Cable"
-			x: 32.5d
-			y: -6.0d
-		}
-		{
-			dependencies: ["33AF6A368B3587E0"]
-			description: ["Every electric machine starts life as an empty &6Machine Hull&r waiting for a circuit and a recipe. This is the LV one."]
-			icon: "gtceu:lv_machine_hull"
-			id: "E862838CB35D8296"
-			rewards: [{ id: "FE0CC46E3BF5F812", type: "xp", xp: 30 }]
-			shape: "gear"
-			tasks: [{ count: 2L, id: "D4307AB204FD89FD", item: "gtceu:lv_machine_hull", type: "item" }]
-			title: "LV Machine Hull"
-			x: 35.0d
-			y: -3.0d
-		}
-		{
-			dependencies: ["D9DE11D9BE2E0E47", "DBA84FC1DC1C8912", "E862838CB35D8296"]
-			description: [
-				"Steam spins the &6LV Steam Turbine&r and out comes real, steady electricity - the first the base has ever seen."
-				"That's the Steam Age done. Everything past this gate runs on power instead of pressure."
-			]
-			icon: "gtceu:lv_steam_turbine"
-			id: "C996827E4BFC339E"
+			dependencies: ["103C07A78792B593", "1AFD1F4557C5DA80"]
+			description: ["Drills bring the ore and greenhouses the wood. Hand mining was only the start."]
+			icon: "gtceu:steam_vein_drill"
+			id: "3557D15A5D2004C4"
 			rewards: [
-				{ id: "7B0D5D25018EB656", type: "xp", xp: 100 }
-				{ count: 16, id: "AD54E246836CF089", item: "minecraft:torch", type: "item" }
+				{ id: "499C3B20D8C53E18", type: "xp", xp: 50 }
+				{ count: 8, id: "21410F60279332F6", item: "minecraft:bread", type: "item" }
 			]
-			shape: "diamond"
-			size: 1.75d
-			tasks: [{ id: "9D440BC33682A584", item: "gtceu:lv_steam_turbine", type: "item" }]
-			title: "LV Steam Turbine"
-			x: 38.0d
-			y: 0.0d
+			shape: "rsquare"
+			size: 1.25d
+			tasks: [{ id: "59EBF6F3A0E28D4D", type: "checkmark" }]
+			title: "No More Pickaxe"
+			x: 26.0d
+			y: -1.5d
 		}
 	]
+	subtitle: ["Earth without electricity: coke, bronze machines, steel, and ore and wood that arrive on their own."]
 	title: "Steam Age: Escape Velocity"
 }
