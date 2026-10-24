@@ -14,18 +14,19 @@ Pack de GregTech enorme para Minecraft 1.20.1 (Forge) sobre GregTech Modern 7.5.
 
 ## Cómo jugar (Prism Launcher)
 
-1. Crea una instancia de Minecraft 1.20.1 con Forge 47.4.28 y Java 17.
-2. Descarga [packwiz-installer-bootstrap.jar](https://github.com/packwiz/packwiz-installer-bootstrap/releases) en la carpeta `minecraft` de la instancia.
-3. En *Editar instancia → Ajustes → Comandos personalizados*, pon como comando previo al lanzamiento:
+**Canal jugable (recomendado).** Se actualiza solo y conserva tu mundo.
 
-   ```
-   "$INST_JAVA" -jar packwiz-installer-bootstrap.jar https://raw.githubusercontent.com/Ezequiel24123z/GrindlessGregtech/v0.4.0/pack/pack.toml
-   ```
+1. Descarga `Gregtech-Grindless-jugable.zip` de la [versión "Canal jugable"](https://github.com/Ezequiel24123z/GrindlessGregtech/releases/tag/canal-jugable).
+2. En Prism: *Añadir instancia → Importar → elige el zip*.
+3. Arranca. La primera vez descarga unos 400 MB de mods.
 
-4. Arranca. packwiz descarga los mods desde sus fuentes oficiales y los mantiene en la versión fijada.
+Antes de cada arranque, la instancia se pone al día desde la rama `jugable`, que solo avanza a versiones probadas. FTB Backups 2 hace copias del mundo en la carpeta `backups` de la instancia.
 
-Al crear el mundo sale un aviso de "ajustes experimentales" por las dimensiones del pack; dale a continuar.
+**Una versión fija.** Crea una instancia de Minecraft 1.20.1 con Forge 47.4.28 y Java 17. Pon [packwiz-installer-bootstrap.jar](https://github.com/packwiz/packwiz-installer-bootstrap/releases) en la carpeta `minecraft` de la instancia. Después, en *Editar instancia → Ajustes → Comandos personalizados*, pon como comando previo al lanzamiento:
 
+```
+"$INST_JAVA" -jar packwiz-installer-bootstrap.jar https://raw.githubusercontent.com/Ezequiel24123z/GrindlessGregtech/v0.4.0/pack/pack.toml
+```
 ## Para desarrollar
 
 Lee [AGENTS.md](AGENTS.md). Las decisiones están en [DECISIONS.md](DECISIONS.md) y los créditos y licencias en [CREDITS.md](CREDITS.md).
