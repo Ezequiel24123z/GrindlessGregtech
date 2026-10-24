@@ -34,7 +34,7 @@ Mismo patrón que LV y MV: un catalizador que no se gasta y entradas de otra lí
 - **Registro:** `gtceu:hv_vein_drill`, tipo `gtceu:vein_drilling`, la spec y la tabla de LV y MV (`lv/multis.js`, `lv/vein_drilling.js`) más la tabla nueva `veins_end.json`.
 - **Decisión: cuatro vetas del End, no seis.** `bauxite_vein_end` (bauxita, ilmenita, aluminio), `magnetite_vein_end` (magnetita, vanadio, cromita, oro), `scheelite_vein` (scheelita, tungstato, litio) y `sheldonite_vein` (bornita, cooperita, platino, paladio). `naquadah_vein` y `pitchblende_vein_end` son radiactivas y nadie las pide antes de IV.
 - **Muestra y viaje:** la muestra se hace con 2 menas de la veta, así que basta un viaje. Llave del End (`grindless:end_key`, receta con un ojo de ender; mismo ayudante que las del Vacío y el Llano) lleva a `minecraft:the_end` y devuelve al punto de origen. No hay que matar al dragón. Las rocas indicadoras de GTM y el prospector HV (`gtceu:prospector.hv`, verificar alcance) marcan dónde mirar.
-- **Gana al MV:** tope 32 en `bores` (una escotilla HV, 512 V ÷ 8, llena las 32 corridas: ×12 sobre el vapor; abierto a balance) y broca de titanio (`grindless:titanium_drill_bit`, ~0,5 % por ciclo; ~0,25 % con lodo) hecha con el titanio de Kroll. Hasta entonces sirve la vanádica.
+- **Gana al MV:** tope 32 en `bores` (una escotilla HV, 512 V ÷ 8, llena las 32 corridas: ×12 sobre el vapor; abierto a balance) y broca de acero inoxidable (`grindless:stainless_steel_drill_bit`, ~0,5 % por ciclo; ~0,25 % con lodo). HV no tiene titanio (ver *HV sin titanio*, al final); la vanádica sigue valiendo.
 - **Cierra el círculo:** muestra y agua, sin más viajes. Da ilmenita (titanio), tungsteno y platino (EV).
 
 ### Aceite, gas y aire
@@ -135,14 +135,14 @@ Abre EV: casco y escotillas EV (4 A y 16 A), perforadora de fluidos HV (casco EV
 | AdvancedAE | `advancedae` | se propone descartarlo (lv.md lo lista para HV–EV) |
 | GTM Advanced Hatch, Modern AE2 Additions | `gtm-advanced-hatch`, `modern-ae2-additions` | a revisar: HV o más; que no duplique las escotillas ME de GTM |
 | MEGA Cells | `mega` | IV (manda lv.md) |
-| GCYR | `gcyr` | no se abre en HV; el primer cohete se decide en EV |
+| GCYR | `gcyr` | el primer cohete y el traje espacial son de HV, con inox y piezas HV (`integration/gcyr.js`, ver *HV sin titanio*) |
 | Sophisticated Backpacks y Storage, Storage Drawers de GT | `sophisticated-backpacks`, `sophisticated-storage`, `gregtech-storage-drawers` | nivel 3 con inox y titanio |
 | Create y Greate | `create`, `greate` | sin cambios |
 
 Ningún mod nuevo es obligatorio: máquinas, tipos de receta, llave y catalizadores son KubeJS.
 
-- **Startup:** tipos `gtceu:refining` y `gtceu:reforming`; máquinas `refinery`, `reformer`, `hv_vein_drill` y `hv_greenhouse` con el helper de patrones; `bores` en 32 para HV; ítems `grindless:titanium_drill_bit`, `grindless:hydrotreating_catalyst`, `grindless:reforming_catalyst` y `grindless:end_key`. El `widen` de la refinería: 2 fluidos de entrada, 8 de salida, 1 ítem de entrada y 1 de salida.
-- **Server:** generar `refining` desde `distillation_tower` (crudo) y `cracker` + torre (craqueo); las 2–3 recetas de `reforming` a mano en una tabla; `veins_end.json` y la broca de titanio en `lv/vein_drilling.js`; la llave en `dimensions.js`; quitar la receta vanilla `minecraft:ender_eye` (en GTM solo la quita `recipes.hardMiscRecipes`, que se llevaría también el horno y la mesa de crafteo); recetas de 256k de AE2; puertas de los mods de la tabla con circuitos HV.
+- **Startup:** tipos `gtceu:refining` y `gtceu:reforming`; máquinas `refinery`, `reformer`, `hv_vein_drill` y `hv_greenhouse` con el helper de patrones; `bores` en 32 para HV; ítems `grindless:stainless_steel_drill_bit`, `grindless:hydrotreating_catalyst`, `grindless:reforming_catalyst` y `grindless:end_key`. El `widen` de la refinería: 2 fluidos de entrada, 8 de salida, 1 ítem de entrada y 1 de salida.
+- **Server:** generar `refining` desde `distillation_tower` (crudo) y `cracker` + torre (craqueo); las 2–3 recetas de `reforming` a mano en una tabla; `veins_end.json` y la broca de inox en `lv/vein_drilling.js`; la llave en `dimensions.js`; quitar la receta vanilla `minecraft:ender_eye` (en GTM solo la quita `recipes.hardMiscRecipes`, que se llevaría también el horno y la mesa de crafteo); recetas de 256k de AE2; puertas de los mods de la tabla con circuitos HV.
 - **Config:** `config/gtceu.yaml` ya trae FE y vetas infinitas de fluido; falta decidir `machines.enableMaintenance` (riesgo 5) y comprobar `recipes.enableExtractorRecycling` (activo por defecto): de él sale el blaze líquido.
 - **Misiones:** capítulo "Fábrica HV" con unas 14, una por paso y por multibloque, premio pequeño y sin bloquear recetas.
 - **Pruebas:** (1) arranca; (2) refinería, reformador, perforadora HV e invernadero HV se forman y procesan; (3) crudo → refinería → nafta → gasolina; nafta → cracker → etileno → PE; boule → estación de trabajo; rutilo → titanio, y `-Tier hv` sin huérfanas.
@@ -176,3 +176,21 @@ Se aprueban las nueve propuestas, con dos precisiones:
 - **Llave del End.** Lleva al End vanilla, a una plataforma segura lejos de la isla central, y vuelve como las otras llaves. No hace falta matar al dragón: basta con traer dos menas de cada veta del End una sola vez.
 - **Mantenimiento.** Ya está apagado en todo el pack desde MV (`DECISIONS.md`).
 - **AE2 base sigue entera en LV** (lo pide el usuario), celdas de 256k incluidas. La propuesta 8 queda así: en HV solo se ponen puertas a los addons (`expanded-ae`, `extended-ae` si se queda), a los barriles, supercofres y tanques de GT, y a las escotillas ME de GTM en EV. Nada de AE2 base pide circuitos HV.
+
+## HV sin titanio (decisión del usuario, 2026-10-24)
+
+El titanio entra en EV y sale solo de la Luna (`docs/viaje.md`, opción A). Todo HV pasa a acero inoxidable. Lo de arriba que habla de titanio en HV (la línea de Kroll del paso 6 y el barril de titanio) queda superado por eso; la ilmenita del End se queda de momento como fuente (ver la última nota). La puerta a EV (casco, motor y bomba EV) sigue pidiendo titanio, pero ahora es el que se trae de la Luna al final de HV.
+
+- **Auditoría** sobre el volcado de recetas (todo lo que la era HV fabrica y lo que fabrica cada pieza): en GTM 7.5.3 el escalón HV ya era de inox. Ninguna máquina, casco, carcasa, componente, escotilla ni multibloque de GTM de HV pide titanio, y los nuestros (refinería, reformador, perforadora e invernadero HV) tampoco. Lo único que lo pedía era nuestra broca, el escáner de cohetes de GCYR y la muestra de la veta de bauxita del End, porque la hace con ilmenita.
+- **Broca HV.** `grindless:stainless_steel_drill_bit`: placas y varillas de inox, mismo desgaste y rendimiento que tenía la de titanio. La de titanio sigue registrada para los mundos viejos, oculta en EMI, y se convierte 1:1 en la de inox.
+- **El primer cohete y el traje** (GCYR) son de HV (`integration/gcyr.js`):
+  - El escáner de cohetes lleva casco HV, circuitos HV y placas de inox.
+  - La tela espacial cambia el polibencimidazol (IV) por una placa de Kapton K (química HV).
+  - La fibra de vidrio pasa al baño químico de HV (480 EU/t).
+  - El casco y las grebas llevan circuitos HV.
+  - El peto lleva una celda grande de inox y circuitos HV, en vez de la de acero de tungsteno.
+  - El motor, el depósito básico, el asiento, la plataforma de lanzamiento y el chip de destino ya eran de HV o menos.
+- **Oxígeno.** GCYR solo registra el esparcidor de oxígeno de IV en adelante. En el primer viaje el oxígeno va en el depósito del peto (16 cubos, unos 40 minutos), que se llena en un enlatador de fluidos.
+- **Vetas del End en la v0.4.1** (transición hasta que la Luna llegue en la v0.5.0, decisión del orquestador):
+  - La ilmenita se queda en la veta de bauxita del End, para que el titanio tenga fuente hasta que la sustituya la Luna. La muestra ya no la pide: se hace con bauxita y aluminio (`"sample": false` en `veins_end.json`).
+  - La veta de scheelita sale del End (`veins_excluded.json`) con sus recetas, y vuelve en Marte. Su muestra sigue registrada para las partidas que ya la tienen: oculta en EMI, se convierte en una sonda de vetas vacía. El validador confirma que nada de vapor a HV la necesita. El litio sigue saliendo de la veta de sales (lepidolita y espodumena) y de la arcilla.

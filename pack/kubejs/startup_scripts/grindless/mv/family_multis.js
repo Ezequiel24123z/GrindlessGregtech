@@ -10,7 +10,7 @@
 // and aluminium frames (aluminium is already there for the MV motors, stainless steel is not).
 //
 // The drill vetoes a base recipe while drilling fluid is in its hatch (the fluid recipe is the better one, like the LV drill).
-// Both machines skip the recipes under <type>/hv/ (the titanium bit and the End veins are the HV drill's).
+// Both machines skip the recipes under <type>/hv/ (the stainless steel bit and the End veins are the HV drill's).
 // The greenhouse works like the LV one with programmed circuit 2 (fertilizer variants); with CO2 in a hatch as well the
 // fertilizer + CO2 variant runs instead of the fertilizer one: x1.5 output on top and 100 mB of O2 back per run. Circuit 1 or no
 // circuit: CO2 is ignored and the base recipe runs. The greenhouse needs a fluid OUTPUT hatch for that O2 and takes one or two

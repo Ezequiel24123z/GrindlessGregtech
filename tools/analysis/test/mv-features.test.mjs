@@ -5,7 +5,7 @@ import path from 'node:path';
 import { test } from 'node:test';
 import { fileURLToPath } from 'node:url';
 import { loadTierConfig } from '../lib/config.mjs';
-import { gf, gi, gt, mkDump, run, shaped, verdicts } from './helpers.mjs';
+import { gf, gi, gt, mkDump, run, shaped, shapeless, verdicts } from './helpers.mjs';
 
 const TIERS = path.join(path.dirname(fileURLToPath(import.meta.url)), '..', 'tiers');
 const linesOf = (list, id) => list.find((r) => r.target.id === id).lines.join('\n');
@@ -175,7 +175,45 @@ test('objetivos por veta: requireItem salta las vetas sin objeto de la tabla (ot
   // la de la veta del Nether no tiene receta: FAIL; la del otro mod ni siquiera es un objetivo
   assert.equal(r.out.auto[1].verdict, 'FAIL');
   assert.deepEqual(r.model.stats.veinsWithoutItem, ['gtnn:apatite_vein_tf']);
-  assert.match(r.text, /vetas del registro sin objeto de la tabla de la perforadora \(de otros mods o que el pack aún no ofrece.*; no se comprueban\): gtnn:apatite_vein_tf/);
+  assert.match(r.text, /vetas del registro que la tabla de la perforadora no ofrece \(sin muestra o sin receta de perforación.*; no se comprueban\): gtnn:apatite_vein_tf/);
+  // requireRecipe se fija en las recetas: la muestra de topacio existe (como una muestra oculta de una veta apartada) pero ninguna
+  // receta de perforación la toma, así que la veta no tiene objetivo; tampoco la del otro mod
+  const byRecipe = run(dump, {
+    ...cfg,
+    autoTargetsFromVeins: [{
+      ...cfg.autoTargetsFromVeins[0], requireItem: undefined,
+      requireRecipe: { type: 'gtceu:vein_drilling', input: 'grindless:vein_sample_{id}' },
+    }],
+  });
+  assert.deepEqual(byRecipe.out.auto.map((x) => [x.target.id, x.verdict]), [['p-redstone_vein_ow', 'PASS']]);
+  assert.deepEqual(byRecipe.model.stats.veinsWithoutItem, ['gtceu:topaz_vein', 'gtnn:apatite_vein_tf']);
+});
+
+test('mundo con fromVeins.requireRecipe: una veta apartada (muestra registrada, sin receta de perforación) no da menas en el viaje', () => {
+  const veins = [
+    { id: 'gtceu:bauxite_vein_end', layer: 'endstone', dims: ['minecraft:the_end'], mats: ['gtceu:bauxite', 'gtceu:ilmenite'] },
+    { id: 'gtceu:scheelite_vein', layer: 'endstone', dims: ['minecraft:the_end'], mats: ['gtceu:scheelite', 'gtceu:tungstate'] },
+  ];
+  const recipes = [
+    gt('t:drill_end', 'gtceu:vein_drilling', { ins: [gi('grindless:vein_sample_bauxite_end', 1, 0)], outs: [gi('gtceu:raw_bauxite')] }),
+    // la muestra apartada solo se convierte en una sonda vacía
+    shapeless('t:probe_from_scheelite', [{ item: 'grindless:vein_sample_scheelite' }], 'grindless:empty_vein_probe'),
+  ];
+  const world = (from) => [{ id: 'menas-end', mode: 'manual', bootstrap: true, template: 'gtceu:raw_{m}', materials: [], fromVeins: { dimensions: ['minecraft:the_end'], ...from } }];
+  const cfg = (from) => ({
+    tier: 'end', unconditionalTypes: ['minecraft:crafting_shapeless'], world: world(from),
+    targets: [{ id: 'bauxita', item: 'gtceu:raw_bauxite' }, { id: 'ilmenita', item: 'gtceu:raw_ilmenite' }, { id: 'scheelita', item: 'gtceu:raw_scheelite' }],
+    autoTargets: [],
+  });
+  const dump = mkDump({
+    recipes, veins,
+    items: ['gtceu:raw_bauxite', 'gtceu:raw_ilmenite', 'gtceu:raw_scheelite', 'gtceu:raw_tungstate', 'grindless:vein_sample_bauxite_end', 'grindless:vein_sample_scheelite'],
+  });
+  // con requireItem la muestra oculta todavía cuenta la veta de scheelita
+  assert.deepEqual(verdicts(run(dump, cfg({ requireItem: 'grindless:vein_sample_{id}' })).out.gate), { bauxita: 'PASS', ilmenita: 'PASS', scheelita: 'PASS' });
+  // con requireRecipe solo cuentan las vetas con receta de perforación: la de bauxita (con su ilmenita) sí, la de scheelita no
+  const r = run(dump, cfg({ requireRecipe: { type: 'gtceu:vein_drilling', input: 'grindless:vein_sample_{id}' } }));
+  assert.deepEqual(verdicts(r.out.gate), { bauxita: 'PASS', ilmenita: 'PASS', scheelita: 'FAIL' });
 });
 
 // ---------------------------------------------------------------- motivo del bloqueo de un yacimiento

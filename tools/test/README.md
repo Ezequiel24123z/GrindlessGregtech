@@ -64,6 +64,18 @@ Se lanza con `-Commands 'kubejs custom_command gg_ping'`. Convención de salida:
 
 Truco de KubeJS 6.5 (Rhino) observado aquí: dentro de manejadores de eventos, `const`/`let` pueden lanzar `redeclaration of var X`; usa `var` y `function () {}`. Y `ClientEvents.tick` de KubeJS solo dispara con mundo y jugador cargados.
 
+Nombres vanilla en KubeJS 2001.6.5: sus mixins (`@RemapForJS`) renombran algunos miembros para los scripts y el nombre de Mojang **no existe** (ni el SRG): `Entity#getYRot/getXRot` → `getYaw/getPitch`, `getUUID/getStringUUID` → `getUuid/getStringUuid`, `tickCount` → `age`, `Level#getGameTime` → `getTime`, `Level#dimension()` → `getDimensionKey`, `Player#closeContainer` → `closeMenu`, `Direction#getStepX/Y/Z` → `getX/Y/Z`; `Entity#level()` está oculto (usa `getLevel()`). La lista completa está en los mixins de KubeJS y Rhino (`EntityMixin`, `LevelMixin`, `ItemStackMixin`, `DirectionMixin`…). La suite `server` no tiene jugador: el código que use uno se prueba en la suite `client`.
+
+### Pruebas con jugador real (suite `client`)
+
+En la suite `client` los scripts de servidor del overlay corren en el servidor integrado con el `ServerPlayer` real, y las dos mitades de un test (servidor y cliente, misma JVM) se hablan con un `ConcurrentHashMap` guardado en `global`.
+
+- **Se activan con un marcador**, porque el cliente no tiene `-Commands`: copia `overlay/` a otra carpeta, añade `kubejs/config/<test>.json` = `{"enabled": true}` y lanza `-Suite client -OverlayDir <esa carpeta>`. Un marcador por ejecución: los tests mueven al mismo jugador.
+  - `gg_test_dimension_keys.json`: las tres llaves de viaje con clic derecho real, ida y vuelta, y el aviso cuando una llave falla (`gg_test_dimension_keys.js` en `server_scripts/`, `client_scripts/` y `startup_scripts/`).
+  - `gg_test_gcyr_flight.json`: el vuelo de GCYR a la Luna y vuelta (#91), el Rocket Scanner (#122) y el fuego del cohete sobre su piloto. La parte del escáner también corre en la suite `server`: `-Commands 'kubejs custom_command gg_test_gcyr_flight' -WaitForLog 'GGTEST\|gcyr_flight\|DONE@@600'`.
+- **Retener el cliente:** mc-runtime-test sale cuando el `tickCount` del jugador llega a 100 sin pantalla abierta; la mitad de cliente lo baja (`age`) mientras dura el test.
+- **Clic derecho real:** la mitad de cliente mantiene la tecla de usar pulsada un tick (`options.keyUse.setDown`) y Minecraft hace el resto, como con el ratón.
+
 `log-allowlist.txt`: una regex .NET por línea con los ERROR/WARN benignos; mantenla corta y concreta.
 
 ## El PC de casa
