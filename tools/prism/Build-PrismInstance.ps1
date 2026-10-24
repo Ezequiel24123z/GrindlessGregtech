@@ -21,26 +21,24 @@ $mc = Join-Path $inst '.minecraft'
 New-Item -ItemType Directory -Force -Path $mc | Out-Null
 $utf8 = New-Object System.Text.UTF8Encoding($false)
 
-# Prism exports INST_JAVA to pre-launch commands; a .cmd wrapper keeps the quotes around a Java path with spaces
-# out of instance.cfg, whose value quoting differs between Prism versions.
-$cmd = "@echo off`r`n" +
-"rem Updates Gregtech Grindless from the '$Channel' channel before every launch.`r`n" +
-"`"%INST_JAVA%`" -jar packwiz-installer-bootstrap.jar $packUrl`r`n" +
-"exit /b %ERRORLEVEL%`r`n"
-[IO.File]::WriteAllText((Join-Path $mc 'grindless-update.cmd'), $cmd, $utf8)
+# Prism substitutes $INST_JAVA in the command text when the command runs (after it has picked the Java); the
+# environment variable of the same name is computed earlier and can be empty for a new instance with automatic Java,
+# so the command must name $INST_JAVA itself (packwiz's documented Prism command). Prism 11 reads instance.cfg with
+# QSettings (ConfigVersion 1.3): the value is quoted and its inner quotes escaped.
+$preLaunch = '"\"$INST_JAVA\" -jar packwiz-installer-bootstrap.jar ' + $packUrl + '"'
 
 $cfg = @(
     '[General]',
-    'ConfigVersion=1.2',
+    'ConfigVersion=1.3',
     'InstanceType=OneSix',
     "name=$name",
     'iconKey=default',
     'OverrideCommands=true',
-    'PreLaunchCommand=cmd /c grindless-update.cmd',
+    "PreLaunchCommand=$preLaunch",
     'OverrideMemory=true',
     "MinMemAlloc=$MinMemMb",
     "MaxMemAlloc=$MaxMemMb",
-    "notes=Gregtech Grindless, canal $Channel. Se actualiza solo al arrancar (solo versiones probadas)."
+    "notes=`"Gregtech Grindless: canal $Channel. Se actualiza solo al arrancar (solo versiones probadas).`""
 ) -join "`r`n"
 [IO.File]::WriteAllText((Join-Path $inst 'instance.cfg'), $cfg + "`r`n", $utf8)
 
