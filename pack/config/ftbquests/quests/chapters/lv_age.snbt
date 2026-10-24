@@ -198,7 +198,7 @@
 		{
 			dependencies: ["73CA53E9E02D4639"]
 			description: [
-				"Drop fertilizer and a programmed circuit in the greenhouse's input bus and every recipe doubles its output in half the time."
+				"Drop fertilizer and a programmed circuit in the greenhouse's input bus to feed it."
 				"Make it in the mixer from dirt, sawdust and sand, or in the chemical reactor from ash and a phosphate. The arc furnace's leftover ash finally has somewhere to go."
 			]
 			icon: "gtceu:fertilizer"
@@ -281,7 +281,7 @@
 			y: 12.0d
 		}
 		{
-			dependencies: ["6D668A4CB9B8384A"]
+			dependencies: ["5795EAFBAB034E45"]
 			description: [
 				"The &6Gas Collector&r pulls air out of the sky: mostly nitrogen, a slice of oxygen, nothing else worth keeping."
 				"Centrifuge it and the two useful gases split apart. The rest just vents."
@@ -375,7 +375,7 @@
 		{
 			dependencies: ["0785A341666D046E"]
 			description: [
-				"Good board, two LV circuits, two diodes and a pinch of copper wire. The MV circuit comes together in the circuit assembler at plain LV power."
+				"Good board and the LV circuits and diodes it needs, soldered together in the circuit assembler at plain LV power."
 				"Nothing stops you stocking these long before MV machines exist."
 			]
 			icon: "gtceu:good_electronic_circuit"
@@ -403,7 +403,7 @@
 		{
 			dependencies: ["2C50918B882FA400"]
 			description: [
-				"Graphite comes off the diamond vein; press four dust around a steel rod and you get a graphite electrode."
+				"Graphite comes off the diamond vein; press the dust around a steel rod and you get a graphite electrode."
 				"It wears out by chance in the arc furnace, same as a drill bit. Keep spares in the input bus."
 			]
 			icon: "grindless:graphite_electrode"
@@ -489,7 +489,7 @@
 		{
 			dependencies: ["382D3153A231CEBF"]
 			description: [
-				"Four stamped plates, four printed processors: steel plus certus, diamond, gold or silicon in the forming press, then inscribed same as always."
+				"The forming press stamps the plates, then the inscriber prints each processor, same as always."
 				"Press whichever your next build actually needs. Nothing here asks for all four at once."
 			]
 			icon: "ae2:logic_processor_press"
@@ -673,18 +673,18 @@
 			y: -6.0d
 		}
 		{
-			dependencies: ["5ECDAA1F9811AC0A"]
-			description: ["Crushed ore and the centrifuge's leftovers bind into a catalyst that sulfide ore needs before it can be roasted."]
+			dependencies: ["5A176E45F8E64ED7"]
+			description: ["Vanadium and diatomite bind into a contact catalyst. The acid plant needs it to turn sulfur dioxide into acid, and it wears out now and then, so keep spares."]
 			icon: "grindless:contact_catalyst"
 			id: "30B1A00EBEC54B6D"
 			rewards: [{ id: "124DE9A929364C39", type: "xp", xp: 30 }]
 			tasks: [{ count: 4L, id: "3FF1A8EC8D614951", item: "grindless:contact_catalyst", type: "item" }]
 			title: "Contact Mass"
-			x: 17.5d
-			y: 3.0d
+			x: 22.5d
+			y: 6.0d
 		}
 		{
-			dependencies: ["30B1A00EBEC54B6D"]
+			dependencies: ["5ECDAA1F9811AC0A"]
 			description: ["The &6Sulfide Roaster&r burns sulfur-bearing ore hot. The sulfur leaves as gas, the metal stays behind, ready for the rest of the ore line."]
 			icon: "gtceu:sulfide_roaster"
 			id: "5A176E45F8E64ED7"
@@ -696,7 +696,7 @@
 		}
 		{
 			dependencies: ["5A176E45F8E64ED7"]
-			description: ["Galena roasted and leached gives up its silver. It is the first silver you pull from ore rather than from a trade."]
+			description: ["Galena roasted in the sulfide roaster gives up its silver as nuggets. It is the first silver you pull from ore."]
 			icon: "gtceu:silver_nugget"
 			id: "2B7D9F41C0E83A65"
 			rewards: [{ id: "34D2F60B19C7E853", type: "xp", xp: 35 }]
@@ -707,7 +707,7 @@
 		}
 		{
 			dependencies: ["731F761B242263ED"]
-			description: ["A steel tank holds the salt loop the heliostat needs. It keeps the heat over the night, so the tower does not go cold after sunset."]
+			description: ["The steel multiblock tank and its valve store the steam the tower makes by day. The night runs on what was saved."]
 			icon: "gtceu:steel_multiblock_tank"
 			id: "1D9C4B27E05F8A36"
 			rewards: [{ id: "5E0A7C93D2B14F68", type: "xp", xp: 35 }]
@@ -718,7 +718,7 @@
 		}
 		{
 			dependencies: ["1D9C4B27E05F8A36"]
-			description: ["Mirrors laid in a field on the ground, each one angled to bounce the sun to the same point. Plain glass and a frame, repeated until the field is full."]
+			description: ["Mirrors laid out on open ground, each angled to throw the sun onto the tower. Each one is silver-backed, so the silver comes before the field."]
 			icon: "grindless:heliostat_mirror"
 			id: "2F6B1D9A8C4E0527"
 			rewards: [{ id: "7B1F4C8E2D05A930", type: "xp", xp: 40 }]
@@ -729,7 +729,7 @@
 		}
 		{
 			dependencies: ["2F6B1D9A8C4E0527"]
-			description: ["The &6Heliostat Tower&r gathers the field's light into one point at the top. The heat it makes runs a multiblock, in the day and in the night from the tank."]
+			description: ["The &6Heliostat Tower&r gathers the field's light into one point at the top. It makes steam only by day, under open sky and clear weather. At night the tank carries on."]
 			icon: "gtceu:heliostat_tower"
 			id: "3A7E2C5F1B9D4061"
 			rewards: [{ id: "5D5B1E3A7C42F086", type: "xp", xp: 60 }]
