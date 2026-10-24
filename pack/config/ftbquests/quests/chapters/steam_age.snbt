@@ -82,6 +82,21 @@
 		{
 			dependencies: ["20A9578F6F706702"]
 			description: [
+				"The battery keeps the coal gas that the coke oven throws away, along with the creosote. It needs a fluid output hatch, and no steam part pulls fluid out, so you hand-make the ULV output hatch; EMI shows how. A screwdriver turns it into the ULV input hatch."
+			]
+			icon: "gtceu:coking_battery"
+			id: "3A7C5E1D9B2F6048"
+			rewards: [{ id: "6A2D9F4C1E8B5073", type: "xp", xp: 40 }]
+			shape: "gear"
+			size: 1.25d
+			tasks: [{ id: "5F1E8B2C4A9D7063", item: "gtceu:coking_battery", type: "item" }]
+			title: "Coke Battery"
+			x: 6.0d
+			y: -1.5d
+		}
+		{
+			dependencies: ["20A9578F6F706702"]
+			description: [
 				"Water without buckets. The pump makes it inside, a little faster in wet biomes, so no lake is needed."
 				"It is a small multiblock of treated wood with a pump hatch and pump decks; the controller's EMI page has the shape."
 			]
@@ -284,6 +299,49 @@
 			title: "Primitive Blast Furnace"
 			x: 12.0d
 			y: 0.0d
+		}
+		{
+			dependencies: ["376295DE4FA3B31E"]
+			description: [
+				"A second route to steel. Steam drives it, so it needs no firebricks run of its own. Ore, coke and a little calcite make steel in batches."
+			]
+			icon: "gtceu:steam_blast_furnace"
+			id: "4B8E2D6A1F9C3057"
+			rewards: [{ id: "5D9B3F7A1C2E6048", type: "xp", xp: 40 }]
+			shape: "gear"
+			size: 1.25d
+			tasks: [{ id: "7C1A4E9D2B6F3081", item: "gtceu:steam_blast_furnace", type: "item" }]
+			title: "Steam Blast Furnace"
+			x: 12.0d
+			y: 1.5d
+		}
+		{
+			dependencies: ["376295DE4FA3B31E"]
+			description: [
+				"At the eyepiece you see the dark seas, the bright highlands and the big craters with their rays. It only works at night, under a clear sky, with the controller at Y 100 or more."
+			]
+			icon: "gtceu:steam_observatory"
+			id: "1253203E620BE055"
+			rewards: [{ id: "1F6D3B9E4A2C8075", type: "xp", xp: 45 }]
+			shape: "gear"
+			size: 1.25d
+			tasks: [{ id: "2E8C5A1F9D4B7036", item: "gtceu:steam_observatory", type: "item" }]
+			title: "Clockwork Observatory"
+			x: 12.0d
+			y: -3.0d
+		}
+		{
+			dependencies: ["1253203E620BE055"]
+			description: [
+				"The first chart of the Moon. Its data only comes from looking, so the observatory never spends it, and the optical observatory in LV still needs it."
+			]
+			icon: "grindless:lunar_chart_draft"
+			id: "10F6A7BFB476944C"
+			rewards: [{ id: "6E2A8C4F1D9B3072", type: "xp", xp: 45 }]
+			tasks: [{ id: "3B9E6D2F8A1C4057", item: "grindless:lunar_chart_draft", type: "item" }]
+			title: "Lunar Chart (Draft)"
+			x: 14.0d
+			y: -3.0d
 		}
 		{
 			dependencies: ["376295DE4FA3B31E"]
