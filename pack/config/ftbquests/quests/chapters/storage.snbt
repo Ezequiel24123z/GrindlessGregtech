@@ -100,7 +100,7 @@
 			id: "7DDD10B50E898DCC"
 			rewards: [{ id: "5A0D7E3C92F18B64", type: "xp", xp: 50 }]
 			size: 1.0d
-			tasks: [{ id: "3C701BB25855755E", type: "item", item: { id: "3C701BB25855755E", type: "itemfilters:tag", tag: "storagedrawers:drawers" } }]
+			tasks: [{ id: "3C701BB25855755E", item: { Count: 1b, id: "itemfilters:tag", tag: { value: "storagedrawers:drawers" } }, title: "Any Drawer", type: "item" }]
 			title: "Storage Drawers"
 			x: 5.0d
 			y: -2.0d
