@@ -133,9 +133,17 @@ What it gains: **recipes that do not exist on Earth.** Oxygen on a world with no
 
 What it gains: **liquids GTM does not make, and the site's cold.** GTM liquefies air, O₂ and helium in the freezer (`liquid_air`, `liquid_oxygen`, `liquid_helium`: 1,920 EU/t, 240 t per bucket for the last two), but it has no Liquid Nitrogen or Liquid Hydrogen. On the Moon, at night, radiators dump heat into a black sky: the plant liquefies several gases in one structure and uses half the energy.
 
-- **Recipe type:** `gtceu:cryogenic_processing` (new, verify id), with `.dimension('gcyr:luna')`. One recipe per gas: O₂ → Liquid Oxygen, He → Liquid Helium, N₂ → Liquid Nitrogen (a new fluid in KubeJS: GTM 7.5.3 does not have it) and H₂ → Liquid Hydrogen (only if IV gives it a use). At night (`.daytime(true)`, verify), half the freezer's energy; by day, the same.
+- **Recipe type:** `gtceu:cryogenic_processing` (built on 2026-10-25, run `b3-cryogenic-plant-2`, on the Moon), every recipe with `.dimension('gcyr:luna')`. One recipe per gas, 1,000 → 1,000 mB at the vacuum freezer's 1,920 EU/t for 240 ticks: O₂ → liquid oxygen, He → liquid helium, N₂ → liquid nitrogen (`gtceu:liquid_nitrogen`, a liquid of GTM's nitrogen). No liquid hydrogen; IV decides.
+- **Night rule:**
+  - A run that starts with the sun down (day time 12,786–23,214) and all 12 radiators seeing the sky costs half (960 EU/t). Otherwise it costs the freezer's price. Each run keeps the price it started with.
+  - It is a run-start recipe modifier, not a `.daytime()` recipe. GTM checks conditions on every tick, so a night run caught by dawn would wait a whole day; and its recipe lookup keeps only one of two recipes with the same ingredients.
+  - `Level#isNight` is not used, because a thunderstorm trips it.
 - **Own condition:** the site and the time of day. There is no catalyst: the advantage is the cold.
-- **Structure:** 3×3×7 tower of frostproof casing (`gtceu:frostproof_machine_casing`) on sintered brick, with a wing of radiators facing the sky; 2 input hatches, 4 output hatches and 1–2 EV hatches. Accepts ME hatches.
+- **Structure** (7 wide × 8 high × 3 deep):
+  - a 3×3×7 frost-proof tower with a titanium pipe core, on sintered regolith;
+  - two 2×3 wings of Night-Sky Radiators (`grindless:night_sky_radiator`: MV assembler, 2 aluminium small fluid pipes + 4 aluminium plates + an aluminium frame + 100 mB ammonia → 2) on aluminium frame legs.
+  
+  Parts go in the tower's two lowest rings: 1–2 EV energy hatches, 1–2 input hatches and 1–4 output hatches. ME hatches fit.
 - **Crafted with:** EV hull + GTM Vacuum Freezer + 2 EV pumps + 4 EV circuits.
 - **Why it is not a big cube:** it makes a liquid GTM does not have (nitrogen; hydrogen, if IV requires it), it only gains energy from its site and time of day (it does not run on Earth), and each liquid has a named consumer.
 - **Destinations:** Liquid Nitrogen → coolant for the tripod (EV) and the Mercury drill (IV). Liquid Oxygen → IV extreme engines (their alternative to fission). Liquid Helium → ingots at 5,000 K or more (IV). Liquid Hydrogen: GCYR asks for 14 buckets of any fuel, so hydrolox only comes in if IV makes it mandatory.
