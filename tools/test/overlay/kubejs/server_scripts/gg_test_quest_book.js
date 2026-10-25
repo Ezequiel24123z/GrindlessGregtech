@@ -200,7 +200,7 @@
       check('claim_' + code, done && claimed === quest.getRewards().size(), '"' + quest.getTitle().getString() + '": completed=' + done +
         ', rewards claimed ' + claimed + '/' + quest.getRewards().size())
     })
-    check('arrival_items', invCount(p, 'minecraft:bread') >= bread0 + 8 && invCount(p, 'minecraft:torch') >= 16,
+    check('arrival_items', invCount(p, 'minecraft:bread') >= bread0 + 64 && invCount(p, 'minecraft:torch') >= 16,
       'bread ' + invCount(p, 'minecraft:bread') + ', torches ' + invCount(p, 'minecraft:torch') + ' in the inventory')
     var missing = TOOLS.filter(function (id) { return invSlot(p, id) < 0 })
     check('toolbox_items', missing.length === 0, missing.length === 0 ? 'all ' + TOOLS.length + ' tools in the inventory' : 'missing ' + missing.join(', '))

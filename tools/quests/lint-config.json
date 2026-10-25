@@ -21,6 +21,7 @@
   "allowLongEdges": [
   ],
   "manyRewardsOk": [
+    { "quest": "69BDA9FBB0EB66F2", "why": "Arrival keeps the original bread and torch reward ids, adds a 56-bread top-up for existing saves, and supplies the requested starter equipment." },
     { "quest": "047B55ED9C952BC9", "why": "The Neutronium Toolbox (welcome): one reward per tool, on purpose (docs/quests.md)." }
   ],
   "quantityOk": [

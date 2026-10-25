@@ -17,6 +17,8 @@ Ideas are not copied as text or as code: they are rebuilt with our rules, and we
 
 | Idea in Gregtech Grindless | Where it comes from | Source licence | What we take |
 |---|---|---|---|
+| Diamond starter working tools with Efficiency V and a stack of food, alongside the retained neutronium toolbox | The pack author's early-game request for v0.7.1 | Original pack design | FTB Quests rewards; no external code, text or assets copied. |
+| Gift-only Field Prospector: free, immediate 16-chunk surveys without generating terrain | GregTech Modern 7.5.3, `ServerCache` / `WorldCache` / `DimensionCache` and `SPacketProspectOre` ([pinned source](https://github.com/GregTechCEu/GregTech-Modern/tree/v7.5.3-1.20.1/src/main/java/com/gregtechceu/gtceu/integration/map/cache)); the pack author's request | LGPL-3.0 | Calls GTM's existing saved-vein queries and native map-discovery packet. Our gift marker, use handler and text; no GTM code or textures copied. |
 | T0–T15 campaign and the trip to the black hole at the galactic centre (eras, places, Kardashev milestones, ending) | [grindless-earlygame](https://github.com/Ezequiel24123z/grindless-earlygame) (Ezequiel24123z, the pack's author) | MIT | The campaign script. The mod's machines and systems are not inherited; they are rebuilt with GregTech parts. |
 | Vein drill with a sample that is not used up | GregTech Leisure (data scanned once as a catalyst; vacuum miner with vein chosen by circuit), Monifactory (the micro-miner head picks the table) | GTL: No clear licence (ideas only). Monifactory: LGPL-3.0 | The concept. The implementation is ours. |
 | Drill bit that wears down by probability | Star Technology (meshes with probability-based wear) | MIT | The concept. |
