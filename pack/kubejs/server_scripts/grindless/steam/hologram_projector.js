@@ -3,8 +3,9 @@
 // does exactly the same in this pack.
 //
 //   right-click            the server tells the client to show the hologram: GTM's own in-world preview of the structure, for
-//                          30 s (client_scripts/grindless/hologram_projector.js; a second click on the same controller hides it)
-//   sneak + right-click    builds the structure from the player's inventory:
+//                          30 s (client_scripts/grindless/hologram_projector.js; a second click on the same controller hides it).
+//                          On a formed controller the click opens its screen as usual
+//   sneak + right-click    builds the structure from the player's inventory (a formed controller only says it is formed):
 //     - only each cell's default blocks: the options of the cell's pattern predicate that are not GT machines (casings, coils,
 //       glass, frames, pipes, our oneOf casings...). Hatches, buses, mufflers, maintenance and every other part (any GT machine
 //       block) are never placed. A cell whose only options are parts is left empty and listed ("parts go here");
@@ -739,10 +740,14 @@
     if (itemId !== ITEM && itemId !== TERMINAL) return
     var level = event.getLevel()
     var pos = event.getBlock().getPos()
-    if (controllerAt(level, pos) === null) return
+    var ctrl = controllerAt(level, pos)
+    if (ctrl === null) return
     var player = event.getPlayer()
+    var sneaking = player.isShiftKeyDown() === true
+    // a formed controller opens its screen as usual; sneak + right-click on it only says it is formed
+    if (!sneaking && ctrl.isFormed()) return
     try {
-      P.last = click(player, level, pos, player.isShiftKeyDown() === true, itemId)
+      P.last = click(player, level, pos, sneaking, itemId)
     } catch (e) {
       P.last = { kind: 'error', item: itemId, error: String(e) }
       console.error(LOG + 'click at ' + pos + ' with ' + itemId + ': ' + e)
