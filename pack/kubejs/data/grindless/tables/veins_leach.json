@@ -1,0 +1,25 @@
+{
+  "_source": "GregTechCEu/GregTech-Modern tag v7.5.3-1.20.1: src/main/java/com/gregtechceu/gtceu/common/data/GTOres.java (PITCHBLENDE_VEIN, End section: a cuboid of pitchblende, top 2 + middle 3 + bottom 2 layers, with uraninite spread through it, endstone layer, Y 30-60, weight 30). Colors: .color() of each material in common/data/materials/*.java.",
+  "_how_it_is_used": [
+    "The veins that the uranium in-situ leach field works, which no drill takes (docs/eras/iv.md, decisions taken with the raise, 2: in-situ leaching replaces drilling pitchblende with a Tungstensteel bit, so the home drills get no recipe for it and the family veto needs no exception). GTM's End vein stays in the world as GTM generates it; this table only gives it its sample.",
+    "Loaded by startup_scripts/grindless/iv/foundation.js as global.grindless.tables.veins_leach: it feeds the sample items (grindless:vein_sample_<id>). server_scripts/grindless/iv/foundation.js makes the sample recipes and publishes global.grindless.ivFoundation.leachVeins() (normalized like the other tables). The leach field reads the sample as a catalyst that is never used up.",
+    "id = GTM vein id without the '_vein' chunk ('pitchblende_vein_end' -> 'pitchblende_end'); the sample item is grindless:vein_sample_<id>. gtm = GTM vein id (gtceu:<gtm>). layer = endstone. minY/maxY = heightRangeUniform. spawnWeight = GTM vein weight.",
+    "materials: the cuboid as weights, the way veins_venus.json reads GTM's naquadah one: pitchblende weighs the 7 layers (2 + 3 + 2), uraninite the one spread.",
+    "No gtceu:vein_drilling recipe takes these samples, so the coverage test (gg_test_hv_multis.js) still finds the vein uncovered: veins_excluded.json keeps it, with this table as the reason.",
+    "Sample recipe: the empty vein probe + raw pitchblende + raw uraninite, brought back by hand from the End."
+  ],
+  "dimension": "minecraft:the_end",
+  "veins": [
+    {
+      "id": "pitchblende_end", "kind": "ore", "gtm": "gtceu:pitchblende_vein_end", "generator": "cuboid", "layer": "endstone",
+      "minY": 30, "maxY": 60, "spawnWeight": 30,
+      "colorMaterial": "pitchblende", "color": "#FFD647",
+      "stone": "minecraft:end_stone",
+      "_note": "Uranium of the End. Destinations: the leach field dissolves uraninite out of the vein in place (sulfuric acid and oxygen) and the hot cell enriches it; thorium and lead stay in the ground.",
+      "materials": [
+        { "id": "pitchblende", "weight": 7 },
+        { "id": "uraninite", "weight": 1 }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,27 @@
+{
+  "_source": "Our own table: Mercury (gcyr:mercury, Gregicality Rocketry 0.2.9) generates only this vein. Iridosmine is a GT material of ours (startup_scripts/grindless/iv/foundation.js, gtceu:iridosmine, DISABLE_DECOMPOSITION); graphite and sulfur are GTM 7.5.3's. Every one has a mercury ore (gtceu:mercury_<material>_ore, GCYR's 'mercury' ore tag prefix). GCYR's own Mercury veins (Earth materials) were removed in v0.5.0. The dimension, the layer and the stone were read in GCYR's source (data/gcyr/dimension/mercury.json, worldgen/noise_settings/mercury.json: default block gcyr:mercury_rock; GCYRWorldGenLayers.MERCURY: a BlockMatchTest on gcyr:mercury_rock for gcyr:mercury).",
+  "_how_it_is_used": [
+    "Same format as veins_mars.json and veins_moon.json (kind 'ore' only), so the readers of those tables read this one unchanged. Loaded by startup_scripts/grindless/iv/foundation.js as global.grindless.tables.veins_mercury: it feeds the Mercury vein sample items. server_scripts/grindless/iv/foundation.js adds the vein to Mercury (GTCEuServerEvents.oreVeins), so the first visit finds it, makes the sample recipe and publishes global.grindless.ivFoundation.mercuryVeins() (normalized like global.grindless.mars.martianVeins()). The Mercury vein drill (IV) generates its drilling recipes from it, with .dimension('gcyr:mercury').",
+    "gtm = registry id of the vein; layer = GCYR's 'mercury' layer (the ores replace gcyr:mercury_rock); minY/maxY = heightRangeUniform; spawnWeight = vein weight; clusterSize and density = the Mars veins' numbers; materials = the layered generator (weight and size of every material); the drill splits its raw ores by the same weights (same maths as veins.json).",
+    "id = sample suffix (grindless:vein_sample_<id>), following the registry rule of the other tables: grindless:iridosmine_vein_mercury -> sample grindless:vein_sample_iridosmine_mercury.",
+    "Sample recipe: the empty vein probe + raw iridosmine + raw graphite, gathered by hand on the first visit.",
+    "colorMaterial = the material of the vein's surface indicator rocks; color = tint of the Mercury sample core.",
+    "stone = the inert byproduct of a drilling run (gcyr:mercury_cobblestone, what Mercury rock drops). A macerator grinds it into Hermean regolith dust, the feed of the Mercury solar works' bricks.",
+    "Mercury only gives its own (docs/eras/iv.md, 'Venus and Mercury'): iridium and osmium come from nowhere else, and only through iridosmine. Graphite and sulfur are the minerals the vein really grows with: MESSENGER found Mercury's dark crust rich in graphite and its surface rich in sulfur."
+  ],
+  "dimension": "gcyr:mercury",
+  "veins": [
+    {
+      "id": "iridosmine_mercury", "kind": "ore", "gtm": "grindless:iridosmine_vein_mercury", "generator": "layered", "layer": "mercury",
+      "minY": 0, "maxY": 60, "spawnWeight": 30, "clusterSize": 30, "density": 0.3,
+      "colorMaterial": "iridosmine", "color": "#B9C6D2",
+      "stone": "gcyr:mercury_cobblestone",
+      "_note": "Native iridium-osmium alloy grains in Mercury's dark, carbon-rich crust, with graphite and sulfur. Destinations: iridosmine -> the platinum plant's mode 3 (iridium and osmium); graphite -> GTM's graphite lines (electrodes, graphene); sulfur -> sulfuric acid.",
+      "materials": [
+        { "id": "iridosmine", "weight": 3, "size": [1, 4] },
+        { "id": "graphite", "weight": 2, "size": [1, 2] },
+        { "id": "sulfur", "weight": 1, "size": [1, 1] }
+      ]
+    }
+  ]
+}
