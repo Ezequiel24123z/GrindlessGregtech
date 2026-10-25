@@ -343,7 +343,7 @@ test('config: the tiers/next/ layer makes the whole chain inherit from its files
 // ---------------------------------------------------------------- real configs
 
 test('real tiers: era order is inherited and every resource and group has an era from the order', () => {
-  for (const tier of ['steam', 'lv', 'mv', 'hv']) {
+  for (const tier of ['steam', 'lv', 'mv', 'hv', 'ev']) {
     const { raw } = loadTierConfig({ tier }, TIERS);
     assert.ok(raw.eraOrder && raw.eraOrder.length >= 6, `${tier}: eraOrder`);
     for (const e of [...raw.eraResources, ...raw.eraItems]) assert.ok(raw.eraOrder.includes(e.era), `${tier}: ${e.id} has era ${e.era}`);
@@ -360,7 +360,10 @@ test('real tiers (hv): titanium, helium-3 and the Moon belong to EV and only com
   assert.deepEqual(res.moon.dimensions, ['gcyr:luna']);
   assert.equal(res.end.era, 'mv');
   assert.equal(res.nether.era, 'lv');
-  for (const id of ['tungsten', 'naquadah', 'iridium-osmium', 'mars', 'venus', 'mercury']) assert.equal(res[id].era, 'iv', id);
+  for (const id of ['naquadah', 'iridium-osmium', 'venus', 'mercury']) assert.equal(res[id].era, 'iv', id);
+  // Mars is EV's second substage (ev-mars, 2026-10-25): its tungsten belongs to it, after the Moon's ev and before iv
+  for (const id of ['tungsten', 'mars']) assert.equal(res[id].era, 'ev-mars', id);
+  assert.ok(raw.eraOrder.indexOf('ev') < raw.eraOrder.indexOf('ev-mars') && raw.eraOrder.indexOf('ev-mars') < raw.eraOrder.indexOf('iv'));
   assert.deepEqual(res.titanium.onlyFrom, ['moon']);
   assert.deepEqual(res['helium-3'].onlyFrom, ['moon']);
   const items = Object.fromEntries(raw.eraItems.map((g) => [g.id, g]));
@@ -411,4 +414,43 @@ test('real tiers (v0.5.0): the End is in MV, the trip to the Moon gives the luna
   assert.ok(hv.autoTargets.some((t) => t.id === 'auto-titanium' && !t.expect));
   assert.ok(!hv.autoTargets.some((t) => t.id === 'auto-titanium-not-in-hv'));
   assert.ok(!fs.existsSync(path.join(TIERS, 'next', 'hv.json')) && !fs.existsSync(path.join(TIERS, 'next', 'mv.json')));
+});
+
+test('real tiers (ev, 2026-10-25): the Moon and Mars substages, the Martian resources only from Mars, the trips\' keys, the tier veto and B7\'s slot', () => {
+  const { raw: ev } = loadTierConfig({ tier: 'ev' }, TIERS);
+  const res = Object.fromEntries(ev.eraResources.map((r) => [r.id, r]));
+  for (const id of ['moon', 'titanium', 'helium-3']) assert.equal(res[id].era, 'ev', id);
+  for (const id of ['mars', 'tungsten', 'merrillite', 'samarium', 'martian-ice']) assert.equal(res[id].era, 'ev-mars', id);
+  for (const id of ['deuterium', 'radioactives', 'quantum', 'venus', 'naquadah', 'mercury', 'iridium-osmium']) assert.equal(res[id].era, 'iv', id);
+  for (const id of ['tungsten', 'merrillite', 'samarium', 'martian-ice', 'deuterium']) assert.deepEqual(res[id].onlyFrom, ['mars'], id);
+  assert.deepEqual(ev.conditions.dimension.asKeysFor, ['gcyr:luna', 'gcyr:mars']);
+  const trip = ev.synthetic.find((s) => s.id === 'mars-trip');
+  assert.deepEqual(trip.produces, ['dim:gcyr:mars']);
+  for (const part of ['gcyr:advanced_fuel_tank', 'gcyr:advanced_rocket_motor']) assert.ok(trip.capital.includes(part), part);
+  assert.deepEqual(ev.world.find((w) => w.id === 'mars-ores').needs, ['dim:gcyr:mars']);
+  // the family tier veto: the tripod only runs its ev/ folder, the dome and the LV-HV drills and greenhouses skip the folders above them
+  const machine = (cfg, id) => cfg.machines.find((m) => (m.id || m.machine) === id);
+  assert.equal(machine(ev, 'gtceu:ev_vein_drill').onlyTier, 'ev');
+  assert.equal(machine(ev, 'gtceu:sealed_dome').vetoAbove, 'ev');
+  for (const t of ['lv', 'mv', 'hv']) {
+    for (const kind of ['vein_drill', 'greenhouse']) assert.equal(machine(ev, `gtceu:${t}_${kind}`).vetoAbove, t, `${t}_${kind}`);
+  }
+  assert.equal(machine(ev, 'gtceu:steam_vein_drill').vetoAbove, undefined, 'the steam drill has no veto hook (known soft spot)');
+  // B7's slot stays optional until that package is merged
+  for (const id of ['gtceu:combined_cycle_plant', 'gtceu:hot_strip_mill']) assert.ok(machine(ev, id).optional, id);
+  for (const id of ['plant-combined-cycle', 'mill-hot-strip']) assert.ok(ev.targets.find((t) => t.id === id).optional, id);
+  // what HV declared and EV no longer holds is dropped; the radioactive and quantum eye checks are real (not optional)
+  const ids = ev.targets.map((t) => t.id);
+  for (const id of ['bit-titanium-not-made', 'scheelite-not-comes-from-end']) assert.ok(!ids.includes(id), id);
+  for (const id of ['uranium-not-before-iv', 'radon-not-before-iv', 'quantum-eye-not-before-iv']) {
+    const t = ev.targets.find((x) => x.id === id);
+    assert.ok(t && t.expect === 'unreachable' && !t.optional, id);
+  }
+  const sites = ev.targets.filter((t) => t.kind === 'site').map((t) => t.id);
+  for (const id of ['site-moon-machines', 'site-mars-machines', 'site-fuels-air']) assert.ok(sites.includes(id), id);
+  const items = Object.fromEntries(ev.eraItems.map((g) => [g.id, g]));
+  assert.equal(items['ev-mars'].era, 'ev-mars');
+  assert.equal(items['output-ev'].era, 'iv');
+  assert.equal(items['hv-gtm'].era, 'hv', 'merging an exclusion keeps the parent\'s era');
+  assert.ok(items['hv-gtm'].exclude.includes('gtceu:hv_fluid_drilling_rig') && items['ev-mars'].items.includes('gtceu:hv_fluid_drilling_rig'));
 });

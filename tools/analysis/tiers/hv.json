@@ -125,6 +125,7 @@
     {
       "machine": "gtceu:hv_vein_drill",
       "types": ["gtceu:vein_drilling"],
+      "vetoAbove": "hv",
       "energy": { "voltage": 512 },
       "needs": ["eu:hv"],
       "partsFromStructure": true,
@@ -138,6 +139,7 @@
     {
       "machine": "gtceu:hv_greenhouse",
       "types": ["gtceu:greenhouse"],
+      "vetoAbove": "hv",
       "energy": { "voltage": 512 },
       "needs": ["eu:hv"],
       "partsFromStructure": true,
@@ -552,18 +554,18 @@
     },
     {
       "id": "mars",
-      "era": "iv",
+      "era": "ev-mars",
       "label": "Mars",
       "dimensions": ["gcyr:mars"],
       "items": ["gcyr:mars_*", "gcyr:martian_*", "gtceu:mars_*_ore", "gtca:mars_*_ore"],
-      "note": "Mars arrives at the end of EV; like the Moon with titanium, what it brings belongs to the next era (IV). To be reviewed when designing EV."
+      "note": "Mars is reached at the end of EV with the tier 2 rocket (docs/eras/ev.md): the era's second substage, ev-mars, after the Moon's (ev). Nothing on the way to Mars may need what it brings (tiers/ev.json)."
     },
     {
       "id": "tungsten",
-      "era": "iv",
+      "era": "ev-mars",
       "label": "tungsten (Mars, at the end of EV)",
       "items": ["*tungst*", "gtceu:*scheelite*"],
-      "note": "Opens IV (tungsten steel). Covers tungsten, scheelite, tungstite and whatever is made from them (tungsten steel, carbides)."
+      "note": "Mars' scheelite vein (veins_mars.json) at the end of EV; tungsten steel opens IV. Covers tungsten, scheelite, tungstate and whatever is made from them (tungsten steel, carbides)."
     },
     { "id": "venus", "era": "iv", "label": "Venus", "dimensions": ["gcyr:venus"], "items": ["gcyr:venus_*", "gcyr:venusian_*", "gtceu:venus_*_ore", "gtca:venus_*_ore"] },
     { "id": "naquadah", "era": "iv", "label": "naquadah (Venus)", "items": ["*naquad*"] },

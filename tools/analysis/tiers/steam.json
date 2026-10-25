@@ -3,7 +3,7 @@
   "title": "Steam era",
   "note": "Gate: coke -> bronze -> steam -> steel -> LV steam turbine + first LV circuit + LV hull (docs/eras/steam.md). Sources: GregTech Modern 7.5.3 (GTMachines, GTMultiMachines, GTOres, FuelRecipes) and the gg_dump.js dump.",
 
-  "eraOrder": ["steam", "lv", "mv", "hv", "ev", "iv", "luv", "zpm", "uv", "uhv", "uev", "uiv", "uxv", "opv", "max"],
+  "eraOrder": ["steam", "lv", "mv", "hv", "ev", "ev-mars", "iv", "luv", "zpm", "uv", "uhv", "uev", "uiv", "uxv", "opv", "max"],
 
   "unconditionalTypes": [
     "minecraft:crafting_shaped",

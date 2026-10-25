@@ -120,6 +120,7 @@
     {
       "machine": "gtceu:mv_vein_drill",
       "types": ["gtceu:vein_drilling"],
+      "vetoAbove": "mv",
       "energy": { "voltage": 128 },
       "needs": ["eu:mv"],
       "partsFromStructure": true,
@@ -133,6 +134,7 @@
     {
       "machine": "gtceu:mv_greenhouse",
       "types": ["gtceu:greenhouse"],
+      "vetoAbove": "mv",
       "energy": { "voltage": 128 },
       "needs": ["eu:mv"],
       "partsFromStructure": true,
