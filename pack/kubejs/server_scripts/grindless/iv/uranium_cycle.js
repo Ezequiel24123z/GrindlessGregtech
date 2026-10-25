@@ -30,7 +30,7 @@
 // mixer, GTM's blast furnace), the helium from the Moon, the acid from the LV contact process, the resin from IV-A1's recipe.
 //
 // Published for the smoke test: global.grindless.uraniumCycle.recipes [{ id, recipeId, kind ('leaching' | 'fabrication'), name, vein,
-// sample, circuit, itemsIn: [{ id, count, chance }] (chance 10000 = used up), fluidsIn, fluidsKept: [{ id, amount }], itemsOut: [{ id,
+// sample, circuit, itemsIn: [{ id, count, chance }] (chance 10000 = used up, 0 = never used up, between = a chanced input), fluidsIn, fluidsKept: [{ id, amount }], itemsOut: [{ id,
 // whole, chance }], dimension, stages: [{ stage, eu, times, from }], energy, eut, duration }], .skipped [{ name, reason }], .clashes,
 // .maxEut, .craftingRecipes { field, plant }, .craftingParts { field, plant }.
 // Rhino: var + function inside every callback that runs more than once (this Rhino throws "redeclaration of var").
@@ -82,14 +82,17 @@
       if (out.length === 0) problems.push(owner + ': no energy')
       return out
     }
+    // inputs: chance 10000 (or none) = used up, 0 = never used up (needed in the bus), anything between = a chanced input (wear);
+    // outputs: chance 10000 (or none) = whole, anything above 0 = a chanced output of one item
     function items(owner, entries, outputs) {
       return list(entries).map(function (x) {
         var count = Number(x.count)
         var chance = x.chance === undefined ? MAX_CHANCE : Number(x.chance)
-        if (!isId(x.id) || !(count >= 1) || !(chance > 0 && chance <= MAX_CHANCE) || (chance < MAX_CHANCE && count !== 1)) {
+        var chanceOk = outputs ? (chance > 0 && chance <= MAX_CHANCE && (chance === MAX_CHANCE || count === 1)) : (chance >= 0 && chance <= MAX_CHANCE)
+        if (!isId(x.id) || !(count >= 1) || Math.floor(chance) !== chance || !chanceOk) {
           problems.push(owner + ': item ' + JSON.stringify(x))
         }
-        if (!outputs) return { id: String(x.id), count: count, chance: MAX_CHANCE }
+        if (!outputs) return { id: String(x.id), count: count, chance: chance }
         return chance < MAX_CHANCE ? { id: String(x.id), whole: 0, chance: chance } : { id: String(x.id), whole: count, chance: 0 }
       })
     }
@@ -195,13 +198,19 @@
     })
   }
 
+  // used up, never used up (chance 0) or worn by chance, as the table says
+  function inputsOf(recipe, rec) {
+    rec.itemsIn.forEach(function (x) {
+      if (x.chance >= MAX_CHANCE) recipe.itemInputs(x.count + 'x ' + x.id)
+      else if (x.chance === 0) recipe.notConsumable(x.count + 'x ' + x.id)
+      else recipe.chancedInput(x.count + 'x ' + x.id, x.chance, 0)
+    })
+  }
+
   function addLeach(event, rec) {
     var recipe = event.recipes.gtceu.in_situ_leaching(rec.id)
       .notConsumable(rec.sample)
-    rec.itemsIn.forEach(function (x) {
-      if (x.chance >= MAX_CHANCE) recipe.itemInputs(x.count + 'x ' + x.id)
-      else recipe.chancedInput(x.count + 'x ' + x.id, x.chance, 0)
-    })
+    inputsOf(recipe, rec)
     rec.fluidsIn.forEach(function (x) { recipe.inputFluids(Fluid.of(x.id, x.amount)) })
     outputsOf(recipe, rec)
     recipe.dimension(rec.dimension)
@@ -212,7 +221,7 @@
   function addStep(event, rec) {
     var recipe = event.recipes.gtceu.fuel_fabrication(rec.id)
       .circuit(rec.circuit)
-    rec.itemsIn.forEach(function (x) { recipe.itemInputs(x.count + 'x ' + x.id) })
+    inputsOf(recipe, rec)
     rec.fluidsIn.forEach(function (x) { recipe.inputFluids(Fluid.of(x.id, x.amount)) })
     rec.fluidsKept.forEach(function (x) { recipe.notConsumableFluid(Fluid.of(x.id, x.amount)) })
     outputsOf(recipe, rec)
