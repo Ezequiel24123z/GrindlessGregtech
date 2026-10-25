@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-// Quest book linter for Gregtech Grindless (FTB Quests SNBT). Rules: docs/misiones.md, section "Herramientas".
+// Quest book linter for Gregtech Grindless (FTB Quests SNBT). Rules: docs/misiones.md, section "Tools".
 //
 //   node tools/quests/lint.mjs [--book <dir>] [--chapter <name>[,<name>...]] [--items <items.json>] [--tags <tags.json>]
 //                              [--config <file>] [--json <out.json>] [--export <out.json>] [--strict] [--quiet]

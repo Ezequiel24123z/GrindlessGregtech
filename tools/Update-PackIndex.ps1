@@ -2,8 +2,8 @@ param(
     [string]$PackDir = (Join-Path $PSScriptRoot '..\pack'),
     [string]$Packwiz
 )
-# Deja los archivos de texto de pack/ en UTF-8 sin BOM y con saltos LF (lo que git publica),
-# y regenera index.toml. Así los hashes de packwiz coinciden con lo que descarga el jugador.
+# Leaves the text files in pack/ as UTF-8 without BOM and with LF line endings (what git publishes),
+# and regenerates index.toml. This way packwiz hashes match what the player downloads.
 $ErrorActionPreference = 'Stop'
 $PackDir = (Resolve-Path $PackDir).Path
 
@@ -13,7 +13,7 @@ if (-not $Packwiz) {
     if (-not (Test-Path $local)) { & (Join-Path $PSScriptRoot 'Get-Packwiz.ps1') | Out-Null }
     $Packwiz = $local
 }
-if (-not (Test-Path $Packwiz)) { throw "No encuentro packwiz.exe ($Packwiz)" }
+if (-not (Test-Path $Packwiz)) { throw "packwiz.exe not found ($Packwiz)" }
 
 $textExt = @('.toml', '.js', '.ts', '.json', '.json5', '.snbt', '.mcmeta', '.md', '.txt', '.cfg', '.properties', '.yaml', '.yml', '.lang', '.csv')
 $changed = 0
@@ -31,10 +31,10 @@ Get-ChildItem -Path $PackDir -Recurse -File | Where-Object { $textExt -contains 
         $changed++
     }
 }
-Write-Output "Normalizados: $changed archivo(s)"
+Write-Output "Normalized: $changed file(s)"
 
 Push-Location $PackDir
 try {
     & $Packwiz refresh
-    if ($LASTEXITCODE -ne 0) { throw "packwiz refresh falló ($LASTEXITCODE)" }
+    if ($LASTEXITCODE -ne 0) { throw "packwiz refresh failed ($LASTEXITCODE)" }
 } finally { Pop-Location }

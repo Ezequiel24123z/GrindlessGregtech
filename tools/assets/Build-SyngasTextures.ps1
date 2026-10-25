@@ -22,7 +22,7 @@
 
   Run from the repo root (PowerShell 5.1 blocks unsigned scripts by default; this bypass only affects that process):
     powershell -NoProfile -ExecutionPolicy Bypass -File tools\assets\Build-SyngasTextures.ps1
-    powershell -NoProfile -ExecutionPolicy Bypass -File tools\assets\Build-SyngasTextures.ps1 -Only plant -Preview C:\ruta\syngas.png
+    powershell -NoProfile -ExecutionPolicy Bypass -File tools\assets\Build-SyngasTextures.ps1 -Only plant -Preview C:\path\syngas.png
 
   Overlay conventions (GTM's workable casings, as every other set): transparent background, details only on the overlay, animated
   variants are vertical 16x(16*n) strips with a .png.mcmeta, *_emissive layers hold only the pixels that glow (identical to the colour
@@ -444,6 +444,6 @@ if ($Preview) {
 if ($Credits) {
     Write-Host ''
     foreach ($rel in $written) {
-        Write-Host ("| ``pack/kubejs/assets/grindless/textures/$rel`` | Generada con tools/assets/$ScriptName (pixel art procedural, original) por el agente de la planta de gas, 2026-10-24 | la del pack (pendiente; propuesta CC BY-SA 4.0) |")
+        Write-Host ("| ``pack/kubejs/assets/grindless/textures/$rel`` | Generated with tools/assets/$ScriptName (procedural pixel art, original) by the gas plant agent, 2026-10-24 | the pack's own (pending; proposed CC BY-SA 4.0) |")
     }
 }

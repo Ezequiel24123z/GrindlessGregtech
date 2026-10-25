@@ -355,7 +355,7 @@ $ok = Invoke-LocalStage 'refresh' {
         $tail = (($txt | Select-Object -Last 4) -join ' | ')
         throw ("{0} failed (exit {1}): {2}" -f $how, $r.Code, $tail)
     }
-    $norm = ($txt | Where-Object { $_ -match 'Normalizados' } | Select-Object -First 1)
+    $norm = ($txt | Where-Object { $_ -match 'Normalized' } | Select-Object -First 1)
     $last = ($txt | Select-Object -Last 1)
     $detail = [string]$last
     if ($norm -and $norm -ne $last) { $detail = "$norm | $last" }
