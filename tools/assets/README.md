@@ -43,6 +43,7 @@ Generators for the pack's own textures. Everything is procedural 16x16 pixel art
 | `Build-UraniumCycleTextures.ps1` | Writes the faces of the IV in-situ leach field and fuel fabrication plant (`multiblock/isr_wellfield/`, `multiblock/fuel_fabrication_plant/`). `-Only isr,fuel`, `-Preview <png outside the repo>` (optional `-PtfeCasing <png>`, `-StainlessCasing <png>`) and `-Credits` (their 10 CREDITS rows). |
 | `Build-HeavyWaterPlantTextures.ps1` | Writes the IV heavy-water plant's face (`multiblock/heavy_water_plant/`). `-Only heavy_water_plant`, `-Preview <png outside the repo>` and `-Credits` (its 5 CREDITS rows). |
 | `Build-FluorsparKilnTextures.ps1` | Writes the IV fluorspar kiln's face (`multiblock/fluorspar_kiln/`). `-Only kiln`, `-Preview <png outside the repo>` and `-Credits` (its 5 CREDITS rows). |
+| `Build-TritiumRemovalTextures.ps1` | Writes the IV tritium removal facility's face (`multiblock/tritium_removal_facility/`). `-Only facility`, `-Preview <png outside the repo>` and `-Credits` (its 5 CREDITS rows). |
 | `Build-IVFoundationTextures.ps1` | Writes the shared IV textures (IV-A1): fuel cycle items, PuBe source, RTG pellet, resin, platinum gauze, inner planets chart, Venus and Mercury vein samples, the Hermean heat shield brick (the Mercury casing texture) and the thin-film panel. `-Only`, `-Preview <png outside the repo>`, `-Credits`. |
 
 ## Regenerate
@@ -413,3 +414,23 @@ The faces of the in-situ leach field and the fuel fabrication plant, with the fi
 | `block/multiblock/fuel_fabrication_plant/overlay_front.png` | Idle: four dark lamps (press, sinter, pilger, glovebox), a dark furnace window, pellets on the tray, an empty tube and dark progress cells. |
 | `.../overlay_front_active.png` + `.mcmeta` | The furnace glows orange and shimmers while boats of pellets cross it; the pellets advance into the tube one cell a frame with a green progress cell each; the lamps are lit blue with a brighter one walking along them. |
 | `.../overlay_front_active_emissive.png` + `.mcmeta` | Only the furnace glow, the lamps and the lit progress cells. |
+
+### Tritium removal facility
+
+The facility's mimic panel, drawn for GTM's frost-proof casing with the IV faces' method, steel ramp, bezel and lamp ramp: at the left the slim titanium catalytic exchange column; in the middle the frosted cold box, its window showing the cryogenic distillation column in a pool of pale blue liquid; at the right the tritium storage bed, a titanium vessel with a sight glass where the stored tritium glows in GTM's tritium pink; a transfer line into the cold box and a tritium line from its sump to the bed; under the column, the run (green) and tritium (pink) lamps.
+
+- 8 frames, `frametime` 4: a vapour bubble rises up the exchange column one pixel a frame; a cold pulse enters the cold box twice a loop; reflux drops fall down the distillation column and splash into the pool; a pink pulse runs along the tritium line into the bed, where the tritium breathes and brightens as it lands; the frost twinkles; the run lamp is lit and the tritium lamp blinks when the pulse lands.
+- Idle: dark cold box, dull pool, dull tritium, lamps dark.
+- The emissive layer holds only the stored tritium, the pulse on the tritium line and the lit lamps.
+- The hot cell's checks; the output is identical byte for byte. `-Preview` draws a review sheet on a stand-in frost-proof casing (the GTM texture is not in the repository).
+
+```powershell
+powershell -NoProfile -ExecutionPolicy Bypass -File tools\assets\Build-TritiumRemovalTextures.ps1
+powershell -NoProfile -ExecutionPolicy Bypass -File tools\assets\Build-TritiumRemovalTextures.ps1 -Credits
+```
+
+| File (under `textures/`) | Notes |
+|---|---|
+| `block/multiblock/tritium_removal_facility/overlay_front.png` | Idle: the cold box dark, the pool and the tritium dull, both lamps dark. |
+| `.../overlay_front_active.png` + `.mcmeta` | 8 frames, `frametime` 4: the rising vapour, the reflux drops, the frost, the tritium pulse into the bed, the run lamp and the tritium lamp's blink. |
+| `.../overlay_front_active_emissive.png` + `.mcmeta` | Only the stored tritium, the tritium line's pulse and the lit lamps. |
