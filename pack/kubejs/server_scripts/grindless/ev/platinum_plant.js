@@ -21,16 +21,20 @@
 //   circuit 2  separation  three recipes; the plant runs the one its inputs fit:
 //       platinum           1 sludge + nitration mixture, ammonium chloride and calcium -> 6 platinum + gold + silicon dioxide + calcium
 //                          chloride + 6 platinum slag + the leftovers of the line (palladium-rich ammonia, nitrogen dioxide, diluted sulfuric
-//                          acid, palladium metal dust, iridium metal residue, rarest metal mixture).  stages: sludge centrifuge -> dissolve the
-//                          platinum powder in nitration mixture -> large reactor with ammonium chloride (salt + raw) -> sifter -> blast
-//                          furnace (back to platinum powder: the loop, run to the end) -> raw platinum + calcium -> platinum
+//                          acid, palladium metal dust).  stages: sludge centrifuge -> dissolve the platinum powder in nitration mixture ->
+//                          large reactor with ammonium chloride (salt + raw) -> sifter -> blast furnace (back to platinum powder: the loop,
+//                          run to the end) -> raw platinum + calcium -> platinum
 //       palladium          palladium-rich ammonia + palladium metal dust + ammonia + formic acid -> palladium.  stages: dust -> rich ammonia
 //                          (ammonia), the large palladium reactor, the sifter (back to metal dust: the loop) and the formic acid step that
 //                          gives the ammonia back
 //       rhodium_ruthenium  platinum slag + potassium pyrosulfate, saltpeter, sodium nitrate, zinc, hydrochloric acid, salt water and steam ->
-//                          rhodium + ruthenium + rarest metal mixture + zinc sulfate + salt + chlorine + ammonia + water + potassium.
+//                          rhodium + ruthenium + zinc sulfate + salt + chlorine + ammonia + water + potassium.
 //                          stages: the leach, the rhodium sulfate, the rhodium salt / nitrate / filter cake / reprecipitated rhodium line, and
 //                          the sodium rutheniate -> ruthenium tetroxide -> cracker -> distillation -> solid -> ruthenium line
+//   Earth gives no iridium or osmium (docs/eras/iv.md decision 5): data/grindless/tables/offworld_only.json strips the iridium metal
+//   residue and the rarest metal mixture from GT--'s sludge centrifuge and inert metal mixture leach (moon/offworld_only.js rebuilds the
+//   loose recipes without them), and the plant reads every strip entry of its stages the same way (the library's patch hook), so modes
+//   1 and 2 give none either.
 //   circuit 3  iridosmine  (IV, docs/eras/iv.md "Family steps": Mercury's iridosmine -> iridium and osmium) 10 iridosmine + 10 saltpeter +
 //                          3 calcium + salt water, hydrochloric acid and hydrogen -> 3 iridium + 1 osmium + 3 platinum sludge residue + 3
 //                          metal sludge + 12 calcium chloride + water + steam. stages: the oxidative fusion (IV-B2's Mercury solar works step,
@@ -45,7 +49,8 @@
 //                          that acid (GTM's chemical_reactor/ammonium_chloride), so neither leaves. The calcium chloride leaves for GTM's
 //                          electrolysis (calcium and chlorine), the platinum sludge residue for the centrifuge (gold, silicon dioxide); the
 //                          metal sludge is GT--'s inert dross. Through the chain the fusion's 6 mixture give 3 iridium and 0.3 osmium, and
-//                          its 700 mB of tetroxide 0.7 osmium: 3 Ir : 1 Os.
+//                          its 700 mB of tetroxide 0.7 osmium: 3 Ir : 1 Os. It is the only way the plant meets iridium and osmium: its first
+//                          stage only runs on Mercury, and the stages after it only take what the fusion makes.
 //   left out: the pgs_from_<ore> recipes of GT-- (ore + nitration mixture -> concentrated platinum, bypassing the sludge: removed by
 //   integration/gtnn.js)
 //
@@ -82,6 +87,7 @@
 //                [{ id, whole, chance }] (chance 0 = none), fluidsOut: [{ id, amount }], eut, duration, energy (what the recipe costs),
 //                sourceEnergy (sum of the stages) }]
 //   .skipped  [{ name, reason }]      .stages  number of source recipes read from the live line      .stageIds  every live stage id the plans use
+//   .stripped [{ stage, items: [ids], fluids: [ids] }] (what offworld_only.json's strip entries took out of the stages as the plant read them)
 //   .fusion   { recipe, from, stage: { eut, duration, v } } (mode 3's first stage, as read from global.grindless.mercury.fusion)
 //   .craftingParts, .electrodeParts, .craftingRecipes { plant, electrode }
 //
@@ -100,6 +106,8 @@
   const IRIDOSMINE_CIRCUIT = 3
   // mode 3's first stage: IV-B2's Mercury solar works recipe, built from global.grindless.mercury.fusion (not an original recipe)
   const FUSION = 'grindless:solar_processing/iridosmine_fusion'
+  // the outputs moon/offworld_only.js strips from loose recipes (resources of other worlds): the plant reads its stages without them
+  const OFFWORLD_TABLE = 'kubejs/data/grindless/tables/offworld_only.json'
   // what the recipe type holds (startup_scripts/grindless/ev/platinum_plant.js publishes it)
   const IO = PP.maxIO || { itemsIn: 8, itemsOut: 12, fluidsIn: 3, fluidsOut: 4 }
 
@@ -278,6 +286,49 @@
     return s
   }
 
+  // ---------------------------------------------------------------- the strips of the loose line
+
+  // offworld_only.json's strip entries, by recipe id: { items: [ids], fluids: [ids] }
+  function stripsOf() {
+    var out = {}
+    var t = G.readJsonTable(OFFWORLD_TABLE)
+    ;(t.strip || []).forEach(function (s) {
+      out[String(s.recipe)] = { items: (s.outputs || []).map(String), fluids: (s.fluids || []).map(String) }
+    })
+    return out
+  }
+
+  // the library's patch hook: a stage is read without the outputs moon/offworld_only.js strips from its loose recipe
+  function stripPatch(strips, C) {
+    return function (id, j) {
+      var s = strips[id]
+      if (!s || !j.outputs) return j
+      var gone = { stage: id, items: [], fluids: [] }
+      if (Array.isArray(j.outputs.item)) {
+        j.outputs.item = j.outputs.item.filter(function (e) {
+          var it = C.itemOf(e.content)
+          if (it !== null && s.items.indexOf(it.id) >= 0) {
+            gone.items.push(it.id)
+            return false
+          }
+          return true
+        })
+      }
+      if (Array.isArray(j.outputs.fluid)) {
+        j.outputs.fluid = j.outputs.fluid.filter(function (e) {
+          var f = C.fluidOf(e.content)
+          if (f !== null && s.fluids.indexOf(f.id) >= 0) {
+            gone.fluids.push(f.id)
+            return false
+          }
+          return true
+        })
+      }
+      PP.stripped.push(gone)
+      return j
+    }
+  }
+
   // ---------------------------------------------------------------- from a balance to a recipe
 
   function recipeOf(plan, composed, C) {
@@ -308,10 +359,18 @@
   function generate(event) {
     PP.recipes = []
     PP.skipped = []
+    PP.stripped = []
     PP.fusion = null
     var C = G.compose
     if (!C) throw new Error('the composer library (server_scripts/grindless/lib/compose.js) is not loaded')
-    var read = C.gather(event, STAGE_IDS)
+    var strips = {}
+    try {
+      strips = stripsOf()
+    } catch (e0) {
+      // without the table the plant would give what the loose line no longer gives: an error, so the release check sees it
+      console.error(LOG + 'platinum plant: could not read ' + OFFWORLD_TABLE + ': ' + e0)
+    }
+    var read = C.gather(event, STAGE_IDS, { patch: stripPatch(strips, C) })
     var steps = read.steps
     PP.stages = read.read
     steps[FUSION] = fusionStage(C)

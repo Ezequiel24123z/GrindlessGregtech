@@ -20,8 +20,8 @@
 //   platinum_plant|DESCRIPTION / PLACED / FORMED / PATTERN / PARTS   the registered description placed block by block, formed by itself
 //   platinum_plant|PROCESS_attack_pentlandite   the leach: 9 ore + electrode -> 1 sludge + 18 nickel + oxygen + sulfuric acid
 //   platinum_plant|PROCESS_no_electrode         the same ore without the electrode: nothing runs (the plant's condition)
-//   platinum_plant|PROCESS_rhodium_ruthenium    a separation: the recipe that fills every IO limit of the type (7 items with the circuit,
-//                                               3 fluids in, 10 item outputs, 4 fluids out)
+//   platinum_plant|PROCESS_rhodium_ruthenium    a separation: the widest recipe of the type (7 items with the circuit, 3 fluids in,
+//                                               8 item outputs since the rarest metal mixture left it, 4 fluids out)
 //   platinum_plant|LOOKUP                       GTM's recipe lookup reaches all six recipes from their inputs
 //   ev_platinum_plant|DONE                      last line
 //
@@ -52,7 +52,9 @@
   // the live stages the plans read: 31 of GT--'s platinum line (EV) and 9 of its iridium and osmium chain (mode 3, IV)
   var STAGE_COUNT = 40
 
-  // what every generated recipe was on 2026-10-24 (scratch run6, GT-- 1.3.10): item [count or whole, chance of 10 000]; fluids in mB
+  // what every generated recipe was on 2026-10-24 (scratch run6, GT-- 1.3.10): item [count or whole, chance of 10 000]; fluids in mB.
+  // 2026-10-25 (IV-B3, iv.md decision 5): platinum and rhodium_ruthenium no longer give the iridium metal residue and the rarest metal
+  // mixture (offworld_only.json strips them from GT--'s loose line, and the plant reads its stages the same way); all else is unchanged
   var REFERENCE = {
     attack_pentlandite: {
       duration: 54, eut: 1903, circuit: 1,
@@ -74,8 +76,7 @@
       fluidsIn: { 'gtceu:nitration_mixture': 54000, 'gtceu:ammonium_chloride': 10800 },
       itemsOut: {
         'gtceu:platinum_dust': [6, 0], 'gtceu:gold_dust': [3, 0], 'gtceu:silicon_dioxide_dust': [3, 0], 'gtceu:platinum_slag_dust': [6, 0],
-        'gtceu:palladium_metal_dust': [0, 9500], 'gtceu:rarest_metal_mixture_dust': [0, 8500], 'gtceu:iridium_metal_residue_dust': [0, 9000],
-        'gtceu:calcium_chloride_dust': [9, 0]
+        'gtceu:palladium_metal_dust': [0, 9500], 'gtceu:calcium_chloride_dust': [9, 0]
       },
       fluidsOut: { 'gtceu:palladium_rich_ammonia': 10800, 'gtceu:nitrogen_dioxide': 27000, 'gtceu:diluted_sulfuric_acid': 27000 }
     },
@@ -94,8 +95,7 @@
       },
       fluidsIn: { 'gtceu:hydrochloric_acid': 28260, 'gtceu:salt_water': 624, 'gtceu:steam': 2181 },
       itemsOut: {
-        'gtceu:rhodium_dust': [1, 3457], 'gtceu:ruthenium_dust': [4, 4856], 'gtceu:rarest_metal_mixture_dust': [3, 7380],
-        'gtceu:zinc_sulfate_dust': [13, 4569], 'gtceu:salt_dust': [4, 1866]
+        'gtceu:rhodium_dust': [1, 3457], 'gtceu:ruthenium_dust': [4, 4856], 'gtceu:zinc_sulfate_dust': [13, 4569], 'gtceu:salt_dust': [4, 1866]
       },
       fluidsOut: { 'gtceu:ammonia': 1346, 'gtceu:chlorine': 25082, 'minecraft:water': 5331, 'gtceu:potassium': 403 }
     },
