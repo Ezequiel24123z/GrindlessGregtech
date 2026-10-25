@@ -403,6 +403,10 @@ test('tiers/obtain.json: inherits from steam, audits GT, and all its rules have 
   assert.ok(raw.obtain.world.some((w) => w.id === 'mars-ground'));
   assert.ok(!raw.obtain.classes.some((c) => (c.materials || []).includes('grindless:titanium_drill_bit')));
   assert.equal(raw.obtain.classes.find((c) => (c.materials || []).includes('deuterium')).until, 'iv');
+  // stages are cumulative and a group goes to the first that reaches it: the naquadah vein's plutonium also gives uraninite,
+  // so the pitchblende stage goes first and the radioactive chain is attributed to IV's radioactives, not to Venus' naquadah
+  const stage = (id) => raw.obtain.later.findIndex((l) => l.id === id);
+  assert.ok(stage('end-pitchblende') >= 0 && stage('end-pitchblende') < stage('end-naquadah'));
 });
 
 test('CLI: --pass obtain with --config writes text, JSON and Markdown and exits 1 if there are unclassified groups', () => {
