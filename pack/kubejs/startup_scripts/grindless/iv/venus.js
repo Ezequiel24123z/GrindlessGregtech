@@ -23,7 +23,8 @@
 //                                  core, and a 3x3x10 condenser stack of inert casing with heat vents beside it, joined by a PTFE
 //                                  duct. Type gtceu:acid_cracking: the clouds' sulfuric acid -> distilled water + oxygen over a
 //                                  platinum gauze (a wear part), Venus only. The circuit is the mode (iv.md, decision 6): 1 vents the
-//                                  sulfur dioxide back into Venus's air, 2 keeps it in a hatch for home and refuses fluid voiding
+//                                  sulfur dioxide back into Venus's air, 2 keeps it in a hatch for chemistry at home (GTM's sulfur
+//                                  trioxide and sulfuric acid) and refuses fluid voiding
 //                                  (lib/no_voiding.js, in the modifier and in beforeWorking).
 //
 // What they gain (rule 4): naquadah only comes from the drill (the only recipe of the naquadah vein), with the IV bit and 128 runs
