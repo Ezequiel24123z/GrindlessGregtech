@@ -26,7 +26,10 @@
 //       MV   120 EU/t  Overworld and Nether vein materials (PB's own floor) and glowstone (redstone byproduct); bauxite, vanadium magnetite and gold too (End veins have them, Overworld veins open them first);
 //                      and what only the End veins give, now that the End is MV (veins_end.json, mv.md): raw aluminium, chromite, cooperite (sheldonite comb), zircon.
 //       EV  1920 EU/t  platinum-group metals (ev.md: platinum plant): platinum, palladium.
-//       IV  7680 EU/t  radioactives and Ir/Os (veins_excluded.json until IV; ev.md decision 3): naquadah, uranium (radioactive comb), osmium.
+//       IV  held       radioactives and Ir/Os (veins_excluded.json until IV; ev.md decision 3): naquadah, uranium (radioactive comb),
+//                      osmium. They get NO recipe until IV is built: GTM's two-hatch rule lets a multiblock with two EV energy hatches
+//                      run 7,680 EU/t, so an IV-voltage recipe is no IV gate, and the radioactive and osmium bees breed from Earth bees
+//                      (creeper x iron, iron x neon cuckoo). iv.md decides them (it removes the naquadah and osmium bees).
 //       MOON 480 EU/t  materials only the Moon has (data/grindless/tables/offworld_only.json, worlds.moon.combs: ilmenite, titanium).
 //       MARS 1920 EU/t materials only Mars has (worlds.mars.combs: tungsten, scheelite, tungstate; scheelite and tungstate left the End
 //                      for Mars). MOON and MARS recipes also carry their world's dimension (worlds.<world>.dimension), so the bees can
@@ -114,6 +117,7 @@
     var made = { MV: 0, HV: 0, EV: 0, IV: 0, MOON: 0, MARS: 0 }
     var total = 0
     var noEra = []
+    var held = []
     var skipped = 0
     if (Item.exists('productivebees:wax') && Item.exists('productivebees:configurable_honeycomb')) {
       combs.forEach(function (c) {
@@ -122,6 +126,8 @@
           var comb = path.replace(/^.*\//, '').replace(/^(honey)?comb_/, '')
           var era = COMB_ERA.hasOwnProperty(comb) ? COMB_ERA[comb] : null
           if (era === null) { noEra.push(path); return }
+          // item 7: the IV combs wait for IV's own design
+          if (era === 'IV') { held.push(path); return }
           var ingredient = c.json.ingredient
           var result = null
           var chance = 0
@@ -160,7 +166,8 @@
       })
     }
     console.info(LOG + 'GT centrifuge comb recipes: ' + total + ' (MV ' + made.MV + ', HV ' + made.HV + ', EV ' + made.EV + ', IV ' +
-      made.IV + ', Moon ' + made.MOON + ', Mars ' + made.MARS + ') of ' + combs.length + ' material combs; no era, no recipe: ' + (noEra.length > 0 ? noEra.join(', ') : 'none') +
+      made.IV + ', Moon ' + made.MOON + ', Mars ' + made.MARS + ') of ' + combs.length + ' material combs; held until IV: ' +
+      (held.length > 0 ? held.join(', ') : 'none') + '; no era, no recipe: ' + (noEra.length > 0 ? noEra.join(', ') : 'none') +
       '; skipped (no output item or NBT): ' + skipped)
   })
 })()

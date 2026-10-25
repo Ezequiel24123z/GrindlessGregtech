@@ -348,7 +348,12 @@ New rules in `tools/analysis/tiers/ev.json`:
   - **Verified on the v0.5.4 + wave B dump:** only tritium separation and fusion (LuV) use deuterium, so nothing has a source until IV's heavy water from the Martian ice. Tungsten from GTCA's thermal reactor (grossular froth, 30,720 EU/t) is a LuV line (`allowedLate`); alloy decompositions only give back what went in.
   - `gg_test_moon.js` now scans for each world: `earth_mars` and `bees_mars`.
 - **Nothing in EV requires anything from IV.** No Tungsten before Mars (the tier 2 rocket, the suit, the tripod and its bit, the antenna and the Martian half go without it), no radioactives or Quantum Eyes (EV sensors, emitters and field generator stay in IV; the EV creature simulator, the antenna and GTM's EV circuit assembler, which the nano circuits of the gate need, take HV ones), no IV circuits, no naquadah, Iridium or Osmium.
-  - **Radioactive leaks cut on Earth (2026-10-25).** GTM's thorium ore (the Nether's beryllium vein) gave uraninite, which opened uranium, radon and the quantum eye from LV on; it now gives lead and rare earth (`offworld_only.json`, "byproducts"). Liquid ender air (IV voltage, which two EV hatches reach) loses its radon along with its deuterium. The other ores with a uraninite byproduct (uraninite, pitchblende, plutonium) are radioactive themselves and held back until IV.
+  - **Radioactive leaks cut on Earth (2026-10-25).**
+    - GTM's thorium ore (the Nether's beryllium vein) gave uraninite, which opened uranium, radon and the quantum eye from LV on. It now gives lead and rare earth (`offworld_only.json`, "byproducts").
+    - Liquid ender air (IV voltage, which two EV hatches reach) loses its radon along with its deuterium.
+    - GTM's red granite loses its 0.25% uranium dust in the macerator.
+    - Productive Bees' IV combs (radioactive, osmium, naquadah) get no recipe until IV: two EV hatches run any 7,680 EU/t recipe, and two of those bees breed from Earth bees.
+    - The other ores with a uraninite byproduct (uraninite, pitchblende, plutonium) are radioactive themselves and held back until IV.
 - **EV in two substages.** The validator splits the era into *Moon* and *Mars*: nothing on the way to Mars can require Tungsten, Samarium or Deuterium.
 - **Site machines.** Every recipe for the cell, the cryogenic plant, the solar array, the antenna and the lunar veins carries `.dimension('gcyr:luna')`; those for the processor and the Martian veins carry `.dimension('gcyr:mars')`. The fuel recipes carry the five air dimensions (ORed; the validator ORs them too since 2026-10-25, `lib/model.mjs`).
 
