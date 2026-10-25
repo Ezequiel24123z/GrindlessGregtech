@@ -79,7 +79,7 @@
     hasHatch: hasHatch,
     modifier: modifier,
     overclock: overclock,
-    // the plants that take it (IV-B6), for the smoke test and the dump
-    machines: ['gtceu:hot_cell', 'gtceu:fuel_fabrication_plant', 'gtceu:heavy_water_plant']
+    // the plants that take it (IV-B6), for the smoke test and the dump; the platinum and naquadah plants since IV-B3
+    machines: ['gtceu:hot_cell', 'gtceu:fuel_fabrication_plant', 'gtceu:heavy_water_plant', 'gtceu:platinum_plant', 'gtceu:naquadah_plant']
   }
 })()

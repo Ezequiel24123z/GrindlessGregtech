@@ -137,6 +137,7 @@ Gregtech Grindless is a GregTech Modern pack (Minecraft 1.20.1, Forge) in which 
   | tritium removal facility | 12032–12095: the Moon at Y 198–214 and the Overworld at Y 98–112 |
   | travel and network | 12288–12351: the Overworld at Y 98–112 and Venus (`gcyr:venus`) at Y 198–214 |
   | mass production | 12544–12607 (roof at Y 112) |
+  | gallery (client) | 12800–12863 |
 
   For a new test, keep going in steps of 256.
 
