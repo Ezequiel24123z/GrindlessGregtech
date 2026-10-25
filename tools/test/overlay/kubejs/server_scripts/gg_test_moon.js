@@ -10,11 +10,14 @@
 //     worldgen          GTM's live vein registry: no GCYR vein, the lunar vein only in gcyr:luna, the End bauxite vein without
 //                       ilmenite, the removeFromWorld veins of veins_excluded.json gone
 //     offworld          data/grindless/tables/offworld_only.json applied (stripped recipes rebuilt without the outputs, removed ones gone)
-//     earth_titanium, earth_helium3   every loaded recipe that gives a watched titanium-bearing item or helium-3 takes one, or only
-//                       runs off Earth (dimension condition), or is a late line of allowedLate
+//     earth_titanium, earth_helium3, earth_mars   every loaded recipe that gives a watched resource of another world
+//                       (offworld_only.json worlds.<world>.watched: titanium-bearing items and helium-3 for the Moon; tungsten,
+//                       samarium and deuterium for Mars) takes one, or only runs off Earth (dimension condition), or is recycling,
+//                       or is a late line of allowedLate
 //     byproducts        no ore but ilmenite, rutile and titanium has a titanium byproduct (GTM builds every ore chain from them)
 //     end_mv            the End is MV: vanadium steel bit recipes under mv/, no titanium or tungsten ore, the eye bath and the blaze at MV
-//     bees              Productive Bees titanium and ilmenite combs only process on the Moon
+//     bees, bees_mars   Productive Bees combs of the Moon's (titanium, ilmenite) and Mars' (tungsten, scheelite, tungstate)
+//                       materials only process in their own world
 //     planets           GCYR: a tier 1 rocket reaches the Moon and nothing else
 //     travel_config     Waystones and FTB Essentials: crossing dimensions allowed and free, 10 homes
 //   in the world: the Earth band X 2816..2879, Y 98..112, Z 0..15 and, on the Moon, the same X and Z at Y 198..214
@@ -431,8 +434,9 @@
       report.removed.length + '/' + table.remove.length + ': ' + notes.join(' ; ') + (bad.length > 0 ? ' problems=' + bad.join(' | ') : ''))
   }
 
-  // every loaded recipe that gives a watched output (titanium-bearing items, helium-3) without one going in and without a condition
-  // that keeps it off Earth is a leak, unless allowedLate names it
+  // every loaded recipe that gives a watched output of another world (offworld_only.json worlds.<world>.watched: the Moon's
+  // titanium-bearing items and helium-3; Mars' tungsten, samarium and deuterium) without one going in and without a condition that
+  // keeps it off Earth is a leak, unless allowedLate names it
   function earthScan() {
     var L = lazy()
     var G = global.grindless
@@ -442,14 +446,20 @@
     Object.keys(planets).forEach(function (k) {
       if (k !== 'earth') planets[k].dimensions.forEach(function (d) { offEarth.push('"' + d + '"') })
     })
-    var watched = table.watched.items.concat(table.watched.fluids)
-    var idRe = new RegExp('"(' + watched.map(function (w) { return w.replace(/[.*+?^${}()|[\]\\]/g, '\\$&') }).join('|') + ')"', 'g')
-    var inputRe = new RegExp(table.watched.inputPattern)
+    var worlds = Object.keys(table.worlds).map(function (name) {
+      var w = table.worlds[name].watched
+      return {
+        name: name,
+        idRe: new RegExp('"(' + w.items.concat(w.fluids).map(function (x) { return x.replace(/[.*+?^${}()|[\]\\]/g, '\\$&') }).join('|') + ')"', 'g'),
+        inputRe: new RegExp(w.inputPattern),
+        count: { watched: 0, offEarth: 0, processing: 0, recycling: 0, late: 0 },
+        leaks: []
+      }
+    })
     var late = table.allowedLate.map(function (a) { return new RegExp(a.pattern) })
     var access = S.server.registryAccess()
     var all = asArray(S.server.getRecipeManager().getRecipes())
-    var count = { recipes: all.length, gt: 0, watched: 0, offEarth: 0, processing: 0, recycling: 0, late: 0, unreadable: 0 }
-    var leaks = { titanium: [], helium: [] }
+    var count = { recipes: all.length, gt: 0, unreadable: 0 }
     var firstError = ''
     var materials = {}
     asArray(L.GTCEuAPI.materialManager.getRegisteredMaterials()).forEach(function (m) { materials[String(m.getName())] = m })
@@ -480,44 +490,70 @@
           var res = r.getResultItem(access)
           if (res !== null && !res.isEmpty()) outText = '"' + itemIdOf(res) + '"'
         }
-        var found = outText.match(idRe)
-        if (!found) continue
-        count.watched++
-        if (gt) {
-          var conds = conditionsText(r)
-          if (offEarth.some(function (d) { return conds.indexOf(d) >= 0 })) {
-            count.offEarth++
+        // read lazily, at most once per recipe, and only for a recipe with a watched output
+        var conds = null
+        var inputs = null
+        var isRecycling = null
+        var isLate = null
+        for (var w = 0; w < worlds.length; w++) {
+          var W = worlds[w]
+          var found = outText.match(W.idRe)
+          if (!found) continue
+          W.count.watched++
+          if (gt) {
+            if (conds === null) conds = conditionsText(r)
+            if (offEarth.some(function (d) { return conds.indexOf(d) >= 0 })) {
+              W.count.offEarth++
+              continue
+            }
+          }
+          if (inputs === null) inputs = gt ? gtInputsText(r) : ingredientsText(r)
+          if (W.inputRe.test(inputs)) {
+            W.count.processing++
             continue
           }
+          if (gt) {
+            if (isRecycling === null) isRecycling = recycling(r, id)
+            if (isRecycling) {
+              W.count.recycling++
+              continue
+            }
+          }
+          if (isLate === null) isLate = late.some(function (re) { return re.test(id) })
+          if (isLate) {
+            W.count.late++
+            continue
+          }
+          W.leaks.push({ id: id, what: found.map(function (f) { return f.replace(/"/g, '') }).filter(function (v, k, a) { return a.indexOf(v) === k }) })
         }
-        if (inputRe.test(gt ? gtInputsText(r) : ingredientsText(r))) {
-          count.processing++
-          continue
-        }
-        if (gt && recycling(r, id)) {
-          count.recycling++
-          continue
-        }
-        if (late.some(function (re) { return re.test(id) })) {
-          count.late++
-          continue
-        }
-        var what = found.map(function (f) { return f.replace(/"/g, '') }).filter(function (v, k, a) { return a.indexOf(v) === k })
-        var line = id + ' -> ' + what.join(',')
-        if (what.some(function (w) { return w === HE3 })) leaks.helium.push(line)
-        if (what.some(function (w) { return w !== HE3 })) leaks.titanium.push(line)
       } catch (e) {
         count.unreadable++
         if (firstError === '') firstError = id + ': ' + e
       }
     }
-    var summary = 'recipes=' + count.recipes + ' (GT ' + count.gt + ') with a watched output=' + count.watched + ': off Earth ' + count.offEarth +
-      ', processing ' + count.processing + ', recycling ' + count.recycling + ', late ' + count.late + '; unreadable=' + count.unreadable +
-      (firstError !== '' ? ' first=' + firstError : '')
-    check(SCOPE, 'earth_titanium', leaks.titanium.length === 0, summary + (leaks.titanium.length > 0 ? ' LEAKS (' + leaks.titanium.length + '): ' +
-      leaks.titanium.slice(0, 25).join(' ; ') : ''))
-    check(SCOPE, 'earth_helium3', leaks.helium.length === 0, leaks.helium.length > 0 ? 'LEAKS: ' + leaks.helium.join(' ; ') :
-      'no Earth recipe gives helium-3 (the Moon\'s regolith and the late lines only)')
+    var head = 'recipes=' + count.recipes + ' (GT ' + count.gt + '), unreadable=' + count.unreadable + (firstError !== '' ? ' first=' + firstError : '')
+    function countsOf(W) {
+      return W.name + ' with a watched output=' + W.count.watched + ': off Earth ' + W.count.offEarth + ', processing ' + W.count.processing +
+        ', recycling ' + W.count.recycling + ', late ' + W.count.late
+    }
+    function lines(list) {
+      return list.map(function (l) { return l.id + ' -> ' + l.what.join(',') })
+    }
+    worlds.forEach(function (W) {
+      if (W.name === 'moon') {
+        // the Moon keeps its two checks: titanium-bearing outputs and helium-3
+        var helium = W.leaks.filter(function (l) { return l.what.some(function (x) { return x === HE3 }) })
+        var titanium = W.leaks.filter(function (l) { return l.what.some(function (x) { return x !== HE3 }) })
+        check(SCOPE, 'earth_titanium', titanium.length === 0, head + ' | ' + countsOf(W) + (titanium.length > 0 ? ' LEAKS (' + titanium.length + '): ' +
+          lines(titanium).slice(0, 25).join(' ; ') : ''))
+        check(SCOPE, 'earth_helium3', helium.length === 0, helium.length > 0 ? 'LEAKS: ' + lines(helium).join(' ; ') :
+          'no Earth recipe gives helium-3 (the Moon\'s regolith and the late lines only)')
+        return
+      }
+      check(SCOPE, 'earth_' + W.name, W.leaks.length === 0, countsOf(W) + (W.leaks.length > 0 ? ' LEAKS (' + W.leaks.length + '): ' +
+        lines(W.leaks).slice(0, 25).join(' ; ') : ' | no Earth recipe gives a resource of ' + W.name + ' (' + table.worlds[W.name].dimension +
+        ', recycling and the late lines only)'))
+    })
   }
 
   function checkByproducts() {
@@ -567,17 +603,25 @@
       ' eye bath=' + bathEut + ' EU/t blaze rods at ' + blaze.join(',') + ' EU/t' + (bad.length > 0 ? ' problems=' + bad.join(' | ') : ''))
   }
 
+  // Productive Bees combs of another world's materials only process in that world (offworld_only.json worlds.<world>.combs):
+  // 'bees' for the Moon (titanium, ilmenite), 'bees_<world>' for the others
   function checkBees() {
+    var table = global.grindless.readJsonTable('kubejs/data/grindless/tables/offworld_only.json')
     var pb = recipesOfType('gtceu:centrifuge').filter(function (r) { return String(r.getId()).indexOf('grindless:centrifuge/pb/') === 0 })
-    var ti = pb.filter(function (r) { return /"gtceu:[a-z_]*(titanium|ilmenite|rutile)[a-z_]*"/.test(gtItemsOut(r).join(' ')) })
-    var earthly = ti.filter(function (r) { return conditionsText(r).indexOf('"' + LUNA + '"') < 0 }).map(function (r) { return String(r.getId()) })
-    if (ti.length === 0) {
-      note(SCOPE, 'bees', 'no Productive Bees comb gives titanium-bearing output (' + pb.length + ' comb recipes)')
-      return
-    }
-    check(SCOPE, 'bees', earthly.length === 0, ti.length + ' titanium-bearing comb recipes of ' + pb.length + ': ' +
-      ti.map(function (r) { return String(r.getId()).replace('grindless:centrifuge/pb/', '') + '@' + eutOf(r) }).join(',') +
-      (earthly.length > 0 ? ' without the Moon condition: ' + earthly.join(',') : ', all only on the Moon'))
+    Object.keys(table.worlds).forEach(function (name) {
+      var world = table.worlds[name]
+      var key = name === 'moon' ? 'bees' : 'bees_' + name
+      var re = new RegExp('"gtceu:[a-z_]*(' + world.watched.inputPattern + ')[a-z_]*"')
+      var mine = pb.filter(function (r) { return re.test(gtItemsOut(r).join(' ')) })
+      var earthly = mine.filter(function (r) { return conditionsText(r).indexOf('"' + world.dimension + '"') < 0 }).map(function (r) { return String(r.getId()) })
+      if (mine.length === 0) {
+        note(SCOPE, key, 'no Productive Bees comb gives an output of ' + name + ' (' + pb.length + ' comb recipes)')
+        return
+      }
+      check(SCOPE, key, earthly.length === 0, mine.length + ' comb recipes of ' + pb.length + ' give an output of ' + name + ': ' +
+        mine.map(function (r) { return String(r.getId()).replace('grindless:centrifuge/pb/', '') + '@' + eutOf(r) }).join(',') +
+        (earthly.length > 0 ? ' without the ' + world.dimension + ' condition: ' + earthly.join(',') : ', all only in ' + world.dimension))
+    })
   }
 
   function checkPlanets() {

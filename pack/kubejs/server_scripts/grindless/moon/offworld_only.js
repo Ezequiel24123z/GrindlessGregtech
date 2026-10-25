@@ -1,13 +1,14 @@
 // -----------------------------------------------------------------------------------------------
-// Resources of other worlds do not come from Earth (DECISIONS.md 2026-10-24): titanium and helium-3 only from the Moon, tungsten from
-// Mars. data/grindless/tables/offworld_only.json lists every Earth source the pack had at v0.4.0 and what happens to it:
+// Resources of other worlds do not come from Earth (DECISIONS.md 2026-10-24 and 2026-10-25): titanium and helium-3 only from the
+// Moon; tungsten, samarium and deuterium only from Mars. data/grindless/tables/offworld_only.json lists every Earth source the pack
+// had (the Moon's at v0.4.0, Mars' at v0.5.4 with wave B) and what happens to it:
 //   strip    the recipe is removed and added back with GTM's builder (same inputs, chances, energy and time), without the listed item
 //            or fluid outputs; new id grindless:<type>/offworld_only/<old path>
 //   remove   the recipe goes away (its only product was a resource of another world)
 // The ore byproducts are changed at startup (startup_scripts/grindless/moon/earth_byproducts.js), the End bauxite vein loses its
-// ilmenite and the End its scheelite vein (moon/worldgen.js, data/grindless/tables/veins_end.json) and the titanium and ilmenite combs
-// of Productive Bees only run on the Moon (integration/productivebees.js). The smoke test (gg_test_moon.js) also scans every loaded
-// recipe for a new titanium or helium-3 source.
+// ilmenite and the End its scheelite vein (moon/worldgen.js, data/grindless/tables/veins_end.json) and the Productive Bees combs of
+// those materials only run in their own world (integration/productivebees.js, the table's "worlds"). The smoke test (gg_test_moon.js)
+// also scans every loaded recipe for a new Earth source of each world's watched resources.
 // Published as global.grindless.moon.offworldOnly for the test.
 //
 // Rhino: var + function inside every callback that runs more than once (this Rhino throws "redeclaration of var").

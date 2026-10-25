@@ -282,9 +282,10 @@ What it gains: **a separation GTM does not do.** Martian rare earths (the KubeJS
   - Kerosene → recycled, apart from the small loss.
   - Phosphoric acid → GTM's cumene and phenol chemistry; the surplus is inert and voidable.
   - Tricalcium phosphate → GTM's fertilizer; inert and voidable.
-- **Samarium on Earth to cut (C1):**
-  - GTM's `rare_earth_separation` centrifuge;
-  - GTCA's samarium line: `gtceu:sifter/residue_to_smgd`, `gtceu:electric_blast_furnace/flsamaric_to_ho`, and `smtb_to_nitrosmtb` and `nitrosmtb_to_tnd_and_srd` (chemical reactor and large chemical reactor).
+- **Samarium cut on Earth (2026-10-25, `offworld_only.json`, "mars" rows):**
+  - GTM's `rare_earth_separation` centrifuge is rebuilt without its small samarium dust, keeping cadmium, neodymium, cerium, yttrium and lanthanum.
+  - GTCA's samaric branch: `gtceu:electric_blast_furnace/flsamaric_to_ho` is rebuilt without the samarium-terbium mixture. It keeps its holmium, because LuV's wetware boards and enriched holmium have no other source, so removing the recipe outright, as first planned, would have closed LuV.
+  - The rest of the branch (`smtb_to_nitrosmtb` and `nitrosmtb_to_tnd_and_srd` in both reactors, `residue_to_smgd`, `tnd_to_terbium`) is left with no Earth input. Its terbium and gadolinium have no other use, so the hidden table takes them once `obtain.json` classifies them.
 
 ## New process lines
 
@@ -332,7 +333,9 @@ New rules in `tools/analysis/tiers/ev.json`:
 
 - **Titanium only from the Moon.** Nothing outside the lunar chain yields Ilmenite, Rutile, TiCl₄ or Titanium. Leaks to cut: the Ilmenite from `bauxite_vein_end` (it stays in v0.4.1 and is removed when the Moon arrives) and the Rutile from `bauxite_sludge_centrifuge` (decided), the ore byproducts of bauxite (Rutile) and of Aluminium (Ilmenite, Rutile), and a new one, the Ilmenite (5.75%) from `metal_mixture_separation`. No other GTM ore yields them (checked). The Titanium from naquadah (Venus, IV) does not break the rule: it comes later and is not from Earth.
 - **Tungsten only from Mars.** Scheelite and Tungstate, only in `veins_mars.json`: the End vein (decided) and GCYR's Venus vein are removed. No GTM ore yields Tungsten as a byproduct (checked); review GT-- and GTCA.
-- **Helium-3 from the Moon; Samarium and Deuterium from Mars.** Removed from Earth: `helium_separation` and the He-3 from Nether air (with HV's Moon), and now the Samarium from `rare_earth_separation` and the Deuterium from `hydrogen_separation` and from ender air. In GTM only fusion spends D, T and He-3 (verify addons, such as GTCA's thermal reactor).
+- **Helium-3 from the Moon; Samarium and Deuterium from Mars.** Removed from Earth: `helium_separation` and the He-3 from Nether air (with HV's Moon). On 2026-10-25 also the Samarium (above) and the Deuterium: `hydrogen_separation` is removed, and both ender air recipes (the HV centrifuge and the IV distillation) lose their deuterium. Tungsten from bees only comes out on Mars (`offworld_only.json` `worlds.mars.combs`).
+  - **Verified on the v0.5.4 + wave B dump:** only tritium separation and fusion (LuV) use deuterium, so nothing has a source until IV's heavy water from the Martian ice. Tungsten from GTCA's thermal reactor (grossular froth, 30,720 EU/t) is a LuV line (`allowedLate`); alloy decompositions only give back what went in.
+  - `gg_test_moon.js` now scans for each world: `earth_mars` and `bees_mars`.
 - **Nothing in EV requires anything from IV.** No Tungsten before Mars (the tier 2 rocket, the suit, the tripod and its bit, the antenna and the Martian half go without it), no radioactives or Quantum Eyes (EV sensors, emitters and field generator stay in IV), no IV circuits, no naquadah, Iridium or Osmium.
 - **EV in two substages.** The validator splits the era into *Moon* and *Mars*: nothing on the way to Mars can require Tungsten, Samarium or Deuterium.
 - **Site machines.** Every recipe for the cell, the cryogenic plant, the solar array, the antenna and the lunar veins carries `.dimension('gcyr:luna')`; those for the processor and the Martian veins carry `.dimension('gcyr:mars')`.
