@@ -70,7 +70,7 @@ var GG_QUESTS_EXPECTED = {
   mv_age: [54, 67],
   hv_age: [43, 53],
   ev_age: [66, 75],
-  iv_age: [48, 66]
+  iv_age: [55, 76]
 }
 // chapters that sit outside every chapter group on purpose (shown above the groups)
 var GG_UNGROUPED = { welcome: true }
