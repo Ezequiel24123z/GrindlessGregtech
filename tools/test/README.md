@@ -54,7 +54,7 @@ FAIL if a stage fails, there is a crash report, or a `GGTEST|…|FAIL` line appe
 
 ## Writing a test (overlay)
 
-Scripts in `tools/test/overlay/` are copied **on top of** the instance on the home PC and never go into the pack. Example (`overlay/kubejs/server_scripts/gg_test_harness.js`):
+Scripts in `tools/test/overlay/` are copied **on top of** the instance on the home PC and never go into the pack. Besides the tests, the overlay carries `config/voicechat/voicechat-server.properties` (`port=-1`): Simple Voice Chat then uses each server's game port, so two servers on the bench's two slots don't fight over its default UDP 24454 (the second one failed the bind and the whole server stopped). Example (`overlay/kubejs/server_scripts/gg_test_harness.js`):
 
 ```js
 ServerEvents.customCommand('gg_ping', event => { console.info('GGTEST|PING|PASS'); return 1 })
