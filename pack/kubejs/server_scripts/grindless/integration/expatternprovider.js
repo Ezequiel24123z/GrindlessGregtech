@@ -1,5 +1,5 @@
 // -----------------------------------------------------------------------------------------------
-// ExtendedAE (modId expatternprovider) on the HV era (docs/eras/hv.md, "Mods e integracion"), except the wireless
+// ExtendedAE (modId expatternprovider) on the HV era (docs/eras/hv.md, "Mods and integration"), except the wireless
 // connector, re-gated to LV (DECISIONS.md, power pass): it is the cable-free option for whoever does not want to run
 // GT cable, and AE2 itself (its only real requirement, see below) is already LV in this pack.
 //

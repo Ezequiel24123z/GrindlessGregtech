@@ -1,4 +1,4 @@
-// Gregtech Grindless - "Dimensiones de construcción": bedrock fluid deposits in void/flat
+// Gregtech Grindless - "Building Dimensions": bedrock fluid deposits in void/flat
 //
 // GTM 7.5.3's six Overworld bedrock fluid veins (gtceu:heavy_oil_deposit, light_oil_deposit,
 // natural_gas_deposit, oil_deposit, raw_oil_deposit, salt_water_deposit - see GTM's own
@@ -47,7 +47,7 @@ function extendOneFluidVein(event, id, voidKey, flatKey) {
     try {
         event.modify(id, function (def) { addDimsToFluidVeinFilter(def, voidKey, flatKey) })
     } catch (e) {
-        console.error('[grindless] No se pudo extender la veta de fluido ' + id + ': ' + e)
+        console.error('[grindless] Could not extend the fluid vein ' + id + ': ' + e)
     }
 }
 

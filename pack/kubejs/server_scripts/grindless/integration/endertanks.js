@@ -4,7 +4,7 @@
 //   ender_bucket  3 iron + 1 pearl + 4 aluminium plates + wool
 //   ender_tank    bucket + pearl + 3 aluminium plates + MV circuit + 2 obsidian + wool
 // The recipe type endertanks:crafting is kept (it reads the colors of the wool), only the materials change.
-// Era: MV (docs/eras/mv.md, "Mods e integración").
+// Era: MV (docs/eras/mv.md, "Mods and integration").
 //
 // Rhino: var + function inside every callback that runs more than once (this Rhino throws "redeclaration of var").
 (function () {

@@ -6,7 +6,7 @@
 //   ender_chest  pouch + 4 aluminium plates + MV circuit + 2 obsidian + wool
 //   ender_bag    pouch + 4 aluminium plates + MV circuit + wool
 // The recipe type enderchests:crafting is kept (it reads the colors of the wool), only the materials change.
-// Era: MV (docs/eras/mv.md, "Mods e integración").
+// Era: MV (docs/eras/mv.md, "Mods and integration").
 //
 // Rhino: var + function inside every callback that runs more than once (this Rhino throws "redeclaration of var").
 (function () {

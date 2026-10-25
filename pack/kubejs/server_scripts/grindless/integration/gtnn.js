@@ -1,5 +1,5 @@
 // -----------------------------------------------------------------------------------------------
-// GT-- (gtnn 1.3.10), audited against docs/eras (ev.md, "Decisiones tomadas": no addon may process cheaper than GT in its era or
+// GT-- (gtnn 1.3.10), audited against docs/eras (ev.md, "Decisions taken": no addon may process cheaper than GT in its era or
 // undercut the pack's own multiblocks; GCYM-style parallel machines wait for IV). Most of the addon adds work or comes late and
 // stays: the ExxonMobil chemical plant (MV) and its chemistry, dehydrators, neutron activator (IV), rocket engines (EV) with
 // GTNH-style rocket fuels (hydrazine, RP-1: several chemistry steps each), naquadah reactors (enriched naquadah), the circuit

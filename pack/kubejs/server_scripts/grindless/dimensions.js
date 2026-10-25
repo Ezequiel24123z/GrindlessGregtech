@@ -1,4 +1,4 @@
-// Gregtech Grindless - "Dimensiones de construcción"
+// Gregtech Grindless - "Building Dimensions"
 //
 // Behaviour for grindless:void_key / grindless:flat_key / grindless:end_key:
 //  - Used outside its own target dimension (Overworld or anywhere else): remembers the return spot
@@ -163,13 +163,13 @@ function teleportSafely(player, dimId, x, y, z, yaw, pitch) {
     try {
         player.teleportTo(dimId, x, y, z, yaw, pitch)
     } catch (e) {
-        console.error('[grindless] No se pudo teletransportar a ' + dimId + ': ' + e)
+        console.error('[grindless] Could not teleport to ' + dimId + ': ' + e)
         return false
     }
     // Another mod can cancel the teleport (Forge travel/teleport events) without throwing.
     var arrivedDimId = player.getLevel().getDimension().toString()
     if (arrivedDimId !== dimId) {
-        console.error('[grindless] El teletransporte a ' + dimId + ' no se completó: el jugador sigue en ' + arrivedDimId)
+        console.error('[grindless] Teleport to ' + dimId + ' did not complete: the player is still in ' + arrivedDimId)
         return false
     }
     return true
@@ -198,7 +198,7 @@ function returnToSavedPosition(player, server) {
 function travelToBuildingDimension(player, server, targetDimId) {
     var targetLevel = server.getLevel(targetDimId)
     if (!targetLevel) {
-        console.warn('[grindless] La dimensión ' + targetDimId + ' no existe todavía (datapack no cargado?)')
+        console.warn('[grindless] Dimension ' + targetDimId + ' does not exist yet (datapack not loaded?)')
         return false
     }
     var landing = computeLanding(targetLevel, targetDimId, player.getX(), player.getZ())
@@ -236,7 +236,7 @@ function handleKeyUse(player, targetDimId, item) {
     try {
         moved = useTravelKey(player, targetDimId)
     } catch (e) {
-        console.error('[grindless] La llave hacia ' + targetDimId + ' ha fallado: ' + e)
+        console.error('[grindless] The key to ' + targetDimId + ' failed: ' + e)
         moved = false
     }
     if (moved === null) return
@@ -303,7 +303,7 @@ function activateSuperflatOres() {
         $GTConfigHolder.init()
         $GTConfigHolder.INSTANCE.dev.doSuperflatOres = true
     } catch (e) {
-        console.error('[grindless] No se pudo activar dev.doSuperflatOres (vetas GT en Llano): ' + e)
+        console.error('[grindless] Could not enable dev.doSuperflatOres (GT veins in Flat): ' + e)
     }
 }
 
@@ -315,7 +315,7 @@ function extendOreVeinsToFlat(event) {
         var flatKey = $ResourceKey.create($Registries.DIMENSION, new $ResourceLocation('grindless', 'flat'))
         event.modifyAll(function (id, vein) { addFlatToVeinFilter(vein, flatKey) })
     } catch (e) {
-        console.error('[grindless] No se pudieron extender las vetas de GT a grindless:flat: ' + e)
+        console.error('[grindless] Could not extend GT veins to grindless:flat: ' + e)
     }
 }
 

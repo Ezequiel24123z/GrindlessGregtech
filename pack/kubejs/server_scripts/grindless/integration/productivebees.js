@@ -1,7 +1,7 @@
 // -----------------------------------------------------------------------------------------------
 // Productive Bees (productivebees): bees are kept for what they do on their own (wax, honey, pollen, nests, the mob-drop
 // combs below), but combs only give MATERIALS through GregTech machines and never ores, ingots or dusts directly
-// (docs/eras/mv.md, "Mods e integración" + "Decisiones tomadas": a second way to automate, not a shortcut).
+// (docs/eras/mv.md, "Mods and integration" + "Decisions taken": a second way to automate, not a shortcut).
 //  1. Every centrifuge recipe of a material comb (productivebees:centrifuge/<group>/..., 94 loaded here) is removed:
 //     raw_materials (iron, copper, gold, tin, nickel, titanium, tungsten, platinum, iridium, osmium...), alloys (STEEL,
 //     bronze, brass, invar, electrum), gems (diamond, emerald, lapis, quartz, ruby...), dusts (redstone, sulfur, zinc,
