@@ -27,8 +27,8 @@ ClientEvents.lang('en_us', event => {
 
     add('grindless.machine.deep_space_antenna.tooltip.0', 'A titanium dish on a sintered regolith pedestal, its feed horn at the focus. From the Moon, far from Earth\'s radio noise, it listens to Mars and the deep sky.')
     add('grindless.machine.deep_space_antenna.tooltip.1', 'Works only on the Moon, at night: the lunar night hides the Sun\'s radio noise. If dawn comes mid-run, it waits and keeps its progress.')
-    add('grindless.machine.deep_space_antenna.tooltip.2', 'The only source of the Mars Transfer Chart: it writes the radio fixes of Mars onto a data stick. Your Lunar Landing-Site Chart calibrates the dish and is never used up.')
-    add('grindless.machine.deep_space_antenna.tooltip.3', 'Needs, in the control hut: 1 or 2 energy hatches (EV), 1 input bus and 1 output bus.')
+    add('grindless.machine.deep_space_antenna.tooltip.2', 'The only source of the Mars Transfer Chart, and in IV of the Inner Planets Chart and the Lunar VLBI Recording, written onto data sticks and orbs. The chart before each one calibrates the dish and is never used up.')
+    add('grindless.machine.deep_space_antenna.tooltip.3', 'Needs, in the control hut: 1 or 2 energy hatches (EV; two run its IV recipe), 1 input bus and 1 output bus.')
 
     add('gtceu.recipe.grindless_sky.lunar_day', 'Lunar day, panels under open sky (x1.4 sunlight): %s EU/t per panel, %s panels = %s EU/t')
     add('gtceu.recipe.grindless_sky.martian_day', 'Martian day, panels under open sky (x0.43 sunlight): %s EU/t per panel, %s panels = %s EU/t')
@@ -53,8 +53,8 @@ ClientEvents.lang('es_es', event => {
 
     add('grindless.machine.deep_space_antenna.tooltip.0', 'Una antena parabólica de titanio sobre un pedestal de regolito sinterizado, con la bocina en el foco. Desde la Luna, lejos del ruido de radio de la Tierra, escucha a Marte y al cielo profundo.')
     add('grindless.machine.deep_space_antenna.tooltip.1', 'Solo funciona en la Luna y de noche: la noche lunar esconde el ruido de radio del Sol. Si amanece a medio ciclo, espera y no pierde lo hecho.')
-    add('grindless.machine.deep_space_antenna.tooltip.2', 'Es lo único que hace la carta de transferencia a Marte: graba las posiciones de radio de Marte en una memoria de datos. Tu carta del lugar de alunizaje calibra la antena y no se gasta.')
-    add('grindless.machine.deep_space_antenna.tooltip.3', 'Necesita, en la caseta de control: 1 o 2 escotillas de energía (EV), 1 bus de entrada y 1 bus de salida.')
+    add('grindless.machine.deep_space_antenna.tooltip.2', 'Es lo único que hace la carta de transferencia a Marte y, en IV, la carta de los planetas interiores y la grabación VLBI lunar, en memorias y orbes de datos. La carta anterior a cada una calibra la antena y no se gasta.')
+    add('grindless.machine.deep_space_antenna.tooltip.3', 'Necesita, en la caseta de control: 1 o 2 escotillas de energía (EV; con dos hace su receta IV), 1 bus de entrada y 1 bus de salida.')
 
     add('gtceu.recipe.grindless_sky.lunar_day', 'Día lunar, paneles bajo el cielo abierto (luz solar x1,4): %s EU/t por panel, %s paneles = %s EU/t')
     add('gtceu.recipe.grindless_sky.martian_day', 'Día marciano, paneles bajo el cielo abierto (luz solar x0,43): %s EU/t por panel, %s paneles = %s EU/t')
