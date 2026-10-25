@@ -387,6 +387,11 @@ test('real tiers (iv): home, then Venus and Mercury as sibling substages; naquad
     assert.ok(items['iv-gtm'].exclude.includes(it) && items['iv-mercury-gtm'].items.includes(it), it);
   }
   assert.equal(items['output-iv'].era, 'luv');
+  // the wireless network's IV hatches and covers take the IV sensor or emitter: they wait for Mercury; its IV capacitor cell is a home item
+  assert.ok(items['iv-gtm'].exclude.includes('gtceu:iv_wireless_*'));
+  assert.equal(items['iv-mercury-wireless'].era, 'iv-mercury');
+  assert.deepEqual(items['iv-mercury-wireless'].items, ['gtceu:iv_wireless_*', 'grindless:iv_wireless_*_cover']);
+  assert.equal(items['iv-wireless-home'].era || 'iv', 'iv');
   for (const t of ['uranium-not-before-iv', 'radon-not-before-iv', 'quantum-eye-not-before-iv', 'deuterium-not-made']) assert.ok(raw.dropTargets.includes(t), t);
 });
 
