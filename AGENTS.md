@@ -117,7 +117,7 @@ Gregtech Grindless is a GregTech Modern pack (Minecraft 1.20.1, Forge) in which 
   | cryogenic plant | 7424–7487 (Moon) |
   | lunar solar array and deep space antenna | 7680–7743 (Moon) |
   | Mars travel | 7936–7999 (Mars) |
-  | Mars site rules | 8192–8255 (Mars and Moon) |
+  | Mars site rules | 8192–8255: the Overworld and `grindless:void` at Y 98–112, the Moon and Mars at Y 198–214 |
   | AE2 between planets | 8448–8511 (Earth and Moon) |
   | combined-cycle plant and hot strip mill | 8704–8767 |
   | sealed dome | 8960–9023 (Moon) |
