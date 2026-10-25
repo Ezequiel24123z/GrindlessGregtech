@@ -232,7 +232,9 @@
       var info = W.towerInfo(controller)
       var st = W.status(level.getServer())
       var FU = Java.loadClass('com.gregtechceu.gtceu.utils.FormattingUtil')
-      if (info.cells === 0) {
+      if (info.pending) {
+        // just loaded: GTM checks the structure again within a second
+      } else if (info.cells === 0) {
         list.add(Text.translate('grindless.machine.wireless_energy_tower.no_cells').red())
       } else {
         list.add(Text.translate('grindless.machine.wireless_energy_tower.cells', String(info.cells), TIER_NAMES[info.tier].toUpperCase(),
