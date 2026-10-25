@@ -1,0 +1,37 @@
+{
+  "_source": "Our own table: the recipes of IV's naquadah plant, gtceu:naquadah_plant, type gtceu:naquadah_refining (docs/eras/iv.md, 'Naquadah plant', and 'Decisions taken with the raise', decision 10: the fluorine budget). The line is GT--'s (dev.arbor.gtnn.data.recipes.NaquadahLine, GT-- 1.3.10, in the GTNH style): the plans below name its live recipes, and their numbers are read from the loaded pack at every load. Real chemistry: fluoroantimonic acid (HSbF6, the strongest known superacid) from antimony trifluoride and HF; titanium trifluoride reduced by hydrogen; Pu-Be neutron sources (PuBe13).",
+  "_how_it_is_used": [
+    "Read by server_scripts/grindless/iv/naquadah_plant.js at every server load (a /reload picks up changes). Each entry of composed[] becomes one gtceu:naquadah_refining recipe, id grindless:naquadah_refining/<name> (GTM's builder puts the type in front). The smoke test gg_test_naquadah_plant.js checks the live recipe against the design.",
+    "composed[]: server_scripts/grindless/lib/compose.js reads `stages` from the loaded recipes, uses up `given` (the batch) and nets every `linked` key to zero (keys: 'i:<item>' or 'f:<fluid>'). The recipe takes and gives what the whole line takes and gives, with the energy of every stage summed and spent at maxEUt (ceil(energy / maxEUt) ticks).",
+    "Mode 1, naquadah (circuit 1): one batch is one run of GT--'s neutron activator (4 naquadah oxide mixture + 6,000 mB fluoroantimonic acid -> 2 naquadah + 2 TiF3 + gallium at 50 %), the acid made inside (fluoroantimonic_acid from SbF3 and HF, antimony_trifluoride from Sb2O3 and HF) and the TiF3 reduced inside (titanium_trifluoride_separation, 1,941 K: titanium and the HF back; the hot titanium ingot cooled in GTM's vacuum freezer). Antimony trioxide and HF go in; naquadah, titanium, gallium, the hydrogen the acid step lets go and water come out.",
+    "Mode 2 (enriched naquadah) is LuV: its chemical plant step runs at 30,720 EU/t and its last step is a 7,000 K blast furnace that needs naquadah coils (docs/eras/iv.md, 'Naquadah plant'). It is not built in IV.",
+    "activator: GT--'s neutron activator recipe carries no EU (its neutron energy comes from neutron accelerator hatches, and the recipe only works while that energy is inside the window; outside it the inputs become radioactive waste). The plant replaces the window with the Pu-Be source in `source` (a chanced input: used up in `chance` of 10,000 batches) and charges the EU the accelerators spend to hold the window during one activator run, read as the stage's EU/t: decayEv / decayTicks / evPerEu (the neutron energy lost while the accelerators rest, paid back at the accelerators' eV per EU). Ramping a cold activator to the window once (220 MeV / 15 eV per EU, about 14.7 M EU) is not charged: a running line pays it once.",
+    "accelerator: GT-- 1.3.10 bytecode. NeutronAcceleratorMachine#consumeEnergy drains round(0.8 V) EU a tick from its buffer and returns that times (10 + nextInt(11)) eV: 15 eV per EU on average, at any tier. NeutronActivatorMachine#neutronEnergyUpdate adds it times getEfficiencyFactor (0.95^(height - 4); the smallest activator, height 4, loses nothing); #moderateUpdate takes 72,000 eV every 20 ticks while no accelerator works; #getRealRecipe checks the window (evRange 2300220: 220 to 230 MeV) when a run starts."
+  ],
+  "maxEUt": 7680,
+  "modes": [
+    { "circuit": 1, "name": "naquadah" }
+  ],
+  "accelerator": {
+    "evPerEu": 15,
+    "decayEv": 72000,
+    "decayTicks": 20
+  },
+  "source": { "id": "grindless:pube_neutron_source", "chance": 100 },
+  "composed": [
+    {
+      "name": "naquadah",
+      "circuit": 1,
+      "activator": "gtceu:neutron_activator/naquadah",
+      "stages": [
+        "gtceu:neutron_activator/naquadah",
+        "gtceu:chemical_reactor/fluoroantimonic_acid",
+        "gtceu:chemical_reactor/antimony_trifluoride",
+        "gtceu:electric_blast_furnace/titanium_trifluoride_separation",
+        "gtceu:vacuum_freezer/cool_hot_titanium_ingot"
+      ],
+      "given": { "i:gtceu:naquadah_oxide_mixture_dust": 4 },
+      "linked": ["f:gtceu:fluoroantimonic_acid", "i:gtceu:antimony_trifluoride_dust", "i:gtceu:titanium_trifluoride_dust", "i:gtceu:hot_titanium_ingot"]
+    }
+  ]
+}
