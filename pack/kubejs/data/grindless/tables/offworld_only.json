@@ -6,7 +6,7 @@
     "strip: server_scripts/grindless/moon/offworld_only.js removes these recipes and adds them back with GTM's builder, the same inputs, chances, energy and time, without the listed outputs. The new id is grindless:<type>/offworld_only/<old path>. Destinations of what is left: unchanged. (Greate's copies of GT recipes follow: integration/greate.js only keeps copies of GT recipes that are loaded and unchanged.)",
     "remove: recipes whose only purpose is a resource of another world. They go away.",
     "combs: worlds.<world>.combs are Productive Bees combs whose GT centrifuge recipe (integration/productivebees.js) only runs in worlds.<world>.dimension: the bees can live on Earth, but their titanium only comes out on the Moon and their tungsten only on Mars.",
-    "watched: worlds.<world>.watched is what the smoke test (tools/test/overlay/kubejs/server_scripts/gg_test_moon.js) looks for. Every stripped recipe must be gone and its replacement must exist without the outputs, and no recipe of the loaded pack may give a watched output from inputs that hold none (inputPattern), except recipes that only run off Earth (a dimension condition of another world), recycling, and the late lines named in allowedLate."
+    "watched: worlds.<world>.watched is what the smoke test (tools/test/overlay/kubejs/server_scripts/gg_test_moon.js) looks for. Every stripped recipe must be gone and its replacement must exist without the outputs, and no recipe of the loaded pack may give a watched output from inputs that hold none (inputPattern; heavy water, tritiated or concentrated too, carries the Martian deuterium), except recipes that only run off Earth (a dimension condition of another world), recycling, and the late lines named in allowedLate."
   ],
   "worlds": {
     "moon": {
@@ -24,7 +24,7 @@
       "watched": {
         "items": ["gtceu:tungsten_dust", "gtceu:small_tungsten_dust", "gtceu:tiny_tungsten_dust", "gtceu:raw_tungsten", "gtceu:tungsten_ingot", "gtceu:scheelite_dust", "gtceu:small_scheelite_dust", "gtceu:tiny_scheelite_dust", "gtceu:raw_scheelite", "gtceu:tungstate_dust", "gtceu:small_tungstate_dust", "gtceu:tiny_tungstate_dust", "gtceu:raw_tungstate", "gtceu:samarium_dust", "gtceu:small_samarium_dust", "gtceu:tiny_samarium_dust", "gtceu:samarium_ingot"],
         "fluids": ["gtceu:deuterium", "gtceu:tungsten", "gtceu:samarium"],
-        "inputPattern": "tungst|scheelite|samari|deuterium"
+        "inputPattern": "tungst|scheelite|samari|deuterium|heavy_water"
       }
     }
   },
