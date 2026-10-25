@@ -60,15 +60,15 @@ function dumpToolbox() {
 // in the book. Update both numbers when a chapter changes (node tools/quests/lint.mjs prints them per chapter).
 var GG_QUESTS_EXPECTED = {
   storage: [21, 21],
-  applied_energistics: [41, 42],
+  applied_energistics: [42, 43],
   productive_bees: [12, 14],
   travel_and_teams: [16, 15],
   workshop: [17, 16],
   welcome: [16, 15],
   steam_age: [47, 53],
-  lv_age: [51, 52],
-  mv_age: [47, 60],
-  hv_age: [42, 51],
+  lv_age: [52, 53],
+  mv_age: [54, 67],
+  hv_age: [43, 53],
   ev_age: [12, 14]
 }
 // chapters that sit outside every chapter group on purpose (shown above the groups)
