@@ -146,7 +146,7 @@
         if (ids[v.id]) problems.push(t.name + ' vein id ' + v.id + ' is already a vein of another table')
         ids[v.id] = true
         if (v.kind !== 'ore') problems.push(v.id + ': kind ' + v.kind)
-        if (v.layer !== (t.prefix === 'endstone' ? 'endstone' : t.prefix)) problems.push(v.id + ': layer ' + v.layer)
+        if (v.layer !== t.prefix) problems.push(v.id + ': layer ' + v.layer)
         var total = v.ores.reduce(function (s, o) { return s + o.share }, 0)
         if (Math.abs(total - 1) > 1e-9) problems.push(v.id + ': shares add up to ' + total)
         v.ores.forEach(function (o) {
