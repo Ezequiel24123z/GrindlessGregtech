@@ -1,0 +1,1517 @@
+{
+	autofocus_id: "58BB6C2D616F63C2"
+	consume_items: false
+	default_hide_dependency_lines: false
+	default_quest_shape: ""
+	filename: "pl_ev"
+	group: "3027186E3042DDFB"
+	icon: "gtceu:regolith_cell"
+	id: "13353673592F6D0F"
+	order_index: 4
+	progression_mode: "flexible"
+	quest_links: [
+		{
+			id: "5F6C763A605C0409"
+			linked_quest: "5448FA5C814B1DBD"
+			shape: "rsquare"
+			x: 4.5d
+			y: 12.75d
+		}
+		{
+			id: "3BB71360206D221E"
+			linked_quest: "7D28AEC912902688"
+			shape: "rsquare"
+			x: 0.5d
+			y: 32.25d
+		}
+	]
+	quests: [
+		{
+			icon: "grindless:vein_sample_ilmenite_moon"
+			id: "58BB6C2D616F63C2"
+			shape: "rsquare"
+			size: 1.0d
+			subtitle: "Two lunar ores and an empty probe"
+			tasks: [
+				{ id: "5DBA22292368AC1C", item: "grindless:vein_sample_ilmenite_moon", optional_task: true, type: "item" }
+				{ id: "1EECE843E507C269", type: "checkmark" }
+			]
+			title: "Lunar Ilmenite Sample"
+			x: 0.5d
+			y: 3.5d
+		}
+		{
+			icon: "grindless:titanium_drill_bit"
+			id: "75CE85BF3CEDD20B"
+			shape: "rsquare"
+			size: 1.0d
+			subtitle: "EV lathe"
+			tasks: [
+				{ id: "72CE14DEBD2AEBDD", item: "grindless:titanium_drill_bit", optional_task: true, type: "item" }
+				{ id: "5F7ADB07021C58D9", type: "checkmark" }
+			]
+			title: "Titanium Drill Bit"
+			x: 0.5d
+			y: 5.0d
+		}
+		{
+			dependencies: ["58BB6C2D616F63C2", "75CE85BF3CEDD20B"]
+			description: ["Three legs on sintered footings and solar wings that cut its power bill by day. It drills dry, or faster with liquid nitrogen."]
+			icon: "gtceu:ev_vein_drill"
+			id: "33F86304A50381E2"
+			shape: "gear"
+			size: 1.5d
+			tasks: [
+				{ id: "569E6CDC0FBAEFA2", item: "gtceu:ev_vein_drill", optional_task: true, type: "item" }
+				{ id: "5FBD65D6AA6FBFD9", type: "checkmark" }
+			]
+			title: "EV Tripod Drill"
+			x: 2.5d
+			y: 4.25d
+		}
+		{
+			dependencies: ["33F86304A50381E2"]
+			icon: "gtceu:raw_ilmenite"
+			id: "55E97C9F1449D421"
+			size: 1.0d
+			subtitle: "The only titanium there is"
+			tasks: [
+				{ id: "375424788F152F9B", item: "gtceu:raw_ilmenite", optional_task: true, type: "item" }
+				{ id: "1AA65C891396298B", type: "checkmark" }
+			]
+			title: "Raw Ilmenite"
+			x: 4.5d
+			y: 3.5d
+		}
+		{
+			dependencies: ["33F86304A50381E2"]
+			icon: "gcyr:moon_cobblestone"
+			id: "13E54C79DB1880ED"
+			size: 1.0d
+			tasks: [
+				{ id: "1C9296B62B64FA9F", item: "gcyr:moon_cobblestone", optional_task: true, type: "item" }
+				{ id: "5F1F3F523ADA6AF0", type: "checkmark" }
+			]
+			title: "Moon Cobblestone"
+			x: 4.5d
+			y: 5.0d
+		}
+		{
+			dependencies: ["55E97C9F1449D421"]
+			icon: "gtceu:ilmenite_dust"
+			id: "1DD6632E2288B34B"
+			size: 1.0d
+			subtitle: "Ore plant"
+			tasks: [
+				{ id: "721F2C4029CFD700", item: "gtceu:ilmenite_dust", optional_task: true, type: "item" }
+				{ id: "33953538A9748D20", type: "checkmark" }
+			]
+			title: "Ilmenite Dust"
+			x: 6.5d
+			y: 3.5d
+		}
+		{
+			dependencies: ["13E54C79DB1880ED"]
+			icon: "gtceu:lunar_regolith_dust"
+			id: "117C937B930C0DF3"
+			size: 1.0d
+			subtitle: "Any macerator"
+			tasks: [
+				{ id: "315EB438E448CA6C", item: "gtceu:lunar_regolith_dust", optional_task: true, type: "item" }
+				{ id: "5178B4472FBE4C2B", type: "checkmark" }
+			]
+			title: "Lunar Regolith Dust"
+			x: 6.5d
+			y: 5.0d
+		}
+		{
+			icon: "grindless:platinum_electrode"
+			id: "5B8D143D02672906"
+			shape: "rsquare"
+			size: 1.0d
+			subtitle: "From the platinum plant; wears out slowly"
+			tasks: [
+				{ id: "32FB07B68877C727", item: "grindless:platinum_electrode", optional_task: true, type: "item" }
+				{ id: "181C0319E4558688", type: "checkmark" }
+			]
+			title: "Platinum Electrode"
+			x: 6.5d
+			y: 2.0d
+		}
+		{
+			icon: "grindless:molten_salt_charge"
+			id: "1A482E4D14C3DB9A"
+			shape: "rsquare"
+			size: 1.0d
+			subtitle: "Calcium chloride; never used up"
+			tasks: [
+				{ id: "3354033AD8000A6F", item: "grindless:molten_salt_charge", optional_task: true, type: "item" }
+				{ id: "5C223D02313D66FE", type: "checkmark" }
+			]
+			title: "Molten Salt Charge"
+			x: 6.5d
+			y: 6.5d
+		}
+		{
+			dependencies: ["1DD6632E2288B34B", "117C937B930C0DF3", "5B8D143D02672906", "1A482E4D14C3DB9A"]
+			description: [
+				"Melts the Moon and runs a current through it: oxygen, metals, gases and bricks, all from dirt."
+				"Titanium comes out without a gram of chlorine."
+			]
+			icon: "gtceu:regolith_cell"
+			id: "160CAC8253483B6F"
+			shape: "gear"
+			size: 1.5d
+			tasks: [
+				{ id: "78A9C5F1A1D4E33E", item: "gtceu:regolith_cell", optional_task: true, type: "item" }
+				{ id: "1EBF8137111FC670", type: "checkmark" }
+			]
+			title: "Regolith Cell"
+			x: 8.5d
+			y: 4.25d
+		}
+		{
+			dependencies: ["160CAC8253483B6F"]
+			icon: "gtceu:titanium_ingot"
+			id: "7A2E1E77C6E8D110"
+			size: 1.25d
+			tasks: [
+				{ id: "1F94CDE52054C251", item: "gtceu:titanium_ingot", optional_task: true, type: "item" }
+				{ id: "151FE2B7AA3C22A6", type: "checkmark" }
+			]
+			title: "Titanium"
+			x: 11.0d
+			y: 0.75d
+		}
+		{
+			dependencies: ["160CAC8253483B6F"]
+			icon: "gtceu:oxygen_bucket"
+			id: "1458BF1626921294"
+			size: 1.0d
+			tasks: [
+				{ id: "166ECEFE436902FB", item: "gtceu:oxygen_bucket", optional_task: true, type: "item" }
+				{ id: "7CEBFAD7DACCFFF2", type: "checkmark" }
+			]
+			title: "Oxygen"
+			x: 11.0d
+			y: 2.25d
+		}
+		{
+			dependencies: ["160CAC8253483B6F"]
+			icon: "gtceu:nitrogen_bucket"
+			id: "785C6D2A044413EE"
+			size: 1.0d
+			tasks: [
+				{ id: "5FE461250F5BF81D", item: "gtceu:nitrogen_bucket", optional_task: true, type: "item" }
+				{ id: "78BB123136A34345", type: "checkmark" }
+			]
+			title: "Nitrogen"
+			x: 11.0d
+			y: 3.5d
+		}
+		{
+			dependencies: ["160CAC8253483B6F"]
+			icon: "gtceu:helium_bucket"
+			id: "76112F400A2DF852"
+			size: 1.0d
+			tasks: [
+				{ id: "5337A60539836607", item: "gtceu:helium_bucket", optional_task: true, type: "item" }
+				{ id: "3B3564BD9491F2D7", type: "checkmark" }
+			]
+			title: "Helium"
+			x: 11.0d
+			y: 4.75d
+		}
+		{
+			dependencies: ["160CAC8253483B6F"]
+			icon: "gtceu:helium_3_bucket"
+			id: "32DB086A900C3F2A"
+			size: 0.75d
+			subtitle: "Saved for fusion"
+			tasks: [
+				{ id: "32D47E838A2C1CB9", item: "gtceu:helium_3_bucket", optional_task: true, type: "item" }
+				{ id: "3F16307268358CCF", type: "checkmark" }
+			]
+			title: "Helium-3"
+			x: 11.0d
+			y: 6.0d
+		}
+		{
+			dependencies: ["160CAC8253483B6F"]
+			icon: "grindless:sintered_regolith"
+			id: "539C9725CCAEB1D4"
+			size: 1.25d
+			subtitle: "Every lunar structure stands on it"
+			tasks: [
+				{ id: "7507400D18D73347", item: "grindless:sintered_regolith", optional_task: true, type: "item" }
+				{ id: "56CF374630D2C5DA", type: "checkmark" }
+			]
+			title: "Sintered Regolith"
+			x: 11.0d
+			y: 7.5d
+		}
+		{
+			dependencies: ["1458BF1626921294", "785C6D2A044413EE", "76112F400A2DF852"]
+			description: ["Radiators dump heat into the black sky. A run that starts at night costs half, so the base liquefies after sunset."]
+			icon: "gtceu:cryogenic_plant"
+			id: "1AAC58BA57B8E7A1"
+			shape: "gear"
+			size: 1.5d
+			tasks: [
+				{ id: "7923C61BE19C7CE2", item: "gtceu:cryogenic_plant", optional_task: true, type: "item" }
+				{ id: "79493C584E7F0217", type: "checkmark" }
+			]
+			title: "Cryogenic Plant"
+			x: 13.0d
+			y: 3.5d
+		}
+		{
+			dependencies: ["1AAC58BA57B8E7A1"]
+			icon: "gtceu:liquid_oxygen_bucket"
+			id: "11DC5691F1CA0B91"
+			size: 0.75d
+			subtitle: "Kept for IV's engines"
+			tasks: [
+				{ id: "741D45DC08BBBB23", item: "gtceu:liquid_oxygen_bucket", optional_task: true, type: "item" }
+				{ id: "390C7D25950982BE", type: "checkmark" }
+			]
+			title: "Liquid Oxygen"
+			x: 15.0d
+			y: 2.25d
+		}
+		{
+			dependencies: ["1AAC58BA57B8E7A1"]
+			icon: "gtceu:liquid_nitrogen_bucket"
+			id: "5642C3DCC05983B2"
+			size: 1.0d
+			tasks: [
+				{ id: "173A2858569BC680", item: "gtceu:liquid_nitrogen_bucket", optional_task: true, type: "item" }
+				{ id: "3757BCDDFA194C2E", type: "checkmark" }
+			]
+			title: "Liquid Nitrogen"
+			x: 15.0d
+			y: 3.5d
+		}
+		{
+			dependencies: ["1AAC58BA57B8E7A1"]
+			icon: "gtceu:liquid_helium_bucket"
+			id: "7C00BCD35855B841"
+			size: 0.75d
+			subtitle: "Kept for IV's hottest ingots"
+			tasks: [
+				{ id: "317EDCD253495F03", item: "gtceu:liquid_helium_bucket", optional_task: true, type: "item" }
+				{ id: "1CF3B644B5D0ED0D", type: "checkmark" }
+			]
+			title: "Liquid Helium"
+			x: 15.0d
+			y: 4.75d
+		}
+		{
+			dependencies: ["5642C3DCC05983B2"]
+			icon: "gtceu:ev_vein_drill"
+			id: "368ECF695588E8AC"
+			shape: "circle"
+			size: 0.75d
+			subtitle: "Back to the drill: half again the ore"
+			tasks: [
+				{ id: "148C42539BAF824D", item: "gtceu:ev_vein_drill", optional_task: true, type: "item" }
+				{ id: "32D6C1F66C755A04", type: "checkmark" }
+			]
+			title: "Tripod, Cooled"
+			x: 17.0d
+			y: 3.5d
+		}
+		{
+			icon: "gtceu:ilmenite_dust"
+			id: "39212E20005B180A"
+			shape: "rsquare"
+			size: 1.0d
+			subtitle: "Lunar, down the bridge"
+			tasks: [
+				{ id: "72C75BBB76E92EEA", item: "gtceu:ilmenite_dust", optional_task: true, type: "item" }
+				{ id: "7AE959264E56BBB8", type: "checkmark" }
+			]
+			title: "Ilmenite Dust"
+			x: 0.5d
+			y: 14.25d
+		}
+		{
+			icon: "gtceu:carbon_dust"
+			id: "5660B2FA9A5B9183"
+			shape: "rsquare"
+			size: 1.0d
+			tasks: [
+				{ id: "1560708020AEFA1D", item: "gtceu:carbon_dust", optional_task: true, type: "item" }
+				{ id: "5903DAAB442A8129", type: "checkmark" }
+			]
+			title: "Carbon Dust"
+			x: 0.5d
+			y: 15.75d
+		}
+		{
+			dependencies: ["39212E20005B180A", "5660B2FA9A5B9183"]
+			icon: "gtceu:electric_blast_furnace"
+			id: "3C775E595179791B"
+			shape: "gear"
+			size: 1.25d
+			tasks: [
+				{ id: "760AC39272618555", item: "gtceu:electric_blast_furnace", optional_task: true, type: "item" }
+				{ id: "73147D654FAD6D67", type: "checkmark" }
+			]
+			title: "Electric Blast Furnace"
+			x: 2.5d
+			y: 15.0d
+		}
+		{
+			dependencies: ["3C775E595179791B"]
+			icon: "gtceu:rutile_dust"
+			id: "11F7845ED1F2EA24"
+			size: 1.0d
+			tasks: [
+				{ id: "5158E3920F0AE84E", item: "gtceu:rutile_dust", optional_task: true, type: "item" }
+				{ id: "1B593900E2A4B536", type: "checkmark" }
+			]
+			title: "Rutile"
+			x: 4.5d
+			y: 14.25d
+		}
+		{
+			dependencies: ["3C775E595179791B"]
+			icon: "gtceu:wrought_iron_ingot"
+			id: "75162C544B395673"
+			size: 0.75d
+			subtitle: "The iron in the ilmenite"
+			tasks: [
+				{ id: "3044B6674BB3AEDC", item: "gtceu:wrought_iron_ingot", optional_task: true, type: "item" }
+				{ id: "549618025E06DA09", type: "checkmark" }
+			]
+			title: "Wrought Iron"
+			x: 4.5d
+			y: 15.75d
+		}
+		{
+			dependencies: ["11F7845ED1F2EA24", "5448FA5C814B1DBD"]
+			icon: "gtceu:titanium_tetrachloride_bucket"
+			id: "32504C3C1F5AE292"
+			size: 1.0d
+			subtitle: "Chemical reactor, with carbon"
+			tasks: [
+				{ id: "12254D8B1F9A8BA9", item: "gtceu:titanium_tetrachloride_bucket", optional_task: true, type: "item" }
+				{ id: "13BEFB88E68E1C93", type: "checkmark" }
+			]
+			title: "Titanium Tetrachloride"
+			x: 6.5d
+			y: 14.25d
+		}
+		{
+			dependencies: ["11F7845ED1F2EA24"]
+			icon: "gtceu:carbon_monoxide_bucket"
+			id: "7C05E13157F03FE3"
+			size: 0.75d
+			subtitle: "Toxic: methanol, or a tank"
+			tasks: [
+				{ id: "54CD6962E705E397", item: "gtceu:carbon_monoxide_bucket", optional_task: true, type: "item" }
+				{ id: "7C98E0F889787BA8", type: "checkmark" }
+			]
+			title: "Carbon Monoxide"
+			x: 6.5d
+			y: 15.75d
+		}
+		{
+			icon: "gtceu:magnesium_dust"
+			id: "5F2A286E380E4088"
+			shape: "rsquare"
+			size: 1.0d
+			tasks: [
+				{ id: "5F0D626410819D6A", item: "gtceu:magnesium_dust", optional_task: true, type: "item" }
+				{ id: "75A2B005D1B16900", type: "checkmark" }
+			]
+			title: "Magnesium"
+			x: 6.5d
+			y: 12.75d
+		}
+		{
+			dependencies: ["32504C3C1F5AE292", "5F2A286E380E4088"]
+			description: ["The Kroll process: magnesium strips the chlorine off. The regolith cell does the same job in one step, but only on the Moon."]
+			icon: "gtceu:hot_titanium_ingot"
+			id: "7FFC26BFA9A516DD"
+			size: 1.0d
+			subtitle: "The EBF again"
+			tasks: [
+				{ id: "75A161853A3724DC", item: "gtceu:hot_titanium_ingot", optional_task: true, type: "item" }
+				{ id: "198852D16BC4A889", type: "checkmark" }
+			]
+			title: "Hot Titanium Ingot"
+			x: 8.5d
+			y: 14.25d
+		}
+		{
+			dependencies: ["32504C3C1F5AE292"]
+			icon: "gtceu:magnesium_chloride_dust"
+			id: "7887D1CC5390C96D"
+			size: 1.0d
+			tasks: [
+				{ id: "57CC1C1D6B5DBCC7", item: "gtceu:magnesium_chloride_dust", optional_task: true, type: "item" }
+				{ id: "5BEF7D4831B1F196", type: "checkmark" }
+			]
+			title: "Magnesium Chloride"
+			x: 8.5d
+			y: 15.75d
+		}
+		{
+			dependencies: ["7887D1CC5390C96D"]
+			icon: "gtceu:magnesium_dust"
+			id: "1924A26CBC50BE37"
+			shape: "circle"
+			size: 0.75d
+			subtitle: "Sodium takes the chlorine; the salt goes back to the electrolyzer"
+			tasks: [
+				{ id: "31BB496C93C862F4", item: "gtceu:magnesium_dust", optional_task: true, type: "item" }
+				{ id: "5AA3A021F9F9C22B", type: "checkmark" }
+			]
+			title: "Magnesium, Back"
+			x: 10.5d
+			y: 15.75d
+		}
+		{
+			dependencies: ["7FFC26BFA9A516DD"]
+			description: ["Rolls the ingot while it still glows, so the freezer and the bender sit this one out. The cooling water leaves as steam."]
+			icon: "gtceu:hot_strip_mill"
+			id: "744843BADCF43DFB"
+			shape: "gear"
+			size: 1.5d
+			tasks: [
+				{ id: "3A0E7CD3BC7B90AF", item: "gtceu:hot_strip_mill", optional_task: true, type: "item" }
+				{ id: "1639600285015326", type: "checkmark" }
+			]
+			title: "Hot Strip Mill"
+			x: 10.5d
+			y: 12.0d
+		}
+		{
+			dependencies: ["7FFC26BFA9A516DD"]
+			icon: "gtceu:vacuum_freezer"
+			id: "30510EDD0C3447B6"
+			shape: "gear"
+			size: 1.25d
+			tasks: [
+				{ id: "5EB45DD439639E5B", item: "gtceu:vacuum_freezer", optional_task: true, type: "item" }
+				{ id: "7DF1A31B9B6BA7D9", type: "checkmark" }
+			]
+			title: "Vacuum Freezer"
+			x: 10.5d
+			y: 14.25d
+		}
+		{
+			dependencies: ["744843BADCF43DFB"]
+			icon: "gtceu:titanium_plate"
+			id: "5A870EC19B1D31C3"
+			size: 1.25d
+			subtitle: "Or rods, or foil"
+			tasks: [
+				{ id: "3F107B5959DEDE11", item: "gtceu:titanium_plate", optional_task: true, type: "item" }
+				{ id: "3FE00597401DF937", type: "checkmark" }
+			]
+			title: "Titanium Plate"
+			x: 12.5d
+			y: 11.25d
+		}
+		{
+			dependencies: ["744843BADCF43DFB"]
+			icon: "gtceu:steam_bucket"
+			id: "1467A41E059F5259"
+			size: 0.75d
+			subtitle: "A turbine takes it, or the mill stops"
+			tasks: [
+				{ id: "71350AFB9CFC1CBD", item: "gtceu:steam_bucket", optional_task: true, type: "item" }
+				{ id: "7AFFD65CC18475A2", type: "checkmark" }
+			]
+			title: "Steam"
+			x: 12.5d
+			y: 12.5d
+		}
+		{
+			dependencies: ["30510EDD0C3447B6"]
+			icon: "gtceu:titanium_ingot"
+			id: "5BFFD26B02B99028"
+			size: 1.25d
+			tasks: [
+				{ id: "1F369C2B2609AF36", item: "gtceu:titanium_ingot", optional_task: true, type: "item" }
+				{ id: "381EB6E68D30FF58", type: "checkmark" }
+			]
+			title: "Titanium"
+			x: 12.5d
+			y: 14.25d
+		}
+		{
+			icon: "gtceu:purified_pentlandite_ore"
+			id: "3D068C37D802CF2A"
+			shape: "rsquare"
+			size: 1.0d
+			subtitle: "Or purified chalcopyrite"
+			tasks: [
+				{ id: "77008076C376876E", item: "gtceu:purified_pentlandite_ore", optional_task: true, type: "item" }
+				{ id: "1052AE873BF03774", type: "checkmark" }
+			]
+			title: "Purified Pentlandite"
+			x: 16.75d
+			y: 14.25d
+		}
+		{
+			icon: "grindless:platinum_electrode"
+			id: "7EFB2DA8E46C8586"
+			shape: "rsquare"
+			size: 1.0d
+			subtitle: "The first ones use End platinum"
+			tasks: [
+				{ id: "57C9E6B28D21C829", item: "grindless:platinum_electrode", optional_task: true, type: "item" }
+				{ id: "14867AE6F4909D5A", type: "checkmark" }
+			]
+			title: "Platinum Electrode"
+			x: 16.75d
+			y: 15.75d
+		}
+		{
+			dependencies: ["3D068C37D802CF2A", "7EFB2DA8E46C8586"]
+			description: [
+				"About forty recipes of a dozen machines, folded into five, with the toxic loops kept inside."
+				"Leach first, then separate: the circuit picks."
+			]
+			icon: "gtceu:platinum_plant"
+			id: "12AE4EEEFAEB2EB9"
+			shape: "gear"
+			size: 1.5d
+			tasks: [
+				{ id: "707B981D3CDB73B4", item: "gtceu:platinum_plant", optional_task: true, type: "item" }
+				{ id: "7BE24A97907BCDA9", type: "checkmark" }
+			]
+			title: "Platinum Plant"
+			x: 18.75d
+			y: 15.0d
+		}
+		{
+			dependencies: ["12AE4EEEFAEB2EB9"]
+			icon: "gtceu:nickel_dust"
+			id: "5488DA7691336FB8"
+			size: 0.75d
+			subtitle: "Or copper, from chalcopyrite"
+			tasks: [
+				{ id: "1B487027AB401BCB", item: "gtceu:nickel_dust", optional_task: true, type: "item" }
+				{ id: "501032D66B5E7952", type: "checkmark" }
+			]
+			title: "Nickel"
+			x: 20.75d
+			y: 12.75d
+		}
+		{
+			dependencies: ["12AE4EEEFAEB2EB9"]
+			icon: "gtceu:platinum_group_sludge_dust"
+			id: "3462E72BFB4DFB86"
+			size: 1.0d
+			tasks: [
+				{ id: "50CE086DFE837A21", item: "gtceu:platinum_group_sludge_dust", optional_task: true, type: "item" }
+				{ id: "7CE1366D79C082CE", type: "checkmark" }
+			]
+			title: "Platinum Group Sludge"
+			x: 20.75d
+			y: 14.25d
+		}
+		{
+			dependencies: ["12AE4EEEFAEB2EB9"]
+			icon: "gtceu:sulfuric_acid_bucket"
+			id: "575FF5284D0C4CF0"
+			size: 0.75d
+			subtitle: "The leach hands its acid back"
+			tasks: [
+				{ id: "36A306F04107DD88", item: "gtceu:sulfuric_acid_bucket", optional_task: true, type: "item" }
+				{ id: "11375B966070DE9E", type: "checkmark" }
+			]
+			title: "Sulfuric Acid"
+			x: 20.75d
+			y: 15.75d
+		}
+		{
+			dependencies: ["3462E72BFB4DFB86"]
+			icon: "gtceu:platinum_dust"
+			id: "5AF85FE2C9DA1793"
+			size: 1.0d
+			tasks: [
+				{ id: "7FDD4842821C1A73", item: "gtceu:platinum_dust", optional_task: true, type: "item" }
+				{ id: "1524A3FE83227D05", type: "checkmark" }
+			]
+			title: "Platinum"
+			x: 23.25d
+			y: 11.0d
+		}
+		{
+			dependencies: ["3462E72BFB4DFB86"]
+			icon: "gtceu:palladium_dust"
+			id: "56280033A496EDB1"
+			size: 1.0d
+			subtitle: "Through palladium-rich ammonia"
+			tasks: [
+				{ id: "381F66B7032D9A67", item: "gtceu:palladium_dust", optional_task: true, type: "item" }
+				{ id: "757C871A07C5524F", type: "checkmark" }
+			]
+			title: "Palladium"
+			x: 23.25d
+			y: 12.25d
+		}
+		{
+			dependencies: ["3462E72BFB4DFB86"]
+			icon: "gtceu:rhodium_dust"
+			id: "5DC3250C7363995F"
+			size: 1.0d
+			subtitle: "From the slag"
+			tasks: [
+				{ id: "73C77A5E62448376", item: "gtceu:rhodium_dust", optional_task: true, type: "item" }
+				{ id: "1B8C9376813373AF", type: "checkmark" }
+			]
+			title: "Rhodium"
+			x: 23.25d
+			y: 13.5d
+		}
+		{
+			dependencies: ["3462E72BFB4DFB86"]
+			icon: "gtceu:ruthenium_dust"
+			id: "3757C105262ED912"
+			size: 1.0d
+			subtitle: "From the slag too"
+			tasks: [
+				{ id: "1B52DFE3E1BD33D4", item: "gtceu:ruthenium_dust", optional_task: true, type: "item" }
+				{ id: "5C6E7377E50C2F07", type: "checkmark" }
+			]
+			title: "Ruthenium"
+			x: 23.25d
+			y: 14.75d
+		}
+		{
+			dependencies: ["3462E72BFB4DFB86"]
+			icon: "gtceu:nitrogen_dioxide_bucket"
+			id: "322011027FC0750F"
+			size: 0.75d
+			subtitle: "Back to nitric acid"
+			tasks: [
+				{ id: "3E920E4D8F800567", item: "gtceu:nitrogen_dioxide_bucket", optional_task: true, type: "item" }
+				{ id: "7F2794E1E5FAAE8C", type: "checkmark" }
+			]
+			title: "Nitrogen Dioxide"
+			x: 23.25d
+			y: 16.0d
+		}
+		{
+			dependencies: ["3462E72BFB4DFB86"]
+			icon: "gtceu:calcium_chloride_dust"
+			id: "1723E88B75B28F76"
+			size: 0.75d
+			subtitle: "The lunar cell's salt charge"
+			tasks: [
+				{ id: "1BD4916F99A8E1BC", item: "gtceu:calcium_chloride_dust", optional_task: true, type: "item" }
+				{ id: "7D5F2C4EEE641CFD", type: "checkmark" }
+			]
+			title: "Calcium Chloride"
+			x: 23.25d
+			y: 17.25d
+		}
+		{
+			dependencies: ["5AF85FE2C9DA1793"]
+			icon: "grindless:platinum_electrode"
+			id: "3713F22BF4D726FE"
+			shape: "circle"
+			size: 0.75d
+			subtitle: "The plant makes its own"
+			tasks: [
+				{ id: "78A10652FB4782B2", item: "grindless:platinum_electrode", optional_task: true, type: "item" }
+				{ id: "718241BC2F9090CC", type: "checkmark" }
+			]
+			title: "Electrodes, Back"
+			x: 25.25d
+			y: 11.0d
+		}
+		{
+			dependencies: ["3757C105262ED912"]
+			icon: "grindless:ruthenium_catalyst"
+			id: "7D20815FCB9301DF"
+			size: 1.0d
+			subtitle: "Mars' atmosphere processor"
+			tasks: [
+				{ id: "376036E368123A3B", item: "grindless:ruthenium_catalyst", optional_task: true, type: "item" }
+				{ id: "781F546B7079966B", type: "checkmark" }
+			]
+			title: "Ruthenium Catalyst"
+			x: 25.25d
+			y: 14.75d
+		}
+		{
+			icon: "minecraft:water_bucket"
+			id: "14CFDAF4B994F040"
+			shape: "rsquare"
+			size: 1.0d
+			subtitle: "From home, over the bridge"
+			tasks: [
+				{ id: "1A573942CB13ECA2", item: "minecraft:water_bucket", optional_task: true, type: "item" }
+				{ id: "51A97A74D996D753", type: "checkmark" }
+			]
+			title: "Water"
+			x: 0.5d
+			y: 20.75d
+		}
+		{
+			icon: "grindless:ruthenium_catalyst"
+			id: "16DA0888E841061F"
+			shape: "rsquare"
+			size: 1.0d
+			subtitle: "From the platinum plant"
+			tasks: [
+				{ id: "5BF6E28A9C816456", item: "grindless:ruthenium_catalyst", optional_task: true, type: "item" }
+				{ id: "5A43CE59FDC22BE4", type: "checkmark" }
+			]
+			title: "Ruthenium Catalyst"
+			x: 0.5d
+			y: 22.25d
+		}
+		{
+			dependencies: ["14CFDAF4B994F040", "16DA0888E841061F"]
+			description: ["Martian carbon dioxide plus water over ruthenium: methane and oxygen. It only works on Mars, because only Mars has that air."]
+			icon: "gtceu:atmosphere_processor"
+			id: "5B4590ACF2BECB84"
+			shape: "gear"
+			size: 1.5d
+			tasks: [
+				{ id: "12EBC01FD05F3FBE", item: "gtceu:atmosphere_processor", optional_task: true, type: "item" }
+				{ id: "7DABF636DE848280", type: "checkmark" }
+			]
+			title: "Atmosphere Processor"
+			x: 2.5d
+			y: 21.5d
+		}
+		{
+			dependencies: ["5B4590ACF2BECB84"]
+			icon: "gtceu:methane_bucket"
+			id: "3AF5BDE984515B4E"
+			size: 1.0d
+			tasks: [
+				{ id: "57E44778FF24745C", item: "gtceu:methane_bucket", optional_task: true, type: "item" }
+				{ id: "3F1BC3071588494A", type: "checkmark" }
+			]
+			title: "Methane"
+			x: 4.5d
+			y: 20.75d
+		}
+		{
+			dependencies: ["5B4590ACF2BECB84"]
+			icon: "gtceu:oxygen_bucket"
+			id: "5E5F11FCACFE7F78"
+			size: 1.0d
+			subtitle: "Suits, too"
+			tasks: [
+				{ id: "5DCE601E6B0AE6B0", item: "gtceu:oxygen_bucket", optional_task: true, type: "item" }
+				{ id: "7C4FACC16F85F8D3", type: "checkmark" }
+			]
+			title: "Oxygen"
+			x: 4.5d
+			y: 22.25d
+		}
+		{
+			dependencies: ["3AF5BDE984515B4E", "5E5F11FCACFE7F78"]
+			description: ["Fuel that brings its own oxygen, so it burns where nothing else will."]
+			icon: "gtceu:methalox_bucket"
+			id: "1B870410FCE22512"
+			size: 1.0d
+			subtitle: "Mixer"
+			tasks: [
+				{ id: "183557A8916B040D", item: "gtceu:methalox_bucket", optional_task: true, type: "item" }
+				{ id: "1E2F684818CF8F4F", type: "checkmark" }
+			]
+			title: "Methalox"
+			x: 6.5d
+			y: 21.5d
+		}
+		{
+			dependencies: ["1B870410FCE22512"]
+			icon: "gtceu:gas_large_turbine"
+			id: "163AAB30757FFDDE"
+			shape: "gear"
+			size: 1.25d
+			subtitle: "Mars power, at a small loss"
+			tasks: [
+				{ id: "5D412B847987F0C3", item: "gtceu:gas_large_turbine", optional_task: true, type: "item" }
+				{ id: "523F8C044A51A71D", type: "checkmark" }
+			]
+			title: "Large Gas Turbine"
+			x: 8.5d
+			y: 21.5d
+		}
+		{
+			icon: "grindless:vein_sample_scheelite_mars"
+			id: "1EA1B137A56C42FD"
+			shape: "rsquare"
+			size: 1.0d
+			tasks: [
+				{ id: "584FD6451303C34F", item: "grindless:vein_sample_scheelite_mars", optional_task: true, type: "item" }
+				{ id: "1022746EB4A3CFE6", type: "checkmark" }
+			]
+			title: "Martian Scheelite Sample"
+			x: 12.75d
+			y: 20.75d
+		}
+		{
+			icon: "grindless:titanium_drill_bit"
+			id: "3631BC84DC93BC54"
+			shape: "rsquare"
+			size: 1.0d
+			tasks: [
+				{ id: "3C6451286266828F", item: "grindless:titanium_drill_bit", optional_task: true, type: "item" }
+				{ id: "729DBFF5AFC24C81", type: "checkmark" }
+			]
+			title: "Titanium Drill Bit"
+			x: 12.75d
+			y: 22.25d
+		}
+		{
+			dependencies: ["1EA1B137A56C42FD", "3631BC84DC93BC54"]
+			icon: "gtceu:ev_vein_drill"
+			id: "3881669AE0B6852F"
+			shape: "gear"
+			size: 1.5d
+			subtitle: "On Mars this time"
+			tasks: [
+				{ id: "7472FC141C673CD8", item: "gtceu:ev_vein_drill", optional_task: true, type: "item" }
+				{ id: "56CF6445478FFCD4", type: "checkmark" }
+			]
+			title: "EV Tripod Drill"
+			x: 14.75d
+			y: 21.5d
+		}
+		{
+			dependencies: ["3881669AE0B6852F"]
+			icon: "gtceu:raw_scheelite"
+			id: "12EABC527EF3070D"
+			size: 1.0d
+			subtitle: "Only Mars has it"
+			tasks: [
+				{ id: "7908F815897115A7", item: "gtceu:raw_scheelite", optional_task: true, type: "item" }
+				{ id: "7BA25A16EAF68353", type: "checkmark" }
+			]
+			title: "Raw Scheelite"
+			x: 16.75d
+			y: 21.5d
+		}
+		{
+			dependencies: ["12EABC527EF3070D"]
+			icon: "gtceu:scheelite_dust"
+			id: "38C493F7031D6421"
+			size: 1.0d
+			subtitle: "Ore plant"
+			tasks: [
+				{ id: "5CA5FDA36B565C9F", item: "gtceu:scheelite_dust", optional_task: true, type: "item" }
+				{ id: "759DC5B5F3A470BA", type: "checkmark" }
+			]
+			title: "Scheelite Dust"
+			x: 18.75d
+			y: 21.5d
+		}
+		{
+			icon: "gtceu:hydrochloric_acid_bucket"
+			id: "7BF504D7B6DE7CCB"
+			shape: "rsquare"
+			size: 1.0d
+			tasks: [
+				{ id: "5FF90069DAA0872F", item: "gtceu:hydrochloric_acid_bucket", optional_task: true, type: "item" }
+				{ id: "3310BE35D7D20688", type: "checkmark" }
+			]
+			title: "Hydrochloric Acid"
+			x: 18.75d
+			y: 23.0d
+		}
+		{
+			dependencies: ["38C493F7031D6421", "7BF504D7B6DE7CCB"]
+			icon: "gtceu:tungstic_acid_dust"
+			id: "7B75496B365E06CE"
+			size: 1.0d
+			subtitle: "Chemical bath"
+			tasks: [
+				{ id: "30B1F6A7D78D8852", item: "gtceu:tungstic_acid_dust", optional_task: true, type: "item" }
+				{ id: "5B106ADE8281E704", type: "checkmark" }
+			]
+			title: "Tungstic Acid"
+			x: 20.75d
+			y: 22.25d
+		}
+		{
+			dependencies: ["7BF504D7B6DE7CCB"]
+			icon: "gtceu:calcium_chloride_dust"
+			id: "131348F358AD0B5D"
+			size: 0.75d
+			subtitle: "More salt for the lunar cell"
+			tasks: [
+				{ id: "3AEF9604A531E61F", item: "gtceu:calcium_chloride_dust", optional_task: true, type: "item" }
+				{ id: "78089ACCB6337ABB", type: "checkmark" }
+			]
+			title: "Calcium Chloride"
+			x: 20.75d
+			y: 23.75d
+		}
+		{
+			dependencies: ["7B75496B365E06CE"]
+			icon: "gtceu:tungsten_dust"
+			id: "5856C42F3ADB5B5B"
+			size: 1.0d
+			subtitle: "Electrolyzer"
+			tasks: [
+				{ id: "5B412DF5F77B26FB", item: "gtceu:tungsten_dust", optional_task: true, type: "item" }
+				{ id: "1FEA1F8F5293D63D", type: "checkmark" }
+			]
+			title: "Tungsten Dust"
+			x: 22.75d
+			y: 22.25d
+		}
+		{
+			dependencies: ["5856C42F3ADB5B5B"]
+			icon: "gtceu:tungsten_ingot"
+			id: "5621ED241FDB8978"
+			size: 1.25d
+			subtitle: "EBF at 3,600 K, then the freezer"
+			tasks: [
+				{ id: "7FC1A4A24B214A62", item: "gtceu:tungsten_ingot", optional_task: true, type: "item" }
+				{ id: "7BB7FF5F95132F08", type: "checkmark" }
+			]
+			title: "Tungsten"
+			x: 24.75d
+			y: 21.5d
+		}
+		{
+			icon: "gtceu:steel_dust"
+			id: "539865629C2A53BC"
+			shape: "rsquare"
+			size: 1.0d
+			tasks: [
+				{ id: "3FE0BA0DB2469E9D", item: "gtceu:steel_dust", optional_task: true, type: "item" }
+				{ id: "7F3A25A2F76759DA", type: "checkmark" }
+			]
+			title: "Steel Dust"
+			x: 22.75d
+			y: 23.75d
+		}
+		{
+			dependencies: ["5856C42F3ADB5B5B", "539865629C2A53BC"]
+			icon: "gtceu:tungsten_steel_dust"
+			id: "1F3097EEF5C3E0BC"
+			size: 1.0d
+			subtitle: "Mixer"
+			tasks: [
+				{ id: "509573CEC1222E5C", item: "gtceu:tungsten_steel_dust", optional_task: true, type: "item" }
+				{ id: "5F7D41FCE9AC7050", type: "checkmark" }
+			]
+			title: "Tungsten Steel Dust"
+			x: 24.75d
+			y: 23.0d
+		}
+		{
+			dependencies: ["1F3097EEF5C3E0BC"]
+			description: ["The IV hull is made of it, so this is the door out of EV."]
+			icon: "gtceu:tungsten_steel_ingot"
+			id: "3F705F45F789AF9B"
+			size: 1.25d
+			tasks: [
+				{ id: "550D11F2D219BE49", item: "gtceu:tungsten_steel_ingot", optional_task: true, type: "item" }
+				{ id: "399AAE09231FDCD1", type: "checkmark" }
+			]
+			title: "Tungsten Steel"
+			x: 26.75d
+			y: 23.0d
+		}
+		{
+			icon: "gtceu:nitrogen_bucket"
+			id: "57AED950297A0E14"
+			shape: "rsquare"
+			size: 1.0d
+			tasks: [
+				{ id: "760D0F1AEC4B3BF0", item: "gtceu:nitrogen_bucket", optional_task: true, type: "item" }
+				{ id: "398B6D10627F488B", type: "checkmark" }
+			]
+			title: "Nitrogen"
+			x: 31.0d
+			y: 20.75d
+		}
+		{
+			icon: "gtceu:hydrogen_bucket"
+			id: "7648436ECA850B1B"
+			shape: "rsquare"
+			size: 1.0d
+			tasks: [
+				{ id: "195DC7CC56C3A68E", item: "gtceu:hydrogen_bucket", optional_task: true, type: "item" }
+				{ id: "7CE8DBE03C3256E8", type: "checkmark" }
+			]
+			title: "Hydrogen"
+			x: 31.0d
+			y: 22.25d
+		}
+		{
+			icon: "gtceu:oxygen_bucket"
+			id: "3F17B657847E8DC8"
+			shape: "rsquare"
+			size: 1.0d
+			tasks: [
+				{ id: "7F11123CB695B873", item: "gtceu:oxygen_bucket", optional_task: true, type: "item" }
+				{ id: "35935AF52FD0BA0A", type: "checkmark" }
+			]
+			title: "Oxygen"
+			x: 31.0d
+			y: 23.75d
+		}
+		{
+			dependencies: ["57AED950297A0E14", "7648436ECA850B1B", "3F17B657847E8DC8"]
+			icon: "gtceu:large_chemical_reactor"
+			id: "1DE4BA2DD99538AB"
+			shape: "gear"
+			size: 1.25d
+			subtitle: "All three at once"
+			tasks: [
+				{ id: "739F302CE746C678", item: "gtceu:large_chemical_reactor", optional_task: true, type: "item" }
+				{ id: "5E94D32F800E2F3F", type: "checkmark" }
+			]
+			title: "Large Chemical Reactor"
+			x: 33.0d
+			y: 22.25d
+		}
+		{
+			icon: "gtceu:nitrogen_dioxide_bucket"
+			id: "1442666CE12D4753"
+			shape: "rsquare"
+			size: 1.0d
+			subtitle: "From the platinum plant"
+			tasks: [
+				{ id: "1579A4ED55963146", item: "gtceu:nitrogen_dioxide_bucket", optional_task: true, type: "item" }
+				{ id: "3A982C804E61D5E7", type: "checkmark" }
+			]
+			title: "Nitrogen Dioxide"
+			x: 33.0d
+			y: 24.0d
+		}
+		{
+			dependencies: ["1DE4BA2DD99538AB", "1442666CE12D4753"]
+			description: ["One reactor where GregTech used to want a whole tower. The platinum plant's fumes come back as more acid."]
+			icon: "gtceu:nitric_acid_bucket"
+			id: "7D9B7EAC07F4A088"
+			size: 1.25d
+			tasks: [
+				{ id: "14FE06A05AB5155E", item: "gtceu:nitric_acid_bucket", optional_task: true, type: "item" }
+				{ id: "1C709147A0D0FA56", type: "checkmark" }
+			]
+			title: "Nitric Acid"
+			x: 35.0d
+			y: 22.25d
+		}
+		{
+			icon: "gtceu:merrillite_dust"
+			id: "5651F3F990FB6AF8"
+			shape: "rsquare"
+			size: 1.0d
+			subtitle: "Martian tripod, then any furnace"
+			tasks: [
+				{ id: "303F011CD199353D", item: "gtceu:merrillite_dust", optional_task: true, type: "item" }
+				{ id: "3F6A116EA6E6AB56", type: "checkmark" }
+			]
+			title: "Merrillite Dust"
+			x: 0.5d
+			y: 29.25d
+		}
+		{
+			icon: "gtceu:hydrochloric_acid_bucket"
+			id: "1D3B173CCE489EDE"
+			shape: "rsquare"
+			size: 1.0d
+			tasks: [
+				{ id: "31E346BFC7F65F31", item: "gtceu:hydrochloric_acid_bucket", optional_task: true, type: "item" }
+				{ id: "14F5E9CB828AB4BF", type: "checkmark" }
+			]
+			title: "Hydrochloric Acid"
+			x: 0.5d
+			y: 30.75d
+		}
+		{
+			dependencies: ["5651F3F990FB6AF8", "1D3B173CCE489EDE", "7D28AEC912902688"]
+			description: [
+				"Leach with acid, then shake with kerosene down a line of settlers: the rare earths come apart one by one."
+				"Samarium only comes from here."
+			]
+			icon: "gtceu:extraction_cascade"
+			id: "7ABCC0FFFDAD3AEF"
+			shape: "gear"
+			size: 1.5d
+			tasks: [
+				{ id: "51C33A0185A137B7", item: "gtceu:extraction_cascade", optional_task: true, type: "item" }
+				{ id: "7CA704F441753465", type: "checkmark" }
+			]
+			title: "Extraction Cascade"
+			x: 3.0d
+			y: 30.75d
+		}
+		{
+			dependencies: ["7ABCC0FFFDAD3AEF"]
+			icon: "gtceu:samarium_chloride_dust"
+			id: "14D36681D9DED7C8"
+			size: 1.0d
+			tasks: [
+				{ id: "52D8525827FB0C5C", item: "gtceu:samarium_chloride_dust", optional_task: true, type: "item" }
+				{ id: "5D2524F4E8BB2D0F", type: "checkmark" }
+			]
+			title: "Samarium Chloride"
+			x: 5.5d
+			y: 27.5d
+		}
+		{
+			dependencies: ["7ABCC0FFFDAD3AEF"]
+			icon: "gtceu:neodymium_chloride_dust"
+			id: "18E892324F7A1EF6"
+			size: 1.0d
+			tasks: [
+				{ id: "3A9D7D4081BB67AC", item: "gtceu:neodymium_chloride_dust", optional_task: true, type: "item" }
+				{ id: "7D5195BF53DE849E", type: "checkmark" }
+			]
+			title: "Neodymium Chloride"
+			x: 5.5d
+			y: 28.75d
+		}
+		{
+			dependencies: ["7ABCC0FFFDAD3AEF"]
+			icon: "gtceu:mixed_rare_earth_chloride_dust"
+			id: "750868DEA72A6634"
+			size: 1.0d
+			tasks: [
+				{ id: "724D63B1B1F610B4", item: "gtceu:mixed_rare_earth_chloride_dust", optional_task: true, type: "item" }
+				{ id: "52C065C4A4E5F7D8", type: "checkmark" }
+			]
+			title: "Mixed Rare Earth Chloride"
+			x: 5.5d
+			y: 30.0d
+		}
+		{
+			dependencies: ["7ABCC0FFFDAD3AEF"]
+			icon: "gtceu:diluted_hydrochloric_acid_bucket"
+			id: "730CC3D97B80FA9E"
+			size: 1.0d
+			tasks: [
+				{ id: "3A6CA37129FA75B6", item: "gtceu:diluted_hydrochloric_acid_bucket", optional_task: true, type: "item" }
+				{ id: "13C07D170ACB3E62", type: "checkmark" }
+			]
+			title: "Diluted Hydrochloric Acid"
+			x: 5.5d
+			y: 31.25d
+		}
+		{
+			dependencies: ["7ABCC0FFFDAD3AEF"]
+			icon: "gtceu:kerosene_bucket"
+			id: "55C959342ACEB216"
+			shape: "circle"
+			size: 0.75d
+			subtitle: "Almost all of it comes back"
+			tasks: [
+				{ id: "3F234AFC515E276C", item: "gtceu:kerosene_bucket", optional_task: true, type: "item" }
+				{ id: "39551C93F0BCB0F2", type: "checkmark" }
+			]
+			title: "Kerosene, Back"
+			x: 5.5d
+			y: 32.5d
+		}
+		{
+			dependencies: ["7ABCC0FFFDAD3AEF"]
+			icon: "gtceu:phosphoric_acid_bucket"
+			id: "374F7F98594E91D0"
+			size: 0.75d
+			subtitle: "Cumene and phenol, or void it"
+			tasks: [
+				{ id: "37D5391F979AE613", item: "gtceu:phosphoric_acid_bucket", optional_task: true, type: "item" }
+				{ id: "5115D3382ADCD934", type: "checkmark" }
+			]
+			title: "Phosphoric Acid"
+			x: 5.5d
+			y: 33.75d
+		}
+		{
+			dependencies: ["7ABCC0FFFDAD3AEF"]
+			icon: "gtceu:tricalcium_phosphate_dust"
+			id: "30C1AF8ECAF187D3"
+			size: 0.75d
+			subtitle: "Fertilizer"
+			tasks: [
+				{ id: "7F85196E428201D1", item: "gtceu:tricalcium_phosphate_dust", optional_task: true, type: "item" }
+				{ id: "3BD802EF98EB0BBC", type: "checkmark" }
+			]
+			title: "Tricalcium Phosphate"
+			x: 5.5d
+			y: 35.0d
+		}
+		{
+			dependencies: ["14D36681D9DED7C8"]
+			icon: "gtceu:samarium_dust"
+			id: "5928A959696AF7B5"
+			size: 1.0d
+			subtitle: "Kept for LuV's magnets"
+			tasks: [
+				{ id: "1A9B0C8EFB4AB73D", item: "gtceu:samarium_dust", optional_task: true, type: "item" }
+				{ id: "5111D073CF6E94BF", type: "checkmark" }
+			]
+			title: "Samarium"
+			x: 7.5d
+			y: 27.5d
+		}
+		{
+			dependencies: ["18E892324F7A1EF6"]
+			icon: "gtceu:neodymium_dust"
+			id: "3BCF667218AC0EA5"
+			size: 1.0d
+			subtitle: "Motor magnets"
+			tasks: [
+				{ id: "79484D2D8859190A", item: "gtceu:neodymium_dust", optional_task: true, type: "item" }
+				{ id: "139530835AB46255", type: "checkmark" }
+			]
+			title: "Neodymium"
+			x: 7.5d
+			y: 28.75d
+		}
+		{
+			dependencies: ["750868DEA72A6634"]
+			icon: "gtceu:rare_earth_dust"
+			id: "5853708E3C1E23EE"
+			size: 0.75d
+			subtitle: "GregTech's centrifuge takes it from here"
+			tasks: [
+				{ id: "3C2CCD1CF9BB93BA", item: "gtceu:rare_earth_dust", optional_task: true, type: "item" }
+				{ id: "551D32A629FBC366", type: "checkmark" }
+			]
+			title: "Rare Earth"
+			x: 7.5d
+			y: 30.0d
+		}
+		{
+			dependencies: ["730CC3D97B80FA9E"]
+			icon: "gtceu:hydrochloric_acid_bucket"
+			id: "346225E6D168A91D"
+			shape: "circle"
+			size: 0.75d
+			subtitle: "Distillation tower, then the leach again"
+			tasks: [
+				{ id: "3070F35BAC20DFC8", item: "gtceu:hydrochloric_acid_bucket", optional_task: true, type: "item" }
+				{ id: "7273CC09FF2545D1", type: "checkmark" }
+			]
+			title: "Hydrochloric Acid, Back"
+			x: 7.5d
+			y: 31.25d
+		}
+		{
+			icon: "gtceu:methane_bucket"
+			id: "3A17FDEDE770117A"
+			shape: "rsquare"
+			size: 1.0d
+			subtitle: "Or any gas turbine fuel"
+			tasks: [
+				{ id: "3D30CEC443B44369", item: "gtceu:methane_bucket", optional_task: true, type: "item" }
+				{ id: "73DE27E223ECB597", type: "checkmark" }
+			]
+			title: "Methane"
+			x: 11.5d
+			y: 27.5d
+		}
+		{
+			icon: "gtceu:distilled_water_bucket"
+			id: "1CBF73225FD775A0"
+			shape: "rsquare"
+			size: 1.0d
+			tasks: [
+				{ id: "1FFC5B7EA4B93907", item: "gtceu:distilled_water_bucket", optional_task: true, type: "item" }
+				{ id: "5E69F0517BAF3203", type: "checkmark" }
+			]
+			title: "Distilled Water"
+			x: 11.5d
+			y: 29.0d
+		}
+		{
+			dependencies: ["3A17FDEDE770117A", "1CBF73225FD775A0"]
+			description: ["A gas turbine whose hot exhaust boils water. The fuel pays the same, and the steam is the bonus, but only if a turbine takes it."]
+			icon: "gtceu:combined_cycle_plant"
+			id: "793579F408298CB0"
+			shape: "gear"
+			size: 1.5d
+			tasks: [
+				{ id: "12696C7FAA5465F5", item: "gtceu:combined_cycle_plant", optional_task: true, type: "item" }
+				{ id: "5A9569899123CEC4", type: "checkmark" }
+			]
+			title: "Combined-Cycle Plant"
+			x: 13.5d
+			y: 28.25d
+		}
+		{
+			dependencies: ["793579F408298CB0"]
+			icon: "gtceu:steam_bucket"
+			id: "1E903E3D111EECE9"
+			size: 1.0d
+			tasks: [
+				{ id: "1D7E43947010EBD9", item: "gtceu:steam_bucket", optional_task: true, type: "item" }
+				{ id: "7C1A6DC6D762E165", type: "checkmark" }
+			]
+			title: "Steam"
+			x: 15.5d
+			y: 28.25d
+		}
+		{
+			dependencies: ["1E903E3D111EECE9"]
+			icon: "gtceu:steam_large_turbine"
+			id: "5FE90FCA71C62110"
+			shape: "gear"
+			size: 1.25d
+			tasks: [
+				{ id: "1BD9D2903F4B4071", item: "gtceu:steam_large_turbine", optional_task: true, type: "item" }
+				{ id: "3D6300F9AEBD2F4F", type: "checkmark" }
+			]
+			title: "Large Steam Turbine"
+			x: 17.5d
+			y: 28.25d
+		}
+		{
+			dependencies: ["5FE90FCA71C62110"]
+			icon: "gtceu:distilled_water_bucket"
+			id: "3115FFD93B0BD82C"
+			shape: "circle"
+			size: 0.75d
+			subtitle: "Into the plant again"
+			tasks: [
+				{ id: "1EC01D976A4F777F", item: "gtceu:distilled_water_bucket", optional_task: true, type: "item" }
+				{ id: "7348CE0E6A260A3E", type: "checkmark" }
+			]
+			title: "Distilled Water, Back"
+			x: 19.5d
+			y: 28.25d
+		}
+		{
+			icon: "minecraft:beetroot_seeds"
+			id: "18655420F89C6107"
+			shape: "rsquare"
+			size: 1.0d
+			subtitle: "Any plant; never used up"
+			tasks: [
+				{ id: "147B603DEE27385D", item: "minecraft:beetroot_seeds", optional_task: true, type: "item" }
+				{ id: "37EBFA27A56E6512", type: "checkmark" }
+			]
+			title: "Seeds"
+			x: 23.5d
+			y: 27.5d
+		}
+		{
+			icon: "gtceu:carbon_dioxide_bucket"
+			id: "18F537A953D4B78D"
+			shape: "rsquare"
+			size: 1.0d
+			subtitle: "Martian air, or MV's test stand exhaust"
+			tasks: [
+				{ id: "5351BA6D67040F05", item: "gtceu:carbon_dioxide_bucket", optional_task: true, type: "item" }
+				{ id: "54E51E24456D56CD", type: "checkmark" }
+			]
+			title: "Carbon Dioxide"
+			x: 23.5d
+			y: 29.0d
+		}
+		{
+			dependencies: ["18655420F89C6107", "18F537A953D4B78D"]
+			description: ["Grow lights under a glass roof, behind an airlock. The plants turn carbon dioxide into oxygen right through the fourteen-day night."]
+			icon: "gtceu:sealed_dome"
+			id: "3BFF58EC797C6C39"
+			shape: "gear"
+			size: 1.5d
+			tasks: [
+				{ id: "356BF4B6668BA32C", item: "gtceu:sealed_dome", optional_task: true, type: "item" }
+				{ id: "76E4C1B90A987F83", type: "checkmark" }
+			]
+			title: "Sealed Dome"
+			x: 25.5d
+			y: 28.25d
+		}
+		{
+			dependencies: ["3BFF58EC797C6C39"]
+			icon: "minecraft:beetroot"
+			id: "31E8630B6040471B"
+			size: 1.0d
+			tasks: [
+				{ id: "79D382833BB007EA", item: "minecraft:beetroot", optional_task: true, type: "item" }
+				{ id: "12FF535FF8DBDFF6", type: "checkmark" }
+			]
+			title: "Crops"
+			x: 27.5d
+			y: 27.5d
+		}
+		{
+			dependencies: ["3BFF58EC797C6C39"]
+			icon: "gtceu:oxygen_bucket"
+			id: "54B0CC36CC9772F1"
+			size: 0.75d
+			subtitle: "Suits, or the cryogenic plant"
+			tasks: [
+				{ id: "5B6DB735175BB82C", item: "gtceu:oxygen_bucket", optional_task: true, type: "item" }
+				{ id: "149A205F270E29A4", type: "checkmark" }
+			]
+			title: "Oxygen"
+			x: 27.5d
+			y: 29.0d
+		}
+		{
+			dependencies: ["31E8630B6040471B"]
+			icon: "gtceu:biomass_bucket"
+			id: "3CB3C55B530FB074"
+			size: 1.0d
+			subtitle: "Brewery"
+			tasks: [
+				{ id: "527964E89FAEFA40", item: "gtceu:biomass_bucket", optional_task: true, type: "item" }
+				{ id: "73CB3F573A25BD12", type: "checkmark" }
+			]
+			title: "Biomass"
+			x: 29.5d
+			y: 27.5d
+		}
+		{
+			icon: "grindless:creature_model_wither"
+			id: "71488A45FB65BD6A"
+			shape: "rsquare"
+			size: 1.0d
+			subtitle: "Printed from wither skeleton skulls"
+			tasks: [
+				{ id: "798CA4CB3187EFD0", item: "grindless:creature_model_wither", optional_task: true, type: "item" }
+				{ id: "7F14DDE43B6D8FB3", type: "checkmark" }
+			]
+			title: "Wither Model"
+			x: 29.5d
+			y: 29.0d
+		}
+		{
+			dependencies: ["3CB3C55B530FB074", "71488A45FB65BD6A"]
+			icon: "gtceu:ev_creature_simulator"
+			id: "5A0B517EDB8BDFBE"
+			shape: "gear"
+			size: 1.25d
+			subtitle: "EV: it eats a lot of biomass"
+			tasks: [
+				{ id: "1284361ACB488D9F", item: "gtceu:ev_creature_simulator", optional_task: true, type: "item" }
+				{ id: "369614E42D402B51", type: "checkmark" }
+			]
+			title: "Creature Simulator"
+			x: 31.5d
+			y: 28.25d
+		}
+		{
+			dependencies: ["5A0B517EDB8BDFBE"]
+			icon: "minecraft:nether_star"
+			id: "182D9BB9E4FD1F15"
+			size: 1.25d
+			subtitle: "Saved for IV"
+			tasks: [
+				{ id: "371E1C09F42BB8A2", item: "minecraft:nether_star", optional_task: true, type: "item" }
+				{ id: "7B36DF0195024CFC", type: "checkmark" }
+			]
+			title: "Nether Star"
+			x: 33.5d
+			y: 28.25d
+		}
+	]
+	subtitle: ["The Moon runs itself, platinum comes apart at home, and Mars sends tungsten and rare earths."]
+	title: "EV Lines"
+}

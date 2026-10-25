@@ -76,8 +76,24 @@ function exportModel(book, findings, chapters) {
         root: q.deps.length === 0,
         hideLines: q.hideDependencyLines,
         level: levelOf(q.id),
-        cross: cross.filter((c) => c.to === q).map((c) => ({ chapter: c.from.chapter.filename, title: questLabel(c.from) })),
+        cross: cross.filter((c) => c.to === q).map((c) => ({ chapter: c.from.chapter.filename, title: questLabel(c.from), viaLink: ch.links.some((l) => l.linked === c.from.id) })),
       })),
+      // quest links: FTB Quests draws every dependency line to every button of the quest, links included (QuestPanel), so a
+      // link brings in the lines of the quest it mirrors that have an end in this chapter
+      links: ch.links.map((l) => {
+        const q = book.questById.get(l.linked);
+        return { id: l.id, linked: l.linked, x: l.x, y: l.y, size: l.size, shape: l.shape || ch.defaultShape, title: q ? questLabel(q) : l.linked, chapter: q ? q.chapter.filename : '' };
+      }),
+      linkEdges: (() => {
+        const out = [];
+        const buttonsOf = (id) => [...ch.quests.filter((q) => q.id === id).map((q) => q.id), ...ch.links.filter((l) => l.linked === id).map((l) => l.id)];
+        for (const q of ch.quests) for (const d of q.deps) for (const l of ch.links) if (l.linked === d) out.push({ from: l.id, to: q.id });
+        for (const l of ch.links) {
+          const x = book.questById.get(l.linked);
+          if (x) for (const d of x.deps) for (const b of buttonsOf(d)) out.push({ from: b, to: l.id });
+        }
+        return out;
+      })(),
       edges: edges.map((e) => {
         const bad = mine.filter((f) => edgeRules.has(f.rule) && f.quest === e.to.id && (f.other === e.from.id || f.rule === 'crossing' || f.rule === 'through-node'));
         const own = bad.filter((f) => f.other === e.from.id || f.rule === 'crossing' || (f.rule === 'through-node' && f.message.includes(`"${questLabel(e.from)}"`)));
