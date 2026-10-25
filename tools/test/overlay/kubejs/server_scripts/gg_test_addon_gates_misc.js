@@ -73,7 +73,7 @@
   ;['chemical_reactor', 'large_chemical_reactor'].forEach(function (m) {
     TAP_ORES.forEach(function (ore) { TAP_IDS.push('gtceu:' + m + '/pgs_from_' + ore, 'gtceu:' + m + '/pgs_from_' + ore + '_p') })
   })
-  // the stage recipes of GT--'s platinum line the EV platinum plant composes (ev/platinum_plant.server.js): none may be removed
+  // the stage recipes of GT--'s platinum line the EV platinum plant composes (server_scripts/grindless/ev/platinum_plant.js): none may be removed
   var PLATLINE_STAGES = ['centrifuge/platinum_group_sludge_dust', 'chemical_reactor/crude_rhodium_metallic_powder',
     'chemical_reactor/dissolve_platinum_metallic_powder9', 'chemical_reactor/large_palladium_dusts',
     'chemical_reactor/palladium_metallic_powder_conversion', 'chemical_reactor/raw_palladium_separation',
