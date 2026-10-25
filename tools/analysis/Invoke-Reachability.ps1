@@ -32,7 +32,7 @@
 .EXAMPLE
   powershell -NoProfile -ExecutionPolicy Bypass -File tools\analysis\Invoke-Reachability.ps1 -Tier steam
 .EXAMPLE
-  powershell -NoProfile -ExecutionPolicy Bypass -File tools\analysis\Invoke-Reachability.ps1 -Tier steam -SkipDump -Explain perforadora
+  powershell -NoProfile -ExecutionPolicy Bypass -File tools\analysis\Invoke-Reachability.ps1 -Tier steam -SkipDump -Explain drill
 .EXAMPLE
   powershell -NoProfile -ExecutionPolicy Bypass -File tools\analysis\Invoke-Reachability.ps1 -Tier obtain -SkipDump -DumpDir <dump>
 #>

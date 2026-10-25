@@ -65,21 +65,21 @@
 
   "world": [
     {
-      "id": "arboles",
+      "id": "trees",
       "mode": "manual",
       "bootstrap": true,
       "items": ["#minecraft:logs_that_burn", "#minecraft:saplings", "gtceu:rubber_leaves", "minecraft:apple"],
       "note": "Chop trees and collect saplings from leaves."
     },
     {
-      "id": "resina",
+      "id": "resin",
       "mode": "manual",
       "bootstrap": true,
       "items": ["gtceu:sticky_resin"],
       "note": "Natural rubber logs (rubberTreeSpawnChance 0.5 per chunk) drop sticky resin 85% of the time (GTM's loot_tables/blocks/rubber_log.json)."
     },
     {
-      "id": "suelo",
+      "id": "ground",
       "mode": "manual",
       "bootstrap": true,
       "items": [
@@ -90,7 +90,7 @@
       "note": "Mined or dug with wood/stone tools. Flint comes from gravel."
     },
     {
-      "id": "plantas",
+      "id": "plants",
       "mode": "manual",
       "items": [
         "minecraft:sugar_cane", "minecraft:wheat_seeds", "minecraft:wheat", "minecraft:beetroot_seeds", "minecraft:melon_seeds",
@@ -100,21 +100,21 @@
       "note": "Crops and plants from the world."
     },
     {
-      "id": "fluidos",
+      "id": "fluids",
       "mode": "manual",
       "bootstrap": true,
       "items": ["fluid:minecraft:water", "fluid:minecraft:lava"],
       "note": "With a bucket. Lava is only needed once, next to the rock crusher."
     },
     {
-      "id": "gemas-y-polvos",
+      "id": "gems-and-dusts",
       "mode": "manual",
       "bootstrap": true,
       "items": ["minecraft:coal", "minecraft:redstone", "minecraft:raw_iron", "minecraft:raw_copper", "minecraft:raw_gold"],
       "note": "GTM 7.5.3 removes vanilla ores (removeVanillaOreGen = true): coal and redstone come from the coal_vein / redstone_vein_ow veins, and raw iron, copper and gold from copper_vein (deepslate) and magnetite_vein_ow; GT unifies its raw items with the vanilla ones."
     },
     {
-      "id": "menas-gt",
+      "id": "ores-gt",
       "mode": "manual",
       "bootstrap": true,
       "template": "gtceu:raw_{m}",
@@ -138,14 +138,14 @@
       "note": "Mob loot. Disabled on purpose: if a gate recipe needs it, that's a design flaw (the report flags it)."
     },
     {
-      "id": "bomba-primitiva",
+      "id": "pump-primitive",
       "mode": "auto",
       "via": ["gtceu:primitive_pump"],
       "items": ["fluid:minecraft:water"],
       "note": "The primitive pump gives water non-stop (PrimitivePumpMachine); it has no recipes, which is why it's modeled as a source."
     },
     {
-      "id": "minero-de-vapor",
+      "id": "miner-of-steam",
       "mode": "auto",
       "finite": true,
       "via": ["gtceu:lp_steam_miner", "gtceu:hp_steam_miner"],
@@ -156,7 +156,7 @@
       "note": "The steam miner picks up whatever is beneath it and depletes it; there are no recipes (DUMMY_RECIPES)."
     },
     {
-      "id": "minero-de-vapor-menas",
+      "id": "miner-of-steam-ores",
       "mode": "auto",
       "finite": true,
       "via": ["gtceu:lp_steam_miner", "gtceu:hp_steam_miner"],
@@ -433,20 +433,20 @@
 
   "synthetic": [
     {
-      "id": "caldera-solida",
+      "id": "boiler-solid",
       "machines": ["gtceu:lp_steam_solid_boiler", "gtceu:hp_steam_solid_boiler"],
       "consumes": [{ "fuelOf": "gtceu:steam_boiler", "kind": "item" }, "fluid:minecraft:water"],
       "produces": ["fluid:gtceu:steam"],
       "note": "Boilers don't use an output recipe: gtceu:steam_boiler recipes only list fuels (FuelRecipes). It turns solid fuel + water into steam."
     },
     {
-      "id": "caldera-liquida",
+      "id": "boiler-liquid",
       "machines": ["gtceu:lp_steam_liquid_boiler", "gtceu:hp_steam_liquid_boiler"],
       "consumes": [{ "fuelOf": "gtceu:steam_boiler", "kind": "fluid" }, "fluid:minecraft:water"],
       "produces": ["fluid:gtceu:steam"]
     },
     {
-      "id": "caldera-solar",
+      "id": "boiler-solar",
       "machines": ["gtceu:lp_steam_solar_boiler", "gtceu:hp_steam_solar_boiler"],
       "consumes": ["fluid:minecraft:water"],
       "produces": ["fluid:gtceu:steam"]
@@ -454,93 +454,93 @@
   ],
 
   "targets": [
-    { "id": "coque", "label": "Coke", "item": "gtceu:coke_gem" },
-    { "id": "bronce", "label": "Bronze ingot", "item": "gtceu:bronze_ingot" },
-    { "id": "caldera-lp", "label": "LP coal boiler", "item": "gtceu:lp_steam_solid_boiler" },
-    { "id": "vapor", "label": "Steam available", "fluid": "gtceu:steam" },
-    { "id": "macerador-vapor", "label": "Steam macerator", "item": "gtceu:lp_steam_macerator" },
-    { "id": "horno-vapor", "label": "Steam furnace", "item": "gtceu:lp_steam_furnace" },
-    { "id": "aleador-vapor", "label": "Steam alloy smelter", "item": "gtceu:lp_steam_alloy_smelter" },
-    { "id": "compresor-vapor", "label": "Steam compressor", "item": "gtceu:lp_steam_compressor" },
-    { "id": "martillo-vapor", "label": "Steam forge hammer", "item": "gtceu:lp_steam_forge_hammer" },
-    { "id": "extractor-vapor", "label": "Steam extractor", "item": "gtceu:lp_steam_extractor" },
-    { "id": "trituradora-rocas", "label": "Steam rock crusher", "item": "gtceu:lp_steam_rock_crusher" },
-    { "id": "minero-vapor", "label": "Steam miner", "item": "gtceu:lp_steam_miner" },
-    { "id": "bomba-primitiva", "label": "Primitive pump", "item": "gtceu:primitive_pump" },
-    { "id": "horno-coque", "label": "Coke oven", "item": "gtceu:coke_oven" },
-    { "id": "alto-horno-primitivo", "label": "Primitive blast furnace", "item": "gtceu:primitive_blast_furnace" },
-    { "id": "acero", "label": "Steel ingot", "item": "gtceu:steel_ingot" },
-    { "id": "caldera-hp", "label": "High-pressure boiler (steel)", "item": "gtceu:hp_steam_solid_boiler" },
-    { "id": "macerador-hp", "label": "High-pressure macerator (steel)", "item": "gtceu:hp_steam_macerator" },
-    { "id": "perforadora", "label": "Steam vein drill (ours)", "item": "gtceu:steam_vein_drill" },
-    { "id": "invernadero", "label": "Steam greenhouse (ours)", "item": "gtceu:steam_greenhouse" },
-    { "id": "observatorio-vapor", "label": "Clockwork observatory (ours)", "item": "gtceu:steam_observatory" },
-    { "id": "carta-lunar-borrador", "label": "Lunar chart (draft), from the clockwork observatory", "item": "grindless:lunar_chart_draft" },
-    { "id": "receta-carta-borrador", "label": "Eyepiece observation: paper + coal dust -> draft (at night, clear sky, Y 100+: conditions not modeled)", "kind": "recipe", "type": "gtceu:stargazing", "output": "grindless:lunar_chart_draft" },
-    { "id": "carta-borrador-solo-observatorio", "label": "The draft only comes from the clockwork observatory (the copy needs a draft)", "item": "grindless:lunar_chart_draft", "without": ["operate:gtceu:steam_observatory"], "expect": "unreachable" },
-    { "id": "casco-lv", "label": "LV hull", "item": "gtceu:lv_machine_hull" },
-    { "id": "cable-estano", "label": "Insulated tin cable", "item": "gtceu:tin_single_cable" },
-    { "id": "circuito-lv", "label": "First LV circuit", "item": "gtceu:basic_electronic_circuit" },
-    { "id": "turbina-lv", "label": "LV steam turbine", "item": "gtceu:lv_steam_turbine" },
-    { "id": "receta-coque", "label": "Coke oven recipe -> coke", "kind": "recipe", "type": "gtceu:coke_oven", "output": "gtceu:coke_gem" },
-    { "id": "receta-acero", "label": "Primitive blast furnace recipe -> steel", "kind": "recipe", "type": "gtceu:primitive_blast_furnace", "output": "gtceu:steel_ingot" },
-    { "id": "alto-horno-vapor", "label": "Steam blast furnace (ours)", "item": "gtceu:steam_blast_furnace" },
-    { "id": "receta-acero-alto-horno-vapor", "label": "Steam blast furnace: iron ore + coke + calcite -> steel + ash", "kind": "recipe", "type": "gtceu:steelmaking", "output": "gtceu:steel_ingot" },
-    { "id": "escotilla-salida-ulv", "label": "ULV fluid output hatch (hand-crafted in steam, for the coking battery)", "item": "gtceu:ulv_output_hatch" },
-    { "id": "bateria-coque", "label": "Coking battery with byproducts (ours)", "item": "gtceu:coking_battery" },
-    { "id": "receta-gas-de-hulla", "label": "Coking battery: coal -> coke + creosote + coal gas", "kind": "recipe", "type": "gtceu:coking", "output": "fluid:gtceu:coal_gas" },
-    { "id": "turbina-genera", "label": "The LV turbine can generate with steam", "kind": "recipe", "type": "gtceu:steam_turbine" },
-    { "id": "macerador-grande-vapor", "label": "Large Steam Macerator (Large Steam family, ours)", "item": "gtceu:large_steam_macerator" },
-    { "id": "centrifuga-grande-vapor", "label": "Large Steam Centrifuge (Large Steam family, ours)", "item": "gtceu:large_steam_centrifuge" },
-    { "id": "centrifuga-termica-grande-vapor", "label": "Large Steam Thermal Centrifuge (Large Steam family, ours)", "item": "gtceu:large_steam_thermal_centrifuge" },
-    { "id": "bano-quimico-grande-vapor", "label": "Large Steam Chemical Bath (Large Steam family, ours)", "item": "gtceu:large_steam_chemical_bath" },
-    { "id": "lavadora-grande-vapor", "label": "Large Steam Ore Washer (Large Steam family, ours)", "item": "gtceu:large_steam_ore_washer" },
-    { "id": "receta-macerador-grande", "label": "The Large Steam Macerator runs a real GTM macerator recipe (crushed ore -> impure dust)", "kind": "recipe", "type": "gtceu:macerator" },
-    { "id": "receta-lavadora-grande", "label": "The Large Steam Ore Washer runs a real GTM washer recipe (crushed ore + water -> purified ore)", "kind": "recipe", "type": "gtceu:ore_washer" },
-    { "id": "martillo-vapor-familia", "label": "Steam Forge Hammer (small steam family, ours)", "item": "gtceu:steam_forge_hammer" },
-    { "id": "compresor-vapor-familia", "label": "Steam Compressor (small steam family, ours)", "item": "gtceu:steam_compressor" },
-    { "id": "aleador-vapor-familia", "label": "Steam Alloy Smelter (small steam family, ours)", "item": "gtceu:steam_alloy_smelter" },
-    { "id": "mezclador-vapor-familia", "label": "Steam Mixer (small steam family, ours)", "item": "gtceu:steam_mixer" },
-    { "id": "bano-quimico-vapor-familia", "label": "Steam Chemical Bath (small steam family, ours)", "item": "gtceu:steam_chemical_bath" },
-    { "id": "lavadora-vapor-familia", "label": "Steam Ore Washer (small steam family, ours)", "item": "gtceu:steam_ore_washer" },
-    { "id": "escotilla-entrada-ulv", "label": "ULV fluid input hatch (hand-crafted in steam, for the small family's mixer/bath/washer)", "item": "gtceu:ulv_input_hatch" },
-    { "id": "receta-compresor-familia", "label": "The Steam Compressor runs a real GTM compressor recipe (sand -> sandstone)", "kind": "recipe", "type": "gtceu:compressor" },
-    { "id": "receta-bano-familia", "label": "The Steam Chemical Bath runs a real GTM chemical bath recipe (sugar cane + water -> paper)", "kind": "recipe", "type": "gtceu:chemical_bath" }
+    { "id": "coke", "label": "Coke", "item": "gtceu:coke_gem" },
+    { "id": "bronze", "label": "Bronze ingot", "item": "gtceu:bronze_ingot" },
+    { "id": "boiler-lp", "label": "LP coal boiler", "item": "gtceu:lp_steam_solid_boiler" },
+    { "id": "steam", "label": "Steam available", "fluid": "gtceu:steam" },
+    { "id": "macerator-steam", "label": "Steam macerator", "item": "gtceu:lp_steam_macerator" },
+    { "id": "furnace-steam", "label": "Steam furnace", "item": "gtceu:lp_steam_furnace" },
+    { "id": "alloy-smelter-steam", "label": "Steam alloy smelter", "item": "gtceu:lp_steam_alloy_smelter" },
+    { "id": "compressor-steam", "label": "Steam compressor", "item": "gtceu:lp_steam_compressor" },
+    { "id": "hammer-steam", "label": "Steam forge hammer", "item": "gtceu:lp_steam_forge_hammer" },
+    { "id": "extractor-steam", "label": "Steam extractor", "item": "gtceu:lp_steam_extractor" },
+    { "id": "crusher-rocks", "label": "Steam rock crusher", "item": "gtceu:lp_steam_rock_crusher" },
+    { "id": "miner-steam", "label": "Steam miner", "item": "gtceu:lp_steam_miner" },
+    { "id": "pump-primitive", "label": "Primitive pump", "item": "gtceu:primitive_pump" },
+    { "id": "furnace-coke", "label": "Coke oven", "item": "gtceu:coke_oven" },
+    { "id": "blast-furnace-primitive", "label": "Primitive blast furnace", "item": "gtceu:primitive_blast_furnace" },
+    { "id": "steel", "label": "Steel ingot", "item": "gtceu:steel_ingot" },
+    { "id": "boiler-hp", "label": "High-pressure boiler (steel)", "item": "gtceu:hp_steam_solid_boiler" },
+    { "id": "macerator-hp", "label": "High-pressure macerator (steel)", "item": "gtceu:hp_steam_macerator" },
+    { "id": "drill", "label": "Steam vein drill (ours)", "item": "gtceu:steam_vein_drill" },
+    { "id": "greenhouse", "label": "Steam greenhouse (ours)", "item": "gtceu:steam_greenhouse" },
+    { "id": "observatory-steam", "label": "Clockwork observatory (ours)", "item": "gtceu:steam_observatory" },
+    { "id": "lunar-chart-draft", "label": "Lunar chart (draft), from the clockwork observatory", "item": "grindless:lunar_chart_draft" },
+    { "id": "recipe-chart-draft", "label": "Eyepiece observation: paper + coal dust -> draft (at night, clear sky, Y 100+: conditions not modeled)", "kind": "recipe", "type": "gtceu:stargazing", "output": "grindless:lunar_chart_draft" },
+    { "id": "chart-draft-only-observatory", "label": "The draft only comes from the clockwork observatory (the copy needs a draft)", "item": "grindless:lunar_chart_draft", "without": ["operate:gtceu:steam_observatory"], "expect": "unreachable" },
+    { "id": "hull-lv", "label": "LV hull", "item": "gtceu:lv_machine_hull" },
+    { "id": "cable-tin", "label": "Insulated tin cable", "item": "gtceu:tin_single_cable" },
+    { "id": "circuit-lv", "label": "First LV circuit", "item": "gtceu:basic_electronic_circuit" },
+    { "id": "turbine-lv", "label": "LV steam turbine", "item": "gtceu:lv_steam_turbine" },
+    { "id": "recipe-coke", "label": "Coke oven recipe -> coke", "kind": "recipe", "type": "gtceu:coke_oven", "output": "gtceu:coke_gem" },
+    { "id": "recipe-steel", "label": "Primitive blast furnace recipe -> steel", "kind": "recipe", "type": "gtceu:primitive_blast_furnace", "output": "gtceu:steel_ingot" },
+    { "id": "blast-furnace-steam", "label": "Steam blast furnace (ours)", "item": "gtceu:steam_blast_furnace" },
+    { "id": "recipe-steel-blast-furnace-steam", "label": "Steam blast furnace: iron ore + coke + calcite -> steel + ash", "kind": "recipe", "type": "gtceu:steelmaking", "output": "gtceu:steel_ingot" },
+    { "id": "hatch-output-ulv", "label": "ULV fluid output hatch (hand-crafted in steam, for the coking battery)", "item": "gtceu:ulv_output_hatch" },
+    { "id": "battery-coke", "label": "Coking battery with byproducts (ours)", "item": "gtceu:coking_battery" },
+    { "id": "recipe-coal-gas", "label": "Coking battery: coal -> coke + creosote + coal gas", "kind": "recipe", "type": "gtceu:coking", "output": "fluid:gtceu:coal_gas" },
+    { "id": "turbine-generates", "label": "The LV turbine can generate with steam", "kind": "recipe", "type": "gtceu:steam_turbine" },
+    { "id": "macerator-large-steam", "label": "Large Steam Macerator (Large Steam family, ours)", "item": "gtceu:large_steam_macerator" },
+    { "id": "centrifuge-large-steam", "label": "Large Steam Centrifuge (Large Steam family, ours)", "item": "gtceu:large_steam_centrifuge" },
+    { "id": "centrifuge-thermal-large-steam", "label": "Large Steam Thermal Centrifuge (Large Steam family, ours)", "item": "gtceu:large_steam_thermal_centrifuge" },
+    { "id": "bath-chemical-large-steam", "label": "Large Steam Chemical Bath (Large Steam family, ours)", "item": "gtceu:large_steam_chemical_bath" },
+    { "id": "washer-large-steam", "label": "Large Steam Ore Washer (Large Steam family, ours)", "item": "gtceu:large_steam_ore_washer" },
+    { "id": "recipe-macerator-large", "label": "The Large Steam Macerator runs a real GTM macerator recipe (crushed ore -> impure dust)", "kind": "recipe", "type": "gtceu:macerator" },
+    { "id": "recipe-washer-large", "label": "The Large Steam Ore Washer runs a real GTM washer recipe (crushed ore + water -> purified ore)", "kind": "recipe", "type": "gtceu:ore_washer" },
+    { "id": "hammer-steam-family", "label": "Steam Forge Hammer (small steam family, ours)", "item": "gtceu:steam_forge_hammer" },
+    { "id": "compressor-steam-family", "label": "Steam Compressor (small steam family, ours)", "item": "gtceu:steam_compressor" },
+    { "id": "alloy-smelter-steam-family", "label": "Steam Alloy Smelter (small steam family, ours)", "item": "gtceu:steam_alloy_smelter" },
+    { "id": "mixer-steam-family", "label": "Steam Mixer (small steam family, ours)", "item": "gtceu:steam_mixer" },
+    { "id": "bath-chemical-steam-family", "label": "Steam Chemical Bath (small steam family, ours)", "item": "gtceu:steam_chemical_bath" },
+    { "id": "washer-steam-family", "label": "Steam Ore Washer (small steam family, ours)", "item": "gtceu:steam_ore_washer" },
+    { "id": "hatch-input-ulv", "label": "ULV fluid input hatch (hand-crafted in steam, for the small family's mixer/bath/washer)", "item": "gtceu:ulv_input_hatch" },
+    { "id": "recipe-compressor-family", "label": "The Steam Compressor runs a real GTM compressor recipe (sand -> sandstone)", "kind": "recipe", "type": "gtceu:compressor" },
+    { "id": "recipe-bath-family", "label": "The Steam Chemical Bath runs a real GTM chemical bath recipe (sugar cane + water -> paper)", "kind": "recipe", "type": "gtceu:chemical_bath" }
   ],
 
   "autoTargets": [
-    { "id": "auto-mena-hierro", "label": "Raw iron ore (drill)", "anyOf": ["minecraft:raw_iron", "gtceu:raw_goethite", "gtceu:raw_hematite", "gtceu:raw_yellow_limonite", "gtceu:raw_magnetite", "gtceu:raw_pyrite"] },
-    { "id": "auto-mena-cobre", "label": "Raw copper ore (drill)", "anyOf": ["minecraft:raw_copper", "gtceu:raw_chalcopyrite", "gtceu:raw_malachite"] },
-    { "id": "auto-mena-estano", "label": "Raw tin ore (drill)", "anyOf": ["gtceu:raw_cassiterite", "gtceu:raw_tin"] },
+    { "id": "auto-ore-iron", "label": "Raw iron ore (drill)", "anyOf": ["minecraft:raw_iron", "gtceu:raw_goethite", "gtceu:raw_hematite", "gtceu:raw_yellow_limonite", "gtceu:raw_magnetite", "gtceu:raw_pyrite"] },
+    { "id": "auto-ore-copper", "label": "Raw copper ore (drill)", "anyOf": ["minecraft:raw_copper", "gtceu:raw_chalcopyrite", "gtceu:raw_malachite"] },
+    { "id": "auto-ore-tin", "label": "Raw tin ore (drill)", "anyOf": ["gtceu:raw_cassiterite", "gtceu:raw_tin"] },
     { "id": "auto-redstone", "label": "Redstone (LV circuit)", "item": "minecraft:redstone" },
-    { "id": "auto-troncos", "label": "Logs (greenhouse)", "anyOf": ["minecraft:oak_log", "minecraft:spruce_log", "minecraft:birch_log", "minecraft:jungle_log", "minecraft:acacia_log", "minecraft:dark_oak_log", "minecraft:mangrove_log", "minecraft:cherry_log", "gtceu:rubber_log"] },
-    { "id": "auto-resina", "label": "Sticky resin (greenhouse)", "item": "gtceu:sticky_resin" },
-    { "id": "auto-adoquin", "label": "Cobblestone (rock crusher)", "item": "minecraft:cobblestone" },
-    { "id": "auto-piedra", "label": "Stone", "item": "minecraft:stone" },
-    { "id": "auto-agua", "label": "Water (primitive pump)", "fluid": "minecraft:water" },
-    { "id": "auto-vapor", "label": "Steam (boiler)", "fluid": "gtceu:steam" },
-    { "id": "auto-vapor-combustible", "label": "Steam with only fuel boilers", "fluid": "gtceu:steam", "without": ["synthetic:caldera-solar"] },
-    { "id": "auto-carbon", "label": "Coal", "item": "minecraft:coal" },
-    { "id": "auto-carbon-vegetal", "label": "Charcoal", "item": "minecraft:charcoal" },
-    { "id": "auto-coque", "label": "Coke", "item": "gtceu:coke_gem" },
-    { "id": "auto-hierro", "label": "Iron ingot", "item": "minecraft:iron_ingot" },
-    { "id": "auto-cobre", "label": "Copper ingot", "item": "minecraft:copper_ingot" },
-    { "id": "auto-estano", "label": "Tin ingot", "item": "gtceu:tin_ingot" },
-    { "id": "auto-bronce", "label": "Bronze ingot", "item": "gtceu:bronze_ingot" },
-    { "id": "auto-acero", "label": "Steel ingot", "item": "gtceu:steel_ingot" },
-    { "id": "auto-perforacion", "label": "Usable and sustained vein drill recipe", "kind": "recipe", "type": "gtceu:vein_drilling" },
-    { "id": "auto-perforacion-combustible", "label": "Drill sustained with only fuel boilers", "kind": "recipe", "type": "gtceu:vein_drilling", "without": ["synthetic:caldera-solar"] },
-    { "id": "auto-invernadero", "label": "Usable and sustained greenhouse recipe", "kind": "recipe", "type": "gtceu:greenhouse" },
-    { "id": "auto-invernadero-combustible", "label": "Greenhouse sustained with only fuel boilers", "kind": "recipe", "type": "gtceu:greenhouse", "without": ["synthetic:caldera-solar"] },
-    { "id": "auto-acero-alto-horno-vapor", "label": "Steel from the steam blast furnace (ore, coke and calcite from the drill and the battery)", "kind": "recipe", "type": "gtceu:steelmaking", "output": "gtceu:steel_ingot" },
-    { "id": "auto-calcita", "label": "Calcite (steam blast furnace flux, lapis lazuli vein)", "anyOf": ["gtceu:raw_calcite", "gtceu:calcite_dust"] },
-    { "id": "auto-gas-de-hulla", "label": "Coal gas (coking battery)", "fluid": "gtceu:coal_gas" },
-    { "id": "auto-creosota", "label": "Creosote (coke oven and coking battery)", "fluid": "gtceu:creosote" }
+    { "id": "auto-logs", "label": "Logs (greenhouse)", "anyOf": ["minecraft:oak_log", "minecraft:spruce_log", "minecraft:birch_log", "minecraft:jungle_log", "minecraft:acacia_log", "minecraft:dark_oak_log", "minecraft:mangrove_log", "minecraft:cherry_log", "gtceu:rubber_log"] },
+    { "id": "auto-resin", "label": "Sticky resin (greenhouse)", "item": "gtceu:sticky_resin" },
+    { "id": "auto-cobblestone", "label": "Cobblestone (rock crusher)", "item": "minecraft:cobblestone" },
+    { "id": "auto-stone", "label": "Stone", "item": "minecraft:stone" },
+    { "id": "auto-water", "label": "Water (primitive pump)", "fluid": "minecraft:water" },
+    { "id": "auto-steam", "label": "Steam (boiler)", "fluid": "gtceu:steam" },
+    { "id": "auto-steam-fuel", "label": "Steam with only fuel boilers", "fluid": "gtceu:steam", "without": ["synthetic:boiler-solar"] },
+    { "id": "auto-coal", "label": "Coal", "item": "minecraft:coal" },
+    { "id": "auto-charcoal", "label": "Charcoal", "item": "minecraft:charcoal" },
+    { "id": "auto-coke", "label": "Coke", "item": "gtceu:coke_gem" },
+    { "id": "auto-iron", "label": "Iron ingot", "item": "minecraft:iron_ingot" },
+    { "id": "auto-copper", "label": "Copper ingot", "item": "minecraft:copper_ingot" },
+    { "id": "auto-tin", "label": "Tin ingot", "item": "gtceu:tin_ingot" },
+    { "id": "auto-bronze", "label": "Bronze ingot", "item": "gtceu:bronze_ingot" },
+    { "id": "auto-steel", "label": "Steel ingot", "item": "gtceu:steel_ingot" },
+    { "id": "auto-drilling", "label": "Usable and sustained vein drill recipe", "kind": "recipe", "type": "gtceu:vein_drilling" },
+    { "id": "auto-drilling-fuel", "label": "Drill sustained with only fuel boilers", "kind": "recipe", "type": "gtceu:vein_drilling", "without": ["synthetic:boiler-solar"] },
+    { "id": "auto-greenhouse", "label": "Usable and sustained greenhouse recipe", "kind": "recipe", "type": "gtceu:greenhouse" },
+    { "id": "auto-greenhouse-fuel", "label": "Greenhouse sustained with only fuel boilers", "kind": "recipe", "type": "gtceu:greenhouse", "without": ["synthetic:boiler-solar"] },
+    { "id": "auto-steel-blast-furnace-steam", "label": "Steel from the steam blast furnace (ore, coke and calcite from the drill and the battery)", "kind": "recipe", "type": "gtceu:steelmaking", "output": "gtceu:steel_ingot" },
+    { "id": "auto-calcite", "label": "Calcite (steam blast furnace flux, lapis lazuli vein)", "anyOf": ["gtceu:raw_calcite", "gtceu:calcite_dust"] },
+    { "id": "auto-coal-gas", "label": "Coal gas (coking battery)", "fluid": "gtceu:coal_gas" },
+    { "id": "auto-creosote", "label": "Creosote (coke oven and coking battery)", "fluid": "gtceu:creosote" }
   ],
 
   "eraItems": [
     {
-      "id": "vapor-maquinas",
+      "id": "steam-machines",
       "label": "GTM's steam machines and the primitive multiblocks",
       "items": [
         "gtceu:lp_steam_*", "gtceu:hp_steam_*", "gtceu:steam_grinder", "gtceu:steam_oven", "gtceu:steam_input_bus", "gtceu:steam_input_hatch",
@@ -548,12 +548,12 @@
         "gtceu:firebricks", "gtceu:primitive_pump", "gtceu:pump_deck", "gtceu:bronze_brick_casing", "gtceu:bronze_firebox_casing"
       ]
     },
-    { "id": "vapor-multibloques", "label": "Our steam drill and greenhouse, formed", "items": ["m:gtceu:steam_vein_drill", "m:gtceu:steam_greenhouse"] },
-    { "id": "vapor-brocas", "label": "Bronze and steel drill bits", "items": ["grindless:bronze_drill_bit", "grindless:steel_drill_bit"] },
-    { "id": "vapor-observatorio", "label": "Clockwork observatory formed and its lunar chart (draft)", "items": ["m:gtceu:steam_observatory", "grindless:lunar_chart_draft"] },
-    { "id": "vapor-alto-horno-bateria", "label": "Steam blast furnace and coking battery formed, plus the ULV fluid output hatch the battery needs", "items": ["m:gtceu:steam_blast_furnace", "m:gtceu:coking_battery", "gtceu:ulv_output_hatch"] },
+    { "id": "steam-multiblocks", "label": "Our steam drill and greenhouse, formed", "items": ["m:gtceu:steam_vein_drill", "m:gtceu:steam_greenhouse"] },
+    { "id": "steam-bits", "label": "Bronze and steel drill bits", "items": ["grindless:bronze_drill_bit", "grindless:steel_drill_bit"] },
+    { "id": "steam-observatory", "label": "Clockwork observatory formed and its lunar chart (draft)", "items": ["m:gtceu:steam_observatory", "grindless:lunar_chart_draft"] },
+    { "id": "steam-blast-furnace-battery", "label": "Steam blast furnace and coking battery formed, plus the ULV fluid output hatch the battery needs", "items": ["m:gtceu:steam_blast_furnace", "m:gtceu:coking_battery", "gtceu:ulv_output_hatch"] },
     {
-      "id": "vapor-large-steam-family",
+      "id": "steam-large-steam-family",
       "label": "Large Steam family formed (GregTech Leisure's idea, reimplemented, 64 parallels each)",
       "items": [
         "m:gtceu:large_steam_macerator", "m:gtceu:large_steam_centrifuge", "m:gtceu:large_steam_thermal_centrifuge",
@@ -561,7 +561,7 @@
       ]
     },
     {
-      "id": "vapor-small-steam-family",
+      "id": "steam-small-steam-family",
       "label": "Small steam family formed (GregTech Leisure's idea, reimplemented, 8 parallels each) and the ULV input hatch the mixer/bath/washer need",
       "items": [
         "m:gtceu:steam_forge_hammer", "m:gtceu:steam_compressor", "m:gtceu:steam_alloy_smelter",
@@ -569,7 +569,7 @@
       ]
     },
     {
-      "id": "salida-vapor",
+      "id": "output-steam",
       "era": "lv",
       "label": "Steam's output: the gate to LV (LV hull, circuit and steam turbine)",
       "items": ["gtceu:lv_machine_hull", "gtceu:basic_electronic_circuit", "gtceu:lv_steam_turbine"]

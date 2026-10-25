@@ -72,13 +72,13 @@ test('programmed circuit and Forge compound inputs are resolved', () => {
 test('an empty vanilla tag (just the barrier) or a missing one leaves the slot with no members, named', () => {
   const rec = {
     id: 'x', type: 'minecraft:crafting_shaped',
-    json: { pattern: ['AB'], key: { A: { tag: 'a:vacia' }, B: { tag: 'a:no_esta' } }, result: { item: 'r' } },
+    json: { pattern: ['AB'], key: { A: { tag: 'a:empty' }, B: { tag: 'a:missing' } }, result: { item: 'r' } },
   };
-  const { n, ctx } = norm(rec, { tags: { 'a:vacia': ['minecraft:barrier'] } });
+  const { n, ctx } = norm(rec, { tags: { 'a:empty': ['minecraft:barrier'] } });
   assert.deepEqual(n.inputs.map((i) => i.alts.length), [0, 0]);
-  assert.match(n.inputs[0].label, /#a:vacia/);
-  assert.ok(ctx.tags.empty.has('a:vacia'));
-  assert.ok(ctx.tags.missing.has('a:no_esta'));
+  assert.match(n.inputs[0].label, /#a:empty/);
+  assert.ok(ctx.tags.empty.has('a:empty'));
+  assert.ok(ctx.tags.missing.has('a:missing'));
 });
 
 test('child config inherits from the parent: lists added together, targets only with inheritTargets', () => {
@@ -91,8 +91,8 @@ test('child config inherits from the parent: lists added together, targets only 
   assert.ok(lv.machinesFromRegistry.length >= 1);
   assert.ok(lv.targets.length > steam.targets.length, 'inheritTargets adds steam\'s');
   assert.ok(lv.autoTargets.length > steam.autoTargets.length);
-  assert.ok(lv.targets.some((t) => t.id === 'turbina-lv'));
-  assert.ok(lv.targets.some((t) => t.id === 'horno-arco'));
+  assert.ok(lv.targets.some((t) => t.id === 'turbine-lv'));
+  assert.ok(lv.targets.some((t) => t.id === 'furnace-arc'));
   assert.equal(lv.tier, 'lv');
   assert.equal(lv.typeAliases['gtceu:shaped'], 'minecraft:crafting_shaped');
   // maps are merged key by key

@@ -24,11 +24,11 @@
       { "type": "gtceu:lunar_drilling", "input": "grindless:vein_sample_{id}" }
     ] },
     "world": [
-      { "id": "arboles-gt", "mode": "manual", "items": ["gtceu:rubber_log", "gtceu:rubber_leaves", "gtceu:rubber_sapling", "gtceu:sticky_resin"], "note": "GTM's rubber trees in the Overworld and the sticky resin they drop." },
-      { "id": "piedras-gt", "mode": "manual", "items": ["gtceu:marble", "gtceu:red_granite"], "note": "GTM 7.5.3 GTPlacedFeatures/GTBiomeModifiers: marble and red granite patches in the Overworld." },
-      { "id": "suelo-luna", "mode": "manual", "items": ["gcyr:moon_stone", "gcyr:moon_cobblestone", "gcyr:moon_sand", "gcyr:lunar_mare_regolith"], "note": "The Moon's ground (gcyr:luna, by hand at the end of HV since v0.5.0): the lunar drill's regolith sample needs regolith and lunar sand (data/grindless/tables/veins_moon.json)." },
-      { "id": "carbonera", "mode": "auto", "via": ["gtceu:charcoal_pile_igniter"], "items": ["gtceu:brittle_charcoal"], "note": "GTM's charcoal pile igniter burns logs in the world and leaves brittle charcoal: it isn't a recipe." },
-      { "id": "recetas-especiales", "mode": "manual", "items": ["gtceu:facade_cover"], "note": "The facade cover comes from a special recipe (gtceu:crafting_facade_cover) that the analysis doesn't read." }
+      { "id": "trees-gt", "mode": "manual", "items": ["gtceu:rubber_log", "gtceu:rubber_leaves", "gtceu:rubber_sapling", "gtceu:sticky_resin"], "note": "GTM's rubber trees in the Overworld and the sticky resin they drop." },
+      { "id": "stones-gt", "mode": "manual", "items": ["gtceu:marble", "gtceu:red_granite"], "note": "GTM 7.5.3 GTPlacedFeatures/GTBiomeModifiers: marble and red granite patches in the Overworld." },
+      { "id": "moon-ground", "mode": "manual", "items": ["gcyr:moon_stone", "gcyr:moon_cobblestone", "gcyr:moon_sand", "gcyr:lunar_mare_regolith"], "note": "The Moon's ground (gcyr:luna, by hand at the end of HV since v0.5.0): the lunar drill's regolith sample needs regolith and lunar sand (data/grindless/tables/veins_moon.json)." },
+      { "id": "coal-pile", "mode": "auto", "via": ["gtceu:charcoal_pile_igniter"], "items": ["gtceu:brittle_charcoal"], "note": "GTM's charcoal pile igniter burns logs in the world and leaves brittle charcoal: it isn't a recipe." },
+      { "id": "recipes-special", "mode": "manual", "items": ["gtceu:facade_cover"], "note": "The facade cover comes from a special recipe (gtceu:crafting_facade_cover) that the analysis doesn't read." }
     ],
 
     "ignoreOreBlocks": true,
@@ -36,11 +36,11 @@
     "creative": ["*:creative_*", "*:*_creative_*", "*:debug_*", "gtceu:portable_debug_scanner"],
 
     "later": [
-      { "id": "marte", "era": "EV (Mars, at the end of EV)", "until": "ev", "label": "Mars (gcyr:mars)", "dimensions": ["gcyr:mars"], "items": ["gcyr:martian_rock", "gcyr:martian_cobblestone", "gcyr:mars_regolith"] },
-      { "id": "end-scheelita", "era": "EV (Mars, at the end of EV)", "until": "ev", "label": "the scheelite vein, which moves from the End to Mars (veins_excluded.json; no longer generated)", "veins": ["gtceu:scheelite_vein"], "materials": ["scheelite", "tungstate", "lithium"] },
-      { "id": "venus-mercurio", "era": "IV (Venus and Mercury)", "until": "iv", "label": "Venus and Mercury (gcyr:venus, gcyr:mercury)", "dimensions": ["gcyr:venus", "gcyr:mercury"], "items": ["gcyr:venus_rock", "gcyr:venus_cobblestone", "gcyr:venus_sand", "gcyr:venusian_regolith", "gcyr:mercury_rock", "gcyr:mercury_cobblestone"] },
+      { "id": "mars", "era": "EV (Mars, at the end of EV)", "until": "ev", "label": "Mars (gcyr:mars)", "dimensions": ["gcyr:mars"], "items": ["gcyr:martian_rock", "gcyr:martian_cobblestone", "gcyr:mars_regolith"] },
+      { "id": "end-scheelite", "era": "EV (Mars, at the end of EV)", "until": "ev", "label": "the scheelite vein, which moves from the End to Mars (veins_excluded.json; no longer generated)", "veins": ["gtceu:scheelite_vein"], "materials": ["scheelite", "tungstate", "lithium"] },
+      { "id": "venus-mercury", "era": "IV (Venus and Mercury)", "until": "iv", "label": "Venus and Mercury (gcyr:venus, gcyr:mercury)", "dimensions": ["gcyr:venus", "gcyr:mercury"], "items": ["gcyr:venus_rock", "gcyr:venus_cobblestone", "gcyr:venus_sand", "gcyr:venusian_regolith", "gcyr:mercury_rock", "gcyr:mercury_cobblestone"] },
       { "id": "end-naquadah", "era": "IV+ (naquadah: Venus in docs/journey.md, and whatever hangs off it)", "until": "iv", "label": "the End's naquadah vein, held back until IV (veins_excluded.json)", "veins": ["gtceu:naquadah_vein"] },
-      { "id": "end-pechblenda", "era": "IV (radioactives)", "until": "iv", "label": "the End's pitchblende vein, held back until IV (veins_excluded.json)", "veins": ["gtceu:pitchblende_vein_end"] },
+      { "id": "end-pitchblende", "era": "IV (radioactives)", "until": "iv", "label": "the End's pitchblende vein, held back until IV (veins_excluded.json)", "veins": ["gtceu:pitchblende_vein_end"] },
       { "id": "proxima", "era": "UHV (Proxima b)", "until": "uhv", "label": "Proxima Centauri b", "dimensions": ["gcyr:proxima_centauri_b"], "items": ["gcyr:proxima_centauri_b_*", "gcyr:prb_*"] }
     ],
 

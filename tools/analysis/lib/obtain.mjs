@@ -24,7 +24,7 @@ const pathOf = (id) => {
 };
 
 export const DEFAULT_DIMENSIONS = ['minecraft:overworld', 'minecraft:the_nether', 'minecraft:the_end', 'grindless:flat', 'grindless:void'];
-/** Eras del pack en orden (las de docs/viaje.md); `until` de la clase B es una de ellas y la de la clase C, "never". */
+/** The pack's eras in order (the ones in docs/journey.md); class B's `until` is one of them, and class C's is "never". */
 export const ERA_IDS = ['steam', 'lv', 'mv', 'hv', 'ev', 'iv', 'luv', 'zpm', 'uv', 'uhv', 'uev', 'uiv', 'uxv', 'opv', 'max'];
 const DEFAULT_NBT_TYPED = ['productivebees:configurable_honeycomb', 'productivebees:configurable_comb', 'productivebees:spawn_egg_configurable_bee'];
 const HIDDEN_TAG = 'c:hidden_from_recipe_viewers';

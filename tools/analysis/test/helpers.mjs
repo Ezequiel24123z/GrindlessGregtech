@@ -103,9 +103,9 @@ export function miniPack({ drillEut = 8, extraRecipes = [] } = {}) {
     tier: 'mini',
     unconditionalTypes: ['minecraft:crafting_shaped', 'minecraft:crafting_shapeless'],
     world: [
-      { id: 'arboles', mode: 'manual', bootstrap: true, items: ['t:log', 't:sapling', 't:rock', 't:raw'] },
-      { id: 'agua', mode: 'manual', bootstrap: true, items: ['fluid:t:water'] },
-      { id: 'bomba', mode: 'auto', via: ['t:pump'], items: ['fluid:t:water'] },
+      { id: 'trees', mode: 'manual', bootstrap: true, items: ['t:log', 't:sapling', 't:rock', 't:raw'] },
+      { id: 'water', mode: 'manual', bootstrap: true, items: ['fluid:t:water'] },
+      { id: 'pump', mode: 'auto', via: ['t:pump'], items: ['fluid:t:water'] },
     ],
     machines: [
       { machine: 't:furnace', types: ['minecraft:smelting'], needs: [['t:log', 't:coal']] },
@@ -115,19 +115,19 @@ export function miniPack({ drillEut = 8, extraRecipes = [] } = {}) {
       { machine: 't:greenhouse', types: ['t:greenhouse'], maxEUt: 32, needs: ['fluid:t:steam'], parts: ['t:casing'] },
     ],
     synthetic: [
-      { id: 'caldera', machines: ['t:boiler'], consumes: [['t:log', 't:coal'], 'fluid:t:water'], produces: ['fluid:t:steam'] },
+      { id: 'boiler', machines: ['t:boiler'], consumes: [['t:log', 't:coal'], 'fluid:t:water'], produces: ['fluid:t:steam'] },
     ],
     targets: [
-      { id: 'perforadora', item: 't:drill' },
-      { id: 'invernadero', item: 't:greenhouse' },
-      { id: 'receta-perforacion', kind: 'recipe', type: 't:drilling' },
+      { id: 'drill', item: 't:drill' },
+      { id: 'greenhouse', item: 't:greenhouse' },
+      { id: 'recipe-drilling', kind: 'recipe', type: 't:drilling' },
     ],
     autoTargets: [
-      { id: 'auto-mena', item: 't:raw' },
-      { id: 'auto-troncos', item: 't:log' },
-      { id: 'auto-lingote', item: 't:ingot' },
-      { id: 'auto-agua', fluid: 't:water' },
-      { id: 'auto-vapor', fluid: 't:steam' },
+      { id: 'auto-ore', item: 't:raw' },
+      { id: 'auto-logs', item: 't:log' },
+      { id: 'auto-ingot', item: 't:ingot' },
+      { id: 'auto-water', fluid: 't:water' },
+      { id: 'auto-steam', fluid: 't:steam' },
     ],
   };
   const dump = mkDump({ recipes, items: MINI_ITEMS, fluids: MINI_FLUIDS });

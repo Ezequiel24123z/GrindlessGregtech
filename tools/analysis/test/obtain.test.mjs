@@ -98,12 +98,12 @@ function pack({ drillRecipe = true, extraRecipes = [], classes, tagsItem = {}, t
       veins: { requireRecipe: { type: 'gtceu:vein_drilling', input: 'grindless:vein_sample_{id}' } },
       ignoreOreBlocks: true,
       creative: ['*:creative_*'],
-      later: [{ id: 'luna', era: 'EV', until: 'ev', label: 'la Luna', dimensions: ['gcyr:luna'] }],
+      later: [{ id: 'moon', era: 'EV', until: 'ev', label: 'the Moon', dimensions: ['gcyr:luna'] }],
       classes: classes || [
         { class: 'A', materials: ['perlite'], era: 'LV', source: 'Nether vein', reason: 'its electrolysis gives obsidian dust' },
         { class: 'C', materials: ['beta'], reason: 'its vein isn\'t in the table' },
         { class: 'C', materials: ['gtceu:industrial_alpha_casing'], reason: 'no recipe' },
-        { class: 'C', materials: ['no_existe'], reason: 'rule that doesn\'t name anything' },
+        { class: 'C', materials: ['does_not_exist'], reason: 'rule that doesn\'t name anything' },
         { class: 'C', fallback: true, partial: true, forms: 'ore', reason: 'no vein' },
       ],
       ...obtain,
@@ -173,7 +173,7 @@ test('obtain: classification (rules, creative, later era, fallback rules, unclas
   assert.equal(group(res, 'theta').cls, 'C', 'fallback rule: loose ore forms');
   assert.equal(group(res, 'omega').cls, '?');
   assert.equal(res.verdict, 'FAIL', 'there are unclassified groups');
-  assert.ok(res.unusedRules.some((u) => u.materials.includes('no_existe')));
+  assert.ok(res.unusedRules.some((u) => u.materials.includes('does_not_exist')));
   assert.ok(res.byClass.A.groups === 1 && res.byClass['?'].groups > 0);
 });
 
@@ -219,7 +219,7 @@ test('obtain: text, JSON and Markdown reports', () => {
   const md = renderObtainMarkdown(res, { dump: 'd', namespaces: 'gtceu', dimensions: ['minecraft:overworld'] });
   assert.match(md, /\| Class \| What to do \| Groups \| Items \| Fluids \| Recipes \|/);
   assert.match(md, /### perlite[\s\S]*t:electro_perlite/);
-  assert.match(md, /EV: comes from la Luna[^\n]*`gamma`/);
+  assert.match(md, /EV: comes from the Moon[^\n]*`gamma`/);
   assert.match(md, /its vein isn't in the table[^\n]*`beta`/);
   assert.match(md, /## Unclassified[\s\S]*`omega`/);
   const json = obtainToJson(res);
@@ -351,7 +351,7 @@ test('obtain: the reachable Moon with its drill (requireRecipe in a list) and a 
     { type: 'gtceu:vein_drilling', input: 'grindless:vein_sample_{id}' },
     { type: 'gtceu:lunar_drilling', input: 'grindless:vein_sample_{id}' },
   ];
-  const later = [{ id: 'marte', era: 'EV', until: 'ev', label: 'Marte', materials: ['lambda'] }];
+  const later = [{ id: 'mars', era: 'EV', until: 'ev', label: 'Mars', materials: ['lambda'] }];
   const classes = [{ class: 'C', fallback: true, materials: ['*'], reason: 'rest' }];
   const run = (obtain) => {
     const p = pack({ extraRecipes, extra, classes, obtain: { later, ...obtain } });
@@ -363,7 +363,7 @@ test('obtain: the reachable Moon with its drill (requireRecipe in a list) and a 
   assert.ok(!never(res).has('gtceu:kappa_dust') && !never(res).has('gtceu:raw_kappa'), 'the lunar vein with the lunar drill\'s recipe gives its ore');
   assert.equal(group(res, 'lambda').cls, 'B', 'the stage\'s materials give their raw ores');
   assert.equal(group(res, 'lambda').until, 'ev');
-  assert.equal(res.later.find((s) => s.id === 'marte').materials, 1, 'a vein material in the stage');
+  assert.equal(res.later.find((s) => s.id === 'mars').materials, 1, 'a vein material in the stage');
 
   // mutation: only the vein drill (the lunar one doesn't count) -> the sample needs the ore only the vein would give: never
   res = run({ reachableDimensions: withMoon, veins: { requireRecipe: drills[0] } });
@@ -389,7 +389,7 @@ test('tiers/obtain.json: inherits from steam, audits GT, and all its rules have 
   const { raw } = loadTierConfig({ tier: 'obtain' }, path.join(here, '..', 'tiers'));
   assert.ok(raw.obtain.audit.includes('gtceu') && raw.obtain.audit.includes('grindless'));
   assert.ok(raw.unconditionalTypes.includes('minecraft:crafting_shaped'), 'inherited from steam');
-  assert.ok(raw.synthetic.some((s) => s.id === 'caldera-solida'), 'steam\'s boilers give the steam');
+  assert.ok(raw.synthetic.some((s) => s.id === 'boiler-solid'), 'steam\'s boilers give the steam');
   for (const c of raw.obtain.classes) {
     assert.ok(['A', 'B', 'C'].includes(c.class), JSON.stringify(c));
     assert.ok(c.reason && c.reason.length > 5, JSON.stringify(c));
