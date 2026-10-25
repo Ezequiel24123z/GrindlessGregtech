@@ -1,10 +1,10 @@
 <#
 .SYNOPSIS
-  Regenerates the Processing Lines charts and checks them (docs/quests.md, section 17).
+  Regenerates the Processing Lines charts and the Power tab, and checks them (docs/quests.md, sections 17 and 18).
 
 .DESCRIPTION
   1. pl-gen.mjs: the chapters, the group line and the linter's roots (a dry run without -Write: counts and layout only).
-  2. With -Dump: pl-check.mjs checks every arrow against that recipe dump.
+  2. With -Dump: pl-check.mjs checks every arrow, and every number of the Power tab, against that recipe dump.
   3. With -Write: the linter on the charts (item ids and tags against the dump, if given) and on the whole book.
   4. With -Write and -Preview: one PNG per chart (Render-QuestPreview.ps1).
   Reports and previews go to -OutDir (default: out\ next to this script, ignored by git).
@@ -54,7 +54,7 @@ if ($Dump) {
 
 if ($Write) {
     $book = Join-Path $repo 'pack\config\ftbquests\quests\chapters'
-    $charts = (Get-ChildItem $book -Filter 'pl_*.snbt' | ForEach-Object { $_.BaseName }) -join ','
+    $charts = ((Get-ChildItem $book -Filter 'pl_*.snbt' | ForEach-Object { $_.BaseName }) + @('power')) -join ','
     Push-Location $repo
     try {
         $lint = @('tools\quests\lint.mjs', '--chapter', $charts)

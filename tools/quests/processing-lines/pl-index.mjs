@@ -37,6 +37,8 @@ export async function loadIndex({ dump, quiet = true } = {}) {
     // recipes the bench's test overlay adds (gg_test:...) are not part of the pack
     if (String(rec.id).startsWith('gg_test:')) continue;
     const n = normalizeRecipe(rec, nctx);
+    // ticks per run (GT recipes): the power checks read EU per unit of fuel from it
+    n.duration = rec.json && typeof rec.json.duration === 'number' ? rec.json.duration : null;
     recipes.set(n.id, n);
     const ins = new Set();
     for (const i of n.inputs) for (const a of i.alts) ins.add(a);
@@ -67,7 +69,7 @@ export function describe(n) {
   });
   const outs = n.outputs.map((o) => (o.count && o.count !== 1 ? o.count + 'x' : '') + short(o.key) + (o.chance < 1 ? `@${Math.round(o.chance * 1000) / 10}%` : ''));
   const cond = (n.conditions || []).map((c) => c.type + (c.dimension ? '=' + c.dimension : '') + (c.temperature ? '=' + c.temperature : '')).filter(Boolean);
-  return `${n.type} ${n.id}: ${ins.join(' + ')} -> ${outs.join(' + ')}${n.eut ? `  [${n.eut} EU/t]` : ''}${cond.length ? '  {' + cond.join(', ') + '}' : ''}`;
+  return `${n.type} ${n.id}: ${ins.join(' + ')} -> ${outs.join(' + ')}${n.eut ? `  [${n.eut} EU/t]` : ''}${n.euOut ? `  [makes ${n.euOut} EU/t]` : ''}${n.duration ? `  ${n.duration} t` : ''}${cond.length ? '  {' + cond.join(', ') + '}' : ''}`;
 }
 
 async function main(argv) {

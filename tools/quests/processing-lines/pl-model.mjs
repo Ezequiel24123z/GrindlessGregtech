@@ -6,15 +6,17 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath, pathToFileURL } from 'node:url';
 import { KINDS } from './pl-lib.mjs';
+import { parse as parseSnbt } from '../lib/snbt.mjs';
 
 const here = path.dirname(fileURLToPath(import.meta.url));
 // the checkout this folder lives in (tools/quests/processing-lines)
 export const REPO = path.resolve(here, '..', '..', '..');
+export const BOOK = path.join(REPO, 'pack', 'config', 'ftbquests', 'quests');
 export const TIERS = ['steam', 'lv', 'mv', 'hv', 'ev', 'iv'];
 export const ALL = [];
-for (const t of TIERS) {
-  const f = path.join(here, `pl-data-${t}.mjs`);
-  if (fs.existsSync(f)) ALL.push((await import(pathToFileURL(f).href)).default);
+for (const f of [...TIERS.map((t) => `pl-data-${t}.mjs`), 'power-data.mjs']) {
+  const file = path.join(here, f);
+  if (fs.existsSync(file)) ALL.push((await import(pathToFileURL(file).href)).default);
 }
 export const GROUP_TITLE = 'Processing Lines';
 export const GAP_X = 3;
@@ -35,7 +37,7 @@ export function buildModel(chapters = ALL) {
   const errors = [];
   const byFile = new Map();
   for (const ch of chapters) {
-    const m = { ...ch, id: hid('chapter|' + ch.file), nodes: [], byKey: new Map() };
+    const m = { ...ch, id: hid('chapter|' + ch.file), groupTitle: ch.group || GROUP_TITLE, nodes: [], byKey: new Map() };
     byFile.set(ch.file, m);
     // place the clusters: bands top to bottom, clusters left to right, top-aligned, GAP_X/GAP_Y apart
     let bandY = 0;
@@ -80,7 +82,31 @@ export function buildModel(chapters = ALL) {
     for (const ck of Object.keys(ch.clusters)) if (!placed.has(ck)) errors.push(`${ch.file}: cluster ${ck} is in no band`);
   }
   // resolve links and dependencies
+  const eraBook = new Map();
+  const eraQuest = (chapter, id) => {
+    if (!eraBook.has(chapter)) {
+      const file = path.join(BOOK, 'chapters', chapter + '.snbt');
+      const quests = new Map();
+      if (fs.existsSync(file)) {
+        for (const q of parseSnbt(fs.readFileSync(file, 'utf8')).quests || []) {
+          const items = new Set();
+          const add = (it) => { if (typeof it === 'string') items.add(it); else if (it && typeof it.id === 'string') items.add(it.id); };
+          add(q.icon);
+          for (const t of q.tasks || []) add(t.item);
+          quests.set(String(q.id), { id: String(q.id), chapter, title: String(q.title || ''), deps: [].concat(q.dependencies || []).map(String), items, era: true });
+        }
+      }
+      eraBook.set(chapter, quests);
+    }
+    return eraBook.get(chapter).get(id) || null;
+  };
   const resolveRef = (ref, where) => {
+    if (ref.includes('#')) {
+      const [chapter, id] = ref.split('#');
+      const q = eraQuest(chapter, id);
+      if (!q) errors.push(`${where}: link to unknown quest ${ref}`);
+      return q;
+    }
     const [file, key] = ref.split(':');
     const target = byFile.get(file);
     const node = target && target.byKey.get(key);
@@ -94,6 +120,12 @@ export function buildModel(chapters = ALL) {
         nd.target = resolveRef(nd.link, `${m.file}/${nd.key}`);
         if (nd.target && nd.target.chapter === m.file) errors.push(`${m.file}/${nd.key}: a link inside its own chapter repeats every line of ${nd.link}`);
       }
+    }
+    const seen = new Map();
+    for (const nd of m.nodes) {
+      if (!nd.target) continue;
+      if (seen.has(nd.target.id)) errors.push(`${m.file}/${nd.key}: ${nd.link} is linked twice (also ${seen.get(nd.target.id)}): FTB draws every line of a quest at each of its links`);
+      seen.set(nd.target.id, nd.key);
     }
   }
   for (const m of byFile.values()) {

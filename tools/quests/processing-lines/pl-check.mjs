@@ -1,10 +1,14 @@
-// Checks every arrow of the Processing Lines charts against a recipe dump (gg_dump's kubejs-exported), with the repository's
-// own loaders (tools/analysis/lib). An arrow A -> B passes when:
+// Checks every arrow of the Processing Lines charts and of the Power tab against a recipe dump (gg_dump's kubejs-exported),
+// with the repository's own loaders (tools/analysis/lib). An arrow A -> B passes when:
 //   item -> item        some recipe takes A and gives B (recycling recipes do not count; `by` limits the recipe types);
 //   item -> machine M   some recipe of M's types takes A;
 //   machine M -> item   some recipe of M's types gives B and takes one of the items drawn into M (any, if none is drawn);
 //   machine -> machine  some recipe takes the first controller and gives the second (how it is built);
 //   summary A -> B      { via: [I1, I2, ...] }: every step A -> I1 -> I2 -> ... -> B passes as item -> item.
+// The Power tab's own arrows: an era quest -> B (B's item is a task or the icon of that quest), engineFluid (what GTM's large
+// combustion engines burn besides the fuel), boilerWater (a GTM boiler drinks it), build (a part of B's controller recipe).
+// Every number in a Power node's text is a figure (pl-lib.mjs#P) that checkFig recomputes from the dump's recipes and
+// machines, pack/config/gtceu.yaml, a constant of the pack's scripts or tables, or the dump's electric.json.
 // Also: every icon and task item exists and is not hidden in EMI (the dump's c:hidden_from_recipe_viewers, and
 // hidden_until.json groups after IMPLEMENTED_ERA), every machine's recipe types exist, and every leaf states where it ends.
 //
@@ -129,12 +133,221 @@ function itemToItem(a, b, types, allowRecycling = false) {
 }
 
 function drawnInputs(m) {
-  return m.arrows.filter((e) => !e.srcRes.machine).flatMap((e) => keysOf(e.srcRes));
+  return m.arrows.filter((e) => !e.srcRes.machine && !e.srcRes.era && !e.engine && !e.boilerWater && !e.build).flatMap((e) => keysOf(e.srcRes));
+}
+
+// ---------------------------------------------------------------- facts beyond recipes (the Power tab)
+
+const V = (tier) => 8 * 4 ** tier;
+const TIER_INDEX = { ulv: 0, lv: 1, mv: 2, hv: 3, ev: 4, iv: 5, luv: 6, zpm: 7, uv: 8, uhv: 9 };
+const byType = new Map();
+for (const r of idx.recipes.values()) { if (!byType.has(r.type)) byType.set(r.type, []); byType.get(r.type).push(r); }
+const recipesOf = (types) => types.flatMap((t) => byType.get(t) || []);
+
+// pack/config/gtceu.yaml as dotted paths (a plain reader: indentation and key: value)
+function readYaml(file) {
+  const out = new Map();
+  const stack = [];
+  for (const raw of fs.readFileSync(file, 'utf8').split(/\r?\n/)) {
+    if (/^\s*(#|$)/.test(raw)) continue;
+    const mm = /^(\s*)([A-Za-z0-9_.-]+):\s*(.*)$/.exec(raw);
+    if (!mm) continue;
+    while (stack.length && stack[stack.length - 1].indent >= mm[1].length) stack.pop();
+    const value = mm[3].replace(/\s+#.*$/, '').trim();
+    const key = [...stack.map((s) => s.key), mm[2]].join('.');
+    if (value === '') stack.push({ indent: mm[1].length, key: mm[2] });
+    else out.set(key, value.replace(/^["']|["']$/g, ''));
+  }
+  return out;
+}
+const gtYaml = readYaml(path.join(repo, 'pack', 'config', 'gtceu.yaml'));
+const cfgNum = (suffix, def) => { for (const [k, v] of gtYaml) if (k === suffix || k.endsWith('.' + suffix)) return Number(v); return def; };
+
+// GTM 7.5.3's boilers (defaults from ConfigHolder): a small boiler makes base / 2 every 10 ticks at full heat
+// (SteamBoilerMachine#getTotalSteamOutput), and a high-pressure one burns its fuel twice as fast (recipeModifier, duration x 0.5);
+// a large boiler drains floor(T x 5 / steamPerWater) water every 5 ticks at full throttle and makes steamPerWater steam from each
+// mB (LargeBoilerMachine#updateCurrentTemperature), burning each fuel for its large_boiler recipe's duration
+const BOILERS = {
+  'gtceu:lp_steam_solid_boiler': { key: 'smallBoilers.solidBoilerBaseOutput', def: 120, type: 'gtceu:steam_boiler' },
+  'gtceu:hp_steam_solid_boiler': { key: 'smallBoilers.hpSolidBoilerBaseOutput', def: 300, type: 'gtceu:steam_boiler', hp: true },
+  'gtceu:lp_steam_liquid_boiler': { key: 'smallBoilers.liquidBoilerBaseOutput', def: 240, type: 'gtceu:steam_boiler' },
+  'gtceu:hp_steam_liquid_boiler': { key: 'smallBoilers.hpLiquidBoilerBaseOutput', def: 600, type: 'gtceu:steam_boiler', hp: true },
+  'gtceu:lp_steam_solar_boiler': { key: 'smallBoilers.solarBoilerBaseOutput', def: 120 },
+  'gtceu:hp_steam_solar_boiler': { key: 'smallBoilers.hpSolarBoilerBaseOutput', def: 360 },
+  'gtceu:bronze_large_boiler': { key: 'largeBoilers.bronzeBoilerMaxTemperature', def: 800, type: 'gtceu:large_boiler', large: true },
+  'gtceu:steel_large_boiler': { key: 'largeBoilers.steelBoilerMaxTemperature', def: 1800, type: 'gtceu:large_boiler', large: true },
+  'gtceu:titanium_large_boiler': { key: 'largeBoilers.titaniumBoilerMaxTemperature', def: 3200, type: 'gtceu:large_boiler', large: true },
+  'gtceu:tungstensteel_large_boiler': { key: 'largeBoilers.tungstensteelBoilerMaxTemperature', def: 6400, type: 'gtceu:large_boiler', large: true },
+};
+function boilerSteam(item) {
+  const b = BOILERS[item];
+  if (!b) return null;
+  const v = cfgNum(b.key, b.def);
+  if (!b.large) return v / 20;
+  const spw = cfgNum('largeBoilers.steamPerWater', 160);
+  return (Math.floor((v * 5) / spw) * spw) / 5;
+}
+// GTM 7.5.3's large combustion engines: V[tier] of the hull, x2 voltage with the boost and the output times 1.5 (EV) or 2
+// (above EV), taking lubricant and oxygen (liquid oxygen above EV) besides the fuel (LargeCombustionEngineMachine)
+const ENGINES = {
+  'gtceu:large_combustion_engine': ['fluid:gtceu:lubricant', 'fluid:gtceu:oxygen'],
+  'gtceu:extreme_combustion_engine': ['fluid:gtceu:lubricant', 'fluid:gtceu:liquid_oxygen'],
+};
+// the tier of the machine hull in a controller's own recipe
+function hullTier(item) {
+  for (const r of idx.producers.get(item) || []) {
+    for (const i of r.inputs) for (const a of i.alts) {
+      const mm = /^gtceu:(ulv|lv|mv|hv|ev|iv|luv|zpm|uv|uhv)_machine_hull$/.exec(a);
+      if (mm) return TIER_INDEX[mm[1]];
+    }
+  }
+  return null;
+}
+// a constant of the pack's scripts or tables: { file, re } (first capture) or { file, json: 'a.b' }
+function sourceValue(src) {
+  const file = path.join(repo, src.file);
+  if (!fs.existsSync(file)) return null;
+  const text = fs.readFileSync(file, 'utf8');
+  if (src.json) return src.json.split('.').reduce((o, k) => (o == null ? o : o[k]), readJson(text));
+  const mm = new RegExp(src.re).exec(text);
+  return mm ? Number(mm[1]) : null;
+}
+// gg_dump's electric.json: wire properties per material, EU-holding items, AE2's P2P toll
+const electricFile = path.join(dumpDir, 'electric.json');
+const electric = fs.existsSync(electricFile) ? readJson(fs.readFileSync(electricFile, 'utf8')) : null;
+
+const near = (a, b) => Math.abs(a - b) < 0.005 + 1e-9 * Math.abs(b) || Math.round(a * 100) / 100 === b;
+const consumed = (r, key) => r.inputs.find((i) => i.alts.includes(key) && !i.cap);
+
+function checkFig(nd, f) {
+  const fail = (why) => ({ ok: false, why });
+  const pass = (how) => ({ ok: true, how });
+  const any = (vals, want, what) => (vals.some((v) => near(v, want)) ? pass(what) : fail(`${what}: ${vals.length ? vals.map((v) => Math.round(v * 100) / 100).join(' or ') : 'no recipe'}`));
+  switch (f.t) {
+    case 'single': {
+      const reg = idx.machines.get(nd.item);
+      if (!reg) return fail('not in machines.json');
+      return V(reg.tier) === f.eut ? pass(`machines.json tier ${reg.tier}: V = ${V(reg.tier)}`) : fail(`machines.json tier ${reg.tier}: V = ${V(reg.tier)}`);
+    }
+    case 'run': {
+      const hits = recipesOf(nd.types).filter((r) => r.euOut === f.eut && (!f.recipe || r.id === f.recipe));
+      return hits.length ? pass(hits[0].id) : fail(`no ${nd.types.join('|')} recipe makes ${f.eut} EU/t${f.recipe ? ' as ' + f.recipe : ''}`);
+    }
+    case 'uses': {
+      const hits = recipesOf(nd.types).filter((r) => r.eut === f.eut);
+      return hits.length ? pass(hits[0].id) : fail(`no ${nd.types.join('|')} recipe uses ${f.eut} EU/t`);
+    }
+    case 'max': {
+      const n = sourceValue(f.src);
+      if (n !== f.n) return fail(`${f.src.file} gives ${n}, not ${f.n}`);
+      return f.total === f.n * f.each ? pass(`${f.n} x ${f.each} (${f.src.file})`) : fail(`${f.n} x ${f.each} is ${f.n * f.each}`);
+    }
+    case 'fuel': {
+      const vals = [];
+      for (const r of idx.consumers.get(f.key) || []) {
+        if (!nd.types.includes(r.type) || !(r.euOut > 0) || !r.duration || (f.recipe && r.id !== f.recipe)) continue;
+        const inp = consumed(r, f.key);
+        if (inp) vals.push((r.euOut * r.duration) / ((inp.count || 1) * (inp.consume || 1)));
+      }
+      return any(vals, f.eu, `EU per unit of ${f.key}`);
+    }
+    case 'steam': {
+      const fromConfig = boilerSteam(nd.item);
+      if (fromConfig !== null) return near(fromConfig, f.mbt) ? pass(`gtceu.yaml: ${fromConfig} mB/t`) : fail(`gtceu.yaml gives ${fromConfig} mB/t`);
+      const vals = recipesOf(nd.types).flatMap((r) => r.outputs.filter((o) => o.key === 'fluid:gtceu:steam' && r.duration).map((o) => o.count / r.duration));
+      return any(vals, f.mbt, 'steam per tick');
+    }
+    case 'steamFuel': {
+      const b = BOILERS[nd.item];
+      if (!b || !b.type) return fail('not a fuel-burning GTM boiler');
+      const mbt = boilerSteam(nd.item);
+      const vals = [];
+      for (const r of idx.consumers.get(f.key) || []) {
+        if (r.type !== b.type || !r.duration) continue;
+        const inp = consumed(r, f.key);
+        if (!inp) continue;
+        const dur = b.hp ? Math.max(1, Math.floor(r.duration * 0.5)) : r.duration;
+        vals.push(f.key.startsWith('fluid:') ? (mbt * dur) / inp.count : (mbt * dur) / inp.count / 1000);
+      }
+      return any(vals, f.buckets, `buckets of steam from ${f.key}`);
+    }
+    case 'ccSteam': {
+      const vals = [];
+      for (const r of idx.consumers.get(f.key) || []) {
+        if (!nd.types.includes(r.type)) continue;
+        const inp = consumed(r, f.key);
+        const st = r.outputs.find((o) => o.key === 'fluid:gtceu:steam');
+        if (inp && st) vals.push(st.count / inp.count);
+      }
+      return any(vals, f.mb, `steam per mB of ${f.key}`);
+    }
+    case 'engine': {
+      const t = hullTier(nd.item);
+      if (t === null) return fail('no machine hull in the controller recipe');
+      const factor = t > TIER_INDEX.ev ? 2 : 1.5;
+      if (f.eut !== V(t)) return fail(`hull tier ${t}: V = ${V(t)}`);
+      if (f.factor !== factor || f.boosted !== V(t) * 2 * factor) return fail(`boosted: ${V(t) * 2 * factor} (factor ${factor})`);
+      return pass(`hull tier ${t}: V = ${V(t)}, boosted 2 x ${factor}`);
+    }
+    case 'turbine': {
+      const t = hullTier(nd.item);
+      return t !== null && f.eut === 2 * V(t) ? pass(`hull tier ${t}: 2 x V = ${2 * V(t)}`) : fail(`hull tier ${t}`);
+    }
+    case 'cover': {
+      const mm = /^gtceu:(ulv|lv|mv|hv|ev|iv|luv|zpm|uv|uhv)_solar_panel$/.exec(nd.item);
+      const v = nd.item === 'gtceu:solar_panel' ? 1 : mm ? V(TIER_INDEX[mm[1]]) : null;
+      return v === f.eut ? pass(`CoverSolarPanel: ${v}`) : fail(`CoverSolarPanel: ${v}`);
+    }
+    case 'battery': {
+      if (!electric) return fail('needs the dump\'s electric.json');
+      const e = (electric.items || []).find((x) => x.id === f.item);
+      return e && e.capacity === f.eu ? pass(`electric.json: ${e.capacity}`) : fail(`electric.json: ${e ? e.capacity : 'no entry'}`);
+    }
+    case 'cable': {
+      if (!electric) return fail('needs the dump\'s electric.json');
+      const w = (electric.wires || []).find((x) => x.material === f.material);
+      if (!w) return fail(`electric.json has no wire for ${f.material}`);
+      const ok = w.voltage === V(TIER_INDEX[String(f.tier).toLowerCase()]) && w.amperage === f.amps && w.loss === f.loss;
+      return ok ? pass(`electric.json: ${w.voltage} V, ${w.amperage} A, loss ${w.loss}`) : fail(`electric.json: ${w.voltage} V, ${w.amperage} A, loss ${w.loss}`);
+    }
+    case 'toll': {
+      if (!electric || !electric.ae2) return fail('needs the dump\'s electric.json');
+      const p = Math.round(Number(electric.ae2.p2pEnergyTax) * 10000) / 100;
+      return p === f.percent ? pass(`AE2 P2P energy tax ${electric.ae2.p2pEnergyTax}`) : fail(`AE2 P2P energy tax ${electric.ae2.p2pEnergyTax}`);
+    }
+    case 'anywhere': {
+      // the recipes of the type with no dimension condition are the ones that run off Earth: their fuels must be exactly these
+      const free = (byType.get(f.type) || []).filter((r) => !(r.conditions || []).some((c) => /dimension/.test(String(c.type || ''))));
+      if (!free.length) return fail(`no recipe of ${f.type} runs without a dimension condition`);
+      const want = f.fuels.map((x) => x.key);
+      const stray = free.filter((r) => !r.inputs.some((i) => i.alts.some((a) => want.includes(a))));
+      const missing = want.filter((k) => !free.some((r) => r.inputs.some((i) => i.alts.includes(k))));
+      if (stray.length || missing.length) return fail(`off Earth: ${free.map((r) => r.id).join(', ')}`);
+      return pass(`${free.length} ${f.type} recipe(s) with no dimension condition: ${free.map((r) => r.id).join(', ')}`);
+    }
+    default:
+      return fail('unknown figure ' + f.t);
+  }
 }
 
 function checkArrow(e) {
   const A = e.srcRes;
   const B = e.dst;
+  if (A.era) {
+    // an era quest introduces B: B's item is one of its tasks, or its icon
+    return A.items.has(B.item) ? { ok: true, recipes: [`${A.chapter} "${A.title}" (${A.id})`] } : { ok: false, why: `quest ${A.chapter} "${A.title}" has no task or icon ${B.item}` };
+  }
+  if (e.engine) {
+    const ok = (ENGINES[B.item] || []).some((k) => keysOf(A).includes(k));
+    return ok ? { ok: true, recipes: [`LargeCombustionEngineMachine takes ${A.res}`] } : { ok: false, why: `${B.item} does not take ${A.res} besides its fuel` };
+  }
+  if (e.boilerWater) {
+    return BOILERS[B.item] && A.res === 'fluid:minecraft:water' ? { ok: true, recipes: ['a GTM boiler drinks water'] } : { ok: false, why: `${B.item} is not a GTM boiler, or ${A.res} is not water` };
+  }
+  if (e.build) {
+    const hits = keysOf(A).flatMap((k) => (idx.consumers.get(k) || []).filter((r) => outputKeys(r).has(B.item)));
+    return hits.length ? { ok: true, recipes: [hits[0].id], build: true } : { ok: false, why: `no recipe builds ${B.item} from ${A.res}` };
+  }
   const types = e.by || (B.machine ? null : B.by) || null;
   if (e.via) {
     const chain = [keysOf(A), ...e.via.map((k) => [k]), keysOf(B)];
@@ -169,31 +382,44 @@ function checkArrow(e) {
 const lines = ['# Processing lines: arrow check', '', `Dump: \`${dumpDir}\` (EMI switch at ${dumpEra} when dumped). Implemented era now: ${implemented}.`, ''];
 let fails = 0;
 let total = 0;
+let figs = 0;
+let figFails = 0;
 let allIssues = 0;
 const summaries = [];
 for (const m of model.chapters) {
   const issues = [];
   const verified = [];
+  const verifiedFigs = [];
   // what every node shows
   for (const nd of m.nodes) {
     if (nd.link) continue;
     if (!idx.items.has(nd.item)) issues.push(`${nd.key}: item ${nd.item} does not exist`);
-    if (hiddenTag.has(nd.item) && stillHidden(nd.item, dumpItem)) issues.push(`${nd.key}: ${nd.item} is hidden in EMI (c:hidden_from_recipe_viewers)`);
-    if (lateItem.has(nd.item)) issues.push(`${nd.key}: ${nd.item} waits for ${lateItem.get(nd.item)} (hidden_until.json)`);
+    // later content (kind peek) may still be hidden in EMI: it only takes a checkmark
+    const peek = nd.kind === 'peek';
+    if (!peek && hiddenTag.has(nd.item) && stillHidden(nd.item, dumpItem)) issues.push(`${nd.key}: ${nd.item} is hidden in EMI (c:hidden_from_recipe_viewers)`);
+    if (!peek && lateItem.has(nd.item)) issues.push(`${nd.key}: ${nd.item} waits for ${lateItem.get(nd.item)} (hidden_until.json)`);
     if (nd.fluid) {
       if (!idx.fluids.has(nd.fluid)) issues.push(`${nd.key}: fluid ${nd.fluid} does not exist`);
-      if (hiddenFluidTag.has(nd.fluid) && stillHidden(nd.fluid, dumpFluid)) issues.push(`${nd.key}: fluid ${nd.fluid} is hidden in EMI`);
-      if (lateFluid.has(nd.fluid)) issues.push(`${nd.key}: fluid ${nd.fluid} waits for ${lateFluid.get(nd.fluid)}`);
+      if (!peek && hiddenFluidTag.has(nd.fluid) && stillHidden(nd.fluid, dumpFluid)) issues.push(`${nd.key}: fluid ${nd.fluid} is hidden in EMI`);
+      if (!peek && lateFluid.has(nd.fluid)) issues.push(`${nd.key}: fluid ${nd.fluid} waits for ${lateFluid.get(nd.fluid)}`);
     }
     if (nd.machine && nd.typeless) issues.push(`${nd.key}: no recipe types for ${nd.item} (machines.json has none: give them)`);
     if (nd.machine) for (const t of nd.types) if (!idx.recipeTypes.has(t) && ![...idx.recipes.values()].some((r) => r.type === t)) issues.push(`${nd.key}: recipe type ${t} unknown`);
+    // the numbers in its text
+    for (const f of nd.figs || []) {
+      figs++;
+      const r = checkFig(nd, f);
+      const what = `${f.t}${f.name ? ' ' + f.name : ''} ${f.eu ?? f.eut ?? f.mbt ?? f.buckets ?? f.mb ?? f.total ?? f.loss ?? f.percent ?? ''}`.trim();
+      if (r.ok) verifiedFigs.push(`${nd.key} [${what}]: ${r.how}`);
+      else { figFails++; issues.push(`FIGURE ${nd.key} [${what}]: ${r.why}`); }
+    }
   }
   // leaves
   const hasOut = new Set();
   for (const mm of model.chapters) for (const nd of mm.nodes) for (const e of nd.arrows) hasOut.add(e.srcRes.id);
   for (const nd of m.nodes) {
     if (nd.link || nd.machine || hasOut.has(nd.id)) continue;
-    if (['product', 'ret', 'dest'].includes(nd.kind)) continue;
+    if (['product', 'ret', 'dest', 'info', 'peek', 'slot'].includes(nd.kind)) continue;
     if (!nd.end) issues.push(`${nd.key}: a leaf with no destination (give it an arrow, kind 'product', or end: '...')`);
   }
   // arrows
@@ -207,13 +433,13 @@ for (const m of model.chapters) {
       if (r.summary) summaries.push(`${m.file}: ${e.srcRes.title} -> ${nd.title}, through ${r.summary.join(', ')} (${r.recipes.join(', ')})`);
     }
   }
-  lines.push(`## ${m.file}: ${m.nodes.length} nodes, ${verified.length} arrows verified, ${issues.length} issues`, '');
+  lines.push(`## ${m.file}: ${m.nodes.length} nodes, ${verified.length} arrows verified${verifiedFigs.length ? ', ' + verifiedFigs.length + ' figures verified' : ''}, ${issues.length} issues`, '');
   allIssues += issues.length;
   for (const i of issues) lines.push('- **' + i + '**');
   if (issues.length) lines.push('');
-  for (const v of verified) lines.push('- ' + v);
+  for (const v of [...verified, ...verifiedFigs]) lines.push('- ' + v);
   lines.push('');
-  console.log(`${m.file}: ${verified.length} arrows verified, ${issues.length} issues`);
+  console.log(`${m.file}: ${verified.length} arrows verified${verifiedFigs.length ? ', ' + verifiedFigs.length + ' figures verified' : ''}, ${issues.length} issues`);
   for (const i of issues) console.log('  ' + i);
 }
 lines.push('## Summary arrows (named intermediates)', '');
@@ -222,5 +448,5 @@ if (outFile) {
   fs.mkdirSync(path.dirname(path.resolve(outFile)), { recursive: true });
   fs.writeFileSync(outFile, lines.join('\n') + '\n');
 }
-console.log(`total: ${total} arrows, ${fails} failing, ${allIssues} issues; ${summaries.length} summary arrows; hidden table at dump time: ${dumpTableFrom}${outFile ? '; report ' + outFile : ''}`);
+console.log(`total: ${total} arrows, ${fails} failing; ${figs} figures, ${figFails} failing; ${allIssues} issues; ${summaries.length} summary arrows; hidden table at dump time: ${dumpTableFrom}${electric ? '' : '; no electric.json in this dump'}${outFile ? '; report ' + outFile : ''}`);
 process.exitCode = allIssues ? 1 : 0;
