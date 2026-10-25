@@ -348,8 +348,8 @@
 		{
 			dependencies: ["19A021F221E595D2"]
 			description: [
-				"Put AE2WTLib's &6Quantum Bridge Card&r and one singularity of an entangled pair in a wireless terminal, and the other singularity in a quantum bridge at home."
-				"Now the terminal works at any distance and in any dimension, and charges itself from the network. Keep the home end chunk-loaded and you can order cobblestone from Mars."
+				"Put AE2WTLib's &6Quantum Bridge Card&r and one singularity of an entangled pair in a &6Wireless Crafting Terminal&r (the plain Wireless Terminal has no room for the card), and the other singularity in a quantum bridge at home."
+				"Now the terminal reaches your network at any distance and in any dimension. Keep the home bridge chunk-loaded and you can order cobblestone from Mars."
 			]
 			icon: "ae2wtlib:quantum_bridge_card"
 			id: "3312ACABB4B4739F"
