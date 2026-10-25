@@ -115,6 +115,129 @@ function Get-GGSettleVerdict {
     return ''
 }
 
+# ---- a bounded restart inside one run: the command `@restart:<marker regex>[&&<marker regex>...]` -----------------------------------
+# For a test that must see a cold start of the same world (persistent data, chunks and machines read back from disk). It waits until every
+# marker has appeared in the server's logs (at most min(180 s, waitTimeoutSec)): in a run with other tests, list their DONE markers too, so
+# the restart ends none of them halfway. Then it stops the server through its console (the final shutdown's 30 s grace; it must exit 0,
+# i.e. after saving), keeps the first boot's logs in results\server\phase1\ and starts the same command line (same heap) on the same world,
+# then waits for Done, the same post-boot settle and RCON. The run keeps its slot and the global Minecraft mutex throughout, so this is still
+# the one test JVM; every wait runs on the run's one native budget clock (never reset: a restart spends the same 600 s), and a run holds at
+# most one restart, server suite only (Assert-GGResourceRequest).
+function Invoke-GGServerRestart {
+    param($Ctx, [string]$Inst, [string]$Res, $Req, [string]$Marker)
+    $budget = $global:GG.NativeBudget
+    if (-not $budget) { throw 'restart before the first boot: there is no native budget clock' }
+
+    $patterns = @()
+    if ($Marker) { $patterns = @($Marker -split '&&') }
+    if ($patterns.Count -gt 0) {
+        $rxs = @($patterns | ForEach-Object { New-Object Text.RegularExpressions.Regex($_) })
+        $seen = @($rxs | ForEach-Object { $false })
+        $limitMs = Get-GGNativeTimeoutMs $budget ([math]::Min(180, [int]$Req.waitTimeoutSec) * 1000)
+        $tails = @((New-Object GGTail (Join-Path $Inst 'logs\kubejs\server.log')), (New-Object GGTail (Join-Path $Inst 'logs\latest.log')))
+        $sw = [Diagnostics.Stopwatch]::StartNew()
+        while ($true) {
+            [void](Get-GGNativeTimeoutMs $budget 1)
+            foreach ($t in $tails) {
+                foreach ($l in $t.ReadNew()) {
+                    for ($i = 0; $i -lt $rxs.Count; $i++) { if (-not $seen[$i] -and $rxs[$i].IsMatch($l)) { $seen[$i] = $true } }
+                }
+            }
+            $open = @(for ($i = 0; $i -lt $rxs.Count; $i++) { if (-not $seen[$i]) { $patterns[$i] } })
+            if ($open.Count -eq 0) { break }
+            if ($Ctx.Proc.HasExited) { throw ("the server exited (code {0}) before the restart marker(s) [{1}]" -f $Ctx.Proc.ExitCode, ($open -join '] [')) }
+            if ($sw.Elapsed.TotalMilliseconds -gt $limitMs) { throw ("restart marker(s) [{0}] not seen within {1}s" -f ($open -join '] ['), [int]($limitMs / 1000)) }
+            Update-GGLock
+            Start-Sleep -Milliseconds 500
+        }
+        Write-GGLog ("  restart marker hit [{0}] after {1}s" -f ($patterns -join '] ['), [int]$sw.Elapsed.TotalSeconds)
+    }
+
+    # clean stop, as the final shutdown does: the console's `stop`, 30 s at most, exit code 0 (the world and persistent data saved)
+    if ($Ctx.Rcon) { $Ctx.Rcon.Dispose(); $Ctx.Rcon = $null }
+    $g = $Ctx.Proc
+    $g.WriteLine('stop')
+    $stopMs = Get-GGNativeTimeoutMs $budget 30000
+    if (-not $g.WaitForExit($stopMs)) { throw ("the server did not stop within {0}s for the restart" -f [int]($stopMs / 1000)) }
+    $g.CloseLogs()
+    Set-GGSlotState $null $false
+    if ($g.ExitCode -ne 0) { throw ("the server stopped with exit code {0} for the restart (not a clean save)" -f $g.ExitCode) }
+    $Ctx.Booted = $false
+
+    # the first boot's logs go to results\server\phase1\ and leave the instance, so the second boot's waits only read the second boot
+    $keep = Join-Path $Res 'phase1'
+    New-Item -ItemType Directory -Force -Path (Join-Path $keep 'logs\kubejs') | Out-Null
+    foreach ($rel in @('logs\latest.log', 'logs\debug.log')) {
+        $src = Join-Path $Inst $rel
+        if (Test-Path -LiteralPath $src) { Move-Item -LiteralPath $src -Destination (Join-Path $keep $rel) -Force }
+    }
+    Get-ChildItem (Join-Path $Inst 'logs\kubejs') -Filter *.log -File -ErrorAction SilentlyContinue | ForEach-Object {
+        Move-Item -LiteralPath $_.FullName -Destination (Join-Path $keep ('logs\kubejs\' + $_.Name)) -Force
+    }
+    foreach ($f in @('server-stdout.log', 'server-stderr.log')) {
+        $src = Join-Path $Res $f
+        if (Test-Path -LiteralPath $src) { Move-Item -LiteralPath $src -Destination (Join-Path $keep $f) -Force }
+    }
+    $Ctx.Phase1Logs = $true
+
+    # the same command line on the same world (no RAM gate: the one global test JVM and its heap caps are the limits)
+    [void](Get-GGNativeTimeoutMs $budget 1)
+    $argLine = "-Dgg.run=$($global:GG.RunId) @user_jvm_args.txt @libraries/net/minecraftforge/forge/$($Ctx.ForgeVer)/win_args.txt nogui"
+    $g2 = [GGProc]::Start($Ctx.Java, $argLine, $Inst, (Join-Path $Res 'server-stdout.log'), (Join-Path $Res 'server-stderr.log'), $null)
+    $Ctx.Proc = $g2
+    Set-GGSlotState $null $true
+    Write-GGLog "server JVM restarted on the same world (pid $($g2.Id))"
+
+    $tail = New-Object GGTail (Join-Path $Inst 'logs\latest.log')
+    $doneRx = [regex]'Done \(([\d.,]+)s\)! For help, type "help"'
+    $sw = [Diagnostics.Stopwatch]::StartNew()
+    $bootSecs = $null
+    while (-not $bootSecs) {
+        [void](Get-GGNativeTimeoutMs $budget 1)
+        foreach ($l in $tail.ReadNew()) { $m = $doneRx.Match($l); if ($m.Success) { $bootSecs = $m.Groups[1].Value } }
+        if ($bootSecs) { break }
+        if ($g2.HasExited) { throw ("the restarted server exited with code {0} before 'Done' after {1}s. {2}" -f $g2.ExitCode, [int]$sw.Elapsed.TotalSeconds, (Get-GGFailureHint $Res $Inst)) }
+        if ($sw.Elapsed.TotalSeconds -gt [int]$Req.bootTimeoutSec) { throw ("the restarted server did not boot within {0}s" -f $Req.bootTimeoutSec) }
+        Update-GGLock
+        Start-Sleep -Milliseconds 1000
+    }
+    $Ctx.Booted = $true
+    Write-GGLog ("  restarted: Done in {0}s (wall {1}s)" -f $bootSecs, [int]$sw.Elapsed.TotalSeconds)
+
+    # the same post-boot settle as the first boot (a datapack reload re-runs the KubeJS server scripts)
+    $minSettle = 15
+    if ($null -ne $Req.settleSec) { $minSettle = [int]$Req.settleSec }
+    if ($minSettle -gt 0) {
+        $state = New-GGSettleState
+        $settleTail = New-Object GGTail (Join-Path $Inst 'logs\latest.log')
+        $ssw = [Diagnostics.Stopwatch]::StartNew()
+        $verdict = ''
+        while (-not $verdict) {
+            [void](Get-GGNativeTimeoutMs $budget 1)
+            foreach ($l in $settleTail.ReadNew()) { [void](Add-GGSettleLine $state $l $ssw.Elapsed.TotalSeconds) }
+            if ($g2.HasExited) { throw ("the restarted server exited during its settle (code {0})" -f $g2.ExitCode) }
+            $verdict = Get-GGSettleVerdict $state $ssw.Elapsed.TotalSeconds $minSettle 4 30 ($minSettle + 240)
+            if (-not $verdict) { Update-GGLock; Start-Sleep -Milliseconds 500 }
+        }
+        Write-GGLog ("  restarted: settled {0:N1}s after Done ({1}, {2} datapack reload(s))" -f $ssw.Elapsed.TotalSeconds, $verdict, $state.Reloads)
+    }
+
+    $deadline = (Get-Date).AddSeconds(90)
+    while ($true) {
+        $connectTimeout = Get-GGNativeTimeoutMs $budget 10000
+        try {
+            $Ctx.Rcon = [GGRcon]::Connect('127.0.0.1', $Ctx.RconPort, $Ctx.RconPw, $connectTimeout)
+            break
+        } catch {
+            if ((Get-Date) -gt $deadline) { throw ("RCON connect after the restart failed: {0}" -f $_.Exception.Message) }
+            if ($g2.HasExited) { throw ("the restarted server exited while waiting for RCON (code {0})" -f $g2.ExitCode) }
+            Start-Sleep -Seconds 2
+        }
+    }
+    $Ctx.Restarted = $true
+    Write-GGLog '  restarted: RCON connected again'
+}
+
 function Invoke-GGServerSuite {
     param($Req, [string]$PackToml, $PackInfo, [string]$PackKey)
 
@@ -127,7 +250,7 @@ function Invoke-GGServerSuite {
     $waits = @(Get-GGList $Req.waitForLog)
     $bootTimeout = [int]$Req.bootTimeoutSec
     $cmdTimeout = [int]$Req.commandTimeoutSec
-    $ctx = @{ Proc = $null; Rcon = $null; Java = ''; ForgeVer = ''; Port = 0; RconPort = 0; RconPw = ''; ExpectStop = $false; Booted = $false }
+    $ctx = @{ Proc = $null; Rcon = $null; Java = ''; ForgeVer = ''; Port = 0; RconPort = 0; RconPw = ''; ExpectStop = $false; Booted = $false; Restarted = $false; Phase1Logs = $false }
     foreach ($c in $commands) { if ($c -match '^\s*/?stop\s*$') { $ctx.ExpectStop = $true } }
 
     try {
@@ -292,6 +415,12 @@ function Invoke-GGServerSuite {
                     foreach ($c in $commands) {
                         $commandBudget = Get-GGNativeTimeoutMs $global:GG.NativeBudget ($cmdTimeout * 1000)
                         $i++
+                        if ($c -match '^@restart(?::(.+))?$') {
+                            # not an RCON command: the harness's bounded restart (one per run, same budget; see Invoke-GGServerRestart)
+                            Write-GGLog "restart> $c"
+                            Invoke-GGServerRestart $ctx $inst $res $Req ([string]$Matches[1])
+                            continue
+                        }
                         if ([Text.Encoding]::UTF8.GetByteCount($c) -gt 1440) { $bad += "#$i too long (>1440 bytes)"; continue }
                         Write-GGLog "rcon> $c"
                         $t0 = Get-Date
@@ -399,6 +528,8 @@ function Invoke-GGServerSuite {
                 })
             # KubeJS script errors only exist in its own logs (`/kubejs errors server` needs a player, RCON has none).
             [void](Invoke-GGStage 'kubejs-errors' { Invoke-GGKubeJsCheck $inst $res })
+            # a restarted run's first boot has its own KubeJS logs (moved to results\server\phase1\ before the second launch)
+            if ($ctx.Phase1Logs) { [void](Invoke-GGStage 'kubejs-errors-phase1' { Invoke-GGKubeJsCheck (Join-Path $res 'phase1') (Join-Path $res 'phase1') }) }
         }
         Save-GGInstanceResults $inst $res
     }

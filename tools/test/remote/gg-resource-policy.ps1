@@ -41,6 +41,20 @@ function Assert-GGResourceRequest {
             throw 'Each waitForLog deadline must be at most 180 seconds (0 uses waitTimeoutSec)'
         }
     }
+    # a bounded restart (gg-server.ps1, Invoke-GGServerRestart): server suite only, at most one per run, valid marker regexes
+    $restarts = @(@($Req.commands) | Where-Object { $null -ne $_ -and ([string]$_) -match '^\s*@restart' })
+    if ($restarts.Count -gt 0) {
+        if ([string]$Req.suite -ne 'server') { throw 'A server restart (@restart) belongs to the server suite only' }
+        if ($restarts.Count -gt 1) { throw 'A run may restart its server at most once: both boots share one native budget' }
+        $restart = [string]$restarts[0]
+        if ($restart -notmatch '^@restart(?::(.+))?$') { throw "Malformed restart command '$restart': use @restart or @restart:<marker regex>[&&<marker regex>...]" }
+        if ($Matches[1]) {
+            foreach ($pattern in ($Matches[1] -split '&&')) {
+                if (-not $pattern) { throw "Empty restart marker in '$restart'" }
+                try { [void](New-Object Text.RegularExpressions.Regex($pattern)) } catch { throw "Invalid restart marker regex '$pattern'" }
+            }
+        }
+    }
 }
 
 # One clock survives both suites; successive stages cannot each claim a fresh ten minutes.
