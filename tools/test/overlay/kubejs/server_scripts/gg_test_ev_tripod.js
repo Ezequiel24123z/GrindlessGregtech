@@ -10,7 +10,8 @@
 //   static
 //     registration   the machine (type gtceu:vein_drilling, its structure description), the wing panel, global.grindless.ev.tripod
 //     rules          every vein_drilling and greenhouse recipe: the generic tier rule gives the old LV and MV vetoes exactly, the HV
-//                    drill and greenhouse skip only the ev/ folder, the tripod takes only it; and a made-up iv/ recipe is above EV
+//                    drill and greenhouse skip only the ev/ folder, the tripod takes only it; the IV drills' iv/ recipes (IV-B1, IV-B2)
+//                    and a made-up iv/ recipe are above EV
 //     recipes        one dry and one cooled recipe per 'ore' vein of every Moon or Mars table, each with its dimension, 8 EU/t, 200 t
 //     wear           the bit's wear GTM reads: 100 / 10 000 dry, 25 cooled; 50 mB of liquid nitrogen per run
 //     bit            the titanium bit is a drill bit again, made on the EV lathe (> 512 EU/t, so not in HV), its old conversion gone
@@ -240,6 +241,10 @@
       var tripodTakes = tier === T.tier
       if (tier === 'ev') {
         if (!lv || !mv || !hv) bad.push(id + ' ev but not above lv/mv/hv')
+      } else if (tier !== '' && ['lv', 'mv', 'hv'].indexOf(tier) < 0) {
+        // the IV drills' recipes (IV-B1's pressurized and IV-B2's Mercury drill): above every home drill and above the tripod
+        if (!lv || !mv || !hv || !rules.isAboveTier(r, 'ev')) bad.push(id + ' ' + tier + ' but not above lv/mv/hv/ev')
+        if (tripodTakes) bad.push(id + ' taken by the tripod')
       } else {
         // the vetoes before the generic rule: LV skipped /mv/ and /hv/, MV skipped /hv/, HV skipped nothing
         if (lv !== (rules.isMvRecipe(r) || rules.isHvRecipe(r))) bad.push(id + ' LV rule changed')
@@ -256,7 +261,7 @@
       rules.recipeTier(stub('vein_drilling/iron_bronze')) === '' && !rules.isAboveTier(stub('greenhouse/oak'), 'lv')
     if (!future) bad.push('made-up iv/ and steam paths misread')
     check('rules', bad.length === 0 && all.length > 0, all.length + ' vein_drilling + greenhouse recipes by tier ' + JSON.stringify(byTier) +
-      ': the LV and MV vetoes are what they were, HV skips only ev/, the tripod takes only ev/; a made-up iv/ recipe is above EV' +
+      ': the LV and MV vetoes are what they were, HV skips only ev/, the tripod takes only ev/; the IV drills\' iv/ recipes and a made-up iv/ recipe are above EV' +
       (bad.length > 0 ? ' | problems: ' + bad.slice(0, 10).join('; ') : ''))
   }
 
