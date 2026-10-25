@@ -701,6 +701,92 @@
 			x: 12.0d
 			y: -4.5d
 		}
+		{
+			dependencies: ["262640F3533EE2C3"]
+			description: [
+				"Eleven forming machines behind one controller: bender, wiremill, lathe, cutter, extruder and more. Pick the machine in the mode tab on the left of the controller."
+				"Up to 4 recipes at once, each at its full EU/t. It saves rows of machines, not power."
+			]
+			icon: "gtceu:universal_processing_factory"
+			id: "627E186404378CB4"
+			rewards: [{ id: "2D3C6C97135BC1D7", type: "xp", xp: 50 }]
+			tasks: [{ id: "6453007841DA2C65", item: "gtceu:universal_processing_factory", type: "item" }]
+			title: "Universal Processing Factory"
+			x: 4.0d
+			y: 3.0d
+		}
+		{
+			dependencies: ["627E186404378CB4"]
+			description: ["Assembler and circuit assembler in one hall. Recipes that need a cleanroom still need one."]
+			icon: "gtceu:universal_assembly_factory"
+			id: "661F318CAF9FAB23"
+			rewards: [{ id: "36FBB71246272AC6", type: "xp", xp: 50 }]
+			tasks: [{ id: "7D3B9ED1BD1DACC3", item: "gtceu:universal_assembly_factory", type: "item" }]
+			title: "Universal Assembly Factory"
+			x: 4.0d
+			y: 4.5d
+		}
+		{
+			dependencies: ["661F318CAF9FAB23"]
+			description: ["Centrifuge, electrolyzer, thermal centrifuge, macerator, sifter, extractor and electromagnetic separator. Every gas needs its own output hatch."]
+			icon: "gtceu:universal_separation_factory"
+			id: "12DED2DD9F460B1E"
+			rewards: [{ id: "1BC8ED62911B2B29", type: "xp", xp: 50 }]
+			tasks: [{ id: "25A4C777B062B5E0", item: "gtceu:universal_separation_factory", type: "item" }]
+			title: "Universal Separation Factory"
+			x: 4.0d
+			y: 6.0d
+		}
+		{
+			dependencies: ["12DED2DD9F460B1E"]
+			description: ["Mixer, chemical reactor, chemical bath and ore washer. Dust-only mixes need no hatch at all."]
+			icon: "gtceu:universal_mixing_factory"
+			id: "334DF899A63DBB13"
+			rewards: [{ id: "6CD8011712E8A87D", type: "xp", xp: 50 }]
+			tasks: [{ id: "1354E905F7AA5B40", item: "gtceu:universal_mixing_factory", type: "item" }]
+			title: "Universal Mixing Factory"
+			x: 4.0d
+			y: 7.5d
+		}
+		{
+			dependencies: ["334DF899A63DBB13"]
+			description: [
+				"One furnace for mixed batches: dusts, food and ores with the same cooking time smelt together in one run."
+				"Hotter coils, more at once: 4 with cupronickel, doubling every 900 K, up to 64."
+			]
+			icon: "gtceu:advanced_multi_smelter"
+			id: "1DAF5DAC3FE8DF4E"
+			rewards: [{ id: "1CA714AF20413892", type: "xp", xp: 50 }]
+			tasks: [{ id: "120EE92F2E3CA8B6", item: "gtceu:advanced_multi_smelter", type: "item" }]
+			title: "Advanced Multi Smelter"
+			x: 6.0d
+			y: 7.5d
+		}
+		{
+			dependencies: ["1DAF5DAC3FE8DF4E"]
+			description: ["No power, just lava: it smelts several items at once with lava as its heat. It never makes lava; it only burns it."]
+			icon: "gtceu:lava_furnace"
+			id: "7F6788F6AAD7AE1B"
+			rewards: [{ id: "31EB13E7D3C67344", type: "xp", xp: 40 }]
+			tasks: [{ id: "27704CDD80CD50C9", item: "gtceu:lava_furnace", type: "item" }]
+			title: "Lava Furnace"
+			x: 8.0d
+			y: 7.5d
+		}
+		{
+			dependencies: ["1E1E4E32D9532D1A"]
+			description: [
+				"Tired of waiting for a clear night? Seed the clouds: calcium chloride clears the sky for a day, salt brings rain, salt and copper wire call a storm."
+				"It works on the Overworld only, and the weather changes when the run ends."
+			]
+			icon: "gtceu:weather_controller"
+			id: "78EB08D129F7B21A"
+			rewards: [{ id: "68EC208C4D9846BA", type: "xp", xp: 50 }]
+			tasks: [{ id: "7329F59F90310654", item: "gtceu:weather_controller", type: "item" }]
+			title: "Weather Controller"
+			x: 8.0d
+			y: -4.5d
+		}
 	]
 	title: "MV: The Far End"
 }

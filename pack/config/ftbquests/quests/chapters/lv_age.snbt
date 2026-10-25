@@ -761,6 +761,20 @@
 			x: 10.0d
 			y: -1.5d
 		}
+		{
+			dependencies: ["731F761B242263ED"]
+			description: [
+				"The &6Generator Array&r runs up to 16 LV generators in one structure: steam turbine, combustion generator or gas turbine mode, picked in the controller."
+				"Same fuel and the same energy per bucket as the single blocks. The dynamo hatches set the limit: an LV hatch carries 2 generators, an MV one 8."
+			]
+			icon: "gtceu:generator_array"
+			id: "1CE11DDA27E5B778"
+			rewards: [{ id: "18760F8546AE3848", type: "xp", xp: 40 }]
+			tasks: [{ id: "4D711CBAE950FEAA", item: "gtceu:generator_array", type: "item" }]
+			title: "Sixteen Turbines, One Hall"
+			x: 2.0d
+			y: -1.5d
+		}
 	]
 	title: "LV: The First Spark"
 }
