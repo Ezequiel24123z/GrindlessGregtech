@@ -22,10 +22,12 @@
 //                    palladium          palladium-rich ammonia, palladium metal dust, ammonia and formic acid -> palladium
 //                    rhodium_ruthenium  platinum slag and the reagents of the rhodium and the ruthenium lines -> rhodium, ruthenium,
 //                                       rarest metal mixture and the leftovers (zinc sulfate, salt, chlorine, ammonia, water, potassium)
+//   3  iridosmine  (IV) Mercury's iridosmine -> iridium and osmium, 3 : 1: IV-B2's oxidative fusion and GT--'s iridium and osmium chain,
+//                  with the osmium tetroxide, the chlorine and the ammonia kept inside (docs/eras/iv.md, "Family steps")
 // Every recipe is generated from the loose line's own recipes (server_scripts/grindless/ev/platinum_plant.js): the same ratios and the
 // SAME ENERGY, the sum of the stages it replaces, with the loops run to the end. No discount and no parallels. Its condition is the
 // electrode in the input bus and a destination for every output: if a bus or a hatch is full, the plant stops. The iridium and osmium
-// are not refined here (ev.md: IV); their mixtures come out.
+// mixtures of modes 1 and 2 still come out (Earth's platinum line); mode 3 refines Mercury's iridosmine.
 //
 // Machine class: GTM's plain electric multiblock (WorkableElectricMultiblockMachine), so its overclock is GTM's.
 //
@@ -127,6 +129,7 @@
         Text.translate('grindless.machine.platinum_plant.tooltip.0'),
         Text.translate('grindless.machine.platinum_plant.tooltip.1'),
         Text.translate('grindless.machine.platinum_plant.tooltip.2'),
+        Text.translate('grindless.machine.platinum_plant.tooltip.4'),
         Text.translate('grindless.machine.platinum_plant.tooltip.3')
       ])
       .workableCasingModel(INERT_TEXTURE, 'grindless:block/multiblock/platinum_plant')
