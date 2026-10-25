@@ -397,6 +397,12 @@ test('tiers/obtain.json: inherits from steam, audits GT, and all its rules have 
   }
   for (const l of raw.obtain.later) assert.ok(ERA_IDS.includes(l.until), `later stage with no valid era in until: ${l.id}`);
   assert.ok(!raw.obtain.classes.some((c) => (c.materials || []).includes('perlite')), 'perlite already comes from the LV sieve (lv/perlite.js)');
+  // EV (2026-10-25): Mars is reached, so it is no longer a later stage; the titanium drill bit is a drill bit again (not C)
+  assert.ok(raw.obtain.reachableDimensions.includes('gcyr:mars') && raw.obtain.reachableDimensions.includes('gcyr:luna'));
+  assert.ok(!raw.obtain.later.some((l) => l.id === 'mars' || (l.dimensions || []).includes('gcyr:mars')));
+  assert.ok(raw.obtain.world.some((w) => w.id === 'mars-ground'));
+  assert.ok(!raw.obtain.classes.some((c) => (c.materials || []).includes('grindless:titanium_drill_bit')));
+  assert.equal(raw.obtain.classes.find((c) => (c.materials || []).includes('deuterium')).until, 'iv');
 });
 
 test('CLI: --pass obtain with --config writes text, JSON and Markdown and exits 1 if there are unclassified groups', () => {
