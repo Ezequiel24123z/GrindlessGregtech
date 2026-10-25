@@ -19,8 +19,10 @@
 //                               Mercury cobblestone). Sun rule: a run that starts with the sun on the receiver (GTM's own solar test,
 //                               GTUtil.canSeeSunClearly) and all 8 mirrors under open sky pays a quarter of the EU/t; at night or shaded
 //                               it pays all of it. The quarter is applied after GTM's overclock, so the sun makes a run cheaper, never
-//                               faster (the cryogenic plant's run-start pricing). Fluid voiding is refused for recipes with fluid
-//                               outputs: the iridosmine fusion's osmium tetroxide stays contained.
+//                               faster (the cryogenic plant's run-start pricing, alwaysTryModifyRecipe; like there, a run that GTM
+//                               restarts from its cached recipe after an idle spell keeps the price of the moment it went idle). A
+//                               recipe with fluid outputs does not run while the controller voids fluids (lib/no_voiding.js, in the
+//                               modifier and in beforeWorking): the iridosmine fusion's osmium tetroxide stays contained.
 //   gtceu:mercury_solar_field   POWER FAMILY, IV step (after LV's heliostat tower and EV's lunar solar array): 36 Hermean thin-film
 //                               panels (the solar works makes them, iv.md decision 8) on tungsten steel posts over brick footings, a
 //                               radiator bank at the back and a control hut under a brick sunshade. A generator (lib/generators.js) of
@@ -381,19 +383,19 @@
   }
 
   var SUN = null
-  var noVoiding = null
   var worksFailed = false
-  var fluidCap = null
 
-  // true while the controller is set to void fluids (GTM's IVoidable)
-  function voidsFluids(machine) {
-    if (fluidCap === null) fluidCap = lazy().FluidCap
-    return machine.canVoidRecipeOutputs(fluidCap) === true
-  }
+  // the works keeps what it makes: while the controller voids fluids, a recipe with fluid outputs (the fusion's osmium tetroxide and steam)
+  // does not run (lib/no_voiding.js, in the modifier and before every start); the bricks and the panels make no fluid and are not held up
+  const KEEP = { which: 'fluids', reason: NO_VOIDING, name: 'Mercury solar works' }
 
   function hasFluidOutputs(recipe) {
-    var outs = recipe.getOutputContents(lazy().FluidCap)
-    return outs != null && outs.size() > 0
+    try {
+      var outs = recipe.getOutputContents(lazy().FluidCap)
+      return outs != null && outs.size() > 0
+    } catch (e) {
+      return true
+    }
   }
 
   // ---------------------------------------------------------------- the solar field
@@ -620,13 +622,9 @@
       ])
       .workableCasingModel(BRICK_TEXTURE, 'grindless:block/multiblock/mercury_vein_drill')
 
-    // ---- the solar works: GTM's overclock, then the sun's quarter (cheaper, never faster); fluid voiding refused when it makes fluids
-    function worksModifier(machine, recipe) {
+    // ---- the solar works: GTM's overclock, then the sun's quarter (cheaper, never faster); recipes with fluid outputs refuse voiding
+    function sunPricing(machine, recipe) {
       try {
-        if (hasFluidOutputs(recipe) && voidsFluids(machine)) {
-          if (noVoiding === null) noVoiding = ModifierFunction.cancel(Text.translate(NO_VOIDING))
-          return noVoiding
-        }
         var oc = GTRecipeModifiers.OC_NON_PERFECT.getModifier(machine, recipe)
         if (sunState(machine).key !== 'sun') return oc
         if (SUN === null) SUN = ModifierFunction.builder().eutMultiplier(SUN_FACTOR).build()
@@ -638,6 +636,17 @@
         }
         return ModifierFunction.IDENTITY
       }
+    }
+
+    var keepModifier = G.noVoiding.modifier(KEEP, sunPricing)
+    var keepBeforeWorking = G.noVoiding.beforeWorking(KEEP)
+
+    function worksModifier(machine, recipe) {
+      return hasFluidOutputs(recipe) ? keepModifier(machine, recipe) : sunPricing(machine, recipe)
+    }
+
+    function worksBeforeWorking(machine, recipe) {
+      return !hasFluidOutputs(recipe) || keepBeforeWorking(machine, recipe)
     }
 
     var worksDisplay = guarded('Mercury solar works', function (controller, list) {
@@ -652,6 +661,7 @@
       .rotationState(RotationState.NON_Y_AXIS)
       .recipeType(WORKS_TYPE)
       .recipeModifier(worksModifier, true)
+      .beforeWorking(worksBeforeWorking)
       .additionalDisplay(worksDisplay)
       .appearanceBlock(GTBlocks.CASING_TUNGSTENSTEEL_ROBUST)
       .pattern(function (def) { return Pat.build(def, WORKS_SPEC) })
