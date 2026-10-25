@@ -195,6 +195,8 @@
       .rotationState(RotationState.NON_Y_AXIS)
       .recipeType(TYPE)
       .recipeModifier(cellModifier(), true)
+      // GTM restarts a cached recipe without the modifier: refuse voiding at every start too (lib/no_voiding.js, IV-A4's finding)
+      .beforeWorking(G.noVoiding.beforeWorking({ which: 'both', reason: NO_VOIDING, name: 'hot cell' }))
       .appearanceBlock(function () { return Block.getBlock(SHIELD) })
       .pattern(function (def) { return Pat.build(def, SPEC) })
       ["tooltips(net.minecraft.network.chat.Component[])"]([

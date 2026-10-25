@@ -334,6 +334,8 @@
     // replaced by the same helper pieces behind the voiding refusal and with the SCRAM line
     Gen.configure(event.create('fission_reactor', 'multiblock'), GEN_OPTS)
       .recipeModifier(reactorModifier(), true)
+      // GTM restarts a cached recipe without the modifier: refuse voiding at every start too (lib/no_voiding.js, IV-A4's finding)
+      .beforeWorking(G.noVoiding.beforeWorking({ which: 'both', reason: NO_VOIDING, name: 'fission reactor' }))
       .additionalDisplay(reactorDisplay)
       .langValue('Fission Reactor')
       .rotationState(RotationState.NON_Y_AXIS)

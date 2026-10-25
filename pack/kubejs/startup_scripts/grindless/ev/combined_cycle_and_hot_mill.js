@@ -220,6 +220,8 @@
     // replaced by the same helper modifier behind the voiding refusal
     Gen.configure(event.create('combined_cycle_plant', 'multiblock'), { maxParallels: PLANT_MAX_PARALLELS, name: 'combined_cycle_plant' })
       .recipeModifier(plantModifier(), true)
+      // GTM restarts a cached recipe without the modifier: refuse steam voiding at every start too (lib/no_voiding.js, IV-A4's finding)
+      .beforeWorking(G.noVoiding.beforeWorking({ which: 'fluids', reason: NO_VOIDING, name: 'combined-cycle plant' }))
       .langValue('Combined-Cycle Plant')
       .rotationState(RotationState.NON_Y_AXIS)
       .recipeType('combined_cycle')
@@ -238,6 +240,7 @@
       .rotationState(RotationState.NON_Y_AXIS)
       .recipeType('hot_rolling')
       .recipeModifier(millModifier(), true)
+      .beforeWorking(G.noVoiding.beforeWorking({ which: 'fluids', reason: NO_VOIDING, name: 'hot strip mill' }))
       .appearanceBlock(GTBlocks.CASING_TITANIUM_STABLE)
       .pattern(function (def) { return Pat.build(def, MILL_SPEC) })
       ["tooltips(net.minecraft.network.chat.Component[])"]([
