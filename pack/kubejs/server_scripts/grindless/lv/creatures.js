@@ -10,7 +10,8 @@
 //        cycle (biomass_mb) is what ONE brewery of the creature's tier makes in that time: 25 mB per 10 s at LV.
 //   gtceu:assembler            grindless:blank_creature_model (sensor + emitter + circuit) and, per creature, the print
 //        blank model + the creature's print items  ->  grindless:creature_model_<id>   (nobody is killed)
-//   crafting table             gtceu:<lv|mv|hv|ev>_creature_simulator from the voltage parts of its tier
+//   crafting table             gtceu:<lv|mv|hv|ev>_creature_simulator from the voltage parts of its tier (the EV one with an HV
+//                              emitter and sensor: EV's need the quantum eye, an IV resource)
 //
 // Helpers shared with the test overlay:
 //   global.grindless.creatureTable()          normalized table: { biomass: { fluid, lvBreweryMbPerS }, printing, blank,
@@ -27,12 +28,14 @@
   const MAX_ITEM_INPUTS = 3
   const MAX_DROPS = 4
 
-  // machine hull + the parts GT's own machine recipes take for that tier (HULL, MOTOR, SENSOR, EMITTER, CIRCUIT, CABLE)
+  // machine hull + the parts GT's own machine recipes take for that tier (HULL, MOTOR, SENSOR, EMITTER, CIRCUIT, CABLE). `optics`
+  // overrides the tier of the emitter and the sensor: EV's need GTM's quantum eye (radon), which waits for IV (docs/eras/ev.md), so
+  // the EV simulator, the wither's, takes HV ones like the deep space antenna
   const MACHINE_TIERS = [
     { tier: 1, name: 'lv', circuit: '#gtceu:circuits/lv', cable: 'gtceu:tin_single_cable' },
     { tier: 2, name: 'mv', circuit: '#gtceu:circuits/mv', cable: 'gtceu:copper_single_cable' },
     { tier: 3, name: 'hv', circuit: '#gtceu:circuits/hv', cable: 'gtceu:gold_single_cable' },
-    { tier: 4, name: 'ev', circuit: '#gtceu:circuits/ev', cable: 'gtceu:aluminium_single_cable' }
+    { tier: 4, name: 'ev', circuit: '#gtceu:circuits/ev', cable: 'gtceu:aluminium_single_cable', optics: 'hv' }
   ]
 
   // blank creature model: sensor (sees the creature) + emitter (projects it) + circuit (remembers it)
@@ -86,11 +89,11 @@
         recipe: 'grindless:crafting/' + t.name + '_creature_simulator',
         keys: {
           C: t.circuit,
-          E: 'gtceu:' + t.name + '_emitter',
+          E: 'gtceu:' + (t.optics || t.name) + '_emitter',
           W: t.cable,
           H: 'gtceu:' + t.name + '_machine_hull',
           M: 'gtceu:' + t.name + '_electric_motor',
-          S: 'gtceu:' + t.name + '_sensor'
+          S: 'gtceu:' + (t.optics || t.name) + '_sensor'
         }
       }
     })
