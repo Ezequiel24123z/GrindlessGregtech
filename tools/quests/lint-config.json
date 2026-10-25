@@ -8,7 +8,12 @@
   "maxLines": 4,
   "maxRewardEntries": 6,
   "direction": { "default": "ltr" },
-  "allowRoots": {},
+  "noRewardGroups": { "groups": ["Processing Lines"], "why": "The processing-line charts are reference: no rewards, nothing to claim (docs/quests.md, section 17)." },
+  "allowRoots": {
+    "_why_pl": "Processing Lines (pl_*): every line starts from its own raw inputs, so a chart has one starting point per input. The charts are reference only: no quest outside the group depends on them (docs/quests.md, section 17).",
+    "pl_steam": ["154FF345AAD6A8D6", "3E12E056BF035A8B", "33EE5B62F8800597", "3ED3028B836AED08", "712D5EF975A6777F", "3A7D776CB565F139", "325B56288D65F719", "1FA0E8A2522F4E74", "3BF35BF7A1D6642C", "1DDC0A772FAE3BDC", "5DD59270C0E1B1C8", "7E3E0FAF651CBA0B", "17BAAC00E4102F89", "37E266BF3B107FD4", "333D84BAF94F8236", "7ED1ADD8DD9656A7", "53BC9C82556B9DF1", "55667EFBCB109E00"],
+    "pl_lv": ["344B94A42C0B9B6B", "31422BC38C16E67D", "1DCC7755DF59E3AE", "7A646DD83B7A66CF", "190CFC46B6412C3A", "3C3D3502FD8DEAA4", "38924C8787ABC653", "586399B66DD432D0", "5BF897978D5CE1AB", "152A086C9EEAA6AC", "52005DFF50024EC0", "311D8A81588B485D", "37C079003D956ABB", "3CCC2AE912E34FC7", "57C76B992225F740", "1E89202592F1F682", "7F0921332C91819E", "70473C9E03BE7F08", "77DF7AE068111355", "73F12C3F6247982B", "1E6C75E88AF1BEA8", "5C6CB5123D0B49BC", "32F405A210E05887", "5FE8A53ECDFED0DE", "1C070843E3F7630F", "1C734E12E86F170D", "3273E05BE192C962", "51BE35381B5DA8CA", "3B4EC36C63AE9591", "5887C91D880A8283"]
+  },
   "allowLongEdges": [
     { "from": "35719B747A75F7B6", "to": "5615E54AF782990A", "why": "Gasoline to Space Suit (hv_age): the suit chemistry comes from Gasoline at the left, and the suit is only needed at the Moon, so the quest sits next to it." }
   ],
