@@ -31,6 +31,7 @@ Generators for the pack's own textures. Everything is procedural 16x16 pixel art
 | `Build-AE2InterplanetaryTextures.ps1` | Writes the Martian Quantum Seed (item and `.mcmeta`). |
 | `Build-ExtractionCascadeTextures.ps1` | Writes the face of the EV rare-earth extraction cascade: three mixer-settler stages seen through a sight glass, kerosene over the lilac chloride solution, and the taps of the three chlorides. `-Preview <png outside the repo>`, `-Casing <png>` (preview context) and `-Credits`. |
 | `Build-SealedDomeTextures.ps1` | Writes the face of the EV sealed dome, drawn for the sintered regolith brick: a tempered glass dome on dark soil, an LED bar and three plants; while it works, the LEDs shimmer, the leaves sway and O₂ bubbles rise. `-Preview <png>` (×6, with an optional `-Casing <png>`) and `-Credits`. The map is `$SdDome` and the colours `$SdPal`. |
+| `Build-MarsTravelTextures.ps1` | Writes the Martian vein sample's frame and core (tinted per vein, like the lunar samples). |
 
 ## Regenerate
 

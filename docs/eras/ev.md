@@ -62,10 +62,21 @@ AE2 is the backbone between planets (the user's decision), and improving it is a
 
 ## Mars, end of EV
 
-- **How to get there.** Mars requires a tier 2 rocket (`rocket_tier` 2 on its GCYR planet, which works out the tier as (engine + tank) / 2). GCYR makes the advanced tank and engine in IV with Tungsten Steel, which comes from Mars: impossible. They are remade in EV with Titanium: tank = 2 Titanium drums (`gtceu:titanium_drum`) + 6 Kapton K plates + Titanium Frame; engine = 4 advanced thrusters (`gtceu:advanced_power_thruster`, HV motor) + 6 Kapton K plates + Titanium Frame. EV Assembler, with the Mars chart as catalyst. Fuel: 14 buckets, whichever fuel (GCYR asks for the same from Earth as from the Moon).
+- **How to get there** (built on 2026-10-25, `integration/gcyr_mars_road.js`).
+  - **Tier rule:** Mars requires a tier 2 rocket. GCYR averages part tiers ((average motor + average tank) / 2, `RocketEntity`), so every motor and every tank must be advanced.
+  - **The parts:** GCYR makes the advanced tank and engine in IV with Tungsten Steel, which comes from Mars, so they are remade in the EV assembler (1,920 EU/t, 15 s), with the Mars chart as a catalyst that is not used up.
+    - Tank (`grindless:assembler/gcyr/advanced_fuel_tank`): 2 Titanium drums + 6 Kapton K plates + 1 Titanium frame.
+    - Engine (`grindless:assembler/gcyr/advanced_rocket_motor`): 4 advanced power thrusters + 6 Kapton K plates + 1 Titanium frame.
+  - **Fuel:** 14 B from Earth or the Moon, of any GCYR fuel. An advanced tank holds 7 B, so two tanks are one trip.
+  - **Venus and Mercury** are at `rocket_tier` 3 (datapack), so the Mars rocket reaches only the Moon and Mars.
 - **The first visit, by hand.** Outbound by rocket with the kit in your backpack: waystone, parts for the Martian half of the bridge, a charged AE2 energy cell, sintered brick footings, and the tripod and processor controllers. There: the waystone (the return trip is through it), 2 ores from each vein for samples (ice too: verify that Mars generates it) and the bridge.
 - **What gets built first.** The bridge (power and parts come from home), the atmosphere processor (O₂ for the suit and methane, run on the site's power) and the tripod with the samples. From there, the Scheelite comes down on its own.
-- **What only Mars gives.** Tungsten (Scheelite and Tungstate), rare earths (a material of its own with ore, made in KubeJS, that yields Samarium; Neodymium stays in the Nether because the EV motor calls for it from HV) and ice with about five times more Deuterium than Earth's water, which IV turns into Heavy Water. `veins_mars.json` has only those three veins, and only they generate in the Mars world: GCYR's iron, nickel, copper and zinc veins are removed (Mars is not "more of the same").
+- **What only Mars gives** (built on 2026-10-25, `veins_mars.json`). Only these three veins generate in the Mars world; GCYR's six Mars veins are removed (Mars is not "more of the same"):
+  - **Scheelite vein:** scheelite, tungstate and lithium, at Y 0–60. It is GTM's old End vein, so lithium ore now comes from Mars too.
+  - **Merrillite vein:** merrillite (the rare earths: samarium through the extraction cascade; neodymium stays in the Nether because the EV motor calls for it from HV), apatite and tricalcium phosphate, at Y 20–70.
+  - **Ice vein:** `gtceu:deuterium_rich_ice` (about five times Earth's deuterium), gypsum and salt, at Y 40–80. IV turns the ice into heavy water, which no mod in the pack has yet.
+  
+  Around the test band, the Martian surface is at about Y 149 and the veins sit at Y 0–80, so the first visit digs down, guided by the surface rocks. Raw merrillite becomes dust in a plain furnace, which works on Mars. The kit needs 3 empty vein probes.
 - **Mars rules.** Thin air of CO₂ with no O₂: combustion only works with oxygen (methalox = methane + O₂ in the mixer, burned in a gas turbine with `.dimension('gcyr:mars')`; other fuels get the inverse). Light ×0.43: solar barely produces. 0.38 g and 208 K: the HV suit is enough. Dust and pressurized equipment are IV.
 
 ## Automatic resource generation
