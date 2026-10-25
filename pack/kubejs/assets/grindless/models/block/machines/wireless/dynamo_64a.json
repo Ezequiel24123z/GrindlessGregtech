@@ -1,9 +1,9 @@
 {
   "parent": "gtceu:block/overlay/front",
   "textures": {
-    "overlay_tint": "grindless:block/machines/wireless/port_64a_tinted",
-    "overlay_art": "grindless:block/machines/wireless/dynamo",
-    "overlay_emissive": "grindless:block/machines/wireless/dynamo_emissive"
+    "overlay_tint": "grindless:block/machines/wireless/overlay_port_64a_tinted",
+    "overlay_art": "grindless:block/machines/wireless/overlay_dynamo",
+    "overlay_emissive": "grindless:block/machines/wireless/overlay_dynamo_emissive"
   },
   "elements": [
     {

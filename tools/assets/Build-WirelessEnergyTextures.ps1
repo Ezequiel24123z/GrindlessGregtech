@@ -11,11 +11,13 @@
   cyan arcs coming in = EU out of it (energy hatch, energy cover); the tower's cells glow in their tier's colour.
 
   Writes (under pack/kubejs/assets/grindless/textures/):
-    block/machines/wireless/hatch.png, hatch_emissive.png(+.mcmeta)      the wireless energy hatch's front: a round port with a small dish,
+    block/machines/wireless/overlay_hatch.png and overlay_hatch_emissive.png(+.mcmeta)
+                                                                         the wireless energy hatch's front: a round port with a small dish,
                                                                          the signal coming in (cyan, animated, full-bright)
-    block/machines/wireless/dynamo.png, dynamo_emissive.png(+.mcmeta)    the wireless dynamo hatch's front: the port with a small mast and
+    block/machines/wireless/overlay_dynamo.png and overlay_dynamo_emissive.png(+.mcmeta)
+                                                                         the wireless dynamo hatch's front: the port with a small mast and
                                                                          a beacon, the signal going out (amber)
-    block/machines/wireless/port_<2|4|16|64>a_tinted.png                 the port's inner ring and the amperage pips under it (1 to 4),
+    block/machines/wireless/overlay_port_<2|4|16|64>a_tinted.png         the port's inner ring and the amperage pips under it (1 to 4),
                                                                          light grey: GTM tints them with the tier's colour (tint index 2,
                                                                          EnergyHatchPartMachine#tintColor). The block models
                                                                          (models/block/machines/wireless/<kind>_<amps>a.json) stack the hull,
@@ -391,13 +393,13 @@ $Dir = 'block/machines/wireless'
 
 if (Test-Want 'hatches') {
     $d = New-SmallDish
-    Out-Tex (New-HatchArt $d 'p') "$Dir/hatch.png"
-    Out-Tex (Join-Frames (New-SignalFrames $d @(1, 0) 'Q' 'q' 'Q')) "$Dir/hatch_emissive.png" 5
+    Out-Tex (New-HatchArt $d 'p') "$Dir/overlay_hatch.png"
+    Out-Tex (Join-Frames (New-SignalFrames $d @(1, 0) 'Q' 'q' 'Q')) "$Dir/overlay_hatch_emissive.png" 5
     $m = New-SmallMast
-    Out-Tex (New-HatchArt $m 'z') "$Dir/dynamo.png"
-    Out-Tex (Join-Frames (New-SignalFrames $m @(0, 1) 'Y' 'y' 'K')) "$Dir/dynamo_emissive.png" 5
+    Out-Tex (New-HatchArt $m 'z') "$Dir/overlay_dynamo.png"
+    Out-Tex (Join-Frames (New-SignalFrames $m @(0, 1) 'Y' 'y' 'K')) "$Dir/overlay_dynamo_emissive.png" 5
     $pips = @{ 2 = 1; 4 = 2; 16 = 3; 64 = 4 }
-    foreach ($a in 2, 4, 16, 64) { Out-Tex (New-PortTint $pips[$a]) "$Dir/port_$($a)a_tinted.png" }
+    foreach ($a in 2, 4, 16, 64) { Out-Tex (New-PortTint $pips[$a]) "$Dir/overlay_port_$($a)a_tinted.png" }
 }
 
 if (Test-Want 'covers') {
@@ -465,7 +467,7 @@ foreach ($rel in $written) {
         for ($f = 0; $f -lt $n; $f++) { $seen[(($img.P[($f * 256)..($f * 256 + 255)]) -join ',')] = 1 }
         if ($seen.Count -lt $n) { $msgs += "only $($seen.Count) distinct frames out of $n" }
     }
-    if ($rel -match '^block/machines/wireless/(hatch|dynamo)_emissive\.png$') {
+    if ($rel -match '^block/machines/wireless/overlay_(hatch|dynamo)_emissive\.png$') {
         $art = Read-Png ($path -replace '_emissive\.png$', '.png')
         $n = [int]($img.H / 16)
         for ($f = 0; $f -lt $n; $f++) { for ($i = 0; $i -lt 256; $i++) {
