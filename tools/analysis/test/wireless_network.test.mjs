@@ -566,21 +566,45 @@ function jvm(opts = {}) {
     ServerEvents: { tick: (fn) => ticks.push(fn), recipes() {}, customCommand: (name, fn) => { commands[name] = fn; } },
     BlockEvents: { rightClicked() {}, placed() {}, broken() {} },
   };
-  sandbox.global = sandbox;
-  sandbox.grindless = { readJsonTable: (p) => JSON.parse(fs.readFileSync(path.join(PACK, p), 'utf8')) };
+  sandbox.global = kubejsGlobal();
+  sandbox.global.grindless = { readJsonTable: (p) => JSON.parse(fs.readFileSync(path.join(PACK, p), 'utf8')) };
   vm.createContext(sandbox);
   const runFile = (f) => vm.runInContext(fs.readFileSync(f, 'utf8'), sandbox, { filename: path.basename(f) });
   runFile(PATTERNS_SCRIPT);
   runFile(STARTUP_SCRIPT);
-  const W = sandbox.grindless.wireless;
+  const G = sandbox.global.grindless;
+  const W = G.wireless;
   // what GTM's machine registration does through Pat.build: the tower's structure described for the tests
-  sandbox.grindless.patterns.register(W.towerId, W.towerSpec);
+  G.patterns.register(W.towerId, W.towerSpec);
   Object.values(W.covers).forEach((c) => { W.coverDefinitions[c.def] = { id: c.def }; });
   for (const f of [path.join(LIB, 'wireless_registry.js'), path.join(LIB, 'wireless_adapters.js'), SERVER_SCRIPT].concat(opts.overlays || [])) runFile(f);
   // the game's tick: the server script's handler settles every settleTicks ticks unless paused
   const run = (server, n) => { for (let i = 0; i < n; i++) { server.tick++; ticks.forEach((fn) => fn({ server })); } };
-  return { W, run, errors, lines, commands, ticks, sandbox };
+  return { W, G, run, errors, lines, commands, ticks, sandbox, global: sandbox.global };
 }
+
+// KubeJS 2001.6.5's `global` is a Java HashMap<String, Object> (BuiltinKubeJSPlugin.GLOBAL) behind Rhino's NativeJavaMap: a value goes in
+// through Context.jsToJava (a JS number becomes a java.lang.Double) and comes out through ValueUnwrapper.DEFAULT and the default
+// WrapFactory, whose javaPrimitiveWrap KubeJS never turns off, so a stored number or string comes back as a wrapped Java object. Rhino's
+// interpreter then takes `wrapped === 1` (a number literal) as false (Interpreter#doShallowEquals does not unwrap), while `=== true`
+// unwraps (ScriptRuntime#shallowEq) and String() gives the text. The stand-in keeps that: numbers and strings come back as objects (a
+// number's text is Java's, "1.0"), booleans and script objects as they were stored. `kubejsGlobal.stored(g)` reads what was stored.
+const STORED = Symbol('stored');
+function kubejsGlobal() {
+  const map = new Map();
+  const wrap = (v) => {
+    if (typeof v === 'number') return { javaClass: 'java.lang.Double', valueOf: () => v, toString: () => (Number.isInteger(v) ? v.toFixed(1) : String(v)) };
+    if (typeof v === 'string') return { javaClass: 'java.lang.String', valueOf: () => v, toString: () => v };
+    return v;
+  };
+  return new Proxy({}, {
+    get: (_, k) => (k === STORED ? map : typeof k === 'string' && map.has(k) ? wrap(map.get(k)) : undefined),
+    set: (_, k, v) => { map.set(k, v); return true; },
+    has: (_, k) => map.has(k),
+    deleteProperty: (_, k) => map.delete(k),
+  });
+}
+kubejsGlobal.stored = (g, key) => g[STORED].get(key);
 
 // an item stack: GTM's LV batteries carry an electric item (empty), anything else none
 const BATTERY_MAX = { 'gtceu:lv_lithium_battery': 120000, 'gtceu:lv_sodium_battery': 80000 };
@@ -916,7 +940,7 @@ function simWorld() {
 
 // a server (a JVM's) on the simulated world, with its persistent data
 function simServer(sim, j, pd) {
-  sim.patterns = j.sandbox.grindless.patterns;
+  sim.patterns = j.G.patterns;
   sim.server = {
     persistentData: pd, tick: 0,
     getTickCount() { return this.tick; },
@@ -953,11 +977,11 @@ test('the native wireless tests (adapters, then the restart\'s two phases) pass 
   // the harness's commands: the adapters test, then phase 1 (the wireless tests take turns on their band, in the order asked for)
   assert.equal(j1.commands.gg_test_wireless_adapters({}), 1);
   assert.equal(j1.commands.gg_test_wireless_restart_1({}), 1);
-  assert.equal(j1.sandbox.ggTestWirelessQueue, 'wireless_adapters,wireless_restart_1');
+  assert.equal(kubejsGlobal.stored(j1.global, 'ggTestWirelessQueue'), 'wireless_adapters,wireless_restart_1');
   const phase1 = () => j1.lines.includes('GGTEST|wireless_restart|PHASE1|DONE');
   assert.ok(simRun(sim, j1, 6000, phase1), 'phase 1 ends: ' + j1.lines.slice(-5).join(' / '));
   assert.ok(j1.lines.indexOf('GGTEST|wireless_adapters|DONE') < j1.lines.indexOf('GGTEST|wireless_restart|PHASE1|DONE'), 'the adapters test first');
-  assert.equal(j1.sandbox.ggTestWirelessQueue, '', 'both left the queue');
+  assert.equal(kubejsGlobal.stored(j1.global, 'ggTestWirelessQueue'), '', 'both left the queue');
   // @restart: the stop saves the persistent data with the world; a new JVM starts on it and GTM checks the loaded multiblocks again
   const bytes = writeNbt(sim.server.persistentData);
   Object.values(sim.levels).forEach((l) => l.machines.forEach((m) => { if (m.reload) m.reload(); }));
@@ -966,7 +990,7 @@ test('the native wireless tests (adapters, then the restart\'s two phases) pass 
   simRun(sim, j2, 300);
   assert.equal(j2.commands.gg_test_wireless_restart_2({}), 1);
   assert.ok(simRun(sim, j2, 3000, () => j2.lines.includes('GGTEST|wireless_restart|DONE')), 'phase 2 ends: ' + j2.lines.slice(-5).join(' / '));
-  assert.equal(j2.sandbox.ggTestWirelessQueue, '');
+  assert.equal(kubejsGlobal.stored(j2.global, 'ggTestWirelessQueue'), '');
   const all = j1.lines.concat(j2.lines).filter((l) => l.startsWith('GGTEST|'));
   if (process.env.GG_SHOW_SIM) console.log(all.join('\n'));
   assert.deepEqual(all.filter((l) => /\|(FAIL|ERROR)(\||$)/.test(l)), []);
@@ -983,4 +1007,82 @@ test('the native wireless tests (adapters, then the restart\'s two phases) pass 
     assert.equal(sim.server.persistentData.contains(k), false, k);
   }
   assert.equal(sim.commands.filter((c) => c.startsWith('forceload remove')).length, 3, 'the adapters test\'s band and phase 2\'s two');
+});
+// The restart fixture's phases on their own: what the native run of e3fb14d (20261026-002755-both-a1c) could not show. There, restart_1
+// stored its phase in `global` as a number, read it back wrapped, compared it with a number literal and returned on every tick: its
+// request NOTE and then nothing, no failure, until the bench's 180 s restart barrier expired.
+const RESTART_SCRIPTS = ['gg_test_wireless_adapters.js', 'gg_test_wireless_restart.js'].map((f) => path.join(OVERLAY, f));
+const passed = (lines, scope, name) => lines.some((l) => l.startsWith('GGTEST|' + scope + '|' + name + '|PASS'));
+const failed = (lines) => lines.filter((l) => l.startsWith('GGTEST|') && /\|(FAIL|ERROR)(\||$)/.test(l));
+
+// phase 1 in one sandbox, the bench's @restart (persistent data through NbtIo bytes, the multiblocks checked again), phase 2 in another
+function restartAround(sim, j1, phase2Ticks = 3000) {
+  const bytes = writeNbt(sim.server.persistentData);
+  Object.values(sim.levels).forEach((l) => l.machines.forEach((m) => { if (m.reload) m.reload(); }));
+  const j2 = jvm({ overlays: RESTART_SCRIPTS, clock: sim.clock, disk: sim.disk });
+  simServer(sim, j2, readNbt(bytes));
+  simRun(sim, j2, 300);
+  assert.equal(j2.commands.gg_test_wireless_restart_2({}), 1);
+  assert.ok(simRun(sim, j2, phase2Ticks, () => j2.lines.includes('GGTEST|wireless_restart|DONE')), 'phase 2 ends: ' + j2.lines.slice(-3).join(' / '));
+  return j2;
+}
+
+test('kubejs global stand-in: a number stored in global does not come back as that number; booleans and strings do (KubeJS 2001.6.5 + its Rhino)', () => {
+  const g = kubejsGlobal();
+  g.mode = 1;
+  g.flag = true;
+  g.queue = 'wireless_restart_1';
+  assert.notStrictEqual(g.mode, 1, 'Interpreter#doShallowEquals: a wrapped java.lang.Double is not the literal 1');
+  assert.equal(String(g.mode), '1.0', 'Double#toString');
+  assert.equal(g.flag, true, 'ScriptRuntime#shallowEq unwraps a Boolean');
+  assert.equal(String(g.queue), 'wireless_restart_1');
+  assert.equal(g.missing, undefined);
+  assert.equal(kubejsGlobal.stored(g, 'mode'), 1);
+});
+
+test('restart_1 starts on its own (no adapter test before it), and the restart\'s phase 2 still proves the cold start', () => {
+  const sim = simWorld();
+  const j1 = jvm({ overlays: RESTART_SCRIPTS, clock: sim.clock, disk: sim.disk });
+  simServer(sim, j1, new CompoundTag());
+  simRun(sim, j1, 40);
+  assert.equal(j1.commands.gg_test_wireless_restart_1({}), 1);
+  assert.equal(kubejsGlobal.stored(j1.global, 'ggTestWirelessRestartRequest1'), true, 'the request is a boolean');
+  assert.ok(simRun(sim, j1, 2000, () => j1.lines.includes('GGTEST|wireless_restart|PHASE1|DONE')), 'phase 1 ends: ' + j1.lines.slice(-3).join(' / '));
+  for (const name of ['PLACED', 'BEFORE', 'SYNTHETIC', 'SAVED']) assert.ok(passed(j1.lines, 'wireless_restart', name), name);
+  assert.equal(kubejsGlobal.stored(j1.global, 'ggTestWirelessQueue'), '');
+  assert.equal(kubejsGlobal.stored(j1.global, 'ggTestWirelessRestartRequest1'), false, 'taken');
+  const j2 = restartAround(sim, j1);
+  for (const name of ['RESTORED', 'AUTOMATIC']) assert.ok(passed(j2.lines, 'wireless_restart', name), name);
+  assert.deepEqual(failed(j1.lines.concat(j2.lines)), []);
+  assert.equal(sim.levels['minecraft:overworld'].machines.size + sim.levels['gcyr:luna'].machines.size, 0, 'left clean');
+});
+
+test('restart_1 that never gets its turn fails in 120 s with the queue it saw, ends phase 1, and phase 2 reports it and cleans up', () => {
+  const sim = simWorld();
+  const j1 = jvm({ overlays: RESTART_SCRIPTS, clock: sim.clock, disk: sim.disk });
+  simServer(sim, j1, new CompoundTag());
+  simRun(sim, j1, 40);
+  // a wireless test asked for earlier that never ends (it holds the head of the queue)
+  j1.global.ggTestWirelessQueue = 'wireless_energy';
+  assert.equal(j1.commands.gg_test_wireless_restart_1({}), 1);
+  const asked = sim.clock.now;
+  assert.ok(simRun(sim, j1, 3000, () => j1.lines.includes('GGTEST|wireless_restart|PHASE1|DONE')), 'phase 1 ends instead of waiting forever');
+  const waited = sim.clock.now - asked;
+  assert.ok(waited > 120000 && waited <= 121000, 'it gave up after its 120 s, inside the bench\'s 180 s restart barrier (' + waited + ' ms)');
+  const turn = failed(j1.lines);
+  assert.equal(turn.length, 1);
+  assert.match(turn[0], /^GGTEST\|wireless_restart\|TURN\|FAIL\|phase 1 was asked for and had no turn on the band in 120 s: the queue is \[wireless_energy, wireless_restart_1\]$/);
+  assert.equal(kubejsGlobal.stored(j1.global, 'ggTestWirelessQueue'), 'wireless_energy', 'it left the queue');
+  assert.equal(kubejsGlobal.stored(j1.global, 'ggTestWirelessRestartRequest1'), false);
+  const rec = sim.server.persistentData.getCompound('gg_test_wireless_restart');
+  assert.equal(rec.getBoolean('ok'), false);
+  assert.match(rec.getString('reason'), /no turn on the band in 120 s/);
+  // phase 2, as before: the record says phase 1 did not finish; it cleans up and ends
+  const j2 = restartAround(sim, j1);
+  const reported = failed(j2.lines);
+  assert.equal(reported.length, 1);
+  assert.match(reported[0], /^GGTEST\|wireless_restart\|RESTORED\|FAIL\|phase 1 did not finish: phase 1 was asked for and had no turn on the band in 120 s/);
+  assert.ok(!passed(j2.lines, 'wireless_restart', 'AUTOMATIC'), 'nothing to prove without phase 1');
+  assert.equal(sim.server.persistentData.contains('gg_test_wireless_restart'), false, 'the record is removed');
+  assert.equal(kubejsGlobal.stored(j2.global, 'ggTestWirelessQueue'), '');
 });
