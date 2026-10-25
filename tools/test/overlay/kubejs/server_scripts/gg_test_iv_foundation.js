@@ -21,7 +21,7 @@
 //   zircaloy_steps    GTM's own EBF (both, with and without argon, at 2,100 K) and vacuum freezer recipes of zircaloy
 //   no_decomposition  no electrolyzer or centrifuge recipe splits iridosmine, Hermean regolith, fluorite, the concentrate or the tritiated
 //                     water, and heavy water only through our electrolysis
-//   tritium           no recipe of the pack gives tritium (deuterium_separation gone, the liquid ender air distillation without it)
+//   tritium           only the Moon's detritiation recipe may give tritium (deuterium_separation gone, ender air without it)
 //   tables            global.grindless.ivFoundation.checkTables(): Venus, Mercury and leach tables, the fluorite entry, the sample pairs
 //   samples           the vein sample recipes (Venus, Mercury, the End's pitchblende and the fluorite one)
 //   fluorite_drilling the fluorite vein's drilling recipes, from the existing generators; #forge:raw_materials/fluorite holds GCYR's raw ore
@@ -392,7 +392,8 @@
       var separation = byId(server, 'gtceu:centrifuge/deuterium_separation') !== null
       var enderAir = byId(server, 'grindless:distillation_tower/offworld_only/distill_liquid_ender_air')
       var enderOuts = enderAir === null ? 'missing' : describe(gtFluids(enderAir.getOutputContents(caps().fluid)))
-      check('tritium', makers.length === 0 && !separation && enderAir !== null,
+      var onlyDetritiation = makers.every(function (id) { return id === 'grindless:detritiation/tritiated_heavy_water' })
+      check('tritium', onlyDetritiation && !separation && enderAir !== null,
         scanned + ' GT recipes; giving tritium: ' + (makers.join(', ') || 'none') + '; deuterium_separation ' + (separation ? 'STILL LOADED' : 'gone') +
         '; liquid ender air distillation gives ' + enderOuts)
     })
