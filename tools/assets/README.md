@@ -34,6 +34,7 @@ Generators for the pack's own textures. Everything is procedural 16x16 pixel art
 | `Build-MarsTravelTextures.ps1` | Writes the Martian vein sample's frame and core (tinted per vein, like the lunar samples). |
 | `Build-EVTripodTextures.ps1` | Writes the EV Tripod Drill's face (`multiblock/ev_tripod/`) and its Solar Wing Panel (`block/ev_tripod/wing_cells`, `wing_frame`). `-Only drill,wing` and `-Credits`. `Build-EVTextures.ps1`'s `drill` set and `Build-EVPreview.ps1` still draw the discarded Earth EV drill (`multiblock/ev_vein_drill/`) and the tungsten steel bit; nothing uses them. |
 | `Build-LunarPowerAntennaTextures.ps1` | Writes the faces of the EV lunar solar array and the deep space antenna (`multiblock/lunar_solar_array/`, `multiblock/deep_space_antenna/`). `-Credits` prints their 10 CREDITS rows. |
+| `Build-CryogenicPlantTextures.ps1` | Writes the EV cryogenic plant's face (a dewar and a frosted coil) and the Night-Sky Radiator's three faces. `-Only plant,radiator`, `-Preview <png outside the repo>` and `-Credits`. |
 
 ## Regenerate
 

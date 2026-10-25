@@ -48,6 +48,8 @@ Gregtech Grindless is a GregTech Modern pack (Minecraft 1.20.1, Forge) in which 
   - **Multi-mode controllers** veto recipes of an inactive mode in their modifier (`alwaysTryModifyRecipe`), because GTM does not drop the cached recipe when the mode changes. See `mv/leisure_factories.js`.
   - **Conditions of the same type OR together:** `.dimension(a).dimension(b)` means a or b. "Not a and not b" can't be written with reversed conditions, so use an allowlist.
   - **Unreachable from Rhino:** `SizedIngredient#getItems()` and `FluidIngredient#getStacks()`. Use `RecipeHelper.getInputItems` / `getInputFluids` / `getRealEUt`.
+  - **`Math.PI` is undefined in this Rhino** (KubeJS 2001.6.5); `Math.cos`, `Math.floor` and `Math.round` work. Code that uses it silently becomes NaN, so use a numeric literal or precomputed bounds.
+  - **Recipe conditions are checked on every tick of a run.** A day or night condition can stall a run halfway, so use a run-start modifier (`alwaysTryModifyRecipe`) for time-of-day pricing. See `ev/cryogenic_plant.js`.
 
 ## packwiz
 
