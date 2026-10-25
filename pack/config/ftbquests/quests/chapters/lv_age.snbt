@@ -13,7 +13,7 @@
 			dependencies: ["4996827E4BFC339E"]
 			description: [
 				"Steam turns into current. Machines want a cable now instead of a firebox, and the Nether stops being a quick raid: its veins end up in your drills."
-				"Up top, the Moon gets its first proper photograph, taken with the chart you drew by hand."
+				"The Moon also gets its first proper photograph, taken with the chart you drew by hand."
 			]
 			icon: "gtceu:lv_machine_hull"
 			id: "1AC672110DFD0C14"
@@ -54,7 +54,7 @@
 		{
 			dependencies: ["1AC672110DFD0C14"]
 			description: [
-				"Motor, piston, pump, conveyor and robot arm. Nearly every LV machine is some mix of the five, so keep a few of each in a chest and you'll walk to the crafting table a lot less."
+				"Motor, piston, pump, conveyor and robot arm. Nearly every LV machine is some mix of the five. Keep a few of each in a chest and you'll walk to the crafting table a lot less."
 			]
 			icon: "gtceu:lv_electric_motor"
 			id: "5795EAFBAB034E45"
@@ -73,7 +73,7 @@
 		{
 			dependencies: ["5795EAFBAB034E45"]
 			description: [
-				"The steam macerator's electric replacement. It still gives only the first output until HV, so in this row the byproducts come from the washer and the centrifuges."
+				"The steam macerator's electric replacement. It still gives only the first output until HV, so the byproducts come from the washer and the centrifuges instead."
 				"Everything after it starts from crushed ore."
 			]
 			icon: "gtceu:lv_macerator"
@@ -87,7 +87,7 @@
 		{
 			dependencies: ["3822BE3A45F1C474"]
 			description: [
-				"Rinses crushed ore into purified ore and shakes loose some of the first byproduct. Distilled water does it faster than plain water."
+				"The washer rinses crushed ore into purified ore and shakes loose some of the first byproduct. Distilled water does it faster than plain water."
 				"For some ores a sodium persulfate soak in the chemical bath gives a lot more; that is how bauxite gives up its gallium."
 			]
 			icon: "gtceu:lv_ore_washer"
@@ -101,7 +101,7 @@
 		{
 			dependencies: ["766C58FC4FAC6D61"]
 			description: [
-				"Bakes and spins washed ore into refined ore, and a second byproduct falls out on the way. The macerator then grinds the refined ore into clean dust."
+				"Heat and spin turn washed ore into refined ore, and a second byproduct falls out on the way. The macerator then grinds it into clean dust. In MV the Ore Plant does all of this in one building."
 			]
 			icon: "gtceu:lv_thermal_centrifuge"
 			id: "18D60FF391B2F8DC"
@@ -114,8 +114,8 @@
 		{
 			dependencies: ["18D60FF391B2F8DC"]
 			description: [
-				"Spins dusts, fluids and even air apart into what they're made of. It's the last stop of the ore line, and air from the gas collector comes out as nitrogen and oxygen."
-				"It also splits realgar into arsenic and sulfur, so rubber stops costing you a trip to the Nether."
+				"The last stop of the ore line, where dust gets spun apart into what it's made of. Air from the gas collector comes out as nitrogen and oxygen."
+				"It also splits realgar into arsenic and sulfur, so the next batch of rubber needs no trip to the Nether."
 			]
 			icon: "gtceu:lv_centrifuge"
 			id: "5ECDAA1F9811AC0A"
@@ -209,7 +209,7 @@
 		{
 			dependencies: ["47283300070CD8C2"]
 			description: [
-				"Mob drops without the mob. The &6Creature Simulator&r turns a model, some biomass and the creature's own mineral into drops, and nothing has to die."
+				"Mob drops without the mob. The &6Creature Simulator&r turns a model, some biomass and the creature's own mineral into drops."
 				"The programmed circuit picks the roll: circuit 1 gives the full set, the others a single kind of drop."
 			]
 			icon: "gtceu:lv_creature_simulator"
@@ -279,7 +279,7 @@
 		{
 			dependencies: ["5795EAFBAB034E45"]
 			description: [
-				"Breathes in air for the centrifuge to split into nitrogen and oxygen. It works in the Void and the Flatlands as well as the Overworld, which stock GregTech doesn't allow."
+				"It breathes in air for the centrifuge to split into nitrogen and oxygen. Stock GregTech only lets it do that in the Overworld; here the Void and the Flatlands work too."
 			]
 			icon: "gtceu:lv_gas_collector"
 			id: "09FAB2A84C90B5D6"
@@ -292,7 +292,7 @@
 		{
 			dependencies: ["09FAB2A84C90B5D6"]
 			description: [
-				"Pulls compounds apart with electricity and nothing else. Its big job right now is sapphire, which splits into aluminium and oxygen, and aluminium is your way into MV."
+				"It pulls compounds apart with electricity and nothing else. Its big job right now is sapphire, which splits into aluminium and oxygen, and aluminium is your way into MV."
 			]
 			icon: "gtceu:lv_electrolyzer"
 			id: "50622961B58725B8"
@@ -305,7 +305,7 @@
 		{
 			dependencies: ["50622961B58725B8"]
 			description: [
-				"LV's small chemistry happens here: sulfuric acid, iron chloride, and the sodium bisulfate that the electrolyzer turns into persulfate. Both of those etch circuit boards."
+				"LV's small chemistry happens here: sulfuric acid, iron chloride, and the sodium bisulfate that the electrolyzer turns into persulfate. The chloride and the persulfate both etch circuit boards."
 				"The hydrogen they give off goes in a tank, not the sky. MV turns it into methanol."
 			]
 			icon: "gtceu:lv_chemical_reactor"
@@ -319,7 +319,7 @@
 		{
 			dependencies: ["09155B5B0F1BE994"]
 			description: [
-				"It mixes things, as advertised. Here that means drilling fluid, gallium arsenide, the roaster's contact mass and even AE2's fluix crystal."
+				"It mixes things, as advertised. Here that means drilling fluid, gallium arsenide, the roaster's catalyst and AE2's fluix crystal."
 			]
 			icon: "gtceu:lv_mixer"
 			id: "3C89167418EA462B"
@@ -332,7 +332,7 @@
 		{
 			dependencies: ["3879D8323DF4F8BB"]
 			description: [
-				"Makes circuits in batches, so your hands can retire from soldering. It needs MV circuits in its own recipe, which is why it waits until now."
+				"It makes circuits in batches and takes the soldering off your hands. Its own recipe asks for MV circuits, so it waits until you've made a few of those by hand."
 			]
 			icon: "gtceu:lv_circuit_assembler"
 			id: "220C6C2F1D568194"
@@ -345,7 +345,7 @@
 		{
 			dependencies: ["09155B5B0F1BE994"]
 			description: [
-				"A better board than the resin one: a phenolic board, etched with silver foil in sodium persulfate or iron chloride, whichever you have more of. That is what all the chemistry was for."
+				"A better board than the resin one. The phenolic board gets etched with silver foil in sodium persulfate or iron chloride, whichever you have more of, and both come out of the chemistry you just set up."
 			]
 			icon: "gtceu:phenolic_printed_circuit_board"
 			id: "5F2D3E9A2F35D8E0"
@@ -358,7 +358,7 @@
 		{
 			dependencies: ["5F2D3E9A2F35D8E0"]
 			description: [
-				"Gallium and arsenic go into the mixer as gallium arsenide, and the assembler turns that into diodes. Arsenic comes out of realgar in the centrifuge, gallium out of bauxite."
+				"The mixer turns gallium and arsenic dust into gallium arsenide, and the assembler turns that into diodes. Arsenic comes out of realgar in the centrifuge, gallium out of bauxite in a persulfate bath."
 				"Diodes are the last piece the MV circuit is waiting on."
 			]
 			icon: "gtceu:diode"
@@ -372,7 +372,7 @@
 		{
 			dependencies: ["0785A341666D046E"]
 			description: [
-				"You can make the &6Good Electronic Circuit&r by hand, no MV power needed. That's lucky, because the circuit assembler won't build without it, so make a few."
+				"You can make the &6Good Electronic Circuit&r by hand, no MV power needed. Good thing, too, because the circuit assembler won't build without it. Make a few."
 			]
 			icon: "gtceu:good_electronic_circuit"
 			id: "3879D8323DF4F8BB"
@@ -385,7 +385,7 @@
 		{
 			dependencies: ["220C6C2F1D568194"]
 			description: [
-				"Stamps shaped parts out of plates. In this pack it also stamps AE2's processor presses out of steel plate, so you can skip the meteorite hunting."
+				"The press stamps shaped parts out of plates. In this pack it also stamps AE2's processor presses out of steel plate, so you can skip the meteorite hunting."
 			]
 			icon: "gtceu:lv_forming_press"
 			id: "2C50918B882FA400"
@@ -398,7 +398,7 @@
 		{
 			dependencies: ["2C50918B882FA400"]
 			description: [
-				"Graphite dust from the diamond vein, pressed around a steel rod. The arc furnace burns through one now and then, the way the drill eats bits, so keep spares in its bus."
+				"Graphite dust from the diamond vein, pressed around a steel rod. The arc furnace burns through one now and then, the way the drill eats bits. Spares go in its bus."
 			]
 			icon: "grindless:graphite_electrode"
 			id: "4767E74EF8428F44"
@@ -412,7 +412,7 @@
 			dependencies: ["4767E74EF8428F44"]
 			description: [
 				"An arc under quartz sand and coke makes AE2's silicon at LV, while GregTech's own silicon waits for an MV blast furnace. It takes exactly two energy hatches and an electrode."
-				"It also turns cobblestone and water into obsidian and bakes sky dust, so all of AE2 is within reach this early."
+				"It also turns cobblestone and water into obsidian and bakes sky dust, so the core of AE2 is within reach this early."
 			]
 			icon: "gtceu:submerged_arc_furnace"
 			id: "62D5FBAC11D478E9"
@@ -469,7 +469,7 @@
 		{
 			dependencies: ["19778BA6D436527A"]
 			description: [
-				"The mixer makes fluix from charged certus, redstone and quartzite dust. Quartzite stands in for Nether quartz here, so this one doesn't need a trip."
+				"The mixer makes fluix from charged certus, redstone and quartzite dust. Quartzite stands in for Nether quartz here, and this one needs no trip at all."
 			]
 			icon: "ae2:fluix_crystal"
 			id: "382D3153A231CEBF"
@@ -482,7 +482,7 @@
 		{
 			dependencies: ["382D3153A231CEBF"]
 			description: [
-				"The forming press stamps the presses and the inscriber uses them the usual way. Any one counts here, so make the one your next build needs."
+				"The forming press stamps the presses and the inscriber uses them the usual way. Any one counts here. Make whichever your next build needs."
 			]
 			icon: "ae2:logic_processor_press"
 			id: "7F321CF5445BE4CA"
@@ -501,6 +501,7 @@
 			dependencies: ["7F321CF5445BE4CA"]
 			description: [
 				"A controller, a drive and an energy acceptor are all a network needs to wake up. Here they come out of the LV assembler, built on machine hulls like any GregTech machine."
+				"AE2 runs on FE, but GregTech cable plugged straight into the acceptor powers it. No converter needed."
 			]
 			icon: "ae2:controller"
 			id: "0BB3182B7BA1B9AF"
@@ -517,7 +518,7 @@
 		{
 			dependencies: ["0BB3182B7BA1B9AF"]
 			description: [
-				"With an interface, a pattern provider and a molecular assembler, the network starts crafting for you. They're LV hull builds too, around AE2's usual cores."
+				"With an interface, a pattern provider and a molecular assembler, the network starts crafting for you. They're LV hull builds too, around AE2's usual cores, and the annihilation core takes a quartzite gem where AE2 would ask for Nether quartz."
 			]
 			icon: "ae2:interface"
 			id: "3B94B80BD64D83F2"
@@ -534,7 +535,7 @@
 		{
 			dependencies: ["3B94B80BD64D83F2"]
 			description: [
-				"A terminal to see everything and a crafting CPU to plan the jobs, and the network is up and running. The Applied Energistics tab takes it from here."
+				"A terminal to see everything and a crafting CPU to plan the jobs. From here on AE2 is plain AE2, and the Applied Energistics tab has the rest."
 			]
 			icon: "ae2:terminal"
 			id: "09539172C5EF719B"
@@ -567,7 +568,7 @@
 		{
 			dependencies: ["7853BCDA154074E2"]
 			description: [
-				"Another hull, one tier up. You'll be hearing that a lot. Its casing is aluminium, which is why it had to wait for the ingots."
+				"Another hull, one tier up. Its casing is aluminium, hence the wait for the ingots."
 			]
 			icon: "gtceu:mv_machine_hull"
 			id: "0B26AF4B18A1BE7D"
@@ -614,7 +615,7 @@
 		{
 			dependencies: ["6D668A4CB9B8384A"]
 			description: [
-				"Glass with a silver emulsion, made in the assembler. The optical observatory exposes them to the Moon, which beats drawing it by hand."
+				"Glass with a silver emulsion, made in the assembler. The optical observatory exposes them to the Moon, and this time the Moon draws itself."
 			]
 			icon: "grindless:photographic_plate"
 			id: "365B9E86E3AA4894"
@@ -669,21 +670,21 @@
 		{
 			dependencies: ["3C89167418EA462B"]
 			description: [
-				"The sulfide roaster's catalyst, vanadium on diatomite. It wears out now and then like a drill bit, so keep a few spares in the bus."
-				"The vanadium comes out of vanadium magnetite on the ore line."
+				"The sulfide roaster's catalyst, vanadium on diatomite, from the mixer. It wears out now and then, so keep a few in the roaster's bus."
+				"For the vanadium, smelt raw vanadium magnetite into dust and let the centrifuge split it."
 			]
 			icon: "grindless:contact_catalyst"
 			id: "30B1A00EBEC54B6D"
 			rewards: [{ id: "124DE9A929364C39", type: "xp", xp: 30 }]
 			tasks: [{ count: 4L, id: "3FF1A8EC8D614951", item: "grindless:contact_catalyst", type: "item" }]
-			title: "Contact Mass"
+			title: "Contact Catalyst"
 			x: 12.0d
 			y: 3.0d
 		}
 		{
 			dependencies: ["30B1A00EBEC54B6D"]
 			description: [
-				"Roasts sulfide ores in air, and the sulfur comes out as sulfuric acid instead of a cloud. The heat comes back as steam, which your turbines will gladly take."
+				"The roaster burns sulfide ores in air, and the sulfur comes out as sulfuric acid instead of a cloud. The heat comes back as steam for your turbines."
 			]
 			icon: "gtceu:sulfide_roaster"
 			id: "5A176E45F8E64ED7"
@@ -722,7 +723,7 @@
 		{
 			dependencies: ["6D668A4CB9B8384A"]
 			description: [
-				"The heliostat tower needs a whole field of these behind it, each angled to throw sunlight at the top. They're silvered glass, so the silver comes first."
+				"The heliostat tower needs a whole field of these behind it, each angled to throw sunlight at the top. They're silvered glass. Get the silver going before you start on them."
 			]
 			icon: "grindless:heliostat_mirror"
 			id: "2F6B1D9A8C4E0527"
@@ -735,7 +736,7 @@
 		{
 			dependencies: ["2F6B1D9A8C4E0527"]
 			description: [
-				"Sunlight in, steam out, and not a lump of fuel anywhere. It only works by day under an open, dry sky."
+				"It turns sunlight into steam without a lump of fuel anywhere. It only works by day under an open, dry sky."
 				"At night it does nothing at all, which is what the tank is for."
 			]
 			icon: "gtceu:heliostat_tower"

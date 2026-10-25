@@ -10,7 +10,7 @@
 	quests: [
 		{
 			description: [
-				"Little helpers for building, for moving things about and for keeping a big factory in order. Nothing in here is required, but your wrists will thank you."
+				"Little helpers for the building and the hauling that a big factory turns into. Nothing here is required. Start with whichever chore annoys you most."
 			]
 			icon: "craftingstationjei:crafting_station"
 			id: "7A5D031021239B63"
@@ -96,7 +96,7 @@
 		{
 			dependencies: ["2AC55861A735E86D"]
 			description: [
-				"Keeps your tools one key press away without clogging the hotbar. With twenty neutronium tools to carry around, that's not a small thing."
+				"Keeps your tools one key press away without clogging the hotbar. You're carrying a whole neutronium toolbox, so it earns its slot."
 			]
 			icon: "toolbelt:belt"
 			id: "3B0C7A1E5D92F604"
@@ -137,7 +137,7 @@
 		{
 			dependencies: ["519A1162AF5FB3F1"]
 			description: [
-				"Copies one machine's settings and pastes them onto the next. Set up the first machine in a row properly and the rest take a click each."
+				"The &6Machine Memory Card&r copies one machine's settings onto the next. Set up the first machine in a row properly and the rest take a click each."
 			]
 			icon: "gtceu:machine_memory_card"
 			id: "45522DAFCB743B77"

@@ -11,8 +11,7 @@
 		{
 			dependencies: ["3207813527EE1FBD"]
 			description: [
-				"Chests fill up fast in a GregTech pack, mostly with things whose names you hadn't heard of last week. Drawers, backpacks and ender storage help."
-				"The quests run roughly in the order each piece becomes useful."
+				"Chests fill up fast in a GregTech pack, mostly with things whose names you hadn't heard of last week. Drawers, backpacks and ender storage help, roughly in the order you'll want them."
 			]
 			icon: "minecraft:chest"
 			id: "55D3B1D14B8BCE80"
@@ -44,7 +43,7 @@
 		{
 			dependencies: ["55D3B1D14B8BCE80"]
 			description: [
-				"Deletes whatever you put in it, and the liquid version does the same for fluids. Nothing comes back out, so check twice before you pipe anything important at it."
+				"Whatever goes into a trash can is gone, and the liquid version does the same for fluids. Check twice before you pipe anything important at it."
 			]
 			icon: "trashcans:liquid_trash_can"
 			id: "57FEB8D08B146B4D"
@@ -126,7 +125,7 @@
 		{
 			dependencies: ["55D3B1D14B8BCE80"]
 			description: [
-				"Chests and barrels you can upgrade in place without emptying them first, and fit with upgrades that filter, compact or void what goes in."
+				"Sophisticated chests and barrels look like the vanilla ones and take upgrades the way a backpack does. A wooden one is enough to start."
 			]
 			icon: "sophisticatedstorage:barrel"
 			id: "79B4AC2740C87AE3"
@@ -140,7 +139,7 @@
 		{
 			dependencies: ["2A79F8FC98CE29AF"]
 			description: [
-				"Each better backpack adds slots and room for more upgrades, and moving up a tier keeps everything inside. Once you have one, the leather one can retire."
+				"Each better backpack adds slots and room for more upgrades, and moving up a tier keeps everything inside. Once you've moved up, the leather one goes in a drawer."
 			]
 			icon: "sophisticatedbackpacks:iron_backpack"
 			id: "103C352E8E444DAE"
@@ -174,7 +173,7 @@
 		{
 			dependencies: ["7DDD10B50E898DCC"]
 			description: [
-				"Storage Drawers in GregTech rubber and treated wood. Same drawers, different look, and built from what your greenhouse and coke oven already make."
+				"Storage Drawers in GregTech's rubber wood and treated wood. Same drawers, different look, built from what your greenhouse and coke oven already make."
 			]
 			icon: "gtstoragedrawers:gtceu_rubber_full_drawers_4"
 			id: "722067166031198E"
@@ -206,7 +205,7 @@
 		{
 			dependencies: ["7DDD10B50E898DCC"]
 			description: [
-				"Another drawer mod, with its own look and framed versions you can dress in any block. Use whichever style you like; they're happy to share a base."
+				"Another drawer mod, with its own look and framed versions you can dress in any block. Use whichever style you like; the two mods get along fine in one base."
 			]
 			icon: "functionalstorage:oak_4"
 			id: "3A6EDC513C78058B"
@@ -255,7 +254,7 @@
 		{
 			dependencies: ["533C9CC57CA1FD3D"]
 			description: [
-				"A gold storage upgrade multiplies what a drawer holds, enough that you'll stop checking on it."
+				"A gold storage upgrade multiplies what a drawer holds. One upgraded drawer holds more than you'll ever mine by hand."
 			]
 			icon: "functionalstorage:gold_upgrade"
 			id: "5CB66DA9F7F0AC8D"
@@ -289,7 +288,7 @@
 		{
 			dependencies: ["14177D50BDAA5C9C"]
 			description: [
-				"The controller links every sophisticated chest and barrel near it, so things go in and come out through one block. Storage links stretch its reach."
+				"The controller links every sophisticated chest and barrel near it, and things go in and come out through one block. Storage links stretch its reach."
 			]
 			icon: "sophisticatedstorage:controller"
 			id: "18F1EB87F96A33CC"
@@ -307,7 +306,7 @@
 		{
 			dependencies: ["14177D50BDAA5C9C"]
 			description: [
-				"A pouch tuned to an ender chest's colour code opens that chest from wherever you are, other planets included. It's also the first step to the chest itself."
+				"Right-click the &6Ender Pouch&r and your own vanilla ender chest opens, wherever you are, other planets included. Every coloured ender chest is built around one, and so is the ender bag that links to a chest."
 			]
 			icon: "enderchests:ender_pouch"
 			id: "13F136DFAF367A5A"

@@ -93,7 +93,7 @@
 		{
 			dependencies: ["6C51B805476EAF2E"]
 			description: [
-				"The first trip to any world is by rocket, since a waystone can't send you somewhere you've never been. After that it's one more stop on the network, and the world's name comes up on screen every time you arrive."
+				"Each new planet costs one rocket trip, because a waystone can't send you somewhere you've never been. Put one down when you land and the planet joins your network. Its name comes up on screen every time you arrive."
 			]
 			icon: "waystones:warp_stone"
 			id: "6E7F12273752EC74"
@@ -134,7 +134,7 @@
 		{
 			dependencies: ["163B6BC04C86A82F"]
 			description: [
-				"Force-load your claimed chunks and the factory keeps working while you're on the other side of the world, or off it entirely. There's a limit per player, so spend it on the machines that matter."
+				"Force-load your claimed chunks and the factory keeps working while you're on the other side of the world, or off it entirely, as long as someone on your team is online. There's a limit per player. Spend it on the machines that matter."
 			]
 			icon: "minecraft:compass"
 			id: "519566BBE2C4D41C"
@@ -188,7 +188,7 @@
 		{
 			dependencies: ["12AEF6D64403D824"]
 			description: [
-				"Nature's Compass finds the biome you ask for and Explorer's Compass the structure. Xaero's maps keep waypoints, so the trip home is easy."
+				"Nature's Compass finds the biome you ask for and Explorer's Compass the structure. Xaero's maps keep waypoints for the trip home."
 			]
 			icon: "naturescompass:naturescompass"
 			id: "0F671384B0300393"
