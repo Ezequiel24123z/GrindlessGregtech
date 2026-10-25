@@ -1,0 +1,143 @@
+{
+  "_source": "Our own table: the recipes of IV's hot cell, gtceu:hot_cell (docs/eras/iv.md, 'Hot cell', and 'Decisions taken with the raise', decisions 7 and 10). Modes 1 and 4 are composed from GTM's live recipes (the plans below name them; the numbers are read from the loaded pack at every load). Modes 2 and 3 are ours. Real processes: UF6 enrichment, MOX fuel, metallic production fuel in Zircaloy (Hanford N reactor), PuO2 heat sources in Pt-30Rh cladding (LWRHU), PuBe13 neutron sources in double steel capsules, PUREX reprocessing (Savannah River, La Hague) with vitrified high-level waste and nitric acid recovered from the NOx off-gas.",
+  "_how_it_is_used": [
+    "Read by server_scripts/grindless/iv/hot_cell.js at every server load (a /reload picks up changes). Each entry becomes one gtceu:hot_cell recipe, id grindless:hot_cell/<name> (GTM's builder puts the type in front). The smoke test gg_test_hot_cell.js checks the live recipes against this table.",
+    "The programmed circuit is the mode: 1 enrichment, 2 fuel, 3 reprocessing, 4 radon. Inside a mode every recipe has its own inputs (GTM's recipe lookup keeps one recipe per set of ingredients, counts ignored, and a recipe whose ingredients are a subset of another's can hide it): no recipe of the type may take a subset of another's ingredients.",
+    "composed[]: server_scripts/grindless/lib/compose.js reads `stages` from the loaded recipes, uses up `given` (the batch) and nets every `linked` key to zero (keys: 'i:<item>' or 'f:<fluid>'). The recipe takes and gives what the whole line takes and gives, with the energy of every stage summed and spent at maxEUt (ceil(energy / maxEUt) ticks). Enrichment: UF6 never leaves and the fluorine the hexafluoride step needs comes back from the electrolyses, so HF goes in and the same fluorine comes out as F2 (decision 10: the hot cell converts HF into F2 and creates none). Radon: GTM's 8 plutonium ingots come back as dust and are smelted back (the electric furnace's EU), so they stay inside as a catalyst and no plutonium is needed.",
+    "recipes[]: ours, at eut x duration. itemsIn / itemsOut: { id, count, chance? } (chance of 10000; an output with a chance is a chanced output); fluidsIn / fluidsOut: { id, amount } in mB.",
+    "Plutonium balance (gtceu:plutonium_dust is GTM's Pu-239): a spent LEU or MOX assembly returns 1 Pu and 8 U-238; a MOX assembly takes 2 Pu (net -1 Pu per MOX); a breeder takes 1 Pu ingot and its spent assembly returns 2 Pu (net +1). An RTG pellet and a Pu-Be source take 1 Pu each.",
+    "The radioactive waste (gtnn:radioactive_waste: the fission products glassed with the chopped cladding) is contained: it leaves through the output bus and the hot cell refuses voiding. The NO2 goes to GTM's nitric acid recipes (2 NO2 + water + O2 -> 2 HNO3)."
+  ],
+  "maxEUt": 7680,
+  "modes": [
+    { "circuit": 1, "name": "enrichment" },
+    { "circuit": 2, "name": "fuel" },
+    { "circuit": 3, "name": "reprocessing" },
+    { "circuit": 4, "name": "radon" }
+  ],
+  "composed": [
+    {
+      "name": "enrichment",
+      "circuit": 1,
+      "stages": [
+        "gtceu:chemical_reactor/uranium_hexafluoride",
+        "gtceu:centrifuge/uranium_hexafluoride_separation",
+        "gtceu:electrolyzer/enriched_uranium_hexafluoride_separation",
+        "gtceu:electrolyzer/depleted_uranium_hexafluoride_separation"
+      ],
+      "given": { "i:gtceu:uraninite_dust": 30 },
+      "linked": ["f:gtceu:uranium_hexafluoride", "f:gtceu:enriched_uranium_hexafluoride", "f:gtceu:depleted_uranium_hexafluoride"]
+    },
+    {
+      "name": "radon",
+      "circuit": 4,
+      "stages": [
+        "gtceu:large_chemical_reactor/radon_from_uranium_238",
+        "gtceu:smelting/smelt_dust_plutonium_to_ingot"
+      ],
+      "given": { "i:gtceu:uranium_dust": 1 },
+      "linked": ["i:gtceu:plutonium_ingot"]
+    }
+  ],
+  "recipes": [
+    {
+      "name": "mox_fuel_assembly",
+      "circuit": 2,
+      "eut": 7680,
+      "duration": 400,
+      "itemsIn": [
+        { "id": "gtceu:plutonium_dust", "count": 2 },
+        { "id": "gtceu:uranium_dust", "count": 8 },
+        { "id": "grindless:zircaloy_cladding_tube", "count": 4 }
+      ],
+      "fluidsIn": [
+        { "id": "gtceu:oxygen", "amount": 20000 },
+        { "id": "gtceu:helium", "amount": 100 }
+      ],
+      "itemsOut": [{ "id": "grindless:mox_fuel_assembly", "count": 1 }],
+      "fluidsOut": []
+    },
+    {
+      "name": "breeder_fuel_assembly",
+      "circuit": 2,
+      "eut": 7680,
+      "duration": 400,
+      "itemsIn": [
+        { "id": "gtceu:plutonium_ingot", "count": 1 },
+        { "id": "gtceu:uranium_ingot", "count": 9 },
+        { "id": "grindless:zircaloy_cladding_tube", "count": 4 }
+      ],
+      "fluidsIn": [{ "id": "gtceu:helium", "amount": 100 }],
+      "itemsOut": [{ "id": "grindless:breeder_fuel_assembly", "count": 1 }],
+      "fluidsOut": []
+    },
+    {
+      "name": "rtg_pellet",
+      "circuit": 2,
+      "eut": 7680,
+      "duration": 200,
+      "itemsIn": [
+        { "id": "gtceu:plutonium_dust", "count": 1 },
+        { "id": "gtceu:platinum_foil", "count": 2 },
+        { "id": "gtceu:rhodium_foil", "count": 1 }
+      ],
+      "fluidsIn": [{ "id": "gtceu:oxygen", "amount": 2000 }],
+      "itemsOut": [{ "id": "grindless:rtg_pellet", "count": 1 }],
+      "fluidsOut": []
+    },
+    {
+      "name": "pube_neutron_source",
+      "circuit": 2,
+      "eut": 7680,
+      "duration": 200,
+      "itemsIn": [
+        { "id": "gtceu:plutonium_dust", "count": 1 },
+        { "id": "gtceu:beryllium_dust", "count": 13 },
+        { "id": "gtceu:stainless_steel_foil", "count": 2 }
+      ],
+      "fluidsIn": [],
+      "itemsOut": [{ "id": "grindless:pube_neutron_source", "count": 1 }],
+      "fluidsOut": []
+    },
+    {
+      "name": "reprocess_spent_fuel",
+      "circuit": 3,
+      "eut": 7680,
+      "duration": 600,
+      "itemsIn": [{ "id": "grindless:spent_fuel_assembly", "count": 1 }],
+      "fluidsIn": [{ "id": "gtceu:nitric_acid", "amount": 4000 }],
+      "itemsOut": [
+        { "id": "gtceu:uranium_dust", "count": 8 },
+        { "id": "gtceu:plutonium_dust", "count": 1 },
+        { "id": "gtnn:radioactive_waste", "count": 1 },
+        { "id": "gtceu:caesium_dust", "count": 1, "chance": 1000 },
+        { "id": "gtceu:neodymium_dust", "count": 1, "chance": 1000 }
+      ],
+      "fluidsOut": [
+        { "id": "gtceu:nitrogen_dioxide", "amount": 4000 },
+        { "id": "gtceu:xenon", "amount": 200 },
+        { "id": "gtceu:krypton", "amount": 40 }
+      ]
+    },
+    {
+      "name": "reprocess_spent_breeder",
+      "circuit": 3,
+      "eut": 7680,
+      "duration": 600,
+      "itemsIn": [{ "id": "grindless:spent_breeder_assembly", "count": 1 }],
+      "fluidsIn": [{ "id": "gtceu:nitric_acid", "amount": 4000 }],
+      "itemsOut": [
+        { "id": "gtceu:uranium_dust", "count": 7 },
+        { "id": "gtceu:plutonium_dust", "count": 2 },
+        { "id": "gtnn:radioactive_waste", "count": 1 },
+        { "id": "gtceu:caesium_dust", "count": 1, "chance": 250 },
+        { "id": "gtceu:neodymium_dust", "count": 1, "chance": 250 }
+      ],
+      "fluidsOut": [
+        { "id": "gtceu:nitrogen_dioxide", "amount": 4000 },
+        { "id": "gtceu:xenon", "amount": 50 },
+        { "id": "gtceu:krypton", "amount": 10 }
+      ]
+    }
+  ]
+}
