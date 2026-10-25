@@ -1,263 +1,263 @@
-# Gregtech Grindless: el viaje al agujero negro
+# Gregtech Grindless: the journey to the black hole
 
-El usuario aprobó esta tabla el 2026-10-24, con los cambios de la última sección. Es la guía del pack. Cada era se diseña en detalle al llegar a ella, en `docs/eras/`.
+The user approved this table on 2026-10-24, with the changes in the last section. It is the pack's guide. Each era is designed in detail when we reach it, in `docs/eras/`.
 
-La investigación de apoyo está en `docs/investigacion/espacio/`:
-- la campaña de `grindless-earlygame` (`grindless-campaign.md`);
-- lo que hacen otros packs (`packs-space.md`);
-- los mods espaciales (`space-mods.md`);
-- lo que trae GTM 7.5.3 por tier (`gtm-tiers.md`);
-- el catálogo de máquinas candidatas (`machines-catalog.md`).
+The supporting research is in `docs/investigacion/espacio/`:
+- the `grindless-earlygame` campaign (`grindless-campaign.md`);
+- what other packs do (`packs-space.md`);
+- the space mods (`space-mods.md`);
+- what GTM 7.5.3 brings per tier (`gtm-tiers.md`);
+- the catalog of candidate machines (`machines-catalog.md`).
 
-## Cómo casan Grindless y GregTech
+## How Grindless and GregTech fit together
 
-- **Energía.** Grindless sube con `8 × 4ⁿ`, que es exactamente la escalera de voltajes de GT: T0 = vapor/ULV … T14 = MAX. Su T15 (8 590 millones por tick) no existe en GT. El final es el proyecto de MAX con varios amperios (4 A de MAX = T15); no se inventa un voltaje falso.
-- **Industria.** Los temas T0–T9 de Grindless caen 1:1 en Vapor–UHV, y son justo lo que GT trae ahí:
+- **Energy.** Grindless climbs with `8 × 4ⁿ`, which is exactly GT's voltage ladder: T0 = steam/ULV … T14 = MAX. Its T15 (8,590 million per tick) does not exist in GT. The endgame is the MAX project with several amps (4 A of MAX = T15); no fake voltage is invented.
+- **Industry.** Grindless's T0–T9 topics map 1:1 onto Steam Age–UHV, and they are exactly what GT provides there:
 
-  | Tema de Grindless | Era de GT |
+  | Grindless topic | GT era |
   |---|---|
-  | Precisión | EV |
+  | Precision | EV |
   | Nuclear | IV |
-  | Criogenia | LuV |
-  | Fusión | ZPM |
-  | Partículas | UV |
-  | Cuántica | UHV |
-- **Espacio.** En Grindless empieza en T10 (UEV). Aquí empieza al final de HV, así que sus etapas se adelantan:
+  | Cryogenics | LuV |
+  | Fusion | ZPM |
+  | Particles | UV |
+  | Quantum | UHV |
+- **Space.** In Grindless it starts at T10 (UEV). Here it starts at the end of HV, so its stages come earlier:
 
-  | Etapa de Grindless | Eras aquí |
+  | Grindless stage | Eras here |
   |---|---|
   | Orbital (T10) | HV–LuV |
-  | Planetaria y Kardashev I (T11) | IV–ZPM |
-  | Estelar y Kardashev II (T12) | UV–UHV |
-  | Interestelar (T13) | UEV–UXV |
-  | Galáctica y Kardashev III (T14) | OpV |
-  | Horizonte de sucesos (T15) | MAX |
+  | Planetary and Kardashev I (T11) | IV–ZPM |
+  | Stellar and Kardashev II (T12) | UV–UHV |
+  | Interstellar (T13) | UEV–UXV |
+  | Galactic and Kardashev III (T14) | OpV |
+  | Event horizon (T15) | MAX |
 
-## La tabla
+## The table
 
-| Era | Viaje | Solo sale de allí | Máquinas nuevas (nuestras) | Abre |
+| Era | Journey | Only comes from there | New machines (ours) | Opens |
 |---|---|---|---|---|
-| **Vapor** (T0) | La Tierra: Overworld, Vacío y Llano. El observatorio dibuja la primera carta de la Luna. | — | perforadora e invernadero de vapor (ya están), alto horno de vapor, batería de coque, observatorio de relojería | LV |
-| **LV** (T1) | el Nether (ya está) | las vetas del Nether | perforadora, invernadero, horno de arco y simulador de criaturas (ya están); tostador de sulfuros con planta de ácido, torre solar de espejos, observatorio óptico | MV |
-| **MV** (T2) | el End (sale de HV, que solo debe abrir la Luna) | las vetas del End: bauxita, vanadio y cromo, platino, circonio | planta de mineral y biorrefinería (ya están); banco de pruebas de motores, radiotelescopio | HV |
-| **HV** (T3) | la **Luna**, al final de la era, con el primer cohete y a mano | **titanio** (ilmenita lunar) y helio-3, que se guarda para la fusión | refinería y reformador (ya están); autoclave de composites, planta de gas de síntesis, complejo de lanzamiento, perforadora lunar (solo forma en la Luna) | EV: sin titanio lunar no hay casco EV |
-| **EV** (T4) | base lunar automática y conectada con casa; **Marte** al final | tungsteno, tierras raras, hielo con deuterio | planta de platino, celda de regolito con horno de volátiles y planta criogénica (Luna), procesador de atmósfera (Marte), trípode EV y campo solar lunar | IV: acero de tungsteno |
-| **IV** (T5) | **Venus y Mercurio** a la vez | naquadah (vetas de Venus a 90 bar), iridio y osmio (corteza de Mercurio) | reactor de fisión (núcleos diseñados), celda caliente (radioquímica y pastillas RTG), planta de naquadah, perforadora presurizada (Venus) y de lado nocturno (Mercurio), motor térmico de Venus, campo solar de Mercurio | LuV |
-| **LuV** (T6) | **cinturón de asteroides y lunas de Júpiter** (Ío, Europa, Ganímedes); primera estación orbital | cultivos del océano de Europa (circuitos vivos), metales de asteroide | fundición en microgravedad, procesador de asteroides, criobot, toma volcánica de Ío, rectena (energía mandada desde la órbita) | ZPM |
-| **ZPM** (T7) | **Saturno** (Titán, Encélado) y los gigantes de hielo **desde la órbita, sin bajar** | helio-3 y deuterio a granel, tolinas de Titán | fusión como infraestructura, láser de minería orbital, sifón de gigantes gaseosos, astillero orbital, ascensor espacial. **Kardashev I**: todo el sistema solar trabaja | UV |
-| **UV** (T8) | Plutón y el cinturón de Kuiper desde la órbita; primera sonda a otra estrella | hielos exóticos | acelerador de partículas, lanzador de velas láser | UHV |
-| **UHV** (T9) | **Alfa Centauri** (Próxima b): la sonda abre la primera puerta | flora alienígena | par de puertas de curvatura, enjambre de Dyson alrededor del Sol. **Kardashev II** | UEV |
-| **UEV** (T10) | varias estrellas a la vez (Sirio, Barnard…) | materia degenerada de enana blanca | forja estelar, colector de nebulosa | UIV |
-| **UIV** (T11) | estrellas de neutrones, púlsares y el primer agujero negro, Cygnus X-1 | neutronio, metales del proceso r | motor de Penrose (ensayo con un agujero negro), ordenador Matrioshka | UXV |
-| **UXV** (T12) | el brazo de la galaxia: muchos sistemas a la vez | plasma estelar, plasma del disco de acreción | elevador estelar, espumadora del disco de acreción | OpV |
-| **OpV** (T13) | el bulbo galáctico | antimateria industrial, materia exótica estable | forja de Kugelblitz (microagujeros negros hechos con luz), sondas que se replican solas. **Kardashev III** | MAX |
-| **MAX** (T14–T15) | **Sagitario A\***, el centro de la galaxia | — | **la concha de espejos**: el multibloque más grande del pack. Rodea el agujero negro, amplifica una onda hasta que estalla y con él estalla el universo | el final |
+| **Steam Age** (T0) | Earth: Overworld, Void and Flatland. The observatory draws the first chart of the Moon. | — | steam drill and greenhouse (already there), steam blast furnace, coke battery, clockwork observatory | LV |
+| **LV** (T1) | the Nether (already there) | the Nether veins | drill, greenhouse, arc furnace and creature simulator (already there); sulfide roaster with acid plant, solar mirror tower, optical observatory | MV |
+| **MV** (T2) | the End (moved from HV, which should only open the Moon) | the End veins: bauxite, vanadium and chromium, platinum, zirconium | ore plant and biorefinery (already there); engine test stand, radio telescope | HV |
+| **HV** (T3) | the **Moon**, at the end of the era, with the first rocket, by hand | **titanium** (lunar ilmenite) and helium-3, which is kept for fusion | refinery and reformer (already there); composite autoclave, syngas plant, launch complex, lunar drill (only forms on the Moon) | EV: without lunar titanium there is no EV hull |
+| **EV** (T4) | automated lunar base, connected to home; **Mars** at the end | tungsten, rare earths, deuterium ice | platinum plant, regolith cell with volatiles furnace and cryogenic plant (Moon), atmosphere processor (Mars), EV tripod and lunar solar field | IV: tungsten steel |
+| **IV** (T5) | **Venus and Mercury** at once | naquadah (Venus veins at 90 bar), iridium and osmium (Mercury crust) | fission reactor (designed cores), hot cell (radiochemistry and RTG pellets), naquadah plant, pressurized drill (Venus) and night-side drill (Mercury), Venus heat engine, Mercury solar field | LuV |
+| **LuV** (T6) | **the asteroid belt and Jupiter's moons** (Io, Europa, Ganymede); first orbital station | Europa ocean crops (living circuits), asteroid metals | microgravity smelter, asteroid processor, cryobot, volcanic intake on Io, rectenna (power beamed from orbit) | ZPM |
+| **ZPM** (T7) | **Saturn** (Titan, Enceladus) and the ice giants **from orbit, without landing** | bulk helium-3 and deuterium, Titan tholins | fusion as infrastructure, orbital mining laser, gas giant siphon, orbital shipyard, space elevator. **Kardashev I**: the whole solar system works | UV |
+| **UV** (T8) | Pluto and the Kuiper belt from orbit; first probe to another star | exotic ices | particle accelerator, laser sail launcher | UHV |
+| **UHV** (T9) | **Alpha Centauri** (Proxima b): the probe opens the first gate | alien flora | pair of warp gates, Dyson swarm around the Sun. **Kardashev II** | UEV |
+| **UEV** (T10) | several stars at once (Sirius, Barnard…) | white dwarf degenerate matter | stellar forge, nebula collector | UIV |
+| **UIV** (T11) | neutron stars, pulsars and the first black hole, Cygnus X-1 | neutronium, r-process metals | Penrose engine (test with a black hole), Matrioshka computer | UXV |
+| **UXV** (T12) | the galactic arm: many systems at once | stellar plasma, accretion disk plasma | stellar elevator, accretion disk skimmer | OpV |
+| **OpV** (T13) | the galactic bulge | industrial antimatter, stable exotic matter | Kugelblitz forge (micro black holes made of light), probes that replicate on their own. **Kardashev III** | MAX |
+| **MAX** (T14–T15) | **Sagittarius A\***, the center of the galaxy | — | **the mirror shell**: the largest multiblock in the pack. It surrounds the black hole, amplifies a wave until it bursts, and the universe bursts with it | the end |
 
-Los materiales exactos de cada fila se fijan al diseñar cada era. La forma general es lo que se aprueba aquí.
+The exact materials for each row are set when each era is designed. What is approved here is the general shape.
 
-## La Luna en HV: dos opciones
+## The Moon in HV: two options
 
-**A. Titanio. Elegida por el usuario.**
-- **Qué es:** la ilmenita del mar lunar (las muestras del Apolo llegan a ~10 % de TiO₂).
-- **Por qué EV la necesita:** el casco EV y casi toda máquina EV llevan titanio, así que la Luna es la puerta a EV. Como EV gasta mucho titanio, automatizar la base lunar es el primer trabajo de EV.
-- **Qué hay que cambiar:**
-  - Quitar el titanio de la Tierra: la ilmenita de la veta del End y el rutilo que sale de la bauxita.
-  - Cambiar la broca de titanio de la perforadora HV.
-  - El helio-3 viene de regalo para la fusión.
+**A. Titanium. Chosen by the user.**
+- **What it is:** the ilmenite of the lunar sea (Apollo samples reach ~10% TiO₂).
+- **Why EV needs it:** the EV hull and almost every EV machine use titanium, so the Moon is the gate to EV. Since EV uses a lot of titanium, automating the lunar base is EV's first job.
+- **What has to change:**
+  - Remove titanium from Earth: the ilmenite from the End vein and the rutile that comes from bauxite.
+  - Change the titanium drill bit of the HV drill.
+  - Helium-3 comes as a bonus for fusion.
 
-**B. Platino y paladio.**
-- **Qué es:** metal de meteoritos en el regolito.
-- **Por qué EV lo necesita:** alimenta la planta de platino, la pieza estrella de EV.
-- **Qué hay que cambiar:** la línea de platino de GT-- saca el platino de los sulfuros de la Tierra. Hacerlo solo lunar obliga a romper esa línea, y el platino pesa menos que el titanio en EV.
+**B. Platinum and palladium.**
+- **What it is:** meteorite metal in the regolith.
+- **Why EV needs it:** it feeds the platinum plant, EV's star piece.
+- **What has to change:** the GT-- platinum line gets platinum from Earth's sulfides. Making it lunar-only forces that line to be broken, and platinum is less of a burden than titanium in EV.
 
-## Las vetas del End
+## The End veins
 
-Hoy HV abre el End y, con la Luna, abriría dos sitios. Propuesta: **el End pasa a MV**, que hoy no abre ningún sitio.
-- **El orden queda así:** el Nether (LV, hacia abajo), el End (MV, más allá del mundo) y la Luna (HV, arriba).
-- **Qué hay que bajar a MV:** el ojo de ender y la llave del End. El blaze pasa de HV a MV en el simulador.
-- **Qué sale de la veta del End:**
-  - la ilmenita, que va a la Luna con la opción A;
-  - la scheelita, que va a Marte.
+Today HV opens the End and, with the Moon, it would open two places. Proposal: **the End moves to MV**, which opens no place today.
+- **The order becomes:** the Nether (LV, downward), the End (MV, beyond the world) and the Moon (HV, upward).
+- **What has to move down to MV:** the ender eye and the End key. The blaze moves from HV to MV in the simulator.
+- **What comes out of the End vein:**
+  - the ilmenite, which goes to the Moon under option A;
+  - the scheelite, which goes to Mars.
 
-## Cada planeta tiene sus reglas
+## Each planet has its own rules
 
-- **Máquinas que solo funcionan allí.** GTM ya admite recetas con condición de dimensión. Además, la estructura de los multibloques lleva piezas que solo se fabrican allí, como el ladrillo de regolito sinterizado. Hay que ir y montarlos en el sitio.
-- **Entorno.** Cada planeta tiene un perfil que cambia las recetas:
-  - En el vacío no hay combustión, y los procesos de vacío son gratis.
-  - Con calor se gasta más refrigerante.
-  - Con frío la criogenia sale más barata.
-  - Con poca gravedad los cristales crecen más rápido.
-  - Con radiación hacen falta carcasas blindadas.
-  - La energía solar depende de la luz (Mercurio ×6,7, Luna ×1,4, Marte ×0,43).
-- **Energía del sitio.**
+- **Machines that only work there.** GTM already supports recipes with a dimension condition. Also, multiblock structures use parts that are only made there, like the sintered regolith brick. You have to go there and build them on site.
+- **Environment.** Each planet has a profile that changes the recipes:
+  - In vacuum there is no combustion, and vacuum processes are free.
+  - In heat, more coolant is used.
+  - In cold, cryogenics costs less.
+  - In low gravity, crystals grow faster.
+  - With radiation, shielded casings are needed.
+  - Solar power depends on the light (Mercury ×6.7, Moon ×1.4, Mars ×0.43).
+- **Power on site.**
   - Solar.
-  - Combustibles de allí: metano y oxígeno en Marte, calor en Venus, volcanes en Ío.
-  - Pilas RTG.
-  - Desde LuV, energía mandada desde la órbita a una rectena.
-- **Transporte (decisión del usuario).**
-  - Personas: la primera vez en cohete; después, Waystones o los /home de FTB, sin coste.
-  - Materiales, fluidos y energía: AE2, con el puente cuántico entre planetas hecho con una mitad en cada extremo.
-  - La red AE2 entre planetas mejora con las eras.
-  - Los cofres, tanques y demás objetos ender funcionan entre planetas sin límite (el usuario, 2026-10-24: son un mod de calidad de vida precisamente para eso). AE2 es la columna industrial, no el único camino.
-- **Lo que sale de un planeta no existe en la Tierra.** El validador de recetas lo comprueba para cada recurso, incluidas abejas, subproductos y addons.
+  - Local fuels: methane and oxygen on Mars, heat on Venus, volcanoes on Io.
+  - RTG batteries.
+  - From LuV on, power beamed from orbit to a rectenna.
+- **Transport (user's decision).**
+  - People: the first time by rocket; after that, Waystones or FTB's /home, at no cost.
+  - Materials, fluids and power: AE2, with the quantum bridge between planets built with one half at each end.
+  - The interplanetary AE2 network improves with each era.
+  - Ender chests, tanks and other ender items work between planets with no limit (the user, 2026-10-24: they are a quality-of-life mod precisely for that). AE2 is the industrial backbone, not the only route.
+- **What comes from a planet does not exist on Earth.** The recipe validator checks this for every resource, including bees, byproducts and addons.
 
-## De visitar a dominar
+## From visiting to dominating
 
-1. **En persona y a mano:** HV–IV (Luna, Marte, Venus y Mercurio).
-2. **Bases automáticas conectadas:** EV–LuV.
-3. **Estaciones en órbita que explotan sin bajar:** LuV–UV.
-4. **Industria del tamaño de una estrella o de un sistema:** UHV–OpV (Dyson, forja estelar, elevador estelar; Kardashev II y III).
-5. **El proyecto del agujero negro:** MAX.
+1. **In person, by hand:** HV–IV (Moon, Mars, Venus and Mercury).
+2. **Connected automatic bases:** EV–LuV.
+3. **Orbital stations that exploit without landing:** LuV–UV.
+4. **Industry the size of a star or a system:** UHV–OpV (Dyson, stellar forge, stellar elevator; Kardashev II and III).
+5. **The black hole project:** MAX.
 
-## El final
+## The end
 
-Es un solo proyecto en cuatro etapas, y cada una es un multibloque que gana algo:
+It is a single project in four stages, and each one is a multiblock that delivers something:
 
-| Era | Etapa | Qué hace |
+| Era | Stage | What it does |
 |---|---|---|
-| UIV | Motor de Penrose | Ensayo en un agujero negro estelar: saca energía del giro. |
-| UXV | Espumadora del disco | Convierte el plasma del disco de acreción en materia exótica. |
-| OpV | Forja de Kugelblitz | Hace microagujeros negros con luz, que hay que contener. |
-| MAX | Concha de espejos | Rodea Sagitario A\* y amplifica una onda hasta que el agujero estalla. Es el multibloque más grande del pack. |
+| UIV | Penrose engine | Test on a stellar black hole: extracts energy from its spin. |
+| UXV | Disk skimmer | Turns accretion disk plasma into exotic matter. |
+| OpV | Kugelblitz forge | Makes micro black holes from light, which must be contained. |
+| MAX | Mirror shell | Surrounds Sagittarius A\* and amplifies a wave until the hole bursts. It is the largest multiblock in the pack. |
 
-- **La receta final** pide la energía guardada, la onda semilla de la forja y todos los segmentos en su sitio.
-- **Al detonar** el universo estalla: créditos y una semilla de universo nuevo para quien quiera volver a empezar.
-- **Dónde:** GCYR trae la dimensión `black_hole_orbit` con un cielo de agujero negro y nada que lleve a ella. Es el sitio perfecto.
-- **Lo que hay que preparar antes:** el helper de patrones (hoy 16 filas) tiene que aceptar estructuras mucho más grandes.
+- **The final recipe** asks for the stored energy, the seed wave from the forge and every segment in place.
+- **On detonation** the universe bursts: credits and a seed for a new universe, for anyone who wants to start over.
+- **Where:** GCYR ships the `black_hole_orbit` dimension with a black hole sky and nothing that leads to it. It is the perfect place.
+- **What has to be prepared first:** the pattern helper (16 rows today) has to accept much larger structures.
 
-## Las familias cambian de forma y de piezas, no solo de color
+## The families change shape and parts, not just color
 
-- **Perforadora:**
-  1. torre de bronce (vapor);
-  2. celosía de acero con bomba de lodo (LV);
-  3. torre de aluminio (MV);
-  4. equipo rotatorio de inox (HV);
-  5. trípode lunar con alas solares (EV);
-  6. equipo presurizado o con camisa de refrigerante (IV);
-  7. ancla de arpón en asteroides y criobot en lunas heladas (LuV);
-  8. cuchara atmosférica en gigantes gaseosos (ZPM);
-  9. espumadora del disco (UXV–MAX).
-- **Invernadero:**
-  1. casa de cristal;
-  2. hidropónico de inox;
-  3. cúpula lunar sellada;
-  4. anillo hidropónico que gira (gravedad por giro);
-  5. biorreactor de algas;
-  6. biosfera del arca para el viaje.
-- **Observatorio (familia nueva, la que cuenta el viaje):**
-  1. telescopio de relojería;
+- **Vein drill:**
+  1. bronze tower (steam);
+  2. steel lattice with mud pump (LV);
+  3. aluminium tower (MV);
+  4. rotary stainless steel equipment (HV);
+  5. lunar tripod with solar wings (EV);
+  6. pressurized equipment or with a coolant jacket (IV);
+  7. harpoon anchor on asteroids and cryobot on icy moons (LuV);
+  8. atmospheric scoop on gas giants (ZPM);
+  9. disk skimmer (UXV–MAX).
+- **Greenhouse:**
+  1. glass house;
+  2. stainless steel hydroponics;
+  3. sealed lunar dome;
+  4. rotating hydroponic ring (gravity from spin);
+  5. algae bioreactor;
+  6. ark biosphere for the trip.
+- **Observatory (new family, the one that tells the story of the journey):**
+  1. clockwork telescope;
   2. refractor;
-  3. radiotelescopio;
-  4. antena de espacio profundo;
-  5. interferómetro;
-  6. detector de ondas gravitacionales;
-  7. el telescopio que fotografía Sagitario A\*, que da los datos del objetivo final.
+  3. radio telescope;
+  4. deep-space antenna;
+  5. interferometer;
+  6. gravitational-wave detector;
+  7. the telescope that photographs Sagittarius A\*, which supplies the data for the final goal.
 
-## Misiones
+## Quests
 
-En inglés, un capítulo por era. Cada capítulo cuenta el paso que te acerca al centro de la galaxia. Se abre con lo que se ve desde el observatorio y se cierra con el viaje siguiente. Nunca se promete un multibloque que no existe todavía.
+In English, one chapter per era. Each chapter tells the step that brings you closer to the center of the galaxy. It opens with what is seen from the observatory and closes with the next journey. Never promise a multiblock that doesn't exist yet.
 
-## Lo que hacen otros packs
+## What other packs do
 
 - **GTNH:**
-  - **Planetas por tier:** la Luna en HV, Marte, Venus y Mercurio en EV, etc.
-  - **Ascensor espacial (UV):** módulos que minan planetas sin bajar.
-  - **Megaestructuras finales:** el Ojo de la Armonía y la Forja de los Dioses.
-  - **El agujero negro "pseudoestable":** se siembra y decae si no se cuida. Es el mejor precedente de nuestro final.
-  - **El final de verdad:** la Puerta Estelar.
-  - **Lo que cansa:** cohetes y esquemas por mazmorras, aterrizajes a mano, recetas de 111 horas, azar obligatorio y entradas que se pierden si falla la energía. Licencia LGPL/GPL/sin licencia: solo ideas.
+  - **Planets by tier:** the Moon in HV, Mars, Venus and Mercury in EV, etc.
+  - **Space elevator (UV):** modules that mine planets without landing.
+  - **Final megastructures:** the Eye of Harmony and the Forge of the Gods.
+  - **The "pseudo-stable" black hole:** it is seeded and decays if it is not tended. It is the best precedent for our ending.
+  - **The real ending:** the Stellar Gate.
+  - **What wears you out:** rockets and blueprints from dungeons, landings by hand, 111-hour recipes, mandatory luck and inputs that are lost if power fails. License LGPL/GPL/no license: ideas only.
 - **GregTech Leisure:**
-  - **Planetas:** 8 cohetes, cada planeta con su fluido.
-  - **Explotación sin volver:** centro espacial con drones que no se gastan.
-  - **Cósmico:** esfera de Dyson y Ojo de la Armonía.
-  - **El final:** MAX acaba en "modo creativo", un final sin gracia; hay que evitarlo.
-  - **Cantidades absurdas:** máquinas de millones de paralelos.
-  - **Licencia:** contradictoria; solo ideas.
+  - **Planets:** 8 rockets, each planet with its own fluid.
+  - **Exploitation without going back:** space center with drones that don't wear out.
+  - **Cosmic:** Dyson sphere and Eye of Harmony.
+  - **The ending:** MAX ends in "creative mode", a dull ending; it has to be avoided.
+  - **Absurd quantities:** machines with millions of parallels.
+  - **License:** contradictory; ideas only.
 - **Star Technology:**
-  - **Viaje:** se viaja por puertas estelares, no por cohetes.
-  - **K.O.M.A.R.U.:** un marco de módulos cuyo mantenimiento sube con el tamaño.
-  - **Licencia:** MIT, se puede copiar con atribución.
+  - **Travel:** you travel through stargates, not rockets.
+  - **K.O.M.A.R.U.:** a frame of modules whose upkeep grows with its size.
+  - **License:** MIT, can be copied with attribution.
 - **GT Odyssey:**
-  - **Planetas:** usa Ad Astra.
-  - **Minería remota:** escaneas una dimensión una vez y la minas desde casa ("por fin no hay que plantar mineros por todas partes").
-  - **Licencia:** no comercial; solo ideas.
-- **Monifactory / Nomifactory:** sin espacio, con misiones de "microverso" que dan lotes fijos. Licencia LGPL.
-- **Cosmic Frontiers y Phoenix Forge:** prometen finales que no existen. Hay que evitarlo.
+  - **Planets:** uses Ad Astra.
+  - **Remote mining:** you scan a dimension once and mine it from home ("finally no need to plant miners everywhere") (translated from Spanish).
+  - **License:** non-commercial; ideas only.
+- **Monifactory / Nomifactory:** no space content, with "microverse" quests that give fixed batches. License LGPL.
+- **Cosmic Frontiers and Phoenix Forge:** they promise endings that don't exist. Avoid that.
 
-**Qué funciona.**
-- Pisar el planeta una vez y después explotarlo desde lejos.
-- Megaestructuras que se manejan, con entradas y salidas de verdad.
-- Catalizador que no se gasta + reactivo barato = mucho producto.
-- Capítulos que resumen la era.
+**What works.**
+- Land on the planet once, then exploit it from afar.
+- Megastructures you can manage, with real inputs and outputs.
+- A catalyst that isn't consumed + a cheap reagent = lots of product.
+- Chapters that sum up the era.
 
-**Qué cansa.**
-- Tiempos y azar inflados.
-- Ir y volver a mano.
-- Muros de cantidad.
-- Castigos que tiran el trabajo.
-- Finales "creativos" que anulan la logística.
-- Prometer lo que no está hecho.
+**What wears you out.**
+- Inflated timers and luck.
+- Going back and forth by hand.
+- Walls of quantity.
+- Penalties that throw away your work.
+- "Creative" endings that cancel out the logistics.
+- Promising what isn't done yet.
 
-## Mod de espacio
+## Space mod
 
-**GCYR, que ya está en el pack, y nada más.** El informe completo está en `space-mods.md`.
+**GCYR, which is already in the pack, and nothing else.** The full report is in `space-mods.md`.
 
-**Por qué GCYR.**
-- Es de GregTech. Los cohetes se montan con piezas hechas en ensambladoras de GT y queman fluidos de GT.
-- Trae la Luna, Marte, Mercurio, Venus, sus órbitas y un esbozo de Próxima b. Se pueden añadir planetas con JSON.
-- Tiene oxígeno y temperatura (copiados del código MIT de Ad Astra). El oxígeno lo pone una máquina, el esparcidor de oxígeno.
-- Trae una esfera de Dyson y la dimensión `black_hole_orbit` con su shader de agujero negro funcionando.
-- Licencia LGPL-3.0: se puede incluir y adaptar con atribución.
+**Why GCYR.**
+- It's from GregTech. Rockets are built from parts made in GT assemblers and burn GT fluids.
+- It brings the Moon, Mars, Mercury, Venus, their orbits and a sketch of Proxima b. Planets can be added with JSON.
+- It has oxygen and temperature (copied from Ad Astra's MIT code). A machine supplies the oxygen: the oxygen spreader.
+- It has a Dyson sphere and the `black_hole_orbit` dimension, with its black hole shader working.
+- License LGPL-3.0: it can be included and adapted with attribution.
 
-**Por qué no los demás.**
+**Why not the others.**
 
-| Mod | Licencia | Por qué no |
+| Mod | License | Why not |
 |---|---|---|
-| Ad Astra | código MIT y arte con todos los derechos reservados | No tiene ninguna conexión con KubeJS: todos los packs que lo usan escribieron Java. Con GCYR duplicaría el oxígeno, los cohetes y los materiales. |
-| Northstar Redux | MIT | Va sobre Create y no tiene ganchos de GT, aunque sí tiene plugin de KubeJS. |
-| Creating Space | MIT | Va sobre Create y no tiene plugin de KubeJS. |
-| Galacticraft | — | Está muerto en Forge. |
+| Ad Astra | MIT code and art with all rights reserved | It has no KubeJS connection at all: every pack that uses it wrote Java. With GCYR it would duplicate the oxygen, rockets and materials. |
+| Northstar Redux | MIT | Built on Create and has no GT hooks, although it does have a KubeJS plugin. |
+| Creating Space | MIT | Built on Create and has no KubeJS plugin. |
+| Galacticraft | — | Dead on Forge. |
 
-**Lo que hacemos nosotros, sin Java.**
-- Las máquinas que solo funcionan en un planeta: la condición de dimensión de las recetas de GTM.
-- La gravedad y la radiación: ningún mod las tiene, así que van como reglas por planeta en las recetas.
-- Los recursos exclusivos de cada planeta.
-- El transporte entre planetas.
-- La minería orbital: los satélites y láseres de GCYR no están hechos.
+**What we do ourselves, without Java.**
+- Machines that only work on one planet: the dimension condition of GTM recipes.
+- Gravity and radiation: no mod has them, so they go in as per-planet rules in the recipes.
+- Each planet's exclusive resources.
+- Transport between planets.
+- Orbital mining: GCYR's satellites and lasers are not built.
 
-**Lo que hay que arreglar de GCYR.**
-- Sus vetas de Marte son materiales de la Tierra: se cambian por las nuestras.
-- Sube el primer cohete y el traje espacial a HV. Hoy el escáner de cohetes es de EV y el traje necesita un plástico de IV.
-- Tiene dos fallos abiertos al lanzar y al cambiar de dimensión. Hay que probarlos en partida.
+**What has to be fixed in GCYR.**
+- Its Mars veins are Earth materials: they get swapped for ours.
+- Move the first rocket and the space suit to HV. Today the rocket scanner is EV and the suit needs an IV plastic.
+- It has two open bugs, on launch and on dimension change. They have to be tested in game.
 
-## Decisiones del usuario (2026-10-24)
+## User decisions (2026-10-24)
 
-1. **La Luna da titanio (opción A).** El titanio entra en EV y sale solo de la Luna.
-2. **El End pasa a MV.** Hay que comprobar que, sin la ilmenita (a la Luna) ni la scheelita (a Marte), la veta del End sigue mereciendo el viaje.
-3. **HV sin titanio.** Todo HV pasa a acero inoxidable: máquinas, cascos, brocas (la broca HV es de inox), multibloques y las piezas del cohete y del traje de GCYR. Las texturas HV se rehacen donde haga falta.
-4. **Regla del validador:** nada de una era puede pedir un recurso que sale en una era posterior.
-5. **Kardashev:** el I en ZPM, el II en UHV y el III en OpV.
-6. **Viajes.** La primera visita a cada planeta es en cohete. Después, las personas usan Waystones o los /home de FTB, sin coste extra. Que viajar sea gratis es intencional.
-7. **AE2 es la columna del transporte entre planetas:** materiales, fluidos y energía.
-   - El puente cuántico entre planetas se fabrica con una mitad hecha en cada extremo, así que hay que ir una vez; después funciona solo.
-   - La red entre planetas mejora con las eras (más canales, más capacidad, más energía) y es un objetivo en sí.
-   - Los cofres y tanques ender no cruzan a otro planeta. *Cambiado el mismo día por el usuario: los objetos ender funcionan en todos los planetas, sin límite.*
-8. **Misiones.**
-   - Una pestaña por era (Vapor → MAX) que cuenta el viaje.
-   - Pestañas aparte para los mods de calidad de vida: almacenamiento, AE2 y addons, Productive Bees, Create/Greate si se quedan, Waystones/FTB…
-   - Se reutilizan misiones de packs cuya licencia lo permite; si no, se escriben.
-   - Todo en inglés.
-9. **Post-UHV.** Primero se reutiliza lo que existe en packs externos, Gregicality y packs antiguos con licencia que lo permita (texturas y código incluidos). Crearlo de cero es el último recurso.
-10. **Orden de trabajo:**
-    1. probar en partida el lanzamiento y el salto de dimensión de GCYR;
-    2. HV a inox y versión corregida;
-    3. prototipo de la Luna probado en partida;
-    4. EV con el viaje y texturas nuevas;
-    5. IV diseñada en detalle mientras tanto;
-    6. pestañas de misiones de mods externos en paralelo;
-    7. un resumen corto al cerrar cada versión.
+1. **The Moon gives titanium (option A).** Titanium enters in EV and comes only from the Moon.
+2. **The End moves to MV.** Check that, without the ilmenite (to the Moon) or the scheelite (to Mars), the End vein still justifies the trip.
+3. **HV without titanium.** Everything in HV moves to stainless steel: machines, hulls, drill bits (the HV drill bit is stainless), multiblocks and the rocket and suit pieces of GCYR. The HV textures are redone where needed.
+4. **Validator rule:** nothing in an era can require a resource that comes out in a later era.
+5. **Kardashev:** I in ZPM, II in UHV and III in OpV.
+6. **Travel.** The first visit to each planet is by rocket. After that, people use Waystones or FTB's /home, at no extra cost. Making travel free is intentional.
+7. **AE2 is the backbone of transport between planets:** materials, fluids and power.
+   - The quantum bridge between planets is built with one half made at each end, so you have to go once; after that it runs on its own.
+   - The network between planets improves with the eras (more channels, more capacity, more power) and is a goal in itself.
+   - Ender chests and tanks don't cross to another planet. *Changed by the user the same day: ender items work on all planets, with no limit.*
+8. **Quests.**
+   - One tab per era (Steam Age → MAX) that tells the journey.
+   - Separate tabs for the quality-of-life mods: storage, AE2 and addons, Productive Bees, Create/Greate if they stay, Waystones/FTB…
+   - Quests are reused from packs whose license allows it; otherwise they are written from scratch.
+   - All in English.
+9. **Post-UHV.** First, reuse what exists in external packs, Gregicality and older packs whose license allows it (textures and code included). Creating it from scratch is the last resort.
+10. **Work order:**
+    1. test GCYR's launch and dimension jump in game;
+    2. HV to stainless steel and corrected version;
+    3. Moon prototype tested in game;
+    4. EV with the journey and new textures;
+    5. IV designed in detail in the meantime;
+    6. external-mod quest tabs in parallel;
+    7. a short summary when each version closes.
 
-Lo que sigue abierto lo resuelve el orquestador y lo apunta en `DECISIONS.md`:
-- Por encima de UHV, GTM no trae circuitos, cables ni bobinas.
-- El helper de patrones tiene que crecer para los multibloques gigantes.
-- `ev.md` e `iv.md` se rehacen con el viaje. Lo construido en el scratch se reaprovecha.
+The orchestrator resolves what is still open and records it in `DECISIONS.md`:
+- Above UHV, GTM does not provide circuits, cables or coils.
+- The pattern helper has to grow for giant multiblocks.
+- `ev.md` and `iv.md` are redone with the journey. What was built in the scratch is reused.

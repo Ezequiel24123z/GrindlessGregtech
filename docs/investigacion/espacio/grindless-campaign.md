@@ -1,140 +1,140 @@
-# Grindless: la campaña, resumida como guion para Gregtech Grindless
+# Grindless: the campaign, summarized as a script for Gregtech Grindless
 
-Fuente: el repo *Grindless* de Ezequiel24123z (MIT, del propio usuario), clonado en `research/space/grindless-earlygame/`, commit `30226c2` (main, 2026-10-23). Lo he leído sin modificarlo.
+Source: the *Grindless* repo by Ezequiel24123z (MIT, the user's own), cloned into `research/space/grindless-earlygame/`, commit `30226c2` (main, 2026-10-23). I read it without modifying it.
 
-Las citas `archivo:línea` son relativas a ese clon: **R** `README.md` · **D** `docs/DECISIONS.md` · **M** `docs/MACHINES.md` · **P** `docs/PROCESSES.md` · **B** `docs/BUILD-OUT.md` · **J/** `common/src/main/java/io/github/ezequiel24123z/grindless/` · **RES/** `common/src/main/resources/`. **GG:** es este repo y **S:** la carpeta `files/` de la sesión.
+The citations `file:line` are relative to that clone: **R** `README.md` · **D** `docs/DECISIONS.md` · **M** `docs/MACHINES.md` · **P** `docs/PROCESSES.md` · **B** `docs/BUILD-OUT.md` · **J/** `common/src/main/java/io/github/ezequiel24123z/grindless/` · **RES/** `common/src/main/resources/`. **GG:** is this repo and **S:** is the session's `files/` folder.
 
-**Estado en la fuente.** De T3 a T15 todo es diseño. Luna, el Drift, Sagitario, el cohete y la estación existen como prototipos registrados, pero sin receta de supervivencia (D:4952-4958, R:1182-1187). Ningún tier está aceptado (R:2229-2232).
+**Status in the source.** From T3 to T15 everything is design. The Moon, the Drift, Sagittarius, the rocket and the station exist as registered prototypes, but without a survival recipe (D:4952-4958, R:1182-1187). No tier is accepted (R:2229-2232).
 
-**⚑ = cambio ya decidido para GG que no está en Grindless.** La Luna y el primer cohete llegan al final de HV. El final es llegar al agujero negro y hacerlo explotar, y con él el universo (GG:DECISIONS.md:46).
+**⚑ = change already decided for GG that is not in Grindless.** The Moon and the first rocket arrive at the end of HV. The ending is reaching the black hole and making it explode, and with it the universe (GG:DECISIONS.md:46).
 
 ---
 
-## 1. La escalera T0–T15
+## 1. The T0–T15 ladder
 
-- **Energía.** Tecnología, controlador y energía suben juntos con `F(n) = 8 × 4ⁿ` (R:253-256, R:274). Es la escalera de voltajes de GT: LV–IV son alias de F1–F5 (R:1332-1333). Así, T0 = ULV … T13 = OpV, T14 ≈ MAX, y T15 queda por encima de GT.
-- **Cuatro líneas.** Cada tier trenza materiales, química, control y energía. Se cruzan durante el tier y convergen en la Control Matrix del siguiente (R:8-10, P:368-371, P:424-433). Desde T2, ninguna línea cierra su producto sin otra (D:4930-4931).
-- **Forma de cada tier.** «an entry bootstrap, several interacting route expansions, a logistics or scaling problem, a signature project and a frontier matrix» (P:394-395). Crece por decisiones nuevas, no por cantidades ni tiempos (D:4933-4935).
-- **Arquitecturas de Matrix.** Relay T1–T3, Integrated T4–T6, Superconducting T7–T9, Photonic T10–T12 (cristales zero-g, láseres, óptica) y Causal T13–T15 (materia exótica, relojes distribuidos, control relativista). Cada una fabrica más barato los ratings viejos (D:4908-4918).
+- **Energy.** Technology, controller and energy rise together with `F(n) = 8 × 4ⁿ` (R:253-256, R:274). It is GT's voltage ladder: LV–IV are aliases of F1–F5 (R:1332-1333). So T0 = ULV … T13 = OpV, T14 ≈ MAX, and T15 sits above GT.
+- **Four lines.** Each tier braids materials, chemistry, control and energy. They cross during the tier and converge on the next tier's Control Matrix (R:8-10, P:368-371, P:424-433). From T2 on, no line closes its product without another (D:4930-4931).
+- **Shape of each tier.** «an entry bootstrap, several interacting route expansions, a logistics or scaling problem, a signature project and a frontier matrix» (P:394-395). It grows through new decisions, not through quantities or times (D:4933-4935).
+- **Matrix architectures.** Relay T1–T3, Integrated T4–T6, Superconducting T7–T9, Photonic T10–T12 (zero-g crystals, lasers, optics) and Causal T13–T15 (exotic matter, distributed clocks, relativistic control). Each one makes older ratings cheaper to fabricate (D:4908-4918).
 
-Fuentes de la tabla: tema (R:1450-1467), líneas M · Q · C · E (P:375-390) y cierre (B:475-490). El resto se cita en la celda. El cierre siempre es la Matrix del tier siguiente o, en T15, el objetivo final (D:5016).
+Sources for the table: theme (R:1450-1467), lines M · Q · C · E (P:375-390) and ending (B:475-490). The rest is cited in the cell. The ending is always the next tier's Matrix or, at T15, the final goal (D:5016).
 
-| Tier (F, GT) | Tema | Líneas trenzadas: M · Q · C · E | Firma | Lugares | Recurso exclusivo | Hito | Cómo acaba |
+| Tier (F, GT) | Theme | Braided lines: M · Q · C · E | Signature | Places | Exclusive resource | Milestone | How it ends |
 |---|---|---|---|---|---|---|---|
-| **T0 Bootstrap** (8, ULV) | Escape velocity | M agregado geológico y fracciones metálicas · Q cerámica, biomasa y vidrio · C redstone y calibración del Data Core · E fuente F0 y taller | Taller conectado: Quern, Clay Mixer, Firing Chamber, Settling Trough, Geological Collector, Biocultivator, Biomass Dynamo (M:49-58) | Mundo base, Superflat primero (R:3-4) | — | Se acaba picar a mano (R:1480) | 5 Relay Matrix T1, hechas a mano |
-| **T1 Voltaic** (32, LV) | Familias básicas | M molienda, reducción, chapas, varillas, engranajes y vidrio renovable · Q agua, gases de tostación y aislante cerámico · C hilo de cobre, bobinas, relés y Assembler · E generador térmico y primer pilón | Thermal Generator, Pulverizer, Arc Furnace, Press y Assembler (P:439-440); las familias básicas de máquinas (D:8174) | + Factory World opcional, plano y sin recursos gratis (R:2294-2299) | — | El Assembler acaba con el crafteo a mano (R:1480-1481) | Relay Matrix T2 |
-| **T2 Industrial** (128, MV) | Bucles cerrados | M acero, lavado B2/B3, fundido y colada · Q azufre, redstone sintética, electrólisis, aire, salmuera y resina · C motores, bombas y lógica cableada · E vapor y solar | Proceso de contacto (Chemical Reactor), Wire Mill, Chemical Washer, Electrolysis Cell y Atmospheric Intake (R:2369-2372) | Mundo base | — | — | Matrix T3 |
-| **T3 Arc** (512, HV) | Construcción con energía | M refractarios, fluidos calientes y aleaciones duras · Q primeros hidrocarburos y el medio de la Arc Cell · C controladores, cajas logísticas y Construction Drones · E Arc Reactor alimentado | Arc Reactor de FU directa con Arc Cells, y el Arc Exosuit con el mismo reactor en miniatura (R:967-984); drones hasta ~15³ (M:593-596) | Mundo base. ⚑ GG: Luna y cohete | — | Primer multibloque diseñado (P:378) | Matrix T4, con drones y Arc Reactor en marcha |
-| **T4 Precision** (2 048, EV) | Pureza y control | M silicio electrónico, cerámicas técnicas y nobles recuperados · Q química a presión, nítrico y HCl, etchant, polímeros y agua ultrapura · C litografía, Integrated Matrices, circuitos y patrones · E acondicionamiento de energía; campus de varias líneas | Lithography Unit (R:1801); Research Station, cuyos patrones son catalizadores y no desbloqueos (R:1475-1478); Replicator (R:1833) | Mundo base | — | — | Primera frontera Integrated |
-| **T5 Nuclear** (8 192, IV) | Núcleos diseñados | M vainas, moderadores, reflectores y aleaciones antirradiación · Q UF6, agua pesada, limpieza de refrigerante y reprocesado · C controladores endurecidos y sensores · E fisión, intercambiadores y salas de turbinas | Fission Reactor paramétrico que hace SCRAM en vez de explotar (R:1056-1070, M:633); cascadas de centrífugas (P:923-930); Deep Core Drill con «weighted planetary pool» (R:442-444) | Mundo base | — | — | Ciclo de combustible completo y núcleo diseñado |
-| **T6 Cryogenic** (32 768, LuV) | Frío profundo | M aleaciones superconductoras e imanes de alto campo · Q helio líquido, criógenos y separación del combustible de fusión · C control de bajo ruido e interconexión superconductora · E bancos de pulso y red criogénica | Cryogenic Plant y Superconductor (R:1803, R:1672) | Mundo base | — (el deuterio entra aquí, R:1920; luego es la firma de Kryos) | — | Criógenos, imanes y pulso listos para la fusión |
-| **T7 Fusion** (131 072, ZPM) | Plasma sostenido | M paredes antineutrones, mantas y Containment Rings · Q cría D-T, D-D y recuperación de helio · C diagnóstico de plasma · E fusión sostenida; drones hasta ~32³ | Fusion Reactor: la ignición la paga la red vieja y, si pierde contención, se apaga sin daños (R:1072-1084); ciclos D-T → D-D → D-³He → p-¹¹B (M:680-687) | Mundo base | — | — | Bucle D-T cerrado con su manta |
-| **T8 Particle** (524 288, UV) | Núcleos a medida | M isótopos, láminas blanco y precursores exóticos · Q preparación de blancos y separación de radionúclidos · C temporización del haz y detectores · E el tamaño del anillo decide las reacciones | Particle Accelerator: transmutación, síntesis exótica (antimateria, isótopos exóticos, materia extraña), creación de materia e investigación (R:1088-1095, M:672-674) | Mundo base | — (los isótopos exóticos entran aquí, R:1920; luego son firma de Erebus) | La escasez pasa a ser un problema de energía (R:1097-1100) | Exóticos de frontera |
-| **T9 Quantum** (2 097 152, UHV) | Materia programable | M sustratos coherentes, metamateriales y Matter programable · Q deposición nanoquímica y refrigerantes cuánticos · C Quantum Cores, replicación y Quantum Assembler · E almacén de fase y fusión aneutrónica | Quantum Assembler y Matter Condenser (R:1115-1116) | Mundo base | — (la materia extraña entra aquí, R:1920; luego es firma de Erebus) | La fábrica terrestre es un campus (P:384) | Campus terrestre con control cuántico |
-| **T10 Orbital** (8 388 608, UEV) | Suelo y órbita | M compuestos, ablativos, aleaciones de vacío y cristales zero-g · Q propelentes, soporte vital y criogenia orbital · C guiado, buses de satélite, relés y Photonic Matrices · E cohetes, Mass Driver y solar orbital; fábrica en dos sitios | Launch Pad y cohete, Mass Driver y Orbital Catcher, Orbital Platform, satélites y Rectenna, industria de vacío, Orbital Assembly Bay (R:1863-1892); Assembly Field (R:616-617); Exotic Exosuit (R:948) | Órbita y Luna; el vuelo local no sale de la estrella (R:263-265, M:770) | Helio-3 (R:1199, R:1920) y productos de vacío y microgravedad (R:1170-1174) | Primera energía pasiva a gran escala: el satélite solar (R:1154) | Suelo y órbita forman una red abastecida |
-| **T11 Planetary** (33 554 432, UIV) | Mundos como infraestructura | M regolito y materiales de construcción de cada mundo · Q ISRU atmosférico, soporte vital cerrado y combustibles locales · C telepresencia, Colony Cores, Deep Survey y rutas interplanetarias · E varios mundos, Space Elevator y Horizon Gates | Telepresence Terminal y Proxy Frame, Colony Core, Drop Pod Bay, Interplanetary Router, Space Elevator, Horizon Gate y Deep Survey Satellite (R:1877-1893) | Los seis mundos de respaldo o los del mod espacial (§2.3) | El recurso firma de cada mundo (R:1197-1205) | **Kardashev I** (R:260-261) | Varios mundos forman un sistema industrial que se recupera |
-| **T12 Stellar** (134 217 728, UXV) | Una estrella como infraestructura | M materia sacada de la estrella y materiales de la Stellar Forge · Q separación de plasma estelar y medios extremos · C control fotónico estelar y coordinación de enjambres · E Dyson network e industria de sistema | Stellar Forge y Dyson Network; Planetary Engine en T11–T12 (M:774-779) | La estrella natal | Star-lifted matter (P:387) | **Kardashev II** | Procesado estelar y Dyson a escala Tipo II |
-| **T13 Interstellar** (536 870 912, OpV) | Varios sistemas | M materiales traídos de varios sistemas · Q combustibles de larga duración, criógenos y química de viaje en bucle cerrado · C Causal Matrices, relojes distribuidos y transporte de estado de proceso · E estación supralumínica, el Drift y fábrica multisistema | Supraluminal Station y Causal Buffer (M:776-777) | El Drift y otros sistemas | Componentes de otros sistemas (P:388); el Drift no da nada (D:4202-4203) | Salir de la estrella natal (R:1465) | Varios sistemas intercambian producción por la ruta supralumínica |
-| **T14 Galactic** (2 147 483 648, ≈MAX) | Industria que se expande sola | M antimateria industrial, materia exótica estable y estructuras de singularidad · Q medios de aniquilación y recuperación galáctica · C sondas autorreplicantes, rutas causales y computación distribuida · E energía de singularidad y expansión abstracta | Singularity Reactor (R:1102-1106); Fusion Lance y Singularity Charge (R:1037-1040) | La galaxia, en abstracto | Antimateria industrial y materia exótica estable (P:389) | **Kardashev III** | Autoexpansión, antimateria y singularidad a escala Tipo III |
-| **T15 Event Horizon** (8 589 934 592, sin GT) | El centro galáctico | M blindaje relativista y estructuras contra la acreción · Q bucles finales criogénicos, de plasma y de antimateria · C navegación galáctica, tiempo y telemetría del horizonte · E la ruta a Sagitario | Infraestructura del horizonte: aproximación, blindaje y extracción (M:780) | Sagitario | Recursos de acreción, ya en el postgame (D:4947-4949) | Llegar es la victoria. ⚑ GG: llegar y detonar | La ruta completa llega a Sagitario |
+| **T0 Bootstrap** (8, ULV) | Escape velocity | M geological aggregate and metal fractions · Q ceramics, biomass and glass · C redstone and Data Core calibration · E F0 source and workshop | Connected workshop: Quern, Clay Mixer, Firing Chamber, Settling Trough, Geological Collector, Biocultivator, Biomass Dynamo (M:49-58) | Base world, Superflat first (R:3-4) | — | Hand-mining ends (R:1480) | 5 Relay Matrix T1, made by hand |
+| **T1 Voltaic** (32, LV) | Basic families | M grinding, reduction, plates, rods, gears and renewable glass · Q water, roasting gases and ceramic insulator · C copper wire, coils, relays and Assembler · E thermal generator and first pylon | Thermal Generator, Pulverizer, Arc Furnace, Press and Assembler (P:439-440); the basic machine families (D:8174) | + optional Factory World, flat and with no free resources (R:2294-2299) | — | The Assembler ends hand crafting (R:1480-1481) | Relay Matrix T2 |
+| **T2 Industrial** (128, MV) | Closed loops | M steel, B2/B3 washing, melting and casting · Q sulfur, synthetic redstone, electrolysis, air, brine and resin · C motors, pumps and hardwired logic · E steam and solar | Contact process (Chemical Reactor), Wire Mill, Chemical Washer, Electrolysis Cell and Atmospheric Intake (R:2369-2372) | Base world | — | — | Matrix T3 |
+| **T3 Arc** (512, HV) | Powered construction | M refractories, hot fluids and hard alloys · Q first hydrocarbons and the Arc Cell's medium · C controllers, logistics boxes and Construction Drones · E Arc Reactor, fed | Direct-FU Arc Reactor with Arc Cells, and the Arc Exosuit with the same miniature reactor (R:967-984); drones up to ~15³ (M:593-596) | Base world. ⚑ GG: Moon and rocket | — | First multiblock designed (P:378) | Matrix T4, with drones and Arc Reactor running |
+| **T4 Precision** (2 048, EV) | Purity and control | M electronic silicon, technical ceramics and recovered noble metals · Q high-pressure chemistry, nitric acid and HCl, etchant, polymers and ultrapure water · C lithography, Integrated Matrices, circuits and patterns · E power conditioning; campus with several lines | Lithography Unit (R:1801); Research Station, whose patterns are catalysts and not unlocks (R:1475-1478); Replicator (R:1833) | Base world | — | — | First Integrated frontier |
+| **T5 Nuclear** (8 192, IV) | Designed cores | M cladding, moderators, reflectors and anti-radiation alloys · Q UF6, heavy water, coolant cleaning and reprocessing · C hardened controllers and sensors · E fission, exchangers and turbine halls | Parametric Fission Reactor that SCRAMs instead of exploding (R:1056-1070, M:633); centrifuge cascades (P:923-930); Deep Core Drill with «weighted planetary pool» (R:442-444) | Base world | — | — | Full fuel cycle and designed core |
+| **T6 Cryogenic** (32 768, LuV) | Deep cold | M superconducting alloys and high-field magnets · Q liquid helium, cryogens and fusion fuel separation · C low-noise control and superconducting interconnect · E pulse banks and cryogenic grid | Cryogenic Plant and Superconductor (R:1803, R:1672) | Base world | — (deuterium enters here, R:1920; later it is Kryos's signature) | — | Cryogens, magnets and pulse ready for fusion |
+| **T7 Fusion** (131 072, ZPM) | Sustained plasma | M antineutron walls, blankets and Containment Rings · Q D-T, D-D breeding and helium recovery · C plasma diagnostics · E sustained fusion; drones up to ~32³ | Fusion Reactor: the old grid pays for ignition and, if it loses containment, shuts down without damage (R:1072-1084); cycles D-T → D-D → D-³He → p-¹¹B (M:680-687) | Base world | — | — | Closed D-T loop with its blanket |
+| **T8 Particle** (524 288, UV) | Custom nuclei | M isotopes, target foils and exotic precursors · Q target preparation and radionuclide separation · C beam timing and detectors · E the ring size decides the reactions | Particle Accelerator: transmutation, exotic synthesis (antimatter, exotic isotopes, strange matter), matter creation and research (R:1088-1095, M:672-674) | Base world | — (exotic isotopes enter here, R:1920; later they are Erebus's signature) | Scarcity becomes an energy problem (R:1097-1100) | Frontier exotics |
+| **T9 Quantum** (2 097 152, UHV) | Programmable matter | M coherent substrates, metamaterials and programmable Matter · Q nanochemical deposition and quantum coolants · C Quantum Cores, replication and Quantum Assembler · E phase storage and aneutronic fusion | Quantum Assembler and Matter Condenser (R:1115-1116) | Base world | — (strange matter enters here, R:1920; later it is Erebus's signature) | The terrestrial factory is a campus (P:384) | Terrestrial campus with quantum control |
+| **T10 Orbital** (8 388 608, UEV) | Ground and orbit | M composites, ablatives, vacuum alloys and zero-g crystals · Q propellants, life support and orbital cryogenics · C guidance, satellite buses, relays and Photonic Matrices · E rockets, Mass Driver and orbital solar; factory across two sites | Launch Pad and rocket, Mass Driver and Orbital Catcher, Orbital Platform, satellites and Rectenna, vacuum industry, Orbital Assembly Bay (R:1863-1892); Assembly Field (R:616-617); Exotic Exosuit (R:948) | Orbit and Moon; local flight does not leave the star (R:263-265, M:770) | Helium-3 (R:1199, R:1920) and vacuum and microgravity products (R:1170-1174) | First large-scale passive energy: the solar satellite (R:1154) | Ground and orbit form a supplied network |
+| **T11 Planetary** (33 554 432, UIV) | Worlds as infrastructure | M regolith and construction materials of each world · Q atmospheric ISRU, closed life support and local fuels · C telepresence, Colony Cores, Deep Survey and interplanetary routes · E several worlds, Space Elevator and Horizon Gates | Telepresence Terminal and Proxy Frame, Colony Core, Drop Pod Bay, Interplanetary Router, Space Elevator, Horizon Gate and Deep Survey Satellite (R:1877-1893) | The six backup worlds or those from the space mod (§2.3) | Each world's signature resource (R:1197-1205) | **Kardashev I** (R:260-261) | Several worlds form an industrial system that recovers |
+| **T12 Stellar** (134 217 728, UXV) | A star as infrastructure | M matter pulled from the star and Stellar Forge materials · Q stellar plasma separation and extreme media · C stellar photonic control and swarm coordination · E Dyson network and system industry | Stellar Forge and Dyson Network; Planetary Engine in T11–T12 (M:774-779) | The home star | Star-lifted matter (P:387) | **Kardashev II** | Stellar processing and Dyson at Type II scale |
+| **T13 Interstellar** (536 870 912, OpV) | Several systems | M materials brought from several systems · Q long-life fuels, cryogens and closed-loop travel chemistry · C Causal Matrices, distributed clocks and process-state transport · E supraluminal station, the Drift and multi-system factory | Supraluminal Station and Causal Buffer (M:776-777) | The Drift and other systems | Components from other systems (P:388); the Drift gives nothing (D:4202-4203) | Leaving the home star (R:1465) | Several systems trade production over the supraluminal route |
+| **T14 Galactic** (2 147 483 648, ≈MAX) | Industry that expands on its own | M industrial antimatter, stable exotic matter and singularity structures · Q annihilation media and galactic recovery · C self-replicating probes, causal routes and distributed computing · E singularity energy and abstract expansion | Singularity Reactor (R:1102-1106); Fusion Lance and Singularity Charge (R:1037-1040) | The galaxy, in the abstract | Industrial antimatter and stable exotic matter (P:389) | **Kardashev III** | Self-expansion, antimatter and singularity at Type III scale |
+| **T15 Event Horizon** (8 589 934 592, no GT) | The galactic center | M relativistic shielding and anti-accretion structures · Q final cryogenic, plasma and antimatter loops · C galactic navigation, time and horizon telemetry · E the route to Sagittarius | Horizon infrastructure: approach, shielding and extraction (M:780) | Sagittarius | Accretion resources, already in the postgame (D:4947-4949) | Arriving is the victory. ⚑ GG: arrive and detonate | The full route reaches Sagittarius |
 
-- **Escala de los multibloques.** A mano 3³–5³ (T2), drones ~15³ (T3–T5), enjambres ~32³ (T6–T9), Assembly Field con estructuras de chunks (T10–T12) y flotas de construcción abstractas entre mundos y sistemas (T13–T15) (M:593-599).
-- **Fabricación tardía.** En T10–T12 el proceso orbital y de campo da componentes, controladores y secciones estructurales. En T13–T15 hay producción distribuida de sistemas enormes, sin máquinas normales automáticas (R:1621-1622).
-- **⚑ Luna en HV.** En Grindless la Luna está en T10, que numéricamente es UEV. GG la adelanta siete tiers. El Launch Pad de Grindless pide «Particle-era materials, Quantum guidance and an Orbital Matrix» (R:1133), es decir, piezas de T8–T10 que en HV aún no existen.
+- **Multiblock scale.** Hand-built 3³–5³ (T2), drones ~15³ (T3–T5), swarms ~32³ (T6–T9), Assembly Field with chunk structures (T10–T12) and abstract construction fleets across worlds and systems (T13–T15) (M:593-599).
+- **Late manufacturing.** In T10–T12 the orbital and field processes yield components, controllers and structural sections. In T13–T15 there is distributed production of huge systems, with no normal automatic machines (R:1621-1622).
+- **⚑ Moon in HV.** In Grindless the Moon is in T10, which is numerically UEV. GG moves it forward seven tiers. Grindless's Launch Pad asks for «Particle-era materials, Quantum guidance and an Orbital Matrix» (R:1133), that is, parts from T8–T10 that do not yet exist at HV.
 
 ---
 
-## 2. Espacio y lugares
+## 2. Space and places
 
-### 2.1 Cómo se viaja
+### 2.1 How you travel
 
-| Tier | Medio | Qué hace | Fuente |
+| Tier | Means | What it does | Source |
 |---|---|---|---|
-| T10 | Launch Pad + Rocket | El multibloque monta y lanza cohetes. El cohete sale de una línea y se gasta al lanzarlo. Sirve para el primer viaje y para todo lo que lleve tripulación | R:1133-1134, R:1139 |
-| T10 | Mass Driver | Manda carga a órbita solo con energía. Barato por kg e inútil para lo frágil o vivo. Convierte el espacio «from an event into infrastructure» | R:1135, R:1139-1141 |
-| T10 | Orbital Platform | La estación: módulos lanzados que crecen hasta ser una base | R:1136 |
-| T11 | Space Elevator | Enlace permanente suelo-órbita, de mucho caudal y solo energía. Deja obsoleto el Mass Driver | R:1295 |
-| T11 | Horizon Gate | Par de anillos. El lejano se entrega una vez (cohete, Mass Driver o paquete de colonia). Las personas pasan baratas; la carga puede pasar, pero cuesta más por kg que el Mass Driver. Las direcciones salen del Deep Survey. Nether y End solo por datapack | R:1272-1284, D:2735-2748, M:704-711 |
-| T13 | Supraluminal Station | La estación es el viaje interestelar: ni enlace ni cohete | M:777, D:4301-4303 |
-| T15 | Ruta final | Navegación galáctica y blindaje relativista hasta Sagitario | P:390, D:4945 |
+| T10 | Launch Pad + Rocket | The multiblock assembles and launches rockets. The rocket comes off a line and is used up at launch. It serves the first trip and anything that carries crew | R:1133-1134, R:1139 |
+| T10 | Mass Driver | Sends cargo to orbit on energy alone. Cheap per kg and useless for anything fragile or alive. Turns space «from an event into infrastructure» | R:1135, R:1139-1141 |
+| T10 | Orbital Platform | The station: launched modules that grow into a base | R:1136 |
+| T11 | Space Elevator | Permanent ground-to-orbit link, high throughput and energy only. Makes the Mass Driver obsolete | R:1295 |
+| T11 | Horizon Gate | A pair of rings. The far one is handed over once (rocket, Mass Driver or colony package). People pass cheaply; cargo can pass too, but costs more per kg than the Mass Driver. The addresses come from the Deep Survey. Nether and End only via datapack | R:1272-1284, D:2735-2748, M:704-711 |
+| T13 | Supraluminal Station | The station is the interstellar trip: neither link nor rocket | M:777, D:4301-4303 |
+| T15 | Final route | Galactic navigation and relativistic shielding to Sagittarius | P:390, D:4945 |
 
-- **Cómo lo hace el prototipo.** El cohete sube un bloque por tick hasta el techo del mundo y abre un mapa de aterrizaje con el mundo base y Luna. Nether, End, Drift y agujero negro no salen en el mapa (D:4282-4290). La ida cuesta 102 400 FU y la vuelta es gratis, para no dejar al jugador tirado en un mundo sin red (D:4291-4296).
-- **La estación del prototipo.** Sube al techo y llega al Drift (6 553 600 FU a la ida). Del Drift a Sagitario es gratis, y de Sagitario vuelve gratis a la litera guardada (D:4384-4396, D:4470-4475, D:4489-4495).
-- **Enlaces viejos.** El Lunar Link y el Starward Link quedan como marcadores de prueba, no como atajos (R:1186-1187; RES/assets/grindless/lang/en_us.json:182-183).
-- **Idea histórica no hecha.** Orbes de teletransporte de un material mágico, justo antes del vuelo espacial, para volver a un planeta ya pisado. «Not implemented. Not next.» (B:727).
+- **How the prototype does it.** The rocket rises one block per tick to the world's ceiling and opens a landing map with the base world and Moon. Nether, End, Drift and black hole are not on the map (D:4282-4290). The outbound trip costs 102 400 FU and the return is free, so the player is not left stranded in a world with no network (D:4291-4296).
+- **The prototype station.** It rises to the ceiling and reaches the Drift (6 553 600 FU outbound). From the Drift to Sagittarius is free, and from Sagittarius you return for free to the saved bed (D:4384-4396, D:4470-4475, D:4489-4495).
+- **Old links.** The Lunar Link and the Starward Link remain as test markers, not as shortcuts (R:1186-1187; RES/assets/grindless/lang/en_us.json:182-183).
+- **Historical idea, not built.** Teleport orbs made from a magical material, just before space flight, to return to a planet already visited. «Not implemented. Not next.» (B:727).
 
-### 2.2 Luna
+### 2.2 Moon
 
-- **Diseño.** «Airless, low gravity, close». Peligro: vacío. Recurso firma: helio-3, «premium fusion fuel» (R:1199). Se llega con el programa de vuelo local de T10, no con una receta de teletransporte (R:263-265, D:4079-4081).
-- **Prototipo.** Dimensión `grindless:luna`, plana: 1 capa de bedrock y 64 de `grindless:lunar_regolith` (RES/data/grindless/dimension/luna.json:9-12, J/planet/PlanetCatalogue.java:30-33). Cielo del End y noche fija (RES/data/grindless/dimension_type/luna.json:13, 25). Sin spawns ni menas, y sin daño de vacío ni soporte vital (D:4113-4117).
-- **Helio-3.** Todas las vetas de Luna son helio-3. Es el reactivo `grindless:helium_3`, no una mena ni un `forge:raw_materials`, para que no se pique con pico ni aparezca en el Overworld (D:4100-4102, D:4119-4124, J/planet/PlanetCatalogue.java:14-16). La forma gas queda para después (P:348).
-- **Para qué sirve.** Fusión D-³He, aneutrónica, «tying fusion to the orbital layer» (M:686, P:944). Junto al deuterio de Kryos mejora la fusión madura (R:1309). El regolito se beneficia en T11 (P:386).
-- **⚑ GG.** La Luna llega al final de HV, siete tiers antes que en Grindless.
+- **Design.** «Airless, low gravity, close». Hazard: vacuum. Signature resource: helium-3, «premium fusion fuel» (R:1199). You reach it with the T10 local flight program, not with a teleport recipe (R:263-265, D:4079-4081).
+- **Prototype.** Dimension `grindless:luna`, flat: 1 layer of bedrock and 64 of `grindless:lunar_regolith` (RES/data/grindless/dimension/luna.json:9-12, J/planet/PlanetCatalogue.java:30-33). End sky and fixed night (RES/data/grindless/dimension_type/luna.json:13, 25). No spawns or ores, and no vacuum damage or life support (D:4113-4117).
+- **Helium-3.** All the Moon's veins are helium-3. It is the reagent `grindless:helium_3`, not an ore or a `forge:raw_materials`, so it cannot be mined with a pickaxe or appear in the Overworld (D:4100-4102, D:4119-4124, J/planet/PlanetCatalogue.java:14-16). The gas form is left for later (P:348).
+- **What it is for.** D-³He fusion, aneutronic, «tying fusion to the orbital layer» (M:686, P:944). Together with Kryos deuterium it improves mature fusion (R:1309). The regolith benefits in T11 (P:386).
+- **⚑ GG.** The Moon arrives at the end of HV, seven tiers earlier than in Grindless.
 
-### 2.3 Mundos de respaldo (si no hay mod espacial)
+### 2.3 Backup worlds (if there is no space mod)
 
-| Mundo | Carácter | Peligro | Recurso firma | Para qué, según la fuente |
+| World | Character | Hazard | Signature resource | What it is for, per the source |
 |---|---|---|---|---|
-| Luna | Sin aire, baja gravedad, cerca | Vacío | Helio-3 | Fusión D-³He (M:686) |
-| Tharsis | Desierto frío, atmósfera fina | Frío, tormentas de polvo | Vetas de hierro muy ricas | Hierro que el Overworld ya tiene (D:4090-4092) |
-| Vulcan | Volcánico, caliente, denso | Calor, ceniza | Metales pesados, geotermia | — |
-| Kryos | Luna de hielo con océano interior | Frío extremo | Deuterio, volátiles criogénicos | Fusión madura (R:1309) |
-| Erebus | Planeta errante, sin estrella, oscuro | Oscuridad, radiación | Isótopos exóticos, materia extraña | «the strange-matter world» (D:2752) |
-| Thalassa | Océano, aire espeso | Presión, corrosión | Química a alta presión, volátiles disueltos | Condiciones de proceso, no menas (D:2749-2751) |
-| Helios | Anclado por marea | Calor de día, frío de noche | Condiciones extremas, «not a second ore list» | Ídem |
+| Moon | Airless, low gravity, close | Vacuum | Helium-3 | D-³He fusion (M:686) |
+| Tharsis | Cold desert, thin atmosphere | Cold, dust storms | Very rich iron veins | Iron the Overworld already has (D:4090-4092) |
+| Vulcan | Volcanic, hot, dense | Heat, ash | Heavy metals, geothermal energy | — |
+| Kryos | Ice moon with an inner ocean | Extreme cold | Deuterium, cryogenic volatiles | Mature fusion (R:1309) |
+| Erebus | Rogue planet, no star, dark | Darkness, radiation | Exotic isotopes, strange matter | «the strange-matter world» (D:2752) |
+| Thalassa | Ocean, thick air | Pressure, corrosion | High-pressure chemistry, dissolved volatiles | Process conditions, not ores (D:2749-2751) |
+| Helios | Tidally locked | Heat by day, cold by night | Extreme conditions, «not a second ore list» | Ditto |
 
-Tabla de R:1197-1205. Thalassa y Helios entraron con la Horizon Gate (D:2749-2751). En la fuente no aparece ningún otro mundo con nombre; los demás lugares son el mundo base, el Factory World, la órbita, el Drift y Sagitario.
+Table from R:1197-1205. Thalassa and Helios were added with the Horizon Gate (D:2749-2751). The source names no other worlds; the other places are the base world, the Factory World, orbit, the Drift and Sagittarius.
 
-- **Planetas distintos, mismos materiales.** Cada mundo tiene su propio reparto de vetas sobre el mismo registro de materiales: «Planets are not reskins» (R:1207-1211). «Do not invent unique untaggable ores that only exist there» (D:2752-2753).
-- **Dónde construir importa.** La solar depende de la distancia a la estrella, cada peligro pide su soporte vital y la gravedad cambia el coste del Mass Driver (R:1213-1214).
-- **Mods espaciales.** El README dice que, si hay un mod espacial, se usan sus planetas (R:1189-1195). ADR-0088 lo invierte (§5.3).
+- **Different planets, same materials.** Each world has its own distribution of veins over the same material registry: «Planets are not reskins» (R:1207-1211). «Do not invent unique untaggable ores that only exist there» (D:2752-2753).
+- **Where you build matters.** Solar power depends on the distance to the star, each hazard needs its own life support, and gravity changes the cost of the Mass Driver (R:1213-1214).
+- **Space mods.** The README says that, if there is a space mod, its planets are used (R:1189-1195). ADR-0088 reverses this (§5.3).
 
-### 2.4 El Drift
+### 2.4 The Drift
 
-- «the dark between the home star and the galactic centre» (J/star/DriftCatalogue.java:6-8). Es una sola parada: una cubierta `grindless:drift_deck` sobre bedrock, sin vetas. «It is not a planet and not a mining dimension» (D:4198-4203, RES/data/grindless/dimension/drift.json:9-12).
-- Pertenece a T13 y se llega en la Supraluminal Station (R:1185-1186, D:4172-4173). Se rechazó una cadena de estrellas con nombre: «One hop is the route.» (D:4224).
+- «the dark between the home star and the galactic centre» (J/star/DriftCatalogue.java:6-8). It is a single stop: a `grindless:drift_deck` surface over bedrock, with no veins. «It is not a planet and not a mining dimension» (D:4198-4203, RES/data/grindless/dimension/drift.json:9-12).
+- It belongs to T13 and you reach it through the Supraluminal Station (R:1185-1186, D:4172-4173). A chain of named stars was rejected: «One hop is the route.» (D:4224).
 
-### 2.5 Sagitario, el centro galáctico
+### 2.5 Sagittarius, the galactic center
 
-- **El lugar.** Dimensión `grindless:sagittarius`: una masa sólida de `grindless:horizon_shell` de 16 bloques, sin cielo y con techo (D:4476-4478, RES/data/grindless/dimension_type/sagittarius.json:8-9, 16).
-- **La sala.** Al llegar se talla una sala de 7×4×7 con la litera en (0, 2, 0), una Arrival Mark con luz 15 y un pozo de 3×3 para salir. Son 286 celdas. La cáscara y la marca son irrompibles y no tienen objeto. La sala se vuelve a tallar en cada llegada, «so the room cannot be kept as a base» (D:4479-4488, J/centre/CentreChamber.java:15-16).
-- **La llegada.** El mensaje dice «The galactic centre. Arriving is the victory.» (RES/assets/grindless/lang/en_us.json:358). Salir te devuelve gratis a la litera guardada. El cohete nunca vuela allí (D:4489-4495).
-- **Estado.** La sala es «a prototype destination, not the final amount of gameplay at the centre» (D:4949-4950). No hay receta del agujero negro antes de T15 (D:4958).
+- **The place.** Dimension `grindless:sagittarius`: a solid mass of `grindless:horizon_shell`, 16 blocks thick, with no sky and a ceiling (D:4476-4478, RES/data/grindless/dimension_type/sagittarius.json:8-9, 16).
+- **The room.** On arrival a 7×4×7 room is carved out, with the bed at (0, 2, 0), an Arrival Mark with light 15 and a 3×3 shaft to leave. That makes 286 cells. The shell and the mark are unbreakable and have no item. The room is carved again on every arrival, «so the room cannot be kept as a base» (D:4479-4488, J/centre/CentreChamber.java:15-16).
+- **Arrival.** The message says «The galactic centre. Arriving is the victory.» (RES/assets/grindless/lang/en_us.json:358). Leaving returns you for free to the saved bed. The rocket never flies there (D:4489-4495).
+- **Status.** The room is «a prototype destination, not the final amount of gameplay at the centre» (D:4949-4950). There is no black hole recipe before T15 (D:4958).
 
-### 2.6 Estaciones y otros lugares
+### 2.6 Stations and other places
 
-- **Orbital Platform (T10).** «Your space station. Built from launched modules; expands into a real base.» (R:1136). Los módulos salen del Orbital Assembly Bay (R:1174).
-- **Supraluminal Station (T13).** Un asiento sobre una Station Berth. Llegar al techo es llegar, sin menú (D:4378-4383).
-- **Factory World.** Mundo plano a mediodía para construir, con las vetas finitas normales; no es un atajo de recursos (R:2294-2299, D:5417).
+- **Orbital Platform (T10).** «Your space station. Built from launched modules; expands into a real base.» (R:1136). The modules come out of the Orbital Assembly Bay (R:1174).
+- **Supraluminal Station (T13).** A seat on a Station Berth. Reaching the ceiling is arriving, with no menu (D:4378-4383).
+- **Factory World.** A flat world fixed at noon for building, with normal finite veins; it is not a resource shortcut (R:2294-2299, D:5417).
 
-### 2.7 Satélites (T10; Deep Survey en T11)
+### 2.7 Satellites (T10; Deep Survey in T11)
 
-- **Sin mantenimiento.** Son permanentes: «no orbital decay, no refuelling, no maintenance minigame». Cuestan energía y masa de lanzamiento (R:1147-1149, D:437-442).
-- **Survey.** Mapa de vetas desde órbita, «the single most useful object in the mod» (R:1153).
-- **Solar Power.** Luz sin noche, radiada a una Rectenna (R:1154).
-- **Relay.** Lleva la red a otras dimensiones y da ancho de banda, que gastan la telepresencia y las colonias (R:1155).
-- **Sentinel.** Mapa de Resonance, aviso de enjambres y blancos para ataques orbitales (R:1156).
-- **Logistics.** Drop pods y rutas de objetos entre suelo, estación y colonias (R:1157).
-- **Deep Survey.** Estudia otros planetas; hace falta para explotar uno que no has pisado (R:1158).
-- La constelación es un diseño en sí: cobertura, ancho de banda y consumo (R:1160-1161).
+- **No maintenance.** They are permanent: «no orbital decay, no refuelling, no maintenance minigame». They cost energy and launch mass (R:1147-1149, D:437-442).
+- **Survey.** A vein map from orbit, «the single most useful object in the mod» (R:1153).
+- **Solar Power.** Light without night, beamed to a Rectenna (R:1154).
+- **Relay.** It carries the network to other dimensions and gives bandwidth, which telepresence and colonies use up (R:1155).
+- **Sentinel.** Resonance map, warning of swarms and targets for orbital strikes (R:1156).
+- **Logistics.** Drop pods and item routes between ground, station and colonies (R:1157).
+- **Deep Survey.** Studies other planets; you need it to exploit one you have not visited (R:1158).
+- The constellation is a design in itself: coverage, bandwidth and consumption (R:1160-1161).
 
-### 2.8 Cuatro formas de explotar un mundo (R:1216-1284)
+### 2.8 Four ways to exploit a world (R:1216-1284)
 
-1. **En persona.** Volar, aterrizar y construir, con el soporte vital del peligro: exotraje o base presurizada (R:1221-1227). Exotic Exosuit con blindaje antirradiación y soporte vital orbital (R:948); módulos de vacío, calor y radiación en T10 (R:1919).
-2. **Telepresencia.** Un Proxy Frame en el otro mundo y una Telepresence Terminal en casa. Gasta ancho de banda y energía, y la latencia crece con la distancia. Si destruyen el cuerpo pierdes el cuerpo, no el inventario: «Failure costs materials, never progress» (R:1229-1244).
-3. **Colonias.** Un Colony Core aterriza y trabaja solo. Su producción depende de módulos, riqueza de la veta y energía. Envía a casa por Mass Driver a un Orbital Catcher o por drop pod. Su integridad baja con el peligro y se repone con suministros automatizables. Se simula en abstracto, sin forzar chunks (R:1246-1270, D:415-421). En T11 las rutinas de Operator Drone corren en colonias (R:692-693).
-4. **Horizon Gate.** Ir andando tras entregar el anillo lejano (R:1272-1284).
+1. **In person.** Fly, land and build, with the life support the hazard demands: exosuit or pressurized base (R:1221-1227). Exotic Exosuit with anti-radiation shielding and orbital life support (R:948); vacuum, heat and radiation modules in T10 (R:1919).
+2. **Telepresence.** A Proxy Frame in the other world and a Telepresence Terminal at home. It uses bandwidth and energy, and latency grows with distance. If the body is destroyed, you lose the body, not the inventory: «Failure costs materials, never progress» (R:1229-1244).
+3. **Colonies.** A Colony Core lands and works on its own. Its output depends on modules, vein richness and energy. It ships goods home by Mass Driver to an Orbital Catcher or by drop pod. Its integrity falls with the hazard and is restored with automatable supplies. It is simulated in the abstract, without force-loading chunks (R:1246-1270, D:415-421). In T11 Operator Drone routines run in colonies (R:692-693).
+4. **Horizon Gate.** Walk through after the far ring is delivered (R:1272-1284).
 
-### 2.9 Logística orbital
+### 2.9 Orbital logistics
 
-Orbital Catcher (recibe las cápsulas del Mass Driver), Drop Pod Bay y Landing Beacon (entrega en superficie), Rectenna (energía radiada), Interplanetary Router (objetos entre suelo, estación y colonias) y Space Elevator en T11 (R:1286-1295). «Presence is the gate; bulk is the driver.» (R:1306).
+Orbital Catcher (receives the Mass Driver capsules), Drop Pod Bay and Landing Beacon (surface delivery), Rectenna (beamed energy), Interplanetary Router (items between ground, station and colonies) and Space Elevator in T11 (R:1286-1295). «Presence is the gate; bulk is the driver.» (R:1306).
 
-### 2.10 Industria orbital
+### 2.10 Orbital industry
 
-- **Máquinas.** Vacuum Furnace (sin oxidación, más pureza), Zero-G Crystallizer (cristales perfectos, «the only source of the substrates advanced circuits need»), Orbital Cryo Plant (el espacio ya es frío: licuar cuesta una fracción), Vacuum Deposition Chamber (películas finas y aleaciones exóticas) y Orbital Assembly Bay (lo que la gravedad no deja construir) (R:1163-1174).
-- **Por qué subir.** Vacío y gravedad cero son condiciones de proceso, y la órbita es «a manufacturing necessity rather than a victory lap» (M:696-698). La industria orbital no emite Resonance a la superficie (R:1176-1178).
-- **Rutas.** El cuarto camino al silicio electrónico es orbital: «A player in orbit stops thinking about it» (M:743-746, P:995). El agua ultrapura tiene ruta de vacío en T10 (P:1000). Las Photonic Matrices salen de cristales zero-g (D:4912).
-- **Todos los sistemas ganan algo.** La red llega a otras dimensiones, los satélites mapean vetas, la logística se vuelve interplanetaria, el traje es soporte vital y el helio-3 y el deuterio mejoran la fusión (R:1297-1309).
+- **Machines.** Vacuum Furnace (no oxidation, more purity), Zero-G Crystallizer (perfect crystals, «the only source of the substrates advanced circuits need»), Orbital Cryo Plant (space is already cold: liquefying costs a fraction), Vacuum Deposition Chamber (thin films and exotic alloys) and Orbital Assembly Bay (what gravity does not let you build) (R:1163-1174).
+- **Why go up.** Vacuum and zero gravity are process conditions, and orbit is «a manufacturing necessity rather than a victory lap» (M:696-698). Orbital industry does not emit Resonance to the surface (R:1176-1178).
+- **Routes.** The fourth route to electronic silicon is orbital: «A player in orbit stops thinking about it» (M:743-746, P:995). Ultrapure water has a vacuum route in T10 (P:1000). Photonic Matrices come from zero-g crystals (D:4912).
+- **Every system gains something.** The network reaches other dimensions, satellites map veins, logistics become interplanetary, the suit is life support, and helium-3 and deuterium improve fusion (R:1297-1309).
 
 ---
 

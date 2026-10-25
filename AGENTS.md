@@ -88,6 +88,9 @@ Gregtech Grindless es un pack de GregTech Modern (Minecraft 1.20.1, Forge) en el
   | camino al cohete | 4096–4159 |
   | llaves de viaje | 4352–4415 |
   | libro de misiones (cliente) | 4608–4671 |
+  | energía | 4864–4927 |
+  | familia pequeña de vapor | 5120–5183 |
+  | familia Large Steam | 5376–5439 |
 
   Para un test nuevo se sigue en saltos de 256.
 

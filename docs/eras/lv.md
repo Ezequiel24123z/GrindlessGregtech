@@ -233,6 +233,11 @@ AE2 15.4.11 queda como viene (canales 8/32). Cambia cómo se fabrica: se quitan 
 
 El polvo de piedra de GTM se separa en MV (`stone_dust_separation`, 120 EU/t). Se baja a LV por KubeJS para cumplir lo que dice vapor.md.
 
+## Cruces nuevos (auditoría de complejidad)
+
+- **Invernadero LV, variante CO₂ (circuito 3):** catalizador + 100 mB de CO₂ del horno de arco → ×1,25 la salida, mismo tiempo y EU/t (`grindless:lv/<cultivo>_co2`). Sin agua ni O₂: la escotilla de entrada es una y guarda un solo fluido, y el invernadero LV no tiene escotilla de salida.
+- **Horno de arco, obsidiana con agua destilada (circuito 2):** 32 adoquines + electrodo + 4 000 mB de agua destilada (la que devuelve la turbina de vapor, la misma que alimenta la torre solar) → 4 obsidianas y un 10 % de arena de cuarzo extra. Mismo EU/t y tiempo que la receta de agua (`grindless:arc_smelting/obsidian_distilled`).
+
 ## Puerta a MV
 
 | Qué se construye | Qué prueba |
@@ -306,3 +311,4 @@ Mandan sobre lo de arriba cuando choquen.
     - Las criaturas pasivas imprimen su modelo con lo que comen (trigo, semillas o hilo).
     - Creeper (pólvora) es de MV y Blaze (varas) de HV.
     - Un fermentador LV alimenta un simulador LV a pleno ritmo (relación 1:1).
+12. **Energía inalámbrica también en LV (2026-10-25, lo pide el usuario, "como en Leisure").** Quien no quiera tender cable de GT ya tiene dos piezas en LV: el túnel P2P de EU (`eup2p:eu_p2p_tunnel`, sin cambios: cualquier túnel P2P de AE2 se vuelve de EU al tocarlo con un cable de GT) y el conector inalámbrico de ExtendedAE (`expatternprovider:wireless_connect`), cuya receta se baja de circuito HV a LV (`integration/expatternprovider.js`); el resto de su receta (procesador de ingeniería, receptor inalámbrico, polvo del cielo, cable inteligente de AE2) ya era de LV. La nota de "Después: ExtendedAE y AdvancedAE (HV–EV)" de más arriba sigue valiendo para el resto de ExtendedAE (buses grandes, interfaz y unidad extendidas, hub inalámbrico...), que se queda en HV.

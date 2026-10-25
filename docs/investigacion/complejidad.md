@@ -1,128 +1,128 @@
-# Auditoría de complejidad por tier — Gregtech Grindless (v0.5.0)
+# Complexity audit per tier — Gregtech Grindless (v0.5.0)
 
-Fecha: 2026-10-24. Fuentes: `AGENTS.md`, `DECISIONS.md`, `docs/viaje.md`, `docs/eras/*.md`, `pack/kubejs/startup_scripts/grindless/**`, `pack/kubejs/server_scripts/grindless/**`, `pack/config/ftbquests/quests/chapters/*_age.snbt`, informes del validador (`scratch/release/val-0.5.0/*.{txt,json}`), `docs/investigacion/espacio/gtm-tiers.md`.
+Date: 2026-10-24. Sources: `AGENTS.md`, `DECISIONS.md`, `docs/viaje.md`, `docs/eras/*.md`, `pack/kubejs/startup_scripts/grindless/**`, `pack/kubejs/server_scripts/grindless/**`, `pack/config/ftbquests/quests/chapters/*_age.snbt`, validator reports (`scratch/release/val-0.5.0/*.{txt,json}`), `docs/investigacion/espacio/gtm-tiers.md`.
 
-Vapor–HV están **construidos** (código KubeJS real, probado en partida). EV–IV están **diseñados** (`docs/eras/ev.md`, `iv.md`), sin código ni validador propio todavía (no hay `ev.json`/`iv.json` en `tools/analysis/tiers/`, ni `ev_age`/`iv_age` completos en el libro). Esa distinción se mantiene en todas las tablas.
+Steam–HV are **built** (real KubeJS code, tested in-game). EV–IV are **designed** (`docs/eras/ev.md`, `iv.md`), without their own code or validator yet (there is no `ev.json`/`iv.json` in `tools/analysis/tiers/`, nor complete `ev_age`/`iv_age` in the quest book). That distinction is kept in all tables.
 
-## 1. Tabla maestra
+## 1. Master table
 
-| Métrica | Vapor | LV | MV | HV | EV (diseño) | IV (diseño) |
+| Metric | Steam | LV | MV | HV | EV (design) | IV (design) |
 |---|---|---|---|---|---|---|
-| Multibloques propios (registrados) | 5 | 6 | 6 | 7 | 7 (0 construidos) | 8 (0 construidos) |
-| Multibloques de GTM que se vuelven útiles | — (sin electricidad) | EBF + máquinas de 1 bloque | perforadora de fluidos MV | cleanroom, cracker, reactor químico grande, caldera/turbina grandes de acero | congelador, torre destilación, motor/turbina de combustión y gas grandes, large miner EV | línea de ensamblaje, large miner IV, paralelo ×4, quantum chest/tank |
-| Líneas de proceso (tabuladas en la era) | ~4 (reconstruidas, sin tabla propia) | 4 (+ AE2 como mega-línea aparte, ~20 pasos) | 5 | 6 (+ proyecto cohete, + syngas) | 9 | 8 |
-| Pasos medios por línea | ~1.5 | ~5 | ~4.5 | ~5 | ~4 | ~4.5 |
-| Misiones (capítulo `*_age.snbt`) | 46 | 51 | 47 | 42 | 12 (de ~25 planeadas) | 0 (de ~22 planeadas) |
-| Ítems en la puerta (gate) | 36 | 143 | 279 | 407 | — | — |
-| Ítems automatizables (auto) | 27 | 88 | 193 | 295 | — | — |
-| Reglas de orden de eras que vigila el validador | 6 | 14 | 22 | 37 | — | — |
-| Horas de juego (estimado) | 3–5 | 7–11 | 10–15 | 18–26 | 30–45 | 45–70 |
+| Own multiblocks (registered) | 5 | 6 | 6 | 7 | 7 (0 built) | 8 (0 built) |
+| GTM multiblocks that become useful | — (no electricity) | EBF + 1-block machines | MV fluid drill | cleanroom, cracker, large chemical reactor, large steel boiler/turbine | freezer, distillation tower, large combustion engine/gas turbine, large EV miner | assembly line, large IV miner, parallel ×4, quantum chest/tank |
+| Process lines (tabulated in the era) | ~4 (rebuilt, no table of its own) | 4 (+ AE2 as a separate mega-line, ~20 steps) | 5 | 6 (+ rocket project, + syngas) | 9 | 8 |
+| Average steps per line | ~1.5 | ~5 | ~4.5 | ~5 | ~4 | ~4.5 |
+| Quests (chapter `*_age.snbt`) | 46 | 51 | 47 | 42 | 12 (of ~25 planned) | 0 (of ~22 planned) |
+| Items in the gate | 36 | 143 | 279 | 407 | — | — |
+| Automatable items (auto) | 27 | 88 | 193 | 295 | — | — |
+| Era-order rules checked by the validator | 6 | 14 | 22 | 37 | — | — |
+| Play hours (estimated) | 3–5 | 7–11 | 10–15 | 18–26 | 30–45 | 45–70 |
 
-Las cifras de misiones de LV/MV/HV son **las de antes de la reescritura** (`DECISIONS.md`: "LV, MV, HV... rehechos por seis escritores en paralelo... van en la v0.5.1"); no sirven todavía para medir tendencia. EV tiene solo el capítulo "Lunar Base" (12 misiones): el tramo de Marte, platino y nano del propio `ev.md` aún no está escrito.
+The quest figures for LV/MV/HV are **the ones from before the rewrite** (`DECISIONS.md`, translated from Spanish: "LV, MV, HV... rewritten by six writers in parallel... go into v0.5.1"); they cannot yet be used to measure a trend. EV only has the "Lunar Base" chapter (12 quests): the Mars, platinum and nano section of `ev.md` itself is not written yet.
 
-## 2. Detalle por tier
+## 2. Detail per tier
 
-### Vapor — 5 multibloques: `steam_vein_drill`, `steam_greenhouse`, `steam_blast_furnace`, `coking_battery`, `steam_observatory`
-Líneas: coque (+creosota+gas), bronce, acero (alto horno de vapor), vetas, madera/cultivos, carta lunar (borrador). Cruces ya presentes: coque→creosota (combustible/madera tratada) y gas de hulla→LV (turbina, destiladora) y MV (biorrefinería); ceniza→LV (fertilizante); piedra de la perforadora→LV (lodo) y MV (centrífuga). Es decir: **vapor ya nace cruzando hacia LV/MV**, aunque la regla de exponencialidad aún no existía.
+### Steam — 5 multiblocks: `steam_vein_drill`, `steam_greenhouse`, `steam_blast_furnace`, `coking_battery`, `steam_observatory`
+Lines: coke (+creosote+gas), bronze, steel (steam blast furnace), veins, wood/crops, lunar chart (draft). Cross-links already present: coke→creosote (fuel/treated wood) and coal gas→LV (turbine, distillery) and MV (biorefinery); ash→LV (fertilizer); drill stone→LV (sludge) and MV (centrifuge). In other words: **steam already starts out crossing into LV/MV**, even though the exponential-growth rule did not exist yet.
 
-### LV — 6 multibloques: `lv_vein_drill`, `lv_greenhouse`, `submerged_arc_furnace`, `sulfide_roaster`, `heliostat_tower`, `optical_observatory`
-Líneas tabuladas (`lv.md`): mineral completo (5 pasos), zafiro→aluminio (2), sal→persulfato y FeCl₃ (6), galio+arsénico→diodos (6). Además, fuera de tabla: AE2 híbrido (~20 recetas propias, la "mega-línea" de la era), horno de arco (3 recetas), tostador de sulfuros (6 tostaciones + quemador), torre solar, simulador de criaturas (7 especies). Cruces destacados ya resueltos: plata del tostador→espejos de la torre solar; óxidos del tostador→electrolizador→Zn/Pb/Sb/Cu y su O₂ vuelve al EBF; CO del arco (circuito 2)→MV (metanol); impactita del arco necesita certus cargado de AE2.
+### LV — 6 multiblocks: `lv_vein_drill`, `lv_greenhouse`, `submerged_arc_furnace`, `sulfide_roaster`, `heliostat_tower`, `optical_observatory`
+Tabulated lines (`lv.md`): full ore (5 steps), sapphire→aluminium (2), salt→persulfate and FeCl₃ (6), gallium+arsenic→diodes (6). Also, outside the table: hybrid AE2 (~20 recipes of its own, the era's "mega-line"), arc furnace (3 recipes), sulfide roaster (6 roastings + burner), solar tower, creature simulator (7 species). Notable cross-links already solved: silver from the roaster→solar tower mirrors; roaster oxides→electrolyzer→Zn/Pb/Sb/Cu and its O₂ returns to the EBF; CO from the arc furnace (circuit 2)→MV (methanol); arc furnace impactite needs charged certus quartz from AE2.
 
-### MV — 6 multibloques: `mv_vein_drill`, `mv_greenhouse`, `ore_plant`, `biorefinery`, `engine_test_stand`, `radio_telescope`
-Líneas tabuladas (`mv.md`): silicio→chips (7), pirólisis→fracciones (2 pasos, 8+ ramas), combustibles (5), etileno→PE/PVC (5), mineral→planta (3). La planta de mineral y la biorrefinería son **generadas desde las recetas reales de GTM** (`ore_plant.js`, `biorefinery.js`): no hay tabla propia, así que cualquier cruce que ya exista en la química de GT llega gratis. Cruces explícitos hacia HV, ya documentados como "herencia": glicerol, mezcla de metales, metanol/acetona, nafta.
+### MV — 6 multiblocks: `mv_vein_drill`, `mv_greenhouse`, `ore_plant`, `biorefinery`, `engine_test_stand`, `radio_telescope`
+Tabulated lines (`mv.md`): silicon→chips (7), pyrolysis→fractions (2 steps, 8+ branches), fuels (5), ethylene→PE/PVC (5), ore→plant (3). The ore plant and the biorefinery are **generated from the real GTM recipes** (`ore_plant.js`, `biorefinery.js`): there is no table of their own, so any cross-link that already exists in GT chemistry comes for free. Explicit cross-links toward HV, already documented as "inheritance": glycerol, mixed metal, methanol/acetone, naphtha.
 
-### HV — 7 multibloques: `hv_vein_drill`, `hv_greenhouse`, `refinery`, `reformer`, `syngas_plant`, `composite_autoclave`, `lunar_drill`
-Líneas tabuladas (`hv.md`): crudo→combustibles (6), craqueo→olefinas/aromáticos (4), PTFE (3), epoxi/SBR (7), titanio (5), circuitos EV (4). Más el **proyecto del primer cohete** (banco de pruebas MV → autoclave HV → motor/depósito, ~6-8 pasos cruzando MV+HV) y la planta de gas de síntesis (6 recetas). El catalizador de la refinería ya cruza 3 líneas de mineral (cobalto del níquel, molibdeno del Nether, sílice de la arena): es el mejor ejemplo ya construido de "cruce profundo".
+### HV — 7 multiblocks: `hv_vein_drill`, `hv_greenhouse`, `refinery`, `reformer`, `syngas_plant`, `composite_autoclave`, `lunar_drill`
+Tabulated lines (`hv.md`): crude→fuels (6), cracking→olefins/aromatics (4), PTFE (3), epoxy/SBR (7), titanium (5), EV circuits (4). Plus the **first rocket project** (MV test bench → HV autoclave → rocket motor/tank, ~6-8 steps crossing MV+HV) and the syngas plant (6 recipes). The refinery catalyst already crosses 3 ore lines (cobalt from nickel, molybdenum from the Nether, silica from sand): it is the best example already built of a "deep cross-link".
 
-### EV (diseño) — 7 multibloques: `regolith_cell`, `cryogenic_plant`, `atmosphere_processor`, `platinum_plant` (nuevos) + `ev_vein_drill`, `lunar_solar_array`, `deep_space_antenna` (escalones)
-9 líneas tabuladas en `ev.md`. Es la primera era con **reservas explícitas a 2-3 eras vista**: helio→lingotes IV, helio-3→fusión LuV, nitrógeno líquido→perforadora de Mercurio (IV), Ir/Os→refino IV, CaCl₂ en bucle con la Luna. Dos sitios (Luna automática, Marte a mano).
+### EV (design) — 7 multiblocks: `regolith_cell`, `cryogenic_plant`, `atmosphere_processor`, `platinum_plant` (new) + `ev_vein_drill`, `lunar_solar_array`, `deep_space_antenna` (steps)
+9 tabulated lines in `ev.md`. It is the first era with **explicit reserves 2-3 eras ahead**: helium→IV ingots, helium-3→LuV fusion, liquid nitrogen→Mercury vein drill (IV), Ir/Os→IV refining, CaCl₂ in a loop with the Moon. Two sites (Moon automated, Mars by hand).
 
-### IV (diseño) — 8 multibloques: `fission_reactor`, `hot_cell`, `naquadah_plant` (nuevos) + `pressurized_vein_drill`, `mercury_vein_drill`, `venus_heat_engine`, `mercury_solar_field`, `interferometer` (escalones)
-8 líneas tabuladas en `iv.md`. Sigue reservando hacia delante: tritio→fusión LuV, sulfato enriquecido/trinio→LuV, solución de naquadria→ZPM, Cs→naquadria ZPM. Dos sitios simultáneos (Venus + Mercurio).
+### IV (design) — 8 multiblocks: `fission_reactor`, `hot_cell`, `naquadah_plant` (new) + `pressurized_vein_drill`, `mercury_vein_drill`, `venus_heat_engine`, `mercury_solar_field`, `interferometer` (steps)
+8 tabulated lines in `iv.md`. It keeps reserving items for later eras: tritium→LuV fusion, enriched sulfate/trinium→LuV, naquadria solution→ZPM, Cs→naquadria ZPM. Two simultaneous sites (Venus + Mercury).
 
-## 3. Veredicto: ¿crece exponencial, lineal o plano?
+## 3. Verdict: does it grow exponentially, linearly or flat?
 
-| Eje | Vapor→LV | LV→MV | MV→HV | HV→EV | EV→IV | Patrón |
+| Axis | Steam→LV | LV→MV | MV→HV | HV→EV | EV→IV | Pattern |
 |---|---|---|---|---|---|---|
-| Multibloques propios | ×1.2 | ×1.0 | ×1.17 | ×1.0 | ×1.14 | **Plano** (+0 a +1 por tier) |
-| Multibloques GTM desbloqueados (aprox., por tier) | — → 2 | 2 → 1 | 1 → 4 | 4 → 6 | 6 → 7 | No monótono (MV solo añade 1), pero crece y satura hacia IV |
-| Líneas tabuladas | ×1.0 | ×1.25 | ×1.2 | ×1.5 | ×0.89 | **Lineal**, con techo (~4-9) |
-| Gate (ítems, delta real) | +107 | +136 | +128 | — | — | **Lineal** (incrementos casi iguales, no crecientes) |
-| Auto (ítems, delta real) | +61 | +105 | +102 | — | — | **Lineal** |
-| Reglas de orden de eras (validador) | ×2.33 | ×1.57 | ×1.68 | — | — | **La más rápida de las medidas**, sub-exponencial pero crece |
-| Misiones | ×1.11 | ×0.92 | ×0.89 | ×0.29* | 0† | **No concluyente** (rescritura en curso) |
-| Horas (estimado, punto medio) | ×2.25 | ×1.39 | ×1.76 | ×1.7 | ×1.53 | La que más se acerca a "exponencial", pero es estimación |
+| Own multiblocks | ×1.2 | ×1.0 | ×1.17 | ×1.0 | ×1.14 | **Flat** (+0 to +1 per tier) |
+| GTM multiblocks unlocked (approx., per tier) | — → 2 | 2 → 1 | 1 → 4 | 4 → 6 | 6 → 7 | Not monotonic (MV only adds 1), but it grows and saturates toward IV |
+| Tabulated lines | ×1.0 | ×1.25 | ×1.2 | ×1.5 | ×0.89 | **Linear**, with a ceiling (~4-9) |
+| Gate (items, actual delta) | +107 | +136 | +128 | — | — | **Linear** (almost equal increments, not growing) |
+| Auto (items, actual delta) | +61 | +105 | +102 | — | — | **Linear** |
+| Era-order rules (validator) | ×2.33 | ×1.57 | ×1.68 | — | — | **The fastest of the measures**, sub-exponential but growing |
+| Quests | ×1.11 | ×0.92 | ×0.89 | ×0.29* | 0† | **Inconclusive** (rewrite in progress) |
+| Hours (estimated, midpoint) | ×2.25 | ×1.39 | ×1.76 | ×1.7 | ×1.53 | The closest to "exponential", but it is an estimate |
 
-\* EV solo lleva el capítulo de la Luna; no es comparable todavía. † IV: 0 de ~22 planeadas, el capítulo no está escrito.
+\* EV only has the Moon chapter; it is not comparable yet. † IV: 0 of ~22 planned; the chapter is not written.
 
-**Conclusión:** hoy el crecimiento es **lineal a plano en los ejes estructurales** (multibloques, líneas, ítems de la puerta), no exponencial en sentido estricto — un eje exponencial real daría *razones crecientes* (36→107→214→428...), y aquí las razones **decrecen** o se mantienen. Esto es coherente con una decisión que ya está en `DECISIONS.md` ("desde EV, cada era lleva 2-3 multibloques nuevos"): el propio pack ya fijó un objetivo de crecimiento **lineal** en número de multibloques, no exponencial. Lo que sí puede crecer más rápido sin inflar cantidades ni tiempos es la **densidad del grafo de cruces**: cada multibloque nuevo que además enlaza con 2+ líneas anteriores (no solo la inmediata) hace que el número de *conexiones* crezca más rápido que el número de *nodos* — eso es lo que ya se ve en el salto EV/IV (reservas a 2-3 eras vista) frente a vapor/LV (reservas a 1 era vista), y es la señal más parecida a "exponencial" que hay en los datos. El cumplimiento en lo ya construido (Vapor–HV) es razonable y no hace falta rehacerlo, tal como ya decidiste; el libro de misiones de LV/MV/HV sí debería remedir tras la reescritura de v0.5.1 para tener una cifra fiable.
+**Conclusion:** today growth is **linear to flat on the structural axes** (multiblocks, lines, items in the gate), not exponential in the strict sense. A real exponential axis would give *growing ratios* (36→107→214→428...), and here the ratios **shrink** or stay the same. This is consistent with a decision already in `DECISIONS.md` (translated from Spanish: "from EV on, each era brings 2-3 new multiblocks"): the pack itself already set a target of **linear** growth in the number of multiblocks, not exponential. What can grow faster without inflating quantities or times is the **density of the cross-link graph**: each new multiblock that also links to 2+ earlier lines (not just the immediate one) makes the number of *connections* grow faster than the number of *nodes*. That is what already shows in the EV/IV jump (reserves 2-3 eras ahead) compared with steam/LV (reserves 1 era ahead), and it is the signal closest to "exponential" in the data. Compliance in what is already built (Steam–HV) is reasonable and does not need redoing, as you already decided; the LV/MV/HV quest book should be re-measured after the v0.5.1 rewrite to get a reliable figure.
 
-## 4. Cambios pequeños, Steam→HV
+## 4. Small changes, Steam→HV
 
-Reglas: aditivos, sin tocar la forma de ningún multibloque, sin subir cantidades ni tiempos — la complejidad entra por un paso, una condición o un cruce nuevos. Todas usan ítems/fluidos que ya existen en el pack.
+Rules: additive, without changing the shape of any multiblock, without raising quantities or times — complexity comes in through a new step, a new condition or a new cross-link. All of them use items/fluids that already exist in the pack.
 
 ### LV
 
-| # | Propuesta | Detalle de receta | Archivos | Valor/esfuerzo |
+| # | Proposal | Recipe detail | Files | Value/effort |
 |---|---|---|---|---|
-| L1 | El CO₂ por defecto del horno de arco (circuito 1, receta `silicon`) hoy se ventea (`arc_furnace.js`: *"CO2 is vented"*). Adelantar a LV la variante CO₂ que MV ya planea para su invernadero. | Nueva variante circuito 3 del `lv_greenhouse`: catalizador sin gastar + 100 mB `gtceu:carbon_dioxide` + 100 mB agua → +25 % de salida (la mitad del ×3 de MV) + 50 mB `gtceu:oxygen`. Mismo tiempo/EU que la base. | `server_scripts/grindless/lv/greenhouse.js` (nuevo bloque tipo `fertilizerVariant`); comentario en `lv/arc_furnace.js` | **Alto/Bajo** — 0 ítems nuevos, patrón ya existe en `mv/family_greenhouse.js` |
-| L2 | El agua destilada que la Torre Solar devuelve (4 mB por 640 de vapor) no se usa en ningún otro multibloque de LV; el horno de arco solo admite agua normal en su receta de obsidiana. | Nueva receta `obsidian_distilled` (circuito 2): 32× adoquín + electrodo (azar) + 4000 mB `gtceu:distilled_water` → 4× obsidiana + 10 % de posibilidad de 1× `gtceu:quartz_sand_dust` extra. Mismo EU/t y duración que la receta de agua normal. | `server_scripts/grindless/lv/arc_furnace.js` | **Alto/Bajo** — enlaza dos multibloques de LV que hoy no se hablan |
-| L3 | El antimonio del tostador (estibinita/tetraedrita → electrolizador) no tiene destino más allá del lingote. | Receta alternativa del espejo del heliostato: 1× placa de acero + 1× lámina de plata (en vez de 2) + 1× polvo de antimonio + 1× panel de vidrio + 1× engranaje pequeño de acero → 1 espejo (mismo ítem, mismo EU/t). | `server_scripts/grindless/lv/heliostat_tower.js` | **Medio/Bajo** — 0 ítems nuevos, pero valor más cosmético |
-| L4 | El carbono sobrante de HV (refinería/syngas, "Carbono (1/9 por tanda) → blaze, acero") no tiene uso en LV; daría un tercer origen al electrodo de grafito. | Receta alternativa del electrodo: 4× `gtceu:carbon_dust` + barra de acero → 1 electrodo (misma receta que con polvo de grafito). *Verificar que `gtceu:carbon_dust` existe como ítem distinto del grafito en GTM 7.5.3 antes de aplicarlo.* | `server_scripts/grindless/lv/arc_furnace.js` | **Medio/Medio** — cruce hacia atrás (HV→LV) con mayor valor narrativo, pero con un supuesto por confirmar |
+| L1 | The default CO₂ from the arc furnace (circuit 1, `silicon` recipe) is vented today (`arc_furnace.js`: *"CO2 is vented"*). Bring forward to LV the CO₂ variant that MV already plans for its greenhouse. | New circuit 3 variant of `lv_greenhouse`: unspent catalyst + 100 mB `gtceu:carbon_dioxide` + 100 mB water → +25% output (half of MV's ×3) + 50 mB `gtceu:oxygen`. Same time/EU as the base. | `server_scripts/grindless/lv/greenhouse.js` (new `fertilizerVariant` code block); comment in `lv/arc_furnace.js` | **High/Low** — 0 new items, pattern already exists in `mv/family_greenhouse.js` |
+| L2 | The distilled water that the Solar Tower returns (4 mB per 640 of steam) is not used by any other LV multiblock; the arc furnace only accepts plain water in its obsidian recipe. | New `obsidian_distilled` recipe (circuit 2): 32× cobblestone + electrode (chance-based) + 4000 mB `gtceu:distilled_water` → 4× obsidian + 10% chance of 1× extra `gtceu:quartz_sand_dust`. Same EU/t and duration as the plain-water recipe. | `server_scripts/grindless/lv/arc_furnace.js` | **High/Low** — links two LV multiblocks that do not interact today |
+| L3 | The antimony from the roaster (stibnite/tetrahedrite → electrolyzer) has no use beyond the ingot. | Alternative recipe for the heliostat mirror: 1× steel plate + 1× silver foil (instead of 2) + 1× antimony dust + 1× glass panel + 1× small steel gear → 1 mirror (same item, same EU/t). | `server_scripts/grindless/lv/heliostat_tower.js` | **Medium/Low** — 0 new items, but the value is more cosmetic |
+| L4 | The spare carbon from HV (refinery/syngas, "Carbon (1/9 per batch) → blaze, steel", translated from Spanish) has no use in LV; it would give the graphite electrode a third source. | Alternative electrode recipe: 4× `gtceu:carbon_dust` + steel rod → 1 electrode (same recipe as with graphite powder). *To verify that `gtceu:carbon_dust` exists as an item distinct from graphite in GTM 7.5.3 before applying it.* | `server_scripts/grindless/lv/arc_furnace.js` | **Medium/Medium** — backward cross-link (HV→LV) with more narrative value, but with an assumption to confirm |
 
 ### MV
 
-| # | Propuesta | Detalle de receta | Archivos | Valor/esfuerzo |
+| # | Proposal | Recipe detail | Files | Value/effort |
 |---|---|---|---|---|
-| M1 | El invernadero MV solo combina fertilizante+CO₂ (circuito 2); la biomasa fermentada de la biorrefinería/cervecería no alimenta ningún invernadero. | Nueva variante circuito 3: catalizador sin gastar + 50 mB `gtceu:fermented_biomass` (sin fertilizante ni CO₂) → ×2 la salida base, mismo tiempo/EU que la receta base (no la mitad). Un camino más barato para quien ya fermenta pero no tiene la línea de ácido/CO₂ montada. | `server_scripts/grindless/mv/family_greenhouse.js` | **Alto/Bajo** — mismo patrón que la variante existente, 0 ítems nuevos |
-| M2 | Las vetas MV no tienen variante de "lixiviado": el ácido sulfúrico del tostador de LV solo se usa en química, nunca en la perforadora. | Tercera variante por veta (Overworld + Nether) en la Perforadora MV: broca + muestra + 50 mB `gtceu:sulfuric_acid` → mismo rendimiento base + una posibilidad extra (p. ej. 500/10000) del material más raro de la veta. Se añade al mismo bucle que ya genera las otras dos variantes, así que cubre todas las vetas de una vez. | `server_scripts/grindless/mv/family_vein_drilling.js` | **Alto/Medio** — toca muchas recetas pero con una sola plantilla |
-| M3 | La carta del lugar de alunizaje (radiotelescopio) exige "sin tormenta"; hoy no hay forma de saltarse esa condición. | Receta alternativa `lunar_landing_chart_shielded`: mapa y efemérides sin gastar + 2× papel + 1× `#forge:small_dusts/silver` (recubrimiento reflectante) → misma carta, pero con `.thunder(0.6, true)` en vez de `0.2` (tolera más tormenta, no la anula). | `server_scripts/grindless/observatory/recipes.js` | **Medio/Bajo** — reutiliza la plata que ya usan las placas fotográficas |
+| M1 | The MV greenhouse only combines fertilizer+CO₂ (circuit 2); the fermented biomass from the biorefinery/brewery feeds no greenhouse. | New circuit 3 variant: unspent catalyst + 50 mB `gtceu:fermented_biomass` (no fertilizer or CO₂) → ×2 the base output, same time/EU as the base recipe (not half). A cheaper route for anyone who already ferments but does not have the acid/CO₂ line set up. | `server_scripts/grindless/mv/family_greenhouse.js` | **High/Low** — same pattern as the existing variant, 0 new items |
+| M2 | MV veins have no "leaching" variant: the sulfuric acid from the LV roaster is only used in chemistry, never in the drill. | Third variant per vein (Overworld + Nether) in the MV Vein Drill: drill bit + sample + 50 mB `gtceu:sulfuric_acid` → same base yield + one extra chance (e.g. 500/10000) of the rarest material in the vein. It is added to the same loop that already generates the other two variants, so it covers all veins at once. | `server_scripts/grindless/mv/family_vein_drilling.js` | **High/Medium** — touches many recipes but with a single template |
+| M3 | The landing site chart (radio telescope) requires "no storm"; today there is no way to skip that condition. | Alternative recipe `lunar_landing_chart_shielded`: unspent map and ephemeris + 2× paper + 1× `#forge:small_dusts/silver` (reflective coating) → same chart, but with `.thunder(0.6, true)` instead of `0.2` (it tolerates more storm, it does not cancel it). | `server_scripts/grindless/observatory/recipes.js` | **Medium/Low** — reuses the silver that the photographic plates already use |
 
 ### HV
 
-| # | Propuesta | Detalle de receta | Archivos | Valor/esfuerzo |
+| # | Proposal | Recipe detail | Files | Value/effort |
 |---|---|---|---|---|
-| H1 | El H₂S de la refinería hoy solo da ácido o azufre; `hv.md` señala como riesgo abierto que el H₂ "con crudo pesado no cierra". | Nueva variante del quemador del tostador de sulfuros: 1000 mB `gtceu:hydrogen_sulfide` + el mismo aire/agua que el quemador de azufre → 1000 mB ácido sulfúrico + vapor + 500 mB `gtceu:hydrogen` extra (H₂S → S + H₂ es química real). Mismo EU/t y duración que el quemador de azufre existente. | `server_scripts/grindless/lv/sulfide_roaster.js` | **Alto/Bajo** — cierra un riesgo ya documentado en `hv.md`, 0 ítems nuevos |
-| H2 | La ceniza de la planta de gas de síntesis solo va a centrífuga o fertilizante; el catalizador de hidrotratamiento de la refinería solo tiene una receta (cobalto+molibdeno+sílice). | Receta alternativa del catalizador: 1× `gtceu:cobalt_dust` + 1× `gtceu:molybdenum_dust` + 3× `gtceu:ash_dust` (en vez de sílice) → 4 catalizadores. Cierra un lazo dentro de HV (syngas↔refinería). | `server_scripts/grindless/hv/refinery_crafting.js` | **Alto/Bajo** — 0 ítems nuevos, receta alternativa pura |
-| H3 | El nitrógeno del autoclave de composites se ventea tras cada curado sin ningún uso (`hv.md`: *"se ventea tras cada curado"*). | Variante del modo 1 (gasificación) de la planta de gas de síntesis que acepta 500 mB `gtceu:nitrogen` como gas portador en vez de aire ambiente, mismos sólidos/vapor/salidas, mismo EU/t y duración: un segundo camino de entrada, no un bono. | `server_scripts/grindless/hv/syngas_plant.js` | **Medio/Medio** — cruza el proyecto del cohete con la química de HV, pero exige encajar en la tabla generadora existente |
+| H1 | The H₂S from the refinery today only yields acid or sulfur; `hv.md` flags as an open risk that the H₂ "does not balance with heavy crude" (translated from Spanish). | New variant of the sulfide roaster's burner: 1000 mB `gtceu:hydrogen_sulfide` + the same air/water as the sulfur burner → 1000 mB sulfuric acid + steam + 500 mB extra `gtceu:hydrogen` (H₂S → S + H₂ is real chemistry). Same EU/t and duration as the existing sulfur burner. | `server_scripts/grindless/lv/sulfide_roaster.js` | **High/Low** — closes a risk already documented in `hv.md`, 0 new items |
+| H2 | The ash from the syngas plant only goes to the centrifuge or fertilizer; the refinery's hydrotreating catalyst has only one recipe (cobalt+molybdenum+silica). | Alternative catalyst recipe: 1× `gtceu:cobalt_dust` + 1× `gtceu:molybdenum_dust` + 3× `gtceu:ash_dust` (instead of silica) → 4 catalysts. Closes a loop within HV (syngas↔refinery). | `server_scripts/grindless/hv/refinery_crafting.js` | **High/Low** — 0 new items, purely an alternative recipe |
+| H3 | The nitrogen from the composites autoclave is vented after each curing cycle with no use (`hv.md`: *"is vented after each curing cycle"*, translated from Spanish). | Variant of mode 1 (gasification) of the syngas plant that accepts 500 mB `gtceu:nitrogen` as a carrier gas instead of ambient air, same solids/steam/outputs, same EU/t and duration: a second input route, not a bonus. | `server_scripts/grindless/hv/syngas_plant.js` | **Medium/Medium** — crosses the rocket project with HV chemistry, but it has to fit the existing generator table |
 
-## 5. Objetivos desde EV para que el crecimiento sea exponencial
+## 5. Targets from EV onward so that growth is exponential
 
-El eje que de verdad puede componerse sin inflar cantidades es la **densidad de cruces**: no basta con añadir multibloques (`DECISIONS.md` ya fija 2-3 por era, cifra lineal a propósito), hay que exigir que cada línea nueva enlace con **más líneas anteriores y más lejanas** que la era previa.
+The axis that can really compound without inflating quantities is the **density of cross-links**: adding multiblocks is not enough (`DECISIONS.md` already sets 2-3 per era, a linear figure on purpose). Each new line must be required to link to **more earlier and more distant lines** than the previous era.
 
-### Tabla de objetivos (EV–UV) y regla general después
+### Target table (EV–UV) and general rule after that
 
-| Era | Multibloques propios nuevos | Escalones de familia | Líneas nuevas | Cruces exigidos (que miren ≥2 eras atrás) | Sitios planetarios |
+| Era | New own multiblocks | Family steps | New lines | Required cross-links (looking ≥2 eras back) | Planetary sites |
 |---|---|---|---|---|---|
-| EV | 3–4 | 3 (perforadora, energía, observatorio) | 6–9 | ≥4 | Luna (automática) + Marte (visita) |
-| IV | 3 | 5 (2 perforadoras, 2 energía, observatorio) | 6–8 | ≥5 | Venus + Mercurio (a la vez) |
-| LuV | 3 | 2–3 (criobot/ancla, rectena, ¿observatorio?) | 5–7 | ≥6 | cinturón + Ío/Europa/Ganímedes + **1ª estación orbital** (sitio sin aterrizar) |
-| ZPM | 2–3 | 2–3 | 5–7 | ≥7 | Saturno + gigantes helados, **todo desde órbita** |
-| UV | 2 | 1–2 | 4–6 | ≥8 | Plutón/Kuiper en órbita + 1ª sonda interestelar |
-| **UHV en adelante (regla general)** | ≥2 | ≥1 | ≥ las de la era anterior | cada línea nueva reutiliza ≥2 intermedios de 2+ eras distintas **y** reserva ≥1 subproducto para ≥2 eras después | 1 sitio nuevo cada 1-2 eras (tabla de `viaje.md`), cada uno con ≥1 regla de validador ("X solo sale de Y") |
+| EV | 3–4 | 3 (drill, energy, observatory) | 6–9 | ≥4 | Moon (automated) + Mars (visit) |
+| IV | 3 | 5 (2 drills, 2 energy, observatory) | 6–8 | ≥5 | Venus + Mercury (at the same time) |
+| LuV | 3 | 2–3 (cryobot/anchor, rectenna, observatory?) | 5–7 | ≥6 | belt + Io/Europa/Ganymede + **1st orbital station** (site not landed on) |
+| ZPM | 2–3 | 2–3 | 5–7 | ≥7 | Saturn + ice giants, **all from orbit** |
+| UV | 2 | 1–2 | 4–6 | ≥8 | Pluto/Kuiper in orbit + 1st interstellar probe |
+| **UHV onward (general rule)** | ≥2 | ≥1 | ≥ those of the previous era | each new line reuses ≥2 intermediates from 2+ different eras **and** reserves ≥1 byproduct for ≥2 eras later | 1 new site every 1-2 eras (table in `viaje.md`), each with ≥1 validator rule ("X only comes from Y", translated from Spanish) |
 
-### EV vs. el objetivo
+### EV vs. the target
 
-`ev.md` **ya cumple o supera** la tabla: 4 multibloques nuevos + 3 escalones (7 en total, por encima del mínimo), 9 líneas tabuladas, y es la primera era con reservas explícitas a 2-3 eras vista (helio→IV, helio-3→fusión LuV, Ir/Os→IV, nitrógeno líquido→perforadora de Mercurio IV). Lo que le falta no es diseño, es **aparato de medición y contenido pendiente**:
-- No existe `tools/analysis/tiers/ev.json`: no se puede validar la puerta de EV todavía.
-- El capítulo de misiones solo cubre la Luna (12 de ~25): falta Marte, planta de platino, circuitos nano y wither.
-- Los riesgos que el propio documento señala (fallos de GCYR al lanzar/cambiar de dimensión, rendimiento de AE2 entre 3 dimensiones) son los que de verdad bloquean, no la falta de cruces.
+`ev.md` **already meets or exceeds** the table: 4 new multiblocks + 3 steps (7 in total, above the minimum), 9 tabulated lines, and it is the first era with explicit reserves 2-3 eras ahead (helium→IV, helium-3→LuV fusion, Ir/Os→IV, liquid nitrogen→Mercury vein drill (IV)). What it lacks is not design; it is **measurement tooling and pending content**:
+- There is no `tools/analysis/tiers/ev.json`: the EV gate cannot be validated yet.
+- The quest chapter only covers the Moon (12 of ~25): Mars, platinum plant, nano circuits and wither are missing.
+- The risks the document itself flags (GCYR failures when launching/changing dimension, AE2 performance across 3 dimensions) are the ones that really block, not the lack of cross-links.
 
-### IV vs. el objetivo
+### IV vs. the target
 
-`iv.md` también **cumple**: 3 multibloques nuevos + 5 escalones (8 en total), 8 líneas, reservas hacia LuV y ZPM (tritio, sulfato enriquecido/trinio, solución de naquadria, Cs). Igual que EV, lo que falta es:
-- `tools/analysis/tiers/iv.json` y el capítulo `iv_age.snbt` (0 de ~22 misiones escritas).
-- El propio documento marca la fisión en KubeJS como el riesgo nº1 ("si un generador multibloque de KubeJS no saca EU... se prueba antes que nada"): conviene resolver ese spike antes de construir el resto de la era, porque toda la energía de IV depende de él.
-- No hay perforadora propia en la Tierra para IV (decisión correcta, ya que la broca de acero de tungsteno sube de tier en las perforadoras que ya existen): no es un hueco, es la regla "no todo escalón de familia tiene que repetirse cada era".
+`iv.md` also **meets** it: 3 new multiblocks + 5 steps (8 in total), 8 lines, reserves toward LuV and ZPM (tritium, enriched sulfate/trinium, naquadria solution, Cs). As with EV, what is missing is:
+- `tools/analysis/tiers/iv.json` and the chapter `iv_age.snbt` (0 of ~22 quests written).
+- The document itself marks fission in KubeJS as risk no. 1 ("if a KubeJS multiblock generator does not output EU... it is tested before anything else", translated from Spanish): it is worth resolving that spike before building the rest of the era, because all of IV's energy depends on it.
+- There is no IV drill of its own on Earth (the right decision, since the tungsten steel drill bit raises the tier of the drills that already exist): it is not a gap, it is the rule "not every family step has to repeat each era" (translated from Spanish).
 
-### Lo que viene después de IV
+### What comes after IV
 
-`docs/eras/luv.md`, `zpm.md` y `uv.md` **no existen todavía**: la tabla de objetivos de arriba es el punto de partida para escribirlos. LuV merece atención especial porque introduce un tipo de sitio nuevo — la **estación orbital** (no se aterriza, se opera desde fuera) — que la regla general de ahí en adelante debe dar por normal (ZPM y UV ya no bajan a ningún planeta, per `viaje.md`).
+`docs/eras/luv.md`, `zpm.md` and `uv.md` **do not exist yet**: the target table above is the starting point for writing them. LuV deserves special attention because it introduces a new kind of site — the **orbital station** (it is not landed on, it is operated from outside) — which the general rule from then on should treat as normal (ZPM and UV no longer land on any planet, according to `viaje.md`).
 
-## 6. Resumen de la auditoría
+## 6. Audit summary
 
-- **Multibloques propios:** 5 (Vapor) → 6 → 6 → 7 (HV construidos); 7 → 8 (EV/IV diseñados). Crecimiento plano, por decisión ya tomada en `DECISIONS.md`.
-- **Líneas de proceso:** 4 → 4 → 5 → 6 (construidas); 9 → 8 (diseñadas). Lineal, con cruces cada vez más profundos.
-- **Veredicto:** ninguno de los ejes estructurales (multibloques, líneas, ítems de la puerta) es exponencial hoy; son lineales o planos, con razones que decrecen tier a tier. El eje más prometedor es la **profundidad de los cruces hacia adelante**, que sí se acelera de HV a EV/IV.
-- No hace falta rehacer Vapor–HV (la regla es nueva); los cuatro-seis cambios pequeños de la sección 4 son el ajuste razonable.
-- EV e IV, tal como están diseñados, ya cumplen el objetivo de contenido; lo que falta es el validador propio, el resto del libro de misiones y resolver los riesgos técnicos que cada documento ya señala.
+- **Own multiblocks:** 5 (Steam) → 6 → 6 → 7 (HV built); 7 → 8 (EV/IV designed). Flat growth, by a decision already taken in `DECISIONS.md`.
+- **Process lines:** 4 → 4 → 5 → 6 (built); 9 → 8 (designed). Linear, with cross-links that get deeper each time.
+- **Verdict:** none of the structural axes (multiblocks, lines, items in the gate) is exponential today; they are linear or flat, with ratios that shrink tier by tier. The most promising axis is the **depth of forward cross-links**, which does speed up from HV to EV/IV.
+- There is no need to redo Steam–HV (the rule is new); the four to six small changes in section 4 are the reasonable adjustment.
+- EV and IV, as designed, already meet the content target; what is missing is their own validator, the rest of the quest book, and resolving the technical risks each document already flags.

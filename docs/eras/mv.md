@@ -138,6 +138,11 @@ Qué gana: es lo único que hace la **carta del lugar de alunizaje** (`grindless
 | Etileno → PE y PVC | biomasa (cervecería) → alambique → 600 mB de etanol por 1 000; etanol + H₂SO₄ → etileno (120 EU/t) → PE; 2 Cl₂ + etileno → cloruro de vinilo → PVC | Ácido diluido: alambique, 2/3 de ácido + agua (lazo). HCl: vuelve (O₂ + HCl + etileno → cloruro de vinilo). NaOH: bisulfato → persulfato (placas) o catalizador del biodiésel. H₂: metanol y desulfuración. Polvo de madera de la destilación (50 %): tablero fenólico |
 | Mineral → planta | perforadora → planta (agua) → polvos → aleaciones y EBF | Polvo de piedra (4 por mena): lodo o centrífuga MV. Secundarios: azufre, galio, indio, cobalto… cada uno a su línea |
 
+## Cruces nuevos (auditoría de complejidad)
+
+- **Invernadero MV, biomasa fermentada (circuito 3):** catalizador + 50 mB de biomasa fermentada de la biorrefinería → ×2 la salida, mismo tiempo y EU/t, sin fertilizante ni CO₂ (`grindless:mv/<cultivo>_biomass`). Es el camino para quien ya fermenta y no tiene la línea de ácido y CO₂.
+- **Perforadora MV, lixiviado con ácido (todas las vetas):** broca + muestra + 50 mB de ácido sulfúrico → el rendimiento base y un 5 % extra del mineral más raro de la veta (`grindless:mv/<veta>_vanadium_steel_acid_fluid`). Con ácido en la escotilla, la receta base de vanadio cede el paso a esta.
+
 ## Puerta a HV
 
 | Qué se construye | Qué prueba |
