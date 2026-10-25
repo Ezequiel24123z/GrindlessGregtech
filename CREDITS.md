@@ -10,6 +10,7 @@ The pack does not redistribute mods: packwiz downloads them from their official 
 | KubeJS, Rhino | Latvian / KubeJS-Mods | LGPL-3.0 | Pack scripts. |
 | FTB Quests, Library, Teams | FTB | Author's licence | Quest book. |
 | Wildcard Pattern 0.1.2 | LeoDreamer (github.com/LeoDreamer2004/Wildcard-Pattern) | MIT | Mod from its GitHub release; our assembler recipe. |
+| Gregtech Terminals 6.8.5 (gtceuterminal) | Bgame (github.com/BgameXl/gtceu-terminal-addon) | MIT | Installed mod. The Hologram Projector calls its public `BlockPatternReflection` to read GTM's pattern grid; no code copied. |
 
 ## Ideas and processes
 
@@ -145,6 +146,9 @@ Ideas are not copied as text or as code: they are rebuilt with our rules, and we
 | Platinum plant mode 3 (iridosmine → iridium and osmium) | IV-B2's fusion; GT--'s iridium and osmium chain (gtnn 1.3.10); real platinum-group refining (osmium volatilized as OsO₄, iridium through its chloro salts) | AGPL-3.0 (read in game, nothing copied) / real | Composed at load (`ev/platinum_plant.js`). |
 | Parallel hatch in the platinum and naquadah plants | GTM's Parallel Control Hatch and GCYM's parallel-then-overclock order, through IV-B6's helper | LGPL-3.0 (GTM) | Already credited by IV-B6; nothing new copied. |
 | Processing Lines tab: one flowchart chapter per tier, each node an optional item task with a checkmark, gears for machines, quest links to import a quest from an earlier chart | Star Technology (StarT-Dev-Team, © 2023 trulyno), "Progression" group, `config/ftbquests/quests/chapters/pl1.snbt`–`pl5.snbt` | MIT | Structure and conventions. The lines, the layout, the generator and the texts are ours; no SNBT or text was copied. |
+| Hologram Projector: right-click previews the multiblock; sneak-right-click builds its default structural blocks from inventory, never hatches | GTNH StructureLib's Multiblock Structure Hologram Projector (GTNewHorizons/StructureLib, from TecTech) | LGPL-3.0 (older versions MIT) | The idea and click semantics only; no StructureLib code, text or texture copied. |
+| The projector's in-world hologram | GTM 7.5.3 `MultiblockInWorldPreviewRenderer` (`showPreview`, `cleanPreview`) | LGPL-3.0 | Public renderer called from `client_scripts/grindless/hologram_projector.js`, not copied. |
+| Pattern cell positions for controller facing, upwards facing and mirroring | GTM 7.5.3 `BlockPattern#setActualRelativeOffset` | LGPL-3.0 | Adapted to JavaScript as `relOffset` in `server_scripts/grindless/steam/hologram_projector.js`. |
 
 ## Quests
 
@@ -174,6 +178,8 @@ Each of our own textures is recorded here with its origin.
 
 | File | Origin | Licence |
 |---|---|---|
+| `pack/kubejs/assets/grindless/textures/item/hologram_projector.png` | Generated with tools/assets/Build-HologramProjectorTextures.ps1 (original procedural pixel art), 2026-10-25 | the pack's licence (pending; proposed CC BY-SA 4.0) |
+| `pack/kubejs/assets/grindless/textures/item/hologram_projector.png.mcmeta` | Generated with tools/assets/Build-HologramProjectorTextures.ps1 (original procedural pixel art), 2026-10-25 | the pack's licence (pending; proposed CC BY-SA 4.0) |
 | `pack/kubejs/assets/grindless/textures/block/multiblock/steam_vein_drill/overlay_front.png` | Generated with tools/assets/Build-SteamTextures.ps1 (procedural pixel art, original) by the assets agent, 2026-10-24 | the pack's licence (pending; proposed CC BY-SA 4.0) |
 | `pack/kubejs/assets/grindless/textures/block/multiblock/steam_vein_drill/overlay_front_active.png` | Generated with tools/assets/Build-SteamTextures.ps1 (procedural pixel art, original) by the assets agent, 2026-10-24 | the pack's licence (pending; proposed CC BY-SA 4.0) |
 | `pack/kubejs/assets/grindless/textures/block/multiblock/steam_vein_drill/overlay_front_active.png.mcmeta` | Generated with tools/assets/Build-SteamTextures.ps1 (procedural pixel art, original) by the assets agent, 2026-10-24 | the pack's licence (pending; proposed CC BY-SA 4.0) |

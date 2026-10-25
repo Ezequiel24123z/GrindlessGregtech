@@ -18,6 +18,14 @@ The game starts here, without electricity. Coke, bricks, bronze, boilers and ste
    - The **coke battery** (ours) cokes like 6 or 7 coke ovens and stores coal gas for LV.
 7. **Gate to LV.** LV Steam Turbine (`gtceu:lv_steam_turbine`), first LV circuit, LV Machine Hull and rubber-insulated tin cable. Once that works, the era is behind you.
 
+## Building multiblocks
+
+The **Hologram Projector** (`grindless:hologram_projector`) is made at the crafting table with glass, bronze plates, redstone torches and redstone, using a screwdriver.
+
+Right-click an unformed controller to show its native GTM hologram for 30 seconds; click again to hide it. Sneak-right-click to place the default structural blocks from your inventory: casings, coils, glass, frames and pipes. It never places hatches, buses, mufflers or other GT machine parts, and leaves non-replaceable obstructions alone. Chat lists missing materials, obstructions and the cells left for parts. Formed controllers still open normally.
+
+Repeating patterns use their minimum size. GTM's preview renderer does not display mirroring; the structural build does follow the controller's actual mirroring. GTM's Terminal uses the same conservative placement rules and keeps its recipe and Workshop quest.
+
 ## Our multiblocks
 
 They are registered under `gtceu:` because that is how GTM registers machines. Our own items go under `grindless:`.
