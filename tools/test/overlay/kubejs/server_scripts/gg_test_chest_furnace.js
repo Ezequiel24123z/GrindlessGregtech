@@ -74,7 +74,10 @@
   }
 
   function check(name, ok, detail) {
-    if (!ok) T.failed.push(name)
+    if (!ok) {
+      T.failed.push(name)
+      shared().put('failed', true)
+    }
     T.table.push(name)
     emit(name, ok ? 'PASS' : 'FAIL', detail)
     return ok
@@ -258,15 +261,21 @@
       T.level = T.server.overworld()
       T.playerName = String(p.getName().getString())
       T.spawn = { x: p.getX(), y: p.getY(), z: p.getZ() }
+      T.yaw = p.getYaw()
+      T.pitch = p.getPitch()
+      T.selected = p.getInventory().selected
+      T.hand = p.getMainHandItem().copy()
+      T.mode = String(p.gameMode.getGameModeForPlayer().getName())
       cmd('gamemode survival ' + T.playerName)
-      cmd('effect give ' + T.playerName + ' minecraft:resistance 600 4 true')
+      // No persistent effect to leak into the next fixture in the disposable world.
+      T.forced = true
       cmd('forceload add ' + AREA.x0 + ' ' + AREA.z0 + ' ' + AREA.x1 + ' ' + AREA.z1)
       return false
     }
     if (age < 20) return false
+    T.touched = true // Cleanup must run even if constructing the floor throws.
     cmd('fill ' + AREA.x0 + ' ' + AREA.y0 + ' ' + AREA.z0 + ' ' + AREA.x1 + ' ' + AREA.y1 + ' ' + AREA.z1 + ' minecraft:air')
     cmd('fill ' + AREA.x0 + ' ' + AREA.y0 + ' ' + AREA.z0 + ' ' + AREA.x1 + ' ' + AREA.y0 + ' ' + AREA.z1 + ' minecraft:smooth_stone')
-    T.touched = true
     note('area', 'X ' + AREA.x0 + '-' + AREA.x1 + ' Z ' + AREA.z0 + '-' + AREA.z1 + ' Y ' + AREA.y0 + '-' + AREA.y1 + ' force-loaded and cleared; player ' + T.playerName)
     return true
   }
@@ -487,6 +496,7 @@
       var spec = cls().SSConfig.SERVER_SPEC
       var values = spec.getValues()
       var byPath = targetsByPath()
+      T.oldConfig = OLD_KEYS.map(function (k) { return { cv: values.get(k), v: Number(values.get(k).get()) } })
       guardedSet(spec, OLD_KEYS.map(function (k) { return { cv: values.get(k), v: byPath[k].stock } }))
       note('old_config', OLD_KEYS.map(function (k) { return k + '=' + values.get(k).get() }).join(', '))
       T.level.setBlockAndUpdate(bp(A), Block.getBlock('sophisticatedstorage:iron_chest').defaultBlockState())
@@ -753,18 +763,39 @@
     shared().put('clickToken', '')
     try {
       var p = testPlayer(server)
-      if (p !== null && T.spawn) server.runCommandSilent('execute in ' + EARTH + ' run tp ' + T.playerName + ' ' + T.spawn.x + ' ' + T.spawn.y + ' ' + T.spawn.z)
-    } catch (e) { note('restore', 'failed: ' + e) }
+      if (T.spawn) {
+        if (p === null) throw new Error('player unavailable for restoration')
+        p.closeMenu()
+        p.getInventory().setItem(T.selected, T.hand)
+        p.getInventory().selected = T.selected
+        p.getInventory().setChanged()
+        p.inventoryMenu.broadcastChanges()
+        if (server.runCommandSilent('execute in ' + EARTH + ' run tp ' + T.playerName + ' ' + T.spawn.x + ' ' + T.spawn.y + ' ' + T.spawn.z + ' ' + T.yaw + ' ' + T.pitch) < 1) {
+          throw new Error('return-to-spawn command failed')
+        }
+        cmd('gamemode ' + T.mode + ' ' + T.playerName)
+      }
+    } catch (e) { check('restore', false, String(e)) }
+    if (T.oldConfig) {
+      try { guardedSet(cls().SSConfig.SERVER_SPEC, T.oldConfig) } catch (e) { check('config_cleanup', false, String(e)) }
+    }
     if (T.touched) {
       try {
-        cmd('fill ' + AREA.x0 + ' ' + AREA.y0 + ' ' + AREA.z0 + ' ' + AREA.x1 + ' ' + AREA.y1 + ' ' + AREA.z1 + ' minecraft:air')
+        cmd('forceload add ' + AREA.x0 + ' ' + AREA.z0 + ' ' + AREA.x1 + ' ' + AREA.z1)
+        if (cmd('fill ' + AREA.x0 + ' ' + AREA.y0 + ' ' + AREA.z0 + ' ' + AREA.x1 + ' ' + AREA.y1 + ' ' + AREA.z1 + ' minecraft:air') < 1) {
+          throw new Error('test-band clear command failed')
+        }
         cmd('kill @e[type=item,x=' + AREA.x0 + ',y=' + AREA.y0 + ',z=' + AREA.z0 + ',dx=16,dy=15,dz=16]')
-        cmd('forceload remove ' + AREA.x0 + ' ' + AREA.z0 + ' ' + AREA.x1 + ' ' + AREA.z1)
-      } catch (e) { note('cleanup', 'failed: ' + e) }
+      } catch (e) { check('cleanup', false, String(e)) }
+    }
+    // Independent finally-like release even when fill/config/player cleanup fails.
+    if (T.forced) {
+      try { cmd('forceload remove ' + AREA.x0 + ' ' + AREA.z0 + ' ' + AREA.x1 + ' ' + AREA.z1) } catch (e) { check('forceload_cleanup', false, String(e)) }
     }
     var failed = T.failed.filter(function (f, i) { return T.failed.indexOf(f) === i })
     check('all', failed.length === 0, failed.length === 0 ? 'every check passed: ' + T.table.join(', ') : 'failed: ' + failed.join(', '))
     shared().put('hold', false)
+    shared().put('serverDone', true)
     global[REQ + 'Done'] = true
     console.info(TAG + 'DONE')
   }
@@ -776,6 +807,11 @@
     }
     if (T === null || T.finished) return
     T.server = server
+    if (sval('cancel') !== '') {
+      check('cancelled', false, sval('cancel'))
+      finish(server)
+      return
+    }
     T.t = server.getTickCount() - T.tick0
     if (T.t > TEST_TIMEOUT) {
       check('timeout', false, 'the test ran ' + T.t + ' ticks; step ' + STEPS[T.step][0])
@@ -789,6 +825,7 @@
       return
     }
     var step = STEPS[T.step]
+    if (T.since === null) T.since = T.t
     var age = T.t - T.since
     var done = false
     try {
@@ -805,8 +842,11 @@
     if (T.finished) return
     if (done) {
       T.step++
-      T.since = T.t
-      T.st = {}
+      // The next callback MUST see age 0, even if server tick counts skip.
+      T.since = null
+      // These three steps share the actual saved inventory/BE baselines.
+      // Clearing st after old_world/update loses the evidence before comparison.
+      if (step[0] !== 'old_world' && step[0] !== 'update') T.st = {}
     }
   }
 
@@ -823,16 +863,26 @@
     onTick(event.server)
   })
 
-  // client suite: armed when the player joins, if the instance carries the marker file
-  PlayerEvents.loggedIn(function (event) {
-    if (global[REQ + 'Done'] || T !== null || !enabledByMarker()) return
+  function arm(player) {
+    if (global[REQ + 'Done'] || T !== null || global[REQ]) throw new Error('chest/furnace fixture already armed')
     global[REQ + 'At'] = Date.now() + 5000
     global[REQ] = true
     var S = shared()
+    S.clear()
     S.put('hold', true)
     S.put('clickToken', '')
     S.put('closeToken', '')
     S.put('report', '')
-    note('armed', 'player ' + event.player.getName().getString() + ' joined and ' + MARKER + ' is present: the chest and furnace test starts in a few seconds')
+    note('armed', 'chest and furnace fixture starts in a few seconds; exclusive player ownership')
+  }
+
+  global.ggTestChestFurnaceStart = arm
+
+  // An integrated marker takes precedence: only the dispatcher may arm this fixture.
+  PlayerEvents.loggedIn(function (event) {
+    var integrated = JsonIO.read('kubejs/config/gg_test_v071_integration.json')
+    if (integrated && String(integrated.enabled) === 'true') return
+    if (global[REQ + 'Done'] || T !== null || !enabledByMarker()) return
+    arm(event.player)
   })
 })()

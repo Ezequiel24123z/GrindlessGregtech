@@ -29,7 +29,13 @@
 
   function finish() {
     request.done = true
+    try {
+      request.player.setYaw(request.yaw)
+      request.player.setPitch(request.pitch)
+      request.player.getInventory().selected = request.selected
+    } catch (e) { check('server_cleanup', false, String(e)) }
     shared().put('hold', false)
+    shared().put('serverDone', true)
     if (shared().putIfAbsent('doneLogged', true) === null) console.info(TAG + 'DONE')
   }
 
@@ -77,16 +83,20 @@
       Number(probeCap.getCharge()) === before,
       'charged saved-copy internal discharge works; simulated and actual external discharge refuse')
     // Replace, do not duplicate, the actual reward with its native save/load result.
+    equipGift(player, found.slot, restored)
+  }
+
+  function equipGift(player, slot, stack) {
     var inv = player.getInventory()
-    inv.setItem(found.slot, restored)
+    inv.setItem(slot, stack)
     var displaced = inv.getItem(0)
-    inv.setItem(0, restored)
-    if (found.slot !== 0) inv.setItem(found.slot, displaced)
+    inv.setItem(0, stack)
+    if (slot !== 0) inv.setItem(slot, displaced)
     inv.selected = 0
     inv.setChanged()
     player.inventoryMenu.broadcastChanges()
     requireProof('gift_equipped', player.getMainHandItem().getNbt().getBoolean(GIFT_TAG) &&
-      count(player, GIFT) === 1, 'saved/loaded real reward equipped in hotbar slot zero')
+      count(player, GIFT) === 1, 'real marked reward equipped in hotbar slot zero')
   }
 
   function count(player, id) {
@@ -169,7 +179,21 @@
   }
 
   function prepare(player) {
-    restoreGift(player)
+    if (request.pendingOnly) {
+      // Real FTB reward, not a synthetic scanner. Prior 77-check migration/range
+      // proof is reused: claim only the gift needed for the pending native map proof.
+      var quest = arrival()
+      var team = Java.loadClass('dev.ftb.mods.ftbquests.quest.TeamData').get(player)
+      player.server.runCommandSilent('ftbquests change_progress ' + player.getName().getString() + ' complete 69BDA9FBB0EB66F2')
+      var rewards = quest.getRewards()
+      for (var r = 0; r < rewards.size(); r++) {
+        if (String(rewards.get(r).getCodeString()) === '6325EC29C56BD824') team.claimReward(player, rewards.get(r), true)
+      }
+      var found = gift(player)
+      requireProof('map_gift', count(player, GIFT) === 1 && Number(electric(found.stack).getCharge()) === 0,
+        'actual marked empty Arrival gift; prior reward/save-load/external-energy proof reused')
+      equipGift(player, found.slot, found.stack)
+    } else restoreGift(player)
     var ServerCache = Java.loadClass('com.gregtechceu.gtceu.integration.map.cache.server.ServerCache')
     var GridPos = Java.loadClass('com.gregtechceu.gtceu.integration.map.cache.GridPos')
     var Metadata = Java.loadClass('com.gregtechceu.gtceu.api.data.worldgen.ores.GeneratedVeinMetadata')
@@ -194,7 +218,7 @@
     requireProof('foreign_dimension', foreignLevel !== null, 'existing native grindless:void level required')
     var foreignDim = foreignLevel.getDimensionKey()
     var entries = [describe(natural, 'natural', true)]
-    var offsets = [[256, 0], [-256, 0], [0, 256], [0, -256],
+    var offsets = request.pendingOnly ? [] : [[256, 0], [-256, 0], [0, 256], [0, -256],
       [256, 256], [256, -256], [-256, 256], [-256, -256],
       [257, 0], [-257, 0], [0, 257], [0, -257],
       [257, 257], [257, -257], [-257, 257], [-257, -257]]
@@ -233,8 +257,8 @@
     for (var f = 0; f < fixtures.length; f++) inserted = inserted && allFixtures.contains(fixtures[f])
     requireProof('fixture_metadata_inserted', inserted && foreignAdded && allFixtures.contains(natural) &&
       ServerCache.instance.getNearbyVeins(foreignDim, center, 256).contains(foreign),
-      'all 16 boundary entries (including excluded 257s) and foreign-only entry exist in native cache')
-    requireProof('unloaded_boundary_before', unloaded > 0,
+      (request.pendingOnly ? 'natural entry and foreign codec-isolation fixture' : 'all 16 boundary entries (including excluded 257s) and foreign-only entry') + ' exist in native cache')
+    if (!request.pendingOnly) requireProof('unloaded_boundary_before', unloaded > 0,
       'getChunkNow-only boundary probe: ' + unloaded + '/' + request.chunks.length + ' chunks initially unloaded')
     console.info(TAG + 'fixture_lifetime|NOTE|metadata persists ONLY in this fresh disposable world; no broad native cache cleanup')
     request.center = center
@@ -277,16 +301,28 @@
         probes.push(chunk.x + ',' + chunk.z + '=' + (absent ? 'unloaded' : 'LOADED'))
       }
     })
-    requireProof('scan_' + token + '_no_chunk_load', stillUnloaded, probes.join(';'))
+    if (!request.pendingOnly) requireProof('scan_' + token + '_no_chunk_load', stillUnloaded, probes.join(';'))
     request.phase = 'cooldown'
     request.completedAt = serverTicks
   }
 
+  function arm(player, pendingOnly) {
+    if (request !== null) throw new Error('starter fixture already armed')
+    shared().clear()
+    request = { player: player, at: Date.now() + 10000, deadline: Date.now() + 120000,
+      phase: 'rewards', pendingOnly: pendingOnly, yaw: player.getYaw(), pitch: player.getPitch(),
+      selected: player.getInventory().selected }
+    shared().put('hold', true)
+  }
+
+  global.ggTestStarterEquipmentStart = function (player) { arm(player, true) }
+
   PlayerEvents.loggedIn(function (event) {
+    var integrated = JsonIO.read('kubejs/config/gg_test_v071_integration.json')
+    if (integrated && String(integrated.enabled) === 'true') return
     var marker = JsonIO.read(MARKER)
     if (!marker || String(marker.get('enabled')) !== 'true' || request !== null) return
-    request = { player: event.player, at: Date.now() + 10000, deadline: Date.now() + 120000, phase: 'rewards' }
-    shared().put('hold', true)
+    arm(event.player, false)
   })
 
   ServerEvents.tick(function () {
@@ -296,13 +332,13 @@
       requireAlive()
       if (Date.now() < request.at) return
       if (request.phase === 'rewards') {
-        claim(request.player)
+        if (!request.pendingOnly) claim(request.player)
         prepare(request.player)
       } else if (request.phase === 'scan') {
         verifyScan(request.player)
       } else if (request.phase === 'cooldown' && serverTicks - request.completedAt >= 12 &&
           !request.player.getCooldowns().isOnCooldown(request.player.getMainHandItem().getItem())) {
-        if (request.round < 3) {
+        if (!request.pendingOnly && request.round < 3) {
           request.round++
           request.phase = 'scan'
           nextScan()
@@ -316,7 +352,8 @@
         requireProof('native_cache_codec_complete', String(shared().get('codecDone')) === 'true',
           'client native in-memory codec/marker rehydration assertions completed after map capture')
         check('paired_proof', !shared().get('failed'),
-          'reward migration + three zero-charge native clicks + actual map PNG + native codec/marker rehydration')
+          (request.pendingOnly ? 'one natural reveal; prior reward/boundary proof reused' : 'reward migration + three zero-charge native clicks') +
+          ' + actual map PNG + native IN-MEMORY codec/marker rehydration (not disk/reconnect)')
         finish()
       }
     } catch (e) {
@@ -327,6 +364,7 @@
   })
 
   function requireAlive() {
+    if (shared().get('cancel')) throw new Error('integration cancelled: ' + shared().get('cancel'))
     if (shared().get('clientAborted')) throw new Error('client aborted: ' + shared().get('clientAborted'))
     if (Date.now() > request.deadline) throw new Error('120s paired proof timeout in phase ' + request.phase)
   }
