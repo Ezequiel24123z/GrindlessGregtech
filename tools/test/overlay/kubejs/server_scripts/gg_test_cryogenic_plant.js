@@ -209,14 +209,33 @@
 
   // ---------------------------------------------------------------- the sun
 
-  // the plant's definition of night, the test's own copy: vanilla's time of day (DimensionType#timeOfDay of a dimension without a fixed
-  // time: 0 noon, 0.25 sunset, 0.5 midnight, 0.75 sunrise); the sun is down between sunset and sunrise, day time 12,786 to 23,214
+  // the plant's definition of night, the test's own copy: the sun is down from day time 12,786 to 23,214 of every 24,000 (where vanilla's
+  // time-of-day curve, DimensionType#timeOfDay of a dimension without a fixed time, is between 0.25 sunset and 0.75 sunrise; the bounds
+  // were worked out with Node, as the startup keeps them)
   function sunDownLocal(dayTime) {
-    var f = Number(dayTime) / 24000 - 0.25
-    f = f - Math.floor(f)
-    var d = 0.5 - Math.cos(f * Math.PI) / 2
-    var tod = (f * 2 + d) / 3
-    return tod > 0.25 && tod < 0.75
+    var t = Number(dayTime) % 24000
+    if (t < 0) t += 24000
+    return t >= NIGHT_FROM && t <= NIGHT_TO
+  }
+
+  // the curve itself, as this Rhino evaluates it: run 1 of 2026-10-25 found the sun never set with it (only reported, never judged)
+  function rhinoCurveText() {
+    var parts = []
+    try {
+      var f = 18000 / 24000 - 0.25
+      parts.push('18000/24000=' + (18000 / 24000))
+      parts.push('f=' + f)
+      parts.push('Math.floor(f)=' + Math.floor(f))
+      parts.push('Math.PI=' + Math.PI)
+      parts.push('Math.cos(f*PI)=' + Math.cos(f * Math.PI))
+      var g = f - Math.floor(f)
+      var d = 0.5 - Math.cos(g * Math.PI) / 2
+      parts.push('tod(18000)=' + ((g * 2 + d) / 3))
+      parts.push('Math.cos(1)=' + Math.cos(1))
+    } catch (e) {
+      parts.push('threw ' + e)
+    }
+    return parts.join(' ')
   }
 
   function startupSunFn() {
@@ -431,6 +450,7 @@
 
   // The startup's sunIsDown is what the modifier uses. If a server script cannot call it, the run checks use the test's own copy.
   function sunCurveCheck() {
+    note('rhino_math', rhinoCurveText())
     var local = nightWindow(sunDownLocal)
     var fn = startupSunFn()
     if (fn === null) {

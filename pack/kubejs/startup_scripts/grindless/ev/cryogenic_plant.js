@@ -21,10 +21,10 @@
 // alwaysTryModifyRecipe, so GTM re-applies it when each run ends (RecipeLogic#onRecipeFinish): the price follows the sky run by run,
 // and a run keeps the price it started with. After that, GTM's standard overclock (non-perfect) uses whatever voltage is left.
 //
-// Night: the sun below the horizon, read from the level's day time with vanilla's own time-of-day curve (DimensionType#timeOfDay:
-// 0 noon, 0.25 sunset, 0.5 midnight, 0.75 sunrise). GCYR's Moon (dimension type gcyr:luna) has no fixed time and runs on the Overworld's
-// clock: the sun is down from day time 12,786 to 23,214, about 10,400 of the 24,000 ticks. Level#isNight is not used, because a
-// thunderstorm also turns it true (vanilla darkens the sky with the rain and thunder levels).
+// Night: the sun below the horizon, read from the level's day time: vanilla's own time-of-day curve (DimensionType#timeOfDay: 0 noon,
+// 0.25 sunset, 0.5 midnight, 0.75 sunrise) puts it down from day time 12,786 to 23,214, about 10,400 of the 24,000 ticks (the bounds
+// are kept as integers, see sunIsDown). GCYR's Moon (dimension type gcyr:luna) has no fixed time and runs on the Overworld's clock.
+// Level#isNight is not used, because a thunderstorm also turns it true (vanilla darkens the sky with the rain and thunder levels).
 // Sky: every radiator must see the sky (Level#canSeeSky on the block above it, like the heliostat mirrors of lv/heliostat_tower.js). A
 // covered wing just gives the day price. The two wings are symmetric, so a mirrored structure has its radiators on the same cells.
 //
@@ -127,17 +127,18 @@
     return pos.offset(-fx * c.back + fz * c.side, c.up, -fz * c.back - fx * c.side)
   }
 
-  // vanilla DimensionType#timeOfDay for a dimension without a fixed time: 0 noon, 0.25 sunset, 0.5 midnight, 0.75 sunrise
-  function timeOfDay(dayTime) {
-    var f = dayTime / 24000 - 0.25
-    f = f - Math.floor(f)
-    var d = 0.5 - Math.cos(f * Math.PI) / 2
-    return (f * 2 + d) / 3
-  }
+  // Vanilla's time-of-day curve (DimensionType#timeOfDay without a fixed time: 0 noon, 0.25 sunset, 0.5 midnight, 0.75 sunrise) passes
+  // 0.25 between day time 12,785 and 12,786 and 0.75 between 23,214 and 23,215, so the sun is down from 12,786 to 23,214 of every
+  // 24,000. The bounds are worked out once (with Node) and kept as integers: this Rhino evaluated the curve itself wrong on the bench
+  // (the sun never set), and integer comparisons leave nothing to evaluate.
+  const SUNSET = 12786
+  const SUNRISE = 23214
+  CRYO.night = { from: SUNSET, to: SUNRISE }
 
   function sunIsDown(dayTime) {
-    var t = timeOfDay(dayTime)
-    return t > 0.25 && t < 0.75
+    var t = Number(dayTime) % 24000
+    if (t < 0) t += 24000
+    return t >= SUNSET && t <= SUNRISE
   }
   CRYO.sunIsDown = sunIsDown
 
