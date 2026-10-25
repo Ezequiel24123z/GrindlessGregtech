@@ -271,8 +271,50 @@
       width / 2, height / 2 - 4 * scale)
   }
 
+  function rehydrateNaturalMarker(mc) {
+    // Native in-memory codec/marker rehydration only: NOT disk persistence,
+    // reconnect, or a clean-cache roundtrip. Never clear/reset a cache or renderer.
+    var dim = mc.player.getLevel().getDimensionKey()
+    check('native_cache_codec_dimension', String(dim.location()) === c.plan.dimension,
+      'save and both reads use the same actual client ResourceKey')
+    var cache = Java.loadClass('com.gregtechceu.gtceu.integration.map.cache.client.GTClientCache').instance
+    c.cacheNbt = cache.saveDimFile('', dim) // Retain NBT client-locally, never in the shared cross-thread map.
+    check('native_cache_codec', c.cacheNbt !== null, "saveDimFile('', actualDim) returned native CompoundTag")
+    var markers = row(mc)
+    var HashMap = Java.loadClass('java.util.HashMap')
+    var countBefore = new HashMap(markers).size()
+    var natural = c.plan.entries[0]
+    var id = markerId(natural)
+    var original = markers.get(id)
+    check('marker_rehydration_baseline', original !== null, 'selected natural marker exists before removal')
+    var name = String(original.getName())
+    markers.remove(id) // ONLY the selected natural Xaero record; native cache metadata stays intact.
+    check('marker_rehydration_hidden', !markers.containsKey(id) &&
+      new HashMap(markers).size() === countBefore - 1, 'exactly one selected natural marker removed')
+    for (var r = 1; r <= 2; r++) {
+      cache.readDimFile('', dim, c.cacheNbt)
+      var restored = markers.get(id)
+      var pos = restored === null ? null : restored.getVein().center()
+      check(r === 1 ? 'marker_rehydration' : 'marker_rehydration_repeat',
+        restored !== null && String(restored.getName()) === name &&
+        pos.getX() === natural.x && pos.getY() === natural.y && pos.getZ() === natural.z,
+        'read=' + r + '; same natural name=' + name + ' at [' + natural.x + ',' + natural.y + ',' + natural.z + ']')
+      check('native_cache_codec_no_duplication_' + r, new HashMap(markers).size() === countBefore,
+        'read=' + r + '; same dimension marker count=' + countBefore)
+      check('native_cache_codec_dimension_isolation_' + r,
+        dim.equals(mc.player.getLevel().getDimensionKey()) &&
+        !markers.containsKey(markerId(c.plan.foreign)) && foreignRow().equals(c.foreignBefore),
+        'foreign fixture still absent; foreign marker row unchanged; no dimension travel')
+    }
+    global.ggStarterEquipment.put('codecDone', true)
+  }
+
   function map(mc) {
     if (c.screenshot) {
+      if (val('mapCaptured') === 'true' && val('mapDone') !== 'true') {
+        if (val('mapResult') === 'PASS') rehydrateNaturalMarker(mc)
+        global.ggStarterEquipment.put('mapDone', true) // Publish completion only AFTER successful codec assertions.
+      }
       // A map can pause the integrated server: close on the CLIENT thread after its PNG callback,
       // letting the server consume mapDone and release hold rather than deadlocking behind the GUI.
       if (val('mapDone') === 'true') mc.setScreen(null)
@@ -365,7 +407,7 @@
           global.ggStarterEquipment.put('mapResult', 'FAIL')
           global.ggStarterEquipment.put('mapDetail', 'screenshot callback: ' + e)
         }
-        global.ggStarterEquipment.put('mapDone', true)
+        global.ggStarterEquipment.put('mapCaptured', true)
       })
   }
 

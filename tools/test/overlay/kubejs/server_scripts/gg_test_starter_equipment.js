@@ -313,7 +313,10 @@
       } else if (request.phase === 'map' && shared().get('mapDone')) {
         requireProof('real_map_screenshot', String(shared().get('mapResult')) === 'PASS',
           String(shared().get('mapDetail')))
-        check('paired_proof', !shared().get('failed'), 'reward migration + three zero-charge native clicks + actual map PNG')
+        requireProof('native_cache_codec_complete', String(shared().get('codecDone')) === 'true',
+          'client native in-memory codec/marker rehydration assertions completed after map capture')
+        check('paired_proof', !shared().get('failed'),
+          'reward migration + three zero-charge native clicks + actual map PNG + native codec/marker rehydration')
         finish()
       }
     } catch (e) {
