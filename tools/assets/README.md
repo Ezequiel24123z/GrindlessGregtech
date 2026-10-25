@@ -40,6 +40,7 @@ Generators for the pack's own textures. Everything is procedural 16x16 pixel art
 | `Build-CombinedCycleHotMillTextures.ps1` | Writes the faces of the EV combined-cycle plant and hot strip mill (`multiblock/combined_cycle_plant/`, `multiblock/hot_strip_mill/`). `-Credits` prints their 10 CREDITS rows. |
 | `Build-FissionReactorTextures.ps1` | Writes the IV fission reactor's face (`multiblock/fission_reactor/`). `-Only reactor` and `-Credits` (its 5 CREDITS rows). |
 | `Build-HotCellTextures.ps1` | Writes the IV hot cell's face (`multiblock/hot_cell/`). `-Only hot_cell` and `-Credits` (its 5 CREDITS rows). |
+| `Build-HeavyWaterPlantTextures.ps1` | Writes the IV heavy-water plant's face (`multiblock/heavy_water_plant/`). `-Only heavy_water_plant`, `-Preview <png outside the repo>` and `-Credits` (its 5 CREDITS rows). |
 | `Build-IVFoundationTextures.ps1` | Writes the shared IV textures (IV-A1): fuel cycle items, PuBe source, RTG pellet, resin, platinum gauze, inner planets chart, Venus and Mercury vein samples, the Hermean heat shield brick (the Mercury casing texture) and the thin-film panel. `-Only`, `-Preview <png outside the repo>`, `-Credits`. |
 
 ## Regenerate
@@ -374,3 +375,12 @@ The operating window, drawn for GT--'s radiation-proof casing with the EV faces'
 - Idle: dark cell, tongs parked, dull olive sample, lamps dark.
 - The emissive layer holds only the sample, its light on the bench and the lit lamps.
 - The fission reactor's checks; the output is identical byte for byte.
+
+### Heavy-water plant
+
+The plant's mimic panel, drawn for GTM's inert PTFE casing with the IV faces' method, steel ramp, bezel and lamp ramp. On the dark board, the short cold tower (cool blue) and the tall hot tower (warm orange) are joined at mid-height by the two lines of the H2S loop. The slim grey vacuum column stands at the right with a drop of heavy water (pale cyan) under it, and two mode lamps sit above the cold tower (1 exchange, 2 finishing).
+
+- 8 frames, `frametime` 4: a cold bubble rises one pixel a frame and a brighter warm streak two; a warm pulse runs along the upper line to the cold tower and a cold one back along the lower line; the drop glows and breathes, and once a loop a droplet falls into it from the column; lamp 1 is lit.
+- Idle: dim towers, no flow, a dull drop, lamps dark.
+- The emissive layer holds only the bubbles, the pulses, the drop with its droplet and the lit lamp.
+- The fission reactor's checks; the output is identical byte for byte. `-Preview <png outside the repo>` writes an x8 review sheet on a light and a dark inert-casing stand-in (never shipped).
