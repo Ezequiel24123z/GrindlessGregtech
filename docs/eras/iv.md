@@ -82,7 +82,7 @@ What it gains: **IV's energy without burning anything, with a reactor that GTM d
 - **Structure:** vessel of radiation-proof machine casing (`gtnn:radiation_proof_machine_casing`: dense lead, TS frame and concrete; IV assembler), 4 TS pipe channels, turbine room (`gtceu:tungstensteel_turbine_casing`) and vents; assembly and spent-fuel buses, water hatches, moderator and tritium hatches, and IV dynamo hatches. Accepts ME hatches.
 - **Built with:** IV hull, IV field generator (the hot cell comes first), 2 IV pumps and 4 IV circuits.
 - **By-products:** spent fuel → hot cell. Tritium → stored for fusion. Water → tower.
-- **Balance (as built, IV-A2):** an assembly lasts 200 channel-cycles of 400 ticks and gives 1.31 G EU (LEU in light water), 2.62 G (LEU or MOX in heavy water) or 0.66 G (breeder). An LEU assembly costs about 2–4 M EU plus 30 uraninite, 2 Zircaloy ingots and 100 mB of helium, so it returns about 400× in light water and 850× in heavy water. A full heavy-water reactor (131,072 EU/t, 9.4 G EU an hour) uses 3.6 LEU assemblies an hour. It balances: the rate the player feels is set by channels and dynamo hatches, not by fuel scarcity. If the fuel's final cost comes out far above 10 M EU per assembly, the lever is the wear chance (50 → 25 of 10,000 doubles an assembly's life), not the channels. The extreme combustion engines stay the uranium-free alternative.
+- **Balance (as built, IV-A2):** an assembly lasts 200 channel-cycles of 400 ticks and gives 1.31 G EU (LEU in light water), 2.62 G (LEU or MOX in heavy water) or 0.66 G (breeder). An LEU assembly costs 3.63 M EU (IV-A4's real figure, with the hot cell's enrichment) plus 30 uraninite, 2 Zircaloy ingots and 100 mB of helium, so it returns 361× in light water and 722× in heavy water. A full heavy-water reactor (131,072 EU/t, 9.4 G EU an hour) uses 3.6 LEU assemblies an hour. It balances: the rate the player feels is set by channels and dynamo hatches, not by fuel scarcity. If the fuel's final cost comes out far above 10 M EU per assembly, the lever is the wear chance (50 → 25 of 10,000 doubles an assembly's life), not the channels. The extreme combustion engines stay the uranium-free alternative.
 - **As built (IV-A2):**
   - The programmed circuit picks the core (1 LEU in light water, 2 LEU in heavy water, 3 MOX in heavy water, 4 breeder), because GTM's lookup would hide the light-water core behind the heavy-water one. The cores live in `data/grindless/tables/fission_cores.json`; cycles are 400 ticks.
   - Wear and spent fuel are GTM's chanced input and output (50 of 10,000 each, two rolls). GTM 7.5.3's OR chance logic is deterministic per machine: exactly one assembly per 200 channel-cycles, not a random lifetime.
@@ -454,6 +454,12 @@ All of them are IV recipes (7,680 EU/t unless a composed GTM stage sets another 
   - If the Tungstensteel-bit drilling stays too, uranium has two routes: pick one.
   - The resin needs a recipe (GTM has no polystyrene; styrene + sulfuric acid, *(tune)*).
 - **Source and licence:** real: in-situ recovery of uranium, about 55–56 % of the world's mine output in 2022–24 (World Nuclear Association), with the five-spot pattern, ion exchange and peroxide yellowcake.
+- **As built (IV-A4):**
+  - The recipe as designed, one per vein of `veins_leach.json`, End only: the sample (not consumed), 100 mB acid, 50 mB oxygen and the resin (1 %) give 2 uraninite and contained waste (1 %). The EU is the ore plant's pitchblende run plus one HV bore, 40,800 a batch, spent at IV (6 ticks at 6,800 EU/t). A batch is fast: throughput is bounded by acid, oxygen and resin, and one field outruns any number of reactors.
+  - The five wells are real pattern rows three blocks deep: the player digs five 3-deep holes. Outside the End the controller says why it does not run.
+  - Voiding is refused with `lib/no_voiding.js`, in the modifier and in `beforeWorking`. The second matters: GTM 7.5.3 restarts an idle machine's cached recipe without calling the modifier, and with voiding on its start check skips the room for the voided outputs.
+  - The resin is IV-A1's sulfonated polystyrene (a cation resin); real acid ISR uses strong-base anion resins, and the recipe can change if realism matters.
+  - All the figures live in `data/grindless/tables/uranium_cycle.json`, with each energy stage naming its source.
 
 #### Mercury solar works: `gtceu:mercury_solar_works`, type `gtceu:solar_processing` (Mercury)
 
@@ -528,6 +534,11 @@ All of them are IV recipes (7,680 EU/t unless a composed GTM stage sets another 
   - A new material and a new recipe for `iv.md`'s LEU assembly.
   - GTM has no hafnium, so the "nuclear-grade" zirconium skips the hafnium removal: the documents should say so.
 - **Source and licence:** real: Zircaloy (US Naval Reactors, 1950s), cold pilgering of cladding tubes and the helium backfill of light-water fuel rods.
+- **As built (IV-A4):** the three recipes of the design on circuits 1–3, their energy from GTM's stages, spent at IV:
+  - pellets: ten `form_glass` pressings and the 2,000 K blast stage of UO₂, 456,000 EU; the 500 mB of hydrogen is a non-consumed fluid input (never used up, not an output);
+  - tube: the small-pipe extrusion of Zircaloy's mass, 3,822 EU (a 1-tick IV recipe);
+  - assembly: one IV assembler stage, 1,536,000 EU.
+  - **Balance:** 3.63 M EU per LEU assembly (with the hot cell's enrichment), so the reactor returns 361× in light water and 722× in heavy water. Zirconium keeps up: about 2.5 HV drill runs on the End zircon vein per assembly.
 
 ### Reserve
 
