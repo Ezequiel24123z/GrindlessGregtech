@@ -494,24 +494,33 @@ export function buildModel(dump, rawCfg) {
       }
       slots.push(slotOf(i.alts, !!i.cap, i.label, i.kind, !!i.cat));
     }
-    for (const c of n.conditions) {
-      const dimCfg = cfg.conditions.dimension;
-      if (c.type === 'dimension' && typeof c.dimension === 'string' && dimCfg && (dimCfg.asKeys || asArray(dimCfg.asKeysFor).includes(c.dimension))) {
-        // obtainability audit (asKeys): the recipe needs the dim:<id> key, a fact for each dimension that's reached (and
-        // another pass adds the later eras' ones). `asKeysFor: [ids]` does the same only for those dimensions: a base outside
-        // the factory (the Moon), whose key is given by a tier rule (the trip). The reverse condition ("outside X") is met in
-        // any other dimension.
-        if (c.reverse !== true) slots.push(slotOf(['dim:' + c.dimension], true, `in ${c.dimension}`, 'cond'));
-        continue;
-      }
-      if (c.type === 'dimension' && typeof c.dimension === 'string' && !(cfg.conditions.dimension && cfg.conditions.dimension.ignore)) {
-        // the factory sits in one specific dimension (cfg.contextDimension): the recipe only applies where its condition says
-        const here = c.dimension === ctxDim;
-        if (c.reverse === true ? here : !here) {
-          slots.push(slotOf([], false, `only applies ${c.reverse === true ? 'outside' : 'in'} ${c.dimension}; the factory is in ${ctxDim}`, 'cond'));
+    // GTM ORs the dimension conditions of one recipe (DimensionCondition.isOr, RecipeHelper.checkConditions): together they make
+    // one slot, met when any of them is. Obtainability audit (asKeys): a dimension condition needs the dim:<id> key, a fact for
+    // each dimension that's reached (and another pass adds the later eras' ones). `asKeysFor: [ids]` does the same only for those
+    // dimensions: a base outside the factory (the Moon), whose key is given by a tier rule (the trip). The others are compared
+    // against the factory's dimension (cfg.contextDimension). A reverse condition ("outside X") that is keyed, or any condition
+    // that holds in the factory's dimension, meets the slot outright.
+    const dimCfg = cfg.conditions.dimension;
+    const keyedDim = (c) => !!dimCfg && !!(dimCfg.asKeys || asArray(dimCfg.asKeysFor).includes(c.dimension));
+    const dimGroup = n.conditions.filter((c) => c.type === 'dimension' && typeof c.dimension === 'string' && (keyedDim(c) || !(dimCfg && dimCfg.ignore)));
+    if (dimGroup.length > 0) {
+      let met = false;
+      const keys = [];
+      for (const c of dimGroup) {
+        if (keyedDim(c)) {
+          if (c.reverse === true) met = true;
+          else keys.push('dim:' + c.dimension);
+        } else if ((c.reverse === true) !== (c.dimension === ctxDim)) {
+          met = true;
         }
-        continue;
       }
+      if (!met) {
+        const where = dimGroup.map((c) => (c.reverse === true ? 'outside ' : 'in ') + c.dimension).join(' or ');
+        slots.push(keys.length > 0 ? slotOf(keys, true, where, 'cond') : slotOf([], false, `only applies ${where}; the factory is in ${ctxDim}`, 'cond'));
+      }
+    }
+    for (const c of n.conditions) {
+      if (dimGroup.includes(c)) continue;
       const rule = cfg.conditions[c.type] || cfg.conditions['*'];
       if (!rule || rule.ignore || c.reverse === true) continue;
       if (rule.unsupported) slots.push(slotOf(['cond:' + c.type], true, `condition ${c.type}`, 'cond'));
