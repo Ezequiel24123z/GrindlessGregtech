@@ -102,12 +102,13 @@ export function recipeTierOf(id) {
 /**
  * The pack's family veto (lv/multis.js): `vetoAbove: <tier>` skips the recipes filed under a folder above that tier
  * (`rules.isAboveTier`: the LV, MV and HV drills and greenhouses, the sealed dome); `onlyTier: <tier>` runs only that tier's folder
- * (`rules.recipeTier(recipe) !== tier`: the EV tripod). The steam machines have no veto hook, so they declare neither.
+ * (`rules.recipeTier(recipe) !== tier`: the EV tripod), and `onlyTier: ""` only the recipes with no tier folder (the steam drill and
+ * greenhouse, steam/machines.js, since 2026-10-25).
  */
 function tierAllows(e, recipeId) {
-  if (!e.vetoAbove && !e.onlyTier) return true;
+  if (e.vetoAbove === undefined && e.onlyTier === undefined) return true;
   const t = recipeTierOf(recipeId);
-  if (e.onlyTier) return t === e.onlyTier;
+  if (e.onlyTier !== undefined) return t === e.onlyTier;
   return t === '' || TIER_NAMES.indexOf(t) <= TIER_NAMES.indexOf(e.vetoAbove);
 }
 
@@ -414,7 +415,8 @@ export function buildModel(dump, rawCfg) {
     }
     if (entriesById.has(id)) warnings.push(`duplicate machine in the configuration: ${id}`);
     for (const f of ['vetoAbove', 'onlyTier']) {
-      if (e[f] !== undefined && !TIER_NAMES.includes(e[f])) warnings.push(`${id}: ${f} «${e[f]}» isn't a tier (${TIER_NAMES.join(', ')})`);
+      const ok = TIER_NAMES.includes(e[f]) || (f === 'onlyTier' && e[f] === '');
+      if (e[f] !== undefined && !ok) warnings.push(`${id}: ${f} «${e[f]}» isn't a tier (${TIER_NAMES.join(', ')}${f === 'onlyTier' ? ', or "" for the recipes with no tier folder' : ''})`);
     }
     entriesById.set(id, e);
     const reg = dump.machines.get(e.machine);

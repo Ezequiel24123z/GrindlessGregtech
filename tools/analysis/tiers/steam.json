@@ -90,6 +90,12 @@
       "note": "Mined or dug with wood/stone tools. Flint comes from gravel."
     },
     {
+      "id": "stones-gt",
+      "mode": "manual",
+      "items": ["gtceu:marble", "gtceu:red_granite"],
+      "note": "GTM 7.5.3's stone patches in the Overworld (GTPlacedFeatures/GTBiomeModifiers), mined by hand; tiers/obtain.json has the same source. Macerating red granite gives a chance of uranium dust (gtceu:macerator/macerate_red_granite), which the EV tier's radioactive check watches."
+    },
+    {
       "id": "plants",
       "mode": "manual",
       "items": [
@@ -244,6 +250,7 @@
     {
       "machine": "gtceu:steam_vein_drill",
       "types": ["gtceu:vein_drilling"],
+      "onlyTier": "",
       "maxEUt": 32,
       "needs": ["fluid:gtceu:steam"],
       "partsFromStructure": true,
@@ -256,6 +263,7 @@
     {
       "machine": "gtceu:steam_greenhouse",
       "types": ["gtceu:greenhouse"],
+      "onlyTier": "",
       "maxEUt": 32,
       "needs": ["fluid:gtceu:steam"],
       "partsFromStructure": true,
