@@ -26,6 +26,8 @@
 //                         (static; gg_test_recipe_lookup asks GTM's lookup)
 //   bee_removed           Productive Bees' gcteu:electric_blast_furnace/naquadah_bee is gone
 //   controller_recipe     grindless:assembler/naquadah_plant exists and holds its parts
+//   parallel_hatch_option both plants take GTM's Parallel Control Hatch (IV-B6's lib/parallel_hatch.js) as one more option of their part
+//                         cells, at most one, with the same size and part cells as before
 //   earth_cut_strips      iv.md decision 5, iridium and osmium only from Mercury: offworld_only.json's two Mercury strip entries are
 //                         applied (GT--'s sludge centrifuge without its iridium metal residue and rarest metal mixture, its inert metal
 //                         mixture leach without the mixture): the originals are gone and the rebuilt recipes keep every other output
@@ -570,6 +572,47 @@
       check('controller_recipe', outs.length === 1 && outs[0].id === NAQ && missing.length === 0, NP().craftingRecipe + ' -> ' +
         outs.map(function (x) { return x.id }).join(',') + ' from [' + ids.map(short).join(', ') + '] at ' + inputEUt(r) + ' EU/t' +
         (missing.length > 0 ? ' | missing: ' + missing.join(',') : ''))
+    })
+
+    safely('parallel_hatch_option', function () {
+      var problems = []
+      var lines = []
+      // size (w, h, d) and part cells of each structure: the hatch is one more option of the part cells, never a new cell
+      var want = { 'gtceu:naquadah_plant': [7, 4, 5, 39], 'gtceu:platinum_plant': [5, 5, 7, 35] }
+      Object.keys(want).forEach(function (id) {
+        var desc = global.grindless.patterns.describe(id)
+        if (!desc) {
+          problems.push(id + ': no structure description')
+          return
+        }
+        var w = desc.slices[0][0].length
+        var h = desc.slices[0].length
+        var d = desc.slices.length
+        var cells = 0
+        var options = 0
+        var limits = null
+        Object.keys(desc.symbols).forEach(function (ch) {
+          var sym = desc.symbols[ch]
+          var opts = sym.kind === 'oneOf' ? sym.options : [sym]
+          var ph = opts.filter(function (o) { return o.kind === 'part' && o.ability === 'parallel_hatch' })
+          if (ph.length === 0) return
+          options += ph.length
+          limits = ph[0].limits
+          desc.slices.forEach(function (rows) {
+            rows.forEach(function (row) {
+              for (var i = 0; i < row.length; i++) if (row.charAt(i) === ch) cells++
+            })
+          })
+        })
+        var ww = want[id]
+        if (w !== ww[0] || h !== ww[1] || d !== ww[2]) problems.push(id + ' is ' + w + 'x' + h + 'x' + d + ', was ' + ww.slice(0, 3).join('x'))
+        if (options !== 1 || !limits || limits.max !== 1) problems.push(id + ': ' + options + ' hatch options, limits ' + JSON.stringify(limits))
+        if (cells !== ww[3]) problems.push(id + ': the hatch option in ' + cells + ' cells, the part cells are ' + ww[3])
+        lines.push(short(id) + ' ' + w + 'x' + h + 'x' + d + ', the hatch option in its ' + cells + ' part cells, max ' + (limits ? limits.max : '?'))
+      })
+      var listed = (global.grindless.parallelHatch || {}).machines || []
+      Object.keys(want).forEach(function (id) { if (listed.indexOf(id) < 0) problems.push(id + ' is not in global.grindless.parallelHatch.machines') })
+      check('parallel_hatch_option', problems.length === 0, lines.join(' ; ') + (problems.length > 0 ? ' | problems: ' + problems.join('; ') : ''))
     })
 
     safely('balance', function () {

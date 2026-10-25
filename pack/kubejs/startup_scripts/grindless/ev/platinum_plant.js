@@ -30,7 +30,9 @@
 // gives no iridium or osmium (docs/eras/iv.md decision 5: data/grindless/tables/offworld_only.json strips the iridium metal residue and
 // the rarest metal mixture from it), so modes 1 and 2 give none; mode 3 refines Mercury's iridosmine.
 //
-// Machine class: GTM's plain electric multiblock (WorkableElectricMultiblockMachine), so its overclock is GTM's.
+// Machine class: GTM's plain electric multiblock (WorkableElectricMultiblockMachine), so its overclock is GTM's, after a parallel hatch's
+// copies when one sits in a part cell (lib/parallel_hatch.js; IV-B6's mechanism, added by IV-B3: the IV hatch runs up to 4 copies, each
+// at the recipe's EU/t, so 4 EV recipes at once need IV voltage; the electrode, a chanced input, is not multiplied).
 //
 // Geometry (slices back -> front, rows bottom -> top; the controller is in the front slice, middle column, row 1):
 //   row 0   floor: the 20 cells of its edge are `X` (inert casing or a part), the 15 of the middle are inert casing
@@ -40,8 +42,9 @@
 //   row 4   roof of tempered glass
 // The 35 `X` cells are casing or parts: 1-2 EV energy hatches, 1 input bus, 1 output bus, 3 input hatches and 4 output hatches (the most
 // fluids one recipe takes in or gives out: three input hatches serve every recipe, and the rhodium-ruthenium one fills the four output
-// hatches). That is 10 or 11 parts, so at least 24 cells are inert casing. ME buses and hatches have the same abilities as the plain
-// ones and fit the same cells.
+// hatches), and at most one parallel hatch. That is 10 to 12 parts, so at least 23 cells are inert casing. The parts' limits set that
+// floor, so the casing has no minimum of its own (it had 24, the floor of 11 parts, until IV-B3 added the parallel hatch; every build
+// that formed still forms). ME buses and hatches have the same abilities as the plain ones and fit the same cells.
 //
 // Textures: overlay dir grindless:block/multiblock/platinum_plant, base casing GTM's inert (PTFE) machine casing; item/platinum_electrode.
 // Names / tooltips: client_scripts/grindless/ev_platinum_plant_lang.js.
@@ -67,7 +70,7 @@
   // takes 7); items out: the metals and the byproduct dusts, a whole amount plus a chanced remainder (up to 10); fluids in: the reagents
   // (3); fluids out: the acids, gases and solutions the line lets go (4)
   PP.maxIO = { itemsIn: 8, itemsOut: 12, fluidsIn: 3, fluidsOut: 4 }
-  PP.hatches = { energy: [1, 2], inputBus: 1, outputBus: 1, inputHatches: 3, outputHatches: 4 }
+  PP.hatches = { energy: [1, 2], inputBus: 1, outputBus: 1, inputHatches: 3, outputHatches: 4, parallelHatch: [0, 1] }
 
   // ---------------------------------------------------------------- pattern
 
@@ -80,13 +83,16 @@
     slices: [BACK, HALL, HALL, HALL, HALL, HALL, FRONT],
     symbols: {
       S: Pat.controller(),
+      // the casing fills the cells the parts leave; a minimum on it would make tools/analysis model the optional parallel hatch as
+      // the only filler, so the EV plant would seem to need an IV hatch to form
       X: Pat.oneOf(
-        Pat.block(INERT, { min: 24 }),
+        Pat.block(INERT),
         Pat.part('energy_input', { min: 1, max: 2 }),
         Pat.part('input_bus', { exact: 1 }),
         Pat.part('output_bus', { exact: 1 }),
         Pat.part('input_hatch', { exact: 3 }),
-        Pat.part('output_hatch', { exact: 4 })
+        Pat.part('output_hatch', { exact: 4 }),
+        G.parallelHatch.part()
       ),
       I: Pat.block(INERT),
       P: Pat.block(PIPE),
@@ -124,6 +130,8 @@
       .langValue('Platinum Plant')
       .rotationState(RotationState.NON_Y_AXIS)
       .recipeType('pgm_refining')
+      // a parallel hatch's copies, then GTM's default overclock (IV-B6's helper; without a hatch, the overclock alone, as before)
+      .recipeModifier(G.parallelHatch.modifier(G.parallelHatch.overclock))
       .appearanceBlock(GTBlocks.CASING_PTFE_INERT)
       .pattern(function (def) { return Pat.build(def, SPEC) })
       ["tooltips(net.minecraft.network.chat.Component[])"]([
@@ -131,7 +139,8 @@
         Text.translate('grindless.machine.platinum_plant.tooltip.1'),
         Text.translate('grindless.machine.platinum_plant.tooltip.2'),
         Text.translate('grindless.machine.platinum_plant.tooltip.4'),
-        Text.translate('grindless.machine.platinum_plant.tooltip.3')
+        Text.translate('grindless.machine.platinum_plant.tooltip.3'),
+        Text.translate('grindless.machine.parallel_hatch.tooltip')
       ])
       .workableCasingModel(INERT_TEXTURE, 'grindless:block/multiblock/platinum_plant')
   })
