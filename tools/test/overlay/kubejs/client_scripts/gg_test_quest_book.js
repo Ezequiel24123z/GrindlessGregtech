@@ -38,12 +38,14 @@
     { name: 'gg_book_welcome', chapter: 'welcome' },
     { name: 'gg_book_steam_age', chapter: 'steam_age' },
     { name: 'gg_book_hv_rocket', chapter: 'hv_age', x: 20, y: 0 },
-    { name: 'gg_book_mv_end', chapter: 'mv_age', x: 16, y: 6 },
+    { name: 'gg_book_mv_end', chapter: 'mv_age', x: 14, y: 6 },
     { name: 'gg_book_ev_age', chapter: 'ev_age' },
     { name: 'gg_book_iv_age', chapter: 'iv_age', x: 10, y: -1.5 },
     { name: 'gg_book_iv_planets', chapter: 'iv_age', x: 30, y: -2 }
   ]
   var OPEN_TICKS = 60
+  // the Processing Lines group: three of its charts, centred on their middles
+  SHOTS.push({ name: 'gg_book_pl_lv', chapter: 'pl_lv' }, { name: 'gg_book_pl_ev', chapter: 'pl_ev' }, { name: 'gg_book_pl_iv', chapter: 'pl_iv' })
   var c = { holding: false, since: 0, errors: 0, ageField: null, gaveUp: false, tipDone: '', book: null }
 
   function val(key) {
