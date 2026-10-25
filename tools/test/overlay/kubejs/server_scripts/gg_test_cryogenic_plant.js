@@ -218,7 +218,8 @@
     return t >= NIGHT_FROM && t <= NIGHT_TO
   }
 
-  // the curve itself, as this Rhino evaluates it: run 1 of 2026-10-25 found the sun never set with it (only reported, never judged)
+  // the curve itself, as this Rhino evaluates it (only reported, never judged): on 2026-10-25 it showed Math.PI is undefined here, so the
+  // curve came out NaN and the sun never set until the bounds became integers
   function rhinoCurveText() {
     var parts = []
     try {
