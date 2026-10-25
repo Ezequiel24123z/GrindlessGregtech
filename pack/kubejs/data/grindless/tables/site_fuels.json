@@ -3,12 +3,12 @@
   "_how_it_is_used": [
     "Read by server_scripts/grindless/power/generators.js (published as global.grindless.power.site) and the smoke test gg_test_mars_site.js.",
     "A fuel needs air to burn. Every recipe of burningTypes gets one dimension condition per entry of airDimensions. GTM ORs the dimension conditions of a recipe (DimensionCondition.isOr in GTM 7.5.3), so the fuel burns in any of those dimensions and nowhere else: not on the Moon, on Mars, in any orbit or on any planet added later. Reversed conditions cannot say 'not the Moon and not Mars': ORed, they pass everywhere.",
-    "airDimensions are the dimensions of Earth in planets.json without its orbit: they have breathable air. A new dimension with air (from a new mod) has to be added here, or nothing burns in it.",
+    "airDimensions are the dimensions of Earth in planets.json without its orbit: they have breathable air. A new dimension with air (from a new mod) has to be added here, or nothing burns in it. Their order is the order of the conditions: GTM's recipe view (GTRecipeWidget) draws every dimension marker of a recipe at the same spot, so only the last one shows in EMI. The Overworld goes last (the building dimensions have no marker and would show as a barrier).",
     "burnAnywhere: fuels that carry their own oxidizer, and lava, which heats a boiler without burning. Their recipes get no condition. A recipe matches when one of its fluid inputs is the fluid or its forge: tag (for example forge:lava).",
     "newFuels: fuel recipes of ours. gtmDuration is the duration GTM would give the recipe; generators.js doubles it like every other generator recipe (DECISIONS.md, power pass), so the EU per mB matches the rest. They are made with no condition: they burn anywhere.",
     "A recipe that already carries a dimension condition is left alone: it was placed on purpose."
   ],
-  "airDimensions": ["minecraft:overworld", "minecraft:the_nether", "minecraft:the_end", "grindless:void", "grindless:flat"],
+  "airDimensions": ["grindless:flat", "grindless:void", "minecraft:the_end", "minecraft:the_nether", "minecraft:overworld"],
   "burningTypes": [
     "gtceu:combustion_generator",
     "gtceu:gas_turbine",
