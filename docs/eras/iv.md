@@ -95,15 +95,29 @@ What it gains: **IV's energy without burning anything, with a reactor that GTM d
 
 What it gains: **radioactive material never passes through hands, and it makes two recipes that are impossible at small scale.** GTM flags uranium, plutonium, radon and tritium as radioactive; here they enter through buses and leave to the network. The circuit selects the mode. Modes 1 and 4 are composed from the live recipes, with the same energy and yield, like the EV platinum plant; modes 2 and 3 are ours.
 
-1. **Enrichment:** 3 uraninite + 4,000 mB of HF → 0.1 U-235 + 0.9 U-238 + 2,000 mB of water + 4,000 mB of F₂ (steps `uranium_hexafluoride`, `uranium_hexafluoride_separation` and the two electrolyses). The UF₆ does not leave and the fluorine comes back: the hot cell returns more F₂ than it needs.
-2. **Fuel:** LEU assemblies (U-235 + U-238 + O₂, with a TS plate cladding), MOX (Pu + U-238) and breeder; RTG pellets (plutonium oxide); Pu-Be neutron source (`grindless:pube_neutron_source`, with Nether beryllium).
-3. **Reprocessing** (PUREX): spent fuel + HNO₃ → U-238 and Pu-239 back + Xe, Kr, Cs and Nd + NOₓ for the Ostwald tower + vitrified waste (`gtnn:radioactive_waste`, a GT-- item with no use).
-4. **Radon:** U-238 + 10,000 mB of air → 1,000 mB of Rn (`radon_from_uranium_238`). The 8 plutonium ingots that GTM returns as dust stay inside as a catalyst, and the dust → ingot loop is closed.
+1. **Enrichment:** 30 uraninite + 40,000 mB of HF → 1 U-235 + 9 U-238 + 20,000 mB of water + 40,000 mB of F₂ (steps `uranium_hexafluoride`, `uranium_hexafluoride_separation` and the two electrolyses), one LEU assembly's uranium. The UF₆ does not leave, and the HF's fluorine comes back as F₂, no more (decision 10).
+2. **Fuel:** MOX (oxide: 2 Pu + 8 U-238 + O₂) and breeder (metal: a Pu ingot core in 9 U-238 ingots), both in Zircaloy tubes with helium; RTG pellets (PuO₂ in Pt-Rh foil); Pu-Be neutron source (`grindless:pube_neutron_source`, PuBe₁₃ with Nether beryllium, in stainless steel foil). Fresh LEU is made by the fuel fabrication plant (decision 7).
+3. **Reprocessing** (PUREX): a spent assembly + 4,000 mB HNO₃ → U-238 and Pu-239 back + Xe and Kr, Cs and Nd (10 % chances) + 4,000 mB NO₂ for GTM's nitric acid recipes + one vitrified waste (`gtnn:radioactive_waste`, a GT-- item with no use: the fission products and the chopped cladding).
+4. **Radon:** U-238 + 10,000 mB of air → 1,000 mB of Rn (`radon_from_uranium_238`). The 8 plutonium ingots that GTM returns as dust stay inside as a catalyst, so the first radon needs no plutonium: radon → Quantum Star → IV field generator → reactor works before any plutonium exists.
 
 - **Structure:** radiation-proof casing cells, laminated glass windows and manipulators; 1 or 2 IV hatches; accepts ME.
-- **Built with:** IV hull, centrifuge, chemical reactor and IV electrolyzer, 2 IV robot arms and 4 IV circuits.
+- **Built with:** IV hull, IV centrifuge, IV chemical reactor and an **EV electrolyzer** (GTM's IV one needs osmium wire, which is Mercury's), 2 IV robot arms and 4 IV circuits.
 - **By-products:** F₂ → the HF for the naquadah plant. Xe → enriched naquadah. Kr and Nd → noble gases and magnets. Cs → stored for naquadria (ZPM). Waste → stored contained and never emptied. Thorium → stored; lead → casings.
 - **Cut-down option:** without reprocessing or the breeder, the essentials remain: enrichment, LEU and radon.
+- **As built (IV-A3):**
+  - The circuit is the mode (1 enrichment, 2 fuel, 3 reprocessing, 4 radon); the recipes live in `data/grindless/tables/hot_cell.json`. Modes 1 and 4 are composed at every load by `server_scripts/grindless/lib/compose.js`, the platinum plant's composer as a library, and spend the stages' energy at 7,680 EU/t.
+  - Structure: 7 wide × 5 high × 4 deep, two 2×2×2 cells of radiation-proof casing on a light concrete floor, two laminated glass windows, tungstensteel frame manipulators, PTFE pipe vessels and filter casings on the roof. Voiding items or fluids is refused, so the waste stays contained.
+  - Every recipe of the type has its own ingredient set: MOX and the breeder differ by form (oxide dust and O₂ against metal ingots), the RTG pellet by its Pt-Rh foil, the Pu-Be source by beryllium.
+- **Plutonium balance (IV-A3, next to the reactor's EU):**
+
+  | Fuel | EU per assembly | Pu in | Pu back from its spent assembly | Net Pu |
+  |---|---|---|---|---|
+  | LEU (light or heavy water) | 1.31 or 2.62 G | 0 | 1 | +1 |
+  | MOX (heavy water) | 2.62 G | 2 | 1 | −1 |
+  | Breeder | 0.66 G | 1 | 2 | +1 |
+  | RTG pellet, Pu-Be source | — | 1 | — | −1 |
+
+  One spent LEU assembly pays for one MOX. A breeder and a MOX together are plutonium-neutral and burn 2 U-238 for 3.28 G EU: the closed cycle runs on enrichment tails. The hot cell spends 3.07 M EU to make a MOX or breeder assembly, 4.61 M to reprocess one and 1.02 M to enrich one LEU's uranium, against 0.66–2.62 G per assembly.
 
 ### Naquadah plant: `gtceu:naquadah_plant`
 
@@ -156,7 +170,7 @@ What it gains: **the hands-free neutron window and the superacid inside.** The l
 
 ## AE2 between planets: the IV step
 
-EV leaves the ME P2P tunnel trunk, power over EU P2P (or FE P2P with GTM converters for FE devices; 32,768 EU/t crossing, measured) and the pairs the base sets up. IV goes up one step:
+EV leaves the ME P2P tunnel trunk, power over EU P2P (or FE P2P with GTM converters for FE devices; 32,768 EU/t crossing, measured with EV parts: the tunnel itself has no cap) and the pairs the base sets up. IV goes up one step:
 
 - **Two more pairs,** Earth–Venus and Earth–Mercury. Their far half is built there on the first visit, and both sides run with loaded chunks (FTB Chunks).
 - **More amperage:** EU P2P tunnels (`eup2p`) already cross dimensions and carry EV power since EV, and they pay the same toll as FE (2.5% of the energy, in AE). The IV step is amperage. Target: 131,072 EU/t crossing. eup2p's laser P2P tunnel (`LaserP2PTunnelPart`, id to verify) is the candidate. The heat engine sends home what is left over, and the reactor covers Mercury's night.
@@ -279,7 +293,7 @@ What changed while EV was built, and what the IV design has to take into account
 - **Power by site.** Fuels only burn in the dimensions with air (`data/grindless/tables/site_fuels.json`, an allowlist that GTM ORs), so "no combustion" on Venus and Mercury needs no more code. An IV machine that burns fuel in a script-added recipe calls `global.grindless.power.burnsInAir(builder)`. A byproduct that must have a destination can refuse fluid voiding, like the combined-cycle plant (`grindless.steam_outputs.no_voiding`).
 - **Weather.** `space/airless_weather.js` keeps every dimension of the other planets dry, Venus and Mercury included. If Venus's clouds should ever be weather, Venus has to be exempted there.
 - **Family veto.** A family recipe of a tier lives under `<type>/<tier>/`, and every lower machine skips the folders above its own tier; the steam machines skip every tier folder. The Tungstensteel-bit recipes that the older home drills should run (the pitchblende vein, *Route* step 2) therefore cannot live under `vein_drilling/iv/`. They go in the folder of the lowest drill meant to run them, or the veto gets an explicit exception.
-- **AE2.** EU P2P is the main power route between planets: 32,768 EU/t per pair across the bridge, measured in EV, with AE2's 2.5% toll.
+- **AE2.** EU P2P is the main power route between planets. The tunnel has no cap of its own (EUP2P passes the voltage and splits the amperage), so 16 A IV hatches at each end carry the reactor's 131,072 EU/t; AE2 takes its 2.5 % toll. The laser tunnel (`eup2p:laser_p2p_tunnel`) exists, but in stock GTM only LuV machines take laser hatches, so IV doesn't need it.
 - **GTM's HV fluid drilling rig** arrives with Mars (tungsten carbide gears), at the end of EV.
 
 ## Raising IV to the target (orchestrator, 2026-10-25)
@@ -341,11 +355,17 @@ All of them are IV recipes (7,680 EU/t unless a composed GTM stage sets another 
   - IV: the reactor and the tritium removal facility.
   - LuV: deuterium for fusion.
 - **Risks:**
-  - A non-consumed fluid input from KubeJS (`notConsumableFluid`) must be verified. The fallback is a run-start check in the modifier, like the cryogenic plant's radiator check.
+  - A non-consumed fluid input from KubeJS (`notConsumableFluid`) was proven on the bench by IV-A5: the plant refuses to start below 1,000 mB of H₂S, never drains it, and takes it once under overclock. No run-start check is needed.
   - LuV's D-T fusion burns 125 mB of D every 16 ticks, so LuV needs a bigger source (Saturn, as `journey.md` says).
 - **Source and licence:**
   - Real: the Girdler sulfide process (Spevack, 1943; Savannah River, 1952; Bruce Heavy Water Plant), with vacuum distillation to finish; Vemork's electrolytic enrichment as history.
   - The catalog's "heavy-water tower" (our own idea).
+- **As built (IV-A5):**
+  - Circuit 1 exchange, circuit 2 finishing; the recipes live in `data/grindless/tables/heavy_water_plant.json`.
+  - EU: each step at GTM's own price, summed and spent under the design's caps: exchange 1,907 EU/t × 58 t (110,606 EU), finishing 477 EU/t × 70 t (33,390 EU). Both run on an EV hatch and overclock above it.
+  - The depleted water is plain `minecraft:water` (inert; the plant allows voiding); the distilled water is the condensed steam (GTM's 160:1). Any steam works, GTM's boilers' too.
+  - Structure: a 3×3×10 cold tower and a 3×3×14 hot tower of inert PTFE casing, a 2×2 titanium pipe bridge, a 1×1×8 tungstensteel vacuum column, 14 part cells in the towers' feet. No dimension condition: it burns nothing.
+  - **Yield next to the reactor:** 340 EU, 0.025 ice and 40 mB of steam per mB of heavy water. A full heavy-water reactor needs 3,600 mB an hour: 90 ice an hour (9 with the tritium removal facility), 17 EU/t on average, 79 s of one plant an hour.
 
 #### Venus acid works: `gtceu:venus_acid_works`, type `gtceu:acid_cracking` (Venus)
 
@@ -392,7 +412,7 @@ All of them are IV recipes (7,680 EU/t unless a composed GTM stage sets another 
   - Out: 2,000 mB HF + gypsum dust *(tune, in GTM's gypsum units)*.
   - EU: GTM's acid attack on a calcium mineral, `phosphoric_acid_from_apatite` (9,600 EU per 5,000 mB of acid), gives 1,920 EU per 1,000 mB.
   - About 61 fluorite then replace the 385 mica per 2 naquadah.
-- **Fluorite source:** a new Earth vein of fluorite, barite, galena and sphalerite (a Mississippi Valley-type deposit), drilled by the existing drills. Fluorite stays hidden until IV, because nothing uses it before the kiln.
+- **Fluorite source:** a new Earth vein of fluorite, barite, galena and sphalerite (a Mississippi Valley-type deposit), drilled by the existing drills from steam on (IV-A1). Fluorite shows in EMI from then on: nothing uses it before the kiln, and it is inert (it can be voided until IV).
 - **Byproducts:**
   - Gypsum goes to GTM's concrete (`mixer/concrete_from_calcite`) and from there to the radiation-proof casing of the reactor and the hot cell.
   - HF goes to the naquadah plant, the UF₆ and PTFE.
