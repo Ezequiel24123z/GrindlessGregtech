@@ -90,7 +90,7 @@ Rules: additive, without changing the shape of any multiblock, without raising q
 
 ## 5. Targets from EV onward so that growth is exponential
 
-**Updated 2026-10-24/25.** The user then set a stronger target (`DECISIONS.md`, rule 7 of `AGENTS.md`): our progression multiblocks grow by about **×1.35 per era** from EV on (EV 10 or more, IV 13–14, LuV about 18, then ×1.35 of the previous era). That target replaces the old "2–3 per era" figure, and the "New own multiblocks" and "Family steps" columns below together have to add up to it. The rest of this section still holds: lines and cross-links must grow too.
+**Updated 2026-10-24/25.** The user then set a stronger target (`DECISIONS.md`, rule 7 of `AGENTS.md`): our progression multiblocks grow by about **×1.35 per era** from EV on (EV ended with 11, so IV about 15 and LuV about 20, then ×1.35 of the previous era; `docs/eras/iv.md`, "Raising IV to the target", brings IV to 15). That target replaces the old "2–3 per era" figure, and the "New own multiblocks" and "Family steps" columns below together have to add up to it. The rest of this section still holds: lines and cross-links must grow too.
 
 The axis that can really compound without inflating quantities is the **density of cross-links**: adding multiblocks is not enough. Each new line must be required to link to **more earlier and more distant lines** than the previous era.
 

@@ -274,3 +274,302 @@ What changed while EV was built, and what the IV design has to take into account
 - **Family veto.** A family recipe of a tier lives under `<type>/<tier>/`, and every lower machine skips the folders above its own tier; the steam machines skip every tier folder. The Tungstensteel-bit recipes that the older home drills should run (the pitchblende vein, *Route* step 2) therefore cannot live under `vein_drilling/iv/`. They go in the folder of the lowest drill meant to run them, or the veto gets an explicit exception.
 - **AE2.** EU P2P is the main power route between planets: 32,768 EU/t per pair across the bridge, measured in EV, with AE2's 2.5% toll.
 - **GTM's HV fluid drilling rig** arrives with Mars (tungsten carbide gears), at the end of EV.
+
+## Raising IV to the target (orchestrator, 2026-10-25)
+
+Rule 7 of `AGENTS.md`: EV ended with 11 multiblocks of ours, so IV needs about 15. As designed above, IV has 8:
+- the reactor, the hot cell and the naquadah plant;
+- the pressurized and Mercury drills;
+- the Venus heat engine;
+- the Mercury solar field;
+- the interferometer.
+
+The RTG is a single block and the platinum plant's mode 3 belongs to an EV machine, so neither counts. Seven are added, which makes 15. They come from a design pass on 2026-10-25: the machine catalog, the Leisure ideas (ideas only) and real engineering. Each closes a hole the design already had:
+- deuterium had no source;
+- fluorine was a wall of raw quantity;
+- Venus had no water or oxygen of its own;
+- Mercury had no site parts;
+- the reactor's tritium had no contained route;
+- the family veto blocked the Tungstensteel-bit route to uranium;
+- the fuel cladding made no physical sense.
+
+All of them are IV recipes (7,680 EU/t unless a composed GTM stage sets another figure) through the pattern helper, with ME parts and names in `en_us` and `es_es`. Every id was checked against the dump, GTM's source and `pack/kubejs`, with no clash. Figures marked *(tune)* are set when the machine is built.
+
+| Site | Ours in IV after the raise |
+|---|---|
+| Earth | fission reactor, hot cell, naquadah plant, heavy-water plant, fluorspar kiln, fuel fabrication plant |
+| The End | uranium in-situ leach field |
+| Moon | tritium removal facility |
+| Venus (and Mars) | pressurized drill, heat engine, acid works |
+| Mercury | Mercury drill, solar field, interferometer, solar works |
+
+### The seven added
+
+#### Heavy-water plant: `gtceu:heavy_water_plant`, type `gtceu:isotope_exchange` (Earth)
+
+- **What it gains:**
+  - A separation GTM does not have: deuterium enrichment by dual-temperature exchange.
+  - Several steps in one: melting, exchange and finishing.
+  - The pack's only deuterium source, since EV removed `hydrogen_separation`.
+  - It replaces `iv.md`'s "distillation tower (our recipe)": the distillation tower only does the last step in reality.
+- **Recipes** (the circuit picks the mode):
+  1. **Exchange, a batch of 16:**
+     - In: 16 `gtceu:deuterium_rich_ice_dust` + 25,600 mB steam + an H₂S charge (≥ 1,000 mB in its own hatch, not consumed).
+     - Out: 3,200 mB heavy-water concentrate (`gtceu:heavy_water_concentrate`, about 20 % D₂O, the real GS product) + 12,800 mB depleted water + 160 mB distilled water (the condensed steam, at GTM's 160:1).
+     - EU per ice: the melt at GTM's `extractor/snow_block_extraction` rate (512 EU per 1,000 mB) + the exchange at the removed `centrifuge/hydrogen_separation` rate (3,200 EU per 40 mB of D, so 80 EU per mB of D; 80 mB here) = 6,912 EU.
+     - The batch is 110,592 EU: 1,920 EU/t for 58 t. The steam per ice is *(tune)*.
+  2. **Finishing:** 1,000 mB concentrate → 200 mB heavy water (`gtceu:heavy_water`) + 800 mB distilled water, at `distillation_tower/distill_water_large`'s rate (19,200 EU per 576 mB): 33,333 EU, 480 EU/t for 70 t.
+  - **Yield:** 1 ice → 40 mB D₂O → 80 mB D in GTM's electrolyzer (`gtceu:heavy_water`, decision 10). The reactor full of heavy water (4 channels, 5 mB per 20 s cycle) needs 3,600 mB/h, which is about 90 ice an hour and 17 EU/t on average.
+- **Byproducts:**
+  - Depleted water is inert: it goes to the network or is voided.
+  - The distilled water goes to the network.
+  - The H₂S stays in the plant: it is a charge, not a cost.
+  - The heavy water goes to the reactor and to electrolysis (deuterium for LuV, and O₂).
+- **Structure** (≤ 16 high): a cold tower (3×3×10) and a hot tower (3×3×14) of inert machine casing, two blocks apart, joined at mid-height by a bridge of titanium pipe casings (the heat exchanger). Beside them stands a 1×1×8 vacuum column of tungstensteel pipe casing. Parts go at the towers' feet.
+- **Controller:** IV hull + distillation tower controller + IV fluid heater + 2 IV pumps + 4 IV circuits.
+- **Why it is not a big cube:** two towers of different heights show the hot-cold cycle. It needs another plant's steam and the refinery's H₂S.
+- **Crossings:**
+  - EV: Mars ice from the tripod, and steam from the combined-cycle plant and hot strip mill, which refuse to void it.
+  - HV: the refinery's H₂S.
+  - IV: the reactor and the tritium removal facility.
+  - LuV: deuterium for fusion.
+- **Risks:**
+  - A non-consumed fluid input from KubeJS (`notConsumableFluid`) must be verified. The fallback is a run-start check in the modifier, like the cryogenic plant's radiator check.
+  - LuV's D-T fusion burns 125 mB of D every 16 ticks, so LuV needs a bigger source (Saturn, as `journey.md` says).
+- **Source and licence:**
+  - Real: the Girdler sulfide process (Spevack, 1943; Savannah River, 1952; Bruce Heavy Water Plant), with vacuum distillation to finish; Vemork's electrolytic enrichment as history.
+  - The catalog's "heavy-water tower" (our own idea).
+
+#### Venus acid works: `gtceu:venus_acid_works`, type `gtceu:acid_cracking` (Venus)
+
+- **What it gains:** a recipe that exists only on Venus. It makes water and oxygen from the clouds, and the planet's 737 K does the acid's dehydration step. The base stops needing shipped water for the pressurized drill's heat tax and for the heat engine.
+- **Recipe** (`.dimension('gcyr:venus')`):
+  - In: 1,000 mB sulfuric acid (GTM's gas collector, cloud recipe) + a platinum gauze (`grindless:platinum_gauze`, 0.1 % wear *(tune)*).
+  - Out: 1,000 mB distilled water + 1,000 mB O₂ (+ 1,000 mB SO₂, see byproducts).
+  - The stoichiometry is GTM's `sulfur_trioxide` and `sulfuric_acid_from_trioxide` run backwards.
+  - The EU is that of `electrolyzer/distilled_water_electrolysis` (45,000 EU per 1,000 mB): cracking the acid costs what splitting water costs. 7,680 EU/t for 6 t is about 46,080 EU. There is no discount: Venus's heat is the recipe's condition, not a price cut.
+- **Byproducts:**
+  - Water goes to the drill, the heat engine and the network.
+  - O₂ goes to the IV oxygen spreader and the suits; the surplus goes home as LOX.
+  - SO₂, in circuit 1, goes back into the Venusian air inside the recipe. It is Venus's own gas: below the clouds the planet does this same decomposition.
+  - SO₂, in circuit 2, is kept in a hatch (voiding refused) for home's LV sulfide roaster, whose contact plant turns it into acid and steam.
+  - Which circuit the base uses is a decision to take.
+- **Structure:**
+  - a 5×5 hot plate of Venusian regolith casing (the site casing) on the ground;
+  - a 3×3×6 bayonet decomposer of titanium pipe casings, with the gauze inside;
+  - a 3×3×10 condenser stack with heat vents beside it.
+  
+  Parts go at the edge of the plate.
+- **Controller:** IV hull + IV chemical reactor + IV fluid heater + 2 platinum gauzes + 4 IV circuits.
+- **Why it is not a big cube:** a plate, a decomposer and a stack. It works only on Venus and is fed by a collector up in the clouds.
+- **Crossings:**
+  - GTM's gas collector (Venus recipes);
+  - EV: the platinum plant (gauze) and the Moon's cryogenic plant (LOX);
+  - LV: the sulfide roaster (SO₂, circuit 2);
+  - IV: the pressurized drill and heat engine.
+- **Risks:**
+  - AE2 moves water for free, so the gain is the site recipe and the oxygen, like the regolith cell's.
+  - The gas collector's altitude condition still has to be verified on GCYR's Venus.
+- **Source and licence:**
+  - Real: Venus cloud ISRU (Mogul et al., *JGR Planets* 2025; Landis, "Colonization of Venus", 2003); the acid decomposition section of the sulfur–iodine cycle (General Atomics) and the hybrid sulfur cycle (Westinghouse); Sandia's bayonet decomposer.
+  - The catalog's cloud harvester (GTL's Venus acid): idea only.
+
+#### Fluorspar kiln: `gtceu:fluorspar_kiln`, type `gtceu:fluorspar_digestion` (Earth)
+
+- **What it gains:** the pack's only fluorine route that is not silicate electrolysis.
+  - The naquadah plant uses about 40,500 mB of F per 2 naquadah. GT--'s live chain was checked in the dump: 42,000 mB HF in and 1,500 back through `titanium_trifluoride_separation`.
+  - Today's sources are electrolyses: mica (19 dust → 2,000 mB F), lepidolite (20 → 2,000), topaz (10 → 1,000), pyrochlore (11 → 1,000) and biotite (22 → 2,000).
+  - That means about 385 mica dust per 2 naquadah, a wall of raw quantity (rule 2). The kiln turns it into a line (decision 10, the fluorine budget).
+- **Recipe:**
+  - In: 3 fluorite dust (`gcyr:fluorite`, CaF₂: GCYR already registers it, with no recipe and no vein today) + 1,000 mB sulfuric acid.
+  - Out: 2,000 mB HF + gypsum dust *(tune, in GTM's gypsum units)*.
+  - EU: GTM's acid attack on a calcium mineral, `phosphoric_acid_from_apatite` (9,600 EU per 5,000 mB of acid), gives 1,920 EU per 1,000 mB.
+  - About 61 fluorite then replace the 385 mica per 2 naquadah.
+- **Fluorite source:** a new Earth vein of fluorite, barite, galena and sphalerite (a Mississippi Valley-type deposit), drilled by the existing drills. Fluorite stays hidden until IV, because nothing uses it before the kiln.
+- **Byproducts:**
+  - Gypsum goes to GTM's concrete (`mixer/concrete_from_calcite`) and from there to the radiation-proof casing of the reactor and the hot cell.
+  - HF goes to the naquadah plant, the UF₆ and PTFE.
+  - Unreacted fluorite goes back to the feed.
+- **Structure:** a 3×3×13 rotary kiln of heatproof machine casing on 3 roller stands (steel frames), turned by a gearbox, with a 3×3×6 HF scrubber and condenser of inert machine casing at its hot end.
+- **Controller:** IV hull + IV electric furnace + IV chemical reactor + 2 IV pumps + 4 IV circuits.
+- **Why it is not a big cube:** a long kiln and a tower. It needs a new ore and LV's acid.
+- **Crossings:**
+  - LV: the roaster's acid (or Venus's);
+  - Steam and LV: the vein's galena and sphalerite;
+  - IV: the naquadah plant, the UF₆, and the reactor's casing through concrete.
+- **Risks:**
+  - A new vein (it generates only in new chunks; the drill recipes appear at once) and the hidden-items table.
+  - GCYR's fluorite has to be checked: CaF₂ components and no decomposition, which the dump confirms.
+- **Source and licence:** real: industrial HF from fluorspar and sulfuric acid in rotary kilns at about 200–250 °C. GCYR 0.2.9's fluorite material (LGPL-3.0).
+
+#### Uranium in-situ leach field: `gtceu:isr_wellfield`, type `gtceu:in_situ_leaching` (the End)
+
+- **What it gains:** uranium with no drill bit and no crushing: a leaching solution dissolves it in place. It replaces step 2 of `iv.md`'s route (the Tungstensteel bit in the older drills), which the family veto blocks (`iv.md`'s last section).
+- **Recipe** (`.dimension('minecraft:the_end')`):
+  - In: the pitchblende vein sample (not consumed) + 100 mB sulfuric acid + 50 mB O₂ + an ion-exchange resin (`grindless:ion_exchange_resin`, 1 % wear *(tune)*).
+  - Out: 2 uraninite dust + `gtnn:radioactive_waste` at 1 % (the radium in the eluate).
+  - EU: the ore plant's pitchblende run (`grindless:ore_processing/mv/pitchblende_water`, 39,200 EU) + one bore of the HV drill *(tune)*.
+- **Byproducts:**
+  - Thorium and lead stay in the ground: the solution does not take them.
+  - The barren solution is re-injected inside the recipe; that is the 100 mB loss.
+  - The radium sludge goes to the hot cell's store and is contained.
+- **Structure:** a 7×7 five-spot pattern: four injection wellheads at the corners and one production wellhead in the middle, as tungstensteel pipe columns that go 3 blocks into the ground, and a header house with two ion-exchange columns on one side.
+- **Controller:** IV hull + HV fluid drilling rig controller + 2 IV pumps + IV chemical bath + 4 IV circuits.
+- **Why it is not a big cube:** a flat pattern of wells. It works by chemistry, not with a bit.
+- **Crossings:** MV (the End vein), LV (the acid), Earth or the Moon (the O₂), and IV (the hot cell and the reactor).
+- **Risks:**
+  - If the Tungstensteel-bit drilling stays too, uranium has two routes: pick one.
+  - The resin needs a recipe (GTM has no polystyrene; styrene + sulfuric acid, *(tune)*).
+- **Source and licence:** real: in-situ recovery of uranium, about 55–56 % of the world's mine output in 2022–24 (World Nuclear Association), with the five-spot pattern, ion exchange and peroxide yellowcake.
+
+#### Mercury solar works: `gtceu:mercury_solar_works`, type `gtceu:solar_processing` (Mercury)
+
+- **What it gains:** Mercury's site workshop, as the regolith cell is the Moon's: recipes that only exist under concentrated sunlight and free vacuum.
+- **Recipes** (`.dimension('gcyr:mercury')`):
+  1. **Solar sintering:** 16 Hermean regolith dust (`gtceu:hermean_regolith_dust`, macerated GCYR `mercury_cobblestone` or `mercury_rock`) → 4 heat-shield bricks (`grindless:hermean_heat_shield_brick`), the casing of the Mercury drill, the solar field and the interferometer. The EU is the electric furnace's 48,000 per brick, as in EV.
+  2. **Thin-film panels (vacuum evaporation):** 1 gallium arsenide dust + 1 silicon wafer + tempered glass + a tungsten steel frame → 1 Hermean thin-film panel (`grindless:hermean_thin_film_panel`). It is the Mercury field's panel and the step after EV's Solar Wing Panel (48,000 EU in the HV assembler) *(tune)*.
+  3. **Iridosmine fusion (optional):** the input step of the platinum plant's mode 3, moved to the site. 10 iridosmine + 10 saltpeter + 1,000 mB salt water → rarest metal mixture + steam, at the figures of GT--'s `rarest_metal_residue` (775 K, 120 EU/t for 200 t).
+  - **Sun rule:** a run that starts by day pays 0.25 of the EU/t, with a run-start modifier like the tripod's wings: cheaper, never faster *(tune)*.
+- **Byproducts:** slag is inert and dumped; the steam goes to a turbine or is vented (inert); the mixture goes home.
+- **Structure:** 8 heliostat mirrors on frames around a 3×3×3 focal furnace on a pad of the bricks, with a 3×3 glass evaporation bell beside it.
+- **Controller:** IV hull + heliostat tower controller (LV, ours) + IV electric furnace + IV assembler + 4 IV circuits.
+- **Why it is not a big cube:** a mirror field around a focus. It works only on Mercury.
+- **Crossings:**
+  - LV: the heliostat family, the Nether's saltpeter and the GaAs line;
+  - EV: the Solar Wing Panel;
+  - IV: the naquadah activator's gallium (to GaAs), and Mercury's iridosmine (to the platinum plant).
+- **Risks:**
+  - The sintering alone would be a furnace recipe with a dimension, which is convenience: the panels are what make it ours.
+  - Whether GCYR's Mercury has a night is still open (`iv.md`).
+- **Source and licence:**
+  - Real: DLR and ESA's solar sintering of lunar regolith (2017); the Odeillo solar furnace; solar cells evaporated in place on the Moon (Ignatiev and Freundlich, NASA); the Wake Shield Facility (1994–96).
+  - The catalog's solar foundry (Supersymmetry's solar furnace, GPL): idea only.
+
+#### Tritium removal facility: `gtceu:tritium_removal_facility`, type `gtceu:detritiation` (Moon)
+
+- **What it gains:** it gives the reactor's activated moderator a destination that keeps it contained, recycles the heavy water and turns tritium into a product.
+- **Reactor change:** with heavy water, an LEU or MOX core turns 5 mB of heavy water into 5 mB of tritiated heavy water (`gtceu:tritiated_heavy_water`, radioactive, voiding refused), instead of 5 mB of tritium.
+- **Recipe** (`.dimension('gcyr:luna')`):
+  - In: 1,000 mB tritiated heavy water + 100 mB deuterium (the exchange carrier, returned).
+  - Out: 900 mB heavy water + 200 mB tritium + 100 mB deuterium.
+  - EU: GTM's `centrifuge/deuterium_separation` per mB of tritium (12,800 EU per 40 mB, so 320 EU/mB: 64,000) + liquefying the carrier at the vacuum freezer's 1,920 EU/t for 240 t per 1,000 mB (46,080) = 110,080 EU.
+  - At night, with the radiators seeing the sky, it costs half: the cryogenic plant's run-start rule *(tune)*.
+- **Byproducts:**
+  - The heavy water goes back to the reactor. At full power the make-up drops from 3,600 to 360 mB/h.
+  - The tritium is stored for LuV fusion (voiding refused): about 720 mB/h, against `iv.md`'s 3,600 *(tune)*.
+  - The deuterium loops.
+- **Structure:** a 3×3×12 frost-proof cold box on sintered regolith, two 1×1×6 catalytic exchange columns of titanium pipe casing, and two 2×3 wings of Night-Sky Radiators. Parts go in the lowest ring.
+- **Controller:** IV hull + cryogenic plant controller + IV electrolyzer + 2 IV pumps + 4 IV circuits.
+- **Why it is not a big cube:** columns, a cold box and radiator wings. It works only on the Moon, takes the reactor's water and gives it back.
+- **Crossings:**
+  - EV: the Moon base's radiators, brick and night rule;
+  - IV: the reactor and the heavy-water plant;
+  - LuV: the tritium.
+- **Risks:** tritium is cheap through GTM's `deuterium_separation` (160 mB D → 40 mB T at 80 EU/t) and still leaks from liquid ender air. Decision 4 settles both: tritium comes only through this facility.
+- **Source and licence:** real: the Darlington Tritium Removal Facility (Ontario Hydro, 1990: vapour-phase catalytic exchange, cryogenic distillation, tritium stored on titanium) and ITER's isotope separation system.
+
+#### Fuel fabrication plant: `gtceu:fuel_fabrication_plant`, type `gtceu:fuel_fabrication` (Earth)
+
+- **What it gains:**
+  - Real fuel: UO₂ pellets in Zircaloy tubes, backfilled with helium.
+  - It takes the LEU part of the hot cell's mode 2. Fresh LEU needs no hot cell; MOX, the breeder, the RTG pellets and the Pu-Be source stay in the hot cell.
+  - It replaces the "TS plate cladding", which makes no physical sense: tungsten absorbs neutrons.
+- **Recipes:**
+  1. **Pellets:** 1 U-235 + 9 U-238 + 20,000 mB O₂ → 10 LEU pellets (`grindless:leu_pellet`), pressed and then sintered in 500 mB of hydrogen, which comes back. The EU is GTM's forming press plus a 2,000 K EBF stage *(tune)*.
+  2. **Zircaloy tube:** 1 Zircaloy ingot (`gtceu:zircaloy`, new: Zr with about 1.5 % Sn as in real Zircaloy-4; the game ratio is *(tune)*) → 2 cladding tubes, by pilgering, at the EU of GTM's small-pipe extrusion for an alloy of that mass.
+  3. **Assembly:** 10 pellets + 4 tubes + 100 mB helium → 1 LEU assembly, the reactor's item, at one IV assembler stage.
+- **Byproducts:** grinding swarf goes back to the press, tube crops are remelted and the hydrogen loops. Nothing leaves.
+- **Structure:** a 3×4×13 line:
+  - a pellet press bay;
+  - a sintering tunnel with a coil ring;
+  - a pilger stand (two gearboxes on a tungsten steel frame bed);
+  - a rod-loading glovebox of laminated glass with the helium hatch.
+- **Controller:** IV hull + IV forming press + IV extruder + IV assembler + 4 IV circuits.
+- **Why it is not a big cube:** a line. It needs the End's zirconium and the Moon's helium.
+- **Crossings:**
+  - MV: the End's zirconium vein (GTCA's red zircon, then GTM's electrolysis, gives Zr). Zirconium has almost no use today: 6 recipes, all GTCA zirconium carbide in the alloy blast smelter and packing.
+  - Steam and LV: tin.
+  - EV: the Moon's helium.
+  - IV: enrichment and the reactor.
+- **Risks:**
+  - A new material and a new recipe for `iv.md`'s LEU assembly.
+  - GTM has no hafnium, so the "nuclear-grade" zirconium skips the hafnium removal: the documents should say so.
+- **Source and licence:** real: Zircaloy (US Naval Reactors, 1950s), cold pilgering of cladding tubes and the helium backfill of light-water fuel rods.
+
+### Reserve
+
+#### Enrichment cascade: `gtceu:enrichment_cascade`, type `gtceu:isotope_enrichment` (Earth). Reserve.
+
+- **What it gains:**
+  - It takes the hot cell's mode 1: UF₆ is not a hot-cell material.
+  - It adds what one GTM centrifuge cannot do: stripping the tails, set by the cascade's length.
+- **Recipe:** composed from GTM's live recipes:
+  - `uranium_hexafluoride`: 3 uraninite + 4,000 HF + 2,000 F₂ → 1,000 UF₆ + 2,000 water, 30 EU/t for 200 t;
+  - `uranium_hexafluoride_separation`: 100 enriched / 900 depleted, 480 EU/t for 160 t;
+  - the two electrolyses, 120 EU/t for 160 t each.
+  
+  Per 30 uraninite: 1,020,000 EU → 1 U-235 + 9 U-238 + 20,000 mB water + 40,000 mB F₂, against 40,000 mB HF in.
+- **Stripping:** the centrifuge rows are counted after the structure forms (2 to 6), the way the lunar array counts panels. Each row above 2 moves 0.025 of the U-238 output into U-235 and pays one more separation stage *(tune)*.
+- **Byproducts:**
+  - Depleted uranium goes to the MOX and breeder blankets and to radon (hot cell mode 4).
+  - F₂ becomes HF again; the water goes to the network.
+- **Structure:** a hall 5 wide × 6 high × up to 15 deep: rows of 1×1×4 centrifuge columns on clean machine casing under a UF₆ header.
+- **Controller:** IV hull + 2 HV centrifuges + IV electrolyzer + IV chemical reactor + 4 IV circuits.
+- **Why it is not a big cube:** its length is its yield.
+- **Crossings:** MV (the End's pitchblende), the fluorspar kiln (fluorine), the hot cell and the reactor.
+- **Risks:** without the stripping rule it is GCYM's large centrifuge with parallels, which is convenience. The row count needs a modifier.
+- **Source and licence:**
+  - Real: Zippe-type gas centrifuge cascades (Urenco), and the trade-off between tails assay and separative work.
+  - GTM's recipes (LGPL), composed.
+
+#### Superconductor line: `gtceu:superconductor_line`, type `gtceu:superconductor_drawing` (Earth). Reserve.
+
+- **What it gains:** powder-in-tube wire. SmFeAsO dust becomes wire with no hot ingot, and the helium gas goes back to the Moon.
+- **Recipe:**
+  - In: 4 SmFeAsO dust + 2 silver foil (the sheath) + 2,000 mB liquid helium.
+  - Out: 2 quadruple wires + 1,000 mB helium.
+  - EU: 17,672,880, the sum of GTM's stages with no discount: 4 EBF runs at 5,200 K (1,920 EU/t for 1,500 t), 4 vacuum freezer runs (7,680 EU/t for 200 t, 500 mB of liquid helium → 250 mB of helium each) and 2 wiremill runs (30 EU/t for 148 t).
+- **Byproducts:** the helium gas goes back to the Moon's cryogenic plant; the silver stays in the wire, like a real sheath.
+- **Structure:** a 3×4×13 drawing line: dies, a tube furnace with a ring of 5,400 K coils, and a laminated-glass cryostat test bay.
+- **Controller:** IV hull + IV wiremill + vacuum freezer controller + IV mixer + 4 IV circuits.
+- **Crossings:** EV (Mars's samarium, the Moon's helium) and LV (silver, arsenic).
+- **Risks:** it overlaps GCYM's alloy blast smelter (mixer and EBF), mega vacuum freezer and large wiremill, so it is close to convenience.
+- **Source and licence:** real: powder-in-tube iron-based superconducting wires (Y. Ma's group at IEE-CAS since 2008; the review in *Supercond. Sci. Technol.* 25, 2012), and the same method for Nb₃Sn, MgB₂ and Bi-2223.
+
+#### Considered and dropped
+
+- **A second reactor** (the GTNH/GT++ liquid fluoride thorium reactor, idea only): it duplicates the fission reactor, and thorium already has GT--'s liquid fuels at LuV and ZPM.
+- **A waste repository** (Onkalo): a sink that gains nothing (rule 4).
+- **A calutron:** it duplicates the enrichment cascade.
+- **A Czochralski puller for the naquadah boule:** EV discarded it (it belongs to LuV's microgravity).
+- **Venus CO₂ electrolysis for O₂** (MOXIE-like): the acid works already gives O₂ and water.
+- **Venus molten-carbonate CO₂ → carbon:** no exclusive gain, since graphite is plentiful.
+- **A spent-fuel cooling pond:** a time sink (rule 2).
+- **Leisure's IV multiblocks** (ideas only):
+  - the Chemical Energy Devourer, which is convenience;
+  - the Heat Exchanger, which is energy from nothing (the GTCA equivalent was removed);
+  - the Digestion and Dissolving Tanks, since EV's cascade already separates the rare earths;
+  - the 24 "Large X" machines, which are convenience.
+
+### Decisions taken with the raise (orchestrator, 2026-10-25)
+
+1. **The seven above are added**, so IV has 15 multiblocks of ours. The enrichment cascade and the superconductor line stay in reserve: without the stripping rule, the first is convenience, and the second is close to GCYM's machines.
+2. **In-situ leaching replaces drilling pitchblende with a Tungstensteel bit.** *Route* step 2 changes: the leach field on the End's pitchblende vein is the uranium source. The home drills get no Tungstensteel-bit recipes, so the family veto needs no exception.
+3. **The reactor's heavy water comes out tritiated**, and the tritium removal facility on the Moon recycles it.
+4. **Tritium comes only from the reactor, through the facility.** In IV's build, liquid ender air loses its tritium (with the radon and deuterium EV removed), and GTM's `centrifuge/deuterium_separation` is removed. Until then nothing uses tritium (fusion is LuV).
+5. **A new Earth vein of fluorite, barite, galena and sphalerite** (Mississippi Valley type) feeds the fluorspar kiln. It generates only in new chunks; the drill recipes appear at once. GCYR's `gcyr:fluorite` is the material.
+6. **The Venus acid works has both modes.** Circuit 1 returns the SO₂ to Venus's air (the planet's own gas). Circuit 2 keeps it, refusing voiding, for the LV sulfide roaster at home.
+7. **Fresh LEU fuel leaves the hot cell** for the fuel fabrication plant: UO₂ pellets in Zircaloy, backfilled with Moon helium. The hot cell keeps enrichment, MOX, the breeder, RTG pellets, the Pu-Be source, reprocessing and radon. The new material is `gtceu:zircaloy`. GTM has no hafnium, so "nuclear-grade" zirconium skips its removal.
+8. **The Mercury solar field takes the solar works' thin-film panels**, so it is not a Mercury circuit of the lunar array.
+9. **GTM's large miners stay** as world-digging automation of finite ore, on every planet. The site drills remain the infinite source.
+10. **Corrections to the design above:**
+    - **No Ostwald tower:** EV discarded it, and GTM's LCR makes nitric acid.
+    - **No liquid hydrogen in IV** unless a consumer appears (GCYR burns any fuel).
+    - **Radon** comes from GTM's `radon_from_uranium_238` and the hot cell. Extended Features' large collector makes ender air, whose radon EV removed.
+    - **Heavy water** is a KubeJS GT material, `gtceu:heavy_water` (D₂O, decomposition by electrolysis); the Martian ice is melted in the heavy-water plant.
+    - **The fluorine budget:** the hot cell converts HF into F₂ and creates none. The naquadah plant needs about 40,500 mB of fluorine per 2 naquadah, and the fluorspar kiln is its source.
+    - **The inner-planets chart:** an IV recipe of the deep space antenna writes `grindless:inner_planets_chart`.
+    - **The level 3 rocket:** its parts are GCYR's elite fuel tank and motor (`gcyr:elite_fuel_tank`, `gcyr:elite_rocket_motor`), remade in the IV assembler with tungsten steel and the chart, as EV remade the advanced ones. Verify in `RocketEntity` that they average to tier 3.
+    - **`planets.json`:** Venus and Mercury get pair tags and names, and seeds made on site, like Mars's merrillite seed.
+    - **The heat engine's water** has a destination: steam to a turbine, or vented as inert. It comes from the acid works.
+    - **Test bands** go on from X 9472 in steps of 256, with the same X and Z on each planet. Bands 3072 and 3328 belong to the steam and LV multiblocks.
