@@ -129,8 +129,8 @@
 
   // Vanilla's time-of-day curve (DimensionType#timeOfDay without a fixed time: 0 noon, 0.25 sunset, 0.5 midnight, 0.75 sunrise) passes
   // 0.25 between day time 12,785 and 12,786 and 0.75 between 23,214 and 23,215, so the sun is down from 12,786 to 23,214 of every
-  // 24,000. The bounds are worked out once (with Node) and kept as integers: this Rhino evaluated the curve itself wrong on the bench
-  // (the sun never set), and integer comparisons leave nothing to evaluate.
+  // 24,000. The bounds are worked out once (with Node) and kept as integers: in this Rhino (KubeJS 2001.6.5) Math.PI is undefined, so
+  // the curve itself came out NaN on the bench and the sun never set; integer comparisons leave nothing to evaluate.
   const SUNSET = 12786
   const SUNRISE = 23214
   CRYO.night = { from: SUNSET, to: SUNRISE }
