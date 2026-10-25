@@ -1506,7 +1506,7 @@ hash = "69d9f09ec5ce719264872a7dbb17971c3f6efc82cff5e758be1ccfa05ee81457"
 
 [[files]]
 file = "kubejs/server_scripts/grindless/dimensions_resources.js"
-hash = "31da85f5c7ebfaa25d792784318e392b0886c8e80d153aa70b7f3fe47bae8f6e"
+hash = "3d0cb3edefd277b5b95e708550729f7ce8cc60a64889434cb7e1603d7b3f7dca"
 
 [[files]]
 file = "kubejs/server_scripts/grindless/ev/ae2_interplanetary.js"
