@@ -61,7 +61,9 @@
     },
     dt: {
       id: 'gtceu:distillation_tower', casing: 'gtceu:clean_machine_casing',
-      parts: [['gtceu:hv_energy_input_hatch', 1], ['gtceu:hv_input_hatch', 1]],
+      // GTM's DistillationTowerMachine#onStructureFormed undoes the structure without a fluid output hatch (machine logic, not the
+      // pattern's counts), so the test adds one on the first layer
+      parts: [['gtceu:hv_energy_input_hatch', 1], ['gtceu:hv_input_hatch', 1], ['gtceu:hv_output_hatch', 1]],
       needs: 2, extra: ['gtceu:hv_energy_input_hatch', 'gtceu:hv_input_hatch'], height: 3
     }
   }
@@ -96,7 +98,6 @@
         IMachineBlock: Java.loadClass('com.gregtechceu.gtceu.api.block.IMachineBlock'),
         MultiDef: Java.loadClass('com.gregtechceu.gtceu.api.machine.MultiblockMachineDefinition'),
         Blocks: Java.loadClass('net.minecraftforge.registries.ForgeRegistries').BLOCKS,
-        SimpleContainer: Java.loadClass('net.minecraft.world.SimpleContainer'),
         FakePlayerFactory: Java.loadClass('net.minecraftforge.common.util.FakePlayerFactory'),
         Hand: Java.loadClass('net.minecraft.world.InteractionHand'),
         Direction: Java.loadClass('net.minecraft.core.Direction'),
@@ -197,18 +198,26 @@
   function machineAt(pos) { return lazy().MetaMachine.getMachine(S.level, pos) }
 
   // ---------------------------------------------------------------- inventories
+  // a test inventory with a vanilla Container's methods (Rhino picks SimpleContainer's ItemStack... constructor for a number, so
+  // the slots live in a JS array): what the projector's containerSource reads and takes from
   function container(items) {
-    var cont = new (lazy().SimpleContainer)(54)
+    var slots = []
+    for (var i = 0; i < 54; i++) slots.push(Item.empty)
     var slot = 0
     items.forEach(function (it) {
       var left = it[1]
       while (left > 0 && slot < 54) {
         var n = Math.min(64, left)
-        cont.setItem(slot++, Item.of(it[0], n))
+        slots[slot++] = Item.of(it[0], n)
         left -= n
       }
     })
-    return cont
+    return {
+      getContainerSize: function () { return slots.length },
+      getItem: function (k) { return slots[k] },
+      setItem: function (k, st) { slots[k] = st },
+      setChanged: function () { }
+    }
   }
 
   function contents(cont) {
@@ -266,8 +275,9 @@
       ', ' + p0.parts.length + ' part-only, facing ' + p0.facing + ' up ' + p0.up : 'plan failed: ' + p0.error)) return
     var places = p0.cells.filter(function (cell) { return cell.kind === 'place' })
     var casings = places.filter(function (cell) { return cell.block === M.casing })
-    var low = casings.slice().sort(function (a, b) { return a.y - b.y })
-    var snow = low[0]
+    // the snow layer: the first casing cell (in the pattern's order, so it is filled before the stock runs out) on the lowest row
+    var lowY = Math.min.apply(null, casings.map(function (cell) { return cell.y }))
+    var snow = casings.filter(function (cell) { return cell.y === lowY })[0]
     var dirt = casings.filter(function (cell) { return cell !== snow })[1]
     // a floor right under the structure, so the snow layer has something to stand on
     var xs = p0.cells.map(function (cell) { return cell.x })
@@ -472,12 +482,14 @@
     var fp = fakePlayer()
     fp.setItemInHand(lazy().Hand.MAIN_HAND, Item.of(P().item))
     fp.getInventory().setItem(1, Item.of(MACHINES.ebf.casing, 64))
+    var before = P().plan(S.level, c.pos)
     var result = clickAs(fp, c.pos, 'north')
     var last = P().last
     var plan = P().plan(S.level, c.pos)
-    check(c.key + '.click', last !== null && last.kind === 'hologram' && plan.present === 1 && plan.placedTotal > 0,
-      'plain use with the projector: ' + (last === null ? 'nothing' : last.kind) + ' (the hologram packet goes to the player), cells already built ' +
-      plan.present + ' (just the controller), interaction result ' + result)
+    check(c.key + '.click', last !== null && last.kind === 'hologram' && plan.present === before.present && plan.placedTotal === before.placedTotal &&
+      Number(contents(fp.getInventory())[MACHINES.ebf.casing] || 0) === 64,
+      'plain use with the projector: ' + (last === null ? 'nothing' : last.kind) + ' (the hologram packet goes to the player); the structure is as it was: ' +
+      plan.present + ' cells done (the air ones), ' + plan.placedTotal + ' to place (' + before.placedTotal + ' before), no casing used; interaction result ' + result)
   }
 
   function fakeFormed(c) {
