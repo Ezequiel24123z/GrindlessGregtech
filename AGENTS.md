@@ -147,7 +147,7 @@ Gregtech Grindless is a GregTech Modern pack (Minecraft 1.20.1, Forge) in which 
   | mass production | 12544–12607 (roof at Y 112) |
   | gallery (client) | 12800–12863 |
   | QBC terminal (client) | 13056–13119: the Overworld at Y 98–112 (all of Z 0–63, force-loaded while it runs); on the Moon (`gcyr:luna`) and Mars (`gcyr:mars`) X 13084–13092, Z 28–36, Y 198–214 (7×7 floor at Y 198); the 1,000+ block case only stands the player on natural ground at X 13088, Z 1104+ |
-  | hologram projector | 16384–16447 (reserved; LuV bands skip it) |
+  | hologram projector | 16384–16447, Z 0–63 (client: X 16416–16447, Z 40–55; LuV bands skip it) |
   | chests and furnaces (client) | 18688–18751 (uses X 18688–18703, Z 0–15, Y 98–112) |
 
   For a new test, keep going in steps of 256.

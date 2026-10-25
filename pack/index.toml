@@ -1657,6 +1657,14 @@ file = "kubejs/assets/grindless/textures/item/hermean_vein_sample_frame.png"
 hash = "825c89541e549a4cc9fb6126e493992cbb145bdb3b0ca120a3c08a79d0da6cd1"
 
 [[files]]
+file = "kubejs/assets/grindless/textures/item/hologram_projector.png"
+hash = "d1703fe84d9e85346d15b90e1f8f61710128606024f420443fe7c9a12a5704e5"
+
+[[files]]
+file = "kubejs/assets/grindless/textures/item/hologram_projector.png.mcmeta"
+hash = "491ea51d46bc1f0c0ff11ed9293461cc67de293c7672abbc45f67563f8fe1f1a"
+
+[[files]]
 file = "kubejs/assets/grindless/textures/item/hydrotreating_catalyst.png"
 hash = "e678efb5cdda310f1de88a7110a6fac835318b73c5d03c8be63e92d5312612a7"
 
@@ -1899,6 +1907,14 @@ hash = "a9990ffd7a5c5b07a445605252c47152539c2c147a68d876f83ce9677b35dd44"
 [[files]]
 file = "kubejs/client_scripts/grindless/ev_tripod_lang.js"
 hash = "daa864538f1a96794fcb671fe200c5633b45ec6c7a9adffe53d6de3707c8c899"
+
+[[files]]
+file = "kubejs/client_scripts/grindless/hologram_projector.js"
+hash = "f089f4810c6ede9c60ba2286267bea0015ad1310076ce73ed5ea08b1e4673b91"
+
+[[files]]
+file = "kubejs/client_scripts/grindless/hologram_projector_lang.js"
+hash = "f018eeee2c496f1f034eb67b5b06b15550ff29edf9aa45b5d52179cce78926d1"
 
 [[files]]
 file = "kubejs/client_scripts/grindless/hv_family_lang.js"
@@ -2537,6 +2553,10 @@ file = "kubejs/server_scripts/grindless/steam/greenhouse.js"
 hash = "5b0de9d3e7f8b9086a863407b045573b3f04356bd5062bc1f916545ce9806024"
 
 [[files]]
+file = "kubejs/server_scripts/grindless/steam/hologram_projector.js"
+hash = "b4f7d4ba89b755aa3aa70e7f6df24144ed19a1495afdbe919588d222e7241e7b"
+
+[[files]]
 file = "kubejs/server_scripts/grindless/steam/large_family.js"
 hash = "9ce2c1310872a0ec93f5ecfbc08a3fc17b8763451efc4114b8d60380f3af05e8"
 
@@ -2787,6 +2807,10 @@ hash = "075c6e6176238999f8d821432464cdee74f8c14929f4d923b509ac5fa8909655"
 [[files]]
 file = "kubejs/startup_scripts/grindless/steam/coking_battery.js"
 hash = "03b577228bc506ae3710c10ddb5ca672270738bd18156da565dd973a4401a1c3"
+
+[[files]]
+file = "kubejs/startup_scripts/grindless/steam/hologram_projector.js"
+hash = "366270173fb2f0324711ac3ca6a356c2b0d5d85a07067d3d799224906ebedc62"
 
 [[files]]
 file = "kubejs/startup_scripts/grindless/steam/items.js"
