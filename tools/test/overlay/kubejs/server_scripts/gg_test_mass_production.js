@@ -632,7 +632,7 @@
       if (research === null) problems.push(RESEARCH + ' missing')
       else {
         stick = gtItemsOut(research)[0]
-        var nbt = stick && stick.getTag() ? String(stick.getTag()) : ''
+        var nbt = stick ? String(stick.getNbt()) : ''
         if (nbt.indexOf(RESEARCH_ID) < 0) problems.push('the scanner writes ' + nbt)
         if (inputEUt(research) !== 1920) problems.push('research at ' + inputEUt(research) + ' EU/t')
         S.stick = stick.copy()
@@ -657,7 +657,7 @@
       check('assembly_line_chain', problems.length === 0, 'controller <= ' + ctrl.map(function (x) { return x.id }).join(', ') + '; control casing <= ' +
         control.map(function (x) { return x.id }).join(', ') + '; line casing <= ' + unit.map(function (x) { return x.id }).join(', ') + '; data access hatch <= ' +
         data.map(function (x) { return x.id }).join(', ') + '; research ' + short(RESEARCH) + ' at ' + (research ? inputEUt(research) : '?') + ' EU/t -> ' +
-        (stick ? String(stick.getTag()) : 'none') + '; ' + short(AL_RECIPE) + ': ' + items.map(function (x) { return short(x.id) + ' x' + x.count }).join(', ') + ' + ' +
+        (stick ? String(stick.getNbt()) : 'none') + '; ' + short(AL_RECIPE) + ': ' + items.map(function (x) { return short(x.id) + ' x' + x.count }).join(', ') + ' + ' +
         fluids.map(function (f) { return short(f.id) + ' ' + f.amount }).join(', ') + (S.alRecipe ? ', ' + S.alRecipe.eut + ' EU/t x ' + S.alRecipe.duration + ' t' : '') +
         (problems.length > 0 ? ' | problems: ' + problems.join('; ') : ''))
     })
@@ -1108,15 +1108,35 @@
     return Item.of('gtceu:data_stick', '{assembly_line_research:{research_id:"' + RESEARCH_ID + '",research_type:"gtceu:assembly_line"}}')
   }
 
+  // puts the research stick into the data access hatch the way its slot does (the handler's insertItem, which only takes data items);
+  // if that refuses, straight into its storage, and says so. Returns { ok, detail }
+  function stickIntoHatch(hatch) {
+    var RM = Java.loadClass('com.gregtechceu.gtceu.utils.ResearchManager')
+    var stick = researchStick()
+    var research = RM.readResearchId(stick)
+    var detail = itemName(stick) + ' x' + stick.getCount() + ' ' + stick.getNbt() + ' (data item: ' + RM.isStackDataItem(stick, false) + ', research: ' +
+      (research === null ? 'none' : research.researchId() + ' for ' + research.recipeType()) + ')'
+    var inv = hatch.importItems
+    var rest = inv.insertItem(0, stick.copy(), false)
+    if (!rest.isEmpty()) {
+      detail += '; the handler refused it (' + itemName(rest) + ' x' + rest.getCount() + ' back, slots ' + inv.getSlots() + ', formed ' + hatch.isFormed() +
+        '): put into its storage instead'
+      inv.storage.setStackInSlot(0, stick.copy())
+    } else {
+      detail += '; taken by the handler'
+    }
+    var held = inv.getStackInSlot(0)
+    return { ok: !held.isEmpty() && itemName(held) === 'gtceu:data_stick' && RM.readResearchId(held) !== null, detail: detail }
+  }
+
   function alFormed(m) {
     safely('al_PARTS', function () {
       m.P = findParts(m, m.ctrl)
       var missing = AL_ROLES.filter(function (role) { return !m.P[role] })
-      var rest = missing.indexOf('data') < 0 ? m.P.data.importItems.insertItem(0, researchStick(), false) : null
-      var stickIn = rest !== null && rest.isEmpty()
-      check('al_PARTS', missing.length === 0 && stickIn, '[' + m.P.ids.join(' ') + '] research stick in the data access hatch: ' + stickIn +
-        (missing.length > 0 ? ' | missing: ' + missing.join(', ') : ''))
-      if (missing.length > 0 || !stickIn) {
+      var stick = missing.indexOf('data') < 0 ? stickIntoHatch(m.P.data) : { ok: false, detail: 'no data access hatch' }
+      check('al_PARTS', missing.length === 0 && stick.ok, '[' + m.P.ids.join(' ') + '] research stick in the data access hatch: ' + stick.ok + ' (' +
+        stick.detail + ')' + (missing.length > 0 ? ' | missing: ' + missing.join(', ') : ''))
+      if (missing.length > 0 || !stick.ok) {
         m.phase = 'done'
         return
       }
