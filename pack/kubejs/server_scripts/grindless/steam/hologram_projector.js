@@ -549,7 +549,7 @@
         cands.sort(byTier)
         res.parts.push({ x: c.x, y: c.y, z: c.z, id: cands.length > 0 ? cands[0].id : '', nameKey: cands.length > 0 ? cands[0].nameKey : '', options: cands.length })
       } else if (c.kind === 'blocked' || c.kind === 'unloaded') {
-        res.blocked.push({ x: c.x, y: c.y, z: c.z, block: c.now, reason: c.kind === 'unloaded' ? 'unloaded' : c.reason })
+        res.blocked.push({ x: c.x, y: c.y, z: c.z, block: c.now, reason: c.kind === 'unloaded' ? 'unloaded' : c.reason, takesDefault: takesDefault(c) })
       }
       res.cells.push({
         x: c.x, y: c.y, z: c.z, kind: c.kind, block: c.block === null ? '' : c.block.id, now: c.now,
@@ -574,6 +574,20 @@
       s.parts.forEach(function (b) { ids.push(b.id) })
     })
     return ids
+  }
+
+  // the cell still wants a default block: step 2 gave it one and placing it was refused (an entity, a claim), or one of its default
+  // options has room left (a cell whose options are all at their maximum only takes parts, as in step 2)
+  function takesDefault(c) {
+    if (c.group) return true
+    return c.info.options.some(function (s) { return !maxed(s, c.layer) })
+  }
+
+  // every default block is in place: nothing placed or missing on this click and no cell that still wants one left as it is (a wrong
+  // block, an entity, a claim, an unloaded chunk). Cells only for parts, or that must stay air, don't count: the player fills those.
+  function complete(res) {
+    return res.ok === true && res.placedTotal === 0 && res.missingTotal === 0 &&
+      !res.blocked.some(function (b) { return b.takesDefault === true })
   }
 
   // KubeJS calls Level#dimension() getDimensionKey for scripts
@@ -690,7 +704,7 @@
         return Text.translate('message.grindless.projector.at', blockName(b.block), at(b))
       })).gray())
     }
-    if (res.placedTotal === 0 && res.missingTotal === 0) lines.push(Text.translate('message.grindless.projector.complete').green())
+    if (complete(res)) lines.push(Text.translate('message.grindless.projector.complete').green())
     return lines
   }
 
@@ -797,6 +811,7 @@
     relOffset: relOffset,
     report: report,
     summary: summary,
+    complete: complete,
     last: null
   })
 })()
