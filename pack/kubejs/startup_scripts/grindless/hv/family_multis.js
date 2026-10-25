@@ -15,8 +15,9 @@
 //
 // The vetoes are the MV ones: the drill vetoes a base recipe while drilling fluid is present in its hatch (the fluid recipe is the
 // better one) and the vanadium steel base while sulfuric acid is (the leaching variant takes its place); the greenhouse follows the
-// programmed circuit (2 = fertilizer mode, with CO2 in a hatch too the fertilizer + CO2 variant; 3 = the boosters). Neither skips a
-// tier: they run every recipe the lower machines run.
+// programmed circuit (2 = fertilizer mode, with CO2 in a hatch too the fertilizer + CO2 variant; 3 = the boosters). Both run every
+// recipe the lower machines run and skip the ones of the tiers above HV (<type>/ev/ and up: rules.isAboveTier, lv/multis.js): the
+// titanium bit and the lunar and Martian veins are the EV Tripod Drill's.
 //
 // Textures: overlay dirs grindless:block/multiblock/hv_vein_drill and hv_greenhouse (drawn separately). Names / tooltips:
 // client_scripts/grindless/hv_family_lang.js.
@@ -99,12 +100,14 @@
     var rules = lv.rules
 
     function drillVeto(machine, recipe) {
-      return (!rules.isFluidRecipe(recipe) && rules.machineHasFluid(machine, 'gtceu:drilling_fluid')) ||
+      return rules.isAboveTier(recipe, 'hv') ||
+        (!rules.isFluidRecipe(recipe) && rules.machineHasFluid(machine, 'gtceu:drilling_fluid')) ||
         (rules.isVanadiumBaseRecipe(recipe) && rules.machineHasFluid(machine, 'gtceu:sulfuric_acid'))
     }
 
     // circuit 2 = fertilizer mode; with CO2 in a hatch too the fertilizer + CO2 variant is the one that runs; circuit 3 = boosters
     function greenhouseVeto(machine, recipe) {
+      if (rules.isAboveTier(recipe, 'hv')) return true
       if (rules.machineCircuit(machine) < 2) return false
       if (rules.isBoosterRecipe(recipe)) return false
       if (!rules.isFertilizerRecipe(recipe)) return true
