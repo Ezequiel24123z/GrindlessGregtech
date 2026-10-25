@@ -9,8 +9,8 @@
 //                        EU: the design's two stages, each at the rate of the GTM recipe it stands for:
 //                          separation     GTM's centrifuge/deuterium_separation (160 mB D -> 40 mB T, 80 EU/t x 160 t: 12,800 EU per 40 mB
 //                                         of tritium; IV-A1 removed it, decision 4): 320 EU per mB, 200 mB -> 64,000 EU
-//                          liquefaction   GTM's vacuum_freezer/liquid_oxygen (1,920 EU/t x 240 t per 1,000 mB: 46,080 EU), the carrier
-//                                         stream through the cold box for 1,000 mB of feed -> 46,080 EU
+//                          liquefaction   GTM's vacuum_freezer/liquid_oxygen (1,920 EU/t x 240 t: 460,800 EU per 1,000 mB), for the 100 mB
+//                                         deuterium carrier liquefied in the cold box -> 46,080 EU
 //                        = 110,080 EU, spent at IV voltage: the shortest whole number of ticks, at no more than 7,680 EU/t, whose EU/t
 //                        is a whole even number that pays the energy exactly (so the night half is exact too): 6,880 EU/t x 16 t. The
 //                        data key grindless_night_eut holds the night EU/t (3,440: what the startup's modifier gives a run that starts in
@@ -41,16 +41,19 @@
   // how far past the shortest duration the exact price is looked for
   var PRICE_SEARCH = 64
 
+  var CARRIER = TRF.carrier || { id: 'gtceu:deuterium', amount: 100 }
+  var TRITIUM = { id: 'gtceu:tritium', amount: 200 }
+
   var RUN = {
     name: 'tritiated_heavy_water',
     feed: { id: 'gtceu:tritiated_heavy_water', amount: 1000 },
-    carrier: TRF.carrier || { id: 'gtceu:deuterium', amount: 100 },
+    carrier: CARRIER,
     heavyWater: { id: 'gtceu:heavy_water', amount: 900 },
-    tritium: { id: 'gtceu:tritium', amount: 200 },
-    // each stage: eu per `per` units of what it handles, and how many units one run handles
+    tritium: TRITIUM,
+    // each stage: eu per `per` mB of what it handles, and how many mB one run handles: the tritium separated, and the carrier liquefied
     stages: [
-      { stage: 'separation', from: 'gtceu:centrifuge/deuterium_separation', eu: 12800, per: 40, amount: 200, unit: 'mB of tritium' },
-      { stage: 'liquefaction', from: 'gtceu:vacuum_freezer/liquid_oxygen', eu: 46080, per: 1000, amount: 1000, unit: 'mB of feed' }
+      { stage: 'separation', from: 'gtceu:centrifuge/deuterium_separation', eu: 12800, per: 40, amount: TRITIUM.amount, unit: 'mB of tritium' },
+      { stage: 'liquefaction', from: 'gtceu:vacuum_freezer/liquid_oxygen', eu: 460800, per: 1000, amount: CARRIER.amount, unit: 'mB of carrier' }
     ],
     maxEUt: MAX_EUT,
     dimension: TRF.dimension || 'gcyr:luna'
