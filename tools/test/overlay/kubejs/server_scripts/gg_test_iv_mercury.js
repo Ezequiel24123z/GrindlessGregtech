@@ -42,6 +42,12 @@
 //       works_night           the bricks at night pay all 7,680 EU/t
 //       field_night           no EU once the sun is down
 //       interferometer_night  the Inner Planets Chart (kept) and a Lunar VLBI Recording (used) -> the Outer System Chart
+//     WINDOW (GTM keeps an idle machine's last recipe for one tick and restarts it without the modifier if the inputs come back then)
+//       drill_window          a night run ends; in that tick day comes and the bits come back: the next run is the cooled one, not the
+//                             cached dry recipe in the sun
+//       works_window          a sun-priced run ends; in that tick night comes and the dust comes back: the next run pays 7,680 EU/t
+//     (both fail without freshEveryRun in startup_scripts/grindless/iv/mercury.js: bench run iv-b2-mercury-1 saw the works' cached
+//     sun price at night)
 // var + function everywhere (this Rhino throws "redeclaration of var" for const/let inside functions that run more than once).
 (function () {
   var TAG = 'GGTEST|'
@@ -49,7 +55,8 @@
   var FORM_TIMEOUT = 600
   var DAY_TIMEOUT = 1400
   var NIGHT_TIMEOUT = 1000
-  var TEST_TIMEOUT = 4000
+  var WINDOW_TIMEOUT = 900
+  var TEST_TIMEOUT = 4800
   var FIELD_DAY_TICKS = 120
   var FIELD_NIGHT_GRACE = 30
   var FIELD_NIGHT_TICKS = 120
@@ -917,10 +924,77 @@
         var ln2 = tankOf(P.inHatch).mb
         var ok = !/_cryo$/.test(run.id) && /vein_drilling\/iv\/mercury_/.test(run.id) && run.parallels === D.cap && run.eut === 4096 && run.duration === 100 && ln2 === 5000
         check('drill_night_dry', ok, runText(run) + '; liquid nitrogen in the hatch ' + ln2 + ' mB (kept: wanted 5000)')
-        m.step = 'night_done'
+        // no more bits: when this run ends the drill stands idle at night (the window phase feeds it again)
+        clearInv(P.inBus)
+        insert(P.inBus, m.sample, 1)
+        m.nightRun = run
+        m.step = 'night_starve'
+        m.mark = S.t
       } else if (S.t - m.mark > 300) {
         check('drill_night_dry', false, 'no run within 300 ticks of night: ' + recipeState(m))
         m.step = 'night_done'
+      }
+      return
+    }
+    if (m.step === 'night_starve') {
+      if (!m.ctrl.getRecipeLogic().isWorking() && S.t - m.mark >= m.nightRun.duration + 5) m.step = 'night_done'
+    }
+  }
+
+  // the one-tick window, drill (clock: night): bits back, a dry run starts, the bits are taken away; in the tick that run ends (GTM still
+  // holds its dry recipe for one tick) day comes and the bits come back. The next start must be a fresh search: the cooled recipe, with the
+  // liquid nitrogen that is still in the hatch, never the cached dry one in the sun.
+  function drillWindow(m) {
+    var P = m.parts
+    var D = M().drill
+    var run = newRun(m)
+    var rlg = m.ctrl.getRecipeLogic()
+    if (m.step === 'w_feed') {
+      insert(P.inBus, BIT, 160)
+      m.step = 'w_run'
+      m.mark = S.t
+      wake(m)
+      return
+    }
+    if (m.step === 'w_run') {
+      if (run) {
+        clearInv(P.inBus)
+        insert(P.inBus, m.sample, 1)
+        m.windowRun = run
+        m.step = 'w_end'
+        m.mark = S.t
+      } else if (S.t - m.mark > 300) {
+        check('drill_window', false, 'no night run to start from: ' + recipeState(m))
+        m.step = 'window_done'
+        S.windowTurn = 'works'
+      }
+      return
+    }
+    if (m.step === 'w_end') {
+      if (!rlg.isWorking() && rlg.getLastRecipe() !== null && rlg.getLastRecipe() !== undefined) {
+        m.ln2Before = tankOf(P.inHatch).mb
+        setClock(DAY, 'the drill\'s night run ended this tick: day and the bits come in the same tick')
+        insert(P.inBus, BIT, 160)
+        m.step = 'w_after'
+        m.mark = S.t
+      } else if (S.t - m.mark > m.windowRun.duration + 60) {
+        check('drill_window', false, 'the end of the night run was not seen with its recipe still held: ' + recipeState(m))
+        m.step = 'window_done'
+        S.windowTurn = 'works'
+      }
+      return
+    }
+    if (m.step === 'w_after') {
+      if (run) {
+        var ln2 = tankOf(P.inHatch).mb
+        check('drill_window', /_cryo$/.test(run.id) && ln2 === m.ln2Before - run.parallels * D.coolantPerRun, 'night run ' + runText(m.windowRun) +
+          ' ended, then day and bits in the same tick: ' + runText(run) + '; liquid nitrogen ' + m.ln2Before + ' -> ' + ln2 + ' mB')
+        m.step = 'window_done'
+        S.windowTurn = 'works'
+      } else if (S.t - m.mark > 300) {
+        check('drill_window', false, 'no run after the bits came back at day: ' + recipeState(m))
+        m.step = 'window_done'
+        S.windowTurn = 'works'
       }
     }
   }
@@ -1059,10 +1133,67 @@
       var expect = worksExpect(m)
       if (run) {
         check('works_night', run.id === BRICKS_RECIPE && expect.key === 'night' && run.eut === 7680 && run.duration === 25, runText(run) + '; sky now ' + expect.key)
-        m.step = 'night_done'
+        m.step = 'night_runs'
+        m.mark = S.t
       } else if (S.t - m.mark > 200) {
         check('works_night', false, 'no run within 200 ticks of night: ' + recipeState(m))
         m.step = 'night_done'
+      }
+      return
+    }
+    // the night's dust runs out and the works goes idle (the window phase feeds it again)
+    if (m.step === 'night_runs') {
+      var left = readInv(m.parts.inBus.getInventory())[REGOLITH] || 0
+      if ((left < 16 && !m.ctrl.getRecipeLogic().isWorking()) || S.t - m.mark > 300) m.step = 'night_done'
+    }
+  }
+
+  // the one-tick window, works (after the drill's, clock: day): one run of bricks in the sun; in the tick it ends night comes and dust
+  // comes back. The next start must be a fresh search at the night price, never the cached sun-priced recipe.
+  function worksWindow(m) {
+    var P = m.parts
+    var run = newRun(m)
+    var rlg = m.ctrl.getRecipeLogic()
+    if (m.step === 'w_turn') {
+      if (S.windowTurn === 'works') {
+        insert(P.inBus, REGOLITH, 16)
+        m.step = 'w_run'
+        m.mark = S.t
+        wake(m)
+      }
+      return
+    }
+    if (m.step === 'w_run') {
+      if (run) {
+        m.windowRun = run
+        m.step = 'w_end'
+        m.mark = S.t
+      } else if (S.t - m.mark > 200) {
+        check('works_window', false, 'no day run to start from: ' + recipeState(m))
+        m.step = 'window_done'
+      }
+      return
+    }
+    if (m.step === 'w_end') {
+      if (!rlg.isWorking() && rlg.getLastRecipe() !== null && rlg.getLastRecipe() !== undefined) {
+        setClock(NIGHT, 'the works\' day run ended this tick: night and the dust come in the same tick')
+        insert(P.inBus, REGOLITH, 16)
+        m.step = 'w_after'
+        m.mark = S.t
+      } else if (S.t - m.mark > m.windowRun.duration + 60) {
+        check('works_window', false, 'the end of the day run was not seen with its recipe still held: ' + recipeState(m))
+        m.step = 'window_done'
+      }
+      return
+    }
+    if (m.step === 'w_after') {
+      if (run) {
+        check('works_window', m.windowRun.eut === 1920 && run.id === BRICKS_RECIPE && run.eut === 7680, 'day run ' + runText(m.windowRun) +
+          ' ended, then night and dust in the same tick: ' + runText(run) + ' (wanted 7680 EU/t)')
+        m.step = 'window_done'
+      } else if (S.t - m.mark > 200) {
+        check('works_window', false, 'no run after the dust came back at night: ' + recipeState(m))
+        m.step = 'window_done'
       }
     }
   }
@@ -1141,17 +1272,6 @@
       return
     }
     if (run) m.nightRun = run
-    if (m.step === 'day') {
-      var inBus = readInv(P.inBus.getInventory())
-      var outBus = readInv(P.outBus.getInventory())
-      check('interferometer_day', !m.dayRun && !m.statuses.WORKING && inBus[INNER] === 1 && inBus[REC] === 1 && !outBus[OUTER],
-        'by day: ' + (m.dayRun ? 'it ran: ' + runText(m.dayRun) : 'no run') + '; statuses ' + histogram(m.statuses) + '; input bus [' + summary(inBus) + ']')
-      m.statuses = {}
-      m.step = 'night'
-      m.mark = S.t
-      wake(m)
-      return
-    }
     if (m.step === 'night') {
       var outNow = readInv(P.outBus.getInventory())
       if (outNow[OUTER] === 1 || S.t - m.mark > 800) {
@@ -1177,6 +1297,10 @@
     return S.copies.every(function (m) { return m.phase !== 'running' || m.step === 'night_done' })
   }
 
+  function windowDone() {
+    return S.copies.every(function (m) { return m.phase !== 'running' || m.step === 'window_done' })
+  }
+
   function displays() {
     var drill = copyOf('drill')
     if (drill && drill.phase === 'running') {
@@ -1197,7 +1321,7 @@
   }
 
   // the night's inputs go in during the tick the clock changes, before any machine searches again: the drill must find liquid nitrogen
-  // in its hatch and still drill dry
+  // in its hatch and still drill dry. The interferometer's day verdict is taken here, before a night tick is counted.
   function nightStart(m) {
     var P = m.parts
     if (m.copy.key === 'drill') {
@@ -1206,9 +1330,24 @@
     } else if (m.copy.key === 'works') {
       insert(P.inBus, REGOLITH, 64)
       m.step = 'night_wait'
+    } else if (m.copy.key === 'interferometer') {
+      var inBus = readInv(P.inBus.getInventory())
+      var outBus = readInv(P.outBus.getInventory())
+      check('interferometer_day', !m.dayRun && !m.statuses.WORKING && inBus[INNER] === 1 && inBus[REC] === 1 && !outBus[OUTER],
+        'by day: ' + (m.dayRun ? 'it ran: ' + runText(m.dayRun) : 'no run') + '; statuses ' + histogram(m.statuses) + '; input bus [' + summary(inBus) + ']')
+      m.statuses = {}
+      m.step = 'night'
     }
     m.mark = S.t
     wake(m)
+  }
+
+  // the one-tick window checks, after the night (the clock is still night): the drill first, then the works
+  function windowStart(m) {
+    if (m.copy.key === 'drill') m.step = 'w_feed'
+    else if (m.copy.key === 'works') m.step = 'w_turn'
+    else m.step = 'window_done'
+    m.mark = S.t
   }
 
   function finish() {
@@ -1216,7 +1355,7 @@
     S.finished = true
     try {
       S.copies.forEach(function (m) {
-        if (m.phase === 'running' && m.step !== 'night_done' && m.step !== 'day_done') note(m.copy.key + '_UNFINISHED', 'step ' + m.step + '; ' + recipeState(m))
+        if (m.phase === 'running' && m.step !== 'window_done') note(m.copy.key + '_UNFINISHED', 'step ' + m.step + '; ' + recipeState(m))
       })
       setClock(1000, 'the test is over: back to day')
       cmd('forceload remove ' + BAND.x0 + ' ' + BAND.z0 + ' ' + BAND.x1 + ' ' + BAND.z1)
@@ -1240,7 +1379,7 @@
           formTimeout()
           S.phase = 'done'
         }
-      } else if (S.phase === 'day' || S.phase === 'night') {
+      } else if (S.phase === 'day' || S.phase === 'night' || S.phase === 'window') {
         var phase = S.phase
         S.copies.forEach(function (m) {
           if (m.phase !== 'running') return
@@ -1248,10 +1387,14 @@
             upkeep(m)
             if (m.copy.key === 'drill') {
               if (phase === 'day') drillDay(m)
-              else drillNight(m)
+              else if (phase === 'night') drillNight(m)
+              else drillWindow(m)
             } else if (m.copy.key === 'works') {
               if (phase === 'day') worksDay(m)
-              else worksNight(m)
+              else if (phase === 'night') worksNight(m)
+              else worksWindow(m)
+            } else if (phase === 'window') {
+              newRun(m)
             } else if (m.copy.key === 'field') {
               fieldTick(m, phase)
             } else {
@@ -1271,6 +1414,12 @@
           S.phaseStart = S.t
         } else if (phase === 'night' && (nightDone() || S.t - S.phaseStart > NIGHT_TIMEOUT)) {
           if (!nightDone()) note('NIGHT', 'night phase timed out after ' + NIGHT_TIMEOUT + ' ticks')
+          S.copies.forEach(function (m) { if (m.phase === 'running') windowStart(m) })
+          S.windowTurn = 'drill'
+          S.phase = 'window'
+          S.phaseStart = S.t
+        } else if (phase === 'window' && (windowDone() || S.t - S.phaseStart > WINDOW_TIMEOUT)) {
+          if (!windowDone()) note('WINDOW', 'window phase timed out after ' + WINDOW_TIMEOUT + ' ticks')
           S.phase = 'done'
         }
       }
