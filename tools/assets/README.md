@@ -46,6 +46,7 @@ Generators for the pack's own textures. Everything is procedural 16x16 pixel art
 | `Build-VenusTextures.ps1` | Writes the faces of the IV Venus package (IV-B1): the pressurized vein drill, the Venus heat engine and the Venus acid works (`multiblock/pressurized_vein_drill/`, `multiblock/venus_heat_engine/`, `multiblock/venus_acid_works/`). `-Only drill,engine,works`, `-Preview <png outside the repo>` (optional `-PtfeCasing <png>`, `-TungstenCasing <png>`) and `-Credits` (their 15 CREDITS rows). |
 | `Build-TritiumRemovalTextures.ps1` | Writes the IV tritium removal facility's face (`multiblock/tritium_removal_facility/`). `-Only facility`, `-Preview <png outside the repo>` and `-Credits` (its 5 CREDITS rows). |
 | `Build-IVFoundationTextures.ps1` | Writes the shared IV textures (IV-A1): fuel cycle items, PuBe source, RTG pellet, resin, platinum gauze, inner planets chart, Venus and Mercury vein samples, the Hermean heat shield brick (the Mercury casing texture) and the thin-film panel. `-Only`, `-Preview <png outside the repo>`, `-Credits`. |
+| `Build-NaquadahPlantTextures.ps1` | Writes the IV naquadah plant's face (`multiblock/naquadah_plant/`). `-Only naquadah_plant` and `-Credits` (its 5 CREDITS rows). |
 | `Build-IVMercuryTextures.ps1` | Writes the faces of the IV Mercury machines (IV-B2): the Mercury vein drill, the Mercury solar works, the Mercury solar field and the interferometer (`multiblock/mercury_vein_drill/`, `mercury_solar_works/`, `mercury_solar_field/`, `interferometer/`), and the interferometer's three data orbs (`item/lunar_vlbi_recording`, `outer_system_chart`, `sagittarius_a_star_signal`). `-Only drill,works,field,interferometer,items`, `-Preview <png outside the repo>` and `-Credits` (its 23 CREDITS rows). |
 | `Build-TravelNetworkTextures.ps1` | Writes the Venusian and Hermean Quantum Seeds (items and `.mcmeta`) and the RTG cell's overlays (`block/machines/rtg/`). `-Only seeds,rtg` and `-Credits` (its 11 CREDITS rows). |
 
@@ -568,3 +569,28 @@ powershell -NoProfile -ExecutionPolicy Bypass -File tools\assets\Build-TravelNet
 | `.../overlay_top_active.png` + `.mcmeta` | The vents glowing, 4 frames. |
 | `.../overlay_top_active_emissive.png` + `.mcmeta` | Only the glowing vents. |
 | `.../overlay_side.png`, `.../overlay_back.png` | The radiator fins. |
+
+### Naquadah plant (IV)
+
+The viewport into the plant's activation chamber, drawn for GTM's inert PTFE casing with the hot cell's method, steel ramp, bezel and lamp ramp. A dark steel frame holds dark teal lead glass. Inside, at the left, the Pu-Be source (a small capsule with a yellow band) stands in a steel cradle. At the right, a vessel of the pale green-yellow superacid bath (HSbF₆) has a dark green-black heap of naquadah at its bottom. Under the window: a radiation sign, the handle of the source drawer and the mode 1 lamp.
+
+- 8 frames, `frametime` 4: the source glows Cherenkov blue and breathes, lighting the chamber and the vessel's near wall. The bath's surface shimmers, and bubbles rise and burst at the surface. Dark green flecks sink and settle on the heap, which glints as each one lands. The lamp is lit.
+- Idle: a dark chamber, a dull capsule, a still and unlit bath, and a dark lamp.
+- The emissive layer holds only the source's glow, the bath's surface and the lit lamp.
+- The hot cell's checks; the output is identical byte for byte.
+- To retouch:
+  - `$NpPal` and `$NpBase` hold the colours and the map.
+  - `$NpHalo` and `$NpPulse` shape the glow.
+  - `$NpBubbles`, `$NpFleckX` and `$NpFlecks` drive the bath.
+  - Add any new light to `$NpGlowZone`.
+
+```powershell
+powershell -NoProfile -ExecutionPolicy Bypass -File tools\assets\Build-NaquadahPlantTextures.ps1
+powershell -NoProfile -ExecutionPolicy Bypass -File tools\assets\Build-NaquadahPlantTextures.ps1 -Credits
+```
+
+| File (under `textures/`) | Notes |
+|---|---|
+| `block/multiblock/naquadah_plant/overlay_front.png` | Idle: the dark chamber behind the lead glass, with a glint at its top left. The grey capsule with its yellow band sits in its cradle beside the vessel, where still, unlit superacid stands over the dark heap. Below: the radiation sign, the drawer handle and the dark lamp. |
+| `.../overlay_front_active.png` + `.mcmeta` | 8 frames, `frametime` 4: the source's Cherenkov glow swells and ebbs once a loop and shimmers. It lights the chamber blue around it and the vessel's near wall. The bath's surface is lit and shimmers. Two bubbles rise in the far column and a small one off the heap's peak, each flashing as it bursts. Two flecks of naquadah sink in the near column and settle on the heap, which glints as each one lands. The mode 1 lamp is lit green. |
+| `.../overlay_front_active_emissive.png` + `.mcmeta` | Only the source's glow (the capsule and its halo), the bath's surface and the lit lamp. |
