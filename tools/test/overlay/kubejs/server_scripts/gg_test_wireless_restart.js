@@ -13,6 +13,8 @@
 //
 // Markers: GGTEST|wireless_restart|<check>|PASS|FAIL|NOTE|<detail>; phase 1 ends with GGTEST|wireless_restart|PHASE1|DONE (the
 // harness's restart marker), phase 2 with GGTEST|wireless_restart|DONE. The first boot's log is in results\server\phase1\.
+//   TURN                a phase asked for that has no turn on the band within 120 s fails with the queue it saw and still ends with its
+//                       marker (phase 1 leaves a record saying why: phase 2 reports it as RESTORED FAIL and cleans up)
 //   phase 1 (before the restart), the Overworld X 13312-13375, Z 0-63, Y 98-112 (roof at Y 112), the Moon (gcyr:luna) same X and Z,
 //   Y 198-214, both force-loaded (vanilla saves force-loaded chunks and loads them again at start):
 //     the endpoints that really work: a tower with 4 LV cells; in the Overworld an LV battery buffer with 4 full sodium batteries and an
@@ -44,7 +46,9 @@
   var SCOPE = 'wireless_restart'
   var QUIET_MS = 10000
   var LOADED_AT = Date.now()
-  var REQUEST = 'ggTestWirelessRestartRequest'
+  var REQUEST = { 1: 'ggTestWirelessRestartRequest1', 2: 'ggTestWirelessRestartRequest2' }
+  // a requested phase that has not had its turn after this long fails with the queue it saw (before the bench's 180 s restart barrier)
+  var TURN_WAIT_MS = 120000
   // the wireless tests share their band: they take turns in the order they were asked for (gg_test_wireless_*.js)
   var QUEUE = 'ggTestWirelessQueue'
   var JVM_TOKEN = 'ggTestWirelessRestartJvm'
@@ -764,12 +768,46 @@
 
   // The pack's Additional Placements mod reloads the datapacks (and these scripts) a couple of seconds after the server is up: the
   // command only leaves a request in `global` and the tick handler starts the phase once these scripts have been loaded for QUIET_MS
-  // and it is this phase's turn on the band.
+  // and it is this phase's turn on the band. One boolean per phase: `global` is a Java HashMap (KubeJS's BuiltinKubeJSPlugin.GLOBAL),
+  // so a number stored there comes back as a wrapped java.lang.Double, and Rhino's interpreter takes a wrapped value and a number
+  // literal as unequal (Interpreter#doShallowEquals): the first version stored the phase as a number and never saw its request.
+  function requestedMode() {
+    if (global[REQUEST[1]] === true) return 1
+    if (global[REQUEST[2]] === true) return 2
+    return 0
+  }
+
+  // when this script instance first saw the pending request (a reload of the scripts starts the wait again)
+  var waitingSince = 0
+
+  // a request that never had its turn: a FAIL with the queue, the phase's end marker (phase 1 also leaves a record saying why, which
+  // phase 2 reports), and nothing left waiting
+  function gaveUp(server, mode, name) {
+    var why = 'phase ' + mode + ' was asked for and had no turn on the band in ' + (TURN_WAIT_MS / 1000) + ' s: the queue is [' + queueList().join(', ') + ']'
+    global[REQUEST[mode]] = false
+    waitingSince = 0
+    leaveQueue(name)
+    S = newState(server, mode)
+    check('TURN', false, why)
+    if (mode === 1) endPhase1(why)
+    else endPhase2()
+  }
+
   function startIfRequested(server) {
-    var mode = global[REQUEST]
-    if ((mode !== 1 && mode !== 2) || (S !== null && !S.finished)) return
-    if (Date.now() - LOADED_AT < QUIET_MS || !myTurn(SCOPE + '_' + mode)) return
-    global[REQUEST] = 0
+    if (S !== null && !S.finished) return
+    var mode = requestedMode()
+    if (mode === 0) {
+      waitingSince = 0
+      return
+    }
+    var name = SCOPE + '_' + mode
+    if (waitingSince === 0) waitingSince = Date.now()
+    if (Date.now() - LOADED_AT < QUIET_MS || !myTurn(name)) {
+      if (Date.now() - waitingSince > TURN_WAIT_MS) gaveUp(server, mode, name)
+      return
+    }
+    global[REQUEST[mode]] = false
+    waitingSince = 0
     try {
       run(server, mode)
     } catch (e) {
@@ -789,10 +827,11 @@
       emit('run', 'NOTE', 'a phase is still in progress')
       return 0
     }
-    global[REQUEST] = mode
+    global[REQUEST[mode]] = true
+    waitingSince = Date.now()
     joinQueue(SCOPE + '_' + mode)
     emit('requested', 'NOTE', 'phase ' + mode + ' starts once these scripts have been loaded for ' + (QUIET_MS / 1000) + ' s and the wireless tests asked for before it are done (' +
-      queueList().join(', ') + ')')
+      queueList().join(', ') + '); it fails after ' + (TURN_WAIT_MS / 1000) + ' s without its turn')
     return 1
   }
 
