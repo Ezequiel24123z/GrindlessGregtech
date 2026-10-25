@@ -260,6 +260,8 @@
       .rotationState(RotationState.NON_Y_AXIS)
       .recipeType('cryogenic_processing')
       .recipeModifier(coldModifier, true)
+      // the night price is set when a run starts: refresh it when GTM would restart a cached run (lib/fresh_run.js, IV-B2's finding)
+      .afterWorking(G.freshRun.afterWorking('cryogenic plant'))
       .appearanceBlock(GTBlocks.CASING_ALUMINIUM_FROSTPROOF)
       .pattern(function (def) { return Pat.build(def, SPEC) })
       .allowExtendedFacing(false)
