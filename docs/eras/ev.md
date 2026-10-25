@@ -6,7 +6,7 @@ You enter EV with what HV's end leaves you. On Earth: EV hull of lunar Titanium,
 
 ## Route
 
-1. **EV network.** HV→EV transformer, buffers and EV hatches (the 4, 16 and 64 A ones start here). Large gas turbines (`gtceu:gas_large_turbine`: EV hull, 2 EV circuits, 4 gears and 2 large Stainless Steel pipes; 4,096 EU/t with the rotor at 100%) running on refinery gas, and large Titanium boilers, up to the gate's 32,768 EU/t.
+1. **EV network.** HV→EV transformer, buffers and EV hatches. The EV energy and dynamo hatches (the 4, 16 and 64 A ones start here) need MPIC chips (phosphorus boule, brown lens, EV cutter) and the Extreme Voltage Coil (fine platinum wire), so they come after the platinum plant and the phosphorus line; until then two HV energy hatches run EV recipes. Large gas turbines (`gtceu:gas_large_turbine`: EV hull, 2 EV circuits, 4 gears and 2 large Stainless Steel pipes; 4,096 EU/t with the rotor at 100%) running on refinery gas, and large Titanium boilers, up to the gate's 32,768 EU/t.
 2. **ME hatches.** `gtceu:me_input_bus`, `me_output_bus`, `me_input_hatch` and `me_output_hatch` (EV; the stocking ones and the pattern buffer are LuV). Each multiblock requests from the network and returns to it, on the Moon too.
 3. **Moon base I.** Lunar solar array and buffers. The EV tripod replaces HV's lunar drill and sends Ilmenite home through an ME bus.
 4. **Moon base II.** Regolith cell (volatiles, O₂ and metals from the regolith, chlorine-free Titanium from the Ilmenite, and the sintered brick for lunar structures) and cryogenic plant (liquid oxygen, nitrogen and helium, using the cold of the lunar night).
@@ -411,16 +411,22 @@ No new mods: machines, recipe types, items, fluids and rules are all KubeJS and 
 
 ## Quests
 
-Chapter **"EV — Moonbase"** in the eras tab, written in English: about 25 short quests, with small rewards and no recipe locks. It is the step where you first hear the center of the galaxy:
-
-- **Opens** with the Moon already visited: "Titanium only exists up here. Make the Moon work without you."
-- **The base:** solar array, tripod, cell, sintered brick and cryogenic plant, with Ilmenite reaching home through an ME bus.
-- **One network, two worlds:** ME hatches, trunk, power over the bridge and the second pair built by the base.
-- **Fine chemistry:** nitric acid, platinum plant, nano computer and wither, based on the draft `scratch/ev-quests/ev_age.snbt` (its texts change: Tungsten no longer comes from the End and the metal mixture no longer yields Ilmenite).
-- **The far side:** the antenna. "With Earth's noise blocked by 3,474 km of rock, the antenna hears a steady hiss from Sagittarius: the heart of the galaxy, 26,000 light-years away. You will go there. Mars first."
-- **Red Horizon:** Mars chart, tier 2 rocket, landing (dimension quest `gcyr:mars`), waystone, bridge, processor and Martian tripod.
-- **Closes** with the IV hull: "Mars gave you tungsten. Venus and Mercury burn. That's next."
-- No quest names a multiblock that does not exist yet.
+Built on 2026-10-25 (package C2): `ev_age.snbt`, "EV: Lunar Base", 66 quests and 75 dependencies; v0.5.0's 12 quests keep their ids.
+- **The spine is the journey:** Lunar Base → samples → Lunar Drill → titanium → EV hull, transformer, motor and pump, components → EV Tripod Drill → drilling dry → A Rocket for Mars → **Red Horizon** (`gcyr:mars`) → Martian samples and tripod → tungsten → tungsten steel → **IV Machine Hull** (exit, also after the Nanoprocessor Supercomputer).
+- **Above it, off-world:**
+  - the Earth–Moon network: bridge, trunk, and a second pair made by the base;
+  - Moon base II: sintered bricks, the regolith cell and its modes, titanium without chlorine, the solar array, the cryogenic plant with liquid nitrogen and oxygen, the sealed dome;
+  - the far side: Deep Space Antenna → Mars chart;
+  - on Mars: the Martian seed and the Earth–Mars bridge, the atmosphere processor and methalox, the ice, the extraction cascade and samarium, and RTM coils.
+- **Below it, Earth:**
+  - the vacuum rule, the super chest and tank, the wither line;
+  - battery buffer → large gas turbine → combined-cycle plant, and the hot strip mill;
+  - nitric acid → platinum plant → platinum, palladium, rhodium and ruthenium → ruthenium catalyst;
+  - EV to IV transformer (MPIC chips) → EV hatches;
+  - the EV circuit assembler → nanoprocessor line → supercomputer.
+- **The antenna's text:** "With Earth's noise blocked by 3,474 km of rock, the Deep Space Antenna hears a steady hiss from Sagittarius: the center of the galaxy, 26,000 light-years away. You will go there. Mars first."
+- **The exit:** "Mars gave you tungsten. Venus and Mercury burn. That's next."
+- **EV hatches come late.** EV energy and dynamo hatches need MPIC chips (phosphorus boule, brown lens, EV cutter) and the Extreme Voltage Coil (fine platinum wire), so they arrive after the platinum plant and the phosphorus line. Until then, two HV energy hatches let a multiblock run EV recipes (GTM allows one tier up with two hatches of the top tier), and the lunar solar array and the combined-cycle plant run on HV dynamo hatches.
 
 ## Risks
 
