@@ -256,7 +256,9 @@
     var legacySamples = (HV.legacySamples || []).slice()
     var badSamples = legacySamples.filter(function (id) {
       var path = id.substring(id.indexOf(':') + 1)
-      var drills = drillRecipes.filter(function (r) { return String(r.id).indexOf('/' + path.replace('vein_sample_', '') + '_') >= 0 }).length
+      // a drilling recipe of this vein is <...>/<vein>_<bit>...; the Mars scheelite vein (scheelite_mars_<bit>) is another sample's
+      var ofVein = new RegExp('/' + path.replace('vein_sample_', '') + '_(bronze|steel|vanadium_steel|stainless_steel|titanium)(_|$)')
+      var drills = drillRecipes.filter(function (r) { return ofVein.test(String(r.id)) }).length
       return !Item.exists(id) || hidden.indexOf(id) < 0 || samples.indexOf(id) >= 0 || drills > 0 ||
         !rm.byKey(rl('grindless:crafting/empty_vein_probe_from_' + path)).isPresent()
     })
