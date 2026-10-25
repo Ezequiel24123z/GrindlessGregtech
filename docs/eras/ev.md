@@ -51,7 +51,7 @@ AE2 is the backbone between planets (the user's decision), and improving it is a
 - **ME hatches on the Moon.** The tripod, cell and cryogenic plant request from and deliver to the home network: Titanium reaches Earth without anyone moving it.
 - **Trunk.** ME P2P tunnels over the bridge (32 channels each): the Moon base has a full network without more pairs.
 - **Power** (measured on 2026-10-25, run `20261025-055851-ae2-interplanetary`).
-  - **Main route:** EU P2P tunnels (`eup2p`, available since LV) carry 32,768 EU/t per pair across the bridge with no converters. FE P2P with GTM's 16 A EV converters (`gtceu:ev_16a_energy_converter`) carries the same, and stays for FE devices.
+  - **Main route:** EU P2P tunnels (`eup2p`, available since LV) carry power across the bridge with no converters. A tunnel has no cap of its own: it passes the voltage through and splits the amperage over its outputs, so the hatches at each end set the limit (32,768 EU/t was measured in EV with 16 A EV parts). FE P2P with GTM's 16 A EV converters (`gtceu:ev_16a_energy_converter`) carries the same, and stays for FE devices.
   - **AE2's toll** is the same for both: 2.5% of the energy, paid in AE (0.05 AE per EU, 1,638.4 AE/t at full rate). It never blocks a transfer, but an unpowered network stops the tunnels.
   - **Bridge upkeep:** 22 AE/t per bridge block, about 405 AE/t for a linked pair with its tunnels.
   - Earth covers the lunar night, and the daytime solar surplus flows home.
