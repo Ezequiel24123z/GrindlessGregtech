@@ -95,15 +95,29 @@ What it gains: **IV's energy without burning anything, with a reactor that GTM d
 
 What it gains: **radioactive material never passes through hands, and it makes two recipes that are impossible at small scale.** GTM flags uranium, plutonium, radon and tritium as radioactive; here they enter through buses and leave to the network. The circuit selects the mode. Modes 1 and 4 are composed from the live recipes, with the same energy and yield, like the EV platinum plant; modes 2 and 3 are ours.
 
-1. **Enrichment:** 3 uraninite + 4,000 mB of HF → 0.1 U-235 + 0.9 U-238 + 2,000 mB of water + 4,000 mB of F₂ (steps `uranium_hexafluoride`, `uranium_hexafluoride_separation` and the two electrolyses). The UF₆ does not leave and the fluorine comes back: the hot cell returns more F₂ than it needs.
-2. **Fuel:** LEU assemblies (U-235 + U-238 + O₂, with a TS plate cladding), MOX (Pu + U-238) and breeder; RTG pellets (plutonium oxide); Pu-Be neutron source (`grindless:pube_neutron_source`, with Nether beryllium).
-3. **Reprocessing** (PUREX): spent fuel + HNO₃ → U-238 and Pu-239 back + Xe, Kr, Cs and Nd + NOₓ for the Ostwald tower + vitrified waste (`gtnn:radioactive_waste`, a GT-- item with no use).
-4. **Radon:** U-238 + 10,000 mB of air → 1,000 mB of Rn (`radon_from_uranium_238`). The 8 plutonium ingots that GTM returns as dust stay inside as a catalyst, and the dust → ingot loop is closed.
+1. **Enrichment:** 30 uraninite + 40,000 mB of HF → 1 U-235 + 9 U-238 + 20,000 mB of water + 40,000 mB of F₂ (steps `uranium_hexafluoride`, `uranium_hexafluoride_separation` and the two electrolyses), one LEU assembly's uranium. The UF₆ does not leave, and the HF's fluorine comes back as F₂, no more (decision 10).
+2. **Fuel:** MOX (oxide: 2 Pu + 8 U-238 + O₂) and breeder (metal: a Pu ingot core in 9 U-238 ingots), both in Zircaloy tubes with helium; RTG pellets (PuO₂ in Pt-Rh foil); Pu-Be neutron source (`grindless:pube_neutron_source`, PuBe₁₃ with Nether beryllium, in stainless steel foil). Fresh LEU is made by the fuel fabrication plant (decision 7).
+3. **Reprocessing** (PUREX): a spent assembly + 4,000 mB HNO₃ → U-238 and Pu-239 back + Xe and Kr, Cs and Nd (10 % chances) + 4,000 mB NO₂ for GTM's nitric acid recipes + one vitrified waste (`gtnn:radioactive_waste`, a GT-- item with no use: the fission products and the chopped cladding).
+4. **Radon:** U-238 + 10,000 mB of air → 1,000 mB of Rn (`radon_from_uranium_238`). The 8 plutonium ingots that GTM returns as dust stay inside as a catalyst, so the first radon needs no plutonium: radon → Quantum Star → IV field generator → reactor works before any plutonium exists.
 
 - **Structure:** radiation-proof casing cells, laminated glass windows and manipulators; 1 or 2 IV hatches; accepts ME.
-- **Built with:** IV hull, centrifuge, chemical reactor and IV electrolyzer, 2 IV robot arms and 4 IV circuits.
+- **Built with:** IV hull, IV centrifuge, IV chemical reactor and an **EV electrolyzer** (GTM's IV one needs osmium wire, which is Mercury's), 2 IV robot arms and 4 IV circuits.
 - **By-products:** F₂ → the HF for the naquadah plant. Xe → enriched naquadah. Kr and Nd → noble gases and magnets. Cs → stored for naquadria (ZPM). Waste → stored contained and never emptied. Thorium → stored; lead → casings.
 - **Cut-down option:** without reprocessing or the breeder, the essentials remain: enrichment, LEU and radon.
+- **As built (IV-A3):**
+  - The circuit is the mode (1 enrichment, 2 fuel, 3 reprocessing, 4 radon); the recipes live in `data/grindless/tables/hot_cell.json`. Modes 1 and 4 are composed at every load by `server_scripts/grindless/lib/compose.js`, the platinum plant's composer as a library, and spend the stages' energy at 7,680 EU/t.
+  - Structure: 7 wide × 5 high × 4 deep, two 2×2×2 cells of radiation-proof casing on a light concrete floor, two laminated glass windows, tungstensteel frame manipulators, PTFE pipe vessels and filter casings on the roof. Voiding items or fluids is refused, so the waste stays contained.
+  - Every recipe of the type has its own ingredient set: MOX and the breeder differ by form (oxide dust and O₂ against metal ingots), the RTG pellet by its Pt-Rh foil, the Pu-Be source by beryllium.
+- **Plutonium balance (IV-A3, next to the reactor's EU):**
+
+  | Fuel | EU per assembly | Pu in | Pu back from its spent assembly | Net Pu |
+  |---|---|---|---|---|
+  | LEU (light or heavy water) | 1.31 or 2.62 G | 0 | 1 | +1 |
+  | MOX (heavy water) | 2.62 G | 2 | 1 | −1 |
+  | Breeder | 0.66 G | 1 | 2 | +1 |
+  | RTG pellet, Pu-Be source | — | 1 | — | −1 |
+
+  One spent LEU assembly pays for one MOX. A breeder and a MOX together are plutonium-neutral and burn 2 U-238 for 3.28 G EU: the closed cycle runs on enrichment tails. The hot cell spends 3.07 M EU to make a MOX or breeder assembly, 4.61 M to reprocess one and 1.02 M to enrich one LEU's uranium, against 0.66–2.62 G per assembly.
 
 ### Naquadah plant: `gtceu:naquadah_plant`
 

@@ -127,6 +127,7 @@ Gregtech Grindless is a GregTech Modern pack (Minecraft 1.20.1, Forge) in which 
   | rare-earth extraction cascade | 9216–9279 |
   | IV foundation (registrations only) | 9728–9791 |
   | fission reactor | 9984–10047 |
+  | hot cell | 10240–10303 |
 
   For a new test, keep going in steps of 256.
 
