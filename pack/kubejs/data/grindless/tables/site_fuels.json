@@ -1,0 +1,38 @@
+{
+  "_source": "Our own table: the site rules of power (docs/eras/ev.md, Moon rules and Mars rules). Dimension ids: vanilla, the pack's datapack (grindless:void, grindless:flat) and Gregicality Rocketry 0.2.9 (see planets.json).",
+  "_how_it_is_used": [
+    "Read by server_scripts/grindless/power/generators.js (published as global.grindless.power.site) and the smoke test gg_test_mars_site.js.",
+    "A fuel needs air to burn. Every recipe of burningTypes gets one dimension condition per entry of airDimensions. GTM ORs the dimension conditions of a recipe (DimensionCondition.isOr in GTM 7.5.3), so the fuel burns in any of those dimensions and nowhere else: not on the Moon, on Mars, in any orbit or on any planet added later. Reversed conditions cannot say 'not the Moon and not Mars': ORed, they pass everywhere.",
+    "airDimensions are the dimensions of Earth in planets.json without its orbit: they have breathable air. A new dimension with air (from a new mod) has to be added here, or nothing burns in it.",
+    "burnAnywhere: fuels that carry their own oxidizer, and lava, which heats a boiler without burning. Their recipes get no condition. A recipe matches when one of its fluid inputs is the fluid or its forge: tag (for example forge:lava).",
+    "newFuels: fuel recipes of ours. gtmDuration is the duration GTM would give the recipe; generators.js doubles it like every other generator recipe (DECISIONS.md, power pass), so the EU per mB matches the rest. They are made with no condition: they burn anywhere.",
+    "A recipe that already carries a dimension condition is left alone: it was placed on purpose."
+  ],
+  "airDimensions": ["minecraft:overworld", "minecraft:the_nether", "minecraft:the_end", "grindless:void", "grindless:flat"],
+  "burningTypes": [
+    "gtceu:combustion_generator",
+    "gtceu:gas_turbine",
+    "gtceu:semi_fluid_generator",
+    "gtceu:rocket_engine",
+    "gtceu:steam_boiler",
+    "gtceu:large_boiler"
+  ],
+  "burnAnywhere": [
+    { "fluid": "gtceu:methalox", "why": "methane premixed with its oxygen (ev/foundation.js): the fuel of the Moon and Mars" },
+    { "fluid": "gtceu:rocket_fuel", "why": "GTM's rocket fuel: dimethylhydrazine mixed with oxygen or dinitrogen tetroxide" },
+    { "fluid": "gtceu:rp_1_mixed_fuel", "why": "GT--: RP-1 mixed with oxygen" },
+    { "fluid": "gtceu:methylhydrazine_nitrate_rocket_fuel", "why": "GT--: methylhydrazine mixed with nitric acid" },
+    { "fluid": "minecraft:lava", "why": "lava heats a boiler without burning" }
+  ],
+  "newFuels": [
+    {
+      "name": "methalox",
+      "type": "gtceu:gas_turbine",
+      "fluid": "gtceu:methalox",
+      "amount": 6,
+      "eut": 32,
+      "gtmDuration": 7,
+      "why": "6 mB of methalox hold 2 mB of methane (CH4 + 2 O2), the amount of GTM's methane recipe (2 mB, 7 ticks, 32 EU/t): the same EU per mB of methane, 224 EU after the doubling, about 74.7 EU per mB of methalox. Mixing costs 12.8 EU per mB of methalox (ev/foundation.js), the price of carrying the oxygen."
+    }
+  ]
+}
