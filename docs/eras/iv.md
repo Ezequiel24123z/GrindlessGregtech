@@ -7,10 +7,10 @@ IV starts with what EV leaves behind (`ev.md`): an IV hull in Tungstensteel (tun
 ## Route
 
 1. **IV grid and HSS-G.** IV cutter in a cleanroom → HPIC chips → IV hatches (IV hull, 2 W cables, 2 HPIC, IV voltage coil and NaK; two of the same step go up one tier). HSS-G: EV mixer (5 TS + Cr + 2 Mo + V → 9) → 4,200 K EBF with RTM coil → `hssg_coil_block` coil (IV assembler: 8 double HSS-G wires, 8 WC plates and 144 mB of W) → 5,400 K EBF.
-2. **Uranium.** With the Tungstensteel drill bit (`grindless:tungsten_steel_drill_bit`, which `ev.md` moves to IV), the home drills open `pitchblende_vein_end`: pitchblende → uraninite, thorium and lead.
-3. **Hot cell.** Enrichment (UF₆ in one pass) and radon with the plutonium inside → Quantum Star (Nether Star + 1,250 mB of Rn) → IV field generator (SmFeAsO, with samarium from Mars).
-4. **Reactor.** LEU cores with light water; with heavy water from Mars, double the power and tritium. The power plant no longer runs at the limit.
-5. **Thermal suit and level 3 rocket.** PBI (IV reactor) → insulating fabrics from GCYR → thermal upgrade for the suit (IV assembler); without it, Venus (737 K) and Mercury (440 K) kill. Level 3 engine and tank in Tungstensteel and the EV antenna chart.
+2. **Uranium.** The in-situ leach field in the End (`gtceu:isr_wellfield`, decision 2) dissolves uraninite from GTM's `pitchblende_vein_end` in place: the vein's sample (raw pitchblende + raw uraninite, mined once by hand), sulfuric acid, oxygen and an ion-exchange resin. No drill takes that vein. Fluorite from the new Earth vein (drilled from steam on) goes through the fluorspar kiln for the HF.
+3. **Hot cell.** Enrichment (UF₆ in one pass, the HF's fluorine back as F₂) and radon with no plutonium stock → Quantum Star (Nether Star + 1,250 mB of Rn) → IV field generator (SmFeAsO, with samarium from Mars).
+4. **Reactor.** LEU assemblies from the fuel fabrication plant (UO₂ pellets in Zircaloy tubes, with the Moon's helium), first with light water; with heavy water from the heavy-water plant (Mars ice), double the power. The tritiated heavy water goes to the Moon's tritium removal facility, which returns the heavy water and stores the tritium. Spent fuel goes back to the hot cell for MOX and the breeder. The power plant no longer runs at the limit.
+5. **Thermal suit and level 3 rocket.** PBI (IV reactor) → insulating fabrics from GCYR → thermal upgrade for the suit (IV assembler); without it, Venus (737 K) and Mercury (440 K) kill. GCYR's elite motor and tank, remade in the IV assembler with tungsten steel and the antenna's inner-planets chart: a rocket's level is the floor of its average motor and tank tiers, so level 3 needs every motor and tank elite, and two elite tanks for the trip's fuel.
 6. **Venus, by hand.** Naquadah sample, starter RTG cell, casings made there, half of the bridge and the heat engine. Then, the pressurized drill.
 7. **Mercury, by hand.** Iridosmine sample, solar field and RTG cell, half of the bridge and the night-side drill.
 8. **Naquadah.** Naquadah plant → dust → 5,000 K EBF → ingot → boule (5,400 K EBF) → Naquadah-doped Wafers (8 CPU Wafers each, in a cleanroom).
@@ -26,12 +26,12 @@ IV starts with what EV leaves behind (`ev.md`): an IV hull in Tungstensteel (tun
 - **Helium from the Moon.** Liquid Helium to cool the hot naquadah ingots (5,000 K).
 - **Rare earths (Mars).** Samarium: SmFeAsO, the IV superconductor, and LuV magnets.
 - **Platinum plant.** Pt, Pd, Rh and Ru as before, and it gains mode 3. The Pd makes the Pd/C for enriched naquadah.
-- **Cryogenic plant and Ostwald tower.** Liquid Nitrogen (Mercury drill by day), LOX and LH₂ (rocket), HNO₃ (reprocessing).
+- **Cryogenic plant.** Liquid Nitrogen (Mercury drill by day), LOX and LH₂ (rocket). The nitric acid for reprocessing comes from GTM's chemical reactors (decision 10: no Ostwald tower).
 - **Wither, nano, antenna and AE2.** Nether Stars → Quantum Stars; Nanoprocessor Supercomputers → LuV mainframes; the deep space antenna (`gtceu:deep_space_antenna`) writes the Venus and Mercury chart; the EV network (P2P trunk, power as FE and the pairs the base sets up) is where the IV network grows from.
 
 ## Venus and Mercury
 
-- **Level 3 rocket.** GCYR sets Venus and Mercury at level 2, like Mars (verified in the jar); `ev.md` raises them to 3 with a datapack so the Mars rocket cannot reach them. GCYR works out the level as (engine + tank) / 2, and IV makes the two level 3 parts with GCYR's KubeJS plugin (`grindless:iv_rocket_motor` and `grindless:iv_fuel_tank`, to verify): tank = 2 Tungstensteel drums + 6 Kapton K plates + TS frame (what GCYR asked for the advanced one); engine = 4 advanced thrusters + 2 IV motors + 6 Kapton K plates + TS frame. IV assembler, with the antenna chart as catalyst. GCYR's elite tier (ZPM) is left for later.
+- **Level 3 rocket.** GCYR sets Venus and Mercury at level 2, like Mars (verified in the jar); `ev.md` raises them to 3 with a datapack so the Mars rocket cannot reach them. GCYR works out a rocket's level as the floor of (average motor tier + average tank tier) / 2, so level 3 needs every motor and every tank elite (research, 2026-10-25). IV remakes GCYR's elite parts (`gcyr:elite_fuel_tank`, `gcyr:elite_rocket_motor`, whose only recipes are ZPM assembler ones) in the IV assembler with tungsten steel and the antenna's inner-planets chart, as EV remade the advanced ones (decision 10). GCYR's KubeJS motor builder creates a fuel tank (a GCYR bug), so no parts of our own are registered. A trip to Venus or Mercury takes 14,000 mB of fuel and an elite tank holds 12,000: the rocket needs two elite tanks.
 - **Suit.** The gate to the trip is GCYR's thermal upgrade (`gcyr:space_suit_thermal_upgrade_smithing_template`, assembler at 7,680 EU/t: 3 heat shield fabrics, 3 insulating fabrics with PBI, 2 titanium plates and 2 Kapton K plates). On the first visit, the chestplate tank alone is enough. At the bases, GCYR's IV oxygen spreader (`gcyr:iv_oxygen_spreader`, verify recipe).
 - **First visit, by hand.** You go down with an RTG cell, an IV assembler and home parts. Two ores are mined from the vein for the sample, the site casings and half of the bridge are made there, and a Waystone is left behind. After that, travel is free.
 
@@ -54,10 +54,12 @@ What is built there, and works only there: on Venus, the pressurized drill (whic
 |---|---|---|
 | Naquadah (and Pu-239 from the same vein) | deep vein on Venus | pressurized drill |
 | Iridium and osmium | Mercury iridosmine vein (`gtceu:iridosmine`, registered by IV-A1) | Mercury drill → platinum plant |
-| Uranium, thorium and lead | `pitchblende_vein_end` with a Tungstensteel drill bit; thorium also from Nether beryllium | home drills |
-| Heavy Water and deuterium | Mars ice (`ev.md`) | GTM distillation tower (our recipe) |
-| Pu-239, tritium, Xe, Kr, Cs and Nd | breeding, moderator and reprocessing | reactor and hot cell |
-| Radon | uranium + air, with the plutonium inside; also air from the End | hot cell; Extended Features' large collector |
+| Uranium (uraninite) | the End's pitchblende vein, leached in place (decision 2); thorium and lead stay in the ground | in-situ leach field |
+| Hydrofluoric acid | the Earth fluorite vein (fluorite, barite, galena, sphalerite), drilled from steam on | fluorspar kiln |
+| Heavy Water and deuterium | Mars ice (`ev.md`); the reactor's moderator comes back from the Moon | heavy-water plant; tritium removal facility; electrolysis for deuterium |
+| Pu-239, Xe, Kr, Cs and Nd | breeding and reprocessing | reactor and hot cell |
+| Tritium | the reactor's heavy-water moderator | tritium removal facility (Moon), the only source |
+| Radon | uranium + air, with the plutonium kept inside, so no plutonium stock is needed | hot cell; GTM's large chemical reactor with plutonium |
 | CO₂ and H₂SO₄ | air and clouds of Venus | GTM gas collector |
 
 It closes the loop: samples, drill bits and water, with no more trips. The five worlds feed the same network. There is no IV greenhouse and no new creature: the simulator ends at EV.
@@ -186,7 +188,7 @@ EV leaves the ME P2P tunnel trunk, power over EU P2P (or FE P2P with GTM convert
 | Naquadah | Venus → ore plant → oxide → naquadah plant → dust → 5,000 K EBF → ingot → boule (5,400 K EBF) → wafers; UHPIC (large reactor, two IV hatches, 576 mB of molten naquadah) | Ti and Ga: see the plant. Enriched oxide (28% of the ore): mode 2, or stored |
 | Iridium and osmium | Mercury → iridosmine → platinum plant, mode 3 → Ir (4,500 K EBF) and Os (EBF, two IV hatches) → ruridit (2 Ru + Ir), HSS-S (6 HSS-G + 2 Ir + Os) and osmiridium (LuV) | OsO₄ and Cl₂: stay inside. Platinum Sludge Residue: gold and Silicon Dioxide |
 | IV superconductors | samarium (Mars) → SmFeAsO (IV mixer); niobium (pyrochlore and tantalite) + titanium → NbTi; 3 Pd + Rh → Rhodium Plated Palladium | — |
-| Heavy water | Mars ice → water (five times more deuterium) → distillation tower (our recipe) → heavy water (`gtceu:heavy_water`) → reactor; electrolysis → deuterium | Light water: to the network. O₂: air. Reactor tritium: fusion |
+| Heavy water | Mars ice → the heavy-water plant (dual-temperature exchange with an H₂S charge, then finishing) → heavy water (`gtceu:heavy_water`) → reactor; electrolysis → deuterium | Light water: to the network. O₂: air. The reactor's tritiated heavy water: the Moon's removal facility, which returns the heavy water and stores the tritium for fusion |
 | Suit | PBI (IV reactor; the phenol returns), Kapton K and para-aramid (GCYR), fiberglass → fabrics → thermal upgrade | Phenol and HCl from the aramid: loops |
 | Venus | gas collector: CO₂ at the bottom and Sulfuric Acid in the clouds | CO₂: greenhouses. H₂SO₄: enriched naquadah and platinum plant |
 
@@ -241,7 +243,7 @@ It unlocks LuV: hulls, hatches and LuV components (assembly line); LuV mixer and
 No new mods.
 
 - **Startup:** types `fission_core`, `hot_cell` and `naquadah_refining`; machines `fission_reactor`, `hot_cell`, `naquadah_plant`, `pressurized_vein_drill`, `mercury_vein_drill`, `venus_heat_engine`, `mercury_solar_field`, `interferometer` (the multiblocks, with the pattern helper) and `rtg`; material `gtceu:iridosmine` and fluid `gtceu:heavy_water` (both registered by IV-A1); level 3 engine and tank (GCYR plugin); items for assemblies, spent fuel, RTG pellet, Pu-Be source, site casings and samples; reactor channel modifier.
-- **Server:** recipes composed from the live ones (hot cell, modes 1 and 4; naquadah plant; platinum, mode 3) and ours in tables. Veins: `naquadah_vein` to Venus, iridosmine on Mercury, GCYR's veins on Venus and Mercury removed, `veins_venus.json` and `veins_mercury.json`, and pitchblende with the Tungstensteel drill bit. Platline without Ir/Os, bees removed, and dimension, altitude and night conditions.
+- **Server:** recipes composed from the live ones (hot cell, modes 1 and 4; naquadah plant; platinum, mode 3) and ours in tables. Veins: `naquadah_vein` to Venus, iridosmine on Mercury, GCYR's veins on Venus and Mercury removed, `veins_venus.json` and `veins_mercury.json`, and the End's pitchblende vein read by the leach field (no drill takes it). Platline without Ir/Os, bees removed, and dimension, altitude and night conditions.
 - **Config:** nothing new. Venus and Mercury go into EV's planet table.
 - **Tests:** (1) it starts; (2) reactor, hot cell and naquadah plant form and process (plant and IV multiblock strips); (3) on Venus and Mercury (new strips after EV's: Venus X 3072–3135 and Mercury X 3328–3391, Y 98–112) the drills, heat engine and solar field form and only work there, and the level 3 rocket arrives; and `-Tier iv` with no orphans.
 
@@ -259,7 +261,7 @@ Credits to note in `CREDITS.md`: designed-core reactor (Grindless campaign, T5, 
 
 1. **IV is the nuclear era.** Our fission reactor, with designed cores, takes the place of the first fusion, which stays in LuV (GTM's). The extreme combustion engines remain as the alternative. It replaces the previous version's power plant of 4 extreme engines.
 2. **Three new multiblocks:** reactor, hot cell and naquadah plant. The plant reads GT--'s live recipes and swaps the activator's window for a Pu-Be source; its mode 2 (enriched) is a LuV recipe with two IV hatches.
-3. **Family steps:** pressurized drill (Venus, and Mars with dust filters) and Mercury drill (night side), with a Tungstensteel drill bit and a cap of 128; Venus heat engine and Mercury solar field; RTG cell; interferometer; and the platinum plant's mode 3. At home there is no IV drill: the Tungstensteel drill bit opens the pitchblende in the older drills.
+3. **Family steps:** pressurized drill (Venus, and Mars with dust filters) and Mercury drill (night side), with a Tungstensteel drill bit and a cap of 128; Venus heat engine and Mercury solar field; RTG cell; interferometer; and the platinum plant's mode 3. At home there is no IV drill: the End's pitchblende is leached in place (decision 2).
 4. **Naquadah only from Venus:** `gtceu:naquadah_vein` moves from the End to Venus (generation and table), and the naquadah bees are removed.
 5. **Iridium and osmium only from Mercury:** new material `gtceu:iridosmine` in a Mercury vein. Earth's platline stops releasing the Ir/Os mixture and the iridium residue, so open question 10 in `ev.md` is closed: there is nothing to refine on Earth. The osmium bees are removed.
 6. **Travel:** Venus and Mercury at level 3 (`ev.md` datapack), with the level 3 engine and tank made in IV with GCYR's KubeJS plugin and the antenna chart; GCYR's thermal upgrade (IV) is the other half of the gate. The first visit is by hand, with an RTG cell and casings made there; after that, Waystones. GCYR's veins on Venus and Mercury are removed.
@@ -292,7 +294,7 @@ What changed while EV was built, and what the IV design has to take into account
 - **Deuterium has no Earth source left** (`hydrogen_separation` removed, ender air stripped). IV's heavy water from the Martian ice is the first source of all.
 - **Power by site.** Fuels only burn in the dimensions with air (`data/grindless/tables/site_fuels.json`, an allowlist that GTM ORs), so "no combustion" on Venus and Mercury needs no more code. An IV machine that burns fuel in a script-added recipe calls `global.grindless.power.burnsInAir(builder)`. A byproduct that must have a destination can refuse fluid voiding, like the combined-cycle plant (`grindless.steam_outputs.no_voiding`).
 - **Weather.** `space/airless_weather.js` keeps every dimension of the other planets dry, Venus and Mercury included. If Venus's clouds should ever be weather, Venus has to be exempted there.
-- **Family veto.** A family recipe of a tier lives under `<type>/<tier>/`, and every lower machine skips the folders above its own tier; the steam machines skip every tier folder. The Tungstensteel-bit recipes that the older home drills should run (the pitchblende vein, *Route* step 2) therefore cannot live under `vein_drilling/iv/`. They go in the folder of the lowest drill meant to run them, or the veto gets an explicit exception.
+- **Family veto.** A family recipe of a tier lives under `<type>/<tier>/`, and every lower machine skips the folders above its own tier; the steam machines skip every tier folder. The Tungstensteel-bit recipes that the older home drills should run (the pitchblende vein, *Route* step 2) therefore cannot live under `vein_drilling/iv/`. They go in the folder of the lowest drill meant to run them, or the veto gets an explicit exception. (Superseded by decision 2: the leach field takes the pitchblende, so no drill needs an exception.)
 - **AE2.** EU P2P is the main power route between planets. The tunnel has no cap of its own (EUP2P passes the voltage and splits the amperage), so 16 A IV hatches at each end carry the reactor's 131,072 EU/t; AE2 takes its 2.5 % toll. The laser tunnel (`eup2p:laser_p2p_tunnel`) exists, but in stock GTM only LuV machines take laser hatches, so IV doesn't need it.
 - **GTM's HV fluid drilling rig** arrives with Mars (tungsten carbide gears), at the end of EV.
 
@@ -451,7 +453,7 @@ All of them are IV recipes (7,680 EU/t unless a composed GTM stage sets another 
 - **Why it is not a big cube:** a flat pattern of wells. It works by chemistry, not with a bit.
 - **Crossings:** MV (the End vein), LV (the acid), Earth or the Moon (the O₂), and IV (the hot cell and the reactor).
 - **Risks:**
-  - If the Tungstensteel-bit drilling stays too, uranium has two routes: pick one.
+  - Decision 2 picked the leach field as uranium's only route: no drill takes the vein.
   - The resin needs a recipe (GTM has no polystyrene; styrene + sulfuric acid, *(tune)*).
 - **Source and licence:** real: in-situ recovery of uranium, about 55–56 % of the world's mine output in 2022–24 (World Nuclear Association), with the five-spot pattern, ion exchange and peroxide yellowcake.
 - **As built (IV-A4):**
