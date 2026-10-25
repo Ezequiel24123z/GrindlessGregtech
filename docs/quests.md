@@ -204,6 +204,10 @@ node tools\quests\fix-ids.mjs [--chapter lv_age] [--write] [--map]
 
 # Preview: one PNG per chapter (boxes, lines, grid)
 powershell -File tools\quests\Render-QuestPreview.ps1 -Chapter steam_age -OutDir <folder> [-Prefix after-]
+
+# Generated chapters: edit the data, then regenerate (the SNBT comes out with the same ids)
+node tools\quests\ev-chapter\gen.mjs                                    # ev_age.snbt from quests-data.mjs (section 14)
+powershell -File tools\quests\processing-lines\run.ps1 -Dump <kubejs-exported> -Write [-Preview]   # Processing Lines and Power (sections 17 and 18)
 ```
 
 - The preview draws quest links as teal dashed boxes, with the lines FTB Quests draws to them.
@@ -245,7 +249,7 @@ Why this order, checked against the recipe dump of v0.4.0:
 
 **Tested in-game (24-10-2026, pack with the Moon):** `gg_test_quests` loads both with all their quests and dependencies; `gg_test_quest_book`, on a real client, completes *Arrival* and *The Neutronium Toolbox*, claims their 22 rewards, and checks that the 20 tools carry GTM's NBT, do not wear out, mine, pick up items with the magnet, break a 3x3 area (mining hammer), and show "Unbreakable" with no durability lines. The book screenshots read from left to right.
 
-The SNBT files are the source: they are edited by hand, following this guide.
+The SNBT files are the source: they are edited by hand, following this guide. Exceptions generated from data in `tools/quests/` are `ev_age.snbt` (section 14), the Processing Lines (section 17) and Power (section 18). For those, edit the data and regenerate.
 
 ## 14. Plan for Steam, LV, MV, HV, EV and IV: the Moon through each instrument
 
@@ -336,6 +340,8 @@ The sky row and the steam-content machines are in. Section 13 describes the chap
 
 Spine: the journey from *Lunar Base* to *Red Horizon* and the *IV Machine Hull*. Above it the Moon and Mars, below it Earth's power, platinum and nano circuits (see `docs/eras/ev.md`, "Quests"). Far requirements are named in the text, not drawn as long lines (section 5).
 
+The chapter is generated: its source is `tools/quests/ev-chapter/quests-data.mjs` (every quest, task and reward id spelled out). Edit the data and run `node tools/quests/ev-chapter/gen.mjs`, which rewrites `ev_age.snbt` in the book's format.
+
 ### IV — "IV: Inner Planets" (`iv_age.snbt`, 53 quests, 74 dependencies; done in v0.7.0)
 
 Spine: the route from the hot cell and the reactor, through the Moon's tritium and the chart, to Mercury, iridium and the assembly line, ending at *Gate to LuV*. Above it uranium, fuel and Venus; below it heavy water, Mercury's solar field and the parallel hatch (see `docs/eras/iv.md`, "Quests"). Machine quests carry the machine's name; the two landings (*Under the Clouds*, *Day of Fire*) are the milestones.
@@ -394,5 +400,17 @@ A chapter group of its own, "Processing Lines", with one chart per tier: `pl_ste
 - **Arrows** are dependencies and read left to right. An arrow is one recipe, or a short chain whose intermediates the subtitle names ("EBF at 5,000 K, then the freezer").
 - **Quest links** import a quest from an earlier chart (sulfuric acid from LV, nitric acid from EV). Only across chapters: FTB Quests draws a dependency's line to every button of that quest, links included, so a link in its own chapter repeats all its lines, and a loop through a link is a cycle.
 - **Text:** a title, a subtitle (the machine, or where the thing goes), and on our multiblocks one or two sentences in the voice of section 8. A leaf always says where it ends (rule 3).
-- **The source is the data, not the SNBT.** `files/scratch/proc-lines/pl-data-<tier>.mjs` holds the clusters, nodes, arrows and texts; `pl-gen.mjs` writes the chapters, the group line and the linter's roots; `pl-check.mjs` checks every arrow against a `gg_dump` and writes `check-report.md`; `run.ps1 -Write -Preview` does all of it, lints and renders the previews. Ids are hashes of the chapter and the node's key, so they don't change when a chart is regenerated.
+- **The source is the data, not the SNBT.** `tools/quests/processing-lines/pl-data-<tier>.mjs` holds the clusters, nodes, arrows and texts; `pl-gen.mjs` writes the chapters, the group line and the linter's roots; `pl-check.mjs --dump <kubejs-exported>` checks every arrow against a `gg_dump` (`--out <file>` writes the full report, every arrow with the recipe that proves it). `run.ps1 -Dump <kubejs-exported> -Write -Preview` does all of it, lints and renders the previews into `out\` next to it (ignored by git). Ids are hashes of the chapter and the node's key, so they don't change when a chart is regenerated.
 - **When a tier lands:** write its data file from the era's "As built" sections, check it against a dump of that era, regenerate, and add its counts to `GG_QUESTS_EXPECTED`.
+
+## 18. Power
+
+The `power` chapter ("Power") sits in Quality of Life after Workshop. It compares generation from Steam through IV, fuel values, storage and transmission without making progression depend on it.
+
+- **Layout:** one band per tier, with two IV bands; then later generators without speculative numbers, the grid and the wireless network. Generators are gears, fuels rounded squares and grid components hexagons.
+- **Reference only:** 83 quests and 47 links, flexible progression, optional item tasks plus checkmarks, no rewards and no dependencies from progression chapters.
+- **Links:** fuels import the Processing Lines nodes that make them; generators import their introduction quests. Links never receive an arrow. Do not import a quest if its inherited dependencies would draw a long line across the chart.
+- **Source:** `tools/quests/processing-lines/power-data.mjs`, the shared generator and `pl-check.mjs`. Counts go in `GG_QUESTS_EXPECTED.power`; stable node keys preserve quest ids.
+- **Figures:** the checker recomputes EU per unit of fuel, output, steam, capacities, cable loss and AE2's P2P tax from the recipe dump, `electric.json`, pack config and scripts. Wireless figures also check the current table, structure slots and registered ids. An unverifiable number does not go in.
+- **Wireless:** the complete LV-IV band requires the wireless implementation. Its covers follow the exact-class support boundary: normal GTM machines, chargers and battery buffers, not converters or multiblock controllers. `WITH_WIRELESS = false` is a fallback for a release without wireless (77 quests and 82 dependencies), not the assembled candidate.
+- **Later eras:** LuV stays in the later row without figures until implemented; then add its own checked band.

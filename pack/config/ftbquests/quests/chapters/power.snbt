@@ -1,0 +1,1651 @@
+{
+	autofocus_id: "3F30292CB0F46ACD"
+	consume_items: false
+	default_hide_dependency_lines: false
+	default_quest_shape: ""
+	filename: "power"
+	group: "7C6BF927E205E2F4"
+	icon: "gtceu:lv_steam_turbine"
+	id: "3BAA93BF8B4F3550"
+	order_index: 5
+	progression_mode: "flexible"
+	quest_links: [
+		{
+			id: "10E1D31B85F3C4B6"
+			linked_quest: "6D923ADC90127182"
+			shape: "rsquare"
+			x: 0.5d
+			y: 0.5d
+		}
+		{
+			id: "1FF12D621F8D58FF"
+			linked_quest: "19979B49F362A2DF"
+			shape: "rsquare"
+			x: 0.5d
+			y: 2.0d
+		}
+		{
+			id: "3AFCF519E3DE4D4C"
+			linked_quest: "56C1CC49EE43FB68"
+			shape: "rsquare"
+			x: 7.0d
+			y: 0.75d
+		}
+		{
+			id: "7629687969790D83"
+			linked_quest: "4996827E4BFC339E"
+			shape: "rsquare"
+			x: 0.5d
+			y: 7.25d
+		}
+		{
+			id: "551471D787EB07BE"
+			linked_quest: "36B68B4C2B1E0DBA"
+			shape: "rsquare"
+			x: 7.0d
+			y: 7.25d
+		}
+		{
+			id: "1F65046CC771A887"
+			linked_quest: "78196EE68F118BA4"
+			shape: "rsquare"
+			x: 7.0d
+			y: 10.25d
+		}
+		{
+			id: "35A36F3610779E8B"
+			linked_quest: "3B4CA27555ED52FF"
+			shape: "rsquare"
+			x: 9.25d
+			y: 11.0d
+		}
+		{
+			id: "30C711880F9E3012"
+			linked_quest: "3A7E2C5F1B9D4061"
+			shape: "rsquare"
+			x: 15.75d
+			y: 7.25d
+		}
+		{
+			id: "7930360B5F5BF464"
+			linked_quest: "1CE11DDA27E5B778"
+			shape: "rsquare"
+			x: 22.25d
+			y: 7.25d
+		}
+		{
+			id: "5D24A174C26C2422"
+			linked_quest: "706EBF5AC6E6A649"
+			shape: "rsquare"
+			x: 28.75d
+			y: 7.5d
+		}
+		{
+			id: "74165808BE1116F8"
+			linked_quest: "3B49C5C485933961"
+			shape: "rsquare"
+			x: 7.0d
+			y: 14.75d
+		}
+		{
+			id: "7FE6BF0407670E7F"
+			linked_quest: "35A04771E8252D31"
+			shape: "rsquare"
+			x: 7.0d
+			y: 16.25d
+		}
+		{
+			id: "7256FF3615F78EAF"
+			linked_quest: "193E72A27638CE3B"
+			shape: "rsquare"
+			x: 7.0d
+			y: 17.75d
+		}
+		{
+			id: "175921CA42C992E0"
+			linked_quest: "57ABFD6435016C70"
+			shape: "rsquare"
+			x: 13.5d
+			y: 14.75d
+		}
+		{
+			id: "5B056E4E85EADE89"
+			linked_quest: "753F4EB4AD967E41"
+			shape: "rsquare"
+			x: 13.5d
+			y: 16.25d
+		}
+		{
+			id: "70C9D9A0CA92CB2C"
+			linked_quest: "305F916B3530ABAD"
+			shape: "rsquare"
+			x: 20.0d
+			y: 14.75d
+		}
+		{
+			id: "70640B36ECF03D0B"
+			linked_quest: "39BFC0FAB2D7CD50"
+			shape: "rsquare"
+			x: 7.0d
+			y: 22.75d
+		}
+		{
+			id: "14216B02880B8F35"
+			linked_quest: "15F18C7DA5F52345"
+			shape: "rsquare"
+			x: 7.0d
+			y: 24.25d
+		}
+		{
+			id: "3F220BE4CA6627AB"
+			linked_quest: "31187D1F8D38635D"
+			shape: "rsquare"
+			x: 7.0d
+			y: 25.75d
+		}
+		{
+			id: "35A45CACB7C5C6CD"
+			linked_quest: "55FAC45856DC4D1C"
+			shape: "rsquare"
+			x: 13.5d
+			y: 22.75d
+		}
+		{
+			id: "3C9FE59EFD2CD79A"
+			linked_quest: "34AFF67F96F7B95A"
+			shape: "rsquare"
+			x: 13.5d
+			y: 24.25d
+		}
+		{
+			id: "54CE2B9A9F53B154"
+			linked_quest: "7C224996639926D9"
+			shape: "rsquare"
+			x: 13.5d
+			y: 25.75d
+		}
+		{
+			id: "7A629F830D17B5E8"
+			linked_quest: "362FFC64DB9D2C89"
+			shape: "rsquare"
+			x: 13.5d
+			y: 27.25d
+		}
+		{
+			id: "7551372F15BDF5B2"
+			linked_quest: "3E36E1AF43DCB110"
+			shape: "rsquare"
+			x: 20.0d
+			y: 22.75d
+		}
+		{
+			id: "7546F7471165184A"
+			linked_quest: "3AF5BDE984515B4E"
+			shape: "rsquare"
+			x: 0.5d
+			y: 30.75d
+		}
+		{
+			id: "11870F7886EA3FDA"
+			linked_quest: "1B870410FCE22512"
+			shape: "rsquare"
+			x: 0.5d
+			y: 32.25d
+		}
+		{
+			id: "37C0091C877E9407"
+			linked_quest: "1DD071239194961D"
+			shape: "rsquare"
+			x: 7.0d
+			y: 30.75d
+		}
+		{
+			id: "570665E755E80630"
+			linked_quest: "734B97375A3121C4"
+			shape: "rsquare"
+			x: 20.0d
+			y: 31.0d
+		}
+		{
+			id: "5FCDAD2C717F9FCF"
+			linked_quest: "509D8E16F2FFD75B"
+			shape: "rsquare"
+			x: 26.5d
+			y: 31.0d
+		}
+		{
+			id: "7FE76419D53E922F"
+			linked_quest: "5BED4655BDD34ED3"
+			shape: "rsquare"
+			x: 0.5d
+			y: 38.75d
+		}
+		{
+			id: "3C096973E2FB5131"
+			linked_quest: "11DC5691F1CA0B91"
+			shape: "rsquare"
+			x: 0.5d
+			y: 41.75d
+		}
+		{
+			id: "11844F34095CCC55"
+			linked_quest: "503863FFACA225A8"
+			shape: "rsquare"
+			x: 20.0d
+			y: 37.25d
+		}
+		{
+			id: "190D693629E3BAE4"
+			linked_quest: "7B7B0F4AD0D3C01A"
+			shape: "rsquare"
+			x: 20.0d
+			y: 38.75d
+		}
+		{
+			id: "533AA7C2F930BC98"
+			linked_quest: "774234968F1BEB95"
+			shape: "rsquare"
+			x: 0.5d
+			y: 45.5d
+		}
+		{
+			id: "7E8F874EB2156225"
+			linked_quest: "3D424D897DEB2D37"
+			shape: "rsquare"
+			x: 0.5d
+			y: 47.0d
+		}
+		{
+			id: "349B0EAB4853C530"
+			linked_quest: "17A3FCFC32F409FD"
+			shape: "rsquare"
+			x: 0.5d
+			y: 48.5d
+		}
+		{
+			id: "39FBEB45939CD8EA"
+			linked_quest: "773EBEBBC58010FD"
+			shape: "rsquare"
+			x: 0.5d
+			y: 50.0d
+		}
+		{
+			id: "30E152780FA9264F"
+			linked_quest: "17260FE287B08ADA"
+			shape: "rsquare"
+			x: 0.5d
+			y: 51.5d
+		}
+		{
+			id: "3AF0B2A902D76B47"
+			linked_quest: "5669D88DE37D633F"
+			shape: "rsquare"
+			x: 7.25d
+			y: 45.5d
+		}
+		{
+			id: "1714CF94FFCFAC83"
+			linked_quest: "50C4A414ED95DC2D"
+			shape: "rsquare"
+			x: 7.25d
+			y: 47.0d
+		}
+		{
+			id: "16F30C6049444F59"
+			linked_quest: "7B12E3AC75BB566B"
+			shape: "rsquare"
+			x: 13.75d
+			y: 45.75d
+		}
+		{
+			id: "50BB0111F6990AAB"
+			linked_quest: "3C6755E902FEF468"
+			shape: "rsquare"
+			x: 20.25d
+			y: 45.5d
+		}
+		{
+			id: "5F7349ECD7E9FE4E"
+			linked_quest: "5047605FE0A03D21"
+			shape: "rsquare"
+			x: 0.5d
+			y: 56.5d
+		}
+		{
+			id: "37EA5C37FB08041B"
+			linked_quest: "39A5A5CC76591697"
+			shape: "rsquare"
+			x: 0.5d
+			y: 60.0d
+		}
+		{
+			id: "1FCCBED6CE4452ED"
+			linked_quest: "1DFC0C1A50793CB7"
+			shape: "rsquare"
+			x: 21.5d
+			y: 60.0d
+		}
+		{
+			id: "3D9F43AA278F3647"
+			linked_quest: "366AB48E5BF50431"
+			shape: "rsquare"
+			x: 19.25d
+			y: 61.5d
+		}
+		{
+			id: "354C64B97FEDF96E"
+			linked_quest: "42BF2F77456F8773"
+			shape: "rsquare"
+			x: 21.5d
+			y: 61.5d
+		}
+	]
+	quests: [
+		{
+			icon: "minecraft:coal"
+			id: "3ED556DDAE344669"
+			shape: "rsquare"
+			size: 1.0d
+			subtitle: "Coke and charcoal work too"
+			tasks: [
+				{ id: "1AABBF37A1178AF8", item: "minecraft:coal", optional_task: true, type: "item" }
+				{ id: "7E7B9E6C8CB091AA", type: "checkmark" }
+			]
+			title: "Coal"
+			x: 0.5d
+			y: 3.5d
+		}
+		{
+			dependencies: ["6D923ADC90127182", "19979B49F362A2DF", "3ED556DDAE344669"]
+			description: [
+				"Burns anything a furnace burns."
+				"Buckets of steam: coal 76.8, charcoal 76.8, coke 153.6."
+			]
+			icon: "gtceu:lp_steam_solid_boiler"
+			id: "3F30292CB0F46ACD"
+			shape: "gear"
+			size: 1.25d
+			subtitle: "Steam Age: 48 mB/t of steam"
+			tasks: [
+				{ id: "5F6B95854107C90E", item: "gtceu:lp_steam_solid_boiler", optional_task: true, type: "item" }
+				{ id: "35C7889B7E53E6B6", type: "checkmark" }
+			]
+			title: "Low-Pressure Solid Boiler"
+			x: 2.75d
+			y: 2.0d
+		}
+		{
+			dependencies: ["3ED556DDAE344669"]
+			description: [
+				"Steel walls: more steam from the same coal, and it burns faster."
+				"Buckets of steam: coal 96, charcoal 96, coke 192."
+			]
+			icon: "gtceu:hp_steam_solid_boiler"
+			id: "7B759FA6ECBA9138"
+			shape: "gear"
+			size: 1.25d
+			subtitle: "Steam Age: 120 mB/t of steam"
+			tasks: [
+				{ id: "1525D86B80B8EC96", item: "gtceu:hp_steam_solid_boiler", optional_task: true, type: "item" }
+				{ id: "14B1B9A959940FD9", type: "checkmark" }
+			]
+			title: "High-Pressure Solid Boiler"
+			x: 2.75d
+			y: 3.5d
+		}
+		{
+			icon: "minecraft:lava_bucket"
+			id: "7E7E5101922AF0BB"
+			shape: "rsquare"
+			size: 1.0d
+			subtitle: "Pumped in the Nether"
+			tasks: [
+				{ id: "58D0C97E867C7CA4", item: "minecraft:lava_bucket", optional_task: true, type: "item" }
+				{ id: "159326CBD0ACE0A1", type: "checkmark" }
+			]
+			title: "Lava"
+			x: 7.0d
+			y: 2.25d
+		}
+		{
+			dependencies: ["56C1CC49EE43FB68", "7E7E5101922AF0BB"]
+			description: [
+				"Buckets of steam: a bucket of lava 864, a bucket of creosote 134.4."
+				"Off Earth it runs only on lava."
+			]
+			icon: "gtceu:lp_steam_liquid_boiler"
+			id: "1C75F87C5B8F8A10"
+			shape: "gear"
+			size: 1.25d
+			subtitle: "Steam Age: 96 mB/t of steam"
+			tasks: [
+				{ id: "52B15B91782318A7", item: "gtceu:lp_steam_liquid_boiler", optional_task: true, type: "item" }
+				{ id: "31356D18762FE4E3", type: "checkmark" }
+			]
+			title: "Low-Pressure Liquid Boiler"
+			x: 9.25d
+			y: 0.75d
+		}
+		{
+			dependencies: ["7E7E5101922AF0BB"]
+			description: [
+				"Buckets of steam: a bucket of lava 1,080, a bucket of creosote 168."
+				"Off Earth it runs only on lava."
+			]
+			icon: "gtceu:hp_steam_liquid_boiler"
+			id: "7C4E48490D0B6FF1"
+			shape: "gear"
+			size: 1.25d
+			subtitle: "Steam Age: 240 mB/t of steam"
+			tasks: [
+				{ id: "1B3C16E9B0B6834B", item: "gtceu:hp_steam_liquid_boiler", optional_task: true, type: "item" }
+				{ id: "59868086187C3C99", type: "checkmark" }
+			]
+			title: "High-Pressure Liquid Boiler"
+			x: 9.25d
+			y: 2.25d
+		}
+		{
+			icon: "minecraft:water_bucket"
+			id: "360B3AEB0429FFB2"
+			shape: "rsquare"
+			size: 1.0d
+			subtitle: "Every boiler drinks it"
+			tasks: [
+				{ id: "5C784D896902224A", item: "minecraft:water_bucket", optional_task: true, type: "item" }
+				{ id: "5CF60A17A534D133", type: "checkmark" }
+			]
+			title: "Water"
+			x: 13.5d
+			y: 1.5d
+		}
+		{
+			dependencies: ["360B3AEB0429FFB2"]
+			icon: "gtceu:lp_steam_solar_boiler"
+			id: "31C2095264A70995"
+			shape: "gear"
+			size: 1.25d
+			subtitle: "Steam Age: 48 mB/t of steam. By day, under open sky"
+			tasks: [
+				{ id: "72887310DC3A4FDB", item: "gtceu:lp_steam_solar_boiler", optional_task: true, type: "item" }
+				{ id: "7A1674D282B5146B", type: "checkmark" }
+			]
+			title: "Low-Pressure Solar Boiler"
+			x: 15.75d
+			y: 0.75d
+		}
+		{
+			dependencies: ["360B3AEB0429FFB2"]
+			icon: "gtceu:hp_steam_solar_boiler"
+			id: "199343D758E708FA"
+			shape: "gear"
+			size: 1.25d
+			subtitle: "Steam Age: 144 mB/t of steam. By day, under open sky"
+			tasks: [
+				{ id: "37D8C48E145CDDE1", item: "gtceu:hp_steam_solar_boiler", optional_task: true, type: "item" }
+				{ id: "5C27449C196F5DBF", type: "checkmark" }
+			]
+			title: "High-Pressure Solar Boiler"
+			x: 15.75d
+			y: 2.25d
+		}
+		{
+			icon: "gtceu:steam_bucket"
+			id: "1F60BC1BE056BEDD"
+			shape: "rsquare"
+			size: 1.0d
+			subtitle: "From any boiler"
+			tasks: [
+				{ id: "155CA91F2D0A9854", item: "gtceu:steam_bucket", optional_task: true, type: "item" }
+				{ id: "7B197BE6A2AE04FE", type: "checkmark" }
+			]
+			title: "Steam"
+			x: 0.5d
+			y: 8.75d
+		}
+		{
+			dependencies: ["4996827E4BFC339E", "1F60BC1BE056BEDD"]
+			description: [
+				"A little of the steam comes back as distilled water."
+				"EU per mB: steam 1."
+			]
+			icon: "gtceu:lv_steam_turbine"
+			id: "7E537A0EC081A531"
+			shape: "gear"
+			size: 1.25d
+			subtitle: "LV: 32 EU/t"
+			tasks: [
+				{ id: "58503E0C5E389C11", item: "gtceu:lv_steam_turbine", optional_task: true, type: "item" }
+				{ id: "56EECAC44EE8F78A", type: "checkmark" }
+			]
+			title: "Steam Turbine"
+			x: 2.75d
+			y: 8.0d
+		}
+		{
+			icon: "minecraft:coal"
+			id: "7ACE6630AF70D9CA"
+			shape: "rsquare"
+			size: 1.0d
+			subtitle: "Coke and charcoal work too"
+			tasks: [
+				{ id: "39D418C23A04BA19", item: "minecraft:coal", optional_task: true, type: "item" }
+				{ id: "79DCF987EFF2F6D5", type: "checkmark" }
+			]
+			title: "Coal"
+			x: 7.0d
+			y: 8.75d
+		}
+		{
+			dependencies: ["36B68B4C2B1E0DBA", "7ACE6630AF70D9CA", "78196EE68F118BA4"]
+			description: [
+				"A fuel burns just as long in any large boiler; a bigger boiler only makes more steam from it."
+				"Buckets of steam: coal 2,560, coke 5,120, a bucket of lava 14,400, a bucket of creosote 896, a bucket of biomass 13,600, a bucket of heavy fuel 36,000."
+				"Off Earth it runs only on lava."
+			]
+			icon: "gtceu:bronze_large_boiler"
+			id: "1D8073C1BA45C583"
+			shape: "gear"
+			size: 1.25d
+			subtitle: "LV: 6,400 mB/t of steam"
+			tasks: [
+				{ id: "5068F3A3C7704A5D", item: "gtceu:bronze_large_boiler", optional_task: true, type: "item" }
+				{ id: "79AAEBEE7FBFBFB2", type: "checkmark" }
+			]
+			title: "Large Bronze Boiler"
+			x: 9.25d
+			y: 8.75d
+		}
+		{
+			dependencies: ["3B4CA27555ED52FF"]
+			description: [
+				"Every fuel it takes, best first; most of them come with MV."
+				"EU per mB: high-octane gasoline 6,400, gasoline 3,200, cetane-boosted diesel 1,440, diesel 960, light fuel 640, naphtha 640, toluene 640, biodiesel 512, rocket fuel 500, ethanol 384, octane 160, methanol 128, sulfuric light fuel 80, raw oil 15, light oil 10."
+				"Off Earth it runs only on rocket fuel."
+			]
+			icon: "gtceu:lv_combustion"
+			id: "3C7B14ACBAB83421"
+			shape: "gear"
+			size: 1.25d
+			subtitle: "LV: 32 EU/t"
+			tasks: [
+				{ id: "335F48F88802A51E", item: "gtceu:lv_combustion", optional_task: true, type: "item" }
+				{ id: "7EB536C9F8685E92", type: "checkmark" }
+			]
+			title: "Combustion Generator"
+			x: 11.5d
+			y: 11.0d
+		}
+		{
+			icon: "minecraft:water_bucket"
+			id: "3DDEBAAFE6DCA1D1"
+			shape: "rsquare"
+			size: 1.0d
+			tasks: [
+				{ id: "7F27824D5920C343", item: "minecraft:water_bucket", optional_task: true, type: "item" }
+				{ id: "77B6B54AD0BB1A5B", type: "checkmark" }
+			]
+			title: "Water"
+			x: 15.75d
+			y: 8.75d
+		}
+		{
+			dependencies: ["3A7E2C5F1B9D4061", "3DDEBAAFE6DCA1D1"]
+			icon: "gtceu:heliostat_tower"
+			id: "11E41192B3FC2784"
+			shape: "gear"
+			size: 1.5d
+			subtitle: "LV: 800 mB/t of steam, uses 16 EU/t. By day, under an open, dry sky"
+			tasks: [
+				{ id: "18911BEFB571C73C", item: "gtceu:heliostat_tower", optional_task: true, type: "item" }
+				{ id: "57032A1B14DD465C", type: "checkmark" }
+			]
+			title: "Heliostat Tower"
+			x: 18.0d
+			y: 8.0d
+		}
+		{
+			icon: "gtceu:steam_bucket"
+			id: "58B70960F0677351"
+			shape: "rsquare"
+			size: 1.0d
+			subtitle: "From any boiler"
+			tasks: [
+				{ id: "1933A73CD4CA6406", item: "gtceu:steam_bucket", optional_task: true, type: "item" }
+				{ id: "39A9F9A268B4054A", type: "checkmark" }
+			]
+			title: "Steam"
+			x: 22.25d
+			y: 8.75d
+		}
+		{
+			dependencies: ["1CE11DDA27E5B778", "58B70960F0677351"]
+			description: ["LV generators stacked behind one controller: the same EU per mB, far less cable."]
+			icon: "gtceu:generator_array"
+			id: "3E284B46CB053CA4"
+			shape: "gear"
+			size: 1.5d
+			subtitle: "LV: 32 EU/t a generator, up to 512 EU/t"
+			tasks: [
+				{ id: "5CB56DDFF3ED48F4", item: "gtceu:generator_array", optional_task: true, type: "item" }
+				{ id: "7F6979034C39B426", type: "checkmark" }
+			]
+			title: "Generator Array"
+			x: 24.5d
+			y: 8.0d
+		}
+		{
+			dependencies: ["706EBF5AC6E6A649"]
+			description: [
+				"Every gas it takes, best first."
+				"EU per mB: nitrobenzene 2,560, benzene 704, LPG 640, butane 592, phenol 576, butene 512, propane 464, butadiene 408, propene 384, ethane 336, refinery gas 320, ethylene 256, methane 224, coal gas 192, sulfuric naphtha 80, methalox 74.67, sulfuric gas 50, wood gas 48, natural gas 40."
+				"Off Earth it runs only on methalox."
+			]
+			icon: "gtceu:lv_gas_turbine"
+			id: "1363651AF8FA00A6"
+			shape: "gear"
+			size: 1.25d
+			subtitle: "LV: 32 EU/t"
+			tasks: [
+				{ id: "74C5DC73502B2B4D", item: "gtceu:lv_gas_turbine", optional_task: true, type: "item" }
+				{ id: "3B091C75ED9220AD", type: "checkmark" }
+			]
+			title: "Gas Turbine"
+			x: 31.0d
+			y: 7.5d
+		}
+		{
+			icon: "gtceu:steam_bucket"
+			id: "1A53D78F7093D2FE"
+			shape: "rsquare"
+			size: 1.0d
+			subtitle: "From any boiler"
+			tasks: [
+				{ id: "54A5E6B45E8F3C30", item: "gtceu:steam_bucket", optional_task: true, type: "item" }
+				{ id: "3EF5920D5E2EB6E3", type: "checkmark" }
+			]
+			title: "Steam"
+			x: 0.5d
+			y: 15.0d
+		}
+		{
+			dependencies: ["1A53D78F7093D2FE"]
+			icon: "gtceu:mv_steam_turbine"
+			id: "5569FD27070A69DF"
+			shape: "gear"
+			size: 1.25d
+			subtitle: "MV: 128 EU/t. Same steam, more of it at once"
+			tasks: [
+				{ id: "122CAD4E5D04E878", item: "gtceu:mv_steam_turbine", optional_task: true, type: "item" }
+				{ id: "3F176C5F595362A5", type: "checkmark" }
+			]
+			title: "Steam Turbine"
+			x: 2.75d
+			y: 15.0d
+		}
+		{
+			icon: "gtceu:oil_medium_bucket"
+			id: "75288F7EFB601954"
+			shape: "rsquare"
+			size: 1.0d
+			subtitle: "Pumped by the fluid drilling rig"
+			tasks: [
+				{ id: "73A9F9F4376BD310", item: "gtceu:oil_medium_bucket", optional_task: true, type: "item" }
+				{ id: "7D00ECAC824C0B5C", type: "checkmark" }
+			]
+			title: "Raw Oil"
+			x: 7.0d
+			y: 19.25d
+		}
+		{
+			dependencies: ["3B49C5C485933961", "35A04771E8252D31", "193E72A27638CE3B", "75288F7EFB601954"]
+			description: [
+				"Diesel is the first fuel worth the trouble."
+				"EU per mB: diesel 960, light fuel 640, methanol 128, raw oil 15."
+				"Off Earth it runs only on rocket fuel."
+			]
+			icon: "gtceu:mv_combustion"
+			id: "163B25BF53765AF4"
+			shape: "gear"
+			size: 1.25d
+			subtitle: "MV: 128 EU/t"
+			tasks: [
+				{ id: "3F6039FDFC0BC0E7", item: "gtceu:mv_combustion", optional_task: true, type: "item" }
+				{ id: "5ECD132CD3D3B1AB", type: "checkmark" }
+			]
+			title: "Combustion Generator"
+			x: 9.25d
+			y: 17.0d
+		}
+		{
+			icon: "gtceu:natural_gas_bucket"
+			id: "565F67AC5CCCC608"
+			shape: "rsquare"
+			size: 1.0d
+			subtitle: "From a gas deposit, by fluid drill"
+			tasks: [
+				{ id: "7A1FD34499F23C02", item: "gtceu:natural_gas_bucket", optional_task: true, type: "item" }
+				{ id: "51F4B1B20CD68AB9", type: "checkmark" }
+			]
+			title: "Natural Gas"
+			x: 13.5d
+			y: 17.75d
+		}
+		{
+			dependencies: ["57ABFD6435016C70", "753F4EB4AD967E41", "565F67AC5CCCC608"]
+			description: [
+				"EU per mB: benzene 704, wood gas 48, natural gas 40."
+				"Off Earth it runs only on methalox."
+			]
+			icon: "gtceu:mv_gas_turbine"
+			id: "76DCD18CDB87423A"
+			shape: "gear"
+			size: 1.25d
+			subtitle: "MV: 128 EU/t"
+			tasks: [
+				{ id: "71241ED8FF1C71E8", item: "gtceu:mv_gas_turbine", optional_task: true, type: "item" }
+				{ id: "1A200D3CE11DBD99", type: "checkmark" }
+			]
+			title: "Gas Turbine"
+			x: 15.75d
+			y: 16.25d
+		}
+		{
+			dependencies: ["305F916B3530ABAD"]
+			icon: "gtceu:solar_panel"
+			id: "1DD7B84584479A68"
+			size: 1.0d
+			subtitle: "MV: 1 EU/t in clear sun. A cover: it goes on top of a machine and feeds it"
+			tasks: [
+				{ id: "1B03862AFFA88FE2", item: "gtceu:solar_panel", optional_task: true, type: "item" }
+				{ id: "7D0828C4CBF2C795", type: "checkmark" }
+			]
+			title: "Solar Panel"
+			x: 22.25d
+			y: 14.75d
+		}
+		{
+			icon: "gtceu:steam_bucket"
+			id: "7752E282A6C02EFE"
+			shape: "rsquare"
+			size: 1.0d
+			subtitle: "From any boiler"
+			tasks: [
+				{ id: "347FD67AD5C50E4E", item: "gtceu:steam_bucket", optional_task: true, type: "item" }
+				{ id: "32EAAC42673E398A", type: "checkmark" }
+			]
+			title: "Steam"
+			x: 0.5d
+			y: 23.75d
+		}
+		{
+			dependencies: ["7752E282A6C02EFE"]
+			icon: "gtceu:hv_steam_turbine"
+			id: "75D45A38ED1CF8EF"
+			shape: "gear"
+			size: 1.25d
+			subtitle: "HV: 512 EU/t"
+			tasks: [
+				{ id: "35B6C499188FFD3F", item: "gtceu:hv_steam_turbine", optional_task: true, type: "item" }
+				{ id: "52FF30C6F71C2676", type: "checkmark" }
+			]
+			title: "Steam Turbine"
+			x: 2.75d
+			y: 23.0d
+		}
+		{
+			dependencies: ["7752E282A6C02EFE"]
+			description: [
+				"The rotor's power sets the output, and its efficiency how far each mB goes."
+				"EU per mB: steam 1."
+			]
+			icon: "gtceu:steam_large_turbine"
+			id: "5B02680F9FBB231B"
+			shape: "gear"
+			size: 1.25d
+			subtitle: "HV: 1,024 EU/t times the rotor's power"
+			tasks: [
+				{ id: "33815C8EC8399F9D", item: "gtceu:steam_large_turbine", optional_task: true, type: "item" }
+				{ id: "7D1A27F3497E24DB", type: "checkmark" }
+			]
+			title: "Large Steam Turbine"
+			x: 2.75d
+			y: 24.5d
+		}
+		{
+			dependencies: ["39BFC0FAB2D7CD50", "15F18C7DA5F52345", "31187D1F8D38635D"]
+			description: [
+				"Gasoline goes much further than light fuel."
+				"EU per mB: gasoline 3,200, naphtha 640, toluene 640."
+				"Off Earth it runs only on rocket fuel."
+			]
+			icon: "gtceu:hv_combustion"
+			id: "1BA5F44080B641AD"
+			shape: "gear"
+			size: 1.25d
+			subtitle: "HV: 512 EU/t"
+			tasks: [
+				{ id: "50AB6C240FE13FA7", item: "gtceu:hv_combustion", optional_task: true, type: "item" }
+				{ id: "19EDEA7AC272ABC4", type: "checkmark" }
+			]
+			title: "Combustion Generator"
+			x: 9.25d
+			y: 24.25d
+		}
+		{
+			dependencies: ["55FAC45856DC4D1C", "34AFF67F96F7B95A", "7C224996639926D9", "362FFC64DB9D2C89"]
+			description: [
+				"EU per mB: butadiene 408, propene 384, refinery gas 320, ethylene 256."
+				"Off Earth it runs only on methalox."
+			]
+			icon: "gtceu:hv_gas_turbine"
+			id: "13DF83D4FE67EA8B"
+			shape: "gear"
+			size: 1.25d
+			subtitle: "HV: 512 EU/t"
+			tasks: [
+				{ id: "7E4C51B6F09E46AD", item: "gtceu:hv_gas_turbine", optional_task: true, type: "item" }
+				{ id: "51D93E77912B3FCA", type: "checkmark" }
+			]
+			title: "Gas Turbine"
+			x: 15.75d
+			y: 25.0d
+		}
+		{
+			icon: "minecraft:coal"
+			id: "39DAC1D0FF7C13E5"
+			shape: "rsquare"
+			size: 1.0d
+			subtitle: "Coke and charcoal work too"
+			tasks: [
+				{ id: "1B45BC0B3D8F315F", item: "minecraft:coal", optional_task: true, type: "item" }
+				{ id: "50C82BAE3E9BCA22", type: "checkmark" }
+			]
+			title: "Coal"
+			x: 20.0d
+			y: 24.25d
+		}
+		{
+			dependencies: ["3E36E1AF43DCB110", "39DAC1D0FF7C13E5"]
+			description: [
+				"Buckets of steam: coal 5,120, coke 10,240, a bucket of lava 28,800, a bucket of creosote 1,792, a bucket of biomass 27,200, a bucket of heavy fuel 72,000."
+				"Off Earth it runs only on lava."
+			]
+			icon: "gtceu:steel_large_boiler"
+			id: "55E0037C73B695E6"
+			shape: "gear"
+			size: 1.25d
+			subtitle: "HV: 12,800 mB/t of steam"
+			tasks: [
+				{ id: "34CFCC051C53DB38", item: "gtceu:steel_large_boiler", optional_task: true, type: "item" }
+				{ id: "34AD526F531C8A27", type: "checkmark" }
+			]
+			title: "Large Steel Boiler"
+			x: 22.25d
+			y: 23.5d
+		}
+		{
+			icon: "gtceu:phosphorus_wafer"
+			id: "1827990D2CC8A4B0"
+			shape: "rsquare"
+			size: 1.0d
+			subtitle: "Cut from a phosphorus boule, in the cleanroom"
+			tasks: [
+				{ id: "145E678E9F16D661", item: "gtceu:phosphorus_wafer", optional_task: true, type: "item" }
+				{ id: "56F9D120CD660BA6", type: "checkmark" }
+			]
+			title: "Phosphorus Wafer"
+			x: 26.5d
+			y: 22.75d
+		}
+		{
+			dependencies: ["1827990D2CC8A4B0"]
+			icon: "gtceu:ulv_solar_panel"
+			id: "1C4EB30BC886A251"
+			size: 1.0d
+			subtitle: "HV: 8 EU/t in clear sun. Graphene wire and gallium arsenide go into it"
+			tasks: [
+				{ id: "59CD956A129917AC", item: "gtceu:ulv_solar_panel", optional_task: true, type: "item" }
+				{ id: "3508036C1351001A", type: "checkmark" }
+			]
+			title: "ULV Solar Panel"
+			x: 28.75d
+			y: 22.75d
+		}
+		{
+			dependencies: ["3AF5BDE984515B4E", "1B870410FCE22512"]
+			description: [
+				"Methalox brings its own oxygen."
+				"EU per mB: methane 224, methalox 74.67."
+				"Off Earth it runs only on methalox."
+			]
+			icon: "gtceu:gas_large_turbine"
+			id: "131CC09BEFE8C520"
+			shape: "gear"
+			size: 1.25d
+			subtitle: "EV: 4,096 EU/t times the rotor's power"
+			tasks: [
+				{ id: "12B82B47C6B69D1C", item: "gtceu:gas_large_turbine", optional_task: true, type: "item" }
+				{ id: "39B864C8978175CF", type: "checkmark" }
+			]
+			title: "Large Gas Turbine"
+			x: 2.75d
+			y: 31.5d
+		}
+		{
+			icon: "gtceu:distilled_water_bucket"
+			id: "7FD6D26BABB2EA2D"
+			shape: "rsquare"
+			size: 1.0d
+			tasks: [
+				{ id: "7575572016E391C3", item: "gtceu:distilled_water_bucket", optional_task: true, type: "item" }
+				{ id: "7FF37FDEC9329119", type: "checkmark" }
+			]
+			title: "Distilled Water"
+			x: 7.0d
+			y: 32.25d
+		}
+		{
+			icon: "gtceu:refinery_gas_bucket"
+			id: "399D820371E4A082"
+			shape: "rsquare"
+			size: 1.0d
+			subtitle: "Or any gas turbine fuel"
+			tasks: [
+				{ id: "39C0A3E7AA6E10E4", item: "gtceu:refinery_gas_bucket", optional_task: true, type: "item" }
+				{ id: "5F8F25CA0C96C57C", type: "checkmark" }
+			]
+			title: "Refinery Gas"
+			x: 7.0d
+			y: 33.75d
+		}
+		{
+			dependencies: ["1DD071239194961D", "7FD6D26BABB2EA2D", "399D820371E4A082"]
+			description: [
+				"The gas turbine's EU per mB, plus steam from its own exhaust for a Large Steam Turbine."
+				"Steam per mB of fuel: benzene 282 mB, LPG 256 mB, refinery gas 128 mB, methane 89.5 mB, methalox 29.83 mB."
+			]
+			icon: "gtceu:combined_cycle_plant"
+			id: "737EE6BBB91297A2"
+			shape: "gear"
+			size: 1.5d
+			subtitle: "EV: 32 EU/t a run, up to 8,192 EU/t"
+			tasks: [
+				{ id: "7475A401EB343470", item: "gtceu:combined_cycle_plant", optional_task: true, type: "item" }
+				{ id: "5259A1CBB330F66D", type: "checkmark" }
+			]
+			title: "Combined-Cycle Plant"
+			x: 9.25d
+			y: 32.25d
+		}
+		{
+			icon: "minecraft:coal"
+			id: "1D77F23B39BB5169"
+			shape: "rsquare"
+			size: 1.0d
+			subtitle: "Coke and charcoal work too"
+			tasks: [
+				{ id: "1FF7F406D6EFFC8F", item: "minecraft:coal", optional_task: true, type: "item" }
+				{ id: "77C0AF00EC1B5B73", type: "checkmark" }
+			]
+			title: "Coal"
+			x: 13.5d
+			y: 31.0d
+		}
+		{
+			dependencies: ["1D77F23B39BB5169"]
+			description: [
+				"Buckets of steam: coal 10,240, coke 20,480, a bucket of lava 57,600, a bucket of creosote 3,584, a bucket of biomass 54,400, a bucket of heavy fuel 144,000."
+				"Off Earth it runs only on lava."
+			]
+			icon: "gtceu:titanium_large_boiler"
+			id: "300844EF3B9111A7"
+			shape: "gear"
+			size: 1.25d
+			subtitle: "EV: 25,600 mB/t of steam"
+			tasks: [
+				{ id: "52100099BA00CD1F", item: "gtceu:titanium_large_boiler", optional_task: true, type: "item" }
+				{ id: "1367DA11E4878ED8", type: "checkmark" }
+			]
+			title: "Large Titanium Boiler"
+			x: 15.75d
+			y: 31.0d
+		}
+		{
+			dependencies: ["734B97375A3121C4"]
+			description: ["By day only, and nothing burns."]
+			icon: "gtceu:lunar_solar_array"
+			id: "7CB57EB9D2DF0397"
+			shape: "gear"
+			size: 1.5d
+			subtitle: "EV: 420 EU/t a panel on the Moon, 129 EU/t a panel on Mars, up to 15,120 EU/t"
+			tasks: [
+				{ id: "78D2A942767D8C9C", item: "gtceu:lunar_solar_array", optional_task: true, type: "item" }
+				{ id: "111A957C161E3158", type: "checkmark" }
+			]
+			title: "Lunar Solar Array"
+			x: 22.25d
+			y: 31.0d
+		}
+		{
+			dependencies: ["509D8E16F2FFD75B"]
+			icon: "gtceu:rp_1_mixed_fuel_bucket"
+			id: "3DA909F15E4B53E6"
+			size: 1.0d
+			subtitle: "GT--'s chemical plant, with oxygen"
+			tasks: [
+				{ id: "71FA42FE0A62D670", item: "gtceu:rp_1_mixed_fuel_bucket", optional_task: true, type: "item" }
+				{ id: "3D86C76806CA5EA5", type: "checkmark" }
+			]
+			title: "RP-1 Mixed Fuel"
+			x: 28.5d
+			y: 31.0d
+		}
+		{
+			dependencies: ["3DA909F15E4B53E6"]
+			description: [
+				"A rocket motor, bolted to the floor."
+				"EU per mB: methylhydrazine nitrate 12,288, dense hydrazine 6,144, RP-1 mixed fuel 3,072."
+				"Off Earth it runs only on RP-1 mixed fuel and methylhydrazine nitrate."
+			]
+			icon: "gtnn:ev_rocket_engine"
+			id: "3F41FB36E636B7A2"
+			shape: "gear"
+			size: 1.25d
+			subtitle: "EV: 2,048 EU/t"
+			tasks: [
+				{ id: "1848A6F120EFF5B3", item: "gtnn:ev_rocket_engine", optional_task: true, type: "item" }
+				{ id: "77DFD696B9E841B4", type: "checkmark" }
+			]
+			title: "Rocket Engine"
+			x: 30.75d
+			y: 31.0d
+		}
+		{
+			icon: "gtceu:lubricant_bucket"
+			id: "1F88C8EDA3519707"
+			shape: "rsquare"
+			size: 1.0d
+			subtitle: "From creosote or seed oil"
+			tasks: [
+				{ id: "1D6E13749C77A211", item: "gtceu:lubricant_bucket", optional_task: true, type: "item" }
+				{ id: "509B876954F540E0", type: "checkmark" }
+			]
+			title: "Lubricant"
+			x: 0.5d
+			y: 37.25d
+		}
+		{
+			icon: "gtceu:high_octane_gasoline_bucket"
+			id: "141B5B813FD9887B"
+			shape: "rsquare"
+			size: 1.0d
+			subtitle: "Gasoline with additives, in the large chemical reactor"
+			tasks: [
+				{ id: "75E7D1A659166806", item: "gtceu:high_octane_gasoline_bucket", optional_task: true, type: "item" }
+				{ id: "1751CD64FB62E724", type: "checkmark" }
+			]
+			title: "High-Octane Gasoline"
+			x: 0.5d
+			y: 40.25d
+		}
+		{
+			dependencies: ["1F88C8EDA3519707", "5BED4655BDD34ED3", "141B5B813FD9887B"]
+			description: [
+				"Lubricant keeps it turning, and oxygen boosts it."
+				"With the boost: each mB goes 1.5 times as far."
+				"EU per mB: high-octane gasoline 6,400, gasoline 3,200, cetane-boosted diesel 1,440, diesel 960."
+			]
+			icon: "gtceu:large_combustion_engine"
+			id: "1BBE4D0EA5845217"
+			shape: "gear"
+			size: 1.25d
+			subtitle: "IV: 2,048 EU/t, 6,144 boosted. It wants an IV circuit"
+			tasks: [
+				{ id: "3BF0BC4058F07C6B", item: "gtceu:large_combustion_engine", optional_task: true, type: "item" }
+				{ id: "33E0916CC40A9B31", type: "checkmark" }
+			]
+			title: "Large Combustion Engine"
+			x: 2.75d
+			y: 38.75d
+		}
+		{
+			dependencies: ["11DC5691F1CA0B91"]
+			description: [
+				"Same fuels and lubricant as the large engine; liquid oxygen boosts it."
+				"With the boost: each mB goes twice as far."
+			]
+			icon: "gtceu:extreme_combustion_engine"
+			id: "587433D87197411F"
+			shape: "gear"
+			size: 1.25d
+			subtitle: "IV: 8,192 EU/t, 32,768 boosted. It wants a LuV circuit"
+			tasks: [
+				{ id: "715896D96CCBFB3A", item: "gtceu:extreme_combustion_engine", optional_task: true, type: "item" }
+				{ id: "1A24FB5B17AF2610", type: "checkmark" }
+			]
+			title: "Extreme Combustion Engine"
+			x: 2.75d
+			y: 41.75d
+		}
+		{
+			icon: "minecraft:coal"
+			id: "1495DE4490F71A0F"
+			shape: "rsquare"
+			size: 1.0d
+			subtitle: "Coke and charcoal work too"
+			tasks: [
+				{ id: "5C09F101B78C8792", item: "minecraft:coal", optional_task: true, type: "item" }
+				{ id: "7CAA1B6752F6B56E", type: "checkmark" }
+			]
+			title: "Coal"
+			x: 7.0d
+			y: 37.5d
+		}
+		{
+			dependencies: ["1495DE4490F71A0F"]
+			description: [
+				"Buckets of steam: coal 20,480, coke 40,960, a bucket of lava 115,200, a bucket of creosote 7,168, a bucket of biomass 108,800, a bucket of heavy fuel 288,000."
+				"Off Earth it runs only on lava."
+			]
+			icon: "gtceu:tungstensteel_large_boiler"
+			id: "5F55047735B92AD7"
+			shape: "gear"
+			size: 1.25d
+			subtitle: "IV: 51,200 mB/t of steam"
+			tasks: [
+				{ id: "3F449355CB4BD4A7", item: "gtceu:tungstensteel_large_boiler", optional_task: true, type: "item" }
+				{ id: "74E156636C9986C7", type: "checkmark" }
+			]
+			title: "Large Tungstensteel Boiler"
+			x: 9.25d
+			y: 37.5d
+		}
+		{
+			icon: "gtceu:rp_1_mixed_fuel_bucket"
+			id: "10BC23329A359542"
+			shape: "rsquare"
+			size: 1.0d
+			tasks: [
+				{ id: "124E5F7A26802C0F", item: "gtceu:rp_1_mixed_fuel_bucket", optional_task: true, type: "item" }
+				{ id: "18631719CDFB083A", type: "checkmark" }
+			]
+			title: "RP-1 Mixed Fuel"
+			x: 13.5d
+			y: 37.5d
+		}
+		{
+			dependencies: ["10BC23329A359542"]
+			icon: "gtnn:iv_rocket_engine"
+			id: "55EB7C90F8212EE5"
+			shape: "gear"
+			size: 1.25d
+			subtitle: "IV: 8,192 EU/t. Same fuels as the EV one"
+			tasks: [
+				{ id: "3B02F64455D8469B", item: "gtnn:iv_rocket_engine", optional_task: true, type: "item" }
+				{ id: "7BAC7837CCC5D5CC", type: "checkmark" }
+			]
+			title: "Rocket Engine"
+			x: 15.75d
+			y: 37.5d
+		}
+		{
+			dependencies: ["503863FFACA225A8", "7B7B0F4AD0D3C01A"]
+			description: [
+				"Day and night, on any world, and one pellet keeps it going for a long while."
+				"EU per pellet: 147 million."
+			]
+			icon: "gtceu:ev_rtg"
+			id: "5B1058FB244E02D2"
+			shape: "gear"
+			size: 1.25d
+			subtitle: "IV: 2,048 EU/t"
+			tasks: [
+				{ id: "3548563A15188866", item: "gtceu:ev_rtg", optional_task: true, type: "item" }
+				{ id: "708108BB3A60CD00", type: "checkmark" }
+			]
+			title: "RTG Cell"
+			x: 22.25d
+			y: 38.0d
+		}
+		{
+			dependencies: ["774234968F1BEB95", "3D424D897DEB2D37", "17A3FCFC32F409FD", "773EBEBBC58010FD", "17260FE287B08ADA"]
+			description: [
+				"No smoke and no fuel line: a few assemblies run it for hours."
+				"A channel: LEU in light water 16,384 EU/t, LEU in heavy water 32,768 EU/t, MOX 32,768 EU/t, breeder 8,192 EU/t."
+				"EU per assembly: LEU in light water 1.31 billion, LEU in heavy water 2.62 billion, MOX 2.62 billion, breeder 655 million."
+			]
+			icon: "gtceu:fission_reactor"
+			id: "18DBFDBF4B7E69F2"
+			shape: "gear"
+			size: 1.5d
+			subtitle: "IV: up to 131,072 EU/t"
+			tasks: [
+				{ id: "504689E7B36A7814", item: "gtceu:fission_reactor", optional_task: true, type: "item" }
+				{ id: "3ECE3ECB1C92B96D", type: "checkmark" }
+			]
+			title: "Fission Reactor"
+			x: 3.0d
+			y: 48.5d
+		}
+		{
+			dependencies: ["5669D88DE37D633F", "50C4A414ED95DC2D"]
+			description: ["Venus is always at noon, so it never stops. The water leaves as steam for a turbine."]
+			icon: "gtceu:venus_heat_engine"
+			id: "3BF1166CE0AD729A"
+			shape: "gear"
+			size: 1.5d
+			subtitle: "IV: 8,192 EU/t on Venus"
+			tasks: [
+				{ id: "7E9074E75447FB5E", item: "gtceu:venus_heat_engine", optional_task: true, type: "item" }
+				{ id: "7351F0E6E718BB85", type: "checkmark" }
+			]
+			title: "Venus Heat Engine"
+			x: 9.5d
+			y: 46.25d
+		}
+		{
+			dependencies: ["7B12E3AC75BB566B"]
+			description: ["Nothing at night: an RTG cell or a buffer carries the base till sunrise."]
+			icon: "gtceu:mercury_solar_field"
+			id: "18600826FA6DE130"
+			shape: "gear"
+			size: 1.5d
+			subtitle: "IV: 2,010 EU/t a panel by day, up to 72,360 EU/t"
+			tasks: [
+				{ id: "7F0C8F8D5DC21EAD", item: "gtceu:mercury_solar_field", optional_task: true, type: "item" }
+				{ id: "1DDADE3841D9D322", type: "checkmark" }
+			]
+			title: "Mercury Solar Field"
+			x: 16.0d
+			y: 45.75d
+		}
+		{
+			dependencies: ["3C6755E902FEF468"]
+			icon: "gtceu:lv_solar_panel"
+			id: "7F0EEA7EB03BB9AA"
+			size: 1.0d
+			subtitle: "IV: 32 EU/t in clear sun. It wants a LuV circuit"
+			tasks: [
+				{ id: "34FB2788DC466DE6", item: "gtceu:lv_solar_panel", optional_task: true, type: "item" }
+				{ id: "1BCE33D2869FFDEE", type: "checkmark" }
+			]
+			title: "LV Solar Panel"
+			x: 22.5d
+			y: 45.5d
+		}
+		{
+			icon: "gtceu:deuterium_bucket"
+			id: "12AE9D9C05C6405F"
+			shape: "rsquare"
+			size: 1.0d
+			subtitle: "Heavy water through the electrolyzer"
+			tasks: [
+				{ id: "53E19F943A263FA1", item: "gtceu:deuterium_bucket", optional_task: true, type: "item" }
+				{ id: "3E881ABBCEF5BEA0", type: "checkmark" }
+			]
+			title: "Deuterium"
+			x: 0.5d
+			y: 55.0d
+		}
+		{
+			dependencies: ["12AE9D9C05C6405F", "5047605FE0A03D21"]
+			icon: "gtceu:luv_fusion_reactor"
+			id: "7EE65AE45E5168EE"
+			shape: "circle"
+			size: 1.0d
+			subtitle: "LuV: the tritium you keep in IV goes in here"
+			tasks: [{ id: "7471C190711B52C6", type: "checkmark" }]
+			title: "Fusion Reactor"
+			x: 2.75d
+			y: 55.75d
+		}
+		{
+			dependencies: ["7EE65AE45E5168EE"]
+			icon: "gtceu:helium_plasma_bucket"
+			id: "12A6FDE4906BA019"
+			shape: "circle"
+			size: 1.0d
+			tasks: [{ id: "1F174843B7A6AD3A", type: "checkmark" }]
+			title: "Helium Plasma"
+			x: 5.0d
+			y: 55.75d
+		}
+		{
+			dependencies: ["12A6FDE4906BA019"]
+			icon: "gtceu:plasma_large_turbine"
+			id: "3349702727A7B708"
+			shape: "circle"
+			size: 1.0d
+			subtitle: "LuV: plasma turned into power"
+			tasks: [{ id: "1E360973257556B7", type: "checkmark" }]
+			title: "Large Plasma Turbine"
+			x: 7.25d
+			y: 55.75d
+		}
+		{
+			icon: "gtceu:enriched_naquadah_bolt"
+			id: "59DECDED26DF0294"
+			shape: "circle"
+			size: 1.0d
+			subtitle: "It wants naquadah coils in the blast furnace"
+			tasks: [{ id: "5735B3C60B1F7675", type: "checkmark" }]
+			title: "Enriched Naquadah"
+			x: 11.25d
+			y: 55.0d
+		}
+		{
+			dependencies: ["59DECDED26DF0294"]
+			icon: "gtnn:ev_naquadah_reactor"
+			id: "7A5E1A85E6D4E433"
+			shape: "circle"
+			size: 1.0d
+			subtitle: "LuV: enriched naquadah first, naquadria later"
+			tasks: [{ id: "79C38349090C87F0", type: "checkmark" }]
+			title: "Naquadah Reactor"
+			x: 13.5d
+			y: 55.0d
+		}
+		{
+			icon: "gcyr:dyson_solar_cell"
+			id: "11C73137027F90A3"
+			shape: "circle"
+			size: 1.0d
+			tasks: [{ id: "7ED020059F8C2BA4", type: "checkmark" }]
+			title: "Dyson Solar Cell"
+			x: 17.5d
+			y: 55.0d
+		}
+		{
+			dependencies: ["11C73137027F90A3"]
+			icon: "gcyr:dyson_system_controller"
+			id: "5C7774A29F329470"
+			shape: "circle"
+			size: 1.0d
+			subtitle: "UHV: a star wrapped in panels"
+			tasks: [{ id: "5A8383B9274CEC05", type: "checkmark" }]
+			title: "Dyson Sphere"
+			x: 19.75d
+			y: 55.0d
+		}
+		{
+			icon: "gtceu:lv_machine_hull"
+			id: "3F30A6656E0CFBCC"
+			shape: "rsquare"
+			size: 1.0d
+			tasks: [
+				{ id: "137B95FD2FE5D27B", item: "gtceu:lv_machine_hull", optional_task: true, type: "item" }
+				{ id: "1310AA95A22D5357", type: "checkmark" }
+			]
+			title: "LV Machine Hull"
+			x: 0.5d
+			y: 61.5d
+		}
+		{
+			dependencies: ["39A5A5CC76591697", "3F30A6656E0CFBCC"]
+			icon: "gtceu:lv_transformer_1a"
+			id: "1CB00A8238CEC252"
+			size: 1.0d
+			subtitle: "Steps power up or down one tier"
+			tasks: [
+				{ id: "7E39B8AD97F6838D", item: "gtceu:lv_transformer_1a", optional_task: true, type: "item" }
+				{ id: "31CFED4D78A86D20", type: "checkmark" }
+			]
+			title: "Transformer"
+			x: 2.75d
+			y: 60.75d
+		}
+		{
+			dependencies: ["3F30A6656E0CFBCC"]
+			icon: "gtceu:lv_battery_buffer_4x"
+			id: "5A90DEBD7F2451BA"
+			size: 1.0d
+			subtitle: "Batteries in a box, wired into the grid"
+			tasks: [
+				{ id: "3FA9541F1DA23059", item: "gtceu:lv_battery_buffer_4x", optional_task: true, type: "item" }
+				{ id: "7C9C03C01488771C", type: "checkmark" }
+			]
+			title: "Battery Buffer"
+			x: 2.75d
+			y: 62.25d
+		}
+		{
+			icon: "gtceu:lv_battery_hull"
+			id: "1DD9B8EADA8EBAC0"
+			shape: "rsquare"
+			size: 1.0d
+			tasks: [
+				{ id: "1672D3E5678CC657", item: "gtceu:lv_battery_hull", optional_task: true, type: "item" }
+				{ id: "7BC9E457531FB475", type: "checkmark" }
+			]
+			title: "Battery Hull"
+			x: 6.75d
+			y: 60.0d
+		}
+		{
+			dependencies: ["1DD9B8EADA8EBAC0"]
+			description: [
+				"Battery buffers and your electric tools both run on these."
+				"Holds: LV sodium 80,000 EU, LV cadmium 100,000 EU, LV lithium 120,000 EU, MV lithium 420,000 EU, HV lithium 1,800,000 EU, energium crystal 6,400,000 EU, EV vanadium 10,240,000 EU, lapotron crystal 25,000,000 EU, IV vanadium 40,960,000 EU."
+			]
+			icon: "gtceu:lv_lithium_battery"
+			id: "3B3977D660812D74"
+			size: 1.0d
+			tasks: [
+				{ id: "3DD8F09C69B61E2E", item: "gtceu:lv_lithium_battery", optional_task: true, type: "item" }
+				{ id: "328867C8186371F7", type: "checkmark" }
+			]
+			title: "Batteries"
+			x: 9.0d
+			y: 60.0d
+		}
+		{
+			icon: "gtceu:tin_single_wire"
+			id: "3B2125BC87FC669D"
+			shape: "rsquare"
+			size: 1.0d
+			tasks: [
+				{ id: "31786F675927C16D", item: "gtceu:tin_single_wire", optional_task: true, type: "item" }
+				{ id: "3FB9D1665233557D", type: "checkmark" }
+			]
+			title: "Tin Wire"
+			x: 13.0d
+			y: 60.0d
+		}
+		{
+			dependencies: ["3B2125BC87FC669D"]
+			description: [
+				"Insulated cable loses less than bare wire, and a superconductor loses nothing."
+				"Loss per block and amp: tin 1 EU (LV, 1 A), copper 2 EU (MV, 1 A), gold 2 EU (HV, 3 A), aluminium 1 EU (EV, 1 A), platinum 1 EU (IV, 2 A), manganese phosphide (superconductor) none (LV, 2 A)."
+			]
+			icon: "gtceu:tin_single_cable"
+			id: "127A408A8BDBFF75"
+			size: 1.0d
+			tasks: [
+				{ id: "1859D68B43A89BAB", item: "gtceu:tin_single_cable", optional_task: true, type: "item" }
+				{ id: "3871AD536567DAE2", type: "checkmark" }
+			]
+			title: "Cables"
+			x: 15.25d
+			y: 60.0d
+		}
+		{
+			dependencies: ["1DFC0C1A50793CB7", "42BF2F77456F8773"]
+			description: ["Any voltage, any distance, and over the quantum bridge, any planet."]
+			icon: "eup2p:eu_p2p_tunnel"
+			id: "711FFBFDAA8307E9"
+			size: 1.0d
+			subtitle: "A 2.5% toll, paid in AE energy"
+			tasks: [
+				{ id: "1BE01FC27AE116C7", item: "eup2p:eu_p2p_tunnel", optional_task: true, type: "item" }
+				{ id: "728A1DDDD15CA5E0", type: "checkmark" }
+			]
+			title: "EU P2P Tunnel"
+			x: 23.75d
+			y: 60.75d
+		}
+		{
+			dependencies: ["366AB48E5BF50431"]
+			icon: "ae2:quantum_link"
+			id: "58B2E63DFD2DE970"
+			size: 1.0d
+			subtitle: "It carries the network, and the tunnels on it, to the other worlds"
+			tasks: [
+				{ id: "32B1199731A4CC2C", item: "ae2:quantum_link", optional_task: true, type: "item" }
+				{ id: "1B46B5DDCB2DAE84", type: "checkmark" }
+			]
+			title: "Quantum Bridge"
+			x: 21.5d
+			y: 63.0d
+		}
+		{
+			icon: "gtceu:lapotron_crystal"
+			id: "56341035C7044592"
+			shape: "rsquare"
+			size: 1.0d
+			tasks: [
+				{ id: "7F883844A50B6AD4", item: "gtceu:lapotron_crystal", optional_task: true, type: "item" }
+				{ id: "141F18F856922379", type: "checkmark" }
+			]
+			title: "Lapotron Crystal"
+			x: 27.75d
+			y: 60.0d
+		}
+		{
+			dependencies: ["56341035C7044592"]
+			icon: "gtceu:power_substation"
+			id: "755AF9B54C201779"
+			size: 1.0d
+			subtitle: "One battery the size of a building; it wants a LuV circuit"
+			tasks: [
+				{ id: "7E5D6B106D5061CF", item: "gtceu:power_substation", optional_task: true, type: "item" }
+				{ id: "763E4D7BD3695ACC", type: "checkmark" }
+			]
+			title: "Power Substation"
+			x: 30.0d
+			y: 60.0d
+		}
+		{
+			icon: "gtceu:lv_lithium_battery"
+			id: "1A5654A5282AA2BB"
+			shape: "rsquare"
+			size: 1.0d
+			subtitle: "Any battery of the cell's tier"
+			tasks: [
+				{ id: "7D38B81C77322663", item: "gtceu:lv_lithium_battery", optional_task: true, type: "item" }
+				{ id: "1348853C62E926F2", type: "checkmark" }
+			]
+			title: "Batteries"
+			x: 0.5d
+			y: 68.75d
+		}
+		{
+			dependencies: ["1A5654A5282AA2BB"]
+			description: [
+				"Batteries of its tier in a block. An empty slot takes the tower's casing."
+				"Holds: LV 720,000 EU, MV 2,520,000 EU, HV 10,800,000 EU, EV 61,440,000 EU, IV 245,760,000 EU."
+			]
+			icon: "grindless:lv_capacitor_cell"
+			id: "16ABFBB249BDC07B"
+			size: 1.0d
+			subtitle: "The weakest cell in any tower sets the network's voltage"
+			tasks: [
+				{ id: "5F647B421B89C6F2", item: "grindless:lv_capacitor_cell", optional_task: true, type: "item" }
+				{ id: "5E46CBD3C716378C", type: "checkmark" }
+			]
+			title: "Capacitor Cell"
+			x: 2.75d
+			y: 68.75d
+		}
+		{
+			dependencies: ["16ABFBB249BDC07B"]
+			description: [
+				"No tower, no network: build it before any hatch or cover."
+				"5% of what goes in is lost on the way."
+			]
+			icon: "gtceu:wireless_energy_tower"
+			id: "1A64E503878275AE"
+			shape: "gear"
+			size: 1.5d
+			subtitle: "LV: 32 cell slots. One network for every world and every player"
+			tasks: [
+				{ id: "39235CB4DAA85A3A", item: "gtceu:wireless_energy_tower", optional_task: true, type: "item" }
+				{ id: "1639805696AC3174", type: "checkmark" }
+			]
+			title: "Wireless Energy Tower"
+			x: 5.0d
+			y: 68.75d
+		}
+		{
+			dependencies: ["1A64E503878275AE"]
+			description: [
+				"Energy goes in at any voltage; the cells only limit what comes out."
+				"Comes in 2, 4, 16 and 64 A, LV to IV."
+			]
+			icon: "gtceu:lv_wireless_dynamo_hatch"
+			id: "128CD52291A76880"
+			size: 1.0d
+			subtitle: "Generator multiblocks feed the network through it"
+			tasks: [
+				{ id: "58114DD6FCE0B349", item: "gtceu:lv_wireless_dynamo_hatch", optional_task: true, type: "item" }
+				{ id: "39DDC21A11D4C123", type: "checkmark" }
+			]
+			title: "Wireless Dynamo Hatch"
+			x: 7.25d
+			y: 66.5d
+		}
+		{
+			dependencies: ["1A64E503878275AE"]
+			description: ["2 A of its tier, LV to IV."]
+			icon: "grindless:lv_wireless_dynamo_cover"
+			id: "54D4653CC016835A"
+			size: 1.0d
+			subtitle: "On a generator or a battery buffer, it feeds the network"
+			tasks: [
+				{ id: "77A87C660B9F021C", item: "grindless:lv_wireless_dynamo_cover", optional_task: true, type: "item" }
+				{ id: "3888F503C6818E73", type: "checkmark" }
+			]
+			title: "Wireless Dynamo Cover"
+			x: 7.25d
+			y: 68.0d
+		}
+		{
+			dependencies: ["1A64E503878275AE"]
+			description: [
+				"Above the network's voltage it gets nothing; shift-right-click it with an empty hand to see why."
+				"Comes in 2, 4, 16 and 64 A, LV to IV."
+			]
+			icon: "gtceu:lv_wireless_energy_hatch"
+			id: "5062E82EF67AFF89"
+			size: 1.0d
+			subtitle: "Multiblocks draw from the network through it"
+			tasks: [
+				{ id: "71CC443C03739105", item: "gtceu:lv_wireless_energy_hatch", optional_task: true, type: "item" }
+				{ id: "3777273B8EF27E04", type: "checkmark" }
+			]
+			title: "Wireless Energy Hatch"
+			x: 7.25d
+			y: 69.5d
+		}
+		{
+			dependencies: ["1A64E503878275AE"]
+			description: [
+				"GTM machines, chargers and battery buffers, not converters or multiblock controllers; shift-right-click with an empty hand for the readout."
+				"2 A of its tier, LV to IV."
+			]
+			icon: "grindless:lv_wireless_energy_cover"
+			id: "7713822C036911A8"
+			size: 1.0d
+			subtitle: "Single machines draw through it, on any side but the front"
+			tasks: [
+				{ id: "316A5192E2D0349B", item: "grindless:lv_wireless_energy_cover", optional_task: true, type: "item" }
+				{ id: "3B94480C2084B2D2", type: "checkmark" }
+			]
+			title: "Wireless Energy Cover"
+			x: 7.25d
+			y: 71.0d
+		}
+	]
+	subtitle: ["Every way to make power, tier by tier, and what carries it and stores it."]
+	title: "Power"
+}
