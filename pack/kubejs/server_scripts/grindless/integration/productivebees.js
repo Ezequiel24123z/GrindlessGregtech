@@ -26,15 +26,16 @@
 //       MV   120 EU/t  Overworld and Nether vein materials (PB's own floor) and glowstone (redstone byproduct); bauxite, vanadium magnetite and gold too (End veins have them, Overworld veins open them first);
 //                      and what only the End veins give, now that the End is MV (veins_end.json, mv.md): raw aluminium, chromite, cooperite (sheldonite comb), zircon.
 //       EV  1920 EU/t  platinum-group metals (ev.md: platinum plant): platinum, palladium.
-//       IV  held       radioactives and Ir/Os (veins_excluded.json until IV; ev.md decision 3): naquadah, uranium (radioactive comb),
-//                      osmium. They get NO recipe until IV is built: GTM's two-hatch rule lets a multiblock with two EV energy hatches
-//                      run 7,680 EU/t, so an IV-voltage recipe is no IV gate, and the radioactive and osmium bees breed from Earth bees
-//                      (creeper x iron, iron x neon cuckoo). iv.md decides them (it removes the naquadah and osmium bees).
+//       IV  held       radioactives and Ir/Os: naquadah, uranium (radioactive comb), osmium. They get NO recipe, for good (docs/eras/iv.md,
+//                      decisions 4 and 5, and the raise's decision 2): naquadah only comes from Venus, iridium and osmium only from
+//                      Mercury's iridosmine, and uranium only from the End's leach field. A comb recipe would also skip the gate: GTM's
+//                      two-hatch rule lets a multiblock with two EV energy hatches run 7,680 EU/t, and the radioactive and osmium bees
+//                      breed from Earth bees (creeper x iron, iron x neon cuckoo). The bees stay registered (saves), with nothing to give.
 //       MOON 480 EU/t  materials only the Moon has (data/grindless/tables/offworld_only.json, worlds.moon.combs: ilmenite, titanium).
 //       MARS 1920 EU/t materials only Mars has (worlds.mars.combs: tungsten, scheelite, tungstate; scheelite and tungstate left the End
 //                      for Mars). MOON and MARS recipes also carry their world's dimension (worlds.<world>.dimension), so the bees can
 //                      live on Earth but their titanium only comes out on the Moon and their tungsten only on Mars.
-//     No recipe: materials the pack does not open before LuV (fluorite: no vein or recipe makes it; neutronium) and combs that would
+//     No recipe: materials whose only source is a line of their own (fluorite: IV's fluorite vein, drilled; neutronium) and combs that would
 //     skip a line (iridium nuggets: the IV iridium chain; blaze powder and rods: HV chemical reactor and simulator; netherite scrap).
 //     A comb missing from COMB_ERA gets no recipe and is named in the server log.
 // Bees only ever produce combs (the 101 hive recipes make configurable combs and pollen; bone, chorus, fish, sponge, spider eye
@@ -126,7 +127,7 @@
           var comb = path.replace(/^.*\//, '').replace(/^(honey)?comb_/, '')
           var era = COMB_ERA.hasOwnProperty(comb) ? COMB_ERA[comb] : null
           if (era === null) { noEra.push(path); return }
-          // item 7: the IV combs wait for IV's own design
+          // item 7: the IV combs (naquadah, radioactive, osmium) never get a recipe
           if (era === 'IV') { held.push(path); return }
           var ingredient = c.json.ingredient
           var result = null
@@ -166,7 +167,7 @@
       })
     }
     console.info(LOG + 'GT centrifuge comb recipes: ' + total + ' (MV ' + made.MV + ', HV ' + made.HV + ', EV ' + made.EV + ', IV ' +
-      made.IV + ', Moon ' + made.MOON + ', Mars ' + made.MARS + ') of ' + combs.length + ' material combs; held until IV: ' +
+      made.IV + ', Moon ' + made.MOON + ', Mars ' + made.MARS + ') of ' + combs.length + ' material combs; held for good (no recipe): ' +
       (held.length > 0 ? held.join(', ') : 'none') + '; no era, no recipe: ' + (noEra.length > 0 ? noEra.join(', ') : 'none') +
       '; skipped (no output item or NBT): ' + skipped)
   })

@@ -10,7 +10,7 @@
     "earth": { "dimensions": ["minecraft:overworld", "minecraft:the_nether", "minecraft:the_end", "grindless:void", "grindless:flat", "gcyr:overworld_orbit"] },
     "moon": { "dimensions": ["gcyr:luna", "gcyr:luna_orbit"], "pairTag": "moon", "name": { "en_us": "the Moon", "es_es": "la Luna" } },
     "mars": { "dimensions": ["gcyr:mars", "gcyr:mars_orbit"], "pairTag": "mars", "name": { "en_us": "Mars", "es_es": "Marte" } },
-    "venus": { "dimensions": ["gcyr:venus", "gcyr:venus_orbit"] },
-    "mercury": { "dimensions": ["gcyr:mercury", "gcyr:mercury_orbit"] }
+    "venus": { "dimensions": ["gcyr:venus", "gcyr:venus_orbit"], "pairTag": "venus", "name": { "en_us": "Venus", "es_es": "Venus" } },
+    "mercury": { "dimensions": ["gcyr:mercury", "gcyr:mercury_orbit"], "pairTag": "mercury", "name": { "en_us": "Mercury", "es_es": "Mercurio" } }
   }
 }
