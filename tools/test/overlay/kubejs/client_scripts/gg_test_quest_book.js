@@ -41,6 +41,8 @@
     { name: 'gg_book_ev_age', chapter: 'ev_age' }
   ]
   var OPEN_TICKS = 60
+  // the Processing Lines group: three of its charts, centred on their middles
+  SHOTS.push({ name: 'gg_book_pl_lv', chapter: 'pl_lv' }, { name: 'gg_book_pl_ev', chapter: 'pl_ev' }, { name: 'gg_book_pl_iv', chapter: 'pl_iv' })
   var c = { holding: false, since: 0, errors: 0, ageField: null, gaveUp: false, tipDone: '', book: null }
 
   function val(key) {
