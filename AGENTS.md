@@ -39,7 +39,7 @@ Gregtech Grindless is a GregTech Modern pack (Minecraft 1.20.1, Forge) in which 
 - **Repository language:** everything in the repository is in English: docs, code comments, tool messages, data notes and commit messages (requested by the user). The only Spanish allowed is the `es_es` game translation (lang files and the `es_es` blocks of `*_lang.js`).
 - **Integration:** recipes from other mods that break progression are redone so that they go through GregTech machines.
 - **Rhino (KubeJS 6):** inside functions or callbacks that run more than once, use `var`, not `const`/`let`. Otherwise you get "redeclaration of var".
-- **Vanilla names (KubeJS 2001.6.5):** some members are renamed for the scripts, and the Mojang name does not exist: `getYRot`/`getXRot` are `getYaw`/`getPitch`, `getStringUUID` is `getStringUuid`, `tickCount` is `age` and `Level#getGameTime` is `getTime`; `Entity#level()` is hidden (use `getLevel()`). Full list in `tools/test/README.md`. Anything that uses a player is tested in the `client` suite.
+- **Vanilla names (KubeJS 2001.6.5):** some members are renamed for the scripts, and the Mojang name does not exist: `getYRot`/`getXRot` are `getYaw`/`getPitch`, `getStringUUID` is `getStringUuid`, `tickCount` is `age`, `Level#getGameTime` is `getTime` and `ItemStack#getTag` is `getNbt`; `Entity#level()` is hidden (use `getLevel()`). Full list in `tools/test/README.md`. Anything that uses a player is tested in the `client` suite.
 - **GTM 7.5.3 traps** (each one cost a bench run):
   - **Recipe ids:** the GT recipe builder puts the recipe type in front of the id you pass: `event.recipes.gtceu.assembler('grindless:x')` is saved as `grindless:assembler/x`.
   - **Generator multiblocks** go through `startup_scripts/grindless/lib/generators.js`.
@@ -134,8 +134,11 @@ Gregtech Grindless is a GregTech Modern pack (Minecraft 1.20.1, Forge) in which 
   | fluorspar kiln | 11008–11071 |
   | Venus | 11264–11327: on Venus (`gcyr:venus`) from one block above the highest ground (Y 162 for ground Y 156–161) up 19 blocks, and a gas collector at Y 250; on Mars (`gcyr:mars`) the same X and Z (slab at Y 163) |
   | Mercury | 11520–11583 on Mercury (`gcyr:mercury`), built on Y 200 (the band's highest ground is Y 173) |
+  | naquadah plant | 11776–11839 (roof at Y 111) |
   | tritium removal facility | 12032–12095: the Moon at Y 198–214 and the Overworld at Y 98–112 |
   | travel and network | 12288–12351: the Overworld at Y 98–112 and Venus (`gcyr:venus`) at Y 198–214 |
+  | mass production | 12544–12607 (roof at Y 112) |
+  | gallery (client) | 12800–12863 |
 
   For a new test, keep going in steps of 256.
 

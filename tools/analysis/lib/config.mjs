@@ -68,6 +68,7 @@ function loadFile(file, ctx, tierHint) {
   for (const k of MERGED_MAPS) raw[k] = { ...(parent[k] || {}), ...(raw[k] || {}) };
   raw.fluidContainers = raw.fluidContainers || parent.fluidContainers;
   raw.eraOrder = raw.eraOrder || parent.eraOrder;
+  raw.eraSiblings = raw.eraSiblings || parent.eraSiblings;
   const inherit = raw.inheritTargets ? parent : {};
   for (const k of TARGET_LISTS) raw[k] = mergeList(inherit[k] || [], raw[k] || [], k, raw.dropTargets);
   raw.eraResources = mergeEraList(parent.eraResources || [], raw.eraResources || [], era);

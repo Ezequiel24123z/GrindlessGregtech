@@ -1,4 +1,5 @@
 {
+	autofocus_id: "3610F788A08B9FD3"
 	default_hide_dependency_lines: false
 	default_quest_shape: ""
 	filename: "hv_age"
@@ -11,8 +12,8 @@
 		{
 			dependencies: ["53336232501835EE"]
 			description: [
-				"The cleanroom is up. HV is where oil gets refined instead of burned and every machine is built from stainless steel."
-				"The way out is a rocket to the Moon."
+				"The cleanroom works, so welcome to HV. Crude oil stops being something you burn and turns into chemistry, and stainless steel goes into everything."
+				"The way out is up: a rocket to the Moon."
 			]
 			icon: "gtceu:hv_machine_hull"
 			id: "3610F788A08B9FD3"
@@ -27,40 +28,7 @@
 		{
 			dependencies: ["3610F788A08B9FD3"]
 			description: [
-				"The &6HV Energy Hatch&r and &6HV Battery Buffer&r are the same idea at a bigger size. Build them onto the MV to HV transformer from the gate."
-			]
-			icon: "gtceu:hv_energy_input_hatch"
-			id: "402F2B16DAE481B7"
-			rewards: [{ id: "1AF584529AB814B3", type: "xp", xp: 30 }]
-			tasks: [
-				{ count: 2L, id: "5895EA447DCF5847", item: "gtceu:hv_energy_input_hatch", type: "item" }
-				{ id: "115A06EDFACFB98E", item: "gtceu:hv_battery_buffer_4x", type: "item" }
-			]
-			title: "HV Grid"
-			x: 2.0d
-			y: 0.0d
-		}
-		{
-			dependencies: ["402F2B16DAE481B7"]
-			description: [
-				"Steam power stops being one tiered block here: the &6Steel Large Boiler&r and the &6Large Steam Turbine&r are proper multiblocks, built once and fed forever."
-				"Creosote and biomass still light the fire. Gasoline takes over the power plant later in this chapter."
-			]
-			icon: "gtceu:steam_large_turbine"
-			id: "134BDAC25F5824C1"
-			rewards: [{ id: "5FBBC7364C4A5A61", type: "xp", xp: 45 }]
-			tasks: [
-				{ id: "46D1E9A6AF89FC55", item: "gtceu:steel_large_boiler", type: "item" }
-				{ id: "67BB0E16F80459A9", item: "gtceu:steam_large_turbine", type: "item" }
-			]
-			title: "Large Steel Boiler and Turbine"
-			x: 2.0d
-			y: -1.5d
-		}
-		{
-			dependencies: ["402F2B16DAE481B7"]
-			description: [
-				"Motor, piston, pump, arm and conveyor, one more size up. Nothing new to learn: stainless steel instead of aluminium in most of them."
+				"Another tier, another round of motors, pumps and arms, mostly in stainless steel this time. You'll be making these for the rest of the age, so an assembler that does nothing else isn't a bad idea."
 			]
 			icon: "gtceu:hv_electric_motor"
 			id: "5B595A919C80BFC0"
@@ -73,47 +41,13 @@
 				{ id: "61D202ED6D17FF04", item: "gtceu:hv_conveyor_module", type: "item" }
 			]
 			title: "HV Components"
-			x: 4.0d
+			x: 2.0d
 			y: 0.0d
 		}
 		{
 			dependencies: ["5B595A919C80BFC0"]
 			description: [
-				"Nickel, black bronze and steel melt into &6Black Steel&r in the Kanthal furnace. Rose gold, brass, steel and black steel melt again into &6Red Steel&r. Both cool in a chemical bath."
-				"Red steel is what the HV cutter's saw blade is made of."
-			]
-			icon: "gtceu:red_steel_ingot"
-			id: "2EE2A70803F87897"
-			rewards: [{ id: "37DF63D19831DAD3", type: "xp", xp: 35 }]
-			tasks: [
-				{ count: 4L, id: "2D823876F35C5D3F", item: "gtceu:black_steel_ingot", type: "item" }
-				{ count: 4L, id: "15199CC371D9FAAF", item: "gtceu:red_steel_ingot", type: "item" }
-			]
-			title: "Black Steel and Red Steel"
-			x: 4.0d
-			y: 1.5d
-		}
-		{
-			dependencies: ["2EE2A70803F87897"]
-			description: [
-				"The &6Cutter&r and &6Laser Engraver&r step up again. The cutter is the one that needs the red steel saw blade."
-				"The engraver is what turns a silicon wafer into a CPU wafer next."
-			]
-			icon: "gtceu:hv_laser_engraver"
-			id: "715BB49A8BCDE679"
-			rewards: [{ id: "2F1A3C944FB46257", type: "xp", xp: 35 }]
-			tasks: [
-				{ id: "18670943281B28B2", item: "gtceu:hv_cutter", type: "item" }
-				{ id: "4E6581D4A78F7BE3", item: "gtceu:hv_laser_engraver", type: "item" }
-			]
-			title: "HV Cutter and Laser Engraver"
-			x: 4.0d
-			y: 3.0d
-		}
-		{
-			dependencies: ["5B595A919C80BFC0"]
-			description: [
-				"Same family, same vein table, more bores per hatch again. It reaches every vein the smaller drills do, Earth and End, only faster."
+				"The drill family grows again: one HV hatch now runs more bores at once. It knows every vein the smaller drills do, Earth and End alike, and your pickaxe stays retired."
 			]
 			icon: "gtceu:hv_vein_drill"
 			id: "721FA9268C278B3F"
@@ -125,26 +59,26 @@
 			size: 1.0d
 			tasks: [{ id: "3FA479D4D0FB6DE4", item: "gtceu:hv_vein_drill", type: "item" }]
 			title: "HV Vein Drill"
-			x: 6.0d
+			x: 4.0d
 			y: -1.5d
 		}
 		{
 			dependencies: ["721FA9268C278B3F"]
 			description: [
-				"The longest-lasting bit yet, cut from the same stainless steel as every other HV part. The vanadium steel bit still works if you run out."
+				"The HV drill's own bit, in stainless steel. If you run out, the old vanadium steel bit still fits, so the drill never has to sit idle."
 			]
 			icon: "grindless:stainless_steel_drill_bit"
 			id: "2CD2C8EF5A408796"
 			rewards: [{ id: "396C938D1616ED8E", type: "xp", xp: 25 }]
 			tasks: [{ count: 4L, id: "4222DE23EA3992E8", item: "grindless:stainless_steel_drill_bit", type: "item" }]
 			title: "Stainless Steel Drill Bit"
-			x: 8.0d
+			x: 6.0d
 			y: -3.0d
 		}
 		{
 			dependencies: ["5B595A919C80BFC0"]
 			description: [
-				"Same spec, more bores. This is only the step up. HV asks for no more wood or crops than MV; the new carbon in this chapter comes from oil, not trees."
+				"The greenhouse's HV size: same crops, more bores per run. HV doesn't need more wood than MV did, because the new carbon comes up out of the ground as crude oil."
 			]
 			icon: "gtceu:hv_greenhouse"
 			id: "3C06724477E3E0BB"
@@ -156,14 +90,14 @@
 			size: 1.5d
 			tasks: [{ id: "5DB8D7813E63F2DC", item: "gtceu:hv_greenhouse", type: "item" }]
 			title: "HV Greenhouse"
-			x: 4.0d
+			x: 2.0d
 			y: -1.5d
 		}
 		{
 			dependencies: ["5B595A919C80BFC0"]
 			description: [
-				"The &6Refinery&r takes crude and hydrogen in and gives every fraction out in one pass, desulfurized. GTM's own tower needs four passes and still leaves sulfur in."
-				"A programmed circuit picks the job: plain refining, cracking with hydrogen, or cracking with steam into olefins and aromatics."
+				"The &6Refinery&r takes crude oil and hydrogen and hands back every fraction in one pass, sulfur already removed. GregTech alone would want a distillery pass per fraction and a reactor to clean each one."
+				"A programmed circuit picks the job: refining, hydrocracking or steam cracking."
 			]
 			icon: "gtceu:refinery"
 			id: "5C5D6FB9ECB7BC51"
@@ -175,13 +109,14 @@
 			size: 1.5d
 			tasks: [{ id: "659FBFC6A4539F6D", item: "gtceu:refinery", type: "item" }]
 			title: "Refinery"
-			x: 6.0d
+			x: 4.0d
 			y: 0.0d
 		}
 		{
 			dependencies: ["5C5D6FB9ECB7BC51"]
 			description: [
-				"The &6Syngas Plant&r turns steam and carbon into carbon monoxide and hydrogen. Carbon monoxide is toxic, so keep the plant's output away from the base until it has been shifted."
+				"The &6Syngas Plant&r blasts powdered coal or heavy fuel with steam and gives back carbon monoxide and hydrogen, each in its own hatch. That's the easy hydrogen for the ammonia in rocket fuel."
+				"The carbon monoxide is toxic, so shift it or turn it into methanol."
 			]
 			icon: "gtceu:syngas_plant"
 			id: "4C18E0B7D5A92F61"
@@ -190,70 +125,55 @@
 			size: 1.0d
 			tasks: [{ id: "0E5A7C2D98B14F36", item: "gtceu:syngas_plant", type: "item" }]
 			title: "Syngas Plant"
-			x: 6.0d
+			x: 4.0d
 			y: 1.5d
 		}
 		{
 			dependencies: ["4C18E0B7D5A92F61"]
 			description: [
-				"Carbon monoxide and steam over the &6Shift Catalyst&r give carbon dioxide and more hydrogen, the hydrogen the refinery and the reformer keep asking for."
-				"The catalyst is a mix of magnetite and chromium dust."
+				"On circuit 4 the plant runs carbon monoxide and steam over the &6Shift Catalyst&r, and the poison comes out as carbon dioxide and more hydrogen. Send it to the refinery."
+				"The catalyst is mixed from magnetite and chromium dust, and it wears out slowly."
 			]
 			icon: "grindless:shift_catalyst"
 			id: "7B52A3F9E0C84D16"
 			rewards: [{ id: "19B8F5D3A60E7C42", type: "xp", xp: 35 }]
 			tasks: [{ id: "1D4F16B0A2E73C85", type: "checkmark" }]
 			title: "Water-Gas Shift"
-			x: 8.0d
+			x: 6.0d
 			y: 1.5d
 		}
 		{
 			dependencies: ["5C5D6FB9ECB7BC51"]
 			description: [
-				"Cobalt, molybdenum and silica from sand, crossed with three different ore lines, make the &6Hydrotreating Catalyst&r the refinery burns through by chance."
-				"Cobalt rides the nickel vein, molybdenum the Nether one; keep both stocked."
+				"The refinery eats a &6Hydrotreating Catalyst&r every so often, so keep spares in its input bus. Cobalt comes from the nickel vein and molybdenum from the Nether, and the syngas plant's ash can stand in for the silica."
 			]
 			icon: "grindless:hydrotreating_catalyst"
 			id: "64F01001238ACD74"
 			rewards: [{ id: "7BB92FDB97461071", type: "xp", xp: 30 }]
 			tasks: [{ count: 4L, id: "700AC5219F2F1ADB", item: "grindless:hydrotreating_catalyst", type: "item" }]
 			title: "Hydrotreating Catalyst"
-			x: 8.0d
+			x: 6.0d
 			y: 0.0d
 		}
 		{
 			dependencies: ["64F01001238ACD74"]
 			description: [
-				"Circuit 3 and a splash of steam turn naphtha into ethylene, propene, butadiene and benzene in the same refinery, no separate cracker required."
-				"Hydrogen cracking (circuit 2) is the other mode: feed it back whatever fraction is piling up."
+				"Put circuit 3 in the refinery, give it steam, and naphtha comes back as ethylene, propene, butadiene and benzene. Most of HV's plastics start there."
+				"Circuit 2 cracks with hydrogen instead, which is handy for whatever fraction keeps piling up."
 			]
 			icon: "gtceu:refinery"
 			id: "1051C4B8835DB4A3"
 			rewards: [{ id: "40F96569A80405B1", type: "xp", xp: 30 }]
 			tasks: [{ id: "5104D985778131A0", type: "checkmark" }]
 			title: "Cracking and Olefins"
-			x: 10.0d
+			x: 8.0d
 			y: 0.0d
 		}
 		{
 			dependencies: ["64F01001238ACD74"]
 			description: [
-				"Natural gas desulfurizes into refinery gas, and the distillery pulls methane, ethane, propane, butane and helium out of it."
-				"The methane goes to the PTFE line two steps on."
-			]
-			icon: "gtceu:mv_distillery"
-			id: "74B6466FA603FC14"
-			rewards: [{ id: "3A062C4CD7BE032D", type: "xp", xp: 25 }]
-			tasks: [{ id: "62A49DAE5A598587", type: "checkmark" }]
-			title: "Natural Gas and Refinery Gas"
-			x: 10.0d
-			y: 1.5d
-		}
-		{
-			dependencies: ["64F01001238ACD74"]
-			description: [
-				"GTM never reforms naphtha. The &6Catalytic Reformer&r does, turning it into benzene, toluene and the hydrogen the refinery just spent."
-				"Not required: without it, the electrolyzer alone keeps the refinery in hydrogen, just with less margin."
+				"GregTech never reforms naphtha, so the &6Catalytic Reformer&r does: benzene, toluene, and hydrogen to send straight back to the refinery."
+				"It's optional. Without it the electrolyzer covers the hydrogen, with less to spare."
 			]
 			icon: "gtceu:reformer"
 			id: "52781D6F5A69C4BE"
@@ -263,80 +183,55 @@
 			size: 1.5d
 			tasks: [{ id: "3D77A53BF29A83F5", item: "gtceu:reformer", type: "item" }]
 			title: "Catalytic Reformer"
-			x: 8.0d
+			x: 6.0d
 			y: -1.5d
 		}
 		{
 			dependencies: ["52781D6F5A69C4BE"]
 			description: [
-				"Platinum from the sheldonite vein, pressed onto silica. The &6Reforming Catalyst&r is the one thing in this chapter that only the End can supply."
+				"Platinum on silica, and the platinum comes from the End's sheldonite vein. That End sample in your drill finally earns its keep."
 			]
 			icon: "grindless:reforming_catalyst"
 			id: "045FA73ADE3D0624"
 			rewards: [{ id: "5669400C0C30D05F", type: "xp", xp: 30 }]
 			tasks: [{ count: 4L, id: "0CAB2A5FCAE4C6DC", item: "grindless:reforming_catalyst", type: "item" }]
 			title: "Reforming Catalyst"
-			x: 10.0d
+			x: 8.0d
 			y: -3.0d
 		}
 		{
-			dependencies: ["74B6466FA603FC14"]
-			description: ["Topaz, lepidolite or bastnasite give up fluorine. Fluorine and hydrogen react to hydrofluoric acid, which PTFE cannot do without."]
-			icon: "gtceu:lv_chemical_reactor"
-			id: "7267E269B84470FF"
-			rewards: [{ id: "48E8AC75F8251D19", type: "xp", xp: 25 }]
-			tasks: [{ id: "26D26CF3E5C118AD", type: "checkmark" }]
-			title: "Hydrofluoric Acid"
-			x: 12.0d
-			y: 1.5d
-		}
-		{
-			dependencies: ["1051C4B8835DB4A3", "7267E269B84470FF", "74B6466FA603FC14"]
+			dependencies: ["1051C4B8835DB4A3"]
 			description: [
-				"Methane and chlorine make chloroform, chloroform and hydrofluoric acid make TFE, and TFE with oxygen makes &6PTFE&r."
-				"Cast it into inert casing and large pipe, and the large chemical reactor finally has walls that will not melt."
+				"&6PTFE&r is the plastic nothing eats, which is why the large chemical reactor is lined with it. The road runs through chloroform and TFE."
+				"Methane comes from distilling refinery gas, and the fluorine from topaz, lepidolite or bastnasite."
 			]
 			icon: "gtceu:inert_machine_casing"
 			id: "720331A06D7F2344"
 			rewards: [{ id: "2BA86A8E9940CABD", type: "xp", xp: 35 }]
 			tasks: [{ count: 8L, id: "2B26A5F014E45D2A", item: "gtceu:inert_machine_casing", type: "item" }]
 			title: "PTFE"
-			x: 12.0d
-			y: 0.0d
-		}
-		{
-			dependencies: ["1051C4B8835DB4A3"]
-			description: [
-				"Glycerol from MV's biodiesel line turns into epichlorohydrin. Cumene from benzene and propene splits into phenol and acetone, and the three combine into epoxy."
-				"Styrene and butadiene make SBR. Epoxy goes into every composite part of the rocket."
-			]
-			icon: "gtceu:mv_mixer"
-			id: "47895685D763AE65"
-			rewards: [{ id: "4973030D0D5597E4", type: "xp", xp: 30 }]
-			tasks: [{ id: "6BA5CFB1330C9434", type: "checkmark" }]
-			title: "Epoxy and SBR"
 			x: 10.0d
-			y: -1.5d
+			y: 0.0d
 		}
 		{
 			dependencies: ["720331A06D7F2344"]
 			description: [
-				"The &6Large Chemical Reactor&r takes the PTFE you just made as inert casing and pipe."
-				"Naphtha, refinery gas, methanol and acetone cook into raw gasoline, and a splash of toluene finishes it. Gasoline also takes over from creosote in the power plant."
+				"With PTFE walls, the &6Large Chemical Reactor&r can finally be built. Its big job in HV is gasoline, and the methanol and acetone piling up since MV go straight into it."
+				"Gasoline is also a far better fuel than creosote."
 			]
 			icon: "gtceu:large_chemical_reactor"
 			id: "35719B747A75F7B6"
 			rewards: [{ id: "3EB45CE14A466656", type: "xp", xp: 55 }]
 			tasks: [{ id: "1E56A8818DE368EE", item: "gtceu:large_chemical_reactor", type: "item" }]
 			title: "Gasoline"
-			x: 14.0d
+			x: 12.0d
 			y: 0.0d
 		}
 		{
-			dependencies: ["47895685D763AE65"]
+			dependencies: ["1051C4B8835DB4A3"]
 			description: [
-				"The &6Composite Autoclave&r is built from an HV hull, two HV autoclaves, two HV pumps and four HV circuits. Build it as a horizontal vessel on two stainless steel saddles, door at the front, nitrogen line on top."
-				"Leave the chamber empty: the composite recipes take their inputs from the hatches."
+				"The &6Composite Autoclave&r cures fiber in epoxy under nitrogen pressure, which no single machine can do."
+				"Build it as a vessel lying on two saddles with the door facing you, and leave the inside empty: everything comes in through the hatches."
 			]
 			icon: "gtceu:composite_autoclave"
 			id: "3B7E2C9A41D06F85"
@@ -345,37 +240,40 @@
 			size: 1.5d
 			tasks: [{ id: "5A0C81E7D2B94F16", item: "gtceu:composite_autoclave", type: "item" }]
 			title: "Composite Autoclave"
-			x: 12.0d
+			x: 8.0d
 			y: -1.5d
 		}
 		{
 			dependencies: ["3B7E2C9A41D06F85"]
-			description: ["A fiberglass foil, epoxy and nitrogen cure into four &6Ablative Heat-Shield Tiles&r. Each untested motor takes four."]
+			description: [
+				"&6Ablative Heat-Shield Tiles&r are fiberglass soaked in epoxy and cured under nitrogen. They sit at the base of each motor and burn away so the motor doesn't."
+			]
 			icon: "grindless:ablative_heat_shield_tile"
 			id: "6D0A4F18B2E93C57"
 			rewards: [{ id: "2C6E9B0F4D17A853", type: "xp", xp: 45 }]
 			tasks: [{ count: 2L, id: "1C7E09A3F5D82B64", item: "grindless:ablative_heat_shield_tile", type: "item" }]
 			title: "Heat-Shield Tiles"
-			x: 14.0d
+			x: 10.0d
 			y: -1.5d
 		}
 		{
 			dependencies: ["471A024EBFCA8459", "3B7E2C9A41D06F85"]
 			description: [
-				"A stainless steel drum, para-aramid foil, epoxy and nitrogen cure into four &6Overwrapped Tanks&r in the autoclave."
-				"A fuel tank takes four of them, with Kapton K plates and stainless frames."
+				"An &6Overwrapped Tank&r is a stainless steel drum wrapped in para-aramid and cured in epoxy, light and very hard to burst. The rocket's fuel tanks are built around them."
 			]
 			icon: "grindless:composite_overwrapped_tank"
 			id: "1F8C57E2A6D40B93"
 			rewards: [{ id: "7F1A4D82B0E6C395", type: "xp", xp: 45 }]
 			tasks: [{ count: 4L, id: "4E2B9D06C1A7F358", item: "grindless:composite_overwrapped_tank", type: "item" }]
 			title: "Overwrapped Tanks"
-			x: 16.0d
+			x: 12.0d
 			y: -3.0d
 		}
 		{
 			dependencies: ["6D0A4F18B2E93C57"]
-			description: ["Four qualified power thrusters, four heat-shield tiles and Kapton K plates go into the assembler, on a stainless steel frame. The motor stays untested until it has been fired."]
+			description: [
+				"The &6Untested Rocket Motor&r is where the qualified thrusters and heat-shield tiles come together, on a stainless steel frame. The name is honest."
+			]
 			icon: "grindless:untested_rocket_motor"
 			id: "5E26B9D13A7C08F4"
 			rewards: [{ id: "305E3C97D2A18F64", type: "xp", xp: 50 }]
@@ -383,12 +281,15 @@
 			size: 1.25d
 			tasks: [{ id: "3F90C2E8B1D5A746", item: "grindless:untested_rocket_motor", type: "item" }]
 			title: "Untested Rocket Motor"
-			x: 16.0d
+			x: 12.0d
 			y: -1.5d
 		}
 		{
 			dependencies: ["5E26B9D13A7C08F4", "76D281E9D9C6FD20", "115744A9113F8B38"]
-			description: ["Fire four untested motors together on the &6Engine Test Stand&r with rocket fuel in the tank. Only the ones that survive the burn become rocket motors."]
+			description: [
+				"Back to the &6Engine Test Stand&r from MV, this time with a whole motor, burning the same rocket fuel it'll fly on. It needs HV power now: an HV energy hatch, or a second MV one."
+				"The motors always pass, but it's nice to know before you're sitting on top of one."
+			]
 			icon: "gtceu:engine_test_stand"
 			id: "2A94D7C0E6B15F38"
 			rewards: [{ id: "4D9A6E2C81F0B375", type: "xp", xp: 60 }]
@@ -396,49 +297,52 @@
 			size: 1.25d
 			tasks: [{ id: "6B1D3E7A90C24F5D", type: "checkmark" }]
 			title: "Static Fire"
-			x: 18.0d
+			x: 16.0d
 			y: 0.0d
 		}
 		{
 			dependencies: ["2A94D7C0E6B15F38"]
-			description: ["The static fire turns four untested motors into four &6Basic Rocket Motors&r. The rocket's screen shows its speed, and it has to stay above zero: every block of the rocket weighs."]
+			description: [
+				"Each static fire hands you a &6Basic Rocket Motor&r. Make more than the bare minimum: every block of the rocket has weight, and with too few motors it barely leaves the pad."
+				"The rocket's screen shows its speed."
+			]
 			icon: "gcyr:basic_rocket_motor"
 			id: "5C1D3FB96A9FB74A"
 			rewards: [{ id: "71613751FE3583C9", type: "xp", xp: 40 }]
 			tasks: [{ count: 6L, id: "6C0A50CC41916AEE", item: "gcyr:basic_rocket_motor", type: "item" }]
 			title: "Rocket Motors"
-			x: 20.0d
+			x: 18.0d
 			y: 0.0d
 		}
 		{
 			dependencies: ["1F8C57E2A6D40B93"]
-			description: ["A trip to the Moon and back burns more than one &6Basic Fuel Tank&r holds, so the first rocket carries two."]
+			description: ["A single &6Basic Fuel Tank&r can't hold enough for a Moon launch, so the first rocket carries a pair."]
 			icon: "gcyr:basic_fuel_tank"
 			id: "4A6E81ABD8026025"
 			rewards: [{ id: "240589002FC5DF78", type: "xp", xp: 40 }]
 			tasks: [{ count: 2L, id: "216EB77B2A3105FF", item: "gcyr:basic_fuel_tank", type: "item" }]
 			title: "Fuel Tanks"
-			x: 20.0d
+			x: 16.0d
 			y: -1.5d
 		}
 		{
 			dependencies: ["35719B747A75F7B6"]
 			description: [
-				"Dimethylhydrazine comes out of methanol, ammonia and hypochlorous acid in a chemical reactor, and the mixer blends it with oxygen. Hydrogen also burns in the rocket, but it runs out far sooner."
-				"The syngas plant is the easy way to the hydrogen for the ammonia. A Moon launch needs at least 8 buckets of rocket fuel in the tanks."
+				"&6Rocket Fuel&r is dimethylhydrazine and oxygen out of the mixer, and the hydrazine comes from methanol, ammonia and hypochlorous acid."
+				"A Moon launch needs at least 8 buckets in the tanks. Make extra, because every static fire burns some too."
 			]
 			icon: "gtceu:hv_chemical_reactor"
 			id: "76D281E9D9C6FD20"
 			rewards: [{ id: "3E3E25931D1CA960", type: "xp", xp: 40 }]
 			tasks: [{ id: "437D6750BF09654E", type: "checkmark" }]
 			title: "Rocket Fuel"
-			x: 16.0d
+			x: 14.0d
 			y: 0.0d
 		}
 		{
 			dependencies: ["35719B747A75F7B6"]
 			description: [
-				"The rocket is built on a square of &6Launch Pads&r with a short tower of stainless steel frames, and the scanner's EMI page shows where each block goes."
+				"The rocket stands on a square of &6Launch Pads&r with a short tower of stainless steel frames. The scanner's EMI page shows where every block goes."
 			]
 			icon: "gcyr:launch_pad"
 			id: "7B21622AADB1E1D1"
@@ -448,14 +352,14 @@
 				{ count: 2L, id: "3B8A9579E4CC32E1", item: "gtceu:stainless_steel_frame", type: "item" }
 			]
 			title: "Launch Pad"
-			x: 18.0d
+			x: 16.0d
 			y: 1.5d
 		}
 		{
-			dependencies: ["35719B747A75F7B6"]
+			dependencies: ["4A6E81ABD8026025"]
 			description: [
-				"Fill the &6Space Chestplate&r with oxygen in a fluid canner before you leave: an empty suit drowns you on the Moon."
-				"The suit is four pieces, and the lunar cold gets through any piece you leave at home."
+				"The suit is sewn from the same para-aramid and Kapton as the fuel tanks. Fill the &6Space Chestplate&r with oxygen in a fluid canner before you leave: an empty suit drowns you on the Moon."
+				"Wear all four pieces. The lunar cold finds whichever one you forgot."
 			]
 			icon: "gcyr:space_helmet"
 			id: "5615E54AF782990A"
@@ -467,13 +371,13 @@
 				{ id: "2734B9A769F33E71", item: "gcyr:space_boots", type: "item" }
 			]
 			title: "Space Suit"
-			x: 24.0d
-			y: 4.5d
+			x: 20.0d
+			y: -1.5d
 		}
 		{
 			dependencies: ["5C1D3FB96A9FB74A", "4A6E81ABD8026025", "7B21622AADB1E1D1"]
 			description: [
-				"Motors on the pad, tanks on the motors and the &6Seat&r on top, all in front of the &6Rocket Scanner&r. Right-click the scanner and press Build to turn the blocks into a rocket."
+				"Motors on the pad, tanks on the motors, the &6Seat&r on top, all in front of the &6Rocket Scanner&r. Right-click the scanner and press Build, and the pile of blocks becomes a rocket."
 			]
 			icon: "gcyr:rocket_scanner"
 			id: "5151DE8D3623EDCF"
@@ -485,28 +389,28 @@
 				{ id: "1DF6E14CDCEDEA6D", item: "gcyr:seat", type: "item" }
 			]
 			title: "First Rocket"
-			x: 22.0d
+			x: 20.0d
 			y: 0.0d
 		}
 		{
 			dependencies: ["5151DE8D3623EDCF", "5C4613715A82BDBF"]
 			description: [
-				"Program the &6ID Chip&r for the Moon on the planet screen. It is written from the Lunar Landing-Site Chart, which stays on the table. A first rocket reaches nothing farther without it."
-				"Pack the lunar drill, empty vein probes, charged batteries and a waystone. Check the chestplate has air, load chip and fuel into the rocket, sit down and launch."
+				"The &6ID Chip&r is written from your landing-site chart, which you get back, and set to the Moon on the planet screen."
+				"Pack the lunar drill, empty vein probes, charged batteries and a waystone. Check the suit has air, load the chip and the fuel, sit down and go."
 			]
 			icon: "gcyr:id_chip"
 			id: "4A672DF7CF424623"
 			rewards: [{ id: "3E3DC37BC58FD75C", type: "xp", xp: 40 }]
 			tasks: [{ id: "4B08AC4FA0E80C99", item: "gcyr:id_chip", type: "item" }]
 			title: "Liftoff"
-			x: 24.0d
+			x: 22.0d
 			y: 0.0d
 		}
 		{
 			dependencies: ["4A672DF7CF424623", "5615E54AF782990A"]
 			description: [
-				"Hold Space to brake on the way down: a hard landing blows the rocket up."
-				"Keep the chestplate topped up with oxygen on the surface, or you drown on the Moon. The EV tab starts here, at the lunar base."
+				"Hold Space to brake on the way down. A hard landing blows the rocket up, and the walk home is long."
+				"Keep the chestplate topped up with oxygen, then set up camp: the lunar base is where EV begins."
 			]
 			icon: "gcyr:moon_stone"
 			id: "2897E3EB8159710C"
@@ -518,144 +422,84 @@
 			size: 1.75d
 			tasks: [{ dimension: "gcyr:luna", id: "2717156C3769D52D", type: "dimension" }]
 			title: "The Moon"
-			x: 26.0d
+			x: 24.0d
 			y: 0.0d
 		}
 		{
-			dependencies: ["715BB49A8BCDE679"]
+			dependencies: ["5B595A919C80BFC0"]
 			description: [
-				"The cutter and laser engraver you already own slice and burn a boule into CPU wafers, the same way ILC and RAM were made in MV."
-			]
-			icon: "gtceu:cpu_wafer"
-			id: "2267FA6D185D2882"
-			rewards: [
-				{ id: "176F9BAA23F1A8F9", type: "xp", xp: 30 }
-			]
-			tasks: [{ id: "28566FCC6FBBF1B3", item: "gtceu:cpu_wafer", count: 4L, type: "item" }]
-			title: "CPU Wafer"
-			x: 6.0d
-			y: 3.0d
-		}
-		{
-			dependencies: ["2267FA6D185D2882"]
-			description: ["A plastic board, two microprocessors, inductors, capacitors and RAM solder into a &6Microprocessor Assembly&r. The workstation wants two of them."]
-			icon: "gtceu:micro_processor_assembly"
-			id: "37FCA61395646727"
-			rewards: [
-				{ id: "4B3FF7686F5AC64C", type: "xp", xp: 35 }
-			]
-			tasks: [{ id: "75AE43FDB54724F1", item: "gtceu:micro_processor_assembly", count: 2L, type: "item" }]
-			title: "Microprocessor Assembly"
-			x: 8.0d
-			y: 3.0d
-		}
-		{
-			dependencies: ["37FCA61395646727"]
-			description: [
-				"Two assemblies, diodes, RAM, electrum wire and a blue alloy of electrotine and silver. The &6Workstation&r is only built inside the cleanroom you raised in MV."
-				"EV machines ask for it from here on."
+				"From CPU wafer to &6Workstation&r, the whole micro line runs on MV power, and only the last step needs the cleanroom."
+				"The vacuum freezer wants these, and so does nearly everything in EV, so get the line running early."
 			]
 			icon: "gtceu:micro_processor_computer"
 			id: "51DD45CBEDEE31D9"
-			rewards: [
-				{ id: "3701FB44C4351347", type: "xp", xp: 50 }
+			rewards: [{ id: "3701FB44C4351347", type: "xp", xp: 80 }]
+			tasks: [
+				{ count: 4L, id: "28566FCC6FBBF1B3", item: "gtceu:cpu_wafer", type: "item" }
+				{ count: 2L, id: "75AE43FDB54724F1", item: "gtceu:micro_processor_assembly", type: "item" }
+				{ id: "68F1C9AFFB461C1A", item: "gtceu:micro_processor_computer", type: "item" }
 			]
-			tasks: [{ id: "68F1C9AFFB461C1A", item: "gtceu:micro_processor_computer", type: "item" }]
 			title: "EV Workstation"
-			x: 10.0d
+			x: 4.0d
 			y: 3.0d
 		}
 		{
 			dependencies: ["51DD45CBEDEE31D9"]
 			description: [
-				"The &6Vacuum Freezer&r is crafted with two EV circuits, so the workstation comes first."
-				"It cools a hot ingot solid and, fed air, separates it into liquid oxygen and nitrogen."
+				"The &6Vacuum Freezer&r is built with EV circuits, so it waits for the workstation. It cools the hottest ingots out of the blast furnace and turns air into liquid air."
+				"Lunar titanium will need it the day you bring ilmenite home."
 			]
 			icon: "gtceu:vacuum_freezer"
 			id: "53D1CE971F63D842"
-			rewards: [
-				{ id: "312C422590E22590", type: "xp", xp: 60 }
-			]
+			rewards: [{ id: "312C422590E22590", type: "xp", xp: 60 }]
 			size: 1.25d
 			tasks: [{ id: "0AEBA5F4B70C1D3E", item: "gtceu:vacuum_freezer", type: "item" }]
 			title: "Vacuum Freezer"
-			x: 12.0d
+			x: 6.0d
 			y: 3.0d
 		}
 		{
 			dependencies: ["53D1CE971F63D842"]
-			description: ["Nickel and chromium from the ore plant, smelted so hot that only two HV hatches reach it, then cooled in the vacuum freezer. &6Nichrome&r is the coil wire EV's own furnace will need."]
+			description: [
+				"&6Nichrome&r needs more power than one HV energy hatch gives, so the blast furnace gets two, and the hot ingot goes through the freezer."
+				"EV turns it into coils: the regolith cell on the Moon and tungsten's furnace both want them."
+			]
 			icon: "gtceu:nichrome_ingot"
 			id: "70F4075BAF69DA99"
-			rewards: [
-				{ id: "5B177DB0EA38B7DC", type: "xp", xp: 40 }
-			]
-			tasks: [{ id: "7FEDE320D91D5B65", item: "gtceu:nichrome_ingot", count: 4L, type: "item" }]
+			rewards: [{ id: "5B177DB0EA38B7DC", type: "xp", xp: 40 }]
+			tasks: [{ count: 4L, id: "7FEDE320D91D5B65", item: "gtceu:nichrome_ingot", type: "item" }]
 			title: "Nichrome"
-			x: 14.0d
+			x: 8.0d
 			y: 3.0d
 		}
 		{
 			dependencies: ["24DEACCFA4DCD216"]
 			description: [
-				"Stainless steel drums hold far more fluid than any tank GTM gave you before. Park one under every machine that floods a bus."
+				"A &6Stainless Steel Drum&r holds a lot of fluid and keeps it when you pick it up. It's also the liner inside the rocket's overwrapped tanks, so make a few extra."
 			]
 			icon: "gtceu:stainless_steel_drum"
 			id: "471A024EBFCA8459"
-			rewards: [
-				{ id: "6707FD083533EF59", type: "xp", xp: 30 }
-			]
+			rewards: [{ id: "6707FD083533EF59", type: "xp", xp: 30 }]
 			tasks: [{ id: "336736F34B2A70B0", item: "gtceu:stainless_steel_drum", type: "item" }]
 			title: "GT Drums"
-			x: 14.0d
+			x: 10.0d
 			y: -3.0d
 		}
 		{
-			dependencies: ["471A024EBFCA8459"]
+			dependencies: ["53336232501835EE", "5B595A919C80BFC0"]
 			description: [
-				"The &6Super Chest&r and &6Super Tank&r hold millions of items or buckets apiece. The ore plant and the refinery finally have somewhere to dump a backlog."
+				"GregTech saves the &6Cleaning Maintenance Hatch&r for UV; here you get it in HV. Any GregTech multiblock with a maintenance slot counts as being in a cleanroom once it's fitted."
+				"The pack's own multiblocks don't take one."
 			]
-			icon: "gtceu:hv_super_tank"
-			id: "02DC15B32EA52FEC"
-			rewards: [
-				{ id: "0727FC45CCD3BAA4", type: "xp", xp: 35 }
-			]
-			tasks: [
-				{ id: "083222AECEE29A71", item: "gtceu:hv_super_chest", type: "item" }
-				{ id: "2836F1DB768DD854", item: "gtceu:hv_super_tank", type: "item" }
-			]
-			title: "Super Chest and Tank"
-			x: 16.0d
-			y: -4.5d
-		}
-		{
-			dependencies: ["02DC15B32EA52FEC"]
-			description: [
-				"AE2 itself asks nothing new. It has been whole since LV. HV only opens the door to the bigger addons: larger co-processors and a wireless bus, both gated behind HV circuits and stainless steel."
-				"Entirely optional: the LV sub-tree already runs the whole factory."
-			]
-			icon: "ae2:controller"
-			id: "61928A6B7E8BCC95"
-			optional: true
-			rewards: [
-				{ id: "5E985164B4B837AB", type: "xp", xp: 25 }
-			]
-			tasks: [{ id: "2B10D5B1F47F2392", type: "checkmark" }]
-			title: "AE2 at HV"
-			x: 18.0d
-			y: -4.5d
-		}
-		{
-			dependencies: ["53336232501835EE", "715BB49A8BCDE679"]
-			description: ["The cleanroom's filters and fans in one hatch: a GregTech multiblock that takes a maintenance hatch counts as being in a cleanroom with it."]
 			icon: "gtceu:cleaning_maintenance_hatch"
 			id: "12831B49EE204B0B"
 			rewards: [{ id: "290DE13044D4E778", type: "xp", xp: 60 }]
 			tasks: [{ id: "2AB3457DB642C0B2", item: "gtceu:cleaning_maintenance_hatch", type: "item" }]
 			title: "Cleanroom in a Hatch"
-			x: 4.0d
-			y: 4.5d
+			x: 2.0d
+			y: 1.5d
 		}
 	]
+	subtitle: ["Crude oil becomes chemistry, and the chemistry becomes a rocket to the Moon."]
 	title: "HV: Moonshot"
 }

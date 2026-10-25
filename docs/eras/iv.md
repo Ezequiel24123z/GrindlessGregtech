@@ -123,16 +123,22 @@ What it gains: **radioactive material never passes through hands, and it makes t
 
 ### Naquadah plant: `gtceu:naquadah_plant`
 
-What it gains: **the hands-free neutron window and the superacid inside.** The live line is GT--'s, in the GTNH style: naquadah oxide only yields naquadah in GT--'s neutron activator, which needs the neutron energy kept in a window (220–230 MeV for naquadah, 460–480 for enriched, and 1,050–1,100 for naquadria) with accelerators and graphite or beryllium dust. The plant composes the live steps and swaps the window for the Pu-Be source on the bus (used up at random, ≈ 1% per batch) plus the EU of the accelerators (numbers to tune).
+What it gains: **the hands-free neutron window and the superacid inside.** The live line is GT--'s, in the GTNH style: naquadah oxide only yields naquadah in GT--'s neutron activator, which needs the neutron energy kept in a window (220–230 MeV for naquadah, 460–480 for enriched, and 1,050–1,100 for naquadria) with accelerators and graphite or beryllium dust. The plant composes the live steps and swaps the window for the Pu-Be source on the bus (used up at random, ≈ 1% per batch) plus the EU of the accelerators (240 EU/t, from GT--'s constants; see *As built*).
 
 1. **Naquadah** (circuit 1): `neutron_activator/naquadah` (4 oxide + 6,000 mB of HSbF₆ → 2 naquadah + 2 TiF₃ + Ga at 50%), `fluoroantimonic_acid`, `antimony_trifluoride` and `titanium_trifluoride_separation` (1,941 K EBF → titanium + HF). For every 2 naquadah, about 15 Sb₂O₃ dust (6 antimony) and about 40,000 mB of fluorine as HF go in; the H₂ and HF from the steps come back inside.
 2. **Enriched** (circuit 2; LuV recipe, with two IV hatches and a cleanroom; verify that GTM assigns it to a multiblock): enriched oxide → Enriched Naquadah Sulfate. Steps: reactor (1,920 EU/t), hexafluoride (7,680), xenon (cleanroom), GT--'s chemical plant (30,720, with Pd/C and AuF₃), mixer with H₂SO₄ and activator. The residue goes through the dehydrator and electrolysis, which return Xe, Au, SbF₃ and HF.
 
-- **Structure:** inert casing (PTFE) ≥ 40, PTFE pipes, activation chamber of radiation-proof casing and laminated glass; input bus (oxide, Sb₂O₃ and source), output bus, 3 input hatches (HF, H₂ and H₂SO₄) and 1 or 2 IV hatches; accepts ME.
+- **Structure:** inert casing (PTFE) ≥ 50, PTFE pipes, activation chamber of radiation-proof casing and laminated glass; input bus (oxide, Sb₂O₃ and source), output bus, 1–6 input hatches (mode 1 takes only HF; hydrogen is a net output), 1–2 energy hatches (two EV hatches before Mercury) and one parallel hatch; accepts ME.
 - **Built with:** IV hull, chemical reactor, IV mixer and centrifuge, 2 IV pumps and 4 IV circuits.
 - **By-products:** titanium → into the titanium loop (see *Proposed decisions*). Gallium → Gallium Arsenide for the boule. Enriched sulfate and Trinium Sulfide → stored for the 7,000 and 7,200 K EBFs (LuV). Naquadria Solution (radioactive) → stored contained until ZPM.
 - **Why it is not one big cube:** no GTM machine combines activator, reactors and EBF; the power is the sum of the steps, and it needs fluorine, antimony and the hot cell's source.
 - **Cut-down option:** mode 2 moves to LuV; without the plant, the loose GT-- line with its activator remains.
+- *As built (IV-B3):*
+  - **Mode 1** (circuit 1) is composed from GT--'s live line at every load (`lib/compose.js`, `data/grindless/tables/naquadah_plant.json`): 4 naquadah oxide mixture + 15 Sb₂O₃ + 40,500 mB HF + the Pu-Be source → 2 naquadah dust + titanium and gallium at 50 % + 10,500 mB hydrogen + 9,000 mB water, 7,678 EU/t × 149 t. Per naquadah dust that is 2 oxide, 7.5 Sb₂O₃ and 20,250 mB HF. The antimony trioxide comes from the LV sulfide roaster or GTM's reactor. The hot titanium ingot is cooled inside, so a titanium ingot leaves.
+  - **The window:** GT--'s activator checks it when a run starts, and makes waste outside it. The plant's Pu-Be source holds it, one source per 100 batches. Its stage pays the accelerators' upkeep, 240 EU/t: GT--'s 72,000 eV lost per 20 idle ticks, at 15 eV per EU. A cold activator's ramp (about 14.7 M EU once) is not charged.
+  - **Structure:** 7 × 4 × 5, 107 blocks. Two EV energy hatches run it before Mercury (IV voltage, GTM's two-hatch rule).
+  - It doesn't refuse voiding: in IV it makes nothing that must be contained. Mode 2 will, and mode 2 is not built (LuV).
+  - **The parallel hatch:** one in any part cell. Each copy pays the recipe's EU/t, so 4 copies need LuV voltage (two IV hatches), and each wants its own Pu-Be source in the bus, because GTM counts a chanced input per copy.
 
 ### Family steps
 
@@ -145,7 +151,8 @@ What it gains: **the hands-free neutron window and the superacid inside.** The l
   - **Mercury solar field** (`gtceu:mercury_solar_field`): the lunar field with a heat-shield sunshade. By day it yields ×6.7 (the Moon, ×1.4); at night, nothing.
   - **RTG cell** (`gtceu:ev_rtg`: GTM's KubeJS builder names a single block `<tier>_<name>`, and 2,048 EU/t is one EV amp; the simple KubeJS generator is proven by IV-B5): plutonium oxide pellet that is used up at random (≈ 1 per hour) → 2,048 EU/t constant. It starts every base and covers Mercury's night.
 - **Observatory, step 5: interferometer** (`gtceu:interferometer`): the Mercury antenna (night and vacuum) combines its data with the Moon's deep space antenna over the network. It gives the outer-system chart (the belt and Jupiter, the LuV trip) and the first signal from Sagittarius A*.
-- **Platinum plant, mode 3** (circuit 3): iridosmine → Ir + Os with GT--'s live chain (`rarest_metal_residue_ebf`, OsO₄ distillation and `osmium_dust_completion`; `iridium_metal_residue_process` → IrO₂ → iridium acid → `iridium_chloride` → `iridium_chloride_separation` with calcium). The input step is ours: iridosmine + saltpeter + brine (775 K EBF) → Rarest Metal Mixture, like `rarest_metal_residue`, tuned to give 3 Ir per Os. The OsO₄ and Cl₂ do not leave, and the CaCl₂ goes to electrolysis. Accepts the parallel hatch.
+- **Platinum plant, mode 3** (circuit 3): iridosmine → Ir + Os with GT--'s live chain (`rarest_metal_residue_ebf`, OsO₄ distillation and `osmium_dust_completion`; `iridium_metal_residue_process` → IrO₂ → iridium acid → `iridium_chloride` → `iridium_chloride_separation` with calcium). The input step is ours: iridosmine + saltpeter + brine (775 K EBF) → Rarest Metal Mixture, like `rarest_metal_residue`; IV-B2's fusion figures give 3 Ir per Os through GT--'s chain. The OsO₄ and Cl₂ do not leave, and the CaCl₂ goes to electrolysis. Accepts the parallel hatch.
+  - *As built (IV-B3):* `grindless:pgm_refining/iv/iridosmine`, composed from IV-B2's fusion (`global.grindless.mercury.fusion`) and GT--'s chain, with GTM's HCl and NH₄Cl syntheses closing the chlorine and ammonia loops, so hydrogen goes in: 10 iridosmine + 10 saltpeter + 3 Ca + 1,000 mB salt water + 12,500 mB HCl + 7,000 mB H₂ → 3 Ir + 1 Os + 3 platinum sludge residue + 3 metal sludge + 12 CaCl₂ + 4,700 mB water + 1,000 mB steam, 1,919 EU/t × 1,034 t. It takes iridosmine only. The platinum plant now composes with `lib/compose.js` (its own copy is gone). 4 parallel copies run on IV voltage and want 4 electrodes in the bus.
 
 ### Discarded
 
@@ -171,6 +178,31 @@ What it gains: **the hands-free neutron window and the superacid inside.** The l
 - **Two IV hatches = LuV:** osmium, UHPIC wafer and naquadah mode 2. GCYM's large assemblers have only one hatch.
 - **Plan B:** Extended Features' Expanded Assembly Line (accepts ME buses) with a GCYM-type controller. GT--'s component line still has no recipe.
 - **Quantum Chest V and Quantum Tank V (IV):** the lines' stock, off the network.
+
+### As built (IV-B6)
+
+- **IV parallel hatch:** `grindless:crafting/iv_parallel_hatch`, GTM's shape with 4 IV circuits. Its sensor and emitter take iridium, so it comes after Mercury.
+- **Our plants take it:** the hot cell, the fuel fabrication plant and the heavy-water plant accept one in any part cell (`lib/parallel_hatch.js`; no shape changed). The platinum and naquadah plants take one too (IV-B3), and each of their copies wants its own electrode or Pu-Be source in the bus. Each copy pays the recipe's EU/t: one IV hatch runs 4 copies up to 2,048 EU/t, and 4 copies of an IV recipe need two IV hatches. Per batch, the hatch costs the recipe's own EU and an overclock twice that (heavy-water exchange: 110,606 against 221,212 EU). The H2S charge is needed once and never multiplied. The reactor, the fluorspar kiln and the drills keep their own parallel copies and take no hatch.
+- **GCYM:** the large packer and the alloy blast smelter moved up from EV (`grindless:crafting/large_packer`, `grindless:crafting/alloy_blast_smelter`). Every GCYM controller now takes IV circuits or better. Machines already built keep working.
+- **The line from AE2 (proven on the bench):**
+  - an export bus under each ULV input bus, set to its ingredient, in order; fluids through 1× hatches, in order;
+  - GTM's ME output bus returns the product; it connects to AE2 on its front face only, so face it at the cable;
+  - a 7-slice line with 10 channels started the LuV motor 20 ticks after the ingredients reached ME storage, and put it back 9 ticks after the run (6,000 EU/t × 600 t);
+  - no level emitter is needed when the network holds whole products' worth of ingredients;
+  - research: GTM's EV scanner writes the stick, kept in a data access hatch.
+- **Quantum Chest V and Quantum Tank V:** GTM's IV recipes, at home (the HV field generator's quantum eye comes from the hot cell's radon).
+
+What needs Mercury, computed from the dump with every iridium and osmium source and every Mercury recipe left out:
+
+| After Mercury | First missing input |
+|---|---|
+| `gtceu:iv_parallel_hatch` | IV sensor and emitter (iridium rods) |
+| `gtceu:assembly_line`, its control casing and line casing | IV sensor and emitter; ruridit gear |
+| GCYM's large engraving laser and large circuit assembler | IV emitter; IV circuit assembler |
+| GCYM's large electrolyzer, electromagnet and distillery | osmium wire; osmium quadruple wire; iridium large fluid pipe |
+| the IV energy and dynamo hatches | IV voltage coil (fine iridium wire) |
+
+GCYM's large mixer is LuV (osmiridium rotor), and the mega blast furnace and mega vacuum freezer are ZPM. **IV at home**, with no iridium: the large packer, the alloy blast smelter and GCYM's other 14 machines, GTCA's megas, GT--'s Maceration Stack, Quantum Chest V and Tank V, the data access hatch, the EV scanner, GTM's ME output bus, our three plants and the IV parts they use. Before Mercury they run on 2 EV energy hatches.
 
 ## AE2 between planets: the IV step
 
@@ -229,6 +261,13 @@ It unlocks LuV: hulls, hatches and LuV components (assembly line); LuV mixer and
 - **IV in three sub-stages:** home, Venus and Mercury, as EV is split into Moon and Mars. Nothing on the way to Venus and Mercury (level 3 rocket, thermal upgrade, site casings and bridge halves) asks for naquadah, iridium or osmium.
 - **Nothing in IV asks for anything from LuV:** no asteroid metals, no Europa crops, no products of 7,000 K or hotter EBFs (enriched naquadah, trinium), nor anything from fusion (europium, americium).
 - **The gate is built** only with what IV and the earlier eras give.
+- **Implemented (C1, 2026-10-25).** `tools/analysis/tiers/iv.json` extends `ev`.
+  - `eraOrder` goes `ev-mars`, `iv`, `iv-venus`, `iv-mercury`, `luv`; Venus and Mercury are siblings (`eraSiblings`): nothing of one may need the other's resources. The trips are the synthetics `end-trip` (the End's key) and `inner-trip` (the tier 3 rocket, whose elite tank and motor need the antenna's Inner Planets Chart, and the thermal suit).
+  - Exclusivity: naquadah only from Venus, iridium and osmium only from Mercury, titanium from the Moon or Venus. Checks: uranium only through the leach field, tritium only through the Moon facility, LEU only from the fuel plant, heavy water only from its plant, naquadah dust only from the naquadah plant (GT--'s neutron activator is LuV: its quark cores are precision assembly at 30,720 EU/t, one hatch); no rarest metal mixture, iridium residue, iridium, osmium, IV energy hatch, parallel hatch or assembly line without Mercury.
+  - Energy: the reactor, the Venus heat engine, the Mercury solar field and the RTG, read from their own recipes. Before Mercury there are no IV hatches (the IV voltage coil takes iridium): our IV multiblocks and GCYM's machines run on two EV hatches (IV voltage).
+  - Gate to LuV, every item PASS: the LuV hull, the LuV motor from the assembly line with its research, the UHPIC wafer, the naquadah and osmium ingots, the nanoprocessor mainframe, the Outer System Chart, the first Sagittarius A* signal, plutonium-241, the IV→LuV transformer and an IV parallel hatch in one of our plants. The quantities (131,072 EU/t, 4 mainframes, 10 minutes untouched) are not checked: the validator is qualitative.
+  - Site checks: the leach field in the End, the tritium facility on the Moon, the Venus and Mercury machines and recipes on their planets, the pressurized drill on Venus or Mars.
+  - Not modeled: the parallel hatch's copies, the assembly line's ordered inputs and AE2 feeding, GTCA's megas and GT--'s Maceration Stack (their types already run elsewhere).
 
 ## Mods and integration
 
@@ -236,7 +275,7 @@ It unlocks LuV: hulls, hatches and LuV components (assembly line); LuV mixer and
 |---|---|---|
 | GCYR | `gcyr` | its own elite fuel tank and rocket motor remade in the IV assembler (Venus and Mercury at level 3: `ev.md` datapack; Proxima b at 4), thermal upgrade (IV) and IV oxygen spreader; Venus and Mercury veins removed |
 | GT-- | `gtnn` | live naquadah line (the plant composes it), loose activator, naquadah reactors (LuV), radiation-proof casing and radioactive waste |
-| Productive Bees | `productivebees` | naquadah and osmium bees removed |
+| Productive Bees | `productivebees` | PB's naquadah bee recipe removed (IV-B3); the osmium bee still breeds, but its comb has no recipe (IV-A1) |
 | MEGA Cells, Expanded AE | `mega`, `expanded-ae` | IV (decided) |
 | EU P2P Tunnel | `eup2p` | power between planets as EU, no converters |
 | GTM Extended Features | `gtm-extended-features` | large collector (End air: Rn and Xe); Expanded Assembly Line as plan B |
@@ -266,6 +305,7 @@ Credits to note in `CREDITS.md`: designed-core reactor (Grindless campaign, T5, 
 3. **Family steps:** pressurized drill (Venus, and Mars with dust filters) and Mercury drill (night side), with a Tungstensteel drill bit and a cap of 128; Venus heat engine and Mercury solar field; RTG cell; interferometer; and the platinum plant's mode 3. At home there is no IV drill: the End's pitchblende is leached in place (decision 2).
 4. **Naquadah only from Venus:** `gtceu:naquadah_vein` moves from the End to Venus (generation and table), and the naquadah bees are removed.
 5. **Iridium and osmium only from Mercury:** new material `gtceu:iridosmine` in a Mercury vein. Earth's platline stops releasing the Ir/Os mixture and the iridium residue, so open question 10 in `ev.md` is closed: there is nothing to refine on Earth. The osmium bees are removed.
+   - *As built (IV-B3):* two strips in `offworld_only.json` (with a new Mercury world) rebuild GT--'s platinum group sludge centrifuge without the iridium metal residue and the rarest metal mixture, and its inert metal mixture leach without the mixture (as `grindless:centrifuge/offworld_only/platinum_group_sludge_dust` and `grindless:electric_blast_furnace/offworld_only/rarest_metal_residue`; silicon dioxide, gold, platinum and palladium metal dust, sodium rutheniate and steam stay). The EV platinum plant reads its stages through the same strips, so its platinum and rhodium-ruthenium recipes lose the same outputs, with their energy unchanged. Iridium and osmium come only from Mercury's iridosmine. GT--'s loose refining recipes stay, so stored residues still refine. Proof: `gg_test_naquadah_plant`'s `earth_mercury` and the Moon test's Earth scan find no Earth recipe that gives the residues, iridium or osmium.
 6. **Travel:** Venus and Mercury at level 3 (`ev.md` datapack), with GCYR's elite tank and motor remade in IV with the antenna's chart (superseded by decision 10: GCYR's KubeJS plugin isn't used); GCYR's thermal upgrade (IV) is the other half of the gate. The first visit is by hand, with an RTG cell and casings made there; after that, Waystones. GCYR's veins on Venus and Mercury are removed.
 7. **AE2 in IV:** pairs to Venus and Mercury, power as EU over P2P (`eup2p`) instead of FE with converters, 131,072 EU/t crossing, MEGA and Expanded AE's 32k coprocessors.
 8. **Mass production:** assembly line with one AE2 export bus per cut, IV parallel with IV circuits, and GCYM at IV (with `large_packer` and `alloy_blast_smelter`). Plan B: the Expanded Assembly Line.
@@ -661,4 +701,4 @@ The shared ids of `PACKAGES-IV.md` are registered in `startup_scripts/grindless/
 - **Tritium:** only from the reactor through the Moon's removal facility. Liquid ender air no longer gives it and GTM's `deuterium_separation` is removed; until IV-B4 nothing makes it (fusion, its consumer, is LuV), and GTCA's zinc plasma (fusion of copper and tritium) is B LuV.
 - **Radiation-proof casing:** GT--'s own IV assembler recipe (6 dense lead plates, a tungsten steel frame and 1,296 mB concrete), unchanged.
 - **Ion-exchange resin:** sulfonated polystyrene (styrene + sulfuric acid). Real acid in-situ leaching uses strong-base anion resins; that could become styrene + chloromethane + dimethylamine if realism matters.
-- **Productive Bees:** the naquadah, osmium and radioactive combs keep no recipe for good. PB's own EBF recipe for the naquadah bee (osmium bee egg + naquadah block) still exists and is a dead end; IV-B3 removes it.
+- **Productive Bees:** the naquadah, osmium and radioactive combs keep no recipe for good. PB's own EBF recipe for the naquadah bee (osmium bee egg + naquadah block) was a dead end; IV-B3 removed it (`integration/productivebees.js`).

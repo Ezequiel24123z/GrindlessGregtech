@@ -24,13 +24,13 @@
   Lava furnace (drawn for machine_casing_solid_steel): a heavy riveted hearth door with a handle, a recessed window behind two
   grate bars over a pool of lava, and an inlet pipe that comes in from the top and drips into the pool. No electricity, so no
   lamp and no blue: the lava is the state. 8 frames, frametime 4: the pool churns (its rows flowing against each other), a crest
-  runs along the surface, bubbles rise and burst, and a bead swells at the nozzle, falls and splashes. Idle: dark red and black
-  crust with a few faint embers.
+  runs along the surface, bubbles rise and burst, and a bead swells at the nozzle, falls and splashes. Idle: a cooling dark red
+  crust with a few dull embers.
 
   Weather controller (drawn for machine_casing_solid_steel): a cloud-seeding console with a small sky display, an MV blue
   barometer bar and the state lamp. 8 frames, frametime 2: a pale cloud with rain falling from it, a yellow lightning strike
   (one frame, with an afterglow on the next one) that lights the sky, the barometer falling before the strike and rising after
-  it, and a blinking green lamp. Idle: a grey cloud on a dark screen, the barometer dim and a red lamp.
+  it, and a blinking green lamp. Idle: a grey cloud on a dark slate screen, the barometer dim and a red lamp.
 
   Run from the repo root (PowerShell 5.1 blocks unsigned scripts by default; this bypass only affects that process):
     powershell -NoProfile -ExecutionPolicy Bypass -File tools\assets\Build-LeisureUtilityTextures.ps1
@@ -269,7 +269,7 @@ function New-SmelterFrame {
 # ============================================================================================
 $LavaPal = New-Pal ($SteelSpec + ' ' + @'
 k=FFF8C8 l=FFDA4A m=FFA21E n=F2700E o=C8400A p=8A2208
-q=4E1A10 r=2C100C s=6A2414 t=8C3618
+q=7A2A16 r=46180E s=9A3A1A t=C8541E
 u=3A1610 v=2A120E
 '@)
 $LavaRamp = @('k', 'l', 'm', 'n', 'o', 'p')    # hottest -> darkest
@@ -362,7 +362,7 @@ function New-LavaFrame {
 #  strip (y13): MV blue barometer bar x3..9 and the state lamp x12..13
 # ============================================================================================
 $WxPal = New-Pal ($SteelSpec + ' ' + $BlueSpec + ' ' + $LampSpec + ' ' + @'
-k=16243A l=1C3050 m=243C62 n=10151C
+k=16243A l=1C3050 m=243C62 n=1C2838
 h=2C4674 i=36548A j=4064A0
 v=A8E2FF w=5A9AD2
 x=FFF8B0 y=FFD23A
@@ -398,7 +398,7 @@ $WxCloud = @(
 Assert-Map 'WxCloud' $WxCloud 8 4
 $WxCloudDay = New-Pal 'o=F4F8FC p=D0DAE6 q=A2B0C2 r=76849A'
 $WxCloudFlash = New-Pal 'o=FFFFF4 p=EEF2F8 q=C8D2E0 r=FFE89A'
-$WxCloudIdle = New-Pal 'o=6C727A p=52585F q=3E434A r=33373D'
+$WxCloudIdle = New-Pal 'o=B4BCC6 p=8E96A2 q=6E7682 r=545B66'
 
 $WxRain = @(@{ X = 5; P = 0 }, @{ X = 7; P = 2 }, @{ X = 9; P = 1 }, @{ X = 11; P = 3 })   # columns and phases (period 4)
 $WxStrike = 5                                                                               # the frame of the lightning
