@@ -74,7 +74,7 @@ hash = "0ee7b8c399b8327c36dce2359cccec2ddf82c7a4a52058049d618c4e9cbe19dc"
 
 [[files]]
 file = "config/ftbquests/quests/chapters/welcome.snbt"
-hash = "c368ad56b06ce2c768ccce7aa912723aceea20751b1beebea3c8c586de580fe5"
+hash = "e2b78cbd075a1c18a5acfce6dad5f481953ba6ada097de4fe1a934eb66fce97c"
 
 [[files]]
 file = "config/ftbquests/quests/chapters/workshop.snbt"
@@ -2029,6 +2029,10 @@ file = "kubejs/client_scripts/grindless/space_lang.js"
 hash = "50409ef6ee9d2a6794a119a89ca0544aacfd1201c14c3863414237655f4512d8"
 
 [[files]]
+file = "kubejs/client_scripts/grindless/starter_prospector_lang.js"
+hash = "80eb976eeeaec7061029b2b87b378cc15d90ea47e18bde11a44f8ba906c6eab9"
+
+[[files]]
 file = "kubejs/client_scripts/grindless/steam_content_lang.js"
 hash = "8ec503c51da14d8c034d548cbcb724f7a2afc0330bcd72dadc194882ec6c7e7b"
 
@@ -2547,6 +2551,10 @@ hash = "e71d08729f1cd6c81c9d0a0ce0f277c67e3c520ee2f4c2baafe76229278157e6"
 [[files]]
 file = "kubejs/server_scripts/grindless/space/rocket_scanner.js"
 hash = "faa25c0bb0d376ba35487c9635c36760d62549dc0ffab8c42239eff022bfc32c"
+
+[[files]]
+file = "kubejs/server_scripts/grindless/starter_prospector.js"
+hash = "ebb1efe66f8a5dbc7b38c643d0afdcb8aba9c779d946d18a9886f14d640284cc"
 
 [[files]]
 file = "kubejs/server_scripts/grindless/steam/blast_furnace.js"
