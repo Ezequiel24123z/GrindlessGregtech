@@ -194,10 +194,11 @@ node tools\quests\fix-ids.mjs [--chapter lv_age] [--write] [--map]
 powershell -File tools\quests\Render-QuestPreview.ps1 -Chapter steam_age -OutDir <folder> [-Prefix after-]
 ```
 
+- The preview draws quest links as teal dashed boxes, with the lines FTB Quests draws to them.
 - `--items`/`--tags` use the `items.json` and `tags.json` files from a `gg_dump` (the most recent one, with the Moon: `files/test-runs/hidden-moon-dump1/results/server/kubejs-exported/`). The dump only includes the tags that some recipe uses, so a tag missing there is a warning; `gg_test_quests` checks all of them in-game.
 - Errors: repeated id, id that FTB Quests cannot read (8–F), dependency that does not exist or is circular, second start, floating quest, overlapping boxes, backward line, line longer than 5 squares, item that does not exist, chapter without a title, quest without tasks.
 - Warnings: off the grid, boxes almost touching, vertical drop of more than 3, line passing under another quest, crossings, long text, banned phrase, long dash or " - " used as a dash, quantity in the text, no reward, too many rewards.
-- Exceptions (`lint-config.json`), always with their reason: `allowLongEdges`, `allowRoots`, `manyRewardsOk`, `quantityOk` (a number in the text that is not from a recipe: the 8 fuel buckets of a launch) and `direction` per chapter (`ltr` by default, `ttb` if a chapter is read from top to bottom).
+- Exceptions (`lint-config.json`), always with their reason: `allowLongEdges`, `allowRoots`, `manyRewardsOk`, `quantityOk` (a number in the text that is not from a recipe: the 8 fuel buckets of a launch), `noRewardGroups` (chapter groups with no rewards on purpose: the Processing Lines) and `direction` per chapter (`ltr` by default, `ttb` if a chapter is read from top to bottom).
 - **In-game test, server:** `tools\test\Invoke-GGTest.ps1 -Suite server -PackDir <pack copy> -Commands 'kubejs custom_command gg_test_quests' -WaitForLog 'GGTEST\|quests\|DONE@@900'`. It checks that each chapter loads with its number of quests **and dependencies** (`GG_QUESTS_EXPECTED` in `tools/test/overlay/kubejs/server_scripts/gg_test_quests.js`: when a chapter changes, both numbers are updated, which the linter prints), that every item and tag exists, and that the toolbox gives what it should.
 - **Real client test:** `gg_test_quest_book` (marker `kubejs/config/gg_test_quest_book.json`, see `tools/test/README.md`). It completes *Arrival* and the toolbox with the FTB Quests command, claims their rewards through the same path as the button, checks the tools (NBT, damage, magnet, 3x3, description) and takes screenshots of the open book (`kubejs/exported/gg_book_*.png`). To photograph another chapter, add an entry to `SHOTS` in `client_scripts/gg_test_quest_book.js`.
 - Always pass the test bench a copy of `pack/` with `-PackDir`: it runs `Update-PackIndex` over whatever you give it.
@@ -367,3 +368,15 @@ A chunk is one chapter, written by one person. The contract is this guide and th
 | 8 | `productive_bees.snbt` | 5 dashes | Section 15 |
 
 Welcome, Steam and EV are not split up: they are done. The incoming machines and the Moon are added by the book team when the coordinator says so.
+
+## 17. Processing Lines
+
+A chapter group of its own, "Processing Lines", with one chart per tier: `pl_steam`, `pl_lv`, `pl_mv`, `pl_hv`, `pl_ev` and `pl_iv` (Steam Lines to IV Lines). Each chart shows the tier's lines at a glance, the way Star Technology's `pl1`–`pl5` do: what goes in, which machine, what comes out, where each byproduct ends and where the loops close. EMI shows one recipe; a chart shows the line.
+
+- **Nodes:** every node is a quest with one item: an optional item task (never consumed) plus a checkmark, so it can be ticked by hand or by holding the item. No rewards. The charts are `progression_mode: "flexible"` and no quest elsewhere depends on them: they never block anything.
+- **Shapes:** raw inputs are rounded squares; items the default hexagon, products a bigger one, byproducts a small one; machines are gears, our multiblocks a bigger gear; a return (something that goes back into an earlier step: "Electrodes, Back", "Heavy Water, Back") is a small circle at the end of its line. A fluid shows as its bucket.
+- **Arrows** are dependencies and read left to right. An arrow is one recipe, or a short chain whose intermediates the subtitle names ("EBF at 5,000 K, then the freezer").
+- **Quest links** import a quest from an earlier chart (sulfuric acid from LV, nitric acid from EV). Only across chapters: FTB Quests draws a dependency's line to every button of that quest, links included, so a link in its own chapter repeats all its lines, and a loop through a link is a cycle.
+- **Text:** a title, a subtitle (the machine, or where the thing goes), and on our multiblocks one or two sentences in the voice of section 8. A leaf always says where it ends (rule 3).
+- **The source is the data, not the SNBT.** `files/scratch/proc-lines/pl-data-<tier>.mjs` holds the clusters, nodes, arrows and texts; `pl-gen.mjs` writes the chapters, the group line and the linter's roots; `pl-check.mjs` checks every arrow against a `gg_dump` and writes `check-report.md`; `run.ps1 -Write -Preview` does all of it, lints and renders the previews. Ids are hashes of the chapter and the node's key, so they don't change when a chart is regenerated.
+- **When a tier lands:** write its data file from the era's "As built" sections, check it against a dump of that era, regenerate, and add its counts to `GG_QUESTS_EXPECTED`.
