@@ -53,7 +53,7 @@ What is built there, and works only there: on Venus, the pressurized drill (whic
 | Resource | Source | Machine |
 |---|---|---|
 | Naquadah (and Pu-239 from the same vein) | deep vein on Venus | pressurized drill |
-| Iridium and osmium | Mercury iridosmine vein (`gtceu:iridosmine`, new material, to verify) | Mercury drill → platinum plant |
+| Iridium and osmium | Mercury iridosmine vein (`gtceu:iridosmine`, registered by IV-A1) | Mercury drill → platinum plant |
 | Uranium, thorium and lead | `pitchblende_vein_end` with a Tungstensteel drill bit; thorium also from Nether beryllium | home drills |
 | Heavy Water and deuterium | Mars ice (`ev.md`) | GTM distillation tower (our recipe) |
 | Pu-239, tritium, Xe, Kr, Cs and Nd | breeding, moderator and reprocessing | reactor and hot cell |
@@ -121,9 +121,9 @@ What it gains: **the hands-free neutron window and the superacid inside.** The l
 ### Family steps
 
 - **Pressurized vein drill** (`gtceu:pressurized_vein_drill`): a closed shaft against pressure, a TS pipe jacket, inert casing against acid and pressurized regolith casing. On Venus (`.dimension('gcyr:venus')`) it runs the naquadah vein with a Tungstensteel drill bit; instead of Drilling Fluid it uses Distilled Water, which comes out as steam: it is the heat tax (four times what the Drilling Fluid requires), and the steam is inert (it is discarded or moves a turbine). On Mars it runs its three veins with dust filters: it is the pressurized kit that `ev.md` left for IV. Cap of 128 in `bores` (the tripod, 64).
-- **Mercury drill** (`gtceu:mercury_vein_drill`): low-profile, under a heat-shield sunshade and with radiators. At night it drills dry and the Tungstensteel drill bit wears out twice as fast; by day it only works with Liquid Nitrogen (verify that GCYR's Mercury has a night; if not, it always needs it). Iridosmine vein.
+- **Mercury drill** (`gtceu:mercury_vein_drill`): low-profile, under a heat-shield sunshade and with radiators. At night it drills dry and the Tungstensteel drill bit wears out twice as fast; by day it only works with Liquid Nitrogen (GCYR's Mercury has a day and night cycle: its dimension type has no fixed time). Iridosmine vein.
 - **On-site power** (builds on the LV solar mirror tower and the EV lunar solar field, `gtceu:lunar_solar_array`):
-  - **Venus heat engine** (`gtceu:venus_heat_engine`): a hot plate on the ground and a 16-block radiator chimney up into the clouds, which is the cold side. With `.dimension('gcyr:venus')`, 200 mB of Distilled Water per 20 s cycle → 8,192 EU/t, by day and by night. Outside Venus there is no such heat.
+  - **Venus heat engine** (`gtceu:venus_heat_engine`): a hot plate on the ground and a 16-block radiator chimney up into the clouds, which is the cold side. With `.dimension('gcyr:venus')`, 200 mB of Distilled Water per 20 s cycle → 8,192 EU/t, always: GCYR's Venus is fixed at noon (`fixed_time` 6000), so day and night don't matter there. Outside Venus there is no such heat.
   - **Mercury solar field** (`gtceu:mercury_solar_field`): the lunar field with a heat-shield sunshade. By day it yields ×6.7 (the Moon, ×1.4); at night, nothing.
   - **RTG cell** (`gtceu:rtg`, single-block machine; verify the simple KubeJS generator): plutonium oxide pellet that is used up at random (≈ 1 per hour) → 2,048 EU/t constant. It starts every base and covers Mercury's night.
 - **Observatory, step 5: interferometer** (`gtceu:interferometer`): the Mercury antenna (night and vacuum) combines its data with the Moon's deep space antenna over the network. It gives the outer-system chart (the belt and Jupiter, the LuV trip) and the first signal from Sagittarius A*.
@@ -172,7 +172,7 @@ EV leaves the ME P2P tunnel trunk, power over EU P2P (or FE P2P with GTM convert
 | Naquadah | Venus → ore plant → oxide → naquadah plant → dust → 5,000 K EBF → ingot → boule (5,400 K EBF) → wafers; UHPIC (large reactor, two IV hatches, 576 mB of molten naquadah) | Ti and Ga: see the plant. Enriched oxide (28% of the ore): mode 2, or stored |
 | Iridium and osmium | Mercury → iridosmine → platinum plant, mode 3 → Ir (4,500 K EBF) and Os (EBF, two IV hatches) → ruridit (2 Ru + Ir), HSS-S (6 HSS-G + 2 Ir + Os) and osmiridium (LuV) | OsO₄ and Cl₂: stay inside. Platinum Sludge Residue: gold and Silicon Dioxide |
 | IV superconductors | samarium (Mars) → SmFeAsO (IV mixer); niobium (pyrochlore and tantalite) + titanium → NbTi; 3 Pd + Rh → Rhodium Plated Palladium | — |
-| Heavy water | Mars ice → water (five times more deuterium) → distillation tower (our recipe) → heavy water (`grindless:heavy_water`, verify) → reactor; electrolysis → deuterium | Light water: to the network. O₂: air. Reactor tritium: fusion |
+| Heavy water | Mars ice → water (five times more deuterium) → distillation tower (our recipe) → heavy water (`gtceu:heavy_water`) → reactor; electrolysis → deuterium | Light water: to the network. O₂: air. Reactor tritium: fusion |
 | Suit | PBI (IV reactor; the phenol returns), Kapton K and para-aramid (GCYR), fiberglass → fabrics → thermal upgrade | Phenol and HCl from the aramid: loops |
 | Venus | gas collector: CO₂ at the bottom and Sulfuric Acid in the clouds | CO₂: greenhouses. H₂SO₄: enriched naquadah and platinum plant |
 
@@ -226,7 +226,7 @@ It unlocks LuV: hulls, hatches and LuV components (assembly line); LuV mixer and
 
 No new mods.
 
-- **Startup:** types `fission_core`, `hot_cell` and `naquadah_refining`; machines `fission_reactor`, `hot_cell`, `naquadah_plant`, `pressurized_vein_drill`, `mercury_vein_drill`, `venus_heat_engine`, `mercury_solar_field`, `interferometer` (the multiblocks, with the pattern helper) and `rtg`; material `gtceu:iridosmine` and fluid `grindless:heavy_water` (check whether EV already has it); level 3 engine and tank (GCYR plugin); items for assemblies, spent fuel, RTG pellet, Pu-Be source, site casings and samples; reactor channel modifier.
+- **Startup:** types `fission_core`, `hot_cell` and `naquadah_refining`; machines `fission_reactor`, `hot_cell`, `naquadah_plant`, `pressurized_vein_drill`, `mercury_vein_drill`, `venus_heat_engine`, `mercury_solar_field`, `interferometer` (the multiblocks, with the pattern helper) and `rtg`; material `gtceu:iridosmine` and fluid `gtceu:heavy_water` (both registered by IV-A1); level 3 engine and tank (GCYR plugin); items for assemblies, spent fuel, RTG pellet, Pu-Be source, site casings and samples; reactor channel modifier.
 - **Server:** recipes composed from the live ones (hot cell, modes 1 and 4; naquadah plant; platinum, mode 3) and ours in tables. Veins: `naquadah_vein` to Venus, iridosmine on Mercury, GCYR's veins on Venus and Mercury removed, `veins_venus.json` and `veins_mercury.json`, and pitchblende with the Tungstensteel drill bit. Platline without Ir/Os, bees removed, and dimension, altitude and night conditions.
 - **Config:** nothing new. Venus and Mercury go into EV's planet table.
 - **Tests:** (1) it starts; (2) reactor, hot cell and naquadah plant form and process (plant and IV multiblock strips); (3) on Venus and Mercury (new strips after EV's: Venus X 3072–3135 and Mercury X 3328–3391, Y 98–112) the drills, heat engine and solar field form and only work there, and the level 3 rocket arrives; and `-Tier iv` with no orphans.
@@ -235,7 +235,7 @@ No new mods.
 
 - **Fission in KubeJS.** The multiblock generator, the 16 A dynamo hatches and the channel parallel are untested, and the EU balance per assembly is ours. Plan B: the extreme combustion engines carry the power plant.
 - **The GT-- line.** Composing the activator without its window, the cleanroom step of mode 2 and the antimony and fluorine use. Plan B: mode 1 only, or the loose line with the activator.
-- **GCYR on Venus and Mercury.** The heat and the thermal upgrade, the level 3 parts through the KubeJS plugin, the launch and dimension-change failures (#91 and #122), moving veins and removing GCYR's, and knowing whether Mercury has a night. It must be tested in an actual game before IV is closed.
+- **GCYR on Venus and Mercury.** The heat and the thermal upgrade, the level 3 parts through the KubeJS plugin, the launch and dimension-change failures (#91 and #122), moving veins and removing GCYR's, and knowing whether Mercury has a night (settled by IV-A1: it does; Venus is fixed at noon). It must be tested in an actual game before IV is closed.
 - **Iridium and osmium only from Mercury.** The new material and the platline cut change EV's platinum plant. Plan B: GTM's iridium and osmium ores in the vein and the ore plant, without mode 3.
 - **Five loaded worlds.** Bases with loaded chunks on the Moon, Mars, Venus and Mercury, plus EU P2P between dimensions: watch the TPS with spark.
 
@@ -406,7 +406,7 @@ All of them are IV recipes (7,680 EU/t unless a composed GTM stage sets another 
   - IV: the naquadah plant, the UF₆, and the reactor's casing through concrete.
 - **Risks:**
   - A new vein (it generates only in new chunks; the drill recipes appear at once) and the hidden-items table.
-  - GCYR's fluorite has to be checked: CaF₂ components and no decomposition, which the dump confirms.
+  - GCYR's fluorite gives CaF₂ components, so GTM gave it an automatic electrolysis (3 dust → Ca + 2,000 mB F₂ at 30 EU/t); IV-A1 disabled its decomposition, so the kiln is the only fluorine route from fluorite.
 - **Source and licence:** real: industrial HF from fluorspar and sulfuric acid in rotary kilns at about 200–250 °C. GCYR 0.2.9's fluorite material (LGPL-3.0).
 
 #### Uranium in-situ leach field: `gtceu:isr_wellfield`, type `gtceu:in_situ_leaching` (the End)
@@ -447,7 +447,7 @@ All of them are IV recipes (7,680 EU/t unless a composed GTM stage sets another 
   - IV: the naquadah activator's gallium (to GaAs), and Mercury's iridosmine (to the platinum plant).
 - **Risks:**
   - The sintering alone would be a furnace recipe with a dimension, which is convenience: the panels are what make it ours.
-  - Whether GCYR's Mercury has a night is still open (`iv.md`).
+  - GCYR's Mercury has a day and night cycle (IV-A1 read its dimension type), so the sun rule works as written.
 - **Source and licence:**
   - Real: DLR and ESA's solar sintering of lunar regolith (2017); the Odeillo solar furnace; solar cells evaporated in place on the Moon (Ignatiev and Freundlich, NASA); the Wake Shield Facility (1994–96).
   - The catalog's solar foundry (Supersymmetry's solar furnace, GPL): idea only.
@@ -580,3 +580,18 @@ All of them are IV recipes (7,680 EU/t unless a composed GTM stage sets another 
     - **`planets.json`:** Venus and Mercury get pair tags and names, and seeds made on site, like Mars's merrillite seed.
     - **The heat engine's water** has a destination: steam to a turbine, or vented as inert. It comes from the acid works.
     - **Test bands** go on from X 9472 in steps of 256, with the same X and Z on each planet. Bands 3072 and 3328 belong to the steam and LV multiblocks.
+
+## As built: shared registrations (IV-A1)
+
+The shared ids of `PACKAGES-IV.md` are registered in `startup_scripts/grindless/iv/foundation.js` and `server_scripts/grindless/iv/foundation.js` and published as `global.grindless.ivFoundation`.
+
+- **Heavy water:** `gtceu:heavy_water`, with no automatic decomposition. Its electrolysis is written by hand at GTM's water numbers (`grindless:electrolyzer/heavy_water_electrolysis`: 1,000 mB → 2,000 mB deuterium + 1,000 mB oxygen, 30 EU/t, 75 s), so "1 ice → 40 mB D₂O → 80 mB D" holds. The concentrate and tritiated heavy water (GTM's radioactive hazard) never decompose.
+- **Zircaloy:** `gtceu:zircaloy`, Zircaloy-4 at 63 Zr : 1 Sn: EV mixer, then GTM's EBF at 2,100 K (argon optional) and the vacuum freezer. Zirconium dust comes from GTCA's End zircon; an LEU assembly needs about 2 Zr dust (4 tubes = 2 ingots).
+- **Iridosmine and the Mercury vein:** `gtceu:iridosmine`, (Ir,Os), the only iridium and osmium carrier: no decomposition and no ore smelting. Mercury's vein `grindless:iridosmine_vein_mercury` (Y 0–60): iridosmine 3, graphite 2, sulfur 1; sample raw iridosmine + raw graphite. GCYR places Mercury's and Proxima b's ores on the same stone, so the ore block may be either `gtceu:mercury_iridosmine_ore` or `gtceu:proxima_centauri_b_iridosmine_ore`; both drop raw iridosmine, and the drills use raw ores.
+- **Naquadah on Venus:** `grindless:naquadah_vein_venus` (Y −40 to 10, under the lava seas): naquadah 7 : plutonium 1; sample raw naquadah + raw plutonium. GTM's End naquadah vein no longer generates, and GCYR's five Venus and Mercury veins are removed.
+- **Pitchblende:** GTM's End vein generates as before and gets a sample (`grindless:vein_sample_pitchblende_end`, raw pitchblende + raw uraninite, `veins_leach.json`) that no drill takes: the leach field reads it.
+- **Fluorite:** `grindless:fluorite_vein` (Overworld and `grindless:flat`, Y 10–60): fluorite 4, barite 2, galena 1, sphalerite 1; sample raw fluorite + raw barite. Every Earth drill from steam up drills it, and it generates only in chunks made after v0.7.0. GCYR's fluorite has its decomposition disabled. Up to v0.6.1 the hidden table removed its ore chain as junk; the audit now treats it as B IV until a dump has the chain, and then the chain is simply obtainable.
+- **Tritium:** only from the reactor through the Moon's removal facility. Liquid ender air no longer gives it and GTM's `deuterium_separation` is removed; until IV-B4 nothing makes it (fusion, its consumer, is LuV), and GTCA's zinc plasma (fusion of copper and tritium) is B LuV.
+- **Radiation-proof casing:** GT--'s own IV assembler recipe (6 dense lead plates, a tungsten steel frame and 1,296 mB concrete), unchanged.
+- **Ion-exchange resin:** sulfonated polystyrene (styrene + sulfuric acid). Real acid in-situ leaching uses strong-base anion resins; that could become styrene + chloromethane + dimethylamine if realism matters.
+- **Productive Bees:** the naquadah, osmium and radioactive combs keep no recipe for good. PB's own EBF recipe for the naquadah bee (osmium bee egg + naquadah block) still exists and is a dead end; IV-B3 removes it.
