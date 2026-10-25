@@ -10,8 +10,9 @@
 //                               (global.grindless.lv.bores) with a cap of 128 runs; one tungsten steel bit per run in the bus.
 //                                 by day    only with liquid nitrogen (10 mB a run): Mercury's sun would burn a dry bit out
 //                                 at night  dry: the bit wears twice as fast, and the liquid nitrogen in the hatch is kept for the day
-//                               The shift is read when a run starts (the recipe modifier runs again before every run): a run is never
-//                               stopped halfway by dawn or dusk, as a recipe condition would do (GTM checks those every tick).
+//                               The shift is read when a run starts (the recipe modifier runs again before every run, and every start
+//                               goes through it, see freshEveryRun below): a run is never stopped halfway by dawn or dusk, as a recipe
+//                               condition would do (GTM checks those every tick).
 //   gtceu:mercury_solar_works   Mercury's site workshop, type gtceu:solar_processing: 8 heliostat mirrors on tungsten steel posts behind
 //                               a 3x3x3 focal furnace of robust tungsten steel casing (its top is a tungsten steel firebox receiver that
 //                               glows while it works), and a 3x3 laminated glass evaporation bell beside it, on a pad of Mercury rock.
@@ -19,10 +20,10 @@
 //                               Mercury cobblestone). Sun rule: a run that starts with the sun on the receiver (GTM's own solar test,
 //                               GTUtil.canSeeSunClearly) and all 8 mirrors under open sky pays a quarter of the EU/t; at night or shaded
 //                               it pays all of it. The quarter is applied after GTM's overclock, so the sun makes a run cheaper, never
-//                               faster (the cryogenic plant's run-start pricing, alwaysTryModifyRecipe; like there, a run that GTM
-//                               restarts from its cached recipe after an idle spell keeps the price of the moment it went idle). A
-//                               recipe with fluid outputs does not run while the controller voids fluids (lib/no_voiding.js, in the
-//                               modifier and in beforeWorking): the iridosmine fusion's osmium tetroxide stays contained.
+//                               faster (the cryogenic plant's run-start pricing, alwaysTryModifyRecipe; and, unlike there, every run goes
+//                               through the modifier, see freshEveryRun below). A recipe with fluid outputs does not run while the
+//                               controller voids fluids (lib/no_voiding.js, in the modifier and in beforeWorking): the iridosmine
+//                               fusion's osmium tetroxide stays contained.
 //   gtceu:mercury_solar_field   POWER FAMILY, IV step (after LV's heliostat tower and EV's lunar solar array): 36 Hermean thin-film
 //                               panels (the solar works makes them, iv.md decision 8) on tungsten steel posts over brick footings, a
 //                               radiator bank at the back and a control hut under a brick sunshade. A generator (lib/generators.js) of
@@ -272,7 +273,8 @@
         IO: Java.loadClass('com.gregtechceu.gtceu.api.capability.recipe.IO'),
         FluidCap: Java.loadClass('com.gregtechceu.gtceu.api.capability.recipe.FluidRecipeCapability').CAP,
         Registries: Java.loadClass('net.minecraftforge.registries.ForgeRegistries'),
-        GTUtil: Java.loadClass('com.gregtechceu.gtceu.utils.GTUtil')
+        GTUtil: Java.loadClass('com.gregtechceu.gtceu.utils.GTUtil'),
+        RecipeHelper: Java.loadClass('com.gregtechceu.gtceu.api.recipe.RecipeHelper')
       }
     }
     return LC
@@ -292,6 +294,28 @@
     }
     return total
   }
+
+  // GTM 7.5.3 keeps an idle machine's last recipe for one tick and restarts it without its modifier if the inputs come back in that tick
+  // (RecipeLogic#findAndHandleRecipe: "try to execute last recipe if possible"): the shift or the price of the tick before. Across a jump
+  // of the clock, or a sunset in that very tick, a dry run could start by day or a night run at the sun's price. So when a run ends and
+  // the next one cannot start at once (GTM's own match: inputs and room for the outputs), the logic is marked dirty and the next start is
+  // a fresh search through the modifier. A machine that keeps running is not touched: GTM re-applies the modifier when each run ends
+  // (alwaysTryModifyRecipe). Used by the drill and the solar works (afterWorking).
+  var dirtyFailed = false
+  function freshEveryRun(machine) {
+    try {
+      var logic = machine.getRecipeLogic()
+      var last = logic.getLastRecipe()
+      if (last != null && lazy().RecipeHelper.matchRecipe(machine, last).isSuccess()) return
+      logic.markLastRecipeDirty()
+    } catch (e) {
+      if (!dirtyFailed) {
+        dirtyFailed = true
+        console.error(LOG + 'could not mark a Mercury machine\'s last recipe dirty: ' + e)
+      }
+    }
+  }
+  M.freshEveryRun = freshEveryRun
 
   // ---------------------------------------------------------------- the drill
 
@@ -610,6 +634,7 @@
       .rotationState(RotationState.NON_Y_AXIS)
       .recipeType('vein_drilling')
       .recipeModifier(drillModifier, true)
+      .afterWorking(freshEveryRun)
       .additionalDisplay(drillDisplay)
       .appearanceBlock(function () { return Block.getBlock(BRICK) })
       .pattern(function (def) { return Pat.build(def, DRILL_SPEC) })
@@ -662,6 +687,7 @@
       .recipeType(WORKS_TYPE)
       .recipeModifier(worksModifier, true)
       .beforeWorking(worksBeforeWorking)
+      .afterWorking(freshEveryRun)
       .additionalDisplay(worksDisplay)
       .appearanceBlock(GTBlocks.CASING_TUNGSTENSTEEL_ROBUST)
       .pattern(function (def) { return Pat.build(def, WORKS_SPEC) })
