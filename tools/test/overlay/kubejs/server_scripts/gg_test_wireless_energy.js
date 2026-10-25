@@ -45,6 +45,8 @@
   var QUIET_MS = 10000
   var LOADED_AT = Date.now()
   var REQUEST = 'ggTestWirelessEnergyRequest'
+  // the wireless tests share their band: they take turns in the order they were asked for (gg_test_wireless_*.js)
+  var QUEUE = 'ggTestWirelessQueue'
   var TEST_TIMEOUT = 4000
 
   var EARTH = 'minecraft:overworld'
@@ -110,6 +112,24 @@
     } catch (e) {
       check(name, false, 'exception: ' + e)
     }
+  }
+
+  // the turn queue: test names joined by commas in `global` (a plain string survives the scripts' reloads)
+  function queueList() {
+    var s = global[QUEUE]
+    s = s === undefined || s === null ? '' : String(s)
+    return s === '' ? [] : s.split(',')
+  }
+  function joinQueue(name) {
+    var q = queueList()
+    if (q.indexOf(name) < 0) q.push(name)
+    global[QUEUE] = q.join(',')
+  }
+  function leaveQueue(name) {
+    global[QUEUE] = queueList().filter(function (n) { return n !== name }).join(',')
+  }
+  function myTurn(name) {
+    return queueList()[0] === name
   }
 
   // ---------------------------------------------------------------- Java
@@ -1031,6 +1051,7 @@
     } catch (e) {
       check('cleanup', false, 'exception: ' + e)
     }
+    leaveQueue(SCOPE)
     console.info(TAG + SCOPE + '|DONE')
   }
 
@@ -1178,10 +1199,11 @@
   }
 
   // The pack's Additional Placements mod reloads the datapacks (and these scripts) a couple of seconds after the server is up: the
-  // command only leaves a request in `global` and the tick handler starts the test once these scripts have been loaded for QUIET_MS.
+  // command only leaves a request in `global` and the tick handler starts the test once these scripts have been loaded for QUIET_MS
+  // and it is this test's turn on the band.
   function startIfRequested(server) {
     if (global[REQUEST] !== true || (S !== null && !S.finished)) return
-    if (Date.now() - LOADED_AT < QUIET_MS) return
+    if (Date.now() - LOADED_AT < QUIET_MS || !myTurn(SCOPE)) return
     global[REQUEST] = false
     try {
       run(server)
@@ -1202,7 +1224,9 @@
       return 0
     }
     global[REQUEST] = true
-    note('requested', 'the test starts once these scripts have been loaded for ' + (QUIET_MS / 1000) + ' s')
+    joinQueue(SCOPE)
+    note('requested', 'the test starts once these scripts have been loaded for ' + (QUIET_MS / 1000) + ' s and the wireless tests asked for before it are done (' +
+      queueList().join(', ') + ')')
     return 1
   })
 })()
