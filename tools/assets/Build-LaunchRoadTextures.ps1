@@ -174,7 +174,8 @@ Assert-Map 'DoorBase' $DoorBase
 
 # ============================================================================================
 #  ENGINE TEST STAND - controller face (aluminium frost-proof casing, MV)
-#  the stand seen from the front, as the multiblock is built (launch_road/engine_test_stand.js): the run tank on top (RP-1 half
+#  the stand seen from the front, as the multiblock is built (launch_road/engine_test_stand.js), against the test site's dusk sky:
+#  the run tank on top (RP-1 half
 #  amber, LOX half frosted, a seam between them), the feed line down to the engine, two aluminium truss legs standing in a
 #  firebrick flame bucket, the engine mount and its copper bell hanging between them. Firing: a kerolox plume with shock diamonds
 #  walking down it hits the bucket, exhaust billows out of the trench on both sides, the telemetry lights on the legs blink.
@@ -189,10 +190,13 @@ K=EFEFEF L=C4C4C4 M=9A9A9A
 N=B4583A O=8A3E28 P=5E2A1C
 Q=E7A877 R=B87245 S=7E4A28
 T=E6C46A U=B28E3C V=DDF2FF W=A9CFE6
+l=232E40 m=2B384C n=344358
 '@)
 
 $StandLegL = @(@(4, 4, '1'), @(4, 5, '3'), @(4, 6, '1'), @(4, 7, '3'), @(4, 8, '1'), @(4, 9, '3'))
-$StandLegR = @(@(12, 4, '3'), @(12, 5, '5'), @(12, 6, '3'), @(12, 7, '5'), @(12, 8, '3'), @(12, 9, '5'))
+$StandLegR = @(@(12, 4, '2'), @(12, 5, '4'), @(12, 6, '2'), @(12, 7, '4'), @(12, 8, '2'), @(12, 9, '4'))
+# The test site behind the stand, at dusk: darkest at the top, lighter towards the horizon (y3..9 of the window).
+$StandSky = @('l', 'l', 'l', 'm', 'm', 'n', 'n')
 # Exhaust puffs leaving the trench: three steps out and up, one per frame, the right side two frames behind the left.
 $PuffL = @(@(6, 9), @(5, 9), @(5, 8))
 $PuffR = @(@(10, 9), @(11, 9), @(11, 8))
@@ -203,6 +207,7 @@ function New-StandFrame {
     $c = New-Canvas; $e = New-Canvas
     $P = $StandPal
     Write-Map $c 0 0 $PanelBase $P
+    for ($y = 3; $y -le 9; $y++) { for ($x = 3; $x -le 13; $x++) { Set-Px $c $x $y $P[$StandSky[$y - 3]] } }
 
     # base panel: blue stripes (x2..8) and the state lamp (x10..13), the MV drill's layout
     for ($y = 12; $y -le 13; $y++) {

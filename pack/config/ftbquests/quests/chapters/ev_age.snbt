@@ -11,10 +11,7 @@
 	quests: [
 		{
 			dependencies: ["2897E3EB8159710C"]
-			description: [
-				"Titanium only exists up here. This tab makes the Moon work without you, then finds the way to Mars."
-				"Ender chests and ender tanks work between Earth and the Moon: the cheap link for a few stacks. A whole factory crosses over the AE2 bridge."
-			]
+			description: ["Every bit of titanium in this pack is up here, under grey dust and a black sky. First the Moon learns to run without you. Then you point a rocket at Mars."]
 			icon: "gcyr:lunar_mare_regolith"
 			id: "7E510A95C066D14C"
 			rewards: [{ id: "073D0AACCEB758A2", type: "xp", xp: 40 }]
@@ -27,24 +24,7 @@
 		}
 		{
 			dependencies: ["7E510A95C066D14C"]
-			description: ["Place and activate a &6Waystone&r at the base. From then on waystones and /home carry you between Earth and the Moon; the rocket was only for the first trip."]
-			icon: "waystones:waystone"
-			id: "72396893B6F91D23"
-			optional: true
-			rewards: [{ id: "029E7E7ABA6D2804", type: "xp", xp: 25 }]
-			shape: "circle"
-			size: 0.75d
-			tasks: [{ id: "7A7054C7DDBDED28", type: "checkmark" }]
-			title: "Waystone on the Moon"
-			x: 2.0d
-			y: -1.5d
-		}
-		{
-			dependencies: ["7E510A95C066D14C"]
-			description: [
-				"Combustion generators, gas turbines and boilers only burn where there is air: Earth, the Nether, the End and the building worlds. Up here they sit idle, and EMI lists the worlds each fuel burns in."
-				"Fuels that carry their own oxygen burn anywhere: methalox and rocket fuels. Steam turbines burn nothing and work everywhere."
-			]
+			description: ["No air, no fire. Bring a diesel generator up here and it'll just sit there, looking embarrassed. Methalox and rocket fuel carry their own oxygen; EMI lists where everything else burns."]
 			icon: "minecraft:flint_and_steel"
 			id: "16E2B1FFE70AC165"
 			rewards: [{ id: "31B61BB841330806", type: "xp", xp: 20 }]
@@ -57,7 +37,10 @@
 		}
 		{
 			dependencies: ["7E510A95C066D14C"]
-			description: ["Raw ilmenite and raw olivine from a lunar vein make one sample; the two kinds of regolith, scooped up, make the other. Each needs an empty vein probe from Earth."]
+			description: [
+				"Same as on Earth: an empty probe dipped in both raw ores of a vein makes its sample. Raw ilmenite and raw olivine make the first."
+				"The second takes the two kinds of regolith, scooped straight off the ground."
+			]
 			icon: "grindless:vein_sample_ilmenite_moon"
 			id: "65FD970F8628E474"
 			rewards: [{ id: "16857AADAB1453ED", type: "xp", xp: 40 }]
@@ -72,8 +55,8 @@
 		{
 			dependencies: ["65FD970F8628E474"]
 			description: [
-				"Craft the &6Lunar Drill&r on Earth and build it here: it forms anywhere but only drills on the Moon."
-				"A sample and a stainless steel bit go in the input bus. Until the bridge to Earth is up, it runs on the batteries you brought."
+				"Craft the &6Lunar Drill&r at home and build it up here: it forms anywhere but only drills on the Moon. A sample and a stainless steel bit go in its input bus."
+				"Until there's a bridge to Earth, it runs on the batteries you packed. You did pack batteries."
 			]
 			icon: "gtceu:lunar_drill"
 			id: "246C8ADBADA728E9"
@@ -90,7 +73,7 @@
 		}
 		{
 			dependencies: ["246C8ADBADA728E9", "53D1CE971F63D842"]
-			description: ["The Moon's ilmenite is the only titanium in the pack. At home the EBF turns it into rutile, chlorine and carbon make titanium tetrachloride, magnesium reduces that in the EBF, and the vacuum freezer cools the hot ingot."]
+			description: ["The Moon's ilmenite is the only titanium you'll ever get. Back home it takes the long way round: the EBF twice, a chlorine bath and the vacuum freezer. Clear your afternoon."]
 			icon: "gtceu:titanium_ingot"
 			id: "14DF849D657D6AEF"
 			rewards: [{ id: "7EF3030512FB7BB2", type: "xp", xp: 55 }]
@@ -105,7 +88,10 @@
 		}
 		{
 			dependencies: ["14DF849D657D6AEF"]
-			description: ["Lunar titanium goes first into the &6EV Machine Hull&r, and every EV machine starts from one."]
+			description: [
+				"Your first lunar titanium goes into the &6EV Machine Hull&r."
+				"EV energy hatches come much later, and until then two HV energy hatches on a multiblock run EV recipes just fine."
+			]
 			icon: "gtceu:ev_machine_hull"
 			id: "61ECF6270ECCE3C2"
 			rewards: [{ id: "6DE5A471269B3A5D", type: "xp", xp: 40 }]
@@ -116,61 +102,43 @@
 		}
 		{
 			dependencies: ["61ECF6270ECCE3C2"]
-			description: ["Same bridge as always, one size up: four HV amps in, one EV amp out, or the other way round."]
-			icon: "gtceu:hv_transformer_1a"
-			id: "6457FB82BC6D3618"
-			rewards: [{ id: "343DC485F998A708", type: "xp", xp: 45 }]
-			tasks: [{ id: "336CD67466A1FC2E", item: "gtceu:hv_transformer_1a", type: "item" }]
-			title: "HV to EV Transformer"
+			description: [
+				"The EV motor is built around titanium rods, and every other part here needs a motor, so the Moon is officially in your supply chain."
+				"The motor's neodymium magnet comes from the monazite vein in the Nether."
+			]
+			icon: "gtceu:ev_electric_motor"
+			id: "164F0808EF9DF557"
+			rewards: [{ id: "1B2016D2F9628E2F", type: "xp", xp: 70 }]
+			tasks: [
+				{ id: "0CB11B272083BF4F", item: "gtceu:ev_electric_motor", type: "item" }
+				{ id: "01D849EAF82915F5", item: "gtceu:ev_electric_pump", type: "item" }
+				{ id: "3FC827F4C82F8B11", item: "gtceu:ev_electric_piston", type: "item" }
+				{ id: "19CA491E1535D0D1", item: "gtceu:ev_robot_arm", type: "item" }
+				{ id: "3EB895FBD4951335", item: "gtceu:ev_conveyor_module", type: "item" }
+			]
+			title: "EV Components"
 			x: 10.0d
 			y: 0.0d
 		}
 		{
-			dependencies: ["6457FB82BC6D3618"]
-			description: ["Titanium rods and a neodymium magnet wind into the &6EV Motor&r, and a titanium pipe goes into the &6EV Pump&r. Neodymium rides the monazite vein in the Nether."]
-			icon: "gtceu:ev_electric_motor"
-			id: "164F0808EF9DF557"
-			rewards: [{ id: "1B2016D2F9628E2F", type: "xp", xp: 45 }]
-			tasks: [
-				{ id: "0CB11B272083BF4F", item: "gtceu:ev_electric_motor", type: "item" }
-				{ id: "01D849EAF82915F5", item: "gtceu:ev_electric_pump", type: "item" }
-			]
-			title: "EV Motor and Pump"
-			x: 12.0d
-			y: 0.0d
-		}
-		{
-			dependencies: ["164F0808EF9DF557", "70F4075BAF69DA99"]
-			description: ["GTM's own &6Distillation Tower&r takes over crude oil in EV, and right now it splits liquid air into oxygen, nitrogen and the noble gases the refinery never touched."]
-			icon: "gtceu:distillation_tower"
-			id: "3084C18A4334B401"
-			rewards: [
-				{ id: "663886DE4A6DDBC5", type: "xp", xp: 150 }
-				{ count: 16, id: "3206BC7E787A3152", item: "minecraft:torch", type: "item" }
-			]
-			shape: "gear"
-			size: 1.0d
-			tasks: [{ id: "5463D5111EC8D608", item: "gtceu:distillation_tower", type: "item" }]
-			title: "Distillation Tower"
-			x: 14.0d
-			y: 3.0d
-		}
-		{
 			dependencies: ["246C8ADBADA728E9"]
-			description: ["The regolith sample gives &6Helium-3&r into an output hatch on the drill, and only by lunar day. Nothing burns it yet: keep it for the quantum seeds."]
+			description: [
+				"With the regolith sample, the lunar drill pumps &6Helium-3&r into an output hatch, by lunar day only. Nothing burns it yet."
+				"The quantum seeds need some, and the rest is worth keeping for the day something does."
+			]
 			icon: "grindless:vein_sample_regolith_moon"
 			id: "1DC956E9F071636A"
 			rewards: [{ id: "3B994EBAA2AF1405", type: "xp", xp: 40 }]
 			tasks: [{ id: "3FFC2A59AF730E83", type: "checkmark" }]
 			title: "Helium-3"
-			x: 6.0d
+			x: 4.0d
 			y: -1.5d
 		}
 		{
 			dependencies: ["1DC956E9F071636A"]
 			description: [
-				"An ender pearl and helium-3 react into a &6Lunar Quantum Seed&r on the Moon; thrown into an explosion with an AE2 singularity, it gives an entangled pair."
-				"One goes in a quantum chamber at home, the other in one here, and both ends need chunk-loading. A pair made on Earth is pushed out of a lunar chamber."
+				"The Earth-Moon bridge starts with a &6Lunar Quantum Seed&r, made in a chemical reactor up here from an ender pearl and helium-3. An ordinary singularity pair won't do: a lunar quantum chamber spits it out."
+				"One half goes in a chamber at home, one here, and both ends stay chunk-loaded."
 			]
 			icon: "ae2:quantum_link"
 			id: "366AB48E5BF50431"
@@ -184,42 +152,28 @@
 				{ count: 16L, id: "318D644FC6DE61F3", item: "ae2:quantum_ring", type: "item" }
 			]
 			title: "Earth-Moon Bridge"
-			x: 6.0d
+			x: 4.0d
 			y: -3.0d
 		}
 		{
 			dependencies: ["366AB48E5BF50431"]
 			description: [
-				"Two &6EU P2P Tunnels&r on one frequency: one against a cable at home, the other against the drill's energy hatch. The home power plant now runs the Moon."
-				"A pair carries a full sixteen-amp EV line, so match the voltage to the hatch at the far end. AE2 takes a small toll in AE energy for everything it moves."
+				"Two &6EU P2P Tunnels&r on one frequency, one on a cable at home and one on a hatch up here, and the power plant on Earth runs the Moon."
+				"The tunnels pass whatever voltage you feed them, so match it to the hatch at the far end. AE2 charges a small toll in AE energy for the delivery."
 			]
 			icon: "eup2p:eu_p2p_tunnel"
 			id: "42BF2F77456F8773"
 			rewards: [{ id: "5D6B28FB61E42CBD", type: "xp", xp: 60 }]
 			tasks: [{ count: 2L, id: "751D67F4EBA6DE8C", item: "eup2p:eu_p2p_tunnel", type: "item" }]
 			title: "Power from Earth"
-			x: 8.0d
+			x: 6.0d
 			y: -4.5d
 		}
 		{
 			dependencies: ["366AB48E5BF50431"]
-			description: ["The bridge carries a limited number of channels. An &6ME P2P Tunnel&r pair across it spends one and carries a whole cable's worth: a couple of pairs give the Moon base the full network of home."]
-			icon: "ae2:me_p2p_tunnel"
-			id: "34EE22096065B999"
-			rewards: [
-				{ id: "7A4D2FB554196FFA", type: "xp", xp: 40 }
-				{ count: 16, id: "5FD9D261E43FECD4", item: "ae2:fluix_glass_cable", type: "item" }
-			]
-			tasks: [{ count: 4L, id: "59278C78DDBEB896", item: "ae2:me_p2p_tunnel", type: "item" }]
-			title: "A Trunk to the Moon"
-			x: 8.0d
-			y: -3.0d
-		}
-		{
-			dependencies: ["34EE22096065B999"]
 			description: [
-				"Let the base make the seed: a chemical reactor on the Moon fed by the network, ender pearls from home and helium-3 from the drill or the cell."
-				"The seed comes home over the first bridge, the explosion makes the pair, and one half goes back the same way."
+				"Once the first bridge is up, the Moon can make its own seeds in a chemical reactor up here, with ender pearls sent from home and helium-3 from the drill or the cell."
+				"The seed travels home over the bridge, the explosion happens there, and one half travels back. Nobody has to fly."
 			]
 			icon: "grindless:lunar_quantum_seed"
 			id: "38AA0491A1AFD8C9"
@@ -233,14 +187,14 @@
 				{ count: 16L, id: "172A4B25DF6871FF", item: "ae2:quantum_ring", type: "item" }
 			]
 			title: "A Second Pair, No Rocket"
-			x: 10.0d
+			x: 6.0d
 			y: -3.0d
 		}
 		{
 			dependencies: ["246C8ADBADA728E9"]
 			description: [
-				"Cobblestone from the drill, or any lunar stone and sand you dig, grinds into &6Lunar Regolith Dust&r in any macerator. An electric furnace bakes it into &6Sintered Regolith Bricks&r, but only on the Moon: at home it sits idle."
-				"The whole Moon base stands on these bricks."
+				"Cobblestone from the drill, or any lunar stone you dig up, grinds into &6Lunar Regolith Dust&r in any macerator."
+				"An electric furnace bakes that into &6Sintered Regolith Bricks&r, but only up here: at home the furnace just stares at it. Nearly the whole Moon base stands on these bricks."
 			]
 			icon: "grindless:sintered_regolith"
 			id: "33EFC07080657F50"
@@ -253,14 +207,14 @@
 				{ count: 16L, id: "7504084A6B44AD55", item: "grindless:sintered_regolith", type: "item" }
 			]
 			title: "Bricks from the Ground"
-			x: 8.0d
+			x: 6.0d
 			y: -1.5d
 		}
 		{
-			dependencies: ["33EFC07080657F50", "164F0808EF9DF557"]
+			dependencies: ["33EFC07080657F50", "164F0808EF9DF557", "70F4075BAF69DA99"]
 			description: [
-				"Oxygen on a world with no air, titanium without chlorine and bricks for the rest of the base. The &6Regolith Cell&r is a hall of sintered brick around a crucible ringed with nichrome coils, and its recipes only run up here."
-				"Its anode is a platinum electrode in the input bus. Circuit 3 bakes bricks faster than the furnace, at the same energy per brick."
+				"The &6Regolith Cell&r cooks moon dirt until it gives up oxygen and metal, which is a lot to ask of dirt. It is a hall of sintered brick around a crucible ringed with nichrome coils, and it only works up here."
+				"A platinum electrode in the input bus is its anode. On circuit 3 it bakes bricks faster than a furnace."
 			]
 			icon: "gtceu:regolith_cell"
 			id: "5BEACE3F7A414F40"
@@ -272,53 +226,56 @@
 			size: 1.5d
 			tasks: [{ id: "3955EAB8FBFF6100", item: "gtceu:regolith_cell", type: "item" }]
 			title: "Regolith Cell"
-			x: 12.0d
-			y: -3.0d
-		}
-		{
-			dependencies: ["5BEACE3F7A414F40"]
-			description: ["Circuit 2 melts the regolith and splits it on the platinum anode: oxygen bubbles off, iron and silicon sink. The oxygen fills your suit and feeds the cryogenic plant."]
-			icon: "gtceu:oxygen_bucket"
-			id: "320CD85A4C8D87D5"
-			rewards: [{ id: "79FE3323A8B1B780", type: "xp", xp: 35 }]
-			tasks: [{ id: "33B726E8B2DB7D96", type: "checkmark" }]
-			title: "Breathing Rock"
-			x: 14.0d
+			x: 10.0d
 			y: -1.5d
 		}
 		{
 			dependencies: ["5BEACE3F7A414F40"]
 			description: [
-				"Billions of years of solar wind are stuck in the regolith grains. Circuit 1 heats them until they let go: mostly hydrogen and helium, some nitrogen and a pinch of helium-3."
-				"Each gas wants its own output hatch, or one ME output hatch takes them all."
+				"On circuit 2 the cell melts regolith and runs current through it. Oxygen bubbles off the platinum anode, and iron and silicon settle out."
+				"That oxygen fills your suit and feeds the cryogenic plant."
+			]
+			icon: "gtceu:oxygen_bucket"
+			id: "320CD85A4C8D87D5"
+			rewards: [{ id: "79FE3323A8B1B780", type: "xp", xp: 35 }]
+			tasks: [{ id: "33B726E8B2DB7D96", type: "checkmark" }]
+			title: "Oxygen from Rock"
+			x: 12.0d
+			y: -1.5d
+		}
+		{
+			dependencies: ["5BEACE3F7A414F40"]
+			description: [
+				"Billions of years of solar wind are stuck to the regolith grains. Circuit 1 heats them until they let go: mostly hydrogen and helium, a little nitrogen, a pinch of helium-3."
+				"Give each gas its own output hatch, or let one ME output hatch take the lot."
 			]
 			icon: "gtceu:helium_bucket"
 			id: "1F20597E41D764DE"
 			rewards: [{ id: "5F5858D2E73DF3BF", type: "xp", xp: 35 }]
 			tasks: [{ id: "394D8CD1CC1EBBF9", type: "checkmark" }]
 			title: "Solar Wind, Bottled"
-			x: 14.0d
-			y: -4.5d
+			x: 10.0d
+			y: -3.0d
 		}
 		{
 			dependencies: ["320CD85A4C8D87D5", "321540F2528D14FA"]
 			description: [
-				"Ilmenite dust in molten calcium chloride gives its oxygen to the anode and leaves titanium behind, with the same energy as the Kroll steps and none of their chlorine. It runs on circuit 2 with the &6Molten Salt Charge&r in the bus, and the charge is never used up."
-				"The platinum plant leaves plenty of calcium chloride behind."
+				"Ilmenite dust in molten calcium chloride, current through it, and the oxygen leaves for the anode while the titanium stays behind. Same energy as the long way, and no chlorine at all."
+				"It runs on circuit 2 with the &6Molten Salt Charge&r in the bus, and the charge never gets used up. The platinum plant has calcium chloride to spare."
 			]
 			icon: "grindless:molten_salt_charge"
 			id: "33176DE8937B3BEE"
 			rewards: [{ id: "125FC86C33CAA992", type: "xp", xp: 50 }]
 			tasks: [{ id: "1CB526CAE9B11C78", item: "grindless:molten_salt_charge", type: "item" }]
 			title: "Titanium without Chlorine"
-			x: 18.0d
+			x: 14.0d
 			y: -1.5d
 		}
 		{
 			dependencies: ["5BEACE3F7A414F40"]
 			description: [
-				"A field of wing panels on titanium posts over sintered brick, radiators behind. Put programmed circuit 1 in the &6Lunar Solar Array&r's input bus and every panel that sees open sky feeds the base by day."
-				"At night it rests: buffers, or Earth over the bridge, carry the base until dawn."
+				"The &6Lunar Solar Array&r is rows of wing panels on titanium posts over sintered brick. With circuit 1 in its input bus, every panel that sees open sky pays out by day."
+				"At night it rests, and buffers or Earth over the bridge keep the lights on."
 			]
 			icon: "gtceu:lunar_solar_array"
 			id: "734B97375A3121C4"
@@ -330,14 +287,14 @@
 			size: 1.25d
 			tasks: [{ id: "32C9AF4491B411D4", item: "gtceu:lunar_solar_array", type: "item" }]
 			title: "Lunar Solar Array"
-			x: 16.0d
+			x: 12.0d
 			y: -3.0d
 		}
 		{
 			dependencies: ["1F20597E41D764DE"]
 			description: [
-				"Aluminium heat pipes full of ammonia make the &6Night-Sky Radiator&r. The &6Cryogenic Plant&r is a frostproof tower on sintered brick with a wing of radiators on each side, and nothing may cover them."
-				"It only works on the Moon, and at night it costs half the vacuum freezer's energy: it pours its heat into a black sky."
+				"The &6Cryogenic Plant&r is a frostproof tower on sintered brick with a wing of &6Night-Sky Radiators&r on each side, and it only runs on the Moon."
+				"At night it dumps its heat into the black sky and liquefies gases for half the vacuum freezer's energy. Keep the radiators uncovered."
 			]
 			icon: "gtceu:cryogenic_plant"
 			id: "79EE0C54F2D89358"
@@ -352,14 +309,14 @@
 				{ id: "58324638CAF43E78", item: "gtceu:cryogenic_plant", type: "item" }
 			]
 			title: "Cryogenic Plant"
-			x: 16.0d
-			y: -6.0d
+			x: 10.0d
+			y: -4.5d
 		}
 		{
 			dependencies: ["79EE0C54F2D89358"]
 			description: [
-				"GregTech never liquefied nitrogen; the cryogenic plant does, from the cell's nitrogen or from home. Pipes and tanks have to handle cryogenic fluids: check the tooltip."
-				"In the tripod's input hatch it keeps the bit cold: half again as much ore and a quarter of the wear. With less than one bore's worth in the hatch, the tripod drills dry."
+				"GregTech never liquefied nitrogen, but the cryogenic plant does. Check the tooltip of every pipe and tank it goes through, since not all of them like cryogenic fluids."
+				"In the tripod's input hatch it keeps the bit cold: more ore, much less wear. Let the hatch run low and the tripod drills dry."
 			]
 			icon: "gtceu:liquid_nitrogen_bucket"
 			id: "71F33D9D6D486DFE"
@@ -368,29 +325,29 @@
 				{ id: "3AA211C12A2B4DF1", item: "gtceu:stainless_steel_fluid_cell", type: "item" }
 			]
 			tasks: [{ id: "1BBB212BC73F2606", item: "gtceu:liquid_nitrogen_bucket", type: "item" }]
-			title: "Colder than the Lunar Night"
-			x: 18.0d
-			y: -6.0d
+			title: "Liquid Nitrogen"
+			x: 12.0d
+			y: -4.5d
 		}
 		{
 			dependencies: ["79EE0C54F2D89358"]
 			description: [
-				"Oxygen from the cell becomes liquid oxygen at the freezer's speed and, after sunset, at half its energy. The controller shows what the next run costs."
-				"Store liquid oxygen and liquid helium for IV: the extreme engines want one, the hottest ingots the other."
+				"The cell's oxygen becomes &6Liquid Oxygen&r here, as fast as in the freezer and at half the energy once the sun's down. The controller tells you what the next run will cost."
+				"Start a stockpile of liquid oxygen and liquid helium: IV's extreme engines want the first, its hottest ingots the second."
 			]
 			icon: "gtceu:liquid_oxygen_bucket"
 			id: "587829FDC7BAB863"
 			rewards: [{ id: "147BF2D687A70D59", type: "xp", xp: 40 }]
 			tasks: [{ id: "7C844C0B7BCB595B", item: "gtceu:liquid_oxygen_bucket", type: "item" }]
-			title: "Night Shift"
-			x: 18.0d
-			y: -7.5d
+			title: "Liquid Oxygen"
+			x: 12.0d
+			y: -6.0d
 		}
 		{
 			dependencies: ["734B97375A3121C4", "5C4613715A82BDBF"]
 			description: [
 				"With Earth's noise blocked by 3,474 km of rock, the &6Deep Space Antenna&r hears a steady hiss from Sagittarius: the center of the galaxy, 26,000 light-years away. You will go there. Mars first."
-				"It listens only on the Moon, at night. Your Lunar Landing-Site Chart calibrates the dish."
+				"It only listens on the Moon, at night, and your landing-site chart calibrates the dish."
 			]
 			icon: "gtceu:deep_space_antenna"
 			id: "5940CA99055BAF42"
@@ -402,14 +359,14 @@
 			size: 1.25d
 			tasks: [{ id: "1C33E0A1C8B74069", item: "gtceu:deep_space_antenna", type: "item" }]
 			title: "Deep Space Antenna"
-			x: 18.0d
+			x: 14.0d
 			y: -3.0d
 		}
 		{
 			dependencies: ["734B97375A3121C4"]
 			description: [
-				"Bring the soil, make a sky out of lamps and let the plants make the air: the &6Sealed Dome&r grows crops on the Moon and Mars from water and carbon dioxide, and breathes out oxygen."
-				"Programmed circuit 4 grows the off-world crops. On Mars it takes the carbon dioxide from the air; up here it comes from home."
+				"The &6Sealed Dome&r is a greenhouse that brings its own soil and makes a sky out of lamps. On circuit 4 it grows crops on the Moon or Mars from water and carbon dioxide, and breathes out oxygen."
+				"Mars supplies the carbon dioxide from its air; up here it has to come from home."
 			]
 			icon: "gtceu:sealed_dome"
 			id: "56820468F118D3EA"
@@ -421,29 +378,14 @@
 			size: 1.25d
 			tasks: [{ id: "7D87303BAEF28490", item: "gtceu:sealed_dome", type: "item" }]
 			title: "Sealed Dome"
-			x: 18.0d
+			x: 14.0d
 			y: -4.5d
 		}
 		{
 			dependencies: ["164F0808EF9DF557"]
-			description: ["Piston, arm and conveyor, one size up. The EV lathe, the circuit assembler and the machines the platinum plant is built from all want them."]
-			icon: "gtceu:ev_robot_arm"
-			id: "5B5C54F1B2AE9B99"
-			rewards: [{ id: "515608060260EA86", type: "xp", xp: 40 }]
-			tasks: [
-				{ id: "3FC827F4C82F8B11", item: "gtceu:ev_electric_piston", type: "item" }
-				{ id: "19CA491E1535D0D1", item: "gtceu:ev_robot_arm", type: "item" }
-				{ id: "3EB895FBD4951335", item: "gtceu:ev_conveyor_module", type: "item" }
-			]
-			title: "EV Components"
-			x: 14.0d
-			y: 0.0d
-		}
-		{
-			dependencies: ["5B5C54F1B2AE9B99"]
 			description: [
-				"The Lunar Drill was a visitor; the &6EV Tripod Drill&r stays. Titanium legs on sintered brick footings, a raised body, a drill string between them and two wings of solar panels. It is crafted from the old Lunar Drill and drills only the Moon's and Mars's veins."
-				"Titanium bits are turned on an EV lathe, one for each bore of a cycle."
+				"The lunar drill was a visitor; the &6EV Tripod Drill&r moves in, on titanium legs with a solar wing on each side. It is crafted from the old lunar drill and only drills the veins of the Moon and Mars."
+				"Its titanium bits come off an EV lathe, and a full cycle can wear out one per bore."
 			]
 			icon: "gtceu:ev_vein_drill"
 			id: "5107982325BE34B7"
@@ -459,51 +401,40 @@
 				{ id: "1C53BF2915922005", item: "gtceu:ev_vein_drill", type: "item" }
 			]
 			title: "EV Tripod Drill"
-			x: 16.0d
+			x: 12.0d
 			y: 0.0d
 		}
 		{
 			dependencies: ["5107982325BE34B7"]
 			description: [
-				"No water on the Moon, so no drilling mud: dry, the bit wears out fast. By day the wings pay half the power, and at night Earth pays it all through the bridge."
-				"Swap an output bus for an ME Output Bus and the ilmenite reaches home with nobody carrying it."
+				"There's no water up here, so there's no drilling mud either, and a dry bit wears out fast. By day the solar wings cover half the bill; at night Earth pays all of it over the bridge."
+				"Swap an output bus for an ME Output Bus and the ilmenite ships itself home."
 			]
 			icon: "gtceu:raw_ilmenite"
 			id: "321540F2528D14FA"
 			rewards: [{ id: "3C91B7DB655E3564", type: "xp", xp: 50 }]
 			tasks: [{ count: 64L, id: "159814B37781817F", item: "gtceu:raw_ilmenite", type: "item" }]
 			title: "Drilling Dry"
-			x: 18.0d
+			x: 14.0d
 			y: 0.0d
 		}
 		{
-			dependencies: ["14DF849D657D6AEF"]
-			description: ["The &6Super Chest IV&r and &6Super Tank IV&r hold twice what the HV ones do, still one item or one fluid each. Both are built around an MV field generator, and the tank also takes an EV pump."]
-			icon: "gtceu:ev_super_tank"
-			id: "732D4AD6DA7885B9"
-			rewards: [{ id: "390EA98CE333FC14", type: "xp", xp: 35 }]
-			tasks: [
-				{ id: "7D00BE4A877BA364", item: "gtceu:ev_super_chest", type: "item" }
-				{ id: "5BA31A0E054CD1FC", item: "gtceu:ev_super_tank", type: "item" }
-			]
-			title: "EV Super Chest and Tank"
-			x: 8.0d
-			y: 1.5d
-		}
-		{
 			dependencies: ["61ECF6270ECCE3C2"]
-			description: ["The &6Advanced Creature Simulator III&r runs the biggest models in the pack. It is built from EV motors, an HV emitter and an HV sensor: the EV emitter and sensor need a quantum eye, and that waits for IV."]
+			description: ["The &6Advanced Creature Simulator III&r runs models the HV one can't, like the wither. It's built with an HV emitter and sensor, because the EV ones need a quantum eye and that waits for IV."]
 			icon: "gtceu:ev_creature_simulator"
 			id: "1F57B2083B56B2BA"
 			rewards: [{ id: "5B4FA8CE917B791D", type: "xp", xp: 40 }]
 			tasks: [{ id: "1869942F7008236A", item: "gtceu:ev_creature_simulator", type: "item" }]
 			title: "Advanced Creature Simulator III"
-			x: 10.0d
+			x: 8.0d
 			y: 1.5d
 		}
 		{
 			dependencies: ["1F57B2083B56B2BA"]
-			description: ["No trip to the fortress: nether bricks and bone blocks print a &6Wither Skeleton&r model. It runs in the HV simulator or better on biomass and tricalcium phosphate, and drops a skull now and then. Circuit 2 drops only skulls."]
+			description: [
+				"Skip the fortress. Nether bricks and bone blocks print a &6Wither Skeleton&r model, and any simulator from HV up runs it on biomass and tricalcium phosphate."
+				"Skulls drop now and then; circuit 2 gives nothing but skulls."
+			]
 			icon: "grindless:creature_model_wither_skeleton"
 			id: "561EADDBC1373853"
 			rewards: [
@@ -511,15 +442,15 @@
 				{ count: 4, id: "70052057802E0E94", item: "gtceu:tricalcium_phosphate_dust", type: "item" }
 			]
 			tasks: [{ id: "3554ADB692D9075E", item: "grindless:creature_model_wither_skeleton", type: "item" }]
-			title: "Withered"
-			x: 10.0d
+			title: "Wither Skeletons"
+			x: 8.0d
 			y: 3.0d
 		}
 		{
 			dependencies: ["561EADDBC1373853"]
 			description: [
-				"Wither skeleton skulls print the &6Wither&r model, and only the EV simulator or better runs it. Each run hands back a Nether Star."
-				"Keep a stock: IV turns them into quantum stars."
+				"Wither skeleton skulls print a &6Wither&r model, and only the EV simulator runs it. Each run hands back a Nether Star, no boss fight required."
+				"Keep a stock, because IV turns them into quantum stars."
 			]
 			icon: "minecraft:nether_star"
 			id: "73D14393C00DE14D"
@@ -528,42 +459,15 @@
 				{ id: "56A559EC98B8D9CA", item: "grindless:creature_model_wither", type: "item" }
 				{ id: "1D42A20C7B41C7DF", item: "minecraft:nether_star", type: "item" }
 			]
-			title: "Three Skulls"
-			x: 10.0d
+			title: "Nether Stars"
+			x: 8.0d
 			y: 4.5d
 		}
 		{
-			dependencies: ["6457FB82BC6D3618"]
-			description: ["The &6EV Battery Buffer&r, one size up. EV energy and dynamo hatches need MPIC chips from the phosphorus line, so they come later; until then, two HV energy hatches let a multiblock run EV recipes."]
-			icon: "gtceu:ev_battery_buffer_4x"
-			id: "1E4DD04B3DA43043"
-			rewards: [{ id: "3E8DDD529B04FC73", type: "xp", xp: 30 }]
-			tasks: [{ id: "5E75E2AED96ECF8B", item: "gtceu:ev_battery_buffer_4x", type: "item" }]
-			title: "EV Grid"
-			x: 12.0d
-			y: 1.5d
-		}
-		{
-			dependencies: ["1E4DD04B3DA43043"]
+			dependencies: ["61ECF6270ECCE3C2"]
 			description: [
-				"The &6Large Gas Turbine&r burns refinery gas, natural gas and the light fuels of the refinery. It wants a turbine rotor in its rotor holder and a dynamo hatch, and it spins up slowly."
-				"Its usual fuels only burn where there is air."
-			]
-			icon: "gtceu:gas_large_turbine"
-			id: "596FCF1F9EB37820"
-			rewards: [{ id: "10D70D21F62E3620", type: "xp", xp: 50 }]
-			shape: "gear"
-			size: 1.0d
-			tasks: [{ id: "13AA495F6C10B331", item: "gtceu:gas_large_turbine", type: "item" }]
-			title: "Large Gas Turbine"
-			x: 12.0d
-			y: 3.0d
-		}
-		{
-			dependencies: ["596FCF1F9EB37820"]
-			description: [
-				"A gas turbine throws its exhaust away while it is still hot. The &6Combined-Cycle Plant&r, built from a Large Gas Turbine controller and EV pumps, runs it through a boiler, so the same fuel also turns a &6Large Steam Turbine&r."
-				"It needs distilled water and no rotor. Give the steam somewhere to go: if its hatch fills up, the plant stops."
+				"A gas turbine throws its exhaust away while it's still hot. The &6Combined-Cycle Plant&r, built around a large gas turbine controller, sends it through a boiler instead, so the same fuel also spins a &6Large Steam Turbine&r."
+				"Feed it distilled water; it needs no rotor. If the steam has nowhere to go, the whole plant stops."
 			]
 			icon: "gtceu:combined_cycle_plant"
 			id: "1DD071239194961D"
@@ -575,14 +479,14 @@
 				{ id: "554E1B9CAF293B9A", item: "gtceu:steam_large_turbine", type: "item" }
 			]
 			title: "Combined-Cycle Plant"
-			x: 12.0d
-			y: 4.5d
+			x: 10.0d
+			y: 3.0d
 		}
 		{
-			dependencies: ["5B5C54F1B2AE9B99"]
+			dependencies: ["164F0808EF9DF557"]
 			description: [
-				"Hot ingots, rolls and a curtain of water: the &6Hot Strip Mill&r turns a hot ingot straight into plates, rods or foil, with no freezer and no bender. The circuit picks the shape."
-				"The quench water comes out as steam that needs somewhere to go. Ingots that need liquid helium stay with the freezer."
+				"The &6Hot Strip Mill&r rolls a hot ingot straight into plates, rods or foil, skipping the freezer and the bender. The circuit picks the shape."
+				"The cooling water comes out as steam, so give it a turbine to go to. Ingots that need liquid helium still go to the freezer."
 			]
 			icon: "gtceu:hot_strip_mill"
 			id: "7637A9813DB73D6B"
@@ -591,28 +495,14 @@
 			size: 1.25d
 			tasks: [{ id: "5BE8B5540509D143", item: "gtceu:hot_strip_mill", type: "item" }]
 			title: "Hot Strip Mill"
-			x: 14.0d
+			x: 10.0d
 			y: 1.5d
 		}
 		{
-			dependencies: ["3084C18A4334B401"]
+			dependencies: ["164F0808EF9DF557", "004525B795119B1B"]
 			description: [
-				"The large chemical reactor joins nitrogen, hydrogen and oxygen into nitric acid in one step. Mixed with sulfuric acid it becomes the nitration mixture the platinum plant drinks."
-				"Hydrochloric acid and ammonia make the ammonium chloride it also needs."
-			]
-			icon: "gtceu:nitric_acid_bucket"
-			id: "1605B92CD5A0E262"
-			rewards: [{ id: "76B5DC44E4C90FAE", type: "xp", xp: 35 }]
-			tasks: [{ id: "776E904AFFC767F4", type: "checkmark" }]
-			title: "Nitric Acid"
-			x: 16.0d
-			y: 4.5d
-		}
-		{
-			dependencies: ["5B5C54F1B2AE9B99", "004525B795119B1B"]
-			description: [
-				"The &6Platinum Plant&r is one hall for GT--'s whole platinum line, about forty recipes, with its loops closed inside. The controller is made of the machines it replaces."
-				"A platinum electrode sits in the input bus and wears out about once in a thousand runs. The first one takes End platinum from the sheldonite vein; after that the plant pays for its own."
+				"GT--'s platinum line is about forty recipes across a dozen machines; the &6Platinum Plant&r packs it into one hall, loops and all. It drinks nitration mixture and ammonium chloride, so get both flowing first."
+				"Don't expect iridium or osmium from Earth's ore: those wait for Mercury. The electrode wears out rarely, and after the first one, made from End platinum, the plant pays for its own."
 			]
 			icon: "gtceu:platinum_plant"
 			id: "1F70EF41E5F8ED95"
@@ -627,14 +517,14 @@
 				{ id: "1B3F08EE9C03B6B0", item: "gtceu:platinum_plant", type: "item" }
 			]
 			title: "Platinum Plant"
-			x: 16.0d
+			x: 12.0d
 			y: 3.0d
 		}
 		{
-			dependencies: ["1F70EF41E5F8ED95", "1605B92CD5A0E262"]
+			dependencies: ["1F70EF41E5F8ED95"]
 			description: [
-				"Circuit 1 attacks purified pentlandite or chalcopyrite: &6Platinum Group Sludge&r, nickel or copper, and sulfuric acid back to its loop. Circuit 2 turns the sludge into platinum, gold and slag."
-				"That second run is the longest of the plant: give it a battery buffer. Nitrogen dioxide goes back to nitric acid and the diluted acid to the distillery."
+				"Circuit 1 leaches purified pentlandite or chalcopyrite into &6Platinum Group Sludge&r, with nickel or copper on the side. Circuit 2 turns the sludge into &6Platinum&r, gold and slag."
+				"That second run is long and hungry, so put a battery buffer on the plant. Its nitrogen dioxide goes back to nitric acid."
 			]
 			icon: "gtceu:platinum_dust"
 			id: "791D4E94384E12AB"
@@ -644,27 +534,14 @@
 				{ id: "725A2FE2FC260568", item: "gtceu:platinum_dust", type: "item" }
 			]
 			title: "Platinum"
-			x: 18.0d
+			x: 14.0d
 			y: 3.0d
 		}
 		{
 			dependencies: ["791D4E94384E12AB"]
-			description: ["Iridium and osmium are refined in IV. Store the &6Iridium Metal Residue&r and the rarest metal mixture the platinum run drops: they keep."]
-			icon: "gtceu:iridium_metal_residue_dust"
-			id: "343C28EBA1AF6F08"
-			optional: true
-			rewards: [{ id: "5EFA85FB4597200F", type: "xp", xp: 25 }]
-			size: 0.75d
-			tasks: [{ id: "33E1A759C086EA85", item: "gtceu:iridium_metal_residue_dust", type: "item" }]
-			title: "Keep the Iridium"
-			x: 18.0d
-			y: 4.5d
-		}
-		{
-			dependencies: ["791D4E94384E12AB"]
 			description: [
-				"The platinum slag, a handful of salts, zinc, hydrochloric acid and steam give up &6Rhodium&r and &6Ruthenium&r. The toxic ruthenium tetroxide never leaves the plant."
-				"This run fills all four output hatches: give every fluid somewhere to go, or the plant stops."
+				"The platinum slag still has &6Rhodium&r and &6Ruthenium&r in it, and this run gets them out. The toxic ruthenium tetroxide stays inside the plant, which is where you want it."
+				"It fills all four output hatches, so give every fluid somewhere to go."
 			]
 			icon: "gtceu:ruthenium_dust"
 			id: "74BC8201D518D3BA"
@@ -674,25 +551,28 @@
 				{ id: "3E3FF44F46764B58", item: "gtceu:ruthenium_dust", type: "item" }
 			]
 			title: "Rhodium and Ruthenium"
-			x: 20.0d
+			x: 16.0d
 			y: 3.0d
 		}
 		{
 			dependencies: ["791D4E94384E12AB"]
-			description: ["The palladium-rich ammonia the platinum run lets go, with ammonia and formic acid, gives up its &6Palladium&r. Keep the palladium metal dust that run drops: this one needs it too."]
+			description: [
+				"The platinum run also lets go of palladium-rich ammonia. Feed it back with more ammonia and formic acid and out comes &6Palladium&r."
+				"Keep the palladium metal dust the platinum run drops, because this one needs it too."
+			]
 			icon: "gtceu:palladium_dust"
 			id: "31410FFA71DAFA0F"
 			rewards: [{ id: "3A7A69EE74073864", type: "xp", xp: 40 }]
 			tasks: [{ id: "37DDC43E6EF22757", item: "gtceu:palladium_dust", type: "item" }]
 			title: "Palladium"
-			x: 20.0d
+			x: 16.0d
 			y: 4.5d
 		}
 		{
 			dependencies: ["74BC8201D518D3BA"]
 			description: [
-				"Ruthenium on alumina pellets, mixed from sapphire dust: the &6Ruthenium Catalyst&r that turns carbon dioxide and hydrogen into methane."
-				"Make a few now and take them to Mars, where the atmosphere processor wears them out slowly."
+				"Ruthenium on alumina pellets makes the &6Ruthenium Catalyst&r, which turns carbon dioxide and hydrogen into methane."
+				"Mars's atmosphere processor wears them out slowly, so pack a few for the trip."
 			]
 			icon: "grindless:ruthenium_catalyst"
 			id: "169F778007DE0484"
@@ -701,47 +581,34 @@
 				{ id: "7E2ADEECDA9F8A70", item: "grindless:ruthenium_catalyst", type: "item" }
 			]
 			tasks: [{ count: 4L, id: "7CD60D931DAFDC14", item: "grindless:ruthenium_catalyst", type: "item" }]
-			title: "A Pinch of Ruthenium"
-			x: 22.0d
+			title: "Ruthenium Catalyst"
+			x: 18.0d
 			y: 3.0d
 		}
 		{
 			dependencies: ["791D4E94384E12AB"]
 			description: [
-				"Same bridge as always, one size up: four EV amps in, one IV amp out, or the other way round. Its IV side is platinum cable."
-				"It also takes &6MPIC Chips&r. A phosphorus boule grows in the blast furnace under nitrogen for a long time, so start it early; its wafers, engraved with a brown lens, go to an EV cutter."
-			]
-			icon: "gtceu:ev_transformer_1a"
-			id: "54ED87CE8700B870"
-			rewards: [{ id: "33F4F198823ECC52", type: "xp", xp: 50 }]
-			tasks: [
-				{ id: "122E1A370CCA9586", item: "gtceu:mpic_chip", type: "item" }
-				{ id: "7B15B3C4C5DCAB28", item: "gtceu:ev_transformer_1a", type: "item" }
-			]
-			title: "EV to IV Transformer"
-			x: 22.0d
-			y: 4.5d
-		}
-		{
-			dependencies: ["54ED87CE8700B870"]
-			description: [
-				"The &6Extreme Voltage Coil&r winds fine platinum wire around a neodymium magnet in the EV assembler. With MPIC chips and sodium potassium it makes the &6EV Energy Hatch&r."
-				"Dynamo hatches and the hatches that take more amps are built the same way."
+				"Real &6EV Energy Hatches&r need two things you only get late: fine platinum wire for the &6Extreme Voltage Coil&r, and MPIC chips."
+				"The chips come from a phosphorus boule that grows slowly in the blast furnace, so start one early. Dynamo hatches are built the same way."
 			]
 			icon: "gtceu:ev_energy_input_hatch"
 			id: "147B753858CA98F8"
-			rewards: [{ id: "1945B8580D9E3172", type: "xp", xp: 50 }]
+			rewards: [{ id: "1945B8580D9E3172", type: "xp", xp: 70 }]
 			tasks: [
+				{ id: "122E1A370CCA9586", item: "gtceu:mpic_chip", type: "item" }
 				{ id: "1E4DA31A3DE66AED", item: "gtceu:ev_voltage_coil", type: "item" }
 				{ count: 2L, id: "34BB3C6659E110AC", item: "gtceu:ev_energy_input_hatch", type: "item" }
 			]
 			title: "EV Hatches"
-			x: 24.0d
+			x: 18.0d
 			y: 4.5d
 		}
 		{
-			dependencies: ["5B5C54F1B2AE9B99"]
-			description: ["Nano circuits need more voltage than the HV assembler has. The &6EV Circuit Assembler&r is built around Microprocessor Mainframes, the IV circuits the micro line already makes in the cleanroom, and an HV emitter."]
+			dependencies: ["164F0808EF9DF557"]
+			description: [
+				"Nano circuits need more voltage than the HV circuit assembler has. The &6EV Circuit Assembler&r asks for Microprocessor Mainframes, the micro line's IV circuit, so the cleanroom gets busy again."
+				"Its emitter is an HV one: the EV emitter waits for IV."
+			]
 			icon: "gtceu:ev_circuit_assembler"
 			id: "3C5EB45848DA6797"
 			rewards: [{ id: "5BA2C540CC3F5FC0", type: "xp", xp: 60 }]
@@ -750,14 +617,14 @@
 				{ id: "3304D08BC6374CB2", item: "gtceu:ev_circuit_assembler", type: "item" }
 			]
 			title: "EV Circuit Assembler"
-			x: 16.0d
+			x: 12.0d
 			y: 1.5d
 		}
 		{
 			dependencies: ["3C5EB45848DA6797"]
 			description: [
-				"A CPU wafer, raw carbon fibers and glowstone react into a nano CPU wafer in an EV chemical reactor inside the cleanroom, and the cutter splits it into chips."
-				"The &6Nanoprocessor&r is the HV circuit of the nano line, and only the EV assembler can make it."
+				"The nano line starts with a CPU wafer turned into a nano CPU wafer in an EV chemical reactor, inside the cleanroom."
+				"The &6Nanoprocessor&r is its HV circuit, and only the EV circuit assembler can put one together."
 			]
 			icon: "gtceu:nano_processor"
 			id: "115A9664BF3CF352"
@@ -769,25 +636,25 @@
 				{ id: "56249581DA728383", item: "gtceu:nano_processor", type: "item" }
 			]
 			title: "Nanoprocessor"
-			x: 20.0d
+			x: 16.0d
 			y: 1.5d
 		}
 		{
 			dependencies: ["115A9664BF3CF352"]
-			description: ["Nanoprocessors, SMD inductors and RAM on an epoxy printed circuit board: the &6Nanoprocessor Assembly&r, the nano line's EV circuit."]
+			description: ["The &6Nanoprocessor Assembly&r is the nano line's EV circuit, and it sits on an epoxy circuit board, so HV's epoxy line still has work to do. The supercomputer is built from these."]
 			icon: "gtceu:nano_processor_assembly"
 			id: "368E5D61D5E5572B"
 			rewards: [{ id: "7624CE505F1A4895", type: "xp", xp: 50 }]
 			tasks: [{ id: "5EFB1E15AA8BFF6A", item: "gtceu:nano_processor_assembly", type: "item" }]
 			title: "Nanoprocessor Assembly"
-			x: 24.0d
+			x: 20.0d
 			y: 1.5d
 		}
 		{
 			dependencies: ["368E5D61D5E5572B"]
 			description: [
-				"The &6Nanoprocessor Supercomputer&r is the IV circuit, and the wall of this era. Its NOR chips come from a phosphorus boule, which grows slowly in the blast furnace: cut it, engrave the wafers with a pink lens and cut them again."
-				"The SMD diodes take fine platinum wire, so the platinum plant comes first."
+				"The &6Nanoprocessor Supercomputer&r is the IV circuit and the real wall of EV. Its NOR chips come from the same slow phosphorus boule as the MPIC chips, engraved with a pink lens this time."
+				"The SMD diodes want fine platinum wire, so the platinum plant comes first."
 			]
 			icon: "gtceu:nano_processor_computer"
 			id: "1D65975B45CF7836"
@@ -800,28 +667,28 @@
 				{ id: "16EF052E69CEFC07", item: "gtceu:nano_processor_computer", type: "item" }
 			]
 			title: "Nanoprocessor Supercomputer"
-			x: 28.0d
+			x: 24.0d
 			y: 1.5d
 		}
 		{
 			dependencies: ["5940CA99055BAF42"]
 			description: [
-				"Radio fixes of Mars, the next transfer window and a landing ellipse on the northern plains. The landing-site chart stays in the bus, and a data stick comes out as the &6Mars Transfer Chart&r."
-				"The tier 2 rocket parts are assembled with it, and it is never used up."
+				"At night the antenna takes radio fixes on Mars, works out the next transfer window and marks a landing ellipse on the northern plains."
+				"Your landing-site chart stays in the bus, and a data stick comes out as the &6Mars Transfer Chart&r. The tier 2 rocket parts are built with it, and it's never used up."
 			]
 			icon: "grindless:mars_chart"
 			id: "319C39AD99B5E4A8"
 			rewards: [{ id: "1641701EDE841626", type: "xp", xp: 60 }]
 			tasks: [{ id: "3A236F3B926B3BD2", item: "grindless:mars_chart", type: "item" }]
 			title: "The Way to Mars"
-			x: 20.0d
+			x: 16.0d
 			y: -1.5d
 		}
 		{
 			dependencies: ["319C39AD99B5E4A8", "321540F2528D14FA"]
 			description: [
-				"Mars needs a tier 2 rocket, and GCYR averages the parts: one basic motor or tank keeps you at the Moon. Swap every one for an &6Advanced Rocket Motor&r or &6Advanced Fuel Tank&r, made in the EV assembler with the Mars chart and lunar titanium."
-				"Two advanced tanks hold exactly one trip, from Earth or from the Moon. Program the ID chip for Mars on the planet screen."
+				"Mars needs a tier 2 rocket, and the game averages your parts: a single basic motor or tank left on board keeps you at the Moon. Swap every one for an &6Advanced Rocket Motor&r or &6Advanced Fuel Tank&r, made in the EV assembler with the Mars chart."
+				"Two advanced tanks hold exactly one trip. Set the ID chip to Mars."
 			]
 			icon: "gcyr:advanced_rocket_motor"
 			id: "5A84C7A4F1A7F2D9"
@@ -834,14 +701,14 @@
 				{ count: 6L, id: "311C26C14AF5C9FE", item: "gcyr:advanced_rocket_motor", type: "item" }
 			]
 			title: "A Rocket for Mars"
-			x: 20.0d
+			x: 16.0d
 			y: 0.0d
 		}
 		{
 			dependencies: ["5A84C7A4F1A7F2D9"]
 			description: [
-				"Thin carbon dioxide air, low gravity and deep cold: the HV suit is enough. Bring a waystone, because the way home is through it, not the rocket."
-				"Pack the kit: sintered brick footings, the bridge parts, a chemical reactor with ender pearls and helium-3, and charged batteries. Sunlight is weak here: the solar array wants circuit 2 and gives under a third."
+				"Mars is cold and its air is thin carbon dioxide, but your HV suit copes. Bring a waystone: it's your ride home."
+				"Pack sintered-brick footings, the bridge parts, a chemical reactor with ender pearls and helium-3, and charged batteries. Sunlight is weak here, so the solar array wants circuit 2 and gives under a third."
 			]
 			icon: "gcyr:mars_regolith"
 			id: "3C5189B47D70D762"
@@ -853,14 +720,14 @@
 			size: 1.25d
 			tasks: [{ dimension: "gcyr:mars", id: "5A92C623281A6694", type: "dimension" }]
 			title: "Red Horizon"
-			x: 22.0d
+			x: 18.0d
 			y: 0.0d
 		}
 		{
 			dependencies: ["3C5189B47D70D762"]
 			description: [
-				"Small rocks on the surface mark each vein. Mine the ore pair of each vein and pack it into a vein sample: scheelite, merrillite and ice. Mars has only these veins, and none of them exists anywhere else."
-				"The scheelite vein lies deepest: dig."
+				"Mars has only three veins: scheelite, merrillite and ice. None of them exists anywhere else, and small rocks on the surface give each one away."
+				"Dip a probe in both raw ores of each vein. Scheelite sits deepest, so expect a long dig."
 			]
 			icon: "grindless:vein_sample_scheelite_mars"
 			id: "5EFC42884771D00C"
@@ -870,27 +737,30 @@
 				{ id: "5E50801BB633D859", item: "grindless:vein_sample_merrillite_mars", type: "item" }
 				{ id: "11F2EA23D6358D4B", item: "grindless:vein_sample_ice_mars", type: "item" }
 			]
-			title: "Two of Each"
-			x: 24.0d
+			title: "Martian Samples"
+			x: 20.0d
 			y: 0.0d
 		}
 		{
 			dependencies: ["5EFC42884771D00C"]
 			description: [
-				"Merrillite seals the pearl: rare-earth ions are what real quantum memories keep their states in. A chemical reactor makes the &6Martian Quantum Seed&r only on Mars, from merrillite dust, an ender pearl and helium-3."
-				"Raw merrillite turns into dust in a plain furnace."
+				"Rare-earth ions are what real quantum memories store their states in, so merrillite gets the job here. A chemical reactor makes the &6Martian Quantum Seed&r from merrillite dust, an ender pearl and helium-3, and only on Mars."
+				"Raw merrillite becomes dust in a plain furnace, which still works here."
 			]
 			icon: "grindless:martian_quantum_seed"
 			id: "5301384885D78BAC"
 			rewards: [{ id: "7BA522A8AA02443F", type: "xp", xp: 50 }]
 			tasks: [{ id: "13C945C4547889F7", item: "grindless:martian_quantum_seed", type: "item" }]
 			title: "A Seed from Mars"
-			x: 24.0d
+			x: 20.0d
 			y: -1.5d
 		}
 		{
 			dependencies: ["5301384885D78BAC"]
-			description: ["Blow the seed up with an AE2 singularity at home and send one half to Mars. The Martian half needs no energy of its own: once linked it runs on your home network. Load both ends."]
+			description: [
+				"Blow the seed up with a singularity at home, then send one half to Mars. The Martian end needs no power of its own; once linked, it runs on the home network."
+				"Chunk-load both ends, same as the Moon."
+			]
 			icon: "ae2:quantum_ring"
 			id: "53893FAB153254B8"
 			rewards: [{ id: "56844C1FA1C458D3", type: "xp", xp: 80 }]
@@ -902,14 +772,14 @@
 				{ count: 16L, id: "108C6CDDD90C502E", item: "ae2:quantum_ring", type: "item" }
 			]
 			title: "Earth-Mars Bridge"
-			x: 26.0d
+			x: 22.0d
 			y: -3.0d
 		}
 		{
 			dependencies: ["53893FAB153254B8"]
 			description: [
-				"The &6Atmosphere Processor&r breathes the thin carbon dioxide air, splits water and joins the hydrogen to the carbon dioxide: three machines in one, and it only works on Mars."
-				"Circuit 1 with a ruthenium catalyst gives methane and oxygen. Send it water from home: the Martian ice is kept for IV. Circuit 2 only takes in carbon dioxide."
+				"The &6Atmosphere Processor&r breathes Martian air, splits water and joins the hydrogen to the carbon dioxide: three machines in one, and it only runs on Mars."
+				"Circuit 1, with a ruthenium catalyst, makes methane and oxygen from water you send from home. Save the Martian ice for IV. Circuit 2 only collects carbon dioxide."
 			]
 			icon: "gtceu:atmosphere_processor"
 			id: "58BBEC58FB5953BD"
@@ -921,28 +791,28 @@
 			size: 1.5d
 			tasks: [{ id: "78097613D42E5A43", item: "gtceu:atmosphere_processor", type: "item" }]
 			title: "Atmosphere Processor"
-			x: 28.0d
+			x: 24.0d
 			y: -4.5d
 		}
 		{
 			dependencies: ["58BBEC58FB5953BD"]
 			description: [
-				"Methane and oxygen mixed in the EV mixer make &6Methalox&r. It carries its own oxygen, so it burns where diesel and coal cannot, in any gas turbine on Mars or the Moon."
-				"Making it costs more than it gives back: it stores and carries power. The base's real power comes from home and the sun."
+				"Methane and oxygen from the EV mixer make &6Methalox&r, a fuel that brings its own oxygen, so it burns in any gas turbine on Mars or the Moon."
+				"It costs more energy to make than it gives back, so treat it as a battery, not a power plant."
 			]
 			icon: "gtceu:methalox_bucket"
 			id: "76CC753087EAD9F0"
 			rewards: [{ id: "59C404F9D1D26FD8", type: "xp", xp: 45 }]
 			tasks: [{ id: "1C4C427019CC4B41", item: "gtceu:methalox_bucket", type: "item" }]
 			title: "Methalox"
-			x: 30.0d
+			x: 26.0d
 			y: -4.5d
 		}
 		{
 			dependencies: ["5EFC42884771D00C"]
 			description: [
-				"Build a second EV Tripod Drill here and feed it the scheelite sample and titanium bits. Its wings pay little in this weak sunlight."
-				"Tungsten only comes from Mars, and now it comes down without you."
+				"Build a second EV Tripod Drill here and give it the scheelite sample and titanium bits. The solar wings don't do much in this weak sunlight."
+				"Tungsten only comes from Mars, and from now on it reaches home without you."
 			]
 			icon: "gtceu:raw_scheelite"
 			id: "56FFD4EF98A6C3B8"
@@ -952,27 +822,27 @@
 			]
 			tasks: [{ count: 16L, id: "7391930490146D70", item: "gtceu:raw_scheelite", type: "item" }]
 			title: "The Martian Tripod"
-			x: 26.0d
+			x: 22.0d
 			y: 0.0d
 		}
 		{
 			dependencies: ["56FFD4EF98A6C3B8"]
-			description: ["Mars lost most of its water to space, but the heavy kind stayed behind: this ice holds about five times Earth's deuterium. Nothing uses it yet. Store it: in IV it becomes heavy water."]
+			description: ["Mars lost most of its water to space, but the heavy kind tended to stay, so this ice holds about five times Earth's deuterium. Nothing uses it yet. Store it, because IV turns it into heavy water."]
 			icon: "gtceu:raw_deuterium_rich_ice"
 			id: "148A0854C671B0AC"
 			optional: true
 			rewards: [{ id: "34868A8CB47D7899", type: "xp", xp: 30 }]
 			size: 0.75d
 			tasks: [{ count: 16L, id: "39F11652861B7724", item: "gtceu:raw_deuterium_rich_ice", type: "item" }]
-			title: "Ice with a Secret"
-			x: 26.0d
+			title: "Deuterium-Rich Ice"
+			x: 22.0d
 			y: -1.5d
 		}
 		{
 			dependencies: ["56FFD4EF98A6C3B8"]
 			description: [
-				"In Martian meteorites the rare earths hide in merrillite, a phosphate no electrolyzer can split. The &6Extraction Cascade&r leaches it in hydrochloric acid, then pulls the rare earths apart with kerosene, stage by stage."
-				"Circuit 1 leaches, circuit 2 extracts. Give each fluid its own output hatch, or the cascade stops."
+				"Merrillite is a phosphate, and no electrolyzer will split it. The &6Extraction Cascade&r leaches it in hydrochloric acid and then pulls the rare earths apart with kerosene, one stage at a time."
+				"Circuit 1 leaches, circuit 2 extracts. Each fluid needs its own output hatch, or the whole cascade stops."
 			]
 			icon: "gtceu:extraction_cascade"
 			id: "3FCCD81DE98DA9EF"
@@ -984,14 +854,14 @@
 				{ id: "7B8358196931945F", item: "gtceu:extraction_cascade", type: "item" }
 			]
 			title: "Extraction Cascade"
-			x: 28.0d
+			x: 24.0d
 			y: -1.5d
 		}
 		{
 			dependencies: ["3FCCD81DE98DA9EF"]
 			description: [
-				"The extraction gives samarium, neodymium and mixed rare-earth chlorides, and most of the kerosene comes back. Any electrolyzer turns the chlorides into metal and chlorine."
-				"&6Samarium&r only comes from Mars. Store it for IV's superconductor and the magnets of LuV's motors."
+				"The cascade gives samarium, neodymium and mixed rare-earth chlorides, and hands most of the kerosene back. Any electrolyzer turns the chlorides into metal and chlorine."
+				"&6Samarium&r only comes from Mars, and IV's superconductor and LuV's motor magnets both want it, so start a pile."
 			]
 			icon: "gtceu:samarium_dust"
 			id: "72022B0ECDC3668B"
@@ -1001,12 +871,12 @@
 				{ id: "1088F02E75EFC2DD", item: "gtceu:samarium_dust", type: "item" }
 			]
 			title: "Samarium"
-			x: 30.0d
+			x: 26.0d
 			y: -3.0d
 		}
 		{
 			dependencies: ["56FFD4EF98A6C3B8"]
-			description: ["Scheelite in hydrochloric acid gives tungstic acid in an EV chemical bath, and the EV electrolyzer splits it into &6Tungsten&r dust. The blast furnace needs nichrome coils to melt it, and the vacuum freezer cools the hot ingot."]
+			description: ["Scheelite takes the familiar road to &6Tungsten&r: an acid bath, the electrolyzer, the blast furnace and the freezer. Nichrome coils are just hot enough to melt it."]
 			icon: "gtceu:tungsten_ingot"
 			id: "5B6B5BE89721691A"
 			rewards: [{ id: "3EDBCF351DEE2347", type: "xp", xp: 60 }]
@@ -1016,23 +886,23 @@
 				{ id: "71A6759B1111A3DC", item: "gtceu:tungsten_ingot", type: "item" }
 			]
 			title: "Tungsten"
-			x: 28.0d
+			x: 24.0d
 			y: 0.0d
 		}
 		{
 			dependencies: ["5B6B5BE89721691A"]
-			description: ["Ruthenium from the plant, tungsten from Mars and molybdenum from the Nether make &6RTM Alloy&r. A blast furnace lined with its coils runs hotter than nichrome ever did."]
+			description: ["&6RTM Alloy&r takes shopping on three worlds: ruthenium from the platinum plant, tungsten from Mars and molybdenum from the Nether. A blast furnace lined with its coils runs hotter than nichrome ever could."]
 			icon: "gtceu:rtm_alloy_coil_block"
 			id: "3DB3729547372E91"
 			rewards: [{ id: "58D020FF415A194C", type: "xp", xp: 80 }]
 			tasks: [{ count: 4L, id: "56EE64CD3A69B9CA", item: "gtceu:rtm_alloy_coil_block", type: "item" }]
 			title: "RTM Coils"
-			x: 30.0d
+			x: 26.0d
 			y: -1.5d
 		}
 		{
 			dependencies: ["5B6B5BE89721691A"]
-			description: ["Tungsten and steel dust mixed in the EV mixer, smelted in the same furnace and cooled in the same freezer: &6Tungsten Steel&r, the metal every IV machine is built from."]
+			description: ["Tungsten and steel dust from the mixer take another trip through the blast furnace and the freezer. &6Tungsten Steel&r is what IV machines are made of, so you'll want plenty."]
 			icon: "gtceu:tungsten_steel_ingot"
 			id: "11BD5A24AAF314BC"
 			rewards: [{ id: "18399F59E4F03505", type: "xp", xp: 60 }]
@@ -1041,13 +911,13 @@
 				{ id: "106C109CA8C652F8", item: "gtceu:tungsten_steel_ingot", type: "item" }
 			]
 			title: "Tungsten Steel"
-			x: 30.0d
+			x: 26.0d
 			y: 0.0d
 		}
 		{
 			dependencies: ["11BD5A24AAF314BC", "1D65975B45CF7836"]
 			description: [
-				"Tungsten steel around a casing, platinum cables and PTFE: the &6IV Machine Hull&r."
+				"The &6IV Machine Hull&r puts Martian tungsten steel, platinum cable and PTFE into one box."
 				"Mars gave you tungsten. Venus and Mercury burn. That's next."
 			]
 			icon: "gtceu:iv_machine_hull"
@@ -1057,10 +927,10 @@
 			size: 1.75d
 			tasks: [{ id: "165460090EBCFE61", item: "gtceu:iv_machine_hull", type: "item" }]
 			title: "IV Machine Hull"
-			x: 32.0d
+			x: 28.0d
 			y: 0.0d
 		}
 	]
-	subtitle: ["A Moon base that runs without you, platinum and nano circuits at home, and the first steps on Mars."]
+	subtitle: ["The Moon learns to run without you, and then a rocket points at Mars."]
 	title: "EV: Lunar Base"
 }

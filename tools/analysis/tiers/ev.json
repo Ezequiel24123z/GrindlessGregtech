@@ -514,7 +514,7 @@
       "id": "ev-gtm",
       "label": "GTM's EV machines, parts and components (gtceu:ev_*; what needs a quantum eye or tungsten stays in IV)",
       "items": ["gtceu:ev_*"],
-      "exclude": ["gtceu:ev_emitter", "gtceu:ev_sensor", "gtceu:ev_field_generator", "gtceu:ev_laser_engraver", "gtceu:ev_scanner", "gtceu:ev_large_miner"],
+      "exclude": ["gtceu:ev_emitter", "gtceu:ev_sensor", "gtceu:ev_field_generator", "gtceu:ev_laser_engraver", "gtceu:ev_scanner", "gtceu:ev_large_miner", "gtceu:ev_world_accelerator"],
       "note": "GTM's EV emitter, sensor and field generator need a quantum eye (radon, IV), and so do the laser engraver and the scanner built from them; the large miner needs tungsten gears and IV circuits. They stay in IV (docs/eras/ev.md). Decisions of 2026-10-25 (C1): the pack's EV circuit assembler (the nano line and the gate's nano computers) and EV creature simulator (the wither) take an HV emitter and sensor instead, so they are EV items."
     },
     {
