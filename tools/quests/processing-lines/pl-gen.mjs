@@ -61,6 +61,7 @@ function headline(f) {
     case 'turbine': return `${num(f.eut)} EU/t times the rotor's power`;
     case 'cover': return `${num(f.eut)} EU/t in clear sun`;
     case 'toll': return `a ${num(f.percent)}% toll, paid in AE energy`;
+    case 'wslots': return `${num(f.n)} cell slots`;
     default: return null;
   }
 }
@@ -82,6 +83,10 @@ function figLines(figs) {
     else if (f.t === 'run' && f.line) add(f.label || 'A run', `${f.name} ${num(f.eut)} EU/t`);
     else if (f.t === 'engine') add('With the boost', `each mB goes ${f.factor === 2 ? 'twice' : num(f.factor) + ' times'} as far`);
     else if (f.t === 'anywhere') groups.push({ plain: 'Off Earth it runs only on ' + andList(f.fuels.map((x) => x.name)) });
+    else if (f.t === 'wcell') add('Holds', `${f.name} ${f.eu.toLocaleString('en-US')} EU`);
+    else if (f.t === 'wloss') groups.push({ plain: `${num(f.percent)}% of what goes in is lost on the way` });
+    else if (f.t === 'wamps') groups.push({ plain: `Comes in ${andList(f.amps.map(String))} A, ${tierName(f.from)} to ${tierName(f.to)}` });
+    else if (f.t === 'wcover') groups.push({ plain: `${f.amps} A of its tier, ${tierName(f.from)} to ${tierName(f.to)}` });
   }
   return groups.map((g) => (g.plain ? g.plain + '.' : `${g.label}: ${g.entries.join(', ')}.`));
 }
@@ -209,15 +214,14 @@ function writeRoots(file, model) {
   const otherLines = others.map(([k, v]) => `    "${k}": ${JSON.stringify(v)}`);
   const all = otherLines.concat(entries);
   text = text.replace(re, '"allowRoots": {\n' + all.join(',\n') + '\n  }');
-  // quests that stand alone on purpose (alone: true in the data)
+  // quests that stand alone on purpose (alone: true in the data): the block is written again from the data every time
   const alone = model.chapters.map((m) => [m.file, m.nodes.filter((nd) => nd.alone && !nd.link).map((nd) => nd.id)]).filter(([, ids]) => ids.length);
-  const isoRe = /"allowIsolated": \{[\s\S]*?\n  \}/;
+  text = text.replace(/\n {2}"allowIsolated": \{[\s\S]*?\n {2}\},/, '');
   if (alone.length) {
-    const isoLines = ['    "_why": "A placeholder that stands alone on purpose: the Power tab keeps a slot for the wireless energy network, which is being built (docs/quests.md, section 18)."',
+    const isoLines = ['    "_why": "Quests that stand alone on purpose: alone: true in a processing-lines data file (docs/quests.md, section 17)."',
       ...alone.map(([k, ids]) => `    "${k}": [${ids.map((id) => '"' + id + '"').join(', ')}]`)];
     const block = '"allowIsolated": {\n' + isoLines.join(',\n') + '\n  }';
-    if (isoRe.test(text)) text = text.replace(isoRe, block);
-    else text = text.replace(/\n  "allowLongEdges": /, `\n  ${block},\n  "allowLongEdges": `);
+    text = text.replace(/\n {2}"allowLongEdges": /, `\n  ${block},\n  "allowLongEdges": `);
     if (!text.includes(block)) throw new Error('could not write allowIsolated in ' + file);
   }
   const noReward = hasPower

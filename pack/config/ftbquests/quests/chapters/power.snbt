@@ -228,46 +228,67 @@
 			y: 41.75d
 		}
 		{
+			id: "11844F34095CCC55"
+			linked_quest: "503863FFACA225A8"
+			shape: "rsquare"
+			x: 20.0d
+			y: 37.25d
+		}
+		{
 			id: "190D693629E3BAE4"
 			linked_quest: "7B7B0F4AD0D3C01A"
 			shape: "rsquare"
 			x: 20.0d
-			y: 37.5d
+			y: 38.75d
+		}
+		{
+			id: "533AA7C2F930BC98"
+			linked_quest: "774234968F1BEB95"
+			shape: "rsquare"
+			x: 0.5d
+			y: 45.5d
 		}
 		{
 			id: "7E8F874EB2156225"
 			linked_quest: "3D424D897DEB2D37"
 			shape: "rsquare"
 			x: 0.5d
-			y: 45.5d
+			y: 47.0d
 		}
 		{
 			id: "349B0EAB4853C530"
 			linked_quest: "17A3FCFC32F409FD"
 			shape: "rsquare"
 			x: 0.5d
-			y: 47.0d
+			y: 48.5d
 		}
 		{
 			id: "39FBEB45939CD8EA"
 			linked_quest: "773EBEBBC58010FD"
 			shape: "rsquare"
 			x: 0.5d
-			y: 48.5d
+			y: 50.0d
 		}
 		{
 			id: "30E152780FA9264F"
 			linked_quest: "17260FE287B08ADA"
 			shape: "rsquare"
 			x: 0.5d
-			y: 50.0d
+			y: 51.5d
+		}
+		{
+			id: "3AF0B2A902D76B47"
+			linked_quest: "5669D88DE37D633F"
+			shape: "rsquare"
+			x: 7.25d
+			y: 45.5d
 		}
 		{
 			id: "1714CF94FFCFAC83"
 			linked_quest: "50C4A414ED95DC2D"
 			shape: "rsquare"
 			x: 7.25d
-			y: 45.75d
+			y: 47.0d
 		}
 		{
 			id: "16F30C6049444F59"
@@ -288,35 +309,35 @@
 			linked_quest: "5047605FE0A03D21"
 			shape: "rsquare"
 			x: 0.5d
-			y: 55.0d
+			y: 56.5d
 		}
 		{
 			id: "37EA5C37FB08041B"
 			linked_quest: "39A5A5CC76591697"
 			shape: "rsquare"
 			x: 0.5d
-			y: 58.5d
+			y: 60.0d
 		}
 		{
 			id: "1FCCBED6CE4452ED"
 			linked_quest: "1DFC0C1A50793CB7"
 			shape: "rsquare"
 			x: 21.5d
-			y: 58.5d
+			y: 60.0d
 		}
 		{
 			id: "3D9F43AA278F3647"
 			linked_quest: "366AB48E5BF50431"
 			shape: "rsquare"
 			x: 19.25d
-			y: 60.0d
+			y: 61.5d
 		}
 		{
 			id: "354C64B97FEDF96E"
 			linked_quest: "42BF2F77456F8773"
 			shape: "rsquare"
 			x: 21.5d
-			y: 60.0d
+			y: 61.5d
 		}
 	]
 	quests: [
@@ -1169,7 +1190,7 @@
 			y: 37.5d
 		}
 		{
-			dependencies: ["7B7B0F4AD0D3C01A"]
+			dependencies: ["503863FFACA225A8", "7B7B0F4AD0D3C01A"]
 			description: [
 				"Day and night, on any world, and one pellet keeps it going for a long while."
 				"EU per pellet: 147 million."
@@ -1185,10 +1206,10 @@
 			]
 			title: "RTG Cell"
 			x: 22.25d
-			y: 37.5d
+			y: 38.0d
 		}
 		{
-			dependencies: ["3D424D897DEB2D37", "17A3FCFC32F409FD", "773EBEBBC58010FD", "17260FE287B08ADA"]
+			dependencies: ["774234968F1BEB95", "3D424D897DEB2D37", "17A3FCFC32F409FD", "773EBEBBC58010FD", "17260FE287B08ADA"]
 			description: [
 				"No smoke and no fuel line: a few assemblies run it for hours."
 				"A channel: LEU in light water 16,384 EU/t, LEU in heavy water 32,768 EU/t, MOX 32,768 EU/t, breeder 8,192 EU/t."
@@ -1205,10 +1226,10 @@
 			]
 			title: "Fission Reactor"
 			x: 3.0d
-			y: 47.75d
+			y: 48.5d
 		}
 		{
-			dependencies: ["50C4A414ED95DC2D"]
+			dependencies: ["5669D88DE37D633F", "50C4A414ED95DC2D"]
 			description: ["Venus is always at noon, so it never stops. The water leaves as steam for a turbine."]
 			icon: "gtceu:venus_heat_engine"
 			id: "3BF1166CE0AD729A"
@@ -1221,7 +1242,7 @@
 			]
 			title: "Venus Heat Engine"
 			x: 9.5d
-			y: 45.75d
+			y: 46.25d
 		}
 		{
 			dependencies: ["7B12E3AC75BB566B"]
@@ -1265,7 +1286,7 @@
 			]
 			title: "Deuterium"
 			x: 0.5d
-			y: 53.5d
+			y: 55.0d
 		}
 		{
 			dependencies: ["12AE9D9C05C6405F", "5047605FE0A03D21"]
@@ -1277,7 +1298,7 @@
 			tasks: [{ id: "7471C190711B52C6", type: "checkmark" }]
 			title: "Fusion Reactor"
 			x: 2.75d
-			y: 54.25d
+			y: 55.75d
 		}
 		{
 			dependencies: ["7EE65AE45E5168EE"]
@@ -1288,7 +1309,7 @@
 			tasks: [{ id: "1F174843B7A6AD3A", type: "checkmark" }]
 			title: "Helium Plasma"
 			x: 5.0d
-			y: 54.25d
+			y: 55.75d
 		}
 		{
 			dependencies: ["12A6FDE4906BA019"]
@@ -1300,7 +1321,7 @@
 			tasks: [{ id: "1E360973257556B7", type: "checkmark" }]
 			title: "Large Plasma Turbine"
 			x: 7.25d
-			y: 54.25d
+			y: 55.75d
 		}
 		{
 			icon: "gtceu:enriched_naquadah_bolt"
@@ -1311,7 +1332,7 @@
 			tasks: [{ id: "5735B3C60B1F7675", type: "checkmark" }]
 			title: "Enriched Naquadah"
 			x: 11.25d
-			y: 53.5d
+			y: 55.0d
 		}
 		{
 			dependencies: ["59DECDED26DF0294"]
@@ -1323,7 +1344,7 @@
 			tasks: [{ id: "79C38349090C87F0", type: "checkmark" }]
 			title: "Naquadah Reactor"
 			x: 13.5d
-			y: 53.5d
+			y: 55.0d
 		}
 		{
 			icon: "gcyr:dyson_solar_cell"
@@ -1333,7 +1354,7 @@
 			tasks: [{ id: "7ED020059F8C2BA4", type: "checkmark" }]
 			title: "Dyson Solar Cell"
 			x: 17.5d
-			y: 53.5d
+			y: 55.0d
 		}
 		{
 			dependencies: ["11C73137027F90A3"]
@@ -1345,7 +1366,7 @@
 			tasks: [{ id: "5A8383B9274CEC05", type: "checkmark" }]
 			title: "Dyson Sphere"
 			x: 19.75d
-			y: 53.5d
+			y: 55.0d
 		}
 		{
 			icon: "gtceu:lv_machine_hull"
@@ -1358,7 +1379,7 @@
 			]
 			title: "LV Machine Hull"
 			x: 0.5d
-			y: 60.0d
+			y: 61.5d
 		}
 		{
 			dependencies: ["39A5A5CC76591697", "3F30A6656E0CFBCC"]
@@ -1372,7 +1393,7 @@
 			]
 			title: "Transformer"
 			x: 2.75d
-			y: 59.25d
+			y: 60.75d
 		}
 		{
 			dependencies: ["3F30A6656E0CFBCC"]
@@ -1386,7 +1407,7 @@
 			]
 			title: "Battery Buffer"
 			x: 2.75d
-			y: 60.75d
+			y: 62.25d
 		}
 		{
 			icon: "gtceu:lv_battery_hull"
@@ -1399,7 +1420,7 @@
 			]
 			title: "Battery Hull"
 			x: 6.75d
-			y: 58.5d
+			y: 60.0d
 		}
 		{
 			dependencies: ["1DD9B8EADA8EBAC0"]
@@ -1416,7 +1437,7 @@
 			]
 			title: "Batteries"
 			x: 9.0d
-			y: 58.5d
+			y: 60.0d
 		}
 		{
 			icon: "gtceu:tin_single_wire"
@@ -1429,7 +1450,7 @@
 			]
 			title: "Tin Wire"
 			x: 13.0d
-			y: 58.5d
+			y: 60.0d
 		}
 		{
 			dependencies: ["3B2125BC87FC669D"]
@@ -1446,7 +1467,7 @@
 			]
 			title: "Cables"
 			x: 15.25d
-			y: 58.5d
+			y: 60.0d
 		}
 		{
 			dependencies: ["1DFC0C1A50793CB7", "42BF2F77456F8773"]
@@ -1461,7 +1482,7 @@
 			]
 			title: "EU P2P Tunnel"
 			x: 23.75d
-			y: 59.25d
+			y: 60.75d
 		}
 		{
 			dependencies: ["366AB48E5BF50431"]
@@ -1475,7 +1496,7 @@
 			]
 			title: "Quantum Bridge"
 			x: 21.5d
-			y: 61.5d
+			y: 63.0d
 		}
 		{
 			icon: "gtceu:lapotron_crystal"
@@ -1488,7 +1509,7 @@
 			]
 			title: "Lapotron Crystal"
 			x: 27.75d
-			y: 58.5d
+			y: 60.0d
 		}
 		{
 			dependencies: ["56341035C7044592"]
@@ -1502,18 +1523,127 @@
 			]
 			title: "Power Substation"
 			x: 30.0d
-			y: 58.5d
+			y: 60.0d
 		}
 		{
-			icon: "minecraft:lightning_rod"
-			id: "351CB836C17869CE"
-			shape: "circle"
+			icon: "gtceu:lv_lithium_battery"
+			id: "1A5654A5282AA2BB"
+			shape: "rsquare"
 			size: 1.0d
-			subtitle: "Coming soon, tower and all"
-			tasks: [{ id: "32B9D9C372884542", type: "checkmark" }]
-			title: "Wireless Energy Network"
-			x: 32.25d
-			y: 58.5d
+			subtitle: "Any battery of the cell's tier"
+			tasks: [
+				{ id: "7D38B81C77322663", item: "gtceu:lv_lithium_battery", optional_task: true, type: "item" }
+				{ id: "1348853C62E926F2", type: "checkmark" }
+			]
+			title: "Batteries"
+			x: 0.5d
+			y: 68.75d
+		}
+		{
+			dependencies: ["1A5654A5282AA2BB"]
+			description: [
+				"Batteries of its tier in a block. An empty slot takes the tower's casing."
+				"Holds: LV 720,000 EU, MV 2,520,000 EU, HV 10,800,000 EU, EV 61,440,000 EU, IV 245,760,000 EU."
+			]
+			icon: "grindless:lv_capacitor_cell"
+			id: "16ABFBB249BDC07B"
+			size: 1.0d
+			subtitle: "The weakest cell in any tower sets the network's voltage"
+			tasks: [
+				{ id: "5F647B421B89C6F2", item: "grindless:lv_capacitor_cell", optional_task: true, type: "item" }
+				{ id: "5E46CBD3C716378C", type: "checkmark" }
+			]
+			title: "Capacitor Cell"
+			x: 2.75d
+			y: 68.75d
+		}
+		{
+			dependencies: ["16ABFBB249BDC07B"]
+			description: [
+				"No tower, no network: build it before any hatch or cover."
+				"5% of what goes in is lost on the way."
+			]
+			icon: "gtceu:wireless_energy_tower"
+			id: "1A64E503878275AE"
+			shape: "gear"
+			size: 1.5d
+			subtitle: "LV: 32 cell slots. One network for every world and every player"
+			tasks: [
+				{ id: "39235CB4DAA85A3A", item: "gtceu:wireless_energy_tower", optional_task: true, type: "item" }
+				{ id: "1639805696AC3174", type: "checkmark" }
+			]
+			title: "Wireless Energy Tower"
+			x: 5.0d
+			y: 68.75d
+		}
+		{
+			dependencies: ["1A64E503878275AE"]
+			description: [
+				"Energy goes in at any voltage; the cells only limit what comes out."
+				"Comes in 2, 4, 16 and 64 A, LV to IV."
+			]
+			icon: "gtceu:lv_wireless_dynamo_hatch"
+			id: "128CD52291A76880"
+			size: 1.0d
+			subtitle: "Generator multiblocks feed the network through it"
+			tasks: [
+				{ id: "58114DD6FCE0B349", item: "gtceu:lv_wireless_dynamo_hatch", optional_task: true, type: "item" }
+				{ id: "39DDC21A11D4C123", type: "checkmark" }
+			]
+			title: "Wireless Dynamo Hatch"
+			x: 7.25d
+			y: 66.5d
+		}
+		{
+			dependencies: ["1A64E503878275AE"]
+			description: ["2 A of its tier, LV to IV."]
+			icon: "grindless:lv_wireless_dynamo_cover"
+			id: "54D4653CC016835A"
+			size: 1.0d
+			subtitle: "On a generator or a battery buffer, it feeds the network"
+			tasks: [
+				{ id: "77A87C660B9F021C", item: "grindless:lv_wireless_dynamo_cover", optional_task: true, type: "item" }
+				{ id: "3888F503C6818E73", type: "checkmark" }
+			]
+			title: "Wireless Dynamo Cover"
+			x: 7.25d
+			y: 68.0d
+		}
+		{
+			dependencies: ["1A64E503878275AE"]
+			description: [
+				"Above the network's voltage it gets nothing; shift-right-click it with an empty hand to see why."
+				"Comes in 2, 4, 16 and 64 A, LV to IV."
+			]
+			icon: "gtceu:lv_wireless_energy_hatch"
+			id: "5062E82EF67AFF89"
+			size: 1.0d
+			subtitle: "Multiblocks draw from the network through it"
+			tasks: [
+				{ id: "71CC443C03739105", item: "gtceu:lv_wireless_energy_hatch", optional_task: true, type: "item" }
+				{ id: "3777273B8EF27E04", type: "checkmark" }
+			]
+			title: "Wireless Energy Hatch"
+			x: 7.25d
+			y: 69.5d
+		}
+		{
+			dependencies: ["1A64E503878275AE"]
+			description: [
+				"Shift-right-click the machine with an empty hand to read the network."
+				"2 A of its tier, LV to IV."
+			]
+			icon: "grindless:lv_wireless_energy_cover"
+			id: "7713822C036911A8"
+			size: 1.0d
+			subtitle: "Single machines draw through it, on any side but the front"
+			tasks: [
+				{ id: "316A5192E2D0349B", item: "grindless:lv_wireless_energy_cover", optional_task: true, type: "item" }
+				{ id: "3B94480C2084B2D2", type: "checkmark" }
+			]
+			title: "Wireless Energy Cover"
+			x: 7.25d
+			y: 71.0d
 		}
 	]
 	subtitle: ["Every way to make power, tier by tier, and what carries it and stores it."]

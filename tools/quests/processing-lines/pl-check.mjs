@@ -6,7 +6,9 @@
 //   machine -> machine  some recipe takes the first controller and gives the second (how it is built);
 //   summary A -> B      { via: [I1, I2, ...] }: every step A -> I1 -> I2 -> ... -> B passes as item -> item.
 // The Power tab's own arrows: an era quest -> B (B's item is a task or the icon of that quest), engineFluid (what GTM's large
-// combustion engines burn besides the fuel), boilerWater (a GTM boiler drinks it), build (a part of B's controller recipe).
+// combustion engines burn besides the fuel), boilerWater (a GTM boiler drinks it), build (a part of B's controller recipe),
+// structure (a block of B's pattern in the dump's structures.json) and network (a wireless hatch or cover of the wireless table,
+// registered in the dump, that works through the network the tower holds).
 // Every number in a Power node's text is a figure (pl-lib.mjs#P) that checkFig recomputes from the dump's recipes and
 // machines, pack/config/gtceu.yaml, a constant of the pack's scripts or tables, or the dump's electric.json.
 // Also: every icon and task item exists and is not hidden in EMI (the dump's c:hidden_from_recipe_viewers, and
@@ -133,7 +135,7 @@ function itemToItem(a, b, types, allowRecycling = false) {
 }
 
 function drawnInputs(m) {
-  return m.arrows.filter((e) => !e.srcRes.machine && !e.srcRes.era && !e.engine && !e.boilerWater && !e.build).flatMap((e) => keysOf(e.srcRes));
+  return m.arrows.filter((e) => !e.srcRes.machine && !e.srcRes.era && !e.engine && !e.boilerWater && !e.build && !e.structure && !e.network).flatMap((e) => keysOf(e.srcRes));
 }
 
 // ---------------------------------------------------------------- facts beyond recipes (the Power tab)
@@ -203,18 +205,54 @@ function hullTier(item) {
   }
   return null;
 }
+// a file of the pack: this checkout's, or else the one in the pack the dump was made from (the run's upload.zip), for content
+// that is on another branch until it merges (the wireless network's table)
+function packText(rel) {
+  const file = path.join(repo, rel);
+  if (fs.existsSync(file)) return { text: fs.readFileSync(file, 'utf8'), from: rel };
+  const raw = fs.existsSync(upload) ? readZipEntry(upload, rel.replace(/\\/g, '/')) : null;
+  return raw ? { text: raw.toString('utf8'), from: `${rel} (the dump's upload.zip)` } : null;
+}
 // a constant of the pack's scripts or tables: { file, re } (first capture) or { file, json: 'a.b' }
 function sourceValue(src) {
-  const file = path.join(repo, src.file);
-  if (!fs.existsSync(file)) return null;
-  const text = fs.readFileSync(file, 'utf8');
-  if (src.json) return src.json.split('.').reduce((o, k) => (o == null ? o : o[k]), readJson(text));
-  const mm = new RegExp(src.re).exec(text);
+  const got = packText(src.file);
+  if (!got) return null;
+  if (src.json) return src.json.split('.').reduce((o, k) => (o == null ? o : o[k]), readJson(got.text));
+  const mm = new RegExp(src.re).exec(got.text);
   return mm ? Number(mm[1]) : null;
 }
 // gg_dump's electric.json: wire properties per material, EU-holding items, AE2's P2P toll
 const electricFile = path.join(dumpDir, 'electric.json');
 const electric = fs.existsSync(electricFile) ? readJson(fs.readFileSync(electricFile, 'utf8')) : null;
+// gg_dump's structures.json: every multiblock's pattern (slices of symbols, and what each symbol accepts)
+const structuresFile = path.join(dumpDir, 'structures.json');
+const structures = new Map();
+if (fs.existsSync(structuresFile)) {
+  const all = readJson(fs.readFileSync(structuresFile, 'utf8')).structures || {};
+  for (const [id, s] of Array.isArray(all) ? all.map((x) => [x.id, x]) : Object.entries(all)) structures.set(id, s);
+}
+const symbolBlocks = (sym) => (!sym ? [] : sym.kind === 'blocks' ? sym.blocks || [] : sym.kind === 'oneOf' ? (sym.options || []).flatMap(symbolBlocks) : []);
+// how many places of a multiblock's pattern take this block
+function patternCount(machine, block) {
+  const s = structures.get(machine);
+  if (!s) return null;
+  const takes = new Set(Object.keys(s.symbols || {}).filter((k) => symbolBlocks(s.symbols[k]).includes(block)));
+  let n = 0;
+  for (const slice of s.slices || []) for (const row of slice) for (const ch of row) if (takes.has(ch)) n++;
+  return n;
+}
+// the wireless network's table, and the hatches and covers it registers (startup_scripts/grindless/lv/wireless_energy.js)
+const wirelessSrc = packText('pack/kubejs/data/grindless/tables/wireless_energy.json');
+const wireless = wirelessSrc ? readJson(wirelessSrc.text) : null;
+function wirelessIds(kind) {
+  if (!wireless) return [];
+  const names = (wireless.tiers || []).map((t) => t.name);
+  if (kind === 'energy_hatch' || kind === 'dynamo_hatch') {
+    return names.flatMap((t) => (wireless.hatchAmps || []).map((a) => `gtceu:${t}_wireless_${kind}${a === 2 ? '' : '_' + a + 'a'}`));
+  }
+  return names.map((t) => `grindless:${t}_wireless_${kind}`);
+}
+const wirelessKind = (item) => (/_wireless_(energy|dynamo)_(hatch|cover)(_\d+a)?$/.exec(item) || []).slice(1, 3).join('_');
 
 const near = (a, b) => Math.abs(a - b) < 0.005 + 1e-9 * Math.abs(b) || Math.round(a * 100) / 100 === b;
 const consumed = (r, key) => r.inputs.find((i) => i.alts.includes(key) && !i.cap);
@@ -325,6 +363,45 @@ function checkFig(nd, f) {
       if (stray.length || missing.length) return fail(`off Earth: ${free.map((r) => r.id).join(', ')}`);
       return pass(`${free.length} ${f.type} recipe(s) with no dimension condition: ${free.map((r) => r.id).join(', ')}`);
     }
+    case 'wcell': {
+      if (!wireless) return fail('no tables/wireless_energy.json in this checkout or in the dump\'s upload.zip');
+      const row = (wireless.tiers || []).find((t) => t.cell === f.item);
+      if (!row) return fail(`the wireless table has no cell ${f.item}`);
+      if (row.capacity !== f.eu) return fail(`${wirelessSrc.from}: ${row.capacity}`);
+      if (!idx.items.has(f.item)) return fail(`${f.item} is not registered in the dump`);
+      if (!electric) return pass(`${wirelessSrc.from}: ${row.capacity}`);
+      const bat = (electric.items || []).find((x) => x.id === row.referenceBattery);
+      return bat && bat.capacity * 6 === f.eu ? pass(`${wirelessSrc.from}: ${row.capacity} = 6 x ${row.referenceBattery} (electric.json: ${bat.capacity})`)
+        : fail(`6 x ${row.referenceBattery} = ${bat ? bat.capacity * 6 : 'no entry in electric.json'}`);
+    }
+    case 'wslots': {
+      if (!wireless) return fail('no tables/wireless_energy.json in this checkout or in the dump\'s upload.zip');
+      const t = wireless.tower || {};
+      if (t.cellSlots !== f.n) return fail(`${wirelessSrc.from}: cellSlots ${t.cellSlots}`);
+      const cells = (wireless.tiers || []).map((r) => r.cell);
+      const counts = cells.map((c) => patternCount(t.id, c));
+      if (counts.some((c) => c !== f.n)) return fail(`structures.json: ${t.id} takes cells in ${counts.join('/')} places`);
+      return pass(`${wirelessSrc.from}: cellSlots ${t.cellSlots}; structures.json: every cell fits ${f.n} places of ${t.id}`);
+    }
+    case 'wloss': {
+      if (!wireless || !wireless.loss) return fail('no loss in the wireless table');
+      const lost = 100 * (1 - wireless.loss.numerator / wireless.loss.denominator);
+      return near(lost, f.percent) ? pass(`${wirelessSrc.from}: ${wireless.loss.numerator}/${wireless.loss.denominator} arrives`) : fail(`${wirelessSrc.from}: ${lost}% lost`);
+    }
+    case 'wamps':
+    case 'wcover': {
+      if (!wireless) return fail('no tables/wireless_energy.json in this checkout or in the dump\'s upload.zip');
+      const names = (wireless.tiers || []).map((r) => r.name);
+      if (names[0] !== f.from || names[names.length - 1] !== f.to) return fail(`${wirelessSrc.from}: tiers ${names.join(', ')}`);
+      const amps = f.t === 'wamps' ? wireless.hatchAmps : wireless.coverAmps;
+      if (JSON.stringify(amps) !== JSON.stringify(f.amps)) return fail(`${wirelessSrc.from}: ${JSON.stringify(amps)} A`);
+      const kind = wirelessKind(nd.item);
+      const ids = wirelessIds(kind);
+      if (!ids.includes(nd.item)) return fail(`${nd.item} is not one of the table's ${kind}s`);
+      const missing = ids.filter((id) => !idx.items.has(id));
+      if (missing.length) return fail(`not registered in the dump: ${missing.join(', ')}`);
+      return pass(`${wirelessSrc.from}: ${JSON.stringify(amps)} A, ${names.join(', ')}; all ${ids.length} ${kind}s registered`);
+    }
     default:
       return fail('unknown figure ' + f.t);
   }
@@ -347,6 +424,17 @@ function checkArrow(e) {
   if (e.build) {
     const hits = keysOf(A).flatMap((k) => (idx.consumers.get(k) || []).filter((r) => outputKeys(r).has(B.item)));
     return hits.length ? { ok: true, recipes: [hits[0].id], build: true } : { ok: false, why: `no recipe builds ${B.item} from ${A.res}` };
+  }
+  if (e.structure) {
+    const n = patternCount(B.item, A.item);
+    return n ? { ok: true, recipes: [`structures.json: ${B.item} takes ${A.item} in ${n} places`] } : { ok: false, why: `${B.item}'s pattern (structures.json) has no place for ${A.item}` };
+  }
+  if (e.network) {
+    if (!wireless) return { ok: false, why: 'no tables/wireless_energy.json in this checkout or in the dump\'s upload.zip' };
+    if (!wireless.tower || A.item !== wireless.tower.id) return { ok: false, why: `${A.item} is not the wireless table's tower` };
+    const kind = wirelessKind(B.item);
+    return kind && wirelessIds(kind).includes(B.item) && idx.items.has(B.item) ? { ok: true, recipes: [`${wirelessSrc.from}: ${B.item} works through the network ${A.item} holds`] }
+      : { ok: false, why: `${B.item} is not a registered wireless hatch or cover of the table` };
   }
   const types = e.by || (B.machine ? null : B.by) || null;
   if (e.via) {
@@ -409,7 +497,7 @@ for (const m of model.chapters) {
     for (const f of nd.figs || []) {
       figs++;
       const r = checkFig(nd, f);
-      const what = `${f.t}${f.name ? ' ' + f.name : ''} ${f.eu ?? f.eut ?? f.mbt ?? f.buckets ?? f.mb ?? f.total ?? f.loss ?? f.percent ?? ''}`.trim();
+      const what = `${f.t}${f.name ? ' ' + f.name : ''} ${f.eu ?? f.eut ?? f.mbt ?? f.buckets ?? f.mb ?? f.total ?? f.loss ?? f.percent ?? f.n ?? f.amps ?? ''}`.trim();
       if (r.ok) verifiedFigs.push(`${nd.key} [${what}]: ${r.how}`);
       else { figFails++; issues.push(`FIGURE ${nd.key} [${what}]: ${r.why}`); }
     }
