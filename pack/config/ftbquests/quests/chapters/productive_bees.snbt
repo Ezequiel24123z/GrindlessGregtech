@@ -76,7 +76,7 @@
 			dependencies: ["2F0252E6D86763C7", "25CF38B8E88FD430"]
 			description: [
 				"Productive bees only live in an &6Advanced Beehive&r. They fly out, gather and come back with combs, which you pipe or hopper out of the hive."
-				"It needs an MV circuit here, which is why the bees wait for MV."
+				"The recipe wants an MV circuit here. Bees are an MV hobby."
 			]
 			icon: "productivebees:advanced_oak_beehive"
 			id: "0CB810A94D49A9ED"
@@ -137,7 +137,7 @@
 		{
 			dependencies: ["5723368F9FCD9CCD"]
 			description: [
-				"The &6Simulator Upgrade&r keeps the bees indoors while they work, so they stop wandering through your machine rooms. It needs blaze rods, and those come from the MV simulator."
+				"The &6Simulator Upgrade&r keeps the bees inside the hive while they work, and your machine rooms get some peace. It needs blaze rods, and those come from the MV simulator."
 			]
 			icon: "productivebees:upgrade_simulator"
 			id: "4A802166B5E6F521"
@@ -168,7 +168,7 @@
 		{
 			dependencies: ["05376BE98BF2B1E4"]
 			description: [
-				"A material comb gives up its material only in a GregTech &6Centrifuge&r, with some wax and honey on the side. An MV centrifuge covers the Overworld and Nether metals."
+				"A &6material comb&r gives up its material only in a GregTech centrifuge, with some wax and honey on the side. An MV centrifuge covers the Overworld and Nether metals."
 			]
 			icon: "gtceu:mv_centrifuge"
 			id: "3FFE7724EB772829"
@@ -182,7 +182,7 @@
 		{
 			dependencies: ["3FFE7724EB772829"]
 			description: [
-				"Each comb runs at the voltage of the age that opens its material, so the rarer metals want a bigger centrifuge; EMI shows the EU/t."
+				"Each comb runs at the voltage of the age that opens its material. Rarer metals want a bigger centrifuge, and EMI shows the EU/t."
 				"Some only work off-world: ilmenite and titanium combs need a centrifuge on the Moon, and the tungsten ones a centrifuge on Mars."
 			]
 			icon: "gtceu:hv_centrifuge"

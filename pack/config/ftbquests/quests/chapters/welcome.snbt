@@ -11,8 +11,8 @@
 	quests: [
 		{
 			description: [
-				"You wake up on Earth with empty pockets. The plan is to end up at &6Sagittarius A*&r, the black hole in the middle of the galaxy, and each tab of this book gets you a little closer."
-				"The book never locks a recipe. For the how, hover an item in EMI and press R; U shows what it's used in. Lost the book? Paper and a plank make another."
+				"You wake up on Earth with empty pockets. The plan is to end up at Sagittarius A*, the black hole in the middle of the galaxy, and each age in this book gets you a little closer."
+				"Nothing in it locks a recipe. EMI covers the how: R on an item shows how it's made, U what it's used in. Lost the book? Paper and a plank make another."
 			]
 			icon: "ftbquests:book"
 			id: "69BDA9FBB0EB66F2"
@@ -30,7 +30,7 @@
 		{
 			dependencies: ["69BDA9FBB0EB66F2"]
 			description: [
-				"The &6Void Key&r takes you to an empty dimension and leaves a small platform under your feet, so the visit doesn't start with a fall. Use it again to land back where you left the Overworld."
+				"The &6Void Key&r takes you to an empty dimension and leaves a small platform under your feet, which beats falling forever. Use it again to land back where you left the Overworld."
 				"Lose it and a spare is cheap; EMI has the recipe."
 			]
 			icon: "grindless:void_key"
@@ -46,7 +46,7 @@
 		{
 			dependencies: ["69BDA9FBB0EB66F2"]
 			description: [
-				"The &6Flatland Key&r opens a world of flat stone that runs to the horizon, which is exactly what a sprawling factory wants. It works like the Void Key, and a spare is just as cheap."
+				"The &6Flatland Key&r opens a world of flat stone that runs to the horizon. A sprawling factory won't find better ground. It works like the Void Key, and a spare is just as easy to make."
 			]
 			icon: "grindless:flat_key"
 			id: "0348DB79BD43D043"
@@ -116,7 +116,7 @@
 		{
 			dependencies: ["345C4D73090CB5E2"]
 			description: [
-				"Coal veins sit high up in the stone, which is lucky, because you'll burn a lot of it. Smelt the raw ore and feed the coal to furnaces now, to boilers soon, and to the coke oven when steel comes around."
+				"Coal veins sit high in the stone, so you'll find one early. Smelt the raw ore and burn the coal in your furnaces for now. The boilers and the coke oven will be asking for it soon enough."
 			]
 			icon: "minecraft:coal"
 			id: "117BE5D9218C383A"
@@ -163,7 +163,7 @@
 		{
 			dependencies: ["436EF55FE0284C3E"]
 			description: [
-				"GregTech tools stay in the crafting grid and come out a little more worn each time. The hammer comes first: set it above ingots and you get a plate. Get used to plates, because nearly everything from here on wants some."
+				"GregTech tools stay in the crafting grid and come out a little more worn each time. The hammer comes first. Set it above ingots and you get a plate, and get used to plates, because most of what you make from here on wants some."
 			]
 			icon: "gtceu:iron_hammer"
 			id: "132005EEFEDA0317"
@@ -188,8 +188,8 @@
 		{
 			dependencies: ["132005EEFEDA0317"]
 			description: [
-				"Yes, neutronium, on day one. Try not to think about it too hard. That's one of each GregTech tool, none of them wear out in the grid, and the mining ones drop what they break straight into your inventory."
-				"GregTech makes no neutronium mortar, mallet or plunger, so those three come in naquadah and rubber, and they don't break either."
+				"Yes, neutronium, on day one. Try not to think about it too hard. It's one of each GregTech hand tool, none of them ever wear out, and the mining ones drop what they break straight into your inventory."
+				"GregTech never made a neutronium mortar, mallet or plunger. Those three come in naquadah and rubber instead, and they don't break either."
 			]
 			icon: "gtceu:neutronium_wrench"
 			id: "047B55ED9C952BC9"
@@ -570,7 +570,7 @@
 		{
 			dependencies: ["047B55ED9C952BC9"]
 			description: [
-				"Diamonds and redstone live deep. Diamond shares its vein with graphite and coal, and redstone shares one with ruby and cinnabar. The steam macerator wants diamonds, and redstone turns into red alloy and magnetic rods long before LV."
+				"Diamonds and redstone live deep. Diamond shares its vein with graphite and coal, and redstone shares one with ruby and cinnabar. The steam macerator wants diamonds, and redstone ends up as red alloy and magnetic rods before the steam age is out."
 			]
 			icon: "minecraft:diamond"
 			id: "4E808BA706D1C241"
@@ -587,7 +587,7 @@
 			dependencies: ["047B55ED9C952BC9"]
 			description: [
 				"Both come from the copper-tin vein, which runs from the caves up into the hills: chalcopyrite for copper, cassiterite for tin. There's also a cassiterite vein that's nearly all tin. The raw ores smelt straight into ingots."
-				"Tooltips carry the formula, in case you were wondering why tin says Sn."
+				"Tooltips carry the formula, and the Sn on tin is Latin, not a typo."
 			]
 			icon: "minecraft:copper_ingot"
 			id: "66595C41CAF3204F"
@@ -620,7 +620,7 @@
 			dependencies: ["3760F1805DB4C916"]
 			description: [
 				"Copper and tin dust mixed in the grid make bronze dust; EMI has the ratio. Smelt it and hammer the ingots into plates."
-				"The whole steam age is built from bronze, and that's the next tab, so make more than you think you need. Later the steam alloy smelter makes it straight from ingots and wastes less."
+				"The steam age is built out of bronze, so expect to come back for more. Later the steam alloy smelter makes it straight from ingots and wastes less."
 			]
 			icon: "gtceu:bronze_ingot"
 			id: "3207813527EE1FBD"

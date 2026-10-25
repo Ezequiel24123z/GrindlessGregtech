@@ -13,7 +13,7 @@
 			dependencies: ["39A5A5CC76591697"]
 			description: [
 				"MV is where the factory stops fitting in one room and the lines start feeding each other. The gas off the silicon furnace ends up as methanol, for one."
-				"It's also your first trip off the map. The End has veins worth the journey."
+				"It also takes you past the Nether, to the End, for veins worth the trip."
 			]
 			icon: "gtceu:mv_machine_hull"
 			id: "055851443092A93B"
@@ -28,7 +28,7 @@
 		{
 			dependencies: ["51BBBA6F37785CD7"]
 			description: [
-				"Ruby from the deep redstone vein splits into chromium and aluminium in the electrolyzer. Now that you have MV power, bauxite becomes a second road to aluminium."
+				"Ruby from the deep redstone vein splits into chromium and aluminium in the electrolyzer. Now that you have MV power, bauxite gives you aluminium too."
 			]
 			icon: "gtceu:chromium_ingot"
 			id: "3EB82BACA3DFF6DB"
@@ -44,8 +44,8 @@
 		{
 			dependencies: ["3EB82BACA3DFF6DB"]
 			description: [
-				"Iron, aluminium and chromium, mixed and then melted in the blast furnace, which now wants two MV energy hatches. The hot ingot cools in a chemical bath, and wound into coils it takes the furnace hot enough for silicon."
-				"Yes, the blast furnace again. It's going to be that kind of game."
+				"Iron, aluminium and chromium, mixed and then melted in the blast furnace, which now wants two MV energy hatches. The hot ingot cools in a chemical bath."
+				"Wound into coils, it goes back into the furnace that made it, and now that furnace is hot enough for silicon."
 			]
 			icon: "gtceu:kanthal_coil_block"
 			id: "5DC39DF3C1563B6B"
@@ -58,7 +58,7 @@
 		{
 			dependencies: ["3EB82BACA3DFF6DB"]
 			description: [
-				"Mostly steel, with a little vanadium and chromium. The cutter's saw blade is made of it, and so is the drill bit that can reach the End veins, so make plenty."
+				"Mostly steel, with a little vanadium and chromium. The cutter's saw blade is made of it, and so is the drill bit that can reach the End veins."
 			]
 			icon: "gtceu:vanadium_steel_ingot"
 			id: "74057E6BDC378944"
@@ -71,7 +71,7 @@
 		{
 			dependencies: ["5DC39DF3C1563B6B"]
 			description: [
-				"Iron with chromium, manganese and nickel, through the blast furnace on its two MV hatches. The HV hull and the HV motor are made of it, so the cleanroom waits on it too."
+				"Iron with chromium, manganese and nickel, through the blast furnace on its two MV hatches. The HV hull and the HV motor are made of it, and the cleanroom needs both."
 			]
 			icon: "gtceu:stainless_steel_ingot"
 			id: "24DEACCFA4DCD216"
@@ -84,7 +84,7 @@
 		{
 			dependencies: ["055851443092A93B"]
 			description: [
-				"The same five parts, one size up, with aluminium and cupronickel where iron and copper used to be. Stock up; the rest of MV is built from them."
+				"The same five parts, one size up, with aluminium and cupronickel where iron and copper used to be. The rest of MV is built from them."
 			]
 			icon: "gtceu:mv_electric_motor"
 			id: "51BBBA6F37785CD7"
@@ -103,7 +103,8 @@
 		{
 			dependencies: ["74057E6BDC378944"]
 			description: [
-				"The silicon line needs both. The &6Cutter&r runs on a vanadium steel saw blade, and the &6Laser Engraver&r's emitter needs a flawless emerald, which the Nether's beryllium vein provides."
+				"The silicon line needs both. The &6Cutter&r runs on a vanadium steel saw blade, and the &6Laser Engraver&r's emitter needs a flawless emerald."
+				"The Nether's beryllium vein has the emeralds, and the sifter finds the flawless ones."
 			]
 			icon: "gtceu:mv_laser_engraver"
 			id: "6213116B3B6723B8"
@@ -138,8 +139,8 @@
 		{
 			dependencies: ["51BBBA6F37785CD7"]
 			description: [
-				"The drill family's MV member: the same samples, many more bores per hatch. One MV hatch keeps it busier than two LV hatches ever kept the last one."
-				"Give it a vanadium steel bit and it can reach the End veins as well."
+				"Same samples as the LV drill, and many more bores: one MV hatch keeps it busier than two LV hatches ever kept the last one."
+				"Put a vanadium steel bit in the bus and drilling fluid in the tank, and it reaches the End veins too."
 			]
 			icon: "gtceu:mv_vein_drill"
 			id: "430CFDDFCF9174C1"
@@ -184,8 +185,8 @@
 		{
 			dependencies: ["5DC39DF3C1563B6B"]
 			description: [
-				"GregTech's own silicon, at last: silicon dioxide and carbon in a blast furnace that only gets hot enough with Kanthal coils. The ingot comes out hot and needs a dip in the chemical bath."
-				"Keep the carbon monoxide it gives off. It's poisonous, so it goes in a tank, and the methanol line takes it later."
+				"This is GregTech's own silicon. Silicon dioxide and carbon go into a blast furnace that only gets hot enough with Kanthal coils, and the ingot comes out hot and needs a dip in the chemical bath."
+				"Keep the carbon monoxide it gives off. It's poisonous and goes in a tank, and the methanol line takes it later."
 			]
 			icon: "gtceu:silicon_ingot"
 			id: "7C7BAECAD00C19E7"
@@ -225,7 +226,7 @@
 			dependencies: ["086C8CD2541ED490"]
 			description: [
 				"The laser engraver prints a circuit pattern onto the wafer, and the lens colour decides which one: red for ILC, green for RAM. The cutter then dices the printed wafer into chips."
-				"You'll want both in stock from here to HV."
+				"Both go into every integrated circuit until HV."
 			]
 			icon: "gtceu:ilc_chip"
 			id: "4A6B8F971E17C847"
@@ -241,7 +242,7 @@
 		{
 			dependencies: ["51BBBA6F37785CD7"]
 			description: [
-				"Many more bores per hatch than the LV one, and a taste for carbon dioxide. Feed it CO2 and the crops come in half again as big, with oxygen back for the blast furnace."
+				"Many more crops at once than the LV one, and it takes carbon dioxide on top of the fertilizer: the harvest grows by half, with oxygen back for the blast furnace."
 				"The logs go to pyrolysis and the crops to the brewery."
 			]
 			icon: "gtceu:mv_greenhouse"
@@ -303,7 +304,7 @@
 		{
 			dependencies: ["51BBBA6F37785CD7"]
 			description: [
-				"GregTech's rig pumps oil, gas or brine from the fluid vein under it. Veins never run dry in this pack, and the Flatlands and the Void have oil and gas too, so pick a spot once and leave it there."
+				"GregTech's rig pumps oil, gas or salt water from the fluid vein under it. Veins never run dry in this pack, and the Flatlands and the Void have oil and gas too, so pick a spot once and leave it there."
 			]
 			icon: "gtceu:mv_fluid_drilling_rig"
 			id: "1A38798F23E8EA97"
@@ -332,7 +333,7 @@
 		{
 			dependencies: ["1A38798F23E8EA97"]
 			description: [
-				"Brine comes from the rig if your base sits over an ocean; anywhere else, salt and water in the mixer do the job. The electrolyzer splits it into sodium hydroxide, chlorine and hydrogen."
+				"Salt water comes from the rig if your base sits over an ocean; anywhere else, salt and water in the mixer do the job. The electrolyzer splits it into sodium hydroxide, chlorine and hydrogen."
 				"The chlorine goes into PVC and the hydrogen into methanol."
 			]
 			icon: "gtceu:lv_electrolyzer"
@@ -372,7 +373,7 @@
 		{
 			dependencies: ["0D69D5BBC371A5B7"]
 			description: [
-				"The small parts the integrated circuits want. Transistors need silicon and polyethylene, which is why they wait for the plastic, and the resistors are carbon this time instead of resin."
+				"The small parts the integrated circuits eat by the handful. Transistors need silicon and polyethylene, and the plastic only just arrived. The assembler now makes resistors in batches, too."
 			]
 			icon: "gtceu:transistor"
 			id: "6A521D8B1437F9E4"
@@ -436,7 +437,7 @@
 		{
 			dependencies: ["0D69D5BBC371A5B7"]
 			description: [
-				"Hull number three, in stainless steel with polyethylene trim, so both the furnace and the plastic line have to be running."
+				"Hull number three, in stainless steel with polyethylene trim. Both the furnace and the plastic line have to be running for this one."
 			]
 			icon: "gtceu:hv_machine_hull"
 			id: "01AAEC5F1DC1C5EE"
@@ -465,7 +466,7 @@
 		{
 			dependencies: ["1617CBC90D126D2F"]
 			description: [
-				"MV circuits open the next layer of AE2, Applied Flux and the wireless terminals among it. The Applied Energistics tab has the details."
+				"Applied Flux, which stores FE in the network, and the wireless pattern terminals both need MV circuits in this pack. Build whichever you'll actually use."
 			]
 			icon: "ae2:controller"
 			id: "63CD92CD1D3FC989"
@@ -480,7 +481,7 @@
 			dependencies: ["49BA4B42FA5DD586", "01AAEC5F1DC1C5EE", "21B999C2D0EF51A9"]
 			description: [
 				"HV chips can't be made in a dusty factory, so they get a room of their own. Wipe your feet."
-				"The &6Cleanroom&r closes MV. HV is next, and HV ends on the Moon."
+				"The &6Cleanroom&r closes MV. Past it is HV, and at the end of HV, the Moon."
 			]
 			icon: "gtceu:cleanroom"
 			id: "53336232501835EE"
@@ -523,7 +524,7 @@
 			tasks: [{ id: "3F8A1D6C02B7E945", item: "grindless:lunar_landing_chart", type: "item" }]
 			title: "Lunar Landing-Site Chart"
 			x: 6.0d
-			y: -3.0d
+			y: -4.5d
 		}
 		{
 			dependencies: ["44031073B1E3A181"]
@@ -567,7 +568,7 @@
 		{
 			dependencies: ["4B8E1D73A0F25C69"]
 			description: [
-				"Fires rocket engines while they're bolted to the ground, which is the right order to do things in. Nothing flies in this pack until it has burned here first."
+				"Fires rocket engines while they're bolted to the ground, which is the right order to do things in. Your first rocket's thrusters and its motor both get a burn here before they're allowed to fly."
 			]
 			icon: "gtceu:engine_test_stand"
 			id: "115744A9113F8B38"
@@ -582,7 +583,7 @@
 		{
 			dependencies: ["51BBBA6F37785CD7", "47892302FAEA3244"]
 			description: [
-				"The blaze model you printed in LV finally gets to run, in an MV simulator. Blaze rods lead to ender eyes, and ender eyes lead to the End."
+				"The blaze model you printed in LV gets to run now, in an MV simulator. Blaze rods lead to ender eyes, and ender eyes lead to the End."
 			]
 			icon: "minecraft:blaze_rod"
 			id: "3C356A1439744E15"
@@ -598,7 +599,7 @@
 		{
 			dependencies: ["3C356A1439744E15"]
 			description: [
-				"No crafting-table eyes in this pack. Blaze rods melt into liquid blaze in the extractor, and an ender pearl soaked in it in the MV chemical bath comes out as an eye."
+				"No crafting-table eyes in this pack. The extractor melts blaze rods into liquid blaze, and the MV chemical bath soaks an ender pearl in it until it comes out as an eye."
 			]
 			icon: "minecraft:ender_eye"
 			id: "3DDBE9267C197FEE"
@@ -608,7 +609,7 @@
 				{ id: "7D0735D4C3007874", item: "gtceu:mv_chemical_bath", type: "item" }
 			]
 			title: "Ender Eye"
-			x: 8.0d
+			x: 6.0d
 			y: -3.0d
 		}
 		{
@@ -622,12 +623,12 @@
 			tasks: [{ id: "5AA55A133132E331", item: "grindless:end_key", type: "item" }]
 			title: "End Key"
 			x: 8.0d
-			y: -6.0d
+			y: -4.5d
 		}
 		{
 			dependencies: ["756117B334515EA3", "30D3D68203F455F9"]
 			description: [
-				"Bring back raw ore from each End vein and make the samples at home, same as ever. The MV drill runs them with a vanadium steel bit and drilling fluid in the tank, and platinum, palladium and zirconium are among what comes up."
+				"Bring back raw ore from each End vein and make the samples at home, same as ever. The MV drill runs them with a vanadium steel bit and drilling fluid in the tank, and platinum, palladium and zirconium come up with the rest."
 			]
 			icon: "grindless:vein_sample_sheldonite"
 			id: "004525B795119B1B"
@@ -645,7 +646,7 @@
 		{
 			dependencies: ["51BBBA6F37785CD7"]
 			description: [
-				"Eleven shaping machines behind one controller, bender, wiremill, lathe and cutter among them, and you pick the mode in the controller. It runs a few recipes at once at full price each, so it saves floor space, not power."
+				"Eleven shaping machines share one controller, from the bender and wiremill to the lathe and cutter, and its mode tab picks which one it is. It runs a few recipes at once, each at full price: less floor space, same power bill."
 			]
 			icon: "gtceu:universal_processing_factory"
 			id: "627E186404378CB4"
@@ -671,7 +672,7 @@
 		{
 			dependencies: ["661F318CAF9FAB23"]
 			description: [
-				"Seven ways of taking things apart in one hall, from the centrifuge and electrolyzer to the electromagnetic separator. Give it an output hatch for each gas a recipe makes."
+				"Seven ways of taking things apart in one hall, from the centrifuge and electrolyzer to the electromagnetic separator. Each output hatch holds one fluid, so give it one for every fluid a recipe makes."
 			]
 			icon: "gtceu:universal_separation_factory"
 			id: "12DED2DD9F460B1E"
@@ -697,8 +698,7 @@
 		{
 			dependencies: ["334DF899A63DBB13"]
 			description: [
-				"Throw in a mixed batch and it smelts everything that shares a cooking time in one run, dusts and dinner alike."
-				"Better coils let it take more at once, and the number keeps doubling as the coils improve."
+				"Throw in a mixed batch and it smelts everything that shares a cooking time in one run, dusts and dinner alike. Each better coil doubles how much it takes at once."
 			]
 			icon: "gtceu:advanced_multi_smelter"
 			id: "1DAF5DAC3FE8DF4E"
@@ -733,7 +733,7 @@
 			tasks: [{ id: "7329F59F90310654", item: "gtceu:weather_controller", type: "item" }]
 			title: "Weather Controller"
 			x: 6.0d
-			y: -4.5d
+			y: -6.0d
 		}
 	]
 	subtitle: ["The End for ore, silicon and plastics at home, and a landing site picked by radar."]
