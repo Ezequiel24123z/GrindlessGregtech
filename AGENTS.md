@@ -24,6 +24,11 @@ Gregtech Grindless is a GregTech Modern pack (Minecraft 1.20.1, Forge) in which 
 4. Each era has at least one of our multiblocks that gains something: speed, throughput, a recipe that is impossible on a small scale, or several steps in one.
 5. Quests are short, in English, give a small reward, and never block recipes. Before writing a chapter, look at how other packs solve it. Copy and adapt only from packs whose license allows it (see `CREDITS.md`), always with attribution.
 6. If this file conflicts with what GTM 7.5.3 does, GTM takes precedence.
+7. Each era is clearly bigger and more complex than the one before. It has more of our progression multiblocks (about ×1.35 per era from EV on: EV 10 or more, IV 13–14, LuV 18…), more process lines, and more crossings with lines from two or more eras back.
+   - Progression multiblocks add a recipe, route or line that did not exist.
+   - Parallel versions of machines that already exist do not count toward the target, such as the steam families and Leisure's other convenience multiblocks. They are quality of life.
+   - Steam Age to HV is not redone; it only gets small additions. Targets and audit are in `docs/research/complexity.md`.
+8. Power is generous but never free. Boilers make ×8 steam and every generator gets twice the EU per unit of fuel (in the style of GregTech Leisure, see `DECISIONS.md`). Later eras, post-UHV included, keep that generosity with the same fuels, or with better fuels and more complex plants. No energy from nothing.
 
 ## KubeJS
 
