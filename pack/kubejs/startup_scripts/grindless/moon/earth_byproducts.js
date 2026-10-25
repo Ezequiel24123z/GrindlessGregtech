@@ -1,7 +1,8 @@
 // -----------------------------------------------------------------------------------------------
-// Earth ore byproducts without titanium (DECISIONS.md 2026-10-24: titanium comes only from the Moon). GTM's aluminium ore gave
-// ilmenite and rutile and its bauxite gave rutile (common/data/materials/MaterialFlagAddition.java); data/grindless/tables/
-// offworld_only.json ("byproducts") says what they give instead. GTM builds every ore-processing recipe of a material from these lists
+// Earth ore byproducts without titanium (DECISIONS.md 2026-10-24: titanium comes only from the Moon) or uraninite (2026-10-25:
+// radioactives wait for IV). GTM's aluminium ore gave ilmenite and rutile, its bauxite gave rutile and its thorium (the Nether's
+// beryllium vein) gave uraninite (common/data/materials/MaterialFlagAddition.java); data/grindless/tables/offworld_only.json
+// ("byproducts") says what they give instead. GTM builds every ore-processing recipe of a material from these lists
 // when the server loads (macerator, ore washer, thermal centrifuge, chemical bath, sifter) and the MV Ore Plant reads those
 // recipes, so the change reaches all of them from here.
 // GTCEuStartupEvents.materialModification runs after GTM's own materials and after every addon's MaterialEvent, so nothing
@@ -40,6 +41,6 @@
       ore['setOreByProducts(java.util.Collection)'](list)
       changed.push(name + ' -> ' + table.byproducts[name].join(', '))
     })
-    console.info('[grindless/moon] ore byproducts without titanium: ' + changed.join('; '))
+    console.info('[grindless/moon] Earth ore byproducts (no titanium, no uraninite): ' + changed.join('; '))
   })
 })()

@@ -104,12 +104,12 @@ Built on 2026-10-25 (run `b1-ev-tripod-2`, on the Moon).
 
 ### The rest
 
-- **Earth.** The HV drill still covers the Overworld, Nether and End, and there is no EV drill on Earth (ore is plentiful: the bottleneck is processing). HV fluid drill (EV hull, ×16) for crude and gas. Air, noble gases, chlorine and acids, as in HV.
+- **Earth.** The HV drill still covers the Overworld, Nether and End, and there is no EV drill on Earth (ore is plentiful: the bottleneck is processing). The MV fluid drill covers crude and gas; GTM's HV fluid drill (×16) takes tungsten carbide gears, so it arrives with Mars, at the end of EV. Air, noble gases, chlorine and acids, as in HV.
 - **Moon.** The regolith is the drills' stone (GCYR moon cobblestone and the other lunar stones) ground in any macerator into `gtceu:lunar_regolith_dust`, and the cell converts it into O₂, metals, volatiles and bricks; the cryogenic plant liquefies whatever is needed.
 - **Mars.** CO₂ from the air, for the processor; the ice goes to the network for IV.
 - **Creatures.** `mobs.json` gains two rows (2026-10-25):
   - **Wither skeleton,** at HV: 480 EU/t, 10 s, 100 mB of biomass + 1 tricalcium phosphate, printed from 8 nether bricks + 8 bone blocks. Circuit 1 gives bones, coal and a skull at 10%; circuit 2 gives only the skull.
-  - **The wither,** at EV: 1,920 EU/t, 30 s, 400 mB of biomass, printed from 3 wither skeleton skulls. It gives 1 Nether Star per cycle, saved for IV.
+  - **The wither,** at EV: 1,920 EU/t, 30 s, 400 mB of biomass, printed from 3 wither skeleton skulls. It gives 1 Nether Star per cycle, saved for IV. The EV creature simulator that makes it takes an HV emitter and an HV sensor (EV's need the quantum eye, which waits for IV).
 - **Closing the loop:** crude, air, salt and Earth ores come from drills; Ilmenite and regolith come from the lunar tripod; Scheelite, rare earths and ice come from the Martian one. The rest is EU.
 
 ## Our multiblocks
@@ -341,7 +341,8 @@ New rules in `tools/analysis/tiers/ev.json`:
 - **Helium-3 from the Moon; Samarium and Deuterium from Mars.** Removed from Earth: `helium_separation` and the He-3 from Nether air (with HV's Moon). On 2026-10-25 also the Samarium (above) and the Deuterium: `hydrogen_separation` is removed, and both ender air recipes (the HV centrifuge and the IV distillation) lose their deuterium. Tungsten from bees only comes out on Mars (`offworld_only.json` `worlds.mars.combs`).
   - **Verified on the v0.5.4 + wave B dump:** only tritium separation and fusion (LuV) use deuterium, so nothing has a source until IV's heavy water from the Martian ice. Tungsten from GTCA's thermal reactor (grossular froth, 30,720 EU/t) is a LuV line (`allowedLate`); alloy decompositions only give back what went in.
   - `gg_test_moon.js` now scans for each world: `earth_mars` and `bees_mars`.
-- **Nothing in EV requires anything from IV.** No Tungsten before Mars (the tier 2 rocket, the suit, the tripod and its bit, the antenna and the Martian half go without it), no radioactives or Quantum Eyes (EV sensors, emitters and field generator stay in IV), no IV circuits, no naquadah, Iridium or Osmium.
+- **Nothing in EV requires anything from IV.** No Tungsten before Mars (the tier 2 rocket, the suit, the tripod and its bit, the antenna and the Martian half go without it), no radioactives or Quantum Eyes (EV sensors, emitters and field generator stay in IV; the EV creature simulator, the antenna and GTM's EV circuit assembler, which the nano circuits of the gate need, take HV ones), no IV circuits, no naquadah, Iridium or Osmium.
+  - **Radioactive leaks cut on Earth (2026-10-25).** GTM's thorium ore (the Nether's beryllium vein) gave uraninite, which opened uranium, radon and the quantum eye from LV on; it now gives lead and rare earth (`offworld_only.json`, "byproducts"). Liquid ender air (IV voltage, which two EV hatches reach) loses its radon along with its deuterium. The other ores with a uraninite byproduct (uraninite, pitchblende, plutonium) are radioactive themselves and held back until IV.
 - **EV in two substages.** The validator splits the era into *Moon* and *Mars*: nothing on the way to Mars can require Tungsten, Samarium or Deuterium.
 - **Site machines.** Every recipe for the cell, the cryogenic plant, the solar array, the antenna and the lunar veins carries `.dimension('gcyr:luna')`; those for the processor and the Martian veins carry `.dimension('gcyr:mars')`. The fuel recipes carry the five air dimensions (ORed; the validator ORs them too since 2026-10-25, `lib/model.mjs`).
 
