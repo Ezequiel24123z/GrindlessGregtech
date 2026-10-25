@@ -39,7 +39,7 @@ Gregtech Grindless is a GregTech Modern pack (Minecraft 1.20.1, Forge) in which 
 - **Repository language:** everything in the repository is in English: docs, code comments, tool messages, data notes and commit messages (requested by the user). The only Spanish allowed is the `es_es` game translation (lang files and the `es_es` blocks of `*_lang.js`).
 - **Integration:** recipes from other mods that break progression are redone so that they go through GregTech machines.
 - **Rhino (KubeJS 6):** inside functions or callbacks that run more than once, use `var`, not `const`/`let`. Otherwise you get "redeclaration of var".
-- **Vanilla names (KubeJS 2001.6.5):** some members are renamed for the scripts, and the Mojang name does not exist: `getYRot`/`getXRot` are `getYaw`/`getPitch`, `getStringUUID` is `getStringUuid`, `tickCount` is `age` and `Level#getGameTime` is `getTime`; `Entity#level()` is hidden (use `getLevel()`). Full list in `tools/test/README.md`. Anything that uses a player is tested in the `client` suite.
+- **Vanilla names (KubeJS 2001.6.5):** some members are renamed for the scripts, and the Mojang name does not exist: `getYRot`/`getXRot` are `getYaw`/`getPitch`, `getStringUUID` is `getStringUuid`, `tickCount` is `age`, `Level#getGameTime` is `getTime` and `ItemStack#getTag` is `getNbt`; `Entity#level()` is hidden (use `getLevel()`). Full list in `tools/test/README.md`. Anything that uses a player is tested in the `client` suite.
 - **GTM 7.5.3 traps** (each one cost a bench run):
   - **Recipe ids:** the GT recipe builder puts the recipe type in front of the id you pass: `event.recipes.gtceu.assembler('grindless:x')` is saved as `grindless:assembler/x`.
   - **Generator multiblocks** go through `startup_scripts/grindless/lib/generators.js`.
@@ -51,7 +51,7 @@ Gregtech Grindless is a GregTech Modern pack (Minecraft 1.20.1, Forge) in which 
   - **`Math.PI` is undefined in this Rhino** (KubeJS 2001.6.5); `Math.cos`, `Math.floor` and `Math.round` work. Code that uses it silently becomes NaN, so use a numeric literal or precomputed bounds.
   - **Weather is shared.** Every dimension with sky light takes the Overworld's rain and thunder (vanilla shares the flags), and full rain alone makes `Level#isNight()` true at noon, which is GTM's daytime condition. Earth's dimensions keep the weather; `space/airless_weather.js` keeps every dimension of the other planets in `planets.json` dry.
   - **Overloads Rhino can't pick.** `RecipeDB#find(holder, predicate)` with a JS function throws "the choice of Java method ... is ambiguous". Call the overload by its signature: `db['find(com.gregtechceu.gtceu.api.capability.recipe.IRecipeCapabilityHolder,java.util.function.Predicate)'](ctrl, fn)`.
-  - **Recipe conditions are checked on every tick of a run.** A day or night condition can stall a run halfway, so use a run-start modifier (`alwaysTryModifyRecipe`) for time-of-day pricing. See `ev/cryogenic_plant.js`.
+  - **Recipe conditions are checked on every tick of a run.** A day or night condition can stall a run halfway, so use a run-start modifier (`alwaysTryModifyRecipe`) for time-of-day pricing. See `ev/cryogenic_plant.js`. GTM also restarts a just-finished recipe without the modifier for one tick, so a run-start price needs `.afterWorking(G.freshRun.afterWorking(name))` (`lib/fresh_run.js`) to be fresh at every start.
   - **A modifier alone doesn't stop a run.** GTM 7.5.3 restarts an idle machine's cached last recipe without calling the recipe modifier, and with voiding on its start check skips the room for the voided outputs. A machine that must keep its outputs refuses voiding with `lib/no_voiding.js` in both places: `G.noVoiding.modifier(opts, next)` as the modifier and `.beforeWorking(G.noVoiding.beforeWorking(opts))`.
   - **One recipe per lookup path.** GTM's recipe lookup keeps one recipe per ingredient path, so two recipes of one type with the same inputs collide even when their conditions differ: the one left out never runs, though EMI shows it (the log says `failed to add recipe from staging into lookup DB`). A recipe whose inputs are a prefix of another's can hide it too. Give every recipe its own circuit or input, or make one recipe with ORed conditions when the result is the same. The bench test `gg_test_recipe_lookup` asks GTM's lookup for every recipe and fails on any collision of ours.
 
@@ -133,7 +133,10 @@ Gregtech Grindless is a GregTech Modern pack (Minecraft 1.20.1, Forge) in which 
   | heavy-water plant | 10752–10815 (roof at Y 112) |
   | fluorspar kiln | 11008–11071 |
   | Venus | 11264–11327: on Venus (`gcyr:venus`) from one block above the highest ground (Y 162 for ground Y 156–161) up 19 blocks, and a gas collector at Y 250; on Mars (`gcyr:mars`) the same X and Z (slab at Y 163) |
+  | Mercury | 11520–11583 on Mercury (`gcyr:mercury`), built on Y 200 (the band's highest ground is Y 173) |
   | tritium removal facility | 12032–12095: the Moon at Y 198–214 and the Overworld at Y 98–112 |
+  | travel and network | 12288–12351: the Overworld at Y 98–112 and Venus (`gcyr:venus`) at Y 198–214 |
+  | mass production | 12544–12607 (roof at Y 112) |
 
   For a new test, keep going in steps of 256.
 

@@ -46,6 +46,8 @@ Generators for the pack's own textures. Everything is procedural 16x16 pixel art
 | `Build-VenusTextures.ps1` | Writes the faces of the IV Venus package (IV-B1): the pressurized vein drill, the Venus heat engine and the Venus acid works (`multiblock/pressurized_vein_drill/`, `multiblock/venus_heat_engine/`, `multiblock/venus_acid_works/`). `-Only drill,engine,works`, `-Preview <png outside the repo>` (optional `-PtfeCasing <png>`, `-TungstenCasing <png>`) and `-Credits` (their 15 CREDITS rows). |
 | `Build-TritiumRemovalTextures.ps1` | Writes the IV tritium removal facility's face (`multiblock/tritium_removal_facility/`). `-Only facility`, `-Preview <png outside the repo>` and `-Credits` (its 5 CREDITS rows). |
 | `Build-IVFoundationTextures.ps1` | Writes the shared IV textures (IV-A1): fuel cycle items, PuBe source, RTG pellet, resin, platinum gauze, inner planets chart, Venus and Mercury vein samples, the Hermean heat shield brick (the Mercury casing texture) and the thin-film panel. `-Only`, `-Preview <png outside the repo>`, `-Credits`. |
+| `Build-IVMercuryTextures.ps1` | Writes the faces of the IV Mercury machines (IV-B2): the Mercury vein drill, the Mercury solar works, the Mercury solar field and the interferometer (`multiblock/mercury_vein_drill/`, `mercury_solar_works/`, `mercury_solar_field/`, `interferometer/`), and the interferometer's three data orbs (`item/lunar_vlbi_recording`, `outer_system_chart`, `sagittarius_a_star_signal`). `-Only drill,works,field,interferometer,items`, `-Preview <png outside the repo>` and `-Credits` (its 23 CREDITS rows). |
+| `Build-TravelNetworkTextures.ps1` | Writes the Venusian and Hermean Quantum Seeds (items and `.mcmeta`) and the RTG cell's overlays (`block/machines/rtg/`). `-Only seeds,rtg` and `-Credits` (its 11 CREDITS rows). |
 
 ## Regenerate
 
@@ -495,3 +497,74 @@ powershell -NoProfile -ExecutionPolicy Bypass -File tools\assets\Build-VenusText
   - `$WorksLines` holds each line's pulse colour and phase.
   - `$WorksWaterLamp` and `$WorksOxygenLamp` are the two lamps.
 - **Glow zones:** `$DrillGlowZone`, `$EngineGlowZone` and `$WorksGlowZone` say where light may come from. A new light outside them fails the check, so add it there as well.
+
+### Mercury (IV-B2)
+
+The faces of the four Mercury machines and the interferometer's data orbs, with the IV faces' method, steel ramp, bezel and lamp ramp (the helpers are copied from `Build-HeavyWaterPlantTextures.ps1`; the drill bit is `Draw-Helix`, copied from `Build-EVTextures.ps1`). Three faces are drawn for the Hermean heat-shield brick, which is pale, so each face is a whole dark panel inside the 1 px casing ring. The solar works is drawn for GTM's robust tungstensteel casing.
+
+```powershell
+powershell -NoProfile -ExecutionPolicy Bypass -File tools\assets\Build-IVMercuryTextures.ps1
+powershell -NoProfile -ExecutionPolicy Bypass -File tools\assets\Build-IVMercuryTextures.ps1 -Only drill,items -Credits
+powershell -NoProfile -ExecutionPolicy Bypass -File tools\assets\Build-IVMercuryTextures.ps1 -Preview C:\path\iv-mercury.png
+```
+
+- `-Only` accepts `drill`, `works`, `field`, `interferometer` and `items` (comma-separated, also with `-File`).
+- `-Preview` (outside the repo, never shipped) writes an x8 review sheet. Each face is shown on its casing: the real brick PNG, or for the works a robust tungstensteel stand-in drawn by the script. The rows are idle, the 8 frames and a dark room; the raw layer on a checker around the emissive layer alone; and a 3x3 wall at x8, x2 and x1. Last, the three orbs at x8 and x2.
+- All faces: 8 frames, `frametime` 4.
+
+| File (under `textures/`) | Drawn on | Notes |
+|---|---|---|
+| `block/multiblock/mercury_vein_drill/` (`overlay_front`, `_active` and `_active_emissive`, with `.mcmeta`) | `grindless:hermean_heat_shield_brick` | A steel panel with a round window onto the tungstensteel bit (dark blue-grey) bitten into the rock. Beside it, the day/night lamp pair (an orange sun plus and a pale blue moon crescent); along the foot, the liquid-nitrogen frost gauge, a pale cyan glass tube. Working: the helix turns an eighth of a turn per frame, the point glints hot and throws sparks, frost flickers on the gauge and a puff of cold vapour pops over it, the sun lamp is lit and the moon lamp blinks once a loop. Idle: the bit still, no frost, both lamps dark. Emissive: the point, its sparks, the heated rock beside it and the lit lamps. |
+| `block/multiblock/mercury_solar_works/` (the same three) | GTM's robust tungstensteel machine casing | A heavy sight port in a tungstensteel bezel onto the focal furnace: a crucible on the hearth, the charge where the focus lands, and two thin sun rays from the heliostats coming in from the port's top corners. Under it, the glass evaporation bell and two lamps (focus, bell). Working: the spot breathes from white to yellow under its halo, a bright pulse runs down each ray while the rest shimmers, and the focus lamp is lit. Idle: a dark port, a cold charge, no rays. Emissive: the spot, its halo, the rays and the lamp. |
+| `block/multiblock/mercury_solar_field/` (the same three) | `grindless:hermean_heat_shield_brick` | A control panel: a thin-film panel icon tilted towards the sun on a leg and a strut, the sun lamp and a vertical power bar. The icon is indigo-black GaAs in 3 px strips parted by a silver busbar (the look of `block/iv/thin_film_cells.png`) in the tungstensteel frame's ramp. Working: the sun lamp is lit, the bar fills from the bottom with its top cell brightest and then the full bar pulses, and a glint sweeps across the film. Idle: lamp off, empty bar. Emissive: the lamp, the lit bar cells and the glint. |
+| `block/multiblock/interferometer/` (the same three) | `grindless:hermean_heat_shield_brick` | Two dish glyphs over the correlator screen (dark green-black glass in a raised steel bezel) and the status lamp. Working: the interference fringes, a packet of bright and dark bands, scroll one pixel a frame and sharpen as the correlation builds up; a trace blip runs along the bottom of the screen; the lamp is lit. Idle: a dark screen. Emissive: the lit fringes, the trace and the lamp. |
+| `item/lunar_vlbi_recording.png`, `item/outer_system_chart.png`, `item/sagittarius_a_star_signal.png` | | The data orb, our own drawing: a glassy blue-violet crystal sphere lit from the top left, with a pale caustic on its far side, in a small steel cradle. One silhouette, three marks: a pale grey crescent Moon with the rest of its disc in earthshine; banded orange Jupiter with its red spot and four asteroid dots of the belt; and a ring of orange-gold light around a dark shadow, brightest along the bottom (the 2022 Event Horizon Telescope image), with a faint radio wave front. |
+
+- The checks fail the run:
+  - sizes: 16x16 faces and items, 16x128 strips; binary alpha; no pure black; the pack's `.mcmeta` bytes;
+  - faces: an empty casing ring around a panel without holes; 8 different active frames (no frame repeats another, the loop seam included); an idle face that is not the first active frame;
+  - emissive layers: identical to the colour layer of the same frame, only where the face has lights, lit in every frame;
+  - items: neither empty nor fully opaque; the three orbs on one silhouette, with three different marks.
+- The output is identical byte for byte on every run.
+
+#### How to retouch (Mercury)
+
+- Shared ramps: `$SteelSpec` (`A`-`J`, bezels and boards), `$LampSpec` (`M`-`S`), and `$SunLampSpec` with `$SunGlyph` (the sun lamp of the drill and the field: `u`/`v` off, `U`/`Y` lit). `New-Pal` fails on a repeated letter.
+- Drill: `$DrSpec` and `$DrBase`.
+  - The bit: `$DrBitRamp` with `$DrBitX`, `$DrBitTip`, `$DrBitPitch` and `$DrBitStarts`; it is only drawn on the window's inside (`$DrInside`).
+  - What moves: `$DrTipSeq` (the point's glow per frame), `$DrHot`, `$DrSparks`, `$DrMoon` with `$DrMoonFrame` (the blink), and `$DrFrostX0`/`$DrFrostX1` with `$DrPuffX` (the frost).
+- Solar works: `$TsSpec` (tungstensteel `0`-`5`), `$WkCommonSpec`, and `$WkWorkSpec`/`$WkIdleSpec` (the letters that change between working and idle: port, hearth, crucible), with `$WkBase`. What moves: `$WkSpot`, `$WkHalo`, `$WkRayL`/`$WkRayR`, `$WkFocus` (the focus ramp) and `$WkBreath` (the spot's breath per frame).
+- Solar field: `$FdSpec` and `$FdBase` (the film's letters `l m n s t` mark where the glint may run); `$FdLevel` (lit bar cells per frame) and `$FdGlint` (the glint's diagonal per frame).
+- Interferometer: `$IfSpec` and `$IfBase`; `$IfPeriod`, `$IfSharp` (contrast per frame), `$IfEnvSlope` and `$IfToneAt` shape the fringes.
+- Orbs: `$OrbSpec` (glass `0`-`5` and caustic `h`, cradle `a b m n o`), `$OrbCx`, `$OrbCy`, `$OrbR`, `$OrbSpecular` and `$CradleMap`. Each mark (`$MoonMark`, `$JupiterMark`, `$HoleMark`) is a `Spec`, a 5x5 `Rows` map drawn at `$MarkOrigin` and `Extra` pixels. Marks must stay inside the sphere (the script throws otherwise), so the silhouette check keeps holding.
+
+### Travel and network
+
+The far halves of the inner bridges and the RTG cell, with the AE2 seed method (`Build-AE2InterplanetaryTextures.ps1`): every pixel
+drawn by code, deterministic, binary alpha, no pure black.
+
+- **Seeds:** the sealed ampoule of the lunar and Martian seeds, with the teal ender pearl and the two violet sparks of the entangled
+  pair, under a cap of the planet's ground. Venus: ochre regolith with sulfur specks, a pale sulfur-yellow glow crossed by two cloud
+  bands that drift down; the sparks turn the Moon's way. Mercury: dark grey rock with graphite glints, the Sun's white glare with a
+  day-night terminator sweeping across; the sparks turn the Martian way. 8 frames, `frametime` 3; both start an eighth of a turn
+  ahead, so no seed shares another's frames.
+- **RTG cell** (GTM's generator model on the EV hull, which adds the energy-out marker on the front): the top is a round steel cap
+  over the heat source with a 9×9 radiation trefoil and four vents through its rim; while it runs the vents glow a dull red-orange and
+  breathe (4 frames, `frametime` 8, with an emissive layer of only the vents). Side and back: six titanium radiator fins between a
+  root bar and a top bar.
+- Checks (the run fails on any): 16×16 frames, binary alpha, no pure black, 4–8 frames with at least 3 distinct, an emissive layer
+  inside its colour layer.
+
+```powershell
+powershell -NoProfile -ExecutionPolicy Bypass -File tools\assets\Build-TravelNetworkTextures.ps1
+powershell -NoProfile -ExecutionPolicy Bypass -File tools\assets\Build-TravelNetworkTextures.ps1 -Credits
+```
+
+| File (under `textures/`) | Notes |
+|---|---|
+| `item/venusian_quantum_seed.png` + `.mcmeta` | Venusian Quantum Seed (`grindless:venusian_quantum_seed`). |
+| `item/hermean_quantum_seed.png` + `.mcmeta` | Hermean Quantum Seed (`grindless:hermean_quantum_seed`). |
+| `block/machines/rtg/overlay_top.png` | Idle: the cap, the trefoil, four cold vents. |
+| `.../overlay_top_active.png` + `.mcmeta` | The vents glowing, 4 frames. |
+| `.../overlay_top_active_emissive.png` + `.mcmeta` | Only the glowing vents. |
+| `.../overlay_side.png`, `.../overlay_back.png` | The radiator fins. |
