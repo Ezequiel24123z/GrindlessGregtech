@@ -1,6 +1,7 @@
 # gg-common.ps1 - shared helpers for the Gregtech Grindless test harness.
 # Runs on the home test PC (Windows PowerShell 5.1). Dot-sourced by the other remote scripts.
 # Only touches D:\GregtechGrindless\ (override with $env:GG_BASE).
+. (Join-Path $PSScriptRoot 'gg-resource-policy.ps1')
 
 $ErrorActionPreference = 'Stop'
 $ProgressPreference = 'SilentlyContinue'
@@ -33,7 +34,8 @@ if (-not $global:GG) {
         Stages       = (New-Object System.Collections.ArrayList)
         HasLock      = $false
         Slot         = -1
-        Slots        = 2
+        Slots        = 1
+        NativeBudget = $null
         ReserveGb    = 0.0
         JvmStarted   = ''
         LockStarted  = ''
@@ -189,32 +191,58 @@ public class GGRcon : IDisposable
     private TcpClient client;
     private NetworkStream stream;
     private int nextId = 100;
+    private Stopwatch timeoutClock;
+    private int timeoutBudgetMs;
+
+    private void BeginTimeout(int timeoutMs)
+    {
+        if (timeoutMs <= 0) throw new ArgumentOutOfRangeException("timeoutMs");
+        timeoutBudgetMs = timeoutMs;
+        timeoutClock = Stopwatch.StartNew();
+    }
+
+    private int RemainingTimeoutMs()
+    {
+        double left = timeoutBudgetMs - timeoutClock.Elapsed.TotalMilliseconds;
+        if (left <= 0) throw new IOException("RCON operation timeout");
+        return Math.Max(1, (int)Math.Ceiling(left));
+    }
+
+    private void ApplyTimeout()
+    {
+        int left = RemainingTimeoutMs();
+        client.SendTimeout = left;
+        client.ReceiveTimeout = left;
+    }
 
     public static GGRcon Connect(string host, int port, string password, int timeoutMs)
     {
         GGRcon r = new GGRcon();
+        r.BeginTimeout(timeoutMs);
         r.client = new TcpClient();
         r.client.NoDelay = true;
         IAsyncResult ar = r.client.BeginConnect(host, port, null, null);
-        if (!ar.AsyncWaitHandle.WaitOne(timeoutMs))
+        if (!ar.AsyncWaitHandle.WaitOne(r.RemainingTimeoutMs()))
         {
             r.client.Close();
             throw new IOException("RCON connect timeout");
         }
         r.client.EndConnect(ar);
-        r.client.SendTimeout = timeoutMs;
-        r.client.ReceiveTimeout = timeoutMs;
         r.stream = r.client.GetStream();
-        int id = r.nextId++;
-        r.Send(id, 3, password);
-        while (true)
+        try
         {
-            int rid, type; string body;
-            r.Read(out rid, out type, out body);
-            if (rid == -1) throw new IOException("RCON bad password");
-            if (rid == id) break;
+            int id = r.nextId++;
+            r.Send(id, 3, password);
+            while (true)
+            {
+                int rid, type; string body;
+                r.Read(out rid, out type, out body);
+                if (rid == -1) throw new IOException("RCON bad password");
+                if (rid == id) break;
+            }
+            return r;
         }
-        return r;
+        catch { r.Dispose(); throw; }
     }
 
     private void Send(int id, int type, string body)
@@ -229,6 +257,7 @@ public class GGRcon : IDisposable
         w.Write((short)0);
         w.Flush();
         byte[] a = m.ToArray();
+        ApplyTimeout();
         stream.Write(a, 0, a.Length);
         stream.Flush();
     }
@@ -239,6 +268,7 @@ public class GGRcon : IDisposable
         int o = 0;
         while (o < n)
         {
+            ApplyTimeout();
             int r = stream.Read(b, o, n - o);
             if (r <= 0) throw new IOException("RCON connection closed");
             o += r;
@@ -260,7 +290,7 @@ public class GGRcon : IDisposable
     // first reply packet acts as an end-of-reply sentinel (the server answers strictly in order).
     public string Command(string cmd, int timeoutMs)
     {
-        client.ReceiveTimeout = timeoutMs;
+        BeginTimeout(timeoutMs);
         int id = nextId++;
         int sentinel = nextId++;
         Send(id, 2, cmd);
@@ -640,17 +670,15 @@ function Invoke-GGTool {
     return $code
 }
 
-# ---------------------------------------------------------------- slot semaphore (at most N Minecraft JVMs at once)
+# ---------------------------------------------------------------- slot semaphore (one Minecraft JVM globally)
 #
 # A slot is a file created with CreateNew by the run that holds it: runs\.lock (slot 0, the historical single lock,
 # same JSON fields as ever) and runs\.lock.1, runs\.lock.2, ... Holders heartbeat their file (Update-GGLock); a file is
 # stale when its owner is gone or silent for LockStaleMin, and the next waiter reclaims it (and kills the dead run's JVMs).
 # Rules for taking a slot (evaluated by one waiter at a time, see the FIFO tickets below):
-#   - at most min(own -Slots, -Slots of every active holder) runs at once; a holder written by an older harness version
-#     (no "v" field) assumes it is alone, so it counts as exclusive;
-#   - the lowest free index below -Slots is used; the index also selects the run's server/RCON port window;
-#   - a run that would overlap another one needs free RAM >= MinFreeGb, where the RAM that runs still starting their
-#     JVM have yet to allocate (reserveGb, absorbed over RampSec after the JVM starts) is already subtracted.
+#   - always one holder, even if a legacy caller asks for more slots;
+#   - old nonzero slot files are recognized and block new work until their owners finish;
+#   - every run, including the first, needs at least 8 GB available RAM.
 
 function Get-GGSlotPath {
     param([int]$Index)
@@ -758,13 +786,17 @@ function Get-GGFreeRamGb {
         $perf = Get-CimInstance Win32_PerfFormattedData_PerfOS_Memory -ErrorAction Stop
         if ($perf -and $perf.AvailableMBytes) { return [math]::Round([double]$perf.AvailableMBytes / 1024, 1) }
     } catch {}
-    try { return [math]::Round((Get-CimInstance Win32_OperatingSystem -ErrorAction Stop).FreePhysicalMemory / 1MB, 1) } catch { return 999.0 }
+    try {
+        $os = Get-CimInstance Win32_OperatingSystem -ErrorAction Stop
+        if ($null -eq $os.FreePhysicalMemory) { throw 'FreePhysicalMemory is unavailable' }
+        return [math]::Round($os.FreePhysicalMemory / 1MB, 1)
+    } catch { throw "Cannot measure available RAM; refusing to start a personal-PC test: $($_.Exception.Message)" }
 }
 
 # How many runs may be active at once, given the holders that already are.
 function Get-GGSlotLimit {
     param($Others, [int]$Slots)
-    $limit = $Slots
+    $limit = 1
     foreach ($h in @($Others)) {
         if (-not $h.Info.v) { $limit = 1; continue }
         $n = 0
@@ -805,16 +837,17 @@ function Get-GGSlotDecision {
     if ($active.Count + 1 -gt $limit) { return @{ Index = -1; Reason = ("all {0} slot(s) busy - {1}" -f $limit, $who) } }
     $used = @($active | ForEach-Object { [int]$_.Index })
     $idx = -1
-    for ($i = 0; $i -lt $Slots; $i++) { if ($used -notcontains $i) { $idx = $i; break } }
+    for ($i = 0; $i -lt $limit; $i++) { if ($used -notcontains $i) { $idx = $i; break } }
     if ($idx -lt 0) { return @{ Index = -1; Reason = ("no free slot below {0} - {1}" -f $Slots, $who) } }
     $free = $null
     $pending = 0.0
-    if ($active.Count -gt 0 -and $MinFreeGb -gt 0) {
+    $MinFreeGb = [math]::Max(8, $MinFreeGb)
+    if ($MinFreeGb -gt 0) {
         $free = Get-GGFreeRamGb
         $pending = Get-GGPendingRamGb $active
         $eff = [math]::Round($free - $pending, 1)
         if ($eff -lt $MinFreeGb) {
-            return @{ Index = -1; Reason = ("waiting for RAM: {0} GB available - {1} GB still to be allocated by starting runs = {2} GB, {3} GB needed to share the PC - {4}" -f $free, [math]::Round($pending, 1), $eff, $MinFreeGb, $who) }
+            return @{ Index = -1; Reason = ("waiting for RAM: {0} GB available - {1} GB pending = {2} GB, {3} GB needed before launch - {4}" -f $free, [math]::Round($pending, 1), $eff, $MinFreeGb, $who) }
         }
     }
     return @{ Index = $idx; Reason = ''; Free = $free; Pending = $pending }
@@ -837,9 +870,10 @@ function Get-GGEarlierWaiters {
 }
 
 function Enter-GGLock {
-    param([int]$MaxWaitMin = 120, [int]$Slots = 2, [double]$MinFreeGb = 9, [double]$ReserveGb = 0)
+    param([int]$MaxWaitMin = 5, [int]$Slots = 1, [double]$MinFreeGb = 8, [double]$ReserveGb = 0)
     New-Item -ItemType Directory -Force -Path $global:GG.Runs | Out-Null
-    if ($Slots -lt 1) { $Slots = 1 }
+    $Slots = 1
+    $MinFreeGb = [math]::Max(8, $MinFreeGb)
     $global:GG.Slots = $Slots
     $global:GG.ReserveGb = $ReserveGb
     $global:GG.JvmStarted = ''
