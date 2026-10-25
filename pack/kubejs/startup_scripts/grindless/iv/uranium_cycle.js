@@ -19,10 +19,10 @@
 // one and makes the reactor's LEU fuel, which nothing else makes. Energy: every recipe costs the sum of GTM's stages it stands for,
 // spent at the IV voltage (the table says which stages).
 //
-// The leach field keeps its waste: the radioactive waste is contained, so its recipe modifier cancels a run while the controller voids
-// items (grindless.machine.isr_wellfield.no_voiding, the mechanism of grindless.steam_outputs.no_voiding), then GTM's own overclock
-// (the default of an electric multiblock) runs. GTM 7.5.3 restarts an idle machine's cached last recipe without its modifier, so the
-// same refusal also sits in beforeWorking, which every start of a run goes through. Outside the End it forms but its recipes do not
+// The leach field keeps its waste: the radioactive waste is contained, so it refuses to run while the controller voids items
+// (grindless.machine.isr_wellfield.no_voiding), through lib/no_voiding.js: the mechanism of grindless.steam_outputs.no_voiding in its
+// recipe modifier, then GTM's own overclock (the default of an electric multiblock); and the same refusal in beforeWorking, because
+// GTM 7.5.3 restarts an idle machine's cached last recipe without its modifier. Outside the End it forms but its recipes do not
 // start (GTM's dimension condition), and the controller says why (grindless.machine.isr_wellfield.not_end). The plant is a plain
 // electric multiblock with GTM's overclock.
 //
@@ -172,20 +172,12 @@
 
   // ---------------------------------------------------------------- helpers
 
-  var LC = null
-  function lazy() {
-    if (LC === null) {
-      LC = {
-        ItemCap: Java.loadClass('com.gregtechceu.gtceu.api.capability.recipe.ItemRecipeCapability').CAP,
-        RecipeLogic: Java.loadClass('com.gregtechceu.gtceu.api.machine.trait.RecipeLogic')
-      }
-    }
-    return LC
-  }
+  // the radioactive waste is an item: only item voiding is refused (lib/no_voiding.js)
+  const KEEP = { which: 'items', reason: NO_VOIDING, name: 'leach field' }
 
   // true while the controller is set to void items (GTM's IVoidable): the radioactive waste would be thrown away
   function voidsItems(machine) {
-    return machine.canVoidRecipeOutputs(lazy().ItemCap) === true
+    return G.noVoiding.voids(machine, KEEP.which)
   }
 
   // 'minecraft:the_end' for a level (KubeJS shows Level#dimension() as getDimension(), the location; ev/tripod.js)
@@ -198,19 +190,13 @@
     }
   }
 
-  // ---------------------------------------------------------------- the leach field's modifier and line
+  // ---------------------------------------------------------------- the leach field's modifier, start check and line
 
-  var noVoiding = null
-
-  // before every run (alwaysTryModifyRecipe): voiding refused, then GTM's own overclock
-  function fieldModifier() {
+  // GTM's own overclock, after the voiding refusal of lib/no_voiding.js
+  function overclock() {
     var failed = false
     return function (machine, recipe) {
       try {
-        if (voidsItems(machine)) {
-          if (noVoiding === null) noVoiding = ModifierFunction.cancel(Text.translate(NO_VOIDING))
-          return noVoiding
-        }
         return GTRecipeModifiers.OC_NON_PERFECT.getModifier(machine, recipe)
       } catch (e) {
         if (!failed) {
@@ -223,42 +209,6 @@
   }
 
   var displayFailed = false
-  var beforeFailed = false
-
-  // every start of a run (RecipeLogic#setupRecipe calls the definition's beforeWorking): an idle machine reuses its cached last recipe
-  // without the modifier (RecipeLogic#findAndHandleRecipe), and with item voiding on GTM's check skips the room for the outputs, so a
-  // batch could start, and void its waste, once voiding is switched on while the field waits. The refusal is checked here too. A refused
-  // start leaves the logic idle with nothing to search (it unsubscribes until something changes), so the reason is recorded here, the
-  // way GTM records a failed match (RecipeLogic.putFailureReason; given the machine, only its (Object, GTRecipe, Component) overload
-  // applies, so Rhino has no choice to make). Switching voiding off wakes the logic (WorkableMultiblockMachine#setVoidingMode).
-  var noVoidingText = null
-
-  function fieldBeforeWorking(machine, recipe) {
-    var voids = false
-    try {
-      voids = voidsItems(machine)
-    } catch (e) {
-      if (!beforeFailed) {
-        beforeFailed = true
-        console.error(LOG + 'leach field voiding check before a run failed: ' + e)
-      }
-      return true
-    }
-    if (!voids) return true
-    try {
-      if (recipe !== null && recipe !== undefined) {
-        if (noVoidingText === null) noVoidingText = Text.translate(NO_VOIDING)
-        lazy().RecipeLogic.putFailureReason(machine, recipe, noVoidingText)
-      }
-      machine.getRecipeLogic().markLastRecipeDirty()
-    } catch (e2) {
-      if (!beforeFailed) {
-        beforeFailed = true
-        console.error(LOG + 'leach field could not record why it refused a run: ' + e2)
-      }
-    }
-    return false
-  }
 
   // one controller line outside the End: why nothing starts (GTM's dimension condition says nothing by itself)
   function fieldDisplay(controller, list) {
@@ -327,8 +277,8 @@
       .rotationState(RotationState.NON_Y_AXIS)
       .allowExtendedFacing(false)
       .recipeType(FIELD_TYPE)
-      .recipeModifier(fieldModifier(), true)
-      .beforeWorking(fieldBeforeWorking)
+      .recipeModifier(G.noVoiding.modifier(KEEP, overclock()), true)
+      .beforeWorking(G.noVoiding.beforeWorking(KEEP))
       .appearanceBlock(GTBlocks.CASING_PTFE_INERT)
       .pattern(function (def) { return Pat.build(def, FIELD_SPEC) })
       .additionalDisplay(fieldDisplay)
