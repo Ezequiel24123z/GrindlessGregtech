@@ -213,19 +213,25 @@ What it gains: **crops where there is no sky, no soil and no air.** LED panels g
 
 What it gains: **a separation GTM does not do.** Martian rare earths (the KubeJS material from the Mars vein) only come apart here. Samarium only comes from Mars, because EV removes it from `rare_earth_separation`. Real separation plants work this way, with a long cascade of mixer-settlers and an organic solvent.
 
-- **Recipe type:** `gtceu:solvent_extraction` (new). The circuit picks the mode:
-  1. **Leach** (circuit 1): Martian rare-earth dust + HCl (EV fine chemistry) → rare-earth chloride solution.
-  2. **Extraction** (circuit 2): chloride solution + kerosene (MV RP-1 line) → Samarium, Neodymium and the other chlorides GTM 7.5.3 has as materials (verify), with about 95% of the kerosene back *(tune)*.
-  - GTM's electrolyzer turns the chlorides into metals.
-- **Structure:** a 3×3×7 line of mixer-settler stages in inert casing with glass sides. It has an input bus, 3 fluid input hatches, 4 fluid output hatches and 1–2 EV hatches. Accepts ME hatches.
-- **Crafted with:** EV hull + EV mixer + EV centrifuge + EV chemical reactor + 4 EV circuits.
+- **Recipe type:** `gtceu:solvent_extraction` (built on 2026-10-25, run `b9-extraction-cascade-2`). The circuit picks the mode; both modes are EV recipes at 1,920 EU/t:
+  1. **Leach** (circuit 1): 4 merrillite dust + 3,000 mB HCl → 1,000 mB rare-earth chloride solution + 1,000 mB phosphoric acid + 3 tricalcium phosphate, in 40 ticks.
+  2. **Extraction** (circuit 2): 1,000 mB solution + 3,000 mB HCl (the strip) + 1,000 mB kerosene → 1 samarium chloride + 1 neodymium chloride + 2 mixed rare-earth chloride + 950 mB kerosene + 6,000 mB diluted HCl, in 200 ticks.
+  - GTM 7.5.3 has no rare-earth chlorides, so they are materials of ours. GTM's own electrolyzer decomposition turns each one (4 dust) into its metal + 3,000 mB of chlorine. The mixed chloride gives GTM's rare earth dust, which goes on to GTM's centrifuge.
+  - About 1.84 M EU per samarium. The 1:1:2 split and the 95% kerosene return are *(tune)*.
+- **Structure:** a 3×3×7 line of mixer-settler stages in inert casing with glass sides: three titanium gearboxes (the mixers) between two settlers, under a PTFE pipe header. Parts: an input bus, an output bus (the chlorides and the phosphate are dusts), 1–3 fluid input hatches, 1–4 fluid output hatches and 1–2 EV hatches. Accepts ME hatches.
+- **Crafted with:** EV hull + EV mixer + EV centrifuge + EV chemical reactor + 4 EV circuits, in a crafting table.
 - **Why it is not a big cube:** its input exists only on Mars, it crosses three eras (MV kerosene, EV HCl, Mars ore), and it sends Samarium two eras ahead.
 - **Byproducts:**
   - Samarium → reserve for the LuV motors' magnets.
   - Neodymium → motors, alongside the Nether's.
-  - Spent HCl → back to the HCl loop.
+  - Diluted HCl → GTM's distillation tower (2,000 mB → 1,000 HCl + 1,000 water), then back to the leach.
+  - Chlorine from the electrolyzer → HCl again with hydrogen.
   - Kerosene → recycled, apart from the small loss.
-  - Chlorides with no consumer are inert and voided.
+  - Phosphoric acid → GTM's cumene and phenol chemistry; the surplus is inert and voidable.
+  - Tricalcium phosphate → GTM's fertilizer; inert and voidable.
+- **Samarium on Earth to cut (C1):**
+  - GTM's `rare_earth_separation` centrifuge;
+  - GTCA's samarium line: `gtceu:sifter/residue_to_smgd`, `gtceu:electric_blast_furnace/flsamaric_to_ho`, and `smtb_to_nitrosmtb` and `nitrosmtb_to_tnd_and_srd` (chemical reactor and large chemical reactor).
 
 ## New process lines
 
@@ -242,7 +248,7 @@ What it gains: **a separation GTM does not do.** Martian rare earths (the KubeJS
 | Metal mixture | stone dust → `stone_dust_separation` → mixture → `metal_mixture_separation` (900 EU/t) → hematite, bauxite, pyrolusite, barite and chromite | Each one to its own line; the barite is stored. The Ilmenite is removed from the recipe |
 | Combined cycle | refinery gas or any gas turbine fuel + distilled water → combined-cycle plant → EU + steam → large steam turbine | Steam: turbine, or the plant stops |
 | Hot rolling | EBF → hot ingot → hot strip mill (circuit picks plate, rods or foil) + water → product + steam | Steam: turbines |
-| Martian rare earths | Martian tripod → rare-earth ore → dust → cascade: HCl leach → chloride solution → solvent extraction with kerosene (MV) → separated chlorides → GTM electrolyzer | Samarium: LuV magnets (reserve). Neodymium: motors. Spent HCl: back to the HCl loop. Kerosene: recycled, small loss. Inert ones: voided |
+| Martian rare earths | Martian tripod → merrillite ore → dust → cascade: HCl leach → chloride solution + phosphoric acid + tricalcium phosphate → solvent extraction with kerosene (MV) and an HCl strip → samarium, neodymium and mixed chlorides → GTM electrolyzer → Sm, Nd, rare earth dust + Cl₂ | Samarium: LuV magnets (reserve). Neodymium: motors. Diluted HCl: distillation tower, back to the leach. Cl₂: HCl. Kerosene: recycled, small loss. Phosphoric acid and the phosphate: inert, voidable |
 | Off-world crops | seeds + water + CO₂ (Martian air, or CO₂ from home: engine test stand exhaust, MV) → sealed dome → crops + O₂ | Crops: biomass for the wither. O₂: suits, cryogenic plant |
 
 ## Storage and logistics

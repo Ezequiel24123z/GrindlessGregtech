@@ -28,6 +28,8 @@ Generators for the pack's own textures. Everything is procedural 16x16 pixel art
 | `Build-GeneratorArrayTextures.ps1` | Writes the LV generator array's face. `-Credits` prints its CREDITS rows. |
 | `Build-LeisureFactoriesTextures.ps1` | Writes the faces of the four MV universal factories. `-Credits` prints their 20 CREDITS rows. |
 | `Build-LeisureUtilityTextures.ps1` | Writes the faces of the advanced multi smelter, the lava furnace and the weather controller. `-Credits` prints their 15 CREDITS rows. |
+| `Build-AE2InterplanetaryTextures.ps1` | Writes the Martian Quantum Seed (item and `.mcmeta`). |
+| `Build-ExtractionCascadeTextures.ps1` | Writes the face of the EV rare-earth extraction cascade: three mixer-settler stages seen through a sight glass, kerosene over the lilac chloride solution, and the taps of the three chlorides. `-Preview <png outside the repo>`, `-Casing <png>` (preview context) and `-Credits`. |
 
 ## Regenerate
 
