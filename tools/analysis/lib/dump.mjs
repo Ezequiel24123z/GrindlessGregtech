@@ -1,5 +1,6 @@
 // Loads the dump written by tools/test/overlay/kubejs/server_scripts/gg_dump.js
-// (recipes.json, tags.json, items.json and, optionally, machines.json, veins.json, info.json).
+// (recipes.json, tags.json, items.json and, optionally, machines.json, veins.json, info.json), and the recipes GTM's lookup never
+// finds when gg_test_recipe_lookup ran in the same server (lookup_unreachable.json: they leave the model).
 import fs from 'node:fs';
 import path from 'node:path';
 
@@ -45,7 +46,53 @@ function readIfExists(dir, name, required) {
   return JSON.parse(fs.readFileSync(p, 'utf8'));
 }
 
-export function loadDump(dir) {
+/**
+ * Written next to the gg_dump files by the bench guard gg_test_recipe_lookup (tools/test/overlay/kubejs/server_scripts) when both
+ * run in one server: the GT recipes GTM 7.5.3's recipe lookup never finds from their own inputs ({unreachable: [{id, type, proxy,
+ * reaches, shadowedBy, ...}]}). No machine can ever run them, so they leave the model.
+ */
+export const LOOKUP_FILE = 'lookup_unreachable.json';
+
+/**
+ * Drops from `recipes` (id -> recipe) the ones GTM's lookup never finds. Only a recipe the dump holds under the same type goes: a
+ * proxy (a smelting recipe the electric furnace cannot find) is lost in that GT type alone and stays as a recipe of its own type.
+ * Returns what the CLI reports: {file, listed, dropped: [ids], notInDump: [ids], otherType: [ids]}.
+ */
+function dropUnreachable(recipes, lookupDoc) {
+  const out = { file: !!lookupDoc, listed: 0, dropped: [], notInDump: [], otherType: [] };
+  if (!lookupDoc) return out;
+  const list = Array.isArray(lookupDoc.unreachable) ? lookupDoc.unreachable : [];
+  out.listed = list.length;
+  for (const u of list) {
+    const r = recipes.get(u.id);
+    if (!r) out.notInDump.push(u.id);
+    else if (u.type && r.type !== u.type) out.otherType.push(u.id);
+    else {
+      recipes.delete(u.id);
+      out.dropped.push(u.id);
+    }
+  }
+  return out;
+}
+
+/** The one line the CLI prints about GTM's recipe lookup (dump.lookup). */
+export function lookupLine(dump) {
+  const l = dump.lookup;
+  if (!l || !l.file) {
+    return `Lookup  : no ${LOOKUP_FILE} in the dump, so recipes GTM's lookup never finds still count (run gg_test_recipe_lookup in the gg_dump server run)`;
+  }
+  const extra = [];
+  if (l.notInDump.length > 0) extra.push(`${l.notInDump.length} not in recipes.json`);
+  if (l.otherType.length > 0) extra.push(`${l.otherType.length} kept as recipes of their own type (proxies)`);
+  return `Lookup  : dropped ${l.dropped.length} recipe${l.dropped.length === 1 ? '' : 's'} GTM's recipe lookup never finds ` +
+    `(${LOOKUP_FILE}: ${l.listed} listed${extra.length > 0 ? '; ' + extra.join('; ') : ''})`;
+}
+
+/**
+ * Reads a dump folder. `log` gets the lookup line (lookupLine); by default it goes to stdout, so the CLI shows it even with
+ * --quiet. Pass log: null to stay silent.
+ */
+export function loadDump(dir, { log = (line) => process.stdout.write(line + '\n') } = {}) {
   const docs = {
     recipes: readIfExists(dir, 'recipes.json', true),
     items: readIfExists(dir, 'items.json', true),
@@ -56,8 +103,11 @@ export function loadDump(dir) {
     config: readIfExists(dir, 'config.json', false),
     structures: readIfExists(dir, 'structures.json', false),
     info: readIfExists(dir, 'info.json', false),
+    lookup: readIfExists(dir, LOOKUP_FILE, false),
   };
-  return makeDump(dir, docs);
+  const dump = makeDump(dir, docs);
+  if (log) log(lookupLine(dump));
+  return dump;
 }
 
 function normalizeConfig(values) {
@@ -84,6 +134,8 @@ export function makeDump(dir, docs) {
       parseErrors++;
     }
   }
+  // the recipes GTM's lookup never finds (lookup_unreachable.json) leave the model before anything reads it
+  const lookup = dropUnreachable(recipes, docs.lookup || null);
 
   const machines = new Map();
   const recipeTypes = new Map();
@@ -97,6 +149,8 @@ export function makeDump(dir, docs) {
     info: docs.info || null,
     recipes,
     parseErrors,
+    // GTM's recipe lookup (lookup_unreachable.json): {file, listed, dropped, notInDump, otherType}; file false when there was none
+    lookup,
     items: new Set(itemsDoc.items || []),
     fluids: new Set(itemsDoc.fluids || []),
     tags: new TagIndex(docs.tags),
