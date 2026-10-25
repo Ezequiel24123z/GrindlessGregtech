@@ -469,6 +469,14 @@ export function buildModel(dump, rawCfg) {
         const sd = structureSelectors(desc, abilityItems, (i) => dump.items.size === 0 || dump.items.has(i));
         for (const p of sd.problems) warnings.push(`${id}: ${p}`);
         partSels = sd.selectors;
+        // requireAbilities (IV, 2026-10-25): a variant built WITH an optional part its real pattern offers (a plant of ours formed with
+        // the IV parallel hatch); the pattern must have a cell for it
+        for (const ab of asArray(e.requireAbilities)) {
+          if (abilityMaxCount(desc, ab) === 0) warnings.push(`${id}: requireAbilities «${ab}»: ${e.machine}'s pattern has no part with that ability`);
+          const items = (abilityItems[ab] || []).filter((i) => dump.items.size === 0 || dump.items.has(i));
+          if (!abilityItems[ab]) warnings.push(`${id}: requireAbilities «${ab}» isn't in the config's partAbilities`);
+          partSels.push({ anyOf: items, label: `part «${ab}» (this variant's)` });
+        }
         partsFrom = 'structure';
         stats.structureMachines++;
         stats.structureMachineIds.push(e.machine);
