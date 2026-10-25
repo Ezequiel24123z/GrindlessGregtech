@@ -9,11 +9,11 @@
 	quest_links: [ ]
 	quests: [
 		{
-			description: [
-				"The LV ME Interface and ME Terminal are the way in. From here the network grows into storage, crafting and the addons that tie it to GregTech."
-				"Hold &6G&r over any AE2 item to open its guide page. The guide has the details."
-			]
 			dependencies: ["09539172C5EF719B"]
+			description: [
+				"The network you built in LV already stores and crafts. From here it learns to talk to GregTech machines and picks up the addons worth having."
+				"Hold &6G&r over any AE2 item to open its guide page."
+			]
 			icon: "ae2:controller"
 			id: "38EE187ED07F2279"
 			rewards: [
@@ -29,114 +29,25 @@
 		}
 		{
 			dependencies: ["38EE187ED07F2279"]
-			description: ["The &6Submerged Arc Furnace&r makes the silicon AE2 uses. It is the first step of the crafting chain, and GregTech's own silicon ingot can wait."]
-			icon: "ae2:silicon"
-			id: "3AA242B7C5A510C3"
-			rewards: [{ id: "49271A078D4D50E7", type: "xp", xp: 15 }]
-			tasks: [{ count: 4L, id: "06AF32CC7361E874", item: "ae2:silicon", type: "item" }]
-			title: "Silicon"
-			x: 2.5d
-			y: -1.5d
-		}
-		{
-			dependencies: ["38EE187ED07F2279"]
-			description: ["Certus dust grows into a crystal in the &6Autoclave&r. Most AE2 recipes also take GregTech's certus gem."]
-			icon: "ae2:certus_quartz_crystal"
-			id: "2355A754D6DF98A0"
-			rewards: [{ id: "1BE196B68912DDA3", type: "xp", xp: 15 }]
-			tasks: [{ count: 4L, id: "527376E57BA9E82A", item: "ae2:certus_quartz_crystal", type: "item" }]
-			title: "Certus Quartz"
-			x: 2.5d
-			y: 1.5d
-		}
-		{
-			dependencies: ["3AA242B7C5A510C3"]
-			description: ["The LV &6Forming Press&r stamps each processor press from a plate and one of four materials. A press is never used up once it is made."]
-			icon: "ae2:logic_processor_press"
-			id: "5C4C635A051A37DE"
-			rewards: [{ id: "1B6D57D4DB10C490", type: "xp", xp: 15 }]
-			tasks: [{ icon: "ae2:logic_processor_press", id: "66D35DBF7C61A378", item: { Count: 1b, id: "itemfilters:or", tag: { items: [{ Count: 1b, id: "ae2:calculation_processor_press" }, { Count: 1b, id: "ae2:engineering_processor_press" }, { Count: 1b, id: "ae2:logic_processor_press" }, { Count: 1b, id: "ae2:silicon_press" }] } }, title: "Any Processor Press", type: "item" }]
-			title: "Processor Presses"
-			x: 5.0d
-			y: -1.5d
-		}
-		{
-			dependencies: ["2355A754D6DF98A0"]
-			description: ["The LV &6Polarizer&r charges certus with EU alone. The &6Mixer&r turns charged certus into fluix, with redstone and quartzite dust."]
-			icon: "ae2:fluix_crystal"
-			id: "2ADCAA7DB2333938"
-			rewards: [{ id: "32FBE183BD367123", type: "xp", xp: 15 }]
-			tasks: [
-				{ id: "72A5A7962F96FE39", item: "ae2:charged_certus_quartz_crystal", type: "item" }
-				{ id: "1293E219C4857835", item: "ae2:fluix_crystal", type: "item" }
-			]
-			title: "Charged Certus and Fluix"
-			x: 5.0d
-			y: 1.5d
-		}
-		{
-			dependencies: ["5C4C635A051A37DE", "2ADCAA7DB2333938"]
-			description: ["Both are built in the LV &6Assembler&r. Once placed, they work the same as the AE2 versions."]
-			icon: "ae2:inscriber"
-			id: "5F5A231D0105D5C1"
-			rewards: [{ id: "5092627CAE00CCC2", type: "xp", xp: 20 }]
-			tasks: [
-				{ id: "3A6F5E54D7EA0E93", item: "ae2:inscriber", type: "item" }
-				{ id: "78F55EF1BE722B49", item: "ae2:charger", type: "item" }
-			]
-			title: "Inscriber and Charger"
-			x: 7.5d
-			y: 0.0d
-		}
-		{
-			dependencies: ["5F5A231D0105D5C1"]
-			description: ["The inscriber presses a circuit and silicon into processors. Logic, calculation and engineering processors go into nearly every network part."]
-			icon: "ae2:engineering_processor"
-			id: "2488399E0CDDE19C"
-			rewards: [{ id: "7391BB6408E3385B", type: "xp", xp: 20 }]
-			tasks: [
-				{ id: "70A67ED8E5566B6F", item: "ae2:logic_processor", type: "item" }
-				{ id: "3D1193465FB4DEA1", item: "ae2:calculation_processor", type: "item" }
-				{ id: "71D8145D2C4CB1D5", item: "ae2:engineering_processor", type: "item" }
-			]
-			title: "Processors"
-			x: 10.0d
-			y: 0.0d
-		}
-		{
-			dependencies: ["2488399E0CDDE19C"]
-			description: ["The brain of the network. Almost every device on the network needs a channel from the controller, so the cables and parts after it all run from here."]
-			icon: "ae2:controller"
-			id: "1099965F1BB5578D"
-			rewards: [{ id: "252D94B85F7AAB23", type: "xp", xp: 25 }]
-			tasks: [{ id: "3DC5EC24BCDA3A65", item: "ae2:controller", type: "item" }]
-			title: "ME Controller"
-			x: 12.5d
-			y: 0.0d
-		}
-		{
-			dependencies: ["1099965F1BB5578D"]
 			description: [
-				"The network draws Forge Energy. Put an &6Energy Acceptor&r against a GregTech &6Energy Converter&r switched to EU to FE with a soft mallet, and the grid powers the network."
-				"An &6Energy Cell&r keeps it running through a short blackout."
+				"AE2 runs on Forge Energy and your factory makes EU, but they get along fine: GregTech cable plugged straight into the &6Energy Acceptor&r powers the network. No converter, no soft mallet."
+				"An energy cell carries the network through a short blackout."
 			]
 			icon: "ae2:energy_acceptor"
 			id: "6877CAA8988871F0"
 			rewards: [{ id: "130A91E682AF3BF3", type: "xp", xp: 15 }]
 			tasks: [
 				{ id: "6CBB40E7B7DE7CD1", item: "ae2:energy_acceptor", type: "item" }
-				{ id: "7E6FCF44149DEE94", item: "gtceu:lv_1a_energy_converter", optional_task: true, type: "item" }
 				{ id: "1CA5B1C8F56FD437", item: "ae2:energy_cell", optional_task: true, type: "item" }
 			]
 			title: "Powering the Network"
-			x: 12.5d
-			y: -2.5d
+			x: 2.0d
+			y: -4.5d
 		}
 		{
 			dependencies: ["6877CAA8988871F0"]
 			description: [
-				"&6Applied Flux&r stores Forge Energy in cells and moves it through the network: the &6Flux Accessor&r is its plug, and an Induction Card in an interface feeds the blocks around it."
-				"EU still comes from GregTech converters; nothing here makes power."
+				"&6Applied Flux&r stores Forge Energy in cells and moves it around the network. The Flux Accessor is the plug, and an induction card in an interface charges whatever sits next to it. It stores power; it doesn't make any."
 			]
 			icon: "appflux:flux_accessor"
 			id: "52F7C6CE45331142"
@@ -147,176 +58,47 @@
 				{ id: "769AD737A58BC730", item: "appflux:fe_1k_cell", optional_task: true, type: "item" }
 			]
 			title: "Applied Flux"
-			x: 12.5d
-			y: -5.0d
+			x: 4.0d
+			y: -6.0d
 		}
 		{
-			dependencies: ["1099965F1BB5578D"]
+			dependencies: ["38EE187ED07F2279"]
 			description: [
-				"Glass and covered cable carry the fewest channels, smart cable more, and dense smart cable the most. Smart cables light up to show how full they are."
-				"Run dense trunks from the controller and branch off with normal cable. When a device goes dark with power on, you are out of channels."
+				"Tell the &6ME Requester&r what to keep in stock, and it orders a craft whenever the stock drops below that. Cables, plates and circuits stay topped up while you do something more interesting."
+				"The Requester Terminal shows them all on one screen."
 			]
-			icon: "ae2:fluix_smart_cable"
-			id: "794F4E39DA21E1A2"
-			rewards: [{ id: "7FA264B21525C4A1", type: "xp", xp: 15 }]
-			tasks: [
-				{ icon: "ae2:fluix_smart_cable", id: "21A603B53BB352CC", item: { Count: 1b, id: "itemfilters:tag", tag: { value: "ae2:smart_cable" } }, title: "Any ME Smart Cable", type: "item" }
-				{ icon: "ae2:fluix_smart_dense_cable", id: "2533A76FD449B96F", item: { Count: 1b, id: "itemfilters:tag", tag: { value: "ae2:smart_dense_cable" } }, optional_task: true, title: "Any ME Dense Smart Cable", type: "item" }
-			]
-			title: "Cables and Channels"
-			x: 15.0d
-			y: 2.5d
-		}
-		{
-			dependencies: ["1099965F1BB5578D"]
-			description: ["The &6ME Drive&r holds the storage cells. A cell is a housing plus a component, and the 1k cell is where every network starts. Fluid cells work the same way."]
-			icon: "ae2:drive"
-			id: "3D91EF1ABE20EB0D"
-			rewards: [{ id: "70991E501BE568FC", type: "xp", xp: 20 }]
-			tasks: [
-				{ id: "66F9335102B940CF", item: "ae2:drive", type: "item" }
-				{ id: "6DBD3D73CE82186B", item: "ae2:item_storage_cell_1k", type: "item" }
-			]
-			title: "Drive and Cells"
-			x: 15.0d
-			y: 0.0d
-		}
-		{
-			dependencies: ["3D91EF1ABE20EB0D"]
-			description: ["The first component that holds more than the 1k cell. Every size up follows the same pattern."]
-			icon: "ae2:cell_component_4k"
-			id: "5563D90752E0F0D9"
-			rewards: [{ id: "7FB8865CC720FE43", type: "xp", xp: 10 }]
-			shape: "pentagon"
-			tasks: [{ id: "34C4E865BF002769", item: "ae2:cell_component_4k", type: "item" }]
-			title: "4k Storage"
-			x: 15.0d
-			y: -2.5d
-		}
-		{
-			dependencies: ["5563D90752E0F0D9"]
-			description: ["Each size up uses rarer parts. An item cell holds a limited number of kinds, so partition cells in the Cell Workbench before one kind fills the drive."]
-			icon: "ae2:cell_component_16k"
-			id: "4F014C18D925478E"
-			rewards: [{ id: "0CB8DCA3B2D1F431", type: "xp", xp: 10 }]
-			shape: "pentagon"
-			tasks: [{ id: "3B3E4D20A47E9F8F", item: "ae2:cell_component_16k", type: "item" }]
-			title: "16k Storage"
-			x: 17.5d
-			y: -2.5d
-		}
-		{
-			dependencies: ["4F014C18D925478E"]
-			description: ["Keep a pattern for each size and the network can make its own cells."]
-			icon: "ae2:cell_component_64k"
-			id: "27C9589C71D2ECEB"
-			rewards: [{ id: "7FD5C81CE72061D9", type: "xp", xp: 15 }]
-			shape: "pentagon"
-			tasks: [{ id: "09383CA580E08531", item: "ae2:cell_component_64k", type: "item" }]
-			title: "64k Storage"
-			x: 20.0d
-			y: -2.5d
-		}
-		{
-			dependencies: ["27C9589C71D2ECEB"]
-			description: ["The largest cell plain AE2 makes. Past it, MEGA Cells take over at IV."]
-			icon: "ae2:cell_component_256k"
-			id: "1626F8CC75D6BBCD"
-			rewards: [{ id: "6149B3F1E2815B71", type: "xp", xp: 25 }]
-			shape: "pentagon"
-			tasks: [{ id: "55D58079394AFDA3", item: "ae2:cell_component_256k", type: "item" }]
-			title: "256k Storage"
-			x: 22.5d
-			y: -2.5d
-		}
-		{
-			dependencies: ["3D91EF1ABE20EB0D"]
-			description: ["A &6Terminal&r shows everything the network holds and hands it out. Turn it into a &6Crafting Terminal&r right away: the same view, plus a crafting grid that pulls straight from storage."]
-			icon: "ae2:crafting_terminal"
-			id: "263BFD3AC4314340"
-			rewards: [{ id: "719703D01FFBC9C1", type: "xp", xp: 15 }]
-			tasks: [
-				{ id: "64F01ED6D4763343", item: "ae2:terminal", type: "item" }
-				{ id: "64167F8AF0D418AC", item: "ae2:crafting_terminal", optional_task: true, type: "item" }
-			]
-			title: "Terminals"
-			x: 17.5d
-			y: 0.0d
-		}
-		{
-			dependencies: ["263BFD3AC4314340"]
-			description: ["Patterns store recipes. Encode &6crafting&r patterns for anything made on a crafting grid and &6processing&r patterns for anything a machine does. Every GregTech recipe is a processing pattern."]
-			icon: "ae2:pattern_encoding_terminal"
-			id: "3F8B30362EE28B61"
-			rewards: [{ id: "0E43AF199C66A945", type: "xp", xp: 15 }]
-			tasks: [
-				{ id: "149074FD2324A7A1", item: "ae2:pattern_encoding_terminal", type: "item" }
-				{ count: 4L, id: "38A9569EE45B583C", item: "ae2:blank_pattern", type: "item" }
-			]
-			title: "Patterns"
-			x: 20.0d
-			y: 0.0d
-		}
-		{
-			dependencies: ["3F8B30362EE28B61"]
-			description: [
-				"A &6Pattern Provider&r pushes a pattern's ingredients into whatever it faces: a &6Molecular Assembler&r for crafting patterns, a GregTech machine for processing ones."
-				"Send the machine's output back into the provider and the product returns to the network."
-			]
-			icon: "ae2:pattern_provider"
-			id: "331CD545A1B1E755"
-			rewards: [{ id: "0C11C6B6ED144941", type: "xp", xp: 20 }]
-			tasks: [
-				{ id: "28BCF0896FE10BA9", item: "ae2:pattern_provider", type: "item" }
-				{ id: "3E7FC7BA9F093823", item: "ae2:molecular_assembler", type: "item" }
-			]
-			title: "Pattern Provider and Assembler"
-			x: 22.5d
-			y: 0.0d
-		}
-		{
-			dependencies: ["331CD545A1B1E755"]
-			description: ["A crafting CPU is a solid box of crafting blocks with at least one &6Crafting Storage&r in it. Storage sets how big a job it can hold; &6Co-Processing Units&r let it run more steps at once. One CPU runs one job, so build a few."]
-			icon: "ae2:1k_crafting_storage"
-			id: "401395583FA0B7EA"
-			rewards: [{ id: "222B9E3B95A7F758", type: "xp", xp: 20 }]
-			tasks: [
-				{ id: "3718A3D44B0A9D83", item: "ae2:crafting_unit", type: "item" }
-				{ id: "660C9EF7FFE7A09B", item: "ae2:1k_crafting_storage", type: "item" }
-				{ id: "75A929CF94413E85", item: "ae2:crafting_accelerator", optional_task: true, type: "item" }
-			]
-			title: "Crafting CPU"
-			x: 25.0d
-			y: 0.0d
-		}
-		{
-			dependencies: ["401395583FA0B7EA"]
-			description: ["Name an item and an amount: when the stock drops below it, the &6ME Requester&r orders a craft. Cables, plates and circuits stay topped up without anyone opening a terminal, and the Requester Terminal manages them all from one screen."]
 			icon: "merequester:requester"
 			id: "52EAD94C16BCAE98"
+			optional: true
 			rewards: [{ id: "4D71C3D1DC422EE0", type: "xp", xp: 15 }]
+			size: 0.75d
 			tasks: [
 				{ id: "3F1E216A420220D8", item: "merequester:requester", type: "item" }
 				{ id: "563FF14B694EA006", item: "merequester:requester_terminal", optional_task: true, type: "item" }
 			]
 			title: "ME Requester"
-			x: 27.5d
-			y: 0.0d
+			x: 2.0d
+			y: -3.0d
 		}
 		{
-			dependencies: ["331CD545A1B1E755"]
-			description: ["GregTech machines pick a recipe by their programmed circuit. Slot this card into a Pattern Provider and the circuit travels with the pattern, so one assembler can serve every circuit setting the network asks for."]
+			dependencies: ["38EE187ED07F2279"]
+			description: [
+				"GregTech machines pick recipes by programmed circuit, which used to mean one machine per setting. Put a &6Programmed Circuit Card&r in a pattern provider and the circuit travels with the pattern, so one assembler can handle every setting the network asks for."
+			]
 			icon: "pccard:card_programmed_circuit"
 			id: "4C1866021512C936"
 			rewards: [{ id: "3F9C6D0F5762B5C7", type: "xp", xp: 15 }]
 			tasks: [{ id: "6129DA4516B7427D", item: "pccard:card_programmed_circuit", type: "item" }]
 			title: "Programmed Circuit Card"
-			x: 22.5d
-			y: 2.5d
+			x: 2.0d
+			y: 1.5d
 		}
 		{
 			dependencies: ["4C1866021512C936"]
-			description: ["GregTech's own ME parts: an &6ME Output Bus&r or &6Hatch&r pushes a multiblock's products straight into the network, and an &6ME Input Bus&r or &6Hatch&r pulls in the items and fluids you configure. Each one starts from an EV bus or hatch."]
+			description: [
+				"An &6ME Output Bus&r or hatch sends a multiblock's products straight into the network, and an &6ME Input Bus&r or hatch pulls in whatever you configure."
+				"They're built on EV buses and hatches, and they work on the Moon too: that's how the tripod's ilmenite gets home."
+			]
 			icon: "gtceu:me_output_bus"
 			id: "7B99DC38DC39F93A"
 			rewards: [{ id: "04AB9AAD4A813503", type: "xp", xp: 25 }]
@@ -328,12 +110,15 @@
 				{ id: "23AABFDDB351A2ED", item: "gtceu:me_input_hatch", optional_task: true, type: "item" }
 			]
 			title: "GregTech ME Hatches"
-			x: 25.0d
-			y: 2.5d
+			x: 4.0d
+			y: 1.5d
 		}
 		{
 			dependencies: ["7B99DC38DC39F93A"]
-			description: ["Further on: the &6ME Stocking Input Bus&r (IV) shows a multiblock what the network holds and takes it only when a recipe runs, and the &6ME Pattern Buffer&r (LuV) puts a pattern provider inside the machine; buffer proxies let other machines share it."]
+			description: [
+				"For later. The &6ME Stocking Input Bus&r (IV) lets a multiblock see what the network holds and take it only when a recipe runs."
+				"The &6ME Pattern Buffer&r (LuV) puts a whole pattern provider inside the machine, and buffer proxies share it with other machines."
+			]
 			icon: "gtceu:me_pattern_buffer"
 			id: "0ECED7D5D7DA1022"
 			optional: true
@@ -344,139 +129,87 @@
 				{ id: "50C01866794B9CD6", item: "gtceu:me_pattern_buffer", optional_task: true, type: "item" }
 			]
 			title: "Stocking and Pattern Buffers"
-			x: 27.5d
-			y: 2.5d
+			x: 6.0d
+			y: 1.5d
 		}
 		{
-			dependencies: ["1099965F1BB5578D"]
-			description: ["The &6ME Interface&r keeps a few stacks of chosen items on hand for pipes and machines to take, and sends whatever it receives into the network."]
-			icon: "ae2:interface"
-			id: "7EBBE1CF534F29D6"
-			rewards: [{ id: "73F1F9426FF74C33", type: "xp", xp: 15 }]
-			tasks: [{ id: "25137F2AC8EB51F6", item: "ae2:interface", type: "item" }]
-			title: "ME Interface"
-			x: 12.5d
-			y: 2.5d
-		}
-		{
-			dependencies: ["7EBBE1CF534F29D6"]
-			description: ["An &6Import Bus&r pulls items into the network, an &6Export Bus&r pushes them out, and a &6Storage Bus&r on a chest, a drawer controller or a GregTech super chest makes that inventory part of the network."]
-			icon: "ae2:storage_bus"
-			id: "50334613CC045531"
-			rewards: [{ id: "0A7A6D731FA564F0", type: "xp", xp: 20 }]
-			tasks: [
-				{ id: "3D12C15273BF9DC6", item: "ae2:import_bus", type: "item" }
-				{ id: "366D732EDABBF1BD", item: "ae2:export_bus", type: "item" }
-				{ id: "143A3124100466AF", item: "ae2:storage_bus", type: "item" }
-			]
-			title: "Import, Export and Storage"
-			x: 15.0d
-			y: 5.0d
-		}
-		{
-			dependencies: ["50334613CC045531"]
-			description: ["Cards change what a part does: speed for throughput, capacity for more filter slots, fuzzy to ignore damage and NBT, and a crafting card lets an export bus or interface order what it is missing."]
-			icon: "ae2:speed_card"
-			id: "3997098B3FCF03F3"
-			rewards: [{ id: "63DE0C3353B1CF06", type: "xp", xp: 15 }]
-			tasks: [
-				{ id: "28EB66B914942CBD", item: "ae2:speed_card", type: "item" }
-				{ id: "4B0CE160867CF0A3", item: "ae2:capacity_card", type: "item" }
-				{ id: "4599C88734F678EC", item: "ae2:fuzzy_card", optional_task: true, type: "item" }
-				{ id: "15D4598DEA4BD8CD", item: "ae2:crafting_card", optional_task: true, type: "item" }
-			]
-			title: "Upgrade Cards"
-			x: 17.5d
-			y: 5.0d
-		}
-		{
-			dependencies: ["7EBBE1CF534F29D6"]
+			dependencies: ["6877CAA8988871F0"]
 			description: [
-				"A &6P2P Tunnel&r sends one thing through a single channel: items, fluids, redstone or FE. Right-click a tunnel with what it should carry to retune it, and link the input to its outputs with a &6Memory Card&r."
-				"Tunnels never push or pull by themselves; something has to feed the input."
+				"Two &6Wireless Connectors&r, linked with the wireless tool, join two pieces of network with no cable between them, at short range and in one dimension."
+				"A P2P tunnel right-clicked with a GregTech wire becomes an &6EU P2P Tunnel&r. Together they power a far machine without a wire strung across the base."
 			]
-			icon: "ae2:me_p2p_tunnel"
-			id: "2085F78EAB2C08E0"
-			rewards: [{ id: "353C071A0C294311", type: "xp", xp: 20 }]
-			tasks: [
-				{ count: 2L, id: "235EB995F1F4CBCF", item: "ae2:me_p2p_tunnel", type: "item" }
-				{ id: "257154328FA3BAA5", item: "ae2:memory_card", type: "item" }
-			]
-			title: "P2P Tunnels"
-			x: 12.5d
-			y: 5.5d
-		}
-		{
-			dependencies: ["2085F78EAB2C08E0"]
-			description: ["Right-click a P2P tunnel with a GregTech wire or cable and it carries EU instead: a long power line that costs a single channel."]
-			icon: "eup2p:eu_p2p_tunnel"
-			id: "6BFCD88ED34D83F2"
-			optional: true
-			rewards: [{ id: "2755D69FFC2604D5", type: "xp", xp: 10 }]
-			tasks: [{ count: 2L, id: "2EBC4A53996009C4", item: "eup2p:eu_p2p_tunnel", type: "item" }]
-			title: "EU P2P"
-			x: 15.0d
-			y: 7.5d
-		}
-		{
-			dependencies: ["2085F78EAB2C08E0"]
-			description: ["A &6Wireless Connector&r pairs with another to carry a connection with no cable between them, and an &6EU P2P Tunnel&r moves power the same way once a GregTech wire tunes it. Both still cost a channel and only reach a short range in the same dimension."]
 			icon: "eup2p:eu_p2p_tunnel"
 			id: "1DFC0C1A50793CB7"
 			optional: true
 			rewards: [{ id: "17273254ED1D0497", type: "xp", xp: 15 }]
 			tasks: [
 				{ count: 2L, id: "515EF8ADF6CBCCA8", item: "expatternprovider:wireless_connect", type: "item" }
+				{ id: "349EE139528D42E2", item: "expatternprovider:wireless_tool", type: "item" }
 				{ count: 2L, id: "1DB67FD30D975773", item: "eup2p:eu_p2p_tunnel", type: "item" }
 			]
 			title: "Power Without Cables"
-			x: 15.0d
-			y: 9.5d
+			x: 4.0d
+			y: -4.5d
 		}
 		{
-			dependencies: ["2085F78EAB2C08E0"]
-			description: ["The &6Advanced Memory Card&r lists every P2P tunnel on the network and links, renames and retunes them from one screen, so nobody walks the cable."]
+			dependencies: ["1DFC0C1A50793CB7"]
+			description: [
+				"The &6Advanced Memory Card&r lists every P2P tunnel on the network and lets you link, rename and retune them from one screen, instead of walking the cable."
+			]
 			icon: "betterp2p:advanced_memory_card"
 			id: "43ED82AC7DACA796"
 			optional: true
 			rewards: [{ id: "5F308FB6C448072F", type: "xp", xp: 10 }]
 			tasks: [{ id: "5CB142A1AD3D13AB", item: "betterp2p:advanced_memory_card", type: "item" }]
 			title: "Better P2P"
-			x: 12.5d
-			y: 8.5d
+			x: 6.0d
+			y: -4.5d
 		}
 		{
-			dependencies: ["263BFD3AC4314340"]
-			description: ["A &6Wireless Access Point&r broadcasts the network; a &6Wireless Terminal&r carries the terminal in your pocket. Wireless Boosters stretch the range, and the energy bill with it."]
-			icon: "ae2:wireless_terminal"
-			id: "7CD0184FBE907F0C"
-			rewards: [{ id: "6B3E06B3EB676590", type: "xp", xp: 15 }]
-			tasks: [
-				{ id: "18326920E2D837AB", item: "ae2:wireless_access_point", type: "item" }
-				{ id: "29C9D1D5ABFD26D2", item: "ae2:wireless_terminal", type: "item" }
+			dependencies: ["38EE187ED07F2279"]
+			description: [
+				"A &6Wireless Access Point&r broadcasts the network, and AE2WTLib's terminals use it: pattern encoding, pattern access, and the &6Universal Terminal&r that holds them all. The Wireless Comprehensive Work Terminal folds the lot into one item."
+				"Range is the catch. Boosters stretch it, and the energy bill with it."
 			]
-			title: "Wireless Access"
-			x: 20.0d
-			y: 3.5d
-		}
-		{
-			dependencies: ["7CD0184FBE907F0C"]
-			description: ["AE2WTLib adds wireless pattern encoding and pattern access terminals, plus a &6Universal Terminal&r that merges them. The Wireless Comprehensive Work Terminal folds all four into one item."]
 			icon: "ae2wtlib:wireless_universal_terminal"
 			id: "19A021F221E595D2"
 			rewards: [{ id: "3559F2DC375F5BB1", type: "xp", xp: 20 }]
 			subtitle: "MV"
 			tasks: [
-				{ icon: "ae2wtlib:wireless_universal_terminal", id: "3879B06AF5DFFA9F", item: { Count: 1b, id: "itemfilters:or", tag: { items: [{ Count: 1b, id: "ae2wtlib:wireless_pattern_encoding_terminal" }, { Count: 1b, id: "ae2wtlib:wireless_pattern_access_terminal" }, { Count: 1b, id: "ae2wtlib:wireless_universal_terminal" }] } }, title: "Any AE2WTLib Terminal", type: "item" }
-				{ id: "1CCBFF717B7D189F", item: "wcwt:wireless_comprehensive_work_terminal", optional_task: true, type: "item" }
+				{ id: "18326920E2D837AB", item: "ae2:wireless_access_point", type: "item" }
+				{
+					icon: "ae2wtlib:wireless_universal_terminal"
+					id: "3879B06AF5DFFA9F"
+					item: {
+						Count: 1b
+						id: "itemfilters:or"
+						tag: {
+							items: [
+								{ Count: 1b, id: "ae2wtlib:wireless_pattern_encoding_terminal" }
+								{ Count: 1b, id: "ae2wtlib:wireless_pattern_access_terminal" }
+								{ Count: 1b, id: "ae2wtlib:wireless_universal_terminal" }
+							]
+						}
+					}
+					title: "Any AE2WTLib Terminal"
+					type: "item"
+				}
+				{
+					id: "1CCBFF717B7D189F"
+					item: "wcwt:wireless_comprehensive_work_terminal"
+					optional_task: true
+					type: "item"
+				}
 			]
 			title: "Wireless Terminals"
-			x: 22.5d
-			y: 5.0d
+			x: 2.0d
+			y: 0.0d
 		}
 		{
 			dependencies: ["19A021F221E595D2"]
-			description: ["Slot these into a wireless terminal: the &6Insert Card&r sends chosen inventory slots into the network, the &6Export Card&r keeps chosen items stocked in your inventory."]
+			description: [
+				"Two cards for a wireless terminal. The &6Insert Card&r sends the slots you choose into the network, and the Export Card keeps chosen items topped up in your inventory. Torches and food, mostly."
+			]
 			icon: "ae2insertexportcard:insert_card"
 			id: "7DC4B4BA51BF3F4C"
 			optional: true
@@ -487,12 +220,15 @@
 				{ id: "1399A705BB1397B8", item: "ae2insertexportcard:export_card", optional_task: true, type: "item" }
 			]
 			title: "Insert and Export Cards"
-			x: 25.0d
-			y: 5.0d
+			x: 4.0d
+			y: -1.5d
 		}
 		{
-			dependencies: ["401395583FA0B7EA"]
-			description: ["ExtendedAE's bigger parts each take an HV circuit: the &6Extended Pattern Provider&r and &6Extended Interface&r have four times the slots, the &6Extended Drive&r twice the cells. Fewer blocks, fewer channels."]
+			dependencies: ["38EE187ED07F2279"]
+			description: [
+				"ExtendedAE's bigger parts cost an HV circuit each. The &6Extended Pattern Provider&r and &6Extended Interface&r hold four times the slots, and the extended drive twice the cells."
+				"Fewer blocks means fewer channels."
+			]
 			icon: "expatternprovider:ex_pattern_provider"
 			id: "36995D579FF95FDB"
 			rewards: [{ id: "72289605AE19376E", type: "xp", xp: 25 }]
@@ -503,40 +239,28 @@
 				{ id: "072529BA9150572F", item: "expatternprovider:ex_drive", optional_task: true, type: "item" }
 			]
 			title: "ExtendedAE"
-			x: 27.5d
-			y: -2.5d
+			x: 2.0d
+			y: 3.0d
 		}
 		{
 			dependencies: ["36995D579FF95FDB"]
-			description: ["The &6Pattern Modifier&r multiplies or divides every pattern you load into it. Feed a parallel multiblock a whole batch per push instead of one recipe at a time."]
+			description: [
+				"The &6Pattern Modifier&r multiplies or divides every pattern you put in it. Handy when a parallel multiblock should get a whole batch per push instead of one recipe at a time."
+			]
 			icon: "expatternprovider:pattern_modifier"
 			id: "06BEE6F40C916AA1"
 			rewards: [{ id: "13AD955FAA008412", type: "xp", xp: 15 }]
 			subtitle: "HV"
 			tasks: [{ id: "772867038C0B4BCD", item: "expatternprovider:pattern_modifier", type: "item" }]
 			title: "Pattern Modifier"
-			x: 30.0d
-			y: -2.5d
+			x: 4.0d
+			y: 3.0d
 		}
 		{
 			dependencies: ["36995D579FF95FDB"]
-			description: ["A pair of &6Wireless Connectors&r carries channels across a short gap with no cable in between. It works in the same dimension at short range. Link the pair with the wireless tool."]
-			icon: "expatternprovider:wireless_connect"
-			id: "5A3C748BF85596CF"
-			optional: true
-			rewards: [{ id: "17F5F055020BF6D3", type: "xp", xp: 15 }]
-			subtitle: "HV"
-			tasks: [
-				{ count: 2L, id: "1A76F6E957334D41", item: "expatternprovider:wireless_connect", type: "item" }
-				{ id: "349EE139528D42E2", item: "expatternprovider:wireless_tool", type: "item" }
+			description: [
+				"The &6Extended Molecular Assembler&r runs several crafts at once. When that's still not enough, the Assembler Matrix is a multiblock full of assemblers with its own pattern storage, all on one channel."
 			]
-			title: "Wireless Connector"
-			x: 27.5d
-			y: -5.0d
-		}
-		{
-			dependencies: ["36995D579FF95FDB"]
-			description: ["The &6Extended Molecular Assembler&r runs several crafts at once. Past that, the &6Assembler Matrix&r is a whole multiblock of assemblers with its own pattern storage, all on one channel."]
 			icon: "expatternprovider:ex_molecular_assembler"
 			id: "775009BAB287E2EE"
 			optional: true
@@ -544,17 +268,22 @@
 			subtitle: "HV"
 			tasks: [
 				{ id: "742DEFA39EC2E2A3", item: "expatternprovider:ex_molecular_assembler", type: "item" }
-				{ id: "5DF7B3B33690FF02", item: "expatternprovider:assembler_matrix_frame", optional_task: true, type: "item" }
+				{
+					id: "5DF7B3B33690FF02"
+					item: "expatternprovider:assembler_matrix_frame"
+					optional_task: true
+					type: "item"
+				}
 			]
 			title: "Assemblers at Scale"
-			x: 30.0d
-			y: -5.0d
+			x: 4.0d
+			y: 4.5d
 		}
 		{
 			dependencies: ["36995D579FF95FDB"]
 			description: [
-				"Expanded AE scales autocrafting. Its &6Expanded Crafting Unit&r is the base of co-processors that double at every step, and each bigger one needs a better circuit."
-				"The &6Expanded Pattern Provider&r is the pattern side of the same upgrade."
+				"Expanded AE is for when crafting jobs outgrow your CPUs. Its &6Expanded Crafting Unit&r is the base of co-processors that double at every step, each asking for a better circuit."
+				"The Expanded Pattern Provider is the same idea on the pattern side."
 			]
 			icon: "expandedae:exp_crafting_unit"
 			id: "7478C96B907B506C"
@@ -566,12 +295,14 @@
 				{ id: "6AAFC32D78BAD239", item: "expandedae:exp_crafting_accelerator_2", optional_task: true, type: "item" }
 			]
 			title: "Expanded AE"
-			x: 30.0d
-			y: 0.0d
+			x: 6.0d
+			y: 4.5d
 		}
 		{
-			dependencies: ["1626F8CC75D6BBCD"]
-			description: ["Past 256k, &6MEGA Cells&r take over. Everything MEGA adds grows from the &6Accumulation Processor&r, made in the circuit assembler with an IV circuit: 1M to 256M cells, MEGA crafting units, interfaces and pattern providers."]
+			dependencies: ["38EE187ED07F2279"]
+			description: [
+				"Past 256k, &6MEGA Cells&r take over, and everything they add grows from the Accumulation Processor. That one comes out of the circuit assembler with an IV circuit, so MEGA waits for IV."
+			]
 			icon: "megacells:cell_component_1m"
 			id: "5A61972D645C5B48"
 			rewards: [{ id: "4599C28A2D83D012", type: "xp", xp: 30 }]
@@ -581,37 +312,62 @@
 				{ id: "49B82D9C09F18AA2", item: "megacells:cell_component_1m", type: "item" }
 			]
 			title: "MEGA Cells"
-			x: 25.0d
-			y: -2.5d
+			x: 2.0d
+			y: -1.5d
 		}
 		{
-			dependencies: ["7478C96B907B506C"]
+			dependencies: ["3312ACABB4B4739F"]
 			description: [
-				"Each planet gets its own network. The Earth-Moon Bridge in the EV chapter is what joins them."
-				"Ender storage works across planets, so a chest on Earth can feed a network on the Moon. Keep growing the network at home first; what it learns here, it does there too."
+				"The network leaves Earth in EV, over quantum bridges. The catch is the singularity pair: each planet's half comes from a seed made on that planet, so the Moon's bridge starts with a chemical reactor on the Moon."
 			]
 			icon: "ae2:quantum_ring"
 			id: "6DB0D0C11BE35CD7"
 			rewards: [{ id: "3A53F1759B11E473", type: "xp", xp: 30 }]
 			shape: "diamond"
 			size: 1.5d
+			subtitle: "EV"
 			tasks: [{ id: "21EFD8A858129CB5", type: "checkmark" }]
 			title: "Beyond This World"
-			x: 32.5d
+			x: 6.0d
 			y: 0.0d
 		}
 		{
 			dependencies: ["06BEE6F40C916AA1"]
-			description: ["One pattern for a whole family of GregTech materials: set a filter and it stands in for every matching recipe."]
+			description: [
+				"One &6Wildcard Pattern&r stands in for a whole family of GregTech materials: set a filter and it covers every matching recipe. One pattern can cover plates for every metal you own."
+			]
 			icon: "wildcard_pattern:wildcard_pattern"
 			id: "67EF6A99C884C643"
 			rewards: [{ id: "15D9E4C91325778E", type: "xp", xp: 40 }]
 			tasks: [{ id: "108D79EF7E01363D", item: "wildcard_pattern:wildcard_pattern", type: "item" }]
 			title: "Wildcard Pattern"
-			x: 32.5d
-			y: -2.5d
+			x: 6.0d
+			y: 3.0d
+		}
+		{
+			dependencies: ["19A021F221E595D2"]
+			description: [
+				"Put AE2WTLib's &6Quantum Bridge Card&r and one singularity of an entangled pair in a &6Wireless Crafting Terminal&r (the plain Wireless Terminal has no room for the card), and the other singularity in a quantum bridge at home."
+				"Now the terminal reaches your network at any distance and in any dimension. Keep the home bridge chunk-loaded and you can order cobblestone from Mars."
+			]
+			icon: "ae2wtlib:quantum_bridge_card"
+			id: "3312ACABB4B4739F"
+			rewards: [
+				{ id: "7EE32BF399C4E6C9", type: "xp", xp: 30 }
+				{ count: 2, id: "1CD52E04A5549809", item: "minecraft:ender_pearl", type: "item" }
+			]
+			subtitle: "MV"
+			tasks: [
+				{ id: "320A24469E09B001", item: "ae2wtlib:quantum_bridge_card", type: "item" }
+				{ count: 2L, id: "5875031616E0277E", item: "ae2:quantum_entangled_singularity", type: "item" }
+				{ id: "195AAFEDB9170DFC", item: "ae2:quantum_link", type: "item" }
+				{ count: 8L, id: "120DD4055C69C062", item: "ae2:quantum_ring", type: "item" }
+			]
+			title: "Wireless from Anywhere"
+			x: 4.0d
+			y: 0.0d
 		}
 	]
-	subtitle: ["One network for everything"]
+	subtitle: ["The network you built in LV, all grown up"]
 	title: "Applied Energistics"
 }

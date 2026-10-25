@@ -1,0 +1,1308 @@
+{
+	autofocus_id: "140A1C3C4979392E"
+	consume_items: false
+	default_hide_dependency_lines: false
+	default_quest_shape: ""
+	filename: "pl_mv"
+	group: "3027186E3042DDFB"
+	icon: "gtceu:ore_plant"
+	id: "3DD4AC1ED2526A8B"
+	order_index: 2
+	progression_mode: "flexible"
+	quest_links: [
+		{
+			id: "78BA164EA44832CD"
+			linked_quest: "162641406869CF74"
+			shape: "rsquare"
+			x: 23.0d
+			y: 2.25d
+		}
+		{
+			id: "74A0FAF7B573E821"
+			linked_quest: "376DA31AF22E8CD8"
+			shape: "rsquare"
+			x: 0.5d
+			y: 12.0d
+		}
+		{
+			id: "58375C52001E87B2"
+			linked_quest: "70A91737242112D0"
+			shape: "rsquare"
+			x: 19.0d
+			y: 12.75d
+		}
+		{
+			id: "1C91EE718836F734"
+			linked_quest: "5DB10211B3E10692"
+			shape: "rsquare"
+			x: 2.5d
+			y: 16.75d
+		}
+		{
+			id: "711FA7BE1E3C7F89"
+			linked_quest: "78196EE68F118BA4"
+			shape: "rsquare"
+			x: 0.5d
+			y: 18.25d
+		}
+		{
+			id: "1ED17BAEEBAE9746"
+			linked_quest: "325AC2585F63E613"
+			shape: "rsquare"
+			x: 8.5d
+			y: 28.5d
+		}
+		{
+			id: "7E212844780A65CB"
+			linked_quest: "388F688236DC7298"
+			shape: "rsquare"
+			x: 29.0d
+			y: 26.25d
+		}
+		{
+			id: "3254E134CC050F59"
+			linked_quest: "3954D84FC7C457CA"
+			shape: "rsquare"
+			x: 29.0d
+			y: 27.75d
+		}
+	]
+	quests: [
+		{
+			icon: "minecraft:raw_copper"
+			id: "140A1C3C4979392E"
+			shape: "rsquare"
+			size: 1.0d
+			subtitle: "Or any raw ore from the drills"
+			tasks: [
+				{ id: "10245AF70AC16EA5", item: "minecraft:raw_copper", optional_task: true, type: "item" }
+				{ id: "7E48B5FBFEEAD5BE", type: "checkmark" }
+			]
+			title: "Raw Copper"
+			x: 0.5d
+			y: 2.25d
+		}
+		{
+			icon: "minecraft:water_bucket"
+			id: "7117E4A2A9FA2934"
+			shape: "rsquare"
+			size: 1.0d
+			subtitle: "Or a little distilled water"
+			tasks: [
+				{ id: "3E146D37F19602F9", item: "minecraft:water_bucket", optional_task: true, type: "item" }
+				{ id: "3B83B9B4266B962F", type: "checkmark" }
+			]
+			title: "Water"
+			x: 0.5d
+			y: 3.75d
+		}
+		{
+			dependencies: ["140A1C3C4979392E", "7117E4A2A9FA2934"]
+			description: [
+				"The steam chart's whole Large Steam line, in one hall: crush, wash, spin, crush again."
+				"Same dust and same byproducts, so every byproduct still needs somewhere to go."
+			]
+			icon: "gtceu:ore_plant"
+			id: "5334E508185B316C"
+			shape: "gear"
+			size: 1.5d
+			tasks: [
+				{ id: "70D52818945A4FFA", item: "gtceu:ore_plant", optional_task: true, type: "item" }
+				{ id: "397296008976F6B3", type: "checkmark" }
+			]
+			title: "Ore Plant"
+			x: 2.5d
+			y: 3.0d
+		}
+		{
+			dependencies: ["5334E508185B316C"]
+			icon: "gtceu:copper_dust"
+			id: "5352A7D1281CEEA3"
+			size: 1.25d
+			tasks: [
+				{ id: "39F94C289AF95FC9", item: "gtceu:copper_dust", optional_task: true, type: "item" }
+				{ id: "5056424DD09D5A5A", type: "checkmark" }
+			]
+			title: "Copper Dust"
+			x: 5.0d
+			y: 0.75d
+		}
+		{
+			dependencies: ["5334E508185B316C"]
+			icon: "gtceu:cobalt_dust"
+			id: "126F9C63160F964F"
+			size: 0.75d
+			subtitle: "Cobalt brass"
+			tasks: [
+				{ id: "321A886147032537", item: "gtceu:cobalt_dust", optional_task: true, type: "item" }
+				{ id: "332B9AAA1741C360", type: "checkmark" }
+			]
+			title: "Cobalt"
+			x: 5.0d
+			y: 2.0d
+		}
+		{
+			dependencies: ["5334E508185B316C"]
+			icon: "gtceu:gold_dust"
+			id: "7F26B4878C13CC15"
+			size: 0.75d
+			subtitle: "Electrum and the circuit wires"
+			tasks: [
+				{ id: "5B0716C56DB58B9E", item: "gtceu:gold_dust", optional_task: true, type: "item" }
+				{ id: "74BE798FE831A0DC", type: "checkmark" }
+			]
+			title: "Gold"
+			x: 5.0d
+			y: 3.25d
+		}
+		{
+			dependencies: ["5334E508185B316C"]
+			icon: "gtceu:nickel_dust"
+			id: "772E9C680D345515"
+			size: 0.75d
+			subtitle: "Stainless steel, below"
+			tasks: [
+				{ id: "1704B062C789998E", item: "gtceu:nickel_dust", optional_task: true, type: "item" }
+				{ id: "178078B1FC03696D", type: "checkmark" }
+			]
+			title: "Nickel"
+			x: 5.0d
+			y: 4.5d
+		}
+		{
+			dependencies: ["5334E508185B316C"]
+			icon: "gtceu:stone_dust"
+			id: "3ECF4CC21E53BE78"
+			size: 1.0d
+			subtitle: "The tailings"
+			tasks: [
+				{ id: "1A0026C68A870403", item: "gtceu:stone_dust", optional_task: true, type: "item" }
+				{ id: "55236B22DFD485A7", type: "checkmark" }
+			]
+			title: "Stone Dust"
+			x: 5.0d
+			y: 5.75d
+		}
+		{
+			dependencies: ["3ECF4CC21E53BE78"]
+			icon: "gtceu:mv_centrifuge"
+			id: "37E1FD6ABC7D63BC"
+			shape: "gear"
+			size: 1.25d
+			subtitle: "Stone dust separation"
+			tasks: [
+				{ id: "551113A1556AF4C2", item: "gtceu:mv_centrifuge", optional_task: true, type: "item" }
+				{ id: "318E96586C6D5DCE", type: "checkmark" }
+			]
+			title: "Centrifuge"
+			x: 7.0d
+			y: 5.75d
+		}
+		{
+			dependencies: ["37E1FD6ABC7D63BC"]
+			icon: "gtceu:quartzite_dust"
+			id: "15E1D3CC3B2E8A43"
+			size: 0.75d
+			subtitle: "Glass dust"
+			tasks: [
+				{ id: "3D18EB531AFF8B9C", item: "gtceu:quartzite_dust", optional_task: true, type: "item" }
+				{ id: "5A2CFB49CDA6D4D6", type: "checkmark" }
+			]
+			title: "Quartzite"
+			x: 9.0d
+			y: 5.0d
+		}
+		{
+			dependencies: ["37E1FD6ABC7D63BC"]
+			icon: "gtceu:metal_mixture_dust"
+			id: "76D93624226C7F19"
+			size: 0.75d
+			subtitle: "Kept: the EV centrifuge splits it"
+			tasks: [
+				{ id: "728278CE1FF99797", item: "gtceu:metal_mixture_dust", optional_task: true, type: "item" }
+				{ id: "599C4EAEA8766482", type: "checkmark" }
+			]
+			title: "Metal Mixture"
+			x: 9.0d
+			y: 6.5d
+		}
+		{
+			icon: "minecraft:sand"
+			id: "7175D25489718417"
+			shape: "rsquare"
+			size: 1.0d
+			tasks: [
+				{ id: "3ADE1A34134087FD", item: "minecraft:sand", optional_task: true, type: "item" }
+				{ id: "3AE9554367774C2B", type: "checkmark" }
+			]
+			title: "Sand"
+			x: 13.0d
+			y: 0.75d
+		}
+		{
+			dependencies: ["7175D25489718417"]
+			icon: "gtceu:silicon_dioxide_dust"
+			id: "370E8C453F35D5B8"
+			size: 1.0d
+			subtitle: "Electrolyzer"
+			tasks: [
+				{ id: "35C45DAE79BA8508", item: "gtceu:silicon_dioxide_dust", optional_task: true, type: "item" }
+				{ id: "700B5A8A82EACCA6", type: "checkmark" }
+			]
+			title: "Silicon Dioxide"
+			x: 15.0d
+			y: 0.75d
+		}
+		{
+			icon: "gtceu:carbon_dust"
+			id: "7F608DE81C849B19"
+			shape: "rsquare"
+			size: 1.0d
+			subtitle: "Coal dust in the centrifuge"
+			tasks: [
+				{ id: "7F62F2F8F5E3C555", item: "gtceu:carbon_dust", optional_task: true, type: "item" }
+				{ id: "38180D45A94CB992", type: "checkmark" }
+			]
+			title: "Carbon Dust"
+			x: 15.0d
+			y: 2.25d
+		}
+		{
+			dependencies: ["370E8C453F35D5B8", "7F608DE81C849B19"]
+			icon: "gtceu:electric_blast_furnace"
+			id: "58A045B4E4E38A51"
+			shape: "gear"
+			size: 1.25d
+			subtitle: "Kanthal coils, two MV hatches"
+			tasks: [
+				{ id: "3C59D01B154CBFB5", item: "gtceu:electric_blast_furnace", optional_task: true, type: "item" }
+				{ id: "73B9CDB284068025", type: "checkmark" }
+			]
+			title: "Electric Blast Furnace"
+			x: 17.0d
+			y: 1.5d
+		}
+		{
+			dependencies: ["58A045B4E4E38A51"]
+			icon: "gtceu:hot_silicon_ingot"
+			id: "795EB23A6DA5B410"
+			size: 1.0d
+			tasks: [
+				{ id: "1506A333BA24CBA4", item: "gtceu:hot_silicon_ingot", optional_task: true, type: "item" }
+				{ id: "71B6A52A2C7D72D4", type: "checkmark" }
+			]
+			title: "Hot Silicon Ingot"
+			x: 19.0d
+			y: 0.75d
+		}
+		{
+			dependencies: ["58A045B4E4E38A51"]
+			description: ["Each silicon ingot leaves a puff of it. It's toxic, so it goes to methanol or into a tank, never into the air."]
+			icon: "gtceu:carbon_monoxide_bucket"
+			id: "5DA41E40CD6B586C"
+			size: 0.75d
+			tasks: [
+				{ id: "7C37B8E8E1B54E17", item: "gtceu:carbon_monoxide_bucket", optional_task: true, type: "item" }
+				{ id: "3A76DED8E8F1D10A", type: "checkmark" }
+			]
+			title: "Carbon Monoxide"
+			x: 19.0d
+			y: 2.25d
+		}
+		{
+			dependencies: ["795EB23A6DA5B410"]
+			icon: "gtceu:silicon_ingot"
+			id: "5BA23EBE92918B00"
+			size: 1.0d
+			subtitle: "Cooled in the chemical bath"
+			tasks: [
+				{ id: "7BB4F82739E6813F", item: "gtceu:silicon_ingot", optional_task: true, type: "item" }
+				{ id: "74CF01AA2301A38F", type: "checkmark" }
+			]
+			title: "Silicon"
+			x: 21.0d
+			y: 0.75d
+		}
+		{
+			dependencies: ["5BA23EBE92918B00"]
+			icon: "gtceu:silicon_dust"
+			id: "7F3B1584A5EC2760"
+			size: 1.0d
+			subtitle: "Macerator"
+			tasks: [
+				{ id: "78E4F7F37D94895F", item: "gtceu:silicon_dust", optional_task: true, type: "item" }
+				{ id: "7DD322BE6A167085", type: "checkmark" }
+			]
+			title: "Silicon Dust"
+			x: 23.0d
+			y: 0.75d
+		}
+		{
+			dependencies: ["7F3B1584A5EC2760", "162641406869CF74"]
+			description: ["A pile of silicon dust and a pinch of LV's gallium arsenide, grown into one big crystal."]
+			icon: "gtceu:silicon_boule"
+			id: "7BBADF62374B8923"
+			size: 1.0d
+			subtitle: "Back into the EBF"
+			tasks: [
+				{ id: "3F299B5685457151", item: "gtceu:silicon_boule", optional_task: true, type: "item" }
+				{ id: "141F366E100BE696", type: "checkmark" }
+			]
+			title: "Silicon Boule"
+			x: 25.0d
+			y: 1.5d
+		}
+		{
+			dependencies: ["7BBADF62374B8923"]
+			icon: "gtceu:silicon_wafer"
+			id: "305F916B3530ABAD"
+			size: 1.0d
+			subtitle: "Cutter"
+			tasks: [
+				{ id: "797FD5B0C5DCC3E3", item: "gtceu:silicon_wafer", optional_task: true, type: "item" }
+				{ id: "3F150E2CAEC1B35B", type: "checkmark" }
+			]
+			title: "Silicon Wafer"
+			x: 27.0d
+			y: 1.5d
+		}
+		{
+			dependencies: ["305F916B3530ABAD"]
+			icon: "gtceu:ilc_wafer"
+			id: "1C7659EAE352A09C"
+			size: 1.0d
+			subtitle: "Laser engraver, red lens"
+			tasks: [
+				{ id: "703DDE49762D2D24", item: "gtceu:ilc_wafer", optional_task: true, type: "item" }
+				{ id: "5A6A9B4BDE38CA2F", type: "checkmark" }
+			]
+			title: "ILC Wafer"
+			x: 29.0d
+			y: 0.75d
+		}
+		{
+			dependencies: ["305F916B3530ABAD"]
+			icon: "gtceu:ram_wafer"
+			id: "16EC00EBE3A1709C"
+			size: 1.0d
+			subtitle: "Green lens"
+			tasks: [
+				{ id: "1113734CFD2EA594", item: "gtceu:ram_wafer", optional_task: true, type: "item" }
+				{ id: "763AF937FA939E5A", type: "checkmark" }
+			]
+			title: "RAM Wafer"
+			x: 29.0d
+			y: 2.25d
+		}
+		{
+			dependencies: ["1C7659EAE352A09C"]
+			icon: "gtceu:ilc_chip"
+			id: "1DA952BCA999523F"
+			size: 1.25d
+			subtitle: "Cutter"
+			tasks: [
+				{ id: "1D8364946D78C19D", item: "gtceu:ilc_chip", optional_task: true, type: "item" }
+				{ id: "19F94169BFBCD7DF", type: "checkmark" }
+			]
+			title: "ILC Chip"
+			x: 31.0d
+			y: 0.75d
+		}
+		{
+			dependencies: ["16EC00EBE3A1709C"]
+			icon: "gtceu:ram_chip"
+			id: "789C44B2ADB7CB6F"
+			size: 1.25d
+			subtitle: "Cutter"
+			tasks: [
+				{ id: "10F5355153B1FAF3", item: "gtceu:ram_chip", optional_task: true, type: "item" }
+				{ id: "12BB3354276E7ACC", type: "checkmark" }
+			]
+			title: "RAM Chip"
+			x: 31.0d
+			y: 2.25d
+		}
+		{
+			icon: "minecraft:oak_log"
+			id: "17EE635E773D8A93"
+			shape: "rsquare"
+			size: 1.0d
+			subtitle: "From the greenhouse"
+			tasks: [
+				{ id: "5546BAEA0507B916", item: "minecraft:oak_log", optional_task: true, type: "item" }
+				{ id: "5DADDD2E10D6F819", type: "checkmark" }
+			]
+			title: "Logs"
+			x: 0.5d
+			y: 10.5d
+		}
+		{
+			dependencies: ["17EE635E773D8A93", "376DA31AF22E8CD8"]
+			icon: "gtceu:pyrolyse_oven"
+			id: "3448324095EB1D51"
+			shape: "gear"
+			size: 1.25d
+			subtitle: "Nitrogen keeps the byproducts"
+			tasks: [
+				{ id: "1D4964E5C334AFF4", item: "gtceu:pyrolyse_oven", optional_task: true, type: "item" }
+				{ id: "72161E1633A09801", type: "checkmark" }
+			]
+			title: "Pyrolyse Oven"
+			x: 2.5d
+			y: 11.25d
+		}
+		{
+			dependencies: ["3448324095EB1D51"]
+			icon: "minecraft:charcoal"
+			id: "71C0F19AA6C6EFF9"
+			size: 0.75d
+			subtitle: "Fuel, or carbon for the arc furnace"
+			tasks: [
+				{ id: "3711FCB613CE191C", item: "minecraft:charcoal", optional_task: true, type: "item" }
+				{ id: "1FEB2D94479D5405", type: "checkmark" }
+			]
+			title: "Charcoal"
+			x: 5.0d
+			y: 10.0d
+		}
+		{
+			dependencies: ["3448324095EB1D51"]
+			icon: "gtceu:charcoal_byproducts_bucket"
+			id: "530DB8D39474C366"
+			size: 1.0d
+			tasks: [
+				{ id: "5A36C9FFAE089581", item: "gtceu:charcoal_byproducts_bucket", optional_task: true, type: "item" }
+				{ id: "511C05E04E1B91CE", type: "checkmark" }
+			]
+			title: "Charcoal Byproducts"
+			x: 5.0d
+			y: 11.5d
+		}
+		{
+			dependencies: ["530DB8D39474C366"]
+			description: [
+				"A distillation column for everything that grew. Each layer pulls one fraction, so each fraction needs its own tank."
+				"Run its outputs through it again and they split further."
+			]
+			icon: "gtceu:biorefinery"
+			id: "1C6AA54777EAF1DD"
+			shape: "gear"
+			size: 1.5d
+			tasks: [
+				{ id: "553BF0D01720441B", item: "gtceu:biorefinery", optional_task: true, type: "item" }
+				{ id: "3195033F1108F156", type: "checkmark" }
+			]
+			title: "Biorefinery"
+			x: 7.0d
+			y: 11.5d
+		}
+		{
+			dependencies: ["1C6AA54777EAF1DD"]
+			icon: "gtceu:wood_tar_bucket"
+			id: "19A8B02DCA6E0826"
+			size: 1.0d
+			tasks: [
+				{ id: "71FE60781450BE7D", item: "gtceu:wood_tar_bucket", optional_task: true, type: "item" }
+				{ id: "58060F7EAB7DA93A", type: "checkmark" }
+			]
+			title: "Wood Tar"
+			x: 9.0d
+			y: 10.5d
+		}
+		{
+			dependencies: ["1C6AA54777EAF1DD"]
+			icon: "gtceu:wood_vinegar_bucket"
+			id: "19BBA732E02D5FEE"
+			size: 1.0d
+			tasks: [
+				{ id: "5B8FAC7A2F43BECA", item: "gtceu:wood_vinegar_bucket", optional_task: true, type: "item" }
+				{ id: "37CC81839E16BD64", type: "checkmark" }
+			]
+			title: "Wood Vinegar"
+			x: 9.0d
+			y: 12.0d
+		}
+		{
+			dependencies: ["1C6AA54777EAF1DD"]
+			icon: "gtceu:wood_gas_bucket"
+			id: "57ABFD6435016C70"
+			size: 0.75d
+			subtitle: "Gas turbine, or split again"
+			tasks: [
+				{ id: "75496CD166247F4A", item: "gtceu:wood_gas_bucket", optional_task: true, type: "item" }
+				{ id: "5D36F457BBF18392", type: "checkmark" }
+			]
+			title: "Wood Gas"
+			x: 9.0d
+			y: 13.5d
+		}
+		{
+			dependencies: ["19A8B02DCA6E0826"]
+			icon: "gtceu:benzene_bucket"
+			id: "753F4EB4AD967E41"
+			size: 0.75d
+			subtitle: "Tank it: HV makes styrene and epoxy"
+			tasks: [
+				{ id: "7B4FA3B43EC71C8E", item: "gtceu:benzene_bucket", optional_task: true, type: "item" }
+				{ id: "75E78B2E95CFACC1", type: "checkmark" }
+			]
+			title: "Benzene"
+			x: 11.0d
+			y: 9.75d
+		}
+		{
+			dependencies: ["19A8B02DCA6E0826"]
+			icon: "gtceu:phenol_bucket"
+			id: "15726B151FE16B78"
+			size: 0.75d
+			subtitle: "HV's epoxy wants it"
+			tasks: [
+				{ id: "5D10AF009F5A6083", item: "gtceu:phenol_bucket", optional_task: true, type: "item" }
+				{ id: "5DC7B3BDF0D8FAA7", type: "checkmark" }
+			]
+			title: "Phenol"
+			x: 11.0d
+			y: 11.0d
+		}
+		{
+			dependencies: ["19BBA732E02D5FEE"]
+			icon: "gtceu:methanol_bucket"
+			id: "193E72A27638CE3B"
+			size: 1.0d
+			subtitle: "Biodiesel now, gasoline at HV"
+			tasks: [
+				{ id: "59139873818D2897", item: "gtceu:methanol_bucket", optional_task: true, type: "item" }
+				{ id: "7521935889547964", type: "checkmark" }
+			]
+			title: "Methanol"
+			x: 11.0d
+			y: 12.25d
+		}
+		{
+			dependencies: ["19BBA732E02D5FEE"]
+			icon: "gtceu:acetone_bucket"
+			id: "1D62F8CA7C28023C"
+			size: 0.75d
+			subtitle: "Glue now, gasoline at HV"
+			tasks: [
+				{ id: "5B9E7BC854A05808", item: "gtceu:acetone_bucket", optional_task: true, type: "item" }
+				{ id: "336BE167A05866D6", type: "checkmark" }
+			]
+			title: "Acetone"
+			x: 11.0d
+			y: 13.5d
+		}
+		{
+			description: ["GregTech's own drilling rig, on a deposit that never runs dry."]
+			icon: "gtceu:oil_bucket"
+			id: "5A7A0DCA855148BF"
+			shape: "rsquare"
+			size: 1.0d
+			subtitle: "MV fluid drilling rig"
+			tasks: [
+				{ id: "71EE52BC31CF84CC", item: "gtceu:oil_bucket", optional_task: true, type: "item" }
+				{ id: "582EC56CD3781BE2", type: "checkmark" }
+			]
+			title: "Crude Oil"
+			x: 15.0d
+			y: 10.5d
+		}
+		{
+			dependencies: ["5A7A0DCA855148BF"]
+			icon: "gtceu:mv_distillery"
+			id: "11AE48749D98C844"
+			shape: "gear"
+			size: 1.25d
+			subtitle: "One fraction per circuit"
+			tasks: [
+				{ id: "5665916BC7A2E700", item: "gtceu:mv_distillery", optional_task: true, type: "item" }
+				{ id: "33472A969ADEBD75", type: "checkmark" }
+			]
+			title: "Distillery"
+			x: 17.0d
+			y: 10.5d
+		}
+		{
+			dependencies: ["11AE48749D98C844"]
+			icon: "gtceu:sulfuric_light_fuel_bucket"
+			id: "17F4FDC0C6AFF611"
+			size: 1.0d
+			tasks: [
+				{ id: "1A9D0E898FBEA2F6", item: "gtceu:sulfuric_light_fuel_bucket", optional_task: true, type: "item" }
+				{ id: "502F25283AC0F4BA", type: "checkmark" }
+			]
+			title: "Sulfuric Light Fuel"
+			x: 19.0d
+			y: 9.75d
+		}
+		{
+			dependencies: ["11AE48749D98C844"]
+			icon: "gtceu:sulfuric_heavy_fuel_bucket"
+			id: "38B9150B1A9B70FF"
+			size: 1.0d
+			tasks: [
+				{ id: "3B670D9715E5BC83", item: "gtceu:sulfuric_heavy_fuel_bucket", optional_task: true, type: "item" }
+				{ id: "5948782ED34853AD", type: "checkmark" }
+			]
+			title: "Sulfuric Heavy Fuel"
+			x: 19.0d
+			y: 11.25d
+		}
+		{
+			dependencies: ["17F4FDC0C6AFF611", "38B9150B1A9B70FF", "70A91737242112D0"]
+			icon: "gtceu:mv_chemical_reactor"
+			id: "788CBEF57C2426E1"
+			shape: "gear"
+			size: 1.25d
+			subtitle: "Hydrogen takes the sulfur out"
+			tasks: [
+				{ id: "1B93BAE208498020", item: "gtceu:mv_chemical_reactor", optional_task: true, type: "item" }
+				{ id: "16977A4CF28A0B10", type: "checkmark" }
+			]
+			title: "Chemical Reactor"
+			x: 21.0d
+			y: 11.25d
+		}
+		{
+			dependencies: ["788CBEF57C2426E1"]
+			icon: "gtceu:light_fuel_bucket"
+			id: "35A04771E8252D31"
+			size: 1.0d
+			tasks: [
+				{ id: "1FFCDBE3F884CA5A", item: "gtceu:light_fuel_bucket", optional_task: true, type: "item" }
+				{ id: "3172A336A8A2C0D8", type: "checkmark" }
+			]
+			title: "Light Fuel"
+			x: 23.0d
+			y: 9.75d
+		}
+		{
+			dependencies: ["788CBEF57C2426E1"]
+			icon: "gtceu:heavy_fuel_bucket"
+			id: "5A497DE21401B625"
+			size: 1.0d
+			tasks: [
+				{ id: "3A63652E1955E21E", item: "gtceu:heavy_fuel_bucket", optional_task: true, type: "item" }
+				{ id: "51C1E86C38144B60", type: "checkmark" }
+			]
+			title: "Heavy Fuel"
+			x: 23.0d
+			y: 11.25d
+		}
+		{
+			dependencies: ["788CBEF57C2426E1"]
+			icon: "gtceu:hydrogen_sulfide_bucket"
+			id: "56E0A1E3A01FE8ED"
+			size: 0.75d
+			subtitle: "Becomes sulfuric acid"
+			tasks: [
+				{ id: "5AB954C839463C52", item: "gtceu:hydrogen_sulfide_bucket", optional_task: true, type: "item" }
+				{ id: "5477ECC928E41CE0", type: "checkmark" }
+			]
+			title: "Hydrogen Sulfide"
+			x: 23.0d
+			y: 12.75d
+		}
+		{
+			dependencies: ["35A04771E8252D31", "5A497DE21401B625"]
+			description: ["Five parts light to one heavy. It runs MV's power until gasoline shows up."]
+			icon: "gtceu:diesel_bucket"
+			id: "3B49C5C485933961"
+			size: 1.25d
+			subtitle: "Mixer"
+			tasks: [
+				{ id: "3D40A01D2A0FC07D", item: "gtceu:diesel_bucket", optional_task: true, type: "item" }
+				{ id: "169D6A40F9618A0D", type: "checkmark" }
+			]
+			title: "Diesel"
+			x: 25.0d
+			y: 10.5d
+		}
+		{
+			dependencies: ["5DB10211B3E10692"]
+			icon: "gtceu:diluted_sulfuric_acid_bucket"
+			id: "3B175B81E822C9CA"
+			size: 1.0d
+			tasks: [
+				{ id: "7950468C787FF88B", item: "gtceu:diluted_sulfuric_acid_bucket", optional_task: true, type: "item" }
+				{ id: "79EABF686C26F90B", type: "checkmark" }
+			]
+			title: "Diluted Sulfuric Acid"
+			x: 4.5d
+			y: 17.5d
+		}
+		{
+			dependencies: ["3B175B81E822C9CA"]
+			icon: "gtceu:sulfuric_acid_bucket"
+			id: "71047F7E28181CAB"
+			shape: "circle"
+			size: 0.75d
+			subtitle: "Distillery: the acid goes round again"
+			tasks: [
+				{ id: "5513A4071963676D", item: "gtceu:sulfuric_acid_bucket", optional_task: true, type: "item" }
+				{ id: "110378E0E30B4C83", type: "checkmark" }
+			]
+			title: "Sulfuric Acid, Back"
+			x: 6.5d
+			y: 17.5d
+		}
+		{
+			dependencies: ["78196EE68F118BA4"]
+			icon: "gtceu:ethanol_bucket"
+			id: "3B4CA27555ED52FF"
+			size: 1.0d
+			subtitle: "Distillery or biorefinery"
+			tasks: [
+				{ id: "7E7B4C468ABBC4FA", item: "gtceu:ethanol_bucket", optional_task: true, type: "item" }
+				{ id: "377540B16CFBEDF9", type: "checkmark" }
+			]
+			title: "Ethanol"
+			x: 2.5d
+			y: 18.25d
+		}
+		{
+			dependencies: ["3B4CA27555ED52FF", "5DB10211B3E10692"]
+			icon: "gtceu:ethylene_bucket"
+			id: "3F098B86CDAAC38D"
+			size: 1.0d
+			subtitle: "Ethanol dried with sulfuric acid"
+			tasks: [
+				{ id: "1817FCF8D8C3104E", item: "gtceu:ethylene_bucket", optional_task: true, type: "item" }
+				{ id: "3CCC4D23D38DCFBD", type: "checkmark" }
+			]
+			title: "Ethylene"
+			x: 4.5d
+			y: 19.0d
+		}
+		{
+			dependencies: ["3F098B86CDAAC38D"]
+			description: ["Plastic at last: transistors, hulls and a great many plates."]
+			icon: "gtceu:polyethylene_bucket"
+			id: "1CC7E58747F973C2"
+			size: 1.25d
+			subtitle: "With oxygen"
+			tasks: [
+				{ id: "18B6AF9514659B8D", item: "gtceu:polyethylene_bucket", optional_task: true, type: "item" }
+				{ id: "7D29CADFAA77C6F8", type: "checkmark" }
+			]
+			title: "Polyethylene"
+			x: 6.5d
+			y: 19.0d
+		}
+		{
+			icon: "gtceu:salt_water_bucket"
+			id: "5F664A7E3F56B341"
+			shape: "rsquare"
+			size: 1.0d
+			subtitle: "Drilling rig, or salt and water"
+			tasks: [
+				{ id: "5A932236E6CDA24B", item: "gtceu:salt_water_bucket", optional_task: true, type: "item" }
+				{ id: "5B15E0542682FA76", type: "checkmark" }
+			]
+			title: "Salt Water"
+			x: 2.5d
+			y: 22.0d
+		}
+		{
+			dependencies: ["5F664A7E3F56B341"]
+			icon: "gtceu:chlorine_bucket"
+			id: "5448FA5C814B1DBD"
+			size: 1.0d
+			subtitle: "Electrolyzer; hydrogen and lye on the side"
+			tasks: [
+				{ id: "178870933F861904", item: "gtceu:chlorine_bucket", optional_task: true, type: "item" }
+				{ id: "1433B54A69D44734", type: "checkmark" }
+			]
+			title: "Chlorine"
+			x: 4.5d
+			y: 22.0d
+		}
+		{
+			dependencies: ["3F098B86CDAAC38D", "5448FA5C814B1DBD", "15043AB7481B7736"]
+			icon: "gtceu:vinyl_chloride_bucket"
+			id: "365E71F07FE451E2"
+			size: 1.0d
+			tasks: [
+				{ id: "7D92E40A3D513907", item: "gtceu:vinyl_chloride_bucket", optional_task: true, type: "item" }
+				{ id: "32EAC38DFC8195E4", type: "checkmark" }
+			]
+			title: "Vinyl Chloride"
+			x: 6.5d
+			y: 20.5d
+		}
+		{
+			dependencies: ["5448FA5C814B1DBD"]
+			icon: "gtceu:hydrochloric_acid_bucket"
+			id: "15043AB7481B7736"
+			size: 1.0d
+			subtitle: "Goes back in with oxygen"
+			tasks: [
+				{ id: "31D5D568083C7B22", item: "gtceu:hydrochloric_acid_bucket", optional_task: true, type: "item" }
+				{ id: "7DDF50A8C1470121", type: "checkmark" }
+			]
+			title: "Hydrochloric Acid"
+			x: 6.5d
+			y: 22.0d
+		}
+		{
+			dependencies: ["365E71F07FE451E2"]
+			description: ["The hazmat suit is mostly this."]
+			icon: "gtceu:polyvinyl_chloride_bucket"
+			id: "5E1160E3EC58EB29"
+			size: 1.25d
+			subtitle: "With oxygen"
+			tasks: [
+				{ id: "14CA44A9B8A22ACD", item: "gtceu:polyvinyl_chloride_bucket", optional_task: true, type: "item" }
+				{ id: "1F21B9274FC6E6E1", type: "checkmark" }
+			]
+			title: "PVC"
+			x: 8.5d
+			y: 20.5d
+		}
+		{
+			icon: "gtceu:ruby_dust"
+			id: "7D872ECD77AFB603"
+			shape: "rsquare"
+			size: 1.0d
+			subtitle: "Deep redstone vein"
+			tasks: [
+				{ id: "5E482058F4ED4F55", item: "gtceu:ruby_dust", optional_task: true, type: "item" }
+				{ id: "37D7034B05692F01", type: "checkmark" }
+			]
+			title: "Ruby Dust"
+			x: 12.75d
+			y: 20.5d
+		}
+		{
+			dependencies: ["7D872ECD77AFB603"]
+			icon: "gtceu:mv_electrolyzer"
+			id: "3BA74246E66C42D8"
+			shape: "gear"
+			size: 1.25d
+			tasks: [
+				{ id: "5FFFCA930D97499A", item: "gtceu:mv_electrolyzer", optional_task: true, type: "item" }
+				{ id: "106CFA4EB029CBF1", type: "checkmark" }
+			]
+			title: "Electrolyzer"
+			x: 14.75d
+			y: 20.5d
+		}
+		{
+			icon: "gtceu:manganese_dust"
+			id: "100239312E5967FF"
+			shape: "rsquare"
+			size: 1.0d
+			tasks: [
+				{ id: "5F78D698C3272CB7", item: "gtceu:manganese_dust", optional_task: true, type: "item" }
+				{ id: "39A1F26D18D21130", type: "checkmark" }
+			]
+			title: "Manganese"
+			x: 16.75d
+			y: 16.75d
+		}
+		{
+			icon: "gtceu:nickel_dust"
+			id: "34FB06BFD72FC9B3"
+			shape: "rsquare"
+			size: 1.0d
+			tasks: [
+				{ id: "1BCBE4681440BDD4", item: "gtceu:nickel_dust", optional_task: true, type: "item" }
+				{ id: "7BFB9ACC622D901B", type: "checkmark" }
+			]
+			title: "Nickel"
+			x: 16.75d
+			y: 18.25d
+		}
+		{
+			dependencies: ["3BA74246E66C42D8"]
+			icon: "gtceu:chromium_dust"
+			id: "7EC6299F8E7FA11A"
+			size: 1.0d
+			tasks: [
+				{ id: "5FD420DD25ED7A91", item: "gtceu:chromium_dust", optional_task: true, type: "item" }
+				{ id: "7BCDEB7A207F85D5", type: "checkmark" }
+			]
+			title: "Chromium"
+			x: 16.75d
+			y: 19.75d
+		}
+		{
+			dependencies: ["3BA74246E66C42D8"]
+			icon: "gtceu:aluminium_dust"
+			id: "546B5B179EB248EA"
+			size: 1.0d
+			tasks: [
+				{ id: "12984A21B253005E", item: "gtceu:aluminium_dust", optional_task: true, type: "item" }
+				{ id: "1726B18B1D443D8B", type: "checkmark" }
+			]
+			title: "Aluminium"
+			x: 16.75d
+			y: 21.25d
+		}
+		{
+			icon: "gtceu:iron_dust"
+			id: "1B03F035776D5191"
+			shape: "rsquare"
+			size: 1.0d
+			tasks: [
+				{ id: "5FFA5CFF28840D7E", item: "gtceu:iron_dust", optional_task: true, type: "item" }
+				{ id: "57BEC70C2311A45B", type: "checkmark" }
+			]
+			title: "Iron Dust"
+			x: 16.75d
+			y: 22.75d
+		}
+		{
+			dependencies: ["100239312E5967FF", "34FB06BFD72FC9B3", "7EC6299F8E7FA11A"]
+			icon: "gtceu:stainless_steel_dust"
+			id: "7049B74B2CF8745D"
+			size: 1.0d
+			subtitle: "Mixer, with six iron"
+			tasks: [
+				{ id: "5E8D021FD60DD444", item: "gtceu:stainless_steel_dust", optional_task: true, type: "item" }
+				{ id: "596BD04C6BDE6F3E", type: "checkmark" }
+			]
+			title: "Stainless Steel Dust"
+			x: 18.75d
+			y: 18.25d
+		}
+		{
+			dependencies: ["7049B74B2CF8745D"]
+			icon: "gtceu:stainless_steel_ingot"
+			id: "199871AEC90819A2"
+			size: 1.25d
+			subtitle: "EBF at HV voltage: two MV hatches"
+			tasks: [
+				{ id: "37900481AAB0189E", item: "gtceu:stainless_steel_ingot", optional_task: true, type: "item" }
+				{ id: "5FFCDC0D49308E5D", type: "checkmark" }
+			]
+			title: "Stainless Steel"
+			x: 20.75d
+			y: 18.25d
+		}
+		{
+			dependencies: ["7EC6299F8E7FA11A", "546B5B179EB248EA", "1B03F035776D5191"]
+			icon: "gtceu:kanthal_dust"
+			id: "55CC02521866F8F0"
+			size: 1.0d
+			subtitle: "Mixer"
+			tasks: [
+				{ id: "59E1C870237F16CE", item: "gtceu:kanthal_dust", optional_task: true, type: "item" }
+				{ id: "78F69037B019A664", type: "checkmark" }
+			]
+			title: "Kanthal Dust"
+			x: 18.75d
+			y: 22.0d
+		}
+		{
+			dependencies: ["55CC02521866F8F0"]
+			icon: "gtceu:kanthal_ingot"
+			id: "52D26362BB0806F8"
+			size: 1.0d
+			subtitle: "EBF, then the chemical bath cools it"
+			tasks: [
+				{ id: "71C65B10FE57A176", item: "gtceu:kanthal_ingot", optional_task: true, type: "item" }
+				{ id: "372683DB18488902", type: "checkmark" }
+			]
+			title: "Kanthal"
+			x: 20.75d
+			y: 22.0d
+		}
+		{
+			dependencies: ["52D26362BB0806F8"]
+			description: ["Hotter coils for the EBF: silicon and stainless steel both wait for these."]
+			icon: "gtceu:kanthal_coil_block"
+			id: "7E299038954E2754"
+			size: 1.25d
+			subtitle: "Assembler"
+			tasks: [
+				{ id: "5373492175FDF40E", item: "gtceu:kanthal_coil_block", optional_task: true, type: "item" }
+				{ id: "3F21B88E156E1B9B", type: "checkmark" }
+			]
+			title: "Kanthal Coil"
+			x: 22.75d
+			y: 22.0d
+		}
+		{
+			icon: "gtceu:coal_dust"
+			id: "1753B227E8A5596E"
+			shape: "rsquare"
+			size: 1.0d
+			tasks: [
+				{ id: "5AD57F347CCBEAE9", item: "gtceu:coal_dust", optional_task: true, type: "item" }
+				{ id: "5DA6F2B7A253723C", type: "checkmark" }
+			]
+			title: "Coal Dust"
+			x: 0.5d
+			y: 26.25d
+		}
+		{
+			icon: "grindless:creature_model_blaze"
+			id: "3DEE66C8E3E53F8C"
+			shape: "rsquare"
+			size: 1.0d
+			subtitle: "Printed once, never used up"
+			tasks: [
+				{ id: "3E78F0C717FDFB9A", item: "grindless:creature_model_blaze", optional_task: true, type: "item" }
+				{ id: "3B634F93A909BE5D", type: "checkmark" }
+			]
+			title: "Blaze Model"
+			x: 0.5d
+			y: 27.75d
+		}
+		{
+			dependencies: ["1753B227E8A5596E", "3DEE66C8E3E53F8C"]
+			icon: "gtceu:mv_creature_simulator"
+			id: "18323E4AB23E1BB6"
+			shape: "gear"
+			size: 1.25d
+			subtitle: "Plus biomass"
+			tasks: [
+				{ id: "75CB28E1C0346B90", item: "gtceu:mv_creature_simulator", optional_task: true, type: "item" }
+				{ id: "702C060B685B6F22", type: "checkmark" }
+			]
+			title: "Creature Simulator"
+			x: 2.5d
+			y: 27.0d
+		}
+		{
+			dependencies: ["18323E4AB23E1BB6"]
+			icon: "minecraft:blaze_rod"
+			id: "5D9DB2B68541F412"
+			size: 1.0d
+			tasks: [
+				{ id: "75EB43B8F6C9F945", item: "minecraft:blaze_rod", optional_task: true, type: "item" }
+				{ id: "1DDCC7502890273F", type: "checkmark" }
+			]
+			title: "Blaze Rod"
+			x: 4.5d
+			y: 27.0d
+		}
+		{
+			dependencies: ["5D9DB2B68541F412"]
+			icon: "minecraft:blaze_powder"
+			id: "3D81318C8D0727DF"
+			size: 1.0d
+			tasks: [
+				{ id: "32A0348CC6892198", item: "minecraft:blaze_powder", optional_task: true, type: "item" }
+				{ id: "34A0F5FE44711029", type: "checkmark" }
+			]
+			title: "Blaze Powder"
+			x: 6.5d
+			y: 27.0d
+		}
+		{
+			dependencies: ["3D81318C8D0727DF"]
+			icon: "gtceu:blaze_bucket"
+			id: "5C67D07C75E8F153"
+			size: 1.0d
+			subtitle: "Extractor"
+			tasks: [
+				{ id: "1259EA49B072A071", item: "gtceu:blaze_bucket", optional_task: true, type: "item" }
+				{ id: "19D6E41B310E538E", type: "checkmark" }
+			]
+			title: "Liquid Blaze"
+			x: 8.5d
+			y: 27.0d
+		}
+		{
+			dependencies: ["5C67D07C75E8F153", "325AC2585F63E613"]
+			description: ["A pearl bathed in liquid blaze. The crafting table recipe is gone."]
+			icon: "minecraft:ender_eye"
+			id: "7088D3561786D49F"
+			size: 1.0d
+			subtitle: "Chemical bath"
+			tasks: [
+				{ id: "7688C64663506508", item: "minecraft:ender_eye", optional_task: true, type: "item" }
+				{ id: "31DFF0E814D2361E", type: "checkmark" }
+			]
+			title: "Eye of Ender"
+			x: 10.5d
+			y: 27.75d
+		}
+		{
+			dependencies: ["7088D3561786D49F"]
+			description: ["One trip to the End for two ores per vein, and the MV drill does the rest. The dragon can keep its island."]
+			icon: "grindless:end_key"
+			id: "36A721A43D3899B6"
+			size: 1.25d
+			tasks: [
+				{ id: "112428C917AAE406", item: "grindless:end_key", optional_task: true, type: "item" }
+				{ id: "561A41EC39060E2E", type: "checkmark" }
+			]
+			title: "End Key"
+			x: 12.5d
+			y: 27.75d
+		}
+		{
+			icon: "gtceu:diesel_bucket"
+			id: "7DD593921B25E8AE"
+			shape: "rsquare"
+			size: 1.0d
+			subtitle: "From the fuel line"
+			tasks: [
+				{ id: "7DE3700BC293064C", item: "gtceu:diesel_bucket", optional_task: true, type: "item" }
+				{ id: "78EFF65BE52E4B10", type: "checkmark" }
+			]
+			title: "Diesel"
+			x: 16.75d
+			y: 27.75d
+		}
+		{
+			dependencies: ["7DD593921B25E8AE"]
+			icon: "gtceu:kerosene_bucket"
+			id: "7D28AEC912902688"
+			size: 1.0d
+			subtitle: "Distillery"
+			tasks: [
+				{ id: "5CFB583CDB1B7E16", item: "gtceu:kerosene_bucket", optional_task: true, type: "item" }
+				{ id: "36C3D0FA2D3374A4", type: "checkmark" }
+			]
+			title: "Kerosene"
+			x: 18.75d
+			y: 27.75d
+		}
+		{
+			dependencies: ["7D28AEC912902688"]
+			icon: "gtceu:rp_1_rocket_fuel_bucket"
+			id: "509D8E16F2FFD75B"
+			size: 1.0d
+			subtitle: "Distillery again"
+			tasks: [
+				{ id: "3EC5311BEBCD041B", item: "gtceu:rp_1_rocket_fuel_bucket", optional_task: true, type: "item" }
+				{ id: "548755C1E394B36F", type: "checkmark" }
+			]
+			title: "RP-1"
+			x: 20.75d
+			y: 27.75d
+		}
+		{
+			icon: "gtceu:oxygen_bucket"
+			id: "5CD15C7B14FD5AF8"
+			shape: "rsquare"
+			size: 1.0d
+			tasks: [
+				{ id: "3ED8EDE0B5EF47E5", item: "gtceu:oxygen_bucket", optional_task: true, type: "item" }
+				{ id: "3CD3A825D7106F12", type: "checkmark" }
+			]
+			title: "Oxygen"
+			x: 20.75d
+			y: 26.25d
+		}
+		{
+			icon: "gtceu:power_thruster"
+			id: "7F3DB4C870C461F1"
+			shape: "rsquare"
+			size: 1.0d
+			subtitle: "Assembler"
+			tasks: [
+				{ id: "53F037E4978AEAE7", item: "gtceu:power_thruster", optional_task: true, type: "item" }
+				{ id: "767EA3F6BD266742", type: "checkmark" }
+			]
+			title: "Power Thruster"
+			x: 20.75d
+			y: 29.25d
+		}
+		{
+			dependencies: ["509D8E16F2FFD75B", "5CD15C7B14FD5AF8", "7F3DB4C870C461F1"]
+			description: ["No rocket flies on an engine nobody has lit. Four thrusters burn kerosene together, and the ones that pass come out qualified."]
+			icon: "gtceu:engine_test_stand"
+			id: "5967D24700F210AB"
+			shape: "gear"
+			size: 1.5d
+			tasks: [
+				{ id: "547AB74F99F4E912", item: "gtceu:engine_test_stand", optional_task: true, type: "item" }
+				{ id: "77692ACFFFFE4542", type: "checkmark" }
+			]
+			title: "Engine Test Stand"
+			x: 22.75d
+			y: 27.75d
+		}
+		{
+			dependencies: ["5967D24700F210AB"]
+			icon: "grindless:qualified_power_thruster"
+			id: "170DB957782774D8"
+			size: 1.25d
+			subtitle: "HV's rocket motor wants four"
+			tasks: [
+				{ id: "3DDC843208C318BB", item: "grindless:qualified_power_thruster", optional_task: true, type: "item" }
+				{ id: "1DDA9C6AE15CF386", type: "checkmark" }
+			]
+			title: "Qualified Thruster"
+			x: 24.75d
+			y: 27.0d
+		}
+		{
+			dependencies: ["5967D24700F210AB"]
+			icon: "gtceu:carbon_dioxide_bucket"
+			id: "5A5AFC686B2574CF"
+			size: 0.75d
+			subtitle: "Greenhouse, or methanol"
+			tasks: [
+				{ id: "3CB388D53CEDD251", item: "gtceu:carbon_dioxide_bucket", optional_task: true, type: "item" }
+				{ id: "778547F3352A11D4", type: "checkmark" }
+			]
+			title: "Carbon Dioxide"
+			x: 24.75d
+			y: 28.5d
+		}
+		{
+			dependencies: ["5967D24700F210AB"]
+			icon: "minecraft:water_bucket"
+			id: "57A6BC9A90C9BC16"
+			size: 0.75d
+			subtitle: "Back to the pumps, or void it"
+			tasks: [
+				{ id: "53A22FF049BBD7F1", item: "minecraft:water_bucket", optional_task: true, type: "item" }
+				{ id: "7185F9727BD67AA3", type: "checkmark" }
+			]
+			title: "Water"
+			x: 24.75d
+			y: 30.0d
+		}
+		{
+			icon: "minecraft:paper"
+			id: "78E24E72C05280D7"
+			shape: "rsquare"
+			size: 1.0d
+			tasks: [
+				{ id: "5128D8014F7CC40C", item: "minecraft:paper", optional_task: true, type: "item" }
+				{ id: "1178EABDD17EF8B8", type: "checkmark" }
+			]
+			title: "Paper"
+			x: 29.0d
+			y: 29.25d
+		}
+		{
+			dependencies: ["388F688236DC7298", "3954D84FC7C457CA", "78E24E72C05280D7"]
+			description: ["Radar through cloud and rain, at night. A thunderstorm drowns the echo, so it waits."]
+			icon: "gtceu:radio_telescope"
+			id: "3BDA005617E8520F"
+			shape: "gear"
+			size: 1.5d
+			tasks: [
+				{ id: "1155588747CBE583", item: "gtceu:radio_telescope", optional_task: true, type: "item" }
+				{ id: "1C7F7BA9F252D3C4", type: "checkmark" }
+			]
+			title: "Radio Telescope"
+			x: 31.5d
+			y: 27.0d
+		}
+		{
+			dependencies: ["3BDA005617E8520F"]
+			icon: "grindless:lunar_landing_chart"
+			id: "518C08D5EDC71D81"
+			size: 1.25d
+			subtitle: "HV writes the rocket's chip from it"
+			tasks: [
+				{ id: "1362854C90C5CC7E", item: "grindless:lunar_landing_chart", optional_task: true, type: "item" }
+				{ id: "30B27BDFDF8766EF", type: "checkmark" }
+			]
+			title: "Lunar Landing-Site Chart"
+			x: 34.0d
+			y: 27.0d
+		}
+	]
+	subtitle: ["One plant runs the whole ore chain, wood and crude oil turn into chemistry, and sand turns into chips."]
+	title: "MV Lines"
+}

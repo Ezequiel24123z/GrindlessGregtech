@@ -1,0 +1,1637 @@
+{
+	autofocus_id: "12A85BB438F54A04"
+	consume_items: false
+	default_hide_dependency_lines: false
+	default_quest_shape: ""
+	filename: "pl_iv"
+	group: "3027186E3042DDFB"
+	icon: "gtceu:fission_reactor"
+	id: "389DF6C36AF262FD"
+	order_index: 5
+	progression_mode: "flexible"
+	quest_links: [
+		{
+			id: "50C76F28322E7DB5"
+			linked_quest: "5DB10211B3E10692"
+			shape: "rsquare"
+			x: 0.5d
+			y: 3.25d
+		}
+		{
+			id: "3F8F4985BD989447"
+			linked_quest: "7D9B7EAC07F4A088"
+			shape: "rsquare"
+			x: 0.5d
+			y: 14.5d
+		}
+		{
+			id: "187FF6B00A947BFC"
+			linked_quest: "1DD00667E82E75AE"
+			shape: "rsquare"
+			x: 14.75d
+			y: 9.75d
+		}
+		{
+			id: "3667B8599BFF61BC"
+			linked_quest: "182D9BB9E4FD1F15"
+			shape: "rsquare"
+			x: 4.5d
+			y: 22.25d
+		}
+		{
+			id: "5D16B54AB39CF100"
+			linked_quest: "5642C3DCC05983B2"
+			shape: "rsquare"
+			x: 0.5d
+			y: 38.5d
+		}
+		{
+			id: "5CA302BB9944C119"
+			linked_quest: "162641406869CF74"
+			shape: "rsquare"
+			x: 16.75d
+			y: 36.0d
+		}
+		{
+			id: "594058A638287774"
+			linked_quest: "305F916B3530ABAD"
+			shape: "rsquare"
+			x: 16.75d
+			y: 37.5d
+		}
+	]
+	quests: [
+		{
+			icon: "gcyr:raw_fluorite"
+			id: "12A85BB438F54A04"
+			shape: "rsquare"
+			size: 1.0d
+			subtitle: "The fluorite vein: any Earth drill, from steam on"
+			tasks: [
+				{ id: "57AF51B1C4F3723B", item: "gcyr:raw_fluorite", optional_task: true, type: "item" }
+				{ id: "1B21387D2DE3D57F", type: "checkmark" }
+			]
+			title: "Raw Fluorite"
+			x: 0.5d
+			y: 1.75d
+		}
+		{
+			dependencies: ["12A85BB438F54A04"]
+			icon: "gcyr:fluorite_dust"
+			id: "19BD8AAF2A6925D9"
+			size: 1.0d
+			subtitle: "Macerator twice, then the ore washer"
+			tasks: [
+				{ id: "7783598A7C658B2A", item: "gcyr:fluorite_dust", optional_task: true, type: "item" }
+				{ id: "537A13695C3B2202", type: "checkmark" }
+			]
+			title: "Fluorite Dust"
+			x: 2.5d
+			y: 1.75d
+		}
+		{
+			dependencies: ["19BD8AAF2A6925D9", "5DB10211B3E10692"]
+			description: ["Fluorite and sulfuric acid in a long rotary kiln. A handful of fluorite does the work of a mountain of mica."]
+			icon: "gtceu:fluorspar_kiln"
+			id: "15A1985623FACDFE"
+			shape: "gear"
+			size: 1.5d
+			tasks: [
+				{ id: "146067B2A80755C9", item: "gtceu:fluorspar_kiln", optional_task: true, type: "item" }
+				{ id: "349A64C820492BD5", type: "checkmark" }
+			]
+			title: "Fluorspar Kiln"
+			x: 4.5d
+			y: 1.75d
+		}
+		{
+			dependencies: ["15A1985623FACDFE"]
+			icon: "gtceu:hydrofluoric_acid_bucket"
+			id: "35271B45FE09310E"
+			size: 1.0d
+			tasks: [
+				{ id: "30F0ECBABF904159", item: "gtceu:hydrofluoric_acid_bucket", optional_task: true, type: "item" }
+				{ id: "7FB4F5FBF44ADF93", type: "checkmark" }
+			]
+			title: "Hydrofluoric Acid"
+			x: 6.5d
+			y: 1.75d
+		}
+		{
+			dependencies: ["15A1985623FACDFE"]
+			icon: "gtceu:gypsum_dust"
+			id: "30E4D3EA7A1F22CC"
+			size: 0.75d
+			subtitle: "Concrete, then the reactor's casing"
+			tasks: [
+				{ id: "19563E57D9E4AC1F", item: "gtceu:gypsum_dust", optional_task: true, type: "item" }
+				{ id: "12BD6482944F57A3", type: "checkmark" }
+			]
+			title: "Gypsum"
+			x: 6.5d
+			y: 0.5d
+		}
+		{
+			icon: "grindless:vein_sample_pitchblende_end"
+			id: "5A66BA69651D5E13"
+			shape: "rsquare"
+			size: 1.0d
+			subtitle: "Mined once, in the End"
+			tasks: [
+				{ id: "796ADD478A4FCBFD", item: "grindless:vein_sample_pitchblende_end", optional_task: true, type: "item" }
+				{ id: "502D5E395F61AC3B", type: "checkmark" }
+			]
+			title: "Pitchblende Sample"
+			x: 0.5d
+			y: 4.75d
+		}
+		{
+			icon: "grindless:ion_exchange_resin"
+			id: "707D943A88C25E26"
+			shape: "rsquare"
+			size: 1.0d
+			subtitle: "Styrene and sulfuric acid"
+			tasks: [
+				{ id: "5D5E863A063F6340", item: "grindless:ion_exchange_resin", optional_task: true, type: "item" }
+				{ id: "31DF9C86D1B40EC9", type: "checkmark" }
+			]
+			title: "Ion-Exchange Resin"
+			x: 0.5d
+			y: 6.25d
+		}
+		{
+			dependencies: ["5DB10211B3E10692", "5A66BA69651D5E13", "707D943A88C25E26"]
+			description: [
+				"Five wells in the End push acid and oxygen through the ore and bring the uranium up dissolved."
+				"The drill bits stay at home, and the thorium never leaves the ground."
+			]
+			icon: "gtceu:isr_wellfield"
+			id: "31844FDD8D769D73"
+			shape: "gear"
+			size: 1.5d
+			tasks: [
+				{ id: "3BE5272FCC32A2F6", item: "gtceu:isr_wellfield", optional_task: true, type: "item" }
+				{ id: "7C7D72151429B0C2", type: "checkmark" }
+			]
+			title: "In-Situ Leach Field"
+			x: 3.0d
+			y: 5.0d
+		}
+		{
+			dependencies: ["31844FDD8D769D73"]
+			icon: "gtceu:uraninite_dust"
+			id: "546858F1939C5646"
+			size: 1.0d
+			tasks: [
+				{ id: "1FB0477FAF2F7542", item: "gtceu:uraninite_dust", optional_task: true, type: "item" }
+				{ id: "3CEA43C06E8BDDB3", type: "checkmark" }
+			]
+			title: "Uraninite"
+			x: 5.0d
+			y: 5.0d
+		}
+		{
+			dependencies: ["31844FDD8D769D73"]
+			icon: "gtnn:radioactive_waste"
+			id: "591BFBC2305382F2"
+			size: 0.75d
+			subtitle: "The radium: stored, never emptied"
+			tasks: [
+				{ id: "3A101C14E52CDC83", item: "gtnn:radioactive_waste", optional_task: true, type: "item" }
+				{ id: "71A12563D2A0D794", type: "checkmark" }
+			]
+			title: "Radioactive Waste"
+			x: 5.0d
+			y: 6.5d
+		}
+		{
+			dependencies: ["35271B45FE09310E", "546858F1939C5646"]
+			description: ["Radioactive stuff goes in through a bus and out to the network. Your hands never touch it, which is rather the point."]
+			icon: "gtceu:hot_cell"
+			id: "75EBDEC264519CD5"
+			shape: "gear"
+			size: 1.5d
+			subtitle: "Circuit 1: enrichment"
+			tasks: [
+				{ id: "7EBC2FE205110B07", item: "gtceu:hot_cell", optional_task: true, type: "item" }
+				{ id: "1186F037E6D597B5", type: "checkmark" }
+			]
+			title: "Hot Cell"
+			x: 8.5d
+			y: 4.0d
+		}
+		{
+			dependencies: ["75EBDEC264519CD5"]
+			icon: "gtceu:uranium_235_dust"
+			id: "11CBF06B464C189F"
+			size: 1.0d
+			subtitle: "Fuel fabrication"
+			tasks: [
+				{ id: "7303E804F25271BC", item: "gtceu:uranium_235_dust", optional_task: true, type: "item" }
+				{ id: "5C39D35D4F39EAB0", type: "checkmark" }
+			]
+			title: "Uranium-235"
+			x: 10.5d
+			y: 2.75d
+		}
+		{
+			dependencies: ["75EBDEC264519CD5"]
+			icon: "gtceu:uranium_dust"
+			id: "1D6068D1A886F09F"
+			size: 1.0d
+			subtitle: "Pellets, breeder blankets, radon"
+			tasks: [
+				{ id: "1E6A4DCA981489AD", item: "gtceu:uranium_dust", optional_task: true, type: "item" }
+				{ id: "324C79E1C12CC9AD", type: "checkmark" }
+			]
+			title: "Uranium-238"
+			x: 10.5d
+			y: 4.0d
+		}
+		{
+			dependencies: ["75EBDEC264519CD5"]
+			icon: "gtceu:fluorine_bucket"
+			id: "1509ACFE7AC65746"
+			size: 1.0d
+			subtitle: "The acid's fluorine, all of it"
+			tasks: [
+				{ id: "1E243D1FA89CA6F2", item: "gtceu:fluorine_bucket", optional_task: true, type: "item" }
+				{ id: "50125BB559620D91", type: "checkmark" }
+			]
+			title: "Fluorine"
+			x: 10.5d
+			y: 5.25d
+		}
+		{
+			dependencies: ["75EBDEC264519CD5"]
+			icon: "minecraft:water_bucket"
+			id: "5C043B1CF22DC28B"
+			size: 0.75d
+			subtitle: "Inert: to the network"
+			tasks: [
+				{ id: "5C72556A194C26FD", item: "minecraft:water_bucket", optional_task: true, type: "item" }
+				{ id: "1972FC674CF50FFC", type: "checkmark" }
+			]
+			title: "Water"
+			x: 10.5d
+			y: 6.5d
+		}
+		{
+			dependencies: ["1509ACFE7AC65746"]
+			icon: "gtceu:hydrofluoric_acid_bucket"
+			id: "32A09D1F39AB831D"
+			size: 1.0d
+			subtitle: "With hydrogen, for the naquadah plant"
+			tasks: [
+				{ id: "31B539311BA8D0D4", item: "gtceu:hydrofluoric_acid_bucket", optional_task: true, type: "item" }
+				{ id: "19D28EE3585A4B26", type: "checkmark" }
+			]
+			title: "Hydrofluoric Acid"
+			x: 12.5d
+			y: 5.25d
+		}
+		{
+			icon: "gtceu:uranium_235_dust"
+			id: "73AC4F7E693824C7"
+			shape: "rsquare"
+			size: 1.0d
+			subtitle: "Enriched in the hot cell"
+			tasks: [
+				{ id: "3492C631AC1F64E7", item: "gtceu:uranium_235_dust", optional_task: true, type: "item" }
+				{ id: "551DB0C39AC5DCBC", type: "checkmark" }
+			]
+			title: "Uranium-235"
+			x: 16.5d
+			y: 0.5d
+		}
+		{
+			icon: "gtceu:uranium_dust"
+			id: "373A4AAD597E87A4"
+			shape: "rsquare"
+			size: 1.0d
+			tasks: [
+				{ id: "5C3032E06075BBBD", item: "gtceu:uranium_dust", optional_task: true, type: "item" }
+				{ id: "7B416DA0381D570B", type: "checkmark" }
+			]
+			title: "Uranium-238"
+			x: 16.5d
+			y: 2.0d
+		}
+		{
+			icon: "gtceu:zircaloy_ingot"
+			id: "56A6ACC501C16406"
+			shape: "rsquare"
+			size: 1.0d
+			subtitle: "End zirconium with a little tin"
+			tasks: [
+				{ id: "787DBDD20FA7B2FF", item: "gtceu:zircaloy_ingot", optional_task: true, type: "item" }
+				{ id: "353234C527B626DF", type: "checkmark" }
+			]
+			title: "Zircaloy"
+			x: 16.5d
+			y: 3.5d
+		}
+		{
+			dependencies: ["73AC4F7E693824C7", "373A4AAD597E87A4", "56A6ACC501C16406"]
+			description: ["Uranium oxide pressed into pellets, Zircaloy rolled into tubes, and the lot backfilled with the Moon's helium."]
+			icon: "gtceu:fuel_fabrication_plant"
+			id: "19B1770E002D6EAD"
+			shape: "gear"
+			size: 1.5d
+			tasks: [
+				{ id: "3F3619B1E5F87B90", item: "gtceu:fuel_fabrication_plant", optional_task: true, type: "item" }
+				{ id: "340713F9D14D5557", type: "checkmark" }
+			]
+			title: "Fuel Fabrication Plant"
+			x: 18.5d
+			y: 2.0d
+		}
+		{
+			dependencies: ["19B1770E002D6EAD"]
+			icon: "grindless:leu_pellet"
+			id: "1124210D71BF19AC"
+			size: 1.0d
+			tasks: [
+				{ id: "52169F1969901A51", item: "grindless:leu_pellet", optional_task: true, type: "item" }
+				{ id: "157125A884D40F82", type: "checkmark" }
+			]
+			title: "LEU Pellets"
+			x: 20.5d
+			y: 1.25d
+		}
+		{
+			dependencies: ["19B1770E002D6EAD"]
+			icon: "grindless:zircaloy_cladding_tube"
+			id: "3387D55EECA24EB1"
+			size: 1.0d
+			tasks: [
+				{ id: "5EBD52A9720C2046", item: "grindless:zircaloy_cladding_tube", optional_task: true, type: "item" }
+				{ id: "5A5961C3A6122666", type: "checkmark" }
+			]
+			title: "Cladding Tubes"
+			x: 20.5d
+			y: 2.75d
+		}
+		{
+			dependencies: ["1124210D71BF19AC", "3387D55EECA24EB1"]
+			icon: "grindless:leu_fuel_assembly"
+			id: "3D424D897DEB2D37"
+			size: 1.0d
+			subtitle: "Backfilled with helium"
+			tasks: [
+				{ id: "311005D6C12D65A6", item: "grindless:leu_fuel_assembly", optional_task: true, type: "item" }
+				{ id: "3718E9AF98157573", type: "checkmark" }
+			]
+			title: "LEU Fuel Assembly"
+			x: 22.5d
+			y: 2.0d
+		}
+		{
+			icon: "gtceu:heavy_water_bucket"
+			id: "71E46A4F0AE3D6F1"
+			shape: "rsquare"
+			size: 1.0d
+			subtitle: "The moderator; light water works at half power"
+			tasks: [
+				{ id: "1E2C7421FA79AEE0", item: "gtceu:heavy_water_bucket", optional_task: true, type: "item" }
+				{ id: "7FABF23A9AB1673B", type: "checkmark" }
+			]
+			title: "Heavy Water"
+			x: 22.5d
+			y: 3.5d
+		}
+		{
+			dependencies: ["3D424D897DEB2D37", "71E46A4F0AE3D6F1"]
+			description: [
+				"Four channels and no smoke. Fill it with heavy water and the power doubles."
+				"Run it dry and it shuts down at the end of the cycle. Nothing explodes, it just sulks."
+			]
+			icon: "gtceu:fission_reactor"
+			id: "131557F06455327C"
+			shape: "gear"
+			size: 1.5d
+			tasks: [
+				{ id: "52FAF0364C0FD72A", item: "gtceu:fission_reactor", optional_task: true, type: "item" }
+				{ id: "7B2293C94C7FA24D", type: "checkmark" }
+			]
+			title: "Fission Reactor"
+			x: 24.5d
+			y: 2.0d
+		}
+		{
+			dependencies: ["131557F06455327C"]
+			icon: "grindless:spent_fuel_assembly"
+			id: "37B5CB9C51E225A4"
+			size: 1.0d
+			subtitle: "Back to the hot cell"
+			tasks: [
+				{ id: "3EF463E39FCD46C2", item: "grindless:spent_fuel_assembly", optional_task: true, type: "item" }
+				{ id: "17AC4EC7CC847F01", type: "checkmark" }
+			]
+			title: "Spent Fuel"
+			x: 26.5d
+			y: 1.25d
+		}
+		{
+			dependencies: ["131557F06455327C"]
+			icon: "gtceu:tritiated_heavy_water_bucket"
+			id: "16367BA03FE5D8DE"
+			size: 1.0d
+			subtitle: "Radioactive: it goes to the Moon"
+			tasks: [
+				{ id: "1AEEAC2DA489B90F", item: "gtceu:tritiated_heavy_water_bucket", optional_task: true, type: "item" }
+				{ id: "7A871ACA0FC771CC", type: "checkmark" }
+			]
+			title: "Tritiated Heavy Water"
+			x: 26.5d
+			y: 2.75d
+		}
+		{
+			icon: "grindless:spent_fuel_assembly"
+			id: "1473B9F6D79968E0"
+			shape: "rsquare"
+			size: 1.0d
+			subtitle: "From the reactor"
+			tasks: [
+				{ id: "7C182AAA05C272AC", item: "grindless:spent_fuel_assembly", optional_task: true, type: "item" }
+				{ id: "521FE0E93E923836", type: "checkmark" }
+			]
+			title: "Spent Fuel"
+			x: 0.5d
+			y: 13.0d
+		}
+		{
+			dependencies: ["1473B9F6D79968E0", "7D9B7EAC07F4A088"]
+			description: ["Nitric acid takes the spent fuel apart. The uranium and plutonium come back, the odd noble gas or rare metal turns up, and what's left becomes glassy waste that never leaves your storage."]
+			icon: "gtceu:hot_cell"
+			id: "591F60B659065137"
+			shape: "gear"
+			size: 1.5d
+			subtitle: "Circuit 3"
+			tasks: [
+				{ id: "7FC8680D5A4AC061", item: "gtceu:hot_cell", optional_task: true, type: "item" }
+				{ id: "3766D9C2E86EA576", type: "checkmark" }
+			]
+			title: "Hot Cell, Reprocessing"
+			x: 2.5d
+			y: 13.75d
+		}
+		{
+			dependencies: ["591F60B659065137"]
+			icon: "gtceu:plutonium_dust"
+			id: "314BC927EA058B1F"
+			size: 1.0d
+			tasks: [
+				{ id: "59DF8A7E143C89C0", item: "gtceu:plutonium_dust", optional_task: true, type: "item" }
+				{ id: "7137E2CFAFE2288B", type: "checkmark" }
+			]
+			title: "Plutonium"
+			x: 4.5d
+			y: 12.25d
+		}
+		{
+			dependencies: ["591F60B659065137"]
+			icon: "gtceu:uranium_dust"
+			id: "5B050911A3185646"
+			size: 1.0d
+			subtitle: "Comes back too"
+			tasks: [
+				{ id: "37D78887CD522BBE", item: "gtceu:uranium_dust", optional_task: true, type: "item" }
+				{ id: "11758C1B81D77AD2", type: "checkmark" }
+			]
+			title: "Uranium-238"
+			x: 4.5d
+			y: 13.5d
+		}
+		{
+			dependencies: ["591F60B659065137"]
+			icon: "gtceu:xenon_bucket"
+			id: "32CCA814F0D16669"
+			size: 0.75d
+			subtitle: "Kept for enriched naquadah"
+			tasks: [
+				{ id: "75FEC1DC149C61F2", item: "gtceu:xenon_bucket", optional_task: true, type: "item" }
+				{ id: "3F84295324BE3D5B", type: "checkmark" }
+			]
+			title: "Xenon"
+			x: 4.5d
+			y: 14.75d
+		}
+		{
+			dependencies: ["591F60B659065137"]
+			icon: "gtnn:radioactive_waste"
+			id: "78B77ED90CDECD33"
+			size: 0.75d
+			subtitle: "Vitrified and kept"
+			tasks: [
+				{ id: "74C2B5033A2FB9E7", item: "gtnn:radioactive_waste", optional_task: true, type: "item" }
+				{ id: "5C67DF1D2F4B963D", type: "checkmark" }
+			]
+			title: "Radioactive Waste"
+			x: 4.5d
+			y: 15.75d
+		}
+		{
+			dependencies: ["591F60B659065137"]
+			icon: "gtceu:nitrogen_dioxide_bucket"
+			id: "52D533E75984BA01"
+			size: 0.75d
+			subtitle: "Nitric acid again"
+			tasks: [
+				{ id: "301266393162BA79", item: "gtceu:nitrogen_dioxide_bucket", optional_task: true, type: "item" }
+				{ id: "1792B3D4F6EAF432", type: "checkmark" }
+			]
+			title: "Nitrogen Dioxide"
+			x: 4.5d
+			y: 16.75d
+		}
+		{
+			dependencies: ["314BC927EA058B1F"]
+			icon: "grindless:rtg_pellet"
+			id: "7B7B0F4AD0D3C01A"
+			size: 1.0d
+			subtitle: "In platinum and rhodium foil"
+			tasks: [
+				{ id: "5E6DB031C858F24D", item: "grindless:rtg_pellet", optional_task: true, type: "item" }
+				{ id: "57F1AB532BCD6B6A", type: "checkmark" }
+			]
+			title: "RTG Pellet"
+			x: 6.5d
+			y: 10.0d
+		}
+		{
+			dependencies: ["314BC927EA058B1F"]
+			icon: "grindless:mox_fuel_assembly"
+			id: "17A3FCFC32F409FD"
+			size: 1.0d
+			subtitle: "Burns plutonium"
+			tasks: [
+				{ id: "577FD06AEE783607", item: "grindless:mox_fuel_assembly", optional_task: true, type: "item" }
+				{ id: "7F83574229B42A3C", type: "checkmark" }
+			]
+			title: "MOX Assembly"
+			x: 6.5d
+			y: 11.5d
+		}
+		{
+			dependencies: ["314BC927EA058B1F", "5B050911A3185646"]
+			description: ["MOX burns more plutonium than its spent fuel gives back; a breeder gives back more than it takes. Run one of each and the plutonium evens out."]
+			icon: "grindless:breeder_fuel_assembly"
+			id: "773EBEBBC58010FD"
+			size: 1.0d
+			subtitle: "Makes plutonium"
+			tasks: [
+				{ id: "3F1A3AB400B37D0F", item: "grindless:breeder_fuel_assembly", optional_task: true, type: "item" }
+				{ id: "1D39D76B25406CF8", type: "checkmark" }
+			]
+			title: "Breeder Assembly"
+			x: 6.5d
+			y: 13.0d
+		}
+		{
+			dependencies: ["7B7B0F4AD0D3C01A"]
+			icon: "gtceu:ev_rtg"
+			id: "73852CB94C0B7AF6"
+			shape: "gear"
+			size: 1.25d
+			subtitle: "Starts every base and covers Mercury's night"
+			tasks: [
+				{ id: "50B8C3FD564E1E4B", item: "gtceu:ev_rtg", optional_task: true, type: "item" }
+				{ id: "7BF24CD02D6EBA72", type: "checkmark" }
+			]
+			title: "RTG Cell"
+			x: 8.5d
+			y: 10.0d
+		}
+		{
+			dependencies: ["17A3FCFC32F409FD", "773EBEBBC58010FD"]
+			icon: "gtceu:fission_reactor"
+			id: "3ED1BAB38D8CACE7"
+			shape: "circle"
+			size: 0.75d
+			subtitle: "MOX and breeder cores"
+			tasks: [
+				{ id: "54C1BAC714CCC6D0", item: "gtceu:fission_reactor", optional_task: true, type: "item" }
+				{ id: "3A844CED04AAF646", type: "checkmark" }
+			]
+			title: "Back into the Reactor"
+			x: 8.5d
+			y: 12.25d
+		}
+		{
+			icon: "gtceu:raw_deuterium_rich_ice"
+			id: "1E3605DB3F933D07"
+			shape: "rsquare"
+			size: 1.0d
+			subtitle: "The Martian tripod"
+			tasks: [
+				{ id: "7E0E9D7503E3EAB4", item: "gtceu:raw_deuterium_rich_ice", optional_task: true, type: "item" }
+				{ id: "76D22576ED8EB6AE", type: "checkmark" }
+			]
+			title: "Deuterium-Rich Ice"
+			x: 12.75d
+			y: 11.25d
+		}
+		{
+			dependencies: ["1E3605DB3F933D07"]
+			icon: "gtceu:deuterium_rich_ice_dust"
+			id: "7F6D2C9A8D30ED56"
+			size: 1.0d
+			subtitle: "Ore plant"
+			tasks: [
+				{ id: "37BA02B5DB62B203", item: "gtceu:deuterium_rich_ice_dust", optional_task: true, type: "item" }
+				{ id: "32A568935B9A8029", type: "checkmark" }
+			]
+			title: "Ice Dust"
+			x: 14.75d
+			y: 11.25d
+		}
+		{
+			icon: "gtceu:steam_bucket"
+			id: "730B996F7B48CB00"
+			shape: "rsquare"
+			size: 1.0d
+			subtitle: "Any plant's spare steam"
+			tasks: [
+				{ id: "7ECE6A6444031952", item: "gtceu:steam_bucket", optional_task: true, type: "item" }
+				{ id: "73B576E0EF37D745", type: "checkmark" }
+			]
+			title: "Steam"
+			x: 14.75d
+			y: 12.75d
+		}
+		{
+			dependencies: ["7F6D2C9A8D30ED56", "1DD00667E82E75AE", "730B996F7B48CB00"]
+			description: ["Two towers, one hot and one cold, trade deuterium back and forth until the water is heavy. The hydrogen sulfide is a charge: it never runs out."]
+			icon: "gtceu:heavy_water_plant"
+			id: "532F2807022004BB"
+			shape: "gear"
+			size: 1.5d
+			tasks: [
+				{ id: "1584440F8A99EC0C", item: "gtceu:heavy_water_plant", optional_task: true, type: "item" }
+				{ id: "5E73F089A72DDC69", type: "checkmark" }
+			]
+			title: "Heavy-Water Plant"
+			x: 16.75d
+			y: 11.25d
+		}
+		{
+			dependencies: ["532F2807022004BB"]
+			icon: "gtceu:heavy_water_concentrate_bucket"
+			id: "3B13D87FD4856DC1"
+			size: 1.0d
+			tasks: [
+				{ id: "5E05038CEF7E95DC", item: "gtceu:heavy_water_concentrate_bucket", optional_task: true, type: "item" }
+				{ id: "75B319AA8E7F5F4D", type: "checkmark" }
+			]
+			title: "Heavy Water Concentrate"
+			x: 18.75d
+			y: 10.5d
+		}
+		{
+			dependencies: ["532F2807022004BB"]
+			icon: "gtceu:distilled_water_bucket"
+			id: "322717DBC5190C32"
+			size: 0.75d
+			subtitle: "And plain water: both go to the network"
+			tasks: [
+				{ id: "7ECD3435F5C78116", item: "gtceu:distilled_water_bucket", optional_task: true, type: "item" }
+				{ id: "3C07D5880C8A2213", type: "checkmark" }
+			]
+			title: "Distilled Water"
+			x: 18.75d
+			y: 12.0d
+		}
+		{
+			dependencies: ["3B13D87FD4856DC1"]
+			icon: "gtceu:heavy_water_bucket"
+			id: "17260FE287B08ADA"
+			size: 1.0d
+			subtitle: "Circuit 2 finishes it"
+			tasks: [
+				{ id: "529BF57D83883F9E", item: "gtceu:heavy_water_bucket", optional_task: true, type: "item" }
+				{ id: "14D287669767235C", type: "checkmark" }
+			]
+			title: "Heavy Water"
+			x: 20.75d
+			y: 10.5d
+		}
+		{
+			dependencies: ["17260FE287B08ADA"]
+			icon: "gtceu:fission_reactor"
+			id: "713E4A5901BFCE5A"
+			shape: "gear"
+			size: 1.25d
+			tasks: [
+				{ id: "7B0AD8D456B5DFC6", item: "gtceu:fission_reactor", optional_task: true, type: "item" }
+				{ id: "16D5E9CF0CC336F2", type: "checkmark" }
+			]
+			title: "Fission Reactor"
+			x: 22.75d
+			y: 10.5d
+		}
+		{
+			dependencies: ["17260FE287B08ADA"]
+			icon: "gtceu:deuterium_bucket"
+			id: "33B9948FCA396811"
+			size: 1.0d
+			subtitle: "Electrolyzer; LuV's fusion wants it too"
+			tasks: [
+				{ id: "5C2F471FD1C4B4D5", item: "gtceu:deuterium_bucket", optional_task: true, type: "item" }
+				{ id: "346BF9BA4603076E", type: "checkmark" }
+			]
+			title: "Deuterium"
+			x: 22.75d
+			y: 12.0d
+		}
+		{
+			dependencies: ["713E4A5901BFCE5A"]
+			icon: "gtceu:tritiated_heavy_water_bucket"
+			id: "31F84F07B7F4E74A"
+			size: 1.0d
+			tasks: [
+				{ id: "12B4D7196C37AB8A", item: "gtceu:tritiated_heavy_water_bucket", optional_task: true, type: "item" }
+				{ id: "3F0AAEA44B3212BA", type: "checkmark" }
+			]
+			title: "Tritiated Heavy Water"
+			x: 24.75d
+			y: 10.5d
+		}
+		{
+			dependencies: ["31F84F07B7F4E74A", "33B9948FCA396811"]
+			description: ["On the Moon the cold strips the tritium out, at half price at night. Nearly all the heavy water goes back to the reactor."]
+			icon: "gtceu:tritium_removal_facility"
+			id: "15C4B97AD249E37A"
+			shape: "gear"
+			size: 1.5d
+			tasks: [
+				{ id: "5A965B8EBD5C1E7E", item: "gtceu:tritium_removal_facility", optional_task: true, type: "item" }
+				{ id: "583CCBCAEEAB0507", type: "checkmark" }
+			]
+			title: "Tritium Removal Facility"
+			x: 26.75d
+			y: 10.5d
+		}
+		{
+			dependencies: ["15C4B97AD249E37A"]
+			icon: "gtceu:heavy_water_bucket"
+			id: "52C52EAC0A3649E2"
+			shape: "circle"
+			size: 0.75d
+			subtitle: "Home to the reactor"
+			tasks: [
+				{ id: "5E2EF5C47EFD6726", item: "gtceu:heavy_water_bucket", optional_task: true, type: "item" }
+				{ id: "7422B983EEB3BBAD", type: "checkmark" }
+			]
+			title: "Heavy Water, Back"
+			x: 28.75d
+			y: 9.75d
+		}
+		{
+			dependencies: ["15C4B97AD249E37A"]
+			icon: "gtceu:tritium_bucket"
+			id: "5047605FE0A03D21"
+			size: 1.25d
+			subtitle: "Kept for LuV's fusion"
+			tasks: [
+				{ id: "7A25F094B7C97937", item: "gtceu:tritium_bucket", optional_task: true, type: "item" }
+				{ id: "59F4DDF48ACD0CF9", type: "checkmark" }
+			]
+			title: "Tritium"
+			x: 28.75d
+			y: 11.25d
+		}
+		{
+			icon: "gtceu:uranium_dust"
+			id: "3AEF09CFBEC416E0"
+			shape: "rsquare"
+			size: 1.0d
+			tasks: [
+				{ id: "52CD700435CFC6F7", item: "gtceu:uranium_dust", optional_task: true, type: "item" }
+				{ id: "318034CF768841D9", type: "checkmark" }
+			]
+			title: "Uranium-238"
+			x: 0.5d
+			y: 20.0d
+		}
+		{
+			icon: "gtceu:air_bucket"
+			id: "580B28DFDEEA7528"
+			shape: "rsquare"
+			size: 1.0d
+			tasks: [
+				{ id: "3A681E4356E5B1DC", item: "gtceu:air_bucket", optional_task: true, type: "item" }
+				{ id: "77D3F5740E7A3C47", type: "checkmark" }
+			]
+			title: "Air"
+			x: 0.5d
+			y: 21.5d
+		}
+		{
+			dependencies: ["3AEF09CFBEC416E0", "580B28DFDEEA7528"]
+			icon: "gtceu:hot_cell"
+			id: "1BF911F955A3A3C5"
+			shape: "gear"
+			size: 1.5d
+			subtitle: "Circuit 4: the plutonium stays inside"
+			tasks: [
+				{ id: "36671F43A22A38E5", item: "gtceu:hot_cell", optional_task: true, type: "item" }
+				{ id: "71E20CC0BA6C127A", type: "checkmark" }
+			]
+			title: "Hot Cell, Radon"
+			x: 2.5d
+			y: 20.75d
+		}
+		{
+			dependencies: ["1BF911F955A3A3C5"]
+			icon: "gtceu:radon_bucket"
+			id: "13A716AD46F66C22"
+			size: 1.0d
+			tasks: [
+				{ id: "351988A8144B28E7", item: "gtceu:radon_bucket", optional_task: true, type: "item" }
+				{ id: "55B5A62B24DB1652", type: "checkmark" }
+			]
+			title: "Radon"
+			x: 4.5d
+			y: 20.75d
+		}
+		{
+			dependencies: ["13A716AD46F66C22", "182D9BB9E4FD1F15"]
+			description: ["The Wither's star, soaked in radon. IV's field generators, sensors and emitters all want one."]
+			icon: "gtceu:quantum_star"
+			id: "56AD12C524F91168"
+			size: 1.25d
+			subtitle: "Chemical bath"
+			tasks: [
+				{ id: "5F60785529B1C86A", item: "gtceu:quantum_star", optional_task: true, type: "item" }
+				{ id: "1597C15BC9BC0F02", type: "checkmark" }
+			]
+			title: "Quantum Star"
+			x: 6.5d
+			y: 21.5d
+		}
+		{
+			icon: "gtceu:iv_gas_collector"
+			id: "5380A442F4908643"
+			shape: "gear"
+			size: 1.25d
+			subtitle: "Up above the cloud base"
+			tasks: [
+				{ id: "793D4CD833416E88", item: "gtceu:iv_gas_collector", optional_task: true, type: "item" }
+				{ id: "5B73A5A4BB6A150C", type: "checkmark" }
+			]
+			title: "Gas Collector"
+			x: 10.75d
+			y: 20.25d
+		}
+		{
+			dependencies: ["5380A442F4908643"]
+			icon: "gtceu:sulfuric_acid_bucket"
+			id: "3A31F0A5C1658FBF"
+			size: 1.0d
+			subtitle: "Straight out of the clouds"
+			tasks: [
+				{ id: "5C0C74DEA1AF8548", item: "gtceu:sulfuric_acid_bucket", optional_task: true, type: "item" }
+				{ id: "54CA89B7A4C9977E", type: "checkmark" }
+			]
+			title: "Sulfuric Acid"
+			x: 12.75d
+			y: 20.25d
+		}
+		{
+			icon: "grindless:platinum_gauze"
+			id: "5813F61614F094E5"
+			shape: "rsquare"
+			size: 1.0d
+			subtitle: "Wears out slowly"
+			tasks: [
+				{ id: "5B24D4C792A881F9", item: "grindless:platinum_gauze", optional_task: true, type: "item" }
+				{ id: "11A8DD5713E71255", type: "checkmark" }
+			]
+			title: "Platinum Gauze"
+			x: 12.75d
+			y: 21.75d
+		}
+		{
+			dependencies: ["3A31F0A5C1658FBF", "5813F61614F094E5"]
+			description: ["The planet's own heat cracks the acid into water and oxygen, so the base stops shipping water from home."]
+			icon: "gtceu:venus_acid_works"
+			id: "111D26C8A0B0ACB5"
+			shape: "gear"
+			size: 1.5d
+			tasks: [
+				{ id: "3D131EA785D5F371", item: "gtceu:venus_acid_works", optional_task: true, type: "item" }
+				{ id: "1B125CC3E928CFC7", type: "checkmark" }
+			]
+			title: "Venus Acid Works"
+			x: 14.75d
+			y: 21.0d
+		}
+		{
+			dependencies: ["111D26C8A0B0ACB5"]
+			icon: "gtceu:distilled_water_bucket"
+			id: "50C4A414ED95DC2D"
+			size: 1.0d
+			subtitle: "The drill and the heat engine drink it"
+			tasks: [
+				{ id: "74C648C11512FD6F", item: "gtceu:distilled_water_bucket", optional_task: true, type: "item" }
+				{ id: "7FF4925A9194A376", type: "checkmark" }
+			]
+			title: "Distilled Water"
+			x: 16.75d
+			y: 20.25d
+		}
+		{
+			dependencies: ["111D26C8A0B0ACB5"]
+			icon: "gtceu:oxygen_bucket"
+			id: "10FC1C3039A3C529"
+			size: 0.75d
+			subtitle: "Suits and the oxygen spreader"
+			tasks: [
+				{ id: "7893A8E27BA566EA", item: "gtceu:oxygen_bucket", optional_task: true, type: "item" }
+				{ id: "13179DB924B1427C", type: "checkmark" }
+			]
+			title: "Oxygen"
+			x: 16.75d
+			y: 21.75d
+		}
+		{
+			dependencies: ["111D26C8A0B0ACB5"]
+			icon: "gtceu:sulfur_dioxide_bucket"
+			id: "7D8638B69748DA93"
+			size: 0.75d
+			subtitle: "Circuit 1 vents it; circuit 2 keeps it for acid at home"
+			tasks: [
+				{ id: "76294CD451D91754", item: "gtceu:sulfur_dioxide_bucket", optional_task: true, type: "item" }
+				{ id: "717296BDFEEB4100", type: "checkmark" }
+			]
+			title: "Sulfur Dioxide"
+			x: 16.75d
+			y: 22.75d
+		}
+		{
+			dependencies: ["50C4A414ED95DC2D"]
+			description: ["Hot ground below, a chimney of radiators up into the clouds: steady power day and night, because Venus is always at noon."]
+			icon: "gtceu:venus_heat_engine"
+			id: "30691FD8A9664E85"
+			shape: "gear"
+			size: 1.5d
+			tasks: [
+				{ id: "13C372D444C8E821", item: "gtceu:venus_heat_engine", optional_task: true, type: "item" }
+				{ id: "71A810A024C79E34", type: "checkmark" }
+			]
+			title: "Venus Heat Engine"
+			x: 18.75d
+			y: 20.25d
+		}
+		{
+			dependencies: ["30691FD8A9664E85"]
+			icon: "gtceu:steam_bucket"
+			id: "1C81876EAB4507C9"
+			size: 0.75d
+			subtitle: "A turbine, or vent it"
+			tasks: [
+				{ id: "3C12E0DA3E148BF1", item: "gtceu:steam_bucket", optional_task: true, type: "item" }
+				{ id: "1EFA50534D6860CD", type: "checkmark" }
+			]
+			title: "Steam"
+			x: 20.75d
+			y: 20.25d
+		}
+		{
+			icon: "grindless:vein_sample_naquadah_venus"
+			id: "37922EE92434EB1D"
+			shape: "rsquare"
+			size: 1.0d
+			subtitle: "Under the lava seas"
+			tasks: [
+				{ id: "54816A7459C797C6", item: "grindless:vein_sample_naquadah_venus", optional_task: true, type: "item" }
+				{ id: "7E4461389568032B", type: "checkmark" }
+			]
+			title: "Venus Naquadah Sample"
+			x: 0.5d
+			y: 27.0d
+		}
+		{
+			icon: "grindless:tungsten_steel_drill_bit"
+			id: "1A31C86EF2F352F9"
+			shape: "rsquare"
+			size: 1.0d
+			tasks: [
+				{ id: "3575DA848EB2E53A", item: "grindless:tungsten_steel_drill_bit", optional_task: true, type: "item" }
+				{ id: "3A205ED274D27E40", type: "checkmark" }
+			]
+			title: "Tungsten Steel Drill Bit"
+			x: 0.5d
+			y: 28.5d
+		}
+		{
+			icon: "gtceu:distilled_water_bucket"
+			id: "7208D5D5C68366CD"
+			shape: "rsquare"
+			size: 1.0d
+			subtitle: "The acid works makes it there"
+			tasks: [
+				{ id: "7A855EF2952EB133", item: "gtceu:distilled_water_bucket", optional_task: true, type: "item" }
+				{ id: "549D97ACE6702DA3", type: "checkmark" }
+			]
+			title: "Distilled Water"
+			x: 0.5d
+			y: 30.0d
+		}
+		{
+			dependencies: ["37922EE92434EB1D", "1A31C86EF2F352F9", "7208D5D5C68366CD"]
+			description: ["A sealed shaft against ninety bar. The cooling water leaves as steam: that's the heat tax."]
+			icon: "gtceu:pressurized_vein_drill"
+			id: "5CC66985D64422EE"
+			shape: "gear"
+			size: 1.5d
+			tasks: [
+				{ id: "568D1009503A7A69", item: "gtceu:pressurized_vein_drill", optional_task: true, type: "item" }
+				{ id: "76D7B307F619F446", type: "checkmark" }
+			]
+			title: "Pressurized Vein Drill"
+			x: 2.5d
+			y: 28.5d
+		}
+		{
+			dependencies: ["5CC66985D64422EE"]
+			icon: "gtceu:raw_naquadah"
+			id: "78C55A0C6115070F"
+			size: 1.0d
+			subtitle: "Only Venus has it"
+			tasks: [
+				{ id: "7807931C722942A0", item: "gtceu:raw_naquadah", optional_task: true, type: "item" }
+				{ id: "1141CA818C10A9C3", type: "checkmark" }
+			]
+			title: "Raw Naquadah"
+			x: 4.5d
+			y: 27.75d
+		}
+		{
+			dependencies: ["5CC66985D64422EE"]
+			icon: "gtceu:raw_plutonium"
+			id: "77C8BAC8B927FCDA"
+			size: 0.75d
+			subtitle: "The same vein: more plutonium"
+			tasks: [
+				{ id: "7EC32714FDE5360A", item: "gtceu:raw_plutonium", optional_task: true, type: "item" }
+				{ id: "37AE70EB5B525B6E", type: "checkmark" }
+			]
+			title: "Raw Plutonium"
+			x: 4.5d
+			y: 29.0d
+		}
+		{
+			dependencies: ["5CC66985D64422EE"]
+			icon: "gtceu:steam_bucket"
+			id: "7385159AEAE3E2A6"
+			size: 0.75d
+			subtitle: "Inert: vent it"
+			tasks: [
+				{ id: "3447031B3C794266", item: "gtceu:steam_bucket", optional_task: true, type: "item" }
+				{ id: "743C359BF0D5C594", type: "checkmark" }
+			]
+			title: "Steam"
+			x: 4.5d
+			y: 30.0d
+		}
+		{
+			dependencies: ["5CC66985D64422EE"]
+			icon: "gcyr:venus_cobblestone"
+			id: "5565C763BE4D6F0F"
+			size: 0.75d
+			subtitle: "Hammered into regolith for the casings"
+			tasks: [
+				{ id: "7D5EDA0E5C7BD112", item: "gcyr:venus_cobblestone", optional_task: true, type: "item" }
+				{ id: "5B073A5736524214", type: "checkmark" }
+			]
+			title: "Venus Cobblestone"
+			x: 4.5d
+			y: 31.0d
+		}
+		{
+			dependencies: ["78C55A0C6115070F"]
+			icon: "gtceu:naquadah_oxide_mixture_dust"
+			id: "51FDDBF809C1732E"
+			size: 1.0d
+			subtitle: "Ore plant"
+			tasks: [
+				{ id: "1498444517053208", item: "gtceu:naquadah_oxide_mixture_dust", optional_task: true, type: "item" }
+				{ id: "73F4817DB2FD6423", type: "checkmark" }
+			]
+			title: "Naquadah Oxide Mixture"
+			x: 6.5d
+			y: 27.75d
+		}
+		{
+			icon: "gtceu:hydrofluoric_acid_bucket"
+			id: "74E626D64C4EC111"
+			shape: "rsquare"
+			size: 1.0d
+			subtitle: "From the kiln, some by way of the hot cell"
+			tasks: [
+				{ id: "702F532814691A51", item: "gtceu:hydrofluoric_acid_bucket", optional_task: true, type: "item" }
+				{ id: "1B229CB0EB64CF6B", type: "checkmark" }
+			]
+			title: "Hydrofluoric Acid"
+			x: 6.5d
+			y: 26.25d
+		}
+		{
+			icon: "gtceu:antimony_trioxide_dust"
+			id: "3DD6E2521B49B155"
+			shape: "rsquare"
+			size: 1.0d
+			subtitle: "Stibnite through the LV roaster"
+			tasks: [
+				{ id: "3FCA9D91AD27CC8C", item: "gtceu:antimony_trioxide_dust", optional_task: true, type: "item" }
+				{ id: "188A116E773023D7", type: "checkmark" }
+			]
+			title: "Antimony Trioxide"
+			x: 6.5d
+			y: 29.25d
+		}
+		{
+			icon: "grindless:pube_neutron_source"
+			id: "1C44BB891BE81D16"
+			shape: "rsquare"
+			size: 1.0d
+			subtitle: "Hot cell; it holds the neutron window"
+			tasks: [
+				{ id: "35D0478F5D94562B", item: "grindless:pube_neutron_source", optional_task: true, type: "item" }
+				{ id: "1CF5901D19C28344", type: "checkmark" }
+			]
+			title: "Pu-Be Neutron Source"
+			x: 6.5d
+			y: 30.75d
+		}
+		{
+			dependencies: ["51FDDBF809C1732E", "74E626D64C4EC111", "3DD6E2521B49B155", "1C44BB891BE81D16"]
+			description: [
+				"The neutron activator, its superacid and the titanium furnace in one hall."
+				"The Pu-Be source holds the neutron window that GT-- makes you babysit with accelerators."
+			]
+			icon: "gtceu:naquadah_plant"
+			id: "1D3B1399264057F4"
+			shape: "gear"
+			size: 1.5d
+			tasks: [
+				{ id: "54369C8A586BAC25", item: "gtceu:naquadah_plant", optional_task: true, type: "item" }
+				{ id: "5934C0BB3AEBE0C3", type: "checkmark" }
+			]
+			title: "Naquadah Plant"
+			x: 8.5d
+			y: 28.5d
+		}
+		{
+			dependencies: ["1D3B1399264057F4"]
+			icon: "gtceu:naquadah_dust"
+			id: "1C089C47DF30A347"
+			size: 1.0d
+			tasks: [
+				{ id: "7CE6D544BA1781CC", item: "gtceu:naquadah_dust", optional_task: true, type: "item" }
+				{ id: "143086456676B8C6", type: "checkmark" }
+			]
+			title: "Naquadah Dust"
+			x: 10.5d
+			y: 27.25d
+		}
+		{
+			dependencies: ["1D3B1399264057F4"]
+			icon: "gtceu:hydrogen_bucket"
+			id: "1D22D0C0412FD4EC"
+			size: 0.75d
+			subtitle: "Back to the network, with some water"
+			tasks: [
+				{ id: "1C035A37B4DBBC8E", item: "gtceu:hydrogen_bucket", optional_task: true, type: "item" }
+				{ id: "7064C9B8D9F24411", type: "checkmark" }
+			]
+			title: "Hydrogen"
+			x: 10.5d
+			y: 28.5d
+		}
+		{
+			dependencies: ["1D3B1399264057F4"]
+			icon: "gtceu:gallium_dust"
+			id: "162ACACF34CD6BC9"
+			size: 0.75d
+			subtitle: "Gallium arsenide for the boule"
+			tasks: [
+				{ id: "13DF03A52BACEA66", item: "gtceu:gallium_dust", optional_task: true, type: "item" }
+				{ id: "13687E27B12836D0", type: "checkmark" }
+			]
+			title: "Gallium"
+			x: 10.5d
+			y: 29.5d
+		}
+		{
+			dependencies: ["1D3B1399264057F4"]
+			icon: "gtceu:titanium_ingot"
+			id: "34F79FE62107D9E5"
+			size: 0.75d
+			subtitle: "Into the titanium you already use"
+			tasks: [
+				{ id: "3FD64DC5463F6127", item: "gtceu:titanium_ingot", optional_task: true, type: "item" }
+				{ id: "18498A4242567C5C", type: "checkmark" }
+			]
+			title: "Titanium"
+			x: 10.5d
+			y: 30.5d
+		}
+		{
+			dependencies: ["1C089C47DF30A347"]
+			icon: "gtceu:hot_naquadah_ingot"
+			id: "74FD9811AB65EAD9"
+			size: 1.0d
+			subtitle: "EBF at 5,000 K"
+			tasks: [
+				{ id: "5D6E5BE2C7FE5D5C", item: "gtceu:hot_naquadah_ingot", optional_task: true, type: "item" }
+				{ id: "14C2B89AEDDA66FC", type: "checkmark" }
+			]
+			title: "Hot Naquadah Ingot"
+			x: 12.5d
+			y: 27.25d
+		}
+		{
+			dependencies: ["74FD9811AB65EAD9"]
+			icon: "gtceu:naquadah_ingot"
+			id: "1482AB495FE4772F"
+			size: 1.0d
+			subtitle: "The freezer, with liquid helium"
+			tasks: [
+				{ id: "1AD3A72295A884CF", item: "gtceu:naquadah_ingot", optional_task: true, type: "item" }
+				{ id: "7EE5E8B1DDB70425", type: "checkmark" }
+			]
+			title: "Naquadah"
+			x: 14.5d
+			y: 27.25d
+		}
+		{
+			dependencies: ["1482AB495FE4772F"]
+			icon: "gtceu:naquadah_boule"
+			id: "345280E4109B40A0"
+			size: 1.0d
+			subtitle: "EBF at 5,400 K, with silicon and GaAs"
+			tasks: [
+				{ id: "182EE8DF3AFAFE45", item: "gtceu:naquadah_boule", optional_task: true, type: "item" }
+				{ id: "1D360342D4085FE9", type: "checkmark" }
+			]
+			title: "Naquadah Boule"
+			x: 16.5d
+			y: 27.25d
+		}
+		{
+			dependencies: ["345280E4109B40A0"]
+			icon: "gtceu:naquadah_wafer"
+			id: "3C6755E902FEF468"
+			size: 1.25d
+			subtitle: "Cut in the cleanroom"
+			tasks: [
+				{ id: "1A42FD832ED6C52C", item: "gtceu:naquadah_wafer", optional_task: true, type: "item" }
+				{ id: "1200A812F792CBE2", type: "checkmark" }
+			]
+			title: "Naquadah Wafer"
+			x: 18.5d
+			y: 27.25d
+		}
+		{
+			icon: "grindless:vein_sample_iridosmine_mercury"
+			id: "1D6EA9A53811980A"
+			shape: "rsquare"
+			size: 1.0d
+			tasks: [
+				{ id: "14F7FE6B1C0CD395", item: "grindless:vein_sample_iridosmine_mercury", optional_task: true, type: "item" }
+				{ id: "5439F3D222D44502", type: "checkmark" }
+			]
+			title: "Mercury Iridosmine Sample"
+			x: 0.5d
+			y: 35.5d
+		}
+		{
+			icon: "grindless:tungsten_steel_drill_bit"
+			id: "701AB3758DD632E7"
+			shape: "rsquare"
+			size: 1.0d
+			tasks: [
+				{ id: "1C628841462FF86D", item: "grindless:tungsten_steel_drill_bit", optional_task: true, type: "item" }
+				{ id: "39F6B6DA09879389", type: "checkmark" }
+			]
+			title: "Tungsten Steel Drill Bit"
+			x: 0.5d
+			y: 37.0d
+		}
+		{
+			dependencies: ["1D6EA9A53811980A", "701AB3758DD632E7", "5642C3DCC05983B2"]
+			description: ["By day it only drills with liquid nitrogen. At night it drills dry and goes through bits faster."]
+			icon: "gtceu:mercury_vein_drill"
+			id: "14ED3AAAE02F0FED"
+			shape: "gear"
+			size: 1.5d
+			tasks: [
+				{ id: "5D5E28ED39EA5662", item: "gtceu:mercury_vein_drill", optional_task: true, type: "item" }
+				{ id: "176AD29962F3B234", type: "checkmark" }
+			]
+			title: "Mercury Vein Drill"
+			x: 2.5d
+			y: 37.0d
+		}
+		{
+			dependencies: ["14ED3AAAE02F0FED"]
+			icon: "gtceu:raw_iridosmine"
+			id: "7C7AB2473F552308"
+			size: 1.0d
+			subtitle: "Only Mercury has it"
+			tasks: [
+				{ id: "1166E0640C9379B1", item: "gtceu:raw_iridosmine", optional_task: true, type: "item" }
+				{ id: "387279F6A296C666", type: "checkmark" }
+			]
+			title: "Raw Iridosmine"
+			x: 4.5d
+			y: 36.25d
+		}
+		{
+			dependencies: ["14ED3AAAE02F0FED"]
+			icon: "gtceu:raw_graphite"
+			id: "3337F4FA72AB4EE0"
+			size: 0.75d
+			subtitle: "Electrodes and graphene"
+			tasks: [
+				{ id: "134A2973D8BF7427", item: "gtceu:raw_graphite", optional_task: true, type: "item" }
+				{ id: "1460608699175E3C", type: "checkmark" }
+			]
+			title: "Raw Graphite"
+			x: 4.5d
+			y: 37.5d
+		}
+		{
+			dependencies: ["14ED3AAAE02F0FED"]
+			icon: "gtceu:raw_sulfur"
+			id: "39690A63FF96FDEF"
+			size: 0.75d
+			subtitle: "Sulfuric acid at home"
+			tasks: [
+				{ id: "59FFD743448B3E0E", item: "gtceu:raw_sulfur", optional_task: true, type: "item" }
+				{ id: "3F31BAE5241BCD05", type: "checkmark" }
+			]
+			title: "Raw Sulfur"
+			x: 4.5d
+			y: 38.5d
+		}
+		{
+			dependencies: ["7C7AB2473F552308"]
+			icon: "gtceu:iridosmine_dust"
+			id: "18282AFCC9E82DD7"
+			size: 1.0d
+			subtitle: "Ore plant"
+			tasks: [
+				{ id: "5701A35AC5744B5A", item: "gtceu:iridosmine_dust", optional_task: true, type: "item" }
+				{ id: "1D5BD0797A28E2C7", type: "checkmark" }
+			]
+			title: "Iridosmine Dust"
+			x: 6.5d
+			y: 36.25d
+		}
+		{
+			dependencies: ["18282AFCC9E82DD7"]
+			description: ["The EV plant learns one more trick. The osmium tetroxide and the chlorine never leave it."]
+			icon: "gtceu:platinum_plant"
+			id: "5B04640EEFA209BC"
+			shape: "gear"
+			size: 1.5d
+			tasks: [
+				{ id: "356258C9E0C9767B", item: "gtceu:platinum_plant", optional_task: true, type: "item" }
+				{ id: "1A5FC2BE6C283B14", type: "checkmark" }
+			]
+			title: "Platinum Plant, Mode 3"
+			x: 8.5d
+			y: 36.25d
+		}
+		{
+			dependencies: ["5B04640EEFA209BC"]
+			icon: "gtceu:iridium_dust"
+			id: "757494C91EDAAF2F"
+			size: 1.0d
+			tasks: [
+				{ id: "325DC718FDB55DB3", item: "gtceu:iridium_dust", optional_task: true, type: "item" }
+				{ id: "7FBAC1F61975BA9B", type: "checkmark" }
+			]
+			title: "Iridium"
+			x: 10.5d
+			y: 34.75d
+		}
+		{
+			dependencies: ["5B04640EEFA209BC"]
+			icon: "gtceu:osmium_dust"
+			id: "18F851C124EE8714"
+			size: 1.0d
+			tasks: [
+				{ id: "53C26F262CBB3E05", item: "gtceu:osmium_dust", optional_task: true, type: "item" }
+				{ id: "775B69B5D3F1B536", type: "checkmark" }
+			]
+			title: "Osmium"
+			x: 10.5d
+			y: 36.25d
+		}
+		{
+			dependencies: ["5B04640EEFA209BC"]
+			icon: "gtceu:platinum_sludge_residue_dust"
+			id: "59AE4725ABD7497C"
+			size: 0.75d
+			subtitle: "Centrifuge: gold and silica"
+			tasks: [
+				{ id: "35735550871A2505", item: "gtceu:platinum_sludge_residue_dust", optional_task: true, type: "item" }
+				{ id: "3EE718818BAFBE4F", type: "checkmark" }
+			]
+			title: "Platinum Sludge Residue"
+			x: 10.5d
+			y: 37.5d
+		}
+		{
+			dependencies: ["5B04640EEFA209BC"]
+			icon: "gtceu:calcium_chloride_dust"
+			id: "5AAD5B70F915AF47"
+			size: 0.75d
+			subtitle: "Electrolysis gives the calcium and chlorine back"
+			tasks: [
+				{ id: "33BA6390DA073C17", item: "gtceu:calcium_chloride_dust", optional_task: true, type: "item" }
+				{ id: "5468600456FEC7A2", type: "checkmark" }
+			]
+			title: "Calcium Chloride"
+			x: 10.5d
+			y: 38.5d
+		}
+		{
+			dependencies: ["757494C91EDAAF2F"]
+			icon: "gtceu:iridium_ingot"
+			id: "58ABEE1E788C7717"
+			size: 1.25d
+			subtitle: "EBF at 4,500 K, then the freezer"
+			tasks: [
+				{ id: "31AD3B402FA71B56", item: "gtceu:iridium_ingot", optional_task: true, type: "item" }
+				{ id: "3542E66CCBB2F5B8", type: "checkmark" }
+			]
+			title: "Iridium Ingot"
+			x: 12.5d
+			y: 34.75d
+		}
+		{
+			dependencies: ["18F851C124EE8714"]
+			icon: "gtceu:osmium_ingot"
+			id: "5C7FFA84335EC922"
+			size: 1.25d
+			subtitle: "Two IV hatches on the EBF"
+			tasks: [
+				{ id: "17EA55C900D392C6", item: "gtceu:osmium_ingot", optional_task: true, type: "item" }
+				{ id: "514F8377B1E1EB88", type: "checkmark" }
+			]
+			title: "Osmium Ingot"
+			x: 12.5d
+			y: 36.25d
+		}
+		{
+			icon: "gcyr:mercury_cobblestone"
+			id: "133791A9E6760B8D"
+			shape: "rsquare"
+			size: 1.0d
+			subtitle: "Every bore of the drill brings some up"
+			tasks: [
+				{ id: "19A39C90A85CD8A9", item: "gcyr:mercury_cobblestone", optional_task: true, type: "item" }
+				{ id: "571CD092B1626AF5", type: "checkmark" }
+			]
+			title: "Mercury Cobblestone"
+			x: 16.75d
+			y: 34.5d
+		}
+		{
+			dependencies: ["133791A9E6760B8D"]
+			icon: "gtceu:hermean_regolith_dust"
+			id: "504E07CA238DFB00"
+			size: 1.0d
+			subtitle: "Any macerator"
+			tasks: [
+				{ id: "16FE8EE688B62D41", item: "gtceu:hermean_regolith_dust", optional_task: true, type: "item" }
+				{ id: "73FF76A7314964D4", type: "checkmark" }
+			]
+			title: "Hermean Regolith Dust"
+			x: 18.75d
+			y: 34.5d
+		}
+		{
+			dependencies: ["504E07CA238DFB00", "162641406869CF74", "305F916B3530ABAD"]
+			description: ["Eight mirrors and a furnace at the focus. A run that starts in full sun costs far less power."]
+			icon: "gtceu:mercury_solar_works"
+			id: "1DA2C8E10F5FB26C"
+			shape: "gear"
+			size: 1.5d
+			tasks: [
+				{ id: "184267331C060677", item: "gtceu:mercury_solar_works", optional_task: true, type: "item" }
+				{ id: "15FFF1EFD1A91ACF", type: "checkmark" }
+			]
+			title: "Mercury Solar Works"
+			x: 20.75d
+			y: 36.0d
+		}
+		{
+			dependencies: ["1DA2C8E10F5FB26C"]
+			icon: "grindless:hermean_heat_shield_brick"
+			id: "34C7729330FA93D3"
+			size: 1.25d
+			subtitle: "Mercury's structures are built from it"
+			tasks: [
+				{ id: "332A75C262C1926A", item: "grindless:hermean_heat_shield_brick", optional_task: true, type: "item" }
+				{ id: "1B0F4FE8BBFFD913", type: "checkmark" }
+			]
+			title: "Heat-Shield Brick"
+			x: 22.75d
+			y: 35.25d
+		}
+		{
+			dependencies: ["1DA2C8E10F5FB26C"]
+			icon: "grindless:hermean_thin_film_panel"
+			id: "7B12E3AC75BB566B"
+			size: 1.25d
+			subtitle: "The solar field is made of them"
+			tasks: [
+				{ id: "172FD6A38FDB032A", item: "grindless:hermean_thin_film_panel", optional_task: true, type: "item" }
+				{ id: "1F74AA6BE7EDA38D", type: "checkmark" }
+			]
+			title: "Thin-Film Panel"
+			x: 22.75d
+			y: 36.75d
+		}
+		{
+			icon: "grindless:inner_planets_chart"
+			id: "55861BEACFC8759D"
+			shape: "rsquare"
+			size: 1.0d
+			subtitle: "The deep space antenna writes it"
+			tasks: [
+				{ id: "7B8245A49DE559A4", item: "grindless:inner_planets_chart", optional_task: true, type: "item" }
+				{ id: "1F578D4A0A86C78A", type: "checkmark" }
+			]
+			title: "Inner Planets Chart"
+			x: 27.0d
+			y: 34.5d
+		}
+		{
+			icon: "grindless:lunar_vlbi_recording"
+			id: "55EE951801145204"
+			shape: "rsquare"
+			size: 1.0d
+			subtitle: "Recorded on the Moon, sent over the bridge"
+			tasks: [
+				{ id: "78EB6A53A7357F3E", item: "grindless:lunar_vlbi_recording", optional_task: true, type: "item" }
+				{ id: "54314FABC12DADEE", type: "checkmark" }
+			]
+			title: "Lunar VLBI Recording"
+			x: 27.0d
+			y: 36.0d
+		}
+		{
+			dependencies: ["55861BEACFC8759D", "55EE951801145204"]
+			description: ["Three dishes on Mercury, listening together with the Moon's antenna as one big ear."]
+			icon: "gtceu:interferometer"
+			id: "1B6875EDD727B2E0"
+			shape: "gear"
+			size: 1.5d
+			tasks: [
+				{ id: "709F5FBADB96BD8F", item: "gtceu:interferometer", optional_task: true, type: "item" }
+				{ id: "7E8D67676DEB213E", type: "checkmark" }
+			]
+			title: "Interferometer"
+			x: 29.0d
+			y: 35.25d
+		}
+		{
+			dependencies: ["1B6875EDD727B2E0"]
+			icon: "grindless:outer_system_chart"
+			id: "31E30AA80CDF91D7"
+			size: 1.0d
+			subtitle: "The belt and Jupiter: LuV's trip"
+			tasks: [
+				{ id: "7E8619FDCBA34251", item: "grindless:outer_system_chart", optional_task: true, type: "item" }
+				{ id: "7E657BEF9D4F7654", type: "checkmark" }
+			]
+			title: "Outer System Chart"
+			x: 31.0d
+			y: 34.5d
+		}
+		{
+			dependencies: ["31E30AA80CDF91D7"]
+			description: ["A steady hiss from the centre of the galaxy. That's where all of this is going."]
+			icon: "grindless:sagittarius_a_star_signal"
+			id: "7B4176719D90C65C"
+			size: 1.25d
+			tasks: [
+				{ id: "72D0725BCB8C7982", item: "grindless:sagittarius_a_star_signal", optional_task: true, type: "item" }
+				{ id: "7A1BF7604E6492BE", type: "checkmark" }
+			]
+			title: "Sagittarius A* Signal"
+			x: 33.0d
+			y: 35.25d
+		}
+	]
+	subtitle: ["Uranium goes round the fuel cycle, heavy water goes to the Moon and back, and Venus and Mercury give naquadah, iridium and osmium."]
+	title: "IV Lines"
+}

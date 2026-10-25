@@ -7,10 +7,13 @@
 //   client_tag      the server's tags reached the client: a later-era and a junk item are in #c:hidden_from_recipe_viewers and
 //                   #grindless:hidden_with_recipes; the old scheelite vein sample only in the first
 //   client_index    EMI's index (EmiStackList.stacks) has no hidden item or fluid (nor the old sample), and has perlite dust, obsidian dust,
-//                   the LV sifter, the Moon's titanium dust, moon sand and helium-3, and Mars' rock and the titanium drill bit (EV)
+//                   the LV sifter, the Moon's titanium dust, moon sand and helium-3, Mars' rock and the titanium drill bit (EV), and IV's
+//                   naquadah, Venus rock, iridosmine, U-235 and deuterium (IV is implemented since C1's switch, 2026-10-25)
 //   client_recipes  EMI shows no recipe that makes or uses a hidden item; it shows the LV sifter's perlite, perlite's electrolysis and the
 //                   old sample's conversion into an empty vein probe
 //   client_jei      JEI runs under EMI: its ingredient list and recipe screen are EMI's (JEMI), so JEI shows nothing of its own
+//   client_chipped  a mod that only ships a JEI plugin reaches EMI: Chipped's workbench categories hold recipes and stone is used by one
+//                   (with JEI 15.56 every one of them failed: EMI 1.1.22's JEMI slot builder lacks a method that JEI made abstract)
 // GGTEST|hidden|client_<check>|PASS|FAIL|NOTE, and GGTEST|hidden|client_done when it lets the client go.
 // var + function: this Rhino throws "redeclaration of var" for const/let in functions that run more than once.
 ;(function () {
@@ -69,11 +72,11 @@
     // EMI hands out JDK immutable lists (ImmutableCollections$ListN); Rhino cannot call their methods (module access): copy them
     var jlist = function (c) { return new ArrayList(c) }
 
-    var hiddenItems = ['gtceu:naquadah_dust', 'gtceu:damascus_steel_ingot', 'gtca:scrap', 'gcyr:venus_rock']
-    var hiddenFluids = ['gtceu:naquadah', 'gtceu:molten_stainless_steel']
+    var hiddenItems = ['gtnn:circuit_assembly_line', 'gtceu:damascus_steel_ingot', 'gtca:scrap', 'gcyr:proxima_centauri_b_regolith']
+    var hiddenFluids = ['gtceu:molten_cerrobase_140', 'gtceu:molten_stainless_steel']
     var shownItems = ['gtceu:perlite_dust', 'gtceu:obsidian_dust', 'gtceu:lv_sifter', 'gtceu:basalt_dust', 'gtceu:titanium_dust', 'gcyr:moon_sand',
-      'gcyr:martian_rock', 'grindless:titanium_drill_bit']
-    var shownFluids = ['gtceu:helium_3']
+      'gcyr:martian_rock', 'grindless:titanium_drill_bit', 'gtceu:naquadah_dust', 'gcyr:venus_rock', 'gtceu:raw_iridosmine', 'gtceu:uranium_235_dust']
+    var shownFluids = ['gtceu:helium_3', 'gtceu:deuterium', 'gtceu:naquadah']
 
     // 1) the tags reached the client
     var tagged = hiddenItems.filter(function (id) { return Item.of(id).hasTag(TAG) && Item.of(id).hasTag(RECIPES_TAG) })
@@ -114,7 +117,7 @@
     // the constructors, not EmiStack.of: Rhino finds of(ItemStack) and of(ItemLike) equally good for a KubeJS item stack
     var stackOf = function (id) { return new ItemEmiStack(Item.of(id)) }
     var problems = []
-    ;['gtceu:naquadah_dust', 'gtceu:damascus_steel_ingot'].forEach(function (id) {
+    ;['gtnn:circuit_assembly_line', 'gtceu:damascus_steel_ingot'].forEach(function (id) {
       var made = count(rm.getRecipesByOutput(stackOf(id)))
       var used = count(rm.getRecipesByInput(stackOf(id)))
       if (made + used > 0) problems.push(id + ' made by ' + made + ', used by ' + used)
@@ -158,6 +161,38 @@
       jei = 'JEMI not available: ' + e
     }
     log('client_jei', ok ? 'PASS' : 'FAIL', jei)
+
+    // 5) Chipped (JEI plugin only, through JEMI)
+    var chipped = []
+    var chippedTotal = 0
+    var cats = jlist(rm.getCategories())
+    for (var ci = 0; ci < cats.size(); ci++) {
+      var cid = String(cats.get(ci).getId())
+      if (cid.indexOf('chipped:') !== 0) continue
+      var n = count(rm.getRecipes(cats.get(ci)))
+      chipped.push(cid + ' ' + n)
+      chippedTotal += n
+    }
+    var stoneUses = jlist(rm.getRecipesByInput(stackOf('minecraft:stone')))
+    var stoneInChipped = 0
+    var sample = ''
+    for (var si = 0; si < stoneUses.size(); si++) {
+      var sr = stoneUses.get(si)
+      var scat = String(sr.getCategory().getId())
+      if (scat.indexOf('chipped:') !== 0) continue
+      stoneInChipped++
+      if (sample === '') {
+        var outs = jlist(sr.getOutputs())
+        var made = []
+        for (var oi = 0; oi < outs.size() && made.length < 3; oi++) {
+          var oid = String(outs.get(oi).getId())
+          if (oid.indexOf('chipped:') === 0) made.push(oid)
+        }
+        sample = scat + ': minecraft:stone -> ' + outs.size() + ' outputs (' + made.join(', ') + (outs.size() > made.length ? ', ...' : '') + ')'
+      }
+    }
+    log('client_chipped', chippedTotal > 0 && stoneInChipped > 0 ? 'PASS' : 'FAIL', 'Chipped categories in EMI: ' + (chipped.join(', ') || 'none') +
+      '; ' + chippedTotal + ' recipes; ' + stoneInChipped + ' of them use stone' + (sample === '' ? '' : '; ' + sample))
   }
 
   function tick() {

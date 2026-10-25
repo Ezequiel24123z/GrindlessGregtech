@@ -70,6 +70,9 @@ export function checkBook(book, cfg, options = {}) {
   const only = options.chapters && options.chapters.length ? new Set(options.chapters) : null;
   const inScope = (ch) => !only || only.has(ch.filename);
   const manyOk = new Set((cfg.manyRewardsOk || []).map((e) => e.quest));
+  // chapter groups whose quests give no reward on purpose (lint-config.json noRewardGroups: { groups: [titles], why })
+  const noRewardGroups = new Set(((cfg.noRewardGroups && cfg.noRewardGroups.groups) || []).map((t) => String(t)));
+  const rewardFree = (ch) => noRewardGroups.has((book.groups.find((g) => g.id === ch.group) || {}).title);
   const quantityOk = new Set((cfg.quantityOk || []).map((e) => e.quest));
   const banned = (cfg.bannedPhrases || []).map((s) => s.toLowerCase());
 
@@ -217,7 +220,7 @@ export function checkBook(book, cfg, options = {}) {
       const qty = /\b\d+\s*(?:x\s*)?(?:ingots?|plates?|dusts?|blocks?|bricks?|logs?|planks?|items?|mb|buckets?|stacks?|nuggets?|gems?|pieces?|cables?|wires?|rods?|bolts?|screws?|gears?|casings?|ores?)\b|\bx\s?\d+\b/i.exec(text);
       if (qty && !quantityOk.has(q.id)) add('warn', 'text-quantity', ch, q, `quantity in the text ("${qty[0]}"): counts go in the task or in EMI`);
       const infoOnly = q.tasks.length > 0 && q.tasks.every((t) => t.type === 'checkmark');
-      if (q.rewards.length === 0 && !infoOnly) add('warn', 'no-reward', ch, q, 'no reward (rule: every quest gives a small one)');
+      if (q.rewards.length === 0 && !infoOnly && !rewardFree(ch)) add('warn', 'no-reward', ch, q, 'no reward (rule: every quest gives a small one)');
       if (q.rewards.length > (cfg.maxRewardEntries ?? 6) && !manyOk.has(q.id)) add('warn', 'reward-entries', ch, q, `${q.rewards.length} rewards (max ${cfg.maxRewardEntries})`);
       for (const r of q.rewards) {
         const n = Number(r.count ?? (r.item && r.item.Count) ?? 1);
