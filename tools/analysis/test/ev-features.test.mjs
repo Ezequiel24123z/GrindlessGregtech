@@ -42,10 +42,13 @@ test('tier veto: vetoAbove skips the recipes filed above the machine\'s tier and
   assert.ok(/runs the recipes filed under ev\/ \(the family's tier veto\)/.test(dead.label), dead.label);
 });
 
-test('tier veto: onlyTier runs its own folder only (the EV tripod), a machine without a veto runs every folder (the steam drill)', () => {
+test('tier veto: onlyTier runs its own folder only (the EV tripod), "" only the unfiled recipes (the steam family), and no veto runs every folder', () => {
   let r = run(...Object.values(drillPack([{ machine: 't:tripod', types: ['t:drilling'], onlyTier: 'ev' }])));
   assert.deepEqual(verdicts(r.out.gate), { a: 'FAIL', b: 'FAIL', c: 'PASS' });
-  r = run(...Object.values(drillPack([{ machine: 't:steam_drill', types: ['t:drilling'] }])));
+  r = run(...Object.values(drillPack([{ machine: 't:steam_drill', types: ['t:drilling'], onlyTier: '' }])));
+  assert.deepEqual(verdicts(r.out.gate), { a: 'PASS', b: 'FAIL', c: 'FAIL' });
+  assert.ok(!r.model.warnings.some((w) => /onlyTier/.test(w)), 'onlyTier "" is valid');
+  r = run(...Object.values(drillPack([{ machine: 't:any_drill', types: ['t:drilling'] }])));
   assert.deepEqual(verdicts(r.out.gate), { a: 'PASS', b: 'PASS', c: 'PASS' });
 });
 

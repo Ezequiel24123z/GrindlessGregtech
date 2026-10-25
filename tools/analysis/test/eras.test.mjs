@@ -416,7 +416,7 @@ test('real tiers (v0.5.0): the End is in MV, the trip to the Moon gives the luna
   assert.ok(!fs.existsSync(path.join(TIERS, 'next', 'hv.json')) && !fs.existsSync(path.join(TIERS, 'next', 'mv.json')));
 });
 
-test('real tiers (ev, 2026-10-25): the Moon and Mars substages, the Martian resources only from Mars, the trips\' keys, the tier veto and B7\'s slot', () => {
+test('real tiers (ev, 2026-10-25): the Moon and Mars substages, the Martian resources only from Mars, the trips\' keys, the tier veto and B7', () => {
   const { raw: ev } = loadTierConfig({ tier: 'ev' }, TIERS);
   const res = Object.fromEntries(ev.eraResources.map((r) => [r.id, r]));
   for (const id of ['moon', 'titanium', 'helium-3']) assert.equal(res[id].era, 'ev', id);
@@ -435,10 +435,12 @@ test('real tiers (ev, 2026-10-25): the Moon and Mars substages, the Martian reso
   for (const t of ['lv', 'mv', 'hv']) {
     for (const kind of ['vein_drill', 'greenhouse']) assert.equal(machine(ev, `gtceu:${t}_${kind}`).vetoAbove, t, `${t}_${kind}`);
   }
-  assert.equal(machine(ev, 'gtceu:steam_vein_drill').vetoAbove, undefined, 'the steam drill has no veto hook (known soft spot)');
-  // B7's slot stays optional until that package is merged
-  for (const id of ['gtceu:combined_cycle_plant', 'gtceu:hot_strip_mill']) assert.ok(machine(ev, id).optional, id);
-  for (const id of ['plant-combined-cycle', 'mill-hot-strip']) assert.ok(ev.targets.find((t) => t.id === id).optional, id);
+  assert.equal(machine(ev, 'gtceu:steam_vein_drill').onlyTier, '', 'the steam drill only runs unfiled steam recipes (steam/machines.js)');
+  assert.equal(machine(ev, 'gtceu:steam_greenhouse').onlyTier, '');
+  // B7 (merged 2026-10-25): both machines are modeled; the combined-cycle plant is one more EV source, never a required one
+  for (const id of ['gtceu:combined_cycle_plant', 'gtceu:hot_strip_mill']) assert.ok(machine(ev, id) && !machine(ev, id).optional, id);
+  assert.deepEqual(ev.synthetic.find((s) => s.id === 'combined-cycle').produces, ['eu:ev']);
+  assert.ok(ev.targets.find((t) => t.id === 'site-fuels-air').types.includes('gtceu:combined_cycle'));
   // what HV declared and EV no longer holds is dropped; the radioactive and quantum eye checks are real (not optional)
   const ids = ev.targets.map((t) => t.id);
   for (const id of ['bit-titanium-not-made', 'scheelite-not-comes-from-end']) assert.ok(!ids.includes(id), id);
