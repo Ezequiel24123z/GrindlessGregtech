@@ -7,7 +7,7 @@
   "obtain": {
     "audit": ["gtceu", "gtca", "gtnn", "gcyr", "grindless", "extendedfeatures", "gtmutils", "gtstoragedrawers", "gtceuterminal"],
     "ignoreNamespaces": ["create", "createaddition", "create_new_age", "createdeco", "create_enchantment_industry"],
-    "reachableDimensions": ["minecraft:overworld", "minecraft:the_nether", "minecraft:the_end", "grindless:flat", "grindless:void", "gcyr:luna"],
+    "reachableDimensions": ["minecraft:overworld", "minecraft:the_nether", "minecraft:the_end", "grindless:flat", "grindless:void", "gcyr:luna", "gcyr:mars"],
 
     "notFree": [
       "*:*spawn_egg*",
@@ -27,6 +27,7 @@
       { "id": "trees-gt", "mode": "manual", "items": ["gtceu:rubber_log", "gtceu:rubber_leaves", "gtceu:rubber_sapling", "gtceu:sticky_resin"], "note": "GTM's rubber trees in the Overworld and the sticky resin they drop." },
       { "id": "stones-gt", "mode": "manual", "items": ["gtceu:marble", "gtceu:red_granite"], "note": "GTM 7.5.3 GTPlacedFeatures/GTBiomeModifiers: marble and red granite patches in the Overworld." },
       { "id": "moon-ground", "mode": "manual", "items": ["gcyr:moon_stone", "gcyr:moon_cobblestone", "gcyr:moon_sand", "gcyr:lunar_mare_regolith"], "note": "The Moon's ground (gcyr:luna, by hand at the end of HV since v0.5.0): the lunar drill's regolith sample needs regolith and lunar sand (data/grindless/tables/veins_moon.json)." },
+      { "id": "mars-ground", "mode": "manual", "items": ["gcyr:martian_rock", "gcyr:martian_cobblestone", "gcyr:mars_regolith"], "note": "Mars' ground (gcyr:mars, by hand with the tier 2 rocket at the end of EV since v0.6.0); the tripod's stone on Mars." },
       { "id": "coal-pile", "mode": "auto", "via": ["gtceu:charcoal_pile_igniter"], "items": ["gtceu:brittle_charcoal"], "note": "GTM's charcoal pile igniter burns logs in the world and leaves brittle charcoal: it isn't a recipe." },
       { "id": "recipes-special", "mode": "manual", "items": ["gtceu:facade_cover"], "note": "The facade cover comes from a special recipe (gtceu:crafting_facade_cover) that the analysis doesn't read." }
     ],
@@ -36,11 +37,9 @@
     "creative": ["*:creative_*", "*:*_creative_*", "*:debug_*", "gtceu:portable_debug_scanner"],
 
     "later": [
-      { "id": "mars", "era": "EV (Mars, at the end of EV)", "until": "ev", "label": "Mars (gcyr:mars)", "dimensions": ["gcyr:mars"], "items": ["gcyr:martian_rock", "gcyr:martian_cobblestone", "gcyr:mars_regolith"] },
-      { "id": "end-scheelite", "era": "EV (Mars, at the end of EV)", "until": "ev", "label": "the scheelite vein, which moves from the End to Mars (veins_excluded.json; no longer generated)", "veins": ["gtceu:scheelite_vein"], "materials": ["scheelite", "tungstate", "lithium"] },
       { "id": "venus-mercury", "era": "IV (Venus and Mercury)", "until": "iv", "label": "Venus and Mercury (gcyr:venus, gcyr:mercury)", "dimensions": ["gcyr:venus", "gcyr:mercury"], "items": ["gcyr:venus_rock", "gcyr:venus_cobblestone", "gcyr:venus_sand", "gcyr:venusian_regolith", "gcyr:mercury_rock", "gcyr:mercury_cobblestone"] },
+      { "id": "end-pitchblende", "era": "IV (radioactives)", "until": "iv", "label": "the End's pitchblende vein, held back until IV (veins_excluded.json)", "veins": ["gtceu:pitchblende_vein_end"], "note": "Before the naquadah vein: its plutonium ore also gives uraninite, and the radioactive chain (uranium, radon, quantum eye and star, and what needs them) is IV's radioactives, not Venus' naquadah." },
       { "id": "end-naquadah", "era": "IV+ (naquadah: Venus in docs/journey.md, and whatever hangs off it)", "until": "iv", "label": "the End's naquadah vein, held back until IV (veins_excluded.json)", "veins": ["gtceu:naquadah_vein"] },
-      { "id": "end-pitchblende", "era": "IV (radioactives)", "until": "iv", "label": "the End's pitchblende vein, held back until IV (veins_excluded.json)", "veins": ["gtceu:pitchblende_vein_end"] },
       { "id": "proxima", "era": "UHV (Proxima b)", "until": "uhv", "label": "Proxima Centauri b", "dimensions": ["gcyr:proxima_centauri_b"], "items": ["gcyr:proxima_centauri_b_*", "gcyr:prb_*"] }
     ],
 
@@ -50,7 +49,9 @@
         "reason": "molten cerrobase 140: only the GT-- circuit assembly line (LuV) asks for it, which integration/gtnn.js keeps, and nothing melts it (the dust does mix); its melting recipe arrives with LuV (decision of 2026-10-24)" },
 
       { "class": "B", "materials": ["iridium", "osmium"], "partial": true, "forms": "ore", "era": "IV (Mercury)", "until": "iv", "reason": "ore forms of iridium and osmium: docs/journey.md gets them from Mercury's crust in IV" },
-      { "class": "B", "materials": ["gcyr:martian_rock_dust"], "era": "EV (Mars, at the end of EV)", "until": "ev", "reason": "GCYR Martian rock dust: arrives with Mars (today nothing mills the rock)" },
+      { "class": "B", "materials": ["deuterium"], "era": "IV (heavy water from the Martian ice)", "until": "iv", "reason": "deuterium: since EV it has no source (hydrogen_separation is removed and both ender air recipes lose it, offworld_only.json); IV makes heavy water from Mars' deuterium-rich ice. Only tritium separation and fusion (LuV) use it" },
+      { "class": "B", "materials": ["helium", "nitrogen"], "partial": true, "era": "LuV (fusion, with IV's deuterium)", "until": "luv", "reason": "helium and nitrogen plasma: only GTM's fusion makes them, from deuterium (D + T, Be + D), which has no source until IV's heavy water; fusion is LuV" },
+      { "class": "B", "materials": ["gtca:helium_ion"], "era": "ZPM (GTCA's comet, from fusion's helium plasma)", "until": "zpm", "reason": "GTCA's helium ion: the comet (122,880 EU/t) makes it from helium plasma, which needs fusion and deuterium" },
       { "class": "B", "materials": ["gcyr:dyson_*", "gcyr:drone_hangar"], "era": "UHV (Dyson swarm)", "until": "uhv", "reason": "Dyson swarm from docs/journey.md (UHV): GCYR gives no recipe for these parts" },
       { "class": "B", "materials": ["gcyr:*_satellite", "gcyr:gps_tracker", "gcyr:beam_receiver", "gcyr:airlock_door", "gcyr:keycard"], "era": "LuV (orbital station)", "until": "luv", "reason": "GCYR satellites, beam receiver and station parts: docs/journey.md opens orbit in LuV; they have no recipe today" },
       { "class": "B", "materials": ["gcyr:space_elevator_support", "gtca:space_elevator*", "gtca:space_miner_*", "gtca:space_pump_*", "gtca:space_assembler_*"], "era": "ZPM (space elevator)", "until": "zpm", "reason": "space elevator and its modules: docs/journey.md places it in ZPM; today GTCA gives no recipe for the modules (integration/gtca.js)" },
@@ -60,7 +61,8 @@
       { "class": "B", "materials": ["naquadria_oxide_mixture"], "era": "IV (naquadah)", "until": "iv", "reason": "GT-- naquadah line: comes from processing naquadria ore, which no vein gives today; it will arrive with the naquadah veins (docs/journey.md: Venus, IV)" },
       { "class": "B", "materials": ["neutronium_mixture", "plutonium_based_liquid_fuel*"], "era": "UV–UIV (neutronium)", "until": "uiv", "reason": "plutonium fuel for the GT-- naquadah reactor: needs neutronium mixture, which comes from a neutronium ore that no vein gives (docs/journey.md: neutronium in UIV)" },
 
-      { "class": "C", "materials": ["grindless:titanium_drill_bit", "grindless:vein_sample_scheelite"], "keepRecipes": true, "reason": "hidden in EMI: only exists for old saves and converts into the new thing (stainless drill bit, empty vein probe); its conversion recipe stays" },
+      { "class": "C", "materials": ["grindless:vein_sample_scheelite"], "keepRecipes": true, "reason": "hidden in EMI: only exists for old saves and converts into the new thing (empty vein probe); its conversion recipe stays" },
+      { "class": "C", "materials": ["gtca:samarium_terbium_mixture", "gtca:nitrogenated_samarium_terbium_mixture", "gtca:terbium_nitrate", "gtca:samarium_residue", "terbium", "gadolinium"], "reason": "GTCA's samarium-terbium branch: since EV samarium is Martian, and flsamaric_to_ho no longer gives the samarium-terbium mixture (offworld_only.json), so the branch has no input anywhere; its terbium and gadolinium have no other consumer" },
       { "class": "C", "materials": ["gtca:green_house", "gtca:*_recycler", "gtca:scrap", "gtca:scrapbox", "gtca:uu_matter_amplifier", "gtca:*_matter_amplificator", "gtca:polymerizer", "gtca:industrial_coke_oven", "gtca:steam_pressurizer", "gtca:high_pressure_steam", "gtca:*_chemical_generator", "gtca:extreme_heat_exchanger", "gtca:shd_turbine", "gtca:pahoehoe_lava", "gtca:sh_steam", "gtca:sc_steam", "gtca:e_85_fuel", "gtca:dymethyl_ether"], "reason": "GTCA: removed by the pack (integration/gtca.js): machines that cheapen a line or pull energy out of nothing, and whatever only they made or burned" },
       { "class": "C", "materials": ["gtca:*purification_unit", "gtca:*water*plant_casing", "gtca:*waterplant_casing", "gtca:purified_water_grade_*", "gtca:inert_*_casing", "gtca:high_energy_ultraviolet_emitter_casing", "gtca:hastealloy_276"], "reason": "GTCA: water purification plant with no controller recipe (integration/gtca.js), and the alloy only its casing asks for" },
       { "class": "C", "materials": ["gtca:bedrockium", "gtca:cosmic_*", "gtca:endium", "gtca:mytryl", "gtca:thaumium", "gtca:vinteum", "infinity", "infinity_catalyst", "space_neutronium", "arcane_crystal", "tellurium", "thulium"], "reason": "addon material with ore blocks in every stone type but no vein in any dimension: nothing gives it" },
@@ -77,6 +79,7 @@
       { "class": "C", "materials": ["calcium_carbonate", "potassium_sulfate", "technetium", "orange_metal", "palladium_on_carbon", "gcyr:iron_oxide", "gcyr:potassium_chloride", "gcyr:chromic_acid"], "reason": "material with no source whose recipes only give things that already come another way (calcium, potassium, sulfur, iron, chromium...)" },
       { "class": "C", "materials": ["gcyr:fluorite"], "reason": "GCYR fluorite: ore blocks with no vein; the pack's fluorine comes from other lines" },
       { "class": "C", "materials": ["tuff"], "reason": "tuff dust: only comes from milling ore blocks in tuff (the drill gives raw ores), and has no use of its own" },
+      { "class": "C", "materials": ["gcyr:martian_rock_dust"], "reason": "GCYR Martian rock dust: only the stone byproduct of milling Martian ore blocks (the tripod gives raw ores, and nothing mills the rock itself), with no use of its own" },
       { "class": "C", "materials": ["udmh", "udmh_rocket_fuel"], "reason": "UDMH: rocket engine fuel with no recipe; GT-- engines burn hydrazine and RP-1, which are made" },
       { "class": "C", "materials": ["hydrogen"], "partial": true, "reason": "hydrogen plasma: GCYR accepts it as fuel, but nothing produces it" },
 

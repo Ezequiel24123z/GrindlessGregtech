@@ -253,7 +253,24 @@ Credits to note in `CREDITS.md`: designed-core reactor (Grindless campaign, T5, 
 
 The twelve proposals are approved, with these clarifications:
 
-- **The fission reactor depends on KubeJS generators.** This was checked on 2026-10-25: a KubeJS generator multiblock outputs EU through dynamo hatches on GTM 7.5.3 (`lib/generators.js`, run `a3-power-generators-run2`). What is still unproven is a custom generator recipe type of ours. The EV lunar solar array is the first one; if it fails, the reactor feeds steam to GTM's large turbines: same place on the route, different output.
+- **The fission reactor depends on KubeJS generators.** This was checked on 2026-10-25: a KubeJS generator multiblock outputs EU through dynamo hatches on GTM 7.5.3 (`lib/generators.js`, run `a3-power-generators-run2`). Custom generator recipe types of ours work too: EV's lunar solar array (`gtceu:lunar_solar`, run `b4-lunar-power-1`) and combined-cycle plant (`gtceu:combined_cycle`, run `b7-combined-cycle-hot-mill-3`) put their EU into real EV battery buffers. The reactor's output needs no plan B.
 - **The `iridosmine` material is registered with KubeJS** (`gtceu:iridosmine`) and only appears in Mercury's vein table. The validator checks that iridium and osmium do not come out on Earth.
 - **`journey.md` is adjusted.** In the IV row, solar smelting moves to plan B, the prospecting satellite moves to LuV, and the reactor, hot cell and naquadah plant come in.
 - **IV is built after EV.** This document is the guide until then.
+
+## What the EV build leaves for IV (orchestrator, 2026-10-25)
+
+What changed while EV was built, and what the IV design has to take into account before IV is built:
+
+- **Growth (rule 7 of `AGENTS.md`).** EV ended with 11 multiblocks of ours, so IV needs about 15. This document predates the rule: the reactor, the hot cell, the naquadah plant and the family steps fall short. IV needs a "Raising IV to the target" pass, as EV had, before its packages are written.
+- **Radioactives really start in IV.** EV now enforces "no radioactives before IV":
+  - GTM's thorium ore (the Nether's beryllium vein) gives lead and rare earth instead of uraninite.
+  - Liquid ender air in GTM's distillation tower gives no radon (nor deuterium).
+  - The EV creature simulator and GTM's EV circuit assembler take HV emitters.
+  - So uranium comes only from the pitchblende vein. Radon comes from the hot cell, GTM's uranium-238 recipe and Extended Features' large collector.
+- **Deuterium has no Earth source left** (`hydrogen_separation` removed, ender air stripped). IV's heavy water from the Martian ice is the first source of all.
+- **Power by site.** Fuels only burn in the dimensions with air (`data/grindless/tables/site_fuels.json`, an allowlist that GTM ORs), so "no combustion" on Venus and Mercury needs no more code. An IV machine that burns fuel in a script-added recipe calls `global.grindless.power.burnsInAir(builder)`. A byproduct that must have a destination can refuse fluid voiding, like the combined-cycle plant (`grindless.steam_outputs.no_voiding`).
+- **Weather.** `space/airless_weather.js` keeps every dimension of the other planets dry, Venus and Mercury included. If Venus's clouds should ever be weather, Venus has to be exempted there.
+- **Family veto.** A family recipe of a tier lives under `<type>/<tier>/`, and every lower machine skips the folders above its own tier; the steam machines skip every tier folder. The Tungstensteel-bit recipes that the older home drills should run (the pitchblende vein, *Route* step 2) therefore cannot live under `vein_drilling/iv/`. They go in the folder of the lowest drill meant to run them, or the veto gets an explicit exception.
+- **AE2.** EU P2P is the main power route between planets: 32,768 EU/t per pair across the bridge, measured in EV, with AE2's 2.5% toll.
+- **GTM's HV fluid drilling rig** arrives with Mars (tungsten carbide gears), at the end of EV.

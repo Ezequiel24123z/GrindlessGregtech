@@ -47,6 +47,7 @@
     {
       "machine": "gtceu:lv_vein_drill",
       "types": ["gtceu:vein_drilling"],
+      "vetoAbove": "lv",
       "energy": { "voltage": 32 },
       "needs": ["eu:lv"],
       "partsFromStructure": true,
@@ -59,6 +60,7 @@
     {
       "machine": "gtceu:lv_greenhouse",
       "types": ["gtceu:greenhouse"],
+      "vetoAbove": "lv",
       "energy": { "voltage": 32 },
       "needs": ["eu:lv"],
       "partsFromStructure": true,
