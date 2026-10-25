@@ -10,8 +10,10 @@
 //   ev_platinum_plant|counts         5 recipes (2 attack + 3 separation) built from the 31 stages of GT--'s live line, none skipped, each in
 //                                    the recipe manager under its final id (grindless:pgm_refining/ev/<name>: GTM's builder puts the type in
 //                                    front)
-//   ev_platinum_plant|figures        every recipe has the inputs, outputs, duration and EU/t it had on 2026-10-24, in the script's record and
-//                                    in the recipe manager: the loose line has not changed under the plant
+//   ev_platinum_plant|figures        every recipe the script built has the inputs, outputs, chances, duration and EU/t it had on 2026-10-24
+//                                    (the loose line has not changed under the plant), and its live recipe in the recipe manager has the
+//                                    same duration and EU/t. The live inputs, outputs and chances are not read back here: compare them in
+//                                    the dump (gg_dump.js, the final recipe set)
 //   ev_platinum_plant|crafting       the plant and the electrode recipes, under their final ids
 //   platinum_plant|DESCRIPTION / PLACED / FORMED / PATTERN / PARTS   the registered description placed block by block, formed by itself
 //   platinum_plant|PROCESS_attack_pentlandite   the leach: 9 ore + electrode -> 1 sludge + 18 nickel + oxygen + sulfuric acid
@@ -284,7 +286,7 @@
         problems.push(name + ' in the recipe manager ' + live.duration + ' t x ' + liveEut + ' EU/t, the script made ' + p.duration + ' x ' + p.eut)
       }
     })
-    check(SCOPE, 'figures', problems.length === 0, 'the 5 recipes against 2026-10-24 (inputs, outputs, chances, duration, EU/t; the live recipes too)' +
+    check(SCOPE, 'figures', problems.length === 0, 'the script\'s 5 recipes against 2026-10-24 (inputs, outputs, chances, duration, EU/t); the live recipes have the same duration and EU/t' +
       (problems.length > 0 ? ' problems(' + problems.length + ')=' + problems.slice(0, 12).join(' ; ') : ''))
 
     var craftProblems = []
