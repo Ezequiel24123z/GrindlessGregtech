@@ -77,6 +77,8 @@ Ideas are not copied as text or as code: they are rebuilt with our rules, and we
 | Lava furnace | GregTech Leisure (`lava_furnace`, makes lava from stone) | No clear licence (ideas only) | The name; ours uses lava as heat and never makes it. |
 | Weather controller, circuits 1/2/3 = clear/rain/thunder | GregTech Leisure (`weather_control`) | No clear licence (ideas only) | The modes; the reagents, gate, hook and structure are ours. |
 | Cleaning maintenance hatch at HV | GregTech Leisure (HV recipe for GTM's hatch) | No clear licence (ideas only) | The tier; the recipe is ours. |
+| Martian Quantum Seed: rare-earth ions as the memory of the Earth–Mars pair | Real rare-earth-doped crystal quantum memories (europium in yttrium orthosilicate, six-hour coherence: Zhong et al., Nature 517, 2015) | — (real physics) | The idea. |
+| Power between planets over AE2 P2P tunnels (eup2p's EU P2P, or FE P2P with GTM energy converters) | AE2 (LGPL-3.0), GregTech Modern (LGPL-3.0), EU P2P Tunnel (eup2p, MIT), used unchanged | LGPL-3.0 / MIT | Use only; no code copied. |
 
 ## Quests
 
@@ -351,3 +353,5 @@ Each of our own textures is recorded here with its origin.
 | `pack/kubejs/assets/grindless/textures/block/multiblock/weather_controller/overlay_front_active.png.mcmeta` | Generated with tools/assets/Build-LeisureUtilityTextures.ps1 (procedural pixel art, original) by the Leisure utility agent, 2026-10-25 | the pack's licence (pending; proposed CC BY-SA 4.0) |
 | `pack/kubejs/assets/grindless/textures/block/multiblock/weather_controller/overlay_front_active_emissive.png` | Generated with tools/assets/Build-LeisureUtilityTextures.ps1 (procedural pixel art, original) by the Leisure utility agent, 2026-10-25 | the pack's licence (pending; proposed CC BY-SA 4.0) |
 | `pack/kubejs/assets/grindless/textures/block/multiblock/weather_controller/overlay_front_active_emissive.png.mcmeta` | Generated with tools/assets/Build-LeisureUtilityTextures.ps1 (procedural pixel art, original) by the Leisure utility agent, 2026-10-25 | the pack's licence (pending; proposed CC BY-SA 4.0) |
+| `pack/kubejs/assets/grindless/textures/item/martian_quantum_seed.png` | Generated with tools/assets/Build-AE2InterplanetaryTextures.ps1 (procedural pixel art, original) by the ae2-interplanetary agent, 2026-10-25 | the pack's licence (pending; proposed CC BY-SA 4.0) |
+| `pack/kubejs/assets/grindless/textures/item/martian_quantum_seed.png.mcmeta` | Generated with tools/assets/Build-AE2InterplanetaryTextures.ps1 (procedural pixel art, original) by the ae2-interplanetary agent, 2026-10-25 | the pack's licence (pending; proposed CC BY-SA 4.0) |

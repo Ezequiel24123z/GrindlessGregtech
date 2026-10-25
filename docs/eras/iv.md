@@ -149,10 +149,10 @@ What it gains: **the hands-free neutron window and the superacid inside.** The l
 
 ## AE2 between planets: the IV step
 
-EV leaves the ME P2P tunnel trunk, power as FE with GTM converters (32,768 EU/t crossing) and the pairs the base sets up. IV goes up one step:
+EV leaves the ME P2P tunnel trunk, power over EU P2P (or FE P2P with GTM converters for FE devices; 32,768 EU/t crossing, measured) and the pairs the base sets up. IV goes up one step:
 
 - **Two more pairs,** Earth–Venus and Earth–Mercury. Their far half is built there on the first visit, and both sides run with loaded chunks (FTB Chunks).
-- **EU without conversion:** EU P2P tunnels (`eup2p`) across the bridge instead of FE with converters, without AE2's tax and at IV amperage (verify that they cross dimensions). Target: 131,072 EU/t crossing. The heat engine sends home what is left over, and the reactor covers Mercury's night.
+- **More amperage:** EU P2P tunnels (`eup2p`) already cross dimensions and carry EV power since EV, and they pay the same toll as FE (2.5% of the energy, in AE). The IV step is amperage. Target: 131,072 EU/t crossing. eup2p's laser P2P tunnel (`LaserP2PTunnelPart`, id to verify) is the candidate. The heat engine sends home what is left over, and the reactor covers Mercury's night.
 - **Capacity:** MEGA (the IV circuit assembler's processor) and the 32k coprocessors of Expanded AE. The network stores and manufactures with what arrives from five worlds.
 - **The network feeds the line:** the export buses of each cut request from all planets at once.
 
