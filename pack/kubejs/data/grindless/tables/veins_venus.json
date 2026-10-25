@@ -1,0 +1,26 @@
+{
+  "_source": "Our own table: Venus (gcyr:venus, Gregicality Rocketry 0.2.9) generates only this vein. It is GTM 7.5.3's End naquadah vein (common/data/GTOres.java, NAQUADAH_VEIN: a cuboid of naquadah, top 2 + middle 3 + bottom 2 layers, with Plutonium 239 spread through it, clusterSize 48-80, density 0.25, weight 30), moved to Venus: server_scripts/grindless/moon/worldgen.js takes gtceu:naquadah_vein out of the End (veins_excluded.json, removeFromWorld) and server_scripts/grindless/iv/foundation.js adds this one. GCYR's own Venus veins (Earth materials) were removed in v0.5.0. The dimension, the layer and the stone were read in GCYR's source (data/gcyr/dimension/venus.json, worldgen/noise_settings/venus.json: default block gcyr:venus_rock; GCYRWorldGenLayers.VENUS: a BlockMatchTest on gcyr:venus_rock for gcyr:venus).",
+  "_how_it_is_used": [
+    "Same format as veins_mars.json and veins_moon.json (kind 'ore' only), so the readers of those tables read this one unchanged. Loaded by startup_scripts/grindless/iv/foundation.js as global.grindless.tables.veins_venus: it feeds the Venus vein sample items. server_scripts/grindless/iv/foundation.js adds the vein to Venus (GTCEuServerEvents.oreVeins), so the first visit finds it, makes the sample recipe and publishes global.grindless.ivFoundation.venusVeins() (normalized like global.grindless.mars.martianVeins()). The pressurized vein drill (IV) generates its drilling recipes from it, with .dimension('gcyr:venus').",
+    "gtm = registry id of the vein; layer = GCYR's 'venus' layer (the ores replace gcyr:venus_rock); minY/maxY = heightRangeUniform; spawnWeight = vein weight; clusterSize and density = GTM's End naquadah numbers; materials = the layered generator (weight and size of every material). GTM's cuboid becomes a layered vein like the scheelite one that moved to Mars: naquadah weighs the 7 layers of the cuboid (2 + 3 + 2) and plutonium the one spread, so the drill splits its raw ores 7 : 1 (same maths as veins.json).",
+    "id = sample suffix (grindless:vein_sample_<id>), following the registry rule of the other tables: grindless:naquadah_vein_venus -> sample grindless:vein_sample_naquadah_venus (the validator and the coverage test derive it the same way).",
+    "Sample recipe: the empty vein probe + raw naquadah + raw plutonium, gathered by hand on the first visit.",
+    "colorMaterial = the material of the vein's surface indicator rocks; color = tint of the Venus sample core.",
+    "stone = the inert byproduct of a drilling run (gcyr:venus_cobblestone, what Venus rock drops): it can be thrown away.",
+    "Venus only gives its own (docs/eras/iv.md, 'Venus and Mercury'): naquadah comes from nowhere else. Its plutonium 239 is the vein's own spread ore."
+  ],
+  "dimension": "gcyr:venus",
+  "veins": [
+    {
+      "id": "naquadah_venus", "kind": "ore", "gtm": "grindless:naquadah_vein_venus", "generator": "layered", "layer": "venus",
+      "minY": -40, "maxY": 10, "spawnWeight": 30, "clusterSize": 40, "density": 0.25,
+      "colorMaterial": "naquadah", "color": "#5A5A6E",
+      "stone": "gcyr:venus_cobblestone",
+      "_note": "GTM's End naquadah vein, moved to Venus and deep, under the lava seas (sea level 20): the first visit digs for it at 90 bar. Destinations: naquadah -> the naquadah plant (oxide, then naquadah dust, the 5,000 K EBF, the boule and the wafers); plutonium 239 -> the hot cell (MOX, the breeder and RTG pellets).",
+      "materials": [
+        { "id": "naquadah", "weight": 7, "size": [2, 4] },
+        { "id": "plutonium", "weight": 1, "size": [1, 1] }
+      ]
+    }
+  ]
+}
