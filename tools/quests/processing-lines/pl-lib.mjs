@@ -70,6 +70,10 @@ export const engineFluid = (k) => ({ k, engine: true });
 export const boilerWater = (k) => ({ k, boilerWater: true });
 // an arrow into a machine from a part of its controller's own recipe ("built from")
 export const build = (k) => ({ k, build: true });
+// a block that goes into a multiblock's structure (the dump's structures.json): capacitor cells into the wireless tower
+export const structure = (k) => ({ k, structure: true });
+// a wireless hatch or cover that only works through the network a wireless energy tower holds (tables/wireless_energy.json)
+export const network = (k) => ({ k, network: true });
 
 // The Power tab's numbers. Each one is checked by pl-check.mjs#checkFig against the source named here.
 export const P = {
@@ -103,4 +107,15 @@ export const P = {
   toll: (percent) => ({ t: 'toll', percent }),
   // the only fuels of a recipe type that work off Earth: its recipes with no dimension condition (site_fuels.json, power/generators.js)
   anywhere: (type, fuels) => ({ t: 'anywhere', type, fuels: fuels.map(([key, name]) => ({ key, name })) }),
+  // the wireless network (tables/wireless_energy.json, read from this checkout or from the pack the dump was made from):
+  // EU a capacitor cell holds (and six of its tier's reference battery, with electric.json)
+  wcell: (item, name, eu) => ({ t: 'wcell', item, name, eu }),
+  // the tower's cell slots (the table, and the cell positions of its pattern in structures.json)
+  wslots: (n) => ({ t: 'wslots', n }),
+  // what is lost on the way into the network, in percent
+  wloss: (percent) => ({ t: 'wloss', percent }),
+  // the amperages of the wireless hatches and the tiers they come in (every one registered in the dump)
+  wamps: (amps, from, to) => ({ t: 'wamps', amps, from, to }),
+  // the wireless covers' amperage and tiers (every one registered in the dump)
+  wcover: (amps, from, to) => ({ t: 'wcover', amps, from, to }),
 };

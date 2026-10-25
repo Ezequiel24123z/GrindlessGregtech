@@ -1,7 +1,7 @@
 // The Power tab (power.snbt, in the Quality of Life group): every way to make power in the pack today, by tier, Steam to IV, and
 // what carries and stores it. Positions are relative to each cluster (pl-model.mjs places the clusters). Every number in a node's
 // text is a figure (pl-lib.mjs#P) that pl-check.mjs recomputes from the dump, the pack's config or a script.
-import { I, F, M, n, L, E, P, engineFluid, boilerWater, build } from './pl-lib.mjs';
+import { I, F, M, n, L, E, P, engineFluid, boilerWater, build, structure, network } from './pl-lib.mjs';
 
 // fuel figures, EU per mB, from the dump's recipes (they already carry the pack's x2, power/generators.js)
 const COMBUSTION = [
@@ -57,6 +57,7 @@ export default {
     ['ivFission', 'ivVenus', 'ivMercury', 'ivSolar'],
     ['laterFusion', 'laterNaq', 'laterDyson'],
     ['gHull', 'gBat', 'gCable', 'gFar', 'gBig'],
+    ['gWireless'],
   ],
   clusters: {
     // ---------------------------------------------------------------- Steam
@@ -357,9 +358,10 @@ export default {
     ivRTG: {
       name: 'RTG cell',
       nodes: [
-        L('rtgp', 0, 0, 'pl_iv:rtgp'),
+        E('eqRTG', 0, -0.75, 'iv_age', '503863FFACA225A8'),
+        L('rtgp', 0, 0.75, 'pl_iv:rtgp'),
         n('rtg', 2.25, 0, M('gtceu:ev_rtg'), 'RTG Cell', {
-          tier: 'iv', from: ['rtgp'], desc: 'Day and night, on any world, and one pellet keeps it going for a long while.',
+          tier: 'iv', from: ['eqRTG', 'rtgp'], desc: 'Day and night, on any world, and one pellet keeps it going for a long while.',
           figs: [P.single(2048), P.fuel('grindless:rtg_pellet', '', 147456000, { unit: 'pellet' })],
         }),
       ],
@@ -367,12 +369,13 @@ export default {
     ivFission: {
       name: 'Fission reactor',
       nodes: [
-        L('leu', 0, -2.25, 'pl_iv:leu'),
-        L('mox', 0, -0.75, 'pl_iv:mox'),
-        L('breeder', 0, 0.75, 'pl_iv:breeder'),
-        L('hw', 0, 2.25, 'pl_iv:hw2'),
+        E('eqFis', 0, -3, 'iv_age', '774234968F1BEB95'),
+        L('leu', 0, -1.5, 'pl_iv:leu'),
+        L('mox', 0, 0, 'pl_iv:mox'),
+        L('breeder', 0, 1.5, 'pl_iv:breeder'),
+        L('hw', 0, 3, 'pl_iv:hw2'),
         n('reactor', 2.5, 0, M('gtceu:fission_reactor'), 'Fission Reactor', {
-          kind: 'ours', tier: 'iv', from: ['leu', 'mox', 'breeder', 'hw'], desc: 'No smoke and no fuel line: a few assemblies run it for hours.',
+          kind: 'ours', tier: 'iv', from: ['eqFis', 'leu', 'mox', 'breeder', 'hw'], desc: 'No smoke and no fuel line: a few assemblies run it for hours.',
           figs: [P.max(131072, 4, 32768, { file: 'pack/kubejs/data/grindless/tables/fission_cores.json', json: 'channels' }),
             P.run(16384, { line: true, label: 'A channel', name: 'LEU in light water', recipe: 'grindless:fission_core/leu_light_water' }),
             P.run(32768, { line: true, label: 'A channel', name: 'LEU in heavy water', recipe: 'grindless:fission_core/leu_heavy_water' }),
@@ -388,9 +391,10 @@ export default {
     ivVenus: {
       name: 'Venus heat engine',
       nodes: [
-        L('dwv', 0, 0, 'pl_iv:dwv'),
+        E('eqVen', 0, -0.75, 'iv_age', '5669D88DE37D633F'),
+        L('dwv', 0, 0.75, 'pl_iv:dwv'),
         n('venus', 2.25, 0, M('gtceu:venus_heat_engine'), 'Venus Heat Engine', {
-          kind: 'ours', tier: 'iv', from: ['dwv'], desc: 'Venus is always at noon, so it never stops. The water leaves as steam for a turbine.',
+          kind: 'ours', tier: 'iv', from: ['eqVen', 'dwv'], desc: 'Venus is always at noon, so it never stops. The water leaves as steam for a turbine.',
           figs: [P.run(8192, { where: 'on Venus' })],
         }),
       ],
@@ -398,6 +402,8 @@ export default {
     ivMercury: {
       name: 'Mercury solar field',
       nodes: [
+        // no link to iv_age's Mercury Solar Field: it hangs off ev_age's Lunar Solar Array, linked in the EV band, and FTB would
+        // draw that dependency between the two links, across the chart
         L('panel', 0, 0, 'pl_iv:panel'),
         n('mercury', 2.25, 0, M('gtceu:mercury_solar_field'), 'Mercury Solar Field', {
           kind: 'ours', tier: 'iv', from: [build('panel')], desc: 'Nothing at night: an RTG cell or a buffer carries the base till sunrise.',
@@ -489,12 +495,42 @@ export default {
       ],
     },
     gBig: {
-      name: 'Substation and what comes next',
+      name: 'Power substation',
       nodes: [
         n('lapo', 0, 0, I('gtceu:lapotron_crystal'), 'Lapotron Crystal', { kind: 'raw' }),
         n('pss', 2.25, 0, I('gtceu:power_substation'), 'Power Substation', { kind: 'info', from: ['lapo'], sub: 'One battery the size of a building; it wants a LuV circuit' }),
-        n('wireless', 4.5, 0, I('minecraft:lightning_rod'), 'Wireless Energy Network', {
-          kind: 'slot', alone: true, sub: 'Coming soon, tower and all',
+      ],
+    },
+    // ---------------------------------------------------------------- the wireless network (tables/wireless_energy.json)
+    gWireless: {
+      name: 'Wireless energy network',
+      nodes: [
+        n('wbat', 0, 0, I('gtceu:lv_lithium_battery'), 'Batteries', { kind: 'raw', sub: 'Any battery of the cell\'s tier' }),
+        n('wcell', 2.25, 0, I('grindless:lv_capacitor_cell'), 'Capacitor Cell', {
+          kind: 'info', from: ['wbat'], sub: 'The weakest cell in any tower sets the network\'s voltage',
+          desc: 'Batteries of its tier in a block. An empty slot takes the tower\'s casing.',
+          figs: [P.wcell('grindless:lv_capacitor_cell', 'LV', 720000), P.wcell('grindless:mv_capacitor_cell', 'MV', 2520000),
+            P.wcell('grindless:hv_capacitor_cell', 'HV', 10800000), P.wcell('grindless:ev_capacitor_cell', 'EV', 61440000),
+            P.wcell('grindless:iv_capacitor_cell', 'IV', 245760000)],
+        }),
+        n('wtower', 4.5, 0, M('gtceu:wireless_energy_tower'), 'Wireless Energy Tower', {
+          kind: 'ours', tier: 'lv', from: [structure('wcell')], figs: [P.wslots(32), P.wloss(5)],
+          sub: 'One network for every world and every player', desc: 'No tower, no network: build it before any hatch or cover.',
+        }),
+        n('wdynH', 6.75, -2.25, I('gtceu:lv_wireless_dynamo_hatch'), 'Wireless Dynamo Hatch', {
+          kind: 'info', from: [network('wtower')], sub: 'Generator multiblocks feed the network through it',
+          desc: 'Energy goes in at any voltage; the cells only limit what comes out.', figs: [P.wamps([2, 4, 16, 64], 'lv', 'iv')],
+        }),
+        n('wdynC', 6.75, -0.75, I('grindless:lv_wireless_dynamo_cover'), 'Wireless Dynamo Cover', {
+          kind: 'info', from: [network('wtower')], sub: 'On a generator or a battery buffer, it feeds the network', figs: [P.wcover(2, 'lv', 'iv')],
+        }),
+        n('wenH', 6.75, 0.75, I('gtceu:lv_wireless_energy_hatch'), 'Wireless Energy Hatch', {
+          kind: 'info', from: [network('wtower')], sub: 'Multiblocks draw from the network through it',
+          desc: 'Above the network\'s voltage it gets nothing; shift-right-click it with an empty hand to see why.', figs: [P.wamps([2, 4, 16, 64], 'lv', 'iv')],
+        }),
+        n('wenC', 6.75, 2.25, I('grindless:lv_wireless_energy_cover'), 'Wireless Energy Cover', {
+          kind: 'info', from: [network('wtower')], sub: 'Single machines draw through it, on any side but the front',
+          desc: 'Shift-right-click the machine with an empty hand to read the network.', figs: [P.wcover(2, 'lv', 'iv')],
         }),
       ],
     },
