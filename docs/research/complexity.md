@@ -1,6 +1,6 @@
 # Complexity audit per tier — Gregtech Grindless (v0.5.0)
 
-Date: 2026-10-24. Sources: `AGENTS.md`, `DECISIONS.md`, `docs/viaje.md`, `docs/eras/*.md`, `pack/kubejs/startup_scripts/grindless/**`, `pack/kubejs/server_scripts/grindless/**`, `pack/config/ftbquests/quests/chapters/*_age.snbt`, validator reports (`scratch/release/val-0.5.0/*.{txt,json}`), `docs/investigacion/espacio/gtm-tiers.md`.
+Date: 2026-10-24. Sources: `AGENTS.md`, `DECISIONS.md`, `docs/journey.md`, `docs/eras/*.md`, `pack/kubejs/startup_scripts/grindless/**`, `pack/kubejs/server_scripts/grindless/**`, `pack/config/ftbquests/quests/chapters/*_age.snbt`, validator reports (`scratch/release/val-0.5.0/*.{txt,json}`), `docs/research/space/gtm-tiers.md`.
 
 Steam–HV are **built** (real KubeJS code, tested in-game). EV–IV are **designed** (`docs/eras/ev.md`, `iv.md`), without their own code or validator yet (there is no `ev.json`/`iv.json` in `tools/analysis/tiers/`, nor complete `ev_age`/`iv_age` in the quest book). That distinction is kept in all tables.
 
@@ -99,7 +99,7 @@ The axis that can really compound without inflating quantities is the **density 
 | LuV | 3 | 2–3 (cryobot/anchor, rectenna, observatory?) | 5–7 | ≥6 | belt + Io/Europa/Ganymede + **1st orbital station** (site not landed on) |
 | ZPM | 2–3 | 2–3 | 5–7 | ≥7 | Saturn + ice giants, **all from orbit** |
 | UV | 2 | 1–2 | 4–6 | ≥8 | Pluto/Kuiper in orbit + 1st interstellar probe |
-| **UHV onward (general rule)** | ≥2 | ≥1 | ≥ those of the previous era | each new line reuses ≥2 intermediates from 2+ different eras **and** reserves ≥1 byproduct for ≥2 eras later | 1 new site every 1-2 eras (table in `viaje.md`), each with ≥1 validator rule ("X only comes from Y", translated from Spanish) |
+| **UHV onward (general rule)** | ≥2 | ≥1 | ≥ those of the previous era | each new line reuses ≥2 intermediates from 2+ different eras **and** reserves ≥1 byproduct for ≥2 eras later | 1 new site every 1-2 eras (table in `journey.md`), each with ≥1 validator rule ("X only comes from Y", translated from Spanish) |
 
 ### EV vs. the target
 
@@ -117,7 +117,7 @@ The axis that can really compound without inflating quantities is the **density 
 
 ### What comes after IV
 
-`docs/eras/luv.md`, `zpm.md` and `uv.md` **do not exist yet**: the target table above is the starting point for writing them. LuV deserves special attention because it introduces a new kind of site — the **orbital station** (it is not landed on, it is operated from outside) — which the general rule from then on should treat as normal (ZPM and UV no longer land on any planet, according to `viaje.md`).
+`docs/eras/luv.md`, `zpm.md` and `uv.md` **do not exist yet**: the target table above is the starting point for writing them. LuV deserves special attention because it introduces a new kind of site — the **orbital station** (it is not landed on, it is operated from outside) — which the general rule from then on should treat as normal (ZPM and UV no longer land on any planet, according to `journey.md`).
 
 ## 6. Audit summary
 

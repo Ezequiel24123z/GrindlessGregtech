@@ -1,6 +1,6 @@
 <#
 .SYNOPSIS
-  Procedural 16x16 pixel art for the Steam Age additions of the journey plan (docs/viaje.md): the Steam Blast Furnace
+  Procedural 16x16 pixel art for the Steam Age additions of the journey plan (docs/journey.md): the Steam Blast Furnace
   and the By-product Coke Battery. GregTech style: bevels, top-left light, every pixel fully opaque or transparent.
 
 .DESCRIPTION

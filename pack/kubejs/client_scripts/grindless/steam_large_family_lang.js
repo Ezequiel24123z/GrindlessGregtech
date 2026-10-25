@@ -1,6 +1,6 @@
 // -----------------------------------------------------------------------------------------------
 // Names and tooltips of the Large Steam family (startup_scripts/grindless/steam/large_family.js, GTL's "Large
-// Steam X" idea reimplemented with our own code/art - docs/investigacion/leisure.md SS4.2): gtceu:large_steam_
+// Steam X" idea reimplemented with our own code/art - docs/research/leisure.md SS4.2): gtceu:large_steam_
 // macerator / _centrifuge / _thermal_centrifuge / _chemical_bath / _ore_washer. The five recipe type names
 // (gtceu.macerator, gtceu.centrifuge, gtceu.thermal_centrifuge, gtceu.chemical_bath, gtceu.ore_washer) are GTM's
 // own and are not touched here.

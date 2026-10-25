@@ -2,7 +2,7 @@
 
 The user approved this table on 2026-10-24, with the changes in the last section. It is the pack's guide. Each era is designed in detail when we reach it, in `docs/eras/`.
 
-The supporting research is in `docs/investigacion/espacio/`:
+The supporting research is in `docs/research/space/`:
 - the `grindless-earlygame` campaign (`grindless-campaign.md`);
 - what other packs do (`packs-space.md`);
 - the space mods (`space-mods.md`);

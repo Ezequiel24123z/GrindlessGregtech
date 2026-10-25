@@ -267,7 +267,7 @@ The nine proposals are approved, with two clarifications:
 
 ## HV without titanium (user decision, 2026-10-24)
 
-Titanium enters at EV and comes only from the Moon (`docs/viaje.md`, option A). All of HV moves to stainless steel. What is written above about titanium in HV (the Kroll line in step 6 and the titanium drum) is superseded by this; the End's ilmenite stays for now as a source (see the last note). The gate to EV (EV hull, motor and pump) still needs titanium, but now it is the titanium brought from the Moon at the end of HV.
+Titanium enters at EV and comes only from the Moon (`docs/journey.md`, option A). All of HV moves to stainless steel. What is written above about titanium in HV (the Kroll line in step 6 and the titanium drum) is superseded by this; the End's ilmenite stays for now as a source (see the last note). The gate to EV (EV hull, motor and pump) still needs titanium, but now it is the titanium brought from the Moon at the end of HV.
 
 - **Audit** of the recipe dump (everything the HV era makes and what each part makes): in GTM 7.5.3 the HV step was already stainless steel. No GTM machine, hull, casing, component, hatch or multiblock at HV requires titanium, and ours (refinery, reformer, HV drill and greenhouse) do not either. The only things that required it were our drill bit, GCYR's rocket scanner and the sample for the End's bauxite vein, because it is made with ilmenite.
 - **HV drill bit.** `grindless:stainless_steel_drill_bit`: stainless steel plates and rods, same wear and yield as the titanium one had. The titanium one stays registered for old worlds, hidden in EMI, and converts 1:1 into the stainless steel one.

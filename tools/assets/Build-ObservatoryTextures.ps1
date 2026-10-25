@@ -17,7 +17,7 @@
     item/lunar_ephemeris.png        LV: a printed sheet of tables with a Moon phase in the corner
     item/lunar_landing_chart.png    MV: a radio plot, green radar contours on a dark plot with the landing ellipse in red
 
-  The family changes shape and parts with the era, not only colour (docs/viaje.md), and so do the faces:
+  The family changes shape and parts with the era, not only colour (docs/journey.md), and so do the faces:
     Steam  a brass telescope behind an arched brass window, pointed at the Moon; a clockwork gear and an oil lamp
     LV     a steel dome with an open slit, the refractor in it; a red darkroom safelight, the plate being exposed, a state lamp
     MV     an aluminium dish under a cloudy sky catching radar echoes, its pedestal, an oscilloscope with the echo, a state lamp

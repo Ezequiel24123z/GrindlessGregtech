@@ -1,5 +1,5 @@
 // Gregtech Grindless - names and tooltips of the small Steam multiblock family (startup_scripts/grindless/steam/
-// small_family.js, GTL idea - docs/investigacion/leisure.md 4.2 - reimplemented with our own code and textures):
+// small_family.js, GTL idea - docs/research/leisure.md 4.2 - reimplemented with our own code and textures):
 //
 //   gtceu:steam_forge_hammer, gtceu:steam_compressor, gtceu:steam_alloy_smelter,
 //   gtceu:steam_mixer, gtceu:steam_chemical_bath, gtceu:steam_ore_washer

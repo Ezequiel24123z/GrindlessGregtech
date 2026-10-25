@@ -11,7 +11,7 @@
       be judged among its neighbours, and a casing strip with the same face on four casings (clean stainless, solid
       steel, heatproof, frost proof aluminium), because the controller has to read on whichever one the multiblock uses;
     - the drill family, idle and working, each face on its own casing (steam, LV, MV, HV and the lunar drill), at x8
-      and at 1x, 2x and 3x as it shows in the world: the family has to change shape, not only colour (docs/viaje.md);
+      and at 1x, 2x and 3x as it shows in the world: the family has to change shape, not only colour (docs/journey.md);
     - the lunar vein samples (frame alone, then frame + core tinted with the colours of the lunar veins, as the game draws
       them) next to the Earth vein sample with the same tints, and the lunar quantum seed (every frame of its animation)
       beside the HV bit the lunar drill drills with, each at x8 on a dark background plus 2x and 1x on a vanilla-slot grey.

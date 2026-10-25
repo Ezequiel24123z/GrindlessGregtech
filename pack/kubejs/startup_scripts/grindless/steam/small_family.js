@@ -1,5 +1,5 @@
 // -----------------------------------------------------------------------------------------------
-// Small Steam multiblock family (GTL idea, docs/investigacion/leisure.md 4.2: "small steam multiblock family
+// Small Steam multiblock family (GTL idea, docs/research/leisure.md 4.2: "small steam multiblock family
 // ... 8 parallels over the single-block recipe", GTLCore LargeSteamParallelMultiblockMachine - idea only,
 // no code/textures copied, licence unclear). GTM already has Steam Grinder/Oven (macerator/furnace, 4 parallels);
 // this family covers the six GTM recipe types that have NO steam multiblock yet: forge hammer, compressor, alloy

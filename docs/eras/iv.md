@@ -124,7 +124,7 @@ What it gains: **the hands-free neutron window and the superacid inside.** The l
 
 ### Discarded
 
-- **Solar smelting on Mercury** (`viaje.md`): smelting osmium with sunlight would skip LuV's osmium recipe. Iridium and osmium are refined at home. It stays as plan B if the Mercury base falls short.
+- **Solar smelting on Mercury** (`journey.md`): smelting osmium with sunlight would skip LuV's osmium recipe. Iridium and osmium are refined at home. It stays as plan B if the Mercury base falls short.
 - **Cloud collector as a multiblock:** GTM's gas collector does it, with an altitude condition.
 - **Prospecting satellite:** moves to LuV, where orbits without landing begin. In IV the sample is mined by hand.
 - **Sealed dome on Mars** (proposal from `ev.md`): no IV base asks for plants; it waits for the one that does.
@@ -246,7 +246,7 @@ Credits to note in `CREDITS.md`: designed-core reactor (Grindless campaign, T5, 
 8. **Mass production:** assembly line with one AE2 export bus per cut, IV parallel with IV circuits, and GCYM at IV (with `large_packer` and `alloy_blast_smelter`). Plan B: the Expanded Assembly Line.
 9. **Titanium from naquadah (TiF₃) is accepted from IV on:** it comes from Venus, not Earth, and the Moon rule still holds for EV.
 10. **GT--'s naquadah reactors:** left untouched; they are the nuclear power from LuV onward.
-11. **Changes to `viaje.md`:** solar smelting moves to plan B, and the prospecting satellite moves to LuV.
+11. **Changes to `journey.md`:** solar smelting moves to plan B, and the prospecting satellite moves to LuV.
 12. **Gate to LuV:** LuV hull, LuV motor from the line via the network, UHPIC and osmium with two IV hatches, 131,072 EU/t of fission, stored fusion fuel, Venus and Mercury bases running on their own, and the outer-system chart.
 
 ## Decisions taken (orchestrator, 2026-10-24)
@@ -255,5 +255,5 @@ The twelve proposals are approved, with these clarifications:
 
 - **The fission reactor depends on KubeJS generators.** If a KubeJS generator multiblock does not output EU through dynamo hatches in GTM 7.5.3, it is tested in an actual game before anything else and, if it fails, the reactor feeds steam to GTM's large turbines: same place on the route, different output.
 - **The `iridosmine` material is registered with KubeJS** (`gtceu:iridosmine`) and only appears in Mercury's vein table. The validator checks that iridium and osmium do not come out on Earth.
-- **`viaje.md` is adjusted.** In the IV row, solar smelting moves to plan B, the prospecting satellite moves to LuV, and the reactor, hot cell and naquadah plant come in.
+- **`journey.md` is adjusted.** In the IV row, solar smelting moves to plan B, the prospecting satellite moves to LuV, and the reactor, hot cell and naquadah plant come in.
 - **IV is built after EV.** This document is the guide until then.

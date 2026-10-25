@@ -2,7 +2,7 @@
 // Crafting-table recipes of the Large Steam family (startup_scripts/grindless/steam/large_family.js). Every
 // controller is steel-tier and expensive on purpose (AGENTS.md rule 4 / the brief: "the controllers are expensive
 // and steel-tier - they are the reward for finishing Steam"), but still pure Vapor-era materials: steel plates and
-// frames (steel exists from the Steam Blast Furnace, docs/eras/vapor.md step 6), bronze pipes, and the steel solid
+// frames (steel exists from the Steam Blast Furnace, docs/eras/steam.md step 6), bronze pipes, and the steel solid
 // casing the family's shell is built from (gtceu:solid_machine_casing - a crafting-table recipe already, plates
 // around a hammer/wrench, see GTM's MetaTileEntityLoader; no assembler or LV electricity needed). Era rule: nothing
 // here needs an LV-or-later resource.

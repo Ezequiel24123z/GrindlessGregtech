@@ -1,5 +1,5 @@
 // -----------------------------------------------------------------------------------------------
-// LV "more reinforced" (docs/viaje.md, docs/eras/lv.md): the Sulfide Roaster with its contact acid plant.
+// LV "more reinforced" (docs/journey.md, docs/eras/lv.md): the Sulfide Roaster with its contact acid plant.
 //
 //   gtceu:sulfide_roaster       a heat-proof roaster on steel legs (a glowing steel firebox grate under a fluidised bed) with a
 //                               steel contact tower on its roof. 5 wide, 7 high, 3 deep; controller on the front face.

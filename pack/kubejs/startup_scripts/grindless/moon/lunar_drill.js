@@ -1,5 +1,5 @@
 // -----------------------------------------------------------------------------------------------
-// The Lunar Drill (gtceu:lunar_drill), the Moon step of the Vein Drill family (docs/viaje.md, "Las familias cambian de forma y de
+// The Lunar Drill (gtceu:lunar_drill), the Moon step of the Vein Drill family (docs/journey.md, "Las familias cambian de forma y de
 // piezas"): not a recoloured derrick but a lander. Three stainless steel legs stand on regolith pads, the body is a 3x3x2 block of
 // clean stainless steel casing with the hatches, two solar wings of daylight detectors stick out of its sides and a short drill
 // string (steel pipe casings) goes down through the body into the ground; a frame on top is the antenna mast. 7 wide, 5 high and

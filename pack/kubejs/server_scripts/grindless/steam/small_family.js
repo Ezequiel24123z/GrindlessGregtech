@@ -13,7 +13,7 @@
 // Each controller costs more than the single block it replaces, built from Steam-era materials only (bronze, steel,
 // bricks at most - no LV part): the item-only trio is built around GTM's own Steam single-block machine it replaces
 // (gtceu:lp_steam_forge_hammer / _compressor / _alloy_smelter); mixer, chemical bath and ore washer have no Steam
-// single-block equivalent in GTM at all (vapor.md 4 only lists macerator/compressor/hammer/extractor/furnace/alloy
+// single-block equivalent in GTM at all (steam.md 4 only lists macerator/compressor/hammer/extractor/furnace/alloy
 // smelter as one-block Steam machines), so their controllers are built from plates, gears, pipe and casing alone -
 // building the full multiblock is the only way to reach those three recipe types before LV.
 (function () {

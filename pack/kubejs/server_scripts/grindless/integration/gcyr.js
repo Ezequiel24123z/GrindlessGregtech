@@ -1,6 +1,6 @@
 // -----------------------------------------------------------------------------------------------
 // Gregicality Rocketry (GCYR 0.2.9): the first rocket and the space suit are HV. The Moon comes at the end of HV with the first rocket
-// (docs/viaje.md) and HV has no titanium: every HV part is stainless steel (DECISIONS.md, 2026-10-24). GCYR's mechanics stay as they
+// (docs/journey.md) and HV has no titanium: every HV part is stainless steel (DECISIONS.md, 2026-10-24). GCYR's mechanics stay as they
 // are: the Rocket Scanner builds the rocket out of the blocks above its launch pads, seats + basic motors + basic fuel tanks make a
 // tier 1 rocket (what the Moon asks for, data/gcyr/gcyr/planets/luna.json), and the suit keeps 16 buckets of oxygen in the chestplate.
 // Only the recipes that asked for EV or later parts change:

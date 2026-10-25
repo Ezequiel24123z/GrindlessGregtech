@@ -1,6 +1,6 @@
 <#
 .SYNOPSIS
-  Procedural 16x16 pixel art for the small Steam multiblock family (GTL idea, docs/investigacion/leisure.md 4.2 -
+  Procedural 16x16 pixel art for the small Steam multiblock family (GTL idea, docs/research/leisure.md 4.2 -
   idea only, no code/textures copied, licence unclear): forge hammer, compressor, alloy smelter, mixer, chemical bath
   and ore washer. GregTech style: bevels, top-left light, every pixel fully opaque or transparent.
 

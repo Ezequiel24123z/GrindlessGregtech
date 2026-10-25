@@ -1,5 +1,5 @@
 // -----------------------------------------------------------------------------------------------
-// The Syngas and Shift Plant, an HV multiblock of the journey plan (docs/viaje.md), the recipe type it runs and its catalyst.
+// The Syngas and Shift Plant, an HV multiblock of the journey plan (docs/journey.md), the recipe type it runs and its catalyst.
 //
 //   gtceu:syngas_plant          9x3x7 plant: a coil-heated gasifier, two stacked shift reactors and a CO2 absorber column on one floor,
 //                               runs the new gtceu:syngas
