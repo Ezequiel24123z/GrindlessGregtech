@@ -600,6 +600,17 @@
 			x: 32.5d
 			y: 0.0d
 		}
+		{
+			dependencies: ["06BEE6F40C916AA1"]
+			description: ["One pattern for a whole family of GregTech materials: set a filter and it stands in for every matching recipe."]
+			icon: "wildcard_pattern:wildcard_pattern"
+			id: "67EF6A99C884C643"
+			rewards: [{ id: "15D9E4C91325778E", type: "xp", xp: 40 }]
+			tasks: [{ id: "108D79EF7E01363D", item: "wildcard_pattern:wildcard_pattern", type: "item" }]
+			title: "Wildcard Pattern"
+			x: 32.5d
+			y: -2.5d
+		}
 	]
 	subtitle: ["One network for everything"]
 	title: "Applied Energistics"
