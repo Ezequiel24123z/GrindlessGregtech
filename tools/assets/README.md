@@ -39,6 +39,7 @@ Generators for the pack's own textures. Everything is procedural 16x16 pixel art
 | `Build-MarsSiteTextures.ps1` | Writes the EV atmosphere processor's face (`multiblock/atmosphere_processor/`): a round intake fan between two dust filters, the Sabatier reactor window, the methane and oxygen gauges, and the EV stripes and lamp; 8 frames, `frametime` 3. `-Preview <png outside the repo> [-Casing <png>]` and `-Credits`. Its helpers are copied from `Build-EVTextures.ps1`; re-running it gives byte-identical files. |
 | `Build-CombinedCycleHotMillTextures.ps1` | Writes the faces of the EV combined-cycle plant and hot strip mill (`multiblock/combined_cycle_plant/`, `multiblock/hot_strip_mill/`). `-Credits` prints their 10 CREDITS rows. |
 | `Build-FissionReactorTextures.ps1` | Writes the IV fission reactor's face (`multiblock/fission_reactor/`). `-Only reactor` and `-Credits` (its 5 CREDITS rows). |
+| `Build-IVFoundationTextures.ps1` | Writes the shared IV textures (IV-A1): fuel cycle items, PuBe source, RTG pellet, resin, platinum gauze, inner planets chart, Venus and Mercury vein samples, the Hermean heat shield brick (the Mercury casing texture) and the thin-film panel. `-Only`, `-Preview <png outside the repo>`, `-Credits`. |
 
 ## Regenerate
 
@@ -304,6 +305,50 @@ powershell -NoProfile -ExecutionPolicy Bypass -File tools\assets\Build-EVPreview
 - The electrode reuses the geometry of the LV graphite one (a diagonal rod with four pixels per row); the ramps (platinum and titanium) and the outline change, and the outline now takes each material's tone.
 
 ## IV era
+
+### IV foundation (IV-A1)
+
+`Build-IVFoundationTextures.ps1`: same method and checks as the EV foundation. Its helpers are copied, so the other scripts stay untouched. The inner planets chart reuses the Mars chart's data stick (`$StickMap` of `Build-EVFoundationTextures.ps1`, here `$ChartMap`). The vein samples reuse the Martian capsule (`New-MartianSampleFrame` of `Build-MarsTravelTextures.ps1`, here `New-SampleFrame`, with its ramps as parameters).
+
+```powershell
+powershell -NoProfile -ExecutionPolicy Bypass -File tools\assets\Build-IVFoundationTextures.ps1
+powershell -NoProfile -ExecutionPolicy Bypass -File tools\assets\Build-IVFoundationTextures.ps1 -Only assemblies,samples
+powershell -NoProfile -ExecutionPolicy Bypass -File tools\assets\Build-IVFoundationTextures.ps1 -Preview C:\path\iv-foundation.png -Credits
+```
+
+- `-Only` accepts `pellet`, `tube`, `assemblies`, `source`, `rtg`, `resin`, `gauze`, `chart`, `samples`, `brick` and `panel` (comma-separated, also with `-File`).
+- `-Preview` (outside the repo, never shipped) writes an x8 review sheet:
+  - every item on slot grey, with the Mars chart next to the inner planets chart;
+  - the vein samples as frame, core, and both layers with the core tinted by its vein (naquadah `5A5A6E`, iridosmine `B9C6D2`), next to the Martian and lunar ones;
+  - the brick alone, as a 3x3 wall and as a wall behind the lunar drill's face, next to the sintered regolith;
+  - the thin-film field 3x3, its cells, its frame and a panel mock, next to the EV Solar Wing Panel;
+  - a strip of the items at x2.
+- The final check fails the run: 16x16, binary alpha, no pure black, block textures fully opaque, item icons neither empty nor fully opaque. Sample cores must be grey only, inside the window and not a copy of the lunar or Martian core. The five assemblies must share one silhouette and all differ, and the chart must keep the Mars chart's silhouette. Output is identical byte for byte on every run.
+
+| File (under `textures/`) | Notes |
+|---|---|
+| `item/leu_pellet.png` | Two sintered UO₂ pellets, dark charcoal with a dull sheen: one standing on its end (top face ringed by the lit chamfer), one lying end-on in front of it (chamfer ring and a shallow dish). |
+| `item/zircaloy_cladding_tube.png` | A long, thin tube from lower left to upper right, three pixels per row, silver with a faint green-grey cast. The open upper end shows the dark bore inside a ring. |
+| `item/leu_fuel_assembly.png`, `mox_fuel_assembly.png`, `breeder_fuel_assembly.png`, `spent_fuel_assembly.png`, `spent_breeder_assembly.png` | One map (`$AssemblyMap`) and one palette each: a tall square rod bundle in oblique view, a stainless top nozzle with flow holes and a coloured band, one spacer grid and a bottom nozzle. The fuel colour shows between the rods: green LEU, orange-red MOX, and for the breeder a purple core between dark olive U-238 blankets. Spent: steel burnt dark bronze, brown rods, Cherenkov blue between the rods and a blue glow edge; the spent breeder keeps a dark purple core. |
+| `item/pube_neutron_source.png` | A small sealed stainless capsule: welded cap with a plug, rippled weld bead, and a yellow band with dark diagonal hazard stripes. |
+| `item/rtg_pellet.png` | A Pu-238 oxide pellet glowing orange-red, white-hot on top, standing in a silvery iridium cup. |
+| `item/ion_exchange_resin.png` | A mound of translucent amber beads: a highlight on the lit side and the light glowing through on the far side. |
+| `item/platinum_gauze.png` | An 11x11 woven Pt-Rh mesh with see-through holes; the wire on top alternates at each crossing. The lower right corner is folded back along a bright crease. |
+| `item/inner_planets_chart.png` | The Mars chart's data stick with Venus (pale yellow-cream with an ochre shade) and Mercury (grey) on the label. |
+| `item/venusian_vein_sample_frame.png`, `item/venusian_vein_sample_core.png` | The lunar and Martian capsule in pale ochre, with a yellow-brown basalt valve, band and foot ring. The core is a weathered crust over two lava flows. |
+| `item/hermean_vein_sample_frame.png`, `item/hermean_vein_sample_core.png` | The same capsule in Mercury's dark greys with a charcoal band. The core is pale regolith over a dark graphite band, then grey rock with bright specks. |
+| `block/hermean_heat_shield_brick.png` | The Mercury casing texture: pale ceramic tiles in a straight 2x2 grid of 8 px squares with thin seams, a soft bevel, a faint per-tile mottle and rare sinter pores. Low contrast and seamless; the sintered regolith is the darker running bond. |
+| `block/iv/thin_film_cells.png` | Top of the thin-film panel: indigo-black GaAs in 3 px strips parted by dark scribes and fine silver busbars, with a faint diagonal sheen. Seamless. |
+| `block/iv/thin_film_frame.png` | The tungstensteel frame (sides and underside), dark blue-grey and brushed. Rows 6 to 8, which the slab's sides show, are a lit line, the mid tone and a dark line. |
+
+#### How to retouch (IV foundation)
+
+- Each piece's colours are at the top of its block (`New-Pal` fails on a repeated letter), with its map next to them: `$PelletMap`, `$TubeMap`, `$AssemblyMap`, `$SourceMap`, `$RtgMap`, `$BeadMap` with `$ResinBeads` (bead positions, back to front), `$ChartMap`, `$VenusCoreRows` and `$MercuryCoreRows`.
+- Assemblies: `$AssemblyVariants` holds one entry per assembly (`Steel`, `Core`, `Band`, an optional `Blanket`, and `Outline`). Upper-case `A` to `E` are the core rods; lower-case `a` to `e` are the two outer rod rows at each end, which copy the core unless `Blanket` is set (as in the breeders). A new fuel is one more entry, and the check keeps the silhouette shared.
+- Gauze: `$GauzeFold` is the crease (u + v); a lower value folds a bigger corner.
+- Samples: `$VenusCapsule` and `$MercuryCapsule` hold the `Body` and `Seal` ramps (light to dark) and the glass highlights. Keep the cores light: the game multiplies them by the vein colour, and Venus's naquadah (`5A5A6E`) is dark.
+- Brick: `$BrickPal`, `$BrickMottle`, `$BrickGradient`, `$BrickBiasAmp` and `$BrickPore`. Keep it pale and low contrast, because controller faces sit on it.
+- Thin-film: `$FilmPal` (cells), `$FilmGlint` (the busbars' brighter column) and `$FramePal` (tungstensteel, a little darker than GTM's `6464A0`).
 
 ### Fission reactor
 
