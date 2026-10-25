@@ -1,0 +1,8 @@
+name = "Wildcard Pattern"
+filename = "wildcard_pattern-0.1.2.jar"
+side = "both"
+
+[download]
+url = "https://github.com/LeoDreamer2004/Wildcard-Pattern/releases/download/v0.1.2/wildcard_pattern-0.1.2.jar"
+hash-format = "sha256"
+hash = "edc9990ce6ef472689742a1f077221297680cf0439f21017a0d5a47dd5128304"
