@@ -40,6 +40,7 @@ Gregtech Grindless is a GregTech Modern pack (Minecraft 1.20.1, Forge) in which 
 - **Integration:** recipes from other mods that break progression are redone so that they go through GregTech machines.
 - **Rhino (KubeJS 6):** inside functions or callbacks that run more than once, use `var`, not `const`/`let`. Otherwise you get "redeclaration of var".
 - **Vanilla names (KubeJS 2001.6.5):** some members are renamed for the scripts, and the Mojang name does not exist: `getYRot`/`getXRot` are `getYaw`/`getPitch`, `getStringUUID` is `getStringUuid`, `tickCount` is `age`, `Level#getGameTime` is `getTime` and `ItemStack#getTag` is `getNbt`; `Entity#level()` is hidden (use `getLevel()`). Full list in `tools/test/README.md`. Anything that uses a player is tested in the `client` suite.
+- **Empty stacks (KubeJS 2001.6.5):** an empty `ItemStack`, `ItemStack.EMPTY` included, compares `=== null` in scripts (KubeJS's stack equality). Test stacks with `isEmpty()`, never against null.
 - **GTM 7.5.3 traps** (each one cost a bench run):
   - **Recipe ids:** the GT recipe builder puts the recipe type in front of the id you pass: `event.recipes.gtceu.assembler('grindless:x')` is saved as `grindless:assembler/x`.
   - **Generator multiblocks** go through `startup_scripts/grindless/lib/generators.js`.
@@ -139,6 +140,7 @@ Gregtech Grindless is a GregTech Modern pack (Minecraft 1.20.1, Forge) in which 
   | travel and network | 12288–12351: the Overworld at Y 98–112 and Venus (`gcyr:venus`) at Y 198–214 |
   | mass production | 12544–12607 (roof at Y 112) |
   | gallery (client) | 12800–12863 |
+  | QBC terminal (client) | 13056–13119: the Overworld at Y 98–112 (all of Z 0–63, force-loaded while it runs); on the Moon (`gcyr:luna`) and Mars (`gcyr:mars`) X 13084–13092, Z 28–36, Y 198–214 (7×7 floor at Y 198); the 1,000+ block case only stands the player on natural ground at X 13088, Z 1104+ |
 
   For a new test, keep going in steps of 256.
 
