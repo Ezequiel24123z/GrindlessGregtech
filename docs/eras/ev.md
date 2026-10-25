@@ -27,7 +27,7 @@ All of this arrives already done in the end-of-HV version:
 - **Spacesuit.** The HV one, with 16 buckets of O₂ in the chestplate (about 40 minutes). GCYR sets its limit at 60 to 363 K: it works for the Moon (113 K) and Mars (208 K), not for Venus or Mercury.
 - **Lunar drill.** It only drills on the Moon. EV swaps it for the tripod and uses it in the tripod's recipe.
 - **Titanium.** The first Titanium comes out of the Kroll on Earth, using lunar Ilmenite (Mg/Cl₂ loop and freezer). EV spends it on hulls, casings, pipes and drums; the cell makes it later on the Moon.
-- **Helium-3.** It is saved for fusion; the cell adds its own. Nothing in EV spends it.
+- **Helium-3.** It is saved for fusion; the cell adds its own. In EV only the quantum seeds spend it: 250 mB per lunar or Martian seed.
 - **Waystones and FTB /home.** After the first visit, people travel for free. On Mars, the first-visit waystone is the way back.
 - **Earth–Moon AE2 bridge.** One pair, with one half built at each end; it carries items and fluids. EV turns it into a trunk.
 - **The rest:** refinery and reformer, cleanroom, freezer, tower, large chemical reactor with PTFE, nichrome coil, the End veins (now MV, with their Platinum) and the HV drill (cap 32, Stainless Steel bit).
@@ -50,9 +50,14 @@ AE2 is the backbone between planets (the user's decision), and improving it is a
 - **Starting point.** HV left an Earth–Moon pair: a quantum bridge that joins the two networks into one (32 channels and shared AE2 energy).
 - **ME hatches on the Moon.** The tripod, cell and cryogenic plant request from and deliver to the home network: Titanium reaches Earth without anyone moving it.
 - **Trunk.** ME P2P tunnels over the bridge (32 channels each): the Moon base has a full network without more pairs.
-- **Power.** FE P2P tunnels over the bridge, and GTM converters on both sides (`gtceu:ev_16a_energy_converter`: 32,768 EU/t per pair; verify the id and AE2's FE tax). Earth covers the lunar night, and the daytime solar surplus flows home.
+- **Power** (measured on 2026-10-25, run `20261025-055851-ae2-interplanetary`).
+  - **Main route:** EU P2P tunnels (`eup2p`, available since LV) carry 32,768 EU/t per pair across the bridge with no converters. FE P2P with GTM's 16 A EV converters (`gtceu:ev_16a_energy_converter`) carries the same, and stays for FE devices.
+  - **AE2's toll** is the same for both: 2.5% of the energy, paid in AE (0.05 AE per EU, 1,638.4 AE/t at full rate). It never blocks a transfer, but an unpowered network stops the tunnels.
+  - **Bridge upkeep:** 22 AE/t per bridge block, about 405 AE/t for a linked pair with its tunnels.
+  - Earth covers the lunar night, and the daytime solar surplus flows home.
+- **Trunk:** an ME P2P pair uses 1 of the bridge's 32 channels and carries 32.
 - **Pairs without travel.** The base builds the lunar half of each new pair itself (with a cell part; it matches the HV recipe), so the network grows on its own.
-- **Mars.** The first Earth–Mars pair comes at the end of the era. Its Martian half is built there on the first visit, and an AE2 energy cell charged at home starts that side (verify).
+- **Mars.** The first Earth–Mars pair comes at the end of the era. Its Martian half is the Martian Quantum Seed (`grindless:martian_quantum_seed`), which is made only on Mars: chemical reactor, merrillite dust + ender pearl + 250 mB helium-3. AE2's ritual then marks the pair for Mars. No charged energy cell is needed: AE2 links quantum bridges without power, and the linked halves run on home's energy.
 - **Goal of the era:** a second Earth–Moon pair built by the base, a trunk of 64 channels or more, 32,768 EU/t crossing, and the Mars pair.
 
 ## Mars, end of EV
