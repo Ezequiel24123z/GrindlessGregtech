@@ -15,7 +15,7 @@
 //                       paper_from_sugar_cane, x8 parallels; its EUt is capped at 32 by SteamParallelMultiblockMachine)
 //   <m>.PARALLEL        8 batches ran at once (the other four only form + static-check: same mechanism as the
 //                       macerator/furnace Steam Grinder/Oven and our own steam_blast_furnace/coking_battery, already
-//                       proven in-game; AGENTS.md "no se vuelve a probar lo que ya está probado")
+//                       proven in-game; AGENTS.md "Do not retest what has already been tested")
 //   <m>.LOOKUP          static check for all six: a real GTM recipe of the machine's own recipe type (forge_hammer/
 //                       compressor/alloy_smelter/mixer/chemical_bath/ore_washer), picked live from the recipe
 //                       manager (EUt <= 32, LV tier or below) and fed into the formed structure, resolves through

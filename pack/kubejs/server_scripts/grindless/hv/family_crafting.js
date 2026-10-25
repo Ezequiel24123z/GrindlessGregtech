@@ -8,7 +8,7 @@
 //   old titanium drill bit     one crafts into one stainless steel bit (worlds made before the change); nothing makes it any more
 //                              and it is hidden from EMI (item tag c:hidden_from_recipe_viewers, like the removed addon machines)
 //   old End vein samples       the scheelite one (its vein left the End table in v0.4.1): one crafts back into an empty vein probe,
-//                              hidden from EMI too. Saves keep every id they had (AGENTS.md, "Canal jugable")
+//                              hidden from EMI too. Saves keep every id they had (AGENTS.md, "Playable channel")
 //   End vein samples           empty vein probe + the two raw ores of the vein (shapeless, one recipe per End vein). The pair is
 //                              unique among ALL veins (global.grindless.hv.checkTables() checks it).
 //

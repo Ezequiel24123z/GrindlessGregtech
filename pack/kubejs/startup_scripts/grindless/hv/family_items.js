@@ -13,7 +13,7 @@
 //                                        item/vein_sample_core, tinted); put in the input bus of the HV Vein Drill with a drill
 //                                        bit and drilling fluid in its fluid hatch it selects the vein.
 //   grindless:vein_sample_scheelite      legacy: the End scheelite vein left the table in v0.4.1 (it comes back on Mars), but saves keep
-//                                        their samples (AGENTS.md, "Canal jugable"): registered, out of grindless:vein_samples, hidden
+//                                        their samples (AGENTS.md, "Playable channel"): registered, out of grindless:vein_samples, hidden
 //                                        from EMI, no drilling recipe takes it and one crafts back into an empty vein probe.
 // It also loads the End vein table into global.grindless.tables.veins_end (the Overworld one is loaded by lib/tables.js, the
 // Nether one by lv/multis_items.js), so startup and server scripts share a single copy, and publishes the legacy ids in
