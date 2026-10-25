@@ -91,7 +91,7 @@
 		}
 		{
 			dependencies: ["19BD8AAF2A6925D9", "5DB10211B3E10692"]
-			description: ["Fluorite and sulfuric acid in a long rotary kiln. About sixty fluorite do the work of almost four hundred mica dust."]
+			description: ["Fluorite and sulfuric acid in a long rotary kiln. A handful of fluorite does the work of a mountain of mica."]
 			icon: "gtceu:fluorspar_kiln"
 			id: "15A1985623FACDFE"
 			shape: "gear"
@@ -163,7 +163,7 @@
 			dependencies: ["5DB10211B3E10692", "5A66BA69651D5E13", "707D943A88C25E26"]
 			description: [
 				"Five wells in the End push acid and oxygen through the ore and bring the uranium up dissolved."
-				"No drill bit, no crushing, and the thorium stays in the ground."
+				"The drill bits stay at home, and the thorium never leaves the ground."
 			]
 			icon: "gtceu:isr_wellfield"
 			id: "31844FDD8D769D73"
@@ -206,7 +206,7 @@
 		}
 		{
 			dependencies: ["35271B45FE09310E", "546858F1939C5646"]
-			description: ["Everything radioactive goes in through a bus and comes out to the network. Your hands stay out of it, which is the point."]
+			description: ["Radioactive stuff goes in through a bus and out to the network. Your hands never touch it, which is rather the point."]
 			icon: "gtceu:hot_cell"
 			id: "75EBDEC264519CD5"
 			shape: "gear"
@@ -403,7 +403,7 @@
 		{
 			dependencies: ["3D424D897DEB2D37", "71E46A4F0AE3D6F1"]
 			description: [
-				"Four channels, no smoke, and 131,072 EU/t when it's full of heavy water."
+				"Four channels and no smoke. Fill it with heavy water and the power doubles."
 				"Run it dry and it shuts down at the end of the cycle. Nothing explodes, it just sulks."
 			]
 			icon: "gtceu:fission_reactor"
@@ -462,7 +462,7 @@
 		}
 		{
 			dependencies: ["1473B9F6D79968E0", "7D9B7EAC07F4A088"]
-			description: ["Nitric acid takes the spent fuel apart. The uranium and plutonium come back, krypton, caesium and neodymium turn up now and then, and the rest leaves as one lump of glassy waste."]
+			description: ["Nitric acid takes the spent fuel apart. The uranium and plutonium come back, the odd noble gas or rare metal turns up, and what's left becomes glassy waste that never leaves your storage."]
 			icon: "gtceu:hot_cell"
 			id: "591F60B659065137"
 			shape: "gear"
@@ -575,7 +575,7 @@
 		}
 		{
 			dependencies: ["314BC927EA058B1F", "5B050911A3185646"]
-			description: ["A MOX assembly takes two plutonium and its spent fuel gives one back; a breeder takes one and gives two. Run one of each and the plutonium evens out."]
+			description: ["MOX burns more plutonium than its spent fuel gives back; a breeder gives back more than it takes. Run one of each and the plutonium evens out."]
 			icon: "grindless:breeder_fuel_assembly"
 			id: "773EBEBBC58010FD"
 			size: 1.0d
@@ -759,7 +759,7 @@
 		}
 		{
 			dependencies: ["31F84F07B7F4E74A", "33B9948FCA396811"]
-			description: ["On the Moon the cold strips the tritium out, at half price at night. Nine-tenths of the heavy water goes back to the reactor."]
+			description: ["On the Moon the cold strips the tritium out, at half price at night. Nearly all the heavy water goes back to the reactor."]
 			icon: "gtceu:tritium_removal_facility"
 			id: "15C4B97AD249E37A"
 			shape: "gear"
@@ -1323,7 +1323,7 @@
 		}
 		{
 			dependencies: ["1D6EA9A53811980A", "701AB3758DD632E7", "5642C3DCC05983B2"]
-			description: ["By day it only drills with liquid nitrogen. At night it drills dry and wears its bit twice as fast."]
+			description: ["By day it only drills with liquid nitrogen. At night it drills dry and goes through bits faster."]
 			icon: "gtceu:mercury_vein_drill"
 			id: "14ED3AAAE02F0FED"
 			shape: "gear"
@@ -1519,7 +1519,7 @@
 		}
 		{
 			dependencies: ["504E07CA238DFB00", "162641406869CF74", "305F916B3530ABAD"]
-			description: ["Eight mirrors and a furnace at the focus. A run that starts in full sun pays a quarter of the power."]
+			description: ["Eight mirrors and a furnace at the focus. A run that starts in full sun costs far less power."]
 			icon: "gtceu:mercury_solar_works"
 			id: "1DA2C8E10F5FB26C"
 			shape: "gear"
