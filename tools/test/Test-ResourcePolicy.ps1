@@ -365,6 +365,8 @@ Assert-Policy (@($calls | Where-Object { $_ -eq 'Get-GGNativeTimeoutMs' }).Count
 Assert-Policy (-not ($calls -contains 'Get-GGFreeRamGb') -and $restartFn.Extent.Text -notmatch 'Insufficient available RAM') 'a restart adds no RAM gate: the one global test JVM and its heap caps are the limits'
 Assert-Policy ($restartFn.Extent.Text -match 'Get-GGNativeTimeoutMs \$budget 30000') 'a restart stops the server within the same 30 s grace as the final shutdown'
 Assert-Policy ((Get-Content -Raw (Join-Path $PSScriptRoot 'remote\gg-server.ps1')) -match "Invoke-GGServerRestart \`$ctx \`$inst \`$res \`$Req") 'the commands stage hands @restart to Invoke-GGServerRestart instead of RCON'
+$waitStage = @($serverAst.FindAll({ param($n) $n -is [Management.Automation.Language.CommandAst] -and $n.GetCommandName() -eq 'Invoke-GGStage' }, $true) | Where-Object { $_.CommandElements[1].Value -eq 'wait-markers' })
+Assert-Policy ($waitStage.Count -eq 1 -and $waitStage[0].Extent.Text -match 'phase1\\logs\\kubejs\\server\.log' -and $waitStage[0].Extent.Text -match 'phase1\\logs\\latest\.log') 'after a restart, -WaitForLog markers may come from either boot'
 
 # A local dry run of Invoke-GGServerRestart: a small console program stands in for java (it writes the "Done" line and exits 0 on
 # `stop`) and a loopback listener answers RCON's login. Two markers (one in each log), the console stop, the first boot's logs moved to

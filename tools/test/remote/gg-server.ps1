@@ -459,6 +459,11 @@ function Invoke-GGServerSuite {
                         @{ Name = 'kubejs/server.log'; Tail = (New-Object GGTail (Join-Path $inst 'logs\kubejs\server.log')) },
                         @{ Name = 'latest.log'; Tail = (New-Object GGTail (Join-Path $inst 'logs\latest.log')) }
                     )
+                    # after a restart the first boot's markers count too: its logs are in results\server\phase1\
+                    if ($ctx.Phase1Logs) {
+                        $tails += @{ Name = 'phase1/kubejs/server.log'; Tail = (New-Object GGTail (Join-Path $res 'phase1\logs\kubejs\server.log')) }
+                        $tails += @{ Name = 'phase1/latest.log'; Tail = (New-Object GGTail (Join-Path $res 'phase1\logs\latest.log')) }
+                    }
                     $sw = [Diagnostics.Stopwatch]::StartNew()
                     $lastPrint = 0
                     while ($true) {
