@@ -1,0 +1,573 @@
+{
+  "tier": "ev",
+  "title": "EV era",
+  "extends": "hv",
+  "inheritTargets": true,
+  "dropTargets": ["bit-titanium-not-made", "auto-titanium-without-lunar-drill", "scheelite-not-comes-from-end"],
+  "note": "EV era per docs/eras/ev.md and its \"Decisions taken\" (which rule), in two substages (its \"Validator\" section): ev, the automated Moon base and Earth's fine chemistry, and ev-mars, Mars reached at the end of the era with the tier 2 rocket (steam.json's eraOrder puts ev-mars between ev and iv, so nothing on the way to Mars may need tungsten, samarium or deuterium). The Moon is the HV trip's dim:gcyr:luna key; Mars is the dim:gcyr:mars key of the synthetic mars-trip (the advanced tank and motor, which need the antenna's Mars chart). Every recipe of the Moon machines (regolith cell, cryogenic plant, antenna, the tripod's lunar veins, the sealed dome's lunar mode) carries .dimension('gcyr:luna') and the Mars ones (atmosphere processor, Martian veins, Martian seed) .dimension('gcyr:mars'): static `site` checks, and conditions.dimension.asKeysFor turns them into the trips' keys. Machines: every EV single block (gtceu:ev_*), our EV multiblocks with their real patterns, GTM's EBF with nichrome, freezer, large chemical reactor and tower on EV hatches, and the family tier veto (vetoAbove/onlyTier: the tripod only runs vein_drilling/ev/, the lower drills and greenhouses skip it). B7's combined-cycle plant and hot strip mill have an optional slot (machines, synthetic, targets and era group marked B7) until that package is merged.",
+  "contexts": ["minecraft:overworld", "grindless:flat", "grindless:void"],
+
+  "conditions": {
+    "dimension": {
+      "asKeysFor": ["gcyr:luna", "gcyr:mars"],
+      "note": "The bases outside the factory: a recipe only valid on the Moon needs the dim:gcyr:luna key (HV's synthetic moon-trip) and one only valid on Mars the dim:gcyr:mars key (synthetic mars-trip), instead of being compared against the factory's dimension. GTM ORs a recipe's dimension conditions: a recipe for the Moon or Mars (the solar array's, the tripod's) needs either key."
+    }
+  },
+
+  "world": [
+    {
+      "id": "mars-ores",
+      "mode": "manual",
+      "bootstrap": true,
+      "needs": ["dim:gcyr:mars"],
+      "template": "gtceu:raw_{m}",
+      "fromVeins": { "dimensions": ["gcyr:mars"], "requireRecipe": { "type": "gtceu:vein_drilling", "input": "grindless:vein_sample_{id}" } },
+      "materials": [],
+      "items": ["gcyr:martian_rock", "gcyr:martian_cobblestone", "gcyr:mars_regolith"],
+      "note": "The first visit to Mars (docs/eras/ev.md, \"Mars, end of EV\"): the trip's key brings back by hand 2 ores of each Martian vein the tripod's table offers (veins_mars.json: scheelite, merrillite and deuterium-rich ice; GCYR's own Mars veins are removed) for the samples, and the Martian ground. A one-off start: the tripod keeps it coming."
+    }
+  ],
+
+  "machinesFromRegistry": [
+    { "prefix": "gtceu:ev_", "maxEUt": 2048, "needs": ["eu:ev"], "excludeTypes": ["gtceu:dummy", "gtceu:steam_turbine", "gtceu:combustion_generator", "gtceu:gas_turbine"] }
+  ],
+
+  "machines": [
+    { "machine": "gtceu:ev_transformer_1a", "types": [], "note": "EV -> IV transformer (1 A)." },
+    { "machine": "gtceu:ev_transformer_2a", "types": [], "note": "EV -> IV transformer (2 A)." },
+    { "machine": "gtceu:ev_transformer_4a", "types": [], "note": "EV -> IV transformer (4 A -> 1 A): the gate to IV." },
+    { "machine": "gtceu:ev_transformer_16a", "types": [], "note": "EV -> IV transformer (16 A)." },
+    {
+      "id": "gtceu:electric_blast_furnace@ev-nichrome",
+      "machine": "gtceu:electric_blast_furnace",
+      "types": ["gtceu:electric_blast_furnace"],
+      "energy": { "voltage": 2048, "hatches": 2 },
+      "coilTemp": 3600,
+      "needs": ["eu:ev"],
+      "parts": [
+        "gtceu:heatproof_machine_casing", "gtceu:nichrome_coil_block", "gtceu:ev_energy_input_hatch", "gtceu:lv_input_bus", "gtceu:lv_output_bus",
+        "gtceu:lv_input_hatch", "gtceu:lv_output_hatch", "gtceu:lv_muffler_hatch",
+        { "anyOf": ["gtceu:maintenance_hatch"], "onlyIf": { "config": "machines.enableMaintenance", "equals": true } }
+      ],
+      "note": "Nichrome EBF with 2 EV hatches: they count as IV (8,192 V) and 3,900 K (3,600 K + 300 K for the three steps above MV): tungsten (3,600 K), tungsten steel and the RTM alloy."
+    },
+    {
+      "id": "gtceu:vacuum_freezer@ev2",
+      "machine": "gtceu:vacuum_freezer",
+      "types": ["gtceu:vacuum_freezer"],
+      "energy": { "voltage": 2048, "hatches": 2 },
+      "needs": ["eu:ev"],
+      "parts": [
+        "gtceu:frostproof_machine_casing", "gtceu:ev_energy_input_hatch", "gtceu:lv_input_bus", "gtceu:lv_output_bus", "gtceu:lv_input_hatch", "gtceu:lv_output_hatch",
+        { "anyOf": ["gtceu:maintenance_hatch"], "onlyIf": { "config": "machines.enableMaintenance", "equals": true } }
+      ],
+      "note": "GTM's vacuum freezer on 2 EV hatches (IV voltage): the hot tungsten, tungsten steel and RTM ingots and GTM's liquid oxygen and helium."
+    },
+    {
+      "id": "gtceu:large_chemical_reactor@ev2",
+      "machine": "gtceu:large_chemical_reactor",
+      "types": ["gtceu:large_chemical_reactor"],
+      "energy": { "voltage": 2048, "hatches": 2 },
+      "needs": ["eu:ev"],
+      "parts": [
+        "gtceu:inert_machine_casing", "gtceu:ptfe_pipe_casing", "gtceu:cupronickel_coil_block", "gtceu:ev_energy_input_hatch", "gtceu:lv_input_bus",
+        "gtceu:lv_output_bus", "gtceu:lv_input_hatch", "gtceu:lv_output_hatch",
+        { "anyOf": ["gtceu:maintenance_hatch"], "onlyIf": { "config": "machines.enableMaintenance", "equals": true } }
+      ],
+      "note": "GTM's large chemical reactor on EV hatches: nitric acid from the elements (docs/eras/ev.md, fine chemistry) and the EV reactions of the nano line."
+    },
+    {
+      "id": "gtceu:distillation_tower@ev2",
+      "machine": "gtceu:distillation_tower",
+      "types": ["gtceu:distillation_tower"],
+      "energy": { "voltage": 2048, "hatches": 2 },
+      "needs": ["eu:ev"],
+      "parts": [
+        "gtceu:clean_machine_casing", "gtceu:ev_energy_input_hatch", "gtceu:lv_input_hatch", "gtceu:lv_output_hatch", "gtceu:lv_output_bus",
+        { "anyOf": ["gtceu:maintenance_hatch"], "onlyIf": { "config": "machines.enableMaintenance", "equals": true } }
+      ],
+      "note": "GTM's distillation tower on EV hatches: the cascade's diluted HCl back to HCl, and the EV distillations."
+    },
+    {
+      "machine": "gtceu:platinum_plant",
+      "types": ["gtceu:pgm_refining"],
+      "energy": { "voltage": 2048 },
+      "needs": ["eu:ev"],
+      "partsFromStructure": true,
+      "partAbilities": { "energy_input": ["gtceu:ev_energy_input_hatch"] },
+      "parts": ["gtceu:inert_machine_casing", "gtceu:titanium_pipe_casing", "gtceu:tempered_glass", "gtceu:ev_energy_input_hatch", "gtceu:ev_input_bus", "gtceu:ev_output_bus", "gtceu:ev_input_hatch", "gtceu:ev_output_hatch"],
+      "note": "Platinum plant (ev/platinum_plant.js, Earth): 5x5x7 hall of inert casing; five recipes composed at load from GT--'s live line; every recipe needs grindless:platinum_electrode (chanced input, 0.1%)."
+    },
+    {
+      "machine": "gtceu:regolith_cell",
+      "types": ["gtceu:regolith_processing"],
+      "energy": { "voltage": 2048 },
+      "needs": ["eu:ev"],
+      "partsFromStructure": true,
+      "partAbilities": { "energy_input": ["gtceu:ev_energy_input_hatch"] },
+      "parts": ["grindless:sintered_regolith", "gtceu:stable_machine_casing", "gtceu:nichrome_coil_block", "gtceu:tempered_glass", "gtceu:ev_energy_input_hatch", "gtceu:ev_input_bus", "gtceu:ev_output_bus", "gtceu:ev_output_hatch"],
+      "note": "Regolith cell (ev/regolith_cell.js, Moon): 5x5x4 hall of sintered regolith bricks (made only on the Moon) around a stable titanium crucible with nichrome coils, glass roof. Every recipe carries .dimension('gcyr:luna'). Circuit 1 volatiles (H2, He, N2, He-3), circuit 2 electrolysis (O2, Si, Fe; ilmenite -> titanium with grindless:platinum_electrode at 0.1% and grindless:molten_salt_charge never used up), circuit 3 sintering; all 1,920 EU/t."
+    },
+    {
+      "machine": "gtceu:cryogenic_plant",
+      "types": ["gtceu:cryogenic_processing"],
+      "energy": { "voltage": 2048 },
+      "needs": ["eu:ev"],
+      "partsFromStructure": true,
+      "partAbilities": { "energy_input": ["gtceu:ev_energy_input_hatch"] },
+      "parts": ["gtceu:frostproof_machine_casing", "gtceu:titanium_pipe_casing", "grindless:sintered_regolith", "gtceu:aluminium_frame", "grindless:night_sky_radiator", "gtceu:ev_energy_input_hatch", "gtceu:ev_input_hatch", "gtceu:ev_output_hatch"],
+      "note": "Cryogenic plant (ev/cryogenic_plant.js, Moon): a 3x3x7 frost-proof tower with a titanium pipe core on sintered regolith and two wings of Night-Sky Radiators on aluminium frames. O2, He and N2 to their liquids at the vacuum freezer's 1,920 EU/t (half at night, a run-start modifier the validator doesn't see); every recipe carries .dimension('gcyr:luna'). The only source of liquid nitrogen."
+    },
+    {
+      "machine": "gtceu:ev_vein_drill",
+      "types": ["gtceu:vein_drilling"],
+      "onlyTier": "ev",
+      "energy": { "voltage": 2048 },
+      "needs": ["eu:ev"],
+      "partsFromStructure": true,
+      "partAbilities": { "energy_input": ["gtceu:ev_energy_input_hatch"] },
+      "parts": ["gtceu:stable_machine_casing", "gtceu:titanium_pipe_casing", "gtceu:titanium_frame", "grindless:sintered_regolith", "grindless:solar_wing_panel", "gtceu:ev_energy_input_hatch", "gtceu:ev_input_bus", "gtceu:ev_output_bus", "gtceu:ev_input_hatch"],
+      "note": "EV Tripod Drill (ev/tripod.js, Moon and Mars): titanium frame legs on sintered regolith footings, a stable titanium body, a titanium pipe drill string and two wings of Solar Wing Panels. It runs gtceu:vein_drilling but only its own vein_drilling/ev/ recipes (onlyTier: the veto refuses every other tier folder), generated from the Moon and Mars vein tables, each with that dimension's condition; titanium drill bit, dry or with 50 mB of liquid nitrogen per bore."
+    },
+    {
+      "machine": "gtceu:lunar_solar_array",
+      "types": ["gtceu:lunar_solar"],
+      "partsFromStructure": true,
+      "partAbilities": { "energy_output": ["gtceu:ev_energy_output_hatch"] },
+      "parts": ["grindless:sintered_regolith", "gtceu:titanium_pipe_casing", "gtceu:titanium_frame", "grindless:solar_wing_panel", "gtceu:ev_input_bus", "gtceu:ev_energy_output_hatch"],
+      "note": "Lunar solar array (ev/lunar_power_and_antenna.js): 36 Solar Wing Panels on titanium frame posts over sintered regolith, a regolith control hut with an input bus and 1-4 dynamo hatches. A generator with its own recipe type (lib/generators.js): by day, 420 EU/t per lit panel on the Moon and 129 on Mars, nothing consumed; the EU is the synthetic solar-array."
+    },
+    {
+      "machine": "gtceu:deep_space_antenna",
+      "types": ["gtceu:deep_space_tracking"],
+      "energy": { "voltage": 2048 },
+      "needs": ["eu:ev"],
+      "partsFromStructure": true,
+      "partAbilities": { "energy_input": ["gtceu:ev_energy_input_hatch"] },
+      "parts": ["grindless:sintered_regolith", "gtceu:titanium_gearbox", "gtceu:titanium_frame", "minecraft:lightning_rod", "gtceu:titanium_pipe_casing", "gtceu:ev_energy_input_hatch", "gtceu:ev_input_bus", "gtceu:ev_output_bus"],
+      "note": "Deep space antenna (ev/lunar_power_and_antenna.js, Moon): a 7x7 titanium dish on a sintered regolith pedestal. At night on the Moon the lunar landing chart (not consumed) + a data stick -> the Mars chart, 1,920 EU/t; its only recipe carries .dimension('gcyr:luna')."
+    },
+    {
+      "machine": "gtceu:sealed_dome",
+      "types": ["gtceu:greenhouse"],
+      "vetoAbove": "ev",
+      "energy": { "voltage": 2048 },
+      "needs": ["eu:ev"],
+      "partsFromStructure": true,
+      "partAbilities": { "energy_input": ["gtceu:ev_energy_input_hatch"] },
+      "parts": ["grindless:sintered_regolith", "minecraft:dirt", "gtceu:tempered_glass", "gtceu:white_lamp", "minecraft:iron_door", "gtceu:ev_energy_input_hatch", "gtceu:ev_input_bus", "gtceu:ev_output_bus", "gtceu:ev_input_hatch", "gtceu:ev_output_hatch"],
+      "note": "Sealed dome (ev/sealed_dome.js, Moon and Mars): the greenhouse family's EV step, gtceu:greenhouse with circuits 0-3 as the HV greenhouse and circuit 4 for its sealed recipes (greenhouse/ev/*_sealed_moon with CO2 from home, *_sealed_mars with the air's), each with its dimension; it skips any folder above ev. Sintered regolith rings, a soil bed, tempered glass, GT lamps and an iron door."
+    },
+    {
+      "machine": "gtceu:extraction_cascade",
+      "types": ["gtceu:solvent_extraction"],
+      "energy": { "voltage": 2048 },
+      "needs": ["eu:ev"],
+      "partsFromStructure": true,
+      "partAbilities": { "energy_input": ["gtceu:ev_energy_input_hatch"] },
+      "parts": ["gtceu:inert_machine_casing", "gtceu:tempered_glass", "gtceu:titanium_gearbox", "gtceu:ptfe_pipe_casing", "gtceu:ev_energy_input_hatch", "gtceu:ev_input_bus", "gtceu:ev_output_bus", "gtceu:ev_input_hatch", "gtceu:ev_output_hatch"],
+      "note": "Rare-earth extraction cascade (ev/extraction_cascade.js, Earth): a 3x3x7 line of mixer-settlers in inert casing. Circuit 1 leaches Martian merrillite with HCl into the chloride solution; circuit 2 separates it with kerosene and an HCl strip into samarium, neodymium and mixed chlorides (GTM's electrolyzer makes the metals). The only consumer of merrillite dust."
+    },
+    {
+      "machine": "gtceu:atmosphere_processor",
+      "types": ["gtceu:atmosphere_processing"],
+      "energy": { "voltage": 2048 },
+      "needs": ["eu:ev"],
+      "partsFromStructure": true,
+      "partAbilities": { "energy_input": ["gtceu:ev_energy_input_hatch"] },
+      "parts": ["gtceu:stable_machine_casing", "gtceu:titanium_frame", "gtceu:titanium_pipe_casing", "gtceu:titanium_gearbox", "gtceu:filter_casing", "gtceu:tempered_glass", "gtceu:ev_energy_input_hatch", "gtceu:ev_input_bus", "gtceu:ev_input_hatch", "gtceu:ev_output_hatch"],
+      "note": "Atmosphere processor (ev/mars_site.js, Mars): stable titanium casing hall with an intake housing. Circuit 1 Sabatier (water from home + the air's CO2 -> methane + oxygen, ruthenium catalyst 0.1%), circuit 2 CO2 from the air; every recipe carries .dimension('gcyr:mars')."
+    },
+    {
+      "machine": "gtceu:combined_cycle_plant",
+      "types": ["gtceu:combined_cycle"],
+      "optional": true,
+      "energy": { "voltage": 2048 },
+      "partsFromStructure": true,
+      "partAbilities": { "energy_output": ["gtceu:ev_energy_output_hatch"] },
+      "parts": ["gtceu:stable_machine_casing", "gtceu:titanium_pipe_casing", "gtceu:firebricks", "gtceu:ev_input_hatch", "gtceu:ev_output_hatch", "gtceu:ev_energy_output_hatch"],
+      "note": "B7 SLOT (package B7, not merged yet: optional until then; fill in its validator needs at the merge). Combined-cycle plant (docs/eras/ev.md, Earth): a generator with its own type (lib/generators.js) that takes the gas turbine's fuels + distilled water -> EU + steam; the EU is the synthetic combined-cycle."
+    },
+    {
+      "machine": "gtceu:hot_strip_mill",
+      "types": ["gtceu:hot_rolling"],
+      "optional": true,
+      "energy": { "voltage": 2048 },
+      "needs": ["eu:ev"],
+      "partsFromStructure": true,
+      "partAbilities": { "energy_input": ["gtceu:ev_energy_input_hatch"] },
+      "parts": ["gtceu:stable_machine_casing", "gtceu:steel_frame", "gtceu:ev_energy_input_hatch", "gtceu:ev_input_bus", "gtceu:ev_output_bus", "gtceu:ev_input_hatch", "gtceu:ev_output_hatch"],
+      "note": "B7 SLOT (package B7, not merged yet: optional until then). Hot strip mill (docs/eras/ev.md, Earth): hot ingot + water -> plate, rods or foil + steam, recipes generated from GTM's hot ingots."
+    }
+  ],
+
+  "synthetic": [
+    {
+      "id": "transformer-ev-iv",
+      "machines": ["gtceu:ev_transformer_1a", "gtceu:ev_transformer_2a", "gtceu:ev_transformer_4a", "gtceu:ev_transformer_16a"],
+      "consumes": ["eu:ev"],
+      "produces": ["eu:iv"],
+      "note": "GTM's EV -> IV transformer on the EV grid: the 32,768 EU/t power station of the gate to IV (amperage isn't modeled)."
+    },
+    {
+      "id": "solar-array",
+      "machines": ["gtceu:lunar_solar_array"],
+      "capital": [["dim:gcyr:luna", "dim:gcyr:mars"]],
+      "produces": ["eu:ev"],
+      "note": "The lunar solar array's daytime EU (420 EU/t per panel on the Moon, 129 on Mars; its two recipes carry the site's dimension and need nothing but a programmed circuit): EV power that burns no fuel, on the Moon or Mars."
+    },
+    {
+      "id": "combined-cycle",
+      "machines": ["gtceu:combined_cycle_plant"],
+      "consumes": [{ "fuelOf": "gtceu:combined_cycle", "kind": "fluid" }],
+      "produces": ["eu:ev"],
+      "note": "B7 SLOT: the combined-cycle plant's EU (fuel + distilled water -> EU + steam). Dead until B7 is merged."
+    },
+    {
+      "id": "mars-trip",
+      "capital": [
+        "gcyr:rocket_scanner", "gcyr:launch_pad", "gtceu:stainless_steel_frame", "gcyr:advanced_fuel_tank", "gcyr:advanced_rocket_motor", "gcyr:seat", "gcyr:id_chip",
+        "gcyr:space_helmet", "gcyr:space_chestplate", "gcyr:space_leggings", "gcyr:space_boots"
+      ],
+      "consumes": ["fluid:gtceu:rocket_fuel", "fluid:gtceu:oxygen"],
+      "produces": ["dim:gcyr:mars"],
+      "note": "The trip to Mars (docs/eras/ev.md, \"Mars, end of EV\"; integration/gcyr_mars_road.js): a tier 2 rocket (GCYR averages part tiers, so every tank and motor is advanced: both remade in the EV assembler with titanium and the antenna's Mars chart as a catalyst), the HV suit with oxygen, and 14 B of fuel. It gives the dim:gcyr:mars key, which the Martian ores need by hand (mars-ores) and the recipes only valid on Mars. Capital: the return is by waystone."
+    }
+  ],
+
+  "targets": [
+    { "id": "energy-iv", "label": "IV energy available (EV -> IV transformer on the EV grid)", "item": "eu:iv" },
+    { "id": "transformer-ev-iv", "label": "EV -> IV transformer (4 A -> 1 A)", "item": "gtceu:ev_transformer_4a" },
+    { "id": "buffer-battery-ev", "label": "EV battery buffer", "item": "gtceu:ev_battery_buffer_4x" },
+    { "id": "hatch-energy-ev-4a", "label": "EV 4 A energy hatch (the 4, 16 and 64 A hatches start here)", "item": "gtceu:ev_energy_input_hatch_4a" },
+    { "id": "turbine-large-gas", "label": "Large gas turbine (EV hull, 2 EV circuits, stainless gears and pipes)", "item": "gtceu:gas_large_turbine" },
+    { "id": "boiler-large-titanium", "label": "Large titanium boiler", "item": "gtceu:titanium_large_boiler" },
+    { "id": "me-hatches", "label": "ME hatches and buses (the base requests from and returns to the network)", "allOf": ["gtceu:me_input_bus", "gtceu:me_output_bus", "gtceu:me_input_hatch", "gtceu:me_output_hatch"] },
+
+    { "id": "lathe-ev", "label": "EV lathe (the titanium drill bit)", "item": "gtceu:ev_lathe" },
+    { "id": "mixer-ev", "label": "EV mixer (methalox)", "item": "gtceu:ev_mixer" },
+    { "id": "centrifuge-ev", "label": "EV centrifuge (metal mixture at 900 EU/t)", "item": "gtceu:ev_centrifuge" },
+    { "id": "electrolyzer-ev", "label": "EV electrolyzer", "item": "gtceu:ev_electrolyzer" },
+    { "id": "reactor-chemical-ev", "label": "EV chemical reactor", "item": "gtceu:ev_chemical_reactor" },
+    { "id": "assembler-circuits-ev", "label": "EV circuit assembler (the nano line)", "item": "gtceu:ev_circuit_assembler" },
+    { "id": "bath-chemical-ev", "label": "EV chemical bath", "item": "gtceu:ev_chemical_bath" },
+    { "id": "simulator-creatures-ev", "label": "EV creature simulator (the wither)", "item": "gtceu:ev_creature_simulator" },
+    { "id": "ebf-nichrome-ev", "label": "Nichrome EBF on 2 EV hatches (3,900 K: tungsten at 3,600 K)", "item": "m:gtceu:electric_blast_furnace@ev-nichrome" },
+
+    { "id": "platinum-electrode", "label": "Platinum electrode (platinum on titanium: the plant's and the cell's anode)", "item": "grindless:platinum_electrode" },
+    { "id": "plant-platinum", "label": "Platinum plant (ours, Earth)", "item": "gtceu:platinum_plant" },
+    { "id": "plant-platinum-formed", "label": "Platinum plant formed", "item": "m:gtceu:platinum_plant" },
+    { "id": "recipe-platinum-plant", "label": "Platinum plant: separation -> platinum", "kind": "recipe", "type": "gtceu:pgm_refining", "output": "gtceu:platinum_dust" },
+
+    { "id": "sintered-regolith", "label": "Sintered regolith brick (only on the Moon: the electric furnace or the cell)", "item": "grindless:sintered_regolith" },
+    { "id": "sintered-regolith-only-moon", "label": "Without the trip to the Moon there's no sintered brick (and no lunar multiblock)", "item": "grindless:sintered_regolith", "without": ["synthetic:moon-trip"], "expect": "unreachable" },
+    { "id": "regolith-dust", "label": "Lunar regolith dust (any macerator, from the drills' moon cobblestone)", "item": "gtceu:lunar_regolith_dust" },
+    { "id": "molten-salt-charge", "label": "Molten salt charge (CaCl2 + titanium: the cell's electrolyte, never used up)", "item": "grindless:molten_salt_charge" },
+    { "id": "regolith-cell", "label": "Regolith cell (ours, Moon)", "item": "gtceu:regolith_cell" },
+    { "id": "regolith-cell-formed", "label": "Regolith cell formed (sintered regolith walls)", "item": "m:gtceu:regolith_cell" },
+    { "id": "recipe-cell-volatiles", "label": "Regolith cell, circuit 1: volatiles (H2, He, N2, He-3), only on the Moon", "kind": "recipe", "recipe": "grindless:regolith_processing/ev/volatiles" },
+    { "id": "recipe-cell-electrolysis", "label": "Regolith cell, circuit 2: oxygen, silicon and iron from regolith", "kind": "recipe", "recipe": "grindless:regolith_processing/ev/regolith_electrolysis" },
+    { "id": "recipe-cell-titanium", "label": "Regolith cell, circuit 2: chlorine-free titanium from ilmenite (anode and salt charge)", "kind": "recipe", "recipe": "grindless:regolith_processing/ev/titanium_from_ilmenite" },
+    { "id": "recipe-cell-sintering", "label": "Regolith cell, circuit 3: sintered bricks", "kind": "recipe", "recipe": "grindless:regolith_processing/ev/sintering" },
+
+    { "id": "radiator-night-sky", "label": "Night-sky radiator (MV assembler: aluminium and ammonia)", "item": "grindless:night_sky_radiator" },
+    { "id": "cryogenic-plant", "label": "Cryogenic plant (ours, Moon)", "item": "gtceu:cryogenic_plant" },
+    { "id": "cryogenic-plant-formed", "label": "Cryogenic plant formed", "item": "m:gtceu:cryogenic_plant" },
+    { "id": "liquid-nitrogen", "label": "Liquid nitrogen (cryogenic plant, only on the Moon)", "fluid": "gtceu:liquid_nitrogen" },
+    { "id": "liquid-nitrogen-only-cryogenic-plant", "label": "Liquid nitrogen only comes from the cryogenic plant", "fluid": "gtceu:liquid_nitrogen", "without": ["operate:gtceu:cryogenic_plant"], "expect": "unreachable" },
+    { "id": "recipe-cryogenic-oxygen", "label": "Cryogenic plant: liquid oxygen", "kind": "recipe", "recipe": "grindless:cryogenic_processing/liquid_oxygen" },
+    { "id": "recipe-cryogenic-helium", "label": "Cryogenic plant: liquid helium", "kind": "recipe", "recipe": "grindless:cryogenic_processing/liquid_helium" },
+
+    { "id": "wing-panel-solar", "label": "Solar wing panel (titanium frame + 2 silicon wafers + tempered glass)", "item": "grindless:solar_wing_panel" },
+    { "id": "solar-array", "label": "Lunar solar array (ours, Moon and Mars)", "item": "gtceu:lunar_solar_array" },
+    { "id": "solar-array-formed", "label": "Lunar solar array formed", "item": "m:gtceu:lunar_solar_array" },
+
+    { "id": "bit-titanium", "label": "Titanium drill bit (EV lathe: long titanium rod; the tripod's bit again)", "item": "grindless:titanium_drill_bit" },
+    { "id": "bit-titanium-needs-ev-lathe", "label": "The titanium bit needs the EV lathe (1,920 EU/t): HV can't make it", "item": "grindless:titanium_drill_bit", "without": ["operate:gtceu:ev_lathe"], "expect": "unreachable" },
+    { "id": "tripod", "label": "EV tripod drill (ours, Moon and Mars)", "item": "gtceu:ev_vein_drill" },
+    { "id": "tripod-formed", "label": "EV tripod formed (sintered footings, wings of solar panels)", "item": "m:gtceu:ev_vein_drill" },
+    { "id": "recipe-tripod-ilmenite", "label": "Tripod: lunar ilmenite, dry (only on the Moon)", "kind": "recipe", "recipe": "grindless:vein_drilling/ev/ilmenite_moon_titanium" },
+    { "id": "recipe-tripod-ilmenite-cryo", "label": "Tripod: lunar ilmenite cooled with liquid nitrogen", "kind": "recipe", "recipe": "grindless:vein_drilling/ev/ilmenite_moon_titanium_cryo" },
+    { "id": "tripod-only-runs-ev", "label": "Only the tripod and the steam drill (no veto hook) run the tripod's recipes: the LV, MV and HV drills skip the ev/ folder", "kind": "recipe", "recipe": "grindless:vein_drilling/ev/*", "without": ["operate:gtceu:ev_vein_drill", "operate:gtceu:steam_vein_drill"], "expect": "unreachable" },
+    {
+      "id": "steam-family-no-veto",
+      "label": "Known soft spot (DECISIONS 2026-10-25, B1): the steam drill and the steam greenhouse have no veto hook, so they can run the tripod's and the sealed dome's recipes off-world (8 runs at most)",
+      "kind": "recipe",
+      "recipe": ["grindless:vein_drilling/ev/*", "grindless:greenhouse/ev/*"],
+      "without": ["operate:gtceu:ev_vein_drill", "operate:gtceu:sealed_dome"],
+      "expect": "unreachable",
+      "optional": true
+    },
+    {
+      "id": "uranium-not-before-iv",
+      "label": "No radioactives before IV (docs/eras/ev.md): uranium isn't obtained in EV (the Nether thorium gives lead and rare earths, not uraninite: offworld_only.json byproducts; the pitchblende vein waits for IV)",
+      "item": "gtceu:uranium_dust",
+      "expect": "unreachable"
+    },
+    {
+      "id": "radon-not-before-iv",
+      "label": "No radon before IV: neither uranium + air nor the ender air distillation give it in EV (offworld_only.json strips it from distill_liquid_ender_air)",
+      "fluid": "gtceu:radon",
+      "expect": "unreachable"
+    },
+    {
+      "id": "quantum-eye-not-before-iv",
+      "label": "No quantum eye before IV: the EV emitter, sensor and field generator stay in IV",
+      "item": "gtceu:quantum_eye",
+      "expect": "unreachable"
+    },
+
+    { "id": "antenna-deep-space", "label": "Deep space antenna (ours, Moon)", "item": "gtceu:deep_space_antenna" },
+    { "id": "antenna-formed", "label": "Deep space antenna formed", "item": "m:gtceu:deep_space_antenna" },
+    { "id": "chart-mars", "label": "Mars Transfer Chart (the antenna on the Moon, at night)", "item": "grindless:mars_chart" },
+    { "id": "chart-mars-only-antenna", "label": "The Mars chart only comes from the deep space antenna", "item": "grindless:mars_chart", "without": ["operate:gtceu:deep_space_antenna"], "expect": "unreachable" },
+
+    { "id": "dome-sealed", "label": "Sealed dome (ours, Moon and Mars: the greenhouse family's EV step)", "item": "gtceu:sealed_dome" },
+    { "id": "dome-sealed-formed", "label": "Sealed dome formed", "item": "m:gtceu:sealed_dome" },
+    { "id": "recipe-dome-moon", "label": "Sealed dome on the Moon: a crop + water + CO2 from home -> x3 + O2", "kind": "recipe", "recipe": "grindless:greenhouse/ev/*_sealed_moon" },
+    { "id": "dome-only-runs-sealed", "label": "The sealed recipes only run in the sealed dome (and the steam greenhouse, which has no veto hook): the LV, MV and HV greenhouses skip the ev/ folder", "kind": "recipe", "recipe": "grindless:greenhouse/ev/*", "without": ["operate:gtceu:sealed_dome", "operate:gtceu:steam_greenhouse"], "expect": "unreachable" },
+
+    { "id": "catalyst-ruthenium", "label": "Ruthenium catalyst (sapphire + ruthenium from the platinum plant)", "item": "grindless:ruthenium_catalyst" },
+    { "id": "methalox", "label": "Methalox (EV mixer: methane + 2 O2)", "fluid": "gtceu:methalox" },
+    { "id": "methalox-only-mixer", "label": "Methalox only comes from the mixer recipe", "fluid": "gtceu:methalox", "without": ["grindless:mixer/methalox"], "expect": "unreachable" },
+    { "id": "recipe-methalox-turbine", "label": "Methalox burns in the gas turbine anywhere (its own oxidizer)", "kind": "recipe", "recipe": "grindless:gas_turbine/methalox" },
+
+    { "id": "rocket-tank-advanced", "label": "GCYR advanced fuel tank (EV assembler: titanium drums, Kapton K, the Mars chart as catalyst)", "item": "gcyr:advanced_fuel_tank" },
+    { "id": "rocket-motor-advanced", "label": "GCYR advanced rocket motor (EV assembler: advanced power thrusters, Kapton K, the Mars chart)", "item": "gcyr:advanced_rocket_motor" },
+    { "id": "rocket-tank-advanced-needs-chart", "label": "The advanced tank needs the Mars chart: without the antenna there's no tier 2 rocket", "item": "gcyr:advanced_fuel_tank", "without": ["operate:gtceu:deep_space_antenna"], "expect": "unreachable" },
+    { "id": "mars-trip", "label": "The trip to Mars (tier 2 rocket, suit with oxygen and fuel): the dim:gcyr:mars key", "item": "dim:gcyr:mars" },
+    { "id": "mars-ores-with-rocket", "label": "Martian scheelite (one trip with the tier 2 rocket)", "item": "gtceu:raw_scheelite" },
+    { "id": "scheelite-without-mars", "label": "Scheelite doesn't come out without the trip to Mars", "item": "gtceu:raw_scheelite", "without": ["synthetic:mars-trip"], "expect": "unreachable" },
+    { "id": "tungsten-without-mars", "label": "Without the trip to Mars there's no tungsten (no bees, no End vein, no byproduct)", "item": "gtceu:tungsten_ingot", "without": ["synthetic:mars-trip"], "expect": "unreachable" },
+    { "id": "merrillite-without-mars", "label": "Merrillite (the Martian rare earths) doesn't come out without the trip to Mars", "item": "gtceu:merrillite_dust", "without": ["synthetic:mars-trip"], "expect": "unreachable" },
+    { "id": "samarium-without-mars", "label": "Without the trip to Mars there's no samarium (rare_earth_separation and GTCA's samaric branch lost it)", "item": "gtceu:samarium_dust", "without": ["synthetic:mars-trip"], "expect": "unreachable" },
+    { "id": "deuterium-not-made", "label": "Deuterium has no source in EV (hydrogen_separation removed, ender air without it): IV's heavy water from the Martian ice", "fluid": "gtceu:deuterium", "expect": "unreachable" },
+    { "id": "recipe-tripod-scheelite", "label": "Tripod on Mars: scheelite, dry (only on Mars)", "kind": "recipe", "recipe": "grindless:vein_drilling/ev/scheelite_mars_titanium" },
+
+    { "id": "processor-atmosphere", "label": "Atmosphere processor (ours, Mars)", "item": "gtceu:atmosphere_processor" },
+    { "id": "processor-atmosphere-formed", "label": "Atmosphere processor formed", "item": "m:gtceu:atmosphere_processor" },
+    { "id": "recipe-sabatier", "label": "Atmosphere processor: water + the air's CO2 -> methane + oxygen (only on Mars)", "kind": "recipe", "recipe": "grindless:atmosphere_processing/ev/sabatier" },
+    { "id": "recipe-co2-intake", "label": "Atmosphere processor: CO2 from the air (for the sealed dome on Mars)", "kind": "recipe", "recipe": "grindless:atmosphere_processing/ev/co2_intake" },
+    { "id": "recipe-dome-mars", "label": "Sealed dome on Mars: a crop + water, CO2 from the air -> x3 + O2", "kind": "recipe", "recipe": "grindless:greenhouse/ev/*_sealed_mars" },
+    { "id": "martian-quantum-seed", "label": "Martian quantum seed (chemical reactor on Mars: merrillite + pearl + helium-3; the Martian half of the bridge)", "item": "grindless:martian_quantum_seed" },
+
+    { "id": "cascade-extraction", "label": "Rare-earth extraction cascade (ours, Earth)", "item": "gtceu:extraction_cascade" },
+    { "id": "recipe-cascade-leach", "label": "Cascade, circuit 1: merrillite + HCl -> chloride solution", "kind": "recipe", "recipe": "grindless:solvent_extraction/ev/merrillite_leach" },
+    { "id": "recipe-cascade-extraction", "label": "Cascade, circuit 2: solution + kerosene + HCl -> samarium, neodymium and mixed chlorides", "kind": "recipe", "recipe": "grindless:solvent_extraction/ev/rare_earth_extraction" },
+    { "id": "samarium", "label": "Samarium dust (cascade -> samarium chloride -> GTM's electrolyzer)", "item": "gtceu:samarium_dust" },
+    { "id": "chlorides-only-cascade", "label": "The rare-earth chlorides only come from the cascade (merrillite has no decomposition)", "item": "gtceu:samarium_chloride_dust", "without": ["operate:gtceu:extraction_cascade"], "expect": "unreachable" },
+
+    { "id": "nether-star", "label": "Nether Star (the wither in the EV creature simulator; saved for IV)", "kind": "recipe", "recipe": "grindless:creature_simulation/wither/*", "output": "minecraft:nether_star" },
+
+    { "id": "tungsten-ingot", "label": "Tungsten ingot (Martian scheelite -> tungstic acid -> electrolysis -> EBF 3,600 K -> freezer)", "item": "gtceu:tungsten_ingot" },
+    { "id": "tungsten-steel-ingot", "label": "Tungsten steel ingot (tungsten + steel -> EBF -> freezer)", "item": "gtceu:tungsten_steel_ingot" },
+    { "id": "rtm-alloy-ingot", "label": "RTM alloy ingot (ruthenium + tungsten + molybdenum)", "item": "gtceu:rtm_alloy_ingot" },
+    { "id": "nano-cpu-wafer", "label": "Nano CPU wafer (EV reactor, clean room)", "item": "gtceu:nano_cpu_wafer" },
+    { "id": "hull-iv", "label": "IV hull (tungsten steel casing, platinum cables, PTFE)", "item": "gtceu:iv_machine_hull" },
+    { "id": "computer-nano", "label": "Nano computer (an IV circuit: the wall of EV)", "item": "gtceu:nano_processor_computer" },
+    { "id": "coil-rtm", "label": "RTM alloy coil (ruthenium from the plant, Martian tungsten, Nether molybdenum)", "item": "gtceu:rtm_alloy_coil_block" },
+    { "id": "motor-iv", "label": "IV electric motor (tungsten steel, tungsten cable)", "item": "gtceu:iv_electric_motor" },
+    { "id": "pump-iv", "label": "IV electric pump", "item": "gtceu:iv_electric_pump" },
+
+    { "id": "plant-combined-cycle", "label": "B7 SLOT: combined-cycle plant (Earth)", "item": "gtceu:combined_cycle_plant", "optional": true },
+    { "id": "mill-hot-strip", "label": "B7 SLOT: hot strip mill (Earth)", "item": "gtceu:hot_strip_mill", "optional": true },
+
+    { "id": "site-moon-machines", "label": "Site machines: every recipe of the regolith cell, the cryogenic plant, the antenna and the lunar drill only runs on the Moon", "kind": "site", "types": ["gtceu:regolith_processing", "gtceu:cryogenic_processing", "gtceu:deep_space_tracking", "gtceu:lunar_drilling"], "dimensions": ["gcyr:luna"] },
+    { "id": "site-moon-recipes", "label": "Site: the sintered brick, the lunar seed, the tripod's lunar veins, the dome's lunar mode and the titanium combs only run on the Moon", "kind": "site", "recipe": ["grindless:electric_furnace/sintered_regolith", "grindless:chemical_reactor/lunar_quantum_seed", "grindless:vein_drilling/ev/*_moon_*", "grindless:greenhouse/ev/*_sealed_moon", "grindless:centrifuge/pb/*honeycomb_titanium", "grindless:centrifuge/pb/*honeycomb_ilmenite"], "dimensions": ["gcyr:luna"] },
+    { "id": "site-mars-machines", "label": "Site machines: every recipe of the atmosphere processor only runs on Mars", "kind": "site", "types": ["gtceu:atmosphere_processing"], "dimensions": ["gcyr:mars"] },
+    { "id": "site-mars-recipes", "label": "Site: the Martian seed, the tripod's Martian veins, the dome's Martian mode and the tungsten combs only run on Mars", "kind": "site", "recipe": ["grindless:chemical_reactor/martian_quantum_seed", "grindless:vein_drilling/ev/*_mars_*", "grindless:greenhouse/ev/*_sealed_mars", "grindless:centrifuge/pb/*honeycomb_tungst*", "grindless:centrifuge/pb/*honeycomb_scheelite"], "dimensions": ["gcyr:mars"] },
+    { "id": "site-offworld", "label": "Site: the solar array only runs off Earth (the Moon or Mars)", "kind": "site", "types": ["gtceu:lunar_solar"], "dimensions": ["gcyr:luna", "gcyr:mars"] },
+    { "id": "site-offworld-family", "label": "Site: the EV family recipes (the tripod's and the sealed dome's) only run on the Moon or Mars", "kind": "site", "recipe": ["grindless:vein_drilling/ev/*", "grindless:greenhouse/ev/*"], "dimensions": ["gcyr:luna", "gcyr:mars"] },
+    {
+      "id": "site-fuels-air",
+      "label": "Site rules of power: every fuel of the burning types burns only in the five dimensions with air (ORed), except the fuels that carry their own oxidizer and lava",
+      "kind": "site",
+      "types": ["gtceu:combustion_generator", "gtceu:gas_turbine", "gtceu:semi_fluid_generator", "gtceu:steam_boiler", "gtceu:large_boiler", "gtceu:rocket_engine"],
+      "dimensions": ["minecraft:overworld", "minecraft:the_nether", "minecraft:the_end", "grindless:void", "grindless:flat"],
+      "exact": true,
+      "allowAnywhere": [
+        "gtceu:steam_boiler/minecraft_lava", "gtceu:large_boiler/minecraft_lava", "gtceu:combustion_generator/rocket_fuel", "gtceu:rocket_engine/rp_1_mixed_fuel",
+        "gtceu:rocket_engine/methylhydrazine_nitrate_rocket_fuel", "grindless:gas_turbine/methalox"
+      ]
+    }
+  ],
+
+  "targetsFromVeins": [
+    {
+      "idPrefix": "mars-sample-",
+      "labelPrefix": "Martian vein sample",
+      "dimensions": ["gcyr:mars"],
+      "requireRecipe": { "type": "gtceu:vein_drilling", "input": "grindless:vein_sample_{id}" },
+      "target": { "item": "grindless:vein_sample_{id}" }
+    }
+  ],
+
+  "autoTargetsFromVeins": [
+    {
+      "idPrefix": "auto-tripod-moon-",
+      "labelPrefix": "EV tripod (on the Moon, titanium bit; the steam drill aside): lunar vein recipe",
+      "dimensions": ["gcyr:luna"],
+      "requireRecipe": { "type": "gtceu:vein_drilling", "input": "grindless:vein_sample_{id}" },
+      "without": ["operate:gtceu:steam_vein_drill"],
+      "target": { "kind": "recipe", "type": "gtceu:vein_drilling", "input": ["grindless:vein_sample_{id}", "grindless:titanium_drill_bit"] }
+    },
+    {
+      "idPrefix": "auto-tripod-mars-",
+      "labelPrefix": "EV tripod (on Mars, titanium bit; the steam drill aside): Martian vein recipe",
+      "dimensions": ["gcyr:mars"],
+      "requireRecipe": { "type": "gtceu:vein_drilling", "input": "grindless:vein_sample_{id}" },
+      "without": ["operate:gtceu:steam_vein_drill"],
+      "target": { "kind": "recipe", "type": "gtceu:vein_drilling", "input": ["grindless:vein_sample_{id}", "grindless:titanium_drill_bit"] }
+    }
+  ],
+
+  "autoTargets": [
+    { "id": "auto-energy-iv", "label": "Sustained IV energy (EV -> IV transformer)", "item": "eu:iv" },
+    { "id": "auto-energy-ev-solar", "label": "EV energy sustained by the solar array alone (no fuel, no transformer from Earth)", "item": "eu:ev", "without": ["synthetic:transformer-hv-ev", "synthetic:combined-cycle"] },
+    { "id": "auto-bit-titanium", "label": "Titanium drill bit (the tripod pays for its own bit: lunar titanium -> EV lathe)", "item": "grindless:titanium_drill_bit" },
+    { "id": "auto-lunar-ilmenite-tripod", "label": "Lunar ilmenite from the tripod alone (without the lunar drill)", "item": "gtceu:raw_ilmenite", "without": ["operate:gtceu:lunar_drill"] },
+    { "id": "auto-titanium-tripod-cell", "label": "Titanium from the tripod and the regolith cell (no lunar drill, no Kroll on Earth)", "item": "gtceu:titanium_ingot", "without": ["operate:gtceu:lunar_drill", "gtceu:electric_blast_furnace/*titanium*"] },
+    { "id": "auto-titanium-without-moon-drills", "label": "Without the lunar drill and the tripod (and the steam drill's soft spot), titanium isn't automated (the trips' ores are a one-off start)", "item": "gtceu:titanium_ingot", "without": ["operate:gtceu:lunar_drill", "operate:gtceu:ev_vein_drill", "operate:gtceu:steam_vein_drill"], "expect": "not-automatic" },
+    { "id": "auto-regolith-dust", "label": "Lunar regolith dust (the drills' moon cobblestone in a macerator)", "item": "gtceu:lunar_regolith_dust" },
+    { "id": "auto-sintered-regolith", "label": "Sintered regolith (the cell or the furnace on the Moon)", "item": "grindless:sintered_regolith" },
+    { "id": "auto-oxygen-moon", "label": "Oxygen from regolith with no air (the cell, circuit 2)", "fluid": "gtceu:oxygen", "without": ["gtceu:gas_collector/*", "grindless:gas_collector/*", "gtceu:electrolyzer/*", "gtceu:centrifuge/*", "grindless:greenhouse/*"] },
+    { "id": "auto-helium-3-cell", "label": "Helium-3 from the regolith cell (without the lunar drill)", "fluid": "gtceu:helium_3", "without": ["operate:gtceu:lunar_drill"] },
+    { "id": "auto-liquid-nitrogen", "label": "Liquid nitrogen (cryogenic plant, Moon)", "fluid": "gtceu:liquid_nitrogen" },
+    { "id": "auto-liquid-oxygen", "label": "Liquid oxygen (cryogenic plant or freezer)", "fluid": "gtceu:liquid_oxygen" },
+    { "id": "auto-liquid-helium", "label": "Liquid helium (cryogenic plant or freezer)", "fluid": "gtceu:liquid_helium" },
+    { "id": "auto-recipe-tripod-cryo", "label": "Tripod cooled with liquid nitrogen: usable and sustained", "kind": "recipe", "recipe": "grindless:vein_drilling/ev/ilmenite_moon_titanium_cryo" },
+    { "id": "auto-platinum", "label": "Platinum (platinum plant)", "item": "gtceu:platinum_dust" },
+    { "id": "auto-palladium", "label": "Palladium", "item": "gtceu:palladium_dust" },
+    { "id": "auto-ruthenium", "label": "Ruthenium (the processor's catalyst and the RTM coil)", "item": "gtceu:ruthenium_dust" },
+    { "id": "auto-rhodium", "label": "Rhodium", "item": "gtceu:rhodium_dust" },
+    { "id": "auto-electrode-platinum", "label": "Platinum electrode", "item": "grindless:platinum_electrode" },
+    { "id": "auto-catalyst-ruthenium", "label": "Ruthenium catalyst", "item": "grindless:ruthenium_catalyst" },
+    { "id": "auto-crops-moon", "label": "Sealed dome on the Moon: usable and sustained", "kind": "recipe", "recipe": "grindless:greenhouse/ev/*_sealed_moon" },
+    { "id": "auto-nether-star", "label": "Nether Star (the wither, from biomass and skulls)", "item": "minecraft:nether_star" },
+    { "id": "auto-mars-dimension", "label": "The trip to Mars can be repeated (rocket fuel and oxygen are sustained)", "item": "dim:gcyr:mars" },
+    { "id": "auto-scheelite", "label": "Martian scheelite (tripod on Mars)", "item": "gtceu:raw_scheelite" },
+    { "id": "auto-tungsten", "label": "Tungsten ingot (scheelite -> tungstic acid -> electrolysis -> EBF -> freezer)", "item": "gtceu:tungsten_ingot" },
+    { "id": "auto-tungsten-steel", "label": "Tungsten steel ingot", "item": "gtceu:tungsten_steel_ingot" },
+    { "id": "auto-tungsten-without-tripod", "label": "Without the tripod (and the steam drill's soft spot), tungsten isn't automated (the first visit's ores are a one-off start)", "item": "gtceu:tungsten_ingot", "without": ["operate:gtceu:ev_vein_drill", "operate:gtceu:steam_vein_drill"], "expect": "not-automatic" },
+    { "id": "auto-merrillite", "label": "Merrillite dust (tripod on Mars)", "item": "gtceu:merrillite_dust" },
+    { "id": "auto-samarium", "label": "Samarium (cascade + GTM's electrolyzer)", "item": "gtceu:samarium_dust" },
+    { "id": "auto-neodymium-cascade", "label": "Neodymium from the cascade (besides the Nether's)", "item": "gtceu:neodymium_dust" },
+    { "id": "auto-deuterium-rich-ice", "label": "Deuterium-rich ice (tripod on Mars; stored for IV)", "item": "gtceu:raw_deuterium_rich_ice" },
+    { "id": "auto-methane-mars", "label": "Methane from the atmosphere processor (Sabatier)", "kind": "recipe", "recipe": "grindless:atmosphere_processing/ev/sabatier" },
+    { "id": "auto-methalox", "label": "Methalox (mixer)", "fluid": "gtceu:methalox" },
+    { "id": "auto-rtm-alloy", "label": "RTM alloy", "item": "gtceu:rtm_alloy_ingot" },
+    { "id": "auto-hull-iv", "label": "IV hull, sustained", "item": "gtceu:iv_machine_hull" }
+  ],
+
+  "eraResources": [
+    {
+      "id": "tungsten",
+      "onlyFrom": ["mars"],
+      "note": "Mars' scheelite vein (veins_mars.json) at the end of EV; tungsten steel opens IV. Exclusivity (EV, 2026-10-25): without Mars no tungsten key is reached (the End's scheelite vein is set aside, Productive Bees' tungsten, scheelite and tungstate combs only process on Mars, and alloy decompositions only give back what went in)."
+    },
+    {
+      "id": "merrillite",
+      "era": "ev-mars",
+      "label": "merrillite (the Martian rare earths)",
+      "items": ["gtceu:*merrillite*"],
+      "onlyFrom": ["mars"],
+      "note": "veins_mars.json's merrillite vein (docs/eras/ev.md, \"What only Mars gives\"): it only comes from Mars and only the extraction cascade splits it."
+    },
+    {
+      "id": "samarium",
+      "era": "ev-mars",
+      "label": "samarium (the cascade, from Martian merrillite)",
+      "items": ["*samarium*"],
+      "onlyFrom": ["mars"],
+      "note": "2026-10-25: samarium leaves Earth (rare_earth_separation without it, GTCA's flsamaric_to_ho without the samarium-terbium mixture: offworld_only.json); the cascade gets it from Martian merrillite. Reserve for LuV's magnets."
+    },
+    {
+      "id": "martian-ice",
+      "era": "ev-mars",
+      "label": "deuterium-rich ice (Mars)",
+      "items": ["gtceu:*deuterium_rich_ice*"],
+      "onlyFrom": ["mars"],
+      "note": "veins_mars.json's ice vein: stored in EV, melted and enriched into heavy water in IV."
+    },
+    {
+      "id": "deuterium",
+      "era": "iv",
+      "label": "deuterium (IV's heavy water, from the Martian ice)",
+      "items": ["fluid:gtceu:deuterium", "gtceu:deuterium_bucket", "*heavy_water*"],
+      "exclude": ["gtceu:*deuterium_rich_ice*"],
+      "onlyFrom": ["mars"],
+      "note": "2026-10-25: hydrogen_separation is removed and both ender air recipes lose their deuterium, so nothing gives it in EV; only tritium separation and fusion (LuV) use it. IV makes heavy water from the Martian ice."
+    },
+    {
+      "id": "radioactives",
+      "era": "iv",
+      "label": "radioactives and radon (IV)",
+      "items": ["*uranium*", "*plutonium*", "*radon*", "*pitchblende*", "*uraninite*"],
+      "note": "docs/eras/ev.md, \"Nothing in EV requires anything from IV\": radioactives, radon and quantum stars open IV. The End's pitchblende vein is held back until IV (veins_excluded.json); on Earth the Nether thorium gives lead and rare earths instead of GTM's uraninite, and the ender air distillation loses its radon (offworld_only.json, decision of 2026-10-25)."
+    },
+    {
+      "id": "quantum",
+      "era": "iv",
+      "label": "quantum eye and quantum star (radon: IV)",
+      "items": ["gtceu:quantum_eye", "gtceu:quantum_star"],
+      "note": "The EV emitter, sensor and field generator need a quantum eye (radon), so they stay in IV; the deep space antenna, the EV creature simulator and the pack's EV circuit assembler use HV ones (decisions of 2026-10-25), so the wither and the nano line need no radon."
+    }
+  ],
+
+  "eraItems": [
+    {
+      "id": "hv-gtm",
+      "exclude": ["gtceu:hv_field_generator", "gtceu:hv_world_accelerator", "gtceu:hv_fluid_drilling_rig"],
+      "note": "In EV (ev.json): GTM's HV field generator (and the world accelerator built on it) needs a quantum eye (radon, IV); GTM's HV fluid drilling rig needs titanium and tungsten carbide gears, so it arrives with Mars (group ev-mars)."
+    },
+    {
+      "id": "ev-gtm",
+      "label": "GTM's EV machines, parts and components (gtceu:ev_*; what needs a quantum eye or tungsten stays in IV)",
+      "items": ["gtceu:ev_*"],
+      "exclude": ["gtceu:ev_emitter", "gtceu:ev_sensor", "gtceu:ev_field_generator", "gtceu:ev_laser_engraver", "gtceu:ev_scanner", "gtceu:ev_large_miner"],
+      "note": "GTM's EV emitter, sensor and field generator need a quantum eye (radon, IV), and so do the laser engraver and the scanner built from them; the large miner needs tungsten gears and IV circuits. They stay in IV (docs/eras/ev.md). Decisions of 2026-10-25 (C1): the pack's EV circuit assembler (the nano line and the gate's nano computers) and EV creature simulator (the wither) take an HV emitter and sensor instead, so they are EV items."
+    },
+    {
+      "id": "ev-multiblocks",
+      "label": "EV multiblocks formed: ours and GTM's that the tier models (the atmosphere processor is built before Mars: its controller travels in the first visit's kit)",
+      "items": [
+        "m:gtceu:platinum_plant", "m:gtceu:regolith_cell", "m:gtceu:cryogenic_plant", "m:gtceu:ev_vein_drill", "m:gtceu:lunar_solar_array", "m:gtceu:deep_space_antenna",
+        "m:gtceu:sealed_dome", "m:gtceu:extraction_cascade", "m:gtceu:atmosphere_processor", "m:gtceu:electric_blast_furnace@ev-nichrome", "m:gtceu:vacuum_freezer@ev2",
+        "m:gtceu:large_chemical_reactor@ev2", "m:gtceu:distillation_tower@ev2"
+      ]
+    },
+    {
+      "id": "ev-moon",
+      "label": "The Moon base: bricks, regolith, the cell's anode and charge, the radiators, the wing panels and the titanium bit",
+      "items": [
+        "grindless:sintered_regolith", "gtceu:lunar_regolith_dust", "grindless:platinum_electrode", "grindless:molten_salt_charge", "grindless:night_sky_radiator",
+        "grindless:solar_wing_panel", "grindless:titanium_drill_bit", "fluid:gtceu:liquid_nitrogen"
+      ]
+    },
+    { "id": "ev-drill-moon", "label": "What the tripod needs on the Moon: the bit, the coolant and the lunar samples", "inputsOf": ["grindless:vein_drilling/ev/*_moon_*"] },
+    {
+      "id": "ev-path-mars",
+      "label": "The way to Mars (no tungsten, samarium or deuterium): the chart, the tier 2 rocket's advanced tank and motor, the catalyst and methalox",
+      "items": ["grindless:mars_chart", "gcyr:advanced_fuel_tank", "gcyr:advanced_rocket_motor", "grindless:ruthenium_catalyst", "fluid:gtceu:methalox"]
+    },
+    {
+      "id": "ev-mars",
+      "era": "ev-mars",
+      "label": "What Mars makes: the Martian seed, the samples, and what the Martian tripod, the processor and the cascade need",
+      "items": ["grindless:martian_quantum_seed", "grindless:vein_sample_scheelite_mars", "grindless:vein_sample_merrillite_mars", "grindless:vein_sample_ice_mars", "gtceu:hv_fluid_drilling_rig"],
+      "inputsOf": ["grindless:vein_drilling/ev/*_mars_*", "grindless:atmosphere_processing/ev/*", "grindless:solvent_extraction/ev/*"]
+    },
+    {
+      "id": "ev-b7",
+      "label": "B7 SLOT (optional until merged): the combined-cycle plant and the hot strip mill formed",
+      "items": ["m:gtceu:combined_cycle_plant", "m:gtceu:hot_strip_mill"],
+      "optional": true
+    },
+    {
+      "id": "output-ev",
+      "era": "iv",
+      "label": "EV's output: the gate to IV (IV hull, nano computer, RTM coil, IV motor and pump), which already belongs to IV",
+      "items": ["gtceu:iv_machine_hull", "gtceu:nano_processor_computer", "gtceu:rtm_alloy_coil_block", "gtceu:iv_electric_motor", "gtceu:iv_electric_pump"]
+    }
+  ]
+}
