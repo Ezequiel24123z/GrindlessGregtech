@@ -1,5 +1,5 @@
 // -----------------------------------------------------------------------------------------------
-// GTM Extended Features (extendedfeatures 3.0.0), audited against docs/eras (ev.md, "Decisiones tomadas": no addon may process
+// GTM Extended Features (extendedfeatures 3.0.0), audited against docs/eras (ev.md, "Decisions taken": no addon may process
 // cheaper than GT in its era or undercut the pack's own multiblocks). Its recipes are generated in Java (the jar's data folder has
 // none) and it ships a crafting recipe for ONE controller only, the Large Gas Collector (IV); the other multiblocks and the
 // hatches have none.

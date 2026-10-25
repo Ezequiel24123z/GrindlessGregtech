@@ -1,5 +1,5 @@
 // -----------------------------------------------------------------------------------------------
-// GT Community Additions (gtca 2.2.0), audited against docs/eras (ev.md, "Decisiones tomadas": no addon may process cheaper than
+// GT Community Additions (gtca 2.2.0), audited against docs/eras (ev.md, "Decisions taken": no addon may process cheaper than
 // GT in its era or undercut the pack's own multiblocks; GCYM-style parallel machines wait for IV). The mod has no config switch
 // and builds its recipes in Java, so everything is done here. The numbers were read from the pack's recipe dump.
 //

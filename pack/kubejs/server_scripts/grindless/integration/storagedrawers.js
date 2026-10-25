@@ -1,6 +1,6 @@
 // -----------------------------------------------------------------------------------------------
 // Storage Drawers (storagedrawers): the storage upgrades are the drawer "levels"; the second level is an MV item
-// (docs/eras/mv.md, "Mods e integración": level 2 with aluminium and steel plates). Copper (level 1) stays; the iron upgrade asks
+// (docs/eras/mv.md, "Mods and integration": level 2 with aluminium and steel plates). Copper (level 1) stays; the iron upgrade asks
 // for STEEL PLATES instead of iron ingots and the gold upgrade for ALUMINIUM PLATES instead of gold ingots. Obsidian, diamond,
 // emerald and netherite upgrades are built on top of those drawers and keep their materials. The GregTech Storage Drawers addon
 // (gtstoragedrawers: rubber / treated wood drawers) only adds drawer frames made of GT wood and needs no gate.

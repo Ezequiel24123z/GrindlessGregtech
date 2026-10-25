@@ -1,4 +1,4 @@
-// Gregtech Grindless - "Dimensiones de construcción"
+// Gregtech Grindless - "Building Dimensions"
 //
 // Item names/tooltips for the three travel keys, and the action-bar message shown when a key fails.
 // Kept out of pack/kubejs/assets/grindless/lang/* (owned by another agent) - Minecraft merges

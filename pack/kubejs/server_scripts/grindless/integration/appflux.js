@@ -1,6 +1,6 @@
 // -----------------------------------------------------------------------------------------------
 // Applied Flux (appflux): FE storage in the ME network (FE cells, flux accessor, induction card). It is an MV mod
-// (docs/eras/mv.md, "Mods e integración"): MV circuits and aluminium, and EU -> FE comes from the GregTech converters
+// (docs/eras/mv.md, "Mods and integration"): MV circuits and aluminium, and EU -> FE comes from the GregTech converters
 // (config/gtceu.yaml compat.energy.enableFEConverters = true), never from a generator.
 // Three choke points cover the whole mod (every FE cell >= 4k, the portable cells and the accessor need them):
 //   energy processor   ae2:inscriber (printed silicon + redstone + printed energy processor)  ->  GT assembler, 120 EU/t:

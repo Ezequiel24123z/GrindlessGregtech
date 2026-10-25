@@ -1,4 +1,4 @@
-// Gregtech Grindless - "Dimensiones de construcción": base fluids in the building dimensions
+// Gregtech Grindless - "Building Dimensions": base fluids in the building dimensions
 //
 // (1) GTM 7.5.3's gas collector only has an Air recipe for the Overworld (plus separate
 // nether_air/ender_air recipes gated to those two dimensions - see GTM's own

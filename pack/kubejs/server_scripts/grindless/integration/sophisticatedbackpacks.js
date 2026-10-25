@@ -7,7 +7,7 @@
 //   backpack, tier 3 and 4 stack upgrades) builds on the tier 2 item, so it is gated through it.
 // The recipes keep their own types (sophisticatedcore:upgrade_next_tier, sophisticatedbackpacks:backpack_upgrade), which copy the
 // contents of the old backpack/upgrade into the new one: only the ingredient tags inside `key` are rewritten.
-// Era: MV (docs/eras/mv.md, "Mods e integración").
+// Era: MV (docs/eras/mv.md, "Mods and integration").
 //
 // Rhino: var + function inside every callback that runs more than once (this Rhino throws "redeclaration of var").
 (function () {
