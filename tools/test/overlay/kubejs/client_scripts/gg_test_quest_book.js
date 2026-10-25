@@ -12,7 +12,8 @@
 //   - on 'bookToken': opens the quest book the way FTB Quests does. First ClientQuestFile.openGui(quest, focused) on The
 //     Neutronium Toolbox (the quest window with its claimed rewards), then the chapter maps without a quest window
 //     (openGui(), selectChapter, zoomed out, scrolled to the part to look at): Welcome, Steam Age, the rocket at the end of
-//     HV, the End row of MV and the lunar base in EV. Toasts are cleared before each shot. Screenshots go to kubejs/exported/
+//     HV, the End row of MV, the lunar base in EV, and IV's nuclear half and its planets. Toasts are cleared before each shot.
+//     Screenshots go to kubejs/exported/
 //     (collected with the results).
 // var + function: this Rhino throws "redeclaration of var" for const/let in functions that run more than once.
 ;(function () {
@@ -36,11 +37,15 @@
     { name: 'gg_quest_toolbox', quest: '047B55ED9C952BC9' },
     { name: 'gg_book_welcome', chapter: 'welcome' },
     { name: 'gg_book_steam_age', chapter: 'steam_age' },
-    { name: 'gg_book_hv_rocket', chapter: 'hv_age', x: 34, y: 0 },
-    { name: 'gg_book_mv_end', chapter: 'mv_age', x: 16, y: 6 },
-    { name: 'gg_book_ev_age', chapter: 'ev_age' }
+    { name: 'gg_book_hv_rocket', chapter: 'hv_age', x: 20, y: 0 },
+    { name: 'gg_book_mv_end', chapter: 'mv_age', x: 14, y: 6 },
+    { name: 'gg_book_ev_age', chapter: 'ev_age' },
+    { name: 'gg_book_iv_age', chapter: 'iv_age', x: 10, y: -1.5 },
+    { name: 'gg_book_iv_planets', chapter: 'iv_age', x: 30, y: -2 }
   ]
   var OPEN_TICKS = 60
+  // the Processing Lines group: three of its charts, centred on their middles
+  SHOTS.push({ name: 'gg_book_pl_lv', chapter: 'pl_lv' }, { name: 'gg_book_pl_ev', chapter: 'pl_ev' }, { name: 'gg_book_pl_iv', chapter: 'pl_iv' })
   var c = { holding: false, since: 0, errors: 0, ageField: null, gaveUp: false, tipDone: '', book: null }
 
   function val(key) {
