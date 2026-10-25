@@ -32,6 +32,7 @@ Generators for the pack's own textures. Everything is procedural 16x16 pixel art
 | `Build-ExtractionCascadeTextures.ps1` | Writes the face of the EV rare-earth extraction cascade: three mixer-settler stages seen through a sight glass, kerosene over the lilac chloride solution, and the taps of the three chlorides. `-Preview <png outside the repo>`, `-Casing <png>` (preview context) and `-Credits`. |
 | `Build-SealedDomeTextures.ps1` | Writes the face of the EV sealed dome, drawn for the sintered regolith brick: a tempered glass dome on dark soil, an LED bar and three plants; while it works, the LEDs shimmer, the leaves sway and O₂ bubbles rise. `-Preview <png>` (×6, with an optional `-Casing <png>`) and `-Credits`. The map is `$SdDome` and the colours `$SdPal`. |
 | `Build-MarsTravelTextures.ps1` | Writes the Martian vein sample's frame and core (tinted per vein, like the lunar samples). |
+| `Build-EVTripodTextures.ps1` | Writes the EV Tripod Drill's face (`multiblock/ev_tripod/`) and its Solar Wing Panel (`block/ev_tripod/wing_cells`, `wing_frame`). `-Only drill,wing` and `-Credits`. `Build-EVTextures.ps1`'s `drill` set and `Build-EVPreview.ps1` still draw the discarded Earth EV drill (`multiblock/ev_vein_drill/`) and the tungsten steel bit; nothing uses them. |
 
 ## Regenerate
 

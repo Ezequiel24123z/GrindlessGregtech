@@ -14,6 +14,6 @@
     { "id": "gtceu:pitchblende_vein_end", "until": "IV", "reason": "End vein of pitchblende and uraninite: radioactive, nobody asks for it before IV (docs/eras/hv.md, decisions)." }
   ],
   "dimensions": [
-    { "ids": ["gcyr:luna", "gcyr:mars", "gcyr:venus", "gcyr:mercury"], "until": "their era", "reason": "Space dimensions of Gregicality Rocketry. GCYR's own 12 veins (Earth materials) are removed from the worldgen since v0.5.0 (server_scripts/grindless/moon/worldgen.js). The Moon has ours (data/grindless/tables/veins_moon.json: grindless:ilmenite_vein_moon); it is drilled by the Lunar Drill with its own recipe type, gtceu:lunar_drilling, not by a gtceu:vein_drilling recipe, and gg_test_moon.js checks it. Mars, Venus and Mercury get their veins with their era." }
+    { "ids": ["gcyr:venus", "gcyr:mercury"], "until": "their era", "reason": "Space dimensions of Gregicality Rocketry that have no veins of ours yet. GCYR's own 12 veins (Earth materials) are removed from the worldgen since v0.5.0 (server_scripts/grindless/moon/worldgen.js). The Moon (veins_moon.json) and Mars (veins_mars.json) have ours, and the EV Tripod Drill drills them with gtceu:vein_drilling recipes, so they are no longer excluded (2026-10-25). Venus and Mercury get their veins with their era (IV)." }
   ]
 }

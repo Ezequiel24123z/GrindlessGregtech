@@ -81,14 +81,26 @@ AE2 is the backbone between planets (the user's decision), and improving it is a
 
 ## Automatic resource generation
 
-### EV tripod: `gtceu:ev_vein_drill` (Moon and Mars)
+### EV tripod: `gtceu:ev_vein_drill` "EV Tripod Drill" (Moon and Mars)
 
-- **New shape and parts.** Three Titanium Frame legs on sintered brick footings, a stable Titanium casing body raised up high, a Titanium pipe run between the legs, and two solar panel wings. Input bus (bit and sample), 2 output buses (one ME), 1 fluid hatch (Liquid Nitrogen) and 1–2 EV hatches.
-- **Registration.** Type `gtceu:vein_drilling`, the spec, the LV-to-HV veto and the scratch code (`ev/family_multis.js`, `bores` with a cap of 64, tested on server): they change the pattern and the bit.
-- **Veins.** The lunar ones from HV (`.dimension('gcyr:luna')`) and, at the end, the three Martian ones (`.dimension('gcyr:mars')`). None from Earth: the HV drill still handles that.
-- **Rules.** Dry, the bit wears out twice as fast; with 50 mB of Liquid Nitrogen per run, same as with mud. By day, the wings cover half the energy on the Moon and almost none on Mars (modifier by dimension and time; verify that it can lower EU/t).
-- **Titanium Drill Bit** (`grindless:titanium_drill_bit`: HV left it registered and hidden for old worlds, with a 1:1 conversion into the Stainless Steel one; in EV it is a drill bit again and the conversion is removed): ~1% per run dry and ~0.25% with Liquid Nitrogen (figures to be tuned). The Titanium it extracts pays for it. The Tungsten Steel one moves to IV.
-- **Beats the lunar drill:** cap of 64, direct output home, and it drills Mars. It is crafted with the lunar drill inside, plus an EV hull, 2 motors and 1 EV pump, 2 EV circuits and Titanium plates.
+Built on 2026-10-25 (run `b1-ev-tripod-2`, on the Moon).
+
+- **Shape and parts** (9×9×6):
+  - three titanium-frame legs on sintered regolith footings;
+  - a raised 3×3×3 stable titanium body;
+  - a titanium pipe drill string into a sintered collar;
+  - two 3×3 wings of Solar Wing Panels (`grindless:solar_wing_panel`: titanium frame + 2 silicon wafers + tempered glass, 480 EU/t);
+  - a mast.
+  
+  Parts: 1–2 energy hatches, 1 input bus (bit and sample), 1–2 output buses and 1 input hatch (liquid nitrogen). ME parts fit.
+- **Registration.** Type `gtceu:vein_drilling`, but it runs only its own `vein_drilling/ev/` recipes. Every LV, MV and HV drill and greenhouse skips any folder above its own tier (the generic veto in `lv/multis.js`). The cap is 64: one EV hatch runs 64 bores in 100 ticks.
+- **Veins.** Its recipes come from every vein table whose dimension is `gcyr:luna` or `gcyr:mars`, each with that dimension; `veins_mars.json` joins with no code. None from Earth: the HV drill still handles that. The regolith's helium-3 stays with the Lunar Drill, because the tripod has no fluid output and the cell takes the regolith over.
+- **Rules.**
+  - **Dry:** 3.75 raw ores per bore and about 1% bit wear.
+  - **With 50 mB of liquid nitrogen per bore:** 5.625 ores (+50%) and 0.25% wear. A dry bore waits while the hatch holds at least one bore's worth of nitrogen.
+  - **Wings:** by day they multiply the EU/t by 0.5 on the Moon and 0.85 on Mars, after the overclock. Cheaper, never faster; seen on the Moon: 1,024 EU/t by day, 2,048 by night.
+- **Titanium Drill Bit** (`grindless:titanium_drill_bit`). It is a drill bit again, made in the EV lathe from a long titanium rod (1,920 EU/t, 10 s). The v0.4.1 conversion into the stainless steel bit is removed, and old bits drill again. A full 64-bore cycle can wear up to 64 bits, because GTM rolls the wear per bore. The Tungsten Steel bit moves to IV.
+- **Beats the lunar drill:** a cap of 64, +50% ore when cooled, direct output home through ME, and it drills Mars. It is crafted from the lunar drill + an EV hull + 2 EV motors + 1 EV pump + 2 EV circuits + 2 titanium plates.
 
 ### The rest
 

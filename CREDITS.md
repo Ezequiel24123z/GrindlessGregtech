@@ -90,6 +90,9 @@ Ideas are not copied as text or as code: they are rebuilt with our rules, and we
 | Mars vein numbers (weight 40, cluster 30, density 0.3, mars layer) | Gregicality Rocketry 0.2.9, `GCYROres.java` and `GCYRWorldGenLayers.java` | LGPL-3.0 | The numbers and the layer; no code copied. |
 | Advanced fuel tank and rocket motor redone in EV with titanium and the Mars chart | Gregicality Rocketry 0.2.9, `MiscRecipes.java`, and the rocket tier rule in `RocketEntity.java` | LGPL-3.0 (the mod is downloaded, not copied) | Its recipes as the base, changed with KubeJS (`integration/gcyr_mars_road.js`). |
 | Venus and Mercury at rocket tier 3 | Gregicality Rocketry 0.2.9, `data/gcyr/gcyr/planets/venus.json` and `mercury.json` | LGPL-3.0 | The files copied with `rocket_tier` changed (`pack/kubejs/data/gcyr/gcyr/planets/`). |
+| EV Tripod Drill: lander drill on three splayed legs with solar wings, drilling dry | `docs/research/space/machines-catalog.md` ("lander drill"); real lunar drills (Apollo Lunar Surface Drill; Honeybee Robotics' TRIDENT on IM-2/PRIME-1) | — (real engineering) | The idea. |
+| Liquid nitrogen as the bit's coolant where there is no water | Cryogenic machining with LN₂ (real practice) | — | The idea. |
+| Solar wings paying part of the drill's energy by day | Lander solar arrays (real) | — | The idea. |
 
 ## Quests
 
@@ -378,3 +381,11 @@ Each of our own textures is recorded here with its origin.
 | `pack/kubejs/assets/grindless/textures/block/multiblock/sealed_dome/overlay_front_active_emissive.png.mcmeta` | Generated with tools/assets/Build-SealedDomeTextures.ps1 (procedural pixel art, original) by the sealed dome agent, 2026-10-25 | the pack's licence (pending; proposed CC BY-SA 4.0) |
 | `pack/kubejs/assets/grindless/textures/item/martian_vein_sample_frame.png` | Generated with tools/assets/Build-MarsTravelTextures.ps1 (procedural pixel art, original) by the mars-travel agent, 2026-10-25 | the pack's licence (pending; proposed CC BY-SA 4.0) |
 | `pack/kubejs/assets/grindless/textures/item/martian_vein_sample_core.png` | Generated with tools/assets/Build-MarsTravelTextures.ps1 (procedural pixel art, original) by the mars-travel agent, 2026-10-25 | the pack's licence (pending; proposed CC BY-SA 4.0) |
+| `pack/kubejs/assets/grindless/textures/block/multiblock/ev_tripod/overlay_front.png` | Generated with tools/assets/Build-EVTripodTextures.ps1 (procedural pixel art, original) by the ev-tripod agent, 2026-10-25 | the pack's licence (pending; proposed CC BY-SA 4.0) |
+| `pack/kubejs/assets/grindless/textures/block/multiblock/ev_tripod/overlay_front_active.png` | Generated with tools/assets/Build-EVTripodTextures.ps1 (procedural pixel art, original) by the ev-tripod agent, 2026-10-25 | the pack's licence (pending; proposed CC BY-SA 4.0) |
+| `pack/kubejs/assets/grindless/textures/block/multiblock/ev_tripod/overlay_front_active.png.mcmeta` | Generated with tools/assets/Build-EVTripodTextures.ps1 (procedural pixel art, original) by the ev-tripod agent, 2026-10-25 | the pack's licence (pending; proposed CC BY-SA 4.0) |
+| `pack/kubejs/assets/grindless/textures/block/multiblock/ev_tripod/overlay_front_active_emissive.png` | Generated with tools/assets/Build-EVTripodTextures.ps1 (procedural pixel art, original) by the ev-tripod agent, 2026-10-25 | the pack's licence (pending; proposed CC BY-SA 4.0) |
+| `pack/kubejs/assets/grindless/textures/block/multiblock/ev_tripod/overlay_front_active_emissive.png.mcmeta` | Generated with tools/assets/Build-EVTripodTextures.ps1 (procedural pixel art, original) by the ev-tripod agent, 2026-10-25 | the pack's licence (pending; proposed CC BY-SA 4.0) |
+| `pack/kubejs/assets/grindless/textures/block/ev_tripod/wing_cells.png` | Generated with tools/assets/Build-EVTripodTextures.ps1 (procedural pixel art, original) by the ev-tripod agent, 2026-10-25 | the pack's licence (pending; proposed CC BY-SA 4.0) |
+| `pack/kubejs/assets/grindless/textures/block/ev_tripod/wing_frame.png` | Generated with tools/assets/Build-EVTripodTextures.ps1 (procedural pixel art, original) by the ev-tripod agent, 2026-10-25 | the pack's licence (pending; proposed CC BY-SA 4.0) |
+| `pack/kubejs/assets/grindless/models/block/ev_tripod/solar_wing_panel.json` | Hand-written block model (original) by the ev-tripod agent, 2026-10-25 | the pack's licence (pending; proposed CC BY-SA 4.0) |
