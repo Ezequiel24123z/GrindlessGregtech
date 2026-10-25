@@ -1,0 +1,51 @@
+{
+  "_source": "Our own table: Mars (gcyr:mars, Gregicality Rocketry 0.2.9) generates only these three veins. GCYR's own six Mars veins (tungstate, iron, nickel, copper, zinc and a rare-earth one of monazite, molybdenite, bastnasite and neodymium) were Earth materials and are removed: server_scripts/grindless/mars/travel.js takes out every vein of any mod that would generate only on Mars, and moon/worldgen.js every other GCYR vein (since v0.5.0). The materials are GTM 7.5.3 ones plus two of ours: merrillite (startup_scripts/grindless/ev/foundation.js) and deuterium_rich_ice (startup_scripts/grindless/mars/travel.js); every one has a mars ore (gtceu:mars_<material>_ore, GCYR's 'mars' ore tag prefix). The dimension, the layer and the stone were read in GCYR's source (data/gcyr/dimension/mars.json, worldgen/noise_settings/mars.json: default block gcyr:martian_rock, GCYRWorldGenLayers.MARS: a BlockMatchTest on gcyr:martian_rock for gcyr:mars).",
+  "_how_it_is_used": [
+    "Same format as veins_moon.json (kind 'ore' only), so the readers of the lunar table read this one unchanged. Loaded by startup_scripts/grindless/mars/travel.js as global.grindless.tables.veins_mars: it feeds the Mars vein sample items. server_scripts/grindless/mars/travel.js adds the veins to Mars (GTCEuServerEvents.oreVeins), so the first visit finds them, makes the sample recipes and publishes global.grindless.mars.martianVeins() (normalized like global.grindless.moon.lunarVeins()). The EV tripod (gtceu:ev_vein_drill) reads every vein table whose dimension is gcyr:luna or gcyr:mars and generates its drilling recipes from them, with .dimension('gcyr:mars').",
+    "gtm = registry id of the vein; layer = GCYR's 'mars' layer (the ores replace gcyr:martian_rock); minY/maxY = heightRangeUniform; spawnWeight = vein weight; clusterSize and density = GCYR's own Mars numbers; materials = the layered generator (weight and size of every material); the drill splits its raw ores by the same weights (same maths as veins.json).",
+    "id = sample suffix (grindless:vein_sample_<id>), following the registry rule of the other tables: grindless:scheelite_vein_mars -> sample grindless:vein_sample_scheelite_mars (the validator and the coverage test derive it the same way). grindless:vein_sample_scheelite (no suffix) is the old End sample, kept for old saves: it is not this one.",
+    "Sample recipes: the empty vein probe + the two most common raw ores of the vein (unique among every vein of the pack), gathered by hand on the first visit, like the Moon ones.",
+    "colorMaterial = the material of the vein's surface indicator rocks; color = tint of the Mars sample core.",
+    "stone = the inert byproduct of a drilling run (gcyr:martian_cobblestone, what Martian rock drops): it can be thrown away.",
+    "Mars only gives its own (docs/eras/ev.md, 'Mars, end of EV'): tungsten, the rare earths of merrillite and deuterium-rich ice. The other materials of each vein are the minerals they really grow with."
+  ],
+  "dimension": "gcyr:mars",
+  "veins": [
+    {
+      "id": "scheelite_mars", "kind": "ore", "gtm": "grindless:scheelite_vein_mars", "generator": "layered", "layer": "mars",
+      "minY": 0, "maxY": 60, "spawnWeight": 40, "clusterSize": 30, "density": 0.3,
+      "colorMaterial": "scheelite", "color": "#D7E8B3",
+      "stone": "gcyr:martian_cobblestone",
+      "_note": "GTM's End scheelite vein (scheelite 3, tungstate 2, lithium 1), moved to Mars: tungsten comes only from here (DECISIONS.md 2026-10-24; validator rule 'Tungsten only from Mars'). Destinations: scheelite and tungstate -> tungsten (HCl bath, electrolysis, EBF) -> tungsten steel and the RTM coil, the gate to IV; lithium (and the lithium of tungstate) -> GTM's lithium lines (batteries). Deeper than the other two: the first visit digs for it.",
+      "materials": [
+        { "id": "scheelite", "weight": 3, "size": [1, 4] },
+        { "id": "tungstate", "weight": 2, "size": [1, 3] },
+        { "id": "lithium", "weight": 1, "size": [1, 1] }
+      ]
+    },
+    {
+      "id": "merrillite_mars", "kind": "ore", "gtm": "grindless:merrillite_vein_mars", "generator": "layered", "layer": "mars",
+      "minY": 20, "maxY": 70, "spawnWeight": 40, "clusterSize": 30, "density": 0.3,
+      "colorMaterial": "merrillite", "color": "#E6CDB4",
+      "stone": "gcyr:martian_cobblestone",
+      "_note": "The rare-earth phosphates of the Martian basalts (shergottites): merrillite, the mineral that holds their rare earths (the EV foundation's material, no decomposition), with apatite and tricalcium phosphate, the phosphates it grows with (also its ore byproducts). Destinations: merrillite -> the rare-earth extraction cascade (samarium only from here, neodymium and the other chlorides); apatite and tricalcium phosphate -> GTM's phosphorus and phosphate lines.",
+      "materials": [
+        { "id": "merrillite", "weight": 3, "size": [1, 4] },
+        { "id": "apatite", "weight": 2, "size": [1, 2] },
+        { "id": "tricalcium_phosphate", "weight": 1, "size": [1, 1] }
+      ]
+    },
+    {
+      "id": "ice_mars", "kind": "ore", "gtm": "grindless:ice_vein_mars", "generator": "layered", "layer": "mars",
+      "minY": 40, "maxY": 80, "spawnWeight": 40, "clusterSize": 30, "density": 0.3,
+      "colorMaterial": "deuterium_rich_ice", "color": "#CFE6F5",
+      "stone": "gcyr:martian_cobblestone",
+      "_note": "Ground ice, shallow (mid-latitude ice sheets and the polar layered deposits lie a few metres down), with the salts that crust Martian soil: deuterium-rich ice (water ice with about five times the D/H of Earth's ocean water: Mars lost most of its hydrogen to space and kept the heavy isotope), gypsum (the north polar dunes are rich in it) and salt (Martian chloride deposits). Destinations: the ice is stored for IV, which melts it and enriches it into heavy water (D2O) for fusion; gypsum -> concrete, or calcium, sulfur and water (GTM's electrolysis); salt -> sodium and chlorine.",
+      "materials": [
+        { "id": "deuterium_rich_ice", "weight": 4, "size": [1, 5] },
+        { "id": "gypsum", "weight": 2, "size": [1, 2] },
+        { "id": "salt", "weight": 1, "size": [1, 1] }
+      ]
+    }
+  ]
+}
