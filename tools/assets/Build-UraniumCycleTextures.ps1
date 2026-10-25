@@ -20,8 +20,8 @@
   under the field and up to the wells. 8 frames, frametime 4: the injection wells are lit IV blue and send pulses of lixiviant
   down the diagonals (opposite wells together, the other pair half a beat later), the production well and its line are lit
   yellow-green (uranyl sulfate) with a pulse running to the header, a yellow loading band rises in each column and resets (the
-  second column half a loop behind the first: lead and lag), and blue pulses run back along the return main. Idle: dark wells,
-  grey lines, empty columns.
+  second column half a loop behind the first: lead and lag), and blue pulses run back along the return main. Idle: unlit wells
+  (a muted blue, the producer olive), grey lines, empty amber resin in the columns.
 
   fuel_fabrication_plant (gtceu:fuel_fabrication_plant, on GTM's clean stainless steel casing): a row of four status lamps
   (press, sinter, pilger, glovebox) along the top, the sintering furnace's window under them, and under that a row of UO2
@@ -29,7 +29,8 @@
   frametime 4: the furnace glows orange (hottest in the middle and at the heaters on top), breathes and shimmers while boats of
   pellets cross its hearth as dark silhouettes; the pellets advance one cell a frame and fill the tube (empty on frame 0, full
   on frame 7, then the next tube) and a green cell lights under each one that is in; the four lamps are lit blue and a brighter
-  one runs along them. Idle: a dark window, an empty tube, dark lamps and cells.
+  one runs along them. Idle: a cold furnace (its heater coils and the boats of pellets on the hearth), an empty tube, unlit lamps
+  and cells.
 
   The *_emissive layers hold only the lit wells, the lit flow and the lit column cells (leach field), and only the furnace glow,
   the lit lamps and the lit progress cells (fuel plant: the pellets and the boats are dark and never glow).
@@ -181,10 +182,10 @@ $IvBlueSpec = 'a=EAFAFF b=BDEBFF c=8FD8FF d=63C2FF e=3FA9FF f=2C86E6 g=2164C2'
 #   wells off: u injection (dark blue), v production (dark olive)     h the return main's deep blue (its pulses run on it)
 #   uranyl sulfate, lit -> dim: x y z w            column cells: q empty resin, r loaded, s the loading front
 $IsrPal = New-Pal ($SteelSpec + ' ' + $IvBlueSpec + ' ' + @'
-k=111A1E l=3B474D L=4A555C h=1B3F78
-u=1C3150 v=343F1A
+k=142228 l=7A8C96 L=8A979E h=1B3F78
+u=3A68A4 v=6E7F2E
 x=EEFF9E y=C3E04A z=86A82A w=58731C
-q=2B2310 r=D8B22A s=FFE46E
+q=5C4A1E r=D8B22A s=FFE46E
 '@)
 
 $IsrBase = @(
@@ -284,16 +285,17 @@ foreach ($x in $IsrColumns) { for ($n = 0; $n -lt $IsrCells; $n++) { [void]$IsrG
 #  y4..8, window x4..12 y5..7: heaters on top, the hearth with its boats below), the pellet tray (x3..5 y11 on a steel tray at
 #  y12), the Zircaloy tube cut open (walls y10 and y12, bore x6..12 y11, end plug x13) and its progress cells (x6..12 y13)
 # ============================================================================================
-#   furnace glow, white-hot -> dark red: h i j k l m       idle window: n glass, w glint, o deep       p a boat of pellets
+#   furnace glow, white-hot -> dark red: h i j k l m       idle window: n glass, w glint, o deep, t a cold heater coil
+#   p a boat of pellets
 #   UO2 pellets: u lit, v shade (they alternate, so the row is seen to move)
 #   Zircaloy (silver with a faint green-grey cast), lit -> dark: 1 2 3 4
 #   off: q progress cell, r / s a status lamp (lit side / shaded side)
 $FuelPal = New-Pal ($SteelSpec + ' ' + $LampSpec + ' ' + $IvBlueSpec + ' ' + @'
 h=FFF6D0 i=FFDA7A j=FFAE45 k=F27F2A l=C9531D m=8C3417
-n=2B2422 w=5C514B o=1F1A19 p=2A201C
-u=7A7168 v=4A433D
+n=3A302C w=8C8078 o=241C1A p=2A201C t=7A5A48
+u=A2988E v=6E655C
 1=E8EBE0 2=C3C7B6 3=A3A795 4=777B6B
-q=1E4029 r=1B2C47 s=142036
+q=2C5A3A r=2F4C7C s=22385E
 '@)
 
 $FuelBase = @(
@@ -323,8 +325,10 @@ $FuelHot = 'hijklm'
 $FuelHotX = 8                                    # the middle of the hot zone
 # The furnace breathes (negative = hotter): one slow swell per loop, out of step with the reactor's pool.
 $FuelBreath = @(0, 0, -1, -1, 0, 0, 1, 1)
-# Idle window: a glint at its top left, the deep at its bottom right.
-$FuelIdleGlass = @{ '5,5' = 'w'; '6,5' = 'w'; '4,6' = 'w'; '12,7' = 'o'; '11,7' = 'o'; '12,6' = 'o' }
+# Idle window (a cold furnace): the heater coils along its top, a glint at its left and the deep at its right, and the boats of
+# pellets standing on the hearth where frame 0 has them.
+$FuelIdleGlass = @{ '4,5' = 't'; '6,5' = 't'; '8,5' = 't'; '10,5' = 't'; '12,5' = 't'; '4,6' = 'w'; '5,6' = 'w'; '12,6' = 'o'; '11,6' = 'o' }
+$FuelIdleBoat = 'v'
 $FuelTrayX = @(3, 4, 5)
 $FuelBoreX = 6; $FuelBoreY = 11; $FuelCells = 7
 $FuelBarY = 13
@@ -352,6 +356,7 @@ function New-FuelFrame {
         } else {
             $key = "$x,$y"
             if ($FuelIdleGlass.ContainsKey($key)) { Set-Px $c $x $y $P[$FuelIdleGlass[$key]] }
+            elseif ($y -eq $FuelGlassY1 -and (Get-Wrap $x 4) -lt 2) { Set-Px $c $x $y $P[$FuelIdleBoat] }
         }
     } }
 
