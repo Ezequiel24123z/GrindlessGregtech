@@ -645,6 +645,17 @@
 			x: 18.0d
 			y: -4.5d
 		}
+		{
+			dependencies: ["53336232501835EE", "715BB49A8BCDE679"]
+			description: ["The cleanroom's filters and fans in one hatch: a GregTech multiblock that takes a maintenance hatch counts as being in a cleanroom with it."]
+			icon: "gtceu:cleaning_maintenance_hatch"
+			id: "12831B49EE204B0B"
+			rewards: [{ id: "290DE13044D4E778", type: "xp", xp: 60 }]
+			tasks: [{ id: "2AB3457DB642C0B2", item: "gtceu:cleaning_maintenance_hatch", type: "item" }]
+			title: "Cleanroom in a Hatch"
+			x: 4.0d
+			y: 4.5d
+		}
 	]
 	title: "HV: Moonshot"
 }
