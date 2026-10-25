@@ -3,13 +3,15 @@
 //
 //   gtceu:fluorspar_kiln        a 3x3x13 rotary kiln of heatproof machine casing on three roller stands (steel frames), turned by a
 //                               gearbox beside it, with a 3x3x6 HF scrubber and condenser of inert machine casing (PTFE packing inside)
-//                               at its hot end. The feed (fluorspar and sulfuric acid) goes in at the cold end, where the controller is;
-//                               the anhydrite drops out under the hot end and the HF leaves the scrubber.
+//                               at its hot end. The feed (fluorspar, sulfuric acid and the quench water) goes in at the cold end, where
+//                               the controller is; the anhydrite is quenched into gypsum and drops out under the hot end, and the HF
+//                               leaves the scrubber.
 //   gtceu:fluorspar_digestion   its recipe type (EU in). One recipe, one charge (server_scripts/grindless/iv/fluorspar_kiln.js):
-//                               3 fluorite dust (gcyr:fluorite, CaF2) + 1,000 mB sulfuric acid -> 2,000 mB hydrofluoric acid + 8 gypsum
-//                               dust, at GTM's own acid attack on a calcium mineral (phosphoric_acid_from_apatite: 30 EU/t, 64 ticks per
-//                               1,000 mB of acid, 1,920 EU, and 8 gypsum dust per 1,000 mB). The unreacted fluorite goes back to the
-//                               feed inside the kiln, so a charge gives the full 2,000 mB.
+//                               3 fluorite dust (gcyr:fluorite, CaF2) + 1,000 mB sulfuric acid + 2,000 mB water -> 2,000 mB hydrofluoric
+//                               acid + 8 gypsum dust (CaSO4.2H2O), at GTM's own acid attack on a calcium mineral
+//                               (phosphoric_acid_from_apatite: 30 EU/t, 64 ticks, 2,000 mB water and 8 gypsum dust per 1,000 mB of
+//                               acid, 1,920 EU). The unreacted fluorite goes back to the feed inside the kiln, so a charge gives the
+//                               full 2,000 mB.
 //
 // What it gains (rule 4): the pack's only fluorine route that is not silicate electrolysis (decision 10, the fluorine budget). GCYR's
 // fluorite has no decomposition (IV-A1), so the kiln is the only way from fluorite to fluorine: about 61 fluorite give the 40,500 mB of
@@ -17,7 +19,8 @@
 //
 // Charges: the kiln runs many charges at once, each paying GTM's EU/t: up to MAX_CHARGES (256) copies of the recipe, as many as the
 // inputs, the room for the outputs and the energy hatches allow (GTM's ParallelLogic: hatch voltage / 30 EU/t), and NO overclock, so a
-// charge always costs 1,920 EU and takes 64 ticks. One IV energy hatch runs 256 charges at 7,680 EU/t: IV voltage at full feed.
+// charge always costs 1,920 EU and takes 64 ticks. One IV energy hatch runs 256 charges at 7,680 EU/t: IV voltage at full feed. It is
+// the parallel of our drills' `bores` (the EV tripod's) without the overclock step; the fluorite supply is the real limit.
 //
 // Containment: the scrubber keeps the HF. The recipe modifier cancels a run with grindless.machine.fluorspar_kiln.no_voiding while the
 // controller voids fluids (the hot cell's mechanism). Voiding items stays allowed: gypsum is inert (rule 3).
@@ -30,8 +33,9 @@
 //   slices 3-14   the kiln body: a ring of heatproof casing (K) round an air bore (#) on rows 1-3; roller stands of steel frames (T) under
 //                 slices 5, 9 and 13; the drive gearbox (G) beside slice 11 on its own frame
 //   slice 15      the feed head: the controller (S) in the middle of the kiln's end, 8 heatproof casing cells (F) round it
-// The 8 `F` cells take 1-2 energy hatches, 1-2 input buses and 1-2 input hatches (at least 2 stay casing); the 9 `Y` cells take 1-2
-// output buses and 1-2 output hatches (at least 5 stay casing). ME buses and hatches have the same abilities, so they fit.
+// The 8 `F` cells take 1-2 energy hatches, 1-2 input buses and 1-4 input hatches (the acid and the water; at full feed one IV hatch of
+// acid and two of water), and at least 2 stay casing; the 9 `Y` cells take 1-2 output buses and 1-2 output hatches (at least 5 stay
+// casing). ME buses and hatches have the same abilities, so they fit.
 //
 // Textures: overlay dir grindless:block/multiblock/fluorspar_kiln (tools/assets/Build-FluorsparKilnTextures.ps1) on GTM's heatproof
 // casing. Names / tooltips: client_scripts/grindless/iv_fluorspar_kiln_lang.js. Published for the recipe script and the smoke test:
@@ -62,12 +66,12 @@
   FK.machine = MACHINE
   FK.recipeType = 'gtceu:' + TYPE
   FK.maxCharges = MAX_CHARGES
-  // one charge: fluorite in, acid in, HF out, gypsum out
-  FK.maxIO = { itemsIn: 1, itemsOut: 1, fluidsIn: 1, fluidsOut: 1 }
+  // one charge: fluorite in; acid and water in; HF out; gypsum out
+  FK.maxIO = { itemsIn: 1, itemsOut: 1, fluidsIn: 2, fluidsOut: 1 }
   FK.feedParts = {
     energy_input: { min: 1, max: 2 },
     input_bus: { min: 1, max: 2 },
-    input_hatch: { min: 1, max: 2 }
+    input_hatch: { min: 1, max: 4 }
   }
   FK.scrubberParts = {
     output_bus: { min: 1, max: 2 },
