@@ -1,9 +1,11 @@
 // IV features of the validator (2026-10-25): per-machine recipe allowlists (`onlyRecipes`), generators read from their own recipes
 // (synthetic `recipesOf`), the assembly line's research (conditions.research.researchKeys), sibling substages (`eraSiblings`) and
-// planet-only generator rules in the era view.
+// planet-only generator rules in the era view; variants built with an optional part (`requireAbilities`, IV-B6's parallel hatch) and
+// optional parts next to a casing with a minimum.
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import { researchIdOf } from '../lib/normalize.mjs';
+import { structureSelectors } from '../lib/structure.mjs';
 import { gt, gi, gf, mkDump, run, verdicts } from './helpers.mjs';
 
 const dim = (d) => ({ type: 'dimension', dimension: d });
@@ -221,4 +223,79 @@ test('pos_y: an altitude condition in a source (Venus\'s clouds) is met on its p
   assert.equal(verdicts(run(dump, { ...withTrip, synthetic: [] }).out.gate).acid, 'FAIL', 'no trip, no clouds');
   // the steam tier's default ignores unknown conditions too ('*'), so the explicit rule only documents it
   assert.equal(verdicts(run(dump, { ...withTrip, conditions: { dimension: { asKeysFor: ['t:venus'] }, '*': { ignore: true } } }).out.gate).acid, 'PASS');
+});
+
+test('structureSelectors: a casing with a minimum and no maximum fills the rest, so an optional part next to it stays optional', () => {
+  const desc = (casingLimits) => ({
+    slices: [['XXXXS']],
+    symbols: {
+      S: { kind: 'controller' },
+      X: {
+        kind: 'oneOf',
+        options: [
+          { kind: 'blocks', blocks: ['x:casing'], limits: casingLimits },
+          { kind: 'part', ability: 'energy_input', limits: { min: 1, max: 2 } },
+          { kind: 'part', ability: 'parallel_hatch', limits: { max: 1, preview: 1 } },
+        ],
+      },
+    },
+  });
+  const abilities = { energy_input: ['x:hatch'], parallel_hatch: ['x:parallel'] };
+  let { selectors, problems } = structureSelectors(desc({ min: 2 }), abilities, () => true);
+  assert.deepEqual(selectors.map((s) => s.anyOf), [['x:casing'], ['x:hatch']], 'the hot cell before the fix needed the parallel hatch');
+  // an optional part that isn't needed doesn't need its ability configured either
+  ({ selectors, problems } = structureSelectors(desc({ min: 2 }), { energy_input: ['x:hatch'] }, () => true));
+  assert.deepEqual(problems, []);
+  // a capped casing: one casing and two hatches can't fill four cells, so the optional part fills the rest
+  ({ selectors } = structureSelectors(desc({ min: 1, max: 1 }), abilities, () => true));
+  assert.deepEqual(selectors.map((s) => s.anyOf), [['x:casing'], ['x:hatch'], ['x:parallel']]);
+});
+
+test('requireAbilities: a variant built with an optional part its pattern offers needs that part; the base machine doesn\'t', () => {
+  const structures = {
+    't:plant': {
+      id: 't:plant',
+      slices: [['XXXS']],
+      symbols: {
+        S: { kind: 'controller' },
+        X: {
+          kind: 'oneOf',
+          options: [
+            { kind: 'blocks', blocks: ['t:casing'], limits: { min: 1 } },
+            { kind: 'part', ability: 'parallel_hatch', limits: { max: 1, preview: 1 } },
+          ],
+        },
+      },
+    },
+  };
+  const recipes = [gt('t:make_parallel', 't:assembler', { ins: [gi('t:iridium')], outs: [gi('t:parallel')] })];
+  const cfg = ({ variant = {}, worldItems = [] } = {}) => ({
+    tier: 'iv',
+    eraOrder: ['steam', 'iv'],
+    partAbilities: { parallel_hatch: ['t:parallel'] },
+    world: [{ id: 'w', mode: 'manual', bootstrap: true, items: ['t:casing', 't:plant', 't:assembler_m', ...worldItems] }],
+    machines: [
+      { machine: 't:assembler_m', types: ['t:assembler'] },
+      { machine: 't:plant', types: [], partsFromStructure: true },
+      { id: 't:plant@parallel', machine: 't:plant', types: [], partsFromStructure: true, requireAbilities: ['parallel_hatch'], ...variant },
+    ],
+    targets: [
+      { id: 'plant', item: 'm:t:plant' },
+      { id: 'plant-parallel', item: 'm:t:plant@parallel' },
+    ],
+  });
+  const dump = mkDump({ recipes, items: ['t:plant', 't:casing', 't:parallel', 't:iridium', 't:assembler_m'], structures });
+  let r = run(dump, cfg());
+  assert.deepEqual(verdicts(r.out.gate), { plant: 'PASS', 'plant-parallel': 'FAIL' }, 'no iridium, no parallel hatch: only the variant waits');
+  const slot = r.model.g.rules.find((x) => x.name === 'build:t:plant@parallel').slots.find((s) => s.label === 'part «parallel_hatch» (this variant\'s)');
+  assert.ok(slot && slot.cap, 'the part is a capital slot of the variant');
+  assert.ok(!r.model.g.rules.find((x) => x.name === 'build:t:plant').slots.some((s) => /parallel/.test(s.label)), 'the base machine has no parallel slot');
+  assert.deepEqual(r.model.warnings, []);
+  r = run(dump, cfg({ worldItems: ['t:iridium'] }));
+  assert.deepEqual(verdicts(r.out.gate), { plant: 'PASS', 'plant-parallel': 'PASS' });
+  // an ability the pattern doesn't offer, or the config doesn't know, is a config warning
+  r = run(dump, cfg({ variant: { requireAbilities: ['muffler'] } }));
+  const w = r.model.warnings.join('\n');
+  assert.match(w, /requireAbilities «muffler»: t:plant's pattern has no part with that ability/);
+  assert.match(w, /requireAbilities «muffler» isn't in the config's partAbilities/);
 });
