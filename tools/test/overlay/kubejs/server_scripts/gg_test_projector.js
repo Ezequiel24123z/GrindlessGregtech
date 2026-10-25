@@ -1,7 +1,7 @@
 // Gregtech Grindless - test of the Hologram Projector (TEST-ONLY overlay: copied over the instance on the test PC, never shipped).
 //
-// SERVER suite, through the published API (global.grindless.projector) with a test inventory (a vanilla SimpleContainer), and
-// through a Forge FakePlayer for the click wiring:
+// SERVER suite, through the published API (global.grindless.projector) with a test inventory (a JS object with a vanilla
+// Container's methods, see container() below), and through a Forge FakePlayer for the click wiring:
 //   powershell -File tools\test\Invoke-GGTest.ps1 -Suite server `
 //     -Commands 'kubejs custom_command gg_test_projector' -WaitForLog 'GGTEST\|projector\|DONE@@600'
 //
