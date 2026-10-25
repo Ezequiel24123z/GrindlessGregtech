@@ -26,6 +26,8 @@ They are registered under `gtceu:` because that is how GTM registers machines. O
 
 What it gains: unlimited ore, without moving to another vein. No single-block machine generates ore; the steam miner only collects the ore already in the world, and depletes it.
 
+**Virtual mining:** the sample selects an output recipe, not a deposit or coordinates. The Earth drill family generates the same Overworld resources in the Overworld, Flatland (`grindless:flat`) and Void (`grindless:void`), without a physical vein beneath it. A vein's depth in the table selects the required drill bit; it does not constrain the machine's height. Later planetary drills generate their resources in the required dimension, also without a physical vein. GTM's physical miners remain optional collectors, separate from this unlimited recipe-based family.
+
 - **Recipe type:** `gtceu:vein_drilling`. The electric drills from LV up will use the same type.
 - **Inputs of each recipe:**
   - a **vein sample** (`grindless:vein_sample_<vein>`), which is not used up;
