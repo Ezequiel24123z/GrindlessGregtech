@@ -93,7 +93,7 @@ Built on 2026-10-25 (run `b1-ev-tripod-2`, on the Moon).
   - a mast.
   
   Parts: 1–2 energy hatches, 1 input bus (bit and sample), 1–2 output buses and 1 input hatch (liquid nitrogen). ME parts fit.
-- **Registration.** Type `gtceu:vein_drilling`, but it runs only its own `vein_drilling/ev/` recipes. Every LV, MV and HV drill and greenhouse skips any folder above its own tier (the generic veto in `lv/multis.js`). The cap is 64: one EV hatch runs 64 bores in 100 ticks.
+- **Registration.** Type `gtceu:vein_drilling`, but it runs only its own `vein_drilling/ev/` recipes. Every LV, MV and HV drill and greenhouse skips any folder above its own tier (the generic veto in `lv/multis.js`), and the steam ones skip every tier folder (`steam/machines.js`). The cap is 64: one EV hatch runs 64 bores in 100 ticks.
 - **Veins.** Its recipes come from every vein table whose dimension is `gcyr:luna` or `gcyr:mars`, each with that dimension; `veins_mars.json` joins with no code. None from Earth: the HV drill still handles that. The regolith's helium-3 stays with the Lunar Drill, because the tripod has no fluid output and the cell takes the regolith over.
 - **Rules.**
   - **Dry:** 3.75 raw ores per bore and about 1% bit wear.
@@ -104,12 +104,12 @@ Built on 2026-10-25 (run `b1-ev-tripod-2`, on the Moon).
 
 ### The rest
 
-- **Earth.** The HV drill still covers the Overworld, Nether and End, and there is no EV drill on Earth (ore is plentiful: the bottleneck is processing). HV fluid drill (EV hull, ×16) for crude and gas. Air, noble gases, chlorine and acids, as in HV.
+- **Earth.** The HV drill still covers the Overworld, Nether and End, and there is no EV drill on Earth (ore is plentiful: the bottleneck is processing). The MV fluid drill covers crude and gas; GTM's HV fluid drill (×16) takes tungsten carbide gears, so it arrives with Mars, at the end of EV. Air, noble gases, chlorine and acids, as in HV.
 - **Moon.** The regolith is the drills' stone (GCYR moon cobblestone and the other lunar stones) ground in any macerator into `gtceu:lunar_regolith_dust`, and the cell converts it into O₂, metals, volatiles and bricks; the cryogenic plant liquefies whatever is needed.
 - **Mars.** CO₂ from the air, for the processor; the ice goes to the network for IV.
 - **Creatures.** `mobs.json` gains two rows (2026-10-25):
   - **Wither skeleton,** at HV: 480 EU/t, 10 s, 100 mB of biomass + 1 tricalcium phosphate, printed from 8 nether bricks + 8 bone blocks. Circuit 1 gives bones, coal and a skull at 10%; circuit 2 gives only the skull.
-  - **The wither,** at EV: 1,920 EU/t, 30 s, 400 mB of biomass, printed from 3 wither skeleton skulls. It gives 1 Nether Star per cycle, saved for IV.
+  - **The wither,** at EV: 1,920 EU/t, 30 s, 400 mB of biomass, printed from 3 wither skeleton skulls. It gives 1 Nether Star per cycle, saved for IV. The EV creature simulator that makes it takes an HV emitter and an HV sensor (EV's need the quantum eye, which waits for IV).
 - **Closing the loop:** crude, air, salt and Earth ores come from drills; Ilmenite and regolith come from the lunar tripod; Scheelite, rare earths and ice come from the Martian one. The rest is EU.
 
 ## Our multiblocks
@@ -341,7 +341,8 @@ New rules in `tools/analysis/tiers/ev.json`:
 - **Helium-3 from the Moon; Samarium and Deuterium from Mars.** Removed from Earth: `helium_separation` and the He-3 from Nether air (with HV's Moon). On 2026-10-25 also the Samarium (above) and the Deuterium: `hydrogen_separation` is removed, and both ender air recipes (the HV centrifuge and the IV distillation) lose their deuterium. Tungsten from bees only comes out on Mars (`offworld_only.json` `worlds.mars.combs`).
   - **Verified on the v0.5.4 + wave B dump:** only tritium separation and fusion (LuV) use deuterium, so nothing has a source until IV's heavy water from the Martian ice. Tungsten from GTCA's thermal reactor (grossular froth, 30,720 EU/t) is a LuV line (`allowedLate`); alloy decompositions only give back what went in.
   - `gg_test_moon.js` now scans for each world: `earth_mars` and `bees_mars`.
-- **Nothing in EV requires anything from IV.** No Tungsten before Mars (the tier 2 rocket, the suit, the tripod and its bit, the antenna and the Martian half go without it), no radioactives or Quantum Eyes (EV sensors, emitters and field generator stay in IV), no IV circuits, no naquadah, Iridium or Osmium.
+- **Nothing in EV requires anything from IV.** No Tungsten before Mars (the tier 2 rocket, the suit, the tripod and its bit, the antenna and the Martian half go without it), no radioactives or Quantum Eyes (EV sensors, emitters and field generator stay in IV; the EV creature simulator, the antenna and GTM's EV circuit assembler, which the nano circuits of the gate need, take HV ones), no IV circuits, no naquadah, Iridium or Osmium.
+  - **Radioactive leaks cut on Earth (2026-10-25).** GTM's thorium ore (the Nether's beryllium vein) gave uraninite, which opened uranium, radon and the quantum eye from LV on; it now gives lead and rare earth (`offworld_only.json`, "byproducts"). Liquid ender air (IV voltage, which two EV hatches reach) loses its radon along with its deuterium. The other ores with a uraninite byproduct (uraninite, pitchblende, plutonium) are radioactive themselves and held back until IV.
 - **EV in two substages.** The validator splits the era into *Moon* and *Mars*: nothing on the way to Mars can require Tungsten, Samarium or Deuterium.
 - **Site machines.** Every recipe for the cell, the cryogenic plant, the solar array, the antenna and the lunar veins carries `.dimension('gcyr:luna')`; those for the processor and the Martian veins carry `.dimension('gcyr:mars')`. The fuel recipes carry the five air dimensions (ORed; the validator ORs them too since 2026-10-25, `lib/model.mjs`).
 
@@ -392,7 +393,7 @@ Chapter **"EV — Moonbase"** in the eras tab, written in English: about 25 shor
 ## Risks
 
 - **GCYR in-game.** Open bugs on launch and on changing dimension (#91, #122), being tested now; Mars depends on a second flight. Plan B: a travel key to Mars, like the End's, with the same rules.
-- **Shared weather.** GCYR's planets share the Overworld's weather. During a thunderstorm at home, the darker sky makes GTM's day condition fail at noon, so the solar array stops for the storm, on the Moon too (rain does not). Not tested. If it bothers, a day check by game time can replace GTM's condition.
+- **Shared weather (fixed 2026-10-25).** Every dimension with sky light, GCYR's planets included, takes the Overworld's rain and thunder, and full rain alone (not only a storm) makes GTM's day condition (`!level.isNight()`) fail at noon. That stopped the solar array, the Lunar Drill's helium-3 and the tripod's wings during rain at home, and let the antenna run by day. `space/airless_weather.js` keeps every dimension of the other planets dry, so the sky on the Moon and Mars follows the clock alone (bench `airless-weather-1`: Earth at rain 1.00, the Moon and Mars at 0.01).
 - **AE2 across dimensions.** Each bridge needs both ends loaded, and three loaded worlds are a heavy load; power over P2P pays an AE2 tax. If performance cannot keep up, fewer pairs and higher-amperage converters.
 - **Moon base balance.** Chlorine-free Titanium at the Kroll's energy, and liquids at half price at night. If they make the Kroll or the home freezer pointless, they get cut back (the titanium mode yields less; the night discount goes down). Recipe time is never changed.
 - **Leaks when removing resources from Earth.** Ti, W, He-3, Sm and D come out of recipes, ore byproducts and addons. A leak breaks the journey without showing in-game: only the validator sees it.

@@ -16,6 +16,8 @@
 //   <machine>|PARALLEL  the machine ran 4 recipes at once
 //   <machine>|LOOKUP    GTM's recipe lookup finds the right recipe for every sample / sapling / seed (and none for a
 //                       deep-vein sample with a bronze bit)
+//   <drill>|VETO        the steam drill refuses a recipe filed under a tier folder (the EV tripod's lunar recipe, 8 EU/t) that GTM's
+//                       steam modifier alone would run
 //   steam|DONE          last line
 //
 // Both machines are built at once around (8, 101, 2) and (24, 102, 2) in the overworld (chunks 0,0 and 1,0 are
@@ -526,7 +528,7 @@
       var found = db.find(ctrl)
       var got = found ? String(found.id) : 'none'
       if (got !== c.want) {
-        var loose = db.find(ctrl, anyRecipe)
+        var loose = db['find(com.gregtechceu.gtceu.api.capability.recipe.IRecipeCapabilityHolder,java.util.function.Predicate)'](ctrl, anyRecipe)
         bad.push(c.label + ' wanted ' + c.want + ' got ' + got + ' (structural match: ' + (loose ? loose.id : 'none') + ')')
       }
     })
@@ -553,6 +555,35 @@
     return global.grindless.greenhouse.entries.map(function (e) {
       return { label: e.id, inputs: [{ id: e.catalyst, n: 1 }], want: 'grindless:greenhouse/' + e.id }
     })
+  }
+
+  // The steam drill only runs its family's steam recipes (steam/machines.js, steamFamily). With a lunar sample and titanium bits in
+  // its bus, the structural lookup finds the EV tripod's dry recipe (8 EU/t, like every drilling recipe): the family veto must refuse
+  // it, while GTM's steam modifier alone would take it (so the check proves the veto, not the voltage cap).
+  function drillVeto(m, ctrl) {
+    var bus = m.inBus.getInventory()
+    m.outs.forEach(function (b) { clearInventory(b.getInventory()) })
+    clearInventory(bus)
+    bus.insertItem(0, Item.of('grindless:vein_sample_ilmenite_moon', 1), false)
+    bus.insertItem(1, Item.of('grindless:titanium_drill_bit', 4), false)
+    try {
+      // explicit overload: Rhino finds RecipeDB.find(holder, function) ambiguous
+      var recipe = ctrl.getRecipeType().db()['find(com.gregtechceu.gtceu.api.capability.recipe.IRecipeCapabilityHolder,java.util.function.Predicate)'](
+        ctrl, function () { return true })
+      var id = recipe ? String(recipe.id) : 'none'
+      if (!recipe || id.indexOf('/ev/') < 0) {
+        check(m.id, 'VETO', false, 'the structural lookup found no EV tripod recipe for a lunar sample with titanium bits: ' + id)
+        return
+      }
+      var def = ctrl.getDefinition()
+      var ours = def.getRecipeModifier().getModifier(ctrl, recipe).apply(recipe)
+      var steamClass = Java.loadClass('com.gregtechceu.gtceu.common.machine.multiblock.steam.SteamParallelMultiblockMachine')
+      var gtmOnly = steamClass.recipeModifier(ctrl, recipe).apply(recipe)
+      check(m.id, 'VETO', ours === null && gtmOnly !== null, id + ': the family veto ' + (ours === null ? 'refuses it' : 'lets it through') +
+        '; GTM\'s steam modifier alone ' + (gtmOnly === null ? 'refuses it too, so this proves nothing' : 'would run it'))
+    } finally {
+      clearInventory(bus)
+    }
   }
 
   function collect(m, ctrl) {
@@ -605,6 +636,7 @@
       id: DRILL, x: 8, y: 101, z: 2, runTicks: 450,
       inputs: [{ id: 'grindless:vein_sample_iron', n: 1 }, { id: 'grindless:bronze_drill_bit', n: 4 }],
       cases: drillCases,
+      veto: drillVeto,
       runs: function (counts) { return counts['minecraft:cobblestone'] || 0 },
       verify: function (counts) {
         var vein = findVein('iron')
@@ -726,6 +758,13 @@
           runLookup(m, ctrl, m.spec.cases())
         } catch (e) {
           check(m.id, 'LOOKUP', false, 'exception: ' + e)
+        }
+        if (m.spec.veto) {
+          try {
+            m.spec.veto(m, ctrl)
+          } catch (e) {
+            check(m.id, 'VETO', false, 'exception: ' + e)
+          }
         }
         m.phase = 'done'
       }
