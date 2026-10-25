@@ -1,10 +1,10 @@
 {
   "tier": "mv",
-  "title": "Era MV",
+  "title": "MV era",
   "extends": "lv",
   "inheritTargets": true,
   "dropTargets": ["silicio-gt-no-antes-de-mv", "bobina-kanthal-no-antes-de-mv"],
-  "note": "Era MV según docs/eras/mv.md y sus \"Decisiones tomadas\" (que mandan): perforadora y invernadero MV (tope 16 de paralelos), planta de mineral (gtceu:ore_plant, tipo gtceu:ore_processing), biorrefinería (recortable: WARN si falta), broca de acero vanádico, perforadora de fluidos de GTM (gtceu:mv_fluid_drilling_rig) con las vetas de fluido infinitas por config, y el End, que abre en MV (v0.5.0, DECISIONS 2026-10-24: «El End pasa a MV, sin ilmenita ni scheelita»): la llave del End, el ojo de ender y el blaze bajan a MV (docs/viaje.md, «Las vetas del End»), las menas del End son la regla menas-end (un viaje con la llave; solo las vetas con muestra en la tabla de la perforadora: veins_end.json sin la ilmenita, que se va a la Luna, ni la veta de scheelita, que se va a Marte), la perforadora MV corre las vetas del End con lodo y el End es un recurso de MV para la regla de eras. Hereda del LV el mundo, las máquinas y TODOS los objetivos (regresión), salvo las dos comprobaciones de fuga que en MV dejan de ser ciertas (silicio de GT y bobina Kanthal). Energía: eu:mv sale del transformador LV->MV (4 A -> 1 A) sobre la red LV, de la turbina de vapor MV o de los generadores de combustible; eu:hv, del transformador MV->HV; no se modelan cables, amperios ni baterías. Las máquinas de un bloque gtceu:mv_* (del registro) corren recetas de hasta 128 V; los multibloques eléctricos con 2 o más escotillas de energía del mismo nivel suben un escalón (GTM 7.5.3, WorkableElectricMultiblockMachine.getMaxVoltage): 2 escotillas MV = 512 V (HV), y por eso el EBF con 2 escotillas MV corre las recetas de 480 EU/t (acero inoxidable, Kanthal) que no caben en una máquina MV de un bloque; el EBF también depende de la bobina (cuproníquel 1 800 K, Kanthal 2 700 K, +100 K por escalón sobre MV). El petróleo sale de los yacimientos de fluido del volcado (fluid_veins.json) que admiten la dimensión de la fábrica, y solo se sostiene con worldgen.oreVeins.infiniteBedrockOresFluids = true (config.json). La escotilla de mantenimiento solo se exige con machines.enableMaintenance = true (también de config.json). El cromo sale del rubí por electrólisis: la planta no procesa gemas y la cromita solo está en el End. La escotilla de energía HV es opcional (WARN): pide un ensamblador HV y un chip LPIC de cámara limpia, o sea que ya es de HV.",
+  "note": "MV era per docs/eras/mv.md and its \"Decisions taken\" (which rule): MV drill and greenhouse (16-parallel cap), ore plant (gtceu:ore_plant, type gtceu:ore_processing), bio-refinery (trimmable: WARN if missing), vanadium steel drill bit, GTM's fluid drilling rig (gtceu:mv_fluid_drilling_rig) with fluid veins made infinite by config, and the End, which opens in MV (v0.5.0, DECISIONS 2026-10-24: \"The End moves to MV, with no ilmenite or scheelite\"): the End's key, the eye of ender and blaze drop to MV (docs/journey.md, \"The End's veins\"), the End's ores follow the menas-end rule (a trip with the key; only veins with a sample in the drill's table: veins_end.json without ilmenite, which moves to the Moon, or the scheelite vein, which moves to Mars), the MV drill runs the End's veins with mud, and the End is an MV resource for the era rule. It inherits from LV the world, the machines and ALL the targets (regression), except the two leak checks that stop holding true in MV (GT's silicon and the Kanthal coil). Energy: eu:mv comes from the LV->MV transformer (4 A -> 1 A) on the LV grid, from the MV steam turbine or from combustion generators; eu:hv, from the MV->HV transformer; cables, amperage and batteries aren't modeled. Single-block gtceu:mv_* machines (from the registry) run recipes up to 128 V; electric multiblocks with 2 or more energy hatches of the same tier raise it one step (GTM 7.5.3, WorkableElectricMultiblockMachine.getMaxVoltage): 2 MV hatches = 512 V (HV), which is why the EBF with 2 MV hatches runs the 480 EU/t recipes (stainless steel, Kanthal) that don't fit in a single-block MV machine; the EBF also depends on its coil (cupronickel 1,800 K, Kanthal 2,700 K, +100 K per step above MV). Oil comes from the dump's fluid deposits (fluid_veins.json) that allow the factory's dimension, and is only sustained with worldgen.oreVeins.infiniteBedrockOresFluids = true (config.json). The maintenance hatch is only required with machines.enableMaintenance = true (also config.json). Chromium comes from ruby by electrolysis: the ore plant doesn't process gems and chromite is only in the End. The HV energy hatch is optional (WARN): it needs an HV assembler and a clean room LPIC chip, meaning it already belongs to HV.",
 
   "contexts": ["minecraft:overworld", "grindless:flat", "grindless:void"],
 
@@ -26,7 +26,7 @@
       "via": ["gtceu:mv_fluid_drilling_rig"],
       "fromFluidVeins": { "fluids": ["gtceu:oil", "gtceu:oil_light", "gtceu:oil_medium", "gtceu:oil_heavy", "gtceu:natural_gas"] },
       "sustainedIf": { "config": "worldgen.oreVeins.infiniteBedrockOresFluids", "equals": true },
-      "note": "Perforadora de fluidos de GTM (decisión 2): bombea el yacimiento del chunk (petróleo, petróleo ligero/medio/pesado, gas natural) y solo gasta EU. Cuenta lo que dice el volcado de yacimientos (fluid_veins.json): los de GTM filtran por dimensión (solo Overworld) y los de Llano/Vacío los añade el pack (dimensions_fluids.js). Sin la config de vetas infinitas el yacimiento se agota hasta su mínimo (WARN). La salmuera no se cuenta: su yacimiento solo sale en océanos; la sal sale del mezclador y la electrólisis."
+      "note": "GTM's fluid drilling rig (decision 2): pumps the chunk's deposit (oil, light/medium/heavy oil, natural gas) and only spends EU. It follows the deposit dump (fluid_veins.json): GTM's filter by dimension (Overworld only), and the pack adds Flat's/Void's (dimensions_fluids.js). Without the infinite-veins config the deposit depletes down to its minimum (WARN). Brine isn't counted: its deposit only occurs in oceans; salt comes from the mixer and electrolysis."
     },
     {
       "id": "menas-end",
@@ -36,23 +36,23 @@
       "template": "gtceu:raw_{m}",
       "fromVeins": { "dimensions": ["minecraft:the_end"], "requireRecipe": { "type": "gtceu:vein_drilling", "input": "grindless:vein_sample_{id}" } },
       "materials": [],
-      "note": "Viaje al End con la llave (MV): dos menas de cada veta que el pack ofrece a la perforadora (las que tienen muestra). Las menas salen del registro vivo de vetas (veins.json): si la veta de bauxita del End volviera a generar ilmenita, el viaje la daría y la comprobación ilmenita-no-sale-del-end fallaría. La muestra de la veta se hace con esas 2 menas, y después la perforadora MV (con lodo) las repone."
+      "note": "Trip to the End with the key (MV): two ores from each vein the pack offers to the drill (the ones with a sample). The ores come from the live vein registry (veins.json): if the End's bauxite vein started generating ilmenite again, the trip would give it and the ilmenita-no-sale-del-end check would fail. The vein's sample is made from those 2 ores, and after that the MV drill (with mud) keeps them coming."
     }
   ],
 
   "machines": [
-    { "machine": "gtceu:lv_transformer_1a", "types": [], "note": "Transformador LV <-> MV de GTM (1 A)." },
+    { "machine": "gtceu:lv_transformer_1a", "types": [], "note": "GTM's LV <-> MV transformer (1 A)." },
     { "machine": "gtceu:lv_transformer_2a", "types": [] },
-    { "machine": "gtceu:lv_transformer_4a", "types": [], "note": "Transformador LV -> MV (4 A -> 1 A): la puerta de LV." },
+    { "machine": "gtceu:lv_transformer_4a", "types": [], "note": "LV -> MV transformer (4 A -> 1 A): LV's gate." },
     { "machine": "gtceu:lv_transformer_16a", "types": [] },
-    { "machine": "gtceu:mv_transformer_1a", "types": [], "note": "Transformador MV <-> HV de GTM (1 A)." },
+    { "machine": "gtceu:mv_transformer_1a", "types": [], "note": "GTM's MV <-> HV transformer (1 A)." },
     { "machine": "gtceu:mv_transformer_2a", "types": [] },
-    { "machine": "gtceu:mv_transformer_4a", "types": [], "note": "Transformador MV -> HV (4 A -> 1 A): puerta a HV." },
+    { "machine": "gtceu:mv_transformer_4a", "types": [], "note": "MV -> HV transformer (4 A -> 1 A): gate to HV." },
     { "machine": "gtceu:mv_transformer_16a", "types": [] },
 
-    { "machine": "gtceu:mv_steam_turbine", "types": ["gtceu:steam_turbine"], "needs": ["fluid:gtceu:steam"], "note": "Generador MV de un bloque: quema vapor." },
-    { "machine": "gtceu:mv_combustion", "types": ["gtceu:combustion_generator"], "note": "Generador de combustión MV: diésel, etanol, metanol..." },
-    { "machine": "gtceu:mv_gas_turbine", "types": ["gtceu:gas_turbine"], "note": "Turbina de gas MV: gas natural, gas de madera, gas de refinería..." },
+    { "machine": "gtceu:mv_steam_turbine", "types": ["gtceu:steam_turbine"], "needs": ["fluid:gtceu:steam"], "note": "Single-block MV generator: burns steam." },
+    { "machine": "gtceu:mv_combustion", "types": ["gtceu:combustion_generator"], "note": "MV combustion generator: diesel, ethanol, methanol..." },
+    { "machine": "gtceu:mv_gas_turbine", "types": ["gtceu:gas_turbine"], "note": "MV gas turbine: natural gas, wood gas, refinery gas..." },
 
     {
       "id": "gtceu:electric_blast_furnace@mv-cuproniquel",
@@ -66,7 +66,7 @@
         "gtceu:lv_output_bus", "gtceu:lv_input_hatch", "gtceu:lv_output_hatch", "gtceu:lv_muffler_hatch",
         { "anyOf": ["gtceu:maintenance_hatch"], "onlyIf": { "config": "machines.enableMaintenance", "equals": true } }
       ],
-      "note": "EBF con bobinas de cuproníquel y 2 escotillas MV (su patrón admite hasta 2): GTM lo trata como HV (512 V), así que corre las recetas de 480 EU/t (acero inoxidable, Kanthal) hasta 1 900 K (1 800 K + 100 K por el escalón sobre MV)."
+      "note": "EBF with cupronickel coils and 2 MV hatches (its pattern allows up to 2): GTM treats it as HV (512 V), so it runs the 480 EU/t recipes (stainless steel, Kanthal) up to 1,900 K (1,800 K + 100 K for the step above MV)."
     },
     {
       "id": "gtceu:electric_blast_furnace@lv-kanthal",
@@ -80,7 +80,7 @@
         "gtceu:lv_output_bus", "gtceu:lv_input_hatch", "gtceu:lv_output_hatch", "gtceu:lv_muffler_hatch",
         { "anyOf": ["gtceu:maintenance_hatch"], "onlyIf": { "config": "machines.enableMaintenance", "equals": true } }
       ],
-      "note": "EBF Kanthal con 2 escotillas LV: cuentan como MV (128 V), suficiente para el silicio (2 273 K, 120 EU/t) y la boule, sin ninguna pieza MV de energía. Para lo de 480 EU/t hacen falta 2 escotillas MV."
+      "note": "Kanthal EBF with 2 LV hatches: they count as MV (128 V), enough for silicon (2,273 K, 120 EU/t) and the boule, with no MV energy part at all. For the 480 EU/t recipes, 2 MV hatches are needed."
     },
     {
       "id": "gtceu:electric_blast_furnace@mv-kanthal",
@@ -94,7 +94,7 @@
         "gtceu:lv_output_bus", "gtceu:lv_input_hatch", "gtceu:lv_output_hatch", "gtceu:lv_muffler_hatch",
         { "anyOf": ["gtceu:maintenance_hatch"], "onlyIf": { "config": "machines.enableMaintenance", "equals": true } }
       ],
-      "note": "EBF Kanthal con 2 escotillas MV: HV (512 V) y 2 800 K (2 700 K + 100 K)."
+      "note": "Kanthal EBF with 2 MV hatches: HV (512 V) and 2,800 K (2,700 K + 100 K)."
     },
 
     {
@@ -107,14 +107,14 @@
         "gtceu:lv_output_bus", "gtceu:lv_input_hatch", "gtceu:lv_output_hatch", "gtceu:lv_muffler_hatch",
         { "anyOf": ["gtceu:maintenance_hatch"], "onlyIf": { "config": "machines.enableMaintenance", "equals": true } }
       ],
-      "note": "Horno de pirólisis de GTM (carcasa ULV, cualquier bobina, 1-2 escotillas de energía): con 2 escotillas LV cuenta como MV (128 V), que llega para sus recetas (64-96 EU/t). Se alimenta del invernadero (troncos) y del nitrógeno del aire."
+      "note": "GTM's pyrolysis oven (ULV casing, any coil, 1-2 energy hatches): with 2 LV hatches it counts as MV (128 V), which is enough for its recipes (64-96 EU/t). It's fed by the greenhouse (logs) and nitrogen from air."
     },
     {
       "machine": "gtceu:mv_fluid_drilling_rig",
       "types": [],
       "needs": ["eu:mv"],
       "parts": ["gtceu:solid_machine_casing", "gtceu:steel_frame", "gtceu:mv_energy_input_hatch", ["gtceu:lv_output_hatch", "gtceu:mv_output_hatch"]],
-      "note": "Perforadora de fluidos de GTM (decisión 2): casco de acero, marcos de acero, 1-2 escotillas de energía (la MV la mueve) y una escotilla de salida de fluidos. No tiene recetas: bombea el yacimiento (regla de mundo yacimientos-fluido)."
+      "note": "GTM's fluid drilling rig (decision 2): steel hull, steel frames, 1-2 energy hatches (MV powers it) and a fluid output hatch. It has no recipes: it pumps the deposit (world rule yacimientos-fluido)."
     },
 
     {
@@ -128,7 +128,7 @@
         "gtceu:frostproof_machine_casing", "gtceu:aluminium_frame", "gtceu:steel_pipe_casing", "gtceu:mv_energy_input_hatch",
         "gtceu:mv_input_bus", "gtceu:mv_output_bus", "gtceu:mv_input_hatch"
       ],
-      "note": "Perforadora de vetas MV (escalón de familia): misma spec y misma tabla de vetas que la LV más la del End (veins_end.json, con lodo), carcasa y marcos de aluminio, tope 16 de paralelos con escotilla MV y broca de acero vanádico."
+      "note": "MV vein drill (family step): same spec and same vein table as the LV one plus the End's (veins_end.json, with mud), aluminium casing and frames, 16-parallel cap with an MV hatch and a vanadium steel drill bit."
     },
     {
       "machine": "gtceu:mv_greenhouse",
@@ -141,7 +141,7 @@
         "gtceu:frostproof_machine_casing", "#forge:glass", "minecraft:dirt", "gtceu:mv_energy_input_hatch", "gtceu:mv_input_bus",
         "gtceu:mv_output_bus", "gtceu:mv_input_hatch", "gtceu:mv_output_hatch"
       ],
-      "note": "Invernadero MV: misma spec que el LV con carcasa de aluminio, tope 16 y entrada opcional de CO2 (x1,5 de salida y 100 mB de O2 de vuelta por una escotilla de salida de fluidos)."
+      "note": "MV greenhouse: same spec as LV with aluminium casing, a 16 cap, and an optional CO2 input (x1.5 output and 100 mB of O2 back through a fluid output hatch)."
     },
     {
       "machine": "gtceu:ore_plant",
@@ -154,7 +154,7 @@
         "gtceu:solid_machine_casing", "gtceu:steel_gearbox", "#forge:glass", "gtceu:heatproof_machine_casing", "gtceu:mv_energy_input_hatch",
         "gtceu:mv_input_bus", "gtceu:mv_output_bus", "gtceu:mv_input_hatch"
       ],
-      "note": "Planta de mineral (la del MV): nave de 7x3x4 con trituradora (2 cajas de engranajes), lavado (vidrio) y horno (carcasa termorresistente); 1-2 escotillas de energía, un bus de entrada, 2 buses de salida y 2 escotillas de fluidos (agua o agua destilada, y el reactivo). Mena cruda + agua -> 2 polvos + 3 secundarios + 4 de polvo de piedra."
+      "note": "Ore plant (MV's): a 7x3x4 hull with a crusher (2 gear boxes), washing (glass) and a furnace (heat-resistant casing); 1-2 energy hatches, an input bus, 2 output buses, and 2 fluid hatches (water or distilled water, and the reagent). Raw ore + water -> 2 dusts + 3 byproducts + 4 stone dust."
     },
     {
       "machine": "gtceu:biorefinery",
@@ -168,7 +168,7 @@
         "gtceu:solid_machine_casing", "gtceu:steel_pipe_casing", "gtceu:mv_energy_input_hatch", "gtceu:mv_input_hatch", "gtceu:mv_output_hatch",
         "gtceu:mv_output_bus"
       ],
-      "note": "Biorrefinería (la pieza recortable del MV): columna de 3x3 con capas, una salida por capa; EU/t <= 120. Sin ella, las fracciones salen del alambique una por pasada."
+      "note": "Bio-refinery (the trimmable piece of MV): 3x3 column with layers, one output per layer; EU/t <= 120. Without it, fractions come out of the still one per pass."
     },
     {
       "machine": "gtceu:radio_telescope",
@@ -181,7 +181,7 @@
         "gtceu:frostproof_machine_casing", "gtceu:aluminium_frame", "minecraft:lightning_rod", "gtceu:mv_energy_input_hatch", "gtceu:mv_input_bus",
         "gtceu:mv_output_bus"
       ],
-      "note": "Radiotelescopio (observatory/machines.js): tres antenas de marcos de aluminio con un pararrayos de antena cada una, un tendido de marcos y la caseta de carcasa de aluminio con las piezas; 120 EU/t. Sus condiciones (de noche, sin tormenta; con lluvia sí) no se modelan."
+      "note": "Radio telescope (observatory/machines.js): three aluminium-frame antennas each with an antenna lightning rod, a run of frames, and the aluminium-casing shed with its parts; 120 EU/t. Its conditions (at night, no storm; rain is fine) aren't modeled."
     },
     {
       "machine": "gtceu:engine_test_stand",
@@ -194,7 +194,7 @@
         "gtceu:frostproof_machine_casing", "gtceu:firebricks", "gtceu:aluminium_frame", "gtceu:heatproof_machine_casing", "gtceu:steel_pipe_casing",
         "gtceu:mv_energy_input_hatch", "gtceu:mv_input_bus", "gtceu:mv_output_bus", "gtceu:mv_input_hatch", "gtceu:mv_output_hatch"
       ],
-      "note": "Banco de pruebas de motores (launch_road/engine_test_stand.js, el camino al primer cohete): base de carcasa de aluminio alrededor de un foso de ladrillo refractario, cuatro patas de marco de aluminio, soporte de carcasa termorresistente, línea de tubo de acero y tanques de carcasa de aluminio; 1-2 escotillas de energía. En MV califica los propulsores de potencia (120 EU/t, RP-1 y oxígeno); el encendido del motor (480 EU/t) es de HV (hv.json)."
+      "note": "Engine test stand (launch_road/engine_test_stand.js, the path to the first rocket): aluminium-casing base around a firebrick pit, four aluminium-frame legs, heat-resistant casing support, steel-pipe line and aluminium-casing tanks; 1-2 energy hatches. In MV it qualifies power thrusters (120 EU/t, RP-1 and oxygen); the engine firing (480 EU/t) belongs to HV (hv.json)."
     }
   ],
 
@@ -213,190 +213,190 @@
       "machines": ["gtceu:lv_transformer_1a", "gtceu:lv_transformer_2a", "gtceu:lv_transformer_4a", "gtceu:lv_transformer_16a"],
       "consumes": ["eu:lv"],
       "produces": ["eu:mv"],
-      "note": "Transformador LV -> MV de GTM sobre la red LV (no se modelan amperios: la central LV tiene que crecer para sostener 4 A)."
+      "note": "GTM's LV -> MV transformer on the LV grid (amperage isn't modeled: the LV power plant has to grow to sustain 4 A)."
     },
     {
       "id": "turbina-mv",
       "machines": ["gtceu:mv_steam_turbine"],
       "produces": ["eu:mv"],
-      "note": "La turbina de vapor MV (con needs de vapor) da energía MV: las calderas grandes de bronce (creosota, biomasa) la alimentan."
+      "note": "The MV steam turbine (with a steam need) gives MV energy: the large bronze boilers (creosote, biomass) feed it."
     },
     {
       "id": "generador-combustion-mv",
       "machines": ["gtceu:mv_combustion"],
       "consumes": [{ "fuelOf": "gtceu:combustion_generator", "kind": "fluid" }],
       "produces": ["eu:mv"],
-      "note": "Generador de combustión MV: diésel, etanol, metanol y los demás combustibles líquidos de GTM."
+      "note": "MV combustion generator: diesel, ethanol, methanol and GTM's other liquid fuels."
     },
     {
       "id": "turbina-gas-mv",
       "machines": ["gtceu:mv_gas_turbine"],
       "consumes": [{ "fuelOf": "gtceu:gas_turbine", "kind": "fluid" }],
       "produces": ["eu:mv"],
-      "note": "Turbina de gas MV: gas natural, gas de madera, gas de refinería."
+      "note": "MV gas turbine: natural gas, wood gas, refinery gas."
     },
     {
       "id": "transformador-mv-hv",
       "machines": ["gtceu:mv_transformer_1a", "gtceu:mv_transformer_2a", "gtceu:mv_transformer_4a", "gtceu:mv_transformer_16a"],
       "consumes": ["eu:mv"],
       "produces": ["eu:hv"],
-      "note": "Transformador MV -> HV de GTM sobre la red MV: la central MV de 2 048 EU/t o más sostiene HV."
+      "note": "GTM's MV -> HV transformer on the MV grid: the MV power plant at 2,048 EU/t or more sustains HV."
     }
   ],
 
   "targets": [
-    { "id": "energia-mv", "label": "Energía MV disponible (transformador LV -> MV, turbina o generadores)", "item": "eu:mv" },
-    { "id": "escotilla-energia-mv", "label": "Escotilla de energía MV", "item": "gtceu:mv_energy_input_hatch" },
-    { "id": "bufer-bateria-mv", "label": "Búfer de baterías MV (4x)", "item": "gtceu:mv_battery_buffer_4x" },
-    { "id": "cable-cobre-goma", "label": "Cable de cobre con goma", "item": "gtceu:copper_single_cable" },
-    { "id": "goma", "label": "Goma (caucho crudo + azufre)", "fluid": "gtceu:rubber" },
-    { "id": "turbina-vapor-mv", "label": "Turbina de vapor MV", "item": "gtceu:mv_steam_turbine" },
-    { "id": "generador-combustion-mv", "label": "Generador de combustión MV", "item": "gtceu:mv_combustion" },
-    { "id": "turbina-gas-mv", "label": "Turbina de gas MV", "item": "gtceu:mv_gas_turbine" },
+    { "id": "energia-mv", "label": "MV energy available (LV -> MV transformer, turbine or generators)", "item": "eu:mv" },
+    { "id": "escotilla-energia-mv", "label": "MV energy hatch", "item": "gtceu:mv_energy_input_hatch" },
+    { "id": "bufer-bateria-mv", "label": "MV battery buffer (4x)", "item": "gtceu:mv_battery_buffer_4x" },
+    { "id": "cable-cobre-goma", "label": "Rubber-insulated copper cable", "item": "gtceu:copper_single_cable" },
+    { "id": "goma", "label": "Rubber (raw rubber + sulfur)", "fluid": "gtceu:rubber" },
+    { "id": "turbina-vapor-mv", "label": "MV steam turbine", "item": "gtceu:mv_steam_turbine" },
+    { "id": "generador-combustion-mv", "label": "MV combustion generator", "item": "gtceu:mv_combustion" },
+    { "id": "turbina-gas-mv", "label": "MV gas turbine", "item": "gtceu:mv_gas_turbine" },
 
-    { "id": "motor-mv", "label": "Motor eléctrico MV", "item": "gtceu:mv_electric_motor" },
-    { "id": "piston-mv", "label": "Pistón eléctrico MV", "item": "gtceu:mv_electric_piston" },
-    { "id": "bomba-mv", "label": "Bomba eléctrica MV", "item": "gtceu:mv_electric_pump" },
-    { "id": "brazo-mv", "label": "Brazo robótico MV", "item": "gtceu:mv_robot_arm" },
-    { "id": "cinta-mv", "label": "Cinta transportadora MV", "item": "gtceu:mv_conveyor_module" },
-    { "id": "sensor-mv", "label": "Sensor MV", "item": "gtceu:mv_sensor" },
-    { "id": "emisor-mv", "label": "Emisor MV (esmeralda sin tacha)", "item": "gtceu:mv_emitter" },
+    { "id": "motor-mv", "label": "MV electric motor", "item": "gtceu:mv_electric_motor" },
+    { "id": "piston-mv", "label": "MV electric piston", "item": "gtceu:mv_electric_piston" },
+    { "id": "bomba-mv", "label": "MV electric pump", "item": "gtceu:mv_electric_pump" },
+    { "id": "brazo-mv", "label": "MV robot arm", "item": "gtceu:mv_robot_arm" },
+    { "id": "cinta-mv", "label": "MV conveyor belt", "item": "gtceu:mv_conveyor_module" },
+    { "id": "sensor-mv", "label": "MV sensor", "item": "gtceu:mv_sensor" },
+    { "id": "emisor-mv", "label": "MV emitter (flawless emerald)", "item": "gtceu:mv_emitter" },
 
-    { "id": "macerador-mv", "label": "Macerador MV", "item": "gtceu:mv_macerator" },
-    { "id": "lavador-mv", "label": "Lavador de mineral MV", "item": "gtceu:mv_ore_washer" },
-    { "id": "centrifuga-termica-mv", "label": "Centrífuga térmica MV", "item": "gtceu:mv_thermal_centrifuge" },
-    { "id": "centrifuga-mv", "label": "Centrífuga MV", "item": "gtceu:mv_centrifuge" },
-    { "id": "electrolizador-mv", "label": "Electrolizador MV", "item": "gtceu:mv_electrolyzer" },
-    { "id": "mezclador-mv", "label": "Mezclador MV", "item": "gtceu:mv_mixer" },
-    { "id": "reactor-quimico-mv", "label": "Reactor químico MV", "item": "gtceu:mv_chemical_reactor" },
-    { "id": "ensamblador-mv", "label": "Ensamblador MV (bobinas y escotillas a 120 EU/t)", "item": "gtceu:mv_assembler" },
-    { "id": "ensamblador-circuitos-mv", "label": "Ensamblador de circuitos MV", "item": "gtceu:mv_circuit_assembler" },
-    { "id": "bano-quimico-mv", "label": "Baño químico MV (enfría los lingotes calientes)", "item": "gtceu:mv_chemical_bath" },
-    { "id": "cortador-mv", "label": "Cortador MV (sierra de acero vanádico)", "item": "gtceu:mv_cutter" },
-    { "id": "grabador-laser-mv", "label": "Grabador láser MV (emisor con esmeralda sin tacha)", "item": "gtceu:mv_laser_engraver" },
-    { "id": "trefiladora-mv", "label": "Trefiladora MV", "item": "gtceu:mv_wiremill" },
-    { "id": "curvadora-mv", "label": "Curvadora MV", "item": "gtceu:mv_bender" },
-    { "id": "extrusora-mv", "label": "Extrusora MV", "item": "gtceu:mv_extruder" },
-    { "id": "prensa-formado-mv", "label": "Prensa de formado MV", "item": "gtceu:mv_forming_press" },
-    { "id": "torno-mv", "label": "Torno MV", "item": "gtceu:mv_lathe" },
-    { "id": "alambique-mv", "label": "Alambique MV", "item": "gtceu:mv_distillery" },
-    { "id": "cerveceria-mv", "label": "Cervecería MV", "item": "gtceu:mv_brewery" },
-    { "id": "fermentador-mv", "label": "Fermentador MV", "item": "gtceu:mv_fermenter" },
-    { "id": "autoclave-mv", "label": "Autoclave MV", "item": "gtceu:mv_autoclave" },
-    { "id": "solidificador-mv", "label": "Solidificador de fluidos MV", "item": "gtceu:mv_fluid_solidifier" },
-    { "id": "enlatadora-mv", "label": "Enlatadora MV", "item": "gtceu:mv_canner" },
-    { "id": "simulador-criaturas-mv", "label": "Simulador de criaturas MV (el creeper)", "item": "gtceu:mv_creature_simulator" },
-    { "id": "modelo-creeper", "label": "Modelo de creeper (impreso en el ensamblador)", "item": "grindless:creature_model_creeper" },
-    { "id": "receta-creeper", "label": "Simulador de criaturas MV: creeper -> pólvora (120 EU/t)", "kind": "recipe", "type": "gtceu:creature_simulation", "output": "minecraft:gunpowder" },
+    { "id": "macerador-mv", "label": "MV macerator", "item": "gtceu:mv_macerator" },
+    { "id": "lavador-mv", "label": "MV ore washer", "item": "gtceu:mv_ore_washer" },
+    { "id": "centrifuga-termica-mv", "label": "MV thermal centrifuge", "item": "gtceu:mv_thermal_centrifuge" },
+    { "id": "centrifuga-mv", "label": "MV centrifuge", "item": "gtceu:mv_centrifuge" },
+    { "id": "electrolizador-mv", "label": "MV electrolyzer", "item": "gtceu:mv_electrolyzer" },
+    { "id": "mezclador-mv", "label": "MV mixer", "item": "gtceu:mv_mixer" },
+    { "id": "reactor-quimico-mv", "label": "MV chemical reactor", "item": "gtceu:mv_chemical_reactor" },
+    { "id": "ensamblador-mv", "label": "MV assembler (coils and hatches at 120 EU/t)", "item": "gtceu:mv_assembler" },
+    { "id": "ensamblador-circuitos-mv", "label": "MV circuit assembler", "item": "gtceu:mv_circuit_assembler" },
+    { "id": "bano-quimico-mv", "label": "MV chemical bath (cools hot ingots)", "item": "gtceu:mv_chemical_bath" },
+    { "id": "cortador-mv", "label": "MV cutter (vanadium steel saw)", "item": "gtceu:mv_cutter" },
+    { "id": "grabador-laser-mv", "label": "MV laser engraver (emitter with a flawless emerald)", "item": "gtceu:mv_laser_engraver" },
+    { "id": "trefiladora-mv", "label": "MV wiremill", "item": "gtceu:mv_wiremill" },
+    { "id": "curvadora-mv", "label": "MV bender", "item": "gtceu:mv_bender" },
+    { "id": "extrusora-mv", "label": "MV extruder", "item": "gtceu:mv_extruder" },
+    { "id": "prensa-formado-mv", "label": "MV forming press", "item": "gtceu:mv_forming_press" },
+    { "id": "torno-mv", "label": "MV lathe", "item": "gtceu:mv_lathe" },
+    { "id": "alambique-mv", "label": "MV still", "item": "gtceu:mv_distillery" },
+    { "id": "cerveceria-mv", "label": "MV brewery", "item": "gtceu:mv_brewery" },
+    { "id": "fermentador-mv", "label": "MV fermenter", "item": "gtceu:mv_fermenter" },
+    { "id": "autoclave-mv", "label": "MV autoclave", "item": "gtceu:mv_autoclave" },
+    { "id": "solidificador-mv", "label": "MV fluid solidifier", "item": "gtceu:mv_fluid_solidifier" },
+    { "id": "enlatadora-mv", "label": "MV canner", "item": "gtceu:mv_canner" },
+    { "id": "simulador-criaturas-mv", "label": "MV creature simulator (the creeper)", "item": "gtceu:mv_creature_simulator" },
+    { "id": "modelo-creeper", "label": "Creeper model (printed in the assembler)", "item": "grindless:creature_model_creeper" },
+    { "id": "receta-creeper", "label": "MV creature simulator: creeper -> gunpowder (120 EU/t)", "kind": "recipe", "type": "gtceu:creature_simulation", "output": "minecraft:gunpowder" },
 
-    { "id": "perforadora-mv", "label": "Perforadora de vetas MV (nuestra)", "item": "gtceu:mv_vein_drill" },
-    { "id": "invernadero-mv", "label": "Invernadero MV (nuestro)", "item": "gtceu:mv_greenhouse" },
-    { "id": "planta-menas", "label": "Planta de mineral (nuestra)", "item": "gtceu:ore_plant" },
-    { "id": "biorrefineria", "label": "Biorrefinería (nuestra, recortable)", "item": "gtceu:biorefinery", "optional": true },
-    { "id": "radiotelescopio", "label": "Radiotelescopio (nuestro)", "item": "gtceu:radio_telescope" },
-    { "id": "carta-alunizaje", "label": "Carta del lugar de alunizaje, del radiotelescopio (la que pedirá el primer cohete, HV)", "item": "grindless:lunar_landing_chart" },
-    { "id": "receta-carta-alunizaje", "label": "Radioastronomía: mapa y efemérides (no se gastan) + papel -> carta de alunizaje (de noche y sin tormenta: no modelado)", "kind": "recipe", "type": "gtceu:radio_astronomy", "output": "grindless:lunar_landing_chart", "input": ["grindless:lunar_map", "grindless:lunar_ephemeris"] },
-    { "id": "carta-alunizaje-solo-radiotelescopio", "label": "La carta de alunizaje solo sale del radiotelescopio (la copia pide una carta)", "item": "grindless:lunar_landing_chart", "without": ["operar:gtceu:radio_telescope"], "expect": "unreachable" },
-    { "id": "banco-pruebas-motores", "label": "Banco de pruebas de motores (nuestro, el camino al primer cohete)", "item": "gtceu:engine_test_stand" },
-    { "id": "rp1", "label": "RP-1 (queroseno de cohete: diésel -> queroseno -> RP-1 en el alambique, 120 EU/t)", "fluid": "gtceu:rp_1_rocket_fuel" },
-    { "id": "propulsor-calificado", "label": "Propulsor de potencia calificado (encendido estático MV: 4 propulsores + RP-1 + O2)", "item": "grindless:qualified_power_thruster" },
-    { "id": "receta-encendido-propulsores", "label": "Banco de pruebas: 4 propulsores de potencia + RP-1 + O2 -> 4 calificados + CO2 + agua", "kind": "recipe", "type": "gtceu:static_fire", "output": "grindless:qualified_power_thruster", "input": ["gtceu:power_thruster", "fluid:gtceu:rp_1_rocket_fuel"] },
-    { "id": "propulsor-calificado-solo-banco", "label": "El propulsor calificado solo sale del banco de pruebas", "item": "grindless:qualified_power_thruster", "without": ["operar:gtceu:engine_test_stand*"], "expect": "unreachable" },
-    { "id": "broca-vanadica", "label": "Broca de acero vanádico", "item": "grindless:vanadium_steel_drill_bit" },
-    { "id": "perforadora-fluidos-mv", "label": "Perforadora de fluidos MV (GTM)", "item": "gtceu:mv_fluid_drilling_rig" },
-    { "id": "horno-pirolisis", "label": "Horno de pirólisis (GTM)", "item": "gtceu:pyrolyse_oven" },
-    { "id": "receta-perforacion-broca-vanadica", "label": "Perforadora MV con broca de acero vanádico", "kind": "recipe", "type": "gtceu:vein_drilling", "input": "grindless:vanadium_steel_drill_bit" },
-    { "id": "receta-planta-menas", "label": "Planta de mineral: mena cruda + agua -> polvos + secundarios + ripio", "kind": "recipe", "type": "gtceu:ore_processing" },
-    { "id": "receta-biorrefineria", "label": "Biorrefinería: una fracción orgánica", "kind": "recipe", "type": "gtceu:bio_distillation", "optional": true },
-    { "id": "receta-invernadero-co2", "label": "Invernadero MV con CO2: devuelve O2", "kind": "recipe", "type": "gtceu:greenhouse", "input": "fluid:gtceu:carbon_dioxide", "output": "fluid:gtceu:oxygen" },
+    { "id": "perforadora-mv", "label": "MV vein drill (ours)", "item": "gtceu:mv_vein_drill" },
+    { "id": "invernadero-mv", "label": "MV greenhouse (ours)", "item": "gtceu:mv_greenhouse" },
+    { "id": "planta-menas", "label": "Ore plant (ours)", "item": "gtceu:ore_plant" },
+    { "id": "biorrefineria", "label": "Bio-refinery (ours, trimmable)", "item": "gtceu:biorefinery", "optional": true },
+    { "id": "radiotelescopio", "label": "Radio telescope (ours)", "item": "gtceu:radio_telescope" },
+    { "id": "carta-alunizaje", "label": "Lunar landing chart, from the radio telescope (the one the first rocket will need, HV)", "item": "grindless:lunar_landing_chart" },
+    { "id": "receta-carta-alunizaje", "label": "Radio astronomy: map and ephemeris (not consumed) + paper -> lunar landing chart (at night, no storm: not modeled)", "kind": "recipe", "type": "gtceu:radio_astronomy", "output": "grindless:lunar_landing_chart", "input": ["grindless:lunar_map", "grindless:lunar_ephemeris"] },
+    { "id": "carta-alunizaje-solo-radiotelescopio", "label": "The lunar landing chart only comes from the radio telescope (the copy needs a chart)", "item": "grindless:lunar_landing_chart", "without": ["operate:gtceu:radio_telescope"], "expect": "unreachable" },
+    { "id": "banco-pruebas-motores", "label": "Engine test stand (ours, the path to the first rocket)", "item": "gtceu:engine_test_stand" },
+    { "id": "rp1", "label": "RP-1 (rocket kerosene: diesel -> kerosene -> RP-1 in the still, 120 EU/t)", "fluid": "gtceu:rp_1_rocket_fuel" },
+    { "id": "propulsor-calificado", "label": "Qualified power thruster (MV static firing: 4 thrusters + RP-1 + O2)", "item": "grindless:qualified_power_thruster" },
+    { "id": "receta-encendido-propulsores", "label": "Test stand: 4 power thrusters + RP-1 + O2 -> 4 qualified thrusters + CO2 + water", "kind": "recipe", "type": "gtceu:static_fire", "output": "grindless:qualified_power_thruster", "input": ["gtceu:power_thruster", "fluid:gtceu:rp_1_rocket_fuel"] },
+    { "id": "propulsor-calificado-solo-banco", "label": "The qualified thruster only comes from the test stand", "item": "grindless:qualified_power_thruster", "without": ["operate:gtceu:engine_test_stand*"], "expect": "unreachable" },
+    { "id": "broca-vanadica", "label": "Vanadium steel drill bit", "item": "grindless:vanadium_steel_drill_bit" },
+    { "id": "perforadora-fluidos-mv", "label": "MV fluid drilling rig (GTM)", "item": "gtceu:mv_fluid_drilling_rig" },
+    { "id": "horno-pirolisis", "label": "Pyrolysis oven (GTM)", "item": "gtceu:pyrolyse_oven" },
+    { "id": "receta-perforacion-broca-vanadica", "label": "MV drill with vanadium steel drill bit", "kind": "recipe", "type": "gtceu:vein_drilling", "input": "grindless:vanadium_steel_drill_bit" },
+    { "id": "receta-planta-menas", "label": "Ore plant: raw ore + water -> dusts + byproducts + tailings", "kind": "recipe", "type": "gtceu:ore_processing" },
+    { "id": "receta-biorrefineria", "label": "Bio-refinery: one organic fraction", "kind": "recipe", "type": "gtceu:bio_distillation", "optional": true },
+    { "id": "receta-invernadero-co2", "label": "MV greenhouse with CO2: returns O2", "kind": "recipe", "type": "gtceu:greenhouse", "input": "fluid:gtceu:carbon_dioxide", "output": "fluid:gtceu:oxygen" },
 
-    { "id": "receta-ebf-estable", "label": "EBF con 2 escotillas MV: acero inoxidable (480 EU/t, 1 700 K)", "kind": "recipe", "type": "gtceu:electric_blast_furnace", "output": "gtceu:stainless_steel_ingot" },
-    { "id": "receta-ebf-silicio-kanthal", "label": "EBF Kanthal: 3 SiO2 + 2 carbono -> lingote de silicio caliente (2 273 K, 120 EU/t, CO)", "kind": "recipe", "type": "gtceu:electric_blast_furnace", "output": "gtceu:hot_silicon_ingot", "input": "gtceu:silicon_dioxide_dust" },
-    { "id": "receta-ebf-boule", "label": "EBF Kanthal: polvo de silicio + GaAs -> boule (1 784 K)", "kind": "recipe", "type": "gtceu:electric_blast_furnace", "output": "gtceu:silicon_boule" },
+    { "id": "receta-ebf-estable", "label": "EBF with 2 MV hatches: stainless steel (480 EU/t, 1,700 K)", "kind": "recipe", "type": "gtceu:electric_blast_furnace", "output": "gtceu:stainless_steel_ingot" },
+    { "id": "receta-ebf-silicio-kanthal", "label": "Kanthal EBF: 3 SiO2 + 2 carbon -> hot silicon ingot (2,273 K, 120 EU/t, CO)", "kind": "recipe", "type": "gtceu:electric_blast_furnace", "output": "gtceu:hot_silicon_ingot", "input": "gtceu:silicon_dioxide_dust" },
+    { "id": "receta-ebf-boule", "label": "Kanthal EBF: silicon dust + GaAs -> boule (1,784 K)", "kind": "recipe", "type": "gtceu:electric_blast_furnace", "output": "gtceu:silicon_boule" },
 
-    { "id": "kanthal-lingote", "label": "Lingote de Kanthal", "item": "gtceu:kanthal_ingot" },
-    { "id": "bobina-kanthal", "label": "Bobina Kanthal (ensamblador a 120 EU/t)", "item": "gtceu:kanthal_coil_block" },
-    { "id": "acero-inoxidable", "label": "Lingote de acero inoxidable", "item": "gtceu:stainless_steel_ingot" },
-    { "id": "acero-vanadico", "label": "Lingote de acero vanádico", "item": "gtceu:vanadium_steel_ingot" },
-    { "id": "cromo-polvo", "label": "Polvo de cromo", "item": "gtceu:chromium_dust" },
-    { "id": "receta-cromo-rubi", "label": "Electrolizador MV: polvo de rubí -> cromo y aluminio (60 EU/t)", "kind": "recipe", "type": "gtceu:electrolyzer", "input": "gtceu:ruby_dust", "output": "gtceu:chromium_dust" },
-    { "id": "vanadio-polvo", "label": "Polvo de vanadio", "item": "gtceu:vanadium_dust" },
-    { "id": "niquel-polvo", "label": "Polvo de níquel", "item": "gtceu:nickel_dust" },
-    { "id": "manganeso-polvo", "label": "Polvo de manganeso", "item": "gtceu:manganese_dust" },
-    { "id": "plata-polvo", "label": "Polvo de plata", "item": "gtceu:silver_dust" },
-    { "id": "oro-polvo", "label": "Polvo de oro", "item": "gtceu:gold_dust" },
+    { "id": "kanthal-lingote", "label": "Kanthal ingot", "item": "gtceu:kanthal_ingot" },
+    { "id": "bobina-kanthal", "label": "Kanthal coil (assembler at 120 EU/t)", "item": "gtceu:kanthal_coil_block" },
+    { "id": "acero-inoxidable", "label": "Stainless steel ingot", "item": "gtceu:stainless_steel_ingot" },
+    { "id": "acero-vanadico", "label": "Vanadium steel ingot", "item": "gtceu:vanadium_steel_ingot" },
+    { "id": "cromo-polvo", "label": "Chromium dust", "item": "gtceu:chromium_dust" },
+    { "id": "receta-cromo-rubi", "label": "MV electrolyzer: ruby dust -> chromium and aluminium (60 EU/t)", "kind": "recipe", "type": "gtceu:electrolyzer", "input": "gtceu:ruby_dust", "output": "gtceu:chromium_dust" },
+    { "id": "vanadio-polvo", "label": "Vanadium dust", "item": "gtceu:vanadium_dust" },
+    { "id": "niquel-polvo", "label": "Nickel dust", "item": "gtceu:nickel_dust" },
+    { "id": "manganeso-polvo", "label": "Manganese dust", "item": "gtceu:manganese_dust" },
+    { "id": "plata-polvo", "label": "Silver dust", "item": "gtceu:silver_dust" },
+    { "id": "oro-polvo", "label": "Gold dust", "item": "gtceu:gold_dust" },
 
-    { "id": "silicio-gt", "label": "Lingote de silicio de GT (EBF Kanthal + baño químico)", "item": "gtceu:silicon_ingot" },
-    { "id": "boule", "label": "Boule de silicio", "item": "gtceu:silicon_boule" },
-    { "id": "oblea-silicio", "label": "Oblea de silicio", "item": "gtceu:silicon_wafer" },
-    { "id": "oblea-ilc", "label": "Oblea ILC", "item": "gtceu:ilc_wafer" },
-    { "id": "oblea-ram", "label": "Oblea RAM", "item": "gtceu:ram_wafer" },
-    { "id": "chip-ilc", "label": "Chip ILC", "item": "gtceu:ilc_chip" },
-    { "id": "chip-ram", "label": "Chip RAM", "item": "gtceu:ram_chip" },
+    { "id": "silicio-gt", "label": "GT silicon ingot (Kanthal EBF + chemical bath)", "item": "gtceu:silicon_ingot" },
+    { "id": "boule", "label": "Silicon boule", "item": "gtceu:silicon_boule" },
+    { "id": "oblea-silicio", "label": "Silicon wafer", "item": "gtceu:silicon_wafer" },
+    { "id": "oblea-ilc", "label": "ILC wafer", "item": "gtceu:ilc_wafer" },
+    { "id": "oblea-ram", "label": "RAM wafer", "item": "gtceu:ram_wafer" },
+    { "id": "chip-ilc", "label": "ILC chip", "item": "gtceu:ilc_chip" },
+    { "id": "chip-ram", "label": "RAM chip", "item": "gtceu:ram_chip" },
     { "id": "transistor", "label": "Transistor", "item": "gtceu:transistor" },
-    { "id": "tablero-fenolico", "label": "Placa de circuito fenólica", "item": "gtceu:phenolic_printed_circuit_board" },
+    { "id": "tablero-fenolico", "label": "Phenolic circuit board", "item": "gtceu:phenolic_printed_circuit_board" },
 
-    { "id": "pe-placa", "label": "Placa de polietileno (PE)", "item": "gtceu:polyethylene_plate" },
-    { "id": "pvc-placa", "label": "Placa de PVC", "item": "gtceu:polyvinyl_chloride_plate" },
-    { "id": "etileno", "label": "Etileno (etanol + ácido sulfúrico)", "fluid": "gtceu:ethylene" },
-    { "id": "receta-etileno-etanol", "label": "Reactor químico MV: etanol + ácido sulfúrico -> etileno (120 EU/t)", "kind": "recipe", "type": "gtceu:chemical_reactor", "input": "fluid:gtceu:ethanol", "output": "fluid:gtceu:ethylene" },
-    { "id": "receta-pe", "label": "Reactor químico: etileno + oxígeno -> polietileno fundido", "kind": "recipe", "type": "gtceu:chemical_reactor", "output": "fluid:gtceu:polyethylene" },
-    { "id": "receta-pvc", "label": "Reactor químico: cloruro de vinilo + oxígeno -> PVC fundido", "kind": "recipe", "type": "gtceu:chemical_reactor", "output": "fluid:gtceu:polyvinyl_chloride" },
-    { "id": "cloruro-vinilo", "label": "Cloruro de vinilo", "fluid": "gtceu:vinyl_chloride" },
-    { "id": "etanol", "label": "Etanol", "fluid": "gtceu:ethanol" },
-    { "id": "metanol", "label": "Metanol", "fluid": "gtceu:methanol" },
-    { "id": "diesel", "label": "Diésel", "fluid": "gtceu:diesel" },
-    { "id": "carbon-activado", "label": "Carbón activado (pirólisis con N2)", "item": "gtceu:activated_carbon_dust" },
-    { "id": "filtro-mascara", "label": "Filtro de máscara", "item": "gtceu:mask_filter" },
+    { "id": "pe-placa", "label": "Polyethylene plate (PE)", "item": "gtceu:polyethylene_plate" },
+    { "id": "pvc-placa", "label": "PVC plate", "item": "gtceu:polyvinyl_chloride_plate" },
+    { "id": "etileno", "label": "Ethylene (ethanol + sulfuric acid)", "fluid": "gtceu:ethylene" },
+    { "id": "receta-etileno-etanol", "label": "MV chemical reactor: ethanol + sulfuric acid -> ethylene (120 EU/t)", "kind": "recipe", "type": "gtceu:chemical_reactor", "input": "fluid:gtceu:ethanol", "output": "fluid:gtceu:ethylene" },
+    { "id": "receta-pe", "label": "Chemical reactor: ethylene + oxygen -> molten polyethylene", "kind": "recipe", "type": "gtceu:chemical_reactor", "output": "fluid:gtceu:polyethylene" },
+    { "id": "receta-pvc", "label": "Chemical reactor: vinyl chloride + oxygen -> molten PVC", "kind": "recipe", "type": "gtceu:chemical_reactor", "output": "fluid:gtceu:polyvinyl_chloride" },
+    { "id": "cloruro-vinilo", "label": "Vinyl chloride", "fluid": "gtceu:vinyl_chloride" },
+    { "id": "etanol", "label": "Ethanol", "fluid": "gtceu:ethanol" },
+    { "id": "metanol", "label": "Methanol", "fluid": "gtceu:methanol" },
+    { "id": "diesel", "label": "Diesel", "fluid": "gtceu:diesel" },
+    { "id": "carbon-activado", "label": "Activated carbon (pyrolysis with N2)", "item": "gtceu:activated_carbon_dust" },
+    { "id": "filtro-mascara", "label": "Mask filter", "item": "gtceu:mask_filter" },
 
-    { "id": "integrado-basico", "label": "Circuito integrado básico", "item": "gtceu:basic_integrated_circuit" },
-    { "id": "integrado-bueno", "label": "Circuito integrado bueno (MV)", "item": "gtceu:good_integrated_circuit" },
-    { "id": "integrado-avanzado", "label": "Circuito integrado avanzado (HV)", "item": "gtceu:advanced_integrated_circuit" },
-    { "id": "circuito-hv-etiqueta", "label": "Algún circuito HV (#gtceu:circuits/hv)", "anyOf": ["#gtceu:circuits/hv"] },
+    { "id": "integrado-basico", "label": "Basic integrated circuit", "item": "gtceu:basic_integrated_circuit" },
+    { "id": "integrado-bueno", "label": "Good integrated circuit (MV)", "item": "gtceu:good_integrated_circuit" },
+    { "id": "integrado-avanzado", "label": "Advanced integrated circuit (HV)", "item": "gtceu:advanced_integrated_circuit" },
+    { "id": "circuito-hv-etiqueta", "label": "Any HV circuit (#gtceu:circuits/hv)", "anyOf": ["#gtceu:circuits/hv"] },
 
-    { "id": "traje-casco", "label": "Traje antipeligro: casco", "item": "gtceu:hazmat_headpiece" },
-    { "id": "traje-peto", "label": "Traje antipeligro: peto", "item": "gtceu:hazmat_chestpiece" },
-    { "id": "traje-pantalones", "label": "Traje antipeligro: pantalones", "item": "gtceu:hazmat_leggings" },
-    { "id": "traje-botas", "label": "Traje antipeligro: botas", "item": "gtceu:hazmat_boots" },
+    { "id": "traje-casco", "label": "Hazmat suit: helmet", "item": "gtceu:hazmat_headpiece" },
+    { "id": "traje-peto", "label": "Hazmat suit: chestplate", "item": "gtceu:hazmat_chestpiece" },
+    { "id": "traje-pantalones", "label": "Hazmat suit: leggings", "item": "gtceu:hazmat_leggings" },
+    { "id": "traje-botas", "label": "Hazmat suit: boots", "item": "gtceu:hazmat_boots" },
 
-    { "id": "carcasa-hv", "label": "Carcasa de máquina HV (acero inoxidable)", "item": "gtceu:hv_machine_casing" },
-    { "id": "casco-hv", "label": "Casco HV (carcasa HV, placas de PE, cables de oro)", "item": "gtceu:hv_machine_hull" },
-    { "id": "escotilla-energia-hv", "label": "Escotilla de energía HV (en GTM pide un ensamblador HV a 480 EU/t y un chip LPIC de cámara limpia: ya es de HV)", "item": "gtceu:hv_energy_input_hatch", "optional": true },
-    { "id": "motor-hv", "label": "Motor eléctrico HV", "item": "gtceu:hv_electric_motor" },
-    { "id": "bomba-hv", "label": "Bomba eléctrica HV", "item": "gtceu:hv_electric_pump" },
-    { "id": "transformador-mv-hv", "label": "Transformador MV -> HV (4 A -> 1 A)", "item": "gtceu:mv_transformer_4a" },
-    { "id": "energia-hv", "label": "Energía HV disponible (transformador MV -> HV sobre la red MV)", "item": "eu:hv" },
+    { "id": "carcasa-hv", "label": "HV machine casing (stainless steel)", "item": "gtceu:hv_machine_casing" },
+    { "id": "casco-hv", "label": "HV hull (HV casing, PE plates, gold cables)", "item": "gtceu:hv_machine_hull" },
+    { "id": "escotilla-energia-hv", "label": "HV energy hatch (in GTM it needs an HV assembler at 480 EU/t and a clean room LPIC chip: it already belongs to HV)", "item": "gtceu:hv_energy_input_hatch", "optional": true },
+    { "id": "motor-hv", "label": "HV electric motor", "item": "gtceu:hv_electric_motor" },
+    { "id": "bomba-hv", "label": "HV electric pump", "item": "gtceu:hv_electric_pump" },
+    { "id": "transformador-mv-hv", "label": "MV -> HV transformer (4 A -> 1 A)", "item": "gtceu:mv_transformer_4a" },
+    { "id": "energia-hv", "label": "HV energy available (MV -> HV transformer on the MV grid)", "item": "eu:hv" },
 
-    { "id": "llave-end", "label": "Llave del End (ojo de ender + palo + obsidiana), ya en MV", "item": "grindless:end_key" },
-    { "id": "ojo-ender", "label": "Ojo de ender en MV (blaze del simulador MV -> extractor -> baño químico)", "item": "minecraft:ender_eye" },
-    { "id": "ojo-ender-solo-por-gt", "label": "El ojo de ender solo sale por el baño químico de GT: sin él no hay receta vanilla ni otra", "item": "minecraft:ender_eye", "without": ["gtceu:chemical_bath/eye_of_ender"], "expect": "unreachable" },
-    { "id": "polvo-blaze", "label": "Polvo de blaze en MV", "item": "minecraft:blaze_powder" },
-    { "id": "blaze-liquido", "label": "Blaze líquido (extractor, 144 mB por polvo)", "fluid": "gtceu:blaze" },
-    { "id": "receta-blaze-simulador-mv", "label": "Simulador de criaturas MV: blaze -> varas de blaze", "kind": "recipe", "type": "gtceu:creature_simulation", "output": "minecraft:blaze_rod" },
-    { "id": "menas-end-con-llave", "label": "Menas del End (un viaje con la llave del End): cromita", "item": "gtceu:raw_chromite" },
-    { "id": "menas-end-sin-llave", "label": "Las menas del End no salen sin el viaje que exige la llave", "item": "gtceu:raw_chromite", "without": ["mundo:menas-end"], "expect": "unreachable" },
-    { "id": "ilmenita-no-sale-del-end", "label": "El End ya no da ilmenita: se va a la Luna (en MV no hay ninguna)", "item": "gtceu:raw_ilmenite", "expect": "unreachable" },
-    { "id": "scheelita-no-sale-del-end", "label": "El End ya no da scheelita ni tungstita: se van a Marte", "anyOf": ["gtceu:raw_scheelite", "gtceu:raw_tungstate"], "expect": "unreachable" },
+    { "id": "llave-end", "label": "End key (eye of ender + stick + obsidian), already in MV", "item": "grindless:end_key" },
+    { "id": "ojo-ender", "label": "Eye of ender in MV (MV simulator's blaze -> extractor -> chemical bath)", "item": "minecraft:ender_eye" },
+    { "id": "ojo-ender-solo-por-gt", "label": "The eye of ender only comes through GT's chemical bath: without it there's no vanilla recipe or any other", "item": "minecraft:ender_eye", "without": ["gtceu:chemical_bath/eye_of_ender"], "expect": "unreachable" },
+    { "id": "polvo-blaze", "label": "Blaze dust in MV", "item": "minecraft:blaze_powder" },
+    { "id": "blaze-liquido", "label": "Liquid blaze (extractor, 144 mB per dust)", "fluid": "gtceu:blaze" },
+    { "id": "receta-blaze-simulador-mv", "label": "MV creature simulator: blaze -> blaze rods", "kind": "recipe", "type": "gtceu:creature_simulation", "output": "minecraft:blaze_rod" },
+    { "id": "menas-end-con-llave", "label": "The End's ores (one trip with the End key): chromite", "item": "gtceu:raw_chromite" },
+    { "id": "menas-end-sin-llave", "label": "The End's ores don't come out without the trip the key requires", "item": "gtceu:raw_chromite", "without": ["world:menas-end"], "expect": "unreachable" },
+    { "id": "ilmenita-no-sale-del-end", "label": "The End no longer gives ilmenite: it moves to the Moon (none in MV)", "item": "gtceu:raw_ilmenite", "expect": "unreachable" },
+    { "id": "scheelita-no-sale-del-end", "label": "The End no longer gives scheelite or tungstite: they move to Mars", "anyOf": ["gtceu:raw_scheelite", "gtceu:raw_tungstate"], "expect": "unreachable" },
 
-    { "id": "cpu-16k", "label": "Almacenamiento de crafteo 16k (la CPU con la que se entra a MV)", "item": "ae2:16k_crafting_storage" },
-    { "id": "cpu-64k", "label": "Almacenamiento de crafteo 64k (la CPU que fabrica el motor HV con patrones)", "item": "ae2:64k_crafting_storage" },
-    { "id": "acelerador-crafteo", "label": "Coprocesador de crafteo", "item": "ae2:crafting_accelerator" },
-    { "id": "terminal-inalambrico", "label": "Terminal inalámbrico de AE2 (batería GT + circuito MV)", "item": "ae2:wireless_terminal" },
-    { "id": "terminal-crafteo-inalambrico", "label": "Terminal de crafteo inalámbrico de AE2", "item": "ae2:wireless_crafting_terminal" },
-    { "id": "cofre-ender", "label": "Cofre de ender (perla del simulador + placas de aluminio + circuito MV, sin ojo de ender)", "item": "enderchests:ender_chest" },
-    { "id": "bolsa-ender", "label": "Bolsa de ender (perla del simulador + placas de aluminio + circuito MV)", "item": "enderchests:ender_bag" },
-    { "id": "tanque-ender", "label": "Tanque de ender (perla del simulador + aluminio + circuito MV, sin ojo de ender)", "item": "endertanks:ender_tank" },
-    { "id": "cubo-ender", "label": "Cubo de ender (perla del simulador + placas de aluminio)", "item": "endertanks:ender_bucket" },
-    { "id": "mochila-hierro", "label": "Mochila de hierro (nivel 1: se queda como la trae el mod)", "item": "sophisticatedbackpacks:iron_backpack" },
-    { "id": "mochila-oro", "label": "Mochila de oro (nivel 2 en MV: placas de aluminio)", "item": "sophisticatedbackpacks:gold_backpack" },
-    { "id": "mejora-filtro-avanzada", "label": "Mejora avanzada de filtro de la mochila (nivel 2 en MV)", "item": "sophisticatedbackpacks:advanced_filter_upgrade" },
-    { "id": "mejora-pila-2", "label": "Mejora de pila nivel 2 de la mochila (placas de aluminio)", "item": "sophisticatedbackpacks:stack_upgrade_tier_2" }
+    { "id": "cpu-16k", "label": "16k crafting storage (the CPU that gets you into MV)", "item": "ae2:16k_crafting_storage" },
+    { "id": "cpu-64k", "label": "64k crafting storage (the CPU that makes the HV motor with patterns)", "item": "ae2:64k_crafting_storage" },
+    { "id": "acelerador-crafteo", "label": "Crafting co-processor", "item": "ae2:crafting_accelerator" },
+    { "id": "terminal-inalambrico", "label": "AE2 wireless terminal (GT battery + MV circuit)", "item": "ae2:wireless_terminal" },
+    { "id": "terminal-crafteo-inalambrico", "label": "AE2 wireless crafting terminal", "item": "ae2:wireless_crafting_terminal" },
+    { "id": "cofre-ender", "label": "Ender chest (simulator pearl + aluminium plates + MV circuit, no ender eye)", "item": "enderchests:ender_chest" },
+    { "id": "bolsa-ender", "label": "Ender pouch (simulator pearl + aluminium plates + MV circuit)", "item": "enderchests:ender_bag" },
+    { "id": "tanque-ender", "label": "Ender tank (simulator pearl + aluminium + MV circuit, no eye of ender)", "item": "endertanks:ender_tank" },
+    { "id": "cubo-ender", "label": "Ender cube (simulator pearl + aluminium plates)", "item": "endertanks:ender_bucket" },
+    { "id": "mochila-hierro", "label": "Iron backpack (tier 1: stays as the mod brings it)", "item": "sophisticatedbackpacks:iron_backpack" },
+    { "id": "mochila-oro", "label": "Gold backpack (tier 2, in MV: aluminium plates)", "item": "sophisticatedbackpacks:gold_backpack" },
+    { "id": "mejora-filtro-avanzada", "label": "Advanced backpack filter upgrade (tier 2, in MV)", "item": "sophisticatedbackpacks:advanced_filter_upgrade" },
+    { "id": "mejora-pila-2", "label": "Backpack stack upgrade tier 2 (aluminium plates)", "item": "sophisticatedbackpacks:stack_upgrade_tier_2" }
   ],
 
   "targetsFromVeins": [
     {
       "idPrefix": "muestra-end-",
-      "labelPrefix": "Muestra de la veta del End",
+      "labelPrefix": "End vein sample",
       "dimensions": ["minecraft:the_end"],
       "requireRecipe": { "type": "gtceu:vein_drilling", "input": "grindless:vein_sample_{id}" },
       "target": { "item": "grindless:vein_sample_{id}" }
@@ -406,25 +406,25 @@
   "autoTargetsFromVeins": [
     {
       "idPrefix": "auto-perforacion-mv-",
-      "labelPrefix": "Perforadora MV con broca vanádica: receta de la veta",
+      "labelPrefix": "MV drill with vanadium bit: vein recipe",
       "dimensions": ["minecraft:overworld", "minecraft:the_nether"],
       "requireRecipe": { "type": "gtceu:vein_drilling", "input": "grindless:vein_sample_{id}" },
       "target": { "kind": "recipe", "type": "gtceu:vein_drilling", "input": ["grindless:vein_sample_{id}", "grindless:vanadium_steel_drill_bit"] }
     },
     {
       "idPrefix": "auto-perforacion-mv-end-",
-      "labelPrefix": "Perforadora MV (sin las de vapor ni LV) con lodo: receta de la veta del End",
+      "labelPrefix": "MV drill (without the steam or LV ones) with mud: End vein recipe",
       "dimensions": ["minecraft:the_end"],
       "requireRecipe": { "type": "gtceu:vein_drilling", "input": "grindless:vein_sample_{id}" },
-      "without": ["operar:gtceu:steam_vein_drill", "operar:gtceu:lv_vein_drill"],
+      "without": ["operate:gtceu:steam_vein_drill", "operate:gtceu:lv_vein_drill"],
       "target": { "kind": "recipe", "type": "gtceu:vein_drilling", "input": ["grindless:vein_sample_{id}", "fluid:gtceu:drilling_fluid"] }
     },
     {
       "idPrefix": "auto-mena-end-",
-      "labelPrefix": "Menas exclusivas de la veta del End (con la perforadora MV)",
+      "labelPrefix": "Ores exclusive to the End vein (with the MV drill)",
       "dimensions": ["minecraft:the_end"],
       "requireRecipe": { "type": "gtceu:vein_drilling", "input": "grindless:vein_sample_{id}" },
-      "without": ["operar:gtceu:steam_vein_drill", "operar:gtceu:lv_vein_drill"],
+      "without": ["operate:gtceu:steam_vein_drill", "operate:gtceu:lv_vein_drill"],
       "exclusiveFrom": ["minecraft:overworld", "minecraft:the_nether"],
       "template": "gtceu:raw_{m}",
       "mode": "anyOf"
@@ -432,87 +432,87 @@
   ],
 
   "autoTargets": [
-    { "id": "auto-energia-mv", "label": "Energía MV sostenida", "item": "eu:mv" },
-    { "id": "auto-energia-mv-combustible", "label": "Energía MV solo con generadores de combustible (sin transformador ni turbina de vapor)", "item": "eu:mv", "without": ["sintética:transformador-lv-mv", "sintética:turbina-mv"] },
-    { "id": "auto-energia-hv", "label": "Energía HV sostenida (transformador MV -> HV)", "item": "eu:hv" },
+    { "id": "auto-energia-mv", "label": "Sustained MV energy", "item": "eu:mv" },
+    { "id": "auto-energia-mv-combustible", "label": "MV energy with only combustion generators (no transformer or steam turbine)", "item": "eu:mv", "without": ["synthetic:transformador-lv-mv", "synthetic:turbina-mv"] },
+    { "id": "auto-energia-hv", "label": "Sustained HV energy (MV -> HV transformer)", "item": "eu:hv" },
 
-    { "id": "auto-petroleo", "label": "Petróleo (perforadora de fluidos + vetas infinitas)", "fluid": "gtceu:oil" },
-    { "id": "auto-petroleo-pesado", "label": "Petróleo pesado (perforadora de fluidos)", "fluid": "gtceu:oil_heavy" },
-    { "id": "auto-diesel", "label": "Diésel", "fluid": "gtceu:diesel" },
-    { "id": "auto-etanol", "label": "Etanol (biomasa -> alambique)", "fluid": "gtceu:ethanol" },
-    { "id": "auto-monoxido", "label": "Monóxido de carbono", "fluid": "gtceu:carbon_monoxide" },
-    { "id": "auto-silicio-co", "label": "EBF Kanthal: SiO2 + carbono -> silicio caliente + CO (el CO del silicio), receta usable y sostenible", "kind": "recipe", "type": "gtceu:electric_blast_furnace", "input": "gtceu:silicon_dioxide_dust", "output": "fluid:gtceu:carbon_monoxide" },
-    { "id": "auto-metanol", "label": "Metanol", "fluid": "gtceu:methanol" },
-    { "id": "auto-metanol-monoxido", "label": "Reactor químico: CO + H2 -> metanol, receta usable y sostenible", "kind": "recipe", "type": "gtceu:chemical_reactor", "input": "fluid:gtceu:carbon_monoxide", "output": "fluid:gtceu:methanol" },
-    { "id": "auto-etileno", "label": "Etileno", "fluid": "gtceu:ethylene" },
-    { "id": "auto-receta-etileno-etanol", "label": "Reactor químico MV: etanol + ácido sulfúrico -> etileno, receta usable y sostenible", "kind": "recipe", "type": "gtceu:chemical_reactor", "input": "fluid:gtceu:ethanol", "output": "fluid:gtceu:ethylene" },
-    { "id": "auto-receta-pe", "label": "Reactor químico: polietileno fundido, receta usable y sostenible", "kind": "recipe", "type": "gtceu:chemical_reactor", "output": "fluid:gtceu:polyethylene" },
-    { "id": "auto-receta-pvc", "label": "Reactor químico: PVC fundido, receta usable y sostenible", "kind": "recipe", "type": "gtceu:chemical_reactor", "output": "fluid:gtceu:polyvinyl_chloride" },
-    { "id": "auto-cloro", "label": "Cloro (salmuera)", "fluid": "gtceu:chlorine" },
-    { "id": "auto-hidrogeno", "label": "Hidrógeno", "fluid": "gtceu:hydrogen" },
-    { "id": "auto-azufre", "label": "Polvo de azufre", "item": "gtceu:sulfur_dust" },
-    { "id": "auto-goma", "label": "Goma", "fluid": "gtceu:rubber" },
-    { "id": "auto-oxigeno-invernadero", "label": "Invernadero con CO2: devuelve O2, receta usable y sostenible", "kind": "recipe", "type": "gtceu:greenhouse", "input": "fluid:gtceu:carbon_dioxide", "output": "fluid:gtceu:oxygen" },
+    { "id": "auto-petroleo", "label": "Oil (fluid drilling rig + infinite veins)", "fluid": "gtceu:oil" },
+    { "id": "auto-petroleo-pesado", "label": "Heavy oil (fluid drilling rig)", "fluid": "gtceu:oil_heavy" },
+    { "id": "auto-diesel", "label": "Diesel", "fluid": "gtceu:diesel" },
+    { "id": "auto-etanol", "label": "Ethanol (biomass -> still)", "fluid": "gtceu:ethanol" },
+    { "id": "auto-monoxido", "label": "Carbon monoxide", "fluid": "gtceu:carbon_monoxide" },
+    { "id": "auto-silicio-co", "label": "Kanthal EBF: SiO2 + carbon -> hot silicon + CO (silicon's CO), usable and sustained recipe", "kind": "recipe", "type": "gtceu:electric_blast_furnace", "input": "gtceu:silicon_dioxide_dust", "output": "fluid:gtceu:carbon_monoxide" },
+    { "id": "auto-metanol", "label": "Methanol", "fluid": "gtceu:methanol" },
+    { "id": "auto-metanol-monoxido", "label": "Chemical reactor: CO + H2 -> methanol, usable and sustained recipe", "kind": "recipe", "type": "gtceu:chemical_reactor", "input": "fluid:gtceu:carbon_monoxide", "output": "fluid:gtceu:methanol" },
+    { "id": "auto-etileno", "label": "Ethylene", "fluid": "gtceu:ethylene" },
+    { "id": "auto-receta-etileno-etanol", "label": "MV chemical reactor: ethanol + sulfuric acid -> ethylene, usable and sustained recipe", "kind": "recipe", "type": "gtceu:chemical_reactor", "input": "fluid:gtceu:ethanol", "output": "fluid:gtceu:ethylene" },
+    { "id": "auto-receta-pe", "label": "Chemical reactor: molten polyethylene, usable and sustained recipe", "kind": "recipe", "type": "gtceu:chemical_reactor", "output": "fluid:gtceu:polyethylene" },
+    { "id": "auto-receta-pvc", "label": "Chemical reactor: molten PVC, usable and sustained recipe", "kind": "recipe", "type": "gtceu:chemical_reactor", "output": "fluid:gtceu:polyvinyl_chloride" },
+    { "id": "auto-cloro", "label": "Chlorine (brine)", "fluid": "gtceu:chlorine" },
+    { "id": "auto-hidrogeno", "label": "Hydrogen", "fluid": "gtceu:hydrogen" },
+    { "id": "auto-azufre", "label": "Sulfur dust", "item": "gtceu:sulfur_dust" },
+    { "id": "auto-goma", "label": "Rubber", "fluid": "gtceu:rubber" },
+    { "id": "auto-oxigeno-invernadero", "label": "Greenhouse with CO2: returns O2, usable and sustained recipe", "kind": "recipe", "type": "gtceu:greenhouse", "input": "fluid:gtceu:carbon_dioxide", "output": "fluid:gtceu:oxygen" },
 
-    { "id": "auto-broca-vanadica", "label": "Broca de acero vanádico (la perforadora paga su broca)", "item": "grindless:vanadium_steel_drill_bit" },
-    { "id": "auto-creeper", "label": "Simulador MV: creeper -> pólvora, receta usable y sostenible", "kind": "recipe", "type": "gtceu:creature_simulation", "output": "minecraft:gunpowder" },
-    { "id": "auto-perforacion-broca-vanadica", "label": "Perforadora MV con broca vanádica: receta usable y sostenible", "kind": "recipe", "type": "gtceu:vein_drilling", "input": "grindless:vanadium_steel_drill_bit" },
-    { "id": "auto-planta-menas", "label": "Planta de mineral: receta usable y sostenible", "kind": "recipe", "type": "gtceu:ore_processing" },
-    { "id": "auto-planta-vanadio", "label": "Planta de mineral: da polvo de vanadio (usable y sostenible)", "kind": "recipe", "type": "gtceu:ore_processing", "output": "gtceu:vanadium_dust" },
-    { "id": "auto-planta-niquel", "label": "Planta de mineral: da polvo de níquel (usable y sostenible)", "kind": "recipe", "type": "gtceu:ore_processing", "output": "gtceu:nickel_dust" },
-    { "id": "auto-planta-manganeso", "label": "Planta de mineral: da polvo de manganeso (usable y sostenible)", "kind": "recipe", "type": "gtceu:ore_processing", "output": "gtceu:manganese_dust" },
-    { "id": "auto-planta-plata", "label": "Planta de mineral: da polvo de plata (usable y sostenible)", "kind": "recipe", "type": "gtceu:ore_processing", "output": "gtceu:silver_dust" },
-    { "id": "auto-planta-oro", "label": "Planta de mineral: da polvo de oro (usable y sostenible)", "kind": "recipe", "type": "gtceu:ore_processing", "output": "gtceu:gold_dust" },
-    { "id": "auto-biorrefineria", "label": "Biorrefinería: receta usable y sostenible", "kind": "recipe", "type": "gtceu:bio_distillation", "optional": true },
-    { "id": "auto-biorrefineria-etanol", "label": "Biorrefinería: biomasa -> etanol (usable y sostenible)", "kind": "recipe", "type": "gtceu:bio_distillation", "output": "fluid:gtceu:ethanol", "optional": true },
-    { "id": "auto-biorrefineria-fenol", "label": "Biorrefinería: alquitrán de madera -> fenol (usable y sostenible)", "kind": "recipe", "type": "gtceu:bio_distillation", "output": "fluid:gtceu:phenol", "optional": true },
-    { "id": "auto-biorrefineria-acetico", "label": "Biorrefinería: vinagre -> ácido acético (usable y sostenible)", "kind": "recipe", "type": "gtceu:bio_distillation", "output": "fluid:gtceu:acetic_acid", "optional": true },
-    { "id": "auto-cromo", "label": "Polvo de cromo", "item": "gtceu:chromium_dust" },
-    { "id": "auto-cromo-rubi", "label": "Electrolizador MV: rubí -> cromo y aluminio, receta usable y sostenible (la planta no da cromo: el rubí es gema y la cromita solo está en el End)", "kind": "recipe", "type": "gtceu:electrolyzer", "input": "gtceu:ruby_dust", "output": "gtceu:chromium_dust" },
-    { "id": "auto-vanadio", "label": "Polvo de vanadio", "item": "gtceu:vanadium_dust" },
-    { "id": "auto-niquel", "label": "Polvo de níquel", "item": "gtceu:nickel_dust" },
-    { "id": "auto-manganeso", "label": "Polvo de manganeso", "item": "gtceu:manganese_dust" },
-    { "id": "auto-plata", "label": "Polvo de plata", "item": "gtceu:silver_dust" },
-    { "id": "auto-oro", "label": "Polvo de oro", "item": "gtceu:gold_dust" },
+    { "id": "auto-broca-vanadica", "label": "Vanadium steel drill bit (the drill pays for its own bit)", "item": "grindless:vanadium_steel_drill_bit" },
+    { "id": "auto-creeper", "label": "MV simulator: creeper -> gunpowder, usable and sustained recipe", "kind": "recipe", "type": "gtceu:creature_simulation", "output": "minecraft:gunpowder" },
+    { "id": "auto-perforacion-broca-vanadica", "label": "MV drill with vanadium bit: usable and sustained recipe", "kind": "recipe", "type": "gtceu:vein_drilling", "input": "grindless:vanadium_steel_drill_bit" },
+    { "id": "auto-planta-menas", "label": "Ore plant: usable and sustained recipe", "kind": "recipe", "type": "gtceu:ore_processing" },
+    { "id": "auto-planta-vanadio", "label": "Ore plant: gives vanadium dust (usable and sustained)", "kind": "recipe", "type": "gtceu:ore_processing", "output": "gtceu:vanadium_dust" },
+    { "id": "auto-planta-niquel", "label": "Ore plant: gives nickel dust (usable and sustained)", "kind": "recipe", "type": "gtceu:ore_processing", "output": "gtceu:nickel_dust" },
+    { "id": "auto-planta-manganeso", "label": "Ore plant: gives manganese dust (usable and sustained)", "kind": "recipe", "type": "gtceu:ore_processing", "output": "gtceu:manganese_dust" },
+    { "id": "auto-planta-plata", "label": "Ore plant: gives silver dust (usable and sustained)", "kind": "recipe", "type": "gtceu:ore_processing", "output": "gtceu:silver_dust" },
+    { "id": "auto-planta-oro", "label": "Ore plant: gives gold dust (usable and sustained)", "kind": "recipe", "type": "gtceu:ore_processing", "output": "gtceu:gold_dust" },
+    { "id": "auto-biorrefineria", "label": "Bio-refinery: usable and sustained recipe", "kind": "recipe", "type": "gtceu:bio_distillation", "optional": true },
+    { "id": "auto-biorrefineria-etanol", "label": "Bio-refinery: biomass -> ethanol (usable and sustained)", "kind": "recipe", "type": "gtceu:bio_distillation", "output": "fluid:gtceu:ethanol", "optional": true },
+    { "id": "auto-biorrefineria-fenol", "label": "Bio-refinery: wood tar -> phenol (usable and sustained)", "kind": "recipe", "type": "gtceu:bio_distillation", "output": "fluid:gtceu:phenol", "optional": true },
+    { "id": "auto-biorrefineria-acetico", "label": "Bio-refinery: vinegar -> acetic acid (usable and sustained)", "kind": "recipe", "type": "gtceu:bio_distillation", "output": "fluid:gtceu:acetic_acid", "optional": true },
+    { "id": "auto-cromo", "label": "Chromium dust", "item": "gtceu:chromium_dust" },
+    { "id": "auto-cromo-rubi", "label": "MV electrolyzer: ruby -> chromium and aluminium, usable and sustained recipe (the ore plant doesn't give chromium: ruby is a gem and chromite is only in the End)", "kind": "recipe", "type": "gtceu:electrolyzer", "input": "gtceu:ruby_dust", "output": "gtceu:chromium_dust" },
+    { "id": "auto-vanadio", "label": "Vanadium dust", "item": "gtceu:vanadium_dust" },
+    { "id": "auto-niquel", "label": "Nickel dust", "item": "gtceu:nickel_dust" },
+    { "id": "auto-manganeso", "label": "Manganese dust", "item": "gtceu:manganese_dust" },
+    { "id": "auto-plata", "label": "Silver dust", "item": "gtceu:silver_dust" },
+    { "id": "auto-oro", "label": "Gold dust", "item": "gtceu:gold_dust" },
 
-    { "id": "auto-kanthal", "label": "Lingote de Kanthal", "item": "gtceu:kanthal_ingot" },
-    { "id": "auto-bobina-kanthal", "label": "Bobina Kanthal", "item": "gtceu:kanthal_coil_block" },
-    { "id": "auto-acero-inoxidable", "label": "Lingote de acero inoxidable", "item": "gtceu:stainless_steel_ingot" },
-    { "id": "auto-acero-vanadico", "label": "Lingote de acero vanádico", "item": "gtceu:vanadium_steel_ingot" },
-    { "id": "auto-silicio-gt", "label": "Lingote de silicio de GT", "item": "gtceu:silicon_ingot" },
-    { "id": "auto-boule", "label": "Boule de silicio", "item": "gtceu:silicon_boule" },
-    { "id": "auto-oblea-ilc", "label": "Oblea ILC", "item": "gtceu:ilc_wafer" },
-    { "id": "auto-oblea-ram", "label": "Oblea RAM", "item": "gtceu:ram_wafer" },
-    { "id": "auto-chip-ilc", "label": "Chip ILC", "item": "gtceu:ilc_chip" },
-    { "id": "auto-chip-ram", "label": "Chip RAM", "item": "gtceu:ram_chip" },
-    { "id": "auto-pe-placa", "label": "Placa de PE", "item": "gtceu:polyethylene_plate" },
-    { "id": "auto-pvc-placa", "label": "Placa de PVC", "item": "gtceu:polyvinyl_chloride_plate" },
-    { "id": "auto-carbon-activado", "label": "Carbón activado", "item": "gtceu:activated_carbon_dust" },
-    { "id": "auto-integrado-avanzado", "label": "Circuito integrado avanzado (HV)", "item": "gtceu:advanced_integrated_circuit" },
-    { "id": "auto-traje-peto", "label": "Traje antipeligro (peto: placas de PVC, goma y filtro)", "item": "gtceu:hazmat_chestpiece" },
-    { "id": "auto-casco-hv", "label": "Casco HV", "item": "gtceu:hv_machine_hull" },
+    { "id": "auto-kanthal", "label": "Kanthal ingot", "item": "gtceu:kanthal_ingot" },
+    { "id": "auto-bobina-kanthal", "label": "Kanthal coil", "item": "gtceu:kanthal_coil_block" },
+    { "id": "auto-acero-inoxidable", "label": "Stainless steel ingot", "item": "gtceu:stainless_steel_ingot" },
+    { "id": "auto-acero-vanadico", "label": "Vanadium steel ingot", "item": "gtceu:vanadium_steel_ingot" },
+    { "id": "auto-silicio-gt", "label": "GT silicon ingot", "item": "gtceu:silicon_ingot" },
+    { "id": "auto-boule", "label": "Silicon boule", "item": "gtceu:silicon_boule" },
+    { "id": "auto-oblea-ilc", "label": "ILC wafer", "item": "gtceu:ilc_wafer" },
+    { "id": "auto-oblea-ram", "label": "RAM wafer", "item": "gtceu:ram_wafer" },
+    { "id": "auto-chip-ilc", "label": "ILC chip", "item": "gtceu:ilc_chip" },
+    { "id": "auto-chip-ram", "label": "RAM chip", "item": "gtceu:ram_chip" },
+    { "id": "auto-pe-placa", "label": "PE plate", "item": "gtceu:polyethylene_plate" },
+    { "id": "auto-pvc-placa", "label": "PVC plate", "item": "gtceu:polyvinyl_chloride_plate" },
+    { "id": "auto-carbon-activado", "label": "Activated carbon", "item": "gtceu:activated_carbon_dust" },
+    { "id": "auto-integrado-avanzado", "label": "Advanced integrated circuit (HV)", "item": "gtceu:advanced_integrated_circuit" },
+    { "id": "auto-traje-peto", "label": "Hazmat suit (chestplate: PVC plates, rubber and filter)", "item": "gtceu:hazmat_chestpiece" },
+    { "id": "auto-casco-hv", "label": "HV hull", "item": "gtceu:hv_machine_hull" },
 
-    { "id": "auto-blaze-vara", "label": "Simulador MV: varas de blaze, receta usable y sostenible", "kind": "recipe", "type": "gtceu:creature_simulation", "output": "minecraft:blaze_rod" },
-    { "id": "auto-polvo-blaze", "label": "Polvo de blaze", "item": "minecraft:blaze_powder" },
-    { "id": "auto-rp1", "label": "RP-1 (del diésel del petróleo)", "fluid": "gtceu:rp_1_rocket_fuel" },
-    { "id": "auto-propulsor-calificado", "label": "Propulsor de potencia calificado (banco de pruebas con RP-1 y O2 del aire)", "item": "grindless:qualified_power_thruster" }
+    { "id": "auto-blaze-vara", "label": "MV simulator: blaze rods, usable and sustained recipe", "kind": "recipe", "type": "gtceu:creature_simulation", "output": "minecraft:blaze_rod" },
+    { "id": "auto-polvo-blaze", "label": "Blaze dust", "item": "minecraft:blaze_powder" },
+    { "id": "auto-rp1", "label": "RP-1 (from oil's diesel)", "fluid": "gtceu:rp_1_rocket_fuel" },
+    { "id": "auto-propulsor-calificado", "label": "Qualified power thruster (test stand with RP-1 and O2 from air)", "item": "grindless:qualified_power_thruster" }
   ],
 
   "eraResources": [
     {
       "id": "end",
       "era": "mv",
-      "label": "el End (sus vetas, con la llave del End)",
+      "label": "the End (its veins, with the End key)",
       "dimensions": ["minecraft:the_end"],
-      "note": "v0.5.0: el End abre en MV. Nada del vapor ni del LV puede pedir lo que solo sale de allí."
+      "note": "v0.5.0: the End opens in MV. Nothing in steam or LV can need what only comes from there."
     }
   ],
 
   "eraItems": [
-    { "id": "mv-gtm", "label": "Máquinas, piezas y componentes MV de GTM (gtceu:mv_*)", "items": ["gtceu:mv_*"] },
+    { "id": "mv-gtm", "label": "GTM's MV machines, parts and components (gtceu:mv_*)", "items": ["gtceu:mv_*"] },
     {
       "id": "mv-multibloques",
-      "label": "Multibloques del MV formados: los nuestros y los de GTM que modela el tier",
+      "label": "MV multiblocks formed: ours and GTM's that the tier models",
       "items": [
         "m:gtceu:mv_vein_drill", "m:gtceu:mv_greenhouse", "m:gtceu:ore_plant", "m:gtceu:biorefinery", "m:gtceu:pyrolyse_oven",
         "m:gtceu:mv_fluid_drilling_rig", "m:gtceu:electric_blast_furnace@mv-cuproniquel", "m:gtceu:electric_blast_furnace@lv-kanthal",
@@ -521,21 +521,21 @@
     },
     {
       "id": "mv-objetos",
-      "label": "Objetos del MV: broca vanádica, modelo de creeper, traje antipeligro y las puertas de los mods",
+      "label": "MV items: vanadium bit, creeper model, hazmat suit and the mods' gateways",
       "items": [
         "grindless:vanadium_steel_drill_bit", "grindless:creature_model_creeper", "gtceu:hazmat_headpiece", "gtceu:hazmat_chestpiece",
         "gtceu:hazmat_leggings", "gtceu:hazmat_boots", "enderchests:ender_chest", "enderchests:ender_bag", "endertanks:ender_tank",
         "endertanks:ender_bucket", "sophisticatedbackpacks:gold_backpack"
       ]
     },
-    { "id": "mv-perforadora", "label": "Lo que pide la perforadora MV: la broca y las muestras de sus recetas", "inputsOf": ["grindless:vein_drilling/mv/*"] },
-    { "id": "mv-end", "label": "Lo que trae el End al MV: la llave del End y el modelo de blaze", "items": ["grindless:end_key", "grindless:creature_model_blaze"] },
-    { "id": "mv-observatorio", "label": "Radiotelescopio formado y la carta del lugar de alunizaje", "items": ["m:gtceu:radio_telescope", "grindless:lunar_landing_chart"] },
-    { "id": "mv-camino-cohete", "label": "El camino al primer cohete en MV: el banco de pruebas formado y los propulsores calificados", "items": ["m:gtceu:engine_test_stand", "grindless:qualified_power_thruster"] },
+    { "id": "mv-perforadora", "label": "What the MV drill needs: the bit and the samples for its recipes", "inputsOf": ["grindless:vein_drilling/mv/*"] },
+    { "id": "mv-end", "label": "What the End brings to MV: the End key and the blaze model", "items": ["grindless:end_key", "grindless:creature_model_blaze"] },
+    { "id": "mv-observatorio", "label": "Radio telescope formed, and the lunar landing site chart", "items": ["m:gtceu:radio_telescope", "grindless:lunar_landing_chart"] },
+    { "id": "mv-camino-cohete", "label": "The path to the first rocket in MV: the test stand formed and the qualified thrusters", "items": ["m:gtceu:engine_test_stand", "grindless:qualified_power_thruster"] },
     {
       "id": "salida-mv",
       "era": "hv",
-      "label": "Salida de MV: la puerta a HV (casco, motor, bomba y circuito HV), que ya es de HV",
+      "label": "MV's output: the gate to HV (HV hull, motor, pump and circuit), which already belongs to HV",
       "items": ["gtceu:hv_machine_hull", "gtceu:hv_electric_motor", "gtceu:hv_electric_pump", "gtceu:advanced_integrated_circuit"]
     }
   ]

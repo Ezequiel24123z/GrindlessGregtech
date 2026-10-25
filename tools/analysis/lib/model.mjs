@@ -1,4 +1,4 @@
-// Construye el grafo de reglas a partir del volcado y de la configuración del tier.
+// Builds the rule graph from the dump and the tier configuration.
 import { Graph } from './engine.mjs';
 import { fluidKey, normalizeRecipe } from './normalize.mjs';
 import { abilityMaxCount, structureSelectors } from './structure.mjs';
@@ -19,22 +19,22 @@ export function prepareConfig(raw) {
   cfg.targetsFromVeins = raw.targetsFromVeins || [];
   cfg.autoTargetsFromVeins = raw.autoTargetsFromVeins || [];
   cfg.synthetic = raw.synthetic || [];
-  // Dimensión en la que se hace la fábrica en este análisis: filtra las recetas con condición de dimensión y los yacimientos
-  // de fluidos. Por defecto el Overworld; la CLI la sustituye (--dimension) y `contexts` lista las que hay que comprobar.
+  // Dimension where the factory sits for this analysis: filters recipes with a dimension condition and fluid deposits.
+  // Defaults to the Overworld; the CLI overrides it (--dimension), and `contexts` lists the ones to check.
   cfg.contextDimension = raw.dimension || 'minecraft:overworld';
-  // Un objetivo "fluid" se trata como un objeto cuya clave lleva el prefijo fluid:.
+  // A "fluid" target is treated as an item whose key carries the fluid: prefix.
   const fixTarget = (t) => (t.fluid !== undefined
     ? { ...t, item: asArray(t.fluid).map((f) => (String(f).startsWith('fluid:') ? f : 'fluid:' + f)) }
     : t);
   cfg.targets = (raw.targets || []).map(fixTarget);
   cfg.autoTargets = (raw.autoTargets || []).map(fixTarget);
-  // Regla de eras (lib/eras.mjs): orden de las eras, recursos que trae cada una y objetos que le pertenecen.
+  // Era rule (lib/eras.mjs): order of the eras, the resources each one brings, and the items that belong to it.
   cfg.era = raw.era || raw.tier;
   cfg.eraOrder = raw.eraOrder || [];
   cfg.eraResources = raw.eraResources || [];
   cfg.eraItems = raw.eraItems || [];
-  // Auditoría de obtención (lib/obtain.mjs): objetos con NBT por tipo, recetas de abejas como reglas y claves/hechos sin objeto
-  // en el registro (dim:<id> de las dimensiones, bee:<id> de las abejas).
+  // Obtainability audit (lib/obtain.mjs): items with NBT by type, bee recipes as rules, and keys/facts with no item
+  // in the registry (dim:<id> for dimensions, bee:<id> for bees).
   cfg.nbtTyped = raw.nbtTyped ? new Set(raw.nbtTyped) : null;
   cfg.bees = !!raw.bees;
   cfg.extraFacts = raw.extraFacts || [];
@@ -42,7 +42,7 @@ export function prepareConfig(raw) {
   return cfg;
 }
 
-/** Claves (objetos o fluidos) que nombra un selector de la configuración. */
+/** Keys (items or fluids) a config selector names. */
 function makeResolver(dump, normList, warnings) {
   const fuelCache = new Map();
   const fuelOf = (type, kind) => {
@@ -67,32 +67,32 @@ function makeResolver(dump, normList, warnings) {
     }
     if (sel.anyOf) return resolve(sel.anyOf, ctx);
     if (sel.fuelOf) return fuelOf(sel.fuelOf, sel.kind || 'item');
-    warnings.push(`selector no válido en ${ctx}: ${JSON.stringify(sel)}`);
+    warnings.push(`invalid selector in ${ctx}: ${JSON.stringify(sel)}`);
     return [];
   };
   const label = (sel) => {
     if (typeof sel === 'string') return sel;
     if (Array.isArray(sel)) return sel.length === 1 ? label(sel[0]) : `(${sel.map(label).join(' | ')})`;
     if (sel && sel.label) return sel.label;
-    if (sel && sel.fuelOf) return `combustible de ${sel.fuelOf}`;
+    if (sel && sel.fuelOf) return `fuel for ${sel.fuelOf}`;
     if (sel && sel.anyOf) return label(sel.anyOf);
     return JSON.stringify(sel);
   };
   return { resolve, label };
 }
 
-/** Voltaje de cada nivel de GT (V[0] = ULV ... V[14] = MAX). */
+/** Voltage of each GT tier (V[0] = ULV ... V[14] = MAX). */
 const V = [8, 32, 128, 512, 2048, 8192, 32768, 131072, 524288, 2097152, 8388608, 33554432, 134217728, 536870912, 2147483647];
 
-/** Material de una veta sin espacio de nombres si es de GT ("gtceu:iron" -> "iron"); el de un addon lo conserva ("gtca:red_zircon"). */
+/** A vein's material without its namespace if it's GT's ("gtceu:iron" -> "iron"); an addon's keeps it ("gtca:red_zircon"). */
 const veinMaterialName = (m) => (m.startsWith('gtceu:') ? m.slice(6) : m);
-/** Id de una veta sin espacio de nombres ni el trozo "_vein" (también en medio): redstone_vein_ow -> redstone_ow. */
+/** A vein's id without its namespace or the "_vein" chunk (even mid-string): redstone_vein_ow -> redstone_ow. */
 const bareVeinId = (short) => short.replace(/_vein(?=_|$)/, '');
 
 /**
- * Materiales de las vetas que cumplen el filtro; sin veins.json se usa la lista de reserva.
- * `offered(veta, from)` aplica `requireItem`/`requireRecipe` (las vetas que la tabla de la perforadora ofrece), p. ej. las
- * vetas del End que el pack ofrece y no las que registra GTM o un addon, ni las que el pack aparta.
+ * Materials of the veins that match the filter; without veins.json the fallback list is used.
+ * `offered(vein, from)` applies `requireItem`/`requireRecipe` (the veins the drill's table offers), e.g. the
+ * End's veins the pack offers, not the ones GTM or an addon registers, nor the ones the pack sets aside.
  */
 function veinMaterials(dump, from, fallback, offered) {
   if (!dump.veins) return { mats: fallback || [], source: 'config' };
@@ -108,7 +108,7 @@ function veinMaterials(dump, from, fallback, offered) {
   return { mats: [...mats].sort(), source: 'veins.json' };
 }
 
-/** Tipos de receta que admite una máquina registrada: los suyos más los vanilla que GT clona (proxies). */
+/** Recipe types a registered machine accepts: its own plus the vanilla ones GT clones (proxies). */
 function typesOfRegistered(dump, reg) {
   const set = new Set(reg.types);
   for (const t of reg.types) {
@@ -129,7 +129,7 @@ export function buildModel(dump, rawCfg) {
     partsNotRequired: [],
   };
 
-  // 1) Recetas normalizadas
+  // 1) Normalized recipes
   const gtTypes = new Set(dump.recipeTypes.keys());
   const nctx = { tags: dump.tags, st, cfg, gtTypes };
   const norm = [];
@@ -143,9 +143,9 @@ export function buildModel(dump, rawCfg) {
   }
   const { resolve, label: selLabel } = makeResolver(dump, norm, warnings);
 
-  // ¿La tabla de la perforadora ofrece la veta? `requireItem`: existe su objeto (la muestra). `requireRecipe: {type, input}`:
-  // alguna receta de ese tipo toma ese objeto como entrada; es lo que vale cuando el pack aparta una veta y deja su muestra
-  // registrada (oculta, se convierte en una sonda vacía) pero sin recetas de perforación. {id}/{short} como en los objetivos.
+  // Does the drill's table offer the vein? `requireItem`: its item exists (the sample). `requireRecipe: {type, input}`:
+  // some recipe of that type takes that item as input; this is what matters when the pack sets a vein aside and leaves its
+  // sample registered (hidden, converted into an empty probe) but with no drilling recipes. {id}/{short} as in targets.
   const recipeInputs = new Map();
   const inputsOfType = (type) => {
     if (!recipeInputs.has(type)) {
@@ -163,49 +163,49 @@ export function buildModel(dump, rawCfg) {
     return true;
   };
 
-  // Una ranura sin ninguna alternativa (etiqueta vacía, ninguna máquina del tier) se apoya en una clave "dead:" sin
-  // productores: nunca se alcanza, pero en el análisis de bloqueo actúa como una raíz que se puede nombrar.
-  // tol = ranura tolerante en la sostenibilidad: combustible de una máquina o catalizador que solo se gasta a veces.
+  // A slot with no alternative at all (empty tag, no machine in the tier) falls back on a "dead:" key with no
+  // producers: it's never reached, but in the blocking analysis it acts as a nameable root.
+  // tol = a slot that's tolerant for sustainability purposes: a machine's fuel or a catalyst only sometimes consumed.
   const slotOf = (keys, cap, label, role, tol = false) => ({
     alts: (keys.length > 0 ? keys : [`dead:${label}`]).map((k) => g.key(k)), cap, label, role, tol, dead: keys.length === 0,
   });
   const addRule = (name, kind, type, slots, outs, meta = {}) =>
     g.addRule({ name, kind, type, slots, outs: outs.map((k) => g.key(k)), meta });
 
-  // 2) Mundo
+  // 2) World
   const facts = { manual: [], auto: [], bootstrap: [] };
-  // fuentes del mundo que aportan algo en este análisis, con su origen (regla de eras): {id, origin, keys, kind, rule?}
+  // world sources that contribute something in this analysis, with their origin (era rule): {id, origin, keys, kind, rule?}
   const worldSources = [];
   const manualRuleKeys = [];
   const worldInfo = [];
   const disabledWorld = new Map();
   const ctxDim = cfg.contextDimension;
-  // Interruptores de la config de GTM que lee el análisis (se vuelcan en config.json): clave -> valor (true/false/null).
+  // GTM config switches the analysis reads (dumped in config.json): key -> value (true/false/null).
   const usedConfig = new Map();
   const configWarned = new Set();
-  // `known` distingue "la config vale otra cosa" de "no se pudo leer": quien pide una pieza condicionada a la config la sigue exigiendo
-  // si no se puede leer (lo prudente), y quien pide un requisito lo da por no cumplido.
-  const configState = (spec, wid, whenUnknown = 'se trata como no cumplida') => {
+  // `known` tells apart "the config has a different value" from "it couldn't be read": a part conditioned on the config
+  // is still required if it can't be read (the cautious choice), while a requirement check is taken as unmet.
+  const configState = (spec, wid, whenUnknown = 'treated as unmet') => {
     const key = spec.config;
     const want = spec.equals === undefined ? true : spec.equals;
     const have = dump.config ? dump.config[key] : undefined;
     usedConfig.set(key, have === undefined ? null : have);
     if (have === undefined || have === null) {
-      const why = dump.config ? 'no se pudo leer en el volcado' : 'el volcado no trae config.json';
+      const why = dump.config ? 'could not be read in the dump' : 'the dump has no config.json';
       if (!configWarned.has(key)) {
         configWarned.add(key);
-        warnings.push(`${wid}: no se puede comprobar la config ${key} (${why}); ${whenUnknown}`);
+        warnings.push(`${wid}: can't check config ${key} (${why}); ${whenUnknown}`);
       }
-      return { ok: false, known: false, text: `config ${key} desconocida (${why})` };
+      return { ok: false, known: false, text: `config ${key} unknown (${why})` };
     }
-    return { ok: have === want, known: true, have, text: `config ${key} = ${have}, se pide ${want}` };
+    return { ok: have === want, known: true, have, text: `config ${key} = ${have}, wants ${want}` };
   };
-  // Yacimientos de fluidos (perforadora de fluidos de GTM): admite la dimensión si su filtro es null o la incluye.
+  // Fluid deposits (GTM's fluid drilling rig): allows the dimension if its filter is null or includes it.
   const fluidVeinInfo = new Map();
-  // Objeto de la mena cruda de un material de una veta, resuelto con el registro del volcado: el del espacio de nombres del propio
-  // material si lo trae (gtca:red_zircon -> gtca:raw_red_zircon), si no el de la plantilla (gtceu:raw_{m}), el vanilla
-  // (minecraft:raw_iron) o el de cualquier otro mod que lo registre (gtca:raw_germanite). `overrides` queda de reserva: solo
-  // vale si el volcado no tiene ningún objeto con ese nombre. Devuelve los ids que existen (ninguno = "sin objeto").
+  // Raw ore item for a vein material, resolved against the dump's registry: the material's own namespace if it has one
+  // (gtca:red_zircon -> gtca:raw_red_zircon), otherwise the template's (gtceu:raw_{m}), vanilla's (minecraft:raw_iron), or
+  // any other mod that registers it (gtca:raw_germanite). `overrides` is only a fallback: it only applies if the dump has
+  // no item with that name. Returns the ids that exist (none = "no item").
   let pathIndex = null;
   const namespacesWithPath = (path) => {
     if (!pathIndex) {
@@ -248,27 +248,27 @@ export function buildModel(dump, rawCfg) {
         else missing++;
       }
       stats.templateMissing += missing;
-      tplInfo = `${mats.length} materiales (${from.source}), ${missing} sin objeto`;
+      tplInfo = `${mats.length} materials (${from.source}), ${missing} with no item`;
     }
     for (const it of asArray(entry.items)) {
       const ks = resolve(it, wid);
-      if (ks.length === 0) warnings.push(`${wid}: "${it}" no tiene miembros en este pack`);
+      if (ks.length === 0) warnings.push(`${wid}: "${it}" has no members in this pack`);
       for (const k of ks) {
-        if (!k.startsWith('fluid:') && !dump.items.has(k)) warnings.push(`${wid}: el objeto ${k} no existe en el registro`);
-        else if (k.startsWith('fluid:') && !dump.fluids.has(k.slice(6))) warnings.push(`${wid}: el fluido ${k.slice(6)} no existe en el registro`);
+        if (!k.startsWith('fluid:') && !dump.items.has(k)) warnings.push(`${wid}: item ${k} doesn't exist in the registry`);
+        else if (k.startsWith('fluid:') && !dump.fluids.has(k.slice(6))) warnings.push(`${wid}: fluid ${k.slice(6)} doesn't exist in the registry`);
         else keys.push(k);
       }
     }
     if (entry.fromFluidVeins) {
       const spec = entry.fromFluidVeins === true ? {} : entry.fromFluidVeins;
       const only = spec.fluids ? new Set(asArray(spec.fluids)) : null;
-      if (!dump.fluidVeins) warnings.push(`${wid}: el volcado no trae fluid_veins.json`);
+      if (!dump.fluidVeins) warnings.push(`${wid}: the dump has no fluid_veins.json`);
       else {
         const ineligible = new Map();
         for (const v of dump.fluidVeins) {
           if (!v.fluid || (only && !only.has(v.fluid))) continue;
           if (!dump.fluids.has(v.fluid)) {
-            warnings.push(`${wid}: el yacimiento ${v.id} da ${v.fluid}, que no existe en el registro`);
+            warnings.push(`${wid}: deposit ${v.id} gives ${v.fluid}, which doesn't exist in the registry`);
             continue;
           }
           const k = 'fluid:' + v.fluid;
@@ -277,16 +277,16 @@ export function buildModel(dump, rawCfg) {
             if (!fluidVeinInfo.has(v.fluid)) fluidVeinInfo.set(v.fluid, []);
             fluidVeinInfo.get(v.fluid).push(v.id);
           } else {
-            ineligible.set(k, `el yacimiento ${v.id} solo admite ${v.dims.length > 0 ? v.dims.join(', ') : 'ninguna dimensión'}; este análisis es en ${ctxDim}`);
+            ineligible.set(k, `deposit ${v.id} only allows ${v.dims.length > 0 ? v.dims.join(', ') : 'no dimension'}; this analysis is in ${ctxDim}`);
           }
         }
         for (const [k, why] of ineligible) if (!keys.includes(k) && !disabledWorld.has(k)) disabledWorld.set(k, why);
       }
     }
     keys = [...new Set(keys)];
-    // ¿el mundo da esto en este análisis? (enabled, dimensión, requisitos de la config de GTM)
+    // does the world give this in this analysis? (enabled, dimension, GTM config requirements)
     let off = entry.enabled === false ? wid : null;
-    if (off === null && entry.dimensions && !entry.dimensions.includes(ctxDim)) off = `${wid} (solo en ${entry.dimensions.join(', ')})`;
+    if (off === null && entry.dimensions && !entry.dimensions.includes(ctxDim)) off = `${wid} (only in ${entry.dimensions.join(', ')})`;
     if (off === null) {
       for (const spec of asArray(entry.requires)) {
         const r = configState(spec, wid);
@@ -301,17 +301,17 @@ export function buildModel(dump, rawCfg) {
       for (const k of keys) if (!disabledWorld.has(k)) disabledWorld.set(k, off);
       return;
     }
-    // sustainedIf: con la config cumplida la fuente no se agota; si no, solo da una cantidad finita (WARN)
+    // sustainedIf: with the config met the source never runs out; otherwise it only gives a finite amount (WARN)
     const sustained = entry.sustainedIf ? configState(entry.sustainedIf, wid).ok : true;
-    // origen de la fuente (dónde se recoge): `origin` o las dimensiones de sus vetas. La regla de eras quita las fuentes
-    // de una dimensión que es recurso de una era posterior (el viaje al End, a la Luna...).
+    // where the source is gathered: `origin` or its veins' dimensions. The era rule removes sources
+    // from a dimension that is a later era's resource (the trip to the End, to the Moon...).
     const origin = entry.origin ? asArray(entry.origin) : entry.fromVeins ? asArray(entry.fromVeins.dimensions || ['minecraft:overworld']) : [];
     const source = { id: wid, origin, keys };
     if (entry.mode === 'manual') {
       if (entry.needs && keys.length > 0) {
-        // recolección a mano que exige antes un objeto que se fabrica (la llave del End): es una regla, no un hecho del mundo
+        // hand-gathering that first requires a crafted item (the End key): it's a rule, not a world fact
         const slots = asArray(entry.needs).map((n) => slotOf(resolve(n, wid), true, selLabel(n), 'capital'));
-        source.rule = addRule(`mundo:${wid}`, 'world-manual', 'world', slots, keys, { bootstrap: !!entry.bootstrap, note: entry.note || '' });
+        source.rule = addRule(`world:${wid}`, 'world-manual', 'world', slots, keys, { bootstrap: !!entry.bootstrap, note: entry.note || '' });
         source.kind = 'rule';
         manualRuleKeys.push(...keys);
       } else {
@@ -320,8 +320,8 @@ export function buildModel(dump, rawCfg) {
         if (entry.bootstrap) facts.bootstrap.push(...keys);
       }
     } else if (entry.via && entry.via.length > 0) {
-      const slots = [slotOf(entry.via.map((v) => 'run:' + v), false, `máquina ${entry.via.join(' | ')}`, 'machine')];
-      source.rule = addRule(`mundo:${wid}`, 'world-auto', 'world', slots, keys, { finite: !!entry.finite || !sustained, note: entry.note || '' });
+      const slots = [slotOf(entry.via.map((v) => 'run:' + v), false, `machine ${entry.via.join(' | ')}`, 'machine')];
+      source.rule = addRule(`world:${wid}`, 'world-auto', 'world', slots, keys, { finite: !!entry.finite || !sustained, note: entry.note || '' });
       source.kind = 'rule';
     } else {
       source.kind = 'auto';
@@ -332,11 +332,11 @@ export function buildModel(dump, rawCfg) {
   stats.fluidVeins = [...fluidVeinInfo.entries()].map(([fluid, ids]) => ({ fluid, deposits: ids }));
   stats.configRead = [...usedConfig.entries()].map(([key, value]) => ({ key, value }));
 
-  // 3) Máquinas: m:<id> (se puede construir) y run:<id> (funciona: construida + lo que consume al operar)
-  // machinesFromRegistry: añade en bloque las máquinas registradas con un prefijo (p. ej. todas las gtceu:lv_*) con sus
-  // tipos de receta reales; una entrada explícita de `machines` con el mismo id tiene prioridad. `maxEUtByTier`: el tope de
-  // EU/t de cada máquina de un bloque es el voltaje de su propio nivel (V[tier] del registro; los multibloques, sin tope);
-  // `includeTypeless`: también las que no tienen tipo de receta (la perforadora de fluidos), para usarlas en `via`.
+  // 3) Machines: m:<id> (can be built) and run:<id> (works: built + whatever it consumes while running)
+  // machinesFromRegistry: adds registered machines in bulk with a prefix (e.g. all gtceu:lv_*) with their
+  // real recipe types; an explicit `machines` entry with the same id takes priority. `maxEUtByTier`: a single-block
+  // machine's EU/t cap is its own tier's voltage (V[tier] from the registry; multiblocks have no cap);
+  // `includeTypeless`: also the ones with no recipe type (the fluid drilling rig), for use in `via`.
   const explicitIds = new Set(cfg.machines.map((e) => e.id || e.machine));
   const fromRegistry = [];
   for (const spec of cfg.machinesFromRegistry) {
@@ -349,7 +349,7 @@ export function buildModel(dump, rawCfg) {
       if (types.length === 0 && !spec.includeTypeless) continue;
       explicitIds.add(mid);
       const maxEUt = spec.maxEUtByTier ? (reg.mb ? undefined : V[Math.max(0, Math.min(V.length - 1, Number(reg.tier) || 0))]) : spec.maxEUt;
-      fromRegistry.push({ machine: mid, types, maxEUt, needs: spec.needs, parts: spec.parts, note: `del registro (${spec.prefix}*)` });
+      fromRegistry.push({ machine: mid, types, maxEUt, needs: spec.needs, parts: spec.parts, note: `from the registry (${spec.prefix}*)` });
     }
   }
   stats.machinesFromRegistry = fromRegistry.length;
@@ -357,10 +357,10 @@ export function buildModel(dump, rawCfg) {
   const typeIndex = new Map();
   for (const e0 of [...cfg.machines, ...fromRegistry]) {
     const id = e0.id || e0.machine;
-    // energy: tensión máxima de un multibloque eléctrico según GTM 7.5.3 (WorkableElectricMultiblockMachine.getMaxVoltage): con
-    // 2 o más escotillas de energía del nivel más alto cuenta como un escalón más (V[nivel + 1] = 4 x la tensión de la
-    // escotilla). Cuenta escotillas, no amperios: dos escotillas LV (2 A cada una) o dos de 1 A dan igual, 128 V (MV).
-    // `hatches` = cuántas admite el patrón (si falta y hay estructura del pack, sale de ella).
+    // energy: max voltage of an electric multiblock per GTM 7.5.3 (WorkableElectricMultiblockMachine.getMaxVoltage): with
+    // 2 or more energy hatches of the highest tier it counts as one step higher (V[tier + 1] = 4x the hatch's voltage).
+    // It counts hatches, not amperage: two LV hatches (2 A each) or two 1 A ones give the same result, 128 V (MV).
+    // `hatches` = how many the pattern allows (if missing and the pack has a structure, it's read from there).
     let e = e0;
     if (e0.energy) {
       const ability = e0.energy.ability || 'energy_input';
@@ -368,32 +368,32 @@ export function buildModel(dump, rawCfg) {
       let hatches = e0.energy.hatches;
       if (hatches === undefined && desc) hatches = abilityMaxCount(desc, ability);
       if (hatches === undefined) {
-        warnings.push(`${id}: energy sin «hatches» y sin estructura de la que leer las escotillas «${ability}»; se cuenta 1`);
+        warnings.push(`${id}: energy has no «hatches» and no structure to read the «${ability}» hatches from; counting 1`);
         hatches = 1;
       }
-      if (typeof e0.energy.voltage !== 'number') warnings.push(`${id}: energy.voltage debe ser un número (la tensión de la escotilla)`);
+      if (typeof e0.energy.voltage !== 'number') warnings.push(`${id}: energy.voltage must be a number (the hatch's voltage)`);
       const maxEUt = hatches >= 2 ? e0.energy.voltage * 4 : e0.energy.voltage;
       e = { ...e0, maxEUt };
       stats.rolledMachines.push({ machine: id, hatches, voltage: e0.energy.voltage, maxEUt });
     }
-    // coilTemp: temperatura de las bobinas de un EBF. GTM suma 100 K por cada escalón de tensión por encima de MV
-    // (GTRecipeModifiers.ebfOverclock) y rechaza las recetas cuyo ebf_temp es mayor.
+    // coilTemp: an EBF's coil temperature. GTM adds 100 K per voltage step above MV
+    // (GTRecipeModifiers.ebfOverclock) and rejects recipes whose ebf_temp is higher.
     if (e0.coilTemp !== undefined) {
       const volt = e.maxEUt;
       const tier = typeof volt === 'number' && volt > 0 ? Math.round(Math.log(volt / 8) / Math.log(4)) : 2;
       e = { ...e, maxTemp: e0.coilTemp + 100 * Math.max(0, tier - 2) };
     }
-    if (entriesById.has(id)) warnings.push(`máquina duplicada en la configuración: ${id}`);
+    if (entriesById.has(id)) warnings.push(`duplicate machine in the configuration: ${id}`);
     entriesById.set(id, e);
     const reg = dump.machines.get(e.machine);
     if (dump.machines.size > 0 && e.machine.startsWith('gtceu:') && !reg && !e.optional) {
-      warnings.push(`la máquina ${e.machine} no está registrada en este pack`);
+      warnings.push(`machine ${e.machine} isn't registered in this pack`);
     }
     if (reg && e.types && e.types.length > 0) {
       const allowed = typesOfRegistered(dump, reg);
       const bad = e.types.filter((t) => !allowed.has(t));
       if (bad.length > 0) {
-        warnings.push(`${e.machine}: la configuración dice que procesa ${bad.join(', ')} pero el registro dice ${reg.types.join(', ') || '(nada)'}`);
+        warnings.push(`${e.machine}: the config says it processes ${bad.join(', ')} but the registry says ${reg.types.join(', ') || '(nothing)'}`);
       }
     }
     const types = new Set(e.types || (reg ? reg.types : []));
@@ -409,67 +409,67 @@ export function buildModel(dump, rawCfg) {
     const checkIds = (keys, what) => {
       for (const k of keys) {
         if (k.startsWith('fluid:') ? dump.fluids.size > 0 && !dump.fluids.has(k.slice(6)) : dump.items.size > 0 && !dump.items.has(k)) {
-          warnings.push(`${id}: ${what} ${k} no existe en el registro (¿id mal escrito o aún sin implementar?)`);
+          warnings.push(`${id}: ${what} ${k} doesn't exist in the registry (misspelled id, or not implemented yet?)`);
         }
       }
     };
-    if (!e.machine.startsWith('gtceu:')) checkIds([e.machine], 'la máquina');
-    // partsFromStructure: las piezas salen de la descripción del patrón que vuelca el pack (structures.json); si el
-    // volcado no la trae se usan las `parts` de la configuración.
+    if (!e.machine.startsWith('gtceu:')) checkIds([e.machine], 'the machine');
+    // partsFromStructure: parts come from the pattern description the pack dumps (structures.json); if the
+    // dump doesn't carry it, the config's `parts` are used.
     let partSels = asArray(e.parts);
     let partsFrom = 'config';
     if (e.partsFromStructure) {
       const desc = dump.structures.get(e.machine);
       if (desc) {
-        // `partAbilities` de la máquina (p. ej. exigir la escotilla MV) tapa clave a clave los del tier
+        // the machine's `partAbilities` (e.g. requiring the MV hatch) overrides the tier's key by key
         const abilityItems = e.partAbilities ? { ...cfg.partAbilities, ...e.partAbilities } : cfg.partAbilities;
         const sd = structureSelectors(desc, abilityItems, (i) => dump.items.size === 0 || dump.items.has(i));
         for (const p of sd.problems) warnings.push(`${id}: ${p}`);
         partSels = sd.selectors;
-        partsFrom = 'estructura';
+        partsFrom = 'structure';
         stats.structureMachines++;
         stats.structureMachineIds.push(e.machine);
       } else {
-        warnings.push(`${id}: el volcado no trae la estructura de ${e.machine}${partSels.length > 0 ? '; se usan las partes de la configuración' : ' ni hay partes en la configuración'}`);
+        warnings.push(`${id}: the dump doesn't carry ${e.machine}'s structure${partSels.length > 0 ? "; using the config's parts" : ' and there are no parts in the config either'}`);
       }
     }
     for (const p of partSels) {
-      // {anyOf, onlyIf:{config,equals}}: pieza que GTM solo exige con ese valor de la config (p. ej. la escotilla de mantenimiento
-      // con machines.enableMaintenance); si la config no se puede leer se sigue exigiendo
+      // {anyOf, onlyIf:{config,equals}}: a part GTM only requires with that config value (e.g. the maintenance hatch
+      // with machines.enableMaintenance); if the config can't be read it's still required
       if (p && typeof p === 'object' && !Array.isArray(p) && p.onlyIf) {
-        const r = configState(p.onlyIf, `parts de ${id}`, 'la pieza se sigue exigiendo');
+        const r = configState(p.onlyIf, `parts of ${id}`, 'the part is still required');
         if (r.known && !r.ok) {
-          stats.partsNotRequired.push({ machine: id, part: selLabel(p), why: `config ${p.onlyIf.config} = ${r.have}; solo se exige con ${p.onlyIf.equals === undefined ? true : p.onlyIf.equals}` });
+          stats.partsNotRequired.push({ machine: id, part: selLabel(p), why: `config ${p.onlyIf.config} = ${r.have}; only required with ${p.onlyIf.equals === undefined ? true : p.onlyIf.equals}` });
           continue;
         }
       }
-      const keys = resolve(p, `parts de ${id}`);
-      checkIds(keys.filter((k) => !k.startsWith('fluid:')), 'la parte');
+      const keys = resolve(p, `parts of ${id}`);
+      checkIds(keys.filter((k) => !k.startsWith('fluid:')), 'the part');
       buildSlots.push(slotOf(keys, true, selLabel(p), 'part'));
     }
-    addRule(`construir:${id}`, 'machine-build', 'machine', buildSlots, ['m:' + id], { assumed: !!e.assumed, partsFrom });
-    const runSlots = [slotOf(['m:' + id], true, `${id} construida`, 'machine-built')];
+    addRule(`build:${id}`, 'machine-build', 'machine', buildSlots, ['m:' + id], { assumed: !!e.assumed, partsFrom });
+    const runSlots = [slotOf(['m:' + id], true, `${id} built`, 'machine-built')];
     for (const n of asArray(e.needs)) {
-      const keys = resolve(n, `needs de ${id}`);
-      checkIds(keys.filter((k) => k.startsWith('fluid:')), 'el fluido');
+      const keys = resolve(n, `needs of ${id}`);
+      checkIds(keys.filter((k) => k.startsWith('fluid:')), 'the fluid');
       runSlots.push(slotOf(keys, false, selLabel(n), 'need', true));
     }
-    addRule(`operar:${id}`, 'machine-run', 'machine', runSlots, ['run:' + id], { maxEUt: e.maxEUt });
+    addRule(`operate:${id}`, 'machine-run', 'machine', runSlots, ['run:' + id], { maxEUt: e.maxEUt });
   }
 
-  // 4) Reglas sintéticas (producción que no es una receta: calderas, bomba primitiva...)
+  // 4) Synthetic rules (production that isn't a recipe: boilers, the primitive pump...)
   for (const s of cfg.synthetic) {
     const slots = [];
     const machineIds = asArray(s.machines);
-    for (const m of machineIds) if (!entriesById.has(m)) warnings.push(`sintética ${s.id}: la máquina ${m} no está en machines`);
-    if (machineIds.length > 0) slots.push(slotOf(machineIds.map((m) => 'run:' + m), false, `máquina ${machineIds.join(' | ')}`, 'machine'));
+    for (const m of machineIds) if (!entriesById.has(m)) warnings.push(`synthetic ${s.id}: machine ${m} isn't in machines`);
+    if (machineIds.length > 0) slots.push(slotOf(machineIds.map((m) => 'run:' + m), false, `machine ${machineIds.join(' | ')}`, 'machine'));
     for (const c of asArray(s.consumes)) slots.push(slotOf(resolve(c, s.id), false, selLabel(c), 'input'));
     for (const c of asArray(s.capital)) slots.push(slotOf(resolve(c, s.id), true, selLabel(c), 'capital'));
     const outs = asArray(s.produces).flatMap((p) => resolve(p, s.id));
-    addRule(`sintética:${s.id}`, 'synthetic', 'synthetic', slots, outs, { note: s.note || '' });
+    addRule(`synthetic:${s.id}`, 'synthetic', 'synthetic', slots, outs, { note: s.note || '' });
   }
 
-  // 5) Recetas
+  // 5) Recipes
   const ruleOfRecipe = new Map();
   for (const n of norm) {
     const slots = [];
@@ -478,11 +478,11 @@ export function buildModel(dump, rawCfg) {
       const euOk = (e) => (e.maxEUt === undefined ? Infinity : e.maxEUt) >= n.eut;
       const tempOk = (e) => e.maxTemp === undefined || n.temp === undefined || e.maxTemp >= n.temp;
       const cands = all.filter((e) => euOk(e) && tempOk(e));
-      let lbl = `máquina de ${n.type}`;
+      let lbl = `machine for ${n.type}`;
       if (cands.length === 0) {
-        if (all.length === 0) lbl = `no hay máquina para ${n.type} en este tier`;
-        else if (all.some(euOk)) lbl = `ninguna máquina de ${n.type} llega a ${n.temp} K (bobinas del tier)`;
-        else lbl = `ninguna máquina de ${n.type} admite ${n.eut} EU/t`;
+        if (all.length === 0) lbl = `there's no machine for ${n.type} in this tier`;
+        else if (all.some(euOk)) lbl = `no ${n.type} machine reaches ${n.temp} K (this tier's coils)`;
+        else lbl = `no ${n.type} machine accepts ${n.eut} EU/t`;
       }
       slots.push(slotOf(cands.map((e) => 'run:' + (e.id || e.machine)), false, lbl, 'machine'));
       if (cands.length === 0) stats.deadByType[n.type] = (stats.deadByType[n.type] || 0) + 1;
@@ -497,27 +497,27 @@ export function buildModel(dump, rawCfg) {
     for (const c of n.conditions) {
       const dimCfg = cfg.conditions.dimension;
       if (c.type === 'dimension' && typeof c.dimension === 'string' && dimCfg && (dimCfg.asKeys || asArray(dimCfg.asKeysFor).includes(c.dimension))) {
-        // auditoría de obtención (asKeys): la receta pide la clave dim:<id>, un hecho para cada dimensión a la que se llega (y otra
-        // pasada añade las de las eras posteriores). `asKeysFor: [ids]` hace lo mismo solo con esas dimensiones: una base fuera de
-        // la fábrica (la Luna), cuya clave da una regla del tier (el viaje). La condición inversa ("fuera de X") se cumple en
-        // cualquier otra dimensión.
-        if (c.reverse !== true) slots.push(slotOf(['dim:' + c.dimension], true, `en ${c.dimension}`, 'cond'));
+        // obtainability audit (asKeys): the recipe needs the dim:<id> key, a fact for each dimension that's reached (and
+        // another pass adds the later eras' ones). `asKeysFor: [ids]` does the same only for those dimensions: a base outside
+        // the factory (the Moon), whose key is given by a tier rule (the trip). The reverse condition ("outside X") is met in
+        // any other dimension.
+        if (c.reverse !== true) slots.push(slotOf(['dim:' + c.dimension], true, `in ${c.dimension}`, 'cond'));
         continue;
       }
       if (c.type === 'dimension' && typeof c.dimension === 'string' && !(cfg.conditions.dimension && cfg.conditions.dimension.ignore)) {
-        // la fábrica está en una dimensión concreta (cfg.contextDimension): la receta solo vale donde dice su condición
+        // the factory sits in one specific dimension (cfg.contextDimension): the recipe only applies where its condition says
         const here = c.dimension === ctxDim;
         if (c.reverse === true ? here : !here) {
-          slots.push(slotOf([], false, `solo vale ${c.reverse === true ? 'fuera de' : 'en'} ${c.dimension}; la fábrica está en ${ctxDim}`, 'cond'));
+          slots.push(slotOf([], false, `only applies ${c.reverse === true ? 'outside' : 'in'} ${c.dimension}; the factory is in ${ctxDim}`, 'cond'));
         }
         continue;
       }
       const rule = cfg.conditions[c.type] || cfg.conditions['*'];
       if (!rule || rule.ignore || c.reverse === true) continue;
-      if (rule.unsupported) slots.push(slotOf(['cond:' + c.type], true, `condición ${c.type}`, 'cond'));
+      if (rule.unsupported) slots.push(slotOf(['cond:' + c.type], true, `condition ${c.type}`, 'cond'));
       else if (rule.needs || rule.needsByField) {
-        // la condición se cumple con una máquina o un objeto construido (la sala limpia): una ranura de capital. `needsByField`
-        // elige según un campo de la condición (cleanroom: "cleanroom" o "sterile_cleanroom"); sin entrada, no se puede cumplir.
+        // the condition is met with a built machine or item (the clean room): a capital slot. `needsByField`
+        // picks based on a field of the condition (cleanroom: "cleanroom" or "sterile_cleanroom"); with no entry, it can't be met.
         let sel = rule.needs;
         let what = c.type;
         if (rule.needsByField) {
@@ -525,15 +525,15 @@ export function buildModel(dump, rawCfg) {
           sel = rule.needsByField.map[variant] !== undefined ? rule.needsByField.map[variant] : rule.needsByField.default;
           what = `${c.type} «${variant}»`;
         }
-        if (sel === undefined || sel === null) slots.push(slotOf(['cond:' + c.type], true, `condición ${what}`, 'cond'));
-        else slots.push(slotOf(resolve(sel, `condición ${c.type}`), true, `${what}: ${selLabel(sel)}`, 'cond'));
+        if (sel === undefined || sel === null) slots.push(slotOf(['cond:' + c.type], true, `condition ${what}`, 'cond'));
+        else slots.push(slotOf(resolve(sel, `condition ${c.type}`), true, `${what}: ${selLabel(sel)}`, 'cond'));
       } else if (rule.field && rule.max !== undefined) {
-        // condición numérica con tope en este tier (p. ej. la temperatura de bobinas del EBF): por encima, la receta no vale
+        // a numeric condition with a cap in this tier (e.g. the EBF's coil temperature): above it, the recipe doesn't apply
         const value = Number(c[rule.field]);
-        if (value > rule.max) slots.push(slotOf([], false, `${c.type} ${value} (este tier llega a ${rule.max})`, 'cond'));
+        if (value > rule.max) slots.push(slotOf([], false, `${c.type} ${value} (this tier reaches ${rule.max})`, 'cond'));
       } else if (rule.fluidsFrom) {
         for (const f of asArray(c[rule.fluidsFrom])) {
-          slots.push(slotOf(resolve('fluid:' + f, `condición ${c.type}`), true, `junto a ${f}`, 'cond'));
+          slots.push(slotOf(resolve('fluid:' + f, `condition ${c.type}`), true, `next to ${f}`, 'cond'));
         }
       }
     }
@@ -547,19 +547,19 @@ export function buildModel(dump, rawCfg) {
   }
   stats.rules = g.rules.length;
 
-  // Objetivos generados a partir de las vetas del registro: uno por veta ("alguna mena de cada veta del Nether").
+  // Targets generated from the registry's veins: one per vein ("some ore from each Nether vein").
   //   {idPrefix, labelPrefix, dimensions, layers?, exclusiveFrom?, requireItem?, requireRecipe?, without?, allowFinite?, optional?}
-  //   más una de estas formas:
-  //   - mena:  {template, mode: 'anyOf'|'allOf'} -> objetivo sobre las menas crudas de la veta (si hay `exclusiveFrom`, solo las
-  //            menas que no salen en las vetas de esas dimensiones; sin ninguna se salta la veta). El objeto de cada mena se
-  //            resuelve con el registro del volcado (espacio de nombres del material, plantilla, vanilla u otro mod); `overrides`
-  //            solo queda de reserva.
-  //   - receta: {target: {...}} -> el objeto se copia con {id} (id de la veta sin el trozo "_vein": redstone_vein_ow -> redstone_ow)
-  //            y {short} (id sin espacio de nombres) sustituidos en sus textos; p. ej.
+  //   plus one of these forms:
+  //   - ore:    {template, mode: 'anyOf'|'allOf'} -> a target over the vein's raw ores (with `exclusiveFrom`, only the
+  //            ores that don't come from the veins of those dimensions; with none, the vein is skipped). Each ore's item is
+  //            resolved against the dump's registry (the material's namespace, the template, vanilla, or another mod); `overrides`
+  //            is only a fallback.
+  //   - recipe: {target: {...}} -> the item is copied with {id} (the vein's id without the "_vein" chunk: redstone_vein_ow -> redstone_ow)
+  //            and {short} (id without namespace) substituted in its text; e.g.
   //            {kind:'recipe', type:'gtceu:vein_drilling', input:'grindless:vein_sample_{id}'}
-  //   `requireRecipe` ({type, input} con {id}/{short}): solo las vetas que la tabla de la perforadora ofrece, es decir, las que
-  //   tienen una receta de ese tipo que toma su muestra; `requireItem` (más flojo): las que tienen el objeto. Las demás no tienen
-  //   objetivo (vetas de otros mods, apartadas en veins_excluded.json o que esperan a su era) y se listan en las notas.
+  //   `requireRecipe` ({type, input} with {id}/{short}): only the veins the drill's table offers, i.e. the ones that
+  //   have a recipe of that type taking their sample; `requireItem` (looser): the ones that have the item. The rest have no
+  //   target (veins from other mods, set aside in veins_excluded.json, or waiting for their era) and are listed in the notes.
   const veinMats = (v) => v.mats.map(veinMaterialName);
   const materialsIn = (dims) => {
     const set = new Set();
@@ -571,7 +571,7 @@ export function buildModel(dump, rawCfg) {
     const out = [];
     for (const spec of specs) {
       if (!dump.veins) {
-        warnings.push(`${which}: el volcado no trae veins.json`);
+        warnings.push(`${which}: the dump has no veins.json`);
         continue;
       }
       const dims = new Set(spec.dimensions || ['minecraft:overworld']);
@@ -591,7 +591,7 @@ export function buildModel(dump, rawCfg) {
           if (!stats.veinsWithoutItem.includes(v.id)) stats.veinsWithoutItem.push(v.id);
           continue;
         }
-        const base = { id: `${spec.idPrefix || 'veta-'}${short}`, label: `${spec.labelPrefix || 'Veta'} ${short}`, ...extras };
+        const base = { id: `${spec.idPrefix || 'vein-'}${short}`, label: `${spec.labelPrefix || 'Vein'} ${short}`, ...extras };
         if (spec.target) {
           const fill = (x) => (typeof x === 'string'
             ? x.split('{id}').join(bareVeinId(short)).split('{short}').join(short)
@@ -605,29 +605,29 @@ export function buildModel(dump, rawCfg) {
         const mats = veinMats(v).filter((m) => !exclusive || !exclusive.has(m));
         const items = [...new Set(mats.flatMap((m) => rawIdsOf(spec, m)))];
         if (items.length === 0) {
-          if (!exclusive) warnings.push(`${which}: la veta ${short} no tiene ninguna mena con objeto (${spec.template})`);
+          if (!exclusive) warnings.push(`${which}: vein ${short} has no ore with an item (${spec.template})`);
           continue;
         }
         out.push({ ...base, [spec.mode === 'all' ? 'allOf' : 'anyOf']: items });
         n++;
       }
-      if (n === 0) warnings.push(`${which}: ninguna veta cumple ${JSON.stringify(spec.dimensions || ['minecraft:overworld'])}`);
+      if (n === 0) warnings.push(`${which}: no vein matches ${JSON.stringify(spec.dimensions || ['minecraft:overworld'])}`);
       stats.veinTargets += n;
     }
     return out;
   };
   cfg.targets.push(...veinTargets(cfg.targetsFromVeins, 'targetsFromVeins'));
   cfg.autoTargets.push(...veinTargets(cfg.autoTargetsFromVeins, 'autoTargetsFromVeins'));
-  // `expect` es una comprobación de fuga y cada paso admite una: sin este aviso un `expect` en la lista equivocada se ignoraría.
+  // `expect` is a leak check and each pass only allows one: without this warning, an `expect` in the wrong list would be silently ignored.
   for (const t of cfg.targets) {
-    if (t.expect && t.expect !== 'unreachable') warnings.push(`objetivo ${t.id}: expect «${t.expect}» no vale en targets (la puerta solo admite «unreachable»)`);
+    if (t.expect && t.expect !== 'unreachable') warnings.push(`target ${t.id}: expect «${t.expect}» isn't valid in targets (the gate only allows «unreachable»)`);
   }
   for (const t of cfg.autoTargets) {
-    if (t.expect && t.expect !== 'not-automatic') warnings.push(`objetivo ${t.id}: expect «${t.expect}» no vale en autoTargets (solo admite «not-automatic»)`);
+    if (t.expect && t.expect !== 'not-automatic') warnings.push(`target ${t.id}: expect «${t.expect}» isn't valid in autoTargets (it only allows «not-automatic»)`);
   }
 
-  // Máquinas registradas (no solo las de la configuración) que ejecutan un tipo de receta; las comprobaciones `machineless` de
-  // fuga distinguen así la receta huérfana (ninguna máquina la corre) de la que alguien podría correr.
+  // Registered machines (not just the ones in the config) that run a recipe type; `machineless` leak checks use this
+  // to tell an orphan recipe (no machine runs it) from one somebody could run.
   const runnerCache = new Map();
   const runnersOf = (type) => {
     if (!runnerCache.has(type)) {
@@ -638,14 +638,14 @@ export function buildModel(dump, rawCfg) {
     return runnerCache.get(type);
   };
   for (const t of [...cfg.targets, ...cfg.autoTargets]) {
-    if (t.machineless && !(t.kind === 'recipe' || t.type || t.recipe)) warnings.push(`objetivo ${t.id}: machineless solo vale en objetivos de tipo receta`);
-    if (t.maxEUt !== undefined && !t.machineless) warnings.push(`objetivo ${t.id}: maxEUt solo se usa junto a machineless`);
+    if (t.machineless && !(t.kind === 'recipe' || t.type || t.recipe)) warnings.push(`target ${t.id}: machineless only applies to recipe-type targets`);
+    if (t.maxEUt !== undefined && !t.machineless) warnings.push(`target ${t.id}: maxEUt is only used together with machineless`);
   }
 
-  // Las claves de objetivos y hechos se crean antes de cerrar el grafo para poder consultarlas aunque nadie las produzca.
+  // Target and fact keys are created before closing the graph so they can be looked up even if nothing produces them.
   const targetKeys = (t) => [...asArray(t.item), ...asArray(t.fluid), ...asArray(t.anyOf), ...asArray(t.allOf), ...asArray(t.input), ...asArray(t.output)];
   for (const t of [...cfg.targets, ...cfg.autoTargets]) {
-    for (const k of targetKeys(t)) for (const kk of resolve(k, `objetivo ${t.id}`)) g.key(kk);
+    for (const k of targetKeys(t)) for (const kk of resolve(k, `target ${t.id}`)) g.key(kk);
   }
   for (const k of [...facts.manual, ...facts.auto, ...facts.bootstrap]) g.key(k);
   for (const k of cfg.extraFacts) facts.auto.push(k);

@@ -1,10 +1,10 @@
-// Utilidades de las pruebas: volcados y configuraciones en memoria (nada se escribe en disco).
+// Test utilities: in-memory dumps and configs (nothing is written to disk).
 import { makeDump } from '../lib/dump.mjs';
 import { buildModel } from '../lib/model.mjs';
 import { runPasses } from '../lib/analyze.mjs';
 import { analyze, renderText } from '../lib/report.mjs';
 
-/** Entrada de receta GT: objeto con cantidad y probabilidad de gasto (10000 = siempre, 0 = no se gasta). */
+/** GT recipe input: item with a count and consumption chance (10000 = always, 0 = never consumed). */
 export const gi = (item, count = 1, chance = 10000) => ({
   content: { type: 'gtceu:sized', count, ingredient: { item } }, chance, maxChance: 10000, tierChanceBoost: 0,
 });
@@ -15,7 +15,7 @@ export const gf = (fluid, amount = 1000, chance = 10000) => ({
   content: { amount, value: [{ fluid }] }, chance, maxChance: 10000, tierChanceBoost: 0,
 });
 
-/** Receta de máquina GT (inputs/outputs/tickInputs por capacidad). */
+/** GT machine recipe (inputs/outputs/tickInputs by capacity). */
 export const gt = (id, type, { ins = [], outs = [], fins = [], fouts = [], eut = 8, conditions, data } = {}) => ({
   id,
   type,
@@ -49,7 +49,7 @@ function collectItems(x, out) {
   }
 }
 
-/** Volcado en memoria; los objetos del registro salen de las propias recetas más `items`. */
+/** In-memory dump; registry items come from the recipes themselves plus `items`. */
 export function mkDump({ recipes = [], items = [], fluids = [], tagsItem = {}, tagsFluid = {}, machines = [], recipeTypes = [], veins = null, fluidVeins = null, config = null, structures = null, info = null } = {}) {
   const all = new Set(items);
   collectItems(recipes.map((r) => r.json), all);
@@ -73,15 +73,15 @@ export function run(dump, cfg, opts = {}) {
   return { model, res, out, text: renderText(model, res, out, { pass: opts.pass || 'both' }) };
 }
 
-/** {id: PASS|FAIL|WARN} de una lista de resultados. */
+/** {id: PASS|FAIL|WARN} from a list of results. */
 export const verdicts = (list) => Object.fromEntries(list.map((r) => [r.target.id, r.verdict]));
 
 const MINI_ITEMS = ['t:coal', 't:log', 't:sapling', 't:rock', 't:raw', 't:ingot', 't:bit', 't:sample', 't:casing'];
 const MINI_FLUIDS = ['t:water', 't:steam'];
 
 /**
- * Mini pack de vapor: mena -> lingote (horno con combustible) -> broca -> perforadora que da mena; invernadero que da
- * troncos; caldera (troncos + agua -> vapor); bomba (agua). Sirve de referencia "todo bien" y de base para las mutaciones.
+ * Steam mini pack: ore -> ingot (furnace with fuel) -> bit -> drill that gives ore; greenhouse that gives
+ * logs; boiler (logs + water -> steam); pump (water). Serves as the "everything works" reference and as a base for mutations.
  */
 export function miniPack({ drillEut = 8, extraRecipes = [] } = {}) {
   const I = { I: { item: 't:ingot' } };
@@ -134,7 +134,7 @@ export function miniPack({ drillEut = 8, extraRecipes = [] } = {}) {
   return { dump, cfg, recipes };
 }
 
-/** Quita recetas por id del mini pack y reconstruye el volcado. */
+/** Removes recipes by id from the mini pack and rebuilds the dump. */
 export function without(pack, ...ids) {
   const recipes = pack.recipes.filter((r) => !ids.includes(r.id));
   return { ...pack, recipes, dump: mkDump({ recipes, items: MINI_ITEMS, fluids: MINI_FLUIDS }) };

@@ -1,4 +1,4 @@
-// Carga de la configuración de un tier (tiers/<tier>.json) con herencia opcional (`extends`).
+// Loads a tier's configuration (tiers/<tier>.json) with optional inheritance (`extends`).
 import fs from 'node:fs';
 import path from 'node:path';
 import { readJson } from './util.mjs';
@@ -6,11 +6,11 @@ import { readJson } from './util.mjs';
 const MERGED_LISTS = ['world', 'machines', 'machinesFromRegistry', 'synthetic', 'toolTags', 'unconditionalTypes', 'ignoreTypes'];
 const TARGET_LISTS = ['targets', 'autoTargets', 'targetsFromVeins', 'autoTargetsFromVeins'];
 const MERGED_MAPS = ['typeAliases', 'conditions', 'partAbilities'];
-// Regla de eras (lib/eras.mjs): siempre se heredan y un elemento del hijo con el mismo id se combina campo a campo con el del
-// padre (basta `{"id": "end", "era": "mv"}` para mover un recurso de era). Un elemento nuevo sin `era` es de la era del archivo
-// que lo declara (`era` o `tier`).
+// Era rule (lib/eras.mjs): always inherited, and a child element with the same id is merged field by field with the
+// parent's (`{"id": "end", "era": "mv"}` is enough to move a resource to another era). A new element with no `era`
+// belongs to the era of the file declaring it (its `era` or `tier`).
 const ERA_LISTS = ['eraResources', 'eraItems'];
-// Listas cuyos elementos tienen identidad: un elemento del hijo con el mismo id sustituye al del padre en vez de duplicarlo.
+// Lists whose elements have an identity: a child element with the same id replaces the parent's instead of duplicating it.
 const KEY_OF = {
   world: (e) => e.id,
   machines: (e) => e.id || e.machine,
@@ -42,8 +42,8 @@ function mergeEraList(parentList, childList, era, drop) {
 }
 
 /**
- * Archivo del padre. Un `extends` por nombre (sin barras) se busca primero en la carpeta de la capa (`tiers/next/`) si el análisis
- * empezó en ella y ese archivo no es el que lo pide; si no, junto al archivo que lo pide (como siempre).
+ * Parent file. An `extends` by name (no slashes) is looked up first in the layer's folder (`tiers/next/`) if the
+ * analysis started there and that file isn't the one requesting it; otherwise, next to the requesting file (as usual).
  */
 function parentFile(file, ext, ctx) {
   if (ctx.overlayDir && !/[\\/]/.test(ext)) {
@@ -55,8 +55,8 @@ function parentFile(file, ext, ctx) {
 
 function loadFile(file, ctx, tierHint) {
   const resolved = path.resolve(file);
-  if (ctx.stack.includes(resolved)) throw new Error(`herencia circular en las configuraciones: ${[...ctx.stack, resolved].join(' -> ')}`);
-  if (!ctx.io.exists(file)) throw new Error(`no existe la configuración ${file}`);
+  if (ctx.stack.includes(resolved)) throw new Error(`circular inheritance in the configs: ${[...ctx.stack, resolved].join(' -> ')}`);
+  if (!ctx.io.exists(file)) throw new Error(`config ${file} doesn't exist`);
   const raw = ctx.io.read(file);
   const era = raw.era || raw.tier || tierHint;
   if (!raw.extends) {
@@ -76,25 +76,26 @@ function loadFile(file, ctx, tierHint) {
 }
 
 /**
- * @param {{tier?: string, config?: string}} o  nombre del tier o ruta explícita a un JSON
- * @param {string} tiersDir carpeta que contiene tiers/<tier>.json
+ * @param {{tier?: string, config?: string}} o  tier name or explicit path to a JSON file
+ * @param {string} tiersDir folder containing tiers/<tier>.json
  * @returns {{raw: object, file: string}}
  *
- * Un tier hijo (`extends: "steam"`) añade a las listas del padre y sustituye el resto de campos; con `inheritTargets: true`
- * hereda además los objetivos (targets, autoTargets y los generados desde vetas) del padre. Los mapas (typeAliases,
- * conditions, partAbilities) se combinan clave a clave y gana el hijo. Un elemento del hijo con el mismo id que uno del
- * padre (mundo, máquinas, sintéticas, objetivos) lo sustituye, y `dropTargets: [ids]` quita objetivos heredados que ya no
- * valen en el tier (p. ej. una comprobación de fuga del LV que en MV deja de ser cierta) y grupos de `eraItems`.
- * `eraOrder` se hereda; `eraResources` y `eraItems` se combinan elemento a elemento (ver ERA_LISTS).
+ * A child tier (`extends: "steam"`) appends to the parent's lists and replaces every other field; with
+ * `inheritTargets: true` it also inherits the parent's targets (targets, autoTargets and the ones generated from
+ * veins). Maps (typeAliases, conditions, partAbilities) are merged key by key, with the child winning. A child
+ * element with the same id as a parent one (world, machines, synthetics, targets) replaces it, and
+ * `dropTargets: [ids]` removes inherited targets no longer valid in the tier (e.g. an LV leak check that stops
+ * holding true in MV) and `eraItems` groups.
+ * `eraOrder` is inherited; `eraResources` and `eraItems` are merged element by element (see ERA_LISTS).
  *
- * Capa de la versión siguiente: una configuración fuera de `tiersDir` (tiers/next/hv.json, `extends: "../hv"`) hace que los
- * `extends` por nombre de toda su cadena se busquen antes en su carpeta, así que tiers/hv.json pasa a heredar de
- * tiers/next/mv.json. Dentro de la capa, un archivo hereda de su versión actual con la ruta (`"../mv"`), nunca por nombre.
- * `io` ({exists, read}) solo lo cambian las pruebas, para cargar árboles de configuración en memoria.
+ * Next-version layer: a config outside `tiersDir` (tiers/next/hv.json, `extends: "../hv"`) makes name-based
+ * `extends` across its whole chain get looked up in its folder first, so tiers/hv.json ends up inheriting from
+ * tiers/next/mv.json. Inside the layer, a file inherits from its current version by path (`"../mv"`), never by name.
+ * `io` ({exists, read}) is only changed by the tests, to load config trees in memory.
  */
 export function loadTierConfig(o, tiersDir, io = { exists: fs.existsSync, read: readJson }) {
   const file = o.config ? path.resolve(o.config) : path.join(tiersDir, `${o.tier}.json`);
-  if (!io.exists(file)) throw new Error(`no existe la configuración ${file}`);
+  if (!io.exists(file)) throw new Error(`config ${file} doesn't exist`);
   const overlayDir = path.resolve(path.dirname(file)) !== path.resolve(tiersDir) ? path.dirname(file) : null;
   const raw = loadFile(file, { overlayDir, stack: [], io }, o.tier);
   raw.tier = raw.tier || o.tier;

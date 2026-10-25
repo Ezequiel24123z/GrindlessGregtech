@@ -1,9 +1,9 @@
-// Carga del volcado que escribe tools/test/overlay/kubejs/server_scripts/gg_dump.js
-// (recipes.json, tags.json, items.json y, opcionales, machines.json, veins.json, info.json).
+// Loads the dump written by tools/test/overlay/kubejs/server_scripts/gg_dump.js
+// (recipes.json, tags.json, items.json and, optionally, machines.json, veins.json, info.json).
 import fs from 'node:fs';
 import path from 'node:path';
 
-/** Miembros de las etiquetas. Una etiqueta vacía de vanilla aparece como [minecraft:barrier]: se trata como vacía. */
+/** Tag members. An empty vanilla tag shows up as [minecraft:barrier]: treated as empty. */
 export class TagIndex {
   constructor(tagsDoc) {
     this.itemTags = new Map(Object.entries((tagsDoc && tagsDoc.item) || {}));
@@ -28,7 +28,7 @@ export class TagIndex {
   fluids(tag) {
     const v = this.fluidTags.get(tag);
     if (v === undefined || v.length === 0) {
-      // Las etiquetas de fluido solo se guardan si tienen miembros; una "forge:xyz" que no aparece no existe como fluido.
+      // Fluid tags are only saved if they have members; a "forge:xyz" that doesn't appear doesn't exist as a fluid.
       this.missing.add('fluid:' + tag);
       return [];
     }
@@ -39,7 +39,7 @@ export class TagIndex {
 function readIfExists(dir, name, required) {
   const p = path.join(dir, name);
   if (!fs.existsSync(p)) {
-    if (required) throw new Error(`Falta ${name} en ${dir} (¿se ejecutó el volcado gg_dump?)`);
+    if (required) throw new Error(`${name} is missing in ${dir} (did the gg_dump run?)`);
     return null;
   }
   return JSON.parse(fs.readFileSync(p, 'utf8'));
@@ -66,7 +66,7 @@ function normalizeConfig(values) {
   return out;
 }
 
-/** Construye el volcado a partir de los documentos ya leídos (también lo usan las pruebas, sin tocar el disco). */
+/** Builds the dump from already-read documents (also used by tests, with no disk access). */
 export function makeDump(dir, docs) {
   const recipesDoc = docs.recipes;
   const itemsDoc = docs.items;
@@ -78,7 +78,7 @@ export function makeDump(dir, docs) {
   for (const entry of recipesDoc.recipes || []) {
     try {
       const r = typeof entry === 'string' ? JSON.parse(entry) : entry;
-      // Las añadidas por scripts van al final y sustituyen a una receta con el mismo id (como hace KubeJS).
+      // Ones added by scripts go last and replace a recipe with the same id (same as KubeJS does).
       recipes.set(r.i, { id: r.i, type: r.t, added: !!r.a, json: r.j });
     } catch {
       parseErrors++;
@@ -103,12 +103,12 @@ export function makeDump(dir, docs) {
     machines,
     recipeTypes,
     veins: veinsDoc ? veinsDoc.veins || [] : null,
-    // yacimientos de fluidos de GT (perforadora de fluidos): [{id, fluid, weight, dims: [..] | null}]; null si no se volcaron
+    // GT fluid deposits (fluid drilling rig): [{id, fluid, weight, dims: [..] | null}]; null if not dumped
     fluidVeins: docs.fluidVeins ? docs.fluidVeins.veins || [] : null,
-    // interruptores de la config de GTM que importan para la progresión: {"worldgen.oreVeins...": true|false|null}; null sin config.json
-    // (los primeros volcados escribían "true"/"false" como texto: se normalizan)
+    // GTM config switches that matter for progression: {"worldgen.oreVeins...": true|false|null}; null with no config.json
+    // (early dumps wrote "true"/"false" as text: normalized here)
     config: docs.config ? normalizeConfig(docs.config.gtceu || {}) : null,
-    // descripción en datos de los patrones de multibloque del pack (global.grindless.structures); vacío si no se volcó
+    // data description of the pack's multiblock patterns (global.grindless.structures); empty if not dumped
     structures: new Map(Object.entries((docs.structures && docs.structures.structures) || {})),
   };
 }
