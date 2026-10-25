@@ -66,7 +66,7 @@ ClientEvents.lang('en_us', event => {
 
     add('block.grindless.hermean_heat_shield_brick', 'Hermean Heat-Shield Bricks')
     add('tooltip.grindless.hermean_heat_shield_brick.0', 'Mercury\'s regolith, sintered under concentrated sunlight into pale, heat-proof bricks.')
-    add('tooltip.grindless.hermean_heat_shield_brick.1', 'Made only on Mercury, in the solar works. Every structure on Mercury stands on them.')
+    add('tooltip.grindless.hermean_heat_shield_brick.1', 'Made only on Mercury, in the solar works. The Mercury vein drill, the solar field and the interferometer stand on them.')
 
     add('block.grindless.hermean_thin_film_panel', 'Hermean Thin-Film Panel')
     add('tooltip.grindless.hermean_thin_film_panel.0', 'Gallium arsenide evaporated onto a silicon wafer in Mercury\'s free vacuum, under tempered glass on a tungsten steel frame.')
@@ -154,7 +154,7 @@ ClientEvents.lang('es_es', event => {
 
     add('block.grindless.hermean_heat_shield_brick', 'Ladrillos de escudo térmico de Mercurio')
     add('tooltip.grindless.hermean_heat_shield_brick.0', 'Regolito de Mercurio sinterizado con luz solar concentrada en ladrillos claros que aguantan el calor.')
-    add('tooltip.grindless.hermean_heat_shield_brick.1', 'Solo se hacen en Mercurio, en la planta solar. Todas las estructuras de Mercurio se apoyan en ellos.')
+    add('tooltip.grindless.hermean_heat_shield_brick.1', 'Solo se hacen en Mercurio, en la planta solar. La perforadora de vetas de Mercurio, el campo solar y el interferómetro se apoyan en ellos.')
 
     add('block.grindless.hermean_thin_film_panel', 'Panel de película fina de Mercurio')
     add('tooltip.grindless.hermean_thin_film_panel.0', 'Arseniuro de galio evaporado sobre una oblea de silicio en el vacío de Mercurio, bajo vidrio templado y en un marco de acero de tungsteno.')
