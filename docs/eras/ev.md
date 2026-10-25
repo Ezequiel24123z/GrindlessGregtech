@@ -38,7 +38,7 @@ In EV the Moon goes from a place you visit to a factory that runs on its own. It
 
 ### Moon rules
 
-- **Vacuum: nothing burns.** Fuels for generators, gas turbines and large boilers carry `.dimension('gcyr:luna', true)` (small boilers do not use recipes: verify).
+- **Vacuum: nothing burns** (done 2026-10-25, B5b). Every recipe of the burning types (combustion generator, gas turbine, semi-fluid generator, GT--'s rocket engine, GTM's small and large boilers: 4,069 recipes) carries an allowlist of the dimensions with air (the Overworld, the Nether, the End, `grindless:void`, `grindless:flat`; `data/grindless/tables/site_fuels.json`, applied by `power/generators.js`). GTM ORs the dimension conditions of a recipe, so reversed conditions (`.dimension('gcyr:luna', true)`) could not be combined; the allowlist also leaves out every orbit and later planet with no more code. Small boilers do use recipes in GTM 7.5.3 (`gtceu:steam_boiler`), and a coal boiler stays cold on the Moon. Fuels that carry their own oxidizer (methalox, GTM's rocket fuel, GT--'s RP-1 and methylhydrazine nitrate mixtures) and lava burn anywhere. Scripts that add burning recipes call `global.grindless.power.burnsInAir(builder)`. Not covered: fires outside GTM's recipes (vanilla furnaces and smokers, AE2's vibration chamber, Farmer's Delight stoves).
 - **Cold: cheap cryogenics.** The cryogenic plant dumps heat into the black sky: at night it liquefies at half the energy of GTM's freezer.
 - **Light ×1.4, daytime only.** Solar power by day (the lunar solar array: 420 EU/t per lit panel); at night, buffers or Earth through the bridge.
 - **No liquid water: no mud.** The tripod drills dry (the bit wears out twice as fast) or cooled with Liquid Nitrogen.
@@ -77,7 +77,7 @@ AE2 is the backbone between planets (the user's decision), and improving it is a
   - **Ice vein:** `gtceu:deuterium_rich_ice` (about five times Earth's deuterium), gypsum and salt, at Y 40–80. IV turns the ice into heavy water, which no mod in the pack has yet.
   
   Around the test band, the Martian surface is at about Y 149 and the veins sit at Y 0–80, so the first visit digs down, guided by the surface rocks. Raw merrillite becomes dust in a plain furnace, which works on Mars. The kit needs 3 empty vein probes.
-- **Mars rules.** Thin air of CO₂ with no O₂: combustion only works with oxygen (methalox = methane + O₂ in the mixer, burned in a gas turbine with `.dimension('gcyr:mars')`; other fuels get the inverse). Light ×0.43: solar barely produces. 0.38 g and 208 K: the HV suit is enough. Dust and pressurized equipment are IV.
+- **Mars rules.** Thin air of CO₂ with no O₂: combustion only works with oxygen. Air fuels burn only in the air dimensions (see the Moon's vacuum rule); methalox (methane + O₂ in the mixer) has no condition and burns anywhere, in the gas turbine (`grindless:gas_turbine/methalox`: 6 mB per 14 t at 32 EU/t, the 224 EU per mB of the methane it holds). Light ×0.43: solar barely produces. 0.38 g and 208 K: the HV suit is enough. Dust and pressurized equipment are IV.
 
 ## Automatic resource generation
 
@@ -159,14 +159,19 @@ What it gains: **liquids GTM does not make, and the site's cold.** GTM liquefies
 
 ### Atmosphere processor: `gtceu:atmosphere_processor` (Mars)
 
+**Status:** in the pack since 2026-10-25 (package B5b: `ev/mars_site.js`, `ev_mars_site_lang.js`, published as `global.grindless.marsSite`); bench run `b5b-mars-site-1` (33/0).
+
 What it gains: **a recipe that exists only on Mars, and three machines in one.** It takes CO₂ from the air, makes hydrogen from water and combines it with CO₂ (Sabatier): oxygen and methane, the base's oxidizer and fuel. It is the first thing built on Mars after the bridge.
 
-- **Recipe type:** `gtceu:atmosphere_processing` (new, verify id), with `.dimension('gcyr:mars')`. It takes air from outside, like the gas collector. One recipe: water → CH₄ + O₂ (net of electrolysis and Sabatier: CO₂ + 2 H₂O → CH₄ + 2 O₂), using the energy of GTM's two stages (figures to be set).
-- **Own condition:** Ruthenium catalyst (`grindless:ruthenium_catalyst`), with Ruthenium from the platinum plant, which is used up by chance.
-- **Structure:** 5×5×6 of stable Titanium casing: air intake with dust filters on top, electrolysis stack and reactor; input hatch (water), 2 output hatches (CH₄ and O₂), catalyst bus and 1–2 EV hatches.
+- **Recipe type:** `gtceu:atmosphere_processing`, every recipe with `.dimension('gcyr:mars')` (read from `veins_mars.json`), 1,920 EU/t:
+  - **Circuit 1, Sabatier:** 2,000 mB water (from home) + the CO₂ of the air + ruthenium catalyst (0.1%) → 1,000 mB CH₄ + 4,000 mB O₂, 134 ticks (CO₂ + 2 H₂O → CH₄ + 2 O₂).
+  - **Circuit 2, intake:** → 10,000 mB CO₂, 27 ticks, for the sealed dome.
+  - **Energy = GTM's stages, no discount:** the ender-air gas collector's 5.12 EU/mB for the thin air, water electrolysis (45 EU/mB) and `carbon_dioxide_from_methane` run backwards (72,000 EU): 257,120 EU, rounded up to whole ticks. Burning the methane in a gas turbine gives back 87% (76% as methalox, with the mixer): Mars power comes from home or the light.
+- **Own condition:** Ruthenium catalyst (`grindless:ruthenium_catalyst`), with Ruthenium from the platinum plant, which is used up by chance; with no catalyst it stays idle.
+- **Structure:** 5 wide, 6 high, 5 deep of stable Titanium casing: a 5×5×4 hall (a titanium frame column for the electrolysis stack, an air plenum, titanium pipe casings for the Sabatier reactor, a pipe-casing manifold, tempered glass on the front) and, set back on top, a 3×3 intake housing with a titanium gearbox (the fan) capped by filter casings. On the floor edge: 1–2 EV energy hatches, 1 input bus (catalyst and circuit), 1 input hatch, 2 output hatches, at least 10 casings. ME parts fit.
 - **Crafted with:** EV hull + EV gas collector + EV electrolyzer + EV chemical reactor + 4 EV circuits.
 - **Why it is not a big cube:** Martian air only exists there, it combines three machines that GTM has separately, and it crosses two planets (Ruthenium from Earth, water from home).
-- **Byproducts:** O₂ → suits and methalox. CH₄ → methalox for the Martian turbines or the home network. The water from the ice, rich in Deuterium, is saved for IV: the processor uses the one from home.
+- **Byproducts:** O₂ → suits and methalox. CH₄ → methalox for the Martian turbines or the home network. Spare CO₂ (circuit 2) → sealed dome. The water from the ice, rich in Deuterium, is saved for IV: the processor uses the one from home.
 
 ### Platinum plant: `gtceu:platinum_plant` (Earth)
 
@@ -297,7 +302,7 @@ What it gains: **a separation GTM does not do.** Martian rare earths (the KubeJS
 | Platinum | sulfide ore → macerator → washer → purified ore → plant, leach → sludge → plant, separation → Pt, Pd, Rh and Ru; EBF and freezer for the hot ingots | Ni and Cu: ore plant. H₂SO₄: sulfuric loop. Ir/Os and iridium residue: stored |
 | Nitric acid and chlorine | N₂ + 3 H₂ + 4 O₂ → HNO₃ (`nitric_acid_from_elements`, large chemical reactor); Cl₂ + H₂ → HCl; nitric + sulfuric → nitration mix (GT--) | Water: network. The line's chlorine goes back into the plant |
 | Nano circuits | phosphorus boule (EBF) → wafers → etching and cutting in cleanroom → NOR chips; CPU → nano wafer (EV reactor, 1,200 t) → processor, assembly and nano computer | Epoxy, acids and persulfate: HV loops. The parts leave no leftovers |
-| Martian atmosphere | Martian air + water → processor (ruthenium) → CH₄ + O₂ → mixer → methalox → gas turbine on Mars | Spare O₂: suits. Spare CH₄: home network |
+| Martian atmosphere | Martian air + water → processor (ruthenium) → CH₄ + O₂ → mixer → methalox → gas turbine on Mars (87% of the processor's energy back as methane, 76% as methalox) | Spare O₂: suits. Spare CH₄: home network. Spare CO₂ (circuit 2): sealed dome |
 | Tungsten (final) | scheelite + 2,000 mB of HCl → tungstic acid (bath, 960 EU/t) → electrolysis (W + 2,000 mB of H₂ + 4,000 of O₂) → EBF with nichrome at 3,600 K → freezer. Tungsten Steel: W + steel (EV mixer) → EBF 3,000 K → freezer. RTM: Ru + W + Mo → EBF 3,000 K → 4,500 K coil | CaCl₂: cell charge. LiCl (from the tungstate): lithium. H₂ and O₂: network |
 | Metal mixture | stone dust → `stone_dust_separation` → mixture → `metal_mixture_separation` (900 EU/t) → hematite, bauxite, pyrolusite, barite and chromite | Each one to its own line; the barite is stored. The Ilmenite is removed from the recipe |
 | Combined cycle | refinery gas or any gas turbine fuel + distilled water → combined-cycle plant → EU + steam → large steam turbine | Steam: turbine, or the plant stops |
@@ -338,7 +343,7 @@ New rules in `tools/analysis/tiers/ev.json`:
   - `gg_test_moon.js` now scans for each world: `earth_mars` and `bees_mars`.
 - **Nothing in EV requires anything from IV.** No Tungsten before Mars (the tier 2 rocket, the suit, the tripod and its bit, the antenna and the Martian half go without it), no radioactives or Quantum Eyes (EV sensors, emitters and field generator stay in IV), no IV circuits, no naquadah, Iridium or Osmium.
 - **EV in two substages.** The validator splits the era into *Moon* and *Mars*: nothing on the way to Mars can require Tungsten, Samarium or Deuterium.
-- **Site machines.** Every recipe for the cell, the cryogenic plant, the solar array, the antenna and the lunar veins carries `.dimension('gcyr:luna')`; those for the processor and the Martian veins carry `.dimension('gcyr:mars')`.
+- **Site machines.** Every recipe for the cell, the cryogenic plant, the solar array, the antenna and the lunar veins carries `.dimension('gcyr:luna')`; those for the processor and the Martian veins carry `.dimension('gcyr:mars')`. The fuel recipes carry the five air dimensions (ORed; the validator ORs them too since 2026-10-25, `lib/model.mjs`).
 
 ## Registered ids (wave A, 2026-10-25)
 
