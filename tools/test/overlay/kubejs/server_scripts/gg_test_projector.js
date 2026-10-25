@@ -501,12 +501,14 @@
     var ingredients = []
     if (recipe.isPresent()) {
       asArray(recipe.get().getIngredients()).forEach(function (ing) {
-        var ids = asArray(ing.getItems()).map(function (st) { return String(st.getId()) })
+        var ids = []
+        try { ids = asArray(ing.getItemIds()).map(String) } catch (e) { ids = ['?'] }
         if (ids.length > 0) ingredients.push(ids[0] + (ids.length > 1 ? ' (+' + (ids.length - 1) + ')' : ''))
       })
     }
-    check('recipe', recipe.isPresent() && String(recipe.get().getResultItem(S.server.registryAccess()).getId()) === p.item,
-      p.recipe + ': ' + ingredients.join(', '))
+    var out = ''
+    try { out = String(recipe.get().getResultItem(S.server.registryAccess()).getId()) } catch (e2) { out = 'unreadable (' + e2 + ')' }
+    check('recipe', recipe.isPresent() && out === p.item, p.recipe + ' -> ' + out + ': ' + ingredients.join(', '))
     check('terminal_recipe', rm.byKey(rl('gtceu:shaped/basic_terminal')).isPresent(), "GTM's Terminal keeps its recipe (it works like the projector)")
     check('reflection', p.available(), "Gregtech Terminals' BlockPatternReflection is reachable from KubeJS: " + p.available())
   }
@@ -639,11 +641,11 @@
     S = { server: server, level: server.overworld(), t: 0, tick0: server.getTickCount(), nextAt: server.getTickCount() + STEP, failed: [], finished: false,
       hologramDone: false, formedChecked: false }
     try {
-      staticChecks()
-      survey()
+      try { staticChecks() } catch (e1) { check('static', false, 'exception: ' + e1) }
+      try { survey() } catch (e2) { check('survey', false, 'exception: ' + e2) }
       prepareWorld(S.level)
       startCases()
-      fakeTerminal()
+      try { fakeTerminal() } catch (e3) { check('fake.terminal', false, 'exception: ' + e3) }
     } catch (e) {
       check('run', false, 'exception: ' + e)
       finish()
