@@ -132,6 +132,7 @@ Gregtech Grindless is a GregTech Modern pack (Minecraft 1.20.1, Forge) in which 
   | uranium cycle | 10496–10559: the Overworld at Y 98–112 and the End at Y 198–214 |
   | heavy-water plant | 10752–10815 (roof at Y 112) |
   | fluorspar kiln | 11008–11071 |
+  | tritium removal facility | 12032–12095: the Moon at Y 198–214 and the Overworld at Y 98–112 |
 
   For a new test, keep going in steps of 256.
 

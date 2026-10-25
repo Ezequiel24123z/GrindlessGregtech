@@ -489,16 +489,16 @@ All of them are IV recipes (7,680 EU/t unless a composed GTM stage sets another 
 - **What it gains:** it gives the reactor's activated moderator a destination that keeps it contained, recycles the heavy water and turns tritium into a product.
 - **Reactor change:** with heavy water, an LEU or MOX core turns 5 mB of heavy water into 5 mB of tritiated heavy water (`gtceu:tritiated_heavy_water`, radioactive, voiding refused), instead of 5 mB of tritium.
 - **Recipe** (`.dimension('gcyr:luna')`):
-  - In: 1,000 mB tritiated heavy water + 100 mB deuterium (the exchange carrier, returned).
-  - Out: 900 mB heavy water + 200 mB tritium + 100 mB deuterium.
-  - EU: GTM's `centrifuge/deuterium_separation` per mB of tritium (12,800 EU per 40 mB, so 320 EU/mB: 64,000) + liquefying the carrier at the vacuum freezer's 1,920 EU/t for 240 t per 1,000 mB (46,080) = 110,080 EU.
-  - At night, with the radiators seeing the sky, it costs half: the cryogenic plant's run-start rule *(tune)*.
+  - In: 1,000 mB tritiated heavy water, with a 100 mB deuterium charge in an input hatch (the exchange carrier: GTM's non-consumed fluid input, needed to start and never drained).
+  - Out: 900 mB heavy water + 200 mB tritium.
+  - EU: GTM's `centrifuge/deuterium_separation` per mB of tritium (12,800 EU per 40 mB, so 320 EU/mB: 64,000) + liquefying the 100 mB carrier at the vacuum freezer's 460,800 EU per 1,000 mB (1,920 EU/t for 240 t): 46,080 = 110,080 EU, spent as 6,880 EU/t for 16 ticks.
+  - At night, with the radiators seeing the sky, it costs half: 3,440 EU/t (55,040 EU), the cryogenic plant's run-start rule.
 - **Byproducts:**
   - The heavy water goes back to the reactor. At full power the make-up drops from 3,600 to 360 mB/h.
-  - The tritium is stored for LuV fusion (voiding refused): about 720 mB/h, against `iv.md`'s 3,600 *(tune)*.
-  - The deuterium loops.
+  - The tritium is stored for LuV fusion (voiding refused): 720 mB/h from a full heavy-water reactor.
+  - The deuterium charge stays in the facility.
 - **Structure:** a 3×3×12 frost-proof cold box on sintered regolith, two 1×1×6 catalytic exchange columns of titanium pipe casing, and two 2×3 wings of Night-Sky Radiators. Parts go in the lowest ring.
-- **Controller:** IV hull + cryogenic plant controller + IV electrolyzer + 2 IV pumps + 4 IV circuits.
+- **Controller:** IV hull + cryogenic plant controller + **EV** electrolyzer (GTM's IV one needs Mercury's osmium) + 2 IV pumps + 4 IV circuits.
 - **Why it is not a big cube:** columns, a cold box and radiator wings. It works only on the Moon, takes the reactor's water and gives it back.
 - **Crossings:**
   - EV: the Moon base's radiators, brick and night rule;
@@ -506,6 +506,11 @@ All of them are IV recipes (7,680 EU/t unless a composed GTM stage sets another 
   - LuV: the tritium.
 - **Risks:** tritium is cheap through GTM's `deuterium_separation` (160 mB D → 40 mB T at 80 EU/t) and still leaks from liquid ender air. Decision 4 settles both: tritium comes only through this facility.
 - **Source and licence:** real: the Darlington Tritium Removal Facility (Ontario Hydro, 1990: vapour-phase catalytic exchange, cryogenic distillation, tritium stored on titanium) and ITER's isotope separation system.
+- **As built (IV-B4):**
+  - One recipe, `grindless:detritiation/tritiated_heavy_water`, Moon only; off the Moon it forms and the controller says it only works there.
+  - The night price is a run-start modifier: a run keeps the price it started with (all 12 radiators must see the sky). A run restarted from GTM's cache keeps the previous run's price, which only matters if new feed arrives in the very tick a run ends; the cryogenic plant behaves the same.
+  - Fluid voiding is refused with `lib/no_voiding.js`, in the modifier and in `beforeWorking`.
+  - Structure: 7 × 13 × 3, 143 blocks; parts in the cold box's lowest ring (1–2 energy, 1–2 input and 1–2 output hatches). The facility works 58 ticks an hour behind a full reactor.
 
 #### Fuel fabrication plant: `gtceu:fuel_fabrication_plant`, type `gtceu:fuel_fabrication` (Earth)
 
