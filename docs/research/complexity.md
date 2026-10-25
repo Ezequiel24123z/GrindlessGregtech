@@ -12,13 +12,13 @@ Steam–HV are **built** (real KubeJS code, tested in-game). EV–IV are **desig
 | GTM multiblocks that become useful | — (no electricity) | EBF + 1-block machines | MV fluid drill | cleanroom, cracker, large chemical reactor, large steel boiler/turbine | freezer, distillation tower, large combustion engine/gas turbine, large EV miner | assembly line, large IV miner, parallel ×4, quantum chest/tank |
 | Process lines (tabulated in the era) | ~4 (rebuilt, no table of its own) | 4 (+ AE2 as a separate mega-line, ~20 steps) | 5 | 6 (+ rocket project, + syngas) | 9 | 8 |
 | Average steps per line | ~1.5 | ~5 | ~4.5 | ~5 | ~4 | ~4.5 |
-| Quests (chapter `*_age.snbt`) | 46 | 51 | 47 | 42 | 12 (of ~25 planned) | 0 (of ~22 planned) |
+| Quests (chapter `*_age.snbt`, v0.5.0) | 46 | 51 | 47 | 42 | 12 (of ~25 planned) | 0 (of ~22 planned) |
 | Items in the gate | 36 | 143 | 279 | 407 | — | — |
 | Automatable items (auto) | 27 | 88 | 193 | 295 | — | — |
 | Era-order rules checked by the validator | 6 | 14 | 22 | 37 | — | — |
 | Play hours (estimated) | 3–5 | 7–11 | 10–15 | 18–26 | 30–45 | 45–70 |
 
-The quest figures for LV/MV/HV are **the ones from before the rewrite** (`DECISIONS.md`, translated from Spanish: "LV, MV, HV... rewritten by six writers in parallel... go into v0.5.1"); they cannot yet be used to measure a trend. EV only has the "Lunar Base" chapter (12 quests): the Mars, platinum and nano section of `ev.md` itself is not written yet.
+The quest figures are v0.5.0's: LV, MV and HV **from before the rewrite** (`DECISIONS.md`, translated from Spanish: "LV, MV, HV... rewritten by six writers in parallel... go into v0.5.1"), and EV with only the "Lunar Base" chapter (12 quests). They cannot be used to measure a trend. After the 2026-10-25 voice pass the chapters have 44 (Steam), 51 (LV), 49 (MV), 32 (HV) and 55 (EV) quests, and the count no longer follows an era's size: a quest only stays if it teaches something about this pack (`docs/quests.md` section 8).
 
 The multiblock row counts **progression** multiblocks only, the ones that add a recipe, route or line. Parallel versions of machines that already exist are quality of life and are counted apart (`DECISIONS.md`, 2026-10-25). Example: the 11 steam family multiblocks of v0.5.2.
 
@@ -37,7 +37,7 @@ Tabulated lines (`mv.md`): silicon→chips (7), pyrolysis→fractions (2 steps, 
 Tabulated lines (`hv.md`): crude→fuels (6), cracking→olefins/aromatics (4), PTFE (3), epoxy/SBR (7), titanium (5), EV circuits (4). Plus the **first rocket project** (MV test bench → HV autoclave → rocket motor/tank, ~6-8 steps crossing MV+HV) and the syngas plant (6 recipes). The refinery catalyst already crosses 3 ore lines (cobalt from nickel, molybdenum from the Nether, silica from sand): it is the best example already built of a "deep cross-link".
 
 ### EV (design) — 7 multiblocks: `regolith_cell`, `cryogenic_plant`, `atmosphere_processor`, `platinum_plant` (new) + `ev_vein_drill`, `lunar_solar_array`, `deep_space_antenna` (steps)
-9 tabulated lines in `ev.md`. It is the first era with **explicit reserves 2-3 eras ahead**: helium→IV ingots, helium-3→LuV fusion, liquid nitrogen→Mercury vein drill (IV), Ir/Os→IV refining, CaCl₂ in a loop with the Moon. Two sites (Moon automated, Mars by hand).
+9 tabulated lines in `ev.md`. It is the first era with **explicit reserves 2-3 eras ahead**: helium→IV ingots, helium-3→LuV fusion, liquid nitrogen→Mercury vein drill (IV), Ir/Os→IV refining (dropped by IV-B3: Earth gives no iridium or osmium, only Mercury does), CaCl₂ in a loop with the Moon. Two sites (Moon automated, Mars by hand).
 
 ### IV (design) — 8 multiblocks: `fission_reactor`, `hot_cell`, `naquadah_plant` (new) + `pressurized_vein_drill`, `mercury_vein_drill`, `venus_heat_engine`, `mercury_solar_field`, `interferometer` (steps)
 8 tabulated lines in `iv.md`. It keeps reserving items for later eras: tritium→LuV fusion, enriched sulfate/trinium→LuV, naquadria solution→ZPM, Cs→naquadria ZPM. Two simultaneous sites (Venus + Mercury).
@@ -107,12 +107,14 @@ The axis that can really compound without inflating quantities is the **density 
 
 ### EV vs. the target
 
-`ev.md` met the lines target (9 tabulated lines), and it is the first era with explicit reserves 2-3 eras ahead (helium→IV, helium-3→LuV fusion, Ir/Os→IV, liquid nitrogen→Mercury vein drill (IV)). With 7 own multiblocks (4 new + 3 steps), it fell short of the ×1.35 target of 10.
+`ev.md` met the lines target (9 tabulated lines), and it is the first era with explicit reserves 2-3 eras ahead (helium→IV, helium-3→LuV fusion, Ir/Os→IV until IV-B3 made iridium and osmium Mercury-only, liquid nitrogen→Mercury vein drill (IV)). With 7 own multiblocks (4 new + 3 steps), it fell short of the ×1.35 target of 10.
 - **Closed on 2026-10-25:** four more were added (`ev.md`, "Raising EV to the target"): combined-cycle plant, hot strip mill, sealed dome and rare-earth extraction cascade. That makes 11.
 
 What is still missing is not design; it is **measurement tooling and pending content**:
 - There is no `tools/analysis/tiers/ev.json`: the EV gate cannot be validated yet.
+  - **Closed on 2026-10-25:** C1 added it (`ev.md`, *Validator*).
 - The quest chapter only covers the Moon (12 of ~25): Mars, platinum plant, nano circuits and wither are missing.
+  - **Closed on 2026-10-25:** package C2 wrote the whole era (66 quests in v0.6.0), and the voice pass cut it to 55.
 - The risks the document itself flags (GCYR failures when launching/changing dimension, AE2 performance across 3 dimensions) are the ones that really block, not the lack of cross-links.
 
 ### IV vs. the target

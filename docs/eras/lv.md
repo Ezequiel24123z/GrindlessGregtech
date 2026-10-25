@@ -275,7 +275,7 @@ No new mod is required: machines, recipe types and models are KubeJS.
 - **Server:** remove by type `ae2:inscriber` and `ae2:charger`, the `ae2:transform` recipes for certus and fluix, and AE2's crafting recipes; also remove `silicon_from_certus_quartz_dust`. Everything is regenerated from `ae2_gt.json` and `mobs.json`.
 - **Tags:** merge `forge:gems/certus_quartz` (GT and AE2 have the same crystal: GT's outputs are switched to AE2's) and add GT's silicon to `forge:silicon`.
 - **Dimensions:** GTM's air is only valid in `overworld`; add gas collector recipes with `.dimension('grindless:void')` and `.dimension('grindless:flat')`, and plains biome in both.
-- **Quests:** chapter "LV Factory" (translated from Spanish) with about 9 quests, one per step, a small reward and no recipe locks.
+- **Quests:** the "LV: The First Spark" chapter, 51 quests since the 2026-10-25 voice pass (`docs/quests.md` section 14), with small rewards and no recipe locks.
 - **Tests:** (1) it starts; (2) the four new multiblocks and machines form and process; (3) sand → certus → fluix → processor → controller, and sapphire → Aluminium → MV machine hull.
 
 ## Risks and open questions
