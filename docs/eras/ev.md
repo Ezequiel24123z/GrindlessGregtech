@@ -40,7 +40,7 @@ In EV the Moon goes from a place you visit to a factory that runs on its own. It
 
 - **Vacuum: nothing burns.** Fuels for generators, gas turbines and large boilers carry `.dimension('gcyr:luna', true)` (small boilers do not use recipes: verify).
 - **Cold: cheap cryogenics.** The cryogenic plant dumps heat into the black sky: at night it liquefies at half the energy of GTM's freezer.
-- **Light ×1.4, daytime only.** Solar power by day; at night, buffers or Earth through the bridge.
+- **Light ×1.4, daytime only.** Solar power by day (the lunar solar array: 420 EU/t per lit panel); at night, buffers or Earth through the bridge.
 - **No liquid water: no mud.** The tripod drills dry (the bit wears out twice as fast) or cooled with Liquid Nitrogen.
 
 ### The AE2 network: EV step
@@ -175,8 +175,15 @@ Per 9 ores: 6 Pt, about 4.2 Pd, about 1.35 Rh and about 4.5 Ru. The CaCl₂ (9 p
 ### Family steps
 
 - **Drill:** the EV tripod (above).
-- **Power: lunar solar array** (`gtceu:lunar_solar_array`). The next step after LV's mirror tower: no mirrors, no boiler and no water; silicon panels from the cell on Titanium frames over sintered brick, with radiators. A generator with no inputs, daytime only, on the Moon (×1.4) or on Mars (×0.43); power per panel to be tuned. Made like TFG's large solar panel (idea only). At night, buffers and the bridge.
-- **Observatory: deep space antenna** (`gtceu:deep_space_antenna`, Moon). Step up from MV's radio telescope: a dish on the far side, safe from Earth's radio noise. With power, it writes the Mars chart onto a `gtceu:data_stick` (`grindless:mars_chart`, catalyst for the tier 2 parts), and its quest opens with the first signal from Sagittarius A\*.
+- **Power: lunar solar array** (`gtceu:lunar_solar_array`, type `gtceu:lunar_solar`; built on 2026-10-25, run `b4-lunar-power-2`). The next step after LV's mirror tower: no mirrors, no boiler and no water.
+  - **Structure:** 36 Solar Wing Panels (the tripod's block: titanium frame + 2 silicon wafers + tempered glass) in 4 rows of 9 on titanium frame posts over sintered regolith, a titanium DC bus, a radiator bank and a regolith control hut with 1 input bus and 1–4 dynamo hatches.
+  - **Output:** one run per panel whose top sees open sky, capped by the dynamo hatches: 420 EU/t per panel on the Moon (300 × 1.4, circuit 1) and 129 on Mars (300 × 0.43, circuit 2), by day only, nothing consumed. A full Moon field gives 15,120 EU/t. The circuit picks the site, because GTM's recipe lookup needs an input.
+  - The first generator multiblock with its own recipe type (`lib/generators.js`): its EU charges a real battery buffer.
+  - At night, buffers and the bridge.
+  - Made like TFG's large solar panel (idea only).
+- **Observatory: deep space antenna** (`gtceu:deep_space_antenna`, type `gtceu:deep_space_tracking`, Moon). Step up from MV's radio telescope: a 7×7 titanium dish on a sintered regolith pedestal, safe from Earth's radio noise.
+  - On the Moon at night, the lunar landing-site chart (not consumed) + a data stick give the Mars chart (`grindless:mars_chart`, the catalyst for the tier 2 parts), at 1,920 EU/t for 30 s. Chart + data stick → 2 by hand.
+  - Its quest opens with the first signal from Sagittarius A\*.
 - **Greenhouse: sealed dome** (added on 2026-10-25, see *Raising EV to the target*). The earlier "no EV step" is reversed: the wither needs biomass and the bases need O₂, and the dome grows both without sky.
 - **From GTM:** EBF, large chemical reactor, tower, freezer, cleanroom and large turbines, as they are.
 
@@ -360,6 +367,7 @@ Chapter **"EV — Moonbase"** in the eras tab, written in English: about 25 shor
 ## Risks
 
 - **GCYR in-game.** Open bugs on launch and on changing dimension (#91, #122), being tested now; Mars depends on a second flight. Plan B: a travel key to Mars, like the End's, with the same rules.
+- **Shared weather.** GCYR's planets share the Overworld's weather. During a thunderstorm at home, the darker sky makes GTM's day condition fail at noon, so the solar array stops for the storm, on the Moon too (rain does not). Not tested. If it bothers, a day check by game time can replace GTM's condition.
 - **AE2 across dimensions.** Each bridge needs both ends loaded, and three loaded worlds are a heavy load; power over P2P pays an AE2 tax. If performance cannot keep up, fewer pairs and higher-amperage converters.
 - **Moon base balance.** Chlorine-free Titanium at the Kroll's energy, and liquids at half price at night. If they make the Kroll or the home freezer pointless, they get cut back (the titanium mode yields less; the night discount goes down). Recipe time is never changed.
 - **Leaks when removing resources from Earth.** Ti, W, He-3, Sm and D come out of recipes, ore byproducts and addons. A leak breaks the journey without showing in-game: only the validator sees it.
