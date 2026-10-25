@@ -239,7 +239,7 @@ Why this order, checked against the recipe dump of v0.4.0:
 
 The SNBT files are the source: they are edited by hand, following this guide. Two exceptions are generated from data kept in `tools/quests/`: `ev_age.snbt` (section 14) and the Processing Lines (section 17). For those, edit the data and regenerate.
 
-## 14. Plan for Steam, LV, MV, HV and EV: the Moon through each instrument
+## 14. Plan for Steam, LV, MV, HV, EV and IV: the Moon through each instrument
 
 ### The journey's spine
 
@@ -329,6 +329,10 @@ The sky row and the steam-content machines are in. Section 13 describes the chap
 Spine: the journey from *Lunar Base* to *Red Horizon* and the *IV Machine Hull*. Above it the Moon and Mars, below it Earth's power, platinum and nano circuits (see `docs/eras/ev.md`, "Quests"). Far requirements are named in the text, not drawn as long lines (section 5).
 
 The chapter is generated: its source is `tools/quests/ev-chapter/quests-data.mjs` (every quest, task and reward id spelled out). Edit the data and run `node tools/quests/ev-chapter/gen.mjs`, which rewrites `ev_age.snbt` in the book's format.
+
+### IV — "IV: Inner Planets" (`iv_age.snbt`, 53 quests, 74 dependencies; done in v0.7.0)
+
+Spine: the route from the hot cell and the reactor, through the Moon's tritium and the chart, to Mercury, iridium and the assembly line, ending at *Gate to LuV*. Above it uranium, fuel and Venus; below it heavy water, Mercury's solar field and the parallel hatch (see `docs/eras/iv.md`, "Quests"). Machine quests carry the machine's name; the two landings (*Under the Clouds*, *Day of Fire*) are the milestones.
 
 ## 15. Quality of life tabs: what to fix
 

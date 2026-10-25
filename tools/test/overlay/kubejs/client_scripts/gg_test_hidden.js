@@ -12,6 +12,8 @@
 //   client_recipes  EMI shows no recipe that makes or uses a hidden item; it shows the LV sifter's perlite, perlite's electrolysis and the
 //                   old sample's conversion into an empty vein probe
 //   client_jei      JEI runs under EMI: its ingredient list and recipe screen are EMI's (JEMI), so JEI shows nothing of its own
+//   client_chipped  a mod that only ships a JEI plugin reaches EMI: Chipped's workbench categories hold recipes and stone is used by one
+//                   (with JEI 15.56 every one of them failed: EMI 1.1.22's JEMI slot builder lacks a method that JEI made abstract)
 // GGTEST|hidden|client_<check>|PASS|FAIL|NOTE, and GGTEST|hidden|client_done when it lets the client go.
 // var + function: this Rhino throws "redeclaration of var" for const/let in functions that run more than once.
 ;(function () {
@@ -159,6 +161,38 @@
       jei = 'JEMI not available: ' + e
     }
     log('client_jei', ok ? 'PASS' : 'FAIL', jei)
+
+    // 5) Chipped (JEI plugin only, through JEMI)
+    var chipped = []
+    var chippedTotal = 0
+    var cats = jlist(rm.getCategories())
+    for (var ci = 0; ci < cats.size(); ci++) {
+      var cid = String(cats.get(ci).getId())
+      if (cid.indexOf('chipped:') !== 0) continue
+      var n = count(rm.getRecipes(cats.get(ci)))
+      chipped.push(cid + ' ' + n)
+      chippedTotal += n
+    }
+    var stoneUses = jlist(rm.getRecipesByInput(stackOf('minecraft:stone')))
+    var stoneInChipped = 0
+    var sample = ''
+    for (var si = 0; si < stoneUses.size(); si++) {
+      var sr = stoneUses.get(si)
+      var scat = String(sr.getCategory().getId())
+      if (scat.indexOf('chipped:') !== 0) continue
+      stoneInChipped++
+      if (sample === '') {
+        var outs = jlist(sr.getOutputs())
+        var made = []
+        for (var oi = 0; oi < outs.size() && made.length < 3; oi++) {
+          var oid = String(outs.get(oi).getId())
+          if (oid.indexOf('chipped:') === 0) made.push(oid)
+        }
+        sample = scat + ': minecraft:stone -> ' + outs.size() + ' outputs (' + made.join(', ') + (outs.size() > made.length ? ', ...' : '') + ')'
+      }
+    }
+    log('client_chipped', chippedTotal > 0 && stoneInChipped > 0 ? 'PASS' : 'FAIL', 'Chipped categories in EMI: ' + (chipped.join(', ') || 'none') +
+      '; ' + chippedTotal + ' recipes; ' + stoneInChipped + ' of them use stone' + (sample === '' ? '' : '; ' + sample))
   }
 
   function tick() {
