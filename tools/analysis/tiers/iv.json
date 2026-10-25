@@ -181,6 +181,391 @@
       "note": "GCYM's alloy blast smelter (GCYMMachines.BLAST_ALLOY_SMELTER: high-temperature smelting casing, a ring of heating coils, heat vents, a muffler) on 2 EV hatches (IV voltage). IV-B6 moved its controller to IV (IV alloy smelter, IV circuits, tantalum carbide): at home. Its recipes give molten alloys (the freezer casts them)."
     },
     {
+      "id": "gtceu:large_maceration_tower@ev2",
+      "machine": "gtceu:large_maceration_tower",
+      "energy": { "voltage": 2048, "hatches": 2 },
+      "needs": ["eu:ev"],
+      "parts": [
+        "gtceu:secure_maceration_casing", "gtceu:crushing_wheels", "gtceu:ev_energy_input_hatch", "gtceu:lv_input_bus", "gtceu:lv_output_bus", "gtceu:lv_input_hatch", "gtceu:lv_output_hatch",
+        { "anyOf": ["gtceu:maintenance_hatch"], "onlyIf": { "config": "machines.enableMaintenance", "equals": true } }
+      ],
+      "note": "GCYM (GTM 7.5.3 GCYMMachines): secure maceration casing and crushing wheels. At home on 2 EV hatches (IV voltage); IV-B6's split puts it at home."
+    },
+    {
+      "id": "gtceu:large_maceration_tower@iv2",
+      "machine": "gtceu:large_maceration_tower",
+      "energy": { "voltage": 8192, "hatches": 2 },
+      "needs": ["eu:iv"],
+      "parts": [
+        "gtceu:secure_maceration_casing", "gtceu:crushing_wheels", "gtceu:iv_energy_input_hatch", "gtceu:lv_input_bus", "gtceu:lv_output_bus", "gtceu:lv_input_hatch", "gtceu:lv_output_hatch",
+        { "anyOf": ["gtceu:maintenance_hatch"], "onlyIf": { "config": "machines.enableMaintenance", "equals": true } }
+      ],
+      "note": "GCYM: secure maceration casing and crushing wheels. On 2 IV hatches after Mercury (LuV voltage, GTM's two-hatch rule)."
+    },
+    {
+      "id": "gtceu:large_chemical_bath@ev2",
+      "machine": "gtceu:large_chemical_bath",
+      "energy": { "voltage": 2048, "hatches": 2 },
+      "needs": ["eu:ev"],
+      "parts": [
+        "gtceu:watertight_casing", "gtceu:titanium_pipe_casing", "gtceu:ev_energy_input_hatch", "gtceu:lv_input_bus", "gtceu:lv_output_bus", "gtceu:lv_input_hatch", "gtceu:lv_output_hatch",
+        { "anyOf": ["gtceu:maintenance_hatch"], "onlyIf": { "config": "machines.enableMaintenance", "equals": true } }
+      ],
+      "note": "GCYM (GTM 7.5.3 GCYMMachines): watertight casing and a titanium pipe. At home on 2 EV hatches (IV voltage); IV-B6's split puts it at home."
+    },
+    {
+      "id": "gtceu:large_chemical_bath@iv2",
+      "machine": "gtceu:large_chemical_bath",
+      "energy": { "voltage": 8192, "hatches": 2 },
+      "needs": ["eu:iv"],
+      "parts": [
+        "gtceu:watertight_casing", "gtceu:titanium_pipe_casing", "gtceu:iv_energy_input_hatch", "gtceu:lv_input_bus", "gtceu:lv_output_bus", "gtceu:lv_input_hatch", "gtceu:lv_output_hatch",
+        { "anyOf": ["gtceu:maintenance_hatch"], "onlyIf": { "config": "machines.enableMaintenance", "equals": true } }
+      ],
+      "note": "GCYM: watertight casing and a titanium pipe. On 2 IV hatches after Mercury (LuV voltage, GTM's two-hatch rule)."
+    },
+    {
+      "id": "gtceu:large_centrifuge@ev2",
+      "machine": "gtceu:large_centrifuge",
+      "energy": { "voltage": 2048, "hatches": 2 },
+      "needs": ["eu:ev"],
+      "parts": [
+        "gtceu:vibration_safe_casing", "gtceu:steel_pipe_casing", "gtceu:ev_energy_input_hatch", "gtceu:lv_input_bus", "gtceu:lv_output_bus", "gtceu:lv_input_hatch", "gtceu:lv_output_hatch",
+        { "anyOf": ["gtceu:maintenance_hatch"], "onlyIf": { "config": "machines.enableMaintenance", "equals": true } }
+      ],
+      "note": "GCYM (GTM 7.5.3 GCYMMachines): vibration-safe casing and a steel pipe. At home on 2 EV hatches (IV voltage); IV-B6's split puts it at home."
+    },
+    {
+      "id": "gtceu:large_centrifuge@iv2",
+      "machine": "gtceu:large_centrifuge",
+      "energy": { "voltage": 8192, "hatches": 2 },
+      "needs": ["eu:iv"],
+      "parts": [
+        "gtceu:vibration_safe_casing", "gtceu:steel_pipe_casing", "gtceu:iv_energy_input_hatch", "gtceu:lv_input_bus", "gtceu:lv_output_bus", "gtceu:lv_input_hatch", "gtceu:lv_output_hatch",
+        { "anyOf": ["gtceu:maintenance_hatch"], "onlyIf": { "config": "machines.enableMaintenance", "equals": true } }
+      ],
+      "note": "GCYM: vibration-safe casing and a steel pipe. On 2 IV hatches after Mercury (LuV voltage, GTM's two-hatch rule)."
+    },
+    {
+      "id": "gtceu:large_packer@ev2",
+      "machine": "gtceu:large_packer",
+      "energy": { "voltage": 2048, "hatches": 2 },
+      "needs": ["eu:ev"],
+      "parts": [
+        "gtceu:robust_machine_casing", "gtceu:ev_energy_input_hatch", "gtceu:lv_input_bus", "gtceu:lv_output_bus", "gtceu:lv_input_hatch", "gtceu:lv_output_hatch",
+        { "anyOf": ["gtceu:maintenance_hatch"], "onlyIf": { "config": "machines.enableMaintenance", "equals": true } }
+      ],
+      "note": "GCYM (GTM 7.5.3 GCYMMachines): robust tungstensteel casing. At home on 2 EV hatches (IV voltage); IV-B6's split puts it at home."
+    },
+    {
+      "id": "gtceu:large_packer@iv2",
+      "machine": "gtceu:large_packer",
+      "energy": { "voltage": 8192, "hatches": 2 },
+      "needs": ["eu:iv"],
+      "parts": [
+        "gtceu:robust_machine_casing", "gtceu:iv_energy_input_hatch", "gtceu:lv_input_bus", "gtceu:lv_output_bus", "gtceu:lv_input_hatch", "gtceu:lv_output_hatch",
+        { "anyOf": ["gtceu:maintenance_hatch"], "onlyIf": { "config": "machines.enableMaintenance", "equals": true } }
+      ],
+      "note": "GCYM: robust tungstensteel casing. On 2 IV hatches after Mercury (LuV voltage, GTM's two-hatch rule)."
+    },
+    {
+      "id": "gtceu:large_assembler@ev",
+      "machine": "gtceu:large_assembler",
+      "energy": { "voltage": 2048, "hatches": 1 },
+      "needs": ["eu:ev"],
+      "parts": [
+        "gtceu:large_scale_assembler_casing", "gtceu:tempered_glass", "gtceu:ev_energy_input_hatch", "gtceu:lv_input_bus", "gtceu:lv_output_bus", "gtceu:lv_input_hatch", "gtceu:lv_output_hatch",
+        { "anyOf": ["gtceu:maintenance_hatch"], "onlyIf": { "config": "machines.enableMaintenance", "equals": true } }
+      ],
+      "note": "GCYM (GTM 7.5.3 GCYMMachines): large-scale assembler casing and tempered glass; exactly one energy hatch (it also runs GT--'s precision assembly). At home on one EV hatch (EV voltage); IV-B6's split puts it at home."
+    },
+    {
+      "id": "gtceu:large_assembler@iv",
+      "machine": "gtceu:large_assembler",
+      "energy": { "voltage": 8192, "hatches": 1 },
+      "needs": ["eu:iv"],
+      "parts": [
+        "gtceu:large_scale_assembler_casing", "gtceu:tempered_glass", "gtceu:iv_energy_input_hatch", "gtceu:lv_input_bus", "gtceu:lv_output_bus", "gtceu:lv_input_hatch", "gtceu:lv_output_hatch",
+        { "anyOf": ["gtceu:maintenance_hatch"], "onlyIf": { "config": "machines.enableMaintenance", "equals": true } }
+      ],
+      "note": "GCYM: large-scale assembler casing and tempered glass; exactly one energy hatch (it also runs GT--'s precision assembly). On one IV hatch after Mercury (IV voltage: GTM allows exactly one energy hatch, so no two-hatch step)."
+    },
+    {
+      "id": "gtceu:large_arc_smelter@ev2",
+      "machine": "gtceu:large_arc_smelter",
+      "energy": { "voltage": 2048, "hatches": 2 },
+      "needs": ["eu:ev"],
+      "parts": [
+        "gtceu:high_temperature_smelting_casing", "gtceu:molybdenum_disilicide_coil_block", "gtceu:lv_muffler_hatch", "gtceu:ev_energy_input_hatch", "gtceu:lv_input_bus", "gtceu:lv_output_bus", "gtceu:lv_input_hatch", "gtceu:lv_output_hatch",
+        { "anyOf": ["gtceu:maintenance_hatch"], "onlyIf": { "config": "machines.enableMaintenance", "equals": true } }
+      ],
+      "note": "GCYM (GTM 7.5.3 GCYMMachines): high-temperature smelting casing, MoSi2 coils and a muffler. At home on 2 EV hatches (IV voltage); IV-B6's split puts it at home."
+    },
+    {
+      "id": "gtceu:large_arc_smelter@iv2",
+      "machine": "gtceu:large_arc_smelter",
+      "energy": { "voltage": 8192, "hatches": 2 },
+      "needs": ["eu:iv"],
+      "parts": [
+        "gtceu:high_temperature_smelting_casing", "gtceu:molybdenum_disilicide_coil_block", "gtceu:lv_muffler_hatch", "gtceu:iv_energy_input_hatch", "gtceu:lv_input_bus", "gtceu:lv_output_bus", "gtceu:lv_input_hatch", "gtceu:lv_output_hatch",
+        { "anyOf": ["gtceu:maintenance_hatch"], "onlyIf": { "config": "machines.enableMaintenance", "equals": true } }
+      ],
+      "note": "GCYM: high-temperature smelting casing, MoSi2 coils and a muffler. On 2 IV hatches after Mercury (LuV voltage, GTM's two-hatch rule)."
+    },
+    {
+      "id": "gtceu:large_sifting_funnel@ev2",
+      "machine": "gtceu:large_sifting_funnel",
+      "energy": { "voltage": 2048, "hatches": 2 },
+      "needs": ["eu:ev"],
+      "parts": [
+        "gtceu:vibration_safe_casing", "gtceu:assembly_line_grating", "gtceu:ev_energy_input_hatch", "gtceu:lv_input_bus", "gtceu:lv_output_bus", "gtceu:lv_input_hatch", "gtceu:lv_output_hatch",
+        { "anyOf": ["gtceu:maintenance_hatch"], "onlyIf": { "config": "machines.enableMaintenance", "equals": true } }
+      ],
+      "note": "GCYM (GTM 7.5.3 GCYMMachines): vibration-safe casing and grating. At home on 2 EV hatches (IV voltage); IV-B6's split puts it at home."
+    },
+    {
+      "id": "gtceu:large_sifting_funnel@iv2",
+      "machine": "gtceu:large_sifting_funnel",
+      "energy": { "voltage": 8192, "hatches": 2 },
+      "needs": ["eu:iv"],
+      "parts": [
+        "gtceu:vibration_safe_casing", "gtceu:assembly_line_grating", "gtceu:iv_energy_input_hatch", "gtceu:lv_input_bus", "gtceu:lv_output_bus", "gtceu:lv_input_hatch", "gtceu:lv_output_hatch",
+        { "anyOf": ["gtceu:maintenance_hatch"], "onlyIf": { "config": "machines.enableMaintenance", "equals": true } }
+      ],
+      "note": "GCYM: vibration-safe casing and grating. On 2 IV hatches after Mercury (LuV voltage, GTM's two-hatch rule)."
+    },
+    {
+      "id": "gtceu:large_autoclave@ev2",
+      "machine": "gtceu:large_autoclave",
+      "energy": { "voltage": 2048, "hatches": 2 },
+      "needs": ["eu:ev"],
+      "parts": [
+        "gtceu:watertight_casing", "gtceu:steel_pipe_casing", "gtceu:ev_energy_input_hatch", "gtceu:lv_input_bus", "gtceu:lv_output_bus", "gtceu:lv_input_hatch", "gtceu:lv_output_hatch",
+        { "anyOf": ["gtceu:maintenance_hatch"], "onlyIf": { "config": "machines.enableMaintenance", "equals": true } }
+      ],
+      "note": "GCYM (GTM 7.5.3 GCYMMachines): watertight casing and a steel pipe. At home on 2 EV hatches (IV voltage); IV-B6's split puts it at home."
+    },
+    {
+      "id": "gtceu:large_autoclave@iv2",
+      "machine": "gtceu:large_autoclave",
+      "energy": { "voltage": 8192, "hatches": 2 },
+      "needs": ["eu:iv"],
+      "parts": [
+        "gtceu:watertight_casing", "gtceu:steel_pipe_casing", "gtceu:iv_energy_input_hatch", "gtceu:lv_input_bus", "gtceu:lv_output_bus", "gtceu:lv_input_hatch", "gtceu:lv_output_hatch",
+        { "anyOf": ["gtceu:maintenance_hatch"], "onlyIf": { "config": "machines.enableMaintenance", "equals": true } }
+      ],
+      "note": "GCYM: watertight casing and a steel pipe. On 2 IV hatches after Mercury (LuV voltage, GTM's two-hatch rule)."
+    },
+    {
+      "id": "gtceu:large_material_press@ev2",
+      "machine": "gtceu:large_material_press",
+      "energy": { "voltage": 2048, "hatches": 2 },
+      "needs": ["eu:ev"],
+      "parts": [
+        "gtceu:stress_proof_casing", "gtceu:steel_gearbox", "gtceu:tempered_glass", "gtceu:ev_energy_input_hatch", "gtceu:lv_input_bus", "gtceu:lv_output_bus", "gtceu:lv_input_hatch", "gtceu:lv_output_hatch",
+        { "anyOf": ["gtceu:maintenance_hatch"], "onlyIf": { "config": "machines.enableMaintenance", "equals": true } }
+      ],
+      "note": "GCYM (GTM 7.5.3 GCYMMachines): stress-proof casing, a steel gearbox and tempered glass. At home on 2 EV hatches (IV voltage); IV-B6's split puts it at home."
+    },
+    {
+      "id": "gtceu:large_material_press@iv2",
+      "machine": "gtceu:large_material_press",
+      "energy": { "voltage": 8192, "hatches": 2 },
+      "needs": ["eu:iv"],
+      "parts": [
+        "gtceu:stress_proof_casing", "gtceu:steel_gearbox", "gtceu:tempered_glass", "gtceu:iv_energy_input_hatch", "gtceu:lv_input_bus", "gtceu:lv_output_bus", "gtceu:lv_input_hatch", "gtceu:lv_output_hatch",
+        { "anyOf": ["gtceu:maintenance_hatch"], "onlyIf": { "config": "machines.enableMaintenance", "equals": true } }
+      ],
+      "note": "GCYM: stress-proof casing, a steel gearbox and tempered glass. On 2 IV hatches after Mercury (LuV voltage, GTM's two-hatch rule)."
+    },
+    {
+      "id": "gtceu:large_brewer@ev2",
+      "machine": "gtceu:large_brewer",
+      "energy": { "voltage": 2048, "hatches": 2 },
+      "needs": ["eu:ev"],
+      "parts": [
+        "gtceu:corrosion_proof_casing", "gtceu:steel_pipe_casing", "gtceu:molybdenum_disilicide_coil_block", "gtceu:ev_energy_input_hatch", "gtceu:lv_input_bus", "gtceu:lv_output_bus", "gtceu:lv_input_hatch", "gtceu:lv_output_hatch",
+        { "anyOf": ["gtceu:maintenance_hatch"], "onlyIf": { "config": "machines.enableMaintenance", "equals": true } }
+      ],
+      "note": "GCYM (GTM 7.5.3 GCYMMachines): corrosion-proof casing, a steel pipe and MoSi2 coils. At home on 2 EV hatches (IV voltage); IV-B6's split puts it at home."
+    },
+    {
+      "id": "gtceu:large_brewer@iv2",
+      "machine": "gtceu:large_brewer",
+      "energy": { "voltage": 8192, "hatches": 2 },
+      "needs": ["eu:iv"],
+      "parts": [
+        "gtceu:corrosion_proof_casing", "gtceu:steel_pipe_casing", "gtceu:molybdenum_disilicide_coil_block", "gtceu:iv_energy_input_hatch", "gtceu:lv_input_bus", "gtceu:lv_output_bus", "gtceu:lv_input_hatch", "gtceu:lv_output_hatch",
+        { "anyOf": ["gtceu:maintenance_hatch"], "onlyIf": { "config": "machines.enableMaintenance", "equals": true } }
+      ],
+      "note": "GCYM: corrosion-proof casing, a steel pipe and MoSi2 coils. On 2 IV hatches after Mercury (LuV voltage, GTM's two-hatch rule)."
+    },
+    {
+      "id": "gtceu:large_cutter@ev2",
+      "machine": "gtceu:large_cutter",
+      "energy": { "voltage": 2048, "hatches": 2 },
+      "needs": ["eu:ev"],
+      "parts": [
+        "gtceu:shock_proof_cutting_casing", "gtceu:tempered_glass", "gtceu:slicing_blades", "gtceu:ev_energy_input_hatch", "gtceu:lv_input_bus", "gtceu:lv_output_bus", "gtceu:lv_input_hatch", "gtceu:lv_output_hatch",
+        { "anyOf": ["gtceu:maintenance_hatch"], "onlyIf": { "config": "machines.enableMaintenance", "equals": true } }
+      ],
+      "note": "GCYM (GTM 7.5.3 GCYMMachines): shock-proof cutting casing, tempered glass and slicing blades. At home on 2 EV hatches (IV voltage); IV-B6's split puts it at home."
+    },
+    {
+      "id": "gtceu:large_cutter@iv2",
+      "machine": "gtceu:large_cutter",
+      "energy": { "voltage": 8192, "hatches": 2 },
+      "needs": ["eu:iv"],
+      "parts": [
+        "gtceu:shock_proof_cutting_casing", "gtceu:tempered_glass", "gtceu:slicing_blades", "gtceu:iv_energy_input_hatch", "gtceu:lv_input_bus", "gtceu:lv_output_bus", "gtceu:lv_input_hatch", "gtceu:lv_output_hatch",
+        { "anyOf": ["gtceu:maintenance_hatch"], "onlyIf": { "config": "machines.enableMaintenance", "equals": true } }
+      ],
+      "note": "GCYM: shock-proof cutting casing, tempered glass and slicing blades. On 2 IV hatches after Mercury (LuV voltage, GTM's two-hatch rule)."
+    },
+    {
+      "id": "gtceu:large_extractor@ev2",
+      "machine": "gtceu:large_extractor",
+      "energy": { "voltage": 2048, "hatches": 2 },
+      "needs": ["eu:ev"],
+      "parts": [
+        "gtceu:watertight_casing", "gtceu:steel_pipe_casing", "gtceu:ev_energy_input_hatch", "gtceu:lv_input_bus", "gtceu:lv_output_bus", "gtceu:lv_input_hatch", "gtceu:lv_output_hatch",
+        { "anyOf": ["gtceu:maintenance_hatch"], "onlyIf": { "config": "machines.enableMaintenance", "equals": true } }
+      ],
+      "note": "GCYM (GTM 7.5.3 GCYMMachines): watertight casing and a steel pipe. At home on 2 EV hatches (IV voltage); IV-B6's split puts it at home."
+    },
+    {
+      "id": "gtceu:large_extractor@iv2",
+      "machine": "gtceu:large_extractor",
+      "energy": { "voltage": 8192, "hatches": 2 },
+      "needs": ["eu:iv"],
+      "parts": [
+        "gtceu:watertight_casing", "gtceu:steel_pipe_casing", "gtceu:iv_energy_input_hatch", "gtceu:lv_input_bus", "gtceu:lv_output_bus", "gtceu:lv_input_hatch", "gtceu:lv_output_hatch",
+        { "anyOf": ["gtceu:maintenance_hatch"], "onlyIf": { "config": "machines.enableMaintenance", "equals": true } }
+      ],
+      "note": "GCYM: watertight casing and a steel pipe. On 2 IV hatches after Mercury (LuV voltage, GTM's two-hatch rule)."
+    },
+    {
+      "id": "gtceu:large_extruder@ev2",
+      "machine": "gtceu:large_extruder",
+      "energy": { "voltage": 2048, "hatches": 2 },
+      "needs": ["eu:ev"],
+      "parts": [
+        "gtceu:stress_proof_casing", "gtceu:titanium_pipe_casing", "gtceu:tempered_glass", "gtceu:ev_energy_input_hatch", "gtceu:lv_input_bus", "gtceu:lv_output_bus", "gtceu:lv_input_hatch", "gtceu:lv_output_hatch",
+        { "anyOf": ["gtceu:maintenance_hatch"], "onlyIf": { "config": "machines.enableMaintenance", "equals": true } }
+      ],
+      "note": "GCYM (GTM 7.5.3 GCYMMachines): stress-proof casing, a titanium pipe and tempered glass. At home on 2 EV hatches (IV voltage); IV-B6's split puts it at home."
+    },
+    {
+      "id": "gtceu:large_extruder@iv2",
+      "machine": "gtceu:large_extruder",
+      "energy": { "voltage": 8192, "hatches": 2 },
+      "needs": ["eu:iv"],
+      "parts": [
+        "gtceu:stress_proof_casing", "gtceu:titanium_pipe_casing", "gtceu:tempered_glass", "gtceu:iv_energy_input_hatch", "gtceu:lv_input_bus", "gtceu:lv_output_bus", "gtceu:lv_input_hatch", "gtceu:lv_output_hatch",
+        { "anyOf": ["gtceu:maintenance_hatch"], "onlyIf": { "config": "machines.enableMaintenance", "equals": true } }
+      ],
+      "note": "GCYM: stress-proof casing, a titanium pipe and tempered glass. On 2 IV hatches after Mercury (LuV voltage, GTM's two-hatch rule)."
+    },
+    {
+      "id": "gtceu:large_solidifier@ev2",
+      "machine": "gtceu:large_solidifier",
+      "energy": { "voltage": 2048, "hatches": 2 },
+      "needs": ["eu:ev"],
+      "parts": [
+        "gtceu:watertight_casing", "gtceu:steel_pipe_casing", "gtceu:ev_energy_input_hatch", "gtceu:lv_input_bus", "gtceu:lv_output_bus", "gtceu:lv_input_hatch", "gtceu:lv_output_hatch",
+        { "anyOf": ["gtceu:maintenance_hatch"], "onlyIf": { "config": "machines.enableMaintenance", "equals": true } }
+      ],
+      "note": "GCYM (GTM 7.5.3 GCYMMachines): watertight casing and a steel pipe. At home on 2 EV hatches (IV voltage); IV-B6's split puts it at home."
+    },
+    {
+      "id": "gtceu:large_solidifier@iv2",
+      "machine": "gtceu:large_solidifier",
+      "energy": { "voltage": 8192, "hatches": 2 },
+      "needs": ["eu:iv"],
+      "parts": [
+        "gtceu:watertight_casing", "gtceu:steel_pipe_casing", "gtceu:iv_energy_input_hatch", "gtceu:lv_input_bus", "gtceu:lv_output_bus", "gtceu:lv_input_hatch", "gtceu:lv_output_hatch",
+        { "anyOf": ["gtceu:maintenance_hatch"], "onlyIf": { "config": "machines.enableMaintenance", "equals": true } }
+      ],
+      "note": "GCYM: watertight casing and a steel pipe. On 2 IV hatches after Mercury (LuV voltage, GTM's two-hatch rule)."
+    },
+    {
+      "id": "gtceu:large_wiremill@ev2",
+      "machine": "gtceu:large_wiremill",
+      "energy": { "voltage": 2048, "hatches": 2 },
+      "needs": ["eu:ev"],
+      "parts": [
+        "gtceu:stress_proof_casing", "gtceu:titanium_gearbox", "gtceu:ev_energy_input_hatch", "gtceu:lv_input_bus", "gtceu:lv_output_bus", "gtceu:lv_input_hatch", "gtceu:lv_output_hatch",
+        { "anyOf": ["gtceu:maintenance_hatch"], "onlyIf": { "config": "machines.enableMaintenance", "equals": true } }
+      ],
+      "note": "GCYM (GTM 7.5.3 GCYMMachines): stress-proof casing and a titanium gearbox. At home on 2 EV hatches (IV voltage); IV-B6's split puts it at home."
+    },
+    {
+      "id": "gtceu:large_wiremill@iv2",
+      "machine": "gtceu:large_wiremill",
+      "energy": { "voltage": 8192, "hatches": 2 },
+      "needs": ["eu:iv"],
+      "parts": [
+        "gtceu:stress_proof_casing", "gtceu:titanium_gearbox", "gtceu:iv_energy_input_hatch", "gtceu:lv_input_bus", "gtceu:lv_output_bus", "gtceu:lv_input_hatch", "gtceu:lv_output_hatch",
+        { "anyOf": ["gtceu:maintenance_hatch"], "onlyIf": { "config": "machines.enableMaintenance", "equals": true } }
+      ],
+      "note": "GCYM: stress-proof casing and a titanium gearbox. On 2 IV hatches after Mercury (LuV voltage, GTM's two-hatch rule)."
+    },
+    {
+      "id": "gtceu:large_engraving_laser@iv2",
+      "machine": "gtceu:large_engraving_laser",
+      "energy": { "voltage": 8192, "hatches": 2 },
+      "needs": ["eu:iv"],
+      "parts": [
+        "gtceu:laser_safe_engraving_casing", "gtceu:tungstensteel_pipe_casing", "gtceu:tempered_glass", "gtceu:assembly_line_grating", "gtceu:iv_energy_input_hatch", "gtceu:lv_input_bus", "gtceu:lv_output_bus", "gtceu:lv_input_hatch", "gtceu:lv_output_hatch",
+        { "anyOf": ["gtceu:maintenance_hatch"], "onlyIf": { "config": "machines.enableMaintenance", "equals": true } }
+      ],
+      "note": "GCYM: laser-safe engraving casing, a tungstensteel pipe, tempered glass and grating. On 2 IV hatches after Mercury (LuV voltage, GTM's two-hatch rule); its controller waits for Mercury (IV-B6)."
+    },
+    {
+      "id": "gtceu:large_circuit_assembler@iv",
+      "machine": "gtceu:large_circuit_assembler",
+      "energy": { "voltage": 8192, "hatches": 1 },
+      "needs": ["eu:iv"],
+      "parts": [
+        "gtceu:large_scale_assembler_casing", "gtceu:tempered_glass", "gtceu:assembly_line_grating", "gtceu:tungstensteel_pipe_casing", "gtceu:iv_energy_input_hatch", "gtceu:lv_input_bus", "gtceu:lv_output_bus", "gtceu:lv_input_hatch", "gtceu:lv_output_hatch",
+        { "anyOf": ["gtceu:maintenance_hatch"], "onlyIf": { "config": "machines.enableMaintenance", "equals": true } }
+      ],
+      "note": "GCYM: large-scale assembler casing, tempered glass, grating and a tungstensteel pipe; exactly one energy hatch. On one IV hatch after Mercury (IV voltage: GTM allows exactly one energy hatch, so no two-hatch step); its controller waits for Mercury (IV-B6)."
+    },
+    {
+      "id": "gtceu:large_electrolyzer@iv2",
+      "machine": "gtceu:large_electrolyzer",
+      "energy": { "voltage": 8192, "hatches": 2 },
+      "needs": ["eu:iv"],
+      "parts": [
+        "gtceu:nonconducting_casing", "gtceu:electrolytic_cell", "gtceu:iv_energy_input_hatch", "gtceu:lv_input_bus", "gtceu:lv_output_bus", "gtceu:lv_input_hatch", "gtceu:lv_output_hatch",
+        { "anyOf": ["gtceu:maintenance_hatch"], "onlyIf": { "config": "machines.enableMaintenance", "equals": true } }
+      ],
+      "note": "GCYM: non-conducting casing and electrolytic cells. On 2 IV hatches after Mercury (LuV voltage, GTM's two-hatch rule); its controller waits for Mercury (IV-B6)."
+    },
+    {
+      "id": "gtceu:large_electromagnet@iv2",
+      "machine": "gtceu:large_electromagnet",
+      "energy": { "voltage": 8192, "hatches": 2 },
+      "needs": ["eu:iv"],
+      "parts": [
+        "gtceu:nonconducting_casing", "gtceu:electrolytic_cell", "gtceu:iv_energy_input_hatch", "gtceu:lv_input_bus", "gtceu:lv_output_bus", "gtceu:lv_input_hatch", "gtceu:lv_output_hatch",
+        { "anyOf": ["gtceu:maintenance_hatch"], "onlyIf": { "config": "machines.enableMaintenance", "equals": true } }
+      ],
+      "note": "GCYM: non-conducting casing and electrolytic cells. On 2 IV hatches after Mercury (LuV voltage, GTM's two-hatch rule); its controller waits for Mercury (IV-B6)."
+    },
+    {
+      "id": "gtceu:large_distillery@iv2",
+      "machine": "gtceu:large_distillery",
+      "energy": { "voltage": 8192, "hatches": 2 },
+      "needs": ["eu:iv"],
+      "parts": [
+        "gtceu:watertight_casing", "gtceu:steel_pipe_casing", "gtceu:iv_energy_input_hatch", "gtceu:lv_input_bus", "gtceu:lv_output_bus", "gtceu:lv_input_hatch", "gtceu:lv_output_hatch",
+        { "anyOf": ["gtceu:maintenance_hatch"], "onlyIf": { "config": "machines.enableMaintenance", "equals": true } }
+      ],
+      "note": "GCYM: watertight casing and a steel pipe per layer. On 2 IV hatches after Mercury (LuV voltage, GTM's two-hatch rule); its controller waits for Mercury (IV-B6)."
+    },
+    {
       "id": "gtceu:hot_cell@parallel",
       "machine": "gtceu:hot_cell",
       "types": ["gtceu:hot_cell"],
@@ -526,6 +911,9 @@
     { "id": "parallel-in-plant", "label": "Gate to LuV: an IV parallel hatch in one of our plants (the hot cell, the fuel fabrication plant or the heavy-water plant, IV-B6)", "anyOf": ["m:gtceu:hot_cell@parallel", "m:gtceu:fuel_fabrication_plant@parallel", "m:gtceu:heavy_water_plant@parallel"] },
     { "id": "hatch-parallel-iv", "label": "IV parallel hatch (IV-B6: 4 IV circuits; its sensor and emitter take iridium)", "item": "gtceu:iv_parallel_hatch" },
     { "id": "mass-mercury-needs-mercury", "label": "IV-B6's Mercury half waits for Mercury: without the trip there is no IV parallel hatch, assembly line, or GCYM large engraving laser, circuit assembler, electrolyzer, electromagnet or distillery (iridium or osmium; needs IV-B3's Earth cut)", "anyOf": ["gtceu:iv_parallel_hatch", "gtceu:assembly_line", "gtceu:large_engraving_laser", "gtceu:large_circuit_assembler", "gtceu:large_electrolyzer", "gtceu:large_electromagnet", "gtceu:large_distillery"], "without": ["synthetic:inner-trip"], "expect": "unreachable" },
+    { "id": "gcym-home-formed", "label": "IV-B6's home kit forms at home: GCYM's machines on EV hatches, with GTM's casings", "allOf": ["m:gtceu:large_maceration_tower@ev2", "m:gtceu:large_chemical_bath@ev2", "m:gtceu:large_centrifuge@ev2", "m:gtceu:large_packer@ev2", "m:gtceu:large_assembler@ev", "m:gtceu:large_arc_smelter@ev2", "m:gtceu:large_sifting_funnel@ev2", "m:gtceu:large_autoclave@ev2", "m:gtceu:large_material_press@ev2", "m:gtceu:large_brewer@ev2", "m:gtceu:large_cutter@ev2", "m:gtceu:large_extractor@ev2", "m:gtceu:large_extruder@ev2", "m:gtceu:large_solidifier@ev2", "m:gtceu:large_wiremill@ev2"] },
+    { "id": "gcym-mercury-formed", "label": "After Mercury every GCYM machine takes IV hatches (two give LuV voltage, except the large assembler and circuit assembler: exactly one)", "allOf": ["m:gtceu:large_maceration_tower@iv2", "m:gtceu:large_chemical_bath@iv2", "m:gtceu:large_centrifuge@iv2", "m:gtceu:large_packer@iv2", "m:gtceu:large_assembler@iv", "m:gtceu:large_arc_smelter@iv2", "m:gtceu:large_sifting_funnel@iv2", "m:gtceu:large_autoclave@iv2", "m:gtceu:large_material_press@iv2", "m:gtceu:large_brewer@iv2", "m:gtceu:large_cutter@iv2", "m:gtceu:large_extractor@iv2", "m:gtceu:large_extruder@iv2", "m:gtceu:large_solidifier@iv2", "m:gtceu:large_wiremill@iv2", "m:gtceu:large_engraving_laser@iv2", "m:gtceu:large_circuit_assembler@iv", "m:gtceu:large_electrolyzer@iv2", "m:gtceu:large_electromagnet@iv2", "m:gtceu:large_distillery@iv2"] },
+    { "id": "neutron-activator-not-in-iv", "label": "GT--'s neutron activator waits for LuV: its two quark cores are precision assembly at 30,720 EU/t, which only GCYM's large assembler runs, on exactly one energy hatch (IV's naquadah comes from IV-B3's plant)", "item": "gtnn:neutron_activator", "expect": "unreachable" },
     { "id": "alloy-blast-smelter", "label": "GCYM's alloy blast smelter (IV-B6: IV parts, at home)", "item": "gtceu:alloy_blast_smelter" },
     { "id": "alloy-blast-smelter-formed", "label": "Alloy blast smelter formed (2 EV hatches)", "item": "m:gtceu:alloy_blast_smelter@ev-rtm" },
     { "id": "large-packer", "label": "GCYM's large packer (IV-B6)", "item": "gtceu:large_packer" },
@@ -713,12 +1101,13 @@
     },
     {
       "id": "iv-mass-home",
-      "label": "The mass-production kit at home (IV-B6's split): GCYM's machines on IV parts (the alloy blast smelter and large packer among them), GTCA's megas, GT--'s Maceration Stack, the data access hatch",
+      "label": "The mass-production kit at home (IV-B6's split): GCYM's machines on IV parts (the alloy blast smelter and large packer among them) and formed at home on EV hatches, GTCA's megas, GT--'s Maceration Stack, the data access hatch",
       "items": [
         "gtceu:alloy_blast_smelter", "gtceu:large_packer", "gtceu:large_maceration_tower", "gtceu:large_arc_smelter", "gtceu:large_chemical_bath", "gtceu:large_sifting_funnel",
         "gtceu:large_centrifuge", "gtceu:large_assembler", "gtceu:large_autoclave", "gtceu:large_material_press", "gtceu:large_brewer", "gtceu:large_cutter",
         "gtceu:large_extractor", "gtceu:large_extruder", "gtceu:large_solidifier", "gtceu:large_wiremill", "gtca:mega_lcr", "gtca:mega_oil_cracking_unit",
-        "gtnn:maceration_stack_controller", "gtceu:data_access_hatch", "m:gtceu:alloy_blast_smelter@ev-rtm", "m:gtceu:alloy_blast_smelter@ev-hssg"
+        "gtnn:maceration_stack_controller", "gtceu:data_access_hatch", "m:gtceu:alloy_blast_smelter@ev-rtm", "m:gtceu:alloy_blast_smelter@ev-hssg",
+        "m:gtceu:large_maceration_tower@ev2", "m:gtceu:large_chemical_bath@ev2", "m:gtceu:large_centrifuge@ev2", "m:gtceu:large_packer@ev2", "m:gtceu:large_assembler@ev", "m:gtceu:large_arc_smelter@ev2", "m:gtceu:large_sifting_funnel@ev2", "m:gtceu:large_autoclave@ev2", "m:gtceu:large_material_press@ev2", "m:gtceu:large_brewer@ev2", "m:gtceu:large_cutter@ev2", "m:gtceu:large_extractor@ev2", "m:gtceu:large_extruder@ev2", "m:gtceu:large_solidifier@ev2", "m:gtceu:large_wiremill@ev2"
       ]
     },
     {
@@ -752,13 +1141,14 @@
     {
       "id": "iv-mercury-gtm",
       "era": "iv-mercury",
-      "label": "GTM's IV items that wait for Mercury: the emitter, sensor and voltage coil (iridium), the energy and dynamo hatches built on the coil, the circuit assembler, laser engraver, scanner, large miner, world accelerator and parallel hatch built on the emitter and sensor, the electrolyzer (osmium wire), the assembly line and its casings (ruridit), and IV-B6's Mercury split of the kit: five GCYM machines and our plants with the parallel hatch",
+      "label": "GTM's IV items that wait for Mercury: the emitter, sensor and voltage coil (iridium), the energy and dynamo hatches built on the coil, the circuit assembler, laser engraver, scanner, large miner, world accelerator and parallel hatch built on the emitter and sensor, the electrolyzer (osmium wire), the assembly line and its casings (ruridit), and IV-B6's Mercury split of the kit: five GCYM machines and our plants with the parallel hatch, and every GCYM machine on IV hatches (LuV voltage on two)",
       "items": [
         "gtceu:iv_emitter", "gtceu:iv_sensor", "gtceu:iv_voltage_coil", "gtceu:iv_energy_input_hatch*", "gtceu:iv_energy_output_hatch*", "gtceu:iv_substation_*",
         "gtceu:iv_*_laser_*_hatch", "gtceu:iv_circuit_assembler", "gtceu:iv_electrolyzer", "gtceu:iv_large_miner", "gtceu:iv_laser_engraver", "gtceu:iv_parallel_hatch",
         "gtceu:iv_scanner", "gtceu:iv_world_accelerator", "m:gtceu:assembly_line", "gtceu:assembly_line", "gtceu:assembly_line_casing", "gtceu:assembly_line_unit",
         "gtceu:large_engraving_laser", "gtceu:large_circuit_assembler", "gtceu:large_electrolyzer", "gtceu:large_electromagnet", "gtceu:large_distillery",
-        "m:gtceu:hot_cell@parallel", "m:gtceu:fuel_fabrication_plant@parallel", "m:gtceu:heavy_water_plant@parallel"
+        "m:gtceu:hot_cell@parallel", "m:gtceu:fuel_fabrication_plant@parallel", "m:gtceu:heavy_water_plant@parallel",
+        "m:gtceu:large_maceration_tower@iv2", "m:gtceu:large_chemical_bath@iv2", "m:gtceu:large_centrifuge@iv2", "m:gtceu:large_packer@iv2", "m:gtceu:large_assembler@iv", "m:gtceu:large_arc_smelter@iv2", "m:gtceu:large_sifting_funnel@iv2", "m:gtceu:large_autoclave@iv2", "m:gtceu:large_material_press@iv2", "m:gtceu:large_brewer@iv2", "m:gtceu:large_cutter@iv2", "m:gtceu:large_extractor@iv2", "m:gtceu:large_extruder@iv2", "m:gtceu:large_solidifier@iv2", "m:gtceu:large_wiremill@iv2", "m:gtceu:large_engraving_laser@iv2", "m:gtceu:large_circuit_assembler@iv", "m:gtceu:large_electrolyzer@iv2", "m:gtceu:large_electromagnet@iv2", "m:gtceu:large_distillery@iv2"
       ]
     },
     {
