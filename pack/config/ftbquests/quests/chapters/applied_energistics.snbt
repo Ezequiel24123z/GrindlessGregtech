@@ -420,6 +420,21 @@
 		}
 		{
 			dependencies: ["2085F78EAB2C08E0"]
+			description: ["A &6Wireless Connector&r pairs with another to carry a connection with no cable between them, and an &6EU P2P Tunnel&r moves power the same way once a GregTech wire tunes it. Both still cost a channel and only reach a short range in the same dimension."]
+			icon: "eup2p:eu_p2p_tunnel"
+			id: "1DFC0C1A50793CB7"
+			optional: true
+			rewards: [{ id: "17273254ED1D0497", type: "xp", xp: 15 }]
+			tasks: [
+				{ count: 2L, id: "515EF8ADF6CBCCA8", item: "expatternprovider:wireless_connect", type: "item" }
+				{ count: 2L, id: "1DB67FD30D975773", item: "eup2p:eu_p2p_tunnel", type: "item" }
+			]
+			title: "Power Without Cables"
+			x: 15.0d
+			y: 9.5d
+		}
+		{
+			dependencies: ["2085F78EAB2C08E0"]
 			description: ["The &6Advanced Memory Card&r lists every P2P tunnel on the network and links, renames and retunes them from one screen, so nobody walks the cable."]
 			icon: "betterp2p:advanced_memory_card"
 			id: "43ED82AC7DACA796"

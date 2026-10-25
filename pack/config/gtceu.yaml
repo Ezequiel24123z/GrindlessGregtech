@@ -6,3 +6,22 @@ worldgen:
     infiniteBedrockOresFluids: true
 machines:
   enableMaintenance: false
+  # Power boost "like GTL" (DECISIONS.md): every small boiler base output at the default's x8, and the large boiler
+  # heat ceiling at x8 (steel at 12800, GTL's own exception), with a faster heat-up for the three hotter large boilers.
+  # steamPerWater is not listed here on purpose: it keeps GTM's default (160), same as GTL itself (research/gtl/leisure-port.md #2).
+  smallBoilers:
+    solidBoilerBaseOutput: 960
+    hpSolidBoilerBaseOutput: 2400
+    liquidBoilerBaseOutput: 1920
+    hpLiquidBoilerBaseOutput: 4800
+    solarBoilerBaseOutput: 960
+    hpSolarBoilerBaseOutput: 2880
+  largeBoilers:
+    bronzeBoilerMaxTemperature: 6400
+    bronzeBoilerHeatSpeed: 1
+    steelBoilerMaxTemperature: 12800
+    steelBoilerHeatSpeed: 2
+    titaniumBoilerMaxTemperature: 25600
+    titaniumBoilerHeatSpeed: 4
+    tungstensteelBoilerMaxTemperature: 51200
+    tungstensteelBoilerHeatSpeed: 8
