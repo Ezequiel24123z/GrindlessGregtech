@@ -1,5 +1,6 @@
 # Local-only regression checks. No SSH, Minecraft, downloads, or remote filesystem writes.
 $ErrorActionPreference = 'Stop'
+$ProgressPreference = 'SilentlyContinue'
 $env:GG_BASE = $PSScriptRoot
 . (Join-Path $PSScriptRoot 'remote\gg-common.ps1')
 $script:Passed = 0
@@ -93,6 +94,37 @@ foreach ($index in 0, 1, 3) {
     Assert-Policy ((Get-GGSlotDecision @($holder) 4 8).Index -eq -1) "legacy slot $index blocks all additional JVMs"
 }
 Assert-Policy ((Get-GGSlotLimit @() 4) -eq 1) 'global scheduler ceiling is one, not merely a default'
+$commonPath = (Join-Path $PSScriptRoot 'remote\gg-common.ps1').Replace("'", "''")
+$probeCode = "`$ProgressPreference='SilentlyContinue'; `$env:GG_BASE='$($PSScriptRoot.Replace("'", "''"))'; . '$commonPath'; if (Try-GGNativeMutex) { Exit-GGNativeMutex; 'ACQUIRED' } else { 'BUSY' }"
+$encodedProbe = [Convert]::ToBase64String([Text.Encoding]::Unicode.GetBytes($probeCode))
+$savedGG = $global:GG.Clone()
+$testRoot = Join-Path ([IO.Path]::GetTempPath()) ('gg-resource-policy-' + [guid]::NewGuid().ToString('N'))
+$testRun = Join-Path $testRoot 'local-test'
+[void][IO.Directory]::CreateDirectory($testRun)
+$global:GG.Runs = $testRoot
+$global:GG.RunDir = $testRun
+$global:GG.RunId = 'local-test'
+$global:GG.LockPath = Join-Path $testRoot '.lock'
+try {
+    $beforeAcquire = [datetime]::UtcNow
+    Enter-GGLock -MaxWaitMin 1 -Slots 4 -MinFreeGb 0
+    $info = Get-GGLockInfo
+    Assert-Policy ($global:GG.HasLock -and $global:GG.NativeMutex -and $info.slots -eq 1) 'real slot acquisition retains the OS mutex and normalizes legacy slot requests'
+    Assert-Policy ([datetime]::Parse($info.started).ToUniversalTime() -ge $beforeAcquire) 'lock start records actual acquisition'
+    [IO.File]::Delete($global:GG.LockPath)
+    $other = & powershell -NoProfile -ExecutionPolicy Bypass -EncodedCommand $encodedProbe
+    Assert-Policy ($LASTEXITCODE -eq 0 -and "$other" -eq 'BUSY') 'another real process stays excluded even without a metadata lock file'
+    Exit-GGLock
+    $other = & powershell -NoProfile -ExecutionPolicy Bypass -EncodedCommand $encodedProbe
+    Assert-Policy ($LASTEXITCODE -eq 0 -and "$other" -eq 'ACQUIRED') 'normal slot exit releases the OS mutex even after metadata disappears'
+} finally {
+    Exit-GGLock
+    [IO.File]::Delete((Join-Path $testRoot '.lock'))
+    [IO.File]::Delete((Join-Path $testRun '.waiting'))
+    [IO.Directory]::Delete($testRun)
+    [IO.Directory]::Delete($testRoot)
+    $global:GG = $savedGG
+}
 Set-Item -Path function:Get-GGFreeRamGb -Value $originalRamReader
 function Get-CimInstance { throw 'simulated unavailable memory counters' }
 Assert-Rejected { Get-GGFreeRamGb } 'unreadable RAM is a failure, not 999 GB of fictional headroom'
