@@ -1,4 +1,5 @@
 {
+	autofocus_id: "1AC672110DFD0C14"
 	default_hide_dependency_lines: false
 	default_quest_shape: ""
 	filename: "lv_age"
@@ -11,8 +12,8 @@
 		{
 			dependencies: ["4996827E4BFC339E"]
 			description: [
-				"Steam turns into current. Past this gate every machine in the factory expects a plug, not a firebox."
-				"Hatches feed the big multiblocks, hulls carry the small stuff. Wire the grid first; everything else in this chapter waits on it."
+				"Steam turns into current. Machines want a cable now instead of a firebox, and the Nether stops being a quick raid: its veins end up in your drills."
+				"The Moon also gets its first proper photograph, taken with the chart you drew by hand."
 			]
 			icon: "gtceu:lv_machine_hull"
 			id: "1AC672110DFD0C14"
@@ -25,55 +26,35 @@
 			y: 0.0d
 		}
 		{
-			dependencies: ["1AC672110DFD0C14"]
-			description: [
-				"The &6Energy Hatch&r is how a multiblock controller eats power. No controller takes a cable straight to its hull."
-				"The &6Battery Buffer&r smooths the grid for single-block machines: charge it off the turbines, draw from it steady."
-			]
-			icon: "gtceu:lv_energy_input_hatch"
-			id: "731F761B242263ED"
-			rewards: [{ id: "001BEA86BA7E7B9D", type: "xp", xp: 30 }]
-			tasks: [
-				{ count: 2L, id: "00C1332B2F38EA10", item: "gtceu:lv_energy_input_hatch", type: "item" }
-				{ id: "5B6C51DD6515E79B", item: "gtceu:lv_battery_buffer_4x", type: "item" }
-			]
-			title: "LV Grid"
-			x: 2.0d
-			y: 0.0d
-		}
-		{
 			dependencies: ["5795EAFBAB034E45"]
 			description: [
-				"The &6Assembler&r puts two or three parts together into one finished piece: plates into frames, cores into network blocks."
-				"Most of what gets built this chapter, from circuits to the AE2 network, passes through this machine at some point."
+				"The &6Assembler&r puts parts together into finished pieces, and here it builds a surprising amount: the blast furnace's coils, the heliostat mirrors, the creature models and AE2's network blocks. It rarely sits idle."
 			]
 			icon: "gtceu:lv_assembler"
 			id: "6D668A4CB9B8384A"
 			rewards: [{ id: "1B81E3E9597DAE9B", type: "xp", xp: 30 }]
 			tasks: [{ id: "35B04A0D13C90131", item: "gtceu:lv_assembler", type: "item" }]
 			title: "LV Assembler"
-			x: 6.0d
+			x: 4.0d
 			y: 0.0d
 		}
 		{
 			dependencies: ["6D668A4CB9B8384A"]
 			description: [
-				"A cupronickel coil is wire wound around bronze foil and sealed in tin alloy, all in the assembler. The cupronickel itself comes from an alloy smelter."
-				"The Electric Blast Furnace builds its heating ring from these coils. More heat means more recipes, so they set what the furnace can do."
+				"They make the blast furnace's heating ring. The coil decides how hot the furnace gets, and the heat decides what it can make. Cupronickel is the first and coolest of them; you'll be back for better ones."
 			]
 			icon: "gtceu:cupronickel_coil_block"
 			id: "5C7A2E94B1D03F68"
 			rewards: [{ id: "2B8E4D1A7C09F356", type: "xp", xp: 35 }]
 			tasks: [{ count: 16L, id: "4E0A9C2D6B3F1785", item: "gtceu:cupronickel_coil_block", type: "item" }]
 			title: "Cupronickel Coils"
-			x: 8.0d
+			x: 6.0d
 			y: 0.0d
 		}
 		{
-			dependencies: ["731F761B242263ED"]
+			dependencies: ["1AC672110DFD0C14"]
 			description: [
-				"Motor, piston, pump, conveyor and robot arm: the five moving parts behind every single-block LV machine."
-				"Keep a stock of each. Ore machines, presses and everything after all ask for a different mix of them."
+				"Motor, piston, pump, conveyor and robot arm. Nearly every LV machine is some mix of the five. Keep a few of each in a chest and you'll walk to the crafting table a lot less."
 			]
 			icon: "gtceu:lv_electric_motor"
 			id: "5795EAFBAB034E45"
@@ -86,67 +67,69 @@
 				{ id: "3922B6EA6ABAD1D2", item: "gtceu:lv_robot_arm", type: "item" }
 			]
 			title: "LV Components"
-			x: 4.0d
+			x: 2.0d
 			y: 0.0d
 		}
 		{
 			dependencies: ["5795EAFBAB034E45"]
 			description: [
-				"The electric &6Macerator&r does what the steam one did, just faster and always on. Raw ore to crushed ore, crushed to dust."
-				"Every machine down the ore line expects crushed ore to start from, not raw."
+				"The steam macerator's electric replacement. It still gives only the first output until HV, so the byproducts come from the washer and the centrifuges instead."
+				"Everything after it starts from crushed ore."
 			]
 			icon: "gtceu:lv_macerator"
 			id: "3822BE3A45F1C474"
 			rewards: [{ id: "398BF14CA6CAFA1E", type: "xp", xp: 30 }]
 			tasks: [{ id: "55E3030426D27EC5", item: "gtceu:lv_macerator", type: "item" }]
 			title: "Macerator"
-			x: 6.0d
+			x: 4.0d
 			y: -3.0d
 		}
 		{
 			dependencies: ["3822BE3A45F1C474"]
 			description: [
-				"The proper washing steam age promised: the &6Ore Washer&r cleans crushed ore in water and keeps the secondary material whole instead of losing it to chance."
-				"A few ores wash better in sodium persulfate than plain water. Check the recipe viewer for which."
+				"The washer rinses crushed ore into purified ore and shakes loose some of the first byproduct. Distilled water does it faster than plain water."
+				"For some ores a sodium persulfate soak in the chemical bath gives a lot more; that is how bauxite gives up its gallium."
 			]
 			icon: "gtceu:lv_ore_washer"
 			id: "766C58FC4FAC6D61"
 			rewards: [{ id: "3F8A3B9EF346D7A9", type: "xp", xp: 30 }]
 			tasks: [{ id: "68276F11F073D951", item: "gtceu:lv_ore_washer", type: "item" }]
 			title: "Ore Washer"
-			x: 8.0d
+			x: 6.0d
 			y: -3.0d
 		}
 		{
 			dependencies: ["766C58FC4FAC6D61"]
-			description: ["The &6Thermal Centrifuge&r bakes washed ore to pull out one more secondary dust before the final crush. Heat does what a hammer can't."]
+			description: [
+				"Heat and spin turn washed ore into refined ore, and a second byproduct falls out on the way. The macerator then grinds it into clean dust. In MV the Ore Plant does all of this in one building."
+			]
 			icon: "gtceu:lv_thermal_centrifuge"
 			id: "18D60FF391B2F8DC"
 			rewards: [{ id: "7C387B8FD56D62F2", type: "xp", xp: 30 }]
 			tasks: [{ id: "5E478CDE07E1C692", item: "gtceu:lv_thermal_centrifuge", type: "item" }]
 			title: "Thermal Centrifuge"
-			x: 10.0d
+			x: 8.0d
 			y: -3.0d
 		}
 		{
 			dependencies: ["18D60FF391B2F8DC"]
 			description: [
-				"The &6Centrifuge&r spins dusts, fluids, even air apart into what they're actually made of."
-				"It is the last stop of the ore line, and the first place nitrogen and oxygen come from, once air goes in."
+				"The last stop of the ore line, where dust gets spun apart into what it's made of. Air from the gas collector comes out as nitrogen and oxygen."
+				"It also splits realgar into arsenic and sulfur, so the next batch of rubber needs no trip to the Nether."
 			]
 			icon: "gtceu:lv_centrifuge"
 			id: "5ECDAA1F9811AC0A"
 			rewards: [{ id: "4E54241FEC649BA9", type: "xp", xp: 35 }]
 			tasks: [{ id: "71F985CEEB82AD09", item: "gtceu:lv_centrifuge", type: "item" }]
 			title: "Centrifuge"
-			x: 12.0d
+			x: 10.0d
 			y: -3.0d
 		}
 		{
 			dependencies: ["5795EAFBAB034E45"]
 			description: [
-				"The &6LV Vein Drill&r is the steam derrick's electric twin: same sample, same bit, more bores at once and room for a second hatch to push it further."
-				"Every Steam Vein Drill recipe still runs here too. Nothing you already built stops working."
+				"Same samples and bits as the steam drill, only electric and quicker, and a second energy hatch makes it quicker again. It runs every steam drill recipe as well."
+				"It also has a fluid hatch, which matters more than it sounds."
 			]
 			icon: "gtceu:lv_vein_drill"
 			id: "2235038DEB4D9870"
@@ -158,28 +141,28 @@
 			size: 1.5d
 			tasks: [{ id: "31B8E7F41955B3AC", item: "gtceu:lv_vein_drill", type: "item" }]
 			title: "LV Vein Drill"
-			x: 6.0d
+			x: 4.0d
 			y: 1.5d
 		}
 		{
 			dependencies: ["2235038DEB4D9870"]
 			description: [
-				"Mix the drill's own stone dust with lubricant and water in a mixer and you get drilling fluid: feed it to the drill's hatch for more ore per run and less bit wear."
-				"Nether veins only drill with it in the tank. The steam drill never had a hatch to carry it."
+				"The drill's own stone dust, mixed with lubricant and water, comes back as drilling fluid. With it in the hatch the drill brings up more ore and wears its bits slower."
+				"The Nether veins won't drill without it, and the steam drill has nowhere to put it. The lubricant comes from the creosote your coke ovens have been hoarding."
 			]
 			icon: "grindless:empty_vein_probe"
 			id: "3C4B301F348411BF"
 			rewards: [{ id: "25F806C232F0B708", type: "xp", xp: 30 }]
 			tasks: [{ id: "1157F014AE90D968", type: "checkmark" }]
 			title: "Drilling Fluid"
-			x: 8.0d
+			x: 6.0d
 			y: 1.5d
 		}
 		{
 			dependencies: ["3C4B301F348411BF"]
 			description: [
-				"A dozen more veins wait in the Nether: certus quartz, beryllium, saltpeter and others the Overworld table doesn't carry."
-				"Dunk the probe in two raw ores of the vein you want, same as any sample. One trip is exploration, not grind. The drill never runs it dry."
+				"The Nether has veins of its own, certus quartz, beryllium and saltpeter among them. Bring back raw ore from the vein you want and make its sample at home."
+				"One trip per vein. After that the drill does the visiting."
 			]
 			icon: "grindless:vein_sample_certus_quartz"
 			id: "65FE680CCF2D67C5"
@@ -187,14 +170,14 @@
 			rewards: [{ id: "6D4BD4D9D3258F3A", type: "xp", xp: 25 }]
 			tasks: [{ id: "4818390ABECA1D36", type: "checkmark" }]
 			title: "Nether Veins"
-			x: 10.0d
+			x: 8.0d
 			y: 1.5d
 		}
 		{
 			dependencies: ["5795EAFBAB034E45"]
 			description: [
-				"The &6LV Greenhouse&r adds a fluid hatch to the steam design: water in means mushrooms, berries, vines and flowers the dry version could never grow."
-				"Every Steam Greenhouse recipe still runs here too, just faster."
+				"An electric greenhouse with a water hatch, and water lets it grow what the steam one can't: mushrooms, berries, vines, kelp and a whole bed of flowers."
+				"It still runs everything the steam greenhouse did, only faster."
 			]
 			icon: "gtceu:lv_greenhouse"
 			id: "73CA53E9E02D4639"
@@ -206,42 +189,42 @@
 			size: 1.5d
 			tasks: [{ id: "517E334F5EDF0822", item: "gtceu:lv_greenhouse", type: "item" }]
 			title: "LV Greenhouse"
-			x: 6.0d
+			x: 4.0d
 			y: 4.5d
 		}
 		{
 			dependencies: ["73CA53E9E02D4639"]
 			description: [
-				"Drop fertilizer and a programmed circuit in the greenhouse's input bus to feed it."
-				"Make it in the mixer from dirt, sawdust and sand, or in the chemical reactor from ash and a phosphate. The arc furnace's leftover ash finally has somewhere to go."
+				"Fertilizer and the right programmed circuit in the greenhouse's bus double the harvest and halve the time."
+				"The mixer makes it from dirt, wood dust and sand. The chemical reactor makes it from calcite or apatite with ash, which is where the ash from your furnaces ends up."
 			]
 			icon: "gtceu:fertilizer"
 			id: "47283300070CD8C2"
 			rewards: [{ id: "446F9500700968E8", type: "xp", xp: 30 }]
 			tasks: [{ count: 8L, id: "68E554C92C5B3A0C", item: "gtceu:fertilizer", type: "item" }]
 			title: "Fertilizer"
-			x: 8.0d
+			x: 6.0d
 			y: 4.5d
 		}
 		{
 			dependencies: ["47283300070CD8C2"]
 			description: [
-				"The &6Creature Simulator&r turns a model, some biomass and the right mineral into a mob's drops. Nobody gets hunted, nothing gets farmed by hand."
-				"A programmed circuit picks the roll: circuit 1 always gives everything a kill would."
+				"Mob drops without the mob. The &6Creature Simulator&r turns a model, some biomass and the creature's own mineral into drops."
+				"The programmed circuit picks the roll: circuit 1 gives the full set, the others a single kind of drop."
 			]
 			icon: "gtceu:lv_creature_simulator"
 			id: "15D34CE9F5FCE6B3"
 			rewards: [{ id: "391C99C4924378FE", type: "xp", xp: 40 }]
 			tasks: [{ id: "0F89B4F048E5F983", item: "gtceu:lv_creature_simulator", type: "item" }]
 			title: "Creature Simulator"
-			x: 10.0d
+			x: 8.0d
 			y: 4.5d
 		}
 		{
 			dependencies: ["15D34CE9F5FCE6B3"]
 			description: [
-				"GTM wants ender pearls as early as LV, but the real synthesis needs beryllium you won't see before the Nether and a tier you won't see for a while yet."
-				"So here is one, free. Print the enderman model with it and the simulator takes it from there. Every pearl after this one is machine-made."
+				"GregTech asks for ender pearls at LV and only lets you synthesize them much later, so here's one on the house."
+				"Spend it on the enderman model. The simulator makes every pearl after that."
 			]
 			icon: "minecraft:ender_pearl"
 			id: "32CF7B11121B4DA9"
@@ -251,14 +234,14 @@
 			]
 			tasks: [{ id: "2AF30FE5A1B67780", type: "checkmark" }]
 			title: "First Pearl"
-			x: 12.0d
+			x: 10.0d
 			y: 4.5d
 		}
 		{
 			dependencies: ["32CF7B11121B4DA9"]
 			description: [
-				"Print whichever model you're short on: a blank model plus the creature's own materials, the exact mix is in the recipe viewer."
-				"None of these are required together. The simulator runs each one on its own."
+				"Print models for whatever you're short on. A blank model plus some of the creature's own material makes one, and the simulator never uses it up."
+				"Any one of them counts here."
 			]
 			icon: "grindless:blank_creature_model"
 			id: "29B4717D718C6BB5"
@@ -273,14 +256,13 @@
 				{ id: "785BE405026B5CDF", item: "grindless:creature_model_enderman", optional_task: true, type: "item" }
 			]
 			title: "Creature Models"
-			x: 14.0d
+			x: 12.0d
 			y: 4.5d
 		}
 		{
 			dependencies: ["29B4717D718C6BB5"]
 			description: [
-				"Two more models print at LV but do not run yet: the creeper and the blaze both want an MV simulator."
-				"Get a head start: have the models ready and they go to work the moment the bigger simulator is up."
+				"Both models print at LV, but the creeper and the blaze only run in an MV simulator. Make them now and they'll be waiting."
 			]
 			icon: "grindless:creature_model_creeper"
 			id: "47892302FAEA3244"
@@ -290,152 +272,147 @@
 				{ id: "680D18F57C8DB75E", item: "grindless:creature_model_creeper", type: "item" }
 				{ id: "3CDE7F33A821E1DF", item: "grindless:creature_model_blaze", type: "item" }
 			]
-			title: "Beyond LV: Creeper and Blaze"
-			x: 16.0d
+			title: "Creeper and Blaze Models"
+			x: 14.0d
 			y: 4.5d
 		}
 		{
 			dependencies: ["5795EAFBAB034E45"]
 			description: [
-				"The &6Gas Collector&r pulls air out of the sky: mostly nitrogen, a slice of oxygen, nothing else worth keeping."
-				"Centrifuge it and the two useful gases split apart. The rest just vents."
+				"It breathes in air for the centrifuge to split into nitrogen and oxygen. Stock GregTech only lets it do that in the Overworld; here the Void and the Flatlands work too."
 			]
 			icon: "gtceu:lv_gas_collector"
 			id: "09FAB2A84C90B5D6"
 			rewards: [{ id: "4C62188771A6494D", type: "xp", xp: 30 }]
 			tasks: [{ id: "237690F5149BA95F", item: "gtceu:lv_gas_collector", type: "item" }]
 			title: "Gas Collector"
-			x: 6.0d
+			x: 4.0d
 			y: 3.0d
 		}
 		{
 			dependencies: ["09FAB2A84C90B5D6"]
 			description: [
-				"The &6Electrolyzer&r breaks a dust into its elements with nothing but electricity. No reagent spent."
-				"Its first job here is oxygen and metals out of ore dusts. Aluminium dust comes from sapphire ore, and you need it for the Blast Furnace."
+				"It pulls compounds apart with electricity and nothing else. Its big job right now is sapphire, which splits into aluminium and oxygen, and aluminium is your way into MV."
 			]
 			icon: "gtceu:lv_electrolyzer"
 			id: "50622961B58725B8"
 			rewards: [{ id: "1737F89DF7F3A701", type: "xp", xp: 30 }]
 			tasks: [{ id: "18B27DABA1F1A8A8", item: "gtceu:lv_electrolyzer", type: "item" }]
 			title: "Electrolyzer"
-			x: 8.0d
+			x: 6.0d
 			y: 3.0d
 		}
 		{
 			dependencies: ["50622961B58725B8"]
 			description: [
-				"The &6Chemical Reactor&r runs the small chemistry this era needs: oxygen into sulfuric acid, salt into persulfate and iron chloride."
-				"The hydrogen that comes off both lines is worth keeping in a tank. Do not vent it, MV wants it back."
+				"LV's small chemistry happens here: sulfuric acid, iron chloride, and the sodium bisulfate that the electrolyzer turns into persulfate. The chloride and the persulfate both etch circuit boards."
+				"The hydrogen they give off goes in a tank, not the sky. MV turns it into methanol."
 			]
 			icon: "gtceu:lv_chemical_reactor"
 			id: "09155B5B0F1BE994"
 			rewards: [{ id: "73880280BC223A89", type: "xp", xp: 35 }]
 			tasks: [{ id: "5B7E3A5E7F5D45F7", item: "gtceu:lv_chemical_reactor", type: "item" }]
 			title: "Chemical Reactor"
-			x: 10.0d
+			x: 8.0d
 			y: 3.0d
 		}
 		{
 			dependencies: ["09155B5B0F1BE994"]
-			description: ["The &6Mixer&r blends wet ingredients: fertilizer, drilling fluid, and soon enough gallium arsenide and fluix crystal."]
+			description: [
+				"It mixes things, as advertised. Here that means drilling fluid, gallium arsenide, the roaster's catalyst and AE2's fluix crystal."
+			]
 			icon: "gtceu:lv_mixer"
 			id: "3C89167418EA462B"
 			rewards: [{ id: "3FE8B3BDBC000C5D", type: "xp", xp: 30 }]
 			tasks: [{ id: "4BE599CF418E61FB", item: "gtceu:lv_mixer", type: "item" }]
 			title: "Mixer"
-			x: 12.0d
+			x: 10.0d
 			y: 3.0d
 		}
 		{
 			dependencies: ["3879D8323DF4F8BB"]
 			description: [
-				"The &6Circuit Assembler&r batches what you just soldered by hand: boards, tubes and cable in, LV circuits out, no hands involved."
-				"It is built from the MV circuit, which is why it comes after."
+				"It makes circuits in batches and takes the soldering off your hands. Its own recipe asks for MV circuits, so it waits until you've made a few of those by hand."
 			]
 			icon: "gtceu:lv_circuit_assembler"
 			id: "220C6C2F1D568194"
 			rewards: [{ id: "32A9BD5A41455BB9", type: "xp", xp: 35 }]
 			tasks: [{ id: "5899D39CB5599808", item: "gtceu:lv_circuit_assembler", type: "item" }]
 			title: "Circuit Assembler"
-			x: 18.0d
+			x: 16.0d
 			y: 6.0d
 		}
 		{
 			dependencies: ["09155B5B0F1BE994"]
 			description: [
-				"Wood dust and glue press into a phenolic board; silver foil and a splash of sodium persulfate, or iron chloride, your call, finish it into a good circuit board."
-				"Better than the resin one steam age taught you, and the salt chemistry you just unlocked is what makes it."
+				"A better board than the resin one. The phenolic board gets etched with silver foil in sodium persulfate or iron chloride, whichever you have more of, and both come out of the chemistry you just set up."
 			]
 			icon: "gtceu:phenolic_printed_circuit_board"
 			id: "5F2D3E9A2F35D8E0"
 			rewards: [{ id: "3CCE26DF092C48D3", type: "xp", xp: 30 }]
 			tasks: [{ count: 4L, id: "45C73EBE75172899", item: "gtceu:phenolic_printed_circuit_board", type: "item" }]
 			title: "Good Circuit Board"
-			x: 12.0d
+			x: 10.0d
 			y: 6.0d
 		}
 		{
 			dependencies: ["5F2D3E9A2F35D8E0"]
 			description: [
-				"Gallium and arsenic dust blend in the mixer into gallium arsenide. Gallium and arsenic both come from ore."
-				"Fine copper wire, that dust and glass make a diode in the assembler, the last part the MV circuit is waiting on."
+				"The mixer turns gallium and arsenic dust into gallium arsenide, and the assembler turns that into diodes. Arsenic comes out of realgar in the centrifuge, gallium out of bauxite in a persulfate bath."
+				"Diodes are the last piece the MV circuit is waiting on."
 			]
 			icon: "gtceu:diode"
 			id: "0785A341666D046E"
 			rewards: [{ id: "47C80CB0BB026BC9", type: "xp", xp: 30 }]
 			tasks: [{ count: 4L, id: "10F2763E413CF2FB", item: "gtceu:diode", type: "item" }]
 			title: "Diodes"
-			x: 14.0d
+			x: 12.0d
 			y: 6.0d
 		}
 		{
 			dependencies: ["0785A341666D046E"]
 			description: [
-				"Copper wire, a steel plate, an LV circuit, a good board and a diode make one by hand. Nothing here needs MV power."
-				"The Circuit Assembler asks for this circuit, so make a few before you build it."
+				"You can make the &6Good Electronic Circuit&r by hand, no MV power needed. Good thing, too, because the circuit assembler won't build without it. Make a few."
 			]
 			icon: "gtceu:good_electronic_circuit"
 			id: "3879D8323DF4F8BB"
 			rewards: [{ id: "7A7D7E619B5877B2", type: "xp", xp: 45 }]
 			tasks: [{ count: 4L, id: "01134F436F85414C", item: "gtceu:good_electronic_circuit", type: "item" }]
 			title: "MV Circuit"
-			x: 16.0d
+			x: 14.0d
 			y: 6.0d
 		}
 		{
 			dependencies: ["220C6C2F1D568194"]
 			description: [
-				"The &6Forming Press&r stamps a plate and a second ingredient into one shaped part: gears, rotors, and soon the processor blanks AE2 needs."
-				"No meteorite ever required: whatever a meteorite would have given you, the press stamps instead."
+				"The press stamps shaped parts out of plates. In this pack it also stamps AE2's processor presses out of steel plate, so you can skip the meteorite hunting."
 			]
 			icon: "gtceu:lv_forming_press"
 			id: "2C50918B882FA400"
 			rewards: [{ id: "04A087AC4B66AAE9", type: "xp", xp: 30 }]
 			tasks: [{ id: "19930A5D35E31332", item: "gtceu:lv_forming_press", type: "item" }]
 			title: "Forming Press"
-			x: 20.0d
+			x: 18.0d
 			y: 7.5d
 		}
 		{
 			dependencies: ["2C50918B882FA400"]
 			description: [
-				"Graphite comes off the diamond vein; press the dust around a steel rod and you get a graphite electrode."
-				"It wears out by chance in the arc furnace, same as a drill bit. Keep spares in the input bus."
+				"Graphite dust from the diamond vein, pressed around a steel rod. The arc furnace burns through one now and then, the way the drill eats bits. Spares go in its bus."
 			]
 			icon: "grindless:graphite_electrode"
 			id: "4767E74EF8428F44"
 			rewards: [{ id: "4BD45FED6F5C4863", type: "xp", xp: 30 }]
 			tasks: [{ count: 2L, id: "6322BDD620B9ABED", item: "grindless:graphite_electrode", type: "item" }]
 			title: "Graphite Electrode"
-			x: 22.0d
+			x: 20.0d
 			y: 7.5d
 		}
 		{
 			dependencies: ["4767E74EF8428F44"]
 			description: [
-				"No single LV block reduces quartz sand to silicon. GTM saves that for an MV blast furnace. The &6Submerged Arc Furnace&r does it anyway, with two energy hatches and an electrode."
-				"The same arc melts cobblestone into lava and bakes obsidian and sand into sky dust, AE2's melted-rock gem."
+				"An arc under quartz sand and coke makes AE2's silicon at LV, while GregTech's own silicon waits for an MV blast furnace. It takes exactly two energy hatches and an electrode."
+				"It also turns cobblestone and water into obsidian and bakes sky dust, so the core of AE2 is within reach this early."
 			]
 			icon: "gtceu:submerged_arc_furnace"
 			id: "62D5FBAC11D478E9"
@@ -444,28 +421,26 @@
 			size: 1.5d
 			tasks: [{ id: "697FE42849C59317", item: "gtceu:submerged_arc_furnace", type: "item" }]
 			title: "Submerged Arc Furnace"
-			x: 24.0d
+			x: 22.0d
 			y: 7.5d
 		}
 		{
 			dependencies: ["62D5FBAC11D478E9"]
 			description: [
-				"The autoclave grows certus quartz dust into a real certus quartz crystal with nothing but water. Distilled water does it in less time."
-				"GTM's own certus gem and AE2's crystal are the same thing now. Whatever your ore line gives you, the network takes it."
+				"The autoclave grows certus dust into crystals in water, and distilled water does it faster and never fails. GregTech's machines hand out AE2's crystal here, so the ore line and the network share one pile."
 			]
 			icon: "ae2:certus_quartz_crystal"
 			id: "3D374AE4AF789B83"
 			rewards: [{ id: "5686983FDF28C1EF", type: "xp", xp: 30 }]
 			tasks: [{ count: 4L, id: "0E183815EF33551B", item: "ae2:certus_quartz_crystal", type: "item" }]
 			title: "Certus Quartz Crystal"
-			x: 24.0d
+			x: 22.0d
 			y: 9.0d
 		}
 		{
 			dependencies: ["3D374AE4AF789B83"]
 			description: [
-				"The &6Inscriber&r and &6Charger&r are still AE2's own blocks. They just are not built from raw iron and copper anymore."
-				"A hull, a motor or piston, an LV circuit and a certus crystal: the network's first two machines are GregTech parts now."
+				"AE2's own &6Inscriber&r and &6Charger&r, built in the assembler from GregTech parts instead of a handful of iron. Once they're down they work exactly like they do anywhere else."
 			]
 			icon: "ae2:inscriber"
 			id: "28CA19174EBE8705"
@@ -475,39 +450,39 @@
 				{ id: "696FD4F84D5675EE", item: "ae2:charger", type: "item" }
 			]
 			title: "Inscriber and Charger"
-			x: 26.0d
+			x: 24.0d
 			y: 9.0d
 		}
 		{
 			dependencies: ["28CA19174EBE8705"]
 			description: [
-				"Charge a crystal in the polarizer for electricity alone, or in the charger you just built. Both land on the same charged certus quartz."
-				"Whichever machine is free when you need one."
+				"The charger you just built and GregTech's polarizer both charge certus, and they make the same crystal. Use whichever one isn't busy."
 			]
 			icon: "ae2:charged_certus_quartz_crystal"
 			id: "19778BA6D436527A"
 			rewards: [{ id: "78479C7E6FA1CB30", type: "xp", xp: 30 }]
 			tasks: [{ count: 4L, id: "3B8D3FBB4B68718B", item: "ae2:charged_certus_quartz_crystal", type: "item" }]
 			title: "Charged Certus Quartz"
-			x: 28.0d
+			x: 26.0d
 			y: 9.0d
 		}
 		{
 			dependencies: ["19778BA6D436527A"]
-			description: ["Charged certus, redstone and a little quartzite dust in the mixer, no water bath required: fluix crystal without ever setting foot in the Nether."]
+			description: [
+				"The mixer makes fluix from charged certus, redstone and quartzite dust. Quartzite stands in for Nether quartz here, and this one needs no trip at all."
+			]
 			icon: "ae2:fluix_crystal"
 			id: "382D3153A231CEBF"
 			rewards: [{ id: "18C037E708F2E829", type: "xp", xp: 30 }]
 			tasks: [{ count: 4L, id: "78F2A1568773608B", item: "ae2:fluix_crystal", type: "item" }]
 			title: "Fluix Crystal"
-			x: 30.0d
+			x: 28.0d
 			y: 9.0d
 		}
 		{
 			dependencies: ["382D3153A231CEBF"]
 			description: [
-				"The forming press stamps the plates, then the inscriber prints each processor, same as always."
-				"Press whichever your next build actually needs. Nothing here asks for all four at once."
+				"The forming press stamps the presses and the inscriber uses them the usual way. Any one counts here. Make whichever your next build needs."
 			]
 			icon: "ae2:logic_processor_press"
 			id: "7F321CF5445BE4CA"
@@ -519,14 +494,14 @@
 				{ id: "539BC9848FEEAFB2", item: "ae2:silicon_press", optional_task: true, type: "item" }
 			]
 			title: "Processor Presses"
-			x: 32.0d
+			x: 30.0d
 			y: 9.0d
 		}
 		{
 			dependencies: ["7F321CF5445BE4CA"]
 			description: [
-				"The &6Controller&r ties every cable on the network into one grid; the &6Drive&r is where storage cells sit; the &6Energy Acceptor&r is the network's one power plug."
-				"One of each is enough to start the network. More drives and channels come as it grows."
+				"A controller, a drive and an energy acceptor are all a network needs to wake up. Here they come out of the LV assembler, built on machine hulls like any GregTech machine."
+				"AE2 runs on FE, but GregTech cable plugged straight into the acceptor powers it. No converter needed."
 			]
 			icon: "ae2:controller"
 			id: "0BB3182B7BA1B9AF"
@@ -537,14 +512,13 @@
 				{ id: "37C8C2C66E3570A8", item: "ae2:energy_acceptor", type: "item" }
 			]
 			title: "Network Core"
-			x: 34.0d
+			x: 32.0d
 			y: 10.5d
 		}
 		{
 			dependencies: ["0BB3182B7BA1B9AF"]
 			description: [
-				"&6Interface&r, &6Pattern Provider&r and &6Molecular Assembler&r move items by pattern and craft them. Three blocks, one small logistics cluster."
-				"All three are built the same way now: an LV hull plus the network cores GTM never touches."
+				"With an interface, a pattern provider and a molecular assembler, the network starts crafting for you. They're LV hull builds too, around AE2's usual cores, and the annihilation core takes a quartzite gem where AE2 would ask for Nether quartz."
 			]
 			icon: "ae2:interface"
 			id: "3B94B80BD64D83F2"
@@ -555,14 +529,13 @@
 				{ id: "3C0A1068ABFB82C5", item: "ae2:molecular_assembler", type: "item" }
 			]
 			title: "ME Interfaces"
-			x: 36.0d
+			x: 34.0d
 			y: 10.5d
 		}
 		{
 			dependencies: ["3B94B80BD64D83F2"]
 			description: [
-				"A &6Terminal&r shows you everything the network holds and lets you request it from anywhere on the grid."
-				"Add a crafting storage next to the interface and assembler you already built and that is a crafting CPU. The network finishes patterns on its own from here."
+				"A terminal to see everything and a crafting CPU to plan the jobs. From here on AE2 is plain AE2, and the Applied Energistics tab has the rest."
 			]
 			icon: "ae2:terminal"
 			id: "09539172C5EF719B"
@@ -572,14 +545,14 @@
 				{ id: "723AEB75C306D427", type: "checkmark" }
 			]
 			title: "ME Network Access"
-			x: 38.0d
+			x: 36.0d
 			y: 10.5d
 		}
 		{
 			dependencies: ["78451687508D5888"]
 			description: [
-				"Crushed sapphire ore drops aluminium dust as a secondary. Sample the deep sapphire vein, drill it, and collect the dust."
-				"Dust becomes ingots in the Blast Furnace. Give it two LV energy hatches and it reaches MV power, enough for this recipe."
+				"At this stage aluminium comes from sapphire. Sample the deep sapphire vein, drill it, and the electrolyzer splits the dust into aluminium and oxygen."
+				"The aluminium dust becomes ingots in the blast furnace you just gave two hatches."
 			]
 			icon: "gtceu:aluminium_ingot"
 			id: "7853BCDA154074E2"
@@ -589,28 +562,27 @@
 				{ count: 4L, id: "6C26B2DBDC31CEE6", item: "gtceu:aluminium_ingot", type: "item" }
 			]
 			title: "Aluminium"
-			x: 12.0d
+			x: 10.0d
 			y: 0.0d
 		}
 		{
 			dependencies: ["7853BCDA154074E2"]
 			description: [
-				"Same idea as the LV hull, one size up: an empty MV Machine Hull waiting for a circuit and a recipe."
-				"The frame uses aluminium plates, so it follows the ingots."
+				"Another hull, one tier up. Its casing is aluminium, hence the wait for the ingots."
 			]
 			icon: "gtceu:mv_machine_hull"
 			id: "0B26AF4B18A1BE7D"
 			rewards: [{ id: "67869852D11F151B", type: "xp", xp: 40 }]
 			tasks: [{ count: 2L, id: "0A359FF1522011F7", item: "gtceu:mv_machine_hull", type: "item" }]
 			title: "MV Machine Hull"
-			x: 14.0d
+			x: 12.0d
 			y: 0.0d
 		}
 		{
 			dependencies: ["0B26AF4B18A1BE7D"]
 			description: [
-				"The &6Transformer&r is the only safe bridge between an LV grid and an MV one: four LV amps in, one MV amp out, or the other way round."
-				"Build the grid to feed it before you throw the switch. A transformer with nothing behind it just trips."
+				"The &6Transformer&r steps LV up to MV, which is about all there is to say about transformers."
+				"MV is next, and MV goes somewhere new: the End, for ore the Overworld won't give you."
 			]
 			icon: "gtceu:lv_transformer_1a"
 			id: "39A5A5CC76591697"
@@ -618,14 +590,14 @@
 			shape: "diamond"
 			tasks: [{ id: "4B097EF6A689ADD8", item: "gtceu:lv_transformer_1a", type: "item" }]
 			title: "LV to MV Transformer"
-			x: 16.0d
+			x: 14.0d
 			y: 0.0d
 		}
 		{
 			dependencies: ["5C7A2E94B1D03F68"]
 			description: [
-				"The &6Electric Blast Furnace&r reaches heat nothing smaller can. The cupronickel coils set the temperature, and the aluminium recipe needs 1700 K."
-				"Build the coils into the structure and feed it aluminium dust. The trap: aluminium is an MV recipe, so the furnace needs two LV energy hatches, not one."
+				"GregTech's big furnace, the one you'll keep coming back to for the rest of the game. Cupronickel coils get it hot enough for aluminium."
+				"The catch: aluminium is an MV recipe. Two LV energy hatches count as MV, so give it two."
 			]
 			icon: "gtceu:electric_blast_furnace"
 			id: "78451687508D5888"
@@ -637,25 +609,27 @@
 			size: 1.5d
 			tasks: [{ id: "4CE9780299D08B3E", item: "gtceu:electric_blast_furnace", type: "item" }]
 			title: "Electric Blast Furnace"
-			x: 10.0d
+			x: 8.0d
 			y: 0.0d
 		}
 		{
 			dependencies: ["6D668A4CB9B8384A"]
-			description: ["Glass and a silver-bearing dust, pressed in the assembler into plates that catch the sky. Nothing on the plate is drawn by hand."]
+			description: [
+				"Glass with a silver emulsion, made in the assembler. The optical observatory exposes them to the Moon, and this time the Moon draws itself."
+			]
 			icon: "grindless:photographic_plate"
 			id: "365B9E86E3AA4894"
 			rewards: [{ id: "5422CC6BEE374C8F", type: "xp", xp: 30 }]
 			tasks: [{ id: "396D2C12CB2C436B", item: "grindless:photographic_plate", type: "item" }]
 			title: "Photographic Plates"
-			x: 8.0d
+			x: 6.0d
 			y: -4.5d
 		}
 		{
 			dependencies: ["365B9E86E3AA4894", "10F6A7BFB476944C"]
 			description: [
-				"The &6Optical Observatory&r is a refractor dome: a long tube and a glass plate that holds still while the sky turns past it."
-				"Through the eyepiece the Moon's seas come up sharp enough to trace by hand."
+				"A refractor in a dome that tracks the Moon while the sky turns, so a plate can take a long exposure. It reads your steam-age draft chart and hands it back."
+				"It still wants a clear night, but it doesn't care how high you build it."
 			]
 			icon: "gtceu:optical_observatory"
 			id: "3D32B4FC8AEE49CE"
@@ -664,108 +638,120 @@
 			size: 1.5d
 			tasks: [{ id: "149106CCB19946CB", item: "gtceu:optical_observatory", type: "item" }]
 			title: "Optical Observatory"
-			x: 10.0d
+			x: 8.0d
 			y: -4.5d
 		}
 		{
 			dependencies: ["3D32B4FC8AEE49CE"]
-			description: ["Expose a plate on the Moon through the dome and you get a map of its seas and craters, drawn by light instead of by hand."]
+			description: [
+				"The plates come back with crater chains, cracks and long shadows along the terminator, and for the first time you can tell flat ground from rough. The same run gives you the ephemeris too."
+			]
 			icon: "grindless:lunar_map"
 			id: "101BAA038F0ACAA6"
 			rewards: [{ id: "763B0BB08C2440D6", type: "xp", xp: 40 }]
 			tasks: [{ id: "341C3A1BD14B42D1", item: "grindless:lunar_map", type: "item" }]
 			title: "Photographic Lunar Map"
-			x: 12.0d
+			x: 10.0d
 			y: -4.5d
 		}
 		{
 			dependencies: ["101BAA038F0ACAA6"]
-			description: ["Shoot the Moon at the same hour on different nights and the plates line up into a timetable: where it sits, and when it rises."]
+			description: [
+				"Tables of where the Moon will be on any night, worked out from the same plates as the map. The radio telescope in MV reads both and never uses them up."
+			]
 			icon: "grindless:lunar_ephemeris"
 			id: "1EEB24C2AB3EF4B0"
 			rewards: [{ id: "3F3B1C55D2A048F1", type: "xp", xp: 40 }]
 			tasks: [{ id: "15CC3A50277F4F8F", item: "grindless:lunar_ephemeris", type: "item" }]
 			title: "Lunar Ephemeris"
-			x: 14.0d
+			x: 12.0d
 			y: -4.5d
 		}
 		{
 			dependencies: ["3C89167418EA462B"]
 			description: [
-				"Vanadium and diatomite blend in the &6Mixer&r into contact mass, the catalyst the sulfide roaster burns through. It wears out now and then, so keep spares."
-				"Vanadium comes from vanadium magnetite on the ore line."
+				"The sulfide roaster's catalyst, vanadium on diatomite, from the mixer. It wears out now and then, so keep a few in the roaster's bus."
+				"For the vanadium, smelt raw vanadium magnetite into dust and let the centrifuge split it."
 			]
 			icon: "grindless:contact_catalyst"
 			id: "30B1A00EBEC54B6D"
 			rewards: [{ id: "124DE9A929364C39", type: "xp", xp: 30 }]
 			tasks: [{ count: 4L, id: "3FF1A8EC8D614951", item: "grindless:contact_catalyst", type: "item" }]
-			title: "Contact Mass"
-			x: 14.0d
+			title: "Contact Catalyst"
+			x: 12.0d
 			y: 3.0d
 		}
 		{
 			dependencies: ["30B1A00EBEC54B6D"]
-			description: ["The &6Sulfide Roaster&r burns sulfur-bearing ore with air, water and contact mass. The sulfur leaves as gas and the metal stays behind for the rest of the ore line."]
+			description: [
+				"The roaster burns sulfide ores in air, and the sulfur comes out as sulfuric acid instead of a cloud. The heat comes back as steam for your turbines."
+			]
 			icon: "gtceu:sulfide_roaster"
 			id: "5A176E45F8E64ED7"
 			rewards: [{ id: "6A1E3C0D9B2F4E58", type: "xp", xp: 35 }]
 			tasks: [{ id: "5B51E7ED80874170", item: "gtceu:sulfide_roaster", type: "item" }]
 			title: "Sulfide Roaster"
-			x: 16.0d
+			x: 14.0d
 			y: 3.0d
 		}
 		{
 			dependencies: ["5A176E45F8E64ED7"]
-			description: ["Galena roasted in the sulfide roaster gives up its silver as nuggets. It is the first silver you pull from ore, and the heliostat mirrors need it."]
+			description: [
+				"Roast galena and silver nuggets drop out with the lead oxide. The heliostat mirrors and the photographic plates both want silver."
+			]
 			icon: "gtceu:silver_nugget"
 			id: "2B7D9F41C0E83A65"
 			rewards: [{ id: "34D2F60B19C7E853", type: "xp", xp: 35 }]
 			tasks: [{ count: 6L, id: "3E1C4A7D35B20F96", item: "gtceu:silver_nugget", type: "item" }]
 			title: "Silver from Galena"
-			x: 18.0d
+			x: 16.0d
 			y: 3.0d
 		}
 		{
 			dependencies: ["3A7E2C5F1B9D4061"]
-			description: ["The steel multiblock tank and its valve store the steam the tower makes by day. The night runs on what was saved."]
+			description: [
+				"A steel multiblock tank soaks up the tower's daytime steam so the turbines keep turning after dark. A long night with a lot of turbines needs more than one."
+			]
 			icon: "gtceu:steel_multiblock_tank"
 			id: "1D9C4B27E05F8A36"
 			rewards: [{ id: "5E0A7C93D2B14F68", type: "xp", xp: 35 }]
 			tasks: [{ id: "4C2E8B51A7D03F9E", item: "gtceu:steel_multiblock_tank", type: "item" }]
 			title: "Steam for the Night"
-			x: 12.0d
+			x: 10.0d
 			y: -1.5d
 		}
 		{
 			dependencies: ["6D668A4CB9B8384A"]
-			description: ["Mirrors laid out on open ground, each angled to throw the sun onto the tower. Each one is silver-backed, so the silver from galena comes first, the assembler last."]
+			description: [
+				"The heliostat tower needs a whole field of these behind it, each angled to throw sunlight at the top. They're silvered glass. Get the silver going before you start on them."
+			]
 			icon: "grindless:heliostat_mirror"
 			id: "2F6B1D9A8C4E0527"
 			rewards: [{ id: "7B1F4C8E2D05A930", type: "xp", xp: 40 }]
 			tasks: [{ count: 28L, id: "6A3D0E7B9F21C84D", item: "grindless:heliostat_mirror", type: "item" }]
 			title: "Mirror Field"
-			x: 8.0d
+			x: 6.0d
 			y: -1.5d
 		}
 		{
 			dependencies: ["2F6B1D9A8C4E0527"]
 			description: [
-				"The &6Heliostat Tower&r gathers the field's light into one point at the top. It makes steam only by day, under open sky and clear weather."
-				"The tank next to it keeps the night supplied."
+				"It turns sunlight into steam without a lump of fuel anywhere. It only works by day under an open, dry sky."
+				"At night it does nothing at all, which is what the tank is for."
 			]
 			icon: "gtceu:heliostat_tower"
 			id: "3A7E2C5F1B9D4061"
 			rewards: [{ id: "5D5B1E3A7C42F086", type: "xp", xp: 60 }]
 			tasks: [{ id: "3C0F4A2E6B17D35C", item: "gtceu:heliostat_tower", type: "item" }]
 			title: "Heliostat Tower"
-			x: 10.0d
+			x: 8.0d
 			y: -1.5d
 		}
 		{
-			dependencies: ["731F761B242263ED"]
+			dependencies: ["1AC672110DFD0C14"]
 			description: [
-				"The &6Generator Array&r runs up to 16 LV generators in one structure: steam turbine, combustion generator or gas turbine mode, picked in the controller."
-				"Same fuel and the same energy per bucket as the single blocks. The dynamo hatches set the limit: an LV hatch carries 2 generators, an MV one 8."
+				"The &6Generator Array&r puts up to sixteen LV generators behind one controller, as steam turbines, combustion generators or gas turbines. Same fuel, same energy per bucket; you only save the floor space and the cable spaghetti."
+				"The dynamo hatches set how many actually run: an LV hatch carries two, an MV hatch eight."
 			]
 			icon: "gtceu:generator_array"
 			id: "1CE11DDA27E5B778"
@@ -776,5 +762,6 @@
 			y: -1.5d
 		}
 	]
+	subtitle: ["Electricity at last: ore lines, a little chemistry, AE2, and the Moon on film."]
 	title: "LV: The First Spark"
 }

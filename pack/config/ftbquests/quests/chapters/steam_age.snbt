@@ -12,8 +12,8 @@
 		{
 			dependencies: ["3207813527EE1FBD"]
 			description: [
-				"Still on Earth, still no electricity. Fire boils water and steam drives bronze machines. By the end of this tab the drills and greenhouses work on their own and the first generator turns."
-				"Hand mining is fine until then; nothing after this tab needs it."
+				"Still on Earth, still no electricity. Fire boils water here, and the steam drives bronze machines."
+				"By the end, drills and greenhouses do the gathering and your first generator is turning. Until then, the pickaxe still has work to do."
 			]
 			icon: "gtceu:lp_steam_solid_boiler"
 			id: "3041A191AB566E3E"
@@ -28,7 +28,7 @@
 		{
 			dependencies: ["3041A191AB566E3E"]
 			description: [
-				"Clay balls smelt into bricks; craft them into brick blocks. The boiler and the bronze casings of the steam machines are built on them."
+				"Smelt clay into bricks. The boiler and the bricked casings of the steam machines are built on them, and the clay you got for finishing bronze was meant for exactly this."
 			]
 			icon: "minecraft:bricks"
 			id: "2504804D432C502B"
@@ -41,7 +41,7 @@
 		{
 			dependencies: ["3041A191AB566E3E"]
 			description: [
-				"Saw a plank into a wooden form and cut a brick shape into it with the knife; the form stays in the grid. With it, clay and sand become coke clay. Smelt that into coke oven bricks and pack them into blocks."
+				"The coke oven wants its own bricks, and they take a few more steps than the plain kind: a carved wooden form, coke clay, then the furnace. The form never leaves the grid, so one carving lasts forever."
 			]
 			icon: "gtceu:coke_oven_bricks"
 			id: "2FF295FBA78AF335"
@@ -60,8 +60,8 @@
 		{
 			dependencies: ["2FF295FBA78AF335"]
 			description: [
-				"Your first multiblock: a hollow cube of bricks with the controller in one face. The controller's EMI page shows the shape."
-				"Coal becomes coke and logs become charcoal; a furnace can't make charcoal here. &6Creosote&r collects inside: boilers burn it and it soaks planks into treated wood."
+				"Your first multiblock, and a gentle one: a hollow cube of bricks with the controller in one face. EMI shows the shape on the controller's page."
+				"It turns coal into coke and logs into charcoal, which a furnace won't do here. The creosote that collects inside burns in boilers, or soaks planks into treated wood."
 			]
 			icon: "gtceu:coke_oven"
 			id: "20A9578F6F706702"
@@ -82,7 +82,8 @@
 		{
 			dependencies: ["20A9578F6F706702"]
 			description: [
-				"The battery keeps the coal gas that the coke oven throws away, along with the creosote. It needs a fluid output hatch, and no steam part pulls fluid out, so you hand-make the ULV output hatch; EMI shows how. A screwdriver turns it into the ULV input hatch."
+				"The &6Coke Battery&r cokes like a row of coke ovens and also keeps the coal gas they let escape. Tank the gas; LV has plans for it."
+				"No steam part can pull fluid out of a multiblock. Here you can hand-craft the ULV output hatch instead, and a screwdriver turns it into the input version."
 			]
 			icon: "gtceu:coking_battery"
 			id: "3A7C5E1D9B2F6048"
@@ -97,8 +98,8 @@
 		{
 			dependencies: ["20A9578F6F706702"]
 			description: [
-				"Water without buckets. The pump makes it inside, a little faster in wet biomes, so no lake is needed."
-				"It is a small multiblock of treated wood with a pump hatch and pump decks; the controller's EMI page has the shape."
+				"The pump makes its own water, a little faster in wet biomes, so no bucket or lake is needed."
+				"Give it a ULV fluid output hatch instead of its own pump hatch and it pumps twice as much. The large steam ore washer is built around one later, too."
 			]
 			icon: "gtceu:primitive_pump"
 			id: "0E2E13522BA2A323"
@@ -113,8 +114,8 @@
 		{
 			dependencies: ["2504804D432C502B"]
 			description: [
-				"Bronze plates, bricks and a furnace. Fill it with water before the first fuel goes in: water poured into a dry, hot boiler blows it up."
-				"Steam comes out of every side except the bottom, so pipe the water in from below."
+				"Your first steam. Fill it with water before the first fuel goes in: a dry, hot boiler that suddenly gets water doesn't stay a boiler for long."
+				"Boilers here make far more steam than in stock GregTech, and one goes a long way. Steam leaves through the top, back and sides, never the bottom or the front. Feed the water in from below."
 			]
 			icon: "gtceu:lp_steam_solid_boiler"
 			id: "6D923ADC90127182"
@@ -130,8 +131,8 @@
 		{
 			dependencies: ["6D923ADC90127182"]
 			description: [
-				"Every steam machine starts from a &6Bronze Machine Casing&r or a &6Bricked Bronze Casing&r, and drinks steam from a boiler or pipe next to it."
-				"After each cycle it vents steam out of the back: keep that side clear or it stops. Low-pressure machines run at half speed; the steel ones don't."
+				"Each steam machine starts from a &6Bronze Machine Casing&r or a &6Bricked Bronze Casing&r and drinks steam from a boiler or pipe beside it."
+				"After every cycle it vents a puff of steam out of the back. Wall that side off and the machine stops, and it'll wait there as long as you will. The bronze ones also run at half the speed of the steel versions."
 			]
 			icon: "gtceu:bronze_machine_casing"
 			id: "4F0049B2E382BA8E"
@@ -147,7 +148,7 @@
 		{
 			dependencies: ["4F0049B2E382BA8E"]
 			description: [
-				"GregTech's miner digs out the ore under it, block by block, until the area is empty. Keep it: the vein drill later in this tab is built around one."
+				"GregTech's miner chews through the ore under it, block by block, until there's nothing left. Don't scrap it when it runs dry; the steam vein drill is built around one."
 			]
 			icon: "gtceu:lp_steam_miner"
 			id: "3E65A226A598A301"
@@ -160,8 +161,8 @@
 		{
 			dependencies: ["4F0049B2E382BA8E"]
 			description: [
-				"Grinds what the mortar did, much faster, but only the first output comes out. Ore byproducts wait for an HV macerator, so keep smelting raw ore for now."
-				"Its recipe needs diamonds from the deep veins."
+				"The mortar's job without the elbow grease. It only gives the first output, so byproducts wait for the large steam macerator or an HV one. It still doubles your ore, though: raw ore comes out as crushed ore, and crushed ore smelts too."
+				"It wants diamonds from the deep veins."
 			]
 			icon: "gtceu:lp_steam_macerator"
 			id: "0238F574F77C30E5"
@@ -174,7 +175,7 @@
 		{
 			dependencies: ["4F0049B2E382BA8E"]
 			description: [
-				"GregTech turns off packing nuggets into ingots or dust into plates by hand; the compressor does it. Wood dust becomes wood plates and fireclay becomes bricks ready to fire."
+				"GregTech won't let you pack nuggets into ingots by hand, so the compressor does it. It also presses wood dust into the wood plates the first circuit boards start from, and fireclay dust into bricks ready for the furnace."
 			]
 			icon: "gtceu:lp_steam_compressor"
 			id: "6BB23A9836716A37"
@@ -187,8 +188,8 @@
 		{
 			dependencies: ["4F0049B2E382BA8E"]
 			description: [
-				"Copper and tin in, bronze out, at a better ratio than mixing dust. It also makes red alloy, and with the right mold it casts glass, glass tubes and rubber sheets."
-				"The steam furnace is the plain smelter of the set."
+				"Copper and tin go in and bronze comes out, with less waste than mixing dust by hand. Red alloy comes from here too, and once you have molds it casts glass, glass tubes and rubber sheets."
+				"The steam furnace is its plainer cousin, if you want one."
 			]
 			icon: "gtceu:lp_steam_alloy_smelter"
 			id: "0B3A5E0D83643882"
@@ -204,7 +205,7 @@
 		{
 			dependencies: ["4F0049B2E382BA8E"]
 			description: [
-				"With water on one side and lava on the other it makes cobblestone and stone without digging. EMI lists what else it can break out."
+				"With water on one side and lava on the other, it breaks out cobblestone and stone for as long as you like. Neither fluid gets used up, so the first bucket of lava is also the last."
 			]
 			icon: "gtceu:lp_steam_rock_crusher"
 			id: "68EB76B726CD7484"
@@ -219,7 +220,7 @@
 		{
 			dependencies: ["68EB76B726CD7484"]
 			description: [
-				"More plates per ingot than the hand hammer, and it crushes cobblestone into gravel and gravel into sand. Behind a rock crusher that is sand for coke clay and glass that never runs out."
+				"It gets more plates out of your ingots than the hand hammer, and it smashes cobblestone into gravel and gravel into sand. Put it behind the rock crusher and you never dig sand again."
 			]
 			icon: "gtceu:lp_steam_forge_hammer"
 			id: "15187E005F30E142"
@@ -234,7 +235,8 @@
 		{
 			dependencies: ["0238F574F77C30E5"]
 			description: [
-				"The &6Steam Grinder&r and &6Steam Oven&r are multiblock macerator and furnace: several items per cycle from one steam hatch. They keep no byproducts either."
+				"The &6Steam Grinder&r and &6Steam Oven&r are GregTech's macerator and furnace in multiblock form, working on several items per cycle from one steam hatch. Like the small macerator, the grinder skips the byproducts."
+				"It won't go to waste later, either: the large steam macerator is built around a grinder."
 			]
 			icon: "gtceu:steam_grinder"
 			id: "67124C424660DDAE"
@@ -252,7 +254,7 @@
 		{
 			dependencies: ["6BB23A9836716A37", "0238F574F77C30E5"]
 			description: [
-				"Grind clay and brick blocks into dust and mix them into fireclay. The compressor presses it, a furnace fires it, and firebricks take heat that would melt ordinary bricks."
+				"The primitive blast furnace runs hot enough to ruin ordinary bricks. Firebricks can take it. They start as ground clay and brick, and the compressor and a furnace do the rest."
 			]
 			icon: "gtceu:firebricks"
 			id: "7E4FF9E6FF9F495C"
@@ -272,7 +274,7 @@
 		{
 			dependencies: ["6BB23A9836716A37"]
 			description: [
-				"Smelted iron nuggets come out as wrought iron nuggets, and the compressor packs them into ingots. Wrought iron turns into steel faster in the blast furnace, and every LV hull needs its plates."
+				"Smelt iron nuggets and they come out as wrought iron nuggets. It surprises everyone the first time. The compressor packs them into ingots, and those turn into steel faster than plain iron. LV hulls wear its plates, too."
 			]
 			icon: "gtceu:wrought_iron_ingot"
 			id: "2985D1F260EE851E"
@@ -288,7 +290,7 @@
 		{
 			dependencies: ["7E4FF9E6FF9F495C"]
 			description: [
-				"Iron or wrought iron with coke or coal becomes steel, slowly; wrought iron is quicker. If steel runs short, build a second furnace against the first: they can share a wall."
+				"Iron and coke, or coal, make steel in here, slowly. Wrought iron speeds it up. When one furnace can't keep up, build the next against it; they're happy to share a wall."
 			]
 			icon: "gtceu:primitive_blast_furnace"
 			id: "376295DE4FA3B31E"
@@ -303,7 +305,7 @@
 		{
 			dependencies: ["376295DE4FA3B31E"]
 			description: [
-				"A second route to steel. Steam drives it, so it needs no firebricks run of its own. Ore, coke and a little calcite make steel in batches."
+				"A second road to steel that takes iron ore straight from the drill, with coke and some calcite from the lapis vein. One of these out-produces half a dozen primitive furnaces, and it drinks steam to do it."
 			]
 			icon: "gtceu:steam_blast_furnace"
 			id: "4B8E2D6A1F9C3057"
@@ -318,7 +320,7 @@
 		{
 			dependencies: ["376295DE4FA3B31E"]
 			description: [
-				"At the eyepiece you see the dark seas, the bright highlands and the big craters with their rays. It only works at night, under a clear sky, with the controller at Y 100 or more."
+				"Through the eyepiece the Moon shows dark seas, bright highlands and big craters with long rays. The &6Clockwork Observatory&r only works at night under a clear sky, with the controller at Y 100 or higher, above the haze and the smoke from your coke ovens."
 			]
 			icon: "gtceu:steam_observatory"
 			id: "1253203E620BE055"
@@ -333,7 +335,7 @@
 		{
 			dependencies: ["1253203E620BE055"]
 			description: [
-				"The first chart of the Moon. Its data only comes from looking, so the observatory never spends it, and the optical observatory in LV still needs it."
+				"Your first map of the Moon, drawn by hand at the eyepiece. Hold on to it: the optical observatory in LV reads it on every run and never uses it up. If you ever want a second one, a copy is cheap."
 			]
 			icon: "grindless:lunar_chart_draft"
 			id: "10F6A7BFB476944C"
@@ -346,7 +348,7 @@
 		{
 			dependencies: ["376295DE4FA3B31E"]
 			description: [
-				"Steel opens the high-pressure machines, the casting molds and the whole LV tier. Keep a blast furnace running from now on."
+				"Steel goes into the high-pressure steam machines, the casting molds and the steel drill bit, and it stays in your recipes from then on. Leave a blast furnace running and let the ingots pile up."
 			]
 			icon: "gtceu:steel_ingot"
 			id: "33AF6A368B3587E0"
@@ -359,42 +361,8 @@
 		{
 			dependencies: ["33AF6A368B3587E0"]
 			description: [
-				"Steel and wrought iron versions of the steam machines, without the half-speed penalty. Upgrade the one your line waits on."
-			]
-			icon: "gtceu:hp_steam_macerator"
-			id: "43DE5CB313894C8C"
-			optional: true
-			rewards: [{ id: "43A3D409E7B2A5FA", type: "xp", xp: 40 }]
-			size: 0.75d
-			tasks: [
-				{ id: "12FF5C16B331FF3F", item: "gtceu:hp_steam_macerator", optional_task: true, type: "item" }
-				{ id: "0C9A945D243BAE40", item: "gtceu:hp_steam_compressor", optional_task: true, type: "item" }
-				{ id: "59BB04B02EE17220", item: "gtceu:hp_steam_forge_hammer", optional_task: true, type: "item" }
-				{ id: "1DFC9ECA5376ED5C", item: "gtceu:hp_steam_extractor", optional_task: true, type: "item" }
-				{ id: "3B081EAAEA440F8C", item: "gtceu:hp_steam_furnace", optional_task: true, type: "item" }
-				{ id: "639A4C8C399C4211", item: "gtceu:hp_steam_alloy_smelter", optional_task: true, type: "item" }
-			]
-			title: "High-Pressure Machines"
-			x: 16.0d
-			y: -1.5d
-		}
-		{
-			dependencies: ["33AF6A368B3587E0"]
-			description: ["Built from the steam miner, it digs a wider area faster. The ore under it still runs out."]
-			icon: "gtceu:hp_steam_miner"
-			id: "6E670D15F2DFA6EA"
-			optional: true
-			rewards: [{ id: "5B8EAFFE2F696429", type: "xp", xp: 25 }]
-			size: 0.75d
-			tasks: [{ id: "48F7AAFCD6BFCB2F", item: "gtceu:hp_steam_miner", type: "item" }]
-			title: "High-Pressure Miner"
-			x: 16.0d
-			y: -3.0d
-		}
-		{
-			dependencies: ["33AF6A368B3587E0"]
-			description: [
-				"Steel plates, a hammer and a file make an empty mold; where the hammer sits in the grid decides the shape. In the alloy smelter the block mold casts glass, the plate mold rubber sheets and the ball mold glass tubes."
+				"Molds turn the alloy smelter into a caster. The block mold makes glass, the plate mold rubber sheets and the ball mold glass tubes."
+				"They all start as the same empty steel mold, and where the hammer sits next to it in the grid picks the shape."
 			]
 			icon: "gtceu:plate_casting_mold"
 			id: "6D95C40FFB75ABEB"
@@ -412,8 +380,8 @@
 		{
 			dependencies: ["6D95C40FFB75ABEB"]
 			description: [
-				"Sand doesn't smelt into glass in GregTech. Grind sand into quartz sand, mix it with a little flint dust into glass dust, and cast that in the alloy smelter with the block mold."
-				"Glass opens the extractor, the vein probe and the greenhouse."
+				"Sand won't smelt into glass here. It takes the long way round, through quartz sand and glass dust, and the alloy smelter casts it with the block mold."
+				"Worth it, because the extractor, the vein probe and the greenhouse all want glass."
 			]
 			icon: "minecraft:glass"
 			id: "64A0425E87F233F6"
@@ -430,7 +398,7 @@
 		{
 			dependencies: ["64A0425E87F233F6"]
 			description: [
-				"Sticky resin goes in and raw rubber pulp comes out; rubber logs and saplings work too, more slowly. Rubber also needs sulfur, which is the next step."
+				"Squeezes sticky resin into raw rubber pulp. Rubber logs and saplings work too, only slower. Rubber also wants sulfur, and that's a trip."
 			]
 			icon: "gtceu:lp_steam_extractor"
 			id: "64373EE5BFA62739"
@@ -443,8 +411,8 @@
 		{
 			dependencies: ["64373EE5BFA62739"]
 			description: [
-				"Rubber needs sulfur, and this early the only source is sulfur ore in the Nether. Steel gives you a flint and steel for the portal; smelt the ore into dust."
-				"In LV a centrifuge gets sulfur out of the realgar in the copper-tin vein, and the Nether becomes a proper destination."
+				"This early, the only sulfur is sulfur ore in the Nether. Your steel makes a flint and steel: light a portal, grab some ore and smelt it into dust."
+				"Bring back extra. At home, sulfur comes out of the realgar in the copper-tin vein, once you have a centrifuge to split it."
 			]
 			icon: "gtceu:sulfur_dust"
 			id: "221A824594716C2E"
@@ -457,7 +425,8 @@
 		{
 			dependencies: ["221A824594716C2E"]
 			description: [
-				"Raw rubber pulp and sulfur in the alloy smelter make rubber ingots; ingots in the plate mold make sheets. Every cable needs a sheet of insulation."
+				"The alloy smelter turns raw rubber pulp and sulfur into rubber ingots, and the plate mold presses those into sheets."
+				"Wrap a wire in a sheet and you have a cable. Tin cable carries LV power, and the hull and the turbine both want some."
 			]
 			icon: "gtceu:rubber_plate"
 			id: "61E429627580A285"
@@ -474,20 +443,7 @@
 		{
 			dependencies: ["61E429627580A285"]
 			description: [
-				"A tin plate and the wire cutter give tin wire; wire plus a rubber sheet is a tin cable, the LV power line. Red alloy cable is made the same way and goes into circuits."
-			]
-			icon: "gtceu:tin_single_cable"
-			id: "5BA84FC1DC1C8912"
-			rewards: [{ id: "382DFB8999992BAC", type: "xp", xp: 25 }]
-			tasks: [{ count: 8L, id: "20248FA90E657CBB", item: "gtceu:tin_single_cable", type: "item" }]
-			title: "Insulated Cable"
-			x: 26.0d
-			y: 0.0d
-		}
-		{
-			dependencies: ["5BA84FC1DC1C8912"]
-			description: [
-				"An iron rod plus redstone dust in the grid makes a magnetic rod. Wind it with copper wire, add tin cables and iron rods, and it is a motor; nearly every LV machine has one."
+				"A magnetic iron rod wrapped in copper wire does most of the work in a motor. Most LV machines have one inside, and so does the turbine."
 			]
 			icon: "gtceu:lv_electric_motor"
 			id: "2AEFA5A96D5BA55D"
@@ -497,26 +453,26 @@
 				{ id: "6ED6C37428C7D4F3", item: "gtceu:lv_electric_motor", type: "item" }
 			]
 			title: "LV Motor"
-			x: 28.0d
-			y: -1.5d
+			x: 26.0d
+			y: 1.5d
 		}
 		{
-			dependencies: ["5BA84FC1DC1C8912"]
+			dependencies: ["61E429627580A285"]
 			description: [
-				"Steel plates and a wrench make the LV casing; wrought iron plates, a steel plate and tin cables turn it into a hull. Every LV machine starts as one."
+				"The empty box every LV machine starts from: a steel casing dressed in wrought iron plates and tin cable. You'll make a great many of these, so get comfortable."
 			]
 			icon: "gtceu:lv_machine_hull"
 			id: "6862838CB35D8296"
 			rewards: [{ id: "7E0CC46E3BF5F812", type: "xp", xp: 30 }]
 			tasks: [{ id: "54307AB204FD89FD", item: "gtceu:lv_machine_hull", type: "item" }]
 			title: "LV Machine Hull"
-			x: 28.0d
+			x: 26.0d
 			y: 0.0d
 		}
 		{
 			dependencies: ["64A0425E87F233F6"]
 			description: [
-				"Glass dust cast in the ball mold is a glass tube. Steel bolts on the ends and copper wire inside make the vacuum tube, the first electronic part."
+				"The first electronics in the pack are glowing glass bottles. The glass tube comes out of the ball mold, and EMI has the rest of the &6Vacuum Tube&r."
 			]
 			icon: "gtceu:vacuum_tube"
 			id: "4A21D67EFA0E04C5"
@@ -529,7 +485,7 @@
 		{
 			dependencies: ["4A21D67EFA0E04C5"]
 			description: [
-				"Resistors take sticky resin, paper, copper wire and coal dust. For the board, coat a wood plate from the compressor in resin, then wrap it in copper wire."
+				"Both lean on sticky resin. It pays to have a rubber sapling in the greenhouse by now. The board starts as a wood plate from the compressor."
 			]
 			icon: "gtceu:resin_printed_circuit_board"
 			id: "1861D320C9F055D2"
@@ -545,7 +501,7 @@
 		{
 			dependencies: ["1861D320C9F055D2"]
 			description: [
-				"Copper and redstone in the alloy smelter. Red alloy wire, insulated like tin cable, carries the signal inside the first circuits."
+				"Copper and redstone melt together into red alloy in the alloy smelter. Hammer it into a plate, cut that into wire and wrap it like tin cable. The first circuits are wired with it."
 			]
 			icon: "gtceu:red_alloy_ingot"
 			id: "30D4DD1212DB31E0"
@@ -556,9 +512,9 @@
 			y: 3.0d
 		}
 		{
-			dependencies: ["30D4DD1212DB31E0", "5BA84FC1DC1C8912"]
+			dependencies: ["30D4DD1212DB31E0", "61E429627580A285"]
 			description: [
-				"All the parts meet here. The &6Basic Electronic Circuit&r is the first LV circuit; the turbine and almost every LV machine need one."
+				"All those small parts meet in the &6Basic Electronic Circuit&r, the first LV circuit. The turbine needs one, and so do most LV machines after it."
 			]
 			icon: "gtceu:basic_electronic_circuit"
 			id: "59DE11D9BE2E0E47"
@@ -572,7 +528,9 @@
 		}
 		{
 			dependencies: ["59DE11D9BE2E0E47"]
-			description: ["It needs LV circuits, so it comes late. One multiblock boiler does the work of a row of small ones."]
+			description: [
+				"A boiler the size of a shed, and its recipe asks for LV circuits, so it comes late. One out-steams a yard full of small boilers, and it burns creosote and biomass as well as coal."
+			]
 			icon: "gtceu:bronze_large_boiler"
 			id: "36B68B4C2B1E0DBA"
 			optional: true
@@ -586,8 +544,8 @@
 		{
 			dependencies: ["6862838CB35D8296", "2AEFA5A96D5BA55D", "59DE11D9BE2E0E47"]
 			description: [
-				"Steam in, LV electricity out: the &6Basic Steam Turbine Generator&r runs on the boilers you already have. That is the first power on Earth and the end of the steam age."
-				"Next tab: electric machines, and a real trip to the Nether."
+				"Steam in, electricity out. The &6Basic Steam Turbine Generator&r runs off the boilers you already have, and like every generator here it gets twice the usual EU from its fuel."
+				"It's the first electricity on Earth. LV comes next, with electric machines and drills that reach into the Nether."
 			]
 			icon: "gtceu:lv_steam_turbine"
 			id: "4996827E4BFC339E"
@@ -599,14 +557,14 @@
 			size: 2.0d
 			tasks: [{ id: "1D440BC33682A584", item: "gtceu:lv_steam_turbine", type: "item" }]
 			title: "LV Steam Turbine"
-			x: 30.0d
+			x: 28.0d
 			y: 0.0d
 		}
 		{
 			dependencies: ["64A0425E87F233F6"]
 			description: [
-				"A glass house on a dirt floor. Put a sapling or seed in the input bus: it is never used up, and logs, sticky resin or crops come out every cycle."
-				"A rubber sapling keeps the resin coming."
+				"A glass house on a dirt floor that farms while you're busy elsewhere. The sapling or seed in its input bus is never used up, and logs, sticky resin or crops come out every cycle."
+				"One with a rubber sapling in it ends your resin worries."
 			]
 			icon: "gtceu:steam_greenhouse"
 			id: "1AFD1F4557C5DA80"
@@ -624,7 +582,7 @@
 		{
 			dependencies: ["64A0425E87F233F6"]
 			description: [
-				"Bronze plates and glass. Empty it does nothing; filled with ore from one vein it becomes that vein's sample."
+				"On its own it's a fancy bronze jar. It stays one until you bring home ore from a vein."
 			]
 			icon: "grindless:empty_vein_probe"
 			id: "5DF70249D310BA55"
@@ -637,7 +595,7 @@
 		{
 			dependencies: ["5DF70249D310BA55"]
 			description: [
-				"The probe plus raw ore from one vein makes that vein's sample; EMI shows which ores each vein takes. The drill reads the sample and never uses it up."
+				"A probe and raw ore from one vein make that vein's sample; EMI shows which ores each vein takes. The drill reads the sample and never uses it up, so one per vein lasts forever."
 			]
 			icon: "grindless:vein_sample_copper_tin"
 			id: "4B2FCEC042219588"
@@ -662,7 +620,7 @@
 		{
 			dependencies: ["5DF70249D310BA55"]
 			description: [
-				"Bronze plates and rods, sharpened with the file. The drill wears a bit out now and then; keep spares in the input bus so it never stalls."
+				"Bronze, filed sharp. The drill grinds one down every so often. Keep spares in the input bus and it won't stall on you."
 			]
 			icon: "grindless:bronze_drill_bit"
 			id: "54FC9D8B7F999601"
@@ -675,8 +633,8 @@
 		{
 			dependencies: ["4B2FCEC042219588", "54FC9D8B7F999601"]
 			description: [
-				"Built around the steam miner. A sample and bits in the input bus, steam in the hatch, and it pulls raw ore from that vein for as long as it runs. One drill per vein you need."
-				"From now on ore comes to you."
+				"This is the deal the pack runs on. Put a sample and some bits in the bus and steam in the hatch, and that vein keeps sending up raw ore for as long as the steam lasts."
+				"Build one drill per vein you need. Your steam miner is inside it."
 			]
 			icon: "gtceu:steam_vein_drill"
 			id: "103C07A78792B593"
@@ -693,7 +651,9 @@
 		}
 		{
 			dependencies: ["54FC9D8B7F999601"]
-			description: ["Lasts much longer than bronze and is the only bit that reaches the deep veins: diamond, redstone and mica."]
+			description: [
+				"Lasts a lot longer than bronze. It's also the only bit that reaches the veins lying wholly below Y 0, which means diamond, redstone and mica."
+			]
 			icon: "grindless:steel_drill_bit"
 			id: "0634FBEA53408D40"
 			optional: true
@@ -706,7 +666,9 @@
 		}
 		{
 			dependencies: ["103C07A78792B593", "1AFD1F4557C5DA80"]
-			description: ["Drills bring the ore and greenhouses the wood. Hand mining was only the start."]
+			description: [
+				"Ore comes from the drills now and wood from the greenhouses. You can hang the pickaxe on the wall; it had a good run."
+			]
 			icon: "gtceu:steam_vein_drill"
 			id: "3557D15A5D2004C4"
 			rewards: [
@@ -723,8 +685,8 @@
 		{
 			dependencies: ["4F0049B2E382BA8E"]
 			description: [
-				"These run GTM's own recipe types a whole batch per cycle from one steam hatch. The forge hammer, compressor and alloy smelter upgrade single-block Steam machines; the other three have no Steam version."
-				"The chemical bath and ore washer need a &6ULV input hatch&r, hand-made, like the coke battery's. The mixer needs no hatch for bronze dust, but that recipe wants a programmed circuit, made from an LV circuit."
+				"Small steam multiblocks that work on several recipes at once from one steam hatch. The forge hammer, compressor and alloy smelter replace machines you already own, while the mixer, chemical bath and ore washer have no steam version at all."
+				"The bath and washer need the hand-made ULV input hatch. The mixer's bronze recipe wants a programmed circuit, and an LV circuit makes one."
 			]
 			icon: "gtceu:steam_mixer"
 			id: "325185F9C76235D6"
@@ -749,8 +711,8 @@
 		{
 			dependencies: ["33AF6A368B3587E0"]
 			description: [
-				"A steel shell that runs GTM's machine recipes a whole batch per cycle from one steam hatch, keeping every chance byproduct."
-				"The macerator's core is the steam grinder from Steam Multis, and the washer's is the primitive pump. The chemical bath, centrifuge and ore washer need &6ULV fluid hatches&r in the shell; the centrifuge wants them even for recipes that need no fluid. The thermal centrifuge needs no hatch."
+				"Big steel halls that run ore by the stack on steam, and unlike the small macerator they keep every byproduct. That's GregTech's full ore line before you've seen a volt."
+				"The macerator is built around a steam grinder and the washer around a primitive pump. The bath, centrifuge and washer need ULV fluid hatches, and the centrifuge insists on them even for dry recipes."
 			]
 			icon: "gtceu:large_steam_macerator"
 			id: "52D6BD0494A56791"
@@ -772,6 +734,6 @@
 			y: 1.5d
 		}
 	]
-	subtitle: ["Earth without electricity: coke, bronze machines, steel, and ore and wood that arrive on their own."]
+	subtitle: ["Still no electricity: coal, steam and bronze, until ore and wood start turning up on their own."]
 	title: "Steam Age: Escape Velocity"
 }
