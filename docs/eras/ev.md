@@ -356,6 +356,27 @@ New rules in `tools/analysis/tiers/ev.json`:
     - The other ores with a uraninite byproduct (uraninite, pitchblende, plutonium) are radioactive themselves and held back until IV.
 - **EV in two substages.** The validator splits the era into *Moon* and *Mars*: nothing on the way to Mars can require Tungsten, Samarium or Deuterium.
 - **Site machines.** Every recipe for the cell, the cryogenic plant, the solar array, the antenna and the lunar veins carries `.dimension('gcyr:luna')`; those for the processor and the Martian veins carry `.dimension('gcyr:mars')`. The fuel recipes carry the five air dimensions (ORed; the validator ORs them too since 2026-10-25, `lib/model.mjs`).
+- **Implemented (C1, 2026-10-25).** `tools/analysis/tiers/ev.json` extends `hv`.
+  - `eraOrder` goes `hv`, `ev`, `ev-mars`, `iv`. The Mars trip is the synthetic `mars-trip`: the advanced tank and motor, which need the antenna's chart.
+  - Exclusivity: titanium and helium-3 only from the Moon; tungsten, merrillite, samarium, the deuterium-rich ice and deuterium only from Mars. Uranium, radon and the quantum eye are real FAIL checks.
+  - Static site checks:
+    - the Moon's machines and recipes on the Moon, the Mars ones on Mars;
+    - the tripod, the dome and the solar array off Earth;
+    - every fuel (4,094 recipes, B7's included) in the five air dimensions. Seven self-oxidized or lava fuels run anywhere.
+  - Gate to IV: the IV hull, nano computer, RTM coil, IV motor and IV pump. EV energy is sustained by the solar array alone and by the combined-cycle plant alone.
+  - In IV, not EV: GTM's EV emitter, sensor, field generator, laser engraver and scanner, the large miner, and GTM's HV field generator and world accelerator (quantum eye). In `ev-mars`: the HV fluid drilling rig (tungsten carbide).
+  - Not modeled in the tiers: Productive Bees (the obtain audit sees its combs and bees) and Leisure's universal factories. An IV-voltage recipe (7,680 EU/t) is EV content wherever a multiblock with two EV hatches can run its type: that's how the IV combs were found.
+  - Final dump `c1-ev-validator-4`, gate / auto / eras:
+
+    | Tier | Gate | Auto | Eras |
+    |---|---|---|---|
+    | steam | 52/52 | 27/27 | 8/8 |
+    | LV | 159/159 | 88/88 | 16/16 |
+    | MV | 294/295 (the optional HV energy hatch) | 193/193 | 24/24 |
+    | HV | 423/423 | 295/295 | 39/39 |
+    | EV | 531/531 | 333/333 | 51/51 |
+
+    The obtain audit passes (A 0, ? 0), and so do the 137 node tests.
 
 ## Registered ids (wave A, 2026-10-25)
 
