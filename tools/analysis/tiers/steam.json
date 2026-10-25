@@ -61,7 +61,8 @@
   "partAbilities": {
     "steam": ["gtceu:steam_input_hatch"],
     "steam_input_bus": ["gtceu:steam_input_bus"],
-    "steam_output_bus": ["gtceu:steam_output_bus"]
+    "steam_output_bus": ["gtceu:steam_output_bus"],
+    "parallel_hatch": ["gtceu:iv_parallel_hatch", "gtceu:luv_parallel_hatch", "gtceu:zpm_parallel_hatch", "gtceu:uv_parallel_hatch"]
   },
 
   "world": [
