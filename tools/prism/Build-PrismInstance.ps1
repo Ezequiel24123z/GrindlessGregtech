@@ -1,7 +1,9 @@
 # Builds the Prism Launcher instance of the playable channel: a zip the player imports once
 # (Prism: Add Instance > Import > zip). On every launch the instance updates itself from the
 # `jugable` branch with packwiz-installer-bootstrap (MIT), which only moves to tested releases.
-#   powershell -NoProfile -ExecutionPolicy Bypass -File tools\prism\Build-PrismInstance.ps1 [-Channel jugable] [-OutDir <dir>]
+# With a version tag as the channel (-Channel v0.5.0) it builds a fixed instance of that version, for the GitHub release
+# of each version: the tag never moves, so that instance never updates.
+#   powershell -NoProfile -ExecutionPolicy Bypass -File tools\prism\Build-PrismInstance.ps1 [-Channel jugable|vX.Y.Z] [-OutDir <dir>]
 param(
     [string]$Channel = 'jugable',
     [string]$OutDir = (Join-Path $PSScriptRoot 'out'),
@@ -12,8 +14,10 @@ $ErrorActionPreference = 'Stop'
 $repo = 'Ezequiel24123z/GrindlessGregtech'
 $packUrl = "https://raw.githubusercontent.com/$repo/$Channel/pack/pack.toml"
 $bootUrl = 'https://github.com/packwiz/packwiz-installer-bootstrap/releases/download/v0.0.3/packwiz-installer-bootstrap.jar'
-$name = 'Gregtech Grindless'
-$folder = 'GregtechGrindless'
+$pinned = $Channel -match '^v\d'
+$name = if ($pinned) { "Gregtech Grindless $Channel" } else { 'Gregtech Grindless' }
+$folder = if ($pinned) { "GregtechGrindless-$Channel" } else { 'GregtechGrindless' }
+$notes = if ($pinned) { "Gregtech Grindless ${Channel}: pinned version, does not update. To play on the latest version, use the playable-channel instance." } else { "Gregtech Grindless: $Channel channel. Updates itself on launch only (tested versions only)." }
 
 $work = Join-Path ([IO.Path]::GetTempPath()) ("gg-prism-" + [guid]::NewGuid().ToString('N'))
 $inst = Join-Path $work $folder
@@ -21,26 +25,24 @@ $mc = Join-Path $inst '.minecraft'
 New-Item -ItemType Directory -Force -Path $mc | Out-Null
 $utf8 = New-Object System.Text.UTF8Encoding($false)
 
-# Prism exports INST_JAVA to pre-launch commands; a .cmd wrapper keeps the quotes around a Java path with spaces
-# out of instance.cfg, whose value quoting differs between Prism versions.
-$cmd = "@echo off`r`n" +
-"rem Updates Gregtech Grindless from the '$Channel' channel before every launch.`r`n" +
-"`"%INST_JAVA%`" -jar packwiz-installer-bootstrap.jar $packUrl`r`n" +
-"exit /b %ERRORLEVEL%`r`n"
-[IO.File]::WriteAllText((Join-Path $mc 'grindless-update.cmd'), $cmd, $utf8)
+# Prism substitutes $INST_JAVA in the command text when the command runs (after it has picked the Java); the
+# environment variable of the same name is computed earlier and can be empty for a new instance with automatic Java,
+# so the command must name $INST_JAVA itself (packwiz's documented Prism command). Prism 11 reads instance.cfg with
+# QSettings (ConfigVersion 1.3): the value is quoted and its inner quotes escaped.
+$preLaunch = '"\"$INST_JAVA\" -jar packwiz-installer-bootstrap.jar ' + $packUrl + '"'
 
 $cfg = @(
     '[General]',
-    'ConfigVersion=1.2',
+    'ConfigVersion=1.3',
     'InstanceType=OneSix',
     "name=$name",
     'iconKey=default',
     'OverrideCommands=true',
-    'PreLaunchCommand=cmd /c grindless-update.cmd',
+    "PreLaunchCommand=$preLaunch",
     'OverrideMemory=true',
     "MinMemAlloc=$MinMemMb",
     "MaxMemAlloc=$MaxMemMb",
-    "notes=Gregtech Grindless, canal $Channel. Se actualiza solo al arrancar (solo versiones probadas)."
+    "notes=`"$notes`""
 ) -join "`r`n"
 [IO.File]::WriteAllText((Join-Path $inst 'instance.cfg'), $cfg + "`r`n", $utf8)
 

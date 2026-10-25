@@ -1,5 +1,5 @@
 // -----------------------------------------------------------------------------------------------
-// GT-- (gtnn 1.3.10), audited against docs/eras (ev.md, "Decisiones tomadas": no addon may process cheaper than GT in its era or
+// GT-- (gtnn 1.3.10), audited against docs/eras (ev.md, "Decisions taken": no addon may process cheaper than GT in its era or
 // undercut the pack's own multiblocks; GCYM-style parallel machines wait for IV). Most of the addon adds work or comes late and
 // stays: the ExxonMobil chemical plant (MV) and its chemistry, dehydrators, neutron activator (IV), rocket engines (EV) with
 // GTNH-style rocket fuels (hydrazine, RP-1: several chemistry steps each), naquadah reactors (enriched naquadah), the circuit
@@ -9,7 +9,7 @@
 // GT--'s harder platinum and naquadah lines (config/gtnn.json enableHarderPlatinumLine / enableHarderNaquadahLine, on by default)
 // STAY: they empty GTM's own separation recipes (pgs_separation, the osmium / rhodium / inert metal / rarest metal steps, the four
 // naquadah solution centrifuges) and put GTNH-style lines in their place, and the EV platinum plant composes its recipes from the
-// live GT-- stage recipes (ev/platinum_plant.server.js); the IV naquadah plant will do the same. None of those stages is touched here.
+// live GT-- stage recipes (server_scripts/grindless/ev/platinum_plant.js); the IV naquadah plant will do the same. None of those stages is touched here.
 //
 // Removed:
 //   pgs_from_<ore> and pgs_from_<ore>_p (chemical reactor and large chemical reactor, 6 ores each: bornite, chalcocite, chalcopyrite,

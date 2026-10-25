@@ -1,4 +1,4 @@
-// Gregtech Grindless - "Dimensiones de construcción"
+// Gregtech Grindless - "Building Dimensions"
 //
 // Registers the three travel keys. Names/tooltips live in client_scripts/grindless/dimensions_lang.js
 // (ClientEvents.lang) so we never touch pack/kubejs/assets/grindless/lang/* (owned by another agent).

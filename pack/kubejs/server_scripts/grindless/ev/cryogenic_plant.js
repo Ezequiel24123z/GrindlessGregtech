@@ -1,0 +1,127 @@
+// -----------------------------------------------------------------------------------------------
+// gtceu:cryogenic_processing recipes of the Cryogenic Plant (gtceu:cryogenic_plant, startup_scripts/grindless/ev/cryogenic_plant.js), and
+// the recipes that make the plant and its radiators (EV era, docs/eras/ev.md, "Cryogenic plant").
+//
+//   liquid_oxygen     1,000 mB oxygen   -> 1,000 mB liquid oxygen     the freezer's own recipe: 1,920 EU/t, 240 ticks
+//   liquid_helium     1,000 mB helium   -> 1,000 mB liquid helium     the freezer's own recipe: 1,920 EU/t, 240 ticks
+//   liquid_nitrogen   1,000 mB nitrogen -> 1,000 mB liquid nitrogen   GTM has none; the same figures as oxygen (77 K against 90 K:
+//                                                                     the difference in ideal work is a few percent)
+// Every recipe carries .dimension('gcyr:luna') (only the Moon's cold and black sky make the plant worth it) and the data key
+// grindless_night_eut: the EU/t the startup modifier gives a run that starts in the lunar night with every radiator open to the sky
+// (half). The EMI line of the type reads that key. Recipe time is never changed.
+//
+// Where the gases come from: oxygen and nitrogen from the regolith cell (EV, on the Moon) or from home through the bridge (GTM's air
+// distillation, electrolysis); helium from the regolith cell or the home network.
+// Destinations: liquid nitrogen -> coolant of the EV tripod drill (and of the Mercury drill in IV); liquid oxygen -> IV extreme engines;
+// liquid helium -> ingots of 5,000 K or more (IV; GTM's freezer already takes it). Nothing is voided: each output hatch holds one liquid,
+// and a recipe only starts when its liquid has room.
+//
+//   Plant: CRAFTING TABLE, EV hull + GTM vacuum freezer + 2 EV electric pumps + 4 EV circuits.
+//   Night-Sky Radiator: ASSEMBLER (MV), 2 aluminium small fluid pipes (the heat pipes) + 4 aluminium plates (the face sheets) + 1 aluminium
+//   frame (the core) + 100 mB ammonia (the heat pipes' working fluid, as in real spacecraft radiators) -> 2 radiators, 120 EU/t, 200 ticks.
+//   The pipe goes first: GTM's frost-proof casing recipe starts with aluminium plates and a frame, and the lookup must keep both.
+//
+// Published in global.grindless.cryogenicPlant for the smoke test:
+//   .recipes  [{ id, name, gas, liquid, amount, eut, nightEut, duration }]
+//   .craftingRecipes { plant, radiator }, .craftingParts
+(function () {
+  const G = global.grindless || (global.grindless = {})
+  const CRYO = G.cryogenicPlant || (G.cryogenicPlant = {})
+  const LOG = '[grindless/ev] '
+
+  const DIMENSION = 'gcyr:luna'
+  const NIGHT_KEY = CRYO.nightKey || 'grindless_night_eut'
+  const NIGHT_FACTOR = CRYO.nightFactor || 0.5
+  const AMOUNT = 1000
+  const EUT = 1920
+  const DURATION = 240
+
+  const TABLE = [
+    { name: 'liquid_oxygen', gas: 'gtceu:oxygen', liquid: 'gtceu:liquid_oxygen' },
+    { name: 'liquid_helium', gas: 'gtceu:helium', liquid: 'gtceu:liquid_helium' },
+    { name: 'liquid_nitrogen', gas: 'gtceu:nitrogen', liquid: 'gtceu:liquid_nitrogen' }
+  ]
+
+  CRYO.recipes = TABLE.map(function (t) {
+    return {
+      id: 'grindless:cryogenic_processing/' + t.name,
+      name: t.name,
+      gas: t.gas,
+      liquid: t.liquid,
+      amount: AMOUNT,
+      eut: EUT,
+      nightEut: Math.round(EUT * NIGHT_FACTOR),
+      duration: DURATION
+    }
+  })
+
+  const PLANT = 'gtceu:cryogenic_plant'
+  const RADIATOR = 'grindless:night_sky_radiator'
+  const HULL = 'gtceu:ev_machine_hull'
+  const FREEZER = 'gtceu:vacuum_freezer'
+  const PUMP = 'gtceu:ev_electric_pump'
+  const HEAT_PIPE = 'gtceu:aluminium_small_fluid_pipe'
+  const PLATE = 'gtceu:aluminium_plate'
+  const FRAME = 'gtceu:aluminium_frame'
+  const AMMONIA = 'gtceu:ammonia'
+
+  CRYO.craftingRecipes = { plant: 'grindless:crafting/cryogenic_plant', radiator: 'grindless:assembler/night_sky_radiator' }
+  CRYO.craftingParts = [PLANT, RADIATOR, HULL, FREEZER, PUMP, HEAT_PIPE, PLATE, FRAME]
+
+  // an uncaught error here would stop KubeJS from running the recipe handlers of the scripts that load after this one
+  ServerEvents.recipes(function (event) {
+    try {
+      addRecipes(event)
+    } catch (e) {
+      console.error(LOG + 'cryogenic plant recipes failed: ' + e)
+    }
+    try {
+      addCrafting(event)
+    } catch (e2) {
+      console.error(LOG + 'cryogenic plant crafting recipes failed: ' + e2)
+    }
+  })
+
+  function addRecipes(event) {
+    var missing = []
+    CRYO.recipes.forEach(function (r) {
+      if (!Fluid.exists(r.gas)) missing.push(r.gas)
+      if (!Fluid.exists(r.liquid)) missing.push(r.liquid)
+    })
+    if (missing.length > 0) {
+      console.error(LOG + 'cryogenic plant recipes skipped, unknown fluid(s): ' + missing.join(', '))
+      return
+    }
+    CRYO.recipes.forEach(function (r) {
+      event.recipes.gtceu.cryogenic_processing('grindless:' + r.name)
+        .inputFluids(Fluid.of(r.gas, r.amount))
+        .outputFluids(Fluid.of(r.liquid, r.amount))
+        .dimension(DIMENSION)
+        .addDataNumber(NIGHT_KEY, r.nightEut)
+        .EUt(r.eut).duration(r.duration)
+    })
+    console.info(LOG + 'cryogenic plant recipes added: ' + CRYO.recipes.length)
+  }
+
+  function addCrafting(event) {
+    var missing = CRYO.craftingParts.filter(function (id) { return !Item.exists(id) })
+    if (!Fluid.exists(AMMONIA)) missing.push(AMMONIA)
+    if (missing.length > 0) {
+      console.error(LOG + 'cryogenic plant crafting skipped, unknown id(s): ' + missing.join(', '))
+      return
+    }
+    event.recipes.gtceu.shaped(PLANT, ['CVC', 'PHP', 'C C'], {
+      C: '#gtceu:circuits/ev',
+      V: FREEZER,
+      P: PUMP,
+      H: HULL
+    }).id(CRYO.craftingRecipes.plant)
+
+    event.recipes.gtceu.assembler('grindless:night_sky_radiator')
+      .itemInputs('2x ' + HEAT_PIPE, '4x ' + PLATE, '1x ' + FRAME)
+      .inputFluids(Fluid.of(AMMONIA, 100))
+      .itemOutputs('2x ' + RADIATOR)
+      .EUt(120).duration(200)
+    console.info(LOG + 'cryogenic plant and night-sky radiator crafting recipes added')
+  }
+})()

@@ -1,11 +1,11 @@
-// Pequeñas utilidades sin dependencias.
+// Small dependency-free utilities.
 import fs from 'node:fs';
 
 export function readJson(file) {
   return JSON.parse(fs.readFileSync(file, 'utf8'));
 }
 
-/** Convierte un glob simple (`*` y `?`) en RegExp anclada. */
+/** Turns a simple glob (`*` and `?`) into an anchored RegExp. */
 export function globToRegExp(glob) {
   const esc = glob.replace(/[.+^${}()|[\]\\]/g, '\\$&').replace(/\*/g, '.*').replace(/\?/g, '.');
   return new RegExp('^' + esc + '$');

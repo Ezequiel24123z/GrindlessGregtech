@@ -1,4 +1,4 @@
-// Pruebas de lo que añade el tier LV: estructuras de multibloque, recetas de AE2, fugas, objetivos opcionales y por veta.
+// Tests for what the LV tier adds: multiblock structures, AE2 recipes, leaks, optional targets and vein-based targets.
 import assert from 'node:assert/strict';
 import { test } from 'node:test';
 import { abilityMaxCount, structureSelectors } from '../lib/structure.mjs';
@@ -7,7 +7,7 @@ import { gf, gi, gt, mkDump, run, shaped, verdicts } from './helpers.mjs';
 const linesOf = (list, id) => list.find((r) => r.target.id === id).lines.join('\n');
 const statusOf = (list, id) => list.find((r) => r.target.id === id).status;
 
-// ---------------------------------------------------------------- estructuras de multibloque
+// ---------------------------------------------------------------- multiblock structures
 
 const DRILL_DESC = {
   id: 'gtceu:steam_vein_drill',
@@ -22,7 +22,7 @@ const DRILL_DESC = {
         { kind: 'part', ability: 'steam_output_bus', limits: { min: 1, max: 2 } },
       ],
     },
-    P: { kind: 'blocks', blocks: ['gtceu:bronze_pipe_casing', 'gtceu:steel_pipe_casing', 'no:existe'] },
+    P: { kind: 'blocks', blocks: ['gtceu:bronze_pipe_casing', 'gtceu:steel_pipe_casing', 'no:does_not_exist'] },
     F: { kind: 'frames', materials: ['bronze', 'steel'] },
   },
 };
@@ -32,7 +32,7 @@ const REGISTRY = new Set([
   'gtceu:steel_pipe_casing', 'gtceu:bronze_frame', 'gtceu:steel_frame',
 ]);
 
-test('structureSelectors: carcasa con mínimo, piezas por habilidad, tubería y marcos como ranuras de capital', () => {
+test('structureSelectors: casing with a minimum, ability-based parts, piping and frames as capital slots', () => {
   const { selectors, problems } = structureSelectors(DRILL_DESC, ABILITIES, (i) => REGISTRY.has(i));
   assert.deepEqual(problems, []);
   assert.deepEqual(selectors.map((s) => s.anyOf), [
@@ -41,13 +41,13 @@ test('structureSelectors: carcasa con mínimo, piezas por habilidad, tubería y 
   ]);
 });
 
-test('structureSelectors: una habilidad sin objetos en partAbilities se avisa y deja la ranura imposible con nombre', () => {
+test('structureSelectors: an ability with no items in partAbilities warns and leaves the slot impossible, named', () => {
   const { selectors, problems } = structureSelectors(DRILL_DESC, { steam_output_bus: ['gtceu:steam_output_bus'] }, (i) => REGISTRY.has(i));
   assert.match(problems.join('\n'), /«steam».*partAbilities/);
-  assert.deepEqual(selectors.find((s) => s.label === 'pieza «steam»').anyOf, []);
+  assert.deepEqual(selectors.find((s) => s.label === 'part «steam»').anyOf, []);
 });
 
-test('structureSelectors: las opciones sin límite de una celda "o" rellenan y solo las acotadas por max no son obligatorias', () => {
+test('structureSelectors: options with no limit in an "or" cell fill in, and only those bounded by max aren\'t mandatory', () => {
   const desc = {
     slices: [['AB']],
     symbols: {
@@ -67,12 +67,12 @@ function drillPack({ withStructure = true, withHatch = true } = {}) {
     shaped('t:hull', ['I'], { I: { item: 't:ingot' } }, 't:hull'),
   ].filter((r) => withHatch || r.id !== 't:hatch');
   const cfg = {
-    tier: 'estructura',
+    tier: 'structure',
     unconditionalTypes: ['minecraft:crafting_shaped'],
     partAbilities: { energy_input: ['t:energy_hatch'] },
     world: [{ id: 'w', mode: 'manual', items: ['t:ingot'] }],
     machines: [{ machine: 't:drill', types: [], partsFromStructure: true, parts: ['t:fallback_part'] }],
-    targets: [{ id: 'maquina', item: 'm:t:drill' }],
+    targets: [{ id: 'machine', item: 'm:t:drill' }],
     autoTargets: [],
   };
   const structures = withStructure ? {
@@ -89,28 +89,28 @@ function drillPack({ withStructure = true, withHatch = true } = {}) {
   return { dump, cfg };
 }
 
-test('partsFromStructure: las piezas salen del patrón volcado y no de la configuración de reserva', () => {
+test('partsFromStructure: parts come from the dumped pattern, not from the fallback config', () => {
   const { dump, cfg } = drillPack();
   const r = run(dump, cfg);
   assert.equal(r.model.stats.structureMachines, 1);
   assert.equal(r.out.verdict, 'PASS');
-  const rule = r.model.g.rules.find((x) => x.name === 'construir:t:drill');
-  assert.equal(rule.meta.partsFrom, 'estructura');
-  assert.deepEqual(rule.slots.slice(1).map((s) => s.label), ['t:casing', 'pieza «energy_input»']);
+  const rule = r.model.g.rules.find((x) => x.name === 'build:t:drill');
+  assert.equal(rule.meta.partsFrom, 'structure');
+  assert.deepEqual(rule.slots.slice(1).map((s) => s.label), ['t:casing', 'part «energy_input»']);
 });
 
-test('partsFromStructure: si falta una pieza del patrón se dice cuál bloquea la máquina', () => {
+test('partsFromStructure: if a pattern part is missing, it says which one blocks the machine', () => {
   const { dump, cfg } = drillPack({ withHatch: false });
   const r = run(dump, cfg);
   assert.equal(r.out.verdict, 'FAIL');
-  assert.match(linesOf(r.out.gate, 'maquina'), /t:energy_hatch|pieza «energy_input»/);
+  assert.match(linesOf(r.out.gate, 'machine'), /t:energy_hatch|part «energy_input»/);
 });
 
-test('partsFromStructure: sin estructura en el volcado se usan las partes de la configuración y se avisa', () => {
+test('partsFromStructure: with no structure in the dump, the config\'s parts are used, and it warns', () => {
   const { dump, cfg } = drillPack({ withStructure: false });
   const r = run(dump, cfg);
-  assert.match(r.model.warnings.join('\n'), /no trae la estructura de t:drill; se usan las partes de la configuración/);
-  const rule = r.model.g.rules.find((x) => x.name === 'construir:t:drill');
+  assert.match(r.model.warnings.join('\n'), /doesn't carry t:drill's structure; using the config's parts/);
+  const rule = r.model.g.rules.find((x) => x.name === 'build:t:drill');
   assert.equal(rule.meta.partsFrom, 'config');
   assert.equal(rule.slots[1].label, 't:fallback_part');
 });
@@ -123,9 +123,9 @@ const ae2Cfg = (extra = {}) => ({
   conditions: { adjacent_fluid: { fluidsFrom: 'fluids' }, ae2_circumstance_explosion: { unsupported: true } },
   world: [
     { id: 'w', mode: 'manual', bootstrap: true, items: ['t:iron_block', 't:ingredient', 't:charged', 't:redstone', 't:quartz'] },
-    { id: 'agua', mode: 'manual', items: ['fluid:t:water'] },
+    { id: 'water', mode: 'manual', items: ['fluid:t:water'] },
   ],
-  synthetic: [{ id: 'energia', produces: ['ae:power'] }],
+  synthetic: [{ id: 'energy', produces: ['ae:power'] }],
   machines: [{ machine: 'ae2:inscriber', types: ['ae2:inscriber'], needs: ['ae:power'] }],
   targets: [],
   autoTargets: [],
@@ -136,7 +136,7 @@ const inscribe = (id, mode, ingredients, result) => ({
   id, type: 'ae2:inscriber', json: { type: 'ae2:inscriber', mode, ingredients, result: { item: result } },
 });
 
-test('AE2 inscriptor: en modo inscribe los moldes (arriba/abajo) son capital y en modo press se gastan', () => {
+test('AE2 inscriber: in inscribe mode the dies (top/bottom) are capital, and in press mode they\'re consumed', () => {
   const recipes = [
     inscribe('a:print', 'inscribe', { top: { item: 't:press' }, middle: { item: 't:ingredient' } }, 't:print'),
     inscribe('a:processor', 'press', { top: { item: 't:print' }, middle: { item: 't:redstone' }, bottom: { item: 't:print' } }, 't:processor'),
@@ -148,18 +148,18 @@ test('AE2 inscriptor: en modo inscribe los moldes (arriba/abajo) son capital y e
   assert.deepEqual(slots('a:processor').filter((s) => s.role !== 'machine').map((s) => s.cap), [false, false, false]);
 });
 
-test('AE2 inscriptor: sin la máquina o sin energía de AE2 la receta no se puede completar', () => {
+test('AE2 inscriber: without the machine or without AE2 power, the recipe can\'t be completed', () => {
   const recipes = [inscribe('a:print', 'inscribe', { top: { item: 't:press' }, middle: { item: 't:ingredient' } }, 't:print')];
-  const targets = [{ id: 'impreso', item: 't:print' }];
+  const targets = [{ id: 'printed', item: 't:print' }];
   const world = [{ id: 'w', mode: 'manual', bootstrap: true, items: ['t:press', 't:ingredient', 'ae2:inscriber'] }];
   const ok = run(mkDump({ recipes, items: ['ae2:inscriber', 't:press'] }), ae2Cfg({ world, targets }));
   assert.equal(ok.out.verdict, 'PASS');
   const noPower = run(mkDump({ recipes, items: ['ae2:inscriber', 't:press'] }), ae2Cfg({ world, targets, synthetic: [] }));
   assert.equal(noPower.out.verdict, 'FAIL');
-  assert.match(linesOf(noPower.out.gate, 'impreso'), /ae:power/);
+  assert.match(linesOf(noPower.out.gate, 'printed'), /ae:power/);
 });
 
-test('AE2 transform: los objetos tirados al agua necesitan el fluido y la explosión no está soportada', () => {
+test('AE2 transform: items thrown into water need the fluid, and the explosion isn\'t supported', () => {
   const water = {
     id: 'a:fluix', type: 'ae2:transform',
     json: {
@@ -171,74 +171,74 @@ test('AE2 transform: los objetos tirados al agua necesitan el fluido y la explos
     id: 'a:singularity', type: 'ae2:transform',
     json: { type: 'ae2:transform', circumstance: { type: 'explosion' }, ingredients: [{ item: 't:quartz' }], result: { item: 't:singularity' } },
   };
-  const targets = [{ id: 'fluix', item: 't:fluix' }, { id: 'singularidad', item: 't:singularity' }];
+  const targets = [{ id: 'fluix', item: 't:fluix' }, { id: 'singularity', item: 't:singularity' }];
   const dump = mkDump({ recipes: [water, boom], tagsFluid: { 'minecraft:water': ['t:water'] }, fluids: ['t:water'] });
   const r = run(dump, ae2Cfg({ targets }));
-  assert.deepEqual(verdicts(r.out.gate), { fluix: 'PASS', singularidad: 'FAIL' });
-  assert.match(linesOf(r.out.gate, 'singularidad'), /ae2_circumstance_explosion|explosion/);
+  assert.deepEqual(verdicts(r.out.gate), { fluix: 'PASS', singularity: 'FAIL' });
+  assert.match(linesOf(r.out.gate, 'singularity'), /ae2_circumstance_explosion|explosion/);
   const dry = run(dump, ae2Cfg({ targets, world: [{ id: 'w', mode: 'manual', items: ['t:charged', 't:redstone', 't:quartz'] }] }));
   assert.equal(dry.out.gate.find((x) => x.target.id === 'fluix').verdict, 'FAIL');
 });
 
-// ---------------------------------------------------------------- fugas, opcionales, vetas
+// ---------------------------------------------------------------- leaks, optionals, veins
 
-test('expect "unreachable": PASS si el objeto no se puede conseguir y FAIL con la cadena si hay una fuga', () => {
+test('expect "unreachable": PASS if the item can\'t be obtained, and FAIL with the chain if there\'s a leak', () => {
   const recipes = [gt('t:blast', 't:ebf', { ins: [gi('t:sand')], outs: [gi('t:silicon')] }), shaped('t:leak', ['S'], { S: { item: 't:sand' } }, 't:silicon2')];
   const cfg = {
-    tier: 'fuga',
+    tier: 'leak',
     unconditionalTypes: ['minecraft:crafting_shaped'],
     world: [{ id: 'w', mode: 'manual', items: ['t:sand'] }],
     targets: [
-      { id: 'silicio', item: 't:silicon', expect: 'unreachable' },
-      { id: 'silicio2', item: 't:silicon2', expect: 'unreachable' },
+      { id: 'silicon', item: 't:silicon', expect: 'unreachable' },
+      { id: 'silicon2', item: 't:silicon2', expect: 'unreachable' },
     ],
     autoTargets: [],
   };
   const r = run(mkDump({ recipes }), cfg);
-  assert.deepEqual(verdicts(r.out.gate), { silicio: 'PASS', silicio2: 'FAIL' });
-  assert.match(linesOf(r.out.gate, 'silicio'), /como debe ser/);
-  assert.match(linesOf(r.out.gate, 'silicio2'), /FUGA[\s\S]*t:silicon2/);
+  assert.deepEqual(verdicts(r.out.gate), { silicon: 'PASS', silicon2: 'FAIL' });
+  assert.match(linesOf(r.out.gate, 'silicon'), /as it should be/);
+  assert.match(linesOf(r.out.gate, 'silicon2'), /LEAK[\s\S]*t:silicon2/);
   assert.equal(r.out.verdict, 'FAIL');
 });
 
-test('expect "not-automatic": PASS si el objeto solo existe como bloque puesto una vez y FAIL con la cadena si una máquina lo repone', () => {
+test('expect "not-automatic": PASS if the item only exists as a block placed once, and FAIL with the chain if a machine resupplies it', () => {
   const melt = gt('t:rock_melt', 't:arc', { ins: [gi('t:cobble', 8)], fouts: [gf('t:lava', 100)], eut: 32 });
   const cfg = {
-    tier: 'fuga-auto',
+    tier: 'leak-auto',
     machines: [{ machine: 't:arc_machine', types: ['t:arc'], maxEUt: 64 }],
     world: [
-      { id: 'maquina', mode: 'manual', bootstrap: true, items: ['t:arc_machine'] },
-      { id: 'piedra', mode: 'auto', items: ['t:cobble'] },
-      { id: 'lava-puesta', mode: 'manual', bootstrap: true, items: ['fluid:t:lava'] },
+      { id: 'machine', mode: 'manual', bootstrap: true, items: ['t:arc_machine'] },
+      { id: 'stone', mode: 'auto', items: ['t:cobble'] },
+      { id: 'lava-placed', mode: 'manual', bootstrap: true, items: ['fluid:t:lava'] },
     ],
-    targets: [{ id: 'mal-puesto', item: 't:cobble', expect: 'not-automatic' }],
+    targets: [{ id: 'badly-placed', item: 't:cobble', expect: 'not-automatic' }],
     autoTargets: [{ id: 'lava', fluid: 't:lava', expect: 'not-automatic' }],
   };
   const items = ['t:arc_machine', 't:cobble'];
   const fluids = ['t:lava'];
   const clean = run(mkDump({ recipes: [], items, fluids }), cfg);
   assert.equal(clean.out.auto[0].verdict, 'PASS');
-  assert.match(linesOf(clean.out.auto, 'lava'), /no se produce sola, como debe ser \(solo gracias al arranque manual/);
-  assert.match(clean.model.warnings.join('\n'), /mal-puesto: expect «not-automatic» no vale en targets/);
+  assert.match(linesOf(clean.out.auto, 'lava'), /doesn't produce itself, as it should be \(only thanks to the manual bootstrap/);
+  assert.match(clean.model.warnings.join('\n'), /badly-placed: expect «not-automatic» isn't valid in targets/);
 
   const leaky = run(mkDump({ recipes: [melt], items, fluids }), cfg);
   assert.equal(leaky.out.auto[0].verdict, 'FAIL');
-  assert.match(linesOf(leaky.out.auto, 'lava'), /FUGA: se produce sola[\s\S]*t:rock_melt/);
+  assert.match(linesOf(leaky.out.auto, 'lava'), /LEAK: it produces itself[\s\S]*t:rock_melt/);
   assert.equal(leaky.out.verdict, 'FAIL');
 });
 
-test('un objetivo opcional que no se cumple da WARN y no tumba el veredicto', () => {
+test('an optional target that isn\'t met gives WARN and doesn\'t sink the verdict', () => {
   const cfg = {
-    tier: 'opcional',
+    tier: 'optional',
     world: [],
-    targets: [{ id: 'conversor', item: 't:converter', optional: true }, { id: 'nada', item: 't:other', optional: true }],
+    targets: [{ id: 'converter', item: 't:converter', optional: true }, { id: 'nothing', item: 't:other', optional: true }],
     autoTargets: [],
   };
   const r = run(mkDump({ items: ['t:converter', 't:other'] }), cfg);
-  assert.deepEqual(verdicts(r.out.gate), { conversor: 'WARN', nada: 'WARN' });
+  assert.deepEqual(verdicts(r.out.gate), { converter: 'WARN', nothing: 'WARN' });
   assert.equal(r.out.verdict, 'PASS');
-  assert.match(r.text, /2 avisos/);
-  assert.match(linesOf(r.out.gate, 'conversor'), /opcional/);
+  assert.match(r.text, /2 warnings/);
+  assert.match(linesOf(r.out.gate, 'converter'), /optional/);
 });
 
 const VEINS = [
@@ -248,12 +248,12 @@ const VEINS = [
   { id: 'gtceu:certus_quartz', layer: 'netherrack', dims: ['minecraft:the_nether'], mats: ['gtceu:certus_quartz'] },
 ];
 
-test('objetivos por veta: receta con muestra por veta (plantilla {id}) y menas exclusivas de la dimensión', () => {
+test('vein targets: recipe with a per-vein sample (template {id}) and dimension-exclusive ores', () => {
   const recipes = [
     gt('t:drill_topaz', 'gtceu:vein_drilling', { ins: [gi('grindless:vein_sample_topaz', 1, 0)], outs: [gi('gtceu:raw_topaz')] }),
   ];
   const cfg = {
-    tier: 'vetas',
+    tier: 'veins',
     machines: [{ machine: 't:drill', types: ['gtceu:vein_drilling'] }],
     world: [
       { id: 'w', mode: 'manual', bootstrap: true, items: ['t:drill', 'grindless:vein_sample_topaz', 'grindless:vein_sample_banded_iron'] },
@@ -262,11 +262,11 @@ test('objetivos por veta: receta con muestra por veta (plantilla {id}) y menas e
     autoTargets: [],
     autoTargetsFromVeins: [
       {
-        idPrefix: 'receta-', labelPrefix: 'Perforación', dimensions: ['minecraft:the_nether'],
+        idPrefix: 'recipe-', labelPrefix: 'Drilling', dimensions: ['minecraft:the_nether'],
         target: { kind: 'recipe', type: 'gtceu:vein_drilling', input: 'grindless:vein_sample_{id}' },
       },
       {
-        idPrefix: 'mena-', labelPrefix: 'Mena', dimensions: ['minecraft:the_nether'], exclusiveFrom: ['minecraft:overworld'],
+        idPrefix: 'ore-', labelPrefix: 'Ore', dimensions: ['minecraft:the_nether'], exclusiveFrom: ['minecraft:overworld'],
         template: 'gtceu:raw_{m}', overrides: { gold: 'minecraft:raw_gold' }, mode: 'anyOf',
       },
     ],
@@ -278,45 +278,45 @@ test('objetivos por veta: receta con muestra por veta (plantilla {id}) y menas e
   const r = run(dump, cfg);
   assert.equal(r.model.stats.veinTargets, 5);
   const ids = r.out.auto.map((x) => x.target.id);
-  // banded_iron solo comparte menas con el Overworld (goethita) o no tiene objeto (oro): sin objetivo de menas
-  assert.deepEqual(ids, ['receta-banded_iron_vein', 'receta-topaz_vein', 'receta-certus_quartz', 'mena-topaz_vein', 'mena-certus_quartz']);
-  assert.equal(r.out.auto.find((x) => x.target.id === 'receta-topaz_vein').target.input, 'grindless:vein_sample_topaz');
-  assert.equal(r.out.auto.find((x) => x.target.id === 'receta-certus_quartz').target.input, 'grindless:vein_sample_certus_quartz');
-  assert.equal(statusOf(r.out.auto, 'mena-topaz_vein'), 'sustained');
-  assert.equal(r.out.auto.find((x) => x.target.id === 'receta-topaz_vein').verdict, 'PASS');
-  // sin receta para esa veta: FAIL y se dice que no hay ninguna receta con esa muestra
-  assert.equal(r.out.auto.find((x) => x.target.id === 'receta-banded_iron_vein').verdict, 'FAIL');
+  // banded_iron only shares ores with the Overworld (goethite) or has no item (gold): no ore target
+  assert.deepEqual(ids, ['recipe-banded_iron_vein', 'recipe-topaz_vein', 'recipe-certus_quartz', 'ore-topaz_vein', 'ore-certus_quartz']);
+  assert.equal(r.out.auto.find((x) => x.target.id === 'recipe-topaz_vein').target.input, 'grindless:vein_sample_topaz');
+  assert.equal(r.out.auto.find((x) => x.target.id === 'recipe-certus_quartz').target.input, 'grindless:vein_sample_certus_quartz');
+  assert.equal(statusOf(r.out.auto, 'ore-topaz_vein'), 'sustained');
+  assert.equal(r.out.auto.find((x) => x.target.id === 'recipe-topaz_vein').verdict, 'PASS');
+  // no recipe for that vein: FAIL, and it says no recipe uses that sample
+  assert.equal(r.out.auto.find((x) => x.target.id === 'recipe-banded_iron_vein').verdict, 'FAIL');
   assert.equal(r.out.verdict, 'FAIL');
 });
 
-test('objetivos por veta: se avisa si el volcado no trae veins.json', () => {
-  const cfg = { tier: 'sin-vetas', world: [], targets: [], autoTargets: [], autoTargetsFromVeins: [{ idPrefix: 'v-', dimensions: ['minecraft:the_nether'], template: 'x:{m}' }] };
+test('vein targets: it warns if the dump has no veins.json', () => {
+  const cfg = { tier: 'without-veins', world: [], targets: [], autoTargets: [], autoTargetsFromVeins: [{ idPrefix: 'v-', dimensions: ['minecraft:the_nether'], template: 'x:{m}' }] };
   const r = run(mkDump({}), cfg);
-  assert.match(r.model.warnings.join('\n'), /autoTargetsFromVeins: el volcado no trae veins.json/);
+  assert.match(r.model.warnings.join('\n'), /autoTargetsFromVeins: the dump has no veins.json/);
 });
 
-test('objetivo de receta con varias entradas: la receta debe tenerlas todas (muestra + lodo)', () => {
+test('recipe target with several inputs: the recipe must have them all (sample + mud)', () => {
   const recipes = [
     gt('t:drill_plain', 'gtceu:vein_drilling', { ins: [gi('t:sample', 1, 0)], outs: [gi('t:raw_a')] }),
     gt('t:drill_mud', 'gtceu:vein_drilling', { ins: [gi('t:sample', 1, 0)], fins: [gf('t:mud', 50)], outs: [gi('t:raw_b')] }),
   ];
   const cfg = {
-    tier: 'multi-entrada',
+    tier: 'multi-input',
     machines: [{ machine: 't:drill', types: ['gtceu:vein_drilling'], maxEUt: 32 }],
     world: [{ id: 'w', mode: 'manual', bootstrap: true, items: ['t:drill', 't:sample'] }],
     targets: [
-      { id: 'con-lodo', kind: 'recipe', type: 'gtceu:vein_drilling', input: ['t:sample', 'fluid:t:mud'] },
-      { id: 'solo-muestra', kind: 'recipe', type: 'gtceu:vein_drilling', input: 't:sample' },
+      { id: 'with-mud', kind: 'recipe', type: 'gtceu:vein_drilling', input: ['t:sample', 'fluid:t:mud'] },
+      { id: 'only-sample', kind: 'recipe', type: 'gtceu:vein_drilling', input: 't:sample' },
     ],
     autoTargets: [],
   };
   const r = run(mkDump({ recipes, items: ['t:drill', 't:sample', 't:raw_a', 't:raw_b'], fluids: ['t:mud'] }), cfg);
-  // el lodo no existe en el mundo: la receta con lodo no se puede completar, la sencilla sí
-  assert.deepEqual(verdicts(r.out.gate), { 'con-lodo': 'FAIL', 'solo-muestra': 'PASS' });
-  assert.match(linesOf(r.out.gate, 'con-lodo'), /hay 1 receta\(s\) del tipo/);
+  // mud doesn't exist in the world: the recipe with mud can't be completed, the plain one can
+  assert.deepEqual(verdicts(r.out.gate), { 'with-mud': 'FAIL', 'only-sample': 'PASS' });
+  assert.match(linesOf(r.out.gate, 'with-mud'), /there are 1 recipe\(s\) of that type/);
 });
 
-test('coilTemp: cada variante de EBF lleva su bobina; GTM suma 100 K por escalón de tensión sobre MV', () => {
+test('coilTemp: each EBF variant carries its coil; GTM adds 100 K per voltage tier above MV', () => {
   const recipes = [
     gt('t:blast_1700', 't:ebf', { ins: [gi('t:dust')], outs: [gi('t:i1700')], eut: 120, data: { ebf_temp: 1700 } }),
     gt('t:blast_1900', 't:ebf', { ins: [gi('t:dust')], outs: [gi('t:i1900')], eut: 120, data: { ebf_temp: 1900 } }),
@@ -325,7 +325,7 @@ test('coilTemp: cada variante de EBF lleva su bobina; GTM suma 100 K por escaló
     gt('t:blast_2900', 't:ebf', { ins: [gi('t:dust')], outs: [gi('t:i2900')], eut: 480, data: { ebf_temp: 2900 } }),
   ];
   const cfg = {
-    tier: 'bobinas',
+    tier: 'coils',
     machines: [
       { id: 't:ebf@cupro', machine: 't:ebf_machine', types: ['t:ebf'], energy: { voltage: 32, hatches: 2 }, coilTemp: 1800 },
       { id: 't:ebf@kanthal', machine: 't:ebf_machine', types: ['t:ebf'], energy: { voltage: 128, hatches: 2 }, coilTemp: 2700 },
@@ -336,16 +336,16 @@ test('coilTemp: cada variante de EBF lleva su bobina; GTM suma 100 K por escaló
   };
   const items = ['t:ebf_machine', 't:dust'];
   const r = run(mkDump({ recipes, items }), cfg);
-  // cuproníquel con 2 escotillas LV = MV (sin bonus): 1800 K y 128 V; Kanthal con 2 escotillas MV = HV: 2700 + 100 = 2800 K, 512 V
+  // cupronickel with 2 LV hatches = MV (no bonus): 1800 K and 128 V; Kanthal with 2 MV hatches = HV: 2700 + 100 = 2800 K, 512 V
   assert.deepEqual(verdicts(r.out.gate), { i1700: 'PASS', i1900: 'PASS', i2700: 'PASS', i2800: 'PASS', i2900: 'FAIL' });
-  // solo cuproníquel: 1900 K y 480 EU/t quedan fuera
+  // cupronickel only: 1900 K and 480 EU/t are out of reach
   const only = run(mkDump({ recipes, items }), { ...cfg, machines: [cfg.machines[0]] });
   assert.deepEqual(verdicts(only.out.gate), { i1700: 'PASS', i1900: 'FAIL', i2700: 'FAIL', i2800: 'FAIL', i2900: 'FAIL' });
-  assert.match(linesOf(only.out.gate, 'i1900'), /ninguna máquina de t:ebf llega a 1900 K/);
-  assert.match(linesOf(only.out.gate, 'i2700'), /ninguna máquina de t:ebf admite 480 EU\/t/);
+  assert.match(linesOf(only.out.gate, 'i1900'), /no t:ebf machine reaches 1900 K/);
+  assert.match(linesOf(only.out.gate, 'i2700'), /no t:ebf machine accepts 480 EU\/t/);
 });
 
-test('dimensión de la fábrica: una receta con condición de dimensión solo vale donde la fábrica está', () => {
+test('factory dimension: a recipe with a dimension condition only applies where the factory is', () => {
   const dim = (d, reverse) => [{ type: 'dimension', dimension: d, ...(reverse ? { reverse: true } : {}) }];
   const recipes = [
     gt('t:air_ow', 'gtceu:gas_collector', { fouts: [gf('t:air', 10000)], eut: 16, conditions: dim('minecraft:overworld') }),
@@ -353,75 +353,75 @@ test('dimensión de la fábrica: una receta con condición de dimensión solo va
     gt('t:gas_not_nether', 'gtceu:gas_collector', { fouts: [gf('t:gas', 10000)], eut: 16, conditions: dim('minecraft:the_nether', true) }),
   ];
   const cfg = (dimension) => ({
-    tier: 'contexto',
+    tier: 'context',
     ...(dimension ? { dimension } : {}),
     machines: [{ machine: 't:collector', types: ['gtceu:gas_collector'], maxEUt: 32 }],
     world: [{ id: 'w', mode: 'manual', bootstrap: true, items: ['t:collector'] }],
-    targets: [{ id: 'aire', fluid: 't:air' }, { id: 'gas', fluid: 't:gas' }],
+    targets: [{ id: 'air', fluid: 't:air' }, { id: 'gas', fluid: 't:gas' }],
     autoTargets: [],
   });
   const dump = () => mkDump({ recipes, items: ['t:collector'], fluids: ['t:air', 't:gas'] });
-  assert.deepEqual(verdicts(run(dump(), cfg()).out.gate), { aire: 'PASS', gas: 'PASS' });
+  assert.deepEqual(verdicts(run(dump(), cfg()).out.gate), { air: 'PASS', gas: 'PASS' });
   const flat = run(dump(), cfg('grindless:flat'));
-  assert.deepEqual(verdicts(flat.out.gate), { aire: 'PASS', gas: 'PASS' });
-  assert.match(flat.text, /Contexto: la fábrica está en la dimensión grindless:flat/);
+  assert.deepEqual(verdicts(flat.out.gate), { air: 'PASS', gas: 'PASS' });
+  assert.match(flat.text, /Context : the factory is in dimension grindless:flat/);
   const nether = run(dump(), cfg('minecraft:the_nether'));
-  assert.deepEqual(verdicts(nether.out.gate), { aire: 'FAIL', gas: 'FAIL' });
-  assert.match(linesOf(nether.out.gate, 'aire'), /solo vale en (minecraft:overworld|grindless:flat); la fábrica está en minecraft:the_nether/);
-  // conditions.dimension.ignore desactiva el filtro
+  assert.deepEqual(verdicts(nether.out.gate), { air: 'FAIL', gas: 'FAIL' });
+  assert.match(linesOf(nether.out.gate, 'air'), /only applies in (minecraft:overworld|grindless:flat); the factory is in minecraft:the_nether/);
+  // conditions.dimension.ignore disables the filter
   const loose = run(dump(), { ...cfg('minecraft:the_nether'), conditions: { dimension: { ignore: true } } });
-  assert.deepEqual(verdicts(loose.out.gate), { aire: 'PASS', gas: 'PASS' });
+  assert.deepEqual(verdicts(loose.out.gate), { air: 'PASS', gas: 'PASS' });
 });
 
-test('yacimientos de fluidos: la perforadora solo da los fluidos cuyos yacimientos admiten la dimensión; la config decide si se agotan', () => {
+test('fluid deposits: the rig only gives fluids whose deposits allow the dimension; config decides if they run out', () => {
   const FLUID_VEINS = [
     { id: 'gtceu:oil_deposit', fluid: 't:oil', weight: 25, dims: ['minecraft:overworld'] },
     { id: 'grindless:flat_gas', fluid: 't:gas', weight: 10, dims: ['grindless:flat'] },
     { id: 'gtceu:salt_deposit', fluid: 't:brine', weight: 10, dims: null },
   ];
   const cfg = (dimension) => ({
-    tier: 'fluidos',
+    tier: 'fluids',
     dimension,
     machines: [{ machine: 't:rig', types: [] }],
     world: [
-      { id: 'taladro', mode: 'manual', bootstrap: true, items: ['t:rig'] },
+      { id: 'drill', mode: 'manual', bootstrap: true, items: ['t:rig'] },
       {
-        id: 'yacimientos', mode: 'auto', via: ['t:rig'], fromFluidVeins: true,
+        id: 'deposits', mode: 'auto', via: ['t:rig'], fromFluidVeins: true,
         sustainedIf: { config: 'worldgen.oreVeins.infiniteBedrockOresFluids', equals: true },
       },
     ],
     targets: [],
     autoTargets: [
-      { id: 'aceite', fluid: 't:oil' }, { id: 'gas', fluid: 't:gas' }, { id: 'salmuera', fluid: 't:brine' },
+      { id: 'oil', fluid: 't:oil' }, { id: 'gas', fluid: 't:gas' }, { id: 'brine', fluid: 't:brine' },
     ],
   });
   const dump = (config) => mkDump({ items: ['t:rig'], fluids: ['t:oil', 't:gas', 't:brine'], fluidVeins: FLUID_VEINS, config });
   const infinite = { 'worldgen.oreVeins.infiniteBedrockOresFluids': true };
   const ow = run(dump(infinite), cfg('minecraft:overworld'));
-  assert.deepEqual(verdicts(ow.out.auto), { aceite: 'PASS', gas: 'FAIL', salmuera: 'PASS' });
-  assert.match(linesOf(ow.out.auto, 'gas'), /el yacimiento grindless:flat_gas solo admite grindless:flat; este análisis es en minecraft:overworld/);
-  assert.match(ow.text, /yacimientos de fluidos que admiten minecraft:overworld: t:oil \(gtceu:oil_deposit\), t:brine \(gtceu:salt_deposit\)/);
-  assert.match(ow.text, /config de GTM leída del volcado: worldgen.oreVeins.infiniteBedrockOresFluids=true/);
+  assert.deepEqual(verdicts(ow.out.auto), { oil: 'PASS', gas: 'FAIL', brine: 'PASS' });
+  assert.match(linesOf(ow.out.auto, 'gas'), /deposit grindless:flat_gas only allows grindless:flat; this analysis is in minecraft:overworld/);
+  assert.match(ow.text, /fluid deposits that allow minecraft:overworld: t:oil \(gtceu:oil_deposit\), t:brine \(gtceu:salt_deposit\)/);
+  assert.match(ow.text, /GTM config read from the dump: worldgen.oreVeins.infiniteBedrockOresFluids=true/);
   const flat = run(dump(infinite), cfg('grindless:flat'));
-  assert.deepEqual(verdicts(flat.out.auto), { aceite: 'FAIL', gas: 'PASS', salmuera: 'PASS' });
-  // sin la config infinita los yacimientos se agotan: solo una fuente finita (WARN)
+  assert.deepEqual(verdicts(flat.out.auto), { oil: 'FAIL', gas: 'PASS', brine: 'PASS' });
+  // without the infinite config the deposits run out: only a finite source (WARN)
   const finite = run(dump({ 'worldgen.oreVeins.infiniteBedrockOresFluids': false }), cfg('minecraft:overworld'));
-  assert.equal(finite.out.auto.find((x) => x.target.id === 'aceite').status, 'finite');
-  assert.equal(finite.out.auto.find((x) => x.target.id === 'aceite').verdict, 'WARN');
-  // un volcado sin config.json no permite comprobarla: se avisa y se trata como no cumplida
+  assert.equal(finite.out.auto.find((x) => x.target.id === 'oil').status, 'finite');
+  assert.equal(finite.out.auto.find((x) => x.target.id === 'oil').verdict, 'WARN');
+  // a dump with no config.json can't check it: it warns and treats it as unmet
   const unknown = run(dump(null), cfg('minecraft:overworld'));
-  assert.equal(unknown.out.auto.find((x) => x.target.id === 'aceite').verdict, 'WARN');
-  assert.match(unknown.model.warnings.join('\n'), /no se puede comprobar la config worldgen.oreVeins.infiniteBedrockOresFluids \(el volcado no trae config.json\)/);
+  assert.equal(unknown.out.auto.find((x) => x.target.id === 'oil').verdict, 'WARN');
+  assert.match(unknown.model.warnings.join('\n'), /can't check config worldgen.oreVeins.infiniteBedrockOresFluids \(the dump has no config.json\)/);
 });
 
-test('mundo: requires (config) y dimensions desactivan una entrada con el motivo en el informe', () => {
+test('world: requires (config) and dimensions disable an entry, with the reason in the report', () => {
   const cfg = (dimension, config) => ({
-    tier: 'requisitos',
+    tier: 'requirements',
     dimension,
     world: [
-      { id: 'sin-flag', mode: 'auto', requires: [{ config: 'gameplay.hazardsEnabled', equals: false }], items: ['t:a'] },
-      { id: 'solo-nether', mode: 'auto', dimensions: ['minecraft:the_nether'], items: ['t:b'] },
-      { id: 'siempre', mode: 'auto', items: ['t:c'] },
+      { id: 'without-flag', mode: 'auto', requires: [{ config: 'gameplay.hazardsEnabled', equals: false }], items: ['t:a'] },
+      { id: 'only-nether', mode: 'auto', dimensions: ['minecraft:the_nether'], items: ['t:b'] },
+      { id: 'always', mode: 'auto', items: ['t:c'] },
     ],
     targets: [{ id: 'a', item: 't:a' }, { id: 'b', item: 't:b' }, { id: 'c', item: 't:c' }],
     autoTargets: [],
@@ -430,13 +430,13 @@ test('mundo: requires (config) y dimensions desactivan una entrada con el motivo
   const dump = (config) => mkDump({ items: ['t:a', 't:b', 't:c'], config });
   const r = run(dump({ 'gameplay.hazardsEnabled': true }), cfg('minecraft:overworld'));
   assert.deepEqual(verdicts(r.out.gate), { a: 'FAIL', b: 'FAIL', c: 'PASS' });
-  assert.match(linesOf(r.out.gate, 'a'), /sin-flag \(config gameplay.hazardsEnabled = true, se pide false\)/);
-  assert.match(linesOf(r.out.gate, 'b'), /solo-nether \(solo en minecraft:the_nether\)/);
+  assert.match(linesOf(r.out.gate, 'a'), /without-flag \(config gameplay.hazardsEnabled = true, wants false\)/);
+  assert.match(linesOf(r.out.gate, 'b'), /only-nether \(only in minecraft:the_nether\)/);
   const nether = run(dump({ 'gameplay.hazardsEnabled': false }), cfg('minecraft:the_nether'));
   assert.deepEqual(verdicts(nether.out.gate), { a: 'PASS', b: 'PASS', c: 'PASS' });
 });
 
-test('condición numérica con tope (ebf_temp): la receta que pide más temperatura que las bobinas del tier no vale', () => {
+test('numeric condition with a cap (ebf_temp): a recipe that needs more temperature than the tier\'s coils doesn\'t apply', () => {
   const recipes = [
     gt('t:blast_low', 't:ebf', { ins: [gi('t:dust')], outs: [gi('t:ingot_low')], eut: 120, data: { ebf_temp: 1700 } }),
     gt('t:blast_high', 't:ebf', { ins: [gi('t:dust')], outs: [gi('t:ingot_high')], eut: 120, data: { ebf_temp: 2273 } }),
@@ -447,33 +447,33 @@ test('condición numérica con tope (ebf_temp): la receta que pide más temperat
     conditions: { ebf_temp: { field: 'temperature', max: 1800 } },
     machines: [{ machine: 't:ebf_machine', types: ['t:ebf'], maxEUt: 128 }],
     world: [{ id: 'w', mode: 'manual', bootstrap: true, items: ['t:ebf_machine', 't:dust'] }],
-    targets: [{ id: 'bajo', item: 't:ingot_low' }, { id: 'alto', item: 't:ingot_high' }, { id: 'caliente', item: 't:ingot_hot' }],
+    targets: [{ id: 'low', item: 't:ingot_low' }, { id: 'high', item: 't:ingot_high' }, { id: 'hot', item: 't:ingot_hot' }],
     autoTargets: [],
   };
   const r = run(mkDump({ recipes, items: ['t:ebf_machine', 't:dust'] }), cfg);
-  assert.deepEqual(verdicts(r.out.gate), { bajo: 'PASS', alto: 'FAIL', caliente: 'FAIL' });
-  assert.match(linesOf(r.out.gate, 'alto'), /ebf_temp 2273 \(este tier llega a 1800\)/);
-  assert.match(linesOf(r.out.gate, 'caliente'), /ninguna máquina de t:ebf admite 480 EU\/t/);
-  // sin la regla de condición, la temperatura se ignora
+  assert.deepEqual(verdicts(r.out.gate), { low: 'PASS', high: 'FAIL', hot: 'FAIL' });
+  assert.match(linesOf(r.out.gate, 'high'), /ebf_temp 2273 \(this tier reaches 1800\)/);
+  assert.match(linesOf(r.out.gate, 'hot'), /no t:ebf machine accepts 480 EU\/t/);
+  // without the condition rule, temperature is ignored
   const loose = run(mkDump({ recipes, items: ['t:ebf_machine', 't:dust'] }), { ...cfg, conditions: {} });
-  assert.equal(loose.out.gate.find((x) => x.target.id === 'alto').verdict, 'PASS');
+  assert.equal(loose.out.gate.find((x) => x.target.id === 'high').verdict, 'PASS');
 });
 
-test('verbose / explain también cuelgan la derivación de los objetivos de tipo receta que dan PASS', () => {
+test('verbose / explain also hang the derivation off recipe-type targets that give PASS', () => {
   const recipes = [gt('t:drill', 'gtceu:vein_drilling', { ins: [gi('t:sample', 1, 0), gi('t:coal', 1)], outs: [gi('t:raw')] })];
   const cfg = {
     tier: 'verbose',
     machines: [{ machine: 't:drill_machine', types: ['gtceu:vein_drilling'], maxEUt: 32 }],
     world: [{ id: 'w', mode: 'manual', bootstrap: true, items: ['t:drill_machine', 't:sample', 't:coal'] }],
-    targets: [{ id: 'perforar', kind: 'recipe', type: 'gtceu:vein_drilling', output: 't:raw' }],
+    targets: [{ id: 'drill', kind: 'recipe', type: 'gtceu:vein_drilling', output: 't:raw' }],
     autoTargets: [],
   };
   const r = run(mkDump({ recipes, items: ['t:drill_machine', 't:sample', 't:coal'] }), cfg, { verbose: true });
   assert.equal(r.out.gate[0].verdict, 'PASS');
-  assert.match(linesOf(r.out.gate, 'perforar'), /receta usable, necesita:[\s\S]*t:coal/);
+  assert.match(linesOf(r.out.gate, 'drill'), /usable recipe, needs:[\s\S]*t:coal/);
 });
 
-test('abilityMaxCount: suma los límites de las opciones con esa habilidad, acotada por las celdas del símbolo', () => {
+test('abilityMaxCount: sums the limits of options with that ability, capped by the symbol\'s cells', () => {
   const desc = {
     slices: [['XXXX', 'XSEX']],
     symbols: {
@@ -489,22 +489,22 @@ test('abilityMaxCount: suma los límites de las opciones con esa habilidad, acot
       E: { kind: 'part', ability: 'energy_input', limits: { exact: 1 } },
     },
   };
-  assert.equal(abilityMaxCount(desc, 'energy_input'), 3); // 2 en la carcasa "o" + 1 exacta
+  assert.equal(abilityMaxCount(desc, 'energy_input'), 3); // 2 in the "or" casing + 1 exact
   assert.equal(abilityMaxCount(desc, 'muffler'), 1);
   assert.equal(abilityMaxCount(desc, 'output_bus'), 0);
-  // sin límite superior: tantas como celdas del símbolo
+  // no upper limit: as many as the symbol's cells
   const free = { slices: [['AAA']], symbols: { A: { kind: 'oneOf', options: [{ kind: 'part', ability: 'energy_input' }] } } };
   assert.equal(abilityMaxCount(free, 'energy_input'), 3);
 });
 
-test('energy: con 2 o más escotillas del mismo nivel un multibloque cuenta un escalón más (GTM getMaxVoltage), con 1 no', () => {
+test('energy: with 2 or more hatches of the same tier a multiblock counts one step higher (GTM getMaxVoltage), with 1 it doesn\'t', () => {
   const recipes = [
     gt('t:mv_blast', 't:blast', { ins: [gi('t:dust')], outs: [gi('t:ingot_mv')], eut: 120 }),
     gt('t:hv_blast', 't:blast', { ins: [gi('t:dust')], outs: [gi('t:ingot_hv')], eut: 480 }),
     gt('t:lv_blast', 't:blast', { ins: [gi('t:dust')], outs: [gi('t:ingot_lv')], eut: 30 }),
   ];
   const base = (energy) => ({
-    tier: 'energia',
+    tier: 'energy',
     machines: [{ machine: 't:furnace', types: ['t:blast'], energy }],
     world: [{ id: 'w', mode: 'manual', bootstrap: true, items: ['t:furnace', 't:dust'] }],
     targets: [{ id: 'lv', item: 't:ingot_lv' }, { id: 'mv', item: 't:ingot_mv' }, { id: 'hv', item: 't:ingot_hv' }],
@@ -514,13 +514,13 @@ test('energy: con 2 o más escotillas del mismo nivel un multibloque cuenta un e
   const two = run(dump(), base({ voltage: 32, hatches: 2 }));
   assert.deepEqual(verdicts(two.out.gate), { lv: 'PASS', mv: 'PASS', hv: 'FAIL' });
   assert.deepEqual(two.model.stats.rolledMachines, [{ machine: 't:furnace', hatches: 2, voltage: 32, maxEUt: 128 }]);
-  assert.match(two.text, /2 escotilla\(s\) de 32 V -> 128 V/);
+  assert.match(two.text, /2 hatch\(es\) of 32 V -> 128 V/);
   const one = run(dump(), base({ voltage: 32, hatches: 1 }));
   assert.deepEqual(verdicts(one.out.gate), { lv: 'PASS', mv: 'FAIL', hv: 'FAIL' });
-  assert.match(linesOf(one.out.gate, 'mv'), /ninguna máquina de t:blast admite 120 EU\/t/);
+  assert.match(linesOf(one.out.gate, 'mv'), /no t:blast machine accepts 120 EU\/t/);
 });
 
-test('energy: las escotillas que admite el patrón salen de la estructura del pack (exactamente 2 -> 128 V; 1 -> 32 V)', () => {
+test('energy: the hatches the pattern allows come from the pack\'s structure (exactly 2 -> 128 V; 1 -> 32 V)', () => {
   const recipes = [gt('t:mv_arc', 't:arc', { ins: [gi('t:dust')], outs: [gi('t:glass')], eut: 120 })];
   const structure = (limits) => ({
     'gtceu:arc': {
@@ -530,11 +530,11 @@ test('energy: las escotillas que admite el patrón salen de la estructura del pa
     },
   });
   const cfg = {
-    tier: 'energia-estructura',
+    tier: 'energy-structure',
     partAbilities: { energy_input: ['t:hatch'] },
     machines: [{ machine: 'gtceu:arc', types: ['t:arc'], energy: { voltage: 32 }, partsFromStructure: true }],
     world: [{ id: 'w', mode: 'manual', bootstrap: true, items: ['gtceu:arc', 't:dust', 't:casing', 't:hatch'] }],
-    targets: [{ id: 'cristal', item: 't:glass' }],
+    targets: [{ id: 'glass', item: 't:glass' }],
     autoTargets: [],
   };
   const items = ['gtceu:arc', 't:dust', 't:casing', 't:hatch'];
@@ -544,10 +544,10 @@ test('energy: las escotillas que admite el patrón salen de la estructura del pa
   const one = run(mkDump({ recipes, items, structures: structure({ exact: 1 }) }), cfg);
   assert.equal(one.out.gate[0].verdict, 'FAIL');
   const none = run(mkDump({ recipes, items }), cfg);
-  assert.match(none.model.warnings.join('\n'), /energy sin «hatches» y sin estructura/);
+  assert.match(none.model.warnings.join('\n'), /energy has no «hatches» and no structure/);
 });
 
-test('objetivo de receta con dimension: solo cuentan las recetas sin condición de dimensión o con esa dimensión', () => {
+test('recipe target with dimension: only recipes with no dimension condition or with that dimension count', () => {
   const dim = (d, reverse) => [{ type: 'dimension', dimension: d, ...(reverse ? { reverse: true } : {}) }];
   const recipes = [
     gt('t:air_overworld', 'gtceu:gas_collector', { fouts: [gf('t:air', 10000)], eut: 16, conditions: dim('minecraft:overworld') }),
@@ -560,20 +560,20 @@ test('objetivo de receta con dimension: solo cuentan las recetas sin condición 
     machines: [{ machine: 't:collector', types: ['gtceu:gas_collector'], maxEUt: 32 }],
     world: [{ id: 'w', mode: 'manual', bootstrap: true, items: ['t:collector'] }],
     targets: [
-      { id: 'aire-overworld', kind: 'recipe', type: 'gtceu:gas_collector', output: 'fluid:t:air', dimension: 'minecraft:overworld' },
-      { id: 'aire-llano', kind: 'recipe', type: 'gtceu:gas_collector', output: 'fluid:t:air', dimension: 'grindless:flat' },
-      { id: 'aire2-llano', kind: 'recipe', type: 'gtceu:gas_collector', output: 'fluid:t:air2', dimension: 'grindless:flat' },
-      { id: 'aire2-vacio', kind: 'recipe', type: 'gtceu:gas_collector', output: 'fluid:t:air2', dimension: 'grindless:void' },
-      { id: 'aire3-llano', kind: 'recipe', type: 'gtceu:gas_collector', output: 'fluid:t:air3', dimension: 'grindless:flat' },
-      { id: 'aire3-nether', kind: 'recipe', type: 'gtceu:gas_collector', output: 'fluid:t:air3', dimension: 'minecraft:the_nether' },
-      { id: 'aire-sin-dimension', kind: 'recipe', type: 'gtceu:gas_collector', output: 'fluid:t:air' },
+      { id: 'air-overworld', kind: 'recipe', type: 'gtceu:gas_collector', output: 'fluid:t:air', dimension: 'minecraft:overworld' },
+      { id: 'air-flat', kind: 'recipe', type: 'gtceu:gas_collector', output: 'fluid:t:air', dimension: 'grindless:flat' },
+      { id: 'air2-flat', kind: 'recipe', type: 'gtceu:gas_collector', output: 'fluid:t:air2', dimension: 'grindless:flat' },
+      { id: 'air2-void', kind: 'recipe', type: 'gtceu:gas_collector', output: 'fluid:t:air2', dimension: 'grindless:void' },
+      { id: 'air3-flat', kind: 'recipe', type: 'gtceu:gas_collector', output: 'fluid:t:air3', dimension: 'grindless:flat' },
+      { id: 'air3-nether', kind: 'recipe', type: 'gtceu:gas_collector', output: 'fluid:t:air3', dimension: 'minecraft:the_nether' },
+      { id: 'air-without-dimension', kind: 'recipe', type: 'gtceu:gas_collector', output: 'fluid:t:air' },
     ],
     autoTargets: [],
   };
   const r = run(mkDump({ recipes, items: ['t:collector'], fluids: ['t:air', 't:air2', 't:air3'] }), cfg);
   assert.deepEqual(verdicts(r.out.gate), {
-    'aire-overworld': 'PASS', 'aire-llano': 'FAIL', 'aire2-llano': 'PASS', 'aire2-vacio': 'FAIL',
-    'aire3-llano': 'PASS', 'aire3-nether': 'FAIL', 'aire-sin-dimension': 'PASS',
+    'air-overworld': 'PASS', 'air-flat': 'FAIL', 'air2-flat': 'PASS', 'air2-void': 'FAIL',
+    'air3-flat': 'PASS', 'air3-nether': 'FAIL', 'air-without-dimension': 'PASS',
   });
-  assert.match(linesOf(r.out.gate, 'aire-llano'), /válida en grindless:flat/);
+  assert.match(linesOf(r.out.gate, 'air-flat'), /valid in grindless:flat/);
 });

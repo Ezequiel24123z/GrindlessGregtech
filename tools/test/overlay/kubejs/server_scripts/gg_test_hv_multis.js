@@ -152,12 +152,12 @@
     var rm = S.server.getRecipeManager()
 
     check(SCOPE, 'shared', !!LV && typeof LV.bores === 'function' && !!LV.rules && typeof LV.rules.isHvRecipe === 'function' &&
-      !!HV && !!HV.drilling && typeof HV.endVeins === 'function' && !!LV.drilling && !!LV.drilling.bits.titanium && !!LV.veinTools,
+      !!HV && !!HV.drilling && typeof HV.endVeins === 'function' && !!LV.drilling && !!LV.drilling.bits.stainless_steel && !!LV.veinTools,
       'bores shared=' + (!!LV && typeof LV.bores) + ' rules=' + (!!LV && !!LV.rules) + ' hv drilling=' + (!!HV && !!HV.drilling) +
       ' end veins=' + (!!HV && typeof HV.endVeins))
 
     var endVeins = HV.endVeins()
-    var items = ['grindless:titanium_drill_bit'].concat(endVeins.map(function (v) { return v.sample }))
+    var items = ['grindless:stainless_steel_drill_bit', LEGACY_BIT].concat(endVeins.map(function (v) { return v.sample }))
     var missingItems = items.filter(function (id) { return !Item.exists(id) })
     var bitTag = tagSize('grindless:drill_bits')
     var sampleTag = tagSize('grindless:vein_samples')
@@ -184,7 +184,7 @@
     check(SCOPE, 'fluids', missingFluids.length === 0,
       'count=' + fluids.length + (missingFluids.length > 0 ? ' missing=' + missingFluids.join(',') : ''))
 
-    var tags = ['forge:plates/stainless_steel', 'forge:plates/titanium', 'forge:rods/titanium', 'forge:glass',
+    var tags = ['forge:plates/stainless_steel', 'forge:rods/stainless_steel', 'forge:glass',
       'minecraft:saplings', 'gtceu:circuits/hv']
     var emptyTags = tags.filter(function (t) { return tagSize(t) === 0 })
     check(SCOPE, 'tags', emptyTags.length === 0,
@@ -207,8 +207,9 @@
     var greenRecipes = greenhouse ? recipesOf(greenhouse) : []
     var overworld = LV.overworldVeins().length
     var nether = LV.netherVeins().length
-    // titanium bit: base on the Overworld veins + fluid on the Overworld and Nether ones; End: 2 bits with fluid per vein
-    var wantDrilling = overworld + (overworld + nether) + endVeins.length * 2
+    // stainless steel bit: base on the Overworld veins + fluid on the Overworld and Nether ones + fluid on the End ones (the End is MV
+    // since v0.5.0: its vanadium steel bit recipes live under mv/, HV.drilling.endMv)
+    var wantDrilling = overworld + (overworld + nether) + endVeins.length
     var haveDrilling = countWithPath(drillRecipes, 'vein_drilling/hv/')
     var haveGreenhouse = countWithPath(greenRecipes, 'greenhouse/hv/')
     check(SCOPE, 'recipes', haveDrilling === wantDrilling && haveGreenhouse === 0 && HV.drilling.count === wantDrilling,
@@ -217,15 +218,52 @@
 
     var tableProblems = HV.checkTables()
     var endIds = endVeins.map(function (v) { return v.id })
-    check(SCOPE, 'end_table', tableProblems.length === 0 && endVeins.length >= 5 && endIds.indexOf('zirconium') >= 0,
+    // v0.4.1: four End veins (the scheelite one waits for Mars), and the bauxite sample is made without its ilmenite; v0.5.0: no End
+    // vein has ilmenite at all (titanium only comes from the Moon)
+    var bauxite = endVeins.filter(function (v) { return v.id === 'bauxite_end' })[0]
+    var bauxitePair = bauxite ? bauxite.samplePair.join('+') : ''
+    var endTitanium = endVeins.filter(function (v) {
+      return v.ores.some(function (o) { return /ilmenite|rutile|titanium/.test(String(o.item)) })
+    }).map(function (v) { return v.id })
+    check(SCOPE, 'end_table', tableProblems.length === 0 && endVeins.length >= 4 && endIds.indexOf('zirconium') >= 0 &&
+      endIds.indexOf('scheelite') < 0 && !!bauxite && bauxitePair.indexOf('ilmenite') < 0 && endTitanium.length === 0,
       endVeins.map(function (v) { return v.id + ' y' + v.minY + '..' + v.maxY + ' ' + v.samplePair.join('+').replace(/#forge:raw_materials\//g, '') }).join('; ') +
+      (endTitanium.length > 0 ? ' titanium ores in ' + endTitanium.join(',') : '') +
       (tableProblems.length > 0 ? ' problems=' + tableProblems.join(' | ') : ''))
 
-    var ids = ['grindless:crafting/hv_vein_drill', 'grindless:crafting/hv_greenhouse', 'grindless:crafting/titanium_drill_bit'].concat(
+    var ids = ['grindless:crafting/hv_vein_drill', 'grindless:crafting/hv_greenhouse', 'grindless:crafting/stainless_steel_drill_bit'].concat(
       endVeins.map(function (v) { return 'grindless:crafting/vein_sample/' + v.id }))
     var missingRecipes = ids.filter(function (id) { return !rm.byKey(rl(id)).isPresent() })
     check(SCOPE, 'crafting', missingRecipes.length === 0,
       'count=' + ids.length + (missingRecipes.length > 0 ? ' missing=' + missingRecipes.join(',') : ''))
+
+    // the titanium bit (the old HV one, kept for old worlds) is the EV Tripod Drill's bit again (server_scripts/grindless/ev/tripod.js):
+    // registered, a drill bit, every drilling recipe that takes it lives under vein_drilling/ev/ (the HV drill skips that folder) and
+    // its HV-era conversion into the stainless steel bit is gone. Whether EMI shows it is the hiding table's business.
+    var bits = asArray(Ingredient.of('#grindless:drill_bits').getItemIds()).map(String)
+    var hidden = asArray(Ingredient.of('#c:hidden_from_recipe_viewers').getItemIds()).map(String)
+    var titaniumDrilling = drillRecipes.filter(function (r) { return String(r.id).indexOf('_titanium') >= 0 }).map(function (r) { return String(r.id) })
+    var outsideEv = titaniumDrilling.filter(function (id) { return id.indexOf('grindless:vein_drilling/ev/') !== 0 })
+    var conversion = rm.byKey(rl('grindless:crafting/stainless_steel_drill_bit_from_titanium')).isPresent()
+    check(SCOPE, 'legacy_bit', Item.exists(LEGACY_BIT) && bits.indexOf(LEGACY_BIT) >= 0 && outsideEv.length === 0 && !conversion,
+      'registered=' + Item.exists(LEGACY_BIT) + ' in grindless:drill_bits=' + (bits.indexOf(LEGACY_BIT) >= 0) + ' drilling recipes with a titanium bit=' +
+      titaniumDrilling.length + ' (outside vein_drilling/ev/: ' + (outsideEv.length > 0 ? outsideEv.join(',') : 'none') + ') old conversion=' + conversion +
+      ' hidden in EMI=' + (hidden.indexOf(LEGACY_BIT) >= 0))
+
+    // the old scheelite sample (the vein left the End table in v0.4.1, saves keep their items): registered, hidden, not a vein sample,
+    // no drilling recipe takes it and it crafts back into an empty vein probe
+    var samples = asArray(Ingredient.of('#grindless:vein_samples').getItemIds()).map(String)
+    var legacySamples = (HV.legacySamples || []).slice()
+    var badSamples = legacySamples.filter(function (id) {
+      var path = id.substring(id.indexOf(':') + 1)
+      // a drilling recipe of this vein is <...>/<vein>_<bit>...; the Mars scheelite vein (scheelite_mars_<bit>) is another sample's
+      var ofVein = new RegExp('/' + path.replace('vein_sample_', '') + '_(bronze|steel|vanadium_steel|stainless_steel|titanium)(_|$)')
+      var drills = drillRecipes.filter(function (r) { return ofVein.test(String(r.id)) }).length
+      return !Item.exists(id) || hidden.indexOf(id) < 0 || samples.indexOf(id) >= 0 || drills > 0 ||
+        !rm.byKey(rl('grindless:crafting/empty_vein_probe_from_' + path)).isPresent()
+    })
+    check(SCOPE, 'legacy_samples', legacySamples.indexOf('grindless:vein_sample_scheelite') >= 0 && badSamples.length === 0,
+      'legacy=' + legacySamples.join(',') + (badSamples.length > 0 ? ' not registered / not hidden / still a sample / still drilled / no conversion: ' + badSamples.join(',') : ''))
 
     // the wear of the bits as GTM sees it: chance of being consumed out of 10000
     try {
@@ -235,17 +273,17 @@
         var fluidMb = asArray(r.getInputContents(fc)).map(function (c) { return Number(c.content.getStacks()[0].getAmount()) })
         return { chances: chances, fluid: fluidMb, duration: Number(r.duration) }
       }
-      var base = read('grindless:vein_drilling/hv/iron_titanium')
-      var wet = read('grindless:vein_drilling/hv/iron_titanium_fluid')
-      var endVanadium = read('grindless:vein_drilling/hv/bauxite_end_vanadium_steel_fluid')
-      var endWet = read('grindless:vein_drilling/hv/sheldonite_titanium_fluid')
+      var base = read('grindless:vein_drilling/hv/iron_stainless_steel')
+      var wet = read('grindless:vein_drilling/hv/iron_stainless_steel_fluid')
+      var endVanadium = read('grindless:vein_drilling/mv/bauxite_end_vanadium_steel_fluid')
+      var endWet = read('grindless:vein_drilling/hv/sheldonite_stainless_steel_fluid')
       var vanadium = read('grindless:vein_drilling/mv/iron_vanadium_steel')
       // bit first in the fluid recipes, sample first in the base ones (see the lookup note of family_vein_drilling.js)
       var okWear = base.chances.join(',') === '0,50' && wet.chances.join(',') === '25,0' && wet.fluid.join(',') === '50' &&
         endVanadium.chances.join(',') === '50,0' && endVanadium.fluid.join(',') === '50' && endWet.chances.join(',') === '25,0' &&
         vanadium.chances.join(',') === '0,100'
-      check(SCOPE, 'bit_wear', okWear, 'titanium base inputs (chance)=' + base.chances.join(',') + ' titanium fluid recipe=' + wet.chances.join(',') +
-        ' fluid mB=' + wet.fluid.join(',') + ' End vanadium fluid recipe=' + endVanadium.chances.join(',') + ' End titanium fluid recipe=' + endWet.chances.join(',') +
+      check(SCOPE, 'bit_wear', okWear, 'stainless steel base inputs (chance)=' + base.chances.join(',') + ' stainless steel fluid recipe=' + wet.chances.join(',') +
+        ' fluid mB=' + wet.fluid.join(',') + ' End vanadium fluid recipe=' + endVanadium.chances.join(',') + ' End stainless steel fluid recipe=' + endWet.chances.join(',') +
         ' MV vanadium base=' + vanadium.chances.join(',') + ' durations=' + base.duration + '/' + wet.duration)
     } catch (e) {
       check(SCOPE, 'bit_wear', false, 'exception: ' + e)
@@ -855,7 +893,9 @@
   var BIT_BRONZE = 'grindless:bronze_drill_bit'
   var BIT_STEEL = 'grindless:steel_drill_bit'
   var BIT_VANADIUM = 'grindless:vanadium_steel_drill_bit'
-  var BIT_TITANIUM = 'grindless:titanium_drill_bit'
+  var BIT_STAINLESS = 'grindless:stainless_steel_drill_bit'
+  // the old HV bit: HV has no titanium (DECISIONS.md, 2026-10-24); registered for old worlds, hidden, no recipe takes it
+  var LEGACY_BIT = 'grindless:titanium_drill_bit'
 
   // a bit stack is 16: the 32 bits of 32 runs at once are two stacks in two slots of the bus
   function bitStacks(id, total) {
@@ -897,43 +937,38 @@
         verify: veinVerify('iron', 'grindless:vein_drilling/mv/iron_vanadium_steel', 2, 0, 32)
       },
       {
-        // the titanium bit without fluid: 3.75 ores per run
-        name: 'titanium', ticks: 260,
-        items: drillItems('grindless:vein_sample_iron', BIT_TITANIUM), circuit: 0, fluids: [],
-        verify: veinVerify('iron', 'grindless:vein_drilling/hv/iron_titanium', 3, 0, 32)
+        // the stainless steel bit without fluid: 3.75 ores per run
+        name: 'stainless', ticks: 260,
+        items: drillItems('grindless:vein_sample_iron', BIT_STAINLESS), circuit: 0, fluids: [],
+        verify: veinVerify('iron', 'grindless:vein_drilling/hv/iron_stainless_steel', 3, 0, 32)
       },
       {
-        // the titanium bit with drilling fluid: +50 % ore, half the wear; the base recipe waits
-        name: 'titanium_fluid', ticks: 260,
-        items: drillItems('grindless:vein_sample_iron', BIT_TITANIUM), circuit: 0, fluids: fluid,
-        verify: veinVerify('iron', 'grindless:vein_drilling/hv/iron_titanium_fluid', 5, 50, 32)
+        // the stainless steel bit with drilling fluid: +50 % ore, half the wear; the base recipe waits
+        name: 'stainless_fluid', ticks: 260,
+        items: drillItems('grindless:vein_sample_iron', BIT_STAINLESS), circuit: 0, fluids: fluid,
+        verify: veinVerify('iron', 'grindless:vein_drilling/hv/iron_stainless_steel_fluid', 5, 50, 32)
       },
       {
-        // a Nether vein with the titanium bit: only possible with drilling fluid
-        name: 'titanium_nether', ticks: 260,
-        items: drillItems('grindless:vein_sample_sulfur', BIT_TITANIUM), circuit: 0, fluids: fluid,
-        verify: veinVerify('sulfur', 'grindless:vein_drilling/hv/sulfur_titanium_fluid', 5, 50, 32)
+        // a Nether vein with the stainless steel bit: only possible with drilling fluid
+        name: 'stainless_nether', ticks: 260,
+        items: drillItems('grindless:vein_sample_sulfur', BIT_STAINLESS), circuit: 0, fluids: fluid,
+        verify: veinVerify('sulfur', 'grindless:vein_drilling/hv/sulfur_stainless_steel_fluid', 5, 50, 32)
       },
       {
-        // End veins: always with drilling fluid, with the titanium bit or the vanadium steel one (until titanium flows)
-        name: 'end_bauxite_titanium', ticks: 260,
-        items: drillItems('grindless:vein_sample_bauxite_end', BIT_TITANIUM), circuit: 0, fluids: fluid,
-        verify: veinVerify('bauxite_end', 'grindless:vein_drilling/hv/bauxite_end_titanium_fluid', 5, 50, 32)
+        // End veins: always with drilling fluid, with the stainless steel bit or the vanadium steel one
+        name: 'end_bauxite_stainless', ticks: 260,
+        items: drillItems('grindless:vein_sample_bauxite_end', BIT_STAINLESS), circuit: 0, fluids: fluid,
+        verify: veinVerify('bauxite_end', 'grindless:vein_drilling/hv/bauxite_end_stainless_steel_fluid', 5, 50, 32)
       },
       {
         name: 'end_magnetite_vanadium', ticks: 260,
         items: drillItems('grindless:vein_sample_magnetite_end', BIT_VANADIUM), circuit: 0, fluids: fluid,
-        verify: veinVerify('magnetite_end', 'grindless:vein_drilling/hv/magnetite_end_vanadium_steel_fluid', 5, 50, 32)
+        verify: veinVerify('magnetite_end', 'grindless:vein_drilling/mv/magnetite_end_vanadium_steel_fluid', 5, 50, 32)
       },
       {
-        name: 'end_scheelite_vanadium', ticks: 260,
-        items: drillItems('grindless:vein_sample_scheelite', BIT_VANADIUM), circuit: 0, fluids: fluid,
-        verify: veinVerify('scheelite', 'grindless:vein_drilling/hv/scheelite_vanadium_steel_fluid', 5, 50, 32)
-      },
-      {
-        name: 'end_sheldonite_titanium', ticks: 260,
-        items: drillItems('grindless:vein_sample_sheldonite', BIT_TITANIUM), circuit: 0, fluids: fluid,
-        verify: veinVerify('sheldonite', 'grindless:vein_drilling/hv/sheldonite_titanium_fluid', 5, 50, 32)
+        name: 'end_sheldonite_stainless', ticks: 260,
+        items: drillItems('grindless:vein_sample_sheldonite', BIT_STAINLESS), circuit: 0, fluids: fluid,
+        verify: veinVerify('sheldonite', 'grindless:vein_drilling/hv/sheldonite_stainless_steel_fluid', 5, 50, 32)
       },
       {
         // the veins other mods add: GT--'s kaolinite is an Overworld vein veins.json does not list: steam numbers, steam recipe id
@@ -943,25 +978,25 @@
       },
       {
         // GTCA's germanite (Nether) and zirconium (End): their main ores are gtca:raw_* items, not gtceu: ones
-        name: 'nether_germanite_titanium', ticks: 260,
-        items: drillItems('grindless:vein_sample_germanite', BIT_TITANIUM), circuit: 0, fluids: fluid,
-        verify: veinVerify('germanite', 'grindless:vein_drilling/hv/germanite_titanium_fluid', 5, 50, 32)
+        name: 'nether_germanite_stainless', ticks: 260,
+        items: drillItems('grindless:vein_sample_germanite', BIT_STAINLESS), circuit: 0, fluids: fluid,
+        verify: veinVerify('germanite', 'grindless:vein_drilling/hv/germanite_stainless_steel_fluid', 5, 50, 32)
       },
       {
-        name: 'end_zirconium_titanium', ticks: 260,
-        items: drillItems('grindless:vein_sample_zirconium', BIT_TITANIUM), circuit: 0, fluids: fluid,
-        verify: veinVerify('zirconium', 'grindless:vein_drilling/hv/zirconium_titanium_fluid', 4, 50, 32)
+        name: 'end_zirconium_stainless', ticks: 260,
+        items: drillItems('grindless:vein_sample_zirconium', BIT_STAINLESS), circuit: 0, fluids: fluid,
+        verify: veinVerify('zirconium', 'grindless:vein_drilling/hv/zirconium_stainless_steel_fluid', 4, 50, 32)
       },
       {
         // the same Nether sample without fluid must not run
         name: 'nether_no_fluid', ticks: 60,
-        items: drillItems('grindless:vein_sample_sulfur', BIT_TITANIUM), circuit: 0, fluids: [],
+        items: drillItems('grindless:vein_sample_sulfur', BIT_STAINLESS), circuit: 0, fluids: [],
         verify: noRecipe
       },
       {
         // End veins need drilling fluid too: this is what keeps the steam drill (no fluid hatch) out of them
         name: 'end_no_fluid', ticks: 60,
-        items: drillItems('grindless:vein_sample_bauxite_end', BIT_TITANIUM), circuit: 0, fluids: [],
+        items: drillItems('grindless:vein_sample_bauxite_end', BIT_STAINLESS), circuit: 0, fluids: [],
         verify: noRecipe
       },
       {
@@ -973,10 +1008,10 @@
     ]
     if (deep !== null) {
       list.splice(6, 0, {
-        // a deep vein (steel bit or better) with the titanium bit
-        name: 'titanium_deep', ticks: 260,
-        items: drillItems(deep.sample, BIT_TITANIUM), circuit: 0, fluids: [],
-        verify: veinVerify(deep.id, 'grindless:vein_drilling/hv/' + deep.id + '_titanium', 3, 0, 32)
+        // a deep vein (steel bit or better) with the stainless steel bit
+        name: 'stainless_deep', ticks: 260,
+        items: drillItems(deep.sample, BIT_STAINLESS), circuit: 0, fluids: [],
+        verify: veinVerify(deep.id, 'grindless:vein_drilling/hv/' + deep.id + '_stainless_steel', 3, 0, 32)
       })
     }
     return list
@@ -1142,15 +1177,15 @@
     var cases = []
     var fluid = [{ id: DRILLING_FLUID, mb: 1000 }]
     global.grindless.hv.allVeins().forEach(function (v) {
-      ;['bronze', 'steel', 'vanadium_steel', 'titanium'].forEach(function (kind) {
-        // End veins: only the vanadium steel and the titanium bit have recipes
+      ;['bronze', 'steel', 'vanadium_steel', 'stainless_steel'].forEach(function (kind) {
+        // End veins: only the vanadium steel and the stainless steel bit have recipes
         if (v.end && (kind === 'bronze' || kind === 'steel')) return
         if (kind === 'bronze' && v.steelOnly) return
-        var bit = kind === 'bronze' ? BIT_BRONZE : (kind === 'steel' ? BIT_STEEL : (kind === 'vanadium_steel' ? BIT_VANADIUM : BIT_TITANIUM))
+        var bit = kind === 'bronze' ? BIT_BRONZE : (kind === 'steel' ? BIT_STEEL : (kind === 'vanadium_steel' ? BIT_VANADIUM : BIT_STAINLESS))
         var items = [{ id: v.sample, n: 1 }, { id: bit, n: 4 }]
-        // recipe folder: steam recipes have none (base) or lv/ (fluid), the vanadium steel bit's mv/, the titanium bit's and
-        // everything on the End veins hv/
-        var tier = (v.end || kind === 'titanium') ? 'hv' : (kind === 'vanadium_steel' ? 'mv' : 'lv')
+        // recipe folder: steam recipes have none (base) or lv/ (fluid), the vanadium steel bit's mv/ (End veins too: the End is MV),
+        // the stainless steel bit's hv/
+        var tier = kind === 'stainless_steel' ? 'hv' : (kind === 'vanadium_steel' ? 'mv' : 'lv')
         // Nether and End veins have no base recipe: they always need drilling fluid
         if (!v.nether && !v.end) {
           cases.push({ label: v.id + '+' + kind, items: items, circuit: 0, fluids: [],

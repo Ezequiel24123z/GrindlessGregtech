@@ -1,15 +1,15 @@
-// Ejecuta los pasos de análisis y evalúa los objetivos.
-//   Paso "gate"  : todo el mundo (manual + automático) -> ¿se puede fabricar la puerta sin comandos?
-//   Paso "auto"  : sin recolección manual salvo el arranque declarado -> ¿existe generación automática sostenible?
+// Runs the analysis passes and evaluates the targets.
+//   "gate" pass  : the whole world (manual + auto) -> can the gate be made with no commands?
+//   "auto" pass  : no manual gathering except the declared bootstrap -> is there sustainable auto-generation?
 import { blockCosts, groundedSustain, lfp } from './engine.mjs';
 import { makeRootCost } from './explain.mjs';
 import { asArray, makeGlobMatcher } from './util.mjs';
 
 export const STATUS = {
-  SUSTAINED: 'sustained', // se regenera sola
-  FINITE: 'finite', // solo con una fuente que se agota (minero de vapor)
-  BOOTSTRAP: 'bootstrap', // solo gracias al arranque manual, no se repone
-  MANUAL: 'manual', // solo a mano
+  SUSTAINED: 'sustained', // regenerates on its own
+  FINITE: 'finite', // only with a source that runs out (the steam miner)
+  BOOTSTRAP: 'bootstrap', // only thanks to the manual bootstrap, not resupplied
+  MANUAL: 'manual', // only by hand
   UNREACHABLE: 'unreachable',
 };
 const RANK = [STATUS.UNREACHABLE, STATUS.MANUAL, STATUS.BOOTSTRAP, STATUS.FINITE, STATUS.SUSTAINED];
@@ -24,8 +24,8 @@ export function runPasses(model) {
 
   const enAuto = new Uint8Array(nR).fill(1);
   const enAutoInf = new Uint8Array(nR).fill(1);
-  // la recolección manual que exige un objeto (la llave del End) no es una fuente en automático: sus recursos valen como arranque
-  // (una sola vez) si la puerta llega a ese objeto
+  // manual gathering that requires an item first (the End key) isn't a source in auto: its resources count as a
+  // bootstrap (one-off) if the gate reaches that item
   const dynBootstrap = [];
   g.rules.forEach((r, i) => {
     if (r.kind === 'machine-build') {
@@ -44,10 +44,10 @@ export function runPasses(model) {
   for (const k of model.facts.auto) permanent[k] = 1;
   const sustain = (enabled) => {
     const r = groundedSustain(g, { universe: prod.reached, enabled, capOk: gate.reached, permanent });
-    // inS = claves sostenidas, ruleLive = reglas que se pueden mantener, supportRule = la regla que las funda.
+    // inS = sustained keys, ruleLive = rules that can be kept up, supportRule = the rule that founds them.
     return { inS: r.G.reached, ruleLive: r.G.fired, supportRule: r.G.via, level: r.G.level, G: r.G, S: r.S, rounds: r.rounds };
   };
-  // Un objetivo puede pedir que se sostenga "sin" ciertas reglas (globs sobre sus nombres): su propia vista del paso auto.
+  // A target can ask to be sustained "without" certain rules (globs over their names): its own view of the auto pass.
   const views = new Map();
   const viewFor = (without) => {
     const list = [...(without || [])].sort();
@@ -69,8 +69,8 @@ export function runPasses(model) {
     return views.get(sig);
   };
   const base = viewFor([]);
-  // Lo mismo para la puerta: `without` en un objetivo de la puerta la recalcula sin esas reglas (p. ej. "el titanio no se
-  // consigue sin el congelador de vacío": expect "unreachable" + without ["construir:gtceu:vacuum_freezer"]).
+  // Same for the gate: `without` on a gate target recalculates it without those rules (e.g. "titanium isn't obtained
+  // without the vacuum freezer": expect "unreachable" + without ["build:gtceu:vacuum_freezer"]).
   const gateViews = new Map();
   const gateViewFor = (without) => {
     const list = [...(without || [])].sort();
@@ -99,7 +99,7 @@ export function keyStatus(res, k, view = res) {
 
 const betterThan = (a, b) => RANK.indexOf(a) > RANK.indexOf(b);
 
-/** Una receta "sirve" en un paso si todas sus ranuras se cumplen. */
+/** A recipe "works" in a pass if all of its slots are met. */
 function recipeUsable(model, res, mode, r, view) {
   if (mode === 'gate') return (view && view.gate ? view.gate : res.gate).fired[r] === 1;
   return view.susInf.ruleLive[r] === 1;
@@ -120,14 +120,14 @@ function recipeMatches(model, rule, t, nameMatch) {
 }
 
 /**
- * `machineless` (comprobaciones de fuga de recetas de addons): ¿se podría completar la receta si su máquina existiera?
- * Se ignora la ranura de la máquina (el controlador de un addon puede no tener receta, o aparecer más tarde) y se exige lo demás:
- * que una máquina registrada la ejecute, que quepa en `maxEUt` y que todas sus entradas y condiciones se alcancen.
- * Devuelve 'usable' o el motivo: 'sin-maquina' | 'eut' | 'entradas'.
+ * `machineless` (leak checks for addon recipes): could the recipe be completed if its machine existed?
+ * The machine slot is ignored (an addon's controller may have no recipe, or appear later) and everything else is
+ * required: a registered machine runs it, it fits in `maxEUt`, and all its inputs and conditions are reached.
+ * Returns 'usable' or the reason: 'no-machine' | 'eut' | 'inputs'.
  */
 function machinelessVerdict(model, res, mode, rule, view, t) {
   if (t.maxEUt !== undefined && rule.meta.eut > t.maxEUt) return 'eut';
-  if (model.runnersOf(rule.type).length === 0) return 'sin-maquina';
+  if (model.runnersOf(rule.type).length === 0) return 'no-machine';
   const sus = mode === 'auto' ? view.susInf : null;
   const gate = mode === 'gate' ? (view && view.gate ? view.gate : res.gate) : null;
   for (const slot of rule.slots) {
@@ -135,24 +135,63 @@ function machinelessVerdict(model, res, mode, rule, view, t) {
     const ok = mode === 'gate'
       ? slot.alts.some((a) => gate.reached[a] === 1)
       : slot.alts.some((a) => sus.inS[a] === 1 || (slot.cap && res.gate.reached[a] === 1));
-    if (!ok) return 'entradas';
+    if (!ok) return 'inputs';
   }
   return 'usable';
 }
 
 /**
- * Evalúa un objetivo en el modo 'gate' (alcanzable a mano) o 'auto' (sostenible).
- * Devuelve {target, ok, status, key, detail}.
+ * `kind: "site"` (static: the same in every pass, whether or not the recipes can be completed): every recipe of `type`/`types`
+ * and/or with an id matching `recipe` (globs) carries dimension conditions, all of them among `dimensions` (GTM ORs a recipe's
+ * dimension conditions), and no reversed one. It checks the "Site machines" rule (the Moon's machines only run on the Moon) and
+ * the fuels' allowlist of air dimensions. `exact: true`: every recipe names every dimension of the list; `allowAnywhere`: id
+ * globs of recipes that may carry no dimension condition (fuels that carry their own oxidizer). No matching recipe = FAIL.
+ */
+function evalSite(model, t) {
+  const g = model.g;
+  const types = new Set([...asArray(t.type), ...asArray(t.types)]);
+  const nameMatch = t.recipe ? makeGlobMatcher(asArray(t.recipe)) : null;
+  const anywhere = makeGlobMatcher(asArray(t.allowAnywhere));
+  const site = asArray(t.dimensions);
+  const defined = [];
+  const offenders = [];
+  let unconditioned = 0;
+  for (const rule of g.rules) {
+    if (rule.kind !== 'recipe' || (types.size > 0 && !types.has(rule.type)) || (nameMatch && !nameMatch(rule.name))) continue;
+    defined.push(rule.id);
+    const dims = rule.meta.dims || [];
+    const notDims = rule.meta.notDims || [];
+    let why = null;
+    if (notDims.length > 0) why = `a reversed condition (outside ${notDims.join(', ')}): with GTM's OR it holds almost everywhere`;
+    else if (dims.length === 0) {
+      if (anywhere(rule.name)) unconditioned++;
+      else why = 'no dimension condition: it runs anywhere';
+    } else {
+      const extra = dims.filter((d) => !site.includes(d));
+      const missing = t.exact ? site.filter((d) => !dims.includes(d)) : [];
+      if (extra.length > 0) why = `also runs in ${extra.join(', ')}`;
+      else if (missing.length > 0) why = `doesn't run in ${missing.join(', ')}`;
+    }
+    if (why) offenders.push({ rule: rule.id, why });
+  }
+  const ok = defined.length > 0 && offenders.length === 0;
+  return { target: t, view: null, kind: 'site', ok, status: ok ? STATUS.SUSTAINED : STATUS.UNREACHABLE, defined, offenders, unconditioned, key: null };
+}
+
+/**
+ * Evaluates a target in 'gate' mode (reachable by hand) or 'auto' mode (sustainable).
+ * Returns {target, ok, status, key, detail}.
  */
 export function evalTarget(model, res, t, mode) {
+  if (t.kind === 'site') return evalSite(model, t);
   const g = model.g;
-  // `without` (globs sobre nombres de regla): en automático, una vista del paso auto; en la puerta, el alcance recalculado sin esas reglas
+  // `without` (globs over rule names): in auto, a view of the auto pass; in the gate, reachability recalculated without those rules
   const view = mode === 'auto' ? res.viewFor(t.without) : res.gateViewFor(t.without);
   const gateOf = view && view.gate ? view.gate : res.gate;
-  // Comprobaciones de fuga: en la puerta (expect "unreachable") no debe poder conseguirse ni a mano; en automático
-  // (expect "not-automatic") no debe poder sostenerse solo (puede existir como bloque puesto una vez, no como recurso repuesto).
+  // Leak checks: in the gate (expect "unreachable") it must not be obtainable even by hand; in auto
+  // (expect "not-automatic") it must not be able to sustain itself alone (it may exist as a block placed once, not as a resupplied resource).
   const neg = (mode === 'gate' && t.expect === 'unreachable') || (mode === 'auto' && t.expect === 'not-automatic');
-  const resolveKeys = (x) => asArray(x).flatMap((s) => model.resolve(s, `objetivo ${t.id}`));
+  const resolveKeys = (x) => asArray(x).flatMap((s) => model.resolve(s, `target ${t.id}`));
   const statusOf = (k) => {
     if (mode === 'gate') return gateOf.reached[k] ? STATUS.MANUAL : STATUS.UNREACHABLE;
     return keyStatus(res, k, view);
@@ -160,8 +199,8 @@ export function evalTarget(model, res, t, mode) {
   const okStatus = (s) => (mode === 'gate' ? s !== STATUS.UNREACHABLE : s === STATUS.SUSTAINED);
 
   if ((t.type || t.recipe) && (t.kind === 'recipe' || !t.item)) {
-    // `recipe`: globs sobre el id de la receta (solo o junto a `type`). `expect` vale aquí también: una comprobación de fuga
-    // de una receta concreta ("la línea de platino de un addon no se puede usar") es PASS si ninguna coincidencia se puede usar.
+    // `recipe`: globs over the recipe's id (alone or together with `type`). `expect` also applies here: a leak check
+    // on one specific recipe ("an addon's platinum line can't be used") is PASS if no match can be used.
     const nameMatch = t.recipe ? makeGlobMatcher(asArray(t.recipe)) : null;
     const hits = [];
     const defined = [];
@@ -209,8 +248,8 @@ export function evalTarget(model, res, t, mode) {
     }
   }
   if (neg) {
-    // Comprobación de fuga: el objeto NO debe poder conseguirse en este tier (p. ej. el silicio de GT antes de MV) o,
-    // en automático, no debe poder producirse solo (p. ej. la lava: es combustible de caldera, sería un bucle de energía).
+    // Leak check: the item must NOT be obtainable in this tier (e.g. GT's silicon before MV), or,
+    // in auto, must not be able to produce itself alone (e.g. lava: it's boiler fuel, that would be an energy loop).
     const leaked = bestKey !== null && (mode === 'gate'
       ? bestStatus !== STATUS.UNREACHABLE
       : bestStatus === STATUS.SUSTAINED || bestStatus === STATUS.FINITE);
@@ -219,13 +258,13 @@ export function evalTarget(model, res, t, mode) {
   return { target: t, view, kind: t.fluid ? 'fluid' : 'item', ok: bestKey !== null && okStatus(bestStatus), status: bestStatus, key: bestKey, candidates: items.length };
 }
 
-/** Costes de bloqueo para una máscara (gate: alcance manual; auto: lo sostenible). Se calculan bajo demanda. */
+/** Blocking costs for a mask (gate: manual reach; auto: what's sustainable). Computed on demand. */
 export function blockerFor(model, res, mode, cache, view = res) {
   const ck = mode === 'gate' ? `gate|${view.sig || ''}` : `auto|${view.sig || ''}`;
   if (cache.has(ck)) return cache.get(ck);
   let out;
   if (mode === 'gate') {
-    // `view` es la propia `res` (puerta completa) o una vista de la puerta sin ciertas reglas (`all` = reglas activas)
+    // `view` is `res` itself (the whole gate) or a view of the gate without certain rules (`all` = active rules)
     out = {
       ...blockCosts(model.g, { mask: view.gate.reached, enabled: view.all, rootCost: makeRootCost(model, view.all) }),
       mask: view.gate.reached, capMask: null,

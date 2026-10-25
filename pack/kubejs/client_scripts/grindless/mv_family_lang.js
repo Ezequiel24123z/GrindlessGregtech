@@ -13,7 +13,7 @@ ClientEvents.lang('en_us', event => {
 
     add('grindless.machine.mv_vein_drill.tooltip.0', 'Drills the vein marked by the vein sample, over and over. It runs every Steam and LV Vein Drill recipe, up to 16 at once.')
     add('grindless.machine.mv_vein_drill.tooltip.1', 'Runs as many bores at once as its energy hatches allow (voltage / 8 EU/t, up to 16): one MV hatch fills all 16, a second one is a voltage tier up and halves the time.')
-    add('grindless.machine.mv_vein_drill.tooltip.2', 'The vanadium steel bit only works here: it wears out in about 1% of the runs (0.5% with drilling fluid). Drilling fluid in the fluid hatch: +50% ore. Nether veins only drill with it.')
+    add('grindless.machine.mv_vein_drill.tooltip.2', 'The vanadium steel bit only works here: it wears out in about 1% of the runs (0.5% with drilling fluid). Drilling fluid in the fluid hatch: +50% ore. Nether and End veins only drill with it.')
     add('grindless.machine.mv_vein_drill.tooltip.3', 'Needs 1 or 2 energy hatches, 1 input bus, 2 output buses and 1 input hatch.')
 
     add('grindless.machine.mv_greenhouse.tooltip.0', 'Grows trees, rubber trees, crops, mushrooms, berries, vines and flowers with a plant that is never used up. It runs every Steam and LV Greenhouse recipe.')
@@ -33,7 +33,7 @@ ClientEvents.lang('es_es', event => {
 
     add('grindless.machine.mv_vein_drill.tooltip.0', 'Perfora la veta que marca la muestra, una y otra vez. Hace todas las recetas de las perforadoras de vapor y LV, hasta 16 a la vez.')
     add('grindless.machine.mv_vein_drill.tooltip.1', 'Hace tantos ciclos a la vez como permitan sus escotillas de energía (voltaje / 8 EU/t, hasta 16): una escotilla MV llena los 16 y una segunda sube un escalón de voltaje y reduce el tiempo a la mitad.')
-    add('grindless.machine.mv_vein_drill.tooltip.2', 'La broca de acero vanádico solo funciona aquí: se gasta en cerca del 1 % de los ciclos (0,5 % con lodo de perforación). Con lodo en la escotilla de fluidos: +50 % de mineral. Las vetas del Nether solo se perforan con él.')
+    add('grindless.machine.mv_vein_drill.tooltip.2', 'La broca de acero vanádico solo funciona aquí: se gasta en cerca del 1 % de los ciclos (0,5 % con lodo de perforación). Con lodo en la escotilla de fluidos: +50 % de mineral. Las vetas del Nether y del End solo se perforan con él.')
     add('grindless.machine.mv_vein_drill.tooltip.3', 'Necesita 1 o 2 escotillas de energía, 1 bus de entrada, 2 buses de salida y 1 escotilla de entrada.')
 
     add('grindless.machine.mv_greenhouse.tooltip.0', 'Cultiva árboles, árboles de caucho, cosechas, setas, bayas, enredaderas y flores con una planta que no se gasta. Hace todas las recetas de los invernaderos de vapor y LV.')

@@ -1,6 +1,6 @@
 tools/bin/
 *.log
-# Material de consulta que no debe entrar al repo
+# Reference material that must not enter the repo
 /*.zip
 /*_src/
 /*.snbt

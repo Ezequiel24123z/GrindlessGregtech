@@ -1,22 +1,23 @@
 {
+	autofocus_id: "69BDA9FBB0EB66F2"
 	default_hide_dependency_lines: false
 	default_quest_shape: ""
 	filename: "welcome"
 	group: ""
 	icon: "ftbquests:book"
-	id: "AF8F1F5704361EE3"
+	id: "2F8F1F5704361EE3"
 	order_index: 0
 	quest_links: [ ]
 	quests: [
 		{
 			description: [
-				"This book tracks what you have done and nudges you toward what comes next."
-				"Nothing in here is mandatory reading. Lose the book and you can always make another - it's cheap on purpose."
+				"You start on Earth with nothing. Far ahead, past the last era, sits &6Sagittarius A*&r, the black hole at the centre of the galaxy. Every tab of this book is one step closer."
+				"Nothing here locks a recipe. Lost the book? Paper and any plank make a new one."
 			]
-			icon: "minecraft:bread"
-			id: "E9BDA9FBB0EB66F2"
+			icon: "ftbquests:book"
+			id: "69BDA9FBB0EB66F2"
 			rewards: [
-				{ count: 8, id: "A1A6FB493B3D6DA8", item: "minecraft:bread", type: "item" }
+				{ count: 8, id: "21A6FB493B3D6DA8", item: "minecraft:bread", type: "item" }
 				{ count: 16, id: "4FE190B37FB472CA", item: "minecraft:torch", type: "item" }
 			]
 			shape: "rsquare"
@@ -27,46 +28,632 @@
 			y: 0.0d
 		}
 		{
-			dependencies: ["E9BDA9FBB0EB66F2"]
+			dependencies: ["69BDA9FBB0EB66F2"]
 			description: [
-				"The &6Void Key&r drops you into an empty dimension with a small platform under your feet. Good for testing builds without touching your real base."
-				"Use the key again and you're back on the Overworld, right where you left."
+				"Hover an item in EMI: &6R&r shows how it is made, &6U&r what it is used for. GregTech recipes name the machine that runs them."
+				"A multiblock shows its whole structure on its controller's EMI page."
 			]
-			icon: "grindless:void_key"
-			id: "F194C28F070B38A2"
-			rewards: [{ id: "B6BF9B1736D3E98E", item: "grindless:void_key", type: "item" }]
-			tasks: [{ id: "62E189D85E4FDE7D", type: "checkmark" }]
-			title: "Key to the Void"
-			x: 3.0d
-			y: -2.0d
+			icon: "minecraft:enchanted_book"
+			id: "71CCAD27C64BD720"
+			rewards: [{ id: "23DF2A88BB12615B", type: "xp", xp: 20 }]
+			shape: "circle"
+			size: 0.75d
+			tasks: [{ id: "30EDBCE0EB25BB90", type: "checkmark" }]
+			title: "Read the Recipes"
+			x: 2.0d
+			y: -1.5d
 		}
 		{
-			dependencies: ["E9BDA9FBB0EB66F2"]
+			dependencies: ["69BDA9FBB0EB66F2"]
 			description: [
-				"The &6Flatland Key&r sends you to a stone world flattened out for building - no hills, no caves, just room for a factory."
-				"Same deal as the other key: use it again to come back to the Overworld."
+				"The &6Void Key&r takes you to an empty dimension and puts a small platform under your feet. Use it again to come back to where you left the Overworld."
+				"Lose it and you can craft another from flint, a stick and glass."
+			]
+			icon: "grindless:void_key"
+			id: "7194C28F070B38A2"
+			optional: true
+			rewards: [{ id: "36BF9B1736D3E98E", item: "grindless:void_key", type: "item" }]
+			size: 0.75d
+			tasks: [{ id: "62E189D85E4FDE7D", type: "checkmark" }]
+			title: "Key to the Void"
+			x: 2.0d
+			y: 1.5d
+		}
+		{
+			dependencies: ["69BDA9FBB0EB66F2"]
+			description: [
+				"The &6Flatland Key&r opens a flat stone world with nothing in the way: room for a factory on level ground. It works like the Void Key, and flint, a stick and dirt make a spare."
 			]
 			icon: "grindless:flat_key"
 			id: "0348DB79BD43D043"
-			rewards: [{ id: "9AFB1627ED225273", item: "grindless:flat_key", type: "item" }]
-			tasks: [{ id: "821707FC93BB804C", type: "checkmark" }]
+			optional: true
+			rewards: [{ id: "1AFB1627ED225273", item: "grindless:flat_key", type: "item" }]
+			size: 0.75d
+			tasks: [{ id: "021707FC93BB804C", type: "checkmark" }]
 			title: "Key to the Flatlands"
-			x: 3.0d
-			y: 2.0d
+			x: 2.0d
+			y: 3.0d
 		}
 		{
-			dependencies: ["E9BDA9FBB0EB66F2"]
+			dependencies: ["69BDA9FBB0EB66F2"]
 			description: [
-				"Press &6R&r or &6U&r on any item in EMI to see how it's made or what it's used for - GregTech recipes always point straight at the machine that runs them."
-				"That's really the whole trick to this pack: when in doubt, check EMI."
+				"Logs, a crafting table and stone tools, as in any world. Vanilla tools are enough for the first ore; GregTech's own are a few steps away."
 			]
-			icon: "minecraft:enchanted_book"
-			id: "F1CCAD27C64BD720"
-			rewards: [{ id: "A3DF2A88BB12615B", type: "xp", xp: 20 }]
-			tasks: [{ id: "B0EDBCE0EB25BB90", type: "checkmark" }]
-			title: "Read the Recipes"
-			x: 3.0d
+			icon: "minecraft:oak_log"
+			id: "3BB2DAC36CB01A7B"
+			rewards: [{ count: 4, id: "47AC4C8B5FE96F75", item: "minecraft:spruce_sapling", type: "item" }]
+			tasks: [
+				{
+					icon: "minecraft:oak_log"
+					id: "1279726F6E6D303E"
+					item: {
+						Count: 1b
+						id: "itemfilters:tag"
+						tag: { value: "minecraft:logs" }
+					}
+					title: "Any Log"
+					type: "item"
+				}
+				{ id: "01DA0D7DE0C42DFE", item: "minecraft:cobblestone", type: "item" }
+			]
+			title: "Wood and Stone"
+			x: 2.0d
+			y: 0.0d
+		}
+		{
+			dependencies: ["3BB2DAC36CB01A7B"]
+			description: [
+				"Rubber trees grow in forests, jungles and swamps, and breaking a rubber log usually drops &6sticky resin&r. It becomes rubber, circuit boards and torches."
+				"Gather some by hand now; the steam greenhouse grows it for you later."
+			]
+			icon: "gtceu:sticky_resin"
+			id: "5DCCA11440887F89"
+			rewards: [{ id: "60A4085073C91D4B", type: "xp", xp: 25 }]
+			tasks: [{ count: 16L, id: "159456B66255575F", item: "gtceu:sticky_resin", type: "item" }]
+			title: "Sticky Resin"
+			x: 4.0d
+			y: -1.5d
+		}
+		{
+			dependencies: ["3BB2DAC36CB01A7B"]
+			description: [
+				"Vanilla ores don't spawn here. All ore sits in big GregTech veins a few chunks apart, each with its own mix of metals."
+				"Small rocks on the ground name the vein underneath; right-click one to put it on your map. A raw ore's EMI page shows its vein: depth, neighbours and how common it is."
+			]
+			icon: "gtceu:prospector.lv"
+			id: "345C4D73090CB5E2"
+			rewards: [{ id: "2489A56E439E1302", type: "xp", xp: 10 }]
+			shape: "circle"
+			tasks: [{ id: "22508DCBFF3F0DE6", type: "checkmark" }]
+			title: "Ore Veins"
+			x: 4.0d
+			y: 0.0d
+		}
+		{
+			dependencies: ["345C4D73090CB5E2"]
+			description: [
+				"Coal veins sit close to the surface. Raw coal smelts into coal; furnaces and boilers burn it, and the coke oven turns it into coke for steel."
+			]
+			icon: "minecraft:coal"
+			id: "117BE5D9218C383A"
+			rewards: [{ id: "385CC1FDE44EF6FD", type: "xp", xp: 10 }]
+			tasks: [{ id: "282A7A450EE34DDE", item: "minecraft:coal", type: "item" }]
+			title: "Coal"
+			x: 6.0d
+			y: 1.5d
+		}
+		{
+			dependencies: ["345C4D73090CB5E2"]
+			description: [
+				"Iron hides in several ores: goethite, limonite and hematite in the iron vein, magnetite in its own vein with a little gold. All of them smelt straight into iron ingots."
+			]
+			icon: "minecraft:iron_ingot"
+			id: "436EF55FE0284C3E"
+			rewards: [{ count: 8, id: "3B1606D987A55117", item: "minecraft:coal", type: "item" }]
+			tasks: [
+				{
+					icon: "gtceu:raw_goethite"
+					id: "52F333756D09DC7C"
+					item: {
+						Count: 1b
+						id: "itemfilters:or"
+						tag: {
+							items: [
+								{ Count: 1b, id: "minecraft:raw_iron" }
+								{ Count: 1b, id: "gtceu:raw_goethite" }
+								{ Count: 1b, id: "gtceu:raw_yellow_limonite" }
+								{ Count: 1b, id: "gtceu:raw_hematite" }
+								{ Count: 1b, id: "gtceu:raw_magnetite" }
+							]
+						}
+					}
+					title: "Any Raw Iron Ore"
+					type: "item"
+				}
+				{ id: "0226810E66FAD00E", item: "minecraft:iron_ingot", type: "item" }
+			]
+			title: "Iron from the Veins"
+			x: 6.0d
+			y: 0.0d
+		}
+		{
+			dependencies: ["436EF55FE0284C3E"]
+			description: [
+				"GregTech tools stay in the crafting grid and only lose durability. The hammer comes first: put it above ingots and you get a plate, and plates are in nearly every recipe from here on."
+			]
+			icon: "gtceu:iron_hammer"
+			id: "132005EEFEDA0317"
+			rewards: [{ id: "180A5E60B09001C2", type: "xp", xp: 20 }]
+			tasks: [
+				{
+					icon: "gtceu:iron_hammer"
+					id: "54B80494ACA4B812"
+					item: {
+						Count: 1b
+						id: "itemfilters:tag"
+						tag: { value: "gtceu:tools/crafting_hammers" }
+					}
+					title: "Any GregTech Hammer"
+					type: "item"
+				}
+			]
+			title: "Your First Hammer"
+			x: 8.0d
+			y: 0.0d
+		}
+		{
+			dependencies: ["132005EEFEDA0317"]
+			description: [
+				"Every GregTech tool, in neutronium, unbreakable. Crafting never wears them down, so tool grind is off the table for the whole pack, and the mining tools pull drops straight into your inventory."
+				"GregTech makes no neutronium mortar, mallet or plunger: those three come in naquadah and rubber, unbreakable too."
+			]
+			icon: "gtceu:neutronium_wrench"
+			id: "047B55ED9C952BC9"
+			rewards: [
+				{
+					id: "6CAA51C49EA8993F"
+					item: {
+						Count: 1b
+						id: "gtceu:neutronium_hammer"
+						tag: {
+							Damage: 0
+							DisallowContainerItem: 0b
+							GT.Behaviours: { RelocateMinedBlocks: 1b, RelocateMobDrops: 1b }
+							GT.Tool: { MaxDamage: 65534 }
+							HideFlags: 2
+							Unbreakable: 1b
+						}
+					}
+					type: "item"
+				}
+				{
+					id: "5C45F09B137014EC"
+					item: {
+						Count: 1b
+						id: "gtceu:neutronium_wrench"
+						tag: {
+							Damage: 0
+							DisallowContainerItem: 0b
+							GT.Behaviours: { Mode: 2b, RelocateMinedBlocks: 1b, RelocateMobDrops: 1b }
+							GT.Tool: { MaxDamage: 65534 }
+							HideFlags: 2
+							Unbreakable: 1b
+						}
+					}
+					type: "item"
+				}
+				{
+					id: "15C4343DC3E86D51"
+					item: {
+						Count: 1b
+						id: "gtceu:neutronium_file"
+						tag: {
+							Damage: 0
+							DisallowContainerItem: 0b
+							GT.Behaviours: { RelocateMinedBlocks: 1b, RelocateMobDrops: 1b }
+							GT.Tool: { MaxDamage: 65534 }
+							HideFlags: 2
+							Unbreakable: 1b
+						}
+					}
+					type: "item"
+				}
+				{
+					id: "57BBE061F6E2BADB"
+					item: {
+						Count: 1b
+						id: "gtceu:neutronium_saw"
+						tag: {
+							Damage: 0
+							DisallowContainerItem: 0b
+							GT.Behaviours: { HarvestIce: 1b, RelocateMinedBlocks: 1b, RelocateMobDrops: 1b }
+							GT.Tool: { MaxDamage: 65534 }
+							HideFlags: 2
+							Unbreakable: 1b
+						}
+					}
+					type: "item"
+				}
+				{
+					id: "2FF87CFD3C01DFB5"
+					item: {
+						Count: 1b
+						id: "gtceu:neutronium_screwdriver"
+						tag: {
+							Damage: 0
+							DisallowContainerItem: 0b
+							GT.Behaviours: { RelocateMinedBlocks: 1b, RelocateMobDrops: 1b }
+							GT.Tool: { MaxDamage: 65534 }
+							HideFlags: 2
+							Unbreakable: 1b
+						}
+					}
+					type: "item"
+				}
+				{
+					id: "06E2AD8177C59EB9"
+					item: {
+						Count: 1b
+						id: "gtceu:neutronium_wire_cutter"
+						tag: {
+							Damage: 0
+							DisallowContainerItem: 0b
+							GT.Behaviours: { RelocateMinedBlocks: 1b, RelocateMobDrops: 1b }
+							GT.Tool: { MaxDamage: 65534 }
+							HideFlags: 2
+							Unbreakable: 1b
+						}
+					}
+					type: "item"
+				}
+				{
+					id: "7593278057563963"
+					item: {
+						Count: 1b
+						id: "gtceu:neutronium_knife"
+						tag: {
+							Damage: 0
+							DisallowContainerItem: 0b
+							GT.Behaviours: { RelocateMinedBlocks: 1b, RelocateMobDrops: 1b }
+							GT.Tool: { MaxDamage: 65534 }
+							HideFlags: 2
+							Unbreakable: 1b
+						}
+					}
+					type: "item"
+				}
+				{
+					id: "2FC17BA137630FF5"
+					item: {
+						Count: 1b
+						id: "gtceu:neutronium_crowbar"
+						tag: {
+							Damage: 0
+							DisallowContainerItem: 0b
+							GT.Behaviours: { RelocateMinedBlocks: 1b, RelocateMobDrops: 1b }
+							GT.Tool: { MaxDamage: 65534 }
+							HideFlags: 2
+							Unbreakable: 1b
+						}
+					}
+					type: "item"
+				}
+				{
+					id: "15B76FE6018E6AE8"
+					item: {
+						Count: 1b
+						id: "gtceu:neutronium_butchery_knife"
+						tag: {
+							Damage: 0
+							DisallowContainerItem: 0b
+							GT.Behaviours: { RelocateMinedBlocks: 1b, RelocateMobDrops: 1b }
+							GT.Tool: { MaxDamage: 65534 }
+							HideFlags: 2
+							Unbreakable: 1b
+						}
+					}
+					type: "item"
+				}
+				{
+					id: "3C8CB86EE18E7864"
+					item: {
+						Count: 1b
+						id: "gtceu:neutronium_scythe"
+						tag: {
+							Damage: 0
+							DisallowContainerItem: 0b
+							GT.Behaviours: {
+								AoEColumn: 2
+								AoELayer: 2
+								AoERow: 2
+								MaxAoEColumn: 2
+								MaxAoELayer: 2
+								MaxAoERow: 2
+								RelocateMinedBlocks: 1b
+								RelocateMobDrops: 1b
+							}
+							GT.Tool: { MaxDamage: 196604 }
+							HideFlags: 2
+							Unbreakable: 1b
+						}
+					}
+					type: "item"
+				}
+				{
+					id: "26CAED5133306E2F"
+					item: {
+						Count: 1b
+						id: "gtceu:neutronium_pickaxe"
+						tag: {
+							Damage: 0
+							DisallowContainerItem: 0b
+							GT.Behaviours: { RelocateMinedBlocks: 1b, RelocateMobDrops: 1b, TorchPlacing: 1b }
+							GT.Tool: { MaxDamage: 65534 }
+							HideFlags: 2
+							Unbreakable: 1b
+						}
+					}
+					type: "item"
+				}
+				{
+					id: "639F1CD3A7BD6AAB"
+					item: {
+						Count: 1b
+						id: "gtceu:neutronium_shovel"
+						tag: {
+							Damage: 0
+							DisallowContainerItem: 0b
+							GT.Behaviours: { RelocateMinedBlocks: 1b, RelocateMobDrops: 1b }
+							GT.Tool: { MaxDamage: 65534 }
+							HideFlags: 2
+							Unbreakable: 1b
+						}
+					}
+					type: "item"
+				}
+				{
+					id: "29C8302C07FDE588"
+					item: {
+						Count: 1b
+						id: "gtceu:neutronium_axe"
+						tag: {
+							Damage: 0
+							DisallowContainerItem: 0b
+							GT.Behaviours: { DisableShields: 1b, RelocateMinedBlocks: 1b, RelocateMobDrops: 1b, TreeFelling: 1b }
+							GT.Tool: { MaxDamage: 65534 }
+							HideFlags: 2
+							Unbreakable: 1b
+						}
+					}
+					type: "item"
+				}
+				{
+					id: "76CA57DF24BDB97D"
+					item: {
+						Count: 1b
+						id: "gtceu:neutronium_hoe"
+						tag: {
+							Damage: 0
+							DisallowContainerItem: 0b
+							GT.Behaviours: { RelocateMinedBlocks: 1b, RelocateMobDrops: 1b }
+							GT.Tool: { MaxDamage: 65534 }
+							HideFlags: 2
+							Unbreakable: 1b
+						}
+					}
+					type: "item"
+				}
+				{
+					id: "1BEEEEA630D484AA"
+					item: {
+						Count: 1b
+						id: "gtceu:neutronium_sword"
+						tag: {
+							Damage: 0
+							DisallowContainerItem: 0b
+							GT.Behaviours: { RelocateMinedBlocks: 1b, RelocateMobDrops: 1b }
+							GT.Tool: { MaxDamage: 65534 }
+							HideFlags: 2
+							Unbreakable: 1b
+						}
+					}
+					type: "item"
+				}
+				{
+					id: "37FD425E0F1BB98B"
+					item: {
+						Count: 1b
+						id: "gtceu:neutronium_mining_hammer"
+						tag: {
+							Damage: 0
+							DisallowContainerItem: 0b
+							GT.Behaviours: {
+								AoEColumn: 1
+								AoELayer: 0
+								AoERow: 1
+								MaxAoEColumn: 1
+								MaxAoELayer: 0
+								MaxAoERow: 1
+								RelocateMinedBlocks: 1b
+								RelocateMobDrops: 1b
+								TorchPlacing: 1b
+							}
+							GT.Tool: { MaxDamage: 196604 }
+							HideFlags: 2
+							Unbreakable: 1b
+						}
+					}
+					type: "item"
+				}
+				{
+					id: "6DA0DC719D069B19"
+					item: {
+						Count: 1b
+						id: "gtceu:neutronium_spade"
+						tag: {
+							Damage: 0
+							DisallowContainerItem: 0b
+							GT.Behaviours: {
+								AoEColumn: 1
+								AoELayer: 0
+								AoERow: 1
+								MaxAoEColumn: 1
+								MaxAoELayer: 0
+								MaxAoERow: 1
+								RelocateMinedBlocks: 1b
+								RelocateMobDrops: 1b
+							}
+							GT.Tool: { MaxDamage: 196604 }
+							HideFlags: 2
+							Unbreakable: 1b
+						}
+					}
+					type: "item"
+				}
+				{
+					id: "1FE382B06CE21ACF"
+					item: {
+						Count: 1b
+						id: "gtceu:naquadah_mortar"
+						tag: {
+							Damage: 0
+							DisallowContainerItem: 0b
+							GT.Behaviours: { }
+							GT.Tool: { MaxDamage: 99 }
+							HideFlags: 2
+							Unbreakable: 1b
+						}
+					}
+					type: "item"
+				}
+				{
+					id: "02CE7CEC981C378D"
+					item: {
+						Count: 1b
+						id: "gtceu:rubber_mallet"
+						tag: {
+							Damage: 0
+							DisallowContainerItem: 0b
+							GT.Behaviours: { }
+							GT.Tool: { MaxDamage: 255 }
+							HideFlags: 2
+							Unbreakable: 1b
+						}
+					}
+					type: "item"
+				}
+				{
+					id: "4F1986B69E46777D"
+					item: {
+						Count: 1b
+						id: "gtceu:rubber_plunger"
+						tag: {
+							Damage: 0
+							DisallowContainerItem: 0b
+							GT.Behaviours: { }
+							GT.Tool: { MaxDamage: 255 }
+							HideFlags: 2
+							Unbreakable: 1b
+						}
+					}
+					type: "item"
+				}
+			]
+			shape: "rsquare"
+			size: 1.5d
+			tasks: [{ id: "3E7CCC8C86E74D39", type: "checkmark" }]
+			title: "The Neutronium Toolbox"
+			x: 10.0d
+			y: 0.0d
+		}
+		{
+			dependencies: ["047B55ED9C952BC9"]
+			description: [
+				"&6Hammer&r: plates. &6File&r: rods and screws. &6Saw&r: bolts and wooden forms. &6Mortar&r: dust. &6Knife&r: cuts forms."
+				"&6Wrench&r: gears and casings; right-click sets a machine's output side, sneak-click turns it. &6Wire cutter&r: wire, and it links cables. &6Screwdriver&r: covers and machine settings."
+				"&6Crowbar&r: takes covers off. &6Soft mallet&r: pauses a machine. &6Plunger&r: empties a machine's tank. &6Mining hammer&r and &6spade&r dig a 3x3 area."
+			]
+			icon: "gtceu:neutronium_screwdriver"
+			id: "060C9714FE2661C1"
+			rewards: [{ id: "4C408857ED386D07", type: "xp", xp: 10 }]
+			shape: "circle"
+			size: 0.75d
+			tasks: [{ id: "2F84D9694342448E", type: "checkmark" }]
+			title: "Tool Cheat Sheet"
+			x: 12.0d
+			y: -1.5d
+		}
+		{
+			dependencies: ["047B55ED9C952BC9"]
+			description: [
+				"Diamonds come from deep veins with graphite and coal, redstone from deep veins with ruby and cinnabar. The steam macerator and miner need a few diamonds; redstone becomes red alloy and magnetic rods before LV."
+			]
+			icon: "minecraft:diamond"
+			id: "4E808BA706D1C241"
+			rewards: [{ id: "039DBB2398D51872", type: "xp", xp: 20 }]
+			tasks: [
+				{ id: "1D2DB24017032927", item: "minecraft:diamond", type: "item" }
+				{ id: "75B1126220CA3B27", item: "minecraft:redstone", type: "item" }
+			]
+			title: "Deep Veins"
+			x: 12.0d
+			y: 1.5d
+		}
+		{
+			dependencies: ["047B55ED9C952BC9"]
+			description: [
+				"Both sit in the copper-tin vein, from deep caves up to the hills: chalcopyrite for copper, cassiterite for tin. A cassiterite vein is almost all tin. The raw ores smelt straight into ingots."
+				"Tooltips carry the formula: Cu is copper, Sn is tin."
+			]
+			icon: "minecraft:copper_ingot"
+			id: "66595C41CAF3204F"
+			rewards: [{ id: "7812CDBC628F8768", type: "xp", xp: 20 }]
+			tasks: [
+				{ id: "4D8A44F363C30D38", item: "minecraft:copper_ingot", type: "item" }
+				{ id: "4EBAE9B6B66896B1", item: "gtceu:tin_ingot", type: "item" }
+			]
+			title: "Copper and Tin"
+			x: 12.0d
+			y: 0.0d
+		}
+		{
+			dependencies: ["66595C41CAF3204F"]
+			description: ["Put an ingot above the mortar and it comes out as dust. Slow by hand; the steam macerator takes over soon."]
+			icon: "gtceu:copper_dust"
+			id: "3760F1805DB4C916"
+			rewards: [{ id: "3806CC9F9C1E06AC", type: "xp", xp: 15 }]
+			tasks: [
+				{ id: "1B0A1FFDC8816D19", item: "gtceu:copper_dust", type: "item" }
+				{ id: "4C50D1F51FE32538", item: "gtceu:tin_dust", type: "item" }
+			]
+			title: "Grinding Dust"
+			x: 14.0d
+			y: 0.0d
+		}
+		{
+			dependencies: ["3760F1805DB4C916"]
+			description: [
+				"Copper dust and tin dust mixed in the grid give bronze dust; EMI shows the ratio. Smelt it into ingots and hammer those into plates."
+				"Bronze builds every machine of the steam age. Later the steam alloy smelter makes it straight from ingots, at a better ratio."
+			]
+			icon: "gtceu:bronze_ingot"
+			id: "3207813527EE1FBD"
+			rewards: [
+				{ id: "128F3700BF8645B9", type: "xp", xp: 30 }
+				{ count: 16, id: "1BD77292EB2A82D7", item: "minecraft:clay_ball", type: "item" }
+			]
+			shape: "diamond"
+			size: 1.5d
+			tasks: [
+				{ id: "404142490526CC93", item: "gtceu:bronze_dust", type: "item" }
+				{ id: "01F11CAD1C31E4CB", item: "gtceu:bronze_ingot", type: "item" }
+				{ id: "238008A7653A63DD", item: "gtceu:bronze_plate", type: "item" }
+			]
+			title: "Bronze"
+			x: 16.0d
 			y: 0.0d
 		}
 	]
+	subtitle: ["Day one on Earth: wood, the first ore and bronze."]
+	title: "Welcome"
 }

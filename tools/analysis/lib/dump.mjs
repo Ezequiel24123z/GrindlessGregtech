@@ -1,9 +1,10 @@
-// Carga del volcado que escribe tools/test/overlay/kubejs/server_scripts/gg_dump.js
-// (recipes.json, tags.json, items.json y, opcionales, machines.json, veins.json, info.json).
+// Loads the dump written by tools/test/overlay/kubejs/server_scripts/gg_dump.js
+// (recipes.json, tags.json, items.json and, optionally, machines.json, veins.json, info.json), and the recipes GTM's lookup never
+// finds when gg_test_recipe_lookup ran in the same server (lookup_unreachable.json: they leave the model).
 import fs from 'node:fs';
 import path from 'node:path';
 
-/** Miembros de las etiquetas. Una etiqueta vacía de vanilla aparece como [minecraft:barrier]: se trata como vacía. */
+/** Tag members. An empty vanilla tag shows up as [minecraft:barrier]: treated as empty. */
 export class TagIndex {
   constructor(tagsDoc) {
     this.itemTags = new Map(Object.entries((tagsDoc && tagsDoc.item) || {}));
@@ -28,7 +29,7 @@ export class TagIndex {
   fluids(tag) {
     const v = this.fluidTags.get(tag);
     if (v === undefined || v.length === 0) {
-      // Las etiquetas de fluido solo se guardan si tienen miembros; una "forge:xyz" que no aparece no existe como fluido.
+      // Fluid tags are only saved if they have members; a "forge:xyz" that doesn't appear doesn't exist as a fluid.
       this.missing.add('fluid:' + tag);
       return [];
     }
@@ -39,13 +40,59 @@ export class TagIndex {
 function readIfExists(dir, name, required) {
   const p = path.join(dir, name);
   if (!fs.existsSync(p)) {
-    if (required) throw new Error(`Falta ${name} en ${dir} (¿se ejecutó el volcado gg_dump?)`);
+    if (required) throw new Error(`${name} is missing in ${dir} (did the gg_dump run?)`);
     return null;
   }
   return JSON.parse(fs.readFileSync(p, 'utf8'));
 }
 
-export function loadDump(dir) {
+/**
+ * Written next to the gg_dump files by the bench guard gg_test_recipe_lookup (tools/test/overlay/kubejs/server_scripts) when both
+ * run in one server: the GT recipes GTM 7.5.3's recipe lookup never finds from their own inputs ({unreachable: [{id, type, proxy,
+ * reaches, shadowedBy, ...}]}). No machine can ever run them, so they leave the model.
+ */
+export const LOOKUP_FILE = 'lookup_unreachable.json';
+
+/**
+ * Drops from `recipes` (id -> recipe) the ones GTM's lookup never finds. Only a recipe the dump holds under the same type goes: a
+ * proxy (a smelting recipe the electric furnace cannot find) is lost in that GT type alone and stays as a recipe of its own type.
+ * Returns what the CLI reports: {file, listed, dropped: [ids], notInDump: [ids], otherType: [ids]}.
+ */
+function dropUnreachable(recipes, lookupDoc) {
+  const out = { file: !!lookupDoc, listed: 0, dropped: [], notInDump: [], otherType: [] };
+  if (!lookupDoc) return out;
+  const list = Array.isArray(lookupDoc.unreachable) ? lookupDoc.unreachable : [];
+  out.listed = list.length;
+  for (const u of list) {
+    const r = recipes.get(u.id);
+    if (!r) out.notInDump.push(u.id);
+    else if (u.type && r.type !== u.type) out.otherType.push(u.id);
+    else {
+      recipes.delete(u.id);
+      out.dropped.push(u.id);
+    }
+  }
+  return out;
+}
+
+/** The one line the CLI prints about GTM's recipe lookup (dump.lookup). */
+export function lookupLine(dump) {
+  const l = dump.lookup;
+  if (!l || !l.file) {
+    return `Lookup  : no ${LOOKUP_FILE} in the dump, so recipes GTM's lookup never finds still count (run gg_test_recipe_lookup in the gg_dump server run)`;
+  }
+  const extra = [];
+  if (l.notInDump.length > 0) extra.push(`${l.notInDump.length} not in recipes.json`);
+  if (l.otherType.length > 0) extra.push(`${l.otherType.length} kept as recipes of their own type (proxies)`);
+  return `Lookup  : dropped ${l.dropped.length} recipe${l.dropped.length === 1 ? '' : 's'} GTM's recipe lookup never finds ` +
+    `(${LOOKUP_FILE}: ${l.listed} listed${extra.length > 0 ? '; ' + extra.join('; ') : ''})`;
+}
+
+/**
+ * Reads a dump folder. `log` gets the lookup line (lookupLine); by default it goes to stdout, so the CLI shows it even with
+ * --quiet. Pass log: null to stay silent.
+ */
+export function loadDump(dir, { log = (line) => process.stdout.write(line + '\n') } = {}) {
   const docs = {
     recipes: readIfExists(dir, 'recipes.json', true),
     items: readIfExists(dir, 'items.json', true),
@@ -56,8 +103,11 @@ export function loadDump(dir) {
     config: readIfExists(dir, 'config.json', false),
     structures: readIfExists(dir, 'structures.json', false),
     info: readIfExists(dir, 'info.json', false),
+    lookup: readIfExists(dir, LOOKUP_FILE, false),
   };
-  return makeDump(dir, docs);
+  const dump = makeDump(dir, docs);
+  if (log) log(lookupLine(dump));
+  return dump;
 }
 
 function normalizeConfig(values) {
@@ -66,7 +116,7 @@ function normalizeConfig(values) {
   return out;
 }
 
-/** Construye el volcado a partir de los documentos ya leídos (también lo usan las pruebas, sin tocar el disco). */
+/** Builds the dump from already-read documents (also used by tests, with no disk access). */
 export function makeDump(dir, docs) {
   const recipesDoc = docs.recipes;
   const itemsDoc = docs.items;
@@ -78,12 +128,14 @@ export function makeDump(dir, docs) {
   for (const entry of recipesDoc.recipes || []) {
     try {
       const r = typeof entry === 'string' ? JSON.parse(entry) : entry;
-      // Las añadidas por scripts van al final y sustituyen a una receta con el mismo id (como hace KubeJS).
+      // Ones added by scripts go last and replace a recipe with the same id (same as KubeJS does).
       recipes.set(r.i, { id: r.i, type: r.t, added: !!r.a, json: r.j });
     } catch {
       parseErrors++;
     }
   }
+  // the recipes GTM's lookup never finds (lookup_unreachable.json) leave the model before anything reads it
+  const lookup = dropUnreachable(recipes, docs.lookup || null);
 
   const machines = new Map();
   const recipeTypes = new Map();
@@ -97,18 +149,20 @@ export function makeDump(dir, docs) {
     info: docs.info || null,
     recipes,
     parseErrors,
+    // GTM's recipe lookup (lookup_unreachable.json): {file, listed, dropped, notInDump, otherType}; file false when there was none
+    lookup,
     items: new Set(itemsDoc.items || []),
     fluids: new Set(itemsDoc.fluids || []),
     tags: new TagIndex(docs.tags),
     machines,
     recipeTypes,
     veins: veinsDoc ? veinsDoc.veins || [] : null,
-    // yacimientos de fluidos de GT (perforadora de fluidos): [{id, fluid, weight, dims: [..] | null}]; null si no se volcaron
+    // GT fluid deposits (fluid drilling rig): [{id, fluid, weight, dims: [..] | null}]; null if not dumped
     fluidVeins: docs.fluidVeins ? docs.fluidVeins.veins || [] : null,
-    // interruptores de la config de GTM que importan para la progresión: {"worldgen.oreVeins...": true|false|null}; null sin config.json
-    // (los primeros volcados escribían "true"/"false" como texto: se normalizan)
+    // GTM config switches that matter for progression: {"worldgen.oreVeins...": true|false|null}; null with no config.json
+    // (early dumps wrote "true"/"false" as text: normalized here)
     config: docs.config ? normalizeConfig(docs.config.gtceu || {}) : null,
-    // descripción en datos de los patrones de multibloque del pack (global.grindless.structures); vacío si no se volcó
+    // data description of the pack's multiblock patterns (global.grindless.structures); empty if not dumped
     structures: new Map(Object.entries((docs.structures && docs.structures.structures) || {})),
   };
 }

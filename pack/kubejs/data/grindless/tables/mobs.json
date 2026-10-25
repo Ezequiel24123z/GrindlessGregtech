@@ -1,13 +1,13 @@
 {
-  "_source": "docs/eras/lv.md, section 'Drops de criaturas' (minerals, amounts, 30 EU/t, 10 s, enderman 20 s) and 'Decisiones tomadas' no. 5 (the first ender pearl comes from an LV quest). Item ids: vanilla 1.20.1 and GTM 7.5.3 (gtceu:<material>_dust). Creeper and blaze are optional higher-tier creatures that we added; zombie and witch are left out on purpose: nothing in GT or AE2 asks for their drops.",
+  "_source": "docs/eras/lv.md, section 'Creature drops' (minerals, amounts, 30 EU/t, 10 s, enderman 20 s) and 'Decisions taken' no. 5 (the first ender pearl comes from an LV quest). Item ids: vanilla 1.20.1 and GTM 7.5.3 (gtceu:<material>_dust). Creeper and blaze are optional higher-tier creatures that we added; zombie and witch are left out on purpose: nothing in GT or AE2 asks for their drops. The wither skeleton (HV) and the wither (EV: 1,920 EU/t, 30 s, 400 mB of biomass, 1 Nether Star) come from docs/eras/ev.md, 'Creatures': the wither skeleton gives the skulls that print the wither model, and the Nether Star is saved for IV.",
   "_how_it_is_used": [
     "Canonical creature table of the pack. Read by startup_scripts/grindless/lv/creatures.js (global.grindless.tables.mobs): registers the model items; by server_scripts/grindless/lv/creatures.js: generates the gtceu:creature_simulation recipes and the assembler recipes that print the models; and by client_scripts/grindless/lv_creatures_lang.js: names. Nothing is hard-coded per creature anywhere else: to add one, add a row here.",
     "biomass.fluid = fluid every simulation cycle consumes (gtceu:biomass: the LV brewery makes it from greenhouse output, GTM recipes brewery/biomass_from_*). biomass.lv_brewery_mb_per_s = what ONE LV brewery makes: 20 mB per 8 s from a carrot (potato, cane...) or 100 mB per 40 s from a sapling = 2.5 mB/s. GTM does not overclock a 3 EU/t recipe in an LV machine and every tier above overclocks it once more, so a brewery makes 2.5 mB/s x 2^(tier-1).",
-    "mobs[].biomass_mb = biomass one cycle eats. The rule is that ONE brewery of the creature's tier keeps ONE simulator of that tier running at full speed (a same-tier brewery keeps up with any overclock too): biomass_mb x 20 / duration <= lv_brewery_mb_per_s x 2^(tier-1). Quantity never makes it harder: LV 25 mB per 10 s cycle, 50 mB for the 20 s enderman, 50 mB for the MV creeper, 100 mB for the HV blaze. The table check (server script) and the test (against GTM's real brewery recipes) enforce the rule.",
+    "mobs[].biomass_mb = biomass one cycle eats. The rule is that ONE brewery of the creature's tier keeps ONE simulator of that tier running at full speed (a same-tier brewery keeps up with any overclock too): biomass_mb x 20 / duration <= lv_brewery_mb_per_s x 2^(tier-1). Quantity never makes it harder: LV 25 mB per 10 s cycle, 50 mB for the 20 s enderman, 50 mB for the MV creeper and the MV blaze (50 x 20 / 200 = 5 mB/s, exactly what one MV brewery makes), 100 mB for the HV wither skeleton (10 mB/s, one HV brewery) and 400 mB per 30 s for the EV wither (13.3 mB/s; one EV brewery makes 20). The table check (server script) and the test (against GTM's real brewery recipes) enforce the rule.",
     "printing = the assembler recipe that turns grindless:blank_creature_model + the creature's print items into grindless:creature_model_<id>.",
     "mobs[].id: the model item is grindless:creature_model_<id>. tier: the lowest simulator tier that can run it (1 = LV, 2 = MV, 3 = HV, 4 = EV). It is enforced by eut: GTM refuses a recipe above the machine's voltage (LV 32, MV 128, HV 512, EV 2048), and higher tiers overclock lower recipes as usual. color: tint of the core layer of the model icon. name: display names (en_us / es_es).",
     "mineral: consumed on every cycle together with the biomass (omitted = nothing but biomass). The model itself is never used up.",
-    "print: what the assembler imprints into a blank model. Every creature needs a different set of ITEMS (GTM's recipe lookup does not tell counts apart, so two creatures with the same items would collide). The creatures that need no mineral per cycle are printed with their feed (cow: wheat, chicken: wheat seeds) or the material they are spun from (sheep: string).",
+    "print: what the assembler imprints into a blank model. Every creature needs a different set of ITEMS (GTM's recipe lookup does not tell counts apart, so two creatures with the same items would collide), and no print may start with the whole print of another creature (the lookup keeps the declared order of the items, so [blank, a] would hide [blank, a, b]). The creatures that need no mineral per cycle are printed with their feed (cow: wheat, chicken: wheat seeds) or the material they are spun from (sheep: string). The wither skeleton is printed from the fortress (nether bricks) and bone blocks; the wither from three wither skeleton skulls, which the wither skeleton model gives.",
     "rolls: one gtceu:creature_simulation recipe per roll. circuit = the programmed circuit that selects the roll (every roll has one, so the lookup never mixes them up). Roll 1 is the full loot; extra rolls give a single kind of drop so that nothing you do not want is forced on you. drops: n items per cycle, optional chance (0..1) per cycle (default: always).",
     "Printing the enderman model also takes one real ender pearl (the LV quest 'First Pearl' gives it); from then on the simulator multiplies pearls."
   ],
@@ -97,13 +97,33 @@
       ]
     },
     {
-      "id": "blaze", "tier": 3, "color": "#FFAA22",
+      "id": "blaze", "tier": 2, "color": "#FFAA22",
       "name": { "en_us": "Blaze", "es_es": "blaze" },
-      "eut": 480, "duration": 200, "biomass_mb": 100,
+      "eut": 120, "duration": 200, "biomass_mb": 50,
       "mineral": { "item": "gtceu:coal_dust", "n": 1 },
       "print": [ { "item": "gtceu:coal_dust", "n": 8 } ],
       "rolls": [
         { "circuit": 1, "drops": [ { "item": "minecraft:blaze_rod", "n": 2 } ] }
+      ]
+    },
+    {
+      "id": "wither_skeleton", "tier": 3, "color": "#7A7A82",
+      "name": { "en_us": "Wither Skeleton", "es_es": "esqueleto wither" },
+      "eut": 480, "duration": 200, "biomass_mb": 100,
+      "mineral": { "item": "gtceu:tricalcium_phosphate_dust", "n": 1 },
+      "print": [ { "item": "minecraft:nether_bricks", "n": 8 }, { "item": "minecraft:bone_block", "n": 8 } ],
+      "rolls": [
+        { "circuit": 1, "drops": [ { "item": "minecraft:bone", "n": 2 }, { "item": "minecraft:coal", "n": 1, "chance": 0.33 }, { "item": "minecraft:wither_skeleton_skull", "n": 1, "chance": 0.1 } ] },
+        { "circuit": 2, "drops": [ { "item": "minecraft:wither_skeleton_skull", "n": 1, "chance": 0.1 } ] }
+      ]
+    },
+    {
+      "id": "wither", "tier": 4, "color": "#6A6E9E",
+      "name": { "en_us": "Wither", "es_es": "wither" },
+      "eut": 1920, "duration": 600, "biomass_mb": 400,
+      "print": [ { "item": "minecraft:wither_skeleton_skull", "n": 3 } ],
+      "rolls": [
+        { "circuit": 1, "drops": [ { "item": "minecraft:nether_star", "n": 1 } ] }
       ]
     }
   ]

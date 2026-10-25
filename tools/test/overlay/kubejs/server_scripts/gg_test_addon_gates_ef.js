@@ -59,7 +59,9 @@
   var IV_PART = /^gtceu:(iv|luv|zpm|uv|uhv|uev|uiv|uxv|opv)_/
   var VA_IV = 7680
   var GTM_TYPES = ['gtceu:cracker', 'gtceu:pyrolyse_oven', 'gtceu:alloy_blast_smelter', 'gtceu:assembly_line', 'gtceu:gas_collector']
-  var GTM_IDS = ['gtceu:centrifuge/endstone_separation', 'gtceu:centrifuge/netherrack_separation',
+  // v0.5.0: GTM's end stone dust separation is replaced by grindless:centrifuge/offworld_only/endstone_separation (no tungstate
+  // until Mars, moon/offworld_only.js); netherrack separation is still GTM's own
+  var GTM_IDS = ['grindless:centrifuge/offworld_only/endstone_separation', 'gtceu:centrifuge/netherrack_separation',
     'gtceu:large_chemical_reactor/naquadah_separation', 'gtceu:shaped/blast_alloy_smelter', 'gtceu:shaped/cracking_unit']
 
   var shipped = null

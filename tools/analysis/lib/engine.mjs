@@ -1,8 +1,8 @@
-// Motor de alcanzabilidad sobre un hipergrafo recursos -> recetas -> recursos.
-//   - lfp:  punto fijo mínimo (qué se puede llegar a fabricar).
-//   - gfp:  punto fijo máximo restringido a un universo (qué se puede mantener sin intervención manual).
-//   - blockCosts: Dijkstra sobre el hipergrafo para elegir la cadena de bloqueo más corta.
-// Una "ranura" de una regla se cumple si cualquiera de sus alternativas (p. ej. los miembros de una etiqueta) está disponible.
+// Reachability engine over a resources -> recipes -> resources hypergraph.
+//   - lfp:  least fixed point (what can ever be made).
+//   - gfp:  greatest fixed point restricted to a universe (what can be kept up with no manual intervention).
+//   - blockCosts: Dijkstra over the hypergraph to pick the shortest blocking chain.
+// A rule's "slot" is met if any of its alternatives (e.g. a tag's members) is available.
 
 export class Graph {
   constructor() {
@@ -89,15 +89,17 @@ export class Graph {
 }
 
 /**
- * Punto fijo mínimo.
- *  facts   : claves disponibles desde el principio.
- *  enabled : Uint8Array por regla (1 = activa); null = todas.
- *  capOk   : si se da, las ranuras de capital (no se consumen) se dan por cumplidas cuando alguna alternativa está en capOk.
- *  tolOk   : si se da, las ranuras "tolerantes" (combustible de una máquina, catalizadores que solo se gastan a veces)
- *            se dan por cumplidas cuando alguna alternativa está en tolOk; así los bucles de arranque (el vapor mueve la
- *            perforadora que da el carbón que alimenta la caldera) no necesitan una entrada "pura".
+ * Least fixed point.
+ *  facts   : keys available from the start.
+ *  enabled : Uint8Array per rule (1 = active); null = all.
+ *  capOk   : if given, capital slots (not consumed) are taken as met when some alternative is in capOk.
+ *  tolOk   : if given, "tolerant" slots (a machine's fuel, catalysts only sometimes consumed)
+ *            are taken as met when some alternative is in tolOk; this way bootstrap loops (steam drives
+ *            the drill that gives the coal that feeds the boiler) don't need a "pure" input.
+ *  blocked : Uint8Array of keys removed from every source (era rule: resources from a later era); no rule
+ *            produces them and no fact gives them, but the rules that give them as a byproduct still give the rest.
  */
-export function lfp(g, { facts, enabled = null, capOk = null, tolOk = null }) {
+export function lfp(g, { facts, enabled = null, capOk = null, tolOk = null, blocked = null }) {
   const nK = g.nKeys;
   const nR = g.rules.length;
   const nS = g.nSlots;
@@ -125,6 +127,7 @@ export function lfp(g, { facts, enabled = null, capOk = null, tolOk = null }) {
     }
     ruleLevel[r] = lvl + 1;
     for (const o of rule.outs) {
+      if (blocked && blocked[o]) continue;
       if (!reached[o]) {
         reached[o] = 1;
         level[o] = lvl + 1;
@@ -158,6 +161,7 @@ export function lfp(g, { facts, enabled = null, capOk = null, tolOk = null }) {
   }
   for (let r = 0; r < nR; r++) if (remaining[r] === 0) fire(r);
   for (const k of facts) {
+    if (blocked && blocked[k]) continue;
     if (!reached[k]) {
       reached[k] = 1;
       level[k] = 0;
@@ -180,13 +184,13 @@ export function lfp(g, { facts, enabled = null, capOk = null, tolOk = null }) {
 }
 
 /**
- * Punto fijo máximo ("se sostiene solo"): el mayor subconjunto S de `universe` tal que cada clave de S es un hecho
- * permanente o la produce una regla viva cuyas ranuras consumibles tienen alguna alternativa en S.
- * Los ciclos que se alimentan a sí mismos (la broca se fabrica con el bronce que sale de perforar) cuentan como sostenibles.
- *  universe : Uint8Array de claves candidatas (normalmente lo alcanzable desde lo automático + el arranque manual).
- *  enabled  : reglas activas.
- *  capOk    : las ranuras de capital deben tener alguna alternativa en capOk (se construyen una sola vez, a mano si hace falta).
- *  permanent: Uint8Array de claves con soporte permanente.
+ * Greatest fixed point ("sustains itself"): the largest subset S of `universe` such that every key in S is a
+ * permanent fact or is produced by a live rule whose consumable slots have some alternative in S.
+ * Cycles that feed themselves (the bit is made with bronze that comes from drilling) count as sustainable.
+ *  universe : Uint8Array of candidate keys (usually whatever is reachable from auto + the manual bootstrap).
+ *  enabled  : active rules.
+ *  capOk    : capital slots must have some alternative in capOk (built once, by hand if needed).
+ *  permanent: Uint8Array of keys with permanent support.
  */
 export function gfp(g, { universe, enabled = null, capOk, permanent }) {
   const nK = g.nKeys;
@@ -256,13 +260,13 @@ export function gfp(g, { universe, enabled = null, capOk, permanent }) {
 }
 
 /**
- * "Se sostiene solo", con suelo. El punto fijo máximo (gfp) acepta cualquier ciclo que se alimente de sí mismo, también
- * los que no crean materia (comprimir <-> descomprimir, polvo <-> polvo diminuto). Aquí se exige además que cada clave
- * tenga una derivación bien fundada desde una fuente permanente: los ingredientes que se gastan vienen siempre de claves
- * ya fundadas, y solo el combustible de las máquinas y los catalizadores (ranuras `tol`) pueden cerrar el círculo
- * (bucle de arranque: vapor -> perforadora -> carbón -> caldera -> vapor).
- * Se itera tol_0 = S, G_i = lfp(tolerantes cumplidas con tol_i), tol_{i+1} = G_i hasta estabilizarse.
- * Devuelve {S, G}: S es el resultado del gfp y G el lfp final (G.reached = claves sostenidas, G.fired = reglas sostenidas).
+ * "Sustains itself", grounded. The greatest fixed point (gfp) accepts any cycle that feeds itself, including
+ * ones that create no matter (compress <-> decompress, dust <-> tiny dust). Here it's also required that every key
+ * have a well-founded derivation from a permanent source: ingredients that get consumed always come from keys that
+ * are already grounded, and only machine fuel and catalysts (`tol` slots) are allowed to close the loop
+ * (bootstrap loop: steam -> drill -> coal -> boiler -> steam).
+ * Iterates tol_0 = S, G_i = lfp(tolerant slots met with tol_i), tol_{i+1} = G_i until it settles.
+ * Returns {S, G}: S is the gfp result and G the final lfp (G.reached = sustained keys, G.fired = sustained rules).
  */
 export function groundedSustain(g, { universe, enabled = null, capOk, permanent }) {
   const S = gfp(g, { universe, enabled, capOk, permanent });
@@ -336,10 +340,11 @@ class MinHeap {
 }
 
 /**
- * Coste mínimo de "desbloquear" cada clave que no está en `mask`: una clave sin ninguna regla que la produzca (raíz)
- * cuesta 1 y una regla cuesta 1 + la suma de lo que le falta. `best[k]` es la regla de menor coste que produce k.
+ * Minimum cost to "unblock" each key that isn't in `mask`: a key with no rule producing it (a root)
+ * costs 1, and a rule costs 1 + the sum of what it's missing. `best[k]` is the lowest-cost rule that produces k.
+ * `blocked`: keys no rule can ever give (removed from every source); they only count as a root, at `rootCost`'s cost.
  */
-export function blockCosts(g, { mask, capMask = null, tolMask = null, enabled = null, rootCost = null }) {
+export function blockCosts(g, { mask, capMask = null, tolMask = null, enabled = null, rootCost = null, blocked = null }) {
   const nK = g.nKeys;
   const nR = g.rules.length;
   const cost = new Float64Array(nK).fill(Infinity);
@@ -367,6 +372,7 @@ export function blockCosts(g, { mask, capMask = null, tolMask = null, enabled = 
   const relax = (r) => {
     const rc = 1 + sum[r];
     for (const o of g.rules[r].outs) {
+      if (blocked && blocked[o]) continue;
       if (rc < cost[o]) {
         cost[o] = rc;
         best[o] = r;

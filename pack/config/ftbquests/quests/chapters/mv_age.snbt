@@ -9,14 +9,14 @@
 	quest_links: [ ]
 	quests: [
 		{
-			dependencies: ["78451687508D5888"]
+			dependencies: ["39A5A5CC76591697"]
 			description: [
 				"The blast furnace is running and MV parts are already crawling into the base. Hatches, hulls and circuits just step up a size."
-				"This is the biggest machine room yet - a flagship multiblock is coming that replaces half of it on its own."
+				"This is the biggest machine room yet. A flagship multiblock is coming that replaces half of it on its own."
 			]
 			icon: "gtceu:mv_machine_hull"
-			id: "855851443092A93B"
-			rewards: [{ id: "84FC4C525A119501", type: "xp", xp: 40 }]
+			id: "055851443092A93B"
+			rewards: [{ id: "04FC4C525A119501", type: "xp", xp: 40 }]
 			shape: "rsquare"
 			size: 1.5d
 			tasks: [{ id: "29FAB6C83D5E24E2", type: "checkmark" }]
@@ -25,137 +25,143 @@
 			y: 0.0d
 		}
 		{
-			dependencies: ["855851443092A93B"]
-			description: ["Raw rubber from the greenhouse and a pinch of sulfur vulcanize into real rubber; wrapped around copper wire it finally holds MV amperage."]
+			dependencies: ["055851443092A93B"]
+			description: [
+				"Raw rubber from the greenhouse and a pinch of sulfur vulcanize into real rubber; wrapped around copper wire it finally holds MV amperage."
+			]
 			icon: "gtceu:copper_single_cable"
-			id: "FBA0CD6F048B3FDE"
+			id: "7BA0CD6F048B3FDE"
 			rewards: [{ id: "79201EACC184D2B0", type: "xp", xp: 25 }]
 			tasks: [{ count: 8L, id: "57AE855E48E5D657", item: "gtceu:copper_single_cable", type: "item" }]
 			title: "Copper Cable"
-			x: 2.5d
+			x: 2.0d
 			y: 0.0d
 		}
 		{
-			dependencies: ["FBA0CD6F048B3FDE"]
+			dependencies: ["7BA0CD6F048B3FDE"]
 			description: [
 				"The &6MV Energy Hatch&r feeds a multiblock controller same as before, just more amps. The &6MV Battery Buffer&r smooths the grid for single-block machines."
-				"Build them onto the LV to MV transformer from the gate - that is still where MV power comes from until the fuels arrive."
+				"Build them onto the LV to MV transformer from the gate. That is still where MV power comes from until the fuels arrive."
 			]
 			icon: "gtceu:mv_energy_input_hatch"
-			id: "C83AF81AF99ECB93"
+			id: "483AF81AF99ECB93"
 			rewards: [{ id: "7A557898B6386F2C", type: "xp", xp: 30 }]
 			tasks: [
 				{ count: 2L, id: "616DD88207161317", item: "gtceu:mv_energy_input_hatch", type: "item" }
-				{ id: "C9688CE9FDA40096", item: "gtceu:mv_battery_buffer_4x", type: "item" }
+				{ id: "49688CE9FDA40096", item: "gtceu:mv_battery_buffer_4x", type: "item" }
 			]
 			title: "MV Grid"
-			x: 5.0d
-			y: 0.0d
+			x: 6.0d
+			y: 1.5d
 		}
 		{
-			dependencies: ["C83AF81AF99ECB93"]
+			dependencies: ["51BBBA6F37785CD7"]
 			description: [
 				"Same bronze boilers, one size up: the &6MV Steam Turbine&r drinks more steam per unit and gives back more current."
 				"Creosote and biomass carry the plant until diesel and ethanol take over, later in this chapter."
 			]
 			icon: "gtceu:mv_steam_turbine"
-			id: "A62640F3533EE2C3"
+			id: "262640F3533EE2C3"
 			rewards: [{ id: "2D4AB7EF96DFA77D", type: "xp", xp: 35 }]
 			tasks: [{ id: "4CF205A2BD83EEB7", item: "gtceu:mv_steam_turbine", type: "item" }]
 			title: "MV Steam Turbine"
-			x: 7.5d
-			y: 0.0d
+			x: 4.0d
+			y: 1.5d
 		}
 		{
-			dependencies: ["C83AF81AF99ECB93"]
+			dependencies: ["51BBBA6F37785CD7"]
 			description: [
-				"Ruby - the same deep redstone vein steam age taught you to drill - splits in the electrolyzer into chromium and aluminium."
-				"A second road to aluminium: bauxite from the mica vein, electrolyzed at MV power. Keep the rutile it leaves behind, HV wants it."
+				"Ruby, the same deep redstone vein steam age taught you to drill, splits in the electrolyzer into chromium and aluminium."
+				"A second road to aluminium: bauxite from the mica vein, electrolyzed at MV power."
 			]
 			icon: "gtceu:chromium_ingot"
 			id: "3EB82BACA3DFF6DB"
-			rewards: [{ id: "ACADAAFB5EDA183C", type: "xp", xp: 30 }]
+			rewards: [{ id: "2CADAAFB5EDA183C", type: "xp", xp: 30 }]
 			tasks: [
-				{ count: 4L, id: "8D9122DA72BB797F", item: "gtceu:chromium_ingot", type: "item" }
-				{ count: 4L, id: "C7222F0CFA9330D0", item: "gtceu:aluminium_ingot", type: "item" }
+				{ count: 4L, id: "0D9122DA72BB797F", item: "gtceu:chromium_ingot", type: "item" }
+				{ count: 4L, id: "47222F0CFA9330D0", item: "gtceu:aluminium_ingot", type: "item" }
 			]
 			title: "Chromium and Aluminium"
-			x: 10.0d
-			y: -3.0d
+			x: 6.0d
+			y: 0.0d
 		}
 		{
-			dependencies: ["3EB82BACA3DFF6DB"]
+			dependencies: ["3EB82BACA3DFF6DB", "483AF81AF99ECB93"]
 			description: [
-				"Iron, aluminium and chromium melt together in the Kanthal EBF - two MV energy hatches now, not one, to reach the 480 EU/t Kanthal needs. A chemical bath and a wiremill turn the ingot into coil wire."
-				"&6Kanthal Coil Blocks&r push the blast furnace to an even higher heat - that is what silicon needs next, and what stainless steel needs too."
+				"Iron, aluminium and chromium melt together in the Kanthal EBF. Two MV energy hatches now, not one, to reach the 480 EU/t Kanthal needs. A chemical bath and a wiremill turn the ingot into coil wire."
+				"&6Kanthal Coil Blocks&r push the blast furnace to an even higher heat. That is what silicon needs next, and what stainless steel needs too."
 			]
 			icon: "gtceu:kanthal_coil_block"
-			id: "DDC39DF3C1563B6B"
+			id: "5DC39DF3C1563B6B"
 			rewards: [{ id: "5C6DDC6FFEF5B6E3", type: "xp", xp: 35 }]
 			tasks: [{ count: 4L, id: "0928209E9F6A03E3", item: "gtceu:kanthal_coil_block", type: "item" }]
 			title: "Kanthal"
-			x: 12.5d
-			y: -3.0d
+			x: 8.0d
+			y: 0.0d
 		}
 		{
-			dependencies: ["DDC39DF3C1563B6B"]
-			description: ["Vanadium, chromium and seven parts steel smelt into &6Vanadium Steel&r - the only metal hard enough for the cutter's saw and the vein drill's new bit."]
+			dependencies: ["3EB82BACA3DFF6DB"]
+			description: ["Vanadium, chromium and seven parts steel smelt into &6Vanadium Steel&r. It makes the cutter's saw blade and the drill bit that reaches the End veins."]
 			icon: "gtceu:vanadium_steel_ingot"
-			id: "F4057E6BDC378944"
+			id: "74057E6BDC378944"
 			rewards: [{ id: "41D73766281A9B27", type: "xp", xp: 30 }]
-			tasks: [{ count: 4L, id: "8EEAC3D611425D40", item: "gtceu:vanadium_steel_ingot", type: "item" }]
+			tasks: [{ count: 4L, id: "0EEAC3D611425D40", item: "gtceu:vanadium_steel_ingot", type: "item" }]
 			title: "Vanadium Steel"
-			x: 15.0d
-			y: -3.0d
+			x: 10.0d
+			y: -1.5d
 		}
 		{
-			dependencies: ["F4057E6BDC378944"]
-			description: ["Iron, chromium, manganese and nickel, through the Kanthal EBF at a lower heat than Kanthal itself needs - &6Stainless Steel&r is what the HV hull and the hazmat suit are waiting on."]
+			dependencies: ["5DC39DF3C1563B6B"]
+			description: ["Iron, chromium, manganese and nickel, through the Kanthal EBF at a lower heat than Kanthal itself needs. &6Stainless Steel&r is what the HV hull and the HV motor are made from."]
 			icon: "gtceu:stainless_steel_ingot"
 			id: "24DEACCFA4DCD216"
-			rewards: [{ id: "C0C419EDB155285F", type: "xp", xp: 30 }]
-			tasks: [{ count: 4L, id: "F43FC2F716A5B238", item: "gtceu:stainless_steel_ingot", type: "item" }]
+			rewards: [{ id: "40C419EDB155285F", type: "xp", xp: 30 }]
+			tasks: [{ count: 4L, id: "743FC2F716A5B238", item: "gtceu:stainless_steel_ingot", type: "item" }]
 			title: "Stainless Steel"
-			x: 17.5d
-			y: -3.0d
+			x: 10.0d
+			y: 1.5d
 		}
 		{
-			dependencies: ["C83AF81AF99ECB93"]
-			description: ["Motor, piston, pump, arm and conveyor, one size up. The motor's coil is cupronickel now, wound around aluminium rods instead of iron."]
+			dependencies: ["7BA0CD6F048B3FDE"]
+			description: [
+				"Motor, piston, pump, arm and conveyor, one size up. The motor's coil is cupronickel now, wound around aluminium rods instead of iron."
+			]
 			icon: "gtceu:mv_electric_motor"
-			id: "D1BBBA6F37785CD7"
+			id: "51BBBA6F37785CD7"
 			rewards: [{ id: "790DC64279681079", type: "xp", xp: 35 }]
 			tasks: [
-				{ id: "EE165FEAE1147BC8", item: "gtceu:mv_electric_motor", type: "item" }
-				{ id: "91C48258FDAD4CC6", item: "gtceu:mv_electric_piston", type: "item" }
+				{ id: "6E165FEAE1147BC8", item: "gtceu:mv_electric_motor", type: "item" }
+				{ id: "11C48258FDAD4CC6", item: "gtceu:mv_electric_piston", type: "item" }
 				{ id: "7072F2D65FCD8EBA", item: "gtceu:mv_electric_pump", type: "item" }
 				{ id: "73417A9AFF066795", item: "gtceu:mv_robot_arm", type: "item" }
 				{ id: "67DAEC4CC0556D49", item: "gtceu:mv_conveyor_module", type: "item" }
 			]
 			title: "MV Components"
-			x: 10.0d
-			y: 3.0d
+			x: 4.0d
+			y: 0.0d
 		}
 		{
-			dependencies: ["D1BBBA6F37785CD7", "F4057E6BDC378944"]
+			dependencies: ["74057E6BDC378944"]
 			description: [
-				"The &6Cutter&r slices one ingot into several plates or wafers - only the saw inside it asks for vanadium steel instead of plain steel."
-				"The &6Laser Engraver&r burns a circuit pattern onto a wafer. Its emitter only lights up with a flawless emerald - the Nether's beryllium vein is the only place to find one without a trip to the End."
+				"The &6Cutter&r slices one ingot into several plates or wafers. Its saw blade is vanadium steel, so the cutter comes after that ingot."
+				"The &6Laser Engraver&r burns a circuit pattern onto a wafer. Its emitter only lights up with a flawless emerald. The Nether's beryllium vein is the only place to find one without a trip to the End."
 			]
 			icon: "gtceu:mv_laser_engraver"
 			id: "6213116B3B6723B8"
-			rewards: [{ id: "9905C6F89AEBEF24", type: "xp", xp: 35 }]
+			rewards: [{ id: "1905C6F89AEBEF24", type: "xp", xp: 35 }]
 			tasks: [
-				{ id: "BB923A18591A522B", item: "gtceu:mv_cutter", type: "item" }
-				{ id: "BDD4F723E828CFB2", item: "gtceu:mv_laser_engraver", type: "item" }
+				{ id: "3B923A18591A522B", item: "gtceu:mv_cutter", type: "item" }
+				{ id: "3DD4F723E828CFB2", item: "gtceu:mv_laser_engraver", type: "item" }
 			]
 			title: "MV Cutter and Laser Engraver"
-			x: 12.5d
-			y: 3.0d
+			x: 12.0d
+			y: -1.5d
 		}
 		{
-			dependencies: ["D1BBBA6F37785CD7"]
-			description: ["Macerator, ore washer, thermal centrifuge and centrifuge, one size up. Nothing new to learn here - just faster, and about to be replaced."]
+			dependencies: ["51BBBA6F37785CD7"]
+			description: [
+				"Macerator, ore washer, thermal centrifuge and centrifuge, one size up. Nothing new to learn here: just faster, and about to be replaced."
+			]
 			icon: "gtceu:mv_macerator"
 			id: "0624908D6FDF0EF8"
 			rewards: [{ id: "288A1EF831FD4160", type: "xp", xp: 30 }]
@@ -163,261 +169,268 @@
 				{ id: "307831B813967EBA", item: "gtceu:mv_macerator", type: "item" }
 				{ id: "3CDA90F954EC8E2C", item: "gtceu:mv_ore_washer", type: "item" }
 				{ id: "54220C15B594794E", item: "gtceu:mv_thermal_centrifuge", type: "item" }
-				{ id: "EC571B2E66F548C2", item: "gtceu:mv_centrifuge", type: "item" }
+				{ id: "6C571B2E66F548C2", item: "gtceu:mv_centrifuge", type: "item" }
 			]
 			title: "MV Ore Machines"
-			x: 15.0d
-			y: 3.0d
+			x: 4.0d
+			y: -3.0d
 		}
 		{
 			dependencies: ["0624908D6FDF0EF8"]
 			description: [
 				"The &6Ore Plant&r is the whole chain in one box: crush, wash, roast and crush again, every secondary intact, without a single bus in between."
-				"One energy hatch runs several ores at once; a second hatch runs twice that. The recipe does not change - it just stops needing ten machines to run it."
+				"One energy hatch runs several ores at once; a second hatch runs twice that. The recipe does not change. It just stops needing ten machines to run it."
 			]
 			icon: "gtceu:ore_plant"
 			id: "3FCAFC1E38DD934C"
 			rewards: [
-				{ id: "9B8BF1FB66892FB3", type: "xp", xp: 80 }
-				{ count: 16, id: "C4804D8CAFF739EE", item: "minecraft:torch", type: "item" }
+				{ id: "1B8BF1FB66892FB3", type: "xp", xp: 80 }
+				{ count: 16, id: "44804D8CAFF739EE", item: "minecraft:torch", type: "item" }
 			]
 			shape: "gear"
 			size: 1.75d
 			tasks: [{ id: "637CD62AA2052170", item: "gtceu:ore_plant", type: "item" }]
 			title: "Ore Plant"
-			x: 17.5d
-			y: 3.0d
+			x: 4.0d
+			y: -4.5d
 		}
 		{
-			dependencies: ["F4057E6BDC378944", "C83AF81AF99ECB93"]
+			dependencies: ["51BBBA6F37785CD7"]
 			description: [
-				"Same family as the LV drill, same vein table, same sample - just more bores per hatch and a vanadium steel bit instead of steel."
-				"Everything the LV drill could reach, this one reaches faster. Nothing from the End yet - that vein waits for HV."
+				"Same family as the LV drill, same vein table, same sample, just more bores per hatch. It is crafted with a plain steel bit."
+				"Everything the LV drill could reach, this one reaches faster. Swap in the vanadium steel bit and it drills the End veins too."
 			]
 			icon: "gtceu:mv_vein_drill"
 			id: "430CFDDFCF9174C1"
 			rewards: [
-				{ id: "8C4CC380A108D82B", type: "xp", xp: 60 }
-				{ count: 16, id: "FF949ADB2FDB784E", item: "minecraft:torch", type: "item" }
+				{ id: "0C4CC380A108D82B", type: "xp", xp: 60 }
+				{ count: 16, id: "7F949ADB2FDB784E", item: "minecraft:torch", type: "item" }
 			]
 			shape: "gear"
 			size: 1.5d
-			tasks: [{ id: "C672CBD07B794FDE", item: "gtceu:mv_vein_drill", type: "item" }]
+			tasks: [{ id: "4672CBD07B794FDE", item: "gtceu:mv_vein_drill", type: "item" }]
 			title: "MV Vein Drill"
-			x: 17.5d
-			y: 6.0d
+			x: 8.0d
+			y: -1.5d
 		}
 		{
-			dependencies: ["430CFDDFCF9174C1"]
-			description: [
-				"The drill pays for its own bit: vanadium steel from the same veins the ore plant is already processing."
-				"It wears out slower than the steel bit ever did, and drilling fluid cuts that wear again."
-			]
+			dependencies: ["430CFDDFCF9174C1", "74057E6BDC378944"]
+			description: ["The bit is vanadium steel, made from the same ingots the cutter uses. It wears out slower than the steel bit ever did, and drilling fluid cuts that wear again."]
 			icon: "grindless:vanadium_steel_drill_bit"
-			id: "B0D3D68203F455F9"
-			rewards: [{ id: "A69EC3BA9860D58B", type: "xp", xp: 25 }]
+			id: "30D3D68203F455F9"
+			rewards: [{ id: "269EC3BA9860D58B", type: "xp", xp: 25 }]
 			tasks: [{ count: 4L, id: "4F9706A386EF5506", item: "grindless:vanadium_steel_drill_bit", type: "item" }]
 			title: "Vanadium Steel Drill Bit"
-			x: 20.0d
-			y: 6.0d
+			x: 12.0d
+			y: -3.0d
 		}
 		{
 			dependencies: ["3FCAFC1E38DD934C"]
 			description: [
 				"Stone dust stops being pure waste: the centrifuge now splits it into quartzite, feldspar, marble, biotite and sodalite."
-				"What is left over is a mixed metal residue, not worth separating yet. Keep it in a drawer - EV will want it."
+				"What is left over is a mixed metal residue, not worth separating yet. Keep it in a drawer. EV will want it."
 			]
 			icon: "gtceu:mv_centrifuge"
-			id: "F93F6428373310F1"
-			rewards: [{ id: "AF874B0D92C4AD22", type: "xp", xp: 25 }]
+			id: "793F6428373310F1"
+			rewards: [{ id: "2F874B0D92C4AD22", type: "xp", xp: 25 }]
 			tasks: [{ id: "511754291104BED2", type: "checkmark" }]
 			title: "Stone Dust Separation"
-			x: 20.0d
-			y: 3.0d
+			x: 6.0d
+			y: -4.5d
 		}
 		{
-			dependencies: ["DDC39DF3C1563B6B"]
+			dependencies: ["5DC39DF3C1563B6B"]
 			description: [
-				"Quartz sand and carbon melt in the Kanthal EBF at a heat only a Kanthal coil reaches - a hot silicon ingot, carbon monoxide coming off instead of dioxide this time."
+				"Quartz sand and carbon melt in the Kanthal EBF at a heat only a Kanthal coil reaches. A hot silicon ingot, carbon monoxide coming off instead of dioxide this time."
 				"That CO is worth keeping: a tank for now, methanol later."
 			]
 			icon: "gtceu:silicon_ingot"
 			id: "7C7BAECAD00C19E7"
-			rewards: [{ id: "941E1BFA68E4415F", type: "xp", xp: 30 }]
+			rewards: [{ id: "141E1BFA68E4415F", type: "xp", xp: 30 }]
 			tasks: [{ count: 4L, id: "24A64FE0CBFB7BBC", item: "gtceu:silicon_ingot", type: "item" }]
 			title: "Silicon Ingot"
-			x: 20.0d
-			y: -3.0d
+			x: 10.0d
+			y: 0.0d
 		}
 		{
 			dependencies: ["7C7BAECAD00C19E7"]
-			description: ["Silicon dust and a pinch of gallium arsenide dust, melted again in the same furnace under circuit 2 - the &6Silicon Boule&r is a single crystal, the ancestor of every wafer you will cut."]
+			description: [
+				"Silicon dust and a pinch of gallium arsenide dust, melted again in the same furnace under circuit 2. The &6Silicon Boule&r is a single crystal, the ancestor of every wafer you will cut."
+			]
 			icon: "gtceu:silicon_boule"
 			id: "12A688D7F923740B"
-			rewards: [{ id: "F23753988B299A39", type: "xp", xp: 35 }]
-			tasks: [{ id: "B14055A0A7D0B4DA", item: "gtceu:silicon_boule", type: "item" }]
+			rewards: [{ id: "723753988B299A39", type: "xp", xp: 35 }]
+			tasks: [{ id: "314055A0A7D0B4DA", item: "gtceu:silicon_boule", type: "item" }]
 			title: "Silicon Boule"
-			x: 22.5d
-			y: -3.0d
+			x: 12.0d
+			y: 0.0d
 		}
 		{
 			dependencies: ["12A688D7F923740B", "6213116B3B6723B8"]
-			description: ["The cutter you already own slices the boule into Silicon Wafers - sixteen from one boule, nothing wasted."]
+			description: ["The cutter you already own slices the boule into Silicon Wafers: sixteen from one boule, nothing wasted."]
 			icon: "gtceu:silicon_wafer"
-			id: "886C8CD2541ED490"
-			rewards: [{ id: "8B53DE86A2D8D40B", type: "xp", xp: 30 }]
-			tasks: [{ count: 8L, id: "996CF5113D833357", item: "gtceu:silicon_wafer", type: "item" }]
+			id: "086C8CD2541ED490"
+			rewards: [{ id: "0B53DE86A2D8D40B", type: "xp", xp: 30 }]
+			tasks: [{ count: 8L, id: "196CF5113D833357", item: "gtceu:silicon_wafer", type: "item" }]
 			title: "Silicon Wafers"
-			x: 25.0d
-			y: -3.0d
+			x: 14.0d
+			y: 0.0d
 		}
 		{
-			dependencies: ["886C8CD2541ED490"]
+			dependencies: ["086C8CD2541ED490"]
 			description: [
 				"Red lens in the laser engraver burns an ILC chip into a wafer; green lens burns a RAM chip. Same machine, same wafer, different light."
-				"Both feed every integrated circuit from here to HV - keep both in stock."
+				"Both feed every integrated circuit from here to HV. Keep both in stock."
 			]
 			icon: "gtceu:ilc_chip"
-			id: "CA6B8F971E17C847"
+			id: "4A6B8F971E17C847"
 			rewards: [{ id: "22837AE7060D658D", type: "xp", xp: 35 }]
 			tasks: [
 				{ count: 4L, id: "2CA6F3BD5D88EE26", item: "gtceu:ilc_chip", type: "item" }
-				{ count: 4L, id: "A5078E469CB4E802", item: "gtceu:ram_chip", type: "item" }
+				{ count: 4L, id: "25078E469CB4E802", item: "gtceu:ram_chip", type: "item" }
 			]
 			title: "ILC and RAM"
-			x: 27.5d
-			y: -3.0d
+			x: 16.0d
+			y: 0.0d
 		}
 		{
-			dependencies: ["D1BBBA6F37785CD7", "C83AF81AF99ECB93"]
+			dependencies: ["51BBBA6F37785CD7"]
 			description: [
 				"Same spec as the LV greenhouse, more bores per hatch. A carbon dioxide line is new: feed it in and every recipe yields half again as much, and gives back oxygen for the EBF."
-				"Logs, rubber resin and crops - everything pyrolysis, the brewery and the biorefinery are about to ask for."
+				"Logs, rubber resin and crops: everything pyrolysis, the brewery and the biorefinery are about to ask for."
 			]
 			icon: "gtceu:mv_greenhouse"
 			id: "3AE74DC5E01AD916"
 			rewards: [
-				{ id: "C251E295C87B7454", type: "xp", xp: 60 }
+				{ id: "4251E295C87B7454", type: "xp", xp: 60 }
 				{ count: 4, id: "3F99F7EF4A1613B8", item: "minecraft:wheat_seeds", type: "item" }
 			]
 			shape: "gear"
 			size: 1.5d
-			tasks: [{ id: "D9AE03D63045757C", item: "gtceu:mv_greenhouse", type: "item" }]
+			tasks: [{ id: "59AE03D63045757C", item: "gtceu:mv_greenhouse", type: "item" }]
 			title: "MV Greenhouse"
-			x: 22.5d
-			y: 9.0d
+			x: 6.0d
+			y: 3.0d
 		}
 		{
 			dependencies: ["3AE74DC5E01AD916"]
-			description: ["Logs go into the &6Pyrolyse Oven&r and a circuit chooses what comes out: charcoal, creosote, tar, wood gas, dark ash, vinegar. Nitrogen in the hatch runs it twice as fast."]
+			description: [
+				"Logs go into the &6Pyrolyse Oven&r and a circuit chooses what comes out: charcoal, creosote, tar, wood gas, dark ash, vinegar. Nitrogen in the hatch runs it twice as fast."
+			]
 			icon: "gtceu:pyrolyse_oven"
-			id: "F168260562812CF8"
-			rewards: [{ id: "F16F10BFB3CF8C10", type: "xp", xp: 35 }]
+			id: "7168260562812CF8"
+			rewards: [{ id: "716F10BFB3CF8C10", type: "xp", xp: 35 }]
 			tasks: [{ id: "7A6F1688CFA14C4C", item: "gtceu:pyrolyse_oven", type: "item" }]
 			title: "Pyrolysis"
-			x: 25.0d
-			y: 9.0d
+			x: 6.0d
+			y: 6.0d
 		}
 		{
-			dependencies: ["F168260562812CF8"]
+			dependencies: ["7168260562812CF8"]
 			description: [
 				"The silicon line's carbon monoxide and the greenhouse's carbon dioxide both end up here: hydrogen turns either one into methanol."
-				"Biodiesel, methyl acetate and MV generators all run on it - nothing about this gas goes to waste."
+				"Biodiesel, methyl acetate and MV generators all run on it. Nothing about this gas goes to waste."
 			]
 			icon: "gtceu:mv_chemical_reactor"
 			id: "48331D61E0C6B691"
 			rewards: [{ id: "7432D0E71BD682FE", type: "xp", xp: 30 }]
 			tasks: [{ id: "3858A9F06BB3A0EE", type: "checkmark" }]
 			title: "Methanol"
-			x: 27.5d
-			y: 9.0d
+			x: 10.0d
+			y: 7.5d
 		}
 		{
 			dependencies: ["48331D61E0C6B691"]
 			description: [
 				"A still gives you one fraction at a time. The &6Biorefinery&r is a column that collects them all in one pass: ethanol, methanol, acetic acid, acetone, phenol, benzene, creosote."
-				"Not required - a distillery run one fraction at a time still reaches everywhere this chapter goes, just slower."
+				"Not required. A distillery run one fraction at a time still reaches everywhere this chapter goes, just slower."
 			]
 			icon: "gtceu:biorefinery"
 			id: "62C555A8293900FA"
 			optional: true
-			rewards: [{ id: "B6C63C01BD92A0F6", type: "xp", xp: 40 }]
+			rewards: [{ id: "36C63C01BD92A0F6", type: "xp", xp: 40 }]
 			shape: "gear"
 			size: 1.5d
 			tasks: [{ id: "6D666454092B45EE", item: "gtceu:biorefinery", type: "item" }]
 			title: "Biorefinery"
-			x: 30.0d
-			y: 9.0d
-		}
-		{
-			dependencies: ["C83AF81AF99ECB93"]
-			description: [
-				"GTM's own &6Fluid Drilling Rig&r prospects and drills oil, gas and brine on its own - the vein never runs dry, in the Overworld or in the Flatlands and Void alike, so one trip under the base is all you need."
-				"Four frames, four circuits, four motors, four pumps and four vanadium steel gears: the first machine that asks for every line in this chapter at once."
-			]
-			icon: "gtceu:mv_fluid_drilling_rig"
-			id: "9A38798F23E8EA97"
-			rewards: [{ id: "D8FE1CD5AD9C17E5", type: "xp", xp: 50 }]
-			shape: "gear"
-			size: 1.5d
-			tasks: [{ id: "8721BC67872504EC", item: "gtceu:mv_fluid_drilling_rig", type: "item" }]
-			title: "MV Fluid Drilling Rig"
-			x: 22.5d
+			x: 14.0d
 			y: 6.0d
 		}
 		{
-			dependencies: ["9A38798F23E8EA97"]
+			dependencies: ["51BBBA6F37785CD7"]
+			description: [
+				"GTM's own &6Fluid Drilling Rig&r prospects and drills oil, gas and brine on its own. The vein never runs dry, in the Overworld or in the Flatlands and Void alike, so one trip under the base is all you need."
+				"It is four hulls, four frames, four circuits, and the motors and pumps to match: a good test of the MV components."
+			]
+			icon: "gtceu:mv_fluid_drilling_rig"
+			id: "1A38798F23E8EA97"
+			rewards: [{ id: "58FE1CD5AD9C17E5", type: "xp", xp: 50 }]
+			shape: "gear"
+			size: 1.5d
+			tasks: [{ id: "0721BC67872504EC", item: "gtceu:mv_fluid_drilling_rig", type: "item" }]
+			title: "MV Fluid Drilling Rig"
+			x: 8.0d
+			y: 1.5d
+		}
+		{
+			dependencies: ["1A38798F23E8EA97"]
 			description: [
 				"Crude splits into fractions in the distillery; strip the sulfur out with hydrogen and the mixer turns the rest into diesel."
-				"No oil under the base? Seed oil and methanol make biodiesel instead - slower, but it runs the same generators."
+				"No oil under the base? Seed oil and methanol make biodiesel instead: slower, but it runs the same generators."
 			]
 			icon: "gtceu:mv_distillery"
-			id: "C4031073B1E3A181"
+			id: "44031073B1E3A181"
 			rewards: [{ id: "7509CCC2EB6D0716", type: "xp", xp: 30 }]
 			tasks: [{ id: "7A175AB84B6DABE5", type: "checkmark" }]
 			title: "Diesel"
-			x: 25.0d
-			y: 6.0d
+			x: 8.0d
+			y: 3.0d
 		}
 		{
-			dependencies: ["CA6B8F971E17C847"]
+			dependencies: ["1A38798F23E8EA97"]
 			description: [
-				"Salt water from the fluid rig's brine deposit - or salt and water in a mixer if you are landlocked - electrolyzes at LV power into sodium hydroxide, chlorine and hydrogen."
+				"Salt water from the fluid rig's brine deposit, or salt and water in a mixer if you are landlocked, electrolyzes at LV power into sodium hydroxide, chlorine and hydrogen."
 				"All three get used again before this chapter ends: sodium hydroxide becomes persulfate, chlorine becomes PVC, hydrogen becomes methanol."
 			]
 			icon: "gtceu:lv_electrolyzer"
-			id: "C98077C9A58D9578"
-			rewards: [{ id: "E09D15E06779863F", type: "xp", xp: 30 }]
+			id: "498077C9A58D9578"
+			rewards: [{ id: "609D15E06779863F", type: "xp", xp: 30 }]
 			tasks: [{ id: "2061C5FD9F9B9C7B", type: "checkmark" }]
 			title: "Brine and Chlorine"
-			x: 30.0d
-			y: -3.0d
+			x: 12.0d
+			y: 3.0d
 		}
 		{
-			dependencies: ["C98077C9A58D9578"]
-			description: ["Ethanol and sulfuric acid make ethylene; ethylene alone makes polyethylene. The transistor two steps from now is waiting on this plastic."]
+			dependencies: ["62C555A8293900FA"]
+			description: [
+				"Ethanol and sulfuric acid make ethylene; ethylene alone makes polyethylene. The transistor two steps from now is waiting on this plastic."
+			]
 			icon: "gtceu:lv_chemical_reactor"
-			id: "8D69D5BBC371A5B7"
-			rewards: [{ id: "D946CE65167C48A5", type: "xp", xp: 30 }]
-			tasks: [{ id: "ADADD3DCAD01B312", type: "checkmark" }]
+			id: "0D69D5BBC371A5B7"
+			rewards: [{ id: "5946CE65167C48A5", type: "xp", xp: 30 }]
+			tasks: [{ id: "2DADD3DCAD01B312", type: "checkmark" }]
 			title: "Ethylene and PE"
-			x: 32.5d
-			y: -3.0d
+			x: 16.0d
+			y: 3.0d
 		}
 		{
-			dependencies: ["8D69D5BBC371A5B7"]
-			description: ["Chlorine from the brine line plus ethylene makes vinyl chloride; string enough of it together and you get PVC - the plates the hazmat suit is built from."]
+			dependencies: ["0D69D5BBC371A5B7", "498077C9A58D9578"]
+			description: [
+				"Chlorine from the brine line plus ethylene makes vinyl chloride; string enough of it together and you get PVC: the plates the hazmat suit is built from."
+			]
 			icon: "gtceu:mv_mixer"
-			id: "8F6966AED46B5795"
-			rewards: [{ id: "DDE2D5B9164A186F", type: "xp", xp: 30 }]
+			id: "0F6966AED46B5795"
+			rewards: [{ id: "5DE2D5B9164A186F", type: "xp", xp: 30 }]
 			tasks: [{ id: "3C0D1AB8A4AB4406", type: "checkmark" }]
 			title: "PVC"
-			x: 35.0d
-			y: -3.0d
+			x: 16.0d
+			y: 4.5d
 		}
 		{
-			dependencies: ["8F6966AED46B5795"]
-			description: ["A silicon plate, fine tin wire and a splash of polyethylene make a &6Transistor&r. Carbon and a coil of wire make a &6Resistor&r - the plainest part in this whole chapter."]
+			dependencies: ["0D69D5BBC371A5B7"]
+			description: [
+				"A silicon plate, fine tin wire and a splash of polyethylene make a &6Transistor&r. Carbon and a coil of wire make a &6Resistor&r. The plainest part in this whole chapter."
+			]
 			icon: "gtceu:transistor"
 			id: "6A521D8B1437F9E4"
 			rewards: [{ id: "24107FFF763CEE90", type: "xp", xp: 30 }]
@@ -426,48 +439,45 @@
 				{ count: 4L, id: "1C024E6FA2BEAE4A", item: "gtceu:resistor", type: "item" }
 			]
 			title: "Transistors and Resistors"
-			x: 37.5d
-			y: -3.0d
+			x: 16.0d
+			y: 1.5d
 		}
 		{
-			dependencies: ["6A521D8B1437F9E4"]
+			dependencies: ["4A6B8F971E17C847", "6A521D8B1437F9E4"]
 			description: [
-				"An ILC chip and a board make a Basic Integrated Circuit; a better board and more of the same make the Good Integrated Circuit - the MV-tier chip."
+				"An ILC chip and a board make a Basic Integrated Circuit; a better board and more of the same make the Good Integrated Circuit: the MV-tier chip."
 				"Same circuit assembler as LV, just fed more inputs."
 			]
 			icon: "gtceu:good_integrated_circuit"
-			id: "9617CBC90D126D2F"
-			rewards: [{ id: "EE0340634B4E4921", type: "xp", xp: 40 }]
+			id: "1617CBC90D126D2F"
+			rewards: [{ id: "6E0340634B4E4921", type: "xp", xp: 40 }]
 			tasks: [
-				{ count: 4L, id: "E47511CD759A7CB8", item: "gtceu:basic_integrated_circuit", type: "item" }
+				{ count: 4L, id: "647511CD759A7CB8", item: "gtceu:basic_integrated_circuit", type: "item" }
 				{ count: 4L, id: "7EE54ED2F26F26DA", item: "gtceu:good_integrated_circuit", type: "item" }
 			]
 			title: "Integrated Circuits"
-			x: 40.0d
-			y: -3.0d
+			x: 18.0d
+			y: 0.0d
 		}
 		{
-			dependencies: ["9617CBC90D126D2F"]
-			description: [
-				"Two good boards, two ILC chips, two RAM chips, four transistors, electrum fine wire and annealed copper bolts off a GTM arc furnace - the &6Advanced Integrated Circuit&r is the HV circuit, and you can build it at MV power."
-				"Eight of these and the HV gate stops asking anything of your circuit line."
-			]
+			dependencies: ["1617CBC90D126D2F", "6A521D8B1437F9E4"]
+			description: ["Good integrated circuits, ILC and RAM chips, transistors, electrum fine wire and annealed copper bolts make the &6Advanced Integrated Circuit&r. It is the HV circuit, and you can build it at MV power."]
 			icon: "gtceu:advanced_integrated_circuit"
-			id: "C9BA4B42FA5DD586"
+			id: "49BA4B42FA5DD586"
 			rewards: [{ id: "60E0CBE6799FF623", type: "xp", xp: 50 }]
-			tasks: [{ count: 8L, id: "A3078925A3CD9598", item: "gtceu:advanced_integrated_circuit", type: "item" }]
+			tasks: [{ count: 8L, id: "23078925A3CD9598", item: "gtceu:advanced_integrated_circuit", type: "item" }]
 			title: "Advanced Integrated Circuit"
-			x: 42.5d
-			y: -3.0d
+			x: 20.0d
+			y: 0.0d
 		}
 		{
-			dependencies: ["8F6966AED46B5795"]
+			dependencies: ["0F6966AED46B5795"]
 			description: [
 				"GTM's hazards stay on, and this chapter's chemistry pays for them: the &6Hazmat Suit&r is PVC plates, rubber, lead and glass, with a polyethylene and activated carbon filter in the mask."
 				"Pyrolysis with nitrogen in the hatch is where that activated carbon comes from."
 			]
 			icon: "gtceu:hazmat_chestpiece"
-			id: "FB6466252E0C044A"
+			id: "7B6466252E0C044A"
 			rewards: [{ id: "66D264C84F214235", type: "xp", xp: 45 }]
 			tasks: [
 				{ id: "22D15E2F083EBEF9", item: "gtceu:hazmat_headpiece", type: "item" }
@@ -476,68 +486,70 @@
 				{ id: "0423480BB10991E0", item: "gtceu:hazmat_boots", type: "item" }
 			]
 			title: "Hazmat Suit"
-			x: 45.0d
-			y: -3.0d
+			x: 16.0d
+			y: 6.0d
 		}
 		{
-			dependencies: ["C9BA4B42FA5DD586", "FB6466252E0C044A"]
-			description: ["Stainless steel casing, two polyethylene plates and two gold cables - the HV Machine Hull is one size up from MV, and every ingredient already has a line feeding it."]
+			dependencies: ["0D69D5BBC371A5B7"]
+			description: [
+				"Stainless steel casing, two polyethylene plates and two gold cables. The HV Machine Hull is one size up from MV, and every ingredient already has a line feeding it."
+			]
 			icon: "gtceu:hv_machine_hull"
 			id: "01AAEC5F1DC1C5EE"
 			rewards: [{ id: "57FE7D4629271854", type: "xp", xp: 40 }]
 			tasks: [{ count: 2L, id: "4CFF1C375225DF80", item: "gtceu:hv_machine_hull", type: "item" }]
 			title: "HV Machine Hull"
-			x: 47.5d
-			y: -3.0d
+			x: 20.0d
+			y: 1.5d
 		}
 		{
 			dependencies: ["01AAEC5F1DC1C5EE"]
 			description: ["Same bridge as the LV to MV one, one size up: four MV amps in, one HV amp out, or the other way round."]
 			icon: "gtceu:mv_transformer_1a"
 			id: "3AA2DBA360D83236"
-			rewards: [{ id: "800C1E1F1D0B6039", type: "xp", xp: 45 }]
-			tasks: [{ id: "C1703CC0F8850236", item: "gtceu:mv_transformer_1a", type: "item" }]
+			rewards: [{ id: "000C1E1F1D0B6039", type: "xp", xp: 45 }]
+			tasks: [{ id: "41703CC0F8850236", item: "gtceu:mv_transformer_1a", type: "item" }]
 			title: "MV to HV Transformer"
-			x: 50.0d
-			y: -3.0d
+			x: 22.0d
+			y: 3.0d
 		}
 		{
-			dependencies: ["3AA2DBA360D83236"]
+			dependencies: ["01AAEC5F1DC1C5EE"]
 			description: [
 				"Stainless steel rods, a double silver cable and a double electrum wire wind into the &6HV Motor&r. Stainless pipe and rubber rings make the &6HV Pump&r."
-				"Both are gate-only for this chapter - HV itself is next."
+				"Both are gate-only for this chapter. HV itself is next."
 			]
 			icon: "gtceu:hv_electric_motor"
 			id: "21B999C2D0EF51A9"
-			rewards: [{ id: "9C8DB2E0CEAB0D08", type: "xp", xp: 40 }]
+			rewards: [{ id: "1C8DB2E0CEAB0D08", type: "xp", xp: 40 }]
 			tasks: [
 				{ id: "242873E27919655F", item: "gtceu:hv_electric_motor", type: "item" }
-				{ id: "FE359107E29AC257", item: "gtceu:hv_electric_pump", type: "item" }
+				{ id: "7E359107E29AC257", item: "gtceu:hv_electric_pump", type: "item" }
 			]
 			title: "HV Motor and Pump"
-			x: 52.5d
-			y: -3.0d
+			x: 22.0d
+			y: 1.5d
 		}
 		{
-			dependencies: ["21B999C2D0EF51A9"]
+			dependencies: ["1617CBC90D126D2F"]
 			description: [
 				"None of this is required, but the network keeps growing: Applied Flux feeds it FE through an MV circuit, wireless terminals run off a GT battery and an MV circuit, and EnderChests or EnderTanks turn the simulator's pearls and your aluminium plates into portable storage."
-				"Pick whichever is useful - the core AE2 sub-tree from LV already does the job alone."
+				"Pick whichever is useful. The core AE2 sub-tree from LV already does the job alone."
 			]
 			icon: "ae2:controller"
 			id: "63CD92CD1D3FC989"
 			optional: true
 			rewards: [{ id: "231C195DB1B74F7E", type: "xp", xp: 25 }]
-			tasks: [{ id: "BB48C0F2BEC84CC3", type: "checkmark" }]
+			tasks: [{ id: "3B48C0F2BEC84CC3", type: "checkmark" }]
 			title: "AE2 Grows Up"
-			x: 52.5d
-			y: 0.0d
+			x: 20.0d
+			y: -1.5d
 		}
 		{
-			dependencies: ["21B999C2D0EF51A9", "62C555A8293900FA"]
+			dependencies: ["49BA4B42FA5DD586", "01AAEC5F1DC1C5EE", "3AA2DBA360D83236", "21B999C2D0EF51A9"]
 			description: [
-				"An HV hull, an HV circuit, three filters, two stainless rotors and two HV motors - the &6Cleanroom&r is the one room clean enough for HV wafers and chips."
-				"That is the MV chapter done. Metal, silicon, carbon and chlorine all stand on their own lines - HV just needs you to step inside."
+				"An HV hull, an HV motor, an HV circuit, filters and stainless rotors. The &6Cleanroom&r is the one room clean enough for HV wafers and chips."
+				"Metal, silicon, carbon and chlorine each have their own line now. HV just needs you to step inside."
 			]
 			icon: "gtceu:cleanroom"
 			id: "53336232501835EE"
@@ -547,10 +559,234 @@
 			]
 			shape: "diamond"
 			size: 1.75d
-			tasks: [{ id: "804271B08D0CFDDF", item: "gtceu:cleanroom", type: "item" }]
+			tasks: [{ id: "004271B08D0CFDDF", item: "gtceu:cleanroom", type: "item" }]
 			title: "Cleanroom"
-			x: 55.0d
+			x: 24.0d
+			y: 0.0d
+		}
+		{
+			dependencies: ["51BBBA6F37785CD7", "101BAA038F0ACAA6", "1EEB24C2AB3EF4B0"]
+			description: ["The &6Radio Telescope&r listens from above the base. It needs MV power and a clear sky, and it is the first step toward the Moon."]
+			icon: "gtceu:radio_telescope"
+			id: "1E1E4E32D9532D1A"
+			rewards: [{ id: "1B7C4D2A9E035F61", type: "xp", xp: 40 }]
+			shape: "gear"
+			size: 1.5d
+			tasks: [{ id: "5A0E7C41B2D93F18", item: "gtceu:radio_telescope", type: "item" }]
+			title: "Radio Telescope"
+			x: 6.0d
+			y: -3.0d
+		}
+		{
+			dependencies: ["1E1E4E32D9532D1A"]
+			description: [
+				"The telescope maps the Moon's face. The &6Lunar Landing-Site Chart&r marks where a rocket can set down, and HV's first launch needs it."
+			]
+			icon: "grindless:lunar_landing_chart"
+			id: "5C4613715A82BDBF"
+			rewards: [{ id: "2D91E6B4C7A08F13", type: "xp", xp: 60 }]
+			tasks: [{ id: "3F8A1D6C02B7E945", item: "grindless:lunar_landing_chart", type: "item" }]
+			title: "Lunar Landing-Site Chart"
+			x: 8.0d
+			y: -3.0d
+		}
+		{
+			dependencies: ["44031073B1E3A181"]
+			description: ["Diesel goes back into the distillery and the next cut is kerosene. It is the base of the rocket fuel."]
+			icon: "gtceu:kerosene_bucket"
+			id: "6E2B9F41C5A7D038"
+			rewards: [{ id: "7A4D2C90E61B53F8", type: "xp", xp: 30 }]
+			tasks: [{ id: "5C1F0A8E3B94D672", type: "checkmark" }]
+			title: "Kerosene"
+			x: 8.0d
+			y: 4.5d
+		}
+		{
+			dependencies: ["6E2B9F41C5A7D038"]
+			description: ["Kerosene goes through the distillery once more and comes out as RP-1. The static fire burns it, and so will the rocket."]
+			icon: "gtceu:rp_1_rocket_fuel_bucket"
+			id: "4B8E1D73A0F25C69"
+			rewards: [{ id: "1D5E8B2A7C90F436", type: "xp", xp: 40 }]
+			tasks: [{ id: "2F6C9A40D7E18B35", type: "checkmark" }]
+			title: "RP-1"
+			x: 10.0d
+			y: 3.0d
+		}
+		{
+			dependencies: ["4B8E1D73A0F25C69"]
+			description: [
+				"Power thrusters, RP-1 and oxygen go into a static test. The ones that survive the fire come out as qualified power thrusters, and only those fly."
+			]
+			icon: "grindless:qualified_power_thruster"
+			id: "3A9D0C6F82B14E57"
+			rewards: [{ id: "5E0A7D3C1F92B684", type: "xp", xp: 50 }]
+			tasks: [{ count: 4L, id: "6C2F8E14B9A03D7B", item: "grindless:qualified_power_thruster", type: "item" }]
+			title: "Qualified Power Thrusters"
+			x: 12.0d
+			y: 6.0d
+		}
+		{
+			dependencies: ["3A9D0C6F82B14E57"]
+			description: ["The &6Engine Test Stand&r is a multiblock that fires a rocket engine on the ground, on RP-1. Every engine is tested here before it flies."]
+			icon: "gtceu:engine_test_stand"
+			id: "115744A9113F8B38"
+			rewards: [{ id: "2B6F4C9E8D0A17E3", type: "xp", xp: 60 }]
+			shape: "gear"
+			size: 1.5d
+			tasks: [{ id: "7D3B0E92A6C41F58", item: "gtceu:engine_test_stand", type: "item" }]
+			title: "Engine Test Stand"
+			x: 12.0d
+			y: 4.5d
+		}
+		{
+			dependencies: ["51BBBA6F37785CD7", "47892302FAEA3244"]
+			description: [
+				"The blaze model from LV runs in an &6MV Creature Simulator&r on biomass and coal dust. Its rods are the way to ender eyes, and the eyes are the way to the End."
+			]
+			icon: "minecraft:blaze_rod"
+			id: "3C356A1439744E15"
+			rewards: [{ id: "5C2423EF0233FD7F", type: "xp", xp: 30 }]
+			tasks: [
+				{ id: "1C226BFF42F4D0D1", item: "gtceu:mv_creature_simulator", type: "item" }
+				{ id: "7ED4D594DF1095B4", item: "minecraft:blaze_rod", type: "item" }
+			]
+			title: "Blaze"
+			x: 6.0d
 			y: -1.5d
 		}
+		{
+			dependencies: ["3C356A1439744E15"]
+			description: [
+				"The extractor melts blaze rods into liquid blaze, and an &6MV Chemical Bath&r soaks an ender pearl in it. The vanilla recipe is gone; the pearls come from the enderman model."
+			]
+			icon: "minecraft:ender_eye"
+			id: "3DDBE9267C197FEE"
+			rewards: [{ id: "455F4629A4E480F9", type: "xp", xp: 35 }]
+			tasks: [
+				{ id: "27CDF7857BE02FBD", item: "minecraft:ender_eye", type: "item" }
+				{ id: "7D0735D4C3007874", item: "gtceu:mv_chemical_bath", type: "item" }
+			]
+			title: "Ender Eye"
+			x: 10.0d
+			y: -3.0d
+		}
+		{
+			dependencies: ["3DDBE9267C197FEE"]
+			description: [
+				"An ender eye, a stick and obsidian make the &6End Key&r. It drops you on a safe platform away from the main island and brings you back: you are there for ore, not for the dragon."
+			]
+			icon: "grindless:end_key"
+			id: "756117B334515EA3"
+			rewards: [{ id: "1232F0B14764A6C8", type: "xp", xp: 30 }]
+			tasks: [{ id: "5AA55A133132E331", item: "grindless:end_key", type: "item" }]
+			title: "End Key"
+			x: 10.0d
+			y: -6.0d
+		}
+		{
+			dependencies: ["756117B334515EA3", "30D3D68203F455F9"]
+			description: [
+				"Each End vein needs its own sample: raw ore from that vein and an empty probe. The MV vein drill with a vanadium steel bit runs all four, always with drilling fluid, and EMI lists what each vein gives."
+			]
+			icon: "grindless:vein_sample_sheldonite"
+			id: "004525B795119B1B"
+			rewards: [{ id: "6BC885CD026BAD65", type: "xp", xp: 40 }]
+			tasks: [
+				{ id: "1AF75215B6DC9170", item: "grindless:vein_sample_bauxite_end", type: "item" }
+				{ id: "6EAC9D6932581F0E", item: "grindless:vein_sample_magnetite_end", type: "item" }
+				{ id: "456E0BD2E8DB3874", item: "grindless:vein_sample_sheldonite", type: "item" }
+				{ id: "1DA53D76EFA29AB0", item: "grindless:vein_sample_zirconium", type: "item" }
+			]
+			title: "End Veins"
+			x: 12.0d
+			y: -4.5d
+		}
+		{
+			dependencies: ["262640F3533EE2C3"]
+			description: [
+				"Eleven forming machines behind one controller: bender, wiremill, lathe, cutter, extruder and more. Pick the machine in the mode tab on the left of the controller."
+				"Up to 4 recipes at once, each at its full EU/t. It saves rows of machines, not power."
+			]
+			icon: "gtceu:universal_processing_factory"
+			id: "627E186404378CB4"
+			rewards: [{ id: "2D3C6C97135BC1D7", type: "xp", xp: 50 }]
+			tasks: [{ id: "6453007841DA2C65", item: "gtceu:universal_processing_factory", type: "item" }]
+			title: "Universal Processing Factory"
+			x: 4.0d
+			y: 3.0d
+		}
+		{
+			dependencies: ["627E186404378CB4"]
+			description: ["Assembler and circuit assembler in one hall. Recipes that need a cleanroom still need one."]
+			icon: "gtceu:universal_assembly_factory"
+			id: "661F318CAF9FAB23"
+			rewards: [{ id: "36FBB71246272AC6", type: "xp", xp: 50 }]
+			tasks: [{ id: "7D3B9ED1BD1DACC3", item: "gtceu:universal_assembly_factory", type: "item" }]
+			title: "Universal Assembly Factory"
+			x: 4.0d
+			y: 4.5d
+		}
+		{
+			dependencies: ["661F318CAF9FAB23"]
+			description: ["Centrifuge, electrolyzer, thermal centrifuge, macerator, sifter, extractor and electromagnetic separator. Every gas needs its own output hatch."]
+			icon: "gtceu:universal_separation_factory"
+			id: "12DED2DD9F460B1E"
+			rewards: [{ id: "1BC8ED62911B2B29", type: "xp", xp: 50 }]
+			tasks: [{ id: "25A4C777B062B5E0", item: "gtceu:universal_separation_factory", type: "item" }]
+			title: "Universal Separation Factory"
+			x: 4.0d
+			y: 6.0d
+		}
+		{
+			dependencies: ["12DED2DD9F460B1E"]
+			description: ["Mixer, chemical reactor, chemical bath and ore washer. Dust-only mixes need no hatch at all."]
+			icon: "gtceu:universal_mixing_factory"
+			id: "334DF899A63DBB13"
+			rewards: [{ id: "6CD8011712E8A87D", type: "xp", xp: 50 }]
+			tasks: [{ id: "1354E905F7AA5B40", item: "gtceu:universal_mixing_factory", type: "item" }]
+			title: "Universal Mixing Factory"
+			x: 4.0d
+			y: 7.5d
+		}
+		{
+			dependencies: ["334DF899A63DBB13"]
+			description: [
+				"One furnace for mixed batches: dusts, food and ores with the same cooking time smelt together in one run."
+				"Hotter coils, more at once: 4 with cupronickel, doubling every 900 K, up to 64."
+			]
+			icon: "gtceu:advanced_multi_smelter"
+			id: "1DAF5DAC3FE8DF4E"
+			rewards: [{ id: "1CA714AF20413892", type: "xp", xp: 50 }]
+			tasks: [{ id: "120EE92F2E3CA8B6", item: "gtceu:advanced_multi_smelter", type: "item" }]
+			title: "Advanced Multi Smelter"
+			x: 6.0d
+			y: 7.5d
+		}
+		{
+			dependencies: ["1DAF5DAC3FE8DF4E"]
+			description: ["No power, just lava: it smelts several items at once with lava as its heat. It never makes lava; it only burns it."]
+			icon: "gtceu:lava_furnace"
+			id: "7F6788F6AAD7AE1B"
+			rewards: [{ id: "31EB13E7D3C67344", type: "xp", xp: 40 }]
+			tasks: [{ id: "27704CDD80CD50C9", item: "gtceu:lava_furnace", type: "item" }]
+			title: "Lava Furnace"
+			x: 8.0d
+			y: 7.5d
+		}
+		{
+			dependencies: ["1E1E4E32D9532D1A"]
+			description: [
+				"Tired of waiting for a clear night? Seed the clouds: calcium chloride clears the sky for a day, salt brings rain, salt and copper wire call a storm."
+				"It works on the Overworld only, and the weather changes when the run ends."
+			]
+			icon: "gtceu:weather_controller"
+			id: "78EB08D129F7B21A"
+			rewards: [{ id: "68EC208C4D9846BA", type: "xp", xp: 50 }]
+			tasks: [{ id: "7329F59F90310654", item: "gtceu:weather_controller", type: "item" }]
+			title: "Weather Controller"
+			x: 8.0d
+			y: -4.5d
+		}
 	]
+	title: "MV: The Far End"
 }

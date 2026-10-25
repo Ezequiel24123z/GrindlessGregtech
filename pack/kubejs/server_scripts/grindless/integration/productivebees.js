@@ -1,7 +1,7 @@
 // -----------------------------------------------------------------------------------------------
 // Productive Bees (productivebees): bees are kept for what they do on their own (wax, honey, pollen, nests, the mob-drop
 // combs below), but combs only give MATERIALS through GregTech machines and never ores, ingots or dusts directly
-// (docs/eras/mv.md, "Mods e integración" + "Decisiones tomadas": a second way to automate, not a shortcut).
+// (docs/eras/mv.md, "Mods and integration" + "Decisions taken": a second way to automate, not a shortcut).
 //  1. Every centrifuge recipe of a material comb (productivebees:centrifuge/<group>/..., 94 loaded here) is removed:
 //     raw_materials (iron, copper, gold, tin, nickel, titanium, tungsten, platinum, iridium, osmium...), alloys (STEEL,
 //     bronze, brass, invar, electrum), gems (diamond, emerald, lapis, quartz, ruby...), dusts (redstone, sulfur, zinc,
@@ -23,11 +23,19 @@
 //     the recipe names) with HALF of PB's chance. Alloy combs (steel, bronze...), silicon, sticky resin, AE2 and fluid combs get
 //     no recipe: those materials have their own GT lines.
 //  7. Tiers: each recipe of item 6 runs at the EU/t of the era that opens the comb's material (docs/eras/*.md, data/grindless/tables/veins*.json):
-//       MV   120 EU/t  Overworld and Nether vein materials (PB's own floor) and glowstone (redstone byproduct); bauxite, vanadium magnetite and gold too (End veins have them, Overworld veins open them first).
-//       HV   480 EU/t  materials only the End veins give (veins_end.json, hv.md): raw aluminium, chromite, ilmenite, titanium, scheelite, tungstate, cooperite (sheldonite comb), zircon.
-//       EV  1920 EU/t  platinum-group metals and tungsten (ev.md: platinum plant, tungsten line): platinum, palladium, tungsten.
-//       IV  7680 EU/t  radioactives and Ir/Os (veins_excluded.json until IV; ev.md decision 3): naquadah, uranium (radioactive comb), osmium.
-//     No recipe: materials the pack does not open before LuV (fluorite: no vein or recipe makes it; neutronium) and combs that would
+//       MV   120 EU/t  Overworld and Nether vein materials (PB's own floor) and glowstone (redstone byproduct); bauxite, vanadium magnetite and gold too (End veins have them, Overworld veins open them first);
+//                      and what only the End veins give, now that the End is MV (veins_end.json, mv.md): raw aluminium, chromite, cooperite (sheldonite comb), zircon.
+//       EV  1920 EU/t  platinum-group metals (ev.md: platinum plant): platinum, palladium.
+//       IV  held       radioactives and Ir/Os: naquadah, uranium (radioactive comb), osmium. They get NO recipe, for good (docs/eras/iv.md,
+//                      decisions 4 and 5, and the raise's decision 2): naquadah only comes from Venus, iridium and osmium only from
+//                      Mercury's iridosmine, and uranium only from the End's leach field. A comb recipe would also skip the gate: GTM's
+//                      two-hatch rule lets a multiblock with two EV energy hatches run 7,680 EU/t, and the radioactive and osmium bees
+//                      breed from Earth bees (creeper x iron, iron x neon cuckoo). The bees stay registered (saves), with nothing to give.
+//       MOON 480 EU/t  materials only the Moon has (data/grindless/tables/offworld_only.json, worlds.moon.combs: ilmenite, titanium).
+//       MARS 1920 EU/t materials only Mars has (worlds.mars.combs: tungsten, scheelite, tungstate; scheelite and tungstate left the End
+//                      for Mars). MOON and MARS recipes also carry their world's dimension (worlds.<world>.dimension), so the bees can
+//                      live on Earth but their titanium only comes out on the Moon and their tungsten only on Mars.
+//     No recipe: materials whose only source is a line of their own (fluorite: IV's fluorite vein, drilled; neutronium) and combs that would
 //     skip a line (iridium nuggets: the IV iridium chain; blaze powder and rods: HV chemical reactor and simulator; netherite scrap).
 //     A comb missing from COMB_ERA gets no recipe and is named in the server log.
 // Bees only ever produce combs (the 101 hive recipes make configurable combs and pollen; bone, chorus, fish, sponge, spider eye
@@ -44,7 +52,9 @@
   var CHANCE_SCALE = 0.5
 
   // item 7: comb name (productivebees:centrifuge/<group>/honeycomb_<name>) -> era of its material -> EU/t
-  var ERA_EUT = { MV: 120, HV: 480, EV: 1920, IV: 7680 }
+  var ERA_EUT = { MV: 120, HV: 480, EV: 1920, IV: 7680, MOON: 480, MARS: 1920 }
+  var WORLDS = global.grindless.readJsonTable('kubejs/data/grindless/tables/offworld_only.json').worlds
+  var ERA_DIMENSION = { MOON: WORLDS.moon.dimension, MARS: WORLDS.mars.dimension }
   var COMB_ERA = {}
   var setEra = function (era, names) {
     names.forEach(function (n) { COMB_ERA[n] = era })
@@ -56,11 +66,13 @@
     'glowing', 'redstone', 'saltpeter', 'sulfur',
     'barite', 'bastnasite', 'bauxite', 'cobaltite', 'electrotine', 'galena', 'graphite', 'molybdenum', 'neodymium', 'oilsands',
     'pyrochlore', 'pyrolusite', 'realgar', 'sphalerite', 'stibnite', 'tantalite', 'tetrahedrite', 'tricalcium_phosphate',
-    'vanadium_magnetite'
+    'vanadium_magnetite',
+    'aluminium', 'chromite', 'sheldonite', 'zircon'
   ])
-  setEra('HV', ['aluminium', 'chromite', 'ilmenite', 'titanium', 'scheelite', 'tungstate', 'sheldonite', 'zircon'])
-  setEra('EV', ['platinum', 'palladium', 'tungsten'])
+  setEra('EV', ['platinum', 'palladium'])
   setEra('IV', ['naquadah', 'radioactive', 'osmium'])
+  setEra('MOON', WORLDS.moon.combs)
+  setEra('MARS', WORLDS.mars.combs)
 
   ServerEvents.recipes(function (event) {
     // read the material combs BEFORE removing them: the GT recipes are built from the same data
@@ -103,9 +115,10 @@
       return first
     }
 
-    var made = { MV: 0, HV: 0, EV: 0, IV: 0 }
+    var made = { MV: 0, HV: 0, EV: 0, IV: 0, MOON: 0, MARS: 0 }
     var total = 0
     var noEra = []
+    var held = []
     var skipped = 0
     if (Item.exists('productivebees:wax') && Item.exists('productivebees:configurable_honeycomb')) {
       combs.forEach(function (c) {
@@ -114,6 +127,8 @@
           var comb = path.replace(/^.*\//, '').replace(/^(honey)?comb_/, '')
           var era = COMB_ERA.hasOwnProperty(comb) ? COMB_ERA[comb] : null
           if (era === null) { noEra.push(path); return }
+          // item 7: the IV combs (naquadah, radioactive, osmium) never get a recipe
+          if (era === 'IV') { held.push(path); return }
           var ingredient = c.json.ingredient
           var result = null
           var chance = 0
@@ -134,13 +149,15 @@
           // PB writes the comb NBT as an object (most groups) or as an SNBT string (gtceu group)
           var nbt = typeof ingredient.nbt === 'string' ? ingredient.nbt : JSON.stringify(ingredient.nbt)
           var name = path.replace(/[^a-z0-9_\/]/g, '_')
-          event.recipes.gtceu.centrifuge('grindless:pb/' + name)
+          var recipe = event.recipes.gtceu.centrifuge('grindless:pb/' + name)
             .itemInputs(Item.of('productivebees:configurable_honeycomb', nbt).strongNBT())
             .itemOutputs('productivebees:wax')
             .chancedOutput('1x ' + result, Math.max(1, Math.min(9999, Math.round(chance * 100 * CHANCE_SCALE))), 0)
             .outputFluids(Fluid.of('productivebees:honey', 50))
             .EUt(ERA_EUT[era])
             .duration(DURATION)
+          // a material of another world comes out only there (GTM's dimension condition)
+          if (ERA_DIMENSION.hasOwnProperty(era)) recipe.dimension(ERA_DIMENSION[era])
           made[era]++
           total++
         } catch (e) {
@@ -150,7 +167,8 @@
       })
     }
     console.info(LOG + 'GT centrifuge comb recipes: ' + total + ' (MV ' + made.MV + ', HV ' + made.HV + ', EV ' + made.EV + ', IV ' +
-      made.IV + ') of ' + combs.length + ' material combs; no era, no recipe: ' + (noEra.length > 0 ? noEra.join(', ') : 'none') +
+      made.IV + ', Moon ' + made.MOON + ', Mars ' + made.MARS + ') of ' + combs.length + ' material combs; held for good (no recipe): ' +
+      (held.length > 0 ? held.join(', ') : 'none') + '; no era, no recipe: ' + (noEra.length > 0 ? noEra.join(', ') : 'none') +
       '; skipped (no output item or NBT): ' + skipped)
   })
 })()

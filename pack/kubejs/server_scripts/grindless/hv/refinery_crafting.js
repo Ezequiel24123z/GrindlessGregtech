@@ -8,6 +8,8 @@
 //   Catalytic Reformer (gtceu:reformer)  CRAFTING TABLE: HV hull + HV chemical reactor + 2 HV electric pumps + 4 HV circuits
 //   hydrotreating catalyst            MIXER: 1 cobalt dust + 1 molybdenum dust + 3 silicon dioxide dust -> 4 catalysts. Three ore lines meet in
 //                                     it: cobalt (the nickel vein of the Overworld), molybdenum (the Nether vein) and silica (electrolysis of sand)
+//   hydrotreating catalyst, ash       the same with 3 ash dust in place of the silica (the syngas plant's ash, HV): the same 4 catalysts, energy
+//                                     and time. The syngas line and the refinery line close a loop
 //   reforming catalyst                MIXER: 1 platinum dust + 3 silicon dioxide dust -> 4 catalysts. The platinum is the sheldonite vein of the End
 //
 // A catalyst is used up by chance (0.05 % of the runs), so four of them last for thousands of runs: the cost of this line is in the
@@ -24,6 +26,7 @@
   const REACTOR = 'gtceu:hv_chemical_reactor'
   const PUMP = 'gtceu:hv_electric_pump'
   const SILICA = 'gtceu:silicon_dioxide_dust'
+  const ASH = 'gtceu:ash_dust'
 
   const REFINERY_PARTS = [HULL, DISTILLERY, REACTOR, PUMP, 'gtceu:refinery']
   const REFORMER_PARTS = [HULL, REACTOR, PUMP, 'gtceu:reformer']
@@ -81,6 +84,16 @@
         .itemInputs('1x gtceu:cobalt_dust', '1x gtceu:molybdenum_dust', '3x ' + SILICA)
         .itemOutputs('4x grindless:hydrotreating_catalyst')
         .EUt(120).duration(300)
+
+      // the ash variant: the syngas plant's ash in place of the silica (same catalyst, energy and time)
+      if (Item.exists(ASH)) {
+        event.recipes.gtceu.mixer('grindless:hydrotreating_catalyst_ash')
+          .itemInputs('1x gtceu:cobalt_dust', '1x gtceu:molybdenum_dust', '3x ' + ASH)
+          .itemOutputs('4x grindless:hydrotreating_catalyst')
+          .EUt(120).duration(300)
+      } else {
+        console.error('[grindless/hv] hydrotreating catalyst (ash) skipped, unknown item ' + ASH)
+      }
 
       event.recipes.gtceu.mixer('grindless:reforming_catalyst')
         .itemInputs('1x gtceu:platinum_dust', '3x ' + SILICA)

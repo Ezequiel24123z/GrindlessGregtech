@@ -1,0 +1,16 @@
+{
+  "_source": "Our own table. Dimension ids: vanilla, the pack's datapack (grindless:void, grindless:flat) and Gregicality Rocketry 0.2.9 (data/gcyr/dimension/*.json; the planets of data/gcyr/gcyr/planets/*.json pair a world with its orbit).",
+  "_how_it_is_used": [
+    "Which dimension belongs to which planet. Read by server_scripts/grindless/moon/planets.js (published as global.grindless.planets), moon/quantum_bridge.js and the smoke test gg_test_moon.js.",
+    "DECISIONS.md 2026-10-24: AE2 is the industrial transport between planets (items, fluids and energy); the Earth-Moon quantum bridge is made with one half at each end. Ender chests, tanks, bags and covers, Modular Routers and Waystones work across planets without limits (quality of life), and people travel free (Waystones, FTB homes).",
+    "planets.<key>.dimensions: the dimensions of that planet (the world and its orbit). A dimension that is in no list counts as a planet of its own, never as Earth.",
+    "planets.<key>.pairTag: the value of the NBT key grindless_planet that the Earth-<planet> entangled pairs carry (moon/crafting.js makes the Moon's and ev/ae2_interplanetary.js the Mars ones, each with a seed made on that planet). An AE2 quantum link chamber outside Earth only keeps a singularity marked for its own planet; any other one (an Earth pair from the LV ritual, or a pair for another planet) is pushed out within a second, with a message. A planet with no pairTag keeps no pair at all."
+  ],
+  "planets": {
+    "earth": { "dimensions": ["minecraft:overworld", "minecraft:the_nether", "minecraft:the_end", "grindless:void", "grindless:flat", "gcyr:overworld_orbit"] },
+    "moon": { "dimensions": ["gcyr:luna", "gcyr:luna_orbit"], "pairTag": "moon", "name": { "en_us": "the Moon", "es_es": "la Luna" } },
+    "mars": { "dimensions": ["gcyr:mars", "gcyr:mars_orbit"], "pairTag": "mars", "name": { "en_us": "Mars", "es_es": "Marte" } },
+    "venus": { "dimensions": ["gcyr:venus", "gcyr:venus_orbit"], "pairTag": "venus", "name": { "en_us": "Venus", "es_es": "Venus" } },
+    "mercury": { "dimensions": ["gcyr:mercury", "gcyr:mercury_orbit"], "pairTag": "mercury", "name": { "en_us": "Mercury", "es_es": "Mercurio" } }
+  }
+}
