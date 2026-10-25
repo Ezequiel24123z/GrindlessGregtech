@@ -9,7 +9,8 @@
 //   - on a click request: waits until the crosshair is on the requested block, then holds the use key for one client tick, so Minecraft
 //     runs its own right-click (startUseItem -> useItemOn -> the chest's menu), as with the mouse;
 //   - once a Sophisticated Storage screen is open: after 30 ticks reports what the CLIENT menu shows (storage slots, upgrade slots, rows,
-//     and the stacks and items in every slot that is not the player's inventory) and takes a screenshot into kubejs/exported/;
+//     the stacks and items in the storage slots and, apart, in the upgrade slots), whether the click was aimed at the requested block, and
+//     takes a screenshot into kubejs/exported/ (its IO-thread callback reports whether the file was written);
 //   - on a close request: closes the menu the way the player does (the close packet goes to the server).
 // var + function: this Rhino throws "redeclaration of var" for const/let in functions that run more than once.
 ;(function () {
@@ -19,7 +20,7 @@
   var TAG = 'GGTEST|chest_furnace|'
   var HOLD_MAX_MS = 15 * 60 * 1000
   var c = { holding: false, since: 0, errors: 0, ageField: null, gaveUp: false, levels: false, pressed: '', releaseNext: false, waitAim: 0,
-    clickedHow: '', openTicks: 0, reported: '', closed: '' }
+    clickedHow: '', aimOk: false, openTicks: 0, reported: '', closed: '' }
 
   function val(key) {
     var v = S.get(key)
@@ -126,11 +127,27 @@
     }
     c.pressed = token
     c.waitAim = 0
+    c.aimOk = at === want
     mc.options.keyUse.setDown(true)
     c.releaseNext = true
-    c.clickedHow = 'by a real right-click (use key held one tick) with the crosshair on ' + (at || 'nothing') + (at === want ? '' : ' (wanted ' + want + ')')
+    c.clickedHow = 'a real right-click (use key held one tick) with the crosshair on ' + (at || 'nothing') + (c.aimOk ? '' : ' (wanted ' + want + ')')
     c.openTicks = 0
     S.put('clickNote', c.clickedHow)
+  }
+
+  // the screenshot is written on Minecraft's IO thread; its callback says whether the file was written
+  function shoot(mc, token, name) {
+    try {
+      var Screenshot = Java.loadClass('net.minecraft.client.Screenshot')
+      Java.loadClass('dev.latvian.mods.kubejs.KubeJSPaths').dir('kubejs/exported')
+      Screenshot.grab(field(mc, ['gameDirectory', 'f_91069_']), '../kubejs/exported/' + name + '.png', method(mc, ['getMainRenderTarget', 'm_91385_']), function (msg) {
+        var key = ''
+        try { key = String(msg.getContents().getKey()) } catch (e) { key = String(msg.getString()) }
+        S.put('shotResult', token + '|' + key + '|' + name + '.png')
+      })
+    } catch (e) {
+      S.put('shotResult', token + '|exception ' + String(e).replace(/\|/g, '/') + '|' + name + '.png')
+    }
   }
 
   function observe(mc, p) {
@@ -146,30 +163,29 @@
     c.reported = token
     var menu = sm.menu
     var inv = p.getInventory()
-    var slots = menu.slots
+    // menu.slots holds the storage and the player's slots; the upgrade slots sit past them (StorageContainerMenuBase#getSlot)
+    var first = Number(menu.getInventorySlotsSize())
+    var total = Number(menu.getTotalSlotsNumber())
     var stacks = 0
     var items = 0
-    for (var i = 0; i < slots.size(); i++) {
-      var s = slots.get(i)
-      if (s.container.equals(inv)) continue
+    var upStacks = 0
+    var upItems = 0
+    for (var i = 0; i < total; i++) {
+      var s = menu.getSlot(i)
+      if (i < first && s.container.equals(inv)) continue
       var st = s.getItem()
-      if (!st.isEmpty()) {
+      if (st.isEmpty()) continue
+      if (i < first) {
         stacks++
         items += Number(st.getCount())
+      } else {
+        upStacks++
+        upItems += Number(st.getCount())
       }
     }
-    var shot = val('screenshotName')
-    try {
-      var Screenshot = Java.loadClass('net.minecraft.client.Screenshot')
-      Java.loadClass('dev.latvian.mods.kubejs.KubeJSPaths').dir('kubejs/exported')
-      Screenshot.grab(field(mc, ['gameDirectory', 'f_91069_']), '../kubejs/exported/' + shot + '.png', method(mc, ['getMainRenderTarget', 'm_91385_']), function (msg) { })
-      shot = shot + '.png'
-    } catch (e) {
-      shot = 'failed (' + e + ')'
-    }
-    var how = c.clickedHow !== '' ? c.clickedHow : 'by the server (fallback)'
+    shoot(mc, token, val('screenshotName'))
     var rep = [token, String(sm.scr.getClass().getSimpleName()), Number(menu.getNumberOfStorageInventorySlots()), Number(menu.getNumberOfUpgradeSlots()),
-      Number(menu.getNumberOfRows()), stacks, items, how, shot].join('|')
+      Number(menu.getNumberOfRows()), stacks, items, upStacks, upItems, c.clickedHow !== '' ? c.clickedHow : 'not by a click of this client', c.aimOk ? 'aim' : 'noaim'].join('|')
     S.put('report', rep)
     log('client_screen', 'NOTE', rep)
   }

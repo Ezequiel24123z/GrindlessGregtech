@@ -13,8 +13,9 @@
 //                 included) and their upgrade; a second unload/reload keeps the new size. Automation sees the new slots (Forge's item
 //                 handler capability inserts into and extracts from a slot past the old size) and the limited barrel takes twice as many.
 //   tier_upgrade  iron_to_gold_tier_upgrade used on the full, migrated chest: a gold chest of 162 slots with everything still inside.
-//   gui           real right-clicks (the client holds the use key) on the gold chest (162 slots) and a netherite chest (180): the client's
-//                 menu shows the pack's slot and upgrade counts and every item; one screenshot each (kubejs/exported/gg_chest_*.png).
+//   gui           real right-clicks (the client holds the use key, crosshair on the chest; no server fallback) on the gold chest (162 slots)
+//                 and a netherite chest (180): the client's menu shows the pack's slot and upgrade counts, every item and the upgrade; one
+//                 screenshot each, confirmed written by its callback (kubejs/exported/gg_chest_*.png).
 //   furnaces      Iron Furnaces' live config is the shipped file (which Forge's spec accepts as is: it is never rewritten); an iron and a
 //                 netherite furnace smelt one coal's worth of an ordinary 200-tick smelting recipe at 80 and 2 ticks per item, with
 //                 exactly one coal; an iron furnace holding items and a speed augment becomes a gold furnace with upgrade_gold and keeps
@@ -652,7 +653,8 @@
     return true
   }
 
-  // real right-click: the player stands two blocks south of the chest looking at it; the client holds the use key for a tick
+  // real right-click: the player stands two blocks south of the chest looking at it; the client holds the use key for a tick. No server
+  // fallback: if the real click does not open the chest, the check fails
   function guiStep(name, pos, wantSlots, wantUpg) {
     return function (p, age, st) {
       if (age === 0) {
@@ -662,46 +664,54 @@
         shared().put('screenshotName', 'gg_chest_' + name)
         shared().put('clickPos', pos.x + ',' + pos.y + ',' + pos.z)
         shared().put('report', '')
+        shared().put('shotResult', '')
         return false
       }
       if (age === 10) shared().put('clickToken', st.token)
       var menu = p.containerMenu
       var open = menu !== null && typeof menu.getNumberOfStorageInventorySlots === 'function'
-      if (!open && age === 200 && !st.fallback) {
-        st.fallback = true
-        var hit = new (cls().BlockHitResult)(new (cls().Vec3)(pos.x + 0.5, pos.y + 0.5, pos.z + 1), cls().Direction.SOUTH, bp(pos), false)
-        T.level.getBlockState(bp(pos)).use(T.level, p, cls().Hand.MAIN_HAND, hit)
-        note('gui_' + name + '_fallback', 'the real click did not open the chest in 190 ticks (client: ' + sval('clickNote') + '); opened by BlockState#use on the server')
-      }
       if (open && st.serverSlots === undefined) {
         st.serverSlots = Number(menu.getNumberOfStorageInventorySlots())
         st.serverUpg = Number(menu.getNumberOfUpgradeSlots())
       }
       var rep = sval('report')
-      if (rep === '' || rep.indexOf(st.token) !== 0) return age > 600 ? finishGui(name, st, wantSlots, wantUpg, null) : false
-      return finishGui(name, st, wantSlots, wantUpg, rep)
+      var shot = sval('shotResult')
+      var haveRep = rep !== '' && rep.indexOf(st.token + '|') === 0
+      var haveShot = shot !== '' && shot.indexOf(st.token + '|') === 0
+      if (haveRep && haveShot) return finishGui(name, pos, st, wantSlots, wantUpg, rep, shot)
+      if (age > 600) return finishGui(name, pos, st, wantSlots, wantUpg, haveRep ? rep : null, haveShot ? shot : null)
+      return false
     }
   }
 
-  function finishGui(name, st, wantSlots, wantUpg, rep) {
+  function finishGui(name, pos, st, wantSlots, wantUpg, rep, shot) {
     if (rep === null) {
-      check('gui_' + name, false, 'the client never reported an open storage screen (server menu ' + st.serverSlots + ' slots; client: ' + sval('clickNote') + ')')
+      check('gui_' + name, false, 'the client never reported an open storage screen (server menu ' + (st.serverSlots === undefined ? 'not open' : st.serverSlots + ' slots') +
+        '; client: ' + sval('clickNote') + ')')
       return true
     }
-    // token|screen class|storage slots|upgrade slots|rows|non-player stacks|non-player items|how|screenshot
+    // token|screen class|storage slots|upgrade slots|rows|storage stacks|storage items|upgrade stacks|upgrade items|how|aim
     var f = rep.split('|')
     var cSlots = Number(f[2])
     var cUpg = Number(f[3])
     var cStacks = Number(f[5])
     var cItems = Number(f[6])
-    // the client also counts the upgrade item(s) in the menu's upgrade slots
+    var cUpStacks = Number(f[7])
+    var cUpItems = Number(f[8])
+    var aimed = f[10] === 'aim'
     var upStacks = 0
     var upItems = 0
-    var w = wrapper(name === 'gold' ? A : D).getUpgradeHandler()
+    var w = wrapper(pos).getUpgradeHandler()
     for (var i = 0; i < w.getSlots(); i++) if (!w.getStackInSlot(i).isEmpty()) { upStacks++; upItems += Number(w.getStackInSlot(i).getCount()) }
-    check('gui_' + name, cSlots === wantSlots && cUpg === wantUpg && st.serverSlots === wantSlots && cStacks === st.expect.stacks + upStacks && cItems === st.expect.items + upItems,
-      'screen ' + f[1] + ' opened ' + f[7] + ': the client menu shows ' + cSlots + ' storage slots (want ' + wantSlots + ') in ' + f[4] + ' rows and ' + cUpg + ' upgrade slots (want ' +
-      wantUpg + '); ' + cStacks + ' stacks / ' + cItems + ' items in it (the chest holds ' + st.expect.stacks + ' / ' + st.expect.items + ' plus ' + upStacks + ' upgrade); screenshot ' + f[8])
+    check('gui_' + name, aimed && cSlots === wantSlots && cUpg === wantUpg && st.serverSlots === wantSlots && cStacks === st.expect.stacks && cItems === st.expect.items &&
+      cUpStacks === upStacks && cUpItems === upItems,
+      'screen ' + f[1] + ' opened by ' + f[9] + ': the client menu shows ' + cSlots + ' storage slots (want ' + wantSlots + ') in ' + f[4] + ' rows and ' + cUpg + ' upgrade slots (want ' +
+      wantUpg + '); ' + cStacks + ' stacks / ' + cItems + ' items in the storage slots (the chest holds ' + st.expect.stacks + ' / ' + st.expect.items + ') and ' + cUpStacks +
+      ' / ' + cUpItems + ' in the upgrade slots (the chest holds ' + upStacks + ' / ' + upItems + ')')
+    // Screenshot.grab's callback: screenshot.success once the PNG is written, screenshot.failure otherwise
+    var s = shot === null ? [] : shot.split('|')
+    check('screenshot_' + name, shot !== null && s[1] === 'screenshot.success', shot === null ? 'no screenshot result from the client in 600 ticks' :
+      s[2] + ': ' + s[1] + ' (kubejs/exported)')
     return true
   }
 
