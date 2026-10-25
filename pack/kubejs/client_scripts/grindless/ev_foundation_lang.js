@@ -10,7 +10,11 @@
 //
 // GTM ships no es_es file, so its patterns ("%s Dust", "Crushed %s Ore"...) would mix English with a Spanish material name. The forms
 // below are every item GTM 7.5.3 makes for these materials in this pack (one ore block per stone type of GTM, GCYR and the addons).
-// Buckets keep GTM's "%s Bucket" (GTBucketItem has no per-item key), like every GTM fluid in es_es.
+// The item-specific key is item.gtceu.<the prefix's idPattern with the material>: for dusts, crushed ores and raw ores that is the item
+// path, but an ore block prefix keeps TagPrefix's default pattern "%s_<prefix name>", so the key of gtceu:mars_merrillite_ore is
+// item.gtceu.merrillite_mars (and of the stone one item.gtceu.merrillite_stone). The indicator is named by the global
+// block.surface_rock pattern (SurfaceRockBlock) and buckets by GTM's "%s Bucket" (GTBucketItem): neither has a per-item key, so they
+// keep GTM's English pattern in es_es, like every GTM indicator and bucket.
 // Kept out of pack/kubejs/assets/grindless/lang/* like the other *_lang.js scripts. Quests are English only; names go in en_us and es_es.
 ClientEvents.lang('en_us', event => {
     var add = function (key, value) { event.add('grindless', key, value) }
@@ -83,18 +87,17 @@ ClientEvents.lang('es_es', event => {
     add('item.gtceu.refined_merrillite_ore', 'Mena refinada de merrillita')
     add('item.gtceu.raw_merrillite', 'Merrillita en bruto')
     add('item.gtceu.raw_merrillite_block', 'Bloque de merrillita en bruto')
-    add('item.gtceu.merrillite_indicator', 'Indicador de merrillita')
 
-    // one ore block per stone type; only the Mars one generates (the Mars vein table)
+    // one ore block per stone type (ore prefix name -> where it sits); only the Mars one generates (the Mars vein table)
     var stones = {
-        '': '', andesite: ' en andesita', basalt: ' en basalto', blackstone: ' en piedra negra', deepslate: ' en pizarra profunda',
+        stone: '', andesite: ' en andesita', basalt: ' en basalto', blackstone: ' en piedra negra', deepslate: ' en pizarra profunda',
         diorite: ' en diorita', endstone: ' en piedra del End', granite: ' en granito', gravel: ' en grava', marble: ' en mármol',
         mars: ' de Marte', mercury: ' de Mercurio', moon: ' de la Luna', netherrack: ' en netherrack',
         proxima_centauri_b: ' de Próxima Centauri b', red_granite: ' en granito rojo', red_sand: ' en arena roja', sand: ' en arena',
         tuff: ' en toba', venus: ' de Venus'
     }
     Object.keys(stones).forEach(function (stone) {
-        add('item.gtceu.' + (stone === '' ? '' : stone + '_') + 'merrillite_ore', 'Mena de merrillita' + stones[stone])
+        add('item.gtceu.merrillite_' + stone, 'Mena de merrillita' + stones[stone])
     })
 })
 
