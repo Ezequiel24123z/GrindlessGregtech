@@ -10,7 +10,7 @@ hash = "de63e3cf6023cde07903b426e255f0690c7e3324c3e65a2da64bb7ff51cdad24"
 
 [[files]]
 file = "config/ftbquests/quests/chapters/applied_energistics.snbt"
-hash = "206f8d7fb1406015849d6d85ecd2aaa3d837ce64b49888955fe36c26dfc5f38d"
+hash = "db4face206639314c0c2cbdbbdf7a0459fb09baa884c2816c118a6c5e70605f7"
 
 [[files]]
 file = "config/ftbquests/quests/chapters/ev_age.snbt"
@@ -18,15 +18,15 @@ hash = "772c60b3e6f2d8f9153188fa69d8c9192dfbc47216417d4523ed96c3af8b6dc1"
 
 [[files]]
 file = "config/ftbquests/quests/chapters/hv_age.snbt"
-hash = "25dbd8da60ba09c7271cd176387fcdb881ddff5c35d5950f1733b9648b6fd8f2"
+hash = "07fae9819a0ac615a7bc3f3263aff098837bbcbb7b0c53315a73c274045a3399"
 
 [[files]]
 file = "config/ftbquests/quests/chapters/lv_age.snbt"
-hash = "9d45c96ac653f08e5a0880c595a86871b5a7a2c4c54fa2c25a189a605d4b872f"
+hash = "447c6862b2d19c7cc4975eb66de11971c400850e232ff859fdda3dee6ec1c457"
 
 [[files]]
 file = "config/ftbquests/quests/chapters/mv_age.snbt"
-hash = "78058eafff90174e6bde8e40ccf52e176d5fa554f4dede4be9475d4a40f29d27"
+hash = "47571a07fbec975f8a6398d1a32a3e6f6a8d27de134d1d4d85fbff514dc43262"
 
 [[files]]
 file = "config/ftbquests/quests/chapters/productive_bees.snbt"
