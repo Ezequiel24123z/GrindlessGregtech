@@ -17,7 +17,8 @@
 //                               a 3x3x3 focal furnace of robust tungsten steel casing (its top is a tungsten steel firebox receiver that
 //                               glows while it works), and a 3x3 laminated glass evaporation bell beside it, on a pad of Mercury rock.
 //                               It makes the heat-shield bricks, so it cannot stand on them: the pad is GCYR's Mercury rock (smelted
-//                               Mercury cobblestone). Sun rule: a run that starts with the sun on the receiver (GTM's own solar test,
+//                               Mercury cobblestone). The bell may stand on either side: GTM forms a mirrored build too, and the sky
+//                               checks follow its flip. Sun rule: a run that starts with the sun on the receiver (GTM's own solar test,
 //                               GTUtil.canSeeSunClearly) and all 8 mirrors under open sky pays a quarter of the EU/t; at night or shaded
 //                               it pays all of it. The quarter is applied after GTM's overclock, so the sun makes a run cheaper, never
 //                               faster (the cryogenic plant's run-start pricing, alwaysTryModifyRecipe; and, unlike there, every run goes
@@ -242,9 +243,19 @@
   const STEPS = { north: [0, -1], south: [0, 1], west: [-1, 0], east: [1, 0] }
 
   // world position of a cell: front (fx, fz) is the direction the controller faces; back = -front, +side = (fz, -fx) (the mapping of
-  // the heliostat tower's sun check, the lunar array's sky count and the structure placement of the tests)
-  function cellPos(pos, fx, fz, p) {
-    return pos.offset(-fx * p.back + fz * p.side, p.up, -fz * p.back - fx * p.side)
+  // the heliostat tower's sun check, the lunar array's sky count and the structure placement of the tests). A mirrored build (GTM lets
+  // every multiblock form flipped: BlockPattern negates the axis across the facing) has its cells on the other side: sign -1.
+  function cellPos(pos, fx, fz, p, sign) {
+    var side = p.side * (sign === -1 ? -1 : 1)
+    return pos.offset(-fx * p.back + fz * side, p.up, -fz * p.back - fx * side)
+  }
+
+  function sideSign(machine) {
+    try {
+      return machine.isFlipped() === true ? -1 : 1
+    } catch (e) {
+      return 1
+    }
   }
 
   // how many of the cells have the open sky above them (-1 when the machine has no level or no horizontal facing)
@@ -254,9 +265,10 @@
     var step = STEPS[String(machine.getFrontFacing()).toLowerCase()]
     if (!step) return -1
     var pos = machine.getPos()
+    var sign = sideSign(machine)
     var lit = 0
     for (var i = 0; i < cells.length; i++) {
-      if (level.canSeeSky(cellPos(pos, step[0], step[1], cells[i]).above())) lit++
+      if (level.canSeeSky(cellPos(pos, step[0], step[1], cells[i], sign).above())) lit++
     }
     return lit
   }
@@ -274,7 +286,8 @@
         FluidCap: Java.loadClass('com.gregtechceu.gtceu.api.capability.recipe.FluidRecipeCapability').CAP,
         Registries: Java.loadClass('net.minecraftforge.registries.ForgeRegistries'),
         GTUtil: Java.loadClass('com.gregtechceu.gtceu.utils.GTUtil'),
-        RecipeHelper: Java.loadClass('com.gregtechceu.gtceu.api.recipe.RecipeHelper')
+        RecipeHelper: Java.loadClass('com.gregtechceu.gtceu.api.recipe.RecipeHelper'),
+        ContentModifier: Java.loadClass('com.gregtechceu.gtceu.api.recipe.content.ContentModifier')
       }
     }
     return LC
@@ -295,18 +308,25 @@
     return total
   }
 
-  // GTM 7.5.3 keeps an idle machine's last recipe for one tick and restarts it without its modifier if the inputs come back in that tick
+  // GTM 7.5.3 keeps an idle machine's last recipe for one tick and restarts it without its modifier if it can run then
   // (RecipeLogic#findAndHandleRecipe: "try to execute last recipe if possible"): the shift or the price of the tick before. Across a jump
   // of the clock, or a sunset in that very tick, a dry run could start by day or a night run at the sun's price. So when a run ends and
-  // the next one cannot start at once (GTM's own match: inputs and room for the outputs), the logic is marked dirty and the next start is
-  // a fresh search through the modifier. A machine that keeps running is not touched: GTM re-applies the modifier when each run ends
-  // (alwaysTryModifyRecipe). Used by the drill and the solar works (afterWorking).
+  // the next one may not start at once, the logic is marked dirty and the next start is a fresh search through the modifier. afterWorking
+  // runs before GTM puts this run's outputs away, so the check is GTM's own match on a copy of the run with its outputs doubled: inputs
+  // for one more run, room for this run's outputs and the next one's (a copy, because the match writes the recipe's bus group). A machine
+  // that keeps running is not touched: GTM re-applies the modifier when each run ends (alwaysTryModifyRecipe). Used by the drill and the
+  // solar works (afterWorking).
   var dirtyFailed = false
+  var DOUBLE_OUTPUTS = null
   function freshEveryRun(machine) {
     try {
       var logic = machine.getRecipeLogic()
       var last = logic.getLastRecipe()
-      if (last != null && lazy().RecipeHelper.matchRecipe(machine, last).isSuccess()) return
+      if (last != null) {
+        if (DOUBLE_OUTPUTS === null) DOUBLE_OUTPUTS = ModifierFunction.builder().outputModifier(lazy().ContentModifier.multiplier(2)).build()
+        var probe = DOUBLE_OUTPUTS.apply(last)
+        if (probe != null && lazy().RecipeHelper.matchRecipe(machine, probe).isSuccess()) return
+      }
       logic.markLastRecipeDirty()
     } catch (e) {
       if (!dirtyFailed) {
@@ -387,7 +407,7 @@
     if (!step) return { key: 'shaded', covered: MIRROR_CELLS.length + 1 }
     var pos = machine.getPos()
     var covered = 0
-    if (!lazy().GTUtil.canSeeSunClearly(level, cellPos(pos, step[0], step[1], RECEIVER_CELL))) covered++
+    if (!lazy().GTUtil.canSeeSunClearly(level, cellPos(pos, step[0], step[1], RECEIVER_CELL, sideSign(machine)))) covered++
     var lit = cellsUnderSky(machine, MIRROR_CELLS)
     covered += lit < 0 ? MIRROR_CELLS.length : MIRROR_CELLS.length - lit
     return covered === 0 ? { key: 'sun', covered: 0 } : { key: 'shaded', covered: covered }
