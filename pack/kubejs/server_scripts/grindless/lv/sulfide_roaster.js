@@ -19,11 +19,17 @@
 // Plus the plain sulfur burner of an acid plant: 1 sulfur dust + 7 500 mB of air (1 500 mB of oxygen) + water -> 1 000 mB of acid
 // + steam, 30 EU/t (one amp, the blowers), 60 ticks. It returns a little less energy than it takes (no power loop from sulfur).
 //
+// The HV hydrogen sulfide burner (grindless:sulfide_roasting/h2s, the refinery's H2S): the same burner, same air and water, same 30 EU/t
+// and 60 ticks, with 1 000 mB of hydrogen sulfide in the sulfur's place. The H2S splits on the way (H2S -> S + H2, real chemistry): the
+// sulfur burns as above and 500 mB of hydrogen leaves in its own hatch. So 3 input hatches (air, water, H2S) and 3 output hatches (acid,
+// steam, hydrogen): the most the roaster has (the type takes 3 fluids in and out, startup_scripts/grindless/lv/sulfide_roaster.js).
+//
+// Lookup note (GTM's RecipeDB): the dust roasts start with their dust and the sulfur burner with its sulfur; the H2S burner has no dust,
+// so it starts with the catalyst (items come first) or with its fluids, and no ingredient list is a prefix of another.
+//
 // Where the by-products go: zincite, massicot, antimony trioxide and cupric oxide go to the LV electrolyzer (zinc, lead, antimony,
 // copper, and their oxygen back); hematite smelts into iron in any furnace; the silver nuggets become ingots; the ash is the
 // fertilizer of the chemical reactor; the acid is GT chemistry (persulfate, bisulfate, HCl...); the steam goes to the turbines.
-//
-// Lookup note (GTM's RecipeDB): every recipe starts with a different dust, so no ingredient list is a prefix of another.
 (function () {
   const G = global.grindless
   const LVC = G.lvContent || (G.lvContent = {})
@@ -36,6 +42,9 @@
   const AIR_PER_ROAST = 15000
   const STEAM_PER_1000_SO2 = 3200
   const STEAM_PER_WATER = 160
+  const H2S = 'gtceu:hydrogen_sulfide'
+  const HYDROGEN = 'gtceu:hydrogen'
+  const H2S_BURNER = { id: 'h2s', h2s: 1000, hydrogen: 500 }
 
   // the GTM 7.5.3 EBF roasts, one row each (outputs exactly as in the EBF recipe, MachineRecipeLoader.registerBlastFurnaceMetallurgyRecipes;
   // chanced = [item, GTM chance fraction])
@@ -70,6 +79,8 @@
     }),
     sulfur: { recipe: 'grindless:sulfide_roasting/sulfur', so2: SULFUR.so2, air: SULFUR.air, steam: steamOf(SULFUR.so2),
       water: waterOf(SULFUR.so2), amperage: SULFUR.amperage, duration: SULFUR.duration },
+    h2sBurner: { recipe: 'grindless:sulfide_roasting/' + H2S_BURNER.id, h2s: H2S_BURNER.h2s, hydrogen: H2S_BURNER.hydrogen,
+      so2: SULFUR.so2, air: SULFUR.air, steam: steamOf(SULFUR.so2), water: waterOf(SULFUR.so2) },
     catalystRecipe: 'grindless:mixer/contact_catalyst',
     controllerRecipe: 'grindless:crafting/sulfide_roaster'
   }
@@ -108,6 +119,20 @@
       .outputFluids(Fluid.of('gtceu:sulfuric_acid', SULFUR.so2), Fluid.of('gtceu:steam', steamOf(SULFUR.so2)))
       .EUt(VOLTAGE, SULFUR.amperage).duration(SULFUR.duration)
 
+    // the HV burner on the refinery's hydrogen sulfide (see the header): the sulfur burner's air, water and time and energy, the H2S in
+    // the sulfur's place, and the hydrogen in a third output hatch. Its own check: missing H2S or hydrogen only skips this recipe.
+    if (Fluid.exists(H2S) && Fluid.exists(HYDROGEN)) {
+      event.recipes.gtceu.sulfide_roasting('grindless:' + H2S_BURNER.id)
+        .chancedInput(CATALYST, CATALYST_WEAR, 0)
+        .inputFluids(Fluid.of(H2S, H2S_BURNER.h2s), Fluid.of('gtceu:air', SULFUR.air), Fluid.of('minecraft:water', waterOf(SULFUR.so2)))
+        .outputFluids(Fluid.of('gtceu:sulfuric_acid', SULFUR.so2), Fluid.of('gtceu:steam', steamOf(SULFUR.so2)),
+          Fluid.of(HYDROGEN, H2S_BURNER.hydrogen))
+        .EUt(VOLTAGE, SULFUR.amperage).duration(SULFUR.duration)
+    } else {
+      console.error('[grindless/lv] sulfide roaster H2S burner skipped, unknown fluid(s): ' +
+        [H2S, HYDROGEN].filter(function (id) { return !Fluid.exists(id) }).join(', '))
+    }
+
     // the catalyst: vanadium (LV centrifuge of vanadium magnetite) on a diatomite carrier, like the real V2O5 contact masses
     event.recipes.gtceu.mixer('grindless:contact_catalyst')
       .itemInputs('1x #forge:dusts/vanadium', '4x #forge:dusts/diatomite')
@@ -124,6 +149,7 @@
       K: 'gtceu:steel_firebox_casing'
     }).id('grindless:crafting/sulfide_roaster')
 
-    console.info('[grindless/lv] sulfide_roasting recipes added: ' + (ROASTS.length + 1) + ', contact catalyst and controller recipes added')
+    console.info('[grindless/lv] sulfide_roasting recipes added: ' + (ROASTS.length + 2) + ' (sulfur and the HV H2S burner included), ' +
+      'contact catalyst and controller recipes added')
   })
 })()

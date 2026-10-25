@@ -19,6 +19,9 @@
 //                4 dust a sky dust run takes. In GTM obsidian is HV in the rock breaker and lava-bound in the solidifier; here
 //                it is LV from cobblestone and water. No fuel value anywhere (obsidian burns for nothing, the water is gone),
 //                so there is no energy loop, unlike a lava recipe (lava is a steam boiler fuel in GTM).
+//   obsidian_distilled  the same with circuit 2 and 4 000 mB of DISTILLED water (the water the LV steam turbine gives back: the
+//                loop the heliostat tower takes its feed from) -> 4 obsidian and a 10 % chance of 1 quartz sand dust more.
+//                The same energy and time as the water recipe.
 //
 // Where the byproducts go: the ash is the fertilizer of GTM's chemical reactor (calcite + 3 ash + water -> fertilizer, the
 // fuel of the LV greenhouse's fertilizer variants); CO2 is vented; CO waits in a tank for MV chemistry.
@@ -27,7 +30,8 @@
 // steel rod in an LV forming press. Graphite comes from the diamond vein (deep: needs the steel bit) and the ore line.
 //
 // Lookup note (GTM's RecipeDB): the two silicon recipes differ in the circuit, so neither ingredient list is a prefix of the
-// other; no other arc_smelting recipe shares its first ingredients.
+// other; no other arc_smelting recipe shares its first ingredients. The distilled obsidian starts with the cobblestone like the
+// water one and differs from it at the third ingredient (circuit 2 against the water), so neither is a prefix of the other.
 (function () {
   const G = global.grindless
   const LV = G.lv || (G.lv = {})
@@ -36,6 +40,7 @@
   const ELECTRODE_WEAR = 300
   const VOLTAGE = 32
   const AMPERAGE = 2
+  const DISTILLED_WATER = 'gtceu:distilled_water'
 
   // published for the smoke test
   LV.arc = {
@@ -44,7 +49,7 @@
     amperage: AMPERAGE,
     eut: VOLTAGE * AMPERAGE,
     wear: ELECTRODE_WEAR,
-    recipes: ['silicon', 'silicon_co', 'sky_dust', 'obsidian'].map(function (id) { return 'grindless:arc_smelting/' + id })
+    recipes: ['silicon', 'silicon_co', 'sky_dust', 'obsidian', 'obsidian_distilled'].map(function (id) { return 'grindless:arc_smelting/' + id })
   }
 
   const NEEDED_ITEMS = ['gtceu:quartz_sand_dust', 'gtceu:coke_dust', 'gtceu:ash_dust', 'gtceu:obsidian_dust',
@@ -96,6 +101,21 @@
       .inputFluids(Fluid.of('minecraft:water', 4000))
       .itemOutputs('4x minecraft:obsidian')
       .EUt(VOLTAGE, AMPERAGE).duration(300)
+
+    // the same quench with distilled water (see the header): circuit 2, a 10 % chance of one quartz sand dust more. Its own check:
+    // a missing distilled water only skips this recipe.
+    if (Fluid.exists(DISTILLED_WATER)) {
+      arc('obsidian_distilled')
+        .itemInputs('32x minecraft:cobblestone')
+        .chancedInput(ELECTRODE, ELECTRODE_WEAR, 0)
+        .circuit(2)
+        .inputFluids(Fluid.of(DISTILLED_WATER, 4000))
+        .itemOutputs('4x minecraft:obsidian')
+        .chancedOutput('1x gtceu:quartz_sand_dust', 1000, 0)
+        .EUt(VOLTAGE, AMPERAGE).duration(300)
+    } else {
+      console.error('[grindless/lv] arc furnace obsidian (distilled water) skipped, unknown fluid ' + DISTILLED_WATER)
+    }
 
     // the electrode itself: LV forming press, graphite dust around a steel rod
     event.recipes.gtceu.forming_press('grindless:graphite_electrode')

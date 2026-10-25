@@ -14,10 +14,16 @@
 //      catalyst, 6-8 plants per run, 400 ticks, 4 EU/t per run. Destinations: biomass (GTM brewery: mushrooms, berries and
 //      kelp), dyes (flowers) and the big boiler; the fertilizer variants exist for them too.
 //      (Cocoa is already a steam crop.)
+//   3. CO2 boosters, one for every steam recipe and extra crop: sapling or seed (not consumed) + 100 mB of carbon dioxide +
+//      PROGRAMMED CIRCUIT 3  ->  x1.25 the output, in the same 400 ticks and 4 EU/t per run as the base recipe. The CO2 is the
+//      Submerged Arc Furnace's (its silicon recipe vents 2 000 mB per run). Two limits of this machine shape the recipe: its one
+//      input hatch holds one fluid (multi-fluid hatches are EV), so there is CO2 here and no water; and it has no output hatch,
+//      so the oxygen the MV variant gives back has nowhere to go and is not in this one.
 //
 // Lookup note (GTM's RecipeDB cannot keep a recipe whose ingredient list is a prefix of another's): a steam recipe is just
 // [catalyst], so the fertilizer variants list the FERTILIZER first, then the catalyst, then circuit and water. The extras
-// have catalysts no steam recipe uses.
+// have catalysts no steam recipe uses. The boosters list the CIRCUIT first, then the catalyst, then the CO2, so no booster
+// starts with the catalyst alone (the steam recipe) or with the fertilizer.
 (function () {
   const G = global.grindless
   const LV = G.lv || (G.lv = {})
@@ -25,6 +31,11 @@
   const WATER = 'minecraft:water'
   const WATER_MB = 100
   const FERTILIZER = 'gtceu:fertilizer'
+  const CO2 = 'gtceu:carbon_dioxide'
+  const CO2_MB = 100
+  // the CO2 booster: x1.25 the output, circuit 3
+  const BOOST = 1.25
+  const BOOST_CIRCUIT = 3
 
   // plants the steam greenhouse does not grow. n = plants per run
   const EXTRAS = [
@@ -71,6 +82,22 @@
     })
   }
 
+  // outputs times a factor that is not a whole number: whole items, plus one chanced item for the fraction. A chanced output
+  // keeps its count and gets its chance times the factor, so its expected count is scaled the same way.
+  function addScaledOutputs(recipe, outputs, factor) {
+    outputs.forEach(function (o) {
+      if (o.chance === undefined) {
+        var expected = o.n * factor
+        var whole = Math.floor(expected + 1e-9)
+        var fraction = Math.round((expected - whole) * 10000)
+        if (whole > 0) recipe.itemOutputs(whole + 'x ' + o.item)
+        if (fraction >= 1) recipe.chancedOutput('1x ' + o.item, Math.min(fraction, 9999), 0)
+      } else {
+        recipe.chancedOutput(o.n + 'x ' + o.item, Math.max(1, Math.min(9999, Math.round(o.chance * factor * 10000))), 0)
+      }
+    })
+  }
+
   ServerEvents.recipes(function (event) {
     var table = G.greenhouse
     var baseDuration = table.duration
@@ -78,6 +105,7 @@
     var fertDuration = Math.round(baseDuration / 2)
     var fertEut = baseEut * 2
     var count = 0
+    var boosterCount = 0
 
     function fertilizerVariant(entry) {
       var items = [FERTILIZER, entry.catalyst].concat(entry.outputs.map(function (o) { return o.item }))
@@ -96,10 +124,29 @@
       count++
     }
 
+    // 3. CO2 booster (see the header): circuit 3, sapling or seed + CO2, x1.25 the output in the base time and energy
+    function boosterVariant(entry) {
+      var items = [entry.catalyst].concat(entry.outputs.map(function (o) { return o.item }))
+      var missing = items.filter(function (id) { return !Item.exists(id) })
+      if (!Fluid.exists(CO2)) missing.push(CO2)
+      if (missing.length > 0) {
+        console.error('[grindless/lv] greenhouse ' + entry.id + ' CO2 booster skipped, unknown id(s): ' + missing.join(', '))
+        return
+      }
+      var recipe = event.recipes.gtceu.greenhouse('grindless:lv/' + entry.id + '_co2')
+        .circuit(BOOST_CIRCUIT)
+        .notConsumable(entry.catalyst)
+        .inputFluids(Fluid.of(CO2, CO2_MB))
+      addScaledOutputs(recipe, entry.outputs, BOOST)
+      recipe.EUt(baseEut).duration(baseDuration)
+      boosterCount++
+      count++
+    }
+
     // 1. fertilizer variants of the steam recipes
     table.entries.forEach(fertilizerVariant)
 
-    // 2. extra crops: base recipe (water) and fertilizer variant
+    // 2. extra crops: base recipe (water), fertilizer variant and CO2 booster
     LV.greenhouseExtras.forEach(function (entry) {
       var items = [entry.catalyst].concat(entry.outputs.map(function (o) { return o.item }))
       var missing = items.filter(function (id) { return !Item.exists(id) })
@@ -114,7 +161,14 @@
       recipe.EUt(baseEut).duration(baseDuration)
       count++
       fertilizerVariant(entry)
+      boosterVariant(entry)
     })
+
+    // the CO2 boosters of the steam recipes (the extras get theirs in step 2)
+    table.entries.forEach(boosterVariant)
+
+    // published for the smoke test
+    LV.greenhouseBoosters = { circuit: BOOST_CIRCUIT, co2: CO2, co2Mb: CO2_MB, factor: BOOST, count: boosterCount }
 
     console.info('[grindless/lv] greenhouse recipes added: ' + count)
   })

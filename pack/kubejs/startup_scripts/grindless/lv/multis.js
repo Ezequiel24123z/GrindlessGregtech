@@ -25,7 +25,8 @@
 //
 // Lookup note (GTM's RecipeDB): a recipe whose ingredient list is a prefix of another recipe's list makes one of the two
 // disappear. The generated LV recipes therefore list the ingredient that the steam recipe does NOT start with first
-// (drill: drill bit before sample; greenhouse: fertilizer before catalyst). See server_scripts/grindless/lv/*.js.
+// (drill: drill bit before sample; greenhouse: fertilizer before catalyst, the CO2 boosters: circuit before catalyst).
+// See server_scripts/grindless/lv/*.js.
 //
 // Textures: overlay dirs grindless:block/multiblock/<machine> (drawn separately), base casings from GTM:
 // steel solid machine casing for the drill and the greenhouse, heat-proof machine casing for the arc furnace.
@@ -178,6 +179,16 @@
     return /\/mv\/.+_co2$/.test(recipePath(recipe))
   }
 
+  // greenhouse boosters, programmed circuit 3: LV .../lv/<crop>_co2 (CO2), MV .../mv/<crop>_biomass (fermented biomass)
+  function isBoosterRecipe(recipe) {
+    return /\/(lv\/.+_co2|mv\/.+_biomass)$/.test(recipePath(recipe))
+  }
+
+  // the MV vanadium steel recipe without fluid: the sulfuric acid (leaching) variant replaces it while acid is in the hatch
+  function isVanadiumBaseRecipe(recipe) {
+    return /\/mv\/.+_vanadium_steel$/.test(recipePath(recipe))
+  }
+
   function machineHasFluid(machine, fluidId) {
     var c = lazy()
     var handlers = machine.getCapabilitiesFlat(c.IO.IN, c.FluidCap)
@@ -215,7 +226,8 @@
   }
 
   function greenhouseVeto(machine, recipe) {
-    return isMvRecipe(recipe) || isHvRecipe(recipe) || (!isFertilizerRecipe(recipe) && machineCircuit(machine) >= 2)
+    return isMvRecipe(recipe) || isHvRecipe(recipe) ||
+      (!isFertilizerRecipe(recipe) && !isBoosterRecipe(recipe) && machineCircuit(machine) >= 2)
   }
 
   // Runs as many copies of the recipe as the energy hatches allow (hatch voltage / EU per run), at most `cap` (8 by default;
@@ -259,6 +271,8 @@
     isFluidRecipe: isFluidRecipe,
     isFertilizerRecipe: isFertilizerRecipe,
     isCo2Recipe: isCo2Recipe,
+    isBoosterRecipe: isBoosterRecipe,
+    isVanadiumBaseRecipe: isVanadiumBaseRecipe,
     machineHasFluid: machineHasFluid,
     machineCircuit: machineCircuit
   }
