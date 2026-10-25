@@ -57,6 +57,10 @@ file = "config/ftbquests/quests/chapters/pl_steam.snbt"
 hash = "a5132ed09dcb09ddd174931514ff4279e1be2553be6a7df2b49e28581a26ea00"
 
 [[files]]
+file = "config/ftbquests/quests/chapters/power.snbt"
+hash = "4a1a9ec2c20c089cd2770444c7679712c536d8345b9275a913ec873adb6250fe"
+
+[[files]]
 file = "config/ftbquests/quests/chapters/productive_bees.snbt"
 hash = "5e53204937962d11d4ece09bff190ff8ceae53118a9f296bcefb4bf9173fbac3"
 
