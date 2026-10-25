@@ -1,5 +1,5 @@
 // -----------------------------------------------------------------------------------------------
-// The Engine Test Stand (gtceu:engine_test_stand), MV, the first step of the road to the first rocket (docs/viaje.md: MV builds the
+// The Engine Test Stand (gtceu:engine_test_stand), MV, the first step of the road to the first rocket (docs/journey.md: MV builds the
 // test stand and the radio telescope, HV flies to the Moon), and the recipe type it runs, gtceu:static_fire.
 //
 // A static fire: the engine is clamped to the stand, fed from the run tanks and fired into the flame bucket; it comes out qualified, or it

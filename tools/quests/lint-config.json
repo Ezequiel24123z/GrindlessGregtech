@@ -1,5 +1,5 @@
 {
-  "_doc": "Configuration of tools/quests/lint.mjs. Rules and their reasons: docs/misiones.md.",
+  "_doc": "Configuration of tools/quests/lint.mjs. Rules and their reasons: docs/quests.md.",
   "maxEdge": 5.0,
   "maxVerticalDrop": 3.0,
   "minGap": 0.25,
@@ -13,7 +13,7 @@
     { "from": "35719B747A75F7B6", "to": "5615E54AF782990A", "why": "Gasoline to Space Suit (hv_age): the suit chemistry comes from Gasoline at the left, and the suit is only needed at the Moon, so the quest sits next to it." }
   ],
   "manyRewardsOk": [
-    { "quest": "047B55ED9C952BC9", "why": "The Neutronium Toolbox (welcome): one reward per tool, on purpose (docs/misiones.md)." }
+    { "quest": "047B55ED9C952BC9", "why": "The Neutronium Toolbox (welcome): one reward per tool, on purpose (docs/quests.md)." }
   ],
   "quantityOk": [
     { "quest": "76D281E9D9C6FD20", "why": "Rocket Fuel (hv_age): the launch threshold of 8 buckets is not a recipe amount and EMI does not show it." }

@@ -1,6 +1,6 @@
 # How we work in this repo
 
-Gregtech Grindless is a GregTech Modern pack (Minecraft 1.20.1, Forge) in which nothing is gathered by hand. Before touching anything, read this file, `DECISIONS.md` and the latest note in `docs/sesiones/`.
+Gregtech Grindless is a GregTech Modern pack (Minecraft 1.20.1, Forge) in which nothing is gathered by hand. Before touching anything, read this file, `DECISIONS.md` and the latest note in `docs/sessions/`.
 
 ## Structure
 
@@ -13,7 +13,7 @@ Gregtech Grindless is a GregTech Modern pack (Minecraft 1.20.1, Forge) in which 
 | `pack/kubejs/assets/grindless/` | Own textures, models and languages. |
 | `pack/config/ftbquests/quests/` | Quest book. |
 | `docs/eras/` | Short design of each era. |
-| `docs/sesiones/` | Closing note of each session. |
+| `docs/sessions/` | Closing note of each session. |
 | `tools/test/` | Remote test bench (see its `README.md`). |
 
 ## Pack rules
@@ -106,7 +106,7 @@ Gregtech Grindless is a GregTech Modern pack (Minecraft 1.20.1, Forge) in which 
 
 - `DECISIONS.md`: one line per important decision.
 - `CREDITS.md`: source and license of each idea, multiblock or asset.
-- `docs/sesiones/YYYY-MM-DD.md`: when closing a session, what works, what is broken and what comes next.
+- `docs/sessions/YYYY-MM-DD.md`: when closing a session, what works, what is broken and what comes next.
 
 ## Git
 

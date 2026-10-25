@@ -101,7 +101,7 @@ What it gains: yield. It cokes like the coke oven and also recovers coal gas, wh
 
 ### Clockwork Observatory — `gtceu:steam_observatory`
 
-What it gains: it is the only thing that makes the first Moon chart (`grindless:lunar_chart_draft`). It opens the observatory family, the one the journey relies on (`docs/viaje.md`): navigation data only comes from looking.
+What it gains: it is the only thing that makes the first Moon chart (`grindless:lunar_chart_draft`). It opens the observatory family, the one the journey relies on (`docs/journey.md`): navigation data only comes from looking.
 
 - **Recipe type:** `gtceu:stargazing` (eyepiece observation).
 - **Recipe:** 4 paper + 1 coal dust (the ink) → 1 Lunar Chart (Draft). 8 EU/t of steam and 400 ticks (600 in the steam multiblock, which is 30 s). One chart at a time.
@@ -129,7 +129,7 @@ What it gains: it is the only thing that makes the first Moon chart (`grindless:
 
 ### Large Steam family — `gtceu:large_steam_macerator/centrifuge/thermal_centrifuge/chemical_bath/ore_washer`
 
-What it gains: processing ore at plant scale, without electricity. Idea from GregTech Leisure (the "Large Steam X" family, `docs/investigacion/leisure.md` §4.2). Its license is not permissive: no code, textures or text are copied, only the concept of a large steam multiblock with a parallel cap. The sixth GTL member is left out (the assembler with an AE2 molecular assembler core): it does not fit a multiblock built only with KubeJS.
+What it gains: processing ore at plant scale, without electricity. Idea from GregTech Leisure (the "Large Steam X" family, `docs/research/leisure.md` §4.2). Its license is not permissive: no code, textures or text are copied, only the concept of a large steam multiblock with a parallel cap. The sixth GTL member is left out (the assembler with an AE2 molecular assembler core): it does not fit a multiblock built only with KubeJS.
 
 All five machines share a casing (steel, 5×5×5, with bronze or steel frame posts on the 4 vertical edges) and a mechanism (`SteamParallelMultiblockMachine`, the same as GTM's standard Steam Grinder and Steam Oven: duration ×1.5, steam from one hatch, and GTM rejects outright any recipe above LV, 32 EU/t). Unlike GTM's Steam Grinder and Steam Oven, none of them calls `addOutputLimit` (which cuts them down to a single byproduct): here the whole ore byproduct chain is kept, with 2 output buses (8 slots) so that the 64-parallel cap does not run short on a single 4-slot bus.
 
@@ -153,18 +153,18 @@ Verified in the GTM 7.5.3 code (`data/recipe/generated/OreRecipeHandler.java`), 
 - **All five stay on steam; none moves to electric LV.** The plan foresaw that escape if GTM blocked the centrifuge or thermal centrifuge completely; it does not (table above), so all five are still `SteamParallelMultiblockMachine`.
 - **No `addOutputLimit`.** GTM sets it on its own Steam Grinder and Steam Oven to keep a single byproduct; here it is removed on purpose, because the family's goal is the full byproduct chain.
 - **"Steel and brass" is texture only.** Real brass needs zinc, which does not come until the LV sulfide roaster (like the observatory's clock). The casing is standard steel (`gtceu:solid_machine_casing`, already used by the electric LV multiblocks); the brass is a golden tone hand-painted into the overlay.
-- **64 parallels is the cap**, the same one GTL's "absurd parallels" rule sets in `docs/investigacion/leisure.md`. No multiblock in the family goes past that.
+- **64 parallels is the cap**, the same one GTL's "absurd parallels" rule sets in `docs/research/leisure.md`. No multiblock in the family goes past that.
 
 ### Small steam family — `gtceu:steam_forge_hammer/compressor/alloy_smelter/mixer/chemical_bath/ore_washer`
 
-What it gains: the six GTM recipe types that the steam era did not run at scale. Without this family, the forge hammer, the compressor and the alloy smelter only reach the cap of a single steam block (`gtceu:lp_steam_*`/`hp_steam_*`); the mixer, the chemical bath and the ore washer do not exist at all until LV, because GTM gives them no single-block steam machine. Idea from GregTech Leisure (`docs/investigacion/leisure.md` §4.2, GTLCore `LargeSteamParallelMultiblockMachine`), license unclear: only the concept (a small steam multiblock with 8 parallels on the single-block recipe); the structure, textures and code are ours (`steam/small_family.js`).
+What it gains: the six GTM recipe types that the steam era did not run at scale. Without this family, the forge hammer, the compressor and the alloy smelter only reach the cap of a single steam block (`gtceu:lp_steam_*`/`hp_steam_*`); the mixer, the chemical bath and the ore washer do not exist at all until LV, because GTM gives them no single-block steam machine. Idea from GregTech Leisure (`docs/research/leisure.md` §4.2, GTLCore `LargeSteamParallelMultiblockMachine`), license unclear: only the concept (a small steam multiblock with 8 parallels on the single-block recipe); the structure, textures and code are ours (`steam/small_family.js`).
 
 All six share the same hollow 3×3×3 cube that GTM's standard Steam Grinder and Steam Oven use (`SteamParallelMultiblockMachine`, with 8 parallels instead of the standard 4: duration ×1.5, EU/t ×(8/9) per parallel up to a cap of 32, nothing above LV). The forge hammer, the compressor and the alloy smelter only take item parts (steam hatch, input bus, output bus), and their controller is built with the single-block steam machine they replace. The chemical bath and the ore washer add a fluid input hatch, which their own recipes always need; the mixer makes it optional (0 to 2 inputs, 0 to 1 output), because bronze, brass, invar and the other powder alloys do not need fluid, while glue, salt water, concrete and drilling fluid do. None of the three has a single-block steam machine to replace, so their controller is built only from plates, gears, pipe and steam casing.
 
 #### Decisions taken (small steam family, 2026-10-25)
 
 - **No new recipe type.** All six run the GTM type of their electric machine (`forge_hammer`, `compressor`, `alloy_smelter`, `mixer`, `chemical_bath`, `ore_washer`): every existing recipe at LV or below becomes usable in steam without touching a single recipe of ours.
-- **8 parallels, no more.** That is the number GTL's idea asks for in this small family (`docs/investigacion/leisure.md` §4.2); the larger Large Steam family stays at 64.
+- **8 parallels, no more.** That is the number GTL's idea asks for in this small family (`docs/research/leisure.md` §4.2); the larger Large Steam family stays at 64.
 - **The ULV fluid input hatch can be hand-crafted in steam**, like the output one the coke battery already used: same gap (GTM only gives it through the assembler, LV), same hand recipe (ULV Machine Hull + glass + sticky resin).
 - **The mixer makes its fluid hatches optional** because half of its recipes (the powder alloys) do not need them: the cheapest structure already works for bronze, and it can be extended later without touching the controller.
 - **A single mechanism tested in game for the family** (AGENTS.md): the compressor (item) and the chemical bath (fluid) process in game with 8 parallels; the forge hammer, alloy smelter, mixer and ore washer are only formed and checked statically, because they run the same, already tested `SteamParallelMultiblockMachine`.

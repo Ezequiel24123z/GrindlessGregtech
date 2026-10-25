@@ -8,7 +8,7 @@
       casing, the eight active frames on the casing with the emissive layer on top, frame 0 in a "dark room" (casing and
       colour dimmed, emissive at full brightness) and the emissive layer alone on black;
     - the family row: the three working faces side by side on their casings, at x8 and as a 3x3 wall at x3, so the
-      family can be judged changing shape and parts from era to era (docs/viaje.md);
+      family can be judged changing shape and parts from era to era (docs/journey.md);
     - the charts, from the parchment draft to the radio plot, at x8 on a dark background and at 2x and 1x on a
       vanilla-slot grey.
 

@@ -17,7 +17,7 @@
     item/titanium_drill_bit.png            (the old HV bit: hv/family_items.js keeps the item, hidden, so worlds made before
                                             the stainless decision load their bits; same pixels as before)
 
-  HV has no titanium (DECISIONS.md, docs/viaje.md): titanium only comes from the Moon. The drill's legs and bit, which used
+  HV has no titanium (DECISIONS.md, docs/journey.md): titanium only comes from the Moon. The drill's legs and bit, which used
   to be titanium, are stainless steel now.
 
   Run from the repo root (PowerShell 5.1 blocks unsigned scripts by default; this bypass only affects that process):

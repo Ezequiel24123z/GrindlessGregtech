@@ -142,7 +142,7 @@ Built and tested in the scratch (`scratch/ev-plant/src/`), not applied. What it 
 ### Discarded
 
 - **Ostwald tower:** GTM's large chemical reactor already makes `nitric_acid_from_elements` (N₂ + 3 H₂ + 4 O₂ → HNO₃) in one step at HV, and NOₓ (including from IV reprocessing) returns to nitric acid with `nitric_acid_from_dioxide_1` and `_2`. It would be a big cube.
-- **Crystal puller on the Moon** (boules with fewer defects): crystals in microgravity belong to LuV's orbital smelting (`viaje.md`), and an EBF with a good coil already runs just as fast.
+- **Crystal puller on the Moon** (boules with fewer defects): crystals in microgravity belong to LuV's orbital smelting (`journey.md`), and an EBF with a good coil already runs just as fast.
 - **Mass cannon:** AE2 already moves everything between planets; it would be duplicate transport. The idea is kept for when the network hits a limit the cannon could beat.
 - **Propellant tank:** evaporation would be a penalty that wastes work; tanks and AE2 store the fluids.
 - **EV drill on Earth** (the scratch one, 3×6×3): HV already does the job. Its code moves to the tripod.
@@ -239,7 +239,7 @@ Credits to note in `CREDITS.md`: regolith cell (NASA and MIT molten-regolith ele
 
 1. **EV = automatic Moon and Mars at the end.** Titanium and Helium-3 only from the Moon; Tungsten, Samarium and ice with Deuterium only from Mars. The gate to IV is Tungsten Steel.
 2. **Three new multiblocks:** regolith cell and cryogenic plant (Moon) and atmosphere processor (Mars). The platinum plant stays as it is in the scratch and lends electrodes and Ruthenium to the others.
-3. **Removed from the EV row of `viaje.md`:** Ostwald tower (GTM already makes nitric acid in one step), mass cannon (AE2 already transports) and propellant tank (it would be a penalty). The volatiles furnace is a mode of the cell. The crystal puller is discarded: it belongs to LuV.
+3. **Removed from the EV row of `journey.md`:** Ostwald tower (GTM already makes nitric acid in one step), mass cannon (AE2 already transports) and propellant tank (it would be a penalty). The volatiles furnace is a mode of the cell. The crystal puller is discarded: it belongs to LuV.
 4. **Family steps:** EV tripod (`gtceu:ev_vein_drill`: Moon and Mars, cap 64, titanium drill bit, dry or with Liquid Nitrogen, solar wings), lunar solar array and deep space antenna. No EV greenhouse or EV drill on Earth. The Tungsten Steel drill bit moves to IV.
 5. **AE2 network, EV step:** ME hatches on the Moon, ME P2P trunk, power over FE P2P with 16 A EV converters, lunar halves built by the base and the first Earth–Mars pair.
 6. **Mars with a tier 2 rocket in EV:** GCYR's advanced tank and engine remade with Titanium, Mars chart as catalyst, 14 buckets and the HV suit; the return trip is by waystone. Venus and Mercury go up to `rocket_tier` 3 (and Proxima b, which is already 3, further up); IV makes its parts with GCYR's KubeJS plugin.
@@ -256,5 +256,5 @@ The twelve proposals are approved, with these details:
 
 - **Titanium drill bit.** In `v0.4.1` it stays hidden and converts 1:1 into the Stainless Steel one, because HV has no Titanium. EV shows it again as the EV tripod's drill bit, made with lunar Titanium, and removes the conversion. The old bits work again.
 - **The HV lunar drill and the EV tripod are in the same family.** The EV tripod changes shape and parts compared to the HV one, not just the bit.
-- **`viaje.md` is adjusted.** In the EV row, the Ostwald tower, the mass cannon and the propellant tank come out, and the cryogenic plant goes in.
+- **`journey.md` is adjusted.** In the EV row, the Ostwald tower, the mass cannon and the propellant tank come out, and the cryogenic plant goes in.
 - **EV is built once the Moon works in-game** (the user asked for this). What is in the scratch is reused: the platinum plant, the EV drill and the EV quests.

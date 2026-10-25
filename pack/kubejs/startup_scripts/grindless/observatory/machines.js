@@ -1,5 +1,5 @@
 // -----------------------------------------------------------------------------------------------
-// The observatory family, Steam to MV (docs/viaje.md, "Observatory (new family, the one that tells the story of the journey)"): the machines that tell
+// The observatory family, Steam to MV (docs/journey.md, "Observatory (new family, the one that tells the story of the journey)"): the machines that tell
 // the journey, because navigation data only comes from looking. Each step is its own multiblock with its own recipe type, so each
 // observatory is the only machine that makes its chart (EMI lists only that machine for it). Every pattern goes through
 // global.grindless.patterns (lib/patterns.js). The family changes shape and parts with the era, not only colour:

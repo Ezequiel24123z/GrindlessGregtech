@@ -187,7 +187,7 @@ Batches A–D are applied by the mod batch agent in that order, each one tested 
 
 ## Change of 2026-10-24 (afternoon): batches A–D are out
 
-The pack becomes a journey to the black hole (`docs/viaje.md`), and the user asks that each mod make sense in it and be interesting.
+The pack becomes a journey to the black hole (`docs/journey.md`), and the user asks that each mod make sense in it and be interesting.
 
 **Create and Greate are out.**
 - They do not process ore.

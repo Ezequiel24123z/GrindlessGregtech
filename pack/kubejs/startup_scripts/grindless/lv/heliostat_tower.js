@@ -1,5 +1,5 @@
 // -----------------------------------------------------------------------------------------------
-// LV "more reinforced" (docs/viaje.md, docs/eras/lv.md): the Heliostat Tower, the first solar plant of the pack and the first step
+// LV "more reinforced" (docs/journey.md, docs/eras/lv.md): the Heliostat Tower, the first solar plant of the pack and the first step
 // of the power family (heliostat tower -> lunar solar field -> orbital solar station -> Dyson sphere).
 //
 //   gtceu:heliostat_tower       a steel lattice tower on a 3x3 pump house, with a steel firebox receiver at the top (GTM lights it

@@ -1,4 +1,4 @@
-// Gregtech Grindless - names and tooltips of the Steam Age additions of the journey plan (docs/viaje.md):
+// Gregtech Grindless - names and tooltips of the Steam Age additions of the journey plan (docs/journey.md):
 //
 //   gtceu:steam_blast_furnace, gtceu:coking_battery     (machine names + tooltips)
 //   gtceu:steelmaking, gtceu:coking                     (recipe type names)

@@ -81,7 +81,7 @@ What it gains: **throughput and several steps in one**. The distillery yields on
 
 ### Engine test stand: `gtceu:engine_test_stand` (the road to the first rocket)
 
-What it gains: **a recipe that is impossible at small scale**. No machine does a static fire, and no rocket flies with an untested engine. It is the first step of the first rocket (`docs/viaje.md`: MV sets up the stand and the radio telescope, HV flies to the Moon): its MV job is the part the HV engine will request, and in HV the same stand tests the whole engine (see `hv.md`, *The first rocket*).
+What it gains: **a recipe that is impossible at small scale**. No machine does a static fire, and no rocket flies with an untested engine. It is the first step of the first rocket (`docs/journey.md`: MV sets up the stand and the radio telescope, HV flies to the Moon): its MV job is the part the HV engine will request, and in HV the same stand tests the whole engine (see `hv.md`, *The first rocket*).
 
 - **Recipe type:** `gtceu:static_fire` (new). The part under test enters through the bus, the fuel and oxidizer through the tanks, and the exhaust leaves as CO₂ and water, each through its own hatch.
 - **MV, the thruster cluster:** 4 GTM power thrusters (`gtceu:power_thruster`: MV motor, aluminium, steel rotor) + 200 mB of RP-1 + 300 mB of O₂ → 4 qualified thrusters (`grindless:qualified_power_thruster`) + 200 mB of CO₂ + 200 mB of water. 300 t at 120 EU/t. The four for one engine ignite together, like the engines of one stage.
@@ -98,7 +98,7 @@ What it gains: **a recipe that is impossible at small scale**. No machine does a
 
 ### Radio telescope: `gtceu:radio_telescope` (road to the first rocket)
 
-What it gains: it is the only machine that makes the **Lunar Landing-Site Chart** (`grindless:lunar_landing_chart`), the chart for the first trip to the Moon at the end of HV. It is the third step of the observatory family (`docs/viaje.md`), and it gains sky: radio goes through clouds and rain.
+What it gains: it is the only machine that makes the **Lunar Landing-Site Chart** (`grindless:lunar_landing_chart`), the chart for the first trip to the Moon at the end of HV. It is the third step of the observatory family (`docs/journey.md`), and it gains sky: radio goes through clouds and rain.
 
 - **Recipe type:** `gtceu:radio_astronomy` (`startup_scripts/grindless/observatory/machines.js`, recipes in `server_scripts/grindless/observatory/recipes.js`).
 - **Recipe:** the photographic map and the LV ephemerides, which are not used up, + 2 paper → 1 Lunar Landing-Site Chart. 120 EU/t and 600 ticks (30 s).

@@ -1,7 +1,7 @@
 // -----------------------------------------------------------------------------------------------
 // GregTech Leisure (GTL) idea, reimplemented: our own "Large Steam X" family, a step up from the small steam
 // family (steam/small_family.js, another agent's file) at the Steam -> LV transition. GTL's licence is not
-// permissive (docs/investigacion/leisure.md): no code, textures or text were copied, only the idea (bigger steam
+// permissive (docs/research/leisure.md): no code, textures or text were copied, only the idea (bigger steam
 // multiblocks, 64 parallels) and our own numbers, patterns and art. GTL's assembler member (an AE2 molecular
 // assembler core) is skipped: it does not fit a KubeJS-only steam multiblock.
 //
@@ -42,16 +42,16 @@
 //
 // Shape (one family look, "a step up from the small steam family": bigger, steel-and-brass, more industrial):
 // a 5x5x5 steel shell (gtceu:solid_machine_casing, the LV-tier casing already used by our LV multis/observatory/
-// arc furnace/heliostat tower/ore plant/biorefinery - steel is a Vapor-era resource already, see docs/eras/vapor.md
+// arc furnace/heliostat tower/ore plant/biorefinery - steel is a Vapor-era resource already, see docs/eras/steam.md
 // step 6; no later-era material is needed anywhere in this family) with a bronze-or-steel frame post at each of the
 // 4 true vertical edges (the "steel-and-brass" industrial-girder look: brass itself needs zinc, not available until
 // LV's sulfide roaster, so the brass look is a texture accent on bronze/steel, same call the observatory made for
-// its "brass" clockwork - see docs/eras/vapor.md's observatory decisions). The controller sits at the middle of the
+// its "brass" clockwork - see docs/eras/steam.md's observatory decisions). The controller sits at the middle of the
 // front face. 125 cells total: 20 are the 4 corner frame posts (4 x 5 Y-layers), 1 is the controller, the remaining
 // 104 are a single 'X' = oneOf(casing, steam hatch, steam input bus, 2 steam output buses, and per-machine fluid
 // hatches as the recipe type needs - see CASING_MIN below) cell: the player places every part anywhere among the
 // 104 'X' cells, same freedom as every other family in this pack. 64 parallels (the brief's cap; GTL's own
-// "paralelos absurdos" are explicitly out, docs/investigacion/leisure.md SS5) means a guaranteed output can need
+// "paralelos absurdos" are explicitly out, docs/research/leisure.md SS5) means a guaranteed output can need
 // more than one 64-stack, hence 2 output buses (8 slots) instead of 1.
 //
 // Textures: overlay dir grindless:block/multiblock/<machine> (overlay_front{,_active,_active_emissive}.png + the

@@ -200,7 +200,7 @@ powershell -NoProfile -ExecutionPolicy Bypass -File tools\assets\Build-MoonPrevi
 ```
 
 - `-Only` accepts `drill`, `sample` and `seed` (comma-separated, also with `-File`). `-Verbose` warns if a later drawing covers an emissive pixel.
-- The preview accepts `-Section drill,family,items` and `-Scale`. The casings and the regolith are context only (any 16x16 PNG: GTM's casings extracted from the jar and `moon_stone.png` from GCYR, kept outside the repo); without them, backgrounds drawn by code are used. The `family` section lines up the five drills (steam, LV, MV, HV and lunar), each on its casing, at x8, 3x, 2x and 1x: the family has to change shape, not just color (`docs/viaje.md`).
+- The preview accepts `-Section drill,family,items` and `-Scale`. The casings and the regolith are context only (any 16x16 PNG: GTM's casings extracted from the jar and `moon_stone.png` from GCYR, kept outside the repo); without them, backgrounds drawn by code are used. The `family` section lines up the five drills (steam, LV, MV, HV and lunar), each on its casing, at x8, 3x, 2x and 1x: the family has to change shape, not just color (`docs/journey.md`).
 - The final check is the HV one (size, binary alpha, no pure black, `.mcmeta` with 4 to 8 frames, empty outer ring, emissive contained in the color layer, animation that really changes), plus the sample one: the core only carries grays and only paints where the frame is transparent. All loops are 8 frames with periods that divide 8, and the output is identical byte for byte on every run.
 
 | File (under `textures/`) | Drawn on | Notes |
@@ -258,7 +258,7 @@ powershell -NoProfile -ExecutionPolicy Bypass -File tools\assets\Build-LaunchRoa
 
 ## EV era
 
-These textures are parked outside the pack while EV is reworked along with the journey (`docs/viaje.md`): the EV drill below is replaced by the lunar one (tripod with solar wings, see "The Moon").
+These textures are parked outside the pack while EV is reworked along with the journey (`docs/journey.md`): the EV drill below is replaced by the lunar one (tripod with solar wings, see "The Moon").
 
 Same method and same neutral steel ramp as the earlier eras (`$SteelSpec`). What marks the step up are the **purple** accents (base stripes, lamps and current pulses, `$PurpleSpec`) and the tungstensteel, blue-violet (`$TungstenSpec`), of the drill tower.
 

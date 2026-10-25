@@ -1,5 +1,5 @@
 // Gregtech Grindless - Traveler's Titles (travelerstitles): the title shown when the player enters a dimension, in English, named as the
-// journey of docs/viaje.md names them (the Overworld is Earth, where the journey starts). Keys: travelerstitles.<namespace>.<path>
+// journey of docs/journey.md names them (the Overworld is Earth, where the journey starts). Keys: travelerstitles.<namespace>.<path>
 // (optional .color = RGB hex). The Nether and the End keep the mod's own titles. es_es only renames: missing keys (the colours) fall back to en_us.
 ClientEvents.lang('en_us', event => {
     event.add('travelerstitles', 'travelerstitles.minecraft.overworld', 'Earth')

@@ -1,7 +1,7 @@
 # Space mods for the GregTech campaign — comparison & recommendation
 
 Research date 2026-10-24. Pack: MC 1.20.1, Forge 47.4.28, GTCEu 7.5.3 (pinned), KubeJS 2001.6.5. Re-evaluates the
-2026-10-24 orchestrator decision "GCYR is space; Ad Astra out" (`docs/integracion/mods-tecnicos.md`) against GCYR's
+2026-10-24 orchestrator decision "GCYR is space; Ad Astra out" (`docs/integration/technical-mods.md`) against GCYR's
 actual source and the wider 1.20.1-Forge space-mod field. **Verdict: that decision holds, now with hard evidence.**
 
 ## 0. TL;DR

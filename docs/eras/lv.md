@@ -160,7 +160,7 @@ What it gains: **steam without fuel**. It is the first solar plant and the first
 
 ### Optical Observatory: `gtceu:optical_observatory` (reinforced LV)
 
-What it gains: it is the only machine that makes the **photographic lunar map** (`grindless:lunar_map`) and the **lunar ephemerides** (`grindless:lunar_ephemeris`). It is the second step in the observatory family (`docs/viaje.md`), and it gains sky: height is no longer needed.
+What it gains: it is the only machine that makes the **photographic lunar map** (`grindless:lunar_map`) and the **lunar ephemerides** (`grindless:lunar_ephemeris`). It is the second step in the observatory family (`docs/journey.md`), and it gains sky: height is no longer needed.
 
 - **Recipe type:** `gtceu:astrophotography` (`startup_scripts/grindless/observatory/machines.js`, recipes in `server_scripts/grindless/observatory/recipes.js`).
 - **Recipe:** the Lunar Chart (Draft), which is never used up (it is the chart you navigate by) + 4 Photographic Plates + 2 paper → 1 Photographic Lunar Map + 1 Lunar Ephemeris. 30 EU/t and 600 ticks (30 s).
@@ -231,7 +231,7 @@ AE2 15.4.11 stays as it comes (channels 8/32). How it is made changes: the Inscr
 | Salt → persulfate and FeCl₃ | Sulfur + O₂ → SO₂ → SO₃ → H₂SO₄; Salt + H₂SO₄ → Sodium Bisulfate + HCl; Sodium Bisulfate → Sodium Persulfate; Iron + HCl → FeCl₃ | H₂ (from the persulfate and the FeCl₃): tank, MV destination (methanol, ammonia), flammable, not vented; surplus HCl: tank |
 | Gallium + arsenic → diodes | washed bauxite → thermal centrifuge → macerator (14% Gallium); Realgar → electrolysis → Arsenic and Sulfur; mixer → GaAs; assembler → Diode | Sulfur: acid and creature simulator; Antimony and barite from the Realgar: stored |
 
-GTM's stone dust is separated at MV (`stone_dust_separation`, 120 EU/t). KubeJS brings it down to LV to meet what vapor.md says.
+GTM's stone dust is separated at MV (`stone_dust_separation`, 120 EU/t). KubeJS brings it down to LV to meet what steam.md says.
 
 ## New cross-links (complexity audit)
 
