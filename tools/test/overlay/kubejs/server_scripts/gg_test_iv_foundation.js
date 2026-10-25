@@ -25,6 +25,8 @@
 //   tables            global.grindless.ivFoundation.checkTables(): Venus, Mercury and leach tables, the fluorite entry, the sample pairs
 //   samples           the vein sample recipes (Venus, Mercury, the End's pitchblende and the fluorite one)
 //   fluorite_drilling the fluorite vein's drilling recipes, from the existing generators; #forge:raw_materials/fluorite holds GCYR's raw ore
+//   fluorite_chain    NOTE only: how many GT recipes process the drill's raw (or crushed) fluorite; none while hidden_until.json keeps
+//                     gcyr:fluorite as junk
 //   worldgen          GTM's live vein registry: our Venus, Mercury and fluorite veins with their layer, dimensions and materials; GTM's End
 //                     naquadah vein gone, the End's pitchblende vein still there; nothing else generates only on Venus or Mercury
 //   planets           planets.json: Venus and Mercury carry their pair tags
@@ -461,6 +463,22 @@
       check('fluorite_drilling', takers.length >= 4 && givesFluorite === takers.length && steam.length === 0 && raw.indexOf(ids.fluoriteRaw) >= 0,
         takers.length + ' vein_drilling recipes take ' + sample + ' (' + takers.sort().join(', ') + '), ' + givesFluorite + ' give raw fluorite; steam ones missing: ' +
         (steam.join(', ') || 'none') + '; #forge:raw_materials/fluorite = ' + (raw.join(', ') || 'empty'))
+    })
+
+    // NOTE, not a check: until hidden_until.json moves gcyr:fluorite from "never" to IV, integration/hidden.js removes its whole ore chain,
+    // so nothing turns raw fluorite into the fluorite dust the fluorspar kiln takes. Turn this into a check once the table is regenerated.
+    safely('fluorite_chain', function () {
+      // the drill gives raw fluorite: the chain that matters starts from it (raw, crushed, purified or refined, item or tag)
+      var FORMS = /"(gcyr:raw_fluorite|gcyr:(crushed|purified|refined)_fluorite_ore|forge:raw_materials\/fluorite|forge:(crushed|purified|refined)_ores\/fluorite)"/
+      var chain = []
+      asArray(GTRegistries.RECIPE_TYPES.keys()).forEach(function (key) {
+        recipesOfType(server, String(key)).forEach(function (r) {
+          var ins = asArray(r.getInputContents(caps().item)).map(function (c) { return String(c.content.toJson()) }).join(' ')
+          if (FORMS.test(ins)) chain.push(String(r.getId()))
+        })
+      })
+      emit('fluorite_chain', 'NOTE', chain.length + ' GT recipes process raw or crushed fluorite' + (chain.length > 0 ? ': ' + chain.sort().slice(0, 12).join(', ') :
+        ' (the hidden table still removes the ore chain as junk: regenerate it with gcyr:fluorite in class B, until iv)'))
     })
 
     safely('worldgen', function () {
