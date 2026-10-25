@@ -123,9 +123,19 @@
 
   // only called once planRebuild succeeded for this recipe, so this replay is not expected to throw; the recipe was
   // already removed by the caller at this point (same id), which is why the plan has to be validated first.
+  // GTM's KubeJS builder prefixes the recipe type's path to the id it is given (event.recipes.gtceu.steam_turbine('gtceu:steam')
+  // is saved as gtceu:steam_turbine/steam), so the type prefix is stripped first: the rebuilt recipe keeps its original id.
+  function builderId(type, id) {
+    var typePath = type.substring(type.indexOf(':') + 1)
+    var ns = id.substring(0, id.indexOf(':'))
+    var path = id.substring(id.indexOf(':') + 1)
+    if (path.indexOf(typePath + '/') === 0) return ns + ':' + path.substring(typePath.length + 1)
+    return id
+  }
+
   function applyPlan(event, type, id, plan) {
     var shortType = type.replace(/^gtceu:/, '')
-    var b = event.recipes.gtceu[shortType](id)
+    var b = event.recipes.gtceu[shortType](builderId(type, id))
     plan.calls.forEach(function (call) { call(b) })
     b.EUt(plan.eu).duration(plan.duration)
   }
@@ -150,6 +160,12 @@
         if (!producesEu(json) || consumesEu(json)) return
         if (typeof json.duration !== 'number') {
           report.skipped.push(c.id + ' (no duration field)')
+          return
+        }
+        // conditional generators (gcyr:dyson_controller's orbit / dyson_sphere recipes) are out of reach today and the
+        // rebuild does not replay recipeConditions: they stay at their original duration, on purpose
+        if (json.recipeConditions !== undefined) {
+          report.skipped.push(c.id + ' (has recipeConditions)')
           return
         }
         var plan
