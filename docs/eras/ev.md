@@ -84,7 +84,9 @@ AE2 is the backbone between planets (the user's decision), and improving it is a
 - **Earth.** The HV drill still covers the Overworld, Nether and End, and there is no EV drill on Earth (ore is plentiful: the bottleneck is processing). HV fluid drill (EV hull, ×16) for crude and gas. Air, noble gases, chlorine and acids, as in HV.
 - **Moon.** The regolith comes out of the tripod (the stone it drops, ground up; verify the material), and the cell converts it into O₂, metals and volatiles; the cryogenic plant liquefies whatever is needed.
 - **Mars.** CO₂ from the air, for the processor; the ice goes to the network for IV.
-- **Creatures.** The EV simulator (already registered) adds the Wither Skeleton (tier 3) and the wither (tier 4, 1,920 EU/t, 30 s, 400 mB of biomass, 1 Nether Star per cycle) to `mobs.json`. The Nether Star is saved for IV.
+- **Creatures.** `mobs.json` gains two rows (2026-10-25):
+  - **Wither skeleton,** at HV: 480 EU/t, 10 s, 100 mB of biomass + 1 tricalcium phosphate, printed from 8 nether bricks + 8 bone blocks. Circuit 1 gives bones, coal and a skull at 10%; circuit 2 gives only the skull.
+  - **The wither,** at EV: 1,920 EU/t, 30 s, 400 mB of biomass, printed from 3 wither skeleton skulls. It gives 1 Nether Star per cycle, saved for IV.
 - **Closing the loop:** crude, air, salt and Earth ores come from drills; Ilmenite and regolith come from the lunar tripod; Scheelite, rare earths and ice come from the Martian one. The rest is EU.
 
 ## Our multiblocks
@@ -199,14 +201,18 @@ What it gains: **several steps in one, and energy back.** Hot ingots go straight
 
 What it gains: **crops where there is no sky, no soil and no air.** LED panels grow plants through the 14-day lunar night, and the plants turn CO₂ into O₂. The idea comes from Leisure's large greenhouse (no sky needed) and the catalog's sealed lunar dome. The physics is real: BIOS-3 and Lunar Palace 1.
 
-- **Recipe type:** the greenhouse family's type if it does not check for sky or daytime (verify). Otherwise a new type, `gtceu:sealed_growing`.
-  - Recipes carry `.dimension('gcyr:luna')` or `.dimension('gcyr:mars')`.
-  - Yields are those of the HV greenhouse.
-  - Seed or sapling (not used up) + water + CO₂ → crops or wood + O₂.
+- **Recipe type:** `gtceu:greenhouse`, the family's own type. It was checked on 2026-10-25 (run `b8-sealed-dome-2`, on the Moon): neither the type nor any of its old recipes checks sky, daytime or dimension.
+  - **Programmed circuit 4 is the sealed mode,** off-world only. Each plant + 100 mB water + 200 mB CO₂ (Moon, `.dimension('gcyr:luna')`), or water alone (Mars, `.dimension('gcyr:mars')`, CO₂ from the air), gives ×3 the base output + 100 mB O₂, at 8 EU/t for 200 ticks. That is the HV greenhouse's best yield, with LEDs and no fertilizer. There are two recipes per plant (86 in all), because the Mars one has no CO₂ input.
+  - Circuits 0–3 work as in the HV greenhouse. The cap is 64 runs.
+  - Lower greenhouses never run the sealed recipes, which have `/ev/` ids and need circuit 4.
 - **CO₂:** on Mars, it comes straight from the outside air, like the gas collector. On the Moon, it comes from home through the bridge. Home sources include the engine test stand's exhaust (MV), which gives that CO₂ a destination two eras later.
-- **Structure:** a dome of tempered glass on a ring of sintered regolith brick, with an airlock, LED panels and a soil bed. It has an input bus, an output bus, a water hatch, a CO₂ hatch, an O₂ output hatch and 1–2 EV hatches.
-  - On Mars, the brick has to come from the Moon, because only the cell makes it.
-- **Crafted with:** HV greenhouse controller + EV hull + 2 EV pumps + 4 EV circuits.
+- **Structure:** 7×5×7.
+  - Two rings of sintered regolith (the hatches plus at least 38 bricks) and a 3×3 soil bed in a brick floor.
+  - A tempered glass wall stepping into a 5×5 ring, under a 3×3 cap of GT lamps (the LED panels).
+  - An iron door as the airlock, next to the controller.
+  - Parts: 1–2 energy hatches, 1 input bus, 1–2 output buses, 1–2 input hatches and 1 output hatch. ME parts fit.
+  - On Mars, the brick has to come from the Moon, because only the Moon makes it.
+- **Crafted with:** HV greenhouse controller + EV hull + 2 EV pumps + 4 EV circuits, with a wrench.
 - **Byproducts:** O₂ → suits, the cryogenic plant or the network. Crops → home, where the brewery turns them into biomass for the wither (400 mB per Nether Star), and food.
 
 #### Rare-earth extraction cascade: `gtceu:extraction_cascade` (Earth)
