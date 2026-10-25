@@ -40,7 +40,9 @@ Generators for the pack's own textures. Everything is procedural 16x16 pixel art
 | `Build-CombinedCycleHotMillTextures.ps1` | Writes the faces of the EV combined-cycle plant and hot strip mill (`multiblock/combined_cycle_plant/`, `multiblock/hot_strip_mill/`). `-Credits` prints their 10 CREDITS rows. |
 | `Build-FissionReactorTextures.ps1` | Writes the IV fission reactor's face (`multiblock/fission_reactor/`). `-Only reactor` and `-Credits` (its 5 CREDITS rows). |
 | `Build-HotCellTextures.ps1` | Writes the IV hot cell's face (`multiblock/hot_cell/`). `-Only hot_cell` and `-Credits` (its 5 CREDITS rows). |
+| `Build-UraniumCycleTextures.ps1` | Writes the faces of the IV in-situ leach field and fuel fabrication plant (`multiblock/isr_wellfield/`, `multiblock/fuel_fabrication_plant/`). `-Only isr,fuel`, `-Preview <png outside the repo>` (optional `-PtfeCasing <png>`, `-StainlessCasing <png>`) and `-Credits` (their 10 CREDITS rows). |
 | `Build-HeavyWaterPlantTextures.ps1` | Writes the IV heavy-water plant's face (`multiblock/heavy_water_plant/`). `-Only heavy_water_plant`, `-Preview <png outside the repo>` and `-Credits` (its 5 CREDITS rows). |
+| `Build-FluorsparKilnTextures.ps1` | Writes the IV fluorspar kiln's face (`multiblock/fluorspar_kiln/`). `-Only kiln`, `-Preview <png outside the repo>` and `-Credits` (its 5 CREDITS rows). |
 | `Build-IVFoundationTextures.ps1` | Writes the shared IV textures (IV-A1): fuel cycle items, PuBe source, RTG pellet, resin, platinum gauze, inner planets chart, Venus and Mercury vein samples, the Hermean heat shield brick (the Mercury casing texture) and the thin-film panel. `-Only`, `-Preview <png outside the repo>`, `-Credits`. |
 
 ## Regenerate
@@ -384,3 +386,30 @@ The plant's mimic panel, drawn for GTM's inert PTFE casing with the IV faces' me
 - Idle: dim towers, no flow, a dull drop, lamps dark.
 - The emissive layer holds only the bubbles, the pulses, the drop with its droplet and the lit lamp.
 - The fission reactor's checks; the output is identical byte for byte. `-Preview <png outside the repo>` writes an x8 review sheet on a light and a dark inert-casing stand-in (never shipped).
+
+### Fluorspar kiln
+
+The kiln from the side, as on a flow sheet, drawn for GTM's heatproof casing with the EV faces' method, steel ramp, bezel and lamp ramp: a long pale kiln on two steel riding rings and their rollers, over a plinth; a hopper of lilac fluorspar over its cold end; a heating jacket under it between the rings; the white PTFE scrubber tower at its hot end, with its packing column and the HF sump at its foot; the drive (green) and HF (cyan) lamps over the kiln.
+
+```powershell
+powershell -NoProfile -ExecutionPolicy Bypass -File tools\assets\Build-FluorsparKilnTextures.ps1
+powershell -NoProfile -ExecutionPolicy Bypass -File tools\assets\Build-FluorsparKilnTextures.ps1 -Credits
+```
+
+- 8 frames, `frametime` 4: the kiln turns (a seam of rivets runs down its visible side, and the opposite seam comes round), fluorspar trickles down the chute, the jacket glows and flickers, a drop of HF runs down the packing into the sump, the drive lamp is lit and the HF lamp blinks as the drop lands.
+- Idle: still kiln, dark jacket, empty sump, dull fluorspar, lamps dark.
+- The emissive layer holds only the jacket and the lit lamps.
+- The hot cell's checks; the output is identical byte for byte. `-Preview` draws a review sheet on a stand-in heatproof casing (the GTM texture is not in the repository).
+
+### Uranium cycle
+
+The faces of the in-situ leach field and the fuel fabrication plant, with the fission reactor's method: steel bezel, lamp ramp and IV blue, its helpers and checks copied, so no other script changes. Checks: 16x16 frames (strips of exactly 8, `frametime` 4), binary alpha, no pure black, an empty casing ring around a panel with no holes, no frame equal to the next, and an emissive layer inside the colour layer, lit in every frame and only on the face's own lights. The output is identical byte for byte. `-Only isr|fuel`; `-Preview` writes an x8 sheet on the real casings when `-PtfeCasing`/`-StainlessCasing` point at GTM's PNGs (kept outside the repo), otherwise on flat greys.
+
+| File (under `textures/`) | Notes |
+|---|---|
+| `block/multiblock/isr_wellfield/overlay_front.png` | Idle: a dark five-spot mimic with the header line, two empty ion-exchange columns and the return main. |
+| `.../overlay_front_active.png` + `.mcmeta` | 8 frames, `frametime` 4: the injection wells lit blue with pulses down the diagonals, the production well and its line glowing yellow-green, a yellow loading band rising in each column, and blue pulses running back along the return. |
+| `.../overlay_front_active_emissive.png` + `.mcmeta` | Only the lit wells, lines and loaded column cells. |
+| `block/multiblock/fuel_fabrication_plant/overlay_front.png` | Idle: four dark lamps (press, sinter, pilger, glovebox), a dark furnace window, pellets on the tray, an empty tube and dark progress cells. |
+| `.../overlay_front_active.png` + `.mcmeta` | The furnace glows orange and shimmers while boats of pellets cross it; the pellets advance into the tube one cell a frame with a green progress cell each; the lamps are lit blue with a brighter one walking along them. |
+| `.../overlay_front_active_emissive.png` + `.mcmeta` | Only the furnace glow, the lamps and the lit progress cells. |
