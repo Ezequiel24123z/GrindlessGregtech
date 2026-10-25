@@ -36,7 +36,8 @@
 //
 // Published on global.grindless.wireless (the startup object) for the tower's display and the smoke tests
 // (tools/test/overlay/kubejs/server_scripts/gg_test_wireless_*.js): track, trackCover, placeCover, forget, tracked, settle, status,
-// towerInfo, stored, setStored, totals, flows, faults, perTick, readout, recipes, classify, blocksFromTag, dropCache.
+// towerInfo, stored, setStored, totals, flows, faults, perTick, readout, recipes, classify, blocksFromTag, dropCache, and the keys
+// blocksKey, storeKey, legacyKey.
 // Rhino: var + function inside every callback that runs more than once.
 (function () {
   const G = global.grindless || (global.grindless = {})
@@ -110,6 +111,7 @@
   const R = G.wirelessRegistry
   if (!R) throw new Error('[grindless/wireless] server_scripts/grindless/lib/wireless_registry.js did not run')
   const LEGACY_KEY = 'grindless_wireless_blocks_legacy'
+  W.legacyKey = LEGACY_KEY
 
   // the parsed list and the persistent-data tag it was read from or written as
   var cache = { tag: null, list: null }
