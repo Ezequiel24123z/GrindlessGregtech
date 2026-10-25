@@ -1,6 +1,6 @@
 // -----------------------------------------------------------------------------------------------
 // Expanded AE (modId expandedae, CurseForge build 1.4.x; it builds on ExtendedAE and AE2WTLib) on the HV era
-// (docs/eras/hv.md, "Mods e integracion": coprocessors small at HV, the big ones wait for EV-IV).
+// (docs/eras/hv.md, "Mods and integration": coprocessors small at HV, the big ones wait for EV-IV).
 // Era: HV.
 //
 // Every recipe only asks for AE2 parts, so the pacing is a GT circuit:

@@ -1,7 +1,7 @@
 param(
     [string]$Destination = (Join-Path $PSScriptRoot 'bin')
 )
-# Descarga packwiz (no tiene releases; se usa el build de GitHub Actions de la rama main).
+# Downloads packwiz (it has no releases; uses the GitHub Actions build from the main branch).
 $ErrorActionPreference = 'Stop'
 $ProgressPreference = 'SilentlyContinue'
 New-Item -ItemType Directory -Force -Path $Destination | Out-Null
@@ -10,5 +10,5 @@ Invoke-WebRequest -UseBasicParsing -Uri 'https://nightly.link/packwiz/packwiz/wo
 Expand-Archive -Path $zip -DestinationPath $Destination -Force
 Remove-Item $zip
 $exe = Join-Path $Destination 'packwiz.exe'
-if (-not (Test-Path $exe)) { throw "packwiz.exe no apareció en $Destination" }
+if (-not (Test-Path $exe)) { throw "packwiz.exe did not appear in $Destination" }
 Write-Output $exe

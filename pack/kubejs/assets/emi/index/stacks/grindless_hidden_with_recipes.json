@@ -1,0 +1,8 @@
+{
+  "_comment": "EMI index data (resource pack: EMI only reads assets/emi/index/stacks/*.json). Every item and fluid in the tag grindless:hidden_with_recipes is disabled: EMI drops it from the index AND drops every recipe that has it as an input, output or catalyst. The tag is filled on the server by server_scripts/grindless/integration/hidden.js with what cannot be obtained yet or ever (kubejs/data/grindless/tables/hidden_until.json). The old items of earlier versions only get c:hidden_from_recipe_viewers, which EMI hides from the index by itself, so their conversion recipes stay in view.",
+  "disable": true,
+  "removed": [
+    "#item:grindless:hidden_with_recipes",
+    "#fluid:grindless:hidden_with_recipes"
+  ]
+}

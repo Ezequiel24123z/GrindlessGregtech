@@ -1,5 +1,5 @@
 // -----------------------------------------------------------------------------------------------
-// Applied Energistics 2 on the LV era (docs/eras/lv.md, "Decisiones tomadas" #1, #2 and #6).
+// Applied Energistics 2 on the LV era (docs/eras/lv.md, "Decisions taken" #1, #2 and #6).
 //
 // HYBRID approach: AE2 stays AE2 (inscriber, charger, processors, cells, channels...). Only its ENTRY POINTS
 // are rerouted through GregTech so that the whole mod can be unlocked at LV without meteorites. Everything is

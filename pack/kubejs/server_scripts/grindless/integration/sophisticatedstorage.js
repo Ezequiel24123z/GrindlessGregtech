@@ -3,7 +3,7 @@
 // sophisticatedcore), so its "advanced" upgrades follow the same MV rule as sophisticatedbackpacks.js: gold ingots -> aluminium
 // plates, diamonds -> steel plates. The storage tiers (copper / iron / gold / diamond / netherite chests and barrels) stay as the
 // mod has them.
-// Era: MV (docs/eras/mv.md, "Mods e integración").
+// Era: MV (docs/eras/mv.md, "Mods and integration").
 //
 // Rhino: var + function inside every callback that runs more than once (this Rhino throws "redeclaration of var").
 (function () {

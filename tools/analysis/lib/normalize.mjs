@@ -1,5 +1,5 @@
-// Normaliza el JSON crudo de cada receta a {entradas, salidas, EU/t, condiciones}.
-// Las claves de recurso son: id de objeto tal cual ("minecraft:stick") y "fluid:<id>" para fluidos.
+// Normalizes each recipe's raw JSON into {inputs, outputs, EU/t, conditions}.
+// Resource keys are: the item id as-is ("minecraft:stick") and "fluid:<id>" for fluids.
 import { asArray } from './util.mjs';
 
 export const fluidKey = (id) => 'fluid:' + id;
@@ -7,16 +7,37 @@ const MAX_CHANCE = 10000;
 
 function labelOf(tags, alts, fallback) {
   if (alts.length === 0) {
-    if (tags.length > 0) return `#${tags.join('|#')} (etiqueta vacía o inexistente en este pack)`;
-    return fallback || '(vacío)';
+    if (tags.length > 0) return `#${tags.join('|#')} (empty or nonexistent tag in this pack)`;
+    return fallback || '(empty)';
   }
   if (tags.length === 1) return '#' + tags[0];
   if (tags.length > 1) return '#' + tags.join('|#');
   return alts.length === 1 ? alts[0] : `${alts[0]} (+${alts.length - 1})`;
 }
 
-/** Ingrediente de objeto (vanilla, Forge o GT) -> {alts:[ids], tags:[...], count, circuit?, bad?}. */
-export function parseItemIngredient(j, tagIndex, st) {
+/**
+ * Type that holds a "configurable" item's NBT (Productive Bees' honeycombs, honeycomb blocks and eggs carry the bee
+ * in EntityTag.type). The NBT arrives as an object or as SNBT/JSON text: {EntityTag:{type:"productivebees:iron"}}.
+ */
+export function nbtType(nbt) {
+  if (!nbt) return null;
+  if (typeof nbt === 'object') return nbt.EntityTag && typeof nbt.EntityTag.type === 'string' ? nbt.EntityTag.type : null;
+  const m = /["']?type["']?\s*:\s*["']([^"']+)["']/.exec(String(nbt));
+  return m ? m[1] : null;
+}
+
+/**
+ * An item's key: with `nbtTyped` (a Set of ids, only for the obtainability audit) items on that list with an NBT type
+ * are split by type ("productivebees:configurable_honeycomb#productivebees:iron"); the rest of the analysis merges them into one id.
+ */
+export function itemKey(item, nbt, nbtTyped) {
+  if (!nbtTyped || !nbtTyped.has(item)) return item;
+  const t = nbtType(nbt);
+  return t ? `${item}#${t}` : item;
+}
+
+/** Item ingredient (vanilla, Forge or GT) -> {alts:[ids], tags:[...], count, circuit?, bad?}. */
+export function parseItemIngredient(j, tagIndex, st, nbtTyped = null) {
   const res = { alts: [], tags: [], count: 1 };
   const visit = (x) => {
     if (x === null || x === undefined) return;
@@ -60,12 +81,12 @@ export function parseItemIngredient(j, tagIndex, st) {
       default:
         break;
     }
-    if (typeof x.item === 'string') res.alts.push(x.item);
+    if (typeof x.item === 'string') res.alts.push(itemKey(x.item, x.nbt, nbtTyped));
     else if (typeof x.tag === 'string') {
       res.tags.push(x.tag);
       res.alts.push(...tagIndex.items(x.tag));
     } else if (!res.bad) {
-      res.bad = 'forma desconocida';
+      res.bad = 'unknown form';
       st.unresolved.add(String(x.type || JSON.stringify(x).slice(0, 60)));
     }
   };
@@ -75,7 +96,7 @@ export function parseItemIngredient(j, tagIndex, st) {
   return res;
 }
 
-/** Ingrediente de fluido de GT: {amount, value:[{fluid}|{tag}]} o {count_provider, inner}. */
+/** GT fluid ingredient: {amount, value:[{fluid}|{tag}]} or {count_provider, inner}. */
 export function parseFluidIngredient(j, tagIndex, st) {
   const res = { alts: [], tags: [], amount: 0 };
   const visitValue = (v) => {
@@ -140,11 +161,12 @@ function pickOutput(parsed) {
 
 function normalizeGT(out, j, ctx) {
   const { tags, st } = ctx;
+  const nbtTyped = typedOf(ctx);
   const addIn = (cap, c) => {
     const chance = c.chance === undefined ? MAX_CHANCE : c.chance;
     const maxChance = c.maxChance || MAX_CHANCE;
     if (cap === 'item') {
-      const p = parseItemIngredient(c.content, tags, st);
+      const p = parseItemIngredient(c.content, tags, st, nbtTyped);
       out.inputs.push({
         kind: 'item', alts: p.alts, label: labelOf(p.tags, p.alts, p.bad), count: p.count,
         cap: chance === 0, cat: chance > 0 && chance < maxChance, consume: chance / maxChance, bad: p.bad, tags: p.tags,
@@ -161,15 +183,15 @@ function normalizeGT(out, j, ctx) {
     const chance = c.chance === undefined ? MAX_CHANCE : c.chance;
     const maxChance = c.maxChance || MAX_CHANCE;
     if (cap === 'item') {
-      const p = parseItemIngredient(c.content, tags, st);
+      const p = parseItemIngredient(c.content, tags, st, nbtTyped);
       const k = pickOutput(p);
       if (k) out.outputs.push({ key: k, chance: chance / maxChance, count: p.count });
-      else out.warn.push('salida sin objeto: ' + labelOf(p.tags, p.alts, p.bad));
+      else out.warn.push('output with no item: ' + labelOf(p.tags, p.alts, p.bad));
     } else if (cap === 'fluid') {
       const p = parseFluidIngredient(c.content, tags, st);
       const k = pickOutput(p);
       if (k) out.outputs.push({ key: k, chance: chance / maxChance, count: p.amount });
-      else out.warn.push('salida de fluido sin fluido');
+      else out.warn.push('fluid output with no fluid');
     }
   };
   for (const [cap, list] of Object.entries(j.inputs || {})) for (const c of asArray(list)) addIn(cap, c);
@@ -183,7 +205,9 @@ function normalizeGT(out, j, ctx) {
   }
   for (const c of asArray((j.tickOutputs || {}).eu)) out.euOut = Math.max(out.euOut, euOf(c.content).voltage);
   out.conditions = [...asArray(j.recipeConditions)];
-  // GT guarda la temperatura del horno de alto vacío en `data`, no en las condiciones
+  // GT category (e.g. gtceu:macerator_recycling): tells apart recycling an item from the recipe that makes the material
+  if (typeof j.category === 'string') out.category = j.category;
+  // GT stores the EBF's temperature in `data`, not in conditions
   if (j.data && typeof j.data.ebf_temp === 'number') {
     out.temp = j.data.ebf_temp;
     out.conditions.push({ type: 'ebf_temp', temperature: j.data.ebf_temp });
@@ -192,26 +216,39 @@ function normalizeGT(out, j, ctx) {
   return out;
 }
 
-function resultOf(r) {
+/** Set of ids with NBT typing (cfg.nbtTyped, only for the obtainability audit), or null. */
+const typedOf = (ctx) => (ctx.cfg && ctx.cfg.nbtTyped instanceof Set ? ctx.cfg.nbtTyped : null);
+
+/**
+ * Output of a non-GT recipe. Productive Bees nests the item ({item: {type: 'forge:nbt', item, nbt}} or
+ * {item: {tag}}); a tag output gives the first member (whatever the game hands over).
+ */
+function resultOf(r, ctx) {
   if (!r) return [];
   if (typeof r === 'string') return [{ key: r, count: 1 }];
-  if (Array.isArray(r)) return r.flatMap(resultOf);
+  if (Array.isArray(r)) return r.flatMap((x) => resultOf(x, ctx));
+  if (r.item && typeof r.item === 'object') return resultOf(r.item, ctx).map((o) => ({ ...o, count: r.count || o.count }));
+  if (typeof r.tag === 'string' && !r.item && !r.id) {
+    const first = ctx.tags.items(r.tag)[0];
+    return first ? [{ key: first, count: r.count || 1 }] : [];
+  }
   const id = r.item || r.id || (typeof r.result === 'string' ? r.result : null);
-  return id ? [{ key: id, count: r.count || 1 }] : [];
+  return id ? [{ key: itemKey(id, r.nbt, typedOf(ctx)), count: r.count || 1 }] : [];
 }
 
 function normalizeGeneric(out, j, ctx) {
   const { tags, st, cfg } = ctx;
+  const nbtTyped = typedOf(ctx);
   const toolTags = cfg.toolTagSet;
   const pushFluidContainer = (ing) => {
-    // Receta con un recipiente lleno de fluido (cubo de agua, de creosota...): hace falta el fluido y algo donde llevarlo.
+    // A recipe with a container full of fluid (water bucket, creosote bucket...): needs the fluid and something to carry it in.
     const p = parseFluidIngredient(ing.fluid, tags, st);
     out.inputs.push({
       kind: 'fluid', alts: p.alts, label: 'fluid:' + labelOf(p.tags, p.alts.map((a) => a.slice(6)), p.bad), count: p.amount,
       cap: false, consume: 1, bad: p.bad, tags: p.tags,
     });
     out.inputs.push({
-      kind: 'item', alts: cfg.fluidContainers || ['minecraft:bucket'], label: 'recipiente de fluidos', count: 1,
+      kind: 'item', alts: cfg.fluidContainers || ['minecraft:bucket'], label: 'fluid container', count: 1,
       cap: true, consume: 0, tags: [],
     });
   };
@@ -220,7 +257,7 @@ function normalizeGeneric(out, j, ctx) {
       pushFluidContainer(ing);
       return;
     }
-    const p = parseItemIngredient(ing, tags, st);
+    const p = parseItemIngredient(ing, tags, st, nbtTyped);
     const cap = p.tags.length > 0 && p.tags.every((t) => toolTags.has(t));
     out.inputs.push({
       kind: cap ? 'tool' : 'item', alts: p.alts, label: labelOf(p.tags, p.alts, p.bad), count: p.count,
@@ -228,16 +265,16 @@ function normalizeGeneric(out, j, ctx) {
     });
   };
   if (out.type === 'ae2:inscriber' && j.ingredients && !Array.isArray(j.ingredients)) {
-    // AE2 15: en modo "inscribe" los moldes (arriba y abajo) no se gastan; en modo "press" se gastan los tres ingredientes.
+    // AE2 15: in "inscribe" mode the dies (top and bottom) aren't consumed; in "press" mode all three ingredients are.
     for (const [slot, ing] of Object.entries(j.ingredients)) {
-      pushItem(ing, slot !== 'middle' && j.mode !== 'press' ? { cap: true, consume: 0, kind: 'molde' } : {});
+      pushItem(ing, slot !== 'middle' && j.mode !== 'press' ? { cap: true, consume: 0, kind: 'die' } : {});
     }
     out.shape = 'ae2-inscriber';
   } else if (j.pattern && j.key) {
     const syms = new Set();
     for (const row of asArray(j.pattern)) for (const ch of String(row)) if (ch !== ' ') syms.add(ch);
     for (const s of syms) {
-      if (j.key[s] === undefined) out.warn.push(`símbolo "${s}" sin clave`);
+      if (j.key[s] === undefined) out.warn.push(`symbol "${s}" has no key`);
       else pushItem(j.key[s]);
     }
     out.shape = 'shaped';
@@ -250,22 +287,110 @@ function normalizeGeneric(out, j, ctx) {
     out.shape = 'generic';
   }
   if (out.type === 'ae2:transform' && j.circumstance) {
-    // Transformación en el mundo: los objetos se tiran a un fluido (agua) o se hacen explotar. El fluido hace de condición
-    // "junto a"; lo demás (explosión) cuenta como condición no soportada salvo que la configuración diga otra cosa.
+    // World transformation: items are thrown into a fluid (water) or made to explode. The fluid acts as an "adjacent
+    // to" condition; the rest (explosion) counts as an unsupported condition unless the config says otherwise.
     const c = j.circumstance;
     if (c.type === 'fluid' && c.tag) out.conditions.push({ type: 'adjacent_fluid', fluids: ['#' + c.tag] });
     else if (c.type === 'fluid' && c.fluid) out.conditions.push({ type: 'adjacent_fluid', fluids: [c.fluid] });
     else out.conditions.push({ type: `ae2_circumstance_${c.type}` });
   }
-  for (const r of [...resultOf(j.result), ...resultOf(j.results), ...resultOf(j.output)]) {
+  for (const r of [...resultOf(j.result, ctx), ...resultOf(j.results, ctx), ...resultOf(j.output, ctx)]) {
     out.outputs.push({ key: r.key, chance: 1, count: r.count });
   }
   return out;
 }
 
+/** Productive Bees types read as bee rules when the config asks for `bees` (obtainability audit). */
+export const BEE_TYPES = new Set([
+  'productivebees:advanced_beehive', 'productivebees:bee_breeding', 'productivebees:bee_conversion', 'productivebees:bee_spawning',
+  'productivebees:bee_fishing', 'productivebees:block_conversion', 'productivebees:centrifuge', 'productivebees:bottler',
+]);
+export const beeKey = (id) => 'bee:' + id;
+
 /**
- * ctx = {tags: TagIndex, st: estadísticas, cfg: config con typeAliases y toolTagSet, gtTypes: Set de tipos GT}
- * Devuelve la receta normalizada (siempre un objeto).
+ * Productive Bees: bees are "bee:<id>" keys (capital: not consumed). The hive gives the bee's honeycombs (an
+ * NBT-less configurable honeycomb is the bee's own), crossbreeding gives offspring, conversion changes a bee with
+ * an item, nests drop bees, and fishing pulls them out of water (biomes are taken as reachable).
+ */
+function normalizeBees(out, j, ctx) {
+  const { tags, st } = ctx;
+  const nbtTyped = typedOf(ctx);
+  const bee = (b) => (typeof b === 'string' ? b : b && typeof b.bee === 'string' ? b.bee : null);
+  const beeIn = (b) => {
+    const id = bee(b);
+    if (id) out.inputs.push({ kind: 'bee', alts: [beeKey(id)], label: 'bee ' + id, count: 1, cap: true, consume: 0, tags: [] });
+    else out.warn.push('bee with no id');
+  };
+  const beeOut = (b) => {
+    const id = bee(b);
+    if (id) out.outputs.push({ key: beeKey(id), chance: 1, count: 1 });
+  };
+  const itemIn = (ing, cap = false) => {
+    const p = parseItemIngredient(ing, tags, st, nbtTyped);
+    out.inputs.push({
+      kind: 'item', alts: p.alts, label: labelOf(p.tags, p.alts, p.bad), count: p.count, cap, consume: cap ? 0 : 1, bad: p.bad, tags: p.tags,
+    });
+  };
+  const fluidOut = (f, amount) => {
+    const id = f.fluid || (f.tag ? tags.fluids(f.tag)[0] : null);
+    if (id) out.outputs.push({ key: fluidKey(id), chance: 1, count: amount || 0 });
+  };
+  switch (out.type) {
+    case 'productivebees:advanced_beehive':
+      beeIn(j.ingredient);
+      for (const r of asArray(j.results)) {
+        for (const o of resultOf(r, ctx)) {
+          const key = nbtTyped && nbtTyped.has(o.key) && bee(j.ingredient) ? `${o.key}#${bee(j.ingredient)}` : o.key;
+          out.outputs.push({ key, chance: (r.chance || 100) / 100, count: o.count });
+        }
+      }
+      break;
+    case 'productivebees:bee_breeding':
+      beeIn(j.parent1);
+      beeIn(j.parent2);
+      asArray(j.offspring).forEach(beeOut);
+      break;
+    case 'productivebees:bee_conversion':
+      beeIn(j.source);
+      if (j.item) itemIn(j.item);
+      beeOut(j.result);
+      break;
+    case 'productivebees:bee_spawning':
+      itemIn(j.ingredient, true);
+      asArray(j.results).forEach(beeOut);
+      break;
+    case 'productivebees:bee_fishing':
+      beeOut(j.bee);
+      break;
+    case 'productivebees:block_conversion':
+      beeIn(j.bee);
+      if (j.from && j.from.Name) itemIn({ item: j.from.Name });
+      if (j.to && j.to.Name) out.outputs.push({ key: j.to.Name, chance: (j.chance || 100) / 100, count: 1 });
+      break;
+    case 'productivebees:centrifuge':
+      itemIn(j.ingredient);
+      for (const o of asArray(j.outputs)) {
+        if (o.fluid) fluidOut(o.fluid, o.amount);
+        else for (const r of resultOf(o, ctx)) out.outputs.push({ key: r.key, chance: (o.chance || 100) / 100, count: r.count });
+      }
+      break;
+    case 'productivebees:bottler': {
+      itemIn(j.input);
+      const p = parseFluidIngredient(j.fluid, tags, st);
+      out.inputs.push({ kind: 'fluid', alts: p.alts, label: 'fluid:' + labelOf(p.tags, p.alts.map((a) => a.slice(6)), p.bad), count: p.amount, cap: false, consume: 1, bad: p.bad, tags: p.tags });
+      for (const r of resultOf(j.output, ctx)) out.outputs.push({ key: r.key, chance: 1, count: r.count });
+      break;
+    }
+    default:
+      break;
+  }
+  out.shape = 'bees';
+  return out;
+}
+
+/**
+ * ctx = {tags: TagIndex, st: stats, cfg: config with typeAliases and toolTagSet, gtTypes: Set of GT types}
+ * Returns the normalized recipe (always an object).
  */
 export function normalizeRecipe(rec, ctx) {
   const type = (ctx.cfg.typeAliases && ctx.cfg.typeAliases[rec.type]) || rec.type;
@@ -274,6 +399,7 @@ export function normalizeRecipe(rec, ctx) {
     conditions: [], shape: '', warn: [], otherCaps: new Set(),
   };
   const j = rec.json || {};
+  if (ctx.cfg && ctx.cfg.bees && BEE_TYPES.has(rec.type)) return normalizeBees(out, j, ctx);
   const gtLike = ctx.gtTypes.has(rec.type) || ctx.gtTypes.has(type) ||
     (!j.pattern && !Array.isArray(j.ingredients) && (j.inputs || j.outputs || j.tickInputs || j.tickOutputs));
   return gtLike ? normalizeGT(out, j, ctx) : normalizeGeneric(out, j, ctx);

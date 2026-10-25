@@ -8,19 +8,20 @@
       the raw layers on a checker (transparency check), the emissive layer alone on black, a "dark room" view
       (casing and colour layer dimmed, emissive layer at full brightness, as in a dark cave), a 3x3 wall so the face
       can be judged among its neighbours, and a casing strip with the same face on four casings (clean stainless,
-      stable titanium, solid steel, heatproof) because the controllers have to read on whichever one the multiblock uses;
+      solid steel, heatproof, frost proof aluminium) because the controllers have to read on whichever one the multiblock
+      uses. HV has no titanium, so the stable titanium casing is not in the strip any more;
     - the End key next to the void and flat keys it belongs with, the two catalysts, and the drill bits as a tier
-      progression (bronze, steel, vanadium steel, titanium), each at x8 on a dark background plus 2x and 1x on a
+      progression (bronze, steel, vanadium steel, stainless steel), each at x8 on a dark background plus 2x and 1x on a
       vanilla-slot grey.
 
-  The casings are only context. Pass -StainlessCasing / -TitaniumCasing / -SteelCasing / -HeatproofCasing with any
-  16x16 PNG (e.g. GTM's machine_casing_clean_stainless_steel.png, machine_casing_stable_titanium.png,
-  machine_casing_solid_steel.png and machine_casing_heatproof.png extracted from the jar, kept OUTSIDE the repo).
+  The casings are only context. Pass -StainlessCasing / -SteelCasing / -HeatproofCasing / -FrostproofCasing with any
+  16x16 PNG (e.g. GTM's machine_casing_clean_stainless_steel.png, machine_casing_solid_steel.png,
+  machine_casing_heatproof.png and machine_casing_frost_proof.png extracted from the jar, kept OUTSIDE the repo).
   Without them flat stand-ins drawn by code are used.
 
   Run:
     powershell -NoProfile -ExecutionPolicy Bypass -File tools\assets\Build-HVPreview.ps1 -Out <png> `
-      [-StainlessCasing <png>] [-TitaniumCasing <png>] [-SteelCasing <png>] [-HeatproofCasing <png>] `
+      [-StainlessCasing <png>] [-SteelCasing <png>] [-HeatproofCasing <png>] [-FrostproofCasing <png>] `
       [-Scale 8] [-Section refinery,reformer,drill,greenhouse,items]
 #>
 [CmdletBinding()]
@@ -28,9 +29,9 @@ param(
     [string]$TexRoot = '',
     [string]$Out = '',
     [string]$StainlessCasing = '',
-    [string]$TitaniumCasing = '',
     [string]$SteelCasing = '',
     [string]$HeatproofCasing = '',
+    [string]$FrostproofCasing = '',
     [int]$Scale = 8,
     [string[]]$Section = @()
 )
@@ -146,7 +147,7 @@ function New-StandInPanel {
 
 function New-StandInSteel { return (New-StandInPanel 'a=85807B b=79756F c=6D6963 d=3D3934 e=56524D f=4A4641 l=34373C m=464A50') }
 function New-StandInStainless { return (New-StandInPanel 'a=DDE1E6 b=CFD4DA c=BFC5CC d=6B727B e=98A0A9 f=868E98 l=A2AAB3 m=B2B9C1') }
-function New-StandInTitanium { return (New-StandInPanel 'a=EBD0F2 b=DDBDE8 c=C9A3D8 d=7E5A8F e=A883BA f=9470A8 l=B48FC6 m=C39ED2') }
+function New-StandInAluminium { return (New-StandInPanel 'a=D2DEE8 b=C4D2DE c=B3C3D1 d=65798B e=8A9DAF f=788CA0 l=93A6B8 m=A3B5C5') }
 
 function New-StandInHeatproof {
     $c = New-Canvas 16 16
@@ -167,9 +168,9 @@ function Get-Context {
 }
 
 $ctxStain = Get-Context $StainlessCasing { New-StandInStainless } 'stainless casing'
-$ctxTi = Get-Context $TitaniumCasing { New-StandInTitanium } 'titanium casing'
 $ctxSteel = Get-Context $SteelCasing { New-StandInSteel } 'steel casing'
 $ctxHeat = Get-Context $HeatproofCasing { New-StandInHeatproof } 'heatproof casing'
+$ctxAlu = Get-Context $FrostproofCasing { New-StandInAluminium } 'frost proof casing'
 
 # ---------------------------------------------------------------- sheet
 $S = $Scale
@@ -210,7 +211,7 @@ function Draw-Label { param([string]$Text, [int]$X, [int]$Y, [bool]$Bold = $fals
 $y = $margin
 Draw-Label 'Gregtech Grindless - HV era textures (review sheet, x8 nearest neighbour)' $margin $y $true
 $y += 22
-Draw-Label ('Context (not shipped): ' + $ctxStain.Note + ' | ' + $ctxTi.Note + ' | ' + $ctxSteel.Note + ' | ' + $ctxHeat.Note + '. Top-left light. Emissive layers added on top for the lit state.') $margin $y $false $true
+Draw-Label ('Context (not shipped): ' + $ctxStain.Note + ' | ' + $ctxSteel.Note + ' | ' + $ctxHeat.Note + ' | ' + $ctxAlu.Note + '. Top-left light. Emissive layers added on top for the lit state.') $margin $y $false $true
 $y += 26
 
 # ---------------------------------------------------------------- overlay sections
@@ -280,20 +281,20 @@ function Draw-Overlay-Section {
         Draw-Canvas (New-Wall $casing $f) $x $script:y 3
     }
     $stripX = 975
-    $tiles = @($ctxStain.Canvas, $ctxTi.Canvas, $ctxSteel.Canvas, $ctxHeat.Canvas)
+    $tiles = @($ctxStain.Canvas, $ctxSteel.Canvas, $ctxHeat.Canvas, $ctxAlu.Canvas)
     for ($k = 0; $k -lt 4; $k++) {
         if ($idle) { Draw-Canvas (Merge-Over $tiles[$k] $idle) ($stripX + $k * 68) $script:y 4 }
         if ($act) { Draw-Canvas (Get-Lit $tiles[$k] $act $emi 2) ($stripX + $k * 68) ($script:y + 68) 4 }
     }
-    Draw-Label 'casings: stainless | titanium | steel | heat' $stripX ($script:y + 136) $false $true
+    Draw-Label 'casings: stainless | steel | heat | alu' $stripX ($script:y + 136) $false $true
     Draw-Label 'dark room (emissive at full brightness) | 3x3 wall: idle, active f2' $margin ($script:y + 48 * 3 + 1) $false $true
     $script:y += 48 * 3 + 24
 }
 
 if (Test-Section 'refinery') { Draw-Overlay-Section 'Refinery (controller face)' 'multiblock/refinery' $ctxStain 'clean stainless steel casing' }
 if (Test-Section 'reformer') { Draw-Overlay-Section 'Reformer (controller face)' 'multiblock/reformer' $ctxStain 'clean stainless steel casing' }
-if (Test-Section 'drill') { Draw-Overlay-Section 'HV Vein Drill (controller face)' 'multiblock/hv_vein_drill' $ctxTi 'stable titanium casing' }
-if (Test-Section 'greenhouse') { Draw-Overlay-Section 'HV Greenhouse (controller face)' 'multiblock/hv_greenhouse' $ctxTi 'stable titanium casing' }
+if (Test-Section 'drill') { Draw-Overlay-Section 'HV Vein Drill (controller face)' 'multiblock/hv_vein_drill' $ctxStain 'clean stainless steel casing' }
+if (Test-Section 'greenhouse') { Draw-Overlay-Section 'HV Greenhouse (controller face)' 'multiblock/hv_greenhouse' $ctxStain 'clean stainless steel casing' }
 
 # ---------------------------------------------------------------- items
 $darkItem = New-Solid (Hex '2B2F36')
@@ -327,7 +328,7 @@ function Draw-Item-Row {
 if (Test-Section 'items') {
     Draw-Item-Row 'Keys  -  item/end_key.png beside the void and flat keys it belongs with   (x8 on dark | 2x and 1x on a vanilla slot)' @('void_key', 'flat_key', 'end_key')
     Draw-Item-Row 'Catalysts  -  item/hydrotreating_catalyst.png (cobalt, molybdenum, silica) and item/reforming_catalyst.png (platinum on silica)' @('hydrotreating_catalyst', 'reforming_catalyst')
-    Draw-Item-Row 'Drill bits  -  item/titanium_drill_bit.png (extra, the HV drill needs it) after the bronze, steel and vanadium steel bits' @('bronze_drill_bit', 'steel_drill_bit', 'vanadium_steel_drill_bit', 'titanium_drill_bit')
+    Draw-Item-Row 'Drill bits  -  item/stainless_steel_drill_bit.png (the HV bit: HV has no titanium) after the bronze, steel and vanadium steel bits' @('bronze_drill_bit', 'steel_drill_bit', 'vanadium_steel_drill_bit', 'stainless_steel_drill_bit')
 }
 $g.Dispose()
 

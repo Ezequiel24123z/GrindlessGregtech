@@ -1,0 +1,10 @@
+# Gregtech Grindless: values that differ from FTB Essentials' defaults (copied into each new world's serverconfig/ftbessentials.snbt).
+# Homes: travel between planets is free on purpose (DECISIONS.md 2026-10-24); one home per base (Earth, the Moon, later planets)
+# needs more than the default single home. Teleports have no cost and no dimension blacklist.
+{
+	teleportation: {
+		home: {
+			max: 10
+		}
+	}
+}

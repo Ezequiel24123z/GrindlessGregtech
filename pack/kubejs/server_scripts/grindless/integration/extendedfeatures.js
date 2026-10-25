@@ -1,5 +1,5 @@
 // -----------------------------------------------------------------------------------------------
-// GTM Extended Features (extendedfeatures 3.0.0), audited against docs/eras (ev.md, "Decisiones tomadas": no addon may process
+// GTM Extended Features (extendedfeatures 3.0.0), audited against docs/eras (ev.md, "Decisions taken": no addon may process
 // cheaper than GT in its era or undercut the pack's own multiblocks). Its recipes are generated in Java (the jar's data folder has
 // none) and it ships a crafting recipe for ONE controller only, the Large Gas Collector (IV); the other multiblocks and the
 // hatches have none.
@@ -28,7 +28,8 @@
 // Kept: Large Gas Collector (IV recipe: IV circuits, motor, pump and gas collector; air, nether air and ender air, each in its
 // dimension), the universal circuits (assembler, 1 circuit of a tier -> 1 universal circuit in the same #gtceu:circuits/<tier>
 // tag: not a shortcut) and the parts without a recipe (Matrix Data Relay, Power Transformer, LuV-UHV data access and wireless
-// optical hatches, configurable cleaning maintenance hatch; GTM's own cleaning hatch is UV, so never give it a cheaper one).
+// optical hatches, configurable cleaning maintenance hatch). GTM's own cleaning hatch moved from UV to an HV recipe of ours on
+// 2026-10-25 (mv/leisure_utility.js, a GregTech Leisure idea), so the addon's configurable one stays without a recipe.
 // Cleaner, but not a server script: MultiblocksConfig in config/extendedfeatures.yaml unregisters the removed machines.
 // Era: never for the removed machines; IV or later for the large ones.
 //

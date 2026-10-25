@@ -1,6 +1,6 @@
 {
   "format": 1,
-  "note": "Data for server_scripts/grindless/integration/ae2.js (hybrid AE2 on LV, docs/eras/lv.md 'Decisiones tomadas' #1, #2 and #6). Only the ENTRY POINTS of AE2 are rewritten; every other AE2 recipe is left untouched. Item and recipe ids were checked against the AE2 15.4.11 jar and GTM 7.5.3. Inputs use KubeJS item strings ('Nx id' or 'Nx #tag'); fluids use GTM strings ('#tag amount' in mB). 'tags' are new item tags, 'extendTags' add members to existing ones: ae2:all_nether_quartz gets the quartzite gem, so AE2's annihilation core (needed by interface, pattern provider, molecular assembler, buses...) and light detector no longer ask for Nether quartz.",
+  "note": "Data for server_scripts/grindless/integration/ae2.js (hybrid AE2 on LV, docs/eras/lv.md 'Decisions taken' #1, #2 and #6). Only the ENTRY POINTS of AE2 are rewritten; every other AE2 recipe is left untouched. Item and recipe ids were checked against the AE2 15.4.11 jar and GTM 7.5.3. Inputs use KubeJS item strings ('Nx id' or 'Nx #tag'); fluids use GTM strings ('#tag amount' in mB). 'tags' are new item tags, 'extendTags' add members to existing ones: ae2:all_nether_quartz gets the quartzite gem, so AE2's annihilation core (needed by interface, pattern provider, molecular assembler, buses...) and light detector no longer ask for Nether quartz.",
 
   "tags": {
     "grindless:ae2/certus_quartz": ["ae2:certus_quartz_crystal", "gtceu:certus_quartz_gem"]

@@ -1,4 +1,4 @@
-// Pruebas del volcado (gg_dump.js): compatibilidad con Rhino/KubeJS 6 y contrato de formato con el analizador.
+// Tests for the dump (gg_dump.js): Rhino/KubeJS 6 compatibility and the format contract with the validator.
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import path from 'node:path';
@@ -11,7 +11,7 @@ const here = path.dirname(fileURLToPath(import.meta.url));
 const scriptPath = path.resolve(here, '..', '..', 'test', 'overlay', 'kubejs', 'server_scripts', 'gg_dump.js');
 const source = fs.readFileSync(scriptPath, 'utf8');
 
-/** Quita comentarios y literales de cadena/regex sencillos para buscar construcciones prohibidas en el código. */
+/** Strips comments and simple string/regex literals to look for forbidden constructs in the code. */
 function codeOnly(src) {
   return src
     .replace(/\/\*[\s\S]*?\*\//g, '')
@@ -20,19 +20,19 @@ function codeOnly(src) {
     .replace(/"(?:\\.|[^"\\\n])*"/g, '""');
 }
 
-test('gg_dump.js es ES5 para Rhino: sin const/let, flechas, plantillas ni clases', () => {
+test('gg_dump.js is ES5 for Rhino: no const/let, arrow functions, templates, or classes', () => {
   const code = codeOnly(source);
-  assert.doesNotMatch(code, /\b(const|let|class)\b/, 'const/let dan "redeclaration of var" en funciones que se llaman varias veces');
+  assert.doesNotMatch(code, /\b(const|let|class)\b/, 'const/let cause "redeclaration of var" in functions called more than once');
   assert.doesNotMatch(code, /=>/);
   assert.doesNotMatch(code, /`/);
   assert.doesNotMatch(code, /\.\.\./);
 });
 
-test('gg_dump.js tiene sintaxis válida', () => {
+test('gg_dump.js has valid syntax', () => {
   assert.doesNotThrow(() => new vm.Script(source, { filename: scriptPath }));
 });
 
-test('gg_dump.js solo se carga en el banco de pruebas (overlay), nunca dentro del pack', () => {
+test('gg_dump.js is only loaded in the test bench (overlay), never inside the pack', () => {
   assert.match(scriptPath.replace(/\\/g, '/'), /tools\/test\/overlay\//);
   assert.ok(!fs.existsSync(path.resolve(here, '..', '..', '..', 'pack', 'kubejs', 'server_scripts', 'gg_dump.js')));
 });
@@ -95,7 +95,7 @@ function runScript(globalObj, extraClasses = {}) {
       loaded: (f) => { handlers.loaded = f; },
       customCommand: (n, f) => { handlers[`cmd:${n}`] = f; },
     },
-    Java: { loadClass: (n) => { if (!(n in classes)) throw new Error(`clase no disponible: ${n}`); return classes[n]; } },
+    Java: { loadClass: (n) => { if (!(n in classes)) throw new Error(`class not available: ${n}`); return classes[n]; } },
     JsonIO: { write: (p, tree) => { written[p] = plain(tree); } },
     Ingredient: { of: (t) => ({ getItemIds: () => (t === '#forge:ingots/bronze' ? ['gtceu:bronze_ingot'] : ['minecraft:barrier']) }) },
     ...(globalObj ? { global: globalObj } : {}),
@@ -113,7 +113,7 @@ const recipe = (id, type, json, extra = {}) => ({
   json: { toString: () => JSON.stringify(json) },
 });
 
-test('gg_dump.js: recoge recetas originales y añadidas y escribe los archivos con el formato que lee el analizador', () => {
+test('gg_dump.js: collects original and added recipes and writes the files in the format the validator reads', () => {
   const { handlers, logs, written, dirs } = runScript();
   assert.equal(typeof handlers.recipes, 'function');
   assert.equal(typeof handlers['cmd:gg_dump'], 'function');
@@ -130,7 +130,7 @@ test('gg_dump.js: recoge recetas originales y añadidas y escribe los archivos c
   handlers['cmd:gg_dump']();
   assert.deepEqual(dirs, ['kubejs/exported']);
   const done = logs.find(([, m]) => m.includes('GGTEST|dump|DONE|'));
-  assert.ok(done, 'falta el marcador DONE: ' + JSON.stringify(logs));
+  assert.ok(done, 'missing the DONE marker: ' + JSON.stringify(logs));
   assert.match(done[1], /recipes=3/);
 
   const rec = written['kubejs/exported/recipes.json'];
@@ -144,11 +144,11 @@ test('gg_dump.js: recoge recetas originales y añadidas y escribe los archivos c
     ['grindless:vein_drilling/copper', 'gtceu:vein_drilling', true],
   ]);
 
-  // contrato: el analizador carga lo que escribe el volcado
+  // contract: the validator loads what the dump writes
   const tags = written['kubejs/exported/tags.json'];
   assert.equal(tags.format, 'gg-tags-2');
   assert.deepEqual(tags.item['forge:ingots/bronze'], ['gtceu:bronze_ingot']);
-  assert.deepEqual(tags.item['minecraft:logs'], [], 'una etiqueta vacía (barrera de vanilla) se guarda vacía');
+  assert.deepEqual(tags.item['minecraft:logs'], [], 'an empty tag (vanilla\'s barrier) is stored empty');
   const items = written['kubejs/exported/items.json'];
   assert.deepEqual(items.items, ['gtceu:bronze_ingot', 'minecraft:stick']);
   const dump = makeDump('(simulado)', { recipes: rec, items, tags, machines: null, veins: null, info: written['kubejs/exported/info.json'] });
@@ -157,14 +157,14 @@ test('gg_dump.js: recoge recetas originales y añadidas y escribe los archivos c
   assert.deepEqual(dump.tags.items('forge:ingots/bronze'), ['gtceu:bronze_ingot']);
 });
 
-test('gg_dump.js: sin recetas recogidas avisa con FAIL en vez de escribir un volcado vacío', () => {
+test('gg_dump.js: with no recipes collected, it warns with FAIL instead of writing an empty dump', () => {
   const { handlers, logs, written } = runScript();
   handlers['cmd:gg_dump']();
   assert.ok(logs.some(([lvl, m]) => lvl === 'error' && m.includes('GGTEST|dump|FAIL|no recipes collected')));
   assert.deepEqual(Object.keys(written), []);
 });
 
-test('gg_dump.js: un fallo al serializar una receta no tumba el volcado y se cuenta', () => {
+test('gg_dump.js: a failure serializing a recipe doesn\'t bring down the dump, and it\'s counted', () => {
   const { handlers, logs } = runScript();
   const bad = recipe('x:y', 'minecraft:smelting', { type: 'minecraft:smelting' }, { changed: true, serializeThrows: true });
   handlers.recipes({ originalRecipes: { values: () => [bad] }, addedRecipes: [] });
@@ -186,7 +186,7 @@ const STRUCTURES = {
 
 const stick = recipe('minecraft:stick', 'minecraft:crafting_shaped', { type: 'minecraft:crafting_shaped', pattern: ['#'], key: { '#': { tag: 'forge:ingots/bronze' } }, result: { item: 'minecraft:stick' } });
 
-test('gg_dump.js: vuelca global.grindless.structures a structures.json y el analizador lo carga', () => {
+test('gg_dump.js: dumps global.grindless.structures to structures.json, and the validator loads it', () => {
   const { handlers, logs, written } = runScript(sandboxGlobal(STRUCTURES));
   handlers.recipes({ originalRecipes: { values: () => [stick] }, addedRecipes: [] });
   handlers['cmd:gg_dump']();
@@ -206,7 +206,7 @@ test('gg_dump.js: vuelca global.grindless.structures a structures.json y el anal
   assert.deepEqual([...dump.structures.keys()], ['gtceu:lv_vein_drill']);
 });
 
-test('gg_dump.js: sin global.grindless escribe structures.json vacío y no falla', () => {
+test('gg_dump.js: with no global.grindless, it writes an empty structures.json and doesn\'t fail', () => {
   const { handlers, logs, written } = runScript();
   handlers.recipes({ originalRecipes: { values: () => [stick] }, addedRecipes: [] });
   handlers['cmd:gg_dump']();
@@ -215,7 +215,7 @@ test('gg_dump.js: sin global.grindless escribe structures.json vacío y no falla
   assert.ok(logs.some(([, m]) => m.includes('GGTEST|dump|DONE|')));
 });
 
-test('gg_dump.js: vuelca los yacimientos de fluidos (filtro de dimensión) y los interruptores de config de GTM y el analizador los carga', () => {
+test('gg_dump.js: dumps fluid deposits (dimension filter) and GTM\'s config switches, and the validator loads them', () => {
   const deposit = (weight, fluid, dims) => ({
     getWeight: () => weight, getMinimumYield: () => 50, getMaximumYield: () => 300, getDepletedYield: () => 25,
     getStoredFluid: () => ({ get: () => fluid }), getDimensionFilter: () => dims,
@@ -264,7 +264,7 @@ test('gg_dump.js: vuelca los yacimientos de fluidos (filtro de dimensión) y los
   assert.equal(dump.config['worldgen.oreVeins.infiniteBedrockOresFluids'], true);
 });
 
-test('gg_dump.js: un java.lang.Boolean de Rhino (objeto, no boolean) se escribe como booleano y no como texto', () => {
+test('gg_dump.js: a Rhino java.lang.Boolean (object, not boolean) is written as a boolean, not as text', () => {
   const javaBool = (v) => ({ toString: () => String(v) });
   const classes = {
     'com.gregtechceu.gtceu.config.ConfigHolder': {
@@ -284,7 +284,7 @@ test('gg_dump.js: un java.lang.Boolean de Rhino (objeto, no boolean) se escribe 
   assert.strictEqual(values['machines.doBedrockOres'], false);
   assert.strictEqual(values['compat.energy.enableFEConverters'], false);
 
-  // con JsonParser disponible (servidor real) los booleanos se escriben como primitivo Boolean de Gson y no como String
+  // with JsonParser available (real server) booleans are written as a Gson Boolean primitive, not as a String
   const real = runScript(undefined, { ...classes, 'com.google.gson.JsonParser': { parseString: (s) => ({ parsedBoolean: s === 'true' }) } });
   real.handlers.recipes({ originalRecipes: { values: () => [stick] }, addedRecipes: [] });
   real.handlers['cmd:gg_dump']();
@@ -292,7 +292,7 @@ test('gg_dump.js: un java.lang.Boolean de Rhino (objeto, no boolean) se escribe 
   assert.deepEqual(parsed, { parsedBoolean: false });
 });
 
-test('gg_dump.js: sin las clases de GTM los yacimientos de fluidos y la config no se escriben y el volcado sigue valiendo', () => {
+test('gg_dump.js: without GTM\'s classes, fluid deposits and config aren\'t written, and the dump still works', () => {
   const { handlers, logs, written } = runScript();
   handlers.recipes({ originalRecipes: { values: () => [stick] }, addedRecipes: [] });
   handlers['cmd:gg_dump']();

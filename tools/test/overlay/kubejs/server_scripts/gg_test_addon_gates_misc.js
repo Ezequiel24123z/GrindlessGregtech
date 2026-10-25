@@ -73,7 +73,7 @@
   ;['chemical_reactor', 'large_chemical_reactor'].forEach(function (m) {
     TAP_ORES.forEach(function (ore) { TAP_IDS.push('gtceu:' + m + '/pgs_from_' + ore, 'gtceu:' + m + '/pgs_from_' + ore + '_p') })
   })
-  // the stage recipes of GT--'s platinum line the EV platinum plant composes (ev/platinum_plant.server.js): none may be removed
+  // the stage recipes of GT--'s platinum line the EV platinum plant composes (server_scripts/grindless/ev/platinum_plant.js): none may be removed
   var PLATLINE_STAGES = ['centrifuge/platinum_group_sludge_dust', 'chemical_reactor/crude_rhodium_metallic_powder',
     'chemical_reactor/dissolve_platinum_metallic_powder9', 'chemical_reactor/large_palladium_dusts',
     'chemical_reactor/palladium_metallic_powder_conversion', 'chemical_reactor/raw_palladium_separation',
@@ -130,8 +130,10 @@
   // the machines of the four addons that may be crafted after the audit
   var AUDITED = {}
   function audit(ns, names) { names.forEach(function (n) { AUDITED[ns + ':' + n] = true }) }
+  // gtca:space_elevator is not here since v0.5.0: its controller recipe takes piko wafer ICs, which nothing in the pack makes, so
+  // hidden.js removes that dead recipe and the elevator stays hidden until ZPM (hidden_until.json)
   audit('gtca', ['advanced_ebf', 'comet', 'isamill', 'flotation_cell_regulator', 'thermal_reactor', 'mega_lcr', 'mega_oil_cracking_unit',
-    'nano_forge', 'pcb_factory_mki', 'pcb_factory_mkii', 'pcb_factory_mkiii', 'space_elevator', 'tegmark_forge'])
+    'nano_forge', 'pcb_factory_mki', 'pcb_factory_mkii', 'pcb_factory_mkiii', 'tegmark_forge'])
   ;['ev', 'iv', 'luv', 'zpm', 'uv', 'uhv'].forEach(function (t) { audit('gtca', [t + '_matter_fabricator']) })
   audit('gtnn', ['catalyst_hatch', 'circuit_assembly_line', 'large_dehydrator', 'large_naquadah_reactor', 'exxonmobil_chemical_plant',
     'maceration_stack_controller', 'neutron_activator', 'neutron_sensor'])
@@ -155,11 +157,13 @@
     'gtceu:assembler/converter_64_a_lv', 'gtceu:assembler/omnibreaker', 'gtceu:assembler/me_tag_stocking_input_bus',
     'gtceuterminal:multi_structure_manager', 'gtceuterminal:dismantler', 'gtceuterminal:schematic_interface',
     'gtstoragedrawers:gtceu_rubber_full_drawers_1', 'gtstoragedrawers:gtceu_treated_trim',
-    'gcyr:assembler/basic_rocket_motor', 'gcyr:assembler/basic_fuel_tank', 'gcyr:shaped/rocket_scanner', 'gcyr:chemical_reactor/kapton_k',
-    'gcyr:assembler/launch_pad', 'gcyr:assembler/space_fabric',
+    'grindless:static_fire/gcyr/basic_rocket_motor', 'grindless:assembler/gcyr/basic_fuel_tank', 'grindless:gcyr/rocket_scanner', 'gcyr:chemical_reactor/kapton_k',
+    'gcyr:assembler/launch_pad', 'grindless:assembler/gcyr/space_fabric',
     'gtceu:steam_turbine/steam', 'gtceu:combustion_generator/diesel', 'gtceu:gas_turbine/methane',
     'gtceu:large_chemical_reactor/polyethylene_from_tetrachloride_oxygen', 'gtceu:pyrolyse_oven/log_to_creosote',
-    'gtceu:coke_oven/coal_to_coke', 'gtceu:shaped/large_chemical_reactor', 'gtceu:centrifuge/rare_earth_separation'
+    'gtceu:coke_oven/coal_to_coke', 'gtceu:shaped/large_chemical_reactor',
+    // rebuilt without its samarium (moon/offworld_only.js, offworld_only.json: samarium is Martian)
+    'grindless:centrifuge/offworld_only/rare_earth_separation'
   ]
 
   var shipped = null
@@ -647,8 +651,8 @@
 
   function noteRocket(rm) {
     var parts = []
-    ;['gcyr:shaped/rocket_scanner', 'gcyr:assembler/basic_rocket_motor', 'gcyr:assembler/basic_fuel_tank', 'gcyr:assembler/advanced_rocket_motor',
-      'gcyr:assembler/advanced_fuel_tank', 'gcyr:assembler/elite_rocket_motor', 'gcyr:assembler/space_fabric',
+    ;['grindless:gcyr/rocket_scanner', 'grindless:static_fire/gcyr/basic_rocket_motor', 'grindless:assembler/gcyr/basic_fuel_tank', 'gcyr:assembler/advanced_rocket_motor',
+      'gcyr:assembler/advanced_fuel_tank', 'gcyr:assembler/elite_rocket_motor', 'grindless:assembler/gcyr/space_fabric',
       'gcyr:shaped/space_station_packager'].forEach(function (id) {
       var r = rm.byKey(rl(id))
       if (!r.isPresent()) {

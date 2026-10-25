@@ -197,12 +197,14 @@
     var overworld = LV.overworldVeins().length
     var nether = LV.netherVeins().length
     var wantDrilling = overworld + (overworld + nether)
+    // the End is MV since v0.5.0: its vanadium steel bit recipes (hv/family_vein_drilling.js) live under mv/ too
+    var endMv = G.hv && G.hv.drilling ? G.hv.drilling.endMv : -1
     var wantGreenhouse = G.greenhouse.entries.length + LV.greenhouseExtras.length
     var haveDrilling = countWithPath(drillRecipes, 'vein_drilling/mv/')
     var haveGreenhouse = countWithPath(greenRecipes, 'greenhouse/mv/')
-    check(SCOPE, 'recipes', haveDrilling === wantDrilling && haveGreenhouse === wantGreenhouse &&
+    check(SCOPE, 'recipes', haveDrilling === wantDrilling + endMv && endMv === G.hv.endVeins().length && haveGreenhouse === wantGreenhouse &&
       MV.drilling.count === wantDrilling && MV.greenhouse.count === wantGreenhouse,
-      'mv vein_drilling=' + haveDrilling + '/' + wantDrilling + ' mv greenhouse=' + haveGreenhouse + '/' + wantGreenhouse +
+      'mv vein_drilling=' + haveDrilling + '/' + (wantDrilling + endMv) + ' (End ' + endMv + ') mv greenhouse=' + haveGreenhouse + '/' + wantGreenhouse +
       ' (all of the type: vein_drilling=' + drillRecipes.length + ' greenhouse=' + greenRecipes.length + ')')
 
     var ids = ['grindless:crafting/mv_vein_drill', 'grindless:crafting/mv_greenhouse', 'grindless:crafting/vanadium_steel_drill_bit']
@@ -627,7 +629,8 @@
   // ---------------------------------------------------------------- scenarios
 
   function findVein(id) {
-    var veins = global.grindless.lv.allVeins()
+    // Overworld, Nether and End (the End is MV since v0.5.0)
+    var veins = global.grindless.hv && global.grindless.hv.allVeins ? global.grindless.hv.allVeins() : global.grindless.lv.allVeins()
     for (var i = 0; i < veins.length; i++) {
       if (veins[i].id === id) return veins[i]
     }
@@ -705,9 +708,9 @@
         }
       },
       {
-        // the titanium bit is the HV drill's (grindless:vein_drilling/hv/...): vetoed here, with fluid
+        // the stainless steel bit is the HV drill's (grindless:vein_drilling/hv/...): vetoed here, with fluid
         name: 'hv_bit_gated', ticks: 60,
-        items: [{ id: 'grindless:vein_sample_iron', n: 1 }, { id: 'grindless:titanium_drill_bit', n: 16 }], circuit: 0,
+        items: [{ id: 'grindless:vein_sample_iron', n: 1 }, { id: 'grindless:stainless_steel_drill_bit', n: 16 }], circuit: 0,
         fluids: [{ id: DRILLING_FLUID, mb: 8000 }],
         verify: function (r) {
           var n = Object.keys(r.items).length
@@ -715,9 +718,16 @@
         }
       },
       {
-        // an End sample with the MV bit and fluid: the End recipes are the HV drill's, so nothing runs here
-        name: 'end_gated', ticks: 60,
+        // an End sample with the MV bit and fluid: the End is MV since v0.5.0, the MV drill runs it (16 at once, 5.625 ores per run)
+        name: 'end_mv', ticks: 260,
         items: [{ id: 'grindless:vein_sample_bauxite_end', n: 1 }, { id: BIT_VANADIUM, n: 16 }], circuit: 0,
+        fluids: [{ id: DRILLING_FLUID, mb: 8000 }],
+        verify: veinVerify('bauxite_end', 'grindless:vein_drilling/mv/bauxite_end_vanadium_steel_fluid', 5, 50, 16)
+      },
+      {
+        // the stainless steel bit on an End vein is still the HV drill's (hv/): vetoed here
+        name: 'end_hv_bit_gated', ticks: 60,
+        items: [{ id: 'grindless:vein_sample_bauxite_end', n: 1 }, { id: 'grindless:stainless_steel_drill_bit', n: 16 }], circuit: 0,
         fluids: [{ id: DRILLING_FLUID, mb: 8000 }],
         verify: function (r) {
           var n = Object.keys(r.items).length
@@ -907,6 +917,11 @@
         cases.push({ label: v.id + '+' + kind + ' (fluid)', items: items, circuit: 0, fluids: fluid,
           want: 'grindless:vein_drilling/' + (kind === 'vanadium_steel' ? 'mv' : 'lv') + '/' + v.id + '_' + kind + '_fluid' })
       })
+    })
+    // the End veins (MV since v0.5.0): the vanadium steel bit, always with fluid
+    global.grindless.hv.endVeins().forEach(function (v) {
+      cases.push({ label: v.id + '+vanadium_steel (fluid)', items: [{ id: v.sample, n: 1 }, { id: BIT_VANADIUM, n: 4 }], circuit: 0,
+        fluids: fluid, want: 'grindless:vein_drilling/mv/' + v.id + '_vanadium_steel_fluid' })
     })
     return cases
   }

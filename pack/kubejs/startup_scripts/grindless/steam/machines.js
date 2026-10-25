@@ -13,6 +13,11 @@
 // Textures: overlay dirs grindless:block/multiblock/<machine> (overlay_front*.png), base casing
 // gtceu:block/casings/solid/machine_casing_bronze_plated_bricks (GTM's steam machine casing).
 // Names: assets/grindless/lang/*.json (block.gtceu.<machine>).
+//
+// Both machines only run their family's steam recipes, the ones with no tier folder in their id: lv/, mv/, hv/, ev/... belong to the
+// electric machines of the family (rules.recipeTier, lv/multis.js). GTM's steam modifier only refuses recipes above LV voltage, and
+// every family recipe runs at 8 EU/t, so without the veto a steam drill on the Moon with titanium bits would run the EV tripod's
+// recipes (steamFamily below).
 (function () {
   const Pat = global.grindless.patterns
 
@@ -28,6 +33,12 @@
 
   const DRILL = 'gtceu:steam_vein_drill'
   const GREENHOUSE = 'gtceu:steam_greenhouse'
+
+  // GTM's steam modifier, after the family veto: a recipe filed under a tier folder is not a steam recipe
+  function steamFamily(machine, recipe) {
+    if (global.grindless.lv.rules.recipeTier(recipe) !== '') return ModifierFunction.NULL
+    return MachineModifiers.STEAM_PARALLEL_MULTIBLOCK.getModifier(machine, recipe)
+  }
 
   // Specs are plain data + predicate descriptors (nothing of GTM runs until a pattern is built, which GTM does
   // lazily the first time a controller checks its structure). They are registered at startup so the structure
@@ -89,7 +100,7 @@
       .rotationState(RotationState.NON_Y_AXIS)
       .machine(function (holder) { return MachineConstructors.createSteamMultiblock(holder, 4) })
       .recipeType('vein_drilling')
-      .recipeModifier(MachineModifiers.STEAM_PARALLEL_MULTIBLOCK, true)
+      .recipeModifier(steamFamily, true)
       .appearanceBlock(GTBlocks.CASING_BRONZE_BRICKS)
       .pattern(function (def) { return Pat.build(def, DRILL_SPEC) })
       ["tooltips(net.minecraft.network.chat.Component[])"]([
@@ -104,7 +115,7 @@
       .rotationState(RotationState.NON_Y_AXIS)
       .machine(function (holder) { return MachineConstructors.createSteamMultiblock(holder, 4) })
       .recipeType('greenhouse')
-      .recipeModifier(MachineModifiers.STEAM_PARALLEL_MULTIBLOCK, true)
+      .recipeModifier(steamFamily, true)
       .appearanceBlock(GTBlocks.CASING_BRONZE_BRICKS)
       .pattern(function (def) { return Pat.build(def, GREENHOUSE_SPEC) })
       ["tooltips(net.minecraft.network.chat.Component[])"]([

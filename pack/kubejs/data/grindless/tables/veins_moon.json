@@ -1,0 +1,35 @@
+{
+  "_source": "Our own table: the Moon (gcyr:luna, Gregicality Rocketry 0.2.9) has no GT vein of ours in GTM or GCYR. The materials are GTM 7.5.3 materials that already have moon ores (gtceu:moon_<material>_ore, GCYR's 'moon' ore tag prefix). color = tint of the lunar sample core: ilmenite's own GTM color (#2B2A24) reads black on the capsule, so a lighter grey-brown is used. The dimension, the layer and the regolith blocks were read in GCYR's source (data/gcyr/dimension/luna.json, worldgen/noise_settings/luna.json, GCYRWorldGenLayers.MOON).",
+  "_how_it_is_used": [
+    "Loaded by startup_scripts/grindless/moon/items.js as global.grindless.tables.veins_moon: it feeds the lunar vein sample items. server_scripts/grindless/moon/worldgen.js adds the 'ore' veins to the Moon (GTCEuServerEvents.oreVeins), so the first visit finds them; server_scripts/grindless/moon/lunar_drilling.js generates the gtceu:lunar_drilling recipes of the Lunar Drill (gtceu:lunar_drill) and server_scripts/grindless/moon/crafting.js the sample recipes.",
+    "Two kinds of vein. kind 'ore': a GTM vein that generates in the Moon (gtm = registry id, layer = GCYR's 'moon' layer, minY/maxY = heightRangeUniform, spawnWeight = vein weight, layers = the layered generator: weight and size of every material) and that the drill mines like the Earth veins (materials[] with the same weights; same maths as veins.json). kind 'volatiles': the regolith itself. The drill scoops and bakes it in the sun (the wings), and only fluids come out (volatiles[]: fluid id, mB per run). The spent regolith goes back to the ground. Only by lunar day (daytime condition).",
+    "id = sample suffix (grindless:vein_sample_<id>). The 'ore' veins follow the registry rule of the other tables: grindless:ilmenite_vein_moon -> sample grindless:vein_sample_ilmenite_moon (the validator and the coverage test derive it the same way).",
+    "Sample recipes: the empty vein probe + the two most common raw ores of an 'ore' vein, or + the two regolith blocks of a 'volatiles' vein (sampleBlocks). Both are gathered by hand on the first visit, like the End ones.",
+    "Every lunar recipe carries .dimension('gcyr:luna'): the Lunar Drill only works on the Moon. Titanium (ilmenite) and helium-3 come only from here (DECISIONS.md, 2026-10-24).",
+    "stone = the inert byproduct of an 'ore' vein (gcyr:moon_cobblestone): it can be thrown away."
+  ],
+  "dimension": "gcyr:luna",
+  "veins": [
+    {
+      "id": "ilmenite_moon", "kind": "ore", "gtm": "grindless:ilmenite_vein_moon", "generator": "layered", "layer": "moon",
+      "minY": 10, "maxY": 80, "spawnWeight": 40, "clusterSize": 30, "density": 0.3,
+      "colorMaterial": "ilmenite", "color": "#6E6A5E",
+      "stone": "gcyr:moon_cobblestone",
+      "_note": "High-titanium mare basalt: ilmenite (up to ~10 % TiO2 in the Apollo 11 and 17 samples), olivine, a little chromite (spinel) and native iron (meteoritic). Destinations: ilmenite -> titanium (Kroll) and iron; olivine -> magnesium, iron and silica; chromite -> chromium; iron -> iron.",
+      "materials": [
+        { "id": "ilmenite", "weight": 4, "size": [1, 4] },
+        { "id": "olivine", "weight": 2, "size": [1, 2] },
+        { "id": "chromite", "weight": 1, "size": [1, 1] },
+        { "id": "iron", "weight": 1, "size": [1, 1] }
+      ]
+    },
+    {
+      "id": "regolith_moon", "kind": "volatiles", "color": "#8E8E86",
+      "sampleBlocks": ["gcyr:lunar_mare_regolith", "gcyr:moon_sand"],
+      "_note": "Solar-wind volatiles of the regolith, released at ~700 C (the Wisconsin FTI lunar miner idea: scoop, heat with the sun, keep the gas, put the soil back). Kept minimal at HV: only helium-3 is kept (real ratio by mass: H ~50 ppm, He-4 ~15 ppm, He-3 ~0.01 ppm; here He-3 is generous) and the rest is vented. Helium-3 is stored for fusion (LuV). In EV the regolith cell takes over the regolith (O2, metals, sintered bricks).",
+      "volatiles": [
+        { "fluid": "gtceu:helium_3", "mb": 5 }
+      ]
+    }
+  ]
+}

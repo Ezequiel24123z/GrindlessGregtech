@@ -486,7 +486,7 @@
       var item = bath.itemsOut.length === 1 ? parseItem(bath.itemsOut[0].j) : null
       if (fin === null || fluidShort(fin) !== 'blaze' || fin.amount !== 144) problems.push('eye bath fluid ' + JSON.stringify(fin))
       if (item === null || item.id !== 'minecraft:ender_eye') problems.push('eye bath output ' + JSON.stringify(item))
-      if (bath.eut !== 480) problems.push('eye bath draws ' + bath.eut + ' EU/t (HV is 480)')
+      if (bath.eut !== 120) problems.push('eye bath draws ' + bath.eut + ' EU/t (the End is MV since v0.5.0: 120)')
       var pearl = inputMap(bath)
       if (pearl['#forge:gems/ender_pearl'] !== 1) problems.push('eye bath item inputs ' + JSON.stringify(pearl))
     }

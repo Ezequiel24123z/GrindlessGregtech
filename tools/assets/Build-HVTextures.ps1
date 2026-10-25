@@ -13,7 +13,12 @@
     block/multiblock/hv_greenhouse/...     (same three)
     item/end_key.png
     item/hydrotreating_catalyst.png, item/reforming_catalyst.png
-    item/titanium_drill_bit.png            (not in the brief: the HV drill's bit needs a texture, see docs/eras/hv.md)
+    item/stainless_steel_drill_bit.png     (the HV drill's bit: HV has no titanium, every HV part is stainless steel)
+    item/titanium_drill_bit.png            (the old HV bit: hv/family_items.js keeps the item, hidden, so worlds made before
+                                            the stainless decision load their bits; same pixels as before)
+
+  HV has no titanium (DECISIONS.md, docs/journey.md): titanium only comes from the Moon. The drill's legs and bit, which used
+  to be titanium, are stainless steel now.
 
   Run from the repo root (PowerShell 5.1 blocks unsigned scripts by default; this bypass only affects that process):
     powershell -NoProfile -ExecutionPolicy Bypass -File tools\assets\Build-HVTextures.ps1
@@ -28,14 +33,15 @@
   it also reads on the other casings):
     refinery       ->  gtceu:block/casings/solid/machine_casing_clean_stainless_steel  (gtceu:clean_machine_casing, docs/eras/hv.md)
     reformer       ->  gtceu:block/casings/solid/machine_casing_clean_stainless_steel  (gtceu:clean_machine_casing, docs/eras/hv.md)
-    hv_vein_drill  ->  gtceu:block/casings/solid/machine_casing_stable_titanium        (titanium family casing)
-    hv_greenhouse  ->  gtceu:block/casings/solid/machine_casing_stable_titanium        (titanium family casing)
+    hv_vein_drill  ->  gtceu:block/casings/solid/machine_casing_clean_stainless_steel  (gtceu:clean_machine_casing, hv/family_multis.js)
+    hv_greenhouse  ->  gtceu:block/casings/solid/machine_casing_clean_stainless_steel  (gtceu:clean_machine_casing, hv/family_multis.js)
 
   The bit shares one small shader with the steam and MV drill bits (Draw-Helix, copied from Build-MVTextures.ps1 so
-  that script stays untouched): a cone and cylinder lit from the top-left with a helical thread.
+  that script stays untouched): a cone and cylinder lit from the top-left with a helical thread. The stainless bit adds
+  a dark reflection band down the body (-Chrome), the polished look of GTM's SHINY stainless steel.
 
 .PARAMETER Only
-  Subset of: refinery, reformer, drill, greenhouse, keys, catalysts, bit. Default: everything.
+  Subset of: refinery, reformer, drill, greenhouse, keys, catalysts, bit, legacy. Default: everything.
 .PARAMETER OutRoot
   Textures root. Default: <repo>/pack/kubejs/assets/grindless/textures
 .PARAMETER Credits
@@ -352,13 +358,13 @@ function New-ReformerFrame {
 }
 
 # ============================================================================================
-#  HV VEIN DRILL - controller face (stable titanium casing)
-#  a derrick whose truss legs alternate stainless and titanium, around a dark top drive, a titanium bit biting into
-#  End stone with ore flecks; orange power cable and a drilling-mud hose, hazard stripes and a state lamp at the base
+#  HV VEIN DRILL - controller face (clean stainless steel casing)
+#  a stainless derrick (truss legs in two alternating stainless tones) around a dark top drive, a stainless steel bit
+#  biting into End stone with ore flecks; orange power cable and a drilling-mud hose, hazard stripes and a state lamp
+#  at the base. HV has no titanium: the legs and the bit, titanium in the first drawing, are stainless steel now.
 # ============================================================================================
 $HvDrillPal = New-Pal ($SteelSpec + ' ' + $OrangeSpec + ' ' + $StainSpec + ' ' + $LampSpec + ' ' + @'
-K=FBEAFF L=EDC6FA m=DCA0F0 n=AD6FC8 o=6A3C86
-T=F2D4FF U=C896E0 V=9A5FB8 W=6E3F8A
+K=FFFFFF L=EDEDFD m=C4C4D8 n=86869E o=3E3E52
 p=F3F0B6 q=DAD596 r=BAB474 s=8F8A52 t=5E5A33
 u=8C5BD0 v=3B2468 w=FFFFFF
 x=8A5A2E y=B07A44
@@ -384,9 +390,9 @@ $HvDrillBase = @(
 )
 Assert-Map 'HvDrillBase' $HvDrillBase
 
-# Truss legs (x, y, tone): stainless and titanium alternate, light on the lit left leg, darker on the right one.
-$HvLegL = @(@(5, 5, '1'), @(5, 6, 'T'), @(4, 7, '1'), @(4, 8, 'T'), @(3, 9, '1'), @(3, 10, 'T'))
-$HvLegR = @(@(11, 5, '3'), @(11, 6, 'V'), @(12, 7, '3'), @(12, 8, 'V'), @(13, 9, '3'), @(13, 10, 'V'))
+# Truss legs (x, y, tone): two stainless tones alternate up each leg, light on the lit left leg, darker on the right one.
+$HvLegL = @(@(5, 5, '2'), @(5, 6, '1'), @(4, 7, '2'), @(4, 8, '1'), @(3, 9, '2'), @(3, 10, '1'))
+$HvLegR = @(@(11, 5, '4'), @(11, 6, '3'), @(12, 7, '4'), @(12, 8, '3'), @(13, 9, '4'), @(13, 10, '3'))
 # Power cable (right) and mud hose (left), 8 cells each: out of the top drive, along the top, down the wall.
 $HvCable = @(@(11, 3), @(12, 3), @(13, 3), @(13, 4), @(13, 5), @(13, 6), @(13, 7), @(13, 8))
 $HvHose = @(@(5, 3), @(4, 3), @(3, 3), @(3, 4), @(3, 5), @(3, 6), @(3, 7), @(3, 8))
@@ -460,7 +466,7 @@ function New-HvDrillFrame {
         Set-Px $c (7 + $i) 6 $P[$(if ($swap) { $up[$i] } else { $dn[$i] })]
     }
 
-    # bit: titanium, lit left edge; a spec glint walks around the cone while it turns
+    # bit: stainless steel, lit left edge; a spec glint walks around the cone while it turns
     for ($r = 0; $r -lt 3; $r++) {
         $row = $HvBitRows[$r]
         for ($i = 0; $i -lt $row[1].Length; $i++) { Set-Px $c ($row[0] + $i) (7 + $r) $P[[string]$row[1][$i]] }
@@ -637,9 +643,12 @@ function New-HvGreenhouseFrame {
 #  ITEMS
 # ============================================================================================
 # --- Draw-Helix: shared shader of the steam, MV and HV drill bits (copied from Build-MVTextures.ps1) -------------------
+# -Chrome (0 = off, the other bits) darkens a vertical band just right of the axis (-BandAt, -BandW in body radii): the
+# dark reflection that makes polished metal read as polished.
 function Draw-Helix {
     param($Canvas, $Ramp, [double]$Xc, [double]$TipY, [double]$RadBody, [double]$TipLen, [double]$BodyLen,
-          [double]$RadShank, [double]$TotalLen, [double]$Pitch, [double]$Starts, [double]$Amp, [double]$Phase = 0.0)
+          [double]$RadShank, [double]$TotalLen, [double]$Pitch, [double]$Starts, [double]$Amp, [double]$Phase = 0.0,
+          [double]$Chrome = 0.0, [double]$BandAt = 0.25, [double]$BandW = 0.22)
     $lightX = -0.62; $lightZ = 0.50
     for ($y = 0; $y -lt $Canvas.H; $y++) {
         for ($x = 0; $x -lt $Canvas.W; $x++) {
@@ -657,6 +666,10 @@ function Draw-Helix {
             $depth = [Math]::Sqrt([Math]::Max(0.0, $radSafe * $radSafe - $across * $across))
             $diffuse = [Math]::Max(0.0, ($across / $radSafe) * $lightX + ($depth / $radSafe) * $lightZ)
             $tone = 0.18 + 0.78 * $diffuse
+            if ($Chrome -gt 0) {
+                $band = (($across / $radSafe) - $BandAt) / $BandW
+                $tone -= $Chrome * [Math]::Exp(-$band * $band)
+            }
             if ($zone -eq 'thread') {
                 $theta = [Math]::Asin([Math]::Max(-1.0, [Math]::Min(1.0, $across / $radSafe)))
                 $turn = $Starts * ($axial / $Pitch + $theta / (2 * [Math]::PI)) + $Phase
@@ -670,10 +683,22 @@ function Draw-Helix {
     }
 }
 
-# GTM's titanium is a pink-lilac metal (0xDCA0F0): spec, light, mid, dark, darkest.
+# GTM's stainless steel is a bright, faintly violet white (0xEDEDFD) with a near-black second colour and the SHINY icon set:
+# spec, light, mid, dark, darkest.
+$RampStainlessSteel = @((Hex 'FFFFFF'), (Hex 'EDEDFD'), (Hex 'C4C4D8'), (Hex '86869E'), (Hex '3E3E52'))
+
+# The HV bit, after the vanadium steel one: a touch longer tip, three broad flutes, and the dark reflection band of a
+# polished bit so it does not read as the plain steel bit.
+function New-StainlessSteelBit {
+    $c = New-Canvas
+    Draw-Helix $c $RampStainlessSteel 8.0 14.7 3.2 7.5 10.5 2.2 13.6 14.0 3.0 0.9 0.0 -Chrome 0.12
+    Add-Outline $c -LitArgb (Hex '6E6E86') -ShadeArgb (Hex '1E1E2A')
+    return $c
+}
+
+# The old HV bit (legacy item, see the header): GTM's titanium is a pink-lilac metal: spec, light, mid, dark, darkest.
 $RampTitanium = @((Hex 'F9E9FF'), (Hex 'ECC8FA'), (Hex 'DCA0F0'), (Hex 'AB6FC6'), (Hex '6B3C86'))
 
-# One step above the vanadium bit: a touch longer, same three broad flutes.
 function New-TitaniumBit {
     $c = New-Canvas
     Draw-Helix $c $RampTitanium 8.0 14.7 3.2 7.5 10.5 2.2 13.6 14.0 3.0 0.9 0.0
@@ -803,7 +828,8 @@ if (Test-Want 'catalysts') {
     Out-Tex (New-Catalyst @($PelCobalt, $PelCobalt, $PelMoly, $PelSilica) @((Hex '8FA4FF'), (Hex '4057DC'), (Hex '1F2B7A')) 0) 'item/hydrotreating_catalyst.png'
     Out-Tex (New-Catalyst @($PelIvory, $PelIvory, $PelPlat) @((Hex 'FFE98A'), (Hex 'D9A92A'), (Hex '7A5A10')) 3) 'item/reforming_catalyst.png'
 }
-if (Test-Want 'bit') { Out-Tex (New-TitaniumBit) 'item/titanium_drill_bit.png' }
+if (Test-Want 'bit') { Out-Tex (New-StainlessSteelBit) 'item/stainless_steel_drill_bit.png' }
+if (Test-Want 'legacy') { Out-Tex (New-TitaniumBit) 'item/titanium_drill_bit.png' }
 
 # ============================================================================================
 #  VERIFY what was written (size, binary alpha, no pure black, mcmeta vs frames, empty casing ring, emissive subset,
@@ -866,6 +892,6 @@ foreach ($rel in $written) { Write-Host "  $rel" }
 if ($Credits) {
     Write-Host ''
     foreach ($rel in $written) {
-        Write-Host ("| ``pack/kubejs/assets/grindless/textures/$rel`` | Generada con tools/assets/$ScriptName (pixel art procedural, original) por agente de assets, 2026-10-24 | la del pack (pendiente; propuesta CC BY-SA 4.0) |")
+        Write-Host ("| ``pack/kubejs/assets/grindless/textures/$rel`` | Generated with tools/assets/$ScriptName (procedural pixel art, original) by the assets agent, 2026-10-24 | the pack's own (pending; proposed CC BY-SA 4.0) |")
     }
 }

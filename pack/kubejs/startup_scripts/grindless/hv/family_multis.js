@@ -2,21 +2,22 @@
 // The HV step of the LV family: same recipe types and same structure shape as LV and MV, stainless steel instead of aluminium,
 // 32 runs at once.
 //
-//   gtceu:hv_vein_drill    3x6x3 derrick, runs gtceu:vein_drilling: every steam, LV and MV recipe plus the HV ones (the titanium
-//                          bit and the End veins, which only this drill and better can run)
+//   gtceu:hv_vein_drill    3x6x3 derrick, runs gtceu:vein_drilling: every steam, LV and MV recipe plus the HV ones (the stainless
+//                          steel bit and the End veins, which only this drill and better can run)
 //   gtceu:hv_greenhouse    5x5x5 house, runs gtceu:greenhouse: every steam, LV and MV recipe (fertilizer, CO2 and all). The HV
 //                          greenhouse is only the step: no recipes of its own, HV needs no more wood or crops than MV
 //
 // Both use `bores` (global.grindless.lv.bores, startup_scripts/grindless/lv/multis.js) with a cap of 32 runs: one HV energy
 // hatch (512 V) fills the 32 runs of a drilling recipe (8 EU/t each) and of a fertilizer / CO2 variant (8 EU/t), two hatches are
 // one voltage tier up and GTM's overclock halves the time (4x the EU). Casings: GTM's clean stainless steel machine casing and
-// stainless steel frames, and the steel pipe casing of LV and MV for the drill's mast. Nothing in the structure needs titanium:
-// the End is one of the ways to get it (the ilmenite of the End veins feeds the Kroll line), so the HV drill must be buildable
-// before the first titanium bit.
+// stainless steel frames, and the steel pipe casing of LV and MV for the drill's mast. Nothing in the structure, the controllers or
+// the bit needs titanium: HV has none (DECISIONS.md, 2026-10-24; titanium comes from the Moon and opens EV).
 //
 // The vetoes are the MV ones: the drill vetoes a base recipe while drilling fluid is present in its hatch (the fluid recipe is the
-// better one) and the greenhouse follows the programmed circuit (2 = fertilizer mode, with CO2 in a hatch too the fertilizer + CO2
-// variant). Neither skips a tier: they run every recipe the lower machines run.
+// better one) and the vanadium steel base while sulfuric acid is (the leaching variant takes its place); the greenhouse follows the
+// programmed circuit (2 = fertilizer mode, with CO2 in a hatch too the fertilizer + CO2 variant; 3 = the boosters). Both run every
+// recipe the lower machines run and skip the ones of the tiers above HV (<type>/ev/ and up: rules.isAboveTier, lv/multis.js): the
+// titanium bit and the lunar and Martian veins are the EV Tripod Drill's.
 //
 // Textures: overlay dirs grindless:block/multiblock/hv_vein_drill and hv_greenhouse (drawn separately). Names / tooltips:
 // client_scripts/grindless/hv_family_lang.js.
@@ -99,12 +100,16 @@
     var rules = lv.rules
 
     function drillVeto(machine, recipe) {
-      return !rules.isFluidRecipe(recipe) && rules.machineHasFluid(machine, 'gtceu:drilling_fluid')
+      return rules.isAboveTier(recipe, 'hv') ||
+        (!rules.isFluidRecipe(recipe) && rules.machineHasFluid(machine, 'gtceu:drilling_fluid')) ||
+        (rules.isVanadiumBaseRecipe(recipe) && rules.machineHasFluid(machine, 'gtceu:sulfuric_acid'))
     }
 
-    // circuit 2 = fertilizer mode; with CO2 in a hatch too the fertilizer + CO2 variant is the one that runs
+    // circuit 2 = fertilizer mode; with CO2 in a hatch too the fertilizer + CO2 variant is the one that runs; circuit 3 = boosters
     function greenhouseVeto(machine, recipe) {
+      if (rules.isAboveTier(recipe, 'hv')) return true
       if (rules.machineCircuit(machine) < 2) return false
+      if (rules.isBoosterRecipe(recipe)) return false
       if (!rules.isFertilizerRecipe(recipe)) return true
       return !rules.isCo2Recipe(recipe) && rules.machineHasFluid(machine, 'gtceu:carbon_dioxide')
     }
