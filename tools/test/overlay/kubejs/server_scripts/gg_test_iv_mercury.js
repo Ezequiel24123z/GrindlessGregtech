@@ -24,7 +24,8 @@
 //     crafting        the four controllers, the chart copy and the IV lathe bit make what they say
 //   in the world: Mercury (gcyr:mercury), band X 11520..11583, Z 0..15, built on Y0 = the higher of 200 and the band's highest ground + 2
 //   (measured: NOTE AREA). Controllers face north at Z 1; the structures stand behind them (Z 1..8).
-//     <copy>_PLACED / _FORMED / _PARTS   drill (x 11524), works (x 11536), field (x 11545), interferometer (x 11562)
+//     <copy>_PLACED / _FORMED / _PARTS   drill (x 11524), works (x 11536), field (x 11545), interferometer (x 11562), works_mirror (x 11574,
+//                                        built mirrored: X 11572..11580)
 //     DAY (time 6000)
 //       drill_day_cooled      the cooled recipe runs: 128 bores, one overclock (4,096 EU/t, 100 t), 1,280 mB of liquid nitrogen a run
 //       drill_day_refused     no liquid nitrogen: the dry recipe does not start by day, and the controller says why
@@ -42,12 +43,18 @@
 //       works_night           the bricks at night pay all 7,680 EU/t
 //       field_night           no EU once the sun is down
 //       interferometer_night  the Inner Planets Chart (kept) and a Lunar VLBI Recording (used) -> the Outer System Chart
-//     WINDOW (GTM keeps an idle machine's last recipe for one tick and restarts it without the modifier if the inputs come back then)
+//     WINDOW (GTM keeps an idle machine's last recipe for one tick and restarts it without the modifier if it can run then)
 //       drill_window          a night run ends; in that tick day comes and the bits come back: the next run is the cooled one, not the
 //                             cached dry recipe in the sun
 //       works_window          a sun-priced run ends; in that tick night comes and the dust comes back: the next run pays 7,680 EU/t
-//     (both fail without freshEveryRun in startup_scripts/grindless/iv/mercury.js: bench run iv-b2-mercury-1 saw the works' cached
+//       works_window_full     a night run fills the output bus (its next inputs are there); in that tick day comes and the bus is emptied:
+//                             the next run pays the sun's price (afterWorking runs before the outputs go in: only its doubled-output
+//                             check sees the full bus)
+//     (all three fail without freshEveryRun in startup_scripts/grindless/iv/mercury.js: bench run iv-b2-mercury-1 saw the works' cached
 //     sun price at night)
+//   the mirrored works (x 11574, built flipped, the second copy of the works):
+//       works_mirror_sky      GTM formed it flipped; clear sky = sun; a stone over its far mirror (5 cells across, on its own side) =
+//                             shaded with 1 covered; the stone away = sun again
 // var + function everywhere (this Rhino throws "redeclaration of var" for const/let inside functions that run more than once).
 (function () {
   var TAG = 'GGTEST|'
@@ -119,7 +126,12 @@
     { key: 'interferometer', machine: INTERF, x: 11562, z: 1, parts: [
       { si: 7, ri: 0, ci: 8, id: 'gtceu:iv_energy_input_hatch', role: 'energy' },
       { si: 7, ri: 1, ci: 6, id: 'gtceu:iv_input_bus', role: 'inBus' },
-      { si: 7, ri: 1, ci: 10, id: 'gtceu:iv_output_bus', role: 'outBus' }] }
+      { si: 7, ri: 1, ci: 10, id: 'gtceu:iv_output_bus', role: 'outBus' }] },
+    // a second works, built mirrored (GTM forms it flipped): its far mirrors are on the other side of the furnace
+    { key: 'works_mirror', machine: WORKS, x: 11574, z: 1, mirror: true, parts: [
+      { si: 6, ri: 1, ci: 1, id: 'gtceu:iv_energy_input_hatch', role: 'energy' },
+      { si: 6, ri: 1, ci: 3, id: 'gtceu:iv_input_bus', role: 'inBus' },
+      { si: 6, ri: 2, ci: 1, id: 'gtceu:iv_output_bus', role: 'outBus' }] }
   ]
 
   var S = null
@@ -551,6 +563,8 @@
     })
     if (ctrl === null) throw new Error('the description has no controller cell')
     var cy = S.y0 + ctrl.ri
+    // a mirrored copy has every column on the other side of the controller
+    var sgn = copy.mirror ? -1 : 1
     var cells = []
     desc.slices.forEach(function (rows, si) {
       rows.forEach(function (row, ri) {
@@ -559,7 +573,7 @@
           if (ch === ' ') continue
           var sym = desc.symbols[ch]
           if (sym.kind === 'air' || sym.kind === 'any') continue
-          var c = { si: si, ri: ri, ci: ci, ch: ch, x: copy.x - (ci - ctrl.ci), y: cy + (ri - ctrl.ri), z: copy.z - (si - ctrl.si), id: null,
+          var c = { si: si, ri: ri, ci: ci, ch: ch, x: copy.x - sgn * (ci - ctrl.ci), y: cy + (ri - ctrl.ri), z: copy.z - (si - ctrl.si), id: null,
             props: '', role: null }
           if (sym.kind === 'controller') {
             c.id = copy.machine
@@ -1006,9 +1020,11 @@
     return { key: state.key, covered: state.covered }
   }
 
+  // a far mirror (the last column: 5 cells from the controller), so the check depends on the side the mirrors are counted on
   function mirrorCover(m) {
-    var cell = m.plan.cells.filter(function (c) { return c.ch === 'M' })[0]
-    return { x: cell.x, y: cell.y + 1, z: cell.z }
+    var cells = m.plan.cells.filter(function (c) { return c.ch === 'M' })
+    var far = cells.reduce(function (a, b) { return b.ci > a.ci ? b : a }, cells[0])
+    return { x: far.x, y: far.y + 1, z: far.z }
   }
 
   function worksDay(m) {
@@ -1190,11 +1206,84 @@
       if (run) {
         check('works_window', m.windowRun.eut === 1920 && run.id === BRICKS_RECIPE && run.eut === 7680, 'day run ' + runText(m.windowRun) +
           ' ended, then night and dust in the same tick: ' + runText(run) + ' (wanted 7680 EU/t)')
-        m.step = 'window_done'
+        m.step = 'wf_prep'
       } else if (S.t - m.mark > 200) {
         check('works_window', false, 'no run after the dust came back at night: ' + recipeState(m))
         m.step = 'window_done'
       }
+      return
+    }
+    // the one-tick window with a full output bus: a night run fills the bus (its inputs for the next run are there); in the tick it ends,
+    // day comes and the bus is emptied. afterWorking runs before GTM puts the outputs away, so only its check with doubled outputs sees
+    // that the next run cannot start, and marks the logic dirty
+    if (m.step === 'wf_prep') {
+      var inv = P.outBus.getInventory()
+      var n = inv.getSlots()
+      for (var i = 0; i < n - 1; i++) inv.setStackInSlot(i, Item.of('minecraft:cobblestone', 64))
+      inv.setStackInSlot(n - 1, Item.of(BRICK, 60))
+      insert(P.inBus, REGOLITH, 32)
+      m.step = 'wf_run'
+      m.mark = S.t
+      wake(m)
+      return
+    }
+    if (m.step === 'wf_run') {
+      if (run) {
+        m.fullRun = run
+        m.step = 'wf_end'
+        m.mark = S.t
+      } else if (S.t - m.mark > 200) {
+        check('works_window_full', false, 'no night run with room for one run left in the output bus: ' + recipeState(m))
+        m.step = 'window_done'
+      }
+      return
+    }
+    if (m.step === 'wf_end') {
+      if (!rlg.isWorking() && rlg.getLastRecipe() !== null && rlg.getLastRecipe() !== undefined) {
+        m.fullBricks = readInv(P.outBus.getInventory())[BRICK] || 0
+        setClock(DAY, 'the works\' night run filled its output bus this tick: day comes and the bus is emptied in the same tick')
+        clearInv(P.outBus)
+        m.step = 'wf_after'
+        m.mark = S.t
+      } else if (S.t - m.mark > m.fullRun.duration + 60) {
+        check('works_window_full', false, 'the end of the run that fills the bus was not seen with its recipe still held: ' + recipeState(m))
+        m.step = 'window_done'
+      }
+      return
+    }
+    if (m.step === 'wf_after') {
+      if (run) {
+        check('works_window_full', m.fullRun.eut === 7680 && m.fullBricks === 64 && run.id === BRICKS_RECIPE && run.eut === 1920, 'night run ' +
+          runText(m.fullRun) + ' filled the bus (' + m.fullBricks + ' bricks in its last slot), then day and an empty bus in the same tick: ' +
+          runText(run) + ' (wanted 1920 EU/t)')
+        m.step = 'window_done'
+      } else if (S.t - m.mark > 200) {
+        check('works_window_full', false, 'no run after the bus was emptied at day: ' + recipeState(m))
+        m.step = 'window_done'
+      }
+    }
+  }
+
+  // the mirrored works (day): GTM formed it flipped, and its sun check must count the mirrors on its own side of the furnace
+  function mirrorTick(m, phase) {
+    newRun(m)
+    if (phase !== 'day') return
+    if (m.step === 'idle') {
+      m.flipped = m.ctrl.isFlipped() === true
+      m.clearState = M().works.sunState(m.ctrl)
+      m.cover = mirrorCover(m)
+      setBlock(m.cover.x, m.cover.y, m.cover.z, COVER, '')
+      m.step = 'covered'
+      return
+    }
+    if (m.step === 'covered') {
+      var covered = M().works.sunState(m.ctrl)
+      setBlock(m.cover.x, m.cover.y, m.cover.z, 'minecraft:air', '')
+      var after = M().works.sunState(m.ctrl)
+      check('works_mirror_sky', m.flipped && m.clearState.key === 'sun' && covered.key === 'shaded' && covered.covered === 1 && after.key === 'sun',
+        'formed flipped=' + m.flipped + '; clear sky: ' + m.clearState.key + ' (covered ' + m.clearState.covered + '); a stone over its far mirror at ' +
+        m.cover.x + ',' + (m.cover.y - 1) + ',' + m.cover.z + ': ' + covered.key + ' (covered ' + covered.covered + '); stone taken away: ' + after.key)
+      m.step = 'day_done'
     }
   }
 
@@ -1337,6 +1426,8 @@
         'by day: ' + (m.dayRun ? 'it ran: ' + runText(m.dayRun) : 'no run') + '; statuses ' + histogram(m.statuses) + '; input bus [' + summary(inBus) + ']')
       m.statuses = {}
       m.step = 'night'
+    } else if (m.copy.key === 'works_mirror') {
+      m.step = 'night_done'
     }
     m.mark = S.t
     wake(m)
@@ -1393,6 +1484,8 @@
               if (phase === 'day') worksDay(m)
               else if (phase === 'night') worksNight(m)
               else worksWindow(m)
+            } else if (m.copy.key === 'works_mirror') {
+              mirrorTick(m, phase)
             } else if (phase === 'window') {
               newRun(m)
             } else if (m.copy.key === 'field') {
