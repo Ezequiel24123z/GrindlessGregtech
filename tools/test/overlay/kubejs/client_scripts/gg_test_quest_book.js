@@ -43,6 +43,8 @@
   var OPEN_TICKS = 60
   // the Processing Lines group: three of its charts, centred on their middles
   SHOTS.push({ name: 'gg_book_pl_lv', chapter: 'pl_lv' }, { name: 'gg_book_pl_ev', chapter: 'pl_ev' }, { name: 'gg_book_pl_iv', chapter: 'pl_iv' })
+  // the Power tab: its Steam Age and LV rows, then the IV rows
+  SHOTS.push({ name: 'gg_book_power_top', chapter: 'power', x: 12, y: 4 }, { name: 'gg_book_power_iv', chapter: 'power', x: 14, y: 36 })
   var c = { holding: false, since: 0, errors: 0, ageField: null, gaveUp: false, tipDone: '', book: null }
 
   function val(key) {
