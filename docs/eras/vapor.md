@@ -1,209 +1,209 @@
-# Era de vapor
+# Steam era
 
-Aquí empieza el juego, sin electricidad. Coque, ladrillos, bronce, calderas y acero. Las máquinas de vapor hacen el trabajo sucio y, antes de salir, el mineral y la madera ya llegan solos.
+The game starts here, without electricity. Coke, bricks, bronze, boilers and steel. Steam machines do the dirty work, and before you leave, ore and wood already arrive on their own.
 
-## Ruta
+## Route
 
-1. **Arranque.** Madera, pedernal y las herramientas de GT (mortero, martillo, lima). Se pica a mano lo justo: un poco de cobre, estaño, hierro y carbón. Arcilla y arena para los ladrillos.
-2. **Coque.** Horno de coque (`gtceu:coke_oven`): carbón a coque, troncos a carbón vegetal. La creosota sale como subproducto y sirve de combustible en la caldera líquida o para impregnar madera.
-3. **Bronce.** Bronce en polvo con el mortero y fundido. Primeras placas y engranajes.
-4. **Vapor.** Caldera de carbón de baja presión (`gtceu:lp_steam_solid_boiler`) y bomba primitiva (`gtceu:primitive_pump`) para el agua. Máquinas de vapor de un bloque: macerador, compresor, martillo, extractor, horno y aleador.
-5. **Sin pico.** Aquí se acaba el picar:
-   - Minero de vapor de GTM (`gtceu:lp_steam_miner`): saca el mineral de una veta real que tenga debajo.
-   - **Perforadora de vetas a vapor** (nuestra): saca de forma indefinida la veta que marque la muestra.
-   - **Invernadero de vapor** (nuestro): madera, resina y cultivos.
-   - Trituradora de rocas de vapor (`gtceu:lp_steam_rock_crusher`): roca y adoquín con agua y lava al lado.
-6. **Acero.** Alto horno primitivo (`gtceu:primitive_blast_furnace`): hierro y coque dan acero. Con el acero llegan las máquinas de alta presión y la broca de acero.
-   - Después, el **alto horno de vapor** (nuestro) hace acero directamente de la mena, más rápido, a cambio de vapor.
-   - La **batería de coque** (nuestra) coquiza como 6 o 7 hornos de coque y guarda el gas de hulla para LV.
-7. **Puerta a LV.** Turbina de vapor LV (`gtceu:lv_steam_turbine`), primer circuito LV, casco LV y cable de estaño con goma. Cuando eso funciona, la era está superada.
+1. **Start.** Wood, flint and the GT tools (mortar, hammer, file). Hand-mine only what is needed: a little copper, tin, iron and coal. Clay and sand for the bricks.
+2. **Coke.** Coke oven (`gtceu:coke_oven`): coal to coke, logs to charcoal. Creosote comes out as a byproduct. It fuels the liquid boiler or impregnates wood.
+3. **Bronze.** Bronze dust made with the mortar, then smelted. First plates and gears.
+4. **Steam.** Low-Pressure Boiler, coal-fired (`gtceu:lp_steam_solid_boiler`), and a Primitive Pump (`gtceu:primitive_pump`) for water. Single-block steam machines: Steam Macerator, Steam Compressor, Steam Forge Hammer, Steam Extractor, Steam Furnace and Steam Alloy Smelter.
+5. **No more pickaxe.** Hand-mining ends here:
+   - GTM's Steam Miner (`gtceu:lp_steam_miner`): pulls ore from a real vein beneath it.
+   - **Steam vein drill** (ours): pulls indefinitely from the vein the sample marks.
+   - **Steam greenhouse** (ours): wood, resin and crops.
+   - Steam Rock Crusher (`gtceu:lp_steam_rock_crusher`): stone and cobblestone, with water and lava beside it.
+6. **Steel.** Primitive Blast Furnace (`gtceu:primitive_blast_furnace`): iron and coke make steel. Steel brings the high-pressure machines and the steel drill bit.
+   - Later, the **steam blast furnace** (ours) makes steel straight from the ore, faster, in exchange for steam.
+   - The **coke battery** (ours) cokes like 6 or 7 coke ovens and stores coal gas for LV.
+7. **Gate to LV.** LV Steam Turbine (`gtceu:lv_steam_turbine`), first LV circuit, LV Machine Hull and rubber-insulated tin cable. Once that works, the era is behind you.
 
-## Multibloques nuestros
+## Our multiblocks
 
-Se registran en `gtceu:` porque así funciona el registro de máquinas de GTM. Los objetos propios van en `grindless:`.
+They are registered under `gtceu:` because that is how GTM registers machines. Our own items go under `grindless:`.
 
-### Perforadora de vetas a vapor — `gtceu:steam_vein_drill`
+### Steam Vein Drill — `gtceu:steam_vein_drill`
 
-Qué gana: mineral sin límite y sin tener que mudarse de veta. Ninguna máquina de un bloque genera mineral; el minero de vapor solo recoge el que ya hay en el mundo y lo agota.
+What it gains: unlimited ore, without moving to another vein. No single-block machine generates ore; the steam miner only collects the ore already in the world, and depletes it.
 
-- **Tipo de receta:** `gtceu:vein_drilling`. El mismo tipo lo usarán las perforadoras eléctricas de LV y siguientes.
-- **Entradas de cada receta:**
-  - una **muestra de veta** (`grindless:vein_sample_<veta>`), que no se consume;
-  - una **broca** (`grindless:bronze_drill_bit` o `grindless:steel_drill_bit`), que se gasta por probabilidad (bronce alrededor del 10 % por ciclo, acero alrededor del 4 %);
-  - agua (unos 100 mB por ciclo) si el multibloque admite escotilla de fluidos; si no, solo vapor.
-- **Salidas:** el mineral en bruto (`raw_*`) de la veta, en proporción a los pesos de la veta en GTM, más un subproducto inerte de piedra que se puede tirar.
-- **Tabla de vetas:** se genera desde las vetas del Overworld de GTM 7.5.3. Un único archivo de datos alimenta todas las recetas. Las vetas profundas (por debajo de Y 0) solo admiten la broca de acero; las demás admiten las dos, y la de acero rinde más.
-- **Muestra de veta:** se craftea una vez con una sonda vacía (placas de bronce y vidrio) y dos menas en bruto de esa veta. Se consiguen picando una vez o con el minero de vapor.
-- **Ritmo orientativo:** con 4 en paralelo, unas 40-60 menas por minuto. A pleno rendimiento gasta unos 50-60 mB/t de vapor, así que pide varias calderas o una caldera grande de bronce.
-- **Estructura:** una torre visible de unos 3×3 de base y 5-7 de alto, con marcos de bronce o acero y casco de vapor. Lleva bus de entrada, bus de salida, escotilla de vapor y escotilla de agua.
+- **Recipe type:** `gtceu:vein_drilling`. The electric drills from LV up will use the same type.
+- **Inputs of each recipe:**
+  - a **vein sample** (`grindless:vein_sample_<vein>`), which is not used up;
+  - a **drill bit** (`grindless:bronze_drill_bit` or `grindless:steel_drill_bit`), which wears out by chance (bronze about 10% per cycle, steel about 4%);
+  - water (about 100 mB per cycle) if the multiblock accepts a fluid hatch; if not, steam only.
+- **Outputs:** the raw ore (`raw_*`) of the vein, in proportion to the vein's weights in GTM, plus an inert stone byproduct that can be thrown away.
+- **Vein table:** generated from the Overworld veins of GTM 7.5.3. A single data file feeds all the recipes. Deep veins (below Y 0) accept only the steel drill bit; the rest accept both, and the steel one yields more.
+- **Vein sample:** crafted once from an empty vein probe (bronze plates and glass) and two raw ores of that vein. You get the raw ores by hand-mining once or from the steam miner.
+- **Approximate rate:** with 4 in parallel, about 40-60 ores per minute. At full output it uses about 50-60 mB/t of steam, so it needs several boilers or a Large Bronze Boiler.
+- **Structure:** a visible tower about 3×3 at the base and 5-7 high, with bronze or steel frames and a steam casing. It has an input bus, an output bus, a steam hatch and a water hatch.
 
-### Invernadero de vapor — `gtceu:steam_greenhouse`
+### Steam Greenhouse — `gtceu:steam_greenhouse`
 
-Qué gana: madera, resina y comida sin talar ni plantar. Ninguna máquina de un bloque de GTM hace crecer árboles.
+What it gains: wood, resin and food without felling or planting. No single-block GTM machine grows trees.
 
-- **Tipo de receta:** `gtceu:greenhouse`. Lo compartirán los invernaderos eléctricos.
-- **Entradas:** un plantón o semilla como catalizador (no se gasta), agua y, si se quiere, fertilizante (harina de hueso o el fertilizante de GT) para más producción.
-- **Salidas:**
-  - árboles vanilla: troncos, alguna vez un plantón y palos;
-  - árbol de caucho de GTM: troncos de caucho y resina pegajosa;
-  - cultivos: trigo, caña de azúcar, zanahoria, patata, remolacha, calabaza y sandía.
-- **Ritmo orientativo:** unos 6 troncos cada 30 s por paralelo sin fertilizante. Con fertilizante, unas 1,5 veces más.
-- **Estructura:** unos 5×5×5. Suelo de tierra, paredes y techo de vidrio y esqueleto de casco de vapor. Tiene que verse como un invernadero.
+- **Recipe type:** `gtceu:greenhouse`. Electric greenhouses will share it.
+- **Inputs:** a sapling or seed as catalyst (not used up), water and, optionally, fertilizer (bone meal or GT's fertilizer) for more output.
+- **Outputs:**
+  - vanilla trees: logs, sometimes a sapling, and sticks;
+  - GTM rubber tree: rubber logs and sticky resin;
+  - crops: wheat, sugar cane, carrot, potato, beetroot, pumpkin and melon.
+- **Approximate rate:** about 6 logs every 30 s per parallel without fertilizer. With fertilizer, about 1.5 times more.
+- **Structure:** about 5×5×5. Dirt floor, glass walls and roof, and a steam casing frame. It has to look like a greenhouse.
 
-### Alto horno de vapor — `gtceu:steam_blast_furnace`
+### Steam Blast Furnace — `gtceu:steam_blast_furnace`
 
-Qué gana: pasos y velocidad. El horno y el alto horno primitivo en una sola máquina: toma la mena y da acero. Una estructura hace tanto acero como 6 o 7 altos hornos primitivos, así que las brocas de acero de la perforadora dejan de ser el cuello de botella.
+What it gains: fewer steps and more speed. The furnace and the primitive blast furnace in one machine: it takes ore and gives steel. One structure makes as much steel as 6 or 7 primitive blast furnaces, so the drill's steel bits stop being the bottleneck.
 
-- **Tipo de receta:** `gtceu:steelmaking` (fabricación de acero).
-- **Receta:** 4 de hierro + 4 de coque + 1 de fundente → 4 lingotes de acero + 1 de ceniza. 8 EU/t y 2 400 ticks por carga.
-  - **Hierro:** mena en bruto o triturada de hierro, magnetita, hematita, goethita o limonita amarilla, y lingote o polvo de hierro. Una receta por fila de la tabla `kubejs/data/grindless/tables/steam_blast_furnace.json`.
-  - **Fundente** (`#grindless:blast_furnace_fluxes`): calcita en bruto, en polvo o en bloque. La calcita sale de la veta de lapislázuli.
-  - **Fuera:** la pirita es un sulfuro y espera al tostador de LV.
-- **Ritmo:** 4 cargas a la vez y 1,5 veces más lentas: 16 lingotes cada 180 s, unos 5,3 por minuto. Gasta unos 57 mB/t de vapor (12 800 mB por lingote).
-- **Comparación con GTM.** El alto horno primitivo (`gtceu:primitive_blast_furnace`) hace 1 lingote de hierro + 1 de coque → 1 de acero + 1/9 de ceniza en 1 500 ticks, de uno en uno, y el hierro hay que fundirlo antes.
-  - **El rendimiento es el de GT.** Una mena en bruto da 1 acero, como fundirla da 1 lingote. Una triturada también da 1, y macerar una en bruto da 2 trituradas, o sea 2 de acero. Gasta 1 coque por acero, como el primitivo.
-  - **Lo que cuesta:** vapor (el primitivo no gasta nada más), una línea de coque, otra de calcita y una estructura mayor con acero en el controlador.
-- **Estructura** (3 × 7 × 3):
-  - crisol: casco de vapor con las piezas (escotilla de vapor, bus de entrada y 1 o 2 buses de salida);
-  - etalaje: ladrillo refractario, tres toberas (tuberías de bronce o acero) y el controlador;
-  - cuba: ladrillo refractario hueco (el hueco tiene que estar vacío);
-  - arriba: cuatro postes de marco (bronce o acero) y el bajante, dos tuberías.
-- **Controlador:** el alto horno primitivo, placas de acero, una tubería de bronce, engranajes de bronce y casco de vapor.
+- **Recipe type:** `gtceu:steelmaking` (steel production).
+- **Recipe:** 4 iron + 4 coke + 1 flux → 4 steel ingots + 1 ash. 8 EU/t and 2,400 ticks per load.
+  - **Iron:** raw or crushed iron ore, magnetite, hematite, goethite or yellow limonite, and iron ingot or iron dust. One recipe per row of the table `kubejs/data/grindless/tables/steam_blast_furnace.json`.
+  - **Flux** (`#grindless:blast_furnace_fluxes`): raw, dust or block calcite. Calcite comes from the lapis lazuli vein.
+  - **Left out:** pyrite is a sulfide and waits for the LV sulfide roaster.
+- **Rate:** 4 loads at once and 1.5 times slower: 16 ingots every 180 s, about 5.3 per minute. It uses about 57 mB/t of steam (12,800 mB per ingot).
+- **Comparison with GTM.** The primitive blast furnace (`gtceu:primitive_blast_furnace`) makes 1 iron ingot + 1 coke → 1 steel + 1/9 ash in 1,500 ticks, one at a time, and the iron has to be smelted first.
+  - **The yield is GT's.** One raw ore gives 1 steel, just as smelting it gives 1 ingot. A crushed ore also gives 1, and macerating a raw ore gives 2 crushed ores, so 2 steel. It uses 1 coke per steel, like the primitive one.
+  - **What it costs:** steam (the primitive one uses nothing else), a coke line, another calcite line, and a larger structure with steel in the controller.
+- **Structure** (3 × 7 × 3):
+  - hearth: steam casing with its parts (steam hatch, input bus and 1 or 2 output buses);
+  - bosh: firebricks, three tuyeres (bronze or steel pipes) and the controller;
+  - stack: hollow firebricks (the hollow must stay empty);
+  - top: four frame posts (bronze or steel) and the downcomer, two pipes.
+- **Controller:** the primitive blast furnace, steel plates, a bronze pipe, bronze gears and a steam casing.
 
-### Batería de coque con subproductos — `gtceu:coking_battery`
+### By-product Coke Battery — `gtceu:coking_battery`
 
-Qué gana: rendimiento. Coquiza como el horno de coque y además recupera el gas de hulla, que el horno de coque pierde.
+What it gains: yield. It cokes like the coke oven and also recovers coal gas, which the coke oven loses.
 
-- **Tipo de receta:** `gtceu:coking` (coquización).
-- **Receta:** 1 de carbón → 1 de coque + 500 mB de creosota + 125 mB de gas de hulla. 4 EU/t y 360 ticks.
-- **Ritmo:** 4 cámaras a la vez: 4 de carbón cada 27 s, como 6 o 7 hornos de coque. Gasta unos 28 mB/t de vapor (3 840 mB por carbón, lo que dan unos 180 mB de su propia creosota en una caldera líquida de alta presión).
-- **Por qué estos números** (por carbón, recetas de GTM 7.5.3):
+- **Recipe type:** `gtceu:coking` (coking).
+- **Recipe:** 1 coal → 1 coke + 500 mB creosote + 125 mB coal gas. 4 EU/t and 360 ticks.
+- **Rate:** 4 chambers at once: 4 coal every 27 s, like 6 or 7 coke ovens. It uses about 28 mB/t of steam (3,840 mB per coal, which is about what 180 mB of its own creosote gives in a high-pressure liquid boiler).
+- **Why these numbers** (per coal, GTM 7.5.3 recipes):
 
-  | Máquina | Era | Coque | Creosota | Gas de hulla | Coste |
+  | Machine | Era | Coke | Creosote | Coal gas | Cost |
   |---|---|---|---|---|---|
-  | Horno de coque | Vapor | 1 | 500 mB | — | 900 ticks y nada más |
-  | **Batería de coque** | Vapor | 1 | 500 mB | 125 mB | 3 840 mB de vapor |
-  | Horno de pirólisis, con vapor | MV | 1 | — | 250 mB | 62,5 mB de vapor y 96 EU/t |
-  | Horno de pirólisis, con N₂ | MV | 1 | 500 mB | — | 62,5 mB de N₂ y 96 EU/t |
+  | Coke oven | Steam | 1 | 500 mB | — | 900 ticks and nothing else |
+  | **Coke battery** | Steam | 1 | 500 mB | 125 mB | 3,840 mB of steam |
+  | Pyrolyse oven, with steam | MV | 1 | — | 250 mB | 62.5 mB of steam and 96 EU/t |
+  | Pyrolyse oven, with N₂ | MV | 1 | 500 mB | — | 62.5 mB of N₂ and 96 EU/t |
 
-  - El coque se queda 1:1. El horno de coque industrial de GT Community Additions daba 2 de coque por carbón y 3,4 veces la creosota, y por eso se quitó.
-  - La creosota es la del horno de coque.
-  - El gas es la mitad del que recupera el horno de pirólisis de MV; la otra mitad calienta los hornos (una batería real quema el 40-50 % de su propio gas bajo las cámaras).
-  - En EU de LV (96 EU por mB de gas de hulla en la turbina de gas; unos 10,5 EU por mB de creosota en una caldera líquida de alta presión), un carbón vale unos 5 250 EU en el horno de coque, unos 15 300 EU aquí (descontado el vapor) y unos 22 000 EU en el horno de pirólisis. Mejor que la máquina de vapor de GTM y por debajo de la de MV.
-- **Estructura** (5 × 4 × 3):
-  - base: casco de vapor con la escotilla de vapor y 1 o 2 buses de salida (el coque);
-  - tres cámaras de ladrillo de coque entre dos paredes de hogar de bronce; el controlador es la puerta de la cámara del medio;
-  - techo: casco de vapor con el bus de entrada (la boca de carga) y las dos escotillas de salida de fluidos (creosota y gas), y el colector de gas en medio (tuberías de bronce o acero).
-- **Controlador:** dos hornos de coque, placas y engranajes de bronce, una tubería de bronce y casco de vapor.
-- **Escotilla ULV de salida de fluidos.** En GTM 7.5.3 solo se fabrica en el ensamblador (LV), y ninguna pieza de vapor saca fluidos de un multibloque de vapor: la escotilla de la bomba solo admite agua y la del horno de coque solo funciona con él. Por eso tiene receta a mano: casco ULV + vidrio + 2 de resina pegajosa (la cola). Efectos secundarios pequeños:
-  - con un destornillador pasa a ser la escotilla ULV de entrada (receta de GTM; ninguna máquina de vapor la usa);
-  - la bomba primitiva bombea el doble de agua con ella que con su escotilla.
+  - Coke stays 1:1. The industrial coke oven from GT Community Additions gave 2 coke per coal and 3.4 times the creosote, so it was removed.
+  - The creosote is the coke oven's.
+  - The gas is half of what the MV pyrolyse oven recovers; the other half heats the ovens (a real battery burns 40-50% of its own gas under the chambers).
+  - At LV prices (96 EU per mB of coal gas in the gas turbine; about 10.5 EU per mB of creosote in a high-pressure liquid boiler), a coal is worth about 5,250 EU in the coke oven, about 15,300 EU here (after subtracting the steam), and about 22,000 EU in the pyrolyse oven. Better than GTM's steam machine and below the MV one.
+- **Structure** (5 × 4 × 3):
+  - base: steam casing with the steam hatch and 1 or 2 output buses (the coke);
+  - three chambers of coke oven bricks between two bronze firebox walls; the controller is the door of the middle chamber;
+  - roof: steam casing with the input bus (the charging hole), the two fluid output hatches (creosote and gas), and the gas collector in the middle (bronze or steel pipes).
+- **Controller:** two coke ovens, bronze plates and gears, a bronze pipe and a steam casing.
+- **ULV fluid output hatch.** In GTM 7.5.3 it is only made in the assembler (LV), and no steam part pulls fluids out of a steam multiblock: the pump's hatch only accepts water, and the one for the coke oven only works with the coke oven. So it has a hand recipe: ULV Machine Hull + glass + 2 sticky resin (the glue). Minor side effects:
+  - with a screwdriver it becomes the ULV input hatch (GTM recipe; no steam machine uses it);
+  - the primitive pump pumps twice as much water with it as with its own hatch.
 
-### Observatorio de relojería — `gtceu:steam_observatory`
+### Clockwork Observatory — `gtceu:steam_observatory`
 
-Qué gana: es lo único que hace la primera carta de la Luna (`grindless:lunar_chart_draft`). Abre la familia del observatorio, la que cuenta el viaje (`docs/viaje.md`): los datos de navegación solo salen de mirar.
+What it gains: it is the only thing that makes the first Moon chart (`grindless:lunar_chart_draft`). It opens the observatory family, the one the journey relies on (`docs/viaje.md`): navigation data only comes from looking.
 
-- **Tipo de receta:** `gtceu:stargazing` (observación al ocular).
-- **Receta:** 4 de papel + 1 de polvo de carbón (la tinta) → 1 carta lunar (borrador). 8 EU/t de vapor y 400 ticks (600 en el multibloque de vapor: 30 s). Una carta cada vez.
-- **Condiciones** (de GTM, puestas en la receta):
-  - de noche (la condición de día, invertida);
-  - con el cielo despejado (nivel de lluvia por debajo de 0,2);
-  - con el controlador en Y 100 o más (`posY 100..319`): por encima de la bruma del valle y del humo de los hornos de coque.
-  - Si amanece o llueve a medio dibujo, la máquina espera y no pierde lo hecho (`regressWhenWaiting(false)`). En EMI, una línea dice la regla en palabras.
-- **Por qué no es grind:** una noche despejada llega sola y una torre de 40 bloques se levanta en un momento (en el Llano, el suelo está en Y 63). No hay azar ni tiempos inflados: la observación dura 30 s y siempre da la carta.
-- **Estructura** (3 × 6 × 5, al aire libre):
-  - plataforma de casco de vapor con la escotilla de vapor y un bus de entrada y otro de salida;
-  - pilar de ladrillo de piedra;
-  - caja de engranajes de bronce (el mecanismo de relojería) entre dos horquillas de marco de bronce;
-  - tubo de tuberías de bronce que sube en diagonal hacia atrás, con un vidrio arriba (el objetivo).
-  - El latón del dibujo es el bronce de GTM: el latón pide cinc y en vapor no hay.
-- **Controlador:** vidrio, una tubería de bronce (el tubo), engranajes de bronce, el casco de bronce, placas de bronce y un reloj (el mecanismo). Todo es de vapor, así que se fabrica en cualquier era posterior: un mundo que ya está en LV también lo construye.
-- **La carta no se gasta.** El observatorio óptico (LV) la lee sin gastarla. Se copia a mano: borrador + papel + polvo de carbón → 2.
+- **Recipe type:** `gtceu:stargazing` (eyepiece observation).
+- **Recipe:** 4 paper + 1 coal dust (the ink) → 1 Lunar Chart (Draft). 8 EU/t of steam and 400 ticks (600 in the steam multiblock, which is 30 s). One chart at a time.
+- **Conditions** (from GTM, set in the recipe):
+  - at night (the day condition, inverted);
+  - with a clear sky (rain level below 0.2);
+  - with the controller at Y 100 or higher (`posY 100..319`): above the valley haze and the smoke from the coke ovens.
+  - If it gets light or rains partway through a drawing, the machine waits and keeps its progress (`regressWhenWaiting(false)`). In EMI, a line states the rule in words.
+- **Why it is not grind:** a clear night comes on its own, and a 40-block tower goes up in a moment (on the Flat, the ground is at Y 63). There is no luck involved and no inflated times: observing takes 30 s and always gives the chart.
+- **Structure** (3 × 6 × 5, outdoors):
+  - platform of steam casing with the steam hatch, an input bus and an output bus;
+  - stone brick pillar;
+  - bronze gearbox (the clockwork mechanism) between two bronze frame fork arms;
+  - tube of bronze pipes rising diagonally backwards, with glass on top (the objective).
+  - The brass in the drawing is GTM's bronze: brass needs zinc, and there is no zinc in the steam era.
+- **Controller:** glass, a bronze pipe (the tube), bronze gears, a bronze hull, bronze plates and a clock (the mechanism). Everything here is steam-era, so it can be built in any later era: a world already in LV can build it too.
+- **The chart is not used up.** The Optical Observatory (LV) reads it without using it up. You copy it by hand: draft + paper + coal dust → 2.
 
-#### Decisiones tomadas (observatorio, 2026-10-24)
+#### Decisions taken (observatory, 2026-10-24)
 
-- **Un tipo de receta por observatorio** (`stargazing`, `astrophotography`, `radio_astronomy`), no uno compartido como en la perforadora. Así cada carta solo sale de su máquina, y EMI lo enseña.
-- **Las cartas se hacen una vez.** La máquina siguiente las pide sin gastarlas, y cualquier carta se copia en la mesa (original + soporte en blanco → 2). La copia sale de los cristales de coordenadas de Star Technology (MIT); su azar no: su buscador dimensional da el cristal con un 5 % de probabilidad.
-- **El validador no modela las condiciones del cielo:** las da por cumplidas. Las prueba `gg_test_observatory` en partida, también que el observatorio se niega cuando falla cada una.
-- **La tinta es polvo de carbón.** El tinte negro sale de la tinta de calamar o de la rosa marchita, que en vapor no se automatizan.
+- **One recipe type per observatory** (`stargazing`, `astrophotography`, `radio_astronomy`), not one shared type as in the drill. That way each chart only comes out of its own machine, and EMI shows it.
+- **Charts are made once.** The next machine asks for them without using them up, and any chart can be copied in a crafting table (original + blank sheet → 2). The copy idea comes from Star Technology's coordinate crystals (MIT); its randomness does not: its dimensional finder gives the crystal with a 5% chance.
+- **The validator does not model the sky conditions:** it treats them as met. They are tested in game by `gg_test_observatory`, which also checks that the observatory refuses to run when each one fails.
+- **The ink is coal dust.** Black dye comes from ink sacs or wither roses, neither of which is automated in the steam era.
 
-### Familia Large Steam — `gtceu:large_steam_macerator/centrifuge/thermal_centrifuge/chemical_bath/ore_washer`
+### Large Steam family — `gtceu:large_steam_macerator/centrifuge/thermal_centrifuge/chemical_bath/ore_washer`
 
-Qué gana: procesar mena a escala de planta sin electricidad. Idea de GregTech Leisure (familia "Large Steam X", `docs/investigacion/leisure.md` §4.2), su licencia no es permisiva: ni código, ni texturas, ni texto se copian, solo el concepto de un multibloque de vapor grande con un tope de paralelos. Se omite el sexto miembro de GTL (el ensamblador con núcleo de ensamblador molecular de AE2): no encaja en un multibloque solo de KubeJS.
+What it gains: processing ore at plant scale, without electricity. Idea from GregTech Leisure (the "Large Steam X" family, `docs/investigacion/leisure.md` §4.2). Its license is not permissive: no code, textures or text are copied, only the concept of a large steam multiblock with a parallel cap. The sixth GTL member is left out (the assembler with an AE2 molecular assembler core): it does not fit a multiblock built only with KubeJS.
 
-Las cinco máquinas comparten carcasa (acero 5×5×5, postes de marco de bronce o acero en las 4 aristas verticales) y mecanismo (`SteamParallelMultiblockMachine`, igual que el macerador y el horno de vapor de serie de GTM: duración ×1,5, vapor de una escotilla, y GTM rechaza de raíz cualquier receta por encima de LV, 32 EU/t). A diferencia del macerador/horno de vapor de GTM, ninguna llama a `addOutputLimit` (lo que les recorta a un solo subproducto): aquí se guarda toda la cadena de subproducto de mena, con 2 buses de salida (8 huecos) para que el tope de 64 paralelos no se quede corto en un solo bus de 4.
+All five machines share a casing (steel, 5×5×5, with bronze or steel frame posts on the 4 vertical edges) and a mechanism (`SteamParallelMultiblockMachine`, the same as GTM's standard Steam Grinder and Steam Oven: duration ×1.5, steam from one hatch, and GTM rejects outright any recipe above LV, 32 EU/t). Unlike GTM's Steam Grinder and Steam Oven, none of them calls `addOutputLimit` (which cuts them down to a single byproduct): here the whole ore byproduct chain is kept, with 2 output buses (8 slots) so that the 64-parallel cap does not run short on a single 4-slot bus.
 
-Cada controlador corre, sin tocar, un tipo de receta de GTM:
+Each controller runs an unchanged GTM recipe type:
 
-| Máquina | Tipo de GTM | EU/t de sus recetas de la cadena de mena | Escotillas de fluido |
+| Machine | GTM type | EU/t of its ore-chain recipes | Fluid hatches |
 |---|---|---|---|
-| Large Steam Macerator | `gtceu:macerator` | 2 siempre | ninguna |
-| Large Steam Thermal Centrifuge | `gtceu:thermal_centrifuge` | 30 (el valor por defecto del tipo) | ninguna |
-| Large Steam Ore Washer | `gtceu:ore_washer` | 4 o 16 (el valor por defecto) | 1 de entrada |
-| Large Steam Chemical Bath | `gtceu:chemical_bath` | 32 (justo LV) para el lavado de mena; sus baños de lingote caliente (960/128) quedan fuera | 1 de entrada, 1 de salida |
-| Large Steam Centrifuge | `gtceu:centrifuge` | 24 y 5 para las separaciones de polvo sucio/puro | 1 de entrada, 1-2 de salida |
+| Large Steam Macerator | `gtceu:macerator` | always 2 | none |
+| Large Steam Thermal Centrifuge | `gtceu:thermal_centrifuge` | 30 (the type's default value) | none |
+| Large Steam Ore Washer | `gtceu:ore_washer` | 4 or 16 (the default value) | 1 input |
+| Large Steam Chemical Bath | `gtceu:chemical_bath` | 32 (just LV) for ore washing; its hot ingot baths (960/128) are left out | 1 input, 1 output |
+| Large Steam Centrifuge | `gtceu:centrifuge` | 24 and 5 for the dirty and pure dust separations | 1 input, 1-2 output |
 
-Verificado en el código de GTM 7.5.3 (`data/recipe/generated/OreRecipeHandler.java`), no solo leído de memoria: las cinco tienen recetas reales de la cadena de subproducto de mena a 32 EU/t o menos, así que ninguna necesitó el escalón eléctrico a LV que se había dejado como salida de emergencia por si el tope de vapor bloqueaba el tipo entero.
+Verified in the GTM 7.5.3 code (`data/recipe/generated/OreRecipeHandler.java`), not just from memory: all five have real ore byproduct-chain recipes at 32 EU/t or less, so none needed the electric LV step that had been kept as an emergency exit in case the steam cap blocked the whole type.
 
-- **Controlador:** casco de vapor (herencia de la era), placas y marcos de acero y un "núcleo" propio de cada máquina — macerador: `gtceu:steam_grinder` (el pequeño de GTM, superado); lavadora: `gtceu:primitive_pump` (la bomba de GTM, superada); centrífuga/centrífuga térmica/baño: engranaje, varilla y tubería de bronce.
-- **Estructura:** una sola forma compartida por las cinco (104 huecos libres para piezas + casing, 20 de marco en las aristas, 1 de controlador), registrada una vez por `global.grindless.patterns` y reutilizada con distintos juegos de piezas según el tipo de receta.
+- **Controller:** steam casing (inherited from the era), steel plates and frames, and a "core" specific to each machine — macerator: `gtceu:steam_grinder` (GTM's small one, superseded); ore washer: `gtceu:primitive_pump` (GTM's Primitive Pump, superseded); centrifuge/thermal centrifuge/bath: bronze gear, rod and pipe.
+- **Structure:** one shape shared by all five (104 free cells for parts + casing, 20 frame cells on the edges, 1 controller cell), registered once through `global.grindless.patterns` and reused with different sets of parts depending on the recipe type.
 
-#### Decisiones tomadas (familia Large Steam, 2026-10-25)
+#### Decisions taken (Large Steam family, 2026-10-25)
 
-- **Las cinco se quedan en vapor, ninguna pasa a LV eléctrico.** La orden preveía ese escape si GTM bloqueaba centrífuga o centrífuga térmica por completo; no lo hace (tabla de arriba), así que las cinco siguen siendo `SteamParallelMultiblockMachine`.
-- **Sin `addOutputLimit`.** GTM se lo pone a su propio macerador/horno de vapor para quedarse con un solo subproducto; aquí se quita a propósito, porque el objetivo de la familia es la cadena de subproducto completa.
-- **"Acero y latón" es solo textura.** El latón de verdad pide cinc, que no llega hasta el tostador de sulfuros de LV (igual que el reloj del observatorio). La carcasa es acero de serie (`gtceu:solid_machine_casing`, ya usado por los multibloques eléctricos de LV); el latón es un tono dorado pintado a mano en el overlay.
-- **64 paralelos es el tope**, el mismo que fija la regla de "paralelos absurdos" de GTL en `docs/investigacion/leisure.md`. Ningún multibloque de la familia pasa de ahí.
+- **All five stay on steam; none moves to electric LV.** The plan foresaw that escape if GTM blocked the centrifuge or thermal centrifuge completely; it does not (table above), so all five are still `SteamParallelMultiblockMachine`.
+- **No `addOutputLimit`.** GTM sets it on its own Steam Grinder and Steam Oven to keep a single byproduct; here it is removed on purpose, because the family's goal is the full byproduct chain.
+- **"Steel and brass" is texture only.** Real brass needs zinc, which does not come until the LV sulfide roaster (like the observatory's clock). The casing is standard steel (`gtceu:solid_machine_casing`, already used by the electric LV multiblocks); the brass is a golden tone hand-painted into the overlay.
+- **64 parallels is the cap**, the same one GTL's "absurd parallels" rule sets in `docs/investigacion/leisure.md`. No multiblock in the family goes past that.
 
-### Familia pequeña de vapor — `gtceu:steam_forge_hammer/compressor/alloy_smelter/mixer/chemical_bath/ore_washer`
+### Small steam family — `gtceu:steam_forge_hammer/compressor/alloy_smelter/mixer/chemical_bath/ore_washer`
 
-Qué gana: los seis tipos de receta de GTM que la era de vapor no corría a escala. Sin esta familia, el martillo de forja, el compresor y la fundición de aleación solo llegan al tope de un bloque de vapor (`gtceu:lp_steam_*`/`hp_steam_*`); el mezclador, el baño químico y la lavadora de mineral no existen en absoluto hasta LV, porque GTM no les da ninguna máquina de vapor de un bloque. Idea de GregTech Leisure (`docs/investigacion/leisure.md` §4.2, GTLCore `LargeSteamParallelMultiblockMachine`), licencia no clara: solo el concepto (un multibloque de vapor pequeño con 8 paralelos sobre la receta de un bloque); estructura, texturas y código son nuestros (`steam/small_family.js`).
+What it gains: the six GTM recipe types that the steam era did not run at scale. Without this family, the forge hammer, the compressor and the alloy smelter only reach the cap of a single steam block (`gtceu:lp_steam_*`/`hp_steam_*`); the mixer, the chemical bath and the ore washer do not exist at all until LV, because GTM gives them no single-block steam machine. Idea from GregTech Leisure (`docs/investigacion/leisure.md` §4.2, GTLCore `LargeSteamParallelMultiblockMachine`), license unclear: only the concept (a small steam multiblock with 8 parallels on the single-block recipe); the structure, textures and code are ours (`steam/small_family.js`).
 
-Los seis comparten el mismo cubo hueco de 3×3×3 que usa el macerador/horno de vapor de serie de GTM (`SteamParallelMultiblockMachine`, con 8 paralelos en vez de los 4 de serie: duración ×1,5, EU/t ×(8/9) por paralelo hasta un tope de 32, nada por encima de LV). El martillo de forja, el compresor y la fundición de aleación solo llevan piezas de ítem (escotilla de vapor, bus de entrada, bus de salida) y su controlador se fabrica con la máquina de vapor de un bloque que sustituyen. El baño químico y la lavadora de mineral añaden una escotilla de entrada de fluido, siempre necesaria según sus propias recetas; el mezclador la deja opcional (0 a 2 de entrada, 0 a 1 de salida), porque el bronce, el latón, el invar y el resto de aleaciones en polvo no piden fluido, y la cola, el agua salada, el hormigón o el lodo de perforación sí. Ninguno de los tres tiene máquina de vapor de un bloque que sustituir, así que su controlador se fabrica solo con placas, engranajes, tubería y casco de vapor.
+All six share the same hollow 3×3×3 cube that GTM's standard Steam Grinder and Steam Oven use (`SteamParallelMultiblockMachine`, with 8 parallels instead of the standard 4: duration ×1.5, EU/t ×(8/9) per parallel up to a cap of 32, nothing above LV). The forge hammer, the compressor and the alloy smelter only take item parts (steam hatch, input bus, output bus), and their controller is built with the single-block steam machine they replace. The chemical bath and the ore washer add a fluid input hatch, which their own recipes always need; the mixer makes it optional (0 to 2 inputs, 0 to 1 output), because bronze, brass, invar and the other powder alloys do not need fluid, while glue, salt water, concrete and drilling fluid do. None of the three has a single-block steam machine to replace, so their controller is built only from plates, gears, pipe and steam casing.
 
-#### Decisiones tomadas (familia pequeña de vapor, 2026-10-25)
+#### Decisions taken (small steam family, 2026-10-25)
 
-- **Ningún tipo de receta nuevo.** Los seis corren el tipo de GTM de su máquina eléctrica (`forge_hammer`, `compressor`, `alloy_smelter`, `mixer`, `chemical_bath`, `ore_washer`): toda receta ya existente a LV o por debajo se vuelve usable en vapor sin tocar una sola receta nuestra.
-- **8 paralelos, no más.** Es el número que pide la idea de GTL para esta familia pequeña (`docs/investigacion/leisure.md` §4.2); la familia Large Steam, más grande, se queda con 64.
-- **La escotilla ULV de entrada de fluidos se puede fabricar a mano en vapor**, igual que la de salida que ya usaba la batería de coque: mismo hueco (GTM solo la da por el ensamblador, LV), misma receta de mano (casco ULV + vidrio + resina pegajosa).
-- **El mezclador deja las escotillas de fluido opcionales** porque la mitad de sus recetas (las aleaciones en polvo) no las necesita: la estructura más barata ya sirve para el bronce, y se amplía luego sin tocar el controlador.
-- **Un solo mecanismo probado en partida por la familia** (AGENTS.md): compresor (ítem) y baño químico (fluido) procesan en partida con 8 paralelos; martillo de forja, fundición de aleación, mezclador y lavadora de mineral solo se forman y se comprueban en estático, porque corren el mismo `SteamParallelMultiblockMachine` ya probado.
+- **No new recipe type.** All six run the GTM type of their electric machine (`forge_hammer`, `compressor`, `alloy_smelter`, `mixer`, `chemical_bath`, `ore_washer`): every existing recipe at LV or below becomes usable in steam without touching a single recipe of ours.
+- **8 parallels, no more.** That is the number GTL's idea asks for in this small family (`docs/investigacion/leisure.md` §4.2); the larger Large Steam family stays at 64.
+- **The ULV fluid input hatch can be hand-crafted in steam**, like the output one the coke battery already used: same gap (GTM only gives it through the assembler, LV), same hand recipe (ULV Machine Hull + glass + sticky resin).
+- **The mixer makes its fluid hatches optional** because half of its recipes (the powder alloys) do not need them: the cheapest structure already works for bronze, and it can be extended later without touching the controller.
+- **A single mechanism tested in game for the family** (AGENTS.md): the compressor (item) and the chemical bath (fluid) process in game with 8 parallels; the forge hammer, alloy smelter, mixer and ore washer are only formed and checked statically, because they run the same, already tested `SteamParallelMultiblockMachine`.
 
-- La piedra de la perforadora es inerte y se puede tirar. En LV puede ir al lodo de perforación y en MV a la centrífuga, como hace GTM.
-- Los plantones sobrantes van a compostaje (bolas de planta en LV) o a biomasa más adelante.
-- La creosota del horno de coque es combustible o madera tratada. No se inventa ninguna receta solo para "aprovecharla".
-- La creosota de la batería de coque es la misma: combustible de caldera o madera tratada.
-- La ceniza del alto horno de vapor es la escoria: la cal del fundente y la ceniza del coque. Es inerte y se puede tirar (la papelera de Trash Cans ya está en vapor). En LV, el reactor químico de GTM hace fertilizante con calcita + 3 de ceniza + agua, y la centrífuga la separa en cal viva, magnesia, potasa, carbonato de sodio y algo de hematita.
-- Los gases del tragante del alto horno de vapor (CO₂ y CO) salen por el bajante, como en el alto horno primitivo.
-- El gas de hulla de la batería es inflamable y venenoso: se guarda en tanques (bidones o un tanque multibloque) y, si su escotilla se llena, la batería se para.
-  - En LV alimenta la turbina de gas (96 EU/mB) y la destiladora (alquitrán, amoníaco, etilbenceno o CO₂, con un poco de polvo de coque de vuelta).
-  - En MV va a la biorrefinería y a la torre de destilación de GTM.
-  - En vapor no se quema: no se añade ninguna receta de caldera que no tenga GTM.
+- The drill's stone is inert and can be thrown away. In LV it can go into drilling fluid, and in MV into the centrifuge, as GTM does.
+- Spare saplings go to compost (plant balls in LV) or to biomass later.
+- The coke oven's creosote is fuel or treated wood. No recipe is invented just to "make use of it."
+- The coke battery's creosote is the same: boiler fuel or treated wood.
+- The steam blast furnace's ash is slag: the lime from the flux and the ash from the coke. It is inert and can be thrown away (the Trash Cans bin is already available in steam). In LV, GTM's chemical reactor makes fertilizer from calcite + 3 ash + water, and the centrifuge separates it into quicklime, magnesia, potash, sodium carbonate and some hematite.
+- The gases from the steam blast furnace's throat (CO₂ and CO) leave through the downcomer, as in the primitive blast furnace.
+- The coke battery's coal gas is flammable and poisonous: it is kept in tanks (drums or a multiblock tank), and if its hatch fills up, the battery stops.
+  - In LV it feeds the gas turbine (96 EU/mB) and the distillery (coal tar, ammonia, ethylbenzene or CO₂, with some coke dust returned).
+  - In MV it goes to the biorefinery and GTM's distillation tower.
+  - In steam it is not burned: no boiler recipe is added that GTM does not have.
 
-## Dimensiones de construcción
+## Build dimensions
 
-Desde la primera misión se pueden ganar dos llaves gratis:
+From the first mission you can earn two free keys:
 
-- **Llave del Vacío** (`grindless:void_key`): lleva a `grindless:void`, una dimensión vacía. La primera vez crea una plataforma pequeña bajo los pies.
-- **Llave del Llano** (`grindless:flat_key`): lleva a `grindless:flat`, una dimensión totalmente llana con capas de piedra debajo, para construir la fábrica en terreno plano. Si GTM lo permite, también tendrá vetas en el subsuelo.
+- **Void Key** (`grindless:void_key`): leads to `grindless:void`, an empty dimension. The first time, it creates a small platform under your feet.
+- **Flat Key** (`grindless:flat_key`): leads to `grindless:flat`, a fully flat dimension with layers of stone below, for building the factory on level ground. If GTM allows it, it will also have veins underground.
 
-Usar la llave otra vez devuelve al Overworld, al punto desde el que se salió. Las llaves también se pueden craftear barato por si se pierden.
+Using the key again returns you to the Overworld, to the point you left from. The keys can also be crafted cheaply in case they are lost.
 
-## Misiones
+## Missions
 
-El libro está en inglés y sigue esta ruta. Su estructura, los tipos de tarea, la disposición y las recompensas se toman de los libros de misiones de otros packs de GTM. Si la licencia lo permite, se adaptan sus textos con atribución.
+The quest book is in English and follows this route. Its structure, task types, layout and rewards are taken from the quest books of other GTM packs. If the license allows it, their texts are adapted with attribution.
 
-## Puerta de salida
+## Exit gate
 
-Se sale de la era cuando hay acero, una turbina de vapor LV que genera energía de forma estable y el primer circuito LV. La validación estática comprueba que coque, bronce, vapor, acero, turbina LV, circuito LV y casco LV se pueden fabricar sin comandos, partiendo solo de lo que da el mundo.
+You leave the era once you have steel, an LV steam turbine that generates power steadily, and the first LV circuit. The static validation checks that coke, bronze, steam, steel, LV turbine, LV circuit and LV Machine Hull can be made without commands, starting only from what the world provides.
 
-## Decisiones tomadas: alto horno de vapor y batería de coque (2026-10-24)
+## Decisions taken: steam blast furnace and coke battery (2026-10-24)
 
-- **El alto horno de vapor gana pasos y velocidad, no rendimiento.** Da 1 acero por mena, como fundirla y pasarla por el alto horno primitivo, y 1 coque por acero. Quien macera antes saca 2, igual que en GT.
-- **La batería gana rendimiento sin pasar a GTM.** Coque 1:1, la creosota del horno de coque y la mitad del gas del horno de pirólisis de MV. Por carbón queda entre el horno de coque y el de pirólisis.
-- **La escotilla ULV de salida de fluidos se puede fabricar a mano en vapor.** No hay otra forma de sacar fluidos de un multibloque de vapor. La perforadora y el invernadero de vapor no cambian de forma: siguen sin agua ni fertilizante.
-- **La escoria es la ceniza de GTM.** No se crea un objeto nuevo. La ceniza de GTM ya es cal, magnesia y potasa, y tiene destino en LV.
-- **El gas de hulla espera a LV.** En vapor se guarda en tanques. No se le da receta de caldera, porque GTM no la tiene.
-- **Los dos trabajan con 4 paralelos**, como la perforadora y el invernadero de vapor.
-- **El controlador se fabrica con la máquina de GTM que sustituye:** el alto horno primitivo, y dos hornos de coque. El alto horno de vapor pide además acero, así que el primitivo sigue siendo el arranque del acero.
-- **El fundente es calcita en bruto, en polvo o en bloque.** La pirita queda fuera del alto horno: es un sulfuro y antes hay que tostarla (LV).
+- **The steam blast furnace gains steps and speed, not yield.** It gives 1 steel per ore, the same as smelting it and running it through the primitive blast furnace, and 1 coke per steel. Whoever macerates first gets 2, as in GT.
+- **The battery gains yield without using a GTM machine.** Coke 1:1, the coke oven's creosote and half of the MV pyrolyse oven's gas. Per coal, it lands between the coke oven and the pyrolyse oven.
+- **The ULV fluid output hatch can be hand-crafted in steam.** There is no other way to pull fluids out of a steam multiblock. The drill and the steam greenhouse do not change shape: they still have no water or fertilizer.
+- **The slag is GTM's ash.** No new item is created. GTM's ash is already lime, magnesia and potash, and it has a use in LV.
+- **Coal gas waits for LV.** In steam it is stored in tanks. It gets no boiler recipe, because GTM does not have one.
+- **Both run with 4 parallels**, like the steam vein drill and the steam greenhouse.
+- **The controller is built with the GTM machine it replaces:** the primitive blast furnace, and two coke ovens. The steam blast furnace also requires steel, so the primitive one is still how steel gets started.
+- **The flux is raw, dust or block calcite.** Pyrite is left out of the blast furnace: it is a sulfide and must be roasted first (LV).

@@ -138,116 +138,116 @@ Orbital Catcher (receives the Mass Driver capsules), Drop Pod Bay and Landing Be
 
 ---
 
-## 3. Megaestructuras y final
+## 3. Megastructures and ending
 
 ### 3.1 Kardashev
 
-Tipo I es la energía de un planeta (T11), Tipo II la de una estrella (T12) y Tipo III la de una galaxia (T14). Son hitos con nombre: «A Flux Unit is not a physical watt» (R:258-261, D:3584-3587).
+Type I is the energy of a planet (T11), Type II that of a star (T12), and Type III that of a galaxy (T14). They are named milestones: «A Flux Unit is not a physical watt» (R:258-261, D:3584-3587).
 
-### 3.2 Megaestructuras y proyectos firma
+### 3.2 Megastructures and signature projects
 
-| Proyecto | Tier | Qué hace | Por qué no es solo una máquina más grande |
+| Project | Tier | What it does | Why it is not just a bigger machine |
 |---|---|---|---|
-| Ground Array | Sin tier | Anillo 3×3 que guarda 6 553 600 FU | Prototipo retirado hasta que la ruta lo coloque (D:3978-3980, D:4025-4039) |
-| Assembly Field | T10 | Materializa un plano entero | Estructuras medidas en chunks (R:616-617, M:598) |
-| Space Elevator | T11 | Enlace permanente suelo-órbita | La órbita pasa a ser parte de la fábrica (M:773) |
-| Horizon Gate | T11 | Par de anillos | «a milestone on the way, not the victory» (D:3590-3591) |
-| Planetary Engine | T11–T12 | Control de órbita a largo plazo | Cambia la insolación y lo que puede procesar una colonia (M:779) |
-| Dyson Network | T12 | Captación estelar | Tipo II escalando un sistema orbital, «not one trophy block» (M:774) |
-| Stellar Forge | T12 | Proceso a temperatura y presión estelares | Materiales que no aguanta ninguna cámara terrestre u orbital (M:775) |
-| Causal Buffer | T13 | Guarda estado de proceso, no objetos | Lotes grandes migran entre sistemas (M:776) |
-| Supraluminal Station | T13 | Viaje al Drift | Transporte interestelar (M:777) |
-| Singularity Reactor | T14 | Microsingularidad alimentada con Matter | El límite pasa a ser llevar y coordinar la energía. Apoya el Tipo III y la ruta final, pero no es la victoria (R:1102-1106, M:778) |
-| Infraestructura del horizonte | T15 | Aproximación, blindaje y extracción postgame | Llegar es la victoria; acreción y energía rotacional siguen siendo útiles después (M:780) |
+| Ground Array | No tier | 3×3 ring that stores 6 553 600 FU | Prototype retired until the route places it (D:3978-3980, D:4025-4039) |
+| Assembly Field | T10 | Materializes a whole blueprint | Structures measured in chunks (R:616-617, M:598) |
+| Space Elevator | T11 | Permanent ground-to-orbit link | Orbit becomes part of the factory (M:773) |
+| Horizon Gate | T11 | Pair of rings | «a milestone on the way, not the victory» (D:3590-3591) |
+| Planetary Engine | T11–T12 | Long-term orbit control | Changes insolation and what a colony can process (M:779) |
+| Dyson Network | T12 | Stellar capture | Type II scaling up an orbital system, «not one trophy block» (M:774) |
+| Stellar Forge | T12 | Process at stellar temperature and pressure | Materials that no terrestrial or orbital chamber can withstand (M:775) |
+| Causal Buffer | T13 | Stores process state, not objects | Large batches migrate between systems (M:776) |
+| Supraluminal Station | T13 | Trip to the Drift | Interstellar transport (M:777) |
+| Singularity Reactor | T14 | Microsingularity fed with Matter | The limit becomes carrying and coordinating energy. It supports Type III and the final route, but it is not the victory (R:1102-1106, M:778) |
+| Horizon infrastructure | T15 | Approach, shielding and postgame extraction | Arriving is the victory; accretion and rotational energy stay useful afterwards (M:780) |
 
-Antes de ADR-0107 el Dyson era un «Dyson Collector» solar en anillo orbital a F8–F9, «the source that outruns a singularity». La Stellar Forge era «necessarily orbital» y el Planetary Engine «moves a colony» (D:3988-3993).
+Before ADR-0107 the Dyson was a solar «Dyson Collector» in an orbital ring at F8–F9, «the source that outruns a singularity». The Stellar Forge was «necessarily orbital» and the Planetary Engine «moves a colony» (D:3988-3993).
 
-### 3.3 Energía tardía, antimateria y autorreplicación
+### 3.3 Late-game energy, antimatter and self-replication
 
-- **Energía.** F10 da 8 388 608 FU/t y F15 8 589 934 592 FU/t (R:1347-1352). F15 es el último nombre. Tras llegar, la infraestructura del agujero negro escala dentro de T15 hasta `Long.MAX_VALUE` FU/t, sin F16–F30 (R:1370-1372, D:4892-4897).
-- **Antimateria.** Primero sale del acelerador en T8 (R:1093). En T14 es industrial, con medios de aniquilación (P:389), y en T15 hay bucles de servicio de antimateria (P:390).
-- **Contención.** El helio líquido sirve «later singularity containment» (P:345). El Containment Ring pasa a «particle, singularity and horizon systems later» (R:1674).
-- **Autorreplicación.** La expansión galáctica es «abstract and self-replicating» y T14 trae «self-replicating probes» (P:401-402, P:389). Pero ADR-0188 corrige: «The earlier self-replicating-factory interpretation overextended automation» (D:9121). Las máquinas normales se montan a mano (R:1575-1578, M:133). Lo que se replica son sondas y expansión abstracta, no máquinas.
-- **Navegación final y blindaje.** Blindaje relativista y estructuras contra la acreción; navegación galáctica, tiempo y telemetría del horizonte (P:390, R:1467, R:2276).
+- **Energy.** F10 gives 8 388 608 FU/t and F15 8 589 934 592 FU/t (R:1347-1352). F15 is the last name. After arriving, the black hole infrastructure scales within T15 up to `Long.MAX_VALUE` FU/t, with no F16–F30 (R:1370-1372, D:4892-4897).
+- **Antimatter.** It first comes out of the accelerator in T8 (R:1093). In T14 it is industrial, with annihilation media (P:389), and in T15 there are antimatter service loops (P:390).
+- **Containment.** Liquid helium serves «later singularity containment» (P:345). The Containment Ring goes to «particle, singularity and horizon systems later» (R:1674).
+- **Self-replication.** Galactic expansion is «abstract and self-replicating» and T14 brings «self-replicating probes» (P:401-402, P:389). But ADR-0188 corrects this: «The earlier self-replicating-factory interpretation overextended automation» (D:9121). Normal machines are assembled by hand (R:1575-1578, M:133). What replicates is probes and abstract expansion, not machines.
+- **Final navigation and shielding.** Relativistic shielding and structures against accretion; galactic navigation, time and horizon telemetry (P:390, R:1467, R:2276).
 
-### 3.4 Llegar, y lo que viene después
+### 3.4 Arriving, and what comes after
 
-- **Objetivo.** «The goal is to reach the black hole at the centre of the Milky Way in T15. Arriving is the victory, and the way there is the station, not a link» (R:269-270).
-- **Un final finito.** El interior es «a finite finale» (D:3593). Se rechazan «An empty "you arrived" anecdote» y «An endless second game inside the hole» (D:3637-3638).
-- **Postgame T15.** «accretion resources, rotational-energy extraction and the climb toward the absolute Flux rate» (D:4947-4949). No es un tier más ni hace falta para ganar (R:271-272). Se rechazó explícitamente «Making black-hole extraction the victory condition» (D:4976-4977).
-- **El atajo que se quitó.** Con recetas Industrial se llegaba al centro en T2, saltándose T3–T6 y todos los Kardashev. «A survival victory at T2 makes the actual campaign optional.» (D:4846-4849, D:4974-4975).
-- **⚑ GG.** Nuestro final cambia «llegar = victoria» por llegar y detonar el agujero negro, y con él el universo. Sigue siendo un final finito, ni vacío ni infinito. Lectura posible, que no está en Grindless: la explotación del agujero negro (acreción y energía rotacional) deja de ser postgame y pasa a ser el camino hacia la detonación.
+- **Goal.** «The goal is to reach the black hole at the centre of the Milky Way in T15. Arriving is the victory, and the way there is the station, not a link» (R:269-270).
+- **A finite ending.** The interior is «a finite finale» (D:3593). «An empty "you arrived" anecdote» and «An endless second game inside the hole» are rejected (D:3637-3638).
+- **Postgame T15.** «accretion resources, rotational-energy extraction and the climb toward the absolute Flux rate» (D:4947-4949). It is not one more tier, and you do not need it to win (R:271-272). «Making black-hole extraction the victory condition» was explicitly rejected (D:4976-4977).
+- **The shortcut that was removed.** With Industrial recipes you could reach the centre at T2, skipping T3–T6 and all the Kardashev levels. «A survival victory at T2 makes the actual campaign optional.» (D:4846-4849, D:4974-4975).
+- **⚑ GG.** Our ending replaces «arriving = victory» with arriving at and detonating the black hole, and with it the universe. It is still a finite ending, neither empty nor infinite. A possible reading that is not in Grindless: exploiting the black hole (accretion and rotational energy) stops being postgame and becomes the path to the detonation.
 
 ---
 
-## 4. Principios de diseño para el espacio
+## 4. Design principles for space
 
-- **Recompensa, no trofeo.** «going to space must be a payoff, not a trophy»: cada objeto orbital trabaja para la base (R:1126-1127).
-- **El espacio abre el juego.** «Factorio launches a rocket and the game ends. Here it is where the game opens up.» (R:1122).
-- **Sin tareas de mantenimiento.** «no orbital decay, no refuelling, no maintenance minigame» (R:1147-1148). «Orbital upkeep would be a recurring chore» (D:441-442).
-- **Infraestructura, no evento.** El Mass Driver «converts space from an event into infrastructure» (R:1140-1141).
-- **Matar el viaje repetido.** «The Horizon Gate is what kills the commute» (R:1141-1142). La telepresencia «deletes the commute» (R:1244). «gates remove repeated travel» (R:1482).
-- **Personas por la puerta, carga por el lanzador.** «Presence is the gate; bulk is the driver.» (R:1306). «People cheap, bulk expensive» (D:2742).
-- **La puerta se gana.** El anillo lejano se entrega una vez: «That is the factory payoff, not a free portal.» (D:2739-2741).
-- **Nunca un mundo para minar.** «A Horizon Gate never opens a world whose only job is "more ore."» (D:2745-2746).
-- **Planetas como repartos.** «Planets are not reskins» (R:1209). Nada de menas únicas sin tag (D:2752-2753).
-- **El sitio es una decisión.** «*where* you build is a genuine engineering decision» (R:1213-1214).
-- **Colonias abstractas.** «Colonies are simulated abstractly, not tick-by-tick» (R:1259). «Force-loading remote bases is how servers die» (D:418).
-- **Ritmo de atención.** «a colony wants attention every few hours, not every few minutes», y esa atención se puede automatizar (R:1268-1270).
-- **Fallar cuesta material, no progreso.** «Failure costs materials, never progress.» (R:1238-1239). Los reactores se apagan en vez de explotar (R:1067-1070, R:1082-1083).
-- **Volver es gratis.** La vuelta no consume para no dejar al jugador tirado sin red (D:4293-4294, D:4394-4395).
-- **La órbita es necesaria.** «a manufacturing necessity rather than a victory lap» (M:698).
-- **Nada de trofeos.** «Every endgame system has a real use. Nothing here is a trophy block.» (M:787-788).
-- **Siempre hay que construir.** «Post-scarcity in *materials* is not post-scarcity in *throughput*.» (M:786).
-- **Física, no máquinas.** «at the end, the factory stops being made of machines and starts being made of physics.» (M:763-764).
-- **Complejidad sí, tareas no.** «Complexity rises; chores do not.» (P:402). «Solving a larger problem is progression; repeating a solved action is grind.» (D:4938-4939).
-- **Cada automatización quita una repetición.** El extractor quita picar, el Assembler el crafteo, los drones colocar, los satélites prospectar, las puertas viajar y las colonias tickear lejos (R:1480-1483).
-- **Sin atajos.** «A survival victory at T2 makes the actual campaign optional.» (D:4974-4975).
-- **Misiones que no bloquean.** El libro sigue la ruta y nunca bloquea una máquina (R:280-281, D:4547-4553).
-- **Ritmo antiguo.** «orbit is 25+ hours in» (R:2007), escrito para la escalera vieja de siete tiers.
+- **Reward, not trophy.** «going to space must be a payoff, not a trophy»: every orbital object works for the base (R:1126-1127).
+- **Space opens up the game.** «Factorio launches a rocket and the game ends. Here it is where the game opens up.» (R:1122).
+- **No maintenance chores.** «no orbital decay, no refuelling, no maintenance minigame» (R:1147-1148). «Orbital upkeep would be a recurring chore» (D:441-442).
+- **Infrastructure, not an event.** The Mass Driver «converts space from an event into infrastructure» (R:1140-1141).
+- **Killing repeated travel.** «The Horizon Gate is what kills the commute» (R:1141-1142). Telepresence «deletes the commute» (R:1244). «gates remove repeated travel» (R:1482).
+- **People through the gate, cargo through the launcher.** «Presence is the gate; bulk is the driver.» (R:1306). «People cheap, bulk expensive» (D:2742).
+- **The gate is earned.** The far ring is handed over once: «That is the factory payoff, not a free portal.» (D:2739-2741).
+- **Never a world just to mine.** «A Horizon Gate never opens a world whose only job is "more ore."» (D:2745-2746).
+- **Planets as resource distributions.** «Planets are not reskins» (R:1209). No unique ores without a tag (D:2752-2753).
+- **Location is a decision.** «*where* you build is a genuine engineering decision» (R:1213-1214).
+- **Abstract colonies.** «Colonies are simulated abstractly, not tick-by-tick» (R:1259). «Force-loading remote bases is how servers die» (D:418).
+- **Attention rhythm.** «a colony wants attention every few hours, not every few minutes», and that attention can be automated (R:1268-1270).
+- **Failure costs material, not progress.** «Failure costs materials, never progress.» (R:1238-1239). Reactors shut down instead of exploding (R:1067-1070, R:1082-1083).
+- **Returning is free.** The return costs nothing, so the player is not left stranded without a network (D:4293-4294, D:4394-4395).
+- **Orbit is necessary.** «a manufacturing necessity rather than a victory lap» (M:698).
+- **No trophies.** «Every endgame system has a real use. Nothing here is a trophy block.» (M:787-788).
+- **You always have to build.** «Post-scarcity in *materials* is not post-scarcity in *throughput*.» (M:786).
+- **Physics, not machines.** «at the end, the factory stops being made of machines and starts being made of physics.» (M:763-764).
+- **Complexity yes, chores no.** «Complexity rises; chores do not.» (P:402). «Solving a larger problem is progression; repeating a solved action is grind.» (D:4938-4939).
+- **Each automation removes a repetition.** The extractor removes hand mining, the Assembler removes crafting, the drones remove placing, the satellites remove prospecting, the gates remove travel and the colonies remove remote ticking (R:1480-1483).
+- **No shortcuts.** «A survival victory at T2 makes the actual campaign optional.» (D:4974-4975).
+- **Quests that do not block.** The book follows the route and never blocks a machine (R:280-281, D:4547-4553).
+- **Old pacing.** «orbit is 25+ hours in» (R:2007), written for the old seven-tier ladder.
 
 ---
 
-## 5. Qué pasa a un pack de GregTech y qué no
+## 5. What happens to a GregTech pack, and what does not
 
-### 5.1 Sistemas del mod Grindless que no pasan
+### 5.1 Grindless mod systems that do not carry over
 
-| Sistema | Dónde | Por qué no pasa | Qué queda como idea o pieza GT |
+| System | Where | Why it does not carry over | What stays as an idea or GT piece |
 |---|---|---|---|
-| Flux Network: pilones, FU, apagones proporcionales, infravoltaje suave | R:295-347, R:1313-1413 | GT tiene EU, cables y sus propias reglas de voltaje | La escalera 8×4ⁿ, que ya es la de GT |
-| Control Matrices, cinco arquitecturas, Research Station | R:1415-1483 | GT ya escalona con circuitos y voltaje | Cada tier acaba en un objeto de salida, y la tecnología nueva abarata la vieja (como las generaciones de circuitos de GT) |
-| Vetas por chunk, agotamiento, Deep Bore, Deep Core Drill | R:349-446 | GT tiene sus vetas y perforadoras | El beat «el satélite te da el mapa de vetas» |
-| Replicación de materia: Scanner, Deconstructor, Replicator, Matter Condenser | R:448-482, R:1827-1834 | Sistema propio | Que sobre material no significa que sobre producción (M:784-786) |
-| Cintas, drones, Operator Drones, Flux Conduits, Phase Network | R:484-788 | GG usa tuberías de GT y AE2 | Multibloques cada vez mayores según la era (M:593-599) |
-| Fluidos con temperatura y presión | R:790-910 | Otro modelo de fluidos | — |
-| Exotrajes modulares y Arc Reactor en miniatura | R:935-984 | GT tiene sus armaduras | «The Exosuit becomes life support» (R:1307). GCYR trae un Oxygen Spreader (S:gtm-src/GCYR_Machines.java:66) |
-| Resonance, Aberraciones, torretas y armas | R:986-1046 | Sistema propio del mod | Llevar la industria sucia a la órbita (R:1176-1178), solo si GG tuviera algo parecido |
-| Multibloques paramétricos simulados antes de construir | M:567-617 | GT usa patrones fijos | El tamaño que crece por era |
-| Libro de misiones propio | D:4542-4553 | GG usa FTB Quests | Que no bloquee nada |
-| Registro por tags e integración con mods espaciales | R:1925-1990 | Infraestructura del mod | «Si hay mod espacial, usa sus planetas» (R:1189-1193): GCYR ya trae vetas en la Luna y Marte (S:gtm-src/GCYR_Ores.java:22-27, 41-48) |
-| Telepresencia, Proxy Frame, Colony Core simulado, Horizon Gate, Interplanetary Router, drop pods | R:1216-1295 | Necesitan código propio; no salen de piezas GT o KubeJS sin más | Los beats de §5.2: se rehacen o se dejan fuera |
-| Peajes en FU, enlaces y cohete que sube al techo | D:4127-4134, D:4282-4296 | Números y bloques del mod | Pagar solo la ida y volver gratis |
+| Flux Network: pylons, FU, proportional blackouts, soft undervoltage | R:295-347, R:1313-1413 | GT has EU, cables and its own voltage rules | The 8×4ⁿ ladder, which is already GT's |
+| Control Matrices, five architectures, Research Station | R:1415-1483 | GT already scales with circuits and voltage | Each tier ends in an output item, and new technology makes the old one cheaper (like GT's circuit generations) |
+| Veins per chunk, depletion, Deep Bore, Deep Core Drill | R:349-446 | GT has its own veins and drills | The beat where the satellite gives you the vein map |
+| Matter replication: Scanner, Deconstructor, Replicator, Matter Condenser | R:448-482, R:1827-1834 | Its own system | Surplus material does not mean surplus production (M:784-786) |
+| Belts, drones, Operator Drones, Flux Conduits, Phase Network | R:484-788 | GG uses GT pipes and AE2 | Multiblocks that grow with each era (M:593-599) |
+| Fluids with temperature and pressure | R:790-910 | A different fluid model | — |
+| Modular exosuits and miniature Arc Reactor | R:935-984 | GT has its own armor | «The Exosuit becomes life support» (R:1307). GCYR ships an Oxygen Spreader (S:gtm-src/GCYR_Machines.java:66) |
+| Resonance, Aberrations, turrets and weapons | R:986-1046 | The mod's own system | Taking dirty industry to orbit (R:1176-1178), only if GG had something similar |
+| Parametric multiblocks simulated before building | M:567-617 | GT uses fixed patterns | The size that grows with each era |
+| Own quest book | D:4542-4553 | GG uses FTB Quests | That it blocks nothing |
+| Registration by tags and integration with space mods | R:1925-1990 | The mod's infrastructure | «If a space mod is already installed, Grindless uses its planets» (R:1189-1193): GCYR already ships veins on the Moon and Mars (S:gtm-src/GCYR_Ores.java:22-27, 41-48) |
+| Telepresence, Proxy Frame, simulated Colony Core, Horizon Gate, Interplanetary Router, drop pods | R:1216-1295 | They need their own code; they do not come out of GT parts or KubeJS alone | The beats of §5.2: rebuilt or left out |
+| FU tolls, links and the rocket that rises to the ceiling | D:4127-4134, D:4282-4296 | The mod's numbers and blocks | Pay only the outbound trip and return for free |
 
-### 5.2 Lo que sí pasa: campaña, beats e ideas
+### 5.2 What does carry over: campaign, beats and ideas
 
-- **El arco.** Los 16 tiers con nombre y tema, y las cuatro líneas que convergen en un objeto de salida (R:1450-1467, P:373-390).
-- **Los hitos.** Kardashev I en Planetary, II en Stellar y III en Galactic (R:260-261), con las megaestructuras de §3.2 entre medias.
-- **Los lugares y sus recursos.** Luna con helio-3, los seis mundos con su firma, el Drift vacío y Sagitario sellado (§2).
-- **La escalera de transporte.** Cohete, Mass Driver, estación, ascensor, puerta, estación supralumínica y ruta final (§2.1).
-- **Los satélites.** Mapa, energía radiada, relé, centinela, logística y sondeo lejano, sin mantenimiento (§2.7).
-- **Las cuatro formas de explotar un mundo**, como beats (§2.8).
-- **La industria orbital como razón para subir:** vacío, gravedad cero y frío (§2.10). Las recetas de GTM admiten `.dimension(...)` (S:gtm-src/ChemistryRecipes.java:102), así que un proceso puede exigir la órbita y un recurso su mundo.
-- **Piezas GCYR que ya cubren beats.** Dyson System Controller (S:gtm-src/GCYR_Machines.java:177), Space Elevator (:204), Space Station Packager (:125) y Drone Hangar (:248). Ojo: GCYR está congelado hasta rediseñar el espacio (GG:DECISIONS.md:50).
-- **Las dimensiones del prototipo.** Son datapacks planos y MIT del propio usuario (RES/data/grindless/dimension/{luna,drift,sagittarius}.json). Se pueden portar a `pack/kubejs/data/` registrando sus bloques con KubeJS y rehaciendo la sala de Sagitario como script (J/centre/CentreChamber.java). La atribución va en `CREDITS.md`.
-- **Los principios de §4.**
+- **The arc.** The 16 named tiers with their themes, and the four lines that converge on an output item (R:1450-1467, P:373-390).
+- **The milestones.** Kardashev I at Planetary, II at Stellar and III at Galactic (R:260-261), with the megastructures of §3.2 in between.
+- **The places and their resources.** The Moon with helium-3, the six worlds with their signatures, the empty Drift and the sealed Sagittarius (§2).
+- **The transport ladder.** Rocket, Mass Driver, station, elevator, gate, supraluminal station and final route (§2.1).
+- **The satellites.** Map, beamed energy, relay, sentinel, logistics and remote survey, with no maintenance (§2.7).
+- **The four ways to exploit a world**, as beats (§2.8).
+- **Orbital industry as a reason to go up:** vacuum, zero gravity and cold (§2.10). GTM recipes accept `.dimension(...)` (S:gtm-src/ChemistryRecipes.java:102), so a process can require orbit and a resource can require its world.
+- **GCYR pieces that already cover beats.** Dyson System Controller (S:gtm-src/GCYR_Machines.java:177), Space Elevator (:204), Space Station Packager (:125) and Drone Hangar (:248). Note: GCYR is frozen until the space design is reworked (GG:DECISIONS.md:50).
+- **The prototype dimensions.** They are flat, MIT-licensed datapacks by the user (RES/data/grindless/dimension/{luna,drift,sagittarius}.json). They can be ported to `pack/kubejs/data/` by registering their blocks with KubeJS and rebuilding the Sagittarius room as a script (J/centre/CentreChamber.java). The attribution goes in `CREDITS.md`.
+- **The principles of §4.**
 
-### 5.3 Contradicciones y huecos en la fuente
+### 5.3 Contradictions and gaps in the source
 
-- **Planetas.** R:1189-1195 y R:1979-1983 dicen «si hay mod espacial, usa sus planetas». ADR-0088 lo invierte («Planets are original», D:3588-3590), y R:1974-1977 deja esas filas como diseño en espera.
-- **Horizon Gate.** ADR-0068 la ponía en T6 (D:2735); ADR-0107 la pasa a T11 (D:4941-4945, R:1137).
-- **Nombre de la Matrix.** El Launch Pad pide «an Orbital Matrix» (R:1133), pero la arquitectura de T10 se llama Photonic (R:1436).
-- **Dyson.** Collector a F8–F9 antes de ADR-0107 (D:3988-3990) frente a la Dyson Network de T12 (M:774).
-- **Autorreplicación.** P:389, P:401-402 y R:1473 la mantienen; ADR-0188 la recorta para las máquinas normales (D:9121, R:1575-1578).
-- **Luna.** Tiene peligro de vacío en el diseño (R:1199), pero en el prototipo no hay daño de vacío ni soporte vital (D:4116-4117).
-- **Agujero negro.** El interior debe ser «a finite finale» (D:3593), pero la sala actual es solo un destino de prueba (D:4949-4950).
-- **Abierto en la fuente.** El formato de dirección y el coste de la Horizon Gate (M:854-856). También dónde se cruza la línea orbital con el final de GT: «Grindless should complement rather than duplicate» (M:852-853).
+- **Planets.** R:1189-1195 and R:1979-1983 say «If a space mod is already installed, Grindless uses its planets». ADR-0088 reverses this («Planets are original», D:3588-3590), and R:1974-1977 keeps those rows as design on hold.
+- **Horizon Gate.** ADR-0068 put it in T6 (D:2735); ADR-0107 moves it to T11 (D:4941-4945, R:1137).
+- **Matrix name.** The Launch Pad asks for «an Orbital Matrix» (R:1133), but the T10 architecture is called Photonic (R:1436).
+- **Dyson.** Collector at F8–F9 before ADR-0107 (D:3988-3990), versus the T12 Dyson Network (M:774).
+- **Self-replication.** P:389, P:401-402 and R:1473 keep it; ADR-0188 trims it for normal machines (D:9121, R:1575-1578).
+- **Moon.** The design has a vacuum hazard (R:1199), but the prototype has no vacuum damage or life support (D:4116-4117).
+- **Black hole.** The interior must be «a finite finale» (D:3593), but the current room is only a test destination (D:4949-4950).
+- **Open in the source.** The address format and the cost of the Horizon Gate (M:854-856). Also where the orbital line crosses the GT ending: «Grindless should complement rather than duplicate» (M:852-853).
