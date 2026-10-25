@@ -82,9 +82,9 @@ export function structureSelectors(desc, abilityItems, hasItem) {
     seen.add(key);
     selectors.push({ anyOf, label });
   };
-  const used = new Set();
-  for (const rows of desc.slices || []) for (const row of rows) for (const ch of String(row)) if (ch !== ' ') used.add(ch);
-  for (const ch of used) {
+  const cells = new Map();
+  for (const rows of desc.slices || []) for (const row of rows) for (const ch of String(row)) if (ch !== ' ') cells.set(ch, (cells.get(ch) || 0) + 1);
+  for (const [ch, cellCount] of cells) {
     const sym = (desc.symbols || {})[ch];
     if (!sym) {
       problems.push(`the pattern uses symbol «${ch}» with no description`);
@@ -95,22 +95,28 @@ export function structureSelectors(desc, abilityItems, hasItem) {
       add(itemsOf(sym, abilityItems, hasItem, problems), labelOf(sym));
       continue;
     }
-    // "casing OR part": parts with a min/exact limit are mandatory; the other options fill the remaining cells
-    const filler = [];
-    const fillerLabels = [];
+    // "casing OR part": parts with a min/exact limit are mandatory; the other options fill the remaining cells, and are
+    // only needed when the mandatory ones can't fill every cell of the symbol. A casing with a minimum and no maximum fills
+    // the rest, so an optional part next to it (IV-B6's parallel hatch, a spare output hatch) stays optional.
+    const fillerOpts = [];
+    let requiredCap = 0;
     const walk = (opts) => {
       for (const o of opts) {
         if (o.kind === 'oneOf') walk(o.options || []);
         else if (SKIP.has(o.kind)) continue;
-        else if (requiredByLimits(o)) add(itemsOf(o, abilityItems, hasItem, problems), labelOf(o));
-        else if (!(o.limits && o.limits.max === 0)) {
-          filler.push(...itemsOf(o, abilityItems, hasItem, problems));
-          fillerLabels.push(labelOf(o));
-        }
+        else if (requiredByLimits(o)) {
+          add(itemsOf(o, abilityItems, hasItem, problems), labelOf(o));
+          const l = o.limits || {};
+          const cap = l.exact ?? l.max;
+          requiredCap += cap === undefined || cap === null ? Infinity : cap;
+        } else if (!(o.limits && o.limits.max === 0)) fillerOpts.push(o);
       }
     };
     walk(sym.options || []);
-    if (fillerLabels.length > 0) add([...new Set(filler)], fillerLabels.join(' | '));
+    if (fillerOpts.length > 0 && requiredCap < cellCount) {
+      const filler = fillerOpts.flatMap((o) => itemsOf(o, abilityItems, hasItem, problems));
+      add([...new Set(filler)], fillerOpts.map(labelOf).join(' | '));
+    }
   }
   return { selectors, problems };
 }

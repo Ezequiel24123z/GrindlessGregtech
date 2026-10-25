@@ -478,16 +478,21 @@ export function runObtain(dump, raw, opts = {}) {
     const limit = ERA_IDS.indexOf(era);
     const obtainable = [...hiddenSet].filter((k) => reachedIn(base, k)).sort();
     let visible = null;
+    let landed = null;
     if (limit >= 0) {
       visible = [];
       for (const grp of neverGroups) {
         if (grp.until !== 'never' && !(ERA_IDS.indexOf(grp.until) > limit)) continue;
         for (const k of grp.keys) if (!hiddenSet.has(k)) visible.push({ key: k, group: grp.id, until: grp.until });
       }
+      // B groups whose era is already implemented (IV, 2026-10-25): hidden.js shows them, yet nothing makes them. Their era landed
+      // without them (a stale rule: reclassify it) or their producer is still missing (an A).
+      landed = neverGroups.filter((grp) => grp.cls === 'B' && ERA_IDS.indexOf(grp.until) >= 0 && ERA_IDS.indexOf(grp.until) <= limit)
+        .map((grp) => ({ group: grp.id, until: grp.until, keys: grp.keys.length, by: grp.by }));
     }
     hiding = {
       items: [...hiddenSet].filter((k) => !k.startsWith('fluid:')).length, fluids: [...hiddenSet].filter((k) => k.startsWith('fluid:')).length,
-      implementedEra: limit >= 0 ? era : null, obtainable, visible,
+      implementedEra: limit >= 0 ? era : null, obtainable, visible, landed,
     };
   }
 
@@ -531,7 +536,8 @@ export function runObtain(dump, raw, opts = {}) {
   const allRecipes = new Set();
   for (const grp of neverGroups) for (const r of [...grp.uses, ...grp.makes]) allRecipes.add(r);
   const unusedRules = compiled.filter((c) => c.used === 0).map((c) => ({ index: c.idx, class: c.rule.class, reason: c.rule.reason || '', materials: asArray(c.rule.materials), items: asArray(c.rule.items) }));
-  const hidingBad = !!hiding && (hiding.obtainable.length > 0 || (hiding.visible !== null && hiding.visible.length > 0));
+  const hidingBad = !!hiding && (hiding.obtainable.length > 0 || (hiding.visible !== null && hiding.visible.length > 0) ||
+    (hiding.landed !== null && hiding.landed.length > 0));
   const verdict = byClass['?'].groups > 0 || hidingBad ? 'FAIL' : 'PASS';
   return {
     verdict, groups: neverGroups, byClass, later: stageInfo, unusedRules, warnings, model, base, hiding,
@@ -577,6 +583,7 @@ function failWhy(res) {
   if (res.byClass['?'].groups > 0) why.push(`${res.byClass['?'].groups} unclassified groups`);
   if (res.hiding && res.hiding.obtainable.length > 0) why.push(`${res.hiding.obtainable.length} hidden but obtainable`);
   if (res.hiding && res.hiding.visible && res.hiding.visible.length > 0) why.push(`${res.hiding.visible.length} not hidden`);
+  if (res.hiding && res.hiding.landed && res.hiding.landed.length > 0) why.push(`${res.hiding.landed.length} B groups of an implemented era`);
   return why.join('; ');
 }
 
@@ -591,6 +598,10 @@ function hidingLines(res, n = 20) {
   if (h.visible) {
     L.push(`  should be hidden (C, or B from an era later than ${h.implementedEra}) and are visible: ${h.visible.length}${h.visible.length > 0
       ? ' — ' + short(h.visible.map((v) => `${v.key} (${v.group}, ${v.until})`), n) + ' (regenerate the hidden table: --table)' : ''}`);
+  }
+  if (h.landed) {
+    L.push(`  B groups of an era already implemented (shown, yet never obtained): ${h.landed.length}${h.landed.length > 0
+      ? ' — ' + short(h.landed.map((v) => `${v.group} (${v.until}, ${v.keys}, by ${v.by})`), n) + ' (their era landed without them: reclassify the rule, or give them a source)' : ''}`);
   }
   return L;
 }

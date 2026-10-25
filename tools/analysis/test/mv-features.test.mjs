@@ -74,7 +74,8 @@ function hatchPack() {
       slices: [['XXS']],
       symbols: {
         S: { kind: 'controller' },
-        X: { kind: 'oneOf', options: [{ kind: 'blocks', blocks: ['t:casing'], limits: { min: 1 } }, { kind: 'part', ability: 'energy_input', limits: { max: 2 } }] },
+        // the energy hatch with a minimum, as the pack's patterns declare it (an option bounded only by max isn't mandatory)
+        X: { kind: 'oneOf', options: [{ kind: 'blocks', blocks: ['t:casing'], limits: { min: 1 } }, { kind: 'part', ability: 'energy_input', limits: { min: 1, max: 2 } }] },
       },
     },
   };
