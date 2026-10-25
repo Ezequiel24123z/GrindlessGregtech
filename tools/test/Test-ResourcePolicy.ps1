@@ -336,6 +336,12 @@ Add-Member -InputObject $req -NotePropertyName suite -NotePropertyValue 'server'
 Add-Member -InputObject $req -NotePropertyName commands -NotePropertyValue @('kubejs custom_command gg_x', '@restart:GGTEST\|x\|PHASE1', 'kubejs custom_command gg_x')
 Assert-GGResourceRequest $req
 Assert-Policy $true 'one restart with a marker is a valid server request'
+$req.suite = 'both'
+Assert-GGResourceRequest $req
+Assert-Policy $true 'one restart is valid in the server stage of a combined request'
+$req.commands = @('@restart', '@restart')
+Assert-Rejected { Assert-GGResourceRequest $req } 'a combined request cannot restart twice or open another native budget'
+$req.suite = 'server'
 $req.commands = @('@restart', '@restart')
 Assert-Rejected { Assert-GGResourceRequest $req } 'a run cannot restart twice (both boots share one budget)'
 $req.commands = @('@restart:(unclosed')
@@ -351,7 +357,7 @@ $req.commands = @('@restart:GGTEST\|a\|DONE&&(')
 Assert-Rejected { Assert-GGResourceRequest $req } 'every restart marker must be a valid regex'
 $req.commands = @('@restart')
 $req.suite = 'client'
-Assert-Rejected { Assert-GGResourceRequest $req } 'a restart belongs to the server suite only'
+Assert-Rejected { Assert-GGResourceRequest $req } 'a client-only request cannot restart a server'
 $tokens = $null
 $errors = $null
 $serverAst = [Management.Automation.Language.Parser]::ParseFile((Join-Path $PSScriptRoot 'remote\gg-server.ps1'), [ref]$tokens, [ref]$errors)
