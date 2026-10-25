@@ -355,11 +355,17 @@ All of them are IV recipes (7,680 EU/t unless a composed GTM stage sets another 
   - IV: the reactor and the tritium removal facility.
   - LuV: deuterium for fusion.
 - **Risks:**
-  - A non-consumed fluid input from KubeJS (`notConsumableFluid`) must be verified. The fallback is a run-start check in the modifier, like the cryogenic plant's radiator check.
+  - A non-consumed fluid input from KubeJS (`notConsumableFluid`) was proven on the bench by IV-A5: the plant refuses to start below 1,000 mB of H₂S, never drains it, and takes it once under overclock. No run-start check is needed.
   - LuV's D-T fusion burns 125 mB of D every 16 ticks, so LuV needs a bigger source (Saturn, as `journey.md` says).
 - **Source and licence:**
   - Real: the Girdler sulfide process (Spevack, 1943; Savannah River, 1952; Bruce Heavy Water Plant), with vacuum distillation to finish; Vemork's electrolytic enrichment as history.
   - The catalog's "heavy-water tower" (our own idea).
+- **As built (IV-A5):**
+  - Circuit 1 exchange, circuit 2 finishing; the recipes live in `data/grindless/tables/heavy_water_plant.json`.
+  - EU: each step at GTM's own price, summed and spent under the design's caps: exchange 1,907 EU/t × 58 t (110,606 EU), finishing 477 EU/t × 70 t (33,390 EU). Both run on an EV hatch and overclock above it.
+  - The depleted water is plain `minecraft:water` (inert; the plant allows voiding); the distilled water is the condensed steam (GTM's 160:1). Any steam works, GTM's boilers' too.
+  - Structure: a 3×3×10 cold tower and a 3×3×14 hot tower of inert PTFE casing, a 2×2 titanium pipe bridge, a 1×1×8 tungstensteel vacuum column, 14 part cells in the towers' feet. No dimension condition: it burns nothing.
+  - **Yield next to the reactor:** 340 EU, 0.025 ice and 40 mB of steam per mB of heavy water. A full heavy-water reactor needs 3,600 mB an hour: 90 ice an hour (9 with the tritium removal facility), 17 EU/t on average, 79 s of one plant an hour.
 
 #### Venus acid works: `gtceu:venus_acid_works`, type `gtceu:acid_cracking` (Venus)
 
