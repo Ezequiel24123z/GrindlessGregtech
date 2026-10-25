@@ -26,6 +26,14 @@
 //                         (static; gg_test_recipe_lookup asks GTM's lookup)
 //   bee_removed           Productive Bees' gcteu:electric_blast_furnace/naquadah_bee is gone
 //   controller_recipe     grindless:assembler/naquadah_plant exists and holds its parts
+//   earth_cut_strips      iv.md decision 5, iridium and osmium only from Mercury: offworld_only.json's two Mercury strip entries are
+//                         applied (GT--'s sludge centrifuge without its iridium metal residue and rarest metal mixture, its inert metal
+//                         mixture leach without the mixture): the originals are gone and the rebuilt recipes keep every other output
+//   platinum_no_residue   the platinum plant read the same two stages without those outputs, and none of its Earth recipes (modes 1
+//                         and 2) gives a residue, iridium or osmium
+//   earth_mercury         offworld_only.json worlds.mercury: every loaded recipe that gives a watched output (the two residues and
+//                         iridium, osmium and iridosmine forms) takes one, or only runs off Earth, or is recycling, or is a late line
+//                         of allowedLate (gg_test_moon.js' Earth scan, for Mercury)
 //   balance               NOTE: what one naquadah dust costs, and the share of the accelerators' upkeep
 //   <copy>_PLACED / _FORMED / _PARTS   the two copies below
 //   no_source             copy naq: every input but the Pu-Be source -> nothing runs (the source holds the window)
@@ -37,8 +45,9 @@
 //   naquadah_plant|DONE   last line
 //
 // Copies (controllers face north at z 2, the structures are behind them; parts on the back wall facing south, and two of the platinum
-// plant's output hatches on its sides): naq, the naquadah plant (x 11777-11783, IV parts), and pt, a platinum plant (x 11798-11802, EV
-// parts). TEST AREA: this test builds, force-loads and clears ONLY its own band of the overworld, X 11776-11839, Y 98-112, Z 0-15
+// plant's output hatches on its sides): naq, the naquadah plant (x 11777-11783) on two EV energy hatches and EV parts, as a player runs
+// it before Mercury (GTM's IV voltage coil takes iridium; two hatches of a tier give the next tier's voltage), and pt, a platinum plant
+// (x 11798-11802, EV parts). TEST AREA: this test builds, force-loads and clears ONLY its own band of the overworld, X 11776-11839, Y 98-112, Z 0-15
 // (AGENTS.md: tests run at the same time in one server), with a roof at Y 111 so no hatch is rained on. The structures come from the
 // descriptions lib/patterns.js records (global.grindless.structures). The oxide, the antimony trioxide, the HF, the Pu-Be source, the
 // iridosmine and the reagents are injected: their sources (Venus and the ore plant, the fluorspar kiln, the hot cell, Mercury) are other
@@ -122,9 +131,9 @@
   var COPIES = [
     {
       key: 'naq', machine: NAQ, x: 11782, z: 2,
-      blocks: { energy: 'gtceu:iv_energy_input_hatch', inBus: 'gtceu:iv_input_bus', outBus: 'gtceu:iv_output_bus', in1: 'gtceu:iv_input_hatch',
-        out1: 'gtceu:iv_output_hatch', out2: 'gtceu:iv_output_hatch' },
-      parts: { '0,0,0': 'energy', '0,0,1': 'inBus', '0,0,2': 'outBus', '0,0,3': 'in1', '0,1,0': 'out1', '0,1,1': 'out2' },
+      blocks: { energy: 'gtceu:ev_energy_input_hatch', energy2: 'gtceu:ev_energy_input_hatch', inBus: 'gtceu:ev_input_bus', outBus: 'gtceu:ev_output_bus',
+        in1: 'gtceu:ev_input_hatch', out1: 'gtceu:ev_output_hatch', out2: 'gtceu:ev_output_hatch' },
+      parts: { '0,0,0': 'energy', '0,0,1': 'inBus', '0,0,2': 'outBus', '0,0,3': 'in1', '0,1,0': 'out1', '0,1,1': 'out2', '0,1,2': 'energy2' },
       facing: {},
       ins: ['in1'], outs: ['out1', 'out2']
     },
@@ -185,7 +194,10 @@
         FluidStack: Java.loadClass('net.minecraftforge.fluids.FluidStack'),
         ItemStack: Java.loadClass('net.minecraft.world.item.ItemStack'),
         Registries: Java.loadClass('net.minecraftforge.registries.ForgeRegistries'),
-        Circuit: Java.loadClass('com.gregtechceu.gtceu.common.item.IntCircuitBehaviour')
+        Circuit: Java.loadClass('com.gregtechceu.gtceu.common.item.IntCircuitBehaviour'),
+        GTRecipe: Java.loadClass('com.gregtechceu.gtceu.api.recipe.GTRecipe'),
+        GTCEuAPI: Java.loadClass('com.gregtechceu.gtceu.api.GTCEuAPI'),
+        PropertyKey: Java.loadClass('com.gregtechceu.gtceu.api.data.chemical.material.properties.PropertyKey')
       }
     }
     return classes
@@ -572,6 +584,208 @@
         Math.round(10000 / NP().source.chance) + ' batches (' + Math.round(10000 / NP().source.chance) * nq + ' naquadah dust). Platinum mode 3: 10 iridosmine -> 3 Ir + 1 Os for ' +
         (publishedPgm('iridosmine') || {}).energy + ' EU')
     })
+
+    earthCutChecks()
+  }
+
+  // ---------------------------------------------------------------- the Earth cut (iv.md decision 5: iridium and osmium only from Mercury)
+
+  var OFFWORLD = 'kubejs/data/grindless/tables/offworld_only.json'
+  var CUT_STRIPS = ['gtceu:centrifuge/platinum_group_sludge_dust', 'gtceu:electric_blast_furnace/rarest_metal_residue']
+  // what the rebuilt recipes must keep
+  var CUT_KEEPS = {
+    'gtceu:centrifuge/platinum_group_sludge_dust': ['gtceu:silicon_dioxide_dust', 'gtceu:gold_dust', 'gtceu:platinum_metal_dust', 'gtceu:palladium_metal_dust'],
+    'gtceu:electric_blast_furnace/rarest_metal_residue': ['gtceu:sodium_rutheniate_dust', 'gtceu:steam']
+  }
+  var RESIDUE_RE = /rarest_metal_mixture|iridium_metal_residue/
+
+  function isGT(r) {
+    return r instanceof lazy().GTRecipe
+  }
+
+  // GT recipe content -> JSON text through GTM's own serializer (gg_test_moon.js: scripts cannot see the overrides of SizedIngredient)
+  function contentText(cap, content) {
+    return String(cap.serializer.toJson(cap.of(content)))
+  }
+
+  function gtTexts(r, cap, output) {
+    var list = output ? asArray(r.getOutputContents(cap)) : asArray(r.getInputContents(cap))
+    return list.map(function (c) { return contentText(cap, c.content) })
+  }
+
+  function gtInputsText(r) {
+    return gtTexts(r, lazy().ItemCap, false).concat(gtTexts(r, lazy().FluidCap, false)).join(' ')
+  }
+
+  function ingredientsText(r) {
+    var out = []
+    asArray(r.getIngredients()).forEach(function (ing) {
+      try {
+        out.push(String(ing.toJson()))
+      } catch (e) {
+        out.push('?')
+      }
+    })
+    return out.join(' ')
+  }
+
+  function conditionsText(r) {
+    var out = []
+    asArray(r.conditions).forEach(function (c) {
+      try {
+        out.push(String(c.serialize()))
+      } catch (e) {
+        var t = String(c.getClass().getSimpleName())
+        try {
+          t += ':"' + c.getDimension().location() + '"'
+        } catch (e2) { /* not a dimension condition */ }
+        out.push(t)
+      }
+    })
+    return out.join(',')
+  }
+
+  function earthCutChecks() {
+    safely('earth_cut_strips', function () {
+      var G = global.grindless
+      var table = G.readJsonTable(OFFWORLD)
+      var report = G.moon ? G.moon.offworldOnly : null
+      if (!report) throw new Error('global.grindless.moon.offworldOnly is missing (moon/offworld_only.js did not run)')
+      var mine = table.strip.filter(function (s) { return [].concat(s['for']).indexOf('mercury') >= 0 })
+      var problems = []
+      var lines = []
+      CUT_STRIPS.forEach(function (id) {
+        if (!mine.some(function (s) { return s.recipe === id })) problems.push('no Mercury strip entry for ' + id)
+      })
+      mine.forEach(function (s) {
+        if (liveRecipe(s.recipe) !== null) problems.push(s.recipe + ' is still loaded')
+        var entry = report.stripped.filter(function (e) { return e.from === s.recipe })[0]
+        if (!entry) {
+          problems.push(s.recipe + ' was not rebuilt')
+          return
+        }
+        var r = liveRecipe(entry.to)
+        if (r === null) {
+          problems.push(entry.to + ' is missing')
+          return
+        }
+        var outs = itemContents(r, false).map(function (x) { return x.id }).concat(fluidContents(r, false).map(function (f) { return f.id }))
+        ;(s.outputs || []).concat(s.fluids || []).forEach(function (o) {
+          if (outs.indexOf(o) >= 0) problems.push(entry.to + ' still gives ' + o)
+        })
+        ;(CUT_KEEPS[s.recipe] || []).forEach(function (o) {
+          if (outs.indexOf(o) < 0) problems.push(entry.to + ' lost ' + o)
+        })
+        lines.push(entry.to + ' -> ' + outs.map(short).join(','))
+      })
+      if (report.failed.length > 0) problems.push('could not rebuild: ' + report.failed.join('; '))
+      check('earth_cut_strips', problems.length === 0, mine.length + ' Mercury strips: ' + lines.join(' ; ') +
+        (problems.length > 0 ? ' | problems: ' + problems.join('; ') : ''))
+    })
+
+    safely('platinum_no_residue', function () {
+      var problems = []
+      var stripped = (PP().stripped || []).map(function (s) { return { stage: s.stage, gone: s.items.concat(s.fluids).sort().join(',') } })
+      var want = {
+        'gtceu:centrifuge/platinum_group_sludge_dust': 'gtceu:iridium_metal_residue_dust,gtceu:rarest_metal_mixture_dust',
+        'gtceu:electric_blast_furnace/rarest_metal_residue': 'gtceu:rarest_metal_mixture_dust'
+      }
+      Object.keys(want).forEach(function (id) {
+        var got = stripped.filter(function (s) { return s.stage === id })
+        if (got.length !== 1 || got[0].gone !== want[id]) problems.push(short(id) + ' read without [' + got.map(function (s) { return s.gone }).join(' | ') + '], want ' + want[id])
+      })
+      ;(PP().recipes || []).forEach(function (rec) {
+        if (rec.mode === 'iridosmine') return
+        rec.itemsOut.forEach(function (o) {
+          if (RESIDUE_RE.test(o.id) || /iridium|osmium/.test(o.id)) problems.push(rec.name + ' gives ' + o.id)
+        })
+      })
+      check('platinum_no_residue', problems.length === 0, 'stages read without: ' + stripped.map(function (s) { return short(s.stage) + ' -[' + s.gone + ']' }).join(' ; ') +
+        '; the ' + (PP().recipes || []).filter(function (r) { return r.mode !== 'iridosmine' }).length + ' Earth recipes give no residue, iridium or osmium' +
+        (problems.length > 0 ? ' | problems: ' + problems.join('; ') : ''))
+    })
+
+    // gg_test_moon.js' Earth scan for offworld_only.json's Mercury: a watched output needs a watched input, a condition that keeps the recipe
+    // off Earth, recycling (a part, a machine or an alloy without an ore back to its materials) or a late line of allowedLate
+    safely('earth_mercury', function () {
+      var G = global.grindless
+      var table = G.readJsonTable(OFFWORLD)
+      var world = table.worlds.mercury
+      if (!world) throw new Error(OFFWORLD + ' has no mercury world')
+      var ids = world.watched.items.concat(world.watched.fluids)
+      var idRe = new RegExp('"(' + ids.map(function (x) { return x.replace(/[.*+?^${}()|[\]\\]/g, '\\$&') }).join('|') + ')"', 'g')
+      var inputRe = new RegExp(world.watched.inputPattern)
+      var late = table.allowedLate.map(function (a) { return new RegExp(a.pattern) })
+      var planets = G.readJsonTable('kubejs/data/grindless/tables/planets.json').planets
+      var offEarth = []
+      Object.keys(planets).forEach(function (k) {
+        if (k !== 'earth') planets[k].dimensions.forEach(function (d) { offEarth.push('"' + d + '"') })
+      })
+      var materials = {}
+      asArray(lazy().GTCEuAPI.materialManager.getRegisteredMaterials()).forEach(function (m) { materials[String(m.getName())] = m })
+      var recyclingId = /^gtceu:(macerator\/macerate_|arc_furnace\/arc_|extractor\/extract_)/
+      function recycling(r, id) {
+        var cat = ''
+        try {
+          cat = String(r.recipeCategory)
+        } catch (e) { /* no category */ }
+        if (/recycling/.test(cat) || recyclingId.test(id)) return true
+        var dec = id.match(/decomposition_(?:centrifuging|electrolyzing)__?([a-z0-9_]+)$/)
+        if (dec === null) return false
+        var mat = materials[dec[1]]
+        return mat !== undefined && !mat.hasProperty(lazy().PropertyKey.ORE)
+      }
+      var access = S.server.registryAccess()
+      var all = asArray(S.server.getRecipeManager().getRecipes())
+      var count = { recipes: all.length, watched: 0, offEarth: 0, processing: 0, recycling: 0, late: 0, unreadable: 0, residueRecipes: 0 }
+      var leaks = []
+      var firstError = ''
+      for (var i = 0; i < all.length; i++) {
+        var r = all[i]
+        var id = String(r.getId())
+        try {
+          var gt = isGT(r)
+          var outText = ''
+          if (gt) {
+            outText = gtTexts(r, lazy().ItemCap, true).join(' ') + ' ' + gtTexts(r, lazy().FluidCap, true).join(' ')
+          } else {
+            var res = r.getResultItem(access)
+            if (res !== null && !res.isEmpty()) outText = '"' + itemName(res) + '"'
+          }
+          var found = outText.match(idRe)
+          if (!found) continue
+          count.watched++
+          if (found.some(function (f) { return RESIDUE_RE.test(f) })) count.residueRecipes++
+          if (gt) {
+            var conds = conditionsText(r)
+            if (offEarth.some(function (d) { return conds.indexOf(d) >= 0 })) {
+              count.offEarth++
+              continue
+            }
+          }
+          if (inputRe.test(gt ? gtInputsText(r) : ingredientsText(r))) {
+            count.processing++
+            continue
+          }
+          if (gt && recycling(r, id)) {
+            count.recycling++
+            continue
+          }
+          if (late.some(function (re) { return re.test(id) })) {
+            count.late++
+            continue
+          }
+          leaks.push(id + ' -> ' + found.map(function (f) { return f.replace(/"/g, '') }).filter(function (v, k, a) { return a.indexOf(v) === k }).join(','))
+        } catch (e) {
+          count.unreadable++
+          if (firstError === '') firstError = id + ': ' + e
+        }
+      }
+      check('earth_mercury', leaks.length === 0 && count.unreadable === 0, 'recipes=' + count.recipes + ', with a watched output ' + count.watched + ' (' +
+        count.residueRecipes + ' give a residue): off Earth ' + count.offEarth + ', processing ' + count.processing + ', recycling ' + count.recycling +
+        ', late ' + count.late + ', unreadable ' + count.unreadable + (firstError !== '' ? ' first=' + firstError : '') +
+        (leaks.length > 0 ? ' | LEAKS (' + leaks.length + '): ' + leaks.slice(0, 25).join(' ; ') : ' | no Earth recipe gives the residues, iridium or osmium'))
+    })
   }
 
   // ---------------------------------------------------------------- structures
@@ -690,13 +904,16 @@
 
   // ---------------------------------------------------------------- the copies
 
-  // the energy hatch is topped up every tick; what it lost since the last tick is what the machine drew
+  // the energy hatches are topped up every tick; what they lost since the last tick is what the machine drew
   function meter(m) {
-    var c = m.P.energy.energyContainer
-    var cap = Number(c.getEnergyCapacity())
-    var stored = Number(c.getEnergyStored())
-    if (m.metered) m.euUsed += cap - stored
-    c.setEnergyStored(cap)
+    ;['energy', 'energy2'].forEach(function (role) {
+      if (!m.P[role]) return
+      var c = m.P[role].energyContainer
+      var cap = Number(c.getEnergyCapacity())
+      var stored = Number(c.getEnergyStored())
+      if (m.metered) m.euUsed += cap - stored
+      c.setEnergyStored(cap)
+    })
     m.metered = true
   }
 
