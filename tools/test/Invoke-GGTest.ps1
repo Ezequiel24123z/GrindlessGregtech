@@ -5,8 +5,8 @@
 .DESCRIPTION
   1. tools\Update-PackIndex.ps1 (normalizes pack text files to UTF-8 no BOM + LF, then packwiz refresh)
   2. zips pack\ + tools\test\overlay\   3. uploads to the home test PC
-  4. runs the remote scripts over ssh (slot semaphore: at most -Slots Minecraft JVMs at once on the test PC, default 2;
-     a second one only starts when enough RAM is free; -Slots 1 = one run at a time, as before)
+  4. runs the remote scripts over ssh (one Minecraft JVM globally, 1G/4G heap, at least 8 GB available RAM;
+     a shared native time budget of at most 600 seconds, then bounded shutdown)
   5. downloads results.zip and prints a concise PASS/FAIL summary (see Show-GGResults.ps1).
 
   Run it with:
@@ -34,7 +34,7 @@ param(
     [string[]]$Commands,
     [string]$CommandsFile,
     [string[]]$WaitForLog,
-    [int]$WaitTimeoutSec = 180,
+    [ValidateRange(1, 180)][int]$WaitTimeoutSec = 120,
     [switch]$Flat,
     [string]$Seed = 'GregtechGrindless',
     [switch]$KeepServerRunning,
@@ -42,15 +42,18 @@ param(
     [string]$PackDir,
     [string]$OverlayDir,
     [switch]$SkipRefresh,
-    [int]$BootTimeoutSec = 900,
-    [int]$CommandTimeoutSec = 300,
-    [int]$ClientTimeoutSec = 1800,
-    [int]$LockWaitMin = 120,
-    [ValidateRange(1, 4)][int]$Slots = 2,
-    [double]$SlotMinFreeGb = 9,
-    [ValidateRange(0, 600)][int]$SettleSec = 15,
-    [string]$ServerXms = '4G',
-    [string]$ServerXmx = '7G',
+    [ValidateRange(1, 420)][int]$BootTimeoutSec = 420,
+    [ValidateRange(1, 60)][int]$CommandTimeoutSec = 60,
+    [ValidateRange(1, 600)][int]$ClientTimeoutSec = 600,
+    [ValidateRange(1, 600)][int]$NativeTimeoutSec = 600,
+    [ValidateRange(1, 15)][int]$LockWaitMin = 5,
+    [ValidateRange(1, 1)][int]$Slots = 1,
+    [ValidateRange(8, 128)][double]$SlotMinFreeGb = 8,
+    [ValidateRange(0, 60)][int]$SettleSec = 15,
+    [string]$ServerXms = '1G',
+    [string]$ServerXmx = '4G',
+    [string]$ClientXms = '1G',
+    [string]$ClientXmx = '4G',
     [string[]]$ServerProp,
     [ValidateSet('mesa', 'stub')][string]$ClientRenderer = 'mesa',
     [string[]]$ClientExclude,
@@ -63,6 +66,7 @@ param(
 
 $ErrorActionPreference = 'Stop'
 $ProgressPreference = 'SilentlyContinue'
+. (Join-Path $PSScriptRoot 'remote\gg-resource-policy.ps1')
 [Threading.Thread]::CurrentThread.CurrentCulture = [Globalization.CultureInfo]::InvariantCulture
 Add-Type -AssemblyName System.IO.Compression
 Add-Type -AssemblyName System.IO.Compression.FileSystem
@@ -315,9 +319,12 @@ $request = [ordered]@{
     bootTimeoutSec    = $BootTimeoutSec
     commandTimeoutSec = $CommandTimeoutSec
     clientTimeoutSec  = $ClientTimeoutSec
+    nativeTimeoutSec  = $NativeTimeoutSec
     waitTimeoutSec    = $WaitTimeoutSec
     serverXms         = $ServerXms
     serverXmx         = $ServerXmx
+    clientXms         = $ClientXms
+    clientXmx         = $ClientXmx
     serverProps       = @(Split-Multi $ServerProp)
     clientRenderer    = $ClientRenderer
     clientExclude     = @($clientExcludeList)
@@ -327,6 +334,7 @@ $request = [ordered]@{
     settleSec         = $SettleSec
     createdUtc        = [datetime]::UtcNow.ToString('o')
 }
+Assert-GGResourceRequest ([pscustomobject]$request)
 $requestJson = ConvertTo-Json -InputObject $request -Depth 6
 [IO.File]::WriteAllText((J $OutDir 'request.json'), $requestJson, (New-Object Text.UTF8Encoding($false)))
 
