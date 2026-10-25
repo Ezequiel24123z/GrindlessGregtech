@@ -1,127 +1,128 @@
-# Cómo se trabaja en este repo
+# How we work in this repo
 
-Gregtech Grindless es un pack de GregTech Modern (Minecraft 1.20.1, Forge) en el que nada se recolecta a mano. Antes de tocar nada, lee este archivo, `DECISIONS.md` y la última nota de `docs/sesiones/`.
+Gregtech Grindless is a GregTech Modern pack (Minecraft 1.20.1, Forge) in which nothing is gathered by hand. Before touching anything, read this file, `DECISIONS.md` and the latest note in `docs/sesiones/`.
 
-## Estructura
+## Structure
 
-| Ruta | Qué hay |
+| Path | Contents |
 |---|---|
-| `pack/` | Raíz de packwiz: `pack.toml`, `index.toml`, `mods/*.pw.toml`, `config/`, `defaultconfigs/`, `kubejs/`. |
-| `pack/kubejs/startup_scripts/grindless/` | Registros: objetos, bloques, tipos de receta y máquinas. |
-| `pack/kubejs/server_scripts/grindless/` | Recetas, integración de otros mods y eventos. |
-| `pack/kubejs/data/grindless/` | Datapack: dimensiones, tags y loot. |
-| `pack/kubejs/assets/grindless/` | Texturas, modelos e idiomas propios. |
-| `pack/config/ftbquests/quests/` | Libro de misiones. |
-| `docs/eras/` | Diseño corto de cada era. |
-| `docs/sesiones/` | Nota de cierre de cada sesión. |
-| `tools/test/` | Banco de pruebas remoto (ver su `README.md`). |
+| `pack/` | packwiz root: `pack.toml`, `index.toml`, `mods/*.pw.toml`, `config/`, `defaultconfigs/`, `kubejs/`. |
+| `pack/kubejs/startup_scripts/grindless/` | Registrations: items, blocks, recipe types and machines. |
+| `pack/kubejs/server_scripts/grindless/` | Recipes, integration with other mods and events. |
+| `pack/kubejs/data/grindless/` | Datapack: dimensions, tags and loot. |
+| `pack/kubejs/assets/grindless/` | Own textures, models and languages. |
+| `pack/config/ftbquests/quests/` | Quest book. |
+| `docs/eras/` | Short design of each era. |
+| `docs/sesiones/` | Closing note of each session. |
+| `tools/test/` | Remote test bench (see its `README.md`). |
 
-## Reglas del pack
+## Pack rules
 
-1. Ningún recurso que la progresión pida de forma repetida se recolecta a mano por obligación. Picar a mano solo sirve para arrancar.
-2. La dificultad sube por complejidad (pasos, condiciones, multibloques, líneas cruzadas), nunca por cantidad bruta ni por tiempos inflados.
-3. Cada subproducto tiene un destino honesto. Lo inerte se puede tirar, lo peligroso se contiene y lo que servirá después se dice. Nada de recetas tontas.
-4. Cada era tiene al menos un multibloque nuestro que gana algo: velocidad, rendimiento, una receta imposible en pequeño o varios pasos en uno.
-5. Las misiones son cortas, en inglés, dan un premio pequeño y nunca bloquean recetas. Antes de escribir un capítulo se mira cómo lo resuelven otros packs. Se copia y adapta solo de los que tienen licencia que lo permite (ver `CREDITS.md`), siempre con atribución.
-6. Si este archivo choca con lo que hace GTM 7.5.3, manda GTM.
+1. No resource that progression requires repeatedly is gathered by hand out of obligation. Mining by hand only serves to get started.
+2. Difficulty rises through complexity (steps, conditions, multiblocks, crossing production lines), never through raw quantity or inflated times.
+3. Every byproduct has an honest destination. Inert ones can be thrown away, dangerous ones are contained, and what will be useful later is stated as such. No silly recipes.
+4. Each era has at least one of our multiblocks that gains something: speed, throughput, a recipe that is impossible on a small scale, or several steps in one.
+5. Quests are short, in English, give a small reward, and never block recipes. Before writing a chapter, look at how other packs solve it. Copy and adapt only from packs whose license allows it (see `CREDITS.md`), always with attribution.
+6. If this file conflicts with what GTM 7.5.3 does, GTM takes precedence.
 
 ## KubeJS
 
-- **IDs:** objetos y bloques propios en `grindless:`. Máquinas y tipos de receta en `gtceu:`, porque así los registra GTM.
-- **Patrones:** los multibloques se definen siempre a través del helper de patrones de `pack/kubejs/startup_scripts/grindless/`. Cuando llegue GTM 8.0, se cambia el helper y no cada multibloque.
-- **Datos:** las tablas (vetas, cultivos…) viven en archivos de datos y las recetas se generan desde ellas. No se escriben a mano recetas repetitivas.
-- **Texto:** los nombres de objetos y máquinas van en `en_us` (inglés) y `es_es` (español). Las misiones van solo en inglés.
-- **Integración:** las recetas de otros mods que rompan la progresión se rehacen para que pasen por máquinas de GregTech.
-- **Rhino (KubeJS 6):** dentro de funciones o callbacks que se ejecutan más de una vez, usa `var` y no `const`/`let`. Si no, salta "redeclaration of var".
-- **Nombres vanilla (KubeJS 2001.6.5):** algunos miembros cambian de nombre para los scripts y el de Mojang no existe: `getYRot`/`getXRot` son `getYaw`/`getPitch`, `getStringUUID` es `getStringUuid`, `tickCount` es `age` y `Level#getGameTime` es `getTime`; `Entity#level()` está oculto (usa `getLevel()`). Lista completa en `tools/test/README.md`. Lo que use un jugador se prueba en la suite `client`.
+- **IDs:** our own items and blocks use `grindless:`. Machines and recipe types use `gtceu:`, because that is how GTM registers them.
+- **Patterns:** multiblocks are always defined through the pattern helper in `pack/kubejs/startup_scripts/grindless/`. When GTM 8.0 arrives, the helper is changed, not each multiblock.
+- **Data:** tables (veins, crops…) live in data files, and recipes are generated from them. Repetitive recipes are not written by hand.
+- **Text:** item and machine names go in `en_us` (English) and `es_es` (Spanish). Quests are in English only.
+- **Repository language:** everything in the repository is in English: docs, code comments, tool messages, data notes and commit messages (requested by the user). The only Spanish allowed is the `es_es` game translation (lang files and the `es_es` blocks of `*_lang.js`).
+- **Integration:** recipes from other mods that break progression are redone so that they go through GregTech machines.
+- **Rhino (KubeJS 6):** inside functions or callbacks that run more than once, use `var`, not `const`/`let`. Otherwise you get "redeclaration of var".
+- **Vanilla names (KubeJS 2001.6.5):** some members are renamed for the scripts, and the Mojang name does not exist: `getYRot`/`getXRot` are `getYaw`/`getPitch`, `getStringUUID` is `getStringUuid`, `tickCount` is `age` and `Level#getGameTime` is `getTime`; `Entity#level()` is hidden (use `getLevel()`). Full list in `tools/test/README.md`. Anything that uses a player is tested in the `client` suite.
 
 ## packwiz
 
-- **Binario:** packwiz no tiene releases; se descarga de `https://nightly.link/packwiz/packwiz/workflows/go/main/Windows%2064-bit.zip`.
-- **Añadir un mod fijado:** `packwiz mr add <url de la versión>`. Después, comprueba el `side` en su `.pw.toml`.
-- **Índice:** tras cambiar archivos dentro de `pack/`, ejecuta `packwiz refresh`. `index.toml` no se edita a mano.
-- **CurseForge:** solo entra un mod si permite distribución o si tiene una URL oficial de descarga.
+- **Binary:** packwiz has no releases; it is downloaded from `https://nightly.link/packwiz/packwiz/workflows/go/main/Windows%2064-bit.zip`.
+- **Adding a pinned mod:** `packwiz mr add <version URL>`. Then check the `side` in its `.pw.toml`.
+- **Index:** after changing files inside `pack/`, run `packwiz refresh`. `index.toml` is not edited by hand.
+- **CurseForge:** only mods that allow distribution, or that have an official download URL, are added.
 
-## Pruebas
+## Testing
 
-- **Banco:** `tools/test/Invoke-GGTest.ps1`. Sube el pack al PC de casa, arranca servidor o cliente limpios y devuelve los logs.
-- **PC de casa:**
-  - Acceso: `ezequiel@192.168.1.150`.
-  - Solo se escribe dentro de `D:\GregtechGrindless`.
-  - Nunca se tocan la carpeta de PrismLauncher del usuario, `D:\Grindless` ni su `.minecraft`.
-  - Solo una JVM a la vez; el banco usa un candado.
-  - Los clientes de prueba arrancan con todo el sonido a cero (`Set-GGClientOptions` en `tools/test/remote/gg-client.ps1`). El usuario los oye si no.
-- **Qué probar por tier (2-3 pruebas):**
-  1. El pack arranca y crea mundo.
-  2. Nuestros multibloques se forman y procesan.
-  3. Integración: las recetas existen, la generación automática funciona y la puerta al tier siguiente se puede fabricar.
-- **Si una prueba falla:** se arregla y se repite esa, no todas.
-- **No se vuelve a probar lo que ya está probado:**
-  - Si un mecanismo ya pasó su prueba en partida (un multibloque que forma y procesa, un tipo de receta, una tabla que genera recetas), el contenido nuevo que solo lo usa no se prueba otra vez en partida. Por ejemplo: más recetas en un multibloque o más filas en una tabla.
-  - Ese contenido se valida barato: el validador de recetas (`tools/analysis`), las comprobaciones estáticas y que el pack arranque sin errores de KubeJS.
-  - Se prueba en partida solo lo nuevo, lo que cambia el mecanismo o algo que ya falló antes.
-  - Antes de lanzar una prueba cara, hay que poder decir qué duda nueva resuelve.
-  - Al etiquetar una versión se pasan las pruebas de lo que ha cambiado y las del tier nuevo, no la batería entera.
-- **Scripts de prueba:** van en `tools/test/overlay/` y no se publican con el pack.
-- **Zonas de prueba:** los tests se lanzan casi a la vez en el mismo servidor, así que cada uno construye y limpia solo su franja del Overworld (Y 98–112). Las franjas tienen 64 bloques de ancho en X y empiezan en Z 0:
+- **Bench:** `tools/test/Invoke-GGTest.ps1`. It uploads the pack to the home PC, starts a clean server or client and returns the logs.
+- **Home PC:**
+  - Access: `ezequiel@192.168.1.150`.
+  - Writes only happen inside `D:\GregtechGrindless`.
+  - Never touch the user's PrismLauncher folder, `D:\Grindless` or their `.minecraft`.
+  - Only one JVM at a time; the bench uses a lock.
+  - Test clients start with all sound at zero (`Set-GGClientOptions` in `tools/test/remote/gg-client.ps1`). Otherwise, the user would hear them.
+- **What to test per tier (2-3 tests):**
+  1. The pack starts and creates a world.
+  2. Our multiblocks form and process.
+  3. Integration: the recipes exist, automatic generation works, and the gate to the next tier can be crafted.
+- **If a test fails:** fix it and repeat that one, not all of them.
+- **Do not retest what has already been tested:**
+  - If a mechanism has already passed its in-game test (a multiblock that forms and processes, a recipe type, a table that generates recipes), new content that only uses it is not tested in-game again. For example: more recipes in a multiblock or more rows in a table.
+  - That content is validated at low cost: the recipe validator (`tools/analysis`), the static checks, and that the pack starts without KubeJS errors.
+  - Only new things, things that change the mechanism, or things that already failed before are tested in-game.
+  - Before launching an expensive test, you must be able to say which new doubt it resolves.
+  - When tagging a version, run the tests for what has changed and the ones for the new tier, not the whole battery.
+- **Test scripts:** they go in `tools/test/overlay/` and are not published with the pack.
+- **Test zones:** tests are launched almost at the same time on the same server, so each one builds and cleans up only its band of the Overworld (Y 98–112). The bands are 64 blocks wide in X and start at Z 0:
 
   | Test | X |
   |---|---|
-  | vapor | 0–31 |
-  | criaturas | 64–95 |
-  | AE2 | 64–79, pero en Z 64–79 |
-  | multibloques LV | 256–319 |
-  | planta MV | 512–575 |
-  | multibloques MV | 768–831 |
-  | multibloques HV | 1024–1087 |
-  | refinería HV | 1280–1343 (Y 98–113) |
-  | planta EV | 1536–1599 |
-  | multibloques EV | 1792–1855 |
-  | planta IV | 2048–2111 |
-  | multibloques IV | 2304–2367 |
-  | vuelo de GCYR | 2560–2623 |
-  | Luna | 2816–2879; en la Luna (`gcyr:luna`), la misma X y Z en Y 198–214 |
-  | multibloques nuevos de vapor | 3072–3135 |
-  | multibloques nuevos de LV | 3328–3391 |
-  | observatorios | 3584–3647 |
-  | planta de gas de síntesis | 3840–3903 |
-  | camino al cohete | 4096–4159 |
-  | llaves de viaje | 4352–4415 |
-  | libro de misiones (cliente) | 4608–4671 |
-  | energía | 4864–4927 |
-  | familia pequeña de vapor | 5120–5183 |
-  | familia Large Steam | 5376–5439 |
+  | steam | 0–31 |
+  | creatures | 64–95 |
+  | AE2 | 64–79, but at Z 64–79 |
+  | LV multiblocks | 256–319 |
+  | MV plant | 512–575 |
+  | MV multiblocks | 768–831 |
+  | HV multiblocks | 1024–1087 |
+  | HV refinery | 1280–1343 (Y 98–113) |
+  | EV plant | 1536–1599 |
+  | EV multiblocks | 1792–1855 |
+  | IV plant | 2048–2111 |
+  | IV multiblocks | 2304–2367 |
+  | GCYR flight | 2560–2623 |
+  | Moon | 2816–2879; on the Moon (`gcyr:luna`), the same X and Z at Y 198–214 |
+  | new steam multiblocks | 3072–3135 |
+  | new LV multiblocks | 3328–3391 |
+  | observatories | 3584–3647 |
+  | syngas plant | 3840–3903 |
+  | path to the rocket | 4096–4159 |
+  | travel keys | 4352–4415 |
+  | quest book (client) | 4608–4671 |
+  | energy | 4864–4927 |
+  | small steam family | 5120–5183 |
+  | Large Steam family | 5376–5439 |
 
-  Para un test nuevo se sigue en saltos de 256.
+  For a new test, keep going in steps of 256.
 
-## Licencias
+## Licenses
 
-- Antes de copiar algo, mira su licencia en `CREDITS.md`.
-  - MIT o LGPL: se puede usar con atribución.
-  - GPL, no comercial o todos los derechos reservados: solo ideas.
-- Toda idea, multibloque o asset nuevo se anota en `CREDITS.md`.
+- Before copying anything, check its license in `CREDITS.md`.
+  - MIT or LGPL: can be used with attribution.
+  - GPL, non-commercial, or all rights reserved: ideas only.
+- Every new idea, multiblock or asset is noted in `CREDITS.md`.
 
-## Memoria del proyecto
+## Project memory
 
-- `DECISIONS.md`: una línea por decisión importante.
-- `CREDITS.md`: origen y licencia de cada idea, multibloque o asset.
-- `docs/sesiones/AAAA-MM-DD.md`: al cerrar sesión, qué funciona, qué está roto y qué viene después.
+- `DECISIONS.md`: one line per important decision.
+- `CREDITS.md`: source and license of each idea, multiblock or asset.
+- `docs/sesiones/YYYY-MM-DD.md`: when closing a session, what works, what is broken and what comes next.
 
 ## Git
 
-- Cuenta personal `Ezequiel24123z`, nunca la corporativa.
-- Commits pequeños y con mensaje claro.
-- **Versiones:** antes de etiquetar (`vX.Y.Z`), sube `version` en `pack/pack.toml` y pasa `tools/Update-PackIndex.ps1`. Solo se etiqueta lo que ha pasado las pruebas del tier.
+- Personal account `Ezequiel24123z`, never the corporate one.
+- Small commits with a clear message.
+- **Versions:** before tagging (`vX.Y.Z`), bump `version` in `pack/pack.toml` and run `tools/Update-PackIndex.ps1`. Only what has passed the tier's tests gets tagged.
 
-## Canal jugable
+## Playable channel
 
-El usuario juega mientras se desarrolla.
-- **Rama `jugable`:** es su canal. Solo avanza a una etiqueta `vX.Y.Z` que haya pasado las pruebas: `git push origin vX.Y.Z^{commit}:refs/heads/jugable`.
-- **Al moverla:** se le manda un resumen corto con qué hay de nuevo y qué cambia en su partida.
-- **Versión en GitHub (lo pide el usuario):** cada etiqueta `vX.Y.Z` se publica como versión de GitHub. Lleva notas cortas en español (qué hay nuevo y qué cambia en la partida) y el zip de Prism fijado a esa versión (`Build-PrismInstance.ps1 -Channel vX.Y.Z`). También se actualiza la nota de `canal-jugable`.
-- **Instancia de Prism:** la genera `tools/prism/Build-PrismInstance.ps1` y está en la versión de GitHub `canal-jugable`. Se actualiza sola al arrancar con packwiz-installer-bootstrap, así que solo se rehace si cambian la URL del canal o el bootstrap.
-- **Partidas compatibles:**
-  - No se quita un objeto, bloque o fluido registrado. Se deja registrado y oculto en EMI, con una receta que lo convierte 1:1 en su sustituto (como la broca de titanio).
-  - Las dimensiones no cambian de id.
-  - Si cambia la forma de un multibloque, la nota de la versión lo dice, porque el jugador tiene que rehacerlo.
-  - Los cambios de vetas y de mundo solo afectan a los chunks nuevos o a las recetas.
+The user plays while development goes on.
+- **`jugable` branch:** this is their channel. It only advances to a `vX.Y.Z` tag that has passed the tests: `git push origin vX.Y.Z^{commit}:refs/heads/jugable`.
+- **When moving it:** send them a short summary of what is new and what changes in their game.
+- **GitHub release (requested by the user):** every `vX.Y.Z` tag is published as a GitHub release. It has short notes in English (what is new and what changes in the game) and the Prism zip pinned to that version (`Build-PrismInstance.ps1 -Channel vX.Y.Z`). The `canal-jugable` note is also updated.
+- **Prism instance:** it is generated by `tools/prism/Build-PrismInstance.ps1` and lives in the GitHub release `canal-jugable`. It updates itself on launch through packwiz-installer-bootstrap, so it is only rebuilt if the channel URL or the bootstrap changes.
+- **Compatible saves:**
+  - A registered item, block or fluid is not removed. It stays registered and hidden in EMI, with a recipe that converts it 1:1 into its replacement (like the Titanium Drill Bit (old)).
+  - Dimensions do not change their id.
+  - If the shape of a multiblock changes, the release notes say so, because the player has to rebuild it.
+  - Changes to veins and world generation only affect new chunks or recipes.
