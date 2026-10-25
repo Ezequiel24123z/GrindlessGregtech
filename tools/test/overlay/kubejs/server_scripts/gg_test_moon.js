@@ -465,14 +465,15 @@
     asArray(L.GTCEuAPI.materialManager.getRegisteredMaterials()).forEach(function (m) { materials[String(m.getName())] = m })
     var recyclingId = /^gtceu:(macerator\/macerate_|arc_furnace\/arc_|extractor\/extract_)/
     // GT's own recycling (a part or a machine back to its materials) and the decomposition of an alloy (a material with no ore) give
-    // back titanium that went in: not a source
+    // back what went in: not a source. GTM names decompositions decomposition_<kind>__<material>, GT Community Additions with one
+    // underscore (decomposition_electrolyzing_end_steel: End Steel is mixed from tungsten dust)
     function recycling(r, id) {
       var cat = ''
       try {
         cat = String(r.recipeCategory)
       } catch (e) { /* no category */ }
       if (/recycling/.test(cat) || recyclingId.test(id)) return true
-      var dec = id.match(/decomposition_(?:centrifuging|electrolyzing)__([a-z0-9_]+)$/)
+      var dec = id.match(/decomposition_(?:centrifuging|electrolyzing)__?([a-z0-9_]+)$/)
       if (dec === null) return false
       var mat = materials[dec[1]]
       return mat !== undefined && !mat.hasProperty(L.PropertyKey.ORE)
