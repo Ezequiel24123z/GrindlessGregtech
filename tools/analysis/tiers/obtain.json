@@ -38,8 +38,8 @@
 
     "later": [
       { "id": "venus-mercury", "era": "IV (Venus and Mercury)", "until": "iv", "label": "Venus and Mercury (gcyr:venus, gcyr:mercury)", "dimensions": ["gcyr:venus", "gcyr:mercury"], "items": ["gcyr:venus_rock", "gcyr:venus_cobblestone", "gcyr:venus_sand", "gcyr:venusian_regolith", "gcyr:mercury_rock", "gcyr:mercury_cobblestone"] },
+      { "id": "end-pitchblende", "era": "IV (radioactives)", "until": "iv", "label": "the End's pitchblende vein, held back until IV (veins_excluded.json)", "veins": ["gtceu:pitchblende_vein_end"], "note": "Before the naquadah vein: its plutonium ore also gives uraninite, and the radioactive chain (uranium, radon, quantum eye and star, and what needs them) is IV's radioactives, not Venus' naquadah." },
       { "id": "end-naquadah", "era": "IV+ (naquadah: Venus in docs/journey.md, and whatever hangs off it)", "until": "iv", "label": "the End's naquadah vein, held back until IV (veins_excluded.json)", "veins": ["gtceu:naquadah_vein"] },
-      { "id": "end-pitchblende", "era": "IV (radioactives)", "until": "iv", "label": "the End's pitchblende vein, held back until IV (veins_excluded.json)", "veins": ["gtceu:pitchblende_vein_end"] },
       { "id": "proxima", "era": "UHV (Proxima b)", "until": "uhv", "label": "Proxima Centauri b", "dimensions": ["gcyr:proxima_centauri_b"], "items": ["gcyr:proxima_centauri_b_*", "gcyr:prb_*"] }
     ],
 
