@@ -31,17 +31,28 @@
 // it and a recipe it collides with are both in one entry. A recipe of ours (a grindless: id, or a recipe our scripts added or
 // changed: ServerEvents.recipes below records them on every load) is never accepted, on either side: it gets fixed.
 // First bench run (2026-10-25, lookup-guard-1): 13 unreachable recipes, the 12 GTM logs plus the silent large reactor dynamite, all
-// addon against addon.
+// addon against addon. The ones that lost a route or ran the wrong recipe are fixed by the pack
+// (server_scripts/grindless/integration/lookup_collisions.js, data/grindless/tables/lookup_collisions.json): their rebuilt recipes
+// and the ones they collided with are in MUST_REACH, and the `collisions` check reads what the script did. Only the same-result
+// duplicates stay in the baseline.
 // The scan runs over server ticks, SLICE_MS of work per tick (about 1.5 s of work over 6 ticks for 44 000 recipes).
+//
+// For tools/analysis: the unreachable recipes (id, type, what each collides with) are written to EXPORT
+// (kubejs/exported/lookup_unreachable.json, the folder gg_dump.js fills and the bench collects as results/server/kubejs-exported)
+// before DONE, so a run with this test and gg_dump gives the validator the recipes GTM's lookup never finds.
 //
 // Markers: GGTEST|lookup|<check>|PASS|FAIL|INFO (detail), last line GGTEST|lookup|DONE
 //   start              INFO: how many types, recipes and proxy recipes the scan covers
 //   <recipe id>        FAIL: unreachable and not in the baseline (with what it collides with); INFO: an accepted baseline conflict
-//   must_reach:<id>    PASS when the recipe exists and the lookup finds it (gtceu:gas_collector/air: 59a9bd2's fix)
+//   must_reach:<id>    PASS when the recipe exists and the lookup finds it (gtceu:gas_collector/air: 59a9bd2's fix; the lookup
+//                      collision fixes and the recipes they collided with)
+//   collisions         PASS when integration/lookup_collisions.js applied its table with no failure and every recipe it removed or
+//                      rebuilt under a new id is gone
 //   empty_path         INFO: recipes skipped because they have no item or fluid input; empty_path_ours FAIL if one is ours
 //   baseline_policy    PASS when no baseline entry names a recipe of ours
 //   baseline_stale     INFO: a baseline entry whose recipes are all reachable now (or gone): it can be removed
 //   script_recipes     INFO: how many recipes our scripts added or changed (what "ours" means beyond grindless: ids)
+//   export             PASS when EXPORT is written
 //   scan               PASS/FAIL summary: types, recipes, proxies, checked, skipped, unreachable, accepted, new, timings
 // var + function everywhere (this Rhino throws "redeclaration of var" for const/let inside functions that run more than once).
 (function () {
@@ -49,30 +60,23 @@
   var FIND = 'find(java.util.Map,java.util.function.Predicate)'
   var SLICE_MS = 250
   var MAX_LISTED = 8
-  var MUST_REACH = ['gtceu:gas_collector/air']
+  var EXPORT_DIR = 'kubejs/exported'
+  var EXPORT = EXPORT_DIR + '/lookup_unreachable.json'
+  var MUST_REACH = [
+    'gtceu:gas_collector/air',
+    // lookup_collisions.js: the recipes it rebuilt on their own circuit, and what each collided with
+    'grindless:distillery/distill_coal_tar_to_anthracene', 'gtceu:distillery/distill_coal_tar_to_durene',
+    'grindless:chemical_reactor/dynamite', 'gtceu:chemical_reactor/bomb',
+    'grindless:large_chemical_reactor/dynamite', 'gtceu:large_chemical_reactor/bomb',
+    'grindless:alloy_blast_smelter/trinium_naquadah_carbonite', 'gtceu:alloy_blast_smelter/trinaquadalloy',
+    // the one LV pentlandite sulfuric attack it keeps in each reactor
+    'gtceu:chemical_reactor/platinum_group_sludge_dust1_lv', 'gtceu:large_chemical_reactor/platinum_group_sludge_dust1_lv'
+  ]
 
   var BASELINE = [
     {
       ids: ['gtceu:bender/bend_lanthanum_plate_to_dense_plate', 'gtceu:bender/dense_lanthanum'],
       reason: 'GTM\'s generated dense lanthanum plate and GT--\'s copy: same plates in, same plate out, same time'
-    },
-    {
-      ids: ['gtceu:chemical_reactor/platinum_group_sludge_dust1_lv', 'gtceu:chemical_reactor/platinum_group_sludge_tiny_dust1',
-        'gtceu:chemical_reactor/platinum_group_sludge_tiny_dust2'],
-      reason: 'GT-- registers its LV pentlandite sulfuric attack three times (tiny_dust2 is its typo: pentlandite in, copper solution out)'
-    },
-    {
-      ids: ['gtceu:large_chemical_reactor/platinum_group_sludge_dust1_lv', 'gtceu:large_chemical_reactor/platinum_group_sludge_tiny_dust1',
-        'gtceu:large_chemical_reactor/platinum_group_sludge_tiny_dust2'],
-      reason: 'GT-- registers its LV pentlandite sulfuric attack three times (tiny_dust2 is its typo: pentlandite in, copper solution out)'
-    },
-    {
-      ids: ['gtceu:chemical_reactor/bomb', 'gtceu:chemical_reactor/dynamite'],
-      reason: 'GT--\'s Supplementaries bomb is GTM\'s dynamite (paper, string, glyceryl trinitrate) plus circuit 1: one path runs into the other'
-    },
-    {
-      ids: ['gtceu:large_chemical_reactor/bomb', 'gtceu:large_chemical_reactor/dynamite'],
-      reason: 'GT--\'s Supplementaries bomb is GTM\'s dynamite (paper, string, glyceryl trinitrate) plus circuit 1: one path runs into the other'
     },
     {
       ids: ['gcyr:chemical_reactor/pyrometillic_dianhydride', 'gcyr:chemical_reactor/potassium_hydroxide'],
@@ -83,20 +87,12 @@
       reason: 'GCYR registers its pyromellitic dianhydride recipe twice, the second under a potassium hydroxide id: identical'
     },
     {
-      ids: ['gtceu:distillery/distill_coal_tar_to_anthracene', 'gtceu:distillery/distill_coal_tar_to_durene'],
-      reason: 'GT-- (anthracene) and GCYR (durene) both rewrite GTM\'s coal tar distillation; GCYR\'s tower wins, both distillery copies keep circuit 5'
-    },
-    {
       ids: ['gtceu:extractor/extract_potassium_pyrosulfate_dust', 'gtceu:extractor/potassium_pyrosulfate_dust'],
       reason: 'GTM\'s generated extraction and GT--\'s copy: same dust in, same molten potassium pyrosulfate out'
     },
     {
       ids: ['gtceu:large_chemical_reactor/raw_palladium_separation', 'gtceu:large_chemical_reactor/raw_palladium_separation_large'],
       reason: 'GT--: the large reactor copy of the raw palladium step and its _large variant share inputs (_large also gives ethylene and water)'
-    },
-    {
-      ids: ['gtceu:alloy_blast_smelter/trinium_naquadah_carbonite', 'gtceu:alloy_blast_smelter/trinaquadalloy'],
-      reason: 'GTCA\'s and GCYR\'s alloys share trinium, naquadah, carbon and circuit 3; each keeps its gas variant (circuit 13)'
     }
   ]
 
@@ -398,6 +394,62 @@
 
   // ---------------------------------------------------------------- report
 
+  // what integration/lookup_collisions.js published (global.grindless.lookupCollisions): no failure, and every recipe it removed or
+  // rebuilt under a new id is gone from the recipe manager (the rebuilt ones are in MUST_REACH)
+  function checkCollisions() {
+    var report = global.grindless ? global.grindless.lookupCollisions : undefined
+    if (report === undefined || report === null) {
+      emit('collisions', 'FAIL', 'global.grindless.lookupCollisions is missing: integration/lookup_collisions.js did not run')
+      return false
+    }
+    var still = report.removed.concat(report.rebuilt.map(function (r) { return r.from })).filter(function (id) { return exists(id) })
+    var ok = report.failed.length === 0 && still.length === 0 && report.rebuilt.length > 0
+    emit('collisions', ok ? 'PASS' : 'FAIL', 'removed ' + report.removed.length + ' (' + report.removed.join(', ') + ')' +
+      '; rebuilt ' + report.rebuilt.map(function (r) { return r.from + ' as ' + r.to + ' on circuit ' + r.circuit }).join(', ') +
+      (report.missing.length > 0 ? '; not in this pack: ' + report.missing.join(', ') : '') +
+      (still.length > 0 ? '; still loaded: ' + still.join(', ') : '') +
+      (report.failed.length > 0 ? '; failed: ' + report.failed.join('; ') : ''))
+    return ok
+  }
+
+  // EXPORT for tools/analysis (lib/dump.mjs reads it next to recipes.json and drops these recipes from its model). JsonIO.write
+  // takes a Gson object, so the JS document goes through Gson's parser.
+  function exportUnreachable(rows, empty) {
+    var doc = {
+      format: 'gg-lookup-unreachable-1',
+      source: 'gg_test_recipe_lookup (tools/test/overlay/kubejs/server_scripts)',
+      time: new Date().toISOString(),
+      note: 'GT recipes that GTM 7.5.3\'s recipe lookup never finds from their own inputs. A proxy recipe (proxy: true, e.g. smelting ' +
+        'converted for the electric furnace) is only lost in that GT type; type is the GT recipe type that loses it.',
+      types: S.typeCount, recipes: S.recipes, proxies: S.proxies, checked: S.checked, skipped: S.skipped,
+      unreachable: rows,
+      emptyPath: empty
+    }
+    try {
+      var dirErrors = []
+      var made = [
+        function () { Java.loadClass('dev.latvian.mods.kubejs.KubeJSPaths').dir(EXPORT_DIR) },
+        function () { Java.loadClass('net.minecraft.FileUtil').createDirectoriesSafe(EXPORT_DIR) }
+      ].some(function (fn) {
+        try {
+          fn()
+          return true
+        } catch (e) {
+          dirErrors.push(String(e))
+          return false
+        }
+      })
+      var json = Java.loadClass('com.google.gson.JsonParser').parseString(JSON.stringify(doc))
+      JsonIO.write(EXPORT, json)
+      emit('export', 'PASS', EXPORT + ': ' + rows.length + ' unreachable recipes and ' + empty.length + ' with no item or fluid input' +
+        (made ? '' : ' (the directory was not created here: ' + dirErrors.join(' ; ') + ')'))
+      return true
+    } catch (e2) {
+      emit('export', 'FAIL', 'could not write ' + EXPORT + ': ' + e2)
+      return false
+    }
+  }
+
   function report() {
     var scanMs = Date.now() - S.t0
     var t0 = Date.now()
@@ -405,8 +457,11 @@
     var accepted = 0
     var fresh = 0
     var hitEntries = []
+    var rows = []
 
     S.unreachable.forEach(function (u) {
+      var row = { id: u.id, type: u.T.id, proxy: u.index >= u.T.own, reaches: [], shadowedBy: [], alsoOut: [], verdict: 'new' }
+      rows.push(row)
       try {
         var reached = reachedWith(u)
         var cover = coveredBy(u)
@@ -414,8 +469,11 @@
         // a recipe that holds all of u's keys and is in the tree: u's path ends inside its path (or is the same)
         var shadow = others.filter(function (id) { return unreachableIds.indexOf(id) < 0 })
         var alsoOut = others.filter(function (id) { return unreachableIds.indexOf(id) >= 0 })
+        row.reaches = reached
+        row.shadowedBy = shadow
+        row.alsoOut = alsoOut
         var partners = reached.concat(shadow)
-        var how = 'type ' + u.T.id + (u.index >= u.T.own ? ' (proxy recipe)' : '') + '; with its own inputs the lookup reaches ' + listed(reached)
+        var how = 'type ' + u.T.id + (row.proxy ? ' (proxy recipe)' : '') + '; with its own inputs the lookup reaches ' + listed(reached)
         if (shadow.length > 0) how += '; recipes holding all of its keys (its path ends inside theirs): ' + listed(shadow)
         if (alsoOut.length > 0) how += '; also left out with all of its keys: ' + listed(alsoOut)
         if (cover.keyless > 0) how += '; ' + cover.keyless + ' of its inputs give no lookup key'
@@ -423,9 +481,12 @@
         var base = baselineFor(u.id, partners)
         if (ours.length > 0) {
           fresh++
+          row.verdict = 'ours'
           emit(u.id, 'FAIL', 'unreachable, recipes of ours involved (' + ours.join(', ') + '): fix them, never baseline them; ' + how)
         } else if (base !== null) {
           accepted++
+          row.verdict = 'accepted'
+          row.reason = base.entry.reason
           if (hitEntries.indexOf(base.entry) < 0) hitEntries.push(base.entry)
           emit(u.id, 'INFO', 'accepted, collides with ' + base.with.join(', ') + ': ' + base.entry.reason + '; ' + how)
         } else {
@@ -434,6 +495,7 @@
         }
       } catch (e) {
         fresh++
+        row.error = String(e)
         emit(u.id, 'FAIL', 'unreachable; the collision report failed: ' + e)
       }
     })
@@ -445,6 +507,7 @@
       if (ok) mustOk++
       emit('must_reach:' + id, ok ? 'PASS' : 'FAIL', !present ? 'the recipe is missing' : (ok ? 'the lookup finds it from its own inputs' : 'unreachable'))
     })
+    var collisionsOk = checkCollisions()
 
     var empty = []
     S.types.forEach(function (T) { empty = empty.concat(T.empty) })
@@ -475,7 +538,10 @@
         (touched.error ? '; the record stopped early: ' + touched.error : ''))
     }
 
-    var failed = fresh + (emptyOurs.length > 0 ? 1 : 0) + (policy.length > 0 ? 1 : 0) + (MUST_REACH.length - mustOk)
+    var exported = exportUnreachable(rows, empty)
+
+    var failed = fresh + (emptyOurs.length > 0 ? 1 : 0) + (policy.length > 0 ? 1 : 0) + (MUST_REACH.length - mustOk) +
+      (collisionsOk ? 0 : 1) + (exported ? 0 : 1)
     emit('scan', failed === 0 ? 'PASS' : 'FAIL', 'types=' + S.typeCount + ' recipes=' + S.recipes + ' proxies=' + S.proxies + ' checked=' + S.checked +
       ' skipped=' + S.skipped + ' unreachable=' + S.unreachable.length + ' accepted=' + accepted + ' new=' + fresh +
       ' scanMs=' + scanMs + ' busyMs=' + S.busy + ' ticks=' + S.ticks + ' reportMs=' + (Date.now() - t0) + ' predicate=' + L.predicate)
