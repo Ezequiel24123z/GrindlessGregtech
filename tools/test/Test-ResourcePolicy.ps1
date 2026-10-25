@@ -20,18 +20,20 @@ function Assert-Rejected {
 
 function New-TestRequest {
     return [pscustomobject]@{
-        slots = 1; slotMinFreeGb = 8; waitForLog = @()
+        slots = 1; waitForLog = @()
         serverXms = '1G'; serverXmx = '4G'
         bootTimeoutSec = 420; commandTimeoutSec = 60; clientTimeoutSec = 600
         waitTimeoutSec = 120; lockWaitMin = 5; settleSec = 15
     }
 }
 
-foreach ($relative in @('Invoke-GGTest.ps1', 'Test-ResourcePolicy.ps1', 'remote\gg-common.ps1',
-        'remote\gg-resource-policy.ps1', 'remote\gg-server.ps1', 'remote\gg-client.ps1', 'remote\Run-GGTest.ps1')) {
+$asts = @{}
+$paths = @([IO.Directory]::GetFiles($PSScriptRoot, '*.ps1')) + @([IO.Directory]::GetFiles((Join-Path $PSScriptRoot 'remote'), '*.ps1'))
+foreach ($path in $paths) {
+    $relative = $path.Substring($PSScriptRoot.Length + 1)
     $tokens = $null
     $errors = $null
-    [void][Management.Automation.Language.Parser]::ParseFile((Join-Path $PSScriptRoot $relative), [ref]$tokens, [ref]$errors)
+    $asts[$relative] = [Management.Automation.Language.Parser]::ParseFile($path, [ref]$tokens, [ref]$errors)
     Assert-Policy ($errors.Count -eq 0) "PowerShell parses $relative"
 }
 
@@ -75,23 +77,53 @@ $req = New-TestRequest
 $req.slots = 2
 Assert-Rejected { Assert-GGResourceRequest $req } 'uploaded request cannot enable a second JVM'
 $req = New-TestRequest
-$req.slotMinFreeGb = 0
-Assert-Rejected { Assert-GGResourceRequest $req } 'uploaded request cannot disable RAM headroom'
+Assert-GGResourceRequest $req
+Assert-Policy ($null -eq $req.PSObject.Properties['slotMinFreeGb']) 'requests need no RAM-floor field'
+foreach ($legacyFloor in @(0, 8, 128, 1000000, -1, [double]::NaN, [double]::PositiveInfinity, $null, 'obsolete')) {
+    $req = New-TestRequest
+    Add-Member -InputObject $req -NotePropertyName slotMinFreeGb -NotePropertyValue $legacyFloor
+    $warnings = @(Assert-GGResourceRequest $req 3>&1)
+    Assert-Policy ($warnings.Count -eq 1 -and $warnings[0] -is [Management.Automation.WarningRecord] -and
+        "$($warnings[0])" -match 'slotMinFreeGb.*deprecated and ignored') "legacy request RAM value '$legacyFloor' is explicitly ignored"
+    Assert-Policy ($req.serverXmx -eq '4G' -and $req.clientXmx -eq '4G' -and $req.nativeTimeoutSec -eq 600) 'ignoring legacy RAM input preserves heap and time caps'
+}
 $req = New-TestRequest
 $req.waitForLog = @([pscustomobject]@{ pattern = 'DONE'; timeoutSec = 900 })
 Assert-Rejected { Assert-GGResourceRequest $req } 'per-marker deadlines cannot bypass the cap'
 
+# Even diagnostic callers must get unknown, not a launch refusal, when both counters fail or omit their values.
+function Get-CimInstance { throw 'simulated unavailable memory counters' }
+try {
+    Assert-Policy ($null -eq (Get-GGFreeRamGb)) 'unavailable RAM counters return unknown without throwing'
+    function Get-CimInstance { return [pscustomobject]@{} }
+    Assert-Policy ($null -eq (Get-GGFreeRamGb)) 'missing RAM counter values return unknown without throwing'
+    function Get-CimInstance { return [pscustomobject]@{ AvailableMBytes = 0 } }
+    Assert-Policy ((Get-GGFreeRamGb) -eq 0) 'zero available RAM is reported honestly for diagnostics'
+} finally { Remove-Item function:Get-CimInstance }
+
 $originalRamReader = ${function:Get-GGFreeRamGb}
-function Get-GGFreeRamGb { return $script:AvailableGb }
-$script:AvailableGb = 8
-$decision = Get-GGSlotDecision @() 4 0
-Assert-Policy ($decision.Index -eq 0 -and $decision.Free -eq 8) 'first JVM starts at the 8 GB boundary even for a legacy caller'
-$script:AvailableGb = 7.9
-Assert-Policy ((Get-GGSlotDecision @() 4 0).Index -eq -1) 'first JVM also waits for RAM; zero cannot disable the floor'
-$script:AvailableGb = 16
+$script:RamReads = 0
+$script:RamMode = 'low'
+function Get-GGFreeRamGb {
+    $script:RamReads++
+    if ($script:RamMode -eq 'unreadable') { throw 'simulated unavailable memory counters' }
+    return $script:AvailableGb
+}
+foreach ($available in 0, 4.5, 7.9, 8) {
+    $script:AvailableGb = $available
+    foreach ($legacyFloor in 0, 8, 128, 1000000) {
+        $records = @(Get-GGSlotDecision @() 4 $legacyFloor 3>&1)
+        $decision = $records[-1]
+        Assert-Policy ($decision.Index -eq 0 -and $null -eq $decision.Free -and $decision.Pending -eq 0) "first JVM is admitted with $available GB regardless of legacy floor $legacyFloor"
+        Assert-Policy ($records[0] -is [Management.Automation.WarningRecord] -and
+            "$($records[0])" -match 'MinFreeGb.*deprecated and ignored') 'legacy slot-decision parameter is explicitly ignored'
+    }
+}
+$script:RamMode = 'unreadable'
+Assert-Policy ((Get-GGSlotDecision @() 4).Index -eq 0) 'unreadable counters cannot refuse the first slot'
 foreach ($index in 0, 1, 3) {
     $holder = [pscustomobject]@{ Index = $index; Info = [pscustomobject]@{ v = 2; slots = 4; runId = 'owned-test'; pid = 123; started = '' } }
-    Assert-Policy ((Get-GGSlotDecision @($holder) 4 8).Index -eq -1) "legacy slot $index blocks all additional JVMs"
+    Assert-Policy ((Get-GGSlotDecision @($holder) 4).Index -eq -1) "legacy slot $index blocks all additional JVMs even without RAM counters"
 }
 Assert-Policy ((Get-GGSlotLimit @() 4) -eq 1) 'global scheduler ceiling is one, not merely a default'
 $commonPath = (Join-Path $PSScriptRoot 'remote\gg-common.ps1').Replace("'", "''")
@@ -106,29 +138,106 @@ $global:GG.RunDir = $testRun
 $global:GG.RunId = 'local-test'
 $global:GG.LockPath = Join-Path $testRoot '.lock'
 try {
-    $beforeAcquire = [datetime]::UtcNow
-    Enter-GGLock -MaxWaitMin 1 -Slots 4 -MinFreeGb 0
-    $info = Get-GGLockInfo
-    Assert-Policy ($global:GG.HasLock -and $global:GG.NativeMutex -and $info.slots -eq 1) 'real slot acquisition retains the OS mutex and normalizes legacy slot requests'
-    Assert-Policy ([datetime]::Parse($info.started).ToUniversalTime() -ge $beforeAcquire) 'lock start records actual acquisition'
-    [IO.File]::Delete($global:GG.LockPath)
-    $other = & powershell -NoProfile -ExecutionPolicy Bypass -EncodedCommand $encodedProbe
-    Assert-Policy ($LASTEXITCODE -eq 0 -and "$other" -eq 'BUSY') 'another real process stays excluded even without a metadata lock file'
+    foreach ($mode in 'low', 'unreadable') {
+        $script:RamMode = $mode
+        $script:AvailableGb = 0
+        $beforeAcquire = [datetime]::UtcNow
+        $warnings = @(Enter-GGLock -MaxWaitMin 1 -Slots 4 -MinFreeGb 1000000 -ReserveGb 1000000 3>&1)
+        Assert-Policy ($warnings.Count -eq 1 -and "$($warnings[0])" -match 'MinFreeGb.*deprecated and ignored') 'legacy acquisition parameter is explicitly ignored'
+        $info = Get-GGLockInfo
+        Assert-Policy ($global:GG.HasLock -and $global:GG.NativeMutex -and $info.slots -eq 1) "real acquisition retains the OS mutex with $mode RAM and legacy slot/floor/reserve inputs"
+        Assert-Policy ([datetime]::Parse($info.started).ToUniversalTime() -ge $beforeAcquire) 'lock start records actual acquisition'
+        Assert-Policy (-not [IO.File]::Exists((Join-Path $testRun '.waiting'))) 'successful acquisition removes its waiting ticket'
+        [IO.File]::Delete($global:GG.LockPath)
+        $other = & powershell -NoProfile -ExecutionPolicy Bypass -EncodedCommand $encodedProbe
+        Assert-Policy ($LASTEXITCODE -eq 0 -and "$other" -eq 'BUSY') 'another real process stays excluded even without a metadata lock file'
+        Exit-GGLock
+        $other = & powershell -NoProfile -ExecutionPolicy Bypass -EncodedCommand $encodedProbe
+        Assert-Policy ($LASTEXITCODE -eq 0 -and "$other" -eq 'ACQUIRED') 'normal slot exit releases the OS mutex even after metadata disappears'
+    }
+
+    # A live legacy nonzero slot must exclude acquisition, even though old RAM/reservation fields are ignored.
+    $legacyPath = Join-Path $testRoot '.lock.3'
+    $legacy = [pscustomobject]@{
+        v = 2; slots = 4; slot = 3; runId = 'legacy-local-test'; pid = $PID; reserveGb = 1000000
+        started = [datetime]::UtcNow.ToString('o'); updated = [datetime]::UtcNow.ToString('o')
+        procStart = (Get-Process -Id $PID).StartTime.ToUniversalTime().ToString('o')
+    }
+    [IO.File]::WriteAllText($legacyPath, (ConvertTo-Json $legacy))
+    $active = @(Get-GGActiveSlots)
+    Assert-Policy ($active.Count -eq 1 -and $active[0].Index -eq 3) 'real live legacy slot metadata is recognized'
+    Assert-Policy ((Get-GGSlotDecision $active 4).Index -eq -1) 'real legacy holder blocks another JVM without RAM checks'
+    $failure = ''
+    try { Enter-GGLock -MaxWaitMin 0 -Slots 4 } catch { $failure = $_.Exception.Message }
+    Assert-Policy ($failure -match 'timed out.*all 1 slot\(s\) busy') 'actual acquisition refuses a live legacy holder, not unreadable RAM'
+    Assert-Policy (-not $global:GG.HasLock -and -not $global:GG.NativeMutex -and
+        -not [IO.File]::Exists((Join-Path $testRun '.waiting'))) 'failed acquisition releases its mutex and waiting ticket'
+    Assert-Policy ([IO.File]::Exists($legacyPath)) 'failed acquisition preserves the other holder'
+    [IO.File]::Delete($legacyPath)
+
+    Enter-GGLock -MaxWaitMin 1
+    $foreign = Get-GGLockInfo
+    $foreign.runId = 'another-local-test'
+    [IO.File]::WriteAllText($global:GG.LockPath, (ConvertTo-Json $foreign))
     Exit-GGLock
+    Assert-Policy ([IO.File]::Exists($global:GG.LockPath)) 'exit never deletes metadata now owned by another run'
     $other = & powershell -NoProfile -ExecutionPolicy Bypass -EncodedCommand $encodedProbe
-    Assert-Policy ($LASTEXITCODE -eq 0 -and "$other" -eq 'ACQUIRED') 'normal slot exit releases the OS mutex even after metadata disappears'
+    Assert-Policy ($LASTEXITCODE -eq 0 -and "$other" -eq 'ACQUIRED') 'exit still releases its own OS mutex after metadata ownership changes'
 } finally {
     Exit-GGLock
     [IO.File]::Delete((Join-Path $testRoot '.lock'))
+    [IO.File]::Delete((Join-Path $testRoot '.lock.3'))
     [IO.File]::Delete((Join-Path $testRun '.waiting'))
     [IO.Directory]::Delete($testRun)
     [IO.Directory]::Delete($testRoot)
     $global:GG = $savedGG
 }
-Set-Item -Path function:Get-GGFreeRamGb -Value $originalRamReader
-function Get-CimInstance { throw 'simulated unavailable memory counters' }
-Assert-Rejected { Get-GGFreeRamGb } 'unreadable RAM is a failure, not 999 GB of fictional headroom'
-Remove-Item function:Get-CimInstance
+
+# Execute the actual pre-launch statements only, stopping BEFORE GGProc.Start. No JVM or tools can be launched.
+# This catches a reintroduced last-moment RAM check on either side, not just a scheduler regression.
+function Get-TestLaunchPrefix {
+    param($Ast, [string]$Stage)
+    $calls = @($Ast.FindAll({
+        param($node)
+        $node -is [Management.Automation.Language.CommandAst] -and $node.GetCommandName() -eq 'Invoke-GGStage'
+    }, $true) | Where-Object { $_.CommandElements[1].Value -eq $Stage })
+    Assert-Policy ($calls.Count -eq 1) "locates the actual $Stage stage"
+    $statements = @($calls[0].CommandElements[2].ScriptBlock.EndBlock.Statements)
+    $starts = @($statements | Where-Object { $_.Extent.Text -match '^\$g = \[GGProc\]::Start\(' })
+    Assert-Policy ($starts.Count -eq 1) "$Stage has one identifiable native launch boundary"
+    $prefix = @($statements | Where-Object { $_.Extent.StartOffset -lt $starts[0].Extent.StartOffset } |
+        ForEach-Object { $_.Extent.Text }) -join "`n"
+    Assert-Policy ($prefix -notmatch '::Start\(|Start-Process|Invoke-GGTool') "$Stage regression prefix contains no process launch"
+    return [scriptblock]::Create($prefix + "`nreturn `$argLine")
+}
+
+$savedBudget = $global:GG.NativeBudget
+try {
+    foreach ($side in 'server', 'client') {
+        $stage = 'boot'
+        if ($side -eq 'client') { $stage = 'client-launch' }
+        $prefix = Get-TestLaunchPrefix $asts["remote\gg-$side.ps1"] $stage
+        $Req = New-TestRequest
+        Assert-GGResourceRequest $Req
+        $ctx = @{ ForgeVer = 'local-only'; Hmc = @{ Home = 'local-only' } }
+        $inst = 'local-only-not-created'
+        $renderer = 'mesa'
+        foreach ($mode in 'low', 'unreadable') {
+            $script:RamMode = $mode
+            $script:AvailableGb = 0
+            $global:GG.NativeBudget = $null
+            $argLine = & $prefix
+            Assert-Policy (-not [string]::IsNullOrEmpty($argLine)) "$side reaches the launch boundary with $mode RAM, without starting a process"
+            Assert-Policy ($global:GG.NativeBudget.TimeoutSec -eq 600) "$side launch preparation preserves the native budget"
+        }
+        $global:GG.NativeBudget = @{ TimeoutSec = 600; Clock = [pscustomobject]@{ Elapsed = [pscustomobject]@{ TotalMilliseconds = 600000 } } }
+        Assert-Rejected { & $prefix } "$side cannot reset an exhausted budget at the launch boundary"
+    }
+    Assert-Policy ($script:RamReads -eq 0) 'slot decisions, real acquisition and both launch boundaries never query RAM'
+} finally {
+    $global:GG.NativeBudget = $savedBudget
+    Set-Item -Path function:Get-GGFreeRamGb -Value $originalRamReader
+}
 
 $budget = @{ TimeoutSec = 600; Clock = [pscustomobject]@{ Elapsed = [pscustomobject]@{ TotalMilliseconds = 0 } } }
 Assert-Policy ((Get-GGNativeTimeoutMs $budget 60000) -eq 60000) 'short operation keeps its own deadline'
@@ -138,12 +247,14 @@ $budget.Clock.Elapsed.TotalMilliseconds = 600000
 Assert-Rejected { Get-GGNativeTimeoutMs $budget 1 } 'total native budget expires at the boundary'
 Assert-Rejected { Get-GGNativeTimeoutMs $budget 600000 } 'a subsequent suite cannot reset the shared budget'
 
-$tokens = $null
-$errors = $null
-$entry = [Management.Automation.Language.Parser]::ParseFile((Join-Path $PSScriptRoot 'Invoke-GGTest.ps1'), [ref]$tokens, [ref]$errors)
-$probe = [scriptblock]::Create($entry.ParamBlock.Extent.Text + @'
+$entry = $asts['Invoke-GGTest.ps1']
+$notice = @($entry.EndBlock.Statements | Where-Object {
+    $_ -is [Management.Automation.Language.IfStatementAst] -and $_.Extent.Text -like "*ContainsKey('SlotMinFreeGb')*"
+})
+Assert-Policy ($notice.Count -eq 1) 'local entry explicitly deprecates the old RAM parameter'
+$probe = [scriptblock]::Create($entry.ParamBlock.Extent.Text + "`n" + $notice[0].Extent.Text + @'
 
-[pscustomobject]@{ Slots=$Slots; ServerXms=$ServerXms; ServerXmx=$ServerXmx; ClientXms=$ClientXms; ClientXmx=$ClientXmx; Native=$NativeTimeoutSec; LockWait=$LockWaitMin }
+[pscustomobject]@{ Slots=$Slots; SlotMinFreeGb=$SlotMinFreeGb; ServerXms=$ServerXms; ServerXmx=$ServerXmx; ClientXms=$ClientXms; ClientXmx=$ClientXmx; Native=$NativeTimeoutSec; LockWait=$LockWaitMin }
 '@)
 $defaults = & $probe
 Assert-Policy ($defaults.Slots -eq 1 -and $defaults.ServerXms -eq '1G' -and $defaults.ServerXmx -eq '4G') 'local server defaults match remote policy'
@@ -151,7 +262,14 @@ Assert-Policy ($defaults.ClientXms -eq '1G' -and $defaults.ClientXmx -eq '4G' -a
 Assert-Rejected { & $probe -Slots 2 } 'local entry rejects extra slots before executing its body'
 Assert-Rejected { & $probe -ClientTimeoutSec 1800 } 'local entry rejects the old 30-minute client timeout'
 Assert-Rejected { & $probe -NativeTimeoutSec 601 } 'local entry rejects a longer total budget'
-Assert-Rejected { & $probe -SlotMinFreeGb 0 } 'local entry rejects disabled RAM headroom'
+Assert-Policy ($defaults.SlotMinFreeGb -eq 0) 'local entry has no default RAM floor'
+foreach ($legacyFloor in @(0, 8, 128, 1000000, -1, [double]::NaN, [double]::PositiveInfinity)) {
+    $records = @(& $probe -SlotMinFreeGb $legacyFloor 3>&1)
+    Assert-Policy ($records.Count -eq 2 -and $records[-1].Slots -eq 1 -and
+        $records[0] -is [Management.Automation.WarningRecord] -and "$($records[0])" -match 'SlotMinFreeGb.*deprecated and ignored') "local entry accepts and deprecates legacy RAM value '$legacyFloor'"
+}
+$requestAssignment = @($entry.EndBlock.Statements | Where-Object { $_.Extent.Text -match '^\$request = ' })
+Assert-Policy ($requestAssignment.Count -eq 1 -and $requestAssignment[0].Extent.Text -notmatch '(?im)^\s*slotMinFreeGb\s*=') 'new upload payloads do not advertise an active RAM floor'
 
 Add-Type -TypeDefinition @'
 using System;

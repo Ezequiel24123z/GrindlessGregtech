@@ -25,7 +25,6 @@ if (-not $global:GG) {
         Incoming     = Join-Path $base 'incoming'
         LockPath     = Join-Path (Join-Path $base 'runs') '.lock'
         LockStaleMin = 60
-        RampSec      = 40
         PollSec      = 15
         RunId        = ''
         RunDir       = ''
@@ -679,7 +678,7 @@ function Invoke-GGTool {
 # Rules for taking a slot (evaluated by one waiter at a time, see the FIFO tickets below):
 #   - always one holder, even if a legacy caller asks for more slots;
 #   - old nonzero slot files are recognized and block new work until their owners finish;
-#   - every run, including the first, needs at least 8 GB available RAM.
+#   - available RAM never gates acquisition or launch; heap and native deadlines remain bounded.
 
 function Try-GGNativeMutex {
     if ($global:GG.NativeMutex) { return $true }
@@ -802,18 +801,17 @@ function Get-GGActiveSlots {
     return @($active)
 }
 
-# RAM a new JVM can get right now: Windows "Available" memory (free + reusable standby cache, what Task Manager shows as
-# Available). The bare free list (Win32_OperatingSystem.FreePhysicalMemory) is only ~7 GB on this 32 GB PC even when it is idle.
+# Optional diagnostic only, never a launch precondition. Unknown memory is reported as null, not a launch refusal.
 function Get-GGFreeRamGb {
     try {
         $perf = Get-CimInstance Win32_PerfFormattedData_PerfOS_Memory -ErrorAction Stop
-        if ($perf -and $perf.AvailableMBytes) { return [math]::Round([double]$perf.AvailableMBytes / 1024, 1) }
+        if ($perf -and $null -ne $perf.AvailableMBytes) { return [math]::Round([double]$perf.AvailableMBytes / 1024, 1) }
     } catch {}
     try {
         $os = Get-CimInstance Win32_OperatingSystem -ErrorAction Stop
         if ($null -eq $os.FreePhysicalMemory) { throw 'FreePhysicalMemory is unavailable' }
         return [math]::Round($os.FreePhysicalMemory / 1MB, 1)
-    } catch { throw "Cannot measure available RAM; refusing to start a personal-PC test: $($_.Exception.Message)" }
+    } catch { return $null }
 }
 
 # How many runs may be active at once, given the holders that already are.
@@ -829,31 +827,13 @@ function Get-GGSlotLimit {
     return $limit
 }
 
-# RAM that the other holders are still going to allocate: their declared reserve until their JVM has been up RampSec.
-function Get-GGPendingRamGb {
-    param($Others)
-    $inv = [Globalization.CultureInfo]::InvariantCulture
-    $rt = [Globalization.DateTimeStyles]::RoundtripKind
-    $sum = 0.0
-    foreach ($h in @($Others)) {
-        $r = 0.0
-        try { $r = [double]$h.Info.reserveGb } catch {}
-        if ($r -le 0) { continue }
-        $factor = 1.0
-        if ($h.Info.jvmStarted) {
-            try {
-                $age = ([datetime]::UtcNow - [datetime]::Parse([string]$h.Info.jvmStarted, $inv, $rt).ToUniversalTime()).TotalSeconds
-                $factor = [math]::Max(0.0, 1.0 - ($age / [double]$global:GG.RampSec))
-            } catch { $factor = 0.0 }
-        }
-        $sum += $r * $factor
-    }
-    return $sum
-}
-
-# Can a new run start now? Returns @{ Index; Reason; Free; Pending }; Index -1 = no (Reason says why).
+# Can a new run start now? MinFreeGb is deprecated and ignored; no value can reinstate a RAM floor.
+# Free/Pending are retained as inert compatibility fields. Index -1 = no (Reason says why).
 function Get-GGSlotDecision {
-    param($Active, [int]$Slots, [double]$MinFreeGb)
+    param($Active, [int]$Slots, [double]$MinFreeGb = 0)
+    if ($PSBoundParameters.ContainsKey('MinFreeGb')) {
+        Write-Warning '-MinFreeGb is deprecated and ignored; slot decisions do not depend on available RAM'
+    }
     $active = @($Active)
     $who = (@($active | ForEach-Object { 'slot {0}: run {1} (pid {2}, since {3})' -f $_.Index, $_.Info.runId, $_.Info.pid, $_.Info.started }) -join '; ')
     $limit = Get-GGSlotLimit $active $Slots
@@ -862,18 +842,7 @@ function Get-GGSlotDecision {
     $idx = -1
     for ($i = 0; $i -lt $limit; $i++) { if ($used -notcontains $i) { $idx = $i; break } }
     if ($idx -lt 0) { return @{ Index = -1; Reason = ("no free slot below {0} - {1}" -f $Slots, $who) } }
-    $free = $null
-    $pending = 0.0
-    $MinFreeGb = [math]::Max(8, $MinFreeGb)
-    if ($MinFreeGb -gt 0) {
-        $free = Get-GGFreeRamGb
-        $pending = Get-GGPendingRamGb $active
-        $eff = [math]::Round($free - $pending, 1)
-        if ($eff -lt $MinFreeGb) {
-            return @{ Index = -1; Reason = ("waiting for RAM: {0} GB available - {1} GB pending = {2} GB, {3} GB needed before launch - {4}" -f $free, [math]::Round($pending, 1), $eff, $MinFreeGb, $who) }
-        }
-    }
-    return @{ Index = $idx; Reason = ''; Free = $free; Pending = $pending }
+    return @{ Index = $idx; Reason = ''; Free = $null; Pending = 0.0 }
 }
 
 # FIFO fairness: waiting runs keep a runs\<id>\.waiting ticket fresh (touched every poll); a run only tries to take
@@ -893,10 +862,13 @@ function Get-GGEarlierWaiters {
 }
 
 function Enter-GGLock {
-    param([int]$MaxWaitMin = 5, [int]$Slots = 1, [double]$MinFreeGb = 8, [double]$ReserveGb = 0)
+    # MinFreeGb is deprecated and ignored. ReserveGb is legacy metadata only, not a reservation or launch gate.
+    param([int]$MaxWaitMin = 5, [int]$Slots = 1, [double]$MinFreeGb = 0, [double]$ReserveGb = 0)
+    if ($PSBoundParameters.ContainsKey('MinFreeGb')) {
+        Write-Warning '-MinFreeGb is deprecated and ignored; slot acquisition does not depend on available RAM'
+    }
     New-Item -ItemType Directory -Force -Path $global:GG.Runs | Out-Null
     $Slots = 1
-    $MinFreeGb = [math]::Max(8, $MinFreeGb)
     $global:GG.Slots = $Slots
     $global:GG.ReserveGb = $ReserveGb
     $global:GG.JvmStarted = ''
@@ -911,7 +883,7 @@ function Enter-GGLock {
             $earlier = @(Get-GGEarlierWaiters)
             $why = ''
             if ($earlier.Count -eq 0 -and (Try-GGNativeMutex)) {
-                $dec = Get-GGSlotDecision @(Get-GGActiveSlots) $Slots $MinFreeGb
+                $dec = Get-GGSlotDecision @(Get-GGActiveSlots) $Slots
                 if ($dec.Index -ge 0) {
                     $path = Get-GGSlotPath $dec.Index
                     $global:GG.Slot = $dec.Index
@@ -985,8 +957,8 @@ function Update-GGLock {
     Save-GGLockFile
 }
 
-# Tells the other runs how much RAM this run is going to need: ReserveGb (its JVM's expected footprint; 0 once no JVM
-# will start any more) and whether a JVM of this run is up (True = one just started, False = it stopped).
+# Informational legacy metadata only: ReserveGb never reserves memory or gates another launch.
+# JvmStarted records whether a JVM of this run is up (True = one just started, False = it stopped).
 function Set-GGSlotState {
     param($ReserveGb = $null, $JvmStarted = $null)
     if ($null -ne $ReserveGb) { $global:GG.ReserveGb = [double]$ReserveGb }

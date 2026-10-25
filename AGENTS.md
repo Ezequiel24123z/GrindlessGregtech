@@ -70,21 +70,27 @@ Gregtech Grindless is a GregTech Modern pack (Minecraft 1.20.1, Forge) in which 
   - Access: `ezequiel@192.168.1.150`.
   - Writes only happen inside `D:\GregtechGrindless`.
   - Never touch the user's PrismLauncher folder, `D:\Grindless` or their `.minecraft`.
-  - Only one JVM at a time; the bench uses a lock.
+  - Only one Minecraft test JVM globally, across all agents/worktrees; the bench enforces this even for legacy slot requests. Updated runners retain a global OS mutex through native cleanup, independently of metadata files.
+  - Client and server use `-Xms1G -Xmx4G`. This caps Java heap, not total process/native RAM. Available RAM is not a launch condition: there is no minimum-memory threshold, and unreadable memory counters do not block a run.
+  - Finish and integrate the tier's implementations first, then validate the complete candidate in one coordinated run owned by a single agent/session. Include pending cross-cutting improvements in that candidate; do not launch separate native tests from each feature workstream or enqueue speculative probes. Required stages run serially, never with overlapping Minecraft JVMs.
+  - The shared native budget remains at most 600 seconds (startup included), with 30 seconds for server shutdown. Commands are capped at 60 seconds and marker waits at 180 seconds. These are failure ceilings, not target durations.
+  - Do necessary source/static validation here, not on the personal PC. Reuse valid prior proof; never raise heap/time/concurrency limits or automatically retry a resource failure.
+  - Before using an older worktree, merge the current bench resource-policy changes; do not use a historical launcher to bypass the limits.
   - Test clients start with all sound at zero (`Set-GGClientOptions` in `tools/test/remote/gg-client.ps1`). Otherwise, the user would hear them.
-- **What to test per tier (2-3 tests):**
+- **Coverage in the tier's single integrated run:**
   1. The pack starts and creates a world.
   2. Our multiblocks form and process.
   3. Integration: the recipes exist, automatic generation works, and the gate to the next tier can be crafted.
-- **If a test fails:** fix it and repeat that one, not all of them.
+- **Small, low-risk changes:** no additional test or native run is required unless there is concrete evidence of a possible failure, a known regression or an affected unproven mechanism. Do not add testing ceremony to straightforward changes.
+- **If a check fails:** fix it and repeat only the affected check, not the whole tier. The same validation owner coordinates the rerun.
 - **Do not retest what has already been tested:**
   - If a mechanism has already passed its in-game test (a multiblock that forms and processes, a recipe type, a table that generates recipes), new content that only uses it is not tested in-game again. For example: more recipes in a multiblock or more rows in a table.
-  - That content is validated at low cost: the recipe validator (`tools/analysis`), the static checks, and that the pack starts without KubeJS errors.
-  - Only new things, things that change the mechanism, or things that already failed before are tested in-game.
-  - Before launching an expensive test, you must be able to say which new doubt it resolves.
-  - When tagging a version, run the tests for what has changed and the ones for the new tier, not the whole battery.
+  - Use the existing recipe validator (`tools/analysis`) and static contracts where relevant; startup without KubeJS errors is covered by the integrated run, not a fresh smoke for each content edit.
+  - Put genuinely new execution mechanisms, changed contracts and known regressions into the integrated candidate's coverage; do not repeat equivalent native proofs for every content instance.
+  - Before the integrated run, identify the concrete unresolved properties it covers. One run may cover several features; no separate run is required just because they have different authors.
+  - When tagging a version, use that tier's integrated evidence and valid prior proof, not a rerun of the whole historical battery.
 - **Test scripts:** they go in `tools/test/overlay/` and are not published with the pack.
-- **Test zones:** tests are launched almost at the same time on the same server, so each one builds and cleans up only its band of the Overworld (Y 98–112). The bands are 64 blocks wide in X and start at Z 0:
+- **Test zones:** each test builds and cleans up only its reserved band of the Overworld (Y 98–112). Keep these bands disjoint even for explicitly approved integration probes. The bands are 64 blocks wide in X and start at Z 0:
 
   | Test | X |
   |---|---|
@@ -141,6 +147,8 @@ Gregtech Grindless is a GregTech Modern pack (Minecraft 1.20.1, Forge) in which 
   | mass production | 12544–12607 (roof at Y 112) |
   | gallery (client) | 12800–12863 |
   | QBC terminal (client) | 13056–13119: the Overworld at Y 98–112 (all of Z 0–63, force-loaded while it runs); on the Moon (`gcyr:luna`) and Mars (`gcyr:mars`) X 13084–13092, Z 28–36, Y 198–214 (7×7 floor at Y 198); the 1,000+ block case only stands the player on natural ground at X 13088, Z 1104+ |
+  | hologram projector | 16384–16447 (reserved; LuV bands skip it) |
+  | chests and furnaces (client) | 18688–18751 (uses X 18688–18703, Z 0–15, Y 98–112) |
 
   For a new test, keep going in steps of 256.
 
