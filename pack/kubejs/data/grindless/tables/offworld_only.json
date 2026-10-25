@@ -1,22 +1,37 @@
 {
-  "_source": "Earth sources of resources that belong to another world, in the pack as loaded at v0.4.0 (recipe dump of the release, files/test-runs/release-0.4.0): every recipe that gives a titanium-bearing material (titanium, rutile, ilmenite) or helium-3 without one going in, plus GTM's ore byproducts (common/data/materials/MaterialFlagAddition.java, GTM 7.5.3), and the tungstate of GTM's end stone dust. Recycling (an alloy or a part that already holds titanium) is not a source and stays.",
+  "_source": "Earth sources of resources that belong to another world, in the pack as loaded at v0.4.0 (recipe dump of the release, files/test-runs/release-0.4.0): every recipe that gives a titanium-bearing material (titanium, rutile, ilmenite) or helium-3 without one going in, plus GTM's ore byproducts (common/data/materials/MaterialFlagAddition.java, GTM 7.5.3), and the tungstate of GTM's end stone dust. Mars (2026-10-25): every recipe of the pack at v0.5.4 plus wave B (recipe dump of files/test-runs/b3-cryogenic-plant-2) that gives tungsten, scheelite, tungstate, samarium or deuterium without one going in. Recycling (an alloy or a part that already holds the resource) is not a source and stays.",
   "_how_it_is_used": [
-    "DECISIONS.md 2026-10-24: titanium and helium-3 come only from the Moon (Lunar Drill, data/grindless/tables/veins_moon.json); tungsten comes from Mars (EV). This table lists what is cut on Earth; for = the world the resource belongs to.",
+    "DECISIONS.md 2026-10-24 and 2026-10-25: titanium and helium-3 come only from the Moon (Lunar Drill, data/grindless/tables/veins_moon.json); tungsten, samarium and deuterium only from Mars (veins_mars.json; samarium through the extraction cascade, deuterium in the Martian ice for IV). This table lists what is cut on Earth; for = the world the resource belongs to (a key of worlds).",
     "byproducts: startup_scripts/grindless/moon/earth_byproducts.js sets these ore byproducts (GTCEuStartupEvents.materialModification, after GTM and every addon). GTM builds the ore chains from them (macerator, ore washer, thermal centrifuge, chemical bath, sifter) and the MV Ore Plant reads those chains, so neither gives rutile or ilmenite any more. aluminium was bauxite, bauxite, ilmenite, rutile; bauxite was grossular, rutile, gallium. The replacements are real companions of bauxite: its iron oxide (hematite, the red of red mud) and gallium.",
     "strip: server_scripts/grindless/moon/offworld_only.js removes these recipes and adds them back with GTM's builder, the same inputs, chances, energy and time, without the listed outputs. The new id is grindless:<type>/offworld_only/<old path>. Destinations of what is left: unchanged. (Greate's copies of GT recipes follow: integration/greate.js only keeps copies of GT recipes that are loaded and unchanged.)",
     "remove: recipes whose only purpose is a resource of another world. They go away.",
-    "combs: Productive Bees combs whose GT centrifuge recipe (integration/productivebees.js) only runs on the Moon (.dimension(dimension)): the bees can live on Earth, but their titanium only comes out on the Moon.",
-    "watched: what the smoke test (tools/test/overlay/kubejs/server_scripts/gg_test_moon.js) looks for. Every stripped recipe must be gone and its replacement must exist without the outputs, and no recipe of the loaded pack may give a watched output from inputs that hold none (inputPattern), except the Moon's own recipes (a dimension condition on the Moon) and the late lines named in allowedLate."
+    "combs: worlds.<world>.combs are Productive Bees combs whose GT centrifuge recipe (integration/productivebees.js) only runs in worlds.<world>.dimension: the bees can live on Earth, but their titanium only comes out on the Moon and their tungsten only on Mars.",
+    "watched: worlds.<world>.watched is what the smoke test (tools/test/overlay/kubejs/server_scripts/gg_test_moon.js) looks for. Every stripped recipe must be gone and its replacement must exist without the outputs, and no recipe of the loaded pack may give a watched output from inputs that hold none (inputPattern), except recipes that only run off Earth (a dimension condition of another world), recycling, and the late lines named in allowedLate."
   ],
-  "dimension": "gcyr:luna",
-  "watched": {
-    "items": ["gtceu:titanium_dust", "gtceu:small_titanium_dust", "gtceu:tiny_titanium_dust", "gtceu:rutile_dust", "gtceu:small_rutile_dust", "gtceu:tiny_rutile_dust", "gtceu:ilmenite_dust", "gtceu:small_ilmenite_dust", "gtceu:tiny_ilmenite_dust", "gtceu:raw_ilmenite", "gtceu:raw_titanium", "gtceu:raw_rutile", "gtceu:titanium_ingot"],
-    "fluids": ["gtceu:helium_3", "gtceu:titanium_tetrachloride", "gtceu:titanium"],
-    "inputPattern": "titan|rutile|ilmenite|helium_3"
+  "worlds": {
+    "moon": {
+      "dimension": "gcyr:luna",
+      "combs": ["ilmenite", "titanium"],
+      "watched": {
+        "items": ["gtceu:titanium_dust", "gtceu:small_titanium_dust", "gtceu:tiny_titanium_dust", "gtceu:rutile_dust", "gtceu:small_rutile_dust", "gtceu:tiny_rutile_dust", "gtceu:ilmenite_dust", "gtceu:small_ilmenite_dust", "gtceu:tiny_ilmenite_dust", "gtceu:raw_ilmenite", "gtceu:raw_titanium", "gtceu:raw_rutile", "gtceu:titanium_ingot"],
+        "fluids": ["gtceu:helium_3", "gtceu:titanium_tetrachloride", "gtceu:titanium"],
+        "inputPattern": "titan|rutile|ilmenite|helium_3"
+      }
+    },
+    "mars": {
+      "dimension": "gcyr:mars",
+      "combs": ["tungsten", "scheelite", "tungstate"],
+      "watched": {
+        "items": ["gtceu:tungsten_dust", "gtceu:small_tungsten_dust", "gtceu:tiny_tungsten_dust", "gtceu:raw_tungsten", "gtceu:tungsten_ingot", "gtceu:scheelite_dust", "gtceu:small_scheelite_dust", "gtceu:tiny_scheelite_dust", "gtceu:raw_scheelite", "gtceu:tungstate_dust", "gtceu:small_tungstate_dust", "gtceu:tiny_tungstate_dust", "gtceu:raw_tungstate", "gtceu:samarium_dust", "gtceu:small_samarium_dust", "gtceu:tiny_samarium_dust", "gtceu:samarium_ingot"],
+        "fluids": ["gtceu:deuterium", "gtceu:tungsten", "gtceu:samarium"],
+        "inputPattern": "tungst|scheelite|samari|deuterium"
+      }
+    }
   },
   "allowedLate": [
     { "pattern": "naquad", "why": "IV naquadah lines: their titanium trifluoride is a byproduct of a later era (naquadah comes after the Moon)." },
-    { "pattern": "fusion_reactor/", "why": "LuV fusion makes plasmas, not ore." }
+    { "pattern": "fusion_reactor/", "why": "LuV fusion makes plasmas, not ore." },
+    { "pattern": "thermal_reactor/[a-z_]+_froth", "why": "GT Community Additions' froth flotation, finished in its thermal reactor at 30,720 EU/t (LuV): the grossular froth gives tungsten long after Mars." }
   ],
   "byproducts": {
     "aluminium": ["bauxite", "bauxite", "gallium"],
@@ -31,10 +46,14 @@
     { "for": "moon", "recipe": "gtceu:centrifuge/diluted_to_filtered", "outputs": ["gtceu:rutile_dust", "gtceu:ilmenite_dust"], "why": "GT Community Additions' bastnasite line (Earth monazite vein): its tailings gave rutile and ilmenite." },
     { "for": "moon", "recipe": "gtceu:centrifuge/bauxite_sludge_centrifuge", "outputs": ["gtceu:rutile_dust"], "why": "Bayer red mud of Earth bauxite: 2 rutile per run." },
     { "for": "moon", "recipe": "gtceu:distillation_tower/distill_liquid_nether_air", "fluids": ["gtceu:helium_3"], "why": "Liquid Nether air (EV): helium-3 is lunar." },
-    { "for": "mars", "recipe": "gtceu:centrifuge/endstone_separation", "outputs": ["gtceu:tungstate_dust"], "why": "End stone dust (the End is MV, and its veins give end stone): 4.45 % tungstate was tungsten before Mars. The sand, the platinum and the helium (helium-4, not helium-3) stay." }
+    { "for": "mars", "recipe": "gtceu:centrifuge/endstone_separation", "outputs": ["gtceu:tungstate_dust"], "why": "End stone dust (the End is MV, and its veins give end stone): 4.45 % tungstate was tungsten before Mars. The sand, the platinum and the helium (helium-4, not helium-3) stay." },
+    { "for": "mars", "recipe": "gtceu:centrifuge/rare_earth_separation", "outputs": ["gtceu:small_samarium_dust"], "why": "GTM's rare earth dust (Earth monazite, bastnasite and the like, LV) gave 35 % small samarium dust: samarium is Martian (extraction cascade). Cadmium, neodymium, cerium, yttrium and lanthanum stay; the cascade's mixed rare-earth chloride also ends here, after its samarium has been taken out." },
+    { "for": "mars", "recipe": "gtceu:electric_blast_furnace/flsamaric_to_ho", "outputs": ["gtca:samarium_terbium_mixture_dust"], "why": "GT Community Additions' samaric branch of Earth bastnasite (EV): the holmium stays, because LuV's wetware and enriched holmium have no other source. The samarium-terbium mixture only fed the samarium residue line (smtb_to_nitrosmtb, nitrosmtb_to_tnd_and_srd, residue_to_smgd), which is left with no input on Earth; its terbium and gadolinium have no other use." },
+    { "for": "mars", "recipe": "gtceu:centrifuge/ender_air_separation", "fluids": ["gtceu:deuterium"], "why": "Ender air (HV gas collector in the End): the deuterium is Martian (deuterium-rich ice). The nitrogen dioxide stays." },
+    { "for": "mars", "recipe": "gtceu:distillation_tower/distill_liquid_ender_air", "fluids": ["gtceu:deuterium"], "why": "Liquid ender air (IV): the deuterium is Martian. The nitrogen dioxide, helium, tritium and noble gases stay." }
   ],
   "remove": [
-    { "for": "moon", "recipe": "gtceu:centrifuge/helium_separation", "why": "Helium-4 -> helium-3 in a centrifuge: helium-3 is lunar (and fusion is LuV)." }
-  ],
-  "combs": ["ilmenite", "titanium"]
+    { "for": "moon", "recipe": "gtceu:centrifuge/helium_separation", "why": "Helium-4 -> helium-3 in a centrifuge: helium-3 is lunar (and fusion is LuV)." },
+    { "for": "mars", "recipe": "gtceu:centrifuge/hydrogen_separation", "why": "Hydrogen -> deuterium in a centrifuge (LV): deuterium is Martian (the deuterium-rich ice, made into heavy water in IV); only tritium separation and fusion (LuV) use it." }
+  ]
 }

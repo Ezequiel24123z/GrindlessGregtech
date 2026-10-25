@@ -161,7 +161,9 @@
     'gcyr:assembler/launch_pad', 'grindless:assembler/gcyr/space_fabric',
     'gtceu:steam_turbine/steam', 'gtceu:combustion_generator/diesel', 'gtceu:gas_turbine/methane',
     'gtceu:large_chemical_reactor/polyethylene_from_tetrachloride_oxygen', 'gtceu:pyrolyse_oven/log_to_creosote',
-    'gtceu:coke_oven/coal_to_coke', 'gtceu:shaped/large_chemical_reactor', 'gtceu:centrifuge/rare_earth_separation'
+    'gtceu:coke_oven/coal_to_coke', 'gtceu:shaped/large_chemical_reactor',
+    // rebuilt without its samarium (moon/offworld_only.js, offworld_only.json: samarium is Martian)
+    'grindless:centrifuge/offworld_only/rare_earth_separation'
   ]
 
   var shipped = null
