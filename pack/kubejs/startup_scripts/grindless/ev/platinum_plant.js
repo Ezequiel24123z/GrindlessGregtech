@@ -25,8 +25,8 @@
 //   3  iridosmine  (IV) Mercury's iridosmine -> iridium and osmium, 3 : 1: IV-B2's oxidative fusion and GT--'s iridium and osmium chain,
 //                  with the osmium tetroxide, the chlorine and the ammonia kept inside (docs/eras/iv.md, "Family steps")
 // Every recipe is generated from the loose line's own recipes (server_scripts/grindless/ev/platinum_plant.js): the same ratios and the
-// SAME ENERGY, the sum of the stages it replaces, with the loops run to the end. No discount and no parallels. Its condition is the
-// electrode in the input bus and a destination for every output: if a bus or a hatch is full, the plant stops. Earth's platinum line
+// SAME ENERGY, the sum of the stages it replaces, with the loops run to the end. No discount and no parallels of its own. Its condition
+// is the electrode in the input bus and a destination for every output: if a bus or a hatch is full, the plant stops. Earth's platinum line
 // gives no iridium or osmium (docs/eras/iv.md decision 5: data/grindless/tables/offworld_only.json strips the iridium metal residue and
 // the rarest metal mixture from it), so modes 1 and 2 give none; mode 3 refines Mercury's iridosmine.
 //
