@@ -163,19 +163,27 @@ function Paint-Lamp {
 #  ICONS (8x8, local coords; absolute = local + WIN_X0/WIN_Y0). Each paints $c/$e in place.
 # ============================================================================================
 
-# FORGE HAMMER: a ram (col 3-4) over an anvil (rows 5-7). Idle: ram up, anvil cold. Active: ram strikes down,
-# sparks at contact.
+# FORGE HAMMER: a ram (col 2-5) over an anvil (rows 5-7), both light iron outlined in dark iron so they read on the
+# bronze bricks behind the open window. Idle: ram up, anvil cold. Active: ram strikes down, sparks fly at contact.
 function Paint-Hammer {
     param($c, $e, [bool]$Active, [int]$T)
-    for ($y = 5; $y -le 7; $y++) { for ($x = 1; $x -le 6; $x++) { Set-Px $c ($WIN_X0 + $x) ($WIN_Y0 + $y) $FamPal['C'] } }
-    Set-Px $c ($WIN_X0 + 1) ($WIN_Y0 + 5) $FamPal['B']; Set-Px $c ($WIN_X0 + 6) ($WIN_Y0 + 5) $FamPal['B']
-    $ramY = if ($Active) { @(0, 1, 2, 3, 3, 2, 1, 0)[$T % 8] } else { 0 }
-    for ($y = 0; $y -le $ramY; $y++) { Set-Px $c ($WIN_X0 + 3) ($WIN_Y0 + $y) $FamPal['E']; Set-Px $c ($WIN_X0 + 4) ($WIN_Y0 + $y) $FamPal['D'] }
-    if ($Active -and $ramY -ge 3) {
-        Set-Both $c $e ($WIN_X0 + 2) ($WIN_Y0 + 4) $FamPal['m']
-        Set-Both $c $e ($WIN_X0 + 5) ($WIN_Y0 + 4) $FamPal['m']
-        Set-Both $c $e ($WIN_X0 + 3) ($WIN_Y0 + 4) $FamPal['h']
-        Set-Both $c $e ($WIN_X0 + 4) ($WIN_Y0 + 4) $FamPal['h']
+    $anvil = @('FAAAAAAF', '.FCBBCF.', 'FDDDDDDF')
+    for ($y = 0; $y -lt 3; $y++) { for ($x = 0; $x -lt 8; $x++) {
+        $ch = [string]$anvil[$y][$x]
+        if ($ch -ne '.') { Set-Px $c ($WIN_X0 + $x) ($WIN_Y0 + 5 + $y) $FamPal[$ch] }
+    } }
+    $headY = 1 + $(if ($Active) { @(0, 1, 2, 3, 3, 2, 1, 0)[$T % 8] } else { 0 })
+    for ($y = 0; $y -lt $headY; $y++) {
+        Set-Px $c ($WIN_X0 + 2) ($WIN_Y0 + $y) $FamPal['F']; Set-Px $c ($WIN_X0 + 3) ($WIN_Y0 + $y) $FamPal['A']
+        Set-Px $c ($WIN_X0 + 4) ($WIN_Y0 + $y) $FamPal['C']; Set-Px $c ($WIN_X0 + 5) ($WIN_Y0 + $y) $FamPal['F']
+    }
+    $head = 'BACD'
+    for ($i = 0; $i -lt 4; $i++) { Set-Px $c ($WIN_X0 + 2 + $i) ($WIN_Y0 + $headY) $FamPal[[string]$head[$i]] }
+    if ($Active -and $headY -ge 4) {
+        Set-Both $c $e ($WIN_X0 + 1) ($WIN_Y0 + 4) $FamPal['m']
+        Set-Both $c $e ($WIN_X0 + 6) ($WIN_Y0 + 4) $FamPal['m']
+        Set-Both $c $e ($WIN_X0 + 0) ($WIN_Y0 + 3) $FamPal['h']
+        Set-Both $c $e ($WIN_X0 + 7) ($WIN_Y0 + 3) $FamPal['h']
     }
 }
 
@@ -195,24 +203,31 @@ function Paint-Compressor {
     }
 }
 
-# ALLOY SMELTER: a small crucible with a melt pool. Idle: cold crust with one ember. Active: the melt churns and a
-# drop falls every few frames.
+# ALLOY SMELTER: a crucible (rows 2-7) with a melt pool, light iron outlined in dark iron so it reads on the bronze
+# bricks behind the open window. Idle: cold crust with one ember. Active: the melt churns and a drop of metal falls
+# into it every few frames.
 function Paint-Smelter {
     param($c, $e, [bool]$Active, [int]$T)
-    for ($y = 4; $y -le 7; $y++) { for ($x = 1; $x -le 6; $x++) { Set-Px $c ($WIN_X0 + $x) ($WIN_Y0 + $y) $FamPal['E'] } }
-    Set-Px $c ($WIN_X0 + 1) ($WIN_Y0 + 4) $FamPal['D']; Set-Px $c ($WIN_X0 + 6) ($WIN_Y0 + 4) $FamPal['D']
+    $pot = @('FBAAAACF', 'FB....DF', 'FB....DF', 'FC....DF', '.FCCDDF.', '..FFFF..')
+    for ($y = 0; $y -lt 6; $y++) { for ($x = 0; $x -lt 8; $x++) {
+        $ch = [string]$pot[$y][$x]
+        if ($ch -ne '.') { Set-Px $c ($WIN_X0 + $x) ($WIN_Y0 + 2 + $y) $FamPal[$ch] }
+    } }
     if (-not $Active) {
-        Set-Px $c ($WIN_X0 + 3) ($WIN_Y0 + 6) $FamPal['k']
+        $crust = @('UWWU', 'WOWW', 'OWOW')
+        for ($y = 0; $y -lt 3; $y++) { for ($x = 0; $x -lt 4; $x++) { Set-Px $c ($WIN_X0 + 2 + $x) ($WIN_Y0 + 3 + $y) $FamPal[[string]$crust[$y][$x]] } }
+        Set-Px $c ($WIN_X0 + 3) ($WIN_Y0 + 4) $FamPal['k']
         return
     }
-    for ($y = 5; $y -le 6; $y++) {
+    for ($y = 3; $y -le 5; $y++) {
         for ($x = 2; $x -le 5; $x++) {
-            $heat = 150 + ((Get-Noise $x $y $T 31) - 128) * 0.7
+            $heat = 150 + ((Get-Noise $x $y $T 31) - 128) * 0.7 - 25 * ($y - 3)
             $k = if ($heat -ge 190) { 'h' } elseif ($heat -ge 140) { 'm' } else { 'k' }
             Set-Both $c $e ($WIN_X0 + $x) ($WIN_Y0 + $y) $FamPal[$k]
         }
     }
-    if (($T % 4) -eq 0) { Set-Both $c $e ($WIN_X0 + 3) ($WIN_Y0 + 7) $FamPal['m'] }
+    if (($T % 4) -eq 0) { Set-Both $c $e ($WIN_X0 + 4) ($WIN_Y0 + 0) $FamPal['m'] }
+    elseif (($T % 4) -eq 1) { Set-Both $c $e ($WIN_X0 + 4) ($WIN_Y0 + 1) $FamPal['h'] }
 }
 
 # MIXER: a vat with a central shaft and rotating paddle blades. Idle: blades at rest. Active: blades turn, a ripple
