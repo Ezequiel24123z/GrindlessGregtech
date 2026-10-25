@@ -19,8 +19,10 @@
 // of the window a run turns its inputs into radioactive waste. Here a Pu-Be neutron source on the bus holds the window (used up in 1 %
 // of the batches) and the accelerators' upkeep is paid as EU. The HSbF6, the strongest superacid known, never leaves the plant.
 //
-// Machine class: GTM's plain electric multiblock (WorkableElectricMultiblockMachine), so its overclock is GTM's. Nothing it makes in IV
-// must be contained (GTM's naquadah is not radioactive), so it does not refuse voiding; mode 2's naquadria solution (LuV) will.
+// Machine class: GTM's plain electric multiblock (WorkableElectricMultiblockMachine), so its overclock is GTM's, after a parallel hatch's
+// copies when one sits in a part cell (lib/parallel_hatch.js, IV-B6's mechanism: the IV hatch runs up to 4 copies, each at the recipe's
+// EU/t, so 4 at once need LuV voltage, two IV energy hatches; the Pu-Be source, a chanced input, is not multiplied). Nothing it makes in
+// IV must be contained (GTM's naquadah is not radioactive), so it does not refuse voiding; mode 2's naquadria solution (LuV) will.
 //
 // Geometry (lib/patterns.js: slices back -> front, rows bottom -> top, columns left -> right seen from the front):
 //   columns 0-3, the superacid hall, 4 high and 5 deep: a floor, walls and a roof of inert casing; its edges (`X`) take the parts; a
@@ -28,8 +30,10 @@
 //   columns 4-6, the activation chamber, rows 0-2 of slices 1-3, against the hall's side: radiation-proof casing (R) with a laminated
 //   glass window (G) in its front and in its outer side, onto a tungstensteel frame (F), the source holder, at its centre.
 //   The controller is in the hall's front wall, row 1, column 1.
-// The 39 `X` cells take 1-2 energy hatches, 1-2 input buses, 1-2 output buses, 1-6 input hatches and 1-4 output hatches; at least 12
-// stay inert casing, so the plant holds at least 40 inert casings. ME buses and hatches have the same abilities, so they fit.
+// The 39 `X` cells take 1-2 energy hatches (two EV hatches give IV voltage: GTM raises it one tier with two hatches of the top tier, and
+// IV hatches need Mercury's iridium), 1-2 input buses, 1-2 output buses, 1-6 input hatches, 1-4 output hatches and at most one parallel
+// hatch. That is at most 17 parts, so at least 22 stay inert casing and the plant holds at least 50 inert casings; the parts' limits set
+// that floor, so the casing has no minimum of its own. ME buses and hatches have the same abilities, so they fit.
 //
 // Textures: overlay dir grindless:block/multiblock/naquadah_plant (tools/assets/Build-NaquadahPlantTextures.ps1) on GTM's inert casing.
 // Names / tooltips: client_scripts/grindless/iv_naquadah_plant_lang.js. Published for the recipe script and the smoke test:
@@ -68,7 +72,6 @@
     input_hatch: { min: 1, max: 6 },
     output_hatch: { min: 1, max: 4 }
   }
-  NP.minCasing = 12
   NP.modes = { 1: 'naquadah' }
   NP.dataKey = DATA_KEY
   NP.blocks = { casing: INERT, vessel: VESSEL, shield: SHIELD, window: WINDOW, holder: HOLDER }
@@ -90,13 +93,16 @@
     ],
     symbols: {
       S: Pat.controller(),
+      // the casing fills the cells the parts leave (no minimum: with one, tools/analysis would model the optional parallel hatch as
+      // the only filler)
       X: Pat.oneOf(
-        Pat.block(INERT, { min: NP.minCasing }),
+        Pat.block(INERT),
         Pat.part('energy_input', NP.parts.energy_input),
         Pat.part('input_bus', NP.parts.input_bus),
         Pat.part('output_bus', NP.parts.output_bus),
         Pat.part('input_hatch', NP.parts.input_hatch),
-        Pat.part('output_hatch', NP.parts.output_hatch)
+        Pat.part('output_hatch', NP.parts.output_hatch),
+        G.parallelHatch.part()
       ),
       I: Pat.block(INERT),
       P: Pat.block(VESSEL),
@@ -141,13 +147,16 @@
       .langValue('Naquadah Plant')
       .rotationState(RotationState.NON_Y_AXIS)
       .recipeType(TYPE)
+      // a parallel hatch's copies, then GTM's default overclock (IV-B6's helper; without a hatch, the overclock alone)
+      .recipeModifier(G.parallelHatch.modifier(G.parallelHatch.overclock))
       .appearanceBlock(GTBlocks.CASING_PTFE_INERT)
       .pattern(function (def) { return Pat.build(def, SPEC) })
       ["tooltips(net.minecraft.network.chat.Component[])"]([
         Text.translate('grindless.machine.naquadah_plant.tooltip.0'),
         Text.translate('grindless.machine.naquadah_plant.tooltip.1'),
         Text.translate('grindless.machine.naquadah_plant.tooltip.2'),
-        Text.translate('grindless.machine.naquadah_plant.tooltip.3')
+        Text.translate('grindless.machine.naquadah_plant.tooltip.3'),
+        Text.translate('grindless.machine.parallel_hatch.tooltip')
       ])
       .workableCasingModel(INERT_TEXTURE, 'grindless:block/multiblock/naquadah_plant')
   })
