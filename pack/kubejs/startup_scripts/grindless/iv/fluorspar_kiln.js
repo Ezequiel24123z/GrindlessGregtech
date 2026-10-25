@@ -220,6 +220,8 @@
       .rotationState(RotationState.NON_Y_AXIS)
       .recipeType(TYPE)
       .recipeModifier(kilnModifier(), true)
+      // GTM restarts a cached recipe without the modifier: refuse fluid voiding at every start too (lib/no_voiding.js, IV-A4's finding)
+      .beforeWorking(G.noVoiding.beforeWorking({ which: 'fluids', reason: NO_VOIDING, name: 'fluorspar kiln' }))
       .appearanceBlock(function () { return Block.getBlock(SHELL) })
       .pattern(function (def) { return Pat.build(def, SPEC) })
       ["tooltips(net.minecraft.network.chat.Component[])"]([
