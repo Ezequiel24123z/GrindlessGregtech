@@ -1,0 +1,41 @@
+{
+  "_doc": [
+    "Addon recipes that collide in GTM 7.5.3's recipe lookup and lose a route or run the wrong recipe. GTM keeps one recipe per ingredient path (AGENTS.md, 'One recipe per lookup path'): of two recipes of one type on one path, or one whose path runs into the other's, only one ever runs, though EMI shows both. Found by the bench guard tools/test/overlay/kubejs/server_scripts/gg_test_recipe_lookup.js (runs lookup-guard-1 and -2, 2026-10-25); the guard asks GTM's lookup for every recipe below after this table is applied.",
+    "server_scripts/grindless/integration/lookup_collisions.js applies each entry:",
+    "  remove   the recipes in `ids` go away. `keeps` is the correct recipe on the same path: if it is missing nothing is removed (an error is logged), so the route never disappears.",
+    "  circuit  each recipe in `ids` is read back as JSON, removed and added again with GTM's KubeJS builder under grindless:<type>/<old path>: the same inputs in the same order, chances, EU, duration, data and conditions, with its programmed circuit set to `circuit` (added after the items when it had none). GTM's .circuit(n) on an existing recipe ADDS a second circuit, and a recipe with two circuits never runs: that is why the recipe is rebuilt, not edited.",
+    "Same-result duplicates (GTM's generated recipe and an addon's copy, GCYR's twin recipe, GT--'s raw palladium _large variant) are not here: they stay in the guard's baseline."
+  ],
+  "collisions": [
+    {
+      "ids": ["gtceu:chemical_reactor/platinum_group_sludge_tiny_dust1", "gtceu:chemical_reactor/platinum_group_sludge_tiny_dust2"],
+      "action": "remove",
+      "keeps": "gtceu:chemical_reactor/platinum_group_sludge_dust1_lv",
+      "reason": "GT-- registers its LV pentlandite sulfuric attack three times on one path: tiny_dust1 is an exact copy of dust1_lv and tiny_dust2 its typo (pentlandite in, sulfuric copper solution out; chalcopyrite has dust2_lv). The typo was the one that ran in the chemical reactor."
+    },
+    {
+      "ids": ["gtceu:large_chemical_reactor/platinum_group_sludge_tiny_dust1", "gtceu:large_chemical_reactor/platinum_group_sludge_tiny_dust2"],
+      "action": "remove",
+      "keeps": "gtceu:large_chemical_reactor/platinum_group_sludge_dust1_lv",
+      "reason": "The same three recipes in the large chemical reactor: only dust1_lv stays."
+    },
+    {
+      "ids": ["gtceu:distillery/distill_coal_tar_to_anthracene"],
+      "action": "circuit",
+      "circuit": 6,
+      "reason": "GT-- (anthracene) and GCYR (durene) both rewrite GTM's coal tar distillation, and both distillery copies take circuit 5: only durene ran, and anthracene, made nowhere else, never did (GT--'s chemical plant hydrogen peroxide needs it). Circuits 1-5 are coal tar's other cuts; 6 is free."
+    },
+    {
+      "ids": ["gtceu:chemical_reactor/dynamite", "gtceu:large_chemical_reactor/dynamite"],
+      "action": "circuit",
+      "circuit": 2,
+      "reason": "GT--'s Supplementaries bomb is GTM's dynamite (paper, string, glyceryl trinitrate) plus circuit 1, so one path runs into the other: the bomb never ran in the chemical reactor and dynamite never in the large one. Dynamite takes circuit 2, free for those inputs."
+    },
+    {
+      "ids": ["gtceu:alloy_blast_smelter/trinium_naquadah_carbonite"],
+      "action": "circuit",
+      "circuit": 6,
+      "reason": "GTCA's trinium naquadah carbonite and GCYR's trinaquadalloy are both trinium, naquadah and carbon dust on circuit 3: only trinaquadalloy ran. Circuit 6 is free for those dusts (2 is trinium naquadah's, 13 the gas variants')."
+    }
+  ]
+}
