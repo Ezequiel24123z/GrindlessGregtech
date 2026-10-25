@@ -129,6 +129,7 @@ Gregtech Grindless is a GregTech Modern pack (Minecraft 1.20.1, Forge) in which 
   | fission reactor | 9984–10047 |
   | hot cell | 10240–10303 |
   | heavy-water plant | 10752–10815 (roof at Y 112) |
+  | fluorspar kiln | 11008–11071 |
 
   For a new test, keep going in steps of 256.
 

@@ -408,9 +408,9 @@ All of them are IV recipes (7,680 EU/t unless a composed GTM stage sets another 
   - Today's sources are electrolyses: mica (19 dust → 2,000 mB F), lepidolite (20 → 2,000), topaz (10 → 1,000), pyrochlore (11 → 1,000) and biotite (22 → 2,000).
   - That means about 385 mica dust per 2 naquadah, a wall of raw quantity (rule 2). The kiln turns it into a line (decision 10, the fluorine budget).
 - **Recipe:**
-  - In: 3 fluorite dust (`gcyr:fluorite`, CaF₂: GCYR already registers it, with no recipe and no vein today) + 1,000 mB sulfuric acid.
-  - Out: 2,000 mB HF + gypsum dust *(tune, in GTM's gypsum units)*.
-  - EU: GTM's acid attack on a calcium mineral, `phosphoric_acid_from_apatite` (9,600 EU per 5,000 mB of acid), gives 1,920 EU per 1,000 mB.
+  - In: 3 fluorite dust (`gcyr:fluorite`, CaF₂) + 1,000 mB sulfuric acid + 2,000 mB water (the quench that turns the anhydrite into gypsum).
+  - Out: 2,000 mB HF + 8 gypsum dust (one CaSO₄·2H₂O in GTM's units; GTM's apatite attack gives 8 per 1,000 mB of acid and takes 2,000 mB of water).
+  - EU: 30 EU/t for 64 ticks per charge (1,920 EU), the apatite attack's own figures (`phosphoric_acid_from_apatite`); up to 256 charges at once with no overclock, so one IV hatch draws 7,680 EU/t at full feed.
   - About 61 fluorite then replace the 385 mica per 2 naquadah.
 - **Fluorite source:** a new Earth vein of fluorite, barite, galena and sphalerite (a Mississippi Valley-type deposit), drilled by the existing drills from steam on (IV-A1). Fluorite shows in EMI from then on: nothing uses it before the kiln, and it is inert (it can be voided until IV).
 - **Byproducts:**
@@ -428,6 +428,12 @@ All of them are IV recipes (7,680 EU/t unless a composed GTM stage sets another 
   - A new vein (it generates only in new chunks; the drill recipes appear at once) and the hidden-items table.
   - GCYR's fluorite gives CaF₂ components, so GTM gave it an automatic electrolysis (3 dust → Ca + 2,000 mB F₂ at 30 EU/t); IV-A1 disabled its decomposition, so the kiln is the only fluorine route from fluorite.
 - **Source and licence:** real: industrial HF from fluorspar and sulfuric acid in rotary kilns at about 200–250 °C. GCYR 0.2.9's fluorite material (LGPL-3.0).
+- **As built (IV-A6):**
+  - One recipe, `grindless:fluorspar_digestion/hydrofluoric_acid_from_fluorite`. CaF₂ + H₂SO₄ + 2 H₂O → CaSO₄·2H₂O + 2 HF balances: GTM's electrolysis of 8 gypsum gives back exactly a charge's calcium, sulfur and water.
+  - Charges in parallel, not overclock: as many as the inputs, the room and the hatches allow, up to 256, each at the recipe's EU/t and duration, so a charge always costs 1,920 EU. It is our drills' `bores` pattern without the overclock step; the fluorite supply is the real limit.
+  - Fluid voiding is refused (the scrubber keeps the HF); item voiding is allowed (gypsum is inert). No dimension condition.
+  - Structure: 4 × 6 × 16, 170 blocks: the scrubber (inert casing with PTFE pipe packing), the kiln (a heatproof casing ring round an air bore, roller stands of steel frames, a steel gearbox drive) and the feed head with the controller at the cold end (1–4 input hatches for the acid and the water). The controller is a crafting-grid recipe.
+  - Balance: 20 charges (60 fluorite, 40,000 mB water) give one LEU enrichment's 40,000 mB HF and 160 gypsum (about 140 radiation-proof casings' worth of concrete); about 61 fluorite give the naquadah plant's fluorine for 2 naquadah, against about 385 mica.
 
 #### Uranium in-situ leach field: `gtceu:isr_wellfield`, type `gtceu:in_situ_leaching` (the End)
 
