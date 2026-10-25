@@ -125,6 +125,8 @@ Gregtech Grindless is a GregTech Modern pack (Minecraft 1.20.1, Forge) in which 
   | combined-cycle plant and hot strip mill | 8704–8767 |
   | sealed dome | 8960–9023 (Moon) |
   | rare-earth extraction cascade | 9216–9279 |
+  | IV foundation (registrations only) | 9728–9791 |
+  | fission reactor | 9984–10047 |
 
   For a new test, keep going in steps of 256.
 

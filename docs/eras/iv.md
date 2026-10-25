@@ -82,7 +82,14 @@ What it gains: **IV's energy without burning anything, with a reactor that GTM d
 - **Structure:** vessel of radiation-proof machine casing (`gtnn:radiation_proof_machine_casing`: dense lead, TS frame and concrete; IV assembler), 4 TS pipe channels, turbine room (`gtceu:tungstensteel_turbine_casing`) and vents; assembly and spent-fuel buses, water hatches, moderator and tritium hatches, and IV dynamo hatches. Accepts ME hatches.
 - **Built with:** IV hull, IV field generator (the hot cell comes first), 2 IV pumps and 4 IV circuits.
 - **By-products:** spent fuel → hot cell. Tritium → stored for fusion. Water → tower.
-- **Numbers to tune:** an LEU with heavy water gives about 2.6 G EU, against what it costs to build. If it does not balance, the channels go down and the extreme combustion engines complete the power plant.
+- **Balance (as built, IV-A2):** an assembly lasts 200 channel-cycles of 400 ticks and gives 1.31 G EU (LEU in light water), 2.62 G (LEU or MOX in heavy water) or 0.66 G (breeder). An LEU assembly costs about 2–4 M EU plus 30 uraninite, 2 Zircaloy ingots and 100 mB of helium, so it returns about 400× in light water and 850× in heavy water. A full heavy-water reactor (131,072 EU/t, 9.4 G EU an hour) uses 3.6 LEU assemblies an hour. It balances: the rate the player feels is set by channels and dynamo hatches, not by fuel scarcity. If the fuel's final cost comes out far above 10 M EU per assembly, the lever is the wear chance (50 → 25 of 10,000 doubles an assembly's life), not the channels. The extreme combustion engines stay the uranium-free alternative.
+- **As built (IV-A2):**
+  - The programmed circuit picks the core (1 LEU in light water, 2 LEU in heavy water, 3 MOX in heavy water, 4 breeder), because GTM's lookup would hide the light-water core behind the heavy-water one. The cores live in `data/grindless/tables/fission_cores.json`; cycles are 400 ticks.
+  - Wear and spent fuel are GTM's chanced input and output (50 of 10,000 each, two rolls). GTM 7.5.3's OR chance logic is deterministic per machine: exactly one assembly per 200 channel-cycles, not a random lifetime.
+  - Channels are the generator helper's parallel copies (`lib/generators.js`), capped at 4 and limited by assemblies, water, room for the outputs and the dynamo hatches' V×A. A heavy-water channel needs 32,768 EU/t of dynamo capacity; one 16 A IV dynamo hatch (or four 4 A ones) carries the full 131,072 EU/t.
+  - The moderator is a second fluid input hatch; the tritiated heavy water leaves through the optional fluid output hatch. The vents are GTM's computer heat vents, and the four tungstensteel pipe channels stand two high around a tungstensteel frame control rod.
+  - SCRAM is GTM's own start check (inputs, and room for every output); the controller shows a SCRAM line while it is shut down with fuel loaded. Voiding items or fluids is refused.
+  - Its recipes are not doubled by `power/generators.js`: `gtceu:fission_core` must stay out of that file's list.
 
 ### Hot cell: `gtceu:hot_cell`
 
