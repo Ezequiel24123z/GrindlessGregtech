@@ -172,6 +172,31 @@ What it gains: **the hands-free neutron window and the superacid inside.** The l
 - **Plan B:** Extended Features' Expanded Assembly Line (accepts ME buses) with a GCYM-type controller. GT--'s component line still has no recipe.
 - **Quantum Chest V and Quantum Tank V (IV):** the lines' stock, off the network.
 
+### As built (IV-B6)
+
+- **IV parallel hatch:** `grindless:crafting/iv_parallel_hatch`, GTM's shape with 4 IV circuits. Its sensor and emitter take iridium, so it comes after Mercury.
+- **Our plants take it:** the hot cell, the fuel fabrication plant and the heavy-water plant accept one in any part cell (`lib/parallel_hatch.js`; no shape changed). The platinum and naquadah plants follow after IV-B3. Each copy pays the recipe's EU/t: one IV hatch runs 4 copies up to 2,048 EU/t, and 4 copies of an IV recipe need two IV hatches. Per batch, the hatch costs the recipe's own EU and an overclock twice that (heavy-water exchange: 110,606 against 221,212 EU). The H2S charge is needed once and never multiplied. The reactor, the fluorspar kiln and the drills keep their own parallel copies and take no hatch.
+- **GCYM:** the large packer and the alloy blast smelter moved up from EV (`grindless:crafting/large_packer`, `grindless:crafting/alloy_blast_smelter`). Every GCYM controller now takes IV circuits or better. Machines already built keep working.
+- **The line from AE2 (proven on the bench):**
+  - an export bus under each ULV input bus, set to its ingredient, in order; fluids through 1× hatches, in order;
+  - GTM's ME output bus returns the product; it connects to AE2 on its front face only, so face it at the cable;
+  - a 7-slice line with 10 channels started the LuV motor 20 ticks after the ingredients reached ME storage, and put it back 9 ticks after the run (6,000 EU/t × 600 t);
+  - no level emitter is needed when the network holds whole products' worth of ingredients;
+  - research: GTM's EV scanner writes the stick, kept in a data access hatch.
+- **Quantum Chest V and Quantum Tank V:** GTM's IV recipes, at home (the HV field generator's quantum eye comes from the hot cell's radon).
+
+What needs Mercury, computed from the dump with every iridium and osmium source and every Mercury recipe left out:
+
+| After Mercury | First missing input |
+|---|---|
+| `gtceu:iv_parallel_hatch` | IV sensor and emitter (iridium rods) |
+| `gtceu:assembly_line`, its control casing and line casing | IV sensor and emitter; ruridit gear |
+| GCYM's large engraving laser and large circuit assembler | IV emitter; IV circuit assembler |
+| GCYM's large electrolyzer, electromagnet and distillery | osmium wire; osmium quadruple wire; iridium large fluid pipe |
+| the IV energy and dynamo hatches | IV voltage coil (fine iridium wire) |
+
+GCYM's large mixer is LuV (osmiridium rotor), and the mega blast furnace and mega vacuum freezer are ZPM. **IV at home**, with no iridium: the large packer, the alloy blast smelter and GCYM's other 14 machines, GTCA's megas, GT--'s Maceration Stack, Quantum Chest V and Tank V, the data access hatch, the EV scanner, GTM's ME output bus, our three plants and the IV parts they use. Before Mercury they run on 2 EV energy hatches.
+
 ## AE2 between planets: the IV step
 
 EV leaves the ME P2P tunnel trunk, power over EU P2P (or FE P2P with GTM converters for FE devices; 32,768 EU/t crossing, measured with EV parts: the tunnel itself has no cap) and the pairs the base sets up. IV goes up one step:

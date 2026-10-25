@@ -24,7 +24,7 @@
 // recipe modifier, then GTM's own overclock (the default of an electric multiblock); and the same refusal in beforeWorking, because
 // GTM 7.5.3 restarts an idle machine's cached last recipe without its modifier. Outside the End it forms but its recipes do not
 // start (GTM's dimension condition), and the controller says why (grindless.machine.isr_wellfield.not_end). The plant is a plain
-// electric multiblock with GTM's overclock.
+// electric multiblock with GTM's overclock, after a parallel hatch's copies when one sits in its floor (IV-B6).
 //
 // Geometry (lib/patterns.js: slices back -> front, rows bottom -> top, columns left -> right as seen from the front):
 //   leach field, 7 wide x 8 high x 10 deep. Slices 0-6 are the five-spot: injection wells at the four corners (slices 0 and 6, columns
@@ -40,7 +40,8 @@
 //     2,000 K sinter), the pilger stand (slices 7-9: two tungstensteel gearboxes, the rolls, on a bed of tungsten steel frames) and the
 //     rod-loading glovebox of laminated glass (slices 10-11) behind the front face (slice 12, controller in the middle of row 1). Clean
 //     stainless steel casing; the floor of the press bay and of the glovebox (symbol X, 18 cells) takes the parts: 1-3 input buses,
-//     1-2 output buses, 1-4 fluid input hatches, 1-2 energy hatches. ME buses and hatches have the same abilities, so they fit.
+//     1-2 output buses, 1-4 fluid input hatches, 1-2 energy hatches and at most one parallel hatch (IV-B6, lib/parallel_hatch.js: its
+//     copies run before GTM's overclock). ME buses and hatches have the same abilities, so they fit.
 //
 // Textures: overlay dirs grindless:block/multiblock/isr_wellfield and .../fuel_fabrication_plant (tools/assets/
 // Build-UraniumCycleTextures.ps1), on GTM's inert PTFE casing and clean stainless steel casing. Names / tooltips:
@@ -153,13 +154,14 @@
     ],
     symbols: {
       S: Pat.controller(),
-      // 18 floor cells: 4 to 11 are parts, the rest clean stainless steel casing
+      // 18 floor cells: 4 to 11 are parts, the rest clean stainless steel casing; one of them may be a parallel hatch (IV-B6)
       X: Pat.oneOf(
         Pat.block(LINE, { min: 6 }),
         Pat.part('input_bus', PLANT_PARTS.input_bus),
         Pat.part('output_bus', PLANT_PARTS.output_bus),
         Pat.part('input_hatch', PLANT_PARTS.input_hatch),
-        Pat.part('energy_input', PLANT_PARTS.energy_input)
+        Pat.part('energy_input', PLANT_PARTS.energy_input),
+        G.parallelHatch.part()
       ),
       C: Pat.block(LINE),
       G: Pat.block(GEARBOX),
@@ -295,13 +297,16 @@
       .rotationState(RotationState.NON_Y_AXIS)
       .allowExtendedFacing(false)
       .recipeType(PLANT_TYPE)
+      // a parallel hatch's copies, then GTM's default overclock (IV-B6; without a hatch, the overclock alone, as before)
+      .recipeModifier(G.parallelHatch.modifier(G.parallelHatch.overclock))
       .appearanceBlock(GTBlocks.CASING_STAINLESS_CLEAN)
       .pattern(function (def) { return Pat.build(def, PLANT_SPEC) })
       ["tooltips(net.minecraft.network.chat.Component[])"]([
         Text.translate('grindless.machine.fuel_fabrication_plant.tooltip.0'),
         Text.translate('grindless.machine.fuel_fabrication_plant.tooltip.1'),
         Text.translate('grindless.machine.fuel_fabrication_plant.tooltip.2'),
-        Text.translate('grindless.machine.fuel_fabrication_plant.tooltip.3')
+        Text.translate('grindless.machine.fuel_fabrication_plant.tooltip.3'),
+        Text.translate('grindless.machine.parallel_hatch.tooltip')
       ])
       .workableCasingModel(LINE_TEXTURE, 'grindless:block/multiblock/fuel_fabrication_plant')
   })
