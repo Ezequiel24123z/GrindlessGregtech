@@ -23,6 +23,8 @@
   if (!global.ggGcyrFlight) global.ggGcyrFlight = new CHM()
   var S = global.ggGcyrFlight
   var TAG = 'GGTEST|gcyr_flight|'
+  var LUV = JsonIO.read('kubejs/config/gg_test_luv_s0_planet.json')
+  var IS_LUV = LUV !== null && String(LUV.get('enabled')) === 'true'
   var HOLD_MAX_MS = 30 * 60 * 1000
   var c = { holding: false, since: 0, jump: false, brakeTicks: 0, lastDim: '', lastVeh: '', frozen: false, planetSince: 0, errors: 0,
     lastRockets: 0, holdNoted: false, windNoted: false, holdMode: '', ourScreen: false, probed: false }
@@ -197,6 +199,10 @@
       S.put('clientScreen', 'PlanetSelectionScreen')
     }
     var want = val('select')
+    if (IS_LUV && want !== '') {
+      global.ggLuvS0Navigate(mc, scr, want, S)
+      return
+    }
     if (want !== '') {
       var planet = k().PlanetData.getPlanet(new (k().RL)(want))
       if (planet !== null && planet !== undefined) {

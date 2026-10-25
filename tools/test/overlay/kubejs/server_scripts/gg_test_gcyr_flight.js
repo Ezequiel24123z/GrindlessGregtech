@@ -43,16 +43,19 @@
 //
 // var + function everywhere: this Rhino throws "redeclaration of var" for const/let in functions that run more than once.
 (function () {
+  var LUV = JsonIO.read('kubejs/config/gg_test_luv_s0_planet.json')
+  var IS_LUV = LUV !== null && String(LUV.get('enabled')) === 'true'
+  var LEVEL4 = IS_LUV && String(LUV.get('level4')) === 'true'
   var TAG = 'GGTEST|'
-  var SCOPE = 'gcyr_flight'
-  var BAND = { x0: 2560, x1: 2623, y0: 98, y1: 112, z0: 0, z1: 15 }
+  var SCOPE = IS_LUV ? (LEVEL4 ? 'luv_s0_rocket' : 'luv_s0_planet') : 'gcyr_flight'
+  var BAND = { x0: IS_LUV ? 13568 : 2560, x1: IS_LUV ? 13631 : 2623, y0: 98, y1: 112, z0: 0, z1: 15 }
   var FLOOR_Y = 98
   var PAD_Y = 99
   var CTRL_Y = 100
   var QUIET_MS = 10000
   var LOADED_AT = Date.now()
   var REQUEST = 'ggTestGcyrFlightRequest'
-  var MARKER = 'kubejs/config/gg_test_gcyr_flight.json'
+  var MARKER = IS_LUV ? 'kubejs/config/gg_test_luv_s0_planet.json' : 'kubejs/config/gg_test_gcyr_flight.json'
   var FORM_TIMEOUT = 400
   var TEST_TIMEOUT = 20 * 60 * 20
   var AGAIN = -1
@@ -76,6 +79,13 @@
   }
   var FUEL_LOAD = 10000
   var SUIT_OXYGEN = 16000
+  if (IS_LUV) {
+    IDS.motor = 'gcyr:elite_rocket_motor'
+    IDS.tank = LEVEL4 ? 'grindless:s0_cryogenic_fuel_tank' : 'gcyr:elite_fuel_tank'
+    IDS.moonPlanet = 'grindless:s0_moon'
+    IDS.moonDim = 'grindless:s0_moon'
+    FUEL_LOAD = 16000
+  }
 
   var S = null
   var FL = null
@@ -433,7 +443,7 @@
       for (var s = -1; s <= 1; s++) out.push({ b: b, s: s, y: 0, id: IDS.motor })
     }
     out.push({ b: 1, s: 0, y: 1, id: IDS.tank })
-    out.push({ b: 2, s: 0, y: 1, id: IDS.tank })
+    out.push({ b: 2, s: 0, y: 1, id: sp.mixed ? 'gcyr:elite_fuel_tank' : IDS.tank })
     out.push({ b: 1, s: 0, y: 2, id: IDS.seat })
     return out
   }
@@ -450,6 +460,16 @@
     { key: 'asym_west', facing: 'west', x: 2588, z: 9, l: 1, r: 2, b: 3, h: 2, rocket: smallRocket },
     { key: 'flight', facing: 'north', x: 2600, z: 9, l: 1, r: 1, b: 3, h: 2, rocket: flightRocket, flight: true }
   ]
+  if (IS_LUV) {
+    SPECS = [
+      { key: 'flight', facing: 'north', x: 13608, z: 9, l: 1, r: 1, b: 3, h: 2, rocket: flightRocket, flight: true }
+    ]
+    if (LEVEL4) {
+      SPECS.push({ key: 'grow', facing: 'north', x: 13570, z: 1, l: 1, r: 1, b: 3, h: 2, rocket: smallRocket, grow: true })
+      SPECS.push({ key: 'asym_east', facing: 'east', x: 13582, z: 1, l: 1, r: 2, b: 3, h: 2, rocket: smallRocket })
+      SPECS.push({ key: 'mixed', facing: 'north', x: 13594, z: 1, l: 1, r: 1, b: 3, h: 2, rocket: flightRocket, mixed: true, cycles: 1 })
+    }
+  }
 
   // the controller faces F; launch pad rows go to the back (b = 1..sp.b, one block lower), columns run from sp.l blocks to the
   // controller's left (F counter-clockwise, as GCYR measures lDist) to sp.r blocks to its right, the stainless steel frame tower
@@ -579,6 +599,12 @@
       fuel.getInt('Amount') + '/' + r.getFuelCapacity() + ' mB'
   }
 
+  function measuredPartsTier(r) {
+    var field = r.getClass().getDeclaredField('partsTier')
+    field.setAccessible(true)
+    return field.getInt(r)
+  }
+
   // ---------------------------------------------------------------- scanner steps (#122)
 
   // the asymmetric pads: what GCYR does is described (NOTE), what decides PASS/FAIL is the pack's guard
@@ -683,6 +709,10 @@
           '#122 REPRODUCED in GCYR as is ("only works on one axis"): "Build" (called directly, past the pack guard) scans the mirrored area: ') + detail)
       } else {
         check(name, ok, detail)
+        if (IS_LUV && ok && m.spec.mixed) {
+          check('mixed_tank_level', Number(measuredPartsTier(m.rocket)) === 3,
+            'scanned elite motors + one tier5 tank + one elite tank: measured private partsTier=' + measuredPartsTier(m.rocket) + ', capacity=' + m.rocket.getFuelCapacity())
+        }
       }
       return 2
     }
@@ -1149,6 +1179,11 @@
         return
       }
       FL.rocketUuid = uuidOf(FL.rocket)
+      if (IS_LUV) {
+        check('scanned_level', Number(measuredPartsTier(FL.rocket)) === (LEVEL4 ? 4 : 3),
+          'native scanner measured private partsTier=' + measuredPartsTier(FL.rocket) + ', capacity=' + FL.rocket.getFuelCapacity())
+        shared().put('luvProbe', LEVEL4 ? 'rocket' : 'planet')
+      }
       probe('rocket', FL.rocket)
       shared().put('rocketUuid', FL.rocketUuid)
       p.setMainHandItem(Item.of(IDS.chip))
@@ -1156,6 +1191,11 @@
       FL.target = IDS.moonPlanet
       FL.targetDim = IDS.moonDim
       FL.leg = 'moon'
+      if (IS_LUV) {
+        FL.target = 'grindless:s0_jupiter'
+        FL.targetDim = 'grindless:s0_jupiter'
+        FL.leg = 'parent_lock'
+      }
       return
     }
 
@@ -1185,10 +1225,13 @@
       }
       if (S.t - FL.subT > 300) {
         check('flight_planet_screen_' + FL.leg, false, 'the chip says "' + planet + '" 15 s after the right-click (client screen: ' + sval('clientScreen') + ', client clicked: ' +
-          sval('selected') + '); the test writes the chip itself and goes on')
+          sval('selected') + '); ' + (IS_LUV ? 'abort without synthetic chip fallback' : 'the test writes the chip itself and goes on'))
         closeMenu(p)
-        setChipPlanet(p.getMainHandItem(), FL.targetDim)
-        go('load')
+        if (IS_LUV) abortFlight('real menu selection failed; no synthetic chip fallback in a spike')
+        else {
+          setChipPlanet(p.getMainHandItem(), FL.targetDim)
+          go('load')
+        }
       }
       return
     }
@@ -1199,7 +1242,7 @@
       p.setMainHandItem(Item.of('minecraft:air'))
       check('flight_load_' + FL.leg, loaded.planet === FL.targetDim && loaded.fuel === FUEL_LOAD && loaded.fluid === IDS.fuel,
         'rocket config slot chip -> ' + loaded.planet + ', tank ' + loaded.fluid + ' ' + loaded.fuel + ' mB of ' + FL.rocket.getFuelCapacity())
-      go(FL.leg === 'moon' ? 'board' : 'launch')
+      go(FL.leg === 'moon' || FL.leg === 'parent_lock' ? 'board' : 'launch')
       return
     }
 
@@ -1235,10 +1278,26 @@
       var r = FL.rocket
       var dest = L.PlanetData.getPlanet(rl(FL.target))
       var need = r.computeRequiredFuelAmountForDestination(dest)
+      var fuelBeforeStart = readRocket(r).fuel
       var before = rocketSummary(r)
       // what the Launch button of the rocket UI runs
       r.startRocket()
       var ok3 = started(r)
+      if (IS_LUV && FL.leg === 'parent_lock') {
+        check('parent_tier_lock', !ok3 && readRocket(r).fuel === fuelBeforeStart,
+          'real chip/menu targets Jupiter tier5; native startRocket on tier' + measuredPartsTier(r) +
+          ' started=' + ok3 + ', fuel before/after=' + fuelBeforeStart + '/' + readRocket(r).fuel)
+        if (ok3) {
+          abortFlight('Jupiter unexpectedly launched below tier5')
+          return
+        }
+        p.setMainHandItem(Item.of(IDS.chip))
+        FL.target = IDS.moonPlanet
+        FL.targetDim = IDS.moonDim
+        FL.leg = 'moon'
+        go('program_chip')
+        return
+      }
       check('flight_launch_' + FL.leg, ok3, (ok3 ? 'ROCKET_STARTED, countdown 200 ticks' : 'startRocket() refused') + '; ' + before + ', fuel needed to launch ' +
         need + ' mB, destination ' + (r.getDestination() === null ? 'none' : String(r.getDestination().level())) + ', rider ' + describeVehicle(p))
       if (!ok3) {
@@ -1249,7 +1308,7 @@
       if (FL.firstLaunchT === undefined) FL.firstLaunchT = S.t
       FL.crossT = 0
       FL.maxY = 0
-      FL.fuelAtLaunch = readRocket(r).fuel
+      FL.fuelAtLaunch = fuelBeforeStart
       shared().put('shot', 'launch_' + FL.leg)
       // the client half reports a server that stops ticking as the #91 freeze only from here to the landing
       shared().put('watch', true)
@@ -1366,6 +1425,15 @@
     }
 
     if (FL.phase === 'moon_stay') {
+      if (IS_LUV) {
+        if (!global.ggLuvS0.onMoon(p, S.t, FL, S.server, shared())) return
+        p.setMainHandItem(Item.of(IDS.chip))
+        FL.leg = 'home'
+        FL.target = IDS.earthPlanet
+        FL.targetDim = IDS.earthDim
+        go('program_chip')
+        return
+      }
       if (FL.sub === 0) {
         FL.stayT = S.t
         FL.sub = 1
@@ -1472,7 +1540,7 @@
     try {
       prepareWorld()
       var p = testPlayer()
-      if (p !== null) p.teleportTo(IDS.earthDim, 2594.5, PAD_Y, 7.5, 0, 20)
+      if (p !== null) p.teleportTo(IDS.earthDim, BAND.x0 + 34.5, PAD_Y, 7.5, 0, 20)
       startScanners()
     } catch (e) {
       check('area', false, 'exception: ' + e)

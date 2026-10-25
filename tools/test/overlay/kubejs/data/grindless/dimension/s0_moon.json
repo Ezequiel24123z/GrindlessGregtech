@@ -1,0 +1,8 @@
+{
+  "type": "grindless:s0_moon",
+  "generator": {
+    "type": "minecraft:noise",
+    "settings": "grindless:s0_moon",
+    "biome_source": { "type": "minecraft:fixed", "biome": "grindless:s0_moon" }
+  }
+}
