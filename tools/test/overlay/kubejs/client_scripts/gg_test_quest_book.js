@@ -36,7 +36,7 @@
     { name: 'gg_quest_toolbox', quest: '047B55ED9C952BC9' },
     { name: 'gg_book_welcome', chapter: 'welcome' },
     { name: 'gg_book_steam_age', chapter: 'steam_age' },
-    { name: 'gg_book_hv_rocket', chapter: 'hv_age', x: 34, y: 0 },
+    { name: 'gg_book_hv_rocket', chapter: 'hv_age', x: 20, y: 0 },
     { name: 'gg_book_mv_end', chapter: 'mv_age', x: 16, y: 6 },
     { name: 'gg_book_ev_age', chapter: 'ev_age' }
   ]
