@@ -32,6 +32,8 @@
 //                       dynamo hatch backs up
 //     COVER_CLICK       a fake player right-clicks an LV macerator holding two LV energy covers: one goes on (GTM's placeCoverOnSide),
 //                       the event is cancelled, one is left; the shift-click readout on it; GTM's removeCover gives the item back
+//     PLACE_BREAK       the fake player places an LV wireless energy hatch (the item's useOn: BlockEvents.placed tracks it) and breaks
+//                       it (ServerPlayerGameMode#destroyBlock: BlockEvents.broken forgets it)
 //     SAVE_RELOAD       save-all flush, the saved kubejs_persistent_data.nbt read back (NBTIO): the list and the store as they were;
 //                       both keys dropped and merged back from the file (KubeJS's own load path): the network is the same
 // TEST AREA: this test force-loads, clears and builds ONLY its band in each dimension (AGENTS.md: tests run at the same time in one server),
@@ -121,6 +123,7 @@
       AABB: Java.loadClass('net.minecraft.world.phys.AABB'),
       Vec3: Java.loadClass('net.minecraft.world.phys.Vec3'),
       BHR: Java.loadClass('net.minecraft.world.phys.BlockHitResult'),
+      UseOnContext: Java.loadClass('net.minecraft.world.item.context.UseOnContext'),
       Hand: Java.loadClass('net.minecraft.world.InteractionHand'),
       ItemEntity: Java.loadClass('net.minecraft.world.entity.item.ItemEntity'),
       LevelResource: Java.loadClass('net.minecraft.world.level.storage.LevelResource'),
@@ -952,6 +955,36 @@
     S.server.runCommandSilent('kill @e[type=item,x=' + (CLICK_MAC.x - 2) + ',y=' + (EY - 2) + ',z=' + (CLICK_MAC.z - 2) + ',dx=5,dy=5,dz=5]')
   }
 
+  // a player's placing and breaking: BlockEvents.placed tracks a wireless hatch, BlockEvents.broken forgets it (the way a player adds and
+  // removes hatches; the rest of the test tracks its /setblock blocks itself)
+  function placeBreak() {
+    var w = W()
+    var L = lazy()
+    var fp = fakePlayer(EARTH)
+    fp.setShiftKeyDown(false)
+    var at = { x: CLICK_MAC.x - 1, y: EY, z: CLICK_MAC.z }
+    var pos = bp(at.x, at.y, at.z)
+    fp.setPositionAndRotation(at.x - 1.5, EY, at.z + 0.5, -90, 0)
+    fp.setItemInHand(L.Hand.MAIN_HAND, Item.of(HATCH_LV))
+    var macPos = bp(CLICK_MAC.x, EY, CLICK_MAC.z)
+    var hit = new L.BHR(new L.Vec3(CLICK_MAC.x, EY + 0.5, CLICK_MAC.z + 0.5), L.Direction.WEST, macPos, false)
+    var res = fp.getMainHandItem().useOn(new L.UseOnContext(fp, L.Hand.MAIN_HAND, hit))
+    var placed = String(S.earth.getBlock(at.x, at.y, at.z).id)
+    var count = function () {
+      return w.tracked(S.server).filter(function (e) { return e.k === 'hatch' && e.d === EARTH && e.x === at.x && e.y === at.y && e.z === at.z }).length
+    }
+    var afterPlace = count()
+    var gm = fp.gameMode
+    var broke = gm ? gm.destroyBlock(pos) : false
+    var gone = String(S.earth.getBlock(at.x, at.y, at.z).id)
+    var afterBreak = count()
+    fp.setItemInHand(L.Hand.MAIN_HAND, Item.empty)
+    check('PLACE_BREAK', placed === HATCH_LV && afterPlace === 1 && broke === true && gone === 'minecraft:air' && afterBreak === 0,
+      'a fake player placed an LV wireless energy hatch against the click macerator (useOn -> ' + res + ', the block ' + placed + '): tracked ' + afterPlace +
+      ' time(s) (BlockEvents.placed); it broke it (ServerPlayerGameMode#destroyBlock -> ' + broke + (gm ? '' : ', no gameMode field') + ', now ' + gone + '): tracked ' +
+      afterBreak + ' (BlockEvents.broken)')
+  }
+
   // save-all flush, the file read back, the keys dropped and merged back from it
   function startSave() {
     var w = W()
@@ -1076,6 +1109,7 @@
       if (since >= 80) {
         guarded('CAP', reportCap)
         guarded('COVER_CLICK', coverClick)
+        guarded('PLACE_BREAK', placeBreak)
         startSave()
         phase('save')
       }

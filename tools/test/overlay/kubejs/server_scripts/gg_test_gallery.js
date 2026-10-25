@@ -68,7 +68,7 @@
       'lunar_solar_array', 'deep_space_antenna', 'extraction_cascade', 'cryogenic_plant', 'combined_cycle_plant', 'hot_strip_mill'] },
     { name: 'iv', title: 'IV controllers', ids: ['pressurized_vein_drill', 'venus_heat_engine', 'venus_acid_works', 'mercury_vein_drill',
       'mercury_solar_works', 'mercury_solar_field', 'interferometer', 'isr_wellfield', 'fuel_fabrication_plant', 'fission_reactor', 'hot_cell',
-      'heavy_water_plant', 'fluorspar_kiln', 'tritium_removal_facility'] },
+      'heavy_water_plant', 'fluorspar_kiln', 'tritium_removal_facility', 'naquadah_plant'] },
     { name: 'single', title: 'single-block machines', ids: ['lv_creature_simulator', 'mv_creature_simulator', 'hv_creature_simulator',
       'ev_creature_simulator', 'ev_rtg'] },
     { name: 'wireless', title: 'wireless energy: the tower, every amperage at LV, every tier at 2 A', ids: wirelessIds() }
