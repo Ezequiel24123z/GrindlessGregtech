@@ -4,7 +4,7 @@
   "extends": "ev",
   "inheritTargets": true,
   "dropTargets": ["uranium-not-before-iv", "radon-not-before-iv", "quantum-eye-not-before-iv", "deuterium-not-made", "bit-titanium-needs-ev-lathe"],
-  "note": "IV era per docs/eras/iv.md (\"Validator (-Tier iv)\", \"Gate to LuV\" and the raise's decisions), in three substages: iv, home (Earth with the Moon base and the Mars outpost EV already reaches, and the End's pitchblende), and iv-venus and iv-mercury, reached together by the tier 3 rocket (synthetic inner-trip: the elite tank and motor, which need the antenna's inner planets chart, the thermal suit upgrade, fuel and oxygen). steam.json's eraSiblings makes the two siblings: nothing of Venus may need Mercury's iridium and osmium, nor Mercury Venus's naquadah, and nothing at home may need either. Every recipe of the Venus machines carries .dimension('gcyr:venus') and the Mercury ones .dimension('gcyr:mercury') (site checks); conditions.dimension.asKeysFor turns them, and the End's leach field, into the trips' keys (the End's key comes from synthetic end-trip, the End key item). Uranium comes from the End's pitchblende vein through the leach field alone (no drill takes it), tritium from the Moon's removal facility alone, naquadah from Venus alone, iridium and osmium from Mercury alone (decisions 2, 4 and 5). Our generator types are EU sources read from their own recipes (synthetic recipesOf): the reactor's cores, the Venus engine's ground heat, the Mercury field's sun and the RTG's pellet. The assembly line's research is modeled (conditions.research: the scanner's data stick carries research:<id>). Pending until IV-B3 and IV-B6 land: the naquadah plant and the platinum plant's mode 3 (B3), and mass production (B6: the assembly line fed from AE2, the IV parallel hatch in our plants, GCYM at IV, Quantum Chest and Tank V).",
+  "note": "IV era per docs/eras/iv.md (\"Validator (-Tier iv)\", \"Gate to LuV\" and the raise's decisions), in three substages: iv, home (Earth with the Moon base and the Mars outpost EV already reaches, and the End's pitchblende), and iv-venus and iv-mercury, reached together by the tier 3 rocket (synthetic inner-trip: the elite tank and motor, which need the antenna's inner planets chart, the thermal suit upgrade, fuel and oxygen). steam.json's eraSiblings makes the two siblings: nothing of Venus may need Mercury's iridium and osmium, nor Mercury Venus's naquadah, and nothing at home may need either. Every recipe of the Venus machines carries .dimension('gcyr:venus') and the Mercury ones .dimension('gcyr:mercury') (site checks); conditions.dimension.asKeysFor turns them, and the End's leach field, into the trips' keys (the End's key comes from synthetic end-trip, the End key item). Uranium comes from the End's pitchblende vein through the leach field alone (no drill takes it), tritium from the Moon's removal facility alone, naquadah from Venus alone, iridium and osmium from Mercury alone (decisions 2, 4 and 5). Our generator types are EU sources read from their own recipes (synthetic recipesOf): the reactor's cores, the Venus engine's ground heat, the Mercury field's sun and the RTG's pellet. The assembly line's research is modeled (conditions.research: the scanner's data stick carries research:<id>). IV-B6's mass production is modeled: the IV parallel hatch in our plants (requireAbilities), GCYM's alloy blast smelter at home, the assembly line with research after Mercury (its AE2 feeding is logistics, proven on IV-B6's bench). Pending until IV-B3 lands: the naquadah plant and the platinum plant's mode 3.",
   "contexts": ["minecraft:overworld", "grindless:flat", "grindless:void"],
 
   "conditions": {
@@ -57,6 +57,10 @@
       "note": "Decision 2 of the raise: the End's pitchblende vein (GTM's gtceu:pitchblende_vein_end, veins_leach.json) is mined by hand once, for the leach field's sample (raw pitchblende + raw uraninite); no drill takes it, and the in-situ leach field leaches its uraninite in place from then on."
     }
   ],
+
+  "partAbilities": {
+    "parallel_hatch": ["gtceu:iv_parallel_hatch", "gtceu:luv_parallel_hatch", "gtceu:zpm_parallel_hatch", "gtceu:uv_parallel_hatch"]
+  },
 
   "machinesFromRegistry": [
     { "prefix": "gtceu:iv_", "maxEUt": 8192, "needs": ["eu:iv"], "excludeTypes": ["gtceu:dummy", "gtceu:steam_turbine", "gtceu:combustion_generator", "gtceu:gas_turbine"] }
@@ -149,131 +153,190 @@
         "gtceu:assembly_line_casing", "gtceu:laminated_glass", "gtceu:assembly_line_unit", { "anyOf": ["gtceu:basic_data_access_hatch", "gtceu:data_access_hatch", "gtceu:advanced_data_access_hatch"] }
       ],
       "note": "GTM 7.5.3's assembly line (GTMultiMachines.ASSEMBLY_LINE): solid steel casing, ULV input buses in order, an output bus, 1-2 energy hatches, grating, control casings (an IV sensor and emitter each: iridium and a quantum star), laminated glass, line units (ruridit gears) and, with research on, a data access hatch holding the scanned data stick. On 2 IV hatches it counts as LuV. IV-B6 feeds it from AE2 (export buses on its ULV buses); that is logistics, not modeled."
-          },
-          {
-            "machine": "gtceu:fission_reactor",
-            "types": ["gtceu:fission_core"],
-            "partsFromStructure": true,
-            "partAbilities": { "energy_output": ["gtceu:ev_energy_output_hatch", "gtceu:ev_energy_output_hatch_4a", "gtceu:ev_energy_output_hatch_16a", "gtceu:iv_energy_output_hatch", "gtceu:iv_energy_output_hatch_4a", "gtceu:iv_energy_output_hatch_16a"] },
-            "note": "Fission reactor (IV-A2, iv/fission_reactor.js, Earth): a generator of its own type, up to 4 channels; the programmed circuit picks the core (1 LEU in light water, 2 LEU in heavy water, 3 MOX in heavy water, 4 breeder); the assembly is a chanced input and the spent assembly a chanced output, the heavy water comes out tritiated; 1-4 dynamo hatches of any tier (one 16 A IV hatch carries 131,072 EU/t). The EU is the synthetic fission, read from its cores."
-          },
-          {
-            "machine": "gtceu:hot_cell",
-            "types": ["gtceu:hot_cell"],
-            "energy": { "voltage": 2048 },
-            "needs": ["eu:ev"],
-            "partsFromStructure": true,
-            "partAbilities": { "energy_input": ["gtceu:ev_energy_input_hatch", "gtceu:ev_energy_input_hatch_4a", "gtceu:ev_energy_input_hatch_16a", "gtceu:iv_energy_input_hatch", "gtceu:iv_energy_input_hatch_4a", "gtceu:iv_energy_input_hatch_16a"] },
-            "note": "Hot cell (IV-A3, iv/hot_cell.js, Earth): radiation-proof casing cells behind lead glass; circuit 1 enrichment (composed from GTM's live UF6 line: 30 uraninite + 40,000 mB HF -> U-235, U-238 and the fluorine back as F2), 2 MOX, breeder, RTG pellet and Pu-Be source, 3 reprocessing, 4 radon (no plutonium stock). All at 7,670-7,680 EU/t."
-          },
-          {
-            "machine": "gtceu:isr_wellfield",
-            "types": ["gtceu:in_situ_leaching"],
-            "energy": { "voltage": 2048 },
-            "needs": ["eu:ev"],
-            "partsFromStructure": true,
-            "partAbilities": { "energy_input": ["gtceu:ev_energy_input_hatch", "gtceu:ev_energy_input_hatch_4a", "gtceu:ev_energy_input_hatch_16a", "gtceu:iv_energy_input_hatch", "gtceu:iv_energy_input_hatch_4a", "gtceu:iv_energy_input_hatch_16a"] },
-            "note": "In-situ leach field (IV-A4, iv/uranium_cycle.js, the End): a five-spot of wells and an inert header house. One recipe per leach vein (veins_leach.json): the pitchblende sample (never used up) + the ion-exchange resin (1 %) + sulfuric acid + oxygen -> 2 uraninite + radioactive waste (1 %), 6,800 EU/t, .dimension('minecraft:the_end'). The pack's uranium."
-          },
-          {
-            "machine": "gtceu:fuel_fabrication_plant",
-            "types": ["gtceu:fuel_fabrication"],
-            "energy": { "voltage": 2048 },
-            "needs": ["eu:ev"],
-            "partsFromStructure": true,
-            "partAbilities": { "energy_input": ["gtceu:ev_energy_input_hatch", "gtceu:ev_energy_input_hatch_4a", "gtceu:ev_energy_input_hatch_16a", "gtceu:iv_energy_input_hatch", "gtceu:iv_energy_input_hatch_4a", "gtceu:iv_energy_input_hatch_16a"] },
-            "note": "Fuel fabrication plant (IV-A4, Earth): circuit 1 LEU pellets (U-235 + U-238 + oxygen, 500 mB hydrogen kept: a chance-0 fluid, capital), 2 Zircaloy cladding tubes, 3 the LEU assembly (pellets, tubes, Moon helium). Its sintering tunnel takes Kanthal or hotter coils."
-          },
-          {
-            "machine": "gtceu:heavy_water_plant",
-            "types": ["gtceu:isotope_exchange"],
-            "energy": { "voltage": 2048 },
-            "needs": ["eu:ev"],
-            "partsFromStructure": true,
-            "partAbilities": { "energy_input": ["gtceu:ev_energy_input_hatch", "gtceu:iv_energy_input_hatch"] },
-            "note": "Heavy-water plant (IV-A5, iv/heavy_water_plant.js, Earth): circuit 1 exchange (Martian ice + steam, with a 1,000 mB H2S charge that is never used up: chance 0, capital), circuit 2 finishing (concentrate -> heavy water). 1,907 and 477 EU/t: an EV hatch runs both; the controller is IV."
-          },
-          {
-            "machine": "gtceu:fluorspar_kiln",
-            "types": ["gtceu:fluorspar_digestion"],
-            "energy": { "voltage": 2048 },
-            "needs": ["eu:ev"],
-            "partsFromStructure": true,
-            "partAbilities": { "energy_input": ["gtceu:ev_energy_input_hatch", "gtceu:ev_energy_input_hatch_4a", "gtceu:ev_energy_input_hatch_16a", "gtceu:iv_energy_input_hatch", "gtceu:iv_energy_input_hatch_4a", "gtceu:iv_energy_input_hatch_16a"] },
-            "note": "Fluorspar kiln (IV-A6, iv/fluorspar_kiln.js, Earth): 3 fluorite dust + 1,000 mB sulfuric acid + 2,000 mB water -> 2,000 mB HF + 8 gypsum dust, 30 EU/t a charge, up to 256 charges at once (one IV hatch at full feed). The only route from fluorite to fluorine."
-          },
-          {
-            "machine": "gtceu:tritium_removal_facility",
-            "types": ["gtceu:detritiation"],
-            "energy": { "voltage": 2048 },
-            "needs": ["eu:ev"],
-            "partsFromStructure": true,
-            "partAbilities": { "energy_input": ["gtceu:ev_energy_input_hatch", "gtceu:ev_energy_input_hatch_4a", "gtceu:ev_energy_input_hatch_16a", "gtceu:iv_energy_input_hatch", "gtceu:iv_energy_input_hatch_4a", "gtceu:iv_energy_input_hatch_16a"] },
-            "note": "Tritium removal facility (IV-B4, iv/tritium_removal.js, the Moon): one recipe, 1,000 mB tritiated heavy water + a 100 mB deuterium charge (chance 0) -> 900 mB heavy water + 200 mB tritium, 6,880 EU/t (half at night, a run-start modifier the validator doesn't see), .dimension('gcyr:luna'). The pack's only tritium."
-          },
-          {
-            "machine": "gtceu:pressurized_vein_drill",
-            "types": ["gtceu:vein_drilling"],
-            "onlyTier": "iv",
-            "onlyRecipes": ["grindless:vein_drilling/iv/pressurized_*"],
-            "energy": { "voltage": 2048 },
-            "needs": ["eu:ev"],
-            "partsFromStructure": true,
-            "partAbilities": { "energy_input": ["gtceu:ev_energy_input_hatch", "gtceu:ev_energy_input_hatch_4a", "gtceu:ev_energy_input_hatch_16a", "gtceu:iv_energy_input_hatch", "gtceu:iv_energy_input_hatch_4a", "gtceu:iv_energy_input_hatch_16a"] },
-            "note": "Pressurized vein drill (IV-B1, iv/venus.js, Venus and Mars): a regolith pad, an inert pressure housing, a filter casing deck and a tungstensteel pipe string; it runs only vein_drilling/iv/pressurized_* (its veto; the Mercury drill's prefix is refused), the IV bit at 0.25 %, cap 128. On Venus 200 mB of distilled water a run leaves as steam (the heat tax); on Mars it drills dry."
-          },
-          {
-            "machine": "gtceu:venus_heat_engine",
-            "types": ["gtceu:venus_heat"],
-            "partsFromStructure": true,
-            "partAbilities": { "energy_output": ["gtceu:ev_energy_output_hatch", "gtceu:ev_energy_output_hatch_4a", "gtceu:ev_energy_output_hatch_16a", "gtceu:iv_energy_output_hatch", "gtceu:iv_energy_output_hatch_4a", "gtceu:iv_energy_output_hatch_16a"] },
-            "note": "Venus heat engine (IV-B1, Venus): a generator of its own type, 200 mB of distilled water a 20 s cycle -> 8,192 EU/t and 32,000 mB of steam, .dimension('gcyr:venus'), always on (Venus is fixed at noon). 1-2 dynamo hatches (one IV or two EV). The EU is the synthetic venus-heat."
-          },
-          {
-            "machine": "gtceu:venus_acid_works",
-            "types": ["gtceu:acid_cracking"],
-            "energy": { "voltage": 2048 },
-            "needs": ["eu:ev"],
-            "partsFromStructure": true,
-            "partAbilities": { "energy_input": ["gtceu:ev_energy_input_hatch", "gtceu:ev_energy_input_hatch_4a", "gtceu:ev_energy_input_hatch_16a", "gtceu:iv_energy_input_hatch", "gtceu:iv_energy_input_hatch_4a", "gtceu:iv_energy_input_hatch_16a"] },
-            "note": "Venus acid works (IV-B1, Venus): the clouds' sulfuric acid + the platinum gauze (0.1 %) -> distilled water + oxygen; circuit 1 vents the SO2, circuit 2 keeps it (refuses voiding). 7,500 EU/t, .dimension('gcyr:venus')."
-          },
-          {
-            "machine": "gtceu:mercury_vein_drill",
-            "types": ["gtceu:vein_drilling"],
-            "onlyTier": "iv",
-            "onlyRecipes": ["grindless:vein_drilling/iv/mercury_*"],
-            "energy": { "voltage": 2048 },
-            "needs": ["eu:ev"],
-            "partsFromStructure": true,
-            "partAbilities": { "energy_input": ["gtceu:ev_energy_input_hatch", "gtceu:ev_energy_input_hatch_4a", "gtceu:ev_energy_input_hatch_16a", "gtceu:iv_energy_input_hatch", "gtceu:iv_energy_input_hatch_4a", "gtceu:iv_energy_input_hatch_16a"] },
-            "note": "Mercury vein drill (IV-B2, iv/mercury.js, Mercury): a heat-shield brick body under a sunshade; it runs only vein_drilling/iv/mercury_* (its veto), by day with 10 mB of liquid nitrogen a bore, at night dry (a run-start modifier the validator doesn't see: either recipe counts), the IV bit, cap 128."
-          },
-          {
-            "machine": "gtceu:mercury_solar_works",
-            "types": ["gtceu:solar_processing"],
-            "energy": { "voltage": 2048 },
-            "needs": ["eu:ev"],
-            "partsFromStructure": true,
-            "partAbilities": { "energy_input": ["gtceu:ev_energy_input_hatch", "gtceu:ev_energy_input_hatch_4a", "gtceu:ev_energy_input_hatch_16a", "gtceu:iv_energy_input_hatch", "gtceu:iv_energy_input_hatch_4a", "gtceu:iv_energy_input_hatch_16a"] },
-            "note": "Mercury solar works (IV-B2, Mercury): 8 heliostat mirrors, a focal furnace and an evaporation bell on Mercury rock. Heat-shield bricks (Hermean regolith), thin-film panels and the iridosmine fusion (-> rarest metal mixture + OsO4: Mercury's route into GT--'s iridium and osmium chain); .dimension('gcyr:mercury'), a quarter of the EU/t when a run starts in the sun."
-          },
-          {
-            "machine": "gtceu:mercury_solar_field",
-            "types": ["gtceu:mercury_solar"],
-            "partsFromStructure": true,
-            "partAbilities": { "energy_output": ["gtceu:ev_energy_output_hatch", "gtceu:ev_energy_output_hatch_4a", "gtceu:ev_energy_output_hatch_16a", "gtceu:iv_energy_output_hatch", "gtceu:iv_energy_output_hatch_4a", "gtceu:iv_energy_output_hatch_16a"] },
-            "note": "Mercury solar field (IV-B2, Mercury): the lunar plan with 36 Hermean thin-film panels; a generator of its own type, 2,010 EU/t a lit panel by day (72,360 EU/t full), .dimension('gcyr:mercury'). The EU is the synthetic mercury-solar."
-          },
-          {
-            "machine": "gtceu:interferometer",
-            "types": ["gtceu:interferometry"],
-            "energy": { "voltage": 2048 },
-            "needs": ["eu:ev"],
-            "partsFromStructure": true,
-            "partAbilities": { "energy_input": ["gtceu:ev_energy_input_hatch", "gtceu:ev_energy_input_hatch_4a", "gtceu:ev_energy_input_hatch_16a", "gtceu:iv_energy_input_hatch", "gtceu:iv_energy_input_hatch_4a", "gtceu:iv_energy_input_hatch_16a"] },
-            "note": "Interferometer (IV-B2, observatory step 5, Mercury): three dishes and a correlator hut. At night on Mercury, the Moon's Lunar VLBI Recording + the Inner Planets Chart (kept) -> the Outer System Chart (the next trip), and with that chart kept -> the Sagittarius A* Signal. 7,680 EU/t, .dimension('gcyr:mercury')."
-          }
+    },
+    {
+      "id": "gtceu:alloy_blast_smelter@ev-rtm",
+      "machine": "gtceu:alloy_blast_smelter",
+      "types": ["gtceu:alloy_blast_smelter"],
+      "energy": { "voltage": 2048, "hatches": 2 },
+      "coilTemp": 4500,
+      "needs": ["eu:ev"],
+      "parts": [
+        "gtceu:high_temperature_smelting_casing", "gtceu:rtm_alloy_coil_block", "gtceu:heat_vent", "gtceu:ev_energy_input_hatch", "gtceu:lv_input_bus", "gtceu:lv_input_hatch",
+        "gtceu:lv_output_hatch", "gtceu:lv_muffler_hatch"
+      ],
+      "note": "GCYM's alloy blast smelter (GCYMMachines.BLAST_ALLOY_SMELTER: high-temperature smelting casing, a ring of heating coils, heat vents, a muffler) on 2 EV hatches (IV voltage). IV-B6 moved its controller to IV (IV alloy smelter, IV circuits, tantalum carbide): at home. Its recipes give molten alloys (the freezer casts them)."
+    },
+    {
+      "id": "gtceu:alloy_blast_smelter@ev-hssg",
+      "machine": "gtceu:alloy_blast_smelter",
+      "types": ["gtceu:alloy_blast_smelter"],
+      "energy": { "voltage": 2048, "hatches": 2 },
+      "coilTemp": 5400,
+      "needs": ["eu:ev"],
+      "parts": [
+        "gtceu:high_temperature_smelting_casing", "gtceu:hssg_coil_block", "gtceu:heat_vent", "gtceu:ev_energy_input_hatch", "gtceu:lv_input_bus", "gtceu:lv_input_hatch",
+        "gtceu:lv_output_hatch", "gtceu:lv_muffler_hatch"
+      ],
+      "note": "GCYM's alloy blast smelter (GCYMMachines.BLAST_ALLOY_SMELTER: high-temperature smelting casing, a ring of heating coils, heat vents, a muffler) on 2 EV hatches (IV voltage). IV-B6 moved its controller to IV (IV alloy smelter, IV circuits, tantalum carbide): at home. Its recipes give molten alloys (the freezer casts them)."
+    },
+    {
+      "id": "gtceu:hot_cell@parallel",
+      "machine": "gtceu:hot_cell",
+      "types": ["gtceu:hot_cell"],
+      "energy": { "voltage": 2048 },
+      "needs": ["eu:ev"],
+      "partsFromStructure": true,
+      "partAbilities": { "energy_input": ["gtceu:ev_energy_input_hatch", "gtceu:ev_energy_input_hatch_4a", "gtceu:ev_energy_input_hatch_16a", "gtceu:iv_energy_input_hatch", "gtceu:iv_energy_input_hatch_4a", "gtceu:iv_energy_input_hatch_16a"] },
+      "requireAbilities": ["parallel_hatch"],
+      "note": "The hot cell built with an IV parallel hatch in one of its part cells (IV-B6, lib/parallel_hatch.js): up to 4 copies of a run. The hatch takes the IV sensor and emitter: Mercury."
+    },
+    {
+      "id": "gtceu:fuel_fabrication_plant@parallel",
+      "machine": "gtceu:fuel_fabrication_plant",
+      "types": ["gtceu:fuel_fabrication"],
+      "energy": { "voltage": 2048 },
+      "needs": ["eu:ev"],
+      "partsFromStructure": true,
+      "partAbilities": { "energy_input": ["gtceu:ev_energy_input_hatch", "gtceu:ev_energy_input_hatch_4a", "gtceu:ev_energy_input_hatch_16a", "gtceu:iv_energy_input_hatch", "gtceu:iv_energy_input_hatch_4a", "gtceu:iv_energy_input_hatch_16a"] },
+      "requireAbilities": ["parallel_hatch"],
+      "note": "The fuel fabrication plant built with an IV parallel hatch (IV-B6)."
+    },
+    {
+      "id": "gtceu:heavy_water_plant@parallel",
+      "machine": "gtceu:heavy_water_plant",
+      "types": ["gtceu:isotope_exchange"],
+      "energy": { "voltage": 2048 },
+      "needs": ["eu:ev"],
+      "partsFromStructure": true,
+      "partAbilities": { "energy_input": ["gtceu:ev_energy_input_hatch", "gtceu:ev_energy_input_hatch_4a", "gtceu:ev_energy_input_hatch_16a", "gtceu:iv_energy_input_hatch", "gtceu:iv_energy_input_hatch_4a", "gtceu:iv_energy_input_hatch_16a"] },
+      "requireAbilities": ["parallel_hatch"],
+      "note": "The heavy-water plant built with an IV parallel hatch (IV-B6, proven: 4 copies of the exchange, the H2S charge still 1,000 mB)."
+    },
+    {
+      "machine": "gtceu:fission_reactor",
+      "types": ["gtceu:fission_core"],
+      "partsFromStructure": true,
+      "partAbilities": { "energy_output": ["gtceu:ev_energy_output_hatch", "gtceu:ev_energy_output_hatch_4a", "gtceu:ev_energy_output_hatch_16a", "gtceu:iv_energy_output_hatch", "gtceu:iv_energy_output_hatch_4a", "gtceu:iv_energy_output_hatch_16a"] },
+      "note": "Fission reactor (IV-A2, iv/fission_reactor.js, Earth): a generator of its own type, up to 4 channels; the programmed circuit picks the core (1 LEU in light water, 2 LEU in heavy water, 3 MOX in heavy water, 4 breeder); the assembly is a chanced input and the spent assembly a chanced output, the heavy water comes out tritiated; 1-4 dynamo hatches of any tier (one 16 A IV hatch carries 131,072 EU/t). The EU is the synthetic fission, read from its cores."
+    },
+    {
+      "machine": "gtceu:hot_cell",
+      "types": ["gtceu:hot_cell"],
+      "energy": { "voltage": 2048 },
+      "needs": ["eu:ev"],
+      "partsFromStructure": true,
+      "partAbilities": { "energy_input": ["gtceu:ev_energy_input_hatch", "gtceu:ev_energy_input_hatch_4a", "gtceu:ev_energy_input_hatch_16a", "gtceu:iv_energy_input_hatch", "gtceu:iv_energy_input_hatch_4a", "gtceu:iv_energy_input_hatch_16a"] },
+      "note": "Hot cell (IV-A3, iv/hot_cell.js, Earth): radiation-proof casing cells behind lead glass; circuit 1 enrichment (composed from GTM's live UF6 line: 30 uraninite + 40,000 mB HF -> U-235, U-238 and the fluorine back as F2), 2 MOX, breeder, RTG pellet and Pu-Be source, 3 reprocessing, 4 radon (no plutonium stock). All at 7,670-7,680 EU/t."
+    },
+    {
+      "machine": "gtceu:isr_wellfield",
+      "types": ["gtceu:in_situ_leaching"],
+      "energy": { "voltage": 2048 },
+      "needs": ["eu:ev"],
+      "partsFromStructure": true,
+      "partAbilities": { "energy_input": ["gtceu:ev_energy_input_hatch", "gtceu:ev_energy_input_hatch_4a", "gtceu:ev_energy_input_hatch_16a", "gtceu:iv_energy_input_hatch", "gtceu:iv_energy_input_hatch_4a", "gtceu:iv_energy_input_hatch_16a"] },
+      "note": "In-situ leach field (IV-A4, iv/uranium_cycle.js, the End): a five-spot of wells and an inert header house. One recipe per leach vein (veins_leach.json): the pitchblende sample (never used up) + the ion-exchange resin (1 %) + sulfuric acid + oxygen -> 2 uraninite + radioactive waste (1 %), 6,800 EU/t, .dimension('minecraft:the_end'). The pack's uranium."
+    },
+    {
+      "machine": "gtceu:fuel_fabrication_plant",
+      "types": ["gtceu:fuel_fabrication"],
+      "energy": { "voltage": 2048 },
+      "needs": ["eu:ev"],
+      "partsFromStructure": true,
+      "partAbilities": { "energy_input": ["gtceu:ev_energy_input_hatch", "gtceu:ev_energy_input_hatch_4a", "gtceu:ev_energy_input_hatch_16a", "gtceu:iv_energy_input_hatch", "gtceu:iv_energy_input_hatch_4a", "gtceu:iv_energy_input_hatch_16a"] },
+      "note": "Fuel fabrication plant (IV-A4, Earth): circuit 1 LEU pellets (U-235 + U-238 + oxygen, 500 mB hydrogen kept: a chance-0 fluid, capital), 2 Zircaloy cladding tubes, 3 the LEU assembly (pellets, tubes, Moon helium). Its sintering tunnel takes Kanthal or hotter coils."
+    },
+    {
+      "machine": "gtceu:heavy_water_plant",
+      "types": ["gtceu:isotope_exchange"],
+      "energy": { "voltage": 2048 },
+      "needs": ["eu:ev"],
+      "partsFromStructure": true,
+      "partAbilities": { "energy_input": ["gtceu:ev_energy_input_hatch", "gtceu:iv_energy_input_hatch"] },
+      "note": "Heavy-water plant (IV-A5, iv/heavy_water_plant.js, Earth): circuit 1 exchange (Martian ice + steam, with a 1,000 mB H2S charge that is never used up: chance 0, capital), circuit 2 finishing (concentrate -> heavy water). 1,907 and 477 EU/t: an EV hatch runs both; the controller is IV."
+    },
+    {
+      "machine": "gtceu:fluorspar_kiln",
+      "types": ["gtceu:fluorspar_digestion"],
+      "energy": { "voltage": 2048 },
+      "needs": ["eu:ev"],
+      "partsFromStructure": true,
+      "partAbilities": { "energy_input": ["gtceu:ev_energy_input_hatch", "gtceu:ev_energy_input_hatch_4a", "gtceu:ev_energy_input_hatch_16a", "gtceu:iv_energy_input_hatch", "gtceu:iv_energy_input_hatch_4a", "gtceu:iv_energy_input_hatch_16a"] },
+      "note": "Fluorspar kiln (IV-A6, iv/fluorspar_kiln.js, Earth): 3 fluorite dust + 1,000 mB sulfuric acid + 2,000 mB water -> 2,000 mB HF + 8 gypsum dust, 30 EU/t a charge, up to 256 charges at once (one IV hatch at full feed). The only route from fluorite to fluorine."
+    },
+    {
+      "machine": "gtceu:tritium_removal_facility",
+      "types": ["gtceu:detritiation"],
+      "energy": { "voltage": 2048 },
+      "needs": ["eu:ev"],
+      "partsFromStructure": true,
+      "partAbilities": { "energy_input": ["gtceu:ev_energy_input_hatch", "gtceu:ev_energy_input_hatch_4a", "gtceu:ev_energy_input_hatch_16a", "gtceu:iv_energy_input_hatch", "gtceu:iv_energy_input_hatch_4a", "gtceu:iv_energy_input_hatch_16a"] },
+      "note": "Tritium removal facility (IV-B4, iv/tritium_removal.js, the Moon): one recipe, 1,000 mB tritiated heavy water + a 100 mB deuterium charge (chance 0) -> 900 mB heavy water + 200 mB tritium, 6,880 EU/t (half at night, a run-start modifier the validator doesn't see), .dimension('gcyr:luna'). The pack's only tritium."
+    },
+    {
+      "machine": "gtceu:pressurized_vein_drill",
+      "types": ["gtceu:vein_drilling"],
+      "onlyTier": "iv",
+      "onlyRecipes": ["grindless:vein_drilling/iv/pressurized_*"],
+      "energy": { "voltage": 2048 },
+      "needs": ["eu:ev"],
+      "partsFromStructure": true,
+      "partAbilities": { "energy_input": ["gtceu:ev_energy_input_hatch", "gtceu:ev_energy_input_hatch_4a", "gtceu:ev_energy_input_hatch_16a", "gtceu:iv_energy_input_hatch", "gtceu:iv_energy_input_hatch_4a", "gtceu:iv_energy_input_hatch_16a"] },
+      "note": "Pressurized vein drill (IV-B1, iv/venus.js, Venus and Mars): a regolith pad, an inert pressure housing, a filter casing deck and a tungstensteel pipe string; it runs only vein_drilling/iv/pressurized_* (its veto; the Mercury drill's prefix is refused), the IV bit at 0.25 %, cap 128. On Venus 200 mB of distilled water a run leaves as steam (the heat tax); on Mars it drills dry."
+    },
+    {
+      "machine": "gtceu:venus_heat_engine",
+      "types": ["gtceu:venus_heat"],
+      "partsFromStructure": true,
+      "partAbilities": { "energy_output": ["gtceu:ev_energy_output_hatch", "gtceu:ev_energy_output_hatch_4a", "gtceu:ev_energy_output_hatch_16a", "gtceu:iv_energy_output_hatch", "gtceu:iv_energy_output_hatch_4a", "gtceu:iv_energy_output_hatch_16a"] },
+      "note": "Venus heat engine (IV-B1, Venus): a generator of its own type, 200 mB of distilled water a 20 s cycle -> 8,192 EU/t and 32,000 mB of steam, .dimension('gcyr:venus'), always on (Venus is fixed at noon). 1-2 dynamo hatches (one IV or two EV). The EU is the synthetic venus-heat."
+    },
+    {
+      "machine": "gtceu:venus_acid_works",
+      "types": ["gtceu:acid_cracking"],
+      "energy": { "voltage": 2048 },
+      "needs": ["eu:ev"],
+      "partsFromStructure": true,
+      "partAbilities": { "energy_input": ["gtceu:ev_energy_input_hatch", "gtceu:ev_energy_input_hatch_4a", "gtceu:ev_energy_input_hatch_16a", "gtceu:iv_energy_input_hatch", "gtceu:iv_energy_input_hatch_4a", "gtceu:iv_energy_input_hatch_16a"] },
+      "note": "Venus acid works (IV-B1, Venus): the clouds' sulfuric acid + the platinum gauze (0.1 %) -> distilled water + oxygen; circuit 1 vents the SO2, circuit 2 keeps it (refuses voiding). 7,500 EU/t, .dimension('gcyr:venus')."
+    },
+    {
+      "machine": "gtceu:mercury_vein_drill",
+      "types": ["gtceu:vein_drilling"],
+      "onlyTier": "iv",
+      "onlyRecipes": ["grindless:vein_drilling/iv/mercury_*"],
+      "energy": { "voltage": 2048 },
+      "needs": ["eu:ev"],
+      "partsFromStructure": true,
+      "partAbilities": { "energy_input": ["gtceu:ev_energy_input_hatch", "gtceu:ev_energy_input_hatch_4a", "gtceu:ev_energy_input_hatch_16a", "gtceu:iv_energy_input_hatch", "gtceu:iv_energy_input_hatch_4a", "gtceu:iv_energy_input_hatch_16a"] },
+      "note": "Mercury vein drill (IV-B2, iv/mercury.js, Mercury): a heat-shield brick body under a sunshade; it runs only vein_drilling/iv/mercury_* (its veto), by day with 10 mB of liquid nitrogen a bore, at night dry (a run-start modifier the validator doesn't see: either recipe counts), the IV bit, cap 128."
+    },
+    {
+      "machine": "gtceu:mercury_solar_works",
+      "types": ["gtceu:solar_processing"],
+      "energy": { "voltage": 2048 },
+      "needs": ["eu:ev"],
+      "partsFromStructure": true,
+      "partAbilities": { "energy_input": ["gtceu:ev_energy_input_hatch", "gtceu:ev_energy_input_hatch_4a", "gtceu:ev_energy_input_hatch_16a", "gtceu:iv_energy_input_hatch", "gtceu:iv_energy_input_hatch_4a", "gtceu:iv_energy_input_hatch_16a"] },
+      "note": "Mercury solar works (IV-B2, Mercury): 8 heliostat mirrors, a focal furnace and an evaporation bell on Mercury rock. Heat-shield bricks (Hermean regolith), thin-film panels and the iridosmine fusion (-> rarest metal mixture + OsO4: Mercury's route into GT--'s iridium and osmium chain); .dimension('gcyr:mercury'), a quarter of the EU/t when a run starts in the sun."
+    },
+    {
+      "machine": "gtceu:mercury_solar_field",
+      "types": ["gtceu:mercury_solar"],
+      "partsFromStructure": true,
+      "partAbilities": { "energy_output": ["gtceu:ev_energy_output_hatch", "gtceu:ev_energy_output_hatch_4a", "gtceu:ev_energy_output_hatch_16a", "gtceu:iv_energy_output_hatch", "gtceu:iv_energy_output_hatch_4a", "gtceu:iv_energy_output_hatch_16a"] },
+      "note": "Mercury solar field (IV-B2, Mercury): the lunar plan with 36 Hermean thin-film panels; a generator of its own type, 2,010 EU/t a lit panel by day (72,360 EU/t full), .dimension('gcyr:mercury'). The EU is the synthetic mercury-solar."
+    },
+    {
+      "machine": "gtceu:interferometer",
+      "types": ["gtceu:interferometry"],
+      "energy": { "voltage": 2048 },
+      "needs": ["eu:ev"],
+      "partsFromStructure": true,
+      "partAbilities": { "energy_input": ["gtceu:ev_energy_input_hatch", "gtceu:ev_energy_input_hatch_4a", "gtceu:ev_energy_input_hatch_16a", "gtceu:iv_energy_input_hatch", "gtceu:iv_energy_input_hatch_4a", "gtceu:iv_energy_input_hatch_16a"] },
+      "note": "Interferometer (IV-B2, observatory step 5, Mercury): three dishes and a correlator hut. At night on Mercury, the Moon's Lunar VLBI Recording + the Inner Planets Chart (kept) -> the Outer System Chart (the next trip), and with that chart kept -> the Sagittarius A* Signal. 7,680 EU/t, .dimension('gcyr:mercury')."
+    }
         ],
   "synthetic": [
     {
@@ -367,12 +430,12 @@
     { "id": "leu-pellet", "label": "LEU pellet", "item": "grindless:leu_pellet" },
     { "id": "cladding-tube", "label": "Zircaloy cladding tube", "item": "grindless:zircaloy_cladding_tube" },
     { "id": "leu-assembly", "label": "LEU fuel assembly", "item": "grindless:leu_fuel_assembly" },
-    { "id": "leu-only-fuel-plant", "label": "LEU assemblies only come from the fuel fabrication plant (decision 7: none from the hot cell)", "item": "grindless:leu_fuel_assembly", "without": ["operate:gtceu:fuel_fabrication_plant"], "expect": "unreachable" },
+    { "id": "leu-only-fuel-plant", "label": "LEU assemblies only come from the fuel fabrication plant (decision 7: none from the hot cell)", "item": "grindless:leu_fuel_assembly", "without": ["operate:gtceu:fuel_fabrication_plant*"], "expect": "unreachable" },
 
     { "id": "heavy-water-plant", "label": "Heavy-water plant (ours, Earth)", "item": "gtceu:heavy_water_plant" },
     { "id": "heavy-water-plant-formed", "label": "Heavy-water plant formed", "item": "m:gtceu:heavy_water_plant" },
     { "id": "heavy-water", "label": "Heavy water (Martian ice, exchange and finishing)", "fluid": "gtceu:heavy_water" },
-    { "id": "heavy-water-only-plant", "label": "Heavy water only comes from the plant (the Moon facility returns what the reactor's moderator took from it)", "fluid": "gtceu:heavy_water", "without": ["operate:gtceu:heavy_water_plant"], "expect": "unreachable" },
+    { "id": "heavy-water-only-plant", "label": "Heavy water only comes from the plant (the Moon facility returns what the reactor's moderator took from it)", "fluid": "gtceu:heavy_water", "without": ["operate:gtceu:heavy_water_plant*"], "expect": "unreachable" },
     { "id": "deuterium", "label": "Deuterium (heavy water electrolysis)", "fluid": "gtceu:deuterium" },
     { "id": "deuterium-only-heavy-water", "label": "Deuterium only comes from heavy water (hydrogen_separation and the ender air's deuterium are gone)", "fluid": "gtceu:deuterium", "without": ["grindless:electrolyzer/heavy_water_electrolysis"], "expect": "unreachable" },
 
@@ -460,6 +523,13 @@
     { "id": "osmium-ingot", "label": "Gate to LuV: osmium ingot (EBF at 30,720 EU/t: two IV hatches)", "item": "gtceu:osmium_ingot" },
     { "id": "mainframe-nano", "label": "Gate to LuV: nanoprocessor mainframe", "item": "gtceu:nano_processor_mainframe" },
     { "id": "stored-plutonium-241", "label": "Gate to LuV, stored for fusion: plutonium-241", "item": "gtceu:plutonium_241_dust" },
+    { "id": "parallel-in-plant", "label": "Gate to LuV: an IV parallel hatch in one of our plants (the hot cell, the fuel fabrication plant or the heavy-water plant, IV-B6)", "anyOf": ["m:gtceu:hot_cell@parallel", "m:gtceu:fuel_fabrication_plant@parallel", "m:gtceu:heavy_water_plant@parallel"] },
+    { "id": "hatch-parallel-iv", "label": "IV parallel hatch (IV-B6: 4 IV circuits; its sensor and emitter take iridium)", "item": "gtceu:iv_parallel_hatch" },
+    { "id": "mass-mercury-needs-mercury", "label": "IV-B6's Mercury half waits for Mercury: without the trip there is no IV parallel hatch, assembly line, or GCYM large engraving laser, circuit assembler, electrolyzer, electromagnet or distillery (iridium or osmium; needs IV-B3's Earth cut)", "anyOf": ["gtceu:iv_parallel_hatch", "gtceu:assembly_line", "gtceu:large_engraving_laser", "gtceu:large_circuit_assembler", "gtceu:large_electrolyzer", "gtceu:large_electromagnet", "gtceu:large_distillery"], "without": ["synthetic:inner-trip"], "expect": "unreachable" },
+    { "id": "alloy-blast-smelter", "label": "GCYM's alloy blast smelter (IV-B6: IV parts, at home)", "item": "gtceu:alloy_blast_smelter" },
+    { "id": "alloy-blast-smelter-formed", "label": "Alloy blast smelter formed (2 EV hatches)", "item": "m:gtceu:alloy_blast_smelter@ev-rtm" },
+    { "id": "large-packer", "label": "GCYM's large packer (IV-B6)", "item": "gtceu:large_packer" },
+    { "id": "quantum-storage-v", "label": "Quantum Chest V and Quantum Tank V (the lines' stock)", "allOf": ["gtceu:iv_quantum_chest", "gtceu:iv_quantum_tank"] },
     { "id": "chart-outer-system", "label": "Gate to LuV: the Outer System Chart (the interferometer: the next trip)", "item": "grindless:outer_system_chart" },
     { "id": "signal-sagittarius", "label": "The first Sagittarius A* signal", "item": "grindless:sagittarius_a_star_signal" },
 
@@ -642,6 +712,16 @@
       ]
     },
     {
+      "id": "iv-mass-home",
+      "label": "The mass-production kit at home (IV-B6's split): GCYM's machines on IV parts (the alloy blast smelter and large packer among them), GTCA's megas, GT--'s Maceration Stack, the data access hatch",
+      "items": [
+        "gtceu:alloy_blast_smelter", "gtceu:large_packer", "gtceu:large_maceration_tower", "gtceu:large_arc_smelter", "gtceu:large_chemical_bath", "gtceu:large_sifting_funnel",
+        "gtceu:large_centrifuge", "gtceu:large_assembler", "gtceu:large_autoclave", "gtceu:large_material_press", "gtceu:large_brewer", "gtceu:large_cutter",
+        "gtceu:large_extractor", "gtceu:large_extruder", "gtceu:large_solidifier", "gtceu:large_wiremill", "gtca:mega_lcr", "gtca:mega_oil_cracking_unit",
+        "gtnn:maceration_stack_controller", "gtceu:data_access_hatch", "m:gtceu:alloy_blast_smelter@ev-rtm", "m:gtceu:alloy_blast_smelter@ev-hssg"
+      ]
+    },
+    {
       "id": "iv-path-inner",
       "label": "The way to Venus and Mercury (no naquadah, iridium or osmium): the chart, the tier 3 rocket's elite tank and motor, the thermal upgrade, the IV bit and the site machines' controllers, which are crafted at home",
       "items": [
@@ -672,11 +752,13 @@
     {
       "id": "iv-mercury-gtm",
       "era": "iv-mercury",
-      "label": "GTM's IV items that wait for Mercury: the emitter, sensor and voltage coil (iridium), the energy and dynamo hatches built on the coil, the circuit assembler, laser engraver, scanner, large miner, world accelerator and parallel hatch built on the emitter and sensor, and the electrolyzer (osmium wire)",
+      "label": "GTM's IV items that wait for Mercury: the emitter, sensor and voltage coil (iridium), the energy and dynamo hatches built on the coil, the circuit assembler, laser engraver, scanner, large miner, world accelerator and parallel hatch built on the emitter and sensor, the electrolyzer (osmium wire), the assembly line and its casings (ruridit), and IV-B6's Mercury split of the kit: five GCYM machines and our plants with the parallel hatch",
       "items": [
         "gtceu:iv_emitter", "gtceu:iv_sensor", "gtceu:iv_voltage_coil", "gtceu:iv_energy_input_hatch*", "gtceu:iv_energy_output_hatch*", "gtceu:iv_substation_*",
         "gtceu:iv_*_laser_*_hatch", "gtceu:iv_circuit_assembler", "gtceu:iv_electrolyzer", "gtceu:iv_large_miner", "gtceu:iv_laser_engraver", "gtceu:iv_parallel_hatch",
-        "gtceu:iv_scanner", "gtceu:iv_world_accelerator", "m:gtceu:assembly_line"
+        "gtceu:iv_scanner", "gtceu:iv_world_accelerator", "m:gtceu:assembly_line", "gtceu:assembly_line", "gtceu:assembly_line_casing", "gtceu:assembly_line_unit",
+        "gtceu:large_engraving_laser", "gtceu:large_circuit_assembler", "gtceu:large_electrolyzer", "gtceu:large_electromagnet", "gtceu:large_distillery",
+        "m:gtceu:hot_cell@parallel", "m:gtceu:fuel_fabrication_plant@parallel", "m:gtceu:heavy_water_plant@parallel"
       ]
     },
     {
