@@ -14,7 +14,7 @@
   Run from the repo root (PowerShell 5.1 blocks unsigned scripts by default; this bypass only affects that process):
     powershell -NoProfile -ExecutionPolicy Bypass -File tools\assets\Build-SteamContentTextures.ps1
     powershell -NoProfile -ExecutionPolicy Bypass -File tools\assets\Build-SteamContentTextures.ps1 -Only blast
-    powershell -NoProfile -ExecutionPolicy Bypass -File tools\assets\Build-SteamContentPreview.ps1 -Out C:\ruta\steam-content.png
+    powershell -NoProfile -ExecutionPolicy Bypass -File tools\assets\Build-SteamContentPreview.ps1 -Out C:\path\steam-content.png
 
   Steam palette, like the drill and greenhouse faces: bronze and brass, riveted iron, warm light. Overlay conventions
   (GTM's workable casings): transparent background, the outer 1 px ring left empty so the casing shows around the face,
@@ -329,6 +329,6 @@ if ($problems -gt 0) { exit 1 }
 if ($Credits) {
     Write-Host ''
     foreach ($rel in $written) {
-        Write-Host ("| ``pack/kubejs/assets/grindless/textures/$rel`` | Generada con tools/assets/$ScriptName (pixel art procedural, original) por el agente de contenido de vapor, 2026-10-24 | la del pack (pendiente; propuesta CC BY-SA 4.0) |")
+        Write-Host ("| ``pack/kubejs/assets/grindless/textures/$rel`` | Generated with tools/assets/$ScriptName (procedural pixel art, original) by the steam content agent, 2026-10-24 | the pack's own (pending; proposed CC BY-SA 4.0) |")
     }
 }

@@ -17,7 +17,7 @@ $bootUrl = 'https://github.com/packwiz/packwiz-installer-bootstrap/releases/down
 $pinned = $Channel -match '^v\d'
 $name = if ($pinned) { "Gregtech Grindless $Channel" } else { 'Gregtech Grindless' }
 $folder = if ($pinned) { "GregtechGrindless-$Channel" } else { 'GregtechGrindless' }
-$notes = if ($pinned) { "Gregtech Grindless ${Channel}: versi$([char]0xF3)n fija, no se actualiza. Para jugar al d$([char]0xED)a, usa la instancia del canal jugable." } else { "Gregtech Grindless: canal $Channel. Se actualiza solo al arrancar (solo versiones probadas)." }
+$notes = if ($pinned) { "Gregtech Grindless ${Channel}: pinned version, does not update. To play on the latest version, use the playable-channel instance." } else { "Gregtech Grindless: $Channel channel. Updates itself on launch only (tested versions only)." }
 
 $work = Join-Path ([IO.Path]::GetTempPath()) ("gg-prism-" + [guid]::NewGuid().ToString('N'))
 $inst = Join-Path $work $folder
