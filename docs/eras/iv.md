@@ -137,9 +137,11 @@ What it gains: **the hands-free neutron window and the superacid inside.** The l
 ### Family steps
 
 - **Pressurized vein drill** (`gtceu:pressurized_vein_drill`): a closed shaft against pressure, a TS pipe jacket, inert casing against acid and pressurized regolith casing. On Venus (`.dimension('gcyr:venus')`) it runs the naquadah vein with a Tungstensteel drill bit; instead of Drilling Fluid it uses Distilled Water, which comes out as steam: it is the heat tax (four times what the Drilling Fluid requires), and the steam is inert (it is discarded or moves a turbine). On Mars it runs its three veins with dust filters: it is the pressurized kit that `ev.md` left for IV. Cap of 128 in `bores` (the tripod, 64).
+  - *As built (IV-B1):* it runs only `vein_drilling/iv/pressurized_<vein>_tungsten_steel` recipes (Venus: naquadah; Mars: scheelite, merrillite and ice), 5.625 ores a run, the IV bit (`grindless:tungsten_steel_drill_bit`, IV-B2's) at 0.25 %. The heat tax is 200 mB of distilled water a run, which leaves as 1,600 mB of steam, the run's own energy at 1 EU per mB, so the drill never makes energy; Mars is dry. 5 × 9 × 4: a regolith pad, a 3 × 3 × 3 inert casing pressure housing, a filter casing deck and a tungstensteel pipe string. GCYR's `gcyr:venusian_regolith` is a falling block, so it is the ground row of every Venus structure; Venus cobblestone hammers into it, only on Venus.
 - **Mercury drill** (`gtceu:mercury_vein_drill`): low-profile, under a heat-shield sunshade and with radiators. At night it drills dry and the Tungstensteel drill bit wears out twice as fast; by day it only works with Liquid Nitrogen (GCYR's Mercury has a day and night cycle: its dimension type has no fixed time). Iridosmine vein.
 - **On-site power** (builds on the LV solar mirror tower and the EV lunar solar field, `gtceu:lunar_solar_array`):
   - **Venus heat engine** (`gtceu:venus_heat_engine`): a hot plate on the ground and a 16-block radiator chimney up into the clouds, which is the cold side. With `.dimension('gcyr:venus')`, 200 mB of Distilled Water per 20 s cycle → 8,192 EU/t, always: GCYR's Venus is fixed at noon (`fixed_time` 6000), so day and night don't matter there. Outside Venus there is no such heat.
+    - *As built (IV-B1):* generator type `gtceu:venus_heat` (kept out of `power/generators.js`'s list): 200 mB of distilled water a 20 s cycle → 8,192 EU/t and 32,000 mB of steam (GTM's 160:1), the water's destination (decision 10). 16 high, the pattern helper's limit: a footing, a 3-high engine house over a firebox hot plate, a roof and an 11-block riser of Night-Sky Radiators.
   - **Mercury solar field** (`gtceu:mercury_solar_field`): the lunar field with a heat-shield sunshade. By day it yields ×6.7 (the Moon, ×1.4); at night, nothing.
   - **RTG cell** (`gtceu:rtg`, single-block machine; verify the simple KubeJS generator): plutonium oxide pellet that is used up at random (≈ 1 per hour) → 2,048 EU/t constant. It starts every base and covers Mercury's night.
 - **Observatory, step 5: interferometer** (`gtceu:interferometer`): the Mercury antenna (night and vacuum) combines its data with the Moon's deep space antenna over the network. It gives the outer-system chart (the belt and Jupiter, the LuV trip) and the first signal from Sagittarius A*.
@@ -381,7 +383,7 @@ All of them are IV recipes (7,680 EU/t unless a composed GTM stage sets another 
   - Water goes to the drill, the heat engine and the network.
   - O₂ goes to the IV oxygen spreader and the suits; the surplus goes home as LOX.
   - SO₂, in circuit 1, goes back into the Venusian air inside the recipe. It is Venus's own gas: below the clouds the planet does this same decomposition.
-  - SO₂, in circuit 2, is kept in a hatch (voiding refused) for home's LV sulfide roaster, whose contact plant turns it into acid and steam.
+  - SO₂, in circuit 2, is kept in a hatch (voiding refused) for GTM's chemical reactor at home: sulfur trioxide, then sulfuric acid. (The LV sulfide roaster takes no SO₂ as an input, so it is not the destination; IV-B1.)
   - Which circuit the base uses is a decision to take.
 - **Structure:**
   - a 5×5 hot plate of Venusian regolith casing (the site casing) on the ground;
@@ -394,14 +396,15 @@ All of them are IV recipes (7,680 EU/t unless a composed GTM stage sets another 
 - **Crossings:**
   - GTM's gas collector (Venus recipes);
   - EV: the platinum plant (gauze) and the Moon's cryogenic plant (LOX);
-  - LV: the sulfide roaster (SO₂, circuit 2);
+  - LV: GTM's chemical reactor turns the kept SO₂ into sulfur trioxide and sulfuric acid (circuit 2);
   - IV: the pressurized drill and heat engine.
 - **Risks:**
   - AE2 moves water for free, so the gain is the site recipe and the oxygen, like the regolith cell's.
-  - The gas collector's altitude condition still has to be verified on GCYR's Venus.
+  - The gas collector's altitude condition was verified on the bench by IV-B1: the cloud base is Y 240 (*tune*); CO₂ on circuit 4 below it and sulfuric acid on circuit 5 at or above it, 1,024 EU/t, 10,000 mB per 10 s. The ground at the Venus band sits at Y 156–161.
 - **Source and licence:**
   - Real: Venus cloud ISRU (Mogul et al., *JGR Planets* 2025; Landis, "Colonization of Venus", 2003); the acid decomposition section of the sulfur–iodine cycle (General Atomics) and the hybrid sulfur cycle (Westinghouse); Sandia's bayonet decomposer.
   - The catalog's cloud harvester (GTL's Venus acid): idea only.
+- **As built (IV-B1):** 7,500 EU/t for 6 ticks, GTM's 45,000 EU per 1,000 mB electrolysis; the gauze wears 0.1 %. Mode 2 is marked by the recipe data `grindless_keep_fluids`, and only it refuses fluid voiding (`lib/no_voiding.js`). The condenser stands beside the 5×5 plate on its own regolith footing (8 × 11 × 5 in all). All the Venus figures live in `data/grindless/tables/venus.json`.
 
 #### Fluorspar kiln: `gtceu:fluorspar_kiln`, type `gtceu:fluorspar_digestion` (Earth)
 
@@ -609,7 +612,7 @@ All of them are IV recipes (7,680 EU/t unless a composed GTM stage sets another 
 3. **The reactor's heavy water comes out tritiated**, and the tritium removal facility on the Moon recycles it.
 4. **Tritium comes only from the reactor, through the facility.** In IV's build, liquid ender air loses its tritium (with the radon and deuterium EV removed), and GTM's `centrifuge/deuterium_separation` is removed. Until then nothing uses tritium (fusion is LuV).
 5. **A new Earth vein of fluorite, barite, galena and sphalerite** (Mississippi Valley type) feeds the fluorspar kiln. It generates only in new chunks; the drill recipes appear at once. GCYR's `gcyr:fluorite` is the material.
-6. **The Venus acid works has both modes.** Circuit 1 returns the SO₂ to Venus's air (the planet's own gas). Circuit 2 keeps it, refusing voiding, for the LV sulfide roaster at home.
+6. **The Venus acid works has both modes.** Circuit 1 returns the SO₂ to Venus's air (the planet's own gas). Circuit 2 keeps it, refusing voiding, for GTM's chemical reactor at home (sulfur trioxide, then sulfuric acid; IV-B1 found that the LV sulfide roaster takes no SO₂).
 7. **Fresh LEU fuel leaves the hot cell** for the fuel fabrication plant: UO₂ pellets in Zircaloy, backfilled with Moon helium. The hot cell keeps enrichment, MOX, the breeder, RTG pellets, the Pu-Be source, reprocessing and radon. The new material is `gtceu:zircaloy`. GTM has no hafnium, so "nuclear-grade" zirconium skips its removal.
 8. **The Mercury solar field takes the solar works' thin-film panels**, so it is not a Mercury circuit of the lunar array.
 9. **GTM's large miners stay** as world-digging automation of finite ore, on every planet. The site drills remain the infinite source.

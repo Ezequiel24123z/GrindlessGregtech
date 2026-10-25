@@ -43,6 +43,7 @@ Generators for the pack's own textures. Everything is procedural 16x16 pixel art
 | `Build-UraniumCycleTextures.ps1` | Writes the faces of the IV in-situ leach field and fuel fabrication plant (`multiblock/isr_wellfield/`, `multiblock/fuel_fabrication_plant/`). `-Only isr,fuel`, `-Preview <png outside the repo>` (optional `-PtfeCasing <png>`, `-StainlessCasing <png>`) and `-Credits` (their 10 CREDITS rows). |
 | `Build-HeavyWaterPlantTextures.ps1` | Writes the IV heavy-water plant's face (`multiblock/heavy_water_plant/`). `-Only heavy_water_plant`, `-Preview <png outside the repo>` and `-Credits` (its 5 CREDITS rows). |
 | `Build-FluorsparKilnTextures.ps1` | Writes the IV fluorspar kiln's face (`multiblock/fluorspar_kiln/`). `-Only kiln`, `-Preview <png outside the repo>` and `-Credits` (its 5 CREDITS rows). |
+| `Build-VenusTextures.ps1` | Writes the faces of the IV Venus package (IV-B1): the pressurized vein drill, the Venus heat engine and the Venus acid works (`multiblock/pressurized_vein_drill/`, `multiblock/venus_heat_engine/`, `multiblock/venus_acid_works/`). `-Only drill,engine,works`, `-Preview <png outside the repo>` (optional `-PtfeCasing <png>`, `-TungstenCasing <png>`) and `-Credits` (their 15 CREDITS rows). |
 | `Build-TritiumRemovalTextures.ps1` | Writes the IV tritium removal facility's face (`multiblock/tritium_removal_facility/`). `-Only facility`, `-Preview <png outside the repo>` and `-Credits` (its 5 CREDITS rows). |
 | `Build-IVFoundationTextures.ps1` | Writes the shared IV textures (IV-A1): fuel cycle items, PuBe source, RTG pellet, resin, platinum gauze, inner planets chart, Venus and Mercury vein samples, the Hermean heat shield brick (the Mercury casing texture) and the thin-film panel. `-Only`, `-Preview <png outside the repo>`, `-Credits`. |
 
@@ -434,3 +435,63 @@ powershell -NoProfile -ExecutionPolicy Bypass -File tools\assets\Build-TritiumRe
 | `block/multiblock/tritium_removal_facility/overlay_front.png` | Idle: the cold box dark, the pool and the tritium dull, both lamps dark. |
 | `.../overlay_front_active.png` + `.mcmeta` | 8 frames, `frametime` 4: the rising vapour, the reflux drops, the frost, the tritium pulse into the bed, the run lamp and the tritium lamp's blink. |
 | `.../overlay_front_active_emissive.png` + `.mcmeta` | Only the stored tritium, the tritium line's pulse and the lit lamps. |
+
+### Venus (IV-B1)
+
+This script draws the faces of the pressurized vein drill, the Venus heat engine and the Venus acid works. It uses the uranium cycle's method (steel bezel, lamp ramp and IV blue). Its helpers and checks are copied, so no other script changes.
+
+- **Casings:** the drill and the acid works are drawn for GTM's inert PTFE casing (a dark grey plate in GTM 7.5.3), the engine for the robust tungstensteel casing (blue-grey). Each face has its own dark frame, so it also reads on light casings.
+- **Checks:**
+  - 16x16 frames, in strips of exactly 8 with `frametime` 4.
+  - Binary alpha and no pure black.
+  - An empty casing ring around a panel with no holes.
+  - No frame equal to the next one.
+  - An emissive layer inside the colour layer, lit in every frame and only on the face's own lights.
+- The output is identical byte for byte.
+
+```powershell
+powershell -NoProfile -ExecutionPolicy Bypass -File tools\assets\Build-VenusTextures.ps1
+powershell -NoProfile -ExecutionPolicy Bypass -File tools\assets\Build-VenusTextures.ps1 -Only drill,works -Credits
+powershell -NoProfile -ExecutionPolicy Bypass -File tools\assets\Build-VenusTextures.ps1 -Preview C:\path\venus.png -PtfeCasing C:\path\machine_casing_inert_ptfe.png -TungstenCasing C:\path\machine_casing_robust_tungstensteel.png
+```
+
+- `-Only` accepts `drill`, `engine` and `works` (comma-separated, also with `-File`).
+- `-Preview` writes an x8 review sheet. It must point outside the repo, and the sheet is never shipped. The sheet shows:
+  - per face, on its own casing: idle, the 8 working frames and a dark room, then idle and working on the other casing and on a pale plate;
+  - the raw colour layer on a checker;
+  - the emissive layer alone;
+  - each face next to the existing faces nearest to it: the EV tripod, lunar drill and fission reactor; the combined-cycle plant, generator array and atmosphere processor; the platinum plant, extraction cascade and heavy-water plant;
+  - 3x3 walls at x4 and x1.
+- Casings in the preview: GTM's real ones when `-PtfeCasing`/`-TungstenCasing` point at its PNGs (extracted from the jar and kept outside the repo); otherwise stand-ins drawn by code.
+
+| File (under `textures/`) | Notes |
+|---|---|
+| `block/multiblock/pressurized_vein_drill/overlay_front.png` | Idle: a round pressure hatch (a raised steel ring with eight dark bolt heads) around a dark porthole, with a glint and the drill string at rest. A round pressure dial at the top right, its needle on the stop and a red zone on its edge. An empty thermometer over a dull bulb. Two dark lamps (run and seal) in a slot at the top left. |
+| `.../overlay_front_active.png` + `.mcmeta` | 8 frames, `frametime` 4: a warm orange glow (the hot drill string, Venus's heat) breathes through the porthole, white-hot in the middle, while a dark screw flight runs down the string. The needle stands high and trembles at the red zone. The thermometer's hot column flickers near the top. The run lamp is green and the seal lamp IV blue. |
+| `.../overlay_front_active_emissive.png` + `.mcmeta` | Only the porthole, the thermometer and the two lamps. |
+| `block/multiblock/venus_heat_engine/overlay_front.png` | Idle: a Stirling-style engine on its hot plate. The cold head's radiator fins sit over the displacer's cylinder (a cool, dark bore with the displacer at rest). Beside it, the flywheel (a thick rim with a brass crank pin) on its post and a dark output lamp. Across the bottom, the heat-exchanger grille, its slots a dull red. |
+| `.../overlay_front_active.png` + `.mcmeta` | 8 frames, `frametime` 4: the grille glows red-orange from below and flickers, with a hotter breath running along the slots. The flywheel turns an eighth a frame. The displacer rises and falls in step with the crank, and the gas under it glows. The electric-blue output lamp blinks (two frames lit, two dark). |
+| `.../overlay_front_active_emissive.png` + `.mcmeta` | Only the hot gas in the bore, the grille's slots and the lit output lamp. |
+| `block/multiblock/venus_acid_works/overlay_front.png` | Idle: a tall sight glass of still, pale yellow acid under its vapour. A stub (the PTFE duct) runs into the catalyst box, where the woven platinum gauze shows as a silvery cross-hatch. Under it, the water line and the oxygen line each run down to a dark lamp. |
+| `.../overlay_front_active.png` + `.mcmeta` | 8 frames, `frametime` 4: three bubbles rise through the acid out of step and break at its surface. The gauze glows a dull orange (the hot catalyst) and flickers. A pulse runs down each line. The water lamp is lit blue and the oxygen lamp pale cyan. |
+| `.../overlay_front_active_emissive.png` + `.mcmeta` | Only the gauze and the two lamps. |
+
+#### How to retouch (Venus)
+
+- **Palettes and maps:** each face has its palette (`$DrillPal`, `$EnginePal`, `$WorksPal`) and its map (`$DrillBase`, `$EngineBase`, `$WorksBase`). `New-Pal` fails on a repeated letter. In a map, `.` keeps the casing and every letter is a colour. What moves is drawn by code over the map.
+- **Drill:**
+  - `$DrillRing` is the porthole's resting heat, by distance from its centre.
+  - `$DrillPulse` is the porthole's breath, in steps dimmer.
+  - `$DrillNeedle` holds the needle's tips, and `$DrillNeedleRun` the working sequence.
+  - `$DrillThermoTop` is the hot column's top row per frame; `$DrillBulb` is the bulb.
+- **Engine:**
+  - `$EnginePins` and `$EngineArms` are the crank pin's eight places on the rim and the arm to each.
+  - `$EnginePiston` is the displacer's row per frame, in step with the crank.
+  - `$EngineSlotX` lists the grille's slots; `$EngineLamp` is the output lamp.
+  - The two heat ramps (`$DrillHeatSpec`, `$EngineHeatSpec`) are separate, so either can change alone.
+- **Acid works:**
+  - `$WorksBubbles` holds the column and phase of each bubble.
+  - The gauze tones are `t u v` when it glows and `p q s` when idle.
+  - `$WorksLines` holds each line's pulse colour and phase.
+  - `$WorksWaterLamp` and `$WorksOxygenLamp` are the two lamps.
+- **Glow zones:** `$DrillGlowZone`, `$EngineGlowZone` and `$WorksGlowZone` say where light may come from. A new light outside them fails the check, so add it there as well.
