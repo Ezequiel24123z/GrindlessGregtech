@@ -154,7 +154,6 @@
     {"material":"gtceu:advanced_soc_wafer","until":"iv","reason":"comes from the End's naquadah vein, held back until IV (veins_excluded.json)","items":["gtceu:advanced_soc_wafer"],"fluids":[]},
     {"material":"gtceu:atomic_casing","until":"iv","reason":"comes from the End's naquadah vein, held back until IV (veins_excluded.json)","items":["gtceu:atomic_casing"],"fluids":[]},
     {"material":"gtceu:blacklight","until":"iv","reason":"comes from the End's naquadah vein, held back until IV (veins_excluded.json)","items":["gtceu:blacklight"],"fluids":[]},
-    {"material":"gtceu:cleaning_maintenance_hatch","until":"iv","reason":"comes from the End's naquadah vein, held back until IV (veins_excluded.json)","items":["gtceu:cleaning_maintenance_hatch"],"fluids":[]},
     {"material":"gtceu:crystal_cpu","until":"iv","reason":"comes from the End's naquadah vein, held back until IV (veins_excluded.json)","items":["gtceu:crystal_cpu"],"fluids":[]},
     {"material":"gtceu:crystal_processor","until":"iv","reason":"comes from the End's naquadah vein, held back until IV (veins_excluded.json)","items":["gtceu:crystal_processor"],"fluids":[]},
     {"material":"gtceu:crystal_processor_assembly","until":"iv","reason":"comes from the End's naquadah vein, held back until IV (veins_excluded.json)","items":["gtceu:crystal_processor_assembly"],"fluids":[]},
