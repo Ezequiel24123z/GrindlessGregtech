@@ -360,7 +360,7 @@
     var sep = byName.separation
     var liq = byName.liquefaction
     if (!sep || sep.from !== REMOVED_STAGE || sep.total !== WANT.separation) problems.push('separation ' + JSON.stringify(sep))
-    if (!liq || liq.from !== FREEZER_STAGE || liq.total !== WANT.liquefaction) problems.push('liquefaction ' + JSON.stringify(liq))
+    if (!liq || liq.from !== FREEZER_STAGE || liq.total !== WANT.liquefaction || liq.amount !== WANT.carrier) problems.push('liquefaction ' + JSON.stringify(liq))
     // the freezer's own recipe, read live: its EU per 1,000 mB of oxygen
     var fr = liveRecipe(FREEZER_STAGE)
     var frText = 'missing'
@@ -382,9 +382,10 @@
     if (!(run.eut <= WANT.maxEut && run.eut > 2048)) problems.push(run.eut + ' EU/t is not an IV EU/t')
     if (run.nightEut * 2 !== run.eut || run.nightEnergy * 2 !== run.energy) problems.push('night ' + run.nightEut + ' EU/t, ' + run.nightEnergy + ' EU')
     check('energy', problems.length === 0, 'stages: separation ' + (sep ? sep.eu + ' EU per ' + sep.per + ' mB of tritium (' + REMOVED_STAGE + ', ' +
-      (removed ? 'removed by IV-A1' : 'present') + ') x ' + sep.amount + ' = ' + sep.total : '?') + ', liquefaction ' + (liq ? liq.total : '?') + ' (live ' +
-      FREEZER_STAGE + ': ' + frText + ') = ' + run.sourceEnergy + ' EU, spent as ' + run.eut + ' EU/t x ' + run.duration + ' t = ' + run.energy + ' EU; night ' +
-      run.nightEut + ' EU/t = ' + run.nightEnergy + ' EU' + (problems.length > 0 ? ' | problems: ' + problems.join('; ') : ''))
+      (removed ? 'removed by IV-A1' : 'present') + ') x ' + sep.amount + ' mB = ' + sep.total : '?') + ', liquefaction ' + (liq ? liq.eu + ' EU per ' + liq.per +
+      ' mB (live ' + FREEZER_STAGE + ': ' + frText + ') x ' + liq.amount + ' mB of carrier = ' + liq.total : '?') + ', in all ' + run.sourceEnergy +
+      ' EU, spent as ' + run.eut + ' EU/t x ' + run.duration + ' t = ' + run.energy + ' EU; night ' + run.nightEut + ' EU/t = ' + run.nightEnergy + ' EU' +
+      (problems.length > 0 ? ' | problems: ' + problems.join('; ') : ''))
   }
 
   // the type's EMI line (GTRecipeType#addDataInfo): on a server without the lang files it gives the translation key, never ''
@@ -414,12 +415,14 @@
     var res = r.getResultItem(S.server.registryAccess())
     var made = String(res.getId()) + ' x' + res.getCount()
     var ids = {}
+    var slots = 0
     asArray(r.getIngredients()).forEach(function (ing) {
-      var items = ing.getItems()
-      for (var i = 0; i < items.length; i++) ids[String(items[i].getId())] = true
+      // KubeJS hides vanilla Ingredient#getItems; its IngredientKJS gives the item ids
+      var list = asArray(ing.getItemIds()).map(String).filter(function (id) { return id !== 'minecraft:air' })
+      if (list.length > 0) slots++
+      list.forEach(function (id) { ids[String(id)] = true })
     })
     var missing = (TRF().craftingParts || []).filter(function (id) { return id !== MACHINE && !ids[id] })
-    var slots = asArray(r.getIngredients()).filter(function (ing) { return !ing.isEmpty() }).length
     check('controller_recipe', made === MACHINE + ' x1' && missing.length === 0 && slots === 9, CRAFTING + ' makes ' + made + ' from ' + slots +
       ' ingredients [' + Object.keys(ids).map(short).join(', ') + '] (the four circuit slots take #gtceu:circuits/iv)' +
       (missing.length > 0 ? ' | missing: ' + missing.join(', ') : ''))
