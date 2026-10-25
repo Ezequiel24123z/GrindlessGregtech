@@ -304,6 +304,126 @@
       "note": "Batería de coque con subproductos (steam/coking_battery.js): base y techo de casco de vapor con las piezas, cámaras de ladrillo de coque entre paredes de hogar de bronce y colector de gas de tuberías. Las dos escotillas de salida de fluidos son de GTM; la ULV tiene receta a mano en vapor (casco ULV + vidrio + resina)."
     },
     {
+      "machine": "gtceu:steam_forge_hammer",
+      "types": ["gtceu:forge_hammer"],
+      "maxEUt": 32,
+      "needs": ["fluid:gtceu:steam"],
+      "partsFromStructure": true,
+      "parts": ["gtceu:steam_machine_casing", "gtceu:steam_input_hatch", "gtceu:steam_input_bus", "gtceu:steam_output_bus"],
+      "note": "Steam Forge Hammer (steam/small_family.js, familia pequeña de vapor, idea de GTL reimplementada): cubo hueco de 3x3x3, 8 paralelos, receta de martillo de forja de GTM sin tocar. Sustituye a gtceu:lp_steam_forge_hammer/hp_steam_forge_hammer (un solo bloque)."
+    },
+    {
+      "machine": "gtceu:steam_compressor",
+      "types": ["gtceu:compressor"],
+      "maxEUt": 32,
+      "needs": ["fluid:gtceu:steam"],
+      "partsFromStructure": true,
+      "parts": ["gtceu:steam_machine_casing", "gtceu:steam_input_hatch", "gtceu:steam_input_bus", "gtceu:steam_output_bus"],
+      "note": "Steam Compressor (steam/small_family.js): misma carcasa, receta de compresor de GTM sin tocar. Sustituye a gtceu:lp_steam_compressor/hp_steam_compressor."
+    },
+    {
+      "machine": "gtceu:steam_alloy_smelter",
+      "types": ["gtceu:alloy_smelter"],
+      "maxEUt": 32,
+      "needs": ["fluid:gtceu:steam"],
+      "partsFromStructure": true,
+      "parts": ["gtceu:steam_machine_casing", "gtceu:steam_input_hatch", "gtceu:steam_input_bus", "gtceu:steam_output_bus"],
+      "note": "Steam Alloy Smelter (steam/small_family.js): misma carcasa, receta de fundición de aleación de GTM sin tocar. Sustituye a gtceu:lp_steam_alloy_smelter/hp_steam_alloy_smelter."
+    },
+    {
+      "machine": "gtceu:steam_mixer",
+      "types": ["gtceu:mixer"],
+      "maxEUt": 32,
+      "needs": ["fluid:gtceu:steam"],
+      "partsFromStructure": true,
+      "partAbilities": { "input_hatch": ["gtceu:ulv_input_hatch", "gtceu:lv_input_hatch"], "output_hatch": ["gtceu:ulv_output_hatch", "gtceu:lv_output_hatch"] },
+      "parts": ["gtceu:steam_machine_casing", "gtceu:steam_input_hatch", "gtceu:steam_input_bus", "gtceu:steam_output_bus"],
+      "note": "Steam Mixer (steam/small_family.js): GTM no tiene mezclador de vapor de un bloque. Sus escotillas de fluido son opcionales en la estructura (0-2 de entrada, 0-1 de salida): las aleaciones en polvo (bronce, latón, invar...) no piden fluido; la cola, el agua salada, el hormigón y el lodo de perforación sí."
+    },
+    {
+      "machine": "gtceu:steam_chemical_bath",
+      "types": ["gtceu:chemical_bath"],
+      "maxEUt": 32,
+      "needs": ["fluid:gtceu:steam"],
+      "partsFromStructure": true,
+      "partAbilities": { "input_hatch": ["gtceu:ulv_input_hatch", "gtceu:lv_input_hatch"] },
+      "parts": ["gtceu:steam_machine_casing", "gtceu:steam_input_hatch", "gtceu:steam_input_bus", "gtceu:steam_output_bus", ["gtceu:ulv_input_hatch", "gtceu:lv_input_hatch"]],
+      "note": "Steam Chemical Bath (steam/small_family.js): GTM no tiene baño químico de vapor de un bloque. Sus recetas de papel/madera tratada/hormigón oscuro a LV o por debajo piden siempre 1 fluido (agua o creosota); la escotilla ULV de entrada tiene receta a mano en vapor (steam/small_family.js, igual que la de salida de la batería de coque)."
+    },
+    {
+      "machine": "gtceu:steam_ore_washer",
+      "types": ["gtceu:ore_washer"],
+      "maxEUt": 32,
+      "needs": ["fluid:gtceu:steam"],
+      "partsFromStructure": true,
+      "partAbilities": { "input_hatch": ["gtceu:ulv_input_hatch", "gtceu:lv_input_hatch"] },
+      "parts": ["gtceu:steam_machine_casing", "gtceu:steam_input_hatch", "gtceu:steam_input_bus", "gtceu:steam_output_bus", ["gtceu:ulv_input_hatch", "gtceu:lv_input_hatch"]],
+      "note": "Steam Ore Washer (steam/small_family.js): GTM no tiene lavadora de mineral de vapor de un bloque. Siempre pide 1 fluido (agua); la escotilla ULV de entrada tiene receta a mano en vapor."
+    },
+    {
+      "machine": "gtceu:large_steam_macerator",
+      "types": ["gtceu:macerator"],
+      "maxEUt": 32,
+      "needs": ["fluid:gtceu:steam"],
+      "partsFromStructure": true,
+      "parts": [
+        "gtceu:solid_machine_casing", "gtceu:steam_input_hatch", "gtceu:steam_input_bus", "gtceu:steam_output_bus",
+        ["gtceu:bronze_frame", "gtceu:steel_frame"]
+      ],
+      "note": "Large Steam Macerator (steam/large_family.js, idea de GregTech Leisure reimplementada): carcasa de acero 5x5x5, 64 paralelos, recetas de macerador de GTM sin tocar (EUt 2 siempre: el tope de vapor nunca las bloquea)."
+    },
+    {
+      "machine": "gtceu:large_steam_thermal_centrifuge",
+      "types": ["gtceu:thermal_centrifuge"],
+      "maxEUt": 32,
+      "needs": ["fluid:gtceu:steam"],
+      "partsFromStructure": true,
+      "parts": [
+        "gtceu:solid_machine_casing", "gtceu:steam_input_hatch", "gtceu:steam_input_bus", "gtceu:steam_output_bus",
+        ["gtceu:bronze_frame", "gtceu:steel_frame"]
+      ],
+      "note": "Large Steam Thermal Centrifuge (steam/large_family.js): misma carcasa, 64 paralelos. Las recetas de mena purificada/triturada a centrifugada usan el EUt por defecto del tipo (30), por debajo del tope de vapor."
+    },
+    {
+      "machine": "gtceu:large_steam_ore_washer",
+      "types": ["gtceu:ore_washer"],
+      "maxEUt": 32,
+      "needs": ["fluid:gtceu:steam"],
+      "partsFromStructure": true,
+      "partAbilities": { "input_hatch": ["gtceu:ulv_input_hatch", "gtceu:lv_input_hatch"] },
+      "parts": [
+        "gtceu:solid_machine_casing", "gtceu:steam_input_hatch", "gtceu:steam_input_bus", "gtceu:steam_output_bus",
+        ["gtceu:bronze_frame", "gtceu:steel_frame"], ["gtceu:ulv_input_hatch", "gtceu:lv_input_hatch"]
+      ],
+      "note": "Large Steam Ore Washer (steam/large_family.js): misma carcasa + 1 escotilla de entrada de fluido (de GTM, cualquier escalón; la ULV tiene receta a mano en vapor, steam/small_family.js). Las recetas de lavado son EUt 4 o el valor por defecto del tipo (16)."
+    },
+    {
+      "machine": "gtceu:large_steam_chemical_bath",
+      "types": ["gtceu:chemical_bath"],
+      "maxEUt": 32,
+      "needs": ["fluid:gtceu:steam"],
+      "partsFromStructure": true,
+      "partAbilities": { "input_hatch": ["gtceu:ulv_input_hatch", "gtceu:lv_input_hatch"], "output_hatch": ["gtceu:ulv_output_hatch", "gtceu:lv_output_hatch"] },
+      "parts": [
+        "gtceu:solid_machine_casing", "gtceu:steam_input_hatch", "gtceu:steam_input_bus", "gtceu:steam_output_bus",
+        ["gtceu:bronze_frame", "gtceu:steel_frame"], ["gtceu:ulv_input_hatch", "gtceu:lv_input_hatch"], ["gtceu:ulv_output_hatch", "gtceu:lv_output_hatch"]
+      ],
+      "note": "Large Steam Chemical Bath (steam/large_family.js): misma carcasa + 1 escotilla de entrada y 1 de salida de fluido. Su receta de mena bañada (lavado con fluido de la veta) es EUt 32 (justo el tope de vapor); los baños de lingote caliente (960/128 EUt) quedan fuera, igual que en todo multibloque de vapor."
+    },
+    {
+      "machine": "gtceu:large_steam_centrifuge",
+      "types": ["gtceu:centrifuge"],
+      "maxEUt": 32,
+      "needs": ["fluid:gtceu:steam"],
+      "partsFromStructure": true,
+      "partAbilities": { "input_hatch": ["gtceu:ulv_input_hatch", "gtceu:lv_input_hatch"], "output_hatch": ["gtceu:ulv_output_hatch", "gtceu:lv_output_hatch"] },
+      "parts": [
+        "gtceu:solid_machine_casing", "gtceu:steam_input_hatch", "gtceu:steam_input_bus", "gtceu:steam_output_bus",
+        ["gtceu:bronze_frame", "gtceu:steel_frame"], ["gtceu:ulv_input_hatch", "gtceu:lv_input_hatch"], ["gtceu:ulv_output_hatch", "gtceu:lv_output_hatch"]
+      ],
+      "note": "Large Steam Centrifuge (steam/large_family.js): misma carcasa + 1 escotilla de entrada y 1-2 de salida de fluido. GTM no bloquea el tipo entero: las separaciones de polvo sucio/puro de la cadena de mena son EUt 24 y 5; solo las más calientes (uranio, piedra luminosa, aire del Nether/End...) quedan por encima del tope de vapor."
+    },
+    {
       "machine": "gtceu:lv_steam_turbine",
       "types": ["gtceu:steam_turbine"],
       "needs": ["fluid:gtceu:steam"],
@@ -369,7 +489,23 @@
     { "id": "escotilla-salida-ulv", "label": "Escotilla ULV de salida de fluidos (a mano en vapor, para la batería de coque)", "item": "gtceu:ulv_output_hatch" },
     { "id": "bateria-coque", "label": "Batería de coque con subproductos (nuestra)", "item": "gtceu:coking_battery" },
     { "id": "receta-gas-de-hulla", "label": "Batería de coque: carbón -> coque + creosota + gas de hulla", "kind": "recipe", "type": "gtceu:coking", "output": "fluid:gtceu:coal_gas" },
-    { "id": "turbina-genera", "label": "La turbina LV puede generar con vapor", "kind": "recipe", "type": "gtceu:steam_turbine" }
+    { "id": "turbina-genera", "label": "La turbina LV puede generar con vapor", "kind": "recipe", "type": "gtceu:steam_turbine" },
+    { "id": "macerador-grande-vapor", "label": "Large Steam Macerator (familia Large Steam, nuestra)", "item": "gtceu:large_steam_macerator" },
+    { "id": "centrifuga-grande-vapor", "label": "Large Steam Centrifuge (familia Large Steam, nuestra)", "item": "gtceu:large_steam_centrifuge" },
+    { "id": "centrifuga-termica-grande-vapor", "label": "Large Steam Thermal Centrifuge (familia Large Steam, nuestra)", "item": "gtceu:large_steam_thermal_centrifuge" },
+    { "id": "bano-quimico-grande-vapor", "label": "Large Steam Chemical Bath (familia Large Steam, nuestra)", "item": "gtceu:large_steam_chemical_bath" },
+    { "id": "lavadora-grande-vapor", "label": "Large Steam Ore Washer (familia Large Steam, nuestra)", "item": "gtceu:large_steam_ore_washer" },
+    { "id": "receta-macerador-grande", "label": "Large Steam Macerator corre una receta real de macerador de GTM (mena triturada -> polvo impuro)", "kind": "recipe", "type": "gtceu:macerator" },
+    { "id": "receta-lavadora-grande", "label": "Large Steam Ore Washer corre una receta real de lavadora de GTM (mena triturada + agua -> mena purificada)", "kind": "recipe", "type": "gtceu:ore_washer" },
+    { "id": "martillo-vapor-familia", "label": "Steam Forge Hammer (familia pequeña de vapor, nuestro)", "item": "gtceu:steam_forge_hammer" },
+    { "id": "compresor-vapor-familia", "label": "Steam Compressor (familia pequeña de vapor, nuestro)", "item": "gtceu:steam_compressor" },
+    { "id": "aleador-vapor-familia", "label": "Steam Alloy Smelter (familia pequeña de vapor, nuestro)", "item": "gtceu:steam_alloy_smelter" },
+    { "id": "mezclador-vapor-familia", "label": "Steam Mixer (familia pequeña de vapor, nuestro)", "item": "gtceu:steam_mixer" },
+    { "id": "bano-quimico-vapor-familia", "label": "Steam Chemical Bath (familia pequeña de vapor, nuestro)", "item": "gtceu:steam_chemical_bath" },
+    { "id": "lavadora-vapor-familia", "label": "Steam Ore Washer (familia pequeña de vapor, nuestro)", "item": "gtceu:steam_ore_washer" },
+    { "id": "escotilla-entrada-ulv", "label": "Escotilla ULV de entrada de fluidos (a mano en vapor, para el mezclador/baño/lavadora de la familia pequeña)", "item": "gtceu:ulv_input_hatch" },
+    { "id": "receta-compresor-familia", "label": "Steam Compressor corre una receta real de compresor de GTM (arena -> arenisca)", "kind": "recipe", "type": "gtceu:compressor" },
+    { "id": "receta-bano-familia", "label": "Steam Chemical Bath corre una receta real de baño químico de GTM (caña de azúcar + agua -> papel)", "kind": "recipe", "type": "gtceu:chemical_bath" }
   ],
 
   "autoTargets": [
@@ -416,6 +552,22 @@
     { "id": "vapor-brocas", "label": "Brocas de bronce y de acero", "items": ["grindless:bronze_drill_bit", "grindless:steel_drill_bit"] },
     { "id": "vapor-observatorio", "label": "Observatorio de relojería formado y su carta lunar (borrador)", "items": ["m:gtceu:steam_observatory", "grindless:lunar_chart_draft"] },
     { "id": "vapor-alto-horno-bateria", "label": "Alto horno de vapor y batería de coque formados, y la escotilla ULV de salida de fluidos que pide la batería", "items": ["m:gtceu:steam_blast_furnace", "m:gtceu:coking_battery", "gtceu:ulv_output_hatch"] },
+    {
+      "id": "vapor-large-steam-family",
+      "label": "Familia Large Steam formada (idea de GregTech Leisure reimplementada, 64 paralelos cada uno)",
+      "items": [
+        "m:gtceu:large_steam_macerator", "m:gtceu:large_steam_centrifuge", "m:gtceu:large_steam_thermal_centrifuge",
+        "m:gtceu:large_steam_chemical_bath", "m:gtceu:large_steam_ore_washer"
+      ]
+    },
+    {
+      "id": "vapor-small-steam-family",
+      "label": "Familia pequeña de vapor formada (idea de GregTech Leisure reimplementada, 8 paralelos cada uno) y la escotilla ULV de entrada que piden el mezclador/baño/lavadora",
+      "items": [
+        "m:gtceu:steam_forge_hammer", "m:gtceu:steam_compressor", "m:gtceu:steam_alloy_smelter",
+        "m:gtceu:steam_mixer", "m:gtceu:steam_chemical_bath", "m:gtceu:steam_ore_washer", "gtceu:ulv_input_hatch"
+      ]
+    },
     {
       "id": "salida-vapor",
       "era": "lv",
