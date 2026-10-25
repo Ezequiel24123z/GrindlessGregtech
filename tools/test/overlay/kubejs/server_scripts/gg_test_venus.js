@@ -49,6 +49,7 @@
   var VENUS = 'gcyr:venus'
   var MARS = 'gcyr:mars'
   var BAND = { x0: 11264, x1: 11327, z0: 0, z1: 15 }
+  // the cloud collector stands this far above the table's cloud base, at Y 250 with today's base of 240
   var CLOUD_Y = 250
   var CLEAR_ABOVE = 18
 
@@ -289,7 +290,7 @@
     }
     if (generator === 'false') problems.push('the engine is not a generator')
     var v = VN()
-    if (!v || !v.drill || v.drill.cap !== 128 || typeof v.drill.isDrillRecipe !== 'function' || !v.recipes || v.cloudBase !== 240) problems.push('global.grindless.venus missing or wrong')
+    if (!v || !v.drill || v.drill.cap !== 128 || typeof v.drill.isDrillRecipe !== 'function' || !v.recipes || v.cloudBase !== Number(v.data.site.cloudBase)) problems.push('global.grindless.venus missing or wrong')
     if (v && v.recipes && v.recipes.problems.length > 0) problems.push('table problems: ' + v.recipes.problems.join('; '))
     check('registration', problems.length === 0, got.join('; ') + '; vein_drilling fluid outputs=' + fluidOuts + ', engine generator=' + generator +
       (problems.length > 0 ? ' | problems: ' + problems.join('; ') : ''))
@@ -454,7 +455,9 @@
     })
     var problems = []
     var text = []
-    ;[[CO2_ID, 4, CO2, -64, 239], [ACID_ID, 5, ACID, 240, 319]].forEach(function (w) {
+    var site = VN().data.site
+    var base = Number(site.cloudBase)
+    ;[[CO2_ID, 4, CO2, Number(site.bottom), base - 1], [ACID_ID, 5, ACID, base, Number(site.skyTop)]].forEach(function (w) {
       var r = byId(w[0])
       if (r === null) {
         problems.push(w[0] + ' missing')
@@ -1272,7 +1275,7 @@
         cmd(s.dim, 'fill ' + BAND.x0 + ' ' + (s.base - 1) + ' ' + BAND.z0 + ' ' + BAND.x1 + ' ' + (s.base + CLEAR_ABOVE) + ' ' + BAND.z1 + ' air')
         cmd(s.dim, 'forceload remove ' + BAND.x0 + ' ' + BAND.z0 + ' ' + BAND.x1 + ' ' + BAND.z1)
       })
-      cmd(VENUS, 'setblock 11302 ' + CLOUD_Y + ' 4 air')
+      if (S.cloudY) cmd(VENUS, 'setblock 11302 ' + S.cloudY + ' 4 air')
     } catch (e) {
       note('CLEANUP', 'exception: ' + e)
     }
@@ -1327,9 +1330,10 @@
     startMachine({ key: 'drill_mars', id: DRILL, dim: MARS, x: 11268, z: 2, step: drillMarsStep,
       counts: { energy_input: 1, input_bus: 1, output_bus: 1, input_hatch: 0, output_hatch: 0 } }, marsBase)
     var cloudBase = global.grindless.venus.cloudBase
+    S.cloudY = Math.min(Number(global.grindless.venus.data.site.skyTop), cloudBase + CLOUD_Y - 240)
     if (venusBase >= cloudBase) note('collector_low', 'the band\'s ground reaches the clouds (structures from Y ' + venusBase + ', cloud base ' + cloudBase + ')')
     startCollector('collector_low', 'below the clouds (CO2)', venusBase, 5, 4, CO2)
-    startCollector('collector_clouds', 'in the clouds (sulfuric acid)', CLOUD_Y, 4, 5, ACID)
+    startCollector('collector_clouds', 'in the clouds (sulfuric acid)', S.cloudY, 4, 5, ACID)
   }
 
   function startIfRequested(server) {
