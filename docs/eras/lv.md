@@ -6,7 +6,7 @@ You enter with what steam leaves you: an LV steam turbine (`gtceu:lv_steam_turbi
 
 ## Route
 
-1. **LV network.** Tin cable with rubber, LV machine hull (`gtceu:lv_machine_hull`), energy hatch (`gtceu:lv_energy_input_hatch`) and battery buffer (`gtceu:lv_battery_buffer_4x`). The Large Bronze Boiler (`gtceu:bronze_large_boiler`, about 800 mB/t of steam, verify) drives about 12 turbines (64 mB/t and 32 EU/t each) and also burns biomass and creosote.
+1. **LV network.** Tin cable with rubber, LV machine hull (`gtceu:lv_machine_hull`), energy hatch (`gtceu:lv_energy_input_hatch`) and battery buffer (`gtceu:lv_battery_buffer_4x`). The Large Bronze Boiler (`gtceu:bronze_large_boiler`) makes up to 6,400 mB/t of steam since v0.5.2 (×8; GTM's default is 800) and also burns biomass and creosote. Each LV turbine uses 32 mB/t for 32 EU/t since v0.5.2 (×2 EU per steam), so one large bronze boiler can feed about 200 of them; in practice the turbines, or a few generator arrays, set the limit.
 2. **Single-block machines.** The LV motor, piston, pump, conveyor and robot arm make the macerator, ore washer, centrifuge, thermal centrifuge, electrolyzer, mixer, chemical reactor, assembler, circuit assembler, forming press, polarizer, autoclave, chemical bath, packer, brewery, fermenter, distillery, gas collector and rock crusher (`gtceu:lv_<machine>`).
 3. **Electric ore.** LV vein drill (ours) and the full line: macerate, wash, thermal-centrifuge and centrifuge.
 4. **Plants and creatures.** LV greenhouse (ours) → biomass → creature simulator: bones, string, slime, wool, leather, feathers and ender pearls.
@@ -183,7 +183,7 @@ What it gains: it is the only machine that makes the **photographic lunar map** 
 
 ### Rejected
 
-- **Multiblock steam engine.** It is a real gap in GTM (there is no multiblock generator at LV or MV). Dropped: LV is covered by the large boiler and the turbines, and GTM ships large turbines at EV. If it were needed, it would enter at MV with processed fuel, not raw.
+- **Multiblock steam engine.** It is a real gap in GTM (there is no multiblock generator at LV or MV). Dropped: LV is covered by the large boiler and the turbines, and GTM ships large turbines at EV. If it were needed, it would enter at MV with processed fuel, not raw. The generator array (2026-10-25, below) is not that: it gains no EU, it only gathers generators.
 - **Ore plant** (macerate, wash and centrifuge in one). Left for MV or HV: at LV the chain has to be learned step by step.
 - **Universal factory** (several machine types on one controller). Too early: there are no chains yet that justify joining them.
 
@@ -232,6 +232,14 @@ AE2 15.4.11 stays as it comes (channels 8/32). How it is made changes: the Inscr
 | Gallium + arsenic → diodes | washed bauxite → thermal centrifuge → macerator (14% Gallium); Realgar → electrolysis → Arsenic and Sulfur; mixer → GaAs; assembler → Diode | Sulfur: acid and creature simulator; Antimony and barite from the Realgar: stored |
 
 GTM's stone dust is separated at MV (`stone_dust_separation`, 120 EU/t). KubeJS brings it down to LV to meet what steam.md says.
+
+## Convenience (counted apart from rule 7)
+
+- **Generator array** (`gtceu:generator_array`, 2026-10-25, a GregTech Leisure idea with our code).
+  - Up to 16 LV generators in one 9×4×3 steel hall, in steam turbine, combustion generator or gas turbine mode.
+  - It runs GTM's own fuel recipes ×n, with the same EU per fuel, no bonus and no overclock. Its dynamo hatches set the limit: an LV hatch carries 2 generators, MV 8 and HV 16.
+  - At 16 it is, in one structure, the "LV power plant of 512 EU/t (about 16 turbines)" of the gate to MV. Steam mode returns distilled water to an optional output hatch.
+  - It is built on `lib/generators.js`, the pattern later generator multiblocks use.
 
 ## New cross-links (complexity audit)
 

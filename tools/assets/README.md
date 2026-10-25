@@ -22,6 +22,12 @@ Generators for the pack's own textures. Everything is procedural 16x16 pixel art
 | `Build-LaunchRoadTextures.ps1` | Writes the textures of the path to the first rocket (MV engine test stand, HV composite autoclave and their parts: qualified power thruster, untested rocket motor, ablative heat shield tile and composite overwrapped tank) to `pack/kubejs/assets/grindless/textures/`. |
 | `Build-EVTextures.ps1` | Writes the EV era textures (platinum plant, vein drill, platinum electrode and tungstensteel drill bit) to `pack/kubejs/assets/grindless/textures/`. |
 | `Build-EVPreview.ps1` | Review sheet at x8 of the EV era: each overlay on its casing and on four casings, all frames, dark cave view, 3x3 wall, the platinum electrode next to the graphite one and the drill bit progression. It is only a preview: it is not published. |
+| `Build-SteamSmallFamilyTextures.ps1` | Writes the faces of the small steam family (forge hammer, compressor, alloy smelter, mixer, chemical bath, ore washer) to `pack/kubejs/assets/grindless/textures/`. `Build-SteamSmallFamilyPreview.ps1` draws their review sheet (not published). |
+| `Build-ObservatoryTextures.ps1` | Writes the observatory family's faces and the charts (steam, LV and MV observatories) to `pack/kubejs/assets/grindless/textures/`. `Build-ObservatoryPreview.ps1` draws their review sheet (not published). |
+| `Build-EVFoundationTextures.ps1` | Writes the shared EV textures (sintered regolith bricks, molten salt charge, ruthenium catalyst, Mars chart). `-Only regolith,charge,catalyst,chart`, `-Preview <png>`, `-Credits`. The brick is the lunar casing texture. |
+| `Build-GeneratorArrayTextures.ps1` | Writes the LV generator array's face. `-Credits` prints its CREDITS rows. |
+| `Build-LeisureFactoriesTextures.ps1` | Writes the faces of the four MV universal factories. `-Credits` prints their 20 CREDITS rows. |
+| `Build-LeisureUtilityTextures.ps1` | Writes the faces of the advanced multi smelter, the lava furnace and the weather controller. `-Credits` prints their 15 CREDITS rows. |
 
 ## Regenerate
 

@@ -123,11 +123,22 @@ What it gains: **a recipe that exists only on Mars, and three machines in one.**
 
 ### Platinum plant: `gtceu:platinum_plant` (Earth)
 
-Built and tested in the scratch (`scratch/ev-plant/src/`), not applied. What it gains: **several steps in one and closed loops.** The live line is GT--'s (GTNH style; it replaces GTM's): about forty recipes in a dozen machines, with dust, ammonia and Ruthenium tetroxide (toxic) loops between them.
+In the pack since 2026-10-25 (`startup_scripts` and `server_scripts/grindless/ev/platinum_plant.js`, `ev_platinum_plant_lang.js`; bench run `20261025-ev-platinum-plant-1`). What it gains: **several steps in one and closed loops.** The live line is GT--'s (GTNH style; it replaces GTM's): about forty recipes in a dozen machines, with dust, ammonia and Ruthenium tetroxide (toxic) loops between them. The plant turns them into five recipes, composed when the world loads.
+
+Per batch:
+- **Attack:** 54 ticks at 1,903 EU/t.
+- **Platinum:** 2,314 ticks at 1,920 EU/t.
+  - Outputs: 6 Pt, 3 Au, 3 SiO₂, 9 CaCl₂, 6 slag.
+  - Chanced: Pd metal dust, the rarest mixture, iridium residue.
+  - Fluids: Pd-rich ammonia, NO₂, dilute H₂SO₄.
+- **Palladium:** 891 ticks at 1,919 EU/t.
+- **Rh/Ru:** 517 ticks at 1,920 EU/t.
+
+Per 9 ores: 6 Pt, about 4.2 Pd, about 1.35 Rh and about 4.5 Ru. The CaCl₂ (9 per sludge) is a third source for the regolith cell's molten salt charge, the NO₂ goes back to nitric acid, and the dilute H₂SO₄ goes to the distillery.
 
 - **Type `gtceu:pgm_refining`,** built when the world loads from GT--'s recipes (if they change, it is rebuilt; if any are missing, the log says so). Circuit 1, leach: 9 purified pentlandite or chalcopyrite ores → platinum sludge + Ni or Cu + O₂ + H₂SO₄, with electrolysis inside. Circuit 2, separation: Platinum, Palladium, and Rhodium with Ruthenium. Same proportions and same energy as the standalone line, with no parallels.
 - **Condition:** platinum electrode (`grindless:platinum_electrode`, Platinum on Titanium, 0.1%).
-- **Structure:** 5×7×5 hall of inert casing (≥ 24), Titanium pipes and tempered glass; 1–2 EV hatches, 1 input bus and 1 output bus, 3 input hatches and 4 output hatches. Accepts ME hatches.
+- **Structure:** a hall 5 wide × 5 high × 7 deep of inert casing (≥ 24), Titanium pipes and tempered glass; 1–2 EV hatches, 1 input bus and 1 output bus, 3 input hatches and 4 output hatches. Accepts ME hatches.
 - **Outputs:** Pt, Pd, Rh, Ru and whatever the standalone line makes, each with a destination. The Ir/Os mixture and the iridium residue are stored (the journey puts Ir and Os on Mercury: see *Decisions*).
 - **New with the journey:** its electrodes are the anodes of the lunar cell, and its Ruthenium is the catalyst for the Martian processor and the RTM.
 
@@ -163,8 +174,7 @@ What it gains: **more energy from the same fuel, through a more complex plant** 
 - **Structure:** a turbine hall of stable Titanium casing with a heat-recovery boiler of Titanium pipes and firebricks on its back. It has 1 fuel input hatch, 1 water input hatch, 1 steam output hatch and 1–2 EV dynamo hatches. There is no rotor: it is a generator with its own recipes, not a GTM turbine.
 - **Crafted with:** EV hull + large gas turbine controller (`gtceu:gas_large_turbine`) + 2 EV pumps + 4 EV circuits.
 - **Why it is not a big cube:** it only gains if a second plant (the steam turbines) takes its steam, so the energy comes from building more, not from a free bonus.
-- **Risk and spike:** it is a KubeJS multiblock that outputs EU, the same mechanism the lunar solar array needs. One spike proves both.
-  - **Fallback:** if EU output is not possible, the plant only burns fuel into steam worth 140% of the fuel's EU in the large steam turbine. It then works like the heliostat tower, which already makes steam.
+- **Generator mechanism (resolved 2026-10-25):** it is a KubeJS multiblock that outputs EU, the same mechanism as the lunar solar array. The spike passed: `lib/generators.js` gives EU through dynamo hatches on GTM 7.5.3 (LV generator array, run `a3-power-generators-run2`), so the steam-only fallback is not needed.
 
 #### Hot strip mill: `gtceu:hot_strip_mill` (Earth)
 
@@ -262,6 +272,20 @@ New rules in `tools/analysis/tiers/ev.json`:
 - **Nothing in EV requires anything from IV.** No Tungsten before Mars (the tier 2 rocket, the suit, the tripod and its bit, the antenna and the Martian half go without it), no radioactives or Quantum Eyes (EV sensors, emitters and field generator stay in IV), no IV circuits, no naquadah, Iridium or Osmium.
 - **EV in two substages.** The validator splits the era into *Moon* and *Mars*: nothing on the way to Mars can require Tungsten, Samarium or Deuterium.
 - **Site machines.** Every recipe for the cell, the cryogenic plant, the solar array, the antenna and the lunar veins carries `.dimension('gcyr:luna')`; those for the processor and the Martian veins carry `.dimension('gcyr:mars')`.
+
+## Registered ids (wave A, 2026-10-25)
+
+`ev/foundation.js` (startup and server) registers what several EV machines share, with no machines of its own:
+- `grindless:sintered_regolith`: the brick of every lunar structure. Its first source is GTM's electric furnace on the Moon only: 4 lunar regolith dust → 1, 120 EU/t, 20 s.
+- `gtceu:lunar_regolith_dust`: any macerator makes it from GCYR's moon cobblestone (the drills' stone), moon stone, mare regolith and moon sand. It is the input of all three regolith cell modes, and it has no decomposition.
+- `gtceu:liquid_nitrogen`: a liquid at 77 K of GTM's own nitrogen. Only the cryogenic plant makes it.
+- `gtceu:methalox`: a gas. EV mixer: 1,000 methane + 2,000 oxygen → 3,000 mB.
+- `gtceu:merrillite`: the rare earths of Mars, a phosphate that dissolves in HCl.
+  - Its ore is `gtceu:mars_merrillite_ore`, in GCYR's Martian rock.
+  - Apatite and tricalcium phosphate are byproducts.
+  - It has no decomposition, so only the extraction cascade splits it.
+- `grindless:molten_salt_charge` (never used up), `grindless:ruthenium_catalyst` (used up by chance) and `grindless:mars_chart` (written by the antenna).
+- `grindless:platinum_electrode`, made by the platinum plant's own script.
 
 ## Mods and integration
 

@@ -253,7 +253,7 @@ Credits to note in `CREDITS.md`: designed-core reactor (Grindless campaign, T5, 
 
 The twelve proposals are approved, with these clarifications:
 
-- **The fission reactor depends on KubeJS generators.** If a KubeJS generator multiblock does not output EU through dynamo hatches in GTM 7.5.3, it is tested in an actual game before anything else and, if it fails, the reactor feeds steam to GTM's large turbines: same place on the route, different output.
+- **The fission reactor depends on KubeJS generators.** This was checked on 2026-10-25: a KubeJS generator multiblock outputs EU through dynamo hatches on GTM 7.5.3 (`lib/generators.js`, run `a3-power-generators-run2`). What is still unproven is a custom generator recipe type of ours. The EV lunar solar array is the first one; if it fails, the reactor feeds steam to GTM's large turbines: same place on the route, different output.
 - **The `iridosmine` material is registered with KubeJS** (`gtceu:iridosmine`) and only appears in Mercury's vein table. The validator checks that iridium and osmium do not come out on Earth.
 - **`journey.md` is adjusted.** In the IV row, solar smelting moves to plan B, the prospecting satellite moves to LuV, and the reactor, hot cell and naquadah plant come in.
 - **IV is built after EV.** This document is the guide until then.

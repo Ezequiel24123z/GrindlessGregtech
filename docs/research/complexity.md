@@ -8,7 +8,7 @@ Steam–HV are **built** (real KubeJS code, tested in-game). EV–IV are **desig
 
 | Metric | Steam | LV | MV | HV | EV (design) | IV (design) |
 |---|---|---|---|---|---|---|
-| Own multiblocks (registered) | 5 (+11 convenience, v0.5.2) | 6 | 6 | 7 | 11 (0 built; 7 before 2026-10-25) | 8 (0 built) |
+| Own multiblocks (registered) | 5 (+11 convenience, v0.5.2) | 6 (+1 convenience) | 6 (+7 convenience) | 7 | 11 (0 built; 7 before 2026-10-25) | 8 (0 built) |
 | GTM multiblocks that become useful | — (no electricity) | EBF + 1-block machines | MV fluid drill | cleanroom, cracker, large chemical reactor, large steel boiler/turbine | freezer, distillation tower, large combustion engine/gas turbine, large EV miner | assembly line, large IV miner, parallel ×4, quantum chest/tank |
 | Process lines (tabulated in the era) | ~4 (rebuilt, no table of its own) | 4 (+ AE2 as a separate mega-line, ~20 steps) | 5 | 6 (+ rocket project, + syngas) | 9 | 8 |
 | Average steps per line | ~1.5 | ~5 | ~4.5 | ~5 | ~4 | ~4.5 |
