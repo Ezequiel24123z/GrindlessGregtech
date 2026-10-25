@@ -206,15 +206,25 @@
     if (hit) return hit
     var item = block.asItem()
     var itemId = String(j.ForgeRegistries.ITEMS.getKey(item))
+    var machine = block instanceof j.IMachineBlock
+    var tier = 99
+    if (machine) {
+      try { tier = Number(block.getDefinition().getTier()) } catch (e) { tier = 99 }
+    }
     var c = {
       id: id,
       state: state,
-      machine: block instanceof j.IMachineBlock,
+      machine: machine,
+      tier: tier,
       item: itemId === 'minecraft:air' ? '' : itemId,
       nameKey: itemId === 'minecraft:air' ? String(block.getDescriptionId()) : String(item.getDescriptionId())
     }
     cache.blocks[key] = c
     return c
+  }
+
+  function byTier(a, b) {
+    return a.tier - b.tier
   }
 
   // one of GTM's SimplePredicates: its limits and its candidates, split into default blocks and parts
@@ -259,6 +269,8 @@
         else s.other++
       }
     }
+    // a part option is named after its lowest tier ("LV Muffler Hatch or similar"); GTM lists an ability's blocks unsorted
+    s.parts.sort(byTier)
     cache.sps.put(sp, s.index)
     cache.spList.push(s)
     return s
@@ -534,6 +546,7 @@
       } else if (c.kind === 'parts') {
         var cands = []
         c.info.partSps.forEach(function (s) { s.parts.forEach(function (p) { cands.push(p) }) })
+        cands.sort(byTier)
         res.parts.push({ x: c.x, y: c.y, z: c.z, id: cands.length > 0 ? cands[0].id : '', nameKey: cands.length > 0 ? cands[0].nameKey : '', options: cands.length })
       } else if (c.kind === 'blocked' || c.kind === 'unloaded') {
         res.blocked.push({ x: c.x, y: c.y, z: c.z, block: c.now, reason: c.kind === 'unloaded' ? 'unloaded' : c.reason })
