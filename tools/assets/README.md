@@ -38,6 +38,7 @@ Generators for the pack's own textures. Everything is procedural 16x16 pixel art
 | `Build-RegolithCellTextures.ps1` | Writes the EV regolith cell's face (`multiblock/regolith_cell/`): a crucible of white-hot melt under a crust, a ring of glowing nichrome, the platinum anode and the metal pool. `-Only cell`, `-Preview <png outside the repo>` (idle, 8 active frames with the emissive layer, a dark room, and a 3×3 brick wall at ×8, ×2 and ×1) and `-Credits`. Palette `$CellPal`, base `$CellBase`, frames from `New-RegolithCellFrame`; it reuses the HV/EV `$WindowBase` and the EV ramps. Its checks fail the run: 16×16 frames, binary alpha, no pure black, an empty casing ring, emissive within the colour layer, 4–8 distinct active frames. |
 | `Build-MarsSiteTextures.ps1` | Writes the EV atmosphere processor's face (`multiblock/atmosphere_processor/`): a round intake fan between two dust filters, the Sabatier reactor window, the methane and oxygen gauges, and the EV stripes and lamp; 8 frames, `frametime` 3. `-Preview <png outside the repo> [-Casing <png>]` and `-Credits`. Its helpers are copied from `Build-EVTextures.ps1`; re-running it gives byte-identical files. |
 | `Build-CombinedCycleHotMillTextures.ps1` | Writes the faces of the EV combined-cycle plant and hot strip mill (`multiblock/combined_cycle_plant/`, `multiblock/hot_strip_mill/`). `-Credits` prints their 10 CREDITS rows. |
+| `Build-FissionReactorTextures.ps1` | Writes the IV fission reactor's face (`multiblock/fission_reactor/`). `-Only reactor` and `-Credits` (its 5 CREDITS rows). |
 
 ## Regenerate
 
@@ -301,3 +302,20 @@ powershell -NoProfile -ExecutionPolicy Bypass -File tools\assets\Build-EVPreview
 
 - The ramps (`$SteelSpec` letters `A`-`J`, `$PurpleSpec` `a`-`g`, `$StainSpec` `0`-`6`, `$LampSpec` `M`-`S` and `$TungstenSpec` `T`-`Y`) are shared; each piece's own letters are at the top of its block (`New-Pal` fails if a letter is repeated). The text maps (`$WindowBase`, `$EvDrillBase`), the tone strings of each liquid (`$PlatNitric`, `$PlatAqua`, `$PlatHcl`) and of the pipe (`$PlatPipe`) are edited by hand; what moves is drawn by code frame by frame.
 - The electrode reuses the geometry of the LV graphite one (a diagonal rod with four pixels per row); the ramps (platinum and titanium) and the outline change, and the outline now takes each material's tone.
+
+## IV era
+
+### Fission reactor
+
+Same method as the EV faces: the neutral steel ramp, the EV bezel and lamp ramp. IV's accent is the Cherenkov blue. The checks are the EV ones, plus: no repeated frame, no hole in the panel, and emissive light only in the glow, the lamps and the bar. The output is identical byte for byte on every run.
+
+```powershell
+powershell -NoProfile -ExecutionPolicy Bypass -File tools\assets\Build-FissionReactorTextures.ps1
+powershell -NoProfile -ExecutionPolicy Bypass -File tools\assets\Build-FissionReactorTextures.ps1 -Credits
+```
+
+| File (under `textures/`) | Notes |
+|---|---|
+| `block/multiblock/fission_reactor/overlay_front.png` | Idle: a dark pool port, lamps off, an empty bar, the SCRAM button and hazard stripes. |
+| `.../overlay_front_active.png` + `.mcmeta` | 8 frames, `frametime` 4: the Cherenkov glow breathes with a ring every four frames, four green lamps (channel 4 flickers once) and the bar moves. SCRAM never lights. |
+| `.../overlay_front_active_emissive.png` + `.mcmeta` | Only the glow, the lamps and the lit bar cells. |
