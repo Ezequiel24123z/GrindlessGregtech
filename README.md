@@ -1,32 +1,32 @@
 # Gregtech Grindless
 
-Pack de GregTech enorme para Minecraft 1.20.1 (Forge) sobre GregTech Modern 7.5.3. Junta lo mejor de los packs técnicos y de GregTech con una regla: **aquí no se recolecta a mano**. Todo recurso básico que pida la progresión se puede generar de forma automática dentro de su era, desde la Steam Age. El procesado sigue siendo GregTech de verdad, y la dificultad sube por complejidad, no por cantidad ni por esperas.
+Huge GregTech pack for Minecraft 1.20.1 (Forge) on top of GregTech Modern 7.5.3. It brings together the best of the tech packs and GregTech under one rule: **no resource is gathered by hand here**. Every basic resource that the progression asks for can be generated automatically within its era, starting from the Steam Age. Processing is still real GregTech, and difficulty rises with complexity, not with quantity or waiting.
 
-## Estado
+## Status
 
-| Era | Estado |
+| Era | Status |
 |---|---|
-| Vapor | Jugable desde `v0.1.0`: coque, bronce, vapor, acero, perforadora de vetas e invernadero de vapor propios, y puerta a LV. |
-| LV | Jugable desde `v0.2.0`: perforadora e invernadero LV, horno de arco sumergido, simulador de criaturas, AE2 entera en LV y 150 mods. |
-| MV | Jugable desde `v0.3.0`: planta de mineral, biorrefinería, perforadora e invernadero MV, petróleo infinito (también en el Llano y el Vacío) y 207 mods. |
-| HV | Jugable desde `v0.4.0`: refinería (destila, hidrotrata y craquea en una pasada), reformador, perforadora HV con vetas del End e invernadero HV. |
-| Lo que viene | El pack se convierte en un viaje hasta el agujero negro del centro de la galaxia. La primera parada es la Luna, al final de HV. |
+| Steam Age | Playable since `v0.1.0`: coke, bronze, steam, steel, our own steam vein drill and steam greenhouse, and the gate to LV. |
+| LV | Playable since `v0.2.0`: LV vein drill and greenhouse, submerged arc furnace, creature simulator, all of AE2 in LV and 150 mods. |
+| MV | Playable since `v0.3.0`: ore plant, biorefinery, MV vein drill and greenhouse, infinite oil (also in the Flatland and the Void) and 207 mods. |
+| HV | Playable since `v0.4.0`: refinery (distills, hydrotreats and cracks in one pass), reformer, HV vein drill with the End veins and HV greenhouse. |
+| What's next | The pack becomes a journey to the black hole at the center of the galaxy. The first stop is the Moon, at the end of HV. |
 
-## Cómo jugar (Prism Launcher)
+## How to play (Prism Launcher)
 
-**Canal jugable (recomendado).** Se actualiza solo y conserva tu mundo.
+**Playable channel (recommended).** It updates by itself and keeps your world.
 
-1. Descarga `Gregtech-Grindless-jugable.zip` de la [versión "Canal jugable"](https://github.com/Ezequiel24123z/GrindlessGregtech/releases/tag/canal-jugable).
-2. En Prism: *Añadir instancia → Importar → elige el zip*.
-3. Arranca. La primera vez descarga unos 400 MB de mods.
+1. Download `Gregtech-Grindless-jugable.zip` from the [playable channel release](https://github.com/Ezequiel24123z/GrindlessGregtech/releases/tag/canal-jugable).
+2. In Prism: *Add instance → Import → choose the zip*.
+3. Launch it. The first time, it downloads about 400 MB of mods.
 
-Antes de cada arranque, la instancia se pone al día desde la rama `jugable`, que solo avanza a versiones probadas. FTB Backups 2 hace copias del mundo en la carpeta `backups` de la instancia.
+Before each launch, the instance updates from the `jugable` branch, which only moves to tested versions. FTB Backups 2 makes copies of the world in the instance's `backups` folder.
 
-**Una versión fija.** Crea una instancia de Minecraft 1.20.1 con Forge 47.4.28 y Java 17. Pon [packwiz-installer-bootstrap.jar](https://github.com/packwiz/packwiz-installer-bootstrap/releases) en la carpeta `minecraft` de la instancia. Después, en *Editar instancia → Ajustes → Comandos personalizados*, pon como comando previo al lanzamiento:
+**A fixed version.** Create a Minecraft 1.20.1 instance with Forge 47.4.28 and Java 17. Put [packwiz-installer-bootstrap.jar](https://github.com/packwiz/packwiz-installer-bootstrap/releases) in the instance's `minecraft` folder. Then, in *Edit instance → Settings → Custom commands*, set this as the pre-launch command:
 
 ```
 "$INST_JAVA" -jar packwiz-installer-bootstrap.jar https://raw.githubusercontent.com/Ezequiel24123z/GrindlessGregtech/v0.4.0/pack/pack.toml
 ```
-## Para desarrollar
+## For developers
 
-Lee [AGENTS.md](AGENTS.md). Las decisiones están en [DECISIONS.md](DECISIONS.md) y los créditos y licencias en [CREDITS.md](CREDITS.md).
+Read [AGENTS.md](AGENTS.md). Decisions are in [DECISIONS.md](DECISIONS.md), and credits and licenses are in [CREDITS.md](CREDITS.md).

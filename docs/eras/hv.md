@@ -186,6 +186,11 @@ El primer cohete deja de ser una receta de ensambladora y pasa a ser un proyecto
 | Titanio | ilmenita lunar → rutilo (`rutile_from_ilmenite`, EBF 1 700 K, 480 EU/t) → `titanium_tetrachloride` (2 C + rutilo + 4 000 de Cl₂, 400 t) → `titanium_from_tetrachloride` (EBF 2 141 K, 480 EU/t, 800 t; + 2 Mg) → lingote caliente → congelador | CO (2 000 mB por TiCl₄): metanol o tanque (tóxico, se contiene). CO₂ del rutilo: inerte. Hierro forjado: acero. MgCl₂: `salt_from_magnesium_chloride` (3 MgCl₂ + 2 Na → Mg + 4 sal), la sal vuelve a la electrólisis |
 | Circuitos EV | boule → obleas → CPU; condensadores, inductores, diodos y RAM → ensamblaje → estación de trabajo en cámara limpia (`gtceu:micro_processor_computer`, soldadura ×2); aleación azul = 4 electrotina (redstone + electrum, o veta de salitre) + 1 plata | Ácido y persulfato de los tableros: lazos de MV. Las piezas no dejan restos |
 
+## Cruces nuevos (auditoría de complejidad)
+
+- **Tostador de sulfuros, quemador de H₂S:** 1 000 mB de sulfuro de hidrógeno de la refinería + el aire y el agua del quemador de azufre → 1 000 mB de ácido, vapor y 500 mB de hidrógeno extra, a 30 EU/t y 60 ticks (`grindless:sulfide_roasting/h2s`). Necesita 3 escotillas de entrada y 3 de salida, el máximo del tostador.
+- **Catalizador de hidrotratamiento con ceniza:** 1 cobalto + 1 molibdeno + 3 ceniza del syngas (en vez de sílice) → 4 catalizadores, mismo EU/t y tiempo (`grindless:hydrotreating_catalyst_ash`).
+
 ## Almacenamiento serio
 
 - **AE2:** HV sube la capacidad, no la mecánica: celda y CPU de 256k con circuito HV y placa de inox (unas 2 recetas reescritas). AE2 sigue híbrido (decisión 1 de LV).

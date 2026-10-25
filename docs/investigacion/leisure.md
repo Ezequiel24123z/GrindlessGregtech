@@ -1,168 +1,168 @@
-# GregTech Leisure (GTL) → Gregtech Grindless: qué nos llevamos
+# GregTech Leisure (GTL) → Gregtech Grindless: what we take away
 
-Investigación pura, sin tocar el repo. Pregunta del usuario: boost de power (calderas/turbinas/combustible), red de energía inalámbrica (¿covers?, ¿LV?), y todo el QoL/multibloques propios de GTL.
+Pure research, without touching the repo. User's question: power boost (boilers/turbines/fuel), wireless energy network (covers?, LV?), and all of GTL's own QoL/multiblocks.
 
-## 0. Fuentes y método
+## 0. Sources and method
 
-- **Copia local de GTL** (instancia `GTL1452-CurseForge-original`, "Factoria Plana EN", GTL **1.4.5.2**, GTLCore **1.2.3.1-fix9**, mc1.20.1): `session-state/.../research/gtl-raw/` — `cfg/gtceu.yaml` y `cfg/gtlcore.yaml` reales, `kubejs/` real (startup/server scripts, 17 300 líneas en `gtceu.js`), `jars/_list_*.txt` (listados de .jar, sin binarios), `jars/gtlcore_classes_*.txt` (nombres de clase del bytecode decompilado, solo para localizar qué hace cada cosa — no se reproduce código), `gtceu_recipes.tsv` (volcado de recetas), `machines_table2.md` (las 158 estructuras, generado en una sesión anterior).
-- Ya había una investigación previa (sesión anterior) volcada en `gtl_body.md`/`gtl_appx.md` dentro de esa misma carpeta: la reaproveché y la verifiqué/amplié en vez de repetirla. `CREDITS.md` y `docs/viaje.md` ya tenían un veredicto previo ("GTL: licencia poco clara, solo ideas"); lo confirmo con texto legal exacto más abajo.
-- **Web/GitHub:** repo del modpack (`EasterFG/GTLCore` es el único remanente público del núcleo, `nutant233/*` da 404 hoy), Modrinth/CurseForge de cada addon, y el código fuente de los mods que SÍ son nuestros (LGPL/MIT) vía búsqueda semántica de su repo.
-- Nuestro pack: `pack/mods/*.pw.toml`, `pack/config/gtceu.yaml` (el real, 7 líneas), `AGENTS.md`, `CREDITS.md`, `docs/viaje.md`, y el script `pack/kubejs/server_scripts/grindless/integration/gtca.js` (decisiones ya tomadas sobre GTCA que afectan directamente la pregunta de power).
+- **Local copy of GTL** (instance `GTL1452-CurseForge-original`, "Factoria Plana EN", GTL **1.4.5.2**, GTLCore **1.2.3.1-fix9**, mc1.20.1): `session-state/.../research/gtl-raw/` — the real `cfg/gtceu.yaml` and `cfg/gtlcore.yaml`, the real `kubejs/` (startup/server scripts, 17 300 lines in `gtceu.js`), `jars/_list_*.txt` (.jar listings, no binaries), `jars/gtlcore_classes_*.txt` (class names from the decompiled bytecode, only to locate what each thing does — no code is reproduced), `gtceu_recipes.tsv` (recipe dump), `machines_table2.md` (the 158 structures, generated in an earlier session).
+- There was already earlier research (previous session) stored in `gtl_body.md`/`gtl_appx.md` inside that same folder: I reused it and verified/extended it instead of repeating it. `CREDITS.md` and `docs/viaje.md` already had a prior verdict, "GTL: unclear license, ideas only" (translated from Spanish). I confirm it with the exact legal text below.
+- **Web/GitHub:** the modpack repo (`EasterFG/GTLCore` is the only public remnant of the core, `nutant233/*` returns 404 today), Modrinth/CurseForge for each addon, and the source code of the mods that ARE ours (LGPL/MIT) via semantic search of their repo.
+- Our pack: `pack/mods/*.pw.toml`, `pack/config/gtceu.yaml` (the real one, 7 lines), `AGENTS.md`, `CREDITS.md`, `docs/viaje.md`, and the script `pack/kubejs/server_scripts/grindless/integration/gtca.js` (decisions already taken about GTCA that directly affect the power question).
 
 ---
 
-## 1. Licencias
+## 1. Licenses
 
-### 1.1 El modpack GTL (configs, KubeJS, misiones)
+### 1.1 The GTL modpack (configs, KubeJS, quests)
 
-| Dónde | Licencia declarada | Evidencia |
+| Where | Declared license | Evidence |
 |---|---|---|
-| Zip de la instancia (raíz) | **CC BY-NC-SA 4.0** (Atribución-NoComercial-CompartirIgual) | Archivo `LICENSE` en la raíz de la instancia, texto verbatim de CC, fechado 2026-08-14. Copia local: `research/gtl-raw/LICENSE`. |
-| La misma página de CurseForge del modpack | **LGPLv3** | Campo "License" del proyecto CurseForge `gregtech-leisure` (id 1695369, autor **nutant233**). |
+| Instance zip (root) | **CC BY-NC-SA 4.0** (Attribution-NonCommercial-ShareAlike) | `LICENSE` file at the root of the instance, verbatim CC text, dated 2026-08-14. Local copy: `research/gtl-raw/LICENSE`. |
+| The same CurseForge page of the modpack | **LGPLv3** | "License" field of the CurseForge project `gregtech-leisure` (id 1695369, author **nutant233**). |
 
-**Esto ya es una contradicción de origen**: el propio autor declara dos licencias incompatibles para el mismo contenido (CC-BY-NC-SA es *compartir-igual*, "viral" sobre el texto/datos; LGPLv3 es una licencia de software de bibliotecas, pensada para código, no para assets/quests). No hay forma de que ambas sean ciertas a la vez. El usuario cree que GTL es permisivo: **no lo es** — en el mejor caso (LGPLv3) solo cubre código con atribución y aviso de cambios; en el peor (CC-BY-NC-SA, lo que de verdad firma el `LICENSE` del zip) cualquier copia literal de sus scripts/misiones contagiaría *ShareAlike* a lo nuestro.
+**This is already a contradiction at the source**: the author declares two incompatible licenses for the same content (CC-BY-NC-SA is *share-alike*, "viral" over the text/data; LGPLv3 is a library software license, meant for code, not for assets/quests). There is no way both are true at once. The user believes GTL is permissive: **it is not** — in the best case (LGPLv3) it only covers code with attribution and a notice of changes; in the worst case (CC-BY-NC-SA, which is what the zip's `LICENSE` actually states) any literal copy of its scripts/quests would pass *ShareAlike* on to ours.
 
-### 1.2 Los mods específicos de GTL
+### 1.2 GTL's own mods
 
-| Mod | Licencia declarada | Evidencia | Nota |
+| Mod | Declared license | Evidence | Note |
 |---|---|---|---|
-| **GTLCore** (núcleo: 158 multibloques, 74 tipos de receta, ~270 mixins) | "LGPLv3.0" (campo `mod_license`) | `gradle.properties` del repo público `EasterFG/GTLCore` (rama `gtl-1431`, v1.1.1): `mod_license=LGPLv3.0`, sin archivo `LICENSE`. | El repo público se detiene en v1.1.1; nuestra copia es la 1.2.3.1-fix9, código privado sin repo visible (`nutant233/GTLCore` → 404 hoy). El propio README de GTL confiesa partes de Gregicality Legacy (GPL-3.0), GTNH (LGPL-3.0/"Other"), Twist Space Technology (GPL-3.0) y **Epimorphism Modern (AGPL-3.0)** — una etiqueta "LGPL" no se sostiene sobre código derivado de GPL/AGPL. |
-| **GTMThings** (hatches/covers inalámbricos — ver §3) | `mods.toml` interno dice `license = "LGPLv3.0"` | `other/gtmthings_mods.toml` en la copia local | **CurseForge y el repo del autor (`liansishen/GTMThings`) lo marcan "All Rights Reserved"** (sin LICENSE en GitHub). Build `1.3.5.b` usada por GTL es un fork privado, no está en Modrinth. Veredicto: **no redistribuible**, pese al `mods.toml`. |
-| ad_astra_rocketed (cohetes T5-T7) | **All rights reserved** (celsiusqc) | `mods.toml` embebido | Dependencia dura del viaje interplanetario de GTL. |
-| ae2CraftingTree / Useful Clipboard | All rights reserved | `mods.toml` embebido | QoL de AE2 de GTL. |
-| wildcard_pattern (build `-gtl`) | MIT | `mods.toml` embebido | Único mod "propio del pack" con licencia limpia. |
-| GTMUtils / GTCA / GTM Extended Features (**ya en nuestro pack**, no son de GTL) | **LGPL-3.0** los tres | Modrinth API: `KMnOsM3N`, `jIPykDYO`, `9MCfIDeI` | No son mods de GTL; los menciono porque resuelven piezas equivalentes a GTLCore/GTMThings (§2 y §3). |
+| **GTLCore** (core: 158 multiblocks, 74 recipe types, ~270 mixins) | "LGPLv3.0" (`mod_license` field) | `gradle.properties` of the public repo `EasterFG/GTLCore` (branch `gtl-1431`, v1.1.1): `mod_license=LGPLv3.0`, no `LICENSE` file. | The public repo stops at v1.1.1; our copy is 1.2.3.1-fix9, private code with no visible repo (`nutant233/GTLCore` → 404 today). GTL's own README admits parts from Gregicality Legacy (GPL-3.0), GTNH (LGPL-3.0/"Other"), Twist Space Technology (GPL-3.0) and **Epimorphism Modern (AGPL-3.0)** — an "LGPL" label does not hold up over code derived from GPL/AGPL. |
+| **GTMThings** (wireless hatches/covers — see §3) | `mods.toml` internal says `license = "LGPLv3.0"` | `other/gtmthings_mods.toml` in the local copy | **CurseForge and the author's repo (`liansishen/GTMThings`) mark it "All Rights Reserved"** (no LICENSE on GitHub). The `1.3.5.b` build used by GTL is a private fork, not on Modrinth. Verdict: **not redistributable**, despite the `mods.toml`. |
+| ad_astra_rocketed (rockets T5-T7) | **All rights reserved** (celsiusqc) | embedded `mods.toml` | Hard dependency of GTL's interplanetary journey. |
+| ae2CraftingTree / Useful Clipboard | All rights reserved | embedded `mods.toml` | GTL's AE2 QoL. |
+| wildcard_pattern (build `-gtl`) | MIT | embedded `mods.toml` | The only "pack-specific" mod with a clean license. |
+| GTMUtils / GTCA / GTM Extended Features (**already in our pack**, not GTL's) | **LGPL-3.0** all three | Modrinth API: `KMnOsM3N`, `jIPykDYO`, `9MCfIDeI` | They are not GTL mods; I mention them because they solve pieces equivalent to GTLCore/GTMThings (§2 and §3). |
 
-### 1.3 Texturas
+### 1.3 Textures
 
-El propio `README.md` de GTL confiesa (sección "鸣谢作品" = "obras agradecidas") que no son suyas:
+GTL's own `README.md` admits (section "鸣谢作品" = "acknowledged works") that they are not its own:
 
 > 部分处理线，多方块结构，**纹理**来自 Gregicality Legacy / GTNH / Twist Space Technology / Gregicality Science / **Mekanism** / Deeper And Darker.
 
-Ni GTL tiene derecho a re-licenciar esas texturas (Gregicality Legacy GPL-3.0, GTNH LGPL-3.0, Twist Space Tech GPL-3.0, Mekanism MIT, Deeper And Darker AGPL-3.0). **Nunca copiar un PNG de GTL.**
+GTL has no right to re-license those textures either (Gregicality Legacy GPL-3.0, GTNH LGPL-3.0, Twist Space Tech GPL-3.0, Mekanism MIT, Deeper And Darker AGPL-3.0). **Never copy a PNG from GTL.**
 
-### 1.4 Veredicto honesto (el usuario cree que es permisivo — no lo es del todo)
+### 1.4 Honest verdict (the user believes it is permissive — it is not entirely)
 
-| Qué | Veredicto |
+| What | Verdict |
 |---|---|
-| ¿Incluir el jar de GTLCore o GTMThings vía packwiz? | **No.** GTLCore: sin repo público de nuestra versión, mixins atados a GTM 1.4.4, procedencia GPL/AGPL bajo etiqueta LGPL insostenible. GTMThings: ARR en CurseForge. |
-| ¿Copiar scripts KubeJS o misiones literalmente? | **No.** CC-BY-NC-SA (ShareAlike) contagiaría nuestra licencia; y la propia CurseForge dice LGPL para el mismo contenido — demasiado contradictorio para confiar. |
-| ¿Copiar texturas? | **Nunca** — ni GTL tiene derecho a cederlas. |
-| ¿Reimplementar la idea/mecánica/números con nuestro propio código? | **Sí.** Ideas, proporciones y topologías no son copyrightables; es lo que ya hace `CREDITS.md` ("ideas only"). Dar crédito a "GregTech Leisure (nutant233 et al.)" y, cuando GTL mismo lo cite, a GTNH/TST/Gregicality Legacy/GT++ en nuestro `CREDITS.md`. |
-| Nota menor | Nuestro `CREDITS.md` cita "GT Community Pack… LGPL-2.1"; el `LICENSE` real del repo (`GregTechCEu/GregTech-Community-Pack`, verificado por la API de GitHub) es **LGPL-3.0** (coincide con lo que GTL también declara para el mismo origen). Vale corregir la cita; no cambia ninguna conclusión. |
+| Include the GTLCore or GTMThings jar via packwiz? | **No.** GTLCore: no public repo for our version, mixins tied to GTM 1.4.4, GPL/AGPL origin under an untenable LGPL label. GTMThings: ARR on CurseForge. |
+| Copy KubeJS scripts or quests literally? | **No.** CC-BY-NC-SA (ShareAlike) would spread its license to ours; and CurseForge itself says LGPL for the same content — too contradictory to rely on. |
+| Copy textures? | **Never** — GTL has no right to pass them on either. |
+| Reimplement the idea/mechanic/numbers with our own code? | **Yes.** Ideas, proportions and topologies are not copyrightable; that is what `CREDITS.md` already does ("ideas only"). Give credit to "GregTech Leisure (nutant233 et al.)" and, when GTL itself cites it, to GTNH/TST/Gregicality Legacy/GT++ in our `CREDITS.md`. |
+| Minor note | Our `CREDITS.md` cites "GT Community Pack… LGPL-2.1"; the repo's actual `LICENSE` (`GregTechCEu/GregTech-Community-Pack`, verified via the GitHub API) is **LGPL-3.0** (matching what GTL also declares for the same origin). The citation is worth correcting; it changes no conclusion. |
 
 ---
 
-## 2. Power: cómo infla GTL la generación
+## 2. Power: how GTL inflates generation
 
-**Nuestro `pack/config/gtceu.yaml` actual tiene 7 líneas** (`enableFEConverters: true`, `infiniteBedrockOresFluids: true`, `enableMaintenance: false`) — no toca ni una sola clave de energía. Partimos de los valores por defecto de GTM 7.5.3 al 100 %.
+**Our current `pack/config/gtceu.yaml` has 7 lines** (`enableFEConverters: true`, `infiniteBedrockOresFluids: true`, `enableMaintenance: false`) — it does not touch a single energy key. We start from GTM 7.5.3's default values at 100%.
 
-### 2.1 Calderas pequeñas (de un bloque) — `machines.smallBoilers` en `cfg/gtceu.yaml`
+### 2.1 Small boilers (single-block) — `machines.smallBoilers` in `cfg/gtceu.yaml`
 
-Archivo real de la instancia GTL: `research/gtl-raw/cfg/gtceu.yaml`. El propio archivo trae en comentario el valor por defecto de GTM (el mismo mod, mismo proyecto Modrinth `7tG215v7` que el nuestro — ver §3.3 para la prueba de que es el mismo mod, no un fork):
+Real file from the GTL instance: `research/gtl-raw/cfg/gtceu.yaml`. The file itself carries, in a comment, the GTM default value (the same mod, same Modrinth project `7tG215v7` as ours — see §3.3 for the proof that it is the same mod, not a fork):
 
-| Clave | Default GTM | Valor en GTL | Factor |
+| Key | GTM default | Value in GTL | Factor |
 |---|---|---|---|
-| `solidBoilerBaseOutput` (caldera sólida) | 120 | **960** | ×8 |
-| `hpSolidBoilerBaseOutput` (sólida alta presión) | 300 | **2400** | ×8 |
-| `liquidBoilerBaseOutput` (líquida) | 240 | **1920** | ×8 |
-| `hpLiquidBoilerBaseOutput` (líquida alta presión) | 600 | **4800** | ×8 |
-| `solarBoilerBaseOutput` (solar) | 120 | **960** | ×8 |
-| `hpSolarBoilerBaseOutput` (solar alta presión) | 360 | **2880** | ×8 |
+| `solidBoilerBaseOutput` (solid boiler) | 120 | **960** | ×8 |
+| `hpSolidBoilerBaseOutput` (solid, high pressure) | 300 | **2400** | ×8 |
+| `liquidBoilerBaseOutput` (liquid boiler) | 240 | **1920** | ×8 |
+| `hpLiquidBoilerBaseOutput` (liquid, high pressure) | 600 | **4800** | ×8 |
+| `solarBoilerBaseOutput` (solar boiler) | 120 | **960** | ×8 |
+| `hpSolarBoilerBaseOutput` (solar, high pressure) | 360 | **2880** | ×8 |
 
-Las seis variantes están multiplicadas por **exactamente ×8**, mB de vapor/segundo a temperatura máxima. Es un único factor global, aplicado a mano a cada clave (no hay una clave "multiplicador de calderas" única).
+All six variants are multiplied by **exactly ×8**, mB of steam/second at maximum temperature. It is a single global factor, applied manually to each key (there is no single "boiler multiplier" key).
 
-### 2.2 Calderas grandes (multibloque) — `machines.largeBoilers`
+### 2.2 Large boilers (multiblock) — `machines.largeBoilers`
 
-| Clave | Default GTM | Valor en GTL | Factor |
+| Key | GTM default | Value in GTL | Factor |
 |---|---|---|---|
-| `steamPerWater` (conversión agua→vapor) | 160 | **160** | **×1 — sin cambios** |
+| `steamPerWater` (water→steam conversion) | 160 | **160** | **×1 — no change** |
 | `bronzeBoilerMaxTemperature` | 800 | **6400** | ×8 |
 | `bronzeBoilerHeatSpeed` | 1 | 1 | ×1 |
-| `steelBoilerMaxTemperature` | 1800 | **12800** | ×7,11 |
+| `steelBoilerMaxTemperature` | 1800 | **12800** | ×7.11 |
 | `steelBoilerHeatSpeed` | 1 | **2** | ×2 |
 | `titaniumBoilerMaxTemperature` | 3200 | **25600** | ×8 |
 | `titaniumBoilerHeatSpeed` | 1 | **4** | ×4 |
 | `tungstensteelBoilerMaxTemperature` | 6400 | **51200** | ×8 |
 | `tungstensteelBoilerHeatSpeed` | 2 | **8** | ×4 |
 
-Lectura: **la proporción vapor:agua no cambia** (sigue costando 1 mB de agua por 160 mB de vapor); lo que sube es el **techo de temperatura** (×8, menos en la caldera de acero, que sube "solo" ×7,11 — posiblemente para no romper la escalera LV-vapor/MV-acero) y la **velocidad de calentamiento** (bronce igual, acero ×2, titanio ×4, tungstensteel ×4). Con el techo más alto y el calentamiento más rápido, una caldera llega antes a un régimen que antes era inalcanzable y lo sostiene con el mismo combustible por ciclo de calor — de ahí el "mucho más vapor" sin tocar el coste de agua.
+Reading: **the steam:water ratio does not change** (it still costs 1 mB of water per 160 mB of steam); what goes up is the **temperature ceiling** (×8, less for the steel boiler, which goes up "only" ×7.11 — possibly so as not to break the LV-steam/MV-steel ladder) and the **heating speed** (bronze the same, steel ×2, titanium ×4, tungstensteel ×4). With the higher ceiling and faster heating, a boiler reaches, sooner, an operating point that used to be unreachable and sustains it with the same fuel per heat cycle — hence the "much more steam" without touching the water cost.
 
-### 2.3 Quemadores/turbinas (EU por mB de combustible): **sin cambios encontrados**
+### 2.3 Burners/turbines (EU per mB of fuel): **no changes found**
 
-Busqué en los tres sitios donde GTM permite tocar esto y **ninguno toca combustión/gas/semifluido/vapor estándar**:
+I searched the three places where GTM lets this be changed, and **none of them touches standard combustion/gas/semi-fluid/steam**:
 
-1. `cfg/gtceu.yaml` no tiene ninguna clave de eficiencia de generador (revisado completo, arriba está el único bloque de energía).
-2. Los 74 tipos de receta que registra GTLCore (`research/gtl-raw/recipetypes.txt`) solo añaden **4** de categoría `generator`: `SEMI_FLUID_GENERATOR_FUELS` (mismo id que el de GTM — referencia, no redefinición, usada por el "Chemical Energy Devourer" de IV para fusionar varios combustibles en un controlador), `ROCKET_ENGINE_FUELS` y `NAQUADAH_REACTOR` (nuevos, generadores propios de GTLCore) y `SUPERCRITICAL_STEAM_TURBINE_FUELS` (turbina propia nueva, id `supercritical_steam_turbine`). **No aparecen** `combustion_generator`, `gas_turbine`, `steam_turbine` ni `plasma_generator` en esa lista — es decir, GTLCore no los toca.
-3. `kubejs/server_scripts/gtceu.js` (17 300 líneas) solo tiene dos recetas que *mencionan* turbinas, y son de **ensamblaje del ítem** (fabricar el bloque "Supercritical Steam Turbine"/"Supercritical Mega Steam Turbine" en un ensamblador), no recetas de combustible.
+1. `cfg/gtceu.yaml` has no generator efficiency key at all (reviewed in full; the only energy block is shown above).
+2. The 74 recipe types that GTLCore registers (`research/gtl-raw/recipetypes.txt`) add only **4** in the `generator` category: `SEMI_FLUID_GENERATOR_FUELS` (same id as GTM's — a reference, not a redefinition, used by the IV "Chemical Energy Devourer" to merge several fuels into one controller), `ROCKET_ENGINE_FUELS` and `NAQUADAH_REACTOR` (new, GTLCore's own generators), and `SUPERCRITICAL_STEAM_TURBINE_FUELS` (new turbine of its own, id `supercritical_steam_turbine`). **`combustion_generator`, `gas_turbine`, `steam_turbine` and `plasma_generator` do not appear** in that list — that is, GTLCore does not touch them.
+3. `kubejs/server_scripts/gtceu.js` (17 300 lines) has only two recipes that *mention* turbines, and both are **item assembly** recipes (crafting the "Supercritical Steam Turbine"/"Supercritical Mega Steam Turbine" block in an assembler), not fuel recipes.
 
-**Conclusión importante para la petición del usuario**: GTL **no** hace "que las turbinas consuman menos" ni sube el EU/mB de los generadores estándar — el vapor normal, el combustión, el gas y el semifluido siguen con los valores de fábrica de GTM. Lo que GTL hace es **alimentar las mismas turbinas con muchísimo más vapor** (calderas más grandes/calientes) y, para quien quiera más, ofrece generadores *nuevos y alternativos* (Supercritical Steam Turbine, Naquadah Reactor, Chemical Energy Devourer) con sus propios números — no un multiplicador global de eficiencia.
+**Important conclusion for the user's request**: GTL **does not** make "turbines consume less" (translated from Spanish), nor does it raise the EU/mB of the standard generators — normal steam, combustion, gas and semi-fluid keep GTM's factory values. What GTL does is **feed the same turbines with far more steam** (bigger/hotter boilers) and, for anyone who wants more, it offers *new and alternative* generators (Supercritical Steam Turbine, Naquadah Reactor, Chemical Energy Devourer) with their own numbers — not a global efficiency multiplier.
 
-### 2.4 ¿Multiplicador global de combustible/duración?
+### 2.4 Global fuel/duration multiplier?
 
-`cfg/gtlcore.yaml` (el config del *mod*, no de GTM) trae `durationMultiplier: 1.0` — es decir, **ni siquiera GTL acelera recetas globalmente**; su `oreMultiplier: 4` es solo para minado, no aplica a combustible. No existe un "multiplicador de combustible" global en ninguno de los dos archivos de configuración.
+`cfg/gtlcore.yaml` (the *mod's* config, not GTM's) sets `durationMultiplier: 1.0` — that is, **GTL does not even speed up recipes globally**; its `oreMultiplier: 4` is only for mining and does not apply to fuel. There is no global "fuel multiplier" in either of the two config files.
 
-### 2.5 Ya tuvimos esta conversación: GTCA y "energía de la nada"
+### 2.5 We have already had this conversation: GTCA and "energy out of nothing"
 
-Antes de recomendar nada, ojo con esto: **ya instalamos GT Community Additions (GTCA, LGPL-3.0, lo tenemos)**, que trae un *Steam Pressurizer* → *Turbina de alta presión/sobrecalentada* y un *Extreme Heat Exchanger* → *Supercritical (SHD) Steam Turbine* — mecánicamente **el mismo tipo de cadena** que querríamos copiar de GTL (vapor normal → procesarlo → mucho más EU por mB). Pero `pack/kubejs/server_scripts/grindless/integration/gtca.js` ya **las quitó todas**, con esta razón escrita en el propio script:
+Before recommending anything, note this: **we have already installed GT Community Additions (GTCA, LGPL-3.0, we have it)**, which includes a *Steam Pressurizer* → *High-pressure/superheated steam turbine* and an *Extreme Heat Exchanger* → *Supercritical (SHD) Steam Turbine* — mechanically **the same kind of chain** we would want to copy from GTL (normal steam → process it → much more EU per mB). But `pack/kubejs/server_scripts/grindless/integration/gtca.js` already **removed all of them**, with this reason written in the script itself:
 
-> «el mod no tiene interruptor de configuración y construye sus recetas en Java, así que todo se hace aquí» … «Steam Pressurizer (HV) 6 400 mB de vapor + 480 EU → 640 mB de vapor de alta presión que vale 8 000 EU en una turbina (el vapor valía 3 200): **energía de la nada**» … «Extreme Heat Exchanger + turbina SHD: plasma de fusión → vapor supercrítico → 3,4-3,7× el EU de la turbina de plasma de GTM para el mismo plasma»
+> «the mod has no config switch and builds its recipes in Java, so everything is done here» … «Steam Pressurizer (HV) 6 400 mB of steam + 480 EU → 640 mB of high pressure steam worth 8 000 EU in a steam turbine (the steam was worth 3 200): **energy out of nothing**» … «Extreme Heat Exchanger + SHD turbine: fusion plasma → supercritical steam → 3.4-3.7× the EU of GTM's plasma turbine for the same plasma» (translated from Spanish)
 
-Es decir: **ya identificamos y rechazamos explícitamente** una cadena de "vapor mejorado = mucho más EU por el mismo combustible" por romper la regla de que "ningún addon procesa más barato que GT en su era". Si ahora el usuario quiere más power "a la Leisure", hay que decidir **conscientemente** si:
-- (a) se sube un multiplicador de calderas estilo GTL (como §2.1/2.2, transparente, afecta a todo el mundo igual, no reintroduce las recetas ya retiradas), o
-- (b) se reconsidera la cadena de GTCA que ya se quitó (reabrir esa decisión).
+That is: **we already identified and explicitly rejected** a chain of "improved steam = much more EU for the same fuel", because it breaks the rule that "no addon processes more cheaply than GT in its era" (translated from Spanish). If the user now wants more power "Leisure-style", we must decide **consciously** whether to:
+- (a) raise a boiler multiplier in the GTL style (as in §2.1/2.2: transparent, affects everyone equally, does not reintroduce the recipes already removed), or
+- (b) reconsider the GTCA chain that was already removed (reopen that decision).
 
-No tomo esa decisión aquí (es investigación); solo la dejo señalada porque el usuario pidió "verificar honestamente" y esto es un choque directo con una decisión ya tomada en este mismo pack.
+I do not make that decision here (this is research); I only flag it because the user asked to "verify honestly" (translated from Spanish) and this is a direct clash with a decision already taken in this same pack.
 
-### 2.6 Dónde vive cada cosa (resumen para implementar más tarde)
+### 2.6 Where each thing lives (summary for later implementation)
 
-| Qué | Dónde |
+| What | Where |
 |---|---|
-| Salida de calderas pequeñas/grandes, temperatura, velocidad de calentamiento | `pack/config/gtceu.yaml` → añadir bloque `machines.smallBoilers` / `machines.largeBoilers` (hoy ausente = valores de fábrica) |
-| EU/mB de combustión, gas, semifluido, vapor estándar | **No configurable por YAML ni KubeJS de forma soportada** — son propiedades Java por combustible/tier en GTM; GTL tampoco las toca. Un cambio aquí exigiría un addon Java o aceptar que solo se toca el lado "calderas". |
-| Generadores nuevos con su propio EU/mB (Naquadah Reactor, Supercritical Steam Turbine, Chemical Energy Devourer) | Específicos de GTLCore, no redistribuible (§1). Lo equivalente nuestro-compatible ya instalado es GTCA (retirado por decisión previa, §2.5) y GTM Extended Features (no toca combustibles). |
+| Output of small/large boilers, temperature, heating speed | `pack/config/gtceu.yaml` → add block `machines.smallBoilers` / `machines.largeBoilers` (absent today = factory values) |
+| EU/mB of combustion, gas, semi-fluid, standard steam | **Not configurable via YAML or KubeJS in a supported way** — these are Java properties per fuel/tier in GTM; GTL does not touch them either. A change here would require a Java addon or accepting that only the "boilers" side is touched. |
+| New generators with their own EU/mB (Naquadah Reactor, Supercritical Steam Turbine, Chemical Energy Devourer) | Specific to GTLCore, not redistributable (§1). Our already-installed, compatible equivalent is GTCA (removed by prior decision, §2.5) and GTM Extended Features (does not touch fuels). |
 
 ---
 
-## 3. Red de energía inalámbrica
+## 3. Wireless energy network
 
-### 3.1 Cómo funciona en GTL — no son covers, son hatches con "frecuencia"
+### 3.1 How it works in GTL — not covers, but hatches with a "frequency"
 
-El mecanismo de GTL **no vive en GTLCore**: vive en un mod aparte, **GTMThings** (autor `liansishen`, mod id `gtmthings`, build `1.3.5.b` empaquetada dentro de GTL). Evidencia: `other/gtmthings_mods.toml` (dependencia dura `gtceu [1.4.2-SNAPSHOT,)`) y el listado de assets del jar (`jars/_list_gtmthings.txt`), que contiene modelos `assets/gtmthings/models/block/machine/part/wireless_energy_hatch.json` y `wireless_energy_hatch_16a.json` — son **hatches de parte** (`part/`), no covers.
+GTL's mechanism **does not live in GTLCore**: it lives in a separate mod, **GTMThings** (author `liansishen`, mod id `gtmthings`, build `1.3.5.b` bundled inside GTL). Evidence: `other/gtmthings_mods.toml` (hard dependency `gtceu [1.4.2-SNAPSHOT,)`) and the asset listing of the jar (`jars/_list_gtmthings.txt`), which contains the models `assets/gtmthings/models/block/machine/part/wireless_energy_hatch.json` and `wireless_energy_hatch_16a.json` — these are **part hatches** (`part/`), not covers.
 
-Descripción funcional (核心模组/CurseForge, verificada por búsqueda web dirigida a la página y al repo del autor):
+Functional description (核心模组/CurseForge, verified by web search aimed at the page and the author's repo):
 
-- El "无线能源仓" (**wireless energy hatch**) es un hatch normal que se coloca en un multibloque (o en una máquina de un bloque) igual que cualquier hatch de energía.
-- Cada hatch tiene una **frecuencia** y se **vincula automáticamente a tu red eléctrica o a tu equipo de FTB Teams** (clic derecho para cambiar de dueño/desvincular).
-- Se **rellena/drena solo, cada tick**, desde esa frecuencia — funciona **entre dimensiones**.
-- Hay variantes por tramo de amperaje: **LV-HV** y **EV-MAX** (múltiples amperajes), es decir, hay un hatch de voltaje bajo utilizable desde LV, y otros de voltaje/amperaje mayor para más adelante — **no es una sola pieza "desbloqueada en LV que ya sirve para todo"**: el techo de potencia de cada hatch sigue el tier en que se fabrica.
-- Aparte de la energía, GTL tiene por separado (créditos de `gtl_appx.md`, confirmado en el catálogo por era): **wireless covers**, **wireless monitor/interface** (para ver/gestionar una máquina a distancia) — esto sí son covers, pero son para *monitorización*, no para transporte de EU.
+- The "无线能源仓" (**wireless energy hatch**) is a normal hatch that is placed on a multiblock (or on a single-block machine) just like any energy hatch.
+- Each hatch has a **frequency** and **links automatically to your power network or your FTB Teams team** (right-click to change owner/unlink).
+- It **fills/drains by itself, every tick**, from that frequency — it works **across dimensions**.
+- There are variants per amperage band: **LV-HV** and **EV-MAX** (multiple amperages). That is, there is a low-voltage hatch usable from LV, and others of higher voltage/amperage for later — **it is not a single piece "unlocked at LV that already serves everything"**: the power ceiling of each hatch follows the tier at which it is crafted.
+- Apart from energy, GTL also has, separately (credits from `gtl_appx.md`, confirmed in the catalog by era): **wireless covers**, **wireless monitor/interface** (to view/manage a machine remotely) — these are indeed covers, but they are for *monitoring*, not for transporting EU.
 
-**Licencia (repetido de §1 porque es la pieza crítica aquí): GTMThings es "All Rights Reserved"** según CurseForge y el repo del propio autor (sin LICENSE). **No podemos incluir ese jar.** Y GTL usa una build privada `1.3.5.b` no publicada siquiera en Modrinth, atada a GTM `1.4.2+` (versión vieja, ver §3.3).
+**License (repeated from §1 because it is the critical piece here): GTMThings is "All Rights Reserved"** according to CurseForge and the author's own repo (no LICENSE). **We cannot include that jar.** And GTL uses a private `1.3.5.b` build that is not even published on Modrinth, tied to GTM `1.4.2+` (an old version, see §3.3).
 
-### 3.2 ¿Lo que ya tenemos nos sirve? — sí, con matices, y ya lo tenemos instalado
+### 3.2 Does what we already have serve us? — yes, with nuances, and we already have it installed
 
-Repasé exactamente los mods que cita el propio usuario (`pack/mods/*.pw.toml`):
+I went through exactly the mods the user cites (`pack/mods/*.pw.toml`):
 
-| Mod nuestro | Licencia | Qué hace de verdad (código fuente, no solo la descripción) | ¿Sirve para "wireless EU desde LV, pocos cables"? |
+| Our mod | License | What it really does (source code, not just the description) | Does it serve "wireless EU from LV, few cables"? |
 |---|---|---|---|
-| **eup2p** "EU P2P Tunnel" (`pack/mods/eup2p.pw.toml`, MIT, repo `lostmyself8/EUP2P`) | MIT | Es un **P2P Tunnel de AE2** (como los de ítems/fluidos/FE que ya existen), especializado en EU: `EUP2PTunnelPart extends CapabilityP2PTunnelPart<…, IEnergyContainer>`. Dos tuneles con la misma frecuencia en **la misma red ME** transportan EU entre sí sin tender cable de GT entre ambos puntos. Se obtiene en la pestaña de AE2 y se sintoniza con clic derecho de un cable/alambre de GTM. | **Sí, ya disponible, sin tocar nada.** Requiere tener ya una red ME en ambos extremos (que es justo nuestra columna de transporte entre eras, según `docs/viaje.md`), no requiere ningún tier de GT concreto más allá de lo que ya pida tener AE2. |
-| **gregtech-modern-utilities** "GTMUtils" (`pack/mods/gregtech-modern-utilities.pw.toml`, LGPL-3.0, repo `Omicron-Industries/GregTech-Modern-Utilities`) | LGPL-3.0 | Trae un verdadero **puente inalámbrico multibloque**: `WEBHubMachine` / `WEBReceiverMachine` (antes llamado "Wireless Active Transformer"/PTERB). Cada uno tiene una `frequency` (int); el Hub junta la energía de sus hatches de entrada locales y la vuelca a un mapa global indexado por frecuencia **y dimensión** (`ResourceKey<Level>` + `BlockPos`), el Receiver la saca de ahí — **sí es cruzado entre dimensiones**, igual que GTMThings. Tiene sistema de refrigerante opcional (`UtilConfig.webCoolantBaseDrain`/`webCoolantIOMultiplier`, ambos en 0 por defecto = desactivado) y puede explotar si GTM no tiene "transformadores activos inofensivos". | **Mecánicamente sí, pero NO está a LV**: su receta (`UtilRecipes.java`, assembly line) pide placas de **Neutronium ×32**, sensores/emisores/generadores de campo **UV**, circuitos **UHV** — es decir, está gateado a **UHV**, como sucesor del Active Transformer. No hay ningún hatch "de un bloque" para máquinas sueltas en este mod. |
-| **gtm-extended-features** "Extended Features" (LGPL-3.0-only) | LGPL-3.0 | Tiene hatches ópticos inalámbricos (datos/investigación) y lo admite en su propio README: *"Potential additions: Wireless ME/Stocking hatches, **Wireless EU**, Wireless CWU"* — **todavía no existe**, está en su lista de planes, no implementado. | No, hoy no. |
-| **appflux** "Applied Flux" (LGPL-3.0, repo `GlodBlock/ExtendedAE`) | LGPL-3.0 | Celdas de ME que guardan **FE** (Forge Energy), no EU de GT directamente. | No es EU; solo sirve si se pasa por un convertidor EU↔FE (los 64A Energy Converters de GTMUtils, o el `enableFEConverters` que ya tenemos activado en `gtceu.yaml`). |
-| **gtca** / **gtnn** / **gtceu-terminals** | LGPL-3.0 | Ninguno trae transporte inalámbrico de EU. | No. |
+| **eup2p** "EU P2P Tunnel" (`pack/mods/eup2p.pw.toml`, MIT, repo `lostmyself8/EUP2P`) | MIT | It is an **AE2 P2P Tunnel** (like the existing item/fluid/FE ones), specialized in EU: `EUP2PTunnelPart extends CapabilityP2PTunnelPart<…, IEnergyContainer>`. Two tunnels with the same frequency on **the same ME network** carry EU between each other without laying GT cable between both points. It is obtained in the AE2 tab and tuned by right-clicking it with a GTM cable/wire. | **Yes, already available, no changes needed.** It requires an ME network already present at both ends (which is exactly our transport column between eras, per `docs/viaje.md`); it does not require any specific GT tier beyond what AE2 already asks for. |
+| **gregtech-modern-utilities** "GTMUtils" (`pack/mods/gregtech-modern-utilities.pw.toml`, LGPL-3.0, repo `Omicron-Industries/GregTech-Modern-Utilities`) | LGPL-3.0 | It brings a real **multiblock wireless bridge**: `WEBHubMachine` / `WEBReceiverMachine` (formerly called "Wireless Active Transformer"/PTERB). Each one has a `frequency` (int); the Hub collects the energy from its local input hatches and dumps it into a global map indexed by frequency **and dimension** (`ResourceKey<Level>` + `BlockPos`), and the Receiver takes it out from there — **it does cross dimensions**, just like GTMThings. It has an optional coolant system (`UtilConfig.webCoolantBaseDrain`/`webCoolantIOMultiplier`, both 0 by default = disabled) and it can explode if GTM does not have "harmless active transformers". | **Mechanically yes, but it is NOT at LV**: its recipe (`UtilRecipes.java`, assembly line) asks for **Neutronium ×32** plates, **UV** field sensors/emitters/generators, **UHV** circuits — that is, it is gated to **UHV**, as the successor of the Active Transformer. This mod has no "single-block" hatch for standalone machines. |
+| **gtm-extended-features** "Extended Features" (LGPL-3.0-only) | LGPL-3.0 | It has wireless optical hatches (data/research) and admits so in its own README: *"Potential additions: Wireless ME/Stocking hatches, **Wireless EU**, Wireless CWU"* — **it does not exist yet**; it is on its plans list, not implemented. | No, not today. |
+| **appflux** "Applied Flux" (LGPL-3.0, repo `GlodBlock/ExtendedAE`) | LGPL-3.0 | ME cells that store **FE** (Forge Energy), not GT EU directly. | It is not EU; it is only useful if it goes through an EU↔FE converter (GTMUtils' 64A Energy Converters, or the `enableFEConverters` we already have enabled in `gtceu.yaml`). |
+| **gtca** / **gtnn** / **gtceu-terminals** | LGPL-3.0 | None brings wireless EU transport. | No. |
 
-### 3.3 Sobre la "opción A" (incluir el jar de GTM/GTLCore)
+### 3.3 About "option A" (including the GTM/GTLCore jar)
 
-Confirmé con la API de Modrinth que **nuestro GTM (`gtceu-1.20.1-7.5.3`) y el de GTL (`GregTechCEu 1.20.1-1.4.4`) son el mismo proyecto de Modrinth, `7tG215v7`** (nuestro `.pw.toml` descarga de `cdn.modrinth.com/data/7tG215v7/…`, exactamente el mismo id que cita la investigación previa para la build de GTL). O sea: **GTL no usa un fork de GTM**, usa una build *mucho* más vieja del mismo mod (su numeración "1.4.4" es un esquema de versión anterior al "7.x" que usamos ahora; mismo proyecto, ~año y medio de distancia aprox., con cambios de API constantes: el propio changelog de 7.5.3 toca cosas internas de recetas/hatches). GTLCore son ~270 mixins contra esa build vieja y depende de bloques `kubejs:*` que solo existen si cargas también el KubeJS de GTL (CC-BY-NC-SA). **Opción A descartada**, confirmando lo que ya concluyó la investigación previa.
+I confirmed with the Modrinth API that **our GTM (`gtceu-1.20.1-7.5.3`) and GTL's (`GregTechCEu 1.20.1-1.4.4`) are the same Modrinth project, `7tG215v7`** (our `.pw.toml` downloads from `cdn.modrinth.com/data/7tG215v7/…`, exactly the same id that the earlier research cites for GTL's build). That is: **GTL does not use a fork of GTM**; it uses a *much* older build of the same mod (its "1.4.4" numbering is a version scheme that predates the "7.x" we use now; same project, roughly a year and a half apart, with constant API changes: the 7.5.3 changelog itself touches internal recipe/hatch code). GTLCore is built from ~270 mixins against that old build and depends on `kubejs:*` blocks that only exist if you also load GTL's KubeJS (CC-BY-NC-SA). **Option A discarded**, confirming what the earlier research already concluded.
 
-### 3.4 Recomendación
+### 3.4 Recommendation
 
-**Combinar Opción C (lo que ya tenemos) con una adaptación pequeña, no Opción A ni Opción B pura:**
+**Combine Option C (what we already have) with a small adaptation, not pure Option A or Option B:**
 
-1. **Ya hoy, sin cambios:** quien no quiera tender cable de GT puede usar el **EU P2P Tunnel** en cuanto tenga red ME — en nuestro pack eso es pronto (LV/MV, columna de transporte ya decidida en `docs/viaje.md`). Esto ya cubre el caso de uso real que describe el usuario ("ayuda para quien no quiera usar muchos cables") sin escribir una línea de código.
-2. **Para un verdadero "hatch inalámbrico" como el de GTL, con reparto por frecuencia y entre dimensiones:** el único camino con licencia limpia y ya instalado es el **WEB Hub/Receiver de GTMUtils (LGPL-3.0)** — mecánicamente es *lo mismo* que GTMThings (ambos son primos del Active Transformer de GTM), pero viene gateado a **UHV**, no a LV. Para parecerse a GTL habría que **re-tierarlo por KubeJS**: quitar su receta de ensamblaje (`assembly_line`, UHV) y añadir una propia en un tier bajo — esto es legal (LGPL permite modificar) y técnico (es una receta de `assembly_line`, se puede sustituir con el patrón que ya usa `gtca.js` para otras recetas). Yo **no** recomiendo bajarlo literalmente a LV tal cual lo pide el usuario: nuestra propia regla de progresión ("la energía es una habilidad de cada era") y el precedente de §2.5 (ya se retiró una mecánica de GTCA por "potencia barata antes de tiempo") apuntan a que el punto correcto es más bien **HV** — que es, de hecho, el mismo tier en que **el propio GTL** empieza a permitir hatches inalámbricos en *multibloques* (el LV de GTL es solo para máquinas sueltas de un bloque). Dejar el single-block / P2P a LV y el puente multibloque a HV reproduce la curva real de GTL, no solo su titular de marketing ("está en LV").
-3. **No tocar nada de GTMThings ni de ningún jar de GTL** — su único camino limpio es reimplementar la idea (que es exactamente lo que GTMUtils ya hizo de forma independiente).
+1. **Already today, no changes:** whoever does not want to lay GT cable can use the **EU P2P Tunnel** as soon as they have an ME network — in our pack that comes early (LV/MV, transport column already decided in `docs/viaje.md`). This already covers the real use case the user describes (translated from Spanish: "help for those who don't want to use many cables") without writing a single line of code.
+2. **For a true "wireless hatch" like GTL's, with frequency-based sharing and across dimensions:** the only route with a clean license and already installed is the **WEB Hub/Receiver of GTMUtils (LGPL-3.0)** — mechanically it is *the same thing* as GTMThings (both are cousins of GTM's Active Transformer), but it is gated to **UHV**, not LV. To resemble GTL, one would have to **re-tier it via KubeJS**: remove its assembly recipe (`assembly_line`, UHV) and add one of our own at a low tier — this is legal (LGPL allows modification) and technically simple (it is an `assembly_line` recipe, which can be replaced with the pattern `gtca.js` already uses for other recipes). I do **not** recommend lowering it to LV literally as the user asks: our own progression rule (translated from Spanish: "energy is a skill of each era") and the precedent in §2.5 (a GTCA mechanic was already removed for "cheap power too early"; translated from Spanish) point to **HV** as the more correct point — which is, in fact, the same tier at which **GTL itself** starts allowing wireless hatches on *multiblocks* (GTL's LV is only for standalone single-block machines). Leaving single-block / P2P at LV and the multiblock bridge at HV reproduces GTL's real curve, not just its marketing headline (translated from Spanish: "it's at LV").
+3. **Do not touch GTMThings or any GTL jar** — its only clean route is to reimplement the idea (which is exactly what GTMUtils already did independently).
 
 ---
 

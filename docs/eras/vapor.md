@@ -127,7 +127,47 @@ Qué gana: es lo único que hace la primera carta de la Luna (`grindless:lunar_c
 - **El validador no modela las condiciones del cielo:** las da por cumplidas. Las prueba `gg_test_observatory` en partida, también que el observatorio se niega cuando falla cada una.
 - **La tinta es polvo de carbón.** El tinte negro sale de la tinta de calamar o de la rosa marchita, que en vapor no se automatizan.
 
-## Subproductos
+### Familia Large Steam — `gtceu:large_steam_macerator/centrifuge/thermal_centrifuge/chemical_bath/ore_washer`
+
+Qué gana: procesar mena a escala de planta sin electricidad. Idea de GregTech Leisure (familia "Large Steam X", `docs/investigacion/leisure.md` §4.2), su licencia no es permisiva: ni código, ni texturas, ni texto se copian, solo el concepto de un multibloque de vapor grande con un tope de paralelos. Se omite el sexto miembro de GTL (el ensamblador con núcleo de ensamblador molecular de AE2): no encaja en un multibloque solo de KubeJS.
+
+Las cinco máquinas comparten carcasa (acero 5×5×5, postes de marco de bronce o acero en las 4 aristas verticales) y mecanismo (`SteamParallelMultiblockMachine`, igual que el macerador y el horno de vapor de serie de GTM: duración ×1,5, vapor de una escotilla, y GTM rechaza de raíz cualquier receta por encima de LV, 32 EU/t). A diferencia del macerador/horno de vapor de GTM, ninguna llama a `addOutputLimit` (lo que les recorta a un solo subproducto): aquí se guarda toda la cadena de subproducto de mena, con 2 buses de salida (8 huecos) para que el tope de 64 paralelos no se quede corto en un solo bus de 4.
+
+Cada controlador corre, sin tocar, un tipo de receta de GTM:
+
+| Máquina | Tipo de GTM | EU/t de sus recetas de la cadena de mena | Escotillas de fluido |
+|---|---|---|---|
+| Large Steam Macerator | `gtceu:macerator` | 2 siempre | ninguna |
+| Large Steam Thermal Centrifuge | `gtceu:thermal_centrifuge` | 30 (el valor por defecto del tipo) | ninguna |
+| Large Steam Ore Washer | `gtceu:ore_washer` | 4 o 16 (el valor por defecto) | 1 de entrada |
+| Large Steam Chemical Bath | `gtceu:chemical_bath` | 32 (justo LV) para el lavado de mena; sus baños de lingote caliente (960/128) quedan fuera | 1 de entrada, 1 de salida |
+| Large Steam Centrifuge | `gtceu:centrifuge` | 24 y 5 para las separaciones de polvo sucio/puro | 1 de entrada, 1-2 de salida |
+
+Verificado en el código de GTM 7.5.3 (`data/recipe/generated/OreRecipeHandler.java`), no solo leído de memoria: las cinco tienen recetas reales de la cadena de subproducto de mena a 32 EU/t o menos, así que ninguna necesitó el escalón eléctrico a LV que se había dejado como salida de emergencia por si el tope de vapor bloqueaba el tipo entero.
+
+- **Controlador:** casco de vapor (herencia de la era), placas y marcos de acero y un "núcleo" propio de cada máquina — macerador: `gtceu:steam_grinder` (el pequeño de GTM, superado); lavadora: `gtceu:primitive_pump` (la bomba de GTM, superada); centrífuga/centrífuga térmica/baño: engranaje, varilla y tubería de bronce.
+- **Estructura:** una sola forma compartida por las cinco (104 huecos libres para piezas + casing, 20 de marco en las aristas, 1 de controlador), registrada una vez por `global.grindless.patterns` y reutilizada con distintos juegos de piezas según el tipo de receta.
+
+#### Decisiones tomadas (familia Large Steam, 2026-10-25)
+
+- **Las cinco se quedan en vapor, ninguna pasa a LV eléctrico.** La orden preveía ese escape si GTM bloqueaba centrífuga o centrífuga térmica por completo; no lo hace (tabla de arriba), así que las cinco siguen siendo `SteamParallelMultiblockMachine`.
+- **Sin `addOutputLimit`.** GTM se lo pone a su propio macerador/horno de vapor para quedarse con un solo subproducto; aquí se quita a propósito, porque el objetivo de la familia es la cadena de subproducto completa.
+- **"Acero y latón" es solo textura.** El latón de verdad pide cinc, que no llega hasta el tostador de sulfuros de LV (igual que el reloj del observatorio). La carcasa es acero de serie (`gtceu:solid_machine_casing`, ya usado por los multibloques eléctricos de LV); el latón es un tono dorado pintado a mano en el overlay.
+- **64 paralelos es el tope**, el mismo que fija la regla de "paralelos absurdos" de GTL en `docs/investigacion/leisure.md`. Ningún multibloque de la familia pasa de ahí.
+
+### Familia pequeña de vapor — `gtceu:steam_forge_hammer/compressor/alloy_smelter/mixer/chemical_bath/ore_washer`
+
+Qué gana: los seis tipos de receta de GTM que la era de vapor no corría a escala. Sin esta familia, el martillo de forja, el compresor y la fundición de aleación solo llegan al tope de un bloque de vapor (`gtceu:lp_steam_*`/`hp_steam_*`); el mezclador, el baño químico y la lavadora de mineral no existen en absoluto hasta LV, porque GTM no les da ninguna máquina de vapor de un bloque. Idea de GregTech Leisure (`docs/investigacion/leisure.md` §4.2, GTLCore `LargeSteamParallelMultiblockMachine`), licencia no clara: solo el concepto (un multibloque de vapor pequeño con 8 paralelos sobre la receta de un bloque); estructura, texturas y código son nuestros (`steam/small_family.js`).
+
+Los seis comparten el mismo cubo hueco de 3×3×3 que usa el macerador/horno de vapor de serie de GTM (`SteamParallelMultiblockMachine`, con 8 paralelos en vez de los 4 de serie: duración ×1,5, EU/t ×(8/9) por paralelo hasta un tope de 32, nada por encima de LV). El martillo de forja, el compresor y la fundición de aleación solo llevan piezas de ítem (escotilla de vapor, bus de entrada, bus de salida) y su controlador se fabrica con la máquina de vapor de un bloque que sustituyen. El baño químico y la lavadora de mineral añaden una escotilla de entrada de fluido, siempre necesaria según sus propias recetas; el mezclador la deja opcional (0 a 2 de entrada, 0 a 1 de salida), porque el bronce, el latón, el invar y el resto de aleaciones en polvo no piden fluido, y la cola, el agua salada, el hormigón o el lodo de perforación sí. Ninguno de los tres tiene máquina de vapor de un bloque que sustituir, así que su controlador se fabrica solo con placas, engranajes, tubería y casco de vapor.
+
+#### Decisiones tomadas (familia pequeña de vapor, 2026-10-25)
+
+- **Ningún tipo de receta nuevo.** Los seis corren el tipo de GTM de su máquina eléctrica (`forge_hammer`, `compressor`, `alloy_smelter`, `mixer`, `chemical_bath`, `ore_washer`): toda receta ya existente a LV o por debajo se vuelve usable en vapor sin tocar una sola receta nuestra.
+- **8 paralelos, no más.** Es el número que pide la idea de GTL para esta familia pequeña (`docs/investigacion/leisure.md` §4.2); la familia Large Steam, más grande, se queda con 64.
+- **La escotilla ULV de entrada de fluidos se puede fabricar a mano en vapor**, igual que la de salida que ya usaba la batería de coque: mismo hueco (GTM solo la da por el ensamblador, LV), misma receta de mano (casco ULV + vidrio + resina pegajosa).
+- **El mezclador deja las escotillas de fluido opcionales** porque la mitad de sus recetas (las aleaciones en polvo) no las necesita: la estructura más barata ya sirve para el bronce, y se amplía luego sin tocar el controlador.
+- **Un solo mecanismo probado en partida por la familia** (AGENTS.md): compresor (ítem) y baño químico (fluido) procesan en partida con 8 paralelos; martillo de forja, fundición de aleación, mezclador y lavadora de mineral solo se forman y se comprueban en estático, porque corren el mismo `SteamParallelMultiblockMachine` ya probado.
 
 - La piedra de la perforadora es inerte y se puede tirar. En LV puede ir al lodo de perforación y en MV a la centrífuga, como hace GTM.
 - Los plantones sobrantes van a compostaje (bolas de planta en LV) o a biomasa más adelante.
