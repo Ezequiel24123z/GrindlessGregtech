@@ -128,29 +128,40 @@ The grid is FTB Quests' grid: one square = one unit of `x`/`y`.
 
 ## 8. Writing
 
-Written in English. One to three sentences, seventy words at most. The voice is that of someone who has already played: it says what the thing does here and the trap worth knowing about.
+Written in English. One to three short sentences, seventy words at most.
 
-- **First sentence:** what it is or what it does in this pack. **Second:** the GT mechanic that catches people out (the vent, the boiler that explodes, the macerator that only gives the first output).
+**The voice** (the user, 2026-10-25, translated from Spanish: "more human, a bit more humorous, not too much, less 'an AI made this'"): a friendly engineer who has done this run before and talks to you across the workbench. Plain words, a little dry, sometimes amused. It tells you what the thing does in this pack, the catch worth knowing about, and now and then a small joke.
+
+- **Humour:** light and occasional, about one quest in four. Understatement, a wink at GregTech's habits (another hull, another trip to the EBF), at the Grindless deal (you will never mine this by hand), at the planets (your diesel generator on the Moon). Never a pun in a title, never sarcasm at the player, no memes, no emoji.
+- **Rhythm:** vary it. A short sentence after a long one. Not every sentence hangs on a colon or a semicolon, and not every quest has the same two-sentence shape.
+- **Talk like a person:** contractions ("you'll", "it's", "don't"), "you" for the player, everyday verbs. Say what you'd say to a friend at the screen, not what a manual would print.
+- **First sentence:** what it is or what it does in this pack. **Then:** the catch (the vent, the boiler that explodes, the fuel that won't burn on the Moon) or the reason it matters. A joke, if any, rides on one of those; it never replaces them.
 - **No quantities in the text.** Neither "three copper and one tin" nor "two ingots per plate". If the number matters: "EMI shows the ratio".
-- **No recipes recited.** The text does not list ingredients with numbers; the tasks and EMI already do that.
+- **No recipes recited.** The text does not list ingredients or steps with numbers; the tasks and EMI already do that. Naming the long road is fine ("the EBF twice, a chlorine bath and the freezer"); copying it isn't.
 - **No report voice.** No "here the recipe asks for X instead of Y", "stays as the mod made it", "every byproduct has an honest end": that is design language, not player language.
 - **Highlighted names** with `&6Name&r`, only the item or machine of the quest.
 - **No long dashes** (— or –) and no "a - b" as a stand-in: use two sentences.
 - **Titles** short and concrete: the name of the thing or what you get ("Coke Oven Bricks", "Sulfur from the Nether", "No More Pickaxe"). No wordplay that hides the content.
 
+### What does not need a quest
+
+A quest earns its place by teaching something about **this** pack. Cut the ones that only teach what any GregTech or AE2 player already knows and that the pack doesn't change: transformers (LV and MV already explain them), cables and voltage tiers, "AE2 can link dimensions", a machine that works exactly as in GregTech. If the pack adds a twist, it goes in one sentence of the quest it belongs to ("the seed for the lunar bridge has to be made on the Moon"). Keep the id of every quest that stays (players keep their progress); when one goes, its children depend on its parents.
+
 ### Banned phrases
 
-The linter flags these (full list in `tools/quests/lint-config.json`): *nothing fancy, nothing exotic, the whole trick, that's really, simple, cheap…, the heart of, for good, on autopilot, the first real, the base has ever…, keep it fed, runs on its own, worth building the moment, embark, delve, dive into, seamless, game-changer, powerhouse, unlock the, unleash, whether you're, it's worth noting, in this quest, this quest will, let's, buckle up, a testament, elevate, journey awaits, the possibilities, say goodbye, just like that, and that's it, trusty, humble, behold*.
+The linter flags these (full list in `tools/quests/lint-config.json`): *nothing fancy, nothing exotic, the whole trick, that's really, simple, cheap…, the heart of, for good, on autopilot, the first real, the base has ever…, keep it fed, runs on its own, worth building the moment, embark, delve, dive into, seamless, game-changer, powerhouse, unlock the, unleash, whether you're, it's worth noting, in this quest, this quest will, let's, buckle up, a testament, elevate, journey awaits, the possibilities, say goodbye, just like that, and that's it, trusty, humble, behold*, and since 2026-10-25 *this tab, this chapter, crucially, importantly, ensure, utilize, leverage*.
 
-Also, things the linter does not catch: rhetorical triplets ("wood, rubber wood and crops, all on autopilot"), "no X, no Y, just Z", sentences that start with "Simple", "Just", "Every…" to sound emphatic, and moral closers ("That's the Steam Age done").
+Also, things the linter does not catch: rhetorical triplets ("wood, rubber wood and crops, all on autopilot"), "no X, no Y, just Z", "not only X but Y", sentences that start with "Simple", "Just", "Every…" to sound emphatic, moral closers ("That's the Steam Age done"), and the same "Thing: explanation." pattern in every quest.
 
-### Before and after (Steam)
+### Before and after
 
 | Before | After |
 |---|---|
 | "Bronze is just copper and tin, nothing exotic. A mortar and a casting mold get you plates and gears before you ever touch a real press." (also false: bronze does not use a mold) | "Copper dust and tin dust mixed in the grid give bronze dust; EMI shows the ratio. Smelt it into ingots and hammer those into plates." |
-| "Coal or charcoal in, steam out. The Low-Pressure Solid Boiler is the heart of every machine you're about to build. Keep it fed and the whole line runs on its own." | "Bronze plates, bricks and a furnace. Fill it with water before the first fuel goes in: water poured into a dry, hot boiler blows it up." |
-| "Tin carries current well enough for LV, and a skin of rubber keeps it from shorting against the frame. Simple, cheap, reliable." | "A tin plate and the wire cutter give tin wire; wire plus a rubber sheet is a tin cable, the LV power line." |
+| "Coal or charcoal in, steam out. The Low-Pressure Solid Boiler is the heart of every machine you're about to build. Keep it fed and the whole line runs on its own." | "Bronze plates, bricks and a furnace. Fill it with water before the first fuel goes in: a dry, hot boiler that suddenly gets water doesn't stay a boiler for long." |
+| (EV, Lunar Base) "Titanium only exists up here. This tab makes the Moon work without you, then finds the way to Mars. Ender chests and ender tanks work between Earth and the Moon: the cheap link for a few stacks. A whole factory crosses over the AE2 bridge." | "Every bit of titanium in this pack is up here, under grey dust and a black sky. First the Moon learns to run without you. Then you point a rocket at Mars." |
+| (EV, Vacuum: Nothing Burns) "Combustion generators, gas turbines and boilers only burn where there is air: Earth, the Nether, the End and the building worlds. Up here they sit idle, and EMI lists the worlds each fuel burns in." | "No air, no fire. Bring a diesel generator up here and it'll just sit there, looking embarrassed. Methalox and rocket fuel carry their own oxygen; EMI lists where everything else burns." |
+| (EV, Titanium) "The Moon's ilmenite is the only titanium in the pack. At home the EBF turns it into rutile, chlorine and carbon make titanium tetrachloride, magnesium reduces that in the EBF, and the vacuum freezer cools the hot ingot." | "The Moon's ilmenite is the only titanium you'll ever get. Back home it takes the long way round: the EBF twice, a chlorine bath and the vacuum freezer. Clear your afternoon." |
 
 ## 9. The journey in the book
 

@@ -19,6 +19,13 @@
     { "quest": "76D281E9D9C6FD20", "why": "Rocket Fuel (hv_age): the launch threshold of 8 buckets is not a recipe amount and EMI does not show it." }
   ],
   "bannedPhrases": [
+    "this tab",
+    "this chapter",
+    "crucially",
+    "importantly",
+    "ensure",
+    "utilize",
+    "leverage",
     "nothing fancy",
     "nothing exotic",
     "the whole trick",
