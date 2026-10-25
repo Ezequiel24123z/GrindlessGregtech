@@ -30,7 +30,7 @@
 		{
 			dependencies: ["38EE187ED07F2279"]
 			description: [
-				"AE2 runs on Forge Energy and your factory makes EU. A GregTech &6Energy Converter&r switched to EU to FE with a soft mallet feeds the &6Energy Acceptor&r and settles the argument."
+				"AE2 runs on Forge Energy and your factory makes EU, but they get along fine: GregTech cable plugged straight into the &6Energy Acceptor&r powers the network. No converter, no soft mallet."
 				"An energy cell carries the network through a short blackout."
 			]
 			icon: "ae2:energy_acceptor"
@@ -38,7 +38,6 @@
 			rewards: [{ id: "130A91E682AF3BF3", type: "xp", xp: 15 }]
 			tasks: [
 				{ id: "6CBB40E7B7DE7CD1", item: "ae2:energy_acceptor", type: "item" }
-				{ id: "7E6FCF44149DEE94", item: "gtceu:lv_1a_energy_converter", optional_task: true, type: "item" }
 				{ id: "1CA5B1C8F56FD437", item: "ae2:energy_cell", optional_task: true, type: "item" }
 			]
 			title: "Powering the Network"
