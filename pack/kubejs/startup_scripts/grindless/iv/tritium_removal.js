@@ -333,6 +333,8 @@
       .recipeType(TYPE)
       .recipeModifier(G.noVoiding.modifier(KEEP, nightPricing()), true)
       .beforeWorking(G.noVoiding.beforeWorking(KEEP))
+      // the night price is set when a run starts: refresh it when GTM would restart a cached run (lib/fresh_run.js, IV-B2's finding)
+      .afterWorking(G.freshRun.afterWorking('tritium removal facility'))
       .appearanceBlock(GTBlocks.CASING_ALUMINIUM_FROSTPROOF)
       .pattern(function (def) { return Pat.build(def, SPEC) })
       .additionalDisplay(display)

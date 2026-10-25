@@ -211,6 +211,8 @@
       .rotationState(RotationState.NON_Y_AXIS)
       .recipeType('vein_drilling')
       .recipeModifier(modifier, true)
+      // the wings' price is set when a run starts: refresh it when GTM would restart a cached run (lib/fresh_run.js, IV-B2's finding)
+      .afterWorking(G.freshRun.afterWorking('EV tripod drill'))
       .appearanceBlock(GTBlocks.CASING_TITANIUM_STABLE)
       .pattern(function (def) { return Pat.build(def, SPEC) })
       ["tooltips(net.minecraft.network.chat.Component[])"]([
