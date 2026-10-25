@@ -54,7 +54,8 @@
 //     sun price at night)
 //   the mirrored works (x 11574, built flipped, the second copy of the works):
 //       works_mirror_sky      GTM formed it flipped; clear sky = sun; a stone over its far mirror (5 cells across, on its own side) =
-//                             shaded with 1 covered; the stone away = sun again
+//                             shaded with 1 covered; the stone away = sun again (Level#canSeeSky reads the sky light, so each read
+//                             waits for the light engine, up to 40 ticks)
 // var + function everywhere (this Rhino throws "redeclaration of var" for const/let inside functions that run more than once).
 (function () {
   var TAG = 'GGTEST|'
@@ -1207,6 +1208,7 @@
         check('works_window', m.windowRun.eut === 1920 && run.id === BRICKS_RECIPE && run.eut === 7680, 'day run ' + runText(m.windowRun) +
           ' ended, then night and dust in the same tick: ' + runText(run) + ' (wanted 7680 EU/t)')
         m.step = 'wf_prep'
+        m.mark = S.t
       } else if (S.t - m.mark > 200) {
         check('works_window', false, 'no run after the dust came back at night: ' + recipeState(m))
         m.step = 'window_done'
@@ -1217,6 +1219,14 @@
     // day comes and the bus is emptied. afterWorking runs before GTM puts the outputs away, so only its check with doubled outputs sees
     // that the next run cannot start, and marks the logic dirty
     if (m.step === 'wf_prep') {
+      // the night run of works_window must end first: its 4 bricks go into the bus when it ends
+      if (!rlg.isIdle()) {
+        if (S.t - m.mark > 200) {
+          check('works_window_full', false, 'the night run of works_window did not end: ' + recipeState(m))
+          m.step = 'window_done'
+        }
+        return
+      }
       var inv = P.outBus.getInventory()
       var n = inv.getSlots()
       for (var i = 0; i < n - 1; i++) inv.setStackInSlot(i, Item.of('minecraft:cobblestone', 64))
@@ -1274,15 +1284,28 @@
       m.cover = mirrorCover(m)
       setBlock(m.cover.x, m.cover.y, m.cover.z, COVER, '')
       m.step = 'covered'
+      m.mark = S.t
       return
     }
+    // Level#canSeeSky reads the sky light: a placed or removed block shows once the light engine has run (a tick or two)
     if (m.step === 'covered') {
       var covered = M().works.sunState(m.ctrl)
+      if (covered.key !== 'shaded' && S.t - m.mark < 40) return
+      m.covered = covered
+      m.coveredAfter = S.t - m.mark
       setBlock(m.cover.x, m.cover.y, m.cover.z, 'minecraft:air', '')
+      m.step = 'uncovered'
+      m.mark = S.t
+      return
+    }
+    if (m.step === 'uncovered') {
       var after = M().works.sunState(m.ctrl)
-      check('works_mirror_sky', m.flipped && m.clearState.key === 'sun' && covered.key === 'shaded' && covered.covered === 1 && after.key === 'sun',
+      if (after.key !== 'sun' && S.t - m.mark < 40) return
+      var c = m.covered
+      check('works_mirror_sky', m.flipped && m.clearState.key === 'sun' && c.key === 'shaded' && c.covered === 1 && after.key === 'sun',
         'formed flipped=' + m.flipped + '; clear sky: ' + m.clearState.key + ' (covered ' + m.clearState.covered + '); a stone over its far mirror at ' +
-        m.cover.x + ',' + (m.cover.y - 1) + ',' + m.cover.z + ': ' + covered.key + ' (covered ' + covered.covered + '); stone taken away: ' + after.key)
+        m.cover.x + ',' + (m.cover.y - 1) + ',' + m.cover.z + ': ' + c.key + ' (covered ' + c.covered + ', read ' + m.coveredAfter + ' t after); stone taken away: ' +
+        after.key + ' (covered ' + after.covered + ', read ' + (S.t - m.mark) + ' t after)')
       m.step = 'day_done'
     }
   }
