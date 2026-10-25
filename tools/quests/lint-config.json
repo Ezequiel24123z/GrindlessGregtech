@@ -10,7 +10,6 @@
   "direction": { "default": "ltr" },
   "allowRoots": {},
   "allowLongEdges": [
-    { "from": "35719B747A75F7B6", "to": "5615E54AF782990A", "why": "Gasoline to Space Suit (hv_age): the suit chemistry comes from Gasoline at the left, and the suit is only needed at the Moon, so the quest sits next to it." }
   ],
   "manyRewardsOk": [
     { "quest": "047B55ED9C952BC9", "why": "The Neutronium Toolbox (welcome): one reward per tool, on purpose (docs/quests.md)." }
