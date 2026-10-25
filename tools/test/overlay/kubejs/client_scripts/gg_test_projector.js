@@ -7,7 +7,10 @@
 //     field `age`, so the counter is wound back 80 -> 20, as in gg_test_quest_book.js);
 //   - hides the HUD for the screenshots (options.hideGui) and puts it back at the end;
 //   - on each request of the server half (shared 'token'), with the crosshair on the controller:
-//       hologram  screenshot gg_projector_before, the use key held one tick (Minecraft's own handleKeybinds -> startUseItem ->
+//       hologram  waits (up to DRAW_MAX ticks) until the client has drawn the render sections around the controller: right after
+//                 the teleport it has the blocks (the crosshair finds the controller) but, on the bench's software renderer,
+//                 may not draw them for a while, and the screenshots would show the sky alone;
+//                 screenshot gg_projector_before, the use key held one tick (Minecraft's own handleKeybinds -> startUseItem ->
 //                 useItemOn, as a mouse click), waits for the projector's client script to show GTM's preview
 //                 (global.grindless.projectorClient.shown), then gg_projector_hologram; the two are compared on a grid of samples
 //       build     the sneak key held, the use key held one tick, sneak released: the server half checks what was built;
@@ -22,6 +25,7 @@
   var TAG = 'GGTEST|projector|'
   var HOLD_MAX_MS = 15 * 60 * 1000
   var WAIT_MAX = 200
+  var DRAW_MAX = 500
   var c = { holding: false, since: 0, errors: 0, ageField: null, gaveUp: false, token: '', job: null, view: null }
 
   function val(key) {
@@ -118,6 +122,39 @@
     return at === want ? '' : 'looking at ' + at + ', not the controller ' + want
   }
 
+  // true/false: the render sections of the controller, both sides of the structure and the floor under the player are built
+  // (Embeddium answers LevelRenderer#isChunkCompiled from its own sections, as in gg_test_gallery.js); null: unknown
+  function drawn(mc) {
+    try {
+      var lr = field(mc, ['levelRenderer', 'f_91060_'])
+      var at = val('ctrl').split(',')
+      if (lr === null || typeof lr.isChunkCompiled !== 'function' || at.length !== 3) return null
+      var BlockPos = Java.loadClass('net.minecraft.core.BlockPos')
+      var x = Number(at[0])
+      var y = Number(at[1])
+      var z = Number(at[2])
+      var probes = [[x, y, z], [x + 2, y, z], [x - 2, y, z], [x, y - 2, z + 4]]
+      for (var i = 0; i < probes.length; i++) {
+        if (lr.isChunkCompiled(new BlockPos(probes[i][0], probes[i][1], probes[i][2])) !== true) return false
+      }
+      return true
+    } catch (e) {
+      return null
+    }
+  }
+
+  // true/false: no render section waits to be rebuilt (LevelRenderer#hasRenderedAllChunks, which Embeddium answers from its own
+  // build queue); null: unknown. Lets the screenshots after the build show the new blocks.
+  function rendered(mc) {
+    try {
+      var lr = field(mc, ['levelRenderer', 'f_91060_'])
+      if (lr === null || typeof lr.hasRenderedAllChunks !== 'function') return null
+      return lr.hasRenderedAllChunks() === true
+    } catch (e) {
+      return null
+    }
+  }
+
   function answer(text) {
     S.put('result', text)
     log('client_' + c.job.kind, 'NOTE', text)
@@ -146,7 +183,14 @@
         var why = aimed(mc)
         if (why !== '' && j.t < WAIT_MAX) return
         if (why !== '') { answer('FAIL the crosshair never reached the controller: ' + why); return }
-        if (j.t < 20) return
+        if (j.drawnAt === undefined) {
+          var d = drawn(mc)
+          if (d === false && j.t < DRAW_MAX) return
+          j.drawnAt = j.t
+          j.terrain = d === true ? 'terrain drawn ' + j.t + ' ticks after the request' : d === false ? 'terrain still not drawn after ' + j.t +
+            ' ticks (the screenshots show the hologram without the real blocks)' : 'terrain drawing state unknown'
+        }
+        if (j.t - j.drawnAt < 20) return
         grab(mc, 'gg_projector_before')
         j.before = sample(mc)
         j.shown0 = projector().shown
@@ -173,7 +217,7 @@
         var ratio = changed(j.before, sample(mc))
         var pc = Math.round(ratio * 1000) / 10
         answer((ratio >= 0.02 ? 'PASS' : 'FAIL') + ' right-click: ' + projector().last + '; ' + pc + ' % of the sampled pixels changed against the screenshot before the click' +
-          ' (gg_projector_before.png -> gg_projector_hologram.png)')
+          ' (gg_projector_before.png -> gg_projector_hologram.png); ' + j.terrain)
       }
       return
     }
@@ -208,8 +252,9 @@
       }
       if (j.step === 'settle') {
         if (j.t < 40) return
+        if (rendered(mc) === false && j.t < 240) return
         grab(mc, 'gg_projector_built')
-        answer('PASS sneak key held, use key held one tick, sneak released; screenshot gg_projector_built.png')
+        answer('PASS sneak key held, use key held one tick, sneak released; screenshot gg_projector_built.png after ' + j.t + ' ticks')
       }
       return
     }
@@ -239,6 +284,7 @@
       }
       if (j.step === 'settle') {
         if (j.t < 20) return
+        if (rendered(mc) === false && j.t < 220) return
         grab(mc, 'gg_projector_hidden')
         answer('PASS a second right-click hides it: ' + projector().last + '; screenshot gg_projector_hidden.png')
       }
