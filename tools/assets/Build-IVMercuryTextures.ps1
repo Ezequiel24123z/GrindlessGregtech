@@ -25,7 +25,8 @@
     tungstensteel bezel onto the focal furnace, a crucible on the hearth with the charge where the focus lands and two thin sun
     rays from the heliostats coming in from the port's top corners; under it the glass evaporation bell and two lamps (focus,
     bell). Working: the spot breathes white -> yellow under its halo, a bright pulse runs down each ray while the rest shimmers,
-    the focus lamp is lit. Idle: a dark port onto the cold crucible and its dull charge, no rays, lamps dark.
+    the focus lamp is lit. Idle: the cold furnace through the port (a dim chamber, the crucible and its dull charge), no rays,
+    lamps dark.
   Mercury solar field (gtceu:mercury_solar_field), drawn for the heat-shield brick: a control panel with a thin-film panel icon
     (indigo gallium arsenide in 3 px strips parted by a silver busbar, the look of block/iv/thin_film_cells.png, tilted
     towards the sun on a leg and a strut), the sun lamp and a vertical power bar. Working: the sun lamp is lit, the bar fills from
@@ -314,16 +315,18 @@ $DrZone = New-Zone (@(, $DrTip) + $DrHot + $DrSparks + (Get-SunPoints $DrSun[0] 
 # ============================================================================================
 #   tungstensteel 0 (highlight) .. 5 (deepest)     port: k inside, h hearth     crucible: c lit, d body, m shade; q the cold charge
 #   bell: g glass, j glass in shade, p inside     lamps: b recess, l focus lamp off (lit: N), a bell lamp off (amber)
-#   (k, h and the crucible are the only letters that change between idle and working: dark when idle, lit by the focus when working)
+#   (k, h and the crucible are the only letters that change between idle and working: a dim cold chamber when idle, lit by the
+#   focus when working)
 #   the focus: W white-hot, X pale yellow, Y yellow, Z deep yellow, V orange, U deep orange
 $TsSpec = '0=B6B8DA 1=9496BE 2=7678A2 3=5C5E84 4=46486A 5=34364F'
 $WkCommonSpec = @'
-q=4A2E26 g=C4E4F0 j=86AFC2 p=22303A b=22233A l=1E4029 a=4A3418
+q=7A4436 g=C4E4F0 j=86AFC2 p=22303A b=22233A l=1E4029 a=4A3418
 W=FFFFF4 X=FFF2C0 Y=FFDE78 Z=FFBE48 V=F2963A U=C8682A
 '@
 $WkWorkSpec = 'k=2C1C1C h=4C3026 c=E0A46A d=A45E36 m=5E3624'
-# idle: the port is dark but the cold crucible on its hearth stays readable (ceramic greys, the charge a dull ore red)
-$WkIdleSpec = 'k=262433 h=4A4446 c=B4ACA8 d=8A827E m=625B58'
+# idle: the furnace is cold but not black, so the port reads as a chamber and the crucible on its hearth stands out (ceramic
+# greys, the charge a dull ore red)
+$WkIdleSpec = 'k=3C3A50 h=6E6668 c=E0D8D2 d=AAA29C m=7A7270'
 $WkPalOn = New-Pal ($LampSpec + ' ' + $TsSpec + ' ' + $WkCommonSpec + ' ' + $WkWorkSpec)
 $WkPalOff = New-Pal ($LampSpec + ' ' + $TsSpec + ' ' + $WkCommonSpec + ' ' + $WkIdleSpec)
 
@@ -360,7 +363,7 @@ function New-SolarWorksFrame {
     $c = New-Canvas; $e = New-Canvas
     $P = if ($Active) { $WkPalOn } else { $WkPalOff }
     Write-Map $c 0 0 $WkBase $P
-    if (-not $Active) { return @{ Color = $c; Emi = $e } }   # idle: a dark port, a cold charge, no rays, lamps dark
+    if (-not $Active) { return @{ Color = $c; Emi = $e } }   # idle: the cold furnace, no rays, lamps dark
     $f = $T % 8
 
     # ---- the focal spot breathes white -> yellow; the halo over it stays two steps dimmer

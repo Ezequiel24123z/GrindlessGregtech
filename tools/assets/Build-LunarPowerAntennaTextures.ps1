@@ -28,7 +28,7 @@
                         at a tiny red-orange Mars in the window's far corner, its feed horn on a boom at the focus; the base strip
                         carries purple EV stripes, the data LED and the lamp. 8 frames, frametime 3: radio wave arcs leave Mars one
                         after another and close in on the dish, the feed horn glows when one arrives, the data LED blinks and two
-                        stars twinkle. Idle: the dish a shade dimmer, no arcs, dark data LED, red lamp.
+                        stars twinkle. Idle: the dish in starlight, no arcs, dark data LED, red lamp.
 
   Run from the repo root (PowerShell 5.1 blocks unsigned scripts by default; this bypass only affects that process):
     powershell -NoProfile -ExecutionPolicy Bypass -File tools\assets\Build-LunarPowerAntennaTextures.ps1
@@ -389,13 +389,11 @@ function New-DeepSpaceAntennaFrame {
         }
     }
 
-    # Mars, the dish, the boom and the feed (the dish is dimmed while the antenna is off, but stays readable)
+    # Mars, the dish, the boom and the feed (the dish stays fully lit while the antenna is off: the face reads by it)
     for ($y = 0; $y -lt 16; $y++) { for ($x = 0; $x -lt 16; $x++) {
         $ch = Get-MapChar $AntennaScene $x $y
         if ($ch -eq '.') { continue }
-        $col = $P[$ch]
-        if (-not $Active -and $ch -match '[0-6C-E]') { $col = Shade $col 0.85 }
-        Set-Px $c $x $y $col
+        Set-Px $c $x $y $P[$ch]
     } }
     if ($Active) {
         # the feed horn glows as an arc arrives and fades on the next frame; the boom carries it to the dish
