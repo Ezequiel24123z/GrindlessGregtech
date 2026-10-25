@@ -18,11 +18,11 @@ powershell -NoProfile -ExecutionPolicy Bypass -File tools\test\Invoke-GGTest.ps1
 Useful parameters (all optional):
 
 - `-Commands 'cmd1;;cmd2'`: RCON commands, in order, or `-CommandsFile` (one per line). **With `-File`, PowerShell does not split lists on commas: use `;;`.**
-- `-WaitForLog 'regex1;;regex2@@90'`: expressions that must appear in `logs\kubejs\server.log` or `latest.log` (the `@@90` sets their deadline in seconds; default `-WaitTimeoutSec 180`).
-- `-Flat` flat world; `-Seed`; `-ServerXms/-ServerXmx` (4G/7G); `-ServerProp 'difficulty=peaceful'`.
-- `-BootTimeoutSec` (900), `-ClientTimeoutSec` (1800), `-CommandTimeoutSec` (300), `-LockWaitMin` (120).
+- `-WaitForLog 'regex1;;regex2@@90'`: expressions that must appear in `logs\kubejs\server.log` or `latest.log` (the `@@90` sets their deadline in seconds; default `-WaitTimeoutSec 120`, maximum 180 per marker).
+- `-Flat` flat world; `-Seed`; `-ServerXms/-ServerXmx` and `-ClientXms/-ClientXmx` (1G/4G each, maximum heap 4 GB); `-ServerProp 'difficulty=peaceful'`.
+- `-BootTimeoutSec` (420), `-ClientTimeoutSec` (600), `-CommandTimeoutSec` (60): defaults are also the maximums. `-NativeTimeoutSec` (600 maximum) is a shared deadline from the first Minecraft launch, not a fresh allowance per stage/suite. Server shutdown has a separate 30-second grace. `-LockWaitMin` defaults to 5 (maximum 15).
 - `-SettleSec` (15): after `Done`, the server waits at least this long before RCON/`-Commands`, and longer while a datapack reload is in progress (e.g. the one that Additional Placements triggers ~2 s after `Done` and that restarts the KubeJS scripts). Its own stage `settle` (`results\server\settle.txt` lists what was detected); `0` disables it. If a reload starts later than the minimum, raise it.
-- `-Slots` (2): how many Minecraft JVMs can run at the same time on the PC; `-Slots 1` = just one, as before. `-SlotMinFreeGb` (9): available RAM needed to share the PC (see "The home PC").
+- `-Slots 1` is mandatory: one Minecraft JVM globally. `-SlotMinFreeGb` (8 minimum): available RAM required even for the first run, checked again just before launch (see "The home PC").
 - `-ClientRenderer mesa|stub` (default `mesa`) and `-ClientExclude 'regex;;regex'` (only useful with `stub`; see below).
 - `-Strict` also fails on WARN stages, ERROR lines that are not allowed, or KubeJS errors.
 - `-SkipRefresh` (only if the index is already fresh: the bench checks this before uploading and warns if it is not), `-PackDir`, `-OverlayDir`, `-OutDir`, `-ShowWarnings`.
@@ -38,7 +38,7 @@ The home PC is driven over SSH (Windows session 0: no monitor and no desktop), a
 - **Real LWJGL**: HeadlessMC turns on its stub when it runs with `--offline` and an "offline" account; a fake account from another provider in `hmc\home-mesa\.auth` avoids it (the game only logs an authentication 401, which is in the allowlist).
 - **No monitor**: `earlyWindowControl = false` is set in `config\fml.toml` for the test client only (Forge's startup window aborts without a monitor).
 - **"Experimental Settings" warning**: because the pack ships worldgen data, Minecraft asks when a world is created, and mc-runtime-test cannot answer. `overlay/kubejs/startup_scripts/gg_test_client.js` presses "Yes" (a Forge tick event; KubeJS's `ClientEvents.tick` does not fire without a world).
-- To keep it light, `renderDistance:4`, `simulationDistance:5` and `maxFps:30` are forced. If the client hangs, `-ClientTimeoutSec` kills it and leaves `hang-jstack.txt` and `hang-jcmd.txt` (live threads and open screens) in `results\client\`.
+- To keep it light, `renderDistance:4`, `simulationDistance:5` and `maxFps:30` are forced. A timeout stops the owned process tree promptly and collects existing logs; it does not prolong the run to collect live JVM diagnostics.
 
 `-ClientRenderer stub` (HeadlessMC `-lwjgl`, no OpenGL) **does not work for this pack**; it is only kept as a plan B for small packs. Tested with the real client: the stub first takes down Embeddium (`Failed to create fence object`, it has no config option), then ModernFix (`StbStitcher`: `Struct cannot be cast to STBRPRect`) and then GTM's LDLib (`GL Shader Allocation Fail!`); removing all of them is no longer "the real client". By default the stub removes only Embeddium (`-ClientExclude '^embeddium[-_+0-9]'`; `-ClientExclude none` to remove nothing). `pack/` is never touched.
 
@@ -47,14 +47,14 @@ The home PC is driven over SSH (Windows session 0: no monitor and no desktop), a
 Output goes to the console and is saved in `-OutDir` (by default `…\files\test-runs\<date>-<suite>\`):
 
 - `summary.txt` / `summary.json`: stages with status and duration, `GGTEST|` lines, crash reports (with the cause), KubeJS errors, and `ERROR` lines that are not in `log-allowlist.txt`.
-- `results\server\` and `results\client\`: `logs\latest.log`, `debug.log`, `logs\kubejs\*.log`, `crash-reports\`, `hs_err\`, `kubejs-exported\` (whatever a test writes to `kubejs/exported/`), `mods.txt`, `rcon.log`, `settle.txt` (server); on the client also `client-hmc-stdout.log` and, if it hangs, `hang-jstack.txt`/`hang-jcmd.txt`. Note: HeadlessMC kills the game as soon as a crash report appears, so the folder may come out empty (the cause is then taken from the log).
+- `results\server\` and `results\client\`: `logs\latest.log`, `debug.log`, `logs\kubejs\*.log`, `crash-reports\`, `hs_err\`, `kubejs-exported\` (whatever a test writes to `kubejs/exported/`), `mods.txt`, `rcon.log`, `settle.txt` (server); on the client also `client-hmc-stdout.log`. Note: HeadlessMC kills the game as soon as a crash report appears, so the folder may come out empty (the cause is then taken from the log).
 - Exit code: `0` PASS, `1` FAIL, `2` failure of the bench itself (no results).
 
 FAIL if a stage fails, there is a crash report, or a `GGTEST|…|FAIL` line appears. `WARN` stages (KubeJS errors, forced stop) do not fail unless `-Strict` is used.
 
 ## Writing a test (overlay)
 
-Scripts in `tools/test/overlay/` are copied **on top of** the instance on the home PC and never go into the pack. Besides the tests, the overlay carries `config/voicechat/voicechat-server.properties` (`port=-1`): Simple Voice Chat then uses each server's game port, so two servers on the bench's two slots don't fight over its default UDP 24454 (the second one failed the bind and the whole server stopped). Example (`overlay/kubejs/server_scripts/gg_test_harness.js`):
+Scripts in `tools/test/overlay/` are copied **on top of** the instance on the home PC and never go into the pack. Besides the tests, the overlay carries `config/voicechat/voicechat-server.properties` (`port=-1`): Simple Voice Chat uses the server's game port rather than assuming its default UDP 24454 is free. Example (`overlay/kubejs/server_scripts/gg_test_harness.js`):
 
 ```js
 ServerEvents.customCommand('gg_ping', event => { console.info('GGTEST|PING|PASS'); return 1 })
@@ -87,7 +87,9 @@ In the `client` suite the overlay's server scripts run on the integrated server 
 ## The home PC
 
 - It only writes to `D:\GregtechGrindless` (`tools`, `cache`, `sync`, `hmc`, `incoming`, `runs`). Never to PrismLauncher, `D:\Grindless` or `.minecraft`.
-- **At most 2 JVMs at a time** (`-Slots`): each run takes a *slot*, a file `runs\.lock` (slot 0, the original lock) or `runs\.lock.1`, `.lock.2`… with PID and time (heartbeat every 30 s; expires after 60 min or when the PID no longer exists). Runs that wait queue up (FIFO) and check every 15 s. Rules: (1) the limit is min(own `-Slots`, the `-Slots` of each active run), and a run from an old version of the bench counts as exclusive; (2) to overlap with another run, you need **available** RAM (Windows' "Available" figure: free + reusable cache; the free list alone sits around 7 GB even at rest) >= `-SlotMinFreeGb` (9 GB) **minus** what the runs that are still starting their JVM are going to reserve (server 0.75·Xmx, client 6.5 GB; this is deducted for 40 s after the JVM starts, measured when the slot is taken and repeated every 15 s while waiting); (3) each slot has its own port window (slot 0: server 25565 / RCON 25575; slot 1: 25585 / 25595; …), so two runs never share a port.
+- **One Minecraft test JVM globally**, across all agents and worktrees. The scheduler's hard ceiling is one, even if a legacy caller asks for more. Runs use `runs\.lock` (PID/start time and a 30-second heartbeat); old nonzero slot files still block new work. FIFO waiting polls every 15 seconds, normally for at most 5 minutes. Coordinate a single focused probe instead of enqueueing batches; `both` remains available for an explicitly justified integration run, not an automatic follow-up.
+- **Heap and headroom:** both sides use `-Xms1G -Xmx4G`. The 4 GB limit is Java heap, **not total RSS**: metaspace, native libraries, Mesa and launcher memory are additional. Require at least **8 GB available RAM** (Windows' Available figure, not just the bare free list) before taking the slot and again before spawning Minecraft. If both memory counters fail, refuse the run rather than assume memory is free. Requests that exceed the heap/deadline limits fail explicitly before launching; do not silently raise them or retry after an out-of-memory failure.
+- **Brief runs:** explain which unproven property needs the PC; run source/static checks locally and reuse existing mechanism proofs. The total native budget is at most 10 minutes from the first JVM launch (startup included and shared by `both`); server clean shutdown gets at most 30 seconds before its owned tree is killed. RCON operations share one absolute deadline across fragmented replies. Boot, commands and marker waits also have the shorter limits above. These are hang safeguards, not target durations. Increasing the budget requires the user's approval and a deliberate policy change; no old launch scripts, manual JVMs or automatic restart chains to bypass it.
 - **Orphans**: only JVMs from runs whose slot has expired are killed (the server carries `-Dgg.run=<id>` on its command line; the client and packwiz-installer carry `runs\<id>\`). Never the JVM of another active slot, nor unrelated processes (PrismLauncher, `D:\Grindless`). Shared resources (downloads into `tools\`, Forge installation, the `sync\<pack>-<side>` directory and its copy) are protected with a system mutex; the client in slot N>0 uses its own `hmc\slotN\` (HeadlessMC's config and `.minecraft`; the first time, it installs Forge again). Any manual experiment that uses a JVM must take a slot and keep a short time limit.
 - Caches: Forge per version (`cache\forge-server`), mods per pack and side (`sync\`; packwiz-installer downloads them once), HeadlessMC's client (`hmc\`), Mesa and its private JDK (`tools\mesa`, `tools\jdk17-mesa`). Each run copies what was synced to `runs\<id>\`; the last 3 are kept.
 - A CurseForge mod that does not allow distribution makes `sync-*` fail: put its jar in `D:\GregtechGrindless\cache\manual-mods\`.
@@ -96,3 +98,5 @@ In the `client` suite the overlay's server scripts run on the integrated server 
 ## Files
 
 `Invoke-GGTest.ps1` (local entry point) · `Show-GGResults.ps1` (summary; use it to re-read an old `-OutDir`) · `log-allowlist.txt` · `overlay/` · `remote/` (`gg-common`, `gg-tools`, `gg-server`, `gg-client`, `gg-collect`, `Run-GGTest`).
+
+Run the policy regressions **locally**, without SSH or Minecraft: `powershell -NoProfile -ExecutionPolicy Bypass -File tools\test\Test-ResourcePolicy.ps1`. They cover request rejection, actual parameter defaults, legacy slot exclusion, the first-run RAM floor, unreadable counters, shared deadlines and a fragmented loopback RCON response.

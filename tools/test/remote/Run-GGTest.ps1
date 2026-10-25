@@ -40,6 +40,7 @@ try {
         $reqPath = Join-Path $runDir 'request.json'
         if (-not (Test-Path $reqPath)) { throw 'request.json missing in upload' }
         $ctl.Req = (Get-Content -LiteralPath $reqPath -Raw -Encoding UTF8) | ConvertFrom-Json
+        Assert-GGResourceRequest $ctl.Req
         $packToml = Join-Path $runDir 'pack\pack.toml'
         if (-not (Test-Path $packToml)) { throw 'pack\pack.toml missing in upload' }
         $ctl.PackInfo = Read-GGPackToml $packToml
@@ -56,15 +57,12 @@ try {
 
         $ok = Invoke-GGStage 'lock' {
             $t0 = Get-Date
-            # how many JVMs may run at once (-Slots), the RAM needed to share the PC, and what this run will need
-            $slots = 2
-            if ($req.slots) { $slots = [int]$req.slots }
-            $minFree = 9.0
-            if ($null -ne $req.slotMinFreeGb) { $minFree = [double]$req.slotMinFreeGb }
+            $slots = 1
+            $minFree = [double]$req.slotMinFreeGb
             $reserve = 0.0
             $suiteName = [string]$req.suite
-            if ($suiteName -eq 'server' -or $suiteName -eq 'both') { $reserve = [math]::Max($reserve, 0.75 * (ConvertTo-GGGb ([string]$req.serverXmx) 7)) }
-            if ($suiteName -eq 'client' -or $suiteName -eq 'both') { $reserve = [math]::Max($reserve, 6.5) }
+            if ($suiteName -eq 'server' -or $suiteName -eq 'both') { $reserve = [math]::Max($reserve, 2 + (ConvertTo-GGGb ([string]$req.serverXmx) 4)) }
+            if ($suiteName -eq 'client' -or $suiteName -eq 'both') { $reserve = [math]::Max($reserve, 2 + (ConvertTo-GGGb ([string]$req.clientXmx) 4)) }
             Enter-GGLock ([int]$req.lockWaitMin) $slots $minFree $reserve
             $killed = Stop-GGOrphans
             $freeGb = [math]::Round((Get-PSDrive D).Free / 1GB, 1)

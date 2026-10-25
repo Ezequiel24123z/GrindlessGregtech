@@ -173,10 +173,11 @@ function Invoke-GGServerSuite {
         }
 
         if ($ok) {
-            $os = Get-CimInstance Win32_OperatingSystem
-            $freeGb = [math]::Round($os.FreePhysicalMemory / 1MB, 1)
-            if ($freeGb -lt 9) { Write-GGLog "low free RAM: $freeGb GB (server uses up to $($Req.serverXmx))" 'WARN' }
             $ok = Invoke-GGStage 'boot' {
+                $freeGb = Get-GGFreeRamGb
+                if ($freeGb -lt [math]::Max(8, [double]$Req.slotMinFreeGb)) { throw "Insufficient available RAM before server launch: $freeGb GB" }
+                if (-not $global:GG.NativeBudget) { $global:GG.NativeBudget = @{ Clock = [Diagnostics.Stopwatch]::StartNew(); TimeoutSec = [int]$Req.nativeTimeoutSec } }
+                [void](Get-GGNativeTimeoutMs $global:GG.NativeBudget 1)
                 # -Dgg.run names the run in the JVM's command line (the other arguments are relative), so JVMs of a dead run can be told apart from the other slot's
                 $argLine = "-Dgg.run=$($global:GG.RunId) @user_jvm_args.txt @libraries/net/minecraftforge/forge/$($ctx.ForgeVer)/win_args.txt nogui"
                 $g = [GGProc]::Start($ctx.Java, $argLine, $inst, (Join-Path $res 'server-stdout.log'), (Join-Path $res 'server-stderr.log'), $null)
@@ -190,6 +191,7 @@ function Invoke-GGServerSuite {
                 $lastLine = ''
                 $lastPrint = 0
                 while ($true) {
+                    [void](Get-GGNativeTimeoutMs $global:GG.NativeBudget 1)
                     $exited = $g.HasExited
                     foreach ($l in $tail.ReadNew()) {
                         $lastLine = $l
@@ -234,6 +236,7 @@ function Invoke-GGServerSuite {
                 $verdict = ''
                 $sw = [Diagnostics.Stopwatch]::StartNew()
                 while ($true) {
+                    [void](Get-GGNativeTimeoutMs $global:GG.NativeBudget 1)
                     $exited = $ctx.Proc.HasExited
                     foreach ($l in $tail.ReadNew()) {
                         $msg = Add-GGSettleLine $state $l $sw.Elapsed.TotalSeconds
@@ -267,8 +270,9 @@ function Invoke-GGServerSuite {
                     $deadline = (Get-Date).AddSeconds(90)
                     $lastErr = ''
                     while ($true) {
+                        $connectTimeout = Get-GGNativeTimeoutMs $global:GG.NativeBudget 10000
                         try {
-                            $ctx.Rcon = [GGRcon]::Connect('127.0.0.1', $ctx.RconPort, $ctx.RconPw, 10000)
+                            $ctx.Rcon = [GGRcon]::Connect('127.0.0.1', $ctx.RconPort, $ctx.RconPw, $connectTimeout)
                             break
                         } catch {
                             $lastErr = $_.Exception.Message
@@ -288,18 +292,20 @@ function Invoke-GGServerSuite {
                     $bad = @()
                     $i = 0
                     foreach ($c in $commands) {
+                        $commandBudget = Get-GGNativeTimeoutMs $global:GG.NativeBudget ($cmdTimeout * 1000)
                         $i++
                         if ([Text.Encoding]::UTF8.GetByteCount($c) -gt 1440) { $bad += "#$i too long (>1440 bytes)"; continue }
                         Write-GGLog "rcon> $c"
                         $t0 = Get-Date
                         $reply = $null
                         try {
-                            $reply = $ctx.Rcon.Command($c, $cmdTimeout * 1000)
+                            $reply = $ctx.Rcon.Command($c, $commandBudget)
                         } catch {
                             $err = $_.Exception.Message
                             if ($ctx.Proc.HasExited) { $bad += "#$i '$c': server died ($err)"; break }
                             $bad += "#$i '$c': $err"
-                            try { $ctx.Rcon.Dispose(); $ctx.Rcon = [GGRcon]::Connect('127.0.0.1', $ctx.RconPort, $ctx.RconPw, 10000) } catch { break }
+                            $connectTimeout = Get-GGNativeTimeoutMs $global:GG.NativeBudget 10000
+                            try { $ctx.Rcon.Dispose(); $ctx.Rcon = [GGRcon]::Connect('127.0.0.1', $ctx.RconPort, $ctx.RconPw, $connectTimeout) } catch { break }
                             continue
                         }
                         $secs = ((Get-Date) - $t0).TotalSeconds
@@ -329,6 +335,7 @@ function Invoke-GGServerSuite {
                     $sw = [Diagnostics.Stopwatch]::StartNew()
                     $lastPrint = 0
                     while ($true) {
+                        [void](Get-GGNativeTimeoutMs $global:GG.NativeBudget 1)
                         $exited = $ctx.Proc.HasExited
                         foreach ($t in $tails) {
                             foreach ($line in $t.Tail.ReadNew()) {
@@ -379,10 +386,10 @@ function Invoke-GGServerSuite {
                         Set-GGStage 'SKIP' 'boot did not finish: JVM killed'
                     } else {
                         try { $g.WriteLine('stop') } catch {}
-                        if (-not $g.WaitForExit(180000)) {
+                        if (-not $g.WaitForExit(30000)) {
                             Stop-GGTree $g.Id
                             [void]$g.WaitForExit(15000)
-                            Set-GGStage 'WARN' 'did not stop within 180s, force-killed'
+                            Set-GGStage 'WARN' 'did not stop within 30s, force-killed'
                         } elseif ($g.ExitCode -ne 0) {
                             Set-GGStage 'WARN' ("stopped, exit code {0}" -f $g.ExitCode)
                         } else {
