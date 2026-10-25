@@ -18,16 +18,17 @@
 //   2  separation  three recipes; the plant runs the one its inputs fit:
 //                    platinum           1 sludge + nitration mixture, ammonium chloride and calcium -> 6 platinum, gold, silicon dioxide,
 //                                       calcium chloride, 6 platinum slag and the leftovers (palladium-rich ammonia, nitrogen dioxide,
-//                                       diluted sulfuric acid, a little palladium metal dust, iridium metal residue, rarest metal mixture)
+//                                       diluted sulfuric acid, a little palladium metal dust)
 //                    palladium          palladium-rich ammonia, palladium metal dust, ammonia and formic acid -> palladium
-//                    rhodium_ruthenium  platinum slag and the reagents of the rhodium and the ruthenium lines -> rhodium, ruthenium,
-//                                       rarest metal mixture and the leftovers (zinc sulfate, salt, chlorine, ammonia, water, potassium)
+//                    rhodium_ruthenium  platinum slag and the reagents of the rhodium and the ruthenium lines -> rhodium, ruthenium and
+//                                       the leftovers (zinc sulfate, salt, chlorine, ammonia, water, potassium)
 //   3  iridosmine  (IV) Mercury's iridosmine -> iridium and osmium, 3 : 1: IV-B2's oxidative fusion and GT--'s iridium and osmium chain,
 //                  with the osmium tetroxide, the chlorine and the ammonia kept inside (docs/eras/iv.md, "Family steps")
 // Every recipe is generated from the loose line's own recipes (server_scripts/grindless/ev/platinum_plant.js): the same ratios and the
 // SAME ENERGY, the sum of the stages it replaces, with the loops run to the end. No discount and no parallels. Its condition is the
-// electrode in the input bus and a destination for every output: if a bus or a hatch is full, the plant stops. The iridium and osmium
-// mixtures of modes 1 and 2 still come out (Earth's platinum line); mode 3 refines Mercury's iridosmine.
+// electrode in the input bus and a destination for every output: if a bus or a hatch is full, the plant stops. Earth's platinum line
+// gives no iridium or osmium (docs/eras/iv.md decision 5: data/grindless/tables/offworld_only.json strips the iridium metal residue and
+// the rarest metal mixture from it), so modes 1 and 2 give none; mode 3 refines Mercury's iridosmine.
 //
 // Machine class: GTM's plain electric multiblock (WorkableElectricMultiblockMachine), so its overclock is GTM's.
 //
