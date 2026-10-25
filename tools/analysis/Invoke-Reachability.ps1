@@ -26,6 +26,13 @@
 .PARAMETER Explain    Prints the full derivation of targets whose id/name contains this text.
 .PARAMETER Detail     Prints the derivation of every target.
 .PARAMETER PackDir    Pack to upload (default the repo's; passed through as-is to Invoke-GGTest.ps1).
+.PARAMETER Table      (obtain) Regenerates the pack's hidden table, pack\kubejs\data\grindless\tables\hidden_until.json (or
+                      -TableFile), from the dump: B groups with their era, C groups with the recipes to remove, merged with the
+                      recipes the file already removed. The step's hiding check still compares against the dump's own tags, so
+                      it only agrees after a new dump with the new table (gg_dump; gg_test_hidden checks the switch in game).
+.PARAMETER TableFile  Path of the hidden table for -Table (default the pack's).
+.PARAMETER Implemented (obtain) Era up to which the pack is implemented (IMPLEMENTED_ERA in integration/hidden.js), to check that
+                      every C and later B is hidden; defaults to the dump's (info.json).
 .PARAMETER DumpTimeoutSec  Deadline for the GGTEST|dump|DONE marker after running the command (default 240).
 .PARAMETER LockWaitMin     Minutes to wait for the home PC's lock (only one JVM at a time).
 
@@ -35,6 +42,8 @@
   powershell -NoProfile -ExecutionPolicy Bypass -File tools\analysis\Invoke-Reachability.ps1 -Tier steam -SkipDump -Explain drill
 .EXAMPLE
   powershell -NoProfile -ExecutionPolicy Bypass -File tools\analysis\Invoke-Reachability.ps1 -Tier obtain -SkipDump -DumpDir <dump>
+.EXAMPLE
+  powershell -NoProfile -ExecutionPolicy Bypass -File tools\analysis\Invoke-Reachability.ps1 -Tier obtain -SkipDump -DumpDir <dump> -Table
 #>
 param(
     [Parameter(Mandatory = $true)][string]$Tier,
@@ -47,6 +56,9 @@ param(
     [string]$Explain,
     [switch]$Detail,
     [string]$PackDir,
+    [switch]$Table,
+    [string]$TableFile,
+    [string]$Implemented,
     [int]$DumpTimeoutSec = 240,
     [int]$LockWaitMin = 120
 )
@@ -198,6 +210,12 @@ if ($SkipDump) {
 $report = Join-Path $OutDir "report-$TierName.txt"
 $aargs = @($Analyzer, '--tier', $Tier, '--dump', $DumpDir, '--pass', $Pass, '--dimension', $Dimension, '--out', $report, '--json', (Join-Path $OutDir "report-$TierName.json"))
 if ($Pass -eq 'obtain' -or $Tier -eq 'obtain') { $aargs += @('--md', (Join-Path $OutDir "report-$TierName.md")) }
+if ($Table) {
+    if (-not ($Pass -eq 'obtain' -or $Tier -eq 'obtain')) { Fail '-Table only applies to the obtain step (-Tier obtain or -Pass obtain)' }
+    if (-not $TableFile) { $TableFile = Join-Path $Repo 'pack\kubejs\data\grindless\tables\hidden_until.json' }
+    $aargs += @('--table', $TableFile)
+}
+if ($Implemented) { $aargs += @('--implemented', $Implemented) }
 if ($Explain) { $aargs += @('--explain', $Explain) }
 if ($Detail) { $aargs += '--verbose' }
 Write-Step "Analysis: $Tier ($Pass)"
