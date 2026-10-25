@@ -170,7 +170,7 @@ What it gains: **the hands-free neutron window and the superacid inside.** The l
 
 ## AE2 between planets: the IV step
 
-EV leaves the ME P2P tunnel trunk, power over EU P2P (or FE P2P with GTM converters for FE devices; 32,768 EU/t crossing, measured) and the pairs the base sets up. IV goes up one step:
+EV leaves the ME P2P tunnel trunk, power over EU P2P (or FE P2P with GTM converters for FE devices; 32,768 EU/t crossing, measured with EV parts: the tunnel itself has no cap) and the pairs the base sets up. IV goes up one step:
 
 - **Two more pairs,** Earth–Venus and Earth–Mercury. Their far half is built there on the first visit, and both sides run with loaded chunks (FTB Chunks).
 - **More amperage:** EU P2P tunnels (`eup2p`) already cross dimensions and carry EV power since EV, and they pay the same toll as FE (2.5% of the energy, in AE). The IV step is amperage. Target: 131,072 EU/t crossing. eup2p's laser P2P tunnel (`LaserP2PTunnelPart`, id to verify) is the candidate. The heat engine sends home what is left over, and the reactor covers Mercury's night.
@@ -293,7 +293,7 @@ What changed while EV was built, and what the IV design has to take into account
 - **Power by site.** Fuels only burn in the dimensions with air (`data/grindless/tables/site_fuels.json`, an allowlist that GTM ORs), so "no combustion" on Venus and Mercury needs no more code. An IV machine that burns fuel in a script-added recipe calls `global.grindless.power.burnsInAir(builder)`. A byproduct that must have a destination can refuse fluid voiding, like the combined-cycle plant (`grindless.steam_outputs.no_voiding`).
 - **Weather.** `space/airless_weather.js` keeps every dimension of the other planets dry, Venus and Mercury included. If Venus's clouds should ever be weather, Venus has to be exempted there.
 - **Family veto.** A family recipe of a tier lives under `<type>/<tier>/`, and every lower machine skips the folders above its own tier; the steam machines skip every tier folder. The Tungstensteel-bit recipes that the older home drills should run (the pitchblende vein, *Route* step 2) therefore cannot live under `vein_drilling/iv/`. They go in the folder of the lowest drill meant to run them, or the veto gets an explicit exception.
-- **AE2.** EU P2P is the main power route between planets: 32,768 EU/t per pair across the bridge, measured in EV, with AE2's 2.5% toll.
+- **AE2.** EU P2P is the main power route between planets. The tunnel has no cap of its own (EUP2P passes the voltage and splits the amperage), so 16 A IV hatches at each end carry the reactor's 131,072 EU/t; AE2 takes its 2.5 % toll. The laser tunnel (`eup2p:laser_p2p_tunnel`) exists, but in stock GTM only LuV machines take laser hatches, so IV doesn't need it.
 - **GTM's HV fluid drilling rig** arrives with Mars (tungsten carbide gears), at the end of EV.
 
 ## Raising IV to the target (orchestrator, 2026-10-25)
