@@ -199,12 +199,12 @@ function New-RoasterFrame {
 # ============================================================================================
 $HeExtra = @'
 a=3F8FDC b=5AA4E6 c=78B8EE d=9ACCF2 g=BEE0F6
-n=0F1A30 o=13213B p=17283F q=1B2F48 r=1F3651 z=C8D2E8
+n=1C2C50 o=21355C p=273E68 q=2D4874 r=355484 z=EEF2FF
 1=FFFCE6 2=FFEB8A 3=FFC93C
 4=FFF6E0 5=FFC266 6=FF8A2B 7=7A3A14
 8=FFF4B8 9=E8D488
-w=E4F6FF x=9AD6F6 X=5C8FB2 Z=33485A
-l=4A4636 L=34312A
+w=E4F6FF x=9AD6F6 X=5C8FB2 Z=6E90AE
+l=6E6852 L=4C483C
 W=F2F4F7 V=AEB4BE
 h=62FF86 i=22C257 s=B52D22 t=5E1511
 '@
@@ -226,7 +226,7 @@ function New-HeliostatFrame {
     for ($y = 3; $y -le 9; $y++) { for ($x = 3; $x -le 12; $x++) {
         Set-Px $c $x $y $P[$(if ($Active) { $day[$y - 3] } else { $night[$y - 3] })]
     } }
-    if (-not $Active) { foreach ($s in @(@(4, 4), @(10, 3), @(12, 6), @(5, 7))) { Set-Px $c $s[0] $s[1] $P['z'] } }
+    if (-not $Active) { foreach ($s in @(@(4, 4), @(10, 3), @(12, 6), @(5, 7), @(11, 8), @(3, 9))) { Set-Px $c $s[0] $s[1] $P['z'] } }
 
     # the sun (emissive): a 2x2 disc with a warm rim
     if ($Active) {
@@ -242,7 +242,7 @@ function New-HeliostatFrame {
             $glint = ((($mx + $T) % 3) -eq 0)
             Set-Both $c $e $mx 10 $P[$(if ($glint) { 'w' } else { 'x' })]
         } else { Set-Px $c $mx 10 $P['Z'] }
-        Set-Px $c $mx 11 $P[$(if ($Active) { 'X' } else { 'G' })]
+        Set-Px $c $mx 11 $P[$(if ($Active) { 'X' } else { 'D' })]
     }
 
     # the rays (emissive, shimmering) - drawn before the tower so the tower stays in front
@@ -267,7 +267,8 @@ function New-HeliostatFrame {
             Set-Both $c $e $px $py $P[$hot[$k]]
         }
     } else {
-        Set-Px $c 7 5 $P['7']; Set-Px $c 8 5 $P['G']; Set-Px $c 7 6 $P['F']; Set-Px $c 8 6 $P['H']
+        # a cold receiver: bare steel with a last dull ember at its lit corner
+        Set-Px $c 7 5 $P['7']; Set-Px $c 8 5 $P['C']; Set-Px $c 7 6 $P['C']; Set-Px $c 8 6 $P['E']
     }
 
     # base strip (y13): steam gauge (x4..8) and the status LED
