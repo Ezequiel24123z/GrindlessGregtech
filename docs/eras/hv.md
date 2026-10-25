@@ -186,6 +186,10 @@ The first rocket stops being an assembler recipe and becomes a project that cros
 | Titanium | lunar ilmenite → rutile (`rutile_from_ilmenite`, EBF 1,700 K, 480 EU/t) → `titanium_tetrachloride` (2 C + rutile + 4,000 of Cl₂, 400 t) → `titanium_from_tetrachloride` (EBF 2,141 K, 480 EU/t, 800 t; + 2 Mg) → hot ingot → freezer | CO (2,000 mB per TiCl₄): methanol or tank (toxic, contained). CO₂ from rutile: inert. Wrought iron: steel. MgCl₂: `salt_from_magnesium_chloride` (3 MgCl₂ + 2 Na → Mg + 4 salt), the salt goes back to electrolysis |
 | EV circuits | boule → wafers → CPU; capacitors, inductors, diodes and RAM → assembly → workstation in cleanroom (`gtceu:micro_processor_computer`, soldering ×2); blue alloy = 4 electrotine (redstone + electrum, or saltpeter vein) + 1 silver | Acid and persulfate from the boards: MV loops. The parts leave no waste |
 
+## Convenience (counted apart from rule 7)
+
+- **Cleaning maintenance hatch at HV** (2026-10-25, a GregTech Leisure idea). GTM's `gtceu:cleaning_maintenance_hatch` moves from its UV recipe to an HV assembler recipe: auto maintenance hatch + 4 filter casings + 2 HV motors + 2 stainless steel rotors + 2 HV circuits. It gives a cleanroom to the multiblocks that take a maintenance part, which are GTM's own; ours don't take one.
+
 ## New crossings (complexity audit)
 
 - **Sulfide roaster, H₂S burner:** 1,000 mB of hydrogen sulfide from the refinery + the air and water of the sulfur burner → 1,000 mB of acid, steam and 500 mB of extra hydrogen, at 30 EU/t and 60 ticks (`grindless:sulfide_roasting/h2s`). It needs 3 input hatches and 3 output hatches, the roaster's maximum.

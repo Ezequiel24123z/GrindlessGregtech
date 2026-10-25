@@ -123,7 +123,7 @@ What it gains: it is the only machine that makes the **Lunar Landing-Site Chart*
 ### Discarded
 
 - **Big cubes** (GCYM and Star Technology's `t_large_*`): speed only. GTM brings the GCYM in IV.
-- **Universal factory** (GTL): joins machines of any type and erases the lines that give MV its identity (circuits, polymers).
+- **Universal factory** (GTL): joining machines of any type would erase the lines that give MV its identity (circuits, polymers). Reconsidered on 2026-10-25 as a convenience that keeps every step (see *Convenience*, below).
 - **Pressure and vacuum system** (GCYS): needs Java and its own networks. If needed, it comes in HV with the cracker.
 - **Multiblock combustion engine** (gap between LV and EV in GTM): 16 MV generators give 2,048 EU/t with about 85 mB/s of diesel. Not needed.
 - **GTM bedrock ore miner** (`gtceu:mv_bedrock_ore_miner`): off by default (`doBedrockOres`) and with no bedrock veins. Our vein drill already does that job with a vein sample.
@@ -137,6 +137,29 @@ What it gains: it is the only machine that makes the **Lunar Landing-Site Chart*
 | Fuels | crude → distillery (one fraction per pass; the HV tower collects them all) → fractions with sulfur → desulfurize with H₂ (LV reactor) → 5,000 of light + 1,000 of heavy → mixer → 6,000 of diesel. Biodiesel: seed oil + methanol + sodium hydroxide | H₂S: sulfuric acid (`sulfuric_acid_from_sulfide`). Refinery gas: gas turbine (160 EU/mB) or distillate (methane, ethane, helium). Naphtha: generator (320 EU/mB) or tank for the HV cracker. Biodiesel glycerol: stored for HV (with CO₂ it gives ethylene). Diesel 480 EU/mB, biodiesel 256, ethanol 192 |
 | Ethylene → PE and PVC | biomass (brewery) → distillery → 600 mB of ethanol per 1,000; ethanol + H₂SO₄ → ethylene (120 EU/t) → PE; 2 Cl₂ + ethylene → vinyl chloride → PVC | Dilute acid: distillery, 2/3 acid + water (loop). HCl: recycled (O₂ + HCl + ethylene → vinyl chloride). NaOH: bisulfate → persulfate (plates) or biodiesel catalyst. H₂: methanol and desulfurization. Wood dust from distillation (50%): phenolic board |
 | Ore → plant | vein drill → plant (water) → dusts → alloys and EBF | Stone dust (4 per ore): drilling fluid or MV centrifuge. Secondary outputs: sulfur, gallium, indium, cobalt… each to its own line |
+
+## Convenience (counted apart from rule 7)
+
+GregTech Leisure ideas with our code (2026-10-25). They save space and buses, but no line loses a step.
+
+- **Universal factories:**
+  - `gtceu:universal_processing_factory`: 11 modes (bender, wiremill, lathe, cutter, extruder, compressor, forge hammer, forming press, polarizer, laser engraver, fluid solidifier);
+  - `gtceu:universal_assembly_factory`: assembler and circuit assembler;
+  - `gtceu:universal_separation_factory`: centrifuge, electrolyzer, thermal centrifuge, macerator, sifter, extractor, electromagnetic separator;
+  - `gtceu:universal_mixing_factory`: mixer, chemical reactor, chemical bath, ore washer.
+  
+  Each one runs one mode at a time with the single blocks' own recipes, so the silicon and polymer lines keep every step. At most 4 parallels, each at its full EU/t, with the standard overclock and the tier from the energy hatches. A mode change takes effect when the run in progress ends. The structure is a 5×3×3 frost proof hall with a core per factory.
+- **Advanced multi smelter** (`gtceu:advanced_multi_smelter`).
+  - It merges different furnace recipes with the same cooking time into one run.
+  - Parallels double every 900 K of coil (4 with cupronickel, 8 kanthal, 16 nichrome, 32 RTM), up to 64, each one costing one electric furnace.
+  - GTM's HV multi smelter stays the bulk smelter.
+- **Lava furnace** (`gtceu:lava_furnace`): it smelts using lava as heat, 10 mB per item, 8 at once, with no energy hatch. It never makes lava, because lava in a large boiler is worth far more than any melting cost.
+- **Weather controller** (`gtceu:weather_controller`, Overworld only).
+  - Circuit 1: clear for a day (4 calcium chloride).
+  - Circuit 2: rain for half a day (2 salt).
+  - Circuit 3: thunderstorm for 5 minutes (2 salt + 4 fine copper wire).
+  
+  The weather changes when a run ends. It helps with the sky conditions of the observatories and the heliostat.
 
 ## New crossings (complexity audit)
 
@@ -185,7 +208,7 @@ No new mod is required: machines, recipe types and drill bits are KubeJS.
 - **Biorefinery.** Reusing GTM's tower class from KubeJS is not verified (if it fails, outputs go to free hatches, with no layers), and in HV the tower takes over from it. It is the cuttable part of the scope.
 - **Handed to HV.** The End (vein sample, portal), the Eye of Ender (blaze powder from the HV chemical reactor), the separation of the mixed metal (EV) and the stored glycerol must have an owner in the HV design.
 
-Credits to add to `CREDITS.md`: ore plant (idea from GTMoreOreProcessing and GTE2, LGPL-3.0); controller as the sum of the machines it replaces, and CO₂ input in the greenhouse (ideas from Star Technology, MIT); biorefinery column (GTM tower class, LGPL-3.0); universal factory (GTL) and big cubes (Star Technology, GCYM) remain as discarded alternatives.
+Credits to add to `CREDITS.md`: ore plant (idea from GTMoreOreProcessing and GTE2, LGPL-3.0); controller as the sum of the machines it replaces, and CO₂ input in the greenhouse (ideas from Star Technology, MIT); biorefinery column (GTM tower class, LGPL-3.0); big cubes (Star Technology, GCYM) remain as discarded alternatives; the universal factory (GTL) entered on 2026-10-25 as a convenience (see `CREDITS.md`).
 
 ## Proposed decisions
 

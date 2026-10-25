@@ -40,6 +40,14 @@ Gregtech Grindless is a GregTech Modern pack (Minecraft 1.20.1, Forge) in which 
 - **Integration:** recipes from other mods that break progression are redone so that they go through GregTech machines.
 - **Rhino (KubeJS 6):** inside functions or callbacks that run more than once, use `var`, not `const`/`let`. Otherwise you get "redeclaration of var".
 - **Vanilla names (KubeJS 2001.6.5):** some members are renamed for the scripts, and the Mojang name does not exist: `getYRot`/`getXRot` are `getYaw`/`getPitch`, `getStringUUID` is `getStringUuid`, `tickCount` is `age` and `Level#getGameTime` is `getTime`; `Entity#level()` is hidden (use `getLevel()`). Full list in `tools/test/README.md`. Anything that uses a player is tested in the `client` suite.
+- **GTM 7.5.3 traps** (each one cost a bench run):
+  - **Recipe ids:** the GT recipe builder puts the recipe type in front of the id you pass: `event.recipes.gtceu.assembler('grindless:x')` is saved as `grindless:assembler/x`.
+  - **Generator multiblocks** go through `startup_scripts/grindless/lib/generators.js`.
+    - `.regressWhenWaiting(false)` is mandatory: with GTM's default, a waiting run regresses and the same fuel pays EU twice.
+    - Standard dynamo hatches are 2 A.
+  - **Multi-mode controllers** veto recipes of an inactive mode in their modifier (`alwaysTryModifyRecipe`), because GTM does not drop the cached recipe when the mode changes. See `mv/leisure_factories.js`.
+  - **Conditions of the same type OR together:** `.dimension(a).dimension(b)` means a or b. "Not a and not b" can't be written with reversed conditions, so use an allowlist.
+  - **Unreachable from Rhino:** `SizedIngredient#getItems()` and `FluidIngredient#getStacks()`. Use `RecipeHelper.getInputItems` / `getInputFluids` / `getRealEUt`.
 
 ## packwiz
 
@@ -81,7 +89,7 @@ Gregtech Grindless is a GregTech Modern pack (Minecraft 1.20.1, Forge) in which 
   | MV multiblocks | 768–831 |
   | HV multiblocks | 1024–1087 |
   | HV refinery | 1280–1343 (Y 98–113) |
-  | EV plant | 1536–1599 |
+  | EV plant | 1536–1599 (the 2026-10-24 scratch test; the platinum plant now uses 5888–5951) |
   | EV multiblocks | 1792–1855 |
   | IV plant | 2048–2111 |
   | IV multiblocks | 2304–2367 |
@@ -97,6 +105,21 @@ Gregtech Grindless is a GregTech Modern pack (Minecraft 1.20.1, Forge) in which 
   | energy | 4864–4927 |
   | small steam family | 5120–5183 |
   | Large Steam family | 5376–5439 |
+  | EV foundation (registrations only) | 5632–5695 |
+  | EV platinum plant | 5888–5951 |
+  | power generators (generator array) | 6144–6207 (controllers at Z 2 and Z 9) |
+  | universal factories | 6400–6463 |
+  | Leisure utility | 6656–6719 |
+  | EV tripod | 6912–6975 (Moon) |
+  | regolith cell | 7168–7231 (Moon) |
+  | cryogenic plant | 7424–7487 (Moon) |
+  | lunar solar array and deep space antenna | 7680–7743 (Moon) |
+  | Mars travel | 7936–7999 (Mars) |
+  | Mars site rules | 8192–8255 (Mars and Moon) |
+  | AE2 between planets | 8448–8511 (Earth and Moon) |
+  | combined-cycle plant and hot strip mill | 8704–8767 |
+  | sealed dome | 8960–9023 (Moon) |
+  | rare-earth extraction cascade | 9216–9279 |
 
   For a new test, keep going in steps of 256.
 
