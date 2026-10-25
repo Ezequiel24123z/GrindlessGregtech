@@ -11,8 +11,7 @@
 		{
 			dependencies: ["3207813527EE1FBD"]
 			description: [
-				"Chests fill up fast. Drawers, backpacks and ender storage keep the base fed and the inventory clear."
-				"Start with what you can craft now. The rest of this tab is ordered by when each piece becomes useful."
+				"Chests fill up fast in a GregTech pack, mostly with things whose names you hadn't heard of last week. Drawers, backpacks and ender storage help, roughly in the order you'll want them."
 			]
 			icon: "minecraft:chest"
 			id: "55D3B1D14B8BCE80"
@@ -27,7 +26,7 @@
 		{
 			dependencies: ["55D3B1D14B8BCE80"]
 			description: [
-				"Crates and drums hold whole stacks of one item each. They are the cheapest way to stop losing ores and dusts to full inventories."
+				"GregTech's crates are big chests in wood and metal, and a strip of duct tape lets you pick one up with everything still inside. Drums hold a single fluid and keep it when you break them."
 			]
 			icon: "minecraft:barrel"
 			id: "0E9F2E59FE951229"
@@ -44,7 +43,7 @@
 		{
 			dependencies: ["55D3B1D14B8BCE80"]
 			description: [
-				"A trash can deletes whatever you drop in it. The liquid version does the same for fluids. Nothing comes back, so use it on the junk."
+				"Whatever goes into a trash can is gone, and the liquid version does the same for fluids. Check twice before you pipe anything important at it."
 			]
 			icon: "trashcans:liquid_trash_can"
 			id: "57FEB8D08B146B4D"
@@ -62,7 +61,7 @@
 		{
 			dependencies: ["55D3B1D14B8BCE80"]
 			description: [
-				"A backpack carries your tools and blocks with you wherever you go. It is the first step toward a portable base."
+				"Extra inventory you wear on your back. In a pack this full of intermediate parts you'll want one early, and it only gets better with upgrades."
 			]
 			icon: "sophisticatedbackpacks:backpack"
 			id: "2A79F8FC98CE29AF"
@@ -76,7 +75,7 @@
 		{
 			dependencies: ["55D3B1D14B8BCE80"]
 			description: [
-				"Tom's Storage terminal reaches every chest in its network from one screen, so you stop walking to the chest that holds what you need."
+				"Tom's Storage puts every chest on its network behind one terminal, so you stop walking the aisles looking for that one dust."
 			]
 			icon: "toms_storage:ts.storage_terminal"
 			id: "08E531BF221FD692"
@@ -87,14 +86,14 @@
 				{ id: "3B9571D1CC8868AC", type: "checkmark" }
 				{ id: "3FF1ABBAA93BA61C", type: "checkmark" }
 			]
-			title: "Remote Access"
+			title: "Storage Terminal"
 			x: 2.5d
 			y: -4.0d
 		}
 		{
 			dependencies: ["0E9F2E59FE951229"]
 			description: [
-				"Storage Drawers keep one item type per drawer and show the count on the front. A few drawers replace a wall of chests."
+				"One item type per drawer, with the count shown on the front. A small wall of drawers replaces a large wall of chests."
 			]
 			icon: "storagedrawers:oak_full_drawers_4"
 			id: "7DDD10B50E898DCC"
@@ -108,7 +107,7 @@
 		{
 			dependencies: ["0E9F2E59FE951229"]
 			description: [
-				"Colossal chests hold far more than a normal chest and stack into one big inventory. Use them when a single chest is not enough."
+				"Build a chest out of many blocks and it holds about as much as all of them would. The name isn't an exaggeration."
 			]
 			icon: "colossalchests:colossal_chest_wood"
 			id: "42AA14E5B1B3BBBC"
@@ -126,7 +125,7 @@
 		{
 			dependencies: ["55D3B1D14B8BCE80"]
 			description: [
-				"Sophisticated storage barrels and chests stack their upgrades and keep a visible count. They are the upgrade path from plain chests."
+				"Sophisticated chests and barrels look like the vanilla ones and take upgrades the way a backpack does. A wooden one is enough to start."
 			]
 			icon: "sophisticatedstorage:barrel"
 			id: "79B4AC2740C87AE3"
@@ -140,7 +139,7 @@
 		{
 			dependencies: ["2A79F8FC98CE29AF"]
 			description: [
-				"An iron backpack gives you more slots than the basic one. Upgrade it once and you will not go back."
+				"Each better backpack adds slots and room for more upgrades, and moving up a tier keeps everything inside. Once you've moved up, the leather one goes in a drawer."
 			]
 			icon: "sophisticatedbackpacks:iron_backpack"
 			id: "103C352E8E444DAE"
@@ -157,7 +156,7 @@
 		{
 			dependencies: ["2A79F8FC98CE29AF"]
 			description: [
-				"Stack upgrades make a backpack hold more of each item. Magnet and pickup upgrades pull loose items in, so you do not chase them."
+				"Stack upgrades fit more of each item per slot, and the pickup and magnet upgrades scoop up whatever you walk past."
 			]
 			icon: "sophisticatedbackpacks:stack_upgrade_tier_1"
 			id: "1ABFE27400126A1F"
@@ -174,7 +173,7 @@
 		{
 			dependencies: ["7DDD10B50E898DCC"]
 			description: [
-				"GregTech drawers are made of rubber and fit the GregTech line. Same idea as Storage Drawers, built for the machines you already run."
+				"Storage Drawers in GregTech's rubber wood and treated wood. Same drawers, different look, built from what your greenhouse and coke oven already make."
 			]
 			icon: "gtstoragedrawers:gtceu_rubber_full_drawers_4"
 			id: "722067166031198E"
@@ -189,7 +188,7 @@
 		{
 			dependencies: ["7DDD10B50E898DCC"]
 			description: [
-				"Drawer upgrades add the features a drawer lacks: void, redstone, or a bigger stack. Each one goes into a drawer's upgrade slot."
+				"Upgrades slot into a drawer to give it more room, a redstone signal or a void that swallows the overflow."
 			]
 			icon: "storagedrawers:upgrade_template"
 			id: "533C9CC57CA1FD3D"
@@ -206,7 +205,7 @@
 		{
 			dependencies: ["7DDD10B50E898DCC"]
 			description: [
-				"Functional Storage drawers and their framed versions cover most of the same ground with a different look. Pick the style that fits your base."
+				"Another drawer mod, with its own look and framed versions you can dress in any block. Use whichever style you like; the two mods get along fine in one base."
 			]
 			icon: "functionalstorage:oak_4"
 			id: "3A6EDC513C78058B"
@@ -224,7 +223,7 @@
 		{
 			dependencies: ["79B4AC2740C87AE3"]
 			description: [
-				"Chest and barrel upgrades change the storage itself. Add the one you need to the chest, and it keeps the rest of its contents."
+				"Tier upgrades turn a sophisticated chest or barrel into a bigger one where it stands, contents and all. The upgrade slots take the rest: feeding, compacting, voiding and more."
 			]
 			icon: "sophisticatedstorage:storage_link"
 			id: "14177D50BDAA5C9C"
@@ -241,7 +240,7 @@
 		{
 			dependencies: ["7DDD10B50E898DCC"]
 			description: [
-				"Drawer controllers pull every drawer on a network into one inventory. Key the drawers to a controller and you stop hunting for a single item."
+				"Set a controller against a wall of drawers and anything you put into it lands in the right drawer. Pipes see the whole wall as one inventory."
 			]
 			icon: "storagedrawers:controller"
 			id: "251B006324CB1018"
@@ -255,7 +254,7 @@
 		{
 			dependencies: ["533C9CC57CA1FD3D"]
 			description: [
-				"The gold upgrade lets a drawer hold far more of one item. It is the upgrade that makes a drawer worth building around."
+				"A gold storage upgrade multiplies what a drawer holds. One upgraded drawer holds more than you'll ever mine by hand."
 			]
 			icon: "functionalstorage:gold_upgrade"
 			id: "5CB66DA9F7F0AC8D"
@@ -271,7 +270,7 @@
 		{
 			dependencies: ["251B006324CB1018"]
 			description: [
-				"The drawer key and framing table link and cover drawers. Use them when a line of drawers needs one look."
+				"The drawer key locks a drawer to its item even when it's empty, and the framing table dresses drawers in any block you like."
 			]
 			icon: "storagedrawers:drawer_key"
 			id: "3C3E663064BBFE61"
@@ -289,9 +288,9 @@
 		{
 			dependencies: ["14177D50BDAA5C9C"]
 			description: [
-				"A storage controller reads every chest and barrel in its range and lets you pull from them from one place. It is the sophisticated network's brain."
+				"The controller links every sophisticated chest and barrel near it, and things go in and come out through one block. Storage links stretch its reach."
 			]
-			icon: "functionalstorage:storage_controller"
+			icon: "sophisticatedstorage:controller"
 			id: "18F1EB87F96A33CC"
 			optional: true
 			rewards: [{ id: "1B6D0F8E4A93C257", type: "xp", xp: 50 }]
@@ -307,7 +306,7 @@
 		{
 			dependencies: ["14177D50BDAA5C9C"]
 			description: [
-				"An ender pouch opens the ender chest with the same three-colour code, from anywhere and on any planet. It is the cheap way into ender storage."
+				"Right-click the &6Ender Pouch&r and your own vanilla ender chest opens, wherever you are, other planets included. Every coloured ender chest is built around one, and so is the ender bag that links to a chest."
 			]
 			icon: "enderchests:ender_pouch"
 			id: "13F136DFAF367A5A"
@@ -322,8 +321,7 @@
 		{
 			dependencies: ["13F136DFAF367A5A"]
 			description: [
-				"An ender chest works across planets. Its contents are the same wherever you open it, so a base on the Moon can reach the stock you left on Earth."
-				"For a whole network that moves items at speed, the AE2 bridge at EV is the industrial option. The ender chest is the cheap small link."
+				"Two ender chests with the same colour code share one inventory, on this planet or the next. A Moon base can dip into what you left on Earth."
 			]
 			icon: "enderchests:ender_chest"
 			id: "6E9BE8B2D413FFC5"
@@ -341,7 +339,7 @@
 		{
 			dependencies: ["6E9BE8B2D413FFC5"]
 			description: [
-				"Ender tanks work the same way as ender chests. Fluids stored in one tank show up in every other tank on any planet, so a remote base can still draw from the same pool."
+				"Ender chests for fluids: same colour codes, same reach across planets. Diesel sent up to the Moon arrives fine; getting it to burn up there is another matter."
 			]
 			icon: "endertanks:ender_tank"
 			id: "2CE0820B76FFD2A3"

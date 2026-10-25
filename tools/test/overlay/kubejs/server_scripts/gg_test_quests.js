@@ -64,16 +64,23 @@ var GG_QUESTS_EXPECTED = {
   productive_bees: [12, 14],
   travel_and_teams: [16, 15],
   workshop: [17, 16],
-  welcome: [16, 15],
-  steam_age: [47, 53],
-  lv_age: [52, 53],
-  mv_age: [54, 67],
+  welcome: [15, 14],
+  steam_age: [44, 50],
+  lv_age: [51, 52],
+  mv_age: [49, 60],
   hv_age: [32, 40],
   ev_age: [55, 63],
   iv_age: [55, 76]
 }
 // chapters that sit outside every chapter group on purpose (shown above the groups)
 var GG_UNGROUPED = { welcome: true }
+// the Processing Lines group (one generated chart per tier; dependencies include the ones on other charts' quests)
+GG_QUESTS_EXPECTED.pl_steam = [63, 57]
+GG_QUESTS_EXPECTED.pl_lv = [98, 90]
+GG_QUESTS_EXPECTED.pl_mv = [88, 91]
+GG_QUESTS_EXPECTED.pl_hv = [73, 70]
+GG_QUESTS_EXPECTED.pl_ev = [106, 103]
+GG_QUESTS_EXPECTED.pl_iv = [111, 113]
 
 // The Neutronium Toolbox (welcome chapter): every reward must be exactly what GTM's IGTTool#get() makes, plus the root
 // "Unbreakable" tag GTM itself reads (ToolHelper.UNBREAKABLE_KEY), and must give no hazard.

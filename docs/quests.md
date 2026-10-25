@@ -99,7 +99,7 @@ The grid is FTB Quests' grid: one square = one unit of `x`/`y`.
 
 - **A dependency is a real requirement:** without that quest's item, this one cannot be done. The only other valid reason is the **assembly order of a single machine** (probe → sample → drill; tubes → resistors and plates → red alloy → circuit).
 - **Never** add a dependency just to place a quest, and never chain topics that have nothing to do with each other.
-- No need to list every ingredient. If the real requirement sits far away (more than 5 squares), the text names it and the dependency goes to the nearby step that makes sense. Example: the steam vein drill has a steam miner in its recipe, but it hangs off the sample and the drill bits, and its text says "built around the steam miner".
+- No need to list every ingredient. If the real requirement sits far away (more than 5 squares), the text names it and the dependency goes to the nearby step that makes sense. Example: the steam vein drill has a steam miner in its recipe, but it hangs off the sample and the drill bits, and its text says "Your steam miner is inside it."
 - **One start per chapter.** The first chapter of the book starts with no dependencies; each age chapter starts with a quest that depends on the exit of the previous one (Steam depends on *Bronze*, LV on *LV Steam Turbine*). No quest floats.
 - `dependency_requirement: "one_completed"` only for "any of these routes works".
 - Quests on other tabs (quality of life) that ask for something from an age depend on the quest in that age where they open, not on anything loose.
@@ -194,10 +194,11 @@ node tools\quests\fix-ids.mjs [--chapter lv_age] [--write] [--map]
 powershell -File tools\quests\Render-QuestPreview.ps1 -Chapter steam_age -OutDir <folder> [-Prefix after-]
 ```
 
+- The preview draws quest links as teal dashed boxes, with the lines FTB Quests draws to them.
 - `--items`/`--tags` use the `items.json` and `tags.json` files from a `gg_dump` (the most recent one, with the Moon: `files/test-runs/hidden-moon-dump1/results/server/kubejs-exported/`). The dump only includes the tags that some recipe uses, so a tag missing there is a warning; `gg_test_quests` checks all of them in-game.
 - Errors: repeated id, id that FTB Quests cannot read (8–F), dependency that does not exist or is circular, second start, floating quest, overlapping boxes, backward line, line longer than 5 squares, item that does not exist, chapter without a title, quest without tasks.
 - Warnings: off the grid, boxes almost touching, vertical drop of more than 3, line passing under another quest, crossings, long text, banned phrase, long dash or " - " used as a dash, quantity in the text, no reward, too many rewards.
-- Exceptions (`lint-config.json`), always with their reason: `allowLongEdges`, `allowRoots`, `manyRewardsOk`, `quantityOk` (a number in the text that is not from a recipe: the 8 fuel buckets of a launch) and `direction` per chapter (`ltr` by default, `ttb` if a chapter is read from top to bottom).
+- Exceptions (`lint-config.json`), always with their reason: `allowLongEdges`, `allowRoots`, `manyRewardsOk`, `quantityOk` (a number in the text that is not from a recipe: the 8 fuel buckets of a launch), `noRewardGroups` (chapter groups with no rewards on purpose: the Processing Lines) and `direction` per chapter (`ltr` by default, `ttb` if a chapter is read from top to bottom).
 - **In-game test, server:** `tools\test\Invoke-GGTest.ps1 -Suite server -PackDir <pack copy> -Commands 'kubejs custom_command gg_test_quests' -WaitForLog 'GGTEST\|quests\|DONE@@900'`. It checks that each chapter loads with its number of quests **and dependencies** (`GG_QUESTS_EXPECTED` in `tools/test/overlay/kubejs/server_scripts/gg_test_quests.js`: when a chapter changes, both numbers are updated, which the linter prints), that every item and tag exists, and that the toolbox gives what it should.
 - **Real client test:** `gg_test_quest_book` (marker `kubejs/config/gg_test_quest_book.json`, see `tools/test/README.md`). It completes *Arrival* and the toolbox with the FTB Quests command, claims their rewards through the same path as the button, checks the tools (NBT, damage, magnet, 3x3, description) and takes screenshots of the open book (`kubejs/exported/gg_book_*.png`). To photograph another chapter, add an entry to `SHOTS` in `client_scripts/gg_test_quest_book.js`.
 - Always pass the test bench a copy of `pack/` with `-PackDir`: it runs `Update-PackIndex` over whatever you give it.
@@ -217,9 +218,11 @@ Not taken: the coin market, the shortcuts (Dimensionally Transcendent Dirt Forge
 
 ## 13. Reference chapters: Welcome and Steam
 
-**Welcome** (16 quests). Spine: *Arrival → Wood and Stone → Ore Veins → Iron from the Veins → Your First Hammer → The Neutronium Toolbox → Copper and Tin → Grinding Dust → Bronze* (exit). Above: EMI, resin and the tool cheat sheet; below: the Void and Plains keys, coal and the deep veins.
+**Welcome** (15 quests, 14 dependencies). Spine: *Arrival → Wood and Stone → Ore Veins → Iron from the Veins → Your First Hammer → The Neutronium Toolbox → Copper and Tin → Grinding Dust → Bronze* (exit). Above: resin and the tool cheat sheet; below: the Void and Flatlands keys, coal and the deep veins.
 
-**Steam** (41 quests). Spine: *Steam Age → Clay and Bricks → Low-Pressure Boiler → Steam Machines → Steam Compressor → Firebricks → Primitive Blast Furnace → Steel → Casting Molds → Glass → Steam Extractor → Sulfur from the Nether → Rubber Sheets → Insulated Cable → LV Machine Hull → LV Steam Turbine* (exit). Top left, the coke oven and the pump; in the machines column, the fan (miner, macerator, compressor, smelter, rock crusher); top right, the vein drill and the greenhouse, up to *No More Pickaxe*; bottom right, the circuit parts.
+**Steam** (44 quests, 50 dependencies). Spine: *Steam Age → Clay and Bricks → Low-Pressure Boiler → Steam Machines → Steam Compressor → Firebricks → Primitive Blast Furnace → Steel → Casting Molds → Glass → Steam Extractor → Sulfur from the Nether → Rubber Sheets → LV Machine Hull → LV Steam Turbine* (exit). Top left, the coke oven with the pump and the coke battery; in the machines column, the fan (miner, macerator, compressor, alloy smelter, and the optional rock crusher and small steam plants); above the blast furnace, the sky row (*Clockwork Observatory → Lunar Chart (Draft)*), and below it the steam blast furnace; top right, the vein drill and the greenhouse, up to *No More Pickaxe*; bottom right, the circuit parts up to *LV Circuit*. The hull, the motor and the circuit hang off *Rubber Sheets*, and the turbine needs all three.
+
+The 2026-10-25 voice pass (section 8) cut *Read the Recipes* from Welcome (EMI's R and U keys are now in *Arrival*) and *Insulated Cable*, *High-Pressure Machines* and *High-Pressure Miner* from Steam (*Rubber Sheets* now says how a cable is made).
 
 Why this order, checked against the recipe dump of v0.4.0:
 
@@ -255,59 +258,66 @@ Rules:
 
 ### Incoming machines
 
-They come in once their test passes and the coordinator says so; each agent leaves its list in `files/scratch/quest-needs/<agent>.md`.
+They come in once their test passes and the coordinator says so; each agent leaves its list in `files/scratch/quest-needs/<agent>.md`. All five are in the book now.
 
 | Agent | Machines | Where they go | How they hook in |
 |---|---|---|---|
 | steam-content | Steam blast furnace, coke battery | Steam | The battery in the coke row, after *Coke Oven*; the steam blast furnace after *Primitive Blast Furnace*, as a second route to steel |
-| lv-content | Sulfide roaster, heliostat tower | LV | The roaster in the ore row; the tower in the power row |
+| lv-content | Sulfide roaster, heliostat tower | LV | The roaster in the chemistry row, after the contact catalyst; the tower in the power row |
 | observatory | The three observatories and their charts | Steam, LV, MV | Sky row (top) |
-| launch-road | Engine test stand, RP-1, qualified thrusters (MV); composite autoclave, ablative tiles, wrapped tanks, untested engine and static fire (HV) | MV and HV | In HV they go in front of the rocket parts: *Rocket Motors* comes to depend on the static fire, and *Fuel Tanks* on the wrapped tanks. Their ids, tasks and part texts do not change |
+| launch-road | Engine test stand, RP-1, qualified thrusters (MV); composite autoclave, ablative tiles, wrapped tanks, untested engine and static fire (HV) | MV and HV | In HV they go in front of the rocket parts: *Rocket Motors* comes to depend on the static fire, and *Fuel Tanks* on the wrapped tanks. Their ids and tasks do not change |
 | syngas | Syngas plant | HV | Chemistry row, after the refinery: hydrogen and CO for methanol and ammonia |
 
-### Steam — "Steam Age: Escape Velocity" (`steam_age.snbt`, 45 quests, 51 dependencies; done, with the sky row and the new steam machines)
+### Steam — "Steam Age: Escape Velocity" (`steam_age.snbt`, 44 quests, 50 dependencies; done, with the sky row and the new steam machines; voice rewrite 2026-10-25)
 
-Only the sky row (above the automation) and the steam-content machines are missing, once they pass their test.
+The sky row and the steam-content machines are in. Section 13 describes the chapter.
 
-### LV — "LV: The First Spark" (`lv_age.snbt`, 51 quests, 52 dependencies; done in v0.5.1)
+### LV — "LV: The First Spark" (`lv_age.snbt`, 51 quests, 52 dependencies; done in v0.5.1, voice rewrite 2026-10-25)
 
 - **Start:** *LV Factory* (current id), depends on *LV Steam Turbine*. Journey line: first electricity; the Nether goes from a round trip to a place you work in.
-- **Spine:** LV network (cable, battery buffer, energy hatch) → *LV Components* (motor, piston, pump, belt, arm) → *LV Assembler* → cupronickel coils → *Electric Blast Furnace* (gear 1.5) → *Aluminium* → *MV Machine Hull* → *LV to MV Transformer* (exit, diamond).
+- **Spine:** *LV Factory* → *LV Components* (motor, piston, pump, belt, arm) → *LV Assembler* → cupronickel coils → *Electric Blast Furnace* (gear 1.5) → *Aluminium* → *MV Machine Hull* → *LV to MV Transformer* (exit, diamond).
 - **Branches:**
-  - at the very top, the sky row (empty until the optical observatory passes);
-  - top, ore: macerator → washer → thermal centrifuge → centrifuge (with the warning that the LV and MV macerators give no byproducts) and the *LV Vein Drill* (gear 1.5) with drilling fluid and *Nether Veins*;
-  - top, green: *LV Greenhouse* → fertilizer; creature simulator → models → first pearl (the creeper and the blaze, for MV);
-  - bottom, chemistry: gas collector → electrolyzer → chemical reactor → sulfuric acid (the sulfur from the realgar, by centrifuge); mixer;
-  - bottom, circuits: circuit assembler → good board → GaAs → diodes → *MV Circuit*;
-  - bottom right: forming press → graphite electrode → *Submerged Arc Furnace* (gear 1.5) and the AE2 branch.
+  - at the very top, the sky row: photographic plates → *Optical Observatory* (gear 1.5) → lunar map → ephemeris;
+  - top, ore: macerator → washer → thermal centrifuge → centrifuge (with the warning that the LV and MV macerators give no byproducts);
+  - above the spine, power: the generator array (*Sixteen Turbines, One Hall*), and mirror field → *Heliostat Tower* → steam for the night;
+  - below the spine, the *LV Vein Drill* (gear 1.5) → drilling fluid → *Nether Veins*;
+  - bottom, chemistry: gas collector → electrolyzer → chemical reactor → mixer → contact catalyst → *Sulfide Roaster* → silver from galena;
+  - bottom, green: *LV Greenhouse* (gear 1.5) → fertilizer → creature simulator → first pearl → models → the creeper and blaze models (for MV);
+  - bottom, circuits: good board (off the chemical reactor) → diodes → *MV Circuit* → circuit assembler;
+  - bottom right: forming press → graphite electrode → *Submerged Arc Furnace* (gear 1.5) and the AE2 branch, up to *ME Network Access*.
+- **Cut on 2026-10-25** (section 8): *LV Grid*. The two-hatch trick is in *Electric Blast Furnace*.
 - **AE2:** the AE2 steps that live in LV today stay in LV as their branch (the user wants all of AE2 in LV). The AE2 tab starts by depending on the last of them and does not repeat them.
 - **Sources:** GTCP Modern `lv__low_voltage` (*Progressing Through LV*, *Electricity Generation*, *But what are Amps?*, *Battery Buffer*, *Machine Auto-Output Behaviour*, *Cover Behaviour*, *Programmed Circuits*, *What is this Mess?: Part Two*, *Cupronickel Coils*, *Gallium Arsenide*, *First MV Circuit!*); Monifactory `genesis` (*A Primer on Power*, *Battery Buffers*, *Charging Items*); Star Technology `industrial_revolution` for tone.
 
-### MV — "MV: The Far End" (`mv_age.snbt`, 47 quests, 60 dependencies; done in v0.5.1)
+### MV — "MV: The Far End" (`mv_age.snbt`, 49 quests, 60 dependencies; done in v0.5.1, voice rewrite 2026-10-25)
 
-- **Start:** *MV Factory*, depends on *LV to MV Transformer* (today, on *Electric Blast Furnace*). Journey line: the End, beyond the world.
-- **Spine:** copper cable and MV network → *MV Components* → chromium and aluminium → *Kanthal* → *Stainless Steel* → *Silicon Ingot* → *Silicon Boule* → *Silicon Wafers* → *Integrated Circuits* → *HV Machine Hull* → *MV to HV Transformer* → *Cleanroom* (exit).
-- **Fixed End row** (v0.5.0): *Blaze* (`3C356A1439744E15`) → *Ender Eye* (`3DDBE9267C197FEE`) → *End Key* (`756117B334515EA3`) → *End Veins* (`004525B795119B1B`, also depends on *Vanadium Steel Drill Bit*). Ids, tasks and texts stay; the row can be moved as a whole.
+- **Start:** *MV Factory*, depends on *LV to MV Transformer*. Journey line: the End, beyond the world.
+- **Spine:** *MV Factory* → *MV Components* → chromium and aluminium → *Kanthal* → *Silicon Ingot* → *Silicon Boule* → *Silicon Wafers* → ILC and RAM → *Integrated Circuits* → *Advanced Integrated Circuit* → *Cleanroom* (exit, also after *HV Machine Hull* and *HV Motor and Pump*).
+- **Fixed End row** (v0.5.0): *Blaze* (`3C356A1439744E15`) → *Ender Eye* (`3DDBE9267C197FEE`) → *End Key* (`756117B334515EA3`) → *End Veins* (`004525B795119B1B`, also depends on *Vanadium Steel Drill Bit*). Ids and tasks stay; the row can be moved as a whole.
 - **Branches:**
-  - at the very top, the sky row (the radio telescope, once it passes);
-  - top, ore: *Ore Plant* (gear 1.5, the age's multiblock) and *MV Vein Drill* with the vanadium steel drill bit; stone dust separation; the End row right after the drill bit;
-  - bottom, carbon: *MV Greenhouse* → pyrolysis → methanol → *Biorefinery* (gear 1.5);
-  - bottom, oil and polymers: *MV Fluid Drilling Rig* → diesel; brine and chlorine → ethylene and PE → PVC;
-  - bottom right: hazard suit, AE2 growing (link to its tab); the MV launch route once it passes.
-- **Layout fixes:** the lines of 14 to 27 squares from *MV Grid*, *MV Components* and *Biorefinery* are the ones that cross the whole chapter (and the End row).
+  - at the very top, the sky row: *Radio Telescope* (gear 1.5) → landing-site chart, and the weather controller;
+  - top, ore: *Ore Plant* (gear 1.75, the age's multiblock) → stone dust separation, and *MV Vein Drill* with the vanadium steel drill bit; the End row runs up from *Blaze* to *End Veins*;
+  - above the spine: vanadium steel → *MV Cutter and Laser Engraver*, which the wafers need; *AE2 Grows Up* (optional) off the integrated circuits;
+  - below the spine: *Stainless Steel* off *Kanthal*; *MV Fluid Drilling Rig* → diesel → kerosene → RP-1 → *Engine Test Stand* → qualified power thrusters (the MV launch route), and brine and chlorine;
+  - bottom, carbon: *MV Greenhouse* → pyrolysis → methanol → *Biorefinery* (gear 1.5, the age's second multiblock) → ethylene and PE → transistors, PVC → hazmat suit, and *HV Machine Hull* → *HV Motor and Pump*;
+  - bottom left: the four universal factories → advanced multi smelter → lava furnace.
+- **Layout fixes:** done in v0.5.1 (the lines of 14 to 27 squares from *MV Grid*, *MV Components* and *Biorefinery* crossed the whole chapter and the End row).
+- **Cut on 2026-10-25** (section 8): *Copper Cable*, *MV Grid*, *MV Ore Machines*, *MV Steam Turbine* and *MV to HV Transformer*.
 - **Sources:** GTCP Modern `mv__medium_voltage` (*Transformers*, *Kanthal Coils*, *Stainless Steel*, *Silicon Lottery*, *Moore's Law*, *Polyethylene*, *The Church of Diesel*, *Desulfurization*, *Distillery*, *Pyrolyse Oven*, *Greenhouse*, *Sulfuric Acid*, *Hydrochloric Acid*); Monifactory `groundwork` (silicon, Kanthal) for structure.
 
 ### HV — "HV: Moonshot" (`hv_age.snbt`, 32 quests, 40 dependencies; done in v0.5.1, voice rewrite 2026-10-25)
 
 - **Start:** *HV Factory*, depends on *Cleanroom* (the MV exit). Journey line: the Moon, the first place off Earth.
-- **Spine:** HV network → *HV Components* → *Refinery* (gear 1.5) → cracking and olefins → PTFE → *Gasoline* (the large chemical reactor) → the rocket → *The Moon* (exit).
-- **Fixed rocket block** (v0.5.0): *Rocket Fuel* (`76D281E9D9C6FD20`), *Rocket Motors* (`5C1D3FB96A9FB74A`), *Fuel Tanks* (`4A6E81ABD8026025`), *Launch Pad* (`7B21622AADB1E1D1`), *Space Suit* (`5615E54AF782990A`) (the five hang off *Gasoline*: the suit's para-aramid and the Kapton for motors and tanks come from that chemistry), *First Rocket* (`5151DE8D3623EDCF`, scanner and seat), *Liftoff* (`4A672DF7CF424623`, chip), *The Moon* (`2897E3EB8159710C`, dimension task `gcyr:luna`). They go piece by piece so the launch route can change recipes without breaking them. They can be moved; ids, tasks, texts and internal dependencies stay.
-- **No longer in HV:** Ender Eye, End Key and End Veins (MV); titanium, EV Machine Hull, HV→EV transformer, EV Motor and Pump, and Distillation Tower (all EV). *Nichrome* stays in HV as a branch: the EV tower depends on it.
+- **Spine:** *HV Factory* → *HV Components* → *Refinery* (gear 1.5) → hydrotreating catalyst → cracking and olefins → PTFE → *Gasoline* (the large chemical reactor) → rocket fuel → *Static Fire* (gear 1.25) → rocket motors → *First Rocket* → *Liftoff* → *The Moon* (exit).
+- **Fixed rocket block** (v0.5.0): *Rocket Fuel* (`76D281E9D9C6FD20`), *Rocket Motors* (`5C1D3FB96A9FB74A`), *Fuel Tanks* (`4A6E81ABD8026025`), *Launch Pad* (`7B21622AADB1E1D1`), *Space Suit* (`5615E54AF782990A`), *First Rocket* (`5151DE8D3623EDCF`, scanner and seat), *Liftoff* (`4A672DF7CF424623`, chip), *The Moon* (`2897E3EB8159710C`, dimension task `gcyr:luna`). They go piece by piece so the launch route can change recipes without breaking them. The fuel and the pad hang off *Gasoline*, the motors off the static fire and the tanks off the overwrapped tanks. The suit hangs off *Fuel Tanks*, because its fabric is the same para-aramid and Kapton. *Liftoff* also needs MV's landing-site chart, and *The Moon* needs the suit. They can be moved; ids and tasks stay.
+- **No longer in HV:** Ender Eye, End Key and End Veins (MV); titanium, EV Machine Hull, HV→EV transformer, EV Motor and Pump, and Distillation Tower (all EV; since the 2026-10-25 voice pass the transformer and the tower are gone, and the motor and pump quest is *EV Components*). *Nichrome* stays in HV as a branch: EV's *Regolith Cell* depends on it, because its crucible is ringed with nichrome coils.
 - **Branches:**
-  - top, ore and green: *HV Vein Drill*, *HV Greenhouse*, stainless steel drill bit;
-  - top, circuits: CPU wafer → *Microprocessor Assembly* → *EV Workstation* → *Vacuum Freezer* → *Nichrome*;
-  - bottom, serious chemistry: HF → PTFE, epoxy and SBR, black and red steels; the syngas plant once it passes;
-  - bottom right: drums, super chest and super tank, AE2 in HV.
+  - top left, ore and green: *HV Greenhouse* (gear 1.5) and *HV Vein Drill* → stainless steel drill bit;
+  - top, the optional *Catalytic Reformer* (gear 1.5) → reforming catalyst, off the hydrotreating catalyst;
+  - top right, the launch road: *Composite Autoclave* (gear 1.5, off cracking) → heat-shield tiles → *Untested Rocket Motor* → *Static Fire* on the spine, which also depends on MV's engine test stand; GT drums (off MV's stainless steel) and the autoclave → overwrapped tanks → *Fuel Tanks* → *Space Suit*;
+  - bottom: *Cleanroom in a Hatch* off *HV Components*, and *Syngas Plant* → water-gas shift off the refinery;
+  - bottom, circuits: *EV Workstation* (CPU wafer, microprocessor assembly and workstation in one quest) → *Vacuum Freezer* → *Nichrome*.
+- **Cut on 2026-10-25** (section 8): *HV Grid*, *Large Steel Boiler and Turbine*, *Black Steel and Red Steel*, *HV Cutter and Laser Engraver*, *Natural Gas and Refinery Gas*, *Hydrofluoric Acid*, *Epoxy and SBR*, *Super Chest and Tank* and *AE2 at HV*. *CPU Wafer* and *Microprocessor Assembly* went into *EV Workstation*.
 - **Sources:** GTCP Modern `hv__high_voltage` (*High Voltage Machines*, *The Cleanroom*, *Large Chemical Reactor*, *Ice Cold*, *Nichrome Coils*, *Polytetrafluoroethylene*, *HV Circuit Assembler*, *The End of an Era*).
 
 ### EV — "EV: Lunar Base" (`ev_age.snbt`, 55 quests, 63 dependencies; done in v0.6.0, voice rewrite 2026-10-25)
@@ -321,16 +331,20 @@ The five are in the *Quality of Life* group and were written before this guide. 
 | Tab | Layout | Text | Fix |
 |---|---|---|---|
 | **Storage** (21) | Star-shaped layout around *Storage*: 7 lines backward, 3 longer than 5 squares. | 7 dashes; recipes written as prose ("Aluminium plates and an MV circuit around the pouch"), design voice ("Every byproduct in this pack has an honest end"). | From left to right in the order they are obtained: chests and backpacks → drawers → Sophisticated → ender chests and tanks (they work between planets: the small, cheap link; the industrial one is EV's AE2 bridge) → drums and GT crates → exit toward AE2. Each mod's side quests go in their own row. |
-| **Applied Energistics** (40) | The best: spine from left to right. Two long lines (*Wireless Access*, *ExtendedAE*) and a column under *ME Controller* that reads from top to bottom. | 13 dashes, "runs on its own", recipes recited ("Three 1k components, a calculation processor…"). | The start depends on the last AE2 step in LV; the column under the controller becomes a row; the bridge between planets stays in EV and is only named here. |
+| **Applied Energistics** (19; 40 on 24-10-2026) | The best: spine from left to right. Two long lines (*Wireless Access*, *ExtendedAE*) and a column under *ME Controller* that reads from top to bottom. | 13 dashes, "runs on its own", recipes recited ("Three 1k components, a calculation processor…"). | The start depends on the last AE2 step in LV; the column under the controller becomes a row; the bridge between planets stays in EV and is only named here. |
 | **Productive Bees** (12) | Clean. | 5 dashes. | Start depends on the age it opens in; rewards that are more than just XP. It is the shortest chunk. |
-| **Travel and Teams** (16) | Star-shaped layout around *Getting Around*: 5 lines backward. | 7 dashes, "the heart of". | Travel row (hang glider, Waystones, scrolls) and team row (teams, homes, claiming, loading chunks) that leave the start to the right; *Other Worlds* as a milestone, without repeating what *Waystone on the Moon* (EV) and *Lunar Base* say. |
-| **Workshop** (15) | Star-shaped layout around *Workshop*: 5 lines backward; mixes three topics. | 11 dashes, "32 blocks" in the text. | Three rows: building (Effortless, Carry On, Ultimine, decoration), logistics (Pipez, LaserIO, Modular Routers, collectors) and GT aids (terminal, memory card, structure manager). |
+| **Travel and Teams** (16) | Star-shaped layout around *Getting Around*: 5 lines backward. | 7 dashes, "the heart of". | Travel row (hang glider, Waystones, scrolls) and team row (teams, homes, claiming, loading chunks) that leave the start to the right; *Other Worlds* as a milestone, without repeating what *Lunar Base* (EV) says. EV's *Waystone on the Moon* was cut on 2026-10-25, so waystones between worlds are this tab's job. |
+| **Workshop** (17; 15 on 24-10-2026) | Star-shaped layout around *Workshop*: 5 lines backward; mixes three topics. | 11 dashes, "32 blocks" in the text. | Three rows: building (Effortless, Carry On, Ultimine, decoration), logistics (Pipez, LaserIO, Modular Routers, collectors) and GT aids (terminal, memory card, structure manager). |
 
 In all five: almost every reward is XP (put in something small and useful instead), and none is tied to the age where it opens. The text must follow the rules in section 8.
+
+**Status (2026-10-25).** v0.5.1 rewrote the five (section 16), and the voice pass (section 8) rewrote them again: none has a linter warning, and the counts in the table are today's. Storage, AE2 and Productive Bees now start from an age quest; most rewards are still XP. The AE2 tab went from 42 quests to 19. It starts at LV's *ME Network Access* and only covers what LV's AE2 branch doesn't: powering the network, the wireless terminals, GregTech's ME hatches and the addons. The column under *ME Controller* went with the controller quest, and the bridge between planets is still only named, in *Beyond This World*.
 
 ## 16. Chunks to write in parallel
 
 Done in v0.5.1: the eight chunks and the incoming machines. Six writers in parallel with a cheap model and then a review of the LV, MV and HV logic with a more capable model. The cheap model writes well, but it does not reason through the progression: the spine and the dependencies of the age chapters always need that review.
+
+On 2026-10-25 two sessions rewrote every chapter in the new voice (section 8) and cut the quests that teach nothing new. Welcome to MV plus Storage, Productive Bees, Travel and Teams and Workshop went from 235 quests to 225, HV from 43 to 32, EV from 66 to 55 and the AE2 tab from 42 to 19. The book has 331 quests, with 0 linter errors and 5 layout warnings, all in LV and MV.
 
 A chunk is one chapter, written by one person. The contract is this guide and the linter:
 
@@ -342,7 +356,7 @@ A chunk is one chapter, written by one person. The contract is this guide and th
 6. Done = linter with 0 errors and 0 warnings in your chapter (or warnings explained in `lint-config.json`), preview from left to right with no crossings, and `gg_test_quests` on the test bench with a copy of `pack/`.
 7. LF and no BOM. No commits and no `Update-PackIndex`.
 
-| Chunk | File | Today, per the linter | Plan |
+| Chunk | File | Per the linter, before v0.5.1 | Plan |
 |---|---|---|---|
 | 1 | `lv_age.snbt` | 8 long lines, 2 crossings, 20 under another quest, 33 dashes, "for good" | Section 14, LV |
 | 2 | `mv_age.snbt` | 12 long, 1 backward, 13 crossings, 16 under another quest, 29 dashes | Section 14, MV (fixed End row) |
@@ -354,3 +368,15 @@ A chunk is one chapter, written by one person. The contract is this guide and th
 | 8 | `productive_bees.snbt` | 5 dashes | Section 15 |
 
 Welcome, Steam and EV are not split up: they are done. The incoming machines and the Moon are added by the book team when the coordinator says so.
+
+## 17. Processing Lines
+
+A chapter group of its own, "Processing Lines", with one chart per tier: `pl_steam`, `pl_lv`, `pl_mv`, `pl_hv`, `pl_ev` and `pl_iv` (Steam Lines to IV Lines). Each chart shows the tier's lines at a glance, the way Star Technology's `pl1`–`pl5` do: what goes in, which machine, what comes out, where each byproduct ends and where the loops close. EMI shows one recipe; a chart shows the line.
+
+- **Nodes:** every node is a quest with one item: an optional item task (never consumed) plus a checkmark, so it can be ticked by hand or by holding the item. No rewards. The charts are `progression_mode: "flexible"` and no quest elsewhere depends on them: they never block anything.
+- **Shapes:** raw inputs are rounded squares; items the default hexagon, products a bigger one, byproducts a small one; machines are gears, our multiblocks a bigger gear; a return (something that goes back into an earlier step: "Electrodes, Back", "Heavy Water, Back") is a small circle at the end of its line. A fluid shows as its bucket.
+- **Arrows** are dependencies and read left to right. An arrow is one recipe, or a short chain whose intermediates the subtitle names ("EBF at 5,000 K, then the freezer").
+- **Quest links** import a quest from an earlier chart (sulfuric acid from LV, nitric acid from EV). Only across chapters: FTB Quests draws a dependency's line to every button of that quest, links included, so a link in its own chapter repeats all its lines, and a loop through a link is a cycle.
+- **Text:** a title, a subtitle (the machine, or where the thing goes), and on our multiblocks one or two sentences in the voice of section 8. A leaf always says where it ends (rule 3).
+- **The source is the data, not the SNBT.** `files/scratch/proc-lines/pl-data-<tier>.mjs` holds the clusters, nodes, arrows and texts; `pl-gen.mjs` writes the chapters, the group line and the linter's roots; `pl-check.mjs` checks every arrow against a `gg_dump` and writes `check-report.md`; `run.ps1 -Write -Preview` does all of it, lints and renders the previews. Ids are hashes of the chapter and the node's key, so they don't change when a chart is regenerated.
+- **When a tier lands:** write its data file from the era's "As built" sections, check it against a dump of that era, regenerate, and add its counts to `GG_QUESTS_EXPECTED`.
