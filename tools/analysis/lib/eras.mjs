@@ -1,35 +1,35 @@
-// Regla de eras (decisión del 2026-10-24): nada de una era puede pedir un recurso que sale en una era posterior.
+// Era rule (decision of 2026-10-24): nothing from an era can need a resource that comes from a later era.
 //
-// Configuración (tiers/<tier>.json; se hereda y se combina por id, ver lib/config.mjs):
-//   eraOrder        orden de las eras: ["steam", "lv", "mv", "hv", "ev", "iv", ...].
-//   eraResources[]  lo que trae cada era: {id, era, label, items?, exclude?, dimensions?, onlyFrom?, note}
-//     items         globs sobre claves de objeto y de fluido (`fluid:gtceu:titanium`): esas claves se quitan de TODA fuente
-//                   (ninguna receta las da, aunque la receta siga dando lo demás; ningún hecho del mundo; ninguna veta, abeja
-//                   ni receta de un addon). Así cuenta lo que es de ese material, venga de donde venga.
-//     dimensions    se quitan las fuentes del mundo que se recogen allí (`origin` de la entrada de `world`, o las dimensiones
-//                   de su `fromVeins`) y las recetas que solo valen allí (condición de dimensión).
-//     onlyFrom      comprobación de exclusividad: [ids de otros recursos] (p. ej. ["luna"]); sin ellos, ninguna clave de este
-//                   recurso debe alcanzarse ("el titanio solo sale de la Luna"). Si sale, FUGA con las fuentes por las que
-//                   entra (reglas que lo dan sin gastarlo y cuyas entradas no lo llevan; el reciclaje no cuenta como fuente).
-//   eraItems[]      lo que pertenece a cada era: {id, era, label, items?, exclude?, inputsOf?, optional?, note}
-//     items         ids o globs (con * o ?) sobre el registro y el grafo (objetos, `fluid:`, máquinas construidas `m:<id>`).
-//                   Un objeto que casa con un glob y que es él mismo de un recurso posterior (gtceu:hv_titanium_drill, la
-//                   herramienta HV con cabezal de titanio) no cuenta como de la era: es de ese recurso. Uno explícito sí.
-//     inputsOf      globs sobre ids de receta: cada entrada (ranura) de esas recetas es un objeto de la era; se cumple con
-//                   cualquiera de sus alternativas (la broca y las muestras de la perforadora HV: grindless:vein_drilling/hv/*).
-//     optional      si falla, WARN (lo que aún no ha llegado: el cohete de GCYR en inox).
-// Comprobación: cada objeto de la era E se alcanza (como en la puerta: recoger a mano vale) con TODOS los recursos de las eras
-// posteriores a E quitados. Los objetos de salida de una era (el casco EV que HV fabrica como puerta) son de la era siguiente.
-// Una violación lleva la cadena más corta hasta el recurso posterior que tira de ella.
+// Config (tiers/<tier>.json; inherited and merged by id, see lib/config.mjs):
+//   eraOrder        order of the eras: ["steam", "lv", "mv", "hv", "ev", "iv", ...].
+//   eraResources[]  what each era brings: {id, era, label, items?, exclude?, dimensions?, onlyFrom?, note}
+//     items         globs over item and fluid keys (`fluid:gtceu:titanium`): those keys are removed from EVERY source
+//                   (no recipe gives them, even though the recipe still gives the rest; no world fact; no vein, bee,
+//                   or addon recipe). This way, whatever is of that material counts, wherever it comes from.
+//     dimensions    removes the world sources gathered there (the `world` entry's `origin`, or its `fromVeins`
+//                   dimensions) and the recipes only valid there (dimension condition).
+//     onlyFrom      exclusivity check: [ids of other resources] (e.g. ["luna"]); without them, no key of this
+//                   resource should be reached ("titanium only comes from the Moon"). If it does, LEAK with the sources it
+//                   comes through (rules that give it without consuming it and whose inputs don't carry it; recycling doesn't count as a source).
+//   eraItems[]      what belongs to each era: {id, era, label, items?, exclude?, inputsOf?, optional?, note}
+//     items         ids or globs (with * or ?) against the registry and the graph (items, `fluid:`, built machines `m:<id>`).
+//                   An item that matches a glob and is itself from a later resource (gtceu:hv_titanium_drill, the
+//                   HV tool with a titanium head) doesn't count as this era's: it belongs to that resource. An explicit one does.
+//     inputsOf      globs over recipe ids: each input (slot) of those recipes is an item of the era; met by
+//                   any of its alternatives (the HV drill's bit and samples: grindless:vein_drilling/hv/*).
+//     optional      if it fails, WARN (whatever hasn't arrived yet: GCYR's rocket in stainless steel).
+// Check: each item of era E is reached (same as the gate: hand-gathering counts) with ALL resources from eras
+// later than E removed. An era's output items (the EV hull HV makes as its gate) belong to the next era.
+// A violation carries the shortest chain to the later resource pulling on it.
 import { blockCosts, lfp } from './engine.mjs';
 import { blockedRoots, blockedTree, derivationTree, describeRule, makeRootCost, renderTree } from './explain.mjs';
 import { asArray, makeGlobMatcher } from './util.mjs';
 
-// claves que no son material (máquinas, energía, ranuras muertas...): un recurso nunca las quita. Las salidas con NBT que el
-// normalizador no reduce (los panales configurables de Productive Bees) quedan como claves que no son texto: tampoco cuentan.
+// keys that aren't material (machines, energy, dead slots...): a resource never removes them. NBT outputs the
+// normalizer doesn't reduce (Productive Bees' configurable honeycombs) stay as non-string keys: they don't count either.
 const SPECIAL = /^(m|run|eu|ae|dead|cond):/;
 const isName = (n) => typeof n === 'string';
-const INPUT_ROLES = new Set(['item', 'fluid', 'tool', 'molde']);
+const INPUT_ROLES = new Set(['item', 'fluid', 'tool', 'die']);
 const hasGlob = (s) => /[*?]/.test(s);
 const MAX_DETAIL = 25;
 
@@ -37,22 +37,22 @@ function eraLabel(r) {
   return `${r.label || r.id} (${r.era})`;
 }
 
-/** Recursos y grupos de objetos de la configuración, resueltos sobre el grafo y el registro del volcado. */
+/** Config resources and item groups, resolved against the graph and the dump's registry. */
 export function prepareEras(model) {
   const { cfg, g, dump, warnings } = model;
   const order = cfg.eraOrder || [];
   const idx = new Map(order.map((e, i) => [e, i]));
   const active = cfg.eraItems.length > 0 || cfg.eraResources.length > 0;
-  if (active && order.length === 0) warnings.push('regla de eras: hay eraResources/eraItems pero falta eraOrder; no se comprueba');
+  if (active && order.length === 0) warnings.push('era rule: there are eraResources/eraItems but eraOrder is missing; not checked');
   const known = (what, id, era) => {
     if (idx.has(era)) return true;
-    warnings.push(`regla de eras: ${what} ${id} tiene la era «${era}», que no está en eraOrder; se ignora`);
+    warnings.push(`era rule: ${what} ${id} has era «${era}», which isn't in eraOrder; ignored`);
     return false;
   };
 
   const resources = [];
   for (const r of cfg.eraResources) {
-    if (!known('el recurso', r.id, r.era)) continue;
+    if (!known('resource', r.id, r.era)) continue;
     const match = makeGlobMatcher(asArray(r.items));
     const excl = makeGlobMatcher(asArray(r.exclude));
     const keys = [];
@@ -61,7 +61,7 @@ export function prepareEras(model) {
         const n = g.keyNames[k];
         if (isName(n) && !SPECIAL.test(n) && match(n) && !excl(n)) keys.push(k);
       }
-      if (keys.length === 0) warnings.push(`regla de eras: el recurso ${r.id} (${asArray(r.items).join(', ')}) no casa con ningún objeto ni fluido del pack`);
+      if (keys.length === 0) warnings.push(`era rule: resource ${r.id} (${asArray(r.items).join(', ')}) matches no item or fluid in the pack`);
     }
     const dims = asArray(r.dimensions);
     resources.push({ ...r, label: r.label || r.id, keys, dims, rank: idx.get(r.era), onlyFrom: asArray(r.onlyFrom) });
@@ -69,8 +69,8 @@ export function prepareEras(model) {
   const resById = new Map(resources.map((r) => [r.id, r]));
 
   const graphKeyOf = (name) => g.keyIndex.get(name);
-  // ¿existe en el pack? Para objetos y fluidos manda el registro del volcado: un objetivo que nombra algo que aún no existe crea
-  // su clave en el grafo, así que tener clave no basta.
+  // does it exist in the pack? For items and fluids, the dump's registry rules: a target naming something that
+  // doesn't exist yet creates its key in the graph, so having a key isn't enough.
   const exists = (name) => {
     if (name.startsWith('fluid:')) return dump.fluids.has(name.slice(6));
     if (name.startsWith('m:') || name.startsWith('run:')) return model.entriesById.has(name.slice(name.indexOf(':') + 1));
@@ -80,7 +80,7 @@ export function prepareEras(model) {
   let universe = null;
   const candidates = () => {
     if (!universe) {
-      // objetos y fluidos del registro, más las claves que no son material (máquinas construidas m:, energía...)
+      // items and fluids from the registry, plus non-material keys (built machines m:, energy...)
       universe = new Set();
       for (const i of dump.items) universe.add(i);
       for (const f of dump.fluids) universe.add('fluid:' + f);
@@ -91,7 +91,7 @@ export function prepareEras(model) {
 
   const groups = [];
   for (const grp of cfg.eraItems) {
-    if (!known('el grupo de objetos', grp.id, grp.era)) continue;
+    if (!known('item group', grp.id, grp.era)) continue;
     const excl = makeGlobMatcher(asArray(grp.exclude));
     const items = [];
     const seen = new Set();
@@ -105,7 +105,7 @@ export function prepareEras(model) {
           items.push({ name, pattern: true, key: graphKeyOf(name) });
           n++;
         }
-        if (n === 0) warnings.push(`regla de eras: el patrón ${s} del grupo ${grp.id} no casa con nada`);
+        if (n === 0) warnings.push(`era rule: pattern ${s} of group ${grp.id} matches nothing`);
       } else if (!seen.has(s)) {
         seen.add(s);
         items.push({ name: s, pattern: false, key: graphKeyOf(s), missing: !exists(s) });
@@ -125,20 +125,20 @@ export function prepareEras(model) {
           slots.get(sig).recipes++;
         }
       }
-      if (recipes === 0) warnings.push(`regla de eras: inputsOf ${asArray(grp.inputsOf).join(', ')} del grupo ${grp.id} no casa con ninguna receta`);
+      if (recipes === 0) warnings.push(`era rule: inputsOf ${asArray(grp.inputsOf).join(', ')} of group ${grp.id} matches no recipe`);
       for (const s of slots.values()) if (!seen.has(s.name)) items.push(s);
     }
     groups.push({ ...grp, label: grp.label || grp.id, rank: idx.get(grp.era), items });
   }
   for (const r of resources) {
-    for (const id of r.onlyFrom) if (!resById.has(id)) warnings.push(`regla de eras: onlyFrom de ${r.id} nombra el recurso ${id}, que no está en eraResources`);
+    for (const id of r.onlyFrom) if (!resById.has(id)) warnings.push(`era rule: onlyFrom of ${r.id} names resource ${id}, which isn't in eraResources`);
   }
   return { order, idx, resources, resById, groups, active: active && order.length > 0 };
 }
 
 /**
- * Vista "sin estos recursos": alcance de la puerta con sus claves quitadas de toda fuente, sin las fuentes del mundo de sus
- * dimensiones y sin las recetas que solo valen allí.
+ * "Without these resources" view: the gate's reach with their keys removed from every source, without the world
+ * sources from their dimensions, and without the recipes that are only valid there.
  */
 export function eraView(model, resList) {
   const g = model.g;
@@ -172,11 +172,11 @@ export function eraView(model, resList) {
   const reasonOf = (k) => {
     if (blocked[k]) {
       const r = keyRes.get(k);
-      return { code: 'later-era', resource: r, text: `recurso de una era posterior: ${eraLabel(r)}` };
+      return { code: 'later-era', resource: r, text: `resource from a later era: ${eraLabel(r)}` };
     }
     if (!lf.reached[k] && lostWorld.has(k)) {
       const { source, resource } = lostWorld.get(k);
-      return { code: 'later-era', resource, text: `solo sale de ${source.origin.join(', ')} (fuente «${source.id}»): recurso de una era posterior, ${eraLabel(resource)}` };
+      return { code: 'later-era', resource, text: `only comes from ${source.origin.join(', ')} (source «${source.id}»): resource from a later era, ${eraLabel(resource)}` };
     }
     return null;
   };
@@ -193,7 +193,7 @@ export function eraView(model, resList) {
   return view;
 }
 
-/** Recursos posteriores que nombra un árbol de bloqueo. */
+/** Later resources named by a blocking tree. */
 function laterIn(tree) {
   const out = new Map();
   for (const why of blockedRoots(tree).values()) if (why.code === 'later-era' && why.resource) out.set(why.resource.id, why.resource);
@@ -210,10 +210,10 @@ function itemTree(model, view, it) {
 }
 
 function itemName(it) {
-  return it.alts && it.recipes ? `${it.name}  (entrada de ${it.recipes} receta(s), p. ej. ${it.example})` : it.name;
+  return it.alts && it.recipes ? `${it.name}  (input of ${it.recipes} recipe(s), e.g. ${it.example})` : it.name;
 }
 
-/** Corta los nodos que ya se desplegaron en una cadena anterior del grupo (se pintan como "ya expandido arriba"). */
+/** Prunes nodes already expanded in an earlier chain of the group (shown as "already expanded above"). */
 function pruneSeen(tree, seen) {
   const walk = (n, depth) => {
     if (!n || n.ruleRoot) return;
@@ -247,17 +247,17 @@ function evalGroup(model, res, eras, grp, viewFor) {
   let verdict = 'PASS';
   if (buckets.violation.length > 0 || buckets.missing.length > 0) verdict = grp.optional ? 'WARN' : 'FAIL';
   else if (explicitUnreachable.length > 0) verdict = 'WARN';
-  const after = `posteriores a ${grp.era}${later.length > 0 ? '' : ' (no hay ninguno declarado)'}`;
+  const after = `later than ${grp.era}${later.length > 0 ? '' : ' (none declared)'}`;
   const extras = [];
-  if (buckets.later.length > 0) extras.push(`${buckets.later.length} son ya de un recurso posterior y no cuentan`);
-  if (buckets.unreachable.length > 0) extras.push(`${buckets.unreachable.length} no se fabrican en este tier`);
-  if (buckets.missing.length > 0) extras.push(`${buckets.missing.length} no existen en el registro`);
+  if (buckets.later.length > 0) extras.push(`${buckets.later.length} already belong to a later resource and don't count`);
+  if (buckets.unreachable.length > 0) extras.push(`${buckets.unreachable.length} aren't made in this tier`);
+  if (buckets.missing.length > 0) extras.push(`${buckets.missing.length} don't exist in the registry`);
   const summary = buckets.violation.length > 0
-    ? `${buckets.violation.length} de ${checked} piden un recurso de una era posterior a ${grp.era}`
-    : `${buckets.ok.length}/${checked} sin recursos de eras ${after}`;
+    ? `${buckets.violation.length} of ${checked} need a resource from an era later than ${grp.era}`
+    : `${buckets.ok.length}/${checked} with no resources from eras ${after}`;
   const lines = [`${summary}${extras.length > 0 ? ` (${extras.join('; ')})` : ''}`];
-  if (grp.optional && verdict !== 'PASS') lines.push('(grupo opcional: se avisa pero no tumba el veredicto)');
-  // las cadenas de un mismo grupo comparten tramos (las cuatro piezas del traje piden la misma tela): cada tramo se despliega una vez
+  if (grp.optional && verdict !== 'PASS') lines.push("(optional group: a warning, but it doesn't sink the verdict)");
+  // chains in the same group share segments (the suit's four pieces all need the same fabric): each segment is expanded once
   const seen = new Set();
   const violations = [];
   for (const it of buckets.violation) {
@@ -267,22 +267,22 @@ function evalGroup(model, res, eras, grp, viewFor) {
   }
   violations.slice(0, MAX_DETAIL).forEach((v, i) => {
     const it = buckets.violation[i];
-    lines.push(`  ✗ ${itemName(it)} — pide ${v.resources.length > 0 ? v.resources.map(eraLabel).join(', ') : 'un recurso posterior'}`);
+    lines.push(`  ✗ ${itemName(it)} — needs ${v.resources.length > 0 ? v.resources.map(eraLabel).join(', ') : 'a later resource'}`);
     if (v.tree) lines.push(...renderTree(model, pruneSeen(v.tree, seen), { prefix: '      ' }));
   });
-  if (violations.length > MAX_DETAIL) lines.push(`  … +${violations.length - MAX_DETAIL} violaciones más (todas en el JSON)`);
-  for (const it of buckets.missing) lines.push(`  ? ${it.name} — no existe en el registro${grp.optional ? ' (aún no ha llegado)' : ' (¿id mal escrito?)'}`);
+  if (violations.length > MAX_DETAIL) lines.push(`  … +${violations.length - MAX_DETAIL} more violations (all in the JSON)`);
+  for (const it of buckets.missing) lines.push(`  ? ${it.name} — doesn't exist in the registry${grp.optional ? " (hasn't arrived yet)" : ' (misspelled id?)'}`);
   for (const it of explicitUnreachable.slice(0, MAX_DETAIL)) {
     const tree = itemTree(model, view, it);
     const res2 = tree ? laterIn(tree) : [];
-    const why = tree ? 'no se fabrica en este tier ni con todos los recursos' : 'está en el registro, pero ninguna receta ni fuente del modelo lo da';
-    lines.push(`  ? ${itemName(it)} — ${why} (la regla no se puede comprobar)${res2.length > 0 ? `; además pide ${res2.map(eraLabel).join(', ')}` : ''}`);
+    const why = tree ? "isn't made in this tier even with every resource" : "is in the registry, but no recipe or source in the model gives it";
+    lines.push(`  ? ${itemName(it)} — ${why} (the rule can't be checked)${res2.length > 0 ? `; it also needs ${res2.map(eraLabel).join(', ')}` : ''}`);
     if (tree) lines.push(...renderTree(model, pruneSeen(tree, seen), { prefix: '      ' }));
   }
   const list = (arr) => arr.slice(0, 8).map((it) => it.name).join(', ') + (arr.length > 8 ? ` … +${arr.length - 8}` : '');
-  if (buckets.later.length > 0) lines.push(`  · de un recurso posterior (no cuentan como de esta era): ${list(buckets.later)}`);
+  if (buckets.later.length > 0) lines.push(`  · from a later resource (don't count as this era's): ${list(buckets.later)}`);
   const patternUnreachable = buckets.unreachable.filter((it) => !it.explicit);
-  if (patternUnreachable.length > 0) lines.push(`  · no se fabrican en este tier (no se comprueban): ${list(patternUnreachable)}`);
+  if (patternUnreachable.length > 0) lines.push(`  · not made in this tier (not checked): ${list(patternUnreachable)}`);
   return {
     group: grp, verdict, lines,
     counts: Object.fromEntries(Object.entries(buckets).map(([k, v]) => [k, v.length])),
@@ -293,7 +293,7 @@ function evalGroup(model, res, eras, grp, viewFor) {
   };
 }
 
-/** "El titanio solo sale de la Luna": sin los recursos de `onlyFrom`, ninguna clave del recurso se alcanza. */
+/** "Titanium only comes from the Moon": without the `onlyFrom` resources, no key of the resource is reached. */
 function evalExclusive(model, eras, r) {
   const g = model.g;
   const sources = r.onlyFrom.map((id) => eras.resById.get(id)).filter(Boolean);
@@ -301,14 +301,15 @@ function evalExclusive(model, eras, r) {
   const own = new Uint8Array(g.nKeys);
   for (const k of r.keys) own[k] = 1;
   const leaked = r.keys.filter((k) => view.lf.reached[k]);
-  const from = sources.map((s) => s.label || s.id).join(', ') || '(ningún recurso conocido)';
+  const from = sources.map((s) => s.label || s.id).join(', ') || '(no known resource)';
   const lines = [];
   if (leaked.length === 0) {
-    lines.push(`ninguno de sus ${r.keys.length} objetos y fluidos sale sin ${from}, como debe ser`);
+    lines.push(`none of its ${r.keys.length} items and fluids come out without ${from}, as it should be`);
     return { resource: r, verdict: 'PASS', lines, leaked: [], entries: [] };
   }
-  // puntos de entrada: reglas que dan una clave del recurso sin gastar ninguna. Solo es una fuente si sus entradas se alcanzan
-  // también sin el propio recurso; si no, recicla lo que ya lleva el recurso (macerar un motor EV da titanio) y no cuenta.
+  // entry points: rules that give a key of the resource without consuming any. It only counts as a source if its
+  // inputs are also reached without the resource itself; otherwise it recycles what already carries the resource
+  // (macerating an EV motor gives titanium) and doesn't count.
   const pure = eraView(model, [...sources, r]);
   const isSource = (i) => g.rules[i].slots.every((slot) => slot.alts.some((a) => pure.lf.reached[a] === 1));
   const entries = [];
@@ -328,34 +329,34 @@ function evalExclusive(model, eras, r) {
   });
   const factEntries = view.facts.filter((k) => own[k]);
   entries.sort((a, b) => a.level - b.level);
-  // agrupados por la clave del recurso que meten: «gtceu:rutile_dust ← 8 reglas: ...»
+  // grouped by the resource key they bring in: «gtceu:rutile_dust ← 8 rules: ...»
   const byKey = new Map();
-  for (const k of factEntries) byKey.set(k, ['del mundo (una fuente de world que no es de ' + from + ')']);
+  for (const k of factEntries) byKey.set(k, ['from the world (a world source not from ' + from + ')']);
   for (const e of entries) {
     for (const o of e.outs) {
       if (!byKey.has(o)) byKey.set(o, []);
       byKey.get(o).push(describeRule(g, e.rule));
     }
   }
-  lines.push(`FUGA: ${leaked.length} de sus ${r.keys.length} objetos y fluidos salen sin ${from}. Entran por ${entries.length + factEntries.length} fuente(s) en ${byKey.size} clave(s)${recycled > 0 ? ` (y ${recycled} receta(s) que reciclan lo que ya lo lleva, que no cuentan)` : ''}:`);
+  lines.push(`LEAK: ${leaked.length} of its ${r.keys.length} items and fluids come out without ${from}. They come in through ${entries.length + factEntries.length} source(s) in ${byKey.size} key(s)${recycled > 0 ? ` (and ${recycled} recipe(s) that recycle what already carries it, which don't count)` : ''}:`);
   const keyList = [...byKey.entries()].sort((a, b) => b[1].length - a[1].length);
   for (const [k, how] of keyList.slice(0, 12)) {
-    lines.push(`  · ${g.keyNames[k]}  ← ${how.length > 1 ? `${how.length} fuentes: ` : ''}${how.slice(0, 3).join(' ; ')}${how.length > 3 ? ' …' : ''}`);
+    lines.push(`  · ${g.keyNames[k]}  ← ${how.length > 1 ? `${how.length} sources: ` : ''}${how.slice(0, 3).join(' ; ')}${how.length > 3 ? ' …' : ''}`);
   }
-  if (keyList.length > 12) lines.push(`  … +${keyList.length - 12} claves más (todas en el JSON)`);
+  if (keyList.length > 12) lines.push(`  … +${keyList.length - 12} more keys (all in the JSON)`);
   const first = entries.length > 0 ? entries[0].outs[0] : factEntries[0];
   if (first !== undefined) {
-    lines.push(`  la primera que se alcanza (${g.keyNames[first]}):`);
+    lines.push(`  the first one reached (${g.keyNames[first]}):`);
     lines.push(...renderTree(model, derivationTree(model, view.lf, first, { depth: 2, kids: 4 }), { prefix: '      ', maxKids: 4 }));
   }
   return {
     resource: r, verdict: r.optional ? 'WARN' : 'FAIL', lines, recycled,
     leaked: leaked.map((k) => g.keyNames[k]),
-    entries: [...factEntries.map((k) => `mundo → ${g.keyNames[k]}`), ...entries.map((e) => `${describeRule(g, e.rule)} → ${e.outs.map((o) => g.keyNames[o]).join(', ')}`)],
+    entries: [...factEntries.map((k) => `world → ${g.keyNames[k]}`), ...entries.map((e) => `${describeRule(g, e.rule)} → ${e.outs.map((o) => g.keyNames[o]).join(', ')}`)],
   };
 }
 
-/** Evalúa la regla de eras: grupos de objetos y comprobaciones de exclusividad. */
+/** Evaluates the era rule: item groups and exclusivity checks. */
 export function evaluateEras(model, res) {
   const eras = prepareEras(model);
   const out = { active: eras.active, resources: [], groups: [], exclusive: [], counts: { pass: 0, warn: 0, total: 0 }, verdict: 'PASS' };

@@ -1,4 +1,4 @@
-// Pruebas de normalización de recetas y de la carga de configuración con herencia.
+// Tests for recipe normalization and config loading with inheritance.
 import assert from 'node:assert/strict';
 import path from 'node:path';
 import { test } from 'node:test';
@@ -21,7 +21,7 @@ function norm(rec, { tags = {}, fluidTags = {}, cfg = {}, gtTypes = ['gtceu:mace
   return { n: normalizeRecipe({ id: rec.id, type: rec.type, added: false, json: rec.json }, ctx), ctx };
 }
 
-test('receta GT: capital (chance 0), catalizador (chance parcial), consumibles, salidas y EU/t', () => {
+test('GT recipe: capital (chance 0), catalyst (partial chance), consumables, outputs and EU/t', () => {
   const { n } = norm(gt('x', 'gtceu:macerator', {
     ins: [gi('a', 2), gi('molde', 1, 0), gi('broca', 1, 1000), gtag('forge:dusts/x')],
     outs: [gi('b', 1, 5000)],
@@ -40,13 +40,13 @@ test('receta GT: capital (chance 0), catalizador (chance parcial), consumibles, 
   assert.ok(n.inputs.some((i) => i.kind === 'fluid' && i.alts[0] === 'fluid:minecraft:water'));
 });
 
-test('receta GT: el EU/t sale de tickInputs y admite {voltage, amperage}', () => {
+test('GT recipe: EU/t comes from tickInputs and accepts {voltage, amperage}', () => {
   const rec = gt('x', 'gtceu:macerator', { ins: [gi('a')], outs: [gi('b')] });
   rec.json.tickInputs = { eu: [{ content: { voltage: 120, amperage: 2 }, chance: 10000, maxChance: 10000 }] };
   assert.equal(norm(rec).n.eut, 120);
 });
 
-test('crafteo: las herramientas son capital y el tipo gtceu:shaped se normaliza al de vanilla', () => {
+test('crafting: tools are capital, and the gtceu:shaped type normalizes to vanilla\'s', () => {
   const rec = {
     id: 'gtceu:shaped/x', type: 'gtceu:shaped',
     json: { type: 'unknown', pattern: ['HI'], key: { H: { tag: 'gtceu:tools/crafting_hammers' }, I: { item: 'ingot' } }, result: { item: 'plate' } },
@@ -58,7 +58,7 @@ test('crafteo: las herramientas son capital y el tipo gtceu:shaped se normaliza 
   assert.deepEqual(n.outputs.map((o) => o.key), ['plate']);
 });
 
-test('circuito programado y entradas compuestas de Forge se resuelven', () => {
+test('programmed circuit and Forge compound inputs are resolved', () => {
   const rec = gt('x', 'gtceu:macerator', { ins: [] });
   rec.json.inputs.item = [
     { content: { type: 'gtceu:circuit', configuration: 3 }, chance: 0, maxChance: 10000 },
@@ -69,7 +69,7 @@ test('circuito programado y entradas compuestas de Forge se resuelven', () => {
   assert.deepEqual(n.inputs[1].alts, ['p', 'q1']);
 });
 
-test('una etiqueta vacía de vanilla (solo la barrera) o ausente deja la ranura sin miembros y con nombre', () => {
+test('an empty vanilla tag (just the barrier) or a missing one leaves the slot with no members, named', () => {
   const rec = {
     id: 'x', type: 'minecraft:crafting_shaped',
     json: { pattern: ['AB'], key: { A: { tag: 'a:vacia' }, B: { tag: 'a:no_esta' } }, result: { item: 'r' } },
@@ -81,7 +81,7 @@ test('una etiqueta vacía de vanilla (solo la barrera) o ausente deja la ranura 
   assert.ok(ctx.tags.missing.has('a:no_esta'));
 });
 
-test('la configuración hija hereda del padre: listas sumadas, objetivos solo con inheritTargets', () => {
+test('child config inherits from the parent: lists added together, targets only with inheritTargets', () => {
   const steam = loadTierConfig({ tier: 'steam' }, tiersDir).raw;
   const lv = loadTierConfig({ tier: 'lv' }, tiersDir).raw;
   assert.ok(steam.targets.length > 10);
@@ -89,36 +89,36 @@ test('la configuración hija hereda del padre: listas sumadas, objetivos solo co
   assert.ok(lv.world.length > steam.world.length);
   assert.ok(lv.synthetic.length > steam.synthetic.length);
   assert.ok(lv.machinesFromRegistry.length >= 1);
-  assert.ok(lv.targets.length > steam.targets.length, 'inheritTargets añade los del vapor');
+  assert.ok(lv.targets.length > steam.targets.length, 'inheritTargets adds steam\'s');
   assert.ok(lv.autoTargets.length > steam.autoTargets.length);
   assert.ok(lv.targets.some((t) => t.id === 'turbina-lv'));
   assert.ok(lv.targets.some((t) => t.id === 'horno-arco'));
   assert.equal(lv.tier, 'lv');
   assert.equal(lv.typeAliases['gtceu:shaped'], 'minecraft:crafting_shaped');
-  // los mapas se combinan clave a clave
+  // maps are merged key by key
   assert.deepEqual(lv.partAbilities.steam, steam.partAbilities.steam);
   assert.ok(lv.partAbilities.energy_input);
   assert.ok(lv.conditions.cleanroom && lv.conditions.ae2_circumstance_explosion);
   assert.ok(lv.autoTargetsFromVeins.length >= 1);
 });
 
-test('los ids de los objetivos de cada tier son únicos', () => {
+test('each tier\'s target ids are unique', () => {
   for (const tier of ['steam', 'lv']) {
     const raw = loadTierConfig({ tier }, tiersDir).raw;
     for (const list of [raw.targets, raw.autoTargets]) {
       const ids = list.map((t) => t.id);
-      assert.equal(new Set(ids).size, ids.length, `${tier}: ids repetidos ${ids.filter((x, i) => ids.indexOf(x) !== i)}`);
+      assert.equal(new Set(ids).size, ids.length, `${tier}: duplicate ids ${ids.filter((x, i) => ids.indexOf(x) !== i)}`);
     }
   }
 });
 
-test('los objetivos del LV nombran objetos o claves con el formato esperado', () => {
+test('LV\'s targets name items or keys in the expected format', () => {
   const lv = loadTierConfig({ tier: 'lv' }, tiersDir).raw;
   const check = (list, expectValue) => {
     for (const t of list) {
       const keys = [t.item, t.fluid, t.output, t.input].flat().filter(Boolean);
       for (const k of keys) assert.match(String(k), /^(fluid:)?[a-z0-9_.-]+:[a-z0-9_./-]+$/, `${t.id}: ${k}`);
-      if (t.expect !== undefined) assert.equal(t.expect, expectValue, `${t.id}: expect solo admite "${expectValue}" en esta lista`);
+      if (t.expect !== undefined) assert.equal(t.expect, expectValue, `${t.id}: expect only allows "${expectValue}" in this list`);
     }
   };
   check(lv.targets, 'unreachable');

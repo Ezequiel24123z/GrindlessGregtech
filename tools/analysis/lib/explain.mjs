@@ -1,4 +1,4 @@
-// Cadenas de derivación (por qué se alcanza algo) y de bloqueo (por qué no).
+// Derivation chains (why something is reached) and blocking chains (why it isn't).
 
 export const keyName = (g, k) => g.keyNames[k];
 
@@ -6,10 +6,10 @@ export function describeRule(g, r) {
   const rule = g.rules[r];
   switch (rule.kind) {
     case 'recipe': return `${rule.type} · ${rule.name}`;
-    case 'machine-build': return `construir ${rule.name.slice(10)}`;
-    case 'machine-run': return `operar ${rule.name.slice(7)}`;
-    case 'world-auto': return `${rule.name}${rule.meta.finite ? ' (finito)' : ''}`;
-    case 'world-manual': return `${rule.name} (a mano, un viaje)`;
+    case 'machine-build': return `build ${rule.name.slice(6)}`;
+    case 'machine-run': return `operate ${rule.name.slice(8)}`;
+    case 'world-auto': return `${rule.name}${rule.meta.finite ? ' (finite)' : ''}`;
+    case 'world-manual': return `${rule.name} (by hand, a trip)`;
     default: return rule.name;
   }
 }
@@ -23,9 +23,9 @@ function pickSlotKid(model, lf, r, s) {
 }
 
 /**
- * Árbol de cómo se llega a `key` con el resultado de un lfp (paso gate, o paso auto con suelo).
- * Las ranuras de capital que el lfp dio por cumplidas de antemano se muestran como hojas ("se construye una vez") y las
- * tolerantes (combustible, catalizadores) como "cebado": se mantienen en el propio ciclo.
+ * Tree of how `key` is reached from an lfp result (gate pass, or auto pass with the ground floor).
+ * Capital slots the lfp took as already met are shown as leaves ("built once"), and tolerant ones
+ * (fuel, catalysts) as "primed": kept up by the cycle itself.
  */
 export function derivationTree(model, lf, key, lim = { depth: 5, kids: 5 }, fromRule = -1) {
   const g = model.g;
@@ -68,7 +68,7 @@ export function derivationTree(model, lf, key, lim = { depth: 5, kids: 5 }, from
     return node;
   };
   if (fromRule >= 0) {
-    // raíz = una receta concreta (objetivos de tipo receta, que no tienen clave propia)
+    // root = one specific recipe (recipe-type targets, which have no key of their own)
     const root = { key: g.rules[fromRule].outs[0] ?? -1, depth: 0, rule: fromRule, ruleHead: true };
     expand(root, fromRule, 0);
     return root;
@@ -77,13 +77,13 @@ export function derivationTree(model, lf, key, lim = { depth: 5, kids: 5 }, from
 }
 
 /**
- * Árbol de una receta de la que se ignora la máquina (objetivos `machineless`): las entradas y condiciones alcanzables en `lf`.
- * `capMask`: en el paso automático, lo que se construye una vez (ranuras de capital).
+ * Tree for a recipe whose machine is ignored (`machineless` targets): the inputs and conditions reachable in `lf`.
+ * `capMask`: in the auto pass, what's built once (capital slots).
  */
 export function machinelessTree(model, lf, r, capMask = null) {
   const g = model.g;
   const rule = g.rules[r];
-  const root = { key: rule.outs[0] ?? -1, depth: 0, rule: r, ruleHead: true, note: 'entradas alcanzables; solo falta la máquina', kids: [] };
+  const root = { key: rule.outs[0] ?? -1, depth: 0, rule: r, ruleHead: true, note: 'inputs reached; only the machine is missing', kids: [] };
   for (const slot of rule.slots) {
     if (slot.role === 'machine') continue;
     const reached = slot.alts.filter((a) => lf.reached[a] === 1).sort((a, b) => lf.level[a] - lf.level[b]);
@@ -102,31 +102,31 @@ function rootReason(model, key) {
   const name = g.keyNames[key];
   const dump = model.dump;
   if (name.startsWith('dead:')) return { code: 'dead-slot', text: name.slice(5) };
-  if (name.startsWith('cond:')) return { code: 'cond', text: `condición ${name.slice(5)} no soportada en este tier` };
-  if (model.manualKeys.has(key)) return { code: 'manual-only', text: 'recurso del mundo que solo se recoge a mano (ninguna máquina lo repone)' };
+  if (name.startsWith('cond:')) return { code: 'cond', text: `condition ${name.slice(5)} isn't supported in this tier` };
+  if (model.manualKeys.has(key)) return { code: 'manual-only', text: 'world resource only gathered by hand (no machine resupplies it)' };
   if (name.startsWith('fluid:')) {
     const id = name.slice(6);
-    if (!dump.fluids.has(id)) return { code: 'unregistered', text: 'el fluido no existe en el registro' };
-    if (model.disabledWorld.has(name)) return { code: 'disabled-world', text: `solo lo da el mundo "${model.disabledWorld.get(name)}", deshabilitado` };
-    return { code: 'no-source', text: 'ninguna receta ni fuente lo produce' };
+    if (!dump.fluids.has(id)) return { code: 'unregistered', text: "the fluid doesn't exist in the registry" };
+    if (model.disabledWorld.has(name)) return { code: 'disabled-world', text: `only given by the world "${model.disabledWorld.get(name)}", disabled` };
+    return { code: 'no-source', text: 'no recipe or source produces it' };
   }
-  if (!dump.items.has(name)) return { code: 'unregistered', text: 'no existe en el registro de objetos (¿máquina u objeto aún sin implementar?)' };
-  if (model.disabledWorld.has(name)) return { code: 'disabled-world', text: `solo lo da el mundo "${model.disabledWorld.get(name)}", deshabilitado en la config` };
-  return { code: 'no-recipe', text: 'existe, pero ninguna receta lo produce y no es un recurso del mundo' };
+  if (!dump.items.has(name)) return { code: 'unregistered', text: "doesn't exist in the item registry (machine or item not implemented yet?)" };
+  if (model.disabledWorld.has(name)) return { code: 'disabled-world', text: `only given by the world "${model.disabledWorld.get(name)}", disabled in the config` };
+  return { code: 'no-recipe', text: "exists, but no recipe produces it and it isn't a world resource" };
 }
 
 /**
- * Coste de "añadir una fuente" para una clave que el análisis de bloqueo trata como raíz: un recurso del mundo que solo
- * se recoge a mano es lo más natural (basta automatizarlo); lo demás (sin receta, de mobs, ranura muerta) es peor.
- * Una clave que tiene productores activos y no es del mundo no es raíz: hay que desbloquear sus productores.
+ * Cost of "adding a source" for a key the blocking analysis treats as a root: a world resource only
+ * gathered by hand is the most natural (just automate it); the rest (no recipe, from mobs, dead slot) is worse.
+ * A key that has active producers and isn't the world's isn't a root: its producers need to be unblocked.
  */
 export function makeRootCost(model, enabled = null) {
   const g = model.g;
   return (k) => {
     const hasProducer = g.producers(k).some((r) => !enabled || enabled[r] === 1);
-    // solo los hechos manuales del mundo son raíces por sí mismos; una mena que exige antes una llave tiene una regla productora
+    // only manual world facts are roots by themselves; an ore that first requires a key has a producer rule
     const manual = model.manualFactKeys ? model.manualFactKeys.has(k) : model.manualKeys.has(k);
-    // un recurso que el mundo daría pero esta config/dimensión no deja es la raíz natural aunque tenga otras recetas lejanas
+    // a resource the world would give but this config/dimension doesn't allow is the natural root even with other distant recipes
     const disabled = model.disabledWorld.has(g.keyNames[k]);
     if (hasProducer && !manual && !disabled) return Infinity;
     switch (rootReason(model, k).code) {
@@ -139,9 +139,9 @@ export function makeRootCost(model, enabled = null) {
 }
 
 /**
- * Árbol de bloqueo con la cadena más barata hasta las raíces que faltan (blocker = salida de blockerFor).
- * `blocker.reasonOf(k)`, si existe, da el motivo de una raíz antes que `rootReason` (la regla de eras nombra así el recurso
- * de una era posterior que tira de la cadena).
+ * Blocking tree with the cheapest chain to the missing roots (blocker = blockerFor's output).
+ * `blocker.reasonOf(k)`, if it exists, gives a root's reason before `rootReason` (the era rule names
+ * the later-era resource pulling on the chain this way).
  */
 export function blockedTree(model, blocker, key, lim = { depth: 8, kids: 4 }) {
   const g = model.g;
@@ -180,7 +180,7 @@ export function blockedTree(model, blocker, key, lim = { depth: 8, kids: 4 }) {
         node.root = reasonOf(k);
         return node;
       }
-      // Sin ruta finita: solo quedan ciclos sin salida. Se sigue la receta con menos ranuras pendientes.
+      // No finite route: only dead-end cycles are left. Follow the recipe with fewest pending slots.
       let pick = -1;
       let pickOpen = Infinity;
       for (const p of prods) {
@@ -205,7 +205,7 @@ export function blockedTree(model, blocker, key, lim = { depth: 8, kids: 4 }) {
   return walk(key, 0, new Set());
 }
 
-/** Árbol de bloqueo de una receta concreta: qué ranuras no se cumplen y por qué (para objetivos de tipo receta). */
+/** Blocking tree for one specific recipe: which slots aren't met and why (for recipe-type targets). */
 export function blockedRuleTree(model, blocker, r, lim = { depth: 8, kids: 4 }) {
   const g = model.g;
   const { cost, mask, capMask } = blocker;
@@ -220,7 +220,7 @@ export function blockedRuleTree(model, blocker, r, lim = { depth: 8, kids: 4 }) 
   return root;
 }
 
-/** Raíces (hojas sin fuente) de un árbol de bloqueo, sin repetir. */
+/** Roots (sourceless leaves) of a blocking tree, without repeats. */
 export function blockedRoots(tree) {
   const out = new Map();
   const walk = (n) => {
@@ -242,26 +242,26 @@ export function renderTree(model, node, opts = {}) {
     }
     const nm = n.ruleRoot || n.ruleHead ? describeRule(g, n.rule) : keyName(g, n.key);
     let line = `${prefix}${slotLabel ? '[' + slotLabel + '] ' : ''}${nm}`;
-    if (n.ruleRoot) line += '  ✗ le falta:';
-    else if (n.ruleHead) line += n.note ? `  (${n.note})` : '  (receta usable, necesita:)';
-    else if (n.fact) line += '  ← del mundo / arranque';
-    else if (n.capital) line += '  ← capital (se construye una vez)';
+    if (n.ruleRoot) line += '  ✗ missing:';
+    else if (n.ruleHead) line += n.note ? `  (${n.note})` : '  (usable recipe, needs:)';
+    else if (n.fact) line += '  ← from the world / bootstrap';
+    else if (n.capital) line += '  ← capital (built once)';
     else if (n.rule !== undefined) line += `  ← ${describeRule(g, n.rule)}`;
-    if (n.level !== undefined && opts.levels) line += `  (nivel ${n.level})`;
-    if (n.primed) line += '  ⟳ cebado (el propio ciclo lo repone)';
-    if (n.cycle) line += '  ↺ ciclo (se alimenta de sí mismo)';
-    if (n.seen) line += '  (ya expandido arriba)';
+    if (n.level !== undefined && opts.levels) line += `  (level ${n.level})`;
+    if (n.primed) line += '  ⟳ primed (the cycle itself resupplies it)';
+    if (n.cycle) line += '  ↺ cycle (feeds itself)';
+    if (n.seen) line += '  (already expanded above)';
     if (n.truncated) line += '  …';
     if (n.root) line += `  ✗ ${n.root.text}`;
-    if (n.ok) line += '  ✓ ya disponible';
+    if (n.ok) line += '  ✓ already available';
     lines.push(line);
     for (const d of n.dead || []) {
-      lines.push(`${prefix}      · ${describeRule(g, d.rule)}${d.slots.length ? ' — falta: ' + d.slots.join(', ') : ''}`);
+      lines.push(`${prefix}      · ${describeRule(g, d.rule)}${d.slots.length ? ' — missing: ' + d.slots.join(', ') : ''}`);
     }
     const kids = n.kids || [];
     const maxKids = opts.maxKids || 6;
     kids.slice(0, maxKids).forEach((k) => walk(k.child, prefix + '    ', k.slot ? k.slot.label : '', depth + 1));
-    if (kids.length > maxKids) lines.push(`${prefix}    … +${kids.length - maxKids} más`);
+    if (kids.length > maxKids) lines.push(`${prefix}    … +${kids.length - maxKids} more`);
   };
   walk(node, opts.prefix || '', '', 0);
   return lines;

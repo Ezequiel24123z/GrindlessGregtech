@@ -1,7 +1,7 @@
 {
   "tier": "obtain",
-  "title": "Auditoría de obtención: lo que no se consigue nunca, en ninguna era",
-  "note": "Paso `--pass obtain` (lib/obtain.mjs). Parte de todas las fuentes del mundo que el pack tiene hoy en cualquier era y de todas las recetas de cualquier nivel, y lista los objetos y fluidos de los espacios de nombres auditados que no se consiguen nunca, agrupados por material y clasificados A (darle una fuente), B (llega con una era posterior de docs/viaje.md: ocultar hasta entonces) o C (no llegará: ocultar con sus recetas). Hereda de steam los tipos de receta sin máquina, los alias, las herramientas, las calderas y las máquinas de vapor.",
+  "title": "Obtainability audit: what is never obtained, in any era",
+  "note": "Step `--pass obtain` (lib/obtain.mjs). Starts from every world source the pack has today in any era and every recipe of any tier, and lists the items and fluids of the audited namespaces that are never obtained, grouped by material and classified A (give it a source), B (arrives with a later era from docs/journey.md: hide until then) or C (will never arrive: hide it with its recipes). Inherits from steam the recipe types with no machine, the aliases, the tools, the boilers and the steam machines.",
   "extends": "steam",
 
   "obtain": {
@@ -24,11 +24,11 @@
       { "type": "gtceu:lunar_drilling", "input": "grindless:vein_sample_{id}" }
     ] },
     "world": [
-      { "id": "arboles-gt", "mode": "manual", "items": ["gtceu:rubber_log", "gtceu:rubber_leaves", "gtceu:rubber_sapling", "gtceu:sticky_resin"], "note": "Árboles de caucho de GTM en el Overworld y la resina que sueltan." },
-      { "id": "piedras-gt", "mode": "manual", "items": ["gtceu:marble", "gtceu:red_granite"], "note": "GTM 7.5.3 GTPlacedFeatures/GTBiomeModifiers: manchas de mármol y de granito rojo en el Overworld." },
-      { "id": "suelo-luna", "mode": "manual", "items": ["gcyr:moon_stone", "gcyr:moon_cobblestone", "gcyr:moon_sand", "gcyr:lunar_mare_regolith"], "note": "El suelo de la Luna (gcyr:luna, a mano al final de HV desde la v0.5.0): la muestra de regolito de la perforadora lunar pide regolito y arena lunar (data/grindless/tables/veins_moon.json)." },
-      { "id": "carbonera", "mode": "auto", "via": ["gtceu:charcoal_pile_igniter"], "items": ["gtceu:brittle_charcoal"], "note": "El encendedor de carbonera de GTM quema los troncos en el mundo y deja carbón quebradizo: no es una receta." },
-      { "id": "recetas-especiales", "mode": "manual", "items": ["gtceu:facade_cover"], "note": "La cubierta de fachada sale de una receta especial (gtceu:crafting_facade_cover) que el análisis no lee." }
+      { "id": "arboles-gt", "mode": "manual", "items": ["gtceu:rubber_log", "gtceu:rubber_leaves", "gtceu:rubber_sapling", "gtceu:sticky_resin"], "note": "GTM's rubber trees in the Overworld and the sticky resin they drop." },
+      { "id": "piedras-gt", "mode": "manual", "items": ["gtceu:marble", "gtceu:red_granite"], "note": "GTM 7.5.3 GTPlacedFeatures/GTBiomeModifiers: marble and red granite patches in the Overworld." },
+      { "id": "suelo-luna", "mode": "manual", "items": ["gcyr:moon_stone", "gcyr:moon_cobblestone", "gcyr:moon_sand", "gcyr:lunar_mare_regolith"], "note": "The Moon's ground (gcyr:luna, by hand at the end of HV since v0.5.0): the lunar drill's regolith sample needs regolith and lunar sand (data/grindless/tables/veins_moon.json)." },
+      { "id": "carbonera", "mode": "auto", "via": ["gtceu:charcoal_pile_igniter"], "items": ["gtceu:brittle_charcoal"], "note": "GTM's charcoal pile igniter burns logs in the world and leaves brittle charcoal: it isn't a recipe." },
+      { "id": "recetas-especiales", "mode": "manual", "items": ["gtceu:facade_cover"], "note": "The facade cover comes from a special recipe (gtceu:crafting_facade_cover) that the analysis doesn't read." }
     ],
 
     "ignoreOreBlocks": true,
@@ -36,56 +36,56 @@
     "creative": ["*:creative_*", "*:*_creative_*", "*:debug_*", "gtceu:portable_debug_scanner"],
 
     "later": [
-      { "id": "marte", "era": "EV (Marte, al final de EV)", "until": "ev", "label": "Marte (gcyr:mars)", "dimensions": ["gcyr:mars"], "items": ["gcyr:martian_rock", "gcyr:martian_cobblestone", "gcyr:mars_regolith"] },
-      { "id": "end-scheelita", "era": "EV (Marte, al final de EV)", "until": "ev", "label": "la veta de scheelita, que pasa del End a Marte (veins_excluded.json; ya no se genera)", "veins": ["gtceu:scheelite_vein"], "materials": ["scheelite", "tungstate", "lithium"] },
-      { "id": "venus-mercurio", "era": "IV (Venus y Mercurio)", "until": "iv", "label": "Venus y Mercurio (gcyr:venus, gcyr:mercury)", "dimensions": ["gcyr:venus", "gcyr:mercury"], "items": ["gcyr:venus_rock", "gcyr:venus_cobblestone", "gcyr:venus_sand", "gcyr:venusian_regolith", "gcyr:mercury_rock", "gcyr:mercury_cobblestone"] },
-      { "id": "end-naquadah", "era": "IV+ (naquadah: Venus en viaje.md, y lo que cuelga de él)", "until": "iv", "label": "la veta de naquadah del End, apartada hasta IV (veins_excluded.json)", "veins": ["gtceu:naquadah_vein"] },
-      { "id": "end-pechblenda", "era": "IV (radiactivos)", "until": "iv", "label": "la veta de pechblenda del End, apartada hasta IV (veins_excluded.json)", "veins": ["gtceu:pitchblende_vein_end"] },
-      { "id": "proxima", "era": "UHV (Próxima b)", "until": "uhv", "label": "Próxima Centauri b", "dimensions": ["gcyr:proxima_centauri_b"], "items": ["gcyr:proxima_centauri_b_*", "gcyr:prb_*"] }
+      { "id": "marte", "era": "EV (Mars, at the end of EV)", "until": "ev", "label": "Mars (gcyr:mars)", "dimensions": ["gcyr:mars"], "items": ["gcyr:martian_rock", "gcyr:martian_cobblestone", "gcyr:mars_regolith"] },
+      { "id": "end-scheelita", "era": "EV (Mars, at the end of EV)", "until": "ev", "label": "the scheelite vein, which moves from the End to Mars (veins_excluded.json; no longer generated)", "veins": ["gtceu:scheelite_vein"], "materials": ["scheelite", "tungstate", "lithium"] },
+      { "id": "venus-mercurio", "era": "IV (Venus and Mercury)", "until": "iv", "label": "Venus and Mercury (gcyr:venus, gcyr:mercury)", "dimensions": ["gcyr:venus", "gcyr:mercury"], "items": ["gcyr:venus_rock", "gcyr:venus_cobblestone", "gcyr:venus_sand", "gcyr:venusian_regolith", "gcyr:mercury_rock", "gcyr:mercury_cobblestone"] },
+      { "id": "end-naquadah", "era": "IV+ (naquadah: Venus in docs/journey.md, and whatever hangs off it)", "until": "iv", "label": "the End's naquadah vein, held back until IV (veins_excluded.json)", "veins": ["gtceu:naquadah_vein"] },
+      { "id": "end-pechblenda", "era": "IV (radioactives)", "until": "iv", "label": "the End's pitchblende vein, held back until IV (veins_excluded.json)", "veins": ["gtceu:pitchblende_vein_end"] },
+      { "id": "proxima", "era": "UHV (Proxima b)", "until": "uhv", "label": "Proxima Centauri b", "dimensions": ["gcyr:proxima_centauri_b"], "items": ["gcyr:proxima_centauri_b_*", "gcyr:prb_*"] }
     ],
 
     "unlockLimit": 200,
     "classes": [
       { "class": "B", "materials": ["cerrobase_140"], "era": "LuV", "until": "luv",
-        "reason": "cerrobase 140 fundido: solo lo pide la línea de montaje de circuitos de GT-- (LuV), que integration/gtnn.js conserva, y nada lo funde (el polvo sí se mezcla); su receta de fundido llega con LuV (decisión del 2026-10-24)" },
+        "reason": "molten cerrobase 140: only the GT-- circuit assembly line (LuV) asks for it, which integration/gtnn.js keeps, and nothing melts it (the dust does mix); its melting recipe arrives with LuV (decision of 2026-10-24)" },
 
-      { "class": "B", "materials": ["iridium", "osmium"], "partial": true, "forms": "ore", "era": "IV (Mercurio)", "until": "iv", "reason": "formas de mena del iridio y el osmio: viaje.md los saca de la corteza de Mercurio en IV" },
-      { "class": "B", "materials": ["gcyr:martian_rock_dust"], "era": "EV (Marte, al final de EV)", "until": "ev", "reason": "polvo de roca marciana de GCYR: llega con Marte (hoy nada muele la roca)" },
-      { "class": "B", "materials": ["gcyr:dyson_*", "gcyr:drone_hangar"], "era": "UHV (enjambre de Dyson)", "until": "uhv", "reason": "enjambre de Dyson de viaje.md (UHV): GCYR no da receta a estas piezas" },
-      { "class": "B", "materials": ["gcyr:*_satellite", "gcyr:gps_tracker", "gcyr:beam_receiver", "gcyr:airlock_door", "gcyr:keycard"], "era": "LuV (estación orbital)", "until": "luv", "reason": "satélites, receptor del rayo y piezas de estación de GCYR: viaje.md abre la órbita en LuV; hoy no tienen receta" },
-      { "class": "B", "materials": ["gcyr:space_elevator_support", "gtca:space_elevator*", "gtca:space_miner_*", "gtca:space_pump_*", "gtca:space_assembler_*"], "era": "ZPM (ascensor espacial)", "until": "zpm", "reason": "ascensor espacial y sus módulos: viaje.md lo pone en ZPM; hoy GTCA no da receta a los módulos (integration/gtca.js)" },
-      { "class": "B", "materials": ["gtceu:uev_machine_casing", "gtceu:uiv_machine_casing", "gtceu:uxv_machine_casing", "gtceu:opv_machine_casing", "gtceu:max_machine_casing"], "era": "UEV–MAX", "until": "uev", "reason": "carcasas de los niveles UEV–MAX de viaje.md: GTM no les da receta" },
-      { "class": "B", "materials": ["extendedfeatures:large_cracking_machine", "extendedfeatures:large_pyrolysis_oven", "extendedfeatures:expanded_assembly_line"], "era": "IV", "until": "iv", "reason": "máquina en paralelo estilo GCYM de Extended Features: sin receta hasta que la ola de IV la quiera (integration/extendedfeatures.js)" },
-      { "class": "B", "materials": ["gtnn:circuit_assembly_line"], "era": "LuV", "until": "luv", "reason": "línea de montaje de circuitos de GT-- (LuV): solo le falta el cerrobase 140 fundido, que llega con LuV" },
-      { "class": "B", "materials": ["naquadria_oxide_mixture"], "era": "IV (naquadah)", "until": "iv", "reason": "línea de naquadah de GT--: sale de procesar mena de naquadria, que ninguna veta da hoy; llegará con las vetas de naquadah (viaje.md: Venus, IV)" },
-      { "class": "B", "materials": ["neutronium_mixture", "plutonium_based_liquid_fuel*"], "era": "UV–UIV (neutronio)", "until": "uiv", "reason": "combustible de plutonio del reactor de naquadah de GT--: pide mezcla de neutronio, que sale de una mena de neutronio que ninguna veta da (viaje.md: neutronio en UIV)" },
+      { "class": "B", "materials": ["iridium", "osmium"], "partial": true, "forms": "ore", "era": "IV (Mercury)", "until": "iv", "reason": "ore forms of iridium and osmium: docs/journey.md gets them from Mercury's crust in IV" },
+      { "class": "B", "materials": ["gcyr:martian_rock_dust"], "era": "EV (Mars, at the end of EV)", "until": "ev", "reason": "GCYR Martian rock dust: arrives with Mars (today nothing mills the rock)" },
+      { "class": "B", "materials": ["gcyr:dyson_*", "gcyr:drone_hangar"], "era": "UHV (Dyson swarm)", "until": "uhv", "reason": "Dyson swarm from docs/journey.md (UHV): GCYR gives no recipe for these parts" },
+      { "class": "B", "materials": ["gcyr:*_satellite", "gcyr:gps_tracker", "gcyr:beam_receiver", "gcyr:airlock_door", "gcyr:keycard"], "era": "LuV (orbital station)", "until": "luv", "reason": "GCYR satellites, beam receiver and station parts: docs/journey.md opens orbit in LuV; they have no recipe today" },
+      { "class": "B", "materials": ["gcyr:space_elevator_support", "gtca:space_elevator*", "gtca:space_miner_*", "gtca:space_pump_*", "gtca:space_assembler_*"], "era": "ZPM (space elevator)", "until": "zpm", "reason": "space elevator and its modules: docs/journey.md places it in ZPM; today GTCA gives no recipe for the modules (integration/gtca.js)" },
+      { "class": "B", "materials": ["gtceu:uev_machine_casing", "gtceu:uiv_machine_casing", "gtceu:uxv_machine_casing", "gtceu:opv_machine_casing", "gtceu:max_machine_casing"], "era": "UEV–MAX", "until": "uev", "reason": "casings for the UEV–MAX tiers from docs/journey.md: GTM gives them no recipe" },
+      { "class": "B", "materials": ["extendedfeatures:large_cracking_machine", "extendedfeatures:large_pyrolysis_oven", "extendedfeatures:expanded_assembly_line"], "era": "IV", "until": "iv", "reason": "GCYM-style parallel machine from Extended Features: no recipe until the IV wave wants it (integration/extendedfeatures.js)" },
+      { "class": "B", "materials": ["gtnn:circuit_assembly_line"], "era": "LuV", "until": "luv", "reason": "GT-- circuit assembly line (LuV): only missing molten cerrobase 140, which arrives with LuV" },
+      { "class": "B", "materials": ["naquadria_oxide_mixture"], "era": "IV (naquadah)", "until": "iv", "reason": "GT-- naquadah line: comes from processing naquadria ore, which no vein gives today; it will arrive with the naquadah veins (docs/journey.md: Venus, IV)" },
+      { "class": "B", "materials": ["neutronium_mixture", "plutonium_based_liquid_fuel*"], "era": "UV–UIV (neutronium)", "until": "uiv", "reason": "plutonium fuel for the GT-- naquadah reactor: needs neutronium mixture, which comes from a neutronium ore that no vein gives (docs/journey.md: neutronium in UIV)" },
 
-      { "class": "C", "materials": ["grindless:titanium_drill_bit", "grindless:vein_sample_scheelite"], "keepRecipes": true, "reason": "oculto en EMI: solo existe para partidas viejas y se convierte en lo nuevo (broca de inox, sonda de vetas vacía); su receta de conversión se queda" },
-      { "class": "C", "materials": ["gtca:green_house", "gtca:*_recycler", "gtca:scrap", "gtca:scrapbox", "gtca:uu_matter_amplifier", "gtca:*_matter_amplificator", "gtca:polymerizer", "gtca:industrial_coke_oven", "gtca:steam_pressurizer", "gtca:high_pressure_steam", "gtca:*_chemical_generator", "gtca:extreme_heat_exchanger", "gtca:shd_turbine", "gtca:pahoehoe_lava", "gtca:sh_steam", "gtca:sc_steam", "gtca:e_85_fuel", "gtca:dymethyl_ether"], "reason": "GTCA: quitado por el pack (integration/gtca.js): máquinas que abaratan una línea o sacan energía de la nada, y lo que solo ellas hacían o quemaban" },
-      { "class": "C", "materials": ["gtca:*purification_unit", "gtca:*water*plant_casing", "gtca:*waterplant_casing", "gtca:purified_water_grade_*", "gtca:inert_*_casing", "gtca:high_energy_ultraviolet_emitter_casing", "gtca:hastealloy_276"], "reason": "GTCA: planta de depuración de agua sin receta de controlador (integration/gtca.js) y la aleación que solo pide su carcasa" },
-      { "class": "C", "materials": ["gtca:bedrockium", "gtca:cosmic_*", "gtca:endium", "gtca:mytryl", "gtca:thaumium", "gtca:vinteum", "infinity", "infinity_catalyst", "space_neutronium", "arcane_crystal", "tellurium", "thulium"], "reason": "material de addon con bloques de mena en todas las piedras pero sin veta en ninguna dimensión: nada lo da" },
-      { "class": "C", "materials": ["extendedfeatures:industrial_greenhouse", "extendedfeatures:advanced_conservatory", "extendedfeatures:rock_processing_plant", "extendedfeatures:synthesis_vessel", "extendedfeatures:universal_disassembly_machine", "extendedfeatures:robust_alloy_materializer"], "reason": "Extended Features: controlador quitado por el pack (integration/extendedfeatures.js)" },
-      { "class": "C", "materials": ["gtnn:component_assembly_line", "gtnn:component_assline_casing_*", "gtnn:homemade_bedrock_ore_machine"], "reason": "GT--: sin receta a propósito (integration/gtnn.js)" },
-      { "class": "C", "materials": ["enriched_naquadah_waste", "barium_sulfide"], "reason": "restos de la separación de naquadah de GTM, que GT-- vacía (enableHarderNaquadahLine): nada los produce" },
-      { "class": "C", "materials": ["gtceu:*_marker", "gcyr:*_marker"], "reason": "bloque técnico (marca de dimensión), no es para el jugador" },
-      { "class": "C", "materials": ["gtceu:*_solar_panel"], "reason": "panel solar: GTM 7.5.3 solo da receta a los de ULV y LV (el de LV llega con el naquadah)" },
-      { "class": "C", "materials": ["gtceu:*_passthrough_hatch"], "reason": "escotilla de paso: GTM 7.5.3 solo da receta a la de HV" },
-      { "class": "C", "materials": ["gtceu:*_bedrock_ore_miner"], "reason": "minero de menas del lecho de roca: GTM 7.5.3 no le da receta (no hay menas de lecho)" },
-      { "class": "C", "materials": ["gtceu:foam", "gtceu:reinforced_foam", "gtceu:petrified_foam", "gtceu:reinforced_stone"], "reason": "bloques de espuma de construcción: GTM 7.5.3 no tiene pulverizador, nada los pone" },
-      { "class": "C", "materials": ["gtceu:sus_record", "gtceu:purple_drink", "mc_guffium_239", "potion", "gtceu:zero_point_module", "gtceu:industrial_steam_casing", "gtceu:treated_wood_hanging_sign", "gtceu:compressed_clay", "gtceuterminal:energy_analyzer"], "reason": "objeto de broma, técnico o sin receta en GTM 7.5.3 / su addon" },
-      { "class": "C", "materials": ["damascus_steel"], "reason": "acero de Damasco: material de herramientas de GTM que ninguna receta fabrica" },
-      { "class": "C", "materials": ["calcium_carbonate", "potassium_sulfate", "technetium", "orange_metal", "palladium_on_carbon", "gcyr:iron_oxide", "gcyr:potassium_chloride", "gcyr:chromic_acid"], "reason": "material sin fuente cuyas recetas solo dan cosas que ya salen por otra vía (calcio, potasio, azufre, hierro, cromo...)" },
-      { "class": "C", "materials": ["gcyr:fluorite"], "reason": "fluorita de GCYR: bloques de mena sin veta; el flúor del pack sale de otras líneas" },
-      { "class": "C", "materials": ["tuff"], "reason": "polvo de toba: solo sale de moler bloques de mena en toba (la perforadora da menas crudas) y no tiene uso propio" },
-      { "class": "C", "materials": ["udmh", "udmh_rocket_fuel"], "reason": "UDMH: combustible del motor cohete sin receta; los motores de GT-- queman hidracina y RP-1, que sí se fabrican" },
-      { "class": "C", "materials": ["hydrogen"], "partial": true, "reason": "plasma de hidrógeno: GCYR lo acepta como combustible, pero nada lo produce" },
+      { "class": "C", "materials": ["grindless:titanium_drill_bit", "grindless:vein_sample_scheelite"], "keepRecipes": true, "reason": "hidden in EMI: only exists for old saves and converts into the new thing (stainless drill bit, empty vein probe); its conversion recipe stays" },
+      { "class": "C", "materials": ["gtca:green_house", "gtca:*_recycler", "gtca:scrap", "gtca:scrapbox", "gtca:uu_matter_amplifier", "gtca:*_matter_amplificator", "gtca:polymerizer", "gtca:industrial_coke_oven", "gtca:steam_pressurizer", "gtca:high_pressure_steam", "gtca:*_chemical_generator", "gtca:extreme_heat_exchanger", "gtca:shd_turbine", "gtca:pahoehoe_lava", "gtca:sh_steam", "gtca:sc_steam", "gtca:e_85_fuel", "gtca:dymethyl_ether"], "reason": "GTCA: removed by the pack (integration/gtca.js): machines that cheapen a line or pull energy out of nothing, and whatever only they made or burned" },
+      { "class": "C", "materials": ["gtca:*purification_unit", "gtca:*water*plant_casing", "gtca:*waterplant_casing", "gtca:purified_water_grade_*", "gtca:inert_*_casing", "gtca:high_energy_ultraviolet_emitter_casing", "gtca:hastealloy_276"], "reason": "GTCA: water purification plant with no controller recipe (integration/gtca.js), and the alloy only its casing asks for" },
+      { "class": "C", "materials": ["gtca:bedrockium", "gtca:cosmic_*", "gtca:endium", "gtca:mytryl", "gtca:thaumium", "gtca:vinteum", "infinity", "infinity_catalyst", "space_neutronium", "arcane_crystal", "tellurium", "thulium"], "reason": "addon material with ore blocks in every stone type but no vein in any dimension: nothing gives it" },
+      { "class": "C", "materials": ["extendedfeatures:industrial_greenhouse", "extendedfeatures:advanced_conservatory", "extendedfeatures:rock_processing_plant", "extendedfeatures:synthesis_vessel", "extendedfeatures:universal_disassembly_machine", "extendedfeatures:robust_alloy_materializer"], "reason": "Extended Features: controller removed by the pack (integration/extendedfeatures.js)" },
+      { "class": "C", "materials": ["gtnn:component_assembly_line", "gtnn:component_assline_casing_*", "gtnn:homemade_bedrock_ore_machine"], "reason": "GT--: no recipe on purpose (integration/gtnn.js)" },
+      { "class": "C", "materials": ["enriched_naquadah_waste", "barium_sulfide"], "reason": "leftovers from GTM's naquadah separation, which GT-- empties out (enableHarderNaquadahLine): nothing produces them" },
+      { "class": "C", "materials": ["gtceu:*_marker", "gcyr:*_marker"], "reason": "technical block (dimension marker), not for the player" },
+      { "class": "C", "materials": ["gtceu:*_solar_panel"], "reason": "solar panel: GTM 7.5.3 only gives a recipe to the ULV and LV ones (the LV one arrives with naquadah)" },
+      { "class": "C", "materials": ["gtceu:*_passthrough_hatch"], "reason": "passthrough hatch: GTM 7.5.3 only gives a recipe to the HV one" },
+      { "class": "C", "materials": ["gtceu:*_bedrock_ore_miner"], "reason": "bedrock ore miner: GTM 7.5.3 gives it no recipe (there are no bedrock ores)" },
+      { "class": "C", "materials": ["gtceu:foam", "gtceu:reinforced_foam", "gtceu:petrified_foam", "gtceu:reinforced_stone"], "reason": "construction foam blocks: GTM 7.5.3 has no sprayer, nothing places them" },
+      { "class": "C", "materials": ["gtceu:sus_record", "gtceu:purple_drink", "mc_guffium_239", "potion", "gtceu:zero_point_module", "gtceu:industrial_steam_casing", "gtceu:treated_wood_hanging_sign", "gtceu:compressed_clay", "gtceuterminal:energy_analyzer"], "reason": "joke item, technical item, or one with no recipe in GTM 7.5.3 / its addon" },
+      { "class": "C", "materials": ["damascus_steel"], "reason": "Damascus steel: GTM tool material that no recipe makes" },
+      { "class": "C", "materials": ["calcium_carbonate", "potassium_sulfate", "technetium", "orange_metal", "palladium_on_carbon", "gcyr:iron_oxide", "gcyr:potassium_chloride", "gcyr:chromic_acid"], "reason": "material with no source whose recipes only give things that already come another way (calcium, potassium, sulfur, iron, chromium...)" },
+      { "class": "C", "materials": ["gcyr:fluorite"], "reason": "GCYR fluorite: ore blocks with no vein; the pack's fluorine comes from other lines" },
+      { "class": "C", "materials": ["tuff"], "reason": "tuff dust: only comes from milling ore blocks in tuff (the drill gives raw ores), and has no use of its own" },
+      { "class": "C", "materials": ["udmh", "udmh_rocket_fuel"], "reason": "UDMH: rocket engine fuel with no recipe; GT-- engines burn hydrazine and RP-1, which are made" },
+      { "class": "C", "materials": ["hydrogen"], "partial": true, "reason": "hydrogen plasma: GCYR accepts it as fuel, but nothing produces it" },
 
-      { "class": "C", "fallback": true, "materials": ["gtca:*"], "reason": "GTCA: pieza o material sin receta ni veta que el pack no usa" },
-      { "class": "C", "fallback": true, "materials": ["gtnn:*"], "reason": "GT--: circuitos y piezas de fin de juego cuya cadena empieza en algo sin receta" },
-      { "class": "C", "fallback": true, "materials": ["gcyr:*"], "reason": "GCYR: pieza o material sin receta que el pack no usa" },
-      { "class": "C", "fallback": true, "materials": ["extendedfeatures:*"], "reason": "Extended Features: pieza sin receta (el addon no trae ninguna)" },
-      { "class": "C", "fallback": true, "partial": true, "forms": "ore", "reason": "el material sale por química, pero no tiene veta: sus formas de mena (cruda, molida, lavada, impura...) no salen nunca" },
-      { "class": "C", "fallback": true, "partial": true, "reason": "formas sueltas de un material que sí se consigue: nada las fabrica (fundidos, plasmas, polvos de algo que solo es fluido)" }
+      { "class": "C", "fallback": true, "materials": ["gtca:*"], "reason": "GTCA: part or material with no recipe or vein that the pack doesn't use" },
+      { "class": "C", "fallback": true, "materials": ["gtnn:*"], "reason": "GT--: end-game circuits and parts whose chain starts from something with no recipe" },
+      { "class": "C", "fallback": true, "materials": ["gcyr:*"], "reason": "GCYR: part or material with no recipe that the pack doesn't use" },
+      { "class": "C", "fallback": true, "materials": ["extendedfeatures:*"], "reason": "Extended Features: part with no recipe (the addon doesn't bring one)" },
+      { "class": "C", "fallback": true, "partial": true, "forms": "ore", "reason": "the material comes from chemistry, but has no vein: its ore forms (raw, crushed, washed, impure...) never come out" },
+      { "class": "C", "fallback": true, "partial": true, "reason": "loose forms of a material that is otherwise obtainable: nothing makes them (molten forms, plasmas, dusts of something that's fluid-only)" }
     ]
   }
 }

@@ -1,12 +1,12 @@
-// PASO OBTENCIÓN: auditoría de lo que no se consigue nunca, en ninguna era.
-// Parte de todas las fuentes del mundo que el pack ya tiene (tablas de vetas por dimensión, yacimientos de fluidos, árboles y
-// piedras de GT, abejas, lo que dan otros mods) y de todas las recetas de cualquier nivel (cada máquina registrada con el tope
-// de EU/t de su nivel, los multibloques sin tope, la energía y las piezas se dan por conseguibles), y lista los objetos y
-// fluidos de los espacios de nombres auditados que no se alcanzan, agrupados por material. Cada grupo se clasifica:
-//   A  merece una fuente: abre una línea o una automatización (lo decide la configuración, con su razón);
-//   B  llega con una era posterior de docs/viaje.md (sale de un planeta o de una veta apartada): ocultar hasta entonces;
-//   C  no llegará nunca (material sin uso de GTM o de un addon, restos de addons): ocultar el objeto y sus recetas.
-// Lo que ninguna regla clasifica sale como «?» y hace FAIL: es material nuevo que nadie ha mirado.
+// OBTAIN STEP: audit of what is never obtained, in any era.
+// Starts from every world source the pack already has (per-dimension vein tables, fluid deposits, GT trees and
+// stones, bees, whatever other mods give) and every recipe of any tier (each registered machine with its tier's EU/t
+// cap, multiblocks with no cap, energy and parts taken as obtainable), and lists the items and
+// fluids of the audited namespaces that aren't reached, grouped by material. Each group is classified:
+//   A  deserves a source: opens a line or an automation (the config decides, with its reason);
+//   B  arrives with a later era from docs/journey.md (comes from a planet or a set-aside vein): hide until then;
+//   C  will never arrive (material with no use in GTM or an addon, addon leftovers): hide the item and its recipes.
+// Whatever no rule classifies comes out as «?» and fails: it's new material nobody has looked at.
 import { lfp } from './engine.mjs';
 import { buildModel } from './model.mjs';
 import { BEE_TYPES, beeKey } from './normalize.mjs';
@@ -29,7 +29,7 @@ export const ERA_IDS = ['steam', 'lv', 'mv', 'hv', 'ev', 'iv', 'luv', 'zpm', 'uv
 const DEFAULT_NBT_TYPED = ['productivebees:configurable_honeycomb', 'productivebees:configurable_comb', 'productivebees:spawn_egg_configurable_bee'];
 const HIDDEN_TAG = 'c:hidden_from_recipe_viewers';
 
-/** Mena cruda de un material de veta ("gtceu:ilmenite", "gcyr:xyz"): la del espacio del material, la de GT, la vanilla o cualquiera. */
+/** Raw ore of a vein material ("gtceu:ilmenite", "gcyr:xyz"): the material's own namespace, GT's, vanilla's, or any other. */
 function rawOreIds(dump, material) {
   const c = material.indexOf(':');
   const ns = c < 0 ? 'gtceu' : material.slice(0, c);
@@ -39,7 +39,7 @@ function rawOreIds(dump, material) {
   return any.sort();
 }
 
-/** Abejas que nombran las recetas de Productive Bees (colmena, cruce, conversión, nidos, pesca). */
+/** Bees named by Productive Bees recipes (hive, crossbreeding, conversion, nests, fishing). */
 function beeIds(dump) {
   const set = new Set();
   const add = (b) => {
@@ -62,9 +62,9 @@ function beeIds(dump) {
 }
 
 /**
- * Configuración derivada para buildModel: el mundo de la auditoría, todas las máquinas del registro, las recetas de tipos sin
- * máquina de GT (mesa de crafteo, horno, otros mods) sin condición, las condiciones ignoradas salvo la dimensión (clave dim:<id>),
- * los cubos de cada fluido y, con `bees`, las abejas.
+ * Config derived for buildModel: the audit's world, every registered machine, recipe types with no GT machine
+ * (crafting table, furnace, other mods) with no condition, conditions ignored except dimension (dim:<id> key),
+ * each fluid's buckets, and, with `bees`, the bees.
  */
 export function obtainConfig(dump, raw) {
   const ob = raw.obtain || {};
@@ -74,7 +74,7 @@ export function obtainConfig(dump, raw) {
   const notFree = makeGlobMatcher(ob.notFree || []);
   const warnings = [];
 
-  // 1) lo que dan los demás mods (vanilla, decoración, AE2, Productive Bees...): se da por conseguible salvo `notFree`
+  // 1) whatever other mods give (vanilla, decoration, AE2, Productive Bees...): taken as obtainable except `notFree`
   const free = [];
   for (const id of dump.items) {
     const ns = nsOf(id);
@@ -86,42 +86,42 @@ export function obtainConfig(dump, raw) {
     if (audited.has(ns) || skipNs.has(ns) || notFree('fluid:' + f)) continue;
     free.push('fluid:' + f);
   }
-  const world = [{ id: 'otros-mods', mode: 'auto', items: free, note: 'objetos y fluidos de los espacios de nombres no auditados' }];
+  const world = [{ id: 'other-mods', mode: 'auto', items: free, note: "items and fluids from the unaudited namespaces" }];
 
-  // 2) vetas de las tablas de las perforadoras en las dimensiones a las que se llega (requireRecipe: las que tienen receta; una
-  // lista = varias perforadoras, p. ej. la de vetas y la lunar, cada una con su tipo de receta)
+  // 2) veins from the drill tables in the dimensions that are reached (requireRecipe: the ones with a recipe; a
+  // list = several drills, e.g. the vein one and the lunar one, each with its own recipe type)
   const veins = ob.veins || {};
   const requireRecipes = Array.isArray(veins.requireRecipe) ? veins.requireRecipe : [veins.requireRecipe || null];
   requireRecipes.forEach((rr, i) => world.push({
-    id: requireRecipes.length > 1 ? `vetas-${rr ? rr.type : i + 1}` : 'vetas', mode: 'auto', template: 'gtceu:raw_{m}',
+    id: requireRecipes.length > 1 ? `veins-${rr ? rr.type : i + 1}` : 'veins', mode: 'auto', template: 'gtceu:raw_{m}',
     fromVeins: { dimensions: reach, ...(rr ? { requireRecipe: rr } : {}), ...(veins.requireItem ? { requireItem: veins.requireItem } : {}) },
-    note: `menas crudas de las vetas de las tablas en las dimensiones a las que se llega${rr ? ` (con receta ${rr.type})` : ''}`,
+    note: `raw ores from the table veins in the dimensions that are reached${rr ? ` (with recipe ${rr.type})` : ''}`,
   }));
 
-  // 3) yacimientos de fluidos (peso > 0) en esas dimensiones, con la perforadora de fluidos si está registrada
+  // 3) fluid deposits (weight > 0) in those dimensions, with the fluid drilling rig if registered
   const rigs = ob.fluidRigs || [...dump.machines.keys()].filter((m) => /fluid_drilling_rig$/.test(m)).sort();
   const fv = (dump.fluidVeins || []).filter((v) => v.fluid && dump.fluids.has(v.fluid) && (v.weight === undefined || v.weight > 0) &&
     (v.dims === null || v.dims === undefined || v.dims.some((d) => reach.includes(d))));
   if (fv.length > 0) {
     world.push({
-      id: 'yacimientos', mode: 'auto', ...(rigs.length > 0 ? { via: rigs } : {}),
-      items: [...new Set(fv.map((v) => 'fluid:' + v.fluid))], note: 'yacimientos de fluidos con peso en las dimensiones a las que se llega',
+      id: 'deposits', mode: 'auto', ...(rigs.length > 0 ? { via: rigs } : {}),
+      items: [...new Set(fv.map((v) => 'fluid:' + v.fluid))], note: 'fluid deposits with weight in the dimensions that are reached',
     });
   }
   for (const w of asArray(ob.world)) world.push(w);
 
-  // 4) cubos: el cubo de un fluido se llena y se vacía sin receta
+  // 4) buckets: a fluid's bucket is filled and emptied with no recipe
   const synthetic = [...asArray(raw.synthetic)];
   for (const id of dump.items) {
     const ns = nsOf(id);
     if (!audited.has(ns) || !id.endsWith('_bucket')) continue;
     const fluid = id.slice(0, -'_bucket'.length);
     if (!dump.fluids.has(fluid)) continue;
-    synthetic.push({ id: `llenar:${id}`, consumes: ['fluid:' + fluid, 'minecraft:bucket'], produces: [id] });
-    synthetic.push({ id: `vaciar:${id}`, consumes: [id], produces: ['fluid:' + fluid] });
+    synthetic.push({ id: `fill:${id}`, consumes: ['fluid:' + fluid, 'minecraft:bucket'], produces: [id] });
+    synthetic.push({ id: `empty:${id}`, consumes: [id], produces: ['fluid:' + fluid] });
   }
 
-  // 5) abejas: un huevo da su abeja y la incubadora da el huevo de una abeja que ya se tiene (huevo + golosina con el gen)
+  // 5) bees: an egg gives its bee, and the incubator gives the egg of a bee you already have (egg + treat with the gene)
   const bees = ob.bees === undefined ? true : !!ob.bees;
   const extraFacts = reach.map((d) => 'dim:' + d);
   const nbtTyped = bees ? asArray((ob.beeOptions || {}).nbtTyped).concat(DEFAULT_NBT_TYPED) : [];
@@ -135,17 +135,17 @@ export function obtainConfig(dump, raw) {
       else if (dump.items.has(`${nsOf(b)}:spawn_egg_${name}`)) egg = `${nsOf(b)}:spawn_egg_${name}`;
       else if (dump.items.has('productivebees:spawn_egg_configurable_bee')) egg = `productivebees:spawn_egg_configurable_bee#${b}`;
       if (egg) {
-        synthetic.push({ id: `huevo:${b}`, consumes: [egg], produces: [beeKey(b)] });
-        synthetic.push({ id: `incubadora:${b}`, capital: [beeKey(b)], consumes: ['minecraft:egg'], produces: [egg] });
+        synthetic.push({ id: `egg:${b}`, consumes: [egg], produces: [beeKey(b)] });
+        synthetic.push({ id: `incubator:${b}`, capital: [beeKey(b)], consumes: ['minecraft:egg'], produces: [egg] });
       }
       if (dump.items.has('productivebees:configurable_comb') && dump.items.has('productivebees:configurable_honeycomb')) {
-        synthetic.push({ id: `bloque-panal:${b}`, consumes: [`productivebees:configurable_honeycomb#${b}`], produces: [`productivebees:configurable_comb#${b}`] });
-        synthetic.push({ id: `panal:${b}`, consumes: [`productivebees:configurable_comb#${b}`], produces: [`productivebees:configurable_honeycomb#${b}`] });
+        synthetic.push({ id: `honeycomb-block:${b}`, consumes: [`productivebees:configurable_honeycomb#${b}`], produces: [`productivebees:configurable_comb#${b}`] });
+        synthetic.push({ id: `honeycomb:${b}`, consumes: [`productivebees:configurable_comb#${b}`], produces: [`productivebees:configurable_honeycomb#${b}`] });
       }
     }
   }
 
-  // 6) tipos de receta sin máquina de GT: se hacen a mano o con un bloque de otro mod (conseguible); los de GT piden su máquina
+  // 6) recipe types with no GT machine: made by hand or with another mod's block (obtainable); GT's types need their machine
   const aliases = raw.typeAliases || {};
   const gtTypes = new Set(dump.recipeTypes.keys());
   const freeTypes = new Set(asArray(raw.unconditionalTypes));
@@ -155,7 +155,7 @@ export function obtainConfig(dump, raw) {
   }
   const ignoreTypes = [...asArray(raw.ignoreTypes), ...[...skipNs].map((ns) => `${ns}:*`)];
 
-  // 7) claves de las fuentes de eras posteriores (se crean antes de cerrar el grafo; los hechos se dan en cada pasada)
+  // 7) keys for later-era sources (created before closing the graph; the facts are given on each pass)
   const later = laterStages(dump, ob);
   const extraKeys = later.flatMap((s) => s.keys);
 
@@ -176,9 +176,10 @@ export function obtainConfig(dump, raw) {
 }
 
 /**
- * Fuentes de eras posteriores, en orden (`obtain.later`): dimensiones (sus vetas, todas, y las recetas con su condición),
- * vetas concretas (las del End apartadas en veins_excluded.json), materiales de veta sueltos (`materials`: sus menas crudas, para
- * una veta que el pack ya quitó del mundo y no sale en veins.json) y objetos sueltos. Cada etapa suma a las anteriores.
+ * Later-era sources, in order (`obtain.later`): dimensions (all their veins, and the recipes with their condition),
+ * specific veins (the End's, set aside in veins_excluded.json), loose vein materials (`materials`: their raw ores, for
+ * a vein the pack already removed from the world and that no longer appears in veins.json), and loose items. Each stage
+ * adds to the previous ones.
  */
 function laterStages(dump, ob) {
   const out = [];
@@ -191,8 +192,8 @@ function laterStages(dump, ob) {
       if (veinIds.has(v.id) || (dims.length > 0 && v.dims.some((d) => dims.includes(d)))) for (const m of v.mats) mats.add(m);
     }
     for (const m of mats) keys.push(...rawOreIds(dump, m));
-    // objetos del sitio (bloques del suelo de un planeta...): ids o globs contra el registro (sin los bloques de mena: una mena
-    // en piedra de un planeta no dice que allí haya una veta)
+    // site items (a planet's ground blocks...): ids or globs against the registry (not ore blocks: a planet's ore
+    // in stone doesn't mean there's a vein there)
     for (const it of asArray(s.items)) {
       if (/[*?]/.test(it)) {
         const match = makeGlobMatcher([it]);
@@ -204,11 +205,11 @@ function laterStages(dump, ob) {
   return out;
 }
 
-/** Formas de mena (las que salen de picar o perforar una veta): crudas, molidas, lavadas, refinadas, polvo impuro y purificado. */
+/** Ore forms (the ones that come from mining or drilling a vein): raw, crushed, washed, refined, impure and purified dust. */
 export const isOreForm = (id) => !id.startsWith('fluid:') &&
   /^(raw_.+|crushed_.+_ore|purified_.+_ore|refined_.+_ore|impure_.+_dust|pure_.+_dust|.+_indicator)$/.test(pathOf(id));
 
-/** Materiales de cada espacio de nombres según las formas del registro (polvo, lingote, gema, mena cruda, fluido). */
+/** Materials of each namespace per the registry's forms (dust, ingot, gem, raw ore, fluid). */
 function materialSets(ids) {
   const sets = new Map();
   const add = (ns, m) => {
@@ -233,9 +234,9 @@ function materialSets(ids) {
 }
 
 /**
- * Palabras que forman las variantes de un material en GT (prefijos y sufijos de TagPrefix, cables, tuberías, herramientas) y las
- * de los addons (molido, espuma, nanitos). Un objeto va al grupo de un material solo si lo demás de su id son estas palabras:
- * gtceu:double_iron_plate es hierro; gtceu:industrial_steam_casing o gcyr:moon_stone no son formas del vapor ni de la piedra.
+ * Words that make up a material's variants in GT (TagPrefix prefixes and suffixes, cables, pipes, tools) and addons'
+ * (milled, foam, nanites). An item only goes in a material's group if the rest of its id is these words:
+ * gtceu:double_iron_plate is iron; gtceu:industrial_steam_casing or gcyr:moon_stone aren't forms of steam or stone.
  */
 const FORM_TOKENS = new Set([
   'tiny', 'small', 'impure', 'pure', 'crushed', 'purified', 'refined', 'raw', 'hot', 'double', 'dense', 'long', 'fine', 'chipped',
@@ -248,8 +249,8 @@ const FORM_TOKENS = new Set([
 ]);
 
 /**
- * Grupo de un objeto: el material más largo cuyo nombre aparece entero en el id y cuyo resto son palabras de forma
- * (iron < wrought_iron), o el propio objeto. Las máquinas registradas van solas.
+ * An item's group: the longest material whose name appears whole in the id with the rest being form words
+ * (iron < wrought_iron), or the item itself. Registered machines go alone.
  */
 function makeGrouper(sets, machines) {
   const gt = sets.get('gtceu') || new Set();
@@ -276,12 +277,12 @@ function makeGrouper(sets, machines) {
 }
 
 /**
- * Primera regla de la configuración que nombra el grupo (material o alguno de sus objetos). Filtros opcionales de la regla:
- * `partial` (true: solo grupos con formas sueltas; false: solo materiales enteros) y `forms: "ore"` (todas las formas que faltan
- * son de mena: el material se consigue por otra vía pero no tiene veta). `stage` elige qué reglas se miran:
- *   'first'    las A y B (deciden antes que nadie: darle una fuente ya, o su era);
- *   'after'    las C (solo si el grupo no llega con una era posterior: lo que llega no es "nunca");
- *   'fallback' las de reserva (`fallback: true`, de cualquier clase), al final.
+ * First config rule that names the group (material or one of its items). Optional rule filters:
+ * `partial` (true: only groups with loose forms; false: only whole materials) and `forms: "ore"` (every missing form
+ * is an ore form: the material is obtainable another way but has no vein). `stage` picks which rules are checked:
+ *   'first'    the A and B ones (decided before anything else: give it a source now, or its era);
+ *   'after'    the C ones (only if the group doesn't arrive with a later era: what arrives isn't "never");
+ *   'fallback' the fallback ones (`fallback: true`, any class), at the end.
  */
 function makeClassifier(rules) {
   const compiled = asArray(rules).map((r, idx) => ({
@@ -305,8 +306,8 @@ function makeClassifier(rules) {
 }
 
 /**
- * Ejecuta la auditoría. Devuelve {verdict, groups, stats, later, unusedRules, warnings, model}.
- * opts.unlocks = false salta el cálculo de lo que abriría cada material (más rápido, para las pruebas que no lo miran).
+ * Runs the audit. Returns {verdict, groups, stats, later, unusedRules, warnings, model}.
+ * opts.unlocks = false skips computing what each material would unlock (faster, for tests that don't look at it).
  */
 export function runObtain(dump, raw, opts = {}) {
   const t0 = Date.now();
@@ -323,9 +324,9 @@ export function runObtain(dump, raw, opts = {}) {
     return k !== undefined && res.reached[k] === 1;
   };
 
-  // auditados: objetos y fluidos de los espacios de nombres de `audit`, sin los fluidos "flowing_" ni lo que `ignore` aparta;
-  // `ignoreOreBlocks`: los bloques de mena (piedra + material + "_ore") son bloques del mundo, no se listan (sí las formas
-  // molidas, lavadas y refinadas: crushed_/purified_/refined_)
+  // audited: items and fluids of the `audit` namespaces, without "flowing_" fluids or whatever `ignore` sets aside;
+  // `ignoreOreBlocks`: ore blocks (stone + material + "_ore") are world blocks, not listed (but the milled, washed
+  // and refined forms are: crushed_/purified_/refined_)
   const audited = new Set(ob.audit || []);
   const ignoreGlob = makeGlobMatcher(ob.ignore || []);
   const oreBlock = (id) => !!ob.ignoreOreBlocks && !id.startsWith('fluid:') && /_ore$/.test(id) && !/^(crushed|purified|refined)_/.test(pathOf(id));
@@ -335,7 +336,7 @@ export function runObtain(dump, raw, opts = {}) {
   for (const f of dump.fluids) if (audited.has(nsOf(f)) && !/^flowing_/.test(pathOf(f)) && !ignore('fluid:' + f)) auditedIds.push('fluid:' + f);
   const never = new Set(auditedIds.filter((n) => !reachedIn(base, n)));
 
-  // grupos por material
+  // groups by material
   const grouper = makeGrouper(materialSets(auditedIds), dump.machines);
   const groups = new Map();
   for (const id of auditedIds) {
@@ -349,7 +350,7 @@ export function runObtain(dump, raw, opts = {}) {
   const groupOfKey = new Map();
   for (const grp of neverGroups) for (const k of grp.keys) groupOfKey.set(k, grp);
 
-  // recetas que piden (una ranura sin ninguna alternativa alcanzable con algo del grupo) o dan algo del grupo
+  // recipes that need (a slot with no alternative reachable from anything in the group) or give something from the group
   for (const grp of neverGroups) {
     grp.uses = new Set();
     grp.makes = new Set();
@@ -375,7 +376,7 @@ export function runObtain(dump, raw, opts = {}) {
     }
   }
 
-  // qué dan las recetas que lo piden (pistas para la clase A) y qué se abriría si el material se consiguiera
+  // what the recipes that need it give (hints for class A), and what would unlock if the material were obtained
   const outsOf = (grp) => {
     const counts = new Map();
     const own = new Set(grp.keys.map(idOf).filter((k) => k !== undefined));
@@ -402,7 +403,7 @@ export function runObtain(dump, raw, opts = {}) {
     grp.unlocks = null;
   }
 
-  // eras posteriores: la primera etapa (acumulada) en la que el grupo se consigue
+  // later eras: the first (cumulative) stage in which the group is obtained
   const stageInfo = [];
   let facts = [...baseFacts];
   const pending = new Set(neverGroups);
@@ -420,11 +421,11 @@ export function runObtain(dump, raw, opts = {}) {
     stageInfo.push({ id: s.id, era: s.era, label: s.label, groups: n, dimensions: s.dimensions, veins: s.veins, materials: s.materials.length });
   }
 
-  // clasificación: reglas A y B, luego solo creativo, luego era posterior (lo que llega con una era no es "nunca", así que una
-  // regla C no lo tapa), luego las reglas C y al final las de reserva; si no, «?»
+  // classification: A and B rules, then creative-only, then later era (what arrives with an era isn't "never", so a
+  // C rule doesn't cover it), then the C rules, and finally the fallback ones; otherwise, «?»
   const { classify, compiled } = makeClassifier(ob.classes);
   const creative = makeGlobMatcher(ob.creative || []);
-  // lo que el pack ya oculta: objetos y fluidos de la etiqueta (una etiqueta de objetos vacía se vuelca como [minecraft:barrier])
+  // what the pack already hides: items and fluids from the tag (an empty item tag dumps as [minecraft:barrier])
   const hiddenItems = dump.tags.itemTags.get(HIDDEN_TAG) || null;
   const hiddenFluids = dump.tags.fluidTags.get(HIDDEN_TAG) || null;
   const hiddenSet = hiddenItems || hiddenFluids
@@ -444,14 +445,14 @@ export function runObtain(dump, raw, opts = {}) {
     if (rule) apply(grp, rule, 'config');
     else if (grp.keys.every((k) => creative(k))) {
       grp.cls = 'C';
-      grp.reason = 'solo modo creativo';
+      grp.reason = 'creative mode only';
       grp.until = 'never';
-      grp.by = 'creativo';
+      grp.by = 'creative';
     } else if (grp.later) {
       grp.cls = 'B';
       grp.era = grp.later.era;
       grp.until = grp.later.until || null;
-      grp.reason = `sale de ${grp.later.label}`;
+      grp.reason = `comes from ${grp.later.label}`;
       grp.by = 'era';
     } else {
       const late = classify(grp, 'after') || classify(grp, 'fallback');
@@ -460,17 +461,17 @@ export function runObtain(dump, raw, opts = {}) {
         grp.cls = '?';
         grp.reason = autoReason(grp, g, base, groupOfKey);
         grp.until = null;
-        grp.by = 'sin clasificar';
+        grp.by = 'unclassified';
       }
     }
     if (grp.cls === 'A') grp.until = null;
-    if (grp.cls === 'B' && !ERA_IDS.includes(grp.until)) warnings.push(`${grp.id}: clase B sin «until» válido (la era en que llega: ${ERA_IDS.join(', ')}); la tabla de ocultos no lo puede ocultar`);
+    if (grp.cls === 'B' && !ERA_IDS.includes(grp.until)) warnings.push(`${grp.id}: class B with no valid «until» (the era it arrives in: ${ERA_IDS.join(', ')}); the hidden table can't hide it`);
     grp.hidden = hiddenSet ? grp.keys.filter((k) => hiddenSet.has(k)).length : null;
   }
 
-  // la ocultación del pack frente a la auditoría: nada que se consiga puede estar oculto (no se verían sus recetas) y, si se sabe
-  // hasta qué era está implementado el pack (opts.implementedEra o info.json: hidden.implementedEra, que vuelca
-  // integration/hidden.js), todo lo C y todo lo B de una era posterior tiene que estar oculto (si no, la tabla está vieja)
+  // the pack's hiding vs. the audit: nothing obtainable can be hidden (its recipes wouldn't be seen), and if we know
+  // which era the pack has implemented up to (opts.implementedEra or info.json: hidden.implementedEra, dumped by
+  // integration/hidden.js), every C and every B from a later era must be hidden (otherwise the table is stale)
   let hiding = null;
   if (hiddenSet) {
     const era = opts.implementedEra || (dump.info && dump.info.hidden && dump.info.hidden.implementedEra) || null;
@@ -490,9 +491,9 @@ export function runObtain(dump, raw, opts = {}) {
     };
   }
 
-  // qué se abriría si el material se consiguiera (solo los de clase A y los sin clasificar, que es donde se decide): una pasada
-  // con sus formas como hechos, sin las recetas que reciclan esas formas (moler o fundir una máquina imposible devolvería sus
-  // materiales y "abriría" media tabla); cuenta lo que pasa a conseguirse fuera del propio grupo
+  // what would unlock if the material were obtained (only for class A and unclassified, since that's where it's decided): one
+  // pass with its forms as facts, without the recipes that recycle those forms (milling or smelting an impossible machine
+  // would give back its materials and "unlock" half the table); counts what becomes obtainable outside the group itself
   if (opts.unlocks !== false) {
     const limit = ob.unlockLimit === undefined ? 200 : ob.unlockLimit;
     const cand = neverGroups.filter((grp) => (grp.cls === 'A' || grp.cls === '?') && grp.gives.some((o) => !o.reached))
@@ -543,11 +544,11 @@ export function runObtain(dump, raw, opts = {}) {
 }
 
 /**
- * Razón automática de un grupo sin clasificar: que nada lo fabrica, que solo sale de sus propias formas o del reciclaje de lo
- * que se hace con él, o qué piden (de fuera) las recetas que lo dan.
+ * Automatic reason for an unclassified group: that nothing makes it, that it only comes from its own forms or from
+ * recycling what's made from it, or what the recipes that give it need (from outside).
  */
 function autoReason(grp, g, base, groupOfKey) {
-  if (grp.makes.size === 0) return grp.uses.size > 0 ? `nada lo fabrica; lo piden ${grp.uses.size} recetas` : 'sin recetas: solo está en el registro';
+  if (grp.makes.size === 0) return grp.uses.size > 0 ? `nothing makes it; ${grp.uses.size} recipes need it` : "no recipes: it's only in the registry";
   const own = new Set(grp.keys);
   const madeFrom = new Set();
   for (const r of grp.uses) for (const o of g.rules[r].outs) madeFrom.add(g.keyNames[o]);
@@ -563,48 +564,48 @@ function autoReason(grp, g, base, groupOfKey) {
     }
   }
   const top = [...need.entries()].sort((a, b) => b[1] - a[1]).slice(0, 3).map(([k]) => k);
-  return top.length > 0 ? `sus recetas piden ${top.join(', ')}` : 'solo sale de sus propias formas o de reciclar lo que se hace con él';
+  return top.length > 0 ? `its recipes need ${top.join(', ')}` : 'it only comes from its own forms or from recycling what is made from it';
 }
 
 const short = (list, n) => (list.length <= n ? list.join(', ') : `${list.slice(0, n).join(', ')} (+${list.length - n})`);
 const ruleNames = (g, set, n) => short([...set].map((r) => g.rules[r].name).sort(), n);
-const givesText = (grp, n = 4) => short(grp.gives.map((o) => `${o.key}${o.reached ? '' : ' (nuevo)'}`), n);
+const givesText = (grp, n = 4) => short(grp.gives.map((o) => `${o.key}${o.reached ? '' : ' (new)'}`), n);
 
-/** Por qué falla el paso: grupos sin clasificar y, si el volcado lo dice, una ocultación que no cuadra con la auditoría. */
+/** Why the step fails: unclassified groups and, if the dump says so, hiding that doesn't match the audit. */
 function failWhy(res) {
   const why = [];
-  if (res.byClass['?'].groups > 0) why.push(`${res.byClass['?'].groups} grupos sin clasificar`);
-  if (res.hiding && res.hiding.obtainable.length > 0) why.push(`${res.hiding.obtainable.length} ocultos que se consiguen`);
-  if (res.hiding && res.hiding.visible && res.hiding.visible.length > 0) why.push(`${res.hiding.visible.length} sin ocultar`);
+  if (res.byClass['?'].groups > 0) why.push(`${res.byClass['?'].groups} unclassified groups`);
+  if (res.hiding && res.hiding.obtainable.length > 0) why.push(`${res.hiding.obtainable.length} hidden but obtainable`);
+  if (res.hiding && res.hiding.visible && res.hiding.visible.length > 0) why.push(`${res.hiding.visible.length} not hidden`);
   return why.join('; ');
 }
 
-/** Líneas de la ocultación del pack (etiqueta c:hidden_from_recipe_viewers) frente a la auditoría. */
+/** Lines for the pack's hiding (c:hidden_from_recipe_viewers tag) vs. the audit. */
 function hidingLines(res, n = 20) {
   const h = res.hiding;
   if (!h) return [];
-  const L = [`Ocultos en el pack (${HIDDEN_TAG}): ${h.items} objetos y ${h.fluids} fluidos; ${h.implementedEra
-    ? `implementado hasta ${h.implementedEra}`
-    : 'el volcado no dice hasta qué era está implementado (integration/hidden.js): no se mira lo que falta por ocultar'}`];
-  L.push(`  se consiguen pero están ocultos: ${h.obtainable.length}${h.obtainable.length > 0 ? ' — ' + short(h.obtainable, n) : ''}`);
+  const L = [`Hidden in the pack (${HIDDEN_TAG}): ${h.items} items and ${h.fluids} fluids; ${h.implementedEra
+    ? `implemented up to ${h.implementedEra}`
+    : "the dump doesn't say which era is implemented (integration/hidden.js): what's left to hide isn't checked"}`];
+  L.push(`  obtainable but hidden: ${h.obtainable.length}${h.obtainable.length > 0 ? ' — ' + short(h.obtainable, n) : ''}`);
   if (h.visible) {
-    L.push(`  tendrían que estar ocultos (C, o B de una era posterior a ${h.implementedEra}) y se ven: ${h.visible.length}${h.visible.length > 0
-      ? ' — ' + short(h.visible.map((v) => `${v.key} (${v.group}, ${v.until})`), n) + ' (regenera la tabla de ocultos: --table)' : ''}`);
+    L.push(`  should be hidden (C, or B from an era later than ${h.implementedEra}) and are visible: ${h.visible.length}${h.visible.length > 0
+      ? ' — ' + short(h.visible.map((v) => `${v.key} (${v.group}, ${v.until})`), n) + ' (regenerate the hidden table: --table)' : ''}`);
   }
   return L;
 }
 
-/** Informe de texto (consola y --out). */
+/** Text report (console and --out). */
 export function renderObtainText(res, file) {
   const L = [];
   const s = res.stats;
-  L.push('=== PASO OBTENCIÓN: lo que no se consigue nunca ===');
+  L.push('=== OBTAIN STEP: what is never obtained ===');
   if (file) L.push(`Config  : ${file}`);
-  L.push(`Auditados: ${s.audited} objetos y fluidos; ${s.never} no se consiguen, en ${s.groups} grupos (${s.full} materiales enteros, ${s.partial} con formas sueltas); ${s.recipes} recetas los piden o los dan.`);
-  L.push(`Modelo  : ${s.rules} reglas (${s.ms} ms)${s.hiddenKnown ? '' : '; el volcado no trae la etiqueta ' + HIDDEN_TAG + ' (no se sabe qué está ya oculto)'}`);
-  for (const st of res.later) L.push(`Era posterior ${st.label} (${st.era}): ${st.groups} grupos`);
+  L.push(`Audited : ${s.audited} items and fluids; ${s.never} are never obtained, in ${s.groups} groups (${s.full} whole materials, ${s.partial} with loose forms); ${s.recipes} recipes need or give them.`);
+  L.push(`Model   : ${s.rules} rules (${s.ms} ms)${s.hiddenKnown ? '' : '; the dump has no ' + HIDDEN_TAG + ' tag (what is already hidden is unknown)'}`);
+  for (const st of res.later) L.push(`Later era ${st.label} (${st.era}): ${st.groups} groups`);
   L.push('');
-  L.push('CLASE  GRUPOS  OBJETOS  FLUIDOS  RECETAS');
+  L.push('CLASS  GROUPS  ITEMS  FLUIDS  RECIPES');
   for (const c of ['A', 'B', 'C', '?']) {
     const b = res.byClass[c];
     L.push(`${c.padEnd(6)} ${String(b.groups).padStart(6)}  ${String(b.items).padStart(7)}  ${String(b.fluids).padStart(7)}  ${String(b.recipes).padStart(7)}`);
@@ -619,26 +620,26 @@ export function renderObtainText(res, file) {
     L.push('');
     L.push(`--- ${c} (${list.length}) ---`);
     for (const grp of list) {
-      const extra = c === 'A' || c === '?' ? `; lo piden ${grp.uses.size} (${givesText(grp)})` : '';
-      L.push(`  ${grp.id}${grp.full ? '' : ' [formas sueltas]'}: ${grp.keys.length} — ${grp.reason}${grp.era ? ` [${grp.era}]` : ''}${extra}`);
+      const extra = c === 'A' || c === '?' ? `; ${grp.uses.size} recipes need it (${givesText(grp)})` : '';
+      L.push(`  ${grp.id}${grp.full ? '' : ' [loose forms]'}: ${grp.keys.length} — ${grp.reason}${grp.era ? ` [${grp.era}]` : ''}${extra}`);
     }
   }
   if (res.unusedRules.length > 0) {
     L.push('');
-    L.push('Reglas de clasificación sin uso (lo que nombran ya se consigue o no existe):');
+    L.push("Unused classification rules (what they name is already obtained, or doesn't exist):");
     for (const u of res.unusedRules) L.push(`  #${u.index} ${u.class}: ${short([...u.materials, ...u.items], 6)} — ${u.reason}`);
   }
   if (res.warnings.length > 0) {
     L.push('');
-    L.push(`Avisos (${res.warnings.length}):`);
+    L.push(`Warnings (${res.warnings.length}):`);
     for (const w of res.warnings.slice(0, 30)) L.push('  ' + w);
   }
   L.push('');
-  L.push(`VEREDICTO: ${res.verdict}${res.verdict === 'FAIL' ? ` (${failWhy(res)})` : ''}`);
+  L.push(`VERDICT: ${res.verdict}${res.verdict === 'FAIL' ? ` (${failWhy(res)})` : ''}`);
   return L.join('\n') + '\n';
 }
 
-/** Resultado en JSON (--json): cada grupo con sus objetos y las recetas que lo piden o lo dan. */
+/** Result in JSON (--json): each group with its items and the recipes that need or give it. */
 export function obtainToJson(res) {
   const g = res.model.g;
   return {
@@ -654,11 +655,12 @@ export function obtainToJson(res) {
 }
 
 /**
- * Tabla de ocultos del pack (--table): pack/kubejs/data/grindless/tables/hidden_until.json, que lee
- * server_scripts/grindless/integration/hidden.js. Un grupo por material: los B con la era en que llegan (`until`), los C con
- * "never"; cada uno con sus objetos y fluidos. Los C llevan además `removeRecipes`: las recetas que solo existen para ellos
- * (una entrada que solo admite objetos C, o todas sus salidas C), que hidden.js quita del servidor. `previous` (la tabla que
- * ya había) conserva las recetas quitadas de los grupos que siguen siendo C: un volcado hecho con hidden.js activo ya no las trae.
+ * The pack's hidden table (--table): pack/kubejs/data/grindless/tables/hidden_until.json, read by
+ * server_scripts/grindless/integration/hidden.js. One group per material: the B ones with the era they arrive in
+ * (`until`), the C ones with "never"; each with its items and fluids. C ones also carry `removeRecipes`: recipes that
+ * only exist for them (an input slot that only accepts C items, or every output C), which hidden.js removes from the
+ * server. `previous` (the table that already existed) keeps the removed recipes of groups that are still C: a dump
+ * taken with hidden.js active no longer carries them.
  */
 export function hiddenTable(res, opts = {}) {
   const g = res.model.g;
@@ -706,10 +708,10 @@ export function hiddenTable(res, opts = {}) {
     _source: `tools/analysis obtainability audit: node tools/analysis/reachability.mjs --pass obtain --dump <dump> --table <this file> (config tools/analysis/tiers/obtain.json${opts.dump ? `, dump ${opts.dump}` : ''}${opts.date ? `, ${opts.date}` : ''}). Do not edit by hand: change the audit config and regenerate.`,
     _how_it_is_used: [
       'server_scripts/grindless/integration/hidden.js reads it. Every group whose `until` is above IMPLEMENTED_ERA (the constant at the top of hidden.js) or is "never" gets its items and fluids into the tags c:hidden_from_recipe_viewers (EMI drops them from its index) and grindless:hidden_with_recipes (assets/emi/index/stacks/grindless_hidden_with_recipes.json disables that tag in EMI: every recipe with one of them as input, output or catalyst disappears from EMI too). Bumping IMPLEMENTED_ERA when an era lands shows that era\'s content again.',
-      'until = era id of docs/viaje.md (steam, lv, mv, hv, ev, iv, luv, zpm, uv, uhv, uev, uiv, uxv, opv, max) in which the group can first be obtained (class B of the audit: planets, the excluded End veins and everything that hangs on them). Its recipes stay on the server, only hidden.',
+      'until = era id of docs/journey.md (steam, lv, mv, hv, ev, iv, luv, zpm, uv, uhv, uev, uiv, uxv, opv, max) in which the group can first be obtained (class B of the audit: planets, the excluded End veins and everything that hangs on them). Its recipes stay on the server, only hidden.',
       'until = "never": junk (class C of the audit): hidden for good and its removeRecipes are removed from the server (recipes that only exist for it: an ingredient that only accepts junk, or junk as every output). Nothing is unregistered: old saves keep every id.',
       'keepRecipes = true: a hidden item whose recipes stay, on the server and in EMI (the old items of earlier versions and their conversion into the new ones): only c:hidden_from_recipe_viewers.',
-      'material = audit group: a GT material with all its forms (dust, ingot, plate, fluid, bucket...) or a single item; reason = why (from the audit config, in Spanish).',
+      'material = audit group: a GT material with all its forms (dust, ingot, plate, fluid, bucket...) or a single item; reason = why (from the audit config).',
       'Regenerating keeps the removeRecipes of the groups that are still junk (a dump taken with hidden.js active no longer has those recipes).',
     ],
     eras: ERA_IDS,
@@ -717,7 +719,7 @@ export function hiddenTable(res, opts = {}) {
   };
 }
 
-/** La tabla en texto: un grupo por línea (se lee y se compara bien). */
+/** The table as text: one group per line (reads and diffs well). */
 export function renderHiddenTable(table) {
   const head = { ...table };
   delete head.groups;
@@ -730,55 +732,55 @@ export function renderHiddenTable(table) {
   return lines.join('\n') + '\n';
 }
 
-/** Informe en Markdown (--md): tabla resumen, la lista A entera y las B y C compactas. */
+/** Markdown report (--md): summary table, the full A list, and compact B and C ones. */
 export function renderObtainMarkdown(res, meta = {}) {
   const g = res.model.g;
   const s = res.stats;
   const L = [];
-  L.push('# Auditoría de obtención');
+  L.push('# Obtainability audit');
   L.push('');
-  L.push(`Volcado: \`${meta.dump || ''}\`. Generado con \`node tools/analysis/reachability.mjs --pass obtain\`${meta.date ? ` el ${meta.date}` : ''}.`);
+  L.push(`Dump: \`${meta.dump || ''}\`. Generated with \`node tools/analysis/reachability.mjs --pass obtain\`${meta.date ? ` on ${meta.date}` : ''}.`);
   L.push('');
-  L.push(`Se auditan ${s.audited} objetos y fluidos (${meta.namespaces || ''}). **${s.never} no se consiguen nunca**, en ${s.groups} grupos por material (${s.full} materiales enteros, ${s.partial} con formas sueltas), y ${s.recipes} recetas los piden o los dan.`);
+  L.push(`Auditing ${s.audited} items and fluids (${meta.namespaces || ''}). **${s.never} are never obtained**, in ${s.groups} groups by material (${s.full} whole materials, ${s.partial} with loose forms), and ${s.recipes} recipes need or give them.`);
   L.push('');
-  L.push('| Clase | Qué hacer | Grupos | Objetos | Fluidos | Recetas |');
+  L.push('| Class | What to do | Groups | Items | Fluids | Recipes |');
   L.push('|---|---|---:|---:|---:|---:|');
-  const what = { A: 'darle una fuente', B: 'ocultar hasta su era', C: 'ocultar con sus recetas', '?': 'sin clasificar' };
+  const what = { A: 'give it a source', B: 'hide until its era', C: 'hide with its recipes', '?': 'unclassified' };
   for (const c of ['A', 'B', 'C', '?']) {
     const b = res.byClass[c];
     if (c === '?' && b.groups === 0) continue;
     L.push(`| ${c} | ${what[c]} | ${b.groups} | ${b.items} | ${b.fluids} | ${b.recipes} |`);
   }
   L.push('');
-  L.push(`Veredicto del paso: **${res.verdict}**${res.verdict === 'FAIL' ? ` (${failWhy(res)})` : ''}.${s.hiddenKnown ? '' : ` El volcado no trae la etiqueta \`${HIDDEN_TAG}\`: no se sabe qué está ya oculto.`}`);
+  L.push(`Step verdict: **${res.verdict}**${res.verdict === 'FAIL' ? ` (${failWhy(res)})` : ''}.${s.hiddenKnown ? '' : ` The dump has no \`${HIDDEN_TAG}\` tag: what is already hidden is unknown.`}`);
   if (res.hiding) {
     L.push('');
     for (const line of hidingLines(res, 10)) L.push(line.startsWith('  ') ? `- ${line.trim()}` : line);
   }
   L.push('');
-  L.push('## A: merecen una fuente');
+  L.push('## A: deserve a source');
   L.push('');
   const A = res.groups.filter((grp) => grp.cls === 'A');
-  if (A.length === 0) L.push('Ninguno.');
+  if (A.length === 0) L.push('None.');
   for (const grp of A) {
     L.push(`### ${grp.id}`);
     L.push('');
-    L.push(`- **Por qué:** ${grp.reason}`);
-    if (grp.source || grp.era) L.push(`- **Fuente propuesta:** ${grp.source || '—'}${grp.era ? ` (era ${grp.era})` : ''}`);
-    L.push(`- **Formas (${grp.keys.length}):** ${grp.keys.map((k) => `\`${k}\``).join(', ')}`);
-    L.push(`- **Recetas que lo piden (${grp.uses.size}):** ${[...grp.uses].map((r) => `\`${g.rules[r].name}\``).sort().join(', ') || '—'}`);
-    L.push(`- **Dan:** ${grp.gives.map((o) => `\`${o.key}\`${o.reached ? '' : ' (hoy no se consigue)'}`).join(', ') || '—'}`);
-    if (grp.unlocks) L.push(`- **Abriría:** ${grp.unlocks.keys} objetos/fluidos más${grp.unlocks.groups.length > 0 ? ` (${short(grp.unlocks.groups, 8)})` : ''}`);
-    L.push(`- **Recetas que lo dan (${grp.makes.size}):** ${ruleNames(g, grp.makes, 12) || '—'}`);
+    L.push(`- **Why:** ${grp.reason}`);
+    if (grp.source || grp.era) L.push(`- **Proposed source:** ${grp.source || '—'}${grp.era ? ` (era ${grp.era})` : ''}`);
+    L.push(`- **Forms (${grp.keys.length}):** ${grp.keys.map((k) => `\`${k}\``).join(', ')}`);
+    L.push(`- **Recipes that need it (${grp.uses.size}):** ${[...grp.uses].map((r) => `\`${g.rules[r].name}\``).sort().join(', ') || '—'}`);
+    L.push(`- **Give:** ${grp.gives.map((o) => `\`${o.key}\`${o.reached ? '' : " (not obtained today)"}`).join(', ') || '—'}`);
+    if (grp.unlocks) L.push(`- **Would unlock:** ${grp.unlocks.keys} more items/fluids${grp.unlocks.groups.length > 0 ? ` (${short(grp.unlocks.groups, 8)})` : ''}`);
+    L.push(`- **Recipes that give it (${grp.makes.size}):** ${ruleNames(g, grp.makes, 12) || '—'}`);
     L.push('');
   }
-  L.push('## B: llegan con una era posterior (ocultar hasta entonces)');
+  L.push('## B: arrive with a later era (hide until then)');
   L.push('');
   const compact = (list, head) => {
     const forms = list.reduce((n, grp) => n + grp.keys.length, 0);
     const recipes = new Set();
     for (const grp of list) for (const r of [...grp.uses, ...grp.makes]) recipes.add(r);
-    L.push(`- **${head}** (${list.length} ${list.length === 1 ? 'grupo' : 'grupos'}, ${forms} ${forms === 1 ? 'forma' : 'formas'}, ${recipes.size} ${recipes.size === 1 ? 'receta' : 'recetas'}): ${list.map((grp) => `\`${grp.id}\``).join(', ')}`);
+    L.push(`- **${head}** (${list.length} ${list.length === 1 ? 'group' : 'groups'}, ${forms} ${forms === 1 ? 'form' : 'forms'}, ${recipes.size} ${recipes.size === 1 ? 'recipe' : 'recipes'}): ${list.map((grp) => `\`${grp.id}\``).join(', ')}`);
   };
   const byKey = (list, keyOf) => {
     const m = new Map();
@@ -790,28 +792,28 @@ export function renderObtainMarkdown(res, meta = {}) {
     return m;
   };
   const B = res.groups.filter((grp) => grp.cls === 'B');
-  if (B.length === 0) L.push('Ninguno.');
+  if (B.length === 0) L.push('None.');
   for (const [k, list] of byKey(B, (grp) => `${grp.era || '—'}: ${grp.reason}`)) compact(list, k);
   L.push('');
-  L.push('## C: no llegarán nunca (ocultar con sus recetas)');
+  L.push('## C: will never arrive (hide with their recipes)');
   L.push('');
   const C = res.groups.filter((grp) => grp.cls === 'C');
-  if (C.length === 0) L.push('Ninguno.');
+  if (C.length === 0) L.push('None.');
   for (const [reason, list] of byKey(C, (grp) => grp.reason)) compact(list, reason);
   L.push('');
   const U = res.groups.filter((grp) => grp.cls === '?');
   if (U.length > 0) {
-    L.push('## Sin clasificar');
+    L.push('## Unclassified');
     L.push('');
-    for (const grp of U) L.push(`- \`${grp.id}\` (${grp.keys.length} formas; lo piden ${grp.uses.size}, lo dan ${grp.makes.size}): ${grp.reason}`);
+    for (const grp of U) L.push(`- \`${grp.id}\` (${grp.keys.length} forms; ${grp.uses.size} need it, ${grp.makes.size} give it): ${grp.reason}`);
     L.push('');
   }
-  L.push('## Cómo se calcula');
+  L.push('## How it is computed');
   L.push('');
-  L.push(`- **Fuentes del mundo:** las vetas de las tablas de la perforadora (las que tienen receta de perforación) en ${(meta.dimensions || []).map((d) => `\`${d}\``).join(', ')}; los yacimientos de fluidos con peso; los árboles de caucho, el mármol y el granito rojo; las abejas (nidos, cruces, conversiones, pesca y huevos de la incubadora); todo lo de los mods no auditados, salvo huevos de generación y objetos de creativo.`);
-  L.push('- **Recetas:** todas, de cualquier nivel. Cada máquina del registro corre las recetas de hasta el voltaje de su nivel; los multibloques, sin tope; la energía, las piezas de los multibloques, la sala limpia y las demás condiciones se dan por conseguibles, salvo la dimensión.');
-  L.push('- **Grupos:** cada objeto va al material más largo cuyo nombre lleva (polvo, lingote, placa... de un mismo material juntos); lo que no es de ningún material va solo. «Formas sueltas» = el material se consigue, pero esas formas no. Los bloques de mena (piedra + material) no se listan: son bloques del mundo.');
-  L.push(`- **B automática:** el grupo se consigue al sumar las fuentes de una era posterior (${res.later.map((st) => `${st.label}: ${st.era}`).join('; ')}).`);
+  L.push(`- **World sources:** the drill's table veins (the ones with a drilling recipe) in ${(meta.dimensions || []).map((d) => `\`${d}\``).join(', ')}; weighted fluid deposits; rubber trees, marble and red granite; bees (nests, crossbreeding, conversions, fishing and incubator eggs); everything from the unaudited mods, except spawn eggs and creative items.`);
+  L.push("- **Recipes:** all of them, of any tier. Each registered machine runs recipes up to its tier's voltage; multiblocks, with no cap; energy, multiblock parts, the clean room and the other conditions are taken as obtainable, except dimension.");
+  L.push("- **Groups:** each item goes to the longest material whose name it carries (dust, ingot, plate... of the same material together); whatever belongs to no material goes alone. \u00abLoose forms\u00bb = the material is obtainable, but those forms aren't. Ore blocks (stone + material) aren't listed: they're world blocks.");
+  L.push(`- **Automatic B:** the group is obtained once a later era's sources are added (${res.later.map((st) => `${st.label}: ${st.era}`).join('; ')}).`);
   L.push('');
   return L.join('\n');
 }

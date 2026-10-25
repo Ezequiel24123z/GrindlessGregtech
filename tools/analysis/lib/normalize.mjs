@@ -1,5 +1,5 @@
-// Normaliza el JSON crudo de cada receta a {entradas, salidas, EU/t, condiciones}.
-// Las claves de recurso son: id de objeto tal cual ("minecraft:stick") y "fluid:<id>" para fluidos.
+// Normalizes each recipe's raw JSON into {inputs, outputs, EU/t, conditions}.
+// Resource keys are: the item id as-is ("minecraft:stick") and "fluid:<id>" for fluids.
 import { asArray } from './util.mjs';
 
 export const fluidKey = (id) => 'fluid:' + id;
@@ -7,8 +7,8 @@ const MAX_CHANCE = 10000;
 
 function labelOf(tags, alts, fallback) {
   if (alts.length === 0) {
-    if (tags.length > 0) return `#${tags.join('|#')} (etiqueta vacía o inexistente en este pack)`;
-    return fallback || '(vacío)';
+    if (tags.length > 0) return `#${tags.join('|#')} (empty or nonexistent tag in this pack)`;
+    return fallback || '(empty)';
   }
   if (tags.length === 1) return '#' + tags[0];
   if (tags.length > 1) return '#' + tags.join('|#');
@@ -16,8 +16,8 @@ function labelOf(tags, alts, fallback) {
 }
 
 /**
- * Tipo que guarda el NBT de un objeto "configurable" (los panales, bloques de panal y huevos de Productive Bees llevan la abeja
- * en EntityTag.type). El NBT llega como objeto o como texto SNBT/JSON: {EntityTag:{type:"productivebees:iron"}}.
+ * Type that holds a "configurable" item's NBT (Productive Bees' honeycombs, honeycomb blocks and eggs carry the bee
+ * in EntityTag.type). The NBT arrives as an object or as SNBT/JSON text: {EntityTag:{type:"productivebees:iron"}}.
  */
 export function nbtType(nbt) {
   if (!nbt) return null;
@@ -27,8 +27,8 @@ export function nbtType(nbt) {
 }
 
 /**
- * Clave de un objeto: con `nbtTyped` (Set de ids, solo la auditoría de obtención) los objetos de esa lista con un tipo en el NBT
- * se separan por tipo ("productivebees:configurable_honeycomb#productivebees:iron"); el resto de análisis los junta en un id.
+ * An item's key: with `nbtTyped` (a Set of ids, only for the obtainability audit) items on that list with an NBT type
+ * are split by type ("productivebees:configurable_honeycomb#productivebees:iron"); the rest of the analysis merges them into one id.
  */
 export function itemKey(item, nbt, nbtTyped) {
   if (!nbtTyped || !nbtTyped.has(item)) return item;
@@ -36,7 +36,7 @@ export function itemKey(item, nbt, nbtTyped) {
   return t ? `${item}#${t}` : item;
 }
 
-/** Ingrediente de objeto (vanilla, Forge o GT) -> {alts:[ids], tags:[...], count, circuit?, bad?}. */
+/** Item ingredient (vanilla, Forge or GT) -> {alts:[ids], tags:[...], count, circuit?, bad?}. */
 export function parseItemIngredient(j, tagIndex, st, nbtTyped = null) {
   const res = { alts: [], tags: [], count: 1 };
   const visit = (x) => {
@@ -86,7 +86,7 @@ export function parseItemIngredient(j, tagIndex, st, nbtTyped = null) {
       res.tags.push(x.tag);
       res.alts.push(...tagIndex.items(x.tag));
     } else if (!res.bad) {
-      res.bad = 'forma desconocida';
+      res.bad = 'unknown form';
       st.unresolved.add(String(x.type || JSON.stringify(x).slice(0, 60)));
     }
   };
@@ -96,7 +96,7 @@ export function parseItemIngredient(j, tagIndex, st, nbtTyped = null) {
   return res;
 }
 
-/** Ingrediente de fluido de GT: {amount, value:[{fluid}|{tag}]} o {count_provider, inner}. */
+/** GT fluid ingredient: {amount, value:[{fluid}|{tag}]} or {count_provider, inner}. */
 export function parseFluidIngredient(j, tagIndex, st) {
   const res = { alts: [], tags: [], amount: 0 };
   const visitValue = (v) => {
@@ -186,12 +186,12 @@ function normalizeGT(out, j, ctx) {
       const p = parseItemIngredient(c.content, tags, st, nbtTyped);
       const k = pickOutput(p);
       if (k) out.outputs.push({ key: k, chance: chance / maxChance, count: p.count });
-      else out.warn.push('salida sin objeto: ' + labelOf(p.tags, p.alts, p.bad));
+      else out.warn.push('output with no item: ' + labelOf(p.tags, p.alts, p.bad));
     } else if (cap === 'fluid') {
       const p = parseFluidIngredient(c.content, tags, st);
       const k = pickOutput(p);
       if (k) out.outputs.push({ key: k, chance: chance / maxChance, count: p.amount });
-      else out.warn.push('salida de fluido sin fluido');
+      else out.warn.push('fluid output with no fluid');
     }
   };
   for (const [cap, list] of Object.entries(j.inputs || {})) for (const c of asArray(list)) addIn(cap, c);
@@ -205,9 +205,9 @@ function normalizeGT(out, j, ctx) {
   }
   for (const c of asArray((j.tickOutputs || {}).eu)) out.euOut = Math.max(out.euOut, euOf(c.content).voltage);
   out.conditions = [...asArray(j.recipeConditions)];
-  // categoría de GT (p. ej. gtceu:macerator_recycling): distingue el reciclaje de un objeto de la receta que fabrica el material
+  // GT category (e.g. gtceu:macerator_recycling): tells apart recycling an item from the recipe that makes the material
   if (typeof j.category === 'string') out.category = j.category;
-  // GT guarda la temperatura del horno de alto vacío en `data`, no en las condiciones
+  // GT stores the EBF's temperature in `data`, not in conditions
   if (j.data && typeof j.data.ebf_temp === 'number') {
     out.temp = j.data.ebf_temp;
     out.conditions.push({ type: 'ebf_temp', temperature: j.data.ebf_temp });
@@ -216,12 +216,12 @@ function normalizeGT(out, j, ctx) {
   return out;
 }
 
-/** Set de ids con NBT por tipo (cfg.nbtTyped, solo la auditoría de obtención) o null. */
+/** Set of ids with NBT typing (cfg.nbtTyped, only for the obtainability audit), or null. */
 const typedOf = (ctx) => (ctx.cfg && ctx.cfg.nbtTyped instanceof Set ? ctx.cfg.nbtTyped : null);
 
 /**
- * Salida de una receta que no es de GT. Productive Bees anida el objeto ({item: {type: 'forge:nbt', item, nbt}} o
- * {item: {tag}}); una salida por etiqueta da el primer miembro (lo que entrega el juego).
+ * Output of a non-GT recipe. Productive Bees nests the item ({item: {type: 'forge:nbt', item, nbt}} or
+ * {item: {tag}}); a tag output gives the first member (whatever the game hands over).
  */
 function resultOf(r, ctx) {
   if (!r) return [];
@@ -241,14 +241,14 @@ function normalizeGeneric(out, j, ctx) {
   const nbtTyped = typedOf(ctx);
   const toolTags = cfg.toolTagSet;
   const pushFluidContainer = (ing) => {
-    // Receta con un recipiente lleno de fluido (cubo de agua, de creosota...): hace falta el fluido y algo donde llevarlo.
+    // A recipe with a container full of fluid (water bucket, creosote bucket...): needs the fluid and something to carry it in.
     const p = parseFluidIngredient(ing.fluid, tags, st);
     out.inputs.push({
       kind: 'fluid', alts: p.alts, label: 'fluid:' + labelOf(p.tags, p.alts.map((a) => a.slice(6)), p.bad), count: p.amount,
       cap: false, consume: 1, bad: p.bad, tags: p.tags,
     });
     out.inputs.push({
-      kind: 'item', alts: cfg.fluidContainers || ['minecraft:bucket'], label: 'recipiente de fluidos', count: 1,
+      kind: 'item', alts: cfg.fluidContainers || ['minecraft:bucket'], label: 'fluid container', count: 1,
       cap: true, consume: 0, tags: [],
     });
   };
@@ -265,16 +265,16 @@ function normalizeGeneric(out, j, ctx) {
     });
   };
   if (out.type === 'ae2:inscriber' && j.ingredients && !Array.isArray(j.ingredients)) {
-    // AE2 15: en modo "inscribe" los moldes (arriba y abajo) no se gastan; en modo "press" se gastan los tres ingredientes.
+    // AE2 15: in "inscribe" mode the dies (top and bottom) aren't consumed; in "press" mode all three ingredients are.
     for (const [slot, ing] of Object.entries(j.ingredients)) {
-      pushItem(ing, slot !== 'middle' && j.mode !== 'press' ? { cap: true, consume: 0, kind: 'molde' } : {});
+      pushItem(ing, slot !== 'middle' && j.mode !== 'press' ? { cap: true, consume: 0, kind: 'die' } : {});
     }
     out.shape = 'ae2-inscriber';
   } else if (j.pattern && j.key) {
     const syms = new Set();
     for (const row of asArray(j.pattern)) for (const ch of String(row)) if (ch !== ' ') syms.add(ch);
     for (const s of syms) {
-      if (j.key[s] === undefined) out.warn.push(`símbolo "${s}" sin clave`);
+      if (j.key[s] === undefined) out.warn.push(`symbol "${s}" has no key`);
       else pushItem(j.key[s]);
     }
     out.shape = 'shaped';
@@ -287,8 +287,8 @@ function normalizeGeneric(out, j, ctx) {
     out.shape = 'generic';
   }
   if (out.type === 'ae2:transform' && j.circumstance) {
-    // Transformación en el mundo: los objetos se tiran a un fluido (agua) o se hacen explotar. El fluido hace de condición
-    // "junto a"; lo demás (explosión) cuenta como condición no soportada salvo que la configuración diga otra cosa.
+    // World transformation: items are thrown into a fluid (water) or made to explode. The fluid acts as an "adjacent
+    // to" condition; the rest (explosion) counts as an unsupported condition unless the config says otherwise.
     const c = j.circumstance;
     if (c.type === 'fluid' && c.tag) out.conditions.push({ type: 'adjacent_fluid', fluids: ['#' + c.tag] });
     else if (c.type === 'fluid' && c.fluid) out.conditions.push({ type: 'adjacent_fluid', fluids: [c.fluid] });
@@ -300,7 +300,7 @@ function normalizeGeneric(out, j, ctx) {
   return out;
 }
 
-/** Tipos de Productive Bees que se leen como reglas de abejas cuando la configuración pide `bees` (auditoría de obtención). */
+/** Productive Bees types read as bee rules when the config asks for `bees` (obtainability audit). */
 export const BEE_TYPES = new Set([
   'productivebees:advanced_beehive', 'productivebees:bee_breeding', 'productivebees:bee_conversion', 'productivebees:bee_spawning',
   'productivebees:bee_fishing', 'productivebees:block_conversion', 'productivebees:centrifuge', 'productivebees:bottler',
@@ -308,9 +308,9 @@ export const BEE_TYPES = new Set([
 export const beeKey = (id) => 'bee:' + id;
 
 /**
- * Productive Bees: las abejas son claves "bee:<id>" (capital: no se gastan). La colmena da los panales de la abeja (un panal
- * configurable sin NBT es el de la propia abeja), el cruce da crías, la conversión cambia una abeja con un objeto, los nidos
- * sueltan abejas y la pesca las saca del agua (los biomas se dan por alcanzables).
+ * Productive Bees: bees are "bee:<id>" keys (capital: not consumed). The hive gives the bee's honeycombs (an
+ * NBT-less configurable honeycomb is the bee's own), crossbreeding gives offspring, conversion changes a bee with
+ * an item, nests drop bees, and fishing pulls them out of water (biomes are taken as reachable).
  */
 function normalizeBees(out, j, ctx) {
   const { tags, st } = ctx;
@@ -318,8 +318,8 @@ function normalizeBees(out, j, ctx) {
   const bee = (b) => (typeof b === 'string' ? b : b && typeof b.bee === 'string' ? b.bee : null);
   const beeIn = (b) => {
     const id = bee(b);
-    if (id) out.inputs.push({ kind: 'bee', alts: [beeKey(id)], label: 'abeja ' + id, count: 1, cap: true, consume: 0, tags: [] });
-    else out.warn.push('abeja sin id');
+    if (id) out.inputs.push({ kind: 'bee', alts: [beeKey(id)], label: 'bee ' + id, count: 1, cap: true, consume: 0, tags: [] });
+    else out.warn.push('bee with no id');
   };
   const beeOut = (b) => {
     const id = bee(b);
@@ -389,8 +389,8 @@ function normalizeBees(out, j, ctx) {
 }
 
 /**
- * ctx = {tags: TagIndex, st: estadísticas, cfg: config con typeAliases y toolTagSet, gtTypes: Set de tipos GT}
- * Devuelve la receta normalizada (siempre un objeto).
+ * ctx = {tags: TagIndex, st: stats, cfg: config with typeAliases and toolTagSet, gtTypes: Set of GT types}
+ * Returns the normalized recipe (always an object).
  */
 export function normalizeRecipe(rec, ctx) {
   const type = (ctx.cfg.typeAliases && ctx.cfg.typeAliases[rec.type]) || rec.type;

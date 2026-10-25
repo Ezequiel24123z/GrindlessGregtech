@@ -1,9 +1,9 @@
-// Pruebas del motor: alcance mínimo, sostenibilidad con suelo y costes de bloqueo.
+// Tests for the engine: minimum reach, grounded sustainability, and blocking costs.
 import assert from 'node:assert/strict';
 import { test } from 'node:test';
 import { blockCosts, Graph, groundedSustain, lfp } from '../lib/engine.mjs';
 
-/** rules: [{name, slots:[{alts:[claves], cap?, tol?}], outs:[claves]}] */
+/** rules: [{name, slots:[{alts:[keys], cap?, tol?}], outs:[keys]}] */
 function build(rules) {
   const g = new Graph();
   for (const r of rules) {
@@ -27,7 +27,7 @@ const set = (g, names) => {
 const ids = (g, names) => names.map((n) => g.key(n));
 const has = (g, arr, n) => arr[g.key(n)] === 1;
 
-test('lfp: una regla se dispara cuando todas sus ranuras tienen alguna alternativa alcanzada', () => {
+test('lfp: a rule fires once every slot has some alternative reached', () => {
   const g = build([
     { name: 'r1', slots: [{ alts: ['a'] }], outs: ['b'] },
     { name: 'r2', slots: [{ alts: ['b'] }, { alts: ['c', 'a'] }], outs: ['d'] },
@@ -40,7 +40,7 @@ test('lfp: una regla se dispara cuando todas sus ranuras tienen alguna alternati
   assert.equal(r.level[g.key('d')], 2);
 });
 
-test('lfp: las ranuras de capital solo se cumplen con capOk y las tolerantes con tolOk', () => {
+test('lfp: capital slots are only met with capOk, and tolerant ones with tolOk', () => {
   const g = build([
     { name: 'r', slots: [{ alts: ['a'] }, { alts: ['martillo'], cap: true }, { alts: ['combustible'], tol: true }], outs: ['x'] },
   ]);
@@ -50,7 +50,7 @@ test('lfp: las ranuras de capital solo se cumplen con capOk y las tolerantes con
   assert.ok(has(g, lfp(g, { ...base, capOk: set(g, ['martillo']), tolOk: set(g, ['combustible']) }).reached, 'x'));
 });
 
-test('lfp: un ciclo sin entrada no se alcanza', () => {
+test('lfp: a cycle with no input is never reached', () => {
   const g = build([
     { name: 'a->b', slots: [{ alts: ['a'] }], outs: ['b'] },
     { name: 'b->a', slots: [{ alts: ['b'] }], outs: ['a'] },
@@ -59,7 +59,7 @@ test('lfp: un ciclo sin entrada no se alcanza', () => {
   assert.ok(!has(g, r.reached, 'a'));
 });
 
-test('groundedSustain: el ciclo comprimir/descomprimir entra en el gfp pero no en la sostenibilidad con suelo', () => {
+test('groundedSustain: the compress/decompress cycle enters the gfp but not grounded sustainability', () => {
   const g = build([
     { name: 'comprimir', slots: [{ alts: ['polvo'] }], outs: ['bloque'] },
     { name: 'descomprimir', slots: [{ alts: ['bloque'] }], outs: ['polvo'] },
@@ -67,12 +67,12 @@ test('groundedSustain: el ciclo comprimir/descomprimir entra en el gfp pero no e
   const universe = set(g, ['polvo', 'bloque']);
   const permanent = new Uint8Array(g.nKeys);
   const r = groundedSustain(g, { universe, capOk: new Uint8Array(g.nKeys), permanent });
-  assert.ok(has(g, r.S.inS, 'polvo'), 'el gfp acepta el ciclo');
-  assert.ok(!has(g, r.G.reached, 'polvo'), 'pero no tiene suelo');
+  assert.ok(has(g, r.S.inS, 'polvo'), 'the gfp accepts the cycle');
+  assert.ok(!has(g, r.G.reached, 'polvo'), 'but it has no ground');
   assert.ok(!has(g, r.G.reached, 'bloque'));
 });
 
-test('groundedSustain: un bucle de arranque (vapor -> perforadora -> carbón -> caldera -> vapor) se sostiene con una fuente', () => {
+test('groundedSustain: a bootstrap loop (steam -> drill -> coal -> boiler -> steam) is sustained with a source', () => {
   const g = build([
     { name: 'perforar', slots: [{ alts: ['vapor'], tol: true }, { alts: ['broca'], tol: true }, { alts: ['muestra'], cap: true }], outs: ['mena', 'carbon'] },
     { name: 'caldera', slots: [{ alts: ['carbon'] }, { alts: ['agua'] }], outs: ['vapor'] },
@@ -84,13 +84,13 @@ test('groundedSustain: un bucle de arranque (vapor -> perforadora -> carbón -> 
   for (const n of ['agua', 'carbon', 'vapor', 'mena', 'broca']) assert.ok(has(g, r.G.reached, n), n);
 });
 
-test('groundedSustain: si falta la fuente de combustible el bucle de arranque no se sostiene', () => {
+test('groundedSustain: if the fuel source is missing, the bootstrap loop isn\'t sustained', () => {
   const g = build([
     { name: 'perforar', slots: [{ alts: ['vapor'], tol: true }, { alts: ['muestra'], cap: true }], outs: ['mena'] },
     { name: 'caldera', slots: [{ alts: ['carbon'] }, { alts: ['agua'] }], outs: ['vapor'] },
     { name: 'bomba', slots: [], outs: ['agua'] },
   ]);
-  // el carbón solo existe como reserva de arranque: está en el universo, pero nada lo repone
+  // coal only exists as a bootstrap reserve: it's in the universe, but nothing resupplies it
   const universe = set(g, ['vapor', 'muestra', 'mena', 'carbon', 'agua']);
   const r = groundedSustain(g, { universe, capOk: set(g, ['muestra']), permanent: new Uint8Array(g.nKeys) });
   assert.ok(!has(g, r.G.reached, 'carbon'));
@@ -99,7 +99,7 @@ test('groundedSustain: si falta la fuente de combustible el bucle de arranque no
   assert.ok(has(g, r.G.reached, 'agua'));
 });
 
-test('blockCosts: elige la cadena de bloqueo más barata y distingue raíces', () => {
+test('blockCosts: picks the cheapest blocking chain and tells roots apart', () => {
   const g = build([
     { name: 'caro', slots: [{ alts: ['a'] }, { alts: ['b'] }, { alts: ['c'] }], outs: ['x'] },
     { name: 'barato', slots: [{ alts: ['d'] }], outs: ['x'] },
@@ -113,7 +113,7 @@ test('blockCosts: elige la cadena de bloqueo más barata y distingue raíces', (
   assert.equal(g.rules[withRootCost.best[g.key('x')]].name, 'caro');
 });
 
-test('blockCosts: lo que ya se tiene cuesta 0 y las ranuras de capital cumplidas no cuentan', () => {
+test('blockCosts: what\'s already held costs 0, and met capital slots don\'t count', () => {
   const g = build([{ name: 'r', slots: [{ alts: ['a'] }, { alts: ['h'], cap: true }], outs: ['x'] }]);
   const mask = set(g, ['a']);
   const sin = blockCosts(g, { mask });

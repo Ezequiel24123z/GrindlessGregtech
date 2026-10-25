@@ -1,6 +1,6 @@
-// Pruebas de la regla de eras (lib/eras.mjs): nada de una era puede pedir un recurso que sale en una era posterior.
-// Mini pack: la Tierra da mena y bauxita; el acero sale de la mena; el titanio sale de la ilmenita, que solo se recoge en la Luna
-// (con el cohete); el End da su mena con la llave. Los objetos de cada era se comprueban con los recursos posteriores quitados.
+// Tests for the era rule (lib/eras.mjs): nothing from an era can need a resource that comes from a later era.
+// Mini pack: Earth gives ore and bauxite; steel comes from ore; titanium comes from ilmenite, which is only gathered on the Moon
+// (with the rocket); the End gives its ore with the key. Each era's items are checked with later resources removed.
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import path from 'node:path';
@@ -16,9 +16,9 @@ const groupOf = (r, id) => r.out.eras.groups.find((x) => x.group.id === id);
 const textOf = (r, id) => groupOf(r, id).lines.join('\n');
 
 /**
- * opciones (mutaciones): scannerTi (el escáner HV pide placa de titanio), bitTi (la perforadora HV pide la broca de titanio),
- * leak (la electrólisis de la bauxita da polvo de titanio como subproducto), mvEnd (un objeto MV pide la mena del End),
- * hullW (el casco EV pide tungsteno), onlyFrom (comprobación "el titanio solo sale de la Luna").
+ * options (mutations): scannerTi (the HV scanner needs a titanium plate), bitTi (the HV drill needs the titanium bit),
+ * leak (bauxite electrolysis gives titanium dust as a byproduct), mvEnd (an MV item needs the End's ore),
+ * hullW (the EV hull needs tungsten), onlyFrom ("titanium only comes from the Moon" check).
  */
 function eraPack(o = {}) {
   const recipes = [
@@ -40,7 +40,7 @@ function eraPack(o = {}) {
     S('t:electrolyzer', { P: 't:steel_plate' }, 't:electrolyzer'),
     gt('t:drill/hv/a', 't:drilling', { ins: [gi('t:sample', 1, 0), gi(o.bitTi ? 't:ti_bit' : 't:hv_bit', 1, 1000)], outs: [gi('t:ore')] }),
     gt('t:electro/bauxite', 't:electrolyzer', { ins: [gi('t:bauxite')], outs: o.leak ? [gi('t:al_dust'), gi('t:ti_dust', 1, 2000)] : [gi('t:al_dust')] }),
-    // reciclaje: deshacer el casco EV devuelve titanio (no es una fuente: el casco ya lleva titanio)
+    // recycling: undoing the EV hull gives back titanium (not a source: the hull already carries titanium)
     gt('t:electro/recycle_ev_hull', 't:electrolyzer', { ins: [gi('t:ev_hull')], outs: [gi('t:ti_dust')] }),
   ];
   const titanio = { id: 'titanio', era: 'ev', label: 'titanio', items: ['t:*ti_*', 't:raw_ilmenite'] };
@@ -81,9 +81,9 @@ function eraPack(o = {}) {
 
 const verdictsOf = (r) => Object.fromEntries(r.out.eras.groups.map((x) => [x.group.id, x.verdict]));
 
-// ---------------------------------------------------------------- referencia y mutaciones
+// ---------------------------------------------------------------- reference and mutations
 
-test('eras: el pack de referencia pasa; el opcional que aún no existe avisa sin tumbar el veredicto', () => {
+test('eras: the reference pack passes; the optional one that doesn\'t exist yet warns without sinking the verdict', () => {
   const { dump, cfg } = eraPack();
   const r = run(dump, cfg, { pass: 'eras' });
   assert.deepEqual(verdictsOf(r), {
@@ -92,12 +92,12 @@ test('eras: el pack de referencia pasa; el opcional que aún no existe avisa sin
   assert.equal(r.out.verdict, 'PASS');
   assert.deepEqual(r.out.gate, []);
   assert.deepEqual(r.out.auto, []);
-  assert.match(textOf(r, 'hv-opcional'), /t:aun_no_existe — no existe en el registro \(aún no ha llegado\)/);
-  assert.match(r.text, /PASO 3 · ERAS/);
-  assert.match(r.text, /VEREDICTO: PASS {2}\(eras 5\/6 \(\+1 avisos\)\)/);
+  assert.match(textOf(r, 'hv-opcional'), /t:aun_no_existe — doesn't exist in the registry \(hasn't arrived yet\)/);
+  assert.match(r.text, /STEP 3 · ERAS/);
+  assert.match(r.text, /VERDICT: PASS {2}\(eras 5\/6 \(\+1 warnings\)\)/);
 });
 
-test('eras (mutación): un objeto HV que pide titanio da FAIL con la cadena más corta hasta el recurso de EV', () => {
+test('eras (mutation): an HV item that needs titanium gives FAIL with the shortest chain to the EV resource', () => {
   const { dump, cfg } = eraPack({ scannerTi: true });
   const r = run(dump, cfg, { pass: 'eras' });
   assert.equal(verdictsOf(r)['hv-explicito'], 'FAIL');
@@ -105,101 +105,101 @@ test('eras (mutación): un objeto HV que pide titanio da FAIL con la cadena más
   const g = groupOf(r, 'hv-explicito');
   assert.deepEqual(g.violations, [{ item: 't:hv_scanner', resources: [{ id: 'titanio', era: 'ev', label: 'titanio' }] }]);
   const text = textOf(r, 'hv-explicito');
-  assert.match(text, /1 de 2 piden un recurso de una era posterior a hv/);
-  assert.match(text, /✗ t:hv_scanner — pide titanio \(ev\)/);
-  assert.match(text, /\[t:ti_plate\] t:ti_plate {2}✗ recurso de una era posterior: titanio \(ev\)/);
-  // la cadena es la más corta: llega a la placa de titanio y no baja hasta la ilmenita ni la Luna
+  assert.match(text, /1 of 2 need a resource from an era later than hv/);
+  assert.match(text, /✗ t:hv_scanner — needs titanio \(ev\)/);
+  assert.match(text, /\[t:ti_plate\] t:ti_plate {2}✗ resource from a later era: titanio \(ev\)/);
+  // the chain is the shortest: it reaches the titanium plate and doesn't go down to ilmenite or the Moon
   assert.doesNotMatch(text, /raw_ilmenite|t:luna/);
-  // el mismo objeto en el patrón también es violación (no es él mismo de titanio)
+  // the same item in the pattern is also a violation (it isn't titanium itself)
   assert.equal(verdictsOf(r)['hv-patron'], 'FAIL');
 });
 
-test('eras: en un patrón, lo que ya es de un recurso posterior (la herramienta HV de titanio) no cuenta; si se nombra, es violación', () => {
+test('eras: in a pattern, something that already belongs to a later resource (the HV titanium tool) doesn\'t count; if named explicitly, it\'s a violation', () => {
   const { dump, cfg } = eraPack();
   const r = run(dump, cfg, { pass: 'eras' });
   const g = groupOf(r, 'hv-patron');
   assert.deepEqual(g.later, ['t:hv_ti_tool']);
   assert.equal(g.verdict, 'PASS');
-  assert.match(textOf(r, 'hv-patron'), /de un recurso posterior \(no cuentan como de esta era\): t:hv_ti_tool/);
+  assert.match(textOf(r, 'hv-patron'), /from a later resource \(don't count as this era's\): t:hv_ti_tool/);
   const named = run(dump, { ...cfg, eraItems: [{ id: 'hv-nombrado', era: 'hv', items: ['t:hv_ti_tool'] }] }, { pass: 'eras' });
   assert.equal(verdictsOf(named)['hv-nombrado'], 'FAIL');
-  assert.match(textOf(named, 'hv-nombrado'), /t:hv_ti_tool {2}✗ recurso de una era posterior: titanio \(ev\)/);
+  assert.match(textOf(named, 'hv-nombrado'), /t:hv_ti_tool {2}✗ resource from a later era: titanio \(ev\)/);
 });
 
-test('eras: inputsOf toma cada entrada de las recetas (la broca de la perforadora HV) y señala la que pide titanio', () => {
+test('eras: inputsOf takes each recipe input (the HV drill\'s bit) and flags the one that needs titanium', () => {
   const { dump, cfg } = eraPack({ bitTi: true });
   const r = run(dump, cfg, { pass: 'eras' });
   const g = groupOf(r, 'hv-perforadora');
   assert.equal(g.verdict, 'FAIL');
   assert.deepEqual(g.violations.map((v) => v.item), ['t:ti_bit']);
-  assert.equal(g.counts.ok, 1, 'la muestra (capital) es de la Tierra y pasa');
-  assert.match(textOf(r, 'hv-perforadora'), /✗ t:ti_bit {2}\(entrada de 1 receta\(s\), p\. ej\. t:drill\/hv\/a\) — pide titanio \(ev\)/);
+  assert.equal(g.counts.ok, 1, 'the sample (capital) is Earth\'s and passes');
+  assert.match(textOf(r, 'hv-perforadora'), /✗ t:ti_bit {2}\(input of 1 recipe\(s\), e\.g\. t:drill\/hv\/a\) — needs titanio \(ev\)/);
 });
 
-test('eras: una dimensión posterior quita sus fuentes del mundo; un objeto MV que pide la mena del End da FAIL y nombra la fuente', () => {
+test('eras: a later dimension removes its world sources; an MV item that needs the End\'s ore gives FAIL and names the source', () => {
   const { dump, cfg } = eraPack({ mvEnd: true });
   const r = run(dump, cfg, { pass: 'eras' });
   assert.equal(verdictsOf(r)['mv-objetos'], 'FAIL');
   const text = textOf(r, 'mv-objetos');
-  assert.match(text, /t:mv_thing — pide el End \(hv\)/);
-  assert.match(text, /t:end_ore {2}✗ solo sale de minecraft:the_end \(fuente «menas-end»\): recurso de una era posterior, el End \(hv\)/);
-  // para los objetos HV el End no es posterior: el mismo objeto en un grupo HV pasa
+  assert.match(text, /t:mv_thing — needs el End \(hv\)/);
+  assert.match(text, /t:end_ore {2}✗ only comes from minecraft:the_end \(source «menas-end»\): resource from a later era, el End \(hv\)/);
+  // for HV items the End isn't later: the same item in an HV group passes
   const hv = run(dump, { ...cfg, eraItems: [{ id: 'hv-con-end', era: 'hv', items: ['t:mv_thing'] }] }, { pass: 'eras' });
   assert.equal(verdictsOf(hv)['hv-con-end'], 'PASS');
 });
 
-test('eras: un subproducto de era posterior se quita de la receta, pero la receta sigue dando lo demás', () => {
+test('eras: a later-era byproduct is removed from the recipe, but the recipe still gives the rest', () => {
   const { dump, cfg } = eraPack({ leak: true });
   const r = run(dump, cfg, { pass: 'eras' });
-  // la electrólisis de la bauxita da titanio de regalo: el aluminio sigue valiendo para el MV
+  // bauxite electrolysis gives titanium for free: the aluminium still counts for MV
   assert.equal(verdictsOf(r)['mv-objetos'], 'PASS');
   assert.equal(groupOf(r, 'mv-objetos').counts.ok, 2);
 });
 
-test('eras: la salida de una era es de la siguiente; el casco EV puede pedir titanio (EV) pero no tungsteno (IV)', () => {
+test('eras: an era\'s output belongs to the next one; the EV hull can need titanium (EV) but not tungsten (IV)', () => {
   const ok = run(eraPack().dump, eraPack().cfg, { pass: 'eras' });
   assert.equal(verdictsOf(ok)['salida-hv'], 'PASS');
   const { dump, cfg } = eraPack({ hullW: true });
   const r = run(dump, { ...cfg, world: [...cfg.world, { id: 'tungsteno-de-prueba', mode: 'manual', items: ['t:w_dust'] }] }, { pass: 'eras' });
   assert.equal(verdictsOf(r)['salida-hv'], 'FAIL');
-  assert.match(textOf(r, 'salida-hv'), /t:ev_hull — pide tungsteno \(iv\)/);
+  assert.match(textOf(r, 'salida-hv'), /t:ev_hull — needs tungsteno \(iv\)/);
 });
 
-test('eras: un objeto explícito que no se fabrica ni con todo avisa (la regla no se puede comprobar) y dice qué recurso posterior pide', () => {
+test('eras: an explicit item that isn\'t made even with everything warns (the rule can\'t be checked) and says which later resource it needs', () => {
   const { dump, cfg } = eraPack({ hullW: true });
   const r = run(dump, cfg, { pass: 'eras' });
-  // sin fuente de tungsteno el casco EV no se fabrica en este tier: aviso, no violación
+  // with no tungsten source the EV hull isn't made in this tier: a warning, not a violation
   assert.equal(verdictsOf(r)['salida-hv'], 'WARN');
-  assert.match(textOf(r, 'salida-hv'), /t:ev_hull — no se fabrica en este tier ni con todos los recursos \(la regla no se puede comprobar\); además pide tungsteno \(iv\)/);
+  assert.match(textOf(r, 'salida-hv'), /t:ev_hull — isn't made in this tier even with every resource \(the rule can't be checked\); it also needs tungsteno \(iv\)/);
   assert.equal(r.out.verdict, 'PASS');
 });
 
-// ---------------------------------------------------------------- exclusividad: "el titanio solo sale de la Luna"
+// ---------------------------------------------------------------- exclusivity: "titanium only comes from the Moon"
 
-test('eras (onlyFrom): sin fugas, ninguna clave del titanio sale sin la Luna; con la bauxita que da titanio, FUGA con su fuente (el reciclaje no cuenta)', () => {
+test('eras (onlyFrom): with no leaks, no titanium key comes out without the Moon; with bauxite giving titanium, LEAK with its source (recycling doesn\'t count)', () => {
   const clean = run(eraPack({ onlyFrom: true }).dump, eraPack({ onlyFrom: true }).cfg, { pass: 'eras' });
   const ex = clean.out.eras.exclusive;
   assert.equal(ex.length, 1);
-  assert.equal(ex[0].verdict, 'PASS', 'deshacer el casco EV da titanio, pero el casco ya pide titanio de la Luna');
-  assert.match(ex[0].lines[0], /ninguno de sus \d+ objetos y fluidos sale sin la Luna/);
+  assert.equal(ex[0].verdict, 'PASS', 'undoing the EV hull gives titanium, but the hull already needs the Moon\'s titanium');
+  assert.match(ex[0].lines[0], /none of its \d+ items and fluids come out without la Luna/);
   const { dump, cfg } = eraPack({ onlyFrom: true, leak: true });
   const r = run(dump, cfg, { pass: 'eras' });
   const leak = r.out.eras.exclusive[0];
   assert.equal(leak.verdict, 'FAIL');
   assert.equal(r.out.verdict, 'FAIL');
   const text = leak.lines.join('\n');
-  assert.match(text, /FUGA: \d+ de sus \d+ objetos y fluidos salen sin la Luna\. Entran por 1 fuente\(s\) en 1 clave\(s\) \(y 1 receta\(s\) que reciclan lo que ya lo lleva, que no cuentan\)/);
+  assert.match(text, /LEAK: \d+ of its \d+ items and fluids come out without la Luna\. They come in through 1 source\(s\) in 1 key\(s\) \(and 1 recipe\(s\) that recycle what already carries it, which don't count\)/);
   assert.match(text, /· t:ti_dust {2}← t:electrolyzer · t:electro\/bauxite/);
   assert.doesNotMatch(text, /← .*recycle_ev_hull/);
   assert.equal(leak.recycled, 1);
   assert.ok(leak.leaked.includes('t:ti_plate'));
-  assert.ok(!leak.leaked.includes('t:raw_ilmenite'), 'la ilmenita solo sale de la Luna');
-  assert.match(r.text, /FAIL {2}ev: titanio solo sale de luna/);
+  assert.ok(!leak.leaked.includes('t:raw_ilmenite'), 'ilmenite only comes from the Moon');
+  assert.match(r.text, /FAIL {2}ev: titanio only comes from luna/);
 });
 
-// ---------------------------------------------------------------- base fuera de la fábrica: conditions.dimension.asKeysFor
+// ---------------------------------------------------------------- a base outside the factory: conditions.dimension.asKeysFor
 
-/** La perforadora lunar: su receta solo vale en la Luna (condición de dimensión) y el viaje (sintética) da la clave dim:t:luna. */
+/** The lunar drill: its recipe is only valid on the Moon (dimension condition), and the trip (synthetic) gives the dim:t:luna key. */
 function lunarPack({ asKeys = true } = {}) {
   const moon = [{ type: 'dimension', dimension: 't:luna' }];
   const recipes = [
@@ -224,7 +224,7 @@ function lunarPack({ asKeys = true } = {}) {
     synthetic: [{ id: 'viaje-luna', capital: ['t:rocket'], produces: ['dim:t:luna'] }],
     targets: [
       { id: 'ilmenita', item: 't:raw_ilmenite' },
-      { id: 'ilmenita-sin-viaje', item: 't:raw_ilmenite', without: ['sintética:viaje-luna'], expect: 'unreachable' },
+      { id: 'ilmenita-sin-viaje', item: 't:raw_ilmenite', without: ['synthetic:viaje-luna'], expect: 'unreachable' },
     ],
     autoTargets: [
       { id: 'auto-ilmenita', item: 't:raw_ilmenite' },
@@ -242,32 +242,32 @@ function lunarPack({ asKeys = true } = {}) {
   return { dump: mkDump({ recipes, items: ['t:ore', 't:raw_ilmenite'] }), cfg };
 }
 
-test('asKeysFor: la receta que solo vale en la Luna pide la clave del viaje; con ella la ilmenita lunar se automatiza y sigue siendo de la Luna', () => {
+test('asKeysFor: the recipe only valid on the Moon needs the trip\'s key; with it, lunar ilmenite is automated and still belongs to the Moon', () => {
   const { dump, cfg } = lunarPack();
   const r = run(dump, cfg);
   assert.deepEqual(verdicts(r.out.gate), { ilmenita: 'PASS', 'ilmenita-sin-viaje': 'PASS' });
   assert.deepEqual(verdicts(r.out.auto), { 'auto-ilmenita': 'PASS', 'auto-titanio': 'PASS' });
   const rule = r.model.g.rules.find((x) => x.name === 't:lunar/ilmenite');
-  assert.ok(rule.slots.some((s) => s.cap && s.alts.some((a) => r.model.g.keyNames[a] === 'dim:t:luna')), 'la ranura de la condición es la clave del viaje');
+  assert.ok(rule.slots.some((s) => s.cap && s.alts.some((a) => r.model.g.keyNames[a] === 'dim:t:luna')), 'the condition\'s slot is the trip\'s key');
   assert.deepEqual(rule.meta.dims, ['t:luna']);
-  // la regla de eras y la exclusividad quitan la receta lunar junto con la Luna
+  // the era rule and exclusivity remove the lunar recipe along with the Moon
   assert.equal(r.out.eras.exclusive[0].verdict, 'PASS');
   assert.deepEqual(verdictsOf(r), { 'hv-objetos': 'PASS', 'salida-hv': 'PASS' });
   assert.equal(r.out.verdict, 'PASS');
 });
 
-test('asKeysFor: sin él, la receta lunar no vale en la fábrica de la Tierra y la ilmenita solo sale del viaje a mano', () => {
+test('asKeysFor: without it, the lunar recipe doesn\'t apply at Earth\'s factory, and ilmenite only comes from the hand-done trip', () => {
   const { dump, cfg } = lunarPack({ asKeys: false });
   const r = run(dump, cfg);
   assert.equal(verdicts(r.out.gate).ilmenita, 'PASS');
   assert.equal(verdicts(r.out.auto)['auto-ilmenita'], 'FAIL');
   const rule = r.model.g.rules.find((x) => x.name === 't:lunar/ilmenite');
-  assert.ok(rule.slots.some((s) => s.dead && /solo vale en t:luna; la fábrica está en minecraft:overworld/.test(s.label)));
+  assert.ok(rule.slots.some((s) => s.dead && /only applies in t:luna; the factory is in minecraft:overworld/.test(s.label)));
 });
 
-// ---------------------------------------------------------------- motor: claves quitadas de toda fuente
+// ---------------------------------------------------------------- engine: keys removed from every source
 
-test('lfp con `blocked`: la regla sigue dando sus otras salidas y los hechos quitados no cuentan', () => {
+test('lfp with `blocked`: the rule still gives its other outputs, and removed facts don\'t count', () => {
   const g = new Graph();
   const a = g.key('a');
   const b = g.key('b');
@@ -284,7 +284,7 @@ test('lfp con `blocked`: la regla sigue dando sus otras salidas y los hechos qui
   assert.equal(lf2.reached[c], 0);
 });
 
-// ---------------------------------------------------------------- configuración: herencia y capa de la versión siguiente
+// ---------------------------------------------------------------- config: inheritance and the next-version layer
 
 function memoryTiers(files) {
   const root = path.resolve('/memoria/tiers');
@@ -295,7 +295,7 @@ function memoryTiers(files) {
   };
 }
 
-test('config de eras: se heredan; un elemento nuevo es de la era de su archivo y uno con el mismo id se combina campo a campo', () => {
+test('era config: inherited; a new element belongs to its file\'s era, and one with the same id is merged field by field', () => {
   const { root, io } = memoryTiers({
     'steam.json': { tier: 'steam', eraOrder: ['steam', 'lv', 'mv'], eraItems: [{ id: 'a', items: ['x:a'] }, { id: 'b', era: 'lv', items: ['x:b'] }] },
     'lv.json': {
@@ -310,12 +310,12 @@ test('config de eras: se heredan; un elemento nuevo es de la era de su archivo y
   assert.deepEqual(lv.eraItems.map((e) => [e.id, e.era]), [['a', 'steam'], ['c', 'lv']]);
   assert.deepEqual(lv.eraResources.map((e) => [e.id, e.era]), [['nether', 'lv']]);
   const mv = loadTierConfig({ tier: 'mv' }, root, io).raw;
-  // el parche solo cambia lo que dice: el Nether conserva su nombre y sus dimensiones; el grupo a, su era y sus objetos
+  // the patch only changes what it says: the Nether keeps its name and dimensions; group a keeps its era and items
   assert.deepEqual(mv.eraResources, [{ id: 'nether', era: 'mv', label: 'el Nether', dimensions: ['minecraft:the_nether'] }]);
   assert.deepEqual(mv.eraItems.find((e) => e.id === 'a'), { id: 'a', era: 'steam', items: ['x:a'], optional: true });
 });
 
-test('config: la capa tiers/next/ hace que toda la cadena herede de sus archivos (next/hv -> hv -> next/mv -> mv)', () => {
+test('config: the tiers/next/ layer makes the whole chain inherit from its files (next/hv -> hv -> next/mv -> mv)', () => {
   const { root, io } = memoryTiers({
     'mv.json': { tier: 'mv', targets: [{ id: 'mv-actual' }], world: [{ id: 'w-mv' }] },
     'hv.json': { tier: 'hv', extends: 'mv', inheritTargets: true, targets: [{ id: 'hv-actual' }], eraResources: [{ id: 'end', label: 'el End' }] },
@@ -333,26 +333,26 @@ test('config: la capa tiers/next/ hace que toda la cadena herede de sus archivos
   assert.deepEqual(next.targets.map((t) => t.id), ['mv-actual', 'mv-siguiente', 'hv-actual']);
   assert.deepEqual(next.world.map((w) => w.id), ['w-mv', 'menas-end']);
   assert.deepEqual(next.eraResources.map((r) => [r.id, r.era]), [['end', 'mv']]);
-  // fuera de la capa nada cambia: el mv de siempre sigue sin el End
+  // outside the layer nothing changes: the regular mv still has no End
   assert.deepEqual(loadTierConfig({ tier: 'mv' }, root, io).raw.world.map((w) => w.id), ['w-mv']);
-  // un archivo de la capa que se nombra a sí mismo por nombre daría un ciclo: se detecta
+  // a layer file that names itself by name would create a cycle: it's detected
   const loop = memoryTiers({ 'mv.json': { tier: 'mv' }, 'next/mv.json': { tier: 'mv', extends: 'mv' } });
-  assert.throws(() => loadTierConfig({ tier: 'next/mv' }, loop.root, loop.io), /herencia circular/);
+  assert.throws(() => loadTierConfig({ tier: 'next/mv' }, loop.root, loop.io), /circular inheritance/);
 });
 
-// ---------------------------------------------------------------- configuraciones reales
+// ---------------------------------------------------------------- real configs
 
-test('tiers reales: el orden de eras se hereda y cada recurso y grupo tiene una era del orden', () => {
+test('real tiers: era order is inherited and every resource and group has an era from the order', () => {
   for (const tier of ['steam', 'lv', 'mv', 'hv']) {
     const { raw } = loadTierConfig({ tier }, TIERS);
     assert.ok(raw.eraOrder && raw.eraOrder.length >= 6, `${tier}: eraOrder`);
-    for (const e of [...raw.eraResources, ...raw.eraItems]) assert.ok(raw.eraOrder.includes(e.era), `${tier}: ${e.id} tiene la era ${e.era}`);
+    for (const e of [...raw.eraResources, ...raw.eraItems]) assert.ok(raw.eraOrder.includes(e.era), `${tier}: ${e.id} has era ${e.era}`);
     const ids = raw.eraItems.map((e) => e.id);
-    assert.equal(new Set(ids).size, ids.length, `${tier}: ids de eraItems repetidos`);
+    assert.equal(new Set(ids).size, ids.length, `${tier}: duplicate eraItems ids`);
   }
 });
 
-test('tiers reales (hv): el titanio, el helio-3 y la Luna son de EV y solo salen de la Luna, el End de MV; la broca de inox, el cohete y el traje de GCYR son de HV (v0.5.0)', () => {
+test('real tiers (hv): titanium, helium-3 and the Moon belong to EV and only come from the Moon, the End to MV; the stainless bit, the rocket and GCYR\'s suit belong to HV (v0.5.0)', () => {
   const { raw } = loadTierConfig({ tier: 'hv' }, TIERS);
   const res = Object.fromEntries(raw.eraResources.map((r) => [r.id, r]));
   assert.equal(res.titanio.era, 'ev');
@@ -364,23 +364,23 @@ test('tiers reales (hv): el titanio, el helio-3 y la Luna son de EV y solo salen
   assert.deepEqual(res.titanio.onlyFrom, ['luna']);
   assert.deepEqual(res['helio-3'].onlyFrom, ['luna']);
   const items = Object.fromEntries(raw.eraItems.map((g) => [g.id, g]));
-  for (const id of ['hv-cohete', 'hv-traje', 'hv-broca-inox']) assert.ok(!items[id].optional, `${id} ya llegó: no es opcional`);
+  for (const id of ['hv-cohete', 'hv-traje', 'hv-broca-inox']) assert.ok(!items[id].optional, `${id} has already arrived: not optional`);
   for (const it of ['gcyr:rocket_scanner', 'gcyr:launch_pad', 'gcyr:basic_fuel_tank', 'gcyr:basic_rocket_motor', 'gcyr:seat']) assert.ok(items['hv-cohete'].items.includes(it), it);
   assert.equal(items['salida-hv'].era, 'ev');
   assert.deepEqual(items['salida-hv'].items.slice(0, 3), ['gtceu:ev_machine_hull', 'gtceu:ev_electric_motor', 'gtceu:ev_electric_pump']);
-  // la base lunar es la salida a EV; el controlador de la perforadora lunar se fabrica en HV
+  // the lunar base is the output to EV; the lunar drill's controller is built in HV
   assert.equal(items['salida-hv-luna'].era, 'ev');
   assert.equal(items['hv-luna'].era, 'hv');
-  assert.ok(!items['hv-objetos'].items.includes('grindless:end_key'), 'la llave del End es del MV');
+  assert.ok(!items['hv-objetos'].items.includes('grindless:end_key'), 'the End\'s key belongs to MV');
   assert.equal(items['mv-end'].era, 'mv');
   assert.equal(items['hv-gtm'].era, 'hv');
   assert.equal(items['vapor-maquinas'].era, 'steam');
   assert.equal(items['salida-vapor'].era, 'lv');
-  // ningún objetivo nombra ya la broca de titanio salvo la comprobación de que no se fabrica
+  // no target names the titanium bit anymore except the check that it isn't made
   const named = [...raw.targets, ...raw.autoTargets, ...raw.autoTargetsFromVeins.map((s) => s.target || {})]
     .filter((t) => JSON.stringify([t.item, t.input]).includes('grindless:titanium_drill_bit'));
   assert.deepEqual(named.map((t) => [t.id, t.expect]), [['broca-titanio-no-se-fabrica', 'unreachable']]);
-  // las vetas se cuentan por las recetas de la perforadora (la de vetas o la lunar), no por que exista su muestra
+  // veins are counted by the drill's recipes (the vein one or the lunar one), not by whether their sample exists
   const veinSpecs = [...raw.world.filter((w) => w.fromVeins).map((w) => w.fromVeins), ...raw.targetsFromVeins, ...raw.autoTargetsFromVeins];
   for (const s of veinSpecs.filter((x) => x.requireItem || x.requireRecipe)) {
     assert.equal(s.requireItem, undefined);
@@ -389,7 +389,7 @@ test('tiers reales (hv): el titanio, el helio-3 y la Luna son de EV y solo salen
   }
 });
 
-test('tiers reales (v0.5.0): el End está en MV, el viaje a la Luna da la clave de la base lunar y la capa tiers/next/ ya se fundió', () => {
+test('real tiers (v0.5.0): the End is in MV, the trip to the Moon gives the lunar base\'s key, and the tiers/next/ layer has already merged in', () => {
   const { raw: mv } = loadTierConfig({ tier: 'mv' }, TIERS);
   const { raw: hv } = loadTierConfig({ tier: 'hv' }, TIERS);
   for (const cfg of [mv, hv]) {
@@ -398,15 +398,15 @@ test('tiers reales (v0.5.0): el End está en MV, el viaje a la Luna da la clave 
   }
   const ids = (cfg) => cfg.targets.map((t) => t.id);
   for (const id of ['llave-end', 'ojo-ender', 'menas-end-con-llave', 'ilmenita-no-sale-del-end', 'scheelita-no-sale-del-end']) assert.ok(ids(mv).includes(id), id);
-  // en HV la Luna también da ilmenita y cromita: esas dos comprobaciones del End dejan de valer
+  // in HV the Moon also gives ilmenite and chromite: those two End checks stop holding
   for (const id of ['ilmenita-no-sale-del-end', 'menas-end-sin-llave']) assert.ok(!ids(hv).includes(id), id);
-  assert.ok(!mv.world.some((w) => w.id === 'menas-luna'), 'el MV no llega a la Luna');
+  assert.ok(!mv.world.some((w) => w.id === 'menas-luna'), 'MV doesn\'t reach the Moon');
   const luna = hv.world.find((w) => w.id === 'menas-luna');
   assert.deepEqual(luna.needs, ['dim:gcyr:luna']);
   assert.ok(luna.fromVeins.dimensions.includes('gcyr:luna'));
   assert.deepEqual(hv.synthetic.find((s) => s.id === 'viaje-luna').produces, ['dim:gcyr:luna']);
   assert.deepEqual(hv.conditions.dimension.asKeysFor, ['gcyr:luna']);
-  assert.equal(mv.conditions.dimension, undefined, 'en MV las recetas lunares siguen sin valer');
+  assert.equal(mv.conditions.dimension, undefined, 'in MV lunar recipes still don\'t apply');
   assert.ok(hv.machines.some((m) => m.machine === 'gtceu:lunar_drill' && m.types.includes('gtceu:lunar_drilling')));
   assert.ok(hv.autoTargets.some((t) => t.id === 'auto-titanio' && !t.expect));
   assert.ok(!hv.autoTargets.some((t) => t.id === 'auto-titanio-no-en-hv'));

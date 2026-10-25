@@ -1,4 +1,4 @@
-// Pruebas de extremo a extremo del modelo con paquetes pequeños en memoria: node --test tools/analysis/test/
+// End-to-end tests for the model with small in-memory packs: node --test tools/analysis/test/
 import assert from 'node:assert/strict';
 import { test } from 'node:test';
 import { gf, gi, gt, miniPack, mkDump, run, shaped, shapeless, verdicts, without } from './helpers.mjs';
@@ -6,7 +6,7 @@ import { gf, gi, gt, miniPack, mkDump, run, shaped, shapeless, verdicts, without
 const statusOf = (list, id) => list.find((r) => r.target.id === id).status;
 const linesOf = (list, id) => list.find((r) => r.target.id === id).lines.join('\n');
 
-test('mini pack: la puerta se fabrica y todo se sostiene solo', () => {
+test('mini pack: the gate is built and everything sustains itself', () => {
   const pack = miniPack();
   const { out, model } = run(pack.dump, pack.cfg);
   assert.deepEqual(model.warnings, []);
@@ -15,31 +15,31 @@ test('mini pack: la puerta se fabrica y todo se sostiene solo', () => {
   assert.ok(Object.values(verdicts(out.auto)).every((v) => v === 'PASS'));
 });
 
-test('el ciclo mena -> lingote -> broca -> perforadora se sostiene aunque la broca se gaste (catalizador)', () => {
+test('the ore -> ingot -> bit -> drill cycle sustains itself even though the bit gets used up (catalyst)', () => {
   const pack = miniPack();
   const { res, model } = run(pack.dump, pack.cfg);
   const raw = model.g.key('t:raw');
   assert.equal(res.susInf.inS[raw], 1);
-  // la mena viene de la perforadora, no de un atajo
+  // the ore comes from the drill, not from a shortcut
   assert.equal(model.g.rules[res.susInf.supportRule[raw]].name, 't:drilling');
 });
 
-test('sin receta de broca la perforadora no se mantiene: la mena solo existe por el arranque manual', () => {
+test('without the bit recipe the drill isn\'t sustained: the ore only exists via the manual bootstrap', () => {
   const { dump, cfg } = without(miniPack(), 't:bit');
   const { out } = run(dump, cfg);
   assert.equal(statusOf(out.auto, 'auto-mena'), 'bootstrap');
   assert.equal(out.verdict, 'FAIL');
-  assert.match(linesOf(out.auto, 'auto-mena'), /manual|arranque/i);
+  assert.match(linesOf(out.auto, 'auto-mena'), /manual|bootstrap/i);
 });
 
-test('sin receta de perforación no hay generación de mena y se dice por qué', () => {
+test('without the drilling recipe there\'s no ore generation, and it says why', () => {
   const { dump, cfg } = without(miniPack(), 't:drilling');
   const { out } = run(dump, cfg);
   assert.equal(statusOf(out.auto, 'auto-mena'), 'bootstrap');
   assert.equal(out.gate.find((r) => r.target.id === 'receta-perforacion').verdict, 'FAIL');
 });
 
-test('sin invernadero no hay troncos sostenidos y la caldera deja de dar vapor', () => {
+test('without the greenhouse there are no sustained logs, and the boiler stops giving steam', () => {
   const { dump, cfg } = without(miniPack(), 't:greenhouse_logs');
   const { out } = run(dump, cfg);
   assert.equal(statusOf(out.auto, 'auto-troncos'), 'bootstrap');
@@ -47,15 +47,15 @@ test('sin invernadero no hay troncos sostenidos y la caldera deja de dar vapor',
   assert.notEqual(statusOf(out.auto, 'auto-lingote'), 'sustained');
 });
 
-test('el límite de EU/t de la máquina de vapor deja sin máquina a las recetas demasiado caras', () => {
+test('the steam machine\'s EU/t cap leaves recipes that are too expensive without a machine', () => {
   const pack = miniPack({ drillEut: 120 });
   const { out } = run(pack.dump, pack.cfg);
   const rule = out.gate.find((r) => r.target.id === 'receta-perforacion');
   assert.equal(rule.verdict, 'FAIL');
-  assert.match(rule.lines.join('\n'), /ninguna máquina de t:drilling admite 120 EU\/t/);
+  assert.match(rule.lines.join('\n'), /no t:drilling machine accepts 120 EU\/t/);
 });
 
-test('el modo --pass gate no evalúa ni cuenta los objetivos automáticos', () => {
+test('--pass gate mode neither evaluates nor counts the auto targets', () => {
   const { dump, cfg } = without(miniPack(), 't:greenhouse_logs');
   const full = run(dump, cfg);
   assert.equal(full.out.verdict, 'FAIL');
@@ -64,7 +64,7 @@ test('el modo --pass gate no evalúa ni cuenta los objetivos automáticos', () =
   assert.equal(out.verdict, 'PASS');
 });
 
-test('un ciclo sin fuente (comprimir <-> descomprimir) no se sostiene aunque haya arranque manual', () => {
+test('a cycle with no source (compress <-> decompress) isn\'t sustained even with a manual bootstrap', () => {
   const recipes = [
     shapeless('t:compress', Array(9).fill({ item: 't:a' }), 't:block'),
     shapeless('t:decompress', [{ item: 't:block' }], 't:a', 9),
@@ -81,7 +81,7 @@ test('un ciclo sin fuente (comprimir <-> descomprimir) no se sostiene aunque hay
   assert.equal(statusOf(out.auto, 'auto-a'), 'bootstrap');
   assert.equal(out.verdict, 'FAIL');
 
-  // con una fuente que reponga la mena el mismo ciclo sí cuenta
+  // with a source that resupplies the ore, the same cycle does count
   const withSource = mkDump({ recipes: [...recipes, gt('t:mine', 't:mining', { outs: [gi('t:a')] })], items: ['t:miner'] });
   const cfg2 = { ...cfg, machines: [{ machine: 't:miner', types: ['t:mining'] }] };
   cfg2.world = [...cfg.world, { id: 'minero-pieza', mode: 'manual', bootstrap: true, items: ['t:miner'] }];
@@ -89,7 +89,7 @@ test('un ciclo sin fuente (comprimir <-> descomprimir) no se sostiene aunque hay
   assert.equal(statusOf(res2.out.auto, 'auto-a'), 'sustained');
 });
 
-test('una fuente que se agota (minero) da WARN y no PASS', () => {
+test('a source that runs out (miner) gives WARN, not PASS', () => {
   const cfg = {
     tier: 'finito',
     world: [
@@ -106,7 +106,7 @@ test('una fuente que se agota (minero) da WARN y no PASS', () => {
   assert.deepEqual(verdicts(out.auto), { 'auto-mena': 'WARN', 'auto-mena-ok': 'PASS' });
 });
 
-test('los miembros de una etiqueta valen como alternativas y una etiqueta vacía bloquea con su nombre', () => {
+test('a tag\'s members work as alternatives, and an empty tag blocks, naming itself', () => {
   const recipes = [
     shaped('t:tool', ['PP'], { P: { tag: 't:plates' } }, 't:tool'),
     shaped('t:tool2', ['PP'], { P: { tag: 't:vacia' } }, 't:tool2'),
@@ -124,7 +124,7 @@ test('los miembros de una etiqueta valen como alternativas y una etiqueta vacía
   assert.match(linesOf(out.gate, 'herramienta2'), /#t:vacia/);
 });
 
-test('la herramienta (etiqueta de herramientas) es capital: basta con tenerla y no se gasta', () => {
+test('the tool (a tool tag) is capital: having it is enough, and it isn\'t consumed', () => {
   const recipes = [
     shaped('t:hammer', ['I'], { I: { item: 't:ingot' } }, 't:hammer'),
     shaped('t:plate', ['H', 'I'], { H: { tag: 'gtceu:tools/crafting_hammers' }, I: { item: 't:ingot' } }, 't:plate'),
@@ -144,7 +144,7 @@ test('la herramienta (etiqueta de herramientas) es capital: basta con tenerla y 
   assert.equal(rule.slots.filter((s) => s.cap).length, 1);
 });
 
-test('un recipiente de fluido pide el fluido y algo donde llevarlo', () => {
+test('a fluid container needs the fluid and something to carry it in', () => {
   const recipes = [
     {
       id: 'gtceu:shaped_fluid_container/paper',
@@ -180,7 +180,7 @@ test('un recipiente de fluido pide el fluido y algo donde llevarlo', () => {
   assert.match(linesOf(noBucket.out.gate, 'papel'), /minecraft:bucket/);
 });
 
-test('un objetivo puede exigir sostenerse "sin" ciertas reglas (without) y entonces no vale el atajo', () => {
+test('a target can require sustaining itself "without" certain rules (without), making the shortcut invalid', () => {
   const pack = miniPack();
   const mk = (recipes) => {
     const cfg = {
@@ -188,8 +188,8 @@ test('un objetivo puede exigir sostenerse "sin" ciertas reglas (without) y enton
       synthetic: [...pack.cfg.synthetic, { id: 'solar', machines: ['t:boiler'], consumes: ['fluid:t:water'], produces: ['fluid:t:steam'] }],
       autoTargets: [
         { id: 'vapor', fluid: 't:steam' },
-        { id: 'vapor-sin-solar', fluid: 't:steam', without: ['sintética:solar'] },
-        { id: 'perforacion-sin-solar', kind: 'recipe', type: 't:drilling', without: ['sintética:solar'] },
+        { id: 'vapor-sin-solar', fluid: 't:steam', without: ['synthetic:solar'] },
+        { id: 'perforacion-sin-solar', kind: 'recipe', type: 't:drilling', without: ['synthetic:solar'] },
       ],
     };
     return run(without({ ...pack, recipes }, 'nada').dump, cfg);
@@ -197,16 +197,16 @@ test('un objetivo puede exigir sostenerse "sin" ciertas reglas (without) y enton
   const ok = mk(pack.recipes);
   assert.deepEqual(verdicts(ok.out.auto), { vapor: 'PASS', 'vapor-sin-solar': 'PASS', 'perforacion-sin-solar': 'PASS' });
 
-  // sin invernadero no hay combustible que se reponga: con el atajo solar sigue habiendo vapor, sin él no
+  // without the greenhouse there's no fuel to resupply: with the solar shortcut there's still steam, without it there isn't
   const noFuel = mk(pack.recipes.filter((r) => r.id !== 't:greenhouse_logs'));
   const v = verdicts(noFuel.out.auto);
   assert.equal(v.vapor, 'PASS');
   assert.equal(v['vapor-sin-solar'], 'FAIL');
   assert.equal(v['perforacion-sin-solar'], 'FAIL');
-  assert.match(noFuel.text, /\[sin sintética:solar\]/);
+  assert.match(noFuel.text, /\[without synthetic:solar\]/);
 });
 
-test('un objetivo de receta sin salidas o sin máquina del tier se informa sin fallar', () => {
+test('a recipe target with no outputs or no machine in the tier is reported without failing', () => {
   const recipes = [gt('t:fuel', 't:boiler_fuel', { ins: [gi('t:log')] })];
   const cfg = {
     tier: 'sin-salida',
@@ -216,10 +216,10 @@ test('un objetivo de receta sin salidas o sin máquina del tier se informa sin f
   };
   const { out, text } = run(mkDump({ recipes, items: ['t:log'] }), cfg);
   assert.equal(out.verdict, 'FAIL');
-  assert.match(text, /no hay máquina para t:boiler_fuel en este tier/);
+  assert.match(text, /there's no machine for t:boiler_fuel in this tier/);
 });
 
-test('las máquinas del registro se añaden en bloque con sus tipos de receta (machinesFromRegistry)', () => {
+test('registry machines are added in bulk with their recipe types (machinesFromRegistry)', () => {
   const recipes = [
     gt('t:macerate', 'gtceu:macerator', { ins: [gi('t:ore')], outs: [gi('t:dust')], eut: 2 }),
     shaped('t:lv_macerator', ['I'], { I: { item: 't:ingot' } }, 'gtceu:lv_macerator'),
@@ -240,7 +240,7 @@ test('las máquinas del registro se añaden en bloque con sus tipos de receta (m
   assert.equal(r.out.verdict, 'PASS');
 });
 
-test('avisa de partes, máquinas y fluidos de la configuración que no existen en el registro', () => {
+test('warns about config parts, machines and fluids that don\'t exist in the registry', () => {
   const cfg = {
     tier: 'avisos',
     world: [],
@@ -256,7 +256,7 @@ test('avisa de partes, máquinas y fluidos de la configuración que no existen e
   assert.match(text, /fluid:t:fantasma/);
 });
 
-test('las recetas de salida con fluidos se leen: un fluido producido por una máquina cuenta', () => {
+test('output recipes with fluids are read: a fluid produced by a machine counts', () => {
   const recipes = [gt('t:pump_recipe', 't:pumping', { fouts: [gf('t:oil')], eut: 8 })];
   const cfg = {
     tier: 'fluidos',

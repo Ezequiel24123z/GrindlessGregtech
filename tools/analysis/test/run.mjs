@@ -1,4 +1,4 @@
-// Lanza todas las pruebas (*.test.mjs) con el ejecutor de Node, sin depender de globs del shell ni de la versión.
+// Runs all tests (*.test.mjs) with Node's test runner, without depending on shell globs or the version.
 //   node tools/analysis/test/run.mjs [--test-reporter=spec]
 import { spawnSync } from 'node:child_process';
 import fs from 'node:fs';

@@ -1,5 +1,5 @@
-// Pruebas de lo que añade el tier MV: herencia de configuración por id, piezas por máquina, config de GTM leída como booleanos
-// y el motivo de un yacimiento de fluidos que no admite la dimensión.
+// Tests for what the MV tier adds: config inheritance by id, per-machine parts, GTM config read as booleans
+// and the reason a fluid deposit doesn't allow the dimension.
 import assert from 'node:assert/strict';
 import path from 'node:path';
 import { test } from 'node:test';
@@ -11,54 +11,54 @@ const TIERS = path.join(path.dirname(fileURLToPath(import.meta.url)), '..', 'tie
 const linesOf = (list, id) => list.find((r) => r.target.id === id).lines.join('\n');
 const dups = (ids) => ids.filter((id, i) => ids.indexOf(id) !== i);
 
-// ---------------------------------------------------------------- configuración real de los tiers
+// ---------------------------------------------------------------- real tier config
 
 for (const tier of ['steam', 'lv', 'mv', 'hv']) {
-  test(`config del tier ${tier}: ids únicos, cada objetivo tiene una forma válida y los "without" apuntan a sintéticas que existen`, () => {
+  test(`tier ${tier} config: unique ids, every target has a valid shape, and "without" entries point at synthetics that exist`, () => {
     const { raw } = loadTierConfig({ tier }, TIERS);
-    assert.deepEqual(dups(raw.targets.map((t) => t.id)), [], 'ids de objetivos repetidos');
-    assert.deepEqual(dups(raw.autoTargets.map((t) => t.id)), [], 'ids de objetivos automáticos repetidos');
-    assert.deepEqual(dups(raw.machines.map((m) => m.id || m.machine)), [], 'máquinas repetidas');
-    assert.deepEqual(dups(raw.synthetic.map((s) => s.id)), [], 'sintéticas repetidas');
-    assert.deepEqual(dups(raw.world.map((w) => w.id).filter(Boolean)), [], 'entradas de mundo repetidas');
+    assert.deepEqual(dups(raw.targets.map((t) => t.id)), [], 'duplicate target ids');
+    assert.deepEqual(dups(raw.autoTargets.map((t) => t.id)), [], 'duplicate autoTargets ids');
+    assert.deepEqual(dups(raw.machines.map((m) => m.id || m.machine)), [], 'duplicate machines');
+    assert.deepEqual(dups(raw.synthetic.map((s) => s.id)), [], 'duplicate synthetics');
+    assert.deepEqual(dups(raw.world.map((w) => w.id).filter(Boolean)), [], 'duplicate world entries');
     const synthetic = new Set(raw.synthetic.map((s) => s.id));
     for (const t of [...raw.targets, ...raw.autoTargets]) {
-      assert.ok(t.item || t.fluid || t.anyOf || t.allOf || t.kind === 'recipe', `el objetivo ${t.id} no tiene item, fluid, anyOf, allOf ni kind`);
+      assert.ok(t.item || t.fluid || t.anyOf || t.allOf || t.kind === 'recipe', `target ${t.id} has no item, fluid, anyOf, allOf, or kind`);
       for (const w of t.without || []) {
-        if (w.startsWith('sintética:')) assert.ok(synthetic.has(w.slice('sintética:'.length)), `${t.id}: sin "${w}" pero esa sintética no existe`);
+        if (w.startsWith('synthetic:')) assert.ok(synthetic.has(w.slice('synthetic:'.length)), `${t.id}: without "${w}" but that synthetic doesn't exist`);
       }
     }
-    assert.deepEqual(dups(raw.targets.map((t) => t.label)), [], 'etiquetas repetidas: dos objetivos dicen lo mismo');
+    assert.deepEqual(dups(raw.targets.map((t) => t.label)), [], 'duplicate labels: two targets say the same thing');
   });
 }
 
-test('tier hijo: un elemento con el mismo id sustituye al del padre y dropTargets quita lo que ya no vale', () => {
+test('child tier: an element with the same id replaces the parent\'s, and dropTargets removes what no longer applies', () => {
   const { raw: lv } = loadTierConfig({ tier: 'lv' }, TIERS);
   const { raw: mv } = loadTierConfig({ tier: 'mv' }, TIERS);
   const ids = (cfg) => cfg.targets.map((t) => t.id);
-  // las comprobaciones de fuga del LV dejan de ser ciertas en MV: ya no están y su lugar lo ocupa el objetivo positivo
+  // LV's leak checks stop holding in MV: they're gone, replaced by the positive target
   for (const id of ['silicio-gt-no-antes-de-mv', 'bobina-kanthal-no-antes-de-mv']) {
     assert.ok(ids(lv).includes(id));
     assert.ok(!ids(mv).includes(id));
   }
   assert.ok(ids(mv).includes('silicio-gt') && ids(mv).includes('bobina-kanthal'));
-  // el resto de objetivos del LV se hereda (regresión): también las fugas que siguen valiendo
+  // the rest of LV's targets are inherited (regression): including the leaks that still apply
   assert.ok(ids(mv).includes('receta-aluminio-ebf') && ids(mv).includes('receta-obsidiana-arco'));
   assert.ok(mv.autoTargets.some((t) => t.id === 'auto-lava-no-automatica'));
-  // el EBF del LV se hereda con su id y las variantes del MV se añaden con ids propios
+  // LV's EBF is inherited with its id, and MV's variants are added with their own ids
   const ebf = mv.machines.filter((m) => m.machine === 'gtceu:electric_blast_furnace').map((m) => m.id || m.machine).sort();
   assert.deepEqual(ebf, [
     'gtceu:electric_blast_furnace', 'gtceu:electric_blast_furnace@lv-kanthal', 'gtceu:electric_blast_furnace@mv-cuproniquel',
     'gtceu:electric_blast_furnace@mv-kanthal',
   ]);
-  // los mapas se combinan clave a clave: el MV añade escotillas MV a las habilidades y hereda las condiciones
+  // maps are merged key by key: MV adds MV hatches to the abilities and inherits the conditions
   assert.ok(mv.partAbilities.energy_input.includes('gtceu:lv_energy_input_hatch') && mv.partAbilities.energy_input.includes('gtceu:mv_energy_input_hatch'));
   assert.deepEqual(mv.partAbilities.maintenance, ['gtceu:maintenance_hatch']);
   assert.equal(mv.conditions.environmental_hazard.unsupported, true);
   assert.deepEqual(mv.contexts, lv.contexts);
 });
 
-// ---------------------------------------------------------------- piezas por máquina
+// ---------------------------------------------------------------- per-machine parts
 
 function hatchPack() {
   const recipes = [
@@ -91,28 +91,28 @@ function hatchPack() {
   return { dump, cfg };
 }
 
-test('machines[].partAbilities: la máquina exige solo la escotilla que dice aunque el tier admita otras para esa habilidad', () => {
+test('machines[].partAbilities: the machine only requires the hatch it names, even if the tier allows others for that ability', () => {
   const { dump, cfg } = hatchPack();
-  // con la lista del tier basta la escotilla LV
+  // with the tier's list, the LV hatch is enough
   assert.equal(run(dump, cfg()).out.verdict, 'PASS');
-  // la máquina exige la escotilla MV, que nadie sabe fabricar: la cadena la nombra
+  // the machine requires the MV hatch, which nobody knows how to make: the chain names it
   const r = run(dump, cfg({ energy_input: ['t:mv_hatch'] }));
   assert.equal(r.out.verdict, 'FAIL');
   assert.match(linesOf(r.out.gate, 'maquina'), /t:mv_hatch/);
-  // el override es clave a clave y no toca las demás habilidades
+  // the override is key by key and doesn't touch the other abilities
   assert.deepEqual(verdicts(run(dump, cfg({ otra_habilidad: ['t:x'] })).out.gate), { maquina: 'PASS' });
 });
 
-// ---------------------------------------------------------------- config de GTM como booleanos
+// ---------------------------------------------------------------- GTM config as booleans
 
-test('config.json: los booleanos escritos como texto por volcados antiguos se leen como booleanos', () => {
+test('config.json: booleans written as text by older dumps are read as booleans', () => {
   const dump = mkDump({ config: { a: 'true', b: 'false', c: null, d: true, e: 5, f: 'otro' } });
   assert.deepEqual(dump.config, { a: true, b: false, c: null, d: true, e: 5, f: 'otro' });
 });
 
-// ---------------------------------------------------------------- piezas que dependen de la config de GTM
+// ---------------------------------------------------------------- parts that depend on GTM config
 
-test('parts con onlyIf: GTM no exige la pieza cuando la config dice que no (mantenimiento) y se sigue exigiendo si no se puede leer', () => {
+test('parts with onlyIf: GTM doesn\'t require the part when the config says not to (maintenance), and it\'s still required if it can\'t be read', () => {
   const recipes = [
     shaped('t:ebf_recipe', ['H'], { H: { item: 't:hull' } }, 't:ebf'),
     shaped('t:hull_recipe', ['I'], { I: { item: 't:ingot' } }, 't:hull'),
@@ -129,25 +129,25 @@ test('parts con onlyIf: GTM no exige la pieza cuando la config dice que no (mant
     autoTargets: [],
   };
   const dump = (config) => mkDump({ recipes, items: ['t:ingot', 't:ebf', 't:hull', 't:maintenance'], config });
-  // con mantenimiento la escotilla (que nadie fabrica) es obligatoria
+  // with maintenance on, the hatch (which nobody makes) is mandatory
   const on = run(dump({ 'machines.enableMaintenance': true }), cfg);
   assert.equal(on.out.verdict, 'FAIL');
   assert.match(linesOf(on.out.gate, 'ebf'), /t:maintenance/);
   assert.deepEqual(on.model.stats.partsNotRequired, []);
-  // sin mantenimiento la máquina se construye sin ella y el informe lo dice
+  // without maintenance the machine is built without it, and the report says so
   const off = run(dump({ 'machines.enableMaintenance': false }), cfg);
   assert.equal(off.out.verdict, 'PASS');
   assert.equal(off.model.stats.partsNotRequired.length, 1);
-  assert.match(off.text, /pieza que la config de GTM no exige: .*machines\.enableMaintenance = false; solo se exige con true.* en t:ebf/);
-  // config ilegible o sin config.json: se sigue exigiendo y se avisa
+  assert.match(off.text, /part the GTM config doesn't require: .*machines\.enableMaintenance = false; only required with true.* in t:ebf/);
+  // unreadable config or no config.json: still required, and it warns
   const unknown = run(dump(null), cfg);
   assert.equal(unknown.out.verdict, 'FAIL');
-  assert.match(unknown.model.warnings.join('\n'), /no se puede comprobar la config machines\.enableMaintenance \(el volcado no trae config\.json\); la pieza se sigue exigiendo/);
+  assert.match(unknown.model.warnings.join('\n'), /can't check config machines\.enableMaintenance \(the dump has no config\.json\); the part is still required/);
 });
 
-// ---------------------------------------------------------------- objetivos por veta con tabla de la perforadora
+// ---------------------------------------------------------------- vein targets with the drill's table
 
-test('objetivos por veta: requireItem salta las vetas sin objeto de la tabla (otros mods) y las lista; {id} quita "_vein" también en medio', () => {
+test('vein targets: requireItem skips veins with no item in the table (other mods) and lists them; {id} strips "_vein" in the middle too', () => {
   const veins = [
     { id: 'gtceu:redstone_vein_ow', layer: 'deepslate', dims: ['minecraft:overworld'], mats: ['gtceu:ruby'] },
     { id: 'gtceu:topaz_vein', layer: 'netherrack', dims: ['minecraft:the_nether'], mats: ['gtceu:topaz'] },
@@ -172,12 +172,12 @@ test('objetivos por veta: requireItem salta las vetas sin objeto de la tabla (ot
   assert.deepEqual(r.out.auto.map((x) => x.target.id), ['p-redstone_vein_ow', 'p-topaz_vein']);
   assert.equal(r.out.auto[0].target.input, 'grindless:vein_sample_redstone_ow');
   assert.equal(r.out.auto[0].verdict, 'PASS');
-  // la de la veta del Nether no tiene receta: FAIL; la del otro mod ni siquiera es un objetivo
+  // the Nether vein's has no recipe: FAIL; the other mod's isn't even a target
   assert.equal(r.out.auto[1].verdict, 'FAIL');
   assert.deepEqual(r.model.stats.veinsWithoutItem, ['gtnn:apatite_vein_tf']);
-  assert.match(r.text, /vetas del registro que la tabla de la perforadora no ofrece \(sin muestra o sin receta de perforación.*; no se comprueban\): gtnn:apatite_vein_tf/);
-  // requireRecipe se fija en las recetas: la muestra de topacio existe (como una muestra oculta de una veta apartada) pero ninguna
-  // receta de perforación la toma, así que la veta no tiene objetivo; tampoco la del otro mod
+  assert.match(r.text, /registry veins the drill's table doesn't offer \(no sample or no drilling recipe.*; not checked\): gtnn:apatite_vein_tf/);
+  // requireRecipe looks at the recipes: the topaz sample exists (like a hidden sample from a set-aside vein) but no
+  // drilling recipe takes it, so the vein has no target; neither does the other mod's
   const byRecipe = run(dump, {
     ...cfg,
     autoTargetsFromVeins: [{
@@ -189,14 +189,14 @@ test('objetivos por veta: requireItem salta las vetas sin objeto de la tabla (ot
   assert.deepEqual(byRecipe.model.stats.veinsWithoutItem, ['gtceu:topaz_vein', 'gtnn:apatite_vein_tf']);
 });
 
-test('mundo con fromVeins.requireRecipe: una veta apartada (muestra registrada, sin receta de perforación) no da menas en el viaje', () => {
+test('world with fromVeins.requireRecipe: a set-aside vein (registered sample, no drilling recipe) gives no ore on the trip', () => {
   const veins = [
     { id: 'gtceu:bauxite_vein_end', layer: 'endstone', dims: ['minecraft:the_end'], mats: ['gtceu:bauxite', 'gtceu:ilmenite'] },
     { id: 'gtceu:scheelite_vein', layer: 'endstone', dims: ['minecraft:the_end'], mats: ['gtceu:scheelite', 'gtceu:tungstate'] },
   ];
   const recipes = [
     gt('t:drill_end', 'gtceu:vein_drilling', { ins: [gi('grindless:vein_sample_bauxite_end', 1, 0)], outs: [gi('gtceu:raw_bauxite')] }),
-    // la muestra apartada solo se convierte en una sonda vacía
+    // the set-aside sample only converts into an empty probe
     shapeless('t:probe_from_scheelite', [{ item: 'grindless:vein_sample_scheelite' }], 'grindless:empty_vein_probe'),
   ];
   const world = (from) => [{ id: 'menas-end', mode: 'manual', bootstrap: true, template: 'gtceu:raw_{m}', materials: [], fromVeins: { dimensions: ['minecraft:the_end'], ...from } }];
@@ -209,16 +209,16 @@ test('mundo con fromVeins.requireRecipe: una veta apartada (muestra registrada, 
     recipes, veins,
     items: ['gtceu:raw_bauxite', 'gtceu:raw_ilmenite', 'gtceu:raw_scheelite', 'gtceu:raw_tungstate', 'grindless:vein_sample_bauxite_end', 'grindless:vein_sample_scheelite'],
   });
-  // con requireItem la muestra oculta todavía cuenta la veta de scheelita
+  // with requireItem the hidden sample still counts the scheelite vein
   assert.deepEqual(verdicts(run(dump, cfg({ requireItem: 'grindless:vein_sample_{id}' })).out.gate), { bauxita: 'PASS', ilmenita: 'PASS', scheelita: 'PASS' });
-  // con requireRecipe solo cuentan las vetas con receta de perforación: la de bauxita (con su ilmenita) sí, la de scheelita no
+  // with requireRecipe only veins with a drilling recipe count: bauxite's (with its ilmenite) does, scheelite's doesn't
   const r = run(dump, cfg({ requireRecipe: { type: 'gtceu:vein_drilling', input: 'grindless:vein_sample_{id}' } }));
   assert.deepEqual(verdicts(r.out.gate), { bauxita: 'PASS', ilmenita: 'PASS', scheelita: 'FAIL' });
 });
 
-// ---------------------------------------------------------------- motivo del bloqueo de un yacimiento
+// ---------------------------------------------------------------- reason a deposit blocks
 
-test('un yacimiento que no admite la dimensión es la raíz que falta aunque otra receta lejana produzca el fluido', () => {
+test('a deposit that doesn\'t allow the dimension is the missing root even if another distant recipe produces the fluid', () => {
   const recipes = [
     gt('t:soul_oil', 't:centrifuge', { ins: [gi('t:soul_sand')], fouts: [gf('t:oil')] }),
     shaped('t:rig_recipe', ['I'], { I: { item: 't:ingot' } }, 't:rig'),
@@ -243,6 +243,6 @@ test('un yacimiento que no admite la dimensión es la raíz que falta aunque otr
   const flat = run(dump, cfg('grindless:flat'));
   assert.equal(flat.out.verdict, 'FAIL');
   const text = linesOf(flat.out.auto, 'aceite');
-  assert.match(text, /el yacimiento gtceu:oil_deposit solo admite minecraft:overworld; este análisis es en grindless:flat/);
+  assert.match(text, /deposit gtceu:oil_deposit only allows minecraft:overworld; this analysis is in grindless:flat/);
   assert.doesNotMatch(text, /soul_sand/);
 });
