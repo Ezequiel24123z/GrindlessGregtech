@@ -41,6 +41,7 @@ Generators for the pack's own textures. Everything is procedural 16x16 pixel art
 | `Build-FissionReactorTextures.ps1` | Writes the IV fission reactor's face (`multiblock/fission_reactor/`). `-Only reactor` and `-Credits` (its 5 CREDITS rows). |
 | `Build-HotCellTextures.ps1` | Writes the IV hot cell's face (`multiblock/hot_cell/`). `-Only hot_cell` and `-Credits` (its 5 CREDITS rows). |
 | `Build-HeavyWaterPlantTextures.ps1` | Writes the IV heavy-water plant's face (`multiblock/heavy_water_plant/`). `-Only heavy_water_plant`, `-Preview <png outside the repo>` and `-Credits` (its 5 CREDITS rows). |
+| `Build-FluorsparKilnTextures.ps1` | Writes the IV fluorspar kiln's face (`multiblock/fluorspar_kiln/`). `-Only kiln`, `-Preview <png outside the repo>` and `-Credits` (its 5 CREDITS rows). |
 | `Build-IVFoundationTextures.ps1` | Writes the shared IV textures (IV-A1): fuel cycle items, PuBe source, RTG pellet, resin, platinum gauze, inner planets chart, Venus and Mercury vein samples, the Hermean heat shield brick (the Mercury casing texture) and the thin-film panel. `-Only`, `-Preview <png outside the repo>`, `-Credits`. |
 
 ## Regenerate
@@ -384,3 +385,17 @@ The plant's mimic panel, drawn for GTM's inert PTFE casing with the IV faces' me
 - Idle: dim towers, no flow, a dull drop, lamps dark.
 - The emissive layer holds only the bubbles, the pulses, the drop with its droplet and the lit lamp.
 - The fission reactor's checks; the output is identical byte for byte. `-Preview <png outside the repo>` writes an x8 review sheet on a light and a dark inert-casing stand-in (never shipped).
+
+### Fluorspar kiln
+
+The kiln from the side, as on a flow sheet, drawn for GTM's heatproof casing with the EV faces' method, steel ramp, bezel and lamp ramp: a long pale kiln on two steel riding rings and their rollers, over a plinth; a hopper of lilac fluorspar over its cold end; a heating jacket under it between the rings; the white PTFE scrubber tower at its hot end, with its packing column and the HF sump at its foot; the drive (green) and HF (cyan) lamps over the kiln.
+
+```powershell
+powershell -NoProfile -ExecutionPolicy Bypass -File tools\assets\Build-FluorsparKilnTextures.ps1
+powershell -NoProfile -ExecutionPolicy Bypass -File tools\assets\Build-FluorsparKilnTextures.ps1 -Credits
+```
+
+- 8 frames, `frametime` 4: the kiln turns (a seam of rivets runs down its visible side, and the opposite seam comes round), fluorspar trickles down the chute, the jacket glows and flickers, a drop of HF runs down the packing into the sump, the drive lamp is lit and the HF lamp blinks as the drop lands.
+- Idle: still kiln, dark jacket, empty sump, dull fluorspar, lamps dark.
+- The emissive layer holds only the jacket and the lit lamps.
+- The hot cell's checks; the output is identical byte for byte. `-Preview` draws a review sheet on a stand-in heatproof casing (the GTM texture is not in the repository).
