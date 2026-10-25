@@ -406,7 +406,7 @@ All of them are IV recipes (7,680 EU/t unless a composed GTM stage sets another 
   - Out: 2,000 mB HF + gypsum dust *(tune, in GTM's gypsum units)*.
   - EU: GTM's acid attack on a calcium mineral, `phosphoric_acid_from_apatite` (9,600 EU per 5,000 mB of acid), gives 1,920 EU per 1,000 mB.
   - About 61 fluorite then replace the 385 mica per 2 naquadah.
-- **Fluorite source:** a new Earth vein of fluorite, barite, galena and sphalerite (a Mississippi Valley-type deposit), drilled by the existing drills. Fluorite stays hidden until IV, because nothing uses it before the kiln.
+- **Fluorite source:** a new Earth vein of fluorite, barite, galena and sphalerite (a Mississippi Valley-type deposit), drilled by the existing drills from steam on (IV-A1). Fluorite shows in EMI from then on: nothing uses it before the kiln, and it is inert (it can be voided until IV).
 - **Byproducts:**
   - Gypsum goes to GTM's concrete (`mixer/concrete_from_calcite`) and from there to the radiation-proof casing of the reactor and the hot cell.
   - HF goes to the naquadah plant, the UF₆ and PTFE.
