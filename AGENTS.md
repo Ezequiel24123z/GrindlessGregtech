@@ -70,7 +70,11 @@ Gregtech Grindless is a GregTech Modern pack (Minecraft 1.20.1, Forge) in which 
   - Access: `ezequiel@192.168.1.150`.
   - Writes only happen inside `D:\GregtechGrindless`.
   - Never touch the user's PrismLauncher folder, `D:\Grindless` or their `.minecraft`.
-  - Only one JVM at a time; the bench uses a lock.
+  - Only one Minecraft test JVM globally, across all agents/worktrees; the bench enforces this even for legacy slot requests. Updated runners retain a global OS mutex through native cleanup, independently of metadata files.
+  - Client and server use `-Xms1G -Xmx4G`. This caps Java heap, not total process/native RAM. Require at least 8 GB available RAM before taking the slot and again before launching; unreadable memory counters fail closed.
+  - One focused probe at a time, no automatic server/client batches or speculative queues. The shared native budget is at most 600 seconds (startup included), with 30 seconds for server shutdown. Commands are capped at 60 seconds and marker waits at 180 seconds. Keep actual probes much shorter; these are failure ceilings, not targets.
+  - Do source/static validation here, not on the personal PC. State the new uncertainty before a native run. Reuse valid prior proof; never raise heap/time/concurrency limits or retry a resource failure without the user's approval.
+  - Before using an older worktree, merge the current bench resource-policy changes; do not use a historical launcher to bypass the limits.
   - Test clients start with all sound at zero (`Set-GGClientOptions` in `tools/test/remote/gg-client.ps1`). Otherwise, the user would hear them.
 - **What to test per tier (2-3 tests):**
   1. The pack starts and creates a world.
