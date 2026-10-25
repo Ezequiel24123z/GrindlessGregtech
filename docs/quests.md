@@ -265,7 +265,7 @@ They come in once their test passes and the coordinator says so; each agent leav
 | launch-road | Engine test stand, RP-1, qualified thrusters (MV); composite autoclave, ablative tiles, wrapped tanks, untested engine and static fire (HV) | MV and HV | In HV they go in front of the rocket parts: *Rocket Motors* comes to depend on the static fire, and *Fuel Tanks* on the wrapped tanks. Their ids, tasks and part texts do not change |
 | syngas | Syngas plant | HV | Chemistry row, after the refinery: hydrogen and CO for methanol and ammonia |
 
-### Steam — "Steam Age: Escape Velocity" (`steam_age.snbt`, 45 quests, 51 dependencies; done, with the sky row and the new steam machines)
+### Steam — "Steam Age: Escape Velocity" (`steam_age.snbt`, 44 quests, 50 dependencies; done, with the sky row and the new steam machines)
 
 Only the sky row (above the automation) and the steam-content machines are missing, once they pass their test.
 
@@ -283,7 +283,7 @@ Only the sky row (above the automation) and the steam-content machines are missi
 - **AE2:** the AE2 steps that live in LV today stay in LV as their branch (the user wants all of AE2 in LV). The AE2 tab starts by depending on the last of them and does not repeat them.
 - **Sources:** GTCP Modern `lv__low_voltage` (*Progressing Through LV*, *Electricity Generation*, *But what are Amps?*, *Battery Buffer*, *Machine Auto-Output Behaviour*, *Cover Behaviour*, *Programmed Circuits*, *What is this Mess?: Part Two*, *Cupronickel Coils*, *Gallium Arsenide*, *First MV Circuit!*); Monifactory `genesis` (*A Primer on Power*, *Battery Buffers*, *Charging Items*); Star Technology `industrial_revolution` for tone.
 
-### MV — "MV: The Far End" (`mv_age.snbt`, 47 quests, 60 dependencies; done in v0.5.1)
+### MV — "MV: The Far End" (`mv_age.snbt`, 49 quests, 60 dependencies; done in v0.5.1)
 
 - **Start:** *MV Factory*, depends on *LV to MV Transformer* (today, on *Electric Blast Furnace*). Journey line: the End, beyond the world.
 - **Spine:** copper cable and MV network → *MV Components* → chromium and aluminium → *Kanthal* → *Stainless Steel* → *Silicon Ingot* → *Silicon Boule* → *Silicon Wafers* → *Integrated Circuits* → *HV Machine Hull* → *MV to HV Transformer* → *Cleanroom* (exit).

@@ -9,7 +9,9 @@
 	quest_links: [ ]
 	quests: [
 		{
-			description: ["Small tools that save a lot of clicks, for building, for moving things around and for keeping a big factory tidy. Nothing in here is required."]
+			description: [
+				"Little helpers for building, for moving things about and for keeping a big factory in order. Nothing in here is required, but your wrists will thank you."
+			]
 			icon: "craftingstationjei:crafting_station"
 			id: "7A5D031021239B63"
 			rewards: [{ id: "1EA6A8BC4B848345", type: "xp", xp: 10 }]
@@ -22,7 +24,9 @@
 		}
 		{
 			dependencies: ["7A5D031021239B63"]
-			description: ["A crafting table that keeps its grid when you walk away and shows the chests next to it in a side panel, so you craft straight out of them."]
+			description: [
+				"A crafting table that remembers its grid when you walk off and shows the chests beside it in a side panel, so you can craft straight out of them."
+			]
 			icon: "craftingstationjei:crafting_station"
 			id: "538F58BC7B0BA56A"
 			rewards: [{ id: "088BCE69D3F9B69E", type: "xp", xp: 10 }]
@@ -33,7 +37,9 @@
 		}
 		{
 			dependencies: ["538F58BC7B0BA56A"]
-			description: ["Lines, walls, floors, cubes and mirrored copies in one click, from the blocks in your inventory. Pick the build mode you need and let it do the repeats."]
+			description: [
+				"Place whole lines, walls and floors in one go, or mirror what you build, using the blocks in your inventory. Pick a build mode and let it handle the repetition."
+			]
 			icon: "effortlessbuilding:randomizer_bag"
 			id: "47149BDDA907D5FB"
 			optional: true
@@ -45,7 +51,9 @@
 		}
 		{
 			dependencies: ["47149BDDA907D5FB"]
-			description: ["Sneak and right-click a chest with empty hands to pick it up, contents and all. Handy when a storage row needs to move without emptying it first."]
+			description: [
+				"Sneak and right-click a chest with empty hands and you pick it up, contents and all. Moving a storage row stops being an afternoon's work."
+			]
 			icon: "minecraft:chest"
 			id: "6956B217C8EEFF21"
 			optional: true
@@ -57,7 +65,9 @@
 		}
 		{
 			dependencies: ["6956B217C8EEFF21"]
-			description: ["Chipped's workbenches and the Rechiseled chisel turn plain blocks into many variants, and Framed Blocks wraps any texture around stairs, slabs and doors. A factory doesn't have to look like a quarry."]
+			description: [
+				"Chipped's workbenches and the Rechiseled chisel turn plain blocks into dozens of variants, and Framed Blocks puts any texture on stairs, slabs and doors. A factory doesn't have to look like a quarry."
+			]
 			icon: "chipped:mason_table"
 			id: "02E012750B71A098"
 			optional: true
@@ -72,7 +82,9 @@
 		}
 		{
 			dependencies: ["02E012750B71A098"]
-			description: ["Hold the &6Ultimine&r key while you break a block and the whole connected patch goes with it: a vein, a tree, a wall you placed wrong. It is bound to the grave accent key by default."]
+			description: [
+				"Hold the &6Ultimine&r key while you break a block and the whole connected patch goes with it, be it a tree or a wall you placed wrong. The key is the grave accent by default."
+			]
 			icon: "minecraft:iron_pickaxe"
 			id: "2AC55861A735E86D"
 			rewards: [{ id: "4B46EE2BDF08B7EB", type: "xp", xp: 10 }]
@@ -83,7 +95,9 @@
 		}
 		{
 			dependencies: ["2AC55861A735E86D"]
-			description: ["A belt for your tools that keeps them one key press away without filling your hotbar. It sits in its own slot, so the tools you swap most are always within reach."]
+			description: [
+				"Keeps your tools one key press away without clogging the hotbar. With twenty neutronium tools to carry around, that's not a small thing."
+			]
 			icon: "toolbelt:belt"
 			id: "3B0C7A1E5D92F604"
 			optional: true
@@ -95,7 +109,9 @@
 		}
 		{
 			dependencies: ["3B0C7A1E5D92F604"]
-			description: ["Gadgets that place, copy, cut and swap blocks from a saved template, and a Template Manager that keeps your builds in one place. Good for repeating a wall or a room without placing each block by hand."]
+			description: [
+				"Gadgets that place, copy and swap blocks in bulk, and save a build as a template to paste again later. Good for the second, third and tenth identical machine room."
+			]
 			icon: "buildinggadgets2:gadget_building"
 			id: "6E2D9A41C0B7F385"
 			optional: true
@@ -107,7 +123,9 @@
 		}
 		{
 			dependencies: ["7A5D031021239B63"]
-			description: ["Sneak and right-click an unformed multiblock controller with the &6Terminal&r and it builds the whole structure from the blocks in your inventory. Worth doing the day you build your first multiblock."]
+			description: [
+				"Sneak and right-click an unformed controller with the &6Terminal&r and it builds the whole multiblock from what's in your inventory. Make one before your second multiblock; the first will explain why."
+			]
 			icon: "gtceu:terminal"
 			id: "519A1162AF5FB3F1"
 			rewards: [{ id: "7B4EC64C80C96334", type: "xp", xp: 15 }]
@@ -118,7 +136,9 @@
 		}
 		{
 			dependencies: ["519A1162AF5FB3F1"]
-			description: ["The &6Machine Memory Card&r copies one machine's settings and pastes them onto the next: set up one machine, then copy it down the row."]
+			description: [
+				"Copies one machine's settings and pastes them onto the next. Set up the first machine in a row properly and the rest take a click each."
+			]
 			icon: "gtceu:machine_memory_card"
 			id: "45522DAFCB743B77"
 			optional: true
@@ -130,7 +150,9 @@
 		}
 		{
 			dependencies: ["519A1162AF5FB3F1"]
-			description: ["It scans the multiblocks nearby and swaps their tiered parts, coils, buses, hatches and energy hatches, for better ones from your inventory or your ME network, all in one go."]
+			description: [
+				"Scans the multiblocks around you and swaps their tiered parts, coils, hatches and buses, for better ones from your inventory or ME network. Upgrading a furnace's coils stops being a demolition job."
+			]
 			icon: "gtceuterminal:multi_structure_manager"
 			id: "7CC8C0CC60DA1F5A"
 			rewards: [{ id: "285C0B7C21395A91", type: "xp", xp: 15 }]
@@ -142,7 +164,9 @@
 		}
 		{
 			dependencies: ["7CC8C0CC60DA1F5A"]
-			description: ["Sneak and right-click a controller and the whole multiblock comes back into your inventory, for the day the factory has to move."]
+			description: [
+				"Sneak and right-click a controller and the whole multiblock comes back into your inventory. For the day the factory has to move, and that day comes."
+			]
 			icon: "gtceuterminal:dismantler"
 			id: "206E7E2BECEA4BEF"
 			optional: true
@@ -154,7 +178,9 @@
 		}
 		{
 			dependencies: ["7CC8C0CC60DA1F5A"]
-			description: ["Copies a finished multiblock into a named blueprint and pastes it again somewhere else, pulling the blocks from your inventory or your ME network."]
+			description: [
+				"Saves a finished multiblock as a named blueprint and builds it again somewhere else, with blocks from your inventory or ME network."
+			]
 			icon: "gtceuterminal:schematic_interface"
 			id: "4C3FBCB0D21BFCEB"
 			optional: true
@@ -167,7 +193,9 @@
 		}
 		{
 			dependencies: ["1D0003CBD1F4B817"]
-			description: ["Configurable pipes with per-side modes, filters, round robin and priorities, and upgrades make them faster. They move items and fluids only, so power stays on GregTech cables."]
+			description: [
+				"Pipes you can set per side, with filters, round robin and priorities, and upgrades to speed them up. Here they move items and fluids; power stays on GregTech cable."
+			]
 			icon: "pipez:item_pipe"
 			id: "3A3D42328C932C57"
 			rewards: [{ id: "28E4EBF774070672", type: "item", item: "pipez:item_pipe" }]
@@ -181,7 +209,9 @@
 		}
 		{
 			dependencies: ["3A3D42328C932C57"]
-			description: ["&6Laser Nodes&r link to each other by laser and move items, fluids and redstone with the cards on their sides, with no pipe in between."]
+			description: [
+				"&6Laser Nodes&r link up by laser and move items, fluids and redstone through the cards on their sides, so there's no pipe to route around everything."
+			]
 			icon: "laserio:laser_node"
 			id: "38F0116F675C8697"
 			optional: true
@@ -196,7 +226,9 @@
 		}
 		{
 			dependencies: ["38F0116F675C8697"]
-			description: ["A &6Modular Router&r does whatever its modules say: send, pull, break, place, vacuum, activate. Speed and stack upgrades make it do it faster."]
+			description: [
+				"A &6Modular Router&r does whatever its modules tell it: send, pull, break, place, vacuum. Upgrades make it faster and let it move bigger stacks."
+			]
 			icon: "modularrouters:modular_router"
 			id: "0823D5B993FC1E83"
 			optional: true
@@ -211,7 +243,9 @@
 		}
 		{
 			dependencies: ["7A5D031021239B63"]
-			description: ["An &6Item Collector&r picks up every dropped item in its range and puts it into the block underneath. Set one on a chest under a farm and the walk is over."]
+			description: [
+				"An &6Item Collector&r picks up dropped items in its range and puts them in the container underneath. Put one on a chest wherever things end up on the floor."
+			]
 			icon: "itemcollectors:basic_collector"
 			id: "1D0003CBD1F4B817"
 			rewards: [{ id: "633FE2B58378B2AF", type: "xp", xp: 10 }]
