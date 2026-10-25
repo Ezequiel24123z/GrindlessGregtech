@@ -24,7 +24,9 @@
 //
 // Containment: the waste (gtnn:radioactive_waste) leaves through the output bus and is never emptied: the recipe modifier cancels a run
 // with grindless.machine.hot_cell.no_voiding while the controller voids items or fluids (the mechanism of grindless.steam_outputs.no_voiding
-// and the fission reactor). Otherwise GTM's own overclock applies (the default modifier of an electric multiblock).
+// and the fission reactor). Otherwise GTM's own overclock applies (the default modifier of an electric multiblock), after a parallel
+// hatch's copies when one sits in a part cell (lib/parallel_hatch.js, IV-B6: the IV hatch runs up to 4 copies, which at 7,680 EU/t
+// needs two IV energy hatches).
 //
 // Machine class: GTM's plain electric multiblock (WorkableElectricMultiblockMachine), so its overclock is GTM's.
 //
@@ -35,8 +37,8 @@
 //   row 1 (X); the cell ceiling (row 3) is casing, with two filter casings (F) over each cell on the roof (row 4, slice 1).
 //   slice 3, the operating face: the concrete plinth, two 2x2 laminated glass windows (G), the controller between them (row 1), and a
 //   tungstensteel frame manipulator (M) through the wall over each window column (row 3).
-// The 20 `X` cells take 1-2 energy hatches, 1-3 input buses, 1-3 output buses, 1-4 input hatches and 1-4 output hatches; at least 4
-// stay casing. ME buses and hatches have the same abilities, so they fit.
+// The 20 `X` cells take 1-2 energy hatches, 1-3 input buses, 1-3 output buses, 1-4 input hatches, 1-4 output hatches and at most one
+// parallel hatch (IV-B6); at least 4 stay casing. ME buses and hatches have the same abilities, so they fit.
 //
 // Textures: overlay dir grindless:block/multiblock/hot_cell (tools/assets/Build-HotCellTextures.ps1) on GT--'s radiation-proof casing.
 // Names / tooltips: client_scripts/grindless/iv_hot_cell_lang.js. Published for the recipe script and the smoke test:
@@ -105,7 +107,8 @@
         Pat.part('input_bus', HC.parts.input_bus),
         Pat.part('output_bus', HC.parts.output_bus),
         Pat.part('input_hatch', HC.parts.input_hatch),
-        Pat.part('output_hatch', HC.parts.output_hatch)
+        Pat.part('output_hatch', HC.parts.output_hatch),
+        G.parallelHatch.part()
       ),
       R: Pat.block(SHIELD),
       B: Pat.block(FLOOR),
@@ -139,16 +142,17 @@
 
   var noVoiding = null
 
-  // before every run (alwaysTryModifyRecipe): voiding refused, then GTM's own overclock
+  // before every run (alwaysTryModifyRecipe): voiding refused, then a parallel hatch's copies if there is one, then GTM's own overclock
   function cellModifier() {
     var failed = false
+    var parallelThenOverclock = G.parallelHatch.modifier(G.parallelHatch.overclock)
     return function (machine, recipe) {
       try {
         if (voids(machine)) {
           if (noVoiding === null) noVoiding = ModifierFunction.cancel(Text.translate(NO_VOIDING))
           return noVoiding
         }
-        return GTRecipeModifiers.OC_NON_PERFECT.getModifier(machine, recipe)
+        return parallelThenOverclock(machine, recipe)
       } catch (e) {
         if (!failed) {
           failed = true
@@ -203,7 +207,8 @@
         Text.translate('grindless.machine.hot_cell.tooltip.0'),
         Text.translate('grindless.machine.hot_cell.tooltip.1'),
         Text.translate('grindless.machine.hot_cell.tooltip.2'),
-        Text.translate('grindless.machine.hot_cell.tooltip.3')
+        Text.translate('grindless.machine.hot_cell.tooltip.3'),
+        Text.translate('grindless.machine.parallel_hatch.tooltip')
       ])
       .workableCasingModel(SHIELD_TEXTURE, 'grindless:block/multiblock/hot_cell')
   })

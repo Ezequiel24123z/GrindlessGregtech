@@ -28,7 +28,7 @@
                         at a tiny red-orange Mars in the window's far corner, its feed horn on a boom at the focus; the base strip
                         carries purple EV stripes, the data LED and the lamp. 8 frames, frametime 3: radio wave arcs leave Mars one
                         after another and close in on the dish, the feed horn glows when one arrives, the data LED blinks and two
-                        stars twinkle. Idle: a dark dish, no arcs, dark data LED, red lamp.
+                        stars twinkle. Idle: the dish in starlight, no arcs, dark data LED, red lamp.
 
   Run from the repo root (PowerShell 5.1 blocks unsigned scripts by default; this bypass only affects that process):
     powershell -NoProfile -ExecutionPolicy Bypass -File tools\assets\Build-LunarPowerAntennaTextures.ps1
@@ -145,8 +145,8 @@ $PurpleSpec = 'a=F3E4FF b=D6B0FF c=B07AF0 d=8A4CD0 e=5C2E9C f=381C64 g=1C0E36'
 $LampSpec = 'M=E2FFE4 N=62FF86 O=22C257 P=0C6B2E Q=FF5A48 R=B52D22 S=5E1511'
 # Titanium as the array builds it: a light blue-grey, lit -> dark (panel frames, legs, the dish).
 $TitaniumSpec = '0=F4F7FA 1=DCE3EA 2=C2CCD7 3=A3AEBC 4=828D9D 5=626C7C 6=454D5A'
-# Monocrystalline silicon cells, deep navy: sheen -> darkest (never black).
-$CellSpec = 'k=4467B0 l=2E4E92 m=243F7C n=1B3166 o=152752 p=101D40'
+# Monocrystalline silicon cells, navy: sheen -> darkest (never black). Bright enough to stand out from the black lunar sky.
+$CellSpec = 'k=7E9FE2 l=5679CC m=4466B8 n=34539E o=263F7E p=1B2E5C'
 # Silver busbars: joint, bar, shaded bar.
 $BusSpec = 'r=E4EAF1 s=B3BECB t=8893A2'
 # The lunar sky (black even by day, a hint of blue so it is never pure black) and its stars.
@@ -179,7 +179,7 @@ Assert-Map 'EvPanel' $EvPanel
 # ============================================================================================
 #  LUNAR SOLAR ARRAY - controller face (sintered regolith)
 #  the sun in the window's top-left corner (its centre sits behind the corner); a navy PV panel tilted towards it (a parallelogram:
-#  titanium top and left frame, three rows of cells, silver busbars slanting with the panel, a shaded bottom frame; it runs on past
+#  titanium top and left frame, four rows of cells, silver busbars slanting with the panel, a shaded bottom frame; it runs on past
 #  the right wall like the rest of the field) on two titanium legs over grey regolith, its shadow on the ground to the right. A
 #  cable runs down the left leg, through the window's floor, into the base strip: purple power LEDs at x4, x6 and x10, the cable's
 #  inlet light at x8 and the lamp at x12..13.
@@ -192,18 +192,19 @@ x=6E717B y=50535C z=3A3D45
 W=F2F8FF X=8FB4EC
 '@)
 
-# The panel and its legs (drawn over the window). Each row of the panel starts one pixel further left than the one above.
+# The panel and its legs (drawn over the window): a titanium top and left frame, four rows of cells crossed by a silver busbar that
+# slants with the panel, the shaded bottom frame and two legs. Each row of the panel starts one pixel further left than the one above.
 $SolarScene = @(
     '................',
     '................',
     '................',
     '................',
-    '................',
     '..........0111..',
-    '.........1mmsm..',
-    '........1mmsmm..',
-    '.......1nnsnns..',
-    '......24444444..',
+    '.........1kmsm..',
+    '........1lmsml..',
+    '.......1lmsmlm..',
+    '......1nnsnnnn..',
+    '.....244444444..',
     '........3...4...',
     '................',
     '................',
@@ -230,8 +231,8 @@ function New-SolarArrayFrame {
     $c = New-Canvas; $e = New-Canvas
     $P = $SolarPal
     Write-Map $c 0 0 $EvPanel $P
-    # at night (idle) the whole landscape is dim
-    $dim = $(if ($Active) { 1.0 } else { 0.6 })
+    # at night (idle) the landscape is dimmed, but only so far that the panel still reads on the black sky
+    $dim = $(if ($Active) { 1.0 } else { 0.85 })
 
     foreach ($s in $SolarStars) { Set-Px $c $s[0] $s[1] $P[$s[2]] }
 
@@ -259,18 +260,18 @@ function New-SolarArrayFrame {
     } }
 
     if ($Active) {
-        # the rays pulse: short for two frames, long for two
+        # the rays pulse: short for two frames, long for two; they stop where the panel is
         $long = (($T % 4) -ge 2)
         foreach ($ray in $SunRays) {
-            Set-Both $c $e $ray[0][0] $ray[0][1] $P[$(if ($long) { 'i' } else { 'u' })]
-            if ($long) { Set-Both $c $e $ray[1][0] $ray[1][1] $P['u'] }
+            if ((Get-MapChar $SolarScene $ray[0][0] $ray[0][1]) -eq '.') { Set-Both $c $e $ray[0][0] $ray[0][1] $P[$(if ($long) { 'i' } else { 'u' })] }
+            if ($long -and (Get-MapChar $SolarScene $ray[1][0] $ray[1][1]) -eq '.') { Set-Both $c $e $ray[1][0] $ray[1][1] $P['u'] }
         }
         # a glint sweeps across the cells: a short band along the busbars' slant moving right, then a pause
         if ($T -le 5) {
             $gx = 8 + $T
             foreach ($g in @(@(($gx + 2), 6, 'X'), @(($gx + 1), 7, 'W'), @($gx, 8, 'X'))) {
                 $ch = Get-MapChar $SolarScene $g[0] $g[1]
-                if ($ch -eq 'm' -or $ch -eq 'n' -or $ch -eq 's') { Set-Both $c $e $g[0] $g[1] $P[$g[2]] }
+                if ($ch -match '^[k-n]$' -or $ch -eq 's') { Set-Both $c $e $g[0] $g[1] $P[$g[2]] }
             }
         }
         # a bead of power runs down the cable with a dimmer tail
@@ -388,13 +389,11 @@ function New-DeepSpaceAntennaFrame {
         }
     }
 
-    # Mars, the dish, the boom and the feed (the dish is dark while the antenna is off)
+    # Mars, the dish, the boom and the feed (the dish stays fully lit while the antenna is off: the face reads by it)
     for ($y = 0; $y -lt 16; $y++) { for ($x = 0; $x -lt 16; $x++) {
         $ch = Get-MapChar $AntennaScene $x $y
         if ($ch -eq '.') { continue }
-        $col = $P[$ch]
-        if (-not $Active -and $ch -match '[0-6C-E]') { $col = Shade $col 0.6 }
-        Set-Px $c $x $y $col
+        Set-Px $c $x $y $P[$ch]
     } }
     if ($Active) {
         # the feed horn glows as an arc arrives and fades on the next frame; the boom carries it to the dish

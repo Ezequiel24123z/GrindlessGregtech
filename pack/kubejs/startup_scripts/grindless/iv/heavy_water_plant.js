@@ -25,15 +25,16 @@
 //
 // Byproducts: the depleted water is inert (to the network, or voided: the plant allows the controller's voiding); the distilled water
 // goes to the network; the concentrate goes back in (circuit 2) or to a second plant. Machine class: GTM's plain electric multiblock
-// (WorkableElectricMultiblockMachine) with GTM's default recipe modifier (non-perfect overclock).
+// (WorkableElectricMultiblockMachine) with GTM's default recipe modifier (non-perfect overclock), after a parallel hatch's copies.
 //
 // Geometry (lib/patterns.js: slices back -> front, rows bottom -> top, columns left -> right seen from the front; 9 wide, 14 high,
 // 3 deep): columns 0-2 the cold tower (rows 0-9), 3-4 the gap, 5-7 the hot tower (rows 0-13), 8 the vacuum column (middle slice, rows
 // 0-7). Each tower is hollow (air inside) above its foot and closed by a cap; its foot (row 0) is a 3x3 whose middle is casing (the sump).
 // The bridge (P) is two titanium pipe casings high (rows 5-6) and two long, in the middle slice. The controller is in the middle of the
 // hot tower's foot, in the front face. The 14 X cells of the feet (the cold tower's 8, the hot tower's 6 that a pipe can reach) take
-// 1-2 energy hatches, 1-2 input buses, 1-4 input hatches and 1-4 output hatches; the rest stay casing. ME buses and hatches, and the
-// quadruple and nonuple hatches, have the same abilities, so they fit.
+// 1-2 energy hatches, 1-2 input buses, 1-4 input hatches, 1-4 output hatches and at most one parallel hatch (IV-B6, lib/parallel_hatch.js:
+// its copies run before GTM's overclock, and the H2S charge is needed once, never multiplied); the rest stay casing. ME buses and hatches,
+// and the quadruple and nonuple hatches, have the same abilities, so they fit.
 //
 // Textures: overlay dir grindless:block/multiblock/heavy_water_plant (tools/assets/Build-HeavyWaterPlantTextures.ps1) on GTM's inert
 // PTFE casing. Names / tooltips: client_scripts/grindless/iv_heavy_water_plant_lang.js. Published for the recipe script and the smoke
@@ -121,7 +122,8 @@
         Pat.part('energy_input', HW.parts.energy_input),
         Pat.part('input_bus', HW.parts.input_bus),
         Pat.part('input_hatch', HW.parts.input_hatch),
-        Pat.part('output_hatch', HW.parts.output_hatch)
+        Pat.part('output_hatch', HW.parts.output_hatch),
+        G.parallelHatch.part()
       ),
       C: Pat.block(CASING),
       P: Pat.block(BRIDGE),
@@ -215,6 +217,8 @@
       .langValue('Heavy-Water Plant')
       .rotationState(RotationState.NON_Y_AXIS)
       .recipeType(TYPE)
+      // a parallel hatch's copies, then GTM's default overclock (IV-B6; without a hatch, the overclock alone, as before)
+      .recipeModifier(G.parallelHatch.modifier(G.parallelHatch.overclock))
       .appearanceBlock(GTBlocks.CASING_PTFE_INERT)
       .pattern(function (def) { return Pat.build(def, SPEC) })
       .additionalDisplay(display)
@@ -222,7 +226,8 @@
         Text.translate('grindless.machine.heavy_water_plant.tooltip.0'),
         Text.translate('grindless.machine.heavy_water_plant.tooltip.1'),
         Text.translate('grindless.machine.heavy_water_plant.tooltip.2'),
-        Text.translate('grindless.machine.heavy_water_plant.tooltip.3')
+        Text.translate('grindless.machine.heavy_water_plant.tooltip.3'),
+        Text.translate('grindless.machine.parallel_hatch.tooltip')
       ])
       .workableCasingModel(CASING_TEXTURE, 'grindless:block/multiblock/heavy_water_plant')
   })

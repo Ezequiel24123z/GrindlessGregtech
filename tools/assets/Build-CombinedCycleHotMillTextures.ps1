@@ -177,8 +177,8 @@ function Draw-BaseStrip {
 
 # ============================================================================================
 #  COMBINED-CYCLE PLANT - controller face (stable titanium casing)
-#  a gas turbine (x3..7, axis y9) blowing its exhaust across the gap at x8 into a heat-recovery boiler (x9..13, y7..11)
-#  with a short stack on its roof (x12..13, y5..6); the steam drifts over the top of the window (y3..4), the purple
+#  a gas turbine (x3..7, y6..11, axis y9) blowing its exhaust across the gap at x8 into a heat-recovery boiler (x9..13, y6..11)
+#  with a short stack on its roof (x12..13, y4..5); the steam drifts over the top of the window (y3..4), the purple
 #  power cable runs along the floor (y12) and the base strip (y13) carries the stripes and the lamp
 # ============================================================================================
 # h..k flame (white-hot -> deep orange) and l..n hot gas (orange-red -> dark red): one heat ramp; L the cold combustor
@@ -192,40 +192,42 @@ t=F2F4F6 u=C6CBD1 v=959BA3 w=6E7378
 $CcHeat = 'hijklmn'                 # heat ramp, hottest first
 $CcGasBase = @(2, 3, 4, 5, 6)       # resting tones along the hot gas path x8..12 (it cools on its way through the boiler)
 
-# Turbine (drawn from x3, y7): the tall intake on the left tapering to the exhaust nozzle at x7; the combustor port on the
+# Turbine (drawn from x3, y6): the tall intake on the left tapering to the exhaust nozzle at x7; the combustor port on the
 # axis (x5..6, y9) is drawn by the frame.
 $CcTurbine = @(
     'BA...',
     'BCAA.',
+    'CDDCA',
     'CD..C',
-    'DEEE.',
+    'DEEEE',
     'EF...'
 )
-# Heat-recovery boiler (drawn from x9, y7): roof, two rows of water tubes between stainless headers (y8, y10) with the
-# hot gas lane between them (y9, open to the exhaust on the left, drawn by the frame), floor.
+# Heat-recovery boiler (drawn from x9, y6): roof, three rows of water tubes between stainless headers (y7, y8, y10) with the
+# hot gas lane among them (y9, open to the exhaust on the left, drawn by the frame), floor.
 $CcBoiler = @(
     'BAABC',
     '2pqr4',
+    '2qrs4',
     '....E',
     '2qrs4',
     'DEEEF'
 )
-# Short stack on the boiler roof (drawn from x12, y5).
+# Short stack on the boiler roof (drawn from x12, y4).
 $CcStack = @(
     'AC',
     'CE'
 )
 # A steam puff by age ("x,y,tone;..."; x relative to the stack column it leaves): it rises out of the stack, then the wind
-# takes it to the left over the boiler and the turbine while it fades. It lives a whole loop, so two are always out.
+# takes it to the left over the turbine while it fades. It lives a whole loop, so two are always out.
 $CcPuff = @(
-    '0,4,t',
-    '0,3,t;-1,4,u',
-    '-1,3,t;-2,4,u',
-    '-2,3,u;-3,4,v',
-    '-3,3,u;-4,4,w',
-    '-4,3,v',
+    '0,3,t',
+    '-1,3,t;-1,4,u',
+    '-2,3,t;-3,4,u',
+    '-3,3,u;-4,4,v',
+    '-4,3,u;-5,4,w',
     '-5,3,v',
-    '-6,3,w'
+    '-6,3,v',
+    '-7,3,w'
 )
 
 function New-CombinedCycleFrame {
@@ -235,7 +237,7 @@ function New-CombinedCycleFrame {
     Write-Map $c 0 0 $WindowBase $P
 
     # ---- gas turbine; the flame core flickers through the combustor port (white-hot to orange towards the turbine)
-    Write-Map $c 3 7 $CcTurbine $P
+    Write-Map $c 3 6 $CcTurbine $P
     foreach ($fx in 5, 6) {
         if ($Active) {
             $n = Get-Noise $fx 9 $T 17
@@ -245,8 +247,8 @@ function New-CombinedCycleFrame {
     }
 
     # ---- heat-recovery boiler and its stack
-    Write-Map $c 9 7 $CcBoiler $P
-    Write-Map $c 12 5 $CcStack $P
+    Write-Map $c 9 6 $CcBoiler $P
+    Write-Map $c 12 4 $CcStack $P
 
     if ($Active) {
         # hot gas: across the gap (x8) and through the lane (x9..12), two waves of heat 4 cells apart; a wave warms the
@@ -270,9 +272,8 @@ function New-CombinedCycleFrame {
             }
         }
     } else {
-        # cold boiler: dull tubes, an empty gas lane
-        foreach ($y in 8, 10) { foreach ($x in 10..12) { Set-Px $c $x $y (Shade (Get-Px $c $x $y) 0.6) } }
-        foreach ($x in 9..12) { Set-Px $c $x 9 $P['H'] }
+        # cold boiler: the water still shows in the tubes, the gas lane is empty
+        foreach ($x in 9..12) { Set-Px $c $x 9 $P['G'] }
     }
 
     # ---- purple power cable from under the turbine along the floor (y12) and out through the right wall; two pulses

@@ -463,8 +463,17 @@
       (gtm.length > 0 ? '; GTM versions present (harder line off): ' + gtm.length : '') + (still.length > 0 ? ' | still there: ' + still.join(', ') : ''))
   }
 
+  // a stage that offworld_only.json strips is rebuilt as grindless:<type>/offworld_only/<path>; the plant reads the original through the
+  // same strip (docs/eras/iv.md decision 5: the PGS centrifuge and the inert metal mixture leach), so the replacement counts
+  function presentOrStripped(rm, id) {
+    if (present(rm, id)) return true
+    var path = String(id).split(':')[1]
+    var cut = path.indexOf('/')
+    return present(rm, 'grindless:' + path.substring(0, cut) + '/offworld_only' + path.substring(cut))
+  }
+
   function checkStages(rm) {
-    var missing = PLATLINE_STAGES.filter(function (id) { return !present(rm, id) })
+    var missing = PLATLINE_STAGES.filter(function (id) { return !presentOrStripped(rm, id) })
     check('platline_stages', missing.length === 0, 'stage recipes of the platinum plant present ' + (PLATLINE_STAGES.length - missing.length) + '/' +
       PLATLINE_STAGES.length + ' (PGS centrifuge, sulfuric attack, dissolve, NH4Cl reactor, sifters, EBFs, Rh / Ru / Pd steps)' +
       (missing.length > 0 ? ' | missing: ' + missing.join(', ') : ''))

@@ -287,7 +287,7 @@ test('obtain: the pack\'s hiding (c:hidden_from_recipe_viewers) matches the audi
 
   const ok = withTags(items, fluids, info);
   let res = runObtain(ok.dump, ok.cfg, { unlocks: false });
-  assert.deepEqual(res.hiding, { items: items.length, fluids: fluids.length, implementedEra: 'lv', obtainable: [], visible: [] });
+  assert.deepEqual(res.hiding, { items: items.length, fluids: fluids.length, implementedEra: 'lv', obtainable: [], visible: [], landed: [] });
   assert.equal(res.verdict, 'PASS');
   assert.equal(group(res, 'salt_water').hidden, group(res, 'salt_water').keys.length, 'counts hidden items and fluids');
   let text = renderObtainText(res);
@@ -319,11 +319,35 @@ test('obtain: the pack\'s hiding (c:hidden_from_recipe_viewers) matches the audi
   res = runObtain(m3.dump, m3.cfg, { unlocks: false, implementedEra: 'lv' });
   assert.deepEqual(res.hiding.visible.map((v) => v.key), ['gtceu:beta_dust']);
 
-  // implemented up to EV: the Moon (B, ev) is already visible; only the C's must be hidden
+  // implemented up to EV while the Moon (B, ev) is still a later stage: only the C's are hidden, so the Moon's groups show in EMI and
+  // nothing makes them; their era landed without them (IV, 2026-10-25: a stale stage or rule fails)
   const ev = res0.groups.filter((g) => g.until === 'never').flatMap((g) => g.keys);
-  const m4 = withTags(ev.filter((k) => !k.startsWith('fluid:')), ev.filter((k) => k.startsWith('fluid:')).map((k) => k.slice(6)), { hidden: { implementedEra: 'ev' } });
+  const evTags = (inf, more = {}) => pack({
+    classes, tagsItem: { [HT]: ev.filter((k) => !k.startsWith('fluid:')) }, tagsFluid: { [HT]: ev.filter((k) => k.startsWith('fluid:')).map((k) => k.slice(6)) },
+    info: inf, ...more,
+  });
+  const m4 = evTags({ hidden: { implementedEra: 'ev' } });
   res = runObtain(m4.dump, m4.cfg, { unlocks: false });
   assert.deepEqual(res.hiding.visible, []);
+  const moonGroups = res0.groups.filter((g) => g.until === 'ev').map((g) => g.id).sort();
+  assert.ok(moonGroups.length > 0);
+  assert.deepEqual(res.hiding.landed.map((v) => v.group).sort(), moonGroups);
+  assert.equal(res.verdict, 'FAIL');
+  text = renderObtainText(res);
+  assert.match(text, /B groups of an era already implemented \(shown, yet never obtained\): \d+ — [^\n]*\(ev, /);
+  assert.match(text, /VERDICT: FAIL \(\d+ B groups of an implemented era\)/);
+  // the switch to EV puts the Moon in reachableDimensions (no stage left) and brings its drill: nothing of it is "never", and it passes
+  const m5 = evTags({ hidden: { implementedEra: 'ev' } }, {
+    obtain: { reachableDimensions: ['minecraft:overworld', 'minecraft:the_nether', 'gcyr:luna'], later: [] },
+    extraRecipes: [
+      gt('t:drill_gamma', 'gtceu:vein_drilling', { ins: [gi('grindless:vein_sample_gamma_moon', 1, 0)], outs: [gi('gtceu:raw_gamma')], conditions: [{ type: 'dimension', dimension: 'gcyr:luna' }] }),
+      shaped('t:sample_gamma', ['R'], { R: { item: 'gtceu:raw_gamma' } }, 'grindless:vein_sample_gamma_moon'),
+    ],
+  });
+  res = runObtain(m5.dump, m5.cfg, { unlocks: false });
+  assert.deepEqual(res.hiding.landed, []);
+  assert.deepEqual(res.hiding.visible, []);
+  assert.deepEqual(res.hiding.obtainable, []);
   assert.equal(res.verdict, 'PASS');
 
   // an empty item tag dumps as [minecraft:barrier]
@@ -402,11 +426,16 @@ test('tiers/obtain.json: inherits from steam, audits GT, and all its rules have 
   assert.ok(!raw.obtain.later.some((l) => l.id === 'mars' || (l.dimensions || []).includes('gcyr:mars')));
   assert.ok(raw.obtain.world.some((w) => w.id === 'mars-ground'));
   assert.ok(!raw.obtain.classes.some((c) => (c.materials || []).includes('grindless:titanium_drill_bit')));
-  assert.equal(raw.obtain.classes.find((c) => (c.materials || []).includes('deuterium')).until, 'iv');
-  // stages are cumulative and a group goes to the first that reaches it: the naquadah vein's plutonium also gives uraninite,
-  // so the pitchblende stage goes first and the radioactive chain is attributed to IV's radioactives, not to Venus' naquadah
-  const stage = (id) => raw.obtain.later.findIndex((l) => l.id === id);
-  assert.ok(stage('end-pitchblende') >= 0 && stage('end-pitchblende') < stage('end-naquadah'));
+  // IV (2026-10-25, C1's switch): Venus and Mercury are reached (their grounds are world sources), the End's pitchblende vein counts
+  // through the leach field's recipe type, and no later stage or B rule names an IV place or IV material any more
+  for (const d of ['gcyr:venus', 'gcyr:mercury']) assert.ok(raw.obtain.reachableDimensions.includes(d), d);
+  assert.ok(raw.obtain.world.some((w) => w.id === 'venus-ground') && raw.obtain.world.some((w) => w.id === 'mercury-ground'));
+  assert.ok(raw.obtain.veins.requireRecipe.some((r) => r.type === 'gtceu:in_situ_leaching' && r.input === 'grindless:vein_sample_{id}'));
+  assert.deepEqual(raw.obtain.later.map((l) => l.id), ['proxima']);
+  assert.ok(!raw.obtain.classes.some((c) => c.class === 'B' && c.until === 'iv'), 'B iv rules go with the switch');
+  for (const m of ['deuterium', 'tritium', 'iridium', 'grindless:leu_pellet']) {
+    assert.ok(!raw.obtain.classes.some((c) => (c.materials || []).includes(m)), `${m} has a source in IV: no rule names it`);
+  }
 });
 
 test('CLI: --pass obtain with --config writes text, JSON and Markdown and exits 1 if there are unclassified groups', () => {
