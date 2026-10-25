@@ -19,21 +19,24 @@
 // walks the tracked blocks once (GTNH's WirelessEnergyHatchManager pattern: one central list, one pass, prune what is gone): towers
 // first, then deposits (wireless dynamo hatches and dynamo covers, as far as the network has room), then withdrawals (wireless energy
 // hatches and energy covers at or below the network's tier, topped up; when the store is short it is shared in proportion to what each
-// one lacks). Blocks in unloaded chunks are skipped and pick up where they left off. The hatches are GTM's EnergyHatchPartMachine and
-// the energy moves with NotifiableEnergyContainer#changeEnergy; a cover moves at most 2 A of its voltage per tick, into or out of the
-// machine's own energy container, or the batteries of a battery buffer (charged and discharged one by one, like GTM's buffer does).
+// one lacks). Blocks in unloaded chunks are skipped and pick up where they left off. The hatches are GTM's EnergyHatchPartMachine; a
+// cover moves at most 2 A of its voltage per tick. How EU goes into and out of a machine is lib/wireless_adapters.js: by the exact
+// class of its energy container, plain containers (NotifiableEnergyContainer, RecipeAmperageEnergyContainer) through changeEnergy, a
+// battery buffer's or charger's items through GTM's own charge and discharge calls (their containers report the items' charge, and the
+// changeEnergy they inherit writes a separate buffer), anything else not at all (a cover is refused on it). Every move is checked
+// against the stored EU; a block whose move fails is set aside with an error in the log, and a failure can lose EU, never make it.
 // The covers: a cover item right-clicked on a single-block machine goes on through GTM's own ICoverable#placeCoverOnSide (the side
 // GTM's own cover items pick, ICoverable#rayTraceCoverableSide); an energy cover needs a machine that takes EU at its tier or above, a
 // dynamo cover a machine that gives EU at its tier or below. A crowbar takes it off and GTM gives the item back.
 // The readout: shift + right-click a wireless hatch, a tower or a covered machine with an empty hand: the network's stored EU,
 // capacity and tier, and the last second's flow in and out, in the action bar.
 // Tracking: BlockEvents.placed (hatches, towers), the covers' placing, the shift-click (a block the list does not have yet); a block
-// that is gone, a cover that is off, and BlockEvents.broken are forgotten. The list lives in persistent data (JSON, like
-// moon/quantum_bridge.js).
+// that is gone, a cover that is off, and BlockEvents.broken are forgotten. The list lives in persistent data as an NBT list of
+// compounds (lib/wireless_registry.js: no size limit; the first version's single JSON string is converted once, and kept aside).
 //
-// Published on global.grindless.wireless (the startup object) for the tower's display and the smoke test
-// (tools/test/overlay/kubejs/server_scripts/gg_test_wireless_energy.js): track, trackCover, placeCover, forget, tracked, settle, status,
-// towerInfo, stored, setStored, totals, perTick, readout, recipes, dropCache.
+// Published on global.grindless.wireless (the startup object) for the tower's display and the smoke tests
+// (tools/test/overlay/kubejs/server_scripts/gg_test_wireless_*.js): track, trackCover, placeCover, forget, tracked, settle, status,
+// towerInfo, stored, setStored, totals, flows, faults, perTick, readout, recipes, classify, blocksFromTag, dropCache.
 // Rhino: var + function inside every callback that runs more than once.
 (function () {
   const G = global.grindless || (global.grindless = {})
@@ -71,7 +74,6 @@
         RL: Java.loadClass('net.minecraft.resources.ResourceLocation'),
         MetaMachine: Java.loadClass('com.gregtechceu.gtceu.api.machine.MetaMachine'),
         GTRegistries: Java.loadClass('com.gregtechceu.gtceu.api.registry.GTRegistries'),
-        GTCap: Java.loadClass('com.gregtechceu.gtceu.api.capability.GTCapabilityHelper'),
         ICoverable: Java.loadClass('com.gregtechceu.gtceu.api.capability.ICoverable'),
         GTUtil: Java.loadClass('com.gregtechceu.gtceu.utils.GTUtil'),
         FU: Java.loadClass('com.gregtechceu.gtceu.utils.FormattingUtil'),
@@ -100,33 +102,32 @@
   }
 
   // ---------------------------------------------------------------- the list
-  // towers:  { k: 'tower', d, x, y, z, f: formed, c: capacity, t: tier (0 = no cells), n: cells }
-  // hatches: { k: 'hatch' | 'dynamo', d, x, y, z, t: tier, a: amps }
-  // covers:  { k: 'cover', d, x, y, z, s: side, ck: 'energy' | 'dynamo', t: tier }
+  // lib/wireless_registry.js keeps it in persistent data as an NBT list of compounds (no size limit) and gives every entry its field
+  // order: towers { k: 'tower', d, x, y, z, f: formed, c: capacity, t: tier (0 = no cells), n: cells }; hatches { k: 'hatch' | 'dynamo',
+  // d, x, y, z, t: tier, a: amps }; covers { k: 'cover', d, x, y, z, s: side, ck: 'energy' | 'dynamo', t: tier }. An entry it cannot use
+  // is kept as { bad, tag } and written back unchanged; the network skips it.
 
-  var cache = { raw: null, list: null }
+  const R = G.wirelessRegistry
+  if (!R) throw new Error('[grindless/wireless] server_scripts/grindless/lib/wireless_registry.js did not run')
+  const LEGACY_KEY = 'grindless_wireless_blocks_legacy'
+
+  // the parsed list and the persistent-data tag it was read from or written as
+  var cache = { tag: null, list: null }
 
   function blocks(server) {
-    var raw = String(server.persistentData.getString(BLOCKS_KEY))
-    if (cache.list !== null && cache.raw === raw) return cache.list
-    var list = []
-    if (raw) {
-      try {
-        list = JSON.parse(raw)
-      } catch (e) {
-        console.error(LOG + 'the list of wireless blocks could not be read, starting a new one: ' + e)
-        list = []
-      }
-    }
-    cache.raw = raw
-    cache.list = list
-    return list
+    var pd = server.persistentData
+    if (cache.list !== null && pd.get(BLOCKS_KEY) === cache.tag) return cache.list
+    var r = R.read(pd, BLOCKS_KEY, LEGACY_KEY)
+    r.notes.forEach(function (n) { console.error(LOG + 'the list of wireless blocks: ' + n) })
+    cache.tag = pd.get(BLOCKS_KEY)
+    cache.list = r.list
+    return r.list
   }
 
   function saveBlocks(server, list) {
-    var raw = JSON.stringify(list)
-    server.persistentData.putString(BLOCKS_KEY, raw)
-    cache.raw = raw
+    var tag = R.write(list)
+    server.persistentData.put(BLOCKS_KEY, tag)
+    cache.tag = tag
     cache.list = list
   }
 
@@ -134,11 +135,13 @@
     return e.d === d && e.x === x && e.y === y && e.z === z && (s === undefined || e.s === s)
   }
 
-  // adds or updates one entry (matched by place, and by side for covers)
+  // adds or updates one entry (matched by place, and by side for covers); the entry is checked and put in its field order first
   function upsert(server, entry) {
+    entry = R.canon(entry)
     var list = blocks(server).slice()
     for (var i = 0; i < list.length; i++) {
       var e = list[i]
+      if (e.bad) continue
       if (same(e, entry.d, entry.x, entry.y, entry.z, entry.k === 'cover' ? entry.s : undefined) && (e.k === 'cover') === (entry.k === 'cover')) {
         if (JSON.stringify(e) === JSON.stringify(entry)) return e
         list[i] = entry
@@ -159,7 +162,7 @@
       var info = towerInfo(machineAt(level, pos))
       if (info.pending) {
         // loaded formed, not checked again yet: what was recorded stands (the settlement reads it once GTM has checked it)
-        var known = blocks(level.server).filter(function (e) { return e.k === 'tower' && same(e, base.d, base.x, base.y, base.z) })[0]
+        var known = blocks(level.server).filter(function (e) { return !e.bad && e.k === 'tower' && same(e, base.d, base.x, base.y, base.z) })[0]
         if (known) return known
         info = { formed: false, cells: 0, capacity: 0, tier: 0 }
       }
@@ -191,7 +194,7 @@
     var y = Number(pos.getY())
     var z = Number(pos.getZ())
     var list = blocks(server)
-    var keep = list.filter(function (e) { return !same(e, d, x, y, z) })
+    var keep = list.filter(function (e) { return e.bad || !same(e, d, x, y, z) })
     if (keep.length === list.length) return false
     saveBlocks(server, keep)
     return true
@@ -237,102 +240,46 @@
   }
 
   // ---------------------------------------------------------------- energy access
+  // lib/wireless_adapters.js: the container's exact class picks how EU moves (plain containers through changeEnergy, battery buffers and
+  // chargers through their items with GTM's own calls, anything else not at all), and every move is checked against the stored EU.
+  // A block whose move fails a check is set aside until the server restarts or it (or its cover) is placed again: W.faults[flow key]
+  // holds why, the log has the numbers and its readout says so. The store counts what the machine really moved (the error's measured
+  // change), never more: a failure can lose EU, never make it.
 
-  // the machine's energy container (TieredEnergyMachine#energyContainer), or null
-  function containerOf(m) {
-    if (m === null) return null
-    var c = m.energyContainer
-    return c === null || c === undefined ? null : c
+  const A = G.wirelessAdapters
+  if (!A) throw new Error('[grindless/wireless] server_scripts/grindless/lib/wireless_adapters.js did not run')
+  var adapters = null
+  function adapter() {
+    if (adapters === null) adapters = A.create(A.gtmDeps())
+    return adapters
+  }
+  W.faults = W.faults || {}
+
+  function fault(e, message) {
+    var k = flowKey(e)
+    if (!W.faults[k]) console.error(LOG + e.k + (e.ck ? ' (' + e.ck + ')' : '') + ' at ' + e.d + ' ' + e.x + ',' + e.y + ',' + e.z + (e.s ? ' ' + e.s : '') +
+      ' set aside until the server restarts or the cover is placed again: ' + message)
+    W.faults[k] = String(message)
   }
 
-  function isBatteryBuffer(m) {
-    return m !== null && typeof m.getBatteryInventory === 'function'
-  }
-
-  // the electric items in a battery buffer: [{ item, stack }]
-  function batteries(m) {
-    var inv = m.getBatteryInventory()
-    var out = []
-    for (var i = 0; i < inv.getSlots(); i++) {
-      var stack = inv.getStackInSlot(i)
-      if (stack.isEmpty()) continue
-      var e = lazy().GTCap.getElectricItem(stack)
-      if (e !== null && e !== undefined) out.push(e)
-    }
-    return out
-  }
-
-  function afterBatteries(m) {
-    m.markDirty()
-    try {
-      m.energyContainer.checkOutputSubscription()
-    } catch (e) {
-      // the buffer starts sending on its own next tick
-    }
-  }
-
-  // what a cover's machine can give (dynamo) or take (energy) right now, at most `limit`
-  function coverAvailable(m, limit) {
-    if (isBatteryBuffer(m)) {
-      var sum = 0
-      batteries(m).forEach(function (b) { sum += Number(b.getCharge()) })
-      return Math.min(sum, limit)
-    }
-    var c = containerOf(m)
-    return c === null ? 0 : Math.min(Number(c.getEnergyStored()), limit)
-  }
-
-  function coverRoom(m, limit) {
-    if (isBatteryBuffer(m)) {
-      var room = 0
-      batteries(m).forEach(function (b) { room += Number(b.getMaxCharge()) - Number(b.getCharge()) })
-      return Math.min(room, limit)
-    }
-    var c = containerOf(m)
-    return c === null ? 0 : Math.min(Number(c.getEnergyCapacity()) - Number(c.getEnergyStored()), limit)
-  }
-
-  // takes `amount` EU out of a cover's machine; returns what came out
-  function coverDrain(m, amount) {
-    if (isBatteryBuffer(m)) {
-      var left = amount
-      var tier = Number(m.getTier())
-      batteries(m).forEach(function (b) {
-        if (left <= 0) return
-        left -= Number(b.discharge(left, tier, true, true, false))
-      })
-      afterBatteries(m)
-      return amount - left
-    }
-    return -Number(containerOf(m).changeEnergy(-amount))
-  }
-
-  // puts `amount` EU into a cover's machine; returns what went in
-  function coverFill(m, amount) {
-    if (isBatteryBuffer(m)) {
-      var left = amount
-      var tier = Number(m.getTier())
-      batteries(m).forEach(function (b) {
-        if (left <= 0) return
-        left -= Number(b.charge(left, tier, true, false))
-      })
-      afterBatteries(m)
-      return amount - left
-    }
-    return Number(containerOf(m).changeEnergy(amount))
+  function shortClass(cls) {
+    var parts = String(cls).split('.')
+    return parts[parts.length - 1]
   }
 
   // why a cover can't go (or work) on this machine: '' when it can, else a message key and its arguments
   function coverMisfit(m, cover) {
-    var c = containerOf(m)
-    if (c === null) return ['message.grindless.wireless.cover_no_energy']
+    var a = adapter().classify(m)
+    if (a.kind === 'none') return ['message.grindless.wireless.cover_no_energy']
+    if (a.kind === 'unsupported') return ['message.grindless.wireless.cover_unsupported', shortClass(a.cls)]
+    var c = a.c
     if (cover.kind === 'energy') {
       var vin = Number(c.getInputVoltage())
       if (!(vin > 0)) return ['message.grindless.wireless.cover_no_input']
       if (cover.tier > tierOfVoltage(vin)) return ['message.grindless.wireless.cover_too_strong', tierName(cover.tier), tierName(tierOfVoltage(vin))]
     } else {
       var vout = Number(c.getOutputVoltage())
-      if (!(vout > 0)) return ['message.grindless.wireless.cover_no_output']
+      if (!(vout > 0) || (a.kind === 'items' && !a.spec.gives)) return ['message.grindless.wireless.cover_no_output']
       if (cover.tier < tierOfVoltage(vout)) return ['message.grindless.wireless.cover_too_weak', tierName(cover.tier), tierName(tierOfVoltage(vout))]
     }
     return ''
@@ -356,18 +303,26 @@
   var windowIn = []
   var windowOut = []
 
-  // returns what it did: { tracked, loaded, forgotten, up, tier, capacity, stored, in, out, lost, drained, towers, withdrawn: [...] }
+  // returns what it did: { tracked, loaded, forgotten, faulted, up, tier, capacity, stored, in, out, lost, drained, towers, skippedAbove }
+  function sane(n, max) {
+    return typeof n === 'number' && n % 1 === 0 && n >= 0 && n <= max
+  }
+
   function settle(server) {
     var L = lazy()
+    var ad = adapter()
+    var ticks = W.settleTicks
     var list = blocks(server)
     var keep = []
     var changed = false
-    var out = { tracked: list.length, loaded: 0, forgotten: 0, up: false, tier: 0, capacity: 0, stored: 0, in: 0, out: 0, lost: 0, drained: 0,
-      towers: 0, skippedAbove: 0 }
+    var out = { tracked: list.length, loaded: 0, forgotten: 0, faulted: 0, up: false, tier: 0, capacity: 0, stored: 0, in: 0, out: 0, lost: 0,
+      drained: 0, towers: 0, skippedAbove: 0 }
     var deposits = []
     var withdrawals = []
     var towers = []
     list.forEach(function (e) {
+      // an entry the list could not read is kept as it was and never used
+      if (e.bad) { keep.push(e); return }
       var level = server.getLevel(e.d)
       var pos = new L.BlockPos(e.x, e.y, e.z)
       if (level === null || level === undefined || !level.isLoaded(pos)) {
@@ -380,7 +335,7 @@
         if (id !== W.towerId) { changed = true; out.forgotten++; return }
         var info = towerInfo(machineAt(level, pos))
         if (!info.pending && (info.formed !== e.f || info.capacity !== e.c || info.tier !== e.t || info.cells !== e.n)) {
-          e = { k: 'tower', d: e.d, x: e.x, y: e.y, z: e.z, f: info.formed, c: info.capacity, t: info.tier, n: info.cells }
+          e = R.canon({ k: 'tower', d: e.d, x: e.x, y: e.y, z: e.z, f: info.formed, c: info.capacity, t: info.tier, n: info.cells })
           changed = true
         }
         keep.push(e)
@@ -400,10 +355,16 @@
         }
         keep.push(e)
         out.loaded++
-        if (coverMisfit(m, cover) !== '') return
-        var limit = W.rate(e.t, W.coverAmps) * W.settleTicks
-        if (cover.kind === 'dynamo') deposits.push({ kind: 'cover', m: m, limit: limit, e: e })
-        else withdrawals.push({ kind: 'cover', m: m, limit: limit, tier: e.t, e: e })
+        if (W.faults[flowKey(e)]) { out.faulted++; return }
+        var misfit = coverMisfit(m, cover)
+        if (misfit !== '') {
+          // a machine whose energy storage the network cannot use (it was placed before this check, or it changed): set aside
+          if (misfit[0] === 'message.grindless.wireless.cover_unsupported') { fault(e, 'unsupported energy container ' + misfit[1]); out.faulted++ }
+          return
+        }
+        var limit = W.rate(e.t, W.coverAmps) * ticks
+        if (cover.kind === 'dynamo') deposits.push({ a: ad.classify(m), limit: limit, e: e })
+        else withdrawals.push({ a: ad.classify(m), limit: limit, tier: e.t, e: e })
         return
       }
       var h = W.hatches[id]
@@ -414,8 +375,11 @@
       }
       keep.push(e)
       out.loaded++
-      if (h.kind === 'dynamo') deposits.push({ kind: 'hatch', c: m.energyContainer, e: e })
-      else withdrawals.push({ kind: 'hatch', c: m.energyContainer, tier: e.t, e: e })
+      if (W.faults[flowKey(e)]) { out.faulted++; return }
+      var ha = ad.classify(m)
+      if (ha.kind !== 'plain') { fault(e, 'the hatch\'s energy container is ' + (ha.cls || 'missing') + ', not GTM\'s NotifiableEnergyContainer'); out.faulted++; return }
+      if (h.kind === 'dynamo') deposits.push({ a: ha, limit: Number.MAX_SAFE_INTEGER, e: e })
+      else withdrawals.push({ a: ha, limit: Number.MAX_SAFE_INTEGER, tier: e.t, e: e })
     })
     if (changed) saveBlocks(server, keep)
 
@@ -432,15 +396,23 @@
     var bank = stored(server)
     var before = bank
     if (out.up) {
-      // deposits: whole multiples of 20 EU, as far as the network has room; any tier
+      // deposits: whole multiples of 20 EU, as far as the network has room; any tier. A move that fails its check counts what the
+      // machine really gave (`measured`), or nothing when that is not a sane number: a failure can lose EU, never make it.
       deposits.forEach(function (d) {
         var room = out.capacity - bank
         if (room <= 0) return
-        var have = d.kind === 'hatch' ? Number(d.c.getEnergyStored()) : coverAvailable(d.m, d.limit)
-        var take = Math.min(have, Math.floor(room * W.lossDenominator / W.lossNumerator))
-        take -= take % W.lossDenominator
-        if (take <= 0) return
-        var gave = d.kind === 'hatch' ? -Number(d.c.changeEnergy(-take)) : coverDrain(d.m, take)
+        var gave = 0
+        var take = 0
+        try {
+          take = Math.min(ad.available(d.a, d.limit, ticks), Math.floor(room * W.lossDenominator / W.lossNumerator))
+          take -= take % W.lossDenominator
+          if (take <= 0) return
+          gave = ad.drain(d.a, take, ticks)
+        } catch (err) {
+          fault(d.e, err.message || err)
+          out.faulted++
+          gave = sane(err.measured, take) ? err.measured : 0
+        }
         var put = Math.floor(gave * W.lossNumerator / W.lossDenominator)
         bank += put
         out.drained += gave
@@ -451,13 +423,17 @@
         fd.in += put
       })
       // withdrawals at or below the network's tier: topped up, shared in proportion when the store is short
-      var takers = withdrawals.filter(function (w) {
-        if (w.tier <= out.tier) return true
-        out.skippedAbove++
-        return false
-      })
-      var needs = takers.map(function (w) {
-        return w.kind === 'hatch' ? Math.max(0, Number(w.c.getEnergyCapacity()) - Number(w.c.getEnergyStored())) : coverRoom(w.m, w.limit)
+      var takers = []
+      var needs = []
+      withdrawals.forEach(function (w) {
+        if (w.tier > out.tier) { out.skippedAbove++; return }
+        try {
+          needs.push(ad.room(w.a, w.limit, ticks))
+          takers.push(w)
+        } catch (err) {
+          fault(w.e, err.message || err)
+          out.faulted++
+        }
       })
       var total = needs.reduce(function (a, b) { return a + b }, 0)
       if (total > 0 && bank > 0) {
@@ -465,7 +441,15 @@
         takers.forEach(function (w, i) {
           var give = share >= 1 ? needs[i] : Math.floor(needs[i] * share)
           if (give <= 0) return
-          var got = w.kind === 'hatch' ? Number(w.c.changeEnergy(give)) : coverFill(w.m, give)
+          var got = 0
+          try {
+            got = ad.fill(w.a, give, ticks)
+          } catch (err) {
+            fault(w.e, err.message || err)
+            out.faulted++
+            // what the machine really took; when that is not a sane number, all of it is charged (the network never gives more than it pays)
+            got = sane(err.measured, give) ? err.measured : give
+          }
           bank -= got
           out.out += got
           flow(w.e).filled += got
@@ -518,17 +502,17 @@
       perTick(st.outPerSecond)).aqua()
   }
 
-  // what a shift-click on this block reads: { tier, withdraws } or null when it is no wireless block
+  // what a shift-click on this block reads: { tier, withdraws, fault } or null when it is no wireless block
   function readoutTarget(level, pos, side) {
     var id = String(level.getBlock(pos).id)
     if (id === W.towerId) {
       track(level, pos)
-      return { tier: 0, withdraws: false }
+      return { tier: 0, withdraws: false, fault: '' }
     }
     var h = W.hatches[id]
     if (h) {
-      track(level, pos)
-      return { tier: h.tier, withdraws: h.kind === 'hatch' }
+      var he = track(level, pos)
+      return { tier: h.tier, withdraws: h.kind === 'hatch', fault: he ? (W.faults[flowKey(he)] || '') : '' }
     }
     var m = machineAt(level, pos)
     if (m === null) return null
@@ -539,8 +523,8 @@
       if (on === null || on === undefined) continue
       var cover = W.covers[String(on.coverDefinition.getId())]
       if (!cover) continue
-      trackCover(level, pos, dirs[i], cover)
-      if (found === null || dirs[i] === side) found = { tier: cover.tier, withdraws: cover.kind === 'energy' }
+      var ce = trackCover(level, pos, dirs[i], cover)
+      if (found === null || dirs[i] === side) found = { tier: cover.tier, withdraws: cover.kind === 'energy', fault: W.faults[flowKey(ce)] || '' }
     }
     return found
   }
@@ -549,18 +533,14 @@
     var p = event.player
     var target = readoutTarget(event.level, event.block.pos, event.facing)
     if (target === null) return
-    var text = readout(event.level.server, target.tier, target.withdraws)
+    var text = target.fault ? Text.translate('message.grindless.wireless.fault').red() : readout(event.level.server, target.tier, target.withdraws)
     p.setStatusMessage(text)
     var key = ''
     var args = []
-    try {
-      var contents = text.getContents()
-      key = String(contents.getKey())
-      var a = contents.getArgs()
-      for (var i = 0; i < a.length; i++) args.push(String(a[i]))
-    } catch (e) {
-      key = ''
-    }
+    var contents = text.getContents()
+    key = String(contents.getKey())
+    var a = contents.getArgs()
+    for (var i = 0; i < a.length; i++) args.push(String(a[i]))
     W.lastReadout = { player: String(p.getStringUuid()), text: String(text.getString()), key: key, args: args }
   }
 
@@ -579,7 +559,9 @@
     var holder = m.getCoverContainer()
     if (holder.getCoverAtSide(side) !== null) return { ok: false, message: Text.translate('message.grindless.wireless.cover_side_taken') }
     if (!holder.placeCoverOnSide(side, stack, def, player)) return { ok: false, message: Text.translate('message.grindless.wireless.cover_cannot') }
-    trackCover(level, pos, side, cover)
+    var placed = trackCover(level, pos, side, cover)
+    // a cover placed again starts over: whatever set the old one aside is forgiven
+    delete W.faults[flowKey(placed)]
     return { ok: true, message: Text.translate('message.grindless.wireless.cover_placed', tierName(cover.tier)) }
   }
 
@@ -589,12 +571,8 @@
     var pos = event.block.pos
     if (machineAt(level, pos) === null) return false
     var holder = machineAt(level, pos).getCoverContainer()
-    var side = null
-    try {
-      side = lazy().ICoverable.rayTraceCoverableSide(holder, p)
-    } catch (e) {
-      side = null
-    }
+    // GTM's own cover items pick the side the player looks at; with no such side, the clicked face
+    var side = lazy().ICoverable.rayTraceCoverableSide(holder, p)
     if (side === null || side === undefined) side = event.facing
     var stack = event.item
     var r = placeCover(level, pos, side, stack, p)
@@ -624,9 +602,11 @@
   W.hatchIds.concat([W.towerId]).forEach(function (id) {
     BlockEvents.placed(id, function (event) {
       try {
-        track(event.level, event.block.pos)
-      } catch (e) {
-        console.error(LOG + 'could not track a placed ' + id + ': ' + e)
+        // a block placed again starts over: whatever set the old one aside is forgiven
+        var e = track(event.level, event.block.pos)
+        if (e) delete W.faults[flowKey(e)]
+      } catch (err) {
+        console.error(LOG + 'could not track a placed ' + id + ': ' + err)
       }
     })
     BlockEvents.broken(id, function (event) {
@@ -726,6 +706,15 @@
   W.perTick = perTick
   W.readout = readout
   W.coverMisfit = coverMisfit
+  // the energy adapter's view of a machine (kind, container class), for the smoke tests
+  W.classify = function (m) { var a = adapter().classify(m); return { kind: a.kind, cls: a.cls } }
+  // a saved persistent-data compound -> its list of blocks (the save-and-reload checks read kubejs_persistent_data.nbt with it)
+  W.blocksFromTag = function (tag) {
+    var list = tag.getList(BLOCKS_KEY, 10)
+    var out = []
+    for (var i = 0; i < list.size(); i++) out.push(R.fromTag(list.getCompound(i)))
+    return out
+  }
   // drops the parsed list (the next settlement reads persistent data again): the smoke test's reload
-  W.dropCache = function () { cache.raw = null; cache.list = null }
+  W.dropCache = function () { cache.tag = null; cache.list = null }
 })()

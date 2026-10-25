@@ -997,7 +997,7 @@
     var w = W()
     var L = lazy()
     var tag = NBTIO.read(S.server.getWorldPath(new L.LevelResource('kubejs_persistent_data.nbt')))
-    var fileList = tag ? String(tag.getString(w.blocksKey)) : ''
+    var fileList = tag ? JSON.stringify(w.blocksFromTag(tag)) : ''
     var fileStore = tag ? Number(tag.getLong(w.storeKey)) : -1
     var sameFile = fileList === S.save.list && fileStore === S.save.store
     // the reload: KubeJS loads persistent data by merging the file into the server's tag (KubeJSServerEventHandler#serverBeforeStart)

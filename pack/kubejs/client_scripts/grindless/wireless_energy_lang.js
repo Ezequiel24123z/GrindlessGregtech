@@ -63,6 +63,8 @@
     add('message.grindless.wireless.cover_too_weak', 'A %s cover is too weak for a %s machine')
     add('message.grindless.wireless.cover_side_taken', 'That side already has a cover')
     add('message.grindless.wireless.cover_cannot', 'The cover does not fit on that side')
+    add('message.grindless.wireless.cover_unsupported', 'Wireless covers can\'t use this machine\'s energy storage (%s)')
+    add('message.grindless.wireless.fault', 'This wireless block was stopped after an energy error (see the server log). Place it or its cover again, or restart the server, to retry')
     add('message.grindless.wireless.cover_placed', '%s wireless cover on')
   })
 
@@ -108,6 +110,8 @@
     add('message.grindless.wireless.cover_too_weak', 'Una cubierta %s es demasiado débil para una máquina %s')
     add('message.grindless.wireless.cover_side_taken', 'Ese lado ya tiene una cubierta')
     add('message.grindless.wireless.cover_cannot', 'La cubierta no cabe en ese lado')
+    add('message.grindless.wireless.cover_unsupported', 'Las cubiertas inalámbricas no pueden usar el almacén de energía de esta máquina (%s)')
+    add('message.grindless.wireless.fault', 'Este bloque inalámbrico se detuvo tras un error de energía (mira el registro del servidor). Vuelve a ponerlo, o a poner su cubierta, o reinicia el servidor, para reintentarlo')
     add('message.grindless.wireless.cover_placed', 'Cubierta inalámbrica %s puesta')
   })
 })()
