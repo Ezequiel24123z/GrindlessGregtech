@@ -231,21 +231,24 @@
       (endTitanium.length > 0 ? ' titanium ores in ' + endTitanium.join(',') : '') +
       (tableProblems.length > 0 ? ' problems=' + tableProblems.join(' | ') : ''))
 
-    var ids = ['grindless:crafting/hv_vein_drill', 'grindless:crafting/hv_greenhouse', 'grindless:crafting/stainless_steel_drill_bit',
-      'grindless:crafting/stainless_steel_drill_bit_from_titanium'].concat(
+    var ids = ['grindless:crafting/hv_vein_drill', 'grindless:crafting/hv_greenhouse', 'grindless:crafting/stainless_steel_drill_bit'].concat(
       endVeins.map(function (v) { return 'grindless:crafting/vein_sample/' + v.id }))
     var missingRecipes = ids.filter(function (id) { return !rm.byKey(rl(id)).isPresent() })
     check(SCOPE, 'crafting', missingRecipes.length === 0,
       'count=' + ids.length + (missingRecipes.length > 0 ? ' missing=' + missingRecipes.join(',') : ''))
 
-    // the old titanium bit (HV has no titanium): still registered for old worlds, hidden in EMI, not a drill bit, no drilling recipe
-    // takes it and it only crafts into the stainless steel bit
-    var hidden = asArray(Ingredient.of('#c:hidden_from_recipe_viewers').getItemIds()).map(String)
+    // the titanium bit (the old HV one, kept for old worlds) is the EV Tripod Drill's bit again (server_scripts/grindless/ev/tripod.js):
+    // registered, a drill bit, every drilling recipe that takes it lives under vein_drilling/ev/ (the HV drill skips that folder) and
+    // its HV-era conversion into the stainless steel bit is gone. Whether EMI shows it is the hiding table's business.
     var bits = asArray(Ingredient.of('#grindless:drill_bits').getItemIds()).map(String)
-    var legacyDrilling = drillRecipes.filter(function (r) { return String(r.id).indexOf('_titanium') >= 0 }).length
-    check(SCOPE, 'legacy_bit', Item.exists(LEGACY_BIT) && hidden.indexOf(LEGACY_BIT) >= 0 && bits.indexOf(LEGACY_BIT) < 0 && legacyDrilling === 0,
-      'registered=' + Item.exists(LEGACY_BIT) + ' hidden=' + (hidden.indexOf(LEGACY_BIT) >= 0) + ' in grindless:drill_bits=' +
-      (bits.indexOf(LEGACY_BIT) >= 0) + ' drilling recipes with a titanium bit=' + legacyDrilling)
+    var hidden = asArray(Ingredient.of('#c:hidden_from_recipe_viewers').getItemIds()).map(String)
+    var titaniumDrilling = drillRecipes.filter(function (r) { return String(r.id).indexOf('_titanium') >= 0 }).map(function (r) { return String(r.id) })
+    var outsideEv = titaniumDrilling.filter(function (id) { return id.indexOf('grindless:vein_drilling/ev/') !== 0 })
+    var conversion = rm.byKey(rl('grindless:crafting/stainless_steel_drill_bit_from_titanium')).isPresent()
+    check(SCOPE, 'legacy_bit', Item.exists(LEGACY_BIT) && bits.indexOf(LEGACY_BIT) >= 0 && outsideEv.length === 0 && !conversion,
+      'registered=' + Item.exists(LEGACY_BIT) + ' in grindless:drill_bits=' + (bits.indexOf(LEGACY_BIT) >= 0) + ' drilling recipes with a titanium bit=' +
+      titaniumDrilling.length + ' (outside vein_drilling/ev/: ' + (outsideEv.length > 0 ? outsideEv.join(',') : 'none') + ') old conversion=' + conversion +
+      ' hidden in EMI=' + (hidden.indexOf(LEGACY_BIT) >= 0))
 
     // the old scheelite sample (the vein left the End table in v0.4.1, saves keep their items): registered, hidden, not a vein sample,
     // no drilling recipe takes it and it crafts back into an empty vein probe
