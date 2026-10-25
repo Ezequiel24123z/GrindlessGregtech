@@ -143,7 +143,7 @@ What it gains: **the hands-free neutron window and the superacid inside.** The l
   - **Venus heat engine** (`gtceu:venus_heat_engine`): a hot plate on the ground and a 16-block radiator chimney up into the clouds, which is the cold side. With `.dimension('gcyr:venus')`, 200 mB of Distilled Water per 20 s cycle → 8,192 EU/t, always: GCYR's Venus is fixed at noon (`fixed_time` 6000), so day and night don't matter there. Outside Venus there is no such heat.
     - *As built (IV-B1):* generator type `gtceu:venus_heat` (kept out of `power/generators.js`'s list): 200 mB of distilled water a 20 s cycle → 8,192 EU/t and 32,000 mB of steam (GTM's 160:1), the water's destination (decision 10). 16 high, the pattern helper's limit: a footing, a 3-high engine house over a firebox hot plate, a roof and an 11-block riser of Night-Sky Radiators.
   - **Mercury solar field** (`gtceu:mercury_solar_field`): the lunar field with a heat-shield sunshade. By day it yields ×6.7 (the Moon, ×1.4); at night, nothing.
-  - **RTG cell** (`gtceu:rtg`, single-block machine; verify the simple KubeJS generator): plutonium oxide pellet that is used up at random (≈ 1 per hour) → 2,048 EU/t constant. It starts every base and covers Mercury's night.
+  - **RTG cell** (`gtceu:ev_rtg`: GTM's KubeJS builder names a single block `<tier>_<name>`, and 2,048 EU/t is one EV amp; the simple KubeJS generator is proven by IV-B5): plutonium oxide pellet that is used up at random (≈ 1 per hour) → 2,048 EU/t constant. It starts every base and covers Mercury's night.
 - **Observatory, step 5: interferometer** (`gtceu:interferometer`): the Mercury antenna (night and vacuum) combines its data with the Moon's deep space antenna over the network. It gives the outer-system chart (the belt and Jupiter, the LuV trip) and the first signal from Sagittarius A*.
 - **Platinum plant, mode 3** (circuit 3): iridosmine → Ir + Os with GT--'s live chain (`rarest_metal_residue_ebf`, OsO₄ distillation and `osmium_dust_completion`; `iridium_metal_residue_process` → IrO₂ → iridium acid → `iridium_chloride` → `iridium_chloride_separation` with calcium). The input step is ours: iridosmine + saltpeter + brine (775 K EBF) → Rarest Metal Mixture, like `rarest_metal_residue`, tuned to give 3 Ir per Os. The OsO₄ and Cl₂ do not leave, and the CaCl₂ goes to electrolysis. Accepts the parallel hatch.
 
@@ -177,7 +177,7 @@ What it gains: **the hands-free neutron window and the superacid inside.** The l
 EV leaves the ME P2P tunnel trunk, power over EU P2P (or FE P2P with GTM converters for FE devices; 32,768 EU/t crossing, measured with EV parts: the tunnel itself has no cap) and the pairs the base sets up. IV goes up one step:
 
 - **Two more pairs,** Earth–Venus and Earth–Mercury. Their far half is built there on the first visit, and both sides run with loaded chunks (FTB Chunks).
-- **More amperage:** EU P2P tunnels (`eup2p`) already cross dimensions and carry EV power since EV, and they pay the same toll as FE (2.5% of the energy, in AE). The IV step is amperage. Target: 131,072 EU/t crossing. eup2p's laser P2P tunnel (`LaserP2PTunnelPart`, id to verify) is the candidate. The heat engine sends home what is left over, and the reactor covers Mercury's night.
+- **More amperage:** EU P2P tunnels (`eup2p`) already cross dimensions and carry EV power since EV, and they pay the same toll as FE (2.5% of the energy, in AE). The IV step is amperage. Target: 131,072 EU/t crossing, which EU P2P with 16 A IV hatches carries (the tunnel has no cap of its own); the laser tunnel (`eup2p:laser_p2p_tunnel`) isn't needed in IV, since in stock GTM only LuV machines take laser hatches. The heat engine sends home what is left over, and the reactor covers Mercury's night.
 - **Capacity:** MEGA (the IV circuit assembler's processor) and the 32k coprocessors of Expanded AE. The network stores and manufactures with what arrives from five worlds.
 - **The network feeds the line:** the export buses of each cut request from all planets at once.
 
@@ -234,7 +234,7 @@ It unlocks LuV: hulls, hatches and LuV components (assembly line); LuV mixer and
 
 | Mod | Slug | Use in IV |
 |---|---|---|
-| GCYR | `gcyr` | level 3 engine and tank with its KubeJS plugin (Venus and Mercury at level 3: `ev.md` datapack), thermal upgrade (IV) and IV oxygen spreader; Venus and Mercury veins removed |
+| GCYR | `gcyr` | its own elite fuel tank and rocket motor remade in the IV assembler (Venus and Mercury at level 3: `ev.md` datapack; Proxima b at 4), thermal upgrade (IV) and IV oxygen spreader; Venus and Mercury veins removed |
 | GT-- | `gtnn` | live naquadah line (the plant composes it), loose activator, naquadah reactors (LuV), radiation-proof casing and radioactive waste |
 | Productive Bees | `productivebees` | naquadah and osmium bees removed |
 | MEGA Cells, Expanded AE | `mega`, `expanded-ae` | IV (decided) |
@@ -244,7 +244,7 @@ It unlocks LuV: hulls, hatches and LuV components (assembly line); LuV mixer and
 
 No new mods.
 
-- **Startup:** types `fission_core`, `hot_cell` and `naquadah_refining`; machines `fission_reactor`, `hot_cell`, `naquadah_plant`, `pressurized_vein_drill`, `mercury_vein_drill`, `venus_heat_engine`, `mercury_solar_field`, `interferometer` (the multiblocks, with the pattern helper) and `rtg`; material `gtceu:iridosmine` and fluid `gtceu:heavy_water` (both registered by IV-A1); level 3 engine and tank (GCYR plugin); items for assemblies, spent fuel, RTG pellet, Pu-Be source, site casings and samples; reactor channel modifier.
+- **Startup:** types `fission_core`, `hot_cell` and `naquadah_refining`; machines `fission_reactor`, `hot_cell`, `naquadah_plant`, `pressurized_vein_drill`, `mercury_vein_drill`, `venus_heat_engine`, `mercury_solar_field`, `interferometer` (the multiblocks, with the pattern helper) and `ev_rtg` (the RTG cell); material `gtceu:iridosmine` and fluid `gtceu:heavy_water` (both registered by IV-A1); GCYR's elite tank and motor remade by id (its KubeJS motor builder makes a fuel tank); items for assemblies, spent fuel, RTG pellet, Pu-Be source, site casings and samples; reactor channel modifier.
 - **Server:** recipes composed from the live ones (hot cell, modes 1 and 4; naquadah plant; platinum, mode 3) and ours in tables. Veins: `naquadah_vein` to Venus, iridosmine on Mercury, GCYR's veins on Venus and Mercury removed, `veins_venus.json` and `veins_mercury.json`, and the End's pitchblende vein read by the leach field (no drill takes it). Platline without Ir/Os, bees removed, and dimension, altitude and night conditions.
 - **Config:** nothing new. Venus and Mercury go into EV's planet table.
 - **Tests:** (1) it starts; (2) reactor, hot cell and naquadah plant form and process (plant and IV multiblock strips); (3) on Venus and Mercury (new strips after EV's: Venus X 3072–3135 and Mercury X 3328–3391, Y 98–112) the drills, heat engine and solar field form and only work there, and the level 3 rocket arrives; and `-Tier iv` with no orphans.
@@ -253,7 +253,7 @@ No new mods.
 
 - **Fission in KubeJS.** The multiblock generator, the 16 A dynamo hatches and the channel parallel are untested, and the EU balance per assembly is ours. Plan B: the extreme combustion engines carry the power plant.
 - **The GT-- line.** Composing the activator without its window, the cleanroom step of mode 2 and the antimony and fluorine use. Plan B: mode 1 only, or the loose line with the activator.
-- **GCYR on Venus and Mercury.** The heat and the thermal upgrade, the level 3 parts through the KubeJS plugin, the launch and dimension-change failures (#91 and #122), moving veins and removing GCYR's, and knowing whether Mercury has a night (settled by IV-A1: it does; Venus is fixed at noon). It must be tested in an actual game before IV is closed.
+- **GCYR on Venus and Mercury.** The heat and the thermal upgrade, the level 3 parts (GCYR's elite ones, remade in IV by IV-B5), the launch and dimension-change failures (#91 and #122), moving veins and removing GCYR's, and knowing whether Mercury has a night (settled by IV-A1: it does; Venus is fixed at noon). It must be tested in an actual game before IV is closed.
 - **Iridium and osmium only from Mercury.** The new material and the platline cut change EV's platinum plant. Plan B: GTM's iridium and osmium ores in the vein and the ore plant, without mode 3.
 - **Five loaded worlds.** Bases with loaded chunks on the Moon, Mars, Venus and Mercury, plus EU P2P between dimensions: watch the TPS with spark.
 
@@ -266,7 +266,7 @@ Credits to note in `CREDITS.md`: designed-core reactor (Grindless campaign, T5, 
 3. **Family steps:** pressurized drill (Venus, and Mars with dust filters) and Mercury drill (night side), with a Tungstensteel drill bit and a cap of 128; Venus heat engine and Mercury solar field; RTG cell; interferometer; and the platinum plant's mode 3. At home there is no IV drill: the End's pitchblende is leached in place (decision 2).
 4. **Naquadah only from Venus:** `gtceu:naquadah_vein` moves from the End to Venus (generation and table), and the naquadah bees are removed.
 5. **Iridium and osmium only from Mercury:** new material `gtceu:iridosmine` in a Mercury vein. Earth's platline stops releasing the Ir/Os mixture and the iridium residue, so open question 10 in `ev.md` is closed: there is nothing to refine on Earth. The osmium bees are removed.
-6. **Travel:** Venus and Mercury at level 3 (`ev.md` datapack), with the level 3 engine and tank made in IV with GCYR's KubeJS plugin and the antenna chart; GCYR's thermal upgrade (IV) is the other half of the gate. The first visit is by hand, with an RTG cell and casings made there; after that, Waystones. GCYR's veins on Venus and Mercury are removed.
+6. **Travel:** Venus and Mercury at level 3 (`ev.md` datapack), with GCYR's elite tank and motor remade in IV with the antenna's chart (superseded by decision 10: GCYR's KubeJS plugin isn't used); GCYR's thermal upgrade (IV) is the other half of the gate. The first visit is by hand, with an RTG cell and casings made there; after that, Waystones. GCYR's veins on Venus and Mercury are removed.
 7. **AE2 in IV:** pairs to Venus and Mercury, power as EU over P2P (`eup2p`) instead of FE with converters, 131,072 EU/t crossing, MEGA and Expanded AE's 32k coprocessors.
 8. **Mass production:** assembly line with one AE2 export bus per cut, IV parallel with IV circuits, and GCYM at IV (with `large_packer` and `alloy_blast_smelter`). Plan B: the Expanded Assembly Line.
 9. **Titanium from naquadah (TiF₃) is accepted from IV on:** it comes from Venus, not Earth, and the Moon rule still holds for EV.
@@ -475,7 +475,7 @@ All of them are IV recipes (7,680 EU/t unless a composed GTM stage sets another 
   3. **Iridosmine fusion (optional):** the input step of the platinum plant's mode 3, moved to the site. 10 iridosmine + 10 saltpeter + 1,000 mB salt water → rarest metal mixture + steam, at the figures of GT--'s `rarest_metal_residue` (775 K, 120 EU/t for 200 t).
   - **Sun rule:** a run that starts by day pays 0.25 of the EU/t, with a run-start modifier like the tripod's wings: cheaper, never faster *(tune)*.
 - **Byproducts:** slag is inert and dumped; the steam goes to a turbine or is vented (inert); the mixture goes home.
-- **Structure:** 8 heliostat mirrors on frames around a 3×3×3 focal furnace on a pad of the bricks, with a 3×3 glass evaporation bell beside it.
+- **Structure:** 8 heliostat mirrors on frames around a 3×3×3 focal furnace on a pad of Mercury rock (the works makes the bricks, so it can't stand on them; IV-B2), with a 3×3 glass evaporation bell beside it.
 - **Controller:** IV hull + heliostat tower controller (LV, ours) + IV electric furnace + IV assembler + 4 IV circuits.
 - **Why it is not a big cube:** a mirror field around a focus. It works only on Mercury.
 - **Crossings:**
@@ -627,6 +627,26 @@ All of them are IV recipes (7,680 EU/t unless a composed GTM stage sets another 
     - **`planets.json`:** Venus and Mercury get pair tags and names, and seeds made on site, like Mars's merrillite seed.
     - **The heat engine's water** has a destination: steam to a turbine, or vented as inert. It comes from the acid works.
     - **Test bands** go on from X 9472 in steps of 256, with the same X and Z on each planet. Bands 3072 and 3328 belong to the steam and LV multiblocks.
+
+## As built: Mercury (IV-B2)
+
+Four multiblocks of ours, all Mercury only (4 of IV's 15). All the figures are in the DECISIONS lines of 2026-10-25.
+
+- **Mercury vein drill** (`gtceu:mercury_vein_drill`): 7 × 5 × 5, a brick body under a brick sunshade on tungsten steel posts, radiators under the shade, a tungsten steel pipe drill string; the controller comes from the EV tripod. The day and night rule is read when a run starts: by day only with liquid nitrogen (10 mB a bore, the bit wears 0.25 %), at night dry (wear 0.5 %, the nitrogen kept). 5.625 raw ores a bore either way, up to 128 bores. Its recipes live under `vein_drilling/iv/mercury_*`. The tungsten steel bit (`grindless:tungsten_steel_drill_bit`) is turned on the IV lathe and shared with the pressurized drill.
+- **Mercury solar works** (`gtceu:mercury_solar_works`, type `gtceu:solar_processing`): 9 × 4 × 7, 8 heliostat mirrors, a robust tungsten steel focal furnace with a firebox receiver, a laminated glass bell and a Mercury rock pad. A run that starts with the sun on its receiver and all eight mirrors under open sky pays a quarter of its EU/t, after GTM's overclock (cheaper, never faster). Bricks (16 Hermean regolith dust → 4 bricks), panels and the iridosmine fusion step (published as `global.grindless.mercury.fusion` for the platinum plant's mode 3). It may be built mirrored: its sky checks follow the flip.
+- **Mercury solar field** (`gtceu:mercury_solar_field`, generator type `gtceu:mercury_solar`): 9 × 3 × 7, the lunar plan with 36 thin-film panels, tungsten steel posts, brick footings, a radiator bank and a brick hut under a sunshade. 2,010 EU/t a lit panel, 72,360 EU/t full, by day only; not doubled by `power/generators.js`.
+- **Interferometer** (`gtceu:interferometer`, type `gtceu:interferometry`, observatory step 5): 17 × 5 × 8, three 5 × 5 dishes, a cable run and a correlator hut. The "combination over the network" is an item: the Moon's deep space antenna writes a Lunar VLBI Recording at night, which crosses the AE2 bridge; at night on Mercury (7,680 EU/t × 30 s) the interferometer turns it, with the Inner Planets Chart kept, into the Outer System Chart, and with the Outer System Chart kept, into the Sagittarius A* Signal.
+- **The one-tick restart window** (found by IV-B2): GTM 7.5.3 keeps a finished recipe for one tick and restarts it without the modifier if it can run then, so a run-start price can carry across a sunset. Every machine with a run-start price closes it in `afterWorking` (`lib/fresh_run.js`, from IV-B2's `freshEveryRun`): the Mercury drill and works, the cryogenic plant, the tritium removal facility and the EV tripod's solar wings.
+- **Measured:** Mercury's ground at the band tops out at Y 173. `time set` makes `Level#isNight()` follow at the level's next tick, and `Level#canSeeSky` follows a block placed or removed above a cell one tick later.
+
+## As built: travel and network (IV-B5)
+
+- **Tier 3 rocket:** `grindless:assembler/gcyr/elite_fuel_tank` (2 tungsten steel drums + 6 Kapton K plates + 1 tungsten steel frame) and `grindless:assembler/gcyr/elite_rocket_motor` (2 IV electric pumps + 4 advanced power thrusters + 6 Kapton K plates + 1 tungsten steel frame), IV assembler 7,680 EU/t × 15 s, with the Inner Planets Chart not consumed; GCYR's ZPM recipes are gone. An elite tank holds 12 B and a trip costs 14 B (GCYR's defaults; the pack ships no GCYR config), so the rocket needs two elite tanks. Proxima Centauri b is at rocket tier 4 (GCYR's own file with that one value changed), so a tier 3 rocket reaches the Moon, Mars, Venus and Mercury only.
+- **Suit:** the thermal upgrade template takes 3 heat shielding fabrics, 3 insulating fabrics (PBI), 2 titanium plates and 2 Kapton K plates (GCYR's own used foils), 7,680 EU/t. Each suit piece needs its heat shielding fabric smithed in for Venus and Mercury: four templates for a full suit. The IV oxygen spreader keeps GTM's shaped recipe; nothing in it waits for Mercury.
+- **Chart:** the deep space antenna, on the Moon at night like the Mars chart: the Mars Transfer Chart (kept) + a data stick → `grindless:inner_planets_chart`, 7,680 EU/t × 30 s (an IV hatch or two EV ones); copies by hand.
+- **RTG cell `gtceu:ev_rtg`:** GTM's SimpleGeneratorMachine through the KubeJS `generator` builder, type `gtceu:radioisotope_decay`: the RTG pellet as a 1 % chanced input per 36 s run → 2,048 EU/t out of its front, one pellet per hour of running (147 M EU), on any world, day and night. Made in the EV assembler from EV parts (EV hull, dense lead, titanium fins, a nichrome-cupronickel thermopile, EV circuits): the cell is simple, its plutonium is IV. Not doubled by `power/generators.js`.
+- **AE2:** the Venusian Quantum Seed (Venusian regolith + ender pearl + 250 mB helium-3, only on Venus) and the Hermean Quantum Seed (Hermean regolith dust + ender pearl + 250 mB helium-3, only on Mercury), chemical reactor 480 EU/t × 10 s; AE2's explosion ritual marks the pairs `venus` / `mercury`, and an unpowered far half links (bench). EU P2P with 16 A IV hatches carries the power.
+- **Measured:** Venus's ground at X 12288–12351 reaches Y 165.
 
 ## As built: shared registrations (IV-A1)
 

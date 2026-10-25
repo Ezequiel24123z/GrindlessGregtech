@@ -133,7 +133,9 @@ Gregtech Grindless is a GregTech Modern pack (Minecraft 1.20.1, Forge) in which 
   | heavy-water plant | 10752–10815 (roof at Y 112) |
   | fluorspar kiln | 11008–11071 |
   | Venus | 11264–11327: on Venus (`gcyr:venus`) from one block above the highest ground (Y 162 for ground Y 156–161) up 19 blocks, and a gas collector at Y 250; on Mars (`gcyr:mars`) the same X and Z (slab at Y 163) |
+  | Mercury | 11520–11583 on Mercury (`gcyr:mercury`), built on Y 200 (the band's highest ground is Y 173) |
   | tritium removal facility | 12032–12095: the Moon at Y 198–214 and the Overworld at Y 98–112 |
+  | travel and network | 12288–12351: the Overworld at Y 98–112 and Venus (`gcyr:venus`) at Y 198–214 |
 
   For a new test, keep going in steps of 256.
 
