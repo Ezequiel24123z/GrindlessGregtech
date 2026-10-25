@@ -5,7 +5,7 @@
 .DESCRIPTION
   1. tools\Update-PackIndex.ps1 (normalizes pack text files to UTF-8 no BOM + LF, then packwiz refresh)
   2. zips pack\ + tools\test\overlay\   3. uploads to the home test PC
-  4. runs the remote scripts over ssh (one Minecraft JVM globally, 1G/4G heap, at least 8 GB available RAM;
+  4. runs the remote scripts over ssh (one Minecraft JVM globally, 1G/4G heap, no available-RAM launch floor;
      a shared native time budget of at most 600 seconds, then bounded shutdown)
   5. downloads results.zip and prints a concise PASS/FAIL summary (see Show-GGResults.ps1).
 
@@ -21,6 +21,9 @@
   Server suite: after "Done" the harness waits -SettleSec (default 15, 0 = off) before RCON/-Commands, longer while a
   datapack reload (e.g. the one Additional Placements triggers) is still running, so it cannot wipe what a test starts.
   Exit code: 0 PASS, 1 FAIL, 2 harness/infrastructure problem (no results).
+
+.PARAMETER SlotMinFreeGb
+  Deprecated and ignored for compatibility. Available RAM does not gate slot acquisition or JVM launch.
 
 .EXAMPLE
   Invoke-GGTest.ps1 -Suite server -Commands 'kubejs custom_command gg_ping' -WaitForLog 'GGTEST\|PING\|PASS'
@@ -48,7 +51,7 @@ param(
     [ValidateRange(1, 600)][int]$NativeTimeoutSec = 600,
     [ValidateRange(1, 15)][int]$LockWaitMin = 5,
     [ValidateRange(1, 1)][int]$Slots = 1,
-    [ValidateRange(8, 128)][double]$SlotMinFreeGb = 8,
+    [double]$SlotMinFreeGb = 0,
     [ValidateRange(0, 60)][int]$SettleSec = 15,
     [string]$ServerXms = '1G',
     [string]$ServerXmx = '4G',
@@ -67,6 +70,9 @@ param(
 $ErrorActionPreference = 'Stop'
 $ProgressPreference = 'SilentlyContinue'
 . (Join-Path $PSScriptRoot 'remote\gg-resource-policy.ps1')
+if ($PSBoundParameters.ContainsKey('SlotMinFreeGb')) {
+    Write-Warning '-SlotMinFreeGb is deprecated and ignored; available RAM does not gate slot acquisition or JVM launch'
+}
 [Threading.Thread]::CurrentThread.CurrentCulture = [Globalization.CultureInfo]::InvariantCulture
 Add-Type -AssemblyName System.IO.Compression
 Add-Type -AssemblyName System.IO.Compression.FileSystem
@@ -330,7 +336,6 @@ $request = [ordered]@{
     clientExclude     = @($clientExcludeList)
     lockWaitMin       = $LockWaitMin
     slots             = $Slots
-    slotMinFreeGb     = $SlotMinFreeGb
     settleSec         = $SettleSec
     createdUtc        = [datetime]::UtcNow.ToString('o')
 }
@@ -447,7 +452,7 @@ if ($ok) {
 }
 
 if ($ok) {
-    Write-Step 'running on the test PC (streaming remote log; waits for a free slot and enough free RAM if other runs hold them) ...'
+    Write-Step 'running on the test PC (streaming remote log; waits for the single global Minecraft slot, regardless of available RAM) ...'
     $remoteLog = J $OutDir 'remote-output.log'
     $rcmd = "powershell -NoProfile -ExecutionPolicy Bypass -File $remoteWin\tools\remote\$remoteScriptsHash\Run-GGTest.ps1 -RunId $runId"
     $sw = [Diagnostics.Stopwatch]::StartNew()

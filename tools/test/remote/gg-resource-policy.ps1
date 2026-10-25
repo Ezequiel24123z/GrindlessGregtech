@@ -31,8 +31,9 @@ function Assert-GGResourceRequest {
         }
     }
     if ([int]$Req.slots -ne 1) { throw 'The personal-PC policy permits exactly one Minecraft JVM globally (-Slots 1)' }
-    $free = [double]$Req.slotMinFreeGb
-    if ([double]::IsNaN($free) -or [double]::IsInfinity($free) -or $free -lt 8) { throw 'slotMinFreeGb must be at least 8 GB' }
+    if ($null -ne $Req.PSObject.Properties['slotMinFreeGb']) {
+        Write-Warning 'slotMinFreeGb is deprecated and ignored; available RAM does not gate slot acquisition or JVM launch'
+    }
     foreach ($wait in @($Req.waitForLog)) {
         if ($null -eq $wait) { continue }
         $n = [double]$wait.timeoutSec

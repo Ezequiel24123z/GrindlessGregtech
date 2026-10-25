@@ -254,8 +254,6 @@ function Invoke-GGClientSuite {
 
         if ($ok) {
             $ok = Invoke-GGStage 'client-launch' {
-                $freeGb = Get-GGFreeRamGb
-                if ($freeGb -lt [math]::Max(8, [double]$Req.slotMinFreeGb)) { throw "Insufficient available RAM before client launch: $freeGb GB" }
                 if (-not $global:GG.NativeBudget) { $global:GG.NativeBudget = @{ Clock = [Diagnostics.Stopwatch]::StartNew(); TimeoutSec = [int]$Req.nativeTimeoutSec } }
                 [void](Get-GGNativeTimeoutMs $global:GG.NativeBudget 1)
                 $lw = ''
@@ -270,7 +268,7 @@ function Invoke-GGClientSuite {
                 $g = [GGProc]::Start($ctx.Hmc.Exe, $argLine, $inst, (Join-Path $res 'client-hmc-stdout.log'), (Join-Path $res 'client-hmc-stderr.log'), $envs)
                 $ctx.Proc = $g
                 Set-GGSlotState $null $true
-                Write-GGLog "HeadlessMC started (pid $($g.Id), renderer $renderer), free RAM $freeGb GB; first run installs the Forge client (slow)"
+                Write-GGLog "HeadlessMC started (pid $($g.Id), renderer $renderer); first run installs the Forge client (slow)"
                 $sw = [Diagnostics.Stopwatch]::StartNew()
                 $lastPrint = 0
                 $lastProbe = -100
