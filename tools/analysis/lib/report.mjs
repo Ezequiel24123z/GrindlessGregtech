@@ -91,6 +91,20 @@ function negativeRecipeLines(model, res, r, mode, view) {
   return L;
 }
 
+/** Lines for a static site check (`kind: "site"`). */
+function siteLines(model, r) {
+  const t = r.target;
+  const scope = [[...asArray(t.type), ...asArray(t.types)].join(', '), t.recipe ? `id ${asArray(t.recipe).join(' | ')}` : ''].filter(Boolean).join(', ');
+  const where = asArray(t.dimensions).join(' or ');
+  if (r.defined.length === 0) return [`there's no recipe of ${scope} in the pack (misspelled type or id?)`];
+  const free = r.unconditioned > 0 ? `; ${r.unconditioned} allowed to run anywhere (${asArray(t.allowAnywhere).join(', ')})` : '';
+  if (r.offenders.length === 0) return [`all ${r.defined.length} recipe(s) of ${scope} only run in ${where}${t.exact ? ' (each names all of them)' : ''}${free}`];
+  const L = [`${r.offenders.length} of ${r.defined.length} recipe(s) of ${scope} don't keep to ${where}${free}:`];
+  for (const o of r.offenders.slice(0, 12)) L.push(`  · ${model.g.rules[o.rule].name}: ${o.why}`);
+  if (r.offenders.length > 12) L.push(`  … +${r.offenders.length - 12} more`);
+  return L;
+}
+
 function evaluateAll(model, res, targets, mode, cache, opts) {
   const out = [];
   for (const t of targets) {
@@ -99,6 +113,11 @@ function evaluateAll(model, res, targets, mode, cache, opts) {
     r.lines = [];
     const g = model.g;
     const view = r.view || res;
+    if (r.kind === 'site') {
+      r.lines.push(...siteLines(model, r));
+      out.push(r);
+      continue;
+    }
     if (r.negative && r.kind === 'recipe') {
       // leak of a recipe (or a recipe type): PASS if no match can be used in this tier
       r.lines.push(...negativeRecipeLines(model, res, r, mode, view));
@@ -214,7 +233,15 @@ export function renderText(model, res, out, opts = {}) {
   L.push(`          ${dump.recipes.size} recipes · ${dump.items.size} items · ${dump.fluids.size} fluids · ${dump.tags.itemTags.size} item tags${modInfo ? ' · ' + modInfo : ''}`);
   L.push(`Model   : ${g.rules.length} rules · ${g.nKeys} resources · world: ${model.facts.manual.length} by hand, ${model.facts.auto.length} fixed, ${model.facts.bootstrap.length} bootstrap`);
   const added = [...dump.recipes.values()].filter((r) => r.added).length;
-  const OUR_TYPES = ['gtceu:vein_drilling', 'gtceu:greenhouse', 'gtceu:ore_processing', 'gtceu:bio_distillation', 'gtceu:refining', 'gtceu:reforming', 'gtceu:pgm_refining'];
+  // the recipe types the pack registers (startup_scripts/grindless/**: GTCEuStartupEvents.registry('gtceu:recipe_type'))
+  const OUR_TYPES = [
+    'gtceu:vein_drilling', 'gtceu:greenhouse', 'gtceu:coking', 'gtceu:steelmaking',
+    'gtceu:sulfide_roasting', 'gtceu:arc_smelting', 'gtceu:solar_steam', 'gtceu:creature_simulation', 'gtceu:stargazing', 'gtceu:astrophotography',
+    'gtceu:ore_processing', 'gtceu:bio_distillation', 'gtceu:radio_astronomy', 'gtceu:static_fire', 'gtceu:weather_control',
+    'gtceu:refining', 'gtceu:reforming', 'gtceu:syngas', 'gtceu:composite_curing', 'gtceu:lunar_drilling',
+    'gtceu:pgm_refining', 'gtceu:regolith_processing', 'gtceu:cryogenic_processing', 'gtceu:lunar_solar', 'gtceu:deep_space_tracking',
+    'gtceu:atmosphere_processing', 'gtceu:solvent_extraction', 'gtceu:combined_cycle', 'gtceu:hot_rolling',
+  ];
   const typesWithRecipes = new Set([...dump.recipes.values()].map((r) => r.type));
   L.push(`          ${added} recipes added by the pack's scripts · the pack's own types with recipes: ${OUR_TYPES.filter((t) => typesWithRecipes.has(t)).join(', ') || '(none: neither vein_drilling nor greenhouse)'}`);
   L.push(`Context : the factory is in dimension ${cfg.contextDimension}`);

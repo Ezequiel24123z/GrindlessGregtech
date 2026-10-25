@@ -141,10 +141,49 @@ function machinelessVerdict(model, res, mode, rule, view, t) {
 }
 
 /**
+ * `kind: "site"` (static: the same in every pass, whether or not the recipes can be completed): every recipe of `type`/`types`
+ * and/or with an id matching `recipe` (globs) carries dimension conditions, all of them among `dimensions` (GTM ORs a recipe's
+ * dimension conditions), and no reversed one. It checks the "Site machines" rule (the Moon's machines only run on the Moon) and
+ * the fuels' allowlist of air dimensions. `exact: true`: every recipe names every dimension of the list; `allowAnywhere`: id
+ * globs of recipes that may carry no dimension condition (fuels that carry their own oxidizer). No matching recipe = FAIL.
+ */
+function evalSite(model, t) {
+  const g = model.g;
+  const types = new Set([...asArray(t.type), ...asArray(t.types)]);
+  const nameMatch = t.recipe ? makeGlobMatcher(asArray(t.recipe)) : null;
+  const anywhere = makeGlobMatcher(asArray(t.allowAnywhere));
+  const site = asArray(t.dimensions);
+  const defined = [];
+  const offenders = [];
+  let unconditioned = 0;
+  for (const rule of g.rules) {
+    if (rule.kind !== 'recipe' || (types.size > 0 && !types.has(rule.type)) || (nameMatch && !nameMatch(rule.name))) continue;
+    defined.push(rule.id);
+    const dims = rule.meta.dims || [];
+    const notDims = rule.meta.notDims || [];
+    let why = null;
+    if (notDims.length > 0) why = `a reversed condition (outside ${notDims.join(', ')}): with GTM's OR it holds almost everywhere`;
+    else if (dims.length === 0) {
+      if (anywhere(rule.name)) unconditioned++;
+      else why = 'no dimension condition: it runs anywhere';
+    } else {
+      const extra = dims.filter((d) => !site.includes(d));
+      const missing = t.exact ? site.filter((d) => !dims.includes(d)) : [];
+      if (extra.length > 0) why = `also runs in ${extra.join(', ')}`;
+      else if (missing.length > 0) why = `doesn't run in ${missing.join(', ')}`;
+    }
+    if (why) offenders.push({ rule: rule.id, why });
+  }
+  const ok = defined.length > 0 && offenders.length === 0;
+  return { target: t, view: null, kind: 'site', ok, status: ok ? STATUS.SUSTAINED : STATUS.UNREACHABLE, defined, offenders, unconditioned, key: null };
+}
+
+/**
  * Evaluates a target in 'gate' mode (reachable by hand) or 'auto' mode (sustainable).
  * Returns {target, ok, status, key, detail}.
  */
 export function evalTarget(model, res, t, mode) {
+  if (t.kind === 'site') return evalSite(model, t);
   const g = model.g;
   // `without` (globs over rule names): in auto, a view of the auto pass; in the gate, reachability recalculated without those rules
   const view = mode === 'auto' ? res.viewFor(t.without) : res.gateViewFor(t.without);
