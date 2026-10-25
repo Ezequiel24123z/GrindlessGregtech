@@ -224,27 +224,33 @@ With 7 multiblocks of ours, EV fell short of the ×1.35 target (rule 7 of `AGENT
 
 #### Combined-cycle plant: `gtceu:combined_cycle_plant` (Earth)
 
+**Status:** in the pack since 2026-10-25 (package B7: `ev/combined_cycle_and_hot_mill.js`, `ev_combined_cycle_and_hot_mill_lang.js`); bench run `b7-combined-cycle-hot-mill-3` (23/0, 172,032 EU into a real EV battery buffer).
+
 What it gains: **more energy from the same fuel, through a more complex plant** (rule 8). A gas turbine's exhaust is still hot. A heat-recovery boiler turns that heat into steam for a steam turbine, which is how real combined-cycle plants beat simple turbines.
 
-- **Recipe type:** `gtceu:combined_cycle` (new, check for an id clash), a generator.
-  - It takes the fuels of GTM's gas turbine, read when the world loads, like the platinum plant reads GT--'s line.
-  - Each fuel gives the same EU per mB as the gas turbine after the ×2 of `power/generators.js`. On top of that, distilled water → steam, worth about +40% of the fuel's EU in a large steam turbine *(tune)*.
-- **Own condition:** the steam needs a destination. If its hatch fills up, the plant stops, fuel and all.
-- **Structure:** a turbine hall of stable Titanium casing with a heat-recovery boiler of Titanium pipes and firebricks on its back. It has 1 fuel input hatch, 1 water input hatch, 1 steam output hatch and 1–2 EV dynamo hatches. There is no rotor: it is a generator with its own recipes, not a GTM turbine.
+- **Recipe type:** `gtceu:combined_cycle` (no id clash), a generator through `lib/generators.js` (up to 256 runs, no overclock; 8,192 EU/t with two EV dynamo hatches).
+  - Its recipes are generated at load (priority −200, after `power/generators.js`) from every live gas turbine recipe: 19 today, GTM's 18 fuels and methalox.
+  - Each fuel gives the same EU per mB as the gas turbine after the ×2 of `power/generators.js`, plus distilled water → steam worth 40% of the run's EU at 1 EU per mB of steam (160 mB of steam per mB of water, rounded up). Methane: 2 mB + 2 mB of water → 448 EU + 179 mB of steam.
+  - **Site rule:** a fuel burns where it burns in the gas turbine (it copies the source's dimension conditions, else `power.burnsInAir`; methalox anywhere). The plant is meant for Earth.
+- **Own condition:** the steam needs a destination. If its hatch fills up, the plant stops, fuel and all, and the controller's fluid voiding is refused (`grindless.steam_outputs.no_voiding`). The steam room also caps the runs: long-burning fuels want a large or ME output hatch for full power.
+- **Structure:** 5 wide × 8 high × 7 deep, 172 blocks. In front, a 4-high turbine hall of stable Titanium casing: 14 Titanium turbine casings around a gearbox shaft and a three-gearbox generator. Behind, a heat-recovery boiler 6 high, plus a stack: 61 firebricks around a 3×4 bank of Titanium pipe casings, and a duct from the turbine. Parts only in the hall's floor: 1–2 dynamo hatches of any tier, 1–2 fluid input hatches (fuel and water; one multi-fluid hatch serves both) and exactly 1 fluid output hatch (steam). There is no rotor: it is a generator with its own recipes, not a GTM turbine.
 - **Crafted with:** EV hull + large gas turbine controller (`gtceu:gas_large_turbine`) + 2 EV pumps + 4 EV circuits.
 - **Why it is not a big cube:** it only gains if a second plant (the steam turbines) takes its steam, so the energy comes from building more, not from a free bonus.
-- **Generator mechanism (resolved 2026-10-25):** it is a KubeJS multiblock that outputs EU, the same mechanism as the lunar solar array. The spike passed: `lib/generators.js` gives EU through dynamo hatches on GTM 7.5.3 (LV generator array, run `a3-power-generators-run2`), so the steam-only fallback is not needed.
+- **Generator mechanism:** a KubeJS multiblock that outputs EU through dynamo hatches, the same mechanism as the generator array (spike `a3-power-generators-run2`) and the lunar solar array; the steam-only fallback was not needed.
+- **Balance:** methane from Mars' atmosphere processor costs 257 EU per mB and gives 224 back in a gas turbine, but about 314 here with its steam (+22%). That loop is accepted. It needs the whole Mars base, the bridge and two plants, and it is far below the EROI of automated wood that the energy audit already accepted.
 
 #### Hot strip mill: `gtceu:hot_strip_mill` (Earth)
 
+**Status:** in the pack since 2026-10-25 (package B7); bench run `b7-combined-cycle-hot-mill-3` (one hot titanium ingot rolled into 1 plate, 2 rods and 4 foil, each with 3,840 mB of steam).
+
 What it gains: **several steps in one, and energy back.** Hot ingots go straight from the EBF to rolled products, without the vacuum freezer and the bender, and the water that cools them comes out as steam. This is real hot rolling.
 
-- **Recipe type:** `gtceu:hot_rolling` (new). Its recipes are generated when the world loads from every GTM material with a hot ingot whose freezer recipe asks only for EU. The ones that need Liquid Helium (5,000 K or more) keep the freezer.
-  - The circuit picks the product: plate, rods or foil, at the bender's and extruder's ratios.
-  - Energy: the sum of the freezer and the bender, with no discount.
-  - Steam per ingot grows with the blast temperature *(tune)*.
-- **Own condition:** water in, steam out. If the steam has no destination, it stops.
-- **Structure:** a 3×3×9 line of rolling stands. It has stable Titanium casing, steel frames, water sprays and a steam hood, plus an input bus, an output bus, a water hatch, a steam output hatch and 1–2 EV hatches.
+- **Recipe type:** `gtceu:hot_rolling`. Its recipes are generated at load from every vacuum freezer recipe of a hot ingot that asks only for EU (and whose hot ingot an EBF makes), with the live bender or extruder recipe of the product: 129 recipes for 58 materials today. The 36 that need Liquid Helium (5,000 K or more) keep the freezer; 9 materials have no plate, rod or foil recipe and are not rolled.
+  - The circuit picks the product: 1 plate (the bender, or the extruder for materials that cannot be bent), 2 rods (the extruder), 3 foil, at their ratios.
+  - Energy: the sum of the freezer and the bender or extruder, with no discount (the higher EU/t of the two, for as many ticks as the sum needs).
+  - Steam: 2 mB per kelvin of the lowest blast temperature, in whole 160 mB (1 mB of water each), never more than the run's EU. Titanium (1,941 K): 3,840 mB per ingot; tungsten steel (3,000 K): 6,080 mB.
+- **Own condition:** water in, steam out. If the steam has no destination, it stops, and fluid voiding is refused.
+- **Structure:** a 3×3×9 line, 73 blocks: four rolling stands (Titanium gearboxes above and below the strip between steel frames), two water-spray slices of Titanium pipe casings under a hood, stable Titanium casing. The strip path is air. Parts: an input bus, an output bus, a water hatch, a steam output hatch and 1–2 energy hatches; ME parts fit.
 - **Crafted with:** EV hull + EV bender + GTM vacuum freezer controller + 2 EV pumps + 4 EV circuits.
 - **Why it is not a big cube:** it is a route GTM does not have (no freezer), and it gives back part of the EBF's energy as steam, which needs a turbine.
 - **Byproducts:** steam → large steam turbine or the combined-cycle plant's steam line.
@@ -305,7 +311,7 @@ What it gains: **a separation GTM does not do.** Martian rare earths (the KubeJS
 | Martian atmosphere | Martian air + water → processor (ruthenium) → CH₄ + O₂ → mixer → methalox → gas turbine on Mars (87% of the processor's energy back as methane, 76% as methalox) | Spare O₂: suits. Spare CH₄: home network. Spare CO₂ (circuit 2): sealed dome |
 | Tungsten (final) | scheelite + 2,000 mB of HCl → tungstic acid (bath, 960 EU/t) → electrolysis (W + 2,000 mB of H₂ + 4,000 of O₂) → EBF with nichrome at 3,600 K → freezer. Tungsten Steel: W + steel (EV mixer) → EBF 3,000 K → freezer. RTM: Ru + W + Mo → EBF 3,000 K → 4,500 K coil | CaCl₂: cell charge. LiCl (from the tungstate): lithium. H₂ and O₂: network |
 | Metal mixture | stone dust → `stone_dust_separation` → mixture → `metal_mixture_separation` (900 EU/t) → hematite, bauxite, pyrolusite, barite and chromite | Each one to its own line; the barite is stored. The Ilmenite is removed from the recipe |
-| Combined cycle | refinery gas or any gas turbine fuel + distilled water → combined-cycle plant → EU + steam → large steam turbine | Steam: turbine, or the plant stops |
+| Combined cycle | refinery gas or any gas turbine fuel + distilled water → combined-cycle plant → EU + steam → large steam turbine; air fuels only where there is air, methalox anywhere | Steam: turbine, or the plant stops |
 | Hot rolling | EBF → hot ingot → hot strip mill (circuit picks plate, rods or foil) + water → product + steam | Steam: turbines |
 | Martian rare earths | Martian tripod → merrillite ore → dust → cascade: HCl leach → chloride solution + phosphoric acid + tricalcium phosphate → solvent extraction with kerosene (MV) and an HCl strip → samarium, neodymium and mixed chlorides → GTM electrolyzer → Sm, Nd, rare earth dust + Cl₂ | Samarium: LuV magnets (reserve). Neodymium: motors. Diluted HCl: distillation tower, back to the leach. Cl₂: HCl. Kerosene: recycled, small loss. Phosphoric acid and the phosphate: inert, voidable |
 | Off-world crops | seeds + water + CO₂ (Martian air, or CO₂ from home: engine test stand exhaust, MV) → sealed dome → crops + O₂ | Crops: biomass for the wither. O₂: suits, cryogenic plant |
