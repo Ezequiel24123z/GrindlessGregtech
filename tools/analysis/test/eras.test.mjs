@@ -343,13 +343,51 @@ test('config: the tiers/next/ layer makes the whole chain inherit from its files
 // ---------------------------------------------------------------- real configs
 
 test('real tiers: era order is inherited and every resource and group has an era from the order', () => {
-  for (const tier of ['steam', 'lv', 'mv', 'hv', 'ev']) {
+  for (const tier of ['steam', 'lv', 'mv', 'hv', 'ev', 'iv']) {
     const { raw } = loadTierConfig({ tier }, TIERS);
     assert.ok(raw.eraOrder && raw.eraOrder.length >= 6, `${tier}: eraOrder`);
     for (const e of [...raw.eraResources, ...raw.eraItems]) assert.ok(raw.eraOrder.includes(e.era), `${tier}: ${e.id} has era ${e.era}`);
     const ids = raw.eraItems.map((e) => e.id);
     assert.equal(new Set(ids).size, ids.length, `${tier}: duplicate eraItems ids`);
+    for (const set of raw.eraSiblings || []) for (const e of set) assert.ok(raw.eraOrder.includes(e), `${tier}: sibling ${e}`);
   }
+});
+
+test('real tiers (iv): home, then Venus and Mercury as sibling substages; naquadah only from Venus, iridium and osmium only from Mercury (2026-10-25)', () => {
+  const { raw } = loadTierConfig({ tier: 'iv' }, TIERS);
+  const o = raw.eraOrder;
+  assert.ok(o.indexOf('ev-mars') < o.indexOf('iv') && o.indexOf('iv') < o.indexOf('iv-venus') && o.indexOf('iv-mercury') < o.indexOf('luv'));
+  assert.deepEqual(raw.eraSiblings, [['iv-venus', 'iv-mercury']]);
+  const res = Object.fromEntries(raw.eraResources.map((r) => [r.id, r]));
+  assert.equal(res.venus.era, 'iv-venus');
+  assert.equal(res.naquadah.era, 'iv-venus');
+  assert.deepEqual(res.naquadah.onlyFrom, ['venus']);
+  assert.ok(res.naquadah.exclude.includes('*naquadria*'), 'naquadria is ZPM');
+  assert.equal(res.mercury.era, 'iv-mercury');
+  assert.equal(res['iridium-osmium'].era, 'iv-mercury');
+  assert.deepEqual(res['iridium-osmium'].onlyFrom, ['mercury']);
+  assert.deepEqual(res.titanium.onlyFrom, ['moon', 'venus'], 'decision 9: TiF3 titanium from Venus is accepted from IV on');
+  assert.ok(res.venus.items.includes('gcyr:venusian_*'), 'hv.json\'s ground globs survive the merge');
+  // the trips and the generators
+  const syn = Object.fromEntries(raw.synthetic.map((s) => [s.id, s]));
+  assert.deepEqual(syn['inner-trip'].produces, ['dim:gcyr:venus', 'dim:gcyr:mercury']);
+  for (const p of ['gcyr:elite_fuel_tank', 'gcyr:elite_rocket_motor', 'gcyr:space_suit_thermal_upgrade_smithing_template']) assert.ok(syn['inner-trip'].capital.includes(p), p);
+  for (const [id, type] of [['fission', 'gtceu:fission_core'], ['venus-heat', 'gtceu:venus_heat'], ['mercury-solar', 'gtceu:mercury_solar'], ['rtg', 'gtceu:radioisotope_decay']]) {
+    assert.deepEqual(syn[id].recipesOf, [type], id);
+  }
+  assert.deepEqual(raw.conditions.dimension.asKeysFor, ['gcyr:luna', 'gcyr:mars', 'gcyr:venus', 'gcyr:mercury', 'minecraft:the_end']);
+  assert.ok(raw.conditions.research.researchKeys);
+  // the two IV drills veto each other's prefix
+  const m = Object.fromEntries(raw.machines.map((e) => [e.id || e.machine, e]));
+  assert.deepEqual(m['gtceu:pressurized_vein_drill'].onlyRecipes, ['grindless:vein_drilling/iv/pressurized_*']);
+  assert.deepEqual(m['gtceu:mercury_vein_drill'].onlyRecipes, ['grindless:vein_drilling/iv/mercury_*']);
+  // what waits for Mercury's iridium is no home item
+  const items = Object.fromEntries(raw.eraItems.map((g) => [g.id, g]));
+  for (const it of ['gtceu:iv_emitter', 'gtceu:iv_sensor', 'gtceu:iv_voltage_coil', 'gtceu:iv_electrolyzer']) {
+    assert.ok(items['iv-gtm'].exclude.includes(it) && items['iv-mercury-gtm'].items.includes(it), it);
+  }
+  assert.equal(items['output-iv'].era, 'luv');
+  for (const t of ['uranium-not-before-iv', 'radon-not-before-iv', 'quantum-eye-not-before-iv', 'deuterium-not-made']) assert.ok(raw.dropTargets.includes(t), t);
 });
 
 test('real tiers (hv): titanium, helium-3 and the Moon belong to EV and only come from the Moon, the End to MV; the stainless bit, the rocket and GCYR\'s suit belong to HV (v0.5.0)', () => {
