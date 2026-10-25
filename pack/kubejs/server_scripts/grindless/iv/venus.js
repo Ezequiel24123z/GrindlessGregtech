@@ -21,7 +21,8 @@
 //   gtceu:acid_cracking (Venus Acid Works), Venus only, the platinum gauze as a chanced input (its wear), the circuit is the mode:
 //     cloud_acid_vented  circuit 1: 1,000 mB sulfuric acid -> 1,000 mB distilled water + 1,000 mB oxygen; the SO2 goes back into the air
 //     cloud_acid_kept    circuit 2: the same + 1,000 mB sulfur dioxide kept (recipe data grindless_keep_fluids: the works refuses
-//                        fluid voiding for it), for home's sulfide roaster
+//                        fluid voiding for it), for chemistry at home: GTM's chemical_reactor/sulfur_trioxide turns it back into SO3 and
+//                        sulfuric acid (the LV sulfide roaster converts only its own SO2: it has no SO2 input)
 //     Energy: GTM's electrolyzer/distilled_water_electrolysis (45,000 EU per 1,000 mB), spent at up to 7,680 EU/t (6 ticks at 7,500).
 //   gtceu:gas_collector (GTM's single-block collector), Venus only, one programmed circuit each (GTM's lookup: 1-3 are taken):
 //     venus_carbon_dioxide  circuit 4, below the cloud base (pos_y -64..239): 10,000 mB of carbon dioxide, 1,024 EU/t for 200 ticks
