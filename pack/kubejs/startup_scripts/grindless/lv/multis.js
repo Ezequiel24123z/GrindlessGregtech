@@ -18,9 +18,14 @@
 // whichever it meets first): a base recipe waits while drilling fluid is in the hatch (drill) or while a circuit
 // of 2 or more is in a bus (greenhouse), so the fluid / fertilizer variant is the one that runs.
 // `bores(veto, cap)` is shared as global.grindless.lv.bores (with the recipe-name rules in global.grindless.lv.rules) for the
-// MV machines (cap 16, startup_scripts/grindless/mv/), the HV ones (cap 32, startup_scripts/grindless/hv/) and the ore plant
-// (cap 6). The LV machines skip the recipes under <type>/mv/ and <type>/hv/ (the vanadium steel bit, with it the End veins, and the
-// CO2 variants are the MV machines', the stainless steel bit the HV drill's); the MV machines skip the <type>/hv/ ones.
+// MV machines (cap 16, startup_scripts/grindless/mv/), the HV ones (cap 32, startup_scripts/grindless/hv/), the EV Tripod Drill
+// (cap 64, startup_scripts/grindless/ev/tripod.js) and the ore plant (cap 6).
+// Tier folders: a family recipe of a machine above steam lives under <type>/<tier>/ (lv, mv, hv, ev, iv...), and every electric
+// machine of the family skips the recipes of the tiers above its own (rules.isAboveTier), so a new era only adds a folder and no
+// lower machine needs a new rule (the steam machines have no veto hook: see the soft spot in hv/family_vein_drilling.js, server
+// side). Today: the vanadium steel bit, with it the End veins, and the CO2 variants are the MV machines'
+// (<type>/mv/), the stainless steel bit the HV drill's (<type>/hv/), the titanium bit and the lunar and Martian veins the EV
+// Tripod Drill's (<type>/ev/); the sealed dome's crops will be <type>/ev/ too.
 // The Lunar Drill (startup_scripts/grindless/moon/lunar_drill.js) uses `bores` too, with no veto: its type has only lunar recipes.
 //
 // Lookup note (GTM's RecipeDB): a recipe whose ingredient list is a prefix of another recipe's list makes one of the two
@@ -165,6 +170,26 @@
     return recipePath(recipe).indexOf('/hv/') >= 0
   }
 
+  // GTM's voltage tiers, lowest first
+  const TIERS = ['ulv', 'lv', 'mv', 'hv', 'ev', 'iv', 'luv', 'zpm', 'uv', 'uhv', 'uev', 'uiv', 'uxv', 'opv', 'max']
+
+  // the tier a family recipe is filed under: the highest tier named by a folder of its id path ('' = none, the steam recipes)
+  function recipeTier(recipe) {
+    var parts = recipePath(recipe).split('/')
+    var best = -1
+    for (var i = 0; i < parts.length - 1; i++) {
+      var t = TIERS.indexOf(parts[i])
+      if (t > best) best = t
+    }
+    return best < 0 ? '' : TIERS[best]
+  }
+
+  // true for a recipe of a tier above `tier`: the lower machines of a family skip the better ones' recipes
+  function isAboveTier(recipe, tier) {
+    var t = recipeTier(recipe)
+    return t !== '' && TIERS.indexOf(t) > TIERS.indexOf(tier)
+  }
+
   // drilling recipes that use drilling fluid (LV and MV): .../<vein>_<bit>_fluid
   function isFluidRecipe(recipe) {
     return /_fluid$/.test(recipePath(recipe))
@@ -220,13 +245,14 @@
     return best
   }
 
-  // the LV machines do not take the MV recipes (vanadium bit, End veins, CO2 variants) nor the HV ones (stainless steel bit)
+  // the LV machines do not take the recipes of a higher tier (MV: vanadium bit, End veins, CO2 variants; HV: stainless steel bit;
+  // EV: titanium bit, lunar and Martian veins...)
   function drillVeto(machine, recipe) {
-    return isMvRecipe(recipe) || isHvRecipe(recipe) || (!isFluidRecipe(recipe) && machineHasFluid(machine, 'gtceu:drilling_fluid'))
+    return isAboveTier(recipe, 'lv') || (!isFluidRecipe(recipe) && machineHasFluid(machine, 'gtceu:drilling_fluid'))
   }
 
   function greenhouseVeto(machine, recipe) {
-    return isMvRecipe(recipe) || isHvRecipe(recipe) ||
+    return isAboveTier(recipe, 'lv') ||
       (!isFertilizerRecipe(recipe) && !isBoosterRecipe(recipe) && machineCircuit(machine) >= 2)
   }
 
@@ -268,6 +294,9 @@
     recipePath: recipePath,
     isMvRecipe: isMvRecipe,
     isHvRecipe: isHvRecipe,
+    tiers: TIERS.slice(),
+    recipeTier: recipeTier,
+    isAboveTier: isAboveTier,
     isFluidRecipe: isFluidRecipe,
     isFertilizerRecipe: isFertilizerRecipe,
     isCo2Recipe: isCo2Recipe,

@@ -12,7 +12,8 @@
 // The drill vetoes a base recipe while drilling fluid is in its hatch (the fluid recipe is the better one, like the LV drill).
 // While sulfuric acid is in its hatch the vanadium steel base recipe gives way to the leaching variant (..._acid_fluid: same
 // yield plus one extra chance of the vein's rarest ore).
-// Both machines skip the recipes under <type>/hv/ (the stainless steel bit is the HV drill's). The End is MV: its veins with the vanadium
+// Both machines skip the recipes of the tiers above MV (<type>/hv/, <type>/ev/ and up: rules.isAboveTier, lv/multis.js): the
+// stainless steel bit is the HV drill's. The End is MV: its veins with the vanadium
 // steel bit are <type>/mv/ recipes, so this drill runs them (with drilling fluid).
 // The greenhouse works like the LV one with programmed circuit 2 (fertilizer variants); with CO2 in a hatch as well the
 // fertilizer + CO2 variant runs instead of the fertilizer one: x1.5 output on top and 100 mB of O2 back per run. Circuit 1 or no
@@ -101,14 +102,14 @@
     var rules = lv.rules
 
     function drillVeto(machine, recipe) {
-      return rules.isHvRecipe(recipe) || (!rules.isFluidRecipe(recipe) && rules.machineHasFluid(machine, 'gtceu:drilling_fluid')) ||
+      return rules.isAboveTier(recipe, 'mv') || (!rules.isFluidRecipe(recipe) && rules.machineHasFluid(machine, 'gtceu:drilling_fluid')) ||
         (rules.isVanadiumBaseRecipe(recipe) && rules.machineHasFluid(machine, 'gtceu:sulfuric_acid'))
     }
 
     // circuit 2 = fertilizer mode; with CO2 in a hatch too the fertilizer + CO2 variant is the one that runs. Circuit 3 = the
     // boosters (LV CO2, MV fermented biomass), which run with or without CO2
     function greenhouseVeto(machine, recipe) {
-      if (rules.isHvRecipe(recipe)) return true
+      if (rules.isAboveTier(recipe, 'mv')) return true
       if (rules.machineCircuit(machine) < 2) return false
       if (rules.isBoosterRecipe(recipe)) return false
       if (!rules.isFertilizerRecipe(recipe)) return true
