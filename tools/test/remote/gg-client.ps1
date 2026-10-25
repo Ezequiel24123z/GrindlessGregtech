@@ -253,13 +253,14 @@ function Invoke-GGClientSuite {
         }
 
         if ($ok) {
-            $os = Get-CimInstance Win32_OperatingSystem
-            $freeGb = [math]::Round($os.FreePhysicalMemory / 1MB, 1)
-            if ($freeGb -lt 8) { Write-GGLog "low free RAM: $freeGb GB (client uses up to 6 GB)" 'WARN' }
             $ok = Invoke-GGStage 'client-launch' {
+                $freeGb = Get-GGFreeRamGb
+                if ($freeGb -lt [math]::Max(8, [double]$Req.slotMinFreeGb)) { throw "Insufficient available RAM before client launch: $freeGb GB" }
+                if (-not $global:GG.NativeBudget) { $global:GG.NativeBudget = @{ Clock = [Diagnostics.Stopwatch]::StartNew(); TimeoutSec = [int]$Req.nativeTimeoutSec } }
+                [void](Get-GGNativeTimeoutMs $global:GG.NativeBudget 1)
                 $lw = ''
                 if ($renderer -eq 'stub') { $lw = '-lwjgl ' }
-                $argLine = "launch --offline $($lw)--packwiz `"$inst`" client --jvm `"-Xmx6G -Djava.awt.headless=true -DMcRuntimeGameTest=false`""
+                $argLine = "launch --offline $($lw)--packwiz `"$inst`" client --jvm `"-Xms$($Req.clientXms) -Xmx$($Req.clientXmx) -Djava.awt.headless=true -DMcRuntimeGameTest=false`""
                 $envs = @("HMC_FILES_LOCATION=$($ctx.Hmc.Home)")
                 if ($renderer -eq 'mesa') {
                     # software OpenGL; llvmpipe threads are capped so the PC stays usable for its owner
@@ -277,7 +278,7 @@ function Invoke-GGClientSuite {
                 $tailOut = New-Object GGTail (Join-Path $res 'client-hmc-stdout.log')
                 $tailLog = New-Object GGTail (Join-Path $inst 'logs\latest.log')
                 $last = ''
-                while (-not $g.WaitForExit(2000)) {
+                while (-not $g.WaitForExit((Get-GGNativeTimeoutMs $global:GG.NativeBudget 2000))) {
                     foreach ($l in $tailLog.ReadNew()) { $last = $l }
                     foreach ($l in $tailOut.ReadNew()) { if (-not $last) { $last = $l } }
                     if ($renderer -eq 'mesa' -and -not $glProof -and ($sw.Elapsed.TotalSeconds - $lastProbe) -ge 10) {
@@ -286,10 +287,9 @@ function Invoke-GGClientSuite {
                         if ($glProof) { Write-GGLog "Mesa OpenGL is loaded by the game JVM ($glProof)" }
                     }
                     if ($sw.Elapsed.TotalSeconds -gt $timeout) {
-                        $diag = Save-GGClientHangDiagnostics $inst $res
                         Stop-GGTree $g.Id
                         [void]$g.WaitForExit(15000)
-                        throw ("client timed out after {0}s; last line: {1}{2}" -f $timeout, $last, $diag)
+                        throw ("client timed out after {0}s; last line: {1}; live diagnostics skipped to stop promptly" -f $timeout, $last)
                     }
                     if ($sw.Elapsed.TotalSeconds - $lastPrint -ge 30) {
                         $lastPrint = $sw.Elapsed.TotalSeconds
