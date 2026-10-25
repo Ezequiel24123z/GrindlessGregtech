@@ -51,7 +51,7 @@
     ebf: {
       id: 'gtceu:electric_blast_furnace', casing: 'gtceu:heatproof_machine_casing',
       parts: [['gtceu:lv_muffler_hatch', 1], ['gtceu:lv_energy_input_hatch', 1]],
-      needs: 1, partCells: 1, extra: ['gtceu:lv_muffler_hatch', 'gtceu:lv_energy_input_hatch', 'gtceu:lv_input_bus'],
+      needs: 1, partCells: 1, partLabel: 'gtceu:lv_muffler_hatch', extra: ['gtceu:lv_muffler_hatch', 'gtceu:lv_energy_input_hatch', 'gtceu:lv_input_bus'],
       coil: 'gtceu:cupronickel_coil_block'
     },
     sbf: {
@@ -343,9 +343,10 @@
       ' (expected ' + M.needs + ')')
     if (M.partCells) {
       var cellsOk = res.parts.length === M.partCells && res.parts.every(function (p) { return blockAt(S.level, p.x, p.y, p.z) === 'minecraft:air' })
-      check(c.key + '.part_cell', cellsOk, 'part-only cells left empty and listed: ' + res.parts.map(function (p) {
+      var labelOk = !M.partLabel || res.parts.every(function (p) { return p.id === M.partLabel })
+      check(c.key + '.part_cell', cellsOk && labelOk, 'part-only cells left empty and listed under their lowest tier: ' + res.parts.map(function (p) {
         return p.id + ' (' + p.options + ' options)@' + p.x + ',' + p.y + ',' + p.z + ' now ' + blockAt(S.level, p.x, p.y, p.z)
-      }).join(', '))
+      }).join(', ') + (M.partLabel ? ' (expected ' + M.partLabel + ')' : ''))
     }
     if (M.coil) {
       var coils = res.cells.filter(function (cell) { return cell.kind === 'place' && /coil/.test(cell.block) })
@@ -443,6 +444,8 @@
     var gm = fp.gameMode
     if (gm === undefined || gm === null || typeof gm.useItemOn !== 'function') gm = fp.f_8941_
     P().last = null
+    // one FakePlayer for every click: the projector ignores a click within 8 ticks of the last one (a held button), so the test spaces them
+    S.lastFakeTick = Number(S.server.getTickCount())
     return String(gm.useItemOn(fp, S.level, fp.getMainHandItem(), j.Hand.MAIN_HAND, hit))
   }
 
@@ -557,7 +560,7 @@
     var missingOurs = ours.filter(function (id) { return !all.some(function (d) { return String(d.getId()) === id }) })
     check('survey', bad.length === 0 && missingOurs.length === 0 && all.length > 100,
       all.length + ' multiblock definitions (' + Object.keys(ns).sort().map(function (k) { return k + ' ' + ns[k] }).join(', ') + ') read: ' + ok +
-      ', ' + cells + ' cells; ' + withParts + ' have cells that only take parts, ' + withMulti + ' cells with several default options' +
+      ', ' + cells + ' cells; ' + withParts + ' have cells that only take parts, ' + withMulti + ' have cells with several default options' +
       (bad.length > 0 ? '; unreadable: ' + bad.slice(0, 12).join(', ') : '') + (missingOurs.length > 0 ? '; ours not registered: ' + missingOurs.join(', ') : ''))
   }
 
@@ -586,10 +589,7 @@
       check(c.key + '.formed', true, 'formed by itself after ' + waited + ' ticks with the default blocks the projector placed and the parts the test added (facing ' +
         c.facing + (c.up ? ', upwards ' + c.up : '') + ', parts ' + asArray(ctrl.getParts()).length + ')')
       c.phase = 'done'
-      if (c.key === 'ebf.creative' && !S.formedChecked) {
-        S.formedChecked = true
-        try { fakeFormed(c) } catch (e) { check('fake.formed', false, 'exception: ' + e) }
-      }
+      if (c.key === 'ebf.creative' && S.formedCase === null) S.formedCase = c
       return
     }
     if (waited >= FORM_TIMEOUT) {
@@ -610,10 +610,17 @@
   }
 
   function step() {
-    S.t = S.server.getTickCount() - S.tick0
-    if (!S.hologramDone && S.t >= 20) {
+    var now = Number(S.server.getTickCount())
+    S.t = now - S.tick0
+    var spaced = now - S.lastFakeTick >= 12
+    if (!S.hologramDone && S.t >= 20 && spaced) {
       S.hologramDone = true
+      spaced = false
       try { fakeHologram() } catch (e) { check('fake.hologram', false, 'exception: ' + e) }
+    }
+    if (S.formedCase !== null && !S.formedChecked && S.hologramDone && spaced) {
+      S.formedChecked = true
+      try { fakeFormed(S.formedCase) } catch (e1) { check('fake.formed', false, 'exception: ' + e1) }
     }
     var pending = 0
     CASES.forEach(function (c) {
@@ -624,7 +631,7 @@
         c.phase = 'done'
       }
     })
-    if (pending === 0 && S.hologramDone) {
+    if (pending === 0 && S.hologramDone && (S.formedChecked || S.formedCase === null)) {
       if (!S.formedChecked) check('fake.formed', false, 'the creative EBF never formed, so the click on a formed controller was not tried')
       finish()
     } else if (S.t > TEST_TIMEOUT) {
@@ -651,7 +658,7 @@
     }
     var server = event.getLevel().getServer()
     S = { server: server, level: server.overworld(), t: 0, tick0: server.getTickCount(), nextAt: server.getTickCount() + STEP, failed: [], finished: false,
-      hologramDone: false, formedChecked: false }
+      hologramDone: false, formedChecked: false, formedCase: null, lastFakeTick: -1000 }
     try {
       try { staticChecks() } catch (e1) { check('static', false, 'exception: ' + e1) }
       try { survey() } catch (e2) { check('survey', false, 'exception: ' + e2) }
@@ -757,6 +764,7 @@
       if (age < 40) return
       var plan = P().plan(level, pos)
       T.want = placesOf(plan)
+      T.plan0 = { present: plan.present, total: plan.placedTotal }
       var inv = p.getInventory()
       inv.clearContent()
       // the selected hotbar slot is the client's: the projector goes into whichever slot it holds
@@ -781,9 +789,10 @@
       var r = sval('result')
       if (r === '' && age < CLIENT_TIMEOUT) return
       var last = P().last
-      var placedNow = P().plan(level, pos).present
-      ccheck('hologram', r.indexOf('PASS') === 0 && last !== null && last.kind === 'hologram' && placedNow === 1,
-        (r === '' ? 'the client never answered' : r) + '; server: ' + (last === null ? 'no click' : last.kind) + ', blocks of the structure built ' + placedNow + ' (the controller)')
+      var p1 = P().plan(level, pos)
+      ccheck('hologram', r.indexOf('PASS') === 0 && last !== null && last.kind === 'hologram' && p1.present === T.plan0.present && p1.placedTotal === T.plan0.total,
+        (r === '' ? 'the client never answered' : r) + '; server: ' + (last === null ? 'no click' : last.kind) + ', nothing built by the plain click: ' +
+        p1.placedTotal + ' blocks still to place (' + T.plan0.total + ' before)')
       ask('build')
       cgo('build')
       return
