@@ -18,6 +18,14 @@ The game starts here, without electricity. Coke, bricks, bronze, boilers and ste
    - The **coke battery** (ours) cokes like 6 or 7 coke ovens and stores coal gas for LV.
 7. **Gate to LV.** LV Steam Turbine (`gtceu:lv_steam_turbine`), first LV circuit, LV Machine Hull and rubber-insulated tin cable. Once that works, the era is behind you.
 
+## Storage and furnaces
+
+Sophisticated Storage's metal tiers are tuned above stock: copper, iron and gold have 90, 108 and 162 inventory slots; diamond and netherite reach the engine's 180-slot cap. Metal upgrade slots double, as do limited barrels' per-slot capacities. Wood is unchanged.
+
+The pack raises only stock per-world config values, preserving customized values and existing contents. Placed single storages expand on load; existing double chests keep their saved size until tier-upgraded or rebuilt.
+
+Iron Furnaces adds ordinary fuel-burning furnace tiers at twice the mod's stock speed (netherite: 5 to 2 ticks per item). One coal still smelts eight items without augments. Tier upgrades retain contents; FE generator/factory augments, the wireless heater and Million/rainbow routes are disabled. These furnaces do not generate power or replace GT ore processing.
+
 ## Building multiblocks
 
 The **Hologram Projector** (`grindless:hologram_projector`) is made at the crafting table with glass, bronze plates, redstone torches and redstone, using a screwdriver.
