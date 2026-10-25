@@ -84,6 +84,33 @@ function makeResolver(dump, normList, warnings) {
 /** Voltage of each GT tier (V[0] = ULV ... V[14] = MAX). */
 const V = [8, 32, 128, 512, 2048, 8192, 32768, 131072, 524288, 2097152, 8388608, 33554432, 134217728, 536870912, 2147483647];
 
+/** GTM's voltage tiers, lowest first: the folders of the pack's family recipes (`TIERS` in startup_scripts/grindless/lv/multis.js). */
+export const TIER_NAMES = ['ulv', 'lv', 'mv', 'hv', 'ev', 'iv', 'luv', 'zpm', 'uv', 'uhv', 'uev', 'uiv', 'uxv', 'opv', 'max'];
+
+/**
+ * The tier a family recipe is filed under: the highest tier named by a folder of its id path ('' = none), as `rules.recipeTier`
+ * in lv/multis.js (grindless:vein_drilling/ev/ilmenite_moon_titanium -> ev).
+ */
+export function recipeTierOf(id) {
+  const path = id.includes(':') ? id.slice(id.indexOf(':') + 1) : id;
+  const parts = path.split('/');
+  let best = -1;
+  for (let i = 0; i < parts.length - 1; i++) best = Math.max(best, TIER_NAMES.indexOf(parts[i]));
+  return best < 0 ? '' : TIER_NAMES[best];
+}
+
+/**
+ * The pack's family veto (lv/multis.js): `vetoAbove: <tier>` skips the recipes filed under a folder above that tier
+ * (`rules.isAboveTier`: the LV, MV and HV drills and greenhouses, the sealed dome); `onlyTier: <tier>` runs only that tier's folder
+ * (`rules.recipeTier(recipe) !== tier`: the EV tripod). The steam machines have no veto hook, so they declare neither.
+ */
+function tierAllows(e, recipeId) {
+  if (!e.vetoAbove && !e.onlyTier) return true;
+  const t = recipeTierOf(recipeId);
+  if (e.onlyTier) return t === e.onlyTier;
+  return t === '' || TIER_NAMES.indexOf(t) <= TIER_NAMES.indexOf(e.vetoAbove);
+}
+
 /** A vein's material without its namespace if it's GT's ("gtceu:iron" -> "iron"); an addon's keeps it ("gtca:red_zircon"). */
 const veinMaterialName = (m) => (m.startsWith('gtceu:') ? m.slice(6) : m);
 /** A vein's id without its namespace or the "_vein" chunk (even mid-string): redstone_vein_ow -> redstone_ow. */
@@ -357,6 +384,8 @@ export function buildModel(dump, rawCfg) {
   const typeIndex = new Map();
   for (const e0 of [...cfg.machines, ...fromRegistry]) {
     const id = e0.id || e0.machine;
+    // an optional machine that isn't registered yet (another package's, still unmerged) has no structure either: no warnings about it
+    const pending = !!e0.optional && dump.machines.size > 0 && !dump.machines.has(e0.machine);
     // energy: max voltage of an electric multiblock per GTM 7.5.3 (WorkableElectricMultiblockMachine.getMaxVoltage): with
     // 2 or more energy hatches of the highest tier it counts as one step higher (V[tier + 1] = 4x the hatch's voltage).
     // It counts hatches, not amperage: two LV hatches (2 A each) or two 1 A ones give the same result, 128 V (MV).
@@ -368,7 +397,7 @@ export function buildModel(dump, rawCfg) {
       let hatches = e0.energy.hatches;
       if (hatches === undefined && desc) hatches = abilityMaxCount(desc, ability);
       if (hatches === undefined) {
-        warnings.push(`${id}: energy has no «hatches» and no structure to read the «${ability}» hatches from; counting 1`);
+        if (!pending) warnings.push(`${id}: energy has no «hatches» and no structure to read the «${ability}» hatches from; counting 1`);
         hatches = 1;
       }
       if (typeof e0.energy.voltage !== 'number') warnings.push(`${id}: energy.voltage must be a number (the hatch's voltage)`);
@@ -384,6 +413,9 @@ export function buildModel(dump, rawCfg) {
       e = { ...e, maxTemp: e0.coilTemp + 100 * Math.max(0, tier - 2) };
     }
     if (entriesById.has(id)) warnings.push(`duplicate machine in the configuration: ${id}`);
+    for (const f of ['vetoAbove', 'onlyTier']) {
+      if (e[f] !== undefined && !TIER_NAMES.includes(e[f])) warnings.push(`${id}: ${f} «${e[f]}» isn't a tier (${TIER_NAMES.join(', ')})`);
+    }
     entriesById.set(id, e);
     const reg = dump.machines.get(e.machine);
     if (dump.machines.size > 0 && e.machine.startsWith('gtceu:') && !reg && !e.optional) {
@@ -429,7 +461,7 @@ export function buildModel(dump, rawCfg) {
         partsFrom = 'structure';
         stats.structureMachines++;
         stats.structureMachineIds.push(e.machine);
-      } else {
+      } else if (!pending) {
         warnings.push(`${id}: the dump doesn't carry ${e.machine}'s structure${partSels.length > 0 ? "; using the config's parts" : ' and there are no parts in the config either'}`);
       }
     }
@@ -477,10 +509,12 @@ export function buildModel(dump, rawCfg) {
       const all = typeIndex.get(n.type) || [];
       const euOk = (e) => (e.maxEUt === undefined ? Infinity : e.maxEUt) >= n.eut;
       const tempOk = (e) => e.maxTemp === undefined || n.temp === undefined || e.maxTemp >= n.temp;
-      const cands = all.filter((e) => euOk(e) && tempOk(e));
+      const tierOk = (e) => tierAllows(e, n.id);
+      const cands = all.filter((e) => euOk(e) && tempOk(e) && tierOk(e));
       let lbl = `machine for ${n.type}`;
       if (cands.length === 0) {
         if (all.length === 0) lbl = `there's no machine for ${n.type} in this tier`;
+        else if (all.some((e) => euOk(e) && tempOk(e))) lbl = `no ${n.type} machine of this tier runs the recipes filed under ${recipeTierOf(n.id)}/ (the family's tier veto)`;
         else if (all.some(euOk)) lbl = `no ${n.type} machine reaches ${n.temp} K (this tier's coils)`;
         else lbl = `no ${n.type} machine accepts ${n.eut} EU/t`;
       }
