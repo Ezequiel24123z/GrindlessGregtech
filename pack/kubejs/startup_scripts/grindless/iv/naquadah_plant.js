@@ -21,7 +21,8 @@
 //
 // Machine class: GTM's plain electric multiblock (WorkableElectricMultiblockMachine), so its overclock is GTM's, after a parallel hatch's
 // copies when one sits in a part cell (lib/parallel_hatch.js, IV-B6's mechanism: the IV hatch runs up to 4 copies, each at the recipe's
-// EU/t, so 4 at once need LuV voltage, two IV energy hatches; the Pu-Be source, a chanced input, is not multiplied). Nothing it makes in
+// EU/t, so 4 at once need LuV voltage, two IV energy hatches. GTM sizes the copies by every consumed input, the chanced Pu-Be source
+// included, so 4 copies want 4 sources in the bus; they are still used up only by chance). Nothing it makes in
 // IV must be contained (GTM's naquadah is not radioactive), so it does not refuse voiding; mode 2's naquadria solution (LuV) will.
 //
 // Geometry (lib/patterns.js: slices back -> front, rows bottom -> top, columns left -> right seen from the front):

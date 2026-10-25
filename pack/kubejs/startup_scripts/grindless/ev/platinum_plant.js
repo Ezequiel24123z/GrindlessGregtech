@@ -32,7 +32,8 @@
 //
 // Machine class: GTM's plain electric multiblock (WorkableElectricMultiblockMachine), so its overclock is GTM's, after a parallel hatch's
 // copies when one sits in a part cell (lib/parallel_hatch.js; IV-B6's mechanism, added by IV-B3: the IV hatch runs up to 4 copies, each
-// at the recipe's EU/t, so 4 EV recipes at once need IV voltage; the electrode, a chanced input, is not multiplied).
+// at the recipe's EU/t, so 4 EV recipes at once need IV voltage. GTM sizes the copies by every consumed input, the chanced electrode
+// included, so 4 copies want 4 electrodes in the bus; they are still used up only by chance).
 //
 // Geometry (slices back -> front, rows bottom -> top; the controller is in the front slice, middle column, row 1):
 //   row 0   floor: the 20 cells of its edge are `X` (inert casing or a part), the 15 of the middle are inert casing
