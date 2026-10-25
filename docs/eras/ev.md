@@ -105,7 +105,7 @@ Built on 2026-10-25 (run `b1-ev-tripod-2`, on the Moon).
 ### The rest
 
 - **Earth.** The HV drill still covers the Overworld, Nether and End, and there is no EV drill on Earth (ore is plentiful: the bottleneck is processing). HV fluid drill (EV hull, ×16) for crude and gas. Air, noble gases, chlorine and acids, as in HV.
-- **Moon.** The regolith comes out of the tripod (the stone it drops, ground up; verify the material), and the cell converts it into O₂, metals and volatiles; the cryogenic plant liquefies whatever is needed.
+- **Moon.** The regolith is the drills' stone (GCYR moon cobblestone and the other lunar stones) ground in any macerator into `gtceu:lunar_regolith_dust`, and the cell converts it into O₂, metals, volatiles and bricks; the cryogenic plant liquefies whatever is needed.
 - **Mars.** CO₂ from the air, for the processor; the ice goes to the network for IV.
 - **Creatures.** `mobs.json` gains two rows (2026-10-25):
   - **Wither skeleton,** at HV: 480 EU/t, 10 s, 100 mB of biomass + 1 tricalcium phosphate, printed from 8 nether bricks + 8 bone blocks. Circuit 1 gives bones, coal and a skull at 10%; circuit 2 gives only the skull.
@@ -116,18 +116,27 @@ Built on 2026-10-25 (run `b1-ev-tripod-2`, on the Moon).
 
 ### Regolith cell: `gtceu:regolith_cell` (Moon, this era's)
 
+**Status:** in the pack since 2026-10-25 (package B2: `ev/regolith_cell.js`, `ev_regolith_cell_lang.js`); bench runs `b2-regolith-cell-1` and `-2` (14/0).
+
 What it gains: **recipes that do not exist on Earth.** Oxygen on a world with no air, Titanium without chlorine or magnesium, and the brick the whole Moon base is built from.
 
-- **Recipe type:** `gtceu:regolith_processing` (new, check for an id clash), all with `.dimension('gcyr:luna')`. The circuit picks the mode:
-  1. **Volatiles** (circuit 1): heated regolith → He, He-3, H₂, N₂ and some water, in real-world proportion: lots of H₂ and He, a pinch of He-3 (figures to be tuned).
-  2. **Electrolysis** (circuit 2): molten regolith → O₂ + Iron + Silicon. With Ilmenite and the electrolyte charge → Titanium ingot + Iron + O₂ (reduction in molten salt, like the FFC process). Energy: the sum of the Kroll stages it replaces (Rutile, TiCl₄, EBF and freezer), with no discount (verify).
-  3. **Sintering** (circuit 3): regolith → sintered regolith brick (`grindless:sintered_regolith`). The first ones, which are slow, come from an electric furnace on the Moon under the same condition.
+- **Recipe type:** `gtceu:regolith_processing` (no id clash), every recipe with `.dimension('gcyr:luna')` (read from `veins_moon.json`), 1,920 EU/t, no parallels. Ids `grindless:regolith_processing/ev/<name>`. The circuit picks the mode, so no mode veto is needed:
+
+  | Circuit | Recipe | In | Out | Ticks |
+  |---|---|---|---|---|
+  | 1 | `volatiles` | 16 lunar regolith dust | 2,000 mB H₂, 250 He, 200 N₂, 1 He-3 (the water is vented) | 50 |
+  | 2 | `regolith_electrolysis` | 16 regolith dust + platinum anode (0.1%) | 7,000 mB O₂, 3 silicon dust, 1 iron dust (the slag is dumped) | 200 |
+  | 2 | `titanium_from_ilmenite` | 5 ilmenite dust + anode (0.1%) + molten salt charge (never used up) | 3 titanium ingots, 1 iron dust, 3,000 mB O₂ | 1,408 |
+  | 3 | `sintering` | 16 regolith dust | 4 `grindless:sintered_regolith` | 100 |
+
+- **Figures:** volatiles per atom of mature mare soil (H 2,000 : He 250 : N 200; He-3 about 8× its real share). Electrolysis: mare soil ~21% Si and ~12% Fe by mass; the oxygen counted as GTM's electrolyzer counts SiO₂ (~55 EU/mB; GTM's water electrolysis 45). Titanium: verified in game, exactly the Kroll stages it replaces (rutile EBF once, then TiCl₄, Kroll EBF and freezer per ingot): 2,703,360 EU per 3 ingots, with the Kroll's yield. Sintering: the furnace's 48,000 EU per brick, four per run.
 - **Own condition:** platinum anode (`grindless:platinum_electrode`, the one from the platinum plant; the first ones use Platinum from the End), which is used up in ~0.1% of batches, and a CaCl₂ electrolyte charge (`grindless:molten_salt_charge`), which is not used up. The CaCl₂ comes from the Solvay loop on Earth and, at the end, from Tungsten.
-- **Structure:** 5×5×4 hall of sintered brick, a crucible of stable Titanium casing with nichrome coils and a tempered glass roof; input bus, output bus, 5 fluid output hatches and 1–2 EV hatches. Accepts ME hatches.
+- **Structure:** 5 wide × 5 deep × 4 high: floor and walls of sintered brick (at least 45), a 3×3 crucible of stable Titanium casing, a ring of 8 nichrome coils with the melt (air) in the middle, a 5×5 tempered glass roof. Parts in the brick, with the brick's look: 1–2 EV energy hatches, 1–2 input buses, 1–2 output buses, 1–5 output hatches (one per gas; one ME output hatch takes all five).
 - **Crafted with:** EV hull + EV electrolyzer + EV electric furnace + 2 EV pumps + 4 EV circuits.
 - **Why it is not a big cube:** (1) its recipes do not exist on Earth and only run on the Moon; (2) chlorine-free Titanium is a process GTM does not have, and it pays for it with the same energy; (3) it needs anodes from the platinum plant, an electrolyte charge and a destination for each output: if a hatch fills up, it stops.
-- **Byproducts:** O₂ and N₂ → cryogenic plant, suit or network. Iron → steel for the base. Silicon → solar array panels. He → cryogenic plant (Liquid Helium for IV). He-3 → fusion reserve. H₂ → home network (refinery). Water: inert, voided.
-- **Scaled-back option:** without the Titanium mode, O₂, volatiles and the brick remain; Titanium still comes from Kroll.
+- **Byproducts:** O₂ and N₂ → cryogenic plant, suit or network. Iron → steel for the base. Silicon → solar array panels. He → cryogenic plant (Liquid Helium for IV). He-3 → fusion reserve. H₂ → home network (refinery). Water and slag: inert, vented or dumped inside the recipe, so the five hatches are the five gases.
+- **Balance:** Titanium at exactly the Kroll's energy and yield, so the home Kroll is not worse per ingot; the cell wins on steps, reagents and logistics. The Lunar Drill's regolith vein keeps its helium-3 (5 mB per run, by day): the cell adds a source instead of taking one out of a world already being played.
+- **Not seen in game:** textures, names and the parts' brick look (no client run); two energy hatches, ME hatches and the anode actually wearing out were not exercised.
 
 ### Cryogenic plant: `gtceu:cryogenic_plant` (Moon)
 
