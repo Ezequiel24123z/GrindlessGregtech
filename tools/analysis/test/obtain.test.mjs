@@ -426,11 +426,16 @@ test('tiers/obtain.json: inherits from steam, audits GT, and all its rules have 
   assert.ok(!raw.obtain.later.some((l) => l.id === 'mars' || (l.dimensions || []).includes('gcyr:mars')));
   assert.ok(raw.obtain.world.some((w) => w.id === 'mars-ground'));
   assert.ok(!raw.obtain.classes.some((c) => (c.materials || []).includes('grindless:titanium_drill_bit')));
-  assert.equal(raw.obtain.classes.find((c) => (c.materials || []).includes('deuterium')).until, 'iv');
-  // stages are cumulative and a group goes to the first that reaches it: the naquadah vein's plutonium also gives uraninite,
-  // so the pitchblende stage goes first and the radioactive chain is attributed to IV's radioactives, not to Venus' naquadah
-  const stage = (id) => raw.obtain.later.findIndex((l) => l.id === id);
-  assert.ok(stage('end-pitchblende') >= 0 && stage('end-pitchblende') < stage('end-naquadah'));
+  // IV (2026-10-25, C1's switch): Venus and Mercury are reached (their grounds are world sources), the End's pitchblende vein counts
+  // through the leach field's recipe type, and no later stage or B rule names an IV place or IV material any more
+  for (const d of ['gcyr:venus', 'gcyr:mercury']) assert.ok(raw.obtain.reachableDimensions.includes(d), d);
+  assert.ok(raw.obtain.world.some((w) => w.id === 'venus-ground') && raw.obtain.world.some((w) => w.id === 'mercury-ground'));
+  assert.ok(raw.obtain.veins.requireRecipe.some((r) => r.type === 'gtceu:in_situ_leaching' && r.input === 'grindless:vein_sample_{id}'));
+  assert.deepEqual(raw.obtain.later.map((l) => l.id), ['proxima']);
+  assert.ok(!raw.obtain.classes.some((c) => c.class === 'B' && c.until === 'iv'), 'B iv rules go with the switch');
+  for (const m of ['deuterium', 'tritium', 'iridium', 'grindless:leu_pellet']) {
+    assert.ok(!raw.obtain.classes.some((c) => (c.materials || []).includes(m)), `${m} has a source in IV: no rule names it`);
+  }
 });
 
 test('CLI: --pass obtain with --config writes text, JSON and Markdown and exits 1 if there are unclassified groups', () => {
