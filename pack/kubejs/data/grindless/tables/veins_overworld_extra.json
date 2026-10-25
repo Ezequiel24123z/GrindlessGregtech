@@ -1,7 +1,8 @@
 {
-  "_source": "GT-- (gtnn 1.3.10) registers these two Overworld veins in code (gtnn:kaolinite_vein, gtnn:wollastonite_vein; no datapack JSON). Every value below was read from the live vein registry (GTRegistries.ORE_VEINS) of the pack: heightRangeUniform, weight, layer and the layer patterns of the generator. Colors: .color() of each material in GTM's common/data/materials/*.java.",
+  "_source": "GT-- (gtnn 1.3.10) registers the first two Overworld veins in code (gtnn:kaolinite_vein, gtnn:wollastonite_vein; no datapack JSON). Every value of those two was read from the live vein registry (GTRegistries.ORE_VEINS) of the pack: heightRangeUniform, weight, layer and the layer patterns of the generator. The fluorite vein is our own (IV, docs/eras/iv.md, decisions taken with the raise, 5): server_scripts/grindless/iv/foundation.js adds it to the worldgen from this entry (its clusterSize, density and sizes are only read there). Colors: .color() of each material in GTM's common/data/materials/*.java (fluorite: GCYR 0.2.9's material).",
   "_how_it_is_used": [
-    "Same format as veins.json (read that file's notes), for the Overworld veins other mods add on top of GTM's 22 (that file belongs to the steam data and is not touched). Loaded by startup_scripts/grindless/lv/multis_items.js as global.grindless.tables.veins_overworld_extra: it feeds the sample items. server_scripts/grindless/lv/vein_drilling.js normalizes it (global.grindless.lv.extraVeins()), generates the steam recipes (same numbers as the steam table: bronze bit 2.5 ores per run and 10 % wear, steel bit 3.75 and 4 %) and, through allVeins(), every LV, MV and HV recipe; server_scripts/grindless/lv/crafting_multis.js crafts the samples.",
+    "Same format as veins.json (read that file's notes), for the Overworld veins other mods add on top of GTM's 22, and our own (that file belongs to the steam data and is not touched). Loaded by startup_scripts/grindless/lv/multis_items.js as global.grindless.tables.veins_overworld_extra: it feeds the sample items. server_scripts/grindless/lv/vein_drilling.js normalizes it (global.grindless.lv.extraVeins()), generates the steam recipes (same numbers as the steam table: bronze bit 2.5 ores per run and 10 % wear, steel bit 3.75 and 4 %) and, through allVeins(), every LV, MV and HV recipe; server_scripts/grindless/lv/crafting_multis.js crafts the samples.",
+    "fluorite (IV): a Mississippi Valley-type deposit of fluorite, barite, galena and sphalerite in limestone, like the Illinois-Kentucky fluorspar district. It only generates in chunks made after IV landed; its sample and drilling recipes exist at once. Nothing uses fluorite before the fluorspar kiln (IV), which turns it into hydrogen fluoride. Barite, galena and sphalerite go to their usual GTM lines.",
     "id = vein id without namespace and without the '_vein' suffix ('kaolinite_vein' -> 'kaolinite'); the sample item is grindless:vein_sample_<id>. The pack validator (tools/analysis) looks for exactly that name for every registry vein. Ids do not clash with veins.json.",
     "gtm = id in GTRegistries.ORE_VEINS; without a namespace it is gtceu:<gtm>, as in the other tables. layer = stone. minY/maxY = heightRangeUniform. spawnWeight = vein weight.",
     "materials[].id = GTM material name; weight = layer weight of the layered generator. wollastonite_vein also lists andradite (weight 1) in GT--, but GTM has no andradite ore (no ore block, no raw_andradite item, only dust/gem), so that layer yields nothing and it is not listed.",
@@ -28,6 +29,17 @@
         { "id": "dolomite", "weight": 2 },
         { "id": "wollastonite", "weight": 2 },
         { "id": "trona", "weight": 2 }
+      ]
+    },
+    {
+      "id": "fluorite", "gtm": "grindless:fluorite_vein", "generator": "layered", "layer": "stone",
+      "minY": 10, "maxY": 60, "spawnWeight": 40, "clusterSize": 36, "density": 0.25,
+      "colorMaterial": "gcyr:fluorite", "color": "#0C9949",
+      "materials": [
+        { "id": "gcyr:fluorite", "weight": 4, "size": [2, 4] },
+        { "id": "barite", "weight": 2, "size": [1, 2] },
+        { "id": "galena", "weight": 1, "size": [1, 1] },
+        { "id": "sphalerite", "weight": 1, "size": [1, 1] }
       ]
     }
   ]
