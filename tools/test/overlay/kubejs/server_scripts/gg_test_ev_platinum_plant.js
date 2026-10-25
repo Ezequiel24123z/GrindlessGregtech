@@ -7,20 +7,22 @@
 // Trimmed from the full scratch test of 2026-10-24 (39 PASS: the generator checked a second way against the loose line, the overclock with
 // two hatches, the whole line chained, the ME hatches, the electrode used up for certain). What is left proves the mechanism on today's pack:
 //   ev_platinum_plant|registration   recipe type gtceu:pgm_refining with its IO sizes, and the machine
-//   ev_platinum_plant|counts         5 recipes (2 attack + 3 separation) built from the 31 stages of GT--'s live line, none skipped, each in
-//                                    the recipe manager under its final id (grindless:pgm_refining/ev/<name>: GTM's builder puts the type in
-//                                    front)
+//   ev_platinum_plant|counts         6 recipes (2 attack + 3 separation + IV's iridosmine) built from the 40 stages of GT--'s live line
+//                                    (31 for EV, 9 for the iridium and osmium of mode 3, whose first stage is IV-B2's fusion, read from
+//                                    global.grindless.mercury.fusion), none skipped, each in the recipe manager under its final id
+//                                    (grindless:pgm_refining/<ev|iv>/<name>: GTM's builder puts the type in front)
 //   ev_platinum_plant|figures        every recipe the script built has the inputs, outputs, chances, duration and EU/t it had on 2026-10-24
-//                                    (the loose line has not changed under the plant), and its live recipe in the recipe manager has the
-//                                    same duration and EU/t. The live inputs, outputs and chances are not read back here: compare them in
-//                                    the dump (gg_dump.js, the final recipe set)
+//                                    (the loose line has not changed under the plant; mode 3 since 2026-10-25, IV-B3, which also moved the
+//                                    plant onto server_scripts/grindless/lib/compose.js with the same results), and its live recipe in the
+//                                    recipe manager has the same duration and EU/t. The live inputs, outputs and chances are not read back
+//                                    here: compare them in the dump (gg_dump.js, the final recipe set). Mode 3 runs in gg_test_naquadah_plant.
 //   ev_platinum_plant|crafting       the plant and the electrode recipes, under their final ids
 //   platinum_plant|DESCRIPTION / PLACED / FORMED / PATTERN / PARTS   the registered description placed block by block, formed by itself
 //   platinum_plant|PROCESS_attack_pentlandite   the leach: 9 ore + electrode -> 1 sludge + 18 nickel + oxygen + sulfuric acid
 //   platinum_plant|PROCESS_no_electrode         the same ore without the electrode: nothing runs (the plant's condition)
-//   platinum_plant|PROCESS_rhodium_ruthenium    a separation: the recipe that fills every IO limit of the type (7 items with the circuit,
-//                                               3 fluids in, 10 item outputs, 4 fluids out)
-//   platinum_plant|LOOKUP                       GTM's recipe lookup reaches all five recipes from their inputs
+//   platinum_plant|PROCESS_rhodium_ruthenium    a separation: the widest recipe of the type (7 items with the circuit, 3 fluids in,
+//                                               8 item outputs since the rarest metal mixture left it, 4 fluids out)
+//   platinum_plant|LOOKUP                       GTM's recipe lookup reaches all six recipes from their inputs
 //   ev_platinum_plant|DONE                      last line
 //
 // TEST AREA: this test builds, force-loads and clears ONLY its own band of the overworld, X 5888-5951, Y 98-112, Z 0-15 (tests run at the
@@ -47,9 +49,12 @@
   var TYPE_ID = 'gtceu:pgm_refining'
   var ELECTRODE = 'grindless:platinum_electrode'
   var ORE_PENTLANDITE = 'gtceu:purified_pentlandite_ore'
-  var STAGE_COUNT = 31
+  // the live stages the plans read: 31 of GT--'s platinum line (EV) and 9 of its iridium and osmium chain (mode 3, IV)
+  var STAGE_COUNT = 40
 
-  // what every generated recipe was on 2026-10-24 (scratch run6, GT-- 1.3.10): item [count or whole, chance of 10 000]; fluids in mB
+  // what every generated recipe was on 2026-10-24 (scratch run6, GT-- 1.3.10): item [count or whole, chance of 10 000]; fluids in mB.
+  // 2026-10-25 (IV-B3, iv.md decision 5): platinum and rhodium_ruthenium no longer give the iridium metal residue and the rarest metal
+  // mixture (offworld_only.json strips them from GT--'s loose line, and the plant reads its stages the same way); all else is unchanged
   var REFERENCE = {
     attack_pentlandite: {
       duration: 54, eut: 1903, circuit: 1,
@@ -71,8 +76,7 @@
       fluidsIn: { 'gtceu:nitration_mixture': 54000, 'gtceu:ammonium_chloride': 10800 },
       itemsOut: {
         'gtceu:platinum_dust': [6, 0], 'gtceu:gold_dust': [3, 0], 'gtceu:silicon_dioxide_dust': [3, 0], 'gtceu:platinum_slag_dust': [6, 0],
-        'gtceu:palladium_metal_dust': [0, 9500], 'gtceu:rarest_metal_mixture_dust': [0, 8500], 'gtceu:iridium_metal_residue_dust': [0, 9000],
-        'gtceu:calcium_chloride_dust': [9, 0]
+        'gtceu:palladium_metal_dust': [0, 9500], 'gtceu:calcium_chloride_dust': [9, 0]
       },
       fluidsOut: { 'gtceu:palladium_rich_ammonia': 10800, 'gtceu:nitrogen_dioxide': 27000, 'gtceu:diluted_sulfuric_acid': 27000 }
     },
@@ -91,10 +95,22 @@
       },
       fluidsIn: { 'gtceu:hydrochloric_acid': 28260, 'gtceu:salt_water': 624, 'gtceu:steam': 2181 },
       itemsOut: {
-        'gtceu:rhodium_dust': [1, 3457], 'gtceu:ruthenium_dust': [4, 4856], 'gtceu:rarest_metal_mixture_dust': [3, 7380],
-        'gtceu:zinc_sulfate_dust': [13, 4569], 'gtceu:salt_dust': [4, 1866]
+        'gtceu:rhodium_dust': [1, 3457], 'gtceu:ruthenium_dust': [4, 4856], 'gtceu:zinc_sulfate_dust': [13, 4569], 'gtceu:salt_dust': [4, 1866]
       },
       fluidsOut: { 'gtceu:ammonia': 1346, 'gtceu:chlorine': 25082, 'minecraft:water': 5331, 'gtceu:potassium': 403 }
+    },
+    // IV (IV-B3, 2026-10-25): IV-B2's fusion + GT--'s iridium and osmium chain, 3 Ir : 1 Os
+    iridosmine: {
+      duration: 1034, eut: 1919, circuit: 3,
+      itemsIn: {
+        'gtceu:iridosmine_dust': [10, 10000], 'gtceu:saltpeter_dust': [10, 10000], 'gtceu:calcium_dust': [3, 10000], 'grindless:platinum_electrode': [1, 10]
+      },
+      fluidsIn: { 'gtceu:salt_water': 1000, 'gtceu:hydrochloric_acid': 12500, 'gtceu:hydrogen': 7000 },
+      itemsOut: {
+        'gtceu:iridium_dust': [3, 0], 'gtceu:osmium_dust': [1, 0], 'gtceu:platinum_sludge_residue_dust': [3, 0], 'gtceu:metal_sludge_dust': [3, 0],
+        'gtceu:calcium_chloride_dust': [12, 0]
+      },
+      fluidsOut: { 'minecraft:water': 4700, 'gtceu:steam': 1000 }
     }
   }
 
@@ -261,11 +277,14 @@
 
     var attack = PP.recipes.filter(function (p) { return p.mode === 'attack' })
     var sep = PP.recipes.filter(function (p) { return p.mode === 'separation' })
+    var iri = PP.recipes.filter(function (p) { return p.mode === 'iridosmine' })
     var have = recipeCount(TYPE_ID)
     var absent = PP.recipes.filter(function (p) { return liveRecipe(p.recipeId) === null }).map(function (p) { return p.recipeId })
-    check(SCOPE, 'counts', attack.length === 2 && sep.length === 3 && PP.skipped.length === 0 && PP.stages === STAGE_COUNT && have === 5 && absent.length === 0,
-      'pgm_refining=' + have + ' (' + attack.length + ' attack + ' + sep.length + ' separation) from ' + PP.stages + ' stages of the live line (want ' + STAGE_COUNT +
-      '), skipped=' + PP.skipped.length + (PP.skipped.length > 0 ? ' (' + PP.skipped.map(function (s) { return s.name + ': ' + s.reason }).join('; ') + ')' : '') +
+    check(SCOPE, 'counts', attack.length === 2 && sep.length === 3 && iri.length === 1 && PP.skipped.length === 0 && PP.stages === STAGE_COUNT && have === 6 &&
+      absent.length === 0,
+      'pgm_refining=' + have + ' (' + attack.length + ' attack + ' + sep.length + ' separation + ' + iri.length + ' iridosmine) from ' + PP.stages +
+      ' stages of the live line (want ' + STAGE_COUNT + '), skipped=' + PP.skipped.length +
+      (PP.skipped.length > 0 ? ' (' + PP.skipped.map(function (s) { return s.name + ': ' + s.reason }).join('; ') + ')' : '') +
       ' ids=' + PP.recipes.map(function (p) { return p.recipeId }).join(',') + (absent.length > 0 ? ' not in the recipe manager=' + absent.join(',') : ''))
 
     var problems = []
@@ -286,7 +305,7 @@
         problems.push(name + ' in the recipe manager ' + live.duration + ' t x ' + liveEut + ' EU/t, the script made ' + p.duration + ' x ' + p.eut)
       }
     })
-    check(SCOPE, 'figures', problems.length === 0, 'the script\'s 5 recipes against 2026-10-24 (inputs, outputs, chances, duration, EU/t); the live recipes have the same duration and EU/t' +
+    check(SCOPE, 'figures', problems.length === 0, 'the script\'s 6 recipes against their references (inputs, outputs, chances, duration, EU/t); the live recipes have the same duration and EU/t' +
       (problems.length > 0 ? ' problems(' + problems.length + ')=' + problems.slice(0, 12).join(' ; ') : ''))
 
     var craftProblems = []
