@@ -11,7 +11,7 @@
 	quests: [
 		{
 			description: [
-				"You wake up on Earth with empty pockets. The plan is to end up at Sagittarius A*, the black hole in the middle of the galaxy, and each age in this book gets you a little closer."
+				"Diamond tools and lunch are waiting in the rewards. The destination is Sagittarius A*, the black hole at the galaxy's centre. Each age gets you closer."
 				"Nothing in it locks a recipe. EMI covers the how: R on an item shows how it's made, U what it's used in. Lost the book? Paper and a plank make another."
 			]
 			icon: "ftbquests:book"
@@ -19,6 +19,55 @@
 			rewards: [
 				{ count: 8, id: "21A6FB493B3D6DA8", item: "minecraft:bread", type: "item" }
 				{ count: 16, id: "4FE190B37FB472CA", item: "minecraft:torch", type: "item" }
+				{ count: 56, id: "187B14E841DD7041", item: "minecraft:bread", type: "item" }
+				{
+					id: "2DF9A8557F6B01A4"
+					item: {
+						Count: 1b
+						id: "minecraft:diamond_pickaxe"
+						tag: { Enchantments: [{ id: "minecraft:efficiency", lvl: 5s }] }
+					}
+					type: "item"
+				}
+				{
+					id: "324EBE931F95743D"
+					item: {
+						Count: 1b
+						id: "minecraft:diamond_axe"
+						tag: { Enchantments: [{ id: "minecraft:efficiency", lvl: 5s }] }
+					}
+					type: "item"
+				}
+				{
+					id: "41DB05DB18D28417"
+					item: {
+						Count: 1b
+						id: "minecraft:diamond_shovel"
+						tag: { Enchantments: [{ id: "minecraft:efficiency", lvl: 5s }] }
+					}
+					type: "item"
+				}
+				{
+					id: "52F090EB06D43CF7"
+					item: {
+						Count: 1b
+						id: "minecraft:diamond_hoe"
+						tag: { Enchantments: [{ id: "minecraft:efficiency", lvl: 5s }] }
+					}
+					type: "item"
+				}
+				{
+					id: "6325EC29C56BD824"
+					item: {
+						Count: 1b
+						id: "gtceu:prospector.hv"
+						tag: {
+							display: { Name: '{"translate":"item.grindless.field_prospector"}' }
+							grindless_starter_prospector: 1b
+						}
+					}
+					type: "item"
+				}
 			]
 			shape: "rsquare"
 			size: 1.5d
@@ -61,7 +110,7 @@
 		{
 			dependencies: ["69BDA9FBB0EB66F2"]
 			description: [
-				"You've done this part before. Logs and cobblestone get you stone tools, and stone tools are enough for the first ore. GregTech's own tools are a few quests away."
+				"Your diamond tools handle the first wood, stone and ore. GregTech's crafting tools are a few quests away; the pickaxe won't hammer plates for you."
 			]
 			icon: "minecraft:oak_log"
 			id: "3BB2DAC36CB01A7B"
@@ -101,10 +150,10 @@
 		{
 			dependencies: ["3BB2DAC36CB01A7B"]
 			description: [
-				"No vanilla ores spawn here. Ore comes in big GregTech veins a few chunks apart, each with its own mix of metals."
-				"The little rocks on the ground tell you what's underneath, and right-clicking one marks the vein on your map. A raw ore's EMI page shows its vein, its depth and its neighbours."
+				"No vanilla ores spawn here. GregTech veins mix several metals, and a raw ore's EMI page shows its vein and depth."
+				"Claim Arrival's &6Field Prospector&r. Right-click to mark veins within sixteen chunks, without charging. Open your map and enable Ore Veins. It surveys generated terrain, not unexplored ground. Surface rocks still tell you what's underneath."
 			]
-			icon: "gtceu:prospector.lv"
+			icon: "gtceu:prospector.hv"
 			id: "345C4D73090CB5E2"
 			rewards: [{ id: "2489A56E439E1302", type: "xp", xp: 10 }]
 			shape: "circle"
