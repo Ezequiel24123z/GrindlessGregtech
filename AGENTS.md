@@ -88,7 +88,7 @@ Gregtech Grindless is a GregTech Modern pack (Minecraft 1.20.1, Forge) in which 
   - Before launching an expensive test, you must be able to say which new doubt it resolves.
   - When tagging a version, run the tests for what has changed and the ones for the new tier, not the whole battery.
 - **Test scripts:** they go in `tools/test/overlay/` and are not published with the pack.
-- **Test zones:** tests are launched almost at the same time on the same server, so each one builds and cleans up only its band of the Overworld (Y 98–112). The bands are 64 blocks wide in X and start at Z 0:
+- **Test zones:** each test builds and cleans up only its reserved band of the Overworld (Y 98–112). Keep these bands disjoint even for explicitly approved integration probes. The bands are 64 blocks wide in X and start at Z 0:
 
   | Test | X |
   |---|---|
