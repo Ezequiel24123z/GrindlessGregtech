@@ -720,6 +720,57 @@
 			x: 26.0d
 			y: -1.5d
 		}
+		{
+			dependencies: ["4F0049B2E382BA8E"]
+			description: [
+				"These run GTM's own recipe types a whole batch per cycle from one steam hatch. The forge hammer, compressor and alloy smelter upgrade single-block Steam machines; the other three have no Steam version."
+				"The chemical bath and ore washer need a &6ULV input hatch&r, hand-made, like the coke battery's. The mixer needs no hatch for bronze dust, but that recipe wants a programmed circuit, made from an LV circuit."
+			]
+			icon: "gtceu:steam_mixer"
+			id: "325185F9C76235D6"
+			optional: true
+			rewards: [
+				{ id: "6BCC7552C07375CE", type: "xp", xp: 40 }
+				{ count: 4, id: "78A7B8CCA9A9DF90", item: "gtceu:bronze_plate", type: "item" }
+			]
+			size: 0.75d
+			tasks: [
+				{ id: "7FDE1B5742620E3D", item: "gtceu:steam_mixer", optional_task: true, type: "item" }
+				{ id: "76592CF23910A086", item: "gtceu:steam_compressor", optional_task: true, type: "item" }
+				{ id: "63FADE8890C34B36", item: "gtceu:steam_alloy_smelter", optional_task: true, type: "item" }
+				{ id: "62098CF31D3E9627", item: "gtceu:steam_forge_hammer", optional_task: true, type: "item" }
+				{ id: "2F64EE349B042190", item: "gtceu:steam_chemical_bath", optional_task: true, type: "item" }
+				{ id: "77BE0BB17FB1D30A", item: "gtceu:steam_ore_washer", optional_task: true, type: "item" }
+			]
+			title: "Small Steam Plants"
+			x: 8.0d
+			y: 4.5d
+		}
+		{
+			dependencies: ["33AF6A368B3587E0"]
+			description: [
+				"A steel shell that runs GTM's machine recipes a whole batch per cycle from one steam hatch, keeping every chance byproduct."
+				"The macerator's core is the steam grinder from Steam Multis, and the washer's is the primitive pump. The chemical bath, centrifuge and ore washer need &6ULV fluid hatches&r in the shell; the centrifuge wants them even for recipes that need no fluid. The thermal centrifuge needs no hatch."
+			]
+			icon: "gtceu:large_steam_macerator"
+			id: "52D6BD0494A56791"
+			optional: true
+			rewards: [
+				{ id: "58E1F78F6D22AA8D", type: "xp", xp: 60 }
+				{ count: 2, id: "48DE865F7476DA59", item: "gtceu:steel_plate", type: "item" }
+			]
+			size: 0.75d
+			tasks: [
+				{ id: "62538627EA89C8A4", item: "gtceu:large_steam_macerator", optional_task: true, type: "item" }
+				{ id: "5920D0DDED303CFA", item: "gtceu:large_steam_centrifuge", optional_task: true, type: "item" }
+				{ id: "7E94C78253DD1567", item: "gtceu:large_steam_thermal_centrifuge", optional_task: true, type: "item" }
+				{ id: "63F121276C05604F", item: "gtceu:large_steam_chemical_bath", optional_task: true, type: "item" }
+				{ id: "1BB28F8EF6908B4F", item: "gtceu:large_steam_ore_washer", optional_task: true, type: "item" }
+			]
+			title: "Large Steam Plants"
+			x: 16.0d
+			y: 1.5d
+		}
 	]
 	subtitle: ["Earth without electricity: coke, bronze machines, steel, and ore and wood that arrive on their own."]
 	title: "Steam Age: Escape Velocity"

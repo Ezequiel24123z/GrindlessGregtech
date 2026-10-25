@@ -98,11 +98,19 @@ function recipeById(rm, id) {
   return opt.isPresent() ? opt.get() : null
 }
 
-// GT recipe only: the fluid inputs as { id, amount } (a tag input resolves to its concrete member fluid(s))
+// GT recipe only: the fluid inputs as { id, amount }. The ingredient's own JSON is read first, so a tag input reports the
+// tag itself (forge:steam), which is what "unchanged" has to compare; resolving it to its member fluids is the fallback.
 function fluidInputs(r) {
   var L = lazy()
   var out = []
   asArray(r.getInputContents(L.FluidCap)).forEach(function (c) {
+    var j = null
+    try { j = JSON.parse(String(c.content.toJson())) } catch (e) { j = null }
+    if (j && j.value && j.value.length > 0) {
+      var v = j.value[0]
+      out.push({ id: String(v.tag ? v.tag : v.fluid), amount: Number(j.amount) })
+      return
+    }
     var stacks = L.FluidCap.of(c.content).getStacks()
     for (var k = 0; k < stacks.length; k++) {
       out.push({ id: String(L.Fluids.getKey(stacks[k].getFluid())), amount: Number(stacks[k].getAmount()) })
