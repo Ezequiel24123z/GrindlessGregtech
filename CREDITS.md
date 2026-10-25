@@ -139,6 +139,8 @@ Ideas are not copied as text or as code: they are rebuilt with our rules, and we
 | Sulfonated polystyrene ion-exchange resin | Real strong-acid cation resins (polystyrene-divinylbenzene, sulfonated) | — (real chemistry) | The resin |
 | Platinum-rhodium gauze catalyst (90:10) | Real Ostwald-process and HCN catalyst gauzes; Pt-catalysed SO₃ decomposition of the sulfur-iodine and hybrid sulfur cycles | — (real chemistry) | The catalyst |
 | GCYR's fluorite material, vein and decomposition flag | GCYR 0.2.9 (`gcyr:fluorite`) | LGPL-3.0 | The material (used, not copied) |
+| Parallel hatch in our IV plants (GTM's Parallel Control Hatch as one more part-cell option; its hatch parallel before the plant's overclock) | GregTech Modern 7.5.3, GCYMMachines (Predicates.autoAbilities with checkParallel; GTRecipeModifiers.PARALLEL_HATCH before the overclock) | LGPL-3.0 | The mechanism, called from KubeJS; the helper is ours (`lib/parallel_hatch.js`). |
+| Assembly line fed from AE2 (one export bus per ordered ULV input bus, fluid export buses into 1x hatches, the product out through an ME output bus) | Common GTCEu / GTNH play practice for the ordered assembly line; GTM 7.5.3 AssemblyLineMachine (ordered inputs) | idea; GTM LGPL-3.0 | The setup, in the quests and the smoke test; no code copied. |
 
 ## Quests
 
