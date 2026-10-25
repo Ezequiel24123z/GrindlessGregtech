@@ -39,11 +39,20 @@
     global.ggStarterEquipment.put('clientAborted', String(error))
     global.ggStarterEquipment.put('hold', false)
     var detail = String(error)
-    try { release(mc) } catch (e) { detail += '; key cleanup: ' + e }
-    try { restoreMapBinding() } catch (e) { detail += '; binding cleanup: ' + e }
-    try { if (mc) mc.setScreen(null) } catch (e) { detail += '; screen cleanup: ' + e }
+    cleanup(mc)
     console.info(TAG + 'client_exception|FAIL|' + detail)
     if (global.ggStarterEquipment.putIfAbsent('doneLogged', true) === null) console.info(TAG + 'DONE')
+  }
+
+  function cleanup(mc) {
+    c.stopped = true
+    var errors = []
+    try { release(mc) } catch (e) { errors.push('use key: ' + e) }
+    try { restoreMapBinding() } catch (e) { errors.push('map binding: ' + e) }
+    try { mc.setScreen(null) } catch (e) { errors.push('screen: ' + e) }
+    if (errors.length) global.ggStarterEquipment.put('failed', true)
+    console.info(TAG + 'client_cleanup|' + (errors.length ? 'FAIL|' + errors.join('; ') : 'PASS|use key, original map binding and screen released'))
+    global.ggStarterEquipment.put('clientDone', true)
   }
 
   function markerId(entry) {
@@ -420,12 +429,7 @@
       mc = Client
       release(mc)
       if (val('hold') !== 'true') {
-        if (c.since) {
-          // Leave c.stopped unset until cleanup succeeds so abort can report its failure once.
-          restoreMapBinding()
-          mc.setScreen(null)
-          c.stopped = true
-        }
+        if (c.since || val('serverDone') === 'true') cleanup(mc)
         return
       }
       if (!c.since) c.since = Date.now()

@@ -18,7 +18,7 @@
   if (!global.ggChestFurnace) global.ggChestFurnace = new CHM()
   var S = global.ggChestFurnace
   var TAG = 'GGTEST|chest_furnace|'
-  var HOLD_MAX_MS = 15 * 60 * 1000
+  var HOLD_MAX_MS = 180000
   var c = { holding: false, since: 0, errors: 0, ageField: null, gaveUp: false, levels: false, pressed: '', releaseNext: false, waitAim: 0,
     clickedHow: '', aimOk: false, openTicks: 0, reported: '', closed: '' }
 
@@ -70,6 +70,15 @@
     if (c.holding) {
       c.holding = false
       log('client_hold', 'NOTE', 'released after ' + Math.round((Date.now() - c.since) / 1000) + ' s: mc-runtime-test may finish now')
+    }
+    if (val('serverDone') === 'true' && val('clientDone') !== 'true') {
+      var errors = []
+      try { mc.options.keyUse.setDown(false) } catch (e) { errors.push('use key: ' + e) }
+      try { if (mc.player) mc.player.closeMenu() } catch (e) { errors.push('menu: ' + e) }
+      try { mc.setScreen(null) } catch (e) { errors.push('screen: ' + e) }
+      if (errors.length) S.put('failed', true)
+      log('client_cleanup', errors.length ? 'FAIL' : 'PASS', errors.length ? errors.join('; ') : 'use key, menu and screen released')
+      S.put('clientDone', true)
     }
   }
 
@@ -217,10 +226,7 @@
       log('client_hold', 'NOTE', 'keeping mc-runtime-test in the world until the server half is done')
     }
     if (Date.now() - c.since > HOLD_MAX_MS) {
-      c.gaveUp = true
-      log('client_hold', 'NOTE', 'gave up holding after ' + (HOLD_MAX_MS / 60000) + ' min')
-      release(mc)
-      return
+      throw new Error('180s chest/furnace client hold deadline')
     }
     windBack(p)
     levels(mc)
@@ -233,7 +239,19 @@
     try {
       tick()
     } catch (e) {
-      if (c.errors++ < 8) log('client_script', 'NOTE', 'exception: ' + e)
+      if (c.errors++ === 0) {
+        S.put('failed', true)
+        S.put('cancel', 'client exception: ' + e)
+        c.gaveUp = true
+        log('client_script', 'FAIL', 'exception: ' + e)
+        try { mcRelease() } catch (cleanupError) { log('client_cleanup', 'FAIL', String(cleanupError)) }
+      }
     }
   })
+
+  function mcRelease() {
+    Client.options.keyUse.setDown(false)
+    c.releaseNext = false
+    Client.setScreen(null)
+  }
 })()
