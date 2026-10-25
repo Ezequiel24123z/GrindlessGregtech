@@ -23,6 +23,7 @@ Generators for the pack's own textures. Everything is procedural 16x16 pixel art
 | `Build-EVTextures.ps1` | Writes the EV era textures (platinum plant, vein drill, platinum electrode and tungstensteel drill bit) to `pack/kubejs/assets/grindless/textures/`. |
 | `Build-EVPreview.ps1` | Review sheet at x8 of the EV era: each overlay on its casing and on four casings, all frames, dark cave view, 3x3 wall, the platinum electrode next to the graphite one and the drill bit progression. It is only a preview: it is not published. |
 | `Build-SteamSmallFamilyTextures.ps1` | Writes the faces of the small steam family (forge hammer, compressor, alloy smelter, mixer, chemical bath, ore washer) to `pack/kubejs/assets/grindless/textures/`. `Build-SteamSmallFamilyPreview.ps1` draws their review sheet (not published). |
+| `Build-SteamLargeFamilyTextures.ps1` | Writes the faces of the Large Steam family (macerator, centrifuge, thermal centrifuge, chemical bath, ore washer: `multiblock/large_steam_<machine>/`) to `pack/kubejs/assets/grindless/textures/`. `-Only macerator,centrifuge,thermal,bath,washer` and `-Credits` (their 25 CREDITS rows). |
 | `Build-ObservatoryTextures.ps1` | Writes the observatory family's faces and the charts (steam, LV and MV observatories) to `pack/kubejs/assets/grindless/textures/`. `Build-ObservatoryPreview.ps1` draws their review sheet (not published). |
 | `Build-EVFoundationTextures.ps1` | Writes the shared EV textures (sintered regolith bricks, molten salt charge, ruthenium catalyst, Mars chart). `-Only regolith,charge,catalyst,chart`, `-Preview <png>`, `-Credits`. The brick is the lunar casing texture. |
 | `Build-GeneratorArrayTextures.ps1` | Writes the LV generator array's face. `-Credits` prints its CREDITS rows. |
@@ -96,6 +97,33 @@ The overlays follow GTM's casing convention: transparent background, details onl
 |---|---|---|
 | `block/multiblock/steam_blast_furnace/` (`overlay_front`, `_active` and `_active_emissive`, with `.mcmeta`) | `gtceu:block/casings/solid/machine_primitive_bricks` (the controller sits on the firebrick casing) | Wind gauge and valve wheel above the bronze annular pipe, two bronze tuyeres on the sides and a riveted iron tap door with a sight glass onto the melt and a tap hole with a runner. 8 frames, `frametime` 3: the melt boils, a spark rises, the tap stream pulses along the runner, the needle shakes with the wind and the lamp turns green. Idle: dark crust with two embers and the red lamp. The emissive layer has the melt, the spark, the tap stream and the lamp. |
 | `block/multiblock/coking_battery/` (the same three) | `gtceu:block/casings/solid/machine_coke_bricks` (the controller is the door of one chamber) | Cast iron chamber door between two riveted uprights, with two closing bars with brass latches and the leveling port at the top. 8 frames, `frametime` 4: the door joints glow (the coke inside is white-hot), a lighter wave runs around the door, the port flickers and the lamp turns green. Idle: dark joints with two embers and the red lamp. The emissive layer has the joints, the port and the lamp. |
+
+## Steam: the Large Steam family
+
+`Build-SteamLargeFamilyTextures.ps1` draws the controller faces of the five Large Steam machines (`startup_scripts/grindless/steam/large_family.js`). Same method and conventions as the small steam family (`Build-SteamSmallFamilyTextures.ps1`; the helpers are copied), but steel-and-brass: the family's shell is steel, so the faces are drawn for GTM's solid steel casing (`gtceu:block/casings/solid/machine_casing_solid_steel`). The idea of the family comes from GregTech Leisure; no code, texture or text of it is used.
+
+```powershell
+powershell -NoProfile -ExecutionPolicy Bypass -File tools\assets\Build-SteamLargeFamilyTextures.ps1
+powershell -NoProfile -ExecutionPolicy Bypass -File tools\assets\Build-SteamLargeFamilyTextures.ps1 -Only macerator,centrifuge -Credits
+```
+
+- `-Only` accepts `macerator`, `centrifuge`, `thermal`, `bath` and `washer` (comma-separated, also with `-File`).
+- One shared frame: a steel bezel with four brass rivets, a brass trim (lit top and left) around a dark recessed window, and a steel base plate with the steam pressure bar (empty when idle, filling one pixel a frame with a lit head while it works) and the status lamp (dull red idle, green while it works). Each machine has its own icon in the window, in bright steel, brass and its own colour, so it reads on the grey casing.
+- All faces: 8 frames, `frametime` 3. The emissive layers hold the pressure bar's head and the lamp, plus the macerator's sparks, the thermal centrifuge's coils and the chemical bath's bubbles.
+- The checks fail the run: size, binary alpha, no pure black, an empty casing ring, 8-frame strips that really animate, an idle face that is not the first working frame, and emissive layers inside the colour layer and lit in every frame. The output is identical byte for byte on every run.
+
+| File (under `textures/`) | Notes |
+|---|---|
+| `block/multiblock/large_steam_macerator/` (`overlay_front`, `_active` and `_active_emissive`, with `.mcmeta`) | Two steel crusher jaws with big teeth, lumps of ore caught between them. Working: the jaws grind past each other, the ore breaks into grit and sparks fly where two teeth meet. |
+| `block/multiblock/large_steam_centrifuge/` (the same three) | A rotor in its round steel bowl: a brass hub, four steel arms and four sample buckets (orange, blue, green, white). Working: it turns an eighth of a turn per frame and a glint runs round the rim. |
+| `block/multiblock/large_steam_thermal_centrifuge/` (the same three) | The same rotor in a bowl whose rim is a ring of copper heating coils. Idle: cold copper. Working: the coils glow orange with a white-hot spot running round, and the rotor turns. |
+| `block/multiblock/large_steam_chemical_bath/` (the same three) | A steel vat of green chemical with a brass rim and a basket of ore on a hook. Idle: the basket hangs above the still liquid. Working: the basket is down in the bath, bubbles rise round it and the surface shimmers. |
+| `block/multiblock/large_steam_ore_washer/` (the same three) | A ribbed steel drum lying in a trough of water under a spray pipe. Idle: still drum, calm water. Working: the ribs move, drops fall from the nozzles and the water splashes against the drum. |
+
+### How to retouch (Large Steam)
+
+- `$FamPal`: steel `A`-`J`, brass `Y y u U W O`, the lamp (`q Q r` green, `L l` red), the pressure bar (`s`, head `S`) and each icon's accents. `New-Pal` fails on a repeated letter.
+- `$FrameBase` is the shared frame; each icon is a `Paint-<Machine>` function in window-local pixels (10 × 8, from x3, y3). `Paint-Plate` draws the base plate.
 
 ## LV era
 
@@ -594,3 +622,22 @@ powershell -NoProfile -ExecutionPolicy Bypass -File tools\assets\Build-NaquadahP
 | `block/multiblock/naquadah_plant/overlay_front.png` | Idle: the dark chamber behind the lead glass, with a glint at its top left. The grey capsule with its yellow band sits in its cradle beside the vessel, where still, unlit superacid stands over the dark heap. Below: the radiation sign, the drawer handle and the dark lamp. |
 | `.../overlay_front_active.png` + `.mcmeta` | 8 frames, `frametime` 4: the source's Cherenkov glow swells and ebbs once a loop and shimmers. It lights the chamber blue around it and the vessel's near wall. The bath's surface is lit and shimmers. Two bubbles rise in the far column and a small one off the heap's peak, each flashing as it bursts. Two flecks of naquadah sink in the near column and settle on the heap, which glints as each one lands. The mode 1 lamp is lit green. |
 | `.../overlay_front_active_emissive.png` + `.mcmeta` | Only the source's glow (the capsule and its halo), the bath's surface and the lit lamp. |
+
+## Contrast pass after the gallery test (2026-10-25)
+
+The client gallery test (`gg_test_gallery`) showed fifteen faces that were hard to read in game, where faces show at about 0.8 of their texture's brightness. Each script below was retouched, keeping its design; the tables above may still describe the earlier look where a note says so.
+
+- `Build-LunarPowerAntennaTextures.ps1`: contrast pass after the gallery client test (2026-10-25). The PV cells (`$CellSpec`) are two steps lighter and the panel (`$SolarScene`) has four rows of cells; at night the landscape is dimmed to 85 % (`$dim`), and the antenna's dish is no longer dimmed while it is off, so both faces read on the black lunar sky.
+- `Build-CombinedCycleHotMillTextures.ps1`: contrast pass (2026-10-25). The combined-cycle plant's turbine (`$CcTurbine`) and boiler (`$CcBoiler`, three rows of tubes) are a row taller, the stack and the steam puffs (`$CcPuff`) moved up with them, and the idle face keeps the water in the tubes. The hot strip mill is unchanged.
+- `Build-IVMercuryTextures.ps1`, in the Mercury table (replacements):
+  - `mercury_solar_works`: "... Idle: the cold furnace through the port (a dim chamber, the crucible and its dull charge), no rays. ..." (`$WkIdleSpec` sets how readable the idle port is).
+  - `mercury_solar_field`: "The icon is indigo GaAs in 3 px strips parted by a silver busbar in a tungstensteel frame, both lifted two steps from `block/iv/thin_film_cells.png` and `thin_film_frame.png` so the icon reads on the pale brick. ..."
+  - `interferometer`: "... Idle: the screen at rest, a dim graticule and a flat trace. ..."
+- `Build-UraniumCycleTextures.ps1`, in the uranium cycle table (replacements):
+  - `isr_wellfield/overlay_front.png`: "Idle: the five-spot mimic with unlit wells (a muted blue, the producer olive), grey flow lines, the header line, two columns of empty amber resin and the return main."
+  - `fuel_fabrication_plant/overlay_front.png`: "Idle: four unlit blue lamps (press, sinter, pilger, glovebox), a cold furnace window (heater coils along its top, boats of pellets on the hearth), pellets on the tray, an empty tube and unlit progress cells."
+- `Build-LVRoasterHeliostatTextures.ps1`, heliostat row: "... Idle: a navy night sky with six stars, the mirrors catching it, and a cold bare-steel receiver. ..."
+- `Build-GeneratorArrayTextures.ps1`: contrast pass (2026-10-25): the bolt at rest (`k l m`) is a dull gold instead of olive.
+- `Build-LeisureUtilityTextures.ps1`: contrast pass (2026-10-25): the lava furnace's idle crust (`q r s t`) is a lighter dark red with dull embers; the weather controller's idle cloud (`$WxCloudIdle`) is a light grey on a dark slate screen (`n`).
+- `Build-LaunchRoadTextures.ps1`, engine test stand row: "The stand as the multiblock builds it, against the test site's dusk sky: ..." (`$StandSky`; the right leg is a step lighter).
+- `Build-SteamSmallFamilyTextures.ps1`: contrast pass (2026-10-25): the window is open onto the bronze bricks, so the forge hammer's ram and anvil and the alloy smelter's crucible are light iron outlined in dark iron; the ram has a head and the crucible is larger (rows 2–7 of the window). The other four faces are unchanged.
