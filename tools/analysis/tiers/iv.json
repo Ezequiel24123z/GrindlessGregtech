@@ -1112,8 +1112,13 @@
       "exclude": [
         "gtceu:iv_emitter", "gtceu:iv_sensor", "gtceu:iv_voltage_coil", "gtceu:iv_energy_input_hatch*", "gtceu:iv_energy_output_hatch*", "gtceu:iv_substation_*",
         "gtceu:iv_*_laser_*_hatch", "gtceu:iv_circuit_assembler", "gtceu:iv_electrolyzer", "gtceu:iv_large_miner", "gtceu:iv_laser_engraver", "gtceu:iv_parallel_hatch",
-        "gtceu:iv_scanner", "gtceu:iv_world_accelerator"
+        "gtceu:iv_scanner", "gtceu:iv_world_accelerator", "gtceu:iv_wireless_*"
       ]
+    },
+    {
+      "id": "iv-wireless-home",
+      "label": "The IV capacitor cell of the wireless network (lv/wireless_energy.js): IV batteries, tungsten steel and IV circuits, an IV assembler; nothing of Venus or Mercury",
+      "items": ["grindless:iv_capacitor_cell"]
     },
     {
       "id": "iv-multiblocks",
@@ -1186,6 +1191,12 @@
         "m:gtceu:hot_cell@parallel", "m:gtceu:fuel_fabrication_plant@parallel", "m:gtceu:heavy_water_plant@parallel", "m:gtceu:platinum_plant@parallel", "m:gtceu:naquadah_plant@parallel",
         "m:gtceu:large_maceration_tower@iv2", "m:gtceu:large_chemical_bath@iv2", "m:gtceu:large_centrifuge@iv2", "m:gtceu:large_packer@iv2", "m:gtceu:large_assembler@iv", "m:gtceu:large_arc_smelter@iv2", "m:gtceu:large_sifting_funnel@iv2", "m:gtceu:large_autoclave@iv2", "m:gtceu:large_material_press@iv2", "m:gtceu:large_brewer@iv2", "m:gtceu:large_cutter@iv2", "m:gtceu:large_extractor@iv2", "m:gtceu:large_extruder@iv2", "m:gtceu:large_solidifier@iv2", "m:gtceu:large_wiremill@iv2", "m:gtceu:large_engraving_laser@iv2", "m:gtceu:large_circuit_assembler@iv", "m:gtceu:large_electrolyzer@iv2", "m:gtceu:large_electromagnet@iv2", "m:gtceu:large_distillery@iv2"
       ]
+    },
+    {
+      "id": "iv-mercury-wireless",
+      "era": "iv-mercury",
+      "label": "The IV wireless energy parts (lv/wireless_energy.js): the eight IV wireless energy and dynamo hatches and the two IV wireless covers take GTM's IV sensor or emitter (iridium), so they wait for Mercury like GTM's IV energy and dynamo hatches; out of iv-gtm's gtceu:iv_* by their exclude",
+      "items": ["gtceu:iv_wireless_*", "grindless:iv_wireless_*_cover"]
     },
     {
       "id": "output-iv",
