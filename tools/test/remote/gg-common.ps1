@@ -36,6 +36,7 @@ if (-not $global:GG) {
         Slot         = -1
         Slots        = 1
         NativeBudget = $null
+        NativeMutex  = $null
         ReserveGb    = 0.0
         JvmStarted   = ''
         LockStarted  = ''
@@ -680,6 +681,28 @@ function Invoke-GGTool {
 #   - old nonzero slot files are recognized and block new work until their owners finish;
 #   - every run, including the first, needs at least 8 GB available RAM.
 
+function Try-GGNativeMutex {
+    if ($global:GG.NativeMutex) { return $true }
+    $mutex = New-Object Threading.Mutex($false, 'Global\GGHarness-minecraft')
+    $held = $false
+    try {
+        try { $held = $mutex.WaitOne(0) } catch [Threading.AbandonedMutexException] { $held = $true }
+        if ($held) { $global:GG.NativeMutex = $mutex }
+        return $held
+    } finally {
+        if (-not $held) { $mutex.Dispose() }
+    }
+}
+
+function Exit-GGNativeMutex {
+    $mutex = $global:GG.NativeMutex
+    if (-not $mutex) { return }
+    try { $mutex.ReleaseMutex() } finally {
+        $mutex.Dispose()
+        $global:GG.NativeMutex = $null
+    }
+}
+
 function Get-GGSlotPath {
     param([int]$Index)
     if ($Index -le 0) { return (Join-Path $global:GG.Runs '.lock') }
@@ -882,13 +905,12 @@ function Enter-GGLock {
     $ticket = [IO.Path]::Combine($global:GG.RunDir, '.waiting')
     $deadline = (Get-Date).AddMinutes($MaxWaitMin)
     $lastMsg = [datetime]::MinValue
-    $global:GG.LockStarted = [datetime]::UtcNow.ToString('o')
     try {
         while ($true) {
             try { [IO.File]::WriteAllText($ticket, [datetime]::UtcNow.ToString('o')) } catch {}
             $earlier = @(Get-GGEarlierWaiters)
             $why = ''
-            if ($earlier.Count -eq 0) {
+            if ($earlier.Count -eq 0 -and (Try-GGNativeMutex)) {
                 $dec = Get-GGSlotDecision @(Get-GGActiveSlots) $Slots $MinFreeGb
                 if ($dec.Index -ge 0) {
                     $path = Get-GGSlotPath $dec.Index
@@ -896,6 +918,7 @@ function Enter-GGLock {
                     $fs = $null
                     $created = $false
                     try {
+                        $global:GG.LockStarted = [datetime]::UtcNow.ToString('o')
                         $fs = New-Object IO.FileStream($path, [IO.FileMode]::CreateNew, [IO.FileAccess]::Write, ([IO.FileShare]::ReadWrite -bor [IO.FileShare]::Delete))
                         $bytes = (New-Object Text.UTF8Encoding($false)).GetBytes((New-GGLockBody))
                         $fs.Write($bytes, 0, $bytes.Length)
@@ -922,13 +945,17 @@ function Enter-GGLock {
                         $global:GG.Slot = -1
                         $global:GG.LockPath = Get-GGSlotPath 0
                         $why = 'slot limit exceeded by a concurrent start, retrying'
+                        Exit-GGNativeMutex
                         Start-Sleep -Seconds (Get-Random -Minimum 2 -Maximum 6)
                         continue
                     }
                 } else {
                     $why = [string]$dec.Reason
                 }
+            } elseif ($earlier.Count -eq 0) {
+                $why = 'another runner holds the global Minecraft mutex'
             }
+            if (-not $global:GG.HasLock) { Exit-GGNativeMutex }
             if ((Get-Date) -gt $deadline) {
                 $detail = $why
                 if ($earlier.Count -gt 0) { $detail = 'queued behind ' + ($earlier -join ', ') }
@@ -946,6 +973,7 @@ function Enter-GGLock {
             Start-Sleep -Milliseconds ([int]($global:GG.PollSec * 1000))
         }
     } finally {
+        if (-not $global:GG.HasLock) { Exit-GGNativeMutex }
         Remove-Item -LiteralPath $ticket -Force -ErrorAction SilentlyContinue
     }
 }
@@ -972,12 +1000,17 @@ function Set-GGSlotState {
 }
 
 function Exit-GGLock {
-    if (-not $global:GG.HasLock) { return }
     try {
-        $info = Get-GGLockInfo $global:GG.LockPath
-        if ($info -and ([int]$info.pid -eq $PID)) { Remove-Item -LiteralPath $global:GG.LockPath -Force -ErrorAction SilentlyContinue }
-    } catch {}
-    $global:GG.HasLock = $false
+        if ($global:GG.HasLock) {
+            $info = Get-GGLockInfo $global:GG.LockPath
+            if ($info -and ([int]$info.pid -eq $PID) -and ([string]$info.runId -eq [string]$global:GG.RunId)) {
+                Remove-Item -LiteralPath $global:GG.LockPath -Force
+            }
+        }
+    } finally {
+        $global:GG.HasLock = $false
+        Exit-GGNativeMutex
+    }
 }
 
 # ---------------------------------------------------------------- misc
