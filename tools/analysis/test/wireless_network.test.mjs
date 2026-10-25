@@ -8,6 +8,10 @@
 //     FeCompat#insertEu, and ChargerMachine / BatteryBufferMachine's EnergyBatteryTrait (item-backed getEnergyStored, the inherited
 //     changeEnergy writing a separate internal buffer). The charger case of the review is reproduced (the old path returns -55,904) and
 //     the adapter charges the real item, exactly.
+//   - lv/wireless_energy.js's settlement with both, in a stand-in world (the startup object, the libraries and the server script in one
+//     sandbox): the numbers gg_test_wireless_adapters.js asserts in the game, the store's books when a machine's move fails a check, and
+//     the list, the store and the endpoints across a cold restart (a second sandbox reading persistent data written in NbtIo's format),
+//     as gg_test_wireless_restart.js does in the game.
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
@@ -66,6 +70,8 @@ class CompoundTag {
   getLong(k) { const t = this.map.get(k); return t && (t.id === 1 || t.id === 3) ? t.v : t && t.id === 4 ? Number(t.v) : 0; }
   getBoolean(k) { const t = this.map.get(k); return !!(t && t.id === 1 && t.v !== 0); }
   getList(k, type) { const t = this.map.get(k); return t && t.id === 9 && (t.type === type || t.size() === 0) ? t : new ListTag(); }
+  getCompound(k) { const t = this.map.get(k); return t && t.id === 10 ? t : new CompoundTag(); }
+  remove(k) { this.map.delete(k); }
   copy() { const c = new CompoundTag(); this.map.forEach((t, k) => c.map.set(k, t.copy())); return c; }
 }
 
@@ -490,4 +496,491 @@ test('wireless adapters: plain containers move exactly through changeEnergy, and
   const mixed = ad.classify(machine(CHARGER, { slots: [{ e: good }, { e: bad }] }));
   assert.throws(() => ad.fill(mixed, 1500, TICKS), (e) => /broken item/.test(e.message) && e.measured === 1000);
   assert.equal(good.getCharge(), 1000);
+});
+
+// ---------------------------------------------------------------- the settlement itself (lv/wireless_energy.js), in a stand-in world
+// One "JVM": the startup script's object (its registrations are stubs; only its data runs), the two libraries and the server script,
+// in one sandbox with the game's classes replaced by the stand-ins above. A second jvm() on the same world and a persistent-data
+// compound written and read in NbtIo's format is a cold restart: a new global, new totals, flows and faults, the list read from disk.
+
+const PACK = path.join(ROOT, 'pack');
+const STARTUP_SCRIPT = path.join(PACK, 'kubejs', 'startup_scripts', 'grindless', 'lv', 'wireless_energy.js');
+const SERVER_SCRIPT = path.join(PACK, 'kubejs', 'server_scripts', 'grindless', 'lv', 'wireless_energy.js');
+const VA = [7, 30, 120, 480, 1920, 7680, 30720, 122880];
+const SIDE = Object.fromEntries(['down', 'up', 'north', 'south', 'west', 'east'].map((n) => [n, { name: n, getName: () => n }]));
+const text = (key, ...args) => {
+  const t = { key, args, getString: () => key, getContents: () => ({ getKey: () => key, getArgs: () => args }) };
+  t.gold = t.aqua = t.red = () => t;
+  return t;
+};
+class Pos {
+  constructor(x, y, z) { this.x = x; this.y = y; this.z = z; }
+  getX() { return this.x; }
+  getY() { return this.y; }
+  getZ() { return this.z; }
+}
+const at = (p) => p.getX() + ',' + p.getY() + ',' + p.getZ();
+const iterator = (list) => { let i = 0; return { hasNext: () => i < list.length, next: () => list[i++] }; };
+
+const PATTERNS_SCRIPT = path.join(PACK, 'kubejs', 'startup_scripts', 'grindless', 'lib', 'patterns.js');
+
+// opts: overlays (test scripts loaded last), clock ({ now }: Date.now in the sandbox), disk (path -> NbtIo bytes, for NBTIO.read)
+function jvm(opts = {}) {
+  const ticks = [];
+  const errors = [];
+  const lines = [];
+  const commands = {};
+  const classes = {
+    'net.minecraft.nbt.CompoundTag': CompoundTag, 'net.minecraft.nbt.ListTag': ListTag, 'net.minecraft.nbt.StringTag': StringTag,
+    'net.minecraft.core.BlockPos': Pos,
+    'net.minecraft.core.Direction': { byName: (n) => SIDE[n] || null, values: () => Object.values(SIDE), UP: SIDE.up },
+    'net.minecraft.resources.ResourceLocation': class { constructor(id) { this.id = id; } },
+    'net.minecraft.world.phys.AABB': class { constructor(...a) { this.a = a; } },
+    'net.minecraft.world.entity.item.ItemEntity': {},
+    'net.minecraft.world.level.storage.LevelResource': class { constructor(name) { this.name = name; } },
+    'net.minecraftforge.common.util.FakePlayerFactory': { getMinecraft: () => ({ fake: true }) },
+    'com.gregtechceu.gtceu.api.machine.MetaMachine': { getMachine: (level, pos) => level.machines.get(at(pos)) || null },
+    'com.gregtechceu.gtceu.api.registry.GTRegistries': { COVERS: { get: () => null } },
+    'com.gregtechceu.gtceu.api.capability.ICoverable': {},
+    'com.gregtechceu.gtceu.utils.GTUtil': { getTierByVoltage: (v) => { let t = 0; while (t < V.length - 1 && V[t] < v) t++; return t; } },
+    'com.gregtechceu.gtceu.utils.FormattingUtil': { formatNumbers: (n) => String(n) },
+    'java.util.UUID': {},
+    'com.gregtechceu.gtceu.api.capability.GTCapabilityHelper': { getElectricItem: (s) => s.e || null, getForgeEnergyItem: (s) => s.fe || null },
+    'com.gregtechceu.gtceu.api.capability.compat.FeCompat': { insertEu },
+    'com.gregtechceu.gtceu.config.ConfigHolder': { INSTANCE: { compat: { energy: { nativeEUToFE: true } } } },
+    'com.gregtechceu.gtceu.common.machine.electric.ChargerMachine': { AMPS_PER_ITEM: 4 },
+    'com.gregtechceu.gtceu.common.machine.electric.BatteryBufferMachine': { AMPS_PER_BATTERY: 2 },
+  };
+  const sandbox = {
+    console: { info: (m) => lines.push(String(m)), log() {}, warn() {}, error: (m) => errors.push(String(m)) },
+    JSON, Math, Number, String, Error, Array, Object, BigInt,
+    Date: opts.clock ? { now: () => opts.clock.now } : Date,
+    Java: { loadClass: (name) => { if (!(name in classes)) throw new Error('no stand-in for ' + name); return classes[name]; } },
+    GTValues: { V, VA },
+    Text: { translate: text, of: (s) => text(s) },
+    Item: { of: simItem },
+    NBTIO: { read: (p) => (opts.disk && opts.disk.has(p) ? readNbt(opts.disk.get(p)) : null) },
+    StartupEvents: { registry() {} },
+    ForgeModEvents: { onGenericEvent() {} },
+    GTCEuStartupEvents: { registry() {} },
+    ServerEvents: { tick: (fn) => ticks.push(fn), recipes() {}, customCommand: (name, fn) => { commands[name] = fn; } },
+    BlockEvents: { rightClicked() {}, placed() {}, broken() {} },
+  };
+  sandbox.global = sandbox;
+  sandbox.grindless = { readJsonTable: (p) => JSON.parse(fs.readFileSync(path.join(PACK, p), 'utf8')) };
+  vm.createContext(sandbox);
+  const runFile = (f) => vm.runInContext(fs.readFileSync(f, 'utf8'), sandbox, { filename: path.basename(f) });
+  runFile(PATTERNS_SCRIPT);
+  runFile(STARTUP_SCRIPT);
+  const W = sandbox.grindless.wireless;
+  // what GTM's machine registration does through Pat.build: the tower's structure described for the tests
+  sandbox.grindless.patterns.register(W.towerId, W.towerSpec);
+  Object.values(W.covers).forEach((c) => { W.coverDefinitions[c.def] = { id: c.def }; });
+  for (const f of [path.join(LIB, 'wireless_registry.js'), path.join(LIB, 'wireless_adapters.js'), SERVER_SCRIPT].concat(opts.overlays || [])) runFile(f);
+  // the game's tick: the server script's handler settles every settleTicks ticks unless paused
+  const run = (server, n) => { for (let i = 0; i < n; i++) { server.tick++; ticks.forEach((fn) => fn({ server })); } };
+  return { W, run, errors, lines, commands, ticks, sandbox };
+}
+
+// an item stack: GTM's LV batteries carry an electric item (empty), anything else none
+const BATTERY_MAX = { 'gtceu:lv_lithium_battery': 120000, 'gtceu:lv_sodium_battery': 80000 };
+function simItem(id, count = 1) {
+  return { id, count, isEmpty: () => false, e: BATTERY_MAX[id] ? electric({ max: BATTERY_MAX[id], tier: 1 }) : undefined };
+}
+
+class Level {
+  constructor(dim, loaded = true) { this.dimension = dim; this.loaded = loaded; this.blocks = new Map(); this.machines = new Map(); }
+  isLoaded() { return this.loaded; }
+  getBlock(pos) { return { id: this.blocks.get(at(pos)) || 'minecraft:air' }; }
+  put(x, y, z, id, m) { this.blocks.set(x + ',' + y + ',' + z, id); if (m) this.machines.set(x + ',' + y + ',' + z, m); return m; }
+}
+
+// a machine that takes covers (GTM's ICoverable: one cover per side) and, for the item machines, its voltages
+function coverable(m, input, output) {
+  const covers = new Map();
+  m.covers = covers;
+  m.getCoverContainer = () => ({
+    getCoverAtSide: (s) => covers.get(s) || null,
+    placeCoverOnSide: (s, stack, def) => { covers.set(s, { coverDefinition: { getId: () => def.id } }); return true; },
+  });
+  if (m.energyContainer) {
+    m.energyContainer.getInputVoltage = () => input;
+    m.energyContainer.getOutputVoltage = () => output;
+  }
+  return m;
+}
+const item = (id) => ({ id });
+
+// the world of the native tests: a tower with 4 LV cells in the Overworld and the levels; the server around them
+function world() {
+  const levels = { 'minecraft:overworld': new Level('minecraft:overworld'), 'gcyr:luna': new Level('gcyr:luna'), 'minecraft:the_end': new Level('minecraft:the_end', false) };
+  const earth = levels['minecraft:overworld'];
+  const cells = [];
+  for (let i = 0; i < 4; i++) { earth.put(13316, 101 + i, 21, 'grindless:lv_capacitor_cell'); cells.push(new Pos(13316, 101 + i, 21)); }
+  const tower = { isFormed: () => true, getMultiblockState: () => ({ cache: cells, getCache: () => ({ iterator: () => iterator(cells) }) }), getLevel: () => earth };
+  earth.put(13316, 100, 20, 'gtceu:wireless_energy_tower', tower);
+  return { levels, earth, moon: levels['gcyr:luna'], end: levels['minecraft:the_end'] };
+}
+function serverOf(w, pd = new CompoundTag()) {
+  const server = { persistentData: pd, tick: 0, getTickCount() { return this.tick; }, getLevel: (d) => w.levels[d] || null };
+  Object.values(w.levels).forEach((l) => { l.server = server; });
+  return server;
+}
+const charger = (charge, opts = {}) => coverable(machine(CHARGER, { slots: [{ e: electric({ max: 120000, charge }) }, null, null, null], ...opts }), 32, 0);
+const buffer = (charge) => coverable(machine(BUFFER, { slots: [0, 1, 2, 3].map(() => ({ e: electric({ max: 80000, charge }) })) }), 32, 32);
+const sum = (m) => m.stacks.filter((s) => !s.isEmpty()).reduce((a, s) => a + s.e.getCharge(), 0);
+
+test('wireless settlement: chargers and battery buffers through their items - the real charge, the store and the rate, settlement by settlement', () => {
+  const { W, errors } = jvm();
+  const w = world();
+  const server = serverOf(w);
+  assert.ok(W.track(w.earth, new Pos(13316, 100, 20)), 'the tower is tracked');
+  const row = {
+    empty: charger(0), partial: charger(60000), near: charger(119900), off: charger(0, { enabled: false }), fill: buffer(0), drain: buffer(80000),
+  };
+  const x = { empty: 13346, partial: 13349, near: 13352, off: 13355, drain: 13358, fill: 13361 };
+  Object.keys(row).forEach((k) => w.earth.put(x[k], 100, 4, k === 'fill' || k === 'drain' ? 'gtceu:lv_battery_buffer_4x' : 'gtceu:lv_charger_4x', row[k]));
+  const converter = w.earth.put(13364, 100, 4, 'gtceu:lv_1a_energy_converter', coverable({ energyContainer: new Container('com.gregtechceu.gtceu.common.machine.trait.ConverterTrait', 4096) }, 32, 32));
+  for (const k of ['empty', 'partial', 'near', 'off', 'fill']) assert.equal(W.placeCover(w.earth, new Pos(x[k], 100, 4), SIDE.up, item('grindless:lv_wireless_energy_cover'), null).ok, true, k);
+  assert.equal(W.placeCover(w.earth, new Pos(x.drain, 100, 4), SIDE.up, item('grindless:lv_wireless_dynamo_cover'), null).ok, true);
+  const refused = W.placeCover(w.earth, new Pos(13364, 100, 4), SIDE.up, item('grindless:lv_wireless_energy_cover'), null);
+  assert.equal(refused.ok, false);
+  assert.equal(refused.message.key, 'message.grindless.wireless.cover_unsupported');
+  assert.equal(refused.message.args[0], 'ConverterTrait');
+  assert.equal(converter.covers.size, 0, 'nothing goes on the converter');
+  W.paused = true;
+  W.setStored(server, 100000);
+  const L = W.rate(1, W.coverAmps) * W.settleTicks;
+  assert.equal(L, 640);
+  const rows = [];
+  let before = { bank: W.stored(server), items: Object.fromEntries(Object.keys(row).map((k) => [k, sum(row[k])])) };
+  for (let s = 0; s < 3; s++) {
+    const st = W.settle(server);
+    const after = { bank: W.stored(server), items: Object.fromEntries(Object.keys(row).map((k) => [k, sum(row[k])])) };
+    rows.push({ st, bank: after.bank - before.bank, d: Object.fromEntries(Object.keys(row).map((k) => [k, after.items[k] - before.items[k]])) });
+    before = after;
+  }
+  const near = [100, 0, 0];
+  rows.forEach((r, i) => {
+    assert.deepEqual(plain(r.d), { empty: L, partial: L, near: near[i], off: 0, fill: L, drain: -L }, 'settlement ' + (i + 1));
+    assert.equal(r.st.up, true);
+    assert.equal(r.st.tier, 1);
+    assert.equal(r.st.capacity, 4 * 720000);
+    assert.equal(r.st.drained, L);
+    assert.equal(r.st.in, L * 19 / 20);
+    assert.equal(r.st.lost, L / 20);
+    const took = r.d.empty + r.d.partial + r.d.near + r.d.off + r.d.fill;
+    assert.equal(r.st.out, took, 'the settlement books exactly what the items took');
+    assert.equal(r.bank, r.st.in - took, 'the store moves by what went in minus what the items took');
+    assert.equal(r.st.faulted, 0);
+  });
+  assert.equal(sum(row.partial), 61920, 'the review\'s charger: 60,000 + 3 x 640 in the real item');
+  assert.equal(row.partial.energyContainer.energyStored, 0, 'its internal buffer never touched');
+  assert.equal(sum(row.near), 120000);
+  assert.equal(W.stored(server), 100000 + 3 * 608 - (3 * 4 * 640 - 2 * 640 + 100 - 640), 'the native test\'s BANK numbers');
+  assert.deepEqual(plain(Object.keys(W.faults)), []);
+  assert.deepEqual(errors, []);
+});
+
+test('wireless settlement: a machine whose move fails a check costs the store what it really took and gives it 19/20 of what really came out - never more', () => {
+  const { W, errors } = jvm();
+  const w = world();
+  const server = serverOf(w);
+  W.track(w.earth, new Pos(13316, 100, 20));
+  // plain-named containers that lie: one stores half of what it reports taking, one gives half of what it reports giving, one reports
+  // giving while its stored EU goes up
+  const takeLiar = new Container(PLAIN, 100000, 0);
+  takeLiar.changeEnergy = function (add) { this.energyStored += add / 2; return add; };
+  const giveLiar = new Container(PLAIN, 100000, 50000);
+  giveLiar.changeEnergy = function (add) { this.energyStored += add / 2; return add; };
+  const backwards = new Container(PLAIN, 100000, 50000);
+  backwards.changeEnergy = function (add) { this.energyStored -= add; return add; };
+  w.earth.put(13340, 100, 4, 'gtceu:lv_macerator', coverable({ energyContainer: takeLiar }, 32, 0));
+  w.earth.put(13343, 100, 4, 'gtceu:lv_steam_turbine', coverable({ energyContainer: giveLiar }, 0, 32));
+  w.earth.put(13346, 100, 4, 'gtceu:lv_steam_turbine', coverable({ energyContainer: backwards }, 0, 32));
+  assert.equal(W.placeCover(w.earth, new Pos(13340, 100, 4), SIDE.up, item('grindless:lv_wireless_energy_cover'), null).ok, true);
+  assert.equal(W.placeCover(w.earth, new Pos(13343, 100, 4), SIDE.up, item('grindless:lv_wireless_dynamo_cover'), null).ok, true);
+  assert.equal(W.placeCover(w.earth, new Pos(13346, 100, 4), SIDE.up, item('grindless:lv_wireless_dynamo_cover'), null).ok, true);
+  W.paused = true;
+  W.setStored(server, 10000);
+  const st = W.settle(server);
+  // the taker: asked 640, really stored 320: the store pays 320
+  assert.equal(takeLiar.getEnergyStored(), 320);
+  assert.equal(st.out, 320);
+  // the giver: asked 640, really gave 320: 304 reach the store (19/20); the backwards one gave nothing: nothing
+  assert.equal(giveLiar.getEnergyStored(), 50000 - 320);
+  assert.equal(backwards.getEnergyStored(), 50640);
+  assert.equal(st.drained, 320);
+  assert.equal(st.in, 304);
+  assert.equal(W.stored(server), 10000 + 304 - 320);
+  assert.equal(st.faulted, 3);
+  assert.equal(Object.keys(W.faults).length, 3);
+  assert.equal(errors.filter((e) => /set aside/.test(e)).length, 3, 'each one logged once, as an error');
+  // set aside: the next settlements leave them alone and say so
+  const again = W.settle(server);
+  assert.equal(again.faulted, 3);
+  assert.equal(again.out + again.in, 0);
+  assert.equal(takeLiar.getEnergyStored(), 320);
+  assert.equal(errors.filter((e) => /set aside/.test(e)).length, 3, 'not logged again');
+  // taken off and placed again: forgiven and checked again; the container still lies, so it is set aside again, and logged again
+  const taker = w.earth.machines.get('13340,100,4');
+  taker.covers.delete(SIDE.up);
+  assert.equal(W.placeCover(w.earth, new Pos(13340, 100, 4), SIDE.up, item('grindless:lv_wireless_energy_cover'), null).ok, true);
+  assert.equal(W.faults['minecraft:overworld|13340|100|4|up'], undefined, 'forgiven');
+  const third = W.settle(server);
+  assert.equal(third.faulted, 3);
+  assert.equal(third.out, 320, 'the store pays what it really took again');
+  assert.equal(takeLiar.getEnergyStored(), 640);
+  assert.equal(errors.filter((e) => /set aside/.test(e)).length, 4);
+});
+
+test('wireless settlement: a list past the old 64 KiB limit and a non-zero store survive a cold restart; the endpoints work again by themselves', () => {
+  const w = world();
+  const pd1 = new CompoundTag();
+  const server1 = serverOf(w, pd1);
+  const jvm1 = jvm();
+  const W1 = jvm1.W;
+  // the native restart test's endpoints: an Overworld dynamo cover on a full battery buffer; on the Moon an energy cover on a battery
+  // buffer with empty batteries and one on a charger, and a lone wireless energy hatch
+  const dyn = w.earth.put(13364, 100, 2, 'gtceu:lv_battery_buffer_4x', buffer(80000));
+  const mb = w.moon.put(13326, 200, 4, 'gtceu:lv_battery_buffer_4x', buffer(0));
+  const mc = w.moon.put(13332, 200, 4, 'gtceu:lv_charger_4x', charger(10000));
+  const sh = w.moon.put(13338, 200, 4, 'gtceu:lv_wireless_energy_hatch', coverable({ energyContainer: new Container(PLAIN, 1024, 0) }, 32, 0));
+  W1.track(w.earth, new Pos(13316, 100, 20));
+  W1.track(w.moon, new Pos(13338, 200, 4));
+  assert.ok(W1.placeCover(w.earth, new Pos(13364, 100, 2), SIDE.up, item('grindless:lv_wireless_dynamo_cover'), null).ok);
+  assert.ok(W1.placeCover(w.moon, new Pos(13326, 200, 4), SIDE.up, item('grindless:lv_wireless_energy_cover'), null).ok);
+  assert.ok(W1.placeCover(w.moon, new Pos(13332, 200, 4), SIDE.up, item('grindless:lv_wireless_energy_cover'), null).ok);
+  W1.setStored(server1, 2000000);
+  jvm1.run(server1, 100);
+  assert.ok(W1.flows['gcyr:luna|13338|200|4|'].filled === 1024, 'the lone hatch filled before the restart');
+  // 1,200 synthetic entries in unloaded End chunks, in one write (no blocks, no machines)
+  const synth = Array.from({ length: 1200 }, (_, i) => R.canon({ k: 'cover', d: 'minecraft:the_end', x: 13312 + (i % 64), y: 100, z: Math.floor(i / 64), s: 'up', ck: i % 2 ? 'dynamo' : 'energy', t: 1 }));
+  pd1.put(W1.blocksKey, R.write(W1.tracked(server1).concat(synth)));
+  W1.dropCache();
+  jvm1.run(server1, 40);
+  assert.equal(W1.tracked(server1).length, 5 + 1200, 'the tower, the hatch, the 3 covers and the synthetic entries: the unloaded ones are kept');
+  // the snapshot: paused, the lone hatch emptied, the save
+  W1.paused = true;
+  sh.energyContainer.setEnergyStored(0);
+  const json = JSON.stringify(W1.tracked(server1));
+  assert.ok(json.length > 65535, 'the old format would have been one ' + json.length + '-byte string');
+  const old = new CompoundTag();
+  old.putString(W1.blocksKey, json);
+  assert.throws(() => writeNbt(old), /UTFDataFormatException/, 'which NbtIo cannot write');
+  const saved = { bank: W1.stored(server1), dyn: sum(dyn), mb: sum(mb), mc: sum(mc) };
+  const bytes = writeNbt(pd1);
+  // the cold restart: a new JVM, the persistent data read from what was written, the same world
+  const jvm2 = jvm();
+  const W2 = jvm2.W;
+  assert.notEqual(W2, W1);
+  const server2 = serverOf(w, readNbt(bytes));
+  assert.equal(server2.persistentData.getTagType(W2.blocksKey), 9);
+  assert.equal(JSON.stringify(W2.tracked(server2)), json, 'the same list, read from disk');
+  assert.equal(W2.stored(server2), saved.bank);
+  jvm2.run(server2, 200);
+  const f = (k) => W2.flows[k] || { drained: 0, in: 0, filled: 0 };
+  const fd = f('minecraft:overworld|13364|100|2|up');
+  const fmb = f('gcyr:luna|13326|200|4|up');
+  const fmc = f('gcyr:luna|13332|200|4|up');
+  const fsh = f('gcyr:luna|13338|200|4|');
+  assert.ok(fd.drained > 0 && saved.dyn - sum(dyn) === fd.drained && fd.in * 20 === fd.drained * 19, 'the dynamo cover gave, exactly');
+  assert.ok(fmb.filled > 0 && sum(mb) - saved.mb === fmb.filled, 'the buffer\'s items took, exactly');
+  assert.ok(fmc.filled > 0 && sum(mc) - saved.mc === fmc.filled, 'the charger\'s item took, exactly');
+  assert.equal(fsh.filled, 1024, 'the lone hatch filled again, once');
+  assert.equal(sh.energyContainer.getEnergyStored(), 1024);
+  assert.equal(W2.stored(server2), saved.bank + W2.totals.in - W2.totals.out, 'the store balances: the saved store + in - out since the start');
+  assert.equal(W2.totals.settlements, 20);
+  assert.equal(JSON.stringify(W2.tracked(server2)), json, 'nothing forgotten, nothing added');
+  assert.deepEqual(plain(Object.keys(W2.faults)), []);
+  assert.deepEqual(jvm2.errors, []);
+});
+// ---------------------------------------------------------------- the two native tests, run in a simulated server
+// tools/test/overlay/kubejs/server_scripts/gg_test_wireless_adapters.js and gg_test_wireless_restart.js in the sandbox above, against a
+// simulated world: the commands they use (fill, setblock, forceload, save-all), GTM's machines as the stand-ins above (the tower and the
+// EBF check their structure 20 ticks after they are placed or loaded; the EBF draws 120 EU/t from its two hatches while it has dust),
+// kubejs_persistent_data.nbt written in NbtIo's format, and the harness's @restart as a second sandbox on the same world. This checks
+// the scripts (every path they take and the numbers they expect) before the PC runs them; GTM's own classes are only checked there.
+
+const OVERLAY = path.join(ROOT, 'tools', 'test', 'overlay', 'kubejs', 'server_scripts');
+const CONVERTER = 'com.gregtechceu.gtceu.common.machine.trait.ConverterTrait';
+
+class SimLevel extends Level {
+  constructor(dim, sim, loaded) { super(dim, loaded); this.sim = sim; }
+  getBlock(a, b, c) { return { id: this.blocks.get(typeof a === 'object' ? at(a) : a + ',' + b + ',' + c) || 'minecraft:air' }; }
+  getChunk() { return null; }
+  getEntitiesOfClass() { return { size: () => 0, get: () => null }; }
+  getTime() { return this.sim.gameTime; }
+}
+
+// where a structure described by lib/patterns.js stands, its controller at (x, y, z) facing north (the overlays' own placing)
+function structureAt(sim, id, x, y, z) {
+  const desc = sim.patterns.describe(id);
+  let ctrl = null;
+  desc.slices.forEach((rows, si) => rows.forEach((row, ri) => [...row].forEach((ch, ci) => { if (desc.symbols[ch] && desc.symbols[ch].kind === 'controller') ctrl = { si, ri, ci }; })));
+  const out = [];
+  desc.slices.forEach((rows, si) => rows.forEach((row, ri) => [...row].forEach((ch, ci) => {
+    const s = desc.symbols[ch];
+    if (ch !== ' ' && s.kind !== 'controller' && s.kind !== 'air' && s.kind !== 'any') out.push(new Pos(x - (ci - ctrl.ci), y + (ri - ctrl.ri), z - (si - ctrl.si)));
+  })));
+  return out;
+}
+
+function simMachine(sim, level, id, x, y, z) {
+  if (id === 'gtceu:lv_charger_4x' || id === 'gtceu:lv_battery_buffer_4x') {
+    const kind = id === 'gtceu:lv_charger_4x' ? CHARGER : BUFFER;
+    const m = machine(kind, { slots: [null, null, null, null] });
+    const inv = { getSlots: () => 4, getStackInSlot: (i) => m.stacks[i], setStackInSlot: (i, s) => { m.stacks[i] = s; } };
+    if (kind === CHARGER) m.getChargerInventory = () => inv;
+    else m.getBatteryInventory = () => inv;
+    m.setWorkingEnabled = (b) => { m.enabled = b; };
+    return coverable(m, 32, kind === BUFFER ? 32 : 0);
+  }
+  if (id === 'gtceu:lv_1a_energy_converter') return coverable({ energyContainer: new Container(CONVERTER, 4096) }, 32, 32);
+  if (id === 'gtceu:lv_macerator') return coverable({ energyContainer: new Container(RECIPE_AMPS, 1024) }, 32, 0);
+  if (id === 'gtceu:lv_wireless_energy_hatch') return coverable({ energyContainer: new Container(PLAIN, 1024) }, 32, 0);
+  if (id === 'gtceu:lv_input_bus') {
+    const bus = { stacks: [{ isEmpty: () => true }] };
+    bus.getInventory = () => ({ setStackInSlot: (i, s) => { bus.stacks[i] = s; } });
+    return bus;
+  }
+  if (id === 'gtceu:wireless_energy_tower' || id === 'gtceu:electric_blast_furnace') {
+    // GTM: isFormed is saved with the machine; the structure (and its cache) is checked again some ticks after a placing or a load
+    const c = { formed: false, cache: null, checkAt: sim.tick + 20, status: 'IDLE', progress: 0 };
+    const tower = id === 'gtceu:wireless_energy_tower';
+    const parts = () => (tower ? structureAt(sim, id, x, y, z) : []);
+    const valid = () => !tower || parts().every((p) => level.getBlock(p).id !== 'minecraft:air');
+    c.isFormed = () => c.formed;
+    c.checkPatternWithLock = () => valid();
+    c.setFlipped = () => {};
+    c.onStructureFormed = () => { c.formed = true; c.cache = parts(); };
+    c.getMultiblockState = () => ({ cache: c.cache, getCache: () => ({ iterator: () => iterator(c.cache) }), isNeededFlip: () => false, error: 'invalid' });
+    c.getLevel = () => level;
+    c.getRecipeLogic = () => ({ getStatus: () => c.status, updateTickSubscription() {}, getProgress: () => c.progress });
+    c.reload = () => { c.cache = null; c.checkAt = sim.tick + 20; c.status = 'IDLE'; };
+    c.tick = () => {
+      if (sim.tick === c.checkAt) { c.formed = valid(); c.cache = c.formed ? parts() : null; }
+      if (tower || !c.formed || sim.tick < c.checkAt) return;
+      const bus = level.machines.get((x - 1) + ',' + y + ',' + z);
+      const hatches = [level.machines.get(x + ',' + y + ',' + (z + 2)), level.machines.get((x - 1) + ',' + y + ',' + (z + 2))].filter(Boolean);
+      const dust = bus && !bus.stacks[0].isEmpty() && bus.stacks[0].id === 'gtceu:steel_dust';
+      if (!dust || hatches.reduce((a, h) => a + h.energyContainer.getEnergyStored(), 0) < 120) { c.status = dust ? 'WAITING' : 'IDLE'; return; }
+      let need = 120;
+      for (const h of hatches) {
+        const take = Math.min(need, h.energyContainer.getEnergyStored());
+        h.energyContainer.setEnergyStored(h.energyContainer.getEnergyStored() - take);
+        need -= take;
+      }
+      c.status = 'WORKING';
+      c.progress++;
+    };
+    return c;
+  }
+  return null;
+}
+
+function simPlace(sim, level, x, y, z, id) {
+  const k = x + ',' + y + ',' + z;
+  level.machines.delete(k);
+  const full = id && id.indexOf(':') < 0 ? 'minecraft:' + id : id;
+  if (!full || full === 'minecraft:air') { level.blocks.delete(k); return; }
+  level.blocks.set(k, full);
+  const m = simMachine(sim, level, full, x, y, z);
+  if (m) level.machines.set(k, m);
+}
+
+function simCommand(sim, line) {
+  let level = sim.levels['minecraft:overworld'];
+  let text = String(line);
+  const ex = /^execute in (\S+) run (.*)$/.exec(text);
+  if (ex) { level = sim.levels[ex[1]]; text = ex[2]; }
+  const a = text.split(' ');
+  sim.commands.push(text);
+  if (a[0] === 'forceload') return 16;
+  if (a[0] === 'save-all') { sim.disk.set('kubejs_persistent_data.nbt', writeNbt(sim.server.persistentData)); return 1; }
+  if (a[0] === 'setblock') { simPlace(sim, level, +a[1], +a[2], +a[3], a[4].split('[')[0]); return 1; }
+  if (a[0] === 'fill') {
+    const [x0, y0, z0, x1, y1, z1] = a.slice(1, 7).map(Number);
+    let n = 0;
+    for (let x = x0; x <= x1; x++) for (let y = y0; y <= y1; y++) for (let z = z0; z <= z1; z++) { simPlace(sim, level, x, y, z, a[7]); n++; }
+    return n;
+  }
+  throw new Error('the simulated server has no command ' + text);
+}
+
+function simWorld() {
+  const sim = { tick: 0, gameTime: 1000, clock: { now: 0 }, disk: new Map(), levels: {}, server: null, commands: [] };
+  for (const d of ['minecraft:overworld', 'gcyr:luna', 'minecraft:the_end']) sim.levels[d] = new SimLevel(d, sim, d !== 'minecraft:the_end');
+  return sim;
+}
+
+// a server (a JVM's) on the simulated world, with its persistent data
+function simServer(sim, j, pd) {
+  sim.patterns = j.sandbox.grindless.patterns;
+  sim.server = {
+    persistentData: pd, tick: 0,
+    getTickCount() { return this.tick; },
+    getLevel: (d) => sim.levels[String(d)] || null,
+    overworld: () => sim.levels['minecraft:overworld'],
+    runCommandSilent: (t) => simCommand(sim, t),
+    getWorldPath: (r) => r.name,
+  };
+  Object.values(sim.levels).forEach((l) => { l.server = sim.server; });
+  return sim.server;
+}
+
+// ticks: GTM's machines, then KubeJS's tick handlers; 50 ms of clock each
+function simRun(sim, j, n, until) {
+  for (let i = 0; i < n; i++) {
+    sim.tick++;
+    sim.gameTime++;
+    sim.clock.now += 50;
+    sim.server.tick++;
+    Object.values(sim.levels).forEach((l) => [...l.machines.values()].forEach((m) => { if (m.tick) m.tick(); }));
+    j.ticks.forEach((fn) => fn({ server: sim.server }));
+    if (until && until()) return true;
+  }
+  return false;
+}
+
+test('the native wireless tests (adapters, then the restart\'s two phases) pass in a simulated server, phase 2 in a second JVM on the same world', () => {
+  const sim = simWorld();
+  const files = ['gg_test_wireless_energy.js', 'gg_test_wireless_adapters.js', 'gg_test_wireless_restart.js'].map((f) => path.join(OVERLAY, f));
+  const j1 = jvm({ overlays: files, clock: sim.clock, disk: sim.disk });
+  simServer(sim, j1, new CompoundTag());
+  simRun(sim, j1, 40);
+  assert.equal(typeof j1.commands.gg_test_wireless_energy, 'function', 'the whole-network test loads beside them');
+  // the harness's commands: the adapters test, then phase 1 (the wireless tests take turns on their band, in the order asked for)
+  assert.equal(j1.commands.gg_test_wireless_adapters({}), 1);
+  assert.equal(j1.commands.gg_test_wireless_restart_1({}), 1);
+  assert.equal(j1.sandbox.ggTestWirelessQueue, 'wireless_adapters,wireless_restart_1');
+  const phase1 = () => j1.lines.includes('GGTEST|wireless_restart|PHASE1|DONE');
+  assert.ok(simRun(sim, j1, 6000, phase1), 'phase 1 ends: ' + j1.lines.slice(-5).join(' / '));
+  assert.ok(j1.lines.indexOf('GGTEST|wireless_adapters|DONE') < j1.lines.indexOf('GGTEST|wireless_restart|PHASE1|DONE'), 'the adapters test first');
+  assert.equal(j1.sandbox.ggTestWirelessQueue, '', 'both left the queue');
+  // @restart: the stop saves the persistent data with the world; a new JVM starts on it and GTM checks the loaded multiblocks again
+  const bytes = writeNbt(sim.server.persistentData);
+  Object.values(sim.levels).forEach((l) => l.machines.forEach((m) => { if (m.reload) m.reload(); }));
+  const j2 = jvm({ overlays: files, clock: sim.clock, disk: sim.disk });
+  simServer(sim, j2, readNbt(bytes));
+  simRun(sim, j2, 300);
+  assert.equal(j2.commands.gg_test_wireless_restart_2({}), 1);
+  assert.ok(simRun(sim, j2, 3000, () => j2.lines.includes('GGTEST|wireless_restart|DONE')), 'phase 2 ends: ' + j2.lines.slice(-5).join(' / '));
+  assert.equal(j2.sandbox.ggTestWirelessQueue, '');
+  const all = j1.lines.concat(j2.lines).filter((l) => l.startsWith('GGTEST|'));
+  if (process.env.GG_SHOW_SIM) console.log(all.join('\n'));
+  assert.deepEqual(all.filter((l) => /\|(FAIL|ERROR)(\||$)/.test(l)), []);
+  const passed = (scope, name) => all.some((l) => l.startsWith('GGTEST|' + scope + '|' + name + '|PASS'));
+  for (const name of ['LEGACY', 'PLACED', 'CLASSIFY', 'CHARGER_OLD_PATH', 'CHARGER_EMPTY', 'CHARGER_PARTIAL', 'CHARGER_NEAR_FULL', 'CHARGER_DISABLED',
+    'BUFFER_FILL', 'BUFFER_DRAIN', 'BANK']) assert.ok(passed('wireless_adapters', name), 'adapters ' + name);
+  for (const name of ['PLACED', 'BEFORE', 'SYNTHETIC', 'SAVED', 'RESTORED', 'AUTOMATIC']) assert.ok(passed('wireless_restart', name), 'restart ' + name);
+  // the only errors logged: the legacy check's deliberate conversion
+  assert.ok(j1.errors.length > 0 && j1.errors.every((e) => /the list of wireless blocks/.test(e)), j1.errors.join(' / '));
+  assert.deepEqual(j2.errors, []);
+  // left clean: no machine in either band, no key of the network or the test, the force-loading released
+  assert.equal(sim.levels['minecraft:overworld'].machines.size + sim.levels['gcyr:luna'].machines.size, 0);
+  for (const k of ['grindless_wireless_blocks', 'grindless_wireless_stored', 'grindless_wireless_blocks_legacy', 'gg_test_wireless_restart']) {
+    assert.equal(sim.server.persistentData.contains(k), false, k);
+  }
+  assert.equal(sim.commands.filter((c) => c.startsWith('forceload remove')).length, 3, 'the adapters test\'s band and phase 2\'s two');
 });
