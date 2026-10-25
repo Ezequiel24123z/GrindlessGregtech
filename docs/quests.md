@@ -299,9 +299,9 @@ Only the sky row (above the automation) and the steam-content machines are missi
   - bottom right: drums, super chest and super tank, AE2 in HV.
 - **Sources:** GTCP Modern `hv__high_voltage` (*High Voltage Machines*, *The Cleanroom*, *Large Chemical Reactor*, *Ice Cold*, *Nichrome Coils*, *Polytetrafluoroethylene*, *HV Circuit Assembler*, *The End of an Era*).
 
-### EV — "EV: Lunar Base" (`ev_age.snbt`, 12 quests, 14 dependencies; done)
+### EV — "EV: Lunar Base" (`ev_age.snbt`, 66 quests, 75 dependencies; done in v0.6.0)
 
-Spine: *Lunar Base* (depends on *The Moon*) → *Lunar Samples* → *Lunar Drill* (gear 1.5) → *Titanium* (also on *Vacuum Freezer*, in HV) → *EV Machine Hull* → *HV to EV Transformer* → *EV Motor and Pump* → *Distillation Tower* (also on *Nichrome*). Top, *Waystone on the Moon* (optional). Bottom, *Helium-3* → *Earth-Moon Bridge* → *Power from Earth*. Only what exists today; Mars and the rest of EV, once they exist.
+Spine: the journey from *Lunar Base* to *Red Horizon* and the *IV Machine Hull*. Above it the Moon and Mars, below it Earth's power, platinum and nano circuits (see `docs/eras/ev.md`, "Quests"). Far requirements are named in the text, not drawn as long lines (section 5).
 
 ## 15. Quality of life tabs: what to fix
 
