@@ -1,0 +1,60 @@
+{
+  "_doc": [
+    "The metal tiers of chests and furnaces, stronger than in their mods (the user asked for iron, gold... upgrades for chests and furnaces that are substantially better than the original mod's). Every pair is [stock, pack]: stock is the mod's own default, read from its source; pack is ours. Wood storages and the vanilla furnace stay as they are.",
+    "sophisticatedstorage: SERVER config, one file per world (<world>/serverconfig/sophisticatedstorage-server.toml), so a defaultconfigs file would never reach an existing world. startup_scripts/grindless/integration/sophisticatedstorage_tiers.js applies this table on every server start, before any chunk loads (Forge's ServerAboutToStartEvent): a key still at its stock value is raised to the pack value; a key with any other value was customized and is kept. Values are only ever raised: a single chest loaded under a slot count lower than its own drops the overflow (ChestBlockEntity#load).",
+    "  Placed storages grow by themselves: StorageWrapper#promoteSlotNumbersToDefaults raises the saved slot and upgrade-slot counts to the new defaults when the block entity loads, and adds empty slots at the end (contents untouched). Double chests keep their saved size until they are tier-upgraded or rebuilt: their default is the single chest's. Limited barrels read the multiplier live. Tier upgrades top a storage up to the target tier's value.",
+    "  The engine caps a storage at 180 slots and 10 upgrade slots, so diamond and netherite get 180 slots (x1.67 and x1.36) and twice the upgrade slots; every other metal tier gets twice the slots and twice the upgrade slots. Limited barrels get twice the per-slot multiplier and twice the upgrade slots.",
+    "ironfurnaces: speed is ticks per 200-tick smelting recipe (the mod scales other recipe times the same way; the vanilla furnace takes 200). Shipped in config/ironfurnaces-client.toml (the mod keeps every furnace setting in its client spec and loads that file itself on both sides). Fuel per item does not change: a fuel burns for burn time x cook time / 200, so coal still smelts 8 items in every tier. The netherite furnace stops at the config's minimum, 2 (x2.5).",
+    "  settings: the Million (rainbow) furnace and its parts off (with a generator augment it made 50,000 FE/t from nothing), the mod's web content off (update check and a fetched player list that hands out rainbow coal) and its update check off. server_scripts/grindless/integration/ironfurnaces.js removes the FE augments (generator, factory) and the wireless heater."
+  ],
+  "sophisticatedstorage": {
+    "mod": "Sophisticated Storage 1.20.1-1.5.9.2197 (P3pp3rF1y/SophisticatedStorage@ca7444b, Config.java)",
+    "file": "serverconfig/sophisticatedstorage-server.toml",
+    "root": "server",
+    "bounds": { "inventorySlotCount": [1, 180], "upgradeSlotCount": [0, 10], "baseSlotLimitMultiplier": [1, 8192] },
+    "storages": {
+      "families": ["Chest", "Barrel", "ShulkerBox"],
+      "section": "{tier}{family}",
+      "tiers": {
+        "Copper": { "inventorySlotCount": [45, 90], "upgradeSlotCount": [1, 2] },
+        "Iron": { "inventorySlotCount": [54, 108], "upgradeSlotCount": [2, 4] },
+        "Gold": { "inventorySlotCount": [81, 162], "upgradeSlotCount": [3, 6] },
+        "Diamond": { "inventorySlotCount": [108, 180], "upgradeSlotCount": [4, 8] },
+        "Netherite": { "inventorySlotCount": [132, 180], "upgradeSlotCount": [5, 10] }
+      }
+    },
+    "limitedBarrels": {
+      "sizes": ["I", "II", "III", "IV"],
+      "section": "Limited{tier}Barrel{size}",
+      "tiers": {
+        "Copper": { "baseSlotLimitMultiplier": { "I": [53, 106], "II": [27, 54], "III": [17, 34], "IV": [13, 26] }, "upgradeSlotCount": [1, 2] },
+        "Iron": { "baseSlotLimitMultiplier": { "I": [64, 128], "II": [32, 64], "III": [20, 40], "IV": [16, 32] }, "upgradeSlotCount": [2, 4] },
+        "Gold": { "baseSlotLimitMultiplier": { "I": [96, 192], "II": [48, 96], "III": [30, 60], "IV": [24, 48] }, "upgradeSlotCount": [3, 6] },
+        "Diamond": { "baseSlotLimitMultiplier": { "I": [128, 256], "II": [64, 128], "III": [40, 80], "IV": [32, 64] }, "upgradeSlotCount": [4, 8] },
+        "Netherite": { "baseSlotLimitMultiplier": { "I": [160, 320], "II": [80, 160], "III": [50, 100], "IV": [40, 80] }, "upgradeSlotCount": [5, 10] }
+      }
+    }
+  },
+  "ironfurnaces": {
+    "mod": "Iron Furnaces 1.20.1-4.1.6 (Qelifern/IronFurnaces@50827ec4, Config.java; unchanged up to 4.1.8)",
+    "file": "config/ironfurnaces-client.toml",
+    "vanillaFurnace": 200,
+    "bounds": { "speed": [2, 72000] },
+    "speed": {
+      "copper_furnace": [180, 90],
+      "iron_furnace": [160, 80],
+      "silver_furnace": [140, 70],
+      "gold_furnace": [120, 60],
+      "diamond_furnace": [80, 40],
+      "emerald_furnace": [40, 20],
+      "crystal_furnace": [40, 20],
+      "obsidian_furnace": [20, 10],
+      "netherite_furnace": [5, 2]
+    },
+    "settings": {
+      "misc.misc.rainbow": [true, false],
+      "misc.misc.web": [false, true],
+      "updates.check_updates.updates": [true, false]
+    }
+  }
+}

@@ -1,8 +1,9 @@
 // -----------------------------------------------------------------------------------------------
 // Sophisticated Storage (sophisticatedstorage): shares the upgrade recipes of Sophisticated Backpacks (library
 // sophisticatedcore), so its "advanced" upgrades follow the same MV rule as sophisticatedbackpacks.js: gold ingots -> aluminium
-// plates, diamonds -> steel plates. The storage tiers (copper / iron / gold / diamond / netherite chests and barrels) stay as the
-// mod has them.
+// plates, diamonds -> steel plates. The recipes of the storage tiers (copper / iron / gold / diamond / netherite chests, barrels and
+// shulker boxes, and their tier upgrades) stay as the mod has them; their capacity is the pack's, raised in every world by
+// startup_scripts/grindless/integration/sophisticatedstorage_tiers.js (table data/grindless/tables/chest_furnace_tiers.json).
 // Era: MV (docs/eras/mv.md, "Mods and integration").
 //
 // Rhino: var + function inside every callback that runs more than once (this Rhino throws "redeclaration of var").

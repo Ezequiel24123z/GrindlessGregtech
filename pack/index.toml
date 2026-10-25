@@ -89,6 +89,10 @@ file = "config/gtceu.yaml"
 hash = "609120cddc56b3d6f4db26c0e04498da3e3a8c6f5bf2965b98e148d0d26f53f6"
 
 [[files]]
+file = "config/ironfurnaces-client.toml"
+hash = "f7a4e2a19942a213b8cdd2cb1b21644525316a795085e26be938e3d40d9cc90b"
+
+[[files]]
 file = "config/waystones-common.toml"
 hash = "4d675290258544ce6315f869065f23b79985cae1525f0bca91a2e81852e8adb4"
 
@@ -2061,6 +2065,10 @@ file = "kubejs/data/grindless/tables/ae2_gt.json"
 hash = "7eaa8fc6122b00a8b59e680d5bea222ef9bc0b903a0fcfdc9bba69b9dcab060e"
 
 [[files]]
+file = "kubejs/data/grindless/tables/chest_furnace_tiers.json"
+hash = "5da688f7bfcbaa1e59fb19e39b1967946ae9d6780b9a61c131fdabc73dddaafa"
+
+[[files]]
 file = "kubejs/data/grindless/tables/fission_cores.json"
 hash = "72ce68bb386096718513d6075de4b92b99571682399bb64b5cfc46c3cd09ecfc"
 
@@ -2309,6 +2317,10 @@ file = "kubejs/server_scripts/grindless/integration/hidden.js"
 hash = "3be1d74d258c45e81853ac0bd5a08fafdba8dd79237431a720ef3f1f61e3e429"
 
 [[files]]
+file = "kubejs/server_scripts/grindless/integration/ironfurnaces.js"
+hash = "68ae9a8308b5bce1d4cdcf5493f535fb003fd839a4979c38fb79ebc670c23210"
+
+[[files]]
 file = "kubejs/server_scripts/grindless/integration/lookup_collisions.js"
 hash = "37ce5ae60a013eb6c17b2f5dae8013f2c904460410a69c161d1ffb6b61ad8a79"
 
@@ -2330,7 +2342,7 @@ hash = "14d47b996a426de53e08dc1c5a05269d19f129d10db41deb78bc44aa34ce1a80"
 
 [[files]]
 file = "kubejs/server_scripts/grindless/integration/sophisticatedstorage.js"
-hash = "a7a5f8bf5325fcdaac2c57695905b60570898931ff35093602a0a43410b5bdfa"
+hash = "460d752f18c212634454173e918a6abcf4fae35582c4e0f95359872feddf5b8b"
 
 [[files]]
 file = "kubejs/server_scripts/grindless/integration/storagedrawers.js"
@@ -2619,6 +2631,10 @@ hash = "ce8ca8375cf9a14f0fa54965b5a058dbf39dd35f04a06ed532c362504a0bf4ea"
 [[files]]
 file = "kubejs/startup_scripts/grindless/hv/syngas_plant.js"
 hash = "a56b3ee8a0178fe253a94c4a0d4a7962e1028fe0b22d64677a11df3b719313ac"
+
+[[files]]
+file = "kubejs/startup_scripts/grindless/integration/sophisticatedstorage_tiers.js"
+hash = "d0dbf71bbb54595243d78fd461cf3dd477a994e83cae80acde50bad4c41f520c"
 
 [[files]]
 file = "kubejs/startup_scripts/grindless/iv/fission_reactor.js"
@@ -3391,6 +3407,11 @@ metafile = true
 [[files]]
 file = "mods/invmove.pw.toml"
 hash = "d0cccd6af36b921ff22365c1f6ee653707a9b5b89eedffa86e1bcd5762b4b809"
+metafile = true
+
+[[files]]
+file = "mods/iron-furnaces.pw.toml"
+hash = "2c92777a27ff2be54fcc77cf20a0d51d8dfda0daf4cb652f003e8ba0d33e338c"
 metafile = true
 
 [[files]]
