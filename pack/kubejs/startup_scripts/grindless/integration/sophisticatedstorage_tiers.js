@@ -136,7 +136,8 @@
         var values = spec.getValues()
         var todo = []
         TARGETS.forEach(function (t) {
-          var cv = values.get(t.path)
+          // Rhino's concatenated paths otherwise match both NightConfig get(String) and get(List).
+          var cv = values['get(java.lang.String)'](t.path)
           if (cv === null || cv === undefined) {
             report.missing.push(t.path)
             return

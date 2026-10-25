@@ -373,6 +373,25 @@ Assert-Policy ($restartFn.Extent.Text -match 'Get-GGNativeTimeoutMs \$budget 300
 Assert-Policy ((Get-Content -Raw (Join-Path $PSScriptRoot 'remote\gg-server.ps1')) -match "Invoke-GGServerRestart \`$ctx \`$inst \`$res \`$Req") 'the commands stage hands @restart to Invoke-GGServerRestart instead of RCON'
 $waitStage = @($serverAst.FindAll({ param($n) $n -is [Management.Automation.Language.CommandAst] -and $n.GetCommandName() -eq 'Invoke-GGStage' }, $true) | Where-Object { $_.CommandElements[1].Value -eq 'wait-markers' })
 Assert-Policy ($waitStage.Count -eq 1 -and $waitStage[0].Extent.Text -match 'phase1\\logs\\kubejs\\server\.log' -and $waitStage[0].Extent.Text -match 'phase1\\logs\\latest\.log') 'after a restart, -WaitForLog markers may come from either boot'
+$commandsGate = $serverAst.Find({ param($n) $n -is [Management.Automation.Language.IfStatementAst] -and $n.Extent.Text -match '^if \(\$ok -and \$commands\.Count -gt 0\)' }, $true)
+$waitGate = $serverAst.Find({ param($n) $n -is [Management.Automation.Language.IfStatementAst] -and $n.Extent.Text -match '^if \(\$ok -and \$waits\.Count -gt 0\)' }, $true)
+Assert-Policy ($null -ne $commandsGate -and $null -ne $waitGate) 'server commands and marker waits have explicit prerequisite gates'
+& {
+    param([string]$CommandsText, [string]$WaitText)
+    $ok = $true
+    $commands = @('@restart:missing')
+    $waits = @(@{ pattern = 'missing'; timeoutSec = 180 })
+    $seen = New-Object System.Collections.Generic.List[string]
+    function Invoke-GGStage {
+        param([string]$Name, [scriptblock]$Action)
+        [void]$seen.Add($Name)
+        return $false
+    }
+    Invoke-Expression $CommandsText
+    Invoke-Expression $WaitText
+    Assert-Policy ($seen.Count -eq 1 -and $seen[0] -eq 'commands') 'a failed command stage skips another marker deadline instead of waiting twice'
+    Assert-Policy (-not $ok) 'a failed command stage keeps its failure result for dependent stages'
+} $commandsGate.Extent.Text $waitGate.Extent.Text
 
 # A local dry run of Invoke-GGServerRestart: a small console program stands in for java (it writes the "Done" line and exits 0 on
 # `stop`) and a loopback listener answers RCON's login. Two markers (one in each log), the console stop, the first boot's logs moved to

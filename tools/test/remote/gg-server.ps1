@@ -407,7 +407,7 @@ function Invoke-GGServerSuite {
         }
 
         if ($ok -and $commands.Count -gt 0) {
-            [void](Invoke-GGStage 'commands' {
+            $ok = Invoke-GGStage 'commands' {
                     if (-not $ctx.Rcon) { throw 'no RCON connection' }
                     $rlog = Join-Path $res 'rcon.log'
                     $bad = @()
@@ -444,7 +444,7 @@ function Invoke-GGServerSuite {
                     }
                     if ($bad.Count -gt 0) { throw ("{0}/{1} command(s) failed: {2}" -f $bad.Count, $commands.Count, ($bad -join ' | ')) }
                     Set-GGStage 'PASS' ("{0}/{0} command(s) ok" -f $commands.Count)
-                })
+                }
         }
 
         if ($ok -and $waits.Count -gt 0) {
