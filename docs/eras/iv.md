@@ -261,6 +261,13 @@ It unlocks LuV: hulls, hatches and LuV components (assembly line); LuV mixer and
 - **IV in three sub-stages:** home, Venus and Mercury, as EV is split into Moon and Mars. Nothing on the way to Venus and Mercury (level 3 rocket, thermal upgrade, site casings and bridge halves) asks for naquadah, iridium or osmium.
 - **Nothing in IV asks for anything from LuV:** no asteroid metals, no Europa crops, no products of 7,000 K or hotter EBFs (enriched naquadah, trinium), nor anything from fusion (europium, americium).
 - **The gate is built** only with what IV and the earlier eras give.
+- **Implemented (C1, 2026-10-25).** `tools/analysis/tiers/iv.json` extends `ev`.
+  - `eraOrder` goes `ev-mars`, `iv`, `iv-venus`, `iv-mercury`, `luv`; Venus and Mercury are siblings (`eraSiblings`): nothing of one may need the other's resources. The trips are the synthetics `end-trip` (the End's key) and `inner-trip` (the tier 3 rocket, whose elite tank and motor need the antenna's Inner Planets Chart, and the thermal suit).
+  - Exclusivity: naquadah only from Venus, iridium and osmium only from Mercury, titanium from the Moon or Venus. Checks: uranium only through the leach field, tritium only through the Moon facility, LEU only from the fuel plant, heavy water only from its plant, naquadah dust only from the naquadah plant (GT--'s neutron activator is LuV: its quark cores are precision assembly at 30,720 EU/t, one hatch); no rarest metal mixture, iridium residue, iridium, osmium, IV energy hatch, parallel hatch or assembly line without Mercury.
+  - Energy: the reactor, the Venus heat engine, the Mercury solar field and the RTG, read from their own recipes. Before Mercury there are no IV hatches (the IV voltage coil takes iridium): our IV multiblocks and GCYM's machines run on two EV hatches (IV voltage).
+  - Gate to LuV, every item PASS: the LuV hull, the LuV motor from the assembly line with its research, the UHPIC wafer, the naquadah and osmium ingots, the nanoprocessor mainframe, the Outer System Chart, the first Sagittarius A* signal, plutonium-241, the IV→LuV transformer and an IV parallel hatch in one of our plants. The quantities (131,072 EU/t, 4 mainframes, 10 minutes untouched) are not checked: the validator is qualitative.
+  - Site checks: the leach field in the End, the tritium facility on the Moon, the Venus and Mercury machines and recipes on their planets, the pressurized drill on Venus or Mars.
+  - Not modeled: the parallel hatch's copies, the assembly line's ordered inputs and AE2 feeding, GTCA's megas and GT--'s Maceration Stack (their types already run elsewhere).
 
 ## Mods and integration
 
