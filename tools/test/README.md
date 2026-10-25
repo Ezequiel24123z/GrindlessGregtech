@@ -66,6 +66,8 @@ Tip for KubeJS 6.5 (Rhino), observed here: inside event handlers, `const`/`let` 
 
 Vanilla names in KubeJS 2001.6.5: its mixins (`@RemapForJS`) rename some members for the scripts, and the Mojang name **does not exist** (nor the SRG name): `Entity#getYRot/getXRot` → `getYaw/getPitch`, `getUUID/getStringUUID` → `getUuid/getStringUuid`, `tickCount` → `age`, `Level#getGameTime` → `getTime`, `Level#dimension()` → `getDimensionKey`, `Player#closeContainer` → `closeMenu`, `Direction#getStepX/Y/Z` → `getX/Y/Z`; `Entity#level()` is hidden (use `getLevel()`). The full list is in the KubeJS and Rhino mixins (`EntityMixin`, `LevelMixin`, `ItemStackMixin`, `DirectionMixin`…). The `server` suite has no player: code that uses one is tested in the `client` suite.
 
+`gg_test_recipe_lookup` (`server` suite) asks GTM's own recipe lookup (`RecipeDB#find`) for every GT recipe with that recipe's own inputs: GTM 7.5.3 keeps one recipe per ingredient path, so a recipe that another one shadows can never run in a machine (EMI still shows it). Any unreachable recipe not in the test's baseline of accepted addon-vs-addon conflicts fails, and so does one of ours (a `grindless:` id or a recipe our scripts add or change) on either side: `-Commands 'kubejs custom_command gg_test_recipe_lookup' -WaitForLog 'GGTEST\|lookup\|DONE@@900'`.
+
 ### Tests with a real player (`client` suite)
 
 In the `client` suite the overlay's server scripts run on the integrated server with the real `ServerPlayer`, and the two halves of a test (server and client, same JVM) talk to each other through a `ConcurrentHashMap` stored in `global`.
