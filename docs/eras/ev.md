@@ -93,7 +93,7 @@ Built on 2026-10-25 (run `b1-ev-tripod-2`, on the Moon).
   - a mast.
   
   Parts: 1–2 energy hatches, 1 input bus (bit and sample), 1–2 output buses and 1 input hatch (liquid nitrogen). ME parts fit.
-- **Registration.** Type `gtceu:vein_drilling`, but it runs only its own `vein_drilling/ev/` recipes. Every LV, MV and HV drill and greenhouse skips any folder above its own tier (the generic veto in `lv/multis.js`). The cap is 64: one EV hatch runs 64 bores in 100 ticks.
+- **Registration.** Type `gtceu:vein_drilling`, but it runs only its own `vein_drilling/ev/` recipes. Every LV, MV and HV drill and greenhouse skips any folder above its own tier (the generic veto in `lv/multis.js`), and the steam ones skip every tier folder (`steam/machines.js`). The cap is 64: one EV hatch runs 64 bores in 100 ticks.
 - **Veins.** Its recipes come from every vein table whose dimension is `gcyr:luna` or `gcyr:mars`, each with that dimension; `veins_mars.json` joins with no code. None from Earth: the HV drill still handles that. The regolith's helium-3 stays with the Lunar Drill, because the tripod has no fluid output and the cell takes the regolith over.
 - **Rules.**
   - **Dry:** 3.75 raw ores per bore and about 1% bit wear.

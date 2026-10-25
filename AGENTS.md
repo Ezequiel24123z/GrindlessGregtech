@@ -50,6 +50,7 @@ Gregtech Grindless is a GregTech Modern pack (Minecraft 1.20.1, Forge) in which 
   - **Unreachable from Rhino:** `SizedIngredient#getItems()` and `FluidIngredient#getStacks()`. Use `RecipeHelper.getInputItems` / `getInputFluids` / `getRealEUt`.
   - **`Math.PI` is undefined in this Rhino** (KubeJS 2001.6.5); `Math.cos`, `Math.floor` and `Math.round` work. Code that uses it silently becomes NaN, so use a numeric literal or precomputed bounds.
   - **Weather is shared.** Every dimension with sky light takes the Overworld's rain and thunder (vanilla shares the flags), and full rain alone makes `Level#isNight()` true at noon, which is GTM's daytime condition. Earth's dimensions keep the weather; `space/airless_weather.js` keeps every dimension of the other planets in `planets.json` dry.
+  - **Overloads Rhino can't pick.** `RecipeDB#find(holder, predicate)` with a JS function throws "the choice of Java method ... is ambiguous". Call the overload by its signature: `db['find(com.gregtechceu.gtceu.api.capability.recipe.IRecipeCapabilityHolder,java.util.function.Predicate)'](ctrl, fn)`.
   - **Recipe conditions are checked on every tick of a run.** A day or night condition can stall a run halfway, so use a run-start modifier (`alwaysTryModifyRecipe`) for time-of-day pricing. See `ev/cryogenic_plant.js`.
 
 ## packwiz
