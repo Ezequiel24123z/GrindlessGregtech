@@ -58,22 +58,12 @@ try {
         $ok = Invoke-GGStage 'lock' {
             $t0 = Get-Date
             $slots = 1
-            $minFree = [double]$req.slotMinFreeGb
-            $reserve = 0.0
-            $suiteName = [string]$req.suite
-            if ($suiteName -eq 'server' -or $suiteName -eq 'both') { $reserve = [math]::Max($reserve, 2 + (ConvertTo-GGGb ([string]$req.serverXmx) 4)) }
-            if ($suiteName -eq 'client' -or $suiteName -eq 'both') { $reserve = [math]::Max($reserve, 2 + (ConvertTo-GGGb ([string]$req.clientXmx) 4)) }
-            Enter-GGLock ([int]$req.lockWaitMin) $slots $minFree $reserve
+            Enter-GGLock -MaxWaitMin ([int]$req.lockWaitMin)
             $killed = Stop-GGOrphans
             $freeGb = [math]::Round((Get-PSDrive D).Free / 1GB, 1)
             if ($freeGb -lt 10) { throw "only $freeGb GB free on D:" }
             $waited = [int]((Get-Date) - $t0).TotalSeconds
-            $share = 'alone on the PC'
-            if (@($global:GG.SlotOthers).Count -gt 0) {
-                $share = 'sharing the PC with ' + (@($global:GG.SlotOthers) -join ', ')
-                if ($null -ne $global:GG.SlotFree) { $share += (' ({0} GB RAM available at acquire)' -f $global:GG.SlotFree) }
-            }
-            Set-GGStage 'PASS' ("acquired slot {0} (of {1}) after {2}s, {3}; orphans killed {4}; D: free {5} GB" -f $global:GG.Slot, $slots, $waited, $share, $killed, $freeGb)
+            Set-GGStage 'PASS' ("acquired slot {0} (of {1}) after {2}s; no RAM launch floor; orphans killed {3}; D: free {4} GB" -f $global:GG.Slot, $slots, $waited, $killed, $freeGb)
         }
     }
 
@@ -85,7 +75,7 @@ try {
         if ($suite -eq 'client' -or $suite -eq 'both') {
             Invoke-GGClientSuite $req $packToml $packInfo $packKey
         }
-        # no JVM of this run is going to start any more: the other slot need not keep RAM free for it
+        # No more JVMs will start for this run; clear the informational legacy slot state.
         Set-GGSlotState 0 $false
     }
 } catch {

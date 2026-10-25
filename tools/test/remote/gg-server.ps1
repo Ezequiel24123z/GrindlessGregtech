@@ -174,8 +174,6 @@ function Invoke-GGServerSuite {
 
         if ($ok) {
             $ok = Invoke-GGStage 'boot' {
-                $freeGb = Get-GGFreeRamGb
-                if ($freeGb -lt [math]::Max(8, [double]$Req.slotMinFreeGb)) { throw "Insufficient available RAM before server launch: $freeGb GB" }
                 if (-not $global:GG.NativeBudget) { $global:GG.NativeBudget = @{ Clock = [Diagnostics.Stopwatch]::StartNew(); TimeoutSec = [int]$Req.nativeTimeoutSec } }
                 [void](Get-GGNativeTimeoutMs $global:GG.NativeBudget 1)
                 # -Dgg.run names the run in the JVM's command line (the other arguments are relative), so JVMs of a dead run can be told apart from the other slot's
@@ -183,7 +181,7 @@ function Invoke-GGServerSuite {
                 $g = [GGProc]::Start($ctx.Java, $argLine, $inst, (Join-Path $res 'server-stdout.log'), (Join-Path $res 'server-stderr.log'), $null)
                 $ctx.Proc = $g
                 Set-GGSlotState $null $true
-                Write-GGLog "server JVM started (pid $($g.Id)), free RAM $freeGb GB"
+                Write-GGLog "server JVM started (pid $($g.Id))"
                 $tail = New-Object GGTail (Join-Path $inst 'logs\latest.log')
                 $doneRx = [regex]'Done \(([\d.,]+)s\)! For help, type "help"'
                 $sw = [Diagnostics.Stopwatch]::StartNew()
