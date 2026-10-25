@@ -297,7 +297,7 @@ Only the sky row (above the automation) and the steam-content machines are missi
 - **Layout fixes:** the lines of 14 to 27 squares from *MV Grid*, *MV Components* and *Biorefinery* are the ones that cross the whole chapter (and the End row).
 - **Sources:** GTCP Modern `mv__medium_voltage` (*Transformers*, *Kanthal Coils*, *Stainless Steel*, *Silicon Lottery*, *Moore's Law*, *Polyethylene*, *The Church of Diesel*, *Desulfurization*, *Distillery*, *Pyrolyse Oven*, *Greenhouse*, *Sulfuric Acid*, *Hydrochloric Acid*); Monifactory `groundwork` (silicon, Kanthal) for structure.
 
-### HV — "HV: Moonshot" (`hv_age.snbt`, 42 quests, 51 dependencies; done in v0.5.1)
+### HV — "HV: Moonshot" (`hv_age.snbt`, 32 quests, 40 dependencies; done in v0.5.1, voice rewrite 2026-10-25)
 
 - **Start:** *HV Factory*, depends on *Cleanroom* (the MV exit). Journey line: the Moon, the first place off Earth.
 - **Spine:** HV network → *HV Components* → *Refinery* (gear 1.5) → cracking and olefins → PTFE → *Gasoline* (the large chemical reactor) → the rocket → *The Moon* (exit).
@@ -310,7 +310,7 @@ Only the sky row (above the automation) and the steam-content machines are missi
   - bottom right: drums, super chest and super tank, AE2 in HV.
 - **Sources:** GTCP Modern `hv__high_voltage` (*High Voltage Machines*, *The Cleanroom*, *Large Chemical Reactor*, *Ice Cold*, *Nichrome Coils*, *Polytetrafluoroethylene*, *HV Circuit Assembler*, *The End of an Era*).
 
-### EV — "EV: Lunar Base" (`ev_age.snbt`, 66 quests, 75 dependencies; done in v0.6.0)
+### EV — "EV: Lunar Base" (`ev_age.snbt`, 55 quests, 63 dependencies; done in v0.6.0, voice rewrite 2026-10-25)
 
 Spine: the journey from *Lunar Base* to *Red Horizon* and the *IV Machine Hull*. Above it the Moon and Mars, below it Earth's power, platinum and nano circuits (see `docs/eras/ev.md`, "Quests"). Far requirements are named in the text, not drawn as long lines (section 5).
 

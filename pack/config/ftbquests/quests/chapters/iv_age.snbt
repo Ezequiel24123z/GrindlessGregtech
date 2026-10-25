@@ -152,7 +152,7 @@
 			dependencies: ["174353B4F6C61A79", "73D14393C00DE14D"]
 			description: [
 				"Circuit 4 blows air over uranium 238 and makes radon, and the plutonium GregTech's own recipe asks for stays inside the cell as a catalyst."
-				"Soak a Nether Star in radon in the chemical bath for a &6Quantum Star&r. All those Wither fights finally pay off."
+				"Soak a Nether Star in radon in the chemical bath for a &6Quantum Star&r. That stack from the simulator's Withers finally has a job."
 			]
 			icon: "gtceu:quantum_star"
 			id: "7136B78C360303F9"
