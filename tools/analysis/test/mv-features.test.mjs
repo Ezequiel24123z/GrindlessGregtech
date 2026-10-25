@@ -37,18 +37,18 @@ test('child tier: an element with the same id replaces the parent\'s, and dropTa
   const { raw: mv } = loadTierConfig({ tier: 'mv' }, TIERS);
   const ids = (cfg) => cfg.targets.map((t) => t.id);
   // LV's leak checks stop holding in MV: they're gone, replaced by the positive target
-  for (const id of ['silicio-gt-no-antes-de-mv', 'bobina-kanthal-no-antes-de-mv']) {
+  for (const id of ['silicon-gt-not-before-mv', 'coil-kanthal-not-before-mv']) {
     assert.ok(ids(lv).includes(id));
     assert.ok(!ids(mv).includes(id));
   }
-  assert.ok(ids(mv).includes('silicio-gt') && ids(mv).includes('bobina-kanthal'));
+  assert.ok(ids(mv).includes('silicon-gt') && ids(mv).includes('coil-kanthal'));
   // the rest of LV's targets are inherited (regression): including the leaks that still apply
-  assert.ok(ids(mv).includes('receta-aluminio-ebf') && ids(mv).includes('receta-obsidiana-arco'));
-  assert.ok(mv.autoTargets.some((t) => t.id === 'auto-lava-no-automatica'));
+  assert.ok(ids(mv).includes('recipe-aluminium-ebf') && ids(mv).includes('recipe-obsidian-arc'));
+  assert.ok(mv.autoTargets.some((t) => t.id === 'auto-lava-not-automatic'));
   // LV's EBF is inherited with its id, and MV's variants are added with their own ids
   const ebf = mv.machines.filter((m) => m.machine === 'gtceu:electric_blast_furnace').map((m) => m.id || m.machine).sort();
   assert.deepEqual(ebf, [
-    'gtceu:electric_blast_furnace', 'gtceu:electric_blast_furnace@lv-kanthal', 'gtceu:electric_blast_furnace@mv-cuproniquel',
+    'gtceu:electric_blast_furnace', 'gtceu:electric_blast_furnace@lv-kanthal', 'gtceu:electric_blast_furnace@mv-cupronickel',
     'gtceu:electric_blast_furnace@mv-kanthal',
   ]);
   // maps are merged key by key: MV adds MV hatches to the abilities and inherits the conditions
@@ -79,12 +79,12 @@ function hatchPack() {
     },
   };
   const cfg = (machineAbilities) => ({
-    tier: 'piezas',
+    tier: 'parts',
     unconditionalTypes: ['minecraft:crafting_shaped'],
     partAbilities: { energy_input: ['t:lv_hatch', 't:mv_hatch'] },
     world: [{ id: 'w', mode: 'manual', items: ['t:ingot'] }],
     machines: [{ machine: 't:drill', types: [], partsFromStructure: true, ...(machineAbilities ? { partAbilities: machineAbilities } : {}) }],
-    targets: [{ id: 'maquina', item: 'm:t:drill' }],
+    targets: [{ id: 'machine', item: 'm:t:drill' }],
     autoTargets: [],
   });
   const dump = mkDump({ recipes, items: ['t:ingot', 't:drill', 't:never', 't:lv_hatch', 't:mv_hatch'], structures });
@@ -98,16 +98,16 @@ test('machines[].partAbilities: the machine only requires the hatch it names, ev
   // the machine requires the MV hatch, which nobody knows how to make: the chain names it
   const r = run(dump, cfg({ energy_input: ['t:mv_hatch'] }));
   assert.equal(r.out.verdict, 'FAIL');
-  assert.match(linesOf(r.out.gate, 'maquina'), /t:mv_hatch/);
+  assert.match(linesOf(r.out.gate, 'machine'), /t:mv_hatch/);
   // the override is key by key and doesn't touch the other abilities
-  assert.deepEqual(verdicts(run(dump, cfg({ otra_habilidad: ['t:x'] })).out.gate), { maquina: 'PASS' });
+  assert.deepEqual(verdicts(run(dump, cfg({ other_ability: ['t:x'] })).out.gate), { machine: 'PASS' });
 });
 
 // ---------------------------------------------------------------- GTM config as booleans
 
 test('config.json: booleans written as text by older dumps are read as booleans', () => {
-  const dump = mkDump({ config: { a: 'true', b: 'false', c: null, d: true, e: 5, f: 'otro' } });
-  assert.deepEqual(dump.config, { a: true, b: false, c: null, d: true, e: 5, f: 'otro' });
+  const dump = mkDump({ config: { a: 'true', b: 'false', c: null, d: true, e: 5, f: 'other' } });
+  assert.deepEqual(dump.config, { a: true, b: false, c: null, d: true, e: 5, f: 'other' });
 });
 
 // ---------------------------------------------------------------- parts that depend on GTM config
@@ -118,7 +118,7 @@ test('parts with onlyIf: GTM doesn\'t require the part when the config says not 
     shaped('t:hull_recipe', ['I'], { I: { item: 't:ingot' } }, 't:hull'),
   ];
   const cfg = {
-    tier: 'mantenimiento',
+    tier: 'maintenance',
     unconditionalTypes: ['minecraft:crafting_shaped'],
     world: [{ id: 'w', mode: 'manual', items: ['t:ingot'] }],
     machines: [{
@@ -157,7 +157,7 @@ test('vein targets: requireItem skips veins with no item in the table (other mod
     gt('t:drill_ow', 'gtceu:vein_drilling', { ins: [gi('grindless:vein_sample_redstone_ow', 1, 0)], outs: [gi('gtceu:raw_ruby')] }),
   ];
   const cfg = {
-    tier: 'tabla',
+    tier: 'table',
     machines: [{ machine: 't:drill', types: ['gtceu:vein_drilling'] }],
     world: [{ id: 'w', mode: 'manual', bootstrap: true, items: ['t:drill', 'grindless:vein_sample_redstone_ow', 'grindless:vein_sample_topaz'] }],
     targets: [],
@@ -199,10 +199,10 @@ test('world with fromVeins.requireRecipe: a set-aside vein (registered sample, n
     // the set-aside sample only converts into an empty probe
     shapeless('t:probe_from_scheelite', [{ item: 'grindless:vein_sample_scheelite' }], 'grindless:empty_vein_probe'),
   ];
-  const world = (from) => [{ id: 'menas-end', mode: 'manual', bootstrap: true, template: 'gtceu:raw_{m}', materials: [], fromVeins: { dimensions: ['minecraft:the_end'], ...from } }];
+  const world = (from) => [{ id: 'end-ores', mode: 'manual', bootstrap: true, template: 'gtceu:raw_{m}', materials: [], fromVeins: { dimensions: ['minecraft:the_end'], ...from } }];
   const cfg = (from) => ({
     tier: 'end', unconditionalTypes: ['minecraft:crafting_shapeless'], world: world(from),
-    targets: [{ id: 'bauxita', item: 'gtceu:raw_bauxite' }, { id: 'ilmenita', item: 'gtceu:raw_ilmenite' }, { id: 'scheelita', item: 'gtceu:raw_scheelite' }],
+    targets: [{ id: 'bauxite', item: 'gtceu:raw_bauxite' }, { id: 'ilmenite', item: 'gtceu:raw_ilmenite' }, { id: 'scheelite', item: 'gtceu:raw_scheelite' }],
     autoTargets: [],
   });
   const dump = mkDump({
@@ -210,10 +210,10 @@ test('world with fromVeins.requireRecipe: a set-aside vein (registered sample, n
     items: ['gtceu:raw_bauxite', 'gtceu:raw_ilmenite', 'gtceu:raw_scheelite', 'gtceu:raw_tungstate', 'grindless:vein_sample_bauxite_end', 'grindless:vein_sample_scheelite'],
   });
   // with requireItem the hidden sample still counts the scheelite vein
-  assert.deepEqual(verdicts(run(dump, cfg({ requireItem: 'grindless:vein_sample_{id}' })).out.gate), { bauxita: 'PASS', ilmenita: 'PASS', scheelita: 'PASS' });
+  assert.deepEqual(verdicts(run(dump, cfg({ requireItem: 'grindless:vein_sample_{id}' })).out.gate), { bauxite: 'PASS', ilmenite: 'PASS', scheelite: 'PASS' });
   // with requireRecipe only veins with a drilling recipe count: bauxite's (with its ilmenite) does, scheelite's doesn't
   const r = run(dump, cfg({ requireRecipe: { type: 'gtceu:vein_drilling', input: 'grindless:vein_sample_{id}' } }));
-  assert.deepEqual(verdicts(r.out.gate), { bauxita: 'PASS', ilmenita: 'PASS', scheelita: 'FAIL' });
+  assert.deepEqual(verdicts(r.out.gate), { bauxite: 'PASS', ilmenite: 'PASS', scheelite: 'FAIL' });
 });
 
 // ---------------------------------------------------------------- reason a deposit blocks
@@ -224,16 +224,16 @@ test('a deposit that doesn\'t allow the dimension is the missing root even if an
     shaped('t:rig_recipe', ['I'], { I: { item: 't:ingot' } }, 't:rig'),
   ];
   const cfg = (dimension) => ({
-    tier: 'aceite',
+    tier: 'oil',
     dimension,
     unconditionalTypes: ['minecraft:crafting_shaped'],
     machines: [{ machine: 't:rig', types: [] }, { machine: 't:centrifuge', types: ['t:centrifuge'] }],
     world: [
-      { id: 'lingotes', mode: 'manual', bootstrap: true, items: ['t:ingot'] },
-      { id: 'yacimientos', mode: 'auto', via: ['t:rig'], fromFluidVeins: true },
+      { id: 'ingots', mode: 'manual', bootstrap: true, items: ['t:ingot'] },
+      { id: 'deposits', mode: 'auto', via: ['t:rig'], fromFluidVeins: true },
     ],
     targets: [],
-    autoTargets: [{ id: 'aceite', fluid: 't:oil' }],
+    autoTargets: [{ id: 'oil', fluid: 't:oil' }],
   });
   const dump = mkDump({
     recipes, items: ['t:ingot', 't:rig', 't:centrifuge', 't:soul_sand'], fluids: ['t:oil'],
@@ -242,7 +242,7 @@ test('a deposit that doesn\'t allow the dimension is the missing root even if an
   assert.equal(run(dump, cfg('minecraft:overworld')).out.verdict, 'PASS');
   const flat = run(dump, cfg('grindless:flat'));
   assert.equal(flat.out.verdict, 'FAIL');
-  const text = linesOf(flat.out.auto, 'aceite');
+  const text = linesOf(flat.out.auto, 'oil');
   assert.match(text, /deposit gtceu:oil_deposit only allows minecraft:overworld; this analysis is in grindless:flat/);
   assert.doesNotMatch(text, /soul_sand/);
 });

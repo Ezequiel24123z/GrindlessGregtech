@@ -8,7 +8,7 @@
 //                   or addon recipe). This way, whatever is of that material counts, wherever it comes from.
 //     dimensions    removes the world sources gathered there (the `world` entry's `origin`, or its `fromVeins`
 //                   dimensions) and the recipes only valid there (dimension condition).
-//     onlyFrom      exclusivity check: [ids of other resources] (e.g. ["luna"]); without them, no key of this
+//     onlyFrom      exclusivity check: [ids of other resources] (e.g. ["moon"]); without them, no key of this
 //                   resource should be reached ("titanium only comes from the Moon"). If it does, LEAK with the sources it
 //                   comes through (rules that give it without consuming it and whose inputs don't carry it; recycling doesn't count as a source).
 //   eraItems[]      what belongs to each era: {id, era, label, items?, exclude?, inputsOf?, optional?, note}
