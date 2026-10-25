@@ -13,10 +13,15 @@
 //                                          rules" question, answered from the live recipe manager instead of just source reading
 //   <m>.DESCRIPTION / PLACED / FORMED / PATTERN / PREVIEW   the structure lib/patterns.js recorded is placed block by
 //                       block and forms by itself; the preview EMI shows has the controller and every part kind
-//   macerator.PROCESS / PARALLEL     64 crushed ore -> 64 impure dust (+ its chance byproduct), one real GTM
-//                       macerator recipe picked from the live recipe manager, run through the controller at 64 parallels
-//   ore_washer.PROCESS / PARALLEL    64 crushed ore + 6400 mB distilled water -> 64 purified ore + 64 stone dust
-//                       (+ chance byproduct), the "_distilled" ore washer recipe (no circuit needed), 64 parallels
+//   macerator.PROCESS / PARALLEL     64 iron ore -> 128 crushed iron ore (+ nickel/stone dust chance byproducts),
+//                       the real GTM macerate_iron_ore_to_crushed_ore recipe read from the live recipe manager
+//                       (its own output, not hardcoded), run through the controller at 64 parallels
+//   ore_washer.PROCESS / PARALLEL    64 crushed iron ore + 6400 mB distilled water -> 64 purified iron ore + 64
+//                       stone dust (+ chance nickel dust), the real GTM wash_iron_crushed_ore_to_purified_ore_distilled
+//                       recipe (no circuit needed), 64 parallels. ore_washer's item input (every material, not just
+//                       iron) is a tag (forge:crushed_ores/<material>), and Rhino cannot read a live SizedIngredient's
+//                       tag (see firstItemId) - so its concrete, known member (gtceu:crushed_iron_ore) is hardcoded in
+//                       SPECS below instead, while every output stays read live from the recipe.
 //   DONE                last line
 //
 // Band (AGENTS.md): X 5376-5439, Z 0-15, Y 98-112 of the Overworld; chunks are force-loaded and the band is cleared
@@ -165,7 +170,9 @@
     return null
   }
 
-  // a concrete item id this (item) ingredient accepts - for reading outputs back, never for guessing inputs.
+  // a concrete item id this (item) ingredient accepts - for reading outputs back, never for guessing inputs
+  // (ore_washer's item input is a material tag, e.g. forge:crushed_ores/iron, which extractItemId does not
+  // resolve on purpose - see SPECS' inputItemId instead).
   // Ingredient#getItems() fails under Rhino on this GTM build ("Cannot find function getItems" on a live
   // SizedIngredient, even though the Java method exists and GTM's own code calls it fine) - toJson() is a
   // different, non-array-returning method on the same object and parses cleanly instead.
@@ -501,7 +508,11 @@
     m.outs.forEach(function (b) { clearInventory(b.getInventory()) })
     var inv = m.inBus.getInventory()
     var itemIn = m.verifier.inputs[0]
-    var itemId = firstItemId(itemIn)
+    // ore_washer's own item ingredient is a material tag (forge:crushed_ores/iron) which firstItemId cannot read
+    // (see its own comment) - m.spec.inputItemId is hardcoded to the concrete item known to satisfy it (macerator's
+    // ingredient is already concrete, but both specs use the same hardcoded field for a uniform fillInputs).
+    // The amount (n) still comes from the live recipe through itemIn.n, same as the fluid input below.
+    var itemId = m.spec.inputItemId
     var n = itemIn.n * PARALLELS
     var left = inv.insertItem(0, Item.of(itemId, n), false)
     if (!left.isEmpty()) throw new Error('could not insert ' + itemId + ' x' + n + ' into the input bus')
@@ -569,8 +580,9 @@
 
   // ---------------------------------------------------------------- machines
 
-  // verifier: reads the REAL recipe's own contents instead of hardcoding a material, so the test does not depend on
-  // which ore happens to be first in GTM's registry - only that macerator/ore_washer processing works at all.
+  // verifier: reads the REAL recipe's own contents (amounts, guaranteed vs. chanced outputs) instead of hardcoding
+  // them, so the test stays correct if GTM's own numbers for the picked recipe ever change; only the recipe id
+  // (SPECS' pick) and its tag-based item input (SPECS' inputItemId) are pinned - see fillInputs/firstItemId above.
   function buildVerifier(recipe) {
     var c = lazy()
     var insI = contentsOf(recipe, c.ItemCap, false)
@@ -608,7 +620,8 @@
     {
       key: 'macerator', id: 'large_steam_macerator', type: 'gtceu:macerator', x: 5384, deep: true, needsInTank: false,
       previewParts: ['gtceu:steam_input_hatch', 'gtceu:steam_input_bus', 'gtceu:steam_output_bus'],
-      pick: function () { return pickRecipe('gtceu:macerator', ['_crushed_ore_to_impure_dust']) }
+      inputItemId: 'gtceu:iron_ore',
+      pick: function () { return pickRecipe('gtceu:macerator', ['macerate_iron_ore_to_crushed_ore']) }
     },
     {
       key: 'centrifuge', id: 'large_steam_centrifuge', type: 'gtceu:centrifuge', x: 5396, deep: false, needsInTank: true,
@@ -624,9 +637,9 @@
     },
     {
       key: 'ore_washer', id: 'large_steam_ore_washer', type: 'gtceu:ore_washer', x: 5432, deep: true, needsInTank: true,
-      inputFluidId: 'gtceu:distilled_water',
+      inputItemId: 'gtceu:crushed_iron_ore', inputFluidId: 'gtceu:distilled_water',
       previewParts: ['gtceu:steam_input_hatch', 'gtceu:steam_input_bus', 'gtceu:steam_output_bus', 'gtceu:ulv_input_hatch'],
-      pick: function () { return pickRecipe('gtceu:ore_washer', ['_crushed_ore_to_purified_ore_distilled']) }
+      pick: function () { return pickRecipe('gtceu:ore_washer', ['wash_iron_crushed_ore_to_purified_ore_distilled']) }
     }
   ]
 
@@ -673,6 +686,11 @@
       m.verifier = buildVerifier(recipe)
       findParts(m, ctrl)
       fillInputs(m)
+      // a freshly-formed WorkableMultiblockMachine unsubscribes its RecipeLogic from the tick loop the first time
+      // it finds nothing to process (keepSubscribing() == false) - its own "a recipe was inserted" notification
+      // does not always resubscribe it in time, so force it to recheck on the very next tick instead of a
+      // variable, sometimes 100+ tick wait for GTM's own idle-polling to notice the new inputs by itself
+      ctrl.getRecipeLogic().updateTickSubscription()
       m.phase = 'running'
       m.tStart = S.t
     } catch (e) {

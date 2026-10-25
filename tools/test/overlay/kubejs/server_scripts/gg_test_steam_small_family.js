@@ -55,6 +55,7 @@
         FluidCap: Java.loadClass('com.gregtechceu.gtceu.api.capability.recipe.FluidRecipeCapability').CAP,
         Fluids: Java.loadClass('net.minecraftforge.registries.ForgeRegistries').FLUIDS,
         FluidStack: Java.loadClass('net.minecraftforge.fluids.FluidStack'),
+        RecipeHelper: Java.loadClass('com.gregtechceu.gtceu.api.recipe.RecipeHelper'),
         AL: Java.loadClass('java.util.ArrayList')
       }
     }
@@ -130,48 +131,43 @@
     })
   }
 
-  // a concrete, correctly-sized sample stack straight out of the recipe's own ingredient (SizedIngredient.getItems() /
-  // FluidIngredient.getStacks() both already return stacks at the recipe's own amount - no guessing involved)
-  function sampleStack(entry) {
-    try {
-      if (entry.fluid) {
-        var stacks = asArray(entry.raw.getStacks())
-        return stacks.length > 0 ? stacks[0] : null
-      }
-      var items = asArray(entry.raw.getItems())
-      return items.length > 0 ? items[0] : null
-    } catch (e) {
-      return null
-    }
-  }
-
   // Picks the simplest (fewest distinct fluids, then fewest total contents) LV-tier-or-below recipe of a GTM recipe
   // type straight from the live recipe manager: nothing about alloy_smelter/mixer/ore_washer's own recipes is
-  // hardcoded here, so this works whatever recipes GTM 7.5.3 actually ships.
+  // hardcoded here, so this works whatever recipes GTM 7.5.3 actually ships. diag (always returned, even on a
+  // miss) tells LOOKUP's FAIL detail how far candidates got, instead of a single flat "none found".
   function pickRecipe(typeId, euCap, noFluid) {
+    var diag = { total: 0, aboveEu: 0, empty: 0, tooManyItems: 0, badItems: 0, badFluid: 0, firstException: '' }
     var type = GTRegistries.RECIPE_TYPES.get(rl(typeId))
-    if (!type) return null
+    if (!type) return { diag: diag }
     var c = lazy()
     var all = asArray(S.server.getRecipeManager().getAllRecipesFor(type))
+    diag.total = all.length
     var candidates = []
     all.forEach(function (r) {
       try {
-        var eut = Number(r.getInputEUt().getTotalEU())
-        if (eut > euCap) return
+        var eut = Number(c.RecipeHelper.getRealEUt(r).getTotalEU())
+        if (eut > euCap) { diag.aboveEu++; return }
         var ii = contentsOf(r, c.ItemCap, false)
         var fi = contentsOf(r, c.FluidCap, false)
-        if (noFluid && fi.length > 0) return
-        if (ii.length + fi.length === 0) return
-        if (ii.length > 4) return // a steam input bus only has 4 slots (one distinct item ingredient per slot)
-        var iiS = ii.map(sampleStack)
-        var fiS = fi.map(sampleStack)
-        if (iiS.some(function (s) { return s === null })) return
-        if (fiS.some(function (s) { return s === null })) return
+        if (noFluid && fi.length > 0) { diag.empty++; return }
+        if (ii.length + fi.length === 0) { diag.empty++; return }
+        if (ii.length > 4) { diag.tooManyItems++; return } // a steam input bus only has 4 slots (one item per slot)
+        // one correctly-sized stack per content, in the same order as ii/fi - straight from compiled Java
+        // (SizedIngredient#getItems() and FluidIngredient#getStacks() both return arrays, and Rhino cannot
+        // resolve either of those directly on a live ingredient instance; RecipeHelper's own methods call them
+        // from real bytecode, so they already work, same as the item side above)
+        var iiS = asArray(c.RecipeHelper.getInputItems(r))
+        if (iiS.length !== ii.length) { diag.badItems++; return }
+        var fiS = asArray(c.RecipeHelper.getInputFluids(r))
+        if (fiS.length !== fi.length) { diag.badFluid++; return }
         candidates.push({ recipe: r, iiS: iiS, fiS: fiS, score: fi.length * 100 + ii.length + fi.length })
-      } catch (e) { /* skip unreadable recipe */ }
+      } catch (e) {
+        if (!diag.firstException) diag.firstException = String(e)
+      }
     })
-    if (candidates.length === 0) return null
+    if (candidates.length === 0) return { diag: diag }
     candidates.sort(function (a, b) { return a.score - b.score })
+    candidates[0].diag = diag
     return candidates[0]
   }
 
@@ -539,23 +535,41 @@
       if (m.outHatch) m.outHatch.tank.setFluidInTank(0, lazy().FluidStack.EMPTY)
 
       var pick = pickRecipe(m.spec.gtmType, EU_CAP, !!m.spec.noFluidPick)
-      if (!pick) {
-        check(m.key + '.LOOKUP', false, 'no LV-tier-or-below recipe of ' + m.spec.gtmType + ' could be read from the live recipe manager')
+      if (!pick.recipe) {
+        var d = pick.diag
+        check(m.key + '.LOOKUP', false, 'no LV-tier-or-below recipe of ' + m.spec.gtmType + ' could be read from the live recipe manager (of ' +
+          d.total + ': aboveEu=' + d.aboveEu + ' empty=' + d.empty + ' tooManyItems=' + d.tooManyItems + ' badItems=' + d.badItems +
+          ' badFluid=' + d.badFluid + (d.firstException ? ' firstException=' + d.firstException : '') + ')')
         return
       }
       var slot = 0
       pick.iiS.forEach(function (st) { inv.insertItem(slot, st, false); slot++ })
       if (pick.fiS.length > 0) {
         if (!m.inHatch) throw new Error('the picked recipe needs a fluid but this machine has no fluid input hatch')
-        m.inHatch.tank.setFluidInTank(0, pick.fiS[0])
+        // setFluidInTank silently no-ops on a FluidStack built outside KubeJS (RecipeHelper's own, same as
+        // GTMaterials.Steam.getFluid() in fillSteam above) - rebuild it through KubeJS's own Fluid.of(), the only
+        // path confirmed to actually land in the tank, from the id/amount RecipeHelper already read correctly
+        m.inHatch.tank.setFluidInTank(0, Fluid.of(fluidName(pick.fiS[0]), Number(pick.fiS[0].getAmount())).getFluidStack())
       }
       var found = ctrl.getRecipeType().db().find(ctrl)
       var foundId = found ? String(found.id) : 'none'
       var wantId = String(pick.recipe.id)
+      var mismatchDetail = ''
+      if (foundId !== wantId) {
+        // db().find() didn't return the recipe we fed it exactly - ask GTM's own matcher why, instead of just
+        // reporting "found=none/something else" (tank readback rules out a silently-ignored insertion)
+        var tankNow = m.inHatch ? 'tank=' + fluidName(m.inHatch.tank.getFluidInTank(0)) + ' x' + m.inHatch.tank.getFluidInTank(0).getAmount() + ' mB ' : ''
+        try {
+          var match = lazy().RecipeHelper.matchRecipe(ctrl, pick.recipe)
+          mismatchDetail = ' ' + tankNow + 'matchRecipe=' + match.isSuccess() + (match.isSuccess() ? '' : ' reason=' + match.reason().getString())
+        } catch (eMatch) {
+          mismatchDetail = ' ' + tankNow + 'matchRecipe threw ' + eMatch
+        }
+      }
       check(m.key + '.LOOKUP', foundId === wantId, 'type=' + m.spec.gtmType + ' picked=' + wantId + ' items=[' +
         pick.iiS.map(function (st) { return st.getId() + ' x' + st.getCount() }).join(', ') + ']' +
         (pick.fiS.length > 0 ? ' fluid=' + fluidName(pick.fiS[0]) + ' x' + pick.fiS[0].getAmount() + ' mB' : '') +
-        ' found=' + foundId)
+        ' found=' + foundId + mismatchDetail)
     } catch (e) {
       check(m.key + '.LOOKUP', false, 'exception: ' + e)
     }
