@@ -3,7 +3,7 @@
   "title": "Steam era",
   "note": "Gate: coke -> bronze -> steam -> steel -> LV steam turbine + first LV circuit + LV hull (docs/eras/steam.md). Sources: GregTech Modern 7.5.3 (GTMachines, GTMultiMachines, GTOres, FuelRecipes) and the gg_dump.js dump.",
 
-  "eraOrder": ["steam", "lv", "mv", "hv", "ev", "iv", "luv", "zpm", "uv", "uhv", "uev", "uiv", "uxv", "opv", "max"],
+  "eraOrder": ["steam", "lv", "mv", "hv", "ev", "ev-mars", "iv", "luv", "zpm", "uv", "uhv", "uev", "uiv", "uxv", "opv", "max"],
 
   "unconditionalTypes": [
     "minecraft:crafting_shaped",
@@ -88,6 +88,12 @@
         "minecraft:flint"
       ],
       "note": "Mined or dug with wood/stone tools. Flint comes from gravel."
+    },
+    {
+      "id": "stones-gt",
+      "mode": "manual",
+      "items": ["gtceu:marble", "gtceu:red_granite"],
+      "note": "GTM 7.5.3's stone patches in the Overworld (GTPlacedFeatures/GTBiomeModifiers), mined by hand; tiers/obtain.json has the same source. GTM's red granite gave a chance of uranium dust in the macerator: the pack rebuilds it without (grindless:macerator/offworld_only/macerate_red_granite), and the EV tier's radioactive check watches it."
     },
     {
       "id": "plants",
@@ -244,6 +250,7 @@
     {
       "machine": "gtceu:steam_vein_drill",
       "types": ["gtceu:vein_drilling"],
+      "onlyTier": "",
       "maxEUt": 32,
       "needs": ["fluid:gtceu:steam"],
       "partsFromStructure": true,
@@ -256,6 +263,7 @@
     {
       "machine": "gtceu:steam_greenhouse",
       "types": ["gtceu:greenhouse"],
+      "onlyTier": "",
       "maxEUt": 32,
       "needs": ["fluid:gtceu:steam"],
       "partsFromStructure": true,
