@@ -12,7 +12,7 @@
 	quest_links: [ ]
 	quests: [
 		{
-			description: ["Every steel ingot of the steam age starts as a lump of coal."]
+			description: ["All the steel of the steam age starts as a lump of coal."]
 			icon: "minecraft:coal"
 			id: "154FF345AAD6A8D6"
 			shape: "rsquare"
@@ -286,7 +286,7 @@
 		}
 		{
 			dependencies: ["37689F7CFDADB7DC"]
-			description: ["It is never used up. Copy it by hand if you want a spare."]
+			description: ["It's never used up. Copy it by hand if you want a spare."]
 			icon: "grindless:lunar_chart_draft"
 			id: "5F16A671CF08E9B6"
 			size: 1.25d
@@ -592,7 +592,7 @@
 			y: 15.75d
 		}
 		{
-			description: ["Sand will not melt into glass here: the glass dust has to be cast. The mold is why glass waits for steel."]
+			description: ["Sand won't melt into glass here: the glass dust has to be cast. The mold is why glass waits for steel."]
 			icon: "gtceu:block_casting_mold"
 			id: "1DDC0A772FAE3BDC"
 			shape: "rsquare"

@@ -1,0 +1,1075 @@
+{
+	autofocus_id: "5FDCFA62F2331833"
+	consume_items: false
+	default_hide_dependency_lines: false
+	default_quest_shape: ""
+	filename: "pl_hv"
+	group: "3027186E3042DDFB"
+	icon: "gtceu:refinery"
+	id: "51F53E667E31552F"
+	order_index: 3
+	progression_mode: "flexible"
+	quest_links: [
+		{
+			id: "1AA74EDFA0BD76D4"
+			linked_quest: "70A91737242112D0"
+			shape: "rsquare"
+			x: 0.5d
+			y: 2.75d
+		}
+		{
+			id: "1536C25E2A729AC0"
+			linked_quest: "193E72A27638CE3B"
+			shape: "rsquare"
+			x: 11.5d
+			y: 13.25d
+		}
+		{
+			id: "3C08F3CCB4B5AB94"
+			linked_quest: "1D62F8CA7C28023C"
+			shape: "rsquare"
+			x: 11.5d
+			y: 14.75d
+		}
+		{
+			id: "70766B9CD31D7B38"
+			linked_quest: "5448FA5C814B1DBD"
+			shape: "rsquare"
+			x: 24.75d
+			y: 13.25d
+		}
+		{
+			id: "1EA272AD59F358F0"
+			linked_quest: "170DB957782774D8"
+			shape: "rsquare"
+			x: 5.5d
+			y: 19.0d
+		}
+	]
+	quests: [
+		{
+			icon: "gtceu:oil_bucket"
+			id: "5FDCFA62F2331833"
+			shape: "rsquare"
+			size: 1.0d
+			subtitle: "MV fluid drilling rig"
+			tasks: [
+				{ id: "1A7FE6DDB0A1F93D", item: "gtceu:oil_bucket", optional_task: true, type: "item" }
+				{ id: "5285E499475A749F", type: "checkmark" }
+			]
+			title: "Crude Oil"
+			x: 0.5d
+			y: 1.25d
+		}
+		{
+			icon: "grindless:hydrotreating_catalyst"
+			id: "3D5CDD218116ADBF"
+			shape: "rsquare"
+			size: 1.0d
+			subtitle: "Mixer: cobalt, molybdenum and silica (or syngas ash)"
+			tasks: [
+				{ id: "3679A4160434C7BB", item: "grindless:hydrotreating_catalyst", optional_task: true, type: "item" }
+				{ id: "39BC98E7D88EF33A", type: "checkmark" }
+			]
+			title: "Hydrotreating Catalyst"
+			x: 0.5d
+			y: 4.25d
+		}
+		{
+			dependencies: ["5FDCFA62F2331833", "70A91737242112D0", "3D5CDD218116ADBF"]
+			description: [
+				"One pass gives every fraction, already free of sulfur. The distillery gives one fraction a pass and throws the rest away."
+				"Give each fraction a tank, or the column stops."
+			]
+			icon: "gtceu:refinery"
+			id: "38AF513B285770F6"
+			shape: "gear"
+			size: 1.5d
+			tasks: [
+				{ id: "3499105E6A5DDC0A", item: "gtceu:refinery", optional_task: true, type: "item" }
+				{ id: "760C955408282488", type: "checkmark" }
+			]
+			title: "Refinery"
+			x: 3.0d
+			y: 2.75d
+		}
+		{
+			dependencies: ["38AF513B285770F6"]
+			icon: "gtceu:heavy_fuel_bucket"
+			id: "3E36E1AF43DCB110"
+			size: 1.0d
+			subtitle: "Diesel, or the syngas plant"
+			tasks: [
+				{ id: "55918CF185EBC15D", item: "gtceu:heavy_fuel_bucket", optional_task: true, type: "item" }
+				{ id: "12D146EDBD448B64", type: "checkmark" }
+			]
+			title: "Heavy Fuel"
+			x: 5.5d
+			y: 0.5d
+		}
+		{
+			dependencies: ["38AF513B285770F6"]
+			icon: "gtceu:light_fuel_bucket"
+			id: "36C23C76D9B342E6"
+			size: 1.0d
+			subtitle: "Diesel, or cracking"
+			tasks: [
+				{ id: "584001D08B37ED09", item: "gtceu:light_fuel_bucket", optional_task: true, type: "item" }
+				{ id: "526559CCEBD17E68", type: "checkmark" }
+			]
+			title: "Light Fuel"
+			x: 5.5d
+			y: 1.75d
+		}
+		{
+			dependencies: ["38AF513B285770F6"]
+			icon: "gtceu:naphtha_bucket"
+			id: "15F18C7DA5F52345"
+			size: 1.0d
+			subtitle: "Reformer, cracking, gasoline"
+			tasks: [
+				{ id: "1DCC5CC676D2EEBD", item: "gtceu:naphtha_bucket", optional_task: true, type: "item" }
+				{ id: "574C9FB9850240A3", type: "checkmark" }
+			]
+			title: "Naphtha"
+			x: 5.5d
+			y: 3.0d
+		}
+		{
+			dependencies: ["38AF513B285770F6"]
+			icon: "gtceu:refinery_gas_bucket"
+			id: "55FAC45856DC4D1C"
+			size: 1.0d
+			subtitle: "Methane for PTFE; gasoline"
+			tasks: [
+				{ id: "3F4A53388DA339AB", item: "gtceu:refinery_gas_bucket", optional_task: true, type: "item" }
+				{ id: "1ADFAAEA5218BDF8", type: "checkmark" }
+			]
+			title: "Refinery Gas"
+			x: 5.5d
+			y: 4.25d
+		}
+		{
+			dependencies: ["38AF513B285770F6"]
+			description: ["The sulfur the refinery pulls out. The LV sulfide roaster burns it back into sulfuric acid."]
+			icon: "gtceu:hydrogen_sulfide_bucket"
+			id: "1DD00667E82E75AE"
+			size: 0.75d
+			tasks: [
+				{ id: "3FFAC19E5F33C0EC", item: "gtceu:hydrogen_sulfide_bucket", optional_task: true, type: "item" }
+				{ id: "71638785223FFF9F", type: "checkmark" }
+			]
+			title: "Hydrogen Sulfide"
+			x: 5.5d
+			y: 5.5d
+		}
+		{
+			icon: "grindless:reforming_catalyst"
+			id: "5AFC7D6BE0D1C601"
+			shape: "rsquare"
+			size: 1.0d
+			subtitle: "End platinum on silica"
+			tasks: [
+				{ id: "35B6ECA4ACD894EE", item: "grindless:reforming_catalyst", optional_task: true, type: "item" }
+				{ id: "77121B070ADDB217", type: "checkmark" }
+			]
+			title: "Reforming Catalyst"
+			x: 9.5d
+			y: 1.0d
+		}
+		{
+			icon: "gtceu:naphtha_bucket"
+			id: "36ECB4254F7638DE"
+			shape: "rsquare"
+			size: 1.0d
+			subtitle: "From the refinery"
+			tasks: [
+				{ id: "782943D691BD0DFB", item: "gtceu:naphtha_bucket", optional_task: true, type: "item" }
+				{ id: "174AD2BD2F698774", type: "checkmark" }
+			]
+			title: "Naphtha"
+			x: 9.5d
+			y: 4.0d
+		}
+		{
+			icon: "gtceu:steam_bucket"
+			id: "7BF34AC740CDD394"
+			shape: "rsquare"
+			size: 1.0d
+			tasks: [
+				{ id: "7307DA493F69BE92", item: "gtceu:steam_bucket", optional_task: true, type: "item" }
+				{ id: "7D4875C87A35AFD2", type: "checkmark" }
+			]
+			title: "Steam"
+			x: 9.5d
+			y: 5.5d
+		}
+		{
+			dependencies: ["5AFC7D6BE0D1C601", "36ECB4254F7638DE"]
+			description: ["Naphtha over platinum gives aromatics and more hydrogen than the refinery used to make that naphtha."]
+			icon: "gtceu:reformer"
+			id: "7CFAA02398D2023A"
+			shape: "gear"
+			size: 1.5d
+			tasks: [
+				{ id: "358B21AE19F37932", item: "gtceu:reformer", optional_task: true, type: "item" }
+				{ id: "18662024A23AB033", type: "checkmark" }
+			]
+			title: "Catalytic Reformer"
+			x: 11.5d
+			y: 1.75d
+		}
+		{
+			dependencies: ["36ECB4254F7638DE", "7BF34AC740CDD394"]
+			icon: "gtceu:refinery"
+			id: "1B4D0FA2CD07C0A4"
+			shape: "gear"
+			size: 1.5d
+			subtitle: "Circuit 3: cracked and split in one pass"
+			tasks: [
+				{ id: "7A82D7EA97C70764", item: "gtceu:refinery", optional_task: true, type: "item" }
+				{ id: "3CBADCE5759FCF90", type: "checkmark" }
+			]
+			title: "Refinery, Steam Cracking"
+			x: 11.5d
+			y: 5.5d
+		}
+		{
+			dependencies: ["7CFAA02398D2023A"]
+			icon: "gtceu:hydrogen_bucket"
+			id: "7811CAAEB8DD172E"
+			shape: "circle"
+			size: 0.75d
+			subtitle: "Back into the refinery"
+			tasks: [
+				{ id: "591A2F8655EEC8C7", item: "gtceu:hydrogen_bucket", optional_task: true, type: "item" }
+				{ id: "7314F57E7A2E6F1D", type: "checkmark" }
+			]
+			title: "Hydrogen, Back"
+			x: 13.5d
+			y: 0.5d
+		}
+		{
+			dependencies: ["7CFAA02398D2023A"]
+			icon: "gtceu:benzene_bucket"
+			id: "777ABA05F5A09A7C"
+			size: 1.0d
+			subtitle: "Styrene and cumene"
+			tasks: [
+				{ id: "7F45C2B453CB2161", item: "gtceu:benzene_bucket", optional_task: true, type: "item" }
+				{ id: "34416583A9136D70", type: "checkmark" }
+			]
+			title: "Benzene"
+			x: 13.5d
+			y: 1.75d
+		}
+		{
+			dependencies: ["7CFAA02398D2023A"]
+			icon: "gtceu:toluene_bucket"
+			id: "31187D1F8D38635D"
+			size: 1.0d
+			subtitle: "Gasoline wants it"
+			tasks: [
+				{ id: "5D10579B99D8F93D", item: "gtceu:toluene_bucket", optional_task: true, type: "item" }
+				{ id: "7E8122AEB7EE1518", type: "checkmark" }
+			]
+			title: "Toluene"
+			x: 13.5d
+			y: 3.0d
+		}
+		{
+			dependencies: ["1B4D0FA2CD07C0A4"]
+			icon: "gtceu:ethylene_bucket"
+			id: "34AFF67F96F7B95A"
+			size: 1.0d
+			subtitle: "PE, PVC, styrene"
+			tasks: [
+				{ id: "30F7641C9EAA4536", item: "gtceu:ethylene_bucket", optional_task: true, type: "item" }
+				{ id: "5B03B4404B7C03BB", type: "checkmark" }
+			]
+			title: "Ethylene"
+			x: 13.5d
+			y: 4.25d
+		}
+		{
+			dependencies: ["1B4D0FA2CD07C0A4"]
+			icon: "gtceu:propene_bucket"
+			id: "7C224996639926D9"
+			size: 1.0d
+			subtitle: "Cumene, then epoxy"
+			tasks: [
+				{ id: "756691DBED3C16F5", item: "gtceu:propene_bucket", optional_task: true, type: "item" }
+				{ id: "1243B84854F0D763", type: "checkmark" }
+			]
+			title: "Propene"
+			x: 13.5d
+			y: 5.5d
+		}
+		{
+			dependencies: ["1B4D0FA2CD07C0A4"]
+			icon: "gtceu:butadiene_bucket"
+			id: "362FFC64DB9D2C89"
+			size: 1.0d
+			subtitle: "Synthetic rubber"
+			tasks: [
+				{ id: "1BDBF272CA9F33B6", item: "gtceu:butadiene_bucket", optional_task: true, type: "item" }
+				{ id: "37AAF527CC2B3C11", type: "checkmark" }
+			]
+			title: "Butadiene"
+			x: 13.5d
+			y: 6.75d
+		}
+		{
+			icon: "grindless:shift_catalyst"
+			id: "3FA30314DAAC0EBF"
+			shape: "rsquare"
+			size: 1.0d
+			subtitle: "Mixer: magnetite and chrome"
+			tasks: [
+				{ id: "580653C6766CB8C7", item: "grindless:shift_catalyst", optional_task: true, type: "item" }
+				{ id: "5C39878AA694B6AE", type: "checkmark" }
+			]
+			title: "Shift Catalyst"
+			x: 0.5d
+			y: 10.25d
+		}
+		{
+			icon: "gtceu:coal_dust"
+			id: "141C508103AC22D7"
+			shape: "rsquare"
+			size: 1.0d
+			subtitle: "Or coke, charcoal, carbon"
+			tasks: [
+				{ id: "3161209B57AD384E", item: "gtceu:coal_dust", optional_task: true, type: "item" }
+				{ id: "1AA1B0BCCEE5B205", type: "checkmark" }
+			]
+			title: "Coal Dust"
+			x: 0.5d
+			y: 11.75d
+		}
+		{
+			icon: "gtceu:steam_bucket"
+			id: "5450FBA8871FE44F"
+			shape: "rsquare"
+			size: 1.0d
+			tasks: [
+				{ id: "3842129A02E9CD2D", item: "gtceu:steam_bucket", optional_task: true, type: "item" }
+				{ id: "5F33585C0A9DD017", type: "checkmark" }
+			]
+			title: "Steam"
+			x: 0.5d
+			y: 13.25d
+		}
+		{
+			icon: "gtceu:heavy_fuel_bucket"
+			id: "78BB9B4CA6962DEA"
+			shape: "rsquare"
+			size: 1.0d
+			subtitle: "The refinery's bottoms"
+			tasks: [
+				{ id: "7C556AB4C4F2DDA0", item: "gtceu:heavy_fuel_bucket", optional_task: true, type: "item" }
+				{ id: "5E3E4AABDDB5105E", type: "checkmark" }
+			]
+			title: "Heavy Fuel"
+			x: 0.5d
+			y: 14.75d
+		}
+		{
+			dependencies: ["3FA30314DAAC0EBF", "141C508103AC22D7", "5450FBA8871FE44F", "78BB9B4CA6962DEA"]
+			description: [
+				"Steam on hot carbon makes carbon monoxide and hydrogen; more steam over the catalyst turns the monoxide into more hydrogen."
+				"Each gas leaves through its own hatch."
+			]
+			icon: "gtceu:syngas_plant"
+			id: "19E1CF6EE30E5C44"
+			shape: "gear"
+			size: 1.5d
+			tasks: [
+				{ id: "581588DE93C5EC9D", item: "gtceu:syngas_plant", optional_task: true, type: "item" }
+				{ id: "55ACE17527922CF8", type: "checkmark" }
+			]
+			title: "Syngas Plant"
+			x: 3.0d
+			y: 12.5d
+		}
+		{
+			dependencies: ["19E1CF6EE30E5C44"]
+			icon: "gtceu:carbon_monoxide_bucket"
+			id: "71E5DDE3B0BC514E"
+			size: 1.0d
+			subtitle: "Methanol, or shift it"
+			tasks: [
+				{ id: "734E260ED3705534", item: "gtceu:carbon_monoxide_bucket", optional_task: true, type: "item" }
+				{ id: "3EEDBE5FD906B6A2", type: "checkmark" }
+			]
+			title: "Carbon Monoxide"
+			x: 5.5d
+			y: 11.0d
+		}
+		{
+			dependencies: ["19E1CF6EE30E5C44"]
+			icon: "gtceu:hydrogen_bucket"
+			id: "3EB0044953E53832"
+			size: 1.25d
+			subtitle: "Refinery, ammonia, HF, the rocket"
+			tasks: [
+				{ id: "351E9A6B41FEC6EA", item: "gtceu:hydrogen_bucket", optional_task: true, type: "item" }
+				{ id: "7467B5511B37F77E", type: "checkmark" }
+			]
+			title: "Hydrogen"
+			x: 5.5d
+			y: 12.5d
+		}
+		{
+			dependencies: ["19E1CF6EE30E5C44"]
+			icon: "gtceu:carbon_dioxide_bucket"
+			id: "74A98964CB4F2201"
+			size: 0.75d
+			subtitle: "Captured: greenhouses, or void it"
+			tasks: [
+				{ id: "535864443B6E15AC", item: "gtceu:carbon_dioxide_bucket", optional_task: true, type: "item" }
+				{ id: "13BF4B39AD6B2934", type: "checkmark" }
+			]
+			title: "Carbon Dioxide"
+			x: 5.5d
+			y: 14.0d
+		}
+		{
+			dependencies: ["19E1CF6EE30E5C44"]
+			icon: "gtceu:ash_dust"
+			id: "3A97F9CFB3715958"
+			size: 0.75d
+			subtitle: "Fertilizer, or the catalyst"
+			tasks: [
+				{ id: "107569624C465FF3", item: "gtceu:ash_dust", optional_task: true, type: "item" }
+				{ id: "57227F170B49A24E", type: "checkmark" }
+			]
+			title: "Ash"
+			x: 5.5d
+			y: 15.5d
+		}
+		{
+			dependencies: ["71E5DDE3B0BC514E"]
+			icon: "gtceu:hydrogen_bucket"
+			id: "7F158CF0E872F990"
+			shape: "circle"
+			size: 0.75d
+			subtitle: "Circuit 4: the monoxide goes round again"
+			tasks: [
+				{ id: "1396F7F61991D30D", item: "gtceu:hydrogen_bucket", optional_task: true, type: "item" }
+				{ id: "33693776A34738AA", type: "checkmark" }
+			]
+			title: "Hydrogen, Shifted"
+			x: 7.5d
+			y: 11.0d
+		}
+		{
+			icon: "gtceu:naphtha_bucket"
+			id: "38505D979BA4C8A2"
+			shape: "rsquare"
+			size: 1.0d
+			tasks: [
+				{ id: "1E5EBD81B540B9E8", item: "gtceu:naphtha_bucket", optional_task: true, type: "item" }
+				{ id: "1B3EB63292B68C47", type: "checkmark" }
+			]
+			title: "Naphtha"
+			x: 11.5d
+			y: 10.25d
+		}
+		{
+			icon: "gtceu:refinery_gas_bucket"
+			id: "58D54C4E316D35DF"
+			shape: "rsquare"
+			size: 1.0d
+			tasks: [
+				{ id: "1683FF59D5338F0B", item: "gtceu:refinery_gas_bucket", optional_task: true, type: "item" }
+				{ id: "19B048D50001D5D5", type: "checkmark" }
+			]
+			title: "Refinery Gas"
+			x: 11.5d
+			y: 11.75d
+		}
+		{
+			dependencies: ["38505D979BA4C8A2", "58D54C4E316D35DF", "193E72A27638CE3B", "1D62F8CA7C28023C"]
+			description: ["The MV biorefinery's methanol and acetone finally find their big job here."]
+			icon: "gtceu:large_chemical_reactor"
+			id: "181E47CD9D767CF8"
+			shape: "gear"
+			size: 1.25d
+			tasks: [
+				{ id: "30300DED96D16DC9", item: "gtceu:large_chemical_reactor", optional_task: true, type: "item" }
+				{ id: "3C6ADD3BF1155B93", type: "checkmark" }
+			]
+			title: "Large Chemical Reactor"
+			x: 14.0d
+			y: 12.5d
+		}
+		{
+			dependencies: ["181E47CD9D767CF8"]
+			icon: "gtceu:raw_gasoline_bucket"
+			id: "33A57BF78B8EE399"
+			size: 1.0d
+			tasks: [
+				{ id: "3CCE287F3BA57019", item: "gtceu:raw_gasoline_bucket", optional_task: true, type: "item" }
+				{ id: "15E88FCACBF05A41", type: "checkmark" }
+			]
+			title: "Raw Gasoline"
+			x: 16.5d
+			y: 12.5d
+		}
+		{
+			icon: "gtceu:toluene_bucket"
+			id: "5B4EE371262EFACD"
+			shape: "rsquare"
+			size: 1.0d
+			subtitle: "From the reformer"
+			tasks: [
+				{ id: "5AD574337FDE99FC", item: "gtceu:toluene_bucket", optional_task: true, type: "item" }
+				{ id: "7EC57E43820BD22C", type: "checkmark" }
+			]
+			title: "Toluene"
+			x: 16.5d
+			y: 14.0d
+		}
+		{
+			dependencies: ["33A57BF78B8EE399", "5B4EE371262EFACD"]
+			icon: "gtceu:gasoline_bucket"
+			id: "39BFC0FAB2D7CD50"
+			size: 1.0d
+			subtitle: "Chemical reactor"
+			tasks: [
+				{ id: "5A3668186D1F6918", item: "gtceu:gasoline_bucket", optional_task: true, type: "item" }
+				{ id: "1D4B8B4F4DCBC3F6", type: "checkmark" }
+			]
+			title: "Gasoline"
+			x: 18.5d
+			y: 13.25d
+		}
+		{
+			dependencies: ["39BFC0FAB2D7CD50"]
+			icon: "gtceu:hv_combustion"
+			id: "3C857FCAB4BD612C"
+			shape: "gear"
+			size: 1.25d
+			subtitle: "Five times the energy of naphtha"
+			tasks: [
+				{ id: "58F9F11FCD8981AD", item: "gtceu:hv_combustion", optional_task: true, type: "item" }
+				{ id: "1AA1996971E05B3D", type: "checkmark" }
+			]
+			title: "Combustion Generator"
+			x: 20.5d
+			y: 13.25d
+		}
+		{
+			icon: "gtceu:lepidolite_dust"
+			id: "5322582EB15CCEDB"
+			shape: "rsquare"
+			size: 1.0d
+			subtitle: "Or bastnasite, or topaz"
+			tasks: [
+				{ id: "54092AADD3D2634F", item: "gtceu:lepidolite_dust", optional_task: true, type: "item" }
+				{ id: "3A69DCE9D41F3878", type: "checkmark" }
+			]
+			title: "Lepidolite Dust"
+			x: 24.75d
+			y: 10.25d
+		}
+		{
+			dependencies: ["5322582EB15CCEDB"]
+			icon: "gtceu:fluorine_bucket"
+			id: "792D7FB5F6297F15"
+			size: 1.0d
+			subtitle: "Electrolyzer"
+			tasks: [
+				{ id: "1426788E5170B1C0", item: "gtceu:fluorine_bucket", optional_task: true, type: "item" }
+				{ id: "7241DE09867514AE", type: "checkmark" }
+			]
+			title: "Fluorine"
+			x: 26.75d
+			y: 10.25d
+		}
+		{
+			dependencies: ["792D7FB5F6297F15"]
+			icon: "gtceu:hydrofluoric_acid_bucket"
+			id: "550FA4A333567A77"
+			size: 1.0d
+			subtitle: "With hydrogen"
+			tasks: [
+				{ id: "3CF74F396767DEE6", item: "gtceu:hydrofluoric_acid_bucket", optional_task: true, type: "item" }
+				{ id: "74FDFE4FF67D8C3D", type: "checkmark" }
+			]
+			title: "Hydrofluoric Acid"
+			x: 28.75d
+			y: 10.25d
+		}
+		{
+			icon: "gtceu:methane_bucket"
+			id: "7225437D4DF43B6C"
+			shape: "rsquare"
+			size: 1.0d
+			subtitle: "Refinery gas, distilled"
+			tasks: [
+				{ id: "1BD7F54C2714F4B7", item: "gtceu:methane_bucket", optional_task: true, type: "item" }
+				{ id: "7F347D5C20ED50A2", type: "checkmark" }
+			]
+			title: "Methane"
+			x: 24.75d
+			y: 11.75d
+		}
+		{
+			dependencies: ["7225437D4DF43B6C", "5448FA5C814B1DBD"]
+			icon: "gtceu:chloroform_bucket"
+			id: "71D0E2E26612900B"
+			size: 1.0d
+			tasks: [
+				{ id: "76F9206D0B0DDE06", item: "gtceu:chloroform_bucket", optional_task: true, type: "item" }
+				{ id: "1B62971B9B49AD2D", type: "checkmark" }
+			]
+			title: "Chloroform"
+			x: 26.75d
+			y: 12.5d
+		}
+		{
+			dependencies: ["550FA4A333567A77", "71D0E2E26612900B"]
+			icon: "gtceu:tetrafluoroethylene_bucket"
+			id: "5AB8B93E680717EE"
+			size: 1.0d
+			tasks: [
+				{ id: "77D7FE79649D2172", item: "gtceu:tetrafluoroethylene_bucket", optional_task: true, type: "item" }
+				{ id: "707D7B2E268DCF46", type: "checkmark" }
+			]
+			title: "Tetrafluoroethylene"
+			x: 30.75d
+			y: 11.0d
+		}
+		{
+			dependencies: ["71D0E2E26612900B"]
+			icon: "gtceu:hydrochloric_acid_bucket"
+			id: "7E9992A861DB0D27"
+			size: 0.75d
+			subtitle: "Both steps leave it: PVC, epoxy"
+			tasks: [
+				{ id: "59F0C54E32AE5724", item: "gtceu:hydrochloric_acid_bucket", optional_task: true, type: "item" }
+				{ id: "118CC231C5686A4C", type: "checkmark" }
+			]
+			title: "Hydrochloric Acid"
+			x: 28.75d
+			y: 12.5d
+		}
+		{
+			dependencies: ["5AB8B93E680717EE"]
+			description: ["Teflon. The large chemical reactor is lined with it, so this line comes first."]
+			icon: "gtceu:polytetrafluoroethylene_bucket"
+			id: "3211798D8D1FE487"
+			size: 1.25d
+			subtitle: "With oxygen"
+			tasks: [
+				{ id: "7A2E037FC94291A1", item: "gtceu:polytetrafluoroethylene_bucket", optional_task: true, type: "item" }
+				{ id: "17CD389F6986E433", type: "checkmark" }
+			]
+			title: "PTFE"
+			x: 32.75d
+			y: 11.0d
+		}
+		{
+			icon: "gcyr:fiberglass_foil"
+			id: "55051CE9CD604D31"
+			shape: "rsquare"
+			size: 1.0d
+			tasks: [
+				{ id: "5DF34560FFA9B9E8", item: "gcyr:fiberglass_foil", optional_task: true, type: "item" }
+				{ id: "556F8845FF6BB5AD", type: "checkmark" }
+			]
+			title: "Fiberglass Foil"
+			x: 0.5d
+			y: 19.0d
+		}
+		{
+			icon: "gtceu:epoxy_bucket"
+			id: "35DCEFE8D74600BF"
+			shape: "rsquare"
+			size: 1.0d
+			subtitle: "Large chemical reactor"
+			tasks: [
+				{ id: "56AA646990E997E7", item: "gtceu:epoxy_bucket", optional_task: true, type: "item" }
+				{ id: "378CEA44300853B1", type: "checkmark" }
+			]
+			title: "Epoxy"
+			x: 0.5d
+			y: 20.5d
+		}
+		{
+			icon: "gtceu:nitrogen_bucket"
+			id: "1886CB536C2D67BA"
+			shape: "rsquare"
+			size: 1.0d
+			subtitle: "Vented after each cure"
+			tasks: [
+				{ id: "11CFD17F803F1F57", item: "gtceu:nitrogen_bucket", optional_task: true, type: "item" }
+				{ id: "396B4D2D2630A921", type: "checkmark" }
+			]
+			title: "Nitrogen"
+			x: 0.5d
+			y: 22.0d
+		}
+		{
+			icon: "gtceu:stainless_steel_drum"
+			id: "1C420FC78FDA42D4"
+			shape: "rsquare"
+			size: 1.0d
+			subtitle: "The liner"
+			tasks: [
+				{ id: "1901C21E9A3B577F", item: "gtceu:stainless_steel_drum", optional_task: true, type: "item" }
+				{ id: "5EC7DA4EFB30A35C", type: "checkmark" }
+			]
+			title: "Stainless Steel Drum"
+			x: 0.5d
+			y: 23.5d
+		}
+		{
+			icon: "gcyr:para_aramid_foil"
+			id: "311A139B9FC53881"
+			shape: "rsquare"
+			size: 1.0d
+			tasks: [
+				{ id: "7012FE419B557124", item: "gcyr:para_aramid_foil", optional_task: true, type: "item" }
+				{ id: "3758300BDEDA957E", type: "checkmark" }
+			]
+			title: "Para-Aramid Foil"
+			x: 0.5d
+			y: 25.0d
+		}
+		{
+			dependencies: ["55051CE9CD604D31", "35DCEFE8D74600BF", "1886CB536C2D67BA", "1C420FC78FDA42D4", "311A139B9FC53881"]
+			description: ["Cures fiber and epoxy under hot nitrogen: heat shield tiles and wrapped tanks no single machine can make."]
+			icon: "gtceu:composite_autoclave"
+			id: "17FF6DB17A913F3D"
+			shape: "gear"
+			size: 1.5d
+			tasks: [
+				{ id: "7AADEB8C3AAAADD0", item: "gtceu:composite_autoclave", optional_task: true, type: "item" }
+				{ id: "577EA0EE42FC7DD0", type: "checkmark" }
+			]
+			title: "Composite Autoclave"
+			x: 3.0d
+			y: 22.0d
+		}
+		{
+			dependencies: ["17FF6DB17A913F3D"]
+			icon: "grindless:ablative_heat_shield_tile"
+			id: "36DD20256A75AB1E"
+			size: 1.0d
+			tasks: [
+				{ id: "36312F90F704C1C1", item: "grindless:ablative_heat_shield_tile", optional_task: true, type: "item" }
+				{ id: "3C58653C4A29BD30", type: "checkmark" }
+			]
+			title: "Ablative Tile"
+			x: 5.5d
+			y: 20.5d
+		}
+		{
+			dependencies: ["17FF6DB17A913F3D"]
+			icon: "grindless:composite_overwrapped_tank"
+			id: "77C862679060227F"
+			size: 1.0d
+			tasks: [
+				{ id: "7D28F6607B313E35", item: "grindless:composite_overwrapped_tank", optional_task: true, type: "item" }
+				{ id: "55940E86B3B016F2", type: "checkmark" }
+			]
+			title: "Overwrapped Tank"
+			x: 5.5d
+			y: 23.5d
+		}
+		{
+			dependencies: ["170DB957782774D8", "36DD20256A75AB1E"]
+			icon: "grindless:untested_rocket_motor"
+			id: "53AC102F9CD5F7B4"
+			size: 1.0d
+			subtitle: "Assembler, with Kapton K"
+			tasks: [
+				{ id: "3BF3C85172558151", item: "grindless:untested_rocket_motor", optional_task: true, type: "item" }
+				{ id: "3255BFAA673A7ABD", type: "checkmark" }
+			]
+			title: "Untested Rocket Motor"
+			x: 7.5d
+			y: 19.75d
+		}
+		{
+			icon: "gtceu:rocket_fuel_bucket"
+			id: "775B016ED47B7AB4"
+			shape: "rsquare"
+			size: 1.0d
+			subtitle: "Dimethylhydrazine and oxygen"
+			tasks: [
+				{ id: "1E7D738E439F0B27", item: "gtceu:rocket_fuel_bucket", optional_task: true, type: "item" }
+				{ id: "76F55258961369DC", type: "checkmark" }
+			]
+			title: "Rocket Fuel"
+			x: 7.5d
+			y: 21.25d
+		}
+		{
+			dependencies: ["53AC102F9CD5F7B4", "775B016ED47B7AB4"]
+			description: ["The same stand as MV, now firing whole motors on the fuel they will fly on."]
+			icon: "gtceu:engine_test_stand"
+			id: "157EA680C1789E68"
+			shape: "gear"
+			size: 1.5d
+			tasks: [
+				{ id: "370FA5D45AF5FA24", item: "gtceu:engine_test_stand", optional_task: true, type: "item" }
+				{ id: "357ACF9D8628CCE2", type: "checkmark" }
+			]
+			title: "Engine Test Stand"
+			x: 9.5d
+			y: 20.5d
+		}
+		{
+			dependencies: ["157EA680C1789E68"]
+			icon: "gcyr:basic_rocket_motor"
+			id: "71948E75F053AEF9"
+			size: 1.25d
+			tasks: [
+				{ id: "109B3F635DE7967E", item: "gcyr:basic_rocket_motor", optional_task: true, type: "item" }
+				{ id: "7F43D77F75247261", type: "checkmark" }
+			]
+			title: "Basic Rocket Motor"
+			x: 11.5d
+			y: 19.75d
+		}
+		{
+			dependencies: ["157EA680C1789E68"]
+			icon: "gtceu:carbon_dioxide_bucket"
+			id: "1229F3D684B0D049"
+			size: 0.75d
+			subtitle: "With water: both have a hatch"
+			tasks: [
+				{ id: "170C8150D3106808", item: "gtceu:carbon_dioxide_bucket", optional_task: true, type: "item" }
+				{ id: "5DF01C7E24C154D7", type: "checkmark" }
+			]
+			title: "Carbon Dioxide"
+			x: 11.5d
+			y: 21.25d
+		}
+		{
+			dependencies: ["77C862679060227F"]
+			icon: "gcyr:basic_fuel_tank"
+			id: "7039B89CD57BD61E"
+			size: 1.25d
+			subtitle: "Assembler"
+			tasks: [
+				{ id: "3057F06D00F4024D", item: "gcyr:basic_fuel_tank", optional_task: true, type: "item" }
+				{ id: "72DC5BB0AD6D477A", type: "checkmark" }
+			]
+			title: "Basic Fuel Tank"
+			x: 7.5d
+			y: 23.5d
+		}
+		{
+			icon: "gtceu:ethylene_bucket"
+			id: "3F34D8A943DCDAA0"
+			shape: "rsquare"
+			size: 1.0d
+			tasks: [
+				{ id: "1F6674C89195543F", item: "gtceu:ethylene_bucket", optional_task: true, type: "item" }
+				{ id: "340272061EE24AC2", type: "checkmark" }
+			]
+			title: "Ethylene"
+			x: 15.75d
+			y: 19.0d
+		}
+		{
+			icon: "gtceu:benzene_bucket"
+			id: "73769D9507929992"
+			shape: "rsquare"
+			size: 1.0d
+			tasks: [
+				{ id: "5D92311F80022FE7", item: "gtceu:benzene_bucket", optional_task: true, type: "item" }
+				{ id: "7C103814B84C5F76", type: "checkmark" }
+			]
+			title: "Benzene"
+			x: 15.75d
+			y: 20.5d
+		}
+		{
+			dependencies: ["3F34D8A943DCDAA0", "73769D9507929992"]
+			icon: "gtceu:styrene_bucket"
+			id: "1EFC616E069199BE"
+			size: 1.0d
+			tasks: [
+				{ id: "3B100AD8DDA041D2", item: "gtceu:styrene_bucket", optional_task: true, type: "item" }
+				{ id: "55B7E557E91C1C72", type: "checkmark" }
+			]
+			title: "Styrene"
+			x: 17.75d
+			y: 19.75d
+		}
+		{
+			icon: "gtceu:butadiene_bucket"
+			id: "171F1F0F5BCDE30F"
+			shape: "rsquare"
+			size: 1.0d
+			subtitle: "Steam cracking"
+			tasks: [
+				{ id: "7DDF6D5A094CCDDA", item: "gtceu:butadiene_bucket", optional_task: true, type: "item" }
+				{ id: "310FA92114D9D725", type: "checkmark" }
+			]
+			title: "Butadiene"
+			x: 17.75d
+			y: 21.25d
+		}
+		{
+			dependencies: ["1EFC616E069199BE", "171F1F0F5BCDE30F"]
+			icon: "gtceu:raw_styrene_butadiene_rubber_dust"
+			id: "512B9A72D3976371"
+			size: 1.0d
+			subtitle: "With oxygen"
+			tasks: [
+				{ id: "1FB5E4EA63B935D8", item: "gtceu:raw_styrene_butadiene_rubber_dust", optional_task: true, type: "item" }
+				{ id: "1586F55D58899C83", type: "checkmark" }
+			]
+			title: "Raw SBR"
+			x: 19.75d
+			y: 20.5d
+		}
+		{
+			icon: "gtceu:sulfur_dust"
+			id: "1E923E842B1231CC"
+			shape: "rsquare"
+			size: 1.0d
+			tasks: [
+				{ id: "5958147D317C1107", item: "gtceu:sulfur_dust", optional_task: true, type: "item" }
+				{ id: "754AC4BC5C957531", type: "checkmark" }
+			]
+			title: "Sulfur"
+			x: 19.75d
+			y: 22.0d
+		}
+		{
+			dependencies: ["512B9A72D3976371", "1E923E842B1231CC"]
+			description: ["Better rubber than the trees give. From IV on, the rings and pumps insist on it."]
+			icon: "gtceu:styrene_butadiene_rubber_bucket"
+			id: "1B54ABC22C003CC8"
+			size: 1.25d
+			subtitle: "Large chemical reactor"
+			tasks: [
+				{ id: "725F241D60BC4CFF", item: "gtceu:styrene_butadiene_rubber_bucket", optional_task: true, type: "item" }
+				{ id: "15C17F75B27DA350", type: "checkmark" }
+			]
+			title: "Styrene-Butadiene Rubber"
+			x: 21.75d
+			y: 21.25d
+		}
+		{
+			icon: "gtceu:nickel_dust"
+			id: "3C1D7FCA60CA4A18"
+			shape: "rsquare"
+			size: 1.0d
+			tasks: [
+				{ id: "1791726E47226828", item: "gtceu:nickel_dust", optional_task: true, type: "item" }
+				{ id: "1B0BDDC01D7ABD42", type: "checkmark" }
+			]
+			title: "Nickel"
+			x: 0.5d
+			y: 28.5d
+		}
+		{
+			icon: "gtceu:chromium_dust"
+			id: "7A326166EC450414"
+			shape: "rsquare"
+			size: 1.0d
+			tasks: [
+				{ id: "1961CDEDAD20C7A7", item: "gtceu:chromium_dust", optional_task: true, type: "item" }
+				{ id: "53F242AB10D6FA4B", type: "checkmark" }
+			]
+			title: "Chromium"
+			x: 0.5d
+			y: 30.0d
+		}
+		{
+			dependencies: ["3C1D7FCA60CA4A18", "7A326166EC450414"]
+			icon: "gtceu:nichrome_dust"
+			id: "3F2356C520754FA1"
+			size: 1.0d
+			subtitle: "Mixer"
+			tasks: [
+				{ id: "3653014478097A68", item: "gtceu:nichrome_dust", optional_task: true, type: "item" }
+				{ id: "33DB9D15CBC53D9D", type: "checkmark" }
+			]
+			title: "Nichrome Dust"
+			x: 2.5d
+			y: 29.25d
+		}
+		{
+			dependencies: ["3F2356C520754FA1"]
+			icon: "gtceu:electric_blast_furnace"
+			id: "1A4539D627DD3CE3"
+			shape: "gear"
+			size: 1.25d
+			subtitle: "2,700 K: two HV hatches"
+			tasks: [
+				{ id: "3AC821D405F37741", item: "gtceu:electric_blast_furnace", optional_task: true, type: "item" }
+				{ id: "11823FB33E77D627", type: "checkmark" }
+			]
+			title: "Electric Blast Furnace"
+			x: 4.5d
+			y: 29.25d
+		}
+		{
+			dependencies: ["1A4539D627DD3CE3"]
+			icon: "gtceu:hot_nichrome_ingot"
+			id: "59C2BA67ACEFE36D"
+			size: 1.0d
+			tasks: [
+				{ id: "76758EA1B2EB0522", item: "gtceu:hot_nichrome_ingot", optional_task: true, type: "item" }
+				{ id: "7DC297654D1D230E", type: "checkmark" }
+			]
+			title: "Hot Nichrome Ingot"
+			x: 6.5d
+			y: 29.25d
+		}
+		{
+			dependencies: ["59C2BA67ACEFE36D"]
+			description: ["Two EV circuits go into it, and every hot ingot from here on comes out of it."]
+			icon: "gtceu:vacuum_freezer"
+			id: "37D679796BA6A282"
+			shape: "gear"
+			size: 1.25d
+			tasks: [
+				{ id: "3D36174A2AB735A7", item: "gtceu:vacuum_freezer", optional_task: true, type: "item" }
+				{ id: "3525D29AF53189C2", type: "checkmark" }
+			]
+			title: "Vacuum Freezer"
+			x: 8.5d
+			y: 29.25d
+		}
+		{
+			dependencies: ["37D679796BA6A282"]
+			icon: "gtceu:nichrome_ingot"
+			id: "5D0A39315F25FE22"
+			size: 1.0d
+			tasks: [
+				{ id: "1E9CBA6F62F99335", item: "gtceu:nichrome_ingot", optional_task: true, type: "item" }
+				{ id: "3E8DE651179A5FCE", type: "checkmark" }
+			]
+			title: "Nichrome"
+			x: 10.5d
+			y: 29.25d
+		}
+		{
+			dependencies: ["5D0A39315F25FE22"]
+			icon: "gtceu:nichrome_coil_block"
+			id: "192B721F556D9AC8"
+			size: 1.25d
+			subtitle: "EV's hotter EBF"
+			tasks: [
+				{ id: "1704606F3DA3736B", item: "gtceu:nichrome_coil_block", optional_task: true, type: "item" }
+				{ id: "35BEE96F5BA90730", type: "checkmark" }
+			]
+			title: "Nichrome Coil"
+			x: 12.5d
+			y: 29.25d
+		}
+	]
+	subtitle: ["Crude oil goes through the refinery, hydrogen comes from carbon, and the rocket's parts get cured and fired."]
+	title: "HV Lines"
+}
