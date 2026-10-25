@@ -1,6 +1,6 @@
 # EV era
 
-EV is titanium, platinum and fine chemistry. Here multiblocks become the normal way to produce. Recipes reach 1,920 EU/t, they need acids, gases and a cleanroom at the same time, and the standalone machine falls short. Titanium only comes from the Moon, so EV's first job is to make the lunar base work on its own and connected to home: a tripod drill, a solar array that powers it, a cell that extracts oxygen from regolith and Titanium from Ilmenite without chlorine, and a plant that liquefies gases with the lunar cold, all linked by AE2. On Earth, the platinum plant closes out fine chemistry, and nano circuits are the wall. At the end, an antenna on the far side of the Moon charts the route to **Mars**, the only place with tungsten. Without it there is no Tungsten Steel and no IV. EV brings together four of our multiblocks (three new ones and the platinum plant), three family steps and the GTM ones.
+EV is titanium, platinum and fine chemistry. Here multiblocks become the normal way to produce. Recipes reach 1,920 EU/t, they need acids, gases and a cleanroom at the same time, and the standalone machine falls short. Titanium only comes from the Moon, so EV's first job is to make the lunar base work on its own and connected to home: a tripod drill, a solar array that powers it, a cell that extracts oxygen from regolith and Titanium from Ilmenite without chlorine, and a plant that liquefies gases with the lunar cold, all linked by AE2. On Earth, the platinum plant closes out fine chemistry, and nano circuits are the wall. At the end, an antenna on the far side of the Moon charts the route to **Mars**, the only place with tungsten. Without it there is no Tungsten Steel and no IV. EV brings together seven of our multiblocks (six new ones and the platinum plant), four family steps and the GTM ones. That makes eleven of ours, the ×1.35 target of rule 7 in `AGENTS.md` (see *Raising EV to the target*).
 
 You enter EV with what HV's end leaves you. On Earth: EV hull of lunar Titanium, an 8,192 EU/t power station, cleanroom, freezer, tower, large chemical reactor and an AE2 network with 256k. On the Moon: the tier 1 rocket, the suit, the lunar drill, the stored Helium-3, the Waystones and the first Earth–Moon AE2 bridge.
 
@@ -136,7 +136,7 @@ Built and tested in the scratch (`scratch/ev-plant/src/`), not applied. What it 
 - **Drill:** the EV tripod (above).
 - **Power: lunar solar array** (`gtceu:lunar_solar_array`). The next step after LV's mirror tower: no mirrors, no boiler and no water; silicon panels from the cell on Titanium frames over sintered brick, with radiators. A generator with no inputs, daytime only, on the Moon (×1.4) or on Mars (×0.43); power per panel to be tuned. Made like TFG's large solar panel (idea only). At night, buffers and the bridge.
 - **Observatory: deep space antenna** (`gtceu:deep_space_antenna`, Moon). Step up from MV's radio telescope: a dish on the far side, safe from Earth's radio noise. With power, it writes the Mars chart onto a `gtceu:data_stick` (`grindless:mars_chart`, catalyst for the tier 2 parts), and its quest opens with the first signal from Sagittarius A\*.
-- **Greenhouse: no EV step.** On the Moon nothing needs plants: the O₂ comes from the cell. The sealed dome waits for a base that needs it.
+- **Greenhouse: sealed dome** (added on 2026-10-25, see *Raising EV to the target*). The earlier "no EV step" is reversed: the wither needs biomass and the bases need O₂, and the dome grows both without sky.
 - **From GTM:** EBF, large chemical reactor, tower, freezer, cleanroom and large turbines, as they are.
 
 ### Discarded
@@ -147,6 +147,70 @@ Built and tested in the scratch (`scratch/ev-plant/src/`), not applied. What it 
 - **Propellant tank:** evaporation would be a penalty that wastes work; tanks and AE2 store the fluids.
 - **EV drill on Earth** (the scratch one, 3×6×3): HV already does the job. Its code moves to the tripod.
 - **GCYM cubes and parallel hatch:** IV, as before.
+
+### Raising EV to the target (orchestrator, 2026-10-25)
+
+With 7 multiblocks of ours, EV fell short of the ×1.35 target (rule 7 of `AGENTS.md`: HV has 7, so EV needs 10 or more). Four are added, which makes 11. They were picked from the machine catalog (`docs/research/space/machines-catalog.md`) and Leisure's ideas (`docs/research/leisure.md`). Each one gains something, and each byproduct has a destination. Figures marked *(tune)* are set when the machine is built.
+
+#### Combined-cycle plant: `gtceu:combined_cycle_plant` (Earth)
+
+What it gains: **more energy from the same fuel, through a more complex plant** (rule 8). A gas turbine's exhaust is still hot. A heat-recovery boiler turns that heat into steam for a steam turbine, which is how real combined-cycle plants beat simple turbines.
+
+- **Recipe type:** `gtceu:combined_cycle` (new, check for an id clash), a generator.
+  - It takes the fuels of GTM's gas turbine, read when the world loads, like the platinum plant reads GT--'s line.
+  - Each fuel gives the same EU per mB as the gas turbine after the ×2 of `power/generators.js`. On top of that, distilled water → steam, worth about +40% of the fuel's EU in a large steam turbine *(tune)*.
+- **Own condition:** the steam needs a destination. If its hatch fills up, the plant stops, fuel and all.
+- **Structure:** a turbine hall of stable Titanium casing with a heat-recovery boiler of Titanium pipes and firebricks on its back. It has 1 fuel input hatch, 1 water input hatch, 1 steam output hatch and 1–2 EV dynamo hatches. There is no rotor: it is a generator with its own recipes, not a GTM turbine.
+- **Crafted with:** EV hull + large gas turbine controller (`gtceu:gas_large_turbine`) + 2 EV pumps + 4 EV circuits.
+- **Why it is not a big cube:** it only gains if a second plant (the steam turbines) takes its steam, so the energy comes from building more, not from a free bonus.
+- **Risk and spike:** it is a KubeJS multiblock that outputs EU, the same mechanism the lunar solar array needs. One spike proves both.
+  - **Fallback:** if EU output is not possible, the plant only burns fuel into steam worth 140% of the fuel's EU in the large steam turbine. It then works like the heliostat tower, which already makes steam.
+
+#### Hot strip mill: `gtceu:hot_strip_mill` (Earth)
+
+What it gains: **several steps in one, and energy back.** Hot ingots go straight from the EBF to rolled products, without the vacuum freezer and the bender, and the water that cools them comes out as steam. This is real hot rolling.
+
+- **Recipe type:** `gtceu:hot_rolling` (new). Its recipes are generated when the world loads from every GTM material with a hot ingot whose freezer recipe asks only for EU. The ones that need Liquid Helium (5,000 K or more) keep the freezer.
+  - The circuit picks the product: plate, rods or foil, at the bender's and extruder's ratios.
+  - Energy: the sum of the freezer and the bender, with no discount.
+  - Steam per ingot grows with the blast temperature *(tune)*.
+- **Own condition:** water in, steam out. If the steam has no destination, it stops.
+- **Structure:** a 3×3×9 line of rolling stands. It has stable Titanium casing, steel frames, water sprays and a steam hood, plus an input bus, an output bus, a water hatch, a steam output hatch and 1–2 EV hatches.
+- **Crafted with:** EV hull + EV bender + GTM vacuum freezer controller + 2 EV pumps + 4 EV circuits.
+- **Why it is not a big cube:** it is a route GTM does not have (no freezer), and it gives back part of the EBF's energy as steam, which needs a turbine.
+- **Byproducts:** steam → large steam turbine or the combined-cycle plant's steam line.
+
+#### Sealed dome: `gtceu:sealed_dome` (Moon and Mars, greenhouse family step)
+
+What it gains: **crops where there is no sky, no soil and no air.** LED panels grow plants through the 14-day lunar night, and the plants turn CO₂ into O₂. The idea comes from Leisure's large greenhouse (no sky needed) and the catalog's sealed lunar dome. The physics is real: BIOS-3 and Lunar Palace 1.
+
+- **Recipe type:** the greenhouse family's type if it does not check for sky or daytime (verify). Otherwise a new type, `gtceu:sealed_growing`.
+  - Recipes carry `.dimension('gcyr:luna')` or `.dimension('gcyr:mars')`.
+  - Yields are those of the HV greenhouse.
+  - Seed or sapling (not used up) + water + CO₂ → crops or wood + O₂.
+- **CO₂:** on Mars, it comes straight from the outside air, like the gas collector. On the Moon, it comes from home through the bridge. Home sources include the engine test stand's exhaust (MV), which gives that CO₂ a destination two eras later.
+- **Structure:** a dome of tempered glass on a ring of sintered regolith brick, with an airlock, LED panels and a soil bed. It has an input bus, an output bus, a water hatch, a CO₂ hatch, an O₂ output hatch and 1–2 EV hatches.
+  - On Mars, the brick has to come from the Moon, because only the cell makes it.
+- **Crafted with:** HV greenhouse controller + EV hull + 2 EV pumps + 4 EV circuits.
+- **Byproducts:** O₂ → suits, the cryogenic plant or the network. Crops → home, where the brewery turns them into biomass for the wither (400 mB per Nether Star), and food.
+
+#### Rare-earth extraction cascade: `gtceu:extraction_cascade` (Earth)
+
+What it gains: **a separation GTM does not do.** Martian rare earths (the KubeJS material from the Mars vein) only come apart here. Samarium only comes from Mars, because EV removes it from `rare_earth_separation`. Real separation plants work this way, with a long cascade of mixer-settlers and an organic solvent.
+
+- **Recipe type:** `gtceu:solvent_extraction` (new). The circuit picks the mode:
+  1. **Leach** (circuit 1): Martian rare-earth dust + HCl (EV fine chemistry) → rare-earth chloride solution.
+  2. **Extraction** (circuit 2): chloride solution + kerosene (MV RP-1 line) → Samarium, Neodymium and the other chlorides GTM 7.5.3 has as materials (verify), with about 95% of the kerosene back *(tune)*.
+  - GTM's electrolyzer turns the chlorides into metals.
+- **Structure:** a 3×3×7 line of mixer-settler stages in inert casing with glass sides. It has an input bus, 3 fluid input hatches, 4 fluid output hatches and 1–2 EV hatches. Accepts ME hatches.
+- **Crafted with:** EV hull + EV mixer + EV centrifuge + EV chemical reactor + 4 EV circuits.
+- **Why it is not a big cube:** its input exists only on Mars, it crosses three eras (MV kerosene, EV HCl, Mars ore), and it sends Samarium two eras ahead.
+- **Byproducts:**
+  - Samarium → reserve for the LuV motors' magnets.
+  - Neodymium → motors, alongside the Nether's.
+  - Spent HCl → back to the HCl loop.
+  - Kerosene → recycled, apart from the small loss.
+  - Chlorides with no consumer are inert and voided.
 
 ## New process lines
 
@@ -161,6 +225,10 @@ Built and tested in the scratch (`scratch/ev-plant/src/`), not applied. What it 
 | Martian atmosphere | Martian air + water → processor (ruthenium) → CH₄ + O₂ → mixer → methalox → gas turbine on Mars | Spare O₂: suits. Spare CH₄: home network |
 | Tungsten (final) | scheelite + 2,000 mB of HCl → tungstic acid (bath, 960 EU/t) → electrolysis (W + 2,000 mB of H₂ + 4,000 of O₂) → EBF with nichrome at 3,600 K → freezer. Tungsten Steel: W + steel (EV mixer) → EBF 3,000 K → freezer. RTM: Ru + W + Mo → EBF 3,000 K → 4,500 K coil | CaCl₂: cell charge. LiCl (from the tungstate): lithium. H₂ and O₂: network |
 | Metal mixture | stone dust → `stone_dust_separation` → mixture → `metal_mixture_separation` (900 EU/t) → hematite, bauxite, pyrolusite, barite and chromite | Each one to its own line; the barite is stored. The Ilmenite is removed from the recipe |
+| Combined cycle | refinery gas or any gas turbine fuel + distilled water → combined-cycle plant → EU + steam → large steam turbine | Steam: turbine, or the plant stops |
+| Hot rolling | EBF → hot ingot → hot strip mill (circuit picks plate, rods or foil) + water → product + steam | Steam: turbines |
+| Martian rare earths | Martian tripod → rare-earth ore → dust → cascade: HCl leach → chloride solution → solvent extraction with kerosene (MV) → separated chlorides → GTM electrolyzer | Samarium: LuV magnets (reserve). Neodymium: motors. Spent HCl: back to the HCl loop. Kerosene: recycled, small loss. Inert ones: voided |
+| Off-world crops | seeds + water + CO₂ (Martian air, or CO₂ from home: engine test stand exhaust, MV) → sealed dome → crops + O₂ | Crops: biomass for the wither. O₂: suits, cryogenic plant |
 
 ## Storage and logistics
 
@@ -207,10 +275,10 @@ New rules in `tools/analysis/tiers/ev.json`:
 
 No new mods: machines, recipe types, items, fluids and rules are all KubeJS and datapack.
 
-- **Startup:** types `pgm_refining`, `regolith_processing`, `cryogenic_processing` and `atmosphere_processing`; machines `platinum_plant`, `regolith_cell`, `cryogenic_plant`, `atmosphere_processor`, `ev_vein_drill` (tripod), `lunar_solar_array` and `deep_space_antenna`, using the pattern helper; blocks and items `sintered_regolith`, `molten_salt_charge`, `mars_chart`, `ruthenium_catalyst`, `platinum_electrode`, the wing panel, the Mars rare earth material and the Mars samples; fluids `liquid_nitrogen`, `methalox` and, if IV requires it, `liquid_hydrogen`; texts in `en_us` and `es_es`.
+- **Startup:** types `pgm_refining`, `regolith_processing`, `cryogenic_processing`, `atmosphere_processing`, `combined_cycle`, `hot_rolling` and `solvent_extraction`; machines `platinum_plant`, `regolith_cell`, `cryogenic_plant`, `atmosphere_processor`, `ev_vein_drill` (tripod), `lunar_solar_array`, `deep_space_antenna`, `combined_cycle_plant`, `hot_strip_mill`, `sealed_dome` and `extraction_cascade`, using the pattern helper; blocks and items `sintered_regolith`, `molten_salt_charge`, `mars_chart`, `ruthenium_catalyst`, `platinum_electrode`, the wing panel, the Mars rare earth material and the Mars samples; fluids `liquid_nitrogen`, `methalox` and, if IV requires it, `liquid_hydrogen`; texts in `en_us` and `es_es`.
 - **Server:** recipes for the new types; `veins_mars.json` with its samples; GCYR advanced parts; combustion bans (Moon, Mars) and methalox; the cuts from the *Validator*; two rows in `mobs.json`.
 - **Data:** `pack/kubejs/data/gcyr/gcyr/planets/venus.json` and `mercury.json` with `rocket_tier` 3, and Mars generation with only our three veins.
-- **Tests:** GCYR's dimensions, the dimension and time conditions, the solar generator and interplanetary P2P are new mechanisms, so they are tested in-game, in new strips (Moon X 2560–2623, Mars X 2816–2879, Y 98–112). The rest is covered by the `-Tier ev` validator, split into Moon and Mars.
+- **Tests:** GCYR's dimensions, the dimension and time conditions, the solar generator and interplanetary P2P are new mechanisms. They are tested in-game in new strips: the next free X bands of the table in `AGENTS.md` (from X 5632, in steps of 256), Z 0–15, Y 98–112. On the Moon and Mars, use the same X and Z. The old figures here (Moon X 2560–2623, Mars X 2816–2879) clashed with the GCYR flight and Moon bands. The rest is covered by the `-Tier ev` validator, split into Moon and Mars.
 
 ## Quests
 
@@ -233,7 +301,11 @@ Chapter **"EV — Moonbase"** in the eras tab, written in English: about 25 shor
 - **Leaks when removing resources from Earth.** Ti, W, He-3, Sm and D come out of recipes, ore byproducts and addons. A leak breaks the journey without showing in-game: only the validator sees it.
 - **Iridium, osmium, Venus and Mercury.** The standalone plant releases the Ir/Os mixture, and the journey puts Ir and Os on Mercury; and the tier 2 rocket reaches Venus and Mercury if they do not go up to tier 3. IV closes this; here the mixture is stored and tier 3 is proposed.
 
-Credits to note in `CREDITS.md`: regolith cell (NASA and MIT molten-regolith electrolysis, and Cambridge's FFC process: real physics), cryogenic plant (radiators to the night sky: real physics), atmosphere processor (MOXIE and the Sabatier reaction: real), solar array (TFG's large solar panel, idea only), antenna (far-side radio telescopes: real), advanced parts and planets (GCYR, LGPL-3.0). The Ostwald tower, the crystal puller, the mass cannon and the propellant tank remain as discarded alternatives.
+Credits to note in `CREDITS.md`: regolith cell (NASA and MIT molten-regolith electrolysis, and Cambridge's FFC process: real physics), cryogenic plant (radiators to the night sky: real physics), atmosphere processor (MOXIE and the Sabatier reaction: real), solar array (TFG's large solar panel, idea only), antenna (far-side radio telescopes: real), advanced parts and planets (GCYR, LGPL-3.0). Also the four 2026-10-25 additions:
+- combined-cycle plant: real combined-cycle gas plants; the catalog's `combined_cycle_plant`; GTNH's large heat exchanger, idea only;
+- hot strip mill: real hot rolling; the catalog's hot strip mill option;
+- sealed dome: Leisure's large greenhouse, idea only; the catalog's sealed lunar dome; BIOS-3 and Lunar Palace 1, real;
+- extraction cascade: real solvent extraction of rare earths. The Ostwald tower, the crystal puller, the mass cannon and the propellant tank remain as discarded alternatives.
 
 ## Proposed decisions
 
@@ -258,3 +330,9 @@ The twelve proposals are approved, with these details:
 - **The HV lunar drill and the EV tripod are in the same family.** The EV tripod changes shape and parts compared to the HV one, not just the bit.
 - **`journey.md` is adjusted.** In the EV row, the Ostwald tower, the mass cannon and the propellant tank come out, and the cryogenic plant goes in.
 - **EV is built once the Moon works in-game** (the user asked for this). What is in the scratch is reused: the platinum plant, the EV drill and the EV quests.
+
+## Decisions taken (orchestrator, 2026-10-25)
+
+- **EV goes from 7 to 11 multiblocks of ours** (rule 7 of `AGENTS.md`: ×1.35 per era). The four additions are in *Raising EV to the target*, and their lines are in *New process lines*.
+- **The sealed dome is the greenhouse family's EV step.** The earlier "no EV greenhouse" is reversed.
+- **Test strips** follow the band table in `AGENTS.md` (from X 5632), not the old Moon and Mars figures of this document.

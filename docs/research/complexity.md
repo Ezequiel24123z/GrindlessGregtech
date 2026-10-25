@@ -8,7 +8,7 @@ Steam–HV are **built** (real KubeJS code, tested in-game). EV–IV are **desig
 
 | Metric | Steam | LV | MV | HV | EV (design) | IV (design) |
 |---|---|---|---|---|---|---|
-| Own multiblocks (registered) | 5 | 6 | 6 | 7 | 7 (0 built) | 8 (0 built) |
+| Own multiblocks (registered) | 5 (+11 convenience, v0.5.2) | 6 | 6 | 7 | 11 (0 built; 7 before 2026-10-25) | 8 (0 built) |
 | GTM multiblocks that become useful | — (no electricity) | EBF + 1-block machines | MV fluid drill | cleanroom, cracker, large chemical reactor, large steel boiler/turbine | freezer, distillation tower, large combustion engine/gas turbine, large EV miner | assembly line, large IV miner, parallel ×4, quantum chest/tank |
 | Process lines (tabulated in the era) | ~4 (rebuilt, no table of its own) | 4 (+ AE2 as a separate mega-line, ~20 steps) | 5 | 6 (+ rocket project, + syngas) | 9 | 8 |
 | Average steps per line | ~1.5 | ~5 | ~4.5 | ~5 | ~4 | ~4.5 |
@@ -19,6 +19,8 @@ Steam–HV are **built** (real KubeJS code, tested in-game). EV–IV are **desig
 | Play hours (estimated) | 3–5 | 7–11 | 10–15 | 18–26 | 30–45 | 45–70 |
 
 The quest figures for LV/MV/HV are **the ones from before the rewrite** (`DECISIONS.md`, translated from Spanish: "LV, MV, HV... rewritten by six writers in parallel... go into v0.5.1"); they cannot yet be used to measure a trend. EV only has the "Lunar Base" chapter (12 quests): the Mars, platinum and nano section of `ev.md` itself is not written yet.
+
+The multiblock row counts **progression** multiblocks only, the ones that add a recipe, route or line. Parallel versions of machines that already exist are quality of life and are counted apart (`DECISIONS.md`, 2026-10-25). Example: the 11 steam family multiblocks of v0.5.2.
 
 ## 2. Detail per tier
 
@@ -55,7 +57,7 @@ Tabulated lines (`hv.md`): crude→fuels (6), cracking→olefins/aromatics (4), 
 
 \* EV only has the Moon chapter; it is not comparable yet. † IV: 0 of ~22 planned; the chapter is not written.
 
-**Conclusion:** today growth is **linear to flat on the structural axes** (multiblocks, lines, items in the gate), not exponential in the strict sense. A real exponential axis would give *growing ratios* (36→107→214→428...), and here the ratios **shrink** or stay the same. This is consistent with a decision already in `DECISIONS.md` (translated from Spanish: "from EV on, each era brings 2-3 new multiblocks"): the pack itself already set a target of **linear** growth in the number of multiblocks, not exponential. What can grow faster without inflating quantities or times is the **density of the cross-link graph**: each new multiblock that also links to 2+ earlier lines (not just the immediate one) makes the number of *connections* grow faster than the number of *nodes*. That is what already shows in the EV/IV jump (reserves 2-3 eras ahead) compared with steam/LV (reserves 1 era ahead), and it is the signal closest to "exponential" in the data. Compliance in what is already built (Steam–HV) is reasonable and does not need redoing, as you already decided; the LV/MV/HV quest book should be re-measured after the v0.5.1 rewrite to get a reliable figure.
+**Conclusion:** today growth is **linear to flat on the structural axes** (multiblocks, lines, items in the gate), not exponential in the strict sense. A real exponential axis would give *growing ratios* (36→107→214→428...), and here the ratios **shrink** or stay the same. This is consistent with a decision already in `DECISIONS.md` (translated from Spanish: "from EV on, each era brings 2-3 new multiblocks"): the pack itself already set a target of **linear** growth in the number of multiblocks, not exponential (since replaced by ×1.35 per era, see §5). What can grow faster without inflating quantities or times is the **density of the cross-link graph**: each new multiblock that also links to 2+ earlier lines (not just the immediate one) makes the number of *connections* grow faster than the number of *nodes*. That is what already shows in the EV/IV jump (reserves 2-3 eras ahead) compared with steam/LV (reserves 1 era ahead), and it is the signal closest to "exponential" in the data. Compliance in what is already built (Steam–HV) is reasonable and does not need redoing, as you already decided; the LV/MV/HV quest book should be re-measured after the v0.5.1 rewrite to get a reliable figure.
 
 ## 4. Small changes, Steam→HV
 
@@ -88,7 +90,9 @@ Rules: additive, without changing the shape of any multiblock, without raising q
 
 ## 5. Targets from EV onward so that growth is exponential
 
-The axis that can really compound without inflating quantities is the **density of cross-links**: adding multiblocks is not enough (`DECISIONS.md` already sets 2-3 per era, a linear figure on purpose). Each new line must be required to link to **more earlier and more distant lines** than the previous era.
+**Updated 2026-10-24/25.** The user then set a stronger target (`DECISIONS.md`, rule 7 of `AGENTS.md`): our progression multiblocks grow by about **×1.35 per era** from EV on (EV 10 or more, IV 13–14, LuV about 18, then ×1.35 of the previous era). That target replaces the old "2–3 per era" figure, and the "New own multiblocks" and "Family steps" columns below together have to add up to it. The rest of this section still holds: lines and cross-links must grow too.
+
+The axis that can really compound without inflating quantities is the **density of cross-links**: adding multiblocks is not enough. Each new line must be required to link to **more earlier and more distant lines** than the previous era.
 
 ### Target table (EV–UV) and general rule after that
 
@@ -103,14 +107,17 @@ The axis that can really compound without inflating quantities is the **density 
 
 ### EV vs. the target
 
-`ev.md` **already meets or exceeds** the table: 4 new multiblocks + 3 steps (7 in total, above the minimum), 9 tabulated lines, and it is the first era with explicit reserves 2-3 eras ahead (helium→IV, helium-3→LuV fusion, Ir/Os→IV, liquid nitrogen→Mercury vein drill (IV)). What it lacks is not design; it is **measurement tooling and pending content**:
+`ev.md` met the lines target (9 tabulated lines), and it is the first era with explicit reserves 2-3 eras ahead (helium→IV, helium-3→LuV fusion, Ir/Os→IV, liquid nitrogen→Mercury vein drill (IV)). With 7 own multiblocks (4 new + 3 steps), it fell short of the ×1.35 target of 10.
+- **Closed on 2026-10-25:** four more were added (`ev.md`, "Raising EV to the target"): combined-cycle plant, hot strip mill, sealed dome and rare-earth extraction cascade. That makes 11.
+
+What is still missing is not design; it is **measurement tooling and pending content**:
 - There is no `tools/analysis/tiers/ev.json`: the EV gate cannot be validated yet.
 - The quest chapter only covers the Moon (12 of ~25): Mars, platinum plant, nano circuits and wither are missing.
 - The risks the document itself flags (GCYR failures when launching/changing dimension, AE2 performance across 3 dimensions) are the ones that really block, not the lack of cross-links.
 
 ### IV vs. the target
 
-`iv.md` also **meets** it: 3 new multiblocks + 5 steps (8 in total), 8 lines, reserves toward LuV and ZPM (tritium, enriched sulfate/trinium, naquadria solution, Cs). As with EV, what is missing is:
+`iv.md` meets the lines target: 8 lines, with reserves toward LuV and ZPM (tritium, enriched sulfate/trinium, naquadria solution, Cs). Its 8 own multiblocks (3 new + 5 steps) fall short of the ×1.35 target. With EV at 11, IV needs about 15, so 6–7 more are chosen when IV is built. As with EV, what is missing is:
 - `tools/analysis/tiers/iv.json` and the chapter `iv_age.snbt` (0 of ~22 quests written).
 - The document itself marks fission in KubeJS as risk no. 1 ("if a KubeJS multiblock generator does not output EU... it is tested before anything else", translated from Spanish): it is worth resolving that spike before building the rest of the era, because all of IV's energy depends on it.
 - There is no IV drill of its own on Earth (the right decision, since the tungsten steel drill bit raises the tier of the drills that already exist): it is not a gap, it is the rule "not every family step has to repeat each era" (translated from Spanish).
@@ -121,8 +128,8 @@ The axis that can really compound without inflating quantities is the **density 
 
 ## 6. Audit summary
 
-- **Own multiblocks:** 5 (Steam) → 6 → 6 → 7 (HV built); 7 → 8 (EV/IV designed). Flat growth, by a decision already taken in `DECISIONS.md`.
+- **Own multiblocks:** 5 (Steam) → 6 → 6 → 7 (HV built); 7 → 8 (EV/IV designed). This was flat growth, by the "2–3 per era" decision then in `DECISIONS.md`. That decision was replaced by ×1.35 per era: EV is now 11, and IV is raised when it is built.
 - **Process lines:** 4 → 4 → 5 → 6 (built); 9 → 8 (designed). Linear, with cross-links that get deeper each time.
 - **Verdict:** none of the structural axes (multiblocks, lines, items in the gate) is exponential today; they are linear or flat, with ratios that shrink tier by tier. The most promising axis is the **depth of forward cross-links**, which does speed up from HV to EV/IV.
 - There is no need to redo Steam–HV (the rule is new); the four to six small changes in section 4 are the reasonable adjustment.
-- EV and IV, as designed, already meet the content target; what is missing is their own validator, the rest of the quest book, and resolving the technical risks each document already flags.
+- EV and IV, as designed, meet the lines target. Their multiblock counts are raised to ×1.35: EV was raised in `ev.md` on 2026-10-25, and IV is raised when it is built. What is missing besides that is their own validator, the rest of the quest book, and resolving the technical risks each document already flags.
