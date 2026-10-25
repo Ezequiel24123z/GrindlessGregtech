@@ -20,7 +20,7 @@ ClientEvents.lang('en_us', event => {
 
     add('item.grindless.vein_sample_ilmenite_moon', 'Lunar Ilmenite Vein Sample')
     add('item.grindless.vein_sample_regolith_moon', 'Lunar Regolith Sample')
-    add('tooltip.grindless.vein_sample.drill_lunar', 'Put it in the input bus of the Lunar Drill, on the Moon, with an HV drill bit. It is never used up.')
+    add('tooltip.grindless.vein_sample.drill_lunar', 'Put it in the input bus of the Lunar Drill (HV drill bit) or the EV Tripod Drill (titanium bit), on the Moon. It is never used up.')
     add('tooltip.grindless.vein_sample.volatiles', 'Gives: %s')
     add('tooltip.grindless.vein_sample.daytime', 'Only by lunar day: the solar wings of the drill bake the regolith.')
     add('tooltip.grindless.vein_sample.moon', 'Moon: craft it with an empty vein probe and two things of the vein brought back by hand on the first visit.')
@@ -46,7 +46,7 @@ ClientEvents.lang('es_es', event => {
 
     add('item.grindless.vein_sample_ilmenite_moon', 'Muestra de veta de ilmenita lunar')
     add('item.grindless.vein_sample_regolith_moon', 'Muestra de regolito lunar')
-    add('tooltip.grindless.vein_sample.drill_lunar', 'Ponla en el bus de entrada de la perforadora lunar, en la Luna, con una broca HV. No se gasta.')
+    add('tooltip.grindless.vein_sample.drill_lunar', 'Ponla en el bus de entrada de la perforadora lunar (broca HV) o de la perforadora trípode EV (broca de titanio), en la Luna. No se gasta.')
     add('tooltip.grindless.vein_sample.volatiles', 'Da: %s')
     add('tooltip.grindless.vein_sample.daytime', 'Solo de día lunar: las alas solares de la perforadora hornean el regolito.')
     add('tooltip.grindless.vein_sample.moon', 'Luna: se hace con una sonda de vetas vacía y dos cosas de la veta traídas a mano en la primera visita.')
