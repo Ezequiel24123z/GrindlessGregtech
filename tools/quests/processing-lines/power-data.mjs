@@ -3,6 +3,10 @@
 // text is a figure (pl-lib.mjs#P) that pl-check.mjs recomputes from the dump, the pack's config or a script.
 import { I, F, M, n, L, E, P, engineFluid, boilerWater, build, structure, network } from './pl-lib.mjs';
 
+// The wireless band uses the wireless energy branch's ids (ezequiel24123z-wireless-energy, bd7759a), which exist only once that
+// branch is merged. false puts the marked slot back instead (GG_QUESTS_EXPECTED.power: [83, 88] with the band, [77, 82] without).
+const WITH_WIRELESS = true;
+
 // fuel figures, EU per mB, from the dump's recipes (they already carry the pack's x2, power/generators.js)
 const COMBUSTION = [
   ['fluid:gtceu:high_octane_gasoline', 'high-octane gasoline', 6400], ['fluid:gtceu:gasoline', 'gasoline', 3200],
@@ -57,7 +61,7 @@ export default {
     ['ivFission', 'ivVenus', 'ivMercury', 'ivSolar'],
     ['laterFusion', 'laterNaq', 'laterDyson'],
     ['gHull', 'gBat', 'gCable', 'gFar', 'gBig'],
-    ['gWireless'],
+    ...(WITH_WIRELESS ? [['gWireless']] : []),
   ],
   clusters: {
     // ---------------------------------------------------------------- Steam
@@ -499,10 +503,12 @@ export default {
       nodes: [
         n('lapo', 0, 0, I('gtceu:lapotron_crystal'), 'Lapotron Crystal', { kind: 'raw' }),
         n('pss', 2.25, 0, I('gtceu:power_substation'), 'Power Substation', { kind: 'info', from: ['lapo'], sub: 'One battery the size of a building; it wants a LuV circuit' }),
+        // without the wireless band, the network keeps a marked place here
+        ...(WITH_WIRELESS ? [] : [n('wireless', 4.5, 0, I('minecraft:lightning_rod'), 'Wireless Energy Network', { kind: 'slot', alone: true, sub: 'Coming soon, tower and all' })]),
       ],
     },
     // ---------------------------------------------------------------- the wireless network (tables/wireless_energy.json)
-    gWireless: {
+    ...(WITH_WIRELESS ? { gWireless: {
       name: 'Wireless energy network',
       nodes: [
         n('wbat', 0, 0, I('gtceu:lv_lithium_battery'), 'Batteries', { kind: 'raw', sub: 'Any battery of the cell\'s tier' }),
@@ -533,6 +539,6 @@ export default {
           desc: 'Shift-right-click the machine with an empty hand to read the network.', figs: [P.wcover(2, 'lv', 'iv')],
         }),
       ],
-    },
+    } } : {}),
   },
 };
