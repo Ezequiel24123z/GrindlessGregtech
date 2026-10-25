@@ -147,7 +147,7 @@ function fakeList(items) {
 }
 
 function sandbox({ values, intBoxing = true, storesDouble = false }) {
-  const spec = { loaded: true, correcting: false, saves: 0, writesOutside: 0, writes: [] };
+  const spec = { loaded: true, correcting: false, saves: 0, writesOutside: 0, writes: [], stringPathReads: 0 };
   const cvs = {};
   for (const [p, v] of Object.entries(values)) {
     cvs[p] = {
@@ -162,7 +162,14 @@ function sandbox({ values, intBoxing = true, storesDouble = false }) {
   }
   const SERVER_SPEC = {
     isLoaded: () => spec.loaded,
-    getValues: () => ({ get: (p) => cvs[p] ?? null }),
+    getValues: () => ({
+      get() { throw new Error('UnmodifiableConfig.get is ambiguous for Rhino ConsString paths'); },
+      'get(java.lang.String)'(p) {
+        spec.stringPathReads++;
+        assert.equal(typeof p, 'string');
+        return cvs[p] ?? null;
+      }
+    }),
     save() { if (!spec.correcting) spec.writesOutside++; spec.saves++; },
     correct(config, listener) {
       spec.correcting = true;
@@ -207,6 +214,15 @@ test('migration: 70 keys from the table, applied on Forge\'s ServerAboutToStartE
   assert.deepEqual([iron.stock, iron.pack], [54, 108]);
   assert.ok(S.targets.some((t) => t.path === 'server.LimitedNetheriteBarrelIV.baseSlotLimitMultiplier' && t.pack === 80));
   assert.ok(S.targets.every((t) => !/Wood|LimitedBarrel(I|II|III|IV)\./.test(t.path)), 'wood storages untouched');
+});
+
+test('migration: concatenated NightConfig paths select the String overload for every key', () => {
+  const sb = sandbox({ values: stockValues() });
+  sb.S.apply('overload regression');
+  assert.ok(sb.S.last.ok, sb.S.last.error);
+  assert.equal(sb.spec.stringPathReads, 70);
+  assert.equal(sb.S.last.raised.length, 70);
+  assert.equal(sb.logs.filter(([level]) => level === 'error').length, 0);
 });
 
 test('migration: an existing world at stock values is raised in one guarded pass with boxed Integers', () => {

@@ -151,7 +151,11 @@
   }
 
   function fileHoldsInteger(cfg, path, n) {
-    return cfg.getOptional(path).equals(cls().IntStream.of(n).boxed().findFirst())
+    return cfg['getOptional(java.lang.String)'](path).equals(cls().IntStream.of(n).boxed().findFirst())
+  }
+
+  function configEntry(cfg, path) {
+    return cfg['get(java.lang.String)'](path)
   }
 
   function guardedSet(spec, pairs) {
@@ -291,11 +295,11 @@
     var values = spec.getValues()
     var bad = []
     S.targets.forEach(function (t) {
-      var cv = values.get(t.path)
+      var cv = configEntry(values, t.path)
       if (cv === null || !liveHoldsInteger(cv, t.pack)) bad.push(t.path + '=' + (cv === null ? 'missing' : cv.get()))
     })
     check('live_integers', bad.length === 0, bad.length === 0 ? 'all ' + S.targets.length + ' live values are java.lang.Integer at the pack value (IronChest ' +
-      values.get('server.IronChest.inventorySlotCount').get() + ' slots, NetheriteChest ' + values.get('server.NetheriteChest.inventorySlotCount').get() + ')' :
+      configEntry(values, 'server.IronChest.inventorySlotCount').get() + ' slots, NetheriteChest ' + configEntry(values, 'server.NetheriteChest.inventorySlotCount').get() + ')' :
       bad.length + ' wrong: ' + bad.slice(0, 6).join(', '))
     // the saved file, read back from disk with a fresh NightConfig reader (no autosave, no watcher)
     var cfg = null
@@ -321,7 +325,7 @@
       check('disk_integers', false, 'the world\'s sophisticatedstorage-server.toml could not be read (tried ' + tries.length + ' paths; client world folders "' + sval('levelDirs') + '")')
     } else {
       var badDisk = []
-      S.targets.forEach(function (t) { if (!fileHoldsInteger(cfg, t.path, t.pack)) badDisk.push(t.path + '=' + cfg.get(t.path)) })
+      S.targets.forEach(function (t) { if (!fileHoldsInteger(cfg, t.path, t.pack)) badDisk.push(t.path + '=' + configEntry(cfg, t.path)) })
       check('disk_integers', badDisk.length === 0, where + ': ' + (badDisk.length === 0 ? 'all ' + S.targets.length + ' keys saved as integers at the pack value' :
         badDisk.length + ' wrong: ' + badDisk.slice(0, 6).join(', ')))
       check('disk_spec_correct', !!spec.isCorrect(cfg), 'Forge\'s spec ' + (spec.isCorrect(cfg) ? 'accepts the saved file as is: the next start loads these values without a correction' :
@@ -363,7 +367,7 @@
         IF.CLIENT_CONFIG.correct(c, function (action, path, before, after) { fixes.push('value ' + String(action) + ' ' + String(path)) },
           function (action, path, before, after) { fixes.push('comment ' + String(path)) })
       }
-      // the mod loads this file in its constructor and corrects it then; the run's log says whether it ever had to (see the README)
+      // Startup may normalize comments; the live values and this post-load spec check remain mandatory.
       check('furnace_file_correct', ok, ok ? 'config/ironfurnaces-client.toml on disk is what the mod\'s spec expects (values and comments)' :
         'the spec would still rewrite it: ' + fixes.slice(0, 8).join(', '))
       c.close()
@@ -496,9 +500,9 @@
       var spec = cls().SSConfig.SERVER_SPEC
       var values = spec.getValues()
       var byPath = targetsByPath()
-      T.oldConfig = OLD_KEYS.map(function (k) { return { cv: values.get(k), v: Number(values.get(k).get()) } })
-      guardedSet(spec, OLD_KEYS.map(function (k) { return { cv: values.get(k), v: byPath[k].stock } }))
-      note('old_config', OLD_KEYS.map(function (k) { return k + '=' + values.get(k).get() }).join(', '))
+      T.oldConfig = OLD_KEYS.map(function (k) { return { cv: configEntry(values, k), v: Number(configEntry(values, k).get()) } })
+      guardedSet(spec, OLD_KEYS.map(function (k) { return { cv: configEntry(values, k), v: byPath[k].stock } }))
+      note('old_config', OLD_KEYS.map(function (k) { return k + '=' + configEntry(values, k).get() }).join(', '))
       T.level.setBlockAndUpdate(bp(A), Block.getBlock('sophisticatedstorage:iron_chest').defaultBlockState())
       T.level.setBlockAndUpdate(bp(B), Block.getBlock('sophisticatedstorage:iron_barrel').defaultBlockState())
       T.level.setBlockAndUpdate(bp(C), Block.getBlock('sophisticatedstorage:limited_iron_barrel_1').defaultBlockState())

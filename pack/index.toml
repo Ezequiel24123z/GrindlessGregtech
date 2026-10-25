@@ -2894,7 +2894,7 @@ hash = "a56b3ee8a0178fe253a94c4a0d4a7962e1028fe0b22d64677a11df3b719313ac"
 
 [[files]]
 file = "kubejs/startup_scripts/grindless/integration/sophisticatedstorage_tiers.js"
-hash = "d0dbf71bbb54595243d78fd461cf3dd477a994e83cae80acde50bad4c41f520c"
+hash = "dc1a8e1c553273b2b077106a3816bbcb5103b6fe12b35917bafea6ed531b9091"
 
 [[files]]
 file = "kubejs/startup_scripts/grindless/iv/fission_reactor.js"
