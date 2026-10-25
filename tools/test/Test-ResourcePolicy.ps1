@@ -330,4 +330,179 @@ try {
     Assert-Policy ($clock.Elapsed.TotalMilliseconds -lt 1000) 'real loopback RCON timeout stays bounded'
 } finally { $fixture.Dispose() }
 
+# the bounded restart (gg-server.ps1 Invoke-GGServerRestart): request rules, and a static look at the function itself
+$req = New-TestRequest
+Add-Member -InputObject $req -NotePropertyName suite -NotePropertyValue 'server'
+Add-Member -InputObject $req -NotePropertyName commands -NotePropertyValue @('kubejs custom_command gg_x', '@restart:GGTEST\|x\|PHASE1', 'kubejs custom_command gg_x')
+Assert-GGResourceRequest $req
+Assert-Policy $true 'one restart with a marker is a valid server request'
+$req.commands = @('@restart', '@restart')
+Assert-Rejected { Assert-GGResourceRequest $req } 'a run cannot restart twice (both boots share one budget)'
+$req.commands = @('@restart:(unclosed')
+Assert-Rejected { Assert-GGResourceRequest $req } 'a restart marker must be a valid regex'
+$req.commands = @('@restartnow')
+Assert-Rejected { Assert-GGResourceRequest $req } 'a malformed restart command is refused'
+$req.commands = @('@restart:GGTEST\|a\|DONE&&GGTEST\|b\|DONE')
+Assert-GGResourceRequest $req
+Assert-Policy $true 'a restart may wait for several markers (&&)'
+$req.commands = @('@restart:GGTEST\|a\|DONE&&')
+Assert-Rejected { Assert-GGResourceRequest $req } 'an empty restart marker is refused'
+$req.commands = @('@restart:GGTEST\|a\|DONE&&(')
+Assert-Rejected { Assert-GGResourceRequest $req } 'every restart marker must be a valid regex'
+$req.commands = @('@restart')
+$req.suite = 'client'
+Assert-Rejected { Assert-GGResourceRequest $req } 'a restart belongs to the server suite only'
+$tokens = $null
+$errors = $null
+$serverAst = [Management.Automation.Language.Parser]::ParseFile((Join-Path $PSScriptRoot 'remote\gg-server.ps1'), [ref]$tokens, [ref]$errors)
+Assert-Policy (@($errors).Count -eq 0) ('gg-server.ps1 parses without errors ' + (@($errors) -join '; '))
+$restartFn = $serverAst.Find({ param($n) $n -is [Management.Automation.Language.FunctionDefinitionAst] -and $n.Name -eq 'Invoke-GGServerRestart' }, $true)
+Assert-Policy ($null -ne $restartFn) 'gg-server.ps1 defines Invoke-GGServerRestart'
+$budgetWrites = @($restartFn.FindAll({ param($n) $n -is [Management.Automation.Language.AssignmentStatementAst] -and $n.Left.Extent.Text -match 'NativeBudget' }, $true))
+Assert-Policy ($budgetWrites.Count -eq 0) 'a restart never resets or replaces the native budget clock'
+$calls = @($restartFn.FindAll({ param($n) $n -is [Management.Automation.Language.CommandAst] }, $true) | ForEach-Object { $_.GetCommandName() })
+Assert-Policy (@($calls | Where-Object { $_ -eq 'Get-GGNativeTimeoutMs' }).Count -ge 6) 'every restart wait is bounded by the shared native budget'
+Assert-Policy (-not ($calls -contains 'Get-GGFreeRamGb') -and $restartFn.Extent.Text -notmatch 'Insufficient available RAM') 'a restart adds no RAM gate: the one global test JVM and its heap caps are the limits'
+Assert-Policy ($restartFn.Extent.Text -match 'Get-GGNativeTimeoutMs \$budget 30000') 'a restart stops the server within the same 30 s grace as the final shutdown'
+Assert-Policy ((Get-Content -Raw (Join-Path $PSScriptRoot 'remote\gg-server.ps1')) -match "Invoke-GGServerRestart \`$ctx \`$inst \`$res \`$Req") 'the commands stage hands @restart to Invoke-GGServerRestart instead of RCON'
+$waitStage = @($serverAst.FindAll({ param($n) $n -is [Management.Automation.Language.CommandAst] -and $n.GetCommandName() -eq 'Invoke-GGStage' }, $true) | Where-Object { $_.CommandElements[1].Value -eq 'wait-markers' })
+Assert-Policy ($waitStage.Count -eq 1 -and $waitStage[0].Extent.Text -match 'phase1\\logs\\kubejs\\server\.log' -and $waitStage[0].Extent.Text -match 'phase1\\logs\\latest\.log') 'after a restart, -WaitForLog markers may come from either boot'
+
+# A local dry run of Invoke-GGServerRestart: a small console program stands in for java (it writes the "Done" line and exits 0 on
+# `stop`) and a loopback listener answers RCON's login. Two markers (one in each log), the console stop, the first boot's logs moved to
+# phase1\, the same command line started (no RAM gate), the boot, the settle and RCON, on the run's one budget clock; then a marker that
+# never comes. No Minecraft, no SSH.
+. (Join-Path $PSScriptRoot 'remote\gg-server.ps1')
+$dryRoot = Join-Path $PSScriptRoot ('.restart-dryrun-' + [guid]::NewGuid().ToString('N'))
+[void][IO.Directory]::CreateDirectory($dryRoot)
+$fakeJava = Join-Path $dryRoot 'fake-java.exe'
+Add-Type -OutputAssembly $fakeJava -OutputType ConsoleApplication -TypeDefinition @'
+using System;
+using System.IO;
+public static class GGFakeServer {
+    public static int Main(string[] args) {
+        Directory.CreateDirectory("logs");
+        string log = Path.Combine("logs", "latest.log");
+        File.AppendAllText(log, "[00:00:00] [Server thread/INFO] [minecraft/DedicatedServer]: Done (1.000s)! For help, type \"help\"" + Environment.NewLine);
+        Console.Out.WriteLine("fake server up: " + string.Join(" ", args));
+        string line;
+        while ((line = Console.In.ReadLine()) != null) {
+            if (line.Trim() == "stop") {
+                File.AppendAllText(log, "[00:00:01] [Server thread/INFO] [minecraft/MinecraftServer]: Stopping server" + Environment.NewLine);
+                return 0;
+            }
+        }
+        return 3;
+    }
+}
+'@
+Add-Type -TypeDefinition @'
+using System;
+using System.IO;
+using System.Net;
+using System.Net.Sockets;
+using System.Threading;
+public sealed class GGLoginRconFixture : IDisposable {
+    private readonly TcpListener listener;
+    private readonly Thread worker;
+    private volatile bool stopping;
+    public int Port { get; private set; }
+    public int Logins;
+    public GGLoginRconFixture() {
+        listener = new TcpListener(IPAddress.Loopback, 0);
+        listener.Start();
+        Port = ((IPEndPoint)listener.LocalEndpoint).Port;
+        worker = new Thread(new ThreadStart(Serve));
+        worker.IsBackground = true;
+        worker.Start();
+    }
+    private static byte[] ReadExact(NetworkStream s, int n) {
+        byte[] b = new byte[n];
+        int o = 0;
+        while (o < n) { int r = s.Read(b, o, n - o); if (r <= 0) throw new IOException("closed"); o += r; }
+        return b;
+    }
+    private void Serve() {
+        while (!stopping) {
+            try {
+                TcpClient c = listener.AcceptTcpClient();
+                NetworkStream s = c.GetStream();
+                int len = BitConverter.ToInt32(ReadExact(s, 4), 0);
+                byte[] p = ReadExact(s, len);
+                MemoryStream m = new MemoryStream();
+                BinaryWriter w = new BinaryWriter(m);
+                w.Write(10); w.Write(BitConverter.ToInt32(p, 0)); w.Write(2); w.Write((short)0);
+                byte[] a = m.ToArray();
+                s.Write(a, 0, a.Length);
+                Interlocked.Increment(ref Logins);
+            } catch (IOException) { } catch (SocketException) { } catch (ObjectDisposedException) { } catch (InvalidOperationException) { }
+        }
+    }
+    public void Dispose() { stopping = true; listener.Stop(); worker.Join(1000); }
+}
+'@
+$savedDryGG = $global:GG.Clone()
+$dryProcs = New-Object System.Collections.ArrayList
+$dryRcon = New-Object GGLoginRconFixture
+$script:DryLog = New-Object System.Collections.ArrayList
+function Write-GGLog { param([string]$Message, [string]$Level = 'INFO') [void]$script:DryLog.Add($Message) }
+# no RAM gate: a restart must not even read the counters (0 GB "available" here would refuse any launch that looked)
+$script:DryRamReads = 0
+function Get-GGFreeRamGb { $script:DryRamReads++; return 0 }
+try {
+    $inst = Join-Path $dryRoot 'server'
+    $res = Join-Path $dryRoot 'results'
+    [void][IO.Directory]::CreateDirectory((Join-Path $inst 'logs\kubejs'))
+    [void][IO.Directory]::CreateDirectory($res)
+    [IO.File]::WriteAllText((Join-Path $inst 'logs\kubejs\server.log'), "[00:00:00] [INFO] GGTEST|dry|PHASE1|DONE`r`n")
+    $global:GG.RunId = 'restart-dryrun'
+    $global:GG.HasLock = $false
+    $global:GG.RunLog = ''
+    $global:GG.NativeBudget = @{ Clock = [Diagnostics.Stopwatch]::StartNew(); TimeoutSec = 600 }
+    $dryBudget = $global:GG.NativeBudget
+    $first = [GGProc]::Start($fakeJava, 'first boot', $inst, (Join-Path $res 'server-stdout.log'), (Join-Path $res 'server-stderr.log'), $null)
+    [void]$dryProcs.Add($first)
+    $waited = [Diagnostics.Stopwatch]::StartNew()
+    while (-not (Test-Path (Join-Path $inst 'logs\latest.log')) -and $waited.Elapsed.TotalSeconds -lt 20) { Start-Sleep -Milliseconds 100 }
+    # the second marker: another test's DONE in latest.log (the fake server opens it only to append a line)
+    [IO.File]::AppendAllText((Join-Path $inst 'logs\latest.log'), "[00:00:00] [Server thread/INFO] [KubeJS Server/]: GGTEST|other|DONE`r`n")
+    $ctx = @{ Proc = $first; Rcon = $null; Java = $fakeJava; ForgeVer = 'dryrun'; Port = 0; RconPort = $dryRcon.Port; RconPw = 'dry'; ExpectStop = $false; Booted = $true; Restarted = $false; Phase1Logs = $false }
+    $dryReq = New-TestRequest
+    $dryReq.settleSec = 1
+    Invoke-GGServerRestart $ctx $inst $res $dryReq 'GGTEST\|dry\|PHASE1\|DONE&&GGTEST\|other\|DONE'
+    $second = $ctx.Proc
+    [void]$dryProcs.Add($second)
+    Assert-Policy ($first.HasExited -and $first.ExitCode -eq 0) 'the restart stops the server through its console and requires exit code 0'
+    Assert-Policy ($second.Id -ne $first.Id -and -not $second.HasExited) 'the restart starts the same command line again as a second process'
+    Assert-Policy ($ctx.Booted -and $ctx.Restarted -and $ctx.Phase1Logs -and $null -ne $ctx.Rcon -and $dryRcon.Logins -eq 1) 'after the restart the server has booted, settled and RCON is connected again'
+    $kept = @('phase1\logs\latest.log', 'phase1\logs\kubejs\server.log', 'phase1\server-stdout.log') | Where-Object { -not (Test-Path (Join-Path $res $_)) }
+    Assert-Policy ($kept.Count -eq 0) ('the first boot''s logs are kept in results\server\phase1 (missing: ' + ($kept -join ', ') + ')')
+    Assert-Policy (-not (Test-Path (Join-Path $inst 'logs\kubejs\server.log'))) 'the second boot''s waits never read the first boot''s KubeJS log'
+    Assert-Policy ((Read-GGSharedText (Join-Path $res 'server-stdout.log')) -match '@user_jvm_args\.txt .*nogui') 'the second launch uses the server''s own argument line'
+    Assert-Policy ([object]::ReferenceEquals($global:GG.NativeBudget, $dryBudget)) 'the restart spends the run''s one budget clock'
+    Assert-Policy ($script:DryRamReads -eq 0) 'the restart reads no available-RAM counter before its second launch'
+    $logText = @($script:DryLog) -join "`n"
+    Assert-Policy ($logText -match 'restart marker hit \[GGTEST\\\|dry\\\|PHASE1\\\|DONE\] \[GGTEST\\\|other\\\|DONE\]' -and $logText -match 'restarted: settled') 'the restart waits for every marker and settles like the first boot'
+    # a marker that never comes: bounded by the wait limit, the server left running for the normal shutdown
+    $dryReq.waitTimeoutSec = 2
+    $clock = [Diagnostics.Stopwatch]::StartNew()
+    $missed = $false
+    try { Invoke-GGServerRestart $ctx $inst $res $dryReq 'GGTEST\|other\|DONE&&never printed' } catch { $missed = $_.Exception.Message -match '\[never printed\] not seen within 2s' }
+    Assert-Policy ($missed -and $clock.Elapsed.TotalSeconds -lt 10 -and -not $second.HasExited -and $ctx.Proc.Id -eq $second.Id) 'a restart marker that never comes fails within its bound and leaves the server to the normal shutdown'
+} finally {
+    foreach ($p in $dryProcs) {
+        if (-not $p.HasExited) {
+            try { $p.WriteLine('stop') } catch {}
+            if (-not $p.WaitForExit(5000)) { Stop-Process -Id $p.Id -Force -ErrorAction SilentlyContinue }
+        }
+        $p.CloseLogs()
+    }
+    if ($ctx -and $ctx.Rcon) { $ctx.Rcon.Dispose() }
+    $dryRcon.Dispose()
+    $global:GG = $savedDryGG
+    Remove-Item function:Write-GGLog
+    Remove-Item function:Get-GGFreeRamGb
+    Remove-Item -LiteralPath $dryRoot -Recurse -Force
+}
+
 [Console]::Out.WriteLine("PASS: $script:Passed local resource-policy checks; no Minecraft or SSH launched")
