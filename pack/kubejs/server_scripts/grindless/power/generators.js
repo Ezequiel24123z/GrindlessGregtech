@@ -27,11 +27,38 @@
 // dyson_controller's two true generator recipes (run_dyson_sphere_space/not_space) end up skipped: they carry
 // recipeConditions (dyson_sphere, orbit), a field this rebuild does not support.
 //
+// -----------------------------------------------------------------------------------------------
+// Site rules (docs/eras/ev.md, Moon rules and Mars rules; the data is data/grindless/tables/site_fuels.json): a fuel
+// needs air to burn. Every fuel recipe of the burning types (combustion generator, gas turbine, semi-fluid generator,
+// GT--'s rocket engine, and the small and large boilers) gets one dimension condition per dimension with air: the
+// Overworld, the Nether, the End and the two building dimensions. GTM ORs the dimension conditions of one recipe
+// (DimensionCondition.isOr, GTM 7.5.3), so the fuel burns in any of them and nowhere else: not on the Moon, on Mars, in
+// an orbit or on any planet added later. Reversed conditions cannot express "not the Moon and not Mars" (ORed, they
+// pass everywhere), which is why this is an allowlist. Steam turbines, plasma and naquadah generators and the Dyson
+// sphere do not burn anything and keep working everywhere.
+//   - Fuels that carry their own oxidizer (methalox, GTM's rocket fuel, GT--'s RP-1 and methylhydrazine nitrate
+//     mixtures) and lava (heat, not a fire) get no condition: they burn anywhere. On the Moon and Mars they are the
+//     only fuels that work; methalox is the one made there (ev/mars_site.js and the mixer of ev/foundation.js).
+//   - GTM 7.5.3's small boilers DO use recipes (gtceu:steam_boiler, one per burnable item, made by FuelRecipes from
+//     burn times; GTMachines registers the solid and liquid boilers with that type), so they follow the same rule.
+//   - The generator types are already rebuilt above, so their conditions are added to the rebuild. The boiler types are
+//     not doubled (their boost is in pack/config/gtceu.yaml): their recipes are changed in place instead (KubeJS keeps
+//     the rest of the recipe as it was and only writes recipeConditions), which also keeps the 20 boiler recipes whose
+//     ingredient carries NBT (wooden tools with Damage:0) exactly as GTM made them.
+//   - A recipe that already carries a dimension condition is left alone: it was placed on purpose.
+//   - The new fuels of the table (methalox in the gas turbine) are added after the passes, with no condition and the
+//     doubled duration. event.forEachRecipe only sees the datapack recipes, never the ones scripts add, so nothing here
+//     can double them twice.
+// Other scripts that add burning fuel recipes of their own call global.grindless.power.burnsInAir(recipe) to give them
+// the same conditions (this pass only sees GTM's and the addons' recipes).
+//
 // Rhino: var + function inside every callback that runs more than once (this Rhino throws "redeclaration of var").
 (function () {
   var G = global.grindless || (global.grindless = {})
   var POWER = G.power || (G.power = {})
   var LOG = '[grindless/power] '
+  var FACTOR = 2
+  var SITE_TABLE = 'kubejs/data/grindless/tables/site_fuels.json'
 
   // gtceu:steam_turbine, combustion_generator, gas_turbine, semi_fluid_generator, plasma_generator (DECISIONS.md list),
   // plus the addon generator types this pack loads: GT--'s naquadah reactor (single and large) and rocket engine,
@@ -41,6 +68,63 @@
     'gtceu:plasma_generator', 'gtceu:naquadah_reactor', 'gtceu:large_naquadah_reactor', 'gtceu:rocket_engine',
     'gcyr:dyson_controller'
   ]
+
+  // ---------------------------------------------------------------- site rules (data/grindless/tables/site_fuels.json)
+
+  function loadSite() {
+    var empty = { airDimensions: [], burningTypes: [], burnAnywhere: [], newFuels: [], loaded: false }
+    try {
+      var t = G.readJsonTable(SITE_TABLE)
+      return {
+        airDimensions: (t.airDimensions || []).map(String),
+        burningTypes: (t.burningTypes || []).map(String),
+        burnAnywhere: t.burnAnywhere || [],
+        newFuels: t.newFuels || [],
+        loaded: true
+      }
+    } catch (e) {
+      console.error(LOG + 'cannot read ' + SITE_TABLE + ', no site rules applied: ' + e)
+      return empty
+    }
+  }
+
+  var SITE = loadSite()
+
+  // 'fluid:<id>' and 'tag:forge:<path>' of every fuel that burns anywhere: GTM's fuel recipes name their fluid by tag
+  var ANYWHERE = {}
+  SITE.burnAnywhere.forEach(function (f) {
+    var id = String(f.fluid)
+    ANYWHERE['fluid:' + id] = true
+    ANYWHERE['tag:forge:' + id.substring(id.indexOf(':') + 1)] = true
+  })
+
+  function isBurningType(type) {
+    return SITE.burningTypes.indexOf(type) >= 0
+  }
+
+  function burnsAnywhere(json) {
+    var fluids = (json.inputs && json.inputs.fluid) || []
+    return fluids.some(function (e) {
+      var values = (e.content && e.content.value) || []
+      return values.some(function (v) {
+        return (v.fluid && ANYWHERE['fluid:' + v.fluid]) || (v.tag && ANYWHERE['tag:' + v.tag])
+      })
+    })
+  }
+
+  function hasDimension(json) {
+    return (json.recipeConditions || []).some(function (c) { return c && (c.type === 'dimension' || c.type === 'gtceu:dimension') })
+  }
+
+  // published for the test and for scripts that add burning fuels of their own: burnsInAir(recipe) gives a GT recipe
+  // builder the same conditions as every fuel recipe of the burning types
+  POWER.factor = FACTOR
+  POWER.site = SITE
+  POWER.siteTable = SITE_TABLE
+  POWER.burnsInAir = function (builder) {
+    SITE.airDimensions.forEach(function (d) { builder.dimension(d) })
+    return builder
+  }
 
   function producesEu(json) {
     var out = json.tickOutputs
@@ -78,7 +162,8 @@
   // validates json and turns it into a plain-data plan (nothing touches `event` yet): the exact sequence of builder
   // calls to replay, plus the doubled duration and the signed EUt. Throws on any shape it does not recognize, so the
   // caller can decide not to touch the live recipe at all when that happens (see "plan before you remove" below).
-  function planRebuild(json) {
+  // dims: the dimensions with air when the recipe burns a fuel (site rules), else empty
+  function planRebuild(json, dims) {
     var known = ['type', 'duration', 'category', 'tickOutputs', 'inputs', 'outputs', 'data']
     var extra = Object.keys(json).filter(function (k) { return known.indexOf(k) < 0 })
     if (extra.length > 0) throw new Error('unsupported fields ' + extra.join(','))
@@ -117,8 +202,9 @@
       if (typeof data[k] === 'number') { var num = data[k]; calls.push(function (b) { b.addData(k, num) }) }
       else { var str = String(data[k]); calls.push(function (b) { b.addDataString(k, str) }) }
     })
+    ;(dims || []).forEach(function (d) { calls.push(function (b) { b.dimension(d) }) })
     // a generator recipe stores its output as a positive tickOutputs.eu; the builder takes EU/t signed (negative = output)
-    return { calls: calls, eu: -eu, duration: json.duration * 2 }
+    return { calls: calls, eu: -eu, duration: json.duration * FACTOR }
   }
 
   // only called once planRebuild succeeded for this recipe, so this replay is not expected to throw; the recipe was
@@ -140,8 +226,62 @@
     b.EUt(plan.eu).duration(plan.duration)
   }
 
+  // the burning types that are not generator types (the small and large boilers): their datapack recipes get the
+  // conditions in place, so KubeJS only writes recipeConditions and the rest of each recipe stays as GTM made it
+  function conditionInPlace(event, type, site) {
+    var n = 0
+    event.forEachRecipe({ type: type }, function (r) {
+      var id = String(r.getId())
+      var json
+      try {
+        json = JSON.parse(String(r.json))
+      } catch (e) {
+        site.failed.push(id + ' (unreadable: ' + e + ')')
+        return
+      }
+      if (hasDimension(json)) {
+        site.kept.push(id)
+        return
+      }
+      if (burnsAnywhere(json)) {
+        site.anywhere.push(id)
+        return
+      }
+      try {
+        SITE.airDimensions.forEach(function (d) { r.dimension(d) })
+        n++
+      } catch (e2) {
+        site.failed.push(id + ' (' + e2 + ')')
+      }
+    })
+    return n
+  }
+
+  // the fuels of ours (methalox): no condition, the duration GTM would give them doubled like every generator recipe
+  function addNewFuels(event, site) {
+    SITE.newFuels.forEach(function (f) {
+      var shortType = String(f.type).replace(/^gtceu:/, '')
+      var id = 'grindless:' + shortType + '/' + f.name
+      if (!Fluid.exists(f.fluid)) {
+        site.failed.push(id + ' (unknown fluid ' + f.fluid + ')')
+        return
+      }
+      try {
+        var duration = f.gtmDuration * FACTOR
+        event.recipes.gtceu[shortType]('grindless:' + f.name)
+          .inputFluids(Fluid.of(f.fluid, f.amount))
+          .EUt(-f.eut)
+          .duration(duration)
+        site.newFuels.push({ id: id, type: String(f.type), fluid: String(f.fluid), amount: f.amount, eut: f.eut, duration: duration })
+      } catch (e) {
+        site.failed.push(id + ' (' + e + ')')
+      }
+    })
+  }
+
   ServerEvents.recipes(function (event) {
     var report = { doubled: [], skipped: [], failed: [], perType: {} }
+    var site = { airDimensions: SITE.airDimensions, conditioned: 0, perType: {}, anywhere: [], kept: [], failed: [], newFuels: [] }
 
     TYPES.forEach(function (type) {
       var captured = []
@@ -154,7 +294,9 @@
         }
       })
 
+      var burning = isBurningType(type)
       var doubledHere = 0
+      var airHere = 0
       captured.forEach(function (c) {
         var json = c.json
         if (!producesEu(json) || consumesEu(json)) return
@@ -166,11 +308,17 @@
         // rebuild does not replay recipeConditions: they stay at their original duration, on purpose
         if (json.recipeConditions !== undefined) {
           report.skipped.push(c.id + ' (has recipeConditions)')
+          if (burning) site.kept.push(c.id)
           return
+        }
+        var dims = []
+        if (burning) {
+          if (burnsAnywhere(json)) site.anywhere.push(c.id)
+          else dims = SITE.airDimensions
         }
         var plan
         try {
-          plan = planRebuild(json)
+          plan = planRebuild(json, dims)
         } catch (e) {
           // nothing touched `event` yet: the original recipe is simply left alone, at its vanilla duration
           report.failed.push(c.id + ' (' + e + ')')
@@ -181,6 +329,7 @@
           applyPlan(event, type, c.id, plan)
           report.doubled.push(c.id)
           doubledHere++
+          if (dims.length > 0) airHere++
         } catch (e) {
           // the plan was already validated: this would only happen on an unexpected GTM/KubeJS API mismatch. The
           // original recipe is already gone at this point (same id), so the id is logged as missing rather than
@@ -189,12 +338,26 @@
         }
       })
       report.perType[type] = { seen: captured.length, doubled: doubledHere }
+      if (burning) site.perType[type] = airHere
     })
 
+    SITE.burningTypes.forEach(function (type) {
+      if (TYPES.indexOf(type) >= 0) return
+      site.perType[type] = conditionInPlace(event, type, site)
+    })
+    Object.keys(site.perType).forEach(function (t) { site.conditioned += site.perType[t] })
+    addNewFuels(event, site)
+
     POWER.generators = report
+    POWER.siteReport = site
     console.info(LOG + 'duration doubled on ' + report.doubled.length + ' generator recipes across ' + TYPES.length +
       ' types' + (report.skipped.length > 0 ? '; skipped: ' + report.skipped.join(', ') : ''))
     if (report.failed.length > 0) console.error(LOG + 'could not rebuild (kept at vanilla duration): ' + report.failed.join('; '))
+    console.info(LOG + 'site rules: ' + site.conditioned + ' fuel recipes burn only where there is air (' + SITE.airDimensions.join(', ') + '): ' +
+      Object.keys(site.perType).map(function (t) { return t.replace(/^gtceu:/, '') + ' ' + site.perType[t] }).join(', ') +
+      '; burn anywhere: ' + site.anywhere.join(', ') + (site.kept.length > 0 ? '; kept with their own conditions: ' + site.kept.join(', ') : '') +
+      '; new fuels: ' + site.newFuels.map(function (f) { return f.id + ' (' + f.amount + ' mB, ' + f.duration + ' t, ' + f.eut + ' EU/t)' }).join(', '))
+    if (site.failed.length > 0) console.error(LOG + 'site rules not applied to: ' + site.failed.join('; '))
   })
 })()
 
