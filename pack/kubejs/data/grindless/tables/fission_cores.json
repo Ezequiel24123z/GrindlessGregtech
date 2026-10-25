@@ -1,0 +1,46 @@
+{
+  "_source": "Our own table: the designed cores of IV's fission reactor (docs/eras/iv.md, 'Designed-core reactor' and 'Decisions taken with the raise', decision 3). Real physics: light-water PWR cores, CANDU-style heavy-water moderators that pick up tritium, MOX fuel and fast breeders with a U-238 blanket.",
+  "_how_it_is_used": [
+    "Read by startup_scripts/grindless/iv/fission_reactor.js (published as global.grindless.fissionReactor.cores) and turned into one gtceu:fission_core recipe per core by server_scripts/grindless/iv/fission_reactor.js, id grindless:fission_core/<name>. The smoke test gg_test_fission_reactor.js checks the live recipes against this table.",
+    "A recipe is one channel-cycle of one core: cycleTicks long, the programmed circuit picks the core (GTM's recipe lookup would hide a light-water recipe that is a prefix of the heavy-water one), the fuel assembly is a chanced input (wearChance of 10000: an assembly lasts 10000 / wearChance channel-cycles) and the spent assembly a chanced output (spentChance of 10000). GTM 7.5.3's OR chance logic keeps a remainder per machine, so in practice exactly one assembly is used up, and one spent assembly comes out, every 200 channel-cycles.",
+    "Every channel takes the coolant (it is lost through the vents) and, for a core with a moderator, moderator.amount mB of moderator.fluid, which comes out as the same amount of moderator.becomes (the moderator is activated: heavy water picks up tritium, decision 3).",
+    "The reactor runs up to `channels` copies of a recipe at once (lib/generators.js): one per assembly in its input buses, as far as the coolant, the moderator, the room for the outputs and the dynamo hatches allow. euPerChannel is the EU/t of one channel. These recipes are NOT doubled by power/generators.js: the numbers here are final."
+  ],
+  "cycleTicks": 400,
+  "channels": 4,
+  "wearChance": 50,
+  "spentChance": 50,
+  "coolant": { "fluid": "minecraft:water", "amount": 2000 },
+  "cores": [
+    {
+      "name": "leu_light_water",
+      "circuit": 1,
+      "fuel": "grindless:leu_fuel_assembly",
+      "euPerChannel": 16384,
+      "spent": "grindless:spent_fuel_assembly"
+    },
+    {
+      "name": "leu_heavy_water",
+      "circuit": 2,
+      "fuel": "grindless:leu_fuel_assembly",
+      "euPerChannel": 32768,
+      "moderator": { "fluid": "gtceu:heavy_water", "becomes": "gtceu:tritiated_heavy_water", "amount": 5 },
+      "spent": "grindless:spent_fuel_assembly"
+    },
+    {
+      "name": "mox_heavy_water",
+      "circuit": 3,
+      "fuel": "grindless:mox_fuel_assembly",
+      "euPerChannel": 32768,
+      "moderator": { "fluid": "gtceu:heavy_water", "becomes": "gtceu:tritiated_heavy_water", "amount": 5 },
+      "spent": "grindless:spent_fuel_assembly"
+    },
+    {
+      "name": "breeder",
+      "circuit": 4,
+      "fuel": "grindless:breeder_fuel_assembly",
+      "euPerChannel": 8192,
+      "spent": "grindless:spent_breeder_assembly"
+    }
+  ]
+}
