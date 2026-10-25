@@ -2,6 +2,8 @@
 //
 // Config (tiers/<tier>.json; inherited and merged by id, see lib/config.mjs):
 //   eraOrder        order of the eras: ["steam", "lv", "mv", "hv", "ev", "iv", ...].
+//   eraSiblings     [[era, ...], ...]: substages reached together (IV's Venus and Mercury, one trip); each counts as later than
+//                   the others, so nothing of one may need a resource of another.
 //   eraResources[]  what each era brings: {id, era, label, items?, exclude?, dimensions?, onlyFrom?, note}
 //     items         globs over item and fluid keys (`fluid:gtceu:titanium`): those keys are removed from EVERY source
 //                   (no recipe gives them, even though the recipe still gives the rest; no world fact; no vein, bee,
@@ -25,9 +27,9 @@ import { blockCosts, lfp } from './engine.mjs';
 import { blockedRoots, blockedTree, derivationTree, describeRule, makeRootCost, renderTree } from './explain.mjs';
 import { asArray, makeGlobMatcher } from './util.mjs';
 
-// keys that aren't material (machines, energy, dead slots...): a resource never removes them. NBT outputs the
+// keys that aren't material (machines, energy, dead slots, dimension keys, research...): a resource never removes them. NBT outputs the
 // normalizer doesn't reduce (Productive Bees' configurable honeycombs) stay as non-string keys: they don't count either.
-const SPECIAL = /^(m|run|eu|ae|dead|cond):/;
+const SPECIAL = /^(m|run|eu|ae|dead|cond|dim|research):/;
 const isName = (n) => typeof n === 'string';
 const INPUT_ROLES = new Set(['item', 'fluid', 'tool', 'die']);
 const hasGlob = (s) => /[*?]/.test(s);
@@ -42,6 +44,16 @@ export function prepareEras(model) {
   const { cfg, g, dump, warnings } = model;
   const order = cfg.eraOrder || [];
   const idx = new Map(order.map((e, i) => [e, i]));
+  // eraSiblings (IV, 2026-10-25): [[era, ...], ...] substages reached together (IV's Venus and Mercury, one trip): each is "later"
+  // than the others, so nothing of one may need what another brings, while both keep their place in eraOrder for everything else.
+  const sibOf = new Map();
+  (cfg.eraSiblings || []).forEach((set, i) => {
+    for (const e of asArray(set)) {
+      if (!idx.has(e)) warnings.push(`era rule: sibling era «${e}» isn't in eraOrder; ignored`);
+      else sibOf.set(e, i);
+    }
+  });
+  const isLater = (era, than) => idx.get(era) > idx.get(than) || (era !== than && sibOf.has(era) && sibOf.get(era) === sibOf.get(than));
   const active = cfg.eraItems.length > 0 || cfg.eraResources.length > 0;
   if (active && order.length === 0) warnings.push('era rule: there are eraResources/eraItems but eraOrder is missing; not checked');
   const known = (what, id, era) => {
@@ -133,7 +145,7 @@ export function prepareEras(model) {
   for (const r of resources) {
     for (const id of r.onlyFrom) if (!resById.has(id)) warnings.push(`era rule: onlyFrom of ${r.id} names resource ${id}, which isn't in eraResources`);
   }
-  return { order, idx, resources, resById, groups, active: active && order.length > 0 };
+  return { order, idx, isLater, resources, resById, groups, active: active && order.length > 0 };
 }
 
 /**
@@ -163,9 +175,10 @@ export function eraView(model, resList) {
     } else if (s.kind === 'manual' || s.kind === 'auto') facts.push(...s.keys);
   }
   if (dims.size > 0) {
+    // recipes only valid in those dimensions, and the generator rules copied from them (synthetic recipesOf: the Venus engine's heat)
     g.rules.forEach((rule, i) => {
       const ds = rule.meta && rule.meta.dims;
-      if (rule.kind === 'recipe' && ds && ds.length > 0 && ds.every((d) => dims.has(d))) enabled[i] = 0;
+      if ((rule.kind === 'recipe' || rule.kind === 'synthetic') && ds && ds.length > 0 && ds.every((d) => dims.has(d))) enabled[i] = 0;
     });
   }
   const lf = lfp(g, { facts, enabled, blocked });
@@ -230,8 +243,8 @@ function pruneSeen(tree, seen) {
 }
 
 function evalGroup(model, res, eras, grp, viewFor) {
-  const view = viewFor(grp.rank);
-  const later = eras.resources.filter((r) => r.rank > grp.rank);
+  const view = viewFor(grp.era);
+  const later = eras.resources.filter((r) => eras.isLater(r.era, grp.era));
   const buckets = { ok: [], violation: [], unreachable: [], missing: [], later: [] };
   for (const it of grp.items) {
     const keys = it.alts || (it.key !== undefined ? [it.key] : []);
@@ -362,9 +375,9 @@ export function evaluateEras(model, res) {
   const out = { active: eras.active, resources: [], groups: [], exclusive: [], counts: { pass: 0, warn: 0, total: 0 }, verdict: 'PASS' };
   if (!eras.active) return out;
   const views = new Map();
-  const viewFor = (rank) => {
-    if (!views.has(rank)) views.set(rank, eraView(model, eras.resources.filter((r) => r.rank > rank)));
-    return views.get(rank);
+  const viewFor = (era) => {
+    if (!views.has(era)) views.set(era, eraView(model, eras.resources.filter((r) => eras.isLater(r.era, era))));
+    return views.get(era);
   };
   out.resources = eras.resources.map((r) => {
     const sources = model.worldSources.filter((s) => s.origin.length > 0 && s.origin.every((d) => r.dims.includes(d))).map((s) => s.id);
