@@ -1,9 +1,9 @@
 // priority: 1000
 // -----------------------------------------------------------------------------------------------
 // Grindless recipe composer: turns a line of LIVE recipes (several machines, loops between them) into the contents of ONE recipe with the
-// same ratios and the SAME energy. It is the EV platinum plant's composer (server_scripts/grindless/ev/platinum_plant.js), taken out into
-// a library so other plants can use it. The platinum plant still carries its own copy, unchanged; the IV hot cell
-// (server_scripts/grindless/iv/hot_cell.js) is the first user of this one.
+// same ratios and the SAME energy. It is the EV platinum plant's composer, taken out into a library so other plants can use it. Users:
+// the EV platinum plant (server_scripts/grindless/ev/platinum_plant.js, modes 1 to 3), the IV hot cell (iv/hot_cell.js) and the IV
+// naquadah plant (iv/naquadah_plant.js).
 //
 // What it does, for a plan { stages: [recipe ids], given: { key: amount }, linked: [keys] }:
 //   1. gather(event, ids, opts) reads the stage recipes from ServerEvents.recipes' ORIGINAL recipes (their JSON), so the numbers are the
@@ -12,8 +12,10 @@
 //      (minecraft:smelting) is read as GTM's electric furnace runs it (GTRecipeType#toGTrecipe: the cooking time as duration, at the
 //      furnace's EU/t, which the caller reads from GTM and passes as opts.furnaceEUt).
 //      Keys: 'i:<item id>' and 'f:<fluid id>'. A tag is turned into GTM's item or fluid (forge:dusts/<m> -> gtceu:<m>_dust,
-//      forge:ingots/<m> -> gtceu:<m>_ingot, forge:gems/<m> -> gtceu:<m>_gem, forge:purified_ores/<m> -> gtceu:purified_<m>_ore,
-//      a fluid tag forge:<m> -> gtceu:<m> or minecraft:<m>).
+//      forge:ingots/<m> -> gtceu:<m>_ingot, forge:hot_ingots/<m> -> gtceu:hot_<m>_ingot, forge:gems/<m> -> gtceu:<m>_gem,
+//      forge:purified_ores/<m> -> gtceu:purified_<m>_ore, a fluid tag forge:<m> -> gtceu:<m> or minecraft:<m>).
+//      opts.patch(id, json), if given, may change a stage's JSON before it is read (it returns the JSON to read): the naquadah plant
+//      gives GT--'s neutron activator stage, whose recipe carries no EU, the EU of the accelerators it replaces.
 //   2. compose(plan, steps) solves the linear system of the stages (Gauss with partial pivoting): every `given` key is used up to its
 //      amount (the batch) and every `linked` key (an intermediate, or a catalyst the line gives back) nets to zero. Given + linked must
 //      be as many as the stages. Everything else the stages touch is a free input (net < 0) or output (net > 0). The energy is the SUM
@@ -71,6 +73,7 @@
     var forms = [
       [/^[^:]*:dusts\/(.+)$/, function (m) { return 'gtceu:' + m + '_dust' }],
       [/^[^:]*:ingots\/(.+)$/, function (m) { return 'gtceu:' + m + '_ingot' }],
+      [/^[^:]*:hot_ingots\/(.+)$/, function (m) { return 'gtceu:hot_' + m + '_ingot' }],
       [/^[^:]*:gems\/(.+)$/, function (m) { return 'gtceu:' + m + '_gem' }],
       [/^[^:]*:purified_ores\/(.+)$/, function (m) { return 'gtceu:purified_' + m + '_ore' }]
     ]
@@ -194,7 +197,9 @@
       if (wanted[id] !== true) return
       try {
         if (r.json === null || r.json === undefined) return
-        var s = parseStage(id, JSON.parse(String(r.json)), opts)
+        var j = JSON.parse(String(r.json))
+        if (opts && typeof opts.patch === 'function') j = opts.patch(id, j) || j
+        var s = parseStage(id, j, opts)
         steps[id] = s
         if (!s.error) read++
       } catch (e) {

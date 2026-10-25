@@ -241,6 +241,9 @@ export function renderText(model, res, out, opts = {}) {
     'gtceu:refining', 'gtceu:reforming', 'gtceu:syngas', 'gtceu:composite_curing', 'gtceu:lunar_drilling',
     'gtceu:pgm_refining', 'gtceu:regolith_processing', 'gtceu:cryogenic_processing', 'gtceu:lunar_solar', 'gtceu:deep_space_tracking',
     'gtceu:atmosphere_processing', 'gtceu:solvent_extraction', 'gtceu:combined_cycle', 'gtceu:hot_rolling',
+    'gtceu:fission_core', 'gtceu:hot_cell', 'gtceu:in_situ_leaching', 'gtceu:fuel_fabrication', 'gtceu:isotope_exchange', 'gtceu:fluorspar_digestion',
+    'gtceu:detritiation', 'gtceu:venus_heat', 'gtceu:acid_cracking', 'gtceu:solar_processing', 'gtceu:mercury_solar', 'gtceu:interferometry',
+    'gtceu:radioisotope_decay',
   ];
   const typesWithRecipes = new Set([...dump.recipes.values()].map((r) => r.type));
   L.push(`          ${added} recipes added by the pack's scripts · the pack's own types with recipes: ${OUR_TYPES.filter((t) => typesWithRecipes.has(t)).join(', ') || '(none: neither vein_drilling nor greenhouse)'}`);
