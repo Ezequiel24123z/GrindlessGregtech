@@ -44,7 +44,8 @@
     symbols: {
       S: Pat.controller(),
       // 31 shell cells: 8 to 11 are parts (2 energy, the input bus for the dust and the catalyst, 2-3 input hatches for air and
-      // water, 1-2 output buses, 2-3 output hatches for the acid and the steam), the rest heat-proof casing
+      // water (3 for the HV hydrogen sulfide burner), 1-2 output buses, 2-3 output hatches for the acid and the steam (3 for the
+      // hydrogen of that burner)), the rest heat-proof casing
       X: Pat.oneOf(
         Pat.block(HEAT_CASING, { min: 18 }),
         Pat.part('energy_input', { exact: 2 }),
@@ -74,11 +75,12 @@
 
   GTCEuStartupEvents.registry('gtceu:recipe_type', function (event) {
     // items in: the dust and the catalyst; items out: the oxide and its by-product (silver, ash...);
-    // fluids in: air and water; fluids out: sulfuric acid and steam
+    // fluids in: air and water (and the hydrogen sulfide of the HV burner: 3); fluids out: sulfuric acid and steam (and the
+    // hydrogen of the HV burner: 3)
     event.create('sulfide_roasting')
       .category('multiblock')
       .setEUIO('in')
-      .setMaxIOSize(2, 2, 2, 2)
+      .setMaxIOSize(2, 2, 3, 3)
       .setProgressBar(GuiTextures.PROGRESS_BAR_ARROW_MULTIPLE, FillDirection.LEFT_TO_RIGHT)
       .setSound(GTSoundEntries.FURNACE)
   })

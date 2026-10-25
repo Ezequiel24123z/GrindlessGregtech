@@ -10,12 +10,15 @@
 // and aluminium frames (aluminium is already there for the MV motors, stainless steel is not).
 //
 // The drill vetoes a base recipe while drilling fluid is in its hatch (the fluid recipe is the better one, like the LV drill).
+// While sulfuric acid is in its hatch the vanadium steel base recipe gives way to the leaching variant (..._acid_fluid: same
+// yield plus one extra chance of the vein's rarest ore).
 // Both machines skip the recipes under <type>/hv/ (the stainless steel bit is the HV drill's). The End is MV: its veins with the vanadium
 // steel bit are <type>/mv/ recipes, so this drill runs them (with drilling fluid).
 // The greenhouse works like the LV one with programmed circuit 2 (fertilizer variants); with CO2 in a hatch as well the
 // fertilizer + CO2 variant runs instead of the fertilizer one: x1.5 output on top and 100 mB of O2 back per run. Circuit 1 or no
 // circuit: CO2 is ignored and the base recipe runs. The greenhouse needs a fluid OUTPUT hatch for that O2 and takes one or two
-// input hatches (water, CO2).
+// input hatches (water, CO2). Circuit 3 is the booster family: the LV CO2 booster (x1.25) and this greenhouse's fermented biomass
+// booster (x2 at the base time), both run with or without CO2 in the hatch.
 //
 // Textures: overlay dirs grindless:block/multiblock/mv_vein_drill and mv_greenhouse (drawn separately). Names / tooltips:
 // client_scripts/grindless/mv_family_lang.js.
@@ -98,13 +101,16 @@
     var rules = lv.rules
 
     function drillVeto(machine, recipe) {
-      return rules.isHvRecipe(recipe) || (!rules.isFluidRecipe(recipe) && rules.machineHasFluid(machine, 'gtceu:drilling_fluid'))
+      return rules.isHvRecipe(recipe) || (!rules.isFluidRecipe(recipe) && rules.machineHasFluid(machine, 'gtceu:drilling_fluid')) ||
+        (rules.isVanadiumBaseRecipe(recipe) && rules.machineHasFluid(machine, 'gtceu:sulfuric_acid'))
     }
 
-    // circuit 2 = fertilizer mode; with CO2 in a hatch too the fertilizer + CO2 variant is the one that runs
+    // circuit 2 = fertilizer mode; with CO2 in a hatch too the fertilizer + CO2 variant is the one that runs. Circuit 3 = the
+    // boosters (LV CO2, MV fermented biomass), which run with or without CO2
     function greenhouseVeto(machine, recipe) {
       if (rules.isHvRecipe(recipe)) return true
       if (rules.machineCircuit(machine) < 2) return false
+      if (rules.isBoosterRecipe(recipe)) return false
       if (!rules.isFertilizerRecipe(recipe)) return true
       return !rules.isCo2Recipe(recipe) && rules.machineHasFluid(machine, 'gtceu:carbon_dioxide')
     }
