@@ -41,7 +41,8 @@ test('disposable planet table preserves the complete integrated production table
 });
 
 test('missing/disabled/non-station markers leave the registry untouched', () => {
-  for (const marker of [null, {}, { enabled: false, stationsOnly: true }, { enabled: true }]) {
+  for (const marker of [null, {}, { enabled: false, integrated: true }, { enabled: true },
+    { enabled: true, stationsOnly: true }]) {
     const dimensions = [...production];
     const p = profile(marker, dimensions);
     p.run();
@@ -50,17 +51,19 @@ test('missing/disabled/non-station markers leave the registry untouched', () => 
   }
 });
 
-test('enabled station continuation extends the same registry once, preserving production dimensions', () => {
-  const dimensions = [...production];
-  const p = profile({ enabled: true, stationsOnly: true }, dimensions);
-  p.run();
-  p.run();
-  assert.equal(p.G.orbits.dimensions, dimensions);
-  assert.deepEqual(dimensions, [...production, 'grindless:s0_moon_orbit']);
-  assert.ok(p.messages.every(message => message.includes('test_orbit_allowlist|PASS')));
+test('enabled full sequence or station continuation extends the same registry once, preserving production dimensions', () => {
+  for (const stationsOnly of [false, true]) {
+    const dimensions = [...production];
+    const p = profile({ enabled: true, integrated: true, stationsOnly }, dimensions);
+    p.run();
+    p.run();
+    assert.equal(p.G.orbits.dimensions, dimensions);
+    assert.deepEqual(dimensions, [...production, 'grindless:s0_moon_orbit']);
+    assert.ok(p.messages.every(message => message.includes('test_orbit_allowlist|PASS')));
+  }
 });
 
 test('enabled continuation fails explicitly without the production orbit registry', () => {
-  const p = profile({ enabled: true, stationsOnly: true });
+  const p = profile({ enabled: true, integrated: true, stationsOnly: true });
   assert.throws(p.run, /requires the production orbit registry/);
 });

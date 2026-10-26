@@ -290,6 +290,7 @@
     S.put('clientDim', dim)
     S.put('clientVehicle', veh)
     if (IS_LUV) {
+      S.put('clientWorldReady', String(mc.currentScreen === null || mc.currentScreen === undefined))
       try {
         var mounted = jcall(p, V.vehicle)
         S.put('clientMountedRocketUuid', mounted instanceof k().Rocket ? String(jcall(mounted, V.uuid)) : '')

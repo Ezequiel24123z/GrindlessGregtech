@@ -445,6 +445,8 @@
     need(String(pkg.getId()) === 'gcyr:space_station_package' && String(card.getId()) === 'gcyr:keycard',
       'unexpected packager outputs')
     e.packageStack = pkg
+    e.packageNbt = String(pkg.getNbt())
+    e.packageCount = Number(pkg.getCount())
     e.keycard = card
     out.setStackInSlot(0, Item.empty)
     out.setStackInSlot(1, Item.empty)
@@ -474,6 +476,26 @@
   }
   // Public native UI, not guessed NBT or forbidden reflection. Call AFTER any
   // RocketEntity.load(tag), since the bridge's config/fuel loader precedes this.
+  function clearDeployedCargo(ctx, rocket, slot) {
+    var current = slot.getItem()
+    if (current.isEmpty()) return
+    var owned = S === null ? null : S.loadedCargo
+    need(owned && owned.deployed && sameNative(ctx.rocket, rocket) &&
+      String(rocket.getStringUuid()) === owned.arrivalRocketUuid,
+    'refusing to replace preexisting rocket cargo')
+    var entry = S.entries.filter(function (e) { return e.label === owned.label && e.id === owned.id })[0]
+    need(entry && entry.arrived && entry.packageNbt === owned.nbt &&
+      entry.packageCount === owned.count &&
+      String(current.getId()) === 'gcyr:space_station_package' &&
+      Number(current.getCount()) === owned.count && String(current.getNbt()) === owned.nbt,
+    'refusing to replace preexisting rocket cargo: not the exact deployed owned package')
+    check(entry.label + '_deployed_package_retained', true,
+      'actual native satellite slot still contains the exact deployed package; removing only this owned test remainder')
+    slot.set(Item.empty)
+    need(slot.getItem().isEmpty(), 'owned deployed package removal did not empty native cargo')
+    S.loadedCargo = null
+  }
+
   function loadCargo(ctx, rocket, stack, control) {
     var empty = stack === undefined || stack.isEmpty()
     need(rocket !== null && !rocket.isRemoved(), 'cargo requires the live rocket')
@@ -522,12 +544,17 @@
           String(loadedControl.getNbt()) === String(control.getNbt()), 'native rocket control readback differs')
         note('control_loaded', 'actual native config slot ID chip=' + loadedControl.getNbt())
       }
-      need(slot.getItem().isEmpty(), 'refusing to replace preexisting rocket cargo')
+      clearDeployedCargo(ctx, rocket, slot)
       slot.set(empty ? Item.empty : stack)
       var got = slot.getItem()
       need(empty ? got.isEmpty() : !got.isEmpty() &&
         String(got.getId()) === 'gcyr:space_station_package' &&
         String(got.getNbt()) === String(stack.getNbt()), 'native rocket cargo readback differs')
+      if (S !== null) {
+        S.loadedCargo = !empty && S.target && S.entries.indexOf(S.target) >= 0 ?
+          { label: S.target.label, id: S.target.id, nbt: String(stack.getNbt()),
+            count: Number(stack.getCount()), deployed: false } : null
+      }
       menu.broadcastChanges()
       note('cargo_loaded', empty ? 'empty native satellite slot' : 'actual package in native satelliteSlot[0]')
       return true
@@ -596,6 +623,11 @@
     })
     need(check(e.label + '_native_deploy', wrong.length === 0, 'package cells=' + e.cells.length +
       ' wrong=' + wrong.join(';')), 'native deployment mismatch (obstruction/drop is NOT a pass)')
+    need(S.loadedCargo && S.loadedCargo.label === e.label && S.loadedCargo.id === e.id &&
+      S.loadedCargo.nbt === e.packageNbt && S.loadedCargo.count === e.packageCount,
+    'completed deployment has no matching owned cargo record')
+    S.loadedCargo.deployed = true
+    S.loadedCargo.arrivalRocketUuid = String(r.getStringUuid())
     var be = e.level.getBlockEntity(pos(e.chest.x, e.chest.y, e.chest.z))
     var item = be.getItem(0)
     check(e.label + '_be_survival', !item.isEmpty() && String(item.getId()) === 'minecraft:diamond' &&
