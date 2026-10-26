@@ -54,9 +54,12 @@
         { "id": "grindless:cvd_diamond_plate", "role": "use", "reason": "temporary (ZPM-A6): its use, the Kuiper survey telescope's mirror coating (machine 17), is ZPM-A9's; delete this exception when A9 merges" }
       ],
       "pendingRoutes": [
-        { "id": "grindless:assembler/aerogel_fuel_tank", "reason": "ZPM-B1: silica aerogel and nanotube yarn are A8's, the Uranus transfer chart B4's; delete when both merge" },
-        { "id": "grindless:chemical_reactor/uranian_quantum_seed", "reason": "ZPM-B1: the ice-giant atmosphere sample is B5's;         delete when B5 merges" },
-                { "id": "grindless:diamond_cvd/cvd_diamond", "reason": "ZPM-A6: the ice-giant diamond seed (not consumed) is B5's; delete when B5 merges" },
-                { "id": "grindless:diamond_cvd/nitrogen_doped_diamond", "reason": "ZPM-A6: the ice-giant diamond seed (not consumed) is B5's; delete when B5 merges" }
-              ]
+        { "id": "grindless:assembler/aerogel_fuel_tank", "reason": "ZPM-B1: the Uranus transfer chart is B4's (silica aerogel and nanotube yarn came with A8); delete when B4 merges" },
+        { "id": "grindless:chemical_reactor/uranian_quantum_seed", "reason": "ZPM-B1: the ice-giant atmosphere sample is B5's; delete when B5 merges" },
+        { "id": "grindless:diamond_cvd/cvd_diamond", "reason": "ZPM-A6: the ice-giant diamond seed (not consumed) is B5's; delete when B5 merges" },
+        { "id": "grindless:diamond_cvd/nitrogen_doped_diamond", "reason": "ZPM-A6: the ice-giant diamond seed (not consumed) is B5's; delete when B5 merges" },
+        { "id": "grindless:chemosynthesis/archaeal_culture", "reason": "ZPM-A8: the Enceladus brine is B4's; delete when B4 merges" },
+        { "id": "grindless:chemosynthesis/growth_medium_broth", "reason": "ZPM-A8: tholin is B3's and the Enceladus brine B4's; delete when both merge" },
+        { "id": "grindless:supercritical_drying/silica_aerogel", "reason": "ZPM-A8: the silica nanograins are B4's; delete when B4 merges" }
+      ]
     }
