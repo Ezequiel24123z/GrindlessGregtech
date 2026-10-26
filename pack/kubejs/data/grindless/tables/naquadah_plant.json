@@ -17,7 +17,8 @@
   "modes": [
     { "circuit": 1, "name": "naquadah" },
     { "circuit": 2, "name": "enriched_naquadah" },
-    { "circuit": 3, "name": "spent_naquadah" }
+    { "circuit": 3, "name": "spent_naquadah" },
+    { "circuit": 4, "name": "enriched_solution" }
   ],
   "accelerator": { "evPerEu": 15, "decayEv": 72000, "decayTicks": 20 },
   "source": { "id": "grindless:pube_neutron_source", "chance": 100 },
@@ -157,6 +158,19 @@
         { "item": "gtceu:gold_trifluoride_dust", "count": 4 },
         { "item": "gtnn:palladium_on_carbon_catalyst", "count": 1, "wearPerBatch": 100 }
       ]
+    }
+  ],
+  "_direct": "ZPM-A2 (docs/eras/zpm.md, Older machines, new modes): one recipe that is not composed from GT--'s live line, on GTM's own ids. Circuit 4 (circuit 3 is spent_naquadah), keep: refuses voiding. Enriched naquadah solution (the naquadria refinery's byproduct) -> enriched naquadah dust + sulfuric acid back (the refinery's charge). The Mk2's starts and the reactor take the dust.",
+  "direct": [
+    {
+      "name": "enriched_solution",
+      "circuit": 4,
+      "keep": true,
+      "eut": 7680,
+      "duration": 200,
+      "itemsOut": [{ "id": "gtceu:enriched_naquadah_dust", "count": 4 }],
+      "fluidsIn": [{ "id": "gtceu:enriched_naquadah_solution", "amount": 1000 }],
+      "fluidsOut": [{ "id": "gtceu:sulfuric_acid", "amount": 500 }]
     }
   ]
 }

@@ -1,0 +1,5 @@
+{
+  "type": "emi:info",
+  "stacks": ["item:grindless:naquadria_containment_casing"],
+  "text": ["emi.grindless.info.naquadria_containment_casing.0"]
+}
