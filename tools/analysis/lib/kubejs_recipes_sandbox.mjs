@@ -51,15 +51,16 @@ export function runServerScripts({ packRoot, scripts, recipes, startup = [], ite
     noVoiding: { modifier: (o, next) => next, beforeWorking: () => () => true },
   };
   const noop = () => {};
+  // startup-only event groups, stubbed: any handler (registry, materialModification...) is accepted and never runs here
+  const events = () => new Proxy({}, { get: () => noop });
   const sandbox = {
     console: { info: log('info'), warn: log('warn'), error: log('error'), log: log('info'), debug: noop },
     global: { grindless: G },
     Item: { exists: (id) => items(String(id)) },
     Fluid: { exists: (id) => fluids(String(id)), of: (id, amount) => ({ fluid: String(id), amount: Number(amount) }) },
     ServerEvents: { recipes: (fn) => handlers.push(fn) },
-    // startup-only names, stubbed: the scripts' registries never run here
-    GTCEuStartupEvents: { registry: noop },
-    StartupEvents: { registry: noop },
+    GTCEuStartupEvents: events(),
+    StartupEvents: events(),
     Text: { translate: (k) => ({ getString: () => k }), gray: (x) => x },
   };
   if (before) before(sandbox);
