@@ -156,6 +156,46 @@ test('the Universal Assembly Factory runs GTM\'s NPU recipe only on a ZPM hatch,
   assert.equal(modifiers.universal_processing_factory(machine(32768), recipe(NPU_RECIPE)), false);
 });
 
+// GT--'s wetware recipe as the native dump has it (gtnn 1.3.10): the re-tier test feeds it to the stand-in as the original
+const GTNN_WETWARE = {
+  i: 'gtnn:circuit_assembly_line/wetware_processor_luv_soldering_alloy', t: 'gtceu:circuit_assembly_line',
+  j: {
+    type: 'gtceu:circuit_assembly_line', duration: 600, category: 'gtceu:circuit_assembly_line',
+    recipeConditions: [{ research: [{ researchId: '1x_gtnn_etched_wetware_processor_base', dataItem: { id: 'gtceu:data_stick', Count: 1,
+      tag: { assembly_line_research: { research_type: 'gtceu:circuit_assembly_line', research_id: '1x_gtnn_etched_wetware_processor_base' } } } }],
+      type: 'research' }],
+    tickInputs: { eu: [{ content: 38400 }] },
+    inputs: {
+      fluid: [{ content: { amount: 72, value: [{ tag: 'forge:soldering_alloy' }] } }],
+      item: [['gtceu:neuro_processing_unit', 16], ['gtceu:crystal_cpu', 16], ['gtnn:warp_nano_cpu_chip', 1], ['gtnn:wrap_advanced_smd_capacitor', 8],
+        ['gtnn:wrap_advanced_smd_transistor', 8], ['gtceu:yttrium_barium_cuprate_quadruple_wire', 8]]
+        .map(([item, count]) => ({ content: { type: 'gtceu:sized', count, ingredient: { item } } })),
+    },
+    outputs: { item: [{ content: { type: 'gtceu:sized', count: 32, ingredient: { item: 'gtceu:wetware_processor' } } }] },
+  },
+};
+
+test('GT--\'s wetware recipe comes back at LuV voltage with the same energy, its inputs in order and its research id', () => {
+  const r = runPackScripts(pack, { originals: [GTNN_WETWARE] });
+  const mine = r.errors.filter((e) => /circuit_line/.test(String(e.file)));
+  assert.deepEqual(mine, [], mine.map((e) => e.message).join('\n'));
+  assert.ok(r.logs.some((l) => /circuit_line/.test(l.file) && /\(38400 EU\/t x 600 t\) -> grindless:circuit_assembly_line\/wetware_processor_luv \(30720 EU\/t x 750 t\)/.test(l.text)));
+  const added = r.docs.recipes.recipes.find((x) => x.i === 'grindless:circuit_assembly_line/wetware_processor_luv');
+  assert.ok(added, 'the re-tiered recipe');
+  assert.equal(added.t, 'gtceu:circuit_assembly_line');
+  assert.equal(added.j.tickInputs.eu[0].content, 30720);
+  assert.deepEqual(added.j.inputs.item.map((x) => x.content.ingredient.item + ' x' + x.content.count),
+    GTNN_WETWARE.j.inputs.item.map((x) => x.content.ingredient.item + ' x' + x.content.count), 'the same inputs, in the same order');
+  assert.deepEqual(added.j.inputs.fluid.map((x) => x.content.value[0].fluid + ' ' + x.content.amount), ['gtceu:soldering_alloy 72']);
+  assert.deepEqual(added.j.outputs.item.map((x) => x.content.ingredient.item + ' x' + x.content.count), ['gtceu:wetware_processor x32']);
+  assert.ok(JSON.stringify(added.j.recipeConditions).includes('1x_gtnn_etched_wetware_processor_base'), 'research id');
+  assert.ok(r.removals.some((x) => x.filter.includes(GTNN_WETWARE.i)), 'GT--\'s original removed by id');
+  // without the original nothing is removed, and it says why
+  const none = runPackScripts(pack);
+  assert.ok(!none.removals.some((x) => x.filter.includes(GTNN_WETWARE.i)));
+  assert.ok(none.errors.some((e) => /circuit_line/.test(String(e.file)) && /left as it is: no original recipe/.test(e.message)));
+});
+
 test('GG_NATIVE_DUMP: the pinned ids exist in a native dump', { skip: !process.env.GG_NATIVE_DUMP }, () => {
   const dir = process.env.GG_NATIVE_DUMP;
   const reg = JSON.parse(fs.readFileSync(path.join(dir, 'items.json'), 'utf8'));
@@ -165,8 +205,13 @@ test('GG_NATIVE_DUMP: the pinned ids exist in a native dump', { skip: !process.e
   const missing = [
     ...[...VERIFIED_BLOCKS, ...VERIFIED_ITEMS].filter((id) => !items.has(id)),
     ...VERIFIED_FLUIDS.filter((id) => !fluids.has(id)),
-    ...[...VERIFIED_STAGES, NPU_RECIPE].filter((id) => !recipeIds.has(id)),
+    ...[...VERIFIED_STAGES, NPU_RECIPE, GTNN_WETWARE.i, 'gtceu:scanner/1_x_gtnn_etched_wetware_processor_base'].filter((id) => !recipeIds.has(id)),
+    ...['gtceu:soldering_alloy'].filter((id) => !fluids.has(id)),
+    ...GTNN_WETWARE.j.inputs.item.map((x) => x.content.ingredient.item).filter((id) => !items.has(id)),
     ...VERIFIED_KEYS.filter((k) => !(k.startsWith('i:') ? items : fluids).has(k.slice(2))),
   ];
   assert.deepEqual(missing, []);
+  const live = JSON.parse(fs.readFileSync(path.join(dir, 'recipes.json'), 'utf8')).recipes.map((s) => JSON.parse(s)).find((r) => r.i === GTNN_WETWARE.i);
+  const shape = (j) => JSON.stringify([j.duration, j.tickInputs, j.recipeConditions, j.inputs.item, j.inputs.fluid, j.outputs.item]);
+  assert.equal(shape(live.j), shape(GTNN_WETWARE.j), 'the pinned copy of GT--\'s wetware recipe is the native one');
 });

@@ -8,9 +8,11 @@
 //   ids                 every block and item the check places or loads exists
 //   registration        gtnn:circuit_assembly_line has types [gtceu:circuit_assembly_line, gtceu:circuit_assembler] (mode 0, mode 1)
 //   npu_recipe          live gtceu:circuit_assembler/neuro_processor: 80,000 EU/t x 600 t, EU tier ZPM (7), a cleanroom condition, 1 NPU
-//   wetware_recipe      live gtnn:circuit_assembly_line/wetware_processor_luv_soldering_alloy: 38,400 EU/t x 600 t, tier ZPM (7),
-//                       research condition, 6 item inputs + 72 mB soldering alloy -> 32 wetware processors
-//   research_entry      the type's data-stick entry for the research id lists the wetware recipe (what GT--'s checkResearch reads)
+//   wetware_recipe      live grindless:circuit_assembly_line/wetware_processor_luv (server_scripts/grindless/luv/circuit_line.js, GT--'s
+//                       recipe at LuV voltage, the same 23.04 M EU): 30,720 EU/t x 750 t, tier LuV (6), research condition, 6 item
+//                       inputs + 72 mB soldering alloy -> 32 wetware processors; GT--'s gtnn:...wetware_processor_luv_soldering_alloy is gone
+//   research_entry      the type's data-stick entry for the research id lists our wetware recipe (what GT--'s checkResearch reads:
+//                       GTM's KubeJS plugin files every added GT recipe there through GTRecipeBuilder#save)
 //   rule_table          GTM's EnergyContainerList.calculateVoltageAmperage + GTUtil tiers for 1 x LuV 2A/4A/16A, 1 x ZPM 2A/4A and
 //                       two LuV 2A: GT--'s combined tier and GTM's max tier, as S0-4.md's table says
 //   npu_sources         recipe manager: no recipe <= 32,768 EU/t (any mod, any type) outputs gtceu:neuro_processing_unit unless its
@@ -20,8 +22,8 @@
 //   <copy>_npu_modifier fullModifyRecipe(NPU recipe) in circuit-assembler mode: null or not as expected, and which rule refuses
 //                       (GT--: recipe tier >= tier of the combined hatch voltage; GTM: recipe tier > the machine tier)
 //   <copy>_npu_run      NPU inputs loaded, a dummy cleanroom given: it does not start (luv, luv16a, zpm) or starts (zpm4a)
-//   <copy>_wetware_modifier / _wetware_run   mode 0, research stick in the template slot, wetware inputs in bus order: refused on
-//                       LuV hatches, starts on the ZPM 2A hatch at 38,400 EU/t x 600 t
+//   <copy>_wetware_modifier / _wetware_run   mode 0, research stick in the template slot, wetware inputs in bus order: starts on
+//                       one LuV 2A hatch (30,720 EU/t x 750 t), on LuV 16A and on ZPM 2A (overclocked)
 //   uaf_npu_modifier / uaf_npu_run   (UAF.enabled) our Universal Assembly Factory on two LuV hatches in circuit-assembler mode:
 //                       it refuses the NPU recipe (mv/leisure_factories.js: HATCH_VOLTAGE_LOCKED, landed with LuV-A5)
 //   CLEANUP, DONE
@@ -52,7 +54,8 @@
 
   var LINE = 'gtnn:circuit_assembly_line'
   var NPU_RECIPE = 'gtceu:circuit_assembler/neuro_processor'
-  var WET_RECIPE = 'gtnn:circuit_assembly_line/wetware_processor_luv_soldering_alloy'
+  var WET_RECIPE = 'grindless:circuit_assembly_line/wetware_processor_luv'
+  var GTNN_WET_RECIPE = 'gtnn:circuit_assembly_line/wetware_processor_luv_soldering_alloy'
   var NPU = 'gtceu:neuro_processing_unit'
   var WETWARE = 'gtceu:wetware_processor'
   var LAB_TYPE = 'gtceu:organoid_assembly'
@@ -70,8 +73,8 @@
   }
   // inV/inA: GTM's combined input voltage and amperage; tier: GTM's machine tier (floor of getMaxVoltage)
   var COPIES = [
-    { key: 'luv', z: 2, energy: 'gtceu:luv_energy_input_hatch', forms: true, inV: 32768, inA: 2, tier: 6, gtnnRefuses: true, gtmRefuses: true, npu: false, wetware: false },
-    { key: 'luv16a', z: 8, energy: 'gtceu:luv_energy_input_hatch_16a', forms: true, inV: 524288, inA: 1, tier: 6, gtnnRefuses: false, gtmRefuses: true, npu: false, wetware: false },
+    { key: 'luv', z: 2, energy: 'gtceu:luv_energy_input_hatch', forms: true, inV: 32768, inA: 2, tier: 6, gtnnRefuses: true, gtmRefuses: true, npu: false, wetware: true },
+    { key: 'luv16a', z: 8, energy: 'gtceu:luv_energy_input_hatch_16a', forms: true, inV: 524288, inA: 1, tier: 6, gtnnRefuses: false, gtmRefuses: true, npu: false, wetware: true },
     { key: 'zpm', z: 14, energy: 'gtceu:zpm_energy_input_hatch', forms: true, inV: 131072, inA: 2, tier: 7, gtnnRefuses: true, gtmRefuses: false, npu: false, wetware: true },
     { key: 'zpm4a', z: 20, energy: 'gtceu:zpm_energy_input_hatch_4a', forms: true, inV: 524288, inA: 1, tier: 7, gtnnRefuses: false, gtmRefuses: false, npu: true, wetware: null },
     { key: 'two_luv', z: 26, energy: 'gtceu:luv_energy_input_hatch', second: 'gtceu:luv_energy_input_hatch', forms: false }
@@ -351,9 +354,11 @@
       var outs = asArray(c.RecipeHelper.getOutputItems(r)).map(function (st) { return st.getCount() + ' ' + itemName(st) })
       S.wet = r
       S.researchId = researchIdOf(r) || RESEARCH_FALLBACK
-      check('wetware_recipe', String(r.recipeType.registryName) === 'gtceu:circuit_assembly_line' && inputEUt(r) === 38400 && Number(r.duration) === 600 &&
-        euTier(r) === 7 && ins.length === 6 && outs.join(',') === '32 ' + WETWARE, inputEUt(r) + ' EU/t x ' + r.duration + ' t, EU tier ' + euTier(r) +
-        ', research ' + S.researchId + ', in [' + ins.concat(fl).join(', ') + '] -> ' + outs.join(', '))
+      var gone = liveRecipe(GTNN_WET_RECIPE) === null
+      check('wetware_recipe', String(r.recipeType.registryName) === 'gtceu:circuit_assembly_line' && inputEUt(r) === 30720 && Number(r.duration) === 750 &&
+        euTier(r) === 6 && ins.length === 6 && outs.join(',') === '32 ' + WETWARE && S.researchId === RESEARCH_FALLBACK && gone,
+        inputEUt(r) + ' EU/t x ' + r.duration + ' t, EU tier ' + euTier(r) + ', research ' + S.researchId + ', in [' + ins.concat(fl).join(', ') +
+        '] -> ' + outs.join(', ') + '; GT--\'s original ' + (gone ? 'removed' : 'STILL LIVE'))
     })
 
     safely('research_entry', function () {
