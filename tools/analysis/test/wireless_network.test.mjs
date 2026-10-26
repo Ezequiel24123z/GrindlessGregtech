@@ -1154,7 +1154,7 @@ const LUV = 6;
 // GTM 7.5.3's reference batteries (GTItems: their electric items' max charge; the dump's electric.json has the same)
 const BATTERY_EU = {
   'gtceu:lv_lithium_battery': 120000, 'gtceu:mv_lithium_battery': 420000, 'gtceu:hv_lithium_battery': 1800000,
-  'gtceu:ev_vanadium_battery': 10240000, 'gtceu:iv_vanadium_battery': 40960000, 'gtceu:luv_vanadium_battery': 163840000,
+  'gtceu:ev_vanadium_battery': 10240000, 'gtceu:iv_vanadium_battery': 40960000, 'gtceu:luv_vanadium_battery': 163840000, 'gtceu:zpm_naquadria_battery': 655360000,
 };
 const SMES = 'grindless:luv_smes_cell';
 const SMES_EU = 983040000;
@@ -1169,7 +1169,7 @@ let staticRun = null;
 const packRun = () => staticRun || (staticRun = runPackScripts(PACK));
 
 test('LuV wireless table: six rows LV to LuV, each cell six of its tier\'s reference battery; the LuV cell is made in the HTS magnet works', () => {
-  assert.deepEqual(TABLE.tiers.map((r) => [r.tier, r.name]), [[1, 'lv'], [2, 'mv'], [3, 'hv'], [4, 'ev'], [5, 'iv'], [6, 'luv']]);
+  assert.deepEqual(TABLE.tiers.map((r) => [r.tier, r.name]), [[1, 'lv'], [2, 'mv'], [3, 'hv'], [4, 'ev'], [5, 'iv'], [6, 'luv'], [7, 'zpm']]);
   for (const r of TABLE.tiers) {
     assert.equal(r.capacity, 6 * BATTERY_EU[r.referenceBattery], r.name + ': 6 x ' + r.referenceBattery);
     if (r.cellMadeBy) continue;
@@ -1184,7 +1184,7 @@ test('LuV wireless table: six rows LV to LuV, each cell six of its tier\'s refer
   assert.equal(luv.texture, 'grindless:block/wireless/smes_cell_luv');
   assert.deepEqual([luv.emitter, luv.sensor, luv.signalParts, luv.link, luv.plate, luv.wire],
     ['gtceu:luv_emitter', 'gtceu:luv_sensor', 1, 'gtceu:quantum_star', 'gtceu:rhodium_plated_palladium_plate', 'niobium_titanium']);
-  assert.equal(TABLE.tiers.filter((r) => r.cellMadeBy).length, 1, 'only the LuV cell is made elsewhere');
+  assert.equal(TABLE.tiers.filter((r) => r.cellMadeBy).length, 2, 'only the LuV and ZPM cells are made elsewhere');
   assert.ok(TABLE._how_it_is_used.some((l) => /cellMadeBy/.test(l)), 'the table documents cellMadeBy');
   // the HTS magnet works' circuit 2 makes exactly this cell
   const smes = HTS.recipes.find((r) => r.name === 'luv_smes_cell');
@@ -1202,11 +1202,11 @@ test('LuV wireless table: six rows LV to LuV, each cell six of its tier\'s refer
   for (const r of TABLE.tiers.filter((x) => x.batteries)) assert.ok(tags[r.batteries.slice(1)], r.batteries + ' is a tag');
 });
 
-test('LuV wireless registrations: the startup script registers 48 hatches, 6 cells and 12 covers from the table (static stand-in)', () => {
+test('LuV wireless registrations: the startup script registers 56 hatches, 7 cells and 14 covers from the table (static stand-in)', () => {
   const run = packRun();
   const ours = (m) => m.file === STARTUP_REL;
   const hatches = [...run.registry.machines.values()].filter((m) => /_wireless_(energy|dynamo)_hatch(_\d+a)?$/.test(m.id));
-  assert.equal(hatches.length, 48);
+  assert.equal(hatches.length, 56);
   assert.ok(hatches.every(ours), 'all of them from lv/wireless_energy.js');
   for (const t of TABLE.tiers) for (const kind of ['energy', 'dynamo']) for (const a of TABLE.hatchAmps) {
     const id = `gtceu:${t.name}_wireless_${kind}_hatch${a === 2 ? '' : '_' + a + 'a'}`;
@@ -1216,15 +1216,15 @@ test('LuV wireless registrations: the startup script registers 48 hatches, 6 cel
   assert.deepEqual(cells.map((b) => b.id), TABLE.tiers.map((r) => r.cell));
   assert.ok(run.registry.items.has(SMES), 'the SMES cell has its block item');
   const covers = [...run.registry.items.values()].filter((i) => ours(i) && /_wireless_(energy|dynamo)_cover$/.test(i.id)).map((i) => i.id);
-  assert.equal(covers.length, 12);
+  assert.equal(covers.length, 14);
   for (const t of TABLE.tiers) for (const kind of ['energy', 'dynamo']) assert.ok(covers.includes(`grindless:${t.name}_wireless_${kind}_cover`), t.name + ' ' + kind);
   assert.deepEqual(run.errors.filter((e) => /wireless/.test(e.file)), [], 'the wireless scripts load cleanly');
   // the same from the startup object the server script reads
   const { W } = jvm();
-  assert.equal(W.hatchIds.length, 48);
-  assert.equal(W.cellIds.length, 6);
-  assert.equal(W.coverList.length, 12);
-  assert.deepEqual(plain(W.tiers), [1, 2, 3, 4, 5, 6]);
+  assert.equal(W.hatchIds.length, 56);
+  assert.equal(W.cellIds.length, 7);
+  assert.equal(W.coverList.length, 14);
+  assert.deepEqual(plain(W.tiers), [1, 2, 3, 4, 5, 6, 7]);
   assert.equal(W.tierNames[LUV], 'luv');
   assert.equal(W.tierLabels[LUV], 'LuV');
   assert.deepEqual(plain(W.cells[SMES]), { tier: LUV, capacity: SMES_EU, madeBy: 'gtceu:hts_magnet_works' });
@@ -1241,9 +1241,9 @@ test('LuV wireless recipes: no assembler recipe for the SMES cell; the LuV hatch
   const { W } = jvm();
   assert.equal(W.recipes.filter((r) => r.output === SMES).length, 0, 'the SMES cell is not made in the assembler');
   assert.ok(!W.recipes.some((r) => /luv_capacitor_cell|luv_smes_cell/.test(r.id)));
-  // every other cell has its one assembler recipe; the tower, 5 cells, 48 hatches, 12 covers
+  // every other cell has its one assembler recipe; the tower, 5 cells, 56 hatches, 14 covers
   for (const r of TABLE.tiers.filter((x) => !x.cellMadeBy)) assert.equal(W.recipes.filter((x) => x.output === r.cell).length, 1, r.cell);
-  assert.equal(W.recipes.length, 1 + 5 + 48 + 12);
+  assert.equal(W.recipes.length, 1 + 5 + 56 + 14);
   const luv = W.recipes.filter((r) => /^gtceu:luv_wireless_|^grindless:luv_wireless_/.test(r.output));
   assert.equal(luv.length, 10);
   for (const r of luv) {
