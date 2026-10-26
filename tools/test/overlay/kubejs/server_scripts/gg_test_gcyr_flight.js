@@ -1475,15 +1475,32 @@
         return
       }
       FL.minY = Math.min(FL.minY, yOf(r3))
-      // landed = the rocket fell and then did not move for 10 ticks (plain positions: no Entity.onGround / Vec3.y name lookups); a
-      // rocket that has not fallen yet may only be waiting for its chunk to load
+      // Existing surface proof uses descent and ten stable samples. The new orbit
+      // assist must ALSO produce real native ground contact and a synced client mount.
       var y3 = yOf(r3)
-      if (FL.lastY !== undefined && Math.abs(y3 - FL.lastY) < 0.001 && FL.minY < FL.arrY - 10) FL.landStable++
+      var orbitLanding = SCOPE === 'luv_s0_stations' &&
+        global.grindless.orbits.dimensions.indexOf(FL.targetDim) >= 0
+      var grounded = !orbitLanding || !!r3.onGround()
+      var mountFresh = Date.now() - Number(sval('clientMountObservedMs')) < 2000
+      var clientMounted = !orbitLanding || (sval('clientMountedRocketUuid') === uuidOf(r3) &&
+        sval('clientDim') === FL.targetDim && mountFresh &&
+        Math.abs(Number(sval('clientMountedRocketY')) - y3) < 0.5 &&
+        sval('clientMountObservationError') === '')
+      var serverMounted = !orbitLanding || (vehicleOf(p) !== null && uuidOf(vehicleOf(p)) === uuidOf(r3))
+      if (FL.lastY !== undefined && Math.abs(y3 - FL.lastY) < 0.001 &&
+          FL.minY < FL.arrY - 10 && grounded && clientMounted && serverMounted) FL.landStable++
       else FL.landStable = 0
       FL.lastY = y3
       if (age === 40) note('flight_client_descent_' + FL.leg, 'client sees: dimension ' + sval('clientDim') + ', vehicle ' + sval('clientVehicle') + ', Space held ' + sval('clientBrakeTicks') + ' ticks')
       if (FL.landStable >= 10) {
         var info = readRocket(r3)
+        if (orbitLanding) {
+          check('flight_native_ground_' + FL.leg, grounded,
+            'native rocket.onGround() after actual collision; no fixture ground flag or forced tick')
+          check('flight_client_mount_' + FL.leg, clientMounted && serverMounted,
+            'same native rocket UUID=' + uuidOf(r3) + ' on server and client; client y=' +
+            sval('clientMountedRocketY') + ', server y=' + y3 + ', fresh observation=' + mountFresh)
+        }
         check('flight_landing_' + FL.leg, true, 'landed in ' + dimOf(r3) + ' at ' + key(Math.floor(jcall(r3, V.x)), Math.floor(y3), Math.floor(jcall(r3, V.z))) + ' ' + (S.t - FL.arriveT) +
           ' ticks after arrival, no crash; fuel ' + info.fuel + ' mB left (' + (FL.fuelAtLaunch - info.fuel) + ' mB burnt this leg), client held Space ' + sval('clientBrakeTicks') + ' ticks')
         FL.legs[FL.leg] = { launchToArrive: FL.arriveT - FL.launchT, arriveToLand: S.t - FL.arriveT, burnt: FL.fuelAtLaunch - info.fuel }
@@ -1501,6 +1518,20 @@
         go(FL.leg === 'moon' ? 'moon_stay' : 'done')
         if (FL.leg !== 'moon') flightSummary()
         return
+      }
+      if (orbitLanding && y3 < 550) {
+        if (FL.orbitSettleT === undefined) {
+          FL.orbitSettleT = S.t
+          FL.orbitSettleMs = Date.now()
+        }
+        if (S.t - FL.orbitSettleT > 200 || Date.now() - FL.orbitSettleMs > 10000) {
+          check('flight_landing_' + FL.leg, false, 'orbit moved below arrival height but normal landing not proven: y=' +
+            y3 + ', onGround=' + grounded + ', serverMounted=' + serverMounted +
+            ', clientMounted=' + clientMounted + ', client=' + sval('clientMountedRocketUuid') +
+            ', clientY=' + sval('clientMountedRocketY') + ', observationError=' + sval('clientMountObservationError'))
+          abortFlight('orbit collision/client-mount recovery failed')
+          return
+        }
       }
       if (age > 2400) {
         check('flight_landing_' + FL.leg, false, 'not on the ground ' + age + ' ticks after arrival: y=' + y3.toFixed(1) + ' min y ' + FL.minY.toFixed(1) +
