@@ -117,6 +117,10 @@ file = "kubejs/assets/emi/index/stacks/grindless_hidden_with_recipes.json"
 hash = "8b88bd0c9b60901357d3a782a3a016a1b9b623225f62f885b5af7ec4afff5f29"
 
 [[files]]
+file = "kubejs/assets/emi/recipe/additions/grindless/aerogel_fuel_tank.json"
+hash = "cb189bc3f37cbbb470663fa68ecb01a734179dba44fafdd9395549206004fb14"
+
+[[files]]
 file = "kubejs/assets/emi/recipe/additions/grindless/asteroid_regolith_casing.json"
 hash = "b39bb918ad9c99fd4c86857f65759b2cb3a2131d4436859f30f8d6c51ca75107"
 
@@ -157,6 +161,10 @@ file = "kubejs/assets/emi/recipe/additions/grindless/magnetic_bearing.json"
 hash = "a371423b1252fac1d3b3bcdf15ffa32c1a9470468fef991e7e348e16a00af950"
 
 [[files]]
+file = "kubejs/assets/emi/recipe/additions/grindless/naquadah_fuel_tank.json"
+hash = "70617751c1eb86ef655bed86a8d0623201b1d70d6d250a86aba2a39643f7b247"
+
+[[files]]
 file = "kubejs/assets/emi/recipe/additions/grindless/night_sky_radiator.json"
 hash = "5b70d2dc5d837251297ad3d4c5431ce752e96608be784d3cd6348a61fbabd724"
 
@@ -177,6 +185,10 @@ file = "kubejs/assets/emi/recipe/additions/grindless/saturn_transfer_chart.json"
 hash = "17fe486266f6e16e011caffd6b167d46e4be849bbfd8f18e46fccfdde31a2f65"
 
 [[files]]
+file = "kubejs/assets/emi/recipe/additions/grindless/saturnian_quantum_seed.json"
+hash = "61d2ebf9e06d4f293a933ddb056ce07d1b65f0dad23aad35616eb19f955e8f98"
+
+[[files]]
 file = "kubejs/assets/emi/recipe/additions/grindless/sintered_regolith.json"
 hash = "ec734f19d60ca0a41edb365f8d8b6eda3bc817296e6f8bf893f66e90558b00d9"
 
@@ -195,6 +207,10 @@ hash = "ea98fe4113e7c5790ac4c3196e9bce5a2d7822950d3af64ff81723113387d8a5"
 [[files]]
 file = "kubejs/assets/emi/recipe/additions/grindless/travel_keys.json"
 hash = "8d321702a4185fd914ce3a340dab477a324f3af6a504233e9216b6f189959691"
+
+[[files]]
+file = "kubejs/assets/emi/recipe/additions/grindless/uranian_quantum_seed.json"
+hash = "a614ec4a71c8721d3c838b4917a0956adefba24658775a439346789d56f4c544"
 
 [[files]]
 file = "kubejs/assets/emi/recipe/additions/grindless/whipple_shield_casing.json"
@@ -223,6 +239,14 @@ hash = "a89c6cdf82b947179b585bc57238bea2097cc25242cd12048b7bf5b72a2dc609"
 [[files]]
 file = "kubejs/assets/grindless/gcyr/planet_assets/sky_renderers/io.json"
 hash = "d9198d8e280be23e9671a3ab40f59cd108fad52e4cc5ce9ee492e154e91d4503"
+
+[[files]]
+file = "kubejs/assets/grindless/gcyr/planet_assets/sky_renderers/saturn_orbit.json"
+hash = "81ab7f0407f02141055f5e9f255d393b2c20021b25d250b16471536f058fd563"
+
+[[files]]
+file = "kubejs/assets/grindless/gcyr/planet_assets/sky_renderers/uranus_orbit.json"
+hash = "03685b4526833dc037d5f94d79a70edb6ef9e95ba3a122344e51b36502911b78"
 
 [[files]]
 file = "kubejs/assets/grindless/lang/en_us.json"
@@ -283,6 +307,14 @@ hash = "6ad66184e9bf56c179050135298c9af54568c2a46126e03b9ff312812403a7f5"
 [[files]]
 file = "kubejs/assets/grindless/models/block/machines/wireless/hatch_64a.json"
 hash = "397f8bc0f2e03f788617d681d4dab36ec811ee09e8f5c15d747da2ee2121f5a0"
+
+[[files]]
+file = "kubejs/assets/grindless/models/block/zpm/aerogel_fuel_tank.json"
+hash = "24e54d0c203eab912aa19a09dee6570387b03cbb68fd21872b5a02b0fbfcabc8"
+
+[[files]]
+file = "kubejs/assets/grindless/models/block/zpm/naquadah_fuel_tank.json"
+hash = "5d8fdf07995b70f2539375cbf814417ac6c2b621d9a11cb78d9a008128e6ed75"
 
 [[files]]
 file = "kubejs/assets/grindless/textures/block/cover/wireless_dynamo_cover_emissive.png"
@@ -2325,8 +2357,24 @@ file = "kubejs/assets/grindless/textures/block/wireless/smes_cell_luv.png"
 hash = "fd8d2dcde56687c2558ce10757c05a5457b53991af48a655c22c7b1408cdac2f"
 
 [[files]]
+file = "kubejs/assets/grindless/textures/block/zpm/aerogel_fuel_tank_end.png"
+hash = "b46a3f8432b32fccdaee62948b24046e4187df037f13383490f4f3c09c3b849d"
+
+[[files]]
+file = "kubejs/assets/grindless/textures/block/zpm/aerogel_fuel_tank_side.png"
+hash = "0ecc3d26e380a1bdb8494cec6d5a80ab908a2b9a0e7456f830a9e44c783cfcc7"
+
+[[files]]
 file = "kubejs/assets/grindless/textures/block/zpm/cryostat_casing.png"
 hash = "bc4ad738fb421f4351a4018cb53e1ce8f97495131c78d4511b0ae3069d8a4a0a"
+
+[[files]]
+file = "kubejs/assets/grindless/textures/block/zpm/naquadah_fuel_tank_end.png"
+hash = "ce41e3b61dd5fc74949b15835eeca6097d2f694de9c5499e41216b1cbe178b0b"
+
+[[files]]
+file = "kubejs/assets/grindless/textures/block/zpm/naquadah_fuel_tank_side.png"
+hash = "05970ae3678473e919b5259e47a48a11a522d3e8e4cc45fbf1b445f66b6ae38b"
 
 [[files]]
 file = "kubejs/assets/grindless/textures/block/zpm/naquadria_containment_casing.png"
@@ -2745,6 +2793,10 @@ file = "kubejs/assets/grindless/textures/item/saturn_transfer_chart.png"
 hash = "78ebb098496cf427abd352c0bc210f99c18301950013a065446d69f9dc422b12"
 
 [[files]]
+file = "kubejs/assets/grindless/textures/item/saturnian_quantum_seed.png"
+hash = "5b0c1015502ae4bd877518747ed9241fa14c2c50010f21470f4143b7aebeebad"
+
+[[files]]
 file = "kubejs/assets/grindless/textures/item/scoop_head.png"
 hash = "42c60b4a3fca00a132beab54ccb9061004abd29811416aad139764da4dabdf14"
 
@@ -2823,6 +2875,10 @@ hash = "224d0d4ddcbee7d0a834ebee2f42a117d5f88cfc6a011b4230541c4d8d1bbb83"
 [[files]]
 file = "kubejs/assets/grindless/textures/item/untested_rocket_motor.png"
 hash = "8ba30c5725a01878692545b5b7326ec02c03b939ce0cb3b6166b234669f34423"
+
+[[files]]
+file = "kubejs/assets/grindless/textures/item/uranian_quantum_seed.png"
+hash = "19f77e36d09bc78a8baa63ac1e2fccf929418be6a60408f05547d85d7aa2fe27"
 
 [[files]]
 file = "kubejs/assets/grindless/textures/item/uranus_transfer_chart.png"
@@ -2922,7 +2978,7 @@ hash = "597286ab53fe25d3ed999a8c75d31f5a52741a4ba3e132008120686679cf8ca3"
 
 [[files]]
 file = "kubejs/client_scripts/grindless/emi_info_lang.js"
-hash = "88bbcf6247182b818c45e02f9a317667e435ef56f8ccd81e2ca8e4f529430beb"
+hash = "3ad1bb19d5804579476d43f133aa3a75eda42ae8eb033eb8a08ed53e618382b7"
 
 [[files]]
 file = "kubejs/client_scripts/grindless/ev_ae2_interplanetary_lang.js"
@@ -3177,12 +3233,16 @@ file = "kubejs/client_scripts/grindless/zpm_naquadria_lang.js"
 hash = "5569b6b13a31c565112e5d4553789f32c0c63ee4cf2a956271a5f1fa5a71ab03"
 
 [[files]]
+file = "kubejs/client_scripts/grindless/zpm_travel_lang.js"
+hash = "6455c858a7865ce488a1874ac795a2014d9a4721bac4066f4325c496081e770f"
+
+[[files]]
 file = "kubejs/data/gcyr/gcyr/planets/mercury.json"
 hash = "1cb9eb28f91d7294d0a6174f7c31198205592268fcb67746d4b3fb3ea99b15e4"
 
 [[files]]
 file = "kubejs/data/gcyr/gcyr/planets/proxima_centauri_b.json"
-hash = "70d95f8c0afab46a7c5dbbbede66dc6d5d23de0d50fa7acca0cf43c38387c9fa"
+hash = "09ddf74e59e5d76a314416ab9b2681c58d0649f590d27a8fb28df54f8c55b359"
 
 [[files]]
 file = "kubejs/data/gcyr/gcyr/planets/venus.json"
@@ -3230,6 +3290,22 @@ hash = "a616d38296854ee437b299bad517415b425cab549d6ef72e46b44803ca5a1ce9"
 
 [[files]]
 file = "kubejs/data/grindless/dimension/jupiter_orbit.json"
+hash = "a616d38296854ee437b299bad517415b425cab549d6ef72e46b44803ca5a1ce9"
+
+[[files]]
+file = "kubejs/data/grindless/dimension/saturn.json"
+hash = "a616d38296854ee437b299bad517415b425cab549d6ef72e46b44803ca5a1ce9"
+
+[[files]]
+file = "kubejs/data/grindless/dimension/saturn_orbit.json"
+hash = "a616d38296854ee437b299bad517415b425cab549d6ef72e46b44803ca5a1ce9"
+
+[[files]]
+file = "kubejs/data/grindless/dimension/uranus.json"
+hash = "a616d38296854ee437b299bad517415b425cab549d6ef72e46b44803ca5a1ce9"
+
+[[files]]
+file = "kubejs/data/grindless/dimension/uranus_orbit.json"
 hash = "a616d38296854ee437b299bad517415b425cab549d6ef72e46b44803ca5a1ce9"
 
 [[files]]
@@ -3281,6 +3357,14 @@ file = "kubejs/data/grindless/gcyr/planets/jupiter.json"
 hash = "ecb66b5791c047f2201f5e7dadc3a45a51d589852e5463900893d1a2889b43f2"
 
 [[files]]
+file = "kubejs/data/grindless/gcyr/planets/saturn.json"
+hash = "6f6ded43158800effb3c78fbc59f60f699233c4fe5c5a0ee8632d151320890d5"
+
+[[files]]
+file = "kubejs/data/grindless/gcyr/planets/uranus.json"
+hash = "4002bd1f5849a2e1cb0562b602b4c8a5a3fd562237c0c9a6b6519247e45f0f73"
+
+[[files]]
 file = "kubejs/data/grindless/tables/ae2_gt.json"
 hash = "7eaa8fc6122b00a8b59e680d5bea222ef9bc0b903a0fcfdc9bba69b9dcab060e"
 
@@ -3318,7 +3402,7 @@ hash = "1f4b256531a0b42a6ecf399e9b692d9e4730bd4102e53aab3e1fa2c999b69e9d"
 
 [[files]]
 file = "kubejs/data/grindless/tables/hidden_until.json"
-hash = "4d59a48b64517e72b1a1d440da176dc1acba82ea4011f6d82ec12e4e6a77cf6b"
+hash = "c71f748e58022034d484e44406485eabbb54b816e58b2f87756189649054e087"
 
 [[files]]
 file = "kubejs/data/grindless/tables/hot_cell.json"
@@ -3350,15 +3434,15 @@ hash = "67a7297880c3f098cbc88440a691b8ebd9e356459cda7d0f270edeb653c5bdaa"
 
 [[files]]
 file = "kubejs/data/grindless/tables/orbits.json"
-hash = "dbf0da39211b14f2c532ac661d757f1d9d37cbf40651e4be35e94bdaf6e38e5a"
+hash = "ed89e7fbc97fe0840b2caea8f2c7556bd3b17d56410ca68e4eefd564a4209134"
 
 [[files]]
 file = "kubejs/data/grindless/tables/places.json"
-hash = "4faa362092c1af5de19ee91d2d72879114845ad696f0e5d34eb73aea4c460207"
+hash = "cf08f9077ae663214376e3552041041d317a9d6bde9b57803c1d0d507341bcad"
 
 [[files]]
 file = "kubejs/data/grindless/tables/planets.json"
-hash = "b743d9d5e96b6b6feb13cb6ed6adb3d064487e283aa227f2883cb14c2b4cacca"
+hash = "da3e38610c0d7d0ec4251b925c32d9f1e8a7a6c7ea173a24a4e48bc85b0f6941"
 
 [[files]]
 file = "kubejs/data/grindless/tables/site_fuels.json"
@@ -3366,7 +3450,7 @@ hash = "229e0fdba455888292da0eb59628876cca82add03fea653ed4d4fb105ed8ed46"
 
 [[files]]
 file = "kubejs/data/grindless/tables/stations.json"
-hash = "3860c9a0065c5059c04f98c8bd793a37db4b82cced2a33e09d1fb140acac5942"
+hash = "e8c18260cbc2ac49a391983af8e607f3f7b3ac600a0caedab11b442a6522e19b"
 
 [[files]]
 file = "kubejs/data/grindless/tables/steam_blast_furnace.json"
@@ -3374,7 +3458,7 @@ hash = "612abed0a7d196efbbcb7dd98cedf24f86eac618bf651b343e1a2e186befd607"
 
 [[files]]
 file = "kubejs/data/grindless/tables/sunlight.json"
-hash = "e4d706ab71071805ed6c120ebe9cf661c6022fb4971cc2858a58e433e2492126"
+hash = "ae709cb8fccd0740848079f2396a38700c7b94c3797eafdd31ade609f88e8f91"
 
 [[files]]
 file = "kubejs/data/grindless/tables/uranium_cycle.json"
@@ -3706,7 +3790,7 @@ hash = "591bd1409386a1a0a086f1b1cae2adc5484035b413285cd13986b1e1da4c46cd"
 
 [[files]]
 file = "kubejs/server_scripts/grindless/launch_road/recipes.js"
-hash = "1bb8ba4124d273fec1c5ce028783272b7520090b17bc1865d99299d2275597ce"
+hash = "bb43a30eb2b869f388c1ec66a53aa8a7a303041b24fff2d67763f0053138458b"
 
 [[files]]
 file = "kubejs/server_scripts/grindless/lib/compose.js"
@@ -3955,6 +4039,10 @@ hash = "bfc444310892c3e9f6bd8240ca44839f77c5288323497128c2f53dc4525cc410"
 [[files]]
 file = "kubejs/server_scripts/grindless/zpm/naquadria.js"
 hash = "de8fbfe93e28fc07a53e29afd080f5152927baa7501f9a99767449a9b170f130"
+
+[[files]]
+file = "kubejs/server_scripts/grindless/zpm/travel.js"
+hash = "8784cc2635089e5bde67d5c4475362cf184008cf1fa785baa3d3d19c13fd4aae"
 
 [[files]]
 file = "kubejs/startup_scripts/grindless/dimensions.js"
@@ -4307,6 +4395,10 @@ hash = "b053916d5bf548c10ee107d9777dd40e727793b2bce81f33952b22c344b7ac91"
 [[files]]
 file = "kubejs/startup_scripts/grindless/zpm/naquadria.js"
 hash = "43ed707051473e4713fef6aeace0062e12235135f9d6a11fca4f4299c508a28d"
+
+[[files]]
+file = "kubejs/startup_scripts/grindless/zpm/travel.js"
+hash = "51dd0427bc8a93b0af6200ba2f1aef81aa3afd0c0afbb196c371751223e4ace6"
 
 [[files]]
 file = "mods/advancement-plaques.pw.toml"

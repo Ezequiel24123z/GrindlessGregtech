@@ -99,6 +99,24 @@ test('an observation with a hidden byproduct is dropped whole: the chart keeps i
   assert.ok(res.problems.some((p) => p.startsWith('t:stargazing/chart (gtceu:stargazing): EMI drops it for output t:later_era_dust')), res.problems.join('\n'));
 });
 
+test('a pending route is dropped only for our stacks disabled until their era; a foreign stack or a stale entry is still a problem', () => {
+  const dump = mkDump({
+    recipes: [
+      gt('t:assembler/tank', 'gtceu:assembler', { ins: [gi('t:small_tank'), gi('t:aerogel', 8)], outs: [gi('t:big_tank')] }),
+      gt('t:assembler/other', 'gtceu:assembler', { ins: [gi('t:small_tank'), gi('t:junk')], outs: [gi('t:big_tank')] }),
+    ],
+    tagsItem: { 't:hidden_with_recipes': ['t:aerogel', 't:junk'] },
+  });
+  const emi = { ...noEmi, disabled: [parseEmiStack('#item:t:hidden_with_recipes')] };
+  const registry = reg({ items: ['t:small_tank', 't:big_tank', 't:aerogel'], types: ['gtceu:assembler'] });
+  const pendingRoutes = [{ id: 't:assembler/tank', reason: 'aerogel is a later package' }, { id: 't:assembler/other' }, { id: 't:assembler/gone' }];
+  const res = audit({ dump, registry, emi, cfg: { ...cfg0, pendingRoutes } });
+  assert.deepEqual(res.pendingRoutes.map((d) => [d.id, d.disabledBy, d.reason]), [['t:assembler/tank', ['input t:aerogel'], 'aerogel is a later package']]);
+  assert.deepEqual(res.droppedRoutes.map((d) => d.id), ['t:assembler/other'], 't:junk is not ours');
+  assert.ok(res.problems.includes('pending route t:assembler/gone: EMI no longer drops it for stacks disabled until their era; delete the entry'), res.problems.join('\n'));
+  assert.ok(res.problems.some((p) => p.startsWith('t:assembler/other (gtceu:assembler): EMI drops it')), res.problems.join('\n'));
+});
+
 test('the multiblock preview places the first block of each predicate: later options are no use, and a structure-only block needs a page', () => {
   const structure = { symbols: { S: { kind: 'controller' }, C: { kind: 'oneOf', options: [{ kind: 'blocks', blocks: ['t:cell_1', 't:cell_2'] }, { kind: 'blocks', blocks: ['t:casing'] }] } } };
   assert.deepEqual(previewBlocks(structure), ['t:cell_1', 't:casing']);

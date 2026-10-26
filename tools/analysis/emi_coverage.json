@@ -5,7 +5,8 @@
     "endProducts: what needs no use (machines always; tools and final rewards here, each with its reason).",
     "requirePages: an item made by a recipe of an invisible type, or whose only use is a place in a structure, also needs an info page (kubejs/assets/emi/recipe/additions/grindless/).",
     "derived: routes the static stand-in cannot see, because a script derives them from the mods' own recipes or GTM generates them from a material's flags. Each one is checked against a native dump with --dump (category = EMI category).",
-    "exceptions: an item that genuinely has no acquisition or no use, with the reason. Keep it empty unless the design says so."
+    "exceptions: an item that genuinely has no acquisition or no use, with the reason. Keep it empty unless the design says so.",
+    "pendingRoutes: temporary, while an era is built. A recipe of ours EMI drops only because a stack of ours is disabled until its era (an input another package of the era makes). Each entry names the package that deletes it; an entry EMI no longer drops is a problem."
   ],
   "invisibleTypes": ["gtceu:electric_furnace", "gtceu:dummy"],
   "requirePages": { "invisibleRoutes": true, "previewOnlyUses": true },
@@ -45,6 +46,12 @@
   ],
   "exceptions": [
     { "id": "grindless:itbtc_coated_conductor", "role": "use", "reason": "temporary (LuV-A3): its uses, the HTS coil and the SMES cell, are LuV-A4's magnet works; delete this exception when A4 merges" },
-    { "id": "grindless:chondritic_extract", "role": "use", "reason": "temporary (LuV-B5): its use, the Europan culture of the algae bioreactor, is LuV-B8's; delete this exception when B8 merges" }
-  ]
-}
+    { "id": "grindless:chondritic_extract", "role": "use", "reason": "temporary (LuV-B5): its use, the Europan culture of the algae bioreactor, is LuV-B8's;     delete this exception when B8 merges" },
+        { "id": "grindless:pica_heat_shield", "role": "use", "reason": "temporary (ZPM-B1): its use, the entry probe bay, is ZPM-B3's; delete this exception when B3 merges" }
+      ],
+      "pendingRoutes": [
+        { "id": "grindless:assembler/aerogel_fuel_tank", "reason": "ZPM-B1: silica aerogel and nanotube yarn are A8's, the Uranus transfer chart B4's; delete when both merge" },
+        { "id": "grindless:chemical_reactor/saturnian_quantum_seed", "reason": "ZPM-B1: the ring ice sample is B2's; delete when B2 merges" },
+        { "id": "grindless:chemical_reactor/uranian_quantum_seed", "reason": "ZPM-B1: the ice-giant atmosphere sample is B5's; delete when B5 merges" }
+      ]
+    }
