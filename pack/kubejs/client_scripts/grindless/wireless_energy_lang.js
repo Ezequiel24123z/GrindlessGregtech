@@ -2,24 +2,29 @@
 // server_scripts/grindless/lv/wireless_energy.js):
 //
 //   gtceu:wireless_energy_tower, grindless.machine.wireless_energy_tower.*      the tower: name, tooltips, controller lines
-//   grindless:<tier>_capacitor_cell, tooltip.grindless.capacitor_cell.*         the cells
+//   grindless:<tier>_capacitor_cell, grindless:luv_smes_cell, tooltip.grindless.capacitor_cell.*, tooltip.grindless.wireless_cell.*
+//                                                                               the cells
 //   gtceu:<tier>_wireless_energy_hatch[_4a|_16a|_64a], gtceu:<tier>_wireless_dynamo_hatch[...], grindless.machine.wireless*.tooltip.*
 //   grindless:<tier>_wireless_energy_cover / _wireless_dynamo_cover, tooltip.grindless.wireless_*cover*   the covers
 //   message.grindless.wireless.*                                                the readout and the covers' placing (action bar)
 //
-// The hatches' names are GTM's (namespace gtceu), the whole name coloured like GTM's energy hatches (§7 LV, §b MV, §6 HV, §5 EV, §9 IV).
+// The hatches' names are GTM's (namespace gtceu), the whole name coloured like GTM's energy hatches (§7 LV, §b MV, §6 HV, §5 EV, §9 IV,
+// §d LuV). The tiers follow kubejs/data/grindless/tables/wireless_energy.json (a Node test checks that every row has its names here).
 // Kept out of pack/kubejs/assets/grindless/lang/* like the other *_lang.js scripts. Names go in en_us and es_es.
 (function () {
   const SECTION = '\u00a7'
+  // cell: the cell's id path and its name (en_us / es_es) when it is not a capacitor cell
   const TIERS = [
     { id: 'lv', name: 'LV', colour: '7' },
     { id: 'mv', name: 'MV', colour: 'b' },
     { id: 'hv', name: 'HV', colour: '6' },
     { id: 'ev', name: 'EV', colour: '5' },
-    { id: 'iv', name: 'IV', colour: '9' }
+    { id: 'iv', name: 'IV', colour: '9' },
+    { id: 'luv', name: 'LuV', colour: 'd', cell: { path: 'luv_smes_cell', en: 'LuV SMES Cell', es: 'Celda SMES LuV' } }
   ]
   const AMPS = [2, 4, 16, 64]
   function suffix(a) { return a === 2 ? '' : '_' + a + 'a' }
+  function cellKey(t) { return 'block.grindless.' + (t.cell ? t.cell.path : t.id + '_capacitor_cell') }
 
   ClientEvents.lang('en_us', function (event) {
     var add = function (key, value) { event.add('grindless', key, value) }
@@ -29,7 +34,7 @@
         event.add('gtceu', 'block.gtceu.' + t.id + '_wireless_energy_hatch' + suffix(a), SECTION + t.colour + t.name + ' ' + amps + 'Wireless Energy Hatch')
         event.add('gtceu', 'block.gtceu.' + t.id + '_wireless_dynamo_hatch' + suffix(a), SECTION + t.colour + t.name + ' ' + amps + 'Wireless Dynamo Hatch')
       })
-      add('block.grindless.' + t.id + '_capacitor_cell', t.name + ' Capacitor Cell')
+      add(cellKey(t), t.cell ? t.cell.en : t.name + ' Capacitor Cell')
       add('item.grindless.' + t.id + '_wireless_energy_cover', SECTION + t.colour + t.name + ' Wireless Energy Cover')
       add('item.grindless.' + t.id + '_wireless_dynamo_cover', SECTION + t.colour + t.name + ' Wireless Dynamo Cover')
     })
@@ -44,6 +49,7 @@
     add('grindless.machine.wireless_energy_tower.flow', 'Last second: in %s EU/t, out %s EU/t')
     add('tooltip.grindless.capacitor_cell.0', 'Holds %s EU in a Wireless Energy Tower')
     add('tooltip.grindless.capacitor_cell.1', 'A tower sends EU out at the tier of its weakest cell')
+    add('tooltip.grindless.wireless_cell.made_by', 'Made in the %s')
     add('grindless.machine.wireless_energy_hatch.tooltip.0', 'Energy input for multiblocks, filled from the wireless network when the network\'s tier is at least the hatch\'s.')
     add('grindless.machine.wireless_dynamo_hatch.tooltip.0', 'Energy output for generator multiblocks: everything it gets goes into the wireless network (5% loss).')
     add('grindless.machine.wireless.tooltip.network', 'One network for every world, stored in Wireless Energy Towers. Its chunk must be loaded.')
@@ -76,7 +82,7 @@
         event.add('gtceu', 'block.gtceu.' + t.id + '_wireless_energy_hatch' + suffix(a), SECTION + t.colour + 'Escotilla de energía inalámbrica ' + t.name + amps)
         event.add('gtceu', 'block.gtceu.' + t.id + '_wireless_dynamo_hatch' + suffix(a), SECTION + t.colour + 'Escotilla dinamo inalámbrica ' + t.name + amps)
       })
-      add('block.grindless.' + t.id + '_capacitor_cell', 'Celda de condensadores ' + t.name)
+      add(cellKey(t), t.cell ? t.cell.es : 'Celda de condensadores ' + t.name)
       add('item.grindless.' + t.id + '_wireless_energy_cover', SECTION + t.colour + 'Cubierta de energía inalámbrica ' + t.name)
       add('item.grindless.' + t.id + '_wireless_dynamo_cover', SECTION + t.colour + 'Cubierta dinamo inalámbrica ' + t.name)
     })
@@ -91,6 +97,7 @@
     add('grindless.machine.wireless_energy_tower.flow', 'Último segundo: entran %s EU/t, salen %s EU/t')
     add('tooltip.grindless.capacitor_cell.0', 'Guarda %s EU en una torre de energía inalámbrica')
     add('tooltip.grindless.capacitor_cell.1', 'Una torre envía EU al nivel de su celda más débil')
+    add('tooltip.grindless.wireless_cell.made_by', 'Se fabrica en: %s')
     add('grindless.machine.wireless_energy_hatch.tooltip.0', 'Entrada de energía para multibloques, que se llena desde la red inalámbrica cuando el nivel de la red es al menos el de la escotilla.')
     add('grindless.machine.wireless_dynamo_hatch.tooltip.0', 'Salida de energía para multibloques generadores: todo lo que recibe va a la red inalámbrica (se pierde un 5 %).')
     add('grindless.machine.wireless.tooltip.network', 'Una sola red para todos los mundos, guardada en torres de energía inalámbrica. Su chunk tiene que estar cargado.')

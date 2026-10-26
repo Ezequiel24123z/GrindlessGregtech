@@ -29,9 +29,12 @@
     item/wireless/<energy|dynamo>_cover_<tier>.png                       the cover items: a steel plate with the frame and the symbol
     block/wireless/capacitor_cell_<tier>.png                             the tower's cells: a steel frame round three capacitor stacks in
                                                                          the tier's colour
+    block/wireless/smes_cell_luv.png                                     the LuV cell (the table row's texture): a superconducting coil in
+                                                                         a frost-grey cryostat, its tape turns light purple in a window
     block/multiblock/wireless_energy_tower/overlay_front.png, overlay_front_active.png(+.mcmeta) and
     overlay_front_active_emissive.png(+.mcmeta)                          the tower controller: a gauge of stacked cells under a small mast
-  Tier colours: GTM's (GTValues.VNF: LV grey, MV aqua, HV gold, EV purple, IV blue).
+  Tier colours: GTM's (GTValues.VNF: LV grey, MV aqua, HV gold, EV purple, IV blue, LuV light purple). The tiers are the rows of
+  kubejs/data/grindless/tables/wireless_energy.json; a row with a texture gets that cell texture instead of capacitor_cell_<tier>.
 
   Run from the repo root (PowerShell 5.1 blocks unsigned scripts by default; this bypass only affects that process):
     powershell -NoProfile -ExecutionPolicy Bypass -File tools\assets\Build-WirelessEnergyTextures.ps1
@@ -104,8 +107,12 @@ P=3A3F49 O=262A31
 '@
 
 # GTM's tier colours (GTValues.VNF): the bright tone; Get-TierRamp derives the rest
-$TierColour = @{ lv = 'B8B8B8'; mv = '4FE6EE'; hv = 'F5A623'; ev = 'B04AD6'; iv = '5A6CF2' }
-$TierNames = @('lv', 'mv', 'hv', 'ev', 'iv')
+$TierColour = @{ lv = 'B8B8B8'; mv = '4FE6EE'; hv = 'F5A623'; ev = 'B04AD6'; iv = '5A6CF2'; luv = 'F26DE8' }
+# the tiers and cells: the rows of kubejs/data/grindless/tables/wireless_energy.json (a row's texture, when it has one, is its cell's)
+$TablePath = Join-Path $PSScriptRoot '..\..\pack\kubejs\data\grindless\tables\wireless_energy.json'
+$TableRows = @((Get-Content -Raw -Encoding UTF8 -LiteralPath $TablePath | ConvertFrom-Json).tiers)
+$TierNames = @($TableRows | ForEach-Object { [string]$_.name })
+foreach ($t in $TierNames) { if (-not $TierColour.ContainsKey($t)) { throw "No colour for the table's tier '$t' in `$TierColour" } }
 
 # 0 highlight, 1 bright, 2 mid, 3 dark, 4 darkest
 function Get-TierRamp {
@@ -358,6 +365,45 @@ function New-Cell {
 }
 
 # ============================================================================================
+#  THE SMES CELL (LuV): a superconducting coil in its cryostat. A frost-grey vessel (the frostproof casing's cool greys, lit from the
+#  left) between two bolted flanges, a helium port on the top flange, and a window round its middle showing the coil: tape turns
+#  slanting across it in the tier's colour; frost glints on the vessel
+# ============================================================================================
+function New-SmesCell {
+    param([string]$Tier)
+    $ramp = Get-TierRamp $Tier
+    $F = @((Hex 'F2F6FA'), (Hex 'D3DBE4'), (Hex 'AFB9C6'), (Hex '8792A1'), (Hex '5F6977'))
+    $c = New-Canvas
+    # the vessel: a cylinder lit from the left (its highlight at x 2, its shade from x 11)
+    for ($y = 0; $y -le 15; $y++) { for ($x = 0; $x -le 15; $x++) {
+        $tone = if ($x -eq 0) { 3 } elseif ($x -eq 2) { 0 } elseif ($x -le 10) { 1 } elseif ($x -le 13) { 2 } elseif ($x -eq 14) { 3 } else { 4 }
+        Set-Px $c $x $y $F[$tone]
+    } }
+    # the flanges (rows 0-1 and 14-15): steel bands with bolts, a shadow under the top one
+    for ($x = 0; $x -le 15; $x++) {
+        $end = ($x -eq 15)
+        Set-Px $c $x 0 $(if ($end) { $Pal['C'] } else { $Pal['B'] })
+        Set-Px $c $x 1 $(if ($end) { $Pal['E'] } else { $Pal['C'] })
+        Set-Px $c $x 2 $(if ($x -ge 14) { $F[4] } else { $F[3] })
+        Set-Px $c $x 14 $(if ($end) { $Pal['C'] } else { $Pal['B'] })
+        Set-Px $c $x 15 $(if ($end) { $Pal['E'] } else { $Pal['D'] })
+    }
+    foreach ($bx in 1, 5, 10, 13) { Set-Px $c $bx 1 $Pal['A']; Set-Px $c $bx 15 $Pal['C'] }
+    # the window: a dark steel rim (rows 4 and 11, columns 2 and 13) round the coil (rows 5..10, columns 3..12): three turns of tape
+    # with dark seams between them, shaded like the cylinder
+    for ($x = 2; $x -le 13; $x++) { Set-Px $c $x 4 $Pal['D']; Set-Px $c $x 11 $Pal['E'] }
+    for ($y = 4; $y -le 11; $y++) { Set-Px $c 2 $y $Pal['D']; Set-Px $c 13 $y $Pal['E'] }
+    for ($y = 5; $y -le 10; $y++) { for ($x = 3; $x -le 12; $x++) {
+        $band = if ($x -le 3) { 0 } elseif ($x -le 7) { 1 } elseif ($x -le 10) { 2 } else { 3 }
+        if (($y % 2) -eq 0) { $band = [Math]::Min(4, $band + 2) }
+        Set-Px $c $x $y $ramp[$band]
+    } }
+    # frost on the cold vessel
+    foreach ($p in @(@(4, 3), @(9, 12), @(5, 13), @(11, 3))) { Set-Px $c $p[0] $p[1] $F[0] }
+    return $c
+}
+
+# ============================================================================================
 #  THE TOWER CONTROLLER: a dark screen with a gauge of stacked cells and a small mast on top of it
 # ============================================================================================
 function New-TowerFront {
@@ -423,7 +469,17 @@ if (Test-Want 'items') {
 }
 
 if (Test-Want 'cells') {
-    foreach ($t in $TierNames) { Out-Tex (New-Cell $t) "block/wireless/capacitor_cell_$t.png" }
+    foreach ($r in $TableRows) {
+        $t = [string]$r.name
+        if ($r.texture) {
+            # a cell with its own texture (the LuV SMES cell): 'grindless:block/wireless/smes_cell_luv' -> block/wireless/smes_cell_luv.png
+            $tex = [string]$r.texture
+            if ($tex -notmatch '^grindless:(block/wireless/[a-z0-9_]+)$') { throw "Texture '$tex' of the $t row is not grindless:block/wireless/<name>" }
+            Out-Tex (New-SmesCell $t) "$($Matches[1]).png"
+        } else {
+            Out-Tex (New-Cell $t) "block/wireless/capacitor_cell_$t.png"
+        }
+    }
 }
 
 if (Test-Want 'tower') {

@@ -95,7 +95,7 @@
   }
 
   function tierName(tier) {
-    return String(W.tierNames[tier] || '?').toUpperCase()
+    return String((W.tierLabels && W.tierLabels[tier]) || String(W.tierNames[tier] || '?').toUpperCase())
   }
 
   function tierOfVoltage(v) {
@@ -639,10 +639,12 @@
   // GTM's style, every part from its own tier (the table): the tower is LV (an LV hull, two LV emitters and sensors, LV circuits, ender
   // pearls); a capacitor cell takes six of its tier's batteries (any battery of GTM's tag), a frame, plates and circuits; the 2 A hatches
   // start from GTM's energy or dynamo hatch of the tier with its sensor (energy) or emitter (dynamo), two circuits and the tier's link
-  // (ender pearl LV-MV, ender eye HV-EV, quantum eye IV); the 4, 16 and 64 A ones from the one below, with two of the tier's quadruple,
-  // octal or hex wires and 2, 4 or 6 plates (GTM's energy_input_hatch_4a / 16a recipes); the covers are a sensor (energy) or emitter
-  // (dynamo), a plate, a circuit and the link. GTM's EV emitter and sensor need a quantum eye (radon, IV), so EV takes two HV ones (as
-  // the pack's EV circuit assembler does); IV takes IV ones, after Mercury (iridium), like GTM's IV hatches.
+  // (ender pearl LV-MV, ender eye HV-EV, quantum eye IV, quantum star LuV); the 4, 16 and 64 A ones from the one below, with two of the
+  // tier's quadruple, octal or hex wires and 2, 4 or 6 plates (GTM's energy_input_hatch_4a / 16a recipes); the covers are a sensor
+  // (energy) or emitter (dynamo), a plate, a circuit and the link. GTM's EV emitter and sensor need a quantum eye (radon, IV), so EV
+  // takes two HV ones (as the pack's EV circuit assembler does); IV takes IV ones, after Mercury (iridium), like GTM's IV hatches.
+  // A row with cellMadeBy gets no cell recipe here: its cell is made by that machine (the LuV SMES cell: the HTS magnet works,
+  // server_scripts/grindless/luv/hts_magnet_works.js).
   const WIRE = { 4: 'quadruple', 16: 'octal', 64: 'hex' }
   const PLATES = { 4: 2, 16: 4, 64: 6 }
 
@@ -654,8 +656,10 @@
       eut: Number(GTValues.VA[1]), duration: 600 })
     W.table.tiers.forEach(function (r) {
       var va = Number(GTValues.VA[r.tier])
-      out.push({ id: 'grindless:assembler/' + r.name + '_capacitor_cell', builderId: 'grindless:' + r.name + '_capacitor_cell', output: r.cell,
-        inputs: ['6x ' + r.batteries, '1x ' + r.frame, '4x ' + r.plate, '2x #gtceu:circuits/' + r.name], eut: va, duration: 400 })
+      if (!r.cellMadeBy) {
+        out.push({ id: 'grindless:assembler/' + r.name + '_capacitor_cell', builderId: 'grindless:' + r.name + '_capacitor_cell', output: r.cell,
+          inputs: ['6x ' + r.batteries, '1x ' + r.frame, '4x ' + r.plate, '2x #gtceu:circuits/' + r.name], eut: va, duration: 400 })
+      }
       W.hatchKindList.forEach(function (kind) {
         var k = W.hatchKinds[kind]
         var signal = (k.role === 'deposit' ? r.emitter : r.sensor)
