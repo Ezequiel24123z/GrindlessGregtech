@@ -12,7 +12,10 @@
   "requirePages": { "invisibleRoutes": true, "previewOnlyUses": true },
   "endProducts": {
     "globs": [],
-    "items": []
+    "items": [
+      { "id": "grindless:synroc_block", "reason": "ZPM-A4: the sealed final form of the waste (zpm.md, machines 4 and 5: kept, inert, a block of its own)" },
+      { "id": "grindless:curium_oxide", "reason": "ZPM-A4: stored for UV (zpm.md: GTM has no curium use before UV)" }
+    ]
   },
   "derived": [
     { "id": "grindless:hydrotreating_catalyst", "role": "use", "category": "gtceu:refining", "source": "server_scripts/grindless/hv/refinery.js builds the refinery's recipes from GTM's distillation, cracking and desulfurization recipes" },
