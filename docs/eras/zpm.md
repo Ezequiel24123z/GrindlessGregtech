@@ -50,7 +50,7 @@ LuV leaves, as built:
    - The naquadah fuel works (2) mixes the fuel from naquadria, cerium and neodymium.
    - The Mk2 excites it with radon; GTM's large naquadah reactor burns it.
    - The depleted fuel goes back to the fuel works.
-6. **Level 5 rocket.** A naquadah rocket motor (KubeJS `gcyr:rocket_motor`, tier 5) and LuV's cryogenic tanks give level 5. The Saturn transfer chart is the motor recipe's catalyst.
+6. **Level 5 rocket.** Naquadah fuel tanks (KubeJS `gcyr:fuel_tank`, tier 7) and LuV's elite motors give level 5. The Saturn transfer chart is the tank recipe's catalyst. (S0-1: GCYR's motors are a fixed enum up to elite, tier 3; a KubeJS `gcyr:rocket_motor` builds a tank, so the era raises the tank, not the motor.)
 7. **Saturn orbit, the third station.**
    - The station kit and Saturn's quantum seed (*Bridges*).
    - Then:
@@ -68,7 +68,7 @@ LuV leaves, as built:
    - The direct energy converter (8) takes the plasma.
    - The dilution-fridge qubit fab (12) runs on ³He/⁴He and makes the qubit arrays that stand in for circuits in GTM's HPCA computation components: the era's research is paid in helium-3, not in ZPM and UV circuits.
 10. **Level 6 rocket.**
-    - The aerogel works' insulation gives the aerogel fuel tank (KubeJS `gcyr:fuel_tank`, tier 7): one naquadah motor (5) and aerogel tanks (7) make level 6.
+    - The aerogel works' insulation gives the aerogel fuel tank (KubeJS `gcyr:fuel_tank`, tier 9): elite motors (3) and aerogel tanks (9) make level 6.
     - The ring seismometer (24) writes the Uranus transfer chart, the tank recipe's catalyst.
 11. **Uranus orbit, the fourth station.**
     - The ice-giant siphon goes deeper than Saturn's.
@@ -109,10 +109,10 @@ All-orbit is a decision (decision 1), not a GCYR limit. Saturn and Uranus have n
   - Uranus's 6 opens with level 6;
   - Jupiter (tier 5) opens with level 5 too. Its orbit gets no station slot and no machine allowlist, so nothing is done there.
 - **Proxima Centauri b moves to tier 8.** It is tier 5 since LuV, and a level 5 rocket would open it (spike S0-2 checks every GCYR planet's tier against the new levels).
-- **Rocket levels** (GCYR: floor((weakest motor + weakest tank) / 2)):
-  - level 5 = naquadah motors (tier 5) + cryogenic tanks (tier 5);
-  - level 6 = naquadah motors (tier 5) + aerogel tanks (tier 7). One cryogenic tank drops the rocket to level 5.
-  - GCYR's KubeJS plugin registers both `gcyr:rocket_motor` and `gcyr:fuel_tank` builders with a `tier`; S0-1 proves both in a real launch.
+- **Rocket levels** (GCYR: floor((weakest motor + weakest tank) / 2), proven at level 4 in LuV):
+  - level 5 = elite motors (tier 3) + naquadah tanks (tier 7);
+  - level 6 = elite motors (tier 3) + aerogel tanks (tier 9). One naquadah tank drops the rocket to level 5.
+  - S0-1: GCYR's motors are a fixed enum (basic, advanced, elite: tiers 1–3) and a KubeJS `gcyr:rocket_motor` builds a fuel tank, so no motor is added. A tier 7 KubeJS `gcyr:fuel_tank` builds; B1's flight T1 proves level 5 and level 6 in real launches. Fallback if a tier 9 tank does not build or launch: no level 6, Uranus moves to tier 5, and the aerogel tank becomes an input of the Uranus station package.
 - **Skies:** GCYR's own sun, small; Saturn large from its orbit with its rings, Uranus pale and tilted. Texture by path, as in LuV.
 - **Weather:** `space/airless_weather.js` covers the two new orbits (always midnight, no rain).
 
@@ -254,7 +254,7 @@ Not counted:
   - the ZPM parallel hatch;
 - GTCA's froth machines: IsaMill, flotation cell, thermal reactor;
 - the new modes of older machines (*Older machines, new modes*);
-- GCYR blocks: the naquadah motor, the aerogel tank and the two new stations;
+- GCYR blocks: the naquadah tank, the aerogel tank and the two new stations;
 - the ZPM wireless tier.
 
 **Why 16 at home:** all-orbit means no surface bases, and LuV's lesson is that every station is the riskiest piece (LuV decision 14). Saturn gets seven and Uranus three, the most a station has held. The home machines are where the far products become parts. Each one consumes something from out there, or feeds the trip.
@@ -365,7 +365,7 @@ Every recipe has a programmed circuit (c*n*) or an input that no other recipe of
     - the rest as **synroc**, a titanate ceramic that locks fission products for geological time. Synroc is the final form: a block, not a hidden void.
   - **Radon in bulk.** The Mk2 needs 200 mB per excited-fuel run and radon in every duranium plasma. The hot cell's c4 (`radon_from_uranium_238`: 1,000 mB for 1 uranium dust, 480 EU/t × 4,000 t) stays. The capsule gives radon with no uranium spent, from waste the player already holds.
 - **Recipes:**
-  - c1 retrieve: 4 radioactive waste + 1,000 mB nitric acid → 1 radium dust *(tune)* + 1,000 mB actinide raffinate (`grindless:actinide_raffinate`) + 2 synroc (`grindless:synroc_block`) + NO₂, 30,720 EU/t × 400 t *(tune)*;
+  - c1 retrieve: 4 radioactive waste + 1,000 mB nitric acid → 1 radium dust *(tune)* + 1,000 mB actinide raffinate (`gtceu:actinide_raffinate`) + 2 synroc (`grindless:synroc_block`) + NO₂, 30,720 EU/t × 400 t *(tune)*;
   - c2 emanate: the radium capsule (`grindless:radium_capsule`: 4 radium dust in a sealed platinum capsule, made by c3, worn 1 % a run) + 1,000 mB helium (looped) → 250 mB radon, 7,680 EU/t × 400 t *(tune: Ra-226's emanation is small; the game's 20×)*;
   - c3 capsule: 4 radium dust + 1 platinum foil → 1 radium capsule.
 - **Byproducts:**
@@ -582,7 +582,7 @@ Every recipe has a programmed circuit (c*n*) or an input that no other recipe of
   - The Jovian survey (LuV's coilgun probe) is the family's catalyst: it says where and how deep, as the vein sample did for the drills.
   - The circuit picks the depth.
 - **Recipes:** survey (not consumed) + scoop head (`grindless:scoop_head`, worn: the family's bit) +
-  - c1: → 16,000 mB hydrogen + 4,000 mB helium (with the He-3 in it: GTM's helium has no isotopes, so the isotope column reads a `grindless:saturn_helium` fluid);
+  - c1: → 16,000 mB hydrogen + 4,000 mB helium (with the He-3 in it: GTM's helium has no isotopes, so the isotope column reads a `gtceu:saturn_helium` fluid);
   - c2: → 2,000 mB methane + 500 mB ammonia;
   - c3 (first run only, `lib/fresh_run.js`): the Saturn bridge sample, if the bridge needs one (*Bridges*).
 - **Byproducts:** hydrogen → the network or the station's fuel cells.
@@ -610,7 +610,7 @@ Every recipe has a programmed circuit (c*n*) or an input that no other recipe of
 ### 20. Ring harvester: `gtceu:ring_harvester`, type `gtceu:ring_harvesting` (Saturn orbit)
 
 - **What it gains:** the rings' ice, 99 % water, and their silicate dust. The ice is Saturn's bridge input (*Bridges*) and the station's water.
-- **Recipes:** c1: a sail net (`grindless:ring_sail_net`, worn) → 4,000 mB water ice slurry (`grindless:ring_ice`) + 1 silicate dust (`gtceu:silicon_dioxide`) *(tune)*.
+- **Recipes:** c1: a sail net (`grindless:ring_sail_net`, worn) → 4,000 mB water ice slurry (`gtceu:ring_ice`) + 1 silicate dust (`gtceu:silicon_dioxide`) *(tune)*.
 - **Byproducts:** silicate dust → glass or voidable.
 - **Structure:** 9×3×9 station truss with net booms and a melt tank.
 - **Controller:** ZPM hull + 2 ZPM conveyors + 4 ZPM circuits *(tune)*.
@@ -648,7 +648,7 @@ Every recipe has a programmed circuit (c*n*) or an input that no other recipe of
 ### 23. Plume sampler: `gtceu:plume_sampler`, type `gtceu:plume_sampling` (Saturn orbit)
 
 - **What it gains:** Enceladus's plume, sampled from orbit as Cassini did in 2015 (E21, 49 km): brine, silica nanograins (evidence of hydrothermal vents), organics and H₂.
-- **Recipes:** c1: an aerogel capture cartridge (`grindless:aerogel_cartridge`, silica aerogel, consumed) → 2,000 mB Enceladus brine (`grindless:enceladus_brine`) + 4 silica nanograins (`grindless:silica_nanograins`) + 250 mB hydrogen *(tune)*.
+- **Recipes:** c1: an aerogel capture cartridge (`grindless:aerogel_cartridge`, silica aerogel, consumed) → 2,000 mB Enceladus brine (`gtceu:enceladus_brine`) + 4 silica nanograins (`grindless:silica_nanograins`) + 250 mB hydrogen *(tune)*.
 - **Byproducts:** the hydrogen → the bioreactor.
 - **Structure:** 7×5×7 probe bay casing and a capture boom.
 - **Controller:** ZPM hull + ZPM robot arm + ZPM sensor + 4 ZPM circuits *(tune)*.
@@ -675,9 +675,9 @@ Every recipe has a programmed circuit (c*n*) or an input that no other recipe of
 
 - **What it gains:** the siphon one step deeper, on a pressure-hull scoop. Uranus's interior is where methane turns to diamond under pressure, the "diamond rain" Kraus reproduced in 2017.
 - **Recipes:** Saturn's interior model (not consumed) + scoop head +
-  - c1: → 8,000 mB deuterium-rich hydrogen (`grindless:uranus_hydrogen`, deuterium 2.5× Saturn's) + 2,000 mB helium;
+  - c1: → 8,000 mB deuterium-rich hydrogen (`gtceu:uranus_hydrogen`, deuterium 2.5× Saturn's) + 2,000 mB helium;
   - c2: → 4,000 mB methane + 500 mB hydrogen sulfide;
-  - c3: → 2,000 mB diamond slurry (`grindless:diamond_slurry`);
+  - c3: → 2,000 mB diamond slurry (`gtceu:diamond_slurry`);
   - the Uranus bridge sample on its first run (`lib/fresh_run.js`).
 - **Byproducts:** H₂S → the slurry separator → sulfur.
 - **Structure:** 7×7×13 pressure hull casing.
@@ -947,7 +947,7 @@ The ten-minute run of every base, untouched, lives only in the bench's integrati
 
 | Mod | Slug | Use in ZPM |
 |---|---|---|
-| GCYR | `gcyr` | two datapack planets (Saturn, Uranus) and four dimensions; two more stations; KubeJS rocket motor (tier 5) and fuel tank (tier 7) |
+| GCYR | `gcyr` | two datapack planets (Saturn, Uranus) and four dimensions; two more stations; KubeJS fuel tanks tier 7 (naquadah) and tier 9 (aerogel); no new motor |
 | GT-- | `gtnn` | the large naquadah reactor; `gtnn:radioactive_waste` (pinned); the naquadria line's ids (pinned) |
 | GTCA | `gtca` | the monazite froth line (IsaMill, flotation, thermal reactor), opened at ZPM; titanium plasma |
 | GTM | `gtceu` | the Mk2, the sterile cleanroom, the mega blast furnace and vacuum freezer, the ZPM parallel hatch, the HPCA |
@@ -956,7 +956,7 @@ The ten-minute run of every base, untouched, lives only in the bench's integrati
 
 No new mods.
 
-- **Startup:** the 27 machines through the pattern helper and their types; the shared blocks; items (samples, probes, heads, charts, the survey, recordings, data, the arrays, the capsule, the raffinate, synroc, curium oxide, Si-28, the PICA shield, the aerogel); fluids (`grindless:saturn_helium`, `grindless:uranus_hydrogen`, `grindless:enceladus_brine`, `grindless:actinide_raffinate`, the slurry); the ZPM wireless tier; the motor and the tank.
+- **Startup:** the 27 machines through the pattern helper and their types; the shared blocks; items (samples, probes, heads, charts, the survey, recordings, data, the arrays, the capsule, the raffinate, synroc, curium oxide, Si-28, the PICA shield, the aerogel); fluids (`gtceu:saturn_helium`, `gtceu:uranus_hydrogen`, `gtceu:enceladus_brine`, `gtceu:actinide_raffinate`, the slurry); the ZPM wireless tier; the two tanks.
 - **Server:** composed recipes (the refinery, the fuel works, the reductor's cascade mode, mode 3); the fusion audit and our D + He-3; the HPCA alternative recipes; the UV hatch's re-registration; the seeds and `sunlight.json` rows; dimension allowlists and `G.noVoiding` where kept.
 - **Data:** `data/grindless/gcyr/planets/*.json` (2); `dimension/` (4) and `dimension_type/` (2); sky renderers (2); `tables/planets.json` (two pair tags); `tables/stations.json` (two slots); `space/airless_weather.js`; `hidden_until.json` (integrator).
 
@@ -972,8 +972,8 @@ No new mods.
 
 ## Risks and open questions
 
-- **GCYR beyond Jupiter** (S0-1, S0-2): datapack planets with tier 5 and 6, a tier 7 KubeJS tank, level 6 launches. Gravity stays menu-only. Same-save reopen in the test client is still unproven (a fixture issue, not a design one).
-- **Four stations** (S0-3): F2 generalises `lib/stations.js`; LuV's two must stay byte-identical in behaviour.
+- **GCYR beyond Jupiter** (S0-1, S0-2): datapack planets with tier 5 and 6 load (S0-2 PASS); a tier 7 KubeJS tank builds, no KubeJS motor exists (S0-1); level 5 and 6 launches are B1's T1. Gravity stays menu-only. Same-save reopen in the test client is still unproven (a fixture issue, not a design one).
+- **Four stations** (S0-3, not run; moved into F2's T1): F2 generalises `lib/stations.js`; LuV's two must stay byte-identical in behaviour.
 - **The large naquadah reactor's recipe** asks for neutronium frames in GT--'s data. A2 re-registers it with duranium frames (decision 5); the validator fails if neutronium reappears in ZPM. If the re-registration breaks its research key, the fallback is the Mk2's helium-3 plants as the main source (*Power*).
 - **The ZPM cell's capacity** above 2³¹ (S0-7).
 - **Naquadria balance:** the stored solution's size and the refinery's yield decide how many reactors run (S0-5). If it is too small, the Ag + He-3 and D + He-3 plants carry the gate (*Power*).
@@ -1053,6 +1053,8 @@ Spikes run one after another in band 18944, before F1. Their files stay in the b
 
 Order: S0-1, S0-2 and S0-3 first (they decide the ids B1 fixes), then S0-5, S0-6, S0-7 and S0-4.
 
+**Results** (`docs/research/zpm-s0.md`, 2026-10-26): S0-1 FAIL as written (no KubeJS motor; a tier 7 tank builds; the levels move to tanks, see *Route*); S0-2 PASS (registry; buttons and skies go to B1's T1); S0-5, S0-6 and S0-7 PASS (figures in the report, for A2, A7 and A5); S0-3 not run, now F2's T1; S0-4 not run, now B1's T1 (its dimension-limited chemical reactor check also goes to A2's T1).
+
 ### Foundation (serial)
 
 #### F1. Registrations
@@ -1076,8 +1078,8 @@ Order: S0-1, S0-2 and S0-3 first (they decide the ids B1 fixes), then S0-5, S0-6
 
 - **Objective:** `lib/stations.js` reads a list of station slots, each with its orbit, so ZPM can add Saturn orbit and Uranus orbit without touching LuV's two.
 - **Allowed:** `pack/kubejs/startup_scripts/grindless/lib/stations.js`, `pack/kubejs/data/grindless/tables/stations.json` (schema: LuV's `first` and `second` stay; a new `more` list, empty in F2), `tools/analysis/test/zpm-stations.test.mjs`, `tools/test/overlay/kubejs/server_scripts/gg_test_zpm_stations.js`, its zones row. `pack/kubejs/server_scripts/grindless/luv/orbit_arrival.js` only if it names the two slots (it did not when this was written).
-- **References:** this file *Bridges and first arrivals*; `startup_scripts/grindless/lib/stations.js:2-31`; `tables/stations.json`; the S0-3 run.
-- **Depends on:** S0-3.
+- **References:** this file *Bridges and first arrivals*; `startup_scripts/grindless/lib/stations.js:2-31`; `tables/stations.json`; LuV's R14 station evidence.
+- **Depends on:** F1 (S0-3 was not run; its question is this package's T1).
 - **Invariants:** LuV's `G.stations.first`, `second`, `b7` and every switch keep their values and meaning; `luv/io_orbit.js` and `tools/quests/luv-stations.mjs` need no change.
 - **Acceptance:** with `more` empty, the LuV suite's station tests and `gg_test_luv_b1` pass unchanged; with two entries (overlay only), four stations deploy.
 - **Tests:** T0; T1: `gg_test_zpm_stations` (four slots, disk save), band 19200. Doubt it resolves: a list of slots keeps LuV's two byte-identical.
@@ -1206,10 +1208,10 @@ Every wave B package depends on B1. B2 to B5 run two at a time.
   - the ablator mode only: `pack/kubejs/startup_scripts/grindless/launch_road/composite_autoclave.js`, `pack/kubejs/server_scripts/grindless/launch_road/recipes.js`, `pack/kubejs/client_scripts/grindless/launch_road_lang.js`;
   - `pack/kubejs/client_scripts/grindless/emi_info_lang.js` (the planets and the station kit; append only).
 - **References:** *Route*, *Saturn, Uranus and what is only seen*, *Site rules*, *Sunlight*, *Bridges and first arrivals*; pattern `luv/travel.js`, `data/grindless/gcyr/planets/jupiter.json`, `dimension/jupiter_orbit.json`, `tools/analysis/test/luv-travel.test.mjs`, `gg_test_luv_b1.js`; S0-1 to S0-4.
-- **Depends on:** F1, F2, S0-1 to S0-4.
+- **Depends on:** F1, F2, S0-1, S0-2.
 - **Invariants:** no surface world is reachable or generated (both planets are voids); dimension ids are final; LuV's worlds, stations and Jupiter are unchanged; no gravity claim; airless weather covers the new orbits through `planets.json`.
 - **Acceptance:** level 5 reaches Saturn orbit, level 6 Uranus orbit, neither reaches Proxima; a station deploys in each; the far half of each AE2 pair is made on site from its local input.
-- **Tests:** T0; T1: `gg_test_zpm_travel` in band 21504: both launches, both stations and the seeds (the S0 checks, now on the permanent ids).
+- **Tests:** T0; T1: `gg_test_zpm_travel` in band 21504: both launches (proving level 5 = elite + tier 7 and level 6 = elite + tier 9), the planet buttons, both stations and the seeds (S0-4's open question). A client stage checks the buttons and skies.
 - **Commits:** 3 (worlds and planets; rockets and the ablator; stations, seeds and sunlight).
 - **Serial:** yes, alone (it owns the travel tables).
 
