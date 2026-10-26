@@ -34,7 +34,9 @@ function mercuryFusion() {
 }
 
 const A1 = a1Items();
-const ITEMS = new Set([...IDS.items, ...A1]);
+// ZPM-A2's mode 4 (enriched solution) output: a GTM material dust, resolved natively in gg_test_zpm_naquadria (no skipped ids)
+const ZPM_A2 = ['gtceu:enriched_naquadah_dust'];
+const ITEMS = new Set([...IDS.items, ...A1, ...ZPM_A2]);
 const FLUIDS = new Set(IDS.fluids);
 
 function strictRun(scripts, startup, recipes, before) {
@@ -52,7 +54,7 @@ test('A1 registers the asteroid PGM concentrate mode 4 takes', () => {
   assert.ok(!IDS.items.includes('grindless:asteroid_pgm_concentrate'), 'the snapshot holds only ids of the native export');
 });
 
-test('naquadah plant: all three modes compose with only registered ids', () => {
+test('naquadah plant: all its modes compose with only registered ids', () => {
   const { G, logs, asked } = strictRun(
     ['kubejs/server_scripts/grindless/lib/compose.js', 'kubejs/server_scripts/grindless/iv/naquadah_plant.js'],
     ['kubejs/startup_scripts/grindless/iv/naquadah_plant.js'], NAQ.recipes);

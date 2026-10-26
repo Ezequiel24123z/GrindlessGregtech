@@ -89,9 +89,11 @@ test('the five reductions: one circuit each, ZPM VA, the mercury bath not consum
   assert.deepEqual(fin.map((f) => f.chance), [10000, 10000, 0], 'the mercury is the one input with chance 0 (not consumed)');
   assert.match(JSON.stringify(fin[2].content), /mercury/);
   assert.deepEqual(ER.recipes[0].notConsumed, [{ id: 'gtceu:mercury', amount: 144 }]);
-  // europium dust only here and at the end of the line
+  // europium dust only here, plus the depleted naquadah fuel's chanced byproduct (zpm.md, machine 2 c2)
   const eu = recipes.filter((r) => r.j.outputs && JSON.stringify(r.j.outputs.item).includes('gtceu:europium_dust'));
-  assert.deepEqual(eu.map((r) => r.i), ['grindless:valence_reduction/metallothermic_reduction']);
+  assert.deepEqual(eu.map((r) => r.i).sort(), ['grindless:naquadah_fuel/fuel_depleted', 'grindless:valence_reduction/metallothermic_reduction']);
+  const dep = eu.find((r) => r.i === 'grindless:naquadah_fuel/fuel_depleted');
+  assert.ok(dep.j.outputs.item.filter((o) => JSON.stringify(o).includes('gtceu:europium_dust')).every((o) => o.chance > 0 && o.chance < 10000), 'the depleted fuel gives europium only as a chance');
 });
 
 test('the chemistry balances: 2 EuCl3 + Zn + 3 H2SO4 -> 2 EuSO4 + ZnSO4 + 6 HCl; 4 EuSO4 + O2 -> 2 Eu2O3 + 4 SO3; Eu2O3 + 2 La -> 2 Eu + La2O3', () => {

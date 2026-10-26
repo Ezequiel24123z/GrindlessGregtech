@@ -205,6 +205,10 @@ file = "kubejs/assets/emi/recipe/additions/grindless/wireless_covers.json"
 hash = "836933c519de8486fce7e784d7b312cf2bdbc38455769d5e72118ae0fa9b9329"
 
 [[files]]
+file = "kubejs/assets/emi/recipe/additions/grindless/zpm_naquadria_casing.json"
+hash = "93fa2170c32637222ad30a732c0cc4a9a1d1606f3da29848df8c854603afa7a8"
+
+[[files]]
 file = "kubejs/assets/grindless/gcyr/planet_assets/sky_renderers/asteroid_belt.json"
 hash = "d6a46c74d825cc68ac39892a9ec21cf1cbd2b4047d7df9dab32d3676edf6991a"
 
@@ -1521,6 +1525,26 @@ file = "kubejs/assets/grindless/textures/block/multiblock/mv_vein_drill/overlay_
 hash = "e9b8025fde1b09b0a4d2a38427b04f98f28a593045be6d177eb2b29164c872b0"
 
 [[files]]
+file = "kubejs/assets/grindless/textures/block/multiblock/naquadah_fuel_works/overlay_front.png"
+hash = "d824e6038a4f62e186c01759cd6b5afde85ffa1f1a273044c60b92fe5231ee46"
+
+[[files]]
+file = "kubejs/assets/grindless/textures/block/multiblock/naquadah_fuel_works/overlay_front_active.png"
+hash = "9c770250233ab926caba6e864c8eb7dac9cdc96153f15c386c3cc74360a97dc5"
+
+[[files]]
+file = "kubejs/assets/grindless/textures/block/multiblock/naquadah_fuel_works/overlay_front_active.png.mcmeta"
+hash = "491ea51d46bc1f0c0ff11ed9293461cc67de293c7672abbc45f67563f8fe1f1a"
+
+[[files]]
+file = "kubejs/assets/grindless/textures/block/multiblock/naquadah_fuel_works/overlay_front_active_emissive.png"
+hash = "d68a71642cf1e07bf72abce4028dc073349d2553c9f661f617903638c2cf6cd0"
+
+[[files]]
+file = "kubejs/assets/grindless/textures/block/multiblock/naquadah_fuel_works/overlay_front_active_emissive.png.mcmeta"
+hash = "491ea51d46bc1f0c0ff11ed9293461cc67de293c7672abbc45f67563f8fe1f1a"
+
+[[files]]
 file = "kubejs/assets/grindless/textures/block/multiblock/naquadah_plant/overlay_front.png"
 hash = "65b19b8c7d75a533a462a1e8a56290632b075eb9e4adac98c12271cd44cbe39f"
 
@@ -1538,6 +1562,26 @@ hash = "33ad0069899f052231f42964a2c48384646ef3626a07fcde8b8e467628a5b196"
 
 [[files]]
 file = "kubejs/assets/grindless/textures/block/multiblock/naquadah_plant/overlay_front_active_emissive.png.mcmeta"
+hash = "491ea51d46bc1f0c0ff11ed9293461cc67de293c7672abbc45f67563f8fe1f1a"
+
+[[files]]
+file = "kubejs/assets/grindless/textures/block/multiblock/naquadria_refinery/overlay_front.png"
+hash = "7d82e0743df57cb8ef264353aa285b059b310e5b4803f36420bddc165c44c896"
+
+[[files]]
+file = "kubejs/assets/grindless/textures/block/multiblock/naquadria_refinery/overlay_front_active.png"
+hash = "17c31cb243b5aeb45936c6836829754fddb07519bb7549e36baa91553517ef51"
+
+[[files]]
+file = "kubejs/assets/grindless/textures/block/multiblock/naquadria_refinery/overlay_front_active.png.mcmeta"
+hash = "491ea51d46bc1f0c0ff11ed9293461cc67de293c7672abbc45f67563f8fe1f1a"
+
+[[files]]
+file = "kubejs/assets/grindless/textures/block/multiblock/naquadria_refinery/overlay_front_active_emissive.png"
+hash = "2cc1e4d3abe7faf9c2c0b4b47e0a9bf678c13198f4bf7b21ebb8314037f7a048"
+
+[[files]]
+file = "kubejs/assets/grindless/textures/block/multiblock/naquadria_refinery/overlay_front_active_emissive.png.mcmeta"
 hash = "491ea51d46bc1f0c0ff11ed9293461cc67de293c7672abbc45f67563f8fe1f1a"
 
 [[files]]
@@ -2970,7 +3014,7 @@ hash = "9118bc07f4eb9e064d48856e0d817a82f3ae11bdb89edde055543cd9aacd1049"
 
 [[files]]
 file = "kubejs/client_scripts/grindless/iv_naquadah_plant_lang.js"
-hash = "02d9af0c54eb66848bd7096c2f896e931d5125c65abf430e4608dfa68859992a"
+hash = "c47acfa0747cb786b31be46007f7b113030e58a42115cf5d193fc41566706394"
 
 [[files]]
 file = "kubejs/client_scripts/grindless/iv_travel_network_lang.js"
@@ -3129,6 +3173,10 @@ file = "kubejs/client_scripts/grindless/zpm_foundation_lang.js"
 hash = "af84a423fd47c7ceabd05fb0892412dd6d3494c9cd63a3bf0cb73089a1663e35"
 
 [[files]]
+file = "kubejs/client_scripts/grindless/zpm_naquadria_lang.js"
+hash = "5569b6b13a31c565112e5d4553789f32c0c63ee4cf2a956271a5f1fa5a71ab03"
+
+[[files]]
 file = "kubejs/data/gcyr/gcyr/planets/mercury.json"
 hash = "1cb9eb28f91d7294d0a6174f7c31198205592268fcb67746d4b3fb3ea99b15e4"
 
@@ -3270,7 +3318,7 @@ hash = "1f4b256531a0b42a6ecf399e9b692d9e4730bd4102e53aab3e1fa2c999b69e9d"
 
 [[files]]
 file = "kubejs/data/grindless/tables/hidden_until.json"
-hash = "cfcbffda37052a4408f28a390d0b776b496246ec6751d588935d394d7733057d"
+hash = "4d59a48b64517e72b1a1d440da176dc1acba82ea4011f6d82ec12e4e6a77cf6b"
 
 [[files]]
 file = "kubejs/data/grindless/tables/hot_cell.json"
@@ -3290,7 +3338,11 @@ hash = "0f8a4b87c41ba2e9d47292f5b434dbe910b2f027ff2a5fd11a6eef9434b40df3"
 
 [[files]]
 file = "kubejs/data/grindless/tables/naquadah_plant.json"
-hash = "d727b8c8d98d7ff99d93dc84a9cde268394b3e4218167a921cbd09fc81051ae8"
+hash = "6cda325e75f5bd0fb69aca568258448eefc658ab786eef294709203b01cd1871"
+
+[[files]]
+file = "kubejs/data/grindless/tables/naquadria.json"
+hash = "9845494bcde38854165f1bf06154fd1140ce2412becbe7f06796f6b514e5dbca"
 
 [[files]]
 file = "kubejs/data/grindless/tables/offworld_only.json"
@@ -3634,7 +3686,7 @@ hash = "3cc42c05b67441f74975d2e935a462a240ea69f93fb52a7d09f43f92468ba1cc"
 
 [[files]]
 file = "kubejs/server_scripts/grindless/iv/naquadah_plant.js"
-hash = "7571f8c639ce4b6bc01269ae468c7c04196044508d6b9ded3336deaee5eaa854"
+hash = "a00d217cf07819253b94d2f0098585f991b8715083388c9bbfc7b2c471da3092"
 
 [[files]]
 file = "kubejs/server_scripts/grindless/iv/travel_network.js"
@@ -3901,6 +3953,10 @@ file = "kubejs/server_scripts/grindless/zpm/europium.js"
 hash = "bfc444310892c3e9f6bd8240ca44839f77c5288323497128c2f53dc4525cc410"
 
 [[files]]
+file = "kubejs/server_scripts/grindless/zpm/naquadria.js"
+hash = "de8fbfe93e28fc07a53e29afd080f5152927baa7501f9a99767449a9b170f130"
+
+[[files]]
 file = "kubejs/startup_scripts/grindless/dimensions.js"
 hash = "6bbf23878af066772a65a97bde38fb25ff42cf860aed05bd338fb84730c3b37e"
 
@@ -4002,7 +4058,7 @@ hash = "629a43b00a5b985f32a965e008b676eaed7e2937df0cd7133c2ce8c51da108ad"
 
 [[files]]
 file = "kubejs/startup_scripts/grindless/iv/naquadah_plant.js"
-hash = "7c1797060c54d168147d8111a83108e3e9e3662da67b5e240d7deba74e188fa3"
+hash = "b66b5f3256c3ee4c8065fc089a432158b3166cbd06def2ce0eaafd842c6d8f58"
 
 [[files]]
 file = "kubejs/startup_scripts/grindless/iv/travel_network.js"
@@ -4247,6 +4303,10 @@ hash = "2a079bac33713fc6d9f935bcb00f8eb6321427a75e4c12e7bde2fd7236631caf"
 [[files]]
 file = "kubejs/startup_scripts/grindless/zpm/foundation.js"
 hash = "b053916d5bf548c10ee107d9777dd40e727793b2bce81f33952b22c344b7ac91"
+
+[[files]]
+file = "kubejs/startup_scripts/grindless/zpm/naquadria.js"
+hash = "43ed707051473e4713fef6aeace0062e12235135f9d6a11fca4f4299c508a28d"
 
 [[files]]
 file = "mods/advancement-plaques.pw.toml"
