@@ -169,6 +169,10 @@ file = "kubejs/assets/grindless/models/block/iv/hermean_thin_film_panel.json"
 hash = "215a2b00c703a903e91a02d770303143acbb4abf9059aa492ca5720641a764c6"
 
 [[files]]
+file = "kubejs/assets/grindless/models/block/luv/orbital_solar_panel.json"
+hash = "43a686441d4077a398db0ce0041d987a7bd1e7748ad2079de9a0e137c7f58342"
+
+[[files]]
 file = "kubejs/assets/grindless/models/block/machines/wireless/dynamo_16a.json"
 hash = "2961e6a28b7d389fd9643e0c0dcf3d70a82f06e821f4269697cceb0acdb544b0"
 
@@ -2237,6 +2241,10 @@ file = "kubejs/client_scripts/grindless/launch_road_lang.js"
 hash = "42c98a78baa19277c3921cfc1836fe9ef875691349f46a2fb7db2f496ae7b609"
 
 [[files]]
+file = "kubejs/client_scripts/grindless/luv_foundation_lang.js"
+hash = "f056bfc08ab6e28f8fce6ea33975c3114889231eabdfa77993ea4608f7d97464"
+
+[[files]]
 file = "kubejs/client_scripts/grindless/lv_content_lang.js"
 hash = "5e7aae7cc1cece54ad4bb4e105c02dfb366fdecffd72d61e5f20b5fddaaa00a8"
 
@@ -2358,7 +2366,7 @@ hash = "78e0550c5776e33e7e3cf74a25bbe172dbbee4f6a0152be0c819ec768b9b60b9"
 
 [[files]]
 file = "kubejs/data/grindless/tables/hidden_until.json"
-hash = "a2e1ab4bfb9468868bc39b4b760b927fdbed161cc90a4f97a77b0686423c1e28"
+hash = "fdf4988079ab726b63180b7ebb4878e2aebf38a0490ef71ce2d0d24ec935aabe"
 
 [[files]]
 file = "kubejs/data/grindless/tables/hot_cell.json"
@@ -2391,6 +2399,10 @@ hash = "229e0fdba455888292da0eb59628876cca82add03fea653ed4d4fb105ed8ed46"
 [[files]]
 file = "kubejs/data/grindless/tables/steam_blast_furnace.json"
 hash = "612abed0a7d196efbbcb7dd98cedf24f86eac618bf651b343e1a2e186befd607"
+
+[[files]]
+file = "kubejs/data/grindless/tables/sunlight.json"
+hash = "e4d706ab71071805ed6c120ebe9cf661c6022fb4971cc2858a58e433e2492126"
 
 [[files]]
 file = "kubejs/data/grindless/tables/uranium_cycle.json"
@@ -3027,6 +3039,10 @@ hash = "35d5e425be1387839301cb771e930ae5835bacd00ce88de3d1447a8d1cb29e9a"
 [[files]]
 file = "kubejs/startup_scripts/grindless/lib/tables.js"
 hash = "05fc95ba3708aff1690713155bbce2990fc4387530fbb84d4b4b141aa1289a96"
+
+[[files]]
+file = "kubejs/startup_scripts/grindless/luv/foundation.js"
+hash = "e684d92eeaaee7b3d8d4f6bf5a8d24f8682b5a37d280eedab5a41165100b5ccc"
 
 [[files]]
 file = "kubejs/startup_scripts/grindless/lv/creatures.js"
