@@ -548,7 +548,21 @@
 			y: 15.25d
 		}
 		{
-			dependencies: ["55A6781AAF1F4955", "1000D7F0AC6AD922", "35DCEFE8D74600BF", "1C185C14C0042F7D", "7604012D834BDFCF"]
+			icon: "gtceu:tetrataenite_rod"
+			id: "3888F3A5859BCF66"
+			shape: "rsquare"
+			size: 1.0d
+			subtitle: "The belt's meteoric magnet"
+			tasks: [
+				{ id: "52FE3A888DCA15AC", item: "gtceu:tetrataenite_rod", optional_task: true, type: "item" }
+				{ id: "50E664B85174C96E", type: "checkmark" }
+			]
+			title: "Tetrataenite Rod"
+			x: 9.75d
+			y: 16.75d
+		}
+		{
+			dependencies: ["55A6781AAF1F4955", "1000D7F0AC6AD922", "35DCEFE8D74600BF", "1C185C14C0042F7D", "7604012D834BDFCF", "3888F3A5859BCF66"]
 			description: [
 				"Wound, potted in epoxy and tested cold before anything leaves."
 				"A coil wound from tape takes a sliver of the trinium GTM's own coil wants."
@@ -754,7 +768,7 @@
 			id: "37DDBA79833B9A79"
 			shape: "rsquare"
 			size: 1.0d
-			subtitle: "GTM brews it in a sterile cleanroom"
+			subtitle: "Europa's culture: the only living matter"
 			tasks: [
 				{ id: "7778D5C6F7E7680A", item: "gtceu:bacteria_bucket", optional_task: true, type: "item" }
 				{ id: "7AB7B416243A1A8B", type: "checkmark" }
@@ -1359,7 +1373,7 @@
 			id: "3322CEA660659623"
 			shape: "rsquare"
 			size: 1.0d
-			subtitle: "Or exquisite olivine"
+			subtitle: "Or the belt's olivine"
 			tasks: [
 				{ id: "12DD38E2D2718EC1", item: "gtceu:exquisite_emerald_gem", optional_task: true, type: "item" }
 				{ id: "7FCC4ECE75647265", type: "checkmark" }
@@ -1818,6 +1832,508 @@
 			title: "Indium"
 			x: 5.75d
 			y: 58.5d
+		}
+		{
+			icon: "grindless:hss_s_drill_bit"
+			id: "3E573BAEF42C6AC8"
+			shape: "rsquare"
+			size: 1.0d
+			tasks: [
+				{ id: "13F2BEECABAC7666", item: "grindless:hss_s_drill_bit", optional_task: true, type: "item" }
+				{ id: "5FAC0F6311AFF209", type: "checkmark" }
+			]
+			title: "HSS-S Drill Bit"
+			x: 0.5d
+			y: 64.0d
+		}
+		{
+			icon: "grindless:anchor_harpoon"
+			id: "1CFC601B7CC2E619"
+			shape: "rsquare"
+			size: 1.0d
+			subtitle: "Worn down a little every run"
+			tasks: [
+				{ id: "31947774A18D810C", item: "grindless:anchor_harpoon", optional_task: true, type: "item" }
+				{ id: "1B20227546F9E512", type: "checkmark" }
+			]
+			title: "Anchor Harpoon"
+			x: 0.5d
+			y: 65.5d
+		}
+		{
+			dependencies: ["3E573BAEF42C6AC8", "1CFC601B7CC2E619"]
+			description: ["Harpoons hold it to the rock while it drills. The belt's veins are drilled here and nowhere else."]
+			icon: "gtceu:harpoon_anchor_drill"
+			id: "1314017983FFC6A1"
+			shape: "gear"
+			size: 1.5d
+			tasks: [
+				{ id: "1F9F089D1602AC46", item: "gtceu:harpoon_anchor_drill", optional_task: true, type: "item" }
+				{ id: "5B8003ED80A20A37", type: "checkmark" }
+			]
+			title: "Harpoon Anchor Drill"
+			x: 3.0d
+			y: 64.75d
+		}
+		{
+			dependencies: ["1314017983FFC6A1"]
+			icon: "gtceu:raw_meteoric_iron"
+			id: "1524D02108DF9765"
+			size: 1.0d
+			tasks: [
+				{ id: "1818B95C51823903", item: "gtceu:raw_meteoric_iron", optional_task: true, type: "item" }
+				{ id: "510C3064D47C29BF", type: "checkmark" }
+			]
+			title: "Raw Meteoric Iron"
+			x: 5.5d
+			y: 64.0d
+		}
+		{
+			dependencies: ["1314017983FFC6A1"]
+			icon: "gtceu:raw_tetrataenite"
+			id: "329D82F9D03AB0E6"
+			size: 1.0d
+			tasks: [
+				{ id: "7CFD422B3EA4E4E8", item: "gtceu:raw_tetrataenite", optional_task: true, type: "item" }
+				{ id: "530A03FFBD7FAF76", type: "checkmark" }
+			]
+			title: "Raw Tetrataenite"
+			x: 5.5d
+			y: 65.5d
+		}
+		{
+			dependencies: ["1524D02108DF9765"]
+			icon: "gtceu:crushed_meteoric_iron_ore"
+			id: "37CDA7320A934B5A"
+			size: 1.0d
+			subtitle: "Macerator"
+			tasks: [
+				{ id: "5ABFCCBE964C9AF0", item: "gtceu:crushed_meteoric_iron_ore", optional_task: true, type: "item" }
+				{ id: "3A62A64F1F34F150", type: "checkmark" }
+			]
+			title: "Crushed Meteoric Iron"
+			x: 7.5d
+			y: 64.0d
+		}
+		{
+			dependencies: ["329D82F9D03AB0E6"]
+			icon: "gtceu:crushed_tetrataenite_ore"
+			id: "5DC634BA1E07BFB0"
+			size: 1.0d
+			subtitle: "Macerator"
+			tasks: [
+				{ id: "313D35B4FBB4F80B", item: "gtceu:crushed_tetrataenite_ore", optional_task: true, type: "item" }
+				{ id: "5BFA91ECBF1DCC1F", type: "checkmark" }
+			]
+			title: "Crushed Tetrataenite"
+			x: 7.5d
+			y: 65.5d
+		}
+		{
+			icon: "gtceu:carbon_monoxide_bucket"
+			id: "5D6907AB957947BB"
+			shape: "rsquare"
+			size: 1.0d
+			subtitle: "A charge; the optical miner tops it up"
+			tasks: [
+				{ id: "313E2E27AF701BDA", item: "gtceu:carbon_monoxide_bucket", optional_task: true, type: "item" }
+				{ id: "3F0C626219B2431C", type: "checkmark" }
+			]
+			title: "Carbon Monoxide"
+			x: 7.5d
+			y: 67.0d
+		}
+		{
+			dependencies: ["37CDA7320A934B5A", "5DC634BA1E07BFB0", "5D6907AB957947BB"]
+			description: ["The Mond process: carbon monoxide carries the iron and nickel off as gas and gives them back as pure metal. The platinum metals stay behind."]
+			icon: "gtceu:asteroid_processor"
+			id: "13713748643928C0"
+			shape: "gear"
+			size: 1.5d
+			tasks: [
+				{ id: "326B4EF7D9E57179", item: "gtceu:asteroid_processor", optional_task: true, type: "item" }
+				{ id: "72524C6D41310FD4", type: "checkmark" }
+			]
+			title: "Asteroid Processor"
+			x: 10.0d
+			y: 65.5d
+		}
+		{
+			dependencies: ["13713748643928C0"]
+			icon: "gtceu:iron_dust"
+			id: "148C9384444EBD40"
+			size: 0.75d
+			subtitle: "With the cobalt: to the network"
+			tasks: [
+				{ id: "5C6A6C279E8040EE", item: "gtceu:iron_dust", optional_task: true, type: "item" }
+				{ id: "11FCA760567770CF", type: "checkmark" }
+			]
+			title: "Iron"
+			x: 12.5d
+			y: 63.0d
+		}
+		{
+			dependencies: ["13713748643928C0"]
+			icon: "gtceu:nickel_dust"
+			id: "1B18C2B8BAECCF62"
+			size: 0.75d
+			subtitle: "The coated conductor line, or the network"
+			tasks: [
+				{ id: "1A9044315B576350", item: "gtceu:nickel_dust", optional_task: true, type: "item" }
+				{ id: "312E4A45C85E3A3F", type: "checkmark" }
+			]
+			title: "Nickel"
+			x: 12.5d
+			y: 64.0d
+		}
+		{
+			dependencies: ["13713748643928C0"]
+			icon: "gtceu:tetrataenite_dust"
+			id: "16FCC81D08790CB4"
+			size: 1.25d
+			subtitle: "Circuit 2 splits it out: rods for the magnet works"
+			tasks: [
+				{ id: "5E6AC395300848FC", item: "gtceu:tetrataenite_dust", optional_task: true, type: "item" }
+				{ id: "317009684D836910", type: "checkmark" }
+			]
+			title: "Tetrataenite"
+			x: 12.5d
+			y: 65.5d
+		}
+		{
+			dependencies: ["13713748643928C0"]
+			icon: "grindless:asteroid_pgm_concentrate"
+			id: "38CA3156E0330FB9"
+			size: 1.0d
+			tasks: [
+				{ id: "11C506BED3D9D0E4", item: "grindless:asteroid_pgm_concentrate", optional_task: true, type: "item" }
+				{ id: "52CAD5BE547E3868", type: "checkmark" }
+			]
+			title: "Asteroid PGM Concentrate"
+			x: 12.5d
+			y: 67.0d
+		}
+		{
+			dependencies: ["38CA3156E0330FB9"]
+			description: ["The EV plant learns a fourth trick. Everything the concentrate holds comes out, and the leftover sludge splits into the other four metals."]
+			icon: "gtceu:platinum_plant"
+			id: "709BF1A7462EE188"
+			shape: "gear"
+			size: 1.5d
+			subtitle: "Circuit 4"
+			tasks: [
+				{ id: "3A03315A12BC5411", item: "gtceu:platinum_plant", optional_task: true, type: "item" }
+				{ id: "17EAA53DDEF7566B", type: "checkmark" }
+			]
+			title: "Platinum Plant, Mode 4"
+			x: 15.0d
+			y: 67.0d
+		}
+		{
+			dependencies: ["709BF1A7462EE188"]
+			icon: "gtceu:iridium_dust"
+			id: "3A51125E741BE31D"
+			size: 1.25d
+			tasks: [
+				{ id: "78BFFE8B5C151516", item: "gtceu:iridium_dust", optional_task: true, type: "item" }
+				{ id: "190425C41B7D43A1", type: "checkmark" }
+			]
+			title: "Iridium"
+			x: 17.5d
+			y: 66.0d
+		}
+		{
+			dependencies: ["709BF1A7462EE188"]
+			icon: "gtceu:osmium_dust"
+			id: "1007B8E74A97F166"
+			size: 1.25d
+			tasks: [
+				{ id: "5431BC6482EA1A41", item: "gtceu:osmium_dust", optional_task: true, type: "item" }
+				{ id: "5A584D77774FB344", type: "checkmark" }
+			]
+			title: "Osmium"
+			x: 17.5d
+			y: 67.5d
+		}
+		{
+			dependencies: ["709BF1A7462EE188"]
+			icon: "gtceu:platinum_group_sludge_dust"
+			id: "709A1E5AEF4F3D8B"
+			size: 0.75d
+			subtitle: "Circuit 2: platinum, palladium, rhodium, ruthenium"
+			tasks: [
+				{ id: "753E3F7B8D8B4FC1", item: "gtceu:platinum_group_sludge_dust", optional_task: true, type: "item" }
+				{ id: "5D6561E4BEF6E341", type: "checkmark" }
+			]
+			title: "Platinum Group Sludge"
+			x: 17.5d
+			y: 68.75d
+		}
+		{
+			dependencies: ["13713748643928C0"]
+			icon: "gtceu:meteoric_iron_dust"
+			id: "5C29AD99F38474CC"
+			shape: "circle"
+			size: 0.75d
+			subtitle: "From the split and the ore line: circuit 3 runs Mond on it"
+			tasks: [
+				{ id: "5E94F4FFE72BA2D6", item: "gtceu:meteoric_iron_dust", optional_task: true, type: "item" }
+				{ id: "74DC7E94031C5BAF", type: "checkmark" }
+			]
+			title: "Meteoric Iron Dust, Back"
+			x: 12.5d
+			y: 68.5d
+		}
+		{
+			icon: "grindless:capture_bag"
+			id: "300ECCC3C8CB6102"
+			shape: "rsquare"
+			size: 1.0d
+			subtitle: "Worn out a little every run"
+			tasks: [
+				{ id: "318521764D00FD90", item: "grindless:capture_bag", optional_task: true, type: "item" }
+				{ id: "7B243844DE6C0AB9", type: "checkmark" }
+			]
+			title: "Capture Bag"
+			x: 21.75d
+			y: 65.0d
+		}
+		{
+			dependencies: ["300ECCC3C8CB6102"]
+			description: ["Mirrors bake a bagged boulder with sunlight, and a cold trap catches what boils off. It only starts with the sun on it."]
+			icon: "gtceu:optical_miner"
+			id: "160086106B0C7DD3"
+			shape: "gear"
+			size: 1.5d
+			tasks: [
+				{ id: "1B05CA4BB5B74880", item: "gtceu:optical_miner", optional_task: true, type: "item" }
+				{ id: "3AB33030FAB64302", type: "checkmark" }
+			]
+			title: "Optical Miner"
+			x: 24.25d
+			y: 65.0d
+		}
+		{
+			dependencies: ["160086106B0C7DD3"]
+			icon: "minecraft:water_bucket"
+			id: "18C421655E30002A"
+			size: 0.75d
+			subtitle: "The belt base, and the network"
+			tasks: [
+				{ id: "33E6622B6A2FA244", item: "minecraft:water_bucket", optional_task: true, type: "item" }
+				{ id: "576205524604646C", type: "checkmark" }
+			]
+			title: "Water"
+			x: 26.75d
+			y: 63.0d
+		}
+		{
+			dependencies: ["160086106B0C7DD3"]
+			icon: "gtceu:carbon_dioxide_bucket"
+			id: "3F6CC0C0F0E51931"
+			size: 1.0d
+			tasks: [
+				{ id: "5D878DC2C8FF73CA", item: "gtceu:carbon_dioxide_bucket", optional_task: true, type: "item" }
+				{ id: "1D79607A1A74BA6D", type: "checkmark" }
+			]
+			title: "Carbon Dioxide"
+			x: 26.75d
+			y: 64.25d
+		}
+		{
+			dependencies: ["160086106B0C7DD3"]
+			icon: "gtceu:carbon_dust"
+			id: "5DECF43E07A2473A"
+			size: 1.0d
+			tasks: [
+				{ id: "360C04EECF4AE97A", item: "gtceu:carbon_dust", optional_task: true, type: "item" }
+				{ id: "7968670C500F74BF", type: "checkmark" }
+			]
+			title: "Carbon"
+			x: 26.75d
+			y: 65.5d
+		}
+		{
+			dependencies: ["160086106B0C7DD3"]
+			icon: "grindless:chondritic_extract"
+			id: "51886E8E69AA4230"
+			size: 1.25d
+			subtitle: "Europa's culture needs it"
+			tasks: [
+				{ id: "170B90FA60916D5A", item: "grindless:chondritic_extract", optional_task: true, type: "item" }
+				{ id: "5199DF82D4084F12", type: "checkmark" }
+			]
+			title: "Chondritic Extract"
+			x: 26.75d
+			y: 67.0d
+		}
+		{
+			dependencies: ["3F6CC0C0F0E51931", "5DECF43E07A2473A"]
+			icon: "gtceu:carbon_monoxide_bucket"
+			id: "10F3DF5800707BB8"
+			size: 1.25d
+			subtitle: "Circuit 2: the asteroid processor's charge"
+			tasks: [
+				{ id: "572F21D07AE90494", item: "gtceu:carbon_monoxide_bucket", optional_task: true, type: "item" }
+				{ id: "53291BABC8D9D8D5", type: "checkmark" }
+			]
+			title: "Carbon Monoxide"
+			x: 29.25d
+			y: 64.75d
+		}
+		{
+			icon: "grindless:cryobot_probe"
+			id: "7A13987106DA386D"
+			shape: "rsquare"
+			size: 1.0d
+			subtitle: "Made at home, spent on the first dive"
+			tasks: [
+				{ id: "11A95698412C4B06", item: "grindless:cryobot_probe", optional_task: true, type: "item" }
+				{ id: "1C1A6866D953EF96", type: "checkmark" }
+			]
+			title: "Cryobot Probe"
+			x: 0.5d
+			y: 72.0d
+		}
+		{
+			icon: "grindless:melt_head"
+			id: "1447B3C4144A1F59"
+			shape: "rsquare"
+			size: 1.0d
+			subtitle: "Wears like a drill bit"
+			tasks: [
+				{ id: "5C4206DB14081BED", item: "grindless:melt_head", optional_task: true, type: "item" }
+				{ id: "14BA512B9884B2D3", type: "checkmark" }
+			]
+			title: "Melt Head"
+			x: 0.5d
+			y: 73.5d
+		}
+		{
+			dependencies: ["7A13987106DA386D", "1447B3C4144A1F59"]
+			description: ["A melt probe sinks through the ice and pays out its tether on the way down. The ocean underneath is the only place with anything alive in it."]
+			icon: "gtceu:cryobot"
+			id: "585B19F164B9FA4F"
+			shape: "gear"
+			size: 1.5d
+			tasks: [
+				{ id: "35B11FFA2606CE21", item: "gtceu:cryobot", optional_task: true, type: "item" }
+				{ id: "57E0438C54290201", type: "checkmark" }
+			]
+			title: "Cryobot"
+			x: 3.0d
+			y: 72.75d
+		}
+		{
+			dependencies: ["585B19F164B9FA4F"]
+			icon: "grindless:europan_ocean_sample"
+			id: "33778985B3759353"
+			size: 1.0d
+			tasks: [
+				{ id: "544620AF2F8D59A3", item: "grindless:europan_ocean_sample", optional_task: true, type: "item" }
+				{ id: "52F7D9EC4CC841DC", type: "checkmark" }
+			]
+			title: "Europan Ocean Sample"
+			x: 5.5d
+			y: 73.5d
+		}
+		{
+			dependencies: ["585B19F164B9FA4F"]
+			icon: "gtceu:europan_brine_bucket"
+			id: "56DB23E36E0539C1"
+			size: 1.0d
+			tasks: [
+				{ id: "1BECF08F64990C32", item: "gtceu:europan_brine_bucket", optional_task: true, type: "item" }
+				{ id: "76C138E16AFE51FF", type: "checkmark" }
+			]
+			title: "Europan Brine"
+			x: 5.5d
+			y: 72.0d
+		}
+		{
+			dependencies: ["56DB23E36E0539C1"]
+			icon: "gtceu:magnesium_sulfate_dust"
+			id: "778C46ABD4F76A48"
+			size: 0.75d
+			subtitle: "Centrifuged with salt and water; the electrolyzer splits it"
+			tasks: [
+				{ id: "1CB12EA0A6B9AAC1", item: "gtceu:magnesium_sulfate_dust", optional_task: true, type: "item" }
+				{ id: "531269E490247A55", type: "checkmark" }
+			]
+			title: "Magnesium Sulfate"
+			x: 8.0d
+			y: 72.0d
+		}
+		{
+			icon: "gtceu:hydrogen_peroxide_bucket"
+			id: "3C921AC3ECFD2885"
+			shape: "rsquare"
+			size: 1.0d
+			subtitle: "GTM's chemical reactor"
+			tasks: [
+				{ id: "331F3571C27F5AA2", item: "gtceu:hydrogen_peroxide_bucket", optional_task: true, type: "item" }
+				{ id: "708E7BC599202883", type: "checkmark" }
+			]
+			title: "Hydrogen Peroxide"
+			x: 5.5d
+			y: 75.0d
+		}
+		{
+			icon: "grindless:chondritic_extract"
+			id: "1B4C8CCEC55AC1EE"
+			shape: "rsquare"
+			size: 1.0d
+			subtitle: "From the belt"
+			tasks: [
+				{ id: "34BBC0CACA2302DD", item: "grindless:chondritic_extract", optional_task: true, type: "item" }
+				{ id: "18864A9B220F8360", type: "checkmark" }
+			]
+			title: "Chondritic Extract"
+			x: 5.5d
+			y: 76.5d
+		}
+		{
+			dependencies: ["33778985B3759353", "56DB23E36E0539C1", "3C921AC3ECFD2885", "1B4C8CCEC55AC1EE"]
+			description: ["A culture that lives on hydrogen and oxidants, the way life in that ocean might. The sample stays inside as the seed."]
+			icon: "gtceu:algae_bioreactor"
+			id: "537A3272F0A875DC"
+			shape: "gear"
+			size: 1.5d
+			tasks: [
+				{ id: "765177923F18B64F", item: "gtceu:algae_bioreactor", optional_task: true, type: "item" }
+				{ id: "78EDC1562B1142DC", type: "checkmark" }
+			]
+			title: "Algae Bioreactor"
+			x: 8.0d
+			y: 74.25d
+		}
+		{
+			dependencies: ["537A3272F0A875DC"]
+			icon: "gtceu:bacteria_bucket"
+			id: "5987C5957696843D"
+			size: 1.25d
+			subtitle: "Home to the biofoundry"
+			tasks: [
+				{ id: "1F0F1F706F714C45", item: "gtceu:bacteria_bucket", optional_task: true, type: "item" }
+				{ id: "3BCFDDC3A68A33EB", type: "checkmark" }
+			]
+			title: "Bacteria"
+			x: 10.5d
+			y: 73.75d
+		}
+		{
+			dependencies: ["537A3272F0A875DC"]
+			icon: "gtceu:biomass_bucket"
+			id: "18A7113A5F6D611D"
+			size: 0.75d
+			subtitle: "Into bacterial sludge"
+			tasks: [
+				{ id: "58ED5D900A732527", item: "gtceu:biomass_bucket", optional_task: true, type: "item" }
+				{ id: "1948561376CAFC7E", type: "checkmark" }
+			]
+			title: "Biomass"
+			x: 10.5d
+			y: 75.25d
 		}
 		{
 			icon: "gtceu:data_orb"
