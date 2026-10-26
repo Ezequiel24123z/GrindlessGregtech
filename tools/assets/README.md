@@ -56,6 +56,7 @@ Generators for the pack's own textures. Everything is procedural 16x16 pixel art
 | `Build-LuVCryogenicsTextures.ps1` | Writes the faces of the LuV helium refrigerator and coated conductor line (LuV-A3: `multiblock/helium_refrigerator/`, `multiblock/coated_conductor_line/`). `-Only refrigerator,line`, `-Preview <png outside the repo>` (optional `-FrostCasing <png>`, `-StainlessCasing <png>`) and `-Credits` (their 10 CREDITS rows). |
 | `Build-LuVFoundationTextures.ps1` | Writes the shared LuV textures (LuV-A1): 29 items (four of them animated quantum seeds) and the ten block textures under `block/luv/` (eight casings and the orbital solar panel's cells and frame). `-Only <output or group>`, `-Preview <png outside the repo>`, `-Credits`. |
 | `Build-HTSMagnetWorksTextures.ps1` | Writes the LuV HTS magnet works' face (`multiblock/hts_magnet_works/`). `-Only magnet_works`, `-Preview <png outside the repo>` and `-Credits` (its 5 CREDITS rows). |
+| `Build-GanymedeTextures.ps1` | Writes the faces of the LuV gravitational wave detector and coilgun launcher (LuV-B9: `multiblock/gravitational_wave_detector/`, `multiblock/coilgun_launcher/`). `-Only detector,launcher`, `-Preview <png outside the repo>` (optional `-FrostCasing <png>`, `-TungstenCasing <png>`) and `-Credits` (their 10 CREDITS rows). |
 
 ## Regenerate
 
@@ -734,6 +735,29 @@ powershell -NoProfile -ExecutionPolicy Bypass -File tools\assets\Build-HTSMagnet
 | `block/multiblock/hts_magnet_works/overlay_front.png` | Idle: the copper-gold coil, cold and dark between its two tape turns, round a dark bore; the run and quench lamps dark. |
 | `.../overlay_front_active.png` + `.mcmeta` | 8 frames, `frametime` 4: the middle turn glowing LuV light purple with two pulses of current running round it, the bore breathing cold cyan, frost glints on the outer turn and the run lamp lit. |
 | `.../overlay_front_active_emissive.png` + `.mcmeta` | Only the middle turn, the bore and the run lamp. |
+
+### Ganymede (LuV-B9)
+
+The faces of the gravitational wave detector (drawn for GTM's frost-proof casing) and the coilgun launcher (drawn for GTM's robust tungstensteel casing), with the LuV-A3 faces' method, steel ramp, bezel, lamp ramp and checks (the helpers are copied from `Build-LuVCryogenicsTextures.ps1`, so no other script changes). Both are original drawings.
+
+- Detector, 8 frames, `frametime` 3: a laser interferometer. An L of two equal beam lines meets at the beam splitter (the laser feeds it from the left, the photodetector sits at the dark port under it), with a sapphire test mass at each arm's end and a small strain display inside the L. Working, the arms hold red laser light with a glint running out to the test masses, and the display sweeps a chirp (a small slow wiggle growing and quickening into the merger, as GW150914's 35 → 250 Hz chirp) in amber; at the merger the peak flashes white and the event lamp lights, then the trace fades to an afterglow. The photodetector follows the trace.
+- Launcher, 8 frames, `frametime` 2: the breech seen down the barrel, a dark bore ringed by four coils alternating copper and superconductor (the far ones a step darker). Working, the coils energise blue-white one after the other from the outer ring to the bore, the bore flashes as the slug passes, and the amber charge indicator drains and refills.
+- The emissive layers hold only the beam lines, splitter, laser, photodetector, display and lamps (detector); the energised rings, the bore, the charge cells and the run lamp (launcher).
+- To retouch: `$GwPal`/`$GwBase`, with `$GwChirp` (one sample per display column), `$GwReveal` (the sweep per frame) and `$GwEventFrames`; `$CgPal`/`$CgBase` (the ring letters are checked against `$CgPixels`), with `$CgHot`, `$CgFade` and `$CgCharge` per frame. Add any new light to `$GwGlowZone` or `$CgGlowZone`.
+
+```powershell
+powershell -NoProfile -ExecutionPolicy Bypass -File tools\assets\Build-GanymedeTextures.ps1
+powershell -NoProfile -ExecutionPolicy Bypass -File tools\assets\Build-GanymedeTextures.ps1 -Credits
+```
+
+| File (under `textures/`) | Notes |
+|---|---|
+| `block/multiblock/gravitational_wave_detector/overlay_front.png` | Idle: grey vacuum tubes in an L, a dull splitter, dark laser and photodetector, sapphire test masses, a flat dim baseline on the display and both lamps dark. |
+| `.../overlay_front_active.png` + `.mcmeta` | 8 frames, `frametime` 3: red light in the arms, an amber chirp swept across the display, the merger flash with the event lamp, then the afterglow; the run lamp lit. |
+| `.../overlay_front_active_emissive.png` + `.mcmeta` | Only the arms, splitter, laser, photodetector, the display's trace and the lit lamps. |
+| `block/multiblock/coilgun_launcher/overlay_front.png` | Idle: copper and superconductor coil rings round a dark bore, rivets, the charge indicator and run lamp dark. |
+| `.../overlay_front_active.png` + `.mcmeta` | 8 frames, `frametime` 2: the coils energise blue-white from the outer ring to the bore, the bore flashes and fades, and the charge indicator drains and refills; the run lamp lit. |
+| `.../overlay_front_active_emissive.png` + `.mcmeta` | Only the energised rings, the bore's flash, the charge cells and the run lamp. |
 
 ## Contrast pass after the gallery test (2026-10-25)
 
