@@ -1,6 +1,7 @@
 // Builds the rule graph from the dump and the tier configuration.
 import { Graph } from './engine.mjs';
 import { fluidKey, normalizeRecipe } from './normalize.mjs';
+import { applyPackages } from './packages.mjs';
 import { abilityMaxCount, structureSelectors } from './structure.mjs';
 import { asArray, makeGlobMatcher } from './util.mjs';
 
@@ -110,6 +111,7 @@ export function recipeTierOf(id) {
  */
 function tierAllows(e, recipeId) {
   if (e.onlyRecipesMatch && !e.onlyRecipesMatch(recipeId)) return false;
+  if (e.exceptRecipesMatch && e.exceptRecipesMatch(recipeId)) return false;
   if (e.vetoAbove === undefined && e.onlyTier === undefined) return true;
   const t = recipeTierOf(recipeId);
   if (e.onlyTier !== undefined) return t === e.onlyTier;
@@ -150,15 +152,18 @@ function typesOfRegistered(dump, reg) {
   return set;
 }
 
-export function buildModel(dump, rawCfg) {
+export function buildModel(dump, rawCfg0) {
+  // packages still being built (lib/packages.mjs): their targets warn instead of failing until the dump carries them
+  const pk = applyPackages(rawCfg0, dump);
+  const rawCfg = pk.raw;
   const cfg = prepareConfig(rawCfg);
   const g = new Graph();
-  const warnings = [];
+  const warnings = [...pk.warnings];
   const st = { unresolved: new Set() };
   const stats = {
     recipes: dump.recipes.size, ignoredByType: {}, deadByType: {}, emptyIngredient: 0, badIngredient: 0,
     templateMissing: 0, rules: 0, structureMachines: 0, structureMachineIds: [], rolledMachines: [], veinTargets: 0, veinsWithoutItem: [],
-    partsNotRequired: [],
+    partsNotRequired: [], packages: pk.packages,
   };
 
   // 1) Normalized recipes
@@ -427,6 +432,13 @@ export function buildModel(dump, rawCfg) {
       if (globs.length === 0) warnings.push(`${id}: onlyRecipes is empty: the machine runs no recipe`);
       e = { ...e, onlyRecipesMatch: makeGlobMatcher(globs) };
     }
+    // exceptRecipes (LuV, 2026-10-26): the recipes a machine's own modifier refuses although its type, voltage and folder allow them
+    // (the Universal Assembly Factory's HATCH_VOLTAGE_LOCKED: GTM's NPU on two LuV hatches, mv/leisure_factories.js)
+    if (e0.exceptRecipes !== undefined) {
+      const globs = asArray(e0.exceptRecipes);
+      if (globs.length === 0) warnings.push(`${id}: exceptRecipes is empty`);
+      e = { ...e, exceptRecipesMatch: makeGlobMatcher(globs) };
+    }
     entriesById.set(id, e);
     const reg = dump.machines.get(e.machine);
     if (dump.machines.size > 0 && e.machine.startsWith('gtceu:') && !reg && !e.optional) {
@@ -456,7 +468,7 @@ export function buildModel(dump, rawCfg) {
         }
       }
     };
-    if (!e.machine.startsWith('gtceu:')) checkIds([e.machine], 'the machine');
+    if (!e.machine.startsWith('gtceu:') && !(e.optional && dump.items.size > 0 && !dump.items.has(e.machine))) checkIds([e.machine], 'the machine');
     // partsFromStructure: parts come from the pattern description the pack dumps (structures.json); if the
     // dump doesn't carry it, the config's `parts` are used.
     let partSels = asArray(e.parts);
@@ -535,7 +547,7 @@ export function buildModel(dump, rawCfg) {
       let lbl = `machine for ${n.type}`;
       if (cands.length === 0) {
         if (all.length === 0) lbl = `there's no machine for ${n.type} in this tier`;
-        else if (all.some((e) => euOk(e) && tempOk(e) && e.onlyRecipesMatch)) lbl = `no ${n.type} machine of this tier takes ${n.id} (the family's veto: its tier folders and the machines' recipe allowlists)`;
+        else if (all.some((e) => euOk(e) && tempOk(e) && (e.onlyRecipesMatch || e.exceptRecipesMatch))) lbl = `no ${n.type} machine of this tier takes ${n.id} (the family's veto: its tier folders and the machines' recipe allowlists)`;
         else if (all.some((e) => euOk(e) && tempOk(e))) lbl = `no ${n.type} machine of this tier runs the recipes filed under ${recipeTierOf(n.id)}/ (the family's tier veto)`;
         else if (all.some(euOk)) lbl = `no ${n.type} machine reaches ${n.temp} K (this tier's coils)`;
         else lbl = `no ${n.type} machine accepts ${n.eut} EU/t`;
