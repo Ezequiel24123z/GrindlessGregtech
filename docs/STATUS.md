@@ -3,10 +3,11 @@
 Integrator-owned. Read this instead of `DECISIONS.md` and the session notes. Overwrite it at each accepted batch; do not append history.
 
 - **Playable version:** v0.8.0 "LuV, the outer system" (`15a7f85`). `playable` and `jugable` both point to it.
-- **Active development branch:** `ezequiel24123z-gregtech-grindless-modpack` (= `15a7f85`). `main` is stale (`4719e7e`); never base work on it.
-- **Current milestone:** LuV done. AI-efficiency migration (Phase 0-1) on `ezequiel24123z-ai-efficiency-migration`, awaiting review. ZPM design not started.
-- **Last accepted integration batch:** LuV A1-A5, B1-B10, C1-C3 (v0.8.0).
-- **Next approved package:** none. Proposed: the efficiency pilot (one measured package), after the migration is accepted.
+- **Active development branch:** `ezequiel24123z-gregtech-grindless-modpack`. `main` matches it (PR #4 merged); feature work still branches from the development branch.
+- **Current milestone:** ZPM design (approved by the user). One Opus architecture session writes `docs/eras/zpm.md` and the package queue.
+- **Last accepted integration batch:** the AI-efficiency migration (Phase 0-1: scoped instructions, `Check-Fast`, `zones.json`, work-package form), on top of v0.8.0.
+- **Next approved package:** none until `docs/eras/zpm.md` is accepted.
+- **Repository:** unmerged historical branches are kept only as `archive/*` tags; finished package branches are deleted after integration.
 
 ## Open blockers and known issues
 - GCYR's configured low gravity is not applied in game (menu only); the design no longer claims it.
