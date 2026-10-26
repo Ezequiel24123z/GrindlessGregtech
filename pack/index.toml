@@ -2781,6 +2781,10 @@ file = "kubejs/data/grindless/tables/orbits.json"
 hash = "dbf0da39211b14f2c532ac661d757f1d9d37cbf40651e4be35e94bdaf6e38e5a"
 
 [[files]]
+file = "kubejs/data/grindless/tables/places.json"
+hash = "4faa362092c1af5de19ee91d2d72879114845ad696f0e5d34eb73aea4c460207"
+
+[[files]]
 file = "kubejs/data/grindless/tables/planets.json"
 hash = "9cda6fa60e8989f2f46bddd42e0dcaf0d943f4f62e40f8017efacbd96379922a"
 
@@ -3463,6 +3467,10 @@ hash = "f2f4d1384e9b8d13c450c4baae08a39050f64c79cf9633c1b02ecb5c7239789f"
 [[files]]
 file = "kubejs/startup_scripts/grindless/lib/patterns.js"
 hash = "35d5e425be1387839301cb771e930ae5835bacd00ce88de3d1447a8d1cb29e9a"
+
+[[files]]
+file = "kubejs/startup_scripts/grindless/lib/places.js"
+hash = "43e0c121267c0aabc56d792bc7932f33af77510dcabd405fa47d2962d3a132ff"
 
 [[files]]
 file = "kubejs/startup_scripts/grindless/lib/tables.js"
