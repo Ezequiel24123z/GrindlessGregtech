@@ -56,6 +56,7 @@ Generators for the pack's own textures. Everything is procedural 16x16 pixel art
 | `Build-LuVCryogenicsTextures.ps1` | Writes the faces of the LuV helium refrigerator and coated conductor line (LuV-A3: `multiblock/helium_refrigerator/`, `multiblock/coated_conductor_line/`). `-Only refrigerator,line`, `-Preview <png outside the repo>` (optional `-FrostCasing <png>`, `-StainlessCasing <png>`) and `-Credits` (their 10 CREDITS rows). |
 | `Build-LuVFoundationTextures.ps1` | Writes the shared LuV textures (LuV-A1): 29 items (four of them animated quantum seeds) and the ten block textures under `block/luv/` (eight casings and the orbital solar panel's cells and frame). `-Only <output or group>`, `-Preview <png outside the repo>`, `-Credits`. |
 | `Build-ZPMFoundationTextures.ps1` | Writes the shared ZPM textures (ZPM-F1): 31 items and the six block textures under `block/zpm/`. `-Only <output or group>`, `-Preview <png outside the repo>`, `-Credits`. |
+| `Build-ZPMNaquadriaTextures.ps1` | Writes the faces of the ZPM naquadria refinery and naquadah fuel works (ZPM-A2: `multiblock/naquadria_refinery/`, `multiblock/naquadah_fuel_works/`), 10 files. `-Credits` (their CREDITS rows). |
 | `Build-HTSMagnetWorksTextures.ps1` | Writes the LuV HTS magnet works' face (`multiblock/hts_magnet_works/`). `-Only magnet_works`, `-Preview <png outside the repo>` and `-Credits` (its 5 CREDITS rows). |
 | `Build-GanymedeTextures.ps1` | Writes the faces of the LuV gravitational wave detector and coilgun launcher (LuV-B9: `multiblock/gravitational_wave_detector/`, `multiblock/coilgun_launcher/`). `-Only detector,launcher`, `-Preview <png outside the repo>` (optional `-FrostCasing <png>`, `-TungstenCasing <png>`) and `-Credits` (their 10 CREDITS rows). |
 | `Build-EuropaTextures.ps1` | Writes the faces of the LuV Europa machines (LuV-B8): the cryobot and the algae bioreactor (`multiblock/cryobot/`, `multiblock/algae_bioreactor/`). `-Only cryobot,algae_bioreactor` and `-Credits` (their 10 CREDITS rows). |
@@ -850,3 +851,21 @@ The client gallery test (`gg_test_gallery`) showed fifteen faces that were hard 
 - `Build-LeisureUtilityTextures.ps1`: contrast pass (2026-10-25): the lava furnace's idle crust (`q r s t`) is a lighter dark red with dull embers; the weather controller's idle cloud (`$WxCloudIdle`) is a light grey on a dark slate screen (`n`).
 - `Build-LaunchRoadTextures.ps1`, engine test stand row: "The stand as the multiblock builds it, against the test site's dusk sky: ..." (`$StandSky`; the right leg is a step lighter).
 - `Build-SteamSmallFamilyTextures.ps1`: contrast pass (2026-10-25): the window is open onto the bronze bricks, so the forge hammer's ram and anvil and the alloy smelter's crucible are light iron outlined in dark iron; the ram has a head and the crucible is larger (rows 2–7 of the window). The other four faces are unchanged.
+
+
+## ZPM naquadria refinery and naquadah fuel works faces (ZPM-A2)
+
+Procedural, drawn by `Build-ZPMNaquadriaTextures.ps1`; nothing is copied from another mod. Both faces: a steel bezel, a window and a run lamp; 4 active frames, frametime 4; the emissive layer holds only the liquid and the lamp.
+
+```powershell
+powershell -NoProfile -ExecutionPolicy Bypass -File tools\assets\Build-ZPMNaquadriaTextures.ps1
+powershell -NoProfile -ExecutionPolicy Bypass -File tools\assets\Build-ZPMNaquadriaTextures.ps1 -Credits
+```
+
+| File (under `textures/`) | Notes |
+|---|---|
+| `block/multiblock/naquadria_refinery/overlay_front.png` | Idle: a dark drum window with a faint violet tint; the run lamp dark. |
+| `block/multiblock/naquadria_refinery/overlay_front_active.png` | Working: violet naquadria solution swirling in the drum, a bright band travelling up it; the run lamp green. |
+| `block/multiblock/naquadah_fuel_works/overlay_front.png` | Idle: an empty dark tank between two struts; the run lamp dark. |
+| `block/multiblock/naquadah_fuel_works/overlay_front_active.png` | Working: amber fuel filling the tank frame by frame; the run lamp green. |
+| `*_emissive.png` | The liquid and the lamp only, a subset of the colour layer. |
