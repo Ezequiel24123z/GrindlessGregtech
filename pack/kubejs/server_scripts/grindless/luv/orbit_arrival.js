@@ -327,6 +327,13 @@
     var target = readTarget(saved, level, state.dimension)
     state.station = String(target.id)
     var plan = landing(rocket, level, target)
+    // KubeJS getType() is an ID string; getEntityType() exposes the native tracking metadata.
+    // Resolve it before any relocation, so a binding failure cannot leave a partial correction.
+    var type = invoke(rocket, ['getEntityType', 'm_6095_'])
+    var interval = Number(invoke(type, ['updateInterval', 'm_20682_']))
+    var tracking = String(invoke(type, ['trackDeltas', 'm_20683_']))
+    need(finite(interval) && Math.floor(interval) === interval && interval > 0, 'invalid native tracking interval')
+    need(tracking === 'true' || tracking === 'false', 'invalid native delta tracking flag')
     var original = association(riders, id)
     need(original === riders.length + '/' + riders.length + '->' + id, 'original rider association changed')
     // Establish each real native seat at the SOURCE, without unride/remount or hand-written seat
@@ -346,12 +353,10 @@
       Math.abs(actual[1] - plan.y) < 0.000001 && Math.abs(actual[2] - plan.old[2]) < 0.000001 &&
       Math.abs(Number(box(rocket).minY) - plan.floor) < 0.000001, 'root transport readback mismatch')
     clearBox(level, rocket, box(rocket), target.station.border())
-    var type = invoke(rocket, ['getType', 'm_6095_'])
     var broadcast = function (packet) {
       for (var r = 0; r < riders.length; r++) send(riders[r], packet)
     }
-    var pairing = new j.Pairing(level, rocket, Number(invoke(type, ['updateInterval', 'm_20682_'])),
-      String(invoke(type, ['trackDeltas', 'm_20683_'])) === 'true', broadcast)
+    var pairing = new j.Pairing(level, rocket, interval, tracking === 'true', broadcast)
     var chunks = level.getChunkSource()
     for (var k = 0; k < riders.length; k++) {
       var rider = riders[k]
