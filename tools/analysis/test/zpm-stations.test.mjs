@@ -29,13 +29,14 @@ const ZPM = [
 ];
 const luvFields = (s) => ({ enabled: s.enabled, first: s.first, second: s.second, plot: s.plot, pieces: s.pieces, b7: s.b7, switches: s.switches });
 
-test('the real table: more is an empty list, and LuV keeps its two stations and the tether', () => {
-  assert.deepEqual(REAL.more, []);
+test('the real table: more is the Saturn and Uranus slots (ZPM-B1), and LuV keeps its two stations and the tether', () => {
+  assert.deepEqual(REAL.more, ZPM);
   const s = run(REAL);
   assert.equal(s.b7, 'tether');
   assert.deepEqual(s.switches, { stations: true, tether: true, sulfur_iodine: false });
-  assert.deepEqual(s.more, []);
-  assert.deepEqual(s.slots, [{ slot: 'first', orbit: 'gcyr:overworld_orbit' }, { slot: 'second', orbit: 'grindless:io_orbit' }]);
+  assert.deepEqual(s.more, ZPM);
+  assert.deepEqual(s.slots.slice(0, 2), [{ slot: 'first', orbit: 'gcyr:overworld_orbit' }, { slot: 'second', orbit: 'grindless:io_orbit' }]);
+  assert.deepEqual(s.slots.slice(2).map((x) => x.slot), ['saturn', 'uranus']);
 });
 
 test('two more stations change nothing LuV reads', () => {
