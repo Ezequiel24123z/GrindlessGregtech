@@ -4,9 +4,14 @@
 // arrows and all, until that package is in LANDED; its place in the layout is kept, so landing a package moves nothing else.
 // pending: { <package>: { ...opts } } is what a node says while that package is still out. Landing one is adding it to LANDED.
 // The pending clusters sit in the bands below the landed ones; their ids follow luv.md and are checked when their package lands.
+// S03, B7T and B7S are not listed by hand: they follow tables/stations.json (../luv-stations.mjs, the rule of lib/stations.js). Io
+// orbit's slot holds one of two, never both: the flux-tube tether (B7T) or, if a second station fails, the sulfur-iodine plant on
+// Io (B7S). After the table flips, regenerate luv_age, pl_luv and power and lint (docs/quests.md, section 14).
 import { I, F, M, n, L, via, build, structure, network } from './pl-lib.mjs';
+import { STATION_PACKAGES } from '../luv-stations.mjs';
 
-export const LANDED = new Set(['A1', 'A2', 'A3', 'A4', 'A5', 'B1', 'B2', 'B3', 'B4', 'B5', 'B6', 'B8', 'B9', 'B10']);
+export const LANDED = new Set(['A1', 'A2', 'A3', 'A4', 'A5', 'B1', 'B2', 'B3', 'B4', 'B5', 'B6', 'B8', 'B9', 'B10', ...STATION_PACKAGES]);
+if (LANDED.has('B7T') && LANDED.has('B7S')) throw new Error('B7T and B7S are alternatives: only one of them lands');
 
 export default {
   file: 'pl_luv',
@@ -342,7 +347,7 @@ export default {
         }),
       ],
     },
-    // ---------------------------------------------------------------- B6 (Io's surface); pending: B7 (Io orbit), B8 (Europa), B9 (Ganymede), B1 (travel)
+    // ---------------------------------------------------------------- B6 (Io's surface); pending: B7T or B7S (Io orbit), B8 (Europa), B9 (Ganymede), B1 (travel)
     io: {
       name: 'Io: fumaroles and heat',
       pkg: 'B6',
@@ -367,15 +372,29 @@ export default {
         n('indium', 7.5, 1.5, I('gtceu:indium_dust'), 'Indium', { kind: 'product', from: ['subl'], by: ['gtceu:fumarole_condensing'], sub: 'ITBTC and indium gallium phosphide' }),
       ],
     },
+    // the Io-orbit slot (B7): the tether (B7T) or the sulfur-iodine plant on Io's surface (B7S), whichever tables/stations.json
+    // lands; both sit in the same place, and pl-model.mjs keeps the slot's room in the layout while neither has landed
     ioorbit: {
-      name: 'Io orbit',
-      pkg: 'B7',
+      name: 'Io orbit, or the sulfur-iodine plant',
       nodes: [
-        n('spool', 0, -0.75, I('grindless:tether_spool'), 'Tether Spool', { kind: 'raw', sub: 'Used up now and then' }),
-        n('argon', 0, 0.75, F('gtceu:argon'), 'Argon', { kind: 'raw', sub: 'Mars argon, for the hollow cathode' }),
+        n('spool', 0, -0.75, I('grindless:tether_spool'), 'Tether Spool', { kind: 'raw', pkg: 'B7T', sub: 'Used up now and then: about one an hour' }),
+        n('argon', 0, 0.75, F('gtceu:argon'), 'Argon', { kind: 'raw', pkg: 'B7T', sub: 'Mars argon for the hollow cathode, 50 mB a run' }),
         n('tether', 2.5, 0, M('gtceu:flux_tube_tether', 'gtceu:electrodynamic_tether'), 'Flux-Tube Tether', {
-          kind: 'ours', from: ['spool', 'argon'],
+          kind: 'ours', pkg: 'B7T', from: ['spool', 'argon'], sub: 'Io orbit only: 65,536 EU/t a spool cell, two cells, 131,072 EU/t',
           desc: 'A bare tether through Jupiter\'s plasma torus drives a current, paid for by the planet\'s spin. Its power goes into the network.',
+        }),
+        n('siWater', 0, -0.75, F('minecraft:water'), 'Water', { kind: 'raw', pkg: 'B7S', sub: 'Europa\'s, carried over' }),
+        n('siAcid', 0, 0.75, F('gtceu:sulfuric_acid'), 'Sulfuric Acid', { kind: 'raw', pkg: 'B7S', sub: 'A 2,000 mB charge: it stays in' }),
+        n('siIodine', 0, 2.25, I('gtceu:iodine_dust'), 'Iodine', { kind: 'raw', pkg: 'B7S', sub: 'A charge of eight dust: it stays in' }),
+        n('si', 2.5, 0.75, M('gtceu:sulfur_iodine_plant', 'gtceu:thermochemical_hydrogen'), 'Sulfur-Iodine Plant', {
+          kind: 'ours', pkg: 'B7S', from: ['siWater', 'siAcid', 'siIodine'], sub: 'On Io only: 30 EU/t, up to four decomposer modules at once',
+          desc: 'Io\'s heat splits the acid, and the iodine carries the hydrogen out of the loop. The acid and the iodine go round, so only the water is used up.',
+        }),
+        n('siH2', 5, 0, F('gtceu:hydrogen'), 'Hydrogen', {
+          kind: 'product', pkg: 'B7S', from: ['si'], sub: '2,000 mB for each 1,000 mB of water: the naquadah plant, the Mk1, the culture',
+        }),
+        n('siO2', 5, 1.5, F('gtceu:oxygen'), 'Oxygen', {
+          kind: 'by', pkg: 'B7S', from: ['si'], end: 'home', sub: '1,000 mB a run, home for the engines and the chemistry',
         }),
       ],
     },

@@ -828,6 +828,11 @@ Every recipe has a programmed circuit (c*n*) or an input that no other recipe of
   - IV: GCYR's aramid;
   - LuV: the Whipple casing.
 - **Source:** real: Sanmartín, Lorenzini and others, *Bare-tether power generation and propulsion at Jupiter* (2005–2008); the Io flux tube (Bigg, 1964; Voyager).
+- **As built (B7):**
+  - One switch: `tables/stations.json` (`lib/stations.js`). The tether is registered only in its mode (`enabled` true, `second` = `grindless:io_orbit`); in the `pending` mode (S0-3 not concluded) neither 16 nor 16b is registered, and the spool stays hidden (its hidden-table group says `unless: tether`).
+  - 5×15×5: a 5×5×5 deployer with station truss edges and radiation vault faces (1–4 dynamo or wireless dynamo hatches, 1 input bus), two reels of three tungstensteel gearboxes inside, an input hatch on the roof as the hollow-cathode port, and a 10-block aluminium-frame stub from the roof's centre.
+  - The two reels are two parallels through `lib/generators.js`: 65,536 EU/t each, 131,072 on a 4 A LuV hatch. Each reel takes 25 mB argon and a spool at 28/10,000 a run: one spool an hour at full power. Recipe `grindless:electrodynamic_tether/plasma_torus`, only in the second station's orbit.
+  - Controller: `MSM / CHC / C C` (motors, sensor, LuV circuits, hull); the magnet works already uses `CSC / MHM / C C`.
 
 ### 16b. If a second station fails: Io sulfur–iodine hydrogen plant: `gtceu:sulfur_iodine_plant`, type `gtceu:thermochemical_hydrogen` (Io)
 
@@ -864,6 +869,9 @@ This plant takes slot 16 only if spike S0-3 shows that a second station can't be
   - MV: iodine from kelp (`gtceu:chemical_reactor/iodine`);
   - LuV: Europa's water, Io's heat, and the hydrogen of mode 2 and fusion.
 - **Source:** real: the sulfur–iodine cycle (General Atomics; JAEA's continuous run, 2019).
+- **As built (B7, written and registered only when `tables/stations.json` has `second: null`):**
+  - 11×14×5: a 5×5 of magma under a tungstensteel firebox hot plate; a vault room (1–2 energy hatches, 1–2 input buses, 1–3 input and output hatches); a 3×3×3 Bunsen reactor of PTFE inert casing under a 3×3×6 HI column (inert casing round a PTFE pipe casing core); four 3×3×3 robust tungstensteel decomposer slots, the first required.
+  - One parallel per complete module, counted in the world at every run start, capped by the energy hatches' voltage; no overclock. Recipe `grindless:thermochemical_hydrogen/sulfur_iodine`; controller `PSP / CHC / C C`.
 
 ### 17. Cryobot: `gtceu:cryobot`, type `gtceu:vein_drilling` (vein drill step 7b; Europa)
 

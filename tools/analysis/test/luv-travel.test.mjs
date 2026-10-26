@@ -242,7 +242,7 @@ test('B1\'s hiding rule is gone; the station pieces wait for S0-3 behind station
   assert.equal(hidden.includes('"grindless:asteroid_quantum_seed"'), hidden.includes('"material":"meteoric_iron"'));
   assert.equal(STATIONS.enabled, false, 'flip only after S0-3 passes natively');
   assert.equal(STATIONS.first, ORBITS.earth);
-  assert.ok(ORBITS.dimensions.includes(STATIONS.second));
+  assert.ok(STATIONS.second === null || ORBITS.dimensions.includes(STATIONS.second), 'second is null (B7\'s fallback) or an orbit');
   for (const id of STATIONS.pieces) assert.ok(IDS.items.includes(id), id);
   assert.equal(hidden.includes('"gcyr:keycard"'), !STATIONS.enabled, 'the keycard shows exactly when the stations do');
 });

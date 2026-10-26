@@ -91,9 +91,13 @@ export function buildModel(chapters = ALL) {
   }
   // resolve links and dependencies
   const eraBook = new Map();
+  // GG_QUESTS_ERA_DIR: a folder whose <chapter>.snbt stands in for the book's (the tests draw a chart for another
+  // tables/stations.json against the luv_age generated for it)
+  const eraDir = process.env.GG_QUESTS_ERA_DIR;
   const eraQuest = (chapter, id) => {
     if (!eraBook.has(chapter)) {
-      const file = path.join(BOOK, 'chapters', chapter + '.snbt');
+      const over = eraDir && path.join(eraDir, chapter + '.snbt');
+      const file = over && fs.existsSync(over) ? over : path.join(BOOK, 'chapters', chapter + '.snbt');
       const quests = new Map();
       if (fs.existsSync(file)) {
         for (const q of parseSnbt(fs.readFileSync(file, 'utf8')).quests || []) {

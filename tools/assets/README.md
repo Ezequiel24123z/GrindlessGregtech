@@ -60,7 +60,7 @@ Generators for the pack's own textures. Everything is procedural 16x16 pixel art
 | `Build-EuropaTextures.ps1` | Writes the faces of the LuV Europa machines (LuV-B8): the cryobot and the algae bioreactor (`multiblock/cryobot/`, `multiblock/algae_bioreactor/`). `-Only cryobot,algae_bioreactor` and `-Credits` (their 10 CREDITS rows). |
 
 | `Build-AsteroidBeltTextures.ps1` | Writes the faces of the LuV asteroid belt machines (LuV-B5): the harpoon anchor drill, the asteroid processor and the optical miner (`multiblock/harpoon_anchor_drill/`, `multiblock/asteroid_processor/`, `multiblock/optical_miner/`). `-Only drill,processor,miner`, `-Preview <png outside the repo>` and `-Credits` (their 15 CREDITS rows). |
-## Regenerate
+| `Build-IoOrbitTextures.ps1` | Writes the faces of the LuV Io orbit machines (LuV-B7): the flux-tube tether and the sulfur-iodine plant (`multiblock/flux_tube_tether/`, `multiblock/sulfur_iodine_plant/`). Static faces; it fails if an emissive pixel is not in the colour layer. |## Regenerate
 
 Run from the repo root. `-ExecutionPolicy Bypass` only affects that process (Windows PowerShell 5.1 blocks unsigned scripts by default).
 
@@ -798,6 +798,23 @@ powershell -NoProfile -ExecutionPolicy Bypass -File tools\assets\Build-EuropaTex
 | `block/multiblock/algae_bioreactor/overlay_front.png` | Idle: three tubes of clear pale medium between dark LED strips; the bar empty, the indicator and run lamps dark. |
 | `.../overlay_front_active.png` + `.mcmeta` | 8 frames, `frametime` 4: the shimmering green culture with a bubble rising in each tube out of step, the LED strips lit pink and warm white, the harvest bar filling, and the indicator and run lamps lit. |
 | `.../overlay_front_active_emissive.png` + `.mcmeta` | Only the LED strips, the lit bar cells and the two lamps. |
+
+### Io orbit: flux-tube tether and sulfur-iodine plant (LuV-B7)
+
+Two static faces (one frame each, no `.mcmeta`), drawn with `Write-Map` like the Io surface faces. The tether's face has a light grey frame for the station truss casing; the plant's a darker grey frame for the radiation vault casing. Each face's palette and map sit together in the script; any new light is set with `Set-Glow`, which writes the same pixel to both layers.
+
+```powershell
+powershell -NoProfile -ExecutionPolicy Bypass -File tools\assets\Build-IoOrbitTextures.ps1
+```
+
+| File (under `textures/`) | Notes |
+|---|---|
+| `block/multiblock/flux_tube_tether/overlay_front.png` | Idle: a copper-wound reel on its stand paying a silver wire from its side over a sheave down into the dark violet plasma torus; the hollow-cathode emitter under the reel is dark. |
+| `.../overlay_front_active.png` | Current runs down the wire in violet and white pulses, the cathode's orifice glows cyan with a violet plume, and the torus sparks where the wire meets it. |
+| `.../overlay_front_active_emissive.png` | Only the wire, the cathode and its plume, and the spark. |
+| `block/multiblock/sulfur_iodine_plant/overlay_front.png` | Idle: a steel column with a violet iodine band at the top, a yellow sulfur band and the dark HI sections, a feed pipe on the left, the hydrogen outlet and its dark lamp on the right, over a cold vertical-slot heat grille. |
+| `.../overlay_front_active.png` | The grille glows orange from the volcanic heat, the HI sections glow and bubble, and the hydrogen lamp is lit green. |
+| `.../overlay_front_active_emissive.png` | Only the grille's slots, the HI sections with their bubbles and the hydrogen lamp. |
 
 ## Contrast pass after the gallery test (2026-10-25)
 

@@ -10,8 +10,9 @@
 //
 // Usage: node tools/quests/luv-chapter/gen.mjs [--all] [--out <file>] [--pending]
 //   --all      pretend every package has landed (the draft of the finished chapter; use with --out for a preview)
-//   --out      write somewhere else than the book
+//   --out      write somewhere else than the book ("-": print the chapter on stdout, the summary on stderr)
 //   --pending  print the left-out quests and the ids they wait for, by package
+// S03, B7T and B7S in LANDED follow tables/stations.json (../luv-stations.mjs; GG_STATIONS_TABLE injects another table for tests).
 import fs from 'node:fs';
 import path from 'node:path';
 import crypto from 'node:crypto';
@@ -161,6 +162,13 @@ const lines = [
   '\ttitle: ' + str(CHAPTER.title),
   '}',
 ];
-fs.writeFileSync(out, lines.join('\n') + '\n', { encoding: 'utf8' });
+const text = lines.join('\n') + '\n';
 const deps = shown.reduce((n, q) => n + q.depIds.length, 0);
-console.log(`wrote ${out}: ${shown.length} quests, ${deps} dependencies (${QUESTS.length - shown.length} waiting for their package)`);
+const summary = `${shown.length} quests, ${deps} dependencies (${QUESTS.length - shown.length} waiting for their package)`;
+if (outArg >= 0 && args[outArg + 1] === '-') {
+  process.stdout.write(text);
+  console.error('luv_age: ' + summary);
+} else {
+  fs.writeFileSync(out, text, { encoding: 'utf8' });
+  console.log(`wrote ${out}: ${summary}`);
+}

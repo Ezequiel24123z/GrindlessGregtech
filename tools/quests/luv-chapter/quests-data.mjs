@@ -7,6 +7,8 @@
 // Packages (docs/eras/luv.md, "Build order"): a quest is in the book only when every package in its `pkg` is in LANDED. When the
 // coordinator merges a package, add it to LANDED, check the quest's ids against what the package registered, run gen.mjs and the
 // linter. `adjust` marks quests already in the book that a package may change (gen.mjs --pending lists both).
+import { STATION_PACKAGES } from '../luv-stations.mjs';
+
 const it = (item, count) => ({ type: 'item', item, count });
 const dim = (dimension) => ({ type: 'dimension', dimension });
 const ck = () => ({ type: 'checkmark' });
@@ -15,8 +17,11 @@ const ri = (item, count) => ({ type: 'item', item, count });
 
 // S03 is spike S0-3: GCYR stations (tables/stations.json enabled); Earth orbit, its machines and what needs their products wait for it.
 // B7 is one of two: the flux-tube tether with a second station (B7T) or the sulfur-iodine plant on Io (B7S), decided by spike S0-3.
+// S03, B7T and B7S are not listed by hand: they follow tables/stations.json (../luv-stations.mjs, the rule of lib/stations.js). After
+// the table flips, regenerate luv_age, pl_luv and power and lint (docs/quests.md, section 14).
 export const PACKAGES = ['A1', 'A2', 'A3', 'A4', 'A5', 'B1', 'S03', 'B2', 'B3', 'B4', 'B5', 'B6', 'B7T', 'B7S', 'B8', 'B9', 'B10'];
-export const LANDED = ['A1', 'A2', 'A3', 'A4', 'A5', 'B1', 'B2', 'B3', 'B4', 'B5', 'B6', 'B8', 'B9', 'B10'];
+const STATIC = ['A1', 'A2', 'A3', 'A4', 'A5', 'B1', 'B2', 'B3', 'B4', 'B5', 'B6', 'B8', 'B9', 'B10'];
+export const LANDED = PACKAGES.filter((p) => STATIC.includes(p) || STATION_PACKAGES.includes(p));
 // what gen.mjs --all draws: everything, with the tether
 export const ALL_STATE = PACKAGES.filter((p) => p !== 'B7S');
 
