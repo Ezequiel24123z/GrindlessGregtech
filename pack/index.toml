@@ -3354,7 +3354,7 @@ hash = "701ca39f3689e63463585df05d35d93a7535d8f54699e360c227d52454c4d61b"
 
 [[files]]
 file = "kubejs/server_scripts/grindless/luv/io_surface.js"
-hash = "6924a5b8c193866c890edf430d57181d88147274faab1512ab4ca4c2226443dd"
+hash = "764df2ce762bf13f2d642e442a0d6bbd7efdf2541d522aaacf872b1f172339a7"
 
 [[files]]
 file = "kubejs/server_scripts/grindless/luv/orbital_biology.js"
