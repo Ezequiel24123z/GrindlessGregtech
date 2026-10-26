@@ -72,6 +72,7 @@
     { "id": "luv_ganymede", "x": [17664, 17727], "tests": ["luv_ganymede"], "note": "S0-7, buried L. On Ganymede (G.places.surface('ganymede')) Y 198-214 (rows at Y 200-204), or, where the ground under the two machines reaches Y 200, five rows from one block above the highest ground" },
     { "id": "luv_fusion", "x": [17920, 17983], "tests": ["luv_fusion"], "note": "the Mk1 at X 17925-17939, the HPCA and the research station at X 17950+" },
     { "id": "luv_travel_b1", "x": [18176, 18239], "tests": ["luv_b1"], "note": "the level 4 rocket's scanner pad at X 18180-18182, Z 4-8; on each new surface (belt, Io, Europa, Ganymede) the same X and Z at Y 198-214, read only (one generated chunk, X 18176-18191, Z 0-15)" },
+    { "id": "zpm_travel_b1", "x": [21504, 21567], "z": [0, 15], "tests": ["zpm_travel"], "note": "client. Overworld Y 98-112: the level 5 (Saturn) and level 6 (Uranus) rocket scanner pads at X 21506-21508 and X 21522-21524, Z 9-14; the player only rides to the target dimensions" },
     { "id": "luv_io_orbit_b7", "x": [18432, 18495], "tests": ["luv_io_orbit"], "note": "flux-tube tether or sulfur-iodine plant; Io orbit (tables/stations.json second) and Io (G.places.surface('io')) the same X and Z at Y 198-214" },
     { "id": "chests_and_furnaces", "x": [18688, 18751], "tests": ["chest_furnace"], "note": "client; uses X 18688-18703, Z 0-15, Y 98-112" },
     { "id": "zpm_s0", "x": [18944, 19007], "tests": ["zpm_s0"], "note": "ZPM-S0 disposable spikes: Mk1/Mk2 fusion at Z 0-40, LuV wireless tower at X 18960" },

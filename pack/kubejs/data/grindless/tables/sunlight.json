@@ -16,6 +16,8 @@
     "gcyr:mercury": { "factor": 6.7, "when": "day", "status": "as_built", "era": "iv", "distanceAU": 0.387, "note": "the rule would give 9.3" },
     "gcyr:venus": { "factor": null, "when": "never", "status": "no_solar", "note": "no solar machine: Venus has the heat engine" },
     "gcyr:overworld_orbit": { "factor": 1.4, "when": "always", "status": "new", "era": "luv", "distanceAU": 1.0, "note": "sky exposure only (fixed_time 18000)" },
+    "grindless:saturn_orbit": { "factor": 0.015, "when": "always", "status": "new", "era": "zpm", "distanceAU": 9.58, "note": "sky exposure only; the row exists to stop accidental solar builds (docs/eras/zpm.md)" },
+    "grindless:uranus_orbit": { "factor": 0.0038, "when": "always", "status": "new", "era": "zpm", "distanceAU": 19.2, "note": "sky exposure only; the row exists to stop accidental solar builds (docs/eras/zpm.md)" },
     "grindless:asteroid_belt": { "factor": 0.19, "when": "day", "status": "new", "era": "luv", "distanceAU": 2.7, "note": "1.4 / 2.7^2; id final after spike S0-1" },
     "grindless:io": { "factor": 0.052, "when": "day", "status": "new", "era": "luv", "distanceAU": 5.2, "note": "1.4 / 5.2^2; id final after spike S0-1" },
     "grindless:europa": { "factor": 0.052, "when": "day", "status": "new", "era": "luv", "distanceAU": 5.2, "note": "1.4 / 5.2^2; id final after spike S0-1" },
