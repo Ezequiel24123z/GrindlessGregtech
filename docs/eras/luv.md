@@ -1302,6 +1302,7 @@ The ten-minute run of every base, untouched, lives only in the bench's integrati
 - **Model:**
   - our generator types are EU sources into the wireless network (`gtceu:orbital_solar`, `gtceu:volcanic_heat`, `gtceu:electrodynamic_tether`);
   - the network's tier is a synthetic step: LuV when the SMES cells exist.
+- **As built (C1):** `tools/analysis/tiers/luv.json`, with seven substages (`luv`, `luv-orbit`, `luv-belt`, then `luv-io`, `luv-europa` and `luv-ganymede` as siblings, then `luv-io-orbit`; the way to the moons is crafted after the belt). Dimension ids come from `tables/orbits.json` and `tables/places.json`. Each package's targets warn until a dump carries it (`packages`), so the config holds the whole design before every package lands. Mode 2 on two IV hatches is in `tiers/iv.json`.
 
 ## Mods and integration
 
