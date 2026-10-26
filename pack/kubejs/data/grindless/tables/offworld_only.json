@@ -6,7 +6,7 @@
     "strip: server_scripts/grindless/moon/offworld_only.js removes these recipes and adds them back with GTM's builder, the same inputs, chances, energy and time, without the listed outputs. The new id is grindless:<type>/offworld_only/<old path>. Destinations of what is left: unchanged. (Greate's copies of GT recipes follow: integration/greate.js only keeps copies of GT recipes that are loaded and unchanged.) A plant that composes these recipes reads them without the same outputs: the EV platinum plant (server_scripts/grindless/ev/platinum_plant.js) applies every strip entry of its stages when it reads them.",
     "remove: recipes whose only purpose is a resource of another world. They go away.",
     "combs: worlds.<world>.combs are Productive Bees combs whose GT centrifuge recipe (integration/productivebees.js) only runs in worlds.<world>.dimension: the bees can live on Earth, but their titanium only comes out on the Moon and their tungsten only on Mars. Mercury has none: the osmium comb has no recipe for good, and the iridium comb none either (integration/productivebees.js, item 7).",
-    "watched: worlds.<world>.watched is what the smoke tests (tools/test/overlay/kubejs/server_scripts/gg_test_moon.js; Mercury's also gg_test_naquadah_plant.js) look for. Every stripped recipe must be gone and its replacement must exist without the outputs, and no recipe of the loaded pack may give a watched output from inputs that hold none (inputPattern; heavy water, tritiated or concentrated too, carries the Martian deuterium), except recipes that only run off Earth (a dimension condition of another world), recycling, and the late lines named in allowedLate."
+    "watched: worlds.<world>.watched is what the smoke tests (tools/test/overlay/kubejs/server_scripts/gg_test_moon.js; Mercury's also gg_test_naquadah_plant.js) look for. Every stripped recipe must be gone and its replacement must exist without the outputs, and no recipe of the loaded pack may give a watched output from inputs that hold none (inputPattern; heavy water, tritiated or concentrated too, carries the Martian deuterium; from LuV the asteroid belt's grindless:asteroid_pgm_concentrate carries iridium and osmium, the platinum plant's mode 4), except recipes that only run off Earth (a dimension condition of another world), recycling, and the late lines named in allowedLate."
   ],
   "worlds": {
     "moon": {
@@ -33,7 +33,7 @@
       "watched": {
         "items": ["gtceu:rarest_metal_mixture_dust", "gtceu:small_rarest_metal_mixture_dust", "gtceu:tiny_rarest_metal_mixture_dust", "gtceu:iridium_metal_residue_dust", "gtceu:small_iridium_metal_residue_dust", "gtceu:tiny_iridium_metal_residue_dust", "gtceu:iridium_dust", "gtceu:small_iridium_dust", "gtceu:tiny_iridium_dust", "gtceu:iridium_ingot", "gtceu:raw_iridium", "gtceu:osmium_dust", "gtceu:small_osmium_dust", "gtceu:tiny_osmium_dust", "gtceu:osmium_ingot", "gtceu:raw_osmium", "gtceu:iridosmine_dust", "gtceu:raw_iridosmine"],
         "fluids": ["gtceu:osmium_tetroxide", "gtceu:iridium", "gtceu:osmium"],
-        "inputPattern": "iridosmine|rarest_metal|iridium|osmium"
+        "inputPattern": "iridosmine|rarest_metal|iridium|osmium|asteroid_pgm"
       }
     }
   },

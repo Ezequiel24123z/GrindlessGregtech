@@ -7,10 +7,10 @@
 // Trimmed from the full scratch test of 2026-10-24 (39 PASS: the generator checked a second way against the loose line, the overclock with
 // two hatches, the whole line chained, the ME hatches, the electrode used up for certain). What is left proves the mechanism on today's pack:
 //   ev_platinum_plant|registration   recipe type gtceu:pgm_refining with its IO sizes, and the machine
-//   ev_platinum_plant|counts         6 recipes (2 attack + 3 separation + IV's iridosmine) built from the 40 stages of GT--'s live line
-//                                    (31 for EV, 9 for the iridium and osmium of mode 3, whose first stage is IV-B2's fusion, read from
-//                                    global.grindless.mercury.fusion), none skipped, each in the recipe manager under its final id
-//                                    (grindless:pgm_refining/<ev|iv>/<name>: GTM's builder puts the type in front)
+//   ev_platinum_plant|counts         7 recipes (2 attack + 3 separation + IV's iridosmine + LuV's asteroid) built from the 40 stages of GT--'s live line
+//                                    (31 for EV, 9 for the iridium and osmium of modes 3 and 4, whose first stages are IV-B2's fusion, read from
+//                                    global.grindless.mercury.fusion, and LuV A2's virtual asteroid opening), none skipped, each in the recipe
+//                                    manager under its final id (grindless:pgm_refining/<ev|iv|luv>/<name>: GTM's builder puts the type in front)
 //   ev_platinum_plant|figures        every recipe the script built has the inputs, outputs, chances, duration and EU/t it had on 2026-10-24
 //                                    (the loose line has not changed under the plant; mode 3 since 2026-10-25, IV-B3, which also moved the
 //                                    plant onto server_scripts/grindless/lib/compose.js with the same results), and its live recipe in the
@@ -22,7 +22,7 @@
 //   platinum_plant|PROCESS_no_electrode         the same ore without the electrode: nothing runs (the plant's condition)
 //   platinum_plant|PROCESS_rhodium_ruthenium    a separation: the widest recipe of the type (7 items with the circuit, 3 fluids in,
 //                                               8 item outputs since the rarest metal mixture left it, 4 fluids out)
-//   platinum_plant|LOOKUP                       GTM's recipe lookup reaches all six recipes from their inputs
+//   platinum_plant|LOOKUP                       GTM's recipe lookup reaches every recipe of the plant (seven since LuV A2) from its inputs
 //   ev_platinum_plant|DONE                      last line
 //
 // TEST AREA: this test builds, force-loads and clears ONLY its own band of the overworld, X 5888-5951, Y 98-112, Z 0-15 (tests run at the
@@ -278,11 +278,14 @@
     var attack = PP.recipes.filter(function (p) { return p.mode === 'attack' })
     var sep = PP.recipes.filter(function (p) { return p.mode === 'separation' })
     var iri = PP.recipes.filter(function (p) { return p.mode === 'iridosmine' })
+    var ast = PP.recipes.filter(function (p) { return p.mode === 'asteroid' })
     var have = recipeCount(TYPE_ID)
     var absent = PP.recipes.filter(function (p) { return liveRecipe(p.recipeId) === null }).map(function (p) { return p.recipeId })
-    check(SCOPE, 'counts', attack.length === 2 && sep.length === 3 && iri.length === 1 && PP.skipped.length === 0 && PP.stages === STAGE_COUNT && have === 6 &&
-      absent.length === 0,
-      'pgm_refining=' + have + ' (' + attack.length + ' attack + ' + sep.length + ' separation + ' + iri.length + ' iridosmine) from ' + PP.stages +
+    // LuV A2's mode 4 (asteroid) adds a 7th recipe and no live stage (its opening is virtual, its chain is mode 3's)
+    check(SCOPE, 'counts', attack.length === 2 && sep.length === 3 && iri.length === 1 && ast.length === 1 && PP.skipped.length === 0 &&
+      PP.stages === STAGE_COUNT && have === 7 && absent.length === 0,
+      'pgm_refining=' + have + ' (' + attack.length + ' attack + ' + sep.length + ' separation + ' + iri.length + ' iridosmine + ' + ast.length + ' asteroid) from ' +
+      PP.stages +
       ' stages of the live line (want ' + STAGE_COUNT + '), skipped=' + PP.skipped.length +
       (PP.skipped.length > 0 ? ' (' + PP.skipped.map(function (s) { return s.name + ': ' + s.reason }).join('; ') + ')' : '') +
       ' ids=' + PP.recipes.map(function (p) { return p.recipeId }).join(',') + (absent.length > 0 ? ' not in the recipe manager=' + absent.join(',') : ''))

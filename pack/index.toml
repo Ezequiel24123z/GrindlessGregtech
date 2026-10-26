@@ -2158,7 +2158,7 @@ hash = "e01bf44580b0dcd57b464d9cffa04e9f97f7bd94023df5424d10a1b26cf6eeec"
 
 [[files]]
 file = "kubejs/client_scripts/grindless/ev_platinum_plant_lang.js"
-hash = "2fdd83b23c6d9bf4b938c8e64ee8bd38cbcc54dd4bf0322e1944a069a8b8af9f"
+hash = "66442f2347da04d70e7da97146b6fe2e94715bb2a372b2bff4f824212c2e5667"
 
 [[files]]
 file = "kubejs/client_scripts/grindless/ev_regolith_cell_lang.js"
@@ -2210,7 +2210,7 @@ hash = "6e3d826e7fdc8a0539db77337cfea39b2d280b43edaa01640a3b9d2778237df5"
 
 [[files]]
 file = "kubejs/client_scripts/grindless/iv_mass_production_lang.js"
-hash = "3ff565a0dc50830cc12cda5395c3af26835b7a1490fc1e15b04111a63530fc30"
+hash = "66f28f77853440fcea9ab288f11a71589a189fb8b729e3fccf447980443e5e3d"
 
 [[files]]
 file = "kubejs/client_scripts/grindless/iv_mercury_lang.js"
@@ -2218,7 +2218,7 @@ hash = "9118bc07f4eb9e064d48856e0d817a82f3ae11bdb89edde055543cd9aacd1049"
 
 [[files]]
 file = "kubejs/client_scripts/grindless/iv_naquadah_plant_lang.js"
-hash = "7465c6e41ccd27f62f1841600726602d6c58c29f39f2f010e195b61fc1358138"
+hash = "02d9af0c54eb66848bd7096c2f896e931d5125c65abf430e4608dfa68859992a"
 
 [[files]]
 file = "kubejs/client_scripts/grindless/iv_travel_network_lang.js"
@@ -2353,6 +2353,10 @@ file = "kubejs/data/grindless/tables/ae2_gt.json"
 hash = "7eaa8fc6122b00a8b59e680d5bea222ef9bc0b903a0fcfdc9bba69b9dcab060e"
 
 [[files]]
+file = "kubejs/data/grindless/tables/asteroid_pgm.json"
+hash = "7fc327765b88faccc080590719c6e4f370dcf83ab89d22dbf584032c5e593c45"
+
+[[files]]
 file = "kubejs/data/grindless/tables/chest_furnace_tiers.json"
 hash = "5da688f7bfcbaa1e59fb19e39b1967946ae9d6780b9a61c131fdabc73dddaafa"
 
@@ -2382,11 +2386,11 @@ hash = "0f8a4b87c41ba2e9d47292f5b434dbe910b2f027ff2a5fd11a6eef9434b40df3"
 
 [[files]]
 file = "kubejs/data/grindless/tables/naquadah_plant.json"
-hash = "dce5edcfe854f34fd201cd86e9ec4e0806312af0ab0263b9f04a303b6d51a16c"
+hash = "d727b8c8d98d7ff99d93dc84a9cde268394b3e4218167a921cbd09fc81051ae8"
 
 [[files]]
 file = "kubejs/data/grindless/tables/offworld_only.json"
-hash = "e636eaeb9d5069d81e724449a81a0fe79d0db930c02d5ff4923ebf75dcfb497a"
+hash = "67a7297880c3f098cbc88440a691b8ebd9e356459cda7d0f270edeb653c5bdaa"
 
 [[files]]
 file = "kubejs/data/grindless/tables/planets.json"
@@ -2506,7 +2510,7 @@ hash = "310990e5aafd21c2794883baddba5315700e9f4f342d6e27158c8cd57238798a"
 
 [[files]]
 file = "kubejs/server_scripts/grindless/ev/platinum_plant.js"
-hash = "9dd91866f1810a973039705747836b20f5fc1d4022cd9f07fcc759a0bdbd4786"
+hash = "9d939327ce9f67c9b6872b870faa2eaad8ab526e22f80ffb1461db5127beee8b"
 
 [[files]]
 file = "kubejs/server_scripts/grindless/ev/quantum_eye_gate.js"
@@ -2678,7 +2682,7 @@ hash = "3cc42c05b67441f74975d2e935a462a240ea69f93fb52a7d09f43f92468ba1cc"
 
 [[files]]
 file = "kubejs/server_scripts/grindless/iv/naquadah_plant.js"
-hash = "29df535f107c319104c38d1a03fe6785ae4dc182083b0d32844a66b280f9e4e2"
+hash = "7571f8c639ce4b6bc01269ae468c7c04196044508d6b9ded3336deaee5eaa854"
 
 [[files]]
 file = "kubejs/server_scripts/grindless/iv/travel_network.js"
@@ -2702,7 +2706,7 @@ hash = "1bb8ba4124d273fec1c5ce028783272b7520090b17bc1865d99299d2275597ce"
 
 [[files]]
 file = "kubejs/server_scripts/grindless/lib/compose.js"
-hash = "1b43f1ba52147e7c2b4a3c32b13ffe5513ec1384e9d844b5e908ae44fb39a236"
+hash = "413f8f2d4ed6b2e0e4afff2796582d77c7cab1eac05892b0092fc722841a037a"
 
 [[files]]
 file = "kubejs/server_scripts/grindless/lib/wireless_adapters.js"
@@ -2910,7 +2914,7 @@ hash = "04104cf2b9f70cc12396ef38bca6c0f0927001dcb0fd7192f17ef9006f70cc82"
 
 [[files]]
 file = "kubejs/startup_scripts/grindless/ev/platinum_plant.js"
-hash = "c4be293de4f0ad2b83fd97483f544112504d97f329cac744ad54bc6d9ead2aaf"
+hash = "2e4f9632ea0630e3e7b27de9d1fd3cbc5a3edb95a27c70898a34435221eda6f3"
 
 [[files]]
 file = "kubejs/startup_scripts/grindless/ev/regolith_cell.js"
@@ -2978,7 +2982,7 @@ hash = "629a43b00a5b985f32a965e008b676eaed7e2937df0cd7133c2ce8c51da108ad"
 
 [[files]]
 file = "kubejs/startup_scripts/grindless/iv/naquadah_plant.js"
-hash = "edcdc3f18fd43c076e3fd37f46088a4afb9ea5e85431d53847d7d4a630739fe2"
+hash = "7c1797060c54d168147d8111a83108e3e9e3662da67b5e240d7deba74e188fa3"
 
 [[files]]
 file = "kubejs/startup_scripts/grindless/iv/travel_network.js"
@@ -3030,7 +3034,7 @@ hash = "32eb1b738b49074eff262301269d6d4c2bb6e82a4c0f3e25d0eda88524ca67b7"
 
 [[files]]
 file = "kubejs/startup_scripts/grindless/lib/parallel_hatch.js"
-hash = "26c65a335d6446850a658ba0be3be8b1effa16439b2fa2de14286568d17a92be"
+hash = "f2f4d1384e9b8d13c450c4baae08a39050f64c79cf9633c1b02ecb5c7239789f"
 
 [[files]]
 file = "kubejs/startup_scripts/grindless/lib/patterns.js"

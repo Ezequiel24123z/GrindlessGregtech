@@ -12,7 +12,15 @@
 //                                                      titanium trifluoride reduced to titanium with the HF back. 4 naquadah oxide
 //                                                      mixture + 15 antimony trioxide + 40,500 mB HF -> 2 naquadah dust, half a
 //                                                      titanium ingot and half a gallium dust (chanced), hydrogen and water.
-//                              Mode 2 (enriched naquadah, circuit 2) is LuV and not built here.
+//                                circuit 2  enriched_naquadah   (LuV, package A2; docs/eras/luv.md "Naquadah plant, mode 2") GT--'s
+//                                                      enriched line with full recovery: 4 enriched naquadah oxide mixture + fluorine,
+//                                                      hydrogen and sulfuric acid -> enriched naquadah sulfate, trinium sulfide, impure
+//                                                      naquadria solution, titanium and HF. Xenon, HSbF6, AuF3 and the Pd/C catalyst are
+//                                                      charges held in the hatches and the bus (the catalyst wears 1 % a batch).
+//                                circuit 3  spent_naquadah      (LuV) reactor III's spent rods, macerated: 6 naquadah dust through GT--'s
+//                                                      naquadah separation and the same line.
+//                              Modes 2 and 3 refuse voiding (their recipes carry the data boolean grindless_naquadah_keep): the
+//                              naquadria solution is contained and the trinium sulfide kept. Mode 1 may void.
 //
 // What it gains (rule 4): the hands-free neutron window and the superacid inside. GT--'s activator only turns the oxide into naquadah
 // while its neutron energy sits in a 10 MeV window, which the player keeps with accelerator hatches, a sensor and moderator dust; out
@@ -22,8 +30,10 @@
 // Machine class: GTM's plain electric multiblock (WorkableElectricMultiblockMachine), so its overclock is GTM's, after a parallel hatch's
 // copies when one sits in a part cell (lib/parallel_hatch.js, IV-B6's mechanism: the IV hatch runs up to 4 copies, each at the recipe's
 // EU/t, so 4 at once need LuV voltage, two IV energy hatches. GTM sizes the copies by every consumed input, the chanced Pu-Be source
-// included, so 4 copies want 4 sources in the bus; they are still used up only by chance). Nothing it makes in
-// IV must be contained (GTM's naquadah is not radioactive), so it does not refuse voiding; mode 2's naquadria solution (LuV) will.
+// included, so 4 copies want 4 sources in the bus; they are still used up only by chance). Nothing mode 1 makes must be contained
+// (GTM's naquadah is not radioactive), so it may void; modes 2 and 3 refuse it (lib/no_voiding.js as the modifier, around the parallel
+// hatch and the overclock, and in beforeWorking, only for the recipes that carry the keep key: the Venus acid works' precedent). The
+// LuV parallel hatch (x16) fits the same cell; mode 2 at x4 runs on two LuV hatches (each copy pays its 30,720 EU/t).
 //
 // Geometry (lib/patterns.js: slices back -> front, rows bottom -> top, columns left -> right seen from the front):
 //   columns 0-3, the superacid hall, 4 high and 5 deep: a floor, walls and a roof of inert casing; its edges (`X`) take the parts; a
@@ -57,15 +67,20 @@
 
   // the recipe data key: the EMI line gtceu.recipe.grindless_naquadah_plant.<recipe name>
   const DATA_KEY = 'grindless_naquadah_plant'
+  // the data boolean of the recipes that refuse voiding (modes 2 and 3)
+  const KEEP_KEY = 'grindless_naquadah_keep'
+  const NO_VOIDING = 'grindless.machine.naquadah_plant.no_voiding'
 
   // ---------------------------------------------------------------- published for the recipe script and the smoke test
 
   NP.machine = MACHINE
   NP.recipeType = 'gtceu:' + TYPE
   NP.table = TABLE
-  // items in: the oxide, the antimony trioxide, the Pu-Be source and the programmed circuit; out: naquadah, titanium and gallium.
-  // Fluids in: the HF; out: the hydrogen and the water
-  NP.maxIO = { itemsIn: 4, itemsOut: 3, fluidsIn: 1, fluidsOut: 2 }
+  // items in: the oxide or the naquadah, the antimony trioxide (mode 1), the Pu-Be source, the AuF3 and Pd/C charges (modes 2 and 3) and
+  // the programmed circuit; out: naquadah, enriched naquadah sulfate, trinium sulfide, titanium and gallium, each a whole amount and a
+  // chanced remainder (6 is mode 2's 5 with room for one more remainder). Fluids in: HF (mode 1); fluorine, hydrogen, sulfuric acid and
+  // the xenon and HSbF6 charges (modes 2 and 3); out: hydrogen and water (mode 1), impure naquadria solution and HF (modes 2 and 3)
+  NP.maxIO = { itemsIn: 5, itemsOut: 6, fluidsIn: 5, fluidsOut: 2 }
   NP.parts = {
     energy_input: { min: 1, max: 2 },
     input_bus: { min: 1, max: 2 },
@@ -73,8 +88,10 @@
     input_hatch: { min: 1, max: 6 },
     output_hatch: { min: 1, max: 4 }
   }
-  NP.modes = { 1: 'naquadah' }
+  NP.modes = { 1: 'naquadah', 2: 'enriched_naquadah', 3: 'spent_naquadah' }
   NP.dataKey = DATA_KEY
+  NP.keepKey = KEEP_KEY
+  NP.noVoiding = NO_VOIDING
   NP.blocks = { casing: INERT, vessel: VESSEL, shield: SHIELD, window: WINDOW, holder: HOLDER }
 
   // ---------------------------------------------------------------- pattern
@@ -124,6 +141,15 @@
     }
   }
 
+  // true for the recipes that refuse voiding (modes 2 and 3)
+  function keeps(recipe) {
+    try {
+      return recipe.data.getBoolean(KEEP_KEY) === true
+    } catch (e) {
+      return false
+    }
+  }
+
   // ---------------------------------------------------------------- recipe type
 
   GTCEuStartupEvents.registry('gtceu:recipe_type', function (event) {
@@ -144,17 +170,30 @@
 
     Pat.register(MACHINE, SPEC)
 
+    // a parallel hatch's copies, then GTM's default overclock (IV-B6's helper; without a hatch, the overclock alone). Modes 2 and 3 refuse
+    // voiding first; registered with alwaysTryModifyRecipe, so GTM re-applies it when each run ends, and beforeWorking refuses a cached
+    // restart (AGENTS.md, "A modifier alone doesn't stop a run")
+    var parallelThenOverclock = G.parallelHatch.modifier(G.parallelHatch.overclock)
+    var keep = { which: 'both', reason: NO_VOIDING, name: 'naquadah plant' }
+    var keepModifier = G.noVoiding.modifier(keep, parallelThenOverclock)
+    var keepStart = G.noVoiding.beforeWorking(keep)
+
     event.create('naquadah_plant', 'multiblock')
       .langValue('Naquadah Plant')
       .rotationState(RotationState.NON_Y_AXIS)
       .recipeType(TYPE)
-      // a parallel hatch's copies, then GTM's default overclock (IV-B6's helper; without a hatch, the overclock alone)
-      .recipeModifier(G.parallelHatch.modifier(G.parallelHatch.overclock))
+      .recipeModifier(function (machine, recipe) {
+        return keeps(recipe) ? keepModifier(machine, recipe) : parallelThenOverclock(machine, recipe)
+      }, true)
+      .beforeWorking(function (machine, recipe) {
+        return keeps(recipe) ? keepStart(machine, recipe) : true
+      })
       .appearanceBlock(GTBlocks.CASING_PTFE_INERT)
       .pattern(function (def) { return Pat.build(def, SPEC) })
       ["tooltips(net.minecraft.network.chat.Component[])"]([
         Text.translate('grindless.machine.naquadah_plant.tooltip.0'),
         Text.translate('grindless.machine.naquadah_plant.tooltip.1'),
+        Text.translate('grindless.machine.naquadah_plant.tooltip.4'),
         Text.translate('grindless.machine.naquadah_plant.tooltip.2'),
         Text.translate('grindless.machine.naquadah_plant.tooltip.3'),
         Text.translate('grindless.machine.parallel_hatch.tooltip')
