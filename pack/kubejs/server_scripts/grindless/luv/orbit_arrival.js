@@ -12,6 +12,9 @@
   A.minimumY = 550
   A.stallTicks = 40
   var LAUNCH_SAMPLE_TICKS = 10
+  // Minecraft 1.20.1 DimensionType's legal Y range bounds every single-column scan.
+  var MIN_SCAN_Y = -2032
+  var MAX_SCAN_Y_EXCLUSIVE = 2032
   A.states = {}
   var LOG = '[grindless/orbit-arrival] '
   var Rocket = Java.loadClass('argent_matter.gcyr.common.entity.RocketEntity')
@@ -58,7 +61,6 @@
       Planets: Java.loadClass('argent_matter.gcyr.data.loader.PlanetData'),
       Capability: Java.loadClass('argent_matter.gcyr.api.capability.GCYRCapabilityHelper'),
       Pos: Java.loadClass('net.minecraft.core.BlockPos'),
-      Height: Java.loadClass('net.minecraft.world.level.levelgen.Heightmap$Types'),
       Context: Java.loadClass('net.minecraft.world.phys.shapes.CollisionContext'),
       Axis: Java.loadClass('net.minecraft.core.Direction$Axis'),
       Vec3: Java.loadClass('net.minecraft.world.phys.Vec3'),
@@ -231,6 +233,65 @@
     need(noCollision(level, entity, bounds) === true, 'blocked whole-box clearance')
   }
 
+  function stationColumn(level, origin, x, z) {
+    var j = java()
+    var originText = '[' + x + ',' + Number(origin.getY()) + ',' + z + ']'
+    var min = 'unread'
+    var max = 'unread'
+    var inspected = 0
+    var queryY = 'none'
+    var outcome = 'build-bounds-query-failed'
+    function detail() {
+      return 'columnOrigin=' + originText + ' minBuildHeight=' + min + ' maxBuildHeight=' + max +
+        ' blocksInspected=' + inspected + ' queryY=' + queryY + ' queryOutcome=' + outcome
+    }
+    function numericInput(value) {
+      var type = typeof value
+      if (value === null || (type !== 'number' && type !== 'object')) return false
+      var tag = Object.prototype.toString.call(value)
+      return tag !== '[object String]' && tag !== '[object Boolean]'
+    }
+    try {
+      min = level.getMinBuildHeight()
+      max = level.getMaxBuildHeight()
+      outcome = 'invalid-build-bounds'
+      // Keep the established native Number normalization, including wrapped Java Number
+      // returns. Reject null/undefined and string/boolean coercion defaults before converting.
+      need(numericInput(min) && numericInput(max), 'invalid column build bounds')
+      min = Number(min)
+      max = Number(max)
+      need(finite(min) && finite(max) && Math.floor(min) === min && Math.floor(max) === max &&
+        min >= MIN_SCAN_Y && max <= MAX_SCAN_Y_EXCLUSIVE && min < max,
+      'invalid column build bounds')
+      // Query ONLY the selected native X/Z, highest first. Neither a heightmap nor a lower
+      // colliding block may stand in for the actual highest non-air block.
+      // Deliberate: getBlockState may load this ONE selected-origin chunk. Do not use an
+      // unloaded-chunk/height query as proof of absence; failed queries are not all-air results.
+      for (var y = max - 1; y >= min; y--) {
+        queryY = y
+        outcome = 'block-query-failed'
+        var pos = new j.Pos(x, y, z)
+        var block = level.getBlockState(pos)
+        outcome = 'unreadable-block-state'
+        need(block !== null && block !== undefined, 'unreadable column block state')
+        outcome = 'air-query-failed'
+        var air = String(block.isAir())
+        outcome = 'unreadable-air-result'
+        need(air === 'true' || air === 'false', 'unreadable column air result')
+        inspected++
+        if (air === 'false') {
+          outcome = 'highest-non-air'
+          return { pos: pos, block: block, y: y, detail: detail() }
+        }
+      }
+      outcome = 'all-air'
+      throw new Error('no physical station column')
+    } catch (e) {
+      // Add query evidence, not a fallback/retry. "Inspected" counts successfully read air/non-air results.
+      throw new Error('station column scan failed ' + detail() + ' cause=' + e)
+    }
+  }
+
   function landing(rocket, level, target) {
     var j = java()
     var old = point(rocket)
@@ -239,34 +300,26 @@
     var z = Number(target.origin.getZ())
     // Native station arrivals use this column. Never move horizontally to rescue a stray rocket.
     need(Math.floor(old[0]) === x && Math.floor(old[2]) === z, 'rocket is not over its selected station column')
-    var height = Number(invoke(level, [
-      'getHeight(net.minecraft.world.level.levelgen.Heightmap$Types,int,int)',
-      'm_6924_(net.minecraft.world.level.levelgen.Heightmap$Types,int,int)', 'getHeight', 'm_6924_'
-    ], [j.Height.WORLD_SURFACE, x, z]))
-    need(finite(height) && height > Number(level.getMinBuildHeight()) &&
-      height <= Number(level.getMaxBuildHeight()), 'no physical station column')
-    var pos = new j.Pos(x, height - 1, z)
-    var block = level.getBlockState(pos)
-    need(!block.isAir(), 'no physical station column')
-    var shape = invoke(block, [
+    var column = stationColumn(level, target.origin, x, z)
+    var shape = invoke(column.block, [
       'getCollisionShape(net.minecraft.world.level.BlockGetter,net.minecraft.core.BlockPos,net.minecraft.world.phys.shapes.CollisionContext)',
       'm_60742_(net.minecraft.world.level.BlockGetter,net.minecraft.core.BlockPos,net.minecraft.world.phys.shapes.CollisionContext)',
       'getCollisionShape', 'm_60742_'
-    ], [level, pos, invoke(j.Context, ['of(net.minecraft.world.entity.Entity)', 'm_82750_(net.minecraft.world.entity.Entity)',
+    ], [level, column.pos, invoke(j.Context, ['of(net.minecraft.world.entity.Entity)', 'm_82750_(net.minecraft.world.entity.Entity)',
       'of', 'm_82750_'], [rocket])])
-    need(!shape.isEmpty(), 'highest column block has no collision support')
+    need(!shape.isEmpty(), 'highest column block has no collision support ' + column.detail)
     var top = Number(invoke(shape, ['max(net.minecraft.core.Direction$Axis)', 'm_83297_(net.minecraft.core.Direction$Axis)',
       'max', 'm_83297_'], [j.Axis.Y]))
-    need(finite(top) && top > 0 && top <= 1, 'unsuitable column collision top')
+    need(finite(top) && top > 0 && top <= 1, 'unsuitable column collision top ' + column.detail)
     var oldBox = box(rocket)
-    var floor = height - 1 + top
+    var floor = column.y + top
     var y = floor + old[1] - Number(oldBox.minY)
     need(finite(y) && y < old[1], 'correction is not straight down')
     var dy = y - old[1]
     var destinationBox = movedBox(oldBox, dy)
     clearBox(level, rocket, destinationBox, target.station.border())
     need(noCollision(level, rocket, movedBox(destinationBox, -0.0001)) === false, 'no actual collision support under root')
-    return { old: old, oldFloor: Number(oldBox.minY), y: y, dy: dy, floor: floor }
+    return { old: old, oldFloor: Number(oldBox.minY), y: y, dy: dy, floor: floor, column: column.detail }
   }
 
   function correct(rocket, riders, level, state, id, stalled, saved) {
@@ -341,7 +394,7 @@
       ' rocket=' + id + ' stalledServerTicks=' + stalled + ' oldRoot=[' + plan.old.join(',') +
       '] newRoot=[' + actual.join(',') + '] oldBBoxFloor=' + plan.oldFloor +
       ' newBBoxFloor=' + Number(box(rocket).minY) + ' originalAssociation=' + original +
-      ' restoredAssociation=' + restored + ' nativeLanding=unverified clientMount=unverified')
+      ' restoredAssociation=' + restored + ' ' + plan.column + ' nativeLanding=unverified clientMount=unverified')
   }
 
   function inspect(group, tick) {
