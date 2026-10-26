@@ -19,6 +19,7 @@
     { "id": "gtceu:samarium_chloride_dust", "role": "use", "category": "gtceu:electrolyzer", "source": "GTM's decomposition recipe, generated from the material's components (startup_scripts/grindless/ev/extraction_cascade.js)" },
     { "id": "gtceu:neodymium_chloride_dust", "role": "use", "category": "gtceu:electrolyzer", "source": "GTM's decomposition recipe, generated from the material's components (startup_scripts/grindless/ev/extraction_cascade.js)" },
     { "id": "gtceu:mixed_rare_earth_chloride_dust", "role": "use", "category": "gtceu:electrolyzer", "source": "GTM's decomposition recipe, generated from the material's components (startup_scripts/grindless/ev/extraction_cascade.js)" },
+    { "id": "gtceu:magnesium_sulfate_dust", "role": "use", "category": "gtceu:electrolyzer", "source": "GTM's decomposition recipe, generated from the material's components (startup_scripts/grindless/luv/europa.js)" },
     { "id": "gtceu:merrillite_dust", "role": "acquisition", "category": "gtceu:ore_crushing", "source": "GTM's ore processing, generated from the material's ore flag (startup_scripts/grindless/ev/foundation.js)" },
     { "id": "gtceu:raw_merrillite", "role": "use", "category": "gtceu:ore_crushing", "source": "GTM's ore processing, generated from the material's ore flag (startup_scripts/grindless/ev/foundation.js)" },
     { "id": "gtceu:iridosmine_dust", "role": "acquisition", "category": "gtceu:ore_crushing", "source": "GTM's ore processing, generated from the material's ore flag (startup_scripts/grindless/iv/foundation.js)" },

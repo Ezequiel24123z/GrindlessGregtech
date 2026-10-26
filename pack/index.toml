@@ -489,6 +489,26 @@ file = "kubejs/assets/grindless/textures/block/multiblock/advanced_multi_smelter
 hash = "af915735740bd046c85e66fc03c47bb31517ef64f1721726151ea5de8cf121e3"
 
 [[files]]
+file = "kubejs/assets/grindless/textures/block/multiblock/algae_bioreactor/overlay_front.png"
+hash = "6b1cb6f82121552b17c922a6098066a7108ed1777286447e5d7dc270c82b36d5"
+
+[[files]]
+file = "kubejs/assets/grindless/textures/block/multiblock/algae_bioreactor/overlay_front_active.png"
+hash = "b76087281f9b070c2a3c1f734ae799e9a87e1dc6183e0e8d7b4a4ee91414fe9e"
+
+[[files]]
+file = "kubejs/assets/grindless/textures/block/multiblock/algae_bioreactor/overlay_front_active.png.mcmeta"
+hash = "491ea51d46bc1f0c0ff11ed9293461cc67de293c7672abbc45f67563f8fe1f1a"
+
+[[files]]
+file = "kubejs/assets/grindless/textures/block/multiblock/algae_bioreactor/overlay_front_active_emissive.png"
+hash = "bb9d6ff509a63973fab32b709a80465d5d277bb0af95f2237a5eeb73400093d2"
+
+[[files]]
+file = "kubejs/assets/grindless/textures/block/multiblock/algae_bioreactor/overlay_front_active_emissive.png.mcmeta"
+hash = "491ea51d46bc1f0c0ff11ed9293461cc67de293c7672abbc45f67563f8fe1f1a"
+
+[[files]]
 file = "kubejs/assets/grindless/textures/block/multiblock/asteroid_processor/overlay_front.png"
 hash = "6807748a5140044979fd56f4b938d7c8c18f43cb5d94a647944f1ae8350789b0"
 
@@ -666,6 +686,26 @@ hash = "11b31510ec66e27e783119db4f2e228726469709469e1beee78424648a8b7747"
 
 [[files]]
 file = "kubejs/assets/grindless/textures/block/multiblock/composite_autoclave/overlay_front_active_emissive.png.mcmeta"
+hash = "491ea51d46bc1f0c0ff11ed9293461cc67de293c7672abbc45f67563f8fe1f1a"
+
+[[files]]
+file = "kubejs/assets/grindless/textures/block/multiblock/cryobot/overlay_front.png"
+hash = "d6840611c34dd931b5ee6d56586e04f5de770152dc7357a1714ddadd0bc24593"
+
+[[files]]
+file = "kubejs/assets/grindless/textures/block/multiblock/cryobot/overlay_front_active.png"
+hash = "d7d30c4cd5661679188d4c47d81a9f9ee0688463b2fb47c207443f5ad5f44a76"
+
+[[files]]
+file = "kubejs/assets/grindless/textures/block/multiblock/cryobot/overlay_front_active.png.mcmeta"
+hash = "491ea51d46bc1f0c0ff11ed9293461cc67de293c7672abbc45f67563f8fe1f1a"
+
+[[files]]
+file = "kubejs/assets/grindless/textures/block/multiblock/cryobot/overlay_front_active_emissive.png"
+hash = "516c18f9c7d1ee816bdcd182094c91e374639d5523b6ea400d5bd85efd46a259"
+
+[[files]]
+file = "kubejs/assets/grindless/textures/block/multiblock/cryobot/overlay_front_active_emissive.png.mcmeta"
 hash = "491ea51d46bc1f0c0ff11ed9293461cc67de293c7672abbc45f67563f8fe1f1a"
 
 [[files]]
@@ -2741,6 +2781,10 @@ file = "kubejs/client_scripts/grindless/luv_cryogenics_lang.js"
 hash = "080ffadc6893bc601b8006678597e6f4284b8127e87dfe1dd8a65ba9f978e6d2"
 
 [[files]]
+file = "kubejs/client_scripts/grindless/luv_europa_lang.js"
+hash = "2e0b89cb0afe295f23a842d80c67ee6cb039bb824b7e534803313cec64060e29"
+
+[[files]]
 file = "kubejs/client_scripts/grindless/luv_foundation_lang.js"
 hash = "f056bfc08ab6e28f8fce6ea33975c3114889231eabdfa77993ea4608f7d97464"
 
@@ -2910,7 +2954,7 @@ hash = "1f4b256531a0b42a6ecf399e9b692d9e4730bd4102e53aab3e1fa2c999b69e9d"
 
 [[files]]
 file = "kubejs/data/grindless/tables/hidden_until.json"
-hash = "c68d4614a7ec1d92382b3e9d496fa3ffb704218c72c01e2cf5d911b7da2a8cb2"
+hash = "cf61d5f264f7545ce6f61ab01b741735f2b193debbcf8876513ab0256681086f"
 
 [[files]]
 file = "kubejs/data/grindless/tables/hot_cell.json"
@@ -3287,6 +3331,10 @@ hash = "24bc5ed88b306d9ee08f6bd5dbcac6c98c05fb4ec70efaad45ee580c9520bf78"
 [[files]]
 file = "kubejs/server_scripts/grindless/luv/coated_conductor_line.js"
 hash = "9b3ec773e7507b4d980768e14f5d22a33091b475c6bf84b457a9bec831f4ab78"
+
+[[files]]
+file = "kubejs/server_scripts/grindless/luv/europa.js"
+hash = "3e90d54d02e604efc3bfb6e820ce195cdc32e564c7f6e1a539e55e0411fcbfdf"
 
 [[files]]
 file = "kubejs/server_scripts/grindless/luv/fusion.js"
@@ -3667,6 +3715,10 @@ hash = "a6a329f580b17079988a013da53901e05255e9a21bf21d3cd7f62399e23c3651"
 [[files]]
 file = "kubejs/startup_scripts/grindless/luv/coated_conductor_line.js"
 hash = "08ab5f0d1bac2e5c67ed75fccb8fe452d1c4bd4846616ca503fe4e74f48f9ba1"
+
+[[files]]
+file = "kubejs/startup_scripts/grindless/luv/europa.js"
+hash = "34d237a9d2226abf2e7304e9a5fc57204d54e749da50ee72ecc22f5d435f01fb"
 
 [[files]]
 file = "kubejs/startup_scripts/grindless/luv/foundation.js"
