@@ -1,0 +1,52 @@
+{
+  "_source": "docs/eras/zpm.md, 'Machine 6' and package A5 (ZPM-A5). Real: powder-in-tube and coated-conductor wire manufacture, SMES coil winding and cold testing (the same magnet factory as the LuV HTS magnet works, one tier up).",
+  "_how_it_is_used": [
+    "Read by startup_scripts/grindless/zpm/magnet_works.js (the charge, shown on the controller) and server_scripts/grindless/zpm/magnet_works.js (one gtceu:naquadria_magnets recipe per entry, id grindless:naquadria_magnets/<name>, with the data key grindless_naquadria_magnets = <name> for its EMI line, and the cryostat casing's assembler recipe); by tools/analysis/test/zpm-magnet_works.test.mjs and the smoke test gg_test_zpm_magnet_works. Nothing here is repeated in code.",
+    "charge: the cold-test charge every entry with \"charge\": true carries, as GTM's non-consumed fluid input (notConsumableFluid, chance 0): needed in an input hatch to start, never drained, taken once whatever the overclock or the parallel hatch's copies.",
+    "recipes[]: name (the recipe's id and lang key), circuit (the programmed circuit that picks it: every entry has its own, so GTM's lookup keeps one recipe per path), itemsIn / fluidsIn (consumed), itemsOut, eut and duration (GTM's EU/t and ticks; marked (tune) in the design until the integrated bench run). The ZPM cell's output is the ZPM row's cell of tables/wireless_energy.json (its cellMadeBy names this machine); a Node test keeps the two tables in step.",
+    "wireEconomy: what GTM's own route to a URhNq2 single wire costs, read from its recipes (mixer 122,880 x 150 t for 4 dust; EBF gas variant 7,680 x 1,005 t; vacuum freezer 122,880 x 200 t; wiremill 30 x 348 t for 2 wires). The magnet works' wire recipe is checked against it: per wire, the EU must never be lower (zpm.md A5 invariant).",
+    "casing: the cryostat casing's assembler recipe. The design asks for aerogel and gold-plated copper; aerogel is package A8's (hidden until it lands), so the casing is made from what exists when the magnet works does: a frostproof casing with gold and copper plates."
+  ],
+  "charge": { "id": "gtceu:liquid_helium", "amount": 1000 },
+  "wireEconomy": {
+    "wiresPerIngot": 2,
+    "dustsPerMix": 4,
+    "mixer": { "eut": 122880, "duration": 150 },
+    "ebf": { "eut": 7680, "duration": 1005 },
+    "freezer": { "eut": 122880, "duration": 200 },
+    "wiremill": { "eut": 30, "duration": 348 }
+  },
+  "casing": {
+    "output": "grindless:cryostat_casing", "count": 2,
+    "itemsIn": [ { "id": "gtceu:frostproof_machine_casing", "count": 1 }, { "id": "gtceu:gold_plate", "count": 2 }, { "id": "gtceu:annealed_copper_plate", "count": 2 } ],
+    "eut": 30720, "duration": 100
+  },
+  "recipes": [
+    {
+      "name": "zpm_smes_cell", "circuit": 1, "charge": true,
+      "_why": "The wireless network's ZPM cell: six of GTM's ZPM naquadria battery, 3,932,160,000 EU, above 2^31 (S0-7 proved the network stores it exactly). A naquadria block stands for the design's 'naquadria core' (no such item exists).",
+      "itemsIn": [ { "id": "gtceu:uranium_rhodium_dinaquadide_single_wire", "count": 16 }, { "id": "gtceu:naquadria_block", "count": 1 },
+                   { "id": "gtceu:zpm_field_generator", "count": 1 } ],
+      "fluidsIn": [],
+      "itemsOut": [ { "id": "grindless:zpm_smes_cell", "count": 1 } ],
+      "eut": 122880, "duration": 600
+    },
+    {
+      "name": "urhnq2_wire", "circuit": 2, "charge": false,
+      "_why": "Powder in the tube: the single wire without the 9,000 K blast, the freezer or the wiremill. Priced above GTM's route per wire (wireEconomy), in EU, so the shortcut buys steps, never energy.",
+      "itemsIn": [ { "id": "gtceu:uranium_dust", "count": 1 }, { "id": "gtceu:rhodium_dust", "count": 1 }, { "id": "gtceu:naquadah_dust", "count": 2 },
+                   { "id": "gtceu:silver_foil", "count": 1 } ],
+      "fluidsIn": [],
+      "itemsOut": [ { "id": "gtceu:uranium_rhodium_dinaquadide_single_wire", "count": 2 } ],
+      "eut": 122880, "duration": 400
+    },
+    {
+      "name": "hts_insert", "circuit": 3, "charge": false,
+      "_why": "The hybrid insert: a LuV HTS coil nested in URhNq2 winding, the field source of the ion implanter's magnet and the qubit fab.",
+      "itemsIn": [ { "id": "gtceu:superconducting_coil", "count": 1 }, { "id": "gtceu:uranium_rhodium_dinaquadide_single_wire", "count": 4 } ],
+      "fluidsIn": [],
+      "itemsOut": [ { "id": "grindless:hts_insert", "count": 1 } ],
+      "eut": 30720, "duration": 300
+    }
+  ]
+}

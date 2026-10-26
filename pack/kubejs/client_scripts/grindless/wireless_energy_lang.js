@@ -20,7 +20,8 @@
     { id: 'hv', name: 'HV', colour: '6' },
     { id: 'ev', name: 'EV', colour: '5' },
     { id: 'iv', name: 'IV', colour: '9' },
-    { id: 'luv', name: 'LuV', colour: 'd', cell: { path: 'luv_smes_cell', en: 'LuV SMES Cell', es: 'Celda SMES LuV' } }
+    { id: 'luv', name: 'LuV', colour: 'd', cell: { path: 'luv_smes_cell', en: 'LuV SMES Cell', es: 'Celda SMES LuV' } },
+    { id: 'zpm', name: 'ZPM', colour: 'c', cell: { path: 'zpm_smes_cell', en: 'ZPM SMES Cell', es: 'Celda SMES ZPM' } }
   ]
   const AMPS = [2, 4, 16, 64]
   function suffix(a) { return a === 2 ? '' : '_' + a + 'a' }

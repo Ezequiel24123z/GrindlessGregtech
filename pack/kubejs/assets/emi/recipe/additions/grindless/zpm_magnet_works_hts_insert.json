@@ -1,0 +1,5 @@
+{
+  "type": "emi:info",
+  "stacks": ["item:grindless:hts_insert"],
+  "text": ["emi.grindless.info.hts_insert.0"]
+}
