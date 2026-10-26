@@ -268,3 +268,16 @@ test('native fixture places four full shapes only inside its reserved band witho
   assert.equal(counts['minecraft:overworld'], 2);
   assert.equal(counts[G.orbits.earth], 2);
 });
+test('native fixture reads EU/t through the EnergyStack and withdraws the rejected batch before cleaning', () => {
+  const src = read('tools/test/overlay/kubejs/server_scripts/gg_test_luv_orbital_industry.js');
+  // GTM 7.5.3's RecipeHelper.getRealEUt returns an EnergyStack: Number() of it is NaN (native S2, 2026-10-26).
+  assert.match(src, /getRealEUt\(recipe\)\.getTotalEU\(\)/);
+  assert.doesNotMatch(src, /Number\([^()]*getRealEUt\([^()]*\)\)/);
+  // The unclean batch left in the bus ran during the cleaning wait and doubled the next check's output (native S2).
+  const unclean = src.slice(src.indexOf("'cleanroom_required_'"));
+  const cleared = unclean.indexOf('empty(m.parts.input)');
+  const hatch = unclean.indexOf("'gtceu:cleaning_maintenance_hatch[facing=north]'");
+  assert.ok(cleared > 0 && hatch > cleared, 'input bus emptied before the cleaning hatch is placed');
+  assert.ok(unclean.indexOf('setFluidInTank(0, classes().Fluids.EMPTY)') > 0 &&
+    unclean.indexOf('setFluidInTank(0, classes().Fluids.EMPTY)') < hatch, 'input hatch emptied before cleaning');
+});

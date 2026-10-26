@@ -62,7 +62,8 @@
   ],
 
   "machinesFromRegistry": [
-    { "prefix": "gtceu:iv_", "maxEUt": 8192, "needs": ["eu:iv"], "excludeTypes": ["gtceu:dummy", "gtceu:steam_turbine", "gtceu:combustion_generator", "gtceu:gas_turbine"] }
+    { "prefix": "gtceu:iv_", "maxEUt": 8192, "needs": ["eu:iv"], "excludeTypes": ["gtceu:dummy", "gtceu:steam_turbine", "gtceu:combustion_generator", "gtceu:gas_turbine"] },
+    { "prefix": "gtnn:iv_dehydrator", "maxEUt": 8192, "needs": ["eu:iv"], "note": "GT--'s dehydrator stays in the pack (integration/gtnn.js); LuV-A2's mode 2 remakes its gold trifluoride through bromine trifluoride, and the bromine comes from gtceu:dehydrator/wet_bromine" }
   ],
 
   "machines": [

@@ -262,7 +262,7 @@
       var dims = conditions.filter(function (c) { return String(c.getClass().getSimpleName()) === 'DimensionCondition' })
       var dimIds = dims.map(function (c) { return String(c.getDimension().location()) })
       var circuits = inputs(r).filter(function (x) { return x.circuit > 0 })
-      var eut = Number(lazy().Helper.getRealEUt(r))
+      var eut = Number(lazy().Helper.getRealEUt(r).getTotalEU())
       check('recipe_' + e.key, lookup(type, r) && Number(r.duration) === e.duration && eut === 30720 &&
         dimIds.length === 1 && dimIds[0] === gid && dims.every(function (c) { return !c.isReverse() }) &&
         circuits.length === 1 && circuits[0].circuit === e.circuit,
