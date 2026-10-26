@@ -24,7 +24,8 @@ const ITEMS = [
 const BLOCKS = [
   'naquadria_containment_casing', 'pressure_hull_casing', 'photomultiplier_casing', 'cryostat_casing', 'probe_bay_casing', 'synroc_block',
 ].map((n) => 'grindless:' + n);
-const FLUIDS = ['saturn_helium', 'uranus_hydrogen', 'enceladus_brine', 'actinide_raffinate', 'diamond_slurry', 'ring_ice'].map((n) => 'grindless:' + n);
+const FLUIDS = ['saturn_helium', 'uranus_hydrogen', 'enceladus_brine', 'actinide_raffinate', 'diamond_slurry', 'ring_ice'].map((n) => 'gtceu:' + n);
+const GASES = ['saturn_helium', 'uranus_hydrogen'];
 // owned by later packages or waiting for spikes S0-1/S0-2: F1 must not register them
 const NOT_F1 = [
   'grindless:zpm_smes_cell', 'grindless:zpm_wireless_energy_cover', 'grindless:zpm_wireless_dynamo_cover', 'grindless:titan_nitriles',
@@ -49,8 +50,10 @@ test('every shared ZPM id is registered, is an id of docs/eras/zpm.md, and nothi
   }
   for (const id of FLUIDS) {
     assert.ok(run.registry.fluids.has(id), `${id} fluid not registered`);
-    assert.ok(ours(run.registry.fluids.get(id).file), id);
+    const mat = run.registry.materials.get(short(id)) || run.registry.materials.get(id);
+    assert.ok(mat && ours(mat.file) && mat.forms.has(GASES.includes(short(id)) ? 'gas' : 'liquid'), `${id} is not a GT material of the right form`);
   }
+  assert.ok(![...run.registry.fluids.keys()].some((id) => id.startsWith('grindless:') && ours(run.registry.fluids.get(id).file)), 'no KubeJS fluids');
   // the casings are named in words only (naquadria containment casing), the rest by id
   for (const id of [...ITEMS, ...BLOCKS, ...FLUIDS]) assert.ok(design.includes(short(id)) || design.includes(short(id).replace(/_/g, ' ')), `${id} is not named in docs/eras/zpm.md`);
   for (const id of NOT_F1) {
@@ -78,7 +81,7 @@ test('names and both tooltip lines in en_us and es_es; fluids and buckets named'
     const L = run.lang[lang] || {};
     for (const id of ITEMS) for (const k of [`item.grindless.${short(id)}`, `tooltip.grindless.${short(id)}.0`, `tooltip.grindless.${short(id)}.1`]) if (!L[k]) problems.push(`${lang} ${k}`);
     for (const id of BLOCKS) for (const k of [`block.grindless.${short(id)}`, `tooltip.grindless.${short(id)}.0`, `tooltip.grindless.${short(id)}.1`]) if (!L[k]) problems.push(`${lang} ${k}`);
-    for (const id of FLUIDS) for (const k of [`fluid.grindless.${short(id)}`, `item.grindless.${short(id)}_bucket`]) if (!L[k]) problems.push(`${lang} ${k}`);
+    for (const id of FLUIDS) if (!L[`material.gtceu.${short(id)}`]) problems.push(`${lang} material.gtceu.${short(id)}`);
   }
   assert.deepEqual(problems, []);
   // the Spanish text is a translation, not a copy of the English one

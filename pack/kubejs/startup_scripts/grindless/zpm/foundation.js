@@ -24,14 +24,14 @@
 //     neptune_flyby_probe, neptune_sample               27 flyby probe bay
 //     silicon_28_dust                                   the hot cell's Si-28 mode
 //     pica_heat_shield                                  the composite autoclave's ablator mode
-//   Fluids (grindless:, KubeJS fluids with buckets; zpm.md writes them with the grindless namespace):
+//   Fluids (GT materials, gtceu: ids as LuV's europan_brine; gas for the helium and hydrogen; zpm.md writes them with grindless:):
 //     saturn_helium (18), uranus_hydrogen (25), enceladus_brine (23), actinide_raffinate (4), diamond_slurry (25), ring_ice (20)
 //   Blocks (grindless:), the shared blocks of zpm.md "Our multiblocks":
 //     naquadria_containment_casing, pressure_hull_casing, photomultiplier_casing, cryostat_casing, probe_bay_casing, synroc_block
 //   LuV's station truss, frostproof and radiation vault casings are reused as they are.
 //
 //   Not here: zpm_smes_cell and the ZPM wireless covers (A5's wireless tier), rocket motors and tanks, planets, orbits, dimensions,
-//   station items, and every GT material (zpm.md names no new material id; the package that needs an intermediate registers it).
+//   station items, and every other GT material (the package that needs an intermediate registers it).
 //   Every id has no recipe until its package lands: tools/analysis/emi-coverage.mjs lists them as expected-unobtained.
 //
 // Textures: tools/assets/Build-ZPMFoundationTextures.ps1.
@@ -83,25 +83,25 @@
     synroc_block: { glass: false }
   }
 
-  // fluid name -> RGB of its texture, and whether it is a gas (thin texture)
+  // GT material name -> colour, formula and whether it is a gas; GTM colours and buckets the fluid
   const FLUIDS = {
-    saturn_helium: { colour: 0xE8D9A0, gas: true },
-    uranus_hydrogen: { colour: 0x9FDCE6, gas: true },
-    enceladus_brine: { colour: 0xA9C4D6, gas: false },
-    actinide_raffinate: { colour: 0xB7C45A, gas: false },
-    diamond_slurry: { colour: 0xC8E6F2, gas: false },
-    ring_ice: { colour: 0xD7EEF7, gas: false }
+    saturn_helium: { colour: 0xE8D9A0, formula: 'He', gas: true },
+    uranus_hydrogen: { colour: 0x9FDCE6, formula: 'H2(D2)', gas: true },
+    enceladus_brine: { colour: 0xA9C4D6, formula: 'H2O(NaCl)(Na2CO3)', gas: false },
+    actinide_raffinate: { colour: 0xB7C45A, formula: '(HNO3)(An)', gas: false },
+    diamond_slurry: { colour: 0xC8E6F2, formula: 'C(H2O)', gas: false },
+    ring_ice: { colour: 0xD7EEF7, formula: '(H2O)(SiO2)', gas: false }
   }
 
   ZPMF.items = Object.keys(ITEMS).map(function (name) { return 'grindless:' + name })
   ZPMF.blocks = Object.keys(BLOCKS).map(function (name) { return 'grindless:' + name })
-  ZPMF.fluids = Object.keys(FLUIDS).map(function (name) { return 'grindless:' + name })
+  ZPMF.fluids = Object.keys(FLUIDS).map(function (name) { return 'gtceu:' + name })
 
   // every id by camelCase name, as the other ZPM packages read them (ids.scoopHead, ids.saturnHelium...)
   ZPMF.ids = {}
   Object.keys(ITEMS).concat(Object.keys(BLOCKS), Object.keys(FLUIDS)).forEach(function (name) {
     var key = name.replace(/_([a-z0-9])/g, function (m, c) { return c.toUpperCase() })
-    ZPMF.ids[key] = 'grindless:' + name
+    ZPMF.ids[key] = (FLUIDS[name] ? 'gtceu:' : 'grindless:') + name
   })
 
   StartupEvents.registry('block', function (event) {
@@ -135,13 +135,15 @@
     })
   })
 
-  StartupEvents.registry('fluid', function (event) {
+  GTCEuStartupEvents.registry('gtceu:material', function (event) {
     Object.keys(FLUIDS).forEach(function (name) {
       var spec = FLUIDS[name]
-      var fluid = event.create('grindless:' + name)
-      if (spec.gas) fluid.thinTexture(spec.colour)
-      else fluid.thickTexture(spec.colour)
-      fluid.bucketColor(spec.colour)
+      var material = event.create(name)
+      if (spec.gas) material.gas()
+      else material.liquid()
+      material.color(spec.colour)
+        .formula(spec.formula)
+        .flags(GTMaterialFlags.DISABLE_DECOMPOSITION)
     })
   })
 })()

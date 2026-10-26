@@ -819,7 +819,7 @@ powershell -NoProfile -ExecutionPolicy Bypass -File tools\assets\Build-IoOrbitTe
 
 ### ZPM foundation (ZPM-F1)
 
-`Build-ZPMFoundationTextures.ps1`: same method and checks as the LuV foundation, with its helpers copied. It draws the 31 shared ZPM items (`item/<id>.png`) and the 6 casing and block textures under `block/zpm/`. The six fluids need no PNG (they use the vanilla-style still and flowing textures).
+`Build-ZPMFoundationTextures.ps1`: same method and checks as the LuV foundation, with its helpers copied. It draws the 31 shared ZPM items (`item/<id>.png`) and the 6 casing and block textures under `block/zpm/`. The six fluids are GT materials (GTM colours them), so they need no PNG.
 
 ```powershell
 powershell -NoProfile -ExecutionPolicy Bypass -File tools\assets\Build-ZPMFoundationTextures.ps1
