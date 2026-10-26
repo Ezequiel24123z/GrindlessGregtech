@@ -233,9 +233,15 @@ test('EMI shows how every item, block, fluid and machine of the pack is obtained
   const gtRecipe = (list) => list.some((m) => m.source === 'recipe' && m.category.startsWith('gtceu:'));
   const charts = res.results.filter((x) => /_chart$|chart_draft$|lunar_map$|lunar_ephemeris$|vlbi_recording$/.test(x.key));
   const samples = res.results.filter((x) => x.key.startsWith('grindless:vein_sample_'));
-  assert.equal(charts.length, 8);
+  assert.equal(charts.length, 9);
   assert.ok(samples.length > 40);
-  for (const r of charts) assert.ok(gtRecipe(r.made) && gtRecipe(r.used) && !r.made.some((m) => m.source === 'page'), r.key);
+  // LuV B9: the Saturn Transfer Chart is made by the coilgun (a GT recipe) and is the ZPM trip: until ZPM its use is its copy and a page
+  const nextEra = new Set(['grindless:saturn_transfer_chart']);
+  for (const r of charts) {
+    // an info page lists its stack as both made and used, so the chart's page shows on both sides
+    assert.ok(gtRecipe(r.made) && (nextEra.has(r.key) || !r.made.some((m) => m.source === 'page')), r.key);
+    assert.ok(nextEra.has(r.key) ? r.used.some((m) => m.source === 'page') : gtRecipe(r.used), r.key);
+  }
   for (const r of samples) assert.ok(gtRecipe(r.used) && !r.used.some((m) => m.source === 'page'), r.key);
 });
 
