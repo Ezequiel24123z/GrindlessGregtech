@@ -117,6 +117,10 @@ file = "kubejs/assets/emi/index/stacks/grindless_hidden_with_recipes.json"
 hash = "8b88bd0c9b60901357d3a782a3a016a1b9b623225f62f885b5af7ec4afff5f29"
 
 [[files]]
+file = "kubejs/assets/emi/recipe/additions/grindless/asteroid_regolith_casing.json"
+hash = "b39bb918ad9c99fd4c86857f65759b2cb3a2131d4436859f30f8d6c51ca75107"
+
+[[files]]
 file = "kubejs/assets/emi/recipe/additions/grindless/capacitor_cells.json"
 hash = "edc2e09a95d89b0482cb1fa127e70a80e105b4ff01a66973f25a5a02744b26d3"
 
@@ -483,6 +487,26 @@ hash = "2d30f3be6008356e87d483a8ef77d9949dcf4cd4900693fcdade8d1619b6ee96"
 [[files]]
 file = "kubejs/assets/grindless/textures/block/multiblock/advanced_multi_smelter/overlay_front_active_emissive.png.mcmeta"
 hash = "af915735740bd046c85e66fc03c47bb31517ef64f1721726151ea5de8cf121e3"
+
+[[files]]
+file = "kubejs/assets/grindless/textures/block/multiblock/asteroid_processor/overlay_front.png"
+hash = "6807748a5140044979fd56f4b938d7c8c18f43cb5d94a647944f1ae8350789b0"
+
+[[files]]
+file = "kubejs/assets/grindless/textures/block/multiblock/asteroid_processor/overlay_front_active.png"
+hash = "b04e13cb768e6c4f58c24c7a2114072b9c103f735e98e11c3c033e911de126e0"
+
+[[files]]
+file = "kubejs/assets/grindless/textures/block/multiblock/asteroid_processor/overlay_front_active.png.mcmeta"
+hash = "491ea51d46bc1f0c0ff11ed9293461cc67de293c7672abbc45f67563f8fe1f1a"
+
+[[files]]
+file = "kubejs/assets/grindless/textures/block/multiblock/asteroid_processor/overlay_front_active_emissive.png"
+hash = "92e10a24d1b0e7505b36124acbc8d7263fa67eb814aec2865651487a9ddd7f2b"
+
+[[files]]
+file = "kubejs/assets/grindless/textures/block/multiblock/asteroid_processor/overlay_front_active_emissive.png.mcmeta"
+hash = "491ea51d46bc1f0c0ff11ed9293461cc67de293c7672abbc45f67563f8fe1f1a"
 
 [[files]]
 file = "kubejs/assets/grindless/textures/block/multiblock/atmosphere_processor/overlay_front.png"
@@ -855,6 +879,26 @@ hash = "94568862f28a4630aa56cc22e056f716a5e262ea65b8facafe3404198c1669de"
 [[files]]
 file = "kubejs/assets/grindless/textures/block/multiblock/gravitational_wave_detector/overlay_front_active_emissive.png.mcmeta"
 hash = "af915735740bd046c85e66fc03c47bb31517ef64f1721726151ea5de8cf121e3"
+
+[[files]]
+file = "kubejs/assets/grindless/textures/block/multiblock/harpoon_anchor_drill/overlay_front.png"
+hash = "f0d2e35df8a2edb4c9a2e33d9b13747efd9beeabf1a61b136420b48125659b58"
+
+[[files]]
+file = "kubejs/assets/grindless/textures/block/multiblock/harpoon_anchor_drill/overlay_front_active.png"
+hash = "68d47271a84a0d9f58995db20310c82d7537ded2a1603398aec6ea2fb2f78f6d"
+
+[[files]]
+file = "kubejs/assets/grindless/textures/block/multiblock/harpoon_anchor_drill/overlay_front_active.png.mcmeta"
+hash = "491ea51d46bc1f0c0ff11ed9293461cc67de293c7672abbc45f67563f8fe1f1a"
+
+[[files]]
+file = "kubejs/assets/grindless/textures/block/multiblock/harpoon_anchor_drill/overlay_front_active_emissive.png"
+hash = "d6edad3082983f919857fef73187a3f3246f250ffd8ffc84711bd51d07df712f"
+
+[[files]]
+file = "kubejs/assets/grindless/textures/block/multiblock/harpoon_anchor_drill/overlay_front_active_emissive.png.mcmeta"
+hash = "491ea51d46bc1f0c0ff11ed9293461cc67de293c7672abbc45f67563f8fe1f1a"
 
 [[files]]
 file = "kubejs/assets/grindless/textures/block/multiblock/heavy_water_plant/overlay_front.png"
@@ -1390,6 +1434,26 @@ hash = "33ad0069899f052231f42964a2c48384646ef3626a07fcde8b8e467628a5b196"
 
 [[files]]
 file = "kubejs/assets/grindless/textures/block/multiblock/naquadah_plant/overlay_front_active_emissive.png.mcmeta"
+hash = "491ea51d46bc1f0c0ff11ed9293461cc67de293c7672abbc45f67563f8fe1f1a"
+
+[[files]]
+file = "kubejs/assets/grindless/textures/block/multiblock/optical_miner/overlay_front.png"
+hash = "5d5842abb63563455c05f37ba14bbaaf10467cce2a0f925a43c2d77fe5bd6dba"
+
+[[files]]
+file = "kubejs/assets/grindless/textures/block/multiblock/optical_miner/overlay_front_active.png"
+hash = "d64d8d1facc04988b40c2a352fe15b24e6f267ec3541f9a6de7d788ed16cfac0"
+
+[[files]]
+file = "kubejs/assets/grindless/textures/block/multiblock/optical_miner/overlay_front_active.png.mcmeta"
+hash = "491ea51d46bc1f0c0ff11ed9293461cc67de293c7672abbc45f67563f8fe1f1a"
+
+[[files]]
+file = "kubejs/assets/grindless/textures/block/multiblock/optical_miner/overlay_front_active_emissive.png"
+hash = "b7d630d138b26acca710fcaf256aa9191ca853c75e64c665e889ae274fd4d994"
+
+[[files]]
+file = "kubejs/assets/grindless/textures/block/multiblock/optical_miner/overlay_front_active_emissive.png.mcmeta"
 hash = "491ea51d46bc1f0c0ff11ed9293461cc67de293c7672abbc45f67563f8fe1f1a"
 
 [[files]]
@@ -2550,7 +2614,7 @@ hash = "597286ab53fe25d3ed999a8c75d31f5a52741a4ba3e132008120686679cf8ca3"
 
 [[files]]
 file = "kubejs/client_scripts/grindless/emi_info_lang.js"
-hash = "21505aa4916cfb78810210df1d35d30d76f0c690e139e3cf025d47590a5784ff"
+hash = "92481c1fdd9cfe0ef010138fc21f3c4fe81649c643b12f87ea65efc90d31e4ab"
 
 [[files]]
 file = "kubejs/client_scripts/grindless/ev_ae2_interplanetary_lang.js"
@@ -2663,6 +2727,10 @@ hash = "2c262a3451019ab796e972445c73b27bfb60f381d0262e5b0c975f6fbd227488"
 [[files]]
 file = "kubejs/client_scripts/grindless/launch_road_lang.js"
 hash = "42c98a78baa19277c3921cfc1836fe9ef875691349f46a2fb7db2f496ae7b609"
+
+[[files]]
+file = "kubejs/client_scripts/grindless/luv_asteroid_belt_lang.js"
+hash = "f8773e5ccdac79b63a071daacd79dd797349aac735d47b5c99236bb4af6ba5b7"
 
 [[files]]
 file = "kubejs/client_scripts/grindless/luv_biofoundry_lang.js"
@@ -2842,7 +2910,7 @@ hash = "1f4b256531a0b42a6ecf399e9b692d9e4730bd4102e53aab3e1fa2c999b69e9d"
 
 [[files]]
 file = "kubejs/data/grindless/tables/hidden_until.json"
-hash = "8bc2a80bbdd101a7350bbc8c901423a93f1a0ca1fcfed9adff5ee923c569a33f"
+hash = "c68d4614a7ec1d92382b3e9d496fa3ffb704218c72c01e2cf5d911b7da2a8cb2"
 
 [[files]]
 file = "kubejs/data/grindless/tables/hot_cell.json"
@@ -2878,7 +2946,7 @@ hash = "4faa362092c1af5de19ee91d2d72879114845ad696f0e5d34eb73aea4c460207"
 
 [[files]]
 file = "kubejs/data/grindless/tables/planets.json"
-hash = "9cda6fa60e8989f2f46bddd42e0dcaf0d943f4f62e40f8017efacbd96379922a"
+hash = "fc38ae1b7d093c7aa929200a3eb10083df4468c3b6070a106f1722cfe50b248d"
 
 [[files]]
 file = "kubejs/data/grindless/tables/site_fuels.json"
@@ -2899,6 +2967,10 @@ hash = "9d4b0282fee8b88e2265fa70777bc1f9e5f5a48bdd3bc0c660776e75739f2cd3"
 [[files]]
 file = "kubejs/data/grindless/tables/veins.json"
 hash = "eebb7c77c7def89c2a4593970852e1987049f9833d5cbaba03c94636332eaccc"
+
+[[files]]
+file = "kubejs/data/grindless/tables/veins_belt.json"
+hash = "12cbb4b4f237e13ca92c7cebef3b41ca0a63b9a2c5fa82f2600f4d13470cedc8"
 
 [[files]]
 file = "kubejs/data/grindless/tables/veins_end.json"
@@ -3199,6 +3271,10 @@ hash = "0f644051440bc20324c3c2951ee947d159620cf743fa4a73d96dbe4dc16370a8"
 [[files]]
 file = "kubejs/server_scripts/grindless/lib/wireless_registry.js"
 hash = "d59f924e029744e5b1369c79a1c4d6329cc1e143b5eb30832622f59dedc65249"
+
+[[files]]
+file = "kubejs/server_scripts/grindless/luv/asteroid_belt.js"
+hash = "f0922ce8f53ee271f837aeddc36d41aa7a51eb6766ef014290482e6c18a6d595"
 
 [[files]]
 file = "kubejs/server_scripts/grindless/luv/biofoundry.js"
@@ -3579,6 +3655,10 @@ hash = "43e0c121267c0aabc56d792bc7932f33af77510dcabd405fa47d2962d3a132ff"
 [[files]]
 file = "kubejs/startup_scripts/grindless/lib/tables.js"
 hash = "05fc95ba3708aff1690713155bbce2990fc4387530fbb84d4b4b141aa1289a96"
+
+[[files]]
+file = "kubejs/startup_scripts/grindless/luv/asteroid_belt.js"
+hash = "ab01abf09338059e1bc8406471406d6ef223bf051f1be19cc084e85f6a82f0f4"
 
 [[files]]
 file = "kubejs/startup_scripts/grindless/luv/biofoundry.js"

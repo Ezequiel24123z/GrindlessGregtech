@@ -58,6 +58,7 @@ Generators for the pack's own textures. Everything is procedural 16x16 pixel art
 | `Build-HTSMagnetWorksTextures.ps1` | Writes the LuV HTS magnet works' face (`multiblock/hts_magnet_works/`). `-Only magnet_works`, `-Preview <png outside the repo>` and `-Credits` (its 5 CREDITS rows). |
 | `Build-GanymedeTextures.ps1` | Writes the faces of the LuV gravitational wave detector and coilgun launcher (LuV-B9: `multiblock/gravitational_wave_detector/`, `multiblock/coilgun_launcher/`). `-Only detector,launcher`, `-Preview <png outside the repo>` (optional `-FrostCasing <png>`, `-TungstenCasing <png>`) and `-Credits` (their 10 CREDITS rows). |
 
+| `Build-AsteroidBeltTextures.ps1` | Writes the faces of the LuV asteroid belt machines (LuV-B5): the harpoon anchor drill, the asteroid processor and the optical miner (`multiblock/harpoon_anchor_drill/`, `multiblock/asteroid_processor/`, `multiblock/optical_miner/`). `-Only drill,processor,miner`, `-Preview <png outside the repo>` and `-Credits` (their 15 CREDITS rows). |
 ## Regenerate
 
 Run from the repo root. `-ExecutionPolicy Bypass` only affects that process (Windows PowerShell 5.1 blocks unsigned scripts by default).
@@ -748,6 +749,11 @@ The faces of the gravitational wave detector (drawn for GTM's frost-proof casing
 ```powershell
 powershell -NoProfile -ExecutionPolicy Bypass -File tools\assets\Build-GanymedeTextures.ps1
 powershell -NoProfile -ExecutionPolicy Bypass -File tools\assets\Build-GanymedeTextures.ps1 -Credits
+### Asteroid belt (LuV-B5)
+The faces of the three belt machines, with the HTS magnet works' method, steel bezel, lamp ramp and checks (helpers copied, so no other script changes). The harpoon anchor drill and the optical miner are drawn for the asteroid regolith brick (`block/luv/asteroid_regolith_casing.png`), the asteroid processor for GTM's solid steel casing; each face has its own dark steel frame, so it reads on both. All three: 8 frames, `frametime` 4, and the output is identical byte for byte. `-Preview` shows each face on the regolith brick or a steel stand-in (the GTM texture is not in the repository).
+- To retouch: each face keeps its colours and map together (`$HdSpec`/`$HdBase`, `$PrSpec`/`$PrBase`, `$OmSpec`/`$OmBase`); the moving parts are `$HdJawRing`, `$HdBar`, `$PrNeedle`, `$PrFleck`, `$OmRayL`/`$OmRayR` and `$OmBreath`. Add any new light to that face's glow zone (`$HdGlowZone`, `$PrGlowZone`, `$OmGlowZone`).
+powershell -NoProfile -ExecutionPolicy Bypass -File tools\assets\Build-AsteroidBeltTextures.ps1
+powershell -NoProfile -ExecutionPolicy Bypass -File tools\assets\Build-AsteroidBeltTextures.ps1 -Only miner -Credits
 ```
 
 | File (under `textures/`) | Notes |
@@ -758,6 +764,15 @@ powershell -NoProfile -ExecutionPolicy Bypass -File tools\assets\Build-GanymedeT
 | `block/multiblock/coilgun_launcher/overlay_front.png` | Idle: copper and superconductor coil rings round a dark bore, rivets, the charge indicator and run lamp dark. |
 | `.../overlay_front_active.png` + `.mcmeta` | 8 frames, `frametime` 2: the coils energise blue-white from the outer ring to the bore, the bore flashes and fades, and the charge indicator drains and refills; the run lamp lit. |
 | `.../overlay_front_active_emissive.png` + `.mcmeta` | Only the energised rings, the bore's flash, the charge cells and the run lamp. |
+| `block/multiblock/harpoon_anchor_drill/overlay_front.png` | Idle: a three-jaw chuck round the drill bit and its carbide tip, a harpoon gun barrel on each side with its barbed harpoon fired into the rock, an empty depth bar and dark run and anchor lamps. |
+| `.../overlay_front_active.png` + `.mcmeta` | The jaws turn round the chuck and the flutes spiral down the bit, the tip glows hot, the depth bar fills a cell every two frames, and the run (green) and anchor (cyan) lamps are lit. |
+| `.../overlay_front_active_emissive.png` + `.mcmeta` | Only the tip, the lit bar cells and the two lamps. |
+| `block/multiblock/asteroid_processor/overlay_front.png` | Idle: the Mond column's panel. A pressure gauge with the needle low, a red valve wheel, a dark sight glass on the carbonyl gas line, the decomposer's cold heater coil and a horseshoe magnet (the separator); dark run and heater lamps. |
+| `.../overlay_front_active.png` + `.mcmeta` | The needle trembles high, gas pulses run right along the sight glass, the coil glows and shimmers, a fleck of nickel hops between the magnet's poles, and the run (green) and heater (amber) lamps are lit. |
+| `.../overlay_front_active_emissive.png` + `.mcmeta` | Only the gas line, the heater coil and the two lamps. |
+| `block/multiblock/optical_miner/overlay_front.png` | Idle: a pale lens over a gold Kapton bag holding a rough boulder under a clear film window, the frosted cold trap piped to the bag, dark run and cold trap lamps. |
+| `.../overlay_front_active.png` + `.mcmeta` | The lens fills with sunlight, two pale rays converge through the film with a white glint running down each, the focus is white-hot over a breathing orange-hot spot, frost glints on the cold trap, and the run (green) and cold trap (cyan) lamps are lit. |
+| `.../overlay_front_active_emissive.png` + `.mcmeta` | Only the lens, the rays, the film, the focus and the two lamps. |
 
 ## Contrast pass after the gallery test (2026-10-25)
 
