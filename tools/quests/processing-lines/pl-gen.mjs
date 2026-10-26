@@ -42,8 +42,10 @@ function list(key, items, indent) {
 // 1234567 -> "1,234,567"; from 100 million on, three significant digits and a word; fractions to two decimals
 export function num(v) {
   const sig3 = (x) => String(Number(x.toPrecision(3)));
-  if (Math.abs(v) >= 1e9) return sig3(v / 1e9) + ' billion';
-  if (Math.abs(v) >= 1e8) return sig3(v / 1e6) + ' million';
+  // rounded first, so 999,948,288 reads "1 billion", not "1000 million"
+  const r = Math.abs(v) >= 1e8 ? Number(v.toPrecision(3)) : v;
+  if (Math.abs(r) >= 1e9) return sig3(r / 1e9) + ' billion';
+  if (Math.abs(r) >= 1e8) return sig3(r / 1e6) + ' million';
   if (Number.isInteger(v)) return v.toLocaleString('en-US');
   return String(Math.round(v * 100) / 100);
 }
@@ -62,6 +64,7 @@ function headline(f) {
     case 'cover': return `${num(f.eut)} EU/t in clear sun`;
     case 'toll': return `a ${num(f.percent)}% toll, paid in AE energy`;
     case 'wslots': return `${num(f.n)} cell slots`;
+    case 'wnet': return `${num(f.eut)} EU/t into the network`;
     default: return null;
   }
 }
