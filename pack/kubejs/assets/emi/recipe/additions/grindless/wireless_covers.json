@@ -1,0 +1,20 @@
+{
+  "type": "emi:info",
+  "stacks": [
+    "item:grindless:lv_wireless_energy_cover",
+    "item:grindless:lv_wireless_dynamo_cover",
+    "item:grindless:mv_wireless_energy_cover",
+    "item:grindless:mv_wireless_dynamo_cover",
+    "item:grindless:hv_wireless_energy_cover",
+    "item:grindless:hv_wireless_dynamo_cover",
+    "item:grindless:ev_wireless_energy_cover",
+    "item:grindless:ev_wireless_dynamo_cover",
+    "item:grindless:iv_wireless_energy_cover",
+    "item:grindless:iv_wireless_dynamo_cover"
+  ],
+  "text": [
+    "emi.grindless.info.wireless_covers.0",
+    "emi.grindless.info.wireless_covers.1",
+    "emi.grindless.info.wireless_covers.2"
+  ]
+}
