@@ -154,12 +154,12 @@ export default {
         n('dil', 4.5, -3.5, F('gtceu:diluted_sulfuric_acid'), 'Diluted Sulfuric Acid', { kind: 'by', from: ['bf'], end: 'sulfuric acid', sub: 'Distillery: sulfuric acid again' }),
         n('collagen', 4.5, -2.25, I('gtceu:collagen_dust'), 'Collagen', { from: ['bf'] }),
         n('sludge', 4.5, -0.75, F('gtceu:bacterial_sludge'), 'Bacterial Sludge', { from: ['bf'] }),
-        L('u235', 4.5, 0.75, 'pl_iv:u235'),
+        n('u235', 4.5, 0.75, I('gtceu:tiny_uranium_235_dust'), 'Tiny Uranium-235 Dust', { kind: 'raw', sub: 'A pinch of the hot cell\'s U-235' }),
         n('phos', 6.5, -3.5, I('gtceu:phosphorus_dust'), 'Phosphorus', {
           kind: 'by', from: ['collagen'], by: ['gtceu:sterile_culture'], end: 'phosphoric acid', sub: 'Phosphoric acid for the next batch',
         }),
         n('gelatin', 6.5, -2.25, I('gtceu:gelatin_dust'), 'Gelatin', { from: ['collagen'], by: ['gtceu:sterile_culture'] }),
-        n('mutagen', 6.5, -0.75, F('gtceu:mutagen'), 'Mutagen', { from: ['sludge', 'u235'], by: ['gtceu:sterile_culture'], sub: 'A pinch of uranium-235' }),
+        n('mutagen', 6.5, -0.75, F('gtceu:mutagen'), 'Mutagen', { from: ['sludge', 'u235'], by: ['gtceu:sterile_culture'], sub: 'Sludge and a tiny pile of uranium-235' }),
         n('agar', 8.5, -2.25, I('gtceu:agar_dust'), 'Agar', { from: ['gelatin'], by: ['gtceu:sterile_culture'] }),
         n('medium', 10.5, -1.5, F('gtceu:sterilized_growth_medium'), 'Sterilized Growth Medium', {
           from: ['agar', 'mutagen'], by: ['gtceu:sterile_culture'], sub: 'With meat, salt and calcium',
