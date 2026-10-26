@@ -61,7 +61,9 @@ Generators for the pack's own textures. Everything is procedural 16x16 pixel art
 | `Build-EuropaTextures.ps1` | Writes the faces of the LuV Europa machines (LuV-B8): the cryobot and the algae bioreactor (`multiblock/cryobot/`, `multiblock/algae_bioreactor/`). `-Only cryobot,algae_bioreactor` and `-Credits` (their 10 CREDITS rows). |
 
 | `Build-AsteroidBeltTextures.ps1` | Writes the faces of the LuV asteroid belt machines (LuV-B5): the harpoon anchor drill, the asteroid processor and the optical miner (`multiblock/harpoon_anchor_drill/`, `multiblock/asteroid_processor/`, `multiblock/optical_miner/`). `-Only drill,processor,miner`, `-Preview <png outside the repo>` and `-Credits` (their 15 CREDITS rows). |
-| `Build-IoOrbitTextures.ps1` | Writes the faces of the LuV Io orbit machines (LuV-B7): the flux-tube tether and the sulfur-iodine plant (`multiblock/flux_tube_tether/`, `multiblock/sulfur_iodine_plant/`). Static faces; it fails if an emissive pixel is not in the colour layer. |## Regenerate
+| `Build-IoOrbitTextures.ps1` | Writes the faces of the LuV Io orbit machines (LuV-B7): the flux-tube tether and the sulfur-iodine plant (`multiblock/flux_tube_tether/`, `multiblock/sulfur_iodine_plant/`). Static faces; it fails if an emissive pixel is not in the colour layer. |
+| `Build-ZPMEuropiumTextures.ps1` | Writes the face of the ZPM europium reductor (ZPM-A3): `multiblock/europium_reductor/` (`overlay_front`, `overlay_front_active` and its emissive layer; static, the emissive pixels are a subset of the colour layer). Proposed CREDITS "Assets" line: europium reductor overlays, procedural, original. |
+## Regenerate
 
 Run from the repo root. `-ExecutionPolicy Bypass` only affects that process (Windows PowerShell 5.1 blocks unsigned scripts by default).
 
