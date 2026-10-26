@@ -81,6 +81,7 @@
     { "id": "zpm_actinides", "x": [19968, 20031], "z": [0, 63], "y": [98, 112], "tests": ["zpm_actinides"], "note": "ZPM-A4: recipe lookups of the waste retrieval and actinide partitioning plants, and a formed retrieval plant (7 x 5 x 7) consuming one waste item" },
     { "id": "zpm_magnet_works", "x": [20224, 20287], "z": [0, 63], "y": [98, 112], "tests": ["zpm_magnet_works"], "note": "ZPM-A5: recipe lookups of the naquadria magnet works, a wireless tower with one ZPM cell (capacity above 2^31), a formed magnet works if cheap" },
     { "id": "zpm_qubits", "x": [20480, 20543], "z": [0, 63], "y": [98, 112], "tests": ["zpm_qubits"], "note": "ZPM-A6: recipe lookups only (no structure placed): the qubit chain, the hot cell's circuit 5 row and our two HPCA assembler recipes beside GTM's" },
+    { "id": "zpm_a7", "x": [20736, 20799], "z": [0, 63], "y": [98, 112], "tests": ["zpm_fusion"], "note": "ZPM-A7: a Mk2 and a Mk1 fusion reactor on our D + He-3 (Mk2 runs, Mk1 refuses), recipe lookups of the plasma quench caster and direct energy converter, a formed converter if cheap" },
     { "id": "zpm_b2", "x": [21760, 21823], "tests": ["zpm_saturn_siphon"], "note": "ZPM-B2: the siphon, column and harvester at Z 0-63; Saturn orbit Y 198-214 and Overworld Y 98-112" }
   ]
 }
