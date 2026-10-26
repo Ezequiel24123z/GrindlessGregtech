@@ -9,7 +9,10 @@
   "enabled": true,
   "first": "gcyr:overworld_orbit",
   "second": "grindless:io_orbit",
-  "more": [],
+  "more": [
+    { "slot": "saturn", "orbit": "grindless:saturn_orbit", "era": "zpm" },
+    { "slot": "uranus", "orbit": "grindless:uranus_orbit", "era": "zpm" }
+  ],
   "plot": 512,
   "pieces": ["gcyr:space_station_packager", "gcyr:space_station_package", "gcyr:id_chip", "gcyr:keycard"]
 }

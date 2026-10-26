@@ -16,7 +16,9 @@
     "jupiter": { "dimensions": ["grindless:jupiter", "grindless:jupiter_orbit"], "name": { "en_us": "Jupiter", "es_es": "Júpiter" } },
     "io": { "dimensions": ["grindless:io", "grindless:io_orbit"], "pairTag": "io", "name": { "en_us": "Io", "es_es": "Ío" } },
     "europa": { "dimensions": ["grindless:europa", "grindless:europa_orbit"], "pairTag": "europa", "name": { "en_us": "Europa", "es_es": "Europa" } },
-    "ganymede": { "dimensions": ["grindless:ganymede", "grindless:ganymede_orbit"], "pairTag": "ganymede", "name": { "en_us": "Ganymede", "es_es": "Ganímedes" } }
+    "ganymede": { "dimensions": ["grindless:ganymede", "grindless:ganymede_orbit"], "pairTag": "ganymede", "name": { "en_us": "Ganymede", "es_es": "Ganímedes" } },
+    "saturn": { "dimensions": ["grindless:saturn", "grindless:saturn_orbit"], "pairTag": "saturn", "name": { "en_us": "Saturn", "es_es": "Saturno" } },
+    "uranus": { "dimensions": ["grindless:uranus", "grindless:uranus_orbit"], "pairTag": "uranus", "name": { "en_us": "Uranus", "es_es": "Urano" } }
   },
   "dryOnEarth": ["gcyr:overworld_orbit"]
 }

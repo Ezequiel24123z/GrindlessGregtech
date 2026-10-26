@@ -15,6 +15,9 @@
 //   gtceu:composite_curing, HV (both 300 t at 480 EU/t; the nitrogen pressurises the vessel and is vented after the cure)
 //     ablative heat shield tile         4 fiberglass foils + 250 mB epoxy + 500 mB nitrogen -> 2 tiles
 //     composite overwrapped tank        1 stainless steel drum + 4 para-aramid foils + 250 mB epoxy + 500 mB nitrogen -> 1 tank
+//   gtceu:composite_curing, HV, circuit 5: the ablator mode (ZPM-B1, docs/eras/zpm.md "Older machines, new modes")
+//     PICA heat shield                  4 carbon fibres + 150 mB phenol + 150 mB formaldehyde (the phenolic resin) -> 2 shields. 480 EU/t x 300 t.
+//                                       The carbon-phenolic ablator the entry and flyby probes carry; nothing here is voided or gathered.
 //
 // The numbers are for one motor (4 thrusters, 2 tiles) and one fuel tank (2 overwrapped tanks): GCYR's Moon rocket takes 4 to 6 basic
 // motors and 2 basic tanks, so the first rocket is 4-6 thruster tests, 4-6 motor static fires, 4-6 tile cures and 4 tank cures, on top of
@@ -73,6 +76,16 @@
     eut: 480,
     duration: 300
   }
+  LR.recipes.ablator = {
+    id: 'grindless:composite_curing/pica_heat_shield',
+    itemsIn: [{ id: 'gtceu:carbon_fibers', n: 4 }],
+    fluidsIn: [{ id: 'gtceu:phenol', mb: 150 }, { id: 'gtceu:formaldehyde', mb: 150 }],
+    itemsOut: [{ id: 'grindless:pica_heat_shield', n: 2 }],
+    fluidsOut: [],
+    circuit: 5,
+    eut: 480,
+    duration: 300
+  }
   LR.craftingRecipes = { testStand: 'grindless:crafting/engine_test_stand', autoclave: 'grindless:crafting/composite_autoclave' }
 
   function ingredient(e) {
@@ -84,6 +97,7 @@
   function addGt(event, type, name, r) {
     var recipe = type === 'static_fire' ? event.recipes.gtceu.static_fire(name) : event.recipes.gtceu.composite_curing(name)
     r.itemsIn.forEach(function (e) { recipe.itemInputs(ingredient(e)) })
+    if (r.circuit) recipe.circuit(r.circuit)
     r.fluidsIn.forEach(function (f) {
       var id = Fluid.exists(f.id) ? f.id : f.fallback
       recipe.inputFluids(Fluid.of(id, f.mb))
@@ -139,7 +153,8 @@
     var table = [
       { type: 'static_fire', name: 'grindless:power_thrusters', r: LR.recipes.thrusters },
       { type: 'composite_curing', name: 'grindless:ablative_heat_shield_tile', r: LR.recipes.tile },
-      { type: 'composite_curing', name: 'grindless:composite_overwrapped_tank', r: LR.recipes.copv }
+      { type: 'composite_curing', name: 'grindless:composite_overwrapped_tank', r: LR.recipes.copv },
+      { type: 'composite_curing', name: 'grindless:pica_heat_shield', r: LR.recipes.ablator }
     ]
     table.forEach(function (t) {
       var missing = tableReady(t.r)

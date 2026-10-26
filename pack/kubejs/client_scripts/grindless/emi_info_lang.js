@@ -54,6 +54,11 @@ ClientEvents.lang('en_us', event => {
 
     add('emi.grindless.info.engineered_seeds.0', 'Made in the Biofoundry (LuV), with Europa\'s bacteria as the vector that carries the gene into the seed.')
     add('emi.grindless.info.engineered_seeds.1', 'Keep them: they are planted in the Rotating Hydroponic Ring, LuV\'s molecular farm on the first station in Earth orbit, and are not used up there. The barley grows the neurotrophic factor the LuV neuro processing unit needs; the tobacco grows plant collagen.')
+
+    add('emi.grindless.info.naquadah_fuel_tank.0', 'A part of a GCYR rocket: build it into the rocket like any fuel tank. Elite rocket motors with only Naquadah Fuel Tanks make a level 5 rocket, which reaches Saturn orbit. One lower tank in the build drops the level. Each tank holds 64,000 mB.')
+    add('emi.grindless.info.aerogel_fuel_tank.0', 'A part of a GCYR rocket: build it into the rocket like any fuel tank. Elite rocket motors with only Aerogel Fuel Tanks make a level 6 rocket, which reaches Uranus orbit. One lower tank in the build drops the level. Each tank holds 256,000 mB.')
+    add('emi.grindless.info.saturnian_quantum_seed.0', 'Made only in Saturn orbit, from a ring ice sample, an ender pearl and helium-3. Blow it up beside an AE2 singularity to get the far half of the Earth-Saturn quantum link.')
+    add('emi.grindless.info.uranian_quantum_seed.0', 'Made only in Uranus orbit, from an ice-giant atmosphere sample, an ender pearl and helium-3. Blow it up beside an AE2 singularity to get the far half of the Earth-Uranus quantum link.')
 })
 
 ClientEvents.lang('es_es', event => {
@@ -104,4 +109,9 @@ ClientEvents.lang('es_es', event => {
 
     add('emi.grindless.info.engineered_seeds.0', 'Se hacen en la biofundición (LuV), con las bacterias de Europa como vector que lleva el gen a la semilla.')
     add('emi.grindless.info.engineered_seeds.1', 'Guárdalas: se plantan en el anillo hidropónico giratorio, la granja molecular de LuV en la primera estación en órbita terrestre, y allí no se gastan. La cebada cultiva el factor neurotrófico que pide la unidad de procesamiento neural de LuV; el tabaco, colágeno vegetal.')
+
+    add('emi.grindless.info.naquadah_fuel_tank.0', 'Una pieza de cohete de GCYR: ponlo en el cohete como cualquier tanque de combustible. Motores de cohete de \u00e9lite con solo tanques de naquadah hacen un cohete de nivel 5, que llega a la \u00f3rbita de Saturno. Un tanque inferior en el cohete baja el nivel. Cada tanque lleva 64.000 mB.')
+    add('emi.grindless.info.aerogel_fuel_tank.0', 'Una pieza de cohete de GCYR: ponlo en el cohete como cualquier tanque de combustible. Motores de cohete de \u00e9lite con solo tanques de aerogel hacen un cohete de nivel 6, que llega a la \u00f3rbita de Urano. Un tanque inferior en el cohete baja el nivel. Cada tanque lleva 256.000 mB.')
+    add('emi.grindless.info.saturnian_quantum_seed.0', 'Se hace solo en la \u00f3rbita de Saturno, con una muestra de hielo de los anillos, una perla de ender y helio-3. Hazla explotar junto a una singularidad de AE2 para obtener la mitad lejana del enlace cu\u00e1ntico Tierra-Saturno.')
+    add('emi.grindless.info.uranian_quantum_seed.0', 'Se hace solo en la \u00f3rbita de Urano, con una muestra de atm\u00f3sfera del gigante de hielo, una perla de ender y helio-3. Hazla explotar junto a una singularidad de AE2 para obtener la mitad lejana del enlace cu\u00e1ntico Tierra-Urano.')
 })
