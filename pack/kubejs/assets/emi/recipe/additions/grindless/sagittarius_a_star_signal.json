@@ -1,0 +1,10 @@
+{
+  "type": "emi:info",
+  "stacks": [
+    "item:grindless:sagittarius_a_star_signal"
+  ],
+  "text": [
+    "emi.grindless.info.sagittarius_a_star_signal.0",
+    "emi.grindless.info.sagittarius_a_star_signal.1"
+  ]
+}

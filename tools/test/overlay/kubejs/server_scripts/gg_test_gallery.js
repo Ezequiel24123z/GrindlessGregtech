@@ -8,7 +8,8 @@
 //     in the table is noted and shown on an extra panel;
 //   - the gallery (this half): the band is cleared, a cyan wall goes up at Z 2 and every machine is set at Z 3 facing south
 //     (GTM's machine block, not formed: a controller's front overlay shows on its casing either way), lit by invisible light
-//     blocks at Z 4. One panel of 6 x 3 machines per era (steam to IV), one for the single-block machines; the player, in
+//     blocks at Z 4. One panel of 6 x 3 machines per era (steam to IV), one for the single-block machines, one for the wireless
+//     energy tower and hatches (8 panels: the band's room is full); the player, in
 //     spectator mode, is put 4.75 blocks in front of each panel and the client half takes one screenshot of it,
 //     kubejs/exported/gg_gallery_<n>.png (HUD hidden). The panel_<n> NOTE lines give each panel's machines, top row first,
 //     left to right;
@@ -67,10 +68,30 @@
       'lunar_solar_array', 'deep_space_antenna', 'extraction_cascade', 'cryogenic_plant', 'combined_cycle_plant', 'hot_strip_mill'] },
     { name: 'iv', title: 'IV controllers', ids: ['pressurized_vein_drill', 'venus_heat_engine', 'venus_acid_works', 'mercury_vein_drill',
       'mercury_solar_works', 'mercury_solar_field', 'interferometer', 'isr_wellfield', 'fuel_fabrication_plant', 'fission_reactor', 'hot_cell',
-      'heavy_water_plant', 'fluorspar_kiln', 'tritium_removal_facility'] },
+      'heavy_water_plant', 'fluorspar_kiln', 'tritium_removal_facility', 'naquadah_plant'] },
     { name: 'single', title: 'single-block machines', ids: ['lv_creature_simulator', 'mv_creature_simulator', 'hv_creature_simulator',
-      'ev_creature_simulator', 'ev_rtg'] }
+      'ev_creature_simulator', 'ev_rtg'] },
+    { name: 'wireless', title: 'wireless energy: the tower, every amperage at LV, every tier at 2 A', ids: wirelessIds() }
   ]
+
+  // the Wireless Energy Tower and its 40 hatches (LV-IV, 2/4/16/64 A, energy and dynamo): the panel sets out the first 18 (one
+  // panel); the rest are in the list, so the registry check still covers them
+  function wirelessIds() {
+    var ids = ['wireless_energy_tower', 'lv_wireless_energy_hatch', 'lv_wireless_energy_hatch_4a', 'lv_wireless_energy_hatch_16a',
+      'lv_wireless_energy_hatch_64a', 'mv_wireless_energy_hatch', 'lv_wireless_dynamo_hatch', 'lv_wireless_dynamo_hatch_4a',
+      'lv_wireless_dynamo_hatch_16a', 'lv_wireless_dynamo_hatch_64a', 'mv_wireless_dynamo_hatch', 'hv_wireless_energy_hatch',
+      'hv_wireless_dynamo_hatch', 'ev_wireless_energy_hatch', 'ev_wireless_dynamo_hatch', 'iv_wireless_energy_hatch',
+      'iv_wireless_dynamo_hatch', 'iv_wireless_energy_hatch_64a']
+    ;['lv', 'mv', 'hv', 'ev', 'iv'].forEach(function (t) {
+      ;['energy', 'dynamo'].forEach(function (k) {
+        ;['', '_4a', '_16a', '_64a'].forEach(function (a) {
+          var id = t + '_wireless_' + k + '_hatch' + a
+          if (ids.indexOf(id) < 0) ids.push(id)
+        })
+      })
+    })
+    return ids
+  }
   var START_TICKS = 40
   var FIRST_SHOT_TICKS = 300
   var SHOT_TICKS = 60

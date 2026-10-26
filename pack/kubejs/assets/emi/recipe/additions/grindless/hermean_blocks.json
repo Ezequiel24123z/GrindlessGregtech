@@ -1,0 +1,10 @@
+{
+  "type": "emi:info",
+  "stacks": [
+    "item:grindless:hermean_heat_shield_brick",
+    "item:grindless:hermean_thin_film_panel"
+  ],
+  "text": [
+    "emi.grindless.info.hermean_blocks.0"
+  ]
+}

@@ -10,6 +10,7 @@ The pack does not redistribute mods: packwiz downloads them from their official 
 | KubeJS, Rhino | Latvian / KubeJS-Mods | LGPL-3.0 | Pack scripts. |
 | FTB Quests, Library, Teams | FTB | Author's licence | Quest book. |
 | Wildcard Pattern 0.1.2 | LeoDreamer (github.com/LeoDreamer2004/Wildcard-Pattern) | MIT | Mod from its GitHub release; our assembler recipe. |
+| Gregtech Terminals 6.8.5 (gtceuterminal) | Bgame (github.com/BgameXl/gtceu-terminal-addon) | MIT | Installed mod. The Hologram Projector calls its public `BlockPatternReflection` to read GTM's pattern grid; no code copied. |
 
 ## Ideas and processes
 
@@ -17,6 +18,8 @@ Ideas are not copied as text or as code: they are rebuilt with our rules, and we
 
 | Idea in Gregtech Grindless | Where it comes from | Source licence | What we take |
 |---|---|---|---|
+| Diamond starter working tools with Efficiency V and a stack of food, alongside the retained neutronium toolbox | The pack author's early-game request for v0.7.1 | Original pack design | FTB Quests rewards; no external code, text or assets copied. |
+| Gift-only Field Prospector: free, immediate 16-chunk surveys without generating terrain | GregTech Modern 7.5.3, `ServerCache` / `WorldCache` / `DimensionCache` and `SPacketProspectOre` ([pinned source](https://github.com/GregTechCEu/GregTech-Modern/tree/v7.5.3-1.20.1/src/main/java/com/gregtechceu/gtceu/integration/map/cache)); the pack author's request | LGPL-3.0 | Calls GTM's existing saved-vein queries and native map-discovery packet. Our gift marker, use handler and text; no GTM code or textures copied. |
 | T0–T15 campaign and the trip to the black hole at the galactic centre (eras, places, Kardashev milestones, ending) | [grindless-earlygame](https://github.com/Ezequiel24123z/grindless-earlygame) (Ezequiel24123z, the pack's author) | MIT | The campaign script. The mod's machines and systems are not inherited; they are rebuilt with GregTech parts. |
 | Vein drill with a sample that is not used up | GregTech Leisure (data scanned once as a catalyst; vacuum miner with vein chosen by circuit), Monifactory (the micro-miner head picks the table) | GTL: No clear licence (ideas only). Monifactory: LGPL-3.0 | The concept. The implementation is ours. |
 | Drill bit that wears down by probability | Star Technology (meshes with probability-based wear) | MIT | The concept. |
@@ -145,6 +148,15 @@ Ideas are not copied as text or as code: they are rebuilt with our rules, and we
 | Platinum plant mode 3 (iridosmine → iridium and osmium) | IV-B2's fusion; GT--'s iridium and osmium chain (gtnn 1.3.10); real platinum-group refining (osmium volatilized as OsO₄, iridium through its chloro salts) | AGPL-3.0 (read in game, nothing copied) / real | Composed at load (`ev/platinum_plant.js`). |
 | Parallel hatch in the platinum and naquadah plants | GTM's Parallel Control Hatch and GCYM's parallel-then-overclock order, through IV-B6's helper | LGPL-3.0 (GTM) | Already credited by IV-B6; nothing new copied. |
 | Processing Lines tab: one flowchart chapter per tier, each node an optional item task with a checkmark, gears for machines, quest links to import a quest from an earlier chart | Star Technology (StarT-Dev-Team, © 2023 trulyno), "Progression" group, `config/ftbquests/quests/chapters/pl1.snbt`–`pl5.snbt` | MIT | Structure and conventions. The lines, the layout, the generator and the texts are ours; no SNBT or text was copied. |
+| Hologram Projector: right-click previews the multiblock; sneak-right-click builds its default structural blocks from inventory, never hatches | GTNH StructureLib's Multiblock Structure Hologram Projector (GTNewHorizons/StructureLib, from TecTech) | LGPL-3.0 (older versions MIT) | The idea and click semantics only; no StructureLib code, text or texture copied. |
+| The projector's in-world hologram | GTM 7.5.3 `MultiblockInWorldPreviewRenderer` (`showPreview`, `cleanPreview`) | LGPL-3.0 | Public renderer called from `client_scripts/grindless/hologram_projector.js`, not copied. |
+| Pattern cell positions for controller facing, upwards facing and mirroring | GTM 7.5.3 `BlockPattern#setActualRelativeOffset` | LGPL-3.0 | Adapted to JavaScript as `relOffset` in `server_scripts/grindless/steam/hologram_projector.js`. |
+| Stronger metal tiers for chests and furnaces: twice the slots and upgrade slots (180 at most), twice the limited-barrel multiplier, twice the smelting speed with the fuel per item unchanged; FE augments and the Million furnace removed | Sophisticated Storage 1.20.1-1.5.9 (P3pp3rF1y: server config `inventorySlotCount` / `upgradeSlotCount` / `baseSlotLimitMultiplier`, `StorageWrapper#promoteSlotNumbersToDefaults`) and Iron Furnaces 1.20.1-4.1.6 (Qelifern: `ironfurnaces-client.toml` speeds, upgrade items) | Sophisticated Storage: all rights reserved (Modrinth); Iron Furnaces: Apache-2.0 on Modrinth (its build file says GPL-3.0) | Only their own configuration, with our values (`tables/chest_furnace_tiers.json`); the per-world migration (`startup_scripts/grindless/integration/sophisticatedstorage_tiers.js`) is ours. No code or assets copied. |
+| A global wireless EU network: energy and dynamo hatches share one store across dimensions | GTNH's GT5-Unofficial wireless EU network | LGPL-3.0, idea only | The concept; our KubeJS store, settlement, entry loss and tier rule. No upstream code or assets copied. |
+| Wireless Energy Tower with tiered capacitor cells | GTM 7.5.3 `PowerSubstationMachine` and its six-batteries-per-cell ratio; GTNH's Lapotronic Supercapacitor | LGPL-3.0, API reference and ideas only | Tiered cells counted from the formed structure and the capacity ratio; our structure, recipes and global weakest-cell rule. |
+| Wireless energy covers for single-block machines | GTMThings | All rights reserved, idea only | The cover concept only; no code or assets read or reused. |
+| Script-registered wireless covers, hatches and item-backed energy adapters | GTM 7.5.3 `GTCEuAPI.RegisterEvent`, `WirelessTransmitterCover`, `SimpleCoverRenderer`, `EnergyHatchPartMachine`, `BatteryBufferMachine` and `ChargerMachine` | LGPL-3.0, public APIs and source reference | GTM's registry and energy APIs; tests model its pinned container behavior. The network, adapters and native-NBT registry are ours. |
+| A Power reference tab with generation options, fuels and figures by tier | GT New Horizons wiki, "Power Generation" | CC BY-SA 4.0, idea only | The reference-page concept. Our layout, data and text; the chart conventions come from the already-credited Star Technology Processing Lines. |
 
 ## Quests
 
@@ -174,6 +186,14 @@ Each of our own textures is recorded here with its origin.
 
 | File | Origin | Licence |
 |---|---|---|
+| `pack/kubejs/assets/grindless/textures/item/hologram_projector.png` | Generated with tools/assets/Build-HologramProjectorTextures.ps1 (original procedural pixel art), 2026-10-25 | the pack's licence (pending; proposed CC BY-SA 4.0) |
+| `pack/kubejs/assets/grindless/textures/item/hologram_projector.png.mcmeta` | Generated with tools/assets/Build-HologramProjectorTextures.ps1 (original procedural pixel art), 2026-10-25 | the pack's licence (pending; proposed CC BY-SA 4.0) |
+| `pack/kubejs/assets/grindless/textures/block/machines/wireless/*` | Original hatch overlays, emissive animations and amperage rings generated with tools/assets/Build-WirelessEnergyTextures.ps1, 2026-10-25 | the pack's licence (pending; proposed CC BY-SA 4.0) |
+| `pack/kubejs/assets/grindless/textures/block/cover/wireless_*` | Original tiered energy/dynamo cover textures and emissive animations generated with tools/assets/Build-WirelessEnergyTextures.ps1, 2026-10-25 | the pack's licence (pending; proposed CC BY-SA 4.0) |
+| `pack/kubejs/assets/grindless/textures/item/wireless/*` | Original cover-item pixel art generated with tools/assets/Build-WirelessEnergyTextures.ps1, 2026-10-25 | the pack's licence (pending; proposed CC BY-SA 4.0) |
+| `pack/kubejs/assets/grindless/textures/block/wireless/*` | Original LV-IV capacitor-cell pixel art generated with tools/assets/Build-WirelessEnergyTextures.ps1, 2026-10-25 | the pack's licence (pending; proposed CC BY-SA 4.0) |
+| `pack/kubejs/assets/grindless/textures/block/multiblock/wireless_energy_tower/*` | Original controller overlays and animation metadata generated with tools/assets/Build-WirelessEnergyTextures.ps1, 2026-10-25 | the pack's licence (pending; proposed CC BY-SA 4.0) |
+| `pack/kubejs/assets/grindless/models/block/machines/wireless/*.json` | Eight original GTM hatch models generated with tools/assets/Build-WirelessEnergyTextures.ps1, 2026-10-25 | the pack's licence (pending) |
 | `pack/kubejs/assets/grindless/textures/block/multiblock/steam_vein_drill/overlay_front.png` | Generated with tools/assets/Build-SteamTextures.ps1 (procedural pixel art, original) by the assets agent, 2026-10-24 | the pack's licence (pending; proposed CC BY-SA 4.0) |
 | `pack/kubejs/assets/grindless/textures/block/multiblock/steam_vein_drill/overlay_front_active.png` | Generated with tools/assets/Build-SteamTextures.ps1 (procedural pixel art, original) by the assets agent, 2026-10-24 | the pack's licence (pending; proposed CC BY-SA 4.0) |
 | `pack/kubejs/assets/grindless/textures/block/multiblock/steam_vein_drill/overlay_front_active.png.mcmeta` | Generated with tools/assets/Build-SteamTextures.ps1 (procedural pixel art, original) by the assets agent, 2026-10-24 | the pack's licence (pending; proposed CC BY-SA 4.0) |

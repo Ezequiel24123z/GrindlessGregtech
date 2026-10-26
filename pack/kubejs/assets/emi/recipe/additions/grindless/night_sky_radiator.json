@@ -1,0 +1,9 @@
+{
+  "type": "emi:info",
+  "stacks": [
+    "item:grindless:night_sky_radiator"
+  ],
+  "text": [
+    "emi.grindless.info.night_sky_radiator.0"
+  ]
+}

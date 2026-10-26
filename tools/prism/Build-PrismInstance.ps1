@@ -1,11 +1,11 @@
 # Builds the Prism Launcher instance of the playable channel: a zip the player imports once
 # (Prism: Add Instance > Import > zip). On every launch the instance updates itself from the
-# `jugable` branch with packwiz-installer-bootstrap (MIT), which only moves to tested releases.
+# `playable` branch with packwiz-installer-bootstrap (MIT), which only moves to tested releases.
 # With a version tag as the channel (-Channel v0.5.0) it builds a fixed instance of that version, for the GitHub release
 # of each version: the tag never moves, so that instance never updates.
-#   powershell -NoProfile -ExecutionPolicy Bypass -File tools\prism\Build-PrismInstance.ps1 [-Channel jugable|vX.Y.Z] [-OutDir <dir>]
+#   powershell -NoProfile -ExecutionPolicy Bypass -File tools\prism\Build-PrismInstance.ps1 [-Channel playable|vX.Y.Z] [-OutDir <dir>]
 param(
-    [string]$Channel = 'jugable',
+    [string]$Channel = 'playable',
     [string]$OutDir = (Join-Path $PSScriptRoot 'out'),
     [int]$MinMemMb = 4096,
     [int]$MaxMemMb = 10240
