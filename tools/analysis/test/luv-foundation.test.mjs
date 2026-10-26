@@ -70,6 +70,34 @@ test('names and both tooltip lines in en_us and es_es; materials named', () => {
   assert.deepEqual(problems, []);
 });
 
+test('every item and block has its texture, and the panel its model', () => {
+  const missing = [];
+  for (const id of ITEMS) if (!fs.existsSync(path.join(assets, 'textures', 'item', short(id) + '.png'))) missing.push(id);
+  for (const id of BLOCKS) {
+    if (id === 'grindless:orbital_solar_panel') continue;
+    if (!fs.existsSync(path.join(assets, 'textures', 'block', 'luv', short(id) + '.png'))) missing.push(id);
+  }
+  const model = path.join(assets, 'models', 'block', 'luv', 'orbital_solar_panel.json');
+  assert.ok(fs.existsSync(model), 'models/block/luv/orbital_solar_panel.json');
+  for (const t of Object.values(JSON.parse(fs.readFileSync(model, 'utf8')).textures)) {
+    const [ns, p] = t.split(':');
+    if (!fs.existsSync(path.join(pack, 'kubejs', 'assets', ns, 'textures', ...p.split('/')) + '.png')) missing.push(t);
+  }
+  assert.deepEqual(missing, []);
+});
+
+test('the forms LuV needs of existing GT materials: germanium plate and dense titanium plate, by materialModification, not hidden', () => {
+  const src = fs.readFileSync(path.join(pack, 'kubejs', 'startup_scripts', 'grindless', 'luv', 'foundation.js'), 'utf8');
+  const body = src.slice(src.indexOf('GTCEuStartupEvents.materialModification'));
+  assert.match(body, /germanium: \[GTMaterialFlags\.GENERATE_PLATE\]/);
+  assert.match(body, /titanium: \[GTMaterialFlags\.GENERATE_DENSE\]/);
+  assert.match(body, /material\.addFlags\(flag\)/);
+  const hidden = readJson('pack/kubejs/data/grindless/tables/hidden_until.json');
+  const ids = new Set(hidden.groups.flatMap((g) => g.items));
+  for (const id of ['gtceu:germanium_plate', 'gtceu:dense_titanium_plate', 'gtceu:germanium_ingot', 'gtceu:titanium_plate']) assert.ok(!ids.has(id), `${id} is hidden`);
+  assert.ok(!hidden.groups.some((g) => g.material === 'germanium' || g.material === 'titanium'));
+});
+
 test('hidden until its package lands: hidden_until.json and the obtain rules list the same A1 groups', () => {
   const hidden = readJson('pack/kubejs/data/grindless/tables/hidden_until.json');
   const rules = readJson('tools/analysis/tiers/obtain.json').obtain.classes.filter((r) => /^LuV-A1 registration/.test(r.reason || ''));
