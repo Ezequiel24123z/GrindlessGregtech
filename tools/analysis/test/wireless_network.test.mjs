@@ -569,6 +569,20 @@ function jvm(opts = {}) {
   sandbox.global = kubejsGlobal();
   sandbox.global.grindless = { readJsonTable: (p) => JSON.parse(fs.readFileSync(path.join(PACK, p), 'utf8')) };
   vm.createContext(sandbox);
+  // KubeJS's Rhino (2001) answers String#charCodeAt with a java.lang.Character (NativeString, Id_charCodeAt: `return c`): arithmetic
+  // makes it NaN (ScriptRuntime#toNumber of a non-JS object), String() gives the character back. Patched on this realm's own
+  // String.prototype, the one the sandbox's string primitives use (the test's realm keeps the real one).
+  vm.runInContext(`(function () {
+    var proto = ('').constructor.prototype;
+    var charAt = proto.charAt;
+    proto.charCodeAt = function (i) {
+      var s = '' + this;
+      var p = Math.trunc(Number(i)) || 0;
+      if (p < 0 || p >= s.length) return NaN;
+      var ch = charAt.call(s, p);
+      return { javaClass: 'java.lang.Character', valueOf: function () { return NaN; }, toString: function () { return ch; } };
+    };
+  })()`, sandbox);
   const runFile = (f) => vm.runInContext(fs.readFileSync(f, 'utf8'), sandbox, { filename: path.basename(f) });
   runFile(PATTERNS_SCRIPT);
   runFile(STARTUP_SCRIPT);
@@ -991,6 +1005,8 @@ test('the native wireless tests (adapters, then the restart\'s two phases) pass 
   assert.equal(j2.commands.gg_test_wireless_restart_2({}), 1);
   assert.ok(simRun(sim, j2, 3000, () => j2.lines.includes('GGTEST|wireless_restart|DONE')), 'phase 2 ends: ' + j2.lines.slice(-5).join(' / '));
   assert.equal(kubejsGlobal.stored(j2.global, 'ggTestWirelessQueue'), '');
+  const print = restoredPrint(j2.lines);
+  assert.ok(print && print.now === print.saved, 'RESTORED compared a well-formed fingerprint: ' + JSON.stringify(print));
   const all = j1.lines.concat(j2.lines).filter((l) => l.startsWith('GGTEST|'));
   if (process.env.GG_SHOW_SIM) console.log(all.join('\n'));
   assert.deepEqual(all.filter((l) => /\|(FAIL|ERROR)(\||$)/.test(l)), []);
@@ -1014,6 +1030,12 @@ test('the native wireless tests (adapters, then the restart\'s two phases) pass 
 const RESTART_SCRIPTS = ['gg_test_wireless_adapters.js', 'gg_test_wireless_restart.js'].map((f) => path.join(OVERLAY, f));
 const passed = (lines, scope, name) => lines.some((l) => l.startsWith('GGTEST|' + scope + '|' + name + '|PASS'));
 const failed = (lines) => lines.filter((l) => l.startsWith('GGTEST|') && /\|(FAIL|ERROR)(\||$)/.test(l));
+// RESTORED's fingerprints, now and saved, when both are well formed (the first version printed `hash NaN-NaN (saved NaN-NaN)`, equal for
+// any list: this Rhino's charCodeAt returns a java.lang.Character, NaN in arithmetic)
+function restoredPrint(lines) {
+  const m = /fingerprint (\d+:\d+-\d+) \(saved (\d+:\d+-\d+), both well formed: true\)/.exec(lines.find((l) => l.startsWith('GGTEST|wireless_restart|RESTORED|')) || '');
+  return m ? { now: m[1], saved: m[2] } : null;
+}
 
 // phase 1 in one sandbox, the bench's @restart (persistent data through NbtIo bytes, the multiblocks checked again), phase 2 in another
 function restartAround(sim, j1, phase2Ticks = 3000) {
@@ -1053,6 +1075,8 @@ test('restart_1 starts on its own (no adapter test before it), and the restart\'
   assert.equal(kubejsGlobal.stored(j1.global, 'ggTestWirelessRestartRequest1'), false, 'taken');
   const j2 = restartAround(sim, j1);
   for (const name of ['RESTORED', 'AUTOMATIC']) assert.ok(passed(j2.lines, 'wireless_restart', name), name);
+  const print = restoredPrint(j2.lines);
+  assert.ok(print && print.now === print.saved, 'RESTORED compared a well-formed fingerprint: ' + JSON.stringify(print));
   assert.deepEqual(failed(j1.lines.concat(j2.lines)), []);
   assert.equal(sim.levels['minecraft:overworld'].machines.size + sim.levels['gcyr:luna'].machines.size, 0, 'left clean');
 });
@@ -1085,4 +1109,30 @@ test('restart_1 that never gets its turn fails in 120 s with the queue it saw, e
   assert.ok(!passed(j2.lines, 'wireless_restart', 'AUTOMATIC'), 'nothing to prove without phase 1');
   assert.equal(sim.server.persistentData.contains('gg_test_wireless_restart'), false, 'the record is removed');
   assert.equal(kubejsGlobal.stored(j2.global, 'ggTestWirelessQueue'), '');
+});
+test('this Rhino\'s String#charCodeAt is modelled: a java.lang.Character, NaN in arithmetic, in the sandbox only', () => {
+  const j = jvm();
+  assert.ok(Number.isNaN(vm.runInContext("'{'.charCodeAt(0) * 131 + 7", j.sandbox)), 'NativeString Id_charCodeAt returns the char');
+  assert.equal(vm.runInContext("String('{'.charCodeAt(0))", j.sandbox), '{');
+  assert.equal(vm.runInContext("'{\"a\"}'.indexOf('a') + 1", j.sandbox), 3, 'indexOf still answers a number');
+  assert.equal('{'.charCodeAt(0), 123, 'the test\'s own realm keeps the real charCodeAt');
+});
+
+test('RESTORED compares the list\'s content: one entry changed across the restart (same length and count) fails it', () => {
+  const sim = simWorld();
+  const j1 = jvm({ overlays: RESTART_SCRIPTS, clock: sim.clock, disk: sim.disk });
+  simServer(sim, j1, new CompoundTag());
+  simRun(sim, j1, 40);
+  assert.equal(j1.commands.gg_test_wireless_restart_1({}), 1);
+  assert.ok(simRun(sim, j1, 2000, () => j1.lines.includes('GGTEST|wireless_restart|PHASE1|DONE')));
+  // between the save and the next start the last synthetic cover changes its kind (dynamo <-> energy: the JSON keeps its length)
+  const list = sim.server.persistentData.getList('grindless_wireless_blocks', 10);
+  const last = list.getCompound(list.size() - 1);
+  last.putString('ck', last.getString('ck') === 'dynamo' ? 'energy' : 'dynamo');
+  const j2 = restartAround(sim, j1);
+  const restored = j2.lines.find((l) => l.startsWith('GGTEST|wireless_restart|RESTORED|')) || '';
+  assert.match(restored, /^GGTEST\|wireless_restart\|RESTORED\|FAIL\|/, 'the changed entry is caught');
+  const m = /fingerprint (\d+):(\d+-\d+) \(saved (\d+):(\d+-\d+), both well formed: true\)/.exec(restored);
+  assert.ok(m && m[1] === m[3] && m[2] !== m[4], 'same length, another fingerprint: ' + restored.slice(0, 420));
+  assert.ok(passed(j2.lines, 'wireless_restart', 'AUTOMATIC'), 'the endpoints still work');
 });
