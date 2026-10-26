@@ -8,6 +8,9 @@
 //   circuit 2  extraction  1 000 mB rare earth chloride solution + 3 000 mB hydrochloric acid (the strip) + 1 000 mB kerosene ->
 //                          1 samarium chloride + 1 neodymium chloride + 2 mixed rare earth chloride + 950 mB kerosene + 6 000 mB diluted
 //                          hydrochloric acid                                                          1 920 EU/t, 200 t (384 000 EU)
+//   circuit 5  ZPM mode    (ZPM-A3, the europium reductor's feed) 4 000 mB GTCA monazite froth + 3 000 mB hydrochloric acid -> 4 000 mB
+//                          europium chloride solution + 1 000 mB phosphoric acid (the froth's phosphate)     122 880 EU/t, 40 t (ZPM hatch)
+//                          The solution goes to the europium reductor (zpm/europium.js); its depleted liquor comes back into circuit 2.
 //
 // The chemistry. Merrillite (A1: Ca8(Mg,Fe)(REE)(PO4)7 per half cell) is three (Ca,Mg)3(PO4)2 and one rare earth phosphate in one
 // lattice. The leach, net of the cascade's own recycling of calcium and phosphate inside, is
@@ -88,6 +91,14 @@
       itemsOut: [{ id: SM_CL, count: 1 }, { id: ND_CL, count: 1 }, { id: MIX_CL, count: 2 }],
       fluidsOut: [{ id: KEROSENE, amount: 950 }, { id: DILUTED_HCL, amount: 6000 }],
       eut: 1920, duration: 200
+    },
+    {
+      name: 'monazite_froth_europium', mode: 'zpm', circuit: 5,
+      itemsIn: [],
+      fluidsIn: [{ id: 'gtca:monazite_froth', amount: 4000 }, { id: HCL, amount: 3000 }],
+      itemsOut: [],
+      fluidsOut: [{ id: 'gtceu:europium_chloride_solution', amount: 4000 }, { id: PHOSPHORIC, amount: 1000 }],
+      eut: 122880, duration: 40
     }
   ]
 
@@ -140,19 +151,16 @@
   })
 
   function addRecipes(event) {
-    var items = {}
-    var fluids = {}
+    var added = 0
     EC.recipes.forEach(function (r) {
-      r.itemsIn.concat(r.itemsOut).forEach(function (x) { items[x.id] = true })
-      r.fluidsIn.concat(r.fluidsOut).forEach(function (f) { fluids[f.id] = true })
-    })
-    var missing = Object.keys(items).filter(function (id) { return !Item.exists(id) })
-      .concat(Object.keys(fluids).filter(function (id) { return !Fluid.exists(id) }))
-    if (missing.length > 0) {
-      console.error(LOG + 'extraction cascade recipes skipped, unknown id(s): ' + missing.join(', '))
-      return
-    }
-    EC.recipes.forEach(function (r) {
+      // one recipe with an unknown id (the ZPM mode takes a GTCA fluid) never takes the others down
+      var missing = r.itemsIn.concat(r.itemsOut).filter(function (x) { return !Item.exists(x.id) }).map(function (x) { return x.id })
+        .concat(r.fluidsIn.concat(r.fluidsOut).filter(function (f) { return !Fluid.exists(f.id) }).map(function (f) { return f.id }))
+      if (missing.length > 0) {
+        console.error(LOG + 'extraction cascade recipe ' + r.name + ' skipped, unknown id(s): ' + missing.join(', '))
+        return
+      }
+      added++
       var recipe = event.recipes.gtceu.solvent_extraction(r.id)
       r.itemsIn.forEach(function (x) { recipe.itemInputs(x.count + 'x ' + x.id) })
       recipe.circuit(r.circuit)
@@ -161,7 +169,7 @@
       r.fluidsOut.forEach(function (f) { recipe.outputFluids(Fluid.of(f.id, f.amount)) })
       recipe.EUt(r.eut).duration(r.duration)
     })
-    console.info(LOG + 'extraction cascade recipes added: ' + EC.recipes.length)
+    console.info(LOG + 'extraction cascade recipes added: ' + added)
   }
 
   // CRAFTING TABLE: EV hull + EV mixer (the mixers of the stages) + EV centrifuge (the settlers: the phases come apart) + EV chemical
