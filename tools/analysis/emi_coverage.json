@@ -51,7 +51,6 @@
       ],
       "pendingRoutes": [
         { "id": "grindless:assembler/aerogel_fuel_tank", "reason": "ZPM-B1: silica aerogel and nanotube yarn are A8's, the Uranus transfer chart B4's; delete when both merge" },
-        { "id": "grindless:chemical_reactor/saturnian_quantum_seed", "reason": "ZPM-B1: the ring ice sample is B2's; delete when B2 merges" },
         { "id": "grindless:chemical_reactor/uranian_quantum_seed", "reason": "ZPM-B1: the ice-giant atmosphere sample is B5's; delete when B5 merges" }
       ]
     }
