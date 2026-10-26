@@ -15,7 +15,7 @@ function descent(options = {}) {
   const rocket = {
     uuid: 'actual-root-uuid', dimension, y: options.y ?? 65,
     isRemoved: () => false, onGround: () => options.ground !== false,
-    getX: () => 0, getY: () => options.y ?? 65, getZ: () => 0,
+    getX: () => 0, getY: () => rocket.y, getZ: () => 0,
   };
   const player = { dimension, y: 67, vehicle: options.serverMount === false ? null : rocket };
   const values = new Map(Object.entries({
@@ -75,13 +75,15 @@ function descent(options = {}) {
     PlayerEvents: { loggedIn() {} }, EntityEvents: { hurt() {}, death() {} },
     Item: { of: id => ({ id }) },
   };
-  if (options.assistHandled) {
-    sandbox.global.grindless.orbitArrival = { states: { [rocket.uuid]: { handled: true } } };
-  }
+  const setAssistState = state => {
+    sandbox.global.grindless.orbitArrival = { states: { [rocket.uuid]: state } };
+  };
+  if (options.assistState !== undefined) setAssistState(options.assistState);
+  else if (options.assistHandled) setAssistState({ handled: true });
   vm.runInNewContext(source.replace(/\}\)\(\)\s*$/, hook + '\n})()'), sandbox, { filename: file });
   const h = sandbox.global.probe;
   h.install(probe);
-  return { h, checks, aborted, setNow: value => { now = value; } };
+  return { h, checks, aborted, rocket, values, setAssistState, setNow: value => { now = value; } };
 }
 
 test('orbit landing requires native collision and the actual fresh server/client mount', () => {
@@ -108,16 +110,106 @@ test('a lowered but unticked rocket, absent/wrong mount, stale data and coordina
 });
 
 test('failed post-correction recovery exits after the bounded settle window, not the full landing timeout', () => {
-  for (const wallDeadline of [false, true]) {
-    const c = descent({ ground: false });
+  for (const assistState of [
+    { handled: true }, { handled: true, outcome: 'corrected' }, { handled: true, outcome: 'error' },
+    { handled: false, outcome: 'corrected' }, { handled: false, outcome: 'error' },
+  ]) for (const wallDeadline of [false, true]) {
+    const c = descent({ ground: false, assistState });
     c.h.tick();
+    assert.equal(c.h.state().orbitSettleT, 100);
+    assert.equal(c.h.state().orbitSettleMs, 100000);
+    if (wallDeadline) c.setNow(110000);
+    else c.h.advance(200);
+    c.h.tick();
+    assert.equal(c.h.state().phase, 'descent', 'deadline boundary is unchanged');
     if (wallDeadline) c.setNow(110001);
-    else c.h.advance(201);
+    else c.h.advance(1);
     c.h.tick();
     assert.equal(c.h.state().phase, 'aborted');
     assert.deepEqual(c.aborted, ['orbit collision/client-mount recovery failed']);
     assert.ok(c.checks.some(row => row.name === 'flight_landing_station_1' && !row.ok));
   }
+});
+
+test('natural descent below550 and past200 ticks/ten seconds never arms the special timer without an assist attempt', () => {
+  for (const assistState of [undefined, { handled: false }, { handled: false, outcome: 'observing' }]) {
+    const c = descent({ y: 549, ground: false, assistState });
+    c.h.state().lastY = 600;
+    c.h.state().minY = 600;
+    c.h.state().landStable = 0;
+    for (let i = 0; i <= 250; i++) {
+      c.rocket.y = 549 - i * 1.5;
+      c.values.set('clientMountedRocketY', String(c.rocket.y));
+      c.values.set('clientMountObservedMs', String(100000 + i * 50));
+      c.setNow(100000 + i * 50);
+      c.h.tick();
+      c.h.advance(1);
+    }
+    assert.equal(c.h.state().phase, 'descent');
+    assert.equal(c.h.state().orbitSettleT, undefined);
+    assert.equal(c.h.state().orbitSettleMs, undefined);
+    assert.deepEqual(c.aborted, []);
+    assert.ok(!c.checks.some(row => row.name === 'flight_landing_station_1'), 'neither false PASS nor special timeout');
+  }
+});
+
+test('an assist observed after prolonged natural descent starts a fresh, latched recovery window at that attempt', () => {
+  const c = descent({ y: 549, ground: false, assistState: { handled: false } });
+  c.h.tick();
+  c.h.advance(201);
+  c.rocket.y = 180;
+  c.setNow(110050);
+  c.h.tick();
+  assert.equal(c.h.state().orbitSettleT, undefined);
+  assert.deepEqual(c.aborted, []);
+  c.setAssistState({ handled: true, outcome: 'error' });
+  c.h.tick();
+  assert.equal(c.h.state().orbitSettleT, 301);
+  assert.equal(c.h.state().orbitSettleMs, 110050);
+  c.setAssistState({ handled: false }); // Once armed, a cleared observation cannot extend this arrival's window.
+  c.h.advance(200);
+  c.setNow(120050);
+  c.h.tick();
+  assert.equal(c.h.state().phase, 'descent');
+  c.h.advance(1);
+  c.setNow(120051);
+  c.h.tick();
+  assert.equal(c.h.state().phase, 'aborted');
+  assert.deepEqual(c.aborted, ['orbit collision/client-mount recovery failed']);
+});
+
+test('natural descent without an assist still expires the unchanged ordinary landing timeout', () => {
+  const c = descent({ y: 500, ground: false, assistState: { handled: false } });
+  c.h.tick();
+  c.h.advance(2300); // age2400 is still within the existing strict >2400 boundary.
+  c.rocket.y = 100;
+  c.setNow(220000);
+  c.h.tick();
+  assert.equal(c.h.state().phase, 'descent');
+  assert.equal(c.h.state().orbitSettleT, undefined);
+  c.h.advance(1);
+  c.h.tick();
+  assert.equal(c.h.state().phase, 'aborted');
+  assert.deepEqual(c.aborted, ['no landing']);
+  assert.ok(c.checks.some(row => !row.ok && row.detail.includes('not on the ground 2401 ticks after arrival')));
+});
+
+test('an unassisted orbit landing still needs all ten stable samples with native ground and fresh matching mounts', () => {
+  const c = descent({ assistState: { handled: false } });
+  c.h.state().landStable = 0;
+  for (let i = 1; i <= 9; i++) {
+    c.h.tick();
+    assert.equal(c.h.state().landStable, i);
+    assert.equal(c.h.state().phase, 'descent');
+    assert.ok(!c.checks.some(row => row.name === 'flight_landing_station_1' && row.ok));
+    c.h.advance(1);
+  }
+  c.h.tick();
+  assert.equal(c.h.state().phase, 'done');
+  assert.ok(c.checks.some(row => row.name === 'flight_native_ground_station_1' && row.ok));
+  assert.ok(c.checks.some(row => row.name === 'flight_client_mount_station_1' && row.ok));
+  assert.ok(c.checks.some(row => row.name === 'flight_landing_station_1' && row.ok));
+  assert.equal(c.h.state().orbitSettleT, undefined);
 });
 
 test('existing surface landing proof is unchanged and does not require the new orbit observations', () => {

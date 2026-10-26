@@ -1525,14 +1525,20 @@
       var assist = orbitLanding && global.grindless.orbitArrival
       var assistState = assist && assist.states[uuidOf(r3)]
       var assistHandled = assistState && String(assistState.handled) === 'true'
-      if (orbitLanding && (y3 < 550 || assistHandled)) {
-        if (FL.orbitSettleT === undefined) {
-          FL.orbitSettleT = S.t
-          FL.orbitSettleMs = Date.now()
-        }
+      var assistOutcome = assistState && assistState.outcome !== undefined ? String(assistState.outcome) : ''
+      var assistAttempted = assistHandled || assistOutcome === 'corrected' || assistOutcome === 'error'
+      // Natural descent below550 is NOT an assist attempt. It keeps the ordinary bounded
+      // landing timeout. Once an actual attempt/terminal outcome is seen, latch this arrival's
+      // short recovery deadline; the arrived phase clears both clocks for the next leg.
+      if (orbitLanding && assistAttempted && FL.orbitSettleT === undefined) {
+        FL.orbitSettleT = S.t
+        FL.orbitSettleMs = Date.now()
+      }
+      if (orbitLanding && FL.orbitSettleT !== undefined) {
         if (S.t - FL.orbitSettleT > 200 || Date.now() - FL.orbitSettleMs > 10000) {
-          check('flight_landing_' + FL.leg, false, 'orbit assist finished or moved below arrival height but normal landing not proven: y=' +
-            y3 + ', assistHandled=' + !!assistHandled + ', onGround=' + grounded + ', serverMounted=' + serverMounted +
+          check('flight_landing_' + FL.leg, false, 'orbit assist attempted/terminal but normal landing not proven: y=' +
+            y3 + ', assistHandled=' + !!assistHandled + ', assistOutcome=' + assistOutcome +
+            ', onGround=' + grounded + ', serverMounted=' + serverMounted +
             ', clientMounted=' + clientMounted + ', client=' + sval('clientMountedRocketUuid') +
             ', clientY=' + sval('clientMountedRocketY') + ', worldReady=' + sval('clientWorldReady') +
             ', observationError=' + sval('clientMountObservationError'))

@@ -256,12 +256,26 @@ function harness({ mode = 'named', dimension = ORBIT, extraOrbits = [], javaLook
         if (this.moveFailure === 'wrongPosition') this.y++;
         if (this.moveFailure === 'dismount') players[0].vehicle = null;
       });
-      api(this, 'getType', 'm_6095_', () => {
-        const type = {};
-        api(type, 'updateInterval', 'm_20682_', () => 3);
-        api(type, 'trackDeltas', 'm_20683_', () => true);
+      this.trackingFailure = null;
+      this.trackingInterval = 3;
+      this.trackingDeltas = true;
+      const type = native({}, 'net.minecraft.world.entity.EntityType');
+      api(type, 'updateInterval', 'm_20682_', () => {
+        calls.push(['trackingInterval']);
+        if (this.trackingFailure === 'interval') throw new Error('native interval query failed');
+        return this.trackingInterval;
+      });
+      api(type, 'trackDeltas', 'm_20683_', () => {
+        calls.push(['trackingDeltas']);
+        if (this.trackingFailure === 'deltas') throw new Error('native delta query failed');
+        return this.trackingDeltas;
+      });
+      api(this, 'getEntityType', 'm_6095_', () => {
+        calls.push(['nativeEntityType']);
+        if (this.trackingFailure === 'type') throw new Error('native entity type query failed');
         return type;
       });
+      this.getType = () => { calls.push(['scriptTypeId']); return 'gcyr:rocket'; };
       Object.defineProperty(this, 'onGround', {
         get: () => () => false,
         set: () => { throw new Error('must wait for genuine native collision'); },
@@ -417,6 +431,55 @@ function harness({ mode = 'named', dimension = ORBIT, extraOrbits = [], javaLook
     tick, dwell, Tag, Pos, Bounds, control, planet, earth, station, border, makePlayer, classes, invoke,
     member, exposed, dispatches, javaClass, missingGets, missingProbes, lookupFaults };
 }
+
+test('KubeJS type-ID getter is not a native EntityType; tracking metadata is resolved before relocation', () => {
+  for (const mode of ['named', 'srg', 'plain', 'plain-srg']) {
+    const h = harness({ mode, javaLookups: true });
+    assert.equal(h.rocket.getType(), 'gcyr:rocket', 'pinned KubeJS script getter returns an ID string');
+    h.calls.length = 0;
+    h.dwell();
+    assert.equal(h.of('scriptTypeId').length, 0, 'production never treats the ID string as an EntityType');
+    assert.equal(h.of('nativeEntityType').length, 1);
+    assert.equal(h.of('trackingInterval').length, 1);
+    assert.equal(h.of('trackingDeltas').length, 1);
+    assert.equal(h.of('rootTeleport').length, 1);
+    const events = h.calls.map(([name]) => name);
+    assert.ok(events.indexOf('trackingInterval') < events.indexOf('rootTeleport'));
+    assert.ok(events.indexOf('trackingDeltas') < events.indexOf('rootTeleport'));
+    assert.equal(h.of('pair').length, 1);
+    assert.equal(h.successes().length, 1);
+    assert.deepEqual(h.errors(), []);
+  }
+});
+
+test('failed or invalid native tracking metadata refuses once before root/rider mutation or packet dispatch', () => {
+  const changes = [
+    (h) => { h.rocket.trackingFailure = 'type'; },
+    (h) => { h.rocket.trackingFailure = 'interval'; },
+    (h) => { h.rocket.trackingFailure = 'deltas'; },
+    (h) => { h.rocket.trackingInterval = NaN; },
+    (h) => { h.rocket.trackingInterval = 0; },
+    (h) => { h.rocket.trackingInterval = -1; },
+    (h) => { h.rocket.trackingInterval = 1.5; },
+    (h) => { h.rocket.trackingDeltas = undefined; },
+  ];
+  for (const mode of ['named', 'srg', 'plain', 'plain-srg']) for (const change of changes) {
+    const h = harness({ mode, javaLookups: true });
+    change(h);
+    h.dwell(0, 140);
+    assert.equal(h.errors().length, 1);
+    assert.equal(h.of('rootTeleport').length, 0);
+    assert.equal(h.of('zeroMotion').length, 0);
+    assert.equal(h.of('pair').length, 0);
+    assert.equal(h.of('packet').length, 0);
+    assert.equal(h.rocket.y, 600);
+    assert.equal(h.players[0].y, 600);
+    assert.equal(h.of('nativeEntityType').length, 1);
+    assert.ok(h.of('trackingInterval').length <= 1);
+    assert.ok(h.of('trackingDeltas').length <= 1);
+    assert.equal(h.successes().length, 0);
+  }
+});
 
 for (const mode of ['named', 'srg', 'plain', 'plain-srg']) {
   for (const javaLookups of [false, true]) test(`${mode}${javaLookups ? '/throwing Java lookups' : ''}: installed handler moves root straight down using actual bbox floor/native seats and syncs the existing mount`, () => {
