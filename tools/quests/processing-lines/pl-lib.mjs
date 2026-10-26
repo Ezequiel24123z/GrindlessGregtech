@@ -79,11 +79,14 @@ export const network = (k) => ({ k, network: true });
 export const P = {
   // a GTM single-block generator's EU/t: V[tier] of its machine tier (machines.json), what GTM's parallel brings any fuel up to
   single: (eut) => ({ t: 'single', eut }),
-  // EU/t of one run of a recipe of the node's types (recipe pins it); per: the unit ('a panel'); where: the site ('on the Moon')
+  // EU/t of one run of a recipe of the node's types (recipe pins it); per: the unit ('a panel'); where: the site ('on the Moon');
+  // solar: { file } also recomputes it from that script's solar-family constants and tables/sunlight.json (Earth orbit, tables/orbits.json);
+  // src: { file, re } also reads it from a constant of the pack's scripts (both need no dump)
   run: (eut, opts = {}) => ({ t: 'run', eut, ...opts }),
   // EU/t a recipe of the node's types uses (the heliostat tower's pumps)
   uses: (eut) => ({ t: 'uses', eut }),
-  // up to n runs at once: total = n x each; n is read from a script or table of the pack (src: { file, re } or { file, json })
+  // up to n runs at once: total = n x each; n is read from a script or table of the pack (src: { file, re } or { file, json },
+  // or { file, re, count: true }: how many times re matches, such as the entries of a list)
   max: (total, n, each, src) => ({ t: 'max', total, n, each, src }),
   // EU per unit of a fuel in the recipes of the node's types: per mB of a fluid, per item (a chanced item counts its odds)
   fuel: (key, name, eu, opts = {}) => ({ t: 'fuel', key, name, eu, ...opts }),
@@ -114,6 +117,8 @@ export const P = {
   wslots: (n) => ({ t: 'wslots', n }),
   // what is lost on the way into the network, in percent
   wloss: (percent) => ({ t: 'wloss', percent }),
+  // EU/t that reaches the network from a source of `from` EU/t, after the table's loss (rounded to the EU)
+  wnet: (eut, from) => ({ t: 'wnet', eut, from }),
   // the amperages of the wireless hatches and the tiers they come in (every one registered in the dump)
   wamps: (amps, from, to) => ({ t: 'wamps', amps, from, to }),
   // the wireless covers' amperage and tiers (every one registered in the dump)
