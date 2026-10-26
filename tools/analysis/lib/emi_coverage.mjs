@@ -4,6 +4,8 @@
 //   - GTM 7.5.3 (GTRecipeEMICategory): one category per GT recipe type, every recipe of it, except the electric furnace's (its category
 //     is never registered: GTRecipeCategory#shouldRegisterDisplays) and the dummy type (not XEI-visible). A not-consumed input
 //     (chance 0, a circuit) is an EMI catalyst; EMI indexes catalysts as uses too (EmiRecipes.Manager: byInput takes getCatalysts()).
+//     The recipe widget also turns conditions into stacks (conditionStacks): every dimension condition is an input slot with the
+//     dimension's marker block, and the assembly line's research is a catalyst slot with the data item.
 //   - GTM's multiblock info (MultiblockInfoEmiRecipe): the controller as output and the blocks of the pattern preview as inputs. The
 //     preview (BlockPattern#getPreview) puts in each cell the first candidate of the predicate it picks, so only the first block of a
 //     predicate can show up; the parts list holds at most 18 stacks (PatternPreviewWidget).
@@ -119,6 +121,45 @@ export function loadEmiData(packDir) {
 
 const FLUID = 'fluid:';
 
+// GTM 7.5.3 shows a dimension condition as an INPUT slot holding the dimension's marker (DimensionCondition#setupDimensionMarkers, added
+// by GTRecipeWidget for every DimensionCondition): GTRegistries.DIMENSION_MARKERS, filled by GTM (GTDimensionMarkers) and GCYR
+// (GCYRDimensionMarkers), or a barrier for a dimension with no marker. Overridable with emi_coverage.json's dimensionMarkers.
+export const DIMENSION_MARKERS = {
+  'minecraft:overworld': 'gtceu:overworld_marker',
+  'minecraft:the_nether': 'gtceu:the_nether_marker',
+  'minecraft:the_end': 'gtceu:the_end_marker',
+  'gcyr:luna': 'gcyr:luna_marker',
+  'gcyr:mars': 'gcyr:mars_marker',
+  'gcyr:mercury': 'gcyr:mercury_marker',
+  'gcyr:venus': 'gcyr:venus_marker',
+};
+export const MARKER_FALLBACK = 'minecraft:barrier';
+
+/**
+ * The stacks GTM's recipe widget adds to a GT recipe for its conditions, as EMI ingredients: [{role, alts, label}].
+ *   dimension  one INPUT slot per DimensionCondition (each of an OR list), with the dimension's marker
+ *   research   the assembly line's research slot (ItemRecipeCapability#applyWidgetInfo): a CATALYST holding the data item of every
+ *              research entry (a data stick unless the entry names another), one ingredient
+ * GTM draws every other condition as a line of text, with no stack.
+ */
+export function conditionStacks(conditions, cfg = {}) {
+  const markers = { ...DIMENSION_MARKERS, ...(cfg.dimensionMarkers || {}) };
+  const out = [];
+  for (const c of conditions || []) {
+    if (!c || typeof c !== 'object') continue;
+    if (c.type === 'dimension' && typeof c.dimension === 'string') {
+      const m = markers[c.dimension] || cfg.dimensionMarkerFallback || MARKER_FALLBACK;
+      out.push({ role: 'input', alts: [m], label: `dimension marker ${m} (${c.dimension})` });
+    } else if (c.type === 'research') {
+      const items = (Array.isArray(c.research) ? c.research : [])
+        .map((e) => (e && e.dataItem && (e.dataItem.id || e.dataItem.item)) || 'gtceu:data_stick');
+      const alts = [...new Set(items.length > 0 ? items : ['gtceu:data_stick'])];
+      out.push({ role: 'catalyst', alts, label: `research data ${alts.join('|')}` });
+    }
+  }
+  return out;
+}
+
 /** Blocks the multiblock preview can place: the first block of every block predicate of the pattern (see the header). */
 export function previewBlocks(structure) {
   const out = [];
@@ -177,6 +218,13 @@ export function auditEmiCoverage({ dump, registry, cfg, emi, lang = null, native
       if (o.key.startsWith('research:')) continue;
       if (disabled.has(o.key)) disabledBy.push('output ' + o.key);
       rec.outputs.add(o.key);
+    }
+    // the stacks GTM's recipe widget adds for its conditions are EMI ingredients like any slot, so a disabled one drops the recipe too
+    if (n.shape === 'gt') {
+      for (const s of conditionStacks(n.conditions, cfg)) {
+        if (s.alts.every((a) => disabled.has(a))) disabledBy.push(s.label);
+        for (const a of s.alts) (s.role === 'catalyst' ? rec.catalysts : rec.inputs).add(a);
+      }
     }
     const dropped = disabledBy.length > 0;
     if (cat === null) {
