@@ -1,0 +1,50 @@
+{
+  "_source": "Our own table: the asteroid belt (docs/eras/luv.md, section 11 and \"The belt and Jupiter's moons\"). Meteoric iron and tetrataenite are GT materials of ours (startup_scripts/grindless/luv/foundation.js, LuV-A1); pentlandite, olivine, chromite, magnetite and graphite are GTM 7.5.3's. Every one has a tuff ore (gtceu:tuff_<material>_ore, GTM's tuff ore prefix). Real basis: iron meteorites (kamacite, taenite, tetrataenite) for the M-type vein, ordinary chondrites for the S-type, carbonaceous chondrites for the C-type.",
+  "_how_it_is_used": [
+    "place = the key of the belt's surface in tables/places.json (G.places.surface): the dimension id lives only there and is final after spike S0-1.",
+    "layer = the world gen layer startup_scripts/grindless/luv/asteroid_belt.js registers: GTM's KubeJS layer 'asteroid_belt', targets minecraft:tuff, limited to the belt's surface. Spike S0-6 (tools/test/overlay gg_test_luv_belt_worldgen) checks it in a test dimension.",
+    "Loaded by startup_scripts/grindless/luv/asteroid_belt.js as global.grindless.tables.veins_belt (the vein sample items, grindless:vein_sample_<id>); server_scripts/grindless/luv/asteroid_belt.js adds the veins to the belt (GTCEuServerEvents.oreVeins), writes the sample recipes (empty vein probe + the two most common raw ores, a pair no other vein of the pack uses) and the harpoon anchor drill's recipes vein_drilling/luv/harpoon_<vein>_hss_s.",
+    "minY/maxY = heightRangeUniform; spawnWeight = vein weight; clusterSize and density = the Mercury vein's numbers; materials = the layered generator (weight and size of every material). The drill splits its raw ores by the same weights (same maths as veins.json). Weights and heights are (tune) until the belt's terrain is final (S0-1).",
+    "stone = the inert byproduct of a drilling run (tuff): the asteroid regolith casing is sintered from it, only on the belt.",
+    "Only from the belt: meteoric iron and tetrataenite are found in no other table, so the asteroid processor's PGM concentrate and the magnet works' tetrataenite come only from here."
+  ],
+  "place": "asteroid_belt",
+  "layer": "asteroid_belt",
+  "veins": [
+    {
+      "id": "m_type_belt", "kind": "ore", "gtm": "grindless:m_type_vein_belt", "generator": "layered", "layer": "asteroid_belt",
+      "minY": 20, "maxY": 200, "spawnWeight": 40, "clusterSize": 30, "density": 0.3,
+      "colorMaterial": "meteoric_iron", "color": "#8C8E8A",
+      "stone": "minecraft:tuff",
+      "_note": "M-type (metal) asteroid: kamacite (meteoric iron), tetrataenite and pentlandite. Destinations: meteoric iron -> the asteroid processor's Mond process (iron, nickel, cobalt and the PGM concentrate -> the platinum plant's mode 4); tetrataenite -> the processor's magnetic split -> the HTS magnet works' bearings; pentlandite -> GTM's nickel line.",
+      "materials": [
+        { "id": "meteoric_iron", "weight": 4, "size": [1, 4] },
+        { "id": "tetrataenite", "weight": 2, "size": [1, 2] },
+        { "id": "pentlandite", "weight": 1, "size": [1, 1] }
+      ]
+    },
+    {
+      "id": "s_type_belt", "kind": "ore", "gtm": "grindless:s_type_vein_belt", "generator": "layered", "layer": "asteroid_belt",
+      "minY": 20, "maxY": 200, "spawnWeight": 30, "clusterSize": 30, "density": 0.3,
+      "colorMaterial": "olivine", "color": "#7FA35A",
+      "stone": "minecraft:tuff",
+      "_note": "S-type (stony) asteroid, an ordinary chondrite: olivine, chromite and magnetite. Destinations: olivine -> gems (the zero-g crystal grower's seed); chromite -> chromium; magnetite -> iron and gold through GTM's ore processing.",
+      "materials": [
+        { "id": "olivine", "weight": 3, "size": [1, 3] },
+        { "id": "chromite", "weight": 2, "size": [1, 2] },
+        { "id": "magnetite", "weight": 2, "size": [1, 2] }
+      ]
+    },
+    {
+      "id": "c_type_belt", "kind": "ore", "gtm": "grindless:c_type_vein_belt", "generator": "layered", "layer": "asteroid_belt",
+      "minY": 20, "maxY": 200, "spawnWeight": 20, "clusterSize": 30, "density": 0.3,
+      "colorMaterial": "graphite", "color": "#3B3A36",
+      "stone": "minecraft:tuff",
+      "_note": "C-type (carbonaceous) asteroid's solid part: graphite and magnetite. Its volatiles (water, CO2, the chondritic extract) come from the optical miner, not the drill. Destinations: graphite -> GTM's graphite lines; magnetite -> GTM's ore processing.",
+      "materials": [
+        { "id": "graphite", "weight": 3, "size": [1, 3] },
+        { "id": "magnetite", "weight": 2, "size": [1, 2] }
+      ]
+    }
+  ]
+}

@@ -669,6 +669,12 @@ Every recipe has a programmed circuit (c*n*) or an input that no other recipe of
   - The KubeJS world gen layer is untested in this pack. One bench run is needed: a fresh belt chunk with the vein.
   - Low gravity has not been tried for playability.
 - **Source:** real: Rosetta's Philae (2014) and OSIRIS-REx's touch-and-go sampler; iron meteorite mineralogy.
+- **As built (B5, `luv/asteroid_belt.js`):**
+  - 7 × 8 × 7: a 5 × 6 pad of regolith casing, four HSS-S harpoon legs, a 3 × 3 × 3 body with the Whipple casing on its back face, a titanium derrick over a tungstensteel drill string.
+  - The veins sit at Y 20–200 *(tune after S0-1)*, weights 40 / 30 / 20. The vein drilling type takes three item inputs (sample, bit, harpoon).
+  - The bit: LuV lathe, a long HSS-S rod, 30,720 EU/t × 200 t. The harpoons: IV assembler, 2 HSS-S rods + a tungsten carbide plate → 2.
+  - The regolith casing: alloy smelter on the belt only, 4 tuff (the drill's stone) + 1 titanium dust → 2.
+  - The belt's seed: chemical reactor on the belt, raw meteoric iron + ender pearl + 250 mB helium-3; `planets.json` gets `belt`.
 
 ### 12. Asteroid processor: `gtceu:asteroid_processor`, type `gtceu:asteroid_processing` (anywhere; built at the belt base)
 
@@ -694,6 +700,10 @@ Every recipe has a programmed circuit (c*n*) or an input that no other recipe of
   - LuV: the ring's magnetic bearings (tetrataenite, through the HTS magnet works), and the optical miner's CO.
 - **Risks:** a KubeJS ore material must keep its GTM byproducts free of PGMs, so that the concentrate stays exclusive.
 - **Source:** real: Ludwig Mond (1890) and the Clydach refinery; carbonyl metallurgy for asteroids (Lewis, 1996).
+- **As built (B5):**
+  - A third recipe, circuit 3: the same Mond from 16 meteoric iron dust. GTM's ore line and the magnetic split leave that dust, and it has no other use.
+  - The magnetic split: 1,920 EU/t × 200 t. It stays voidable; circuits 1 and 3 refuse item voiding.
+  - Hollow 5 × 5 × 6 column, 3 × 3 × 3 separator (the parts and the parallel hatch), a 3 × 2 × 3 glass holder.
 
 ### 13. Optical miner: `gtceu:optical_miner`, type `gtceu:optical_mining` (asteroid belt)
 
@@ -720,6 +730,10 @@ Every recipe has a programmed circuit (c*n*) or an input that no other recipe of
   - IV: the Mercury solar works' heliostat check, and GCYR's aramid and Kapton (the suit line);
   - LuV: the Europan culture and the asteroid processor's CO.
 - **Source:** real: TransAstra's optical mining (Sercel; NASA NIAC, 2016–2019); Mautner, "Planetary bioresources and astroecology" (2002); the OSIRIS-REx samples of Bennu (2025).
+- **As built (B5):**
+  - 13 × 5 × 13. The capture chamber is robust casing with a laminated glass receiver on top; the cold trap is a frostproof column; the hut is 3 × 3 × 3.
+  - Both recipes are belt-only. The capture bag: IV assembler, 7,680 EU/t × 200 t.
+  - The extract's use (the Europan culture) is B8's; until then it is an EMI coverage exception.
 
 ### 14. Fumarole condenser: `gtceu:fumarole_condenser`, type `gtceu:fumarole_condensing` (Io)
 
