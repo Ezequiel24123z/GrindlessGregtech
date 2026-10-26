@@ -52,6 +52,7 @@ Generators for the pack's own textures. Everything is procedural 16x16 pixel art
 | `Build-NaquadahPlantTextures.ps1` | Writes the IV naquadah plant's face (`multiblock/naquadah_plant/`). `-Only naquadah_plant` and `-Credits` (its 5 CREDITS rows). |
 | `Build-IVMercuryTextures.ps1` | Writes the faces of the IV Mercury machines (IV-B2): the Mercury vein drill, the Mercury solar works, the Mercury solar field and the interferometer (`multiblock/mercury_vein_drill/`, `mercury_solar_works/`, `mercury_solar_field/`, `interferometer/`), and the interferometer's three data orbs (`item/lunar_vlbi_recording`, `outer_system_chart`, `sagittarius_a_star_signal`). `-Only drill,works,field,interferometer,items`, `-Preview <png outside the repo>` and `-Credits` (its 23 CREDITS rows). |
 | `Build-TravelNetworkTextures.ps1` | Writes the Venusian and Hermean Quantum Seeds (items and `.mcmeta`) and the RTG cell's overlays (`block/machines/rtg/`). `-Only seeds,rtg` and `-Credits` (its 11 CREDITS rows). |
+| `Build-BiofoundryTextures.ps1` | Writes the LuV biofoundry's face (`multiblock/biofoundry/`). `-Only biofoundry` and `-Credits` (its 5 CREDITS rows). |
 
 ## Regenerate
 
@@ -624,6 +625,33 @@ powershell -NoProfile -ExecutionPolicy Bypass -File tools\assets\Build-NaquadahP
 | `block/multiblock/naquadah_plant/overlay_front.png` | Idle: the dark chamber behind the lead glass, with a glint at its top left. The grey capsule with its yellow band sits in its cradle beside the vessel, where still, unlit superacid stands over the dark heap. Below: the radiation sign, the drawer handle and the dark lamp. |
 | `.../overlay_front_active.png` + `.mcmeta` | 8 frames, `frametime` 4: the source's Cherenkov glow swells and ebbs once a loop and shimmers. It lights the chamber blue around it and the vessel's near wall. The bath's surface is lit and shimmers. Two bubbles rise in the far column and a small one off the heap's peak, each flashing as it bursts. Two flecks of naquadah sink in the near column and settle on the heap, which glints as each one lands. The mode 1 lamp is lit green. |
 | `.../overlay_front_active_emissive.png` + `.mcmeta` | Only the source's glow (the capsule and its halo), the bath's surface and the lit lamp. |
+
+## LuV era
+
+### Biofoundry
+
+A culture port of the sterile hall: a round sealed porthole into one of its fermenter columns, drawn for GTM's plascrete with the hot cell's method, steel ramp, bezel and lamp ramp. Plascrete is a pale grey, so the face is a whole dark steel panel inside the 1 px casing ring. The porthole's flange is clean stainless steel, lit at the top left, with a bolt at each corner of the plate. Through the glass are a headspace with a glint at its top left and the vessel below it, shaded as a lit cylinder (a step darker at the edges, so the flange stands clear). Under it, a control strip: the violet UV lamp, the four-cell growth bar and the green run lamp.
+
+- 8 frames, `frametime` 4: a living green culture under a shimmering layer of foam. Three streams of bubbles rise out of step from the sparger, one pixel a frame with a little wobble; they flash as they burst in the foam, and two of them throw a droplet into the headspace. The growth bar fills one cell every two frames and starts again. The UV and run lamps are lit.
+- Idle: clear sterile medium in the UV light, pale cyan under a violet headspace, with no foam or bubbles; an empty bar and dark lamps.
+- The emissive layer holds only the foam, the bubbles with their bursts and droplets, the lit bar cells and the two lamps.
+- The hot cell's checks; the output is identical byte for byte.
+- To retouch:
+  - `$BfPal` and `$BfBase` hold the colours and the map (`h` headspace, `s` surface, `m` medium).
+  - `$BfHeadIdle`, `$BfHeadCulture`, `$BfMediumIdle`, `$BfMediumCulture` and `$BfDepth` shade the vessel.
+  - `$BfStreams` drives the bubbles and `$BfBar` the growth bar.
+  - Add any new light to `$BfGlowZone`.
+
+```powershell
+powershell -NoProfile -ExecutionPolicy Bypass -File tools\assets\Build-BiofoundryTextures.ps1
+powershell -NoProfile -ExecutionPolicy Bypass -File tools\assets\Build-BiofoundryTextures.ps1 -Credits
+```
+
+| File (under `textures/`) | Notes |
+|---|---|
+| `block/multiblock/biofoundry/overlay_front.png` | Idle: the porthole onto the clear medium, pale cyan under the violet headspace; the bar empty, the UV and run lamps dark. |
+| `.../overlay_front_active.png` + `.mcmeta` | 8 frames, `frametime` 4: the green culture under its foam, the rising bubbles with their bursts and droplets, the growth bar filling, and the UV and run lamps lit. |
+| `.../overlay_front_active_emissive.png` + `.mcmeta` | Only the foam, the bubbles, the lit bar cells and the two lamps. |
 
 ## Contrast pass after the gallery test (2026-10-25)
 

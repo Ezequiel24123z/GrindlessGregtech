@@ -38,6 +38,9 @@ ClientEvents.lang('en_us', event => {
     add('emi.grindless.info.hermean_blocks.0', 'Made only on Mercury, in the Mercury Solar Works. The Mercury Vein Drill, the Mercury Solar Field and the Interferometer stand on the heat-shield bricks; the thin-film panels are the Mercury Solar Field\'s panels, and its controller takes some too.')
 
     add('emi.grindless.info.heliostat_mirror.0', 'A structure block: the mirror field of the Heliostat Tower (LV) and of the Mercury Solar Works. The Heliostat Tower\'s controller takes some too.')
+
+    add('emi.grindless.info.engineered_seeds.0', 'Made in the Biofoundry (LuV), with Europa\'s bacteria as the vector that carries the gene into the seed.')
+    add('emi.grindless.info.engineered_seeds.1', 'Keep them: they are planted in the Rotating Hydroponic Ring, LuV\'s molecular farm on the first station in Earth orbit, and are not used up there. The barley grows the neurotrophic factor the LuV neuro processing unit needs; the tobacco grows plant collagen.')
 })
 
 ClientEvents.lang('es_es', event => {
@@ -72,4 +75,7 @@ ClientEvents.lang('es_es', event => {
     add('emi.grindless.info.hermean_blocks.0', 'Solo se hacen en Mercurio, en la planta solar de Mercurio. La perforadora de vetas de Mercurio, el campo solar de Mercurio y el interferómetro se apoyan en los ladrillos de escudo térmico; los paneles de película fina son los paneles del campo solar de Mercurio, y su controlador también lleva algunos.')
 
     add('emi.grindless.info.heliostat_mirror.0', 'Un bloque de estructura: el campo de espejos de la torre solar de heliostatos (LV) y de la planta solar de Mercurio. El controlador de la torre también lleva algunos.')
+
+    add('emi.grindless.info.engineered_seeds.0', 'Se hacen en la biofundición (LuV), con las bacterias de Europa como vector que lleva el gen a la semilla.')
+    add('emi.grindless.info.engineered_seeds.1', 'Guárdalas: se plantan en el anillo hidropónico giratorio, la granja molecular de LuV en la primera estación en órbita terrestre, y allí no se gastan. La cebada cultiva el factor neurotrófico que pide la unidad de procesamiento neural de LuV; el tabaco, colágeno vegetal.')
 })
