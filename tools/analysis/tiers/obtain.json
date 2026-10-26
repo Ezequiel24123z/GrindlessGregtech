@@ -7,7 +7,7 @@
   "obtain": {
     "audit": ["gtceu", "gtca", "gtnn", "gcyr", "grindless", "extendedfeatures", "gtmutils", "gtstoragedrawers", "gtceuterminal"],
     "ignoreNamespaces": ["create", "createaddition", "create_new_age", "createdeco", "create_enchantment_industry"],
-    "reachableDimensions": ["minecraft:overworld", "minecraft:the_nether", "minecraft:the_end", "grindless:flat", "grindless:void", "gcyr:luna", "gcyr:mars"],
+    "reachableDimensions": ["minecraft:overworld", "minecraft:the_nether", "minecraft:the_end", "grindless:flat", "grindless:void", "gcyr:luna", "gcyr:mars", "gcyr:venus", "gcyr:mercury", "${places}", "${orbits}"],
 
     "notFree": [
       "*:*spawn_egg*",
@@ -16,19 +16,26 @@
       "minecraft:barrier", "minecraft:structure_block", "minecraft:structure_void", "minecraft:jigsaw", "minecraft:light",
       "minecraft:debug_stick", "minecraft:knowledge_book", "minecraft:spawner", "minecraft:bedrock", "minecraft:end_portal_frame",
       "minecraft:reinforced_deepslate", "minecraft:budding_amethyst", "minecraft:petrified_oak_slab", "minecraft:infested_*",
-      "minecraft:player_head", "minecraft:farmland", "minecraft:dirt_path", "minecraft:frogspawn", "minecraft:chorus_plant"
+      "minecraft:player_head", "minecraft:farmland", "minecraft:dirt_path", "minecraft:frogspawn", "minecraft:chorus_plant",
+      "ironfurnaces:augment_generator", "ironfurnaces:augment_factory", "ironfurnaces:heater", "ironfurnaces:item_heater", "ironfurnaces:million_furnace",
+      "ironfurnaces:rainbow_core", "ironfurnaces:rainbow_plating", "ironfurnaces:rainbow_coal", "ironfurnaces:allthemodium_furnace", "ironfurnaces:vibranium_furnace",
+      "ironfurnaces:unobtainium_furnace", "ironfurnaces:upgrade_allthemodium", "ironfurnaces:upgrade_vibranium", "ironfurnaces:upgrade_unobtainium"
     ],
 
     "veins": { "requireRecipe": [
       { "type": "gtceu:vein_drilling", "input": "grindless:vein_sample_{id}" },
-      { "type": "gtceu:lunar_drilling", "input": "grindless:vein_sample_{id}" }
+      { "type": "gtceu:lunar_drilling", "input": "grindless:vein_sample_{id}" },
+      { "type": "gtceu:in_situ_leaching", "input": "grindless:vein_sample_{id}" }
     ] },
     "world": [
       { "id": "trees-gt", "mode": "manual", "items": ["gtceu:rubber_log", "gtceu:rubber_leaves", "gtceu:rubber_sapling", "gtceu:sticky_resin"], "note": "GTM's rubber trees in the Overworld and the sticky resin they drop." },
       { "id": "stones-gt", "mode": "manual", "items": ["gtceu:marble", "gtceu:red_granite"], "note": "GTM 7.5.3 GTPlacedFeatures/GTBiomeModifiers: marble and red granite patches in the Overworld." },
       { "id": "moon-ground", "mode": "manual", "items": ["gcyr:moon_stone", "gcyr:moon_cobblestone", "gcyr:moon_sand", "gcyr:lunar_mare_regolith"], "note": "The Moon's ground (gcyr:luna, by hand at the end of HV since v0.5.0): the lunar drill's regolith sample needs regolith and lunar sand (data/grindless/tables/veins_moon.json)." },
       { "id": "mars-ground", "mode": "manual", "items": ["gcyr:martian_rock", "gcyr:martian_cobblestone", "gcyr:mars_regolith"], "note": "Mars' ground (gcyr:mars, by hand with the tier 2 rocket at the end of EV since v0.6.0); the tripod's stone on Mars." },
+      { "id": "venus-ground", "mode": "manual", "items": ["gcyr:venus_rock", "gcyr:venus_cobblestone", "gcyr:venus_sand", "gcyr:venusian_regolith"], "note": "Venus' ground (gcyr:venus, by hand with the tier 3 rocket in IV since v0.7.0): the pressurized drill's stone, and GCYR's Venusian regolith, a falling surface block (the site casing; B1's hammer also makes it on Venus)." },
+      { "id": "mercury-ground", "mode": "manual", "items": ["gcyr:mercury_rock", "gcyr:mercury_cobblestone"], "note": "Mercury's ground (gcyr:mercury, by hand with the tier 3 rocket in IV since v0.7.0): the Mercury drill's stone, which any macerator makes Hermean regolith." },
       { "id": "coal-pile", "mode": "auto", "via": ["gtceu:charcoal_pile_igniter"], "items": ["gtceu:brittle_charcoal"], "note": "GTM's charcoal pile igniter burns logs in the world and leaves brittle charcoal: it isn't a recipe." },
+      { "id": "station-packager", "mode": "auto", "via": ["gcyr:space_station_packager"], "items": ["gcyr:keycard"], "note": "GCYR's station packager puts a keycard out with every packed station (SpaceStationPackagerMachine): it isn't a recipe. Shown since S0-3 passed (tables/stations.json enabled)." },
       { "id": "recipes-special", "mode": "manual", "items": ["gtceu:facade_cover"], "note": "The facade cover comes from a special recipe (gtceu:crafting_facade_cover) that the analysis doesn't read." }
     ],
 
@@ -37,27 +44,20 @@
     "creative": ["*:creative_*", "*:*_creative_*", "*:debug_*", "gtceu:portable_debug_scanner"],
 
     "later": [
-      { "id": "venus-mercury", "era": "IV (Venus and Mercury)", "until": "iv", "label": "Venus and Mercury (gcyr:venus, gcyr:mercury)", "dimensions": ["gcyr:venus", "gcyr:mercury"], "items": ["gcyr:venus_rock", "gcyr:venus_cobblestone", "gcyr:venus_sand", "gcyr:venusian_regolith", "gcyr:mercury_rock", "gcyr:mercury_cobblestone"] },
-      { "id": "end-pitchblende", "era": "IV (radioactives)", "until": "iv", "label": "the End's pitchblende vein, held back until IV (veins_excluded.json)", "veins": ["gtceu:pitchblende_vein_end"], "note": "Its plutonium ore also gives uraninite, and the radioactive chain (uranium, radon, quantum eye and star, and what needs them) is IV's radioactives. Since IV-A1 GTM's naquadah vein is gone from the End: naquadah comes from Venus (grindless:naquadah_vein_venus, the venus-mercury stage)." },
       { "id": "proxima", "era": "UHV (Proxima b)", "until": "uhv", "label": "Proxima Centauri b", "dimensions": ["gcyr:proxima_centauri_b"], "items": ["gcyr:proxima_centauri_b_*", "gcyr:prb_*"] }
     ],
 
     "unlockLimit": 200,
     "classes": [
-      { "class": "B", "materials": ["cerrobase_140"], "era": "LuV", "until": "luv",
-        "reason": "molten cerrobase 140: only the GT-- circuit assembly line (LuV) asks for it, which integration/gtnn.js keeps, and nothing melts it (the dust does mix); its melting recipe arrives with LuV (decision of 2026-10-24)" },
+      { "class": "B", "materials": ["grindless:tether_spool"], "era": "LuV (B7, held)", "until": "zpm", "unless": "tether", "reason": "LuV-A1 registration (startup_scripts/grindless/luv/foundation.js) held hidden while tables/stations.json is not in the tether mode (package B7, Io orbit: the flux-tube tether, spike S0-3); until zpm, so IMPLEMENTED_ERA luv keeps it out, and unless tether, so hidden.js shows it as soon as the table turns the tether mode on. In the tether mode its recipes exist and the group drops out on the next regeneration; in the sulfur-iodine mode it stays hidden (reclassify it as class C then)" },
 
-      { "class": "B", "materials": ["iridium", "osmium"], "partial": true, "forms": "ore", "era": "IV (Mercury)", "until": "iv", "reason": "ore forms of iridium and osmium: docs/journey.md gets them from Mercury's crust in IV" },
-      { "class": "B", "materials": ["helium", "nitrogen"], "partial": true, "era": "LuV (fusion, with IV's deuterium)", "until": "luv", "reason": "helium and nitrogen plasma: only GTM's fusion makes them, from deuterium (D + T, Be + D), which has no source until IV's heavy water; fusion is LuV" },
-      { "class": "B", "materials": ["gtca:zinc_plasma"], "era": "LuV (fusion, with IV's tritium)", "until": "luv", "reason": "GTCA's zinc plasma: only GTM's fusion reactor makes it (gtceu:fusion_reactor/zinc_plasma, copper + tritium, 49,152 EU/t), and tritium only comes from IV's removal facility since IV-A1's cuts; fusion is LuV" },
-      { "class": "B", "materials": ["gtca:helium_ion"], "era": "ZPM (GTCA's comet, from fusion's helium plasma)", "until": "zpm", "reason": "GTCA's helium ion: the comet (122,880 EU/t) makes it from helium plasma, which needs fusion and deuterium" },
       { "class": "B", "materials": ["gcyr:dyson_*", "gcyr:drone_hangar"], "era": "UHV (Dyson swarm)", "until": "uhv", "reason": "Dyson swarm from docs/journey.md (UHV): GCYR gives no recipe for these parts" },
-      { "class": "B", "materials": ["gcyr:*_satellite", "gcyr:gps_tracker", "gcyr:beam_receiver", "gcyr:airlock_door", "gcyr:keycard"], "era": "LuV (orbital station)", "until": "luv", "reason": "GCYR satellites, beam receiver and station parts: docs/journey.md opens orbit in LuV; they have no recipe today" },
+      { "class": "C", "materials": ["gcyr:*_satellite", "gcyr:gps_tracker", "gcyr:beam_receiver", "gcyr:airlock_door"], "reason": "GCYR 0.2.9's satellites, GPS tracker, beam receiver and airlock door: no recipe and no deploy (docs/eras/luv.md, Considered and dropped: the satellites, the rectenna); they stay hidden" },
       { "class": "B", "materials": ["gcyr:space_elevator_support", "gtca:space_elevator*", "gtca:space_miner_*", "gtca:space_pump_*", "gtca:space_assembler_*"], "era": "ZPM (space elevator)", "until": "zpm", "reason": "space elevator and its modules: docs/journey.md places it in ZPM; today GTCA gives no recipe for the modules (integration/gtca.js)" },
       { "class": "B", "materials": ["gtceu:uev_machine_casing", "gtceu:uiv_machine_casing", "gtceu:uxv_machine_casing", "gtceu:opv_machine_casing", "gtceu:max_machine_casing"], "era": "UEV–MAX", "until": "uev", "reason": "casings for the UEV–MAX tiers from docs/journey.md: GTM gives them no recipe" },
-      { "class": "B", "materials": ["extendedfeatures:large_cracking_machine", "extendedfeatures:large_pyrolysis_oven", "extendedfeatures:expanded_assembly_line"], "era": "IV", "until": "iv", "reason": "GCYM-style parallel machine from Extended Features: no recipe until the IV wave wants it (integration/extendedfeatures.js)" },
-      { "class": "B", "materials": ["gtnn:circuit_assembly_line"], "era": "LuV", "until": "luv", "reason": "GT-- circuit assembly line (LuV): only missing molten cerrobase 140, which arrives with LuV" },
-      { "class": "B", "materials": ["naquadria_oxide_mixture"], "era": "IV (naquadah)", "until": "iv", "reason": "GT-- naquadah line: comes from processing naquadria ore, which no vein gives today; it will arrive with the naquadah veins (docs/journey.md: Venus, IV)" },
+      { "class": "C", "materials": ["extendedfeatures:large_cracking_machine", "extendedfeatures:large_pyrolysis_oven", "extendedfeatures:expanded_assembly_line"], "reason": "GCYM-style parallel machine from Extended Features with no recipe (integration/extendedfeatures.js): the IV wave left them out (docs/eras/iv.md: GCYM at IV; the Expanded Assembly Line is only plan B). A package that adopts one gives it a recipe, and the audit then finds it obtainable" },
+      { "class": "A", "materials": ["cerrobase_140", "gtnn:circuit_assembly_line"], "era": "LuV", "source": "grindless:fluid_heater/molten_cerrobase_140 (server_scripts/grindless/luv/circuit_line.js, A5 after the C3 dump): GTM's liquid cerrobase 140 melted into the molten one GT--'s circuit assembly line controller takes", "reason": "GT-- circuit assembly line (LuV) and molten cerrobase 140: the line's assembly-line recipe takes 1,440 mB of molten cerrobase, which nothing made in the C3 dump luv-c3-s1 (A5's melting landed after it). The next dump finds both obtainable and this rule unused: delete it then" },
+      { "class": "C", "materials": ["naquadria_oxide_mixture"], "reason": "GT--'s naquadria oxide mixture: only processing naquadria ore gives it, and no vein does (Venus's vein is naquadah and plutonium, IV-A1); naquadria itself comes out of the naquadah line" },
       { "class": "B", "materials": ["neutronium_mixture", "plutonium_based_liquid_fuel*"], "era": "UV–UIV (neutronium)", "until": "uiv", "reason": "plutonium fuel for the GT-- naquadah reactor: needs neutronium mixture, which comes from a neutronium ore that no vein gives (docs/journey.md: neutronium in UIV)" },
 
       { "class": "C", "materials": ["grindless:vein_sample_scheelite"], "keepRecipes": true, "reason": "hidden in EMI: only exists for old saves and converts into the new thing (empty vein probe); its conversion recipe stays" },
@@ -68,7 +68,7 @@
       { "class": "C", "materials": ["extendedfeatures:industrial_greenhouse", "extendedfeatures:advanced_conservatory", "extendedfeatures:rock_processing_plant", "extendedfeatures:synthesis_vessel", "extendedfeatures:universal_disassembly_machine", "extendedfeatures:robust_alloy_materializer"], "reason": "Extended Features: controller removed by the pack (integration/extendedfeatures.js)" },
       { "class": "C", "materials": ["gtnn:component_assembly_line", "gtnn:component_assline_casing_*", "gtnn:homemade_bedrock_ore_machine"], "reason": "GT--: no recipe on purpose (integration/gtnn.js)" },
       { "class": "C", "materials": ["enriched_naquadah_waste", "barium_sulfide"], "reason": "leftovers from GTM's naquadah separation, which GT-- empties out (enableHarderNaquadahLine): nothing produces them" },
-      { "class": "C", "materials": ["gtceu:*_marker", "gcyr:*_marker"], "reason": "technical block (dimension marker), not for the player" },
+      { "class": "C", "materials": ["gtceu:*_marker", "gcyr:*_marker"], "keepRecipes": true, "reason": "technical block (dimension marker), not for the player; GTM shows it in every recipe with a dimension condition, so it is only dropped from the index (disabling it in EMI dropped every planet recipe)" },
       { "class": "C", "materials": ["gtceu:*_solar_panel"], "reason": "solar panel: GTM 7.5.3 only gives a recipe to the ULV and LV ones (the LV one arrives with naquadah)" },
       { "class": "C", "materials": ["gtceu:*_passthrough_hatch"], "reason": "passthrough hatch: GTM 7.5.3 only gives a recipe to the HV one" },
       { "class": "C", "materials": ["gtceu:*_bedrock_ore_miner"], "reason": "bedrock ore miner: GTM 7.5.3 gives it no recipe (there are no bedrock ores)" },
@@ -76,8 +76,6 @@
       { "class": "C", "materials": ["gtceu:sus_record", "gtceu:purple_drink", "mc_guffium_239", "potion", "gtceu:zero_point_module", "gtceu:industrial_steam_casing", "gtceu:treated_wood_hanging_sign", "gtceu:compressed_clay", "gtceuterminal:energy_analyzer"], "reason": "joke item, technical item, or one with no recipe in GTM 7.5.3 / its addon" },
       { "class": "C", "materials": ["damascus_steel"], "reason": "Damascus steel: GTM tool material that no recipe makes" },
       { "class": "C", "materials": ["calcium_carbonate", "potassium_sulfate", "technetium", "orange_metal", "palladium_on_carbon", "gcyr:iron_oxide", "gcyr:potassium_chloride", "gcyr:chromic_acid"], "reason": "material with no source whose recipes only give things that already come another way (calcium, potassium, sulfur, iron, chromium...)" },
-      { "class": "B", "materials": ["grindless:leu_pellet", "grindless:leu_fuel_assembly", "grindless:mox_fuel_assembly", "grindless:breeder_fuel_assembly", "grindless:pube_neutron_source", "grindless:rtg_pellet", "grindless:spent_fuel_assembly", "grindless:spent_breeder_assembly", "tritiated_heavy_water", "tritium"], "era": "IV (the IV packages)", "until": "iv",
-        "reason": "IV-A1's shared ids whose producer is a later IV package (fuel fabrication, hot cell, heavy-water plant, tritium removal, Mercury, travel; docs/eras/iv.md); tritium has no other source since IV-A1's cuts. Each rule stops matching when its producer lands; C1 removes the stale ones" },
       { "class": "C", "materials": ["tuff"], "reason": "tuff dust: only comes from milling ore blocks in tuff (the drill gives raw ores), and has no use of its own" },
       { "class": "C", "materials": ["gcyr:martian_rock_dust"], "reason": "GCYR Martian rock dust: only the stone byproduct of milling Martian ore blocks (the tripod gives raw ores, and nothing mills the rock itself), with no use of its own" },
       { "class": "C", "materials": ["udmh", "udmh_rocket_fuel"], "reason": "UDMH: rocket engine fuel with no recipe; GT-- engines burn hydrazine and RP-1, which are made" },

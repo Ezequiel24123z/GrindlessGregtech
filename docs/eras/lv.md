@@ -4,6 +4,19 @@ The first electric factory: cables, single-block machines, small chemistry, cent
 
 You enter with what steam leaves you: an LV steam turbine (`gtceu:lv_steam_turbine`), the first LV circuit, an LV machine hull and tin cable with rubber.
 
+## Wireless energy
+
+The Wireless Energy Tower (`gtceu:wireless_energy_tower`) opens a single EU network for the whole server at LV, across dimensions. It stores energy; it generates none. AE2 and ordinary cables remain alternatives.
+
+- The tower has 32 cell slots. Each takes a capacitor cell or the tower's casing. Cells hold six reference batteries: LV 720,000 EU, MV 2,520,000, HV 10,800,000, EV 61,440,000 and IV 245,760,000. A full LV tower holds 23,040,000 EU.
+- Formed towers add their capacities. The weakest cell across every formed tower sets the network's output tier; replace every lower-tier cell to raise it. Without a formed tower containing a cell, producers back up and nothing moves.
+- Wireless energy and dynamo hatches come in 2, 4, 16 and 64 A, LV-IV. Dynamos deposit; energy hatches withdraw. The generator array can feed a 64 A LV wireless dynamo hatch while an EBF on the Moon draws through two LV wireless energy hatches.
+- Wireless covers move 2 A of their tier on supported GTM single-block machines. Energy covers also charge chargers and battery buffers; dynamo covers drain generators and battery buffers. Right-click a side other than the front. Converters, multiblock controllers, creative containers and unknown mod containers refuse covers rather than use an unsafe fallback.
+- Entry loses 5%; withdrawal loses nothing. Settlement happens every 10 ticks. Inputs have no tier ceiling, but an energy hatch or cover above the network's tier receives nothing.
+- Shift-right-click a tower, wireless hatch or covered machine with an empty hand for its readout. Unloaded endpoints wait; unloaded towers retain their recorded cells. Breaking a tower does not delete the global stored EU; deposits pause if it exceeds the remaining capacity.
+
+This is infrastructure, not another processing line, and does not redo LV's progression-multiblock target. Recipes, capacities, amperages and settlement settings come from `tables/wireless_energy.json`.
+
 ## Route
 
 1. **LV network.** Tin cable with rubber, LV machine hull (`gtceu:lv_machine_hull`), energy hatch (`gtceu:lv_energy_input_hatch`) and battery buffer (`gtceu:lv_battery_buffer_4x`). The Large Bronze Boiler (`gtceu:bronze_large_boiler`) makes up to 6,400 mB/t of steam since v0.5.2 (×8; GTM's default is 800) and also burns biomass and creosote. Each LV turbine uses 32 mB/t for 32 EU/t since v0.5.2 (×2 EU per steam), so one large bronze boiler can feed about 200 of them; in practice the turbines, or a few generator arrays, set the limit.
@@ -275,7 +288,7 @@ No new mod is required: machines, recipe types and models are KubeJS.
 - **Server:** remove by type `ae2:inscriber` and `ae2:charger`, the `ae2:transform` recipes for certus and fluix, and AE2's crafting recipes; also remove `silicon_from_certus_quartz_dust`. Everything is regenerated from `ae2_gt.json` and `mobs.json`.
 - **Tags:** merge `forge:gems/certus_quartz` (GT and AE2 have the same crystal: GT's outputs are switched to AE2's) and add GT's silicon to `forge:silicon`.
 - **Dimensions:** GTM's air is only valid in `overworld`; add gas collector recipes with `.dimension('grindless:void')` and `.dimension('grindless:flat')`, and plains biome in both.
-- **Quests:** chapter "LV Factory" (translated from Spanish) with about 9 quests, one per step, a small reward and no recipe locks.
+- **Quests:** the "LV: The First Spark" chapter, 51 quests since the 2026-10-25 voice pass (`docs/quests.md` section 14), with small rewards and no recipe locks.
 - **Tests:** (1) it starts; (2) the four new multiblocks and machines form and process; (3) sand → certus → fluix → processor → controller, and sapphire → Aluminium → MV machine hull.
 
 ## Risks and open questions

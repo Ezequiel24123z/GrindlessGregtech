@@ -1,0 +1,9 @@
+{
+  "type": "emi:info",
+  "stacks": [
+    "item:grindless:solar_wing_panel"
+  ],
+  "text": [
+    "emi.grindless.info.solar_wing_panel.0"
+  ]
+}

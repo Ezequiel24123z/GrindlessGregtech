@@ -241,10 +241,24 @@ export function renderText(model, res, out, opts = {}) {
     'gtceu:refining', 'gtceu:reforming', 'gtceu:syngas', 'gtceu:composite_curing', 'gtceu:lunar_drilling',
     'gtceu:pgm_refining', 'gtceu:regolith_processing', 'gtceu:cryogenic_processing', 'gtceu:lunar_solar', 'gtceu:deep_space_tracking',
     'gtceu:atmosphere_processing', 'gtceu:solvent_extraction', 'gtceu:combined_cycle', 'gtceu:hot_rolling',
+    'gtceu:fission_core', 'gtceu:hot_cell', 'gtceu:in_situ_leaching', 'gtceu:fuel_fabrication', 'gtceu:isotope_exchange', 'gtceu:fluorspar_digestion',
+    'gtceu:detritiation', 'gtceu:venus_heat', 'gtceu:acid_cracking', 'gtceu:solar_processing', 'gtceu:mercury_solar', 'gtceu:interferometry',
+    'gtceu:radioisotope_decay',
+    'gtceu:closed_loop_cooling', 'gtceu:coated_conductor', 'gtceu:magnet_winding', 'gtceu:sterile_culture', 'gtceu:orbital_solar',
+    'gtceu:microgravity_processing', 'gtceu:wake_epitaxy', 'gtceu:microgravity_crystal_growth', 'gtceu:organoid_assembly',
+    'gtceu:asteroid_processing', 'gtceu:optical_mining', 'gtceu:fumarole_condensing', 'gtceu:volcanic_heat', 'gtceu:electrodynamic_tether',
+    'gtceu:thermochemical_hydrogen', 'gtceu:bioreactor', 'gtceu:gravitational_wave_astronomy', 'gtceu:probe_launch',
   ];
   const typesWithRecipes = new Set([...dump.recipes.values()].map((r) => r.type));
   L.push(`          ${added} recipes added by the pack's scripts · the pack's own types with recipes: ${OUR_TYPES.filter((t) => typesWithRecipes.has(t)).join(', ') || '(none: neither vein_drilling nor greenhouse)'}`);
   L.push(`Context : the factory is in dimension ${cfg.contextDimension}`);
+  const pkgs = model.stats.packages || [];
+  if (pkgs.length > 0) {
+    const landed = pkgs.filter((p) => p.landed).map((p) => p.id);
+    const pending = pkgs.filter((p) => !p.landed);
+    L.push(`Packages: ${landed.length > 0 ? `landed ${landed.join(', ')}` : 'none landed'}${pending.length > 0 ? `; pending ${pending.map((p) => p.id).join(', ')} (their targets warn instead of failing)` : ''}`);
+    for (const p of pending) L.push(`          ${p.id} ${p.label}: the dump lacks ${p.missing.slice(0, 4).join(', ')}${p.missing.length > 4 ? ` +${p.missing.length - 4}` : ''}`);
+  }
   if (model.warnings.length > 0) {
     L.push('');
     L.push(`CONFIG WARNINGS (${model.warnings.length})`);
@@ -343,6 +357,7 @@ export function toJson(model, res, out) {
   const row = (r) => ({
     id: r.target.id, label: r.target.label || r.target.id, verdict: r.verdict, status: r.status,
     key: r.key !== null && r.key !== undefined ? keyName(g, r.key) : null, without: r.target.without || null, detail: r.lines,
+    ...(r.target.pending ? { pending: r.target.pending } : {}),
   });
   const eras = out.eras && out.eras.active ? {
     verdict: out.eras.verdict, counts: out.eras.counts, resources: out.eras.resources,
@@ -356,7 +371,7 @@ export function toJson(model, res, out) {
     })),
   } : null;
   return {
-    tier: model.cfg.tier, verdict: out.verdict, counts: out.counts, warnings: model.warnings,
+    tier: model.cfg.tier, verdict: out.verdict, counts: out.counts, warnings: model.warnings, packages: model.stats.packages || [],
     gate: out.gate.map(row), auto: out.auto.map(row), eras,
     stats: {
       rules: g.rules.length, recipes: model.stats.recipes, deadByType: model.stats.deadByType, ignoredByType: model.stats.ignoredByType,

@@ -7,7 +7,7 @@ You enter EV with what HV's end leaves you. On Earth: EV hull of lunar Titanium,
 ## Route
 
 1. **EV network.** HV→EV transformer, buffers and EV hatches. The EV energy and dynamo hatches (the 4, 16 and 64 A ones start here) need MPIC chips (phosphorus boule, brown lens, EV cutter) and the Extreme Voltage Coil (fine platinum wire), so they come after the platinum plant and the phosphorus line; until then two HV energy hatches run EV recipes. Large gas turbines (`gtceu:gas_large_turbine`: EV hull, 2 EV circuits, 4 gears and 2 large Stainless Steel pipes; 4,096 EU/t with the rotor at 100%) running on refinery gas, and large Titanium boilers, up to the gate's 32,768 EU/t.
-2. **ME hatches.** `gtceu:me_input_bus`, `me_output_bus`, `me_input_hatch` and `me_output_hatch` (EV; the stocking ones and the pattern buffer are LuV). Each multiblock requests from the network and returns to it, on the Moon too.
+2. **ME hatches.** `gtceu:me_input_bus`, `me_output_bus`, `me_input_hatch` and `me_output_hatch` (EV; the stocking bus and hatch are IV, 7,680 EU/t in the assembler, and their IV sensor takes Mercury's iridium; the pattern buffer is LuV). Each multiblock requests from the network and returns to it, on the Moon too.
 3. **Moon base I.** Lunar solar array and buffers. The EV tripod replaces HV's lunar drill and sends Ilmenite home through an ME bus.
 4. **Moon base II.** Regolith cell (volatiles, O₂ and metals from the regolith, chlorine-free Titanium from the Ilmenite, and the sintered brick for lunar structures) and cryogenic plant (liquid oxygen, nitrogen and helium, using the cold of the lunar night).
 5. **Interplanetary network.** P2P tunnel trunk, power over the bridge, and new pairs with no trip (see *The AE2 network*).
@@ -181,17 +181,17 @@ Per batch:
 - **Attack:** 54 ticks at 1,903 EU/t.
 - **Platinum:** 2,314 ticks at 1,920 EU/t.
   - Outputs: 6 Pt, 3 Au, 3 SiO₂, 9 CaCl₂, 6 slag.
-  - Chanced: Pd metal dust, the rarest mixture, iridium residue.
+  - Chanced: Pd metal dust. The rarest metal mixture and the iridium residue went with IV-B3 (see *Outputs*).
   - Fluids: Pd-rich ammonia, NO₂, dilute H₂SO₄.
 - **Palladium:** 891 ticks at 1,919 EU/t.
 - **Rh/Ru:** 517 ticks at 1,920 EU/t.
 
 Per 9 ores: 6 Pt, about 4.2 Pd, about 1.35 Rh and about 4.5 Ru. The CaCl₂ (9 per sludge) is a third source for the regolith cell's molten salt charge, the NO₂ goes back to nitric acid, and the dilute H₂SO₄ goes to the distillery.
 
-- **Type `gtceu:pgm_refining`,** built when the world loads from GT--'s recipes (if they change, it is rebuilt; if any are missing, the log says so). Circuit 1, leach: 9 purified pentlandite or chalcopyrite ores → platinum sludge + Ni or Cu + O₂ + H₂SO₄, with electrolysis inside. Circuit 2, separation: Platinum, Palladium, and Rhodium with Ruthenium. Same proportions and same energy as the standalone line, with no parallels.
+- **Type `gtceu:pgm_refining`,** built when the world loads from GT--'s recipes (if they change, it is rebuilt; if any are missing, the log says so). Circuit 1, leach: 9 purified pentlandite or chalcopyrite ores → platinum sludge + Ni or Cu + O₂ + H₂SO₄, with electrolysis inside. Circuit 2, separation: Platinum, Palladium, and Rhodium with Ruthenium. Same proportions and same energy as the standalone line, with no parallels of its own. Since IV-B3, circuit 3 refines Mercury's iridosmine into iridium and osmium (`iv.md`, *Family steps*), and an IV parallel hatch can run up to 4 copies.
 - **Condition:** platinum electrode (`grindless:platinum_electrode`, Platinum on Titanium, 0.1%).
-- **Structure:** a hall 5 wide × 5 high × 7 deep of inert casing (≥ 24), Titanium pipes and tempered glass; 1–2 EV hatches, 1 input bus and 1 output bus, 3 input hatches and 4 output hatches. Accepts ME hatches.
-- **Outputs:** Pt, Pd, Rh, Ru and whatever the standalone line makes, each with a destination. The Ir/Os mixture and the iridium residue are stored (the journey puts Ir and Os on Mercury: see *Decisions*).
+- **Structure:** a hall 5 wide × 5 high × 7 deep of inert casing, Titanium pipes and tempered glass; 1–2 EV hatches, 1 input bus and 1 output bus, 3 input hatches, 4 output hatches and, since IV-B3, an optional IV parallel hatch. At least 23 cells are casing (24 before IV-B3; every build that formed still forms). Accepts ME hatches.
+- **Outputs:** Pt, Pd, Rh, Ru and whatever the standalone line makes, each with a destination. No iridium or osmium since IV-B3: `offworld_only.json` strips the iridium metal residue and the rarest metal mixture from GT--'s sludge centrifuge and leach, and the plant reads its stages through the same strips, with the same energy. Before that the plant gave both, and they were stored for IV; stored ones still refine with GT--'s loose recipes. Iridium and osmium now come only from Mercury's iridosmine.
 - **New with the journey:** its electrodes are the anodes of the lunar cell, and its Ruthenium is the catalyst for the Martian processor and the RTM.
 
 ### Family steps
@@ -305,7 +305,7 @@ What it gains: **a separation GTM does not do.** Martian rare earths (the KubeJS
 | Lunar titanium | tripod → Ilmenite → cell, mode 2 (CaCl₂ charge, Platinum anode) → Titanium ingot. On Earth, HV's Kroll with Ilmenite coming down the bridge | O₂: cryogenic plant, suit or network. Iron: steel for the base. CaCl₂: not used up |
 | Regolith and volatiles | regolith → cell: mode 1 → He, He-3, H₂, N₂ and water; mode 2 → O₂, Fe and Si; mode 3 → sintered brick | He-3: fusion reserve. He and N₂: cryogenic plant. H₂: home network. Water: voided. Si: solar panels |
 | Lunar cryogenics | O₂, N₂ and He from the cell (or from home through the bridge) → cryogenic plant, at night at half the energy → liquid oxygen, nitrogen and helium | Liquid Nitrogen: tripod (EV) and Mercury drill (IV). Liquid Oxygen: extreme engines (IV). Liquid Helium: 5,000 K ingots (IV) |
-| Platinum | sulfide ore → macerator → washer → purified ore → plant, leach → sludge → plant, separation → Pt, Pd, Rh and Ru; EBF and freezer for the hot ingots | Ni and Cu: ore plant. H₂SO₄: sulfuric loop. Ir/Os and iridium residue: stored |
+| Platinum | sulfide ore → macerator → washer → purified ore → plant, leach → sludge → plant, separation → Pt, Pd, Rh and Ru; EBF and freezer for the hot ingots | Ni and Cu: ore plant. H₂SO₄: sulfuric loop. No Ir/Os mixture or iridium residue since IV-B3 (they were stored before) |
 | Nitric acid and chlorine | N₂ + 3 H₂ + 4 O₂ → HNO₃ (`nitric_acid_from_elements`, large chemical reactor); Cl₂ + H₂ → HCl; nitric + sulfuric → nitration mix (GT--) | Water: network. The line's chlorine goes back into the plant |
 | Nano circuits | phosphorus boule (EBF) → wafers → etching and cutting in cleanroom → NOR chips; CPU → nano wafer (EV reactor, 1,200 t) → processor, assembly and nano computer | Epoxy, acids and persulfate: HV loops. The parts leave no leftovers |
 | Martian atmosphere | Martian air + water → processor (ruthenium) → CH₄ + O₂ → mixer → methalox → gas turbine on Mars (87% of the processor's energy back as methane, 76% as methalox) | Spare O₂: suits. Spare CH₄: home network. Spare CO₂ (circuit 2): sealed dome |
@@ -411,21 +411,22 @@ No new mods: machines, recipe types, items, fluids and rules are all KubeJS and 
 
 ## Quests
 
-Built on 2026-10-25 (package C2): `ev_age.snbt`, "EV: Lunar Base", 66 quests and 75 dependencies; v0.5.0's 12 quests keep their ids.
-- **The spine is the journey:** Lunar Base → samples → Lunar Drill → titanium → EV hull, transformer, motor and pump, components → EV Tripod Drill → drilling dry → A Rocket for Mars → **Red Horizon** (`gcyr:mars`) → Martian samples and tripod → tungsten → tungsten steel → **IV Machine Hull** (exit, also after the Nanoprocessor Supercomputer).
+`ev_age.snbt`, "EV: Lunar Base", 55 quests and 63 dependencies. Package C2 built it on 2026-10-25 with 66 quests, and v0.5.0's 12 kept their ids. The voice pass the same day (`docs/quests.md` section 8) cut eleven, and every quest that stayed kept its id.
+- **The spine is the journey:** Lunar Base → samples → Lunar Drill → titanium → EV hull → EV components (motor, pump, piston, arm and conveyor in one quest) → EV Tripod Drill → drilling dry → A Rocket for Mars → **Red Horizon** (`gcyr:mars`) → Martian samples and tripod → tungsten → tungsten steel → **IV Machine Hull** (exit, also after the Nanoprocessor Supercomputer).
 - **Above it, off-world:**
-  - the Earth–Moon network: bridge, trunk, and a second pair made by the base;
-  - Moon base II: sintered bricks, the regolith cell and its modes, titanium without chlorine, the solar array, the cryogenic plant with liquid nitrogen and oxygen, the sealed dome;
+  - the Earth–Moon network: helium-3, the bridge, power from Earth, and a second pair made by the base;
+  - Moon base II: sintered bricks, the regolith cell and its modes, titanium without chlorine, the solar array, the cryogenic plant with liquid nitrogen and oxygen, the sealed dome. The regolith cell also depends on HV's *Nichrome*, because its crucible is ringed with nichrome coils;
   - the far side: Deep Space Antenna → Mars chart;
   - on Mars: the Martian seed and the Earth–Mars bridge, the atmosphere processor and methalox, the ice, the extraction cascade and samarium, and RTM coils.
 - **Below it, Earth:**
-  - the vacuum rule, the super chest and tank, the wither line;
-  - battery buffer → large gas turbine → combined-cycle plant, and the hot strip mill;
-  - nitric acid → platinum plant → platinum, palladium, rhodium and ruthenium → ruthenium catalyst;
-  - EV to IV transformer (MPIC chips) → EV hatches;
+  - the vacuum rule and the wither line;
+  - the combined-cycle plant and the hot strip mill;
+  - platinum plant → platinum → palladium, and rhodium and ruthenium → ruthenium catalyst;
+  - EV hatches (MPIC chips and the Extreme Voltage Coil), after platinum;
   - the EV circuit assembler → nanoprocessor line → supercomputer.
-- **The antenna's text:** "With Earth's noise blocked by 3,474 km of rock, the Deep Space Antenna hears a steady hiss from Sagittarius: the center of the galaxy, 26,000 light-years away. You will go there. Mars first."
-- **The exit:** "Mars gave you tungsten. Venus and Mercury burn. That's next."
+- **Cut on 2026-10-25:** both transformers, *EV Grid*, *Large Gas Turbine*, *Distillation Tower*, *Nitric Acid*, *A Trunk to the Moon*, *EV Super Chest and Tank*, *Waystone on the Moon* (the Travel tab's job) and *Keep the Iridium* (since IV-B3 Earth gives no iridium). *EV Components* went into *EV Motor and Pump*, which took its title, and the EV to IV transformer's MPIC chip task went to *EV Hatches*. Eight titles that hid their content were renamed, such as *Three Skulls* → *Nether Stars* and *Ice with a Secret* → *Deuterium-Rich Ice*.
+- **The antenna's text:** "With Earth's noise blocked by 3,474 km of rock, the Deep Space Antenna hears a steady hiss from Sagittarius: the center of the galaxy, 26,000 light-years away. You will go there. Mars first. It only listens on the Moon, at night, and your landing-site chart calibrates the dish."
+- **The exit:** "The IV Machine Hull puts Martian tungsten steel, platinum cable and PTFE into one box. Mars gave you tungsten. Venus and Mercury burn. That's next."
 - **EV hatches come late.** EV energy and dynamo hatches need MPIC chips (phosphorus boule, brown lens, EV cutter) and the Extreme Voltage Coil (fine platinum wire), so they arrive after the platinum plant and the phosphorus line. Until then, two HV energy hatches let a multiblock run EV recipes (GTM allows one tier up with two hatches of the top tier), and the lunar solar array and the combined-cycle plant run on HV dynamo hatches.
 
 ## Risks
@@ -435,7 +436,7 @@ Built on 2026-10-25 (package C2): `ev_age.snbt`, "EV: Lunar Base", 66 quests and
 - **AE2 across dimensions.** Each bridge needs both ends loaded, and three loaded worlds are a heavy load; power over P2P pays an AE2 tax. If performance cannot keep up, fewer pairs and higher-amperage converters.
 - **Moon base balance.** Chlorine-free Titanium at the Kroll's energy, and liquids at half price at night. If they make the Kroll or the home freezer pointless, they get cut back (the titanium mode yields less; the night discount goes down). Recipe time is never changed.
 - **Leaks when removing resources from Earth.** Ti, W, He-3, Sm and D come out of recipes, ore byproducts and addons. A leak breaks the journey without showing in-game: only the validator sees it.
-- **Iridium, osmium, Venus and Mercury.** The standalone plant releases the Ir/Os mixture, and the journey puts Ir and Os on Mercury; and the tier 2 rocket reaches Venus and Mercury if they do not go up to tier 3. IV closes this; here the mixture is stored and tier 3 is proposed.
+- **Iridium, osmium, Venus and Mercury (closed).** The standalone line released the Ir/Os mixture while the journey puts Ir and Os on Mercury, and the tier 2 rocket would reach Venus and Mercury unless they went up to tier 3. Venus and Mercury are at `rocket_tier` 3, and since IV-B3 Earth's platinum line gives no iridium or osmium.
 
 Credits to note in `CREDITS.md`: regolith cell (NASA and MIT molten-regolith electrolysis, and Cambridge's FFC process: real physics), cryogenic plant (radiators to the night sky: real physics), atmosphere processor (MOXIE and the Sabatier reaction: real), solar array (TFG's large solar panel, idea only), antenna (far-side radio telescopes: real), advanced parts and planets (GCYR, LGPL-3.0). Also the four 2026-10-25 additions:
 - combined-cycle plant: real combined-cycle gas plants; the catalog's `combined_cycle_plant`; GTNH's large heat exchanger, idea only;
@@ -454,7 +455,7 @@ Credits to note in `CREDITS.md`: regolith cell (NASA and MIT molten-regolith ele
 7. **Mars only gives its own:** three veins (Tungsten, rare earths with a material of their own, and ice); GCYR's common veins are removed from Mars.
 8. **Site rules in EV:** on the Moon nothing burns, night cryogenics use half the energy, light is ×1.4 and there is no mud (Liquid Nitrogen); on Mars, fuel only burns with O₂ (methalox) and light is ×0.43.
 9. **Cuts on Earth:** the Ilmenite from `metal_mixture_separation`, the Samarium from `rare_earth_separation` and the Deuterium from `hydrogen_separation` and from ender air.
-10. **Iridium and osmium:** the Ir/Os mixture and the iridium residue from the plant are stored; their refining on Earth is removed or requires something from Mercury (IV sets it).
+10. **Iridium and osmium:** the Ir/Os mixture and the iridium residue from the plant are stored; their refining on Earth is removed or requires something from Mercury (IV sets it). *Since IV-B3:* the plant gives neither, so nothing is stored, and iridium and osmium come only from Mercury's iridosmine, which the plant refines on circuit 3 (`iv.md`, decision 5).
 11. **Staying in IV:** radioactives, radon and quantum stars; EV sensors, emitters and field generator; GCYM and parallel; large combustion engine (IV circuits). The wither is made in EV and its star is saved.
 12. **Power and tests:** large gas turbines up to 32,768 EU/t on Earth, solar array with Earth at night on the Moon, and methalox on Mars. Whatever changes the mechanism is tested in-game in new strips; the rest with the validator split into Moon and Mars.
 

@@ -1,0 +1,49 @@
+{
+ "_source": "The native registry of the power-quests-1 bench run (2026-10-25, kubejs-exported/items.json, format gg-items-1): every item, block item and fluid id that LuV B6 (startup_scripts/grindless/luv/io_surface.js and server_scripts/grindless/luv/io_surface.js) uses that is not registered by A1 (startup_scripts/grindless/luv/foundation.js) or added by its materialModification (gtceu:dense_titanium_plate); each one checked to be in that registry.",
+ "_how_it_is_used": [
+  "tools/analysis/test/luv-io-surface.test.mjs checks every id the two scripts use, in recipes and in the patterns, against this list and A1's published ids. Never add an id that is not in a native registry export."
+ ],
+ "run": "power-quests-1",
+ "items": [
+  "biomesoplenty:black_sand",
+  "biomesoplenty:brimstone",
+  "biomesoplenty:brimstone_fumarole",
+  "grindless:night_sky_radiator",
+  "gtca:germanite_dust",
+  "gtceu:aluminium_frame",
+  "gtceu:clean_machine_casing",
+  "gtceu:frostproof_machine_casing",
+  "gtceu:germanium_dust",
+  "gtceu:hsss_frame",
+  "gtceu:indium_dust",
+  "gtceu:iron_dust",
+  "gtceu:iv_wireless_energy_hatch",
+  "gtceu:luv_electric_motor",
+  "gtceu:luv_electric_pump",
+  "gtceu:luv_energy_input_hatch",
+  "gtceu:luv_energy_output_hatch",
+  "gtceu:luv_input_bus",
+  "gtceu:luv_input_hatch",
+  "gtceu:luv_machine_hull",
+  "gtceu:luv_output_bus",
+  "gtceu:luv_output_hatch",
+  "gtceu:luv_parallel_hatch",
+  "gtceu:programmed_circuit",
+  "gtceu:robust_machine_casing",
+  "gtceu:sulfur_dust",
+  "gtceu:tantalum_plate",
+  "gtceu:titanium_turbine_casing",
+  "gtceu:tungsten_steel_small_fluid_pipe",
+  "gtceu:tungstensteel_firebox_casing",
+  "gtceu:tungstensteel_pipe_casing",
+  "gtceu:zinc_dust",
+  "minecraft:basalt",
+  "minecraft:magma_block"
+ ],
+ "fluids": [
+  "gtceu:hydrochloric_acid",
+  "gtceu:hydrogen",
+  "gtceu:sulfur_dioxide",
+  "minecraft:water"
+ ]
+}

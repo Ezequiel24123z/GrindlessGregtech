@@ -11,8 +11,8 @@
 		{
 			dependencies: ["055851443092A93B"]
 			description: [
-				"Bees are a second way to automate here, never a shortcut. They make combs, and a material comb only becomes its material inside a GregTech machine, at the voltage of the era that opens that material."
-				"No bee hands you an ore, an ingot or a dust."
+				"Bees are another way to automate, not a shortcut. They make combs, and a material comb only turns into its material inside a GregTech machine, at the voltage of the age that opens that material."
+				"So no bee will hand you titanium early, however nicely you ask."
 			]
 			icon: "productivebees:advanced_oak_beehive"
 			id: "5DA5E1984F92A535"
@@ -26,7 +26,9 @@
 		}
 		{
 			dependencies: ["5DA5E1984F92A535"]
-			description: ["Planks and a honey bottle make a &6Bee Cage&r: right-click a bee to catch it, right-click a block to let it out. Wild nests in wood, stone, sand, snow, gravel and the Nether each hold their own kind of bee."]
+			description: [
+				"Right-click a bee with a &6Bee Cage&r to catch it, and right-click a block to let it out. Wild nests in wood, stone, sand, snow, gravel and the Nether each hold their own kind."
+			]
 			icon: "productivebees:bee_cage"
 			id: "2F0252E6D86763C7"
 			rewards: [{ id: "688979A60EE9BD74", type: "xp", xp: 10 }]
@@ -37,7 +39,9 @@
 		}
 		{
 			dependencies: ["5DA5E1984F92A535"]
-			description: ["A vanilla &6Beehive&r with ordinary bees gives honeycomb and honey bottles, enough for cages, treats and the hive that comes next."]
+			description: [
+				"Plain bees in a vanilla beehive still make honeycomb and honey, and you'll need both for cages, treats and the next hive."
+			]
 			icon: "minecraft:beehive"
 			id: "25CF38B8E88FD430"
 			rewards: [
@@ -54,7 +58,9 @@
 		}
 		{
 			dependencies: ["25CF38B8E88FD430"]
-			description: ["A honeycomb and a honey bottle make a &6Honey Treat&r. Bees love them: they go into the base of every hive upgrade and can carry genes to the bee that eats them."]
+			description: [
+				"Bees love a &6Honey Treat&r. One goes into every hive upgrade, and a treat can carry genes to the bee that eats it."
+			]
 			icon: "productivebees:honey_treat"
 			id: "54252DC8296A7B73"
 			rewards: [
@@ -69,8 +75,8 @@
 		{
 			dependencies: ["2F0252E6D86763C7", "25CF38B8E88FD430"]
 			description: [
-				"Productive bees only work in an &6Advanced Beehive&r. It is the hive that holds them, and it is where they fly out, gather and come back with combs."
-				"Bees fly out, gather and come back with combs; pipe or hopper them out of the hive."
+				"Productive bees only live in an &6Advanced Beehive&r. They fly out, gather and come back with combs, which you pipe or hopper out of the hive."
+				"The recipe wants an MV circuit here. Bees are an MV hobby."
 			]
 			icon: "productivebees:advanced_oak_beehive"
 			id: "0CB810A94D49A9ED"
@@ -87,7 +93,9 @@
 		}
 		{
 			dependencies: ["0CB810A94D49A9ED"]
-			description: ["Set an &6Expansion Box&r on top of an advanced hive and it makes room for more bees."]
+			description: [
+				"An &6Expansion Box&r on top of an advanced hive makes room for more bees."
+			]
 			icon: "productivebees:expansion_box_oak"
 			id: "6FD750400F90D01F"
 			optional: true
@@ -99,7 +107,9 @@
 		}
 		{
 			dependencies: ["0CB810A94D49A9ED", "54252DC8296A7B73"]
-			description: ["The &6Upgrade Base&r is the part every hive upgrade starts from. It turns into hive upgrades: time for faster combs, range for wider gathering, breeding so the hive raises its own bees, filter to keep only certain bees."]
+			description: [
+				"Hive upgrades all start from an &6Upgrade Base&r. Time makes combs faster, range widens the gathering, breeding lets the hive raise its own bees, and the filter decides who gets in."
+			]
 			icon: "productivebees:upgrade_time"
 			id: "5723368F9FCD9CCD"
 			rewards: [{ id: "17126C26F217B992", type: "xp", xp: 15 }]
@@ -114,8 +124,7 @@
 		{
 			dependencies: ["5723368F9FCD9CCD"]
 			description: [
-				"New species come from two parents. EMI lists every pair under bee breeding, with the item each parent wants."
-				"The &6Breeding Chamber&r does it for you."
+				"New species come from two parents, and EMI lists every pair under bee breeding along with what each parent wants. The &6Breeding Chamber&r does the matchmaking for you."
 			]
 			icon: "productivebees:breeding_chamber"
 			id: "2D77C658B8EDEDDA"
@@ -127,7 +136,9 @@
 		}
 		{
 			dependencies: ["5723368F9FCD9CCD"]
-			description: ["The &6Simulator Upgrade&r keeps the bees inside the hive while they work. It needs blaze rods, and the blaze is an MV creature, so this one waits for MV."]
+			description: [
+				"The &6Simulator Upgrade&r keeps the bees inside the hive while they work, and your machine rooms get some peace. It needs blaze rods, and those come from the MV simulator."
+			]
 			icon: "productivebees:upgrade_simulator"
 			id: "4A802166B5E6F521"
 			optional: true
@@ -143,7 +154,9 @@
 		}
 		{
 			dependencies: ["25CF38B8E88FD430"]
-			description: ["Productive Bees' own &6Centrifuge&r needs no power. It splits honeycomb and mob combs (bone, string, slime, rotten flesh, gunpowder) into wax, honey and their drop. Material combs will not go in; those belong to GregTech."]
+			description: [
+				"Productive Bees' own &6Centrifuge&r runs without power and splits honeycomb and mob combs into wax, honey and their drop. Material combs won't go in; those are GregTech's job."
+			]
 			icon: "productivebees:centrifuge"
 			id: "05376BE98BF2B1E4"
 			rewards: [{ id: "28DFD7C72AD21BBF", type: "xp", xp: 10 }]
@@ -155,8 +168,7 @@
 		{
 			dependencies: ["05376BE98BF2B1E4"]
 			description: [
-				"Iron, copper, tin, gems, redstone: a material comb gives its material only in a GregTech &6Centrifuge&r, along with wax and a little honey."
-				"An MV centrifuge handles the Overworld and Nether materials."
+				"A &6material comb&r gives up its material only in a GregTech centrifuge, with some wax and honey on the side. An MV centrifuge covers the Overworld and Nether metals."
 			]
 			icon: "gtceu:mv_centrifuge"
 			id: "3FFE7724EB772829"
@@ -170,8 +182,8 @@
 		{
 			dependencies: ["3FFE7724EB772829"]
 			description: [
-				"Every comb runs at the voltage of the era that opens its material, so the rarer metals need a bigger centrifuge; EMI shows the EU/t on each recipe."
-				"Ilmenite and titanium combs only process in a centrifuge on the Moon."
+				"Each comb runs at the voltage of the age that opens its material. Rarer metals want a bigger centrifuge, and EMI shows the EU/t."
+				"Some only work off-world: ilmenite and titanium combs need a centrifuge on the Moon, and the tungsten ones a centrifuge on Mars."
 			]
 			icon: "gtceu:hv_centrifuge"
 			id: "09CF12D6CC25F7E0"

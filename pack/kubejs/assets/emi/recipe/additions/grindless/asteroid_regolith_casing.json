@@ -1,0 +1,5 @@
+{
+  "type": "emi:info",
+  "stacks": ["item:grindless:asteroid_regolith_casing"],
+  "text": ["emi.grindless.info.asteroid_regolith_casing.0"]
+}

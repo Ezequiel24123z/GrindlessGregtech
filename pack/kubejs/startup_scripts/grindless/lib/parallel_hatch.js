@@ -19,8 +19,10 @@
 // Why a helper outside lib/patterns.js: its ABILITIES table has no parallel hatch and patterns.js is not edited (it stays the one place
 // that changes for GTM 8.0). This file is the second place that builds a GTM predicate: when GTM 8.0 arrives, part() changes with it.
 // What a parallel run costs: GTM multiplies the EU/t by the copies, so the energy hatches must carry the sum (one IV hatch: 8,192 V;
-// two IV hatches: 32,768 V, GTM raises the voltage one tier). A non-consumed input (the heavy-water plant's H2S charge, the fuel plant's
-// hydrogen) is needed once and never multiplied (FluidRecipeCapability#getMaxParallelByInput skips it; Content#copy leaves it as is).
+// two IV hatches: 32,768 V, GTM raises the voltage one tier; two LuV hatches: 131,072 V, four copies of a 30,720 EU/t recipe). A
+// non-consumed input (the heavy-water plant's H2S charge, the fuel plant's hydrogen, the naquadah plant's mode-2 charges) is needed once
+// and never multiplied (FluidRecipeCapability#getMaxParallelByInput skips it; Content#copy leaves it as is); a chanced input (a Pu-Be
+// source, an electrode, the Pd/C catalyst) is consumed, so GTM wants one per copy in the bus.
 //
 // Same rules as patterns.js: everything inside a function, `var` inside functions that run more than once (Rhino), GTM classes reached
 // only when a pattern is built or a recipe modified, so nothing GTM-related runs at script load.
@@ -79,7 +81,13 @@
     hasHatch: hasHatch,
     modifier: modifier,
     overclock: overclock,
-    // the plants that take it (IV-B6), for the smoke test and the dump
-    machines: ['gtceu:hot_cell', 'gtceu:fuel_fabrication_plant', 'gtceu:heavy_water_plant']
+    // the plants that take it (IV-B6), for the smoke test and the dump; the platinum and naquadah plants since IV-B3
+    machines: ['gtceu:hot_cell', 'gtceu:fuel_fabrication_plant', 'gtceu:heavy_water_plant', 'gtceu:platinum_plant', 'gtceu:naquadah_plant'],
+    // LuV (docs/eras/luv.md, "Nothing one at a time"; package A2): GTM's LuV hatch (x16) is made by GTM's own recipe,
+    // gtceu:shaped/parallel_hatch_mk2, and fits the same cell as the IV one in every plant above. These LuV machines must take it too:
+    // each package registers its machine with part() in a part cell, and the LuV smoke test checks every one that is registered
+    luvMachines: ['gtceu:helium_refrigerator', 'gtceu:coated_conductor_line', 'gtceu:hts_magnet_works', 'gtceu:biofoundry', 'gtceu:microgravity_smelter',
+      'gtceu:zero_g_crystal_grower', 'gtceu:wake_shield_facility', 'gtceu:organoid_lab', 'gtceu:asteroid_processor', 'gtceu:fumarole_condenser'],
+    luvRecipe: 'gtceu:shaped/parallel_hatch_mk2'
   }
 })()

@@ -1,8 +1,9 @@
 // -----------------------------------------------------------------------------------------------
 // gtceu:pgm_refining recipes of the Platinum Plant (gtceu:platinum_plant), generated at server load from the LOOSE platinum-group line that
-// is in the recipe set, and the recipes that make the plant and its electrode (EV era). Nothing of the line is typed by hand: the stage
-// recipes are read (ServerEvents.recipes, original recipes, their JSON), chained, and the amounts and the energy come out of the chain, so
-// the ratios are the line's by construction.
+// is in the recipe set, and the recipes that make the plant and its electrode (EV era; mode 3 is IV's, mode 4 LuV's). Nothing of the line is typed by
+// hand: the stage recipes are read (ServerEvents.recipes, original recipes, their JSON), chained, and the amounts and the energy come out
+// of the chain, so the ratios are the line's by construction. The reading, the balance and the rounding are the composer library's,
+// server_scripts/grindless/lib/compose.js (global.grindless.compose), which started as this file's own copy.
 //
 // WHICH LINE: in this pack GTM's own line (PlatGroupMetalsRecipes: pgs_separation, aqua regia, ...) is NOT the live one. GT-- (gtnn, in the
 // pack for its kaolinite and wollastonite veins) empties those recipes and puts a GTNH-style platinum line in their place: nitration
@@ -20,18 +21,50 @@
 //   circuit 2  separation  three recipes; the plant runs the one its inputs fit:
 //       platinum           1 sludge + nitration mixture, ammonium chloride and calcium -> 6 platinum + gold + silicon dioxide + calcium
 //                          chloride + 6 platinum slag + the leftovers of the line (palladium-rich ammonia, nitrogen dioxide, diluted sulfuric
-//                          acid, palladium metal dust, iridium metal residue, rarest metal mixture).  stages: sludge centrifuge -> dissolve the
-//                          platinum powder in nitration mixture -> large reactor with ammonium chloride (salt + raw) -> sifter -> blast
-//                          furnace (back to platinum powder: the loop, run to the end) -> raw platinum + calcium -> platinum
+//                          acid, palladium metal dust).  stages: sludge centrifuge -> dissolve the platinum powder in nitration mixture ->
+//                          large reactor with ammonium chloride (salt + raw) -> sifter -> blast furnace (back to platinum powder: the loop,
+//                          run to the end) -> raw platinum + calcium -> platinum
 //       palladium          palladium-rich ammonia + palladium metal dust + ammonia + formic acid -> palladium.  stages: dust -> rich ammonia
 //                          (ammonia), the large palladium reactor, the sifter (back to metal dust: the loop) and the formic acid step that
 //                          gives the ammonia back
 //       rhodium_ruthenium  platinum slag + potassium pyrosulfate, saltpeter, sodium nitrate, zinc, hydrochloric acid, salt water and steam ->
-//                          rhodium + ruthenium + rarest metal mixture + zinc sulfate + salt + chlorine + ammonia + water + potassium.
+//                          rhodium + ruthenium + zinc sulfate + salt + chlorine + ammonia + water + potassium.
 //                          stages: the leach, the rhodium sulfate, the rhodium salt / nitrate / filter cake / reprecipitated rhodium line, and
 //                          the sodium rutheniate -> ruthenium tetroxide -> cracker -> distillation -> solid -> ruthenium line
-//   left out: the iridium and osmium line (rarest metal mixture and iridium metal residue come out of the plant: an IV job, ev.md) and the
-//   pgs_from_<ore> recipes of GT-- (ore + nitration mixture -> concentrated platinum, bypassing the sludge: removed by integration/gtnn.js)
+//   Earth gives no iridium or osmium (docs/eras/iv.md decision 5): data/grindless/tables/offworld_only.json strips the iridium metal
+//   residue and the rarest metal mixture from GT--'s sludge centrifuge and inert metal mixture leach (moon/offworld_only.js rebuilds the
+//   loose recipes without them), and the plant reads every strip entry of its stages the same way (the library's patch hook), so modes
+//   1 and 2 give none either.
+//   circuit 3  iridosmine  (IV, docs/eras/iv.md "Family steps": Mercury's iridosmine -> iridium and osmium) 10 iridosmine + 10 saltpeter +
+//                          3 calcium + salt water, hydrochloric acid and hydrogen -> 3 iridium + 1 osmium + 3 platinum sludge residue + 3
+//                          metal sludge + 12 calcium chloride + water + steam. stages: the oxidative fusion (IV-B2's Mercury solar works step,
+//                          read from global.grindless.mercury.fusion, the object its live recipe grindless:solar_processing/iridosmine_fusion
+//                          is built from, so the Mercury and Earth routes cannot diverge: 10 iridosmine + 10 saltpeter + 1 000 mB salt water
+//                          -> 6 rarest metal mixture + 700 mB osmium tetroxide + 1 000 mB steam), then GT--'s chain: rarest_metal_residue_ebf
+//                          (iridium metal residue + acidic osmium solution), the distillation tower's acidic_osmium_solution_distill (the
+//                          tetroxide), osmium_dust_completion (osmium + chlorine), iridium_metal_residue_process (IrO2 + platinum sludge
+//                          residue), iridium_dioxide_dissolving, iridium_chloride and iridium_chloride_separation with calcium. The osmium
+//                          tetroxide never leaves; the chlorine of the osmium step goes back into hydrochloric acid with hydrogen (GTM's
+//                          chemical_reactor/hydrochloric_acid) and the ammonia of the iridium chloride step back into ammonium chloride with
+//                          that acid (GTM's chemical_reactor/ammonium_chloride), so neither leaves. The calcium chloride leaves for GTM's
+//                          electrolysis (calcium and chlorine), the platinum sludge residue for the centrifuge (gold, silicon dioxide); the
+//                          metal sludge is GT--'s inert dross. Through the chain the fusion's 6 mixture give 3 iridium and 0.3 osmium, and
+//                          its 700 mB of tetroxide 0.7 osmium: 3 Ir : 1 Os. Until LuV it is the only way the plant meets iridium and osmium:
+//                          its first stage only runs on Mercury, and the stages after it only take what the fusion makes.
+//   circuit 4  asteroid    (LuV, docs/eras/luv.md "Platinum plant, mode 4": the asteroid belt's platinum metals) 22 asteroid PGM concentrate
+//                          (grindless:asteroid_pgm_concentrate, what the asteroid processor's Mond process leaves) + 15 saltpeter + 3 calcium
+//                          + salt water, hydrochloric acid and hydrogen -> 1 platinum group sludge + 3 iridium + 3 osmium + 3 platinum sludge
+//                          residue + 3 metal sludge + 12 calcium chloride + water + steam. stages: the asteroid opening, ours and virtual (no
+//                          recipe of its own; data/grindless/tables/asteroid_pgm.json: 22 concentrate + 15 saltpeter + 1 500 mB salt water ->
+//                          1 sludge + 6 rarest metal mixture + 2 700 mB osmium tetroxide + 1 500 mB steam, its energy read at load: 1.5 times
+//                          the Mercury fusion's plus what one sludge costs through mode 1's attack_pentlandite), then mode 3's GT-- chain, the
+//                          same stages and loops. The 6 mixture give 3 iridium and 0.3 osmium, the 2 700 mB of tetroxide 2.7 osmium: 3 Ir +
+//                          3 Os; the sludge goes to circuit 2 (6 Pt + 4.20 Pd + 4.49 Ru + 1.35 Rh: 22.04 units of platinum metal per 22
+//                          concentrate). With GT-- 1.3.10 it costs 1 920 EU/t x 1 106 t (2.12 M EU; the opening 138 720 of it: 36 000 of
+//                          fusion and 102 720 of attack). Skipped with a warning if the concentrate is not registered (LuV A1 registers it;
+//                          B5's asteroid processor makes it, and until B5 it is hidden from EMI with its recipes, this one included).
+//   left out: the pgs_from_<ore> recipes of GT-- (ore + nitration mixture -> concentrated platinum, bypassing the sludge: removed by
+//   integration/gtnn.js)
 //
 // What "the same as the loose line" means here:
 //   ratios   every input and output has the proportion of the loose chain: the stages run for as much as the chain needs. Where the line
@@ -47,8 +80,11 @@
 //   outputs  nothing of the line is left half-made: the intermediates net out to zero and what the line lets go (acids, gases, byproduct
 //            dusts) comes out through the hatches and the bus, each with its use in another recipe.
 // Every recipe needs a platinum electrode (grindless:platinum_electrode) in the input bus: a chanced input, used up in 0.1 % of the runs.
+// Policy: modes 1 to 3 may void (the controller's voiding mode); mode 4 keeps all it makes. Its recipe carries the recipe data boolean
+// global.grindless.platinumPlant.keepKey (grindless_pgm_keep, set by the startup script), and the plant refuses to run it while the
+// controller voids outputs (startup_scripts/grindless/ev/platinum_plant.js: lib/no_voiding.js in the modifier and the start check).
 // Recipe ids (GTM's builder puts the type in front): grindless:pgm_refining/ev/<name>, name attack_pentlandite, attack_chalcopyrite,
-// platinum, palladium, rhodium_ruthenium.
+// platinum, palladium, rhodium_ruthenium; grindless:pgm_refining/iv/iridosmine; and grindless:pgm_refining/luv/asteroid.
 //
 // Crafting (EV era):
 //   Platinum Plant      ASSEMBLER: EV hull + EV chemical reactor + EV centrifuge + EV electrolyzer + EV sifter + EV mixer + 2 EV electric
@@ -61,11 +97,18 @@
 //                       electrodes: one lasts about a thousand runs.
 //
 // Published in global.grindless.platinumPlant for the smoke test:
-//   .recipes  [{ id (what the builder got), recipeId (the final id), name, mode, circuit, sources: [{ id, scale }] (stages and how many times
-//                each runs), itemsIn: [{ id, count, chance }] (chance 10000 = used up), fluidsIn: [{ id, amount }], itemsOut: [{ id, whole,
-//                chance }] (chance 0 = none), fluidsOut: [{ id, amount }], eut, duration, energy (what the recipe costs), sourceEnergy (sum
-//                of the stages) }]
-//   .skipped  [{ name, reason }]      .stages  number of source recipes read      .stageIds  every stage id the plans use
+//   .recipes  [{ id (what the builder got), recipeId (the final id), name, mode, circuit, sources: [{ id, scale, eut, duration }] (stages and
+//                how many times each runs), itemsIn: [{ id, count, chance }] (chance 10000 = used up), fluidsIn: [{ id, amount }], itemsOut:
+//                [{ id, whole, chance }] (chance 0 = none), fluidsOut: [{ id, amount }], eut, duration, energy (what the recipe costs),
+//                sourceEnergy (sum of the stages), keep (only on the recipes that refuse voiding, true: mode 4's) }]
+//   .skipped  [{ name, reason }]      .stages  number of source recipes read from the live line      .stageIds  every live stage id the plans use
+//   .stripped [{ stage, items: [ids], fluids: [ids] }] (what offworld_only.json's strip entries took out of the stages as the plant read them)
+//   .fusion   { recipe, from, stage: { eut, duration, v } } (mode 3's first stage, as read from global.grindless.mercury.fusion)
+//   .asteroid { table, concentrate, opening: { id, eut, duration, energy, v, fusionEnergy, attackSludgeEnergy, fusionTimes, attackSludge },
+//               yields: { want, got, differ: [ids] }, error } (mode 4's first stage as built at load, null when it could not be; what the
+//               composed recipe gives of each id of the table's yields, and the ids that differ, each a warning; error: why mode 4 was
+//               skipped, null when it was built)
+//   .keepKey (the data boolean of the recipes that refuse voiding), .fusionRecipe, .openingRecipe (the ids of the virtual first stages)
 //   .craftingParts, .electrodeParts, .craftingRecipes { plant, electrode }
 //
 // Rhino: var + function inside every callback that runs more than once (this Rhino throws "redeclaration of var").
@@ -77,16 +120,29 @@
   const ELECTRODE = 'grindless:platinum_electrode'
   const ELECTRODE_WEAR = 10            // of 10 000: 0.1 % of the runs
   const MAX_EUT = 1920                 // VA[EV]: the plant is an EV machine
-  const ID_PREFIX = 'grindless:ev/'
   const TYPE_PATH = 'pgm_refining'
   const ATTACK_CIRCUIT = 1
   const SEPARATION_CIRCUIT = 2
+  const IRIDOSMINE_CIRCUIT = 3
+  const ASTEROID_CIRCUIT = 4
+  // mode 3's first stage: IV-B2's Mercury solar works recipe, built from global.grindless.mercury.fusion (not an original recipe)
+  const FUSION = 'grindless:solar_processing/iridosmine_fusion'
+  // mode 4's first stage: ours and virtual (no recipe has this id), built from its table at load
+  const OPENING = 'grindless:asteroid_pgm_opening'
+  const ASTEROID_TABLE = 'kubejs/data/grindless/tables/asteroid_pgm.json'
+  // the recipe data boolean of a recipe that refuses voiding (the startup script reads it in the modifier and the start check)
+  const KEEP_KEY = String(PP.keepKey || 'grindless_pgm_keep')
+  // the outputs moon/offworld_only.js strips from loose recipes (resources of other worlds): the plant reads its stages without them
+  const OFFWORLD_TABLE = 'kubejs/data/grindless/tables/offworld_only.json'
   // what the recipe type holds (startup_scripts/grindless/ev/platinum_plant.js publishes it)
   const IO = PP.maxIO || { itemsIn: 8, itemsOut: 12, fluidsIn: 3, fluidsOut: 4 }
-  const EPS = 1e-6
 
   function item(name) { return 'i:gtceu:' + name }
   function fluid(name) { return 'f:gtceu:' + name }
+  function stage(path) { return 'gtceu:' + path }
+
+  // what the attack makes and circuit 2 splits: mode 4's opening prices one at the attack's live energy
+  const SLUDGE = item('platinum_group_sludge_dust')
 
   // bag(key, amount, key, amount, ...) -> { key: amount }
   function bag() {
@@ -95,68 +151,87 @@
     return out
   }
 
-  // The plans. `stages`: the stage recipes of the loose line (gtceu: ids). `given`: what the batch takes in, all of it (the batch size).
+  // GT--'s iridium and osmium chain after the first stage of modes 3 and 4 (the fusion, the opening), and the intermediates it closes
+  const IRIDOSMINE_CHAIN = [
+    stage('electric_blast_furnace/rarest_metal_residue_ebf'),
+    stage('distillation_tower/acidic_osmium_solution_distill'),
+    stage('chemical_reactor/osmium_dust_completion'),
+    stage('electric_blast_furnace/iridium_metal_residue_process'),
+    stage('chemical_reactor/iridium_dioxide_dissolving'),
+    stage('chemical_reactor/iridium_chloride'),
+    stage('chemical_reactor/iridium_chloride_separation'),
+    stage('chemical_reactor/hydrochloric_acid'),
+    stage('chemical_reactor/ammonium_chloride')
+  ]
+  const IRIDOSMINE_LINKED = [
+    item('rarest_metal_mixture_dust'), item('iridium_metal_residue_dust'), fluid('acidic_osmium_solution'), fluid('osmium_tetroxide'),
+    item('iridium_dioxide_dust'), fluid('acidic_iridium'), item('iridium_chloride_dust'), fluid('chlorine'), fluid('ammonium_chloride')
+  ]
+
+  // The plans. `stages`: the stage recipes of the loose line (recipe ids). `given`: what the batch takes in, all of it (the batch size).
   // `linked`: the intermediates that must net to zero. Given + linked must be as many as the stages: the system is square. Everything else
-  // the stages touch is a free input or output of the recipe.
+  // the stages touch is a free input or output of the recipe. `era` is the folder of the recipe id. Mode 3's `given` is the fusion's own
+  // iridosmine (filled in from global.grindless.mercury.fusion when the recipes are built), mode 4's the opening's own concentrate (filled
+  // in from its table). `keep`: the recipe refuses voiding (it carries KEEP_KEY).
   const PLANS = [
     {
-      name: 'attack_pentlandite', mode: 'attack', circuit: ATTACK_CIRCUIT,
-      stages: ['large_chemical_reactor/platinum_group_sludge_dust1', 'electrolyzer/decomposition_electrolyzing_sulfuric_nickel_solution'],
+      name: 'attack_pentlandite', mode: 'attack', circuit: ATTACK_CIRCUIT, era: 'ev',
+      stages: [stage('large_chemical_reactor/platinum_group_sludge_dust1'), stage('electrolyzer/decomposition_electrolyzing_sulfuric_nickel_solution')],
       given: bag(item('purified_pentlandite_ore'), 9),
       linked: [fluid('sulfuric_nickel_solution')]
     },
     {
-      name: 'attack_chalcopyrite', mode: 'attack', circuit: ATTACK_CIRCUIT,
-      stages: ['large_chemical_reactor/platinum_group_sludge_dust2', 'electrolyzer/decomposition_electrolyzing_sulfuric_copper_solution'],
+      name: 'attack_chalcopyrite', mode: 'attack', circuit: ATTACK_CIRCUIT, era: 'ev',
+      stages: [stage('large_chemical_reactor/platinum_group_sludge_dust2'), stage('electrolyzer/decomposition_electrolyzing_sulfuric_copper_solution')],
       given: bag(item('purified_chalcopyrite_ore'), 9),
       linked: [fluid('sulfuric_copper_solution')]
     },
     {
-      name: 'platinum', mode: 'separation', circuit: SEPARATION_CIRCUIT,
+      name: 'platinum', mode: 'separation', circuit: SEPARATION_CIRCUIT, era: 'ev',
       stages: [
-        'centrifuge/platinum_group_sludge_dust',
-        'chemical_reactor/dissolve_platinum_metallic_powder9',
-        'large_chemical_reactor/large_platinum_dusts',
-        'sifter/refined_platinum_salt',
-        'electric_blast_furnace/refined_platinum_salt_dust_ebf',
-        'chemical_reactor/raw_platinum_separation'
+        stage('centrifuge/platinum_group_sludge_dust'),
+        stage('chemical_reactor/dissolve_platinum_metallic_powder9'),
+        stage('large_chemical_reactor/large_platinum_dusts'),
+        stage('sifter/refined_platinum_salt'),
+        stage('electric_blast_furnace/refined_platinum_salt_dust_ebf'),
+        stage('chemical_reactor/raw_platinum_separation')
       ],
       given: bag(item('platinum_group_sludge_dust'), 1),
       linked: [item('platinum_metal_dust'), fluid('concentrated_platinum'), item('platinum_salt_dust'), item('refined_platinum_salt_dust'), item('platinum_raw_dust')]
     },
     {
       // the batch is what one batch of the platinum recipe lets go: 10 800 mB of rich ammonia and 0.95 palladium metal dust
-      name: 'palladium', mode: 'separation', circuit: SEPARATION_CIRCUIT,
+      name: 'palladium', mode: 'separation', circuit: SEPARATION_CIRCUIT, era: 'ev',
       stages: [
-        'chemical_reactor/palladium_metallic_powder_conversion',
-        'chemical_reactor/large_palladium_dusts',
-        'sifter/salt_to_metallic_powder_palladium',
-        'chemical_reactor/raw_palladium_separation'
+        stage('chemical_reactor/palladium_metallic_powder_conversion'),
+        stage('chemical_reactor/large_palladium_dusts'),
+        stage('sifter/salt_to_metallic_powder_palladium'),
+        stage('chemical_reactor/raw_palladium_separation')
       ],
       given: bag(fluid('palladium_rich_ammonia'), 10800, item('palladium_metal_dust'), 0.95),
       linked: [item('palladium_salt_dust'), item('palladium_raw_dust')]
     },
     {
       // the batch is the 6 platinum slag of one batch of the platinum recipe
-      name: 'rhodium_ruthenium', mode: 'separation', circuit: SEPARATION_CIRCUIT,
+      name: 'rhodium_ruthenium', mode: 'separation', circuit: SEPARATION_CIRCUIT, era: 'ev',
       stages: [
-        'electric_blast_furnace/leach_residue_one',
-        'large_chemical_reactor/rhodium_sulfate_to_solution_l',
-        'extractor/potassium_pyrosulfate_dust',
-        'chemical_reactor/crude_rhodium_metallic_powder',
-        'electric_blast_furnace/rhodium_salt_ebf',
-        'mixer/rhodium_salt_solution',
-        'chemical_reactor/rhodium_nitrate',
-        'sifter/rhodium_filter_cake',
-        'mixer/rhodium_filter_cake_solution',
-        'chemical_reactor/reprecipitated_rhodium',
-        'chemical_reactor/rhodium_dust',
-        'electric_blast_furnace/rarest_metal_residue',
-        'chemical_reactor/ruthenium_tetroxide',
-        'cracker/hot_ruthenium_tetroxide',
-        'distillation_tower/hot_ruthenium_tetroxide_distill',
-        'fluid_solidifier/ruthenium_tetroxide_dust',
-        'chemical_reactor/ruthenium_tetroxide_separation'
+        stage('electric_blast_furnace/leach_residue_one'),
+        stage('large_chemical_reactor/rhodium_sulfate_to_solution_l'),
+        stage('extractor/potassium_pyrosulfate_dust'),
+        stage('chemical_reactor/crude_rhodium_metallic_powder'),
+        stage('electric_blast_furnace/rhodium_salt_ebf'),
+        stage('mixer/rhodium_salt_solution'),
+        stage('chemical_reactor/rhodium_nitrate'),
+        stage('sifter/rhodium_filter_cake'),
+        stage('mixer/rhodium_filter_cake_solution'),
+        stage('chemical_reactor/reprecipitated_rhodium'),
+        stage('chemical_reactor/rhodium_dust'),
+        stage('electric_blast_furnace/rarest_metal_residue'),
+        stage('chemical_reactor/ruthenium_tetroxide'),
+        stage('cracker/hot_ruthenium_tetroxide'),
+        stage('distillation_tower/hot_ruthenium_tetroxide_distill'),
+        stage('fluid_solidifier/ruthenium_tetroxide_dust'),
+        stage('chemical_reactor/ruthenium_tetroxide_separation')
       ],
       given: bag(item('platinum_slag_dust'), 6),
       linked: [
@@ -165,20 +240,37 @@
         fluid('rhodium_filter_cake'), item('reprecipitated_rhodium_dust'), item('inert_metal_mixture_dust'), item('sodium_rutheniate_dust'),
         fluid('ruthenium_tetroxide'), fluid('ruthenium_tetroxide_hot'), fluid('ruthenium_tetroxide_lq'), item('ruthenium_tetroxide_dust')
       ]
+    },
+    {
+      // IV: Mercury's iridosmine (docs/eras/iv.md, "Family steps", platinum plant mode 3). The batch is the fusion's own iridosmine.
+      name: 'iridosmine', mode: 'iridosmine', circuit: IRIDOSMINE_CIRCUIT, era: 'iv', fromFusion: item('iridosmine_dust'),
+      stages: [FUSION].concat(IRIDOSMINE_CHAIN),
+      given: {},
+      linked: IRIDOSMINE_LINKED
+    },
+    {
+      // LuV: the asteroid belt's platinum metals (docs/eras/luv.md, "Platinum plant, mode 4"). The batch is the opening's own concentrate.
+      name: 'asteroid', mode: 'asteroid', circuit: ASTEROID_CIRCUIT, era: 'luv', fromOpening: true, keep: true,
+      stages: [OPENING].concat(IRIDOSMINE_CHAIN),
+      given: {},
+      linked: IRIDOSMINE_LINKED
     }
   ]
 
   // the order of the outputs of a recipe: the metals first, then what the line lets go
-  const ITEM_ORDER = ['gtceu:platinum_dust', 'gtceu:palladium_dust', 'gtceu:rhodium_dust', 'gtceu:ruthenium_dust', 'gtceu:nickel_dust', 'gtceu:copper_dust',
-    'gtceu:platinum_group_sludge_dust', 'gtceu:gold_dust', 'gtceu:silicon_dioxide_dust', 'gtceu:platinum_slag_dust', 'gtceu:palladium_metal_dust',
-    'gtceu:rarest_metal_mixture_dust', 'gtceu:iridium_metal_residue_dust', 'gtceu:calcium_chloride_dust', 'gtceu:zinc_sulfate_dust', 'gtceu:salt_dust']
+  const ITEM_ORDER = ['gtceu:platinum_dust', 'gtceu:palladium_dust', 'gtceu:rhodium_dust', 'gtceu:ruthenium_dust', 'gtceu:iridium_dust', 'gtceu:osmium_dust',
+    'gtceu:nickel_dust', 'gtceu:copper_dust', 'gtceu:platinum_group_sludge_dust', 'gtceu:gold_dust', 'gtceu:silicon_dioxide_dust', 'gtceu:platinum_slag_dust',
+    'gtceu:palladium_metal_dust', 'gtceu:rarest_metal_mixture_dust', 'gtceu:iridium_metal_residue_dust', 'gtceu:platinum_sludge_residue_dust',
+    'gtceu:metal_sludge_dust', 'gtceu:calcium_chloride_dust', 'gtceu:zinc_sulfate_dust', 'gtceu:salt_dust']
   const FLUID_ORDER = ['gtceu:oxygen', 'gtceu:sulfuric_acid', 'gtceu:palladium_rich_ammonia', 'gtceu:nitrogen_dioxide', 'gtceu:diluted_sulfuric_acid', 'gtceu:ammonia',
-    'gtceu:chlorine', 'minecraft:water', 'gtceu:potassium']
+    'gtceu:chlorine', 'minecraft:water', 'gtceu:steam', 'gtceu:potassium']
 
+  // the stages read from the live line (every stage id of every plan but the fusion, which is built from IV-B2's published object, and the
+  // opening, which is built from its table)
   const STAGE_IDS = []
   PLANS.forEach(function (plan) {
     plan.stages.forEach(function (id) {
-      if (STAGE_IDS.indexOf('gtceu:' + id) < 0) STAGE_IDS.push('gtceu:' + id)
+      if (id !== FUSION && id !== OPENING && STAGE_IDS.indexOf(id) < 0) STAGE_IDS.push(id)
     })
   })
 
@@ -203,297 +295,149 @@
   PP.skipped = []
   PP.stages = 0
   PP.stageIds = STAGE_IDS
+  PP.fusionRecipe = FUSION
+  PP.openingRecipe = OPENING
+  PP.keepKey = KEEP_KEY
+  PP.modes = { 1: 'attack', 2: 'separation', 3: 'iridosmine', 4: 'asteroid' }
   PP.craftingParts = PLANT_PARTS
   PP.electrodeParts = ELECTRODE_PARTS
   PP.craftingRecipes = { plant: 'grindless:assembler/platinum_plant', electrode: 'grindless:assembler/platinum_electrode' }
 
-  // ---------------------------------------------------------------- reading the loose line's recipes
+  // ---------------------------------------------------------------- the virtual first stages (modes 3 and 4)
 
-  // RecipeJS.toString() is "<id>[<type>]" (the type object cannot be read from scripts); getId() is the fallback
-  function recipeId(r) {
-    var m = /^(.*)\[([^\[\]]*)\]$/.exec(String(r))
-    if (m) return m[1]
+  // { id | tag, count } and { id, amount } -> the contents of a GT recipe's JSON, as the library reads them
+  function sizedContent(x) {
+    var ingredient = x.tag ? { tag: String(x.tag) } : { item: String(x.id) }
+    return { content: { type: 'gtceu:sized', count: Number(x.count), ingredient: ingredient } }
+  }
+  function fluidContent(x) {
+    return { content: { amount: Number(x.amount), value: [{ fluid: String(x.id) }] } }
+  }
+
+  // ---------------------------------------------------------------- mode 3's first stage: IV-B2's fusion
+
+  // global.grindless.mercury.fusion (server_scripts/grindless/iv/mercury.js, set when that script loads, before any recipe event) -> the
+  // JSON of a GT recipe, parsed by the library like every live stage: { id, eut, duration, v } or { id, error }
+  function fusionStage(C) {
+    var F = G.mercury && G.mercury.fusion
+    if (!F || !F.inputs || !F.outputs) return { id: FUSION, error: 'global.grindless.mercury.fusion is missing (IV-B2, iv/mercury.js)' }
+    var j = {
+      type: 'gtceu:solar_processing',
+      duration: Number(F.duration),
+      tickInputs: { eu: [{ content: Number(F.eut) }] },
+      inputs: { item: (F.inputs.items || []).map(sizedContent), fluid: (F.inputs.fluids || []).map(fluidContent) },
+      outputs: { item: (F.outputs.items || []).map(sizedContent), fluid: (F.outputs.fluids || []).map(fluidContent) }
+    }
+    var s = C.parseStage(String(F.recipe || FUSION), j)
+    PP.fusion = { recipe: String(F.recipe || FUSION), from: 'global.grindless.mercury.fusion', stage: s.error ? null : { eut: s.eut, duration: s.duration, v: s.v } }
+    return s
+  }
+
+  // ---------------------------------------------------------------- mode 4's first stage: the asteroid opening
+
+  // data/grindless/tables/asteroid_pgm.json -> the JSON of a GT recipe, parsed by the library like every live stage: { id, eut, duration,
+  // v } or { id, error }. The table gives what the opening takes and makes; its energy is read from live data: energy.fusionTimes x the
+  // fusion's (mode 3's first stage, as parsed) + energy.attackSludge x what one platinum group sludge costs through the plan
+  // energy.attackPlan (composed from the live stages: its energy over the sludge it makes). It runs at the plant's EV rate: ceil(energy /
+  // 1 920) ticks at energy / ticks EU/t, so the composer adds exactly that energy (no rounding before the recipe's own).
+  function openingStage(C, steps, table) {
+    function fail(reason) { return { id: OPENING, error: reason } }
+    var o = table.opening
+    var E = table.energy || {}
+    if (!o || !o.inputs || !o.outputs) return fail(ASTEROID_TABLE + ' has no opening')
+    var fusionTimes = Number(E.fusionTimes)
+    var attackSludge = Number(E.attackSludge)
+    if (!(fusionTimes >= 0) || !(attackSludge >= 0)) return fail(ASTEROID_TABLE + ': energy.fusionTimes and energy.attackSludge must be numbers >= 0')
+    var fusion = steps[FUSION]
+    if (!fusion || fusion.error) return fail('the fusion\'s energy is unknown: ' + (fusion ? fusion.error : 'no fusion stage'))
+    var attackPlan = PLANS.filter(function (p) { return p.name === String(E.attackPlan) })[0]
+    if (!attackPlan) return fail(ASTEROID_TABLE + ': energy.attackPlan ' + E.attackPlan + ' is not a plan of the plant')
+    var attack
     try {
-      return String(r.getId())
+      attack = C.compose(attackPlan, steps)
     } catch (e) {
-      return ''
+      attack = { error: String(e) }
     }
-  }
-
-  // { amount, value: [{ fluid } | { tag }] } -> { id, amount } (a tag is a GTM material tag: forge:<name> is the fluid gtceu:<name>)
-  function fluidOf(content) {
-    if (!content || !content.value || content.value.length === 0) return null
-    var v = content.value[0]
-    var id = null
-    if (v.fluid) {
-      id = String(v.fluid)
-    } else if (v.tag) {
-      var name = String(v.tag).replace(/^[^:]*:/, '')
-      var candidates = ['gtceu:' + name, 'minecraft:' + name]
-      for (var i = 0; i < candidates.length; i++) {
-        if (Fluid.exists(candidates[i])) {
-          id = candidates[i]
-          break
-        }
+    if (attack.error) return fail('the sludge\'s energy is unknown: ' + attackPlan.name + ': ' + attack.error)
+    var sludge = attack.net[SLUDGE] || 0
+    if (!(sludge > 0)) return fail(attackPlan.name + ' makes no platinum group sludge')
+    var fusionEnergy = fusionTimes * fusion.eut * fusion.duration
+    var attackSludgeEnergy = attackSludge * attack.energy / sludge
+    var energy = fusionEnergy + attackSludgeEnergy
+    if (!(energy > 0)) return fail('the opening costs no energy')
+    var duration = Math.max(1, Math.ceil(energy / MAX_EUT - 1e-9))
+    var eut = energy / duration
+    var j = {
+      type: 'gtceu:' + TYPE_PATH,
+      duration: duration,
+      tickInputs: { eu: [{ content: eut }] },
+      inputs: { item: (o.inputs.items || []).map(sizedContent), fluid: (o.inputs.fluids || []).map(fluidContent) },
+      outputs: { item: (o.outputs.items || []).map(sizedContent), fluid: (o.outputs.fluids || []).map(fluidContent) }
+    }
+    var s = C.parseStage(OPENING, j)
+    if (!s.error) {
+      PP.asteroid.opening = {
+        id: OPENING, eut: s.eut, duration: s.duration, energy: energy, v: s.v, fusionEnergy: fusionEnergy,
+        attackSludgeEnergy: attackSludgeEnergy, fusionTimes: fusionTimes, attackSludge: attackSludge
       }
     }
-    return id === null ? null : { id: id, amount: Number(content.amount) }
+    return s
   }
 
-  // an item tag of GTM -> its item: forge:dusts/<name> is gtceu:<name>_dust, forge:purified_ores/<name> is gtceu:purified_<name>_ore
-  function itemOfTag(tag) {
-    var m = /^[^:]*:dusts\/(.+)$/.exec(tag)
-    if (m && Item.exists('gtceu:' + m[1] + '_dust')) return 'gtceu:' + m[1] + '_dust'
-    m = /^[^:]*:purified_ores\/(.+)$/.exec(tag)
-    if (m && Item.exists('gtceu:purified_' + m[1] + '_ore')) return 'gtceu:purified_' + m[1] + '_ore'
-    return null
-  }
+  // ---------------------------------------------------------------- the strips of the loose line
 
-  // { item } | { tag } | { type: 'gtceu:sized', count, ingredient: { item | tag } } -> { id, count } or null
-  function itemOf(content) {
-    if (!content) return null
-    var count = Number(content.count || 1)
-    var source = content.ingredient ? content.ingredient : content
-    if (source.item) return { id: String(source.item), count: count }
-    if (source.tag) {
-      var id = itemOfTag(String(source.tag))
-      return id === null ? null : { id: id, count: count }
-    }
-    return null
-  }
-
-  function isCircuit(content) {
-    if (!content) return false
-    if (content.ingredient && content.ingredient.type === 'gtceu:circuit') return true
-    return content.type === 'gtceu:circuit'
-  }
-
-  // total EU/t of a recipe: a plain number is voltage x 1 A, { voltage, amperage } is both
-  function energyOf(j) {
-    var eu = j.tickInputs && j.tickInputs.eu && j.tickInputs.eu[0] ? j.tickInputs.eu[0].content : null
-    if (typeof eu === 'number') return eu
-    if (eu && eu.voltage !== undefined) return Number(eu.voltage) * Number(eu.amperage || 1)
-    return null
-  }
-
-  // the share of the content that is used / made in a run: chance / maxChance (a chance of 0 is a catalyst that is not used up)
-  function shareOf(entry) {
-    var max = entry.maxChance !== undefined ? Number(entry.maxChance) : 10000
-    var chance = entry.chance !== undefined ? Number(entry.chance) : max
-    return chance / max
-  }
-
-  // one stage recipe -> { id, eut, duration, v: { 'i:<item>' | 'f:<fluid>': net amount of one run } } or { id, error }. The programmed
-  // circuit is left out.
-  function parseStage(id, j) {
-    if (!j.inputs && !j.outputs) return { id: id, error: 'an empty recipe (a line that was emptied)' }
-    var eut = energyOf(j)
-    if (eut === null) return { id: id, error: 'unreadable energy' }
-    var duration = Number(j.duration)
-    if (!(duration > 0)) return { id: id, error: 'no duration' }
-    var v = {}
-    function add(key, x) {
-      v[key] = (v[key] || 0) + x
-    }
-    var i
-    var inputs = j.inputs && j.inputs.item ? j.inputs.item : []
-    for (i = 0; i < inputs.length; i++) {
-      if (isCircuit(inputs[i].content)) continue
-      var it = itemOf(inputs[i].content)
-      if (it === null) return { id: id, error: 'unreadable item input ' + i }
-      add('i:' + it.id, -it.count * shareOf(inputs[i]))
-    }
-    var fluidsIn = j.inputs && j.inputs.fluid ? j.inputs.fluid : []
-    for (i = 0; i < fluidsIn.length; i++) {
-      var fi = fluidOf(fluidsIn[i].content)
-      if (fi === null) return { id: id, error: 'unreadable fluid input ' + i }
-      add('f:' + fi.id, -fi.amount)
-    }
-    var outputs = j.outputs && j.outputs.item ? j.outputs.item : []
-    for (i = 0; i < outputs.length; i++) {
-      var io = itemOf(outputs[i].content)
-      if (io === null) return { id: id, error: 'unreadable item output ' + i }
-      add('i:' + io.id, io.count * shareOf(outputs[i]))
-    }
-    var fluidsOut = j.outputs && j.outputs.fluid ? j.outputs.fluid : []
-    for (i = 0; i < fluidsOut.length; i++) {
-      var fo = fluidOf(fluidsOut[i].content)
-      if (fo === null) return { id: id, error: 'unreadable fluid output ' + i }
-      add('f:' + fo.id, fo.amount)
-    }
-    if (Object.keys(v).length === 0) return { id: id, error: 'an empty recipe (a line that was emptied)' }
-    return { id: id, eut: eut, duration: duration, v: v }
-  }
-
-  // every stage the plans need, by id (GTM recipe ids)
-  function gather(event) {
-    var steps = {}
-    var wanted = {}
-    STAGE_IDS.forEach(function (id) { wanted[id] = true })
-    var read = 0
-    event.originalRecipes.values().forEach(function (r) {
-      var id = recipeId(r)
-      if (wanted[id] !== true) return
-      try {
-        if (r.json === null || r.json === undefined) return
-        var s = parseStage(id, JSON.parse(String(r.json)))
-        steps[id] = s
-        if (!s.error) read++
-      } catch (e) {
-        steps[id] = { id: id, error: 'unreadable recipe: ' + e }
-      }
+  // offworld_only.json's strip entries, by recipe id: { items: [ids], fluids: [ids] }
+  function stripsOf() {
+    var out = {}
+    var t = G.readJsonTable(OFFWORLD_TABLE)
+    ;(t.strip || []).forEach(function (s) {
+      out[String(s.recipe)] = { items: (s.outputs || []).map(String), fluids: (s.fluids || []).map(String) }
     })
-    PP.stages = read
-    return steps
+    return out
   }
 
-  // ---------------------------------------------------------------- the balance of a plan
-
-  // Gauss with partial pivoting on a square system (the rows are scaled first); null when it is singular
-  function solve(A, b) {
-    var n = A.length
-    var M = []
-    var i
-    var j
-    for (i = 0; i < n; i++) {
-      var biggest = 0
-      for (j = 0; j < n; j++) biggest = Math.max(biggest, Math.abs(A[i][j]))
-      if (biggest === 0) return null
-      var row = []
-      for (j = 0; j < n; j++) row.push(A[i][j] / biggest)
-      row.push(b[i] / biggest)
-      M.push(row)
-    }
-    for (var c = 0; c < n; c++) {
-      var p = c
-      for (var r = c + 1; r < n; r++) {
-        if (Math.abs(M[r][c]) > Math.abs(M[p][c])) p = r
+  // the library's patch hook: a stage is read without the outputs moon/offworld_only.js strips from its loose recipe
+  function stripPatch(strips, C) {
+    return function (id, j) {
+      var s = strips[id]
+      if (!s || !j.outputs) return j
+      var gone = { stage: id, items: [], fluids: [] }
+      if (Array.isArray(j.outputs.item)) {
+        j.outputs.item = j.outputs.item.filter(function (e) {
+          var it = C.itemOf(e.content)
+          if (it !== null && s.items.indexOf(it.id) >= 0) {
+            gone.items.push(it.id)
+            return false
+          }
+          return true
+        })
       }
-      if (Math.abs(M[p][c]) < 1e-12) return null
-      var swap = M[c]
-      M[c] = M[p]
-      M[p] = swap
-      for (var q = 0; q < n; q++) {
-        if (q === c) continue
-        var f = M[q][c] / M[c][c]
-        if (f === 0) continue
-        for (var k = c; k <= n; k++) M[q][k] -= f * M[c][k]
+      if (Array.isArray(j.outputs.fluid)) {
+        j.outputs.fluid = j.outputs.fluid.filter(function (e) {
+          var f = C.fluidOf(e.content)
+          if (f !== null && s.fluids.indexOf(f.id) >= 0) {
+            gone.fluids.push(f.id)
+            return false
+          }
+          return true
+        })
       }
+      PP.stripped.push(gone)
+      return j
     }
-    var x = []
-    for (i = 0; i < n; i++) x.push(M[i][n] / M[i][i])
-    return x
-  }
-
-  // how often every stage runs, and what the whole chain takes and gives: { net, order, energy, sources } or { error }
-  function compose(plan, steps) {
-    var stages = []
-    for (var i = 0; i < plan.stages.length; i++) {
-      var id = 'gtceu:' + plan.stages[i]
-      var s = steps[id]
-      if (!s) return { error: 'no source recipe ' + id }
-      if (s.error) return { error: id + ': ' + s.error }
-      stages.push(s)
-    }
-    var keys = Object.keys(plan.given).concat(plan.linked)
-    if (keys.length !== stages.length) return { error: keys.length + ' balance equations for ' + stages.length + ' stages' }
-    var A = keys.map(function (key) { return stages.map(function (s) { return s.v[key] || 0 }) })
-    var b = keys.map(function (key) { return -(plan.given[key] || 0) })
-    var x = solve(A, b)
-    if (x === null) return { error: 'the stages do not close (singular)' }
-
-    var net = {}
-    var gross = {}
-    var order = []
-    var energy = 0
-    var sources = []
-    for (var k = 0; k < stages.length; k++) {
-      if (!(x[k] > -1e-9)) return { error: stages[k].id + ' would have to run ' + x[k] + ' times' }
-      var scale = Math.max(0, x[k])
-      sources.push({ id: stages[k].id, scale: scale })
-      energy += scale * stages[k].eut * stages[k].duration
-      Object.keys(stages[k].v).forEach(function (key) {
-        if (net[key] === undefined) {
-          net[key] = 0
-          gross[key] = 0
-          order.push(key)
-        }
-        net[key] += scale * stages[k].v[key]
-        gross[key] += Math.abs(scale * stages[k].v[key])
-      })
-    }
-    // the linked intermediates must net out and the given inputs must be used up entirely (to the rounding of the solver)
-    for (var g = 0; g < plan.linked.length; g++) {
-      var left = net[plan.linked[g]] || 0
-      if (Math.abs(left) > 1e-7 * (gross[plan.linked[g]] || 0) + 1e-9) return { error: plan.linked[g] + ' does not net out (' + left + ')' }
-    }
-    var givenKeys = Object.keys(plan.given)
-    for (var h = 0; h < givenKeys.length; h++) {
-      var used = -(net[givenKeys[h]] || 0)
-      if (Math.abs(used - plan.given[givenKeys[h]]) > 1e-7 * (gross[givenKeys[h]] || 0) + 1e-9) return { error: givenKeys[h] + ' is used ' + used + ', not ' + plan.given[givenKeys[h]] }
-    }
-    return { net: net, order: order, energy: energy, sources: sources }
   }
 
   // ---------------------------------------------------------------- from a balance to a recipe
 
-  function rank(list, id) {
-    var i = list.indexOf(id)
-    return i < 0 ? list.length : i
-  }
-
-  function wholeAndChance(x) {
-    var whole = Math.floor(x + 1e-9)
-    var chance = Math.round((x - whole) * 10000)
-    if (chance >= 10000) {
-      whole++
-      chance = 0
-    }
-    return { whole: whole, chance: Math.max(0, chance) }
-  }
-
-  // ceil(energy / MAX_EUT) ticks, ceil(energy / ticks) EU/t: the energy never drops and the surplus is under one EU/t over the ticks
-  function costOf(energy) {
-    var ticks = Math.max(1, Math.ceil(energy / MAX_EUT - 1e-9))
-    var eut = Math.max(1, Math.ceil(energy / ticks - 1e-9))
-    ticks = Math.max(1, Math.ceil(energy / eut - 1e-9))
-    return { eut: eut, ticks: ticks }
-  }
-
-  function recipeOf(plan, composed) {
-    var rec = {
-      id: ID_PREFIX + plan.name, recipeId: 'grindless:' + TYPE_PATH + '/' + ID_PREFIX.substring('grindless:'.length) + plan.name,
-      name: plan.name, mode: plan.mode, circuit: plan.circuit, sources: composed.sources, itemsIn: [], fluidsIn: [], itemsOut: [], fluidsOut: []
-    }
-    var outItems = []
-    composed.order.forEach(function (key) {
-      var x = composed.net[key]
-      if (Math.abs(x) < EPS) return
-      var isItem = key.indexOf('i:') === 0
-      var id = key.substring(2)
-      if (isItem && x < 0) {
-        var need = -x
-        if (Math.abs(need - Math.round(need)) < EPS) {
-          rec.itemsIn.push({ id: id, count: Math.round(need), chance: 10000 })
-        } else {
-          // a fraction of an item: the whole stack, used up in `chance` of 10 000 runs (the expected use is what the chain needs)
-          var count = Math.max(1, Math.ceil(need))
-          rec.itemsIn.push({ id: id, count: count, chance: Math.round(need / count * 10000) })
-        }
-      } else if (isItem) {
-        var wc = wholeAndChance(x)
-        outItems.push({ id: id, whole: wc.whole, chance: wc.chance })
-      } else if (x < 0) {
-        rec.fluidsIn.push({ id: id, amount: Math.ceil(-x - 1e-6) })
-      } else if (Math.round(x) > 0) {
-        rec.fluidsOut.push({ id: id, amount: Math.round(x) })
-      }
-    })
-    outItems.sort(function (a, b) { return rank(ITEM_ORDER, a.id) - rank(ITEM_ORDER, b.id) })
-    rec.itemsOut = outItems.filter(function (o) { return o.whole > 0 || o.chance > 0 })
-    rec.fluidsOut.sort(function (a, b) { return rank(FLUID_ORDER, a.id) - rank(FLUID_ORDER, b.id) })
-    // what is used up for certain first, the chanced inputs after it, the electrode last
-    rec.itemsIn.sort(function (a, b) { return (b.chance >= 10000 ? 1 : 0) - (a.chance >= 10000 ? 1 : 0) })
+  function recipeOf(plan, composed, C) {
+    var rec = C.contents(composed, { maxEut: MAX_EUT, itemOrder: ITEM_ORDER, fluidOrder: FLUID_ORDER })
+    rec.id = 'grindless:' + plan.era + '/' + plan.name
+    rec.recipeId = 'grindless:' + TYPE_PATH + '/' + plan.era + '/' + plan.name
+    rec.name = plan.name
+    rec.mode = plan.mode
+    rec.circuit = plan.circuit
+    if (plan.keep) rec.keep = true
+    // what is used up for certain first, the chanced inputs after it (the library's order), the electrode last
     rec.itemsIn.push({ id: ELECTRODE, count: 1, chance: ELECTRODE_WEAR })
 
     var entries = 0
@@ -506,20 +450,54 @@
     if (entries > IO.itemsOut) return { error: entries + ' item outputs (the type holds ' + IO.itemsOut + ')' }
     if (rec.fluidsIn.length > IO.fluidsIn) return { error: rec.fluidsIn.length + ' fluid inputs (the type holds ' + IO.fluidsIn + ')' }
     if (rec.fluidsOut.length > IO.fluidsOut) return { error: rec.fluidsOut.length + ' fluid outputs (the type holds ' + IO.fluidsOut + ')' }
-    var cost = costOf(composed.energy)
-    rec.eut = cost.eut
-    rec.duration = cost.ticks
-    rec.energy = cost.eut * cost.ticks
-    rec.sourceEnergy = Math.round(composed.energy * 1e6) / 1e6
     return { recipe: rec }
   }
 
   // ---------------------------------------------------------------- generating
 
+  // mode 4's yields against its table's promise: { want, got, differ: [ids] } (a warning when the live chain gives something else)
+  function checkYields(composed, want) {
+    var got = {}
+    var differ = []
+    Object.keys(want || {}).forEach(function (id) {
+      var x = Math.round((composed.net['i:' + id] || 0) * 1e6) / 1e6
+      got[id] = x
+      if (Math.abs(x - Number(want[id])) > 1e-6) differ.push(id)
+    })
+    if (differ.length > 0) {
+      console.warn(LOG + 'platinum plant asteroid: the live chain gives ' + differ.map(function (id) { return got[id] + ' ' + id }).join(', ') +
+        ' a run; ' + ASTEROID_TABLE + ' promises ' + differ.map(function (id) { return want[id] + ' ' + id }).join(', '))
+    }
+    return { want: want, got: got, differ: differ }
+  }
+
   function generate(event) {
     PP.recipes = []
     PP.skipped = []
-    var steps = gather(event)
+    PP.stripped = []
+    PP.fusion = null
+    PP.asteroid = { table: ASTEROID_TABLE, concentrate: null, opening: null, yields: null, error: null }
+    var C = G.compose
+    if (!C) throw new Error('the composer library (server_scripts/grindless/lib/compose.js) is not loaded')
+    var strips = {}
+    try {
+      strips = stripsOf()
+    } catch (e0) {
+      // without the table the plant would give what the loose line no longer gives: an error, so the release check sees it
+      console.error(LOG + 'platinum plant: could not read ' + OFFWORLD_TABLE + ': ' + e0)
+    }
+    var read = C.gather(event, STAGE_IDS, { patch: stripPatch(strips, C) })
+    var steps = read.steps
+    PP.stages = read.read
+    steps[FUSION] = fusionStage(C)
+    var asteroidTable = null
+    try {
+      asteroidTable = G.readJsonTable(ASTEROID_TABLE)
+      PP.asteroid.concentrate = String(asteroidTable.concentrate)
+      steps[OPENING] = openingStage(C, steps, asteroidTable)
+    } catch (e1) {
+      steps[OPENING] = { id: OPENING, error: 'could not build the opening from ' + ASTEROID_TABLE + ': ' + e1 }
+    }
 
     // a skipped plan means the plant lost a recipe (the loose line changed): a warning, so the log shows it
     function skip(name, reason) {
@@ -529,8 +507,38 @@
 
     PLANS.forEach(function (plan) {
       var composed
+      var p = plan
+      if (plan.fromFusion) {
+        // the batch is what the fusion takes of the key: its iridosmine
+        var f = steps[FUSION]
+        var amount = f && !f.error ? -(f.v[plan.fromFusion] || 0) : 0
+        if (!(amount > 0)) {
+          skip(plan.name, f && f.error ? f.error : 'the fusion takes no ' + plan.fromFusion)
+          return
+        }
+        p = { name: plan.name, stages: plan.stages, given: bag(plan.fromFusion, amount), linked: plan.linked }
+      }
+      if (plan.fromOpening) {
+        // the batch is what the opening takes of the table's concentrate; without the concentrate (LuV A1's) there is no mode 4
+        var opening = steps[OPENING]
+        var concentrate = PP.asteroid.concentrate
+        if (opening.error) {
+          skip(plan.name, opening.error)
+          return
+        }
+        if (!Item.exists(concentrate)) {
+          skip(plan.name, concentrate + ' is not registered (LuV A1 registers it: startup_scripts/grindless/luv/foundation.js)')
+          return
+        }
+        var batch = -(opening.v['i:' + concentrate] || 0)
+        if (!(batch > 0)) {
+          skip(plan.name, 'the opening takes no ' + concentrate)
+          return
+        }
+        p = { name: plan.name, stages: plan.stages, given: bag('i:' + concentrate, batch), linked: plan.linked }
+      }
       try {
-        composed = compose(plan, steps)
+        composed = C.compose(p, steps)
       } catch (e) {
         composed = { error: String(e) }
       }
@@ -538,7 +546,7 @@
         skip(plan.name, composed.error)
         return
       }
-      var made = recipeOf(plan, composed)
+      var made = recipeOf(plan, composed, C)
       if (made.error) {
         skip(plan.name, made.error)
         return
@@ -565,13 +573,23 @@
       })
       rec.fluidsOut.forEach(function (x) { recipe.outputFluids(Fluid.of(x.id, x.amount)) })
       recipe.EUt(rec.eut).duration(rec.duration)
+      // the startup script's modifier and start check refuse voiding for the recipes that carry it (mode 4)
+      if (rec.keep) recipe.addDataBool(KEEP_KEY, true)
+      if (plan.fromOpening) PP.asteroid.yields = checkYields(composed, asteroidTable.yields)
       PP.recipes.push(rec)
-      console.info(LOG + 'pgm_refining ' + rec.name + ': ' + rec.duration + ' t x ' + rec.eut + ' EU/t = ' + rec.energy + ' EU from ' + rec.sources.length + ' stages')
+      console.info(LOG + 'pgm_refining ' + rec.name + ': ' + rec.duration + ' t x ' + rec.eut + ' EU/t = ' + rec.energy + ' EU from ' + rec.sources.length + ' stages' +
+        (rec.keep ? '; refuses voiding' : ''))
+    })
+    PP.skipped.forEach(function (s) {
+      if (s.name === 'asteroid') PP.asteroid.error = s.reason
     })
 
     var attack = PP.recipes.filter(function (r) { return r.mode === 'attack' }).length
+    var iridosmine = PP.recipes.filter(function (r) { return r.mode === 'iridosmine' }).length
+    var asteroid = PP.recipes.filter(function (r) { return r.mode === 'asteroid' }).length
     console.info(LOG + 'pgm_refining recipes added: ' + PP.recipes.length + ' (' + attack + ' attack, ' +
-      (PP.recipes.length - attack) + ' separation) from ' + PP.stages + ' stages; skipped ' + PP.skipped.length)
+      (PP.recipes.length - attack - iridosmine - asteroid) + ' separation, ' + iridosmine + ' iridosmine, ' + asteroid + ' asteroid) from ' + PP.stages +
+      ' stages; skipped ' + PP.skipped.length)
   }
 
   // ---------------------------------------------------------------- crafting

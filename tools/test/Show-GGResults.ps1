@@ -161,6 +161,13 @@ foreach ($side in $sides) {
     foreach ($kf in (Files (J $sd 'logs\kubejs') '*.log' $false)) {
         $kjsIssues["$side/kubejs/" + [IO.Path]::GetFileName($kf)] = Get-LogIssues $kf $false $ggLines $ggSeen
     }
+    # a server run with a restart (@restart) keeps its first boot's logs in server\phase1\: their results count too
+    $p1 = J $sd 'phase1'
+    $p1Latest = J $p1 'logs\latest.log'
+    if (FExists $p1Latest) { $mainIssues["$side/phase1/latest.log"] = Get-LogIssues $p1Latest $true $ggLines $ggSeen }
+    foreach ($kf in (Files (J $p1 'logs\kubejs') '*.log' $false)) {
+        $kjsIssues["$side/phase1/kubejs/" + [IO.Path]::GetFileName($kf)] = Get-LogIssues $kf $false $ggLines $ggSeen
+    }
     foreach ($c in (Files (J $sd 'crash-reports') '*' $false)) {
         $crashes += [pscustomobject]@{ Side = $side; Name = [IO.Path]::GetFileName($c); Info = (Get-CrashSummary $c) }
     }

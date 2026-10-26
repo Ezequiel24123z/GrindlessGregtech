@@ -8,16 +8,21 @@
 // At the end of every server tick this sets the rain and thunder levels of every dimension of the other planets
 // (data/grindless/tables/planets.json: every planet but earth) back to 0. The next weather cycle raises them to 0.01 at most before
 // the sky is computed, so the sky, Level#isNight() and every condition that reads them follow the clock alone. Earth's dimensions,
-// and the weather controller, are left alone.
+// and the weather controller, are left alone, except planets.json's dryOnEarth: Earth orbit belongs to Earth (its AE2 pairs and its air
+// table) but is above the weather (docs/eras/luv.md, "Weather and time").
 // Published as global.grindless.airlessWeather for the test: { dimensions }.
 //
 // Rhino: var + function inside every callback that runs more than once (this Rhino throws "redeclaration of var").
 (function () {
   var G = global.grindless
-  var planets = G.readJsonTable('kubejs/data/grindless/tables/planets.json').planets
+  var table = G.readJsonTable('kubejs/data/grindless/tables/planets.json')
+  var planets = table.planets
   var DIMENSIONS = []
   Object.keys(planets).forEach(function (k) {
     if (k !== 'earth') planets[k].dimensions.forEach(function (d) { DIMENSIONS.push(String(d)) })
+  })
+  ;(table.dryOnEarth || []).forEach(function (d) {
+    if (DIMENSIONS.indexOf(String(d)) < 0) DIMENSIONS.push(String(d))
   })
   G.airlessWeather = { dimensions: DIMENSIONS }
 

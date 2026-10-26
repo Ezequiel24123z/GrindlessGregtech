@@ -437,6 +437,7 @@ export function runObtain(dump, raw, opts = {}) {
     grp.era = rule.era || (grp.later ? grp.later.era : '');
     grp.until = rule.class === 'C' ? 'never' : rule.until || (grp.later ? grp.later.until : null) || null;
     grp.keepRecipes = !!rule.keepRecipes;
+    grp.unless = rule.unless || null;
     grp.source = rule.source || '';
     grp.by = by;
   };
@@ -478,16 +479,21 @@ export function runObtain(dump, raw, opts = {}) {
     const limit = ERA_IDS.indexOf(era);
     const obtainable = [...hiddenSet].filter((k) => reachedIn(base, k)).sort();
     let visible = null;
+    let landed = null;
     if (limit >= 0) {
       visible = [];
       for (const grp of neverGroups) {
         if (grp.until !== 'never' && !(ERA_IDS.indexOf(grp.until) > limit)) continue;
         for (const k of grp.keys) if (!hiddenSet.has(k)) visible.push({ key: k, group: grp.id, until: grp.until });
       }
+      // B groups whose era is already implemented (IV, 2026-10-25): hidden.js shows them, yet nothing makes them. Their era landed
+      // without them (a stale rule: reclassify it) or their producer is still missing (an A).
+      landed = neverGroups.filter((grp) => grp.cls === 'B' && ERA_IDS.indexOf(grp.until) >= 0 && ERA_IDS.indexOf(grp.until) <= limit)
+        .map((grp) => ({ group: grp.id, until: grp.until, keys: grp.keys.length, by: grp.by }));
     }
     hiding = {
       items: [...hiddenSet].filter((k) => !k.startsWith('fluid:')).length, fluids: [...hiddenSet].filter((k) => k.startsWith('fluid:')).length,
-      implementedEra: limit >= 0 ? era : null, obtainable, visible,
+      implementedEra: limit >= 0 ? era : null, obtainable, visible, landed,
     };
   }
 
@@ -531,7 +537,8 @@ export function runObtain(dump, raw, opts = {}) {
   const allRecipes = new Set();
   for (const grp of neverGroups) for (const r of [...grp.uses, ...grp.makes]) allRecipes.add(r);
   const unusedRules = compiled.filter((c) => c.used === 0).map((c) => ({ index: c.idx, class: c.rule.class, reason: c.rule.reason || '', materials: asArray(c.rule.materials), items: asArray(c.rule.items) }));
-  const hidingBad = !!hiding && (hiding.obtainable.length > 0 || (hiding.visible !== null && hiding.visible.length > 0));
+  const hidingBad = !!hiding && (hiding.obtainable.length > 0 || (hiding.visible !== null && hiding.visible.length > 0) ||
+    (hiding.landed !== null && hiding.landed.length > 0));
   const verdict = byClass['?'].groups > 0 || hidingBad ? 'FAIL' : 'PASS';
   return {
     verdict, groups: neverGroups, byClass, later: stageInfo, unusedRules, warnings, model, base, hiding,
@@ -577,6 +584,7 @@ function failWhy(res) {
   if (res.byClass['?'].groups > 0) why.push(`${res.byClass['?'].groups} unclassified groups`);
   if (res.hiding && res.hiding.obtainable.length > 0) why.push(`${res.hiding.obtainable.length} hidden but obtainable`);
   if (res.hiding && res.hiding.visible && res.hiding.visible.length > 0) why.push(`${res.hiding.visible.length} not hidden`);
+  if (res.hiding && res.hiding.landed && res.hiding.landed.length > 0) why.push(`${res.hiding.landed.length} B groups of an implemented era`);
   return why.join('; ');
 }
 
@@ -591,6 +599,10 @@ function hidingLines(res, n = 20) {
   if (h.visible) {
     L.push(`  should be hidden (C, or B from an era later than ${h.implementedEra}) and are visible: ${h.visible.length}${h.visible.length > 0
       ? ' — ' + short(h.visible.map((v) => `${v.key} (${v.group}, ${v.until})`), n) + ' (regenerate the hidden table: --table)' : ''}`);
+  }
+  if (h.landed) {
+    L.push(`  B groups of an era already implemented (shown, yet never obtained): ${h.landed.length}${h.landed.length > 0
+      ? ' — ' + short(h.landed.map((v) => `${v.group} (${v.until}, ${v.keys}, by ${v.by})`), n) + ' (their era landed without them: reclassify the rule, or give them a source)' : ''}`);
   }
   return L;
 }
@@ -699,6 +711,7 @@ export function hiddenTable(res, opts = {}) {
     };
     if (grp.cls === 'C') e.removeRecipes = grp.keepRecipes ? [] : [...new Set([...removeOf.get(grp), ...(previous.get(grp.id) || [])])].sort();
     if (grp.keepRecipes) e.keepRecipes = true;
+    if (grp.unless) e.unless = grp.unless;
     return e;
   };
   const rank = (u) => (u === 'never' ? ERA_IDS.length : ERA_IDS.indexOf(u));
@@ -711,7 +724,8 @@ export function hiddenTable(res, opts = {}) {
       'until = era id of docs/journey.md (steam, lv, mv, hv, ev, iv, luv, zpm, uv, uhv, uev, uiv, uxv, opv, max) in which the group can first be obtained (class B of the audit: planets, the excluded End veins and everything that hangs on them). Its recipes stay on the server, only hidden.',
       'until = "never": junk (class C of the audit): hidden for good and its removeRecipes are removed from the server (recipes that only exist for it: an ingredient that only accepts junk, or junk as every output). Nothing is unregistered: old saves keep every id.',
       'keepRecipes = true: a hidden item whose recipes stay, on the server and in EMI (the old items of earlier versions and their conversion into the new ones): only c:hidden_from_recipe_viewers.',
-      'material = audit group: a GT material with all its forms (dust, ingot, plate, fluid, bucket...) or a single item; reason = why (from the audit config).',
+            'unless = switch name: the group stays hidden only while that switch of global.grindless.stations.switches (startup_scripts/grindless/lib/stations.js, from tables/stations.json) is off; with the switch on, hidden.js shows it.',
+            'material = audit group: a GT material with all its forms (dust, ingot, plate, fluid, bucket...) or a single item; reason = why (from the audit config).',
       'Regenerating keeps the removeRecipes of the groups that are still junk (a dump taken with hidden.js active no longer has those recipes).',
     ],
     eras: ERA_IDS,

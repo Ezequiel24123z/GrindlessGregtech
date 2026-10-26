@@ -6,7 +6,7 @@
 // scripts removed, changed or added recipes). Trigger the export through RCON:
 //   kubejs custom_command gg_dump
 // Files written to kubejs/exported/: recipes.json tags.json items.json machines.json veins.json fluid_veins.json config.json
-//   structures.json info.json
+//   structures.json electric.json info.json
 // Log markers (latest.log): GGTEST|dump|COLLECTED|..., GGTEST|dump|DONE|..., GGTEST|dump|FAIL|...
 //
 // recipes.json = {format, count, recipes:[ "<one JSON object per string>" ]}; each object is
@@ -213,6 +213,42 @@
     });
     recipeTypes.sort(function (a, b) { return a.id < b.id ? -1 : (a.id > b.id ? 1 : 0); });
     return { format: 'gg-machines-1', machines: machines, recipeTypes: recipeTypes };
+  }
+
+  // EU hardware, for the Power tab's checker (tools/quests/processing-lines/pl-check.mjs): every material with a wire property
+  // (its voltage, base amperage, loss per block and amp, superconductor), every GT item that holds EU (tier and capacity), and AE2's
+  // P2P energy toll. A cable loses its material's loss per block; bare wire loses two or three times as much (GTM's Insulation).
+  function dumpElectric() {
+    var out = { format: 'gg-electric-1', wires: [], items: [], ae2: {} };
+    var API = Java.loadClass('com.gregtechceu.gtceu.api.GTCEuAPI');
+    var PK = Java.loadClass('com.gregtechceu.gtceu.api.data.chemical.material.properties.PropertyKey');
+    each(API.materialManager.getRegisteredMaterials(), function (m) {
+      if (!m.hasProperty(PK.WIRE)) return;
+      var w = m.getProperty(PK.WIRE);
+      out.wires.push({ material: str(m.getResourceLocation()), voltage: num(w.getVoltage()), amperage: num(w.getAmperage()),
+        loss: num(w.getLossPerBlock()), superconductor: !!w.isSuperconductor() });
+    });
+    var BI = Java.loadClass('net.minecraft.core.registries.BuiltInRegistries');
+    var IS = Java.loadClass('net.minecraft.world.item.ItemStack');
+    var Cap = Java.loadClass('com.gregtechceu.gtceu.api.capability.GTCapabilityHelper');
+    each(BI.ITEM.keySet(), function (k) {
+      var id = str(k);
+      if (!/^(gtceu|gtca|gtnn):/.test(id)) return;
+      try {
+        var e = Cap.getElectricItem(new IS(BI.ITEM.get(k)));
+        if (e === null || e === undefined) return;
+        out.items.push({ id: id, tier: num(e.getTier()), capacity: num(e.getMaxCharge()) });
+      } catch (e2) { /* not an electric item */ }
+    });
+    out.items.sort(function (a, b) { return a.id < b.id ? -1 : (a.id > b.id ? 1 : 0); });
+    try {
+      var AE = Java.loadClass('appeng.core.AEConfig').instance();
+      out.ae2.p2pEnergyTax = num(AE.getP2PTunnelEnergyTax());
+      out.ae2.p2pTransportTax = num(AE.getP2PTunnelTransportTax());
+    } catch (e3) {
+      out.ae2.error = str(e3);
+    }
+    return out;
   }
 
   // GT ore veins: layer (stone/deepslate/netherrack/endstone), dimensions and every material the vein can hold.
@@ -468,6 +504,7 @@
     var fluidVeins = step('fluid_veins.json', dumpFluidVeins);
     var gtConfig = step('config.json', dumpConfig);
     var structures = step('structures.json', dumpStructures);
+    var electricity = step('electric.json', dumpElectric);
 
     if (tags) counts.itemTags = Object.keys(tags.item).length;
     if (tags) counts.fluidTags = Object.keys(tags.fluid).length;
@@ -479,6 +516,8 @@
     if (fluidVeins) counts.fluidVeins = fluidVeins.veins.length;
     if (gtConfig) counts.config = Object.keys(gtConfig.gtceu).length;
     if (structures) counts.structures = Object.keys(structures.structures).length;
+    if (electricity) counts.wires = electricity.wires.length;
+    if (electricity) counts.electricItems = electricity.items.length;
     counts.veinDrilling = types['gtceu:vein_drilling'] || 0;
     counts.greenhouse = types['gtceu:greenhouse'] || 0;
 

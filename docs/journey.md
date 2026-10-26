@@ -43,7 +43,7 @@ The supporting research is in `docs/research/space/`:
 | **HV** (T3) | the **Moon**, at the end of the era, with the first rocket, by hand | **titanium** (lunar ilmenite) and helium-3, which is kept for fusion | refinery and reformer (already there); composite autoclave, syngas plant, launch complex, lunar drill (only forms on the Moon) | EV: without lunar titanium there is no EV hull |
 | **EV** (T4) | automated lunar base, connected to home; **Mars** at the end | tungsten, rare earths, deuterium ice | platinum plant, regolith cell with volatiles furnace and cryogenic plant (Moon), atmosphere processor (Mars), EV tripod and lunar solar field; combined-cycle plant, hot strip mill and rare-earth extraction cascade (Earth), and sealed dome (Moon and Mars), added for the ×1.35 target | IV: tungsten steel |
 | **IV** (T5) | **Venus and Mercury** at once | naquadah (Venus veins at 90 bar), iridium and osmium (Mercury crust) | fission reactor (designed cores), hot cell (radiochemistry and RTG pellets), naquadah plant, pressurized drill (Venus) and night-side drill (Mercury), Venus heat engine, Mercury solar field | LuV |
-| **LuV** (T6) | **the asteroid belt and Jupiter's moons** (Io, Europa, Ganymede); first orbital station | Europa ocean crops (living circuits), asteroid metals | microgravity smelter, asteroid processor, cryobot, volcanic intake on Io, rectenna (power beamed from orbit) | ZPM |
+| **LuV** (T6) | **the asteroid belt and Jupiter's moons** (Io, Europa, Ganymede); first orbital station, in Earth orbit | living matter from Europa's ocean (wetware circuits); asteroid metals: meteoric iron, tetrataenite and the platinum-metal concentrate (belt); germanium (Io) | helium refrigerator, coated conductor line, HTS magnet works and biofoundry (Earth); orbital solar station, microgravity smelter, zero-g crystal grower, wake shield facility, rotating hydroponic ring and organoid lab (Earth orbit); harpoon anchor drill, asteroid processor and optical miner (belt); fumarole condenser and volcanic intake (Io); flux-tube tether (Io orbit) or the sulfur–iodine plant (Io); cryobot and algae bioreactor (Europa); gravitational-wave detector and coilgun probe launcher (Ganymede) | ZPM |
 | **ZPM** (T7) | **Saturn** (Titan, Enceladus) and the ice giants **from orbit, without landing** | bulk helium-3 and deuterium, Titan tholins | fusion as infrastructure, orbital mining laser, gas giant siphon, orbital shipyard, space elevator. **Kardashev I**: the whole solar system works | UV |
 | **UV** (T8) | Pluto and the Kuiper belt from orbit; first probe to another star | exotic ices | particle accelerator, laser sail launcher | UHV |
 | **UHV** (T9) | **Alpha Centauri** (Proxima b): the probe opens the first gate | alien flora | pair of warp gates, Dyson swarm around the Sun. **Kardashev II** | UEV |
@@ -88,12 +88,12 @@ Today HV opens the End and, with the Moon, it would open two places. Proposal: *
   - In cold, cryogenics costs less.
   - In low gravity, crystals grow faster.
   - With radiation, shielded casings are needed.
-  - Solar power depends on the light (Mercury ×6.7, Moon ×1.4, Mars ×0.43).
+  - Solar power depends on the light (Mercury ×6.7, Moon ×1.4, Earth orbit ×1.4 with no night, Mars ×0.43, the asteroid belt ×0.19, Jupiter's moons ×0.052). One table, `tables/sunlight.json`, holds the factors.
 - **Power on site.**
   - Solar.
   - Local fuels: methane and oxygen on Mars, heat on Venus, volcanoes on Io.
   - RTG batteries.
-  - From LuV on, power beamed from orbit to a rectenna.
+  - From LuV on, the orbital solar station, Io's volcanic intake and Jupiter's tether feed the global wireless network, and every base draws from it.
 - **Transport (user's decision).**
   - People: the first time by rocket; after that, Waystones or FTB's /home, at no cost.
   - Materials, fluids and power: AE2, with the quantum bridge between planets built with one half at each end.
@@ -141,7 +141,7 @@ It is a single project in four stages, and each one is a multiblock that deliver
   1. glass house;
   2. stainless steel hydroponics;
   3. sealed lunar dome;
-  4. rotating hydroponic ring (gravity from spin);
+  4. rotating hydroponic ring (gravity from spin), a molecular farm;
   5. algae bioreactor;
   6. ark biosphere for the trip.
 - **Observatory (new family, the one that tells the story of the journey):**

@@ -1,0 +1,107 @@
+// Gregtech Grindless - text of our EMI information pages (kubejs/assets/emi/recipe/additions/grindless/*.json: EMI's own data
+// recipes, type emi:info; EMI only reads them in the emi namespace). Each page lists its stacks and these translation keys; EMI shows
+// the page under both the recipes and the uses of every stack on it. They cover what EMI cannot show as a recipe: right-click
+// actions (the travel keys, the wireless covers, the hologram projector), what goes into a structure (GTM's multiblock preview only
+// shows the first block of each slot), recipes of GTM's electric furnace (EMI never lists that type) and what an item is kept for.
+// What a recipe already shows (the charts' observations, the samples' drilling) gets no page: its recipe must stay visible, which
+// the audit checks (a recipe EMI drops for a disabled stack fails it).
+// The audit that asks for them is tools/analysis/emi-coverage.mjs. Quests are English only; names and info go in en_us and es_es.
+ClientEvents.lang('en_us', event => {
+    var add = function (key, value) { event.add('grindless', key, value) }
+
+    add('emi.grindless.info.travel_keys.0', 'Right-click a travel key to visit its building dimension: the Void Key leads to an empty void, the Flat Key to a flat world, and the End Key to a safe platform in the End, far from the dragon\'s island.')
+    add('emi.grindless.info.travel_keys.1', 'Right-click it again there to go back to where you were. From one of these dimensions you can hop straight to another. A key is never used up.')
+
+    add('emi.grindless.info.wireless_covers.0', 'Right-click the side of a single-block GregTech machine with a wireless cover to put it on. A crowbar takes it off and gives it back.')
+    add('emi.grindless.info.wireless_covers.1', 'An energy cover goes on a machine of its tier or higher and feeds it from the wireless energy network, up to 2 A, while the network\'s tier is at least the cover\'s. A dynamo cover goes on a generator or battery buffer of its tier or lower and sends its stored EU into the network; 5% is lost on the way in.')
+    add('emi.grindless.info.wireless_covers.2', 'The network\'s energy is stored in Wireless Energy Towers. Shift + right-click a covered machine with an empty hand to read the network.')
+
+    add('emi.grindless.info.capacitor_cells.0', 'Capacitor cells are the storage of the Wireless Energy Tower: its 32 cell slots take cells of any tier (the tower\'s casing fills an empty slot), and every formed tower adds the capacity of its cells to the wireless energy network.')
+    add('emi.grindless.info.capacitor_cells.1', 'The network sends EU out at the tier of the weakest cell in any formed tower. Swapping a cell unforms its tower; the stored EU stays.')
+    add('emi.grindless.info.capacitor_cells.2', 'Most cells come from the assembler. The LuV cell is a superconducting magnetic energy storage (SMES) coil, wound and cold-tested in the HTS Magnet Works.')
+
+    add('emi.grindless.info.jovian_atmosphere_survey.0', 'Written on Ganymede by the Coilgun Probe Launcher (circuit 1): a Jupiter entry probe falls into the clouds and radios hydrogen, helium and the helium-3 ratio back, as Galileo\'s probe did in 1995.')
+    add('emi.grindless.info.jovian_atmosphere_survey.1', 'Keep it: it closes the LuV chapter, and ZPM\'s gas giant siphon needs it to know what it is drawing. No LuV recipe uses it up.')
+    add('emi.grindless.info.saturn_transfer_chart.0', 'Written on Ganymede by the Coilgun Probe Launcher (circuit 2): a Saturn flyby probe swings past Jupiter and reaches Saturn, as Pioneer 11, the Voyagers and Cassini did. A data orb copies it by hand.')
+    add('emi.grindless.info.saturn_transfer_chart.1', 'Keep it: it is the next trip, to Saturn, in ZPM. No LuV recipe uses it up.')
+    add('emi.grindless.info.coilgun_coil_casing.0', 'Wound in the HTS magnet works (circuit 3) from Hg-1223 superconducting wire on an HSS-S frame, potted in epoxy and cold-tested in liquid helium.')
+    add('emi.grindless.info.coilgun_coil_casing.1', 'They are the barrel of the Coilgun Probe Launcher on Ganymede: 33 rings of eight (264 casings) around an open bore. At Ganymede\'s 110 K the Hg-1223 superconducts with no cryostat. No recipe uses them up.')
+    add('emi.grindless.info.magnetic_bearing.0', 'Made in the HTS magnet works (circuit 4): 4 tetrataenite rods, an HSS-S ring and 2 titanium plates, cold-tested in liquid helium. Tetrataenite, a meteorite-only magnet, comes only from the asteroid belt.')
+    add('emi.grindless.info.magnetic_bearing.1', 'A rare-earth-free permanent-magnet bearing: the hub of the rotating hydroponic ring in Earth orbit.')
+
+    add('emi.grindless.info.hologram_projector.0', 'Right-click an unformed multiblock controller to project its structure for 30 seconds; right-click again to hide it. A formed controller opens its normal screen.')
+    add('emi.grindless.info.hologram_projector.1', 'Sneak + right-click to build: it places the structure\'s default blocks from your inventory into empty spaces, one item per block. Hatches, buses and other machine parts are left for you to choose.')
+
+    add('emi.grindless.info.sintered_regolith.0', 'Made only on the Moon. The first bricks come from an electric furnace there: it bakes 4 Lunar Regolith Dust into one block (120 EU/t, 20 s). EMI does not list GregTech\'s electric furnace recipes, so that one only shows here. Later the Regolith Cell sinters them in bulk.')
+    add('emi.grindless.info.sintered_regolith.1', 'Every structure of the Moon base stands on these bricks: the Regolith Cell, the EV Tripod Drill, the Sealed Dome, the Cryogenic Plant, the Lunar Solar Array, the Deep Space Antenna and the Tritium Removal Facility.')
+
+    add('emi.grindless.info.night_sky_radiator.0', 'A structure block: the radiator wings of the Cryogenic Plant, and part of the Venus Heat Engine, the Tritium Removal Facility, the Mercury Vein Drill and the Mercury Solar Field. Facing an open night sky, it sheds heat as infrared light.')
+
+    add('emi.grindless.info.solar_wing_panel.0', 'A structure block: the wings of the EV Tripod Drill and the panels of the Lunar Solar Array (one recipe run per panel under open sky). Three more go into the array\'s controller.')
+    add('emi.grindless.info.orbital_solar_panel.0', 'A structure block: the Orbital Solar Station has two wings of 32 panels. In Earth orbit, each panel whose top sees open sky adds 630 EU/t to the next run: 40,320 EU/t with all 64 exposed. Orbital midnight does not stop it.')
+    add('emi.grindless.info.whipple_shield_casing.0', 'A structure block made as metal foam in the Microgravity Smelter. The Wake Shield Facility needs 69 blocks for its octagonal disc. Keep more for the harpoon drill and the orbital tether: the foam and aramid spread micrometeoroid impacts.')
+    add('emi.grindless.info.radiation_vault_casing.0', 'A structure block: graded-Z shielding, titanium then tantalum, like Juno\'s electronics vault. Near Jupiter the radiation kills electronics, so every machine of ours on Io, Europa and in Io orbit keeps its hatches and buses in a vault housing. The Fumarole Condenser needs at least 24 and the Volcanic Intake at least 30.')
+    add('emi.grindless.info.asteroid_regolith_casing.0', 'A structure block sintered from the belt\'s tuff, only on the asteroid belt (alloy smelter, with titanium dust). The Harpoon Anchor Drill stands on a 29-block pad and its body takes up to 23 more; the Optical Miner\'s hut takes up to 26.')
+    add('emi.grindless.info.sapphire_test_mass.0', 'An optical structure block grown in the Zero-G Crystal Grower. Keep four for the Gravitational-Wave Detector on Ganymede: its two vertex mirrors and the mirror at each arm end. The sapphire is a test mass, not a reagent.')
+    add('emi.grindless.info.station_truss_casing.0', 'A structure block: the casing of every orbital machine of ours, the Orbital Solar Station, the Microgravity Smelter, the Zero-G Crystal Grower, the Rotating Hydroponic Ring and the Organoid Lab. Build them in an orbit.')
+    add('emi.grindless.info.space_station.0', 'A space station is built on Earth and flown up. Build it on the Space Station Packager\'s platform, then give the packager a blank Space Station Package and an ID Chip programmed for the orbit: it packs the build into the package, keeps the chip and puts out a Keycard that identifies the station.')
+    add('emi.grindless.info.space_station.1', 'Load the package into the rocket\'s satellite slot and fly to that orbit: the station unpacks on its own 512 x 512 plot. LuV builds the first in Earth orbit, for the Orbital Solar Station and the other orbital machines, and the second in Io orbit, for the Flux-Tube Tether. Orbits are at 3 K: wear freeze protection.')
+    add('emi.grindless.info.cryogenic_fuel_tank.0', 'A part of a GCYR rocket: build it into the rocket like any fuel tank and scan it with the rocket scanner. Elite rocket motors with only Cryogenic Fuel Tanks make a level 4 rocket, which reaches the asteroid belt, Io, Europa and Ganymede. One Elite Fuel Tank in the build drops it to level 3. Each tank holds 16,000 mB; a launch needs 14,000 mB, so build two.')
+
+    add('emi.grindless.info.hermean_blocks.0', 'Made only on Mercury, in the Mercury Solar Works. The Mercury Vein Drill, the Mercury Solar Field and the Interferometer stand on the heat-shield bricks; the thin-film panels are the Mercury Solar Field\'s panels, and its controller takes some too.')
+
+    add('emi.grindless.info.heliostat_mirror.0', 'A structure block: the mirror field of the Heliostat Tower (LV) and of the Mercury Solar Works. The Heliostat Tower\'s controller takes some too.')
+
+    add('emi.grindless.info.engineered_seeds.0', 'Made in the Biofoundry (LuV), with Europa\'s bacteria as the vector that carries the gene into the seed.')
+    add('emi.grindless.info.engineered_seeds.1', 'Keep them: they are planted in the Rotating Hydroponic Ring, LuV\'s molecular farm on the first station in Earth orbit, and are not used up there. The barley grows the neurotrophic factor the LuV neuro processing unit needs; the tobacco grows plant collagen.')
+})
+
+ClientEvents.lang('es_es', event => {
+    var add = function (key, value) { event.add('grindless', key, value) }
+
+    add('emi.grindless.info.travel_keys.0', 'Haz clic derecho con una llave de viaje para ir a su dimensión de construcción: la Llave del Vacío lleva a un vacío sin nada, la Llave del Llano a un mundo plano y la Llave del End a una plataforma segura en el End, lejos de la isla del dragón.')
+    add('emi.grindless.info.travel_keys.1', 'Vuelve a hacer clic derecho allí para regresar a donde estabas. Desde una de estas dimensiones puedes saltar directamente a otra. La llave nunca se gasta.')
+
+    add('emi.grindless.info.wireless_covers.0', 'Haz clic derecho en un lado de una máquina de GregTech de un solo bloque con una cubierta inalámbrica para ponérsela. Una palanca la quita y te la devuelve.')
+    add('emi.grindless.info.wireless_covers.1', 'Una cubierta de energía va en una máquina de su nivel o superior y la alimenta desde la red de energía inalámbrica, hasta 2 A, mientras el nivel de la red llegue al de la cubierta. Una cubierta dinamo va en un generador o un búfer de baterías de su nivel o inferior y envía a la red la EU que guarda; se pierde un 5 % al entrar.')
+    add('emi.grindless.info.wireless_covers.2', 'La energía de la red se guarda en torres de energía inalámbrica. Mayús + clic derecho con la mano vacía en una máquina con cubierta muestra el estado de la red.')
+
+    add('emi.grindless.info.capacitor_cells.0', 'Las celdas de condensadores son el almacén de la torre de energía inalámbrica: sus 32 huecos de celda aceptan celdas de cualquier nivel (la carcasa de la torre rellena un hueco vacío), y cada torre formada suma la capacidad de sus celdas a la red de energía inalámbrica.')
+    add('emi.grindless.info.capacitor_cells.1', 'La red envía EU al nivel de la celda más débil de todas las torres formadas. Cambiar una celda deshace su torre; la EU guardada se conserva.')
+    add('emi.grindless.info.capacitor_cells.2', 'Casi todas las celdas salen del ensamblador. La celda LuV es una bobina superconductora de almacenamiento magnético de energía (SMES), bobinada y probada en frío en la fábrica de imanes HTS.')
+
+    add('emi.grindless.info.jovian_atmosphere_survey.0', 'Lo escribe en Ganímedes el lanzador de sondas por bobinas (circuito 1): una sonda de entrada cae en las nubes de Júpiter y transmite el hidrógeno, el helio y la proporción de helio-3, como la sonda de Galileo en 1995.')
+    add('emi.grindless.info.jovian_atmosphere_survey.1', 'Guárdalo: cierra el capítulo LuV, y el sifón de gigante gaseoso de ZPM lo necesita para saber qué extrae. Ninguna receta de LuV lo gasta.')
+    add('emi.grindless.info.saturn_transfer_chart.0', 'La escribe en Ganímedes el lanzador de sondas por bobinas (circuito 2): una sonda de sobrevuelo pasa junto a Júpiter y llega a Saturno, como Pioneer 11, las Voyager y Cassini. Un orbe de datos la copia a mano.')
+    add('emi.grindless.info.saturn_transfer_chart.1', 'Guárdala: es el próximo viaje, a Saturno, en ZPM. Ninguna receta de LuV la gasta.')
+    add('emi.grindless.info.coilgun_coil_casing.0', 'Se bobina en la fábrica de imanes HTS (circuito 3) con hilo superconductor de Hg-1223 sobre un armazón de HSS-S, se encapsula en epoxi y se prueba en frío en helio líquido.')
+    add('emi.grindless.info.coilgun_coil_casing.1', 'Son el cañón del lanzador de sondas por bobinas de Ganímedes: 33 anillos de ocho (264 carcasas) alrededor de un ánima abierta. A los 110 K de Ganímedes el Hg-1223 superconduce sin criostato. Ninguna receta las gasta.')
+    add('emi.grindless.info.magnetic_bearing.0', 'Se hace en la fábrica de imanes HTS (circuito 4): 4 varillas de tetrataenita, un anillo de HSS-S y 2 placas de titanio, probado en frío en helio líquido. La tetrataenita, un imán que solo se forma en meteoritos, sale solo del cinturón de asteroides.')
+    add('emi.grindless.info.magnetic_bearing.1', 'Un cojinete de imán permanente sin tierras raras: el buje del anillo hidropónico giratorio en la órbita terrestre.')
+
+    add('emi.grindless.info.hologram_projector.0', 'Haz clic derecho en el controlador de un multibloque sin formar para proyectar su estructura durante 30 segundos; otro clic derecho la oculta. Un controlador formado abre su pantalla normal.')
+    add('emi.grindless.info.hologram_projector.1', 'Agachado + clic derecho construye: coloca desde tu inventario los bloques por defecto de la estructura en los huecos vacíos, un objeto por bloque. Las escotillas, los buses y las demás piezas de máquina las eliges tú.')
+
+    add('emi.grindless.info.sintered_regolith.0', 'Solo se hacen en la Luna. Los primeros ladrillos salen de un horno eléctrico allí: cuece 4 polvos de regolito lunar en un bloque (120 EU/t, 20 s). EMI no muestra las recetas del horno eléctrico de GregTech, así que esa solo aparece aquí. Después, la celda de regolito los sinteriza en grandes cantidades.')
+    add('emi.grindless.info.sintered_regolith.1', 'Todas las estructuras de la base lunar se apoyan en estos ladrillos: la celda de regolito, la perforadora trípode EV, la cúpula sellada, la planta criogénica, la matriz solar lunar, la antena de espacio profundo y la planta de extracción de tritio.')
+
+    add('emi.grindless.info.night_sky_radiator.0', 'Un bloque de estructura: las alas radiadoras de la planta criogénica, y parte del motor térmico de Venus, la planta de extracción de tritio, la perforadora de vetas de Mercurio y el campo solar de Mercurio. Frente a un cielo nocturno abierto, suelta el calor como luz infrarroja.')
+
+    add('emi.grindless.info.solar_wing_panel.0', 'Un bloque de estructura: las alas de la perforadora trípode EV y los paneles de la matriz solar lunar (una ejecución de receta por panel a cielo abierto). Tres más van en el controlador de la matriz.')
+    add('emi.grindless.info.orbital_solar_panel.0', 'Un bloque de estructura: la estación solar orbital tiene dos alas de 32 paneles. En la órbita terrestre, cada panel con el cielo abierto encima añade 630 EU/t al siguiente ciclo: 40.320 EU/t con los 64 expuestos. La medianoche orbital no la detiene.')
+    add('emi.grindless.info.whipple_shield_casing.0', 'Un bloque de estructura hecho como espuma metálica en el fundidor de microgravedad. La instalación de escudo de estela necesita 69 bloques para su disco octagonal. Guarda más para la perforadora de arpones y el cable orbital: la espuma y la aramida dispersan los impactos de micrometeoritos.')
+    add('emi.grindless.info.radiation_vault_casing.0', 'Un bloque de estructura: blindaje de Z graduado, titanio y luego tántalo, como la bóveda electrónica de Juno. Cerca de Júpiter la radiación destruye la electrónica, así que todas nuestras máquinas en Ío, Europa y la órbita de Ío guardan sus escotillas y buses en un recinto de bóveda. El condensador de fumarolas necesita al menos 24 y la toma volcánica al menos 30.')
+    add('emi.grindless.info.asteroid_regolith_casing.0', 'Un bloque de estructura sinterizado con la toba del cinturón, solo en el cinturón de asteroides (horno de aleación, con polvo de titanio). La perforadora anclada con arpones se apoya en una base de 29 bloques y su cuerpo lleva hasta 23 más; la caseta del minero óptico lleva hasta 26.')
+    add('emi.grindless.info.sapphire_test_mass.0', 'Un bloque óptico de estructura cultivado en gravedad cero. Guarda cuatro para el detector de ondas gravitacionales de Ganímedes: dos espejos en el vértice y uno al final de cada brazo. El zafiro es una masa de prueba, no un reactivo.')
+    add('emi.grindless.info.station_truss_casing.0', 'Un bloque de estructura: la carcasa de todas nuestras máquinas orbitales, la estación solar orbital, el fundidor de microgravedad, el cultivador de cristales en gravedad cero, el anillo hidropónico giratorio y el laboratorio de organoides. Constrúyelas en una órbita.')
+    add('emi.grindless.info.space_station.0', 'Una estación espacial se construye en la Tierra y se sube en cohete. Constrúyela sobre la plataforma del empaquetador de estaciones espaciales y dale un paquete de estación vacío y un chip de ID programado para la órbita: mete la construcción en el paquete, se queda el chip y saca una tarjeta llave que identifica la estación.')
+    add('emi.grindless.info.space_station.1', 'Pon el paquete en la ranura de satélite del cohete y vuela a esa órbita: la estación se despliega sola en su parcela de 512 x 512. En LuV la primera va en la órbita terrestre, para la estación solar orbital y las demás máquinas orbitales, y la segunda en la órbita de Ío, para el cable del tubo de flujo. Las órbitas están a 3 K: lleva protección contra el frío.')
+    add('emi.grindless.info.cryogenic_fuel_tank.0', 'Una pieza de cohete de GCYR: ponlo en el cohete como cualquier tanque de combustible y escanéalo con el escáner de cohetes. Motores de cohete de élite con solo tanques de combustible criogénico hacen un cohete de nivel 4, que llega al cinturón de asteroides, Ío, Europa y Ganímedes. Un solo tanque de élite en el cohete lo baja a nivel 3. Cada tanque lleva 16.000 mB; un despegue pide 14.000 mB, así que pon dos.')
+
+    add('emi.grindless.info.hermean_blocks.0', 'Solo se hacen en Mercurio, en la planta solar de Mercurio. La perforadora de vetas de Mercurio, el campo solar de Mercurio y el interferómetro se apoyan en los ladrillos de escudo térmico; los paneles de película fina son los paneles del campo solar de Mercurio, y su controlador también lleva algunos.')
+
+    add('emi.grindless.info.heliostat_mirror.0', 'Un bloque de estructura: el campo de espejos de la torre solar de heliostatos (LV) y de la planta solar de Mercurio. El controlador de la torre también lleva algunos.')
+
+    add('emi.grindless.info.engineered_seeds.0', 'Se hacen en la biofundición (LuV), con las bacterias de Europa como vector que lleva el gen a la semilla.')
+    add('emi.grindless.info.engineered_seeds.1', 'Guárdalas: se plantan en el anillo hidropónico giratorio, la granja molecular de LuV en la primera estación en órbita terrestre, y allí no se gastan. La cebada cultiva el factor neurotrófico que pide la unidad de procesamiento neural de LuV; el tabaco, colágeno vegetal.')
+})

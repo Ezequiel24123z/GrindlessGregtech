@@ -9,6 +9,8 @@ Generators for the pack's own textures. Everything is procedural 16x16 pixel art
 | `Build-SteamPreview.ps1` | Review sheet at x8 with the casings, the frames and the items. It is only a preview: it is not published. |
 | `Build-SteamContentTextures.ps1` | Writes the faces of the steam blast furnace and the coke battery (steam era, journey plan) to `pack/kubejs/assets/grindless/textures/`. |
 | `Build-SteamContentPreview.ps1` | Review sheet for those two faces: idle, the 8 frames, the emissive layer and a 3x3 wall on Firebricks and Coke Oven Bricks. It is only a preview: it is not published. |
+| `Build-HologramProjectorTextures.ps1` | Writes the Steam Hologram Projector's original four-frame item texture and `.mcmeta`; checks dimensions, alpha and distinct frames. `-Credits` prints its attribution rows. |
+| `Build-WirelessEnergyTextures.ps1` | Writes the wireless tower and, for every tier of `tables/wireless_energy.json` (LV to LuV), the cells, covers, hatch overlays and eight hatch models. `-Only cells,hatches,covers,tower` selects sets; a row with a `texture` gets that cell texture (the LuV SMES cell: `block/wireless/smes_cell_luv.png`, a frost-grey cryostat with a light-purple coil window); `-Credits` prints the asset manifest and attribution. Original procedural art, including emissive animations and GTM-tinted amperage rings. |
 | `Build-LVTextures.ps1` | Writes the LV era textures (vein drill, greenhouse, arc furnace, creature simulator, electrode and creature models) to `pack/kubejs/assets/grindless/textures/`. |
 | `Build-LVPreview.ps1` | Review sheet at x8 of the LV era: each overlay on its casing or hull, all frames, dark cave view and 3x3 wall. It is only a preview: it is not published. |
 | `Build-LVRoasterHeliostatTextures.ps1` | Writes the reinforced LV textures: faces of the sulfide roaster and of the heliostat tower, the heliostat mirror (block) and the contact catalyst, to `pack/kubejs/assets/grindless/textures/`. |
@@ -23,6 +25,7 @@ Generators for the pack's own textures. Everything is procedural 16x16 pixel art
 | `Build-EVTextures.ps1` | Writes the EV era textures (platinum plant, vein drill, platinum electrode and tungstensteel drill bit) to `pack/kubejs/assets/grindless/textures/`. |
 | `Build-EVPreview.ps1` | Review sheet at x8 of the EV era: each overlay on its casing and on four casings, all frames, dark cave view, 3x3 wall, the platinum electrode next to the graphite one and the drill bit progression. It is only a preview: it is not published. |
 | `Build-SteamSmallFamilyTextures.ps1` | Writes the faces of the small steam family (forge hammer, compressor, alloy smelter, mixer, chemical bath, ore washer) to `pack/kubejs/assets/grindless/textures/`. `Build-SteamSmallFamilyPreview.ps1` draws their review sheet (not published). |
+| `Build-SteamLargeFamilyTextures.ps1` | Writes the faces of the Large Steam family (macerator, centrifuge, thermal centrifuge, chemical bath, ore washer: `multiblock/large_steam_<machine>/`) to `pack/kubejs/assets/grindless/textures/`. `-Only macerator,centrifuge,thermal,bath,washer` and `-Credits` (their 25 CREDITS rows). |
 | `Build-ObservatoryTextures.ps1` | Writes the observatory family's faces and the charts (steam, LV and MV observatories) to `pack/kubejs/assets/grindless/textures/`. `Build-ObservatoryPreview.ps1` draws their review sheet (not published). |
 | `Build-EVFoundationTextures.ps1` | Writes the shared EV textures (sintered regolith bricks, molten salt charge, ruthenium catalyst, Mars chart). `-Only regolith,charge,catalyst,chart`, `-Preview <png>`, `-Credits`. The brick is the lunar casing texture. |
 | `Build-GeneratorArrayTextures.ps1` | Writes the LV generator array's face. `-Credits` prints its CREDITS rows. |
@@ -46,10 +49,18 @@ Generators for the pack's own textures. Everything is procedural 16x16 pixel art
 | `Build-VenusTextures.ps1` | Writes the faces of the IV Venus package (IV-B1): the pressurized vein drill, the Venus heat engine and the Venus acid works (`multiblock/pressurized_vein_drill/`, `multiblock/venus_heat_engine/`, `multiblock/venus_acid_works/`). `-Only drill,engine,works`, `-Preview <png outside the repo>` (optional `-PtfeCasing <png>`, `-TungstenCasing <png>`) and `-Credits` (their 15 CREDITS rows). |
 | `Build-TritiumRemovalTextures.ps1` | Writes the IV tritium removal facility's face (`multiblock/tritium_removal_facility/`). `-Only facility`, `-Preview <png outside the repo>` and `-Credits` (its 5 CREDITS rows). |
 | `Build-IVFoundationTextures.ps1` | Writes the shared IV textures (IV-A1): fuel cycle items, PuBe source, RTG pellet, resin, platinum gauze, inner planets chart, Venus and Mercury vein samples, the Hermean heat shield brick (the Mercury casing texture) and the thin-film panel. `-Only`, `-Preview <png outside the repo>`, `-Credits`. |
+| `Build-NaquadahPlantTextures.ps1` | Writes the IV naquadah plant's face (`multiblock/naquadah_plant/`). `-Only naquadah_plant` and `-Credits` (its 5 CREDITS rows). |
 | `Build-IVMercuryTextures.ps1` | Writes the faces of the IV Mercury machines (IV-B2): the Mercury vein drill, the Mercury solar works, the Mercury solar field and the interferometer (`multiblock/mercury_vein_drill/`, `mercury_solar_works/`, `mercury_solar_field/`, `interferometer/`), and the interferometer's three data orbs (`item/lunar_vlbi_recording`, `outer_system_chart`, `sagittarius_a_star_signal`). `-Only drill,works,field,interferometer,items`, `-Preview <png outside the repo>` and `-Credits` (its 23 CREDITS rows). |
 | `Build-TravelNetworkTextures.ps1` | Writes the Venusian and Hermean Quantum Seeds (items and `.mcmeta`) and the RTG cell's overlays (`block/machines/rtg/`). `-Only seeds,rtg` and `-Credits` (its 11 CREDITS rows). |
+| `Build-BiofoundryTextures.ps1` | Writes the LuV biofoundry's face (`multiblock/biofoundry/`). `-Only biofoundry` and `-Credits` (its 5 CREDITS rows). |
+| `Build-LuVCryogenicsTextures.ps1` | Writes the faces of the LuV helium refrigerator and coated conductor line (LuV-A3: `multiblock/helium_refrigerator/`, `multiblock/coated_conductor_line/`). `-Only refrigerator,line`, `-Preview <png outside the repo>` (optional `-FrostCasing <png>`, `-StainlessCasing <png>`) and `-Credits` (their 10 CREDITS rows). |
+| `Build-LuVFoundationTextures.ps1` | Writes the shared LuV textures (LuV-A1): 29 items (four of them animated quantum seeds) and the ten block textures under `block/luv/` (eight casings and the orbital solar panel's cells and frame). `-Only <output or group>`, `-Preview <png outside the repo>`, `-Credits`. |
+| `Build-HTSMagnetWorksTextures.ps1` | Writes the LuV HTS magnet works' face (`multiblock/hts_magnet_works/`). `-Only magnet_works`, `-Preview <png outside the repo>` and `-Credits` (its 5 CREDITS rows). |
+| `Build-GanymedeTextures.ps1` | Writes the faces of the LuV gravitational wave detector and coilgun launcher (LuV-B9: `multiblock/gravitational_wave_detector/`, `multiblock/coilgun_launcher/`). `-Only detector,launcher`, `-Preview <png outside the repo>` (optional `-FrostCasing <png>`, `-TungstenCasing <png>`) and `-Credits` (their 10 CREDITS rows). |
+| `Build-EuropaTextures.ps1` | Writes the faces of the LuV Europa machines (LuV-B8): the cryobot and the algae bioreactor (`multiblock/cryobot/`, `multiblock/algae_bioreactor/`). `-Only cryobot,algae_bioreactor` and `-Credits` (their 10 CREDITS rows). |
 
-## Regenerate
+| `Build-AsteroidBeltTextures.ps1` | Writes the faces of the LuV asteroid belt machines (LuV-B5): the harpoon anchor drill, the asteroid processor and the optical miner (`multiblock/harpoon_anchor_drill/`, `multiblock/asteroid_processor/`, `multiblock/optical_miner/`). `-Only drill,processor,miner`, `-Preview <png outside the repo>` and `-Credits` (their 15 CREDITS rows). |
+| `Build-IoOrbitTextures.ps1` | Writes the faces of the LuV Io orbit machines (LuV-B7): the flux-tube tether and the sulfur-iodine plant (`multiblock/flux_tube_tether/`, `multiblock/sulfur_iodine_plant/`). Static faces; it fails if an emissive pixel is not in the colour layer. |## Regenerate
 
 Run from the repo root. `-ExecutionPolicy Bypass` only affects that process (Windows PowerShell 5.1 blocks unsigned scripts by default).
 
@@ -95,6 +106,33 @@ The overlays follow GTM's casing convention: transparent background, details onl
 |---|---|---|
 | `block/multiblock/steam_blast_furnace/` (`overlay_front`, `_active` and `_active_emissive`, with `.mcmeta`) | `gtceu:block/casings/solid/machine_primitive_bricks` (the controller sits on the firebrick casing) | Wind gauge and valve wheel above the bronze annular pipe, two bronze tuyeres on the sides and a riveted iron tap door with a sight glass onto the melt and a tap hole with a runner. 8 frames, `frametime` 3: the melt boils, a spark rises, the tap stream pulses along the runner, the needle shakes with the wind and the lamp turns green. Idle: dark crust with two embers and the red lamp. The emissive layer has the melt, the spark, the tap stream and the lamp. |
 | `block/multiblock/coking_battery/` (the same three) | `gtceu:block/casings/solid/machine_coke_bricks` (the controller is the door of one chamber) | Cast iron chamber door between two riveted uprights, with two closing bars with brass latches and the leveling port at the top. 8 frames, `frametime` 4: the door joints glow (the coke inside is white-hot), a lighter wave runs around the door, the port flickers and the lamp turns green. Idle: dark joints with two embers and the red lamp. The emissive layer has the joints, the port and the lamp. |
+
+## Steam: the Large Steam family
+
+`Build-SteamLargeFamilyTextures.ps1` draws the controller faces of the five Large Steam machines (`startup_scripts/grindless/steam/large_family.js`). Same method and conventions as the small steam family (`Build-SteamSmallFamilyTextures.ps1`; the helpers are copied), but steel-and-brass: the family's shell is steel, so the faces are drawn for GTM's solid steel casing (`gtceu:block/casings/solid/machine_casing_solid_steel`). The idea of the family comes from GregTech Leisure; no code, texture or text of it is used.
+
+```powershell
+powershell -NoProfile -ExecutionPolicy Bypass -File tools\assets\Build-SteamLargeFamilyTextures.ps1
+powershell -NoProfile -ExecutionPolicy Bypass -File tools\assets\Build-SteamLargeFamilyTextures.ps1 -Only macerator,centrifuge -Credits
+```
+
+- `-Only` accepts `macerator`, `centrifuge`, `thermal`, `bath` and `washer` (comma-separated, also with `-File`).
+- One shared frame: a steel bezel with four brass rivets, a brass trim (lit top and left) around a dark recessed window, and a steel base plate with the steam pressure bar (empty when idle, filling one pixel a frame with a lit head while it works) and the status lamp (dull red idle, green while it works). Each machine has its own icon in the window, in bright steel, brass and its own colour, so it reads on the grey casing.
+- All faces: 8 frames, `frametime` 3. The emissive layers hold the pressure bar's head and the lamp, plus the macerator's sparks, the thermal centrifuge's coils and the chemical bath's bubbles.
+- The checks fail the run: size, binary alpha, no pure black, an empty casing ring, 8-frame strips that really animate, an idle face that is not the first working frame, and emissive layers inside the colour layer and lit in every frame. The output is identical byte for byte on every run.
+
+| File (under `textures/`) | Notes |
+|---|---|
+| `block/multiblock/large_steam_macerator/` (`overlay_front`, `_active` and `_active_emissive`, with `.mcmeta`) | Two steel crusher jaws with big teeth, lumps of ore caught between them. Working: the jaws grind past each other, the ore breaks into grit and sparks fly where two teeth meet. |
+| `block/multiblock/large_steam_centrifuge/` (the same three) | A rotor in its round steel bowl: a brass hub, four steel arms and four sample buckets (orange, blue, green, white). Working: it turns an eighth of a turn per frame and a glint runs round the rim. |
+| `block/multiblock/large_steam_thermal_centrifuge/` (the same three) | The same rotor in a bowl whose rim is a ring of copper heating coils. Idle: cold copper. Working: the coils glow orange with a white-hot spot running round, and the rotor turns. |
+| `block/multiblock/large_steam_chemical_bath/` (the same three) | A steel vat of green chemical with a brass rim and a basket of ore on a hook. Idle: the basket hangs above the still liquid. Working: the basket is down in the bath, bubbles rise round it and the surface shimmers. |
+| `block/multiblock/large_steam_ore_washer/` (the same three) | A ribbed steel drum lying in a trough of water under a spray pipe. Idle: still drum, calm water. Working: the ribs move, drops fall from the nozzles and the water splashes against the drum. |
+
+### How to retouch (Large Steam)
+
+- `$FamPal`: steel `A`-`J`, brass `Y y u U W O`, the lamp (`q Q r` green, `L l` red), the pressure bar (`s`, head `S`) and each icon's accents. `New-Pal` fails on a repeated letter.
+- `$FrameBase` is the shared frame; each icon is a `Paint-<Machine>` function in window-local pixels (10 × 8, from x3, y3). `Paint-Plate` draws the base plate.
 
 ## LV era
 
@@ -568,3 +606,231 @@ powershell -NoProfile -ExecutionPolicy Bypass -File tools\assets\Build-TravelNet
 | `.../overlay_top_active.png` + `.mcmeta` | The vents glowing, 4 frames. |
 | `.../overlay_top_active_emissive.png` + `.mcmeta` | Only the glowing vents. |
 | `.../overlay_side.png`, `.../overlay_back.png` | The radiator fins. |
+
+### Naquadah plant (IV)
+
+The viewport into the plant's activation chamber, drawn for GTM's inert PTFE casing with the hot cell's method, steel ramp, bezel and lamp ramp. A dark steel frame holds dark teal lead glass. Inside, at the left, the Pu-Be source (a small capsule with a yellow band) stands in a steel cradle. At the right, a vessel of the pale green-yellow superacid bath (HSbF₆) has a dark green-black heap of naquadah at its bottom. Under the window: a radiation sign, the handle of the source drawer and the mode 1 lamp.
+
+- 8 frames, `frametime` 4: the source glows Cherenkov blue and breathes, lighting the chamber and the vessel's near wall. The bath's surface shimmers, and bubbles rise and burst at the surface. Dark green flecks sink and settle on the heap, which glints as each one lands. The lamp is lit.
+- Idle: a dark chamber, a dull capsule, a still and unlit bath, and a dark lamp.
+- The emissive layer holds only the source's glow, the bath's surface and the lit lamp.
+- The hot cell's checks; the output is identical byte for byte.
+- To retouch:
+  - `$NpPal` and `$NpBase` hold the colours and the map.
+  - `$NpHalo` and `$NpPulse` shape the glow.
+  - `$NpBubbles`, `$NpFleckX` and `$NpFlecks` drive the bath.
+  - Add any new light to `$NpGlowZone`.
+
+```powershell
+powershell -NoProfile -ExecutionPolicy Bypass -File tools\assets\Build-NaquadahPlantTextures.ps1
+powershell -NoProfile -ExecutionPolicy Bypass -File tools\assets\Build-NaquadahPlantTextures.ps1 -Credits
+```
+
+| File (under `textures/`) | Notes |
+|---|---|
+| `block/multiblock/naquadah_plant/overlay_front.png` | Idle: the dark chamber behind the lead glass, with a glint at its top left. The grey capsule with its yellow band sits in its cradle beside the vessel, where still, unlit superacid stands over the dark heap. Below: the radiation sign, the drawer handle and the dark lamp. |
+| `.../overlay_front_active.png` + `.mcmeta` | 8 frames, `frametime` 4: the source's Cherenkov glow swells and ebbs once a loop and shimmers. It lights the chamber blue around it and the vessel's near wall. The bath's surface is lit and shimmers. Two bubbles rise in the far column and a small one off the heap's peak, each flashing as it bursts. Two flecks of naquadah sink in the near column and settle on the heap, which glints as each one lands. The mode 1 lamp is lit green. |
+| `.../overlay_front_active_emissive.png` + `.mcmeta` | Only the source's glow (the capsule and its halo), the bath's surface and the lit lamp. |
+
+## LuV era
+
+### Biofoundry
+
+A culture port of the sterile hall: a round sealed porthole into one of its fermenter columns, drawn for GTM's plascrete with the hot cell's method, steel ramp, bezel and lamp ramp. Plascrete is a pale grey, so the face is a whole dark steel panel inside the 1 px casing ring. The porthole's flange is clean stainless steel, lit at the top left, with a bolt at each corner of the plate. Through the glass are a headspace with a glint at its top left and the vessel below it, shaded as a lit cylinder (a step darker at the edges, so the flange stands clear). Under it, a control strip: the violet UV lamp, the four-cell growth bar and the green run lamp.
+
+- 8 frames, `frametime` 4: a living green culture under a shimmering layer of foam. Three streams of bubbles rise out of step from the sparger, one pixel a frame with a little wobble; they flash as they burst in the foam, and two of them throw a droplet into the headspace. The growth bar fills one cell every two frames and starts again. The UV and run lamps are lit.
+- Idle: clear sterile medium in the UV light, pale cyan under a violet headspace, with no foam or bubbles; an empty bar and dark lamps.
+- The emissive layer holds only the foam, the bubbles with their bursts and droplets, the lit bar cells and the two lamps.
+- The hot cell's checks; the output is identical byte for byte.
+- To retouch:
+  - `$BfPal` and `$BfBase` hold the colours and the map (`h` headspace, `s` surface, `m` medium).
+  - `$BfHeadIdle`, `$BfHeadCulture`, `$BfMediumIdle`, `$BfMediumCulture` and `$BfDepth` shade the vessel.
+  - `$BfStreams` drives the bubbles and `$BfBar` the growth bar.
+  - Add any new light to `$BfGlowZone`.
+
+```powershell
+powershell -NoProfile -ExecutionPolicy Bypass -File tools\assets\Build-BiofoundryTextures.ps1
+powershell -NoProfile -ExecutionPolicy Bypass -File tools\assets\Build-BiofoundryTextures.ps1 -Credits
+```
+
+| File (under `textures/`) | Notes |
+|---|---|
+| `block/multiblock/biofoundry/overlay_front.png` | Idle: the porthole onto the clear medium, pale cyan under the violet headspace; the bar empty, the UV and run lamps dark. |
+| `.../overlay_front_active.png` + `.mcmeta` | 8 frames, `frametime` 4: the green culture under its foam, the rising bubbles with their bursts and droplets, the growth bar filling, and the UV and run lamps lit. |
+| `.../overlay_front_active_emissive.png` + `.mcmeta` | Only the foam, the bubbles, the lit bar cells and the two lamps. |
+
+### LuV foundation (LuV-A1)
+
+`Build-LuVFoundationTextures.ps1`: same method and checks as the IV foundation, with its helpers copied so the other scripts stay untouched. It reuses, recoloured, the pack's own drawings: the quantum seed ampoule (`New-PlanetSeedFrame` of `Build-TravelNetworkTextures.ps1`, here `New-PlaceSeedFrame`), the drill bit shader and the tungsten steel bit's geometry (`Draw-Helix`, `Build-EVTextures.ps1`), the chart data stick (`$ChartMap` of `Build-IVFoundationTextures.ps1`), the data orb (`New-OrbBase` of `Build-IVMercuryTextures.ps1`) and the thin-film frame routine.
+
+```powershell
+powershell -NoProfile -ExecutionPolicy Bypass -File tools\assets\Build-LuVFoundationTextures.ps1
+powershell -NoProfile -ExecutionPolicy Bypass -File tools\assets\Build-LuVFoundationTextures.ps1 -Only seeds,capture_bag
+powershell -NoProfile -ExecutionPolicy Bypass -File tools\assets\Build-LuVFoundationTextures.ps1 -Preview C:\path\luv-a1.png -Credits
+```
+
+- `-Only` accepts any output name (for example `capture_bag` or `station_truss_casing`) and the groups `items`, `seeds`, `casings` and `panel` (comma-separated, also with `-File`).
+- `-Preview` (outside the repo, never shipped) writes an x6 review sheet: every item on slot grey; the 8 frames of each new seed next to the Venusian and Hermean seeds; the families next to their elders (bits, orbs, charts, tapes, vials); every casing 3x3; the orbital cells 3x3 and a panel mock next to the IV thin-film panel's; a strip of the items at x2.
+- The final check fails the run: 16x16 (seeds 16x128), binary alpha, no pure black, block textures fully opaque, item icons with a transparent background in every frame. Seeds: an `.mcmeta` with `frametime` 3, at least 3 distinct frames, the Venusian seed's silhouette and no frame shared with any other seed. The HSS-S bit keeps the tungsten steel bit's silhouette, the chart the Mars chart's, the two orbs the IV orbs', and the two tapes share one, each with a different picture. The frame's rows 6 to 8 are lit > mid > dark, and the panel model uses both panel textures. Output is identical byte for byte on every run.
+
+| File (under `textures/`) | Notes |
+|---|---|
+| `item/asteroid_pgm_concentrate.png` | A small heap of dark grey-black metallic powder (the carbonyl residue of meteoric iron) with bright platinum glints. |
+| `item/chondritic_extract.png` | A small glass vial under an aluminium crimp cap, holding dark amber-brown organic extract. |
+| `item/capture_bag.png` | An inflated bag of gold Kapton gores sewn with white aramid tapes, its mouth on a titanium hoop, the tip gathered by an aramid tie. |
+| `item/asteroid_quantum_seed.png`, `ionian_quantum_seed.png`, `europan_quantum_seed.png`, `ganymedean_quantum_seed.png` (each + `.mcmeta`) | The quantum seed ampoule under a cap of the place's ground, 8 frames, `frametime` 3. Belt: rusty iron-grey rock with metal flecks, a dust lane with a drifting mote. Io: sulfur yellow-orange with red-brown, plumes rising. Europa: white-blue ice with red-brown lineae drifting across. Ganymede: grey-brown with pale ice, a terminator sweeping right to left. |
+| `item/engineered_barley_seed.png`, `engineered_tobacco_seed.png` | Three plump golden barley grains with a crease; a low pile of tiny dark brown tobacco seeds. Both carry a cyan glint and a small cyan sparkle. |
+| `item/cryobot_probe.png` | A slender silver melt probe: a tether reel on top, a seam band, a red-hot nose with a white-hot point. |
+| `item/europan_ocean_sample.png` | A stout bottle under a ridged titanium screw cap: blue brine with green glowing specks. |
+| `item/melt_head.png` | A dark grey tungsten-carbide cone, point down, under its glowing orange heater disc and its stub. |
+| `item/jupiter_entry_probe.png` | A blunt-cone entry probe: a dark brown heat shield in front (below) and a silver conical backshell. |
+| `item/saturn_flyby_probe.png` | A white high-gain dish facing the viewer, a gold-foil bus with its engine, an RTG boom to the left and a science boom with its platform to the right. |
+| `item/jovian_atmosphere_survey.png`, `gravitational_wave_catalogue.png` | The data orb filled with Jupiter's cream, orange and brown bands and a small red oval; the data orb with a cyan chirp that grows and quickens, then rings down. |
+| `item/saturn_transfer_chart.png` | The chart family's data stick with Saturn (a gold disc crossed by a brown ring) and an orange Titan on the label. |
+| `item/heat_exchanger_bundle.png` | Nine dark blue-grey tungstensteel tube ends in a yellow-ochre sulfur-concrete frame, seen obliquely. |
+| `item/tether_spool.png` | Silver aluminium tape wound between white aramid flanges (the near one woven, with its hub); the loose end hangs below. |
+| `item/ionian_sublimate.png` | A crusty crystalline chunk: white-yellow on top, orange below, red-brown crust. |
+| `item/nickel_tungsten_tape.png`, `itbtc_coated_conductor.png` | One roll lying flat (wound face, core hole, loose end): bright nickel-silver; black-purple coating with silver cap-layer edges. |
+| `item/neurotrophic_factor.png` | A glass ampoule with a sealed tip and a blue break ring, holding pale pink protein solution. |
+| `item/neural_organoid.png` | A pinkish-grey folded tissue sphere sitting in a drop of pink culture medium. |
+| `item/triple_junction_wafer.png`, `triple_junction_cell.png` | A round wafer, blue-black over a gold-grey germanium rim and edge; a square cell with cropped corners, deep blue, two silver busbars and thin fingers. |
+| `item/hss_s_drill_bit.png` | The drill bit family's tungsten steel geometry in HSS-S: dark steel with a violet tint. |
+| `item/anchor_harpoon.png` | A diagonal harpoon: a dark HSS-S shaft, a barbed tungsten-carbide head and a cable eye. |
+| `block/luv/station_truss_casing.png` | Light grey aluminium plating behind a titanium truss: chords along the top and left edges and an X brace with a gusset. |
+| `block/luv/radiation_vault_casing.png` | Heavy dark titanium/tantalum plates, riveted and staggered, parted by copper and tin layers (graded-Z). |
+| `block/luv/whipple_shield_casing.png` | A porous aluminium-foam bumper pitted by small impact craters over a woven yellow aramid layer and a dark stand-off gap. |
+| `block/luv/asteroid_regolith_casing.png` | Sintered dark grey-brown rubble bricks in irregular courses with metallic flecks. |
+| `block/luv/sulfur_concrete_casing.png` | Big yellow-ochre sulfur-concrete blocks in running bond, with aggregate and sulfur crystals. |
+| `block/luv/magnetic_bearing.png` | A ring of eight tetrataenite segments around a polished shaft on a bevelled steel plate. |
+| `block/luv/coilgun_coil_casing.png` | Tight black windings with copper-brown highlights between violet HSS-S rims. |
+| `block/luv/sapphire_test_mass.png` | Polished blue sapphire: a bevel, four facets round a table and white glints. |
+| `block/luv/orbital_solar_cells.png` | Top of the orbital solar panel: 8 px multi-junction cells with cropped corners, blue-black, a silver busbar, fine fingers and a diagonal sheen. Seamless. |
+| `block/luv/orbital_solar_frame.png` | The panel's titanium frame (sides and underside): light grey-violet, brushed, with a lit edge. Rows 6 to 8, which the slab's sides show (`models/block/luv/orbital_solar_panel.json`), are lit, mid and dark. |
+
+#### How to retouch (LuV foundation)
+
+- Each piece's colours and map sit together at the top of its block (`New-Pal` fails on a repeated letter). Maps: `$ExtractMap`, `$CryoMap`, `$OceanMap`, `$MeltTop`, `$ChartMap`, `$BundleMap`, `$SpoolMap`, `$SublimateMap`, `$AmpouleMap`. Procedural shapes keep their numbers next to them (`$HeapHalf`, `$BagRows`, `$BarleyGrains`, `$PileHalf`, `$ProbeBack`, `$ProbeFront`, `$ChirpYs`, `$JovianRows`).
+- Seeds: `$SeedPlaces` holds one entry per seed (`Pal`, `Mode`, `Salt`, `Dir`, `Phase`, `Outline`, `Streak`). Change `Dir` or `Phase` if a new seed ever shares a frame with another.
+- Tapes: `$TapeMaterials` holds the two materials (`FaceA` and `FaceB` alternate on the wound face; `Side`; `Edge` is the silver cap layer, 0 for none).
+- Casings: one function each, with its palette above it; keep the patterns on 16 or 8 px so they tile.
+
+### HTS magnet works
+
+The works' magnet seen end-on, drawn for GTM's frost-proof machine casing with the IV faces' method, steel ramp, bezel and lamp ramp (the helpers are copied from `Build-TritiumRemovalTextures.ps1` and `Build-HeavyWaterPlantTextures.ps1`, so no other script changes). On the dark board, a racetrack coil of copper-gold HTS tape: an outer and an inner tape turn lit from the top left, the middle turn between them, wound round a small dark bore. Under the coil, the run (green) and quench (red, the quench detector) lamps.
+
+- 8 frames, `frametime` 4: the field is on. The middle turn glows LuV light purple, a step dimmer on its shaded sides, with two brighter pulses of current running round it clockwise, half a turn apart. The bore glows cold cyan and breathes once a loop, frost glints on the outer turn (the liquid-helium cold test) and the run lamp is lit. The quench lamp never lights: a quench would be a failed test.
+- Idle: the coil cold and dark between its turns, the bore dark and both lamps dark.
+- The emissive layer holds only the middle turn, the bore and the run lamp.
+- The hot cell's checks; the output is identical byte for byte. `-Preview` draws a review sheet on a light and a dark stand-in frost-proof casing (the GTM texture is not in the repository).
+- To retouch:
+  - `$HtPal` and `$HtBase` hold the colours and the map.
+  - `$HtRing` and `$HtCrest` drive the pulses round the middle turn, `$HtBore` and `$HtBoreBreath` the bore's glow, and `$HtFrost` says where the frost may glint.
+  - Add any new light to `$HtGlowZone`.
+
+```powershell
+powershell -NoProfile -ExecutionPolicy Bypass -File tools\assets\Build-HTSMagnetWorksTextures.ps1
+powershell -NoProfile -ExecutionPolicy Bypass -File tools\assets\Build-HTSMagnetWorksTextures.ps1 -Credits
+```
+
+| File (under `textures/`) | Notes |
+|---|---|
+| `block/multiblock/hts_magnet_works/overlay_front.png` | Idle: the copper-gold coil, cold and dark between its two tape turns, round a dark bore; the run and quench lamps dark. |
+| `.../overlay_front_active.png` + `.mcmeta` | 8 frames, `frametime` 4: the middle turn glowing LuV light purple with two pulses of current running round it, the bore breathing cold cyan, frost glints on the outer turn and the run lamp lit. |
+| `.../overlay_front_active_emissive.png` + `.mcmeta` | Only the middle turn, the bore and the run lamp. |
+
+### Ganymede (LuV-B9)
+
+The faces of the gravitational wave detector (drawn for GTM's frost-proof casing) and the coilgun launcher (drawn for GTM's robust tungstensteel casing), with the LuV-A3 faces' method, steel ramp, bezel, lamp ramp and checks (the helpers are copied from `Build-LuVCryogenicsTextures.ps1`, so no other script changes). Both are original drawings.
+
+- Detector, 8 frames, `frametime` 3: a laser interferometer. An L of two equal beam lines meets at the beam splitter (the laser feeds it from the left, the photodetector sits at the dark port under it), with a sapphire test mass at each arm's end and a small strain display inside the L. Working, the arms hold red laser light with a glint running out to the test masses, and the display sweeps a chirp (a small slow wiggle growing and quickening into the merger, as GW150914's 35 → 250 Hz chirp) in amber; at the merger the peak flashes white and the event lamp lights, then the trace fades to an afterglow. The photodetector follows the trace.
+- Launcher, 8 frames, `frametime` 2: the breech seen down the barrel, a dark bore ringed by four coils alternating copper and superconductor (the far ones a step darker). Working, the coils energise blue-white one after the other from the outer ring to the bore, the bore flashes as the slug passes, and the amber charge indicator drains and refills.
+- The emissive layers hold only the beam lines, splitter, laser, photodetector, display and lamps (detector); the energised rings, the bore, the charge cells and the run lamp (launcher).
+- To retouch: `$GwPal`/`$GwBase`, with `$GwChirp` (one sample per display column), `$GwReveal` (the sweep per frame) and `$GwEventFrames`; `$CgPal`/`$CgBase` (the ring letters are checked against `$CgPixels`), with `$CgHot`, `$CgFade` and `$CgCharge` per frame. Add any new light to `$GwGlowZone` or `$CgGlowZone`.
+
+```powershell
+powershell -NoProfile -ExecutionPolicy Bypass -File tools\assets\Build-GanymedeTextures.ps1
+powershell -NoProfile -ExecutionPolicy Bypass -File tools\assets\Build-GanymedeTextures.ps1 -Credits
+### Asteroid belt (LuV-B5)
+The faces of the three belt machines, with the HTS magnet works' method, steel bezel, lamp ramp and checks (helpers copied, so no other script changes). The harpoon anchor drill and the optical miner are drawn for the asteroid regolith brick (`block/luv/asteroid_regolith_casing.png`), the asteroid processor for GTM's solid steel casing; each face has its own dark steel frame, so it reads on both. All three: 8 frames, `frametime` 4, and the output is identical byte for byte. `-Preview` shows each face on the regolith brick or a steel stand-in (the GTM texture is not in the repository).
+- To retouch: each face keeps its colours and map together (`$HdSpec`/`$HdBase`, `$PrSpec`/`$PrBase`, `$OmSpec`/`$OmBase`); the moving parts are `$HdJawRing`, `$HdBar`, `$PrNeedle`, `$PrFleck`, `$OmRayL`/`$OmRayR` and `$OmBreath`. Add any new light to that face's glow zone (`$HdGlowZone`, `$PrGlowZone`, `$OmGlowZone`).
+powershell -NoProfile -ExecutionPolicy Bypass -File tools\assets\Build-AsteroidBeltTextures.ps1
+powershell -NoProfile -ExecutionPolicy Bypass -File tools\assets\Build-AsteroidBeltTextures.ps1 -Only miner -Credits
+### Europa: cryobot and algae bioreactor (LuV-B8)
+The faces of the two Europa machines, drawn for the pack's sulfur concrete casing (`block/luv/sulfur_concrete_casing.png`, both machines' workable casing) with the biofoundry's method, steel ramp, bezel, lamp ramp and checks (its helpers are copied, so no other script changes). The casing is a bright yellow ochre, so each face is a whole dark steel panel inside the 1 px casing ring.
+- Cryobot: a tall borehole window under the tether spool, with a depth gauge and the status lamp at its right. Through the window, the ice shell in strata (frosty white at the top, deeper blue below, with a static frost speckle), the slushy ice-ocean interface and the dark ocean. The probe is a short steel cylinder on its tether.
+  - 8 frames, `frametime` 4: the spool turns and the probe sinks one row a frame from the ice into the ocean, leaving a borehole of meltwater where bubbles rise. Its RTG-heated melt head glows white-hot with an orange halo and a red melt glow under it. The gauge lights one more cell a frame (the newest brightest), and the status lamp is lit.
+  - Idle: the probe parked at the top of the ice, its head dark, the gauge empty and the lamp dark.
+  - The emissive layer holds only the melt head, the lit gauge cells and the lamp.
+- Algae bioreactor: three glass photobioreactor tubes between four LED grow-light strips, under a lamp hood and over the bottom manifold, with a control strip below (grow-light indicator, harvest bar, run lamp).
+  - 8 frames, `frametime` 4: a green culture that shimmers (`Get-Noise`), shaded as lit cylinders. A bubble rises in each tube, out of step, wobbling between the tube's two columns and bursting at the surface. The LEDs glow pink with warm white every third row, the harvest bar fills one cell every two frames and starts again, and the indicator and run lamps are lit.
+  - Idle: clear pale medium in the tubes, the LEDs dark, the bar empty and both lamps dark.
+  - The emissive layer holds only the LED strips, the lit bar cells and the two lamps.
+- The biofoundry's checks; the output is identical byte for byte.
+- To retouch:
+  - `$CbPal`/`$CbBase` and `$AbPal`/`$AbBase` hold the colours and the maps.
+  - Cryobot: `$CbLayer` shades the window row by row, `$CbTipY` moves the probe and `$CbGaugeY0`/`$CbGaugeCells` place the gauge (one cell per frame).
+  - Algae bioreactor: `$AbTubes`, `$AbCulture` and `$AbDepth` shade the tubes, `$AbPath` and `$AbPhase` drive the bubbles, `$AbLedX` places the LED strips and `$AbBar` the harvest bar.
+  - Add any new light to `$CbGlowZone` or `$AbGlowZone`.
+powershell -NoProfile -ExecutionPolicy Bypass -File tools\assets\Build-EuropaTextures.ps1
+powershell -NoProfile -ExecutionPolicy Bypass -File tools\assets\Build-EuropaTextures.ps1 -Only cryobot -Credits
+```
+
+| File (under `textures/`) | Notes |
+|---|---|
+| `block/multiblock/gravitational_wave_detector/overlay_front.png` | Idle: grey vacuum tubes in an L, a dull splitter, dark laser and photodetector, sapphire test masses, a flat dim baseline on the display and both lamps dark. |
+| `.../overlay_front_active.png` + `.mcmeta` | 8 frames, `frametime` 3: red light in the arms, an amber chirp swept across the display, the merger flash with the event lamp, then the afterglow; the run lamp lit. |
+| `.../overlay_front_active_emissive.png` + `.mcmeta` | Only the arms, splitter, laser, photodetector, the display's trace and the lit lamps. |
+| `block/multiblock/coilgun_launcher/overlay_front.png` | Idle: copper and superconductor coil rings round a dark bore, rivets, the charge indicator and run lamp dark. |
+| `.../overlay_front_active.png` + `.mcmeta` | 8 frames, `frametime` 2: the coils energise blue-white from the outer ring to the bore, the bore flashes and fades, and the charge indicator drains and refills; the run lamp lit. |
+| `.../overlay_front_active_emissive.png` + `.mcmeta` | Only the energised rings, the bore's flash, the charge cells and the run lamp. |
+| `block/multiblock/harpoon_anchor_drill/overlay_front.png` | Idle: a three-jaw chuck round the drill bit and its carbide tip, a harpoon gun barrel on each side with its barbed harpoon fired into the rock, an empty depth bar and dark run and anchor lamps. |
+| `.../overlay_front_active.png` + `.mcmeta` | The jaws turn round the chuck and the flutes spiral down the bit, the tip glows hot, the depth bar fills a cell every two frames, and the run (green) and anchor (cyan) lamps are lit. |
+| `.../overlay_front_active_emissive.png` + `.mcmeta` | Only the tip, the lit bar cells and the two lamps. |
+| `block/multiblock/asteroid_processor/overlay_front.png` | Idle: the Mond column's panel. A pressure gauge with the needle low, a red valve wheel, a dark sight glass on the carbonyl gas line, the decomposer's cold heater coil and a horseshoe magnet (the separator); dark run and heater lamps. |
+| `.../overlay_front_active.png` + `.mcmeta` | The needle trembles high, gas pulses run right along the sight glass, the coil glows and shimmers, a fleck of nickel hops between the magnet's poles, and the run (green) and heater (amber) lamps are lit. |
+| `.../overlay_front_active_emissive.png` + `.mcmeta` | Only the gas line, the heater coil and the two lamps. |
+| `block/multiblock/optical_miner/overlay_front.png` | Idle: a pale lens over a gold Kapton bag holding a rough boulder under a clear film window, the frosted cold trap piped to the bag, dark run and cold trap lamps. |
+| `.../overlay_front_active.png` + `.mcmeta` | The lens fills with sunlight, two pale rays converge through the film with a white glint running down each, the focus is white-hot over a breathing orange-hot spot, frost glints on the cold trap, and the run (green) and cold trap (cyan) lamps are lit. |
+| `.../overlay_front_active_emissive.png` + `.mcmeta` | Only the lens, the rays, the film, the focus and the two lamps. |
+| `block/multiblock/cryobot/overlay_front.png` | Idle: the probe parked at the top of the ice with its head dark, under the spool; the ice strata, the interface and the dark ocean; the gauge empty and the status lamp dark. |
+| `.../overlay_front_active.png` + `.mcmeta` | 8 frames, `frametime` 4: the spool turning, the probe sinking a row a frame through the ice into the ocean with its melt head glowing, the meltwater borehole and bubbles behind it, the gauge filling and the status lamp lit. |
+| `.../overlay_front_active_emissive.png` + `.mcmeta` | Only the melt head, the lit gauge cells and the status lamp. |
+| `block/multiblock/algae_bioreactor/overlay_front.png` | Idle: three tubes of clear pale medium between dark LED strips; the bar empty, the indicator and run lamps dark. |
+| `.../overlay_front_active.png` + `.mcmeta` | 8 frames, `frametime` 4: the shimmering green culture with a bubble rising in each tube out of step, the LED strips lit pink and warm white, the harvest bar filling, and the indicator and run lamps lit. |
+| `.../overlay_front_active_emissive.png` + `.mcmeta` | Only the LED strips, the lit bar cells and the two lamps. |
+
+### Io orbit: flux-tube tether and sulfur-iodine plant (LuV-B7)
+
+Two static faces (one frame each, no `.mcmeta`), drawn with `Write-Map` like the Io surface faces. The tether's face has a light grey frame for the station truss casing; the plant's a darker grey frame for the radiation vault casing. Each face's palette and map sit together in the script; any new light is set with `Set-Glow`, which writes the same pixel to both layers.
+
+```powershell
+powershell -NoProfile -ExecutionPolicy Bypass -File tools\assets\Build-IoOrbitTextures.ps1
+```
+
+| File (under `textures/`) | Notes |
+|---|---|
+| `block/multiblock/flux_tube_tether/overlay_front.png` | Idle: a copper-wound reel on its stand paying a silver wire from its side over a sheave down into the dark violet plasma torus; the hollow-cathode emitter under the reel is dark. |
+| `.../overlay_front_active.png` | Current runs down the wire in violet and white pulses, the cathode's orifice glows cyan with a violet plume, and the torus sparks where the wire meets it. |
+| `.../overlay_front_active_emissive.png` | Only the wire, the cathode and its plume, and the spark. |
+| `block/multiblock/sulfur_iodine_plant/overlay_front.png` | Idle: a steel column with a violet iodine band at the top, a yellow sulfur band and the dark HI sections, a feed pipe on the left, the hydrogen outlet and its dark lamp on the right, over a cold vertical-slot heat grille. |
+| `.../overlay_front_active.png` | The grille glows orange from the volcanic heat, the HI sections glow and bubble, and the hydrogen lamp is lit green. |
+| `.../overlay_front_active_emissive.png` | Only the grille's slots, the HI sections with their bubbles and the hydrogen lamp. |
+
+## Contrast pass after the gallery test (2026-10-25)
+
+The client gallery test (`gg_test_gallery`) showed fifteen faces that were hard to read in game, where faces show at about 0.8 of their texture's brightness. Each script below was retouched, keeping its design; the tables above may still describe the earlier look where a note says so.
+
+- `Build-LunarPowerAntennaTextures.ps1`: contrast pass after the gallery client test (2026-10-25). The PV cells (`$CellSpec`) are two steps lighter and the panel (`$SolarScene`) has four rows of cells; at night the landscape is dimmed to 85 % (`$dim`), and the antenna's dish is no longer dimmed while it is off, so both faces read on the black lunar sky.
+- `Build-CombinedCycleHotMillTextures.ps1`: contrast pass (2026-10-25). The combined-cycle plant's turbine (`$CcTurbine`) and boiler (`$CcBoiler`, three rows of tubes) are a row taller, the stack and the steam puffs (`$CcPuff`) moved up with them, and the idle face keeps the water in the tubes. The hot strip mill is unchanged.
+- `Build-IVMercuryTextures.ps1`, in the Mercury table (replacements):
+  - `mercury_solar_works`: "... Idle: the cold furnace through the port (a dim chamber, the crucible and its dull charge), no rays. ..." (`$WkIdleSpec` sets how readable the idle port is).
+  - `mercury_solar_field`: "The icon is indigo GaAs in 3 px strips parted by a silver busbar in a tungstensteel frame, both lifted two steps from `block/iv/thin_film_cells.png` and `thin_film_frame.png` so the icon reads on the pale brick. ..."
+  - `interferometer`: "... Idle: the screen at rest, a dim graticule and a flat trace. ..."
+- `Build-UraniumCycleTextures.ps1`, in the uranium cycle table (replacements):
+  - `isr_wellfield/overlay_front.png`: "Idle: the five-spot mimic with unlit wells (a muted blue, the producer olive), grey flow lines, the header line, two columns of empty amber resin and the return main."
+  - `fuel_fabrication_plant/overlay_front.png`: "Idle: four unlit blue lamps (press, sinter, pilger, glovebox), a cold furnace window (heater coils along its top, boats of pellets on the hearth), pellets on the tray, an empty tube and unlit progress cells."
+- `Build-LVRoasterHeliostatTextures.ps1`, heliostat row: "... Idle: a navy night sky with six stars, the mirrors catching it, and a cold bare-steel receiver. ..."
+- `Build-GeneratorArrayTextures.ps1`: contrast pass (2026-10-25): the bolt at rest (`k l m`) is a dull gold instead of olive.
+- `Build-LeisureUtilityTextures.ps1`: contrast pass (2026-10-25): the lava furnace's idle crust (`q r s t`) is a lighter dark red with dull embers; the weather controller's idle cloud (`$WxCloudIdle`) is a light grey on a dark slate screen (`n`).
+- `Build-LaunchRoadTextures.ps1`, engine test stand row: "The stand as the multiblock builds it, against the test site's dusk sky: ..." (`$StandSky`; the right leg is a step lighter).
+- `Build-SteamSmallFamilyTextures.ps1`: contrast pass (2026-10-25): the window is open onto the bronze bricks, so the forge hammer's ram and anvil and the alloy smelter's crucible are light iron outlined in dark iron; the ram has a head and the crucible is larger (rows 2–7 of the window). The other four faces are unchanged.

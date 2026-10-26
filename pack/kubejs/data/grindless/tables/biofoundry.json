@@ -1,0 +1,103 @@
+{
+  "_source": "Our own table: the recipes of LuV's biofoundry, gtceu:biofoundry (docs/eras/luv.md, '4. Biofoundry', and decision 4, 'Living circuits at LuV'). Steps 1 to 8 are GTM's sterile chain, composed from GTM's live recipes (the plans below name them; the numbers are read from the loaded pack at every load): GTM's own recipes keep their sterile cleanroom condition, ours are the same steps under this type. Steps 9 and 10 are ours: Agrobacterium-mediated transformation, the soil bacterium used as the vector that carries a gene into a plant (real practice, Zambryski et al. 1983; Hiei et al. 1994 for cereals such as barley; tobacco is the classic model plant for it).",
+  "_how_it_is_used": [
+    "Read by server_scripts/grindless/luv/biofoundry.js at every server load (a /reload picks up changes). Each entry becomes one gtceu:sterile_culture recipe, id grindless:sterile_culture/<name> (GTM's builder puts the type in front). The smoke test gg_test_luv_biofoundry.js checks the live recipes against this table.",
+    "The programmed circuit is the step, one circuit per recipe: no recipe of the type may take a subset of another's ingredients (GTM's recipe lookup keeps one recipe per set of ingredients, counts ignored, and a recipe whose ingredients are a subset of another's can hide it).",
+    "composed[]: server_scripts/grindless/lib/compose.js reads `stages` from the loaded recipes, uses up `given` (the batch) and nets every `linked` key to zero (keys: 'i:<item>' or 'f:<fluid>'). The recipe takes and gives what the steps take and give, with the energy of every stage summed and spent at the highest EU/t of its stages (ceil(energy / that EU/t) ticks): GTM's own figures, never cheaper. GTM's sterile cleanroom condition is not copied: the hall is the cleanroom.",
+    "recipes[]: ours, at eut x duration. itemsIn / itemsOut: { id, count }; fluidsIn / fluidsOut: { id, amount } in mB.",
+    "Kept (the biofoundry refuses voiding): the diluted sulfuric acid goes back to sulfuric acid (GTM's distillery, distill_dilute_sulfuric_to_sulfuric_acid), the phosphorus back to phosphoric acid (GTM's phosphoric_acid_from_elements) for the next gelatin, and the stem cells' bacterial sludge back to mutagen (step 6).",
+    "Bacteria per NPU: about 1,000 mB of sterile medium per neuro processing unit (250 for the NPU, 250 for the organoid, 250 for the stem cells, 250 for its share of boards); that medium takes 1,000 mB of mutagen, which takes 10,000 mB of bacterial sludge: about 10,000 mB of bacteria, ten culture runs on Europa."
+  ],
+  "steps": [
+    { "circuit": 1, "name": "collagen_from_bone" },
+    { "circuit": 2, "name": "collagen_from_bone_meal" },
+    { "circuit": 3, "name": "gelatin" },
+    { "circuit": 4, "name": "agar" },
+    { "circuit": 5, "name": "bacterial_sludge" },
+    { "circuit": 6, "name": "mutagen" },
+    { "circuit": 7, "name": "sterile_growth_medium" },
+    { "circuit": 8, "name": "stem_cells" },
+    { "circuit": 9, "name": "engineered_barley_seed" },
+    { "circuit": 10, "name": "engineered_tobacco_seed" }
+  ],
+  "composed": [
+    {
+      "name": "collagen_from_bone",
+      "circuit": 1,
+      "stages": ["gtceu:chemical_reactor/collagen_from_bone"],
+      "given": { "i:minecraft:bone": 1 },
+      "linked": []
+    },
+    {
+      "name": "collagen_from_bone_meal",
+      "circuit": 2,
+      "stages": ["gtceu:chemical_reactor/collagen_from_bone_meal"],
+      "given": { "i:minecraft:bone_meal": 1 },
+      "linked": []
+    },
+    {
+      "name": "gelatin",
+      "circuit": 3,
+      "stages": ["gtceu:mixer/gelatin_mixture", "gtceu:centrifuge/gelatin"],
+      "given": { "i:gtceu:collagen_dust": 6 },
+      "linked": ["f:gtceu:gelatin_mixture"]
+    },
+    {
+      "name": "agar",
+      "circuit": 4,
+      "stages": ["gtceu:autoclave/agar"],
+      "given": { "i:gtceu:gelatin_dust": 1 },
+      "linked": []
+    },
+    {
+      "name": "bacterial_sludge",
+      "circuit": 5,
+      "stages": ["gtceu:large_chemical_reactor/bacterial_sludge"],
+      "given": { "f:gtceu:bacteria": 1000 },
+      "linked": []
+    },
+    {
+      "name": "mutagen",
+      "circuit": 6,
+      "stages": ["gtceu:brewery/enriched_bacterial_sludge_from_u235", "gtceu:distillery/mutagen"],
+      "given": { "f:gtceu:bacterial_sludge": 1000 },
+      "linked": ["f:gtceu:enriched_bacterial_sludge"]
+    },
+    {
+      "name": "sterile_growth_medium",
+      "circuit": 7,
+      "stages": ["gtceu:mixer/raw_growth_medium", "gtceu:fluid_heater/sterile_growth_medium"],
+      "given": { "f:gtceu:mutagen": 4000 },
+      "linked": ["f:gtceu:raw_growth_medium"]
+    },
+    {
+      "name": "stem_cells",
+      "circuit": 8,
+      "stages": ["gtceu:large_chemical_reactor/stem_cells"],
+      "given": { "i:gtceu:osmiridium_dust": 1 },
+      "linked": []
+    }
+  ],
+  "recipes": [
+    {
+      "name": "engineered_barley_seed",
+      "circuit": 9,
+      "eut": 1920,
+      "duration": 600,
+      "itemsIn": [{ "id": "minecraft:wheat_seeds", "count": 1 }],
+      "fluidsIn": [{ "id": "gtceu:bacteria", "amount": 250 }],
+      "itemsOut": [{ "id": "grindless:engineered_barley_seed", "count": 1 }],
+      "fluidsOut": []
+    },
+    {
+      "name": "engineered_tobacco_seed",
+      "circuit": 10,
+      "eut": 1920,
+      "duration": 600,
+      "itemsIn": [{ "id": "minecraft:beetroot_seeds", "count": 1 }],
+      "fluidsIn": [{ "id": "gtceu:bacteria", "amount": 250 }],
+      "itemsOut": [{ "id": "grindless:engineered_tobacco_seed", "count": 1 }],
+      "fluidsOut": []
+    }
+  ]
+}
