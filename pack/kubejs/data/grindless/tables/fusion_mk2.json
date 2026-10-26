@@ -1,0 +1,74 @@
+{
+  "_note": "ZPM-A7 audit of every gtceu:fusion_reactor recipe in the native dump (power-quests-1, GTM 7.5.3 with GTCA, GT-- and the pack) that the Mk2 (gtceu:zpm_fusion_reactor) can run: EU/t at most ZPM and eu_to_start within 16 energy hatches x 20 M EU. fate: keep (the Mk2 runs it as it is after LuV's decisions; ZPM cuts nothing: docs/eras/zpm.md, 'Only from there'), luv_cut (removed by LuV-B10, decision 6; stays removed, so absent from the live manager). ours: recipes the pack registers for the type (server_scripts/grindless/zpm/fusion.js). beyond: the recipes the Mk2 can never run (start above 320 M). server_scripts/grindless/zpm/fusion.js reads this table; a recipe of the type that the Mk2 could run and that is neither listed here nor ours is logged as unaudited. The figures of eut and start are GTM's, except duranium, whose start is LuV's 200 M re-registration (tables/fusion_mk1.json).",
+  "mk2": { "machine": "gtceu:zpm_fusion_reactor", "maxEUt": 131072, "maxStart": 320000000, "energyHatches": 16, "startPerHatch": 20000000 },
+  "recipes": [
+    { "id": "gtceu:fusion_reactor/deuterium_and_tritium_to_helium_plasma", "eut": 4096, "start": 40000000, "fate": "keep", "why": "LuV's small fusion power, limited by the Moon facility's tritium." },
+    { "id": "gtceu:fusion_reactor/lantanum_and_silicon_to_lutetium_plasma", "eut": 7680, "start": 80000000, "fate": "keep", "why": "Lutetium; no ore vein gives it." },
+    { "id": "gtceu:fusion_reactor/hydrogen_and_vanadium_to_chromium_plasma", "eut": 24576, "start": 140000000, "fate": "keep", "why": "Chromium for the lutetium + chromium americium route." },
+    { "id": "gtceu:fusion_reactor/neodymium_and_hydrogen_to_europium_plasma", "eut": 24576, "start": 150000000, "fate": "keep", "why": "Europium: the Mk1's route; the reductor is the cheap one." },
+    { "id": "gtceu:fusion_reactor/calcium_plasma", "eut": 7680, "start": 120000000, "fate": "keep", "why": "GTCA (Mg + O): fusion power not tied to tritium." },
+    { "id": "gtceu:fusion_reactor/gold_and_aluminium_to_uranium_238_plasma", "eut": 24576, "start": 140000000, "fate": "luv_cut", "why": "Cut by LuV (uranium comes from the End or Venus); ZPM does not restore it." },
+    { "id": "gtceu:fusion_reactor/mercury_and_magnesium_to_uranium_235_plasma", "eut": 24576, "start": 140000000, "fate": "luv_cut", "why": "Cut by LuV (U-235 comes from the hot cell); ZPM does not restore it." },
+    { "id": "gtceu:fusion_reactor/silver_and_copper_to_osmium_plasma", "eut": 24578, "start": 150000000, "fate": "luv_cut", "why": "Cut by LuV (osmium comes from Mercury or the belt); ZPM does not restore it." },
+    { "id": "gtceu:fusion_reactor/gallium_and_radon_to_duranium_plasma", "eut": 16384, "start": 200000000, "fate": "keep", "why": "Duranium only from the Mk2 (LuV's 200 M re-registration): the tritanium and the reactor's frames need it." },
+    { "id": "gtceu:fusion_reactor/carbon_and_helium_3_to_oxygen_plasma", "eut": 4096, "start": 180000000, "fate": "keep", "why": "Oxygen plasma for GTM's plasma turbine, as GTM has it." },
+    { "id": "gtceu:fusion_reactor/uranium_based_liquid_fuel_excited", "eut": 7680, "start": 200000000, "fate": "keep", "why": "Burns IV uranium in the large naquadah reactor." },
+    { "id": "gtceu:fusion_reactor/sulfur_plasma", "eut": 10240, "start": 240000000, "fate": "keep", "why": "GTCA (Al + Li): a plasma for the turbine." },
+    { "id": "gtceu:fusion_reactor/beryllium_and_deuterium_to_nitrogen_plasma", "eut": 16384, "start": 280000000, "fate": "keep", "why": "Nitrogen plasma for the turbine." },
+    { "id": "gtceu:fusion_reactor/carbon_and_magnesium_to_argon_plasma", "eut": 24576, "start": 180000000, "fate": "keep", "why": "Argon plasma for the turbine." },
+    { "id": "gtceu:fusion_reactor/silver_and_lithium_to_indium_plasma", "eut": 24576, "start": 280000000, "fate": "keep", "why": "Indium, a rare metal with no vein of its own." },
+    { "id": "gtceu:fusion_reactor/naquadah_based_liquid_fuel_excited", "eut": 26000, "start": 320000000, "fate": "keep", "why": "The era's power: the large naquadah reactor's fuel." },
+    { "id": "gtceu:fusion_reactor/arsenic_and_ruthenium_to_darmstadtium_plasma", "eut": 30720, "start": 200000000, "fate": "keep", "why": "Darmstadtium, the UV hull (gate)." },
+    { "id": "gtceu:fusion_reactor/gold_and_mercury_to_radon_plasma", "eut": 30720, "start": 200000000, "fate": "keep", "why": "Radon: the waste retrieval plant is the cheap route, not the only one." },
+    { "id": "gtceu:fusion_reactor/titanium_and_duranium_to_tritanium_plasma", "eut": 30720, "start": 200000000, "fate": "keep", "why": "Tritanium for UV's parts, made in ZPM (gate)." },
+    { "id": "gtceu:fusion_reactor/plutonium_based_liquid_fuel_excited", "eut": 30720, "start": 220000000, "fate": "keep", "why": "Burns IV plutonium in the large naquadah reactor." },
+    { "id": "gtceu:fusion_reactor/titanium_plasma", "eut": 49152, "start": 100000000, "fate": "keep", "why": "GTCA (Al + F): a plasma for the turbine." },
+    { "id": "gtceu:fusion_reactor/xenon_and_zinc_to_plutonium_239_plasma", "eut": 49152, "start": 120000000, "fate": "keep", "why": "A second plutonium route, as GTM has it." },
+    { "id": "gtceu:fusion_reactor/zinc_plasma", "eut": 49152, "start": 180000000, "fate": "keep", "why": "GTCA (Cu + T): a plasma for the turbine." },
+    { "id": "gtceu:fusion_reactor/lutenium_and_chromium_to_americium_plasma", "eut": 49152, "start": 200000000, "fate": "keep", "why": "Americium: the partitioning plant is the waste route, not the only one." },
+    { "id": "gtceu:fusion_reactor/krypton_and_cerium_to_plutonium_241_plasma", "eut": 49152, "start": 240000000, "fate": "keep", "why": "Plutonium-241 for the americium line." },
+    { "id": "gtceu:fusion_reactor/silver_and_helium_3_to_tin_plasma", "eut": 49152, "start": 280000000, "fate": "keep", "why": "Saturn's helium-3 into power (Mk2 only); the direct energy converter takes its plasma." },
+    { "id": "gtceu:fusion_reactor/californium", "eut": 122880, "start": 120000000, "fate": "keep", "why": "Nothing in ZPM asks for it." }
+  ],
+  "ours": [
+    {
+      "id": "grindless:fusion_reactor/d_he3_to_helium_plasma",
+      "builderId": "grindless:d_he3_to_helium_plasma",
+      "eut": 16384,
+      "duration": 16,
+      "start": 200000000,
+      "inputs": [{ "tag": "forge:deuterium", "amount": 125 }, { "fluid": "gtceu:helium_3", "amount": 125 }],
+      "output": { "id": "gtceu:helium_plasma", "amount": 125 },
+      "why": "Aneutronic D + He-3, Saturn's reason to exist as power. The 200 M start is above the Mk1's 160 M: Mk2 only. The direct energy converter burns its plasma."
+    }
+  ],
+  "beyond": [
+    "gtceu:fusion_reactor/silicon_and_magnesium_to_iron_plasma",
+    "gtceu:fusion_reactor/enriched_naquadah_and_radon_to_naquadria_plasma",
+    "gtceu:fusion_reactor/potassium_and_fluorine_to_nickel_plasma",
+    "gtceu:fusion_reactor/plutonium_241_and_hydrogen_gas_to_americium_plasma",
+    "gtceu:fusion_reactor/americium_and_naquadria_to_neutronium_plasma",
+    "gtceu:fusion_reactor/oganesson"
+  ],
+  "quench": {
+    "machine": "gtceu:plasma_quench_caster",
+    "argon": { "id": "gtceu:argon", "amount": 1000, "returned": 950 },
+    "steam": { "id": "gtceu:steam", "amount": 2000 },
+    "eut": 30720,
+    "duration": 20,
+    "metals": [
+      { "name": "duranium", "fluid": "gtceu:duranium", "plate": "gtceu:duranium_plate", "foil": "gtceu:duranium_foil" },
+      { "name": "tritanium", "fluid": "gtceu:tritanium", "plate": "gtceu:tritanium_plate", "foil": "gtceu:tritanium_foil" },
+      { "name": "darmstadtium", "fluid": "gtceu:darmstadtium", "plate": "gtceu:darmstadtium_plate", "foil": null }
+    ]
+  },
+  "converter": {
+    "machine": "gtceu:direct_energy_converter",
+    "factor": 1.25,
+    "eut": 2560,
+    "recipes": [
+      { "name": "helium_plasma", "input": "gtceu:helium_plasma", "output": "gtceu:helium", "duration": 80, "turbine": "gtceu:plasma_generator/helium", "turbineEUPerMB": 163840 },
+      { "name": "tin_plasma", "input": "gtceu:tin_plasma", "output": "gtceu:tin", "duration": 256, "turbine": "gtceu:plasma_generator/tin", "turbineEUPerMB": 524288 }
+    ]
+  }
+}
