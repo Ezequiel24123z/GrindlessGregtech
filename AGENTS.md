@@ -166,6 +166,7 @@ Gregtech Grindless is a GregTech Modern pack (Minecraft 1.20.1, Forge) in which 
   | LuV crystal grower, hydroponic ring and organoid lab | 16640–16703, Z 0–63; Earth orbit Y 198–214 |
   | LuV fusion and research | 17920–17983, Z 0–63 (Overworld, Y 98–112): the Mk1 at X 17925–17939, the HPCA and the research station at X 17950+ |
   | LuV Io surface: fumarole condenser and volcanic intake (S0-7) | 17152–17215, Z 0–63: the Overworld at Y 98–112 and Io (`G.places.surface('io')`) at Y 198–214 |
+  | LuV Ganymede: GW detector (S0-7, buried L) and coilgun | 17664–17727, Z 0–63: the Overworld at Y 98–112; on Ganymede (`G.places.surface('ganymede')`) Y 198–214 (rows at Y 200–204), or, where the ground under the two machines reaches Y 200, five rows from one block above the highest ground |
   | chests and furnaces (client) | 18688–18751 (uses X 18688–18703, Z 0–15, Y 98–112) |
 
   For a new test, keep going in steps of 256.

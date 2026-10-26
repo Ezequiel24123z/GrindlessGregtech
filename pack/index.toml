@@ -141,6 +141,10 @@ file = "kubejs/assets/emi/recipe/additions/grindless/hologram_projector.json"
 hash = "bea7e2389a77cc3b92464944198882be16111a1ddfeaf9125a31b5f0585c6624"
 
 [[files]]
+file = "kubejs/assets/emi/recipe/additions/grindless/jovian_atmosphere_survey.json"
+hash = "60d303821879e9f621ae8e0a87311c110d28ea5166f67a3341b05cf7c49a78b3"
+
+[[files]]
 file = "kubejs/assets/emi/recipe/additions/grindless/magnetic_bearing.json"
 hash = "a371423b1252fac1d3b3bcdf15ffa32c1a9470468fef991e7e348e16a00af950"
 
@@ -157,12 +161,12 @@ file = "kubejs/assets/emi/recipe/additions/grindless/radiation_vault_casing.json
 hash = "ec5bdc5341d33e66c78fa57e6d0d976a5b89d1b1bd09321daad329e8cc48725c"
 
 [[files]]
-file = "kubejs/assets/emi/recipe/additions/grindless/sagittarius_a_star_signal.json"
-hash = "e14dbe607d11a87897534ed3284696d55d9db4614962af174bb4e6396b29d649"
-
-[[files]]
 file = "kubejs/assets/emi/recipe/additions/grindless/sapphire_test_mass.json"
 hash = "45b458374ad31fea70b5b9f56e9aaf68e623826c869a74b5bc0d6003155aac19"
+
+[[files]]
+file = "kubejs/assets/emi/recipe/additions/grindless/saturn_transfer_chart.json"
+hash = "17fe486266f6e16e011caffd6b167d46e4be849bbfd8f18e46fccfdde31a2f65"
 
 [[files]]
 file = "kubejs/assets/emi/recipe/additions/grindless/sintered_regolith.json"
@@ -561,6 +565,26 @@ file = "kubejs/assets/grindless/textures/block/multiblock/coated_conductor_line/
 hash = "491ea51d46bc1f0c0ff11ed9293461cc67de293c7672abbc45f67563f8fe1f1a"
 
 [[files]]
+file = "kubejs/assets/grindless/textures/block/multiblock/coilgun_launcher/overlay_front.png"
+hash = "b06feed14861022f8a7936041ffc56ba80ae10f26cdec54bc49bcb7cb7833914"
+
+[[files]]
+file = "kubejs/assets/grindless/textures/block/multiblock/coilgun_launcher/overlay_front_active.png"
+hash = "468dc7fd950c7d1c60c4aa0bcafa591984a55cf0d016975926152508258c52d1"
+
+[[files]]
+file = "kubejs/assets/grindless/textures/block/multiblock/coilgun_launcher/overlay_front_active.png.mcmeta"
+hash = "e9b8025fde1b09b0a4d2a38427b04f98f28a593045be6d177eb2b29164c872b0"
+
+[[files]]
+file = "kubejs/assets/grindless/textures/block/multiblock/coilgun_launcher/overlay_front_active_emissive.png"
+hash = "e9eb1796a1f6077c667e9b558eaf90a7367e0acbb96da39de3abd7b47af3fd05"
+
+[[files]]
+file = "kubejs/assets/grindless/textures/block/multiblock/coilgun_launcher/overlay_front_active_emissive.png.mcmeta"
+hash = "e9b8025fde1b09b0a4d2a38427b04f98f28a593045be6d177eb2b29164c872b0"
+
+[[files]]
 file = "kubejs/assets/grindless/textures/block/multiblock/coking_battery/overlay_front.png"
 hash = "86f8eee203c0800b32a35e57d0b608e77afb6704813de9df42c2548dd650378b"
 
@@ -810,6 +834,26 @@ hash = "860bce29e549d5d205015399698deb1e2a3eefaf1d481a14cd43ef5afbcccf9d"
 
 [[files]]
 file = "kubejs/assets/grindless/textures/block/multiblock/generator_array/overlay_front_active_emissive.png.mcmeta"
+hash = "af915735740bd046c85e66fc03c47bb31517ef64f1721726151ea5de8cf121e3"
+
+[[files]]
+file = "kubejs/assets/grindless/textures/block/multiblock/gravitational_wave_detector/overlay_front.png"
+hash = "a0ee94308c1bbdc2b580bbbb99d251de35cae5d2ceb102f9cbffb468e4a384fc"
+
+[[files]]
+file = "kubejs/assets/grindless/textures/block/multiblock/gravitational_wave_detector/overlay_front_active.png"
+hash = "29cd852f566f1753f4c45c6f7428477aebc913f5f1c907583c820830f09b920c"
+
+[[files]]
+file = "kubejs/assets/grindless/textures/block/multiblock/gravitational_wave_detector/overlay_front_active.png.mcmeta"
+hash = "af915735740bd046c85e66fc03c47bb31517ef64f1721726151ea5de8cf121e3"
+
+[[files]]
+file = "kubejs/assets/grindless/textures/block/multiblock/gravitational_wave_detector/overlay_front_active_emissive.png"
+hash = "94568862f28a4630aa56cc22e056f716a5e262ea65b8facafe3404198c1669de"
+
+[[files]]
+file = "kubejs/assets/grindless/textures/block/multiblock/gravitational_wave_detector/overlay_front_active_emissive.png.mcmeta"
 hash = "af915735740bd046c85e66fc03c47bb31517ef64f1721726151ea5de8cf121e3"
 
 [[files]]
@@ -2506,7 +2550,7 @@ hash = "597286ab53fe25d3ed999a8c75d31f5a52741a4ba3e132008120686679cf8ca3"
 
 [[files]]
 file = "kubejs/client_scripts/grindless/emi_info_lang.js"
-hash = "bdc7e93f08593a247bf18dc4a0935f142a3c9bfac755195327e88d889b6dbdfa"
+hash = "21505aa4916cfb78810210df1d35d30d76f0c690e139e3cf025d47590a5784ff"
 
 [[files]]
 file = "kubejs/client_scripts/grindless/ev_ae2_interplanetary_lang.js"
@@ -2631,6 +2675,10 @@ hash = "080ffadc6893bc601b8006678597e6f4284b8127e87dfe1dd8a65ba9f978e6d2"
 [[files]]
 file = "kubejs/client_scripts/grindless/luv_foundation_lang.js"
 hash = "f056bfc08ab6e28f8fce6ea33975c3114889231eabdfa77993ea4608f7d97464"
+
+[[files]]
+file = "kubejs/client_scripts/grindless/luv_ganymede_lang.js"
+hash = "dab8b1538460b4aa734b6b6eaa7e64e63ab7ffc657e41d015061650084abd320"
 
 [[files]]
 file = "kubejs/client_scripts/grindless/luv_hts_magnet_works_lang.js"
@@ -2794,7 +2842,7 @@ hash = "1f4b256531a0b42a6ecf399e9b692d9e4730bd4102e53aab3e1fa2c999b69e9d"
 
 [[files]]
 file = "kubejs/data/grindless/tables/hidden_until.json"
-hash = "d03c9e18c67d990d690b5bb19070a142bdf3d83967a138b9d9ca8fa91e0d98c8"
+hash = "8bc2a80bbdd101a7350bbc8c901423a93f1a0ca1fcfed9adff5ee923c569a33f"
 
 [[files]]
 file = "kubejs/data/grindless/tables/hot_cell.json"
@@ -3169,6 +3217,10 @@ file = "kubejs/server_scripts/grindless/luv/fusion.js"
 hash = "04615daf0bfd369590a79d276b19fd148f685125905662af8d68e0478ee3681a"
 
 [[files]]
+file = "kubejs/server_scripts/grindless/luv/ganymede.js"
+hash = "1fdf67a1ac7ab0f03761ff26b8d87f6287cc35eccaae90cfd1f639892e3464f1"
+
+[[files]]
 file = "kubejs/server_scripts/grindless/luv/helium_refrigerator.js"
 hash = "689cbd10e98ff67c0260040f8dd9ff215e8b31d41950b2f84abe5510158335e8"
 
@@ -3539,6 +3591,10 @@ hash = "08ab5f0d1bac2e5c67ed75fccb8fe452d1c4bd4846616ca503fe4e74f48f9ba1"
 [[files]]
 file = "kubejs/startup_scripts/grindless/luv/foundation.js"
 hash = "92ff3acae0a65f47c0192fd4363def48be95c3e91572389bb444f61dff451382"
+
+[[files]]
+file = "kubejs/startup_scripts/grindless/luv/ganymede.js"
+hash = "d4c7075da72167a7b81ab62bb9ed83d25ee9f866ba858af549c9bfe2d2e86ec1"
 
 [[files]]
 file = "kubejs/startup_scripts/grindless/luv/helium_refrigerator.js"
