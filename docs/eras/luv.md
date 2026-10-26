@@ -221,8 +221,10 @@ Five GCYR entries (datapack JSON, no Java) and ten dimensions. The ids are propo
     - mutagen takes the enriched sludge.
 - **Germanium only from Io** (GTCA's froth stays ZPM). **Sulfur concrete only on Io.**
 - **The neuro processing unit at LuV only from the organoid lab.**
-  - GTM's `circuit_assembler/neuro_processor` (80,000 EU/t) stays a ZPM-voltage recipe.
-  - GT--'s line can't run it below UV hatches: its `CircuitAssemblyLineMachine.getRealRecipe` takes a GTM circuit-assembler recipe only when the recipe's tier is below the hatches'.
+  - GTM's `circuit_assembler/neuro_processor` (80,000 EU/t) stays a ZPM-voltage recipe. From LuV the biofoundry makes its stem cells and sterile medium, so every machine that could run it on LuV power was checked (spike S0-4, GT-- 1.3.10 bytecode):
+    - GT--'s line has a single energy-hatch cell (`GTPPMachines.kt:58-105`). Its `CircuitAssemblyLineMachine.getRealRecipe` (`.kt:78-86`) refuses a circuit-assembler recipe whose EU tier is at or above the tier of the hatch's combined voltage (2 A: the hatch's tier; 4 A: one up; 16 A: two up), and GTM refuses anything above the hatch's own tier. So the NPU is refused on every LuV hatch and on a ZPM 2 A hatch, and runs from a ZPM 4 A hatch.
+    - GTM's large circuit assembler takes exactly one energy hatch.
+    - Our Universal Assembly Factory takes two, and GTM lets two hatches of a tier run the next tier's recipes. Its modifier refuses the NPU unless one hatch alone reaches ZPM (`mv/leisure_factories.js`, `HATCH_VOLTAGE_LOCKED`, LuV-A5).
 - **Europium only from the Mk1** until ZPM.
 - **Optical pipes:** GTM's two recycling recipes go (decision 18; machine 6).
 - **GCYR's satellites** have no recipe and no deploy: they stay hidden.
