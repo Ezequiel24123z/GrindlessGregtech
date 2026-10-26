@@ -29,6 +29,11 @@
 //   spent_rod_macerate        gtceu:macerator/macerate_long_naquadah_rod: 1 long naquadah rod -> 1 naquadah dust (circuit 3's feed)
 //   luv_parallel_hatch_recipe GTM's gtceu:shaped/parallel_hatch_mk2 is live as GTM made it (LuV sensor, emitter and hull, 4 ZPM circuits,
 //                             2 niobium-titanium double cables) and nothing else (crafting or GT) makes gtceu:luv_parallel_hatch
+//   luv_hatch_fits            GTM's parallel-hatch ability takes the IV and LuV hatches, and every IV plant of
+//                             global.grindless.parallelHatch.machines (the naquadah and platinum plants among them) has one part-cell
+//                             symbol taking that ability, max 1, with no tier restriction: the LuV hatch fits the IV hatch's cell
+//   luv_parallel_takers       every registered machine of global.grindless.parallelHatch.luvMachines has that same option (FAIL when a
+//                             registered one lacks it); a NOTE lists the ones not registered yet (packages still to land)
 //   pgm_mode4                 grindless:pgm_refining/luv/asteroid is live: circuit 4, 22 concentrate, 3 Ir, 3 Os, 1 sludge, the keep
 //                             boolean, exactly its published contents; no other pgm_refining recipe takes circuit 4 or keeps. FAIL when
 //                             the concentrate is not registered (LuV A1 must be merged before the integrated run)
@@ -231,7 +236,9 @@
         RecipeType: Java.loadClass('net.minecraft.world.item.crafting.RecipeType'),
         VoidingMode: Java.loadClass('com.gregtechceu.gtceu.api.machine.feature.IVoidable$VoidingMode'),
         AABB: Java.loadClass('net.minecraft.world.phys.AABB'),
-        ItemEntity: Java.loadClass('net.minecraft.world.entity.item.ItemEntity')
+        ItemEntity: Java.loadClass('net.minecraft.world.entity.item.ItemEntity'),
+        PartAbility: Java.loadClass('com.gregtechceu.gtceu.api.machine.multiblock.PartAbility'),
+        BI: Java.loadClass('net.minecraft.core.registries.BuiltInRegistries')
       }
     }
     return classes
@@ -798,11 +805,100 @@
       ' recipes, circuit 4 and the keep boolean only on ' + short(ASTEROID_ID), problems))
   }
 
+  // the blocks GTM's parallel-hatch ability accepts (lib/parallel_hatch.js's part() asks for the ability with no tier, so every one of
+  // them fits any cell that takes the option): { id: true }
+  function hatchBlocks() {
+    var c = lazy()
+    var out = {}
+    asArray(c.PartAbility.PARALLEL_HATCH.getAllBlocks()).forEach(function (b) { out[String(c.BI.BLOCK.getKey(b))] = true })
+    return out
+  }
+
+  // a structure description's parallel-hatch option (gg_test_naquadah_plant's parallel_hatch_option reading): { problems, text }. One
+  // symbol takes it (a controller reads one hatch), limited to 1, with no tier restriction, in at least one cell
+  function hatchOption(id) {
+    var desc = global.grindless.patterns.describe(id)
+    if (!desc) return { problems: [short(id) + ': no structure description'], text: short(id) + ' (no description)' }
+    var problems = []
+    var symbols = []
+    var cells = 0
+    var limits = []
+    Object.keys(desc.symbols).forEach(function (ch) {
+      var sym = desc.symbols[ch]
+      var opts = sym.kind === 'oneOf' ? sym.options : [sym]
+      var ph = opts.filter(function (o) { return o.kind === 'part' && o.ability === 'parallel_hatch' })
+      if (ph.length === 0) return
+      ph.forEach(function (o) {
+        symbols.push(ch)
+        limits.push(JSON.stringify(o.limits || null))
+        if (!o.limits || o.limits.max !== 1) problems.push(short(id) + ': "' + ch + '" takes the hatch with limits ' + JSON.stringify(o.limits || null))
+        if (o.tiers !== undefined) problems.push(short(id) + ': "' + ch + '" takes only tiers ' + JSON.stringify(o.tiers))
+      })
+      desc.slices.forEach(function (rows) {
+        rows.forEach(function (row) {
+          for (var i = 0; i < row.length; i++) if (row.charAt(i) === ch) cells++
+        })
+      })
+    })
+    if (symbols.length === 0) problems.push(short(id) + ': no part cell takes a parallel hatch')
+    else if (symbols.length > 1) problems.push(short(id) + ': ' + symbols.length + ' symbols take a parallel hatch (a controller reads one)')
+    if (symbols.length > 0 && cells === 0) problems.push(short(id) + ': the hatch symbol is in no cell')
+    return {
+      problems: problems,
+      text: short(id) + ' ' + desc.slices[0][0].length + 'x' + desc.slices[0].length + 'x' + desc.slices.length + ' "' + symbols.join('') + '" in ' + cells +
+        ' cells, limits ' + limits.join(',')
+    }
+  }
+
+  // the IV plants (the naquadah and platinum plants among them) take GTM's LuV hatch in the same cell as the IV one
+  function luvHatchFitsCheck() {
+    var problems = []
+    var fits = hatchBlocks()
+    ;['gtceu:iv_parallel_hatch', LUV_HATCH].forEach(function (id) {
+      if (fits[id] !== true) problems.push(id + ' is not a block of GTM\'s parallel-hatch ability')
+    })
+    var list = PH().machines || []
+    ;[NAQ, PLANT].forEach(function (id) { if (list.indexOf(id) < 0) problems.push(id + ' is not in global.grindless.parallelHatch.machines') })
+    var lines = []
+    list.forEach(function (id) {
+      var h = hatchOption(id)
+      lines.push(h.text)
+      problems = problems.concat(h.problems)
+    })
+    check('luv_hatch_fits', problems.length === 0, withProblems('the ability takes [' + Object.keys(fits).map(short).sort().join(', ') + ']; ' + lines.join(' ; '), problems))
+  }
+
+  // the LuV machines lib/parallel_hatch.js lists: every registered one takes the hatch; the others are packages still to land
+  function luvTakersCheck() {
+    var list = PH().luvMachines || []
+    var problems = []
+    var registered = []
+    var pending = []
+    var lines = []
+    if (list.length === 0) problems.push('global.grindless.parallelHatch.luvMachines is missing or empty')
+    list.forEach(function (id) {
+      var def = GTRegistries.MACHINES.get(rl(id))
+      if (def === null || def === undefined) {
+        pending.push(id)
+        return
+      }
+      registered.push(id)
+      var h = hatchOption(id)
+      lines.push(h.text)
+      problems = problems.concat(h.problems)
+    })
+    if (pending.length > 0) note('luv_parallel_takers', 'not registered yet (their packages have not landed): ' + pending.map(short).join(', '))
+    check('luv_parallel_takers', problems.length === 0, withProblems(registered.length + ' of ' + list.length + ' registered' +
+      (lines.length > 0 ? ': ' + lines.join(' ; ') : ' (none yet)'), problems))
+  }
+
   function staticChecks() {
     safely('ids', idsCheck)
     safely('registration', registrationCheck)
     naquadahChecks()
     safely('luv_parallel_hatch_recipe', luvHatchCheck)
+    safely('luv_hatch_fits', luvHatchFitsCheck)
+    safely('luv_parallel_takers', luvTakersCheck)
     safely('pgm_mode4', pgmMode4Check)
   }
 
