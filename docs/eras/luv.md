@@ -411,11 +411,11 @@ Every recipe has a programmed circuit (c*n*) or an input that no other recipe of
   | 3 | Gelatin | 6 collagen + 1,500 mB phosphoric acid + 4,500 mB water → 4 gelatin + 1 phosphorus | 480 × 4,800 | `mixer/gelatin_mixture` (×1.5) + `centrifuge/gelatin` |
   | 4 | Agar | 1 gelatin + 1,000 mB distilled water → 1 agar | 480 × 600 | `autoclave/agar` |
   | 5 | Bacterial sludge | 1,000 mB biomass + 1,000 mB bacteria → 1,000 mB sludge | 1,920 × 600 | `large_chemical_reactor/bacterial_sludge` |
-  | 6 | Mutagen | 1,000 mB sludge + 1 tiny U-235 → 100 mB mutagen | 7,680 × 101 | `brewery/enriched_bacterial_sludge_from_u235` + `distillery/mutagen` |
+  | 6 | Mutagen | 1,000 mB sludge + 1 tiny U-235 → 100 mB mutagen | 7,610 × 101 | `brewery/enriched_bacterial_sludge_from_u235` + `distillery/mutagen` |
   | 7 | Sterile medium | 4,000 mB mutagen + 4 meat + 4 salt + 4 calcium + 4 agar → 4,000 mB sterilized growth medium | 7,680 × 2,000 | `mixer/raw_growth_medium` + 40 × `fluid_heater/sterile_growth_medium` |
   | 8 | Stem cells | 500 mB bacteria + 500 mB medium + 1 osmiridium dust → 32 stem cells + 500 mB sludge | 30,720 × 300 | `large_chemical_reactor/stem_cells` |
-  | 9 | Engineered barley seed | 1 wheat seeds + 250 mB bacteria → 1 `grindless:engineered_barley_seed` | 1,920 × 600 *(tune)* | ours: the bacteria as the vector (Agrobacterium, real) |
-  | 10 | Engineered tobacco seed | 1 beetroot seeds (the stand-in) + 250 mB bacteria → 1 `grindless:engineered_tobacco_seed` | 1,920 × 600 *(tune)* | ours |
+  | 9 | Engineered barley seed | 1 wheat seeds + 250 mB bacteria → 1 `grindless:engineered_barley_seed` | 1,920 × 600 | ours: the bacteria as the vector (Agrobacterium, real) |
+  | 10 | Engineered tobacco seed | 1 beetroot seeds (the stand-in) + 250 mB bacteria → 1 `grindless:engineered_tobacco_seed` | 1,920 × 600 | ours |
 
 - **Byproducts** (kept: `G.noVoiding` in both places):
   - diluted sulfuric acid → back to sulfuric acid (the pack's usual reconcentration);
@@ -426,13 +426,15 @@ Every recipe has a programmed circuit (c*n*) or an input that no other recipe of
   - That medium needs 1,000 mB of mutagen, which needs 10,000 mB of sludge.
   - So about 10,000 mB of bacteria per NPU: 10 culture runs on Europa.
   - Plant collagen from the ring (its c6) can replace c1–c2.
-- **Structure:** a sealed hall, about 9 × 6 × 9:
+- **Structure:** a sealed hall, 9 × 6 × 9 (as built, `startup_scripts/grindless/luv/biofoundry.js`):
   - plascrete with cleanroom glass;
   - four fermenter columns of laminated glass and clean stainless steel casing;
-  - an autoclave bay;
-  - GT lamps as the UV ceiling;
-  - an iron-door airlock.
-- **Controller:** LuV hull + 2 LuV pumps + LuV sensor + 4 LuV circuits *(tune)*.
+  - an autoclave bay (heat-proof casings under a steel pipe header);
+  - GT lamps (any colour) as the UV ceiling;
+  - an iron-door airlock;
+  - every part on the back wall (21 cells: 1–2 energy hatches, buses, hatches and the parallel hatch).
+- **As built:** steps 1–8 are composed at every load from GTM's live recipes (`tables/biofoundry.json`, `lib/compose.js`), each spent at the highest EU/t of its stages with the stages' energy; steps 9–10 are the table's own. Every recipe has its own circuit.
+- **Controller:** LuV hull + 2 LuV pumps + LuV sensor + 4 LuV circuits, assembler 7,680 EU/t × 600 t (`grindless:assembler/biofoundry`).
 - **Crossings:**
   - LV: the creature simulator's meat and bones;
   - HV and EV: salt and calcium;

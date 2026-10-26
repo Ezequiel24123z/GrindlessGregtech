@@ -12,6 +12,7 @@
 //      (minecraft:smelting) is read as GTM's electric furnace runs it (GTRecipeType#toGTrecipe: the cooking time as duration, at the
 //      furnace's EU/t, which the caller reads from GTM and passes as opts.furnaceEUt).
 //      Keys: 'i:<item id>' and 'f:<fluid id>'. A tag is turned into GTM's item or fluid (forge:dusts/<m> -> gtceu:<m>_dust,
+//      forge:small_dusts/<m> and forge:tiny_dusts/<m> -> gtceu:small_<m>_dust and gtceu:tiny_<m>_dust,
 //      forge:ingots/<m> -> gtceu:<m>_ingot, forge:hot_ingots/<m> -> gtceu:hot_<m>_ingot, forge:gems/<m> -> gtceu:<m>_gem,
 //      forge:purified_ores/<m> -> gtceu:purified_<m>_ore, a fluid tag forge:<m> -> gtceu:<m> or minecraft:<m>).
 //      opts.patch(id, json), if given, may change a stage's JSON before it is read (it returns the JSON to read): the naquadah plant
@@ -72,6 +73,8 @@
   function itemOfTag(tag) {
     var forms = [
       [/^[^:]*:dusts\/(.+)$/, function (m) { return 'gtceu:' + m + '_dust' }],
+      [/^[^:]*:small_dusts\/(.+)$/, function (m) { return 'gtceu:small_' + m + '_dust' }],
+      [/^[^:]*:tiny_dusts\/(.+)$/, function (m) { return 'gtceu:tiny_' + m + '_dust' }],
       [/^[^:]*:ingots\/(.+)$/, function (m) { return 'gtceu:' + m + '_ingot' }],
       [/^[^:]*:hot_ingots\/(.+)$/, function (m) { return 'gtceu:hot_' + m + '_ingot' }],
       [/^[^:]*:gems\/(.+)$/, function (m) { return 'gtceu:' + m + '_gem' }],
