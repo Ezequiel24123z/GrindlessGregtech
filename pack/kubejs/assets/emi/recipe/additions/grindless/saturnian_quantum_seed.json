@@ -1,0 +1,5 @@
+{
+  "type": "emi:info",
+  "stacks": ["item:grindless:saturnian_quantum_seed"],
+  "text": ["emi.grindless.info.saturnian_quantum_seed.0"]
+}
