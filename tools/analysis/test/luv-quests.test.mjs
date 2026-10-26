@@ -50,6 +50,8 @@ function registered() {
   for (const f of fs.readdirSync(luvDir)) {
     const s = fs.readFileSync(path.join(luvDir, f), 'utf8');
     for (const m of s.matchAll(/create\('([a-z_]+)', 'multiblock'\)/g)) ids.add('gtceu:' + m[1]);
+    // machine ids the scripts name in a constant (E.cryobot = 'gtceu:cryobot', var DRILL = 'gtceu:harpoon_anchor_drill', ...)
+    for (const m of s.matchAll(/(?:=|:)\s*'(gtceu:[a-z_]+)'/g)) ids.add(m[1]);
     for (const m of s.matchAll(/names = \[([^\]]+)\]/g)) for (const n of m[1].matchAll(/'([a-z_]+)'/g)) ids.add('gtceu:' + n[1]);
   }
   const industry = read('pack/kubejs/startup_scripts/grindless/luv/orbital_industry.js');

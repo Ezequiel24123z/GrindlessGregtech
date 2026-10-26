@@ -6,7 +6,7 @@
 // The pending clusters sit in the bands below the landed ones; their ids follow luv.md and are checked when their package lands.
 import { I, F, M, n, L, via, build, structure, network } from './pl-lib.mjs';
 
-export const LANDED = new Set(['A1', 'A2', 'A3', 'A4', 'A5', 'B2', 'B3', 'B4', 'B6', 'B9', 'B10']);
+export const LANDED = new Set(['A1', 'A2', 'A3', 'A4', 'A5', 'B2', 'B3', 'B4', 'B5', 'B6', 'B8', 'B9', 'B10']);
 
 export default {
   file: 'pl_luv',
@@ -321,6 +321,7 @@ export default {
         n('ir', 17, 1.25, I('gtceu:iridium_dust'), 'Iridium', { kind: 'product', from: ['pplant'] }),
         n('os', 17, 2.75, I('gtceu:osmium_dust'), 'Osmium', { kind: 'product', from: ['pplant'] }),
         n('pgs', 17, 4, I('gtceu:platinum_group_sludge_dust'), 'Platinum Group Sludge', { kind: 'by', from: ['pplant'], end: 'circuit 2', sub: 'Circuit 2: platinum, palladium, rhodium, ruthenium' }),
+        n('midback', 12, 3.75, I('gtceu:meteoric_iron_dust'), 'Meteoric Iron Dust, Back', { kind: 'ret', from: ['aproc'], sub: 'From the split and the ore line: circuit 3 runs Mond on it' }),
       ],
     },
     miner: {
@@ -388,8 +389,9 @@ export default {
           kind: 'ours', from: ['probe', 'head'],
           desc: 'A melt probe sinks through the ice and pays out its tether on the way down. The ocean underneath is the only place with anything alive in it.',
         }),
-        n('sample', 5, -0.75, I('grindless:europan_ocean_sample'), 'Europan Ocean Sample', { from: ['cryobot'] }),
-        n('brine', 5, 0.75, F('gtceu:europan_brine'), 'Europan Brine', { from: ['cryobot'] }),
+        n('sample', 5, 0.75, I('grindless:europan_ocean_sample'), 'Europan Ocean Sample', { from: ['cryobot'] }),
+        n('brine', 5, -0.75, F('gtceu:europan_brine'), 'Europan Brine', { from: ['cryobot'] }),
+        n('mgso4', 7.5, -0.75, I('gtceu:magnesium_sulfate_dust'), 'Magnesium Sulfate', { kind: 'by', from: ['brine'], by: ['gtceu:centrifuge'], end: 'electrolyzer', sub: 'Centrifuged with salt and water; the electrolyzer splits it' }),
         n('h2o2', 5, 2.25, F('gtceu:hydrogen_peroxide'), 'Hydrogen Peroxide', { kind: 'raw', sub: 'GTM\'s chemical reactor' }),
         n('ext2', 5, 3.75, I('grindless:chondritic_extract'), 'Chondritic Extract', { kind: 'raw', sub: 'From the belt' }),
         n('bioreactor', 7.5, 1.5, M('gtceu:algae_bioreactor', 'gtceu:bioreactor'), 'Algae Bioreactor', {
