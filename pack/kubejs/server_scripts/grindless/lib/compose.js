@@ -16,11 +16,14 @@
 //      forge:ingots/<m> -> gtceu:<m>_ingot, forge:hot_ingots/<m> -> gtceu:hot_<m>_ingot, forge:gems/<m> -> gtceu:<m>_gem,
 //      forge:purified_ores/<m> -> gtceu:purified_<m>_ore, a fluid tag forge:<m> -> gtceu:<m> or minecraft:<m>).
 //      opts.patch(id, json), if given, may change a stage's JSON before it is read (it returns the JSON to read): the naquadah plant
-//      gives GT--'s neutron activator stage, whose recipe carries no EU, the EU of the accelerators it replaces.
+//      gives GT--'s neutron activator stage, whose recipe carries no EU, the EU of the accelerators it replaces. opts.tagItems
+//      ({ '<tag>': '<item id>' }) names the item of a tag with no GTM form (the naquadah plant's GT-- Pd/C catalyst).
 //   2. compose(plan, steps) solves the linear system of the stages (Gauss with partial pivoting): every `given` key is used up to its
 //      amount (the batch) and every `linked` key (an intermediate, or a catalyst the line gives back) nets to zero. Given + linked must
 //      be as many as the stages. Everything else the stages touch is a free input (net < 0) or output (net > 0). The energy is the SUM
-//      of every stage's EU/t x duration, scaled by how often it runs: no discount.
+//      of every stage's EU/t x duration, scaled by how often it runs: no discount. An optional `recovered` list names free keys the
+//      plant keeps inside as a charge (LuV's naquadah mode 2: xenon, gold, antimony, Pd/C): their net is taken out of the balance and
+//      returned apart in `recovered`, and the caller puts the charge in the recipe.
 //   3. contents(composed, opts) turns the balance into recipe contents: a whole number of items, a fraction as a chance (of the output,
 //      or of using up the input), fluids in whole millibuckets (inputs rounded up, outputs to the nearest), and the energy as
 //      ceil(energy / maxEut) ticks at ceil(energy / ticks) EU/t (costOf): a recipe of the machine's tier that never costs less than the
@@ -29,7 +32,7 @@
 // Use (inside ServerEvents.recipes; every function only reads):
 //   var C = global.grindless.compose
 //   var read = C.gather(event, ['gtceu:chemical_reactor/x', ...], { furnaceEUt: 4 })     // { steps: { id: stage }, read: n }
-//   var composed = C.compose(plan, read.steps)                                            // { net, order, energy, sources } or { error }
+//   var composed = C.compose(plan, read.steps)                                            // { net, order, energy, sources, recovered } or { error }
 //   var made = C.contents(composed, { maxEut: 7680 })                                     // { itemsIn, fluidsIn, itemsOut, fluidsOut, ... }
 //
 // Rhino: var + function inside every function (this Rhino throws "redeclaration of var" for const/let in code that runs more than once).
@@ -69,8 +72,13 @@
     return id === null ? null : { id: id, amount: Number(content.amount) }
   }
 
-  // an item tag of GTM -> its item
-  function itemOfTag(tag) {
+  // an item tag of GTM -> its item. tagItems ({ '<tag>': '<item id>' }, a plan's table) names the item of a tag that has no GTM form
+  // (GT--'s forge:catalyst/palladium_on_carbon is gtnn:palladium_on_carbon_catalyst)
+  function itemOfTag(tag, tagItems) {
+    if (tagItems && tagItems[tag] !== undefined) {
+      var named = String(tagItems[tag])
+      return Item.exists(named) ? named : null
+    }
     var forms = [
       [/^[^:]*:dusts\/(.+)$/, function (m) { return 'gtceu:' + m + '_dust' }],
       [/^[^:]*:small_dusts\/(.+)$/, function (m) { return 'gtceu:small_' + m + '_dust' }],
@@ -91,16 +99,16 @@
   }
 
   // { item } | { tag } | { type: 'gtceu:sized', count, ingredient: { item | tag } } | [ alternatives ] -> { id, count } or null
-  function itemOf(content) {
+  function itemOf(content, tagItems) {
     if (!content) return null
-    if (Array.isArray(content)) return content.length > 0 ? itemOf(content[0]) : null
+    if (Array.isArray(content)) return content.length > 0 ? itemOf(content[0], tagItems) : null
     var count = Number(content.count || 1)
     var source = content.ingredient ? content.ingredient : content
     if (Array.isArray(source)) source = source.length > 0 ? source[0] : null
     if (!source) return null
     if (source.item) return { id: String(source.item), count: count }
     if (source.tag) {
-      var id = itemOfTag(String(source.tag))
+      var id = itemOfTag(String(source.tag), tagItems)
       return id === null ? null : { id: id, count: count }
     }
     return null
@@ -151,6 +159,7 @@
   function parseStage(id, j, opts) {
     if (j && j.type === 'minecraft:smelting') return parseSmelting(id, j, opts)
     if (!j.inputs && !j.outputs) return { id: id, error: 'an empty recipe (a line that was emptied)' }
+    var tagItems = opts && opts.tagItems ? opts.tagItems : null
     var eut = energyOf(j)
     if (eut === null) return { id: id, error: 'unreadable energy' }
     var duration = Number(j.duration)
@@ -163,7 +172,7 @@
     var inputs = j.inputs && j.inputs.item ? j.inputs.item : []
     for (i = 0; i < inputs.length; i++) {
       if (isCircuit(inputs[i].content)) continue
-      var it = itemOf(inputs[i].content)
+      var it = itemOf(inputs[i].content, tagItems)
       if (it === null) return { id: id, error: 'unreadable item input ' + i }
       add('i:' + it.id, -it.count * shareOf(inputs[i]))
     }
@@ -175,7 +184,7 @@
     }
     var outputs = j.outputs && j.outputs.item ? j.outputs.item : []
     for (i = 0; i < outputs.length; i++) {
-      var io = itemOf(outputs[i].content)
+      var io = itemOf(outputs[i].content, tagItems)
       if (io === null) return { id: id, error: 'unreadable item output ' + i }
       add('i:' + io.id, io.count * shareOf(outputs[i]))
     }
@@ -297,7 +306,19 @@
         return { error: givenKeys[h] + ' is used ' + used + ', not ' + plan.given[givenKeys[h]] }
       }
     }
-    return { net: net, order: order, energy: energy, sources: sources }
+    // the recovered keys (a plan's optional list): what the stages lose of a reagent the plant keeps inside as a charge. Their net leaves
+    // the balance and is reported apart, so the recipe neither takes nor gives them; the caller adds the charge itself.
+    var recovered = {}
+    var recoveredKeys = Array.isArray(plan.recovered) ? plan.recovered : []
+    for (var r = 0; r < recoveredKeys.length; r++) {
+      var rk = String(recoveredKeys[r])
+      if (plan.given[rk] !== undefined || plan.linked.indexOf(rk) >= 0) return { error: rk + ' is recovered and also given or linked' }
+      recovered[rk] = net[rk] || 0
+      delete net[rk]
+      var at = order.indexOf(rk)
+      if (at >= 0) order.splice(at, 1)
+    }
+    return { net: net, order: order, energy: energy, sources: sources, recovered: recovered }
   }
 
   function wholeAndChance(x) {

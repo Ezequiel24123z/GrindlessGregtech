@@ -948,8 +948,9 @@ This plant takes slot 16 only if spike S0-3 shows that a second station can't be
 
 ### Naquadah plant, mode 2: the exact balance
 
-`lib/compose.js` composes the mode at every load from GT--'s live recipes, pinned by id, as mode 1 is. A pinned recipe that comes back empty (no inputs and no outputs) stops the load with an error. The dump has three such placeholders, and all are rejected:
+`lib/compose.js` composes the mode at every load from GT--'s live recipes, pinned by id, as mode 1 is. A pinned recipe that comes back empty (no inputs and no outputs) stops the mode with an error. GT-- empties four GTM placeholders (`NaquadahLine#remove`), and all are rejected:
 - `gtceu:centrifuge/impure_enriched_naquadah_solution_separation`;
+- `gtceu:centrifuge/acidic_enriched_naquadah_separation`;
 - `gtceu:centrifuge/acidic_naquadria_solution_separation`;
 - `gtceu:centrifuge/impure_naquadria_solution_separation`.
 
@@ -1019,6 +1020,10 @@ They are 5 EU/t × 100 t with nothing in and nothing out.
   - **Out:** 5 enriched naquadah sulfate + 1 at 62.5 %; 1 trinium sulfide; 2,375 mB impure naquadria solution; 1 titanium ingot; about 10,000 mB HF.
   - **EU:** about 109 M *(composed when built)*.
   - **What it means:** six rods that gave 6 G EU come back as 0.94 enriched ingot. The fuel cycle returns about 16 %, so reactor III is never a perpetual engine (rule 8).
+- **As built (A2, spike S0-11 static):** `tables/naquadah_plant.json` (circuits 2 and 3), `iv/naquadah_plant.js`, `lib/compose.js` (`recovered` keys and `tagItems`), checked by `tools/analysis/test/naquadah-mode2.test.mjs` on the pinned recipes (`tools/analysis/fixtures/gtnn-1.3.10-naquadah-line.json`; jar and dump agree).
+  - **Circuit 2** composes to exactly the run above: 4 oxide + 36,000 mB F₂ + 26,500 mB H₂ + 8,000 mB H₂SO₄ + Pu-Be at 75 of 10,000 → 11 sulfate + 1 at 25 %, 2 trinium sulfide, 3 Ti + 1 at 50 %, 750 mB impure naquadria, 8,500 mB HF. Held: 1,000 mB xenon, 2,500 mB HSbF₆, 4 AuF₃, 1 Pd/C at 400 of 10,000. **30,717 EU/t × 5,984 t = 183.8 M EU**: 0.2 M over the figure above, the vacuum freezer that cools the batch's 0.875 hot titanium (mode 1 counts it too).
+  - **Circuit 3** (6 naquadah dust; one spent long rod macerates to one dust, `gtceu:macerator/macerate_long_naquadah_rod`): + 18,000 mB F₂ + 15,000 mB H₂ + 4,000 mB H₂SO₄ + Pu-Be at 38 → 5 sulfate + 1 at 62.5 %, 1 trinium sulfide, 1 Ti, 2,375 mB naquadria, 10,000 mB HF. Pd/C at 200. **30,716 EU/t × 3,558 t = 109.3 M EU.**
+  - Recovered per circuit-2 run (what GT-- as it runs would lose): 2,000 mB xenon, 2 gold, 38 SbF₃ against 4 Sb₂O₃ given, 4 Pd/C.
 
 ### Platinum plant, mode 4: asteroid platinum metals, absolute
 
@@ -1031,6 +1036,11 @@ They are 5 EU/t × 100 t with nothing in and nothing out.
 - **The sum per 22 concentrate:** Pt 6 + Pd 4.20 + Ru 4.49 + Rh 1.35 + Ir 3 + Os 3 = **22.04 units**. One concentrate is one unit of platinum metal, so the balance closes.
   - The split is 27 / 19 / 20 / 6 / 14 / 14 %, against the CI chondrites' 30 / 17 / 21 / 4 / 14 / 15 %.
 - **Yield:** 22 concentrate ← 352 crushed meteoric iron, about 16 harpoon-drill runs.
+- **As built (A2):** the list above (mode 3 ×1.5) cannot give 3 Ir + 3 Os, so the mode is composed: our opening stage (`tables/asteroid_pgm.json`: 22 concentrate + 15 saltpeter + 1,500 mB salt water → 1 sludge + 6 rarest metal mixture + 2,700 mB OsO₄ + 1,500 mB steam; 138,720 EU, 1.5 × the Mercury fusion's plus one sludge through mode 1's attack), then mode 3's live GT-- chain. `grindless:pgm_refining/luv/asteroid`, checked by `tools/analysis/test/platinum-asteroid.test.mjs`:
+  - **In:** 22 concentrate + 15 saltpeter + 3 calcium + 1,500 mB salt water + 10,500 mB HCl + 21,000 mB H₂ + the electrode (0.1 %).
+  - **Out:** 1 platinum group sludge + 3 Ir + 3 Os + 3 platinum sludge residue + 3 metal sludge + 12 CaCl₂ + 8,700 mB water + 1,500 mB steam.
+  - **EU:** 1,920 EU/t × 1,106 t (2.12 M EU). It refuses voiding (`grindless_pgm_keep`); modes 1–3 stay voidable.
+  - The sum per 22 concentrate stays 22.04 units. Until B5 removes A1's EMI hiding of the concentrate, EMI drops this recipe with it.
 
 ### Cryogenic fuel tank
 
