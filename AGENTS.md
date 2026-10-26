@@ -156,6 +156,9 @@ Gregtech Grindless is a GregTech Modern pack (Minecraft 1.20.1, Forge) in which 
   | QBC terminal (client) | 13056–13119: the Overworld at Y 98–112 (all of Z 0–63, force-loaded while it runs); on the Moon (`gcyr:luna`) and Mars (`gcyr:mars`) X 13084–13092, Z 28–36, Y 198–214 (7×7 floor at Y 198); the 1,000+ block case only stands the player on natural ground at X 13088, Z 1104+ |
   | wireless energy | 13312–13375, Z 0–63: Overworld Y 98–112 and Moon Y 198–214; restart fixtures use unloaded End metadata only, never blocks or chunk loading. Wireless fixtures take turns on this shared band. |
   | hologram projector | 16384–16447, Z 0–63 (client: X 16416–16447, Z 40–55; LuV bands skip it) |
+  | LuV orbital solar station | 15872–15935, Z 0–63; Earth orbit Y 198–214 |
+  | LuV microgravity smelter and wake shield | 16128–16191, Z 0–63; Earth orbit Y 198–214 |
+  | LuV crystal grower, hydroponic ring and organoid lab | 16640–16703, Z 0–63; Earth orbit Y 198–214 |
   | chests and furnaces (client) | 18688–18751 (uses X 18688–18703, Z 0–15, Y 98–112) |
 
   For a new test, keep going in steps of 256.
