@@ -2,6 +2,7 @@
 // what carries and stores it. Positions are relative to each cluster (pl-model.mjs places the clusters). Every number in a node's
 // text is a figure (pl-lib.mjs#P) that pl-check.mjs recomputes from the dump, the pack's config or a script.
 import { I, F, M, n, L, E, P, engineFluid, boilerWater, build, structure, network } from './pl-lib.mjs';
+import { STATION_PACKAGES } from '../luv-stations.mjs';
 
 // The wireless band uses the wireless energy branch's ids (ezequiel24123z-wireless-energy, bd7759a), which exist only once that
 // branch is merged. false puts the marked slot back instead (GG_QUESTS_EXPECTED.power: [90, 102] with the band, [83, 93] without,
@@ -12,7 +13,11 @@ const WITH_WIRELESS = true;
 // or cluster tagged pkg: 'B6' (or ['B1', 'B6']: all of them) is left out, with every arrow into it, until its packages are here:
 // when one lands, adding it to this set is the whole change. B7 lands as one of two: 'B7T' is the flux-tube tether, 'B7S' the
 // sulfur-iodine plant that takes its slot if a second station fails (luv.md, 16b). The Io sites also wait for B1's places.
-const LANDED = new Set(['A1', 'A2', 'A3', 'A4', 'A5', 'B1', 'B2', 'B3', 'B4', 'B5', 'B6', 'B8', 'B9', 'B10']);
+// S03, B7T and B7S are not listed here: they follow tables/stations.json (../luv-stations.mjs, the rule of lib/stations.js), so the
+// tab never names the machine the pack leaves out. After the table flips, regenerate luv_age, pl_luv and power and lint
+// (docs/quests.md, section 14).
+export const LANDED = new Set(['A1', 'A2', 'A3', 'A4', 'A5', 'B1', 'B2', 'B3', 'B4', 'B5', 'B6', 'B8', 'B9', 'B10', ...STATION_PACKAGES]);
+if (LANDED.has('B7T') && LANDED.has('B7S')) throw new Error('B7T and B7S are alternatives: only one of them lands');
 
 // fuel figures, EU per mB, from the dump's recipes (they already carry the pack's x2, power/generators.js)
 const COMBUSTION = [

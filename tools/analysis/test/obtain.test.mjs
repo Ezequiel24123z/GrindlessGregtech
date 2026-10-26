@@ -237,7 +237,7 @@ test('hidden table (--table): B with its era, C with recipes that only exist for
   ];
   const classes = [
     { class: 'A', materials: ['perlite'], reason: 'a' },
-    { class: 'B', materials: ['omega'], until: 'luv', reason: 'arrives in LuV' },
+    { class: 'B', materials: ['omega'], until: 'luv', unless: 'tether', reason: 'arrives in LuV' },
     { class: 'C', materials: ['beta'], reason: 'no vein' },
     { class: 'C', materials: ['grindless:old_bit'], keepRecipes: true, reason: 'old saves' },
     { class: 'C', fallback: true, materials: ['*'], reason: 'rest' },
@@ -248,6 +248,8 @@ test('hidden table (--table): B with its era, C with recipes that only exist for
   const byMat = Object.fromEntries(table.groups.map((x) => [x.material, x]));
   assert.equal(byMat.gamma.until, 'ev', 'B with the stage\'s era');
   assert.equal(byMat.omega.until, 'luv', 'B with its rule\'s era');
+  assert.equal(byMat.omega.unless, 'tether', 'a rule\'s unless (a stations switch) reaches its group');
+  assert.ok(!('unless' in byMat.gamma) && !('unless' in byMat.beta), 'no unless without one in the rule');
   assert.ok(!('removeRecipes' in byMat.gamma), 'a B\'s recipes stay');
   assert.deepEqual(byMat.salt_water.fluids, ['gtceu:salt_water']);
   assert.ok(byMat.salt_water.items.includes('gtceu:salt_water_bucket'));
