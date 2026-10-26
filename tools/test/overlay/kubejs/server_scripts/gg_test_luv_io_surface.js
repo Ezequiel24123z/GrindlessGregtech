@@ -606,7 +606,9 @@
             var part = at(m.site, m.pos[role])
             if (!part) return
             if (typeof part.getInventory === 'function') emptyBus(part)
-            if (typeof part.getCircuitInventory === 'function') part.getCircuitInventory().setStackInSlot(0, lazy().ItemStack.EMPTY)
+            if (typeof part.getCircuitInventory === 'function' && Number(part.getCircuitInventory().getSlots()) > 0) {
+              part.getCircuitInventory().setStackInSlot(0, lazy().ItemStack.EMPTY)
+            }
             if (part.tank) setTank(part, '', 0)
           } catch (e) { problems.push('empty ' + role + ': ' + e) }
         })
