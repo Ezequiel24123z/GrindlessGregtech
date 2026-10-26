@@ -242,7 +242,10 @@ Five GCYR entries (datapack JSON, no Java) and ten dimensions. The ids are propo
   | `gold_and_aluminium_to_uranium_238_plasma` | 24,576 | 140 M | **cut:** uranium comes from the End |
   | `gallium_and_radon_to_duranium_plasma` | 16,384 | 140 M | **to the Mk2:** re-registered with a 200 M start, since ZPM's tritanium needs duranium |
 
-  - **Not Mk1 recipes,** because of their tier or start: Xe + Zn → Pu-239 (49,152 EU/t), Kr + Ce → Pu-241, and the plasmas of N, O, Fe, Sn, Ar, Ni, Ti, Zn and S.
+  - **Not Mk1 recipes** (B10's audit of the dump, all 33 recipes of the type: `data/grindless/tables/fusion_mk1.json`), because of their tier or start, untouched:
+    - EU/t above LuV: Xe + Zn → Pu-239, Kr + Ce → Pu-241, Ag + He-3 → Sn, Lu + Cr → Am, enriched naquadah + Rn → naquadria, Pu-241 + H → Am plasma, Am + naquadria → neutronium, californium, oganesson, and GTCA's titanium and zinc plasmas;
+    - a start above 160 M EU: the plasmas of N, O, Fe, Ar and Ni, GTCA's sulfur plasma, Ag + Li → In, Au + Hg → Rn, As + Ru → Ds, Ti + Du → tritanium, and the three excited fuels (uranium, plutonium and naquadah based).
+  - `server_scripts/grindless/luv/fusion.js` logs an error for any recipe of the type that the Mk1 could run and the audit does not list.
   - **Other producers of the cut products, checked:**
     - osmium: the platinum plant's mode 3 and the Mercury solar works, which GTM's osmium chain depends on;
     - U-235: the hot cell's enrichment and GTM's UF₆ electrolysis (the hot cell's line);
@@ -1107,14 +1110,15 @@ They are 5 EU/t × 100 t with nothing in and nothing out.
 | Orbital solar station | Earth orbit | 630 a lit panel; 40,320 for 64 | 38,304 | the panels | no |
 | Volcanic intake | Io | up to 131,072 | 124,518 | SO₂ charge; a bundle about every hour per module | no |
 | Flux-tube tether | Io orbit | up to 131,072 | 124,518 | a spool about every hour; 50 mB argon a run | no |
-| Mk1 calcium plasma (GTCA) → GTM's plasma turbine | Earth | about 39,400 net per Mk1 *(verify on the bench)* | about 37,400 | 128 mB Mg + 128 mB O₂ a run | yes |
+| Mk1 calcium plasma (GTCA) → GTM's plasma turbine | Earth | about 78,800 net per Mk1 (one fusion overclock; *the bench confirms*) | about 74,900 | 256 mB Mg + 256 mB O₂ every 128 t | yes |
 | Mk1 D + T | Earth | about 1,640 on average per full reactor's tritium | — | tritium | yes |
 | RTG cell (IV) | anywhere | 2,048 | 1,946 | a pellet an hour | no |
 
 - **The calcium plasma, from the dump** (decision 19: the net figure is checked on the bench in B10):
   - A run is 7,680 EU/t × 128 t (983,040 EU) for 16 mB of plasma.
   - `gtceu:plasma_generator/calcium_plasma` gives 2,048 EU/t × 184 t per mB, already doubled: 6.03 M EU.
-  - Net, 5.05 M EU per 128 t, so about 39,400 EU/t per Mk1, paid in magnesium. It is LuV's only fusion power that is not tied to tritium.
+  - Net, 5.05 M EU a run, paid in magnesium. It is LuV's only fusion power that is not tied to tritium.
+  - **B10, from GTM 7.5.3's code:** the Mk1 caps its voltage at LuV (`FusionReactorMachine#getMaxVoltage`), and its overclock doubles the EU/t and halves the time (`FUSION_OC`). The recipe is IV, so it gets one overclock: 15,360 EU/t × 64 t, the same 983,040 EU a run. Back to back, that is about **78,800 EU/t net per Mk1**, twice the first estimate of 39,400, which left the overclock out. Nd + H → Eu is a LuV recipe and gets none. The bench fixture `gg_test_luv_fusion` measures the real run.
 - **The gate's 524,288 EU/t out of the bank needs at least 551,882 in.** For example:
 
   | Source | EU/t |
