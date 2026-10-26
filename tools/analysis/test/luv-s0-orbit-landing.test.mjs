@@ -13,9 +13,9 @@ function descent(options = {}) {
   const orbit = 'gcyr:overworld_orbit';
   const dimension = options.dimension || orbit;
   const rocket = {
-    uuid: 'actual-root-uuid', dimension, y: 65,
+    uuid: 'actual-root-uuid', dimension, y: options.y ?? 65,
     isRemoved: () => false, onGround: () => options.ground !== false,
-    getX: () => 0, getY: () => 65, getZ: () => 0,
+    getX: () => 0, getY: () => options.y ?? 65, getZ: () => 0,
   };
   const player = { dimension, y: 67, vehicle: options.serverMount === false ? null : rocket };
   const values = new Map(Object.entries({
@@ -75,6 +75,9 @@ function descent(options = {}) {
     PlayerEvents: { loggedIn() {} }, EntityEvents: { hurt() {}, death() {} },
     Item: { of: id => ({ id }) },
   };
+  if (options.assistHandled) {
+    sandbox.global.grindless.orbitArrival = { states: { [rocket.uuid]: { handled: true } } };
+  }
   vm.runInNewContext(source.replace(/\}\)\(\)\s*$/, hook + '\n})()'), sandbox, { filename: file });
   const h = sandbox.global.probe;
   h.install(probe);
@@ -123,4 +126,30 @@ test('existing surface landing proof is unchanged and does not require the new o
   assert.equal(c.h.state().phase, 'done');
   assert.ok(c.checks.some(row => row.name === 'flight_landing_station_1' && row.ok));
   assert.ok(!c.checks.some(row => row.name.startsWith('flight_native_ground_')));
+});
+
+test('a terminal assist failure at Y600 unwinds within ten seconds without waiting for a move', () => {
+  const c = descent({ y: 600, ground: false, clientUuid: '', assistHandled: true });
+  c.h.state().minY = 600;
+  c.h.state().lastY = 600;
+  c.h.tick();
+  c.setNow(110001);
+  c.h.tick();
+  assert.equal(c.h.state().phase, 'aborted');
+  assert.deepEqual(c.aborted, ['orbit collision/client-mount recovery failed']);
+  assert.ok(c.checks.some(row => !row.ok && row.detail.includes('assistHandled=true')));
+});
+
+test('each actual arrival clears the previous leg settle deadlines', () => {
+  const start = source.indexOf('      FL.arriveT = S.t');
+  const end = source.indexOf("      go('descent')", start);
+  assert.ok(start >= 0 && end > start);
+  const FL = { rocketUuid: 'actual-root-uuid', leg: 'second', orbitSettleT: 1, orbitSettleMs: 1 };
+  vm.runInNewContext(source.slice(start, end), {
+    FL, S: { t: 900 }, newRocket: {}, yOf: () => 600, shared: () => ({ put() {} }), shot() {},
+  });
+  assert.equal(FL.arriveT, 900);
+  assert.equal(FL.orbitSettleT, undefined);
+  assert.equal(FL.orbitSettleMs, undefined);
+  assert.equal(FL.landStable, 0);
 });
