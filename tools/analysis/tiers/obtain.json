@@ -45,9 +45,6 @@
 
     "unlockLimit": 200,
     "classes": [
-      { "class": "B", "materials": ["cerrobase_140"], "era": "LuV", "until": "luv",
-        "reason": "molten cerrobase 140: only the GT-- circuit assembly line (LuV) asks for it, which integration/gtnn.js keeps, and nothing melts it (the dust does mix); its melting recipe arrives with LuV (decision of 2026-10-24)" },
-
       { "class": "B", "materials": ["grindless:tether_spool"], "era": "LuV (B7)", "until": "luv", "reason": "LuV-A1 registration (startup_scripts/grindless/luv/foundation.js): package B7, Io orbit, writes its recipes and then deletes this rule and its groups in hidden_until.json" },
 
       { "class": "B", "materials": ["gcyr:dyson_*", "gcyr:drone_hangar"], "era": "UHV (Dyson swarm)", "until": "uhv", "reason": "Dyson swarm from docs/journey.md (UHV): GCYR gives no recipe for these parts" },
@@ -55,7 +52,7 @@
       { "class": "B", "materials": ["gcyr:space_elevator_support", "gtca:space_elevator*", "gtca:space_miner_*", "gtca:space_pump_*", "gtca:space_assembler_*"], "era": "ZPM (space elevator)", "until": "zpm", "reason": "space elevator and its modules: docs/journey.md places it in ZPM; today GTCA gives no recipe for the modules (integration/gtca.js)" },
       { "class": "B", "materials": ["gtceu:uev_machine_casing", "gtceu:uiv_machine_casing", "gtceu:uxv_machine_casing", "gtceu:opv_machine_casing", "gtceu:max_machine_casing"], "era": "UEV–MAX", "until": "uev", "reason": "casings for the UEV–MAX tiers from docs/journey.md: GTM gives them no recipe" },
       { "class": "C", "materials": ["extendedfeatures:large_cracking_machine", "extendedfeatures:large_pyrolysis_oven", "extendedfeatures:expanded_assembly_line"], "reason": "GCYM-style parallel machine from Extended Features with no recipe (integration/extendedfeatures.js): the IV wave left them out (docs/eras/iv.md: GCYM at IV; the Expanded Assembly Line is only plan B). A package that adopts one gives it a recipe, and the audit then finds it obtainable" },
-      { "class": "B", "materials": ["gtnn:circuit_assembly_line"], "era": "LuV", "until": "luv", "reason": "GT-- circuit assembly line (LuV): only missing molten cerrobase 140, which arrives with LuV" },
+      { "class": "B", "materials": ["gtnn:circuit_assembly_line"], "era": "LuV", "until": "luv", "reason": "GT-- circuit assembly line (LuV): GT--'s assembly-line recipe takes a LuV circuit assembler and LuV parts at 30,720 EU/t; its molten cerrobase 140 comes from luv/circuit_line.js (grindless:fluid_heater/molten_cerrobase_140)" },
       { "class": "C", "materials": ["naquadria_oxide_mixture"], "reason": "GT--'s naquadria oxide mixture: only processing naquadria ore gives it, and no vein does (Venus's vein is naquadah and plutonium, IV-A1); naquadria itself comes out of the naquadah line" },
       { "class": "B", "materials": ["neutronium_mixture", "plutonium_based_liquid_fuel*"], "era": "UV–UIV (neutronium)", "until": "uiv", "reason": "plutonium fuel for the GT-- naquadah reactor: needs neutronium mixture, which comes from a neutronium ore that no vein gives (docs/journey.md: neutronium in UIV)" },
 

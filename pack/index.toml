@@ -3070,7 +3070,7 @@ hash = "1f4b256531a0b42a6ecf399e9b692d9e4730bd4102e53aab3e1fa2c999b69e9d"
 
 [[files]]
 file = "kubejs/data/grindless/tables/hidden_until.json"
-hash = "43c0ad089d13ba35cff81cc2eede8cee175146781b7d9166a347e0829e730fd9"
+hash = "9f83060a12761a3b4eb241fcf659ddb953c9f37a040ddd34984dc1f6f701fa44"
 
 [[files]]
 file = "kubejs/data/grindless/tables/hot_cell.json"
@@ -3478,7 +3478,7 @@ hash = "92c5fef3229cefd44a912b7cf3af03d010b5e7b4f37a564f06a6bc7238d18c73"
 
 [[files]]
 file = "kubejs/server_scripts/grindless/luv/circuit_line.js"
-hash = "24bc5ed88b306d9ee08f6bd5dbcac6c98c05fb4ec70efaad45ee580c9520bf78"
+hash = "d8e854a7bb93de5024fec43473b2902b2435c5a09e18d8d73c1b93b126a05404"
 
 [[files]]
 file = "kubejs/server_scripts/grindless/luv/coated_conductor_line.js"

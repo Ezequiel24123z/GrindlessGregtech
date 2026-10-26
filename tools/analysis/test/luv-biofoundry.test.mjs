@@ -177,7 +177,7 @@ const GTNN_WETWARE = {
 
 test('GT--\'s wetware recipe comes back at LuV voltage with the same energy, its inputs in order and its research id', () => {
   const r = runPackScripts(pack, { originals: [GTNN_WETWARE] });
-  const mine = r.errors.filter((e) => /circuit_line/.test(String(e.file)));
+  const mine = r.errors.filter((e) => /circuit_line/.test(String(e.file)) && !/no gtceu:molten_cerrobase_140 route/.test(e.message));
   assert.deepEqual(mine, [], mine.map((e) => e.message).join('\n'));
   assert.ok(r.logs.some((l) => /circuit_line/.test(l.file) && /\(38400 EU\/t x 600 t\) -> grindless:circuit_assembly_line\/wetware_processor_luv \(30720 EU\/t x 750 t\)/.test(l.text)));
   const added = r.docs.recipes.recipes.find((x) => x.i === 'grindless:circuit_assembly_line/wetware_processor_luv');
@@ -196,22 +196,90 @@ test('GT--\'s wetware recipe comes back at LuV voltage with the same energy, its
   assert.ok(none.errors.some((e) => /circuit_line/.test(String(e.file)) && /left as it is: no original recipe/.test(e.message)));
 });
 
+// GTM's melting of one cerrobase ingot as the native dump has it (C3 run luv-c3-s1): the molten route copies its price
+const CERROBASE_MELT = {
+  i: 'gtceu:extractor/extract_cerrobase_140_ingot', t: 'gtceu:extractor',
+  j: {
+    type: 'gtceu:extractor', duration: 181, category: 'gtceu:extractor', tickInputs: { eu: [{ content: 120 }] },
+    inputs: { item: [{ content: { type: 'gtceu:sized', count: 1, ingredient: { tag: 'forge:ingots/cerrobase_140' } } }] },
+    outputs: { fluid: [{ content: { amount: 144, value: [{ fluid: 'gtceu:cerrobase_140' }] } }] },
+  },
+};
+const MOLTEN_CERROBASE = 'gtceu:molten_cerrobase_140';
+const LINE_RECIPE = 'gtnn:assembly_line/circuit_assembly_line';
+
+test('molten cerrobase 140 has a route: GTM\'s liquid in the fluid heater at GTM\'s melting price, so GT--\'s line can be built', () => {
+  const r = runPackScripts(pack, { originals: [CERROBASE_MELT] });
+  const mine = r.errors.filter((e) => /circuit_line/.test(String(e.file)) && !/wetware_processor_luv_soldering_alloy left as it is/.test(e.message));
+  assert.deepEqual(mine, [], mine.map((e) => e.message).join('\n'));
+  const added = r.docs.recipes.recipes.find((x) => x.i === 'grindless:fluid_heater/molten_cerrobase_140');
+  assert.ok(added, 'grindless:fluid_heater/molten_cerrobase_140');
+  assert.equal(added.t, 'gtceu:fluid_heater');
+  assert.equal(added.j.tickInputs.eu[0].content, 120);
+  // the stand-in keeps no duration: the script's own line says it
+  assert.ok(r.logs.some((l) => /circuit_line/.test(l.file) &&
+    /grindless:fluid_heater\/molten_cerrobase_140: 144 mB gtceu:cerrobase_140 -> gtceu:molten_cerrobase_140, 120 EU\/t x 181 t \(from gtceu:extractor\/extract_cerrobase_140_ingot\)/.test(l.text)));
+  assert.deepEqual(added.j.inputs.fluid.map((x) => x.content.value[0].fluid + ' ' + x.content.amount), ['gtceu:cerrobase_140 144']);
+  assert.deepEqual(added.j.outputs.fluid.map((x) => x.content.value[0].fluid + ' ' + x.content.amount), [MOLTEN_CERROBASE + ' 144']);
+  assert.deepEqual(added.j.inputs.item.map((x) => x.content.type === 'gtceu:circuit' ? 'circuit ' + x.content.configuration : JSON.stringify(x.content)),
+    ['circuit 1'], 'only the programmed circuit');
+  // the only fluid heater recipe that takes liquid cerrobase: one recipe per lookup path
+  assert.equal(r.docs.recipes.recipes.filter((x) => x.t === 'gtceu:fluid_heater' && JSON.stringify(x.j.inputs || {}).includes('cerrobase_140')).length, 1);
+  // without GTM's ingot extraction there is no price to copy: no recipe, and it says why
+  const none = runPackScripts(pack);
+  assert.ok(!none.docs.recipes.recipes.some((x) => x.i === 'grindless:fluid_heater/molten_cerrobase_140'));
+  assert.ok(none.errors.some((e) => /circuit_line/.test(String(e.file)) && /no gtceu:molten_cerrobase_140 route/.test(e.message)));
+});
+
+test('molten cerrobase 140 is no longer hidden (its recipe is ours: EMI drops a recipe with a stack hidden with its recipes)', () => {
+  const hidden = JSON.parse(fs.readFileSync(path.join(kubejs, 'data', 'grindless', 'tables', 'hidden_until.json'), 'utf8')).groups;
+  assert.deepEqual(hidden.filter((g) => (g.fluids || []).includes(MOLTEN_CERROBASE)).map((g) => g.material), []);
+  const rules = JSON.parse(fs.readFileSync(path.join(root, 'tools', 'analysis', 'tiers', 'obtain.json'), 'utf8')).obtain.classes;
+  assert.deepEqual(rules.filter((c) => (c.materials || []).includes('cerrobase_140')), [], 'no obtain rule hides cerrobase 140');
+  const line = rules.find((c) => (c.materials || []).includes('gtnn:circuit_assembly_line'));
+  assert.ok(line && line.until === 'luv' && !/missing molten cerrobase/.test(line.reason), 'the line stays LuV for its own recipe');
+});
+
 test('GG_NATIVE_DUMP: the pinned ids exist in a native dump', { skip: !process.env.GG_NATIVE_DUMP }, () => {
   const dir = process.env.GG_NATIVE_DUMP;
   const reg = JSON.parse(fs.readFileSync(path.join(dir, 'items.json'), 'utf8'));
   const items = new Set(reg.items);
   const fluids = new Set(reg.fluids);
   const recipeIds = new Set(JSON.parse(fs.readFileSync(path.join(dir, 'recipes.json'), 'utf8')).recipes.map((s) => JSON.parse(s).i));
+  // a dump taken with A5 loaded has our re-tiered wetware recipe instead of GT--'s (removed by id); an older one has GT--'s
+  const retiered = recipeIds.has('grindless:circuit_assembly_line/wetware_processor_luv');
+  assert.notEqual(retiered, recipeIds.has(GTNN_WETWARE.i), 'exactly one of GT--\'s wetware recipe and ours');
   const missing = [
     ...[...VERIFIED_BLOCKS, ...VERIFIED_ITEMS].filter((id) => !items.has(id)),
     ...VERIFIED_FLUIDS.filter((id) => !fluids.has(id)),
-    ...[...VERIFIED_STAGES, NPU_RECIPE, GTNN_WETWARE.i, 'gtceu:scanner/1_x_gtnn_etched_wetware_processor_base'].filter((id) => !recipeIds.has(id)),
+    ...[...VERIFIED_STAGES, NPU_RECIPE, 'gtceu:scanner/1_x_gtnn_etched_wetware_processor_base'].filter((id) => !recipeIds.has(id)),
     ...['gtceu:soldering_alloy'].filter((id) => !fluids.has(id)),
     ...GTNN_WETWARE.j.inputs.item.map((x) => x.content.ingredient.item).filter((id) => !items.has(id)),
     ...VERIFIED_KEYS.filter((k) => !(k.startsWith('i:') ? items : fluids).has(k.slice(2))),
   ];
   assert.deepEqual(missing, []);
-  const live = JSON.parse(fs.readFileSync(path.join(dir, 'recipes.json'), 'utf8')).recipes.map((s) => JSON.parse(s)).find((r) => r.i === GTNN_WETWARE.i);
-  const shape = (j) => JSON.stringify([j.duration, j.tickInputs, j.recipeConditions, j.inputs.item, j.inputs.fluid, j.outputs.item]);
-  assert.equal(shape(live.j), shape(GTNN_WETWARE.j), 'the pinned copy of GT--\'s wetware recipe is the native one');
+  const all = JSON.parse(fs.readFileSync(path.join(dir, 'recipes.json'), 'utf8')).recipes.map((s) => JSON.parse(s));
+  if (retiered) {
+    const ours = all.find((r) => r.i === 'grindless:circuit_assembly_line/wetware_processor_luv');
+    assert.equal(ours.j.tickInputs.eu[0].content, 30720);
+    assert.equal(ours.j.duration, 750);
+    assert.deepEqual(ours.j.inputs.item.map((x) => JSON.stringify(x.content.ingredient) + x.content.count),
+      GTNN_WETWARE.j.inputs.item.map((x) => JSON.stringify(x.content.ingredient) + x.content.count), 'GT--\'s inputs, in order');
+  } else {
+    const live = all.find((r) => r.i === GTNN_WETWARE.i);
+    const shape = (j) => JSON.stringify([j.duration, j.tickInputs, j.recipeConditions, j.inputs.item, j.inputs.fluid, j.outputs.item]);
+    assert.equal(shape(live.j), shape(GTNN_WETWARE.j), 'the pinned copy of GT--\'s wetware recipe is the native one');
+  }
+  // molten cerrobase: GTM's ingot melt as pinned, the fluids exist, and GT--'s line asks for the molten one through its tag
+  const melt = all.find((x) => x.i === CERROBASE_MELT.i);
+  const meltShape = (j) => JSON.stringify([j.duration, j.tickInputs, j.inputs, j.outputs]);
+  assert.equal(meltShape(melt.j), meltShape(CERROBASE_MELT.j), 'the pinned copy of GTM\'s cerrobase ingot melt is the native one');
+  for (const f of ['gtceu:cerrobase_140', MOLTEN_CERROBASE]) assert.ok(fluids.has(f), f);
+  const tags = JSON.parse(fs.readFileSync(path.join(dir, 'tags.json'), 'utf8'));
+  assert.deepEqual((tags.fluid || {})['forge:molten_cerrobase_140'], [MOLTEN_CERROBASE]);
+  assert.ok(!((tags.fluid || {})['forge:cerrobase_140'] || []).includes(MOLTEN_CERROBASE), 'the heater\'s input tag never matches its output');
+  const line = all.find((x) => x.i === LINE_RECIPE);
+  assert.ok(JSON.stringify(line.j.inputs.fluid).includes('"forge:molten_cerrobase_140"'), 'GT--\'s line takes molten cerrobase');
+  const made = all.filter((x) => JSON.stringify(x.j.outputs || {}).includes('"' + MOLTEN_CERROBASE + '"')).map((x) => x.i);
+  assert.ok(made.every((id) => id === 'grindless:fluid_heater/molten_cerrobase_140'), 'only our route makes it: ' + made.join(', '));
 });

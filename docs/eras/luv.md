@@ -1337,7 +1337,7 @@ The ten-minute run of every base, untouched, lives only in the bench's integrati
 | Mod | Slug | Use in LuV |
 |---|---|---|
 | GCYR | `gcyr` | five datapack planets and ten dimensions; the station packager and package; photovoltaic cells; the KubeJS fuel tank for level 4; satellites hidden |
-| GT-- | `gtnn` | naquadah reactor III; the live naquadah line (mode 2 composes it); the circuit assembly line (wetware processors from NPUs) |
+| GT-- | `gtnn` | naquadah reactor III; the live naquadah line (mode 2 composes it); the circuit assembly line (wetware processors from NPUs; its own recipe takes 1,440 mB of molten cerrobase 140, made by `grindless:fluid_heater/molten_cerrobase_140` from GTM's liquid cerrobase at the price of GTM's melting of an ingot) |
 | GTCA | `gtca` | calcium plasma (Mk1 power); its germanium froth stays ZPM |
 | Biomes O' Plenty | `biomesoplenty` | Io's blocks, by id |
 | EU P2P Tunnel, MEGA Cells, Expanded AE | `eup2p`, `mega`, `expanded-ae` | the AE2 route and capacity |
