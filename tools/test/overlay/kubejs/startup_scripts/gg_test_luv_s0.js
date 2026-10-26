@@ -8,7 +8,7 @@ StartupEvents.registry('block', function (event) {
 ;(function () {
   var marker = JsonIO.read('kubejs/config/gg_test_luv_s0_planet.json')
   if (marker === null || String(marker.get('enabled')) !== 'true' ||
-      String(marker.get('stationsOnly')) !== 'true') return
+      String(marker.get('integrated')) !== 'true') return
   var G = global.grindless
   if (!G || !G.orbits || !Array.isArray(G.orbits.dimensions)) {
     throw new Error('[grindless S0] station continuation requires the production orbit registry')

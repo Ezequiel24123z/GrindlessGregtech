@@ -24,6 +24,7 @@ function descent(options = {}) {
     clientMountedRocketY: String(options.clientY ?? rocket.y),
     clientMountObservedMs: String(options.observedMs ?? 100000),
     clientMountObservationError: options.clientError || '',
+    clientWorldReady: String(options.worldReady !== false),
     clientBrakeTicks: '60',
   }));
   const checks = [];
@@ -93,7 +94,7 @@ test('a lowered but unticked rocket, absent/wrong mount, stale data and coordina
   for (const options of [
     { ground: false }, { serverMount: false }, { clientUuid: '' },
     { clientUuid: 'other-root' }, { observedMs: 97000 }, { clientY: 600 },
-    { clientError: 'native observation failed' },
+    { clientError: 'native observation failed' }, { worldReady: false },
   ]) {
     const c = descent(options);
     c.h.tick();

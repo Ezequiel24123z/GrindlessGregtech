@@ -1485,7 +1485,7 @@
       var clientMounted = !orbitLanding || (sval('clientMountedRocketUuid') === uuidOf(r3) &&
         sval('clientDim') === FL.targetDim && mountFresh &&
         Math.abs(Number(sval('clientMountedRocketY')) - y3) < 0.5 &&
-        sval('clientMountObservationError') === '')
+        sval('clientMountObservationError') === '' && sval('clientWorldReady') === 'true')
       var serverMounted = !orbitLanding || (vehicleOf(p) !== null && uuidOf(vehicleOf(p)) === uuidOf(r3))
       if (FL.lastY !== undefined && Math.abs(y3 - FL.lastY) < 0.001 &&
           FL.minY < FL.arrY - 10 && grounded && clientMounted && serverMounted) FL.landStable++
@@ -1499,7 +1499,8 @@
             'native rocket.onGround() after actual collision; no fixture ground flag or forced tick')
           check('flight_client_mount_' + FL.leg, clientMounted && serverMounted,
             'same native rocket UUID=' + uuidOf(r3) + ' on server and client; client y=' +
-            sval('clientMountedRocketY') + ', server y=' + y3 + ', fresh observation=' + mountFresh)
+            sval('clientMountedRocketY') + ', server y=' + y3 + ', fresh observation=' + mountFresh +
+            ', world ready=' + sval('clientWorldReady'))
         }
         check('flight_landing_' + FL.leg, true, 'landed in ' + dimOf(r3) + ' at ' + key(Math.floor(jcall(r3, V.x)), Math.floor(y3), Math.floor(jcall(r3, V.z))) + ' ' + (S.t - FL.arriveT) +
           ' ticks after arrival, no crash; fuel ' + info.fuel + ' mB left (' + (FL.fuelAtLaunch - info.fuel) + ' mB burnt this leg), client held Space ' + sval('clientBrakeTicks') + ' ticks')
@@ -1528,7 +1529,8 @@
           check('flight_landing_' + FL.leg, false, 'orbit moved below arrival height but normal landing not proven: y=' +
             y3 + ', onGround=' + grounded + ', serverMounted=' + serverMounted +
             ', clientMounted=' + clientMounted + ', client=' + sval('clientMountedRocketUuid') +
-            ', clientY=' + sval('clientMountedRocketY') + ', observationError=' + sval('clientMountObservationError'))
+            ', clientY=' + sval('clientMountedRocketY') + ', worldReady=' + sval('clientWorldReady') +
+            ', observationError=' + sval('clientMountObservationError'))
           abortFlight('orbit collision/client-mount recovery failed')
           return
         }
