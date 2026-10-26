@@ -187,6 +187,7 @@ Gregtech Grindless is a GregTech Modern pack (Minecraft 1.20.1, Forge) in which 
 
 - Personal account `Ezequiel24123z`, never the corporate one.
 - Small commits with a clear message.
+- **No `git stash` in parallel work:** the stash is shared by every worktree of the repository, so one session can pop another's. Use a WIP commit on your own branch.
 - **Versions:** before tagging (`vX.Y.Z`), bump `version` in `pack/pack.toml` and run `tools/Update-PackIndex.ps1`. Only what has passed the tier's tests gets tagged.
 
 ## Playable channel
