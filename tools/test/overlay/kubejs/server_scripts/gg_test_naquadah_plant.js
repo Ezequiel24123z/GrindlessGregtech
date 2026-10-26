@@ -29,7 +29,8 @@
 //   bee_removed           Productive Bees' gcteu:electric_blast_furnace/naquadah_bee is gone
 //   controller_recipe     grindless:assembler/naquadah_plant exists and holds its parts
 //   parallel_hatch_option both plants take GTM's Parallel Control Hatch (IV-B6's lib/parallel_hatch.js) as one more option of their part
-//                         cells, at most one, with the same size and part cells as before
+//                         cells, at most one, with the same size and part cells as before; the option has no tier restriction and
+//                         GTM's ability takes the IV and LuV hatches, so the LuV hatch (LuV A2) fits the same cells
 //   earth_cut_strips      iv.md decision 5, iridium and osmium only from Mercury: offworld_only.json's two Mercury strip entries are
 //                         applied (GT--'s sludge centrifuge without its iridium metal residue and rarest metal mixture, its inert metal
 //                         mixture leach without the mixture): the originals are gone and the rebuilt recipes keep every other output
@@ -201,7 +202,9 @@
         Circuit: Java.loadClass('com.gregtechceu.gtceu.common.item.IntCircuitBehaviour'),
         GTRecipe: Java.loadClass('com.gregtechceu.gtceu.api.recipe.GTRecipe'),
         GTCEuAPI: Java.loadClass('com.gregtechceu.gtceu.api.GTCEuAPI'),
-        PropertyKey: Java.loadClass('com.gregtechceu.gtceu.api.data.chemical.material.properties.PropertyKey')
+        PropertyKey: Java.loadClass('com.gregtechceu.gtceu.api.data.chemical.material.properties.PropertyKey'),
+        PartAbility: Java.loadClass('com.gregtechceu.gtceu.api.machine.multiblock.PartAbility'),
+        BI: Java.loadClass('net.minecraft.core.registries.BuiltInRegistries')
       }
     }
     return classes
@@ -600,6 +603,7 @@
         var cells = 0
         var options = 0
         var limits = null
+        var tiers
         Object.keys(desc.symbols).forEach(function (ch) {
           var sym = desc.symbols[ch]
           var opts = sym.kind === 'oneOf' ? sym.options : [sym]
@@ -607,6 +611,7 @@
           if (ph.length === 0) return
           options += ph.length
           limits = ph[0].limits
+          tiers = ph[0].tiers
           desc.slices.forEach(function (rows) {
             rows.forEach(function (row) {
               for (var i = 0; i < row.length; i++) if (row.charAt(i) === ch) cells++
@@ -616,12 +621,20 @@
         var ww = want[id]
         if (w !== ww[0] || h !== ww[1] || d !== ww[2]) problems.push(id + ' is ' + w + 'x' + h + 'x' + d + ', was ' + ww.slice(0, 3).join('x'))
         if (options !== 1 || !limits || limits.max !== 1) problems.push(id + ': ' + options + ' hatch options, limits ' + JSON.stringify(limits))
+        if (tiers !== undefined) problems.push(id + ': the hatch option takes only tiers ' + JSON.stringify(tiers) + ' (LuV A2: every tier fits)')
         if (cells !== ww[3]) problems.push(id + ': the hatch option in ' + cells + ' cells, the part cells are ' + ww[3])
         lines.push(short(id) + ' ' + w + 'x' + h + 'x' + d + ', the hatch option in its ' + cells + ' part cells, max ' + (limits ? limits.max : '?'))
       })
       var listed = (global.grindless.parallelHatch || {}).machines || []
       Object.keys(want).forEach(function (id) { if (listed.indexOf(id) < 0) problems.push(id + ' is not in global.grindless.parallelHatch.machines') })
-      check('parallel_hatch_option', problems.length === 0, lines.join(' ; ') + (problems.length > 0 ? ' | problems: ' + problems.join('; ') : ''))
+      // LuV A2: the option asks for GTM's ability with no tier, so GTM's LuV hatch fits the same cells as the IV one
+      var fits = {}
+      asArray(lazy().PartAbility.PARALLEL_HATCH.getAllBlocks()).forEach(function (b) { fits[String(lazy().BI.BLOCK.getKey(b))] = true })
+      ;['gtceu:iv_parallel_hatch', 'gtceu:luv_parallel_hatch'].forEach(function (hid) {
+        if (fits[hid] !== true) problems.push(hid + ' is not a block of GTM\'s parallel-hatch ability')
+      })
+      check('parallel_hatch_option', problems.length === 0, lines.join(' ; ') + '; the ability takes ' + Object.keys(fits).map(short).sort().join(', ') +
+        (problems.length > 0 ? ' | problems: ' + problems.join('; ') : ''))
     })
 
     safely('balance', function () {
