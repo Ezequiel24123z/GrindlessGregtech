@@ -1,8 +1,10 @@
 // Gregtech Grindless - text of our EMI information pages (kubejs/assets/emi/recipe/additions/grindless/*.json: EMI's own data
 // recipes, type emi:info; EMI only reads them in the emi namespace). Each page lists its stacks and these translation keys; EMI shows
 // the page under both the recipes and the uses of every stack on it. They cover what EMI cannot show as a recipe: right-click
-// actions (the travel keys, the wireless covers, the hologram projector), what goes into a structure, observations that depend on
-// the sky or the world, recipes of GTM's electric furnace (EMI never lists that type) and what an item is kept for.
+// actions (the travel keys, the wireless covers, the hologram projector), what goes into a structure (GTM's multiblock preview only
+// shows the first block of each slot), recipes of GTM's electric furnace (EMI never lists that type) and what an item is kept for.
+// What a recipe already shows (the charts' observations, the samples' drilling) gets no page: its recipe must stay visible, which
+// the audit checks (a recipe EMI drops for a disabled stack fails it).
 // The audit that asks for them is tools/analysis/emi-coverage.mjs. Quests are English only; names and info go in en_us and es_es.
 ClientEvents.lang('en_us', event => {
     var add = function (key, value) { event.add('grindless', key, value) }
@@ -22,18 +24,6 @@ ClientEvents.lang('en_us', event => {
 
     add('emi.grindless.info.hologram_projector.0', 'Right-click an unformed multiblock controller to project its structure for 30 seconds; right-click again to hide it. A formed controller opens its normal screen.')
     add('emi.grindless.info.hologram_projector.1', 'Sneak + right-click to build: it places the structure\'s default blocks from your inventory into empty spaces, one item per block. Hatches, buses and other machine parts are left for you to choose.')
-
-    add('emi.grindless.info.lunar_charts.0', 'Navigation data only comes from looking at the sky. Each observatory makes its chart in a 30-second observation at night, and the next instrument keeps the previous chart as its guide: it is never used up.')
-    add('emi.grindless.info.lunar_charts.1', 'Clockwork Observatory (Steam): the Lunar Chart (Draft), under a clear sky, with the controller at Y 100 or higher. Optical Observatory (LV): the Photographic Lunar Map and the Lunar Ephemeris, under a clear sky. Radio Telescope (MV): the Lunar Landing-Site Chart, in any weather but a thunderstorm.')
-    add('emi.grindless.info.lunar_charts.2', 'The Lunar Landing-Site Chart goes into your first rocket\'s ID chip and calibrates the Moon\'s Deep Space Antenna. Any chart copies by hand: the chart and a blank (paper and coal dust, or a photographic plate for the map) make two.')
-
-    add('emi.grindless.info.deep_space_charts.0', 'The Deep Space Antenna listens only on the Moon, at night. Keeping the Lunar Landing-Site Chart, it writes a data stick into the Mars Transfer Chart; keeping that, the Inner Planets Chart; keeping the Inner Planets Chart, it writes a data orb into a Lunar VLBI Recording.')
-    add('emi.grindless.info.deep_space_charts.1', 'The Interferometer on Mercury, at night, adds its half of the baseline: a Lunar VLBI Recording with the Inner Planets Chart (kept) gives the Outer System Chart, and with the Outer System Chart (kept) the Sagittarius A* Signal.')
-    add('emi.grindless.info.deep_space_charts.2', 'Charts are never used up: the rocket parts that need them keep them (the Mars chart for the advanced tank and motor, the Inner Planets Chart for the elite ones). Copy a chart by hand with a data stick, or a data orb for the Outer System Chart.')
-
-    add('emi.grindless.info.vein_samples.0', 'A vein sample tells a vein drill which vein to drill. Put it in the drill\'s input bus: it is never used up, and the drill brings up that vein\'s ores and stone run after run.')
-    add('emi.grindless.info.vein_samples.1', 'Craft one from an Empty Vein Probe and two raw ores of the vein. Higher-tier drills take deeper and rarer veins; EMI\'s Vein Drilling recipes show which drill and drill bit each sample needs.')
-    add('emi.grindless.info.vein_samples.2', 'Samples of other worlds only drill on their world: the Moon\'s in the Lunar Drill and the EV Tripod Drill, Mars\' in the EV Tripod Drill and the Pressurized Vein Drill, Venus\' in the Pressurized Vein Drill and Mercury\'s in the Mercury Vein Drill. The End\'s pitchblende sample goes in the In-Situ Leach Field.')
 
     add('emi.grindless.info.sintered_regolith.0', 'Made only on the Moon. The first bricks come from an electric furnace there: it bakes 4 Lunar Regolith Dust into one block (120 EU/t, 20 s). EMI does not list GregTech\'s electric furnace recipes, so that one only shows here. Later the Regolith Cell sinters them in bulk.')
     add('emi.grindless.info.sintered_regolith.1', 'Every structure of the Moon base stands on these bricks: the Regolith Cell, the EV Tripod Drill, the Sealed Dome, the Cryogenic Plant, the Lunar Solar Array, the Deep Space Antenna and the Tritium Removal Facility.')
@@ -65,18 +55,6 @@ ClientEvents.lang('es_es', event => {
 
     add('emi.grindless.info.hologram_projector.0', 'Haz clic derecho en el controlador de un multibloque sin formar para proyectar su estructura durante 30 segundos; otro clic derecho la oculta. Un controlador formado abre su pantalla normal.')
     add('emi.grindless.info.hologram_projector.1', 'Agachado + clic derecho construye: coloca desde tu inventario los bloques por defecto de la estructura en los huecos vacíos, un objeto por bloque. Las escotillas, los buses y las demás piezas de máquina las eliges tú.')
-
-    add('emi.grindless.info.lunar_charts.0', 'Los datos de navegación solo salen de mirar el cielo. Cada observatorio hace su carta en una observación de 30 segundos de noche, y el siguiente instrumento conserva la carta anterior como guía: nunca se gasta.')
-    add('emi.grindless.info.lunar_charts.1', 'Observatorio de relojería (vapor): la carta lunar (borrador), con el cielo despejado y el controlador a Y 100 o más. Observatorio óptico (LV): el mapa fotográfico de la Luna y las efemérides lunares, con el cielo despejado. Radiotelescopio (MV): la carta del lugar de alunizaje, con cualquier tiempo salvo tormenta.')
-    add('emi.grindless.info.lunar_charts.2', 'La carta del lugar de alunizaje entra en el chip de identificación de tu primer cohete y calibra la antena de espacio profundo de la Luna. Cualquier carta se copia a mano: la carta y un soporte en blanco (papel y polvo de carbón, o una placa fotográfica para el mapa) dan dos.')
-
-    add('emi.grindless.info.deep_space_charts.0', 'La antena de espacio profundo solo escucha en la Luna, de noche. Conservando la carta del lugar de alunizaje, graba una memoria de datos con la carta de transferencia a Marte; conservando esa, la carta de los planetas interiores; y conservando la de los planetas interiores, graba un orbe de datos con una grabación VLBI lunar.')
-    add('emi.grindless.info.deep_space_charts.1', 'El interferómetro de Mercurio, de noche, añade su mitad de la línea de base: una grabación VLBI lunar con la carta de los planetas interiores (que conserva) da la carta del sistema exterior, y con la carta del sistema exterior (que conserva), la señal de Sagitario A*.')
-    add('emi.grindless.info.deep_space_charts.2', 'Las cartas nunca se gastan: las piezas de cohete que las necesitan las conservan (la carta de Marte para el tanque y el motor avanzados, la de los planetas interiores para los de élite). Copia una carta a mano con una memoria de datos, o con un orbe de datos la del sistema exterior.')
-
-    add('emi.grindless.info.vein_samples.0', 'Una muestra de veta le dice a una perforadora de vetas qué veta perforar. Ponla en el bus de entrada de la perforadora: nunca se gasta, y la perforadora saca las menas y la piedra de esa veta una y otra vez.')
-    add('emi.grindless.info.vein_samples.1', 'Se fabrica con una sonda de vetas vacía y dos menas en bruto de la veta. Las perforadoras de más nivel aceptan vetas más profundas y raras; las recetas de perforación de vetas de EMI muestran qué perforadora y qué broca necesita cada muestra.')
-    add('emi.grindless.info.vein_samples.2', 'Las muestras de otros mundos solo perforan en su mundo: las de la Luna en la perforadora lunar y la perforadora trípode EV, las de Marte en la trípode EV y la perforadora de vetas presurizada, las de Venus en la presurizada y las de Mercurio en la perforadora de vetas de Mercurio. La muestra de pechblenda del End va en el campo de lixiviación in situ.')
 
     add('emi.grindless.info.sintered_regolith.0', 'Solo se hacen en la Luna. Los primeros ladrillos salen de un horno eléctrico allí: cuece 4 polvos de regolito lunar en un bloque (120 EU/t, 20 s). EMI no muestra las recetas del horno eléctrico de GregTech, así que esa solo aparece aquí. Después, la celda de regolito los sinteriza en grandes cantidades.')
     add('emi.grindless.info.sintered_regolith.1', 'Todas las estructuras de la base lunar se apoyan en estos ladrillos: la celda de regolito, la perforadora trípode EV, la cúpula sellada, la planta criogénica, la matriz solar lunar, la antena de espacio profundo y la planta de extracción de tritio.')
