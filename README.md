@@ -51,4 +51,4 @@ Create a Minecraft 1.20.1 instance with Forge 47.4.28 and Java 17. Put [packwiz-
 
 ## For developers
 
-Read [AGENTS.md](AGENTS.md). Decisions are in [DECISIONS.md](DECISIONS.md), and credits and licenses are in [CREDITS.md](CREDITS.md).
+Read [AGENTS.md](AGENTS.md) and [docs/STATUS.md](docs/STATUS.md). Scoped rules are in `.github/instructions/`. Decisions are in [DECISIONS.md](DECISIONS.md), and credits and licenses are in [CREDITS.md](CREDITS.md).
