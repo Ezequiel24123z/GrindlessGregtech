@@ -242,123 +242,309 @@
 			y: 1.5d
 		}
 		{
-			dependencies: ["5933ADF51C8949BD"]
-			description: [
-				"GCYR's &6Space Station Packager&r folds a whole station into one package small enough for a rocket. Pack it at home, fly it to Earth orbit and open it there; the GregTech machines go in once you've arrived."
-				"Everything up there draws from the wireless network, which is why the network came first."
-			]
-			icon: "gcyr:space_station_packager"
-			id: "531171ADA3A1A60B"
-			rewards: [{ id: "705E817367653C3C", type: "xp", xp: 80 }]
+			dependencies: ["3B64E8E2A5FD37A0"]
+			description: ["Bacteria carry new genes into ordinary seeds: barley that makes a nerve growth factor and tobacco that makes human collagen. Real farms do both. Keep the &6Engineered Barley Seed&r and its tobacco cousin; the ring in orbit replants them instead of eating them."]
+			icon: "grindless:engineered_barley_seed"
+			id: "5FCC962F33654DD9"
+			rewards: [{ id: "53372771066B5E95", type: "xp", xp: 60 }]
 			tasks: [
-				{ id: "7378F46BB42CBD46", item: "gcyr:space_station_packager", type: "item" }
-				{ id: "10E8129E34FC8F81", item: "gcyr:space_station_package", type: "item" }
+				{ id: "16FD9A34CED29720", item: "grindless:engineered_barley_seed", type: "item" }
+				{ id: "589D3D2B241295C7", item: "grindless:engineered_tobacco_seed", type: "item" }
 			]
-			title: "Packed and Launched"
+			title: "Engineered Seeds"
+			x: 4.0d
+			y: 3.0d
+		}
+		{
+			dependencies: ["5933ADF51C8949BD"]
+			description: ["Elite motors and cryogenic fuel tanks make a level 4 rocket, and that reaches past Mars. Pack a landing kit every time: wireless energy covers and hatches, a couple of RTG cells in case, and a waystone."]
+			icon: "grindless:cryogenic_fuel_tank"
+			id: "3F76BCDB3BBA8FA4"
+			rewards: [{ id: "1D93CCAEA2F82407", type: "xp", xp: 100 }]
+			tasks: [
+				{ id: "7BF94F974769F8AE", item: "grindless:cryogenic_fuel_tank", type: "item" }
+				{ id: "7B25961FF0DB443E", item: "gcyr:elite_rocket_motor", type: "item" }
+			]
+			title: "Level Four"
 			x: 12.0d
 			y: 0.0d
 		}
 		{
-			dependencies: ["531171ADA3A1A60B"]
-			description: ["Earth orbit: no air, no night, and the coldest shade you'll ever stand in. Chunk-load the station, or its machines stop the moment you fly home."]
-			icon: "grindless:station_truss_casing"
-			id: "75745AD963ECB5C8"
-			rewards: [{ id: "349D03BE358D5C31", type: "xp", xp: 100 }]
-			shape: "rsquare"
-			size: 1.25d
-			tasks: [{ dimension: "gcyr:overworld_orbit", id: "5CA94CD95613248B", type: "dimension" }]
-			title: "First Station"
+			dependencies: ["3F76BCDB3BBA8FA4"]
+			description: ["A floor of rubble with boulders hanging over it, and metal that fell out of the sky. Raw meteoric iron dug on the spot goes into the &6Asteroid Quantum Seed&r, made there in a chemical reactor, and the AE2 bridge reaches the belt."]
+			icon: "grindless:asteroid_quantum_seed"
+			id: "7F943A5682742ECD"
+			rewards: [{ id: "71DC0E5A054576F9", type: "xp", xp: 100 }]
+			tasks: [
+				{ dimension: "grindless:asteroid_belt", id: "5E812785C237D80A", type: "dimension" }
+				{ id: "745CAB3FA6553E84", item: "grindless:asteroid_quantum_seed", type: "item" }
+			]
+			title: "The Belt"
 			x: 14.0d
-			y: 0.0d
+			y: -1.5d
 		}
 		{
-			dependencies: ["75745AD963ECB5C8"]
-			description: [
-				"Up here the Sun never sets, and the &6Orbital Solar Station&r makes the most of it: two wings of panels on a truss, and every panel that sees open sky pays. Send the power home through a LuV wireless dynamo hatch."
-				"It burns nothing, so nothing doubles it."
-			]
-			icon: "gtceu:orbital_solar_station"
-			id: "3F2030C8DDEDB9FF"
+			dependencies: ["7F943A5682742ECD"]
+			description: ["The belt's veins answer to one drill: the &6Harpoon Anchor Drill&r, pinned to the rock by harpoons while its HSS-S bit works. Bits and harpoons both wear slowly. No drilling fluid, it's vacuum, same as Mercury."]
+			icon: "gtceu:harpoon_anchor_drill"
+			id: "7C258E5E568EE8F2"
 			rewards: [
-				{ id: "39623E31E54F56E3", type: "xp", xp: 100 }
-				{ count: 2, id: "18F7447DC3B656EE", item: "gcyr:photovoltaic_cell", type: "item" }
+				{ id: "7591EE6013028AF0", type: "xp", xp: 100 }
+				{ count: 2, id: "3EBA2CAE6CDC167E", item: "grindless:anchor_harpoon", type: "item" }
 			]
 			shape: "gear"
 			size: 1.25d
 			tasks: [
-				{ id: "7DCDEB7079BC07A6", item: "gtceu:orbital_solar_station", type: "item" }
-				{ id: "32FE0E13005F7F83", item: "grindless:orbital_solar_panel", type: "item" }
+				{ id: "58ED6E6D577F6699", item: "gtceu:harpoon_anchor_drill", type: "item" }
+				{ id: "7AFBCB84FB4C0ADA", item: "grindless:hss_s_drill_bit", type: "item" }
+				{ id: "57A97CFA8215CC5C", item: "grindless:anchor_harpoon", type: "item" }
+				{ id: "13BE0CD0A9B08E00", item: "gtceu:raw_meteoric_iron", type: "item" }
 			]
-			title: "Endless Day"
+			title: "Harpoon"
 			x: 16.0d
 			y: -1.5d
 		}
 		{
-			dependencies: ["75745AD963ECB5C8"]
+			dependencies: ["7C258E5E568EE8F2"]
 			description: [
-				"On the ground ZBLAN glass crystallizes while it's drawn; up here it stays clear. The &6Microgravity Smelter&r draws it into optical pipe with no silver at all, foams metal into Whipple shield casing and melts naquadah alloy floating in a field, no crucible."
-				"Mix the ZBLAN at home in the Large Mixing Vessel: a normal mixer can't hold that much fluorine."
+				"The &6Asteroid Processor&r runs the Mond process: carbon monoxide carries the iron and nickel away as gas and leaves the platinum metals behind as a concentrate. The CO stays in the machine. The concentrate exists nowhere else, so the processor won't void it."
+				"It also pulls tetrataenite apart by magnet, and the meteoric iron dust that leaves goes back through Mond."
 			]
-			icon: "gtceu:microgravity_smelter"
-			id: "121BEE9B7E15DE8C"
-			rewards: [{ id: "3FF36420AFEFE3A2", type: "xp", xp: 100 }]
+			icon: "gtceu:asteroid_processor"
+			id: "5556DFCD2B6DD947"
+			rewards: [
+				{ id: "3E232CC68F44C448", type: "xp", xp: 100 }
+				{ count: 2, id: "162392BFEE00E911", item: "gtceu:carbon_monoxide_bucket", type: "item" }
+			]
 			shape: "gear"
 			size: 1.25d
 			tasks: [
-				{ id: "36718AA56A92385A", item: "gtceu:microgravity_smelter", type: "item" }
-				{ id: "135209E83A9A320B", item: "gtceu:zblan_dust", type: "item" }
-				{ id: "3A96E3076111AE91", item: "gtceu:normal_optical_pipe", type: "item" }
+				{ id: "1C58AD65259FF192", item: "gtceu:asteroid_processor", type: "item" }
+				{ id: "3D07002F8CFDE71B", item: "grindless:asteroid_pgm_concentrate", type: "item" }
 			]
-			title: "Fibre from Nothing"
+			title: "Mond"
+			x: 18.0d
+			y: -1.5d
+		}
+		{
+			dependencies: ["5556DFCD2B6DD947"]
+			description: ["The platinum plant's fourth mode dissolves the asteroid concentrate into iridium, osmium and a sludge its old recipes already split into platinum, palladium, rhodium and ruthenium. All six in bulk, in roughly a meteorite's proportions, and Mercury gets a rest."]
+			icon: "gtceu:platinum_group_sludge_dust"
+			id: "183EF636D72AFDB0"
+			rewards: [{ id: "572A6CDC0E710590", type: "xp", xp: 80 }]
+			tasks: [
+				{ id: "175830D12A4E604F", item: "gtceu:platinum_group_sludge_dust", type: "item" }
+				{ id: "79C8BDF2C9AAB82A", item: "gtceu:iridium_dust", type: "item" }
+				{ id: "5702C3DEC232D0CE", item: "gtceu:osmium_dust", type: "item" }
+			]
+			title: "Star Metal"
+			x: 20.0d
+			y: -1.5d
+		}
+		{
+			dependencies: ["7F943A5682742ECD"]
+			description: [
+				"The &6Optical Miner&r bags crumbly carbon-rich boulders and bakes them with mirrors until water, carbon dioxide and a nitrogen-and-phosphorus extract boil off. It only runs with the Sun on its receiver, and the Sun is faint out here, hence all the mirrors."
+				"Its second recipe turns the carbon dioxide into the processor's CO."
+			]
+			icon: "gtceu:optical_miner"
+			id: "1997FB952337C741"
+			rewards: [
+				{ id: "5908F6DB648D4ECB", type: "xp", xp: 100 }
+				{ id: "7F1DFD24E69DF9E1", item: "grindless:capture_bag", type: "item" }
+			]
+			shape: "gear"
+			size: 1.25d
+			tasks: [
+				{ id: "74AB7FD3082AE1C5", item: "gtceu:optical_miner", type: "item" }
+				{ id: "59B83BAC6052A234", item: "grindless:capture_bag", type: "item" }
+				{ id: "59A164CB7238DA1B", item: "grindless:chondritic_extract", type: "item" }
+			]
+			title: "Sunlight on a Boulder"
 			x: 16.0d
 			y: -3.0d
 		}
 		{
-			dependencies: ["121BEE9B7E15DE8C"]
+			dependencies: ["3F76BCDB3BBA8FA4"]
 			description: [
-				"Behind a disc flying through orbit, the vacuum is emptier than any chamber you could build. The &6Wake Shield Facility&r grows HPIC and UHPIC wafers there with half the source and half the time."
-				"Its disc is Whipple shield casing, so the smelter goes first. Give it germanium and it grows solar wafers too."
+				"Io sits in Jupiter's radiation, and electronics there die young. Every machine on Io, on Europa and in Io's orbit carries &6Radiation Vault Casing&r: titanium, then tantalum, like Juno's vault. You'll be fine in the suit. The machines won't."
+				"Brimstone dug on the spot makes the Ionian quantum seed."
 			]
-			icon: "gtceu:wake_shield_facility"
-			id: "58EFB73E6DD24BDB"
-			rewards: [
-				{ id: "5917C4380DC0402D", type: "xp", xp: 100 }
-				{ count: 4, id: "3AEEC37901F33633", item: "gtceu:indium_gallium_phosphide_dust", type: "item" }
-			]
-			shape: "gear"
-			size: 1.25d
+			icon: "grindless:radiation_vault_casing"
+			id: "715B44AABDAFBFAE"
+			rewards: [{ id: "3DA7D8892E1D521C", type: "xp", xp: 100 }]
 			tasks: [
-				{ id: "54780AE195859BCD", item: "gtceu:wake_shield_facility", type: "item" }
-				{ id: "381B7ED8F85D18FD", item: "gtceu:uhpic_wafer", type: "item" }
+				{ dimension: "grindless:io", id: "13DE7A438FBEB6E4", type: "dimension" }
+				{ id: "33A90E532642E87C", item: "grindless:radiation_vault_casing", type: "item" }
+				{ id: "5F57B491BBE90BD8", item: "grindless:ionian_quantum_seed", type: "item" }
 			]
-			title: "In the Wake"
-			x: 18.0d
-			y: -3.0d
+			title: "Behind the Vault"
+			x: 14.0d
+			y: 0.0d
 		}
 		{
-			dependencies: ["75745AD963ECB5C8"]
+			dependencies: ["715B44AABDAFBFAE"]
 			description: [
-				"With nothing stirring the melt, a crystal grows without flaws. The &6Zero-G Crystal Grower&r makes raw crystal chips every time instead of now and then, and much faster, with the same dopant GregTech asks for."
-				"Its sapphire test masses are for later; EMI says what for."
+				"The &6Fumarole Condenser&r sits over a field of vents and catches what the gas drops as it cools: sulfur dioxide, sulfur, and a sublimate with germanium and indium in it. It's the only germanium before ZPM, and it runs on the wireless hatch you brought."
+				"It also casts sulfur concrete, which needs no water. Jovian bases are built from it."
 			]
-			icon: "gtceu:zero_g_crystal_grower"
-			id: "18A794C8BAA71D81"
+			icon: "gtceu:fumarole_condenser"
+			id: "3448ADF675EDD8E7"
+			rewards: [{ id: "5E7185555C94EB4E", type: "xp", xp: 100 }]
+			shape: "gear"
+			size: 1.25d
+			tasks: [
+				{ id: "73E53DF21AF01002", item: "gtceu:fumarole_condenser", type: "item" }
+				{ id: "599598C93A3EBE41", item: "gtceu:germanium_dust", type: "item" }
+				{ id: "33E6398ECA3341A7", item: "grindless:sulfur_concrete_casing", type: "item" }
+			]
+			title: "Fumarole"
+			x: 16.0d
+			y: 0.0d
+		}
+		{
+			dependencies: ["3448ADF675EDD8E7"]
+			description: [
+				"The &6Volcanic Intake&r stands on a patera's magma and runs sulfur dioxide through turbines, and the power goes home through the network. It burns nothing, but the exchanger bundles erode in hot sulfur and need replacing."
+				"Its sulfur dioxide charge comes from the condenser next door."
+			]
+			icon: "gtceu:volcanic_intake"
+			id: "5BC4BFE9A199F5A1"
 			rewards: [
-				{ id: "79A3343DDCAA87FC", type: "xp", xp: 100 }
-				{ count: 16, id: "70CB42BE6A87A4A8", item: "gtceu:sapphire_dust", type: "item" }
+				{ id: "100219E1DF0F24EC", type: "xp", xp: 120 }
+				{ id: "12DC51FA05B67C9D", item: "grindless:heat_exchanger_bundle", type: "item" }
 			]
 			shape: "gear"
 			size: 1.25d
 			tasks: [
-				{ id: "36BE5E6C87916B16", item: "gtceu:zero_g_crystal_grower", type: "item" }
-				{ id: "5132B223B09F2DD4", item: "grindless:sapphire_test_mass", type: "item" }
+				{ id: "3163F820D8C80CCC", item: "gtceu:volcanic_intake", type: "item" }
+				{ id: "59F1E1E7501F3521", item: "grindless:heat_exchanger_bundle", type: "item" }
 			]
-			title: "Perfect Crystal"
+			title: "Patera"
+			x: 18.0d
+			y: 0.0d
+		}
+		{
+			dependencies: ["3F76BCDB3BBA8FA4"]
+			description: ["Europa is a shell of ice over an ocean nobody has ever seen. Blue ice dug on the spot makes the &6Europan Quantum Seed&r, and the AE2 bridge reaches the lid of that ocean."]
+			icon: "grindless:europan_quantum_seed"
+			id: "34BE2C5053E7572B"
+			rewards: [{ id: "7448F9FA44C24D3F", type: "xp", xp: 100 }]
+			tasks: [
+				{ dimension: "grindless:europa", id: "3E538642FDC95BAC", type: "dimension" }
+				{ id: "184431EA1D1B59C8", item: "grindless:europan_quantum_seed", type: "item" }
+			]
+			title: "Under the Ice"
+			x: 14.0d
+			y: 1.5d
+		}
+		{
+			dependencies: ["34BE2C5053E7572B", "3448ADF675EDD8E7"]
+			description: ["The &6Cryobot&r melts its way down through the ice, paying out its tether as it sinks. A probe brings back a living ocean sample; after that it just pumps brine. Its base is sulfur concrete, so Io comes first."]
+			icon: "gtceu:cryobot"
+			id: "377C157965B3A560"
+			rewards: [{ id: "77BA838176319E5B", type: "xp", xp: 100 }]
+			shape: "gear"
+			size: 1.25d
+			tasks: [
+				{ id: "74A8951E8BD752F4", item: "gtceu:cryobot", type: "item" }
+				{ id: "1E0E10CDA6C87AA0", item: "grindless:cryobot_probe", type: "item" }
+				{ id: "74D51A33A3CCF12C", item: "grindless:europan_ocean_sample", type: "item" }
+			]
+			title: "Cryobot"
 			x: 16.0d
 			y: 1.5d
 		}
 		{
-			dependencies: ["38F8454E1AEB4E72"]
+			dependencies: ["377C157965B3A560"]
+			description: ["Brine, hydrogen, peroxide and the belt's chondritic extract feed the ocean sample in the &6Algae Bioreactor&r, and out come bacteria: the only living matter in the pack. The bioreactor refuses to void them. So should you."]
+			icon: "gtceu:algae_bioreactor"
+			id: "5B8B17CDA9D43E9A"
+			rewards: [{ id: "345A0915E28B4D98", type: "xp", xp: 150 }]
+			shape: "gear"
+			size: 1.25d
+			tasks: [
+				{ id: "3CF3D8F95F3BA36A", item: "gtceu:algae_bioreactor", type: "item" }
+				{ id: "504DAA691395A4F7", item: "gtceu:bacteria_bucket", type: "item" }
+			]
+			title: "Something Alive"
+			x: 18.0d
+			y: 1.5d
+		}
+		{
+			dependencies: ["5B8B17CDA9D43E9A"]
+			description: ["Back home the biofoundry finally has bacteria: sludge, mutagen, sterile growth medium and then &6Stem Cells&r, grown on osmiridium. The sludge they hand back goes round again."]
+			icon: "gtceu:stem_cells"
+			id: "712723D264B9CFED"
+			rewards: [{ id: "59FA66D25D123051", type: "xp", xp: 80 }]
+			tasks: [
+				{ id: "5A326A8E662615C4", item: "gtceu:sterilized_growth_medium_bucket", type: "item" }
+				{ id: "5D19036714D06F1A", item: "gtceu:stem_cells", type: "item" }
+			]
+			title: "Stem Cells"
+			x: 20.0d
+			y: 1.5d
+		}
+		{
+			dependencies: ["3F76BCDB3BBA8FA4"]
+			description: ["Ganymede has no quakes, its own magnetic field and ice deep enough to bury things in. It's also cold enough that an old HV superconductor works with no cryostat at all. Tuff dug on the spot makes the &6Ganymedean Quantum Seed&r."]
+			icon: "grindless:ganymedean_quantum_seed"
+			id: "107CFEA9014148F1"
+			rewards: [{ id: "32DD58871C20FC1C", type: "xp", xp: 100 }]
+			tasks: [
+				{ dimension: "grindless:ganymede", id: "7E8439248B8F49D4", type: "dimension" }
+				{ id: "74CC3480CC1F869D", item: "grindless:ganymedean_quantum_seed", type: "item" }
+			]
+			title: "Quiet Moon"
+			x: 14.0d
+			y: 3.0d
+		}
+		{
+			dependencies: ["107CFEA9014148F1"]
+			description: ["Out here mercury barium calcium cuprate superconducts on its own, so the magnet works' coils need no cryostat. String them into the barrel of the &6Coilgun Probe Launcher&r and throw probes off the moon with no rocket at all."]
+			icon: "gtceu:coilgun_launcher"
+			id: "1770E32F925B4E73"
+			rewards: [{ id: "58DCBF0F3BEC2E99", type: "xp", xp: 120 }]
+			shape: "gear"
+			size: 1.25d
+			tasks: [
+				{ id: "7CFFD5635721B996", item: "gtceu:coilgun_launcher", type: "item" }
+				{ id: "768C0F453A429D8C", item: "grindless:coilgun_coil_casing", type: "item" }
+			]
+			title: "Coilgun"
+			x: 16.0d
+			y: 4.5d
+		}
+		{
+			dependencies: ["1770E32F925B4E73"]
+			description: ["A probe with a heat shield falls into Jupiter and radios back hydrogen, helium and helium-3 until it stops. Keep the &6Jovian Atmosphere Survey&r: nobody mines a gas giant by hand."]
+			icon: "grindless:jovian_atmosphere_survey"
+			id: "73EC7C3865D51181"
+			rewards: [{ id: "11D8C52CBA144494", type: "xp", xp: 100 }]
+			tasks: [
+				{ id: "1C39812ADAE7682B", item: "grindless:jupiter_entry_probe", type: "item" }
+				{ id: "10CB344F57ED24DD", item: "grindless:jovian_atmosphere_survey", type: "item" }
+			]
+			title: "Into the Clouds"
+			x: 18.0d
+			y: 4.5d
+		}
+		{
+			dependencies: ["1770E32F925B4E73"]
+			description: ["The flyby probe swings round Jupiter the way Pioneer and the Voyagers did and keeps going. It takes its time reporting back, and what it sends is the &6Saturn Transfer Chart&r: where you're going next, and this time you won't land. Copy it with a data orb and keep it for ZPM."]
+			icon: "grindless:saturn_transfer_chart"
+			id: "5D5C7D4E5CD14993"
+			rewards: [{ id: "56772B69ED46FC07", type: "xp", xp: 150 }]
+			tasks: [
+				{ id: "7E4C01233284E5DA", item: "grindless:saturn_flyby_probe", type: "item" }
+				{ id: "7D51527A02473581", item: "grindless:saturn_transfer_chart", type: "item" }
+			]
+			title: "Slingshot"
+			x: 18.0d
+			y: 3.0d
+		}
+		{
+			dependencies: ["5BC4BFE9A199F5A1"]
 			description: [
 				"GregTech's &6Fusion Reactor Mk1&r, built round your own HTS coils. Every energy hatch adds to the buffer that pays for a start, and europium needs a big start, so fit plenty of LuV hatches."
 				"At LuV it's a materials machine first: the old transmutations that faked osmium and uranium are gone, and calcium plasma from magnesium and oxygen is its power recipe."
@@ -373,8 +559,8 @@
 				{ count: 4L, id: "5A26D33DF72BC1E3", item: "gtceu:superconducting_coil", type: "item" }
 			]
 			title: "Fusion"
-			x: 10.0d
-			y: 3.0d
+			x: 22.0d
+			y: 0.0d
 		}
 		{
 			dependencies: ["543F014BB97A45F4"]
@@ -384,8 +570,8 @@
 			rewards: [{ id: "78D7DB85185F24E8", type: "xp", xp: 100 }]
 			tasks: [{ id: "3FA5997B75AD7194", item: "gtceu:europium_ingot", type: "item" }]
 			title: "Europium"
-			x: 12.0d
-			y: 3.0d
+			x: 24.0d
+			y: 0.0d
 		}
 		{
 			dependencies: ["1531C1737C6BE31B"]
@@ -407,8 +593,8 @@
 				{ id: "1B167A1C96C77B56", item: "gtceu:research_station", type: "item" }
 			]
 			title: "First Data Orb"
-			x: 14.0d
-			y: 3.0d
+			x: 26.0d
+			y: 0.0d
 		}
 	]
 	subtitle: ["Superconductors at home, a station in orbit, then out past Mars to the belt and Jupiter's moons."]

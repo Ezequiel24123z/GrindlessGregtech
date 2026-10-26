@@ -52,6 +52,8 @@ function registered() {
     for (const m of s.matchAll(/create\('([a-z_]+)', 'multiblock'\)/g)) ids.add('gtceu:' + m[1]);
     // machine ids the scripts name in a constant (E.cryobot = 'gtceu:cryobot', var DRILL = 'gtceu:harpoon_anchor_drill', ...)
     for (const m of s.matchAll(/(?:=|:)\s*'(gtceu:[a-z_]+)'/g)) ids.add(m[1]);
+    // blocks made with a spec object: `id: 'grindless:x'` ... `event.create(T.tank.id, ...)`
+    if (/event\.create\([A-Za-z.]+\.id,/.test(s)) for (const m of s.matchAll(/\bid: '(grindless:[a-z_]+)'/g)) ids.add(m[1]);
     for (const m of s.matchAll(/names = \[([^\]]+)\]/g)) for (const n of m[1].matchAll(/'([a-z_]+)'/g)) ids.add('gtceu:' + n[1]);
   }
   const industry = read('pack/kubejs/startup_scripts/grindless/luv/orbital_industry.js');
@@ -102,7 +104,9 @@ test('every item, icon and dimension in the book exists now', () => {
   const { items, icons, dims } = parseChapter(read(chapterPath));
   const missing = [...new Set([...items, ...icons])].filter((id) => !NATIVE.has(id) && !known.has(id));
   assert.deepEqual(missing, [], 'ids that nothing registers: add the package to LANDED only once it registers them');
-  assert.deepEqual(dims.filter((d) => !NATIVE_DIMENSIONS.has(d)), []);
+  const datapackDims = fs.readdirSync(path.join(root, 'pack', 'kubejs', 'data', 'grindless', 'dimension'))
+    .filter((f) => f.endsWith('.json')).map((f) => 'grindless:' + f.slice(0, -5));
+  assert.deepEqual(dims.filter((d) => !NATIVE_DIMENSIONS.has(d) && !datapackDims.includes(d)), []);
 });
 
 test('only landed packages reach the book; ids never start with 8-F', () => {

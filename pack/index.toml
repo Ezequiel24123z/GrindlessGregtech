@@ -26,7 +26,7 @@ hash = "dce0225dd68761818b94972909be4ce0d019b07c83c68f3a4c0fa7a51e0d3bd1"
 
 [[files]]
 file = "config/ftbquests/quests/chapters/luv_age.snbt"
-hash = "8db5a09ab4cc8345b38275efc893fcde5697d72cc218445167b702b5c7681460"
+hash = "9ec68325812726b3b786767571600e9dbd130ecf64ef4d93b6432acd26094e5f"
 
 [[files]]
 file = "config/ftbquests/quests/chapters/lv_age.snbt"
@@ -50,7 +50,7 @@ hash = "feacd3ebc647179416de5c6f7cd376316fb40575c566b8b5e2bea5f43b22d2fc"
 
 [[files]]
 file = "config/ftbquests/quests/chapters/pl_luv.snbt"
-hash = "59eddf12ac7f818e3759ed732b8eadd7141859dfd5da4632c4111648c682735d"
+hash = "829b7ae380a136e4326de8e47d53c98066c3c5c3f89b90228f85fcf7285f5c74"
 
 [[files]]
 file = "config/ftbquests/quests/chapters/pl_lv.snbt"
@@ -66,7 +66,7 @@ hash = "a5132ed09dcb09ddd174931514ff4279e1be2553be6a7df2b49e28581a26ea00"
 
 [[files]]
 file = "config/ftbquests/quests/chapters/power.snbt"
-hash = "2faecb21a1ec6a75eebcefe161a1debb57a8257373506e3f884ffcd7d200cfaa"
+hash = "6e8f283694a023c00d296103ff3ee9cc4ae7a8bf82350533c15c1f45ef4064c3"
 
 [[files]]
 file = "config/ftbquests/quests/chapters/productive_bees.snbt"
