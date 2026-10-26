@@ -30,6 +30,7 @@ import path from 'node:path';
 import zlib from 'node:zlib';
 import { buildModel, REPO } from './pl-model.mjs';
 import { loadIndex, inputKeys, outputKeys } from './pl-index.mjs';
+import { STATIONS, MODE as STATIONS_MODE } from '../luv-stations.mjs';
 
 const args = process.argv.slice(2);
 const opt = (name, def) => { const i = args.indexOf(name); return i >= 0 ? args[i + 1] : def; };
@@ -118,8 +119,11 @@ const dumpEra = (idx.dump.info && idx.dump.info.hidden && idx.dump.info.hidden.i
 const rankOf = (g) => (g.until === 'never' ? ERAS.length : ERAS.indexOf(g.until));
 const lateItem = new Map();
 const lateFluid = new Map();
+// a group's `unless` names a switch of lib/stations.js (from tables/stations.json): integration/hidden.js shows the group while it is on
+const switches = { stations: STATIONS.enabled === true, tether: STATIONS_MODE === 'tether', sulfur_iodine: STATIONS_MODE === 'sulfur_iodine' };
 for (const g of table.groups || []) {
   if (rankOf(g) <= ERAS.indexOf(implemented)) continue;
+  if (typeof g.unless === 'string' && switches[g.unless] === true) continue;
   for (const i of g.items || []) lateItem.set(i, g.until);
   for (const f of g.fluids || []) lateFluid.set(f, g.until);
 }

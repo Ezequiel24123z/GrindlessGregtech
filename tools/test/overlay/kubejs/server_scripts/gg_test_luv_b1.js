@@ -99,6 +99,7 @@
   var WEATHER_WAIT = 40
   var FORM_TIMEOUT = 400
   var BUILD_WAIT = 5
+  var BUILD_ENTITY_WAIT = 100
   // the rocket scanner (gg_test_gcyr_flight.js's flight pad): controller facing north, rows behind it to the south, columns -1..1
   var CTRL = { x: 18181, y: 100, z: 4 }
   var PAD_ROWS = 3
@@ -670,6 +671,10 @@
   function rocketBuild() {
     if (S.tick - S.phaseAt < BUILD_WAIT) return
     var rockets = rocketsIn()
+    // GCYR adds the rocket entity to the pad's entity section; under load (catch-up ticks) that section can lag the block removal,
+    // so wait for the entity (at most BUILD_ENTITY_WAIT ticks and 5 s) before judging the capture
+    if (!S.rocket.buildSeenAt) S.rocket.buildSeenAt = Date.now()
+    if (rockets.length === 0 && (S.tick - S.phaseAt < BUILD_ENTITY_WAIT || Date.now() - S.rocket.buildSeenAt < 5000)) return
     var r = rockets.length > 0 ? rockets[0] : null
     S.rocket.rocket = r
     var expected = {}
