@@ -141,6 +141,14 @@
       .color(0xB9C98A)
       .formula('Ln(NO3)3')
       .flags(GTMaterialFlags.DISABLE_DECOMPOSITION)
+
+    // GTM has no radium: a plain dust, the capsule's charge
+    event.create('radium')
+      .dust()
+      .color(0xE6EBD2).secondaryColor(0x8C9A7A)
+      .iconSet(GTMaterialIconSet.SHINY)
+      .formula('Ra')
+      .flags(GTMaterialFlags.DISABLE_DECOMPOSITION)
   })
 
   // ---------------------------------------------------------------- recipe types

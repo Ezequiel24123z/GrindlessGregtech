@@ -26,6 +26,7 @@ ClientEvents.lang('en_us', event => {
 
     add('material.gtceu.minor_actinide_strip', 'Minor Actinide Strip')
     add('material.gtceu.lanthanide_nitrate', 'Lanthanide Nitrate')
+    add('material.gtceu.radium', 'Radium')
     add('tooltip.grindless.minor_actinide_strip', 'The americium and curium stripped from the raffinate. Split it in the Actinide Partitioning Plant (circuit 2).')
     add('tooltip.grindless.lanthanide_nitrate', 'Left behind by the partitioning. A chemical reactor with hydrochloric acid turns it into rare earth chloride solution for the extraction cascade.')
 })
@@ -52,6 +53,7 @@ ClientEvents.lang('es_es', event => {
 
     add('material.gtceu.minor_actinide_strip', 'Extracto de actínidos menores')
     add('material.gtceu.lanthanide_nitrate', 'Nitrato de lantánidos')
+    add('material.gtceu.radium', 'Radio')
     add('tooltip.grindless.minor_actinide_strip', 'El americio y el curio extraídos del refinado. Sepáralos en la Planta de partición de actínidos (circuito 2).')
     add('tooltip.grindless.lanthanide_nitrate', 'Lo que deja la partición. Un reactor químico con ácido clorhídrico lo convierte en solución de cloruros de tierras raras para la cascada de extracción.')
 })
