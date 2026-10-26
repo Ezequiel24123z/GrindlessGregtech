@@ -1,0 +1,127 @@
+name: Work package
+description: One package of Grindless work for one agent session (contract; AGENTS.md "Work packages").
+title: "[PKG <id>] <objective>"
+labels: ["work-package"]
+body:
+  - type: input
+    id: id
+    attributes:
+      label: Id
+      description: Era and slot, e.g. ZPM-B1, BUG-GCYR-GRAV.
+    validations:
+      required: true
+  - type: textarea
+    id: objective
+    attributes:
+      label: Objective
+      description: One or two sentences. What exists when this is done.
+    validations:
+      required: true
+  - type: textarea
+    id: rationale
+    attributes:
+      label: Rationale
+      description: Why now; the pack rule or era goal it serves (cite docs path:line, do not paste).
+    validations:
+      required: true
+  - type: textarea
+    id: allowed
+    attributes:
+      label: Allowed files
+      description: Exact paths or globs this package may create or edit. Shared files (tier JSONs, lang/*.json, emi_info_lang.js, zones.json row) only if listed here.
+    validations:
+      required: true
+  - type: textarea
+    id: prohibited
+    attributes:
+      label: Prohibited files
+      description: Always includes the integrator-owned set; add package-specific ones.
+      value: |
+        pack/index.toml, pack/pack.toml, pack/kubejs/data/grindless/tables/hidden_until.json, generated quest chapters,
+        AGENTS.md, docs/STATUS.md, DECISIONS.md, CREDITS.md, pack/kubejs/*/grindless/lib/**
+    validations:
+      required: true
+  - type: textarea
+    id: references
+    attributes:
+      label: References (path:line)
+      description: The only context to read. Pattern to copy, helpers, design section, decision line.
+    validations:
+      required: true
+  - type: textarea
+    id: dependencies
+    attributes:
+      label: Dependencies
+      description: Packages or commits that must be merged first ("none" if none).
+    validations:
+      required: true
+  - type: textarea
+    id: invariants
+    attributes:
+      label: Invariants
+      description: What must stay true (no lookup collision, no later-era input, save compatibility, ...).
+    validations:
+      required: true
+  - type: textarea
+    id: acceptance
+    attributes:
+      label: Acceptance criteria
+      description: Checkable statements.
+    validations:
+      required: true
+  - type: textarea
+    id: tests
+    attributes:
+      label: T0 and T1 tests
+      description: T0 is always tools/Check-Fast.ps1. T1 only for a named new mechanism, with the doubt it resolves, the gg_test command and zone (Get-GGTestZone -Id / -Next), or "none".
+      value: |
+        T0: powershell -NoProfile -ExecutionPolicy Bypass -File tools\Check-Fast.ps1
+        T1: none
+    validations:
+      required: true
+  - type: input
+    id: repairs
+    attributes:
+      label: Maximum repairs
+      value: "2"
+    validations:
+      required: true
+  - type: textarea
+    id: escalation
+    attributes:
+      label: Escalation evidence
+      description: What to return after the second failed repair (and to whom).
+      value: |
+        Failing check, at most 20 relevant lines (triage agent output), suspected path:line, attempts made. To the orchestrator; Opus only if it is a cross-system contradiction.
+    validations:
+      required: true
+  - type: textarea
+    id: commits
+    attributes:
+      label: Expected commits
+      description: Number and one-line message of each commit.
+    validations:
+      required: true
+  - type: dropdown
+    id: agent
+    attributes:
+      label: Agent
+      options:
+        - implementer (Sonnet)
+        - mechanical (Haiku)
+    validations:
+      required: true
+  - type: textarea
+    id: handoff
+    attributes:
+      label: Handoff (filled by the worker, at most 15 lines)
+      description: Goes in the PR or merge commit body too.
+      value: |
+        Result: accepted | escalated
+        Files:
+        T0:
+        T1 (run id):
+        Proposed DECISIONS line:
+        Proposed CREDITS line:
+        Risks:
+        Metrics: tools/metrics/Measure-Package.ps1 -Package <id> -Session <session id>
