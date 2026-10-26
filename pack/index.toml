@@ -3298,7 +3298,7 @@ hash = "229e0fdba455888292da0eb59628876cca82add03fea653ed4d4fb105ed8ed46"
 
 [[files]]
 file = "kubejs/data/grindless/tables/stations.json"
-hash = "8c081e83cc4649d0e74df12c63cc71ca9812f563840582b1f50fed0406260a9b"
+hash = "3860c9a0065c5059c04f98c8bd793a37db4b82cced2a33e09d1fb140acac5942"
 
 [[files]]
 file = "kubejs/data/grindless/tables/steam_blast_furnace.json"
@@ -4050,7 +4050,7 @@ hash = "43e0c121267c0aabc56d792bc7932f33af77510dcabd405fa47d2962d3a132ff"
 
 [[files]]
 file = "kubejs/startup_scripts/grindless/lib/stations.js"
-hash = "6bc4c10ebe1e46ba795dddd1683f333b3a31ba7bd0e011037a6c6af3dfd8d5d1"
+hash = "cd4a570ea345f51d8e8b0c8979f7a6225ce96ef4c06c304f572793beceb3c55b"
 
 [[files]]
 file = "kubejs/startup_scripts/grindless/lib/tables.js"

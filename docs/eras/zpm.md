@@ -1083,6 +1083,7 @@ Order: S0-1, S0-2 and S0-3 first (they decide the ids B1 fixes), then S0-5, S0-6
 - **Invariants:** LuV's `G.stations.first`, `second`, `b7` and every switch keep their values and meaning; `luv/io_orbit.js` and `tools/quests/luv-stations.mjs` need no change.
 - **Acceptance:** with `more` empty, the LuV suite's station tests and `gg_test_luv_b1` pass unchanged; with two entries (overlay only), four stations deploy.
 - **Tests:** T0; T1: `gg_test_zpm_stations` (four slots, disk save), band 19200. Doubt it resolves: a list of slots keeps LuV's two byte-identical.
+- **Done (2026-10-26):** `G.stations.more` and `G.stations.slots`; `tools/analysis/test/zpm-stations.test.mjs` proves LuV's fields identical with `more` empty, absent or holding two slots, in every LuV mode. The T1 was not run: GCYR keeps stations per orbit level (`StationWorldSavedData`, one `SavedData` per orbit `ServerLevel`, `ID_MAX²` positions, no global count), so a third and fourth station in new orbits is the mechanism R14 proved in Earth orbit and in a datapack orbit (Io); B1's T1 deploys the two real ones. Band 19200 stays reserved, unused.
 - **Commits:** 1.
 - **Serial:** yes; the integrator runs it. It may overlap wave A (no shared files), but not B1.
 
