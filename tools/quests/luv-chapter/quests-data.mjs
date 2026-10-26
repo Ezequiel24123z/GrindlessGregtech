@@ -15,7 +15,7 @@ const ri = (item, count) => ({ type: 'item', item, count });
 
 // B7 is one of two: the flux-tube tether with a second station (B7T) or the sulfur-iodine plant on Io (B7S), decided by spike S0-3.
 export const PACKAGES = ['A1', 'A2', 'A3', 'A4', 'A5', 'B1', 'B2', 'B3', 'B4', 'B5', 'B6', 'B7T', 'B7S', 'B8', 'B9', 'B10'];
-export const LANDED = ['A1', 'A2', 'A3', 'A4', 'A5', 'B2', 'B3', 'B4', 'B6', 'B10'];
+export const LANDED = ['A1', 'A2', 'A3', 'A4', 'A5', 'B2', 'B3', 'B4', 'B6', 'B9', 'B10'];
 // what gen.mjs --all draws: everything, with the tether
 export const ALL_STATE = PACKAGES.filter((p) => p !== 'B7S');
 
@@ -419,10 +419,10 @@ export const QUESTS = [
     key: 'CHIRP', title: 'Chirp', icon: 'gtceu:gravitational_wave_detector', pkg: ['B1', 'B9'], shape: 'gear', size: 1.25,
     deps: ['GANY'], x: 20, y: 3,
     desc: [
-      "The &6Gravitational-Wave Detector&r is an L of vacuum tubes buried in the ice, with your sapphire test masses for mirrors. After a long observing run it writes the catalogue: two black holes merging, heard as a rising chirp.",
-      'Copy the catalogue with a data orb.',
+      "The &6Gravitational-Wave Detector&r is an L of vacuum tubes buried in packed or blue ice, with your sapphire test masses for mirrors. Put IV's Sagittarius A* signal in its bus, where it stays, and a long observing run writes the catalogue: two black holes merging, heard as a rising chirp.",
+      "Copy the catalogue with a data orb. Plain ice won't do for the cover; it melts.",
     ],
-    tasks: [it('gtceu:gravitational_wave_detector'), it('grindless:sapphire_test_mass', 4), it('grindless:gravitational_wave_catalogue')],
+    tasks: [it('gtceu:gravitational_wave_detector'), it('grindless:sapphire_test_mass', 4), it('grindless:sagittarius_a_star_signal'), it('grindless:gravitational_wave_catalogue')],
     rewards: [xp(150), ri('gtceu:data_orb', 2)],
   },
   {
@@ -447,7 +447,7 @@ export const QUESTS = [
     key: 'SLING', title: 'Slingshot', icon: 'grindless:saturn_transfer_chart', pkg: ['B1', 'B9'],
     deps: ['COIL'], x: 22, y: 3,
     desc: [
-      "The flyby probe swings round Jupiter the way Pioneer and the Voyagers did and keeps going. It takes its time reporting back, and what it sends is the &6Saturn Transfer Chart&r: where you're going next, and this time you won't land.",
+      "The flyby probe swings round Jupiter the way Pioneer and the Voyagers did and keeps going. It takes its time reporting back, and what it sends is the &6Saturn Transfer Chart&r: where you're going next, and this time you won't land. Copy it with a data orb and keep it for ZPM.",
     ],
     tasks: [it('grindless:saturn_flyby_probe'), it('grindless:saturn_transfer_chart')],
     rewards: [xp(150)],
