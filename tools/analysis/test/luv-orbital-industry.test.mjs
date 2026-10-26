@@ -59,6 +59,8 @@ test('smelter has a 3x3x7 shell, eight-coil hollow levitation core and six-block
   assert.equal(s.slices.length, 7);
   s.slices.forEach(rows => { assert.equal(rows.length, 9); rows.forEach(r => assert.equal(r.length, 3)); });
   assert.equal(count(s, 'K'), 8);
+  // Cached native registry: borosilicate_glass is a fluid; the structure uses its block item.
+  assert.deepEqual(Array.from(s.symbols.G.blocks), ['gtceu:borosilicate_glass_block']);
   assert.equal(s.slices[3][1], 'KAK');
   assert.equal(s.slices[3][2], 'CGC');
   assert.deepEqual(Array.from(s.slices[3].slice(3)), [' F ', ' G ', ' F ', ' G ', ' F ', ' G ']);
@@ -98,7 +100,7 @@ test('all six design routes retain exact quantities, circuits, costs, dimensions
     ['whipple_shield_casing', 2, ['4x gtceu:aluminium_ingot', 'gtceu:titanium_dust', '2x gcyr:para_aramid_foil'], [['gtceu:hydrogen', 100]], '2x grindless:whipple_shield_casing', 7680, 200, false],
     ['containerless_naquadah_alloy', 3, ['2x gtceu:naquadah_dust', 'gtceu:osmiridium_dust', 'gtceu:trinium_dust'], [], '4x gtceu:naquadah_alloy_ingot', 30720, 2000, false],
     ['wake_uhpic_wafer', 1, ['gtceu:hpic_wafer', '4x gtceu:indium_gallium_phosphide_dust'], [['gtceu:naquadah', 288]], 'gtceu:uhpic_wafer', 30720, 600, true],
-    ['wake_hpic_wafer', 2, ['gtceu:mpic_wafer', 'gtceu:indium_gallium_phosphide_dust'], [['gtceu:vanadium_gallium', 144]], 'gtceu:hpic_wafer', 7680, 600, true],
+    ['wake_hpic_wafer', 2, ['gtceu:mpic_wafer', 'gtceu:indium_gallium_phosphide_dust'], [['gtceu:molten_vanadium_gallium', 144]], 'gtceu:hpic_wafer', 7680, 600, true],
     ['triple_junction_wafer', 3, ['gtceu:germanium_plate', 'gtceu:gallium_arsenide_dust', 'gtceu:indium_gallium_phosphide_dust'], [], 'grindless:triple_junction_wafer', 7680, 400, true]
   ];
   for (const [name, circuit, items, fluids, output, eut, duration, cleanroom] of expected) {
@@ -149,7 +151,7 @@ test('merged A1 provides B3 design IDs, non-decomposable ZBLAN and the station c
   const registry = {}, materials = {};
   G.tables = {};
   G.readJsonTable = file => JSON.parse(read('pack/' + file));
-  context.GTCEuStartupEvents = { registry(kind, fn) { registry[kind] = fn; } };
+  context.GTCEuStartupEvents = { registry(kind, fn) { registry[kind] = fn; }, materialModification() {} };
   context.StartupEvents = { registry() {} };
   context.GTMaterials = {};
   context.GTMaterialIconSet = { GLASS: 'glass' };
@@ -238,11 +240,25 @@ test('native fixture places four full shapes only inside its reserved band witho
   assert.ok(!log.some(s => s.includes('|exception|')), log.join('\n'));
   const sets = commands.filter(s => s.includes(' run setblock '));
   assert.ok(sets.length > 250);
+  // Independent native registry snapshot: classify blocks separately from fluids, and allow
+  // only these explicit A1 blocks/controllers to be absent from the pre-LuV dump.
+  const existingBlocks = new Set([
+    'minecraft:air', 'gtceu:inert_machine_casing', 'gtceu:hssg_coil_block',
+    'gtceu:borosilicate_glass_block', 'gtceu:titanium_frame',
+    'gtceu:luv_energy_input_hatch', 'gtceu:luv_input_bus', 'gtceu:luv_output_bus',
+    'gtceu:luv_input_hatch', 'gtceu:auto_maintenance_hatch', 'gtceu:cleaning_maintenance_hatch'
+  ]);
+  const newBlocks = new Set([
+    'grindless:station_truss_casing', 'grindless:whipple_shield_casing',
+    'gtceu:microgravity_smelter', 'gtceu:wake_shield_facility'
+  ]);
   const counts = {};
   for (const cmd of sets) {
     const match = /^execute in (\S+) run setblock (-?\d+) (-?\d+) (-?\d+) (.+) replace$/.exec(cmd);
     assert.ok(match, cmd);
     const [, dim, xs, ys, zs, id] = match;
+    const block = id.split('[')[0];
+    assert.ok(existingBlocks.has(block) || newBlocks.has(block), 'unverified native block ID: ' + block);
     const [x, y, z] = [xs, ys, zs].map(Number);
     assert.ok(x >= 16128 && x <= 16191 && z >= 0 && z <= 15, cmd);
     assert.ok(y >= (dim === 'minecraft:overworld' ? 98 : 198), cmd);

@@ -18,7 +18,7 @@
       fluids: [['gtceu:naquadah', 288]], output: 'gtceu:uhpic_wafer', eut: 30720, duration: 600, cleanroom: true },
     { name: 'wake_hpic_wafer', type: 'wake_epitaxy', circuit: 2,
       items: ['gtceu:mpic_wafer', 'gtceu:indium_gallium_phosphide_dust'],
-      fluids: [['gtceu:vanadium_gallium', 144]], output: 'gtceu:hpic_wafer', eut: 7680, duration: 600, cleanroom: true },
+      fluids: [['gtceu:molten_vanadium_gallium', 144]], output: 'gtceu:hpic_wafer', eut: 7680, duration: 600, cleanroom: true },
     { name: 'triple_junction_wafer', type: 'wake_epitaxy', circuit: 3,
       items: ['gtceu:germanium_plate', 'gtceu:gallium_arsenide_dust', 'gtceu:indium_gallium_phosphide_dust'],
       fluids: [], output: 'grindless:triple_junction_wafer', eut: 7680, duration: 400, cleanroom: true }
