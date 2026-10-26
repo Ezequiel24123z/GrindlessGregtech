@@ -1,17 +1,19 @@
-// EMI coverage audit (tools/analysis/emi-coverage.mjs): the static KubeJS stand-in that runs the pack's scripts, the EMI model and the
-// pack itself (zero gaps).
+// EMI coverage audit (tools/analysis/emi-coverage.mjs): the static KubeJS stand-in that runs the pack's scripts, the EMI model, the
+// pack itself (zero gaps), and the native client fixture's contract (expectations current, Rhino-safe ES5, disabled by default).
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import path from 'node:path';
 import { test } from 'node:test';
+import vm from 'node:vm';
 import { fileURLToPath } from 'node:url';
-import { runCoverage } from '../emi-coverage.mjs';
-import { auditEmiCoverage, fixtureExpectations, loadEmiData, parseEmiStack, previewBlocks, renderCoverageText } from '../lib/emi_coverage.mjs';
+import { DEFAULT_EXPECT, runCoverage } from '../emi-coverage.mjs';
+import { auditEmiCoverage, fixtureExpectations, loadEmiData, parseEmiStack, previewBlocks, renderCoverageText, renderExpectations } from '../lib/emi_coverage.mjs';
 import { runPackScripts } from '../lib/kubejs_static.mjs';
 import { gf, gi, gt, mkDump, shaped } from './helpers.mjs';
 
 const here = path.dirname(fileURLToPath(import.meta.url));
 const root = path.resolve(here, '..', '..', '..');
+const overlay = path.join(root, 'tools', 'test', 'overlay', 'kubejs');
 
 // ---------------------------------------------------------------- the model, on in-memory dumps
 
@@ -200,4 +202,136 @@ test('our info pages live where EMI reads them (the emi namespace) and every pag
   for (const p of emi.pages) assert.match(p.file, /^recipe\/additions\/grindless\/[a-z_]+\.json$/);
   const used = new Set(fixtureExpectations(packRun.res).pages);
   for (const p of emi.pages) assert.ok(used.has(p.id), p.file + ' covers no audited stack');
+});
+
+test('the native fixture\'s expectations are current (node tools/analysis/emi-coverage.mjs --expect)', () => {
+  const want = renderExpectations(fixtureExpectations(packRun.res));
+  assert.equal(fs.readFileSync(DEFAULT_EXPECT, 'utf8').replace(/\r\n/g, '\n'), want);
+});
+
+// ---------------------------------------------------------------- the native fixture
+
+const clientFixture = fs.readFileSync(path.join(overlay, 'client_scripts', 'gg_test_emi_coverage.js'), 'utf8');
+const serverFixture = fs.readFileSync(path.join(overlay, 'server_scripts', 'gg_test_emi_coverage.js'), 'utf8');
+const codeOnly = (src) => src.replace(/\/\*[\s\S]*?\*\//g, '').replace(/\/\/.*$/gm, '').replace(/'(?:\\.|[^'\\\n])*'/g, "''");
+
+test('the fixture is ES5 for Rhino, valid, disabled by default, and read-only (no clicks, no teleports, no blocks)', () => {
+  for (const src of [clientFixture, serverFixture]) {
+    assert.doesNotMatch(codeOnly(src), /\b(const|let|class)\b|=>|`/);
+    assert.doesNotThrow(() => new vm.Script(src));
+    assert.doesNotMatch(codeOnly(src), /setDown|teleport|setBlock|\.runCommand|keyUse/);
+  }
+  assert.deepEqual(JSON.parse(fs.readFileSync(path.join(overlay, 'config', 'gg_test_emi_coverage.json'), 'utf8')), { enabled: false });
+  assert.match(clientFixture, /GGTEST\|emi_coverage\|/);
+});
+
+test('the fixture\'s integration hook arms the client half and acknowledges the server side, like the serial dispatcher expects', () => {
+  class SharedMap extends Map {
+    get(k) { return super.has(k) ? super.get(k) : null; }
+    put(k, v) { this.set(k, v); return null; }
+  }
+  const logs = [];
+  const ticks = [];
+  const global = {};
+  const ctx = {
+    global, console: { info: (s) => logs.push(s) }, Java: { loadClass: () => SharedMap },
+    JsonIO: { readJson: () => null, toPrettyString: (x) => JSON.stringify(x) },
+    ClientEvents: { tick: (fn) => ticks.push(fn) }, Client: { player: null }, Date,
+  };
+  vm.runInNewContext(serverFixture, ctx);
+  vm.runInNewContext(clientFixture, ctx);
+  assert.equal(typeof global.ggTestEmiCoverageStart, 'function');
+  ticks.forEach((fn) => fn({}));
+  assert.equal(logs.length, 0, 'asleep without its marker or the dispatcher');
+  global.ggTestEmiCoverageStart({});
+  assert.equal(String(global.ggEmiCoverage.get('serverDone')), 'true');
+  assert.equal(String(global.ggEmiCoverage.get('requested')), 'true');
+  ctx.Client.player = { age: 5 };
+  global.ggEmiCoverage.put('cancel', 'test');
+  ticks.forEach((fn) => fn({}));
+  assert.equal(String(global.ggEmiCoverage.get('clientDone')), 'true');
+  assert.equal(String(global.ggEmiCoverage.get('failed')), 'true');
+  assert.ok(logs.some((l) => /^GGTEST\|emi_coverage\|all\|FAIL\|cancelled/.test(l)) && logs.at(-1) === 'GGTEST|emi_coverage|DONE', logs.join('\n'));
+});
+
+// A stand-in EMI built from the expectations themselves (every route present), so the fixture's own checks run here: all PASS, then
+// one intermediate loses its uses, one route and one page go missing, and an unaudited item appears.
+function simulateFixture(exp, { dropUsesOf = null, dropRoute = null, dropPage = null, extraItem = null } = {}) {
+  const recipes = [];
+  const rec = (id, cat, ins, outs) => recipes.push({ id, cat, ins: new Set(ins), outs: new Set(outs) });
+  let n = 0;
+  for (const e of exp.items) {
+    for (const cat of e.made) if (!(dropRoute && dropRoute.id === e.id && dropRoute.cat === cat)) rec('sim:r' + n++, cat, [], [e.id]);
+    if (e.id !== dropUsesOf) for (const cat of e.used) if (!(dropRoute && dropRoute.id === e.id && dropRoute.cat === cat)) rec('sim:r' + n++, cat, [e.id], []);
+  }
+  for (const p of exp.pages) if (p !== dropPage) rec(p, 'emi:info', [], []);
+  for (const l of exp.legacy) for (const c of l.conversions) rec(c, 'minecraft:crafting', [l.id], []);
+  const wrap = (r) => ({ getId: () => (r.id.startsWith('sim:') ? null : { toString: () => r.id }), getCategory: () => ({ getId: () => ({ toString: () => r.cat }) }) });
+  const list = (arr) => Object.assign(arr.slice(), { size() { return this.length; }, get(i) { return this[i]; } });
+  const rm = {
+    getRecipesByOutput: (s) => recipes.filter((r) => r.outs.has(s.id)).map(wrap),
+    getRecipesByInput: (s) => recipes.filter((r) => r.ins.has(s.id)).map(wrap),
+    getRecipe: (rl) => { const r = recipes.find((x) => x.id === String(rl)); return r ? wrap(r) : null; },
+    getRecipes: () => recipes.map(wrap),
+  };
+  const items = new Set(exp.items.filter((e) => e.kind === 'item').map((e) => e.id).concat(exp.legacy.map((l) => l.id)));
+  if (extraItem) items.add(extraItem);
+  const fluids = new Set(exp.items.filter((e) => e.kind === 'fluid').map((e) => e.id));
+  class RL { constructor(s) { this.s = String(s); } toString() { return this.s; } }
+  const classes = {
+    'net.minecraft.resources.ResourceLocation': RL,
+    'net.minecraft.core.registries.BuiltInRegistries': {
+      ITEM: { keySet: () => [...items].map((i) => new RL(i)), containsKey: (rl) => items.has(String(rl)) },
+      FLUID: { containsKey: (rl) => fluids.has(String(rl)), get: (rl) => String(rl) },
+    },
+    'dev.emi.emi.api.stack.ItemEmiStack': class { constructor(st) { this.id = st.id; } },
+    'dev.emi.emi.api.stack.FluidEmiStack': class { constructor(fl) { this.id = fl; } },
+    'dev.emi.emi.api.EmiApi': { getRecipeManager: () => rm },
+    'dev.emi.emi.registry.EmiStackList': { stacks: [...items].filter((i) => !exp.legacy.some((l) => l.id === i)).map((i) => ({ getId: () => i })) },
+    'dev.emi.emi.runtime.EmiReloadManager': { isLoaded: () => true },
+    'java.util.ArrayList': function (x) { return list(Array.from(x)); },
+    'com.google.gson.JsonParser': { parseString: (s) => JSON.parse(s) },
+  };
+  const logs = [];
+  const written = {};
+  const ticks = [];
+  const ctx = {
+    global: {}, console: { info: (s) => logs.push(s) }, Date, Client: { player: { age: 90 } },
+    Java: { loadClass: (name) => classes[name] },
+    Item: { of: (id) => ({ id }) },
+    JsonIO: {
+      readJson: (p) => (p === 'kubejs/config/gg_test_emi_coverage.json' ? { enabled: true } : p === 'kubejs/config/gg_test_emi_coverage_expect.json' ? exp : null),
+      toPrettyString: (x) => JSON.stringify(x),
+      write: (p, x) => { written[p] = x; },
+    },
+    ClientEvents: { tick: (fn) => ticks.push(fn) },
+  };
+  vm.runInNewContext(clientFixture, ctx);
+  ticks.forEach((fn) => fn({}));
+  const status = Object.fromEntries(logs.filter((l) => l.split('|').length >= 4).map((l) => l.split('|')).map((p) => [p[2], p[3]]));
+  return { logs, status, report: written['kubejs/exported/gg_emi_coverage_report.json'], player: ctx.Client.player };
+}
+
+test('the fixture\'s checks, against a stand-in EMI: all PASS when every expected route is there, and each kind of gap is caught', () => {
+  const exp = JSON.parse(fs.readFileSync(DEFAULT_EXPECT, 'utf8'));
+  let sim = simulateFixture(exp);
+  assert.deepEqual(sim.status, {
+    client_hold: 'NOTE', emi_loaded: 'PASS', expectations: 'NOTE', registry: 'PASS', acquisition: 'PASS', use: 'PASS', routes: 'PASS',
+    preview_routes: 'NOTE', pages: 'PASS', legacy: 'PASS', all: 'PASS',
+  }, sim.logs.join('\n'));
+  assert.equal(sim.logs.at(-1), 'GGTEST|emi_coverage|DONE');
+  assert.equal(sim.player.age, 20, 'standalone, it keeps mc-runtime-test in the world');
+  assert.equal(sim.report.items.length, exp.items.length);
+
+  const sample = exp.items.find((e) => e.id === 'grindless:vein_sample_ilmenite_moon');
+  assert.ok(sample.needUse && sample.used.includes('gtceu:vein_drilling') && sample.used.includes('emi:info'));
+  sim = simulateFixture(exp, { dropUsesOf: sample.id, dropPage: exp.pages[0], extraItem: 'grindless:not_audited',
+    dropRoute: { id: 'grindless:mars_chart', cat: 'gtceu:deep_space_tracking' } });
+  assert.equal(sim.status.use, 'FAIL');
+  assert.equal(sim.status.routes, 'FAIL');
+  assert.equal(sim.status.pages, 'FAIL');
+  assert.equal(sim.status.registry, 'FAIL');
+  assert.equal(sim.status.all, 'FAIL');
+  assert.ok(sim.logs.some((l) => l.includes('grindless:mars_chart made in gtceu:deep_space_tracking')), sim.logs.join('\n'));
+  assert.ok(sim.logs.some((l) => l.includes('none for: ' + sample.id)));
 });
