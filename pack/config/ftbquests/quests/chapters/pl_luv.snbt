@@ -67,13 +67,6 @@
 			y: 9.25d
 		}
 		{
-			id: "3B369EC4693EC06B"
-			linked_quest: "11CBF06B464C189F"
-			shape: "rsquare"
-			x: 5.0d
-			y: 24.5d
-		}
-		{
 			id: "72D92B3C8168025D"
 			linked_quest: "5A5AFC686B2574CF"
 			shape: "rsquare"
@@ -864,6 +857,20 @@
 			y: 23.0d
 		}
 		{
+			icon: "gtceu:tiny_uranium_235_dust"
+			id: "70DB3352193055E1"
+			shape: "rsquare"
+			size: 1.0d
+			subtitle: "A pinch of the hot cell's U-235"
+			tasks: [
+				{ id: "1DF30AEBDC0B4B48", item: "gtceu:tiny_uranium_235_dust", optional_task: true, type: "item" }
+				{ id: "32D0236BEC2C3236", type: "checkmark" }
+			]
+			title: "Tiny Uranium-235 Dust"
+			x: 5.0d
+			y: 24.5d
+		}
+		{
 			dependencies: ["59202F5B9BA3164A"]
 			icon: "gtceu:phosphorus_dust"
 			id: "5BC4FD2C9BA4AB60"
@@ -891,11 +898,11 @@
 			y: 21.5d
 		}
 		{
-			dependencies: ["7DA62C21CBF6BD96", "11CBF06B464C189F"]
+			dependencies: ["7DA62C21CBF6BD96", "70DB3352193055E1"]
 			icon: "gtceu:mutagen_bucket"
 			id: "1C51F11F885E4373"
 			size: 1.0d
-			subtitle: "A pinch of uranium-235"
+			subtitle: "Sludge and a tiny pile of uranium-235"
 			tasks: [
 				{ id: "381B78EDE59FE1A7", item: "gtceu:mutagen_bucket", optional_task: true, type: "item" }
 				{ id: "34301AE7CE18E521", type: "checkmark" }

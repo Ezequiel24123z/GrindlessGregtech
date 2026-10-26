@@ -50,7 +50,7 @@ hash = "feacd3ebc647179416de5c6f7cd376316fb40575c566b8b5e2bea5f43b22d2fc"
 
 [[files]]
 file = "config/ftbquests/quests/chapters/pl_luv.snbt"
-hash = "829b7ae380a136e4326de8e47d53c98066c3c5c3f89b90228f85fcf7285f5c74"
+hash = "ae4f2e42d4e813719b89fbfe6aa6d578527178ec16c2ad18d20d2a11eada6a1a"
 
 [[files]]
 file = "config/ftbquests/quests/chapters/pl_lv.snbt"
