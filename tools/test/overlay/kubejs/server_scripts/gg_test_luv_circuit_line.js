@@ -13,6 +13,8 @@
 //                       inputs + 72 mB soldering alloy -> 32 wetware processors; GT--'s gtnn:...wetware_processor_luv_soldering_alloy is gone
 //   research_entry      the type's data-stick entry for the research id lists our wetware recipe (what GT--'s checkResearch reads:
 //                       GTM's KubeJS plugin files every added GT recipe there through GTRecipeBuilder#save)
+//   molten_cerrobase    live grindless:fluid_heater/molten_cerrobase_140: 144 mB gtceu:cerrobase_140 -> 144 mB molten, 120 EU/t x 181 t
+//                       (GTM's ingot melt price), and gtnn:assembly_line/circuit_assembly_line takes 1,440 mB of that molten fluid
 //   rule_table          GTM's EnergyContainerList.calculateVoltageAmperage + GTUtil tiers for 1 x LuV 2A/4A/16A, 1 x ZPM 2A/4A and
 //                       two LuV 2A: GT--'s combined tier and GTM's max tier, as S0-4.md's table says
 //   npu_sources         recipe manager: no recipe <= 32,768 EU/t (any mod, any type) outputs gtceu:neuro_processing_unit unless its
@@ -55,6 +57,8 @@
   var LINE = 'gtnn:circuit_assembly_line'
   var NPU_RECIPE = 'gtceu:circuit_assembler/neuro_processor'
   var WET_RECIPE = 'grindless:circuit_assembly_line/wetware_processor_luv'
+  var MELT_RECIPE = 'grindless:fluid_heater/molten_cerrobase_140'
+  var LINE_RECIPE = 'gtnn:assembly_line/circuit_assembly_line'
   var GTNN_WET_RECIPE = 'gtnn:circuit_assembly_line/wetware_processor_luv_soldering_alloy'
   var NPU = 'gtceu:neuro_processing_unit'
   var WETWARE = 'gtceu:wetware_processor'
@@ -359,6 +363,20 @@
         euTier(r) === 6 && ins.length === 6 && outs.join(',') === '32 ' + WETWARE && S.researchId === RESEARCH_FALLBACK && gone,
         inputEUt(r) + ' EU/t x ' + r.duration + ' t, EU tier ' + euTier(r) + ', research ' + S.researchId + ', in [' + ins.concat(fl).join(', ') +
         '] -> ' + outs.join(', ') + '; GT--\'s original ' + (gone ? 'removed' : 'STILL LIVE'))
+    })
+
+    // C3 found GT--'s line unbuildable: its assembly-line recipe takes molten cerrobase 140, which nothing made
+    safely('molten_cerrobase', function () {
+      var c = lazy()
+      var r = liveRecipe(MELT_RECIPE)
+      if (r === null) throw new Error(MELT_RECIPE + ' is not in the recipe manager')
+      var fin = asArray(c.RecipeHelper.getInputFluids(r)).map(function (st) { return st.getAmount() + ' ' + fluidName(st) })
+      var fout = asArray(c.RecipeHelper.getOutputFluids(r)).map(function (st) { return st.getAmount() + ' ' + fluidName(st) })
+      var line = liveRecipe(LINE_RECIPE)
+      var lineFluids = line === null ? [] : asArray(c.RecipeHelper.getInputFluids(line)).map(function (st) { return st.getAmount() + ' ' + fluidName(st) })
+      check('molten_cerrobase', String(r.recipeType.registryName) === 'gtceu:fluid_heater' && inputEUt(r) === 120 && Number(r.duration) === 181 &&
+        fin.join(',') === '144 gtceu:cerrobase_140' && fout.join(',') === '144 gtceu:molten_cerrobase_140' && lineFluids.indexOf('1440 gtceu:molten_cerrobase_140') >= 0,
+        inputEUt(r) + ' EU/t x ' + r.duration + ' t: [' + fin.join(', ') + '] -> [' + fout.join(', ') + ']; ' + LINE_RECIPE + ' takes [' + lineFluids.join(', ') + ']')
     })
 
     safely('research_entry', function () {
