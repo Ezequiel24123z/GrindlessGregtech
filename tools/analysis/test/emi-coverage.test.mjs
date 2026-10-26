@@ -317,6 +317,7 @@ function simulateFixture(exp, { dropUsesOf = null, dropRoute = null, dropPage = 
     'dev.emi.emi.runtime.EmiReloadManager': { isLoaded: () => true },
     'java.util.ArrayList': function (x) { return list(Array.from(x)); },
     'com.google.gson.JsonParser': { parseString: (s) => JSON.parse(s) },
+    'net.minecraft.FileUtil': { createDirectoriesSafe: (dir) => { assert.equal(dir, 'kubejs/exported'); } },
   };
   const logs = [];
   const written = {};
