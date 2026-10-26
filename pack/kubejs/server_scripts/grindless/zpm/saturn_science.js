@@ -6,8 +6,8 @@
 //     circuit 1  1 aerogel cartridge (consumed) -> 2,000 mB Enceladus brine + 4 silica nanograins + 250 mB hydrogen, 122,880 EU/t x 400 t
 //   kronoseismology (Ring Seismometer)
 //     circuit 1  1 data orb + the Saturn transfer chart (NOT consumed: the station's track fixes the occultation geometry) + 100 mB liquid
-//                helium (the photometer's cryostat) -> 1 Saturn interior model, 122,880 EU/t x 6,000 t
-//     circuit 2  1 data orb + the Saturn interior model (NOT consumed) -> 1 Uranus transfer chart, 122,880 EU/t x 6,000 t
+//                helium (the photometer's cryostat) -> 1 Saturn interior model, 122,880 EU/t x 600 t
+//     circuit 2  1 data orb + the Saturn interior model (NOT consumed) -> 1 Uranus transfer chart, 122,880 EU/t x 600 t
 //   gtceu:assembler (ZPM), the cartridge's two routes: from silica aerogel (the loop: one cartridge's four grains become four aerogel,
 //     so one flight pays for the next four) and the first one from Earth's silica dust, the seed of the loop.
 //   crafting: the two controllers, and the copies of the interior model and the Uranus chart (one + data orb -> 2, the observatory
@@ -39,11 +39,11 @@
     { name: 'saturn_interior_model', type: 'kronoseismology', circuit: 1,
       itemsIn: [{ id: ORB, count: 1 }], notConsumed: [SATURN_CHART],
       fluidsIn: [{ id: 'gtceu:liquid_helium', amount: 100 }], fluidsOut: [],
-      itemsOut: [{ id: MODEL, count: 1 }], eut: ZPM_VA, duration: 6000 },
+      itemsOut: [{ id: MODEL, count: 1 }], eut: ZPM_VA, duration: 600 },
     { name: 'uranus_transfer_chart', type: 'kronoseismology', circuit: 2,
       itemsIn: [{ id: ORB, count: 1 }], notConsumed: [MODEL],
       fluidsIn: [], fluidsOut: [],
-      itemsOut: [{ id: URANUS_CHART, count: 1 }], eut: ZPM_VA, duration: 6000 }
+      itemsOut: [{ id: URANUS_CHART, count: 1 }], eut: ZPM_VA, duration: 600 }
   ]
 
   SC.recipes = TABLE.map(function (t) {
