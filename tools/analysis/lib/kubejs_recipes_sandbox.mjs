@@ -1,7 +1,8 @@
 // A stand-in for KubeJS's ServerEvents.recipes, to run the pack's composing server scripts (lib/compose.js and the plants that use it)
 // on recipes read from a native dump, in Node. It gives the scripts what they read: global.grindless (with readJsonTable over pack/),
 // Item.exists, Fluid.exists, Fluid.of, an event whose originalRecipes hold the given recipes (toString() "<id>[<type>]", .json the
-// recipe's JSON text, as KubeJS gives them) and whose event.recipes.gtceu.<type>(id) builders record every call.
+// recipe's JSON text, as KubeJS gives them) and whose event.recipes.gtceu.<type>(id) builders record every call (event.custom(json).id(id)
+// records { type, id, json }).
 //
 //   runServerScripts({ packRoot, scripts: [paths relative to pack/], recipes: { id: json }, startup: [paths], items, fluids, before })
 //     -> { G, built: [{ type, id, calls: [[method, ...args]] }], logs: [[level, message]] } (G and built as plain JSON copies)
@@ -79,6 +80,11 @@ export function runServerScripts({ packRoot, scripts, recipes, startup = [], ite
     originalRecipes: { values: () => ({ forEach: (fn) => originals.forEach((r) => fn(r)) }) },
     recipes: { gtceu },
     shaped: () => recorder('minecraft:crafting_shaped', '?', built),
+    custom: (json) => {
+      const entry = { type: String(json.type), id: '?', json: JSON.parse(JSON.stringify(json)), calls: [] };
+      built.push(entry);
+      return { id: (id) => { entry.id = String(id); } };
+    },
   };
   for (const h of handlers) h(event);
   // the scripts' objects belong to the sandbox's realm (its own Array and Object): hand back plain copies, so deepEqual works

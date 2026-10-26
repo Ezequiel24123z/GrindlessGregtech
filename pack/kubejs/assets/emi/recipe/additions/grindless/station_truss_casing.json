@@ -1,0 +1,5 @@
+{
+  "type": "emi:info",
+  "stacks": ["item:grindless:station_truss_casing"],
+  "text": ["emi.grindless.info.station_truss_casing.0"]
+}

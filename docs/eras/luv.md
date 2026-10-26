@@ -106,37 +106,41 @@ IV leaves, as built:
 
 ## The belt and Jupiter's moons
 
-Five GCYR entries (datapack JSON, no Java) and ten dimensions. The ids are proposed and fixed after spike S0-1.
+Five GCYR entries (datapack JSON, no Java) and ten dimensions. The ids are final (B1, from spikes S0-1 and S0-2): `data/grindless/gcyr/planets/*.json`, and every package reads them only through `tables/places.json` (surfaces) and `tables/orbits.json` (orbits).
 
-| Entry | `world` / `orbit_world` | Tier | Gravity (m/s²) | Temp (K) | Radiation (real dose) |
+| Entry | `world` / `orbit_world` | Tier | Gravity (m/s², menu only) | Temp (K) | Radiation (real dose) |
 |---|---|---|---|---|---|
-| Asteroid belt | `grindless:asteroid_belt` / `…_orbit` | 4 | 0.6 *(tune; Ceres 0.28)* | 165 | low |
+| Asteroid belt | `grindless:asteroid_belt` / `…_orbit` | 4 | 0.6 | 165 | low |
 | Jupiter (menu placeholder) | `grindless:jupiter` / `…_orbit`, both `gcyr:space` voids | 5 | 24.79 | 165 | — |
 | Io | `grindless:io` / `…_orbit`, parent Jupiter | 4 | 1.796 | 110 | about 36 Sv a day |
 | Europa | `grindless:europa` / `…_orbit`, parent Jupiter | 4 | 1.315 | 102 | about 5.4 Sv a day |
 | Ganymede | `grindless:ganymede` / `…_orbit`, parent Jupiter | 4 | 1.428 | 110 | about 0.08 Sv a day |
 
 - **Jupiter exists for the menu:** GCYR only gives a navigation button to planets with no parent. Tier 5 keeps it closed in LuV.
-- **Worlds:**
-  - The belt is a rubble floor at Y 60–70 with asteroids above it (GCYR drops the rocket at the same X and Z), on noise adapted from GCYR's `luna` (LGPL-3.0, credited). It keeps a day cycle, for the optical miner.
-  - Io has brimstone plains, paterae of basalt, magma and lava, and fumarole fields (Biomes O' Plenty blocks, by id).
-  - Europa has packed ice over blue ice.
-  - Ganymede has packed ice and tuff.
-  - Skies use GCYR's own `jupiter.png`.
+- **Gravity is not simulated:** GCYR 0.2.9 shows a planet's `gravity` in its menu, but no entity physics reads it. On S0-1's test moon (1.315 m/s²) a player fell at vanilla speed. The pack adds no physics of its own: the column is real-world data for the menu, and no rule, recipe or quest relies on low gravity.
+- **Worlds** (as built in B1: `data/grindless/dimension/`, `dimension_type/`, `worldgen/noise_settings/`, `worldgen/biome/`; the shapes are ours, the file structure adapted from GCYR's `luna` and `mercury`, LGPL-3.0, credited):
+  - Every surface is Y −64 to 320 like the Moon, with no terrain at Y 176 and above (test fixtures build at Y 198–214), no aquifers, caves, features, mobs or precipitation.
+  - The belt is a tuff rubble floor at about Y 59–69 (gravel and cobbled deepslate patches) with tuff asteroids at Y 90–170 (GCYR drops the rocket at the same X and Z). Tuff is B5's ore layer target. It keeps a day cycle, for the optical miner.
+  - Io has brimstone plains at Y 90–110 over basalt, paterae sunk into a lava sea at Y 78 with basalt and magma floors, fumarole fields (Biomes O' Plenty's brimstone fumaroles in clusters) and black sand.
+  - Europa has 9–15 blocks of packed ice over blue ice, at Y 91–106.
+  - Ganymede has tuff hills at Y 84–116 with packed ice caps and patches.
+  - Skies use GCYR's own sun, `jupiter.png` and glow textures by path: Jupiter is large from Io, smaller from Europa and Ganymede, and small from the belt.
+  - Jupiter and the five orbits are GCYR's `gcyr:space` void.
 
 | | Earth orbit (station) | Belt | Io | Io orbit (station) | Europa | Ganymede |
 |---|---|---|---|---|---|---|
-| Rules | vacuum, 3 K, no night, 0 g | vacuum, low gravity, micrometeoroids | no water, no combustion, radiation, heat only from lava | radiation (plasma torus), 3 K | radiation, ice, the ocean 20 km down | 110 K (Hg-1223 superconducts by itself), seismically quiet |
+| Rules | vacuum, 3 K, no night, 0 g | vacuum, micrometeoroids | no water, no combustion, radiation, heat only from lava | radiation (plasma torus), 3 K | radiation, ice, the ocean 20 km down | 110 K (Hg-1223 superconducts by itself), seismically quiet |
 | Site power | orbital solar station | the wireless network; RTG cells | volcanic intake | flux-tube tether | the wireless network | the wireless network |
 | Only from there | — (it makes things) | asteroid metals; chondritic extract | germanium; sulfur concrete | — | living matter | — |
 | Made there | — | asteroid regolith casing | sulfur concrete casing | — | — | — |
 
 - **Travel:**
-  - level 4 = elite motors and only cryogenic tanks;
-  - 14 B from Earth to any LuV place, 8 B between a moon and Jupiter's orbit;
-  - one cryogenic tank holds 16 B *(tune)*.
-- **Stations:**
-  - GCYR's packager (tier 6) and package, the ID chip and the keycard.
+  - level 4 = elite motors and only cryogenic tanks (GCYR: floor((weakest motor tier 3 + weakest tank tier 5) / 2)); one elite tank drops the rocket to level 3;
+  - GCYR asks for 14 B in the tanks to launch from Earth to any LuV place (its solar-system amount), and for its moon amount between a moon and its parent; Jupiter is tier 5, so that leg stays closed in LuV;
+  - one cryogenic tank holds 16 B, two make 32 B. S0-2's level 4 round trip to a test moon burned 5,126 mB out and 4,952 mB home: the launch requirement, not the burn, is what needs the second tank.
+  - Proxima Centauri b goes to tier 5 (it was 4 while no part reached level 4).
+- **Stations** (wait for spike S0-3; `tables/stations.json` stays `"enabled": false` until it passes natively):
+  - GCYR's packager (a LuV hull, GCYR's recipe) and package, the ID chip and the keycard. The keycard stays hidden until the flag flips.
   - The station lands on a 512 × 512 plot in the planet's orbit.
   - GT machines are built after arrival.
 - **Suit:**
@@ -145,7 +149,7 @@ Five GCYR entries (datapack JSON, no Java) and ten dimensions. The ids are propo
   - Spike S0-8 checks that a piece keeps both tags.
 - **Radiation:** machine-only. Patterns on Io, on Europa and in Io orbit include `grindless:radiation_vault_casing` (graded-Z: titanium then tantalum, like Juno's vault).
 - **Weather and time:**
-  - `space/airless_weather.js` gets the new worlds and Earth orbit.
+  - `space/airless_weather.js` dries every dimension of the other planets in `tables/planets.json` (so all ten new ones) and its `dryOnEarth` list, Earth orbit, which stays Earth's for AE2 pairs and air.
   - Orbits are always midnight, so no orbital machine uses a daytime condition.
 
 ### Sunlight: one authoritative table
@@ -173,10 +177,11 @@ Five GCYR entries (datapack JSON, no Java) and ten dimensions. The ids are propo
 | Europa | `europa` | `grindless:europan_quantum_seed` | blue ice, with `.dimension('grindless:europa')` |
 | Ganymede | `ganymede` | `grindless:ganymedean_quantum_seed` | tuff, with `.dimension('grindless:ganymede')` |
 
-- **`tables/planets.json`** gets the four entries, each with its world and its orbit.
+- **`tables/planets.json`** gets five entries (`belt`, `jupiter`, `io`, `europa`, `ganymede`), each with its world and its orbit.
   - Io orbit belongs to `io`, so an Io pair also works in the Io-orbit station.
   - Jupiter gets no pair tag, so it keeps no pair.
   - AE2's ritual and the chamber's ejection of foreign pairs are proven since EV.
+  - **As built:** B1 writes the Io, Europa and Ganymede seeds and pairs (`server_scripts/grindless/luv/travel.js`, the dimension from `G.places`); the belt's seed is B5's, since its raw meteoric iron is.
 - **The first-landing kit** (every place):
   - an IV wireless energy cover for the chemical reactor;
   - an IV wireless energy hatch for the first multiblock;
@@ -1079,9 +1084,10 @@ They are 5 EU/t × 100 t with nothing in and nothing out.
 
 ### Cryogenic fuel tank
 
-`grindless:cryogenic_fuel_tank` *(id final after S0-2)*:
-- the KubeJS block type `gcyr:fuel_tank`, with `.tier(5)` and `.fuelStorage(16000)` *(tune)*;
-- LuV assembler, 30,720 EU/t × 400 t: GCYR's elite fuel tank + 6 HSS-S plates + 8 Kapton K plates + a LuV pump, with the Outer System Chart as a catalyst *(tune)*.
+`grindless:cryogenic_fuel_tank` (final; B1, `startup_scripts/grindless/luv/travel.js`):
+- the KubeJS block type `gcyr:fuel_tank`, with `.tier(5)` and `.fuelStorage(16000)`, the builder S0-2 launched natively;
+- LuV assembler, 30,720 EU/t × 400 t: GCYR's elite fuel tank + 6 HSS-S plates + 8 Kapton K plates + a LuV pump, with the Outer System Chart as a catalyst (`grindless:assembler/cryogenic_fuel_tank`).
+- Its model is a vertical column (`models/block/luv/cryogenic_fuel_tank.json`, textures from `tools/assets/Build-LuVTravelTextures.ps1`), as rocket tanks stand.
 
 ## Family steps
 
@@ -1363,7 +1369,7 @@ No new mods. LuV builds on the pack's own wireless network (v0.7.x).
 
 ## Risks and open questions
 
-- **GCYR beyond the inner planets** (spikes S0-1 to S0-3): datapack planets and the Jupiter group, level 4 with tier 5 KubeJS tanks, the deployment of two stations, very low gravity. GCYR's launch issues #91 and #122 still apply.
+- **GCYR beyond the inner planets** (spikes S0-1 to S0-3): datapack planets and the Jupiter group, and level 4 with tier 5 KubeJS tanks, passed natively; the deployment of two stations (S0-3) is still open. GCYR's configured gravity is not applied (S0-1), so the pack claims no low gravity. GCYR's launch issues #91 and #122 still apply.
 - **The wireless network's LuV tier** (S0-10): LuV is built on a package still in progress (LV to IV). Do wireless hatches count for the two-hatch rule, and does an orbital generator feed it? A4 answers both from GTM's source (yes, and yes with the chunks loaded; *Power on the wireless network*); the integrated run confirms them.
 - **World generation:** the belt's floor and its new KubeJS layer (S0-6); Io's paterae and fumaroles, the cryobot's ice shaft and the GW detector's buried L (S0-7).
 - **The composed mode 2** depends on GT--'s recipe ids staying put. The pins fail loudly (S0-11).
@@ -1383,7 +1389,7 @@ No new mods. LuV builds on the pack's own wireless network (v0.7.x).
 LuV is built in packages after v0.7.x, as IV was. Test bands start at X 13568 and go in steps of 256; X 16384 belongs to the hologram projector, so LuV skips it.
 
 **Spikes come first (S0):** disposable tests that run before any permanent id is registered. Their files stay in the bench overlay.
-- **S0-1:** a datapack Jupiter with one moon: the menu, the worlds, the sky, the weather, low gravity and the flight back.
+- **S0-1:** a datapack Jupiter with one moon: the menu, the worlds, the sky, the weather and the flight back (passed; it also showed that GCYR's gravity value is not applied).
 - **S0-2:** a tier 5 KubeJS fuel tank in a real level 4 launch and return.
 - **S0-3:** a station packed, launched and used in Earth orbit, then a second one in a moon's orbit.
 - **S0-4:** GT--'s circuit assembly line refusing GTM's NPU recipe on LuV hatches.
@@ -1433,10 +1439,10 @@ The design above follows these. The first twelve came with the design review; th
 1. **Places:**
    - five GCYR entries and ten dimensions: the belt, Jupiter, Io, Europa and Ganymede, each with its orbit;
    - Jupiter is a tier 5 placeholder, there only for the menu;
-   - the ids are final after the planet spike (S0-1).
+   - the ids are final after the planet spike (S0-1): fixed in B1.
 2. **Level 4 rocket:**
    - GCYR's elite motors with tier 5 tanks, registered through GCYR's KubeJS `gcyr:fuel_tank` builder; no Java;
-   - the tank's id is final after a real level 4 launch and return (S0-2).
+   - the tank's id is final after a real level 4 launch and return (S0-2): `grindless:cryogenic_fuel_tank`, fixed in B1.
 3. **Stations:** the first in Earth orbit; a second, in Io orbit, only for the tether (decision 17).
 4. **Living circuits at LuV:**
    - bacteria come only from Europa;

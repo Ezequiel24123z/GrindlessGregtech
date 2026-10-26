@@ -1,0 +1,11 @@
+{
+  "type": "grindless:asteroid_belt",
+  "generator": {
+    "type": "minecraft:noise",
+    "settings": "grindless:asteroid_belt",
+    "biome_source": {
+      "type": "minecraft:fixed",
+      "biome": "grindless:asteroid_belt"
+    }
+  }
+}
