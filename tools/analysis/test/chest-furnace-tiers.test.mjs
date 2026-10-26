@@ -177,12 +177,19 @@ function sandbox({ values, intBoxing = true, storesDouble = false }) {
       return 2;
     }
   };
+  // Rhino in game: `new Integer(7)` picks Integer(String) with "7.0" (native run 20261026-010202-both-658), so only the named
+  // valueOf(int) boxes; IntStream.of competes with of(int...), so only of(int) is offered
+  function JavaInteger(n) { throw new Error('java.lang.NumberFormatException: For input string: "' + n.toFixed(1) + '"'); }
+  JavaInteger['valueOf(int)'] = (n) => { assert.ok(Number.isInteger(n)); return intBoxing ? new FakeInteger(n) : n; };
   const classes = {
     'net.p3pp3rf1y.sophisticatedstorage.Config': { SERVER_SPEC },
     'com.electronwill.nightconfig.core.CommentedConfig': { inMemory: () => ({}) },
-    'java.lang.Integer': intBoxing ? FakeInteger : function (n) { return n; },
+    'java.lang.Integer': JavaInteger,
     'java.util.ArrayList': function () { return fakeList([]); },
-    'java.util.stream.IntStream': { of: (n) => ({ boxed: () => ({ collect: () => fakeList([new FakeInteger(n)]) }) }) },
+    'java.util.stream.IntStream': {
+      of() { throw new Error('IntStream.of(int) and of(int...) are ambiguous for a JS number'); },
+      'of(int)': (n) => ({ boxed: () => ({ collect: () => fakeList([new FakeInteger(n)]) }) })
+    },
     'java.util.stream.Stream': { generate: (cv) => ({ limit: () => ({ collect: () => fakeList([cv.raw]) }) }) },
     'java.util.stream.Collectors': { toList: () => null }
   };

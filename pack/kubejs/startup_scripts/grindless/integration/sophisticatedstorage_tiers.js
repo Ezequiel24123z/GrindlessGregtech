@@ -17,7 +17,7 @@
 // correcting, so the sets run inside the listener of ForgeConfigSpec#correct on a throwaway in-memory config: every write happens while
 // isCorrecting() is true, and a later reload reads the finished file.
 // Integers: Rhino turns a JS number passed as Object into a Double (NativeJavaObject.coerceTypeImpl), and an IntValue holding a Double
-// throws ClassCastException in the mod. A constructed java.lang.Integer is a wrapped Java object and passes through as an Integer. A probe
+// throws ClassCastException in the mod. An Integer from Integer.valueOf(int) is a wrapped Java object and passes through as an Integer. A probe
 // checks that before anything is written, and every value is checked again in Java afterwards (rolled back if one is not an Integer).
 //
 // Published for the bench test: global.grindless.storageTiers = { targets, last, apply(reason) }.
@@ -86,13 +86,19 @@
 
   // a List<Integer> made entirely in Java
   function javaInts(n) {
-    return cls().IntStream.of(n).boxed().collect(cls().Collectors.toList())
+    return cls().IntStream['of(int)'](n).boxed().collect(cls().Collectors.toList())
   }
 
-  // the boxing a set() relies on: a constructed Integer handed to an Object parameter stays an Integer
+  // a java.lang.Integer made by Java. The overload is named: given a JS number, Rhino picks new Integer(String) with "7.0" (a native run
+  // threw NumberFormatException), and IntStream.of(int) competes with of(int...).
+  function javaInt(n) {
+    return cls().Integer['valueOf(int)'](n)
+  }
+
+  // the boxing a set() relies on: a Java-made Integer handed to an Object parameter stays an Integer
   function probe() {
     var list = new (cls().ArrayList)()
-    list.add(new (cls().Integer)(7))
+    list.add(javaInt(7))
     return list.equals(javaInts(7))
   }
 
@@ -120,7 +126,7 @@
 
   function setAll(spec, list, field) {
     guarded(spec, function () {
-      list.forEach(function (x) { x.cv.set(new (cls().Integer)(x.t[field])) })
+      list.forEach(function (x) { x.cv.set(javaInt(x.t[field])) })
       spec.save()
     })
   }
