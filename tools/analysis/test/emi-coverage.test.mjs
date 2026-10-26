@@ -117,6 +117,23 @@ test('a pending route is dropped only for our stacks disabled until their era; a
   assert.ok(res.problems.some((p) => p.startsWith('t:assembler/other (gtceu:assembler): EMI drops it')), res.problems.join('\n'));
 });
 
+test('what only a pending route gives is pending, not a gap, and a process whose recipes are all pending routes is not a problem', () => {
+  const dump = mkDump({
+    recipes: [gt('t:cvd/plate', 'gtceu:cvd', { ins: [gi('t:seed', 1, 0), gi('t:methane')], outs: [gi('t:plate')] })],
+    tagsItem: { 't:hidden_with_recipes': ['t:seed'] },
+  });
+  const emi = { ...noEmi, disabled: [parseEmiStack('#item:t:hidden_with_recipes')] };
+  const registry = reg({ items: ['t:seed', 't:plate', 't:methane'], types: ['gtceu:cvd'] });
+  const cfg = { ...cfg0, endProducts: { globs: [], items: [{ id: 't:plate' }] } };
+  const before = audit({ dump, registry, emi, cfg });
+  assert.ok(gapsOf(before)['t:plate'], 'without the entry the plate has no source');
+  assert.ok(before.problems.some((p) => p.startsWith('process gtceu:cvd')), before.problems.join('\n'));
+  const res = audit({ dump, registry, emi, cfg: { ...cfg, pendingRoutes: [{ id: 't:cvd/plate', reason: 'the seed is a later package' }] } });
+  assert.equal(gapsOf(res)['t:plate'], undefined);
+  assert.deepEqual(res.results.find((r) => r.key === 't:plate').pending, [{ role: 'acquisition', routes: ['t:cvd/plate'] }]);
+  assert.ok(!res.problems.some((p) => p.startsWith('process gtceu:cvd')), res.problems.join('\n'));
+});
+
 test('the multiblock preview places the first block of each predicate: later options are no use, and a structure-only block needs a page', () => {
   const structure = { symbols: { S: { kind: 'controller' }, C: { kind: 'oneOf', options: [{ kind: 'blocks', blocks: ['t:cell_1', 't:cell_2'] }, { kind: 'blocks', blocks: ['t:casing'] }] } } };
   assert.deepEqual(previewBlocks(structure), ['t:cell_1', 't:casing']);
