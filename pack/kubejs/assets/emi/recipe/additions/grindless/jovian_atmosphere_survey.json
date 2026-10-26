@@ -1,0 +1,10 @@
+{
+  "type": "emi:info",
+  "stacks": [
+    "item:grindless:jovian_atmosphere_survey"
+  ],
+  "text": [
+    "emi.grindless.info.jovian_atmosphere_survey.0",
+    "emi.grindless.info.jovian_atmosphere_survey.1"
+  ]
+}
