@@ -1,0 +1,5 @@
+{
+  "type": "emi:info",
+  "stacks": ["item:grindless:pressure_hull_casing"],
+  "text": ["emi.grindless.info.pressure_hull_casing.0"]
+}
