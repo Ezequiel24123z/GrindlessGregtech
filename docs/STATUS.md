@@ -5,8 +5,8 @@ Integrator-owned. Read this instead of `DECISIONS.md` and the session notes. Ove
 - **Playable version:** v0.8.0 "LuV, the outer system" (`15a7f85`). `playable` and `jugable` both point to it.
 - **Active development branch:** `ezequiel24123z-gregtech-grindless-modpack`. `main` matches it (PR #4 merged); feature work still branches from the development branch.
 - **Current milestone:** ZPM build. Design accepted: `docs/eras/zpm.md` (queue in its *Build order*), decisions in `DECISIONS.md` (2026-10-26, "ZPM").
-- **Last accepted integration batch:** ZPM-B1 travel and stations (#16): Saturn and Uranus worlds, orbits and skies, rocket levels 5 and 6 (naquadah and aerogel tanks, elite motor), Proxima tier 8, Saturn and Uranus station slots, the PICA heat shield and the outer quantum seeds (Saturn leg proven in T1; Uranus arrival, the orbit seeds, station deployment and skies go to C3). Earlier: A2 naquadria (#8), A3 europium (#9), S0 (#6), F1 (#7), F2.
-- **Approved packages in flight:** A4 actinides (#10, 19968) and B2 the Saturn siphon (#17, 21760). Then A5-A9, B3, B4 with B5, C1-C3, v0.9.0.
+- **Last accepted integration batch:** ZPM-A4 actinides (#10) and ZPM-B2 the Saturn siphon (#17): the waste retrieval and actinide partitioning plants (radium, americium, curium oxide stored for UV, Synroc as the sealed end, lanthanides back to the cascade), and the gas giant siphon, isotope column and ring harvester in Saturn orbit (helium-3, deuterium, ring ice sample); both T1 passed. Earlier: B1 travel (#16; Uranus arrival, the orbit seeds, station deployment and skies go to C3), A2 naquadria (#8), A3 europium (#9), S0 (#6), F1 (#7), F2.
+- **Approved packages in flight:** A5 (#11). Then A6-A9, B3, B4 with B5, C1-C3, v0.9.0.
 - **Repository:** unmerged historical branches are kept only as `archive/*` tags; finished package branches are deleted after integration.
 
 ## Open blockers and known issues
