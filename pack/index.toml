@@ -3070,7 +3070,7 @@ hash = "1f4b256531a0b42a6ecf399e9b692d9e4730bd4102e53aab3e1fa2c999b69e9d"
 
 [[files]]
 file = "kubejs/data/grindless/tables/hidden_until.json"
-hash = "9f83060a12761a3b4eb241fcf659ddb953c9f37a040ddd34984dc1f6f701fa44"
+hash = "f5582a6527f38031acd165b6b7d69854b2b22a21632315eae96efe2cdbe735c2"
 
 [[files]]
 file = "kubejs/data/grindless/tables/hot_cell.json"
@@ -3366,7 +3366,7 @@ hash = "114780cc91ce3c258ea25768a9b0bbc90685664c7e4ff88d4e6c031bc6336a77"
 
 [[files]]
 file = "kubejs/server_scripts/grindless/integration/hidden.js"
-hash = "3be1d74d258c45e81853ac0bd5a08fafdba8dd79237431a720ef3f1f61e3e429"
+hash = "7deab78152cea688e0ee698b53707c3c41e0d4dfb0064be1f446ef3048b34d4e"
 
 [[files]]
 file = "kubejs/server_scripts/grindless/integration/ironfurnaces.js"
