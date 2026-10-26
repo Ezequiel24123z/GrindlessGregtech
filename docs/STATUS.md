@@ -4,9 +4,9 @@ Integrator-owned. Read this instead of `DECISIONS.md` and the session notes. Ove
 
 - **Playable version:** v0.8.0 "LuV, the outer system" (`15a7f85`). `playable` and `jugable` both point to it.
 - **Active development branch:** `ezequiel24123z-gregtech-grindless-modpack`. `main` matches it (PR #4 merged); feature work still branches from the development branch.
-- **Current milestone:** ZPM design (approved by the user). One Opus architecture session writes `docs/eras/zpm.md` and the package queue.
-- **Last accepted integration batch:** the AI-efficiency migration (Phase 0-1: scoped instructions, `Check-Fast`, `zones.json`, work-package form), on top of v0.8.0.
-- **Next approved package:** none until `docs/eras/zpm.md` is accepted.
+- **Current milestone:** ZPM build. Design accepted: `docs/eras/zpm.md` (queue in its *Build order*), decisions in `DECISIONS.md` (2026-10-26, "ZPM").
+- **Last accepted integration batch:** the ZPM era design, on top of the AI-efficiency migration and v0.8.0.
+- **Approved packages in flight:** S0 spikes S0-1..S0-7 (serial, bench band X 18944) and F1 registrations (static, no band; rocket parts and planet ids wait for S0-1/S0-2). Then F2 (integrator), wave A pairs, B1, wave B pairs, C1-C3, v0.9.0.
 - **Repository:** unmerged historical branches are kept only as `archive/*` tags; finished package branches are deleted after integration.
 
 ## Open blockers and known issues
