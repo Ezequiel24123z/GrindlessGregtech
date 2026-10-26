@@ -233,6 +233,10 @@ file = "kubejs/assets/emi/recipe/additions/grindless/zpm_naquadria_casing.json"
 hash = "93fa2170c32637222ad30a732c0cc4a9a1d1606f3da29848df8c854603afa7a8"
 
 [[files]]
+file = "kubejs/assets/emi/recipe/additions/grindless/zpm_photomultiplier_casing.json"
+hash = "f60a125893273e3f6e53e3da667de0a99fb9f663c9e17e160b3e828e12e8cf9f"
+
+[[files]]
 file = "kubejs/assets/grindless/gcyr/planet_assets/sky_renderers/asteroid_belt.json"
 hash = "d6a46c74d825cc68ac39892a9ec21cf1cbd2b4047d7df9dab32d3676edf6991a"
 
@@ -853,6 +857,18 @@ file = "kubejs/assets/grindless/textures/block/multiblock/deep_space_antenna/ove
 hash = "af915735740bd046c85e66fc03c47bb31517ef64f1721726151ea5de8cf121e3"
 
 [[files]]
+file = "kubejs/assets/grindless/textures/block/multiblock/deep_space_network/overlay_front.png"
+hash = "a0e29411f2000725269e33013a7f3ec3251dda6b20f56cd043388ae3ec1bc526"
+
+[[files]]
+file = "kubejs/assets/grindless/textures/block/multiblock/deep_space_network/overlay_front_active.png"
+hash = "e01dfa988b546527cffb7bf59daf3ddc33c402a8f3ecb884cc8be741798f81d1"
+
+[[files]]
+file = "kubejs/assets/grindless/textures/block/multiblock/deep_space_network/overlay_front_active_emissive.png"
+hash = "741132e214debac76dc646e33775bbe27fe40046678d30bdb981dff5e61c1da8"
+
+[[files]]
 file = "kubejs/assets/grindless/textures/block/multiblock/diamond_lattice_fab/overlay_front.png"
 hash = "d2159180150d9e2cc90c4864d57365631a9af45cf017400ac4778173729ddead"
 
@@ -1337,6 +1353,18 @@ file = "kubejs/assets/grindless/textures/block/multiblock/isr_wellfield/overlay_
 hash = "491ea51d46bc1f0c0ff11ed9293461cc67de293c7672abbc45f67563f8fe1f1a"
 
 [[files]]
+file = "kubejs/assets/grindless/textures/block/multiblock/kuiper_survey_telescope/overlay_front.png"
+hash = "b5d00c18aa420a098cf358261bc1d3f2c197c11d7fc571dc17f71600a0cc18ba"
+
+[[files]]
+file = "kubejs/assets/grindless/textures/block/multiblock/kuiper_survey_telescope/overlay_front_active.png"
+hash = "b974b674e4f8a73f11aa41272ec8e8b8a8eeb57ba5d52957796497caa7f8779e"
+
+[[files]]
+file = "kubejs/assets/grindless/textures/block/multiblock/kuiper_survey_telescope/overlay_front_active_emissive.png"
+hash = "0b674388583769b04a71c4a12ef26db60fd43d31380ea362a0a2c135e5bfdb21"
+
+[[files]]
 file = "kubejs/assets/grindless/textures/block/multiblock/large_steam_centrifuge/overlay_front.png"
 hash = "b9c22490aad3715c47e57282e3ea49c30de93b2dde13738df8030a553988857c"
 
@@ -1727,6 +1755,18 @@ hash = "2cc1e4d3abe7faf9c2c0b4b47e0a9bf678c13198f4bf7b21ebb8314037f7a048"
 [[files]]
 file = "kubejs/assets/grindless/textures/block/multiblock/naquadria_refinery/overlay_front_active_emissive.png.mcmeta"
 hash = "491ea51d46bc1f0c0ff11ed9293461cc67de293c7672abbc45f67563f8fe1f1a"
+
+[[files]]
+file = "kubejs/assets/grindless/textures/block/multiblock/neutrino_observatory/overlay_front.png"
+hash = "7ea8a4789b5dad9326e179fe3af956d4b9a3da288cc9ddee769128141582ccde"
+
+[[files]]
+file = "kubejs/assets/grindless/textures/block/multiblock/neutrino_observatory/overlay_front_active.png"
+hash = "8da942bc53104d296917ca74253a4791f3679af2cde59a1846d578f653473d62"
+
+[[files]]
+file = "kubejs/assets/grindless/textures/block/multiblock/neutrino_observatory/overlay_front_active_emissive.png"
+hash = "343ae3453e039f5a8756daeabd34e55b733c6b55bb01bd512ecfd8c28aa30f48"
 
 [[files]]
 file = "kubejs/assets/grindless/textures/block/multiblock/optical_miner/overlay_front.png"
@@ -3441,6 +3481,10 @@ file = "kubejs/client_scripts/grindless/zpm_naquadria_lang.js"
 hash = "5569b6b13a31c565112e5d4553789f32c0c63ee4cf2a956271a5f1fa5a71ab03"
 
 [[files]]
+file = "kubejs/client_scripts/grindless/zpm_observatory_lang.js"
+hash = "964b5abb68a50a4d9b0940bce1788187d7a7452501e6ff4187277393a8562011"
+
+[[files]]
 file = "kubejs/client_scripts/grindless/zpm_outer_chemistry_lang.js"
 hash = "95e3696fc79ff3285f9e97767defe633039b0e7851fa8faf9677531a110f6324"
 
@@ -3626,7 +3670,7 @@ hash = "1f4b256531a0b42a6ecf399e9b692d9e4730bd4102e53aab3e1fa2c999b69e9d"
 
 [[files]]
 file = "kubejs/data/grindless/tables/hidden_until.json"
-hash = "603d54a12a0ac2efc4489e6698f0347ab6b47ee39e35cfb336f24084fdaf6923"
+hash = "5a7a9a1b3cfcabb55b20e65ee1fca23cac1dbc27c9f8ec32545efe58bc5750c4"
 
 [[files]]
 file = "kubejs/data/grindless/tables/hot_cell.json"
@@ -4281,6 +4325,10 @@ file = "kubejs/server_scripts/grindless/zpm/naquadria.js"
 hash = "de8fbfe93e28fc07a53e29afd080f5152927baa7501f9a99767449a9b170f130"
 
 [[files]]
+file = "kubejs/server_scripts/grindless/zpm/observatory.js"
+hash = "c0bffc485e4b2ed7ce6a74aa7c1039509f4940d93faa98f8739df22a80eba973"
+
+[[files]]
 file = "kubejs/server_scripts/grindless/zpm/outer_chemistry.js"
 hash = "617d80424e7dfeffc6a41439206c7ad9f528bf150c4ae2864531001c433dff2d"
 
@@ -4659,6 +4707,10 @@ hash = "de5befb85de3d16a41bcae24812667200d3747ec8694c733ca32c58897dd123d"
 [[files]]
 file = "kubejs/startup_scripts/grindless/zpm/naquadria.js"
 hash = "43ed707051473e4713fef6aeace0062e12235135f9d6a11fca4f4299c508a28d"
+
+[[files]]
+file = "kubejs/startup_scripts/grindless/zpm/observatory.js"
+hash = "49a3d8e19a67ed0d46117603abe2f3236874d1b1a618d2b9e1c75a64997f64cb"
 
 [[files]]
 file = "kubejs/startup_scripts/grindless/zpm/outer_chemistry.js"

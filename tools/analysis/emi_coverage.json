@@ -14,7 +14,9 @@
     "globs": [],
     "items": [
       { "id": "grindless:synroc_block", "reason": "ZPM-A4: the sealed final form of the waste (zpm.md, machines 4 and 5: kept, inert, a block of its own)" },
-      { "id": "grindless:curium_oxide", "reason": "ZPM-A4: stored for UV (zpm.md: GTM has no curium use before UV)" }
+      { "id": "grindless:curium_oxide", "reason": "ZPM-A4: stored for UV (zpm.md: GTM has no curium use before UV)" },
+      { "id": "grindless:multimessenger_catalogue", "reason": "ZPM-A9: the seed of UV's telescope (zpm.md, Bridges and 'What ZPM leaves')" },
+      { "id": "grindless:pluto_kuiper_chart", "reason": "ZPM-A9: UV's trip to Pluto and the Kuiper Belt (zpm.md, 'What ZPM leaves')" }
     ]
   },
   "derived": [
@@ -36,7 +38,8 @@
     { "id": "gtceu:raw_tetrataenite", "role": "use", "category": "gtceu:ore_crushing", "source": "GTM's ore processing, generated from the material's ore flag (startup_scripts/grindless/luv/foundation.js)" },
     { "id": "gtceu:tetrataenite_dust", "role": "use", "category": "minecraft:smelting", "source": "GTM's furnace recipe dust -> ingot, generated for an ingot material with no blast temperature (startup_scripts/grindless/luv/foundation.js)" },
     { "id": "gtceu:tetrataenite_ingot", "role": "acquisition", "category": "minecraft:smelting", "source": "GTM's furnace recipe dust -> ingot, generated for an ingot material with no blast temperature (startup_scripts/grindless/luv/foundation.js)" },
-    { "id": "gtceu:tetrataenite_ingot", "role": "use", "category": "gtceu:lathe", "source": "GTM's lathe recipe ingot -> rod, generated from the material's GENERATE_ROD flag (startup_scripts/grindless/luv/foundation.js); the rod makes the magnet works' bearings" }
+    { "id": "gtceu:tetrataenite_ingot", "role": "use", "category": "gtceu:lathe", "source": "GTM's lathe recipe ingot -> rod, generated from the material's GENERATE_ROD flag (startup_scripts/grindless/luv/foundation.js); the rod makes the magnet works' bearings" },
+    { "id": "grindless:solar_core_survey", "role": "use", "category": "gtceu:assembly_line", "source": "server_scripts/grindless/zpm/observatory.js re-registers GTM's live UV energy hatch recipe (gtceu:assembly_line/energy_hatch_uv) with the survey as a kept input" }
   ],
   "derivedProcesses": [
     { "type": "gtceu:combined_cycle", "source": "server_scripts/grindless/ev/combined_cycle_and_hot_mill.js makes one run per live gas turbine fuel" },
@@ -50,8 +53,7 @@
   "exceptions": [
     { "id": "grindless:itbtc_coated_conductor", "role": "use", "reason": "temporary (LuV-A3): its uses, the HTS coil and the SMES cell, are LuV-A4's magnet works; delete this exception when A4 merges" },
     { "id": "grindless:chondritic_extract", "role": "use", "reason": "temporary (LuV-B5): its use, the Europan culture of the algae bioreactor, is LuV-B8's;     delete this exception when B8 merges" },
-        { "id": "grindless:pica_heat_shield", "role": "use", "reason": "temporary (ZPM-B1): its use, the entry probe bay, is ZPM-B3's; delete this exception when B3 merges" },
-        { "id": "grindless:cvd_diamond_plate", "role": "use", "reason": "temporary (ZPM-A6): its use, the Kuiper survey telescope's mirror coating (machine 17), is ZPM-A9's; delete this exception when A9 merges" }
+        { "id": "grindless:pica_heat_shield", "role": "use", "reason": "temporary (ZPM-B1): its use, the entry probe bay, is ZPM-B3's; delete this exception when B3 merges" }
       ],
       "pendingRoutes": [
         { "id": "grindless:assembler/aerogel_fuel_tank", "reason": "ZPM-B1: the Uranus transfer chart is B4's (silica aerogel and nanotube yarn came with A8); delete when B4 merges" },
@@ -60,6 +62,8 @@
         { "id": "grindless:diamond_cvd/nitrogen_doped_diamond", "reason": "ZPM-A6: the ice-giant diamond seed (not consumed) is B5's; delete when B5 merges" },
         { "id": "grindless:chemosynthesis/archaeal_culture", "reason": "ZPM-A8: the Enceladus brine is B4's; delete when B4 merges" },
         { "id": "grindless:chemosynthesis/growth_medium_broth", "reason": "ZPM-A8: tholin is B3's and the Enceladus brine B4's; delete when both merge" },
-        { "id": "grindless:supercritical_drying/silica_aerogel", "reason": "ZPM-A8: the silica nanograins are B4's; delete when B4 merges" }
+        { "id": "grindless:supercritical_drying/silica_aerogel", "reason": "ZPM-A8: the silica nanograins are B4's; delete when B4 merges" },
+        { "id": "grindless:telemetry_decoding/neptune_flyby_data", "reason": "ZPM-A9: the Neptune probe recording is B5's (flyby probe bay); delete when B5 merges" },
+        { "id": "grindless:telemetry_decoding/triton_flyby_data", "reason": "ZPM-A9: the Triton probe recording is B5's (flyby probe bay); delete when B5 merges" }
       ]
     }
