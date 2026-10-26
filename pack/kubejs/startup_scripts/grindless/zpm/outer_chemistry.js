@@ -1,0 +1,137 @@
+// -----------------------------------------------------------------------------------------------
+// ZPM's outer chemistry (docs/eras/zpm.md, "Machines 9, 13, 14"; package ZPM-A8): three multiblocks and their recipe types. The items they
+// make (carbon_nanotube_yarn, archaeal_culture, silica_aerogel) are ZPM-F1's, in foundation.js. Recipes: server_scripts/grindless/zpm/
+// outer_chemistry.js. Names / tooltips: client_scripts/grindless/zpm_outer_chemistry_lang.js.
+//
+//   gtceu:methane_pyrolyser   type gtceu:methane_pyrolysis    3 x 3 x 12 bubble column of heat-proof casing (the molten tin-nickel bath)
+//   gtceu:vent_bioreactor     type gtceu:chemosynthesis       5 x 5 x 7 of plascrete (the sterile hall's wall), a pipe column as the gas-lift loop
+//   gtceu:aerogel_works       type gtceu:supercritical_drying 5 x 5 x 5 of autoclave-grade casing, a pipe as the CO2 compressor
+//
+// The controller sits in the middle of the back wall, one row up. Row 0 (the floor) takes the parts and at least `minCasings` casings.
+// Textures: grindless:block/multiblock/<machine> (tools/assets/Build-ZPMOuterChemistryTextures.ps1). Published: global.grindless.outerChemistry.
+(function () {
+  const G = global.grindless || (global.grindless = {})
+  const Pat = G.patterns
+  const OC = G.outerChemistry || (G.outerChemistry = {})
+
+  const HEAT = 'gtceu:heatproof_machine_casing'
+  const HEAT_TEXTURE = 'gtceu:block/casings/solid/machine_casing_heatproof'
+  const STERILE = 'gtceu:plascrete'
+  const STERILE_TEXTURE = 'gtceu:block/casings/cleanroom/plascrete'
+  const STABLE = 'gtceu:stable_machine_casing'
+  const STABLE_TEXTURE = 'gtceu:block/casings/solid/machine_casing_stable_titanium'
+  const PIPE = 'gtceu:tungstensteel_pipe_casing'
+
+  const PARTS = {
+    energy_input: { min: 1, max: 2 },
+    input_bus: { min: 1, max: 2 },
+    output_bus: { min: 1, max: 2 },
+    input_hatch: { min: 1, max: 3 },
+    output_hatch: { min: 1, max: 2 }
+  }
+
+  OC.machines = {
+    pyrolyser: {
+      name: 'methane_pyrolyser', machine: 'gtceu:methane_pyrolyser', type: 'methane_pyrolysis', lang: 'Methane Pyrolyser',
+      casing: HEAT, texture: HEAT_TEXTURE, minCasings: 4,
+      width: 3, depth: 3, height: 12,
+      // items in: the circuit; out: graphene or yarn; fluids in: methane and the bath (tin, nickel); out: hydrogen
+      maxIO: { itemsIn: 1, itemsOut: 1, fluidsIn: 3, fluidsOut: 1 }
+    },
+    bioreactor: {
+      name: 'vent_bioreactor', machine: 'gtceu:vent_bioreactor', type: 'chemosynthesis', lang: 'Vent Bioreactor',
+      casing: STERILE, texture: STERILE_TEXTURE, minCasings: 16,
+      width: 5, depth: 5, height: 7,
+      // items in: tholin, the culture and the circuit; out: the cultures; fluids in: bacteria, brine, hydrogen, CO2 or mutagen; out: methane or the broth and the spent brine
+      maxIO: { itemsIn: 3, itemsOut: 1, fluidsIn: 4, fluidsOut: 2 }
+    },
+    aerogel: {
+      name: 'aerogel_works', machine: 'gtceu:aerogel_works', type: 'supercritical_drying', lang: 'Aerogel Works',
+      casing: STABLE, texture: STABLE_TEXTURE, minCasings: 12,
+      width: 5, depth: 5, height: 5,
+      // items in: nanograins; out: aerogel; fluids in: ethanol and the CO2 charge; out: the ethanol
+      maxIO: { itemsIn: 1, itemsOut: 1, fluidsIn: 2, fluidsOut: 1 }
+    }
+  }
+
+  // A hollow box of casing: row 0 takes the parts, S is the controller (back slice, row 1, middle column), `inner` gives the interior.
+  function shell(m, inner) {
+    var slices = []
+    var last = m.depth - 1
+    var mid = (m.width - 1) / 2
+    for (var si = 0; si < m.depth; si++) {
+      var rows = []
+      for (var r = 0; r < m.height; r++) {
+        var row = ''
+        for (var c = 0; c < m.width; c++) {
+          var ch
+          var wall = si === 0 || si === last || c === 0 || c === m.width - 1
+          if (r === 0) ch = 'X'
+          else if (si === last && r === 1 && c === mid) ch = 'S'
+          else if (wall || r === m.height - 1) ch = 'F'
+          else ch = inner(r, si, c)
+          row += ch
+        }
+        rows.push(row)
+      }
+      slices.push(rows)
+    }
+    return slices
+  }
+
+  // the bubble column: an open 1 x 1 shaft up the middle
+  function pyrolyserInner(r, si, c) { return '#' }
+  // the gas-lift loop: a pipe column up the middle
+  function bioreactorInner(r, si, c) { return si === 2 && c === 2 ? 'P' : '#' }
+  // the CO2 compressor: one pipe in the middle of the autoclave
+  function aerogelInner(r, si, c) { return r === 2 && si === 2 && c === 2 ? 'P' : '#' }
+
+  function specOf(m, inner) {
+    var oneOf = [Pat.block(m.casing, { min: m.minCasings })]
+    Object.keys(PARTS).forEach(function (k) { oneOf.push(Pat.part(k, PARTS[k])) })
+    return {
+      slices: shell(m, inner),
+      symbols: {
+        S: Pat.controller(),
+        X: Pat.oneOf.apply(null, oneOf),
+        F: Pat.block(m.casing),
+        P: Pat.block(PIPE),
+        '#': Pat.air()
+      }
+    }
+  }
+  OC.machines.pyrolyser.spec = specOf(OC.machines.pyrolyser, pyrolyserInner)
+  OC.machines.bioreactor.spec = specOf(OC.machines.bioreactor, bioreactorInner)
+  OC.machines.aerogel.spec = specOf(OC.machines.aerogel, aerogelInner)
+
+  GTCEuStartupEvents.registry('gtceu:recipe_type', function (event) {
+    Object.keys(OC.machines).forEach(function (k) {
+      var m = OC.machines[k]
+      event.create(m.type)
+        .category('multiblock')
+        .setEUIO('in')
+        .setMaxIOSize(m.maxIO.itemsIn, m.maxIO.itemsOut, m.maxIO.fluidsIn, m.maxIO.fluidsOut)
+        .setProgressBar(GuiTextures.PROGRESS_BAR_ARROW_MULTIPLE, FillDirection.LEFT_TO_RIGHT)
+        .setSound(GTSoundEntries.ARC)
+    })
+  })
+
+  GTCEuStartupEvents.registry('gtceu:machine', function (event) {
+    Object.keys(OC.machines).forEach(function (k) {
+      var m = OC.machines[k]
+      Pat.register(m.machine, m.spec)
+      event.create(m.name, 'multiblock')
+        .langValue(m.lang)
+        .rotationState(RotationState.NON_Y_AXIS)
+        .recipeType(m.type)
+        .appearanceBlock(function () { return Block.getBlock(m.casing) })
+        .pattern(function (def) { return Pat.build(def, m.spec) })
+        ["tooltips(net.minecraft.network.chat.Component[])"]([
+          Text.translate('grindless.machine.' + m.name + '.tooltip.0'),
+          Text.translate('grindless.machine.' + m.name + '.tooltip.1'),
+          Text.translate('grindless.machine.' + m.name + '.tooltip.2')
+        ])
+        .workableCasingModel(m.texture, 'grindless:block/multiblock/' + m.name)
+    })
+  })
+})()

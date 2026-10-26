@@ -64,6 +64,7 @@ Generators for the pack's own textures. Everything is procedural 16x16 pixel art
 | `Build-AsteroidBeltTextures.ps1` | Writes the faces of the LuV asteroid belt machines (LuV-B5): the harpoon anchor drill, the asteroid processor and the optical miner (`multiblock/harpoon_anchor_drill/`, `multiblock/asteroid_processor/`, `multiblock/optical_miner/`). `-Only drill,processor,miner`, `-Preview <png outside the repo>` and `-Credits` (their 15 CREDITS rows). |
 | `Build-IoOrbitTextures.ps1` | Writes the faces of the LuV Io orbit machines (LuV-B7): the flux-tube tether and the sulfur-iodine plant (`multiblock/flux_tube_tether/`, `multiblock/sulfur_iodine_plant/`). Static faces; it fails if an emissive pixel is not in the colour layer. |
 | `Build-ZPMQubitsTextures.ps1` | Writes the faces of the ZPM diamond lattice fab, ion implanter and qubit fab, and five items (ZPM-A6). Proposed CREDITS "Assets" line: procedural, original. |
+| `Build-ZPMOuterChemistryTextures.ps1` | Writes the faces of the ZPM methane pyrolyser, vent bioreactor and aerogel works (ZPM-A8). Proposed CREDITS "Assets" line: procedural, original. |
 | `Build-ZPMEuropiumTextures.ps1` | Writes the face of the ZPM europium reductor (ZPM-A3): `multiblock/europium_reductor/` (`overlay_front`, `overlay_front_active` and its emissive layer; static, the emissive pixels are a subset of the colour layer). Proposed CREDITS "Assets" line: europium reductor overlays, procedural, original. |
 | `Build-ZPMSaturnSiphonTextures.ps1` | Writes the faces of the ZPM Saturn machines (ZPM-B2): `multiblock/gas_giant_siphon/`, `multiblock/isotope_column/`, `multiblock/ring_harvester/` (`overlay_front`, `overlay_front_active` and its emissive layer; the emissive pixels are a subset of the colour layer). Proposed CREDITS "Assets" lines: the three overlays, procedural, original. |
 | `Build-ZPMTravelTextures.ps1` | Writes the ZPM-B1 travel textures: the naquadah and aerogel fuel tank columns (`block/zpm/<tank>_side`, `_end`) and the Saturnian and Uranian quantum seed ampoules (`item/`). `-OutRoot <dir>` writes elsewhere. |
@@ -890,6 +891,20 @@ powershell -NoProfile -ExecutionPolicy Bypass -File tools\assets\Build-ZPMQubits
 | `block/multiblock/ion_implanter/overlay_front*.png` | A beam tube with magnet rings; the violet beam glows when active. |
 | `block/multiblock/qubit_fab/overlay_front*.png` | Gold cryostat stages over a blue mixing chamber; the chamber glows when active. |
 | `item/nitrogen_doped_cvd_plate.png`, `nv_diamond_chip.png`, `silicon_28_boule.png`, `silicon_28_wafer.png`, `donor_qubit_wafer.png` | Diamond plate, NV chip, Si-28 crystal, wafer and donor wafer. |
+
+## ZPM methane pyrolyser, vent bioreactor and aerogel works (ZPM-A8)
+
+Procedural, drawn by `Build-ZPMOuterChemistryTextures.ps1`; nothing is copied from another mod. Static faces (the emissive pixels are a subset of the colour layer).
+
+```powershell
+powershell -NoProfile -ExecutionPolicy Bypass -File tools\assets\Build-ZPMOuterChemistryTextures.ps1
+```
+
+| File (under `textures/`) | Notes |
+|---|---|
+| `block/multiblock/methane_pyrolyser/overlay_front*.png` | A column of molten metal; the bubbles glow when active. |
+| `block/multiblock/vent_bioreactor/overlay_front*.png` | A porthole onto the vessel; the culture glows teal when active. |
+| `block/multiblock/aerogel_works/overlay_front*.png` | An autoclave door; the pale-blue window glows when active. |
 
 ## ZPM rocket tanks and quantum seeds (ZPM-B1)
 
