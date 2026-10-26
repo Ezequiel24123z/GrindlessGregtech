@@ -143,7 +143,7 @@
 
   // a List<Integer> made entirely in Java, and the Java-side comparisons built on it (see the pack's migration script)
   function javaInts(n) {
-    return cls().IntStream.of(n).boxed().collect(cls().Collectors.toList())
+    return cls().IntStream['of(int)'](n).boxed().collect(cls().Collectors.toList())
   }
 
   function liveHoldsInteger(cv, n) {
@@ -151,7 +151,7 @@
   }
 
   function fileHoldsInteger(cfg, path, n) {
-    return cfg['getOptional(java.lang.String)'](path).equals(cls().IntStream.of(n).boxed().findFirst())
+    return cfg['getOptional(java.lang.String)'](path).equals(cls().IntStream['of(int)'](n).boxed().findFirst())
   }
 
   function configEntry(cfg, path) {
@@ -165,7 +165,7 @@
       if (ran) return
       ran = true
       try {
-        pairs.forEach(function (x) { x.cv.set(new (cls().Integer)(x.v)) })
+        pairs.forEach(function (x) { x.cv.set(cls().Integer['valueOf(int)'](x.v)) })
         spec.save()
       } catch (e) {
         error = e
