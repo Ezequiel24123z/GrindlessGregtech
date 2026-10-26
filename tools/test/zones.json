@@ -79,6 +79,7 @@
     { "id": "zpm_naquadria", "x": [19456, 19519], "tests": ["zpm_naquadria"], "note": "ZPM-A2: recipe lookups of the naquadria refinery, the fuel works, the plant's circuit-4 mode and the re-registered large naquadah reactor (no structure placed)" },
     { "id": "zpm_a3", "x": [19712, 19775], "tests": ["zpm_europium"], "note": "ZPM-A3: the europium reductor (9 x 3 x 7) at Z 0-15, Y 98-112" },
     { "id": "zpm_actinides", "x": [19968, 20031], "z": [0, 63], "y": [98, 112], "tests": ["zpm_actinides"], "note": "ZPM-A4: recipe lookups of the waste retrieval and actinide partitioning plants, and a formed retrieval plant (7 x 5 x 7) consuming one waste item" },
+    { "id": "zpm_qubits", "x": [20480, 20543], "z": [0, 63], "y": [98, 112], "tests": ["zpm_qubits"], "note": "ZPM-A6: recipe lookups only (no structure placed): the qubit chain, the hot cell's circuit 5 row and our two HPCA assembler recipes beside GTM's" },
     { "id": "zpm_b2", "x": [21760, 21823], "tests": ["zpm_saturn_siphon"], "note": "ZPM-B2: the siphon, column and harvester at Z 0-63; Saturn orbit Y 198-214 and Overworld Y 98-112" }
   ]
 }
