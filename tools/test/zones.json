@@ -82,6 +82,7 @@
     { "id": "zpm_magnet_works", "x": [20224, 20287], "z": [0, 63], "y": [98, 112], "tests": ["zpm_magnet_works"], "note": "ZPM-A5: recipe lookups of the naquadria magnet works, a wireless tower with one ZPM cell (capacity above 2^31), a formed magnet works if cheap" },
     { "id": "zpm_qubits", "x": [20480, 20543], "z": [0, 63], "y": [98, 112], "tests": ["zpm_qubits"], "note": "ZPM-A6: recipe lookups only (no structure placed): the qubit chain, the hot cell's circuit 5 row and our two HPCA assembler recipes beside GTM's" },
     { "id": "zpm_a8", "x": [20992, 21055], "z": [0, 63], "y": [98, 112], "tests": ["zpm_outer_chemistry"], "note": "ZPM-A8: recipe lookups only (no structure placed): the methane pyrolyser, vent bioreactor and aerogel works recipes, and the broth beside GTM's raw growth medium mixer recipe" },
+    { "id": "zpm_a9", "x": [21248, 21311], "z": [0, 63], "y": [98, 112], "tests": ["zpm_observatory"], "note": "ZPM-A9: recipe lookups only (no structure placed): the observatory, network and telescope recipes (the telescope's are limited to gcyr:overworld_orbit, Y 198-214 at the same X/Z) and the UV energy hatch" },
     { "id": "zpm_b2", "x": [21760, 21823], "tests": ["zpm_saturn_siphon"], "note": "ZPM-B2: the siphon, column and harvester at Z 0-63; Saturn orbit Y 198-214 and Overworld Y 98-112" }
   ]
 }
