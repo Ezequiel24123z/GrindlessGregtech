@@ -319,13 +319,6 @@
 			y: 56.5d
 		}
 		{
-			id: "3A0501E7D4075B77"
-			linked_quest: "3F2030C8DDEDB9FF"
-			shape: "rsquare"
-			x: 11.25d
-			y: 55.0d
-		}
-		{
 			id: "302B08A0F81657FE"
 			linked_quest: "543F014BB97A45F4"
 			shape: "rsquare"
@@ -1376,7 +1369,7 @@
 			]
 			title: "Photovoltaic Cell"
 			x: 9.0d
-			y: 56.5d
+			y: 55.25d
 		}
 		{
 			dependencies: ["70F29F44F8EE8982"]
@@ -1390,10 +1383,10 @@
 			]
 			title: "Orbital Solar Panel"
 			x: 11.25d
-			y: 56.5d
+			y: 55.25d
 		}
 		{
-			dependencies: ["3F2030C8DDEDB9FF", "170A010206286D7D"]
+			dependencies: ["170A010206286D7D"]
 			description: ["The sky up there is stuck at midnight, and the panels don't care: one counts while its top sees open sky. It burns nothing, so no fuel bonus either."]
 			icon: "gtceu:orbital_solar_station"
 			id: "70E4C0FEFEE2200D"
@@ -1406,7 +1399,7 @@
 			]
 			title: "Orbital Solar Station"
 			x: 13.5d
-			y: 56.5d
+			y: 55.25d
 		}
 		{
 			icon: "gtceu:deuterium_bucket"
