@@ -513,6 +513,26 @@ file = "kubejs/assets/grindless/textures/block/multiblock/biorefinery/overlay_fr
 hash = "491ea51d46bc1f0c0ff11ed9293461cc67de293c7672abbc45f67563f8fe1f1a"
 
 [[files]]
+file = "kubejs/assets/grindless/textures/block/multiblock/coated_conductor_line/overlay_front.png"
+hash = "fa232a45e403a1babc78c41224eff03e7db667e8a8b134d000a7d2400ff86d85"
+
+[[files]]
+file = "kubejs/assets/grindless/textures/block/multiblock/coated_conductor_line/overlay_front_active.png"
+hash = "0b14a46244c44779ce5b2e55601698d40cb08b8965316d1829f3972492ef0e31"
+
+[[files]]
+file = "kubejs/assets/grindless/textures/block/multiblock/coated_conductor_line/overlay_front_active.png.mcmeta"
+hash = "491ea51d46bc1f0c0ff11ed9293461cc67de293c7672abbc45f67563f8fe1f1a"
+
+[[files]]
+file = "kubejs/assets/grindless/textures/block/multiblock/coated_conductor_line/overlay_front_active_emissive.png"
+hash = "a9387ffddf932ed1a89deecc5f422a6f91e7774b73555114895b89f1263b35b9"
+
+[[files]]
+file = "kubejs/assets/grindless/textures/block/multiblock/coated_conductor_line/overlay_front_active_emissive.png.mcmeta"
+hash = "491ea51d46bc1f0c0ff11ed9293461cc67de293c7672abbc45f67563f8fe1f1a"
+
+[[files]]
 file = "kubejs/assets/grindless/textures/block/multiblock/coking_battery/overlay_front.png"
 hash = "86f8eee203c0800b32a35e57d0b608e77afb6704813de9df42c2548dd650378b"
 
@@ -790,6 +810,26 @@ hash = "801ed6afb214f6493d856a39ee0e273bb53bf5b3a64d247aef3d61b28832432f"
 
 [[files]]
 file = "kubejs/assets/grindless/textures/block/multiblock/heliostat_tower/overlay_front_active_emissive.png.mcmeta"
+hash = "491ea51d46bc1f0c0ff11ed9293461cc67de293c7672abbc45f67563f8fe1f1a"
+
+[[files]]
+file = "kubejs/assets/grindless/textures/block/multiblock/helium_refrigerator/overlay_front.png"
+hash = "fb14e242433b548928b55a1765934d4a156813dcf702f3d5b329d04556e5a2ad"
+
+[[files]]
+file = "kubejs/assets/grindless/textures/block/multiblock/helium_refrigerator/overlay_front_active.png"
+hash = "e918347d1b2881a4b9a92d8b0ca948a3971604bc8bc396984da7a3d16f947b81"
+
+[[files]]
+file = "kubejs/assets/grindless/textures/block/multiblock/helium_refrigerator/overlay_front_active.png.mcmeta"
+hash = "491ea51d46bc1f0c0ff11ed9293461cc67de293c7672abbc45f67563f8fe1f1a"
+
+[[files]]
+file = "kubejs/assets/grindless/textures/block/multiblock/helium_refrigerator/overlay_front_active_emissive.png"
+hash = "ea690f2c3d93d319b34b96f7beba4b1b0938171da54202d08ac25c4328cb6e81"
+
+[[files]]
+file = "kubejs/assets/grindless/textures/block/multiblock/helium_refrigerator/overlay_front_active_emissive.png.mcmeta"
 hash = "491ea51d46bc1f0c0ff11ed9293461cc67de293c7672abbc45f67563f8fe1f1a"
 
 [[files]]
@@ -2501,6 +2541,10 @@ file = "kubejs/client_scripts/grindless/luv_biofoundry_lang.js"
 hash = "87919e2a5229ea67ff94c190f357f387f5c7874f1ff6a3e7f38a72553c1a8745"
 
 [[files]]
+file = "kubejs/client_scripts/grindless/luv_cryogenics_lang.js"
+hash = "080ffadc6893bc601b8006678597e6f4284b8127e87dfe1dd8a65ba9f978e6d2"
+
+[[files]]
 file = "kubejs/client_scripts/grindless/luv_foundation_lang.js"
 hash = "f056bfc08ab6e28f8fce6ea33975c3114889231eabdfa77993ea4608f7d97464"
 
@@ -2633,6 +2677,10 @@ file = "kubejs/data/grindless/tables/chest_furnace_tiers.json"
 hash = "5da688f7bfcbaa1e59fb19e39b1967946ae9d6780b9a61c131fdabc73dddaafa"
 
 [[files]]
+file = "kubejs/data/grindless/tables/coated_conductor_line.json"
+hash = "e7afc7668903c820afb04bc88f7752dbba4563f03a2affce9a1cb19d5576a461"
+
+[[files]]
 file = "kubejs/data/grindless/tables/fission_cores.json"
 hash = "72ce68bb386096718513d6075de4b92b99571682399bb64b5cfc46c3cd09ecfc"
 
@@ -2641,8 +2689,12 @@ file = "kubejs/data/grindless/tables/heavy_water_plant.json"
 hash = "78e0550c5776e33e7e3cf74a25bbe172dbbee4f6a0152be0c819ec768b9b60b9"
 
 [[files]]
+file = "kubejs/data/grindless/tables/helium_refrigerator.json"
+hash = "1f4b256531a0b42a6ecf399e9b692d9e4730bd4102e53aab3e1fa2c999b69e9d"
+
+[[files]]
 file = "kubejs/data/grindless/tables/hidden_until.json"
-hash = "2f0c7ac711df7bd41124221a7b5081594044bf3f7bd6f55013ac8c58fdb6d731"
+hash = "1fd6cbaf3e55042e603ca3ee5ec8490c0d66c963f02ba8522634c4d104b27003"
 
 [[files]]
 file = "kubejs/data/grindless/tables/hot_cell.json"
@@ -2997,6 +3049,14 @@ file = "kubejs/server_scripts/grindless/luv/biofoundry.js"
 hash = "92c5fef3229cefd44a912b7cf3af03d010b5e7b4f37a564f06a6bc7238d18c73"
 
 [[files]]
+file = "kubejs/server_scripts/grindless/luv/coated_conductor_line.js"
+hash = "9b3ec773e7507b4d980768e14f5d22a33091b475c6bf84b457a9bec831f4ab78"
+
+[[files]]
+file = "kubejs/server_scripts/grindless/luv/helium_refrigerator.js"
+hash = "689cbd10e98ff67c0260040f8dd9ff215e8b31d41950b2f84abe5510158335e8"
+
+[[files]]
 file = "kubejs/server_scripts/grindless/luv/orbital_biology.js"
 hash = "480a37d4349f04cbc68eb257035a3f659790da25a89802c3ed081ff78a32d5d9"
 
@@ -3345,8 +3405,16 @@ file = "kubejs/startup_scripts/grindless/luv/biofoundry.js"
 hash = "a6a329f580b17079988a013da53901e05255e9a21bf21d3cd7f62399e23c3651"
 
 [[files]]
+file = "kubejs/startup_scripts/grindless/luv/coated_conductor_line.js"
+hash = "08ab5f0d1bac2e5c67ed75fccb8fe452d1c4bd4846616ca503fe4e74f48f9ba1"
+
+[[files]]
 file = "kubejs/startup_scripts/grindless/luv/foundation.js"
 hash = "92ff3acae0a65f47c0192fd4363def48be95c3e91572389bb444f61dff451382"
+
+[[files]]
+file = "kubejs/startup_scripts/grindless/luv/helium_refrigerator.js"
+hash = "16dfc102b7839fbbcd5011b2f08172e67bcb1d80efaee81ba14868042d77f296"
 
 [[files]]
 file = "kubejs/startup_scripts/grindless/luv/orbital_biology.js"

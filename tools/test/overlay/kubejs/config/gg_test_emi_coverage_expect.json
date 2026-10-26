@@ -45,6 +45,7 @@
     {"id":"grindless:hydrotreating_catalyst","kind":"item","needUse":true,"needMade":true,"made":["gtceu:mixer"],"used":["gtceu:refining"]},
     {"id":"grindless:inner_planets_chart","kind":"item","needUse":true,"needMade":true,"made":["gtceu:deep_space_tracking","minecraft:crafting"],"used":["gtceu:assembler","gtceu:deep_space_tracking","gtceu:interferometry","minecraft:crafting"]},
     {"id":"grindless:ion_exchange_resin","kind":"item","needUse":true,"needMade":true,"made":["gtceu:chemical_reactor"],"used":["gtceu:in_situ_leaching"]},
+    {"id":"grindless:itbtc_coated_conductor","kind":"item","needUse":false,"needMade":true,"made":["gtceu:coated_conductor"],"used":[]},
     {"id":"grindless:iv_capacitor_cell","kind":"item","needUse":true,"needMade":true,"made":["emi:info","gtceu:assembler"],"used":["emi:info"]},
     {"id":"grindless:iv_wireless_dynamo_cover","kind":"item","needUse":true,"needMade":true,"made":["emi:info","gtceu:assembler"],"used":["emi:info"]},
     {"id":"grindless:iv_wireless_energy_cover","kind":"item","needUse":true,"needMade":true,"made":["emi:info","gtceu:assembler"],"used":["emi:info"]},
@@ -68,6 +69,7 @@
     {"id":"grindless:mv_wireless_energy_cover","kind":"item","needUse":true,"needMade":true,"made":["emi:info","gtceu:assembler"],"used":["emi:info"]},
     {"id":"grindless:neural_organoid","kind":"item","needUse":true,"needMade":true,"made":["gtceu:organoid_assembly"],"used":["gtceu:organoid_assembly"]},
     {"id":"grindless:neurotrophic_factor","kind":"item","needUse":true,"needMade":true,"made":["gtceu:greenhouse"],"used":["gtceu:organoid_assembly"]},
+    {"id":"grindless:nickel_tungsten_tape","kind":"item","needUse":true,"needMade":true,"made":["gtceu:coated_conductor"],"used":["gtceu:coated_conductor"]},
     {"id":"grindless:night_sky_radiator","kind":"item","needUse":true,"needMade":true,"made":["emi:info","gtceu:assembler"],"used":["emi:info","gtceu:multiblock_info"]},
     {"id":"grindless:orbital_solar_panel","kind":"item","needUse":true,"needMade":true,"made":["emi:info","gtceu:assembler"],"used":["emi:info","gtceu:multiblock_info"]},
     {"id":"grindless:outer_system_chart","kind":"item","needUse":true,"needMade":true,"made":["gtceu:interferometry","minecraft:crafting"],"used":["gtceu:interferometry","minecraft:crafting"]},
@@ -152,6 +154,7 @@
     {"id":"gtceu:atmosphere_processor","kind":"item","needUse":false,"needMade":true,"made":["gtceu:multiblock_info","minecraft:crafting"],"used":[]},
     {"id":"gtceu:biofoundry","kind":"item","needUse":false,"needMade":true,"made":["gtceu:assembler","gtceu:multiblock_info"],"used":[]},
     {"id":"gtceu:biorefinery","kind":"item","needUse":false,"needMade":true,"made":["gtceu:multiblock_info","minecraft:crafting"],"used":[]},
+    {"id":"gtceu:coated_conductor_line","kind":"item","needUse":false,"needMade":true,"made":["gtceu:multiblock_info","minecraft:crafting"],"used":[]},
     {"id":"gtceu:coking_battery","kind":"item","needUse":false,"needMade":true,"made":["gtceu:multiblock_info","minecraft:crafting"],"used":[]},
     {"id":"gtceu:combined_cycle_plant","kind":"item","needUse":false,"needMade":true,"made":["gtceu:multiblock_info","minecraft:crafting"],"used":[]},
     {"id":"gtceu:composite_autoclave","kind":"item","needUse":false,"needMade":true,"made":["gtceu:multiblock_info","minecraft:crafting"],"used":[]},
@@ -177,6 +180,7 @@
     {"id":"gtceu:generator_array","kind":"item","needUse":false,"needMade":true,"made":["gtceu:multiblock_info","minecraft:crafting"],"used":[]},
     {"id":"gtceu:heavy_water_plant","kind":"item","needUse":false,"needMade":true,"made":["gtceu:multiblock_info","minecraft:crafting"],"used":[]},
     {"id":"gtceu:heliostat_tower","kind":"item","needUse":false,"needMade":true,"made":["gtceu:multiblock_info","minecraft:crafting"],"used":["minecraft:crafting"]},
+    {"id":"gtceu:helium_refrigerator","kind":"item","needUse":false,"needMade":true,"made":["gtceu:multiblock_info","minecraft:crafting"],"used":[]},
     {"id":"gtceu:hermean_regolith_dust","kind":"item","needUse":true,"needMade":true,"made":["gtceu:macerator"],"used":["gtceu:chemical_reactor","gtceu:solar_processing"]},
     {"id":"gtceu:hot_cell","kind":"item","needUse":false,"needMade":true,"made":["gtceu:assembler","gtceu:multiblock_info"],"used":[]},
     {"id":"gtceu:hot_strip_mill","kind":"item","needUse":false,"needMade":true,"made":["gtceu:multiblock_info","minecraft:crafting"],"used":[]},
@@ -287,5 +291,5 @@
   ],
   "pages": ["emi:/generated/recipe/additions/grindless/capacitor_cells.json","emi:/generated/recipe/additions/grindless/engineered_seeds.json","emi:/generated/recipe/additions/grindless/heliostat_mirror.json","emi:/generated/recipe/additions/grindless/hermean_blocks.json","emi:/generated/recipe/additions/grindless/hologram_projector.json","emi:/generated/recipe/additions/grindless/night_sky_radiator.json","emi:/generated/recipe/additions/grindless/orbital_solar_panel.json","emi:/generated/recipe/additions/grindless/sagittarius_a_star_signal.json","emi:/generated/recipe/additions/grindless/sapphire_test_mass.json","emi:/generated/recipe/additions/grindless/sintered_regolith.json","emi:/generated/recipe/additions/grindless/solar_wing_panel.json","emi:/generated/recipe/additions/grindless/travel_keys.json","emi:/generated/recipe/additions/grindless/whipple_shield_casing.json","emi:/generated/recipe/additions/grindless/wireless_covers.json"],
   "legacy": [{"id":"grindless:vein_sample_scheelite","conversions":["grindless:crafting/empty_vein_probe_from_vein_sample_scheelite"]}],
-  "hidden": ["grindless:station_truss_casing","grindless:radiation_vault_casing","grindless:asteroid_regolith_casing","grindless:sulfur_concrete_casing","grindless:magnetic_bearing","grindless:coilgun_coil_casing","grindless:nickel_tungsten_tape","grindless:itbtc_coated_conductor","grindless:asteroid_quantum_seed","grindless:ionian_quantum_seed","grindless:europan_quantum_seed","grindless:ganymedean_quantum_seed","grindless:hss_s_drill_bit","grindless:anchor_harpoon","grindless:asteroid_pgm_concentrate","grindless:capture_bag","grindless:chondritic_extract","grindless:ionian_sublimate","grindless:heat_exchanger_bundle","grindless:tether_spool","grindless:cryobot_probe","grindless:melt_head","grindless:europan_ocean_sample","grindless:jupiter_entry_probe","grindless:saturn_flyby_probe","grindless:jovian_atmosphere_survey","grindless:saturn_transfer_chart","grindless:gravitational_wave_catalogue","gtceu:meteoric_iron_dust","gtceu:raw_meteoric_iron","gtceu:tetrataenite_dust","gtceu:tetrataenite_ingot","gtceu:raw_tetrataenite","fluid:gtceu:europan_brine"]
+  "hidden": ["grindless:station_truss_casing","grindless:radiation_vault_casing","grindless:asteroid_regolith_casing","grindless:sulfur_concrete_casing","grindless:magnetic_bearing","grindless:coilgun_coil_casing","grindless:asteroid_quantum_seed","grindless:ionian_quantum_seed","grindless:europan_quantum_seed","grindless:ganymedean_quantum_seed","grindless:hss_s_drill_bit","grindless:anchor_harpoon","grindless:asteroid_pgm_concentrate","grindless:capture_bag","grindless:chondritic_extract","grindless:ionian_sublimate","grindless:heat_exchanger_bundle","grindless:tether_spool","grindless:cryobot_probe","grindless:melt_head","grindless:europan_ocean_sample","grindless:jupiter_entry_probe","grindless:saturn_flyby_probe","grindless:jovian_atmosphere_survey","grindless:saturn_transfer_chart","grindless:gravitational_wave_catalogue","gtceu:meteoric_iron_dust","gtceu:raw_meteoric_iron","gtceu:tetrataenite_dust","gtceu:tetrataenite_ingot","gtceu:raw_tetrataenite","fluid:gtceu:europan_brine"]
 }
