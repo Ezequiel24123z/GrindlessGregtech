@@ -11,8 +11,10 @@
 //                 set back to them first, the way v0.7.0 had it), serialized; the migration raises the config; native block entities are
 //                 recreated from that NBT in the already loaded chunk: they grow to the pack's size, keep every stack (NBT
 //                 included) and their upgrade; a second native block-entity NBT reload keeps the new size. Automation sees the new slots (Forge's item
-//                 handler capability inserts into and extracts from a slot past the old size) and the limited barrel takes twice as many.
-//   tier_upgrade  iron_to_gold_tier_upgrade used on the full, migrated chest: a gold chest of 162 slots with everything still inside.
+//                 handler capability puts items in a slot past the old size and extracts them from it; Sophisticated Core honours the slot index of
+//                 a simulated insert only, a real insert goes to matching stacks, then the first empty slot) and the limited barrel takes twice as many.
+//   tier_upgrade  iron_to_gold_tier_upgrade used on the full, migrated chest: a gold chest of 162 slots / 6 upgrade slots with everything
+//                 still inside. The item acts in Forge's onItemUseFirst, which a real right-click runs before the chest's own use (no sneaking).
 //   gui           real right-clicks (the client holds the use key, crosshair on the chest; no server fallback) on the gold chest (162 slots)
 //                 and a netherite chest (180): the client's menu shows the pack's slot and upgrade counts, every item and the upgrade; one
 //                 screenshot each, confirmed written by its callback (kubejs/exported/gg_chest_*.png).
@@ -29,6 +31,10 @@
 // TEST AREA: verified air high above an ALREADY loaded/generated chunk next to the player. No chunk loads, generation or tickets.
 // Only recorded fixture placements are removed. Storage reloads use native saveWithFullMetadata/loadStatic in that loaded chunk,
 // not chunk unloading or disk/reconnect proof; the inventory growth/retention assertions are unchanged.
+// The client keeps its own copy of a reloaded storage: a data packet makes Sophisticated Storage rebuild that copy's inventory handler but
+// not its upgrade handler (StorageWrapper#load), so a reloaded iron chest would show 2 upgrade slots on screen while the server has 4. A real
+// world never shows this (the client builds every storage from the chunk data after the server start). The GUI checks therefore use storages
+// whose client copy is new: the tier-upgraded gold chest (its block is replaced) and a new netherite chest.
 // var + function everywhere: this Rhino throws "redeclaration of var" for const/let in functions that run more than once.
 ;(function () {
   var TAG = 'GGTEST|chest_furnace|'
@@ -154,6 +160,15 @@
     return cfg['get(java.lang.String)'](path)
   }
 
+  // a fresh NightConfig reader (no autosave, no watcher). builder(String|Path|File) is overloaded and Rhino can't choose for a JS string
+  function openToml(where) {
+    var F = cls().CommentedFileConfig
+    var b = typeof where === 'string' ? F['builder(java.lang.String)'](String(where)) : F['builder(java.nio.file.Path)'](where)
+    var c = b.onFileNotFound(cls().FileNotFoundAction.THROW_ERROR).build()
+    c.load()
+    return c
+  }
+
   function guardedSet(spec, pairs) {
     var ran = false
     var error = null
@@ -243,13 +258,38 @@
     return { items: n, stacks: stacks }
   }
 
+  // Forge's item handler of a grown storage uses the new slots: the named slot past the old size accepts a simulated insert, the real insert
+  // lands past the old size and extractItem gives the items back from that slot. Sophisticated Core honours the slot index of a simulated
+  // insert only; a real one goes to matching stacks, then the first empty slot (InventoryHandlerSlotTracker), and the old slots are full here.
+  // An empty ItemStack can read as null in KubeJS: emptiness is isEmpty() and only the capability is null-checked.
+  function automationRoundTrip(cap, hint, oldSize, wantSlots) {
+    if (cap === null) return { ok: false, text: 'no item handler capability' }
+    var slots = Number(cap.getSlots())
+    var sim = cap.insertItem(hint, Item.of('minecraft:diamond', 5), true)
+    var left = cap.insertItem(hint, Item.of('minecraft:diamond', 5), false)
+    var at = -1
+    for (var i = 0; i < slots && at < 0; i++) {
+      var s = cap.getStackInSlot(i)
+      if (!s.isEmpty() && String(s.getId()) === 'minecraft:diamond') at = i
+    }
+    var back = at < 0 ? null : cap.extractItem(at, 5, false)
+    var gotBack = at >= 0 && !back.isEmpty() && String(back.getId()) === 'minecraft:diamond' && Number(back.getCount()) === 5 && cap.getStackInSlot(at).isEmpty()
+    return { ok: slots === wantSlots && sim.isEmpty() && left.isEmpty() && at >= oldSize && gotBack,
+      text: 'item handler: ' + slots + ' slots; slot ' + hint + ' accepts 5 diamonds (simulated: ' + (sim.isEmpty() ? 'all' : sid(sim) + ' left') + '); the real insert (' +
+        (left.isEmpty() ? 'all in' : sid(left) + ' refused') + ') landed in slot ' + at + ' (old size ' + oldSize + ') and extractItem(' + at + ') gave back ' +
+        (at < 0 ? 'nothing' : sid(back)) }
+  }
+
+  // the item's part of a right-click on a block, in Forge's order (ServerPlayerGameMode#useItemOn): onItemUseFirst, then useOn only if that
+  // passed. Sophisticated Storage's tier upgrades act in onItemUseFirst (their useOn is Item's PASS); Iron Furnaces' upgrades in useOn.
   function useItemOn(p, itemId, pos) {
     p.setItemInHand(cls().Hand.MAIN_HAND, Item.of(itemId))
     var hit = new (cls().BlockHitResult)(new (cls().Vec3)(pos.x + 0.5, pos.y + 1, pos.z + 0.5), cls().Direction.UP, bp(pos), false)
     var ctx = new (cls().UseOnContext)(p, cls().Hand.MAIN_HAND, hit)
-    var r = p.getMainHandItem().useOn(ctx)
+    var r = 'onItemUseFirst ' + String(p.getMainHandItem().onItemUseFirst(ctx))
+    if (r === 'onItemUseFirst PASS') r = 'useOn ' + String(p.getMainHandItem().useOn(ctx))
     p.setItemInHand(cls().Hand.MAIN_HAND, Item.of('minecraft:air'))
-    return String(r)
+    return r
   }
 
   function loadedChunk(pos) {
@@ -387,16 +427,16 @@
     var where = ''
     var tries = []
     try {
-      tries.push(T.server.getWorldPath(cls().LevelResource.ROOT).resolve('serverconfig').resolve('sophisticatedstorage-server.toml'))
+      // Path#resolve(String|Path) is overloaded too
+      var root = T.server.getWorldPath(cls().LevelResource.ROOT)
+      tries.push(root['resolve(java.lang.String)']('serverconfig')['resolve(java.lang.String)']('sophisticatedstorage-server.toml'))
     } catch (e) {
       note('world_path', 'MinecraftServer#getWorldPath not usable from the script (' + e + '); using the client\'s world folder name')
     }
     sval('levelDirs').split(';').filter(function (d) { return d !== '' }).forEach(function (d) { tries.push('saves/' + d + '/serverconfig/sophisticatedstorage-server.toml') })
     for (var i = 0; i < tries.length && cfg === null; i++) {
       try {
-        var c = cls().CommentedFileConfig.builder(tries[i]).onFileNotFound(cls().FileNotFoundAction.THROW_ERROR).build()
-        c.load()
-        cfg = c
+        cfg = openToml(tries[i])
         where = String(tries[i])
       } catch (e) {
         note('config_file_try', String(tries[i]) + ': ' + e)
@@ -440,8 +480,7 @@
     check('furnace_switches_live', rainbow === 'false' && webOff === 'true' && updates === 'false', 'rainbow content ' + rainbow + ', web content disabled ' + webOff +
       ', update check ' + updates)
     try {
-      var c = cls().CommentedFileConfig.builder('config/ironfurnaces-client.toml').onFileNotFound(cls().FileNotFoundAction.THROW_ERROR).build()
-      c.load()
+      var c = openToml('config/ironfurnaces-client.toml')
       var fixes = []
       var ok = !!IF.CLIENT_CONFIG.isCorrect(c)
       if (!ok) {
@@ -563,7 +602,7 @@
       var bad = []
       st.before.forEach(function (s, i) { if (!cls().ItemStack.matches(s, e2.getItem(i))) bad.push('slot ' + i + ': ' + sid(s) + ' -> ' + sid(e2.getItem(i))) })
       st.block = blockId(F3)
-      check('furnace_upgrade_keeps', st.block.indexOf('gold_furnace') >= 0 && bad.length === 0, 'upgrade_gold on an iron furnace (useOn: ' + st.result + '): now ' + st.block +
+      check('furnace_upgrade_keeps', st.block.indexOf('gold_furnace') >= 0 && bad.length === 0, 'upgrade_gold on an iron furnace (' + st.result + '): now ' + st.block +
         '; ' + (bad.length === 0 ? 'input, fuel, output and the speed augment all kept' : bad.join('; ')))
       var inp = Item.of('minecraft:cobblestone', 4)
       e2.setItem(0, inp)
@@ -653,15 +692,8 @@
     check('old_limited_barrel', limit === 128 * 64 && kept === st.cobble && after === st.cobble + 4000 && Number(slotsOf(C).upg) === 4, 'limited iron barrel I: ' + limit +
       ' items per slot (stock ' + st.oldLimit + '), kept ' + kept + ' cobblestone, took 4,000 more through the item handler (' + after + ' now, ' +
       (rest.isEmpty() ? 'nothing' : sid(rest)) + ' refused), ' + slotsOf(C).upg + ' upgrade slots')
-    // automation: Forge's item handler capability of the chest sees and uses the new slots (an empty ItemStack can read as null in
-    // KubeJS, so emptiness is isEmpty() and only the capability is null-checked)
-    var capA = be(A).getCapability(cls().Caps.ITEM_HANDLER, null).orElse(null)
-    var slots = capA === null ? -1 : Number(capA.getSlots())
-    var left = capA === null ? null : capA.insertItem(100, Item.of('minecraft:diamond', 5), false)
-    var back = capA === null ? null : capA.extractItem(100, 5, false)
-    check('automation_new_slots', capA !== null && slots === 108 && left.isEmpty() && String(back.getId()) === 'minecraft:diamond' && Number(back.getCount()) === 5,
-      'item handler: ' + slots + ' slots; 5 diamonds inserted into slot 100 (' + (capA === null ? '?' : left.isEmpty() ? 'all in' : sid(left) + ' refused') + ') and taken out (' +
-      (capA === null ? '?' : sid(back)) + ')')
+    var auto = automationRoundTrip(be(A).getCapability(cls().Caps.ITEM_HANDLER, null).orElse(null), 100, 54, 108)
+    check('automation_new_slots', auto.ok, auto.text)
     st.savedA2 = snapshot(A)
     return true
   }
@@ -693,8 +725,9 @@
     var a = slotsOf(A)
     var ca = compareContents(A, st.saved)
     var up = wrapper(A).getUpgradeHandler().getStackInSlot(0)
-    check('tier_upgrade_full_chest', blockId(A).indexOf('gold_chest') >= 0 && a.inv === 162 && a.upg === 6 && ca.ok && String(up.getId()) === 'sophisticatedstorage:pickup_upgrade',
-      'iron_to_gold_tier_upgrade on the full migrated chest (useOn: ' + st.result + '): ' + blockId(A) + ', ' + a.inv + ' slots / ' + a.upg + ' upgrade slots (stock gold: 81 / 3); ' +
+    check('tier_upgrade_full_chest', st.result === 'onItemUseFirst SUCCESS' && blockId(A).indexOf('gold_chest') >= 0 && a.inv === 162 && a.upg === 6 && ca.ok &&
+      String(up.getId()) === 'sophisticatedstorage:pickup_upgrade',
+      'iron_to_gold_tier_upgrade on the full migrated chest (' + st.result + '): ' + blockId(A) + ', ' + a.inv + ' slots / ' + a.upg + ' upgrade slots (stock gold: 81 / 3); ' +
       ca.text + '; ' + st.total.stacks + ' stacks, ' + st.total.items + ' items; upgrade ' + sid(up))
     place(D, Block.getBlock('sophisticatedstorage:netherite_chest').defaultBlockState())
     return true

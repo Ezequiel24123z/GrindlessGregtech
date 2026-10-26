@@ -330,6 +330,95 @@ test('actual storage reload takes native stock NBT, replaces each BE, and never 
   assert.match(chest, /not chunk\/disk\/reconnect proof/);
 });
 
+test('actual item use follows Forge: onItemUseFirst first, useOn only when it passes', () => {
+  const calls = [];
+  const ctx = {
+    Item: { of: (id) => ({ id }) }, bp: (p) => ({ ...p }),
+    cls: () => ({ Hand: { MAIN_HAND: 'main' }, Direction: { UP: 'up' },
+      Vec3: class { constructor(x, y, z) { Object.assign(this, { x, y, z }); } },
+      BlockHitResult: class { constructor(...a) { this.a = a; } },
+      UseOnContext: class { constructor(p, hand, hit) { Object.assign(this, { p, hand, hit }); } } }),
+  };
+  vm.runInNewContext(fn(chest, 'useItemOn'), ctx);
+  const player = (first, on) => ({ hand: null,
+    setItemInHand(h, s) { calls.push([h, s.id]); this.hand = s; },
+    getMainHandItem() {
+      const id = this.hand.id;
+      return { onItemUseFirst: () => { calls.push(['first', id]); return first; }, useOn: () => { calls.push(['useOn', id]); return on; } };
+    } });
+  const pos = { x: 1, y: 2, z: 3 };
+  // Sophisticated Storage's tier upgrade acts in onItemUseFirst; Item#useOn would PASS and change nothing
+  assert.equal(ctx.useItemOn(player('SUCCESS', 'PASS'), 'sophisticatedstorage:iron_to_gold_tier_upgrade', pos), 'onItemUseFirst SUCCESS');
+  assert.deepEqual(calls.map((c) => c[0]), ['main', 'first', 'main']);
+  assert.deepEqual(calls.at(-1), ['main', 'minecraft:air']);
+  calls.length = 0;
+  // Iron Furnaces' upgrade only overrides useOn
+  assert.equal(ctx.useItemOn(player('PASS', 'SUCCESS'), 'ironfurnaces:upgrade_gold', pos), 'useOn SUCCESS');
+  assert.deepEqual(calls.map((c) => c[0]), ['main', 'first', 'useOn', 'main']);
+});
+
+test('actual TOML reader and world path name the overloads Rhino cannot choose', () => {
+  const used = [];
+  const builder = (kind) => (where) => {
+    used.push([kind, where]);
+    return { onFileNotFound: (a) => ({ build: () => ({ load() { used.push(['load', a]); } }) }) };
+  };
+  const ctx = { cls: () => ({ FileNotFoundAction: { THROW_ERROR: 'throw' }, CommentedFileConfig: {
+    'builder(java.lang.String)': builder('String'), 'builder(java.nio.file.Path)': builder('Path'),
+    builder() { throw new Error('ambiguous builder overload'); } } }) };
+  vm.runInNewContext(fn(chest, 'openToml'), ctx);
+  ctx.openToml('config/ironfurnaces-client.toml');
+  const worldFile = { toString: () => 'saves/w/./serverconfig/sophisticatedstorage-server.toml' };
+  ctx.openToml(worldFile);
+  assert.deepEqual(used.map((u) => u[0]), ['String', 'load', 'Path', 'load']);
+  assert.equal(used[0][1], 'config/ironfurnaces-client.toml');
+  assert.equal(used[2][1], worldFile);
+  assert.equal(used[1][1], 'throw', 'a missing file is an error, never an empty config');
+  assert.doesNotMatch(chest, /CommentedFileConfig\.builder\(|\.resolve\('/, 'no bare overloaded call is left');
+  assert.match(chest, /\['resolve\(java\.lang\.String\)'\]\('serverconfig'\)\['resolve\(java\.lang\.String\)'\]/);
+});
+
+test('actual automation check follows Sophisticated Core: a real insert ignores the slot index, extraction uses the slot it landed in', () => {
+  const stack = (id, n) => ({ isEmpty: () => !id || n === 0, getId: () => id, getCount: () => n });
+  const EMPTY = stack(null, 0);
+  const handler = ({ size = 108, full = 54, extractWorks = true, land } = {}) => {
+    const slots = Array.from({ length: size }, (_, i) => (i < full ? stack('minecraft:stone', 1) : EMPTY));
+    return {
+      getSlots: () => size,
+      getStackInSlot: (i) => slots[i],
+      insertItem(slot, s, simulate) {
+        if (simulate) return slot < size && slots[slot].isEmpty() ? EMPTY : s;
+        // InventoryHandlerSlotTracker: matching stacks, then the first empty slot, whatever slot is named
+        const to = land ?? slots.findIndex((x) => x.isEmpty());
+        if (to < 0) return s;
+        slots[to] = stack(s.getId(), s.getCount());
+        return EMPTY;
+      },
+      extractItem(slot) {
+        const x = slots[slot];
+        if (x.isEmpty() || !extractWorks) return EMPTY;
+        slots[slot] = EMPTY;
+        return x;
+      },
+    };
+  };
+  const ctx = { Item: { of: (id, n) => stack(id, n) }, sid: (s) => (s.isEmpty() ? 'empty' : `${s.getId()} x${s.getCount()}`) };
+  vm.runInNewContext(fn(chest, 'automationRoundTrip'), ctx);
+  const ok = ctx.automationRoundTrip(handler(), 100, 54, 108);
+  assert.equal(ok.ok, true, ok.text);
+  assert.match(ok.text, /landed in slot 54 \(old size 54\) and extractItem\(54\) gave back minecraft:diamond x5/);
+  assert.equal(ctx.automationRoundTrip(handler({ land: 3 }), 100, 54, 108).ok, false, 'items in an old slot prove nothing about the new ones');
+  assert.equal(ctx.automationRoundTrip(handler({ extractWorks: false }), 100, 54, 108).ok, false);
+  assert.equal(ctx.automationRoundTrip(handler({ size: 54 }), 100, 54, 108).ok, false, 'a storage that did not grow fails');
+  assert.equal(ctx.automationRoundTrip(null, 100, 54, 108).ok, false);
+  assert.doesNotMatch(chest, /extractItem\(100/, 'never expects the named slot of a real insert');
+});
+
+test('actual tier-upgrade check requires the item to act and the gold size', () => {
+  assert.match(chest, /st\.result === 'onItemUseFirst SUCCESS' && blockId\(A\)\.indexOf\('gold_chest'\) >= 0 && a\.inv === 162 && a\.upg === 6/);
+  assert.match(chest, /\['gui_gold', guiStep\('gold', A, 162, 6\)\]/);
+});
+
 test('integrated starter driver reuses reward/boundary proof and requests map after one reveal', () => {
   const F = new SharedMap();
   let handler, claims = 0, prepared = 0, finished = 0;

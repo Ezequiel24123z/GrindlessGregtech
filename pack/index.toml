@@ -2358,7 +2358,7 @@ hash = "78e0550c5776e33e7e3cf74a25bbe172dbbee4f6a0152be0c819ec768b9b60b9"
 
 [[files]]
 file = "kubejs/data/grindless/tables/hidden_until.json"
-hash = "af5e653105f81f217e43fa78ccccae7b6467dbba99d62e4a3477f2425848739e"
+hash = "a2e1ab4bfb9468868bc39b4b760b927fdbed161cc90a4f97a77b0686423c1e28"
 
 [[files]]
 file = "kubejs/data/grindless/tables/hot_cell.json"

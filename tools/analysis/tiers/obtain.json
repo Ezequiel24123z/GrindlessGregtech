@@ -65,7 +65,7 @@
       { "class": "C", "materials": ["extendedfeatures:industrial_greenhouse", "extendedfeatures:advanced_conservatory", "extendedfeatures:rock_processing_plant", "extendedfeatures:synthesis_vessel", "extendedfeatures:universal_disassembly_machine", "extendedfeatures:robust_alloy_materializer"], "reason": "Extended Features: controller removed by the pack (integration/extendedfeatures.js)" },
       { "class": "C", "materials": ["gtnn:component_assembly_line", "gtnn:component_assline_casing_*", "gtnn:homemade_bedrock_ore_machine"], "reason": "GT--: no recipe on purpose (integration/gtnn.js)" },
       { "class": "C", "materials": ["enriched_naquadah_waste", "barium_sulfide"], "reason": "leftovers from GTM's naquadah separation, which GT-- empties out (enableHarderNaquadahLine): nothing produces them" },
-      { "class": "C", "materials": ["gtceu:*_marker", "gcyr:*_marker"], "reason": "technical block (dimension marker), not for the player" },
+      { "class": "C", "materials": ["gtceu:*_marker", "gcyr:*_marker"], "keepRecipes": true, "reason": "technical block (dimension marker), not for the player; GTM shows it in every recipe with a dimension condition, so it is only dropped from the index (disabling it in EMI dropped every planet recipe)" },
       { "class": "C", "materials": ["gtceu:*_solar_panel"], "reason": "solar panel: GTM 7.5.3 only gives a recipe to the ULV and LV ones (the LV one arrives with naquadah)" },
       { "class": "C", "materials": ["gtceu:*_passthrough_hatch"], "reason": "passthrough hatch: GTM 7.5.3 only gives a recipe to the HV one" },
       { "class": "C", "materials": ["gtceu:*_bedrock_ore_miner"], "reason": "bedrock ore miner: GTM 7.5.3 gives it no recipe (there are no bedrock ores)" },
