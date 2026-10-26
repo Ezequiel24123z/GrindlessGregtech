@@ -913,3 +913,17 @@ Procedural, drawn by `Build-ZPMTravelTextures.ps1`; nothing is copied from anoth
 ```powershell
 powershell -NoProfile -ExecutionPolicy Bypass -File tools\assets\Build-ZPMTravelTextures.ps1
 ```
+
+## ZPM survey network faces (ZPM-A9)
+
+Procedural, drawn by `Build-ZPMObservatoryTextures.ps1` (`Build-ZPMObservatoryTextures.ps1`); nothing is copied from another mod. Each face is a steel bezel with a dark window; 3 faces, idle and active, the emissive layer holds only the glowing pixels (a subset of the colour layer). Proposed CREDITS "Assets" lines: the three overlays, procedural, original.
+
+```powershell
+powershell -NoProfile -ExecutionPolicy Bypass -File tools\assets\Build-ZPMObservatoryTextures.ps1
+```
+
+| File (under `textures/`) | Notes |
+|---|---|
+| `block/multiblock/neutrino_observatory/overlay_front*.png` | A dark water window with photomultiplier dots; blue flashes glow when active. |
+| `block/multiblock/deep_space_network/overlay_front*.png` | A dish face with a feed horn; the horn and signal arcs glow green when active. |
+| `block/multiblock/kuiper_survey_telescope/overlay_front*.png` | A mirror with a spider cross; the starfield glows when active. |

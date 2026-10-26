@@ -1,0 +1,5 @@
+{
+  "type": "emi:info",
+  "stacks": ["item:grindless:photomultiplier_casing"],
+  "text": ["emi.grindless.info.photomultiplier_casing.0"]
+}
