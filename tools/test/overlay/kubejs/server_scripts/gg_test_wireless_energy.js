@@ -8,10 +8,12 @@
 //
 // Markers: GGTEST|wireless_energy|<check>|PASS|FAIL|NOTE|<detail>; the last line is GGTEST|wireless_energy|DONE.
 //   static (no world)
-//     registry          40 hatches (GTM's EnergyHatchPartMachine, 2/4/16/64 A, LV-IV) with GTM's INPUT_ENERGY / OUTPUT_ENERGY, the tower
-//                       (dummy recipe type), 5 cells, 10 cover items, 10 cover definitions in GTM's own cover registry (marker class)
+//     registry          the table's hatches (GTM's EnergyHatchPartMachine, 2/4/16/64 A x every row: 48 for LV-LuV) with GTM's
+//                       INPUT_ENERGY / OUTPUT_ENERGY, the tower (dummy recipe type), its cells (6), cover items and cover definitions in
+//                       GTM's own cover registry (12, marker class)
 //     buffers           GTM's own buffer sizes: an energy hatch V x 16 x A, a dynamo hatch V x 64 x A (the settlement period's reason)
-//     recipes           every recipe of the table's design exists, makes its block, at the tier's VA; the 4/16/64 A ones take the one below
+//     recipes           every recipe of the table's design exists, makes its block, at the tier's VA; the 4/16/64 A ones take the one below;
+//                       a cell another machine makes (the LuV SMES cell: the HTS magnet works) has no assembler recipe here
 //   in the world: the Overworld X 13312-13375, Z 0-63, Y 98-112 (roof at Y 112), the Moon (gcyr:luna) same X and Z, Y 198-214
 //     ARRAY/EBF/...     the structures placed and formed (the LV generator array with one 64 A LV wireless dynamo hatch; on the Moon an
 //                       EBF with two LV wireless energy hatches, an LV macerator with an LV energy cover, an MV wireless energy hatch)
@@ -182,6 +184,11 @@
     var m = lazy().MetaMachine.getMachine(levelOf(dim), bp(x, y, z))
     return m === null || m === undefined ? null : m
   }
+  // the table's tiers as GTM names them: 'LV-LuV'
+  function tierSpan(w) {
+    var label = function (t) { return w.tierLabels ? String(w.tierLabels[t]) : String(w.tierNames[t]).toUpperCase() }
+    return label(w.tiers[0]) + '-' + label(w.tiers[w.tiers.length - 1])
+  }
   function stored(m) { return m === null ? -1 : Number(m.energyContainer.getEnergyStored()) }
   function fmt(n) { return String(Math.round(n)) }
   function flowOf(dim, p, y, side) {
@@ -264,7 +271,7 @@
       var def = L.GTRegistries.COVERS.get(rl(c.def))
       if (def === null || def === undefined) bad.push('no cover ' + c.def)
     })
-    check('registry', bad.length === 0, w.hatchIds.length + ' hatches (2/4/16/64 A x LV-IV x energy/dynamo) in GTM\'s ability lists, ' + w.towerId + ' types ' +
+    check('registry', bad.length === 0, w.hatchIds.length + ' hatches (2/4/16/64 A x ' + tierSpan(w) + ' x energy/dynamo) in GTM\'s ability lists, ' + w.towerId + ' types ' +
       types.join(',') + ', ' + w.cellIds.length + ' cells, ' + w.coverList.length + ' covers in GTM\'s cover registry (marker ' + w.coverMarker + ')' +
       (bad.length ? ' BAD ' + bad.join('; ') : ''))
   }
@@ -274,8 +281,11 @@
     var L = lazy()
     var lines = []
     var bad = []
-    // GTM 7.5.3's numbers for our hatches: what a placed one holds (the world part reads the live ones)
-    ;[[1, 2], [1, 64], [5, 64]].forEach(function (ta) {
+    // GTM 7.5.3's numbers for our hatches: what a placed one holds (the world part reads the live ones); the table's top tier too
+    var top = w.tiers[w.tiers.length - 1]
+    var probes = [[1, 2], [1, 64], [5, 64]]
+    if (top !== 5) probes.push([top, 64])
+    probes.forEach(function (ta) {
       var inCap = Number(GTValues.V[ta[0]]) * 16 * ta[1]
       var outCap = Number(L.EHPM.getHatchEnergyCapacity(ta[0], ta[1]))
       lines.push(w.tierNames[ta[0]].toUpperCase() + ' ' + ta[1] + ' A: energy hatch ' + inCap + ' EU (16 ticks), dynamo hatch ' + outCap + ' EU (64 ticks)')
@@ -305,8 +315,26 @@
     })
     var amps = w.recipes.filter(function (r) { return /_(4|16|64)a$/.test(r.output) && r.output.indexOf('gtceu:lv_') === 0 })
       .map(function (r) { return r.output.replace('gtceu:', '') + ' <- ' + r.inputs.join(' + ') })
-    check('recipes', bad.length === 0 && n === w.recipes.length, n + ' of ' + w.recipes.length + ' recipes (tower, 5 cells, 40 hatches, 10 covers) in the assembler at their tier\'s VA; LV amperage steps: ' +
-      amps.join(' ; ') + (bad.length ? ' BAD ' + bad.join('; ') : ''))
+    // a cell another machine makes: no assembler recipe of ours, and that machine is registered
+    var cellRecipes = 0
+    var madeElsewhere = []
+    w.cellIds.forEach(function (id) {
+      var made = w.recipes.filter(function (r) { return r.output === id }).length
+      var by = w.cells[id].madeBy
+      if (by) {
+        madeElsewhere.push(id + ' by ' + by)
+        if (made !== 0) bad.push(id + ' has ' + made + ' assembler recipe(s) but is made by ' + by)
+        if (!L.GTRegistries.MACHINES.get(rl(by))) bad.push(id + ': no machine ' + by)
+      } else {
+        cellRecipes += made
+        if (made !== 1) bad.push(id + ' has ' + made + ' assembler recipes')
+      }
+    })
+    var hatchRecipes = w.recipes.filter(function (r) { return w.hatches[r.output] }).length
+    var coverRecipes = w.recipes.filter(function (r) { return w.coverItems[r.output] }).length
+    check('recipes', bad.length === 0 && n === w.recipes.length, n + ' of ' + w.recipes.length + ' recipes (tower, ' + cellRecipes + ' cells, ' + hatchRecipes +
+      ' hatches, ' + coverRecipes + ' covers) in the assembler at their tier\'s VA; made elsewhere: ' + (madeElsewhere.join(', ') || 'none') +
+      '; LV amperage steps: ' + amps.join(' ; ') + (bad.length ? ' BAD ' + bad.join('; ') : ''))
   }
 
   // ---------------------------------------------------------------- the world

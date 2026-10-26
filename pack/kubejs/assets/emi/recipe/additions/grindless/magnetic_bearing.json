@@ -1,0 +1,10 @@
+{
+  "type": "emi:info",
+  "stacks": [
+    "item:grindless:magnetic_bearing"
+  ],
+  "text": [
+    "emi.grindless.info.magnetic_bearing.0",
+    "emi.grindless.info.magnetic_bearing.1"
+  ]
+}

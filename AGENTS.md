@@ -159,6 +159,7 @@ Gregtech Grindless is a GregTech Modern pack (Minecraft 1.20.1, Forge) in which 
   | LuV cryogenics (helium refrigerator, coated conductor line) | 15104–15167, Z 0–63 |
   | LuV biofoundry and GT--'s circuit line (S0-4) | 15616–15679: the biofoundry at X 15616–15647, Z 0–15; the circuit assembly line check and the Universal Assembly Factory at X 15648–15679, Z 0–31 |
   | LuV A2: naquadah mode 2, platinum mode 4, LuV parallel hatch | 14848–14911, Z 0–63 (Overworld, Y 98–112) |
+  | HTS magnet works and LuV wireless (LuV-A4) | 15360–15423, Z 0–63: Overworld Y 98–112 (the magnet works and the two-hatch checks at X 15360–15391, the towers and the LuV jump at X 15392–15423); Earth orbit (`gcyr:overworld_orbit`) X 15392–15423, Y 98–112. It takes its turn with the wireless fixtures. |
   | hologram projector | 16384–16447, Z 0–63 (client: X 16416–16447, Z 40–55; LuV bands skip it) |
   | LuV orbital solar station | 15872–15935, Z 0–63; Earth orbit Y 198–214 |
   | LuV microgravity smelter and wake shield | 16128–16191, Z 0–63; Earth orbit Y 198–214 |

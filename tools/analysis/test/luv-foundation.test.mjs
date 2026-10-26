@@ -48,7 +48,8 @@ test('every shared LuV id of the design is registered with the design\'s name, a
     if (id === 'grindless:station_truss_casing' || id === 'grindless:asteroid_regolith_casing') continue; // named in words only
     assert.ok(design.includes('`' + id + '`'), `${id} is not an id of docs/eras/luv.md`);
   }
-  for (const id of NOT_A1) assert.ok(!run.registry.items.has(id), `${id} belongs to a later package`);
+  // a later package may register them (A4: the SMES cell and the LuV covers, lv/wireless_energy.js), A1 never
+  for (const id of NOT_A1) assert.ok(!run.registry.items.has(id) || !/luv[\\/]foundation\.js$/.test(run.registry.items.get(id).file), `${id} belongs to a later package`);
   for (const [m, forms] of Object.entries(MATERIALS)) {
     const mat = run.registry.materials.get(m) || run.registry.materials.get('gtceu:' + m);
     assert.ok(mat, `material ${m}`);

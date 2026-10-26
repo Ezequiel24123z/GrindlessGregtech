@@ -12,12 +12,18 @@
 //     sandbox): the numbers gg_test_wireless_adapters.js asserts in the game, the store's books when a machine's move fails a check, and
 //     the list, the store and the endpoints across a cold restart (a second sandbox reading persistent data written in NbtIo's format),
 //     as gg_test_wireless_restart.js does in the game.
+//   - the LuV tier (package LuV-A4, at the end): the table's sixth row and its SMES cell, made in the HTS magnet works and not in the
+//     assembler; what the startup script registers for it in the static stand-in of the whole pack (lib/kubejs_static.mjs), its
+//     recipes, names and textures, its ids in a GTM 7.5.3 registry dump when one is on this machine; and the settlement at tier 6: the
+//     jump (LuV only when every formed tower holds LuV cells), a 64 A LuV dynamo hatch's 19/20, and a 32-cell SMES tower's capacity
+//     (past an int) through the registry and a cold restart.
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import path from 'node:path';
 import vm from 'node:vm';
 import { fileURLToPath } from 'node:url';
+import { runPackScripts } from '../lib/kubejs_static.mjs';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..', '..', '..');
 const LIB = path.join(ROOT, 'pack', 'kubejs', 'server_scripts', 'grindless', 'lib');
@@ -556,7 +562,7 @@ function jvm(opts = {}) {
     JSON, Math, Number, String, Error, Array, Object, BigInt,
     Date: opts.clock ? { now: () => opts.clock.now } : Date,
     Java: { loadClass: (name) => { if (!(name in classes)) throw new Error('no stand-in for ' + name); return classes[name]; } },
-    GTValues: { V, VA },
+    GTValues: { V, VA, VN: ['ULV', 'LV', 'MV', 'HV', 'EV', 'IV', 'LuV', 'ZPM'] },
     Text: { translate: text, of: (s) => text(s) },
     Item: { of: simItem },
     NBTIO: { read: (p) => (opts.disk && opts.disk.has(p) ? readNbt(opts.disk.get(p)) : null) },
@@ -1135,4 +1141,351 @@ test('RESTORED compares the list\'s content: one entry changed across the restar
   const m = /fingerprint (\d+):(\d+-\d+) \(saved (\d+):(\d+-\d+), both well formed: true\)/.exec(restored);
   assert.ok(m && m[1] === m[3] && m[2] !== m[4], 'same length, another fingerprint: ' + restored.slice(0, 420));
   assert.ok(passed(j2.lines, 'wireless_restart', 'AUTOMATIC'), 'the endpoints still work');
+});
+
+// ---------------------------------------------------------------- the LuV tier (package LuV-A4)
+// The table's sixth row: the LuV SMES cell (wound in the HTS magnet works, so no assembler recipe), LuV hatches at 2, 4, 16 and 64 A and
+// LuV covers, with the same mechanism and invariants as LV-IV.
+
+const TABLES = path.join(PACK, 'kubejs', 'data', 'grindless', 'tables');
+const TABLE = JSON.parse(fs.readFileSync(path.join(TABLES, 'wireless_energy.json'), 'utf8'));
+const HTS = JSON.parse(fs.readFileSync(path.join(TABLES, 'hts_magnet_works.json'), 'utf8'));
+const LUV = 6;
+// GTM 7.5.3's reference batteries (GTItems: their electric items' max charge; the dump's electric.json has the same)
+const BATTERY_EU = {
+  'gtceu:lv_lithium_battery': 120000, 'gtceu:mv_lithium_battery': 420000, 'gtceu:hv_lithium_battery': 1800000,
+  'gtceu:ev_vanadium_battery': 10240000, 'gtceu:iv_vanadium_battery': 40960000, 'gtceu:luv_vanadium_battery': 163840000,
+};
+const SMES = 'grindless:luv_smes_cell';
+const SMES_EU = 983040000;
+// a GTM 7.5.3 registry dump of the pack (gg_dump.js), when the session that made it left it on this machine
+const DUMP_DIR = [
+  process.env.GG_DUMP_DIR,
+  'C:/Users/EzequielC/.copilot/session-state/52ba6327-e548-48e7-aa57-41c2373d41c2/files/test-runs/power-quests-1/results/server/kubejs-exported',
+].filter(Boolean).find((p) => fs.existsSync(path.join(p, 'items.json')));
+const dumpJson = (name) => JSON.parse(fs.readFileSync(path.join(DUMP_DIR, name), 'utf8'));
+const STARTUP_REL = 'kubejs/startup_scripts/grindless/lv/wireless_energy.js';
+let staticRun = null;
+const packRun = () => staticRun || (staticRun = runPackScripts(PACK));
+
+test('LuV wireless table: six rows LV to LuV, each cell six of its tier\'s reference battery; the LuV cell is made in the HTS magnet works', () => {
+  assert.deepEqual(TABLE.tiers.map((r) => [r.tier, r.name]), [[1, 'lv'], [2, 'mv'], [3, 'hv'], [4, 'ev'], [5, 'iv'], [6, 'luv']]);
+  for (const r of TABLE.tiers) {
+    assert.equal(r.capacity, 6 * BATTERY_EU[r.referenceBattery], r.name + ': 6 x ' + r.referenceBattery);
+    if (r.cellMadeBy) continue;
+    assert.match(String(r.batteries), /^#gtceu:batteries\//, r.name + ': an assembler cell takes the tier\'s batteries');
+    assert.match(String(r.frame), /^gtceu:[a-z_]+_frame$/, r.name + ': and a frame');
+  }
+  const luv = TABLE.tiers[5];
+  assert.equal(luv.cell, SMES);
+  assert.equal(luv.capacity, SMES_EU);
+  assert.equal(luv.referenceBattery, 'gtceu:luv_vanadium_battery');
+  assert.equal(luv.cellMadeBy, 'gtceu:hts_magnet_works');
+  assert.equal(luv.texture, 'grindless:block/wireless/smes_cell_luv');
+  assert.deepEqual([luv.emitter, luv.sensor, luv.signalParts, luv.link, luv.plate, luv.wire],
+    ['gtceu:luv_emitter', 'gtceu:luv_sensor', 1, 'gtceu:quantum_star', 'gtceu:rhodium_plated_palladium_plate', 'niobium_titanium']);
+  assert.equal(TABLE.tiers.filter((r) => r.cellMadeBy).length, 1, 'only the LuV cell is made elsewhere');
+  assert.ok(TABLE._how_it_is_used.some((l) => /cellMadeBy/.test(l)), 'the table documents cellMadeBy');
+  // the HTS magnet works' circuit 2 makes exactly this cell
+  const smes = HTS.recipes.find((r) => r.name === 'luv_smes_cell');
+  assert.ok(smes, 'tables/hts_magnet_works.json has its luv_smes_cell entry');
+  assert.deepEqual(smes.itemsOut, [{ id: luv.cell, count: 1 }]);
+  assert.equal(smes.circuit, 2);
+  assert.equal(HTS.recipes.filter((r) => r.itemsOut.some((o) => o.id === SMES)).length, 1);
+  if (!DUMP_DIR) return;
+  const electric = dumpJson('electric.json');
+  for (const r of TABLE.tiers) {
+    const bat = electric.items.find((x) => x.id === r.referenceBattery);
+    assert.ok(bat && bat.capacity * 6 === r.capacity, r.name + ': electric.json ' + JSON.stringify(bat));
+  }
+  const tags = dumpJson('tags.json').item;
+  for (const r of TABLE.tiers.filter((x) => x.batteries)) assert.ok(tags[r.batteries.slice(1)], r.batteries + ' is a tag');
+});
+
+test('LuV wireless registrations: the startup script registers 48 hatches, 6 cells and 12 covers from the table (static stand-in)', () => {
+  const run = packRun();
+  const ours = (m) => m.file === STARTUP_REL;
+  const hatches = [...run.registry.machines.values()].filter((m) => /_wireless_(energy|dynamo)_hatch(_\d+a)?$/.test(m.id));
+  assert.equal(hatches.length, 48);
+  assert.ok(hatches.every(ours), 'all of them from lv/wireless_energy.js');
+  for (const t of TABLE.tiers) for (const kind of ['energy', 'dynamo']) for (const a of TABLE.hatchAmps) {
+    const id = `gtceu:${t.name}_wireless_${kind}_hatch${a === 2 ? '' : '_' + a + 'a'}`;
+    assert.ok(run.registry.machines.has(id), id);
+  }
+  const cells = [...run.registry.blocks.values()].filter((b) => ours(b));
+  assert.deepEqual(cells.map((b) => b.id), TABLE.tiers.map((r) => r.cell));
+  assert.ok(run.registry.items.has(SMES), 'the SMES cell has its block item');
+  const covers = [...run.registry.items.values()].filter((i) => ours(i) && /_wireless_(energy|dynamo)_cover$/.test(i.id)).map((i) => i.id);
+  assert.equal(covers.length, 12);
+  for (const t of TABLE.tiers) for (const kind of ['energy', 'dynamo']) assert.ok(covers.includes(`grindless:${t.name}_wireless_${kind}_cover`), t.name + ' ' + kind);
+  assert.deepEqual(run.errors.filter((e) => /wireless/.test(e.file)), [], 'the wireless scripts load cleanly');
+  // the same from the startup object the server script reads
+  const { W } = jvm();
+  assert.equal(W.hatchIds.length, 48);
+  assert.equal(W.cellIds.length, 6);
+  assert.equal(W.coverList.length, 12);
+  assert.deepEqual(plain(W.tiers), [1, 2, 3, 4, 5, 6]);
+  assert.equal(W.tierNames[LUV], 'luv');
+  assert.equal(W.tierLabels[LUV], 'LuV');
+  assert.deepEqual(plain(W.cells[SMES]), { tier: LUV, capacity: SMES_EU, madeBy: 'gtceu:hts_magnet_works' });
+  assert.equal(W.cells['grindless:iv_capacitor_cell'].madeBy, null);
+  assert.deepEqual(plain(W.hatches['gtceu:luv_wireless_dynamo_hatch_64a']), { kind: 'dynamo', tier: LUV, amps: 64 });
+  assert.equal(W.covers['grindless:wireless_energy_cover.luv'].item, 'grindless:luv_wireless_energy_cover');
+  assert.equal(W.coverItems['grindless:luv_wireless_dynamo_cover'].def, 'grindless:wireless_dynamo_cover.luv');
+  // the tower takes the SMES cell in all 32 slots, like any cell
+  const desc = W.towerSpec.symbols.C;
+  assert.ok(JSON.stringify(desc).includes(SMES), 'the tower\'s cell slot takes the SMES cell');
+});
+
+test('LuV wireless recipes: no assembler recipe for the SMES cell; the LuV hatches and covers at 30,720 EU/t with GTM 7.5.3 parts', () => {
+  const { W } = jvm();
+  assert.equal(W.recipes.filter((r) => r.output === SMES).length, 0, 'the SMES cell is not made in the assembler');
+  assert.ok(!W.recipes.some((r) => /luv_capacitor_cell|luv_smes_cell/.test(r.id)));
+  // every other cell has its one assembler recipe; the tower, 5 cells, 48 hatches, 12 covers
+  for (const r of TABLE.tiers.filter((x) => !x.cellMadeBy)) assert.equal(W.recipes.filter((x) => x.output === r.cell).length, 1, r.cell);
+  assert.equal(W.recipes.length, 1 + 5 + 48 + 12);
+  const luv = W.recipes.filter((r) => /^gtceu:luv_wireless_|^grindless:luv_wireless_/.test(r.output));
+  assert.equal(luv.length, 10);
+  for (const r of luv) {
+    assert.equal(r.eut, 30720, r.id + ' at VA[LuV]');
+    assert.match(r.id, /^grindless:assembler\/luv_wireless_/);
+  }
+  const by = (out) => W.recipes.find((r) => r.output === out);
+  assert.deepEqual(plain(by('gtceu:luv_wireless_energy_hatch').inputs), ['1x gtceu:luv_sensor', '1x gtceu:luv_energy_input_hatch', '2x #gtceu:circuits/luv', '1x gtceu:quantum_star']);
+  assert.deepEqual(plain(by('gtceu:luv_wireless_dynamo_hatch').inputs), ['1x gtceu:luv_emitter', '1x gtceu:luv_energy_output_hatch', '2x #gtceu:circuits/luv', '1x gtceu:quantum_star']);
+  assert.deepEqual(plain(by('gtceu:luv_wireless_energy_hatch_4a').inputs), ['1x gtceu:luv_wireless_energy_hatch', '2x gtceu:niobium_titanium_quadruple_wire', '2x gtceu:rhodium_plated_palladium_plate']);
+  assert.deepEqual(plain(by('gtceu:luv_wireless_dynamo_hatch_16a').inputs), ['1x gtceu:luv_wireless_dynamo_hatch_4a', '2x gtceu:niobium_titanium_octal_wire', '4x gtceu:rhodium_plated_palladium_plate']);
+  assert.deepEqual(plain(by('gtceu:luv_wireless_energy_hatch_64a').inputs), ['1x gtceu:luv_wireless_energy_hatch_16a', '2x gtceu:niobium_titanium_hex_wire', '6x gtceu:rhodium_plated_palladium_plate']);
+  assert.deepEqual(plain(by('grindless:luv_wireless_energy_cover').inputs), ['1x gtceu:luv_sensor', '1x gtceu:rhodium_plated_palladium_plate', '1x #gtceu:circuits/luv', '1x gtceu:quantum_star']);
+  assert.deepEqual(plain(by('grindless:luv_wireless_dynamo_cover').inputs), ['1x gtceu:luv_emitter', '1x gtceu:rhodium_plated_palladium_plate', '1x #gtceu:circuits/luv', '1x gtceu:quantum_star']);
+  // the whole pack in the static stand-in: the cell's only recipe is the magnet works' circuit 2
+  const docs = packRun().docs.recipes.recipes;
+  const making = docs.filter((r) => JSON.stringify((r.j || {}).outputs || r.j || {}).includes('"' + SMES + '"'));
+  assert.deepEqual(making.map((r) => [r.i, r.t]), [['grindless:magnet_winding/luv_smes_cell', 'gtceu:magnet_winding']]);
+  for (const r of luv) assert.ok(docs.some((d) => d.i === r.id && d.t === 'gtceu:assembler'), r.id + ' in the static recipes');
+  if (!DUMP_DIR) return;
+  // every part of GTM's in GTM 7.5.3's registry, every tag in its tags
+  const items = new Set(dumpJson('items.json').items.map((x) => (typeof x === 'string' ? x : x.id)));
+  const tags = dumpJson('tags.json').item;
+  for (const r of luv) {
+    for (const input of r.inputs) {
+      const id = input.replace(/^\d+x /, '');
+      if (id.startsWith('#')) assert.ok(tags[id.slice(1)], id + ' is a tag');
+      else if (!/^gtceu:luv_wireless_/.test(id)) assert.ok(items.has(id), id + ' is registered');
+    }
+  }
+  assert.ok(!items.has('gtceu:rhodium_plated_palladium_frame'), 'GTM has no LuV hull frame: the SMES row needs none');
+});
+
+// every id a row of the table names (and the ids it derives: GTM's hatches of the tier, the wire's quadruple / octal / hex wires), exact,
+// against GTM 7.5.3's registry: GTM's and vanilla's ids in the dump's items (and nothing taken for a fluid), ours in the static stand-in
+function rowIds(r) {
+  const gtm = [r.referenceBattery, r.emitter, r.sensor, r.link, r.plate, r.frame, `gtceu:${r.name}_energy_input_hatch`, `gtceu:${r.name}_energy_output_hatch`,
+    ...['quadruple', 'octal', 'hex'].map((w) => `gtceu:${r.wire}_${w}_wire`)].filter((id) => id !== null && id !== undefined);
+  const ours = [r.cell, r.cellMadeBy].filter(Boolean);
+  return { gtm, ours };
+}
+
+test('LuV wireless ids: every id of the table\'s rows, the LuV row first, is GTM 7.5.3\'s exact id or one the pack registers', () => {
+  const luv = rowIds(TABLE.tiers[5]);
+  assert.deepEqual(luv.gtm, ['gtceu:luv_vanadium_battery', 'gtceu:luv_emitter', 'gtceu:luv_sensor', 'gtceu:quantum_star', 'gtceu:rhodium_plated_palladium_plate',
+    'gtceu:luv_energy_input_hatch', 'gtceu:luv_energy_output_hatch', 'gtceu:niobium_titanium_quadruple_wire', 'gtceu:niobium_titanium_octal_wire',
+    'gtceu:niobium_titanium_hex_wire']);
+  assert.deepEqual(luv.ours, [SMES, 'gtceu:hts_magnet_works']);
+  const run = packRun();
+  for (const r of TABLE.tiers) {
+    const { gtm, ours } = rowIds(r);
+    for (const id of ours) assert.ok(run.registry.items.has(id) || run.registry.machines.has(id), r.name + ': ' + id + ' is registered by the pack');
+    for (const id of gtm) assert.match(id, /^(gtceu|minecraft):[a-z0-9_]+$/, r.name + ': ' + id);
+    if (r.batteries) assert.match(r.batteries, /^#gtceu:batteries\/[a-z]+$/);
+  }
+  if (!DUMP_DIR) return;
+  const doc = dumpJson('items.json');
+  const items = new Set(doc.items.map((x) => (typeof x === 'string' ? x : x.id)));
+  const fluids = new Set((doc.fluids || []).map((x) => (typeof x === 'string' ? x : x.id)));
+  for (const r of TABLE.tiers) {
+    for (const id of rowIds(r).gtm) {
+      assert.ok(items.has(id), r.name + ': ' + id + ' is not an item of GTM 7.5.3\'s registry (exact id)');
+      assert.ok(!fluids.has(id), r.name + ': ' + id + ' is a fluid, not an item');
+    }
+  }
+});
+
+test('LuV wireless names and textures: en_us and es_es for every LuV block and item (GTM\'s LuV colour), and the textures they point at', () => {
+  const { lang } = packRun();
+  const ids = [];
+  for (const kind of ['energy', 'dynamo']) for (const a of TABLE.hatchAmps) ids.push(`block.gtceu.luv_wireless_${kind}_hatch${a === 2 ? '' : '_' + a + 'a'}`);
+  ids.push('item.grindless.luv_wireless_energy_cover', 'item.grindless.luv_wireless_dynamo_cover');
+  for (const l of ['en_us', 'es_es']) {
+    for (const k of ids) assert.match(String(lang[l][k]), /^\u00a7dLuV |\u00a7d.* LuV( de \d+ A)?$/, l + ' ' + k);
+    assert.ok(lang[l]['block.grindless.luv_smes_cell'], l + ' names the SMES cell');
+    assert.ok(lang[l]['tooltip.grindless.wireless_cell.made_by'], l + ': the made-by tooltip');
+    assert.ok(lang[l]['emi.grindless.info.capacitor_cells.2'], l + ': the EMI page\'s SMES line');
+  }
+  assert.equal(lang.en_us['block.grindless.luv_smes_cell'], 'LuV SMES Cell');
+  assert.equal(lang.en_us['block.gtceu.luv_wireless_energy_hatch_64a'], '\u00a7dLuV 64A Wireless Energy Hatch');
+  const tex = path.join(PACK, 'kubejs', 'assets', 'grindless', 'textures');
+  for (const r of TABLE.tiers) {
+    const cell = r.texture ? String(r.texture).replace(/^grindless:/, '') : 'block/wireless/capacitor_cell_' + r.name;
+    assert.ok(fs.existsSync(path.join(tex, cell + '.png')), r.name + ': ' + cell);
+    for (const kind of ['energy', 'dynamo']) {
+      assert.ok(fs.existsSync(path.join(tex, 'item', 'wireless', `${kind}_cover_${r.name}.png`)), r.name + ' ' + kind + ' cover item');
+      assert.ok(fs.existsSync(path.join(tex, 'block', 'cover', `wireless_${kind}_cover_${r.name}.png`)), r.name + ' ' + kind + ' cover face');
+    }
+  }
+  const page = (f) => JSON.parse(fs.readFileSync(path.join(PACK, 'kubejs', 'assets', 'emi', 'recipe', 'additions', 'grindless', f), 'utf8'));
+  for (const r of TABLE.tiers) assert.ok(page('capacitor_cells.json').stacks.includes('item:' + r.cell), r.cell + ' on the cells\' EMI page');
+  for (const c of TABLE.tiers.flatMap((r) => ['energy', 'dynamo'].map((k) => `item:grindless:${r.name}_wireless_${k}_cover`))) {
+    assert.ok(page('wireless_covers.json').stacks.includes(c), c + ' on the covers\' EMI page');
+  }
+});
+
+// the settlement at LuV: towers of SMES cells (and IV cells) in the Overworld band of LuV-A4, hatches in a row in front of them
+const LX = 15392;
+function luvWorld() {
+  const earth = new Level('minecraft:overworld');
+  const levels = { 'minecraft:overworld': earth, 'gcyr:luna': new Level('gcyr:luna') };
+  // a formed tower at (x, 100, z) whose cells stand in its 32 slots (8 high, 4 deep); `cells` lists them by id
+  const tower = (x, z, cells) => {
+    const at = cells.map((id, i) => {
+      const p = new Pos(x, 101 + (i % 8), z + 1 + Math.floor(i / 8));
+      earth.put(p.x, p.y, p.z, id);
+      return p;
+    });
+    const t = { formed: true, at, isFormed() { return this.formed; }, getLevel: () => earth,
+      getMultiblockState: () => ({ cache: at, getCache: () => ({ iterator: () => iterator(at) }) }) };
+    earth.put(x, 100, z, 'gtceu:wireless_energy_tower', t);
+    return t;
+  };
+  const hatch = (x, id, capacity, stored = 0) => earth.put(x, 100, 40, id, coverable({ energyContainer: new Container(PLAIN, capacity, stored) }, 0, 0));
+  return { levels, earth, tower, hatch };
+}
+const cells = (n, id) => Array.from({ length: n }, () => id);
+const IV_CELL = 'grindless:iv_capacitor_cell';
+const IV_EU = 245760000;
+
+test('LuV wireless jump: LuV only when every formed tower holds LuV cells; above the network\'s tier a LuV hatch gets nothing, IV ones are filled', () => {
+  const { W, errors } = jvm();
+  const w = luvWorld();
+  const server = serverOf(w);
+  const smesTower = w.tower(LX, 0, cells(32, SMES));
+  w.tower(LX + 8, 0, cells(4, IV_CELL));
+  const luv2 = w.hatch(LX + 16, 'gtceu:luv_wireless_energy_hatch', 32768 * 16 * 2);
+  const iv2 = w.hatch(LX + 18, 'gtceu:iv_wireless_energy_hatch', 8192 * 16 * 2);
+  const iv64 = w.hatch(LX + 20, 'gtceu:iv_wireless_energy_hatch_64a', 8192 * 16 * 64);
+  for (const x of [LX, LX + 8]) assert.ok(W.track(w.earth, new Pos(x, 100, 0)), 'tower at ' + x);
+  for (const x of [LX + 16, LX + 18, LX + 20]) assert.ok(W.track(w.earth, new Pos(x, 100, 40)), 'hatch at ' + x);
+  W.paused = true;
+  W.setStored(server, 10000000000);
+  // two towers: the SMES one and an IV one; the network is IV (the weakest cell of every formed tower)
+  const st = W.settle(server);
+  assert.equal(st.up, true);
+  assert.equal(st.towers, 2);
+  assert.equal(st.tier, 5);
+  assert.equal(st.capacity, 32 * SMES_EU + 4 * IV_EU);
+  assert.equal(st.skippedAbove, 1, 'the LuV hatch is above the network\'s tier');
+  assert.equal(luv2.energyContainer.getEnergyStored(), 0, 'and gets nothing');
+  assert.equal(iv2.energyContainer.getEnergyStored(), 262144, 'the IV 2 A hatch filled: V x 16 x 2');
+  assert.equal(iv64.energyContainer.getEnergyStored(), 8388608, 'the IV 64 A hatch filled: V x 16 x 64');
+  assert.equal(st.out, 262144 + 8388608);
+  assert.equal(W.stored(server), 10000000000 - st.out);
+  const above = W.readout(server, LUV, true);
+  assert.equal(above.key, 'message.grindless.wireless.above_tier');
+  assert.deepEqual(plain(above.args), ['LuV', 'IV'], 'its readout says why, in GTM\'s names');
+  assert.equal(W.readout(server, 5, true).key, 'message.grindless.wireless.readout');
+  // the IV tower broken: the network jumps to LuV and the LuV hatch is filled
+  w.earth.blocks.delete((LX + 8) + ',100,0');
+  w.earth.machines.delete((LX + 8) + ',100,0');
+  const jump = W.settle(server);
+  assert.equal(jump.forgotten, 1, 'the broken tower is forgotten');
+  assert.equal(jump.towers, 1);
+  assert.equal(jump.tier, LUV);
+  assert.equal(jump.capacity, 32 * SMES_EU, '31,457,280,000 EU: past an int');
+  assert.equal(jump.skippedAbove, 0);
+  assert.equal(luv2.energyContainer.getEnergyStored(), 1048576, 'the LuV 2 A hatch filled: V x 16 x 2');
+  assert.equal(jump.out, 1048576);
+  const reading = W.readout(server, LUV, true);
+  assert.equal(reading.key, 'message.grindless.wireless.readout');
+  assert.equal(reading.args[0], 'LuV');
+  // a mixed tower: one IV cell among the SMES cells and the tower (so the network) is IV again; replaced, LuV
+  luv2.energyContainer.setEnergyStored(0);
+  w.earth.put(smesTower.at[5].x, smesTower.at[5].y, smesTower.at[5].z, IV_CELL);
+  const mixed = W.settle(server);
+  assert.equal(mixed.tier, 5);
+  assert.equal(mixed.capacity, 31 * SMES_EU + IV_EU);
+  assert.equal(luv2.energyContainer.getEnergyStored(), 0);
+  const entry = W.tracked(server).find((e) => e.k === 'tower');
+  assert.deepEqual([entry.t, entry.n, entry.c], [5, 32, 31 * SMES_EU + IV_EU], 'the recorded tower follows its weakest cell');
+  w.earth.put(smesTower.at[5].x, smesTower.at[5].y, smesTower.at[5].z, SMES);
+  const back = W.settle(server);
+  assert.equal(back.tier, LUV);
+  assert.equal(luv2.energyContainer.getEnergyStored(), 1048576);
+  assert.deepEqual(plain(Object.keys(W.faults)), []);
+  assert.deepEqual(errors, []);
+});
+
+test('LuV wireless dynamo: a 64 A LuV dynamo hatch puts 19/20 of what it gives into the network, in whole multiples of 20 EU', () => {
+  const { W, errors } = jvm();
+  const w = luvWorld();
+  const server = serverOf(w);
+  w.tower(LX, 0, cells(32, SMES));
+  const buffer = 32768 * 64 * 64;
+  assert.equal(buffer, 134217728, 'GTM\'s dynamo hatch: V x 64 x A');
+  const dyn = w.hatch(LX + 16, 'gtceu:luv_wireless_dynamo_hatch_64a', buffer, buffer);
+  const in64 = w.hatch(LX + 18, 'gtceu:luv_wireless_energy_hatch_64a', 32768 * 16 * 64);
+  W.track(w.earth, new Pos(LX, 100, 0));
+  W.track(w.earth, new Pos(LX + 16, 100, 40));
+  W.paused = true;
+  W.setStored(server, 0);
+  const st = W.settle(server);
+  assert.equal(st.drained, 134217720, 'a whole multiple of 20; 8 EU wait in the hatch');
+  assert.equal(st.in, 127506834);
+  assert.equal(st.in * 20, st.drained * 19, 'exactly 19/20');
+  assert.equal(st.lost, st.drained - st.in);
+  assert.equal(dyn.energyContainer.getEnergyStored(), 8);
+  assert.equal(W.stored(server), 127506834);
+  // the rest waits until it makes 20
+  assert.equal(W.settle(server).drained, 0);
+  dyn.energyContainer.setEnergyStored(20);
+  const next = W.settle(server);
+  assert.deepEqual([next.drained, next.in, next.lost], [20, 19, 1]);
+  // a 64 A LuV energy hatch takes its whole buffer (V x 16 x 64) in one settlement
+  W.track(w.earth, new Pos(LX + 18, 100, 40));
+  const fill = W.settle(server);
+  assert.equal(in64.energyContainer.getEnergyStored(), 33554432);
+  assert.equal(fill.out, 33554432);
+  assert.equal(W.stored(server), 127506834 + 19 - 33554432);
+  assert.equal(W.totals.in, 127506834 + 19);
+  assert.deepEqual(errors, []);
+});
+
+test('LuV wireless: a 32-SMES-cell tower\'s capacity (past an int) and a store past an int survive the registry and a cold restart', () => {
+  const big = { k: 'tower', d: 'minecraft:overworld', x: LX, y: 100, z: 0, f: true, c: 32 * SMES_EU, t: LUV, n: 32 };
+  assert.ok(big.c > 2147483647);
+  const tag = R.toTag(big);
+  assert.equal(tag.getTagType('c'), 4, 'a long');
+  assert.deepEqual(plain(R.fromTag(tag)), plain(R.canon(big)));
+  // the cold restart: tracked and settled in one JVM, persistent data through NbtIo's bytes, read by a second JVM
+  const w = luvWorld();
+  w.tower(LX, 0, cells(32, SMES));
+  const pd1 = new CompoundTag();
+  const server1 = serverOf(w, pd1);
+  const j1 = jvm();
+  j1.W.track(w.earth, new Pos(LX, 100, 0));
+  j1.W.setStored(server1, 30000000000);
+  j1.W.paused = true;
+  const before = j1.W.settle(server1);
+  assert.equal(before.capacity, 31457280000);
+  const bytes = writeNbt(pd1);
+  const j2 = jvm();
+  const server2 = serverOf(w, readNbt(bytes));
+  assert.deepEqual(plain(j2.W.tracked(server2)), [plain(R.canon(big))], 'the tower as recorded, its capacity a long');
+  assert.equal(j2.W.stored(server2), 30000000000);
+  // its chunk unloaded: the recorded tower still counts, at LuV
+  w.earth.loaded = false;
+  j2.W.paused = true;
+  const st = j2.W.settle(server2);
+  assert.deepEqual([st.up, st.tier, st.capacity, st.towers], [true, LUV, 31457280000, 1]);
+  assert.equal(j2.W.stored(server2), 30000000000);
+  assert.deepEqual(j1.errors.concat(j2.errors), []);
 });

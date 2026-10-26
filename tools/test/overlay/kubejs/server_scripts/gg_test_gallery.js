@@ -74,7 +74,7 @@
     { name: 'wireless', title: 'wireless energy: the tower, every amperage at LV, every tier at 2 A', ids: wirelessIds() }
   ]
 
-  // the Wireless Energy Tower and its 40 hatches (LV-IV, 2/4/16/64 A, energy and dynamo): the panel sets out the first 18 (one
+  // the Wireless Energy Tower and its 48 hatches (LV-LuV, 2/4/16/64 A, energy and dynamo): the panel sets out the first 18 (one
   // panel); the rest are in the list, so the registry check still covers them
   function wirelessIds() {
     var ids = ['wireless_energy_tower', 'lv_wireless_energy_hatch', 'lv_wireless_energy_hatch_4a', 'lv_wireless_energy_hatch_16a',
@@ -82,7 +82,7 @@
       'lv_wireless_dynamo_hatch_16a', 'lv_wireless_dynamo_hatch_64a', 'mv_wireless_dynamo_hatch', 'hv_wireless_energy_hatch',
       'hv_wireless_dynamo_hatch', 'ev_wireless_energy_hatch', 'ev_wireless_dynamo_hatch', 'iv_wireless_energy_hatch',
       'iv_wireless_dynamo_hatch', 'iv_wireless_energy_hatch_64a']
-    ;['lv', 'mv', 'hv', 'ev', 'iv'].forEach(function (t) {
+    ;['lv', 'mv', 'hv', 'ev', 'iv', 'luv'].forEach(function (t) {
       ;['energy', 'dynamo'].forEach(function (k) {
         ;['', '_4a', '_16a', '_64a'].forEach(function (a) {
           var id = t + '_wireless_' + k + '_hatch' + a

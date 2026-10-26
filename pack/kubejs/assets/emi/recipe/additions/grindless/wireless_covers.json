@@ -10,7 +10,9 @@
     "item:grindless:ev_wireless_energy_cover",
     "item:grindless:ev_wireless_dynamo_cover",
     "item:grindless:iv_wireless_energy_cover",
-    "item:grindless:iv_wireless_dynamo_cover"
+    "item:grindless:iv_wireless_dynamo_cover",
+    "item:grindless:luv_wireless_energy_cover",
+    "item:grindless:luv_wireless_dynamo_cover"
   ],
   "text": [
     "emi.grindless.info.wireless_covers.0",
