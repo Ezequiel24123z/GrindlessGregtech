@@ -52,6 +52,7 @@ Generators for the pack's own textures. Everything is procedural 16x16 pixel art
 | `Build-NaquadahPlantTextures.ps1` | Writes the IV naquadah plant's face (`multiblock/naquadah_plant/`). `-Only naquadah_plant` and `-Credits` (its 5 CREDITS rows). |
 | `Build-IVMercuryTextures.ps1` | Writes the faces of the IV Mercury machines (IV-B2): the Mercury vein drill, the Mercury solar works, the Mercury solar field and the interferometer (`multiblock/mercury_vein_drill/`, `mercury_solar_works/`, `mercury_solar_field/`, `interferometer/`), and the interferometer's three data orbs (`item/lunar_vlbi_recording`, `outer_system_chart`, `sagittarius_a_star_signal`). `-Only drill,works,field,interferometer,items`, `-Preview <png outside the repo>` and `-Credits` (its 23 CREDITS rows). |
 | `Build-TravelNetworkTextures.ps1` | Writes the Venusian and Hermean Quantum Seeds (items and `.mcmeta`) and the RTG cell's overlays (`block/machines/rtg/`). `-Only seeds,rtg` and `-Credits` (its 11 CREDITS rows). |
+| `Build-LuVFoundationTextures.ps1` | Writes the shared LuV textures (LuV-A1): 29 items (four of them animated quantum seeds) and the ten block textures under `block/luv/` (eight casings and the orbital solar panel's cells and frame). `-Only <output or group>`, `-Preview <png outside the repo>`, `-Credits`. |
 | `Build-HTSMagnetWorksTextures.ps1` | Writes the LuV HTS magnet works' face (`multiblock/hts_magnet_works/`). `-Only magnet_works`, `-Preview <png outside the repo>` and `-Credits` (its 5 CREDITS rows). |
 
 ## Regenerate
@@ -627,6 +628,61 @@ powershell -NoProfile -ExecutionPolicy Bypass -File tools\assets\Build-NaquadahP
 | `.../overlay_front_active_emissive.png` + `.mcmeta` | Only the source's glow (the capsule and its halo), the bath's surface and the lit lamp. |
 
 ## LuV era
+
+### LuV foundation (LuV-A1)
+
+`Build-LuVFoundationTextures.ps1`: same method and checks as the IV foundation, with its helpers copied so the other scripts stay untouched. It reuses, recoloured, the pack's own drawings: the quantum seed ampoule (`New-PlanetSeedFrame` of `Build-TravelNetworkTextures.ps1`, here `New-PlaceSeedFrame`), the drill bit shader and the tungsten steel bit's geometry (`Draw-Helix`, `Build-EVTextures.ps1`), the chart data stick (`$ChartMap` of `Build-IVFoundationTextures.ps1`), the data orb (`New-OrbBase` of `Build-IVMercuryTextures.ps1`) and the thin-film frame routine.
+
+```powershell
+powershell -NoProfile -ExecutionPolicy Bypass -File tools\assets\Build-LuVFoundationTextures.ps1
+powershell -NoProfile -ExecutionPolicy Bypass -File tools\assets\Build-LuVFoundationTextures.ps1 -Only seeds,capture_bag
+powershell -NoProfile -ExecutionPolicy Bypass -File tools\assets\Build-LuVFoundationTextures.ps1 -Preview C:\path\luv-a1.png -Credits
+```
+
+- `-Only` accepts any output name (for example `capture_bag` or `station_truss_casing`) and the groups `items`, `seeds`, `casings` and `panel` (comma-separated, also with `-File`).
+- `-Preview` (outside the repo, never shipped) writes an x6 review sheet: every item on slot grey; the 8 frames of each new seed next to the Venusian and Hermean seeds; the families next to their elders (bits, orbs, charts, tapes, vials); every casing 3x3; the orbital cells 3x3 and a panel mock next to the IV thin-film panel's; a strip of the items at x2.
+- The final check fails the run: 16x16 (seeds 16x128), binary alpha, no pure black, block textures fully opaque, item icons with a transparent background in every frame. Seeds: an `.mcmeta` with `frametime` 3, at least 3 distinct frames, the Venusian seed's silhouette and no frame shared with any other seed. The HSS-S bit keeps the tungsten steel bit's silhouette, the chart the Mars chart's, the two orbs the IV orbs', and the two tapes share one, each with a different picture. The frame's rows 6 to 8 are lit > mid > dark, and the panel model uses both panel textures. Output is identical byte for byte on every run.
+
+| File (under `textures/`) | Notes |
+|---|---|
+| `item/asteroid_pgm_concentrate.png` | A small heap of dark grey-black metallic powder (the carbonyl residue of meteoric iron) with bright platinum glints. |
+| `item/chondritic_extract.png` | A small glass vial under an aluminium crimp cap, holding dark amber-brown organic extract. |
+| `item/capture_bag.png` | An inflated bag of gold Kapton gores sewn with white aramid tapes, its mouth on a titanium hoop, the tip gathered by an aramid tie. |
+| `item/asteroid_quantum_seed.png`, `ionian_quantum_seed.png`, `europan_quantum_seed.png`, `ganymedean_quantum_seed.png` (each + `.mcmeta`) | The quantum seed ampoule under a cap of the place's ground, 8 frames, `frametime` 3. Belt: rusty iron-grey rock with metal flecks, a dust lane with a drifting mote. Io: sulfur yellow-orange with red-brown, plumes rising. Europa: white-blue ice with red-brown lineae drifting across. Ganymede: grey-brown with pale ice, a terminator sweeping right to left. |
+| `item/engineered_barley_seed.png`, `engineered_tobacco_seed.png` | Three plump golden barley grains with a crease; a low pile of tiny dark brown tobacco seeds. Both carry a cyan glint and a small cyan sparkle. |
+| `item/cryobot_probe.png` | A slender silver melt probe: a tether reel on top, a seam band, a red-hot nose with a white-hot point. |
+| `item/europan_ocean_sample.png` | A stout bottle under a ridged titanium screw cap: blue brine with green glowing specks. |
+| `item/melt_head.png` | A dark grey tungsten-carbide cone, point down, under its glowing orange heater disc and its stub. |
+| `item/jupiter_entry_probe.png` | A blunt-cone entry probe: a dark brown heat shield in front (below) and a silver conical backshell. |
+| `item/saturn_flyby_probe.png` | A white high-gain dish facing the viewer, a gold-foil bus with its engine, an RTG boom to the left and a science boom with its platform to the right. |
+| `item/jovian_atmosphere_survey.png`, `gravitational_wave_catalogue.png` | The data orb filled with Jupiter's cream, orange and brown bands and a small red oval; the data orb with a cyan chirp that grows and quickens, then rings down. |
+| `item/saturn_transfer_chart.png` | The chart family's data stick with Saturn (a gold disc crossed by a brown ring) and an orange Titan on the label. |
+| `item/heat_exchanger_bundle.png` | Nine dark blue-grey tungstensteel tube ends in a yellow-ochre sulfur-concrete frame, seen obliquely. |
+| `item/tether_spool.png` | Silver aluminium tape wound between white aramid flanges (the near one woven, with its hub); the loose end hangs below. |
+| `item/ionian_sublimate.png` | A crusty crystalline chunk: white-yellow on top, orange below, red-brown crust. |
+| `item/nickel_tungsten_tape.png`, `itbtc_coated_conductor.png` | One roll lying flat (wound face, core hole, loose end): bright nickel-silver; black-purple coating with silver cap-layer edges. |
+| `item/neurotrophic_factor.png` | A glass ampoule with a sealed tip and a blue break ring, holding pale pink protein solution. |
+| `item/neural_organoid.png` | A pinkish-grey folded tissue sphere sitting in a drop of pink culture medium. |
+| `item/triple_junction_wafer.png`, `triple_junction_cell.png` | A round wafer, blue-black over a gold-grey germanium rim and edge; a square cell with cropped corners, deep blue, two silver busbars and thin fingers. |
+| `item/hss_s_drill_bit.png` | The drill bit family's tungsten steel geometry in HSS-S: dark steel with a violet tint. |
+| `item/anchor_harpoon.png` | A diagonal harpoon: a dark HSS-S shaft, a barbed tungsten-carbide head and a cable eye. |
+| `block/luv/station_truss_casing.png` | Light grey aluminium plating behind a titanium truss: chords along the top and left edges and an X brace with a gusset. |
+| `block/luv/radiation_vault_casing.png` | Heavy dark titanium/tantalum plates, riveted and staggered, parted by copper and tin layers (graded-Z). |
+| `block/luv/whipple_shield_casing.png` | A porous aluminium-foam bumper pitted by small impact craters over a woven yellow aramid layer and a dark stand-off gap. |
+| `block/luv/asteroid_regolith_casing.png` | Sintered dark grey-brown rubble bricks in irregular courses with metallic flecks. |
+| `block/luv/sulfur_concrete_casing.png` | Big yellow-ochre sulfur-concrete blocks in running bond, with aggregate and sulfur crystals. |
+| `block/luv/magnetic_bearing.png` | A ring of eight tetrataenite segments around a polished shaft on a bevelled steel plate. |
+| `block/luv/coilgun_coil_casing.png` | Tight black windings with copper-brown highlights between violet HSS-S rims. |
+| `block/luv/sapphire_test_mass.png` | Polished blue sapphire: a bevel, four facets round a table and white glints. |
+| `block/luv/orbital_solar_cells.png` | Top of the orbital solar panel: 8 px multi-junction cells with cropped corners, blue-black, a silver busbar, fine fingers and a diagonal sheen. Seamless. |
+| `block/luv/orbital_solar_frame.png` | The panel's titanium frame (sides and underside): light grey-violet, brushed, with a lit edge. Rows 6 to 8, which the slab's sides show (`models/block/luv/orbital_solar_panel.json`), are lit, mid and dark. |
+
+#### How to retouch (LuV foundation)
+
+- Each piece's colours and map sit together at the top of its block (`New-Pal` fails on a repeated letter). Maps: `$ExtractMap`, `$CryoMap`, `$OceanMap`, `$MeltTop`, `$ChartMap`, `$BundleMap`, `$SpoolMap`, `$SublimateMap`, `$AmpouleMap`. Procedural shapes keep their numbers next to them (`$HeapHalf`, `$BagRows`, `$BarleyGrains`, `$PileHalf`, `$ProbeBack`, `$ProbeFront`, `$ChirpYs`, `$JovianRows`).
+- Seeds: `$SeedPlaces` holds one entry per seed (`Pal`, `Mode`, `Salt`, `Dir`, `Phase`, `Outline`, `Streak`). Change `Dir` or `Phase` if a new seed ever shares a frame with another.
+- Tapes: `$TapeMaterials` holds the two materials (`FaceA` and `FaceB` alternate on the wound face; `Side`; `Edge` is the silver cap layer, 0 for none).
+- Casings: one function each, with its palette above it; keep the patterns on 16 or 8 px so they tile.
 
 ### HTS magnet works
 
