@@ -209,6 +209,8 @@
       var doc = { format: 'gg-emi-coverage-report-1', expectations: exp.format, recipes: allRecipes.size(), pages: ours, items: report,
         noMade: noMade, noUse: noUse, routeMissing: routeMissing, previewMissing: previewMissing, unaudited: unaudited, unknown: unknown,
         pagesMissing: pagesMissing, legacy: legacyBad }
+      // a fresh instance has no kubejs/exported yet (native run 20261026-024353-client-44b); same call as gg_test_recipe_lookup.js
+      Java.loadClass('net.minecraft.FileUtil').createDirectoriesSafe('kubejs/exported')
       JsonIO.write(REPORT, Java.loadClass('com.google.gson.JsonParser').parseString(JSON.stringify(doc)))
     } catch (e) {
       log('report', 'NOTE', 'could not write ' + REPORT + ': ' + e)
