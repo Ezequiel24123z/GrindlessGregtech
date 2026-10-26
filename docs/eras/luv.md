@@ -220,6 +220,7 @@ Five GCYR entries (datapack JSON, no Java) and ten dimensions. The ids are propo
     - the three enriched sludges and the crystal chip from sludge take the sludge;
     - mutagen takes the enriched sludge.
 - **Germanium only from Io** (GTCA's froth stays ZPM). **Sulfur concrete only on Io.**
+  - GTCA's Nether germanite (drilled since LV) keeps its electrolysis without the germanium (`grindless:electrolyzer/germanite`, B6): nothing before LuV asks for germanium; the dump's only other user is UV's quantum alloy.
 - **The neuro processing unit at LuV only from the organoid lab.**
   - GTM's `circuit_assembler/neuro_processor` (80,000 EU/t) stays a ZPM-voltage recipe. From LuV the biofoundry makes its stem cells and sterile medium, so every machine that could run it on LuV power was checked (spike S0-4, GT-- 1.3.10 bytecode):
     - GT--'s line has a single energy-hatch cell (`GTPPMachines.kt:58-105`). Its `CircuitAssemblyLineMachine.getRealRecipe` (`.kt:78-86`) refuses a circuit-assembler recipe whose EU tier is at or above the tier of the hatch's combined voltage (2 A: the hatch's tier; 4 A: one up; 16 A: two up), and GTM refuses anything above the hatch's own tier. So the NPU is refused on every LuV hatch and on a ZPM 2 A hatch, and runs from a ZPM 4 A hatch.
