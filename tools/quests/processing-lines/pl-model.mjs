@@ -12,7 +12,7 @@ const here = path.dirname(fileURLToPath(import.meta.url));
 // the checkout this folder lives in (tools/quests/processing-lines)
 export const REPO = path.resolve(here, '..', '..', '..');
 export const BOOK = path.join(REPO, 'pack', 'config', 'ftbquests', 'quests');
-export const TIERS = ['steam', 'lv', 'mv', 'hv', 'ev', 'iv'];
+export const TIERS = ['steam', 'lv', 'mv', 'hv', 'ev', 'iv', 'luv'];
 export const ALL = [];
 for (const f of [...TIERS.map((t) => `pl-data-${t}.mjs`), 'power-data.mjs']) {
   const file = path.join(here, f);
@@ -37,11 +37,16 @@ export function buildModel(chapters = ALL) {
   const errors = [];
   const byFile = new Map();
   for (const ch of chapters) {
-    const m = { ...ch, id: hid('chapter|' + ch.file), groupTitle: ch.group || GROUP_TITLE, nodes: [], byKey: new Map() };
+    const m = { ...ch, id: hid('chapter|' + ch.file), groupTitle: ch.group || GROUP_TITLE, nodes: [], byKey: new Map(), held: new Set() };
     byFile.set(ch.file, m);
     // place the clusters: bands top to bottom, clusters left to right, top-aligned, GAP_X/GAP_Y apart
     let bandY = 0;
     const placed = new Set();
+    const keys = new Set();
+    // pkg (on a node or its cluster): the content package that makes it. With ch.landed (a Set), a node whose package has not
+    // landed keeps its place in the layout but is left out, with every arrow into or out of it; pending: { <pkg>: { ...opts } }
+    // overrides a node's options while that package has not landed. Landing a package is adding it to the set.
+    const held = (pkg) => !!(ch.landed && pkg && !ch.landed.has(pkg));
     for (const band of ch.bands) {
       let offX = 0;
       let bandH = 0;
@@ -57,7 +62,10 @@ export function buildModel(chapters = ALL) {
         const dx = snap(offX - minX);
         const dy = snap(bandY - minY);
         cl.nodes.forEach((nd, i) => {
-          if (m.byKey.has(nd.key)) errors.push(`${ch.file}: duplicate node key ${nd.key}`);
+          if (keys.has(nd.key)) errors.push(`${ch.file}: duplicate node key ${nd.key}`);
+          keys.add(nd.key);
+          if (held(nd.pkg ?? cl.pkg)) { m.held.add(nd.key); return; }
+          for (const [pkg, opts] of Object.entries(nd.pending || {})) if (held(pkg)) nd = { ...nd, ...opts };
           const kind = KINDS[nd.kind];
           if (!kind) errors.push(`${ch.file}/${nd.key}: unknown kind ${nd.kind}`);
           const node = {
@@ -83,9 +91,13 @@ export function buildModel(chapters = ALL) {
   }
   // resolve links and dependencies
   const eraBook = new Map();
+  // GG_QUESTS_ERA_DIR: a folder whose <chapter>.snbt stands in for the book's (the tests draw a chart for another
+  // tables/stations.json against the luv_age generated for it)
+  const eraDir = process.env.GG_QUESTS_ERA_DIR;
   const eraQuest = (chapter, id) => {
     if (!eraBook.has(chapter)) {
-      const file = path.join(BOOK, 'chapters', chapter + '.snbt');
+      const over = eraDir && path.join(eraDir, chapter + '.snbt');
+      const file = over && fs.existsSync(over) ? over : path.join(BOOK, 'chapters', chapter + '.snbt');
       const quests = new Map();
       if (fs.existsSync(file)) {
         for (const q of parseSnbt(fs.readFileSync(file, 'utf8')).quests || []) {
@@ -134,6 +146,7 @@ export function buildModel(chapters = ALL) {
       nd.arrows = [];
       for (const f of nd.from) {
         const e = typeof f === 'string' ? { k: f } : f;
+        if (m.held.has(e.k)) continue;
         const src = m.byKey.get(e.k);
         if (!src) { errors.push(`${m.file}/${nd.key}: arrow from unknown node ${e.k}`); continue; }
         if (nd.link) { errors.push(`${m.file}/${nd.key}: a link cannot have arrows into it`); continue; }

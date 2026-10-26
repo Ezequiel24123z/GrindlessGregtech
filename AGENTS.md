@@ -155,9 +155,23 @@ Gregtech Grindless is a GregTech Modern pack (Minecraft 1.20.1, Forge) in which 
   | gallery (client) | 12800–12863 |
   | QBC terminal (client) | 13056–13119: the Overworld at Y 98–112 (all of Z 0–63, force-loaded while it runs); on the Moon (`gcyr:luna`) and Mars (`gcyr:mars`) X 13084–13092, Z 28–36, Y 198–214 (7×7 floor at Y 198); the 1,000+ block case only stands the player on natural ground at X 13088, Z 1104+ |
   | wireless energy | 13312–13375, Z 0–63: Overworld Y 98–112 and Moon Y 198–214; restart fixtures use unloaded End metadata only, never blocks or chunk loading. Wireless fixtures take turns on this shared band. |
+  | LuV biofoundry and GT--'s circuit line (S0-4) | 15616–15679, Z 0–15: the biofoundry at X 15616–15647, the circuit assembly line check at X 15648–15679 |
+  | LuV cryogenics (helium refrigerator, coated conductor line) | 15104–15167, Z 0–63 |
+  | LuV biofoundry and GT--'s circuit line (S0-4) | 15616–15679: the biofoundry at X 15616–15647, Z 0–15; the circuit assembly line check and the Universal Assembly Factory at X 15648–15679, Z 0–31 |
+  | LuV A2: naquadah mode 2, platinum mode 4, LuV parallel hatch | 14848–14911, Z 0–63 (Overworld, Y 98–112) |
+  | HTS magnet works and LuV wireless (LuV-A4) | 15360–15423, Z 0–63: Overworld Y 98–112 (the magnet works and the two-hatch checks at X 15360–15391, the towers and the LuV jump at X 15392–15423); Earth orbit (`gcyr:overworld_orbit`) X 15392–15423, Y 98–112. It takes its turn with the wireless fixtures. |
   | hologram projector | 16384–16447, Z 0–63 (client: X 16416–16447, Z 40–55; LuV bands skip it) |
+  | LuV orbital solar station | 15872–15935, Z 0–63; Earth orbit Y 198–214 |
+  | LuV microgravity smelter and wake shield | 16128–16191, Z 0–63; Earth orbit Y 198–214 |
+  | LuV crystal grower, hydroponic ring and organoid lab | 16640–16703, Z 0–63; Earth orbit Y 198–214 |
+  | LuV fusion and research | 17920–17983, Z 0–63 (Overworld, Y 98–112): the Mk1 at X 17925–17939, the HPCA and the research station at X 17950+ |
+  | LuV Io surface: fumarole condenser and volcanic intake (S0-7) | 17152–17215, Z 0–63: the Overworld at Y 98–113 (brimstone under the fumaroles at Y 98) and Io (`G.places.surface('io')`) at Y 198–214 |
+  | LuV Ganymede: GW detector (S0-7, buried L) and coilgun | 17664–17727, Z 0–63: the Overworld at Y 98–112; on Ganymede (`G.places.surface('ganymede')`) Y 198–214 (rows at Y 200–204), or, where the ground under the two machines reaches Y 200, five rows from one block above the highest ground |
+  | LuV asteroid belt (B5) | 16896–16959, Z 0–63: Overworld Y 98–112; the stand-in belt (`grindless:asteroid_belt`) at the same X and Z, Y 198–214, and fresh world gen chunks at Z 1024+ |
+  | LuV Europa: cryobot and algae bioreactor (S0-7 ice shaft) | 17408–17471, Z 0–15: the Overworld at Y 98–113 (the cryobot is 16 high); on Europa (`places.json`, once B1 registers it) the same X and Z |
   | chests and furnaces (client) | 18688–18751 (uses X 18688–18703, Z 0–15, Y 98–112) |
-
+  | LuV travel and places (B1) | 18176–18239, Z 0–63: the Overworld at Y 98–112 (the level 4 rocket's scanner pad at X 18180–18182, Z 4–8); on each new surface (belt, Io, Europa, Ganymede) the same X and Z at Y 198–214, read only (one generated chunk, X 18176–18191, Z 0–15) |
+    | LuV Io orbit: the flux-tube tether or the sulfur–iodine plant (B7) | 18432–18495, Z 0–63: the Overworld at Y 98–112; Io orbit (`tables/stations.json` `second`) and Io (`G.places.surface('io')`) the same X and Z at Y 198–214 |
   For a new test, keep going in steps of 256.
 
 ## Licenses
@@ -177,6 +191,7 @@ Gregtech Grindless is a GregTech Modern pack (Minecraft 1.20.1, Forge) in which 
 
 - Personal account `Ezequiel24123z`, never the corporate one.
 - Small commits with a clear message.
+- **No `git stash` in parallel work:** the stash is shared by every worktree of the repository, so one session can pop another's. Use a WIP commit on your own branch.
 - **Versions:** before tagging (`vX.Y.Z`), bump `version` in `pack/pack.toml` and run `tools/Update-PackIndex.ps1`. Only what has passed the tier's tests gets tagged.
 
 ## Playable channel

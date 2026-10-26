@@ -3,10 +3,10 @@
 //
 //   kubejs custom_command gg_test_hidden      ->  GGTEST|hidden|<check>|PASS|FAIL|NOTE ... and GGTEST|hidden|DONE
 //
-//   table           server_scripts/grindless/integration/hidden.js read kubejs/data/grindless/tables/hidden_until.json, is implemented up to IV
-//                   (C1's switch, 2026-10-25) and hides something
-//   tag_b / tag_c   later-era items and a fluid (a GCYR satellite and molten cerrobase 140, LuV; the space elevator, ZPM; Proxima b's
-//                   regolith, UHV) and junk (scrap, damascus steel, molten stainless steel, GTCA's dead samarium-terbium branch, U-235's ore
+//   table           server_scripts/grindless/integration/hidden.js read kubejs/data/grindless/tables/hidden_until.json, is implemented up to LuV
+//                   (v0.8.0's switch, 2026-10-26) and hides something
+//   tag_b / tag_c   later-era items and a fluid (GCYR's station keycard, held while tables/stations.json is off; GT--'s plutonium fuel, UIV; the space elevator, ZPM; Proxima b's
+//                   regolith, UHV) and junk (a GCYR satellite, scrap, damascus steel, molten stainless steel, GTCA's dead samarium-terbium branch, U-235's ore
 //                   forms) are in #c:hidden_from_recipe_viewers
 //   tag_recipes     they are in #grindless:hidden_with_recipes too (EMI hides their recipes); the old scheelite sample (keepRecipes) is not
 //   visible         perlite dust, obsidian dust, the LV sifter, the Moon (titanium dust, raw ilmenite, moon sand, helium-3), Mars (its
@@ -16,7 +16,7 @@
 //   perlite         the LV sifter recipe gives perlite from basalt dust, and perlite's electrolysis (-> obsidian dust) is still there
 //   removed         junk recipes are gone: one from GTM's datapack, two the ore plant script adds (one for U-235's ore forms, junk since IV)
 //                   and GTCA's samarium-terbium steps
-//   kept            a later-era recipe stays (only hidden: GT--'s circuit assembly line, LuV) and the old-save conversion of the legacy
+//   kept            GT--'s circuit assembly line's recipe stays (visible since LuV landed, v0.8.0) and the old-save conversion of the legacy
 //                   scheelite sample stays
 //   counts          what hidden.js removed (NOTE)
 // var + function: this Rhino throws "redeclaration of var" for const/let in functions that run more than once.
@@ -70,14 +70,14 @@
       check('table', false, 'global.grindless.hidden is not published (hidden.js did not load)')
       return
     }
-    check('table', H.groups.length > 0 && H.hidden.groups > 0 && H.implementedEra === 'iv',
+    check('table', H.groups.length > 0 && H.hidden.groups > 0 && H.implementedEra === 'luv',
       H.groups.length + ' groups in the table, ' + H.hidden.groups + ' hidden (' + H.hidden.items.length + ' items, ' + H.hidden.fluids.length +
       ' fluids), implemented up to ' + H.implementedEra)
 
-    check('tag_b', itemHidden('gcyr:gps_satellite') && fluidHidden('gtceu:molten_cerrobase_140') && itemHidden('gtca:space_elevator') &&
+    check('tag_b', itemHidden('gcyr:keycard') && fluidHidden('gtceu:plutonium_based_liquid_fuel') && itemHidden('gtca:space_elevator') &&
       itemHidden('gcyr:proxima_centauri_b_regolith'),
-      'GCYR GPS satellite and molten cerrobase 140 (LuV), space elevator (ZPM), Proxima b regolith (UHV) hidden: ' + itemHidden('gcyr:gps_satellite') +
-      ' / ' + fluidHidden('gtceu:molten_cerrobase_140') + ' / ' + itemHidden('gtca:space_elevator') + ' / ' + itemHidden('gcyr:proxima_centauri_b_regolith'))
+      'GCYR keycard (held: stations off), GT--\'s plutonium fuel (UIV), space elevator (ZPM), Proxima b regolith (UHV) hidden: ' + itemHidden('gcyr:keycard') +
+      ' / ' + fluidHidden('gtceu:plutonium_based_liquid_fuel') + ' / ' + itemHidden('gtca:space_elevator') + ' / ' + itemHidden('gcyr:proxima_centauri_b_regolith'))
     check('tag_c', itemHidden('gtceu:damascus_steel_ingot') && itemHidden('gtca:scrap') && fluidHidden('gtceu:molten_stainless_steel') &&
       itemHidden('gtceu:terbium_dust') && itemHidden('gtca:samarium_terbium_mixture_dust') && itemHidden('gtceu:raw_uranium_235'),
       'damascus steel ingot, GTCA scrap, molten stainless steel, terbium, the samarium-terbium mixture hidden: ' + itemHidden('gtceu:damascus_steel_ingot') +
@@ -85,8 +85,8 @@
       itemHidden('gtca:samarium_terbium_mixture_dust') + ', raw U-235 (no vein) ' + itemHidden('gtceu:raw_uranium_235'))
     var withRecipes = ['gcyr:gps_satellite', 'gtceu:damascus_steel_ingot', 'gtca:scrap'].filter(function (id) { return itemHidden(id, RECIPES_TAG) })
     var legacy = 'grindless:vein_sample_scheelite'
-    check('tag_recipes', withRecipes.length === 3 && fluidHidden('gtceu:molten_cerrobase_140', RECIPES_TAG) && itemHidden(legacy) && !itemHidden(legacy, RECIPES_TAG),
-      'in #' + RECIPES_TAG + ': ' + withRecipes.join(', ') + ', fluid molten cerrobase 140 ' + fluidHidden('gtceu:molten_cerrobase_140', RECIPES_TAG) + '; old scheelite sample: #' +
+    check('tag_recipes', withRecipes.length === 3 && fluidHidden('gtceu:plutonium_based_liquid_fuel', RECIPES_TAG) && itemHidden(legacy) && !itemHidden(legacy, RECIPES_TAG),
+      'in #' + RECIPES_TAG + ': ' + withRecipes.join(', ') + ', fluid plutonium fuel ' + fluidHidden('gtceu:plutonium_based_liquid_fuel', RECIPES_TAG) + '; old scheelite sample: #' +
       TAG + ' ' + itemHidden(legacy) + ', #' + RECIPES_TAG + ' ' + itemHidden(legacy, RECIPES_TAG) + ' (its conversion stays in view)')
     // perlite (LV source), the Moon (HV: titanium, ilmenite, its ground and helium-3), Mars (EV) and IV (the End's uranium, Venus, Mercury)
     // are obtainable: never hidden
@@ -94,10 +94,11 @@
       'gtceu:titanium_dust', 'gtceu:raw_ilmenite', 'gcyr:moon_sand', 'grindless:titanium_drill_bit', 'gcyr:martian_rock', 'gtceu:raw_scheelite',
       'gtceu:tungsten_ingot', 'gtceu:merrillite_dust', 'gtceu:samarium_dust', 'grindless:vein_sample_scheelite_mars', 'grindless:martian_quantum_seed',
       'gtceu:naquadah_dust', 'gcyr:venus_rock', 'gtceu:raw_iridosmine', 'gtceu:uraninite_dust', 'gtceu:uranium_235_dust', 'grindless:leu_fuel_assembly',
-      'gtceu:quantum_star', 'gtceu:iv_emitter', 'grindless:inner_planets_chart', 'gcyr:elite_fuel_tank']
+      'gtceu:quantum_star', 'gtceu:iv_emitter', 'grindless:inner_planets_chart', 'gcyr:elite_fuel_tank',
+      'gtnn:circuit_assembly_line', 'gtceu:trinium_ingot', 'grindless:chondritic_extract', 'gtceu:germanium_dust', 'grindless:asteroid_pgm_concentrate']
     var shown = visible.filter(function (id) { return !itemHidden(id) })
     var visibleFluids = ['minecraft:water', 'gtceu:helium_3', 'gtceu:liquid_nitrogen', 'gtceu:rare_earth_chloride_solution', 'gtceu:naquadah', 'gtceu:deuterium',
-      'gtceu:heavy_water', 'gtceu:tritium', 'gtceu:radon']
+      'gtceu:heavy_water', 'gtceu:tritium', 'gtceu:radon', 'gtceu:molten_cerrobase_140', 'gtceu:bacteria', 'gtceu:europan_brine']
     var fluidsShown = visibleFluids.filter(function (id) { return !fluidHidden(id) })
     check('visible', shown.length === visible.length && fluidsShown.length === visibleFluids.length, 'not hidden: ' + shown.concat(fluidsShown).join(', ') +
       (shown.length === visible.length && fluidsShown.length === visibleFluids.length ? '' : ' (hidden: ' +

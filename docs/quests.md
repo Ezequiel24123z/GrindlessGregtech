@@ -207,6 +207,7 @@ powershell -File tools\quests\Render-QuestPreview.ps1 -Chapter steam_age -OutDir
 
 # Generated chapters: edit the data, then regenerate (the SNBT comes out with the same ids)
 node tools\quests\ev-chapter\gen.mjs                                    # ev_age.snbt from quests-data.mjs (section 14)
+node tools\quests\luv-chapter\gen.mjs [--pending] [--all --out <file>]  # luv_age.snbt; only the landed LuV packages (section 14)
 powershell -File tools\quests\processing-lines\run.ps1 -Dump <kubejs-exported> -Write [-Preview]   # Processing Lines and Power (sections 17 and 18)
 ```
 
@@ -249,7 +250,7 @@ Why this order, checked against the recipe dump of v0.4.0:
 
 **Tested in-game (24-10-2026, pack with the Moon):** `gg_test_quests` loads both with all their quests and dependencies; `gg_test_quest_book`, on a real client, completes *Arrival* and *The Neutronium Toolbox*, claims their 22 rewards, and checks that the 20 tools carry GTM's NBT, do not wear out, mine, pick up items with the magnet, break a 3x3 area (mining hammer), and show "Unbreakable" with no durability lines. The book screenshots read from left to right.
 
-The SNBT files are the source: they are edited by hand, following this guide. Exceptions generated from data in `tools/quests/` are `ev_age.snbt` (section 14), the Processing Lines (section 17) and Power (section 18). For those, edit the data and regenerate.
+The SNBT files are the source: they are edited by hand, following this guide. Exceptions generated from data in `tools/quests/` are `ev_age.snbt` and `luv_age.snbt` (section 14), the Processing Lines (section 17) and Power (section 18). For those, edit the data and regenerate.
 
 ## 14. Plan for Steam, LV, MV, HV, EV and IV: the Moon through each instrument
 
@@ -346,6 +347,16 @@ The chapter is generated: its source is `tools/quests/ev-chapter/quests-data.mjs
 
 Spine: the route from the hot cell and the reactor, through the Moon's tritium and the chart, to Mercury, iridium and the assembly line, ending at *Gate to LuV*. Above it uranium, fuel and Venus; below it heavy water, Mercury's solar field and the parallel hatch (see `docs/eras/iv.md`, "Quests"). Machine quests carry the machine's name; the two landings (*Under the Clouds*, *Day of Fire*) are the milestones.
 
+### LuV — "LuV: The Outer System" (`luv_age.snbt`; written while LuV is built, package LuV-C2)
+
+- **Start:** *The Outer System*, after *Gate to LuV*. Journey line: superconductors at home, a station in orbit, then the belt and Jupiter's moons.
+- **Spine:** *LuV Components* → *Osmiridium* → *Tape* (coated conductor line) → *Winding* (HTS magnet works, gear 1.5) → *The Network Goes LuV* (SMES cells) → *Packed and Launched* → *First Station* (Earth orbit) → *Level Four* → *Behind the Vault* (Io) → *Fumarole* → *Patera* → *Riding the Torus* or *Iodine Loop* → *Fusion* → *Europium* → *First Data Orb* → *Gate to ZPM* (exit).
+- **Above:** the trinium line (*Naquadah Coil*, *Full Recovery*, *Trinium*, *Reactor III*, *Sixteen at Once*); the station's machines (*Endless Day*, *Fibre from Nothing*, *In the Wake*); the belt (*The Belt*, *Harpoon*, *Mond*, *Star Metal*, *Sunlight on a Boulder*, *Molecular Farm*).
+- **Below:** *Closed Loop*, *Biofoundry*, *Engineered Seeds*, *Perfect Crystal*; Europa (*Under the Ice*, *Cryobot*, *Something Alive*, *Stem Cells*, *Organoid*, *Living Circuits*) and Ganymede (*Quiet Moon*, *Chirp*, *Coilgun*, *Into the Clouds*, *Slingshot*).
+- **Generated:** `tools/quests/luv-chapter/quests-data.mjs` → `gen.mjs`. Ids are hashes of the quest keys. Each quest names the LuV packages it needs; only quests whose packages are all in `LANDED` reach the book, a dependency on a left-out quest goes to its parents, and `fallback` places fusion and research at home until Io lands. `S03` stands for spike S0-3 (`tables/stations.json` `enabled`): the station, Earth orbit's machines and what needs their products (the ring, the organoid lab, living circuits, the detector and the gate) wait for it. When a package merges: add it to `LANDED`, check its ids, run `gen.mjs --pending` (what is still waiting), `gen.mjs`, the linter, and update `GG_QUESTS_EXPECTED.luv_age`. `gen.mjs --all --out <file>` draws the finished chapter (it lints clean too). `tools/analysis/test/luv-quests.test.mjs` fails if the book names an id nothing registers or is stale.
+- **The stations switch:** `S03`, `B7T` (the flux-tube tether) and `B7S` (the sulfur-iodine plant) are not listed by hand. `tools/quests/luv-stations.mjs` derives them from `tables/stations.json` with the rule of `lib/stations.js` (`enabled` gives `S03`; `second` null gives `B7S`, else `enabled` gives `B7T`, else neither), and the `LANDED` sets of `quests-data.mjs`, `pl-data-luv.mjs` and `power-data.mjs` add them, so no chapter names the machine the pack leaves out. After the table flips, regenerate in this order (Power links to `luv_age`): `node tools\quests\luv-chapter\gen.mjs`, then `powershell -File tools\quests\processing-lines\run.ps1 -Dump <kubejs-exported> -Write [-Preview]` (`pl_luv` and `power`; it lints the charts and the book), then `node tools\quests\lint.mjs`, and update `GG_QUESTS_EXPECTED` for `luv_age`, `pl_luv` and `power` with the counts the generators print. `tools/analysis/test/luv-stations-quests.test.mjs` draws all three modes from an injected table (`GG_STATIONS_TABLE`).
+- **No low gravity in the text:** GCYR's gravity isn't applied in game.
+
 ## 15. Quality of life tabs: what to fix
 
 The five are in the *Quality of Life* group and were written before this guide. The ids are already fixed (section 10), and the texts that v0.5.0 left false are already corrected (bees: the blaze is MV, and the ilmenite and titanium honeycombs are only processed on the Moon; AE2: the bridge between planets is EV). What still sounds like AI is mostly " - " as a dash, recited recipes and design voice. Linter count as of 24-10-2026:
@@ -393,7 +404,7 @@ Welcome, Steam and EV are not split up: they are done. The incoming machines and
 
 ## 17. Processing Lines
 
-A chapter group of its own, "Processing Lines", with one chart per tier: `pl_steam`, `pl_lv`, `pl_mv`, `pl_hv`, `pl_ev` and `pl_iv` (Steam Lines to IV Lines). Each chart shows the tier's lines at a glance, the way Star Technology's `pl1`–`pl5` do: what goes in, which machine, what comes out, where each byproduct ends and where the loops close. EMI shows one recipe; a chart shows the line.
+A chapter group of its own, "Processing Lines", with one chart per tier: `pl_steam`, `pl_lv`, `pl_mv`, `pl_hv`, `pl_ev`, `pl_iv` and `pl_luv` (Steam Lines to LuV Lines). Each chart shows the tier's lines at a glance, the way Star Technology's `pl1`–`pl5` do: what goes in, which machine, what comes out, where each byproduct ends and where the loops close. EMI shows one recipe; a chart shows the line.
 
 - **Nodes:** every node is a quest with one item: an optional item task (never consumed) plus a checkmark, so it can be ticked by hand or by holding the item. No rewards. The charts are `progression_mode: "flexible"` and no quest elsewhere depends on them: they never block anything.
 - **Shapes:** raw inputs are rounded squares; items the default hexagon, products a bigger one, byproducts a small one; machines are gears, our multiblocks a bigger gear; a return (something that goes back into an earlier step: "Electrodes, Back", "Heavy Water, Back") is a small circle at the end of its line. A fluid shows as its bucket.
@@ -402,15 +413,18 @@ A chapter group of its own, "Processing Lines", with one chart per tier: `pl_ste
 - **Text:** a title, a subtitle (the machine, or where the thing goes), and on our multiblocks one or two sentences in the voice of section 8. A leaf always says where it ends (rule 3).
 - **The source is the data, not the SNBT.** `tools/quests/processing-lines/pl-data-<tier>.mjs` holds the clusters, nodes, arrows and texts; `pl-gen.mjs` writes the chapters, the group line and the linter's roots; `pl-check.mjs --dump <kubejs-exported>` checks every arrow against a `gg_dump` (`--out <file>` writes the full report, every arrow with the recipe that proves it). `run.ps1 -Dump <kubejs-exported> -Write -Preview` does all of it, lints and renders the previews into `out\` next to it (ignored by git). Ids are hashes of the chapter and the node's key, so they don't change when a chart is regenerated.
 - **When a tier lands:** write its data file from the era's "As built" sections, check it against a dump of that era, regenerate, and add its counts to `GG_QUESTS_EXPECTED`.
+- **A tier that lands in packages** (`pl_luv`): pending clusters and nodes carry `pkg: '<package>'` and the data file's `LANDED` set lists the packages in the pack; the generator leaves out what has not landed, arrows included, but keeps its place in the layout, so landing a package is adding it to `LANDED`, regenerating and updating the counts.
 
 ## 18. Power
 
-The `power` chapter ("Power") sits in Quality of Life after Workshop. It compares generation from Steam through IV, fuel values, storage and transmission without making progression depend on it.
+The `power` chapter ("Power") sits in Quality of Life after Workshop. It compares generation from Steam through LuV, fuel values, storage and transmission without making progression depend on it.
 
-- **Layout:** one band per tier, with two IV bands; then later generators without speculative numbers, the grid and the wireless network. Generators are gears, fuels rounded squares and grid components hexagons.
-- **Reference only:** 83 quests and 47 links, flexible progression, optional item tasks plus checkmarks, no rewards and no dependencies from progression chapters.
+- **Layout:** one band per tier, with two IV bands and two LuV bands; then the later row (the Dyson sphere, no figures), the grid and the wireless network. Generators are gears, fuels rounded squares and grid components hexagons.
+- **Reference only:** 90 quests, 101 dependencies and 54 links, flexible progression, optional item tasks plus checkmarks, no rewards and no dependencies from progression chapters.
 - **Links:** fuels import the Processing Lines nodes that make them; generators import their introduction quests. Links never receive an arrow. Do not import a quest if its inherited dependencies would draw a long line across the chart.
 - **Source:** `tools/quests/processing-lines/power-data.mjs`, the shared generator and `pl-check.mjs`. Counts go in `GG_QUESTS_EXPECTED.power`; stable node keys preserve quest ids.
 - **Figures:** the checker recomputes EU per unit of fuel, output, steam, capacities, cable loss and AE2's P2P tax from the recipe dump, `electric.json`, pack config and scripts. Wireless figures also check the current table, structure slots and registered ids. An unverifiable number does not go in.
-- **Wireless:** the complete LV-IV band requires the wireless implementation. Its covers follow the exact-class support boundary: normal GTM machines, chargers and battery buffers, not converters or multiblock controllers. `WITH_WIRELESS = false` is a fallback for a release without wireless (77 quests and 82 dependencies), not the assembled candidate.
-- **Later eras:** LuV stays in the later row without figures until implemented; then add its own checked band.
+- **Wireless:** the band runs LV to LuV and requires the wireless implementation. Its covers follow the exact-class support boundary: normal GTM machines, chargers and battery buffers, not converters or multiblock controllers. LuV's cell, the SMES cell, comes from the LuV chart's HTS magnet works, and its node states the jump (LuV only when every formed tower holds SMES cells; before it, two IV wireless hatches on one multiblock). `WITH_WIRELESS = false` is a fallback for a release without wireless (83 quests and 93 dependencies), not the assembled candidate.
+- **LuV band:** GT--'s naquadah reactor III (machine tier, EU per long rod from the dump, what reaches the network from the wireless table's loss), the orbital solar station (630 EU/t a lit panel recomputed from B2's script constants, `tables/sunlight.json` and `tables/orbits.json`; 64 panels from the script; 38,304 into the network), the Mk1 with D + T and GTCA's calcium plasma into GTM's plasma turbine (turbine and helium plasma figures from the dump), and B6's volcanic intake (EU/t a module and the module count from B6's scripts, EU per bundle from the dump). The calcium plasma has no figure: its net power waits for the bench (decision 19).
+- **The LANDED gate:** every LuV node or cluster names its packages (`pkg`, `docs/eras/luv.md` "Build order", with the LuV chapter's names: `B7T` the tether, `B7S` the sulfur-iodine plant). `gate()` leaves out anything whose packages are not all in `LANDED`, with every arrow into it and any band left empty, so landing a package is adding it to that set. Written and waiting: the flux-tube tether (`B1` + `B7T`), the sulfur-iodine plant (`B1` + `B7S`) and the intake's link to the book's *Patera* (`B1` + `B6`).
+- **Newer than the dump:** `pl-check.mjs` reports what a dump taken before a package cannot prove (ids this checkout's startup scripts register and the dump's pack did not) as pending, not failed, while still checking every figure that comes from scripts and tables. `--strict` counts pending as issues: use it on the integrated run's dump.

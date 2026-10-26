@@ -1,0 +1,39 @@
+{
+  "_comment": [
+    "LuV coated conductor line (gtceu:coated_conductor_line, type gtceu:coated_conductor; docs/eras/luv.md, machine 2; package LuV-A3).",
+    "server_scripts/grindless/luv/coated_conductor_line.js makes one recipe per entry, id grindless:coated_conductor/<name>; the programmed circuit is the step (1 substrate, 2 tape) and each recipe carries the data key grindless_coated_conductor = <name> (its EMI line).",
+    "Substrate: Ni-5at.%W (19 Ni + 1 W), rolled and annealed to a cube texture (RABiTS). Tape: a micron-thick ITBTC film on it, oxygen-annealed, with a silver cap layer: an eighth of a cast single wire's superconductor per tape.",
+    "Figures marked tune in luv.md: both EU/t x durations and the tape's ITBTC share."
+  ],
+  "recipes": [
+    {
+      "name": "nickel_tungsten_substrate",
+      "step": "substrate",
+      "circuit": 1,
+      "itemsIn": [
+        { "id": "gtceu:nickel_dust", "count": 19 },
+        { "id": "gtceu:tungsten_dust", "count": 1 }
+      ],
+      "fluidsIn": [],
+      "itemsOut": [{ "id": "grindless:nickel_tungsten_tape", "count": 20 }],
+      "eut": 7680,
+      "duration": 400
+    },
+    {
+      "name": "itbtc_coated_conductor",
+      "step": "tape",
+      "circuit": 2,
+      "itemsIn": [
+        { "id": "grindless:nickel_tungsten_tape", "count": 16 },
+        { "id": "gtceu:indium_tin_barium_titanium_cuprate_dust", "count": 1 }
+      ],
+      "fluidsIn": [
+        { "id": "gtceu:oxygen", "amount": 1000 },
+        { "id": "gtceu:silver", "amount": 36 }
+      ],
+      "itemsOut": [{ "id": "grindless:itbtc_coated_conductor", "count": 16 }],
+      "eut": 30720,
+      "duration": 300
+    }
+  ]
+}

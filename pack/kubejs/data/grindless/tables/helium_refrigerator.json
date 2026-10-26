@@ -1,0 +1,26 @@
+{
+  "_comment": [
+    "LuV helium refrigerator (gtceu:helium_refrigerator, type gtceu:closed_loop_cooling; docs/eras/luv.md, machine 1; package LuV-A3).",
+    "server_scripts/grindless/luv/helium_refrigerator.js makes one recipe for every live recipe of source.type that takes source.coolant (GTM's cool_hot_<m>_ingot and the molten-metal ones with the ingot mold), at every server load.",
+    "Each recipe: the source's hot ingot (or its molten metal and the mold, not consumed) + makeUp + precool.in + the charge (GTM's notConsumableFluid: needed to start, never drained) -> the source's ingot + precool.out. The helium the source gives back stays in the loop.",
+    "Energy: the source's EU/t x duration + (source coolant - makeUp) mB re-liquefied at the live rate of reliquefaction.recipe (its EU per mB of liquid helium) x reliquefaction.precoolFactor, spent at max(source EU/t, minEUt): duration = ceil(energy / EU/t).",
+    "reliquefaction.fallbackEuPerMb is used only if the live recipe cannot be read (GTM 7.5.3: 1,920 EU/t x 240 t per 1,000 mB). Figures marked tune in luv.md: makeUp (5 %), precoolFactor."
+  ],
+  "source": {
+    "type": "gtceu:vacuum_freezer",
+    "coolant": "gtceu:liquid_helium",
+    "returned": "gtceu:helium"
+  },
+  "makeUp": { "id": "gtceu:liquid_helium", "amount": 25 },
+  "precool": {
+    "in": { "id": "gtceu:liquid_nitrogen", "amount": 50 },
+    "out": { "id": "gtceu:nitrogen", "amount": 50 }
+  },
+  "charge": { "id": "gtceu:liquid_helium", "amount": 4000 },
+  "reliquefaction": {
+    "recipe": "gtceu:vacuum_freezer/liquid_helium",
+    "fallbackEuPerMb": 460.8,
+    "precoolFactor": 0.5
+  },
+  "minEUt": 1920
+}

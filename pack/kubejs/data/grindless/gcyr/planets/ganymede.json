@@ -1,0 +1,16 @@
+{
+  "translation": "level.grindless.ganymede",
+  "galaxy": "gcyr:milky_way",
+  "solar_system": "gcyr:solar_system",
+  "world": "grindless:ganymede",
+  "orbit_world": "grindless:ganymede_orbit",
+  "parent_world": "grindless:jupiter",
+  "rocket_tier": 4,
+  "gravity": 1.428,
+  "has_atmosphere": false,
+  "days_in_year": 7,
+  "temperature": 110,
+  "solar_power": 1,
+  "has_oxygen": false,
+  "button_color": 9476997
+}

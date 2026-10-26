@@ -41,7 +41,9 @@
     { name: 'gg_book_mv_end', chapter: 'mv_age', x: 14, y: 6 },
     { name: 'gg_book_ev_age', chapter: 'ev_age' },
     { name: 'gg_book_iv_age', chapter: 'iv_age', x: 10, y: -1.5 },
-    { name: 'gg_book_iv_planets', chapter: 'iv_age', x: 30, y: -2 }
+    { name: 'gg_book_iv_planets', chapter: 'iv_age', x: 30, y: -2 },
+    { name: 'gg_book_luv_home', chapter: 'luv_age', x: 6, y: 0 },
+    { name: 'gg_book_luv_sites', chapter: 'luv_age', x: 18, y: 1 }
   ]
   var OPEN_TICKS = 60
   // the Processing Lines group: three of its charts, centred on their middles

@@ -8,7 +8,8 @@
 // lv_content, leisure_utility). It builds nothing and does not set the time.
 // Markers: GGTEST|airless_weather|<check>|PASS|FAIL|NOTE|<detail>, last line GGTEST|airless_weather|DONE
 //   registry     global.grindless.airlessWeather lists the dimensions of the other planets (gcyr:luna and gcyr:mars among them) and
-//                none of Earth's
+//                none of Earth's but Earth orbit (planets.json dryOnEarth)
+//   overworld_orbit_dry      Earth orbit stays dry too (LuV B1)
 //   earth_rain   after WAIT ticks of a thunderstorm on Earth, the Overworld's rain level is up (the storm really happened)
 //   shared       NOTE: Earth dimensions with sky light take the Overworld's rain (vanilla shares the weather flags)
 //   luna_dry, mars_dry       on the Moon and Mars the rain and thunder levels stay at 0.01 or less
@@ -20,7 +21,9 @@
   var WAIT = 200
   var PLANETS = ['gcyr:luna', 'gcyr:mars']
   var EARTH_SKY = ['grindless:void', 'grindless:flat']
-  var EARTH = ['minecraft:overworld', 'minecraft:the_nether', 'minecraft:the_end', 'grindless:void', 'grindless:flat', 'gcyr:overworld_orbit']
+  var EARTH = ['minecraft:overworld', 'minecraft:the_nether', 'minecraft:the_end', 'grindless:void', 'grindless:flat']
+  // Earth orbit belongs to Earth but is kept dry (planets.json dryOnEarth, LuV B1); its sky is fixed at midnight, so no clock check
+  var DRY_EARTH = ['gcyr:overworld_orbit']
   var PI = 3.141592653589793 // Math.PI is undefined in this Rhino
   var state = null
 
@@ -69,7 +72,7 @@
   function start(server) {
     var aw = global.grindless.airlessWeather
     var dims = aw ? aw.dimensions.map(function (d) { return String(d) }) : []
-    var missing = PLANETS.filter(function (d) { return dims.indexOf(d) < 0 })
+    var missing = PLANETS.concat(DRY_EARTH).filter(function (d) { return dims.indexOf(d) < 0 })
     var earthly = dims.filter(function (d) { return EARTH.indexOf(d) >= 0 })
     check('registry', aw !== undefined && missing.length === 0 && earthly.length === 0, 'dimensions=' + dims.join(',') +
       (missing.length > 0 ? ' missing ' + missing.join(',') : '') + (earthly.length > 0 ? ' Earth dimensions listed: ' + earthly.join(',') : ''))
@@ -115,6 +118,17 @@
       var detail = 'time=' + (dayTime % 24000) + ' clock darkness=' + dark.toFixed(2) + ' isNight=' + night + ' expected=' + expected
       if (Math.abs(dark - 4) < 0.05) note(name + '_clock', 'at the dusk/dawn threshold: ' + detail)
       else check(name + '_clock', night === expected, detail)
+    })
+    DRY_EARTH.forEach(function (id) {
+      var name = id.replace(/^gcyr:/, '')
+      var l = server.getLevel(id)
+      if (l === null) {
+        check(name + '_dry', false, id + ' is not loaded')
+        return
+      }
+      var rain = Number(l.getRainLevel(1))
+      var thunder = Number(l.getThunderLevel(1))
+      check(name + '_dry', rain <= 0.011 && thunder <= 0.011, 'rain=' + rain.toFixed(3) + ' thunder=' + thunder.toFixed(3) + ' skylight=' + skyLight(l))
     })
     server.runCommandSilent('weather clear 6000')
     try {
