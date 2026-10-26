@@ -85,6 +85,7 @@
     { "id": "zpm_a8", "x": [20992, 21055], "z": [0, 63], "y": [98, 112], "tests": ["zpm_outer_chemistry"], "note": "ZPM-A8: recipe lookups only (no structure placed): the methane pyrolyser, vent bioreactor and aerogel works recipes, and the broth beside GTM's raw growth medium mixer recipe" },
     { "id": "zpm_a9", "x": [21248, 21311], "z": [0, 63], "y": [98, 112], "tests": ["zpm_observatory"], "note": "ZPM-A9: recipe lookups only (no structure placed): the observatory, network and telescope recipes (the telescope's are limited to gcyr:overworld_orbit, Y 198-214 at the same X/Z) and the UV energy hatch" },
     { "id": "zpm_b2", "x": [21760, 21823], "tests": ["zpm_saturn_siphon"], "note": "ZPM-B2: the siphon, column and harvester at Z 0-63; Saturn orbit Y 198-214 and     Overworld Y 98-112" },
-        { "id": "zpm_b3", "x": [22016, 22079], "z": [0, 63], "y": [98, 112], "tests": ["zpm_titan_probes"], "note": "ZPM-B3: the entry probe bay and the tholin reformer; Saturn orbit Y 198-214 and Overworld Y 98-112 at the same X/Z" }
+        { "id": "zpm_b3", "x": [22016, 22079], "z": [0, 63], "y": [98, 112], "tests": ["zpm_titan_probes"], "note": "ZPM-B3: the entry probe bay and the tholin reformer; Saturn orbit Y 198-214 and Overworld Y 98-112 at the same X/Z" },
+        { "id": "zpm_b4", "x": [22272, 22335], "tests": ["zpm_saturn_science"], "note": "ZPM-B4: the plume sampler and ring seismometer at Z 0-63; Saturn orbit Y 198-214 and Overworld Y 98-112" }
       ]
 }
