@@ -77,6 +77,26 @@ test('a disabled stack (assets/emi/index/stacks) drops every recipe it is in; an
   assert.deepEqual(gapsOf(res), { 't:catalyst': ['acquisition', 'use'] });
   assert.equal(res.results.find((r) => r.key === 't:catalyst').invisibleMade[0].dropped, true);
   assert.deepEqual(res.legacy, [{ key: 't:old', conversions: ['t:crafting/old_to_new'] }]);
+  assert.deepEqual(res.droppedRoutes, [{ id: 't:mixer/cat', type: 'gtceu:mixer', disabledBy: ['output t:junk'], ours: ['t:catalyst'] }]);
+});
+
+test('an observation with a hidden byproduct is dropped whole: the chart keeps its copy recipe, but the audit still fails on the lost route', () => {
+  const dump = mkDump({
+    recipes: [
+      gt('t:stargazing/chart', 'gtceu:stargazing', { ins: [gi('t:paper', 4), gi('t:lens', 1, 0)], outs: [gi('t:chart'), gi('t:later_era_dust')] }),
+      shaped('t:crafting/chart_copy', ['CP'], { C: { item: 't:chart' }, P: { item: 't:paper' } }, 't:chart', 2),
+      gt('t:drilling/a', 'gtceu:drilling', { ins: [gi('t:sample', 1, 0), gi('t:bit', 1, 100)], fins: [gf('t:hidden_fluid', 10)], outs: [gi('t:ore')] }),
+    ],
+    tagsItem: { 't:hidden_with_recipes': ['t:later_era_dust'] }, tagsFluid: { 't:hidden_with_recipes': ['t:hidden_fluid'] },
+  });
+  const emi = { ...noEmi, disabled: [parseEmiStack('#item:t:hidden_with_recipes'), parseEmiStack('#fluid:t:hidden_with_recipes')] };
+  const res = audit({ dump, registry: reg({ items: ['t:chart', 't:lens', 't:sample'], types: ['gtceu:stargazing', 'gtceu:drilling'] }), emi });
+  assert.deepEqual(gapsOf(res), { 't:lens': ['acquisition', 'use'], 't:sample': ['acquisition', 'use'] }, 'the copy keeps the chart covered');
+  assert.deepEqual(res.droppedRoutes.map((d) => [d.id, d.disabledBy, d.ours]), [
+    ['t:stargazing/chart', ['output t:later_era_dust'], ['t:chart', 't:lens']],
+    ['t:drilling/a', ['input fluid:t:hidden_fluid'], ['t:sample']],
+  ]);
+  assert.ok(res.problems.some((p) => p.startsWith('t:stargazing/chart (gtceu:stargazing): EMI drops it for output t:later_era_dust')), res.problems.join('\n'));
 });
 
 test('the multiblock preview places the first block of each predicate: later options are no use, and a structure-only block needs a page', () => {
@@ -189,10 +209,16 @@ test('EMI shows how every item, block, fluid and machine of the pack is obtained
   const { res } = packRun;
   assert.deepEqual({ gaps: res.gaps.map((g) => g.key), problems: res.problems }, { gaps: [], problems: [] }, renderCoverageText(res));
   assert.ok(res.counts.audited > 250);
-  // the families of the bug report: every chart and every vein sample has a page besides its recipes
-  for (const r of res.results.filter((x) => /_chart|chart_draft|lunar_map|ephemeris|vein_sample_/.test(x.key))) {
-    assert.ok(r.made.some((m) => m.source === 'page') && r.used.some((m) => m.source === 'page'), r.key + ' has no info page');
-  }
+  assert.deepEqual(res.droppedRoutes, []);
+  // the families of the bug report: every chart is made by its observation (a GT recipe EMI shows) and used by the next step or a
+  // rocket part, every vein sample is used by a GT drilling or leaching recipe; no page stands in for them
+  const gtRecipe = (list) => list.some((m) => m.source === 'recipe' && m.category.startsWith('gtceu:'));
+  const charts = res.results.filter((x) => /_chart$|chart_draft$|lunar_map$|lunar_ephemeris$|vlbi_recording$/.test(x.key));
+  const samples = res.results.filter((x) => x.key.startsWith('grindless:vein_sample_'));
+  assert.equal(charts.length, 8);
+  assert.ok(samples.length > 40);
+  for (const r of charts) assert.ok(gtRecipe(r.made) && gtRecipe(r.used) && !r.made.some((m) => m.source === 'page'), r.key);
+  for (const r of samples) assert.ok(gtRecipe(r.used) && !r.used.some((m) => m.source === 'page'), r.key);
 });
 
 test('our info pages live where EMI reads them (the emi namespace) and every page is used', () => {
@@ -324,7 +350,7 @@ test('the fixture\'s checks, against a stand-in EMI: all PASS when every expecte
   assert.equal(sim.report.items.length, exp.items.length);
 
   const sample = exp.items.find((e) => e.id === 'grindless:vein_sample_ilmenite_moon');
-  assert.ok(sample.needUse && sample.used.includes('gtceu:vein_drilling') && sample.used.includes('emi:info'));
+  assert.ok(sample.needUse && sample.used.includes('gtceu:vein_drilling') && !sample.used.includes('emi:info'));
   sim = simulateFixture(exp, { dropUsesOf: sample.id, dropPage: exp.pages[0], extraItem: 'grindless:not_audited',
     dropRoute: { id: 'grindless:mars_chart', cat: 'gtceu:deep_space_tracking' } });
   assert.equal(sim.status.use, 'FAIL');
