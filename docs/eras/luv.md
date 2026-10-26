@@ -745,6 +745,7 @@ Every recipe has a programmed circuit (c*n*) or an input that no other recipe of
   - a 3×3 intake over the fumarole field;
   - a column of four condenser zones, from hot to cold: tungsten steel, stainless steel, aluminium and frostproof casing, up to 14 high;
   - vault casings.
+  - *As built (B6):* 5×15×5. Three fumaroles in a line under the column; a 5×5×2 vault housing that takes every hatch and bus and the parallel hatch; four 3-block zones of robust tungstensteel, clean stainless steel, aluminium frames and frostproof casing. No maintenance hatch (maintenance is off pack-wide). The Ionian rock is basalt (GTM's rock breaker) or black sand, one recipe each.
 - **Controller:** LuV hull + 2 LuV pumps + 4 LuV circuits *(tune)*.
 - **Crossings:**
   - LV: sulfuric acid;
@@ -774,6 +775,7 @@ Every recipe has a programmed circuit (c*n*) or an input that no other recipe of
   - a 5×5×10 heat-exchanger tower of sulfur concrete and vault casing;
   - up to 4 turbine modules (3×3×3, titanium turbine casing);
   - radiator fins to Io's 110 K sky.
+  - *As built (B6):* 11×12×5. Magma blocks only (a fluid block in a pattern would also match flowing lava); the vault room is the tower's foot (1 input bus, 1 input hatch, 1–4 dynamo hatches). Module slot 1 is required; slots 2–4 are a whole module or air, and complete modules are counted in the world at every run start. Bundle wear: 56/10,000 a run per module.
 - **Controller:** LuV hull + 2 LuV pumps + LuV motor + 4 LuV circuits *(tune)*.
 - **Crossings:**
   - EV: the Moon's titanium, in the vault;
