@@ -88,7 +88,7 @@
     input_hatch: { min: 1, max: 6 },
     output_hatch: { min: 1, max: 4 }
   }
-  NP.modes = { 1: 'naquadah', 2: 'enriched_naquadah', 3: 'spent_naquadah' }
+  NP.modes = { 1: 'naquadah', 2: 'enriched_naquadah', 3: 'spent_naquadah', 4: 'enriched_solution' }
   NP.dataKey = DATA_KEY
   NP.keepKey = KEEP_KEY
   NP.noVoiding = NO_VOIDING

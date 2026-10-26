@@ -74,6 +74,7 @@
     { "id": "luv_travel_b1", "x": [18176, 18239], "tests": ["luv_b1"], "note": "the level 4 rocket's scanner pad at X 18180-18182, Z 4-8; on each new surface (belt, Io, Europa, Ganymede) the same X and Z at Y 198-214, read only (one generated chunk, X 18176-18191, Z 0-15)" },
     { "id": "luv_io_orbit_b7", "x": [18432, 18495], "tests": ["luv_io_orbit"], "note": "flux-tube tether or sulfur-iodine plant; Io orbit (tables/stations.json second) and Io (G.places.surface('io')) the same X and Z at Y 198-214" },
     { "id": "chests_and_furnaces", "x": [18688, 18751], "tests": ["chest_furnace"], "note": "client; uses X 18688-18703, Z 0-15, Y 98-112" },
-    { "id": "zpm_s0", "x": [18944, 19007], "tests": ["zpm_s0"], "note": "ZPM-S0 disposable spikes: Mk1/Mk2 fusion at Z 0-40, LuV wireless tower at X 18960" }
-  ]
+    { "id": "zpm_s0", "x": [18944, 19007], "tests": ["zpm_s0"], "note": "ZPM-S0 disposable spikes: Mk1/Mk2 fusion at Z 0-40,     LuV wireless tower at X 18960" },
+        { "id": "zpm_naquadria", "x": [19456, 19519], "tests": ["zpm_naquadria"], "note": "ZPM-A2: recipe lookups of the naquadria refinery, the fuel works, the plant's circuit-4 mode and the re-registered large naquadah reactor (no structure placed)" }
+      ]
 }

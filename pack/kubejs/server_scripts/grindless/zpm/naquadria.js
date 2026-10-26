@@ -1,0 +1,230 @@
+// -----------------------------------------------------------------------------------------------
+// Recipes of ZPM's naquadria refinery and naquadah fuel works (machines and recipe types: startup_scripts/grindless/zpm/naquadria.js;
+// docs/eras/zpm.md, machines 1 and 2; package ZPM-A2), generated at every server load from data/grindless/tables/naquadria.json, plus
+// the recipes of their controllers and of the naquadria containment casing.
+//
+//   gtceu:naquadria_refining / gtceu:naquadah_fuel   one recipe per table entry, id grindless:<type>/<name>; the programmed circuit
+//                          picks the recipe, every recipe carries the data key of its type = <name> (its EMI line). "charge" entries
+//                          are GTM's non-consumed fluid inputs (needed to start, never drained). A "chance" on an input is the wear of
+//                          a catalyst stack (the fuel works' 5 % cerium and neodymium make-up); on an output, a chanced output.
+//   Lookup safety: GTM's lookup keeps one recipe per set of ingredients, and a recipe whose ingredients are a subset of another's can
+//   hide it. The recipes of each type are checked against each other at load (circuit and charge count as ingredients); a clash is an error.
+//   crafting               the controllers: ZPM hull + 2 ZPM pumps + ZPM sensor + 4 ZPM circuits (refinery) and ZPM hull + 2 ZPM pumps
+//                          + ZPM motor + 4 ZPM circuits (works), shaped crafting recipes grindless:crafting/<machine>.
+//   assembler              grindless:assembler/naquadria_containment_casing: the casing's route.
+//
+// Destinations: enriched naquadah solution -> naquadah plant mode 3; gallium sulfide -> the MV gallium line; sulfuric acid -> the
+// refinery's charge; naquadah -> plant mode 2; xenon -> GTM's xenon uses; europium -> the motor line. No byproduct is voided.
+//
+// Published for the smoke test: global.grindless.naquadria.recipes [{ type, name, recipeId, circuit, ... }], .skipped, .clashes,
+// .casingRecipe, .controllerRecipes.
+// Rhino: var + function inside every callback that runs more than once (this Rhino throws "redeclaration of var").
+(function () {
+  var LOG = '[grindless/zpm] '
+  var G = global.grindless || (global.grindless = {})
+  var NQ = G.naquadria || (G.naquadria = {})
+  var TABLE = NQ.table || 'kubejs/data/grindless/tables/naquadria.json'
+
+  function list(x) {
+    return Array.isArray(x) ? x : []
+  }
+
+  // ---------------------------------------------------------------- the table
+
+  function loadTable() {
+    var t = G.readJsonTable(TABLE)
+    var problems = []
+    var out = []
+    var chanceOf = function (x) {
+      var ch = x.chance === undefined ? 10000 : Number(x.chance)
+      if (!(ch >= 1 && ch <= 10000) || ch % 1 !== 0) problems.push('chance ' + x.chance)
+      return ch
+    }
+    Object.keys(t.types || {}).forEach(function (type) {
+      var names = {}
+      var circuits = {}
+      list(t.types[type].recipes).forEach(function (r) {
+        var n = String(r.name || '')
+        var eut = Number(r.eut)
+        var duration = Number(r.duration)
+        var circuit = Number(r.circuit)
+        if (!/^[a-z0-9_]+$/.test(n) || names[n] || circuits[circuit] || !(circuit >= 1 && circuit <= 32) || !(eut > 0) || eut % 1 !== 0 || !(duration > 0) || duration % 1 !== 0) {
+          problems.push(type + '/' + n + ': name, circuit ' + r.circuit + ', eut ' + r.eut + ', duration ' + r.duration)
+          return
+        }
+        var bad = false
+        var stack = function (x) {
+          if (String(x.id || '').indexOf(':') < 0 || !(Number(x.count) >= 1)) bad = true
+          return { id: String(x.id), count: Number(x.count), chance: chanceOf(x) }
+        }
+        var fluid = function (f) {
+          if (String(f.id || '').indexOf(':') < 0 || !(Number(f.amount) >= 1)) bad = true
+          return { id: String(f.id), amount: Number(f.amount) }
+        }
+        var rec = { type: type, name: n, circuit: circuit, eut: eut, duration: duration, dataKey: String(t.types[type].dataKey),
+          itemsIn: list(r.itemsIn).map(stack), fluidsIn: list(r.fluidsIn).map(fluid), charge: list(r.charge).map(fluid),
+          itemsOut: list(r.itemsOut).map(stack), fluidsOut: list(r.fluidsOut).map(fluid) }
+        if (bad || (rec.itemsOut.length === 0 && rec.fluidsOut.length === 0) || (rec.itemsIn.length === 0 && rec.fluidsIn.length === 0)) {
+          problems.push(type + '/' + n + ': contents')
+          return
+        }
+        names[n] = true
+        circuits[circuit] = true
+        out.push(rec)
+      })
+    })
+    var casing = t.casing || {}
+    var cas = { id: String(casing.id), recipe: String(casing.recipe), eut: Number(casing.eut), duration: Number(casing.duration), count: Number(casing.count),
+      itemsIn: list(casing.itemsIn).map(function (x) { return { id: String(x.id), count: Number(x.count) } }) }
+    if (cas.id.indexOf(':') < 0 || !(cas.eut > 0) || !(cas.duration > 0) || !(cas.count >= 1) || cas.itemsIn.length === 0) problems.push('casing ' + JSON.stringify(t.casing))
+    if (out.length === 0) problems.push('no recipe')
+    if (problems.length > 0) console.error(LOG + 'naquadria: ' + TABLE + ': ' + problems.join('; '))
+    return { recipes: out, casing: cas }
+  }
+
+  // ---------------------------------------------------------------- building recipes
+
+  function missingIds(rec) {
+    var missing = []
+    rec.itemsIn.concat(rec.itemsOut).forEach(function (x) { if (!Item.exists(x.id) && missing.indexOf(x.id) < 0) missing.push(x.id) })
+    rec.fluidsIn.concat(rec.charge, rec.fluidsOut).forEach(function (x) { if (!Fluid.exists(x.id) && missing.indexOf(x.id) < 0) missing.push(x.id) })
+    return missing
+  }
+
+  function sizeProblem(rec) {
+    var m = NQ.machines
+    var def = null
+    Object.keys(m).forEach(function (k) { if (m[k].type === rec.type) def = m[k] })
+    if (def === null) return 'no machine for type ' + rec.type
+    var io = def.maxIO
+    if (rec.itemsIn.length + 1 > io.itemsIn) return (rec.itemsIn.length + 1) + ' item inputs (the type holds ' + io.itemsIn + ')'
+    if (rec.fluidsIn.length + rec.charge.length > io.fluidsIn) return 'too many fluid inputs (the type holds ' + io.fluidsIn + ')'
+    if (rec.itemsOut.length > io.itemsOut) return rec.itemsOut.length + ' item outputs (the type holds ' + io.itemsOut + ')'
+    if (rec.fluidsOut.length > io.fluidsOut) return rec.fluidsOut.length + ' fluid outputs (the type holds ' + io.fluidsOut + ')'
+    return null
+  }
+
+  function add(event, rec) {
+    var recipe = event.recipes.gtceu[rec.type](rec.id)
+    rec.itemsIn.forEach(function (x) {
+      if (x.chance < 10000) recipe.chancedInput(x.count + 'x ' + x.id, x.chance, 0)
+      else recipe.itemInputs(x.count + 'x ' + x.id)
+    })
+    recipe.circuit(rec.circuit)
+    rec.fluidsIn.forEach(function (x) { recipe.inputFluids(Fluid.of(x.id, x.amount)) })
+    rec.charge.forEach(function (x) { recipe.notConsumableFluid(Fluid.of(x.id, x.amount)) })
+    rec.itemsOut.forEach(function (x) {
+      if (x.chance < 10000) recipe.chancedOutput(x.count + 'x ' + x.id, x.chance, 0)
+      else recipe.itemOutputs(x.count + 'x ' + x.id)
+    })
+    rec.fluidsOut.forEach(function (x) { recipe.outputFluids(Fluid.of(x.id, x.amount)) })
+    recipe.addDataString(rec.dataKey, rec.name)
+      .EUt(rec.eut)
+      .duration(rec.duration)
+  }
+
+  function keysOf(rec) {
+    var keys = {}
+    rec.itemsIn.forEach(function (x) { keys['i:' + x.id] = true })
+    rec.fluidsIn.concat(rec.charge).forEach(function (x) { keys['f:' + x.id] = true })
+    keys['circuit:' + rec.circuit] = true
+    return keys
+  }
+
+  function clashesOf(recs) {
+    var out = []
+    var keys = recs.map(keysOf)
+    function subset(a, b) {
+      return Object.keys(a).every(function (k) { return b[k] === true })
+    }
+    for (var i = 0; i < recs.length; i++) {
+      for (var j = i + 1; j < recs.length; j++) {
+        if (recs[i].type !== recs[j].type) continue
+        if (subset(keys[i], keys[j]) || subset(keys[j], keys[i])) out.push(recs[i].type + '/' + recs[i].name + ' / ' + recs[j].name)
+      }
+    }
+    return out
+  }
+
+  function generate(event) {
+    NQ.recipes = []
+    NQ.skipped = []
+    NQ.clashes = []
+    var table = loadTable()
+    NQ.casing = table.casing
+
+    function skip(name, reason) {
+      NQ.skipped.push({ name: name, reason: reason })
+      console.error(LOG + 'naquadria skipped ' + name + ': ' + reason)
+    }
+
+    table.recipes.forEach(function (rec) {
+      rec.id = 'grindless:' + rec.name
+      rec.recipeId = 'grindless:' + rec.type + '/' + rec.name
+      var missing = missingIds(rec)
+      if (missing.length > 0) return skip(rec.type + '/' + rec.name, 'unknown id(s): ' + missing.join(', '))
+      var tooBig = sizeProblem(rec)
+      if (tooBig !== null) return skip(rec.type + '/' + rec.name, tooBig)
+      try {
+        add(event, rec)
+      } catch (e) {
+        return skip(rec.type + '/' + rec.name, 'the builder failed: ' + e)
+      }
+      NQ.recipes.push(rec)
+      console.info(LOG + rec.type + ' ' + rec.name + ' (circuit ' + rec.circuit + '): ' + rec.duration + ' t x ' + rec.eut + ' EU/t')
+    })
+
+    NQ.clashes = clashesOf(NQ.recipes)
+    if (NQ.clashes.length > 0) console.error(LOG + 'naquadria: recipes whose ingredients are a subset of another\'s (GTM\'s lookup would hide one): ' + NQ.clashes.join('; '))
+    console.info(LOG + 'naquadria: ' + NQ.recipes.length + ' recipes; skipped ' + NQ.skipped.length)
+  }
+
+  // ---------------------------------------------------------------- the casing and the controllers
+
+  function addCasing(event) {
+    var c = NQ.casing
+    var missing = c.itemsIn.map(function (x) { return x.id }).concat([c.id]).filter(function (id) { return !Item.exists(id) })
+    if (missing.length > 0) {
+      console.error(LOG + 'naquadria containment casing recipe skipped, unknown item(s): ' + missing.join(', '))
+      return
+    }
+    var r = event.recipes.gtceu.assembler(c.id)
+    c.itemsIn.forEach(function (x) { r.itemInputs(x.count + 'x ' + x.id) })
+    r.itemOutputs(c.count + 'x ' + c.id).EUt(c.eut).duration(c.duration)
+    NQ.casingRecipe = 'grindless:assembler/' + c.id.split(':')[1]
+  }
+
+  function addControllers(event) {
+    var HULL = 'gtceu:zpm_machine_hull'
+    var PUMP = 'gtceu:zpm_electric_pump'
+    var defs = [
+      { machine: NQ.machines.refinery.machine, extra: 'gtceu:zpm_sensor', pattern: ['CSC', 'PHP', 'C C'], key: 'S', name: 'naquadria_refinery' },
+      { machine: NQ.machines.fuelWorks.machine, extra: 'gtceu:zpm_electric_motor', pattern: ['CMC', 'PHP', 'C C'], key: 'M', name: 'naquadah_fuel_works' }
+    ]
+    NQ.controllerRecipes = []
+    defs.forEach(function (d) {
+      var parts = [HULL, PUMP, d.extra, d.machine]
+      var missing = parts.filter(function (id) { return !Item.exists(id) })
+      if (missing.length > 0) {
+        console.error(LOG + d.name + ' controller recipe skipped, unknown item(s): ' + missing.join(', '))
+        return
+      }
+      var ingredients = { C: '#gtceu:circuits/zpm', P: PUMP, H: HULL }
+      ingredients[d.key] = d.extra
+      event.recipes.gtceu.shaped(d.machine, d.pattern, ingredients).id('grindless:crafting/' + d.name)
+      NQ.controllerRecipes.push('grindless:crafting/' + d.name)
+    })
+  }
+
+  // an uncaught error here would stop KubeJS from running the recipe handlers of the scripts that load after this one
+  ServerEvents.recipes(function (event) {
+    var steps = [['recipes', generate], ['casing', addCasing], ['controllers', addControllers]]
+    steps.forEach(function (s) {
+      try {
+        s[1](event)
+      } catch (e) {
+        console.error(LOG + 'naquadria ' + s[0] + ' failed: ' + e)
+      }
+    })
+  })
+})()

@@ -1,0 +1,82 @@
+{
+  "_comment": "ZPM-A2 (docs/eras/zpm.md machines 1 and 2): the recipes of the naquadria refinery (type naquadria_refining) and the naquadah fuel works (type naquadah_fuel), read by server_scripts/grindless/zpm/naquadria.js, plus the naquadria containment casing's route. Direct recipes on GTM's own ids (the composed stages of the plant are not used here: S0-5 pinned these ids in GTM 7.5.3). Item and fluid ids that do not exist are skipped with an error at load. chance is out of 10000; a chanced input is the wear of a catalyst stack. Destinations: enriched naquadah solution -> naquadah plant mode 3 (circuit 4); gallium sulfide -> the MV gallium line (roast, then electrolysis); sulfuric acid -> back into the refinery's charge; naquadah -> plant mode 2; xenon -> GTM's xenon uses; europium -> the motor line. Nothing is voided.",
+  "types": {
+    "naquadria_refining": {
+      "dataKey": "grindless_naquadria_refining",
+      "recipes": [
+        {
+          "name": "naquadria",
+          "circuit": 1,
+          "eut": 122880,
+          "duration": 400,
+          "fluidsIn": [
+            { "id": "gtceu:impure_naquadria_solution", "amount": 1000 },
+            { "id": "gtceu:hydrogen", "amount": 2000 }
+          ],
+          "charge": [{ "id": "gtceu:sulfuric_acid", "amount": 1000 }],
+          "itemsOut": [
+            { "id": "gtceu:naquadria_dust", "count": 6 },
+            { "id": "gtceu:gallium_sulfide_dust", "count": 2 }
+          ],
+          "fluidsOut": [{ "id": "gtceu:enriched_naquadah_solution", "amount": 500 }]
+        },
+        {
+          "name": "naquadria_waste",
+          "circuit": 2,
+          "eut": 122880,
+          "duration": 100,
+          "fluidsIn": [{ "id": "gtceu:naquadria_waste", "amount": 2000 }],
+          "itemsOut": [
+            { "id": "gtceu:naquadria_dust", "count": 1 },
+            { "id": "gtceu:gallium_sulfide_dust", "count": 1, "chance": 5000 }
+          ],
+          "fluidsOut": [
+            { "id": "gtceu:sulfuric_acid", "amount": 500 },
+            { "id": "gtceu:enriched_naquadah_solution", "amount": 100 }
+          ]
+        }
+      ]
+    },
+    "naquadah_fuel": {
+      "dataKey": "grindless_naquadah_fuel",
+      "recipes": [
+        {
+          "name": "fuel_mix",
+          "circuit": 1,
+          "eut": 7680,
+          "duration": 300,
+          "itemsIn": [
+            { "id": "gtceu:naquadria_dust", "count": 42 },
+            { "id": "gtceu:cerium_dust", "count": 16, "chance": 625 },
+            { "id": "gtceu:neodymium_dust", "count": 16, "chance": 625 }
+          ],
+          "fluidsOut": [{ "id": "gtceu:naquadah_based_liquid_fuel", "amount": 1000 }]
+        },
+        {
+          "name": "fuel_depleted",
+          "circuit": 2,
+          "eut": 30720,
+          "duration": 300,
+          "fluidsIn": [{ "id": "gtceu:naquadah_based_liquid_fuel_depleted", "amount": 1000 }],
+          "itemsOut": [
+            { "id": "gtceu:naquadah_dust", "count": 16 },
+            { "id": "gtceu:europium_dust", "count": 1, "chance": 2500 }
+          ],
+          "fluidsOut": [{ "id": "gtceu:xenon", "amount": 144 }]
+        }
+      ]
+    }
+  },
+  "casing": {
+    "id": "grindless:naquadria_containment_casing",
+    "recipe": "grindless:assembler/naquadria_containment_casing",
+    "eut": 122880,
+    "duration": 100,
+    "itemsIn": [
+      { "id": "gtceu:naquadah_alloy_frame", "count": 1 },
+      { "id": "gtceu:tungsten_steel_plate", "count": 4 },
+      { "id": "gtceu:naquadria_dust", "count": 2 }
+    ],
+    "count": 2
+  }
+}
