@@ -1,0 +1,5 @@
+{
+  "type": "emi:info",
+  "stacks": ["item:grindless:cryostat_casing"],
+  "text": ["emi.grindless.info.cryostat_casing.0"]
+}
