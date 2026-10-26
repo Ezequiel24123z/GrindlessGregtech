@@ -12,7 +12,8 @@ Huge GregTech pack for Minecraft 1.20.1 (Forge) on top of GregTech Modern 7.5.3.
 | HV | Playable since `v0.4.0`: refinery (distills, hydrotreats and cracks in one pass), reformer, HV vein drill with the End veins and HV greenhouse. |
 | EV | Playable since `v0.6.0`: the automatic Moon base, Mars, platinum processing and the gate to IV. |
 | IV | Playable since `v0.7.0`: fission and its fuel cycle, Venus and Mercury, naquadah, iridium and osmium, and the assembly line. |
-| What's next | LuV: the outer system and orbital industry, continuing the journey to the black hole at the center of the galaxy. |
+| LuV | Playable since `v0.8.0`: space stations, the asteroid belt, Io, Europa and Ganymede, trinium, fusion, living circuits and the wireless network's LuV tier. |
+| What's next | ZPM: the space elevator and the road past Saturn, continuing the journey to the black hole at the center of the galaxy. |
 
 ## How to play (Prism Launcher)
 
