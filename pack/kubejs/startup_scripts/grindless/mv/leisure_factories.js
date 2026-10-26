@@ -28,7 +28,8 @@
 //   alwaysTryModifyRecipe, GTM re-applies it when each run ends (RecipeLogic#onRecipeFinish), so the run in progress finishes and the
 //   next one is searched in the new mode.
 // - Tier: the energy hatches. One MV hatch = MV; two hatches of a tier = one tier up (GTM's amperage rule). The cap of 4 keeps them
-//   below our progression multiblocks (rule 2): no speed or energy bonus, no perfect overclock.
+//   below our progression multiblocks (rule 2): no speed or energy bonus, no perfect overclock. Exception (LuV-A5, spike S0-4): GTM's
+//   NPU recipe needs one ZPM hatch here; two LuV hatches do not run it (HATCH_VOLTAGE_LOCKED below).
 // - Several input buses in distinct mode keep different circuits, molds or lenses apart (GTM's own distinct-bus logic).
 //
 // Structure: one hall for the four (5 wide x 3 high x 3 deep), aluminium frost-proof casing like the rest of the MV family, the
@@ -142,6 +143,36 @@
     return String(recipe.getType().registryName) !== String(machine.getRecipeType().registryName)
   }
 
+  // GTM recipes that run here only when ONE energy hatch reaches their voltage: two hatches of a lower tier (GTM's one-tier-up rule,
+  // WorkableElectricMultiblockMachine#getMaxVoltage) do not count for them. GTM's NPU (80,000 EU/t) stays a ZPM recipe: from LuV the
+  // biofoundry makes its stem cells and sterile medium, and two LuV hatches would otherwise run it here, while the LuV NPU comes only
+  // from the organoid lab (docs/eras/luv.md, "Only from there, and the cuts"; spike S0-4). Recipe id -> the voltage one hatch needs.
+  const HATCH_VOLTAGE_LOCKED = { 'gtceu:circuit_assembler/neuro_processor': 131072 }
+  UF.hatchVoltageLocked = HATCH_VOLTAGE_LOCKED
+
+  function recipeIdOf(recipe) {
+    try {
+      return String(recipe.getId())
+    } catch (e) {
+      return String(recipe.id)
+    }
+  }
+
+  // true = skip: a locked recipe on hatches that each fall short of its voltage (refused too when the hatches cannot be read)
+  function belowHatchVoltage(machine, recipe) {
+    var need = HATCH_VOLTAGE_LOCKED[recipeIdOf(recipe)]
+    if (need === undefined) return false
+    try {
+      return Number(machine.getEnergyContainer().getHighestInputVoltage()) < need
+    } catch (e) {
+      return true
+    }
+  }
+
+  function assemblyVeto(machine, recipe) {
+    return otherMode(machine, recipe) || belowHatchVoltage(machine, recipe)
+  }
+
   GTCEuStartupEvents.registry('gtceu:machine', function (event) {
     var bores = G.lv.bores
 
@@ -154,7 +185,7 @@
         .rotationState(RotationState.NON_Y_AXIS)
       // every recipeType() call appends one mode; the first one is the mode a new controller starts in
       f.types.forEach(function (t) { b = b.recipeType(t) })
-      b.recipeModifier(bores(otherMode, MAX_PARALLELS), true)
+      b.recipeModifier(bores(f.id === 'universal_assembly_factory' ? assemblyVeto : otherMode, MAX_PARALLELS), true)
         .appearanceBlock(GTBlocks.CASING_ALUMINIUM_FROSTPROOF)
         .pattern(function (def) { return Pat.build(def, spec) })
         ["tooltips(net.minecraft.network.chat.Component[])"]([
