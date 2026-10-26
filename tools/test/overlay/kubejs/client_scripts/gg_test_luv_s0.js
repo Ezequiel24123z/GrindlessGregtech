@@ -17,22 +17,25 @@
     console.info('GGTEST|luv_s0_menu|' + name + '|' + status + '|' + String(detail).replace(/\|/g, '/'))
   }
   global.ggLuvS0Navigate = function (mc, screen, want, map) {
-    if (nav.screen !== screen) nav = { screen: screen, step: 0, wait: 0 }
+    if (nav.screen !== screen) nav = { screen: screen, step: 0, wait: 0, since: Date.now() }
     if (++nav.wait % 10 !== 0) return
     var list = screen.children()
     var buttons = []
     for (var i = 0; i < list.size(); i++) {
       var button = list.get(i)
-      if (button.visible && typeof button.onPress === 'function') {
+      if (String(button.visible) === 'true' && typeof button.onPress === 'function') {
         buttons.push({ button: button, text: String(button.getMessage().getString()) })
       }
     }
-    log('visible_' + nav.step, 'NOTE', buttons.map(function (b) { return b.text + '(active=' + b.button.active + ')' }).join('; '))
+    log('visible_' + nav.step, 'NOTE', buttons.map(function (b) {
+      return b.text + '(active=' + b.button.active + ',x=' + b.button.getX() + ',y=' + b.button.getY() + ')'
+    }).join('; '))
     var earth = want === 'gcyr:earth'
     var parent = String(Text.translate(earth ? 'level.overworld' : 'level.grindless.s0_jupiter').getString())
     var pick = null
     if (nav.step === 0) {
-      pick = buttons.filter(function (b) { return /solar/i.test(b.text) })[0]
+      var solar = String(Text.translate('gcyr.solar_system').getString())
+      pick = buttons.filter(function (b) { return b.text === solar })[0]
     } else if (nav.step === 1) {
       pick = buttons.filter(function (b) {
         return b.text === parent
@@ -40,20 +43,38 @@
     } else {
       var target = earth || want === 'grindless:s0_jupiter' ? parent : String(Text.translate('level.grindless.s0_moon').getString())
       pick = buttons.filter(function (b) { return b.text === target })[0]
+      var station = String(map.get('stationSelect')) === 'true'
+      if (pick && station) {
+        var surface = pick.button
+        var stationText = String(Java.loadClass('argent_matter.gcyr.client.gui.screen.PlanetSelectionScreen').SPACE_STATION_TEXT.getString())
+        var matches = buttons.filter(function (b) {
+          return b.text === stationText && b.button.getY() === surface.getY() && b.button.getX() > surface.getX()
+        })
+        pick = matches.length === 1 ? matches[0] : null
+      }
       if (pick) {
-        log('hierarchy_' + target.replace(/ /g, '_'), pick.button.active ? 'PASS' : 'FAIL',
-          'target is an actual visible teleport widget after solar-system and parent navigation')
+        if (!nav.captured) {
+          nav.captured = true
+          map.put('shot', 's0_' + map.get('luvProbe') + '_menu_' + target.replace(/ /g, '_') + (station ? '_station' : ''))
+          return
+        }
+        log('hierarchy_' + target.replace(/ /g, '_'), String(pick.button.active) === 'true' ? 'PASS' : 'FAIL',
+          'target is an actual visible ' + (station ? 'station' : 'surface') + ' widget after solar-system and parent navigation')
         map.put('selected', want)
         map.put('select', '')
       }
     }
-    if (pick && pick.button.active) {
+    if (pick && String(pick.button.active) === 'true') {
       pick.button.onPress()
       nav.step++
-    } else if (nav.wait > 160) {
-      log('navigation', 'FAIL', 'no active widget for step ' + nav.step + ', target ' + want)
+    } else if (nav.wait > 160 || Date.now() - nav.since > 8000) {
+      var detail = 'no active widget for step ' + nav.step + ', target ' + want
+      log('navigation', 'FAIL', detail)
+      map.put('navigationError', detail)
       map.put('select', '')
-      screen.onClose()
+      // GCYR deliberately refuses onClose in survival. Unpause the failed test
+      // so its server owner can record the failure and release the client hold.
+      mc.setCurrentScreen(null)
     }
   }
   ClientEvents.tick(function () {
@@ -70,7 +91,7 @@
     }
     if (String(map.get('s0Fall')) === 'start') {
       map.put('s0Fall', '')
-      p.setDeltaMovement(0, 0, 0)
+      p.setDeltaMovement(Java.loadClass('net.minecraft.world.phys.Vec3').ZERO)
       fall = { y: p.getY(), positions: [Number(p.getY())] }
       return
     }

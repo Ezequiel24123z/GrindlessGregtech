@@ -46,8 +46,12 @@
   var LUV = JsonIO.read('kubejs/config/gg_test_luv_s0_planet.json')
   var IS_LUV = LUV !== null && String(LUV.get('enabled')) === 'true'
   var LEVEL4 = IS_LUV && String(LUV.get('level4')) === 'true'
+  var INTEGRATED = IS_LUV && String(LUV.get('integrated')) === 'true'
+  var STATIONS_ONLY = INTEGRATED && String(LUV.get('stationsOnly')) === 'true'
+  var RESUME_AFTER_PARENT = IS_LUV && String(LUV.get('resumeAfterParent')) === 'true'
+  var MEMORY_ISOLATION = IS_LUV && String(LUV.get('memoryIsolation')) === 'true'
   var TAG = 'GGTEST|'
-  var SCOPE = IS_LUV ? (LEVEL4 ? 'luv_s0_rocket' : 'luv_s0_planet') : 'gcyr_flight'
+  var SCOPE = STATIONS_ONLY ? 'luv_s0_station_setup' : (IS_LUV ? (LEVEL4 ? 'luv_s0_rocket' : 'luv_s0_planet') : 'gcyr_flight')
   var BAND = { x0: IS_LUV ? 13568 : 2560, x1: IS_LUV ? 13631 : 2623, y0: 98, y1: 112, z0: 0, z1: 15 }
   var FLOOR_Y = 98
   var PAD_Y = 99
@@ -106,11 +110,19 @@
   }
 
   function check(name, ok, detail) {
+    if (S !== null) {
+      if (!S.counts[SCOPE]) S.counts[SCOPE] = { pass: 0, fail: 0 }
+      S.counts[SCOPE][ok ? 'pass' : 'fail']++
+    }
     emit(name, ok ? 'PASS' : 'FAIL', detail)
   }
 
   function note(name, detail) {
     emit(name, 'NOTE', detail)
+  }
+
+  function shot(name) {
+    shared().put('shot', IS_LUV ? SCOPE + '_' + name : name)
   }
 
   // ---------------------------------------------------------------- Java and shared state
@@ -135,6 +147,8 @@
       GTRegistries: Java.loadClass('com.gregtechceu.gtceu.api.registry.GTRegistries'),
       ArchPlatform: Java.loadClass('dev.architectury.platform.Platform'),
       Rocket: Java.loadClass('argent_matter.gcyr.common.entity.RocketEntity'),
+      FuelTank: Java.loadClass('argent_matter.gcyr.common.block.FuelTankBlock'),
+      Motor: Java.loadClass('argent_matter.gcyr.common.block.RocketMotorBlock'),
       PlanetData: Java.loadClass('argent_matter.gcyr.data.loader.PlanetData'),
       GCYRConfig: Java.loadClass('argent_matter.gcyr.config.GCYRConfig'),
       RecipeTypes: Java.loadClass('argent_matter.gcyr.common.data.GCYRRecipeTypes')
@@ -460,16 +474,18 @@
     { key: 'asym_west', facing: 'west', x: 2588, z: 9, l: 1, r: 2, b: 3, h: 2, rocket: smallRocket },
     { key: 'flight', facing: 'north', x: 2600, z: 9, l: 1, r: 1, b: 3, h: 2, rocket: flightRocket, flight: true }
   ]
-  if (IS_LUV) {
-    SPECS = [
+  function luvSpecs(level4) {
+    var specs = [
       { key: 'flight', facing: 'north', x: 13608, z: 9, l: 1, r: 1, b: 3, h: 2, rocket: flightRocket, flight: true }
     ]
-    if (LEVEL4) {
-      SPECS.push({ key: 'grow', facing: 'north', x: 13570, z: 1, l: 1, r: 1, b: 3, h: 2, rocket: smallRocket, grow: true })
-      SPECS.push({ key: 'asym_east', facing: 'east', x: 13582, z: 1, l: 1, r: 2, b: 3, h: 2, rocket: smallRocket })
-      SPECS.push({ key: 'mixed', facing: 'north', x: 13594, z: 1, l: 1, r: 1, b: 3, h: 2, rocket: flightRocket, mixed: true, cycles: 1 })
+    if (level4 && !STATIONS_ONLY) {
+      specs.push({ key: 'grow', facing: 'north', x: 13570, z: 1, l: 1, r: 1, b: 3, h: 2, rocket: smallRocket, grow: true })
+      specs.push({ key: 'asym_east', facing: 'east', x: 13582, z: 1, l: 1, r: 2, b: 3, h: 2, rocket: smallRocket })
+      specs.push({ key: 'mixed', facing: 'north', x: 13594, z: 1, l: 1, r: 1, b: 3, h: 2, rocket: flightRocket, mixed: true, cycles: 1 })
     }
+    return specs
   }
+  if (IS_LUV) SPECS = luvSpecs(LEVEL4)
 
   // the controller faces F; launch pad rows go to the back (b = 1..sp.b, one block lower), columns run from sp.l blocks to the
   // controller's left (F counter-clockwise, as GCYR measures lDist) to sp.r blocks to its right, the stainless steel frame tower
@@ -600,9 +616,15 @@
   }
 
   function measuredPartsTier(r) {
-    var field = r.getClass().getDeclaredField('partsTier')
-    field.setAccessible(true)
-    return field.getInt(r)
+    var motor = 999
+    var tank = 999
+    asArray(r.getBlocks()).forEach(function (pws) {
+      var block = pws.state().getBlock()
+      if (block instanceof lazy().Motor) motor = Math.min(motor, Number(block.getTier()))
+      if (block instanceof lazy().FuelTank) tank = Math.min(tank, Number(block.getTier()))
+    })
+    if (motor === 999 || tank === 999) throw new Error('scanned rocket has no native motor or tank')
+    return Math.floor((motor + tank) / 2)
   }
 
   // ---------------------------------------------------------------- scanner steps (#122)
@@ -711,7 +733,8 @@
         check(name, ok, detail)
         if (IS_LUV && ok && m.spec.mixed) {
           check('mixed_tank_level', Number(measuredPartsTier(m.rocket)) === 3,
-            'scanned elite motors + one tier5 tank + one elite tank: measured private partsTier=' + measuredPartsTier(m.rocket) + ', capacity=' + m.rocket.getFuelCapacity())
+            'native scanned components: floor((weakest motor + weakest tank)/2)=' + measuredPartsTier(m.rocket) +
+            ', capacity=' + m.rocket.getFuelCapacity() + '; actual launch refusal is checked separately')
         }
       }
       return 2
@@ -832,6 +855,10 @@
     var steps = [stepWaitFormed]
     if (sp.flight) {
       steps.push(stepFlightReady)
+      return steps
+    }
+    if (IS_LUV && sp.mixed) {
+      steps.push(stepBuild('build_1'), stepVerifyBuild('build_1', 'check'))
       return steps
     }
     if (sp.grow) {
@@ -1022,6 +1049,8 @@
   }
 
   function abortFlight(reason) {
+    FL.failed = true
+    FL.failedFlight = { ok: false, leg: FL.leg, detail: String(reason) }
     note('flight_aborted', reason)
     shared().put('brake', false)
     shared().put('watch', false)
@@ -1181,8 +1210,15 @@
       FL.rocketUuid = uuidOf(FL.rocket)
       if (IS_LUV) {
         check('scanned_level', Number(measuredPartsTier(FL.rocket)) === (LEVEL4 ? 4 : 3),
-          'native scanner measured private partsTier=' + measuredPartsTier(FL.rocket) + ', capacity=' + FL.rocket.getFuelCapacity())
+          'native scanned component tier=' + measuredPartsTier(FL.rocket) + ', capacity=' + FL.rocket.getFuelCapacity() +
+          '; the destination launch gate supplies behavioral tier proof')
+        if (LEVEL4) check('tank_capacity', Number(FL.rocket.getFuelCapacity()) === 32000,
+          'two registered tier5 tanks; native rocket capacity=' + FL.rocket.getFuelCapacity() + ' mB')
         shared().put('luvProbe', LEVEL4 ? 'rocket' : 'planet')
+      }
+      if (STATIONS_ONLY) {
+        go('done')
+        return
       }
       probe('rocket', FL.rocket)
       shared().put('rocketUuid', FL.rocketUuid)
@@ -1191,7 +1227,7 @@
       FL.target = IDS.moonPlanet
       FL.targetDim = IDS.moonDim
       FL.leg = 'moon'
-      if (IS_LUV) {
+      if (IS_LUV && !RESUME_AFTER_PARENT) {
         FL.target = 'grindless:s0_jupiter'
         FL.targetDim = 'grindless:s0_jupiter'
         FL.leg = 'parent_lock'
@@ -1204,6 +1240,7 @@
         if (age < 10) return
         shared().put('selected', '')
         shared().put('select', FL.target)
+        shared().put('stationSelect', 'false')
         var used = ''
         FL.subT = S.t
         try {
@@ -1220,7 +1257,7 @@
       if (planet === FL.targetDim) {
         check('flight_planet_screen_' + FL.leg, true, 'the client clicked ' + FL.target + ' on GCYR\'s planet screen; the server wrote gcyr:current_planet=' + planet +
           ' into the chip (' + (S.t - FL.subT) + ' ticks)')
-        go('load')
+        go(IS_LUV && LEVEL4 && FL.leg === 'moon' && !FL.mixedChecked ? 'mixed_gate' : 'load')
         return
       }
       if (S.t - FL.subT > 300) {
@@ -1236,13 +1273,57 @@
       return
     }
 
+    if (FL.phase === 'mixed_gate') {
+      var mixed = scannerByKey('mixed')
+      if (mixed === null || mixed.rocket === null || mixed.rocket.isRemoved()) throw new Error('mixed rocket was not retained by its scanner')
+      if (FL.sub === 0) {
+        FL.mixedChip = p.getMainHandItem().copy()
+        loadRocket(mixed.rocket, FL.mixedChip, Number(mixed.rocket.getFuelCapacity()))
+        p.stopRiding()
+        p.setMainHandItem(Item.of('minecraft:air'))
+        p.teleportTo(IDS.earthDim, xOf(mixed.rocket), yOf(mixed.rocket), zOf(mixed.rocket), 0, 0)
+        p.interactOn(mixed.rocket, L.Hand.MAIN_HAND)
+        FL.sub = 1
+        return
+      }
+      if (age < 20) return
+      var mixedDestination = L.PlanetData.getPlanet(rl(IDS.moonPlanet))
+      var mixedBefore = readRocket(mixed.rocket)
+      var mixedNeed = Number(mixed.rocket.computeRequiredFuelAmountForDestination(mixedDestination))
+      var mixedContext = vehicleOf(p) !== null && uuidOf(vehicleOf(p)) === uuidOf(mixed.rocket) &&
+        mixedBefore.planet === IDS.moonDim && Number(mixedDestination.rocketTier()) === 4 && mixedBefore.fuel >= mixedNeed
+      mixed.rocket.startRocket()
+      check('mixed_launch_gate', mixedContext && !started(mixed.rocket) && readRocket(mixed.rocket).fuel === mixedBefore.fuel,
+        'actual scanned mixed rocket, rider=' + mixedContext + ', destination tier=' + mixedDestination.rocketTier() +
+        ', required/loaded=' + mixedNeed + '/' + mixedBefore.fuel + ', started=' + started(mixed.rocket))
+      if (started(mixed.rocket)) {
+        abortFlight('mixed tier3 rocket unexpectedly launched to tier4 moon')
+        return
+      }
+      p.stopRiding()
+      mixed.rocket.discard()
+      p.teleportTo(IDS.earthDim, xOf(FL.rocket), yOf(FL.rocket), zOf(FL.rocket), 0, 0)
+      p.setMainHandItem(FL.mixedChip)
+      FL.mixedChecked = true
+      go('load')
+      return
+    }
+
     if (FL.phase === 'load') {
-      var chip = jcall(p.getMainHandItem(), V.copy)
-      var loaded = loadRocket(FL.rocket, chip, FUEL_LOAD)
+      var chip = FL.stationLeg ? FL.controlStack : jcall(p.getMainHandItem(), V.copy)
+      var loadAmount = IS_LUV ? Number(FL.rocket.getFuelCapacity()) : FUEL_LOAD
+      var loaded = loadRocket(FL.rocket, chip, loadAmount)
+      if (FL.stationLeg) global.ggLuvS0Stations.loadCargo(stationContext(), FL.rocket, FL.stationPackage)
       p.setMainHandItem(Item.of('minecraft:air'))
-      check('flight_load_' + FL.leg, loaded.planet === FL.targetDim && loaded.fuel === FUEL_LOAD && loaded.fluid === IDS.fuel,
-        'rocket config slot chip -> ' + loaded.planet + ', tank ' + loaded.fluid + ' ' + loaded.fuel + ' mB of ' + FL.rocket.getFuelCapacity())
-      go(FL.leg === 'moon' || FL.leg === 'parent_lock' ? 'board' : 'launch')
+      FL.fromDim = dimOf(p)
+      FL.fromPos = { x: xOf(FL.rocket), z: zOf(FL.rocket) }
+      var controlWorld = FL.stationLeg ? String(L.PlanetData.getPlanet(rl(FL.target)).level().location()) : FL.targetDim
+      check('flight_load_' + FL.leg, (loaded.planet === controlWorld || loaded.planet === FL.targetDim ||
+        (FL.stationLeg && loaded.planet === FL.target)) && loaded.fuel === loadAmount && loaded.fluid === IDS.fuel,
+        'rocket config slot chip -> ' + loaded.planet + ', intended arrival=' + FL.targetDim +
+        ', tank ' + loaded.fluid + ' ' + loaded.fuel + ' mB of ' + FL.rocket.getFuelCapacity())
+      var loadedVehicle = vehicleOf(p)
+      go(loadedVehicle !== null && uuidOf(loadedVehicle) === FL.rocketUuid ? 'launch' : 'board')
       return
     }
 
@@ -1298,6 +1379,10 @@
         go('program_chip')
         return
       }
+      if (IS_LUV && LEVEL4 && FL.leg === 'moon') {
+        check('native_tier4_boundary', Number(dest.rocketTier()) === 4 && ok3,
+          'real scanned all-cryogenic rocket startRocket to a native tier4 destination: started=' + ok3)
+      }
       check('flight_launch_' + FL.leg, ok3, (ok3 ? 'ROCKET_STARTED, countdown 200 ticks' : 'startRocket() refused') + '; ' + before + ', fuel needed to launch ' +
         need + ' mB, destination ' + (r.getDestination() === null ? 'none' : String(r.getDestination().level())) + ', rider ' + describeVehicle(p))
       if (!ok3) {
@@ -1309,7 +1394,7 @@
       FL.crossT = 0
       FL.maxY = 0
       FL.fuelAtLaunch = fuelBeforeStart
-      shared().put('shot', 'launch_' + FL.leg)
+      shot('launch_' + FL.leg)
       // the client half reports a server that stops ticking as the #91 freeze only from here to the landing
       shared().put('watch', true)
       go('ascent')
@@ -1324,8 +1409,8 @@
         if (!r2.isRemoved()) {
           FL.maxY = Math.max(FL.maxY, yOf(r2))
           if (FL.crossT === 0 && yOf(r2) >= 600) FL.crossT = S.t
-          if (age === 260) shared().put('shot', 'climb_' + FL.leg)
-          if (age === 330) shared().put('shot', 'high_' + FL.leg)
+          if (age === 260) shot('climb_' + FL.leg)
+          if (age === 330) shot('high_' + FL.leg)
           if (age === 240) FL.fireResAtClimb = hasFireResistance(p)
         }
         if (age > 2400) {
@@ -1353,8 +1438,8 @@
         m.rocketBlocks.length + ' blocks, not started: GCYR clears the launch on arrival)')
       note('flight_damage_' + FL.leg, 'damage from the launch to the arrival: ' + hurtTimeline(FL.launchT) + '; suit ' + suitState(p))
       // the departure chunk is still loaded in this tick: nothing may be left there
-      var fromLevel = levelOf(FL.leg === 'moon' ? IDS.earthDim : IDS.moonDim)
-      var leftBehind = rocketsAround(fromLevel, xOf(p), zOf(p)).length
+      var fromLevel = levelOf(FL.fromDim)
+      var leftBehind = rocketsAround(fromLevel, FL.fromPos.x, FL.fromPos.z).length
       check('flight_no_copy_' + FL.leg, leftBehind === 0, 'rockets left in the departure dimension at this x/z: ' + leftBehind +
         ' (GCYR moves the rocket, then moves the riders a second time)')
       if (newRocket === null) {
@@ -1370,7 +1455,7 @@
       FL.arrY = yOf(newRocket)
       shared().put('rocketUuid', FL.rocketUuid)
       shared().put('brake', true)
-      shared().put('shot', 'arrival_' + FL.leg)
+      shot('arrival_' + FL.leg)
       go('descent')
       return
     }
@@ -1402,6 +1487,7 @@
         check('flight_landing_' + FL.leg, true, 'landed in ' + dimOf(r3) + ' at ' + key(Math.floor(jcall(r3, V.x)), Math.floor(y3), Math.floor(jcall(r3, V.z))) + ' ' + (S.t - FL.arriveT) +
           ' ticks after arrival, no crash; fuel ' + info.fuel + ' mB left (' + (FL.fuelAtLaunch - info.fuel) + ' mB burnt this leg), client held Space ' + sval('clientBrakeTicks') + ' ticks')
         FL.legs[FL.leg] = { launchToArrive: FL.arriveT - FL.launchT, arriveToLand: S.t - FL.arriveT, burnt: FL.fuelAtLaunch - info.fuel }
+        FL.lastFlight = { ok: true, leg: FL.leg, result: FL.legs[FL.leg], dimension: dimOf(p) }
         FL.landT = S.t
         // the landed rocket's chunk is loaded: exactly one rocket where the player is
         var here = rocketsAround(levelOf(FL.targetDim), xOf(p), zOf(p)).length
@@ -1411,7 +1497,7 @@
           FL.fireResAtClimb + ' (GCYR burns everything under a climbing rocket; the pack keeps riders fire resistant)')
         shared().put('brake', false)
         shared().put('watch', false)
-        shared().put('shot', 'landed_' + FL.leg)
+        shot('landed_' + FL.leg)
         go(FL.leg === 'moon' ? 'moon_stay' : 'done')
         if (FL.leg !== 'moon') flightSummary()
         return
@@ -1426,7 +1512,7 @@
 
     if (FL.phase === 'moon_stay') {
       if (IS_LUV) {
-        if (!global.ggLuvS0.onMoon(p, S.t, FL, S.server, shared())) return
+        if (!LEVEL4 && !global.ggLuvS0.onMoon(p, S.t, FL, S.server, shared())) return
         p.setMainHandItem(Item.of(IDS.chip))
         FL.leg = 'home'
         FL.target = IDS.earthPlanet
@@ -1474,12 +1560,131 @@
 
   // ---------------------------------------------------------------- driver
 
+  function setMoonTier4() {
+    var PD = lazy().PlanetData
+    var Planet = Java.loadClass('argent_matter.gcyr.api.space.planet.Planet')
+    var JsonOps = Java.loadClass('com.mojang.serialization.JsonOps')
+    var Integer = Java.loadClass('java.lang.Integer')
+    var HashMap = Java.loadClass('java.util.HashMap')
+    var id = rl(IDS.moonPlanet)
+    var all = new HashMap(PD.planets())
+    var previous = all.get(id)
+    if (previous === null) throw new Error('disposable moon is absent before its tier transition')
+    var json = Planet.DIRECT_CODEC.encodeStart(JsonOps.INSTANCE, previous).result().orElseThrow().getAsJsonObject()
+    json['addProperty(java.lang.String,java.lang.Number)']('rocket_tier', Integer['valueOf(int)'](4))
+    var next = Planet.DIRECT_CODEC.parse(JsonOps.INSTANCE, json).result().orElseThrow()
+    all.put(id, next)
+    // updatePlanets rebuilds the dimension maps, but the pinned clear() omits solar-system lists.
+    var cleared = {}
+    asArray(all.values()).forEach(function (planet) {
+      var system = String(planet.solarSystem())
+      if (cleared[system]) return
+      var list = PD.getSolarSystemPlanets(planet.solarSystem())
+      if (list === null) throw new Error('missing native solar-system list: ' + system)
+      list.clear()
+      cleared[system] = true
+    })
+    PD.updatePlanets(all)
+    var observed = PD.getPlanetFromLevel(levelOf(IDS.moonDim).getDimensionKey()).orElseThrow()
+    check('moon_tier4_codec', Number(PD.getPlanet(id).rocketTier()) === 4 && Number(observed.rocketTier()) === 4,
+      'one unchanged moon/dimension; native DIRECT_CODEC and updatePlanets (the datapack loader path), JSON=' + json)
+    JsonIO.write('kubejs/exported/luv_s0_moon_tier4.json', {
+      world: IDS.moonDim, rocket_tier: Number(observed.rocketTier()), nativeCodecJson: String(json)
+    })
+  }
+
+  function stationContext() {
+    return {
+      server: S.server,
+      player: testPlayer(),
+      tick: S.t,
+      sharedMap: shared(),
+      rocket: FL.rocket,
+      check: check,
+      note: note,
+      program: function (planetId, station) {
+        var p = testPlayer()
+        p.setMainHandItem(Item.of(IDS.chip))
+        shared().put('selected', '')
+        shared().put('stationSelect', station ? 'true' : 'false')
+        shared().put('select', String(planetId))
+        useHeldItem(p)
+      },
+      flightBusy: function () { return FL.phase !== 'done' },
+      lastFlight: function () {
+        return FL.failed ? FL.failedFlight : FL.lastFlight
+      },
+      fly: function (planetId, dimension, controlStack, stationPackage) {
+        if (FL.phase !== 'done') throw new Error('a real flight is already active')
+        if (controlStack.isEmpty()) throw new Error('station flight control item is empty')
+        var p = testPlayer()
+        if (dimOf(p) !== dimOf(FL.rocket)) throw new Error('player and real rocket are in different worlds')
+        p.stopRiding()
+        p.teleportTo(dimOf(p), xOf(FL.rocket) + 0.5, yOf(FL.rocket), zOf(FL.rocket) + 0.5, 0, 0)
+        FL.failed = false
+        FL.died = false
+        FL.target = String(planetId)
+        FL.targetDim = String(dimension)
+        FL.stationLegIndex = (FL.stationLegIndex || 0) + 1
+        FL.leg = 'station_' + FL.stationLegIndex + '_' + String(dimension).replace(/[:]/g, '_')
+        FL.controlStack = controlStack.copy()
+        FL.stationPackage = stationPackage
+        FL.stationLeg = true
+        FL.orbit = lazy().PlanetData.isOrbitLevel(levelOf(FL.targetDim).getDimensionKey())
+        go('load')
+      },
+      reopen: function (token) {
+        S.stage = 'station_reopen'
+        shared().put('s0sOwnerSnapshot', JSON.stringify({ t: S.t, counts: S.counts, legs: FL.legs }))
+        note('same_save_reopen', 'real-client lifecycle requested with token ' + token + '; no new JVM or budget')
+      }
+    }
+  }
+
+  function nextLuvStage() {
+    if (!INTEGRATED) return false
+    if (FL.failed) {
+      check('integrated_dependency', false, 'later spikes blocked by a failed native flight; no synthetic replacement')
+      return false
+    }
+    JsonIO.write('kubejs/exported/' + SCOPE + '_flights.json', FL.legs)
+    console.info(TAG + SCOPE + '|DONE')
+    if (!LEVEL4) {
+      var p = testPlayer()
+      p.stopRiding()
+      FL.rocket.discard()
+      LEVEL4 = true
+      SCOPE = 'luv_s0_rocket'
+      IDS.tank = 'grindless:s0_cryogenic_fuel_tank'
+      setMoonTier4()
+      SPECS = luvSpecs(true)
+      S.scanners = []
+      FL = null
+      prepareWorld()
+      p.teleportTo(IDS.earthDim, BAND.x0 + 34.5, PAD_Y, 7.5, 0, 20)
+      startScanners()
+      S.stage = 'scanners'
+      return true
+    }
+    if (!global.ggLuvS0Stations || typeof global.ggLuvS0Stations.begin !== 'function') {
+      check('station_driver', false, 'native station driver is not installed')
+      return false
+    }
+    SCOPE = 'luv_s0_stations'
+    shared().put('luvProbe', 'stations')
+    S.stage = 'stations'
+    global.ggLuvS0Stations.begin(stationContext())
+    return true
+  }
+
   function finish() {
     if (S === null || S.finished) return
     S.finished = true
     shared().put('brake', false)
     shared().put('watch', false)
     shared().put('hold', false)
+    if (IS_LUV) JsonIO.write('kubejs/exported/luv_s0_checks.json', S.counts)
+    if (IS_LUV && FL !== null) JsonIO.write('kubejs/exported/' + SCOPE + '_flights.json', FL.legs)
     console.info(TAG + SCOPE + '|DONE')
   }
 
@@ -1503,6 +1708,10 @@
       return
     }
     try {
+      if (IS_LUV && sval('navigationError') !== '') throw new Error('real menu navigation: ' + sval('navigationError'))
+      if (MEMORY_ISOLATION && S.t % 200 === 0 && global.ggLuvS0MemorySummary) {
+        JsonIO.write('kubejs/exported/gg_test_luv_s0_memory.json', JSON.parse(String(global.ggLuvS0MemorySummary)))
+      }
       if (S.stage === 'scanners') {
         S.scanners.forEach(function (m) { advance(m) })
         if (scannersDone()) {
@@ -1520,7 +1729,21 @@
       }
       if (S.stage === 'flight') {
         flightTick()
-        if (FL.phase === 'done') finish()
+        if (FL.phase === 'done' && !nextLuvStage()) finish()
+      }
+      if (S.stage === 'stations') {
+        if (FL.phase !== 'done') flightTick()
+        else {
+          var stationResult = global.ggLuvS0Stations.tick(stationContext())
+          if (stationResult.done) finish()
+        }
+      }
+      if (S.stage === 'station_reopen') {
+        var reopenError = sval('s0sReopenError')
+        if (reopenError !== '') {
+          check('same_save_reopen', false, reopenError)
+          finish()
+        }
       }
     } catch (e) {
       check('step', false, 'exception in ' + S.stage + (FL !== null ? '/' + FL.phase : '') + ': ' + e)
@@ -1530,9 +1753,20 @@
 
   function run(server) {
     S = { server: server, level: server.overworld(), t: 0, tick0: server.getTickCount(), stage: 'scanners', scanners: [], finished: false,
-      playerUuid: global[REQUEST + 'Player'] ? String(global[REQUEST + 'Player']) : null }
+      counts: {}, playerUuid: global[REQUEST + 'Player'] ? String(global[REQUEST + 'Player']) : null }
     FL = null
     try {
+      if (IS_LUV) {
+        Java.loadClass('net.minecraft.FileUtil').createDirectoriesSafe('kubejs/exported')
+        if (MEMORY_ISOLATION) {
+          var structures = S.server.getWorldData().worldGenOptions().generateStructures()
+          check('structures_disabled', String(structures) === 'false',
+            'actual native WorldOptions.generateStructures=' + structures + '; disposable test save only')
+          if (String(structures) !== 'false') throw new Error('memory-isolated save still generates structures')
+          if (String(global.ggLuvS0MemoryError || '') !== '') throw new Error(String(global.ggLuvS0MemoryError))
+        }
+        if (LEVEL4) setMoonTier4()
+      }
       staticChecks()
     } catch (e) {
       check('static', false, 'exception (is GCYR loaded?): ' + e)
@@ -1579,6 +1813,20 @@
   // client suite: armed when the player joins, if the instance carries the marker file. The hold is set first, so that a later
   // problem in this handler cannot let mc-runtime-test quit before the test reports it.
   PlayerEvents.loggedIn(function (event) {
+    if (IS_LUV && sval('s0sReopenPending') !== '') {
+      var savedOwner = JSON.parse(sval('s0sOwnerSnapshot'))
+      LEVEL4 = true
+      IDS.tank = 'grindless:s0_cryogenic_fuel_tank'
+      SCOPE = 'luv_s0_stations'
+      S = { server: event.server, level: event.server.overworld(), t: savedOwner.t,
+        tick0: event.server.getTickCount() - savedOwner.t, stage: 'stations', scanners: [],
+        counts: savedOwner.counts, playerUuid: profileId(event.player), finished: false }
+      FL = { phase: 'done', rocket: vehicleOf(event.player), legs: savedOwner.legs, hurts: {}, hits: [] }
+      setMoonTier4()
+      var resumed = global.ggLuvS0Stations.resume(stationContext(), sval('s0sReopenPending'))
+      if (resumed.done) finish()
+      return
+    }
     if (!enabledByMarker() || (S !== null && !S.finished)) return
     shared().put('hold', true)
     shared().put('brake', false)

@@ -221,6 +221,7 @@
       } catch (e) {
         mc.setCurrentScreen(null)
       }
+      if (mc.currentScreen === scr) mc.setCurrentScreen(null)
       c.planetSince = 0
     }
   }
