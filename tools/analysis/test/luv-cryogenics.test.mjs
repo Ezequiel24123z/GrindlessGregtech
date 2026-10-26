@@ -201,4 +201,12 @@ test('every id A3 names is in the pinned native registry, not a naming guess the
     walk(t);
   }
   assert.deepEqual(problems, []);
+  // the native fixture names more: its parts, the recipe types it scans for recycling, and one live recipe id
+  const fixtureIds = new Set(['gtceu:iv_input_bus', 'gtceu:iv_input_hatch', 'gtceu:iv_output_bus', 'gtceu:iv_output_hatch',
+    'gtceu:luv_energy_input_hatch', 'gtceu:macerator', 'gtceu:arc_furnace', 'gtceu:extractor', 'gtceu:vacuum_freezer',
+    'gtceu:vacuum_freezer/liquid_helium', 'gtceu:closed_loop_cooling', 'gtceu:coated_conductor']);
+  const src = fs.readFileSync(path.join(root, 'tools', 'test', 'overlay', 'kubejs', 'server_scripts', 'gg_test_luv_cryogenics.js'), 'utf8');
+  for (const [, id] of src.matchAll(/['"](?:\d+x )?((?:gtceu|grindless):[a-z0-9_/]+)['"]/g)) {
+    assert.ok(nativeItems.has(id) || nativeFluids.has(id) || registered.has(id) || fixtureIds.has(id), `fixture id: ${id}`);
+  }
 });
