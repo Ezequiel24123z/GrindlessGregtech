@@ -263,3 +263,21 @@ test('germanium only from Io: the germanite electrolysis keeps everything but it
   assert.deepEqual(makers.map((x) => x.id), ['grindless:separate']);
   assert.ok(IDS.items.includes('gtca:germanite_dust'));
 });
+
+test('the native fixture stands every fumarole on brimstone (BOP canSurvive) inside its band', () => {
+  // BOP 1.20.1 BrimstoneFumaroleBlock#canSurvive needs #biomesoplenty:brimstone_decoration_placeable (netherrack, brimstone) with a
+  // sturdy top below it; on air a later neighbour update breaks it (native S2, 2026-10-26: "setblock did not place ... fumarole").
+  const src = fs.readFileSync(path.join(ROOT, 'tools/test/overlay/kubejs/server_scripts/gg_test_luv_io_surface.js'), 'utf8');
+  assert.doesNotThrow(() => new vm.Script(src));
+  assert.match(src, /var FUMAROLE_GROUND = \{ ch: 'F', id: BRIMSTONE \}/);
+  assert.match(src, /var BRIMSTONE = 'biomesoplenty:brimstone'/);
+  const builds = [...src.matchAll(/build\((ow|site), S\.IO\.condenser\.machine, ([^\n]+)\n?([^\n]*)/g)].map((m) => m[0]);
+  assert.equal(builds.length, 2);
+  for (const b of builds) assert.match(b, /ground: FUMAROLE_GROUND/);
+  assert.match(src, /footprintClear\(site, S\.IO\.condenser\.machine, cOrigin, FUMAROLE_GROUND\)/);
+  // condenser 15 high from the origin row - 1, its ground one lower: Overworld Y 98..113, Io Y 198..213
+  assert.match(src, /var OVERWORLD_Y = \{ y0: 98, y1: 113 \}/);
+  assert.match(src, /S\.IO\.condenser\.machine, \{ x: CONDENSER_X, y: 100, z: ORIGIN_Z \}/);
+  assert.match(src, /var cOrigin = \{ x: CONDENSER_X, y: 200, z: ORIGIN_Z \}/);
+  assert.match(src, /ground\.forEach\(function \(g\) \{ put\(site, g\.p, g\.id, false\) \}\)\r?\n\s+plan\.forEach/);
+});
