@@ -90,7 +90,8 @@ test('sky exposure counts all four orientations, including fully and partly cove
 test('solar output derives from authoritative sunlight; no nighttime or fuel doubling', () => {
   const { G, context } = harness();
   const recipes = [];
-  G.readJsonTable = () => ({ sites: [{ dimension: table.earth, factor: 1.4 }] });
+  const sunlight = JSON.parse(source('pack/kubejs/data/grindless/tables/sunlight.json'));
+  G.sunlight = { factor: dim => sunlight.dimensions[dim].factor };
   const api = new Proxy({}, {
     get(_t, type) { return id => {
       const r = { type, id, calls: {} };
