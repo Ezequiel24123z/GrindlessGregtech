@@ -561,7 +561,8 @@ export function runPackScripts(packDir, { originals = [] } = {}) {
         const m = { name: String(name), kind: kind ? String(kind) : 'simple', tiers: [], recipeTypes: [], file: l.file };
         pending.push(m);
         return recorder({
-          tiers: (p, a) => { m.tiers.push(...a.map(Number)); },
+          // GTM's tiers(int...): the tiers one by one, or one array of them (Rhino passes a JS array as the varargs' int[])
+          tiers: (p, a) => { m.tiers.push(...a.flat().map(Number)); },
           recipeType: (p, a) => { m.recipeTypes.push(String(a[0])); },
           recipeTypes: (p, a) => { m.recipeTypes.push(...a.flat().map(String)); },
         });

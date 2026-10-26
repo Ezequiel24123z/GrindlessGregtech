@@ -1,0 +1,10 @@
+{
+  "type": "emi:info",
+  "stacks": [
+    "item:grindless:coilgun_coil_casing"
+  ],
+  "text": [
+    "emi.grindless.info.coilgun_coil_casing.0",
+    "emi.grindless.info.coilgun_coil_casing.1"
+  ]
+}

@@ -11,11 +11,13 @@
 //                                               Substation, cells read from the formed structure, and of GTNH's Lapotronic
 //                                               Supercapacitor, both LGPL-3.0; nothing copied). No machine part: energy comes in and
 //                                               goes out wirelessly. GTM's dummy recipe type, like GTM's own substation.
-//   grindless:<tier>_capacitor_cell             the cells, LV to IV (capacity: six of the tier's reference batteries, the table)
+//   grindless:<tier>_capacitor_cell             the cells, LV to IV, and grindless:luv_smes_cell, LuV's (a superconducting magnetic
+//                                               energy storage coil, wound in the HTS magnet works: the row's cellMadeBy); capacity:
+//                                               six of the tier's reference batteries (the table)
 //   gtceu:<tier>_wireless_energy_hatch[_4a|_16a|_64a]   a multiblock energy hatch (PartAbility.INPUT_ENERGY) the network fills
 //   gtceu:<tier>_wireless_dynamo_hatch[_4a|_16a|_64a]   a multiblock dynamo hatch (PartAbility.OUTPUT_ENERGY) the network empties
 //                                               Both are GTM's own EnergyHatchPartMachine (no new Java class), built with GTM's KubeJS
-//                                               'custom' machine type, at 2, 4, 16 and 64 A for LV to IV: GTM's own buffers (an energy
+//                                               'custom' machine type, at 2, 4, 16 and 64 A for every row of the table (LV to LuV): GTM's own buffers (an energy
 //                                               hatch holds 16 ticks of its full rate, a dynamo hatch 64), GTM's voltage rules, rain
 //                                               check, scanner and Jade. The 64 A ones carry OUTPUT_ENERGY / INPUT_ENERGY (not GTM's
 //                                               substation abilities), so a 64 A dynamo hatch goes in any generator multiblock.
@@ -32,7 +34,9 @@
 //                                               takes the cover off (CoverBehavior#getPickItem is the item it was placed from).
 //   grindless:<tier>_wireless_energy_cover / _wireless_dynamo_cover   the cover items
 //
-// Published as global.grindless.wireless for the server script, the lang script and the smoke test (ids, kinds, tiers, the table).
+// The table drives every tier: its rows go 1 (LV), 2, 3... with no gap, and each one adds its cell, eight hatches and two covers.
+// Published as global.grindless.wireless for the server script, the lang script and the smoke test (ids, kinds, tiers, the table;
+// tierNames / tierLabels by tier: 'luv' / GTM's 'LuV'; cells[id].madeBy: the machine that makes a cell, or null for the assembler).
 // Textures and models: tools/assets/Build-WirelessEnergyTextures.ps1; names: client_scripts/grindless/wireless_energy_lang.js.
 // Rhino: var + function inside every callback that runs more than once.
 (function () {
@@ -43,13 +47,36 @@
   }
   const Pat = G.patterns
   const T = G.readJsonTable('kubejs/data/grindless/tables/wireless_energy.json')
-  if (!T || !T.tiers || T.tiers.length !== 5 || !T.hatchAmps || !T.tower) throw new Error('[grindless/wireless] wireless_energy.json is incomplete')
+  if (!T || !T.tiers || T.tiers.length < 1 || !T.hatchAmps || !T.tower) throw new Error('[grindless/wireless] wireless_energy.json is incomplete')
   const LOG = '[grindless/wireless] '
 
-  const TIER_NAMES = ['ulv', 'lv', 'mv', 'hv', 'ev', 'iv']
+  // the rows: tiers 1, 2, 3... (GTValues: 1 = LV), a name, a cell with a whole capacity; a cell the assembler makes (no cellMadeBy)
+  // needs its batteries and frame
+  T.tiers.forEach(function (r, i) {
+    var why = ''
+    if (r.tier !== i + 1) why = 'tier ' + r.tier + ' (the rows go 1, 2, 3... with no gap)'
+    else if (typeof r.name !== 'string' || !/^[a-z]+$/.test(r.name)) why = 'name ' + r.name
+    else if (typeof r.cell !== 'string' || r.cell.indexOf(':') < 0) why = 'cell ' + r.cell
+    else if (typeof r.capacity !== 'number' || !(r.capacity > 0) || r.capacity % 1 !== 0) why = 'capacity ' + r.capacity
+    else if (!r.cellMadeBy && (!r.batteries || !r.frame)) why = 'a cell made in the assembler needs batteries and a frame'
+    if (why) throw new Error('[grindless/wireless] wireless_energy.json, row ' + (i + 1) + ': ' + why)
+  })
+
+  // by tier (0 = ULV): the ids' prefix ('luv', the row's name) and the name players read (GTM's GTValues.VN: 'LuV'; the row's name in
+  // capitals if GTM's does not match it)
+  const TIER_NAMES = ['ulv']
+  const TIER_LABELS = ['ULV']
+  T.tiers.forEach(function (r) {
+    var vn = GTValues.VN ? GTValues.VN[r.tier] : null
+    TIER_NAMES[r.tier] = r.name
+    TIER_LABELS[r.tier] = vn !== null && vn !== undefined && String(vn).toLowerCase() === r.name ? String(vn) : r.name.toUpperCase()
+  })
+  // GTM's tiers(int...) of the hatches: every row
+  const TIER_LIST = T.tiers.map(function (r) { return r.tier })
   W.table = T
   W.tierNames = TIER_NAMES
-  W.tiers = T.tiers.map(function (r) { return r.tier })
+  W.tierLabels = TIER_LABELS
+  W.tiers = TIER_LIST.slice()
   W.tierRow = {}
   T.tiers.forEach(function (r) { W.tierRow[r.tier] = r })
   W.settleTicks = T.settleTicks
@@ -62,11 +89,11 @@
   // V x A: what one block carries per tick at full rate
   W.rate = function (tier, amps) { return Number(GTValues.V[tier]) * amps }
 
-  // the cells: block id -> { tier, capacity }
+  // the cells: block id -> { tier, capacity, madeBy (the machine that makes it, or null: the assembler) }
   W.cells = {}
   W.cellIds = []
   T.tiers.forEach(function (r) {
-    W.cells[r.cell] = { tier: r.tier, capacity: r.capacity }
+    W.cells[r.cell] = { tier: r.tier, capacity: r.capacity, madeBy: r.cellMadeBy ? String(r.cellMadeBy) : null }
     W.cellIds.push(r.cell)
   })
 
@@ -124,10 +151,15 @@
         .resistance(6)
         .requiresTool(true)
         .tagBlock('minecraft:mineable/pickaxe')
-        .textureAll('grindless:block/wireless/capacitor_cell_' + r.name)
+        .textureAll(r.texture ? String(r.texture) : 'grindless:block/wireless/capacitor_cell_' + r.name)
         .item(function (item) {
           item.tooltip(Text.gray(Text.translate('tooltip.grindless.capacitor_cell.0', String(FU.formatNumbers(r.capacity)))))
           item.tooltip(Text.darkGray(Text.translate('tooltip.grindless.capacitor_cell.1')))
+          // a cell made by one of our machines says which (its name: GTM's block.<namespace>.<path>)
+          if (r.cellMadeBy) {
+            item.tooltip(Text.darkGray(Text.translate('tooltip.grindless.wireless_cell.made_by',
+              Text.translate('block.' + String(r.cellMadeBy).replace(':', '.')))))
+          }
         })
     })
   })
@@ -140,7 +172,7 @@
       event.create(c.item)
         .texture('grindless:item/wireless/' + c.kind + '_cover_' + name)
         .tooltip(Text.gray(Text.translate('tooltip.grindless.wireless_' + c.kind + '_cover.0')))
-        .tooltip(Text.darkGray(Text.translate('tooltip.grindless.wireless_cover.rate', name.toUpperCase(), String(W.rate(c.tier, W.coverAmps)), String(W.coverAmps))))
+        .tooltip(Text.darkGray(Text.translate('tooltip.grindless.wireless_cover.rate', TIER_LABELS[c.tier], String(W.rate(c.tier, W.coverAmps)), String(W.coverAmps))))
         .tooltip(Text.darkGray(Text.translate('tooltip.grindless.wireless_cover.place')))
     })
   })
@@ -237,12 +269,12 @@
       } else if (info.cells === 0) {
         list.add(Text.translate('grindless.machine.wireless_energy_tower.no_cells').red())
       } else {
-        list.add(Text.translate('grindless.machine.wireless_energy_tower.cells', String(info.cells), TIER_NAMES[info.tier].toUpperCase(),
+        list.add(Text.translate('grindless.machine.wireless_energy_tower.cells', String(info.cells), TIER_LABELS[info.tier],
           String(FU.formatNumbers(info.capacity))))
       }
       if (st.up) {
         list.add(Text.translate('grindless.machine.wireless_energy_tower.network', String(FU.formatNumbers(st.stored)),
-          String(FU.formatNumbers(st.capacity)), TIER_NAMES[st.tier].toUpperCase(), String(st.towers)))
+          String(FU.formatNumbers(st.capacity)), TIER_LABELS[st.tier], String(st.towers)))
         list.add(Text.translate('grindless.machine.wireless_energy_tower.flow', W.perTick(st.inPerSecond), W.perTick(st.outPerSecond)))
       }
     } catch (e) {
@@ -253,11 +285,27 @@
   GTCEuStartupEvents.registry('gtceu:machine', function (event) {
     var EHPM = Java.loadClass('com.gregtechceu.gtceu.common.machine.multiblock.part.EnergyHatchPartMachine')
     var IO = Java.loadClass('com.gregtechceu.gtceu.api.capability.recipe.IO')
+    // GTM's tiers(int...), every row of the table: spelled out one argument per tier (the call the LV-IV hatches were proven with),
+    // not a JS array through Rhino's varargs conversion
+    function withTiers(b) {
+      var t = TIER_LIST
+      switch (t.length) {
+        case 1: return b.tiers(t[0])
+        case 2: return b.tiers(t[0], t[1])
+        case 3: return b.tiers(t[0], t[1], t[2])
+        case 4: return b.tiers(t[0], t[1], t[2], t[3])
+        case 5: return b.tiers(t[0], t[1], t[2], t[3], t[4])
+        case 6: return b.tiers(t[0], t[1], t[2], t[3], t[4], t[5])
+        case 7: return b.tiers(t[0], t[1], t[2], t[3], t[4], t[5], t[6])
+        case 8: return b.tiers(t[0], t[1], t[2], t[3], t[4], t[5], t[6], t[7])
+        case 9: return b.tiers(t[0], t[1], t[2], t[3], t[4], t[5], t[6], t[7], t[8])
+        default: throw new Error(LOG + 'wireless_energy.json: 1 to 9 tiers supported (got ' + t.length + ')')
+      }
+    }
     W.hatchKindList.forEach(function (kind) {
       var k = W.hatchKinds[kind]
       W.hatchAmps.forEach(function (amps) {
-        event.create(W.hatchName(kind, amps), 'custom')
-          .tiers(GTValues.LV, GTValues.MV, GTValues.HV, GTValues.EV, GTValues.IV)
+        withTiers(event.create(W.hatchName(kind, amps), 'custom'))
           .machine(function (holder, tier, tankScaling) { return new EHPM(holder, tier, IO[k.io], amps) })
           .definition(function (tier, builder) {
             builder

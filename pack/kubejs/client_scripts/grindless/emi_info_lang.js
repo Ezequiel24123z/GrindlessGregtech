@@ -18,9 +18,14 @@ ClientEvents.lang('en_us', event => {
 
     add('emi.grindless.info.capacitor_cells.0', 'Capacitor cells are the storage of the Wireless Energy Tower: its 32 cell slots take cells of any tier (the tower\'s casing fills an empty slot), and every formed tower adds the capacity of its cells to the wireless energy network.')
     add('emi.grindless.info.capacitor_cells.1', 'The network sends EU out at the tier of the weakest cell in any formed tower. Swapping a cell unforms its tower; the stored EU stays.')
+    add('emi.grindless.info.capacitor_cells.2', 'Most cells come from the assembler. The LuV cell is a superconducting magnetic energy storage (SMES) coil, wound and cold-tested in the HTS Magnet Works.')
 
     add('emi.grindless.info.sagittarius_a_star_signal.0', 'Recorded by the Interferometer on Mercury, at night: it combines a Lunar VLBI Recording from the Moon\'s Deep Space Antenna with the Outer System Chart, which it keeps.')
     add('emi.grindless.info.sagittarius_a_star_signal.1', 'It closes the IV chapter, and no IV recipe uses it up. Keep it: it is one of the items that open LuV, where the journey to the centre of the galaxy goes on.')
+    add('emi.grindless.info.coilgun_coil_casing.0', 'Wound in the HTS magnet works (circuit 3) from Hg-1223 superconducting wire on an HSS-S frame, potted in epoxy and cold-tested in liquid helium.')
+    add('emi.grindless.info.coilgun_coil_casing.1', 'Keep them: they are the barrel of the coilgun probe launcher on Ganymede, later in LuV. No other recipe uses them.')
+    add('emi.grindless.info.magnetic_bearing.0', 'Made in the HTS magnet works (circuit 4): 4 tetrataenite rods, an HSS-S ring and 2 titanium plates, cold-tested in liquid helium. Tetrataenite, a meteorite-only magnet, comes only from the asteroid belt.')
+    add('emi.grindless.info.magnetic_bearing.1', 'A rare-earth-free permanent-magnet bearing: the hub of the rotating hydroponic ring in Earth orbit.')
 
     add('emi.grindless.info.hologram_projector.0', 'Right-click an unformed multiblock controller to project its structure for 30 seconds; right-click again to hide it. A formed controller opens its normal screen.')
     add('emi.grindless.info.hologram_projector.1', 'Sneak + right-click to build: it places the structure\'s default blocks from your inventory into empty spaces, one item per block. Hatches, buses and other machine parts are left for you to choose.')
@@ -49,9 +54,14 @@ ClientEvents.lang('es_es', event => {
 
     add('emi.grindless.info.capacitor_cells.0', 'Las celdas de condensadores son el almacén de la torre de energía inalámbrica: sus 32 huecos de celda aceptan celdas de cualquier nivel (la carcasa de la torre rellena un hueco vacío), y cada torre formada suma la capacidad de sus celdas a la red de energía inalámbrica.')
     add('emi.grindless.info.capacitor_cells.1', 'La red envía EU al nivel de la celda más débil de todas las torres formadas. Cambiar una celda deshace su torre; la EU guardada se conserva.')
+    add('emi.grindless.info.capacitor_cells.2', 'Casi todas las celdas salen del ensamblador. La celda LuV es una bobina superconductora de almacenamiento magnético de energía (SMES), bobinada y probada en frío en la fábrica de imanes HTS.')
 
     add('emi.grindless.info.sagittarius_a_star_signal.0', 'La graba el interferómetro en Mercurio, de noche: combina una grabación VLBI lunar de la antena de espacio profundo de la Luna con la carta del sistema exterior, que conserva.')
     add('emi.grindless.info.sagittarius_a_star_signal.1', 'Cierra el capítulo IV y ninguna receta de IV la gasta. Guárdala: es uno de los objetos que abren LuV, donde sigue el viaje al centro de la galaxia.')
+    add('emi.grindless.info.coilgun_coil_casing.0', 'Se bobina en la fábrica de imanes HTS (circuito 3) con hilo superconductor de Hg-1223 sobre un armazón de HSS-S, se encapsula en epoxi y se prueba en frío en helio líquido.')
+    add('emi.grindless.info.coilgun_coil_casing.1', 'Guárdalas: son el cañón del lanzador de sondas por bobinas de Ganímedes, más adelante en LuV. Ninguna otra receta las usa.')
+    add('emi.grindless.info.magnetic_bearing.0', 'Se hace en la fábrica de imanes HTS (circuito 4): 4 varillas de tetrataenita, un anillo de HSS-S y 2 placas de titanio, probado en frío en helio líquido. La tetrataenita, un imán que solo se forma en meteoritos, sale solo del cinturón de asteroides.')
+    add('emi.grindless.info.magnetic_bearing.1', 'Un cojinete de imán permanente sin tierras raras: el buje del anillo hidropónico giratorio en la órbita terrestre.')
 
     add('emi.grindless.info.hologram_projector.0', 'Haz clic derecho en el controlador de un multibloque sin formar para proyectar su estructura durante 30 segundos; otro clic derecho la oculta. Un controlador formado abre su pantalla normal.')
     add('emi.grindless.info.hologram_projector.1', 'Agachado + clic derecho construye: coloca desde tu inventario los bloques por defecto de la estructura en los huecos vacíos, un objeto por bloque. Las escotillas, los buses y las demás piezas de máquina las eliges tú.')
