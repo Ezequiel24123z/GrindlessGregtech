@@ -606,7 +606,7 @@ Every recipe has a programmed circuit (c*n*) or an input that no other recipe of
 ### 10. Organoid lab: `gtceu:organoid_lab`, type `gtceu:organoid_assembly` (any orbit)
 
 - **What it gains:** the neuro processing unit at LuV voltage, the only LuV route to it.
-  - GTM's `circuit_assembler/neuro_processor` runs at 80,000 EU/t. That needs a ZPM single block, because GTM's large circuit assembler takes exactly one energy hatch (`GCYMMachines.java:338`).
+  - GTM's `circuit_assembler/neuro_processor` runs at 80,000 EU/t. That needs a ZPM single block, because GTM's large circuit assembler takes exactly one energy hatch (`GCYMMachines.java:338`), GT--'s line refuses it on every LuV hatch, and our Universal Assembly Factory refuses it unless one hatch reaches ZPM (spike S0-4).
   - GT--'s circuit assembly line can't run it below UV hatches, and its own wetware recipes consume NPUs.
   - In 0 g, neural organoids grow in three dimensions without a scaffold. Brain organoids have flown to the ISS since 2019, and FinalSpark's living-neuron processors (2024) compute.
 - **Recipes** (GTM's cleanroom condition kept, with a cleaning maintenance hatch; outputs kept with `G.noVoiding` in both places):
@@ -616,7 +616,7 @@ Every recipe has a programmed circuit (c*n*) or an input that no other recipe of
      - 250 mB sterilized growth medium;
      - 8 PBI small fluid pipes, 8 electrum plates, 16 silicone rubber foils and 8 HSS-E bolts.
 - **What it leaves to others:**
-  - Wetware processors come from GT--'s line: 16 NPUs + 16 crystal CPUs → 32, at 38,400 EU/t on two LuV hatches (`gtnn:circuit_assembly_line/wetware_processor_luv_soldering_alloy`).
+  - Wetware processors come from GT--'s line: 16 NPUs + 16 crystal CPUs → 32, at 30,720 EU/t × 750 t on one LuV energy hatch on GT--'s circuit assembly line (`grindless:circuit_assembly_line/wetware_processor_luv`: GT--'s 38,400 × 600 recipe re-registered at LuV voltage with the same 23.04 M EU and its research; the line has one energy-hatch cell, spike S0-4).
   - Wetware boards come from GTM's LuV circuit assembler (30,720 EU/t) with a cleaning hatch.
 - **Structure:**
   - a sealed 5×5×5 module of plascrete and cleanroom glass;
@@ -1157,7 +1157,7 @@ They are 5 EU/t × 100 t with nothing in and nothing out.
 - **GCYM at LuV:** the large mixer (an osmiridium rotor), now essential for URhNq₂. The mega blast furnace and the mega vacuum freezer stay ZPM.
 - **Circuits in batches:**
   - NPUs from the organoid lab;
-  - wetware processors from GT--'s line (32 a run);
+  - wetware processors from GT--'s line (32 a run, one LuV energy hatch on GT--'s circuit assembly line);
   - crystal chips from the grower, then GTM's engraver and circuit assembler.
 
 ## AE2 between planets: the LuV step
@@ -1232,7 +1232,7 @@ No passive waits (decision 12): every row is something built or run.
 | HPCA and research station formed, with computation components | computer casings, the data bank, URhNq₂ from the large mixer on two LuV hatches, ZBLAN optical pipes, PCB coolant |
 | The ZPM energy hatch's data orb, written by the research station; then the hatch, made by the assembly line on two LuV hatches (122,880 EU/t) | research; UHPIC (the wake shield); ZPM voltage coils (a ZPM assembler, its parts from the line, on a transformer); NaK |
 | Mk1 formed with HTS coils, one Nd + H → Eu run | the magnet works, trinium, 15 LuV hatches, the neutron reflectors |
-| 4 wetware processors and 4 crystal processor assemblies on the network | the organoid lab (NPU), GT--'s line, the grower |
+| 4 wetware processors and 4 crystal processor assemblies on the network | the organoid lab (NPU), GT--'s line (one LuV energy hatch on GT--'s circuit assembly line), the grower |
 | The network at LuV (every formed tower on LuV SMES cells) and a calibrated load: 524,288 EU/t for 60 s, through a 16 A LuV wireless energy hatch (exactly 524,288 EU/t) into a GTM power substation (its display shows the input) | the power plan and the network-tier jump |
 | One representative run at each site: Mond and optical mining (belt), fumarole separation and an intake run (Io), a tether run (Io orbit) or, in its place, a sulfur–iodine run (Io), a Europan culture (Europa), the catalogue and a probe (Ganymede), one recipe each of the smelter, wake shield, grower, ring and organoid lab (orbit) | the bases work |
 | Stored: helium-3 (the Moon, since HV), deuterium, tritium, impure naquadria solution | ZPM's fusion as infrastructure |
@@ -1254,7 +1254,7 @@ The ten-minute run of every base, untouched, lives only in the bench's integrati
 
 - **Asteroid metals and the chondritic extract only from the belt.** Iridium and osmium only off Earth: Mercury or the belt.
 - **Living matter only from Europa:** `gtceu:bacteria` comes only from the algae bioreactor's Europa recipe once B8 lands; everything downstream follows.
-- **The NPU at LuV only from the organoid lab.** Wetware processors come from GT--'s line at ZPM voltage on two LuV hatches. GTM's ZPM circuit assembler counts as ZPM.
+- **The NPU at LuV only from the organoid lab.** Wetware processors come from one LuV energy hatch on GT--'s circuit assembly line (its wetware recipe re-registered at 30,720 EU/t, the same energy). GTM's ZPM circuit assembler counts as ZPM, and our Universal Assembly Factory refuses GTM's NPU recipe unless one hatch reaches ZPM.
 - **Germanium and sulfur concrete only from Io.** Europium only from the Mk1.
 - **Trinium only from mode 2** (Venus naquadah, or spent rods).
 - **The Mk1:** no osmium or uranium from fusion; duranium only from the Mk2 (a 200 M EU start).
