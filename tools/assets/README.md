@@ -52,6 +52,7 @@ Generators for the pack's own textures. Everything is procedural 16x16 pixel art
 | `Build-NaquadahPlantTextures.ps1` | Writes the IV naquadah plant's face (`multiblock/naquadah_plant/`). `-Only naquadah_plant` and `-Credits` (its 5 CREDITS rows). |
 | `Build-IVMercuryTextures.ps1` | Writes the faces of the IV Mercury machines (IV-B2): the Mercury vein drill, the Mercury solar works, the Mercury solar field and the interferometer (`multiblock/mercury_vein_drill/`, `mercury_solar_works/`, `mercury_solar_field/`, `interferometer/`), and the interferometer's three data orbs (`item/lunar_vlbi_recording`, `outer_system_chart`, `sagittarius_a_star_signal`). `-Only drill,works,field,interferometer,items`, `-Preview <png outside the repo>` and `-Credits` (its 23 CREDITS rows). |
 | `Build-TravelNetworkTextures.ps1` | Writes the Venusian and Hermean Quantum Seeds (items and `.mcmeta`) and the RTG cell's overlays (`block/machines/rtg/`). `-Only seeds,rtg` and `-Credits` (its 11 CREDITS rows). |
+| `Build-HTSMagnetWorksTextures.ps1` | Writes the LuV HTS magnet works' face (`multiblock/hts_magnet_works/`). `-Only magnet_works`, `-Preview <png outside the repo>` and `-Credits` (its 5 CREDITS rows). |
 
 ## Regenerate
 
@@ -624,6 +625,32 @@ powershell -NoProfile -ExecutionPolicy Bypass -File tools\assets\Build-NaquadahP
 | `block/multiblock/naquadah_plant/overlay_front.png` | Idle: the dark chamber behind the lead glass, with a glint at its top left. The grey capsule with its yellow band sits in its cradle beside the vessel, where still, unlit superacid stands over the dark heap. Below: the radiation sign, the drawer handle and the dark lamp. |
 | `.../overlay_front_active.png` + `.mcmeta` | 8 frames, `frametime` 4: the source's Cherenkov glow swells and ebbs once a loop and shimmers. It lights the chamber blue around it and the vessel's near wall. The bath's surface is lit and shimmers. Two bubbles rise in the far column and a small one off the heap's peak, each flashing as it bursts. Two flecks of naquadah sink in the near column and settle on the heap, which glints as each one lands. The mode 1 lamp is lit green. |
 | `.../overlay_front_active_emissive.png` + `.mcmeta` | Only the source's glow (the capsule and its halo), the bath's surface and the lit lamp. |
+
+## LuV era
+
+### HTS magnet works
+
+The works' magnet seen end-on, drawn for GTM's frost-proof machine casing with the IV faces' method, steel ramp, bezel and lamp ramp (the helpers are copied from `Build-TritiumRemovalTextures.ps1` and `Build-HeavyWaterPlantTextures.ps1`, so no other script changes). On the dark board, a racetrack coil of copper-gold HTS tape: an outer and an inner tape turn lit from the top left, the middle turn between them, wound round a small dark bore. Under the coil, the run (green) and quench (red, the quench detector) lamps.
+
+- 8 frames, `frametime` 4: the field is on. The middle turn glows LuV light purple, a step dimmer on its shaded sides, with two brighter pulses of current running round it clockwise, half a turn apart. The bore glows cold cyan and breathes once a loop, frost glints on the outer turn (the liquid-helium cold test) and the run lamp is lit. The quench lamp never lights: a quench would be a failed test.
+- Idle: the coil cold and dark between its turns, the bore dark and both lamps dark.
+- The emissive layer holds only the middle turn, the bore and the run lamp.
+- The hot cell's checks; the output is identical byte for byte. `-Preview` draws a review sheet on a light and a dark stand-in frost-proof casing (the GTM texture is not in the repository).
+- To retouch:
+  - `$HtPal` and `$HtBase` hold the colours and the map.
+  - `$HtRing` and `$HtCrest` drive the pulses round the middle turn, `$HtBore` and `$HtBoreBreath` the bore's glow, and `$HtFrost` says where the frost may glint.
+  - Add any new light to `$HtGlowZone`.
+
+```powershell
+powershell -NoProfile -ExecutionPolicy Bypass -File tools\assets\Build-HTSMagnetWorksTextures.ps1
+powershell -NoProfile -ExecutionPolicy Bypass -File tools\assets\Build-HTSMagnetWorksTextures.ps1 -Credits
+```
+
+| File (under `textures/`) | Notes |
+|---|---|
+| `block/multiblock/hts_magnet_works/overlay_front.png` | Idle: the copper-gold coil, cold and dark between its two tape turns, round a dark bore; the run and quench lamps dark. |
+| `.../overlay_front_active.png` + `.mcmeta` | 8 frames, `frametime` 4: the middle turn glowing LuV light purple with two pulses of current running round it, the bore breathing cold cyan, frost glints on the outer turn and the run lamp lit. |
+| `.../overlay_front_active_emissive.png` + `.mcmeta` | Only the middle turn, the bore and the run lamp. |
 
 ## Contrast pass after the gallery test (2026-10-25)
 
