@@ -4,7 +4,7 @@
   "solar_system": "gcyr:proxima_centauri",
   "world": "gcyr:proxima_centauri_b",
   "orbit_world": "gcyr:proxima_centauri_b_orbit",
-  "rocket_tier": 5,
+  "rocket_tier": 8,
   "gravity": 9.806,
   "has_atmosphere": true,
   "days_in_year": 11,
