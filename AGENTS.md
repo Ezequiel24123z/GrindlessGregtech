@@ -170,6 +170,7 @@ Gregtech Grindless is a GregTech Modern pack (Minecraft 1.20.1, Forge) in which 
   | LuV asteroid belt (B5) | 16896–16959, Z 0–63: Overworld Y 98–112; the stand-in belt (`grindless:asteroid_belt`) at the same X and Z, Y 198–214, and fresh world gen chunks at Z 1024+ |
   | LuV Europa: cryobot and algae bioreactor (S0-7 ice shaft) | 17408–17471, Z 0–15: the Overworld at Y 98–113 (the cryobot is 16 high); on Europa (`places.json`, once B1 registers it) the same X and Z |
   | chests and furnaces (client) | 18688–18751 (uses X 18688–18703, Z 0–15, Y 98–112) |
+  | LuV travel and places (B1) | 18176–18239, Z 0–63: the Overworld at Y 98–112 (the level 4 rocket's scanner pad at X 18180–18182, Z 4–8); on each new surface (belt, Io, Europa, Ganymede) the same X and Z at Y 198–214, read only (one generated chunk, X 18176–18191, Z 0–15) |
 
   For a new test, keep going in steps of 256.
 

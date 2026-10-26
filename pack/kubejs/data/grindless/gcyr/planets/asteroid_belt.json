@@ -1,0 +1,15 @@
+{
+  "translation": "level.grindless.asteroid_belt",
+  "galaxy": "gcyr:milky_way",
+  "solar_system": "gcyr:solar_system",
+  "world": "grindless:asteroid_belt",
+  "orbit_world": "grindless:asteroid_belt_orbit",
+  "rocket_tier": 4,
+  "gravity": 0.6,
+  "has_atmosphere": false,
+  "days_in_year": 1682,
+  "temperature": 165,
+  "solar_power": 2,
+  "has_oxygen": false,
+  "button_color": 9079434
+}

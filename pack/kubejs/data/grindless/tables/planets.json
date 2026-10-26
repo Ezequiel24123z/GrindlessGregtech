@@ -12,6 +12,11 @@
     "mars": { "dimensions": ["gcyr:mars", "gcyr:mars_orbit"], "pairTag": "mars", "name": { "en_us": "Mars", "es_es": "Marte" } },
     "venus": { "dimensions": ["gcyr:venus", "gcyr:venus_orbit"], "pairTag": "venus", "name": { "en_us": "Venus", "es_es": "Venus" } },
     "mercury": { "dimensions": ["gcyr:mercury", "gcyr:mercury_orbit"], "pairTag": "mercury", "name": { "en_us": "Mercury", "es_es": "Mercurio" } },
-    "belt": { "dimensions": ["grindless:asteroid_belt", "grindless:asteroid_belt_orbit"], "pairTag": "belt", "name": { "en_us": "the asteroid belt", "es_es": "el cinturón de asteroides" } }
-  }
+    "belt": { "dimensions": ["grindless:asteroid_belt", "grindless:asteroid_belt_orbit"], "pairTag": "belt", "name": { "en_us": "the asteroid belt", "es_es": "el cinturón de asteroides" } },
+    "jupiter": { "dimensions": ["grindless:jupiter", "grindless:jupiter_orbit"], "name": { "en_us": "Jupiter", "es_es": "Júpiter" } },
+    "io": { "dimensions": ["grindless:io", "grindless:io_orbit"], "pairTag": "io", "name": { "en_us": "Io", "es_es": "Ío" } },
+    "europa": { "dimensions": ["grindless:europa", "grindless:europa_orbit"], "pairTag": "europa", "name": { "en_us": "Europa", "es_es": "Europa" } },
+    "ganymede": { "dimensions": ["grindless:ganymede", "grindless:ganymede_orbit"], "pairTag": "ganymede", "name": { "en_us": "Ganymede", "es_es": "Ganímedes" } }
+  },
+  "dryOnEarth": ["gcyr:overworld_orbit"]
 }

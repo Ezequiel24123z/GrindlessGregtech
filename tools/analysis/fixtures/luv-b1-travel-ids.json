@@ -1,0 +1,45 @@
+{
+  "_source": "Native registry export power-quests-1 (server kubejs-exported items.json/tags.json, GCYR 0.2.9, GTM 7.5.3, AE2, BOP): only the ids LuV-B1 travel uses. Regenerate from a newer dump, never by hand.",
+  "items": [
+    "ae2:quantum_entangled_singularity",
+    "ae2:singularity",
+    "biomesoplenty:brimstone",
+    "gcyr:advanced_fuel_tank",
+    "gcyr:basic_fuel_tank",
+    "gcyr:elite_fuel_tank",
+    "gcyr:elite_rocket_motor",
+    "gcyr:id_chip",
+    "gcyr:kapton_k_plate",
+    "gcyr:keycard",
+    "gcyr:space_station_package",
+    "gcyr:space_station_packager",
+    "grindless:outer_system_chart",
+    "gtceu:aluminium_plate",
+    "gtceu:hsss_plate",
+    "gtceu:luv_electric_pump",
+    "gtceu:titanium_frame",
+    "minecraft:blue_ice",
+    "minecraft:ender_pearl",
+    "minecraft:tuff"
+  ],
+  "fluids": [
+    "gtceu:helium_3"
+  ],
+  "tags": {
+    "forge:plates/hsss": [
+      "gtceu:hsss_plate"
+    ],
+    "forge:plates/kapton_k": [
+      "gcyr:kapton_k_plate"
+    ],
+    "forge:frames/titanium": [
+      "gtceu:titanium_frame"
+    ],
+    "forge:plates/aluminium": [
+      "gtceu:aluminium_plate"
+    ],
+    "forge:ender_pearls": [
+      "minecraft:ender_pearl"
+    ]
+  }
+}
