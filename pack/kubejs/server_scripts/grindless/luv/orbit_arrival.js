@@ -32,9 +32,15 @@
   // Each simple fallback below is unambiguous by arity and/or its native reference argument:
   // Vec3 motion, NBT/tag/stack helpers, physical queries and packet/sync
   // methods. Integer.valueOf(int) stays explicitly pinned: JS-number/String boxing IS ambiguous.
+  // Rhino 2001.2.3-build.10: ScriptRuntime.in uses hasObjectElem/hasProperty, then the
+  // NativeJavaClass/NativeJavaObject.has -> JavaMembers.has existence path. An absent class
+  // member's get() instead throws reportMemberNotFound. Probe before get; catch neither
+  // presence/lookup failures nor invocation failures, even if their messages look alike.
   function invoke(object, names, args) {
     for (var i = 0; i < names.length; i++) {
-      var method = object[names[i]]
+      var name = names[i]
+      if (!(name in object)) continue
+      var method = object[name]
       if (typeof method === 'function') return method.apply(object, args || [])
     }
     throw new Error('missing public method: ' + names.join(' / '))
