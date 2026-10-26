@@ -31,7 +31,8 @@
 //                       format would have needed one string longer than 65,535 bytes
 //   phase 2 (a new JVM on the same world; the network starts by itself, nothing is placed, clicked or tracked again):
 //     RESTORED          the record is there; this is another JVM (a token phase 1 left in `global` is gone) on the same world (its game
-//                       time went on); the list in persistent data is an NBT list with the same entries (hash and length), synthetic
+//                       time went on); the list in persistent data is an NBT list with the same entries (a well-formed fingerprint of its
+//                       JSON, and its length; a fingerprint that is not well formed fails), synthetic
 //                       ones included (nothing could register those again); no backup key; the store = the saved store + what came in
 //                       - what went out since this JVM started (the network's totals); settlements have run
 //     AUTOMATIC         after 100 more ticks, with no action: the Overworld dynamo cover drained its batteries by exactly what it gave
@@ -204,16 +205,26 @@
   }
   function storedIn(m) { return m === null ? -1 : Number(m.energyContainer.getEnergyStored()) }
 
-  // two polynomial hashes of a string, exact in doubles (each step stays below 2^53)
+  // the list's fingerprint: its length and two polynomial hashes of its characters, exact in doubles (each step stays below 2^53). A
+  // character's code is its place in CODES (printable ASCII, what the list's JSON is made of; anything else counts as 96): this Rhino's
+  // String#charCodeAt returns a java.lang.Character (NativeString, Id_charCodeAt: `return c`), which arithmetic turns into NaN
+  // (ScriptRuntime#toNumber), so the first version printed NaN-NaN for every list and its comparison matched anything
+  var CODES = ' !"#$%&\'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\]^_`abcdefghijklmnopqrstuvwxyz{|}~'
   function hash(s) {
     var a = 0
     var b = 0
     for (var i = 0; i < s.length; i++) {
-      var c = s.charCodeAt(i)
+      var c = CODES.indexOf(s.charAt(i)) + 1
+      if (c < 1) c = 96
       a = (a * 131 + c) % 1000000007
       b = (b * 137 + c) % 998244353
     }
-    return a + '-' + b
+    return s.length + ':' + a + '-' + b
+  }
+
+  // a fingerprint is only evidence if it is well formed and this runtime's hash tells two lists apart; otherwise the check fails
+  function wellFormed(h) {
+    return /^[0-9]+:[0-9]+-[0-9]+$/.test(String(h)) && hash('[{"ck":"energy"}]') !== hash('[{"ck":"dynamo"}]')
   }
 
   function listJson() { return JSON.stringify(W().tracked(S.server)) }
@@ -513,11 +524,12 @@
     var fileBank = tag ? Number(tag.getLong(w.storeKey)) : -1
     var same = fileJson === S.snap.json
     var recOk = rec !== null && String(rec.getString('hash')) === S.snap.hash && Number(rec.getLong('bank')) === S.snap.bank
-    check('SAVED', same && type === 9 && fileBank === S.snap.bank && recOk && S.snap.json.length > 65535,
+    var printOk = wellFormed(S.snap.hash)
+    check('SAVED', same && type === 9 && fileBank === S.snap.bank && recOk && printOk && S.snap.json.length > 65535,
       'save-all flush -> ' + S.saveResult + '; kubejs_persistent_data.nbt read back after ' + (S.t - S.savedAt) + ' ticks: ' + w.blocksKey + ' is NBT type ' + type +
       ' (9 = list) of ' + (tag ? Number(tag.getList(w.blocksKey, 10).size()) : -1) + ' compounds, the same list as in memory: ' + same + ' (' + S.snap.count + ' entries, ' +
-      SYNTHETIC + ' synthetic); the store ' + fileBank + ' EU (in memory ' + S.snap.bank + '); the record written: ' + recOk + '. The old format would have been one ' +
-      S.snap.json.length + '-byte string (NbtIo\'s writeUTF stops at 65,535)')
+      SYNTHETIC + ' synthetic); the store ' + fileBank + ' EU (in memory ' + S.snap.bank + '); the record written: ' + recOk + ', the list\'s fingerprint ' + S.snap.hash +
+      ' (well formed: ' + printOk + '). The old format would have been one ' + S.snap.json.length + '-byte string (NbtIo\'s writeUTF stops at 65,535)')
   }
 
   // ---------------------------------------------------------------- phase 2
@@ -556,10 +568,13 @@
     var fresh = global[JVM_TOKEN] === undefined
     var time = Number(S.earth.getTime())
     var synth = synthetic(list).length
-    check('RESTORED', fresh && time > rec.time && hash(json) === rec.hash && json.length === rec.jsonBytes && list.length === rec.count && type === 9 && size === rec.count &&
+    var print = hash(json)
+    var printOk = wellFormed(print) && wellFormed(rec.hash)
+    check('RESTORED', fresh && time > rec.time && printOk && print === rec.hash && json.length === rec.jsonBytes && list.length === rec.count && type === 9 && size === rec.count &&
       synth === rec.synthetic && !pd.contains(w.legacyKey) && bank === balance && w.totals.settlements > 0 && w.lastReadout === undefined,
       'another JVM: ' + fresh + ' (phase 1\'s token in global is gone); the same world: its game time ' + rec.time + ' -> ' + time + ', ' + Math.round((Date.now() - rec.savedAt) / 1000) +
-      ' s after the snapshot; ' + w.blocksKey + ' is NBT type ' + type + ' of ' + size + ' compounds: ' + list.length + ' entries, hash ' + hash(json) + ' (saved ' + rec.hash + '), ' +
+      ' s after the snapshot; ' + w.blocksKey + ' is NBT type ' + type + ' of ' + size + ' compounds: ' + list.length + ' entries, fingerprint ' + print + ' (saved ' + rec.hash +
+      ', both well formed: ' + printOk + '), ' +
       json.length + ' characters as JSON (saved ' + rec.jsonBytes + '), ' + synth + ' synthetic entries (no placing, clicking or tracking could have made those again); ' +
       'a backup key: ' + pd.contains(w.legacyKey) + '; the store ' + bank + ' EU = the saved ' + rec.bank + ' + ' + w.totals.in + ' in - ' + w.totals.out + ' out since this JVM started (' +
       w.totals.settlements + ' settlements by itself): ' + (bank === balance) + '; a readout this JVM: ' + (w.lastReadout !== undefined))
