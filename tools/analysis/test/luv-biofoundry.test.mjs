@@ -235,9 +235,12 @@ test('molten cerrobase 140 is no longer hidden (its recipe is ours: EMI drops a 
   const hidden = JSON.parse(fs.readFileSync(path.join(kubejs, 'data', 'grindless', 'tables', 'hidden_until.json'), 'utf8')).groups;
   assert.deepEqual(hidden.filter((g) => (g.fluids || []).includes(MOLTEN_CERROBASE)).map((g) => g.material), []);
   const rules = JSON.parse(fs.readFileSync(path.join(root, 'tools', 'analysis', 'tiers', 'obtain.json'), 'utf8')).obtain.classes;
-  assert.deepEqual(rules.filter((c) => (c.materials || []).includes('cerrobase_140')), [], 'no obtain rule hides cerrobase 140');
+  // v0.8.0: the hidden table was regenerated from C3's dump, taken before this recipe; an A rule (a source, never hidden) names it for
+  // cerrobase 140 and the line until the next dump finds both obtainable
+  assert.deepEqual(rules.filter((c) => (c.materials || []).includes('cerrobase_140') && c.class !== 'A'), [], 'no obtain rule hides cerrobase 140');
   const line = rules.find((c) => (c.materials || []).includes('gtnn:circuit_assembly_line'));
-  assert.ok(line && line.until === 'luv' && !/missing molten cerrobase/.test(line.reason), 'the line stays LuV for its own recipe');
+  assert.ok(line && (line.class === 'A' ? /fluid_heater\/molten_cerrobase_140/.test(line.source) : line.until === 'luv' && !/missing molten cerrobase/.test(line.reason)),
+    'the line is LuV content with a source for its molten cerrobase');
 });
 
 test('GG_NATIVE_DUMP: the pinned ids exist in a native dump', { skip: !process.env.GG_NATIVE_DUMP }, () => {

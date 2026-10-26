@@ -31,7 +31,7 @@
 // Rhino: var + function inside every callback that runs more than once (this Rhino throws "redeclaration of var").
 (function () {
   const G = global.grindless || (global.grindless = {})
-  const IMPLEMENTED_ERA = 'iv'
+  const IMPLEMENTED_ERA = 'luv'
   const TABLE = 'kubejs/data/grindless/tables/hidden_until.json'
   const TAG = 'c:hidden_from_recipe_viewers'
   const RECIPES_TAG = 'grindless:hidden_with_recipes'
