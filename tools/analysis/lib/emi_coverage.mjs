@@ -165,17 +165,20 @@ export function auditEmiCoverage({ dump, registry, cfg, emi, lang = null, native
     // a GT recipe in a sub-category (GTM's ore crushing, recycling...) shows in that category's EMI tab (GTRecipeEMICategory)
     if (cat && n.shape === 'gt' && typeof n.category === 'string' && n.category !== '' && !VANILLA_CATEGORIES[r.type]) cat = n.category;
     const rec = { id: r.id, category: cat, source: 'recipe', type: r.type, inputs: new Set(), catalysts: new Set(), outputs: new Set() };
-    let dropped = false;
+    // EMI drops a recipe when any output stack is disabled, or any input or catalyst ingredient has only disabled stacks
+    // (EmiRecipes#bake's invalidator, EmiHidden#isDisabled; GTM gives each slot, and each tag of a slot, its own ingredient)
+    const disabledBy = [];
     for (const i of n.inputs) {
       const alts = i.alts.filter((a) => a !== 'gtceu:programmed_circuit' || i.alts.length === 1);
-      if (alts.length > 0 && alts.every((a) => disabled.has(a))) dropped = true;
+      if (alts.length > 0 && alts.every((a) => disabled.has(a))) disabledBy.push((i.cap ? 'catalyst ' : 'input ') + i.label);
       for (const a of alts) (i.cap ? rec.catalysts : rec.inputs).add(a);
     }
     for (const o of n.outputs) {
       if (o.key.startsWith('research:')) continue;
-      if (disabled.has(o.key)) dropped = true;
+      if (disabled.has(o.key)) disabledBy.push('output ' + o.key);
       rec.outputs.add(o.key);
     }
+    const dropped = disabledBy.length > 0;
     if (cat === null) {
       invisible.push(rec);
       continue;
@@ -187,6 +190,7 @@ export function auditEmiCoverage({ dump, registry, cfg, emi, lang = null, native
     }
     if (dropped) {
       rec.dropped = true;
+      rec.disabledBy = disabledBy;
       invisible.push(rec);
       continue;
     }
@@ -316,6 +320,14 @@ export function auditEmiCoverage({ dump, registry, cfg, emi, lang = null, native
 
   const gaps = results.filter((r) => r.gaps.length > 0);
 
+  // a recipe of ours that EMI drops for a disabled stack takes a whole route out of view (the observation that makes a chart, the drill
+  // run that uses a sample), even when another route keeps the item covered: the recipe must not carry the hidden stack
+  const shown = new Set(results.map((r) => r.key));
+  const droppedRoutes = invisible.filter((r) => r.dropped).map((r) => ({
+    id: r.id, type: r.type, disabledBy: r.disabledBy, ours: [...new Set([...r.outputs, ...r.inputs, ...r.catalysts])].filter((k) => shown.has(k)),
+  })).filter((d) => d.ours.length > 0);
+  for (const d of droppedRoutes) problems.push(`${d.id} (${d.type}): EMI drops it for ${d.disabledBy.join(', ')}, hiding a route of ${d.ours.join(', ')}`);
+
   // every process of ours (a recipe type our scripts register) shows at least one recipe, unless EMI never shows its type
   const processes = [];
   const byCategory = new Map();
@@ -338,7 +350,7 @@ export function auditEmiCoverage({ dump, registry, cfg, emi, lang = null, native
       audited: results.length, items: results.filter((r) => r.kind === 'item').length, machines: results.filter((r) => r.kind === 'machine').length,
       fluids: results.filter((r) => r.kind === 'fluid').length, recipes: recipes.length, pages: emi.pages.length, invisible: invisible.length,
     },
-    results, gaps, legacy, hiddenOurs, missingInDump, problems, previewWarnings, derivedChecks, processes,
+    results, gaps, legacy, hiddenOurs, missingInDump, problems, previewWarnings, derivedChecks, processes, droppedRoutes,
     unknownTypes: [...unknownTypes.entries()].map(([type, n]) => ({ type, n })),
     viaPagesOnly: results.filter((r) => (r.made.length > 0 && r.made.every((m) => m.source === 'page')) || (!r.end && r.used.length > 0 && r.used.every((m) => m.source === 'page'))).map((r) => r.key),
     invisibleRoutes: results.filter((r) => r.invisibleMade.length > 0).map((r) => ({ key: r.key, routes: r.invisibleMade })),
@@ -358,6 +370,7 @@ export function renderCoverageText(res) {
       (g.invisibleMade.length ? ` — made only where EMI does not look: ${g.invisibleMade.map((r) => r.id + (r.dropped ? ' (disabled stack)' : ' (' + r.type + ')')).join(', ')}` : ''));
   }
   const ex = res.results.filter((r) => r.excepted.length > 0);
+  L.push(`Recipes of ours EMI drops for a disabled stack (assets/emi/index/stacks): ${res.droppedRoutes.length}`);
   if (ex.length) {
     L.push(`Justified exceptions: ${ex.length}`);
     for (const r of ex) L.push(`  · ${r.key}: ${r.excepted.map((e) => e.role + ' — ' + e.reason).join('; ')}`);
