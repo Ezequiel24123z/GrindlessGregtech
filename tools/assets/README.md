@@ -10,7 +10,7 @@ Generators for the pack's own textures. Everything is procedural 16x16 pixel art
 | `Build-SteamContentTextures.ps1` | Writes the faces of the steam blast furnace and the coke battery (steam era, journey plan) to `pack/kubejs/assets/grindless/textures/`. |
 | `Build-SteamContentPreview.ps1` | Review sheet for those two faces: idle, the 8 frames, the emissive layer and a 3x3 wall on Firebricks and Coke Oven Bricks. It is only a preview: it is not published. |
 | `Build-HologramProjectorTextures.ps1` | Writes the Steam Hologram Projector's original four-frame item texture and `.mcmeta`; checks dimensions, alpha and distinct frames. `-Credits` prints its attribution rows. |
-| `Build-WirelessEnergyTextures.ps1` | Writes the LV-IV wireless tower, capacitor cells, covers, hatch overlays and eight hatch models. `-Only cells,hatches,covers,tower` selects sets; `-Credits` prints the asset manifest and attribution. Original procedural art, including emissive animations and GTM-tinted amperage rings. |
+| `Build-WirelessEnergyTextures.ps1` | Writes the wireless tower and, for every tier of `tables/wireless_energy.json` (LV to LuV), the cells, covers, hatch overlays and eight hatch models. `-Only cells,hatches,covers,tower` selects sets; a row with a `texture` gets that cell texture (the LuV SMES cell: `block/wireless/smes_cell_luv.png`, a frost-grey cryostat with a light-purple coil window); `-Credits` prints the asset manifest and attribution. Original procedural art, including emissive animations and GTM-tinted amperage rings. |
 | `Build-LVTextures.ps1` | Writes the LV era textures (vein drill, greenhouse, arc furnace, creature simulator, electrode and creature models) to `pack/kubejs/assets/grindless/textures/`. |
 | `Build-LVPreview.ps1` | Review sheet at x8 of the LV era: each overlay on its casing or hull, all frames, dark cave view and 3x3 wall. It is only a preview: it is not published. |
 | `Build-LVRoasterHeliostatTextures.ps1` | Writes the reinforced LV textures: faces of the sulfide roaster and of the heliostat tower, the heliostat mirror (block) and the contact catalyst, to `pack/kubejs/assets/grindless/textures/`. |
@@ -55,6 +55,7 @@ Generators for the pack's own textures. Everything is procedural 16x16 pixel art
 | `Build-BiofoundryTextures.ps1` | Writes the LuV biofoundry's face (`multiblock/biofoundry/`). `-Only biofoundry` and `-Credits` (its 5 CREDITS rows). |
 | `Build-LuVCryogenicsTextures.ps1` | Writes the faces of the LuV helium refrigerator and coated conductor line (LuV-A3: `multiblock/helium_refrigerator/`, `multiblock/coated_conductor_line/`). `-Only refrigerator,line`, `-Preview <png outside the repo>` (optional `-FrostCasing <png>`, `-StainlessCasing <png>`) and `-Credits` (their 10 CREDITS rows). |
 | `Build-LuVFoundationTextures.ps1` | Writes the shared LuV textures (LuV-A1): 29 items (four of them animated quantum seeds) and the ten block textures under `block/luv/` (eight casings and the orbital solar panel's cells and frame). `-Only <output or group>`, `-Preview <png outside the repo>`, `-Credits`. |
+| `Build-HTSMagnetWorksTextures.ps1` | Writes the LuV HTS magnet works' face (`multiblock/hts_magnet_works/`). `-Only magnet_works`, `-Preview <png outside the repo>` and `-Credits` (its 5 CREDITS rows). |
 
 ## Regenerate
 
@@ -709,6 +710,30 @@ powershell -NoProfile -ExecutionPolicy Bypass -File tools\assets\Build-LuVFounda
 - Seeds: `$SeedPlaces` holds one entry per seed (`Pal`, `Mode`, `Salt`, `Dir`, `Phase`, `Outline`, `Streak`). Change `Dir` or `Phase` if a new seed ever shares a frame with another.
 - Tapes: `$TapeMaterials` holds the two materials (`FaceA` and `FaceB` alternate on the wound face; `Side`; `Edge` is the silver cap layer, 0 for none).
 - Casings: one function each, with its palette above it; keep the patterns on 16 or 8 px so they tile.
+
+### HTS magnet works
+
+The works' magnet seen end-on, drawn for GTM's frost-proof machine casing with the IV faces' method, steel ramp, bezel and lamp ramp (the helpers are copied from `Build-TritiumRemovalTextures.ps1` and `Build-HeavyWaterPlantTextures.ps1`, so no other script changes). On the dark board, a racetrack coil of copper-gold HTS tape: an outer and an inner tape turn lit from the top left, the middle turn between them, wound round a small dark bore. Under the coil, the run (green) and quench (red, the quench detector) lamps.
+
+- 8 frames, `frametime` 4: the field is on. The middle turn glows LuV light purple, a step dimmer on its shaded sides, with two brighter pulses of current running round it clockwise, half a turn apart. The bore glows cold cyan and breathes once a loop, frost glints on the outer turn (the liquid-helium cold test) and the run lamp is lit. The quench lamp never lights: a quench would be a failed test.
+- Idle: the coil cold and dark between its turns, the bore dark and both lamps dark.
+- The emissive layer holds only the middle turn, the bore and the run lamp.
+- The hot cell's checks; the output is identical byte for byte. `-Preview` draws a review sheet on a light and a dark stand-in frost-proof casing (the GTM texture is not in the repository).
+- To retouch:
+  - `$HtPal` and `$HtBase` hold the colours and the map.
+  - `$HtRing` and `$HtCrest` drive the pulses round the middle turn, `$HtBore` and `$HtBoreBreath` the bore's glow, and `$HtFrost` says where the frost may glint.
+  - Add any new light to `$HtGlowZone`.
+
+```powershell
+powershell -NoProfile -ExecutionPolicy Bypass -File tools\assets\Build-HTSMagnetWorksTextures.ps1
+powershell -NoProfile -ExecutionPolicy Bypass -File tools\assets\Build-HTSMagnetWorksTextures.ps1 -Credits
+```
+
+| File (under `textures/`) | Notes |
+|---|---|
+| `block/multiblock/hts_magnet_works/overlay_front.png` | Idle: the copper-gold coil, cold and dark between its two tape turns, round a dark bore; the run and quench lamps dark. |
+| `.../overlay_front_active.png` + `.mcmeta` | 8 frames, `frametime` 4: the middle turn glowing LuV light purple with two pulses of current running round it, the bore breathing cold cyan, frost glints on the outer turn and the run lamp lit. |
+| `.../overlay_front_active_emissive.png` + `.mcmeta` | Only the middle turn, the bore and the run lamp. |
 
 ## Contrast pass after the gallery test (2026-10-25)
 

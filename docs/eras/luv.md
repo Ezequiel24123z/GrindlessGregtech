@@ -395,6 +395,12 @@ Every recipe has a programmed circuit (c*n*) or an input that no other recipe of
 - **Risks:**
   - the cell's capacity lives in the wireless package's table;
   - 144 mB of trinium is decision 13, *(tune)* until A4's bench run.
+- **As built (A4):**
+  - `luv/hts_magnet_works.js` (startup and server), recipes from `tables/hts_magnet_works.json`: ids `grindless:magnet_winding/<name>`, circuits 1–4, the 1,000 mB Liquid Helium charge as `notConsumableFluid` on all four, and an EMI line per recipe. A recipe whose ids the game lacks is skipped with an error in the log.
+  - The bearing takes `gtceu:tetrataenite_rod` (A1 gives tetrataenite its rod).
+  - EMI, with A1's hidden groups: the coilgun coil casings show now, with a page saying they are kept for Ganymede's coilgun; the bearing and its recipe show now (B4's ring needs it), with a page, because tetrataenite's B5 group is index-only (`keepRecipes`) until the belt; the SMES cell and the HTS coil recipe show when A3's tape does (the SMES cell has its own group until then, and `hts_magnet_works.test.mjs` fails if it outlives A3's).
+  - The structure is 11 × 5 × 5 on a frostproof base: the cryostat (3×3×4, hollow), the impregnation tank (3×3×3: PTFE pipe casing floor and lid, laminated glass around the bath) and the mandrel (3×3×4 tungstensteel frame cage around a stainless gearbox spindle, on a gearbox turntable). The parts go in the base's front and back rows and in two cells of the cryostat's front wall: 1–2 energy hatches, 1–3 input buses, 1–3 input hatches, 1–2 output buses and the parallel hatch.
+  - Controller: crafting grid, LuV hull + 2 LuV motors + LuV sensor + 4 LuV circuits (`grindless:crafting/hts_magnet_works`).
 - **Source:** real: the CFS and MIT SPARC toroidal field model coil (20 T, 2021), SMES (BPA's 30 MJ unit, 1980s), and vacuum-pressure impregnation and cold testing in magnet manufacturing.
 
 ### 4. Biofoundry: `gtceu:biofoundry`, type `gtceu:sterile_culture` (Earth)
@@ -1088,6 +1094,9 @@ They are 5 EU/t × 100 t with nothing in and nothing out.
   - the LuV cell, `grindless:luv_smes_cell`, a superconducting magnetic-energy-storage coil from the HTS magnet works. It is the LuV row of `tables/wireless_energy.json`, and its capacity follows the table's rule: six LuV vanadium batteries (`gtceu:luv_vanadium_battery`, 163,840,000 EU each), so 983,040,000 EU.
   - **The jump:** the network outputs LuV only when every formed tower holds LuV cells.
   - **Before the jump:** a multiblock with two IV wireless energy hatches reaches LuV voltage (two-hatch rule; spike S0-10 checks that wireless hatches count).
+    - *Static answer (A4, GTM 7.5.3 source):* they count. A wireless energy hatch is GTM's own `EnergyHatchPartMachine` with `INPUT_ENERGY`, so its container joins the controller's `EnergyContainerList`, and `WorkableElectricMultiblockMachine#getMaxVoltage` gives one tier more when `getNumHighestInputContainers() > 1`. The bench's `TWO_HATCH` check runs the HTS coil (30,720 EU/t) on two IV wireless hatches and refuses it on one.
+    - *Does an orbital generator feed a wireless dynamo hatch?* Statically yes: the settlement reads every tracked block through `server.getLevel(dimension)` and `isLoaded`, with no dimension rule (the Moon is natively proven), and `gcyr:overworld_orbit` is an ordinary datapack level (`gcyr:space`, Y 0–255). The station's chunks must stay loaded (FTB Chunks) for its generators to run unattended. The bench's `ORBIT` check runs the generator array there.
+  - **The LuV cell's recipe** is the magnet works' (circuit 2), not the assembler's: the table's LuV row says `cellMadeBy: gtceu:hts_magnet_works`, and the wireless script skips the assembler cell recipe for it.
   - The gate's assembly-line recipes at 100,000–122,880 EU/t need two LuV hatches, so the jump is a gate step.
   - **ZPM's jump:** the ZPM cells are ZPM's first recipe after the gate. They need the ZPM parts the gate proves.
 
@@ -1145,7 +1154,8 @@ They are 5 EU/t × 100 t with nothing in and nothing out.
   - **Who takes it** (`lib/parallel_hatch.js`):
     - IV's plants, the naquadah and platinum plants included;
     - LuV's helium refrigerator, coated conductor line, magnet works, biofoundry, smelter, grower, wake shield facility, organoid lab, asteroid processor and fumarole condenser.
-  - Every copy pays its EU/t, and the total is capped by voltage: two LuV hatches run four copies of a 30,720 EU/t recipe. The amperage of a wireless hatch doesn't lift that cap.
+  - Every copy pays its EU/t, and the total is capped by the overclock voltage: two 2 A LuV hatches run four copies of a 30,720 EU/t recipe.
+  - Multi-amp hatches lift that cap, as in GTM. GTM 7.5.3 folds V × A of all the energy hatches into the overclock voltage (`EnergyContainerList.calculateVoltageAmperage`, `WorkableElectricMultiblockMachine#getOverclockVoltage`), and that voltage caps both the parallels (`EURecipeCapability#getMaxParallelByInput`) and the overclocks. GTM's own 4 A and 16 A hatches do it too. Two 64 A LuV wireless hatches (2,097,152 V at 2 A) fit all 16 copies of the LuV hatch. The recipe-tier gate stays the hatch tier, plus one for two hatches (`getMaxVoltage`). S0-10's `MULTI_AMP` check reads it on the bench.
 - **The assembly line from AE2** builds:
   - the Mk1's parts (15 LuV hatches, 39 LuV pumps, the field generators);
   - the ZPM motor and energy hatch;
@@ -1323,7 +1333,7 @@ No new mods. LuV builds on the pack's own wireless network (v0.7.x).
 ## Risks and open questions
 
 - **GCYR beyond the inner planets** (spikes S0-1 to S0-3): datapack planets and the Jupiter group, level 4 with tier 5 KubeJS tanks, the deployment of two stations, very low gravity. GCYR's launch issues #91 and #122 still apply.
-- **The wireless network's LuV tier** (S0-10): LuV is built on a package still in progress (LV to IV). Do wireless hatches count for the two-hatch rule, and does an orbital generator feed it?
+- **The wireless network's LuV tier** (S0-10): LuV is built on a package still in progress (LV to IV). Do wireless hatches count for the two-hatch rule, and does an orbital generator feed it? A4 answers both from GTM's source (yes, and yes with the chunks loaded; *Power on the wireless network*); the integrated run confirms them.
 - **World generation:** the belt's floor and its new KubeJS layer (S0-6); Io's paterae and fumaroles, the cryobot's ice shaft and the GW detector's buried L (S0-7).
 - **The composed mode 2** depends on GT--'s recipe ids staying put. The pins fail loudly (S0-11).
 - **TPS:** ten new dimensions, four bases and two stations loaded. Watch it with spark (C3).
@@ -1334,7 +1344,7 @@ No new mods. LuV builds on the pack's own wireless network (v0.7.x).
 - **Unknowns:**
   - whether one suit piece keeps both thermal tags (S0-8);
   - GT--'s total EU per circuit-3 run;
-  - the wireless package's scripts know five tiers, LV to IV; A4 extends them to LuV.
+  - the wireless package's scripts know five tiers, LV to IV; A4 extends them to LuV (the table drives the tiers).
 - **Credits:** each package notes its sources in `CREDITS.md`: GCYR's `luna` noise (LGPL-3.0) for the belt, quests adapted from Star Technology (MIT) and Monifactory (LGPL), and each machine's real-world sources. GTNH and GT Leisure stay ideas only.
 
 ## Build order
