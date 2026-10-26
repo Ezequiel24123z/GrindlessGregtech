@@ -16,6 +16,8 @@
 //     europan_brine    Europa's ocean: water with magnesium sulfate and sodium chloride. A liquid; DISABLE_DECOMPOSITION, so its
 //                      electrolyzer and centrifuge recipes are written by package B8 (the cryobot's).
 //   The four are hidden from EMI until their package gives them a route (data/grindless/tables/hidden_until.json, until "luv").
+//   Two forms of existing GT materials are added (materialModification), with GTM's own routes: gtceu:germanium_plate (GENERATE_PLATE;
+//   the triple-junction wafer, B3) and gtceu:dense_titanium_plate (GENERATE_DENSE; the radiation vault casing). Neither is hidden.
 //
 //   Items (grindless:), names in client_scripts/grindless/luv_foundation_lang.js. The package that writes each one's recipes:
 //     nickel_tungsten_tape, itbtc_coated_conductor                                  A3 coated conductor line
@@ -191,6 +193,36 @@
       .color(0x2F6E8E)
       .formula('H2O(MgSO4)(NaCl)')
       .flags(GTMaterialFlags.DISABLE_DECOMPOSITION)
+  })
+
+  // ---------------------------------------------------------------- forms LuV needs of existing GT materials
+
+  // GTM 7.5.3 (and the addons that give germanium its ingot) generate neither form; the LuV design asks for both. materialModification
+  // runs before GTM generates the items and the recipes, so each form comes with GTM's own routes (bender, forge hammer, extruder,
+  // compressor and cutter for the plate; the bender from 9 plates for the dense plate) and its recycling.
+  //   germanium   GENERATE_PLATE   the wake shield facility's triple-junction wafer (B3) takes a germanium plate
+  //   titanium    GENERATE_DENSE   the radiation vault casing (2 dense titanium + 2 tantalum plates + an HSS-S frame)
+  LUVF.addedFlags = { germanium: ['GENERATE_PLATE'], titanium: ['GENERATE_DENSE'] }
+  LUVF.ids.germaniumPlate = 'gtceu:germanium_plate'
+  LUVF.ids.denseTitaniumPlate = 'gtceu:dense_titanium_plate'
+
+  GTCEuStartupEvents.materialModification(function (event) {
+    var flagsOf = { germanium: [GTMaterialFlags.GENERATE_PLATE], titanium: [GTMaterialFlags.GENERATE_DENSE] }
+    Object.keys(flagsOf).forEach(function (name) {
+      try {
+        var material = GTMaterials.get(name)
+        if (material == null || material.isNull()) {
+          console.error(LOG + 'GT material ' + name + ' not found: ' + LUVF.addedFlags[name].join(', ') + ' not added')
+          return
+        }
+        flagsOf[name].forEach(function (flag) {
+          if (!material.hasFlag(flag)) material.addFlags(flag)
+        })
+        console.info(LOG + name + ': ' + LUVF.addedFlags[name].join(', '))
+      } catch (e) {
+        console.error(LOG + name + ': flags not added: ' + e)
+      }
+    })
   })
 
   // ---------------------------------------------------------------- blocks
