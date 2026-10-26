@@ -554,7 +554,8 @@
   function levelOf(id) {
     var keys = array(S.server.levelKeys())
     for (var i = 0; i < keys.length; i++) {
-      if (String(keys[i].location()) === id) return S.server.getLevel(keys[i])
+      // a dimension id string: KubeJS's getLevel(ResourceLocation) next to vanilla's getLevel(ResourceKey) makes a key ambiguous for Rhino
+      if (String(keys[i].location()) === id) return S.server.getLevel(id)
     }
     return null
   }
