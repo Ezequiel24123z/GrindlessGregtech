@@ -167,6 +167,7 @@ Gregtech Grindless is a GregTech Modern pack (Minecraft 1.20.1, Forge) in which 
   | LuV fusion and research | 17920–17983, Z 0–63 (Overworld, Y 98–112): the Mk1 at X 17925–17939, the HPCA and the research station at X 17950+ |
   | LuV Io surface: fumarole condenser and volcanic intake (S0-7) | 17152–17215, Z 0–63: the Overworld at Y 98–112 and Io (`G.places.surface('io')`) at Y 198–214 |
   | chests and furnaces (client) | 18688–18751 (uses X 18688–18703, Z 0–15, Y 98–112) |
+  | LuV travel and places (B1) | 18176–18239, Z 0–63: the Overworld at Y 98–112 (the level 4 rocket's scanner pad at X 18180–18182, Z 4–8); on each new surface (belt, Io, Europa, Ganymede) the same X and Z at Y 198–214, read only (one generated chunk, X 18176–18191, Z 0–15) |
 
   For a new test, keep going in steps of 256.
 
