@@ -16,7 +16,7 @@ const here = path.dirname(fileURLToPath(import.meta.url));
 const PASSES = ['both', 'gate', 'auto', 'eras', 'obtain'];
 
 function usage() {
-  return `Usage: node reachability.mjs --tier <steam|lv|mv|hv|next/hv> --dump <folder> [options]
+  return `Usage: node reachability.mjs --tier <steam|lv|mv|hv|ev|iv|luv|next/<tier>> --dump <folder> [options]
        node reachability.mjs --pass obtain --dump <folder> [--md <file>] [--table <file>] [--implemented <era>]
   --tier <name>       config in tiers/<name>.json (or --config <path>); next/<tier> = the next version's prepared layer
   --dump <folder>     gg_dump dump (recipes.json, tags.json, items.json, machines.json, veins.json, fluid_veins.json, config.json)
@@ -78,7 +78,7 @@ function runContext(raw, dump, o, dimension, file) {
   const out = analyze(model, res, { verbose: o.verbose, explain: o.explain, pass: o.pass });
   const text = renderText(model, res, out, { pass: o.pass });
   const header = `Config  : ${file}\n`;
-  const body = o.quiet ? text.split('\n').filter((l) => /^(===|Context|VERDICT|STEP|  (FAIL|WARN) )/.test(l)).join('\n') + '\n' : text;
+  const body = o.quiet ? text.split('\n').filter((l) => /^(===|Context|Packages|VERDICT|STEP|  (FAIL|WARN) )/.test(l)).join('\n') + '\n' : text;
   return { dimension, model, res, out, body: body.replace(/\n(Model {3}:)/, `\n${header}$1`), ms: Date.now() - t0 };
 }
 

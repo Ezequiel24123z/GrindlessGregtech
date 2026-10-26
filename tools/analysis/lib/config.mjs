@@ -1,11 +1,12 @@
 // Loads a tier's configuration (tiers/<tier>.json) with optional inheritance (`extends`).
 import fs from 'node:fs';
 import path from 'node:path';
+import { readPlaceTables, resolvePlaceTokens } from './places.mjs';
 import { readJson } from './util.mjs';
 
 const MERGED_LISTS = ['world', 'machines', 'machinesFromRegistry', 'synthetic', 'toolTags', 'unconditionalTypes', 'ignoreTypes'];
 const TARGET_LISTS = ['targets', 'autoTargets', 'targetsFromVeins', 'autoTargetsFromVeins'];
-const MERGED_MAPS = ['typeAliases', 'conditions', 'partAbilities'];
+const MERGED_MAPS = ['typeAliases', 'conditions', 'partAbilities', 'packages'];
 // Era rule (lib/eras.mjs): always inherited, and a child element with the same id is merged field by field with the
 // parent's (`{"id": "end", "era": "mv"}` is enough to move a resource to another era). A new element with no `era`
 // belongs to the era of the file declaring it (its `era` or `tier`).
@@ -98,7 +99,14 @@ export function loadTierConfig(o, tiersDir, io = { exists: fs.existsSync, read: 
   const file = o.config ? path.resolve(o.config) : path.join(tiersDir, `${o.tier}.json`);
   if (!io.exists(file)) throw new Error(`config ${file} doesn't exist`);
   const overlayDir = path.resolve(path.dirname(file)) !== path.resolve(tiersDir) ? path.dirname(file) : null;
-  const raw = loadFile(file, { overlayDir, stack: [], io }, o.tier);
+  const loaded = loadFile(file, { overlayDir, stack: [], io }, o.tier);
+  // ${orbit:...}, ${place:...}, ${orbits} and ${places}: dimension ids from the pack's tables (lib/places.mjs). `o.tables` is the
+  // tables object or folder (tests); by default the pack's own, read only when the config uses a token.
+  const tables = o.tables && typeof o.tables === 'object' ? o.tables : () => readPlaceTables(o.tables || defaultTablesDir(tiersDir));
+  const raw = resolvePlaceTokens(loaded, tables);
   raw.tier = raw.tier || o.tier;
   return { raw, file };
 }
+
+/** pack/kubejs/data/grindless/tables, from tools/analysis/tiers. */
+export const defaultTablesDir = (tiersDir) => path.resolve(tiersDir, '..', '..', '..', 'pack', 'kubejs', 'data', 'grindless', 'tables');
