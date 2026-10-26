@@ -1,0 +1,11 @@
+{
+  "type": "emi:info",
+  "stacks": [
+    "item:grindless:engineered_barley_seed",
+    "item:grindless:engineered_tobacco_seed"
+  ],
+  "text": [
+    "emi.grindless.info.engineered_seeds.0",
+    "emi.grindless.info.engineered_seeds.1"
+  ]
+}
