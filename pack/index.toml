@@ -2741,6 +2741,10 @@ file = "kubejs/data/grindless/tables/fission_cores.json"
 hash = "72ce68bb386096718513d6075de4b92b99571682399bb64b5cfc46c3cd09ecfc"
 
 [[files]]
+file = "kubejs/data/grindless/tables/fusion_mk1.json"
+hash = "cc60e97b170255c5318784c467985118747456c9bf179ba77a95c8075718d6dd"
+
+[[files]]
 file = "kubejs/data/grindless/tables/heavy_water_plant.json"
 hash = "78e0550c5776e33e7e3cf74a25bbe172dbbee4f6a0152be0c819ec768b9b60b9"
 
@@ -3119,6 +3123,10 @@ hash = "24bc5ed88b306d9ee08f6bd5dbcac6c98c05fb4ec70efaad45ee580c9520bf78"
 [[files]]
 file = "kubejs/server_scripts/grindless/luv/coated_conductor_line.js"
 hash = "9b3ec773e7507b4d980768e14f5d22a33091b475c6bf84b457a9bec831f4ab78"
+
+[[files]]
+file = "kubejs/server_scripts/grindless/luv/fusion.js"
+hash = "04615daf0bfd369590a79d276b19fd148f685125905662af8d68e0478ee3681a"
 
 [[files]]
 file = "kubejs/server_scripts/grindless/luv/helium_refrigerator.js"
