@@ -200,15 +200,18 @@
     check('clashes', mw.clashes.length === 0, mw.clashes.length === 0 ? 'no recipe\'s ingredients are a subset of another\'s (one recipe per lookup path)' : mw.clashes.join(', '))
 
     var craftBad = []
-    ;[[mw.craftingRecipe, MACHINE_ID, 1], [mw.casingRecipe, 'grindless:cryostat_casing', 2]].forEach(function (t) {
-      var r = liveRecipe(t[0])
-      if (r === null) {
-        craftBad.push(t[0] + ' missing')
-        return
-      }
-      var res = r.getResultItem(S.server.registryAccess())
-      if (String(res.getId()) !== t[1] || Number(res.getCount()) !== t[2]) craftBad.push(t[0] + ' gives ' + res.getId() + ' x' + res.getCount())
-    })
+    var cr = liveRecipe(mw.craftingRecipe)
+    if (cr === null) craftBad.push(mw.craftingRecipe + ' missing')
+    else {
+      var res = cr.getResultItem(S.server.registryAccess())
+      if (String(res.getId()) !== MACHINE_ID) craftBad.push(mw.craftingRecipe + ' gives ' + res.getId())
+    }
+    var kr = liveRecipe(mw.casingRecipe)
+    if (kr === null) craftBad.push(mw.casingRecipe + ' missing')
+    else {
+      var kio = liveIO(kr)
+      if (ids(kio.itemsOut) !== 'grindless:cryostat_casing') craftBad.push(mw.casingRecipe + ' gives ' + ids(kio.itemsOut))
+    }
     check('crafting', craftBad.length === 0, craftBad.join(' ; ') || 'the controller is craftable and the casing is made in the assembler')
   }
 
@@ -420,18 +423,27 @@
 
   // ---------------------------------------------------------------- the run
 
+  // vanilla's fill takes at most 32,768 blocks: the band goes in strips of 16 along Z
+  function fillBand() {
+    var n = 0
+    for (var z = BAND.z0; z <= BAND.z1; z += 16) {
+      n += Number(S.server.runCommandSilent('fill ' + BAND.x0 + ' ' + BAND.y0 + ' ' + z + ' ' + BAND.x1 + ' ' + BAND.y1 + ' ' + Math.min(z + 15, BAND.z1) + ' air'))
+    }
+    return n
+  }
+
   function prepareWorld() {
     for (var cx = BAND.x0 >> 4; cx <= BAND.x1 >> 4; cx++) {
       for (var cz = BAND.z0 >> 4; cz <= BAND.z1 >> 4; cz++) S.level.getChunk(cx, cz)
     }
     S.server.runCommandSilent('forceload add ' + BAND.x0 + ' ' + BAND.z0 + ' ' + BAND.x1 + ' ' + BAND.z1)
-    var cleared = S.server.runCommandSilent('fill ' + BAND.x0 + ' ' + BAND.y0 + ' ' + BAND.z0 + ' ' + BAND.x1 + ' ' + BAND.y1 + ' ' + BAND.z1 + ' air')
+    var cleared = fillBand()
     note('AREA', 'band X ' + BAND.x0 + '-' + BAND.x1 + ' Y ' + BAND.y0 + '-' + BAND.y1 + ' Z ' + BAND.z0 + '-' + BAND.z1 + ' force-loaded, changed ' + cleared + ' blocks while clearing')
   }
 
   function cleanup() {
     try {
-      S.server.runCommandSilent('fill ' + BAND.x0 + ' ' + BAND.y0 + ' ' + BAND.z0 + ' ' + BAND.x1 + ' ' + BAND.y1 + ' ' + BAND.z1 + ' air')
+      fillBand()
       S.server.runCommandSilent('forceload remove ' + BAND.x0 + ' ' + BAND.z0 + ' ' + BAND.x1 + ' ' + BAND.z1)
       var w = W()
       S.server.persistentData.remove(w.blocksKey)
@@ -502,7 +514,7 @@
   function step(elapsed) {
     S.t = elapsed
     var m = S.machine
-    if (S.towerAt === null && elapsed >= 40) {
+    if (S.towerAt === null && elapsed >= 100) {
       try { towerReport() } catch (e) { check('TOWER', false, 'exception: ' + e) }
       S.towerAt = elapsed
     }

@@ -126,7 +126,7 @@ hash = "b39bb918ad9c99fd4c86857f65759b2cb3a2131d4436859f30f8d6c51ca75107"
 
 [[files]]
 file = "kubejs/assets/emi/recipe/additions/grindless/capacitor_cells.json"
-hash = "edc2e09a95d89b0482cb1fa127e70a80e105b4ff01a66973f25a5a02744b26d3"
+hash = "99805aaaaa0fbec474a0070c09f7bf2bf8aba78665f23088efa3924ece5ad40d"
 
 [[files]]
 file = "kubejs/assets/emi/recipe/additions/grindless/coilgun_coil_casing.json"
@@ -218,7 +218,15 @@ hash = "d2f84f6fc58f472c3755ab7c80561707710c8a9ced22877e259dc27110bd82a9"
 
 [[files]]
 file = "kubejs/assets/emi/recipe/additions/grindless/wireless_covers.json"
-hash = "836933c519de8486fce7e784d7b312cf2bdbc38455769d5e72118ae0fa9b9329"
+hash = "d78d13fa8721399b8f4b9b2f06f94575d669fee121d17e46d1db5ce7305003a0"
+
+[[files]]
+file = "kubejs/assets/emi/recipe/additions/grindless/zpm_cryostat_casing.json"
+hash = "e603fa71679d19dae49805813b14fdc0afa77ea96dcff93ee05a1de98c1c3c50"
+
+[[files]]
+file = "kubejs/assets/emi/recipe/additions/grindless/zpm_magnet_works_hts_insert.json"
+hash = "674c3a1e1d6c70160070ac5173fa8f11ca1b49dcdea5da7169eeebcd2bd5c083"
 
 [[files]]
 file = "kubejs/assets/emi/recipe/additions/grindless/zpm_naquadria_casing.json"
@@ -349,6 +357,10 @@ file = "kubejs/assets/grindless/textures/block/cover/wireless_dynamo_cover_mv.pn
 hash = "e5f8ef81ade71747d01e3c2419abe2527d3f8ac04038353a4af33b6a691fea55"
 
 [[files]]
+file = "kubejs/assets/grindless/textures/block/cover/wireless_dynamo_cover_zpm.png"
+hash = "2989e2d0e7d5040dd9c759f109be5e4c2345d7f392a455c3851c774944d795ac"
+
+[[files]]
 file = "kubejs/assets/grindless/textures/block/cover/wireless_energy_cover_emissive.png"
 hash = "c9803d74a96b1d6381f815c28d8492b6c94090a438cba57dd16e24989af9f0c4"
 
@@ -379,6 +391,10 @@ hash = "0cb8dcf42a5f9d9635aecac90b06d72a7f6df8df3f4cf64d9f95cd7a8b204685"
 [[files]]
 file = "kubejs/assets/grindless/textures/block/cover/wireless_energy_cover_mv.png"
 hash = "788c6c00fecbcc14261df897bdd85d9c2afce50853affcb65c6fb12ff915ea98"
+
+[[files]]
+file = "kubejs/assets/grindless/textures/block/cover/wireless_energy_cover_zpm.png"
+hash = "5d733f6f1c7b34eae3211cf8ade0acf1522e2ff1a6228ac66d0d329d031ba739"
 
 [[files]]
 file = "kubejs/assets/grindless/textures/block/ev_tripod/wing_cells.png"
@@ -1621,6 +1637,18 @@ file = "kubejs/assets/grindless/textures/block/multiblock/naquadah_plant/overlay
 hash = "491ea51d46bc1f0c0ff11ed9293461cc67de293c7672abbc45f67563f8fe1f1a"
 
 [[files]]
+file = "kubejs/assets/grindless/textures/block/multiblock/naquadria_magnet_works/overlay_front.png"
+hash = "334d5681769d8656e510d3cf23d9876fe97dd61794ca13a04460461909673542"
+
+[[files]]
+file = "kubejs/assets/grindless/textures/block/multiblock/naquadria_magnet_works/overlay_front_active.png"
+hash = "da8e6de9e2773cba98d4d14f818f30ec99c214a7405a425ba9405cd62cf4df29"
+
+[[files]]
+file = "kubejs/assets/grindless/textures/block/multiblock/naquadria_magnet_works/overlay_front_active_emissive.png"
+hash = "2ab76450d4cd34014dccff32639ec5039adc6558dcb42c1b33f39115ac922e7a"
+
+[[files]]
 file = "kubejs/assets/grindless/textures/block/multiblock/naquadria_refinery/overlay_front.png"
 hash = "7d82e0743df57cb8ef264353aa285b059b310e5b4803f36420bddc165c44c896"
 
@@ -2393,6 +2421,10 @@ file = "kubejs/assets/grindless/textures/block/wireless/smes_cell_luv.png"
 hash = "fd8d2dcde56687c2558ce10757c05a5457b53991af48a655c22c7b1408cdac2f"
 
 [[files]]
+file = "kubejs/assets/grindless/textures/block/wireless/smes_cell_zpm.png"
+hash = "4a3ac3ce195d343af5a2013aeb1888909c33010917f2e06faacf75985be9675d"
+
+[[files]]
 file = "kubejs/assets/grindless/textures/block/zpm/aerogel_fuel_tank_end.png"
 hash = "b46a3f8432b32fccdaee62948b24046e4187df037f13383490f4f3c09c3b849d"
 
@@ -2591,6 +2623,10 @@ hash = "491ea51d46bc1f0c0ff11ed9293461cc67de293c7672abbc45f67563f8fe1f1a"
 [[files]]
 file = "kubejs/assets/grindless/textures/item/hss_s_drill_bit.png"
 hash = "744e27d0a4ab8f53cfe2766e7d8edf9186af823fa17c3dc804bbb809d07b4a67"
+
+[[files]]
+file = "kubejs/assets/grindless/textures/item/hts_insert.png"
+hash = "132382f2558fa31dbb24cf1840c6727bd79cdb31cc519bf1c5ff9dff395df413"
 
 [[files]]
 file = "kubejs/assets/grindless/textures/item/hydrotreating_catalyst.png"
@@ -2977,6 +3013,10 @@ file = "kubejs/assets/grindless/textures/item/wireless/dynamo_cover_mv.png"
 hash = "0987dd5108b4270eff3ee7b2f2134c0b011df497fea0c799e474bc8114e39b24"
 
 [[files]]
+file = "kubejs/assets/grindless/textures/item/wireless/dynamo_cover_zpm.png"
+hash = "27aeee873a187a1acdf350836ba9656e1887f9a63b95ba544e73e1bc7f71524a"
+
+[[files]]
 file = "kubejs/assets/grindless/textures/item/wireless/energy_cover_ev.png"
 hash = "c36dfb32fa693d0eb63d842e284bd5f3595414da71912e052aff647f2458557c"
 
@@ -2999,6 +3039,10 @@ hash = "1bfc7bc2038155dde07112d829dd650bad8e39e4015f98e3e82e44467302a157"
 [[files]]
 file = "kubejs/assets/grindless/textures/item/wireless/energy_cover_mv.png"
 hash = "b333395f6cf244094d9e14bdda4f837a1ad3299d67ee2bc3dd5de7ba135adc29"
+
+[[files]]
+file = "kubejs/assets/grindless/textures/item/wireless/energy_cover_zpm.png"
+hash = "df8145f8cce8f3589afb8ea85735a2460c0333d62148090f3cb1988bb939c36c"
 
 [[files]]
 file = "kubejs/assets/grindless/textures/item/zircaloy_cladding_tube.png"
@@ -3254,7 +3298,7 @@ hash = "313400efd9262ce0bd852e1f43905111d105fa44bc648d3bd5b53be2ad93748a"
 
 [[files]]
 file = "kubejs/client_scripts/grindless/wireless_energy_lang.js"
-hash = "a059274b54adc925413ade00b001a40e7cb8097f0537026cc61f1d88f11927ae"
+hash = "069d252799d0644d14c92588cb00918a264dacdba576d274d5eeb813d5f48c5a"
 
 [[files]]
 file = "kubejs/client_scripts/grindless/zpm_actinides_lang.js"
@@ -3267,6 +3311,10 @@ hash = "4f9a137eaa79a4ff50e663fd8723ae2f930165657168cc62e251bb094eb3b503"
 [[files]]
 file = "kubejs/client_scripts/grindless/zpm_foundation_lang.js"
 hash = "af84a423fd47c7ceabd05fb0892412dd6d3494c9cd63a3bf0cb73089a1663e35"
+
+[[files]]
+file = "kubejs/client_scripts/grindless/zpm_magnet_works_lang.js"
+hash = "32ab3831cf11bf366c48a9149c003f865854c6325162cf0c9e807632a16aa8b0"
 
 [[files]]
 file = "kubejs/client_scripts/grindless/zpm_naquadria_lang.js"
@@ -3446,7 +3494,7 @@ hash = "1f4b256531a0b42a6ecf399e9b692d9e4730bd4102e53aab3e1fa2c999b69e9d"
 
 [[files]]
 file = "kubejs/data/grindless/tables/hidden_until.json"
-hash = "36ef95ed30313f8a2f2da784593833c3c6274683f8f39ac27964cc0944e732a6"
+hash = "4bcd4adbebf4d3f058f973d0b15d5da14a58b32505c65ba43a93e548cf11fece"
 
 [[files]]
 file = "kubejs/data/grindless/tables/hot_cell.json"
@@ -3459,6 +3507,10 @@ hash = "083afadaa4c0ae42b9cd9954fc3d335ed5f788c82a397daaeb50803efb7f2915"
 [[files]]
 file = "kubejs/data/grindless/tables/lookup_collisions.json"
 hash = "5c9f199e89bb1b70e826db6db037575fdd7d8fd1680adccb9f4a6e449927d950"
+
+[[files]]
+file = "kubejs/data/grindless/tables/magnet_works.json"
+hash = "0c275cb632d3811c471ef889b2f679b2107044de9c6c87ecaeacaa89a1f384f2"
 
 [[files]]
 file = "kubejs/data/grindless/tables/mobs.json"
@@ -3558,7 +3610,7 @@ hash = "4822cf86f95d7a146f59bde5b2d6e00bac21980a8e586bb686bd7c3db19a5ced"
 
 [[files]]
 file = "kubejs/data/grindless/tables/wireless_energy.json"
-hash = "d49691f9231938f61583dcefc242fe037cedc5bd715743bc145350455de8473e"
+hash = "c7b6b8b4a014d5369be4c62a9631b8e75b9e4c40508169f22fcdfba14d9cb18c"
 
 [[files]]
 file = "kubejs/data/grindless/worldgen/biome/asteroid_belt.json"
@@ -4085,6 +4137,10 @@ file = "kubejs/server_scripts/grindless/zpm/europium.js"
 hash = "bfc444310892c3e9f6bd8240ca44839f77c5288323497128c2f53dc4525cc410"
 
 [[files]]
+file = "kubejs/server_scripts/grindless/zpm/magnet_works.js"
+hash = "3007ca9d1b4687254d13c97c6dc239a7a4f1b43cf9d1bcb2e9f63ca6ecde934d"
+
+[[files]]
 file = "kubejs/server_scripts/grindless/zpm/naquadria.js"
 hash = "de8fbfe93e28fc07a53e29afd080f5152927baa7501f9a99767449a9b170f130"
 
@@ -4447,6 +4503,10 @@ hash = "2a079bac33713fc6d9f935bcb00f8eb6321427a75e4c12e7bde2fd7236631caf"
 [[files]]
 file = "kubejs/startup_scripts/grindless/zpm/foundation.js"
 hash = "b053916d5bf548c10ee107d9777dd40e727793b2bce81f33952b22c344b7ac91"
+
+[[files]]
+file = "kubejs/startup_scripts/grindless/zpm/magnet_works.js"
+hash = "de5befb85de3d16a41bcae24812667200d3747ec8694c733ca32c58897dd123d"
 
 [[files]]
 file = "kubejs/startup_scripts/grindless/zpm/naquadria.js"
