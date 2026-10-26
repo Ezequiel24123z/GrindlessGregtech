@@ -56,6 +56,7 @@ Generators for the pack's own textures. Everything is procedural 16x16 pixel art
 | `Build-LuVCryogenicsTextures.ps1` | Writes the faces of the LuV helium refrigerator and coated conductor line (LuV-A3: `multiblock/helium_refrigerator/`, `multiblock/coated_conductor_line/`). `-Only refrigerator,line`, `-Preview <png outside the repo>` (optional `-FrostCasing <png>`, `-StainlessCasing <png>`) and `-Credits` (their 10 CREDITS rows). |
 | `Build-LuVFoundationTextures.ps1` | Writes the shared LuV textures (LuV-A1): 29 items (four of them animated quantum seeds) and the ten block textures under `block/luv/` (eight casings and the orbital solar panel's cells and frame). `-Only <output or group>`, `-Preview <png outside the repo>`, `-Credits`. |
 | `Build-HTSMagnetWorksTextures.ps1` | Writes the LuV HTS magnet works' face (`multiblock/hts_magnet_works/`). `-Only magnet_works`, `-Preview <png outside the repo>` and `-Credits` (its 5 CREDITS rows). |
+| `Build-EuropaTextures.ps1` | Writes the faces of the LuV Europa machines (LuV-B8): the cryobot and the algae bioreactor (`multiblock/cryobot/`, `multiblock/algae_bioreactor/`). `-Only cryobot,algae_bioreactor` and `-Credits` (their 10 CREDITS rows). |
 
 ## Regenerate
 
@@ -734,6 +735,39 @@ powershell -NoProfile -ExecutionPolicy Bypass -File tools\assets\Build-HTSMagnet
 | `block/multiblock/hts_magnet_works/overlay_front.png` | Idle: the copper-gold coil, cold and dark between its two tape turns, round a dark bore; the run and quench lamps dark. |
 | `.../overlay_front_active.png` + `.mcmeta` | 8 frames, `frametime` 4: the middle turn glowing LuV light purple with two pulses of current running round it, the bore breathing cold cyan, frost glints on the outer turn and the run lamp lit. |
 | `.../overlay_front_active_emissive.png` + `.mcmeta` | Only the middle turn, the bore and the run lamp. |
+
+### Europa: cryobot and algae bioreactor (LuV-B8)
+
+The faces of the two Europa machines, drawn for the pack's sulfur concrete casing (`block/luv/sulfur_concrete_casing.png`, both machines' workable casing) with the biofoundry's method, steel ramp, bezel, lamp ramp and checks (its helpers are copied, so no other script changes). The casing is a bright yellow ochre, so each face is a whole dark steel panel inside the 1 px casing ring.
+
+- Cryobot: a tall borehole window under the tether spool, with a depth gauge and the status lamp at its right. Through the window, the ice shell in strata (frosty white at the top, deeper blue below, with a static frost speckle), the slushy ice-ocean interface and the dark ocean. The probe is a short steel cylinder on its tether.
+  - 8 frames, `frametime` 4: the spool turns and the probe sinks one row a frame from the ice into the ocean, leaving a borehole of meltwater where bubbles rise. Its RTG-heated melt head glows white-hot with an orange halo and a red melt glow under it. The gauge lights one more cell a frame (the newest brightest), and the status lamp is lit.
+  - Idle: the probe parked at the top of the ice, its head dark, the gauge empty and the lamp dark.
+  - The emissive layer holds only the melt head, the lit gauge cells and the lamp.
+- Algae bioreactor: three glass photobioreactor tubes between four LED grow-light strips, under a lamp hood and over the bottom manifold, with a control strip below (grow-light indicator, harvest bar, run lamp).
+  - 8 frames, `frametime` 4: a green culture that shimmers (`Get-Noise`), shaded as lit cylinders. A bubble rises in each tube, out of step, wobbling between the tube's two columns and bursting at the surface. The LEDs glow pink with warm white every third row, the harvest bar fills one cell every two frames and starts again, and the indicator and run lamps are lit.
+  - Idle: clear pale medium in the tubes, the LEDs dark, the bar empty and both lamps dark.
+  - The emissive layer holds only the LED strips, the lit bar cells and the two lamps.
+- The biofoundry's checks; the output is identical byte for byte.
+- To retouch:
+  - `$CbPal`/`$CbBase` and `$AbPal`/`$AbBase` hold the colours and the maps.
+  - Cryobot: `$CbLayer` shades the window row by row, `$CbTipY` moves the probe and `$CbGaugeY0`/`$CbGaugeCells` place the gauge (one cell per frame).
+  - Algae bioreactor: `$AbTubes`, `$AbCulture` and `$AbDepth` shade the tubes, `$AbPath` and `$AbPhase` drive the bubbles, `$AbLedX` places the LED strips and `$AbBar` the harvest bar.
+  - Add any new light to `$CbGlowZone` or `$AbGlowZone`.
+
+```powershell
+powershell -NoProfile -ExecutionPolicy Bypass -File tools\assets\Build-EuropaTextures.ps1
+powershell -NoProfile -ExecutionPolicy Bypass -File tools\assets\Build-EuropaTextures.ps1 -Only cryobot -Credits
+```
+
+| File (under `textures/`) | Notes |
+|---|---|
+| `block/multiblock/cryobot/overlay_front.png` | Idle: the probe parked at the top of the ice with its head dark, under the spool; the ice strata, the interface and the dark ocean; the gauge empty and the status lamp dark. |
+| `.../overlay_front_active.png` + `.mcmeta` | 8 frames, `frametime` 4: the spool turning, the probe sinking a row a frame through the ice into the ocean with its melt head glowing, the meltwater borehole and bubbles behind it, the gauge filling and the status lamp lit. |
+| `.../overlay_front_active_emissive.png` + `.mcmeta` | Only the melt head, the lit gauge cells and the status lamp. |
+| `block/multiblock/algae_bioreactor/overlay_front.png` | Idle: three tubes of clear pale medium between dark LED strips; the bar empty, the indicator and run lamps dark. |
+| `.../overlay_front_active.png` + `.mcmeta` | 8 frames, `frametime` 4: the shimmering green culture with a bubble rising in each tube out of step, the LED strips lit pink and warm white, the harvest bar filling, and the indicator and run lamps lit. |
+| `.../overlay_front_active_emissive.png` + `.mcmeta` | Only the LED strips, the lit bar cells and the two lamps. |
 
 ## Contrast pass after the gallery test (2026-10-25)
 

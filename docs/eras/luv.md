@@ -868,6 +868,12 @@ This plant takes slot 16 only if spike S0-3 shows that a second station can't be
   - IV: the hot cell's RTG pellets, and the drill family's heat tax;
   - LuV: Io's sulfur concrete and the vault.
 - **Source:** real: cryobot studies (Philberth; VALKYRIE; JPL's PRIME and SESAME), Europa's salt (Trumbo, Brown and Hand, 2019).
+- **As built** (B8, `startup_scripts/grindless/luv/europa.js`):
+  - 5 × 5 × 16: the ice shaft (rows 1–5, packed or blue ice), a sulfur concrete base around a 3 × 3 vault core with the tether opening, a tungsten steel frame derrick and a vault head with a tungstensteel gearbox drum. Base: 1–2 energy hatches, buses and 1–2 output hatches.
+  - GTM's overclock, no parallel: one probe, one sample. The family type is widened (never narrowed) to 3 item inputs and 2 fluid outputs.
+  - The RTG pellet is a 0.56 % chanced input (400 t of the hour's 72,000).
+  - The brine's surplus: a centrifuge splits 1,000 mB into 1,000 mB water, 6 magnesium sulfate (`gtceu:magnesium_sulfate`, new) and 2 salt dust; GTM's generated electrolysis splits both.
+  - Controller: shaped, LuV hull + 2 LuV pumps + LuV sensor + 4 LuV circuits + a tungstensteel gearbox (the drum), so it never matches the zero-g grower's grid. Probe: assembler, melt head + RTG pellet + LuV sensor + 8 optical fibres (the tether) + 4 HSS-S plates, 7,680 EU/t × 600 t. Melt head: 4 tungsten carbide + 2 HSS-S plates + an IV pump, 7,680 EU/t × 400 t.
 
 ### 18. Algae bioreactor: `gtceu:algae_bioreactor`, type `gtceu:bioreactor` (greenhouse step 5; the culture only on Europa)
 
@@ -894,6 +900,7 @@ This plant takes slot 16 only if spike S0-3 shows that a second station can't be
   - GTM's peroxide chemistry;
   - LuV's cryobot, optical miner (belt), biofoundry and sulfur concrete.
 - **Source:** real: ESA's MELiSSA; Europan habitability (Hand and Chyba, 2007; Vance and others, 2016).
+- **As built** (B8): 5 × 5 × 13, the three tubes with lamps between them on a sulfur concrete hall under a vault roof; GTM's overclock; ids `grindless:bioreactor/luv/algae` and `…/europan_culture`. `gtceu:brewery/bacteria` is removed in the same script. The culture takes B5's chondritic extract, so B8 merges after B5.
 
 ### 19. Gravitational-wave detector: `gtceu:gravitational_wave_detector`, type `gtceu:gravitational_wave_astronomy` (observatory step 6; Ganymede)
 
