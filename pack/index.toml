@@ -113,6 +113,10 @@ file = "kubejs/assets/emi/recipe/additions/grindless/capacitor_cells.json"
 hash = "2c54188e7e6c34cae017eae126934bc046b747ad5b01b46d7ec730c2b276782c"
 
 [[files]]
+file = "kubejs/assets/emi/recipe/additions/grindless/engineered_seeds.json"
+hash = "500883fe01437d75e4a8b6f8cf01ec6489c5726899a9bae68c94412817345405"
+
+[[files]]
 file = "kubejs/assets/emi/recipe/additions/grindless/heliostat_mirror.json"
 hash = "735bbc0646777b07c438bba4743516bb0f29cb4944c29db5d2b94d643c1f9b3d"
 
@@ -415,6 +419,26 @@ hash = "45bb3550248a9c4222b933bdb153501ae4fc3b5c7ede61fe67a1c0a21e20aa3f"
 [[files]]
 file = "kubejs/assets/grindless/textures/block/multiblock/atmosphere_processor/overlay_front_active_emissive.png.mcmeta"
 hash = "af915735740bd046c85e66fc03c47bb31517ef64f1721726151ea5de8cf121e3"
+
+[[files]]
+file = "kubejs/assets/grindless/textures/block/multiblock/biofoundry/overlay_front.png"
+hash = "8b584d92d0630cfd92d55781df918df9937fa68a46037fe21c3d4d139b53b3b9"
+
+[[files]]
+file = "kubejs/assets/grindless/textures/block/multiblock/biofoundry/overlay_front_active.png"
+hash = "434ae127915100c96a0e8a396bb69e251677f3e4d7f5b0d7e5df7f68c1dce26e"
+
+[[files]]
+file = "kubejs/assets/grindless/textures/block/multiblock/biofoundry/overlay_front_active.png.mcmeta"
+hash = "491ea51d46bc1f0c0ff11ed9293461cc67de293c7672abbc45f67563f8fe1f1a"
+
+[[files]]
+file = "kubejs/assets/grindless/textures/block/multiblock/biofoundry/overlay_front_active_emissive.png"
+hash = "fbfcf2a903267c85dc949cd0e49584be4958a1bad1d7b54d5fac67965a09c796"
+
+[[files]]
+file = "kubejs/assets/grindless/textures/block/multiblock/biofoundry/overlay_front_active_emissive.png.mcmeta"
+hash = "491ea51d46bc1f0c0ff11ed9293461cc67de293c7672abbc45f67563f8fe1f1a"
 
 [[files]]
 file = "kubejs/assets/grindless/textures/block/multiblock/biorefinery/overlay_front.png"
@@ -2126,7 +2150,7 @@ hash = "597286ab53fe25d3ed999a8c75d31f5a52741a4ba3e132008120686679cf8ca3"
 
 [[files]]
 file = "kubejs/client_scripts/grindless/emi_info_lang.js"
-hash = "e46e4cbac8236185b9d3c3c13df8f87bbc3ab8396c0dade943c624076ed34e2f"
+hash = "bf226f5ff922bcc1212da1846cd61264bed221741421eebf190b947338ba6f9f"
 
 [[files]]
 file = "kubejs/client_scripts/grindless/ev_ae2_interplanetary_lang.js"
@@ -2241,6 +2265,10 @@ file = "kubejs/client_scripts/grindless/launch_road_lang.js"
 hash = "42c98a78baa19277c3921cfc1836fe9ef875691349f46a2fb7db2f496ae7b609"
 
 [[files]]
+file = "kubejs/client_scripts/grindless/luv_biofoundry_lang.js"
+hash = "87919e2a5229ea67ff94c190f357f387f5c7874f1ff6a3e7f38a72553c1a8745"
+
+[[files]]
 file = "kubejs/client_scripts/grindless/luv_foundation_lang.js"
 hash = "f056bfc08ab6e28f8fce6ea33975c3114889231eabdfa77993ea4608f7d97464"
 
@@ -2353,6 +2381,10 @@ file = "kubejs/data/grindless/tables/ae2_gt.json"
 hash = "7eaa8fc6122b00a8b59e680d5bea222ef9bc0b903a0fcfdc9bba69b9dcab060e"
 
 [[files]]
+file = "kubejs/data/grindless/tables/biofoundry.json"
+hash = "41764ea5f1898d48b134417fbcb83d4985817767027dcf6aeceeb46cc8cf0b39"
+
+[[files]]
 file = "kubejs/data/grindless/tables/chest_furnace_tiers.json"
 hash = "5da688f7bfcbaa1e59fb19e39b1967946ae9d6780b9a61c131fdabc73dddaafa"
 
@@ -2366,7 +2398,7 @@ hash = "78e0550c5776e33e7e3cf74a25bbe172dbbee4f6a0152be0c819ec768b9b60b9"
 
 [[files]]
 file = "kubejs/data/grindless/tables/hidden_until.json"
-hash = "fdf4988079ab726b63180b7ebb4878e2aebf38a0490ef71ce2d0d24ec935aabe"
+hash = "ae970c3be283535262eb0093f2cd6bc2e9fc9f103fb68bb1ba34d2833cdb2034"
 
 [[files]]
 file = "kubejs/data/grindless/tables/hot_cell.json"
@@ -2702,7 +2734,7 @@ hash = "1bb8ba4124d273fec1c5ce028783272b7520090b17bc1865d99299d2275597ce"
 
 [[files]]
 file = "kubejs/server_scripts/grindless/lib/compose.js"
-hash = "1b43f1ba52147e7c2b4a3c32b13ffe5513ec1384e9d844b5e908ae44fb39a236"
+hash = "9d5c20e02e9004f7187171f436177343014361c412d8383a2c61be9717822972"
 
 [[files]]
 file = "kubejs/server_scripts/grindless/lib/wireless_adapters.js"
@@ -2711,6 +2743,10 @@ hash = "0f644051440bc20324c3c2951ee947d159620cf743fa4a73d96dbe4dc16370a8"
 [[files]]
 file = "kubejs/server_scripts/grindless/lib/wireless_registry.js"
 hash = "d59f924e029744e5b1369c79a1c4d6329cc1e143b5eb30832622f59dedc65249"
+
+[[files]]
+file = "kubejs/server_scripts/grindless/luv/biofoundry.js"
+hash = "92c5fef3229cefd44a912b7cf3af03d010b5e7b4f37a564f06a6bc7238d18c73"
 
 [[files]]
 file = "kubejs/server_scripts/grindless/lv/arc_furnace.js"
@@ -3041,6 +3077,10 @@ file = "kubejs/startup_scripts/grindless/lib/tables.js"
 hash = "05fc95ba3708aff1690713155bbce2990fc4387530fbb84d4b4b141aa1289a96"
 
 [[files]]
+file = "kubejs/startup_scripts/grindless/luv/biofoundry.js"
+hash = "a6a329f580b17079988a013da53901e05255e9a21bf21d3cd7f62399e23c3651"
+
+[[files]]
 file = "kubejs/startup_scripts/grindless/luv/foundation.js"
 hash = "e684d92eeaaee7b3d8d4f6bf5a8d24f8682b5a37d280eedab5a41165100b5ccc"
 
@@ -3098,7 +3138,7 @@ hash = "f18a63efe946683d10e9b643d8a8eecd33e03f04209036b4254cd7277679945d"
 
 [[files]]
 file = "kubejs/startup_scripts/grindless/mv/leisure_factories.js"
-hash = "b9cd5d6943fa0e3460df53f51f0a3f3b72282a2d45c8b2571391421806cc14dd"
+hash = "17ce5c6f5e3e7f904fd4aba39289a8324b6a7fa6a2e5ad9609824b5dd779006c"
 
 [[files]]
 file = "kubejs/startup_scripts/grindless/mv/leisure_utility.js"
