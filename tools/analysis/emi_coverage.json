@@ -55,10 +55,5 @@
     { "id": "grindless:chondritic_extract", "role": "use", "reason": "temporary (LuV-B5): its use, the Europan culture of the algae bioreactor, is LuV-B8's;     delete this exception when B8 merges" }
       ],
       "pendingRoutes": [
-        { "id": "grindless:chemical_reactor/uranian_quantum_seed", "reason": "ZPM-B1: the ice-giant atmosphere sample is B5's; delete when B5 merges" },
-        { "id": "grindless:diamond_cvd/cvd_diamond", "reason": "ZPM-A6: the ice-giant diamond seed (not consumed) is B5's; delete when B5 merges" },
-        { "id": "grindless:diamond_cvd/nitrogen_doped_diamond", "reason": "ZPM-A6: the ice-giant diamond seed (not consumed) is B5's; delete when B5 merges" },
-        { "id": "grindless:telemetry_decoding/neptune_flyby_data", "reason": "ZPM-A9: the Neptune probe recording is B5's (flyby probe bay); delete when B5 merges" },
-        { "id": "grindless:telemetry_decoding/triton_flyby_data", "reason": "ZPM-A9: the Triton probe recording is B5's (flyby probe bay); delete when B5 merges" }
       ]
     }

@@ -241,6 +241,10 @@ file = "kubejs/assets/emi/recipe/additions/grindless/zpm_probe_bay_casing.json"
 hash = "b77e6aeae55c69b9bdf9c037879739cd00490a99ff92c915bba2b8e0dd130668"
 
 [[files]]
+file = "kubejs/assets/emi/recipe/additions/grindless/zpm_uranus_pressure_hull_casing.json"
+hash = "50e9e7cb81a7f2787b9a7fd532edebdde4592cd6a6f278e387b3d317e9d9aa82"
+
+[[files]]
 file = "kubejs/assets/grindless/gcyr/planet_assets/sky_renderers/asteroid_belt.json"
 hash = "d6a46c74d825cc68ac39892a9ec21cf1cbd2b4047d7df9dab32d3676edf6991a"
 
@@ -1033,6 +1037,18 @@ file = "kubejs/assets/grindless/textures/block/multiblock/flux_tube_tether/overl
 hash = "fe0c1a86ae8a9c0b29b4e5e2e86a8ca4e2e85efe5a8f2d37a15b2ff13137717c"
 
 [[files]]
+file = "kubejs/assets/grindless/textures/block/multiblock/flyby_probe_bay/overlay_front.png"
+hash = "53d4605e244da6ec022fcb24e3a70821e0cac63a0fb81a9226a5d8c05684a7e0"
+
+[[files]]
+file = "kubejs/assets/grindless/textures/block/multiblock/flyby_probe_bay/overlay_front_active.png"
+hash = "04a29c453cedaa8bc5daa39e125622ad1e9e5ea914fe2e808baa322248c1a421"
+
+[[files]]
+file = "kubejs/assets/grindless/textures/block/multiblock/flyby_probe_bay/overlay_front_active_emissive.png"
+hash = "7ca0ecac8fa2082caa12bffcdeeaa47970b2b32fd63449478a4979bcf32c4884"
+
+[[files]]
 file = "kubejs/assets/grindless/textures/block/multiblock/fuel_fabrication_plant/overlay_front.png"
 hash = "9c2d539374c58fcd2c331c73de2787e2c72151d5912ef7752007c6d08ce3f25b"
 
@@ -1303,6 +1319,18 @@ hash = "98776bddcfe819b26ffc5b398a1a256ab9e0f9b8cfb24df692ff0101cdab5a74"
 [[files]]
 file = "kubejs/assets/grindless/textures/block/multiblock/hydroponic_ring/overlay_front_active.png"
 hash = "8a42d68cecb8a983d0583c8f3dfdffe19b49082444ea65dafaccaf0937c25b46"
+
+[[files]]
+file = "kubejs/assets/grindless/textures/block/multiblock/ice_giant_siphon/overlay_front.png"
+hash = "ff6e44ba038045db6cf05ffd699938879229435da1f03368cc4d749d7cbb3bde"
+
+[[files]]
+file = "kubejs/assets/grindless/textures/block/multiblock/ice_giant_siphon/overlay_front_active.png"
+hash = "cee512db1d3e905918264b6cb800649af9b566ed6c06e05ae0b510f4d6642bfa"
+
+[[files]]
+file = "kubejs/assets/grindless/textures/block/multiblock/ice_giant_siphon/overlay_front_active_emissive.png"
+hash = "783833e42d20960267ab25500f5f36d86663354544682a3ffce8b7652c4f6ab7"
 
 [[files]]
 file = "kubejs/assets/grindless/textures/block/multiblock/interferometer/overlay_front.png"
@@ -2063,6 +2091,18 @@ hash = "014849da60d4e340d813c9e9d6f95a632aa7e143274b2b56cb155e8793b7d131"
 [[files]]
 file = "kubejs/assets/grindless/textures/block/multiblock/sealed_dome/overlay_front_active_emissive.png.mcmeta"
 hash = "491ea51d46bc1f0c0ff11ed9293461cc67de293c7672abbc45f67563f8fe1f1a"
+
+[[files]]
+file = "kubejs/assets/grindless/textures/block/multiblock/slurry_separator/overlay_front.png"
+hash = "03fc7e14652f3a36eb58e3a785ca32e0a7d5e64baff664f253a8bca21f624888"
+
+[[files]]
+file = "kubejs/assets/grindless/textures/block/multiblock/slurry_separator/overlay_front_active.png"
+hash = "2482439ea66a6c8df55c3526d323acce359bb6b617bcba4df9f85b7c0ae998ec"
+
+[[files]]
+file = "kubejs/assets/grindless/textures/block/multiblock/slurry_separator/overlay_front_active_emissive.png"
+hash = "175c0554912f5abfa5069c9467c93dc847d80134194610367d05ea37bbcc0131"
 
 [[files]]
 file = "kubejs/assets/grindless/textures/block/multiblock/steam_alloy_smelter/overlay_front.png"
@@ -3565,6 +3605,10 @@ file = "kubejs/client_scripts/grindless/zpm_travel_lang.js"
 hash = "6455c858a7865ce488a1874ac795a2014d9a4721bac4066f4325c496081e770f"
 
 [[files]]
+file = "kubejs/client_scripts/grindless/zpm_uranus_lang.js"
+hash = "15b121dedcef4e2bdc47f2162431b235dded47a85ae8b760fdef6f54b8970d7b"
+
+[[files]]
 file = "kubejs/data/gcyr/gcyr/planets/mercury.json"
 hash = "1cb9eb28f91d7294d0a6174f7c31198205592268fcb67746d4b3fb3ea99b15e4"
 
@@ -3734,7 +3778,7 @@ hash = "1f4b256531a0b42a6ecf399e9b692d9e4730bd4102e53aab3e1fa2c999b69e9d"
 
 [[files]]
 file = "kubejs/data/grindless/tables/hidden_until.json"
-hash = "05276e18f5697bbe9d5f48b36e628f21134ec59afdf8c7b391299fffeedc6980"
+hash = "efb18c7f240c35f27d763c013e89040488213d2f262d32a4d7a3ee28624c004d"
 
 [[files]]
 file = "kubejs/data/grindless/tables/hot_cell.json"
@@ -4417,6 +4461,10 @@ file = "kubejs/server_scripts/grindless/zpm/travel.js"
 hash = "8784cc2635089e5bde67d5c4475362cf184008cf1fa785baa3d3d19c13fd4aae"
 
 [[files]]
+file = "kubejs/server_scripts/grindless/zpm/uranus.js"
+hash = "6d6330e82c879827aa80865860bdfd7338fa956b6f02a3683278249810d080d7"
+
+[[files]]
 file = "kubejs/startup_scripts/grindless/dimensions.js"
 hash = "6bbf23878af066772a65a97bde38fb25ff42cf860aed05bd338fb84730c3b37e"
 
@@ -4807,6 +4855,10 @@ hash = "7977fe42f1a21b99322b64098280808de535ea8eae4fe76b2a2555cabfa3190c"
 [[files]]
 file = "kubejs/startup_scripts/grindless/zpm/travel.js"
 hash = "51dd0427bc8a93b0af6200ba2f1aef81aa3afd0c0afbb196c371751223e4ace6"
+
+[[files]]
+file = "kubejs/startup_scripts/grindless/zpm/uranus.js"
+hash = "10e42770c16f902b401d8d164d40c34ef69a3376bbfa8089c1e38e5b82a2a77d"
 
 [[files]]
 file = "mods/advancement-plaques.pw.toml"

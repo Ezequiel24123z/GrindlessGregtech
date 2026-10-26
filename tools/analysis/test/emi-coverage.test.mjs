@@ -272,7 +272,7 @@ test('EMI shows how every item, block, fluid and machine of the pack is obtained
   assert.ok(samples.length > 40);
   // LuV B9: the Saturn Transfer Chart is made by the coilgun (a GT recipe) and is the ZPM trip: until ZPM its use is its copy and a page
   const nextEra = new Set(['grindless:saturn_transfer_chart']);
-  // ZPM-A9: the Pluto-Kuiper chart decodes B5's recordings (a pending route) and is UV's trip (an end product)
+  // ZPM-A9: the Pluto-Kuiper chart is decoded from B5's flyby recordings and is UV's trip (an end product): no GT use until UV
   const pending = new Set(['grindless:pluto_kuiper_chart']);
   for (const r of charts.filter((x) => !pending.has(x.key))) {
     // an info page lists its stack as both made and used, so the chart's page shows on both sides
