@@ -72,7 +72,7 @@ IV leaves, as built:
     - GTCA's calcium plasma gives a little fusion power (its net figure is checked in B10); D + T stays small.
 11. **Research:**
     - computer casings and the data bank;
-    - the HPCA and the research station (assembly line at 100,000 EU/t on two LuV hatches; URhNq₂ from the large mixer on two LuV hatches);
+    - the HPCA and the research station (assembly line at 100,000 EU/t on two LuV hatches; URhNq₂ dust from the large mixer on two LuV hatches, its ingot from a trinium-coil blast furnace at 9,000 K, its double wire from the Universal Assembly Factory on two LuV hatches);
     - the ZPM energy hatch's data orb.
 12. **Exit:** *Gate to ZPM*.
 
@@ -1207,10 +1207,10 @@ They are 5 EU/t × 100 t with nothing in and nothing out.
     - The advanced computation and bridge components need UV circuits: beyond LuV.
   - **HPCA:** `gtceu:assembly_line/high_performance_computing_array`, 100,000 EU/t × 1,200 t: a data bank, 4 ZPM circuits, 8 LuV field generators, 64 URhNq₂ double wires, 16 optical pipes and 4,000 mB PCB coolant.
   - **Research station:** `gtceu:assembly_line/research_station`, 100,000 EU/t × 1,200 t: a data bank, 8 LuV sensors, 8 ZPM circuits, 2 LuV field generators, 2 ZPM motors, 32 URhNq₂ double wires, 32 trinium foils and 16 optical pipes.
-  - **URhNq₂:** `gtceu:mixer/uranium_rhodium_dinaquadide`, 122,880 EU/t × 150 t: uranium + rhodium + 2 naquadah. GCYM's large mixer takes it on two LuV hatches (`Predicates.autoAbilities` allows two energy hatches, `Predicates.java:159–160`).
+  - **URhNq₂:** `gtceu:mixer/uranium_rhodium_dinaquadide`, 122,880 EU/t × 150 t: uranium + rhodium + 2 naquadah. GCYM's large mixer takes it on two LuV hatches (`Predicates.autoAbilities` allows two energy hatches, `Predicates.java:159–160`). The dust is not the end: the ingot needs a 9,000 K blast (an EBF with trinium coils), and the 122,880 EU/t double-wire assembler recipe runs on our Universal Assembly Factory on two LuV hatches (checked by the LuV integrated run's validator).
   - **The goal:** the data orb for `gtceu:assembly_line/energy_hatch_zpm`.
   - The 100,000 EU/t recipes need two LuV hatches. From the network, that means its LuV tier.
-- **GCYM at LuV:** the large mixer (an osmiridium rotor), now essential for URhNq₂. The mega blast furnace and the mega vacuum freezer stay ZPM.
+- **GCYM at LuV:** the large mixer (an osmiridium rotor), now essential for URhNq₂ dust (then a trinium-coil EBF and the Universal Assembly Factory). The mega blast furnace and the mega vacuum freezer stay ZPM.
 - **Circuits in batches:**
   - NPUs from the organoid lab;
   - wetware processors from GT--'s line (32 a run, one LuV energy hatch on GT--'s circuit assembly line);
@@ -1285,7 +1285,7 @@ No passive waits (decision 12): every row is something built or run.
 |---|---|
 | ZPM hull | trinium (mode 2) and naquadah alloy (the smelter or the 7,200 K EBF) |
 | ZPM motor, made by the assembly line from the network | the Mk1's europium (96 fine wires), Mars samarium, osmiridium |
-| HPCA and research station formed, with computation components | computer casings, the data bank, URhNq₂ from the large mixer on two LuV hatches, ZBLAN optical pipes, PCB coolant |
+| HPCA and research station formed, with computation components | computer casings, the data bank, URhNq₂ (large mixer, trinium-coil EBF, Universal Assembly Factory, all on two LuV hatches), ZBLAN optical pipes, PCB coolant |
 | The ZPM energy hatch's data orb, written by the research station; then the hatch, made by the assembly line on two LuV hatches (122,880 EU/t) | research; UHPIC (the wake shield); ZPM voltage coils (a ZPM assembler, its parts from the line, on a transformer); NaK |
 | Mk1 formed with HTS coils, one Nd + H → Eu run | the magnet works, trinium, 15 LuV hatches, the neutron reflectors |
 | 4 wetware processors and 4 crystal processor assemblies on the network | the organoid lab (NPU), GT--'s line (one LuV energy hatch on GT--'s circuit assembly line), the grower |
