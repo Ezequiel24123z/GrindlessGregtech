@@ -12,7 +12,7 @@ const WITH_WIRELESS = true;
 // or cluster tagged pkg: 'B6' (or ['B1', 'B6']: all of them) is left out, with every arrow into it, until its packages are here:
 // when one lands, adding it to this set is the whole change. B7 lands as one of two: 'B7T' is the flux-tube tether, 'B7S' the
 // sulfur-iodine plant that takes its slot if a second station fails (luv.md, 16b). The Io sites also wait for B1's places.
-const LANDED = new Set(['A1', 'A2', 'A3', 'A4', 'A5', 'B2', 'B3', 'B4', 'B5', 'B6', 'B8', 'B9', 'B10']);
+const LANDED = new Set(['A1', 'A2', 'A3', 'A4', 'A5', 'B1', 'B2', 'B3', 'B4', 'B5', 'B6', 'B8', 'B9', 'B10']);
 
 // fuel figures, EU per mB, from the dump's recipes (they already carry the pack's x2, power/generators.js)
 const COMBUSTION = [
@@ -475,7 +475,7 @@ export default gate({
       pkg: 'B2',
       nodes: [
         n('ospCell', 0, 0, I('gcyr:photovoltaic_cell'), 'Photovoltaic Cell', { kind: 'raw', sub: 'GCYR\'s LuV cell, on naquadah wafers' }),
-        E('eqOSS', 2.25, -1.5, 'luv_age', '3F2030C8DDEDB9FF'),
+        E('eqOSS', 2.25, -1.5, 'luv_age', '3F2030C8DDEDB9FF', { pkg: 'S03' }),
         n('ospPanel', 2.25, 0, I('grindless:orbital_solar_panel'), 'Orbital Solar Panel', { from: ['ospCell'], sub: 'The assembler makes it; triple-junction cells give two at once' }),
         n('orbital', 4.5, 0, M('gtceu:orbital_solar_station', 'gtceu:orbital_solar'), 'Orbital Solar Station', {
           kind: 'ours', tier: 'luv', from: ['eqOSS', structure('ospPanel')], sub: 'A LuV wireless dynamo hatch sends it home',
@@ -510,12 +510,11 @@ export default gate({
       name: 'Volcanic intake',
       pkg: 'B6',
       nodes: [
-        // the book's quest for it waits for B1's places too (tools/quests/luv-chapter/quests-data.mjs, PATERA)
-        E('eqPat', 0, -2.25, 'luv_age', '5BC4BFE9A199F5A1', { pkg: ['B1', 'B6'] }),
+        // no link to the book's Patera: in luv_age, Fusion depends on it, and FTB Quests would draw that line across this tab
         L('so2', 0, -0.75, 'pl_luv:so2'),
         L('bundle', 0, 0.75, 'pl_luv:bundle'),
         n('intake', 2.25, 0, M('gtceu:volcanic_intake', 'gtceu:volcanic_heat'), 'Volcanic Intake', {
-          kind: 'ours', tier: 'luv', from: ['eqPat', 'so2', 'bundle'], sub: 'Standing on a patera\'s magma',
+          kind: 'ours', tier: 'luv', from: ['so2', 'bundle'], sub: 'Standing on a patera\'s magma',
           desc: 'Io\'s tidal heat boils a sulfur dioxide loop. Jupiter pays for it, not you, but the bundles still wear out. More turbine modules, more runs at once.',
           figs: [P.run(32768, { per: 'a turbine module', where: 'on Io', recipe: 'grindless:volcanic_heat/patera', src: { file: IO_SERVER, re: 'intake: \\{ circuit: \\d+, eut: (\\d+)' } }),
             P.max(131072, 4, 32768, { file: IO_STARTUP, re: '\\{ sym: \'\\w\', col: \\d+, row: \\d+ \\}', count: true }), P.wnet(124518, 131072),

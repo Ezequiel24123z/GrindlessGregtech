@@ -2487,6 +2487,101 @@
 			x: 19.75d
 			y: 80.5d
 		}
+		{
+			icon: "minecraft:ender_pearl"
+			id: "1502188D51EF738B"
+			shape: "rsquare"
+			size: 1.0d
+			tasks: [
+				{ id: "3EF4F25A43837E31", item: "minecraft:ender_pearl", optional_task: true, type: "item" }
+				{ id: "5B13C9F49003C94F", type: "checkmark" }
+			]
+			title: "Ender Pearl"
+			x: 0.5d
+			y: 84.75d
+		}
+		{
+			icon: "gtceu:helium_3_bucket"
+			id: "32ECC0024E6F5E4F"
+			shape: "rsquare"
+			size: 1.0d
+			subtitle: "The Moon's"
+			tasks: [
+				{ id: "557F2462D33BC361", item: "gtceu:helium_3_bucket", optional_task: true, type: "item" }
+				{ id: "3B52F31F96DC5CC3", type: "checkmark" }
+			]
+			title: "Helium-3"
+			x: 0.5d
+			y: 86.25d
+		}
+		{
+			dependencies: ["1502188D51EF738B", "32ECC0024E6F5E4F"]
+			icon: "grindless:asteroid_quantum_seed"
+			id: "7CBC782168D5D862"
+			size: 1.25d
+			subtitle: "Made on site, from the local rock"
+			tasks: [
+				{ id: "3B68FC28A7EF4CB4", item: "grindless:asteroid_quantum_seed", optional_task: true, type: "item" }
+				{ id: "1BE048625C656054", type: "checkmark" }
+			]
+			title: "Quantum Seeds"
+			x: 3.0d
+			y: 85.5d
+		}
+		{
+			icon: "gtceu:titanium_frame"
+			id: "7840D10D59C8EB0C"
+			shape: "rsquare"
+			size: 1.0d
+			tasks: [
+				{ id: "1A9581C3DED91234", item: "gtceu:titanium_frame", optional_task: true, type: "item" }
+				{ id: "7C45F2F93CC56B17", type: "checkmark" }
+			]
+			title: "Titanium Frame"
+			x: 0.5d
+			y: 87.75d
+		}
+		{
+			dependencies: ["7840D10D59C8EB0C"]
+			icon: "grindless:station_truss_casing"
+			id: "1171B4DD990112F5"
+			size: 1.25d
+			subtitle: "Every station module is built of it"
+			tasks: [
+				{ id: "3DFE337B05BC5F2D", item: "grindless:station_truss_casing", optional_task: true, type: "item" }
+				{ id: "378C9F60A4426F02", type: "checkmark" }
+			]
+			title: "Station Truss Casing"
+			x: 3.0d
+			y: 87.75d
+		}
+		{
+			icon: "gcyr:kapton_k_plate"
+			id: "33E45C3F1492E595"
+			shape: "rsquare"
+			size: 1.0d
+			tasks: [
+				{ id: "18BC54C8B56B7A22", item: "gcyr:kapton_k_plate", optional_task: true, type: "item" }
+				{ id: "37B43AB366E0C573", type: "checkmark" }
+			]
+			title: "Kapton K Plate"
+			x: 0.5d
+			y: 89.25d
+		}
+		{
+			dependencies: ["33E45C3F1492E595"]
+			icon: "grindless:cryogenic_fuel_tank"
+			id: "10D7DA8F16132672"
+			size: 1.25d
+			subtitle: "The level 4 rocket's tanks"
+			tasks: [
+				{ id: "5A9BB38ABB6A66A9", item: "grindless:cryogenic_fuel_tank", optional_task: true, type: "item" }
+				{ id: "1DF8342398DF2CFF", type: "checkmark" }
+			]
+			title: "Cryogenic Fuel Tank"
+			x: 3.0d
+			y: 89.25d
+		}
 	]
 	subtitle: ["Trinium and enriched naquadah, superconducting tape and magnets, living circuits, and the first factories in orbit."]
 	title: "LuV Lines"
