@@ -158,7 +158,8 @@
         Text.translate('grindless.machine.extraction_cascade.tooltip.0'),
         Text.translate('grindless.machine.extraction_cascade.tooltip.1'),
         Text.translate('grindless.machine.extraction_cascade.tooltip.2'),
-        Text.translate('grindless.machine.extraction_cascade.tooltip.3')
+        Text.translate('grindless.machine.extraction_cascade.tooltip.3'),
+        Text.translate('grindless.machine.extraction_cascade.tooltip.4')
       ])
       .workableCasingModel(INERT_TEXTURE, 'grindless:block/multiblock/extraction_cascade')
   })
