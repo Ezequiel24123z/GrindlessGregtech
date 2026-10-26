@@ -371,9 +371,21 @@ export function auditEmiCoverage({ dump, registry, cfg, emi, lang = null, native
   // a recipe of ours that EMI drops for a disabled stack takes a whole route out of view (the observation that makes a chart, the drill
   // run that uses a sample), even when another route keeps the item covered: the recipe must not carry the hidden stack
   const shown = new Set(results.map((r) => r.key));
-  const droppedRoutes = invisible.filter((r) => r.dropped).map((r) => ({
+  const allDropped = invisible.filter((r) => r.dropped).map((r) => ({
     id: r.id, type: r.type, disabledBy: r.disabledBy, ours: [...new Set([...r.outputs, ...r.inputs, ...r.catalysts])].filter((k) => shown.has(k)),
   })).filter((d) => d.ours.length > 0);
+  // a pending route waits for a later package of the era under construction: it may only be dropped for our own stacks disabled until
+  // their era, and a stale entry (no longer dropped) is a problem, so each one is deleted when its package merges
+  const untilEra = new Set(hiddenOurs.map((h) => h.key));
+  const pending = new Map((cfg.pendingRoutes || []).map((p) => [p.id, p]));
+  const pendingRoutes = [];
+  const droppedRoutes = [];
+  for (const d of allDropped) {
+    const p = pending.get(d.id);
+    if (p && d.disabledBy.every((b) => untilEra.has(b.slice(b.indexOf(' ') + 1)))) pendingRoutes.push({ ...d, reason: p.reason || '' });
+    else droppedRoutes.push(d);
+  }
+  for (const p of pending.values()) if (!pendingRoutes.some((d) => d.id === p.id)) problems.push(`pending route ${p.id}: EMI no longer drops it for stacks disabled until their era; delete the entry`);
   for (const d of droppedRoutes) problems.push(`${d.id} (${d.type}): EMI drops it for ${d.disabledBy.join(', ')}, hiding a route of ${d.ours.join(', ')}`);
 
   // every process of ours (a recipe type our scripts register) shows at least one recipe, unless EMI never shows its type
@@ -398,7 +410,7 @@ export function auditEmiCoverage({ dump, registry, cfg, emi, lang = null, native
       audited: results.length, items: results.filter((r) => r.kind === 'item').length, machines: results.filter((r) => r.kind === 'machine').length,
       fluids: results.filter((r) => r.kind === 'fluid').length, recipes: recipes.length, pages: emi.pages.length, invisible: invisible.length,
     },
-    results, gaps, legacy, hiddenOurs, missingInDump, problems, previewWarnings, derivedChecks, processes, droppedRoutes,
+    results, gaps, legacy, hiddenOurs, missingInDump, problems, previewWarnings, derivedChecks, processes, droppedRoutes, pendingRoutes,
     unknownTypes: [...unknownTypes.entries()].map(([type, n]) => ({ type, n })),
     viaPagesOnly: results.filter((r) => (r.made.length > 0 && r.made.every((m) => m.source === 'page')) || (!r.end && r.used.length > 0 && r.used.every((m) => m.source === 'page'))).map((r) => r.key),
     invisibleRoutes: results.filter((r) => r.invisibleMade.length > 0).map((r) => ({ key: r.key, routes: r.invisibleMade })),
@@ -419,6 +431,10 @@ export function renderCoverageText(res) {
   }
   const ex = res.results.filter((r) => r.excepted.length > 0);
   L.push(`Recipes of ours EMI drops for a disabled stack (assets/emi/index/stacks): ${res.droppedRoutes.length}`);
+  if (res.pendingRoutes && res.pendingRoutes.length) {
+    L.push(`Pending routes (dropped only for stacks disabled until their era): ${res.pendingRoutes.length}`);
+    for (const d of res.pendingRoutes) L.push(`  · ${d.id}: ${d.disabledBy.join(', ')} — ${d.reason}`);
+  }
   if (ex.length) {
     L.push(`Justified exceptions: ${ex.length}`);
     for (const r of ex) L.push(`  · ${r.key}: ${r.excepted.map((e) => e.role + ' — ' + e.reason).join('; ')}`);
