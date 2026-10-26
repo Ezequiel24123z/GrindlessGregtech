@@ -55,6 +55,7 @@ Generators for the pack's own textures. Everything is procedural 16x16 pixel art
 | `Build-BiofoundryTextures.ps1` | Writes the LuV biofoundry's face (`multiblock/biofoundry/`). `-Only biofoundry` and `-Credits` (its 5 CREDITS rows). |
 | `Build-LuVCryogenicsTextures.ps1` | Writes the faces of the LuV helium refrigerator and coated conductor line (LuV-A3: `multiblock/helium_refrigerator/`, `multiblock/coated_conductor_line/`). `-Only refrigerator,line`, `-Preview <png outside the repo>` (optional `-FrostCasing <png>`, `-StainlessCasing <png>`) and `-Credits` (their 10 CREDITS rows). |
 | `Build-LuVFoundationTextures.ps1` | Writes the shared LuV textures (LuV-A1): 29 items (four of them animated quantum seeds) and the ten block textures under `block/luv/` (eight casings and the orbital solar panel's cells and frame). `-Only <output or group>`, `-Preview <png outside the repo>`, `-Credits`. |
+| `Build-ZPMFoundationTextures.ps1` | Writes the shared ZPM textures (ZPM-F1): 31 items and the six block textures under `block/zpm/`. `-Only <output or group>`, `-Preview <png outside the repo>`, `-Credits`. |
 | `Build-HTSMagnetWorksTextures.ps1` | Writes the LuV HTS magnet works' face (`multiblock/hts_magnet_works/`). `-Only magnet_works`, `-Preview <png outside the repo>` and `-Credits` (its 5 CREDITS rows). |
 | `Build-GanymedeTextures.ps1` | Writes the faces of the LuV gravitational wave detector and coilgun launcher (LuV-B9: `multiblock/gravitational_wave_detector/`, `multiblock/coilgun_launcher/`). `-Only detector,launcher`, `-Preview <png outside the repo>` (optional `-FrostCasing <png>`, `-TungstenCasing <png>`) and `-Credits` (their 10 CREDITS rows). |
 | `Build-EuropaTextures.ps1` | Writes the faces of the LuV Europa machines (LuV-B8): the cryobot and the algae bioreactor (`multiblock/cryobot/`, `multiblock/algae_bioreactor/`). `-Only cryobot,algae_bioreactor` and `-Credits` (their 10 CREDITS rows). |
@@ -815,6 +816,21 @@ powershell -NoProfile -ExecutionPolicy Bypass -File tools\assets\Build-IoOrbitTe
 | `block/multiblock/sulfur_iodine_plant/overlay_front.png` | Idle: a steel column with a violet iodine band at the top, a yellow sulfur band and the dark HI sections, a feed pipe on the left, the hydrogen outlet and its dark lamp on the right, over a cold vertical-slot heat grille. |
 | `.../overlay_front_active.png` | The grille glows orange from the volcanic heat, the HI sections glow and bubble, and the hydrogen lamp is lit green. |
 | `.../overlay_front_active_emissive.png` | Only the grille's slots, the HI sections with their bubbles and the hydrogen lamp. |
+
+### ZPM foundation (ZPM-F1)
+
+`Build-ZPMFoundationTextures.ps1`: same method and checks as the LuV foundation, with its helpers copied. It draws the 31 shared ZPM items (`item/<id>.png`) and the 6 casing and block textures under `block/zpm/`. The six fluids need no PNG (they use the vanilla-style still and flowing textures).
+
+```powershell
+powershell -NoProfile -ExecutionPolicy Bypass -File tools\assets\Build-ZPMFoundationTextures.ps1
+powershell -NoProfile -ExecutionPolicy Bypass -File tools\assets\Build-ZPMFoundationTextures.ps1 -Only blocks
+powershell -NoProfile -ExecutionPolicy Bypass -File tools\assets\Build-ZPMFoundationTextures.ps1 -Preview C:\path\zpm-f1.png -Credits
+```
+
+- `-Only` accepts any output name and the groups `items` and `blocks`.
+- `-Preview` (outside the repo, never shipped) writes an x6 sheet: every item on slot grey and every block tiled 3x3.
+- The final check fails the run: 16x16, binary alpha, no pure black, blocks fully opaque, items with a transparent corner and at least 20 opaque pixels, no two identical textures, and the drawn set equals the ids registered in `startup_scripts/grindless/zpm/foundation.js`.
+- `-Credits` prints one CREDITS row per file.
 
 ## Contrast pass after the gallery test (2026-10-25)
 
