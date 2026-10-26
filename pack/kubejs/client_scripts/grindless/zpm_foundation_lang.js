@@ -1,7 +1,7 @@
 // Gregtech Grindless - names and tooltips of the ZPM foundation (startup_scripts/grindless/zpm/foundation.js):
 //
 //   grindless:<item> and grindless:<block>   item.grindless.<n> / block.grindless.<n> plus two tooltip lines (tooltip.grindless.<n>.0 and .1)
-//   grindless:<fluid>                        fluid.grindless.<n> and item.grindless.<n>_bucket
+//   gtceu:<fluid> (GT material)              material.gtceu.<n>
 //
 // Kept out of pack/kubejs/assets/grindless/lang/* like the other *_lang.js scripts. Names go in en_us and es_es.
 (function () {
@@ -134,8 +134,6 @@
             ['Ring Ice', '', ''], ['Hielo de anillo', '', '']]
     ]
 
-    var bucketName = { en_us: function (n) { return n + ' Bucket' }, es_es: function (n) { return 'Cubo de ' + n.charAt(0).toLowerCase() + n.slice(1) } }
-
     ;['en_us', 'es_es'].forEach(function (lang, li) {
         ClientEvents.lang(lang, function (event) {
             var add = function (key, value) { event.add('grindless', key, value) }
@@ -144,8 +142,7 @@
                 var id = e[1]
                 var t = e[2 + li]
                 if (kind === 'fluid') {
-                    add('fluid.grindless.' + id, t[0])
-                    add('item.grindless.' + id + '_bucket', bucketName[lang](t[0]))
+                    add('material.gtceu.' + id, t[0])
                     return
                 }
                 add(kind + '.grindless.' + id, t[0])
