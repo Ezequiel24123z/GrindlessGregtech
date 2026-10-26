@@ -289,6 +289,18 @@
     var veh = clientVehicle(p, rockets)
     S.put('clientDim', dim)
     S.put('clientVehicle', veh)
+    if (IS_LUV) {
+      try {
+        var mounted = jcall(p, V.vehicle)
+        S.put('clientMountedRocketUuid', mounted instanceof k().Rocket ? String(jcall(mounted, V.uuid)) : '')
+        S.put('clientMountedRocketY', mounted instanceof k().Rocket ? String(jcall(mounted, V.y)) : '')
+        S.put('clientMountObservedMs', String(Date.now()))
+        S.put('clientMountObservationError', '')
+      } catch (mountError) {
+        S.put('clientMountedRocketUuid', '')
+        S.put('clientMountObservationError', String(mountError))
+      }
+    }
     if (dim !== c.lastDim || veh !== c.lastVeh) {
       var scr = mc.currentScreen
       var title = 'none'
