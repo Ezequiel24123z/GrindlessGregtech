@@ -12,7 +12,7 @@ const WITH_WIRELESS = true;
 // or cluster tagged pkg: 'B6' (or ['B1', 'B6']: all of them) is left out, with every arrow into it, until its packages are here:
 // when one lands, adding it to this set is the whole change. B7 lands as one of two: 'B7T' is the flux-tube tether, 'B7S' the
 // sulfur-iodine plant that takes its slot if a second station fails (luv.md, 16b). The Io sites also wait for B1's places.
-const LANDED = new Set(['A1', 'A2', 'A3', 'A4', 'A5', 'B2', 'B3', 'B4', 'B6', 'B10']);
+const LANDED = new Set(['A1', 'A2', 'A3', 'A4', 'A5', 'B2', 'B3', 'B4', 'B6', 'B9', 'B10']);
 
 // fuel figures, EU per mB, from the dump's recipes (they already carry the pack's x2, power/generators.js)
 const COMBUSTION = [

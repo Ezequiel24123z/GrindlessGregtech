@@ -6,7 +6,7 @@
 // The pending clusters sit in the bands below the landed ones; their ids follow luv.md and are checked when their package lands.
 import { I, F, M, n, L, via, build, structure, network } from './pl-lib.mjs';
 
-export const LANDED = new Set(['A1', 'A2', 'A3', 'A4', 'A5', 'B2', 'B3', 'B4', 'B6', 'B10']);
+export const LANDED = new Set(['A1', 'A2', 'A3', 'A4', 'A5', 'B2', 'B3', 'B4', 'B6', 'B9', 'B10']);
 
 export default {
   file: 'pl_luv',
@@ -404,12 +404,13 @@ export default {
       name: 'Ganymede: listening and launching',
       pkg: 'B9',
       nodes: [
+        L('sgr2', 0, -2.25, 'pl_iv:sgr'),
         n('orb2', 0, -0.75, I('gtceu:data_orb'), 'Data Orb', { kind: 'raw' }),
         n('mass2', 0, 0.75, I('grindless:sapphire_test_mass'), 'Sapphire Test Mass', { kind: 'raw', sub: 'The crystal grower\'s' }),
         n('lhe3', 0, 2.25, F('gtceu:liquid_helium'), 'Liquid Helium', { kind: 'raw', sub: 'Make-up for the cryostats' }),
         n('gw', 2.5, 0.75, M('gtceu:gravitational_wave_detector', 'gtceu:gravitational_wave_astronomy'), 'Gravitational-Wave Detector', {
-          kind: 'ours', from: ['orb2', structure('mass2'), 'lhe3'],
-          desc: 'Two long arms buried in quiet ice, listening for space itself to stretch. The first catalogue holds a black hole merger, heard as a chirp.',
+          kind: 'ours', from: ['sgr2', 'orb2', structure('mass2'), 'lhe3'],
+          desc: 'Two long arms buried in quiet ice, listening for space itself to stretch. The Sagittarius A* signal stays in its bus, and the first catalogue holds a black hole merger, heard as a chirp.',
         }),
         n('catalogue', 5, 0.75, I('grindless:gravitational_wave_catalogue'), 'Gravitational-Wave Catalogue', { kind: 'product', from: ['gw'] }),
         n('coilc', 0, 4, I('grindless:coilgun_coil_casing'), 'Coilgun Coil Casing', { kind: 'raw', sub: 'Wound in the magnet works' }),
@@ -420,7 +421,7 @@ export default {
           desc: 'Ganymede\'s cold lets an HV superconductor work with no cryostat at all. The barrel throws probes off the moon without a rocket.',
         }),
         n('survey', 5, 4.75, I('grindless:jovian_atmosphere_survey'), 'Jovian Atmosphere Survey', { kind: 'product', from: ['coilgunl'], sub: 'Kept for ZPM' }),
-        n('chart', 5, 6.25, I('grindless:saturn_transfer_chart'), 'Saturn Transfer Chart', { kind: 'product', from: ['coilgunl'], sub: 'The next trip' }),
+        n('chart', 5, 6.25, I('grindless:saturn_transfer_chart'), 'Saturn Transfer Chart', { kind: 'product', from: ['coilgunl'], sub: 'The next trip: kept for ZPM' }),
       ],
     },
     travel: {
