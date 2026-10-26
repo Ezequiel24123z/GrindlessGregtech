@@ -5,8 +5,8 @@ Integrator-owned. Read this instead of `DECISIONS.md` and the session notes. Ove
 - **Playable version:** v0.8.0 "LuV, the outer system" (`15a7f85`). `playable` and `jugable` both point to it.
 - **Active development branch:** `ezequiel24123z-gregtech-grindless-modpack`. `main` matches it (PR #4 merged); feature work still branches from the development branch.
 - **Current milestone:** ZPM build. Design accepted: `docs/eras/zpm.md` (queue in its *Build order*), decisions in `DECISIONS.md` (2026-10-26, "ZPM").
-- **Last accepted integration batch:** the ZPM era design, on top of the AI-efficiency migration and v0.8.0.
-- **Approved packages in flight:** S0 spikes S0-1..S0-7 (serial, bench band X 18944) and F1 registrations (static, no band; rocket parts and planet ids wait for S0-1/S0-2). Then F2 (integrator), wave A pairs, B1, wave B pairs, C1-C3, v0.9.0.
+- **Last accepted integration batch:** ZPM S0 spikes (#6, `docs/research/zpm-s0.md`: S0-2/5/6/7 PASS, S0-1 FAIL so levels 5/6 come from tier 7/9 tanks with elite motors, S0-3/S0-4 moved into F2/B1 T1s) and F1 shared registrations (#7: 31 items, 6 blocks, 6 `gtceu:` fluid materials).
+- **Approved packages in flight:** F2 station slots (integrator, band 19200) and wave A pair 1: A2 naquadria/large naquadah reactor (19456) and A3 europium (19712). Then A4-A9 in pairs, B1, wave B pairs, C1-C3, v0.9.0.
 - **Repository:** unmerged historical branches are kept only as `archive/*` tags; finished package branches are deleted after integration.
 
 ## Open blockers and known issues
