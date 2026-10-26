@@ -17,8 +17,9 @@
 // then call resume(newCtx, token). No old level/machine/server reference is kept
 // in the JSON snapshot; it also survives server-script re-evaluation.
 //
-// Route: Earth -> Earth orbit (packager keycard) -> S0 moon orbit (real-menu
-// station chip) -> Earth (real-menu surface chip retained from the packager).
+// Route: Earth -> Earth orbit -> S0 moon orbit (both retained real-menu
+// new-station ID chips + actual packages) -> Earth (fresh real-menu surface chip).
+// Actual packager keycards are retained/checked, not used for first deployment.
 // Both packages are made on Earth BEFORE flying. No synthetic control NBT,
 // direct dimension change, allocation/addStation, deployment, or wireless.
 //
@@ -27,7 +28,7 @@
 // and menu do NOT register it. Rocket arrival conditionally calls addStation.
 // Borders use the live SpaceStation.BLOCK_MULTIPLIER (default 512), NOT 31.
 //
-// Surface footprint: Overworld X13613..13619 Z47..56 Y99..105, within S0-a.
+// Surface footprint: Overworld X13613..13619 Z3..12 Y99..105, within prepared S0-a.
 // Orbital writes: only the two fresh allocator candidates, every position logged.
 // Freshness scans cover the ENTIRE candidate plot using native chunk-section
 // emptiness (incrementally); no foreign records/blocks may be overwritten.
@@ -41,7 +42,7 @@
   var J = null
   var PREFIX = 'GGTEST|luv_s0_stations|'
   var EXPORT = 'kubejs/exported/gg_test_luv_s0_stations.json'
-  var C = { x: 13616, y: 100, z: 48 }
+  var C = { x: 13616, y: 100, z: 4 }
   var STEAM = ['gtceu:steam_input_hatch', 'gtceu:steam_input_bus', 'gtceu:steam_output_bus']
 
   function java() {
@@ -238,7 +239,7 @@
     // Includes every possible scanned cell, pad, tower and the controller.
     var level = ctx.server.overworld()
     for (var x = 13613; x <= 13619; x++) {
-      for (var z = 47; z <= 56; z++) {
+      for (var z = 3; z <= 12; z++) {
         for (var y = 99; y <= 105; y++) {
           need(bid(level, { x: x, y: y, z: z }) === 'minecraft:air',
             'abort: foreign S0-a fixture at ' + x + ',' + y + ',' + z)
@@ -248,16 +249,16 @@
     S.surface = level
   }
   function packagerStructure(ctx) {
-    put(S.surface, { x: C.x, y: 99, z: 47 }, 'minecraft:iron_block', {}, 'packager_player_stand')
+    put(S.surface, { x: C.x, y: 99, z: 3 }, 'minecraft:iron_block', {}, 'packager_player_stand')
     ctx.player.stopRiding()
-    ctx.player.teleportTo('minecraft:overworld', C.x + 0.5, 100, 47.5, 0, 0)
+    ctx.player.teleportTo('minecraft:overworld', C.x + 0.5, 100, 3.5, 0, 0)
     for (var x = 13613; x <= 13619; x++) {
-      for (var z = 49; z <= 55; z++) {
+      for (var z = 5; z <= 11; z++) {
         put(S.surface, { x: x, y: 99, z: z }, 'gcyr:launch_pad', {}, 'packager')
       }
     }
     for (var y = 100; y <= 104; y++) {
-      put(S.surface, { x: C.x, y: y, z: 56 }, 'gtceu:stainless_steel_frame', {}, 'packager')
+      put(S.surface, { x: C.x, y: y, z: 12 }, 'gtceu:stainless_steel_frame', {}, 'packager')
     }
     if (!S.packager) {
       put(S.surface, C, 'gcyr:space_station_packager', { facing: 'north' }, 'packager')
@@ -269,11 +270,11 @@
   }
   function payload(e) {
     for (var x = 13613; x <= 13619; x++) {
-      for (var z = 49; z <= 55; z++) {
+      for (var z = 5; z <= 11; z++) {
         put(S.surface, { x: x, y: 100, z: z }, 'minecraft:iron_block', {}, e.label + '_payload')
       }
     }
-    var chestPos = { x: 13614, y: 101, z: 50 }
+    var chestPos = { x: 13614, y: 101, z: 6 }
     put(S.surface, chestPos, 'minecraft:chest', { facing: 'north' }, e.label + '_payload')
     var be = S.surface.getBlockEntity(pos(chestPos.x, chestPos.y, chestPos.z))
     be.setItem(0, Item.of('minecraft:diamond', 7))
@@ -282,7 +283,7 @@
     note(e.label + '_be_before', e.chestBefore)
     e.scanBefore = []
     for (var xx = 13613; xx <= 13619; xx++) {
-      for (var zz = 49; zz <= 55; zz++) {
+      for (var zz = 5; zz <= 11; zz++) {
         for (var yy = 100; yy <= 105; yy++) {
           var p = { x: xx, y: yy, z: zz }
           var id = bid(S.surface, p)
@@ -340,6 +341,15 @@
     S.report.packages.push({ label: e.label, count: blocks.length, cells: e.cells,
       chestBefore: e.chestBefore, packagedChest: String(chest) })
   }
+  function programmedChip(stack, surface, stationId) {
+    if (stack.isEmpty() || String(stack.getId()) !== 'gcyr:id_chip') return false
+    var nbt = stack.getNbt()
+    return nbt !== null && String(nbt.getString('gcyr:current_planet')) === surface &&
+      !nbt.contains('gcyr:current_position') &&
+      (stationId === null ? !nbt.contains('gcyr:current_station') :
+        nbt.contains('gcyr:current_station', 3) &&
+        Number(java().Chip.getSpaceStationId(stack)) === stationId)
+  }
   function collectPackage(ctx, e) {
     var out = S.packager.getOutputSlots()
     var pkg = out.getStackInSlot(0)
@@ -352,15 +362,17 @@
     out.setStackInSlot(0, Item.empty)
     out.setStackInSlot(1, Item.empty)
     var retained = S.packager.getKeycardSlot().getStackInSlot(0)
-    check(e.label + '_chip_retained', !retained.isEmpty() &&
-      String(retained.getNbt()) === e.chipNbt, 'packager input is a programmed ID chip, retained unchanged')
+    need(check(e.label + '_chip_retained',
+      programmedChip(retained, e.label === 'earth' ? 'minecraft:overworld' : 'grindless:s0_moon', e.id) &&
+      String(retained.getNbt()) === e.chipNbt, 'packager input is a new-station ID chip, retained unchanged'),
+    'packager did not retain the actual new-station ID chip')
     e.chip = retained
     S.packager.getKeycardSlot().setStackInSlot(0, Item.empty)
     check(e.label + '_package_consumed', S.packager.getPackageSlot().getStackInSlot(0).isEmpty(),
       'native Pack button consumed blank package')
-    check(e.label + '_keycard', Number(java().Keycard.getSavedStation(card)) === e.id &&
+    need(check(e.label + '_keycard', Number(java().Keycard.getSavedStation(card)) === e.id &&
       String(java().Keycard.getSavedPlanet(card).orbitWorld().location()) === e.dimension,
-      'actual output=' + card.getNbt())
+      'actual output=' + card.getNbt()), 'native packager keycard differs from candidate')
     var uncleared = e.scanBefore.filter(function (p) { return bid(S.surface, p) !== 'minecraft:air' })
     need(check(e.label + '_scan_cleared', uncleared.length === 0,
       'native scan cleared ' + e.scanBefore.length + ' captured cells; remaining=' + uncleared.length),
@@ -375,7 +387,7 @@
   }
   // Public native UI, not guessed NBT or forbidden reflection. Call AFTER any
   // RocketEntity.load(tag), since the bridge's config/fuel loader precedes this.
-  function loadCargo(ctx, rocket, stack) {
+  function loadCargo(ctx, rocket, stack, control) {
     var empty = stack === undefined || stack.isEmpty()
     need(rocket !== null && !rocket.isRemoved(), 'cargo requires the live rocket')
     // GCYR's public HasCustomInventoryScreen entry point delegates to its
@@ -389,14 +401,29 @@
     // inventory, but LDLib 1.0.40.b adds native slots from a HashMap.keySet().
     // Menu index 1 is not guaranteed to be cargo. Find its unique native position.
     var slot = null
+    var config = null
     for (var i = 0; i < menu.slots.size(); i++) {
       var candidateSlot = menu.slots.get(i)
+      if (control !== undefined && Math.abs(Number(candidateSlot.x) - 40) <= 1 &&
+          Math.abs(Number(candidateSlot.y) - 20) <= 1) {
+        need(config === null, 'ambiguous native rocket config slot')
+        config = candidateSlot
+      }
       if (Math.abs(Number(candidateSlot.x) - 60) > 1 ||
           Math.abs(Number(candidateSlot.y) - 20) > 1) continue
       need(slot === null, 'ambiguous native rocket satellite slot')
       slot = candidateSlot
     }
     need(slot !== null, 'native rocket satellite slot not found at (60,20)')
+    if (control !== undefined) {
+      need(!control.isEmpty() && String(control.getId()) === 'gcyr:id_chip',
+        'station route requires an actual programmed ID chip')
+      need(config !== null, 'native rocket config slot not found at (40,20)')
+      var loadedControl = config.getItem()
+      need(!loadedControl.isEmpty() && String(loadedControl.getId()) === String(control.getId()) &&
+        String(loadedControl.getNbt()) === String(control.getNbt()), 'native rocket control readback differs')
+      note('control_loaded', 'actual native config slot ID chip=' + loadedControl.getNbt())
+    }
     need(slot.getItem().isEmpty(), 'refusing to replace preexisting rocket cargo')
     slot.set(empty ? Item.empty : stack)
     var got = slot.getItem()
@@ -411,6 +438,15 @@
   function fly(ctx, e, control, cargo, next) {
     mapsExpected()
     need(!ctx.flightBusy(), 'cannot request overlapping flight')
+    var surface = String(java().PlanetData.getPlanet(new ResourceLocation(e.planet)).level().location())
+    var station = e.dimension !== surface
+    need(programmedChip(control, surface, station ? e.id : null),
+      'wrong station/surface ID chip for ' + e.dimension)
+    if (station) {
+      need(String(control.getNbt()) === e.chipNbt, 'deployment must use the retained packager ID chip')
+      need(!cargo.isEmpty() && String(cargo.getId()) === 'gcyr:space_station_package',
+        'first station deployment requires its actual package')
+    }
     S.previousFlight = ctx.lastFlight()
     S.target = e
     ctx.fly(e.planet, e.dimension, control, cargo)
@@ -488,13 +524,15 @@
     note('built', JSON.stringify(e.playerPlaced))
     ctx.player.teleportTo(e.dimension, e.origin.x + 0.5, 72, e.origin.z + 0.5, 0, 0)
     // This is fixture positioning WITHIN the arrived orbit, never interplanetary travel.
-    // Entity.move executes GCYR's actual border collision mixin, not a helper call.
+    // GCYR substitutes a station border in SERVER Entity collision and also
+    // sends center/size packets. This probe proves server enforcement only;
+    // the separate client readback proves received bounds, not client walking.
     ctx.player.teleportTo(e.dimension, bounds.maxX - 0.5, 72, e.origin.z + 0.5, 0, 0)
     var before = Number(ctx.player.getX())
     ctx.player.move(java().Mover.SELF, new (java().Vec3)(2, 0, 0))
     var after = Number(ctx.player.getX())
-    check(e.label + '_border_collision', after > before && after <= bounds.maxX - 0.29,
-      'native Entity.move +2: ' + before + ' -> ' + after + ', maxX=' + bounds.maxX)
+    check(e.label + '_server_border_collision', after > before && after <= bounds.maxX - 0.29,
+      'server native Entity.move +2: ' + before + ' -> ' + after + ', maxX=' + bounds.maxX)
     ctx.player.teleportTo(e.dimension, e.origin.x + 0.5, 72, e.origin.z + 0.5, 0, 0)
     ctx.sharedMap.put('s0sBorderRequest', JSON.stringify({ token: S.run + ':' + e.label,
       dimension: e.dimension, bounds: bounds }))
@@ -506,7 +544,7 @@
     var got = JSON.parse(raw)
     if (got.token !== S.run + ':' + e.label) return false
     check(e.label + '_client_border', got.dimension === e.dimension &&
-      JSON.stringify(got.bounds) === JSON.stringify(e.bounds), JSON.stringify(got))
+      JSON.stringify(got.bounds) === JSON.stringify(e.bounds), 'received client packet bounds; not client walking: ' + JSON.stringify(got))
     ctx.sharedMap.put('s0sBorderRequest', '')
     return true
   }
@@ -673,6 +711,7 @@
     S.surface = null
     S.previousFlight = null
     S.target = null
+    S.homeChip = null
     S.entries.forEach(function (e) {
       e.level = null
       e.chip = null
@@ -786,15 +825,12 @@
           S.index = 0
           packagerStructure(ctx)
           phase(ctx, 'program')
-          ctx.program('gcyr:earth', false)
+          ctx.program('gcyr:earth', true)
         }
       } else if (S.phase === 'program') {
         var chip = ctx.player.getMainHandItem()
-        var nbt = chip.getNbt()
-        if (!chip.isEmpty() && nbt !== null &&
-            String(nbt.getString('gcyr:current_planet')) === (S.index === 0 ? 'minecraft:overworld' : 'grindless:s0_moon') &&
-            (S.index === 0 ? !nbt.contains('gcyr:current_station') : nbt.contains('gcyr:current_station', 3))) {
-          e.chipNbt = String(nbt)
+        if (programmedChip(chip, S.index === 0 ? 'minecraft:overworld' : 'grindless:s0_moon', e.id)) {
+          e.chipNbt = String(chip.getNbt())
           check(e.label + '_real_menu_chip', true, e.chipNbt)
           packagerStructure(ctx)
           payload(e)
@@ -820,9 +856,18 @@
             ctx.program('grindless:s0_moon', true)
           } else {
             S.index = 0
-            fly(ctx, S.entries[0], S.entries[0].keycard, S.entries[0].packageStack, 'earth_flight')
+            phase(ctx, 'home_program')
+            ctx.program('gcyr:earth', false)
           }
         } else need(!timedOut(ctx, 120, 8000), 'real Pack button produced no outputs')
+      } else if (S.phase === 'home_program') {
+        var home = ctx.player.getMainHandItem()
+        if (programmedChip(home, 'minecraft:overworld', null)) {
+          S.homeChip = home
+          check('earth_home_real_menu_chip', true, 'fresh ordinary ID chip, no station/position override: ' + home.getNbt())
+          ctx.player.setMainHandItem(Item.empty)
+          fly(ctx, S.entries[0], S.entries[0].chip, S.entries[0].packageStack, 'earth_flight')
+        } else need(!timedOut(ctx, 160, 10000), 'real planet menu did not program fresh ordinary home chip')
       } else if (S.phase === 'earth_flight' || S.phase === 'moon_flight') {
         if (arrived(ctx, e)) phase(ctx, 'border')
         else need(!timedOut(ctx, 1000, 55000), 'station flight did not complete')
@@ -836,7 +881,7 @@
             phase(ctx, 'steam')
           } else {
             var earth = { planet: 'gcyr:earth', dimension: 'minecraft:overworld' }
-            fly(ctx, earth, S.entries[0].chip, Item.empty, 'earth_return')
+            fly(ctx, earth, S.homeChip, Item.empty, 'earth_return')
           }
         }
       } else if (S.phase === 'steam') {
@@ -850,7 +895,7 @@
           var result = ctx.lastFlight()
           need(result !== null && result !== undefined && result.ok !== false, 'Earth return failed')
           need(dim(ctx.player.getLevel()) === 'minecraft:overworld', 'return did not reach Earth')
-          check('earth_return', true, 'same player, native rocket leg, actual retained Earth surface ID chip')
+          check('earth_return', true, 'same player, native rocket leg, fresh ordinary real-menu Earth surface ID chip')
           S.report.earthReturn = { x: Number(ctx.player.getX()), y: Number(ctx.player.getY()), z: Number(ctx.player.getZ()),
             dimension: dim(ctx.player.getLevel()) }
           note('earth_return_position', JSON.stringify(S.report.earthReturn))

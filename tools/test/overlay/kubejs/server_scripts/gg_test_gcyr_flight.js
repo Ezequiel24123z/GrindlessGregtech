@@ -1313,7 +1313,7 @@
       var chip = FL.stationLeg ? FL.controlStack : jcall(p.getMainHandItem(), V.copy)
       var loadAmount = IS_LUV ? Number(FL.rocket.getFuelCapacity()) : FUEL_LOAD
       var loaded = loadRocket(FL.rocket, chip, loadAmount)
-      if (FL.stationLeg) global.ggLuvS0Stations.loadCargo(stationContext(), FL.rocket, FL.stationPackage)
+      if (FL.stationLeg) global.ggLuvS0Stations.loadCargo(stationContext(), FL.rocket, FL.stationPackage, FL.controlStack)
       p.setMainHandItem(Item.of('minecraft:air'))
       FL.fromDim = dimOf(p)
       FL.fromPos = { x: xOf(FL.rocket), z: zOf(FL.rocket) }
