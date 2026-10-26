@@ -1,0 +1,12 @@
+{
+  "type": "emi:info",
+  "stacks": [
+    "#item:grindless:vein_samples",
+    "item:grindless:empty_vein_probe"
+  ],
+  "text": [
+    "emi.grindless.info.vein_samples.0",
+    "emi.grindless.info.vein_samples.1",
+    "emi.grindless.info.vein_samples.2"
+  ]
+}

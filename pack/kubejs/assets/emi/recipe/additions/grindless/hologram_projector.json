@@ -1,0 +1,10 @@
+{
+  "type": "emi:info",
+  "stacks": [
+    "item:grindless:hologram_projector"
+  ],
+  "text": [
+    "emi.grindless.info.hologram_projector.0",
+    "emi.grindless.info.hologram_projector.1"
+  ]
+}

@@ -109,6 +109,58 @@ file = "kubejs/assets/emi/index/stacks/grindless_hidden_with_recipes.json"
 hash = "8b88bd0c9b60901357d3a782a3a016a1b9b623225f62f885b5af7ec4afff5f29"
 
 [[files]]
+file = "kubejs/assets/emi/recipe/additions/grindless/capacitor_cells.json"
+hash = "2c54188e7e6c34cae017eae126934bc046b747ad5b01b46d7ec730c2b276782c"
+
+[[files]]
+file = "kubejs/assets/emi/recipe/additions/grindless/deep_space_charts.json"
+hash = "b30e45dd30883f27c03ef2ed7a2540b39f78ad53548a3329ede7c6a6b9d811d6"
+
+[[files]]
+file = "kubejs/assets/emi/recipe/additions/grindless/heliostat_mirror.json"
+hash = "735bbc0646777b07c438bba4743516bb0f29cb4944c29db5d2b94d643c1f9b3d"
+
+[[files]]
+file = "kubejs/assets/emi/recipe/additions/grindless/hermean_blocks.json"
+hash = "7064f69ddf85e92f4f20bf60e7d5d9839b1b848af7b1d13c4d361f56b9f7d25f"
+
+[[files]]
+file = "kubejs/assets/emi/recipe/additions/grindless/hologram_projector.json"
+hash = "bea7e2389a77cc3b92464944198882be16111a1ddfeaf9125a31b5f0585c6624"
+
+[[files]]
+file = "kubejs/assets/emi/recipe/additions/grindless/lunar_charts.json"
+hash = "8d7a8f5e5e63b83d2a8e9cc94a7866da1c7c6352a1aba5018a921f7443d01c98"
+
+[[files]]
+file = "kubejs/assets/emi/recipe/additions/grindless/night_sky_radiator.json"
+hash = "5b70d2dc5d837251297ad3d4c5431ce752e96608be784d3cd6348a61fbabd724"
+
+[[files]]
+file = "kubejs/assets/emi/recipe/additions/grindless/sagittarius_a_star_signal.json"
+hash = "e14dbe607d11a87897534ed3284696d55d9db4614962af174bb4e6396b29d649"
+
+[[files]]
+file = "kubejs/assets/emi/recipe/additions/grindless/sintered_regolith.json"
+hash = "ec734f19d60ca0a41edb365f8d8b6eda3bc817296e6f8bf893f66e90558b00d9"
+
+[[files]]
+file = "kubejs/assets/emi/recipe/additions/grindless/solar_wing_panel.json"
+hash = "c3d0a8fc47760fccf897f4c19f72ab1e55eeef5a1140a75d101737d55325595a"
+
+[[files]]
+file = "kubejs/assets/emi/recipe/additions/grindless/travel_keys.json"
+hash = "8d321702a4185fd914ce3a340dab477a324f3af6a504233e9216b6f189959691"
+
+[[files]]
+file = "kubejs/assets/emi/recipe/additions/grindless/vein_samples.json"
+hash = "8b1fd5d7372d25bf0563f9fff902827d2117b6185aa710b823c56c52268ea290"
+
+[[files]]
+file = "kubejs/assets/emi/recipe/additions/grindless/wireless_covers.json"
+hash = "4fa3903d4c4ed7b23bf9b78a283a7331964a58a2ab2abd4317c593bfed010477"
+
+[[files]]
 file = "kubejs/assets/grindless/lang/en_us.json"
 hash = "3b3964d1d84cf4d5a981703a0e2c5b37441638f410cc24cceef28618fa5423c3"
 
@@ -2079,6 +2131,10 @@ hash = "db684eef1cc1c7d7217115e5bd05a5eafef40a0720ab129d73199ba7c0c66ede"
 [[files]]
 file = "kubejs/client_scripts/grindless/dimensions_lang.js"
 hash = "597286ab53fe25d3ed999a8c75d31f5a52741a4ba3e132008120686679cf8ca3"
+
+[[files]]
+file = "kubejs/client_scripts/grindless/emi_info_lang.js"
+hash = "bcd8739f08bb17cd50cda3c76513f4c07156941effbd2c212455012f8180714e"
 
 [[files]]
 file = "kubejs/client_scripts/grindless/ev_ae2_interplanetary_lang.js"
