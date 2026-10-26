@@ -92,7 +92,8 @@
       roles: [['energy', ENERGY], ['input', 'gtceu:zpm_input_bus'], ['fluid', 'gtceu:zpm_input_hatch'], ['output', 'gtceu:zpm_output_bus']],
       items: ['gtceu:data_orb', 'grindless:saturn_transfer_chart'], fluidIn: ['gtceu:liquid_helium', 100],
       outFluids: {}, outItems: { 'grindless:saturn_interior_model': 1 }, duration: 600 }
-  ]  function place(m) {
+  ]
+  function place(m) {
     var desc = global.grindless.patterns.describe(m.id)
     var origin = null
     desc.slices.forEach(function (rows, si) {
@@ -176,7 +177,8 @@
       'grindless:crafting/uranus_transfer_chart_copy'].forEach(function (id) {
       check('support_recipe', byId(id) !== null, id)
     })
-  }  function finish() {
+  }
+  function finish() {
     if (S.finished) return
     S.finished = true
     S.worlds.forEach(function (world) {
