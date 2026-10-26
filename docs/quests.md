@@ -381,8 +381,8 @@ On 2026-10-25 two sessions rewrote every chapter in the new voice (section 8) an
 
 A chunk is one chapter, written by one person. The contract is this guide and the linter:
 
-1. Read `AGENTS.md`, this whole guide, and the two reference chapters (`welcome.snbt`, `steam_age.snbt`).
-2. Touch only your chapter file, its line in `GG_QUESTS_EXPECTED` in `tools/test/overlay/kubejs/server_scripts/gg_test_quests.js` and, if you adapt anything from another pack, `CREDITS.md`.
+1. Read `AGENTS.md`, the sections of this guide that `.github/instructions/quests.instructions.md` lists for your task, and the two reference chapters (`welcome.snbt`, `steam_age.snbt`).
+2. Touch only your chapter file (or its data file, if the chapter is generated) and its line in `GG_QUESTS_EXPECTED` in `tools/test/overlay/kubejs/server_scripts/gg_test_quests.js`. If you adapt anything from another pack, propose the `CREDITS.md` line in the handoff.
 3. Keep the ids of every quest that still means the same thing, and the blocks marked as fixed in section 14. New ids follow section 10.
 4. Check every fact against the recipe dump (`files/test-runs/hidden-moon-dump1/results/server/kubejs-exported/`), not from memory.
 5. No quests or text about the incoming machines in section 14.
