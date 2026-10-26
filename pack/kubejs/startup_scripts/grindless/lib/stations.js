@@ -7,7 +7,10 @@
 //               'sulfur_iodine'  second is null (a second station failed spike S0-3, or no station passed): the Io sulfur-iodine plant
 //               'pending'        stations are still off and second is set: S0-3 has not concluded, neither machine is registered
 //     switches  { stations, tether, sulfur_iodine }: booleans, the names a hidden-table group's `unless` may use (integration/hidden.js)
+//     more      later eras' stations (docs/eras/zpm.md, F2): [{ slot, orbit, era }] from the table's `more` list, each in its own orbit
+//     slots     every station in order: { slot: 'first', orbit }, { slot: 'second', orbit } when second is set, then `more`
 //
+// GCYR keeps stations per orbit level (StationWorldSavedData), so each slot is an orbit of tables/orbits.json, used once.
 // The table is the only switch: luv/io_orbit.js registers the machine of the active mode, its recipes follow it and the tether spool's
 // hiding follows `tether`. Startup and server read the same file, so client and server agree.
 (function () {
@@ -25,6 +28,24 @@
   // the slot's second station is Io orbit's (decisions 3 and 17): the tether, its tooltips and its quests are written for it
   if (second !== null && second !== IO_ORBIT) throw new Error(LOG + 'second must be null or ' + IO_ORBIT + ': ' + second)
   var b7 = second === null ? 'sulfur_iodine' : table.enabled ? 'tether' : 'pending'
+  var slots = [{ slot: 'first', orbit: table.first }]
+  if (second !== null) slots.push({ slot: 'second', orbit: second })
+  var rawMore = table.more === undefined ? [] : table.more
+  if (!Array.isArray(rawMore)) throw new Error(LOG + 'more must be a list')
+  var more = []
+  for (var i = 0; i < rawMore.length; i++) {
+    var e = rawMore[i]
+    if (!e || typeof e.slot !== 'string' || !/^[a-z][a-z0-9_]*$/.test(e.slot)) throw new Error(LOG + 'more[' + i + '].slot must be a lower-case name')
+    if (typeof e.orbit !== 'string' || orbits.indexOf(e.orbit) < 0) throw new Error(LOG + 'more[' + i + '].orbit is not an orbit of tables/orbits.json: ' + e.orbit)
+    if (typeof e.era !== 'string') throw new Error(LOG + 'more[' + i + '].era must be an era name')
+    for (var k = 0; k < slots.length; k++) {
+      if (slots[k].slot === e.slot) throw new Error(LOG + 'duplicate station slot: ' + e.slot)
+      if (slots[k].orbit === e.orbit) throw new Error(LOG + 'two stations in one orbit: ' + e.orbit)
+    }
+    var entry = { slot: e.slot, orbit: e.orbit, era: e.era }
+    more.push(entry)
+    slots.push(entry)
+  }
   G.stations = {
     enabled: table.enabled,
     first: table.first,
@@ -32,7 +53,9 @@
     plot: table.plot,
     pieces: table.pieces || [],
     b7: b7,
-    switches: { stations: table.enabled === true, tether: b7 === 'tether', sulfur_iodine: b7 === 'sulfur_iodine' }
+    switches: { stations: table.enabled === true, tether: b7 === 'tether', sulfur_iodine: b7 === 'sulfur_iodine' },
+    more: more,
+    slots: slots
   }
-  console.info(LOG + 'stations ' + (table.enabled ? 'on' : 'off') + '; Io-orbit slot (B7): ' + b7)
+  console.info(LOG + 'stations ' + (table.enabled ? 'on' : 'off') + '; Io-orbit slot (B7): ' + b7 + '; slots: ' + slots.length)
 })()

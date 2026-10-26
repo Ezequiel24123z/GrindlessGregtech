@@ -3,11 +3,13 @@
   "_how_it_is_used": [
     "Spike S0-3 passed natively (travel spikes R14, candidate 0f2c69f: both station deployments, landings with the orbit arrival assist, placement, borders, a steam machine cycle on the station, return to Earth, blocks and chests kept; R9: the station record and blocks survive a disk save). enabled is true for v0.8.0: the keycard is shown with an EMI page and gg_test_luv_b1 runs its station stage.",
     "GCYR's own pieces need no recipe of ours: the station packager (gcyr:shaped/space_station_packager, a LuV hull) and the package (gcyr:assembler/space_station_package) keep GCYR's recipes; the keycard is the packager's output; the ID chip is grindless:gcyr/id_chip. server_scripts/grindless/luv/orbit_arrival.js moves a rocket that stalls above its selected, deployed station onto it (server side; no physics).",
-    "The Io-orbit slot (package B7) follows this table alone (startup_scripts/grindless/lib/stations.js, G.stations.b7): second null -> 'sulfur_iodine' (the Io sulfur-iodine plant); enabled true with second = grindless:io_orbit -> 'tether' (the flux-tube tether, today); otherwise 'pending' (neither is registered). The active machine's registration, recipes and controller recipe (luv/io_orbit.js), the tether spool's hiding and the quests' S03/B7T/B7S packages (tools/quests/luv-stations.mjs) switch with it. After a flip: regenerate the quest chapters (docs/quests.md), run node tools/analysis/emi-coverage.mjs --expect and the Node suite, and refresh the pack index."
+    "The Io-orbit slot (package B7) follows this table alone (startup_scripts/grindless/lib/stations.js, G.stations.b7): second null -> 'sulfur_iodine' (the Io sulfur-iodine plant); enabled true with second = grindless:io_orbit -> 'tether' (the flux-tube tether, today); otherwise 'pending' (neither is registered). The active machine's registration, recipes and controller recipe (luv/io_orbit.js), the tether spool's hiding and the quests' S03/B7T/B7S packages (tools/quests/luv-stations.mjs) switch with it. After a flip: regenerate the quest chapters (docs/quests.md), run node tools/analysis/emi-coverage.mjs --expect and the Node suite, and refresh the pack index.",
+    "more (ZPM-F2, docs/eras/zpm.md): later eras' stations, { slot, orbit, era }, each in an orbit of tables/orbits.json not used by another slot (GCYR keeps stations per orbit level, StationWorldSavedData, so a new orbit's station is the mechanism R14 proved). lib/stations.js publishes them as G.stations.more and every station in order as G.stations.slots; first, second, b7 and the switches do not read them. ZPM-B1 adds Saturn orbit and Uranus orbit here once its orbits are in tables/orbits.json."
   ],
   "enabled": true,
   "first": "gcyr:overworld_orbit",
   "second": "grindless:io_orbit",
+  "more": [],
   "plot": 512,
   "pieces": ["gcyr:space_station_packager", "gcyr:space_station_package", "gcyr:id_chip", "gcyr:keycard"]
 }
