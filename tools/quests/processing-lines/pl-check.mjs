@@ -14,8 +14,12 @@
 // Also: every icon and task item exists and is not hidden in EMI (the dump's c:hidden_from_recipe_viewers, and
 // hidden_until.json groups after IMPLEMENTED_ERA), every machine's recipe types exist, and every leaf states where it ends.
 //
+// Content newer than the dump (a package that landed after the dump was taken: this checkout registers the id, the dump's pack in
+// its upload.zip did not) cannot be proven by that dump. What depends on it is reported as PENDING, not failed; the parts that come
+// from this checkout's scripts and tables are still checked. --strict counts pending as issues (the integrated run's dump).
+//
 //   node tools/quests/processing-lines/pl-check.mjs --dump <kubejs-exported> [--out <report.md>] [--era iv]
-//        [--dump-table <hidden_until.json>]
+//        [--dump-table <hidden_until.json>] [--strict]
 //
 // --dump is the kubejs-exported folder of a gg_dump run (test-runs/<run>/results/server/kubejs-exported). --out writes the
 // full report (every arrow with the recipe that proves it, and the summary arrows); without it only the totals and the
@@ -36,6 +40,7 @@ if (!dumpDir) {
 }
 const repo = REPO;
 const outFile = opt('--out', null);
+const strict = args.includes('--strict');
 const ERAS = ['steam', 'lv', 'mv', 'hv', 'ev', 'iv', 'luv', 'zpm', 'uv', 'uhv', 'uev', 'uiv', 'uxv', 'opv', 'max'];
 // the era EMI shows today: hidden.js's IMPLEMENTED_ERA in this checkout (the dump may come from an earlier switch)
 const hiddenJs = fs.readFileSync(path.join(repo, 'pack', 'kubejs', 'server_scripts', 'grindless', 'integration', 'hidden.js'), 'utf8');
@@ -63,6 +68,33 @@ function readZipEntry(file, name) {
     p += 46 + skip;
   }
   return null;
+}
+
+// the text of every entry of a zip file whose name passes the test (stored or deflated)
+function readZipTexts(file, test) {
+  const out = new Map();
+  const buf = fs.readFileSync(file);
+  let eocd = -1;
+  for (let i = buf.length - 22; i >= Math.max(0, buf.length - 65557); i--) if (buf.readUInt32LE(i) === 0x06054b50) { eocd = i; break; }
+  if (eocd < 0) return out;
+  const count = buf.readUInt16LE(eocd + 10);
+  let p = buf.readUInt32LE(eocd + 16);
+  for (let n = 0; n < count && buf.readUInt32LE(p) === 0x02014b50; n++) {
+    const method = buf.readUInt16LE(p + 10);
+    const size = buf.readUInt32LE(p + 20);
+    const nameLen = buf.readUInt16LE(p + 28);
+    const skip = nameLen + buf.readUInt16LE(p + 30) + buf.readUInt16LE(p + 32);
+    const local = buf.readUInt32LE(p + 42);
+    const name = buf.toString('utf8', p + 46, p + 46 + nameLen).replace(/\\/g, '/');
+    if (test(name)) {
+      const start = local + 30 + buf.readUInt16LE(local + 26) + buf.readUInt16LE(local + 28);
+      const data = buf.subarray(start, start + size);
+      const raw = method === 0 ? data : method === 8 ? zlib.inflateRawSync(data) : null;
+      if (raw) out.set(name, raw.toString('utf8'));
+    }
+    p += 46 + skip;
+  }
+  return out;
 }
 
 const model = buildModel();
@@ -218,6 +250,7 @@ function sourceValue(src) {
   const got = packText(src.file);
   if (!got) return null;
   if (src.json) return src.json.split('.').reduce((o, k) => (o == null ? o : o[k]), readJson(got.text));
+  if (src.count) return (got.text.match(new RegExp(src.re, 'g')) || []).length;
   const mm = new RegExp(src.re).exec(got.text);
   return mm ? Number(mm[1]) : null;
 }
@@ -254,6 +287,65 @@ function wirelessIds(kind) {
 }
 const wirelessKind = (item) => (/_wireless_(energy|dynamo)_(hatch|cover)(_\d+a)?$/.exec(item) || []).slice(1, 3).join('_');
 
+// ---------------------------------------------------------------- content newer than the dump
+// A pack registers an id when a startup script names it exactly ('ns:path'), creates it (event.create('path' for gtceu machines
+// and recipe types, a constant TYPE = 'path' or a property type: 'path' that it creates), lists it as a key of a registration table ("path: {", the grindless foundation tables) or when it is an id of
+// the wireless table. An id is new since the dump when this checkout registers it, the dump's pack (its upload.zip) does not, and
+// the dump does not have it. Without the upload.zip, an id this checkout registers and the dump lacks counts as new.
+const walkJs = (dir) => (fs.existsSync(dir) ? fs.readdirSync(dir, { withFileTypes: true }).flatMap((d) => (d.isDirectory()
+  ? walkJs(path.join(dir, d.name)) : d.name.endsWith('.js') ? [path.join(dir, d.name)] : [])) : []);
+const STARTUP = 'pack/kubejs/startup_scripts/';
+const WIRELESS_TABLE = 'pack/kubejs/data/grindless/tables/wireless_energy.json';
+function registrar(texts, table) {
+  const all = texts.join('\n');
+  const tableIds = new Set();
+  if (table) {
+    for (const r of table.tiers || []) {
+      tableIds.add(r.cell);
+      for (const kind of ['energy_hatch', 'dynamo_hatch']) for (const a of table.hatchAmps || []) tableIds.add(`gtceu:${r.name}_wireless_${kind}${a === 2 ? '' : '_' + a + 'a'}`);
+      for (const kind of ['energy_cover', 'dynamo_cover']) tableIds.add(`grindless:${r.name}_wireless_${kind}`);
+    }
+  }
+  const esc = (s) => s.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+  return (id) => {
+    if (tableIds.has(id)) return true;
+    const [ns, p] = String(id).split(':');
+    if (!p) return false;
+    if (all.includes(`'${id}'`) || all.includes(`"${id}"`)) return true;
+    if (ns === 'gtceu' && new RegExp(`create\\(['"]${esc(p)}['"]|(const|var|let) [A-Z_]+ = ['"]${esc(p)}['"]|\\btype: ['"]${esc(p)}['"]`).test(all)) return true;
+    return ns === 'grindless' && new RegExp(`(^|[\\s{,])${esc(p)}: \\{`, 'm').test(all);
+  };
+}
+const registeredHere = registrar(walkJs(path.join(repo, ...STARTUP.split('/'))).map((f) => fs.readFileSync(f, 'utf8')), wireless);
+let registeredInDumpPack = null;
+if (fs.existsSync(upload)) {
+  const texts = readZipTexts(upload, (name) => name.startsWith(STARTUP) && name.endsWith('.js'));
+  const t = readZipEntry(upload, WIRELESS_TABLE);
+  if (texts.size) registeredInDumpPack = registrar([...texts.values()], t ? readJson(t.toString('utf8')) : null);
+}
+const isNew = (id) => !!id && !idx.items.has(id) && registeredHere(id) && !(registeredInDumpPack && registeredInDumpPack(id));
+const isNewType = (t) => !idx.recipeTypes.has(t) && !byType.has(t) && registeredHere(t) && !(registeredInDumpPack && registeredInDumpPack(t));
+// a node whose item or recipe type is newer than the dump: what the dump would prove about it is pending
+const pendingNode = (nd) => !!nd && !nd.link && !nd.era && (isNew(nd.item) || (nd.machine && nd.types.some(isNewType)));
+// the figures that only the dump proves (the others come from this checkout's scripts and tables, and always count)
+const DUMP_FIGS = new Set(['single', 'run', 'uses', 'fuel', 'steam', 'steamFuel', 'ccSteam', 'engine', 'turbine', 'battery', 'cable', 'toll', 'anywhere']);
+
+// the solar family's EU/t for a lit panel: a machine script's constants (baseEuPerPanel, junctionMultiplier) times the sunlight
+// table's factor for Earth orbit (tables/orbits.json), as server_scripts/grindless/luv/orbital_solar.js prices its recipe
+function solarPanelEUt(file) {
+  const got = packText(file);
+  const orbits = packText('pack/kubejs/data/grindless/tables/orbits.json');
+  const sun = packText('pack/kubejs/data/grindless/tables/sunlight.json');
+  if (!got || !orbits || !sun) return null;
+  const val = (re) => { const mm = new RegExp(re).exec(got.text); return mm ? Number(mm[1]) : null; };
+  const base = val('baseEuPerPanel: ([\\d.]+)');
+  const bonus = val('junctionMultiplier: ([\\d.]+)');
+  const place = readJson(orbits.text).earth;
+  const row = (readJson(sun.text).dimensions || {})[place];
+  if (base === null || bonus === null || !row || !(row.factor > 0)) return null;
+  return { eut: Math.round(base * row.factor * bonus), how: `${file}: ${base} x ${row.factor} (${place}, sunlight.json) x ${bonus}` };
+}
+
 const near = (a, b) => Math.abs(a - b) < 0.005 + 1e-9 * Math.abs(b) || Math.round(a * 100) / 100 === b;
 const consumed = (r, key) => r.inputs.find((i) => i.alts.includes(key) && !i.cap);
 
@@ -268,8 +360,23 @@ function checkFig(nd, f) {
       return V(reg.tier) === f.eut ? pass(`machines.json tier ${reg.tier}: V = ${V(reg.tier)}`) : fail(`machines.json tier ${reg.tier}: V = ${V(reg.tier)}`);
     }
     case 'run': {
+      // the solar family's price is also recomputed from the machine's script and the sunlight table (no dump needed)
+      let stat = null;
+      if (f.solar) {
+        const s = solarPanelEUt(f.solar);
+        if (!s) return fail(`${f.solar}: no solar constants, or no sunlight row for Earth orbit`);
+        if (s.eut !== f.eut) return fail(`${s.how} = ${s.eut}`);
+        stat = s.how + ' = ' + s.eut;
+      }
+      if (f.src) {
+        const v = sourceValue(f.src);
+        if (v !== f.eut) return fail(`${f.src.file} gives ${v}, not ${f.eut}`);
+        stat = (stat ? stat + '; ' : '') + `${f.src.file}: ${v}`;
+      }
       const hits = recipesOf(nd.types).filter((r) => r.euOut === f.eut && (!f.recipe || r.id === f.recipe));
-      return hits.length ? pass(hits[0].id) : fail(`no ${nd.types.join('|')} recipe makes ${f.eut} EU/t${f.recipe ? ' as ' + f.recipe : ''}`);
+      if (hits.length) return pass(hits[0].id + (stat ? '; ' + stat : ''));
+      const why = `no ${nd.types.join('|')} recipe makes ${f.eut} EU/t${f.recipe ? ' as ' + f.recipe : ''}`;
+      return stat && pendingNode(nd) ? { ok: true, how: stat, pending: why } : fail(why);
     }
     case 'uses': {
       const hits = recipesOf(nd.types).filter((r) => r.eut === f.eut);
@@ -368,10 +475,12 @@ function checkFig(nd, f) {
       const row = (wireless.tiers || []).find((t) => t.cell === f.item);
       if (!row) return fail(`the wireless table has no cell ${f.item}`);
       if (row.capacity !== f.eu) return fail(`${wirelessSrc.from}: ${row.capacity}`);
-      if (!idx.items.has(f.item)) return fail(`${f.item} is not registered in the dump`);
-      if (!electric) return pass(`${wirelessSrc.from}: ${row.capacity}`);
+      const newCell = isNew(f.item);
+      if (!idx.items.has(f.item) && !newCell) return fail(`${f.item} is not registered in the dump`);
+      const cellPending = newCell ? `${f.item} is newer than the dump (registered by this checkout's startup scripts)` : undefined;
+      if (!electric) return { ok: true, how: `${wirelessSrc.from}: ${row.capacity}`, pending: cellPending };
       const bat = (electric.items || []).find((x) => x.id === row.referenceBattery);
-      return bat && bat.capacity * 6 === f.eu ? pass(`${wirelessSrc.from}: ${row.capacity} = 6 x ${row.referenceBattery} (electric.json: ${bat.capacity})`)
+      return bat && bat.capacity * 6 === f.eu ? { ok: true, how: `${wirelessSrc.from}: ${row.capacity} = 6 x ${row.referenceBattery} (electric.json: ${bat.capacity})`, pending: cellPending }
         : fail(`6 x ${row.referenceBattery} = ${bat ? bat.capacity * 6 : 'no entry in electric.json'}`);
     }
     case 'wslots': {
@@ -380,8 +489,17 @@ function checkFig(nd, f) {
       if (t.cellSlots !== f.n) return fail(`${wirelessSrc.from}: cellSlots ${t.cellSlots}`);
       const cells = (wireless.tiers || []).map((r) => r.cell);
       const counts = cells.map((c) => patternCount(t.id, c));
-      if (counts.some((c) => c !== f.n)) return fail(`structures.json: ${t.id} takes cells in ${counts.join('/')} places`);
-      return pass(`${wirelessSrc.from}: cellSlots ${t.cellSlots}; structures.json: every cell fits ${f.n} places of ${t.id}`);
+      const off = cells.filter((c, i) => counts[i] !== f.n);
+      const later = off.filter(isNew);
+      if (off.length > later.length) return fail(`structures.json: ${t.id} takes cells in ${counts.join('/')} places`);
+      return { ok: true, how: `${wirelessSrc.from}: cellSlots ${t.cellSlots}; structures.json: ${later.length ? 'every cell the dump has' : 'every cell'} fits ${f.n} places of ${t.id}`,
+        pending: later.length ? `structures.json predates ${later.join(', ')}` : undefined };
+    }
+    case 'wnet': {
+      if (!wireless || !wireless.loss) return fail('no loss in the wireless table');
+      if (!(nd.figs || []).some((g) => g !== f && (g.total === f.from || (g.t !== 'wnet' && g.eut === f.from)))) return fail(`no figure of ${nd.key} gives ${f.from} EU/t`);
+      const got = Math.round((f.from * wireless.loss.numerator) / wireless.loss.denominator);
+      return got === f.eut ? pass(`${f.from} x ${wireless.loss.numerator}/${wireless.loss.denominator} (${wirelessSrc.from}) = ${got}`) : fail(`${f.from} x ${wireless.loss.numerator}/${wireless.loss.denominator} = ${got}`);
     }
     case 'wloss': {
       if (!wireless || !wireless.loss) return fail('no loss in the wireless table');
@@ -399,8 +517,10 @@ function checkFig(nd, f) {
       const ids = wirelessIds(kind);
       if (!ids.includes(nd.item)) return fail(`${nd.item} is not one of the table's ${kind}s`);
       const missing = ids.filter((id) => !idx.items.has(id));
-      if (missing.length) return fail(`not registered in the dump: ${missing.join(', ')}`);
-      return pass(`${wirelessSrc.from}: ${JSON.stringify(amps)} A, ${names.join(', ')}; all ${ids.length} ${kind}s registered`);
+      const later = missing.filter(isNew);
+      if (missing.length > later.length) return fail(`not registered in the dump: ${missing.filter((id) => !later.includes(id)).join(', ')}`);
+      return { ok: true, how: `${wirelessSrc.from}: ${JSON.stringify(amps)} A, ${names.join(', ')}; ${later.length ? `${ids.length - later.length} of ${ids.length}` : 'all ' + ids.length} ${kind}s registered`,
+        pending: later.length ? `newer than the dump: ${later.join(', ')}` : undefined };
     }
     default:
       return fail('unknown figure ' + f.t);
@@ -473,15 +593,17 @@ let total = 0;
 let figs = 0;
 let figFails = 0;
 let allIssues = 0;
+let allPending = 0;
 const summaries = [];
 for (const m of model.chapters) {
   const issues = [];
+  const pending = [];
   const verified = [];
   const verifiedFigs = [];
   // what every node shows
   for (const nd of m.nodes) {
     if (nd.link) continue;
-    if (!idx.items.has(nd.item)) issues.push(`${nd.key}: item ${nd.item} does not exist`);
+    if (!idx.items.has(nd.item)) (isNew(nd.item) ? pending : issues).push(`${nd.key}: item ${nd.item} ${isNew(nd.item) ? 'is newer than the dump (registered by this checkout)' : 'does not exist'}`);
     // later content (kind peek) may still be hidden in EMI: it only takes a checkmark
     const peek = nd.kind === 'peek';
     if (!peek && hiddenTag.has(nd.item) && stillHidden(nd.item, dumpItem)) issues.push(`${nd.key}: ${nd.item} is hidden in EMI (c:hidden_from_recipe_viewers)`);
@@ -492,14 +614,17 @@ for (const m of model.chapters) {
       if (!peek && lateFluid.has(nd.fluid)) issues.push(`${nd.key}: fluid ${nd.fluid} waits for ${lateFluid.get(nd.fluid)}`);
     }
     if (nd.machine && nd.typeless) issues.push(`${nd.key}: no recipe types for ${nd.item} (machines.json has none: give them)`);
-    if (nd.machine) for (const t of nd.types) if (!idx.recipeTypes.has(t) && ![...idx.recipes.values()].some((r) => r.type === t)) issues.push(`${nd.key}: recipe type ${t} unknown`);
+    if (nd.machine) for (const t of nd.types) if (!idx.recipeTypes.has(t) && ![...idx.recipes.values()].some((r) => r.type === t)) (isNewType(t) ? pending : issues).push(`${nd.key}: recipe type ${t} ${isNewType(t) ? 'is newer than the dump' : 'unknown'}`);
     // the numbers in its text
     for (const f of nd.figs || []) {
       figs++;
-      const r = checkFig(nd, f);
+      let r = checkFig(nd, f);
       const what = `${f.t}${f.name ? ' ' + f.name : ''} ${f.eu ?? f.eut ?? f.mbt ?? f.buckets ?? f.mb ?? f.total ?? f.loss ?? f.percent ?? f.n ?? f.amps ?? ''}`.trim();
+      // what only the dump proves, on a node newer than the dump, waits for a dump that has it
+      if (!r.ok && DUMP_FIGS.has(f.t) && !(f.t === 'run' && (f.solar || f.src)) && pendingNode(nd)) r = { ok: true, how: 'nothing from this checkout', pending: r.why };
       if (r.ok) verifiedFigs.push(`${nd.key} [${what}]: ${r.how}`);
       else { figFails++; issues.push(`FIGURE ${nd.key} [${what}]: ${r.why}`); }
+      if (r.ok && r.pending) pending.push(`FIGURE ${nd.key} [${what}]: ${r.pending}`);
     }
   }
   // leaves
@@ -516,19 +641,31 @@ for (const m of model.chapters) {
       total++;
       const r = checkArrow(e);
       const name = `${e.src.key}${e.src.link ? ' (' + e.src.link + ')' : ''} -> ${nd.key}`;
+      // an arrow done by recipe types newer than the dump (its `by`) waits for a dump that has them, like a newer node
+      const newBy = [].concat(e.by || (nd.machine ? [] : nd.by || []));
+      if (!r.ok && (pendingNode(e.srcRes) || pendingNode(nd) || (newBy.length && newBy.every(isNewType)))) { pending.push(`ARROW ${name}: ${r.why}`); continue; }
       if (!r.ok) { fails++; issues.push(`ARROW ${name}: ${r.why}`); continue; }
       verified.push(`${name}: ${r.recipes.join(' + ')}${r.n > 1 ? ` (and ${r.n - 1} more)` : ''}${r.build ? ' (built from)' : ''}`);
       if (r.summary) summaries.push(`${m.file}: ${e.srcRes.title} -> ${nd.title}, through ${r.summary.join(', ')} (${r.recipes.join(', ')})`);
     }
   }
-  lines.push(`## ${m.file}: ${m.nodes.length} nodes, ${verified.length} arrows verified${verifiedFigs.length ? ', ' + verifiedFigs.length + ' figures verified' : ''}, ${issues.length} issues`, '');
+  if (strict) issues.push(...pending.map((p) => 'PENDING ' + p));
+  const pend = strict ? 0 : pending.length;
+  allPending += pend;
+  lines.push(`## ${m.file}: ${m.nodes.length} nodes, ${verified.length} arrows verified${verifiedFigs.length ? ', ' + verifiedFigs.length + ' figures verified' : ''}, ${issues.length} issues${pend ? ', ' + pend + ' pending' : ''}`, '');
   allIssues += issues.length;
   for (const i of issues) lines.push('- **' + i + '**');
   if (issues.length) lines.push('');
+  if (pend) {
+    lines.push('Pending (newer than the dump: a dump from a pack with them proves them):', '');
+    for (const p of pending) lines.push('- PENDING ' + p);
+    lines.push('');
+  }
   for (const v of [...verified, ...verifiedFigs]) lines.push('- ' + v);
   lines.push('');
-  console.log(`${m.file}: ${verified.length} arrows verified${verifiedFigs.length ? ', ' + verifiedFigs.length + ' figures verified' : ''}, ${issues.length} issues`);
+  console.log(`${m.file}: ${verified.length} arrows verified${verifiedFigs.length ? ', ' + verifiedFigs.length + ' figures verified' : ''}, ${issues.length} issues${pend ? ', ' + pend + ' pending' : ''}`);
   for (const i of issues) console.log('  ' + i);
+  if (pend) for (const p of pending) console.log('  PENDING ' + p);
 }
 lines.push('## Summary arrows (named intermediates)', '');
 for (const s of summaries) lines.push('- ' + s);
@@ -536,5 +673,5 @@ if (outFile) {
   fs.mkdirSync(path.dirname(path.resolve(outFile)), { recursive: true });
   fs.writeFileSync(outFile, lines.join('\n') + '\n');
 }
-console.log(`total: ${total} arrows, ${fails} failing; ${figs} figures, ${figFails} failing; ${allIssues} issues; ${summaries.length} summary arrows; hidden table at dump time: ${dumpTableFrom}${electric ? '' : '; no electric.json in this dump'}${outFile ? '; report ' + outFile : ''}`);
+console.log(`total: ${total} arrows, ${fails} failing; ${figs} figures, ${figFails} failing; ${allIssues} issues; ${allPending} pending (newer than the dump${registeredInDumpPack ? '' : ', no upload.zip: judged by this checkout alone'}${strict ? '; --strict counts them as issues' : ''}); ${summaries.length} summary arrows; hidden table at dump time: ${dumpTableFrom}${electric ? '' : '; no electric.json in this dump'}${outFile ? '; report ' + outFile : ''}`);
 process.exitCode = allIssues ? 1 : 0;

@@ -1,11 +1,18 @@
-// The Power tab (power.snbt, in the Quality of Life group): every way to make power in the pack today, by tier, Steam to IV, and
+// The Power tab (power.snbt, in the Quality of Life group): every way to make power in the pack today, by tier, Steam to LuV, and
 // what carries and stores it. Positions are relative to each cluster (pl-model.mjs places the clusters). Every number in a node's
 // text is a figure (pl-lib.mjs#P) that pl-check.mjs recomputes from the dump, the pack's config or a script.
 import { I, F, M, n, L, E, P, engineFluid, boilerWater, build, structure, network } from './pl-lib.mjs';
 
 // The wireless band uses the wireless energy branch's ids (ezequiel24123z-wireless-energy, bd7759a), which exist only once that
-// branch is merged. false puts the marked slot back instead (GG_QUESTS_EXPECTED.power: [83, 88] with the band, [77, 82] without).
+// branch is merged. false puts the marked slot back instead (GG_QUESTS_EXPECTED.power: [90, 102] with the band, [83, 93] without,
+// with the LANDED set below; each package that lands adds its own nodes).
 const WITH_WIRELESS = true;
+
+// The LuV packages on this branch (docs/eras/luv.md, "Build order"; the names of tools/quests/luv-chapter/quests-data.mjs). A node
+// or cluster tagged pkg: 'B6' (or ['B1', 'B6']: all of them) is left out, with every arrow into it, until its packages are here:
+// when one lands, adding it to this set is the whole change. B7 lands as one of two: 'B7T' is the flux-tube tether, 'B7S' the
+// sulfur-iodine plant that takes its slot if a second station fails (luv.md, 16b). The Io sites also wait for B1's places.
+const LANDED = new Set(['A1', 'A2', 'A3', 'A4', 'A5', 'B2', 'B3', 'B4', 'B6', 'B10']);
 
 // fuel figures, EU per mB, from the dump's recipes (they already carry the pack's x2, power/generators.js)
 const COMBUSTION = [
@@ -43,7 +50,29 @@ const GAS_ANYWHERE = P.anywhere('gtceu:gas_turbine', [['fluid:gtceu:methalox', '
 const coal = (key, x, y) => n(key, x, y, I('minecraft:coal'), 'Coal', { kind: 'raw', sub: 'Coke and charcoal work too' });
 const steam = (key, x, y) => n(key, x, y, F('gtceu:steam'), 'Steam', { kind: 'raw', sub: 'From any boiler' });
 
-export default {
+// the chapter without what has not landed (LANDED): its clusters and nodes, the arrows into them, and bands left empty
+function gate(ch) {
+  const landed = (x) => [].concat(x.pkg || []).every((p) => LANDED.has(p));
+  const clusters = {};
+  const kept = new Set();
+  for (const [ck, cl] of Object.entries(ch.clusters)) {
+    if (!landed(cl)) continue;
+    const nodes = cl.nodes.filter(landed);
+    if (!nodes.length) continue;
+    clusters[ck] = { ...cl, nodes };
+    for (const nd of nodes) kept.add(nd.key);
+  }
+  const keyOf = (f) => (typeof f === 'string' ? f : f.k);
+  for (const cl of Object.values(clusters)) cl.nodes = cl.nodes.map((nd) => ({ ...nd, from: nd.from.filter((f) => kept.has(keyOf(f))) }));
+  const bands = ch.bands.map((b) => b.filter((ck) => clusters[ck])).filter((b) => b.length);
+  return { ...ch, bands, clusters };
+}
+
+const ORBITAL_SOLAR = 'pack/kubejs/startup_scripts/grindless/luv/orbital_solar.js';
+const IO_STARTUP = 'pack/kubejs/startup_scripts/grindless/luv/io_surface.js';
+const IO_SERVER = 'pack/kubejs/server_scripts/grindless/luv/io_surface.js';
+
+export default gate({
   file: 'power',
   group: 'Quality of Life',
   order: 5,
@@ -59,7 +88,9 @@ export default {
     ['evGas', 'evCC', 'evBoiler', 'evSolar', 'evRocket'],
     ['ivEngines', 'ivBoiler', 'ivRocket', 'ivRTG'],
     ['ivFission', 'ivVenus', 'ivMercury', 'ivSolar'],
-    ['laterFusion', 'laterNaq', 'laterDyson'],
+    ['luvNaq', 'luvSolar', 'luvFusion'],
+    ['luvIo', 'luvTether', 'luvSI'],
+    ['laterDyson'],
     ['gHull', 'gBat', 'gCable', 'gFar', 'gBig'],
     ...(WITH_WIRELESS ? [['gWireless']] : []),
   ],
@@ -424,24 +455,101 @@ export default {
         }),
       ],
     },
-    // ---------------------------------------------------------------- later
-    laterFusion: {
-      name: 'Fusion (LuV)',
+    // ---------------------------------------------------------------- LuV (docs/eras/luv.md, "Power on the wireless network")
+    luvNaq: {
+      name: 'Naquadah reactor III',
       nodes: [
+        E('eqRx', 0, -0.75, 'luv_age', '3D5EC5039EBDE967'),
+        // the fuel and the cell come from the LuV chart (pl_luv): the peek quest that stood here is that chart's rod now
+        L('naqbolt', 0, 0.75, 'pl_luv:lrod'),
+        n('naqReactor', 2.25, 0, M('gtnn:luv_naquadah_reactor'), 'Naquadah Reactor III', {
+          tier: 'luv', from: ['eqRx', 'naqbolt'], sub: 'GT--\'s single block; a wireless dynamo cover on it does the rest',
+          desc: 'One rod keeps it humming for a long while, then comes back spent. The naquadah plant re-enriches part of it, never all of it.',
+          figs: [P.single(32768), P.wnet(31130, 32768), P.fuel('gtceu:long_enriched_naquadah_rod', '', 999948288, { unit: 'rod' })],
+        }),
+        n('naqSpent', 4.5, 0, I('gtceu:long_naquadah_rod'), 'Spent Rod, Back', { kind: 'ret', from: ['naqReactor'], sub: 'Macerated, then back into the naquadah plant\'s mode 2' }),
+      ],
+    },
+    luvSolar: {
+      name: 'Orbital solar station',
+      pkg: 'B2',
+      nodes: [
+        n('ospCell', 0, 0, I('gcyr:photovoltaic_cell'), 'Photovoltaic Cell', { kind: 'raw', sub: 'GCYR\'s LuV cell, on naquadah wafers' }),
+        E('eqOSS', 2.25, -1.5, 'luv_age', '3F2030C8DDEDB9FF'),
+        n('ospPanel', 2.25, 0, I('grindless:orbital_solar_panel'), 'Orbital Solar Panel', { from: ['ospCell'], sub: 'The assembler makes it; triple-junction cells give two at once' }),
+        n('orbital', 4.5, 0, M('gtceu:orbital_solar_station', 'gtceu:orbital_solar'), 'Orbital Solar Station', {
+          kind: 'ours', tier: 'luv', from: ['eqOSS', structure('ospPanel')], sub: 'A LuV wireless dynamo hatch sends it home',
+          desc: 'The sky up there is stuck at midnight, and the panels don\'t care: one counts while its top sees open sky. It burns nothing, so no fuel bonus either.',
+          figs: [P.run(630, { per: 'a lit panel', where: 'in Earth orbit', recipe: 'grindless:orbital_solar/earth', solar: ORBITAL_SOLAR }),
+            P.max(40320, 64, 630, { file: ORBITAL_SOLAR, re: 'panels: (\\d+)' }), P.wnet(38304, 40320)],
+        }),
+      ],
+    },
+    luvFusion: {
+      name: 'Fusion',
+      nodes: [
+        E('eqFus', 0, -2.25, 'luv_age', '543F014BB97A45F4'),
         n('deut', 0, -0.75, F('gtceu:deuterium'), 'Deuterium', { kind: 'raw', sub: 'Heavy water through the electrolyzer' }),
         L('tritium', 0, 0.75, 'pl_iv:tritium'),
-        n('fusion', 2.25, 0, M('gtceu:luv_fusion_reactor'), 'Fusion Reactor', { kind: 'peek', from: ['deut', 'tritium'], sub: 'LuV: the tritium you keep in IV goes in here' }),
-        n('plasma', 4.5, 0, F('gtceu:helium_plasma'), 'Helium Plasma', { kind: 'peek', from: ['fusion'] }),
-        n('plasmaT', 6.75, 0, M('gtceu:plasma_large_turbine'), 'Large Plasma Turbine', { kind: 'peek', from: ['plasma'], sub: 'LuV: plasma turned into power' }),
+        n('mg', 0, 2.25, F('gtceu:magnesium'), 'Magnesium', { kind: 'raw', pkg: 'B10', sub: 'Molten, with oxygen beside it' }),
+        n('fusion', 2.25, 0, M('gtceu:luv_fusion_reactor'), 'Fusion Reactor Mk1', {
+          tier: 'luv', from: ['eqFus', 'deut', 'tritium', 'mg'], sub: 'A materials machine first: europium, lutetium and chromium',
+          desc: 'Deuterium and tritium give a little power, and the Moon\'s tritium decides how little.',
+        }),
+        n('plasma', 4.5, -0.75, F('gtceu:helium_plasma'), 'Helium Plasma', { from: ['fusion'] }),
+        n('caPlasma', 4.5, 0.75, F('gtca:calcium_plasma_plasma'), 'Calcium Plasma', {
+          pkg: 'B10', from: ['fusion'], sub: 'GTCA\'s, and no tritium in it',
+          desc: 'The fusion power that doesn\'t wait on the Moon. What it nets after paying the Mk1 gets measured on the bench before it earns a number here.',
+        }),
+        n('plasmaT', 6.75, 0, M('gtceu:plasma_large_turbine'), 'Large Plasma Turbine', {
+          tier: 'luv', from: ['plasma', 'caPlasma'], figs: [P.turbine(65536), P.fuel('fluid:gtceu:helium_plasma', 'helium plasma', 163840)],
+        }),
       ],
     },
-    laterNaq: {
-      name: 'Naquadah reactors',
+    luvIo: {
+      name: 'Volcanic intake',
+      pkg: 'B6',
       nodes: [
-        n('naqbolt', 0, 0, I('gtceu:enriched_naquadah_bolt'), 'Enriched Naquadah', { kind: 'peek', sub: 'It wants naquadah coils in the blast furnace' }),
-        n('naqReactor', 2.25, 0, M('gtnn:ev_naquadah_reactor'), 'Naquadah Reactor', { kind: 'peek', from: ['naqbolt'], sub: 'LuV: enriched naquadah first, naquadria later' }),
+        // the book's quest for it waits for B1's places too (tools/quests/luv-chapter/quests-data.mjs, PATERA)
+        E('eqPat', 0, -2.25, 'luv_age', '5BC4BFE9A199F5A1', { pkg: ['B1', 'B6'] }),
+        L('so2', 0, -0.75, 'pl_luv:so2'),
+        L('bundle', 0, 0.75, 'pl_luv:bundle'),
+        n('intake', 2.25, 0, M('gtceu:volcanic_intake', 'gtceu:volcanic_heat'), 'Volcanic Intake', {
+          kind: 'ours', tier: 'luv', from: ['eqPat', 'so2', 'bundle'], sub: 'Standing on a patera\'s magma',
+          desc: 'Io\'s tidal heat boils a sulfur dioxide loop. Jupiter pays for it, not you, but the bundles still wear out. More turbine modules, more runs at once.',
+          figs: [P.run(32768, { per: 'a turbine module', where: 'on Io', recipe: 'grindless:volcanic_heat/patera', src: { file: IO_SERVER, re: 'intake: \\{ circuit: \\d+, eut: (\\d+)' } }),
+            P.max(131072, 4, 32768, { file: IO_STARTUP, re: '\\{ sym: \'\\w\', col: \\d+, row: \\d+ \\}', count: true }), P.wnet(124518, 131072),
+            P.fuel('grindless:heat_exchanger_bundle', '', 2340571429, { unit: 'bundle' })],
+        }),
       ],
     },
+    luvTether: {
+      name: 'Flux-tube tether',
+      pkg: ['B1', 'B7T'],
+      nodes: [
+        n('spool', 0, -0.75, I('grindless:tether_spool'), 'Tether Spool', { kind: 'raw', sub: 'Used up now and then' }),
+        n('argon', 0, 0.75, F('gtceu:argon'), 'Argon', { kind: 'raw', sub: 'From Mars, for the hollow cathode' }),
+        n('tether', 2.25, 0, M('gtceu:flux_tube_tether', 'gtceu:electrodynamic_tether'), 'Flux-Tube Tether', {
+          kind: 'ours', tier: 'luv', from: ['spool', 'argon'], sub: 'Io orbit only',
+          desc: 'A long bare wire dragged through Jupiter\'s plasma torus, which spins far faster than Io moves. It needs neither ground nor fuel, and its wireless dynamo hatch feeds every base.',
+          figs: [P.run(65536, { per: 'a spool cell', where: 'in Io orbit' })],
+        }),
+      ],
+    },
+    luvSI: {
+      name: 'Sulfur-iodine plant',
+      pkg: ['B1', 'B7S'],
+      nodes: [
+        n('siWater', 0, 0, F('minecraft:water'), 'Water', { kind: 'raw', sub: 'Europa\'s, carried over' }),
+        n('si', 2.25, 0, M('gtceu:sulfur_iodine_plant', 'gtceu:thermochemical_hydrogen'), 'Sulfur-Iodine Plant', {
+          kind: 'ours', tier: 'luv', from: ['siWater'], sub: 'Not a generator: hydrogen from Io\'s heat, on Io only',
+          desc: 'Io supplies the heat, so its hydrogen costs a fraction of the electrolyzer\'s power. The sulfur and the iodine go round and round.',
+          figs: [P.uses(30)],
+        }),
+        n('siH2', 4.5, 0, F('gtceu:hydrogen'), 'Hydrogen', { kind: 'product', from: ['si'], sub: 'For the naquadah plant, the Mk1 and the Europan culture' }),
+      ],
+    },
+    // ---------------------------------------------------------------- later
     laterDyson: {
       name: 'Dyson sphere',
       nodes: [
@@ -512,6 +620,7 @@ export default {
       name: 'Wireless energy network',
       nodes: [
         n('wbat', 0, 0, I('gtceu:lv_lithium_battery'), 'Batteries', { kind: 'raw', sub: 'Any battery of the cell\'s tier' }),
+        E('eqSMES', 0, 4, 'luv_age', '5933ADF51C8949BD', { pkg: 'A4' }),
         n('wcell', 2.25, 0, I('grindless:lv_capacitor_cell'), 'Capacitor Cell', {
           kind: 'info', from: ['wbat'], sub: 'The weakest cell in any tower sets the network\'s voltage',
           desc: 'Batteries of its tier in a block. An empty slot takes the tower\'s casing.',
@@ -520,25 +629,33 @@ export default {
             P.wcell('grindless:iv_capacitor_cell', 'IV', 245760000)],
         }),
         n('wtower', 4.5, 0, M('gtceu:wireless_energy_tower'), 'Wireless Energy Tower', {
-          kind: 'ours', tier: 'lv', from: [structure('wcell')], figs: [P.wslots(32), P.wloss(5)],
+          kind: 'ours', tier: 'lv', from: [structure('wcell'), structure('wsmes')], figs: [P.wslots(32), P.wloss(5)],
           sub: 'One network for every world and every player', desc: 'No tower, no network: build it before any hatch or cover.',
+        }),
+        // LuV's cell (package A4): wound in the HTS magnet works, not assembled from batteries (the table's cellMadeBy); the works
+        // is the LuV chart's (pl_luv)
+        L('hmw', 0, 2.25, 'pl_luv:mw', { pkg: 'A4' }),
+        n('wsmes', 2.25, 2.25, I('grindless:luv_smes_cell'), 'LuV SMES Cell', {
+          kind: 'info', pkg: 'A4', from: ['eqSMES', 'hmw'], sub: 'LuV\'s cell is a superconducting coil, wound rather than assembled',
+          desc: 'The network jumps to LuV only when every formed tower holds these. Until then, a multiblock with two IV wireless energy hatches reaches LuV the usual GregTech way.',
+          figs: [P.wcell('grindless:luv_smes_cell', 'LuV SMES', 983040000)],
         }),
         n('wdynH', 6.75, -2.25, I('gtceu:lv_wireless_dynamo_hatch'), 'Wireless Dynamo Hatch', {
           kind: 'info', from: [network('wtower')], sub: 'Generator multiblocks feed the network through it',
-          desc: 'Energy goes in at any voltage; the cells only limit what comes out.', figs: [P.wamps([2, 4, 16, 64], 'lv', 'iv')],
+          desc: 'Energy goes in at any voltage; the cells only limit what comes out.', figs: [P.wamps([2, 4, 16, 64], 'lv', 'luv')],
         }),
         n('wdynC', 6.75, -0.75, I('grindless:lv_wireless_dynamo_cover'), 'Wireless Dynamo Cover', {
-          kind: 'info', from: [network('wtower')], sub: 'On a generator or a battery buffer, it feeds the network', figs: [P.wcover(2, 'lv', 'iv')],
+          kind: 'info', from: [network('wtower')], sub: 'On a generator or a battery buffer, it feeds the network', figs: [P.wcover(2, 'lv', 'luv')],
         }),
         n('wenH', 6.75, 0.75, I('gtceu:lv_wireless_energy_hatch'), 'Wireless Energy Hatch', {
           kind: 'info', from: [network('wtower')], sub: 'Multiblocks draw from the network through it',
-          desc: 'Above the network\'s voltage it gets nothing; shift-right-click it with an empty hand to see why.', figs: [P.wamps([2, 4, 16, 64], 'lv', 'iv')],
+          desc: 'Above the network\'s voltage it gets nothing; shift-right-click it with an empty hand to see why.', figs: [P.wamps([2, 4, 16, 64], 'lv', 'luv')],
         }),
         n('wenC', 6.75, 2.25, I('grindless:lv_wireless_energy_cover'), 'Wireless Energy Cover', {
           kind: 'info', from: [network('wtower')], sub: 'Single machines draw through it, on any side but the front',
-          desc: 'GTM machines, chargers and battery buffers, not converters or multiblock controllers; shift-right-click with an empty hand for the readout.', figs: [P.wcover(2, 'lv', 'iv')],
+          desc: 'GTM machines, chargers and battery buffers, not converters or multiblock controllers; shift-right-click with an empty hand for the readout.', figs: [P.wcover(2, 'lv', 'luv')],
         }),
       ],
     } } : {}),
   },
-};
+});
