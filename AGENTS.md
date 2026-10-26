@@ -164,7 +164,7 @@ Gregtech Grindless is a GregTech Modern pack (Minecraft 1.20.1, Forge) in which 
   | LuV orbital solar station | 15872–15935, Z 0–63; Earth orbit Y 198–214 |
   | LuV microgravity smelter and wake shield | 16128–16191, Z 0–63; Earth orbit Y 198–214 |
   | LuV crystal grower, hydroponic ring and organoid lab | 16640–16703, Z 0–63; Earth orbit Y 198–214 |
-  | LuV Europa: cryobot and algae bioreactor (S0-7 ice shaft) | 17408–17471, Z 0–63: the Overworld at Y 98–112; on Europa (`places.json`, once B1 registers it) the same X and Z |
+  | LuV Europa: cryobot and algae bioreactor (S0-7 ice shaft) | 17408–17471, Z 0–15: the Overworld at Y 98–113 (the cryobot is 16 high); on Europa (`places.json`, once B1 registers it) the same X and Z |
   | chests and furnaces (client) | 18688–18751 (uses X 18688–18703, Z 0–15, Y 98–112) |
 
   For a new test, keep going in steps of 256.
