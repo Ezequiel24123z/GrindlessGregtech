@@ -76,6 +76,7 @@
     { "id": "chests_and_furnaces", "x": [18688, 18751], "tests": ["chest_furnace"], "note": "client; uses X 18688-18703, Z 0-15, Y 98-112" },
     { "id": "zpm_s0", "x": [18944, 19007], "tests": ["zpm_s0"], "note": "ZPM-S0 disposable spikes: Mk1/Mk2 fusion at Z 0-40, LuV wireless tower at X 18960" },
     { "id": "zpm_naquadria", "x": [19456, 19519], "tests": ["zpm_naquadria"], "note": "ZPM-A2: recipe lookups of the naquadria refinery, the fuel works, the plant's circuit-4 mode and the re-registered large naquadah reactor (no structure placed)" },
-    { "id": "zpm_a3", "x": [19712, 19775], "tests": ["zpm_europium"], "note": "ZPM-A3: the europium reductor (9 x 3 x 7) at Z 0-15, Y 98-112" }
+    { "id": "zpm_a3", "x": [19712, 19775], "tests": ["zpm_europium"], "note": "ZPM-A3: the europium reductor (9 x 3 x 7) at Z 0-15, Y 98-112" },
+    { "id": "zpm_actinides", "x": [19968, 20031], "z": [0, 63], "y": [98, 112], "tests": ["zpm_actinides"], "note": "ZPM-A4: recipe lookups of the waste retrieval and actinide partitioning plants, and a formed retrieval plant (7 x 5 x 7) consuming one waste item" }
   ]
 }
