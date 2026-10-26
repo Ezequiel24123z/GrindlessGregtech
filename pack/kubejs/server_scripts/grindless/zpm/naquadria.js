@@ -216,9 +216,79 @@
     })
   }
 
+  // the large naquadah reactor's assembly-line recipe at ZPM: GTM's own recipe re-added under the same id with duranium frames for the
+  // neutronium ones (everything else, the research and the output kept), read from this load's original recipe
+  var REACTOR = { id: 'gtceu:assembly_line/large_naquadah_reactor', name: 'gtceu:large_naquadah_reactor', from: 'gtceu:neutronium_frame', to: 'gtceu:duranium_frame' }
+
+  function reactorArgs(j) {
+    var research = []
+    var bad = null
+    ;(j.recipeConditions || []).forEach(function (c) {
+      if (c.type !== 'research' || !c.research) bad = 'a condition other than research'
+      else c.research.forEach(function (r) { research.push(String(r.researchId)) })
+    })
+    if (bad !== null) return bad
+    if (research.length !== 1) return 'not one research entry'
+    var eu = j.tickInputs && j.tickInputs.eu && j.tickInputs.eu[0] ? j.tickInputs.eu[0].content : null
+    var eut = typeof eu === 'number' ? eu : (eu && eu.voltage !== undefined ? Number(eu.voltage) * Number(eu.amperage || 1) : null)
+    if (!(eut > 0) || !(j.duration > 0)) return 'unreadable energy or duration'
+    var items = []
+    var swapped = 0
+    ;((j.inputs && j.inputs.item) || []).forEach(function (e) {
+      var c = e.content
+      var sized = c && c.type === 'gtceu:sized'
+      var ing = sized ? c.ingredient : c
+      var count = sized ? (c.count || 1) : 1
+      if (!ing || (e.chance !== undefined && e.chance !== 10000)) { bad = 'item input ' + JSON.stringify(e); return }
+      if (ing.item && !ing.nbt) {
+        var id = ing.item
+        if (id === REACTOR.from) { id = REACTOR.to; swapped += count }
+        items.push(count + 'x ' + id)
+      } else if (ing.tag) items.push(count + 'x #' + ing.tag)
+      else bad = 'item input ' + JSON.stringify(e)
+    })
+    var fluids = []
+    ;((j.inputs && j.inputs.fluid) || []).forEach(function (e) {
+      var c = e.content
+      var v = c && c.value && c.value.length === 1 ? c.value[0] : null
+      if (v && v.fluid && c.amount > 0) fluids.push(v.fluid + ' ' + c.amount)
+      else bad = 'fluid input ' + JSON.stringify(e)
+    })
+    var outs = []
+    ;((j.outputs && j.outputs.item) || []).forEach(function (e) {
+      var c = e.content
+      var sized = c && c.type === 'gtceu:sized'
+      var ing = sized ? c.ingredient : c
+      if (ing && ing.item && !ing.nbt) outs.push((sized ? (c.count || 1) : 1) + 'x ' + ing.item)
+      else bad = 'item output ' + JSON.stringify(e)
+    })
+    if (bad !== null) return bad
+    if (swapped !== 8) return 'expected 8 ' + REACTOR.from + ', found ' + swapped
+    if (outs.length !== 1 || (j.outputs && j.outputs.fluid && j.outputs.fluid.length > 0)) return 'not one item output'
+    if (!Item.exists(REACTOR.to)) return REACTOR.to + ' does not exist'
+    return { items: items, fluids: fluids, output: outs[0], eut: eut, duration: j.duration, research: research[0] }
+  }
+
+  function addReactor(event) {
+    var found = null
+    event.forEachRecipe({ id: REACTOR.id }, function (r) {
+      if (found === null && r.json !== null && r.json !== undefined) found = JSON.parse(String(r.json))
+    })
+    if (found === null) throw new Error('no original recipe ' + REACTOR.id)
+    var args = reactorArgs(found)
+    if (typeof args === 'string') throw new Error(REACTOR.id + ' left as it is: ' + args)
+    event.remove({ id: REACTOR.id })
+    var b = event.recipes.gtceu.assembly_line(REACTOR.name)
+    args.items.forEach(function (s) { b.itemInputs(s) })
+    args.fluids.forEach(function (s) { b.inputFluids(s) })
+    b.itemOutputs(args.output).EUt(args.eut).duration(args.duration).researchWithoutRecipe(args.research)
+    NQ.reactor = { id: REACTOR.id, items: args.items, fluids: args.fluids, output: args.output, eut: args.eut, duration: args.duration, research: args.research }
+    console.info(LOG + 'large naquadah reactor: ' + REACTOR.id + ' re-added with 8 ' + REACTOR.to + ' (' + args.eut + ' EU/t x ' + args.duration + ' t), research ' + args.research)
+  }
+
   // an uncaught error here would stop KubeJS from running the recipe handlers of the scripts that load after this one
   ServerEvents.recipes(function (event) {
-    var steps = [['recipes', generate], ['casing', addCasing], ['controllers', addControllers]]
+    var steps = [['recipes', generate], ['casing', addCasing], ['controllers', addControllers], ['reactor', addReactor]]
     steps.forEach(function (s) {
       try {
         s[1](event)
