@@ -1512,7 +1512,12 @@
 
     if (FL.phase === 'moon_stay') {
       if (IS_LUV) {
-        if (!LEVEL4 && !global.ggLuvS0.onMoon(p, S.t, FL, S.server, shared())) return
+        if (!LEVEL4) {
+          if (!global.ggLuvS0.onMoon(p, S.t, FL, S.server, shared())) return
+          var environment = global.ggLuvS0.summary()
+          check('moon_environment', environment.fail === 0, 'environment assertions: ' +
+            environment.pass + ' passed, ' + environment.fail + ' failed; independent flight coverage continues')
+        }
         p.setMainHandItem(Item.of(IDS.chip))
         FL.leg = 'home'
         FL.target = IDS.earthPlanet
@@ -1671,6 +1676,8 @@
       return false
     }
     SCOPE = 'luv_s0_stations'
+    FL.legs = {}
+    FL.lastFlight = null
     shared().put('luvProbe', 'stations')
     S.stage = 'stations'
     global.ggLuvS0Stations.begin(stationContext())
@@ -1770,6 +1777,10 @@
       staticChecks()
     } catch (e) {
       check('static', false, 'exception (is GCYR loaded?): ' + e)
+      if (IS_LUV) {
+        finish()
+        return
+      }
     }
     try {
       prepareWorld()
