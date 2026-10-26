@@ -12,7 +12,8 @@
 //   shared_ids            the ids the recipes take and the structures use exist (IV-A1's, IV-A3's, GT--'s, the EV electrode)
 //   registration          gtceu:naquadah_plant on its own type gtceu:naquadah_refining (the IO sizes published), not a generator, with a
 //                         structure description
-//   naquadah_composed     mode 1 composed from its 5 live GT-- stages, none skipped, with the design's figures: 4 naquadah oxide mixture +
+//   naquadah_composed     mode 1 composed from its 5 live GT-- stages (pinned 'ok'; LuV A2's modes 2 and 3 read 13 more), none skipped,
+//                         with the design's figures: 4 naquadah oxide mixture +
 //                         15 antimony trioxide + 40 500 mB HF + the Pu-Be source (100 of 10 000) -> 2 naquadah + titanium and gallium at
 //                         5 000 of 10 000 + 10 500 mB hydrogen + 9 000 mB water, for 1 143 960 EU of stages (the activator's run charged the
 //                         accelerators' upkeep, 240 EU/t), spent at no more than 7 680 EU/t and at most one EU/t over the stages
@@ -22,7 +23,8 @@
 //   fusion_live           the fusion stage mode 3 read from global.grindless.mercury.fusion equals IV-B2's live recipe
 //                         grindless:solar_processing/iridosmine_fusion (items, fluids, EU/t and duration)
 //   live_contents         both recipes are in the recipe manager under their final ids with exactly their published contents
-//   lookup_sets           gtceu:naquadah_refining holds one recipe; no gtceu:pgm_refining recipe takes a subset of another's ingredients
+//   lookup_sets           gtceu:naquadah_refining holds the published recipes (3 since LuV A2, checked in gg_test_luv_a2); every live
+//                         gtceu:pgm_refining recipe is published and none takes a subset of another's ingredients
 //                         (static; gg_test_recipe_lookup asks GTM's lookup)
 //   bee_removed           Productive Bees' gcteu:electric_blast_furnace/naquadah_bee is gone
 //   controller_recipe     grindless:assembler/naquadah_plant exists and holds its parts
@@ -32,10 +34,10 @@
 //                         applied (GT--'s sludge centrifuge without its iridium metal residue and rarest metal mixture, its inert metal
 //                         mixture leach without the mixture): the originals are gone and the rebuilt recipes keep every other output
 //   platinum_no_residue   the platinum plant read the same two stages without those outputs, and none of its Earth recipes (modes 1
-//                         and 2) gives a residue, iridium or osmium
+//                         and 2; not mode 3, Mercury's, nor LuV's mode 4, the asteroid belt's) gives a residue, iridium or osmium
 //   earth_mercury         offworld_only.json worlds.mercury: every loaded recipe that gives a watched output (the two residues and
-//                         iridium, osmium and iridosmine forms) takes one, or only runs off Earth, or is recycling, or is a late line
-//                         of allowedLate (gg_test_moon.js' Earth scan, for Mercury)
+//                         iridium, osmium and iridosmine forms) takes one, or the asteroid belt's concentrate (LuV A2's mode 4), or only
+//                         runs off Earth, or is recycling, or is a late line of allowedLate (gg_test_moon.js' Earth scan, for Mercury)
 //   balance               NOTE: what one naquadah dust costs, and the share of the accelerators' upkeep
 //   <copy>_PLACED / _FORMED / _PARTS   the two copies below
 //   no_source             copy naq: every input but the Pu-Be source -> nothing runs (the source holds the window)
@@ -490,7 +492,10 @@
       var extra = []
       var skipped = NP().skipped || []
       if (skipped.length > 0) extra.push('skipped: ' + skipped.map(function (s) { return s.name + ' (' + s.reason + ')' }).join(', '))
-      if (NP().stagesRead !== 5) extra.push(NP().stagesRead + ' live stages read of 5')
+      // LuV A2 added modes 2 and 3 (18 stages in all): mode 1's own 5 stages must be pinned 'ok'
+      var pins = NP().pins || {}
+      var notOk = Object.keys(WANT.naquadah.stages).filter(function (id) { return pins[id] !== 'ok' })
+      if (notOk.length > 0) extra.push('mode 1 pins not ok: ' + notOk.map(function (id) { return short(id) + '=' + pins[id] }).join(', '))
       var acc = NP().accelerator || {}
       if (acc.upkeepEUt !== 240) extra.push('accelerator upkeep ' + acc.upkeepEUt + ' EU/t, want 240 (72 000 eV / 20 t / 15 eV per EU)')
       var problems = composedProblems('naquadah', r, WANT.naquadah, extra)
@@ -545,7 +550,9 @@
     safely('lookup_sets', function () {
       var problems = []
       var naqLive = asArray(S.server.getRecipeManager().getAllRecipesFor(GTRegistries.RECIPE_TYPES.get(rl(NAQ_TYPE)))).length
-      if (naqLive !== 1) problems.push(naqLive + ' live ' + NAQ_TYPE + ' recipes')
+      var naqPublished = (NP().recipes || []).length
+      if (naqLive !== naqPublished) problems.push(naqLive + ' live ' + NAQ_TYPE + ' recipes, ' + naqPublished + ' published')
+      var pgmLive = asArray(S.server.getRecipeManager().getAllRecipesFor(GTRegistries.RECIPE_TYPES.get(rl(PGM_TYPE)))).length
       var sets = (PP().recipes || []).map(function (rec) { return { name: rec.name, keys: liveProblems(rec, null).keys } })
       function subset(x, y) {
         return x.keys.length > 0 && x.keys.every(function (k) { return y.keys.indexOf(k) >= 0 })
@@ -555,7 +562,9 @@
           if (subset(sets[i], sets[j]) || subset(sets[j], sets[i])) problems.push(sets[i].name + ' / ' + sets[j].name)
         }
       }
-      check('lookup_sets', problems.length === 0 && sets.length === 6, NAQ_TYPE + ' holds ' + naqLive + '; ' + sets.length + ' ' + PGM_TYPE +
+      // 6 until LuV A2's mode 4 (7 with it): every live pgm_refining recipe is a published one
+      if (sets.length < 6 || sets.length !== pgmLive) problems.push(sets.length + ' published ' + PGM_TYPE + ' recipes, ' + pgmLive + ' live')
+      check('lookup_sets', problems.length === 0, NAQ_TYPE + ' holds ' + naqLive + ' (' + naqPublished + ' published); ' + sets.length + ' ' + PGM_TYPE +
         ' input sets, none a subset of another' + (problems.length > 0 ? ' | problems: ' + problems.join('; ') : ''))
     })
 
@@ -738,13 +747,13 @@
         if (got.length !== 1 || got[0].gone !== want[id]) problems.push(short(id) + ' read without [' + got.map(function (s) { return s.gone }).join(' | ') + '], want ' + want[id])
       })
       ;(PP().recipes || []).forEach(function (rec) {
-        if (rec.mode === 'iridosmine') return
+        if (rec.mode === 'iridosmine' || rec.mode === 'asteroid') return
         rec.itemsOut.forEach(function (o) {
           if (RESIDUE_RE.test(o.id) || /iridium|osmium/.test(o.id)) problems.push(rec.name + ' gives ' + o.id)
         })
       })
       check('platinum_no_residue', problems.length === 0, 'stages read without: ' + stripped.map(function (s) { return short(s.stage) + ' -[' + s.gone + ']' }).join(' ; ') +
-        '; the ' + (PP().recipes || []).filter(function (r) { return r.mode !== 'iridosmine' }).length + ' Earth recipes give no residue, iridium or osmium' +
+        '; the ' + (PP().recipes || []).filter(function (r) { return r.mode !== 'iridosmine' && r.mode !== 'asteroid' }).length + ' Earth recipes give no residue, iridium or osmium' +
         (problems.length > 0 ? ' | problems: ' + problems.join('; ') : ''))
     })
 
@@ -780,7 +789,9 @@
       }
       var access = S.server.registryAccess()
       var all = asArray(S.server.getRecipeManager().getRecipes())
-      var count = { recipes: all.length, watched: 0, offEarth: 0, processing: 0, recycling: 0, late: 0, unreadable: 0, residueRecipes: 0 }
+      var count = { recipes: all.length, watched: 0, offEarth: 0, processing: 0, belt: 0, recycling: 0, late: 0, unreadable: 0, residueRecipes: 0 }
+      var concentrate = String((PP().asteroid || {}).concentrate || 'grindless:asteroid_pgm_concentrate')
+      var beltRe = new RegExp('"' + concentrate.replace(/[.*+?^${}()|[\]\\]/g, '\\$&') + '"')
       var leaks = []
       var firstError = ''
       for (var i = 0; i < all.length; i++) {
@@ -810,6 +821,11 @@
             count.processing++
             continue
           }
+          // LuV A2: the platinum plant's mode 4 refines the asteroid belt's concentrate (off Earth, like Mercury's iridosmine)
+          if (gt && beltRe.test(gtInputsText(r))) {
+            count.belt++
+            continue
+          }
           if (gt && recycling(r, id)) {
             count.recycling++
             continue
@@ -825,7 +841,8 @@
         }
       }
       check('earth_mercury', leaks.length === 0 && count.unreadable === 0, 'recipes=' + count.recipes + ', with a watched output ' + count.watched + ' (' +
-        count.residueRecipes + ' give a residue): off Earth ' + count.offEarth + ', processing ' + count.processing + ', recycling ' + count.recycling +
+        count.residueRecipes + ' give a residue): off Earth ' + count.offEarth + ', processing ' + count.processing + ', the belt\'s concentrate ' + count.belt +
+        ', recycling ' + count.recycling +
         ', late ' + count.late + ', unreadable ' + count.unreadable + (firstError !== '' ? ' first=' + firstError : '') +
         (leaks.length > 0 ? ' | LEAKS (' + leaks.length + '): ' + leaks.slice(0, 25).join(' ; ') : ' | no Earth recipe gives the residues, iridium or osmium'))
     })

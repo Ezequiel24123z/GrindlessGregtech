@@ -1,0 +1,42 @@
+{
+  "_source": "Our own table: the platinum plant's mode 4, asteroid platinum metals (LuV, package A2; docs/eras/luv.md, 'Platinum plant, mode 4: asteroid platinum metals, absolute' and '12. Asteroid processor'). The asteroid processor's Mond process takes the iron, nickel and cobalt of an M-type asteroid away as carbonyls; the platinum metals form none and stay behind as grindless:asteroid_pgm_concentrate (Inco's Clydach carbonyl residue really was a feedstock for platinum-group refining). One concentrate is one unit of platinum metal. The opening below is ours, like mode 3's first stage (the Mercury fusion); everything after it is GT--'s live iridium and osmium chain, the same stages as mode 3, read from the loaded pack.",
+  "_how_it_is_used": [
+    "Read by server_scripts/grindless/ev/platinum_plant.js at every server load (a /reload picks up changes). The opening is the first stage of mode 4 (programmed circuit 4, recipe grindless:pgm_refining/luv/asteroid): a virtual stage, no recipe of its own, that opens 22 concentrate into what the plant already refines. The composer (server_scripts/grindless/lib/compose.js) then runs mode 3's live chain after it (rarest_metal_residue_ebf, acidic_osmium_solution_distill, osmium_dust_completion, iridium_metal_residue_process, iridium_dioxide_dissolving, iridium_chloride, iridium_chloride_separation, and GTM's hydrochloric_acid and ammonium_chloride that close the chlorine and ammonia loops) until every intermediate nets to zero. The batch is the opening's own concentrate. Without grindless:asteroid_pgm_concentrate registered (LuV A1 registers it; B5's asteroid processor makes it) the mode is skipped with a warning and the other modes are untouched. Until B5 the concentrate is hidden from EMI with its recipes (hidden_until.json), so EMI shows no mode 4 recipe either: its input cannot be had yet.",
+    "opening: what one opening takes and gives. 22 concentrate + 15 saltpeter + 1,500 mB salt water -> 1 platinum group sludge + 6 rarest metal mixture + 2,700 mB osmium tetroxide + 1,500 mB steam: the oxidative fusion of mode 3 (saltpeter and salt water, steam out) at 1.5 times, with the sludge set apart for circuit 2. Through GT--'s chain the 6 rarest metal mixture give 3 iridium and 0.3 osmium (its acidic osmium solution's tetroxide), and the 2,700 mB of tetroxide 2.7 osmium: 3 Ir + 3 Os. The hydrochloric acid, hydrogen and calcium the recipe takes, and the platinum sludge residue, metal sludge, calcium chloride and water it gives, are what that chain takes and gives: nothing is typed here.",
+    "energy: the opening's energy, computed at load from live data. fusionTimes x the Mercury fusion's EU (global.grindless.mercury.fusion, the object grindless:solar_processing/iridosmine_fusion is built from: EU/t x ticks) + attackSludge x the EU one platinum group sludge costs through mode 1's attack (the plant's attack_pentlandite plan composed from GT--'s live recipes, its energy divided by the sludge it makes). The opening is spent at the plant's EV rate (ceil(energy / 1,920) ticks) and added to the chain's energy like any stage: no discount.",
+    "yields: what the composed recipe must give per run (the design's promise: 22 concentrate -> 1 sludge + 3 Ir + 3 Os). The script warns when the live chain gives something else; tools/analysis/test/platinum-asteroid.test.mjs checks it offline on the pinned GT-- recipes. The plant's circuit-2 recipes split the sludge into 6 Pt + 4.20 Pd + 4.49 Ru + 1.35 Rh: with the 3 Ir and 3 Os, 22.04 units of platinum metal per 22 concentrate.",
+    "Policy: mode 4 keeps all it makes. Its recipe carries the data key the startup script publishes (global.grindless.platinumPlant.keepKey), and the plant refuses to run it while the controller voids outputs (lib/no_voiding.js: the modifier and the start check). Modes 1 to 3 may void."
+  ],
+  "concentrate": "grindless:asteroid_pgm_concentrate",
+  "opening": {
+    "inputs": {
+      "items": [
+        { "id": "grindless:asteroid_pgm_concentrate", "count": 22 },
+        { "id": "gtceu:saltpeter_dust", "count": 15 }
+      ],
+      "fluids": [
+        { "id": "gtceu:salt_water", "amount": 1500 }
+      ]
+    },
+    "outputs": {
+      "items": [
+        { "id": "gtceu:platinum_group_sludge_dust", "count": 1 },
+        { "id": "gtceu:rarest_metal_mixture_dust", "count": 6 }
+      ],
+      "fluids": [
+        { "id": "gtceu:osmium_tetroxide", "amount": 2700 },
+        { "id": "gtceu:steam", "amount": 1500 }
+      ]
+    }
+  },
+  "energy": {
+    "fusionTimes": 1.5,
+    "attackSludge": 1,
+    "attackPlan": "attack_pentlandite"
+  },
+  "yields": {
+    "gtceu:iridium_dust": 3,
+    "gtceu:osmium_dust": 3,
+    "gtceu:platinum_group_sludge_dust": 1
+  }
+}

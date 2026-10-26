@@ -1165,7 +1165,7 @@
       "era": "iv-venus",
       "label": "What Venus makes: its machines formed (Venusian regolith), the seed, the sample, naquadah dust (the naquadah plant at home, from Venus's oxide), and what its drill, engine, acid works and the naquadah plant need",
       "items": ["m:gtceu:pressurized_vein_drill", "m:gtceu:venus_heat_engine", "m:gtceu:venus_acid_works", "grindless:venusian_quantum_seed", "grindless:vein_sample_naquadah_venus", "gcyr:venusian_regolith", "gtceu:naquadah_dust"],
-      "inputsOf": ["grindless:vein_drilling/iv/pressurized_*_venus_*", "grindless:venus_heat/*", "grindless:acid_cracking/*", "grindless:naquadah_refining/*"]
+      "inputsOf": ["grindless:vein_drilling/iv/pressurized_*_venus_*", "grindless:venus_heat/*", "grindless:acid_cracking/*", "grindless:naquadah_refining/naquadah"]
     },
     {
       "id": "iv-mercury",

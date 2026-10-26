@@ -1,0 +1,1115 @@
+{
+ "_source": "The platinum plant's live stages as the pack loads them (GT-- 1.3.10, gtnn-1.20.1-1.3.10.jar pinned in pack/mods/gtnn.pw.toml, and GTM 7.5.3), read from the native recipe dump of the power-quests-1 bench run (2026-10-25, tools/test kubejs-exported/recipes.json, format gg-recipes-1), the same dump as gtnn-1.3.10-naquadah-line.json: the original recipes of every stage of the plant's attack_pentlandite plan (mode 1) and of GT--'s iridium and osmium chain that modes 3 and 4 share (server_scripts/grindless/ev/platinum_plant.js, its PLANS). The other plans' stages are not here (LuV A2, mode 4).",
+ "_how_it_is_used": [
+  "tools/analysis/test/platinum-asteroid.test.mjs runs server_scripts/grindless/lib/compose.js and ev/platinum_plant.js on these recipes (a stand-in for ServerEvents.recipes' originalRecipes, tools/analysis/lib/kubejs_recipes_sandbox.mjs) and checks mode 4 (circuit 4, asteroid platinum metals) against data/grindless/tables/asteroid_pgm.json and docs/eras/luv.md. The separation plans, whose stages are not pinned, are skipped there.",
+  "liveComposed is the plant's attack_pentlandite and iridosmine recipes as the same native run built them: the stand-in must compose exactly those (same contents, EU/t and duration).",
+  "related: the Mercury fusion grindless:solar_processing/iridosmine_fusion as that run built it (IV-B2's server_scripts/grindless/iv/mercury.js, from the object it publishes as global.grindless.mercury.fusion): modes 3 and 4 price their first stage from it, and the test checks that the script's object still matches it.",
+  "When pack/mods/gtnn.pw.toml moves to another GT-- version the test fails on purpose: dump the new pack natively, rebuild this file from it (same ids) with the new gtnnVersion, and re-check the modes before accepting it."
+ ],
+ "gtnnVersion": "1.3.10",
+ "recipes": {
+  "gtceu:large_chemical_reactor/platinum_group_sludge_dust1": {
+   "type": "gtceu:large_chemical_reactor",
+   "duration": 25,
+   "category": "gtceu:large_chemical_reactor",
+   "tickInputs": {
+    "eu": [
+     {
+      "content": 480
+     }
+    ]
+   },
+   "inputs": {
+    "fluid": [
+     {
+      "content": {
+       "amount": 9000,
+       "value": [
+        {
+         "tag": "forge:sulfuric_acid"
+        }
+       ]
+      }
+     }
+    ],
+    "item": [
+     {
+      "content": {
+       "type": "gtceu:sized",
+       "count": 9,
+       "ingredient": {
+        "tag": "forge:purified_ores/pentlandite"
+       }
+      }
+     },
+     {
+      "content": {
+       "type": "gtceu:circuit",
+       "configuration": 9
+      },
+      "chance": 0
+     }
+    ]
+   },
+   "outputs": {
+    "fluid": [
+     {
+      "content": {
+       "amount": 18000,
+       "value": [
+        {
+         "fluid": "gtceu:sulfuric_nickel_solution"
+        }
+       ]
+      }
+     }
+    ],
+    "item": [
+     {
+      "content": {
+       "type": "gtceu:sized",
+       "count": 1,
+       "ingredient": {
+        "item": "gtceu:platinum_group_sludge_dust"
+       }
+      }
+     }
+    ]
+   }
+  },
+  "gtceu:electrolyzer/decomposition_electrolyzing_sulfuric_nickel_solution": {
+   "type": "gtceu:electrolyzer",
+   "duration": 84,
+   "category": "gtceu:electrolyzer",
+   "tickInputs": {
+    "eu": [
+     {
+      "content": 60
+     }
+    ]
+   },
+   "inputs": {
+    "fluid": [
+     {
+      "content": {
+       "amount": 1000,
+       "value": [
+        {
+         "tag": "forge:sulfuric_nickel_solution"
+        }
+       ]
+      }
+     }
+    ]
+   },
+   "outputs": {
+    "fluid": [
+     {
+      "content": {
+       "amount": 1000,
+       "value": [
+        {
+         "fluid": "gtceu:oxygen"
+        }
+       ]
+      }
+     },
+     {
+      "content": {
+       "amount": 1000,
+       "value": [
+        {
+         "fluid": "gtceu:sulfuric_acid"
+        }
+       ]
+      }
+     }
+    ],
+    "item": [
+     {
+      "content": {
+       "type": "gtceu:sized",
+       "count": 1,
+       "ingredient": {
+        "item": "gtceu:nickel_dust"
+       }
+      }
+     }
+    ]
+   }
+  },
+  "gtceu:electric_blast_furnace/rarest_metal_residue_ebf": {
+   "type": "gtceu:electric_blast_furnace",
+   "data": {
+    "ebf_temp": 775
+   },
+   "duration": 100,
+   "category": "gtceu:electric_blast_furnace",
+   "tickInputs": {
+    "eu": [
+     {
+      "content": 120
+     }
+    ]
+   },
+   "inputs": {
+    "fluid": [
+     {
+      "content": {
+       "amount": 500,
+       "value": [
+        {
+         "tag": "forge:hydrochloric_acid"
+        }
+       ]
+      }
+     }
+    ],
+    "item": [
+     {
+      "content": {
+       "type": "gtceu:sized",
+       "count": 2,
+       "ingredient": {
+        "tag": "forge:dusts/rarest_metal_mixture"
+       }
+      }
+     },
+     {
+      "content": {
+       "type": "gtceu:circuit",
+       "configuration": 2
+      },
+      "chance": 0
+     }
+    ]
+   },
+   "outputs": {
+    "fluid": [
+     {
+      "content": {
+       "amount": 1000,
+       "value": [
+        {
+         "fluid": "gtceu:acidic_osmium_solution"
+        }
+       ]
+      }
+     }
+    ],
+    "item": [
+     {
+      "content": {
+       "type": "gtceu:sized",
+       "count": 1,
+       "ingredient": {
+        "item": "gtceu:iridium_metal_residue_dust"
+       }
+      }
+     }
+    ]
+   }
+  },
+  "gtceu:distillation_tower/acidic_osmium_solution_distill": {
+   "type": "gtceu:distillation_tower",
+   "duration": 150,
+   "category": "gtceu:distillation_tower",
+   "tickInputs": {
+    "eu": [
+     {
+      "content": 120
+     }
+    ]
+   },
+   "inputs": {
+    "fluid": [
+     {
+      "content": {
+       "amount": 1000,
+       "value": [
+        {
+         "tag": "forge:acidic_osmium_solution"
+        }
+       ]
+      }
+     }
+    ]
+   },
+   "outputs": {
+    "fluid": [
+     {
+      "content": {
+       "amount": 100,
+       "value": [
+        {
+         "fluid": "gtceu:osmium_tetroxide"
+        }
+       ]
+      }
+     },
+     {
+      "content": {
+       "amount": 900,
+       "value": [
+        {
+         "fluid": "minecraft:water"
+        }
+       ]
+      }
+     }
+    ]
+   }
+  },
+  "gtceu:chemical_reactor/osmium_dust_completion": {
+   "type": "gtceu:chemical_reactor",
+   "duration": 300,
+   "category": "gtceu:chemical_reactor",
+   "tickInputs": {
+    "eu": [
+     {
+      "content": 30
+     }
+    ]
+   },
+   "inputs": {
+    "fluid": [
+     {
+      "content": {
+       "amount": 6000,
+       "value": [
+        {
+         "tag": "forge:hydrochloric_acid"
+        }
+       ]
+      }
+     },
+     {
+      "content": {
+       "amount": 1000,
+       "value": [
+        {
+         "tag": "forge:osmium_tetroxide"
+        }
+       ]
+      }
+     }
+    ]
+   },
+   "outputs": {
+    "fluid": [
+     {
+      "content": {
+       "amount": 7000,
+       "value": [
+        {
+         "fluid": "gtceu:chlorine"
+        }
+       ]
+      }
+     },
+     {
+      "content": {
+       "amount": 2000,
+       "value": [
+        {
+         "fluid": "minecraft:water"
+        }
+       ]
+      }
+     }
+    ],
+    "item": [
+     {
+      "content": {
+       "type": "gtceu:sized",
+       "count": 1,
+       "ingredient": {
+        "item": "gtceu:osmium_dust"
+       }
+      }
+     }
+    ]
+   }
+  },
+  "gtceu:electric_blast_furnace/iridium_metal_residue_process": {
+   "type": "gtceu:electric_blast_furnace",
+   "data": {
+    "ebf_temp": 775
+   },
+   "duration": 200,
+   "category": "gtceu:electric_blast_furnace",
+   "tickInputs": {
+    "eu": [
+     {
+      "content": 120
+     }
+    ]
+   },
+   "inputs": {
+    "item": [
+     {
+      "content": {
+       "type": "gtceu:sized",
+       "count": 1,
+       "ingredient": {
+        "tag": "forge:dusts/iridium_metal_residue"
+       }
+      }
+     },
+     {
+      "content": {
+       "type": "gtceu:circuit",
+       "configuration": 1
+      },
+      "chance": 0
+     }
+    ]
+   },
+   "outputs": {
+    "item": [
+     {
+      "content": {
+       "type": "gtceu:sized",
+       "count": 1,
+       "ingredient": {
+        "item": "gtceu:platinum_sludge_residue_dust"
+       }
+      }
+     },
+     {
+      "content": {
+       "type": "gtceu:sized",
+       "count": 1,
+       "ingredient": {
+        "item": "gtceu:iridium_dioxide_dust"
+       }
+      }
+     }
+    ]
+   }
+  },
+  "gtceu:chemical_reactor/iridium_dioxide_dissolving": {
+   "type": "gtceu:chemical_reactor",
+   "duration": 300,
+   "category": "gtceu:chemical_reactor",
+   "tickInputs": {
+    "eu": [
+     {
+      "content": 30
+     }
+    ]
+   },
+   "inputs": {
+    "fluid": [
+     {
+      "content": {
+       "amount": 1000,
+       "value": [
+        {
+         "tag": "forge:hydrochloric_acid"
+        }
+       ]
+      }
+     }
+    ],
+    "item": [
+     {
+      "content": {
+       "type": "gtceu:sized",
+       "count": 1,
+       "ingredient": {
+        "tag": "forge:dusts/iridium_dioxide"
+       }
+      }
+     }
+    ]
+   },
+   "outputs": {
+    "fluid": [
+     {
+      "content": {
+       "amount": 1000,
+       "value": [
+        {
+         "fluid": "gtceu:acidic_iridium"
+        }
+       ]
+      }
+     }
+    ]
+   }
+  },
+  "gtceu:chemical_reactor/iridium_chloride": {
+   "type": "gtceu:chemical_reactor",
+   "duration": 300,
+   "category": "gtceu:chemical_reactor",
+   "tickInputs": {
+    "eu": [
+     {
+      "content": 30
+     }
+    ]
+   },
+   "inputs": {
+    "fluid": [
+     {
+      "content": {
+       "amount": 3000,
+       "value": [
+        {
+         "tag": "forge:ammonium_chloride"
+        }
+       ]
+      }
+     },
+     {
+      "content": {
+       "amount": 1000,
+       "value": [
+        {
+         "tag": "forge:acidic_iridium"
+        }
+       ]
+      }
+     }
+    ]
+   },
+   "outputs": {
+    "fluid": [
+     {
+      "content": {
+       "amount": 3000,
+       "value": [
+        {
+         "fluid": "gtceu:ammonia"
+        }
+       ]
+      }
+     }
+    ],
+    "item": [
+     {
+      "content": {
+       "type": "gtceu:sized",
+       "count": 1,
+       "ingredient": {
+        "item": "gtceu:iridium_chloride_dust"
+       }
+      }
+     }
+    ]
+   }
+  },
+  "gtceu:chemical_reactor/iridium_chloride_separation": {
+   "type": "gtceu:chemical_reactor",
+   "duration": 300,
+   "category": "gtceu:chemical_reactor",
+   "tickInputs": {
+    "eu": [
+     {
+      "content": 1920
+     }
+    ]
+   },
+   "inputs": {
+    "item": [
+     {
+      "content": {
+       "type": "gtceu:sized",
+       "count": 1,
+       "ingredient": {
+        "tag": "forge:dusts/iridium_chloride"
+       }
+      }
+     },
+     {
+      "content": {
+       "type": "gtceu:sized",
+       "count": 1,
+       "ingredient": {
+        "tag": "forge:dusts/calcium"
+       }
+      }
+     }
+    ]
+   },
+   "outputs": {
+    "item": [
+     {
+      "content": {
+       "type": "gtceu:sized",
+       "count": 1,
+       "ingredient": {
+        "item": "gtceu:metal_sludge_dust"
+       }
+      }
+     },
+     {
+      "content": {
+       "type": "gtceu:sized",
+       "count": 1,
+       "ingredient": {
+        "item": "gtceu:iridium_dust"
+       }
+      }
+     },
+     {
+      "content": {
+       "type": "gtceu:sized",
+       "count": 4,
+       "ingredient": {
+        "item": "gtceu:calcium_chloride_dust"
+       }
+      }
+     }
+    ]
+   }
+  },
+  "gtceu:chemical_reactor/hydrochloric_acid": {
+   "type": "gtceu:chemical_reactor",
+   "duration": 60,
+   "category": "gtceu:chemical_reactor",
+   "tickInputs": {
+    "eu": [
+     {
+      "content": 7
+     }
+    ]
+   },
+   "inputs": {
+    "fluid": [
+     {
+      "content": {
+       "amount": 1000,
+       "value": [
+        {
+         "tag": "forge:chlorine"
+        }
+       ]
+      }
+     },
+     {
+      "content": {
+       "amount": 1000,
+       "value": [
+        {
+         "tag": "forge:hydrogen"
+        }
+       ]
+      }
+     }
+    ]
+   },
+   "outputs": {
+    "fluid": [
+     {
+      "content": {
+       "amount": 1000,
+       "value": [
+        {
+         "fluid": "gtceu:hydrochloric_acid"
+        }
+       ]
+      }
+     }
+    ]
+   }
+  },
+  "gtceu:chemical_reactor/ammonium_chloride": {
+   "type": "gtceu:chemical_reactor",
+   "duration": 15,
+   "category": "gtceu:chemical_reactor",
+   "tickInputs": {
+    "eu": [
+     {
+      "content": 30
+     }
+    ]
+   },
+   "inputs": {
+    "fluid": [
+     {
+      "content": {
+       "amount": 1000,
+       "value": [
+        {
+         "tag": "forge:ammonia"
+        }
+       ]
+      }
+     },
+     {
+      "content": {
+       "amount": 1000,
+       "value": [
+        {
+         "tag": "forge:hydrochloric_acid"
+        }
+       ]
+      }
+     }
+    ],
+    "item": [
+     {
+      "content": {
+       "type": "gtceu:circuit",
+       "configuration": 1
+      },
+      "chance": 0
+     }
+    ]
+   },
+   "outputs": {
+    "fluid": [
+     {
+      "content": {
+       "amount": 1000,
+       "value": [
+        {
+         "fluid": "gtceu:ammonium_chloride"
+        }
+       ]
+      }
+     }
+    ]
+   }
+  }
+ },
+ "liveComposed": {
+  "grindless:pgm_refining/ev/attack_pentlandite": {
+   "type": "unknown",
+   "duration": 54,
+   "inputs": {
+    "item": [
+     {
+      "content": {
+       "type": "gtceu:sized",
+       "count": 9,
+       "ingredient": {
+        "item": "gtceu:purified_pentlandite_ore"
+       }
+      },
+      "chance": 10000,
+      "maxChance": 10000,
+      "tierChanceBoost": 0
+     },
+     {
+      "content": {
+       "type": "gtceu:sized",
+       "count": 1,
+       "ingredient": {
+        "item": "grindless:platinum_electrode"
+       }
+      },
+      "chance": 10,
+      "maxChance": 10000,
+      "tierChanceBoost": 0
+     },
+     {
+      "content": {
+       "type": "gtceu:sized",
+       "count": 1,
+       "ingredient": {
+        "type": "gtceu:circuit",
+        "configuration": 1
+       }
+      },
+      "chance": 0,
+      "maxChance": 10000,
+      "tierChanceBoost": 0
+     }
+    ]
+   },
+   "tickInputs": {
+    "eu": [
+     {
+      "content": 1903,
+      "chance": 10000,
+      "maxChance": 10000,
+      "tierChanceBoost": 0
+     }
+    ]
+   },
+   "outputs": {
+    "fluid": [
+     {
+      "content": {
+       "amount": 18000,
+       "value": [
+        {
+         "fluid": "gtceu:oxygen"
+        }
+       ]
+      },
+      "chance": 10000,
+      "maxChance": 10000,
+      "tierChanceBoost": 0
+     },
+     {
+      "content": {
+       "amount": 9000,
+       "value": [
+        {
+         "fluid": "gtceu:sulfuric_acid"
+        }
+       ]
+      },
+      "chance": 10000,
+      "maxChance": 10000,
+      "tierChanceBoost": 0
+     }
+    ],
+    "item": [
+     {
+      "content": {
+       "type": "gtceu:sized",
+       "count": 18,
+       "ingredient": {
+        "item": "gtceu:nickel_dust"
+       }
+      },
+      "chance": 10000,
+      "maxChance": 10000,
+      "tierChanceBoost": 0
+     },
+     {
+      "content": {
+       "type": "gtceu:sized",
+       "count": 1,
+       "ingredient": {
+        "item": "gtceu:platinum_group_sludge_dust"
+       }
+      },
+      "chance": 10000,
+      "maxChance": 10000,
+      "tierChanceBoost": 0
+     }
+    ]
+   }
+  },
+  "grindless:pgm_refining/iv/iridosmine": {
+   "type": "unknown",
+   "duration": 1034,
+   "inputs": {
+    "fluid": [
+     {
+      "content": {
+       "amount": 1000,
+       "value": [
+        {
+         "fluid": "gtceu:salt_water"
+        }
+       ]
+      },
+      "chance": 10000,
+      "maxChance": 10000,
+      "tierChanceBoost": 0
+     },
+     {
+      "content": {
+       "amount": 12500,
+       "value": [
+        {
+         "fluid": "gtceu:hydrochloric_acid"
+        }
+       ]
+      },
+      "chance": 10000,
+      "maxChance": 10000,
+      "tierChanceBoost": 0
+     },
+     {
+      "content": {
+       "amount": 7000,
+       "value": [
+        {
+         "fluid": "gtceu:hydrogen"
+        }
+       ]
+      },
+      "chance": 10000,
+      "maxChance": 10000,
+      "tierChanceBoost": 0
+     }
+    ],
+    "item": [
+     {
+      "content": {
+       "type": "gtceu:sized",
+       "count": 10,
+       "ingredient": {
+        "item": "gtceu:iridosmine_dust"
+       }
+      },
+      "chance": 10000,
+      "maxChance": 10000,
+      "tierChanceBoost": 0
+     },
+     {
+      "content": {
+       "type": "gtceu:sized",
+       "count": 10,
+       "ingredient": {
+        "item": "gtceu:saltpeter_dust"
+       }
+      },
+      "chance": 10000,
+      "maxChance": 10000,
+      "tierChanceBoost": 0
+     },
+     {
+      "content": {
+       "type": "gtceu:sized",
+       "count": 3,
+       "ingredient": {
+        "item": "gtceu:calcium_dust"
+       }
+      },
+      "chance": 10000,
+      "maxChance": 10000,
+      "tierChanceBoost": 0
+     },
+     {
+      "content": {
+       "type": "gtceu:sized",
+       "count": 1,
+       "ingredient": {
+        "item": "grindless:platinum_electrode"
+       }
+      },
+      "chance": 10,
+      "maxChance": 10000,
+      "tierChanceBoost": 0
+     },
+     {
+      "content": {
+       "type": "gtceu:sized",
+       "count": 1,
+       "ingredient": {
+        "type": "gtceu:circuit",
+        "configuration": 3
+       }
+      },
+      "chance": 0,
+      "maxChance": 10000,
+      "tierChanceBoost": 0
+     }
+    ]
+   },
+   "tickInputs": {
+    "eu": [
+     {
+      "content": 1919,
+      "chance": 10000,
+      "maxChance": 10000,
+      "tierChanceBoost": 0
+     }
+    ]
+   },
+   "outputs": {
+    "fluid": [
+     {
+      "content": {
+       "amount": 4700,
+       "value": [
+        {
+         "fluid": "minecraft:water"
+        }
+       ]
+      },
+      "chance": 10000,
+      "maxChance": 10000,
+      "tierChanceBoost": 0
+     },
+     {
+      "content": {
+       "amount": 1000,
+       "value": [
+        {
+         "fluid": "gtceu:steam"
+        }
+       ]
+      },
+      "chance": 10000,
+      "maxChance": 10000,
+      "tierChanceBoost": 0
+     }
+    ],
+    "item": [
+     {
+      "content": {
+       "type": "gtceu:sized",
+       "count": 3,
+       "ingredient": {
+        "item": "gtceu:iridium_dust"
+       }
+      },
+      "chance": 10000,
+      "maxChance": 10000,
+      "tierChanceBoost": 0
+     },
+     {
+      "content": {
+       "type": "gtceu:sized",
+       "count": 1,
+       "ingredient": {
+        "item": "gtceu:osmium_dust"
+       }
+      },
+      "chance": 10000,
+      "maxChance": 10000,
+      "tierChanceBoost": 0
+     },
+     {
+      "content": {
+       "type": "gtceu:sized",
+       "count": 3,
+       "ingredient": {
+        "item": "gtceu:platinum_sludge_residue_dust"
+       }
+      },
+      "chance": 10000,
+      "maxChance": 10000,
+      "tierChanceBoost": 0
+     },
+     {
+      "content": {
+       "type": "gtceu:sized",
+       "count": 3,
+       "ingredient": {
+        "item": "gtceu:metal_sludge_dust"
+       }
+      },
+      "chance": 10000,
+      "maxChance": 10000,
+      "tierChanceBoost": 0
+     },
+     {
+      "content": {
+       "type": "gtceu:sized",
+       "count": 12,
+       "ingredient": {
+        "item": "gtceu:calcium_chloride_dust"
+       }
+      },
+      "chance": 10000,
+      "maxChance": 10000,
+      "tierChanceBoost": 0
+     }
+    ]
+   }
+  }
+ },
+ "related": {
+  "grindless:solar_processing/iridosmine_fusion": {
+   "type": "unknown",
+   "duration": 200,
+   "data": {
+    "grindless_sun_eut": 30
+   },
+   "recipeConditions": [
+    {
+     "dimension": "gcyr:mercury",
+     "type": "dimension"
+    }
+   ],
+   "inputs": {
+    "fluid": [
+     {
+      "content": {
+       "amount": 1000,
+       "value": [
+        {
+         "fluid": "gtceu:salt_water"
+        }
+       ]
+      },
+      "chance": 10000,
+      "maxChance": 10000,
+      "tierChanceBoost": 0
+     }
+    ],
+    "item": [
+     {
+      "content": {
+       "type": "gtceu:sized",
+       "count": 10,
+       "ingredient": {
+        "item": "gtceu:iridosmine_dust"
+       }
+      },
+      "chance": 10000,
+      "maxChance": 10000,
+      "tierChanceBoost": 0
+     },
+     {
+      "content": {
+       "type": "gtceu:sized",
+       "count": 10,
+       "ingredient": {
+        "tag": "forge:dusts/saltpeter"
+       }
+      },
+      "chance": 10000,
+      "maxChance": 10000,
+      "tierChanceBoost": 0
+     }
+    ]
+   },
+   "tickInputs": {
+    "eu": [
+     {
+      "content": 120,
+      "chance": 10000,
+      "maxChance": 10000,
+      "tierChanceBoost": 0
+     }
+    ]
+   },
+   "outputs": {
+    "fluid": [
+     {
+      "content": {
+       "amount": 700,
+       "value": [
+        {
+         "fluid": "gtceu:osmium_tetroxide"
+        }
+       ]
+      },
+      "chance": 10000,
+      "maxChance": 10000,
+      "tierChanceBoost": 0
+     },
+     {
+      "content": {
+       "amount": 1000,
+       "value": [
+        {
+         "fluid": "gtceu:steam"
+        }
+       ]
+      },
+      "chance": 10000,
+      "maxChance": 10000,
+      "tierChanceBoost": 0
+     }
+    ],
+    "item": [
+     {
+      "content": {
+       "type": "gtceu:sized",
+       "count": 6,
+       "ingredient": {
+        "item": "gtceu:rarest_metal_mixture_dust"
+       }
+      },
+      "chance": 10000,
+      "maxChance": 10000,
+      "tierChanceBoost": 0
+     }
+    ]
+   }
+  }
+ }
+}
