@@ -176,14 +176,15 @@ test('eu_to_start: the fusion recipe\'s start energy (data) is a condition a tie
 
 const luv = () => loadTierConfig({ tier: 'luv' }, TIERS).raw;
 
-test('real tiers (luv): seven substages, the moons siblings, the dimension ids from the pack\'s tables and none hard-coded', () => {
+test('real tiers (luv): seven substages, Io before its sibling moons Europa and Ganymede, the dimension ids from the pack\'s tables and none hard-coded', () => {
   const raw = luv();
   const o = raw.eraOrder;
   const at = (e) => o.indexOf(e);
-  for (const [a, b] of [['iv-mercury', 'luv'], ['luv', 'luv-orbit'], ['luv-orbit', 'luv-belt'], ['luv-belt', 'luv-io'], ['luv-ganymede', 'luv-io-orbit'], ['luv-io-orbit', 'zpm']]) {
+  for (const [a, b] of [['iv-mercury', 'luv'], ['luv', 'luv-orbit'], ['luv-orbit', 'luv-belt'], ['luv-belt', 'luv-io'], ['luv-io', 'luv-europa'], ['luv-io', 'luv-ganymede'], ['luv-ganymede', 'luv-io-orbit'], ['luv-io-orbit', 'zpm']]) {
     assert.ok(at(a) >= 0 && at(a) < at(b), `${a} before ${b}`);
   }
-  assert.deepEqual(raw.eraSiblings, [['iv-venus', 'iv-mercury'], ['luv-io', 'luv-europa', 'luv-ganymede']]);
+  // Europa's bases are Io's sulfur concrete (docs/eras/luv.md), so Io is not their sibling
+  assert.deepEqual(raw.eraSiblings, [['iv-venus', 'iv-mercury'], ['luv-europa', 'luv-ganymede']]);
   const t = readPlaceTables(defaultTablesDir(TIERS));
   const surfaces = Object.values(t.places.surfaces);
   for (const d of [...t.orbits.dimensions, ...surfaces]) assert.ok(raw.conditions.dimension.asKeysFor.includes(d), d);

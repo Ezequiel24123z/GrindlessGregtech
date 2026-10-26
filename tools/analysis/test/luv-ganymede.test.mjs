@@ -253,6 +253,9 @@ test('B9 native fixture compiles, stays in its band, reads Ganymede from the pla
   assert.match(src, /refusing to overwrite unowned block/);
   assert.match(src, /S\.blocks\.slice\(\)\.reverse\(\)/);
   assert.match(src, /S\.tick > MAX_TICKS/);
+  // GTM 7.5.3's RecipeHelper.getRealEUt returns an EnergyStack: Number() of it is NaN (native S2, 2026-10-26).
+  assert.match(src, /getRealEUt\(r\)\.getTotalEU\(\)/);
+  assert.doesNotMatch(src, /Number\([^()]*getRealEUt\([^()]*\)\)/);
   const agents = fs.readFileSync(path.join(ROOT, 'AGENTS.md'), 'utf8');
   assert.match(agents, /\| LuV Ganymede[^|]*\| 17664–17727/);
 });

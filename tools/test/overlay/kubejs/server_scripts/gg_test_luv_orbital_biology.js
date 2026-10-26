@@ -1,7 +1,8 @@
 // TEST ONLY, B4. Integrated owner: kubejs custom_command gg_test_luv_orbital_biology
 // Never launches a JVM. Band X16640..16703, Z0..31; orbit Y198..214, Earth Y98..112.
 // Live lookup (including the entire greenhouse family), all three shapes, actual recipe runs,
-// ground/cleanroom rejection, both voiding modes, kept c5/c6 seeds, fluid destinations and LuV NPU.
+// ground/cleanroom rejection, both voiding modes, kept c5/c6 seeds, fluid destinations and LuV NPU
+// (on a second, already clean orbit lab at Z20, so the two un-overclocked organoid recipes overlap).
 // Uses native durations and a real cleaning maintenance hatch, no synthetic cleanroom or clock changes.
 // One command, 150 s / 2900 tick ceiling including setup; cleanup only owns placed blocks/tickets.
 (function () {
@@ -95,7 +96,7 @@
     ]
     if (m.index === 1) {
       roles.push(['out1', 'gtceu:luv_output_hatch'], ['out2', 'gtceu:luv_output_hatch'])
-    } else roles.push(['maintenance', m.ground ? 'gtceu:cleaning_maintenance_hatch' : 'gtceu:auto_maintenance_hatch'])
+    } else roles.push(['maintenance', m.ground || m.clean ? 'gtceu:cleaning_maintenance_hatch' : 'gtceu:auto_maintenance_hatch'])
     var next = 0
     m.positions = {}
     d.slices.forEach(function (rows, z) {
@@ -191,7 +192,7 @@
     return result
   }
   function scenario(m, step) {
-    if (m.index === 0) return { circuit: 1, items: ['gtceu:exquisite_emerald_gem'],
+    if (m.index === 0) return { circuit: 2, items: ['gtceu:exquisite_emerald_gem'],
       fluids: [['gtceu:europium', 16]], output: 'gtceu:raw_crystal_chip', count: 1 }
     if (m.index === 1) return { circuit: step === 0 ? 5 : 6,
       items: [step === 0 ? 'grindless:engineered_barley_seed' : 'grindless:engineered_tobacco_seed'],
@@ -261,8 +262,8 @@
       }
       Object.keys(m.positions).forEach(function (role) { m[role] = at(m, m.positions[role]) })
       check(m.key + '_formed', true, 'native complete pattern, service and maintenance cells')
-      feed(m, scenario(m, 0))
-      m.phase = m.ground ? 'ground' : m.index === 1 ? 'ordinary' :
+      feed(m, scenario(m, m.next))
+      m.phase = m.ground ? 'ground' : m.clean ? 'running' : m.index === 1 ? 'ordinary' :
         m.phase === 'forming' ? 'unclean' : m.index === 0 ? 'running' : 'void_items'
       if (m.phase === 'ordinary') feed(m, { circuit: 0, items: ['minecraft:carrot'], fluids: [] })
       if (m.phase === 'void_items') voiding(m, 'VOID_ITEMS')
@@ -305,7 +306,7 @@
       if ((items(m.outBus)[m.sc.output] || 0) < m.sc.count) return
       verify(m)
       m.next++
-      if (m.index === 0 || m.next === 2) { m.phase = 'done'; return }
+      if (m.next > m.last) { m.phase = 'done'; return }
       feed(m, scenario(m, m.next))
     }
   }
@@ -336,10 +337,20 @@
         var m = { id: 'gtceu:' + name, index: index, dim: world.dim, ground: world.ground,
           low: world.low, high: world.high, level: level,
           p: { x: 16648 + index * 24, y: world.y, z: 2 },
-          key: name + (world.ground ? '_ground' : '_orbit'), next: 0 }
+          key: name + (world.ground ? '_ground' : '_orbit'), next: 0,
+          last: index === 1 && !world.ground ? 1 : 0 }
         S.machines.push(m)
         place(m)
       })
+      if (world.ground) return
+      // The NPU (1563 t, no overclock at LuV) runs on a second, already clean lab beside the
+      // first one's cleanroom/voiding probes and organoid (600 t), so the native critical path
+      // is one recipe, not their sum.
+      var npu = { id: 'gtceu:' + names[2], index: 2, dim: world.dim, ground: false, clean: true,
+        low: world.low, high: world.high, level: level, p: { x: 16648, y: world.y, z: 20 },
+        key: 'organoid_lab_orbit_npu', next: 1, last: 1 }
+      S.machines.push(npu)
+      place(npu)
     })
   }
   ServerEvents.tick(function (event) {

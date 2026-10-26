@@ -28,7 +28,8 @@
 //   truss_recipe           grindless:assembler/station_truss_casing exists
 //   stations               SKIPPED while tables/stations.json says enabled=false (station stages wait for spike S0-3); FAIL if enabled
 //                          (this fixture must then be extended) or missing
-//   terrain_<key>          the generated ground's top blocks belong to that place's surface rules (belt also: a floor surface at Y 50..80)
+//   terrain_<key>          the generated ground's top blocks belong to that place's surface rules (belt also: a floor surface at Y 50..80;
+//                          a belt vein's GTM surface indicator is read through and must lie on belt ground)
 //   offworld_air_<key>     Y 198..214 is air in every sampled column
 //   terrain_export         NOTE: kubejs/exported/luv_b1_terrain.json holds the observed blocks and heights
 //   weather_registry       G.airlessWeather lists the ten new dimensions and Earth orbit
@@ -82,6 +83,9 @@
     ganymede: ['minecraft:tuff', 'minecraft:packed_ice', 'minecraft:gravel']
   }
   var BELT_FLOOR = { y0: 50, y1: 80 }
+  // GTM's surface indicator of a belt vein (gtceu:<colorMaterial>_indicator) lies on the belt's ground over its vein: the scan reads
+  // through it, and the block under it must be belt ground. Indicators of any other vein still fail.
+  var BELT_VEINS_TABLE = 'kubejs/data/grindless/tables/veins_belt.json'
   var TERRAIN_KEYS = ['belt', 'io', 'europa', 'ganymede']
   var COLUMNS = [0, 5, 10, 15]
   var SCAN_TOP = OFFWORLD_Y.y0 - 1
@@ -371,6 +375,10 @@
 
   // ---------------------------------------------------------------- terrain (read only)
   function isGround(key, id) { return GROUND[key].indexOf(id) >= 0 || /ore/.test(id) }
+  function indicatorsOf(key) {
+    if (key !== 'belt') return []
+    return S.G.readJsonTable(BELT_VEINS_TABLE).veins.map(function (v) { return 'gtceu:' + v.colorMaterial + '_indicator' })
+  }
   function terrainOf(key) {
     var dim = S.D.surface[key]
     var level = levelOf(dim)
@@ -378,6 +386,8 @@
       check('terrain_' + key, false, dim + ' is not loaded')
       return
     }
+    var indicators = indicatorsOf(key)
+    function passable(id) { return id === 'minecraft:air' || indicators.indexOf(id) >= 0 }
     level.getChunk(BAND.x0 >> 4, BAND.z0 >> 4)
     var cols = []
     var notAir = []
@@ -389,12 +399,16 @@
           var above = blockAt(level, x, y, z)
           if (above !== 'minecraft:air') notAir.push(x + ',' + y + ',' + z + '=' + above)
         }
-        var col = { x: x, z: z, top: null, topBlock: null, surfaces: [] }
+        var col = { x: x, z: z, top: null, topBlock: null, surfaces: [], indicators: [], badIndicator: null }
         var bottom = key === 'belt' ? BELT_SCAN_BOTTOM : -64
         var prev = blockAt(level, x, SCAN_TOP, z)
         for (var yy = SCAN_TOP - 1; yy >= bottom; yy--) {
           var id = blockAt(level, x, yy, z)
-          if (id !== 'minecraft:air' && prev === 'minecraft:air') {
+          if (indicators.indexOf(prev) >= 0 && !isGround(key, id) && col.badIndicator === null) {
+            col.badIndicator = prev + '@' + (yy + 1) + ' on ' + id
+          }
+          if (indicators.indexOf(id) >= 0) col.indicators.push({ y: yy, block: id })
+          if (!passable(id) && passable(prev)) {
             if (col.top === null) {
               col.top = yy
               col.topBlock = id
@@ -407,12 +421,17 @@
         cols.push(col)
       })
     })
-    var bad = cols.filter(function (c) { return c.top === null || !isGround(key, c.topBlock) })
+    var bad = cols.filter(function (c) { return c.top === null || !isGround(key, c.topBlock) || c.badIndicator !== null })
     var tops = cols.filter(function (c) { return c.top !== null }).map(function (c) { return c.top })
     var seen = {}
-    cols.forEach(function (c) { if (c.topBlock) seen[c.topBlock] = (seen[c.topBlock] || 0) + 1 })
+    var marks = {}
+    cols.forEach(function (c) {
+      if (c.topBlock) seen[c.topBlock] = (seen[c.topBlock] || 0) + 1
+      c.indicators.forEach(function (i) { marks[i.block] = (marks[i.block] || 0) + 1 })
+    })
     var detail = dim + ' chunk ' + (BAND.x0 >> 4) + ',' + (BAND.z0 >> 4) + ': top Y ' + (tops.length ? Math.min.apply(null, tops) + '..' +
-      Math.max.apply(null, tops) : 'none') + ', blocks ' + JSON.stringify(seen)
+      Math.max.apply(null, tops) : 'none') + ', blocks ' + JSON.stringify(seen) +
+      (indicators.length ? ', vein indicators read through ' + JSON.stringify(marks) : '')
     var ok = bad.length === 0
     if (key === 'belt') {
       var floors = []
@@ -427,8 +446,9 @@
         cols.reduce(function (n, c) { return n + c.surfaces.filter(function (s) { return s.y > BELT_FLOOR.y1 }).length }, 0)
     }
     check('terrain_' + key, ok, detail + (bad.length ? '; not ' + key + ' ground: ' + bad.map(function (c) {
-      return c.x + ',' + c.z + '=' + c.topBlock + '@' + c.top
-    }).join(' ') : '') + ' (allowed ' + GROUND[key].join(', ') + ', ores)')
+      return c.x + ',' + c.z + '=' + c.topBlock + '@' + c.top + (c.badIndicator ? ' (indicator ' + c.badIndicator + ')' : '')
+    }).join(' ') : '') + ' (allowed ' + GROUND[key].join(', ') + ', ores' +
+      (indicators.length ? '; read through the belt veins\' indicators ' + indicators.join(', ') : '') + ')')
     check('offworld_air_' + key, notAir.length === 0, 'Y ' + OFFWORLD_Y.y0 + '..' + OFFWORLD_Y.y1 + ' in ' + cols.length + ' columns: ' +
       (notAir.length ? 'not air ' + notAir.slice(0, 12).join(' ') : 'all air'))
     S.terrain[key] = { dimension: dim, chunk: [BAND.x0 >> 4, BAND.z0 >> 4], columns: cols }

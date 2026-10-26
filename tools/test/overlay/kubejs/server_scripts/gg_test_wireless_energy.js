@@ -24,7 +24,9 @@
 //     RUN_*             with exact EU: the 64 A dynamo hatch puts 19/20 of what it gives into the network (the generator array makes
 //                       512 EU/t: its steam pays it), the dynamo cover drains a charged battery buffer at 95%, the Moon's EBF runs
 //                       on its wireless hatches (120 EU/t of recipe progress, all from the network), the Moon's macerator runs on its
-//                       cover, the MV hatch gets nothing (the network is LV; its readout says so), and the store's balance is in - out
+//                       cover, the MV hatch gets nothing (the network is LV; its readout says so), and the store's balance is in - out.
+//                       A settlement between tower B forming and tower A forming sees tower B alone (MV) and rightly fills the MV
+//                       hatch: that fill is reported (the network it saw must be 1 tower, MV) and emptied before the run
 //     UNLOADED          the whole Overworld band unloaded (a chunk next to a force-loaded one stays loaded), the Moon running: both
 //                       towers still count (recorded), the far buffer's cover pauses; RESUMED: loaded again, the towers form again and
 //                       the cover takes EU again
@@ -688,6 +690,20 @@
       macWork: 0,
       mvMax: 0
     }
+    // a settlement between tower B forming and tower A forming had an MV network (tower B alone) and rightly filled the MV hatch: that
+    // fill is reported, then emptied, so the run measures the LV network only
+    var held = stored(S.mvHatch)
+    if (held > 0) S.mvHatch.energyContainer.changeEnergy(-held)
+    S.run.mvBefore = held
+    S.run.mvPre = S.mvPre || null
+    S.run.mvFlow = JSON.parse(JSON.stringify(flowOf(MOON, MV_HATCH, MY)))
+  }
+
+  // while the towers form: the first settlement that fills the MV hatch, with the network that settlement saw
+  function watchMvBeforeRun() {
+    if (S.mvPre || stored(S.mvHatch) <= 0) return
+    var last = W().last || { tier: 0, towers: 0 }
+    S.mvPre = { at: S.t - S.phaseAt, held: stored(S.mvHatch), tier: Number(last.tier), towers: Number(last.towers) }
   }
 
   function countItem(handler, id) {
@@ -778,10 +794,16 @@
     check('RUN_MOON_COVER', R.macWork > 0 && dust > 0 && macUsed === byRuns && macEut > 0,
       'on the Moon the LV macerator worked ' + R.macWork + ' ticks on its LV energy cover: ' + dust + ' iron dust (' + macEut + ' EU/t x ' + macDuration + ' ticks each, progress ' +
       R.macProgress + ' -> ' + macProgress + ') = ' + byRuns + ' EU; the cover put ' + macFilled + ' EU in, its buffer went ' + R.mac + ' -> ' + stored(S.moonMac) + ': ' + macUsed + ' EU used')
-    // the MV hatch: nothing, the network is LV
+    // the MV hatch: nothing, the network is LV; anything it got before the run came from a settlement that saw tower B (MV) alone
     var readout = shiftClick(MOON, MV_HATCH.x, MY, MV_HATCH.z, L.Direction.UP)
-    check('RUN_TIER_GATE', R.mvMax === 0 && stored(S.mvHatch) === 0 && w.last.skippedAbove > 0 && readout === 'message.grindless.wireless.above_tier [MV, LV]',
-      'the MV wireless energy hatch on the Moon held at most ' + R.mvMax + ' EU while the network was LV (skipped above the tier each settlement: ' + w.last.skippedAbove + '); readout: ' + readout)
+    var mvRunFilled = flowOf(MOON, MV_HATCH, MY).filled - R.mvFlow.filled
+    var pre = R.mvPre
+    var preOk = R.mvBefore === 0 || (pre !== null && pre.tier === 2 && pre.towers === 1)
+    check('RUN_TIER_GATE', R.mvMax === 0 && stored(S.mvHatch) === 0 && mvRunFilled === 0 && preOk && w.last.skippedAbove > 0 &&
+      readout === 'message.grindless.wireless.above_tier [MV, LV]',
+      'the MV wireless energy hatch on the Moon held at most ' + R.mvMax + ' EU and was filled ' + mvRunFilled + ' EU while the network was LV (skipped above the tier each settlement: ' +
+      w.last.skippedAbove + '); before the run it held ' + R.mvBefore + ' EU' + (pre ? ' (filled ' + pre.held + ' EU ' + pre.at + ' ticks after the towers were placed, by a settlement whose network was ' +
+      pre.towers + ' tower(s), tier ' + pre.tier + ': tower B formed before tower A; emptied at the run\'s start)' : '') + '; readout: ' + readout)
   }
 
   // the Overworld band unloaded (every chunk of it: a chunk next to a force-loaded one stays loaded), the Moon still running: both towers
@@ -941,12 +963,14 @@
     var U = Sw.unformed
     var flows = (w.totals.in - Sw.totals.in) - (w.totals.out - Sw.totals.out)
     var kept = w.stored(S.server) - Sw.store === flows
+    // from the run's start (both towers formed, LV) to the swap
+    var lvFilled = Sw.mvFlow0.filled - S.run.mvFlow.filled
     check('SWAP', U.towers === 1 && U.capacity === 2 * 2520000 && U.tier === 2 && kept && info.cells === 4 && info.tier === 2 && st.towers === 2 && st.capacity === want &&
-      st.tier === 2 && mvFlow.filled > Sw.mvFlow.filled && stored(S.mvHatch) > 0 && Sw.mvFlow0.filled === 0,
+      st.tier === 2 && mvFlow.filled > Sw.mvFlow.filled && stored(S.mvHatch) > 0 && lvFilled === 0,
       'breaking the cells unformed tower A: the network was tower B alone (' + U.towers + ' tower, ' + U.capacity + ' EU, tier ' + U.tier + '), the store ' + Sw.store + ' -> ' +
       U.store + ' EU; MV cells placed: formed again in ' + (Sw.reformedAt - Sw.placedAt) + ' ticks with ' + JSON.stringify(info) + '; the network: ' + st.towers + ' towers, ' +
       st.capacity + ' EU (want ' + want + '), tier ' + st.tier + '; the store moved only by its flows (' + Sw.store + ' -> ' + w.stored(S.server) + ', in - out ' + flows + '): ' +
-      kept + '; the MV hatch on the Moon (nothing while the network was LV: ' + Sw.mvFlow0.filled + ') emptied at the re-form and filled again: ' + Sw.mvFlow.filled + ' -> ' +
+      kept + '; the MV hatch on the Moon (nothing while the network was LV: ' + lvFilled + ') emptied at the re-form and filled again: ' + Sw.mvFlow.filled + ' -> ' +
       mvFlow.filled + ', holds ' + stored(S.mvHatch))
     Sw.done = true
   }
@@ -1178,6 +1202,7 @@
     try {
       if (S.arrayP && S.arrayP.input && S.earth.isLoaded(bp(ARRAY.x, EY, ARRAY.z))) feedSteam()
       if (S.phase === 'no_tower' && String(S.arrayP.ctrl.getRecipeLogic().getStatus()) === 'WORKING') S.noTower.work++
+      if (S.phase === 'towers') watchMvBeforeRun()
       if (S.phase === 'run') measureRun()
       if (S.phase === 'cap') measureCap()
       if (S.t % 5 === 0 && S.phase !== 'end') step()

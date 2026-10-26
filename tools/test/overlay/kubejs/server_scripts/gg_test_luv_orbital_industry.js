@@ -156,7 +156,7 @@
       var out = array(classes().Helper.getOutputItems(recipe))
       var expected = parseItem(r.output)
       check('live_' + r.name, Number(recipe.duration) === r.duration &&
-        Number(classes().Helper.getRealEUt(recipe)) === r.eut &&
+        Number(classes().Helper.getRealEUt(recipe).getTotalEU()) === r.eut &&
         JSON.stringify(dimIds) === JSON.stringify(allow) && dims.every(function (c) { return !c.isReverse() }) &&
         clean.length === (r.cleanroom ? 1 : 0) && circuit.length === 1 &&
         Number(classes().Circuit.getCircuitConfiguration(circuit[0])) === r.circuit &&
@@ -237,6 +237,10 @@
           Number(m.ctrl.getRecipeLogic().getProgress()) === 0,
         'supplied all inputs and EU, no product and no progress')
       if (m.ground) { m.phase = 'done'; return }
+      // Withdraw the rejected batch: once the cleaning hatch joins, GTM would start it during the cleaning
+      // wait, and the refeed would then queue a second run whose output lands in the next recipe's check.
+      empty(m.parts.input)
+      m.parts.fluid.tank.setFluidInTank(0, classes().Fluids.EMPTY)
       setBlock(m, m.positions.maintenance, 'gtceu:cleaning_maintenance_hatch[facing=north]')
       m.phase = 'reforming'
       m.started = S.tick

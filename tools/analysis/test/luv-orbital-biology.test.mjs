@@ -215,18 +215,24 @@ test('B4 native fixture compiles, cannot overlap other bands and retains every o
   assert.match(src, /refusing to overwrite unowned block/);
   assert.match(src, /S\.blocks\.slice\(\)\.reverse\(\)/);
   assert.match(src, /S\.tickets\.forEach/);
+  // The orbit also holds a second, already clean organoid lab for the NPU (native S2: the two organoid
+  // recipes in series outlasted the fixture deadline in the integrated run).
+  assert.match(src, /key: 'organoid_lab_orbit_npu', next: 1, last: 1/);
+  assert.match(src, /p: \{ x: 16648, y: world\.y, z: 20 \}/);
   const { G } = harness();
   for (const baseY of [102, 202]) {
     const used = new Set();
-    for (let index = 0; index < names.length; index++) {
-      const d = G.structures['gtceu:' + names[index]];
+    const placed = names.map((name, index) => ({ name, x: 16648 + index * 24, z: 2 }));
+    if (baseY === 202) placed.push({ name: 'organoid_lab', x: 16648, z: 20 });
+    for (const { name, x: px, z: pz } of placed) {
+      const d = G.structures['gtceu:' + name];
       let anchor;
       d.slices.forEach((rows, z) => rows.forEach((row, y) => {
         const x = row.indexOf('S');
         if (x >= 0) anchor = { x, y, z };
       }));
       d.slices.forEach((rows, z) => rows.forEach((row, y) => [...row].forEach((ch, x) => {
-        const pos = [16648 + index * 24 - x + anchor.x, baseY + y - anchor.y, 2 - z + anchor.z];
+        const pos = [px - x + anchor.x, baseY + y - anchor.y, pz - z + anchor.z];
         assert.ok(pos[0] >= 16640 && pos[0] <= 16703);
         assert.ok(pos[1] >= baseY - 4 && pos[1] <= baseY + 10);
         assert.ok(pos[2] >= 0 && pos[2] <= 31);
@@ -287,5 +293,25 @@ test('B4 preexisting item/fluid IDs match the pinned native registry, not naming
     'tools/test/overlay/kubejs/server_scripts/gg_test_luv_orbital_biology.js'), 'utf8');
   for (const [, id] of fixture.matchAll(/['"](?:\d+x )?(gtceu:[a-z0-9_]+)['"]/g)) {
     if (id !== 'gtceu:greenhouse') assert.ok(nativeItems.has(id) || nativeFluids.has(id), `fixture native ID: ${id}`);
+  }
+});
+
+test('B4 native fixture feeds exactly the inputs of a real B4 recipe in every scenario', () => {
+  // Native S2: the crystal grower was fed an emerald with circuit 1 (olivine's), matched nothing and never finished.
+  const src = fs.readFileSync(path.join(ROOT, 'tools/test/overlay/kubejs/server_scripts/gg_test_luv_orbital_biology.js'), 'utf8');
+  const body = src.slice(src.indexOf('function scenario(m, step)'), src.indexOf('function wake(m)'));
+  const scenario = vm.runInNewContext('(' + body + ')');
+  const { recipes } = harness();
+  const types = ['microgravity_crystal_growth', 'greenhouse', 'organoid_assembly'];
+  for (const [index, step] of [[0, 0], [1, 0], [1, 1], [2, 0], [2, 1]]) {
+    const sc = JSON.parse(JSON.stringify(scenario({ index }, step)));
+    const matches = recipes.filter((r) => r.type === types[index] && only(r, 'circuit') === sc.circuit);
+    assert.equal(matches.length, 1, `scenario ${index}/${step} circuit ${sc.circuit}`);
+    const r = matches[0];
+    const items = [...call(r, 'itemInputs').flat(), ...call(r, 'notConsumable').flat()].sort();
+    assert.deepEqual(items, [...sc.items].sort(), `scenario ${index}/${step} items`);
+    assert.deepEqual(call(r, 'inputFluids').flat().map((f) => [f.id, f.amount]), sc.fluids);
+    const out = /^(?:(\d+)x )?(.+)$/.exec(only(r, 'itemOutputs'));
+    assert.deepEqual([out[2], Number(out[1] || 1)], [sc.output, sc.count]);
   }
 });
