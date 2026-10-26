@@ -1,8 +1,10 @@
 // S0-a: X 13568..13631. Extends the proven GCYR flight, not its executor.
 ;(function () {
   var state = null
+  var counts = { pass: 0, fail: 0 }
   var TAG = 'GGTEST|luv_s0_environment|'
   function check(name, ok, detail) {
+    counts[ok ? 'pass' : 'fail']++
     console.info(TAG + name + '|' + (ok ? 'PASS' : 'FAIL') + '|' + String(detail).replace(/\|/g, '/'))
   }
   function value(map, key) {
@@ -18,6 +20,7 @@
     p.setHealth(20)
   }
   global.ggLuvS0 = {
+    summary: function () { return { pass: counts.pass, fail: counts.fail } },
     onMoon: function (p, tick, fl, server, map) {
       var level = p.getLevel()
       if (state === null) {
@@ -25,6 +28,15 @@
         var planet = PD.getPlanet(new ResourceLocation('grindless:s0_moon'))
         var orbit = server.getLevel('grindless:s0_moon_orbit')
         state = { phase: 'weather', at: tick, start: tick, x: p.getX(), y: p.getY(), z: p.getZ(), samples: [] }
+        var marker = JsonIO.read('kubejs/config/gg_test_luv_s0_planet.json')
+        state.reusedEnvironment = marker !== null && String(marker.get('resumeAfterEnvironment')) === 'true'
+        if (state.reusedEnvironment) {
+          console.info(TAG + 'prior_environment|NOTE|reusing 20261026-043657-client-69a terrain/sky/orbit/weather/suit/oxygen/cold proof; observing only unresolved fall and reboarding')
+          p.stopRiding()
+          p.teleportTo('grindless:s0_moon', state.x + 5, state.y + 20, state.z, 0, 0)
+          state.phase = 'fall_settle'
+          return false
+        }
         check('landing_coordinates', p.getX() >= 13568 && p.getX() <= 13632 && p.getZ() >= 0 && p.getZ() < 64,
           'natural landing at ' + state.x + ',' + state.y + ',' + state.z)
         var ground = Math.floor(state.y) - 1
@@ -98,7 +110,8 @@
           '10 client physics ticks at JSON gravity 1.315 m/s2: drop=' + sample.drop +
           ' blocks; expected roughly 0.45, vanilla roughly 3.35; positions=' + sample.positions.join(','))
         JsonIO.write('kubejs/exported/luv_s0_environment.json', {
-          gravity: 1.315, temperature: 102, fall: sample, landing: { x: state.x, y: state.y, z: state.z }
+          gravity: 1.315, temperature: 102, fall: sample, landing: { x: state.x, y: state.y, z: state.z },
+          checks: { pass: counts.pass, fail: counts.fail }, reusedEnvironment: state.reusedEnvironment
         })
         p.teleportTo('grindless:s0_moon', state.x, state.y, state.z, 0, 0)
         state.phase = 'reboard'
