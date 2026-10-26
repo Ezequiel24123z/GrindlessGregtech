@@ -1,0 +1,44 @@
+{
+  "_source": "docs/eras/luv.md, '3. HTS magnet works' (package LuV-A4) and decision 13 (the HTS coil's 144 mB of trinium). Real: the CFS and MIT SPARC toroidal field model coil (20 T, 2021), SMES (BPA's 30 MJ unit, 1980s), vacuum-pressure impregnation and cold testing in magnet manufacturing.",
+  "_how_it_is_used": [
+    "Read by startup_scripts/grindless/luv/hts_magnet_works.js (the charge, shown on the controller) and server_scripts/grindless/luv/hts_magnet_works.js (one gtceu:magnet_winding recipe per entry, id grindless:magnet_winding/<name>, with the data key grindless_magnet_winding = <name> for its EMI line); by the smoke test tools/test/overlay/kubejs/server_scripts/gg_test_luv_a4.js. Nothing here is repeated in code.",
+    "charge: the cold-test charge every entry with \"charge\": true carries, as GTM's non-consumed fluid input (notConsumableFluid, chance 0): needed in an input hatch to start, never drained, taken once whatever the overclock or the parallel hatch's copies.",
+    "recipes[]: name (the recipe's id and lang key), circuit (the programmed circuit that picks it: every entry has its own, so GTM's lookup keeps one recipe per path), itemsIn / fluidsIn (consumed), itemsOut, eut and duration (GTM's EU/t and ticks; marked (tune) in the design until the integrated bench run). The SMES cell's output is the LuV row's cell of tables/wireless_energy.json (its cellMadeBy names this machine); a Node test keeps the two tables in step."
+  ],
+  "charge": { "id": "gtceu:liquid_helium", "amount": 1000 },
+  "recipes": [
+    {
+      "name": "hts_coil", "circuit": 1, "charge": true,
+      "_why": "GTM's own ladder: gtceu:assembler/superconducting_coil_luv takes 3,456 mB of trinium and 32 ITBTC double wires. Wound tape takes a twenty-fourth: one Mk1's 43 coils in under an hour of one x4 naquadah plant (decision 13, tune).",
+      "itemsIn": [ { "id": "grindless:itbtc_coated_conductor", "count": 16 }, { "id": "gtceu:niobium_titanium_foil", "count": 16 } ],
+      "fluidsIn": [ { "id": "gtceu:trinium", "amount": 144 }, { "id": "gtceu:epoxy", "amount": 144 } ],
+      "itemsOut": [ { "id": "gtceu:superconducting_coil", "count": 1 } ],
+      "eut": 30720, "duration": 400
+    },
+    {
+      "name": "luv_smes_cell", "circuit": 2, "charge": true,
+      "_why": "The wireless network's LuV cell: superconducting magnetic energy storage, 983,040,000 EU (tables/wireless_energy.json, six LuV vanadium batteries).",
+      "itemsIn": [ { "id": "grindless:itbtc_coated_conductor", "count": 32 }, { "id": "gtceu:niobium_titanium_foil", "count": 8 },
+                   { "id": "gtceu:frostproof_machine_casing", "count": 4 }, { "id": "gtceu:luv_machine_hull", "count": 1 } ],
+      "fluidsIn": [ { "id": "gtceu:epoxy", "amount": 144 } ],
+      "itemsOut": [ { "id": "grindless:luv_smes_cell", "count": 1 } ],
+      "eut": 30720, "duration": 600
+    },
+    {
+      "name": "coilgun_coil_casing", "circuit": 3, "charge": true,
+      "_why": "The coilgun probe launcher's coils (Ganymede): Hg-1223, HV's superconductor, wound and potted.",
+      "itemsIn": [ { "id": "gtceu:mercury_barium_calcium_cuprate_single_wire", "count": 16 }, { "id": "gtceu:hsss_frame", "count": 1 } ],
+      "fluidsIn": [ { "id": "gtceu:epoxy", "amount": 72 } ],
+      "itemsOut": [ { "id": "grindless:coilgun_coil_casing", "count": 2 } ],
+      "eut": 7680, "duration": 200
+    },
+    {
+      "name": "magnetic_bearing", "circuit": 4, "charge": true,
+      "_why": "Tetrataenite (L1_0 FeNi, the belt's meteoric magnet, rare-earth free) rods on an HSS-S ring: the rotating hydroponic ring's bearings.",
+      "itemsIn": [ { "id": "gtceu:tetrataenite_rod", "count": 4 }, { "id": "gtceu:hsss_ring", "count": 1 }, { "id": "gtceu:titanium_plate", "count": 2 } ],
+      "fluidsIn": [],
+      "itemsOut": [ { "id": "grindless:magnetic_bearing", "count": 1 } ],
+      "eut": 1920, "duration": 200
+    }
+  ]
+}
