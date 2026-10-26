@@ -122,6 +122,13 @@
 			x: 0.5d
 			y: 48.25d
 		}
+		{
+			id: "1673BD45CECC595A"
+			linked_quest: "7B4176719D90C65C"
+			shape: "rsquare"
+			x: 14.75d
+			y: 72.0d
+		}
 	]
 	quests: [
 		{
@@ -591,7 +598,7 @@
 			icon: "grindless:coilgun_coil_casing"
 			id: "57D3017A93EE377F"
 			size: 1.25d
-			subtitle: "Stored for now"
+			subtitle: "The coilgun's barrel, on Ganymede"
 			tasks: [
 				{ id: "58E8861C4C59591A", item: "grindless:coilgun_coil_casing", optional_task: true, type: "item" }
 				{ id: "3C4A3DE7D77C0CAB", type: "checkmark" }
@@ -1422,7 +1429,7 @@
 			icon: "grindless:sapphire_test_mass"
 			id: "785F8CEFDCEFD9B9"
 			size: 1.25d
-			subtitle: "Stored for now"
+			subtitle: "The detector's mirrors, on Ganymede"
 			tasks: [
 				{ id: "5B3AA2940AA78608", item: "grindless:sapphire_test_mass", optional_task: true, type: "item" }
 				{ id: "7D49A5A2CB0DB8A1", type: "checkmark" }
@@ -1811,6 +1818,158 @@
 			title: "Indium"
 			x: 5.75d
 			y: 58.5d
+		}
+		{
+			icon: "gtceu:data_orb"
+			id: "3A305BB26B1B37CE"
+			shape: "rsquare"
+			size: 1.0d
+			tasks: [
+				{ id: "1106ED19B24A5A92", item: "gtceu:data_orb", optional_task: true, type: "item" }
+				{ id: "312BD8821599BD21", type: "checkmark" }
+			]
+			title: "Data Orb"
+			x: 14.75d
+			y: 73.5d
+		}
+		{
+			icon: "grindless:sapphire_test_mass"
+			id: "78A7E61B9BBCD7C0"
+			shape: "rsquare"
+			size: 1.0d
+			subtitle: "The crystal grower's"
+			tasks: [
+				{ id: "792BEA5E00BB5D94", item: "grindless:sapphire_test_mass", optional_task: true, type: "item" }
+				{ id: "728494B7DF24F0AB", type: "checkmark" }
+			]
+			title: "Sapphire Test Mass"
+			x: 14.75d
+			y: 75.0d
+		}
+		{
+			icon: "gtceu:liquid_helium_bucket"
+			id: "3BC06E41F27947E7"
+			shape: "rsquare"
+			size: 1.0d
+			subtitle: "Make-up for the cryostats"
+			tasks: [
+				{ id: "5EFA8C357EC484E1", item: "gtceu:liquid_helium_bucket", optional_task: true, type: "item" }
+				{ id: "5C9279C773E912BC", type: "checkmark" }
+			]
+			title: "Liquid Helium"
+			x: 14.75d
+			y: 76.5d
+		}
+		{
+			dependencies: ["7B4176719D90C65C", "3A305BB26B1B37CE", "78A7E61B9BBCD7C0", "3BC06E41F27947E7"]
+			description: ["Two long arms buried in quiet ice, listening for space itself to stretch. The Sagittarius A* signal stays in its bus, and the first catalogue holds a black hole merger, heard as a chirp."]
+			icon: "gtceu:gravitational_wave_detector"
+			id: "167AE36A9A365666"
+			shape: "gear"
+			size: 1.5d
+			tasks: [
+				{ id: "519C9C9E79F39BFE", item: "gtceu:gravitational_wave_detector", optional_task: true, type: "item" }
+				{ id: "725ED634457453E0", type: "checkmark" }
+			]
+			title: "Gravitational-Wave Detector"
+			x: 17.25d
+			y: 75.0d
+		}
+		{
+			dependencies: ["167AE36A9A365666"]
+			icon: "grindless:gravitational_wave_catalogue"
+			id: "11BF2ABCAC0B9F53"
+			size: 1.25d
+			tasks: [
+				{ id: "1F8069F741CE65F3", item: "grindless:gravitational_wave_catalogue", optional_task: true, type: "item" }
+				{ id: "7F4AB801EC10304A", type: "checkmark" }
+			]
+			title: "Gravitational-Wave Catalogue"
+			x: 19.75d
+			y: 75.0d
+		}
+		{
+			icon: "grindless:coilgun_coil_casing"
+			id: "1EC23024E57A7DD1"
+			shape: "rsquare"
+			size: 1.0d
+			subtitle: "Wound in the magnet works"
+			tasks: [
+				{ id: "1EFA1358849F6F94", item: "grindless:coilgun_coil_casing", optional_task: true, type: "item" }
+				{ id: "733002AECC798B31", type: "checkmark" }
+			]
+			title: "Coilgun Coil Casing"
+			x: 14.75d
+			y: 78.25d
+		}
+		{
+			icon: "grindless:jupiter_entry_probe"
+			id: "5D718EF6879AA176"
+			shape: "rsquare"
+			size: 1.0d
+			tasks: [
+				{ id: "39E92B496CEA769A", item: "grindless:jupiter_entry_probe", optional_task: true, type: "item" }
+				{ id: "339372BFD51E810B", type: "checkmark" }
+			]
+			title: "Jupiter Entry Probe"
+			x: 14.75d
+			y: 79.75d
+		}
+		{
+			icon: "grindless:saturn_flyby_probe"
+			id: "529ABDE8B994BA68"
+			shape: "rsquare"
+			size: 1.0d
+			tasks: [
+				{ id: "14733DBB2AD0D7FC", item: "grindless:saturn_flyby_probe", optional_task: true, type: "item" }
+				{ id: "50C9DD594A2A2661", type: "checkmark" }
+			]
+			title: "Saturn Flyby Probe"
+			x: 14.75d
+			y: 81.25d
+		}
+		{
+			dependencies: ["1EC23024E57A7DD1", "5D718EF6879AA176", "529ABDE8B994BA68"]
+			description: ["Ganymede's cold lets an HV superconductor work with no cryostat at all. The barrel throws probes off the moon without a rocket."]
+			icon: "gtceu:coilgun_launcher"
+			id: "37C04E4CCA4A739D"
+			shape: "gear"
+			size: 1.5d
+			tasks: [
+				{ id: "73D9D23840123261", item: "gtceu:coilgun_launcher", optional_task: true, type: "item" }
+				{ id: "558E2E32D65BF466", type: "checkmark" }
+			]
+			title: "Coilgun Probe Launcher"
+			x: 17.25d
+			y: 79.75d
+		}
+		{
+			dependencies: ["37C04E4CCA4A739D"]
+			icon: "grindless:jovian_atmosphere_survey"
+			id: "5A2F521BDFB3E46D"
+			size: 1.25d
+			subtitle: "Kept for ZPM"
+			tasks: [
+				{ id: "1773D7A19F448BB2", item: "grindless:jovian_atmosphere_survey", optional_task: true, type: "item" }
+				{ id: "57AFC2859997FB03", type: "checkmark" }
+			]
+			title: "Jovian Atmosphere Survey"
+			x: 19.75d
+			y: 79.0d
+		}
+		{
+			dependencies: ["37C04E4CCA4A739D"]
+			icon: "grindless:saturn_transfer_chart"
+			id: "10D5987D8C963A0F"
+			size: 1.25d
+			subtitle: "The next trip: kept for ZPM"
+			tasks: [
+				{ id: "75C120299781D665", item: "grindless:saturn_transfer_chart", optional_task: true, type: "item" }
+				{ id: "7DF10AA452E243D1", type: "checkmark" }
+			]
+			title: "Saturn Transfer Chart"
+			x: 19.75d
+			y: 80.5d
 		}
 	]
 	subtitle: ["Trinium and enriched naquadah, superconducting tape and magnets, living circuits, and the first factories in orbit."]
