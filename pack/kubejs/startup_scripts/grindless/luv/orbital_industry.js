@@ -29,7 +29,7 @@
     symbols: {
       S: Pat.controller(), X: ports(STATION, 6), M: Pat.part('maintenance', { exact: 1 }),
       C: Pat.block(STATION), K: Pat.block('gtceu:hssg_coil_block'), A: Pat.air(),
-      G: Pat.block('gtceu:borosilicate_glass'), F: Pat.frame(['titanium'])
+      G: Pat.block('gtceu:borosilicate_glass_block'), F: Pat.frame(['titanium'])
     }
   }
   var disc = ['  WWWWW  ', ' WWWWWWW ', 'WWWWWWWWW', 'WWWWWWWWW', 'WWWWWWWWW',
