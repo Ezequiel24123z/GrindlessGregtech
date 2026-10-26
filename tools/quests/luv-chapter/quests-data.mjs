@@ -15,7 +15,7 @@ const ri = (item, count) => ({ type: 'item', item, count });
 
 // B7 is one of two: the flux-tube tether with a second station (B7T) or the sulfur-iodine plant on Io (B7S), decided by spike S0-3.
 export const PACKAGES = ['A1', 'A2', 'A3', 'A4', 'A5', 'B1', 'B2', 'B3', 'B4', 'B5', 'B6', 'B7T', 'B7S', 'B8', 'B9', 'B10'];
-export const LANDED = ['A1', 'A2', 'A3', 'A4', 'A5', 'B2', 'B3', 'B4', 'B6', 'B9', 'B10'];
+export const LANDED = ['A1', 'A2', 'A3', 'A4', 'A5', 'B2', 'B3', 'B4', 'B5', 'B6', 'B8', 'B9', 'B10'];
 // what gen.mjs --all draws: everything, with the tether
 export const ALL_STATE = PACKAGES.filter((p) => p !== 'B7S');
 
@@ -264,7 +264,7 @@ export const QUESTS = [
     deps: ['HARP'], x: 22, y: -1.5,
     desc: [
       "The &6Asteroid Processor&r runs the Mond process: carbon monoxide carries the iron and nickel away as gas and leaves the platinum metals behind as a concentrate. The CO stays in the machine. The concentrate exists nowhere else, so the processor won't void it.",
-      "It also pulls tetrataenite apart by magnet.",
+      "It also pulls tetrataenite apart by magnet, and the meteoric iron dust that leaves goes back through Mond.",
     ],
     tasks: [it('gtceu:asteroid_processor'), it('grindless:asteroid_pgm_concentrate')],
     rewards: [xp(100), ri('gtceu:carbon_monoxide_bucket', 2)],
