@@ -343,7 +343,7 @@ test('config: the tiers/next/ layer makes the whole chain inherit from its files
 // ---------------------------------------------------------------- real configs
 
 test('real tiers: era order is inherited and every resource and group has an era from the order', () => {
-  for (const tier of ['steam', 'lv', 'mv', 'hv', 'ev', 'iv']) {
+  for (const tier of ['steam', 'lv', 'mv', 'hv', 'ev', 'iv', 'luv']) {
     const { raw } = loadTierConfig({ tier }, TIERS);
     assert.ok(raw.eraOrder && raw.eraOrder.length >= 6, `${tier}: eraOrder`);
     for (const e of [...raw.eraResources, ...raw.eraItems]) assert.ok(raw.eraOrder.includes(e.era), `${tier}: ${e.id} has era ${e.era}`);
