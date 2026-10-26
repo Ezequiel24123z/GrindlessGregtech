@@ -1,0 +1,39 @@
+{
+  "_comment": [
+    "EMI coverage audit (tools/analysis/emi-coverage.mjs, lib/emi_coverage.mjs). Every item, block item, fluid and machine the pack registers needs an EMI-visible acquisition and, unless it is an end product, an EMI-visible use.",
+    "invisibleTypes: GT recipe types EMI never shows (GTM 7.5.3: the electric furnace's category is not registered, the dummy type is not XEI-visible).",
+    "endProducts: what needs no use (machines always; tools and final rewards here, each with its reason).",
+    "requirePages: an item made by a recipe of an invisible type, or whose only use is a place in a structure, also needs an info page (kubejs/assets/emi/recipe/additions/grindless/).",
+    "derived: routes the static stand-in cannot see, because a script derives them from the mods' own recipes or GTM generates them from a material's flags. Each one is checked against a native dump with --dump (category = EMI category).",
+    "exceptions: an item that genuinely has no acquisition or no use, with the reason. Keep it empty unless the design says so."
+  ],
+  "invisibleTypes": ["gtceu:electric_furnace", "gtceu:dummy"],
+  "requirePages": { "invisibleRoutes": true, "previewOnlyUses": true },
+  "endProducts": {
+    "globs": [],
+    "items": []
+  },
+  "derived": [
+    { "id": "grindless:hydrotreating_catalyst", "role": "use", "category": "gtceu:refining", "source": "server_scripts/grindless/hv/refinery.js builds the refinery's recipes from GTM's distillation, cracking and desulfurization recipes" },
+    { "id": "grindless:pube_neutron_source", "role": "use", "category": "gtceu:naquadah_refining", "source": "server_scripts/grindless/iv/naquadah_plant.js composes the naquadah plant's recipe from GT--'s live naquadah line" },
+    { "id": "gtceu:samarium_chloride_dust", "role": "use", "category": "gtceu:electrolyzer", "source": "GTM's decomposition recipe, generated from the material's components (startup_scripts/grindless/ev/extraction_cascade.js)" },
+    { "id": "gtceu:neodymium_chloride_dust", "role": "use", "category": "gtceu:electrolyzer", "source": "GTM's decomposition recipe, generated from the material's components (startup_scripts/grindless/ev/extraction_cascade.js)" },
+    { "id": "gtceu:mixed_rare_earth_chloride_dust", "role": "use", "category": "gtceu:electrolyzer", "source": "GTM's decomposition recipe, generated from the material's components (startup_scripts/grindless/ev/extraction_cascade.js)" },
+    { "id": "gtceu:merrillite_dust", "role": "acquisition", "category": "gtceu:ore_crushing", "source": "GTM's ore processing, generated from the material's ore flag (startup_scripts/grindless/ev/foundation.js)" },
+    { "id": "gtceu:raw_merrillite", "role": "use", "category": "gtceu:ore_crushing", "source": "GTM's ore processing, generated from the material's ore flag (startup_scripts/grindless/ev/foundation.js)" },
+    { "id": "gtceu:iridosmine_dust", "role": "acquisition", "category": "gtceu:ore_crushing", "source": "GTM's ore processing, generated from the material's ore flag (startup_scripts/grindless/iv/foundation.js)" },
+    { "id": "gtceu:raw_iridosmine", "role": "use", "category": "gtceu:ore_crushing", "source": "GTM's ore processing, generated from the material's ore flag (startup_scripts/grindless/iv/foundation.js)" },
+    { "id": "gtceu:deuterium_rich_ice_dust", "role": "acquisition", "category": "gtceu:ore_crushing", "source": "GTM's ore processing, generated from the material's ore flag (startup_scripts/grindless/mars/travel.js)" },
+    { "id": "gtceu:raw_deuterium_rich_ice", "role": "use", "category": "gtceu:ore_crushing", "source": "GTM's ore processing, generated from the material's ore flag (startup_scripts/grindless/mars/travel.js)" },
+    { "id": "gtceu:zircaloy_dust", "role": "use", "category": "gtceu:electric_blast_furnace", "source": "GTM's blast furnace recipe, generated from the material's blast temperature (startup_scripts/grindless/iv/foundation.js)" },
+    { "id": "gtceu:zircaloy_ingot", "role": "acquisition", "category": "gtceu:vacuum_freezer", "source": "GTM cools the hot ingot of the blast furnace recipe it generates (startup_scripts/grindless/iv/foundation.js)" }
+  ],
+  "derivedProcesses": [
+    { "type": "gtceu:combined_cycle", "source": "server_scripts/grindless/ev/combined_cycle_and_hot_mill.js makes one run per live gas turbine fuel" },
+    { "type": "gtceu:hot_rolling", "source": "server_scripts/grindless/ev/combined_cycle_and_hot_mill.js makes the mill's runs from the live recipes it stands in for" },
+    { "type": "gtceu:pgm_refining", "source": "server_scripts/grindless/ev/platinum_plant.js composes the plant's modes from GT--'s live platinum-group line" },
+    { "type": "gtceu:bio_distillation", "source": "server_scripts/grindless/mv/biorefinery.js rebuilds GTM's distillation tower recipes of organic fluids" },
+    { "type": "gtceu:ore_processing", "source": "server_scripts/grindless/mv/ore_plant.js composes GTM's ore chain of every ore into one recipe" }
+  ],
+  "exceptions": []
+}

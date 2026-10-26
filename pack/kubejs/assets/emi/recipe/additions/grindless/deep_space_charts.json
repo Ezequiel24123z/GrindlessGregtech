@@ -1,0 +1,14 @@
+{
+  "type": "emi:info",
+  "stacks": [
+    "item:grindless:mars_chart",
+    "item:grindless:inner_planets_chart",
+    "item:grindless:lunar_vlbi_recording",
+    "item:grindless:outer_system_chart"
+  ],
+  "text": [
+    "emi.grindless.info.deep_space_charts.0",
+    "emi.grindless.info.deep_space_charts.1",
+    "emi.grindless.info.deep_space_charts.2"
+  ]
+}

@@ -1,0 +1,9 @@
+{
+  "type": "emi:info",
+  "stacks": [
+    "item:grindless:heliostat_mirror"
+  ],
+  "text": [
+    "emi.grindless.info.heliostat_mirror.0"
+  ]
+}
