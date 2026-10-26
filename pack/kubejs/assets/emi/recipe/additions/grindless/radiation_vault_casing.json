@@ -1,0 +1,5 @@
+{
+  "type": "emi:info",
+  "stacks": ["item:grindless:radiation_vault_casing"],
+  "text": ["emi.grindless.info.radiation_vault_casing.0"]
+}

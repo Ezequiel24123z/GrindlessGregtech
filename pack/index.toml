@@ -145,6 +145,10 @@ file = "kubejs/assets/emi/recipe/additions/grindless/orbital_solar_panel.json"
 hash = "aa9465897553264d22c2dc84adbefdfa4c211aac412c9f5bfeb1ab93d60e5fdd"
 
 [[files]]
+file = "kubejs/assets/emi/recipe/additions/grindless/radiation_vault_casing.json"
+hash = "ec5bdc5341d33e66c78fa57e6d0d976a5b89d1b1bd09321daad329e8cc48725c"
+
+[[files]]
 file = "kubejs/assets/emi/recipe/additions/grindless/sagittarius_a_star_signal.json"
 hash = "e14dbe607d11a87897534ed3284696d55d9db4614962af174bb4e6396b29d649"
 
@@ -767,6 +771,18 @@ hash = "67135e91dd0705e16e6bdd92d71e8e5366ed82d545ed843cc5ff5fad2d77e0e6"
 [[files]]
 file = "kubejs/assets/grindless/textures/block/multiblock/fuel_fabrication_plant/overlay_front_active_emissive.png.mcmeta"
 hash = "491ea51d46bc1f0c0ff11ed9293461cc67de293c7672abbc45f67563f8fe1f1a"
+
+[[files]]
+file = "kubejs/assets/grindless/textures/block/multiblock/fumarole_condenser/overlay_front.png"
+hash = "bfee9e4815f5359e3a2845782cd75d6cbb0bb9f2873d4fab5d7c616d317860ef"
+
+[[files]]
+file = "kubejs/assets/grindless/textures/block/multiblock/fumarole_condenser/overlay_front_active.png"
+hash = "415bd671e541aa204a103837d6844836db0bf9347d12884ca755a0e132779e1d"
+
+[[files]]
+file = "kubejs/assets/grindless/textures/block/multiblock/fumarole_condenser/overlay_front_active_emissive.png"
+hash = "3f8200f38e4aaa7f1038c001cbfe2ae16797c3da23f5efdc1f5a60b89fc99814"
 
 [[files]]
 file = "kubejs/assets/grindless/textures/block/multiblock/generator_array/overlay_front.png"
@@ -1925,6 +1941,18 @@ file = "kubejs/assets/grindless/textures/block/multiblock/venus_heat_engine/over
 hash = "491ea51d46bc1f0c0ff11ed9293461cc67de293c7672abbc45f67563f8fe1f1a"
 
 [[files]]
+file = "kubejs/assets/grindless/textures/block/multiblock/volcanic_intake/overlay_front.png"
+hash = "6a7b4c3dfd887a8a2eee370cb73d482f9e1fc3f3c39716c07b009354566f138b"
+
+[[files]]
+file = "kubejs/assets/grindless/textures/block/multiblock/volcanic_intake/overlay_front_active.png"
+hash = "96cf5a036e46b00ed97e788855d13f624affeab208e77d56c3f9f267510797e3"
+
+[[files]]
+file = "kubejs/assets/grindless/textures/block/multiblock/volcanic_intake/overlay_front_active_emissive.png"
+hash = "0a49cf01fdb8ad650b7999caa908c3e70dc619d6b39dfca7a17514a768dffd1e"
+
+[[files]]
 file = "kubejs/assets/grindless/textures/block/multiblock/wake_shield_facility/overlay_front.png"
 hash = "d75c5f5ed0b27e5f2b6fc762724f09305a02afb97d0a4a6d25501786de606d6d"
 
@@ -2470,7 +2498,7 @@ hash = "597286ab53fe25d3ed999a8c75d31f5a52741a4ba3e132008120686679cf8ca3"
 
 [[files]]
 file = "kubejs/client_scripts/grindless/emi_info_lang.js"
-hash = "2abfd51584ccac7159f16bf8f235b1b55fd58698192da76b3a295cc40af10161"
+hash = "bdc7e93f08593a247bf18dc4a0935f142a3c9bfac755195327e88d889b6dbdfa"
 
 [[files]]
 file = "kubejs/client_scripts/grindless/ev_ae2_interplanetary_lang.js"
@@ -2599,6 +2627,10 @@ hash = "f056bfc08ab6e28f8fce6ea33975c3114889231eabdfa77993ea4608f7d97464"
 [[files]]
 file = "kubejs/client_scripts/grindless/luv_hts_magnet_works_lang.js"
 hash = "dcdce7c08dc0beb570c99e6e9d23692c1d92d2d6453e5c549cb5f60178454ccf"
+
+[[files]]
+file = "kubejs/client_scripts/grindless/luv_io_surface_lang.js"
+hash = "50aaa36c5af2fe5ee7cc939c11c7e200b3ab6fae77bdba137e54d5cbc48698e1"
 
 [[files]]
 file = "kubejs/client_scripts/grindless/luv_orbital_biology_lang.js"
@@ -2754,7 +2786,7 @@ hash = "1f4b256531a0b42a6ecf399e9b692d9e4730bd4102e53aab3e1fa2c999b69e9d"
 
 [[files]]
 file = "kubejs/data/grindless/tables/hidden_until.json"
-hash = "f729d65b4bf8bd9ea41413d0d04d459b7f635e854a9b5610e4884deda77757f7"
+hash = "d03c9e18c67d990d690b5bb19070a142bdf3d83967a138b9d9ca8fa91e0d98c8"
 
 [[files]]
 file = "kubejs/data/grindless/tables/hot_cell.json"
@@ -3137,6 +3169,10 @@ file = "kubejs/server_scripts/grindless/luv/hts_magnet_works.js"
 hash = "701ca39f3689e63463585df05d35d93a7535d8f54699e360c227d52454c4d61b"
 
 [[files]]
+file = "kubejs/server_scripts/grindless/luv/io_surface.js"
+hash = "6924a5b8c193866c890edf430d57181d88147274faab1512ab4ca4c2226443dd"
+
+[[files]]
 file = "kubejs/server_scripts/grindless/luv/orbital_biology.js"
 hash = "480a37d4349f04cbc68eb257035a3f659790da25a89802c3ed081ff78a32d5d9"
 
@@ -3503,6 +3539,10 @@ hash = "16dfc102b7839fbbcd5011b2f08172e67bcb1d80efaee81ba14868042d77f296"
 [[files]]
 file = "kubejs/startup_scripts/grindless/luv/hts_magnet_works.js"
 hash = "12218da8328b927385776a58f0e7e8fee9b012f6f383dd32cb57e9a492ef5d37"
+
+[[files]]
+file = "kubejs/startup_scripts/grindless/luv/io_surface.js"
+hash = "502729485768f796162250517b32244fb4a918c9d5f81cf6f7a9b251e14949b7"
 
 [[files]]
 file = "kubejs/startup_scripts/grindless/luv/orbital_biology.js"
