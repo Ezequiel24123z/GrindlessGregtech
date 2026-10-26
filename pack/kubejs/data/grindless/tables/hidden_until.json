@@ -5,6 +5,7 @@
     "until = era id of docs/journey.md (steam, lv, mv, hv, ev, iv, luv, zpm, uv, uhv, uev, uiv, uxv, opv, max) in which the group can first be obtained (class B of the audit: planets, the excluded End veins and everything that hangs on them). Its recipes stay on the server, only hidden.",
     "until = \"never\": junk (class C of the audit): hidden for good and its removeRecipes are removed from the server (recipes that only exist for it: an ingredient that only accepts junk, or junk as every output). Nothing is unregistered: old saves keep every id.",
     "keepRecipes = true: a hidden item whose recipes stay, on the server and in EMI (the old items of earlier versions and their conversion into the new ones): only c:hidden_from_recipe_viewers.",
+    "unless = switch name: the group stays hidden only while that switch of global.grindless.stations.switches (startup_scripts/grindless/lib/stations.js, from tables/stations.json) is off; with the switch on, hidden.js shows it.",
     "material = audit group: a GT material with all its forms (dust, ingot, plate, fluid, bucket...) or a single item; reason = why (from the audit config).",
     "Regenerating keeps the removeRecipes of the groups that are still junk (a dump taken with hidden.js active no longer has those recipes)."
   ],
@@ -26,9 +27,8 @@
     "max"
   ],
   "groups": [
-    {"material":"gcyr:keycard","until":"zpm","reason":"the station's keycard (the packager's output) stays hidden while tables/stations.json is disabled (spike S0-3); held past LuV's landing (until zpm, so IMPLEMENTED_ERA luv keeps it out). When S0-3 passes, delete gcyr:keycard from this rule and its group in hidden_until.json (stations.json's note)","items":["gcyr:keycard"],"fluids":[]},
     {"material":"gcyr:space_elevator_support","until":"zpm","reason":"space elevator and its modules: docs/journey.md places it in ZPM; today GTCA gives no recipe for the modules (integration/gtca.js)","items":["gcyr:space_elevator_support"],"fluids":[]},
-    {"material":"grindless:tether_spool","until":"zpm","reason":"LuV-A1 registration (startup_scripts/grindless/luv/foundation.js) held hidden past LuV's landing (until zpm, so IMPLEMENTED_ERA luv keeps it out): package B7, Io orbit, writes its recipes and then deletes this rule and its groups in hidden_until.json","items":["grindless:tether_spool"],"fluids":[]},
+    {"material":"grindless:tether_spool","until":"zpm","reason":"LuV-A1 registration (startup_scripts/grindless/luv/foundation.js) held hidden while tables/stations.json is not in the tether mode (package B7, Io orbit: the flux-tube tether, spike S0-3); until zpm, so IMPLEMENTED_ERA luv keeps it out, and unless tether, so hidden.js shows it as soon as the table turns the tether mode on. In the tether mode its recipes exist and the group drops out on the next regeneration; in the sulfur-iodine mode it stays hidden (reclassify it as class C then)","items":["grindless:tether_spool"],"fluids":[],"unless":"tether"},
     {"material":"gtca:space_assembler_mki","until":"zpm","reason":"space elevator and its modules: docs/journey.md places it in ZPM; today GTCA gives no recipe for the modules (integration/gtca.js)","items":["gtca:space_assembler_mki"],"fluids":[]},
     {"material":"gtca:space_assembler_mkii","until":"zpm","reason":"space elevator and its modules: docs/journey.md places it in ZPM; today GTCA gives no recipe for the modules (integration/gtca.js)","items":["gtca:space_assembler_mkii"],"fluids":[]},
     {"material":"gtca:space_assembler_mkiii","until":"zpm","reason":"space elevator and its modules: docs/journey.md places it in ZPM; today GTCA gives no recipe for the modules (integration/gtca.js)","items":["gtca:space_assembler_mkiii"],"fluids":[]},

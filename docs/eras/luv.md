@@ -139,8 +139,9 @@ Five GCYR entries (datapack JSON, no Java) and ten dimensions. The ids are final
   - GCYR asks for 14 B in the tanks to launch from Earth to any LuV place (its solar-system amount), and for its moon amount between a moon and its parent; Jupiter is tier 5, so that leg stays closed in LuV;
   - one cryogenic tank holds 16 B, two make 32 B. S0-2's level 4 round trip to a test moon burned 5,126 mB out and 4,952 mB home: the launch requirement, not the burn, is what needs the second tank.
   - Proxima Centauri b goes to tier 5 (it was 4 while no part reached level 4).
-- **Stations** (wait for spike S0-3; `tables/stations.json` stays `"enabled": false` until it passes natively):
-  - GCYR's packager (a LuV hull, GCYR's recipe) and package, the ID chip and the keycard. The keycard stays hidden until the flag flips.
+- **Stations** (on since spike S0-3 passed natively: `tables/stations.json` `"enabled": true`, the second in Io orbit):
+  - GCYR's packager (a LuV hull, GCYR's recipe) and package, the ID chip and the keycard. The keycard shows, with an EMI page (`space_station.json`).
+  - `server_scripts/grindless/luv/orbit_arrival.js` moves a rocket that stalls above its selected, deployed station onto it (server side; no physics, only in `tables/orbits.json` dimensions): S0-3's landings needed it.
   - The station lands on a 512 × 512 plot in the planet's orbit.
   - GT machines are built after arrival.
 - **Suit:**
@@ -828,6 +829,11 @@ Every recipe has a programmed circuit (c*n*) or an input that no other recipe of
   - IV: GCYR's aramid;
   - LuV: the Whipple casing.
 - **Source:** real: Sanmartín, Lorenzini and others, *Bare-tether power generation and propulsion at Jupiter* (2005–2008); the Io flux tube (Bigg, 1964; Voyager).
+- **As built (B7):**
+  - One switch: `tables/stations.json` (`lib/stations.js`). The tether is registered only in its mode (`enabled` true, `second` = `grindless:io_orbit`); in the `pending` mode (S0-3 not concluded) neither 16 nor 16b is registered, and the spool stays hidden (its hidden-table group says `unless: tether`). Since S0-3 passed the table is in the tether mode (v0.8.0).
+  - 5×15×5: a 5×5×5 deployer with station truss edges and radiation vault faces (1–4 dynamo or wireless dynamo hatches, 1 input bus), two reels of three tungstensteel gearboxes inside, an input hatch on the roof as the hollow-cathode port, and a 10-block aluminium-frame stub from the roof's centre.
+  - The two reels are two parallels through `lib/generators.js`: 65,536 EU/t each, 131,072 on a 4 A LuV hatch. Each reel takes 25 mB argon and a spool at 28/10,000 a run: one spool an hour at full power. Recipe `grindless:electrodynamic_tether/plasma_torus`, only in the second station's orbit.
+  - Controller: `MSM / CHC / C C` (motors, sensor, LuV circuits, hull); the magnet works already uses `CSC / MHM / C C`.
 
 ### 16b. If a second station fails: Io sulfur–iodine hydrogen plant: `gtceu:sulfur_iodine_plant`, type `gtceu:thermochemical_hydrogen` (Io)
 
@@ -864,6 +870,9 @@ This plant takes slot 16 only if spike S0-3 shows that a second station can't be
   - MV: iodine from kelp (`gtceu:chemical_reactor/iodine`);
   - LuV: Europa's water, Io's heat, and the hydrogen of mode 2 and fusion.
 - **Source:** real: the sulfur–iodine cycle (General Atomics; JAEA's continuous run, 2019).
+- **As built (B7, written and registered only when `tables/stations.json` has `second: null`):**
+  - 11×14×5: a 5×5 of magma under a tungstensteel firebox hot plate; a vault room (1–2 energy hatches, 1–2 input buses, 1–3 input and output hatches); a 3×3×3 Bunsen reactor of PTFE inert casing under a 3×3×6 HI column (inert casing round a PTFE pipe casing core); four 3×3×3 robust tungstensteel decomposer slots, the first required.
+  - One parallel per complete module, counted in the world at every run start, capped by the energy hatches' voltage; no overclock. Recipe `grindless:thermochemical_hydrogen/sulfur_iodine`; controller `PSP / CHC / C C`.
 
 ### 17. Cryobot: `gtceu:cryobot`, type `gtceu:vein_drilling` (vein drill step 7b; Europa)
 
@@ -1369,7 +1378,7 @@ No new mods. LuV builds on the pack's own wireless network (v0.7.x).
 
 ## Risks and open questions
 
-- **GCYR beyond the inner planets** (spikes S0-1 to S0-3): datapack planets and the Jupiter group, and level 4 with tier 5 KubeJS tanks, passed natively; the deployment of two stations (S0-3) is still open. GCYR's configured gravity is not applied (S0-1), so the pack claims no low gravity. GCYR's launch issues #91 and #122 still apply.
+- **GCYR beyond the inner planets** (spikes S0-1 to S0-3): datapack planets and the Jupiter group, and level 4 with tier 5 KubeJS tanks, passed natively; so did the deployment of two stations (S0-3, travel spikes R14 and R9; only an in-client reopen of the same save hangs in the headless bench, under diagnosis). GCYR's configured gravity is not applied (S0-1), so the pack claims no low gravity. GCYR's launch issues #91 and #122 still apply.
 - **The wireless network's LuV tier** (S0-10): LuV is built on a package still in progress (LV to IV). Do wireless hatches count for the two-hatch rule, and does an orbital generator feed it? A4 answers both from GTM's source (yes, and yes with the chunks loaded; *Power on the wireless network*); the integrated run confirms them.
 - **World generation:** the belt's floor and its new KubeJS layer (S0-6); Io's paterae and fumaroles, the cryobot's ice shaft and the GW detector's buried L (S0-7).
 - **The composed mode 2** depends on GT--'s recipe ids staying put. The pins fail loudly (S0-11).
@@ -1391,7 +1400,7 @@ LuV is built in packages after v0.7.x, as IV was. Test bands start at X 13568 an
 **Spikes come first (S0):** disposable tests that run before any permanent id is registered. Their files stay in the bench overlay.
 - **S0-1:** a datapack Jupiter with one moon: the menu, the worlds, the sky, the weather and the flight back (passed; it also showed that GCYR's gravity value is not applied).
 - **S0-2:** a tier 5 KubeJS fuel tank in a real level 4 launch and return.
-- **S0-3:** a station packed, launched and used in Earth orbit, then a second one in a moon's orbit.
+- **S0-3:** a station packed, launched and used in Earth orbit, then a second one in a moon's orbit (passed: R14, 96 checks; R9 kept the station across a disk save).
 - **S0-4:** GT--'s circuit assembly line refusing GTM's NPU recipe on LuV hatches.
 - **S0-5:** every new recipe through the live lookup, and no recycling for the new items.
 - **S0-6:** a world gen layer over tuff in one test dimension.

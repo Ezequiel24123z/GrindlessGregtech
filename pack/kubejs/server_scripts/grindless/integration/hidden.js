@@ -14,6 +14,8 @@
 //                 removed. Nothing is unregistered: old saves keep every id.
 // When an era lands, bump IMPLEMENTED_ERA: its content shows again (and add its places to tools/analysis/tiers/obtain.json, then rerun
 // the audit with --table: what is still out moves to a later era).
+// A group with `unless` names a switch of global.grindless.stations.switches (startup_scripts/grindless/lib/stations.js, from
+// tables/stations.json): while that switch is on the group shows (the tether spool in the tether mode). An unknown switch keeps it hidden.
 //
 // Hiding = two tags, items and fluids. c:hidden_from_recipe_viewers: EMI 1.1.22 drops the tagged stacks from its index (and the pack's
 // other scripts use it for the addon machines they remove and for the old items of earlier versions). grindless:hidden_with_recipes:
@@ -26,7 +28,7 @@
 // KubeJS keeps added recipes apart from the datapack ones, so they are dropped from event.addedRecipes).
 //
 // Published for the smoke test (tools/test/overlay/kubejs/server_scripts/gg_test_hidden.js) and the recipe dump (info.json):
-//   global.grindless.hidden = { implementedEra, eras, groups, hidden: { groups, items, fluids, keep }, isHidden(id), removed: {...} }
+//   global.grindless.hidden = { implementedEra, eras, groups, hidden: { groups, items, fluids, keep }, shownBySwitch, isHidden(id), removed: {...} }
 //
 // Rhino: var + function inside every callback that runs more than once (this Rhino throws "redeclaration of var").
 (function () {
@@ -43,6 +45,7 @@
     eras: ERAS,
     groups: [],
     hidden: { groups: 0, items: [], fluids: [], keep: [] },
+    shownBySwitch: [],
     removeRecipes: [],
     removed: { listed: 0, original: 0, added: 0, missing: 0, ms: 0 },
     tagged: { items: 0, fluids: 0, missing: [] }
@@ -76,6 +79,8 @@
     var fluids = []
     var keep = []
     var remove = []
+    var shown = []
+    var switches = G.stations && G.stations.switches ? G.stations.switches : null
     var count = 0
     groups.forEach(function (g) {
       var r = rank(g.until)
@@ -84,6 +89,15 @@
         return
       }
       if (r <= limit) return
+      if (typeof g.unless === 'string') {
+        if (switches === null || !Object.prototype.hasOwnProperty.call(switches, g.unless)) {
+          console.error(LOG + g.material + ': unless names an unknown switch "' + g.unless + '" (global.grindless.stations.switches: ' +
+            (switches === null ? 'missing' : Object.keys(switches).join(', ')) + '): it stays hidden')
+        } else if (switches[g.unless] === true) {
+          shown.push(g.material)
+          return
+        }
+      }
       count++
       ;(g.items || []).forEach(function (id) {
         items.push(id)
@@ -102,8 +116,10 @@
     H.groups = groups
     H.hidden = { groups: count, items: items, fluids: fluids, keep: keep }
     H.removeRecipes = remove
+    H.shownBySwitch = shown
     console.info(LOG + 'implemented up to ' + IMPLEMENTED_ERA + ': hiding ' + count + ' of ' + groups.length + ' groups (' + items.length +
-      ' items, ' + fluids.length + ' fluids; ' + keep.length + ' keep their recipes in view); ' + remove.length + ' junk recipes to remove')
+      ' items, ' + fluids.length + ' fluids; ' + keep.length + ' keep their recipes in view); ' + remove.length + ' junk recipes to remove' +
+      (shown.length > 0 ? '; shown by a stations switch: ' + shown.join(', ') : ''))
   }
 
   load()

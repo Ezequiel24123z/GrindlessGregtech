@@ -120,6 +120,7 @@
     {"id":"grindless:station_truss_casing","kind":"item","needUse":true,"needMade":true,"made":["emi:info","gtceu:assembler"],"used":["emi:info","gtceu:multiblock_info"]},
     {"id":"grindless:steel_drill_bit","kind":"item","needUse":true,"needMade":true,"made":["minecraft:crafting"],"used":["gtceu:vein_drilling","minecraft:crafting"]},
     {"id":"grindless:sulfur_concrete_casing","kind":"item","needUse":true,"needMade":true,"made":["gtceu:fumarole_condensing"],"used":["gtceu:assembler","gtceu:multiblock_info"]},
+    {"id":"grindless:tether_spool","kind":"item","needUse":true,"needMade":true,"made":["gtceu:assembler"],"used":["gtceu:electrodynamic_tether"]},
     {"id":"grindless:titanium_drill_bit","kind":"item","needUse":true,"needMade":true,"made":["gtceu:lathe"],"used":["gtceu:vein_drilling"]},
     {"id":"grindless:triple_junction_cell","kind":"item","needUse":true,"needMade":true,"made":["gtceu:cutter"],"used":["gtceu:assembler"]},
     {"id":"grindless:triple_junction_wafer","kind":"item","needUse":true,"needMade":true,"made":["gtceu:wake_epitaxy"],"used":["gtceu:cutter"]},
@@ -181,7 +182,7 @@
     {"id":"grindless:vein_sample_zirconium","kind":"item","needUse":true,"needMade":true,"made":["minecraft:crafting"],"used":["gtceu:vein_drilling"]},
     {"id":"grindless:venusian_quantum_seed","kind":"item","needUse":true,"needMade":true,"made":["gtceu:chemical_reactor"],"used":["ae2:item_transformation"]},
     {"id":"grindless:void_key","kind":"item","needUse":true,"needMade":true,"made":["emi:info","minecraft:crafting"],"used":["emi:info"]},
-    {"id":"grindless:whipple_shield_casing","kind":"item","needUse":true,"needMade":true,"made":["emi:info","gtceu:microgravity_processing"],"used":["emi:info","gtceu:multiblock_info"]},
+    {"id":"grindless:whipple_shield_casing","kind":"item","needUse":true,"needMade":true,"made":["emi:info","gtceu:microgravity_processing"],"used":["emi:info","gtceu:assembler","gtceu:multiblock_info"]},
     {"id":"grindless:zircaloy_cladding_tube","kind":"item","needUse":true,"needMade":true,"made":["gtceu:fuel_fabrication"],"used":["gtceu:fuel_fabrication","gtceu:hot_cell"]},
     {"id":"gtceu:advanced_multi_smelter","kind":"item","needUse":false,"needMade":true,"made":["gtceu:multiblock_info","minecraft:crafting"],"used":[]},
     {"id":"gtceu:algae_bioreactor","kind":"item","needUse":false,"needMade":true,"made":["gtceu:multiblock_info","minecraft:crafting"],"used":[]},
@@ -213,6 +214,7 @@
     {"id":"gtceu:extraction_cascade","kind":"item","needUse":false,"needMade":true,"made":["gtceu:multiblock_info","minecraft:crafting"],"used":[]},
     {"id":"gtceu:fission_reactor","kind":"item","needUse":false,"needMade":true,"made":["gtceu:multiblock_info","minecraft:crafting"],"used":[]},
     {"id":"gtceu:fluorspar_kiln","kind":"item","needUse":false,"needMade":true,"made":["gtceu:multiblock_info","minecraft:crafting"],"used":[]},
+    {"id":"gtceu:flux_tube_tether","kind":"item","needUse":false,"needMade":true,"made":["gtceu:multiblock_info","minecraft:crafting"],"used":[]},
     {"id":"gtceu:fuel_fabrication_plant","kind":"item","needUse":false,"needMade":true,"made":["gtceu:multiblock_info","minecraft:crafting"],"used":[]},
     {"id":"gtceu:fumarole_condenser","kind":"item","needUse":false,"needMade":true,"made":["gtceu:multiblock_info","minecraft:crafting"],"used":[]},
     {"id":"gtceu:generator_array","kind":"item","needUse":false,"needMade":true,"made":["gtceu:multiblock_info","minecraft:crafting"],"used":[]},
@@ -299,7 +301,7 @@
     {"id":"gtceu:neodymium_chloride_dust","kind":"item","needUse":true,"needMade":true,"made":["gtceu:solvent_extraction"],"used":["gtceu:electrolyzer"]},
     {"id":"gtceu:optical_miner","kind":"item","needUse":false,"needMade":true,"made":["gtceu:multiblock_info","minecraft:crafting"],"used":[]},
     {"id":"gtceu:optical_observatory","kind":"item","needUse":false,"needMade":true,"made":["gtceu:multiblock_info","minecraft:crafting"],"used":[]},
-    {"id":"gtceu:orbital_solar_station","kind":"item","needUse":false,"needMade":true,"made":["gtceu:assembler","gtceu:multiblock_info"],"used":[]},
+    {"id":"gtceu:orbital_solar_station","kind":"item","needUse":false,"needMade":true,"made":["emi:info","gtceu:assembler","gtceu:multiblock_info"],"used":["emi:info"]},
     {"id":"gtceu:ore_plant","kind":"item","needUse":false,"needMade":true,"made":["gtceu:multiblock_info","minecraft:crafting"],"used":[]},
     {"id":"gtceu:organoid_lab","kind":"item","needUse":false,"needMade":true,"made":["gtceu:multiblock_info","minecraft:crafting"],"used":[]},
     {"id":"gtceu:platinum_plant","kind":"item","needUse":false,"needMade":true,"made":["gtceu:assembler","gtceu:multiblock_info"],"used":[]},
@@ -346,7 +348,7 @@
     {"id":"gtceu:zircaloy_dust","kind":"item","needUse":true,"needMade":true,"made":["gtceu:mixer"],"used":["gtceu:electric_blast_furnace"]},
     {"id":"gtceu:zircaloy_ingot","kind":"item","needUse":true,"needMade":true,"made":["gtceu:vacuum_freezer"],"used":["gtceu:fuel_fabrication"]}
   ],
-  "pages": ["emi:/generated/recipe/additions/grindless/asteroid_regolith_casing.json","emi:/generated/recipe/additions/grindless/capacitor_cells.json","emi:/generated/recipe/additions/grindless/coilgun_coil_casing.json","emi:/generated/recipe/additions/grindless/cryogenic_fuel_tank.json","emi:/generated/recipe/additions/grindless/engineered_seeds.json","emi:/generated/recipe/additions/grindless/heliostat_mirror.json","emi:/generated/recipe/additions/grindless/hermean_blocks.json","emi:/generated/recipe/additions/grindless/hologram_projector.json","emi:/generated/recipe/additions/grindless/jovian_atmosphere_survey.json","emi:/generated/recipe/additions/grindless/magnetic_bearing.json","emi:/generated/recipe/additions/grindless/night_sky_radiator.json","emi:/generated/recipe/additions/grindless/orbital_solar_panel.json","emi:/generated/recipe/additions/grindless/radiation_vault_casing.json","emi:/generated/recipe/additions/grindless/sapphire_test_mass.json","emi:/generated/recipe/additions/grindless/saturn_transfer_chart.json","emi:/generated/recipe/additions/grindless/sintered_regolith.json","emi:/generated/recipe/additions/grindless/solar_wing_panel.json","emi:/generated/recipe/additions/grindless/station_truss_casing.json","emi:/generated/recipe/additions/grindless/travel_keys.json","emi:/generated/recipe/additions/grindless/whipple_shield_casing.json","emi:/generated/recipe/additions/grindless/wireless_covers.json"],
+  "pages": ["emi:/generated/recipe/additions/grindless/asteroid_regolith_casing.json","emi:/generated/recipe/additions/grindless/capacitor_cells.json","emi:/generated/recipe/additions/grindless/coilgun_coil_casing.json","emi:/generated/recipe/additions/grindless/cryogenic_fuel_tank.json","emi:/generated/recipe/additions/grindless/engineered_seeds.json","emi:/generated/recipe/additions/grindless/heliostat_mirror.json","emi:/generated/recipe/additions/grindless/hermean_blocks.json","emi:/generated/recipe/additions/grindless/hologram_projector.json","emi:/generated/recipe/additions/grindless/jovian_atmosphere_survey.json","emi:/generated/recipe/additions/grindless/magnetic_bearing.json","emi:/generated/recipe/additions/grindless/night_sky_radiator.json","emi:/generated/recipe/additions/grindless/orbital_solar_panel.json","emi:/generated/recipe/additions/grindless/radiation_vault_casing.json","emi:/generated/recipe/additions/grindless/sapphire_test_mass.json","emi:/generated/recipe/additions/grindless/saturn_transfer_chart.json","emi:/generated/recipe/additions/grindless/sintered_regolith.json","emi:/generated/recipe/additions/grindless/solar_wing_panel.json","emi:/generated/recipe/additions/grindless/space_station.json","emi:/generated/recipe/additions/grindless/station_truss_casing.json","emi:/generated/recipe/additions/grindless/travel_keys.json","emi:/generated/recipe/additions/grindless/whipple_shield_casing.json","emi:/generated/recipe/additions/grindless/wireless_covers.json"],
   "legacy": [{"id":"grindless:vein_sample_scheelite","conversions":["grindless:crafting/empty_vein_probe_from_vein_sample_scheelite"]}],
-  "hidden": ["grindless:tether_spool"]
+  "hidden": []
 }

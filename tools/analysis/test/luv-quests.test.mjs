@@ -32,7 +32,7 @@ const NATIVE = new Set([
   'gtceu:sterilized_growth_medium_bucket', 'gtceu:stem_cells', 'gtceu:neuro_processing_unit', 'gtnn:circuit_assembly_line',
   'gtceu:wetware_processor', 'gtceu:zpm_machine_hull', 'gtceu:zpm_energy_input_hatch',
   // this pack's own, registered before LuV (same dump)
-  'grindless:outer_system_chart',
+  'grindless:outer_system_chart', 'grindless:sagittarius_a_star_signal',
 ]);
 // dimensions that exist without LuV-B1 (GCYR's own)
 const NATIVE_DIMENSIONS = new Set(['gcyr:overworld_orbit']);
@@ -118,12 +118,18 @@ test('only landed packages reach the book; ids never start with 8-F', () => {
   for (const id of parseChapter(text).ids) assert.match(id, /^[0-7][0-9A-F]{15}$/);
 });
 
-test('the chapter is in GG_QUESTS_EXPECTED with its counts', () => {
+test('the chapter is in GG_QUESTS_EXPECTED with its counts', async () => {
   const text = read(chapterPath);
   const quests = (text.match(/\n\t\t\{\n/g) || []).length;
   const deps = [...text.matchAll(/dependencies: \[([^\]]*)\]/g)].reduce((n, m) => n + (m[1].match(/"/g) || []).length / 2, 0);
   const overlay = read('tools/test/overlay/kubejs/server_scripts/gg_test_quests.js');
   const m = /luv_age:\s*\{\s*quests:\s*(\d+),\s*deps:\s*(\d+)/.exec(overlay) || /luv_age:\s*\[(\d+),\s*(\d+)\]/.exec(overlay);
   assert.ok(m, 'luv_age missing from GG_QUESTS_EXPECTED');
-  assert.deepEqual([Number(m[1]), Number(m[2])], [quests, deps]);
+  // the counts the fixture uses in game: its per-mode row for tables/stations.json (lib/stations.js), else the base entry
+  const { MODE, STATIONS } = await import('../../quests/luv-stations.mjs');
+  const key = MODE === 'sulfur_iodine' ? `${MODE}_stations_${STATIONS.enabled ? 'on' : 'off'}` : MODE;
+  const row = new RegExp(`\\b${key}:\\s*\\{\\s*luv_age:\\s*\\[(\\d+),\\s*(\\d+)\\]`).exec(overlay);
+  assert.ok(row, `GG_QUESTS_LUV_MODES has no row ${key}`);
+  assert.deepEqual([Number(row[1]), Number(row[2])], [quests, deps]);
+  if (MODE === 'pending') assert.deepEqual([Number(m[1]), Number(m[2])], [quests, deps]);
 });
