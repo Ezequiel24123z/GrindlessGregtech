@@ -1,0 +1,15 @@
+{
+  "translation": "level.grindless.uranus",
+  "galaxy": "gcyr:milky_way",
+  "solar_system": "gcyr:solar_system",
+  "world": "grindless:uranus",
+  "orbit_world": "grindless:uranus_orbit",
+  "rocket_tier": 6,
+  "gravity": 8.69,
+  "has_atmosphere": false,
+  "days_in_year": 30687,
+  "temperature": 76,
+  "solar_power": 1,
+  "has_oxygen": false,
+  "button_color": 8508141
+}

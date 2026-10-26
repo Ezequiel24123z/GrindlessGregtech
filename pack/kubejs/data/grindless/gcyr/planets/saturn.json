@@ -1,0 +1,15 @@
+{
+  "translation": "level.grindless.saturn",
+  "galaxy": "gcyr:milky_way",
+  "solar_system": "gcyr:solar_system",
+  "world": "grindless:saturn",
+  "orbit_world": "grindless:saturn_orbit",
+  "rocket_tier": 5,
+  "gravity": 10.44,
+  "has_atmosphere": false,
+  "days_in_year": 10759,
+  "temperature": 134,
+  "solar_power": 1,
+  "has_oxygen": false,
+  "button_color": 14529125
+}
