@@ -13,11 +13,9 @@
 // Every block it places is recorded and removed in reverse; it refuses to overwrite a block it did not place; it force-loads only
 // the structure chunks it builds in (and only when they were not force-loaded already) and removes those tickets.
 //
-// THE BELT DIMENSION IS A STAND-IN. B5 runs before B1 (spike S0-1) ships the belt, so the overlay adds a test-only datapack dimension
-// with the final id: tools/test/overlay/kubejs/data/grindless/dimension/asteroid_belt.json (its type, noise settings and biome are
-// the test-only grindless:s0_6_asteroid_belt). Solid tuff from Y 0 to Y 191 and air above, so the pack's real layer and real veins
-// (Y 20..200) apply unchanged. When B1 ships the real dimension, drop that overlay file (or keep it only as a deliberate test
-// override) and re-read the band's ground height: the structures need air at Y 198..214.
+// THE BELT IS B1's REAL DIMENSION (pack/kubejs/data/grindless/dimension/asteroid_belt.json: tuff, terrain below Y 176). The
+// test-only stand-in this fixture used before B1 (solid tuff Y 0..191 under the same id) was dropped for LuV's integrated run (C3),
+// because an overlay file with that path overrides the shipped belt. The structures need air at Y 198..214.
 //
 // It sets the time of day (the belt reads the Overworld's clock) for the optical miner and puts it back when it ends (the original
 // time plus the ticks it ran, when the daylight cycle is on). Do not run it alongside another fixture that needs a time of day:
@@ -53,7 +51,7 @@
 //     miner_boudouard_without_sun   circuit 2 at night: 1,000 mB CO2 + 1 carbon -> 2,000 mB CO
 //     miner_no_voiding            fluid voiding on: Boudouard does not start, the reason shown
 //   spike S0-6 (fresh chunks)
-//     belt_dimension              the belt level exists (NOTE: the overlay stand-in)
+//     belt_dimension              the belt level exists (B1's real dimension)
 //     belt_terrain_tuff           the scanned belt chunks hold tuff
 //     belt_veins_generated        at least one tuff ore of a belt vein in the fresh belt chunks, confirmed block by block
 //     belt_only_belt_ores         no other ore in them
@@ -907,8 +905,8 @@
     var belt = world(S.belt, 198, 214)
     var earth = world(EARTH, 98, 112)
     S.beltLevel = belt === null ? null : belt.level
-    check('belt_dimension', belt !== null, S.belt + (belt === null ? ' is not loaded (the overlay stand-in ' +
-      'kubejs/data/grindless/dimension/asteroid_belt.json is missing?)' : ' loaded (overlay stand-in until B1 ships the real belt)'))
+    check('belt_dimension', belt !== null, S.belt + (belt === null ? ' is not loaded (B1\'s ' +
+      'kubejs/data/grindless/dimension/asteroid_belt.json is missing?)' : ' loaded (B1\'s real belt)'))
     staticChecks()
     S.jobs = scanJobs()
     if (belt === null) return
