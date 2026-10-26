@@ -69,8 +69,11 @@
       if (list === null || list === undefined) return ''
       return array(list).map(function (c) {
         var ing = c.content
-        var stacks = ing.getItems()
-        return Number(ing.getAmount()) + 'x ' + (stacks.length > 0 ? String(classes().Registries.ITEMS.getKey(stacks[0].getItem())) : '?')
+        var first = ing.kjs$getFirst()
+        var stacks = first ? [first] : []
+        if (stacks.length === 0) return String(ing)
+        var amount = Number(ing.getAmount())
+        return amount + 'x ' + String(classes().Registries.ITEMS.getKey(stacks[0].getItem()))
       }).join(' + ')
     } catch (e) { return '(unreadable: ' + e + ')' }
   }

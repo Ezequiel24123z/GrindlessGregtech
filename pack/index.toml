@@ -853,6 +853,18 @@ file = "kubejs/assets/grindless/textures/block/multiblock/diamond_lattice_fab/ov
 hash = "8367fc10065984ce13d291d834c3f2707686190b5314dc87fc38403f6b02aaba"
 
 [[files]]
+file = "kubejs/assets/grindless/textures/block/multiblock/direct_energy_converter/overlay_front.png"
+hash = "150c46c007075781c5f893a3e34ae61ed120f3478b312aa35622f3842a6d6f81"
+
+[[files]]
+file = "kubejs/assets/grindless/textures/block/multiblock/direct_energy_converter/overlay_front_active.png"
+hash = "3277584c1870953d18c042f72aca7f315f9e2654632c7adbd1db4bd8a6b20a66"
+
+[[files]]
+file = "kubejs/assets/grindless/textures/block/multiblock/direct_energy_converter/overlay_front_active_emissive.png"
+hash = "2582cea0fca43f6dcbcfc70ca08e42cbe05cc675830b2cba5ee7385979d3e4a8"
+
+[[files]]
 file = "kubejs/assets/grindless/textures/block/multiblock/engine_test_stand/overlay_front.png"
 hash = "52e749393d510fe1d30babd5ed73de9da6a1d97c66717b2bfee7822aebd5ccba"
 
@@ -1771,6 +1783,18 @@ hash = "6b065cebce84b18eb1cbc9cfdfd710babb0f8bbc66f8ac779cbe4d43ea8be840"
 [[files]]
 file = "kubejs/assets/grindless/textures/block/multiblock/organoid_lab/overlay_front_active.png"
 hash = "71bc59835297b9666c9863578425b0620851dd4238e0eda95d414cff673eab42"
+
+[[files]]
+file = "kubejs/assets/grindless/textures/block/multiblock/plasma_quench_caster/overlay_front.png"
+hash = "3f9cb9d08ca163950684cfbfc7e6a59ca4e93bab13902cc5cbb256819f195e82"
+
+[[files]]
+file = "kubejs/assets/grindless/textures/block/multiblock/plasma_quench_caster/overlay_front_active.png"
+hash = "9cce50f806c3fa0afe3e2f1b68c9ade798e091932beec18c6774eb96b6dfdf47"
+
+[[files]]
+file = "kubejs/assets/grindless/textures/block/multiblock/plasma_quench_caster/overlay_front_active_emissive.png"
+hash = "94c1e819caf8df2215038a3c63525ca8758b53eaa1cb04dd183457dd84433c5f"
 
 [[files]]
 file = "kubejs/assets/grindless/textures/block/multiblock/platinum_plant/overlay_front.png"
@@ -3369,6 +3393,10 @@ file = "kubejs/client_scripts/grindless/zpm_foundation_lang.js"
 hash = "af84a423fd47c7ceabd05fb0892412dd6d3494c9cd63a3bf0cb73089a1663e35"
 
 [[files]]
+file = "kubejs/client_scripts/grindless/zpm_fusion_lang.js"
+hash = "e65b1f7b33b1c60e0bbcf8dde9e3ab410fdf37b5b46dc794d1e6143050b361ab"
+
+[[files]]
 file = "kubejs/client_scripts/grindless/zpm_magnet_works_lang.js"
 hash = "32ab3831cf11bf366c48a9149c003f865854c6325162cf0c9e807632a16aa8b0"
 
@@ -3543,6 +3571,10 @@ hash = "72ce68bb386096718513d6075de4b92b99571682399bb64b5cfc46c3cd09ecfc"
 [[files]]
 file = "kubejs/data/grindless/tables/fusion_mk1.json"
 hash = "cc60e97b170255c5318784c467985118747456c9bf179ba77a95c8075718d6dd"
+
+[[files]]
+file = "kubejs/data/grindless/tables/fusion_mk2.json"
+hash = "f042cb6b0b65def9af3824e4dee67cd85eaca2750e9d8f01d8f116b01bd5e9c6"
 
 [[files]]
 file = "kubejs/data/grindless/tables/heavy_water_plant.json"
@@ -4197,6 +4229,10 @@ file = "kubejs/server_scripts/grindless/zpm/europium.js"
 hash = "bfc444310892c3e9f6bd8240ca44839f77c5288323497128c2f53dc4525cc410"
 
 [[files]]
+file = "kubejs/server_scripts/grindless/zpm/fusion.js"
+hash = "a37ed72e6d0c0e686ad3c7076bfbfcc4af00bd9b1a28610ea98eb6ea7601299f"
+
+[[files]]
 file = "kubejs/server_scripts/grindless/zpm/magnet_works.js"
 hash = "3007ca9d1b4687254d13c97c6dc239a7a4f1b43cf9d1bcb2e9f63ca6ecde934d"
 
@@ -4567,6 +4603,10 @@ hash = "2a079bac33713fc6d9f935bcb00f8eb6321427a75e4c12e7bde2fd7236631caf"
 [[files]]
 file = "kubejs/startup_scripts/grindless/zpm/foundation.js"
 hash = "b053916d5bf548c10ee107d9777dd40e727793b2bce81f33952b22c344b7ac91"
+
+[[files]]
+file = "kubejs/startup_scripts/grindless/zpm/fusion.js"
+hash = "eb5bf7fb380bff002b1942e47ecffe6835748b5d6eff1cadad7ce9913bd7550a"
 
 [[files]]
 file = "kubejs/startup_scripts/grindless/zpm/magnet_works.js"
