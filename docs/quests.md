@@ -207,6 +207,7 @@ powershell -File tools\quests\Render-QuestPreview.ps1 -Chapter steam_age -OutDir
 
 # Generated chapters: edit the data, then regenerate (the SNBT comes out with the same ids)
 node tools\quests\ev-chapter\gen.mjs                                    # ev_age.snbt from quests-data.mjs (section 14)
+node tools\quests\luv-chapter\gen.mjs [--pending] [--all --out <file>]  # luv_age.snbt; only the landed LuV packages (section 14)
 powershell -File tools\quests\processing-lines\run.ps1 -Dump <kubejs-exported> -Write [-Preview]   # Processing Lines and Power (sections 17 and 18)
 ```
 
@@ -249,7 +250,7 @@ Why this order, checked against the recipe dump of v0.4.0:
 
 **Tested in-game (24-10-2026, pack with the Moon):** `gg_test_quests` loads both with all their quests and dependencies; `gg_test_quest_book`, on a real client, completes *Arrival* and *The Neutronium Toolbox*, claims their 22 rewards, and checks that the 20 tools carry GTM's NBT, do not wear out, mine, pick up items with the magnet, break a 3x3 area (mining hammer), and show "Unbreakable" with no durability lines. The book screenshots read from left to right.
 
-The SNBT files are the source: they are edited by hand, following this guide. Exceptions generated from data in `tools/quests/` are `ev_age.snbt` (section 14), the Processing Lines (section 17) and Power (section 18). For those, edit the data and regenerate.
+The SNBT files are the source: they are edited by hand, following this guide. Exceptions generated from data in `tools/quests/` are `ev_age.snbt` and `luv_age.snbt` (section 14), the Processing Lines (section 17) and Power (section 18). For those, edit the data and regenerate.
 
 ## 14. Plan for Steam, LV, MV, HV, EV and IV: the Moon through each instrument
 
@@ -345,6 +346,15 @@ The chapter is generated: its source is `tools/quests/ev-chapter/quests-data.mjs
 ### IV — "IV: Inner Planets" (`iv_age.snbt`, 53 quests, 74 dependencies; done in v0.7.0)
 
 Spine: the route from the hot cell and the reactor, through the Moon's tritium and the chart, to Mercury, iridium and the assembly line, ending at *Gate to LuV*. Above it uranium, fuel and Venus; below it heavy water, Mercury's solar field and the parallel hatch (see `docs/eras/iv.md`, "Quests"). Machine quests carry the machine's name; the two landings (*Under the Clouds*, *Day of Fire*) are the milestones.
+
+### LuV — "LuV: The Outer System" (`luv_age.snbt`; written while LuV is built, package LuV-C2)
+
+- **Start:** *The Outer System*, after *Gate to LuV*. Journey line: superconductors at home, a station in orbit, then the belt and Jupiter's moons.
+- **Spine:** *LuV Components* → *Osmiridium* → *Tape* (coated conductor line) → *Winding* (HTS magnet works, gear 1.5) → *The Network Goes LuV* (SMES cells) → *Packed and Launched* → *First Station* (Earth orbit) → *Level Four* → *Behind the Vault* (Io) → *Fumarole* → *Patera* → *Riding the Torus* or *Iodine Loop* → *Fusion* → *Europium* → *First Data Orb* → *Gate to ZPM* (exit).
+- **Above:** the trinium line (*Naquadah Coil*, *Full Recovery*, *Trinium*, *Reactor III*, *Sixteen at Once*); the station's machines (*Endless Day*, *Fibre from Nothing*, *In the Wake*); the belt (*The Belt*, *Harpoon*, *Mond*, *Star Metal*, *Sunlight on a Boulder*, *Molecular Farm*).
+- **Below:** *Closed Loop*, *Biofoundry*, *Engineered Seeds*, *Perfect Crystal*; Europa (*Under the Ice*, *Cryobot*, *Something Alive*, *Stem Cells*, *Organoid*, *Living Circuits*) and Ganymede (*Quiet Moon*, *Chirp*, *Coilgun*, *Into the Clouds*, *Slingshot*).
+- **Generated:** `tools/quests/luv-chapter/quests-data.mjs` → `gen.mjs`. Ids are hashes of the quest keys. Each quest names the LuV packages it needs; only quests whose packages are all in `LANDED` reach the book, a dependency on a left-out quest goes to its parents, and `fallback` places fusion and research at home until Io lands. When a package merges: add it to `LANDED`, check its ids, run `gen.mjs --pending` (what is still waiting), `gen.mjs`, the linter, and update `GG_QUESTS_EXPECTED.luv_age`. `gen.mjs --all --out <file>` draws the finished chapter (it lints clean too). `tools/analysis/test/luv-quests.test.mjs` fails if the book names an id nothing registers or is stale.
+- **No low gravity in the text:** GCYR's gravity isn't applied in game.
 
 ## 15. Quality of life tabs: what to fix
 
