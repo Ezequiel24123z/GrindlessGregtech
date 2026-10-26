@@ -60,10 +60,10 @@ test('gg_test_luv_io_orbit.js compiles and keeps to Rhino\'s rules', () => {
   }
 });
 
-test('AGENTS.md (when its row exists) and the README document the fixture', () => {
-  const agents = fs.readFileSync(path.join(ROOT, 'AGENTS.md'), 'utf8').split('\n').map((l) => l.trim());
-  const row = agents.find((l) => l.startsWith('|') && /18432–18495/.test(l));
-  if (row) assert.match(row, /Z 0–63/);
+test('tools/test/zones.json (when its band exists) and the README document the fixture', () => {
+  const table = JSON.parse(fs.readFileSync(path.join(ROOT, 'tools', 'test', 'zones.json'), 'utf8'));
+  const zone = table.zones.find((z) => z.x[0] === 18432 && z.x[1] === 18495);
+  if (zone) assert.deepEqual(zone.z || table.defaults.z, [0, 63]);
   const readme = fs.readFileSync(path.join(ROOT, 'tools', 'test', 'README.md'), 'utf8');
   assert.match(readme, /gg_test_luv_io_orbit/);
   assert.match(readme, /GGTEST\\\|luv_io_orbit\\\|DONE@@180/);

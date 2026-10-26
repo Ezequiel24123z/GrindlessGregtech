@@ -79,24 +79,21 @@ test('its ground lists cover every block the four surfaces\' noise settings can 
   }
 });
 
-test('AGENTS.md reserves the fixture\'s band and the README documents it', () => {
-  const agents = fs.readFileSync(path.join(ROOT, 'AGENTS.md'), 'utf8');
-  const rows = agents.split('\n').map((l) => l.trim());
-  const row = rows.find((l) => l.startsWith('| LuV travel and places (B1)'));
-  assert.ok(row, 'AGENTS.md test-zone row "LuV travel and places (B1)"');
-  assert.match(row, /18176–18239/);
-  assert.match(row, /Z 0–63/);
-  assert.match(row, /Y 98–112/);
-  assert.match(row, /Y 198–214/);
+test('tools/test/zones.json reserves the fixture\'s band and the README documents it', () => {
+  const table = JSON.parse(fs.readFileSync(path.join(ROOT, 'tools', 'test', 'zones.json'), 'utf8'));
+  const zone = table.zones.find((z) => z.id === 'luv_travel_b1');
+  assert.ok(zone, 'zones.json band "luv_travel_b1"');
+  assert.deepEqual(zone.x, [18176, 18239]);
+  assert.deepEqual(zone.z || table.defaults.z, [0, 63]);
+  assert.deepEqual(zone.y || table.defaults.y, [98, 112]);
+  assert.match(zone.note, /Y 198-214/);
   assert.match(SOURCE, /var BAND = \{ x0: 18176, x1: 18239, z0: 0, z1: 63 \}/);
   assert.match(SOURCE, /var OVERWORLD_Y = \{ y0: 98, y1: 112 \}/);
   assert.match(SOURCE, /var OFFWORLD_Y = \{ y0: 198, y1: 214 \}/);
-  // no other band of the table overlaps it (rows that give an X range)
-  for (const l of rows.filter((x) => x.startsWith('| ') && x !== row)) {
-    const r = /\|\s*(\d+)–(\d+)/.exec(l);
-    if (!r) continue;
-    const [a, b] = [Number(r[1]), Number(r[2])];
-    assert.ok(b < BAND.x0 || a > BAND.x1, 'overlaps: ' + l);
+  // no other band of the table overlaps it in X
+  for (const other of table.zones.filter((z) => z !== zone)) {
+    const [a, b] = other.x;
+    assert.ok(b < BAND.x0 || a > BAND.x1, 'overlaps: ' + other.id);
   }
   const readme = fs.readFileSync(path.join(ROOT, 'tools', 'test', 'README.md'), 'utf8');
   assert.match(readme, /gg_test_luv_b1/);

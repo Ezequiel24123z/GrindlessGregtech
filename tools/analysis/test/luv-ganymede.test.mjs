@@ -256,8 +256,8 @@ test('B9 native fixture compiles, stays in its band, reads Ganymede from the pla
   // GTM 7.5.3's RecipeHelper.getRealEUt returns an EnergyStack: Number() of it is NaN (native S2, 2026-10-26).
   assert.match(src, /getRealEUt\(r\)\.getTotalEU\(\)/);
   assert.doesNotMatch(src, /Number\([^()]*getRealEUt\([^()]*\)\)/);
-  const agents = fs.readFileSync(path.join(ROOT, 'AGENTS.md'), 'utf8');
-  assert.match(agents, /\| LuV Ganymede[^|]*\| 17664–17727/);
+  const zones = JSON.parse(fs.readFileSync(path.join(ROOT, 'tools', 'test', 'zones.json'), 'utf8')).zones;
+  assert.deepEqual(zones.find((z) => z.id === 'luv_ganymede').x, [17664, 17727]);
 });
 
 test('B9 every existing id matches the pinned native registry', () => {

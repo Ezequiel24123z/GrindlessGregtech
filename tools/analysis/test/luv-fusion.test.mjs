@@ -223,6 +223,6 @@ test('the native fixture stays in X 17920-17983, Z 0-63, Y 98-112 and pins the s
       assert.ok((nums[3] - nums[0] + 1) * (nums[4] - nums[1] + 1) * (nums[5] - nums[2] + 1) <= 32768, c);
     } else assert.ok(nums[0] >= 17920 && nums[2] <= 17983, c);
   }
-  const agents = read('AGENTS.md');
-  assert.match(agents, /\| LuV fusion and research \| 17920–17983/);
+  const zones = JSON.parse(read('tools/test/zones.json')).zones;
+  assert.deepEqual(zones.find((z) => z.id === 'luv_fusion').x, [17920, 17983]);
 });
