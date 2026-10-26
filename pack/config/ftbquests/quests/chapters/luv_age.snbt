@@ -257,6 +257,122 @@
 		}
 		{
 			dependencies: ["5933ADF51C8949BD"]
+			description: [
+				"GCYR's &6Space Station Packager&r folds a whole station into one package small enough for a rocket. Pack it at home, fly it to Earth orbit and open it there; the GregTech machines go in once you've arrived."
+				"Everything up there draws from the wireless network, which is why the network came first."
+			]
+			icon: "gcyr:space_station_packager"
+			id: "531171ADA3A1A60B"
+			rewards: [{ id: "705E817367653C3C", type: "xp", xp: 80 }]
+			tasks: [
+				{ id: "7378F46BB42CBD46", item: "gcyr:space_station_packager", type: "item" }
+				{ id: "10E8129E34FC8F81", item: "gcyr:space_station_package", type: "item" }
+			]
+			title: "Packed and Launched"
+			x: 10.0d
+			y: -1.5d
+		}
+		{
+			dependencies: ["531171ADA3A1A60B"]
+			description: ["Earth orbit: no air, no night, and the coldest shade you'll ever stand in. Chunk-load the station, or its machines stop the moment you fly home."]
+			icon: "grindless:station_truss_casing"
+			id: "75745AD963ECB5C8"
+			rewards: [{ id: "349D03BE358D5C31", type: "xp", xp: 100 }]
+			shape: "rsquare"
+			size: 1.25d
+			tasks: [{ dimension: "gcyr:overworld_orbit", id: "5CA94CD95613248B", type: "dimension" }]
+			title: "First Station"
+			x: 10.0d
+			y: -3.0d
+		}
+		{
+			dependencies: ["75745AD963ECB5C8"]
+			description: [
+				"Up here the Sun never sets, and the &6Orbital Solar Station&r makes the most of it: two wings of panels on a truss, and every panel that sees open sky pays. Send the power home through a LuV wireless dynamo hatch."
+				"It burns nothing, so nothing doubles it."
+			]
+			icon: "gtceu:orbital_solar_station"
+			id: "3F2030C8DDEDB9FF"
+			rewards: [
+				{ id: "39623E31E54F56E3", type: "xp", xp: 100 }
+				{ count: 2, id: "18F7447DC3B656EE", item: "gcyr:photovoltaic_cell", type: "item" }
+			]
+			shape: "gear"
+			size: 1.25d
+			tasks: [
+				{ id: "7DCDEB7079BC07A6", item: "gtceu:orbital_solar_station", type: "item" }
+				{ id: "32FE0E13005F7F83", item: "grindless:orbital_solar_panel", type: "item" }
+			]
+			title: "Endless Day"
+			x: 12.0d
+			y: -3.0d
+		}
+		{
+			dependencies: ["75745AD963ECB5C8"]
+			description: [
+				"On the ground ZBLAN glass crystallizes while it's drawn; up here it stays clear. The &6Microgravity Smelter&r draws it into optical pipe with no silver at all, foams metal into Whipple shield casing and melts naquadah alloy floating in a field, no crucible."
+				"Mix the ZBLAN at home in the Large Mixing Vessel: a normal mixer can't hold that much fluorine."
+			]
+			icon: "gtceu:microgravity_smelter"
+			id: "121BEE9B7E15DE8C"
+			rewards: [{ id: "3FF36420AFEFE3A2", type: "xp", xp: 100 }]
+			shape: "gear"
+			size: 1.25d
+			tasks: [
+				{ id: "36718AA56A92385A", item: "gtceu:microgravity_smelter", type: "item" }
+				{ id: "135209E83A9A320B", item: "gtceu:zblan_dust", type: "item" }
+				{ id: "3A96E3076111AE91", item: "gtceu:normal_optical_pipe", type: "item" }
+			]
+			title: "Fibre from Nothing"
+			x: 12.0d
+			y: -4.5d
+		}
+		{
+			dependencies: ["121BEE9B7E15DE8C"]
+			description: [
+				"Behind a disc flying through orbit, the vacuum is emptier than any chamber you could build. The &6Wake Shield Facility&r grows HPIC and UHPIC wafers there with half the source and half the time."
+				"Its disc is Whipple shield casing, so the smelter goes first. Give it germanium and it grows solar wafers too."
+			]
+			icon: "gtceu:wake_shield_facility"
+			id: "58EFB73E6DD24BDB"
+			rewards: [
+				{ id: "5917C4380DC0402D", type: "xp", xp: 100 }
+				{ count: 4, id: "3AEEC37901F33633", item: "gtceu:indium_gallium_phosphide_dust", type: "item" }
+			]
+			shape: "gear"
+			size: 1.25d
+			tasks: [
+				{ id: "54780AE195859BCD", item: "gtceu:wake_shield_facility", type: "item" }
+				{ id: "381B7ED8F85D18FD", item: "gtceu:uhpic_wafer", type: "item" }
+			]
+			title: "In the Wake"
+			x: 14.0d
+			y: -4.5d
+		}
+		{
+			dependencies: ["75745AD963ECB5C8"]
+			description: [
+				"With nothing stirring the melt, a crystal grows without flaws. The &6Zero-G Crystal Grower&r makes raw crystal chips every time instead of now and then, and much faster, with the same dopant GregTech asks for."
+				"Its sapphire test masses are for later; EMI says what for."
+			]
+			icon: "gtceu:zero_g_crystal_grower"
+			id: "18A794C8BAA71D81"
+			rewards: [
+				{ id: "79A3343DDCAA87FC", type: "xp", xp: 100 }
+				{ count: 16, id: "70CB42BE6A87A4A8", item: "gtceu:sapphire_dust", type: "item" }
+			]
+			shape: "gear"
+			size: 1.25d
+			tasks: [
+				{ id: "36BE5E6C87916B16", item: "gtceu:zero_g_crystal_grower", type: "item" }
+				{ id: "5132B223B09F2DD4", item: "grindless:sapphire_test_mass", type: "item" }
+			]
+			title: "Perfect Crystal"
+			x: 10.0d
+			y: -4.5d
+		}
+		{
+			dependencies: ["5933ADF51C8949BD"]
 			description: ["Elite motors and cryogenic fuel tanks make a level 4 rocket, and that reaches past Mars. Pack a landing kit every time: wireless energy covers and hatches, a couple of RTG cells in case, and a waystone."]
 			icon: "grindless:cryogenic_fuel_tank"
 			id: "3F76BCDB3BBA8FA4"
@@ -365,6 +481,29 @@
 			y: -3.0d
 		}
 		{
+			dependencies: ["5556DFCD2B6DD947"]
+			description: [
+				"The &6Rotating Hydroponic Ring&r spins for gravity, keeps the Sun on all the time and seals engineered crops away from the wild. The barley makes neurotrophic factor, the tobacco plant collagen, and neither seed gets eaten."
+				"Its hub turns on magnetic bearings: tetrataenite from the processor, wound at the magnet works."
+			]
+			icon: "gtceu:hydroponic_ring"
+			id: "569ED410C9F7ED07"
+			rewards: [
+				{ id: "7BBFDF8C1CE6C8A4", type: "xp", xp: 100 }
+				{ count: 4, id: "5DFAA661A5D85B49", item: "gtceu:carbon_dioxide_bucket", type: "item" }
+			]
+			shape: "gear"
+			size: 1.25d
+			tasks: [
+				{ id: "3030C275B47F38E4", item: "gtceu:hydroponic_ring", type: "item" }
+				{ count: 4L, id: "52A3F55D50675212", item: "grindless:magnetic_bearing", type: "item" }
+				{ id: "78575D16E11B112E", item: "grindless:neurotrophic_factor", type: "item" }
+			]
+			title: "Molecular Farm"
+			x: 20.0d
+			y: -3.0d
+		}
+		{
 			dependencies: ["3F76BCDB3BBA8FA4"]
 			description: [
 				"Io sits in Jupiter's radiation, and electronics there die young. Every machine on Io, on Europa and in Io's orbit carries &6Radiation Vault Casing&r: titanium, then tantalum, like Juno's vault. You'll be fine in the suit. The machines won't."
@@ -422,6 +561,22 @@
 			]
 			title: "Patera"
 			x: 18.0d
+			y: 0.0d
+		}
+		{
+			dependencies: ["5BC4BFE9A199F5A1"]
+			description: ["Io orbits inside a ring of plasma that turns with Jupiter, much faster than Io moves. The &6Flux-Tube Tether&r hangs a wire into it from a second station and collects the current. No ground and no fuel, only spools and a breath of Mars argon."]
+			icon: "gtceu:flux_tube_tether"
+			id: "122BA3AB5BF6C0A8"
+			rewards: [{ id: "15051E358546738E", type: "xp", xp: 120 }]
+			shape: "gear"
+			size: 1.25d
+			tasks: [
+				{ id: "544731B00313C131", item: "gtceu:flux_tube_tether", type: "item" }
+				{ id: "375C9CA3408AF5A4", item: "grindless:tether_spool", type: "item" }
+			]
+			title: "Riding the Torus"
+			x: 20.0d
 			y: 0.0d
 		}
 		{
@@ -486,6 +641,37 @@
 			y: 1.5d
 		}
 		{
+			dependencies: ["712723D264B9CFED"]
+			description: ["In orbit, neurons grow in three dimensions without a scaffold. The &6Organoid Lab&r turns stem cells, growth medium and the ring's neurotrophic factor into a neural organoid, and that into a neuro processing unit at LuV power. Nothing else makes an NPU before ZPM."]
+			icon: "gtceu:organoid_lab"
+			id: "7C67E4A7D55ABED5"
+			rewards: [{ id: "1AB884D956CE2276", type: "xp", xp: 120 }]
+			shape: "gear"
+			size: 1.25d
+			tasks: [
+				{ id: "10DDD5BEE2DAB461", item: "gtceu:organoid_lab", type: "item" }
+				{ id: "35811AF2F42B97B3", item: "grindless:neural_organoid", type: "item" }
+				{ id: "12E541587221B51A", item: "gtceu:neuro_processing_unit", type: "item" }
+			]
+			title: "Organoid"
+			x: 22.0d
+			y: 1.5d
+		}
+		{
+			dependencies: ["7C67E4A7D55ABED5"]
+			description: ["GT--'s circuit assembly line puts NPUs and crystal CPUs together into &6Wetware Processors&r, a whole batch a run on a single LuV energy hatch. Feed it from AE2 and let it keep a stock. ZPM goes through these like crisps."]
+			icon: "gtceu:wetware_processor"
+			id: "18ABE94D897A9D41"
+			rewards: [{ id: "3E1D1D0D9436F09A", type: "xp", xp: 150 }]
+			tasks: [
+				{ id: "3620F25A3417616E", item: "gtnn:circuit_assembly_line", type: "item" }
+				{ id: "1483D95C2A357591", item: "gtceu:wetware_processor", type: "item" }
+			]
+			title: "Living Circuits"
+			x: 24.0d
+			y: 1.5d
+		}
+		{
 			dependencies: ["3F76BCDB3BBA8FA4"]
 			description: ["Ganymede has no quakes, its own magnetic field and ice deep enough to bury things in. It's also cold enough that an old HV superconductor works with no cryostat at all. Tuff dug on the spot makes the &6Ganymedean Quantum Seed&r."]
 			icon: "grindless:ganymedean_quantum_seed"
@@ -497,6 +683,30 @@
 			]
 			title: "Quiet Moon"
 			x: 14.0d
+			y: 3.0d
+		}
+		{
+			dependencies: ["107CFEA9014148F1"]
+			description: [
+				"The &6Gravitational-Wave Detector&r is an L of vacuum tubes buried in packed or blue ice, with your sapphire test masses for mirrors. Put IV's Sagittarius A* signal in its bus, where it stays, and a long observing run writes the catalogue: two black holes merging, heard as a rising chirp."
+				"Copy the catalogue with a data orb. Plain ice won't do for the cover; it melts."
+			]
+			icon: "gtceu:gravitational_wave_detector"
+			id: "35A1D103C253B975"
+			rewards: [
+				{ id: "1DFB91A920604CAE", type: "xp", xp: 150 }
+				{ count: 2, id: "11C25DDFC0BBB9AC", item: "gtceu:data_orb", type: "item" }
+			]
+			shape: "gear"
+			size: 1.25d
+			tasks: [
+				{ id: "71F3EFA8ECC8E395", item: "gtceu:gravitational_wave_detector", type: "item" }
+				{ count: 4L, id: "3EE1921ACF052EFF", item: "grindless:sapphire_test_mass", type: "item" }
+				{ id: "50B13639D0F432D9", item: "grindless:sagittarius_a_star_signal", type: "item" }
+				{ id: "50424BD829866BAB", item: "grindless:gravitational_wave_catalogue", type: "item" }
+			]
+			title: "Chirp"
+			x: 16.0d
 			y: 3.0d
 		}
 		{
@@ -544,7 +754,7 @@
 			y: 3.0d
 		}
 		{
-			dependencies: ["5BC4BFE9A199F5A1"]
+			dependencies: ["122BA3AB5BF6C0A8"]
 			description: [
 				"GregTech's &6Fusion Reactor Mk1&r, built round your own HTS coils. Every energy hatch adds to the buffer that pays for a start, and europium needs a big start, so fit plenty of LuV hatches."
 				"At LuV it's a materials machine first: the old transmutations that faked osmium and uranium are gone, and calcium plasma from magnesium and oxygen is its power recipe."
@@ -594,6 +804,25 @@
 			]
 			title: "First Data Orb"
 			x: 26.0d
+			y: 0.0d
+		}
+		{
+			dependencies: ["32CEA916CCFD8B21"]
+			description: ["Trinium and naquadah alloy make the &6ZPM Machine Hull&r, and the ZPM energy hatch needs everything you learned out here. Bring the wetware, the catalogue and the Saturn chart along: the next trip starts in orbit and never touches the ground."]
+			icon: "gtceu:zpm_machine_hull"
+			id: "1753F1FE9C989F6C"
+			rewards: [{ id: "1B7CB0A9C60E380B", type: "xp", xp: 300 }]
+			shape: "diamond"
+			size: 1.75d
+			tasks: [
+				{ id: "709EC171192BC9C2", item: "gtceu:zpm_machine_hull", type: "item" }
+				{ id: "1F0C407C491B3392", item: "gtceu:zpm_energy_input_hatch", type: "item" }
+				{ count: 4L, id: "3725136E4B93C0ED", item: "gtceu:wetware_processor", type: "item" }
+				{ id: "76CAE5AB135101E8", item: "grindless:gravitational_wave_catalogue", type: "item" }
+				{ id: "157193B0F08CFE5F", item: "grindless:saturn_transfer_chart", type: "item" }
+			]
+			title: "Gate to ZPM"
+			x: 28.0d
 			y: 0.0d
 		}
 	]

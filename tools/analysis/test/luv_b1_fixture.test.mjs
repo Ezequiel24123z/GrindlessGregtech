@@ -8,7 +8,7 @@
 //   - the whole fixture runs in a simulated server with the pack's own startup tables, travel registrations, places, orbits, planets and
 //     airless weather scripts, B1's server recipes (luv/travel.js, through a recorder) and GCYR's planet files; stand-ins copy GCYR 0.2.9's
 //     rocket rule (floor((weakest motor + weakest tank)/2), the capacity is the tanks' sum) and vanilla's weather. Every check passes
-//     (stations SKIPPED while stations.json is disabled), the Overworld's weather is put back exactly, the band is left empty and the
+//     (the station stage reads stations.json; SKIPPED while it is disabled), the Overworld's weather is put back exactly, the band is left empty and the
 //     ticket released; with stations enabled, an occupied footprint, a wrong planet tier or a pair the script skips, only the matching
 //     checks fail and it still ends with DONE.
 import test from 'node:test';
@@ -23,7 +23,7 @@ const PACK = path.join(ROOT, 'pack');
 const KJS = path.join(PACK, 'kubejs');
 const FIXTURE = path.join(ROOT, 'tools', 'test', 'overlay', 'kubejs', 'server_scripts', 'gg_test_luv_b1.js');
 const SOURCE = fs.readFileSync(FIXTURE, 'utf8');
-const STARTUP = ['lib/places.js', 'lib/orbits.js', 'luv/travel.js'].map((f) => path.join(KJS, 'startup_scripts', 'grindless', f));
+const STARTUP = ['lib/places.js', 'lib/orbits.js', 'lib/stations.js', 'luv/travel.js'].map((f) => path.join(KJS, 'startup_scripts', 'grindless', f));
 const SERVER = ['moon/planets.js', 'space/airless_weather.js'].map((f) => path.join(KJS, 'server_scripts', 'grindless', f));
 const SERVER_TRAVEL = path.join(KJS, 'server_scripts', 'grindless', 'luv', 'travel.js');
 
@@ -332,6 +332,10 @@ function simulate(opts = {}) {
   for (const f of STARTUP) vm.runInContext(fs.readFileSync(f, 'utf8'), sandbox, { filename: path.basename(f) });
   for (const f of SERVER) vm.runInContext(fs.readFileSync(f, 'utf8'), sandbox, { filename: path.basename(f) });
   travel.tank = G.luvTravel.tank;
+  // what the station stage reads: the arrival assist's orbits (luv/orbit_arrival.js loads GCYR classes, so only its published list) and the
+  // hidden table's answer for the keycard (integration/hidden.js)
+  if (!opts.noArrival) G.orbitArrival = { dimensions: G.orbits.dimensions.slice() };
+  G.hidden = { isHidden: (id) => !!opts.keycardHidden && String(id) === 'gcyr:keycard' };
 
   // GCYR's tank from the startup registration (tier 5, 16000 mB), its elite motor (tier 3)
   blockRegistry[travel.tank.id] = new FuelTankBlock(travel.tank.id, travel.tank.tier, travel.tank.fuel, travel.tank.typeId);
@@ -370,7 +374,10 @@ function simulate(opts = {}) {
     recipes: { gtceu: new Proxy({}, { get: (_, type) => builder(String(type)) }) },
     custom(json) { const r = { kind: 'custom', json: JSON.parse(JSON.stringify(json)) }; recorded.push(r); return { id: (id) => { r.id = String(id); return r; } }; },
   };
-  sandbox.Item = { exists: (id) => !opts.missingItems || !opts.missingItems.includes(id) };
+  sandbox.Item = {
+    exists: (id) => !opts.missingItems || !opts.missingItems.includes(id),
+    of: (id) => ({ isEmpty: () => false, hasTag: (tag) => !!opts.keycardHidden && String(id) === 'gcyr:keycard' && /hidden/.test(String(tag)) }),
+  };
   sandbox.Fluid = { exists: () => true, of: (id, amount) => ({ id, amount }) };
   sandbox.ServerEvents.recipes = (fn) => fn(recipeEvent);
   vm.runInContext(fs.readFileSync(SERVER_TRAVEL, 'utf8'), sandbox, { filename: 'travel.js' });
@@ -388,6 +395,11 @@ function simulate(opts = {}) {
         getIngredients: () => new AL(r.json.ingredients.map((i) => ({ toJson: () => JSON.stringify(i) }))),
       };
     }
+  }
+
+  // GCYR's packager and package recipes and our ID chip's (the dump's ids)
+  for (const id of ['gcyr:shaped/space_station_packager', 'gcyr:assembler/space_station_package', 'grindless:gcyr/id_chip']) {
+    if (!(opts.missingRecipes || []).includes(id)) recipes[id] = gt([], [id]);
   }
 
   vm.runInContext(SOURCE, sandbox, { filename: 'gg_test_luv_b1.js' });
@@ -446,16 +458,18 @@ function assertInBand(r) {
   }
 }
 
-test('the whole fixture passes in a simulated server: every check, stations SKIPPED, weather restored, band left empty', () => {
+test('the whole fixture passes in a simulated server: every check, the station stage, weather restored, band left empty', () => {
   const r = simulate();
   assert.deepEqual(failed(r), []);
   const want = ['shared_registrations', 'dimension_tables', 'planet_belt', 'planet_jupiter', 'planet_io', 'planet_europa', 'planet_ganymede',
     'proxima_tier', 'levels', 'pair_tags', 'tank_block', 'tank_recipe', 'recipes_done', 'seed_io', 'pair_io', 'seed_europa', 'pair_europa',
     'seed_ganymede', 'pair_ganymede', 'truss_recipe', 'rocket_placed', 'weather_registry', 'terrain_belt', 'offworld_air_belt', 'terrain_io',
     'offworld_air_io', 'terrain_europa', 'offworld_air_europa', 'terrain_ganymede', 'offworld_air_ganymede', 'weather_earth_rain', 'weather_dry',
-    'weather_restored', 'rocket_formed', 'rocket_build', 'rocket_level4', 'rocket_capacity', 'rocket_europa_fuel', 'cleanup'];
+    'weather_restored', 'rocket_formed', 'rocket_build', 'rocket_level4', 'rocket_capacity', 'rocket_europa_fuel', 'cleanup',
+    'stations', 'station_orbits', 'station_recipes', 'keycard_shown', 'orbit_arrival'];
   for (const n of want) assert.equal(byName(r, n) && byName(r, n).status, 'PASS', n + ' ' + JSON.stringify(byName(r, n)));
-  assert.equal(byName(r, 'stations').status, 'SKIPPED');
+  assert.equal(byName(r, 'station_deploy').status, 'NOTE');
+  assert.match(byName(r, 'stations').detail, /G\.stations\.b7=tether/);
   assert.equal(byName(r, 'level4_flight').status, 'NOTE');
   assert.match(byName(r, 'weather_dry').detail, /gcyr:overworld_orbit/);
   assert.match(byName(r, 'rocket_capacity').detail, /32000 mB/);
@@ -477,9 +491,20 @@ test('a belt vein\'s GTM surface indicator on belt ground is read through; any o
   assertCleanAndRestored(foreign);
 });
 
-test('stations.json enabled without a station stage fails "stations" only, and the run still ends cleanly', () => {
-  const r = simulate({ stations: { enabled: true } });
-  assert.deepEqual(failed(r).map((x) => x.split(':')[0]), ['stations']);
+test('stations.json disabled: the station stage is SKIPPED and nothing else changes', () => {
+  const table = readJson(tablePath('kubejs/data/grindless/tables/stations.json'));
+  const r = simulate({ stations: { ...table, enabled: false } });
+  assert.deepEqual(failed(r), []);
+  assert.equal(byName(r, 'stations').status, 'SKIPPED');
+  for (const n of ['station_orbits', 'station_recipes', 'keycard_shown', 'orbit_arrival']) assert.equal(byName(r, n), undefined, n);
+  assertCleanAndRestored(r);
+});
+
+test('station wiring: a hidden keycard, a missing arrival assist or a missing packager recipe fails only its own check', () => {
+  assert.deepEqual(failed(simulate({ keycardHidden: true })).map((x) => x.split(':')[0]), ['keycard_shown']);
+  assert.deepEqual(failed(simulate({ noArrival: true })).map((x) => x.split(':')[0]), ['orbit_arrival']);
+  const r = simulate({ missingRecipes: ['gcyr:shaped/space_station_packager'] });
+  assert.deepEqual(failed(r).map((x) => x.split(':')[0]), ['station_recipes']);
   assertCleanAndRestored(r);
 });
 

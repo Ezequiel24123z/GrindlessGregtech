@@ -1,0 +1,5 @@
+{
+  "type": "emi:info",
+  "stacks": ["item:gcyr:keycard", "item:gcyr:space_station_package", "item:gcyr:space_station_packager", "item:gtceu:orbital_solar_station"],
+  "text": ["emi.grindless.info.space_station.0", "emi.grindless.info.space_station.1"]
+}

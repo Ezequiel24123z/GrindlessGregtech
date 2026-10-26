@@ -1841,6 +1841,50 @@
 			y: 58.5d
 		}
 		{
+			icon: "grindless:tether_spool"
+			id: "7AAFAA4A69A55537"
+			shape: "rsquare"
+			size: 1.0d
+			subtitle: "Used up now and then: about one an hour"
+			tasks: [
+				{ id: "589E3FB563FB948F", item: "grindless:tether_spool", optional_task: true, type: "item" }
+				{ id: "136C31E0EBFDD957", type: "checkmark" }
+			]
+			title: "Tether Spool"
+			x: 10.0d
+			y: 53.25d
+		}
+		{
+			icon: "gtceu:argon_bucket"
+			id: "5373B00D64582EE6"
+			shape: "rsquare"
+			size: 1.0d
+			subtitle: "Mars argon for the hollow cathode, 50 mB a run"
+			tasks: [
+				{ id: "3E3F507D27C43EC9", item: "gtceu:argon_bucket", optional_task: true, type: "item" }
+				{ id: "3046610EA3D69156", type: "checkmark" }
+			]
+			title: "Argon"
+			x: 10.0d
+			y: 54.75d
+		}
+		{
+			dependencies: ["7AAFAA4A69A55537", "5373B00D64582EE6"]
+			description: ["A bare tether through Jupiter's plasma torus drives a current, paid for by the planet's spin. Its power goes into the network."]
+			icon: "gtceu:flux_tube_tether"
+			id: "1CBE2CC0BC6711FA"
+			shape: "gear"
+			size: 1.5d
+			subtitle: "Io orbit only: 65,536 EU/t a spool cell, two cells, 131,072 EU/t"
+			tasks: [
+				{ id: "521140E0C5AAC3A5", item: "gtceu:flux_tube_tether", optional_task: true, type: "item" }
+				{ id: "7E446ADB38BF35AC", type: "checkmark" }
+			]
+			title: "Flux-Tube Tether"
+			x: 12.5d
+			y: 54.0d
+		}
+		{
 			icon: "grindless:hss_s_drill_bit"
 			id: "3E573BAEF42C6AC8"
 			shape: "rsquare"
