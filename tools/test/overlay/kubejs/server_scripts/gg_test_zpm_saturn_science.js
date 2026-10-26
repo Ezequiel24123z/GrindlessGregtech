@@ -91,7 +91,7 @@
     { name: 'ring_seismometer', x: X0 + 30, recipe: 'grindless:kronoseismology/saturn_interior_model', circuit: 1,
       roles: [['energy', ENERGY], ['input', 'gtceu:zpm_input_bus'], ['fluid', 'gtceu:zpm_input_hatch'], ['output', 'gtceu:zpm_output_bus']],
       items: ['gtceu:data_orb', 'grindless:saturn_transfer_chart'], fluidIn: ['gtceu:liquid_helium', 100],
-      outFluids: {}, outItems: { 'grindless:saturn_interior_model': 1 }, duration: 6000 }
+      outFluids: {}, outItems: { 'grindless:saturn_interior_model': 1 }, duration: 600 }
   ]  function place(m) {
     var desc = global.grindless.patterns.describe(m.id)
     var origin = null
@@ -257,7 +257,7 @@
       S.tick++
       S.copies.forEach(tickCopy)
       if (S.copies.every(function (m) { return m.phase === 'done' })) finish()
-      else if (S.tick > 7400) { check('deadline', false, '7400-tick fixture ceiling'); finish() }
+      else if (S.tick > 3400) { check('deadline', false, '3400-tick fixture ceiling'); finish() }
     } catch (e) {
       if (S === null) S = { server: event.server, failed: 0, worlds: [], finished: false }
       check('exception', false, String(e))

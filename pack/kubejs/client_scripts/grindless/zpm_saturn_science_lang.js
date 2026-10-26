@@ -14,7 +14,7 @@ ClientEvents.lang('en_us', event => {
     add('grindless.machine.plume_sampler.no_voiding', 'The sampler keeps its grains and brine. Disable voiding.')
 
     add('grindless.machine.ring_seismometer.tooltip.0', 'Reads Saturn\'s interior from the waves its oscillations raise in the C ring. Only works in Saturn orbit.')
-    add('grindless.machine.ring_seismometer.tooltip.1', 'Circuit 1: a data orb + the Saturn transfer chart (kept) + 100 mB liquid helium -> the Saturn interior model. Circuit 2: the interior model (kept) + a data orb -> the Uranus transfer chart. 122,880 EU/t (ZPM), 6,000 t.')
+    add('grindless.machine.ring_seismometer.tooltip.1', 'Circuit 1: a data orb + the Saturn transfer chart (kept) + 100 mB liquid helium -> the Saturn interior model. Circuit 2: the interior model (kept) + a data orb -> the Uranus transfer chart. 122,880 EU/t (ZPM), 600 t.')
     add('grindless.machine.ring_seismometer.tooltip.2', 'Needs: 1 or 2 energy hatches (ZPM), 1 or 2 input buses, 1 or 2 input hatches, 1 or 2 output buses, and 10 or more station truss casings in the floor. The photometer column stands in the middle.')
     add('grindless.machine.ring_seismometer.no_voiding', 'The seismometer keeps its data. Disable voiding.')
 })
@@ -33,7 +33,7 @@ ClientEvents.lang('es_es', event => {
     add('grindless.machine.plume_sampler.no_voiding', 'El muestreador conserva sus granos y su salmuera. Desactiva el descarte.')
 
     add('grindless.machine.ring_seismometer.tooltip.0', 'Lee el interior de Saturno en las ondas que sus oscilaciones levantan en el anillo C. Solo funciona en la órbita de Saturno.')
-    add('grindless.machine.ring_seismometer.tooltip.1', 'Circuito 1: una esfera de datos + la carta de transferencia a Saturno (se conserva) + 100 mB de helio líquido -> el modelo interior de Saturno. Circuito 2: el modelo interior (se conserva) + una esfera de datos -> la carta de transferencia a Urano. 122 880 EU/t (ZPM), 6 000 t.')
+    add('grindless.machine.ring_seismometer.tooltip.1', 'Circuito 1: una esfera de datos + la carta de transferencia a Saturno (se conserva) + 100 mB de helio líquido -> el modelo interior de Saturno. Circuito 2: el modelo interior (se conserva) + una esfera de datos -> la carta de transferencia a Urano. 122 880 EU/t (ZPM), 600 t.')
     add('grindless.machine.ring_seismometer.tooltip.2', 'Necesita: 1 o 2 escotillas de energía (ZPM), 1 o 2 buses de entrada, 1 o 2 escotillas de entrada, 1 o 2 buses de salida y 10 o más carcasas de armazón de estación en el suelo. La columna del fotómetro va en el centro.')
     add('grindless.machine.ring_seismometer.no_voiding', 'El sismómetro conserva sus datos. Desactiva el descarte.')
 })
