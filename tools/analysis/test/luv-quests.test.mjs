@@ -32,7 +32,7 @@ const NATIVE = new Set([
   'gtceu:sterilized_growth_medium_bucket', 'gtceu:stem_cells', 'gtceu:neuro_processing_unit', 'gtnn:circuit_assembly_line',
   'gtceu:wetware_processor', 'gtceu:zpm_machine_hull', 'gtceu:zpm_energy_input_hatch',
   // this pack's own, registered before LuV (same dump)
-  'grindless:outer_system_chart',
+  'grindless:outer_system_chart', 'grindless:sagittarius_a_star_signal',
 ]);
 // dimensions that exist without LuV-B1 (GCYR's own)
 const NATIVE_DIMENSIONS = new Set(['gcyr:overworld_orbit']);

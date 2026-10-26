@@ -26,7 +26,10 @@
 //   pair_<key>             grindless:transform/<adj>_entangled_singularity: 2 entangled singularities marked grindless_planet=<key>,
 //                          from the seed. The AE2 ritual itself is proven since EV and is not run.
 //   truss_recipe           grindless:assembler/station_truss_casing exists
-//   stations               SKIPPED while tables/stations.json says enabled=false (station stages wait for spike S0-3); FAIL if enabled
+//   stations               tables/stations.json enabled, first = Earth orbit, second an orbit of G.orbits, G.stations.b7 = tether
+//                          (SKIPPED when disabled); station_orbits both orbit levels load; station_recipes GCYR's packager, package
+//                          and our ID chip recipes are live; keycard_shown gcyr:keycard carries no hidden tag; orbit_arrival
+//                          G.orbitArrival covers exactly G.orbits; station_deploy NOTE: deployment is S0-3's native proof (R14)
 //                          (this fixture must then be extended) or missing
 //   terrain_<key>          the generated ground's top blocks belong to that place's surface rules (belt also: a floor surface at Y 50..80;
 //                          a belt vein's GTM surface indicator is read through and must lie on belt ground)
@@ -73,6 +76,9 @@
   var TANK_RECIPE = 'grindless:assembler/cryogenic_fuel_tank'
   var TRUSS_RECIPE = 'grindless:assembler/station_truss_casing'
   var STATIONS_TABLE = 'kubejs/data/grindless/tables/stations.json'
+  var KEYCARD = 'gcyr:keycard'
+  var HIDDEN_TAG = 'c:hidden_from_recipe_viewers'
+  var RECIPES_TAG = 'grindless:hidden_with_recipes'
   var EXPORT = 'kubejs/exported/luv_b1_terrain.json'
   // the blocks each surface's noise settings can put on top (ores are reported, never failed)
   var GROUND = {
@@ -361,16 +367,44 @@
     var truss = liveRecipe(TRUSS_RECIPE)
     check('truss_recipe', truss !== null, TRUSS_RECIPE + (truss ? ' -> ' + contentJson(truss.getOutputContents(L.ItemCap)) : ' missing'))
   }
+  // S0-3 passed natively (travel spikes R14, 0f2c69f: two deployments, landings with the orbit arrival assist, placement, borders, a
+  // steam cycle on the station, return, blocks and chests kept; R9: a disk save). This stage checks only the production wiring of that
+  // proof; the deployment itself is not repeated.
   function stationChecks() {
     var table = null
     try { table = S.G.readJsonTable(STATIONS_TABLE) } catch (e) { table = null }
     if (table === null || table === undefined) {
       check('stations', false, STATIONS_TABLE + ' missing: the station gate is required')
-    } else if (table.enabled === true) {
-      check('stations', false, STATIONS_TABLE + ' says enabled=true, but this fixture has no station stage yet: extend it with spike S0-3\'s proof')
-    } else {
-      emit('stations', 'SKIPPED', 'station stages wait for spike S0-3 (' + STATIONS_TABLE + ' enabled=' + table.enabled + '); not a failure')
+      return
     }
+    if (table.enabled !== true) {
+      emit('stations', 'SKIPPED', 'stations disabled (' + STATIONS_TABLE + ' enabled=' + table.enabled + '); not a failure')
+      return
+    }
+    var orbits = strings(S.G.orbits.dimensions)
+    var mode = S.G.stations ? String(S.G.stations.b7) : 'missing'
+    check('stations', String(table.first) === String(S.G.orbits.earth) && orbits.indexOf(String(table.second)) >= 0 && mode === 'tether',
+      STATIONS_TABLE + ': enabled, first=' + table.first + ' (Earth orbit ' + S.G.orbits.earth + '), second=' + table.second +
+      ', G.stations.b7=' + mode + ' (want tether)')
+    var levels = [table.first, table.second].map(function (d) {
+      var l = null
+      try { l = S.server.getLevel(String(d)) } catch (e) { l = null }
+      return String(d) + (l === null ? ' missing' : ' loaded')
+    })
+    check('station_orbits', levels.every(function (s) { return / loaded$/.test(s) }), levels.join(', '))
+    var pieces = ['gcyr:shaped/space_station_packager', 'gcyr:assembler/space_station_package', 'grindless:gcyr/id_chip']
+    var missing = pieces.filter(function (id) { return liveRecipe(id) === null })
+    check('station_recipes', missing.length === 0, pieces.join(', ') + (missing.length > 0 ? '; missing ' + missing.join(', ') : ''))
+    var card = Item.of(KEYCARD)
+    var tagged = card.hasTag(HIDDEN_TAG) === true || card.hasTag(RECIPES_TAG) === true
+    var hiddenTable = !!(S.G.hidden && typeof S.G.hidden.isHidden === 'function' && S.G.hidden.isHidden(KEYCARD))
+    check('keycard_shown', !card.isEmpty() && !tagged && !hiddenTable, KEYCARD + ': hidden tags ' + tagged + ', hidden table ' + hiddenTable)
+    var A = S.G.orbitArrival
+    var assist = A ? strings(A.dimensions) : []
+    check('orbit_arrival', !!A && assist.length === orbits.length && orbits.every(function (d) { return assist.indexOf(d) >= 0 }),
+      'G.orbitArrival dimensions ' + assist.join(',') + ' (want G.orbits: ' + orbits.join(',') + ')')
+    note('station_deploy', 'deployment, landing, placement, borders, a machine cycle and return are spike S0-3\'s native proof (R14, ' +
+      '0f2c69f); not repeated here')
   }
 
   // ---------------------------------------------------------------- terrain (read only)
