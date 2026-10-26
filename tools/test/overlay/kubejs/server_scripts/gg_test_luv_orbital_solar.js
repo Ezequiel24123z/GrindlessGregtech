@@ -216,6 +216,7 @@
     if (m.delta > 0) {
       var want = m.parallels === 63 ? PARTIAL : FULL
       if (m.delta === want && r && recipeEU(r) === want && Number(r.duration) === 400) m.good++
+      else if (m.boundary === 0 && m.parallels === 63 && m.delta === FULL) m.boundary = 1 // the 64-panel run's last tick, read after the 63-panel run started
       else m.bad++
     } else if (m.delta < 0) m.bad++
     if (m.drain && energy > 0) {
@@ -369,6 +370,7 @@
         check('restored_64', m.bad === 0 && m.parallels === 64, 'uncovering restarts generation at 40320 EU/t')
         cover(m, 1)
         m.partialGood = 0
+        m.boundary = 0
         phase('partial')
       } else if (elapsed > 160) throw new Error('restoring panels did not resume generation')
     } else if (S.phase === 'partial') {
@@ -376,7 +378,7 @@
       else if (m.partialGood > 0 && m.delta > 0) throw new Error('partial field did not remain at 63 panels')
       if (m.partialGood >= 40) {
         check('partial_63', m.bad === 0 && Number(S.A.litPanels(m.ctrl)) === 63,
-          'next run repriced to 63 x 630 = 39690 EU/t for 40 measured ticks')
+          'next run repriced to 63 x 630 = 39690 EU/t for 40 measured ticks; run boundary ticks ' + m.boundary + ', bad ticks ' + m.bad)
         m.ctrl.setWorkingEnabled(false)
         optionalWireless()
       } else if (elapsed > 520) throw new Error('next run did not adopt the 63-panel price')
