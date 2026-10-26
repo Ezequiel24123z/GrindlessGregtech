@@ -73,7 +73,7 @@
     var jlist = function (c) { return new ArrayList(c) }
 
     var hiddenItems = ['gtnn:circuit_assembly_line', 'gtceu:damascus_steel_ingot', 'gtca:scrap', 'gcyr:proxima_centauri_b_regolith']
-    var hiddenFluids = ['gtceu:molten_cerrobase_140', 'gtceu:molten_stainless_steel']
+    var hiddenFluids = ['gtceu:plutonium_based_liquid_fuel', 'gtceu:molten_stainless_steel']
     var shownItems = ['gtceu:perlite_dust', 'gtceu:obsidian_dust', 'gtceu:lv_sifter', 'gtceu:basalt_dust', 'gtceu:titanium_dust', 'gcyr:moon_sand',
       'gcyr:martian_rock', 'grindless:titanium_drill_bit', 'gtceu:naquadah_dust', 'gcyr:venus_rock', 'gtceu:raw_iridosmine', 'gtceu:uranium_235_dust']
     var shownFluids = ['gtceu:helium_3', 'gtceu:deuterium', 'gtceu:naquadah']

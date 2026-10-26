@@ -26,7 +26,6 @@
     "max"
   ],
   "groups": [
-    {"material":"cerrobase_140","until":"luv","reason":"molten cerrobase 140: only the GT-- circuit assembly line (LuV) asks for it, which integration/gtnn.js keeps, and nothing melts it (the dust does mix); its melting recipe arrives with LuV (decision of 2026-10-24)","items":["gtceu:molten_cerrobase_140_bucket"],"fluids":["gtceu:molten_cerrobase_140"]},
     {"material":"gcyr:airlock_door","until":"luv","reason":"GCYR satellites, beam receiver and station parts: docs/journey.md opens orbit in LuV; they have no recipe today","items":["gcyr:airlock_door"],"fluids":[]},
     {"material":"gcyr:beam_receiver","until":"luv","reason":"GCYR satellites, beam receiver and station parts: docs/journey.md opens orbit in LuV; they have no recipe today","items":["gcyr:beam_receiver"],"fluids":[]},
     {"material":"gcyr:empty_satellite","until":"luv","reason":"GCYR satellites, beam receiver and station parts: docs/journey.md opens orbit in LuV; they have no recipe today","items":["gcyr:empty_satellite"],"fluids":[]},
@@ -36,7 +35,7 @@
     {"material":"gcyr:laser_satellite","until":"luv","reason":"GCYR satellites, beam receiver and station parts: docs/journey.md opens orbit in LuV; they have no recipe today","items":["gcyr:laser_satellite"],"fluids":[]},
     {"material":"gcyr:ore_finder_satellite","until":"luv","reason":"GCYR satellites, beam receiver and station parts: docs/journey.md opens orbit in LuV; they have no recipe today","items":["gcyr:ore_finder_satellite"],"fluids":[]},
     {"material":"grindless:tether_spool","until":"luv","reason":"LuV-A1 registration (startup_scripts/grindless/luv/foundation.js): package B7, Io orbit, writes its recipes and then deletes this rule and its groups in hidden_until.json","items":["grindless:tether_spool"],"fluids":[]},
-    {"material":"gtnn:circuit_assembly_line","until":"luv","reason":"GT-- circuit assembly line (LuV): only missing molten cerrobase 140, which arrives with LuV","items":["gtnn:circuit_assembly_line"],"fluids":[]},
+    {"material":"gtnn:circuit_assembly_line","until":"luv","reason":"GT-- circuit assembly line (LuV): GT--'s assembly-line recipe takes a LuV circuit assembler and LuV parts at 30,720 EU/t; its molten cerrobase 140 comes from luv/circuit_line.js (grindless:fluid_heater/molten_cerrobase_140)","items":["gtnn:circuit_assembly_line"],"fluids":[]},
     {"material":"gcyr:space_elevator_support","until":"zpm","reason":"space elevator and its modules: docs/journey.md places it in ZPM; today GTCA gives no recipe for the modules (integration/gtca.js)","items":["gcyr:space_elevator_support"],"fluids":[]},
     {"material":"gtca:space_assembler_mki","until":"zpm","reason":"space elevator and its modules: docs/journey.md places it in ZPM; today GTCA gives no recipe for the modules (integration/gtca.js)","items":["gtca:space_assembler_mki"],"fluids":[]},
     {"material":"gtca:space_assembler_mkii","until":"zpm","reason":"space elevator and its modules: docs/journey.md places it in ZPM; today GTCA gives no recipe for the modules (integration/gtca.js)","items":["gtca:space_assembler_mkii"],"fluids":[]},

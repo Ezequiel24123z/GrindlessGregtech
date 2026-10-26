@@ -5,7 +5,7 @@
 //
 //   table           server_scripts/grindless/integration/hidden.js read kubejs/data/grindless/tables/hidden_until.json, is implemented up to IV
 //                   (C1's switch, 2026-10-25) and hides something
-//   tag_b / tag_c   later-era items and a fluid (a GCYR satellite and molten cerrobase 140, LuV; the space elevator, ZPM; Proxima b's
+//   tag_b / tag_c   later-era items and a fluid (a GCYR satellite, LuV; GT--'s plutonium fuel, UIV; the space elevator, ZPM; Proxima b's
 //                   regolith, UHV) and junk (scrap, damascus steel, molten stainless steel, GTCA's dead samarium-terbium branch, U-235's ore
 //                   forms) are in #c:hidden_from_recipe_viewers
 //   tag_recipes     they are in #grindless:hidden_with_recipes too (EMI hides their recipes); the old scheelite sample (keepRecipes) is not
@@ -74,10 +74,10 @@
       H.groups.length + ' groups in the table, ' + H.hidden.groups + ' hidden (' + H.hidden.items.length + ' items, ' + H.hidden.fluids.length +
       ' fluids), implemented up to ' + H.implementedEra)
 
-    check('tag_b', itemHidden('gcyr:gps_satellite') && fluidHidden('gtceu:molten_cerrobase_140') && itemHidden('gtca:space_elevator') &&
+    check('tag_b', itemHidden('gcyr:gps_satellite') && fluidHidden('gtceu:plutonium_based_liquid_fuel') && itemHidden('gtca:space_elevator') &&
       itemHidden('gcyr:proxima_centauri_b_regolith'),
-      'GCYR GPS satellite and molten cerrobase 140 (LuV), space elevator (ZPM), Proxima b regolith (UHV) hidden: ' + itemHidden('gcyr:gps_satellite') +
-      ' / ' + fluidHidden('gtceu:molten_cerrobase_140') + ' / ' + itemHidden('gtca:space_elevator') + ' / ' + itemHidden('gcyr:proxima_centauri_b_regolith'))
+      'GCYR GPS satellite (LuV), GT--\'s plutonium fuel (UIV), space elevator (ZPM), Proxima b regolith (UHV) hidden: ' + itemHidden('gcyr:gps_satellite') +
+      ' / ' + fluidHidden('gtceu:plutonium_based_liquid_fuel') + ' / ' + itemHidden('gtca:space_elevator') + ' / ' + itemHidden('gcyr:proxima_centauri_b_regolith'))
     check('tag_c', itemHidden('gtceu:damascus_steel_ingot') && itemHidden('gtca:scrap') && fluidHidden('gtceu:molten_stainless_steel') &&
       itemHidden('gtceu:terbium_dust') && itemHidden('gtca:samarium_terbium_mixture_dust') && itemHidden('gtceu:raw_uranium_235'),
       'damascus steel ingot, GTCA scrap, molten stainless steel, terbium, the samarium-terbium mixture hidden: ' + itemHidden('gtceu:damascus_steel_ingot') +
@@ -85,8 +85,8 @@
       itemHidden('gtca:samarium_terbium_mixture_dust') + ', raw U-235 (no vein) ' + itemHidden('gtceu:raw_uranium_235'))
     var withRecipes = ['gcyr:gps_satellite', 'gtceu:damascus_steel_ingot', 'gtca:scrap'].filter(function (id) { return itemHidden(id, RECIPES_TAG) })
     var legacy = 'grindless:vein_sample_scheelite'
-    check('tag_recipes', withRecipes.length === 3 && fluidHidden('gtceu:molten_cerrobase_140', RECIPES_TAG) && itemHidden(legacy) && !itemHidden(legacy, RECIPES_TAG),
-      'in #' + RECIPES_TAG + ': ' + withRecipes.join(', ') + ', fluid molten cerrobase 140 ' + fluidHidden('gtceu:molten_cerrobase_140', RECIPES_TAG) + '; old scheelite sample: #' +
+    check('tag_recipes', withRecipes.length === 3 && fluidHidden('gtceu:plutonium_based_liquid_fuel', RECIPES_TAG) && itemHidden(legacy) && !itemHidden(legacy, RECIPES_TAG),
+      'in #' + RECIPES_TAG + ': ' + withRecipes.join(', ') + ', fluid plutonium fuel ' + fluidHidden('gtceu:plutonium_based_liquid_fuel', RECIPES_TAG) + '; old scheelite sample: #' +
       TAG + ' ' + itemHidden(legacy) + ', #' + RECIPES_TAG + ' ' + itemHidden(legacy, RECIPES_TAG) + ' (its conversion stays in view)')
     // perlite (LV source), the Moon (HV: titanium, ilmenite, its ground and helium-3), Mars (EV) and IV (the End's uranium, Venus, Mercury)
     // are obtainable: never hidden
