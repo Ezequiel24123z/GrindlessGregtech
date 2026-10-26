@@ -113,10 +113,6 @@ file = "kubejs/assets/emi/recipe/additions/grindless/capacitor_cells.json"
 hash = "2c54188e7e6c34cae017eae126934bc046b747ad5b01b46d7ec730c2b276782c"
 
 [[files]]
-file = "kubejs/assets/emi/recipe/additions/grindless/deep_space_charts.json"
-hash = "b30e45dd30883f27c03ef2ed7a2540b39f78ad53548a3329ede7c6a6b9d811d6"
-
-[[files]]
 file = "kubejs/assets/emi/recipe/additions/grindless/heliostat_mirror.json"
 hash = "735bbc0646777b07c438bba4743516bb0f29cb4944c29db5d2b94d643c1f9b3d"
 
@@ -127,10 +123,6 @@ hash = "7064f69ddf85e92f4f20bf60e7d5d9839b1b848af7b1d13c4d361f56b9f7d25f"
 [[files]]
 file = "kubejs/assets/emi/recipe/additions/grindless/hologram_projector.json"
 hash = "bea7e2389a77cc3b92464944198882be16111a1ddfeaf9125a31b5f0585c6624"
-
-[[files]]
-file = "kubejs/assets/emi/recipe/additions/grindless/lunar_charts.json"
-hash = "8d7a8f5e5e63b83d2a8e9cc94a7866da1c7c6352a1aba5018a921f7443d01c98"
 
 [[files]]
 file = "kubejs/assets/emi/recipe/additions/grindless/night_sky_radiator.json"
@@ -151,10 +143,6 @@ hash = "c3d0a8fc47760fccf897f4c19f72ab1e55eeef5a1140a75d101737d55325595a"
 [[files]]
 file = "kubejs/assets/emi/recipe/additions/grindless/travel_keys.json"
 hash = "8d321702a4185fd914ce3a340dab477a324f3af6a504233e9216b6f189959691"
-
-[[files]]
-file = "kubejs/assets/emi/recipe/additions/grindless/vein_samples.json"
-hash = "8b1fd5d7372d25bf0563f9fff902827d2117b6185aa710b823c56c52268ea290"
 
 [[files]]
 file = "kubejs/assets/emi/recipe/additions/grindless/wireless_covers.json"
@@ -2134,7 +2122,7 @@ hash = "597286ab53fe25d3ed999a8c75d31f5a52741a4ba3e132008120686679cf8ca3"
 
 [[files]]
 file = "kubejs/client_scripts/grindless/emi_info_lang.js"
-hash = "bcd8739f08bb17cd50cda3c76513f4c07156941effbd2c212455012f8180714e"
+hash = "e46e4cbac8236185b9d3c3c13df8f87bbc3ab8396c0dade943c624076ed34e2f"
 
 [[files]]
 file = "kubejs/client_scripts/grindless/ev_ae2_interplanetary_lang.js"
