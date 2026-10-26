@@ -1,23 +1,36 @@
 {
-  "_source": "Our own table: the recipes of IV's naquadah plant, gtceu:naquadah_plant, type gtceu:naquadah_refining (docs/eras/iv.md, 'Naquadah plant', and 'Decisions taken with the raise', decision 10: the fluorine budget). The line is GT--'s (dev.arbor.gtnn.data.recipes.NaquadahLine, GT-- 1.3.10, in the GTNH style): the plans below name its live recipes, and their numbers are read from the loaded pack at every load. Real chemistry: fluoroantimonic acid (HSbF6, the strongest known superacid) from antimony trifluoride and HF; titanium trifluoride reduced by hydrogen; Pu-Be neutron sources (PuBe13).",
+  "_source": "Our own table: the recipes of IV's naquadah plant, gtceu:naquadah_plant, type gtceu:naquadah_refining (docs/eras/iv.md, 'Naquadah plant', and 'Decisions taken with the raise', decision 10: the fluorine budget). Mode 2 (LuV, package A2: docs/eras/luv.md, 'Naquadah plant, mode 2: the exact balance', decisions 5 and 21) is GT--'s enriched line with full recovery. The line is GT--'s (dev.arbor.gtnn.data.recipes.NaquadahLine, GT-- 1.3.10, in the GTNH style): the plans below name its live recipes, and their numbers are read from the loaded pack at every load. Real chemistry: fluoroantimonic acid (HSbF6, the strongest known superacid) from antimony trifluoride and HF; titanium trifluoride reduced by hydrogen; Pu-Be neutron sources (PuBe13).",
   "_how_it_is_used": [
     "Read by server_scripts/grindless/iv/naquadah_plant.js at every server load (a /reload picks up changes). Each entry of composed[] becomes one gtceu:naquadah_refining recipe, id grindless:naquadah_refining/<name> (GTM's builder puts the type in front). The smoke test gg_test_naquadah_plant.js checks the live recipe against the design.",
     "composed[]: server_scripts/grindless/lib/compose.js reads `stages` from the loaded recipes, uses up `given` (the batch) and nets every `linked` key to zero (keys: 'i:<item>' or 'f:<fluid>'). The recipe takes and gives what the whole line takes and gives, with the energy of every stage summed and spent at maxEUt (ceil(energy / maxEUt) ticks).",
     "Mode 1, naquadah (circuit 1): one batch is one run of GT--'s neutron activator (4 naquadah oxide mixture + 6,000 mB fluoroantimonic acid -> 2 naquadah + 2 TiF3 + gallium at 50 %), the acid made inside (fluoroantimonic_acid from SbF3 and HF, antimony_trifluoride from Sb2O3 and HF) and the TiF3 reduced inside (titanium_trifluoride_separation, 1,941 K: titanium and the HF back; the hot titanium ingot cooled in GTM's vacuum freezer). Antimony trioxide and HF go in; naquadah, titanium, gallium, the hydrogen the acid step lets go and water come out.",
-    "Mode 2 (enriched naquadah) is LuV: its chemical plant step runs at 30,720 EU/t and its last step is a 7,000 K blast furnace that needs naquadah coils (docs/eras/iv.md, 'Naquadah plant'). It is not built in IV.",
     "activator: GT--'s neutron activator recipe carries no EU (its neutron energy comes from neutron accelerator hatches, and the recipe only works while that energy is inside the window; outside it the inputs become radioactive waste). The plant replaces the window with the Pu-Be source in `source` (a chanced input: used up in `chance` of 10,000 batches) and charges the EU the accelerators spend to hold the window during one activator run, read as the stage's EU/t: decayEv / decayTicks / evPerEu (the neutron energy lost while the accelerators rest, paid back at the accelerators' eV per EU). Ramping a cold activator to the window once (220 MeV / 15 eV per EU, about 14.7 M EU) is not charged: a running line pays it once.",
-    "accelerator: GT-- 1.3.10 bytecode. NeutronAcceleratorMachine#consumeEnergy drains round(0.8 V) EU a tick from its buffer and returns that times (10 + nextInt(11)) eV: 15 eV per EU on average, at any tier. NeutronActivatorMachine#neutronEnergyUpdate adds it times getEfficiencyFactor (0.95^(height - 4); the smallest activator, height 4, loses nothing); #moderateUpdate takes 72,000 eV every 20 ticks while no accelerator works; #getRealRecipe checks the window (evRange 2300220: 220 to 230 MeV) when a run starts."
+    "accelerator: GT-- 1.3.10 bytecode. NeutronAcceleratorMachine#consumeEnergy drains round(0.8 V) EU a tick from its buffer and returns that times (10 + nextInt(11)) eV: 15 eV per EU on average, at any tier. NeutronActivatorMachine#neutronEnergyUpdate adds it times getEfficiencyFactor (0.95^(height - 4); the smallest activator, height 4, loses nothing); #moderateUpdate takes 72,000 eV every 20 ticks while no accelerator works; #getRealRecipe checks the window (evRange 2300220: 220 to 230 MeV) when a run starts.",
+    "Mode 2, enriched naquadah (circuit 2, LuV, maxEUt 30,720): one run is 4 batches of GT--'s chemical plant step (1,000 mB of xenon hexafluoro enriched naquadate each). Stages A to I of luv.md's table (oxide -> impure solution -> hexafluoride -> XeHFN -> chemical plant -> enriched solution + residue; mixer -> acidic solution -> neutron activator (window 460-480 MeV) -> sulfate + impure naquadria; residue -> dehydrator -> xenoauric acid + trinium sulfide -> electrolyzer), the HSbF6 remade inside (R1), the AuF3 remade from the gold with fluorine through BrF3 (R3a-c), the TiF3 reduced to titanium (T, then the vacuum freezer). Not R2 and not R4: the antimony and the Pd/C stay inside.",
+    "Mode 2, spent naquadah (circuit 3): reactor III's spent long naquadah rod, macerated (6 naquadah dust a run), through GT--'s naquadah_separation (S) and then the same stages (decision 21). S gives impure naquadria solution directly.",
+    "recovered: the free keys the plant keeps inside (lib/compose.js takes their net out of the balance): the antimony (SbF3 and the Sb2O3 of A stay as SbF5/HSbF6), the xenon (D reduces XeHFN with hydrogen and xenon is inert), the gold (the AuF3 is made again from it with paid fluorine) and the Pd/C catalyst. GT-- as it runs loses 500 mB of xenon, 0.5 gold, about 4.94 Sb2O3 and 1 Pd/C a batch. charges: what the recipe holds instead, not consumed (notConsumable / notConsumableFluid), except the catalyst's wear: wearPerBatch of 10,000 for each run of batchStage (1 % a batch, 4 % a circuit-2 run).",
+    "pins: every stage id is GT-- 1.3.10's (pack/mods/gtnn.pw.toml). A stage that is missing or empty (no inputs and no outputs) is an ERROR in the log and its mode is not built; `rejected` lists GT--'s four empty placeholders (NaquadahLine#remove: GTM's centrifuge steps the line replaces) a plan must never name. tools/analysis/test/naquadah-mode2.test.mjs composes both circuits from the pinned recipes (tools/analysis/fixtures/gtnn-1.3.10-naquadah-line.json, read from a native dump) and fails when the pin, the ids or the balance change (spike S0-11).",
+    "keep: the mode's recipes carry the data boolean grindless_naquadah_keep and the plant refuses voiding while it runs them (lib/no_voiding.js in the modifier and in beforeWorking): the impure naquadria solution is contained, the trinium sulfide and sulfate are kept. Mode 1 stays voidable.",
+    "tagItems: GT--'s chemical plant step names its catalyst by the tag forge:catalyst/palladium_on_carbon, whose item is gtnn:palladium_on_carbon_catalyst."
   ],
   "maxEUt": 7680,
   "modes": [
-    { "circuit": 1, "name": "naquadah" }
+    { "circuit": 1, "name": "naquadah" },
+    { "circuit": 2, "name": "enriched_naquadah" },
+    { "circuit": 3, "name": "spent_naquadah" }
   ],
-  "accelerator": {
-    "evPerEu": 15,
-    "decayEv": 72000,
-    "decayTicks": 20
-  },
+  "accelerator": { "evPerEu": 15, "decayEv": 72000, "decayTicks": 20 },
   "source": { "id": "grindless:pube_neutron_source", "chance": 100 },
+  "gtnnVersion": "1.3.10",
+  "rejected": [
+    "gtceu:centrifuge/impure_enriched_naquadah_solution_separation",
+    "gtceu:centrifuge/acidic_enriched_naquadah_separation",
+    "gtceu:centrifuge/acidic_naquadria_solution_separation",
+    "gtceu:centrifuge/impure_naquadria_solution_separation"
+  ],
+  "tagItems": {
+    "forge:catalyst/palladium_on_carbon": "gtnn:palladium_on_carbon_catalyst"
+  },
   "composed": [
     {
       "name": "naquadah",
@@ -30,8 +43,120 @@
         "gtceu:electric_blast_furnace/titanium_trifluoride_separation",
         "gtceu:vacuum_freezer/cool_hot_titanium_ingot"
       ],
-      "given": { "i:gtceu:naquadah_oxide_mixture_dust": 4 },
+      "given": {
+        "i:gtceu:naquadah_oxide_mixture_dust": 4
+      },
       "linked": ["f:gtceu:fluoroantimonic_acid", "i:gtceu:antimony_trifluoride_dust", "i:gtceu:titanium_trifluoride_dust", "i:gtceu:hot_titanium_ingot"]
+    },
+    {
+      "name": "enriched_naquadah",
+      "circuit": 2,
+      "maxEUt": 30720,
+      "keep": true,
+      "activator": "gtceu:neutron_activator/enriched_naquadah",
+      "batchStage": "gtceu:chemical_plant/enriched_naquadah_residue_solution",
+      "stages": [
+        "gtceu:large_chemical_reactor/enriched_naquadah_oxide_mixture",
+        "gtceu:large_chemical_reactor/hexafluoride_enriched_naquadah_solution",
+        "gtceu:large_chemical_reactor/xenon_hexafluoro_enriched_naquadate",
+        "gtceu:chemical_plant/enriched_naquadah_residue_solution",
+        "gtceu:mixer/enriched_naquadah_solution_separation",
+        "gtceu:neutron_activator/enriched_naquadah",
+        "gtceu:dehydrator/xenoauric_fluoroantimonic_acid",
+        "gtceu:electrolyzer/xenoauric_fluoroantimonic_acid",
+        "gtceu:large_chemical_reactor/fluoroantimonic_acid",
+        "gtceu:electrolyzer/gold_chloride",
+        "gtceu:large_chemical_reactor/bromine_trifluoride",
+        "gtceu:large_chemical_reactor/gold_chloride",
+        "gtceu:electric_blast_furnace/titanium_trifluoride_separation",
+        "gtceu:vacuum_freezer/cool_hot_titanium_ingot"
+      ],
+      "given": {
+        "i:gtceu:enriched_naquadah_oxide_mixture_dust": 4
+      },
+      "linked": [
+        "f:gtceu:impure_enriched_naquadah_solution",
+        "f:gtceu:hexafluoride_enriched_naquadah_solution",
+        "f:gtceu:xenon_hexafluoro_enriched_naquadate",
+        "f:gtceu:enriched_naquadah_solution",
+        "f:gtceu:acidic_enriched_naquadah_solution",
+        "f:gtceu:enriched_naquadah_residue_solution",
+        "f:gtceu:xenoauric_fluoroantimonic_acid",
+        "f:gtceu:fluoroantimonic_acid",
+        "i:gtceu:titanium_trifluoride_dust",
+        "i:gtceu:hot_titanium_ingot",
+        "f:gtceu:gold_chloride",
+        "f:gtceu:bromine_trifluoride",
+        "i:gtceu:gold_trifluoride_dust"
+      ],
+      "recovered": [
+        "i:gtceu:antimony_trifluoride_dust",
+        "i:gtceu:antimony_trioxide_dust",
+        "f:gtceu:xenon",
+        "i:gtceu:gold_dust",
+        "i:gtnn:palladium_on_carbon_catalyst"
+      ],
+      "charges": [
+        { "fluid": "gtceu:xenon", "amount": 1000 },
+        { "fluid": "gtceu:fluoroantimonic_acid", "amount": 2500 },
+        { "item": "gtceu:gold_trifluoride_dust", "count": 4 },
+        { "item": "gtnn:palladium_on_carbon_catalyst", "count": 1, "wearPerBatch": 100 }
+      ]
+    },
+    {
+      "name": "spent_naquadah",
+      "circuit": 3,
+      "maxEUt": 30720,
+      "keep": true,
+      "activator": "gtceu:neutron_activator/enriched_naquadah",
+      "batchStage": "gtceu:chemical_plant/enriched_naquadah_residue_solution",
+      "stages": [
+        "gtceu:large_chemical_reactor/naquadah_separation",
+        "gtceu:large_chemical_reactor/hexafluoride_enriched_naquadah_solution",
+        "gtceu:large_chemical_reactor/xenon_hexafluoro_enriched_naquadate",
+        "gtceu:chemical_plant/enriched_naquadah_residue_solution",
+        "gtceu:mixer/enriched_naquadah_solution_separation",
+        "gtceu:neutron_activator/enriched_naquadah",
+        "gtceu:dehydrator/xenoauric_fluoroantimonic_acid",
+        "gtceu:electrolyzer/xenoauric_fluoroantimonic_acid",
+        "gtceu:large_chemical_reactor/fluoroantimonic_acid",
+        "gtceu:electrolyzer/gold_chloride",
+        "gtceu:large_chemical_reactor/bromine_trifluoride",
+        "gtceu:large_chemical_reactor/gold_chloride",
+        "gtceu:electric_blast_furnace/titanium_trifluoride_separation",
+        "gtceu:vacuum_freezer/cool_hot_titanium_ingot"
+      ],
+      "given": {
+        "i:gtceu:naquadah_dust": 6
+      },
+      "linked": [
+        "f:gtceu:impure_enriched_naquadah_solution",
+        "f:gtceu:hexafluoride_enriched_naquadah_solution",
+        "f:gtceu:xenon_hexafluoro_enriched_naquadate",
+        "f:gtceu:enriched_naquadah_solution",
+        "f:gtceu:acidic_enriched_naquadah_solution",
+        "f:gtceu:enriched_naquadah_residue_solution",
+        "f:gtceu:xenoauric_fluoroantimonic_acid",
+        "f:gtceu:fluoroantimonic_acid",
+        "i:gtceu:titanium_trifluoride_dust",
+        "i:gtceu:hot_titanium_ingot",
+        "f:gtceu:gold_chloride",
+        "f:gtceu:bromine_trifluoride",
+        "i:gtceu:gold_trifluoride_dust"
+      ],
+      "recovered": [
+        "i:gtceu:antimony_trifluoride_dust",
+        "i:gtceu:antimony_trioxide_dust",
+        "f:gtceu:xenon",
+        "i:gtceu:gold_dust",
+        "i:gtnn:palladium_on_carbon_catalyst"
+      ],
+      "charges": [
+        { "fluid": "gtceu:xenon", "amount": 1000 },
+        { "fluid": "gtceu:fluoroantimonic_acid", "amount": 2500 },
+        { "item": "gtceu:gold_trifluoride_dust", "count": 4 },
+        { "item": "gtnn:palladium_on_carbon_catalyst", "count": 1, "wearPerBatch": 100 }
+      ]
     }
   ]
 }
