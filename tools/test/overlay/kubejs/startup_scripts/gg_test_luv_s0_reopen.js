@@ -1,4 +1,10 @@
-// TEST ONLY. One real Save/Quit -> same-save open in the existing client JVM.
+// TEST ONLY. Automatic lifecycle QUARANTINED before Save/Quit: R14 proved
+// loadLevel holds Rhino's callback lock while the new server needs that lock.
+// A future native client-thread handoff must run outside Rhino; a JS Runnable
+// queued with tell/execute is not that fix. The preserved flow below is not proof
+// of a safe handoff. The loaded server owner receives the explicit failure.
+//
+// Preserved design: one real Save/Quit -> same-save open in the existing JVM.
 // Dormant unless the flight owner's ConcurrentHashMap has hold=true and a
 // nonempty s0sReopenPending. Never starts a test, changes sound options, or calls
 // the server's ggLuvS0Stations.resume. On terminal worldless/partial-load failure
@@ -205,8 +211,9 @@
       need(isFinite(Number(snapshot.atMs)), 'snapshot has no original reopen deadline')
       state.since = Math.min(state.since, Number(snapshot.atMs))
       need(Date.now() - state.since < MAX_MS, '45 s reopen deadline expired before disconnect')
-      captureAndQuit(mc, snapshot)
-      return
+      throw new Error('automatic same-save lifecycle quarantined before Save/Quit: ' +
+        'native world loading inside a Rhino callback deadlocks server startup; ' +
+        'a native client-thread handoff outside Rhino is required')
     }
     if (state.phase === 'closing') {
       if (!worldless(mc)) return
