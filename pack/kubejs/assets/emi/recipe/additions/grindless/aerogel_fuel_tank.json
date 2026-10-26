@@ -1,0 +1,5 @@
+{
+  "type": "emi:info",
+  "stacks": ["item:grindless:aerogel_fuel_tank"],
+  "text": ["emi.grindless.info.aerogel_fuel_tank.0"]
+}

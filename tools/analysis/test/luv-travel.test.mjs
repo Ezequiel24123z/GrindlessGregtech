@@ -107,7 +107,7 @@ test('Jupiter is the tier 5 parent; its moons and the belt are tier 4; Proxima b
   }
   assert.ok(!('parent_world' in planet('asteroid_belt')));
   assert.equal(planet('asteroid_belt').rocket_tier, 4);
-  assert.equal(json('data/gcyr/gcyr/planets/proxima_centauri_b.json').rocket_tier, 5);
+  assert.equal(json('data/gcyr/gcyr/planets/proxima_centauri_b.json').rocket_tier, 8);
 });
 
 test('every place id is shared: places.json, orbits.json, planets.json and a dimension file each', () => {

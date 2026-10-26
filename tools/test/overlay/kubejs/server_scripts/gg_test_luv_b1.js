@@ -16,7 +16,7 @@
 //                          orbits G.orbits'
 //   planet_<key>           GCYR's PlanetData: world, orbit, parent world and rocket tier (belt 4, Jupiter 5 with no parent, Io/Europa/
 //                          Ganymede 4 under Jupiter's world), equal to luvTravel.planets
-//   proxima_tier           gcyr:proxima_centauri_b is rocket tier 5
+//   proxima_tier           gcyr:proxima_centauri_b is rocket tier 5 or more (ZPM-B1 raises it to 8)
 //   levels                 server.getLevel answers for all ten new dimensions
 //   pair_tags              planets.json: pairTag io/europa/ganymede/belt, none for jupiter
 //   tank_block             grindless:cryogenic_fuel_tank is GCYR's FuelTankBlock, getTier() 5, getTankProperties().getFuelStorage() 16000
@@ -257,7 +257,7 @@
         ' parent=' + parentWorld + ' tier=' + e.tier + ' (luvTravel tier ' + (meta ? meta.tier : 'missing') + ')')
     })
     var proxima = planetSummary(PD.getPlanet(rl(PROXIMA)))
-    check('proxima_tier', proxima !== null && proxima.tier === 5, PROXIMA + ' rocket_tier=' + (proxima === null ? 'missing' : proxima.tier) + ' (want 5)')
+    check('proxima_tier', proxima !== null && proxima.tier >= 5, PROXIMA + ' rocket_tier=' + (proxima === null ? 'missing' : proxima.tier) + ' (want 5 or more: ZPM-B1 raises it to 8)')
     var missing = D.all.filter(function (d) { var l = levelOf(d); return l === null || l === undefined })
     check('levels', D.all.length === 10 && missing.length === 0, D.all.length + ' new dimensions; server.getLevel missing for [' + missing.join(', ') + ']')
     var planets = S.G.planets.table.planets
