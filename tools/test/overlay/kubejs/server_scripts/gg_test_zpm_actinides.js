@@ -8,7 +8,8 @@
 //   zpm_actinides|registration  both recipe types with their IO sizes, both machines, the two GT materials, the F1 ids
 //   zpm_actinides|recipes       the five recipes plus the lanthanide nitrate reactor recipe under their final ids with the script's duration,
 //                               EU/t and ids; the crafting recipes
-//   zpm_actinides|gt_waste      GT--'s own recipes that take gtnn:radioactive_waste are still loaded (not removed)
+//   zpm_actinides|gt_waste      NOTE: the count of other namespaces' recipes touching gtnn:radioactive_waste (GT-- has none; the static test
+//                               proves none is removed)
 //   zpm_actinides|LOOKUP        GTM's lookup reaches each recipe of both types from its inputs (one recipe per lookup path)
 //   zpm_actinides|DESCRIPTION / PLACED / FORMED / PATTERN / PARTS   the retrieval plant placed block by block and formed by itself
 //   zpm_actinides|PROCESS_retrieve  circuit 1 consumes 4 waste + 1,000 mB nitric acid and gives the exact outputs
@@ -260,7 +261,9 @@
         if (io.itemsIn.some(function (x) { return x.id === 'gtnn:radioactive_waste' }) || io.itemsOut.some(function (x) { return x.id === 'gtnn:radioactive_waste' })) waste.push(id)
       } catch (e) { /* not an item recipe */ }
     })
-    check('gt_waste', waste.length > 0, 'recipes of other namespaces touching gtnn:radioactive_waste still loaded=' + waste.length + ' ' + waste.slice(0, 4).join(','))
+    // GT-- 7.5.3 has no GT recipe of its own for the waste (only ours make it), so there is nothing to keep: a count, not a pass condition.
+    // That none is removed is the static test's (no event.remove in zpm/actinides.js).
+    note('gt_waste', 'recipes of other namespaces touching gtnn:radioactive_waste loaded=' + waste.length + ' ' + waste.slice(0, 4).join(','))
   }
 
   // ---------------------------------------------------------------- structure (same technique as gg_test_zpm_europium.js)
