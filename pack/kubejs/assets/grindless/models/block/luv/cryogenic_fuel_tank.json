@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:block/cube_column",
+  "textures": {
+    "end": "grindless:block/luv/cryogenic_fuel_tank_end",
+    "side": "grindless:block/luv/cryogenic_fuel_tank_side"
+  }
+}

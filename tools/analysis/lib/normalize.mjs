@@ -159,6 +159,28 @@ function pickOutput(parsed) {
   return parsed.alts.length > 0 ? parsed.alts[0] : null;
 }
 
+/**
+ * The research a GT output carries (GTM 7.5.3's scanner writes `assembly_line_research:{research_id:"..."}` on the data stick or orb;
+ * ResearchManager), or null. The NBT may come as SNBT text or as an object.
+ */
+export function researchIdOf(content) {
+  let found = null;
+  const visit = (x) => {
+    if (found || x === null || typeof x !== 'object') return;
+    if (typeof x.nbt === 'string') {
+      const m = /research_id\s*:\s*"([^"]+)"/.exec(x.nbt) || /research_id\s*:\s*([A-Za-z0-9_.:-]+)/.exec(x.nbt);
+      if (m) found = m[1];
+    }
+    const tag = x.nbt && typeof x.nbt === 'object' ? x.nbt : x.tag && typeof x.tag === 'object' ? x.tag : null;
+    if (!found && tag && tag.assembly_line_research && typeof tag.assembly_line_research.research_id === 'string') {
+      found = tag.assembly_line_research.research_id;
+    }
+    for (const v of Object.values(x)) if (!found && v && typeof v === 'object') visit(v);
+  };
+  visit(content);
+  return found;
+}
+
 function normalizeGT(out, j, ctx) {
   const { tags, st } = ctx;
   const nbtTyped = typedOf(ctx);
@@ -187,6 +209,9 @@ function normalizeGT(out, j, ctx) {
       const k = pickOutput(p);
       if (k) out.outputs.push({ key: k, chance: chance / maxChance, count: p.count });
       else out.warn.push('output with no item: ' + labelOf(p.tags, p.alts, p.bad));
+      // the assembly line's research: the scanned data stick names the research the line's recipes ask for (model.mjs)
+      const rid = researchIdOf(c.content);
+      if (rid) out.outputs.push({ key: 'research:' + rid, chance: chance / maxChance, count: 1 });
     } else if (cap === 'fluid') {
       const p = parseFluidIngredient(c.content, tags, st);
       const k = pickOutput(p);
@@ -212,6 +237,9 @@ function normalizeGT(out, j, ctx) {
     out.temp = j.data.ebf_temp;
     out.conditions.push({ type: 'ebf_temp', temperature: j.data.ebf_temp });
   }
+  // and the fusion reactor's start energy (GTM 7.5.3 FusionReactorMachine: a recipe whose eu_to_start is above what the ring's
+  // hatches store never starts; a tier config caps it with conditions.eu_to_start {field: "eu", max})
+  if (j.data && typeof j.data.eu_to_start === 'number') out.conditions.push({ type: 'eu_to_start', eu: j.data.eu_to_start });
   out.shape = 'gt';
   return out;
 }

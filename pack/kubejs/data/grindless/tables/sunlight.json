@@ -1,0 +1,24 @@
+{
+  "_source": "Our own table: docs/eras/luv.md, \"Sunlight: one authoritative table\" (decision 9 of 2026-10-25). The as-built rows repeat the values the EV and IV machines were built with (startup_scripts/grindless/ev/lunar_power_and_antenna.js, iv/mercury.js); tools/analysis/test/luv-foundation.test.mjs keeps them equal.",
+  "_how_it_is_used": [
+    "startup_scripts/grindless/luv/foundation.js loads it into global.grindless.tables.sunlight; G.sunlight.factor(dimension) gives a dimension's factor, or null where no solar machine works or the dimension is not listed. Every solar machine from LuV on reads it.",
+    "factor: sunlight against Earth's surface by day under a clear sky (1.0). A lit panel of the solar family gives 300 EU/t times its factor (the lunar array's base), times the machine's own cell bonus.",
+    "rule (new airless places): the Moon's 1.4 at 1 AU divided by the square of the distance in AU. As-built values stay as built.",
+    "when: day = only while the place is lit (GTM's daytime check where the place has a day cycle), always = sky exposure only (orbits are always midnight, fixed_time 18000, so no orbital machine uses a daytime condition), never = no solar machine.",
+    "status: reference, as_built (era), new (LuV), no_solar. The LuV places' ids (grindless:asteroid_belt, io, europa, ganymede) are the design's proposals and are final only after spike S0-1; this table does not register them.",
+    "Any other orbit: its planet's factor by the rule, always (for later stations); add its row when the station is built."
+  ],
+  "rule": { "referenceAirless": 1.4, "atAU": 1.0, "power": -2 },
+  "dimensions": {
+    "minecraft:overworld": { "factor": 1.0, "when": "day", "status": "reference", "note": "the family's reference: Earth's surface by day, clear sky" },
+    "gcyr:luna": { "factor": 1.4, "when": "day", "status": "as_built", "era": "ev", "distanceAU": 1.0 },
+    "gcyr:mars": { "factor": 0.43, "when": "day", "status": "as_built", "era": "ev", "distanceAU": 1.52 },
+    "gcyr:mercury": { "factor": 6.7, "when": "day", "status": "as_built", "era": "iv", "distanceAU": 0.387, "note": "the rule would give 9.3" },
+    "gcyr:venus": { "factor": null, "when": "never", "status": "no_solar", "note": "no solar machine: Venus has the heat engine" },
+    "gcyr:overworld_orbit": { "factor": 1.4, "when": "always", "status": "new", "era": "luv", "distanceAU": 1.0, "note": "sky exposure only (fixed_time 18000)" },
+    "grindless:asteroid_belt": { "factor": 0.19, "when": "day", "status": "new", "era": "luv", "distanceAU": 2.7, "note": "1.4 / 2.7^2; id final after spike S0-1" },
+    "grindless:io": { "factor": 0.052, "when": "day", "status": "new", "era": "luv", "distanceAU": 5.2, "note": "1.4 / 5.2^2; id final after spike S0-1" },
+    "grindless:europa": { "factor": 0.052, "when": "day", "status": "new", "era": "luv", "distanceAU": 5.2, "note": "1.4 / 5.2^2; id final after spike S0-1" },
+    "grindless:ganymede": { "factor": 0.052, "when": "day", "status": "new", "era": "luv", "distanceAU": 5.2, "note": "1.4 / 5.2^2; id final after spike S0-1" }
+  }
+}

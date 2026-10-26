@@ -7,3 +7,7 @@ tools/bin/
 /ftbquests_tree.txt
 
 tools/prism/out/
+# tools/Check-Fast.ps1 full logs (agents read the summary, not these)
+tools/.check-fast/
+# Test-ResourcePolicy.ps1's local dry run of a server restart (removed when it ends)
+tools/test/.restart-dryrun-*/

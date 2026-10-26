@@ -15,6 +15,9 @@
 //  4. The magmatic bee's block conversion cobblestone -> lava (renewable lava = free boiler fuel) and blackstone ->
 //     gilded blackstone (gold nuggets) are removed; the other conversions (water, ice, soul sand, crying obsidian,
 //     repairs) are harmless.
+//  4b. PB's own EBF recipe for the naquadah bee (gcteu:electric_blast_furnace/naquadah_bee: an osmium bee egg + a naquadah block
+//     -> a naquadah bee egg, 5,000 K; PB's namespace is spelled gcteu) is removed: the naquadah comb keeps no recipe for good
+//     (item 7), so the bee was a dead end that ate a naquadah block (docs/eras/iv.md, decision 4; package IV-B3).
 //  5. The advanced hives (productivebees:hives/advanced_<wood>_beehive, 14 woods) need an MV CIRCUIT instead of the campfire:
 //     a bee farm with Productive Bees hives is an MV build. Vanilla hives and bee cages still work earlier.
 //  6. The way back, through the GT CENTRIFUGE (30 s): for every ore (raw_materials, incl. iron, copper and gold; gtceu group), gem
@@ -93,6 +96,7 @@
     event.remove({ id: 'productivebees:honey_generator' })
     event.remove({ id: 'productivebees:block_conversion/cobble_to_lava' })
     event.remove({ id: 'productivebees:block_conversion/blackstone_to_gilded_blackstone' })
+    event.remove({ id: 'gcteu:electric_blast_furnace/naquadah_bee' })
 
     event.forEachRecipe({ id: /^productivebees:hives\/advanced_[a-z_]+_beehive$/ }, function (r) {
       var key = r.json.getAsJsonObject('key')

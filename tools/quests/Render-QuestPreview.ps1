@@ -8,7 +8,9 @@ Runs tools\quests\lint.mjs --export to get positions, dependencies and findings,
   - quests with their shape and size; green = start of the chapter, gold = milestone (size >= 1.5),
     grey with a dashed border = optional; red/orange outline = lint error/warning on that quest;
   - dependency lines with an arrow at the dependent end; red/orange = a lint rule complains about that line;
-  - dependencies on other chapters as a dashed stub from the left edge, labelled with the chapter.
+  - dependencies on other chapters as a dashed stub from the left edge, labelled with the chapter;
+  - quest links (quest_links) with a dashed teal outline, the linked quest's title and chapter, and in teal the lines FTB
+    Quests draws to them (every button of a dependency gets a line, links included), instead of a stub.
 
 .PARAMETER Chapter   Chapter file names (without .snbt). Default: all.
 .PARAMETER Book      Quest book folder. Default: pack\config\ftbquests\quests of this repo.
@@ -96,11 +98,15 @@ foreach ($ch in $model.chapters) {
     if ($qs.Count -eq 0) { continue }
     $byId = @{}
     foreach ($q in $qs) { $byId[$q.id] = $q }
-    $hasCross = @($qs | Where-Object { @($_.cross).Count -gt 0 }).Count -gt 0
-    $minX = ($qs | ForEach-Object { $_.x - $_.size / 2 } | Measure-Object -Minimum).Minimum - 1.2
-    $maxX = ($qs | ForEach-Object { $_.x + $_.size / 2 } | Measure-Object -Maximum).Maximum + 1.2
-    $minY = ($qs | ForEach-Object { $_.y - $_.size / 2 } | Measure-Object -Minimum).Minimum - 1.0
-    $maxY = ($qs | ForEach-Object { $_.y + $_.size / 2 } | Measure-Object -Maximum).Maximum + 1.4
+    # quest links (pl_* charts): drawn like quests, with a dashed teal outline
+    $lks = @($ch.links | Where-Object { $_ -ne $null })
+    foreach ($l in $lks) { $byId[$l.id] = $l }
+    $boxes = @($qs) + @($lks)
+    $hasCross = @($qs | Where-Object { @($_.cross | Where-Object { -not $_.viaLink }).Count -gt 0 }).Count -gt 0
+    $minX = ($boxes | ForEach-Object { $_.x - $_.size / 2 } | Measure-Object -Minimum).Minimum - 1.2
+    $maxX = ($boxes | ForEach-Object { $_.x + $_.size / 2 } | Measure-Object -Maximum).Maximum + 1.2
+    $minY = ($boxes | ForEach-Object { $_.y - $_.size / 2 } | Measure-Object -Minimum).Minimum - 1.0
+    $maxY = ($boxes | ForEach-Object { $_.y + $_.size / 2 } | Measure-Object -Maximum).Maximum + 1.4
     if ($hasCross) { $minX -= 3.0 }
     $s = [double]$Scale
     $wCells = $maxX - $minX; $hCells = $maxY - $minY
@@ -140,7 +146,7 @@ foreach ($ch in $model.chapters) {
     $stubPen.DashStyle = [System.Drawing.Drawing2D.DashStyle]::Dash
     foreach ($q in $qs) {
         $i = 0
-        foreach ($c in @($q.cross)) {
+        foreach ($c in @($q.cross | Where-Object { -not $_.viaLink })) {
             $y0 = (& $py $q.y) + $i * 12
             $g.DrawLine($stubPen, [float]4, [float]$y0, (& $px ($q.x - $q.size / 2)), (& $py $q.y))
             $g.DrawString(('<- ' + $c.chapter + ': ' + $c.title), $fontSmall, $grey, [float]6, [float]($y0 - $fontSize * 1.6))
@@ -169,6 +175,47 @@ foreach ($ch in $model.chapters) {
             $g.FillPolygon((New-Object System.Drawing.SolidBrush($col)), [System.Drawing.PointF[]]@($p1, $p2, $p3))
         }
         $pen.Dispose()
+    }
+
+    # lines to and from quest links (teal)
+    $linkCol = New-Color '#4FB3A9'
+    foreach ($e in @($ch.linkEdges | Where-Object { $_ -ne $null })) {
+        $a = $byId[$e.from]; $b = $byId[$e.to]
+        if (-not $a -or -not $b) { continue }
+        $pen = New-Object System.Drawing.Pen($linkCol, [float]([Math]::Max(1.5, 2 * $s / 56)))
+        $x1 = & $px $a.x; $y1 = & $py $a.y; $x2 = & $px $b.x; $y2 = & $py $b.y
+        $g.DrawLine($pen, $x1, $y1, $x2, $y2)
+        $len = [Math]::Sqrt(($x2 - $x1) * ($x2 - $x1) + ($y2 - $y1) * ($y2 - $y1))
+        if ($len -gt 1) {
+            $ux = ($x2 - $x1) / $len; $uy = ($y2 - $y1) / $len
+            $back = $b.size * $s / 2 * 0.95
+            $tx = $x2 - $ux * $back; $ty = $y2 - $uy * $back
+            $ah = 7 * $s / 56
+            $p1 = New-Object System.Drawing.PointF([float]$tx, [float]$ty)
+            $p2 = New-Object System.Drawing.PointF([float]($tx - $ux * $ah * 1.6 - $uy * $ah), [float]($ty - $uy * $ah * 1.6 + $ux * $ah))
+            $p3 = New-Object System.Drawing.PointF([float]($tx - $ux * $ah * 1.6 + $uy * $ah), [float]($ty - $uy * $ah * 1.6 - $ux * $ah))
+            $g.FillPolygon((New-Object System.Drawing.SolidBrush($linkCol)), [System.Drawing.PointF[]]@($p1, $p2, $p3))
+        }
+        $pen.Dispose()
+    }
+
+    # quest links: the linked quest's title and chapter, dashed teal outline
+    foreach ($l in $lks) {
+        $cx = & $px $l.x; $cy = & $py $l.y
+        $r = [float]($l.size * $s / 2 * 0.9)
+        $brush = New-Object System.Drawing.SolidBrush((New-Color '#2B5F5B'))
+        $pen = New-Object System.Drawing.Pen($linkCol, [float]2)
+        $pen.DashStyle = [System.Drawing.Drawing2D.DashStyle]::Dash
+        $pts = Get-ShapePoints $l.shape $cx $cy $r
+        if ($pts) { $g.FillPolygon($brush, $pts); $g.DrawPolygon($pen, $pts) }
+        else { $g.FillRectangle($brush, ($cx - $r), ($cy - $r), (2 * $r), (2 * $r)); $g.DrawRectangle($pen, ($cx - $r), ($cy - $r), (2 * $r), (2 * $r)) }
+        $boxW = [float]([Math]::Max(2.2, $l.size + 0.6) * $s)
+        $fmt = New-Object System.Drawing.StringFormat
+        $fmt.Alignment = [System.Drawing.StringAlignment]::Center
+        $fmt.Trimming = [System.Drawing.StringTrimming]::EllipsisWord
+        $lr = New-Object System.Drawing.RectangleF(($cx - $boxW / 2), ($cy + $r + 2), $boxW, [float]($fontSize * 3.2))
+        $g.DrawString(([string]$l.title + ' (' + [string]$l.chapter + ')'), $font, $white, $lr, $fmt)
+        $brush.Dispose(); $pen.Dispose()
     }
 
     # quests
@@ -208,6 +255,7 @@ foreach ($ch in $model.chapters) {
     $g.FillRectangle((New-Object System.Drawing.SolidBrush((New-Color '#15161A'))), 0, 0, $W, $header)
     $g.DrawString(([string]$ch.title + '   (' + $ch.filename + ')'), $fontHead, $white, [float]10, [float]8)
     $sub = "quests=$($qs.Count)   lint: $($ch.errors) errors, $($ch.warnings) warnings   green=start  gold=milestone  dashed=optional  red/orange=lint"
+    if ($lks.Count -gt 0) { $sub += "  teal dashed=quest link ($($lks.Count))" }
     $g.DrawString($sub, $fontHead2, $grey, [float]12, [float]36)
     $file = Join-Path $OutDir ($Prefix + $ch.filename + '.png')
     $bmp.Save($file, [System.Drawing.Imaging.ImageFormat]::Png)

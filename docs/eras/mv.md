@@ -197,7 +197,7 @@ No new mod is required: machines, recipe types and drill bits are KubeJS.
 - **Startup:** types `gtceu:ore_processing` and `gtceu:bio_distillation`; machines `ore_plant`, `biorefinery`, `mv_vein_drill` and `mv_greenhouse` with the pattern helper; `bores` gets the cap per step (LV 8, MV 16, plant 6); item `grindless:vanadium_steel_drill_bit`. LV's `widen` sets `greenhouse` to 2 input fluids (water and CO₂) and 1 output fluid (O₂).
 - **Server:** generate `ore_processing` from `OreProperty` and `bio_distillation` from the tower recipes with organic input; the vanadium steel drill bit goes into `BITS` in `lv/vein_drilling.js`; greenhouse variants with CO₂. Gate the mods in the table behind MV circuits.
 - **Config:** `config/gtceu.yaml` already enables `compat.energy.enableFEConverters`; `worldgen.oreVeins.infiniteBedrockOresFluids: true` is added. GTM hazards (`gameplay.hazardsEnabled`, on by default) stay on: the suit is part of the gate.
-- **Quests:** a chapter "MV Factory" with about 12, one per step, small reward and no recipe locks.
+- **Quests:** the "MV: The Far End" chapter, 49 quests since the 2026-10-25 voice pass (`docs/quests.md` section 14), with small rewards and no recipe locks.
 - **Tests:** (1) it starts; (2) the ore plant, biorefinery, vein drill and MV greenhouse form and process; (3) ore → dust + secondary outputs; logs → pyrolysis → fractions; sand → silicon → boule → wafers → HV circuit, and `-Tier mv` with no orphans.
 
 ## Risks and open questions

@@ -1,0 +1,5 @@
+{
+  "type": "emi:info",
+  "stacks": ["item:grindless:whipple_shield_casing"],
+  "text": ["emi.grindless.info.whipple_shield_casing.0"]
+}

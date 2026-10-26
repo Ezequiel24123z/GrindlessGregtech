@@ -70,7 +70,14 @@ export function checkBook(book, cfg, options = {}) {
   const only = options.chapters && options.chapters.length ? new Set(options.chapters) : null;
   const inScope = (ch) => !only || only.has(ch.filename);
   const manyOk = new Set((cfg.manyRewardsOk || []).map((e) => e.quest));
-  const quantityOk = new Set((cfg.quantityOk || []).map((e) => e.quest));
+  // chapter groups (and single chapters) whose quests give no reward on purpose
+  // (lint-config.json noRewardGroups: { groups: [titles], chapters: [file names], why })
+  const noRewardGroups = new Set(((cfg.noRewardGroups && cfg.noRewardGroups.groups) || []).map((t) => String(t)));
+  const noRewardChapters = new Set(((cfg.noRewardGroups && cfg.noRewardGroups.chapters) || []).map((t) => String(t)));
+  const rewardFree = (ch) => noRewardChapters.has(ch.filename) || noRewardGroups.has((book.groups.find((g) => g.id === ch.group) || {}).title);
+  // quantityOk: { quest, why } for one quest, or { chapter, why } for a whole chapter whose numbers are its point
+  const quantityOk = new Set((cfg.quantityOk || []).filter((e) => e.quest).map((e) => e.quest));
+  const quantityOkChapters = new Set((cfg.quantityOk || []).filter((e) => e.chapter).map((e) => e.chapter));
   const banned = (cfg.bannedPhrases || []).map((s) => s.toLowerCase());
 
   // ids used more than once anywhere in the book
@@ -104,6 +111,8 @@ export function checkBook(book, cfg, options = {}) {
     const across = (p) => (dir === 'ttb' ? p.x : p.y);
     const roots = ch.quests.filter((q) => q.deps.length === 0);
     const allowRoots = new Set((cfg.allowRoots && cfg.allowRoots[ch.filename]) || []);
+    // a quest that stands alone on purpose (a placeholder for something being built): allowIsolated: { <chapter>: [ids], _why... }
+    const allowIsolated = new Set((cfg.allowIsolated && cfg.allowIsolated[ch.filename]) || []);
     const dependents = new Map();
     for (const q of ch.quests) for (const d of q.deps) { if (!dependents.has(d)) dependents.set(d, []); dependents.get(d).push(q); }
 
@@ -112,7 +121,7 @@ export function checkBook(book, cfg, options = {}) {
     sortedRoots.slice(1).forEach((q) => { if (!allowRoots.has(q.id)) add('error', 'root', ch, q, `second starting point: "${questLabel(q)}" has no dependency (the chapter starts at "${questLabel(sortedRoots[0])}")`); });
 
     for (const q of ch.quests) {
-      if (q.deps.length === 0 && !(dependents.get(q.id) || []).length && ch.quests.length > 1) add('error', 'isolated', ch, q, 'floating quest: nothing leads to it and nothing hangs from it');
+      if (q.deps.length === 0 && !(dependents.get(q.id) || []).length && ch.quests.length > 1 && !allowIsolated.has(q.id)) add('error', 'isolated', ch, q, 'floating quest: nothing leads to it and nothing hangs from it');
       for (const d of q.deps) {
         if (d === q.id) add('error', 'self-dep', ch, q, 'depends on itself');
         else if (!book.questById.has(d)) add('error', 'missing-dep', ch, q, `depends on unknown quest id ${d}`);
@@ -215,9 +224,9 @@ export function checkBook(book, cfg, options = {}) {
       if (/[—–]/.test(text)) add('warn', 'text-dash', ch, q, 'long dash in the text: write two sentences instead');
       else if (/\s-\s/.test(text)) add('warn', 'text-dash', ch, q, '" - " used as a dash: write two sentences, or use a colon');
       const qty = /\b\d+\s*(?:x\s*)?(?:ingots?|plates?|dusts?|blocks?|bricks?|logs?|planks?|items?|mb|buckets?|stacks?|nuggets?|gems?|pieces?|cables?|wires?|rods?|bolts?|screws?|gears?|casings?|ores?)\b|\bx\s?\d+\b/i.exec(text);
-      if (qty && !quantityOk.has(q.id)) add('warn', 'text-quantity', ch, q, `quantity in the text ("${qty[0]}"): counts go in the task or in EMI`);
+      if (qty && !quantityOk.has(q.id) && !quantityOkChapters.has(ch.filename)) add('warn', 'text-quantity', ch, q, `quantity in the text ("${qty[0]}"): counts go in the task or in EMI`);
       const infoOnly = q.tasks.length > 0 && q.tasks.every((t) => t.type === 'checkmark');
-      if (q.rewards.length === 0 && !infoOnly) add('warn', 'no-reward', ch, q, 'no reward (rule: every quest gives a small one)');
+      if (q.rewards.length === 0 && !infoOnly && !rewardFree(ch)) add('warn', 'no-reward', ch, q, 'no reward (rule: every quest gives a small one)');
       if (q.rewards.length > (cfg.maxRewardEntries ?? 6) && !manyOk.has(q.id)) add('warn', 'reward-entries', ch, q, `${q.rewards.length} rewards (max ${cfg.maxRewardEntries})`);
       for (const r of q.rewards) {
         const n = Number(r.count ?? (r.item && r.item.Count) ?? 1);

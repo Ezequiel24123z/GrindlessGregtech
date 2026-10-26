@@ -32,7 +32,7 @@
   var PICK_TARGET = { x: 4642, y: 99, z: 8 }
   var WALL = { x: 4646, y0: 99, y1: 101, z0: 7, z1: 9 }
   var WALL_SPOT = { x: 4644.5, y: 99, z: 8.5 }
-  var EXPECTED = { welcome: 16, steam_age: 47 }
+  var EXPECTED = { welcome: 15, steam_age: 44 }
   var ARRIVAL = '69BDA9FBB0EB66F2'
   var TOOLBOX = '047B55ED9C952BC9'
   var TOOLS = [
@@ -200,7 +200,7 @@
       check('claim_' + code, done && claimed === quest.getRewards().size(), '"' + quest.getTitle().getString() + '": completed=' + done +
         ', rewards claimed ' + claimed + '/' + quest.getRewards().size())
     })
-    check('arrival_items', invCount(p, 'minecraft:bread') >= bread0 + 8 && invCount(p, 'minecraft:torch') >= 16,
+    check('arrival_items', invCount(p, 'minecraft:bread') >= bread0 + 64 && invCount(p, 'minecraft:torch') >= 16,
       'bread ' + invCount(p, 'minecraft:bread') + ', torches ' + invCount(p, 'minecraft:torch') + ' in the inventory')
     var missing = TOOLS.filter(function (id) { return invSlot(p, id) < 0 })
     check('toolbox_items', missing.length === 0, missing.length === 0 ? 'all ' + TOOLS.length + ' tools in the inventory' : 'missing ' + missing.join(', '))

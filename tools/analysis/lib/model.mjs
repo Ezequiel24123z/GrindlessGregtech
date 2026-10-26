@@ -1,6 +1,7 @@
 // Builds the rule graph from the dump and the tier configuration.
 import { Graph } from './engine.mjs';
 import { fluidKey, normalizeRecipe } from './normalize.mjs';
+import { applyPackages } from './packages.mjs';
 import { abilityMaxCount, structureSelectors } from './structure.mjs';
 import { asArray, makeGlobMatcher } from './util.mjs';
 
@@ -31,6 +32,7 @@ export function prepareConfig(raw) {
   // Era rule (lib/eras.mjs): order of the eras, the resources each one brings, and the items that belong to it.
   cfg.era = raw.era || raw.tier;
   cfg.eraOrder = raw.eraOrder || [];
+  cfg.eraSiblings = raw.eraSiblings || [];
   cfg.eraResources = raw.eraResources || [];
   cfg.eraItems = raw.eraItems || [];
   // Obtainability audit (lib/obtain.mjs): items with NBT by type, bee recipes as rules, and keys/facts with no item
@@ -103,9 +105,13 @@ export function recipeTierOf(id) {
  * The pack's family veto (lv/multis.js): `vetoAbove: <tier>` skips the recipes filed under a folder above that tier
  * (`rules.isAboveTier`: the LV, MV and HV drills and greenhouses, the sealed dome); `onlyTier: <tier>` runs only that tier's folder
  * (`rules.recipeTier(recipe) !== tier`: the EV tripod), and `onlyTier: ""` only the recipes with no tier folder (the steam drill and
- * greenhouse, steam/machines.js, since 2026-10-25).
+ * greenhouse, steam/machines.js, since 2026-10-25). `onlyRecipes: [id globs]` (IV, 2026-10-25) runs only the recipes those globs
+ * name: two machines of one type and folder that veto each other's recipes by prefix (the pressurized drill takes only
+ * vein_drilling/iv/pressurized_*, the Mercury drill only vein_drilling/iv/mercury_*).
  */
 function tierAllows(e, recipeId) {
+  if (e.onlyRecipesMatch && !e.onlyRecipesMatch(recipeId)) return false;
+  if (e.exceptRecipesMatch && e.exceptRecipesMatch(recipeId)) return false;
   if (e.vetoAbove === undefined && e.onlyTier === undefined) return true;
   const t = recipeTierOf(recipeId);
   if (e.onlyTier !== undefined) return t === e.onlyTier;
@@ -146,15 +152,18 @@ function typesOfRegistered(dump, reg) {
   return set;
 }
 
-export function buildModel(dump, rawCfg) {
+export function buildModel(dump, rawCfg0) {
+  // packages still being built (lib/packages.mjs): their targets warn instead of failing until the dump carries them
+  const pk = applyPackages(rawCfg0, dump);
+  const rawCfg = pk.raw;
   const cfg = prepareConfig(rawCfg);
   const g = new Graph();
-  const warnings = [];
+  const warnings = [...pk.warnings];
   const st = { unresolved: new Set() };
   const stats = {
     recipes: dump.recipes.size, ignoredByType: {}, deadByType: {}, emptyIngredient: 0, badIngredient: 0,
     templateMissing: 0, rules: 0, structureMachines: 0, structureMachineIds: [], rolledMachines: [], veinTargets: 0, veinsWithoutItem: [],
-    partsNotRequired: [],
+    partsNotRequired: [], packages: pk.packages,
   };
 
   // 1) Normalized recipes
@@ -418,6 +427,18 @@ export function buildModel(dump, rawCfg) {
       const ok = TIER_NAMES.includes(e[f]) || (f === 'onlyTier' && e[f] === '');
       if (e[f] !== undefined && !ok) warnings.push(`${id}: ${f} «${e[f]}» isn't a tier (${TIER_NAMES.join(', ')}${f === 'onlyTier' ? ', or "" for the recipes with no tier folder' : ''})`);
     }
+    if (e0.onlyRecipes !== undefined) {
+      const globs = asArray(e0.onlyRecipes);
+      if (globs.length === 0) warnings.push(`${id}: onlyRecipes is empty: the machine runs no recipe`);
+      e = { ...e, onlyRecipesMatch: makeGlobMatcher(globs) };
+    }
+    // exceptRecipes (LuV, 2026-10-26): the recipes a machine's own modifier refuses although its type, voltage and folder allow them
+    // (the Universal Assembly Factory's HATCH_VOLTAGE_LOCKED: GTM's NPU on two LuV hatches, mv/leisure_factories.js)
+    if (e0.exceptRecipes !== undefined) {
+      const globs = asArray(e0.exceptRecipes);
+      if (globs.length === 0) warnings.push(`${id}: exceptRecipes is empty`);
+      e = { ...e, exceptRecipesMatch: makeGlobMatcher(globs) };
+    }
     entriesById.set(id, e);
     const reg = dump.machines.get(e.machine);
     if (dump.machines.size > 0 && e.machine.startsWith('gtceu:') && !reg && !e.optional) {
@@ -447,7 +468,7 @@ export function buildModel(dump, rawCfg) {
         }
       }
     };
-    if (!e.machine.startsWith('gtceu:')) checkIds([e.machine], 'the machine');
+    if (!e.machine.startsWith('gtceu:') && !(e.optional && dump.items.size > 0 && !dump.items.has(e.machine))) checkIds([e.machine], 'the machine');
     // partsFromStructure: parts come from the pattern description the pack dumps (structures.json); if the
     // dump doesn't carry it, the config's `parts` are used.
     let partSels = asArray(e.parts);
@@ -460,6 +481,14 @@ export function buildModel(dump, rawCfg) {
         const sd = structureSelectors(desc, abilityItems, (i) => dump.items.size === 0 || dump.items.has(i));
         for (const p of sd.problems) warnings.push(`${id}: ${p}`);
         partSels = sd.selectors;
+        // requireAbilities (IV, 2026-10-25): a variant built WITH an optional part its real pattern offers (a plant of ours formed with
+        // the IV parallel hatch); the pattern must have a cell for it
+        for (const ab of asArray(e.requireAbilities)) {
+          if (abilityMaxCount(desc, ab) === 0) warnings.push(`${id}: requireAbilities «${ab}»: ${e.machine}'s pattern has no part with that ability`);
+          const items = (abilityItems[ab] || []).filter((i) => dump.items.size === 0 || dump.items.has(i));
+          if (!abilityItems[ab]) warnings.push(`${id}: requireAbilities «${ab}» isn't in the config's partAbilities`);
+          partSels.push({ anyOf: items, label: `part «${ab}» (this variant's)` });
+        }
         partsFrom = 'structure';
         stats.structureMachines++;
         stats.structureMachineIds.push(e.machine);
@@ -491,8 +520,10 @@ export function buildModel(dump, rawCfg) {
     addRule(`operate:${id}`, 'machine-run', 'machine', runSlots, ['run:' + id], { maxEUt: e.maxEUt });
   }
 
-  // 4) Synthetic rules (production that isn't a recipe: boilers, the primitive pump...)
+  // 4) Synthetic rules (production that isn't a recipe: boilers, the primitive pump...). `recipesOf` ones (a generator's own
+  // recipe type) are added after the recipes, below: they copy each recipe's slots.
   for (const s of cfg.synthetic) {
+    if (s.recipesOf !== undefined) continue;
     const slots = [];
     const machineIds = asArray(s.machines);
     for (const m of machineIds) if (!entriesById.has(m)) warnings.push(`synthetic ${s.id}: machine ${m} isn't in machines`);
@@ -516,6 +547,7 @@ export function buildModel(dump, rawCfg) {
       let lbl = `machine for ${n.type}`;
       if (cands.length === 0) {
         if (all.length === 0) lbl = `there's no machine for ${n.type} in this tier`;
+        else if (all.some((e) => euOk(e) && tempOk(e) && (e.onlyRecipesMatch || e.exceptRecipesMatch))) lbl = `no ${n.type} machine of this tier takes ${n.id} (the family's veto: its tier folders and the machines' recipe allowlists)`;
         else if (all.some((e) => euOk(e) && tempOk(e))) lbl = `no ${n.type} machine of this tier runs the recipes filed under ${recipeTierOf(n.id)}/ (the family's tier veto)`;
         else if (all.some(euOk)) lbl = `no ${n.type} machine reaches ${n.temp} K (this tier's coils)`;
         else lbl = `no ${n.type} machine accepts ${n.eut} EU/t`;
@@ -559,6 +591,15 @@ export function buildModel(dump, rawCfg) {
       if (dimGroup.includes(c)) continue;
       const rule = cfg.conditions[c.type] || cfg.conditions['*'];
       if (!rule || rule.ignore || c.reverse === true) continue;
+      if (rule.researchKeys) {
+        // GTM's assembly line research (ResearchCondition; with machines.enableResearch the line's data access hatch only offers
+        // the recipes its data sticks name): met once the research exists, the research:<id> key a scanner recipe's data stick
+        // carries (normalize.mjs). Any of the condition's entries will do.
+        const ids = asArray(c.research).map((x) => (x && typeof x.researchId === 'string' ? x.researchId : null)).filter(Boolean);
+        if (ids.length === 0) slots.push(slotOf(['cond:' + c.type], true, `condition ${c.type} with no research id`, 'cond'));
+        else slots.push(slotOf(ids.map((id) => 'research:' + id), true, `research ${ids.join(' | ')}`, 'cond'));
+        continue;
+      }
       if (rule.unsupported) slots.push(slotOf(['cond:' + c.type], true, `condition ${c.type}`, 'cond'));
       else if (rule.needs || rule.needsByField) {
         // the condition is met with a built machine or item (the clean room): a capital slot. `needsByField`
@@ -589,6 +630,28 @@ export function buildModel(dump, rawCfg) {
       notDims: dimConds.filter((c) => c.reverse === true).map((c) => c.dimension),
     });
     ruleOfRecipe.set(n.id, rid);
+  }
+
+  // 5b) Generators of the pack's own recipe types (IV, 2026-10-25): `{id, recipesOf: [types], recipe?: [id globs], produces}` adds one
+  // rule per recipe of those types, named synthetic:<id>, with that recipe's slots (its machine, fuel, dimension and other conditions)
+  // and the synthetic's products (the energy key). The reactor's cores, the Venus engine's ground heat, the Mercury field's sunlight and
+  // the RTG's pellet are read from the dump, so a recipe that changes changes the source; `without: ["synthetic:<id>"]` drops them all.
+  for (const s of cfg.synthetic) {
+    if (s.recipesOf === undefined) continue;
+    const types = new Set(asArray(s.recipesOf));
+    const nameMatch = s.recipe ? makeGlobMatcher(asArray(s.recipe)) : null;
+    const outs = asArray(s.produces).flatMap((p) => resolve(p, s.id));
+    let count = 0;
+    for (const n of norm) {
+      if (!types.has(n.type) || (nameMatch && !nameMatch(n.id))) continue;
+      const rid = ruleOfRecipe.get(n.id);
+      if (rid === undefined) continue;
+      const rule = g.rules[rid];
+      const slots = rule.slots.map((slot) => ({ ...slot, alts: [...slot.alts] }));
+      addRule(`synthetic:${s.id}`, 'synthetic', 'synthetic', slots, outs, { note: s.note || '', recipe: n.id, dims: rule.meta.dims, notDims: rule.meta.notDims });
+      count++;
+    }
+    if (count === 0) warnings.push(`synthetic ${s.id}: no recipe of ${[...types].join(', ')}${s.recipe ? ` matching ${asArray(s.recipe).join(', ')}` : ''} in the pack`);
   }
   stats.rules = g.rules.length;
 

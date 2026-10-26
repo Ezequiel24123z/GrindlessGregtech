@@ -1,0 +1,27 @@
+{
+ "_source": "The native registry of the power-quests-1 bench run (2026-10-25, kubejs-exported/items.json, format gg-items-1: 34,559 items and 1,402 fluids): every block and fluid id that LuV B1's world noise settings (pack/kubejs/data/grindless/worldgen/noise_settings) name in a \"Name\" field; each one checked to be in that registry (blocks through their block item, minecraft:lava as a fluid).",
+ "_how_it_is_used": [
+  "tools/analysis/test/luv-worlds.test.mjs fails if a noise settings file names a block or fluid that is not in this list.",
+  "Adding a block to a world: check it in a native items.json first, then add it here. Never add an id that is not in a native registry export."
+ ],
+ "run": "power-quests-1",
+ "blocks": [
+  "biomesoplenty:black_sand",
+  "biomesoplenty:brimstone",
+  "biomesoplenty:brimstone_fumarole",
+  "minecraft:air",
+  "minecraft:basalt",
+  "minecraft:bedrock",
+  "minecraft:blue_ice",
+  "minecraft:cobbled_deepslate",
+  "minecraft:deepslate",
+  "minecraft:gravel",
+  "minecraft:magma_block",
+  "minecraft:packed_ice",
+  "minecraft:snow_block",
+  "minecraft:tuff"
+ ],
+ "fluids": [
+  "minecraft:lava"
+ ]
+}

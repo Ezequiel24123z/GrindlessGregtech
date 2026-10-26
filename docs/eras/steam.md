@@ -18,6 +18,22 @@ The game starts here, without electricity. Coke, bricks, bronze, boilers and ste
    - The **coke battery** (ours) cokes like 6 or 7 coke ovens and stores coal gas for LV.
 7. **Gate to LV.** LV Steam Turbine (`gtceu:lv_steam_turbine`), first LV circuit, LV Machine Hull and rubber-insulated tin cable. Once that works, the era is behind you.
 
+## Storage and furnaces
+
+Sophisticated Storage's metal tiers are tuned above stock: copper, iron and gold have 90, 108 and 162 inventory slots; diamond and netherite reach the engine's 180-slot cap. Metal upgrade slots double, as do limited barrels' per-slot capacities. Wood is unchanged.
+
+The pack raises only stock per-world config values, preserving customized values and existing contents. Placed single storages expand on load; existing double chests keep their saved size until tier-upgraded or rebuilt.
+
+Iron Furnaces adds ordinary fuel-burning furnace tiers at twice the mod's stock speed (netherite: 5 to 2 ticks per item). One coal still smelts eight items without augments. Tier upgrades retain contents; FE generator/factory augments, the wireless heater and Million/rainbow routes are disabled. These furnaces do not generate power or replace GT ore processing.
+
+## Building multiblocks
+
+The **Hologram Projector** (`grindless:hologram_projector`) is made at the crafting table with glass, bronze plates, redstone torches and redstone, using a screwdriver.
+
+Right-click an unformed controller to show its native GTM hologram for 30 seconds; click again to hide it. Sneak-right-click to place the default structural blocks from your inventory: casings, coils, glass, frames and pipes. It never places hatches, buses, mufflers or other GT machine parts, and leaves non-replaceable obstructions alone. Chat lists missing materials, obstructions and the cells left for parts. Formed controllers still open normally.
+
+Repeating patterns use their minimum size. GTM's preview renderer does not display mirroring; the structural build does follow the controller's actual mirroring. GTM's Terminal uses the same conservative placement rules and keeps its recipe and Workshop quest.
+
 ## Our multiblocks
 
 They are registered under `gtceu:` because that is how GTM registers machines. Our own items go under `grindless:`.
@@ -25,6 +41,8 @@ They are registered under `gtceu:` because that is how GTM registers machines. O
 ### Steam Vein Drill — `gtceu:steam_vein_drill`
 
 What it gains: unlimited ore, without moving to another vein. No single-block machine generates ore; the steam miner only collects the ore already in the world, and depletes it.
+
+**Virtual mining:** the sample selects an output recipe, not a deposit or coordinates. The Earth drill family generates the same Overworld resources in the Overworld, Flatland (`grindless:flat`) and Void (`grindless:void`), without a physical vein beneath it. A vein's depth in the table selects the required drill bit; it does not constrain the machine's height. Later planetary drills generate their resources in the required dimension, also without a physical vein. GTM's physical miners remain optional collectors, separate from this unlimited recipe-based family.
 
 - **Recipe type:** `gtceu:vein_drilling`. The electric drills from LV up will use the same type.
 - **Inputs of each recipe:**
