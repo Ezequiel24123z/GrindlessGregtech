@@ -22,6 +22,7 @@ ClientEvents.lang('en_us', event => {
     add('gtceu.recipe.grindless_naquadah_plant.naquadah', 'Mode 1: GT--\'s naquadah line in one pass; a Pu-Be source holds the neutron window')
     add('gtceu.recipe.grindless_naquadah_plant.enriched_naquadah', 'Mode 2: GT--\'s enriched naquadah line with full recovery; xenon, gold, antimony and the Pd/C catalyst stay inside')
     add('gtceu.recipe.grindless_naquadah_plant.spent_naquadah', 'Mode 2: spent naquadah rods re-enriched through GT--\'s naquadah separation, with full recovery')
+    add('gtceu.recipe.grindless_naquadah_plant.enriched_solution', 'Mode 3: enriched naquadah solution from the naquadria refinery turned into enriched naquadah dust, with the sulfuric acid sent back')
 })
 
 ClientEvents.lang('es_es', event => {
@@ -40,4 +41,5 @@ ClientEvents.lang('es_es', event => {
     add('gtceu.recipe.grindless_naquadah_plant.naquadah', 'Modo 1: la línea del naquadah de GT-- en una pasada; una fuente de Pu-Be mantiene la ventana de neutrones')
     add('gtceu.recipe.grindless_naquadah_plant.enriched_naquadah', 'Modo 2: la línea del naquadah enriquecido de GT-- con recuperación total; el xenón, el oro, el antimonio y el catalizador de Pd/C se quedan dentro')
     add('gtceu.recipe.grindless_naquadah_plant.spent_naquadah', 'Modo 2: barras de naquadah gastadas reenriquecidas por la separación del naquadah de GT--, con recuperación total')
+    add('gtceu.recipe.grindless_naquadah_plant.enriched_solution', 'Modo 3: solución de naquadah enriquecido de la refinería de naquadria convertida en polvo de naquadah enriquecido, devolviendo el ácido sulfúrico')
 })

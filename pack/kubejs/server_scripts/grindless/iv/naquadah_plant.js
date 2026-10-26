@@ -154,10 +154,40 @@
         given: p.given, linked: p.linked.map(String), recovered: list(p.recovered).map(String), charges: charges
       })
     })
+    // direct[]: recipes that are not composed from GT--'s line (ZPM-A2's circuit 4), on GTM's own ids, with their own circuit
+    var direct = []
+    list(t.direct).forEach(function (d) {
+      var n = String(d.name || '')
+      var c = Number(d.circuit)
+      var eut = Number(d.eut)
+      var duration = Number(d.duration)
+      var bad = false
+      var stack = function (x) {
+        if (String(x.id || '').indexOf(':') < 0 || !(Number(x.count) >= 1)) bad = true
+        return { id: String(x.id), count: Number(x.count) }
+      }
+      var fluid = function (f) {
+        if (String(f.id || '').indexOf(':') < 0 || !(Number(f.amount) >= 1)) bad = true
+        return { id: String(f.id), amount: Number(f.amount) }
+      }
+      var itemsIn = list(d.itemsIn).map(stack)
+      var itemsOut = list(d.itemsOut).map(stack)
+      var fluidsIn = list(d.fluidsIn).map(fluid)
+      var fluidsOut = list(d.fluidsOut).map(fluid)
+      if (!/^[a-z0-9_]+$/.test(n) || names[n] || !(c >= 1 && c <= 32) || circuits[c] || !(eut > 0) || eut % 1 !== 0 || !(duration > 0) || duration % 1 !== 0 ||
+        bad || itemsIn.length + fluidsIn.length === 0 || itemsOut.length + fluidsOut.length === 0) {
+        problems.push('direct ' + n + ': circuit ' + d.circuit + ' (each recipe needs its own), eut ' + d.eut + ', duration ' + d.duration + ' or its contents')
+        return
+      }
+      names[n] = true
+      circuits[c] = true
+      direct.push({ name: n, circuit: c, keep: d.keep === true, eut: eut, duration: duration, itemsIn: itemsIn, itemsOut: itemsOut, fluidsIn: fluidsIn,
+        fluidsOut: fluidsOut })
+    })
     // a problem in the table would silently drop a mode: an error, so the release check sees it
     if (problems.length > 0) console.error(LOG + 'naquadah plant: ' + TABLE + ': ' + problems.join('; '))
     return {
-      maxEut: maxEut > 0 ? maxEut : 7680, accelerator: accelerator, source: source, plans: plans, rejected: rejected, tagItems: tagItems,
+      maxEut: maxEut > 0 ? maxEut : 7680, accelerator: accelerator, source: source, plans: plans, direct: direct, rejected: rejected, tagItems: tagItems,
       gtnnVersion: String(t.gtnnVersion || '')
     }
   }
@@ -355,6 +385,27 @@
       console.info(LOG + 'naquadah_refining ' + rec.name + ' (circuit ' + rec.circuit + '): ' + rec.duration + ' t x ' + rec.eut + ' EU/t = ' + rec.energy +
         ' EU from ' + rec.sources.length + ' stages (' + rec.sourceEnergy + ' EU, the accelerators\' upkeep at ' + table.accelerator.upkeepEUt + ' EU/t)' +
         (rec.batches > 0 ? '; ' + rec.batches + ' batches' : '') + (rec.keep ? '; refuses voiding' : ''))
+    })
+    NP.directRecipes = []
+    table.direct.forEach(function (d) {
+      var rec = {
+        name: d.name, circuit: d.circuit, keep: d.keep, eut: d.eut, duration: d.duration, id: 'grindless:' + d.name,
+        recipeId: 'grindless:' + TYPE_PATH + '/' + d.name, charges: [], maxEut: d.eut, direct: true,
+        itemsIn: d.itemsIn.map(function (x) { return { id: x.id, count: x.count, chance: MAX_CHANCE } }),
+        itemsOut: d.itemsOut.map(function (x) { return { id: x.id, whole: x.count, chance: 0 } }),
+        fluidsIn: d.fluidsIn, fluidsOut: d.fluidsOut
+      }
+      var missing = missingIds(rec)
+      if (missing.length > 0) return skip(rec.name, 'unknown id(s): ' + missing.join(', '))
+      var tooBig = sizeProblem(rec)
+      if (tooBig !== null) return skip(rec.name, tooBig)
+      try {
+        add(event, rec)
+      } catch (e3) {
+        return skip(rec.name, 'the builder failed: ' + e3)
+      }
+      NP.directRecipes.push(rec)
+      console.info(LOG + 'naquadah_refining ' + rec.name + ' (circuit ' + rec.circuit + ', direct): ' + rec.duration + ' t x ' + rec.eut + ' EU/t' + (rec.keep ? '; refuses voiding' : ''))
     })
     console.info(LOG + 'naquadah plant: ' + NP.recipes.length + ' recipes composed from ' + NP.stagesRead + ' of ' + stageIds.length + ' live stages; skipped ' +
       NP.skipped.length)
