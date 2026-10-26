@@ -7,7 +7,7 @@ import { test } from 'node:test';
 import vm from 'node:vm';
 import { fileURLToPath } from 'node:url';
 import { DEFAULT_EXPECT, runCoverage } from '../emi-coverage.mjs';
-import { auditEmiCoverage, fixtureExpectations, loadEmiData, parseEmiStack, previewBlocks, renderCoverageText, renderExpectations } from '../lib/emi_coverage.mjs';
+import { auditEmiCoverage, conditionStacks, DIMENSION_MARKERS, fixtureExpectations, loadEmiData, parseEmiStack, previewBlocks, renderCoverageText, renderExpectations } from '../lib/emi_coverage.mjs';
 import { runPackScripts } from '../lib/kubejs_static.mjs';
 import { gf, gi, gt, mkDump, shaped } from './helpers.mjs';
 
@@ -140,6 +140,24 @@ test('every process of ours shows a recipe; a GT sub-category is the EMI tab its
   assert.equal(res.results.find((r) => r.key === 't:raw').used[0].category, 'gtceu:ore_crushing');
 });
 
+test('GTM turns a dimension condition into a marker input and research into a data catalyst; a disabled marker drops the recipe', () => {
+  assert.deepEqual(conditionStacks([
+    { type: 'dimension', dimension: 'gcyr:luna' }, { type: 'dimension', dimension: 'grindless:void' }, { type: 'daytime', reverse: true },
+    { type: 'research', research: [{ researchId: 'x', dataItem: { id: 'gtceu:data_orb', Count: 1 } }] }, { type: 'research', research: 'y' },
+  ]).map((s) => [s.role, s.alts]), [
+    ['input', ['gcyr:luna_marker']], ['input', ['minecraft:barrier']], ['catalyst', ['gtceu:data_orb']], ['catalyst', ['gtceu:data_stick']],
+  ]);
+  assert.deepEqual(conditionStacks([{ type: 'dimension', dimension: 't:moon' }], { dimensionMarkers: { 't:moon': 't:moon_marker' } })[0].alts, ['t:moon_marker']);
+  const draw = gt('t:drilling/moon', 'gtceu:drilling', { ins: [gi('t:sample', 1, 0)], outs: [gi('t:ore')], conditions: [{ type: 'dimension', dimension: 'gcyr:luna' }] });
+  const dump = mkDump({ recipes: [draw], items: ['gcyr:luna_marker'], tagsItem: { 't:hidden': ['gcyr:luna_marker'] } });
+  const registry = reg({ items: ['t:sample'], types: ['gtceu:drilling'] });
+  let res = audit({ dump, registry, emi: { ...noEmi, disabled: [parseEmiStack('#item:t:hidden')] }, cfg: { ...cfg0, exceptions: [{ id: 't:sample', role: 'acquisition', reason: 'x' }] } });
+  assert.deepEqual(res.droppedRoutes, [{ id: 't:drilling/moon', type: 'gtceu:drilling', disabledBy: ['dimension marker gcyr:luna_marker (gcyr:luna)'], ours: ['t:sample'] }]);
+  assert.deepEqual(gapsOf(res), { 't:sample': ['use'] });
+  // index-only (c:hidden_from_recipe_viewers, keepRecipes): the recipe stays
+  res = audit({ dump, registry, cfg: { ...cfg0, exceptions: [{ id: 't:sample', role: 'acquisition', reason: 'x' }] } });
+  assert.deepEqual([res.droppedRoutes, res.gaps], [[], []]);
+});
 test('EMI ingredient text: item:, fluid:, #item: and a bare id', () => {
   assert.deepEqual(parseEmiStack('item:grindless:end_key'), { kind: 'item', id: 'grindless:end_key' });
   assert.deepEqual(parseEmiStack('fluid:gtceu:heavy_water'), { kind: 'fluid', id: 'gtceu:heavy_water' });
@@ -219,6 +237,30 @@ test('EMI shows how every item, block, fluid and machine of the pack is obtained
   assert.ok(samples.length > 40);
   for (const r of charts) assert.ok(gtRecipe(r.made) && gtRecipe(r.used) && !r.made.some((m) => m.source === 'page'), r.key);
   for (const r of samples) assert.ok(gtRecipe(r.used) && !r.used.some((m) => m.source === 'page'), r.key);
+});
+
+test('the dimension markers of the old hidden table (disabled, not index-only) drop the 47 planet and End routes the native EMI run found', () => {
+  // before d6ee7d4 hidden_until.json disabled GTM's and GCYR's seven dimension markers; that change is the only one of the table, so
+  // disabling them again reproduces it. Native run 20261026-024353-client-44b found 47 missing routes.
+  const { dump, run } = packRun;
+  const emi = loadEmiData(path.join(root, 'pack'));
+  emi.disabled = [...emi.disabled, ...Object.values(DIMENSION_MARKERS).map((id) => ({ kind: 'item', id }))];
+  const old = auditEmiCoverage({ dump, registry: run.registry, cfg: JSON.parse(fs.readFileSync(path.join(here, '..', 'emi_coverage.json'), 'utf8')), emi, lang: run.lang });
+  assert.equal(old.droppedRoutes.length, 38, old.droppedRoutes.map((d) => d.id).join('\n'));
+  assert.ok(old.droppedRoutes.every((d) => d.disabledBy.every((b) => b.startsWith('dimension marker '))));
+  const now = new Map(fixtureExpectations(packRun.res).items.map((e) => [e.id, e]));
+  const lost = [];
+  for (const e of fixtureExpectations(old).items) {
+    const was = now.get(e.id);
+    for (const role of ['made', 'used']) for (const c of was[role]) if (!e[role].includes(c)) lost.push(`${e.id} ${role} in ${c}`);
+  }
+  assert.equal(lost.length, 47, lost.join('\n'));
+  for (const route of ['grindless:mars_chart made in gtceu:deep_space_tracking', 'grindless:vein_sample_ice_mars used in gtceu:vein_drilling',
+    'gtceu:liquid_nitrogen made in gtceu:cryogenic_processing', 'gtceu:heavy_water made in gtceu:detritiation',
+    'grindless:titanium_drill_bit used in gtceu:vein_drilling', 'grindless:martian_quantum_seed made in gtceu:chemical_reactor']) {
+    assert.ok(lost.includes(route), route);
+  }
+  assert.ok(old.gaps.length > 0 && old.problems.length >= old.droppedRoutes.length, 'the audit fails on it');
 });
 
 test('our info pages live where EMI reads them (the emi namespace) and every page is used', () => {
