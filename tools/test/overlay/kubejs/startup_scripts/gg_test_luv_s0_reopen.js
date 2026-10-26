@@ -24,6 +24,15 @@
 // One 45 s wall-clock deadline includes snapshot publication, closing and open.
 // Vanilla clearLevel/loadLevel can block the client thread; check the deadline
 // around them and on reentrant ticks, but do not interrupt vanilla save IO.
+//
+// mc-runtime-test 1.20.1-5.0.1 MixinMinecraft.tickHook runs at tick HEAD, before
+// Forge END. Its auto-create latches are initialized once per Minecraft instance,
+// set by the initial harness-created world and NEVER reset by clearLevel. Keep
+// that same client, including across the distinct worldless tick. With no player
+// or level the hook cannot auto-exit; native Pause/Title/loading/backup screens
+// protect the transition ticks. Refuse CLOSE_ANY_SCREEN and RUN_GAME_TESTS:
+// those public final controls would defeat this fixture's existing client hold.
+// No private latch access, reflection, system-property mutation or new client.
 ;(function () {
   if (!Platform.isClientEnvironment()) return
   var bridge = null
@@ -58,7 +67,8 @@
       Dirt: Java.loadClass('net.minecraft.client.gui.screens.GenericDirtMessageScreen'),
       Title: Java.loadClass('net.minecraft.client.gui.screens.TitleScreen'),
       Component: Java.loadClass('net.minecraft.network.chat.Component'),
-      LevelResource: Java.loadClass('net.minecraft.world.level.storage.LevelResource')
+      LevelResource: Java.loadClass('net.minecraft.world.level.storage.LevelResource'),
+      RuntimeTest: Java.loadClass('me.earth.mc_runtime_test.McRuntimeTest')
     }
     return J
   }
@@ -86,6 +96,10 @@
     need(!absent(mc.player) && !absent(mc.level) && !absent(server) &&
       String(mc.isLocalServer()) === 'true', 'not a loaded integrated-client save')
     need(String(server.isPublished()) === 'false', 'refusing a LAN-published save')
+    need(String(java().RuntimeTest.RUN_GAME_TESTS) === 'false' &&
+      String(java().RuntimeTest.CLOSE_ANY_SCREEN) === 'false',
+    'runtime-test HEAD hook is incompatible with the existing client hold')
+    state.clientIdentity = String(mc.hashCode())
     var save = root(server)
     var base = mc.getLevelSource().getBaseDir().toAbsolutePath().normalize()
     need(save.getParent() !== null && save.getParent().equals(base),
@@ -118,6 +132,10 @@
     }
   }
   function advance(mc) {
+    if (state.clientIdentity !== undefined) {
+      need(String(mc.hashCode()) === state.clientIdentity,
+        'Minecraft instance changed; runtime-test auto-create latches cannot be reused')
+    }
     if (state.phase !== 'opening') {
       need(value('s0sReopenPending') === state.token && value('hold') === 'true',
         'owner withdrew/changed the pending request or hold before opening')
@@ -134,6 +152,9 @@
       var snapshot = JSON.parse(raw)
       need(snapshot !== null && String(snapshot.reopenToken) === state.token,
         'snapshot token is missing or mismatched')
+      need(isFinite(Number(snapshot.atMs)), 'snapshot has no original reopen deadline')
+      state.since = Math.min(state.since, Number(snapshot.atMs))
+      need(Date.now() - state.since < MAX_MS, '45 s reopen deadline expired before disconnect')
       captureAndQuit(mc, snapshot)
       return
     }

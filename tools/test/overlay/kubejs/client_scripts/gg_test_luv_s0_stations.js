@@ -20,7 +20,8 @@
     var request = val(map, 's0sPackRequest')
     if (request && request !== lastPack) {
       try {
-        if (Gui === null) Gui = Java.loadClass('com.lowdragmc.lowdraglib.gui.modular.ModularUIGui')
+        // LDLib 1.0.40.b (embedded in GTM 7.5.3); ModularUIGui does not exist.
+        if (Gui === null) Gui = Java.loadClass('com.lowdragmc.lowdraglib.gui.modular.ModularUIGuiContainer')
         var screen = mc.currentScreen
         if (screen !== null && screen instanceof Gui &&
             String(Client.player.containerMenu.containerId) === val(map, 's0sPackMenu')) {
