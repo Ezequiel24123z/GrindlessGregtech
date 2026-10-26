@@ -162,8 +162,10 @@ function harness({ mode = 'named', dimension = ORBIT, extraOrbits = [], javaLook
   });
   const blocks = new Map();
   for (let x = 0; x < 3; x++) for (let z = 0; z < 3; z++) blocks.set(key(x, 64, z), { top: 1 });
+  const AIR = native({ isAir: () => true }, 'net.minecraft.world.level.block.state.BlockState');
   const blockState = (entry) => {
-    const state = { isAir: () => !entry };
+    if (!entry || entry.air === true) return AIR;
+    const state = { isAir: () => false };
     api(state,
       'getCollisionShape(net.minecraft.world.level.BlockGetter,net.minecraft.core.BlockPos,net.minecraft.world.phys.shapes.CollisionContext)',
       'm_60742_(net.minecraft.world.level.BlockGetter,net.minecraft.core.BlockPos,net.minecraft.world.phys.shapes.CollisionContext)',
@@ -175,7 +177,7 @@ function harness({ mode = 'named', dimension = ORBIT, extraOrbits = [], javaLook
         });
         return shape;
       });
-    return state;
+    return native(state, 'net.minecraft.world.level.block.state.BlockState');
   };
   const chunks = native({}, 'net.minecraft.server.level.ServerChunkCache');
   api(chunks, 'move(net.minecraft.server.level.ServerPlayer)', 'm_8385_(net.minecraft.server.level.ServerPlayer)',
@@ -185,27 +187,26 @@ function harness({ mode = 'named', dimension = ORBIT, extraOrbits = [], javaLook
     'm_8394_(net.minecraft.world.entity.Entity,net.minecraft.network.protocol.Packet)',
     (root, packet) => calls.push(['broadcast', root, packet]));
   const level = native({
-    dimension, worldBorder: border(), minHeight: -64, maxHeight: 700,
+    dimension, worldBorder: border(), minHeight: 0, maxHeight: 256,
     getDimensionKey() { return resourceKey(this.dimension); },
     getWorldBorder() { return this.worldBorder; },
     getMinBuildHeight() { return this.minHeight; },
     getMaxBuildHeight() { return this.maxHeight; },
-    getBlockState(pos) { return blockState(blocks.get(keyOf(pos))); },
+    getBlockState(pos) {
+      assert.ok(pos instanceof Pos);
+      const x = pos.getX(); const y = pos.getY(); const z = pos.getZ();
+      assert.ok([x, y, z].every(Number.isInteger), 'block queries require integral coordinates');
+      calls.push(['blockState', x, y, z]);
+      return blockState(blocks.get(keyOf(pos))); // Every other queried coordinate is actual AIR.
+    },
     getChunkSource() { return chunks; },
   }, 'net.minecraft.server.level.ServerLevel');
-  api(level, 'getHeight(net.minecraft.world.level.levelgen.Heightmap$Types,int,int)',
-    'm_6924_(net.minecraft.world.level.levelgen.Heightmap$Types,int,int)', (heightType, x, z) => {
-      assert.equal(heightType, 'WORLD_SURFACE');
-      calls.push(['height', x, z]);
-      return Math.max(level.minHeight, ...Array.from(blocks.keys()).map((k) => k.split(',').map(Number))
-        .filter(([bx, , bz]) => bx === x && bz === z).map(([, y]) => y + 1));
-    });
   api(level, 'noCollision(net.minecraft.world.entity.Entity,net.minecraft.world.phys.AABB)',
     'm_45756_(net.minecraft.world.entity.Entity,net.minecraft.world.phys.AABB)', (entity, bounds) => {
       calls.push(['collision', entity, bounds]);
       return !Array.from(blocks.entries()).some(([k, entry]) => {
         const [x, y, z] = k.split(',').map(Number);
-        return !entry.empty && intersects(bounds, new Bounds(x, y, z, x + 1, y + entry.top, z + 1));
+        return !entry.air && !entry.empty && intersects(bounds, new Bounds(x, y, z, x + 1, y + entry.top, z + 1));
       });
     });
   const position = (entity) => {
@@ -375,7 +376,6 @@ function harness({ mode = 'named', dimension = ORBIT, extraOrbits = [], javaLook
       },
     }),
     'net.minecraft.core.BlockPos': Pos,
-    'net.minecraft.world.level.levelgen.Heightmap$Types': { WORLD_SURFACE: 'WORLD_SURFACE' },
     'net.minecraft.world.phys.shapes.CollisionContext': {},
     'net.minecraft.core.Direction$Axis': { Y: 'Y' },
     'net.minecraft.world.phys.Vec3': Vec3,
@@ -425,6 +425,7 @@ for (const mode of ['named', 'srg', 'plain', 'plain-srg']) {
     assert.deepEqual(h.of('save').map(([, , tick]) => tick), [0, 10, 20, 30, 40],
       'proven launch NBT is sampled coarsely, never every tick');
     assert.equal(h.of('stackOf').length, 0, 'no target/config iteration before stall eligibility');
+    assert.equal(h.of('blockState').length, 0, 'no column scan before fresh stall/target authorization');
     assert.equal(h.of('rootTeleport').length, 0);
     h.players[0].age = 1; // Fixture rewinds local age: server tick, not age, is authoritative.
     h.tick(41);
@@ -453,6 +454,9 @@ for (const mode of ['named', 'srg', 'plain', 'plain-srg']) {
     assert.ok(events.indexOf('chunkMove') < events.indexOf('baseline'));
     assert.equal(h.of('broadcast')[0][2].kind, 'observerTeleport');
     assert.deepEqual(h.errors(), []);
+    assert.equal(h.of('blockState').length, h.level.maxHeight - 64);
+    assert.deepEqual(h.of('blockState')[0].slice(1), [0, h.level.maxHeight - 1, 0]);
+    assert.deepEqual(h.of('blockState').at(-1).slice(1), [0, 64, 0]);
     assert.deepEqual(h.missingGets, [], 'no absent class OR instance member may be read to discover absence');
     if (javaLookups) {
       assert.ok(h.missingProbes.some((p) => p.kind === 'instance') || mode === 'named');
@@ -483,13 +487,16 @@ for (const mode of ['named', 'srg', 'plain', 'plain-srg']) {
     for (const field of [`SUCCESS dimension=${ORBIT} station=0 rocket=${ROCKET_ID}`,
       'stalledServerTicks=41', 'oldRoot=[0,600,0]', 'newRoot=[0,65,0]',
       'oldBBoxFloor=600', 'newBBoxFloor=65', `originalAssociation=1/1->${ROCKET_ID}`,
-      `restoredAssociation=1/1->${ROCKET_ID}`, 'nativeLanding=unverified clientMount=unverified']) {
+      `restoredAssociation=1/1->${ROCKET_ID}`, 'columnOrigin=[0,63,0]',
+      'minBuildHeight=0 maxBuildHeight=256', 'blocksInspected=192 queryY=64 queryOutcome=highest-non-air',
+      'nativeLanding=unverified clientMount=unverified']) {
       assert.ok(log.includes(field), `missing native audit field ${field}`);
     }
     h.dwell(42, 200, () => { h.rocket.y = 600; });
     assert.equal(h.of('rootTeleport').length, 1, 'same stale client/hover state never relocates twice');
     assert.equal(h.of('save').length, 21, 'coarse launch observation continues only to detect genuine later launches');
     assert.equal(h.of('stackOf').length, 1, 'same stalled state never rereads/resolves a destination');
+    assert.equal(h.of('blockState').length, h.level.maxHeight - 64, 'same handled arrival never rescans');
     assert.equal(h.successes().length, 1);
   });
 }
@@ -809,7 +816,9 @@ test('a nonzero selected station uses its own native column, never existing stat
   h.dwell();
   assert.deepEqual(h.of('station').map(([, id]) => id), [23]);
   assert.deepEqual(h.of('origin').map(([, id]) => id), [23]);
-  assert.deepEqual(h.of('height').map(([, x, z]) => [x, z]), [[32, 0]]);
+  assert.ok(h.of('blockState').every(([, x, , z]) => x === 32 && z === 0), 'no lateral/default-column query');
+  assert.deepEqual(h.of('blockState')[0].slice(1), [32, h.level.maxHeight - 1, 0]);
+  assert.deepEqual(h.of('blockState').at(-1).slice(1), [32, 64, 0]);
   assert.deepEqual(h.of('rootTeleport').map(([, ...p]) => p), [[32, 65, 0]]);
   assert.match(h.successes()[0], /station=23/);
 });
@@ -881,6 +890,208 @@ test('saved-position chip overrides require typed XYZ and the exact orbit/select
   }
 });
 
+test('block mocks return data-shaped AIR at other queried Y and production has no heightmap dependency', () => {
+  assert.doesNotMatch(source, /Heightmap\$Types|WORLD_SURFACE|\bm_6924_\b|\bgetHeight\b/);
+  const h = harness({ mode: 'plain-srg', javaLookups: true });
+  assert.equal('getHeight' in h.level, false);
+  assert.equal('net.minecraft.world.level.levelgen.Heightmap$Types' in h.classes, false);
+  for (const y of [0, 17, 63, 65, 90, 255]) {
+    assert.equal(h.level.getBlockState(new h.Pos(0, y, 0)).isAir(), true, `unpopulated Y=${y}`);
+  }
+  assert.equal(h.level.getBlockState(new h.Pos(0, 64, 0)).isAir(), false);
+  h.blocks.set('0,90,0', { top: 0.5 });
+  assert.equal(h.level.getBlockState(new h.Pos(0, 90, 0)).isAir(), false);
+  h.blocks.delete('0,64,0');
+  assert.equal(h.level.getBlockState(new h.Pos(0, 64, 0)).isAir(), true);
+});
+
+test('actual selected-origin scan crosses air gaps to varied highest support heights, including minimum build Y', () => {
+  const rows = [
+    { min: 0, max: 256, layers: [0] },
+    { min: -64, max: 320, layers: [-64, 17, 101] },
+    { min: 0, max: 512, layers: [7, 132, 320] },
+    { min: -64, max: 320, layers: [-64] },
+    { min: -2032, max: 2032, layers: [-2032] },
+    { min: 0, max: 512, layers: [48, 180], top: 0.5, x: 32, z: -16 },
+  ];
+  for (const mode of ['named', 'srg', 'plain', 'plain-srg']) for (const row of rows) {
+    const h = harness({ mode, javaLookups: true });
+    const x = row.x ?? 0; const z = row.z ?? 0; const top = row.top ?? 1;
+    const highest = Math.max(...row.layers);
+    h.level.minHeight = row.min; h.level.maxHeight = row.max;
+    h.rocket.x = x; h.rocket.z = z;
+    h.records.get(0).origin = new h.Pos(x, 63, z);
+    h.blocks.clear();
+    for (const y of row.layers) for (let dx = 0; dx < 3; dx++) for (let dz = 0; dz < 3; dz++) {
+      h.blocks.set(`${x + dx},${y},${z + dz}`, { top });
+    }
+    h.blocks.set(`${x},${highest + 1},${z}`, { air: true, top: 1 }); // An explicit AIR entry is not support.
+    h.blocks.set(`${x + 5},${row.max - 1},${z + 5}`, { top: 1 }); // Never a lateral substitute.
+    const before = Array.from(h.blocks.entries());
+    h.dwell(0, 40);
+    assert.equal(h.of('blockState').length, 0, mode);
+    h.tick(41);
+    const queries = h.of('blockState');
+    assert.ok(queries.every(([, bx, , bz]) => bx === x && bz === z), mode);
+    assert.deepEqual(queries.map(([, , y]) => y),
+      Array.from({ length: row.max - highest }, (_, i) => row.max - 1 - i), mode);
+    assert.deepEqual(h.of('rootTeleport').map(([, ...p]) => p), [[x, highest + top, z]], mode);
+    assert.equal(h.players[0].y, highest + top + 4, 'the modeled native seat follows the actual surface');
+    assert.equal(h.players[0].vehicle, h.rocket, mode);
+    assert.equal(h.of('pair').length, 1, mode);
+    assert.deepEqual(h.errors(), [], mode);
+    assert.ok(h.successes()[0].includes(`blocksInspected=${queries.length} queryY=${highest} queryOutcome=highest-non-air`));
+    assert.deepEqual(Array.from(h.blocks.entries()), before, 'queries never create/replace support');
+    h.dwell(42, 120);
+    assert.equal(h.of('blockState').length, queries.length, 'a handled arrival never repeats its scan');
+    assert.equal(h.of('rootTeleport').length, 1);
+  }
+});
+
+test('the highest actual non-air block with no collision refuses lower deployed support, with scan evidence once', () => {
+  for (const mode of ['named', 'srg', 'plain', 'plain-srg']) {
+    const h = harness({ mode, javaLookups: true });
+    h.blocks.set('0,190,0', { top: 1, empty: true });
+    h.blocks.set('0,191,0', { air: true, top: 1 });
+    h.dwell(0, 140);
+    assert.deepEqual(h.of('blockState').map(([, , y]) => y), Array.from({ length: 66 }, (_, i) => 255 - i));
+    assert.equal(h.of('rootTeleport').length, 0);
+    assert.equal(h.of('zeroMotion').length, 0);
+    assert.equal(h.rocket.y, 600);
+    assert.equal(h.errors().length, 1);
+    assert.match(h.errors()[0], /highest column block has no collision support/);
+    assert.match(h.errors()[0], /columnOrigin=\[0,63,0\] minBuildHeight=0 maxBuildHeight=256/);
+    assert.match(h.errors()[0], /blocksInspected=66 queryY=190 queryOutcome=highest-non-air/);
+    assert.equal(h.successes().length, 0);
+  }
+});
+
+test('an entirely AIR selected column scans every in-range Y once, never outside/lateral support, and logs unambiguous absence', () => {
+  for (const mode of ['named', 'srg', 'plain', 'plain-srg']) for (const noOtherBlocks of [false, true]) {
+    const h = harness({ mode, javaLookups: true });
+    if (noOtherBlocks) h.blocks.clear();
+    else h.blocks.delete('0,64,0'); // Other deployed cells still cannot authorize an empty origin column.
+    h.blocks.set('0,-1,0', { top: 1 }); // Out-of-range sentinels, not legal support.
+    h.blocks.set('0,256,0', { top: 1 });
+    h.dwell(0, 140);
+    assert.equal(h.of('blockState').length, 256);
+    assert.ok(h.of('blockState').every(([, x, , z]) => x === 0 && z === 0));
+    assert.deepEqual(h.of('blockState').map(([, , y]) => y), Array.from({ length: 256 }, (_, i) => 255 - i));
+    assert.equal(h.of('rootTeleport').length, 0);
+    assert.equal(h.of('zeroMotion').length, 0);
+    assert.equal(h.errors().length, 1);
+    assert.match(h.errors()[0], /columnOrigin=\[0,63,0\] minBuildHeight=0 maxBuildHeight=256/);
+    assert.match(h.errors()[0], /blocksInspected=256 queryY=0 queryOutcome=all-air/);
+    assert.match(h.errors()[0], /no physical station column/);
+    assert.equal(h.successes().length, 0);
+  }
+});
+
+test('nonfinite, nonintegral, unreadable, reversed or vanilla-unsafe build bounds reject before any block query', () => {
+  const invalid = [
+    [NaN, 256], [0, NaN], [-Infinity, 256], [0, Infinity], [-0.5, 256], [0, 255.5],
+    [256, 256], [257, 256], [-2033, 256], [0, 2033], [-1e9, 1e9],
+    [null, 256], [0, null], [undefined, 256], [0, undefined], ['0', 256], [0, '256'], [false, 256], [0, true],
+    [Object('0'), 256], [0, Object('256')], [Object(false), 256], [0, Object(true)],
+    [Object(NaN), 256], [0, Object(Infinity)], [Object(-0.5), 256], [0, Object(2033)],
+  ];
+  for (const mode of ['named', 'srg', 'plain', 'plain-srg']) for (const [min, max] of invalid) {
+    const h = harness({ mode, javaLookups: true });
+    h.level.minHeight = min; h.level.maxHeight = max;
+    h.dwell(0, 120);
+    assert.equal(h.of('blockState').length, 0, `${mode}/${min}/${max}`);
+    assert.equal(h.of('collision').length, 0);
+    assert.equal(h.of('rootTeleport').length, 0);
+    assert.equal(h.of('zeroMotion').length, 0);
+    assert.equal(h.errors().length, 1);
+    for (const field of ['columnOrigin=[0,63,0]', `minBuildHeight=${min} maxBuildHeight=${max}`,
+      'blocksInspected=0 queryY=none queryOutcome=invalid-build-bounds', 'invalid column build bounds']) {
+      assert.ok(h.errors()[0].includes(field), field);
+    }
+    assert.equal(h.successes().length, 0);
+  }
+});
+
+test('wrapped numeric build bounds normalize before finite/integer checks and execute the full installed handler', () => {
+  // Coercion stand-ins, not proof of native Rhino execution. The Java-shaped object exposes
+  // numeric coercion/public Number behavior, while forbidding any getClass/reflection probe.
+  const wrappers = [
+    (value) => Object(value),
+    (value) => {
+      const wrapped = { valueOf: () => value, doubleValue: () => value, toString: () => String(value) };
+      Object.defineProperty(wrapped, Symbol.toStringTag, { value: 'JavaObject' });
+      Object.defineProperty(wrapped, 'getClass', { get() { throw new Error('getClass/reflection forbidden'); } });
+      return wrapped;
+    },
+  ];
+  for (const mode of ['named', 'srg', 'plain', 'plain-srg']) for (const wrap of wrappers) {
+    for (const which of ['min', 'max', 'both']) {
+      const h = harness({ mode, javaLookups: true });
+      if (which !== 'max') h.level.minHeight = wrap(0);
+      if (which !== 'min') h.level.maxHeight = wrap(256);
+      h.dwell(0, 120);
+      assert.deepEqual(h.errors(), [], `${mode}/${which}`);
+      assert.deepEqual(h.of('rootTeleport').map(([, ...p]) => p), [[0, 65, 0]], `${mode}/${which}`);
+      assert.equal(h.players[0].vehicle, h.rocket);
+      assert.equal(h.players[0].y, 69);
+      assert.equal(h.of('pair').length, 1);
+      assert.equal(h.of('blockState').length, 192, 'normalized bounds scan once through actual support');
+      assert.deepEqual(h.missingGets, []);
+      assert.equal(h.successes().length, 1);
+      assert.ok(h.successes()[0].includes('minBuildHeight=0 maxBuildHeight=256 blocksInspected=192'));
+    }
+  }
+});
+
+test('bounds/block/air query failures are attempted once, keep their original cause, and never claim physical absence', () => {
+  for (const mode of ['named', 'srg', 'plain', 'plain-srg']) {
+    for (const stage of ['bounds', 'block', 'air', 'unreadable-block', 'unreadable-air']) {
+      const h = harness({ mode, javaLookups: true });
+      const failure = new Error(`native ${stage} query began then failed`);
+      if (stage === 'bounds') {
+        h.level.getMaxBuildHeight = () => { h.calls.push(['queryFailure']); throw failure; };
+      } else {
+        const read = h.level.getBlockState;
+        h.level.getBlockState = (pos) => {
+          if (pos.getY() !== 253) return read(pos);
+          h.calls.push(['queryFailure']);
+          if (stage === 'block') throw failure;
+          read(pos);
+          if (stage === 'unreadable-block') return null;
+          return { isAir() { if (stage === 'air') throw failure; return undefined; } };
+        };
+      }
+      h.dwell(0, 140);
+      assert.equal(h.of('queryFailure').length, 1, `${mode}/${stage}`);
+      assert.equal(h.of('rootTeleport').length, 0);
+      assert.equal(h.of('zeroMotion').length, 0);
+      assert.equal(h.errors().length, 1);
+      assert.doesNotMatch(h.errors()[0], /no physical station column/);
+      if (['bounds', 'block', 'air'].includes(stage)) assert.ok(h.errors()[0].includes(failure.message));
+      const outcomes = { bounds: 'build-bounds-query-failed', block: 'block-query-failed', air: 'air-query-failed',
+        'unreadable-block': 'unreadable-block-state', 'unreadable-air': 'unreadable-air-result' };
+      const query = stage === 'bounds' ? `blocksInspected=0 queryY=none queryOutcome=${outcomes[stage]}` :
+        `blocksInspected=2 queryY=253 queryOutcome=${outcomes[stage]}`;
+      assert.ok(h.errors()[0].includes(query), `${mode}/${stage}`);
+      assert.match(h.errors()[0], /columnOrigin=\[0,63,0\] minBuildHeight=0 maxBuildHeight=/);
+      assert.equal(h.successes().length, 0);
+    }
+  }
+});
+
+test('the scan includes maxBuildHeight minus one but retains whole-box build-height refusal there', () => {
+  for (const mode of ['named', 'srg', 'plain', 'plain-srg']) {
+    const h = harness({ mode, javaLookups: true });
+    h.blocks.set('0,255,0', { top: 1 });
+    h.dwell(0, 120);
+    assert.deepEqual(h.of('blockState').map(([, ...p]) => p), [[0, 255, 0]]);
+    assert.equal(h.of('rootTeleport').length, 0);
+    assert.equal(h.errors().length, 1);
+    assert.match(h.errors()[0], /box outside build height/);
+    assert.equal(h.successes().length, 0);
+  }
+});
+
 test('no deployed column, collisionless top, obstructed rocket/rider, outside-column or border overflow fail closed/log once', () => {
   for (const change of [
     (h) => h.blocks.clear(),
@@ -892,7 +1103,7 @@ test('no deployed column, collisionless top, obstructed rocket/rider, outside-co
     (h) => { h.level.worldBorder = h.border(-100, 2.9); },
     (h) => { h.level.maxHeight = 69; }, // Root fits; whole native rider does not.
     (h) => h.blocks.set('0,64,0', { top: NaN }),
-    (h) => h.blocks.set('0,650,0', { top: 1 }), // Assist must not lift the root.
+    (h) => { h.level.maxHeight = 704; h.blocks.set('0,650,0', { top: 1 }); }, // Never lift the root, even in a taller allowed orbit.
   ]) {
     const h = harness(); change(h); h.dwell(0, 140);
     assert.equal(h.of('rootTeleport').length, 0);
