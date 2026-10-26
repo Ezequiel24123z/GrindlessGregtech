@@ -653,14 +653,15 @@
     check('old_limited_barrel', limit === 128 * 64 && kept === st.cobble && after === st.cobble + 4000 && Number(slotsOf(C).upg) === 4, 'limited iron barrel I: ' + limit +
       ' items per slot (stock ' + st.oldLimit + '), kept ' + kept + ' cobblestone, took 4,000 more through the item handler (' + after + ' now, ' +
       (rest.isEmpty() ? 'nothing' : sid(rest)) + ' refused), ' + slotsOf(C).upg + ' upgrade slots')
-    // automation: Forge's item handler capability of the chest sees and uses the new slots
+    // automation: Forge's item handler capability of the chest sees and uses the new slots (an empty ItemStack can read as null in
+    // KubeJS, so emptiness is isEmpty() and only the capability is null-checked)
     var capA = be(A).getCapability(cls().Caps.ITEM_HANDLER, null).orElse(null)
     var slots = capA === null ? -1 : Number(capA.getSlots())
     var left = capA === null ? null : capA.insertItem(100, Item.of('minecraft:diamond', 5), false)
     var back = capA === null ? null : capA.extractItem(100, 5, false)
-    check('automation_new_slots', slots === 108 && left !== null && left.isEmpty() && back !== null && String(back.getId()) === 'minecraft:diamond' && Number(back.getCount()) === 5,
-      'item handler: ' + slots + ' slots; 5 diamonds inserted into slot 100 (' + (left === null ? '?' : left.isEmpty() ? 'all in' : sid(left) + ' refused') + ') and taken out (' +
-      (back === null ? '?' : sid(back)) + ')')
+    check('automation_new_slots', capA !== null && slots === 108 && left.isEmpty() && String(back.getId()) === 'minecraft:diamond' && Number(back.getCount()) === 5,
+      'item handler: ' + slots + ' slots; 5 diamonds inserted into slot 100 (' + (capA === null ? '?' : left.isEmpty() ? 'all in' : sid(left) + ' refused') + ') and taken out (' +
+      (capA === null ? '?' : sid(back)) + ')')
     st.savedA2 = snapshot(A)
     return true
   }
