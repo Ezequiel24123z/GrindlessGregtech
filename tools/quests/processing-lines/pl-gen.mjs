@@ -1,7 +1,10 @@
 // Generates the Processing Lines chapters (pack/config/ftbquests/quests/chapters/pl_*.snbt) and the Power tab (power.snbt)
 // from the data files (pl-data-*.mjs, power-data.mjs).
 //
-//   node tools/quests/processing-lines/pl-gen.mjs [--only pl_lv,power] [--dry]
+//   node tools/quests/processing-lines/pl-gen.mjs [--only pl_lv,power] [--dry] [--print]
+//
+// --print writes nothing: the chapters' SNBT (with --only, just those) goes to stdout, the counts to stderr (the tests use it with
+// GG_STATIONS_TABLE, tools/quests/luv-stations.mjs, to draw pl_luv and power for each mode of tables/stations.json).
 //
 // Writes, in this checkout:
 //   - one chapter file per data file, in the book's format (tabs, LF, no BOM, keys sorted, inline task compounds);
@@ -20,7 +23,9 @@ const args = process.argv.slice(2);
 const opt = (name, def) => { const i = args.indexOf(name); return i >= 0 ? args[i + 1] : def; };
 const repo = REPO;
 const only = opt('--only', '') ? new Set(opt('--only', '').split(',')) : null;
-const dry = args.includes('--dry');
+const print = args.includes('--print');
+const dry = args.includes('--dry') || print;
+const log = print ? console.error : console.log;
 
 const esc = (s) => String(s).replace(/\\/g, '\\\\').replace(/"/g, '\\"');
 const str = (s) => '"' + esc(s) + '"';
@@ -253,8 +258,9 @@ for (const m of model.chapters) {
   const deps = quests.reduce((s, q) => s + q.deps.length, 0);
   const findings = layoutFindings(m);
   bad += findings.length;
-  console.log(`${m.file}: ${quests.length} quests, ${deps} dependencies, ${m.nodes.length - quests.length} links, ${m.lines.length} drawn lines, ${findings.length} layout findings`);
-  for (const f of findings) console.log('  ' + f);
+  log(`${m.file}: ${quests.length} quests, ${deps} dependencies, ${m.nodes.length - quests.length} links, ${m.lines.length} drawn lines, ${findings.length} layout findings`);
+  for (const f of findings) log('  ' + f);
+  if (print && (!only || only.has(m.file))) process.stdout.write(chapterSnbt(m));
   if (dry || (only && !only.has(m.file))) continue;
   fs.writeFileSync(path.join(book, 'chapters', m.file + '.snbt'), chapterSnbt(m));
 }

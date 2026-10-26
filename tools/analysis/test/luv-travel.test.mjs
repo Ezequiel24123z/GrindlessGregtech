@@ -231,7 +231,7 @@ test('airless weather covers every new dimension and Earth orbit, never Earth it
   assert.equal(new Set(dims).size, dims.length);
 });
 
-test('B1\'s hiding rule is gone; the station pieces wait for S0-3 behind stations.json', () => {
+test('B1\'s hiding rule is gone; the stations are on since S0-3 passed, and the keycard shows with its EMI page', () => {
   const obtain = fs.readFileSync(path.join(ROOT, 'tools/analysis/tiers/obtain.json'), 'utf8');
   const hidden = read('data/grindless/tables/hidden_until.json');
   assert.doesNotMatch(obtain, /"era": "LuV \(B1\)"/);
@@ -240,9 +240,14 @@ test('B1\'s hiding rule is gone; the station pieces wait for S0-3 behind station
   }
   // the belt seed is B5's (raw meteoric iron): it stays hidden exactly as long as meteoric iron does
   assert.equal(hidden.includes('"grindless:asteroid_quantum_seed"'), hidden.includes('"material":"meteoric_iron"'));
-  assert.equal(STATIONS.enabled, false, 'flip only after S0-3 passes natively');
+  assert.equal(STATIONS.enabled, true, 'S0-3 passed natively (travel spikes R14)');
+  assert.equal(STATIONS.second, 'grindless:io_orbit', 'the tether\'s station');
   assert.equal(STATIONS.first, ORBITS.earth);
-  assert.ok(ORBITS.dimensions.includes(STATIONS.second));
+  assert.ok(STATIONS.second === null || ORBITS.dimensions.includes(STATIONS.second), 'second is null (B7\'s fallback) or an orbit');
   for (const id of STATIONS.pieces) assert.ok(IDS.items.includes(id), id);
   assert.equal(hidden.includes('"gcyr:keycard"'), !STATIONS.enabled, 'the keycard shows exactly when the stations do');
+  assert.doesNotMatch(obtain, /"materials": \["gcyr:keycard"\]/);
+  const page = json('assets/emi/recipe/additions/grindless/space_station.json');
+  assert.ok(page.stacks.includes('item:gcyr:keycard'));
+  assert.ok(fs.existsSync(path.join(KJS, 'server_scripts/grindless/luv/orbit_arrival.js')), 'the arrival assist ships with the stations');
 });

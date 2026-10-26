@@ -73,11 +73,11 @@
     // EMI hands out JDK immutable lists (ImmutableCollections$ListN); Rhino cannot call their methods (module access): copy them
     var jlist = function (c) { return new ArrayList(c) }
 
-    var hiddenItems = ['gcyr:keycard', 'gtceu:damascus_steel_ingot', 'gtca:scrap', 'gcyr:proxima_centauri_b_regolith']
+    var hiddenItems = ['gcyr:space_elevator_support', 'gtceu:damascus_steel_ingot', 'gtca:scrap', 'gcyr:proxima_centauri_b_regolith']
     var hiddenFluids = ['gtceu:plutonium_based_liquid_fuel', 'gtceu:molten_stainless_steel']
     var shownItems = ['gtceu:perlite_dust', 'gtceu:obsidian_dust', 'gtceu:lv_sifter', 'gtceu:basalt_dust', 'gtceu:titanium_dust', 'gcyr:moon_sand',
       'gcyr:martian_rock', 'grindless:titanium_drill_bit', 'gtceu:naquadah_dust', 'gcyr:venus_rock', 'gtceu:raw_iridosmine', 'gtceu:uranium_235_dust',
-      'gtnn:circuit_assembly_line', 'grindless:chondritic_extract', 'gtceu:germanium_dust']
+      'gtnn:circuit_assembly_line', 'grindless:chondritic_extract', 'gtceu:germanium_dust', 'gcyr:keycard']
     var shownFluids = ['gtceu:helium_3', 'gtceu:deuterium', 'gtceu:naquadah', 'gtceu:molten_cerrobase_140', 'gtceu:bacteria']
 
     // 1) the tags reached the client
@@ -119,7 +119,7 @@
     // the constructors, not EmiStack.of: Rhino finds of(ItemStack) and of(ItemLike) equally good for a KubeJS item stack
     var stackOf = function (id) { return new ItemEmiStack(Item.of(id)) }
     var problems = []
-    ;['gcyr:keycard', 'gtceu:damascus_steel_ingot'].forEach(function (id) {
+    ;['gcyr:space_elevator_support', 'gtceu:damascus_steel_ingot'].forEach(function (id) {
       var made = count(rm.getRecipesByOutput(stackOf(id)))
       var used = count(rm.getRecipesByInput(stackOf(id)))
       if (made + used > 0) problems.push(id + ' made by ' + made + ', used by ' + used)

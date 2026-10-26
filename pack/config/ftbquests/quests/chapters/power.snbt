@@ -319,6 +319,13 @@
 			y: 56.5d
 		}
 		{
+			id: "3A0501E7D4075B77"
+			linked_quest: "3F2030C8DDEDB9FF"
+			shape: "rsquare"
+			x: 11.25d
+			y: 55.0d
+		}
+		{
 			id: "302B08A0F81657FE"
 			linked_quest: "543F014BB97A45F4"
 			shape: "rsquare"
@@ -1369,7 +1376,7 @@
 			]
 			title: "Photovoltaic Cell"
 			x: 9.0d
-			y: 55.25d
+			y: 56.5d
 		}
 		{
 			dependencies: ["70F29F44F8EE8982"]
@@ -1383,10 +1390,10 @@
 			]
 			title: "Orbital Solar Panel"
 			x: 11.25d
-			y: 55.25d
+			y: 56.5d
 		}
 		{
-			dependencies: ["170A010206286D7D"]
+			dependencies: ["3F2030C8DDEDB9FF", "170A010206286D7D"]
 			description: ["The sky up there is stuck at midnight, and the panels don't care: one counts while its top sees open sky. It burns nothing, so no fuel bonus either."]
 			icon: "gtceu:orbital_solar_station"
 			id: "70E4C0FEFEE2200D"
@@ -1399,7 +1406,7 @@
 			]
 			title: "Orbital Solar Station"
 			x: 13.5d
-			y: 55.25d
+			y: 56.5d
 		}
 		{
 			icon: "gtceu:deuterium_bucket"
@@ -1506,6 +1513,50 @@
 			]
 			title: "Volcanic Intake"
 			x: 2.75d
+			y: 63.75d
+		}
+		{
+			icon: "grindless:tether_spool"
+			id: "72D564594B339ED9"
+			shape: "rsquare"
+			size: 1.0d
+			subtitle: "Used up now and then"
+			tasks: [
+				{ id: "1BA52A6F43F5A9C9", item: "grindless:tether_spool", optional_task: true, type: "item" }
+				{ id: "1528ABDFE63B91AD", type: "checkmark" }
+			]
+			title: "Tether Spool"
+			x: 7.0d
+			y: 63.0d
+		}
+		{
+			icon: "gtceu:argon_bucket"
+			id: "3557AB78C4ABF9F6"
+			shape: "rsquare"
+			size: 1.0d
+			subtitle: "From Mars, for the hollow cathode"
+			tasks: [
+				{ id: "51D52E50117F32D1", item: "gtceu:argon_bucket", optional_task: true, type: "item" }
+				{ id: "52D8F75CBC473EFE", type: "checkmark" }
+			]
+			title: "Argon"
+			x: 7.0d
+			y: 64.5d
+		}
+		{
+			dependencies: ["72D564594B339ED9", "3557AB78C4ABF9F6"]
+			description: ["A long bare wire dragged through Jupiter's plasma torus, which spins far faster than Io moves. It needs neither ground nor fuel, and its wireless dynamo hatch feeds every base."]
+			icon: "gtceu:flux_tube_tether"
+			id: "3A2B77CE997861BB"
+			shape: "gear"
+			size: 1.5d
+			subtitle: "LuV: 65,536 EU/t a spool cell in Io orbit. Io orbit only"
+			tasks: [
+				{ id: "17BE285F14DFF455", item: "gtceu:flux_tube_tether", optional_task: true, type: "item" }
+				{ id: "34778F781C7C1E6E", type: "checkmark" }
+			]
+			title: "Flux-Tube Tether"
+			x: 9.25d
 			y: 63.75d
 		}
 		{
