@@ -305,39 +305,88 @@
 			y: 45.5d
 		}
 		{
-			id: "5F7349ECD7E9FE4E"
-			linked_quest: "5047605FE0A03D21"
+			id: "19330B588B4B6F51"
+			linked_quest: "3D5EC5039EBDE967"
+			shape: "rsquare"
+			x: 0.5d
+			y: 55.0d
+		}
+		{
+			id: "52E5166B8C802375"
+			linked_quest: "7BF0DEC5018503E7"
 			shape: "rsquare"
 			x: 0.5d
 			y: 56.5d
+		}
+		{
+			id: "302B08A0F81657FE"
+			linked_quest: "543F014BB97A45F4"
+			shape: "rsquare"
+			x: 17.75d
+			y: 55.0d
+		}
+		{
+			id: "5F7349ECD7E9FE4E"
+			linked_quest: "5047605FE0A03D21"
+			shape: "rsquare"
+			x: 17.75d
+			y: 58.0d
+		}
+		{
+			id: "1866CB02BCDFE3AC"
+			linked_quest: "5BB6D38E1599F086"
+			shape: "rsquare"
+			x: 0.5d
+			y: 63.0d
+		}
+		{
+			id: "76BF7D69D1AEEEF4"
+			linked_quest: "1284DAACF546E6C4"
+			shape: "rsquare"
+			x: 0.5d
+			y: 64.5d
 		}
 		{
 			id: "37EA5C37FB08041B"
 			linked_quest: "39A5A5CC76591697"
 			shape: "rsquare"
 			x: 0.5d
-			y: 60.0d
+			y: 71.5d
 		}
 		{
 			id: "1FCCBED6CE4452ED"
 			linked_quest: "1DFC0C1A50793CB7"
 			shape: "rsquare"
 			x: 21.5d
-			y: 60.0d
+			y: 71.5d
 		}
 		{
 			id: "3D9F43AA278F3647"
 			linked_quest: "366AB48E5BF50431"
 			shape: "rsquare"
 			x: 19.25d
-			y: 61.5d
+			y: 73.0d
 		}
 		{
 			id: "354C64B97FEDF96E"
 			linked_quest: "42BF2F77456F8773"
 			shape: "rsquare"
 			x: 21.5d
-			y: 61.5d
+			y: 73.0d
+		}
+		{
+			id: "1DB9D03F61275809"
+			linked_quest: "5933ADF51C8949BD"
+			shape: "rsquare"
+			x: 0.5d
+			y: 84.25d
+		}
+		{
+			id: "3925C695BE99E732"
+			linked_quest: "1FFCFA949E449B45"
+			shape: "rsquare"
+			x: 0.5d
+			y: 82.5d
 		}
 	]
 	quests: [
@@ -1275,6 +1324,84 @@
 			y: 45.5d
 		}
 		{
+			dependencies: ["3D5EC5039EBDE967", "7BF0DEC5018503E7"]
+			description: [
+				"One rod keeps it humming for a long while, then comes back spent. The naquadah plant re-enriches part of it, never all of it."
+				"EU per rod: 1 billion."
+			]
+			icon: "gtnn:luv_naquadah_reactor"
+			id: "7A5E1A85E6D4E433"
+			shape: "gear"
+			size: 1.25d
+			subtitle: "LuV: 32,768 EU/t, 31,130 EU/t into the network. GT--'s single block; a wireless dynamo cover on it does the rest"
+			tasks: [
+				{ id: "3358FD97811AAE5B", item: "gtnn:luv_naquadah_reactor", optional_task: true, type: "item" }
+				{ id: "79C38349090C87F0", type: "checkmark" }
+			]
+			title: "Naquadah Reactor III"
+			x: 2.75d
+			y: 55.75d
+		}
+		{
+			dependencies: ["7A5E1A85E6D4E433"]
+			icon: "gtceu:long_naquadah_rod"
+			id: "32DA85B8180ED570"
+			shape: "circle"
+			size: 0.75d
+			subtitle: "Macerated, then back into the naquadah plant's mode 2"
+			tasks: [
+				{ id: "3FE61FE7E545A836", item: "gtceu:long_naquadah_rod", optional_task: true, type: "item" }
+				{ id: "1F282B0DD4295DA9", type: "checkmark" }
+			]
+			title: "Spent Rod, Back"
+			x: 5.0d
+			y: 55.75d
+		}
+		{
+			icon: "gcyr:photovoltaic_cell"
+			id: "70F29F44F8EE8982"
+			shape: "rsquare"
+			size: 1.0d
+			subtitle: "GCYR's LuV cell, on naquadah wafers"
+			tasks: [
+				{ id: "3D779BC7ECECD116", item: "gcyr:photovoltaic_cell", optional_task: true, type: "item" }
+				{ id: "78F09D04E63F286B", type: "checkmark" }
+			]
+			title: "Photovoltaic Cell"
+			x: 9.0d
+			y: 55.25d
+		}
+		{
+			dependencies: ["70F29F44F8EE8982"]
+			icon: "grindless:orbital_solar_panel"
+			id: "170A010206286D7D"
+			size: 1.0d
+			subtitle: "The assembler makes it; triple-junction cells give two at once"
+			tasks: [
+				{ id: "7ADB32F8ECC7647E", item: "grindless:orbital_solar_panel", optional_task: true, type: "item" }
+				{ id: "332A2B37B12A2DA8", type: "checkmark" }
+			]
+			title: "Orbital Solar Panel"
+			x: 11.25d
+			y: 55.25d
+		}
+		{
+			dependencies: ["170A010206286D7D"]
+			description: ["The sky up there is stuck at midnight, and the panels don't care: one counts while its top sees open sky. It burns nothing, so no fuel bonus either."]
+			icon: "gtceu:orbital_solar_station"
+			id: "70E4C0FEFEE2200D"
+			shape: "gear"
+			size: 1.5d
+			subtitle: "LuV: 630 EU/t a lit panel in Earth orbit, up to 40,320 EU/t, 38,304 EU/t into the network. A LuV wireless dynamo hatch sends it home"
+			tasks: [
+				{ id: "5CD9D7C0857E9B37", item: "gtceu:orbital_solar_station", optional_task: true, type: "item" }
+				{ id: "1D206E61965FEFED", type: "checkmark" }
+			]
+			title: "Orbital Solar Station"
+			x: 13.5d
+			y: 55.25d
+		}
+		{
 			icon: "gtceu:deuterium_bucket"
 			id: "12AE9D9C05C6405F"
 			shape: "rsquare"
@@ -1285,66 +1412,101 @@
 				{ id: "3E881ABBCEF5BEA0", type: "checkmark" }
 			]
 			title: "Deuterium"
-			x: 0.5d
-			y: 55.0d
+			x: 17.75d
+			y: 56.5d
 		}
 		{
-			dependencies: ["12AE9D9C05C6405F", "5047605FE0A03D21"]
+			icon: "gtceu:magnesium_bucket"
+			id: "1B0A64A4DD006A0B"
+			shape: "rsquare"
+			size: 1.0d
+			subtitle: "Molten, with oxygen beside it"
+			tasks: [
+				{ id: "173C58F9BC0A4955", item: "gtceu:magnesium_bucket", optional_task: true, type: "item" }
+				{ id: "57A1DAAB58DBE6AD", type: "checkmark" }
+			]
+			title: "Magnesium"
+			x: 17.75d
+			y: 59.5d
+		}
+		{
+			dependencies: ["543F014BB97A45F4", "12AE9D9C05C6405F", "5047605FE0A03D21", "1B0A64A4DD006A0B"]
+			description: ["Deuterium and tritium give a little power, and the Moon's tritium decides how little."]
 			icon: "gtceu:luv_fusion_reactor"
 			id: "7EE65AE45E5168EE"
-			shape: "circle"
-			size: 1.0d
-			subtitle: "LuV: the tritium you keep in IV goes in here"
-			tasks: [{ id: "7471C190711B52C6", type: "checkmark" }]
-			title: "Fusion Reactor"
-			x: 2.75d
-			y: 55.75d
+			shape: "gear"
+			size: 1.25d
+			subtitle: "LuV. A materials machine first: europium, lutetium and chromium"
+			tasks: [
+				{ id: "73F9F275BF84BED1", item: "gtceu:luv_fusion_reactor", optional_task: true, type: "item" }
+				{ id: "7471C190711B52C6", type: "checkmark" }
+			]
+			title: "Fusion Reactor Mk1"
+			x: 20.0d
+			y: 57.25d
 		}
 		{
 			dependencies: ["7EE65AE45E5168EE"]
 			icon: "gtceu:helium_plasma_bucket"
 			id: "12A6FDE4906BA019"
-			shape: "circle"
 			size: 1.0d
-			tasks: [{ id: "1F174843B7A6AD3A", type: "checkmark" }]
+			tasks: [
+				{ id: "7F8077BCCDD77005", item: "gtceu:helium_plasma_bucket", optional_task: true, type: "item" }
+				{ id: "1F174843B7A6AD3A", type: "checkmark" }
+			]
 			title: "Helium Plasma"
-			x: 5.0d
-			y: 55.75d
+			x: 22.25d
+			y: 56.5d
 		}
 		{
-			dependencies: ["12A6FDE4906BA019"]
+			dependencies: ["7EE65AE45E5168EE"]
+			description: ["The fusion power that doesn't wait on the Moon. What it nets after paying the Mk1 gets measured on the bench before it earns a number here."]
+			icon: "gtca:calcium_plasma_plasma_bucket"
+			id: "1BEF7516D1DE70C2"
+			size: 1.0d
+			subtitle: "GTCA's, and no tritium in it"
+			tasks: [
+				{ id: "5C75669D15F26489", item: "gtca:calcium_plasma_plasma_bucket", optional_task: true, type: "item" }
+				{ id: "7C53DEC71EB8EC07", type: "checkmark" }
+			]
+			title: "Calcium Plasma"
+			x: 22.25d
+			y: 58.0d
+		}
+		{
+			dependencies: ["12A6FDE4906BA019", "1BEF7516D1DE70C2"]
+			description: ["EU per mB: helium plasma 163,840."]
 			icon: "gtceu:plasma_large_turbine"
 			id: "3349702727A7B708"
-			shape: "circle"
-			size: 1.0d
-			subtitle: "LuV: plasma turned into power"
-			tasks: [{ id: "1E360973257556B7", type: "checkmark" }]
+			shape: "gear"
+			size: 1.25d
+			subtitle: "LuV: 65,536 EU/t times the rotor's power"
+			tasks: [
+				{ id: "51ACE03B1A89F426", item: "gtceu:plasma_large_turbine", optional_task: true, type: "item" }
+				{ id: "1E360973257556B7", type: "checkmark" }
+			]
 			title: "Large Plasma Turbine"
-			x: 7.25d
-			y: 55.75d
+			x: 24.5d
+			y: 57.25d
 		}
 		{
-			icon: "gtceu:enriched_naquadah_bolt"
-			id: "59DECDED26DF0294"
-			shape: "circle"
-			size: 1.0d
-			subtitle: "It wants naquadah coils in the blast furnace"
-			tasks: [{ id: "5735B3C60B1F7675", type: "checkmark" }]
-			title: "Enriched Naquadah"
-			x: 11.25d
-			y: 55.0d
-		}
-		{
-			dependencies: ["59DECDED26DF0294"]
-			icon: "gtnn:ev_naquadah_reactor"
-			id: "7A5E1A85E6D4E433"
-			shape: "circle"
-			size: 1.0d
-			subtitle: "LuV: enriched naquadah first, naquadria later"
-			tasks: [{ id: "79C38349090C87F0", type: "checkmark" }]
-			title: "Naquadah Reactor"
-			x: 13.5d
-			y: 55.0d
+			dependencies: ["5BB6D38E1599F086", "1284DAACF546E6C4"]
+			description: [
+				"Io's tidal heat boils a sulfur dioxide loop. Jupiter pays for it, not you, but the bundles still wear out. More turbine modules, more runs at once."
+				"EU per bundle: 2.34 billion."
+			]
+			icon: "gtceu:volcanic_intake"
+			id: "59076D528BBF261A"
+			shape: "gear"
+			size: 1.5d
+			subtitle: "LuV: 32,768 EU/t a turbine module on Io, up to 131,072 EU/t, 124,518 EU/t into the network. Standing on a patera's magma"
+			tasks: [
+				{ id: "14B03B018DD41B2B", item: "gtceu:volcanic_intake", optional_task: true, type: "item" }
+				{ id: "59F9DE3F2023A5BC", type: "checkmark" }
+			]
+			title: "Volcanic Intake"
+			x: 2.75d
+			y: 63.75d
 		}
 		{
 			icon: "gcyr:dyson_solar_cell"
@@ -1353,8 +1515,8 @@
 			size: 1.0d
 			tasks: [{ id: "7ED020059F8C2BA4", type: "checkmark" }]
 			title: "Dyson Solar Cell"
-			x: 17.5d
-			y: 55.0d
+			x: 0.5d
+			y: 68.0d
 		}
 		{
 			dependencies: ["11C73137027F90A3"]
@@ -1365,8 +1527,8 @@
 			subtitle: "UHV: a star wrapped in panels"
 			tasks: [{ id: "5A8383B9274CEC05", type: "checkmark" }]
 			title: "Dyson Sphere"
-			x: 19.75d
-			y: 55.0d
+			x: 2.75d
+			y: 68.0d
 		}
 		{
 			icon: "gtceu:lv_machine_hull"
@@ -1379,7 +1541,7 @@
 			]
 			title: "LV Machine Hull"
 			x: 0.5d
-			y: 61.5d
+			y: 73.0d
 		}
 		{
 			dependencies: ["39A5A5CC76591697", "3F30A6656E0CFBCC"]
@@ -1393,7 +1555,7 @@
 			]
 			title: "Transformer"
 			x: 2.75d
-			y: 60.75d
+			y: 72.25d
 		}
 		{
 			dependencies: ["3F30A6656E0CFBCC"]
@@ -1407,7 +1569,7 @@
 			]
 			title: "Battery Buffer"
 			x: 2.75d
-			y: 62.25d
+			y: 73.75d
 		}
 		{
 			icon: "gtceu:lv_battery_hull"
@@ -1420,7 +1582,7 @@
 			]
 			title: "Battery Hull"
 			x: 6.75d
-			y: 60.0d
+			y: 71.5d
 		}
 		{
 			dependencies: ["1DD9B8EADA8EBAC0"]
@@ -1437,7 +1599,7 @@
 			]
 			title: "Batteries"
 			x: 9.0d
-			y: 60.0d
+			y: 71.5d
 		}
 		{
 			icon: "gtceu:tin_single_wire"
@@ -1450,7 +1612,7 @@
 			]
 			title: "Tin Wire"
 			x: 13.0d
-			y: 60.0d
+			y: 71.5d
 		}
 		{
 			dependencies: ["3B2125BC87FC669D"]
@@ -1467,7 +1629,7 @@
 			]
 			title: "Cables"
 			x: 15.25d
-			y: 60.0d
+			y: 71.5d
 		}
 		{
 			dependencies: ["1DFC0C1A50793CB7", "42BF2F77456F8773"]
@@ -1482,7 +1644,7 @@
 			]
 			title: "EU P2P Tunnel"
 			x: 23.75d
-			y: 60.75d
+			y: 72.25d
 		}
 		{
 			dependencies: ["366AB48E5BF50431"]
@@ -1496,7 +1658,7 @@
 			]
 			title: "Quantum Bridge"
 			x: 21.5d
-			y: 63.0d
+			y: 74.5d
 		}
 		{
 			icon: "gtceu:lapotron_crystal"
@@ -1509,7 +1671,7 @@
 			]
 			title: "Lapotron Crystal"
 			x: 27.75d
-			y: 60.0d
+			y: 71.5d
 		}
 		{
 			dependencies: ["56341035C7044592"]
@@ -1523,7 +1685,7 @@
 			]
 			title: "Power Substation"
 			x: 30.0d
-			y: 60.0d
+			y: 71.5d
 		}
 		{
 			icon: "gtceu:lv_lithium_battery"
@@ -1537,7 +1699,7 @@
 			]
 			title: "Batteries"
 			x: 0.5d
-			y: 68.75d
+			y: 80.25d
 		}
 		{
 			dependencies: ["1A5654A5282AA2BB"]
@@ -1555,10 +1717,10 @@
 			]
 			title: "Capacitor Cell"
 			x: 2.75d
-			y: 68.75d
+			y: 80.25d
 		}
 		{
-			dependencies: ["16ABFBB249BDC07B"]
+			dependencies: ["16ABFBB249BDC07B", "7DDF714877C2B39F"]
 			description: [
 				"No tower, no network: build it before any hatch or cover."
 				"5% of what goes in is lost on the way."
@@ -1574,13 +1736,31 @@
 			]
 			title: "Wireless Energy Tower"
 			x: 5.0d
-			y: 68.75d
+			y: 80.25d
+		}
+		{
+			dependencies: ["5933ADF51C8949BD", "1FFCFA949E449B45"]
+			description: [
+				"The network jumps to LuV only when every formed tower holds these. Until then, a multiblock with two IV wireless energy hatches reaches LuV the usual GregTech way."
+				"Holds: LuV SMES 983,040,000 EU."
+			]
+			icon: "grindless:luv_smes_cell"
+			id: "7DDF714877C2B39F"
+			size: 1.0d
+			subtitle: "LuV's cell is a superconducting coil, wound rather than assembled"
+			tasks: [
+				{ id: "774B9367E7E1E5E1", item: "grindless:luv_smes_cell", optional_task: true, type: "item" }
+				{ id: "5132E6A976CCB484", type: "checkmark" }
+			]
+			title: "LuV SMES Cell"
+			x: 2.75d
+			y: 82.5d
 		}
 		{
 			dependencies: ["1A64E503878275AE"]
 			description: [
 				"Energy goes in at any voltage; the cells only limit what comes out."
-				"Comes in 2, 4, 16 and 64 A, LV to IV."
+				"Comes in 2, 4, 16 and 64 A, LV to LuV."
 			]
 			icon: "gtceu:lv_wireless_dynamo_hatch"
 			id: "128CD52291A76880"
@@ -1592,11 +1772,11 @@
 			]
 			title: "Wireless Dynamo Hatch"
 			x: 7.25d
-			y: 66.5d
+			y: 78.0d
 		}
 		{
 			dependencies: ["1A64E503878275AE"]
-			description: ["2 A of its tier, LV to IV."]
+			description: ["2 A of its tier, LV to LuV."]
 			icon: "grindless:lv_wireless_dynamo_cover"
 			id: "54D4653CC016835A"
 			size: 1.0d
@@ -1607,13 +1787,13 @@
 			]
 			title: "Wireless Dynamo Cover"
 			x: 7.25d
-			y: 68.0d
+			y: 79.5d
 		}
 		{
 			dependencies: ["1A64E503878275AE"]
 			description: [
 				"Above the network's voltage it gets nothing; shift-right-click it with an empty hand to see why."
-				"Comes in 2, 4, 16 and 64 A, LV to IV."
+				"Comes in 2, 4, 16 and 64 A, LV to LuV."
 			]
 			icon: "gtceu:lv_wireless_energy_hatch"
 			id: "5062E82EF67AFF89"
@@ -1625,13 +1805,13 @@
 			]
 			title: "Wireless Energy Hatch"
 			x: 7.25d
-			y: 69.5d
+			y: 81.0d
 		}
 		{
 			dependencies: ["1A64E503878275AE"]
 			description: [
 				"GTM machines, chargers and battery buffers, not converters or multiblock controllers; shift-right-click with an empty hand for the readout."
-				"2 A of its tier, LV to IV."
+				"2 A of its tier, LV to LuV."
 			]
 			icon: "grindless:lv_wireless_energy_cover"
 			id: "7713822C036911A8"
@@ -1643,7 +1823,7 @@
 			]
 			title: "Wireless Energy Cover"
 			x: 7.25d
-			y: 71.0d
+			y: 82.5d
 		}
 	]
 	subtitle: ["Every way to make power, tier by tier, and what carries it and stores it."]

@@ -72,7 +72,7 @@ IV leaves, as built:
     - GTCA's calcium plasma gives a little fusion power (its net figure is checked in B10); D + T stays small.
 11. **Research:**
     - computer casings and the data bank;
-    - the HPCA and the research station (assembly line at 100,000 EU/t on two LuV hatches; URhNq₂ from the large mixer on two LuV hatches);
+    - the HPCA and the research station (assembly line at 100,000 EU/t on two LuV hatches; URhNq₂ dust from the large mixer on two LuV hatches, its ingot from a trinium-coil blast furnace at 9,000 K, its double wire from the Universal Assembly Factory on two LuV hatches);
     - the ZPM energy hatch's data orb.
 12. **Exit:** *Gate to ZPM*.
 
@@ -106,37 +106,41 @@ IV leaves, as built:
 
 ## The belt and Jupiter's moons
 
-Five GCYR entries (datapack JSON, no Java) and ten dimensions. The ids are proposed and fixed after spike S0-1.
+Five GCYR entries (datapack JSON, no Java) and ten dimensions. The ids are final (B1, from spikes S0-1 and S0-2): `data/grindless/gcyr/planets/*.json`, and every package reads them only through `tables/places.json` (surfaces) and `tables/orbits.json` (orbits).
 
-| Entry | `world` / `orbit_world` | Tier | Gravity (m/s²) | Temp (K) | Radiation (real dose) |
+| Entry | `world` / `orbit_world` | Tier | Gravity (m/s², menu only) | Temp (K) | Radiation (real dose) |
 |---|---|---|---|---|---|
-| Asteroid belt | `grindless:asteroid_belt` / `…_orbit` | 4 | 0.6 *(tune; Ceres 0.28)* | 165 | low |
+| Asteroid belt | `grindless:asteroid_belt` / `…_orbit` | 4 | 0.6 | 165 | low |
 | Jupiter (menu placeholder) | `grindless:jupiter` / `…_orbit`, both `gcyr:space` voids | 5 | 24.79 | 165 | — |
 | Io | `grindless:io` / `…_orbit`, parent Jupiter | 4 | 1.796 | 110 | about 36 Sv a day |
 | Europa | `grindless:europa` / `…_orbit`, parent Jupiter | 4 | 1.315 | 102 | about 5.4 Sv a day |
 | Ganymede | `grindless:ganymede` / `…_orbit`, parent Jupiter | 4 | 1.428 | 110 | about 0.08 Sv a day |
 
 - **Jupiter exists for the menu:** GCYR only gives a navigation button to planets with no parent. Tier 5 keeps it closed in LuV.
-- **Worlds:**
-  - The belt is a rubble floor at Y 60–70 with asteroids above it (GCYR drops the rocket at the same X and Z), on noise adapted from GCYR's `luna` (LGPL-3.0, credited). It keeps a day cycle, for the optical miner.
-  - Io has brimstone plains, paterae of basalt, magma and lava, and fumarole fields (Biomes O' Plenty blocks, by id).
-  - Europa has packed ice over blue ice.
-  - Ganymede has packed ice and tuff.
-  - Skies use GCYR's own `jupiter.png`.
+- **Gravity is not simulated:** GCYR 0.2.9 shows a planet's `gravity` in its menu, but no entity physics reads it. On S0-1's test moon (1.315 m/s²) a player fell at vanilla speed. The pack adds no physics of its own: the column is real-world data for the menu, and no rule, recipe or quest relies on low gravity.
+- **Worlds** (as built in B1: `data/grindless/dimension/`, `dimension_type/`, `worldgen/noise_settings/`, `worldgen/biome/`; the shapes are ours, the file structure adapted from GCYR's `luna` and `mercury`, LGPL-3.0, credited):
+  - Every surface is Y −64 to 320 like the Moon, with no terrain at Y 176 and above (test fixtures build at Y 198–214), no aquifers, caves, features, mobs or precipitation.
+  - The belt is a tuff rubble floor at about Y 59–69 (gravel and cobbled deepslate patches) with tuff asteroids at Y 90–170 (GCYR drops the rocket at the same X and Z). Tuff is B5's ore layer target. It keeps a day cycle, for the optical miner.
+  - Io has brimstone plains at Y 90–110 over basalt, paterae sunk into a lava sea at Y 78 with basalt and magma floors, fumarole fields (Biomes O' Plenty's brimstone fumaroles in clusters) and black sand.
+  - Europa has 9–15 blocks of packed ice over blue ice, at Y 91–106.
+  - Ganymede has tuff hills at Y 84–116 with packed ice caps and patches.
+  - Skies use GCYR's own sun, `jupiter.png` and glow textures by path: Jupiter is large from Io, smaller from Europa and Ganymede, and small from the belt.
+  - Jupiter and the five orbits are GCYR's `gcyr:space` void.
 
 | | Earth orbit (station) | Belt | Io | Io orbit (station) | Europa | Ganymede |
 |---|---|---|---|---|---|---|
-| Rules | vacuum, 3 K, no night, 0 g | vacuum, low gravity, micrometeoroids | no water, no combustion, radiation, heat only from lava | radiation (plasma torus), 3 K | radiation, ice, the ocean 20 km down | 110 K (Hg-1223 superconducts by itself), seismically quiet |
+| Rules | vacuum, 3 K, no night, 0 g | vacuum, micrometeoroids | no water, no combustion, radiation, heat only from lava | radiation (plasma torus), 3 K | radiation, ice, the ocean 20 km down | 110 K (Hg-1223 superconducts by itself), seismically quiet |
 | Site power | orbital solar station | the wireless network; RTG cells | volcanic intake | flux-tube tether | the wireless network | the wireless network |
 | Only from there | — (it makes things) | asteroid metals; chondritic extract | germanium; sulfur concrete | — | living matter | — |
 | Made there | — | asteroid regolith casing | sulfur concrete casing | — | — | — |
 
 - **Travel:**
-  - level 4 = elite motors and only cryogenic tanks;
-  - 14 B from Earth to any LuV place, 8 B between a moon and Jupiter's orbit;
-  - one cryogenic tank holds 16 B *(tune)*.
-- **Stations:**
-  - GCYR's packager (tier 6) and package, the ID chip and the keycard.
+  - level 4 = elite motors and only cryogenic tanks (GCYR: floor((weakest motor tier 3 + weakest tank tier 5) / 2)); one elite tank drops the rocket to level 3;
+  - GCYR asks for 14 B in the tanks to launch from Earth to any LuV place (its solar-system amount), and for its moon amount between a moon and its parent; Jupiter is tier 5, so that leg stays closed in LuV;
+  - one cryogenic tank holds 16 B, two make 32 B. S0-2's level 4 round trip to a test moon burned 5,126 mB out and 4,952 mB home: the launch requirement, not the burn, is what needs the second tank.
+  - Proxima Centauri b goes to tier 5 (it was 4 while no part reached level 4).
+- **Stations** (wait for spike S0-3; `tables/stations.json` stays `"enabled": false` until it passes natively):
+  - GCYR's packager (a LuV hull, GCYR's recipe) and package, the ID chip and the keycard. The keycard stays hidden until the flag flips.
   - The station lands on a 512 × 512 plot in the planet's orbit.
   - GT machines are built after arrival.
 - **Suit:**
@@ -145,7 +149,7 @@ Five GCYR entries (datapack JSON, no Java) and ten dimensions. The ids are propo
   - Spike S0-8 checks that a piece keeps both tags.
 - **Radiation:** machine-only. Patterns on Io, on Europa and in Io orbit include `grindless:radiation_vault_casing` (graded-Z: titanium then tantalum, like Juno's vault).
 - **Weather and time:**
-  - `space/airless_weather.js` gets the new worlds and Earth orbit.
+  - `space/airless_weather.js` dries every dimension of the other planets in `tables/planets.json` (so all ten new ones) and its `dryOnEarth` list, Earth orbit, which stays Earth's for AE2 pairs and air.
   - Orbits are always midnight, so no orbital machine uses a daytime condition.
 
 ### Sunlight: one authoritative table
@@ -173,10 +177,11 @@ Five GCYR entries (datapack JSON, no Java) and ten dimensions. The ids are propo
 | Europa | `europa` | `grindless:europan_quantum_seed` | blue ice, with `.dimension('grindless:europa')` |
 | Ganymede | `ganymede` | `grindless:ganymedean_quantum_seed` | tuff, with `.dimension('grindless:ganymede')` |
 
-- **`tables/planets.json`** gets the four entries, each with its world and its orbit.
+- **`tables/planets.json`** gets five entries (`belt`, `jupiter`, `io`, `europa`, `ganymede`), each with its world and its orbit.
   - Io orbit belongs to `io`, so an Io pair also works in the Io-orbit station.
   - Jupiter gets no pair tag, so it keeps no pair.
   - AE2's ritual and the chamber's ejection of foreign pairs are proven since EV.
+  - **As built:** B1 writes the Io, Europa and Ganymede seeds and pairs (`server_scripts/grindless/luv/travel.js`, the dimension from `G.places`); the belt's seed is B5's, since its raw meteoric iron is.
 - **The first-landing kit** (every place):
   - an IV wireless energy cover for the chemical reactor;
   - an IV wireless energy hatch for the first multiblock;
@@ -220,9 +225,12 @@ Five GCYR entries (datapack JSON, no Java) and ten dimensions. The ids are propo
     - the three enriched sludges and the crystal chip from sludge take the sludge;
     - mutagen takes the enriched sludge.
 - **Germanium only from Io** (GTCA's froth stays ZPM). **Sulfur concrete only on Io.**
+  - GTCA's Nether germanite (drilled since LV) keeps its electrolysis without the germanium (`grindless:electrolyzer/germanite`, B6): nothing before LuV asks for germanium; the dump's only other user is UV's quantum alloy.
 - **The neuro processing unit at LuV only from the organoid lab.**
-  - GTM's `circuit_assembler/neuro_processor` (80,000 EU/t) stays a ZPM-voltage recipe.
-  - GT--'s line can't run it below UV hatches: its `CircuitAssemblyLineMachine.getRealRecipe` takes a GTM circuit-assembler recipe only when the recipe's tier is below the hatches'.
+  - GTM's `circuit_assembler/neuro_processor` (80,000 EU/t) stays a ZPM-voltage recipe. From LuV the biofoundry makes its stem cells and sterile medium, so every machine that could run it on LuV power was checked (spike S0-4, GT-- 1.3.10 bytecode):
+    - GT--'s line has a single energy-hatch cell (`GTPPMachines.kt:58-105`). Its `CircuitAssemblyLineMachine.getRealRecipe` (`.kt:78-86`) refuses a circuit-assembler recipe whose EU tier is at or above the tier of the hatch's combined voltage (2 A: the hatch's tier; 4 A: one up; 16 A: two up), and GTM refuses anything above the hatch's own tier. So the NPU is refused on every LuV hatch and on a ZPM 2 A hatch, and runs from a ZPM 4 A hatch.
+    - GTM's large circuit assembler takes exactly one energy hatch.
+    - Our Universal Assembly Factory takes two, and GTM lets two hatches of a tier run the next tier's recipes. Its modifier refuses the NPU unless one hatch alone reaches ZPM (`mv/leisure_factories.js`, `HATCH_VOLTAGE_LOCKED`, LuV-A5).
 - **Europium only from the Mk1** until ZPM.
 - **Optical pipes:** GTM's two recycling recipes go (decision 18; machine 6).
 - **GCYR's satellites** have no recipe and no deploy: they stay hidden.
@@ -240,7 +248,10 @@ Five GCYR entries (datapack JSON, no Java) and ten dimensions. The ids are propo
   | `gold_and_aluminium_to_uranium_238_plasma` | 24,576 | 140 M | **cut:** uranium comes from the End |
   | `gallium_and_radon_to_duranium_plasma` | 16,384 | 140 M | **to the Mk2:** re-registered with a 200 M start, since ZPM's tritanium needs duranium |
 
-  - **Not Mk1 recipes,** because of their tier or start: Xe + Zn → Pu-239 (49,152 EU/t), Kr + Ce → Pu-241, and the plasmas of N, O, Fe, Sn, Ar, Ni, Ti, Zn and S.
+  - **Not Mk1 recipes** (B10's audit of the dump, all 33 recipes of the type: `data/grindless/tables/fusion_mk1.json`), because of their tier or start, untouched:
+    - EU/t above LuV: Xe + Zn → Pu-239, Kr + Ce → Pu-241, Ag + He-3 → Sn, Lu + Cr → Am, enriched naquadah + Rn → naquadria, Pu-241 + H → Am plasma, Am + naquadria → neutronium, californium, oganesson, and GTCA's titanium and zinc plasmas;
+    - a start above 160 M EU: the plasmas of N, O, Fe, Ar and Ni, GTCA's sulfur plasma, Ag + Li → In, Au + Hg → Rn, As + Ru → Ds, Ti + Du → tritanium, and the three excited fuels (uranium, plutonium and naquadah based).
+  - `server_scripts/grindless/luv/fusion.js` logs an error for any recipe of the type that the Mk1 could run and the audit does not list.
   - **Other producers of the cut products, checked:**
     - osmium: the platinum plant's mode 3 and the Mercury solar works, which GTM's osmium chain depends on;
     - U-235: the hot cell's enrichment and GTM's UF₆ electrolysis (the hot cell's line);
@@ -393,6 +404,12 @@ Every recipe has a programmed circuit (c*n*) or an input that no other recipe of
 - **Risks:**
   - the cell's capacity lives in the wireless package's table;
   - 144 mB of trinium is decision 13, *(tune)* until A4's bench run.
+- **As built (A4):**
+  - `luv/hts_magnet_works.js` (startup and server), recipes from `tables/hts_magnet_works.json`: ids `grindless:magnet_winding/<name>`, circuits 1–4, the 1,000 mB Liquid Helium charge as `notConsumableFluid` on all four, and an EMI line per recipe. A recipe whose ids the game lacks is skipped with an error in the log.
+  - The bearing takes `gtceu:tetrataenite_rod` (A1 gives tetrataenite its rod).
+  - EMI, with A1's hidden groups: the coilgun coil casings show now, with a page saying they are kept for Ganymede's coilgun; the bearing and its recipe show now (B4's ring needs it), with a page, because tetrataenite's B5 group is index-only (`keepRecipes`) until the belt; the SMES cell and the HTS coil recipe show when A3's tape does (the SMES cell has its own group until then, and `hts_magnet_works.test.mjs` fails if it outlives A3's).
+  - The structure is 11 × 5 × 5 on a frostproof base: the cryostat (3×3×4, hollow), the impregnation tank (3×3×3: PTFE pipe casing floor and lid, laminated glass around the bath) and the mandrel (3×3×4 tungstensteel frame cage around a stainless gearbox spindle, on a gearbox turntable). The parts go in the base's front and back rows and in two cells of the cryostat's front wall: 1–2 energy hatches, 1–3 input buses, 1–3 input hatches, 1–2 output buses and the parallel hatch.
+  - Controller: crafting grid, LuV hull + 2 LuV motors + LuV sensor + 4 LuV circuits (`grindless:crafting/hts_magnet_works`).
 - **Source:** real: the CFS and MIT SPARC toroidal field model coil (20 T, 2021), SMES (BPA's 30 MJ unit, 1980s), and vacuum-pressure impregnation and cold testing in magnet manufacturing.
 
 ### 4. Biofoundry: `gtceu:biofoundry`, type `gtceu:sterile_culture` (Earth)
@@ -411,11 +428,11 @@ Every recipe has a programmed circuit (c*n*) or an input that no other recipe of
   | 3 | Gelatin | 6 collagen + 1,500 mB phosphoric acid + 4,500 mB water → 4 gelatin + 1 phosphorus | 480 × 4,800 | `mixer/gelatin_mixture` (×1.5) + `centrifuge/gelatin` |
   | 4 | Agar | 1 gelatin + 1,000 mB distilled water → 1 agar | 480 × 600 | `autoclave/agar` |
   | 5 | Bacterial sludge | 1,000 mB biomass + 1,000 mB bacteria → 1,000 mB sludge | 1,920 × 600 | `large_chemical_reactor/bacterial_sludge` |
-  | 6 | Mutagen | 1,000 mB sludge + 1 tiny U-235 → 100 mB mutagen | 7,680 × 101 | `brewery/enriched_bacterial_sludge_from_u235` + `distillery/mutagen` |
+  | 6 | Mutagen | 1,000 mB sludge + 1 tiny U-235 → 100 mB mutagen | 7,610 × 101 | `brewery/enriched_bacterial_sludge_from_u235` + `distillery/mutagen` |
   | 7 | Sterile medium | 4,000 mB mutagen + 4 meat + 4 salt + 4 calcium + 4 agar → 4,000 mB sterilized growth medium | 7,680 × 2,000 | `mixer/raw_growth_medium` + 40 × `fluid_heater/sterile_growth_medium` |
   | 8 | Stem cells | 500 mB bacteria + 500 mB medium + 1 osmiridium dust → 32 stem cells + 500 mB sludge | 30,720 × 300 | `large_chemical_reactor/stem_cells` |
-  | 9 | Engineered barley seed | 1 wheat seeds + 250 mB bacteria → 1 `grindless:engineered_barley_seed` | 1,920 × 600 *(tune)* | ours: the bacteria as the vector (Agrobacterium, real) |
-  | 10 | Engineered tobacco seed | 1 beetroot seeds (the stand-in) + 250 mB bacteria → 1 `grindless:engineered_tobacco_seed` | 1,920 × 600 *(tune)* | ours |
+  | 9 | Engineered barley seed | 1 wheat seeds + 250 mB bacteria → 1 `grindless:engineered_barley_seed` | 1,920 × 600 | ours: the bacteria as the vector (Agrobacterium, real) |
+  | 10 | Engineered tobacco seed | 1 beetroot seeds (the stand-in) + 250 mB bacteria → 1 `grindless:engineered_tobacco_seed` | 1,920 × 600 | ours |
 
 - **Byproducts** (kept: `G.noVoiding` in both places):
   - diluted sulfuric acid → back to sulfuric acid (the pack's usual reconcentration);
@@ -426,13 +443,15 @@ Every recipe has a programmed circuit (c*n*) or an input that no other recipe of
   - That medium needs 1,000 mB of mutagen, which needs 10,000 mB of sludge.
   - So about 10,000 mB of bacteria per NPU: 10 culture runs on Europa.
   - Plant collagen from the ring (its c6) can replace c1–c2.
-- **Structure:** a sealed hall, about 9 × 6 × 9:
+- **Structure:** a sealed hall, 9 × 6 × 9 (as built, `startup_scripts/grindless/luv/biofoundry.js`):
   - plascrete with cleanroom glass;
   - four fermenter columns of laminated glass and clean stainless steel casing;
-  - an autoclave bay;
-  - GT lamps as the UV ceiling;
-  - an iron-door airlock.
-- **Controller:** LuV hull + 2 LuV pumps + LuV sensor + 4 LuV circuits *(tune)*.
+  - an autoclave bay (heat-proof casings under a steel pipe header);
+  - GT lamps (any colour) as the UV ceiling;
+  - an iron-door airlock;
+  - every part on the back wall (21 cells: 1–2 energy hatches, buses, hatches and the parallel hatch).
+- **As built:** steps 1–8 are composed at every load from GTM's live recipes (`tables/biofoundry.json`, `lib/compose.js`), each spent at the highest EU/t of its stages with the stages' energy; steps 9–10 are the table's own. Every recipe has its own circuit.
+- **Controller:** LuV hull + 2 LuV pumps + LuV sensor + 4 LuV circuits, assembler 7,680 EU/t × 600 t (`grindless:assembler/biofoundry`).
 - **Crossings:**
   - LV: the creature simulator's meat and bones;
   - HV and EV: salt and calcium;
@@ -602,7 +621,7 @@ Every recipe has a programmed circuit (c*n*) or an input that no other recipe of
 ### 10. Organoid lab: `gtceu:organoid_lab`, type `gtceu:organoid_assembly` (any orbit)
 
 - **What it gains:** the neuro processing unit at LuV voltage, the only LuV route to it.
-  - GTM's `circuit_assembler/neuro_processor` runs at 80,000 EU/t. That needs a ZPM single block, because GTM's large circuit assembler takes exactly one energy hatch (`GCYMMachines.java:338`).
+  - GTM's `circuit_assembler/neuro_processor` runs at 80,000 EU/t. That needs a ZPM single block, because GTM's large circuit assembler takes exactly one energy hatch (`GCYMMachines.java:338`), GT--'s line refuses it on every LuV hatch, and our Universal Assembly Factory refuses it unless one hatch reaches ZPM (spike S0-4).
   - GT--'s circuit assembly line can't run it below UV hatches, and its own wetware recipes consume NPUs.
   - In 0 g, neural organoids grow in three dimensions without a scaffold. Brain organoids have flown to the ISS since 2019, and FinalSpark's living-neuron processors (2024) compute.
 - **Recipes** (GTM's cleanroom condition kept, with a cleaning maintenance hatch; outputs kept with `G.noVoiding` in both places):
@@ -612,7 +631,7 @@ Every recipe has a programmed circuit (c*n*) or an input that no other recipe of
      - 250 mB sterilized growth medium;
      - 8 PBI small fluid pipes, 8 electrum plates, 16 silicone rubber foils and 8 HSS-E bolts.
 - **What it leaves to others:**
-  - Wetware processors come from GT--'s line: 16 NPUs + 16 crystal CPUs → 32, at 38,400 EU/t on two LuV hatches (`gtnn:circuit_assembly_line/wetware_processor_luv_soldering_alloy`).
+  - Wetware processors come from GT--'s line: 16 NPUs + 16 crystal CPUs → 32, at 30,720 EU/t × 750 t on one LuV energy hatch on GT--'s circuit assembly line (`grindless:circuit_assembly_line/wetware_processor_luv`: GT--'s 38,400 × 600 recipe re-registered at LuV voltage with the same 23.04 M EU and its research; the line has one energy-hatch cell, spike S0-4).
   - Wetware boards come from GTM's LuV circuit assembler (30,720 EU/t) with a cleaning hatch.
 - **Structure:**
   - a sealed 5×5×5 module of plascrete and cleanroom glass;
@@ -659,6 +678,12 @@ Every recipe has a programmed circuit (c*n*) or an input that no other recipe of
   - The KubeJS world gen layer is untested in this pack. One bench run is needed: a fresh belt chunk with the vein.
   - Low gravity has not been tried for playability.
 - **Source:** real: Rosetta's Philae (2014) and OSIRIS-REx's touch-and-go sampler; iron meteorite mineralogy.
+- **As built (B5, `luv/asteroid_belt.js`):**
+  - 7 × 8 × 7: a 5 × 6 pad of regolith casing, four HSS-S harpoon legs, a 3 × 3 × 3 body with the Whipple casing on its back face, a titanium derrick over a tungstensteel drill string.
+  - The veins sit at Y 20–200 *(tune after S0-1)*, weights 40 / 30 / 20. The vein drilling type takes three item inputs (sample, bit, harpoon).
+  - The bit: LuV lathe, a long HSS-S rod, 30,720 EU/t × 200 t. The harpoons: IV assembler, 2 HSS-S rods + a tungsten carbide plate → 2.
+  - The regolith casing: alloy smelter on the belt only, 4 tuff (the drill's stone) + 1 titanium dust → 2.
+  - The belt's seed: chemical reactor on the belt, raw meteoric iron + ender pearl + 250 mB helium-3; `planets.json` gets `belt`.
 
 ### 12. Asteroid processor: `gtceu:asteroid_processor`, type `gtceu:asteroid_processing` (anywhere; built at the belt base)
 
@@ -684,6 +709,10 @@ Every recipe has a programmed circuit (c*n*) or an input that no other recipe of
   - LuV: the ring's magnetic bearings (tetrataenite, through the HTS magnet works), and the optical miner's CO.
 - **Risks:** a KubeJS ore material must keep its GTM byproducts free of PGMs, so that the concentrate stays exclusive.
 - **Source:** real: Ludwig Mond (1890) and the Clydach refinery; carbonyl metallurgy for asteroids (Lewis, 1996).
+- **As built (B5):**
+  - A third recipe, circuit 3: the same Mond from 16 meteoric iron dust. GTM's ore line and the magnetic split leave that dust, and it has no other use.
+  - The magnetic split: 1,920 EU/t × 200 t. It stays voidable; circuits 1 and 3 refuse item voiding.
+  - Hollow 5 × 5 × 6 column, 3 × 3 × 3 separator (the parts and the parallel hatch), a 3 × 2 × 3 glass holder.
 
 ### 13. Optical miner: `gtceu:optical_miner`, type `gtceu:optical_mining` (asteroid belt)
 
@@ -710,6 +739,10 @@ Every recipe has a programmed circuit (c*n*) or an input that no other recipe of
   - IV: the Mercury solar works' heliostat check, and GCYR's aramid and Kapton (the suit line);
   - LuV: the Europan culture and the asteroid processor's CO.
 - **Source:** real: TransAstra's optical mining (Sercel; NASA NIAC, 2016–2019); Mautner, "Planetary bioresources and astroecology" (2002); the OSIRIS-REx samples of Bennu (2025).
+- **As built (B5):**
+  - 13 × 5 × 13. The capture chamber is robust casing with a laminated glass receiver on top; the cold trap is a frostproof column; the hut is 3 × 3 × 3.
+  - Both recipes are belt-only. The capture bag: IV assembler, 7,680 EU/t × 200 t.
+  - The extract's use (the Europan culture) is B8's; until then it is an EMI coverage exception.
 
 ### 14. Fumarole condenser: `gtceu:fumarole_condenser`, type `gtceu:fumarole_condensing` (Io)
 
@@ -732,6 +765,7 @@ Every recipe has a programmed circuit (c*n*) or an input that no other recipe of
   - a 3×3 intake over the fumarole field;
   - a column of four condenser zones, from hot to cold: tungsten steel, stainless steel, aluminium and frostproof casing, up to 14 high;
   - vault casings.
+  - *As built (B6):* 5×15×5. Three fumaroles in a line under the column; a 5×5×2 vault housing that takes every hatch and bus and the parallel hatch; four 3-block zones of robust tungstensteel, clean stainless steel, aluminium frames and frostproof casing. No maintenance hatch (maintenance is off pack-wide). The Ionian rock is basalt (GTM's rock breaker) or black sand, one recipe each.
 - **Controller:** LuV hull + 2 LuV pumps + 4 LuV circuits *(tune)*.
 - **Crossings:**
   - LV: sulfuric acid;
@@ -761,6 +795,7 @@ Every recipe has a programmed circuit (c*n*) or an input that no other recipe of
   - a 5×5×10 heat-exchanger tower of sulfur concrete and vault casing;
   - up to 4 turbine modules (3×3×3, titanium turbine casing);
   - radiator fins to Io's 110 K sky.
+  - *As built (B6):* 11×12×5. Magma blocks only (a fluid block in a pattern would also match flowing lava); the vault room is the tower's foot (1 input bus, 1 input hatch, 1–4 dynamo hatches). Module slot 1 is required; slots 2–4 are a whole module or air, and complete modules are counted in the world at every run start. Bundle wear: 56/10,000 a run per module.
 - **Controller:** LuV hull + 2 LuV pumps + LuV motor + 4 LuV circuits *(tune)*.
 - **Crossings:**
   - EV: the Moon's titanium, in the vault;
@@ -793,6 +828,11 @@ Every recipe has a programmed circuit (c*n*) or an input that no other recipe of
   - IV: GCYR's aramid;
   - LuV: the Whipple casing.
 - **Source:** real: Sanmartín, Lorenzini and others, *Bare-tether power generation and propulsion at Jupiter* (2005–2008); the Io flux tube (Bigg, 1964; Voyager).
+- **As built (B7):**
+  - One switch: `tables/stations.json` (`lib/stations.js`). The tether is registered only in its mode (`enabled` true, `second` = `grindless:io_orbit`); in the `pending` mode (S0-3 not concluded) neither 16 nor 16b is registered, and the spool stays hidden (its hidden-table group says `unless: tether`).
+  - 5×15×5: a 5×5×5 deployer with station truss edges and radiation vault faces (1–4 dynamo or wireless dynamo hatches, 1 input bus), two reels of three tungstensteel gearboxes inside, an input hatch on the roof as the hollow-cathode port, and a 10-block aluminium-frame stub from the roof's centre.
+  - The two reels are two parallels through `lib/generators.js`: 65,536 EU/t each, 131,072 on a 4 A LuV hatch. Each reel takes 25 mB argon and a spool at 28/10,000 a run: one spool an hour at full power. Recipe `grindless:electrodynamic_tether/plasma_torus`, only in the second station's orbit.
+  - Controller: `MSM / CHC / C C` (motors, sensor, LuV circuits, hull); the magnet works already uses `CSC / MHM / C C`.
 
 ### 16b. If a second station fails: Io sulfur–iodine hydrogen plant: `gtceu:sulfur_iodine_plant`, type `gtceu:thermochemical_hydrogen` (Io)
 
@@ -829,6 +869,9 @@ This plant takes slot 16 only if spike S0-3 shows that a second station can't be
   - MV: iodine from kelp (`gtceu:chemical_reactor/iodine`);
   - LuV: Europa's water, Io's heat, and the hydrogen of mode 2 and fusion.
 - **Source:** real: the sulfur–iodine cycle (General Atomics; JAEA's continuous run, 2019).
+- **As built (B7, written and registered only when `tables/stations.json` has `second: null`):**
+  - 11×14×5: a 5×5 of magma under a tungstensteel firebox hot plate; a vault room (1–2 energy hatches, 1–2 input buses, 1–3 input and output hatches); a 3×3×3 Bunsen reactor of PTFE inert casing under a 3×3×6 HI column (inert casing round a PTFE pipe casing core); four 3×3×3 robust tungstensteel decomposer slots, the first required.
+  - One parallel per complete module, counted in the world at every run start, capped by the energy hatches' voltage; no overclock. Recipe `grindless:thermochemical_hydrogen/sulfur_iodine`; controller `PSP / CHC / C C`.
 
 ### 17. Cryobot: `gtceu:cryobot`, type `gtceu:vein_drilling` (vein drill step 7b; Europa)
 
@@ -858,6 +901,12 @@ This plant takes slot 16 only if spike S0-3 shows that a second station can't be
   - IV: the hot cell's RTG pellets, and the drill family's heat tax;
   - LuV: Io's sulfur concrete and the vault.
 - **Source:** real: cryobot studies (Philberth; VALKYRIE; JPL's PRIME and SESAME), Europa's salt (Trumbo, Brown and Hand, 2019).
+- **As built** (B8, `startup_scripts/grindless/luv/europa.js`):
+  - 5 × 5 × 16: the ice shaft (rows 1–5, packed or blue ice), a sulfur concrete base around a 3 × 3 vault core with the tether opening, a tungsten steel frame derrick and a vault head with a tungstensteel gearbox drum. Base: 1–2 energy hatches, buses and 1–2 output hatches.
+  - GTM's overclock, no parallel: one probe, one sample. The family type is widened (never narrowed) to 3 item inputs and 2 fluid outputs.
+  - The RTG pellet is a 0.56 % chanced input (400 t of the hour's 72,000).
+  - The brine's surplus: a centrifuge splits 1,000 mB into 1,000 mB water, 6 magnesium sulfate (`gtceu:magnesium_sulfate`, new) and 2 salt dust; GTM's generated electrolysis splits both.
+  - Controller: shaped, LuV hull + 2 LuV pumps + LuV sensor + 4 LuV circuits + a tungstensteel gearbox (the drum), so it never matches the zero-g grower's grid. Probe: assembler, melt head + RTG pellet + LuV sensor + 8 optical fibres (the tether) + 4 HSS-S plates, 7,680 EU/t × 600 t. Melt head: 4 tungsten carbide + 2 HSS-S plates + an IV pump, 7,680 EU/t × 400 t.
 
 ### 18. Algae bioreactor: `gtceu:algae_bioreactor`, type `gtceu:bioreactor` (greenhouse step 5; the culture only on Europa)
 
@@ -884,6 +933,7 @@ This plant takes slot 16 only if spike S0-3 shows that a second station can't be
   - GTM's peroxide chemistry;
   - LuV's cryobot, optical miner (belt), biofoundry and sulfur concrete.
 - **Source:** real: ESA's MELiSSA; Europan habitability (Hand and Chyba, 2007; Vance and others, 2016).
+- **As built** (B8): 5 × 5 × 13, the three tubes with lamps between them on a sulfur concrete hall under a vault roof; GTM's overclock; ids `grindless:bioreactor/luv/algae` and `…/europan_culture`. `gtceu:brewery/bacteria` is removed in the same script. The culture takes B5's chondritic extract, so B8 merges after B5.
 
 ### 19. Gravitational-wave detector: `gtceu:gravitational_wave_detector`, type `gtceu:gravitational_wave_astronomy` (observatory step 6; Ganymede)
 
@@ -912,6 +962,7 @@ This plant takes slot 16 only if spike S0-3 shows that a second station can't be
   - LuV: the zero-g grower's test masses.
 - **Risks:** the whole L must stay loaded while it runs.
 - **Source:** real: LIGO and GW150914 (2015), Virgo, KAGRA (underground, sapphire mirrors at 20 K).
+- **As built (B9):** 33 × 5 × 33: two hollow 3×3 tubes 25 long and a 3×3×3 end station on each arm, one layer of packed or blue ice over every tube and end station, hatches only on the vertex. The catalogue run also keeps the Sagittarius A* signal (`notConsumable`), the IV crossing above. Spike S0-7's buried L: `gg_test_luv_ganymede`.
 
 ### 20. Coilgun probe launcher: `gtceu:coilgun_launcher`, type `gtceu:probe_launch` (Ganymede)
 
@@ -939,13 +990,15 @@ This plant takes slot 16 only if spike S0-3 shows that a second station can't be
   - LuV: the magnet works;
   - ZPM: the survey and the chart.
 - **Source:** real: O'Neill's mass drivers (1970s), Galileo's entry probe (1995), gravity assists, and Hg-1223 (Schilling and others, 1993).
+- **As built (B9):** 37 × 5 × 8: 33 rings of eight coil casings (264) around an open bore, a 5×5×4 tungstensteel breech with the controller on its rear face, a 3×3×3 tungstensteel pulse bank beside it. Probes in the LuV assembler (30,720 EU/t × 200 t): Jupiter entry = 4 heat-shielding fabrics + LuV sensor + HV lithium battery + 4 titanium plates; Saturn flyby = 2 RTG pellets + LuV sensor + LuV emitter + 4 titanium plates. The Saturn chart copies with a data orb, like every chart.
 
 ## Older machines, new modes (not counted)
 
 ### Naquadah plant, mode 2: the exact balance
 
-`lib/compose.js` composes the mode at every load from GT--'s live recipes, pinned by id, as mode 1 is. A pinned recipe that comes back empty (no inputs and no outputs) stops the load with an error. The dump has three such placeholders, and all are rejected:
+`lib/compose.js` composes the mode at every load from GT--'s live recipes, pinned by id, as mode 1 is. A pinned recipe that comes back empty (no inputs and no outputs) stops the mode with an error. GT-- empties four GTM placeholders (`NaquadahLine#remove`), and all are rejected:
 - `gtceu:centrifuge/impure_enriched_naquadah_solution_separation`;
+- `gtceu:centrifuge/acidic_enriched_naquadah_separation`;
 - `gtceu:centrifuge/acidic_naquadria_solution_separation`;
 - `gtceu:centrifuge/impure_naquadria_solution_separation`.
 
@@ -1015,6 +1068,10 @@ They are 5 EU/t × 100 t with nothing in and nothing out.
   - **Out:** 5 enriched naquadah sulfate + 1 at 62.5 %; 1 trinium sulfide; 2,375 mB impure naquadria solution; 1 titanium ingot; about 10,000 mB HF.
   - **EU:** about 109 M *(composed when built)*.
   - **What it means:** six rods that gave 6 G EU come back as 0.94 enriched ingot. The fuel cycle returns about 16 %, so reactor III is never a perpetual engine (rule 8).
+- **As built (A2, spike S0-11 static):** `tables/naquadah_plant.json` (circuits 2 and 3), `iv/naquadah_plant.js`, `lib/compose.js` (`recovered` keys and `tagItems`), checked by `tools/analysis/test/naquadah-mode2.test.mjs` on the pinned recipes (`tools/analysis/fixtures/gtnn-1.3.10-naquadah-line.json`; jar and dump agree).
+  - **Circuit 2** composes to exactly the run above: 4 oxide + 36,000 mB F₂ + 26,500 mB H₂ + 8,000 mB H₂SO₄ + Pu-Be at 75 of 10,000 → 11 sulfate + 1 at 25 %, 2 trinium sulfide, 3 Ti + 1 at 50 %, 750 mB impure naquadria, 8,500 mB HF. Held: 1,000 mB xenon, 2,500 mB HSbF₆, 4 AuF₃, 1 Pd/C at 400 of 10,000. **30,717 EU/t × 5,984 t = 183.8 M EU**: 0.2 M over the figure above, the vacuum freezer that cools the batch's 0.875 hot titanium (mode 1 counts it too).
+  - **Circuit 3** (6 naquadah dust; one spent long rod macerates to one dust, `gtceu:macerator/macerate_long_naquadah_rod`): + 18,000 mB F₂ + 15,000 mB H₂ + 4,000 mB H₂SO₄ + Pu-Be at 38 → 5 sulfate + 1 at 62.5 %, 1 trinium sulfide, 1 Ti, 2,375 mB naquadria, 10,000 mB HF. Pd/C at 200. **30,716 EU/t × 3,558 t = 109.3 M EU.**
+  - Recovered per circuit-2 run (what GT-- as it runs would lose): 2,000 mB xenon, 2 gold, 38 SbF₃ against 4 Sb₂O₃ given, 4 Pd/C.
 
 ### Platinum plant, mode 4: asteroid platinum metals, absolute
 
@@ -1027,12 +1084,18 @@ They are 5 EU/t × 100 t with nothing in and nothing out.
 - **The sum per 22 concentrate:** Pt 6 + Pd 4.20 + Ru 4.49 + Rh 1.35 + Ir 3 + Os 3 = **22.04 units**. One concentrate is one unit of platinum metal, so the balance closes.
   - The split is 27 / 19 / 20 / 6 / 14 / 14 %, against the CI chondrites' 30 / 17 / 21 / 4 / 14 / 15 %.
 - **Yield:** 22 concentrate ← 352 crushed meteoric iron, about 16 harpoon-drill runs.
+- **As built (A2):** the list above (mode 3 ×1.5) cannot give 3 Ir + 3 Os, so the mode is composed: our opening stage (`tables/asteroid_pgm.json`: 22 concentrate + 15 saltpeter + 1,500 mB salt water → 1 sludge + 6 rarest metal mixture + 2,700 mB OsO₄ + 1,500 mB steam; 138,720 EU, 1.5 × the Mercury fusion's plus one sludge through mode 1's attack), then mode 3's live GT-- chain. `grindless:pgm_refining/luv/asteroid`, checked by `tools/analysis/test/platinum-asteroid.test.mjs`:
+  - **In:** 22 concentrate + 15 saltpeter + 3 calcium + 1,500 mB salt water + 10,500 mB HCl + 21,000 mB H₂ + the electrode (0.1 %).
+  - **Out:** 1 platinum group sludge + 3 Ir + 3 Os + 3 platinum sludge residue + 3 metal sludge + 12 CaCl₂ + 8,700 mB water + 1,500 mB steam.
+  - **EU:** 1,920 EU/t × 1,106 t (2.12 M EU). It refuses voiding (`grindless_pgm_keep`); modes 1–3 stay voidable.
+  - The sum per 22 concentrate stays 22.04 units. Until B5 removes A1's EMI hiding of the concentrate, EMI drops this recipe with it.
 
 ### Cryogenic fuel tank
 
-`grindless:cryogenic_fuel_tank` *(id final after S0-2)*:
-- the KubeJS block type `gcyr:fuel_tank`, with `.tier(5)` and `.fuelStorage(16000)` *(tune)*;
-- LuV assembler, 30,720 EU/t × 400 t: GCYR's elite fuel tank + 6 HSS-S plates + 8 Kapton K plates + a LuV pump, with the Outer System Chart as a catalyst *(tune)*.
+`grindless:cryogenic_fuel_tank` (final; B1, `startup_scripts/grindless/luv/travel.js`):
+- the KubeJS block type `gcyr:fuel_tank`, with `.tier(5)` and `.fuelStorage(16000)`, the builder S0-2 launched natively;
+- LuV assembler, 30,720 EU/t × 400 t: GCYR's elite fuel tank + 6 HSS-S plates + 8 Kapton K plates + a LuV pump, with the Outer System Chart as a catalyst (`grindless:assembler/cryogenic_fuel_tank`).
+- Its model is a vertical column (`models/block/luv/cryogenic_fuel_tank.json`, textures from `tools/assets/Build-LuVTravelTextures.ps1`), as rocket tanks stand.
 
 ## Family steps
 
@@ -1074,6 +1137,9 @@ They are 5 EU/t × 100 t with nothing in and nothing out.
   - the LuV cell, `grindless:luv_smes_cell`, a superconducting magnetic-energy-storage coil from the HTS magnet works. It is the LuV row of `tables/wireless_energy.json`, and its capacity follows the table's rule: six LuV vanadium batteries (`gtceu:luv_vanadium_battery`, 163,840,000 EU each), so 983,040,000 EU.
   - **The jump:** the network outputs LuV only when every formed tower holds LuV cells.
   - **Before the jump:** a multiblock with two IV wireless energy hatches reaches LuV voltage (two-hatch rule; spike S0-10 checks that wireless hatches count).
+    - *Static answer (A4, GTM 7.5.3 source):* they count. A wireless energy hatch is GTM's own `EnergyHatchPartMachine` with `INPUT_ENERGY`, so its container joins the controller's `EnergyContainerList`, and `WorkableElectricMultiblockMachine#getMaxVoltage` gives one tier more when `getNumHighestInputContainers() > 1`. The bench's `TWO_HATCH` check runs the HTS coil (30,720 EU/t) on two IV wireless hatches and refuses it on one.
+    - *Does an orbital generator feed a wireless dynamo hatch?* Statically yes: the settlement reads every tracked block through `server.getLevel(dimension)` and `isLoaded`, with no dimension rule (the Moon is natively proven), and `gcyr:overworld_orbit` is an ordinary datapack level (`gcyr:space`, Y 0–255). The station's chunks must stay loaded (FTB Chunks) for its generators to run unattended. The bench's `ORBIT` check runs the generator array there.
+  - **The LuV cell's recipe** is the magnet works' (circuit 2), not the assembler's: the table's LuV row says `cellMadeBy: gtceu:hts_magnet_works`, and the wireless script skips the assembler cell recipe for it.
   - The gate's assembly-line recipes at 100,000–122,880 EU/t need two LuV hatches, so the jump is a gate step.
   - **ZPM's jump:** the ZPM cells are ZPM's first recipe after the gate. They need the ZPM parts the gate proves.
 
@@ -1084,14 +1150,15 @@ They are 5 EU/t × 100 t with nothing in and nothing out.
 | Orbital solar station | Earth orbit | 630 a lit panel; 40,320 for 64 | 38,304 | the panels | no |
 | Volcanic intake | Io | up to 131,072 | 124,518 | SO₂ charge; a bundle about every hour per module | no |
 | Flux-tube tether | Io orbit | up to 131,072 | 124,518 | a spool about every hour; 50 mB argon a run | no |
-| Mk1 calcium plasma (GTCA) → GTM's plasma turbine | Earth | about 39,400 net per Mk1 *(verify on the bench)* | about 37,400 | 128 mB Mg + 128 mB O₂ a run | yes |
+| Mk1 calcium plasma (GTCA) → GTM's plasma turbine | Earth | about 78,800 net per Mk1 (one fusion overclock; *the bench confirms*) | about 74,900 | 256 mB Mg + 256 mB O₂ every 128 t | yes |
 | Mk1 D + T | Earth | about 1,640 on average per full reactor's tritium | — | tritium | yes |
 | RTG cell (IV) | anywhere | 2,048 | 1,946 | a pellet an hour | no |
 
 - **The calcium plasma, from the dump** (decision 19: the net figure is checked on the bench in B10):
   - A run is 7,680 EU/t × 128 t (983,040 EU) for 16 mB of plasma.
   - `gtceu:plasma_generator/calcium_plasma` gives 2,048 EU/t × 184 t per mB, already doubled: 6.03 M EU.
-  - Net, 5.05 M EU per 128 t, so about 39,400 EU/t per Mk1, paid in magnesium. It is LuV's only fusion power that is not tied to tritium.
+  - Net, 5.05 M EU a run, paid in magnesium. It is LuV's only fusion power that is not tied to tritium.
+  - **B10, from GTM 7.5.3's code:** the Mk1 caps its voltage at LuV (`FusionReactorMachine#getMaxVoltage`), and its overclock doubles the EU/t and halves the time (`FUSION_OC`). The recipe is IV, so it gets one overclock: 15,360 EU/t × 64 t, the same 983,040 EU a run. Back to back, that is about **78,800 EU/t net per Mk1**, twice the first estimate of 39,400, which left the overclock out. Nd + H → Eu is a LuV recipe and gets none. The bench fixture `gg_test_luv_fusion` measures the real run.
 - **The gate's 524,288 EU/t out of the bank needs at least 551,882 in.** For example:
 
   | Source | EU/t |
@@ -1131,7 +1198,8 @@ They are 5 EU/t × 100 t with nothing in and nothing out.
   - **Who takes it** (`lib/parallel_hatch.js`):
     - IV's plants, the naquadah and platinum plants included;
     - LuV's helium refrigerator, coated conductor line, magnet works, biofoundry, smelter, grower, wake shield facility, organoid lab, asteroid processor and fumarole condenser.
-  - Every copy pays its EU/t, and the total is capped by voltage: two LuV hatches run four copies of a 30,720 EU/t recipe. The amperage of a wireless hatch doesn't lift that cap.
+  - Every copy pays its EU/t, and the total is capped by the overclock voltage: two 2 A LuV hatches run four copies of a 30,720 EU/t recipe.
+  - Multi-amp hatches lift that cap, as in GTM. GTM 7.5.3 folds V × A of all the energy hatches into the overclock voltage (`EnergyContainerList.calculateVoltageAmperage`, `WorkableElectricMultiblockMachine#getOverclockVoltage`), and that voltage caps both the parallels (`EURecipeCapability#getMaxParallelByInput`) and the overclocks. GTM's own 4 A and 16 A hatches do it too. Two 64 A LuV wireless hatches (2,097,152 V at 2 A) fit all 16 copies of the LuV hatch. The recipe-tier gate stays the hatch tier, plus one for two hatches (`getMaxVoltage`). S0-10's `MULTI_AMP` check reads it on the bench.
 - **The assembly line from AE2** builds:
   - the Mk1's parts (15 LuV hatches, 39 LuV pumps, the field generators);
   - the ZPM motor and energy hatch;
@@ -1147,13 +1215,13 @@ They are 5 EU/t × 100 t with nothing in and nothing out.
     - The advanced computation and bridge components need UV circuits: beyond LuV.
   - **HPCA:** `gtceu:assembly_line/high_performance_computing_array`, 100,000 EU/t × 1,200 t: a data bank, 4 ZPM circuits, 8 LuV field generators, 64 URhNq₂ double wires, 16 optical pipes and 4,000 mB PCB coolant.
   - **Research station:** `gtceu:assembly_line/research_station`, 100,000 EU/t × 1,200 t: a data bank, 8 LuV sensors, 8 ZPM circuits, 2 LuV field generators, 2 ZPM motors, 32 URhNq₂ double wires, 32 trinium foils and 16 optical pipes.
-  - **URhNq₂:** `gtceu:mixer/uranium_rhodium_dinaquadide`, 122,880 EU/t × 150 t: uranium + rhodium + 2 naquadah. GCYM's large mixer takes it on two LuV hatches (`Predicates.autoAbilities` allows two energy hatches, `Predicates.java:159–160`).
+  - **URhNq₂:** `gtceu:mixer/uranium_rhodium_dinaquadide`, 122,880 EU/t × 150 t: uranium + rhodium + 2 naquadah. GCYM's large mixer takes it on two LuV hatches (`Predicates.autoAbilities` allows two energy hatches, `Predicates.java:159–160`). The dust is not the end: the ingot needs a 9,000 K blast (an EBF with trinium coils), and the 122,880 EU/t double-wire assembler recipe runs on our Universal Assembly Factory on two LuV hatches (checked by the LuV integrated run's validator).
   - **The goal:** the data orb for `gtceu:assembly_line/energy_hatch_zpm`.
   - The 100,000 EU/t recipes need two LuV hatches. From the network, that means its LuV tier.
-- **GCYM at LuV:** the large mixer (an osmiridium rotor), now essential for URhNq₂. The mega blast furnace and the mega vacuum freezer stay ZPM.
+- **GCYM at LuV:** the large mixer (an osmiridium rotor), now essential for URhNq₂ dust (then a trinium-coil EBF and the Universal Assembly Factory). The mega blast furnace and the mega vacuum freezer stay ZPM.
 - **Circuits in batches:**
   - NPUs from the organoid lab;
-  - wetware processors from GT--'s line (32 a run);
+  - wetware processors from GT--'s line (32 a run, one LuV energy hatch on GT--'s circuit assembly line);
   - crystal chips from the grower, then GTM's engraver and circuit assembler.
 
 ## AE2 between planets: the LuV step
@@ -1225,10 +1293,10 @@ No passive waits (decision 12): every row is something built or run.
 |---|---|
 | ZPM hull | trinium (mode 2) and naquadah alloy (the smelter or the 7,200 K EBF) |
 | ZPM motor, made by the assembly line from the network | the Mk1's europium (96 fine wires), Mars samarium, osmiridium |
-| HPCA and research station formed, with computation components | computer casings, the data bank, URhNq₂ from the large mixer on two LuV hatches, ZBLAN optical pipes, PCB coolant |
+| HPCA and research station formed, with computation components | computer casings, the data bank, URhNq₂ (large mixer, trinium-coil EBF, Universal Assembly Factory, all on two LuV hatches), ZBLAN optical pipes, PCB coolant |
 | The ZPM energy hatch's data orb, written by the research station; then the hatch, made by the assembly line on two LuV hatches (122,880 EU/t) | research; UHPIC (the wake shield); ZPM voltage coils (a ZPM assembler, its parts from the line, on a transformer); NaK |
 | Mk1 formed with HTS coils, one Nd + H → Eu run | the magnet works, trinium, 15 LuV hatches, the neutron reflectors |
-| 4 wetware processors and 4 crystal processor assemblies on the network | the organoid lab (NPU), GT--'s line, the grower |
+| 4 wetware processors and 4 crystal processor assemblies on the network | the organoid lab (NPU), GT--'s line (one LuV energy hatch on GT--'s circuit assembly line), the grower |
 | The network at LuV (every formed tower on LuV SMES cells) and a calibrated load: 524,288 EU/t for 60 s, through a 16 A LuV wireless energy hatch (exactly 524,288 EU/t) into a GTM power substation (its display shows the input) | the power plan and the network-tier jump |
 | One representative run at each site: Mond and optical mining (belt), fumarole separation and an intake run (Io), a tether run (Io orbit) or, in its place, a sulfur–iodine run (Io), a Europan culture (Europa), the catalogue and a probe (Ganymede), one recipe each of the smelter, wake shield, grower, ring and organoid lab (orbit) | the bases work |
 | Stored: helium-3 (the Moon, since HV), deuterium, tritium, impure naquadria solution | ZPM's fusion as infrastructure |
@@ -1250,7 +1318,7 @@ The ten-minute run of every base, untouched, lives only in the bench's integrati
 
 - **Asteroid metals and the chondritic extract only from the belt.** Iridium and osmium only off Earth: Mercury or the belt.
 - **Living matter only from Europa:** `gtceu:bacteria` comes only from the algae bioreactor's Europa recipe once B8 lands; everything downstream follows.
-- **The NPU at LuV only from the organoid lab.** Wetware processors come from GT--'s line at ZPM voltage on two LuV hatches. GTM's ZPM circuit assembler counts as ZPM.
+- **The NPU at LuV only from the organoid lab.** Wetware processors come from one LuV energy hatch on GT--'s circuit assembly line (its wetware recipe re-registered at 30,720 EU/t, the same energy). GTM's ZPM circuit assembler counts as ZPM, and our Universal Assembly Factory refuses GTM's NPU recipe unless one hatch reaches ZPM.
 - **Germanium and sulfur concrete only from Io.** Europium only from the Mk1.
 - **Trinium only from mode 2** (Venus naquadah, or spent rods).
 - **The Mk1:** no osmium or uranium from fusion; duranium only from the Mk2 (a 200 M EU start).
@@ -1270,13 +1338,14 @@ The ten-minute run of every base, untouched, lives only in the bench's integrati
 - **Model:**
   - our generator types are EU sources into the wireless network (`gtceu:orbital_solar`, `gtceu:volcanic_heat`, `gtceu:electrodynamic_tether`);
   - the network's tier is a synthetic step: LuV when the SMES cells exist.
+- **As built (C1):** `tools/analysis/tiers/luv.json`, with seven substages (`luv`, `luv-orbit`, `luv-belt`, then `luv-io`, `luv-europa` and `luv-ganymede` as siblings, then `luv-io-orbit`; the way to the moons is crafted after the belt). Dimension ids come from `tables/orbits.json` and `tables/places.json`. Each package's targets warn until a dump carries it (`packages`), so the config holds the whole design before every package lands. Mode 2 on two IV hatches is in `tiers/iv.json`.
 
 ## Mods and integration
 
 | Mod | Slug | Use in LuV |
 |---|---|---|
 | GCYR | `gcyr` | five datapack planets and ten dimensions; the station packager and package; photovoltaic cells; the KubeJS fuel tank for level 4; satellites hidden |
-| GT-- | `gtnn` | naquadah reactor III; the live naquadah line (mode 2 composes it); the circuit assembly line (wetware processors from NPUs) |
+| GT-- | `gtnn` | naquadah reactor III; the live naquadah line (mode 2 composes it); the circuit assembly line (wetware processors from NPUs; its own recipe takes 1,440 mB of molten cerrobase 140, made by `grindless:fluid_heater/molten_cerrobase_140` from GTM's liquid cerrobase at the price of GTM's melting of an ingot) |
 | GTCA | `gtca` | calcium plasma (Mk1 power); its germanium froth stays ZPM |
 | Biomes O' Plenty | `biomesoplenty` | Io's blocks, by id |
 | EU P2P Tunnel, MEGA Cells, Expanded AE | `eup2p`, `mega`, `expanded-ae` | the AE2 route and capacity |
@@ -1308,8 +1377,8 @@ No new mods. LuV builds on the pack's own wireless network (v0.7.x).
 
 ## Risks and open questions
 
-- **GCYR beyond the inner planets** (spikes S0-1 to S0-3): datapack planets and the Jupiter group, level 4 with tier 5 KubeJS tanks, the deployment of two stations, very low gravity. GCYR's launch issues #91 and #122 still apply.
-- **The wireless network's LuV tier** (S0-10): LuV is built on a package still in progress (LV to IV). Do wireless hatches count for the two-hatch rule, and does an orbital generator feed it?
+- **GCYR beyond the inner planets** (spikes S0-1 to S0-3): datapack planets and the Jupiter group, and level 4 with tier 5 KubeJS tanks, passed natively; the deployment of two stations (S0-3) is still open. GCYR's configured gravity is not applied (S0-1), so the pack claims no low gravity. GCYR's launch issues #91 and #122 still apply.
+- **The wireless network's LuV tier** (S0-10): LuV is built on a package still in progress (LV to IV). Do wireless hatches count for the two-hatch rule, and does an orbital generator feed it? A4 answers both from GTM's source (yes, and yes with the chunks loaded; *Power on the wireless network*); the integrated run confirms them.
 - **World generation:** the belt's floor and its new KubeJS layer (S0-6); Io's paterae and fumaroles, the cryobot's ice shaft and the GW detector's buried L (S0-7).
 - **The composed mode 2** depends on GT--'s recipe ids staying put. The pins fail loudly (S0-11).
 - **TPS:** ten new dimensions, four bases and two stations loaded. Watch it with spark (C3).
@@ -1320,7 +1389,7 @@ No new mods. LuV builds on the pack's own wireless network (v0.7.x).
 - **Unknowns:**
   - whether one suit piece keeps both thermal tags (S0-8);
   - GT--'s total EU per circuit-3 run;
-  - the wireless package's scripts know five tiers, LV to IV; A4 extends them to LuV.
+  - the wireless package's scripts know five tiers, LV to IV; A4 extends them to LuV (the table drives the tiers).
 - **Credits:** each package notes its sources in `CREDITS.md`: GCYR's `luna` noise (LGPL-3.0) for the belt, quests adapted from Star Technology (MIT) and Monifactory (LGPL), and each machine's real-world sources. GTNH and GT Leisure stay ideas only.
 
 ## Build order
@@ -1328,7 +1397,7 @@ No new mods. LuV builds on the pack's own wireless network (v0.7.x).
 LuV is built in packages after v0.7.x, as IV was. Test bands start at X 13568 and go in steps of 256; X 16384 belongs to the hologram projector, so LuV skips it.
 
 **Spikes come first (S0):** disposable tests that run before any permanent id is registered. Their files stay in the bench overlay.
-- **S0-1:** a datapack Jupiter with one moon: the menu, the worlds, the sky, the weather, low gravity and the flight back.
+- **S0-1:** a datapack Jupiter with one moon: the menu, the worlds, the sky, the weather and the flight back (passed; it also showed that GCYR's gravity value is not applied).
 - **S0-2:** a tier 5 KubeJS fuel tank in a real level 4 launch and return.
 - **S0-3:** a station packed, launched and used in Earth orbit, then a second one in a moon's orbit.
 - **S0-4:** GT--'s circuit assembly line refusing GTM's NPU recipe on LuV hatches.
@@ -1378,10 +1447,10 @@ The design above follows these. The first twelve came with the design review; th
 1. **Places:**
    - five GCYR entries and ten dimensions: the belt, Jupiter, Io, Europa and Ganymede, each with its orbit;
    - Jupiter is a tier 5 placeholder, there only for the menu;
-   - the ids are final after the planet spike (S0-1).
+   - the ids are final after the planet spike (S0-1): fixed in B1.
 2. **Level 4 rocket:**
    - GCYR's elite motors with tier 5 tanks, registered through GCYR's KubeJS `gcyr:fuel_tank` builder; no Java;
-   - the tank's id is final after a real level 4 launch and return (S0-2).
+   - the tank's id is final after a real level 4 launch and return (S0-2): `grindless:cryogenic_fuel_tank`, fixed in B1.
 3. **Stations:** the first in Earth orbit; a second, in Io orbit, only for the tether (decision 17).
 4. **Living circuits at LuV:**
    - bacteria come only from Europa;

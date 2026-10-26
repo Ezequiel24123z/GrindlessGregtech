@@ -1,0 +1,10 @@
+{
+  "type": "emi:info",
+  "stacks": [
+    "item:grindless:saturn_transfer_chart"
+  ],
+  "text": [
+    "emi.grindless.info.saturn_transfer_chart.0",
+    "emi.grindless.info.saturn_transfer_chart.1"
+  ]
+}

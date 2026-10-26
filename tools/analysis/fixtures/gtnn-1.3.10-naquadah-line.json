@@ -1,0 +1,1363 @@
+{
+ "_source": "GT-- 1.3.10's naquadah line as the pack loads it (gtnn-1.20.1-1.3.10.jar, pinned in pack/mods/gtnn.pw.toml), read from the native recipe dump of the power-quests-1 bench run (2026-10-25, tools/test kubejs-exported/recipes.json, format gg-recipes-1): the original recipes of every stage that data/grindless/tables/naquadah_plant.json pins, and GT--'s three emptied centrifuge placeholders. Cross-checked against the jar's dev.arbor.gtnn.data.recipes.NaquadahLine (LuV A2, spike S0-11).",
+ "_how_it_is_used": [
+  "tools/analysis/test/naquadah-mode2.test.mjs runs server_scripts/grindless/lib/compose.js and iv/naquadah_plant.js on these recipes (a stand-in for ServerEvents.recipes' originalRecipes) and checks every mode's balance against docs/eras/luv.md and docs/eras/iv.md.",
+  "When pack/mods/gtnn.pw.toml moves to another GT-- version the test fails on purpose: dump the new pack natively, rebuild this file from it (same ids) with the new gtnnVersion, set the table's gtnnVersion, and re-check the balance before accepting it.",
+  "liveComposed is the naquadah plant's mode 1 recipe as the same native run built it: the stand-in must compose exactly that.",
+  "related: recipes the modes rely on outside the plant: GTM's recycling macerator turns reactor III's spent long naquadah rod (gtceu:naquadah_reactor/naquadah_reactor_iii returns gtceu:long_naquadah_rod) into one naquadah dust, circuit 3's input."
+ ],
+ "gtnnVersion": "1.3.10",
+ "recipes": {
+  "gtceu:neutron_activator/naquadah": {
+   "type": "gtceu:neutron_activator",
+   "duration": 100,
+   "category": "gtceu:neutron_activator",
+   "recipeConditions": [
+    {
+     "evRange": 2300220,
+     "type": "neutron_activator_condition"
+    }
+   ],
+   "inputs": {
+    "fluid": [
+     {
+      "content": {
+       "amount": 6000,
+       "value": [
+        {
+         "tag": "forge:fluoroantimonic_acid"
+        }
+       ]
+      }
+     }
+    ],
+    "item": [
+     {
+      "content": {
+       "type": "gtceu:sized",
+       "count": 4,
+       "ingredient": {
+        "tag": "forge:dusts/naquadah_oxide_mixture"
+       }
+      }
+     }
+    ]
+   },
+   "outputs": {
+    "item": [
+     {
+      "content": {
+       "type": "gtceu:sized",
+       "count": 2,
+       "ingredient": {
+        "item": "gtceu:titanium_trifluoride_dust"
+       }
+      }
+     },
+     {
+      "content": {
+       "type": "gtceu:sized",
+       "count": 2,
+       "ingredient": {
+        "item": "gtceu:naquadah_dust"
+       }
+      }
+     },
+     {
+      "content": {
+       "item": "gtceu:gallium_dust"
+      },
+      "chance": 5000
+     }
+    ]
+   }
+  },
+  "gtceu:chemical_reactor/fluoroantimonic_acid": {
+   "type": "gtceu:chemical_reactor",
+   "duration": 300,
+   "category": "gtceu:chemical_reactor",
+   "tickInputs": {
+    "eu": [
+     {
+      "content": 480
+     }
+    ]
+   },
+   "inputs": {
+    "fluid": [
+     {
+      "content": {
+       "amount": 4000,
+       "value": [
+        {
+         "tag": "forge:hydrofluoric_acid"
+        }
+       ]
+      }
+     }
+    ],
+    "item": [
+     {
+      "content": {
+       "type": "gtceu:sized",
+       "count": 4,
+       "ingredient": {
+        "tag": "forge:dusts/antimony_trifluoride"
+       }
+      }
+     }
+    ]
+   },
+   "outputs": {
+    "fluid": [
+     {
+      "content": {
+       "amount": 1000,
+       "value": [
+        {
+         "fluid": "gtceu:fluoroantimonic_acid"
+        }
+       ]
+      }
+     },
+     {
+      "content": {
+       "amount": 2000,
+       "value": [
+        {
+         "fluid": "gtceu:hydrogen"
+        }
+       ]
+      }
+     }
+    ]
+   }
+  },
+  "gtceu:chemical_reactor/antimony_trifluoride": {
+   "type": "gtceu:chemical_reactor",
+   "duration": 60,
+   "category": "gtceu:chemical_reactor",
+   "tickInputs": {
+    "eu": [
+     {
+      "content": 30
+     }
+    ]
+   },
+   "inputs": {
+    "fluid": [
+     {
+      "content": {
+       "amount": 6000,
+       "value": [
+        {
+         "tag": "forge:hydrofluoric_acid"
+        }
+       ]
+      }
+     }
+    ],
+    "item": [
+     {
+      "content": {
+       "type": "gtceu:sized",
+       "count": 5,
+       "ingredient": {
+        "tag": "forge:dusts/antimony_trioxide"
+       }
+      }
+     }
+    ]
+   },
+   "outputs": {
+    "fluid": [
+     {
+      "content": {
+       "amount": 3000,
+       "value": [
+        {
+         "fluid": "minecraft:water"
+        }
+       ]
+      }
+     }
+    ],
+    "item": [
+     {
+      "content": {
+       "type": "gtceu:sized",
+       "count": 8,
+       "ingredient": {
+        "item": "gtceu:antimony_trifluoride_dust"
+       }
+      }
+     }
+    ]
+   }
+  },
+  "gtceu:electric_blast_furnace/titanium_trifluoride_separation": {
+   "type": "gtceu:electric_blast_furnace",
+   "data": {
+    "ebf_temp": 1941
+   },
+   "duration": 900,
+   "category": "gtceu:electric_blast_furnace",
+   "tickInputs": {
+    "eu": [
+     {
+      "content": 480
+     }
+    ]
+   },
+   "inputs": {
+    "fluid": [
+     {
+      "content": {
+       "amount": 3000,
+       "value": [
+        {
+         "tag": "forge:hydrogen"
+        }
+       ]
+      }
+     }
+    ],
+    "item": [
+     {
+      "content": {
+       "type": "gtceu:sized",
+       "count": 4,
+       "ingredient": {
+        "tag": "forge:dusts/titanium_trifluoride"
+       }
+      }
+     }
+    ]
+   },
+   "outputs": {
+    "fluid": [
+     {
+      "content": {
+       "amount": 3000,
+       "value": [
+        {
+         "fluid": "gtceu:hydrofluoric_acid"
+        }
+       ]
+      }
+     }
+    ],
+    "item": [
+     {
+      "content": {
+       "type": "gtceu:sized",
+       "count": 1,
+       "ingredient": {
+        "item": "gtceu:hot_titanium_ingot"
+       }
+      }
+     }
+    ]
+   }
+  },
+  "gtceu:vacuum_freezer/cool_hot_titanium_ingot": {
+   "type": "gtceu:vacuum_freezer",
+   "duration": 144,
+   "category": "gtceu:vacuum_freezer",
+   "tickInputs": {
+    "eu": [
+     {
+      "content": 480
+     }
+    ]
+   },
+   "inputs": {
+    "item": [
+     {
+      "content": {
+       "type": "gtceu:sized",
+       "count": 1,
+       "ingredient": {
+        "tag": "forge:hot_ingots/titanium"
+       }
+      }
+     }
+    ]
+   },
+   "outputs": {
+    "item": [
+     {
+      "content": {
+       "type": "gtceu:sized",
+       "count": 1,
+       "ingredient": {
+        "item": "gtceu:titanium_ingot"
+       }
+      }
+     }
+    ]
+   }
+  },
+  "gtceu:large_chemical_reactor/enriched_naquadah_oxide_mixture": {
+   "type": "gtceu:large_chemical_reactor",
+   "duration": 200,
+   "category": "gtceu:large_chemical_reactor",
+   "tickInputs": {
+    "eu": [
+     {
+      "content": 1920
+     }
+    ]
+   },
+   "inputs": {
+    "fluid": [
+     {
+      "content": {
+       "amount": 3000,
+       "value": [
+        {
+         "tag": "forge:fluoroantimonic_acid"
+        }
+       ]
+      }
+     }
+    ],
+    "item": [
+     {
+      "content": {
+       "type": "gtceu:sized",
+       "count": 2,
+       "ingredient": {
+        "tag": "forge:dusts/enriched_naquadah_oxide_mixture"
+       }
+      }
+     }
+    ]
+   },
+   "outputs": {
+    "fluid": [
+     {
+      "content": {
+       "amount": 2000,
+       "value": [
+        {
+         "fluid": "gtceu:impure_enriched_naquadah_solution"
+        }
+       ]
+      }
+     }
+    ],
+    "item": [
+     {
+      "content": {
+       "type": "gtceu:sized",
+       "count": 2,
+       "ingredient": {
+        "item": "gtceu:antimony_trioxide_dust"
+       }
+      }
+     },
+     {
+      "content": {
+       "type": "gtceu:sized",
+       "count": 7,
+       "ingredient": {
+        "item": "gtceu:titanium_trifluoride_dust"
+       }
+      }
+     }
+    ]
+   }
+  },
+  "gtceu:large_chemical_reactor/hexafluoride_enriched_naquadah_solution": {
+   "type": "gtceu:large_chemical_reactor",
+   "duration": 400,
+   "category": "gtceu:large_chemical_reactor",
+   "tickInputs": {
+    "eu": [
+     {
+      "content": 7680
+     }
+    ]
+   },
+   "inputs": {
+    "fluid": [
+     {
+      "content": {
+       "amount": 1000,
+       "value": [
+        {
+         "tag": "forge:impure_enriched_naquadah_solution"
+        }
+       ]
+      }
+     },
+     {
+      "content": {
+       "amount": 6000,
+       "value": [
+        {
+         "tag": "forge:fluorine"
+        }
+       ]
+      }
+     }
+    ]
+   },
+   "outputs": {
+    "fluid": [
+     {
+      "content": {
+       "amount": 1000,
+       "value": [
+        {
+         "fluid": "gtceu:hexafluoride_enriched_naquadah_solution"
+        }
+       ]
+      }
+     }
+    ]
+   }
+  },
+  "gtceu:large_chemical_reactor/xenon_hexafluoro_enriched_naquadate": {
+   "type": "gtceu:large_chemical_reactor",
+   "duration": 200,
+   "category": "gtceu:large_chemical_reactor",
+   "recipeConditions": [
+    {
+     "cleanroom": "cleanroom",
+     "type": "cleanroom"
+    }
+   ],
+   "tickInputs": {
+    "eu": [
+     {
+      "content": 480
+     }
+    ]
+   },
+   "inputs": {
+    "fluid": [
+     {
+      "content": {
+       "amount": 1000,
+       "value": [
+        {
+         "tag": "forge:hexafluoride_enriched_naquadah_solution"
+        }
+       ]
+      }
+     },
+     {
+      "content": {
+       "amount": 1000,
+       "value": [
+        {
+         "tag": "forge:xenon"
+        }
+       ]
+      }
+     }
+    ]
+   },
+   "outputs": {
+    "fluid": [
+     {
+      "content": {
+       "amount": 1000,
+       "value": [
+        {
+         "fluid": "gtceu:xenon_hexafluoro_enriched_naquadate"
+        }
+       ]
+      }
+     }
+    ]
+   }
+  },
+  "gtceu:chemical_plant/enriched_naquadah_residue_solution": {
+   "type": "gtceu:chemical_plant",
+   "duration": 1200,
+   "category": "gtceu:chemical_plant",
+   "recipeConditions": [
+    {
+     "plantCasing": 6,
+     "type": "plant_casing_condition"
+    }
+   ],
+   "tickInputs": {
+    "eu": [
+     {
+      "content": 30720
+     }
+    ]
+   },
+   "inputs": {
+    "fluid": [
+     {
+      "content": {
+       "amount": 1000,
+       "value": [
+        {
+         "tag": "forge:xenon_hexafluoro_enriched_naquadate"
+        }
+       ]
+      }
+     },
+     {
+      "content": {
+       "amount": 1000,
+       "value": [
+        {
+         "tag": "forge:fluoroantimonic_acid"
+        }
+       ]
+      }
+     },
+     {
+      "content": {
+       "amount": 9000,
+       "value": [
+        {
+         "tag": "forge:hydrogen"
+        }
+       ]
+      }
+     }
+    ],
+    "item": [
+     {
+      "content": {
+       "type": "gtceu:sized",
+       "count": 1,
+       "ingredient": {
+        "tag": "forge:catalyst/palladium_on_carbon"
+       }
+      }
+     },
+     {
+      "content": {
+       "type": "gtceu:sized",
+       "count": 4,
+       "ingredient": {
+        "tag": "forge:dusts/gold_trifluoride"
+       }
+      }
+     }
+    ]
+   },
+   "outputs": {
+    "fluid": [
+     {
+      "content": {
+       "amount": 1000,
+       "value": [
+        {
+         "fluid": "gtceu:enriched_naquadah_solution"
+        }
+       ]
+      }
+     },
+     {
+      "content": {
+       "amount": 1000,
+       "value": [
+        {
+         "fluid": "gtceu:enriched_naquadah_residue_solution"
+        }
+       ]
+      }
+     },
+     {
+      "content": {
+       "amount": 8000,
+       "value": [
+        {
+         "fluid": "gtceu:hydrofluoric_acid"
+        }
+       ]
+      }
+     }
+    ]
+   }
+  },
+  "gtceu:mixer/enriched_naquadah_solution_separation": {
+   "type": "gtceu:mixer",
+   "duration": 100,
+   "category": "gtceu:mixer",
+   "tickInputs": {
+    "eu": [
+     {
+      "content": 480
+     }
+    ]
+   },
+   "inputs": {
+    "fluid": [
+     {
+      "content": {
+       "amount": 1000,
+       "value": [
+        {
+         "tag": "forge:enriched_naquadah_solution"
+        }
+       ]
+      }
+     },
+     {
+      "content": {
+       "amount": 2000,
+       "value": [
+        {
+         "tag": "forge:sulfuric_acid"
+        }
+       ]
+      }
+     }
+    ]
+   },
+   "outputs": {
+    "fluid": [
+     {
+      "content": {
+       "amount": 3000,
+       "value": [
+        {
+         "fluid": "gtceu:acidic_enriched_naquadah_solution"
+        }
+       ]
+      }
+     }
+    ]
+   }
+  },
+  "gtceu:neutron_activator/enriched_naquadah": {
+   "type": "gtceu:neutron_activator",
+   "duration": 120,
+   "category": "gtceu:neutron_activator",
+   "recipeConditions": [
+    {
+     "evRange": 4800460,
+     "type": "neutron_activator_condition"
+    }
+   ],
+   "inputs": {
+    "fluid": [
+     {
+      "content": {
+       "amount": 16000,
+       "value": [
+        {
+         "tag": "forge:acidic_enriched_naquadah_solution"
+        }
+       ]
+      }
+     }
+    ]
+   },
+   "outputs": {
+    "fluid": [
+     {
+      "content": {
+       "amount": 1000,
+       "value": [
+        {
+         "fluid": "gtceu:impure_naquadria_solution"
+        }
+       ]
+      }
+     }
+    ],
+    "item": [
+     {
+      "content": {
+       "type": "gtceu:sized",
+       "count": 15,
+       "ingredient": {
+        "item": "gtceu:enriched_naquadah_sulfate_dust"
+       }
+      }
+     }
+    ]
+   }
+  },
+  "gtceu:dehydrator/xenoauric_fluoroantimonic_acid": {
+   "type": "gtceu:dehydrator",
+   "duration": 240,
+   "category": "gtceu:dehydrator",
+   "tickInputs": {
+    "eu": [
+     {
+      "content": 1920
+     }
+    ]
+   },
+   "inputs": {
+    "fluid": [
+     {
+      "content": {
+       "amount": 2000,
+       "value": [
+        {
+         "tag": "forge:enriched_naquadah_residue_solution"
+        }
+       ]
+      }
+     }
+    ]
+   },
+   "outputs": {
+    "fluid": [
+     {
+      "content": {
+       "amount": 1000,
+       "value": [
+        {
+         "fluid": "gtceu:xenoauric_fluoroantimonic_acid"
+        }
+       ]
+      }
+     }
+    ],
+    "item": [
+     {
+      "content": {
+       "type": "gtceu:sized",
+       "count": 1,
+       "ingredient": {
+        "item": "gtceu:trinium_sulfide_dust"
+       }
+      }
+     }
+    ]
+   }
+  },
+  "gtceu:electrolyzer/xenoauric_fluoroantimonic_acid": {
+   "type": "gtceu:electrolyzer",
+   "duration": 1200,
+   "category": "gtceu:electrolyzer",
+   "tickInputs": {
+    "eu": [
+     {
+      "content": 7680
+     }
+    ]
+   },
+   "inputs": {
+    "fluid": [
+     {
+      "content": {
+       "amount": 1000,
+       "value": [
+        {
+         "tag": "forge:xenoauric_fluoroantimonic_acid"
+        }
+       ]
+      }
+     }
+    ]
+   },
+   "outputs": {
+    "fluid": [
+     {
+      "content": {
+       "amount": 1000,
+       "value": [
+        {
+         "fluid": "gtceu:xenon"
+        }
+       ]
+      }
+     },
+     {
+      "content": {
+       "amount": 3000,
+       "value": [
+        {
+         "fluid": "gtceu:hydrofluoric_acid"
+        }
+       ]
+      }
+     }
+    ],
+    "item": [
+     {
+      "content": {
+       "type": "gtceu:sized",
+       "count": 1,
+       "ingredient": {
+        "item": "gtceu:gold_dust"
+       }
+      }
+     },
+     {
+      "content": {
+       "type": "gtceu:sized",
+       "count": 1,
+       "ingredient": {
+        "item": "gtceu:antimony_trifluoride_dust"
+       }
+      }
+     }
+    ]
+   }
+  },
+  "gtceu:large_chemical_reactor/fluoroantimonic_acid": {
+   "type": "gtceu:large_chemical_reactor",
+   "duration": 300,
+   "category": "gtceu:large_chemical_reactor",
+   "tickInputs": {
+    "eu": [
+     {
+      "content": 480
+     }
+    ]
+   },
+   "inputs": {
+    "fluid": [
+     {
+      "content": {
+       "amount": 4000,
+       "value": [
+        {
+         "tag": "forge:hydrofluoric_acid"
+        }
+       ]
+      }
+     }
+    ],
+    "item": [
+     {
+      "content": {
+       "type": "gtceu:sized",
+       "count": 4,
+       "ingredient": {
+        "tag": "forge:dusts/antimony_trifluoride"
+       }
+      }
+     }
+    ]
+   },
+   "outputs": {
+    "fluid": [
+     {
+      "content": {
+       "amount": 1000,
+       "value": [
+        {
+         "fluid": "gtceu:fluoroantimonic_acid"
+        }
+       ]
+      }
+     },
+     {
+      "content": {
+       "amount": 2000,
+       "value": [
+        {
+         "fluid": "gtceu:hydrogen"
+        }
+       ]
+      }
+     }
+    ]
+   }
+  },
+  "gtceu:electrolyzer/gold_chloride": {
+   "type": "gtceu:electrolyzer",
+   "duration": 360,
+   "category": "gtceu:electrolyzer",
+   "tickInputs": {
+    "eu": [
+     {
+      "content": 120
+     }
+    ]
+   },
+   "inputs": {
+    "fluid": [
+     {
+      "content": {
+       "amount": 6000,
+       "value": [
+        {
+         "tag": "forge:chlorine"
+        }
+       ]
+      }
+     }
+    ],
+    "item": [
+     {
+      "content": {
+       "type": "gtceu:sized",
+       "count": 2,
+       "ingredient": {
+        "tag": "forge:dusts/gold"
+       }
+      }
+     }
+    ]
+   },
+   "outputs": {
+    "fluid": [
+     {
+      "content": {
+       "amount": 1000,
+       "value": [
+        {
+         "fluid": "gtceu:gold_chloride"
+        }
+       ]
+      }
+     }
+    ]
+   }
+  },
+  "gtceu:large_chemical_reactor/bromine_trifluoride": {
+   "type": "gtceu:large_chemical_reactor",
+   "duration": 120,
+   "category": "gtceu:large_chemical_reactor",
+   "tickInputs": {
+    "eu": [
+     {
+      "content": 30
+     }
+    ]
+   },
+   "inputs": {
+    "fluid": [
+     {
+      "content": {
+       "amount": 1000,
+       "value": [
+        {
+         "tag": "forge:bromine"
+        }
+       ]
+      }
+     },
+     {
+      "content": {
+       "amount": 3000,
+       "value": [
+        {
+         "tag": "forge:fluorine"
+        }
+       ]
+      }
+     }
+    ],
+    "item": [
+     {
+      "content": {
+       "type": "gtceu:circuit",
+       "configuration": 3
+      },
+      "chance": 0
+     }
+    ]
+   },
+   "outputs": {
+    "fluid": [
+     {
+      "content": {
+       "amount": 1000,
+       "value": [
+        {
+         "fluid": "gtceu:bromine_trifluoride"
+        }
+       ]
+      }
+     }
+    ]
+   }
+  },
+  "gtceu:large_chemical_reactor/gold_chloride": {
+   "type": "gtceu:large_chemical_reactor",
+   "duration": 200,
+   "category": "gtceu:large_chemical_reactor",
+   "tickInputs": {
+    "eu": [
+     {
+      "content": 120
+     }
+    ]
+   },
+   "inputs": {
+    "fluid": [
+     {
+      "content": {
+       "amount": 1000,
+       "value": [
+        {
+         "tag": "forge:gold_chloride"
+        }
+       ]
+      }
+     },
+     {
+      "content": {
+       "amount": 2000,
+       "value": [
+        {
+         "tag": "forge:bromine_trifluoride"
+        }
+       ]
+      }
+     }
+    ]
+   },
+   "outputs": {
+    "fluid": [
+     {
+      "content": {
+       "amount": 2000,
+       "value": [
+        {
+         "fluid": "gtceu:bromine"
+        }
+       ]
+      }
+     },
+     {
+      "content": {
+       "amount": 6000,
+       "value": [
+        {
+         "fluid": "gtceu:chlorine"
+        }
+       ]
+      }
+     }
+    ],
+    "item": [
+     {
+      "content": {
+       "type": "gtceu:sized",
+       "count": 8,
+       "ingredient": {
+        "item": "gtceu:gold_trifluoride_dust"
+       }
+      }
+     }
+    ]
+   }
+  },
+  "gtceu:large_chemical_reactor/naquadah_separation": {
+   "type": "gtceu:large_chemical_reactor",
+   "duration": 600,
+   "category": "gtceu:large_chemical_reactor",
+   "tickInputs": {
+    "eu": [
+     {
+      "content": 30720
+     }
+    ]
+   },
+   "inputs": {
+    "fluid": [
+     {
+      "content": {
+       "amount": 1000,
+       "value": [
+        {
+         "tag": "forge:fluoroantimonic_acid"
+        }
+       ]
+      }
+     }
+    ],
+    "item": [
+     {
+      "content": {
+       "type": "gtceu:sized",
+       "count": 6,
+       "ingredient": {
+        "tag": "forge:dusts/naquadah"
+       }
+      }
+     }
+    ]
+   },
+   "outputs": {
+    "fluid": [
+     {
+      "content": {
+       "amount": 2000,
+       "value": [
+        {
+         "fluid": "gtceu:impure_enriched_naquadah_solution"
+        }
+       ]
+      }
+     },
+     {
+      "content": {
+       "amount": 2000,
+       "value": [
+        {
+         "fluid": "gtceu:impure_naquadria_solution"
+        }
+       ]
+      }
+     }
+    ],
+    "item": [
+     {
+      "content": {
+       "type": "gtceu:sized",
+       "count": 4,
+       "ingredient": {
+        "item": "gtceu:titanium_trifluoride_dust"
+       }
+      }
+     }
+    ]
+   }
+  },
+  "gtceu:centrifuge/impure_enriched_naquadah_solution_separation": {
+   "type": "gtceu:centrifuge",
+   "duration": 100,
+   "category": "gtceu:centrifuge",
+   "tickInputs": {
+    "eu": [
+     {
+      "content": 5
+     }
+    ]
+   }
+  },
+  "gtceu:centrifuge/acidic_naquadria_solution_separation": {
+   "type": "gtceu:centrifuge",
+   "duration": 100,
+   "category": "gtceu:centrifuge",
+   "tickInputs": {
+    "eu": [
+     {
+      "content": 5
+     }
+    ]
+   }
+  },
+  "gtceu:centrifuge/impure_naquadria_solution_separation": {
+   "type": "gtceu:centrifuge",
+   "duration": 100,
+   "category": "gtceu:centrifuge",
+   "tickInputs": {
+    "eu": [
+     {
+      "content": 5
+     }
+    ]
+   }
+  },
+  "gtceu:centrifuge/acidic_enriched_naquadah_separation": {
+   "type": "gtceu:centrifuge",
+   "duration": 100,
+   "category": "gtceu:centrifuge",
+   "tickInputs": {
+    "eu": [
+     {
+      "content": 5
+     }
+    ]
+   }
+  }
+ },
+ "liveComposed": {
+  "grindless:naquadah_refining/naquadah": {
+   "type": "unknown",
+   "duration": 149,
+   "data": {
+    "grindless_naquadah_plant": "naquadah"
+   },
+   "inputs": {
+    "fluid": [
+     {
+      "content": {
+       "amount": 40500,
+       "value": [
+        {
+         "fluid": "gtceu:hydrofluoric_acid"
+        }
+       ]
+      },
+      "chance": 10000,
+      "maxChance": 10000,
+      "tierChanceBoost": 0
+     }
+    ],
+    "item": [
+     {
+      "content": {
+       "type": "gtceu:sized",
+       "count": 4,
+       "ingredient": {
+        "item": "gtceu:naquadah_oxide_mixture_dust"
+       }
+      },
+      "chance": 10000,
+      "maxChance": 10000,
+      "tierChanceBoost": 0
+     },
+     {
+      "content": {
+       "type": "gtceu:sized",
+       "count": 15,
+       "ingredient": {
+        "item": "gtceu:antimony_trioxide_dust"
+       }
+      },
+      "chance": 10000,
+      "maxChance": 10000,
+      "tierChanceBoost": 0
+     },
+     {
+      "content": {
+       "type": "gtceu:sized",
+       "count": 1,
+       "ingredient": {
+        "item": "grindless:pube_neutron_source"
+       }
+      },
+      "chance": 100,
+      "maxChance": 10000,
+      "tierChanceBoost": 0
+     },
+     {
+      "content": {
+       "type": "gtceu:sized",
+       "count": 1,
+       "ingredient": {
+        "type": "gtceu:circuit",
+        "configuration": 1
+       }
+      },
+      "chance": 0,
+      "maxChance": 10000,
+      "tierChanceBoost": 0
+     }
+    ]
+   },
+   "tickInputs": {
+    "eu": [
+     {
+      "content": 7678,
+      "chance": 10000,
+      "maxChance": 10000,
+      "tierChanceBoost": 0
+     }
+    ]
+   },
+   "outputs": {
+    "fluid": [
+     {
+      "content": {
+       "amount": 10500,
+       "value": [
+        {
+         "fluid": "gtceu:hydrogen"
+        }
+       ]
+      },
+      "chance": 10000,
+      "maxChance": 10000,
+      "tierChanceBoost": 0
+     },
+     {
+      "content": {
+       "amount": 9000,
+       "value": [
+        {
+         "fluid": "minecraft:water"
+        }
+       ]
+      },
+      "chance": 10000,
+      "maxChance": 10000,
+      "tierChanceBoost": 0
+     }
+    ],
+    "item": [
+     {
+      "content": {
+       "type": "gtceu:sized",
+       "count": 2,
+       "ingredient": {
+        "item": "gtceu:naquadah_dust"
+       }
+      },
+      "chance": 10000,
+      "maxChance": 10000,
+      "tierChanceBoost": 0
+     },
+     {
+      "content": {
+       "type": "gtceu:sized",
+       "count": 1,
+       "ingredient": {
+        "item": "gtceu:titanium_ingot"
+       }
+      },
+      "chance": 5000,
+      "maxChance": 10000,
+      "tierChanceBoost": 0
+     },
+     {
+      "content": {
+       "type": "gtceu:sized",
+       "count": 1,
+       "ingredient": {
+        "item": "gtceu:gallium_dust"
+       }
+      },
+      "chance": 5000,
+      "maxChance": 10000,
+      "tierChanceBoost": 0
+     }
+    ]
+   }
+  }
+ },
+ "related": {
+  "gtceu:macerator/macerate_long_naquadah_rod": {
+   "type": "gtceu:macerator",
+   "duration": 526,
+   "category": "gtceu:macerator_recycling",
+   "tickInputs": {
+    "eu": [
+     {
+      "content": 32
+     }
+    ]
+   },
+   "inputs": {
+    "item": [
+     {
+      "content": {
+       "type": "gtceu:sized",
+       "count": 1,
+       "ingredient": {
+        "item": "gtceu:long_naquadah_rod"
+       }
+      }
+     }
+    ]
+   },
+   "outputs": {
+    "item": [
+     {
+      "content": {
+       "type": "gtceu:sized",
+       "count": 1,
+       "ingredient": {
+        "item": "gtceu:naquadah_dust"
+       }
+      }
+     }
+    ]
+   }
+  }
+ }
+}

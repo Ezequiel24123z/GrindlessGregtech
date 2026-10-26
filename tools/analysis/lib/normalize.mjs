@@ -237,6 +237,9 @@ function normalizeGT(out, j, ctx) {
     out.temp = j.data.ebf_temp;
     out.conditions.push({ type: 'ebf_temp', temperature: j.data.ebf_temp });
   }
+  // and the fusion reactor's start energy (GTM 7.5.3 FusionReactorMachine: a recipe whose eu_to_start is above what the ring's
+  // hatches store never starts; a tier config caps it with conditions.eu_to_start {field: "eu", max})
+  if (j.data && typeof j.data.eu_to_start === 'number') out.conditions.push({ type: 'eu_to_start', eu: j.data.eu_to_start });
   out.shape = 'gt';
   return out;
 }

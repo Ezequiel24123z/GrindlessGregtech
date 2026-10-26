@@ -437,6 +437,7 @@ export function runObtain(dump, raw, opts = {}) {
     grp.era = rule.era || (grp.later ? grp.later.era : '');
     grp.until = rule.class === 'C' ? 'never' : rule.until || (grp.later ? grp.later.until : null) || null;
     grp.keepRecipes = !!rule.keepRecipes;
+    grp.unless = rule.unless || null;
     grp.source = rule.source || '';
     grp.by = by;
   };
@@ -710,6 +711,7 @@ export function hiddenTable(res, opts = {}) {
     };
     if (grp.cls === 'C') e.removeRecipes = grp.keepRecipes ? [] : [...new Set([...removeOf.get(grp), ...(previous.get(grp.id) || [])])].sort();
     if (grp.keepRecipes) e.keepRecipes = true;
+    if (grp.unless) e.unless = grp.unless;
     return e;
   };
   const rank = (u) => (u === 'never' ? ERA_IDS.length : ERA_IDS.indexOf(u));
@@ -722,7 +724,8 @@ export function hiddenTable(res, opts = {}) {
       'until = era id of docs/journey.md (steam, lv, mv, hv, ev, iv, luv, zpm, uv, uhv, uev, uiv, uxv, opv, max) in which the group can first be obtained (class B of the audit: planets, the excluded End veins and everything that hangs on them). Its recipes stay on the server, only hidden.',
       'until = "never": junk (class C of the audit): hidden for good and its removeRecipes are removed from the server (recipes that only exist for it: an ingredient that only accepts junk, or junk as every output). Nothing is unregistered: old saves keep every id.',
       'keepRecipes = true: a hidden item whose recipes stay, on the server and in EMI (the old items of earlier versions and their conversion into the new ones): only c:hidden_from_recipe_viewers.',
-      'material = audit group: a GT material with all its forms (dust, ingot, plate, fluid, bucket...) or a single item; reason = why (from the audit config).',
+            'unless = switch name: the group stays hidden only while that switch of global.grindless.stations.switches (startup_scripts/grindless/lib/stations.js, from tables/stations.json) is off; with the switch on, hidden.js shows it.',
+            'material = audit group: a GT material with all its forms (dust, ingot, plate, fluid, bucket...) or a single item; reason = why (from the audit config).',
       'Regenerating keeps the removeRecipes of the groups that are still junk (a dump taken with hidden.js active no longer has those recipes).',
     ],
     eras: ERA_IDS,

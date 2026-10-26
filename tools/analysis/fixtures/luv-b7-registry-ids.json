@@ -1,0 +1,45 @@
+{
+ "_source": "The native registry of the LuV C3 bench run luv-c3-s1 (2026-10-26, kubejs-exported/items.json, format gg-items-1): every item, block item and fluid id that LuV B7 (startup_scripts/grindless/luv/io_orbit.js, server_scripts/grindless/luv/io_orbit.js and the bench fixture gg_test_luv_io_orbit.js) uses, each one checked to be in that registry, A1's registrations included. gtceu:luv_dynamo_hatch and gtceu:quadruple_output_hatch are NOT in it (the LuV dynamo is gtceu:luv_energy_output_hatch).",
+ "_how_it_is_used": [
+  "tools/analysis/test/luv-io-orbit.test.mjs checks every id the two scripts and the fixture use, in recipes, patterns and placements, against this list. Never add an id that is not in a native registry export."
+ ],
+ "run": "luv-c3-s1",
+ "items": [
+  "gcyr:para_aramid_foil",
+  "grindless:radiation_vault_casing",
+  "grindless:station_truss_casing",
+  "grindless:tether_spool",
+  "grindless:whipple_shield_casing",
+  "gtceu:aluminium_foil",
+  "gtceu:aluminium_frame",
+  "gtceu:inert_machine_casing",
+  "gtceu:iodine_dust",
+  "gtceu:iv_energy_input_hatch",
+  "gtceu:iv_wireless_energy_hatch",
+  "gtceu:luv_electric_motor",
+  "gtceu:luv_electric_pump",
+  "gtceu:luv_energy_input_hatch",
+  "gtceu:luv_energy_output_hatch",
+  "gtceu:luv_energy_output_hatch_4a",
+  "gtceu:luv_input_bus",
+  "gtceu:luv_input_hatch",
+  "gtceu:luv_machine_hull",
+  "gtceu:luv_output_hatch",
+  "gtceu:luv_sensor",
+  "gtceu:luv_wireless_dynamo_hatch",
+  "gtceu:luv_wireless_dynamo_hatch_4a",
+  "gtceu:programmed_circuit",
+  "gtceu:ptfe_pipe_casing",
+  "gtceu:robust_machine_casing",
+  "gtceu:tungstensteel_firebox_casing",
+  "gtceu:tungstensteel_gearbox",
+  "minecraft:magma_block"
+ ],
+ "fluids": [
+  "gtceu:argon",
+  "gtceu:hydrogen",
+  "gtceu:oxygen",
+  "gtceu:sulfuric_acid",
+  "minecraft:water"
+ ]
+}

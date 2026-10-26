@@ -1,0 +1,11 @@
+{
+  "type": "grindless:europa",
+  "generator": {
+    "type": "minecraft:noise",
+    "settings": "grindless:europa",
+    "biome_source": {
+      "type": "minecraft:fixed",
+      "biome": "grindless:europa"
+    }
+  }
+}
