@@ -40,8 +40,8 @@ function dispatch(options = {}) {
   const starts = [];
   const global = {};
   for (const [name, key, hook] of [
-    ['starter', 'ggStarterEquipment', 'ggTestStarterEquipmentStart'],
     ['chest', 'ggChestFurnace', 'ggTestChestFurnaceStart'],
+    ['emi', 'ggEmiCoverage', 'ggTestEmiCoverageStart'],
   ]) {
     global[hook] = () => { starts.push(name); global[key] = new SharedMap(); global[key].put('hold', true); };
   }
@@ -54,9 +54,10 @@ function done(F, { serverDone = true, clientDone = true, failed = false } = {}) 
   F.put('serverDone', serverDone); F.put('clientDone', clientDone); F.put('failed', failed);
 }
 
-test('integrated marker ships disabled; all six edited/new overlay scripts parse locally', () => {
+test('integrated marker ships disabled; final chest/EMI scripts parse locally', () => {
   assert.deepEqual(JSON.parse(fs.readFileSync(new URL('config/gg_test_v071_integration.json', overlay), 'utf8')), { enabled: false });
-  for (const code of [server, client, chest, starter, read('client', 'chest_furnace'), read('client', 'starter_equipment')]) {
+  for (const code of [server, client, chest, starter, read('client', 'chest_furnace'), read('client', 'starter_equipment'),
+    read('server', 'emi_coverage'), read('client', 'emi_coverage')]) {
     assert.doesNotThrow(() => new vm.Script(code));
   }
   const s = dispatch({ enabled: false });
@@ -69,19 +70,22 @@ test('fixed serial sequence requires BOTH cleanup acknowledgements, not a fixtur
   const s = dispatch();
   assert.equal(s.S.get('hold'), true, 'dispatcher owns login-to-first-stage gap');
   s.tick(); s.tick();
-  assert.deepEqual(s.starts, ['starter']);
-  const F = s.global.ggStarterEquipment;
+  assert.deepEqual(s.starts, ['chest']);
+  const F = s.global.ggChestFurnace;
   F.put('doneLogged', true); F.put('hold', false); F.put('serverDone', true);
   s.tick();
-  assert.deepEqual(s.starts, ['starter'], 'early DONE/server completion cannot hand off player');
+  assert.deepEqual(s.starts, ['chest'], 'early DONE/server completion cannot hand off player');
   assert.equal(s.S.get('hold'), true);
   F.put('clientDone', true);
   s.tick();
-  assert.deepEqual(s.starts, ['starter'], 'stage transition itself does not start another fixture');
+  assert.deepEqual(s.starts, ['chest'], 'stage transition itself does not start another fixture');
   assert.equal(s.S.get('hold'), true, 'client is held across the handoff');
   s.tick();
-  assert.deepEqual(s.starts, ['starter', 'chest']);
-  done(s.global.ggChestFurnace);
+  assert.deepEqual(s.starts, ['chest', 'emi']);
+  done(s.global.ggEmiCoverage, { clientDone: false });
+  s.tick();
+  assert.equal(s.S.get('hold'), true, 'EMI serverDone alone is not completion');
+  done(s.global.ggEmiCoverage);
   s.tick(); s.tick();
   assert.equal(s.S.get('hold'), false);
   assert.equal(s.S.get('failed'), false);
@@ -92,12 +96,12 @@ test('fixed serial sequence requires BOTH cleanup acknowledgements, not a fixtur
 test('fixture/assertion/cleanup failures stay red and never start the next fixture', () => {
   for (const clientDone of [false, true]) {
     const s = dispatch(); s.tick();
-    done(s.global.ggStarterEquipment, { failed: true, clientDone });
+    done(s.global.ggChestFurnace, { failed: true, clientDone });
     s.tick();
-    assert.deepEqual(s.starts, ['starter']);
+    assert.deepEqual(s.starts, ['chest']);
     if (!clientDone) {
       assert.equal(s.S.get('hold'), true, 'failure still waits for cleanup');
-      s.global.ggStarterEquipment.put('clientDone', true); s.tick();
+      s.global.ggChestFurnace.put('clientDone', true); s.tick();
     }
     assert.equal(s.S.get('failed'), true);
     assert.equal(s.S.get('hold'), false);
@@ -108,12 +112,12 @@ test('fixture/assertion/cleanup failures stay red and never start the next fixtu
 test('170s work ceiling requests cancellation; missing cleanup fails within another 10s', () => {
   const s = dispatch(); s.tick();
   s.time(170001); s.tick();
-  assert.match(s.global.ggStarterEquipment.get('cancel'), /170s/);
+  assert.match(s.global.ggChestFurnace.get('cancel'), /170s/);
   assert.equal(s.S.get('hold'), true);
   s.time(180002); s.tick(); s.tick();
   assert.equal(s.S.get('hold'), false);
   assert.equal(s.S.get('failed'), true);
-  assert.deepEqual(s.starts, ['starter']);
+  assert.deepEqual(s.starts, ['chest']);
   assert.ok(s.logs.some((l) => l.includes('did not acknowledge cleanup')));
 });
 
@@ -126,6 +130,10 @@ test('conflicting markers and missing start hooks cannot produce a green integra
   missing.login(); missing.tick();
   assert.equal(missing.global.ggV071Integration.get('failed'), true);
   assert.ok(missing.logs.some((l) => l.includes('missing fixture start hook')));
+  const emi = dispatch({ markers: { 'kubejs/config/gg_test_emi_coverage.json': { enabled: true } } });
+  emi.tick();
+  assert.deepEqual(emi.starts, []);
+  assert.equal(emi.S.get('failed'), true);
 });
 
 test('both real fixture login hooks defer to integration even if individual markers are enabled', () => {
@@ -175,26 +183,151 @@ test('actual chest driver starts every step at age zero and carries old-world sn
   assert.deepEqual(failures, []);
 });
 
-test('actual chest cleanup keeps failures red and releases forceload even if player/config/band cleanup throws', () => {
+test('actual chest cleanup keeps failures red and attempts exact placements even if player/config cleanup throws', () => {
   const F = new SharedMap(), attempts = [], failures = [], logs = [];
-  const T = { finished: false, spawn: {}, touched: true, forced: true, oldConfig: ['saved config'], failed: [], table: [] };
+  const T = { finished: false, spawn: {}, touched: true, oldConfig: ['saved config'], failed: [], table: [] };
   const ctx = { T, global: {}, TAG: 'GGTEST|chest_furnace|', REQ: 'request',
-    AREA: { x0: 18688, x1: 18703, y0: 98, y1: 112, z0: 0, z1: 15 },
     shared: () => F, cls: () => ({ SSConfig: { SERVER_SPEC: {} } }),
     testPlayer: () => { throw new Error('player failure'); },
     guardedSet: (_, saved) => { attempts.push(saved[0]); throw new Error('config failure'); },
-    cmd: (command) => { attempts.push(command); if (command.startsWith('fill ')) throw new Error('fill failure'); return 1; },
+    cleanupPlaced: () => { attempts.push('exact cleanup'); throw new Error('placement cleanup failure'); },
     check: (name, ok) => { if (!ok) { failures.push(name); T.failed.push(name); F.put('failed', true); } },
     console: { info: (s) => logs.push(s) },
   };
   vm.runInNewContext(`${fn(chest, 'finish')}; finish({})`, ctx);
   assert.deepEqual(failures, ['restore', 'config_cleanup', 'cleanup', 'all']);
   assert.ok(attempts.includes('saved config'));
-  assert.ok(attempts.some((s) => s.startsWith('forceload remove 18688 0 18703 15')));
+  assert.ok(attempts.includes('exact cleanup'));
   assert.equal(F.get('serverDone'), true);
   assert.equal(F.get('hold'), false);
   assert.equal(F.get('failed'), true);
   assert.equal(logs.filter((s) => s.endsWith('|DONE')).length, 1);
+});
+
+// Execute the actual nearby-layout/placement/NBT helpers. Any generating/far access throws.
+function platform({ loaded = true, obstructed = false } = {}) {
+  const edits = [], reads = [], lookups = [], entities = new Map();
+  const points = Object.fromEntries(['A', 'B', 'C', 'D', 'F1', 'F2', 'F3'].map((k) => [k, {}]));
+  const chunk = { getBlockState(pos) {
+    assert.ok(pos.x >= -32 && pos.x <= 15 && pos.z >= -32 && pos.z <= 15, 'nearby only');
+    reads.push(pos);
+    return { isAir: () => !obstructed };
+  } };
+  const level = {
+    getMaxBuildHeight: () => 320,
+    getChunkSource: () => ({
+      getChunkNow(x, z) { assert.ok(Math.abs(x + 1) + Math.abs(z + 1) <= 1); lookups.push([x, z]); return loaded ? chunk : null; },
+      getChunk() { throw new Error('generating access forbidden'); },
+    }),
+    setBlockAndUpdate(pos, state) { edits.push([pos, state]); },
+    getBlockState: () => 'iron state',
+    getBlockEntity: (pos) => entities.get(`${pos.x},${pos.z}`),
+    removeBlockEntity(pos) { entities.get(`${pos.x},${pos.z}`)?.remove(); },
+    setBlockEntity(entity) { entities.set(`${entity.pos.x},${entity.pos.z}`, entity); },
+  };
+  const ctx = {
+    ...points, AREA: null, T: { level, placed: [], placedKeys: {} }, bp: (p) => ({ ...p }),
+    Block: { getBlock: (id) => ({ defaultBlockState: () => id }) },
+    cls: () => ({ BlockEntity: { loadStatic: (pos, state, tag) => ({
+      pos, state, tag, changed: false, setChanged() { this.changed = true; },
+    }) } }),
+  };
+  const names = ['loadedChunk', 'selectArea', 'layout', 'place', 'be', 'saveStorages', 'reloadStorages', 'cleanupPlaced'];
+  vm.runInNewContext(names.map((n) => fn(chest, n)).join('\n'), ctx);
+  return { ctx, points, level, edits, reads, lookups, entities,
+    player: { getX: () => -2, getZ: () => -3 } };
+}
+
+test('actual setup only selects verified air in existing nearby full chunks; GUI references follow dynamic layout', () => {
+  const p = platform();
+  const guiReference = p.points.A;
+  p.ctx.layout(p.ctx.selectArea(p.player));
+  assert.equal(p.reads.length, 16 * 16 * 15, 'whole volume checked before placement');
+  assert.equal(p.edits.length, 0);
+  assert.equal(p.ctx.AREA.x0, -16, 'negative coordinates use floor, not truncation');
+  assert.equal(guiReference.x, -14);
+  assert.equal(guiReference.y, 301);
+  assert.equal(guiReference.z, -12);
+  assert.throws(() => p.ctx.place({ x: 18690, y: 99, z: 4 }, 'stone'), /outside.*footprint/);
+  assert.equal(p.edits.length, 0, 'far access must fail before any world edit');
+  for (const options of [{ loaded: false }, { obstructed: true }]) {
+    const bad = platform(options);
+    assert.throws(() => bad.ctx.selectArea(bad.player), /no verified-air/);
+    assert.equal(bad.edits.length, 0, 'missing chunk/occupied area cannot be cleared or generated');
+    assert.equal(bad.lookups.length, 5, 'bounded nearby candidates only');
+  }
+  assert.doesNotMatch(chest, /forceload\s+(?:add|remove)|\.getChunk(?:At)?\s*\(|runCommandSilent\([^]*?['"]fill /);
+  assert.doesNotMatch(chest, /18688|18703|1168|saveAllChunks/);
+});
+
+test('actual boot builds exactly the recorded nearby floor, without clearing terrain or requesting chunks', () => {
+  const p = platform();
+  const commands = [];
+  Object.assign(p.player, {
+    getName: () => ({ getString: () => 'FixturePlayer' }), getY: () => 70, getYaw: () => 0, getPitch: () => 0,
+    getInventory: () => ({ selected: 0 }), getMainHandItem: () => ({ copy: () => 'saved hand' }),
+    gameMode: { getGameModeForPlayer: () => ({ getName: () => 'survival' }) },
+  });
+  Object.assign(p.ctx, {
+    cmd: (s) => commands.push(s), note: () => {},
+  });
+  p.ctx.T.server = { overworld: () => p.level };
+  vm.runInNewContext(fn(chest, 'stepBoot'), p.ctx);
+  assert.equal(p.ctx.stepBoot(p.player, 0, {}), false);
+  assert.equal(p.edits.length, 0, 'air verification never clears existing blocks');
+  assert.equal(p.ctx.stepBoot(p.player, 20, {}), true);
+  assert.equal(p.edits.length, 256);
+  assert.equal(p.ctx.T.placed.length, 256);
+  assert.ok(p.edits.every(([pos, state]) => pos.y === 300 && state === 'minecraft:smooth_stone'));
+  assert.deepEqual(commands, ['gamemode survival FixturePlayer'], 'no load/ticket/fill command');
+  const n = p.edits.length;
+  p.level.getChunkSource = () => ({ getChunkNow: () => null });
+  assert.throws(() => p.ctx.place(p.points.A, 'iron'), /no longer fully loaded/);
+  assert.equal(p.edits.length, n, 'a lost full chunk is never recovered by loading/generation');
+});
+
+test('actual cleanup removes only deduplicated placements, BE first (no drops), and continues after a failed position', () => {
+  const p = platform();
+  p.ctx.layout(p.ctx.selectArea(p.player));
+  p.ctx.place(p.points.A, 'iron');
+  p.ctx.place(p.points.A, 'gold');
+  p.ctx.place(p.points.F1, 'furnace');
+  assert.equal(p.ctx.T.placed.length, 2);
+  const cleanup = [];
+  p.level.removeBlockEntity = (pos) => cleanup.push(['removeBE', pos.x, pos.z]);
+  p.level.setBlockAndUpdate = (pos, state) => cleanup.push([state, pos.x, pos.z]);
+  p.ctx.cleanupPlaced();
+  assert.deepEqual(cleanup.map((v) => v[0]), ['removeBE', 'minecraft:air', 'removeBE', 'minecraft:air']);
+  assert.deepEqual(cleanup.map((v) => v.slice(1)), [[-14, -6], [-14, -6], [-14, -12], [-14, -12]]);
+  cleanup.length = 0;
+  p.level.removeBlockEntity = (pos) => { if (pos.z === -6) throw new Error('blocked'); cleanup.push(['removeBE']); };
+  assert.throws(() => p.ctx.cleanupPlaced(), /blocked/);
+  assert.equal(cleanup.length, 2, 'one failed placement cannot skip the other cleanup');
+});
+
+test('actual storage reload takes native stock NBT, replaces each BE, and never requests a chunk', () => {
+  const p = platform();
+  p.ctx.layout(p.ctx.selectArea(p.player));
+  const originals = [];
+  for (const point of [p.points.A, p.points.B, p.points.C]) {
+    const tag = { slots: 54, copy() { return { slots: this.slots }; } };
+    const entity = { removed: false, remove() { this.removed = true; }, saveWithFullMetadata: () => tag };
+    originals.push(entity);
+    p.entities.set(`${point.x},${point.z}`, entity);
+  }
+  const saved = p.ctx.saveStorages();
+  p.ctx.reloadStorages(saved);
+  for (let i = 0; i < 3; i++) {
+    const pos = saved[i].pos;
+    const entity = p.entities.get(`${pos.x},${pos.z}`);
+    assert.equal(originals[i].removed, true);
+    assert.notEqual(entity, originals[i]);
+    assert.equal(entity.tag.slots, 54);
+    assert.notEqual(entity.tag, saved[i].tag, 'native NBT copied before load');
+    assert.equal(entity.changed, true);
+  }
+  assert.equal(p.edits.length, 0, 'reload does not replace blocks or drop inventories');
+  assert.match(chest, /not chunk\/disk\/reconnect proof/);
 });
 
 test('integrated starter driver reuses reward/boundary proof and requests map after one reveal', () => {
