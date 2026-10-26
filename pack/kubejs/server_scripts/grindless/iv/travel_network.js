@@ -17,7 +17,7 @@
 //
 // Proxima Centauri b is rocket_tier 3 in GCYR and 26,000 mB away (galaxyFuelAmount): three elite tanks would take an IV rocket there, and
 // the journey reaches it in UHV through gates (docs/journey.md). data/gcyr/gcyr/planets/proxima_centauri_b.json (GCYR's own file with only
-// rocket_tier changed, to 4: no GCYR part reaches tier 4) keeps it out of reach.
+// rocket_tier changed, to 5 since LuV-B1: the cryogenic tank makes level 4 rockets, and nothing reaches tier 5) keeps it out of reach.
 //
 // The thermal suit upgrade. GCYR's thermal upgrade template (the smithing template that adds a heat-shielding or insulating fabric to a
 // suit piece; Venus at 737 K and Mercury at 440 K burn an unshielded suit) is remade by id with iv.md's ingredients:

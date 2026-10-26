@@ -1,0 +1,13 @@
+{
+  "_source": "Our own table (docs/eras/luv.md \"Stations\", decisions 3 and 17; package LuV-B1).",
+  "_how_it_is_used": [
+    "The station pieces of LuV wait for spike S0-3 (a station packed, launched and used in Earth orbit, then a second one in a moon's orbit). Until it passes natively, enabled stays false: the keycard stays hidden (tools/analysis/tiers/obtain.json, era 'LuV (orbital station)'), no EMI page explains the packager, and gg_test_luv_b1's station stage is skipped, not failed.",
+    "GCYR's own pieces need no recipe of ours: the station packager (gcyr:shaped/space_station_packager, a LuV hull) and the package (gcyr:assembler/space_station_package) keep GCYR's recipes; the keycard is the packager's output; the ID chip is grindless:gcyr/id_chip.",
+    "When S0-3 passes: set enabled to true, delete gcyr:keycard from the 'LuV (orbital station)' rule and its group in hidden_until.json, add the packager/keycard EMI info page and run node tools/analysis/emi-coverage.mjs --expect. If the second station fails, second becomes null and B7 builds the Io sulfur-iodine plant (decision 17)."
+  ],
+  "enabled": false,
+  "first": "gcyr:overworld_orbit",
+  "second": "grindless:io_orbit",
+  "plot": 512,
+  "pieces": ["gcyr:space_station_packager", "gcyr:space_station_package", "gcyr:id_chip", "gcyr:keycard"]
+}
