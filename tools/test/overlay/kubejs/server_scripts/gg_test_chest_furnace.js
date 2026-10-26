@@ -8,9 +8,9 @@
 //                 back with NightConfig, and Forge's own spec accepts it as is: the next start loads it without a correction); a second
 //                 run changes nothing.
 //   old_world     an iron chest, an iron barrel and a limited iron barrel built and filled under the STOCK values (the live config is
-//                 set back to them first, the way v0.7.0 had it), saved; the migration raises the config; the chunk is unloaded and
-//                 loaded again, so every block entity loads from its saved data: they grow to the pack's size, keep every stack (NBT
-//                 included) and their upgrade; a second unload/reload keeps the new size. Automation sees the new slots (Forge's item
+//                 set back to them first, the way v0.7.0 had it), serialized; the migration raises the config; native block entities are
+//                 recreated from that NBT in the already loaded chunk: they grow to the pack's size, keep every stack (NBT
+//                 included) and their upgrade; a second native block-entity NBT reload keeps the new size. Automation sees the new slots (Forge's item
 //                 handler capability inserts into and extracts from a slot past the old size) and the limited barrel takes twice as many.
 //   tier_upgrade  iron_to_gold_tier_upgrade used on the full, migrated chest: a gold chest of 162 slots with everything still inside.
 //   gui           real right-clicks (the client holds the use key, crosshair on the chest; no server fallback) on the gold chest (162 slots)
@@ -26,8 +26,9 @@
 //   powershell -File tools\test\Invoke-GGTest.ps1 -Suite client -OverlayDir <that folder> -Slots 1
 // Partner: client_scripts/gg_test_chest_furnace.js (world folder name, clicks, the open screen, screenshots).
 // MARKERS: GGTEST|chest_furnace|<check>|PASS|FAIL|NOTE|<detail>; the last line is GGTEST|chest_furnace|DONE.
-// TEST AREA: Overworld X 18688-18703, Z 0-15, Y 98-112 (chunk 1168,0 of the band X 18688-18751), force-loaded while it runs, smooth
-// stone floor at Y 98, cleared at the end. The player stays at spawn while the chunk unloads.
+// TEST AREA: verified air high above an ALREADY loaded/generated chunk next to the player. No chunk loads, generation or tickets.
+// Only recorded fixture placements are removed. Storage reloads use native saveWithFullMetadata/loadStatic in that loaded chunk,
+// not chunk unloading or disk/reconnect proof; the inventory growth/retention assertions are unchanged.
 // var + function everywhere: this Rhino throws "redeclaration of var" for const/let in functions that run more than once.
 ;(function () {
   var TAG = 'GGTEST|chest_furnace|'
@@ -36,15 +37,9 @@
   var QUIET_MS = 10000
   var LOADED_AT = Date.now()
   var EARTH = 'minecraft:overworld'
-  var AREA = { x0: 18688, x1: 18703, y0: 98, y1: 112, z0: 0, z1: 15 }
-  var CHUNK = { x: 1168, z: 0 }
-  var A = { x: 18690, y: 99, z: 4 }   // iron chest, later gold
-  var B = { x: 18693, y: 99, z: 4 }   // iron barrel
-  var C = { x: 18696, y: 99, z: 4 }   // limited iron barrel I
-  var D = { x: 18699, y: 99, z: 4 }   // netherite chest
-  var F1 = { x: 18690, y: 99, z: 10 } // iron furnace
-  var F2 = { x: 18693, y: 99, z: 10 } // netherite furnace
-  var F3 = { x: 18696, y: 99, z: 10 } // iron furnace -> gold furnace
+  var AREA = null
+  // Keep these objects: guiStep closes over their references before the layout is chosen.
+  var A = {}, B = {}, C = {}, D = {}, F1 = {}, F2 = {}, F3 = {}
   var OLD_KEYS = ['server.IronChest.inventorySlotCount', 'server.IronChest.upgradeSlotCount', 'server.IronBarrel.inventorySlotCount',
     'server.IronBarrel.upgradeSlotCount', 'server.LimitedIronBarrelI.baseSlotLimitMultiplier', 'server.LimitedIronBarrelI.upgradeSlotCount']
   var FILL_IDS = ['stone', 'granite', 'diorite', 'andesite', 'dirt', 'cobblestone', 'oak_planks', 'spruce_planks', 'birch_planks', 'jungle_planks',
@@ -99,6 +94,7 @@
       Stream: Java.loadClass('java.util.stream.Stream'),
       Collectors: Java.loadClass('java.util.stream.Collectors'),
       BlockPos: Java.loadClass('net.minecraft.core.BlockPos'),
+      BlockEntity: Java.loadClass('net.minecraft.world.level.block.entity.BlockEntity'),
       Direction: Java.loadClass('net.minecraft.core.Direction'),
       Vec3: Java.loadClass('net.minecraft.world.phys.Vec3'),
       BlockHitResult: Java.loadClass('net.minecraft.world.phys.BlockHitResult'),
@@ -186,10 +182,12 @@
   }
 
   function be(pos) {
+    loadedChunk(pos)
     return T.level.getBlockEntity(bp(pos))
   }
 
   function blockId(pos) {
+    loadedChunk(pos)
     return String(T.level.getBlockState(bp(pos)).getBlock().getId ? T.level.getBlockState(bp(pos)).getBlock().getId() : T.level.getBlockState(bp(pos)).getBlock())
   }
 
@@ -254,8 +252,88 @@
     return String(r)
   }
 
-  function chunkLoaded() {
-    return !!T.level.isLoaded(bp(A))
+  function loadedChunk(pos) {
+    if (AREA === null || pos.x < AREA.x0 || pos.x > AREA.x1 || pos.z < AREA.z0 || pos.z > AREA.z1 ||
+        pos.y < AREA.y0 || pos.y > AREA.y1) throw new Error('position outside the verified nearby fixture footprint')
+    var chunk = T.level.getChunkSource().getChunkNow(Math.floor(pos.x / 16), Math.floor(pos.z / 16))
+    if (chunk === null || chunk === undefined) throw new Error('fixture chunk is no longer fully loaded; no loading fallback')
+    return chunk
+  }
+
+  function selectArea(p) {
+    var cx = Math.floor(p.getX() / 16)
+    var cz = Math.floor(p.getZ() / 16)
+    var y0 = Number(T.level.getMaxBuildHeight()) - 20
+    var near = [[0, 0], [1, 0], [-1, 0], [0, 1], [0, -1]]
+    for (var i = 0; i < near.length; i++) {
+      var x0 = (cx + near[i][0]) * 16
+      var z0 = (cz + near[i][1]) * 16
+      // getChunkNow returns only an existing full chunk; it never requests/generates one.
+      var chunk = T.level.getChunkSource().getChunkNow(cx + near[i][0], cz + near[i][1])
+      if (chunk === null || chunk === undefined) continue
+      var air = true
+      for (var x = x0; x < x0 + 16 && air; x++) {
+        for (var z = z0; z < z0 + 16 && air; z++) {
+          for (var y = y0; y <= y0 + 14; y++) {
+            if (!chunk.getBlockState(bp({ x: x, y: y, z: z })).isAir()) { air = false; break }
+          }
+        }
+      }
+      if (air) return { x0: x0, x1: x0 + 15, y0: y0, y1: y0 + 14, z0: z0, z1: z0 + 15 }
+    }
+    throw new Error('no verified-air platform in the five nearby fully loaded chunks; nothing placed')
+  }
+
+  function layout(area) {
+    AREA = area
+    ;[[A, 2, 4], [B, 5, 4], [C, 8, 4], [D, 11, 4], [F1, 2, 10], [F2, 5, 10], [F3, 8, 10]].forEach(function (v) {
+      v[0].x = area.x0 + v[1]
+      v[0].y = area.y0 + 1
+      v[0].z = area.z0 + v[2]
+    })
+  }
+
+  function place(pos, state) {
+    loadedChunk(pos)
+    var key = pos.x + ',' + pos.y + ',' + pos.z
+    if (!T.placedKeys[key]) {
+      T.placedKeys[key] = true
+      T.placed.push({ x: pos.x, y: pos.y, z: pos.z })
+    }
+    T.level.setBlockAndUpdate(bp(pos), state)
+  }
+
+  function saveStorages() {
+    return [A, B, C].map(function (pos) {
+      loadedChunk(pos)
+      return { pos: pos, state: T.level.getBlockState(bp(pos)), tag: be(pos).saveWithFullMetadata() }
+    })
+  }
+
+  function reloadStorages(saved) {
+    saved.forEach(function (s) {
+      loadedChunk(s.pos)
+      T.level.removeBlockEntity(bp(s.pos))
+      var next = cls().BlockEntity.loadStatic(bp(s.pos), s.state, s.tag.copy())
+      if (next === null) throw new Error('native block-entity NBT load returned null')
+      T.level.setBlockEntity(next)
+      next.setChanged()
+    })
+  }
+
+  function cleanupPlaced() {
+    var errors = []
+    var air = Block.getBlock('minecraft:air').defaultBlockState()
+    for (var i = T.placed.length - 1; i >= 0; i--) {
+      var pos = T.placed[i]
+      try {
+        loadedChunk(pos)
+        // Removing the BE first prevents container contents being dropped by onRemove.
+        T.level.removeBlockEntity(bp(pos))
+        T.level.setBlockAndUpdate(bp(pos), air)
+      } catch (e) { errors.push(pos.x + ',' + pos.y + ',' + pos.z + ': ' + e) }
+    }
+    if (errors.length) throw new Error(errors.join('; '))
   }
 
   // ---------------------------------------------------------------- steps
@@ -263,6 +341,9 @@
   function stepBoot(p, age, st) {
     if (age === 0) {
       T.level = T.server.overworld()
+      layout(selectArea(p)) // Verify the WHOLE volume before changing the player or placing anything.
+      T.placed = []
+      T.placedKeys = {}
       T.playerName = String(p.getName().getString())
       T.spawn = { x: p.getX(), y: p.getY(), z: p.getZ() }
       T.yaw = p.getYaw()
@@ -271,16 +352,16 @@
       T.hand = p.getMainHandItem().copy()
       T.mode = String(p.gameMode.getGameModeForPlayer().getName())
       cmd('gamemode survival ' + T.playerName)
-      // No persistent effect to leak into the next fixture in the disposable world.
-      T.forced = true
-      cmd('forceload add ' + AREA.x0 + ' ' + AREA.z0 + ' ' + AREA.x1 + ' ' + AREA.z1)
       return false
     }
     if (age < 20) return false
-    T.touched = true // Cleanup must run even if constructing the floor throws.
-    cmd('fill ' + AREA.x0 + ' ' + AREA.y0 + ' ' + AREA.z0 + ' ' + AREA.x1 + ' ' + AREA.y1 + ' ' + AREA.z1 + ' minecraft:air')
-    cmd('fill ' + AREA.x0 + ' ' + AREA.y0 + ' ' + AREA.z0 + ' ' + AREA.x1 + ' ' + AREA.y0 + ' ' + AREA.z1 + ' minecraft:smooth_stone')
-    note('area', 'X ' + AREA.x0 + '-' + AREA.x1 + ' Z ' + AREA.z0 + '-' + AREA.z1 + ' Y ' + AREA.y0 + '-' + AREA.y1 + ' force-loaded and cleared; player ' + T.playerName)
+    T.touched = true
+    var floor = Block.getBlock('minecraft:smooth_stone').defaultBlockState()
+    for (var x = AREA.x0; x <= AREA.x1; x++) {
+      for (var z = AREA.z0; z <= AREA.z1; z++) place({ x: x, y: AREA.y0, z: z }, floor)
+    }
+    note('area', 'X ' + AREA.x0 + '-' + AREA.x1 + ' Z ' + AREA.z0 + '-' + AREA.z1 + ' Y ' + AREA.y0 + '-' + AREA.y1 +
+      ' verified air in an existing full nearby chunk; recorded placements only; player ' + T.playerName)
     return true
   }
 
@@ -425,7 +506,7 @@
       st.perFuel = Math.floor(st.burn / 200)
       st.runs = [{ name: 'iron', pos: F1, block: 'ironfurnaces:iron_furnace', want: 80 }, { name: 'netherite', pos: F2, block: 'ironfurnaces:netherite_furnace', want: 2 }]
       st.runs.forEach(function (r) {
-        T.level.setBlockAndUpdate(bp(r.pos), Block.getBlock(r.block).defaultBlockState())
+        place(r.pos, Block.getBlock(r.block).defaultBlockState())
         var e = be(r.pos)
         var inp = Item.of(st.input.id)
         inp.setCount(st.perFuel)
@@ -467,7 +548,7 @@
 
   function stepFurnaceUpgrade(p, age, st) {
     if (age === 0) {
-      T.level.setBlockAndUpdate(bp(F3), Block.getBlock('ironfurnaces:iron_furnace').defaultBlockState())
+      place(F3, Block.getBlock('ironfurnaces:iron_furnace').defaultBlockState())
       var e = be(F3)
       e.setItem(0, Item.of('minecraft:dirt', 3))
       e.setItem(1, Item.of('minecraft:coal', 2))
@@ -503,9 +584,9 @@
       T.oldConfig = OLD_KEYS.map(function (k) { return { cv: configEntry(values, k), v: Number(configEntry(values, k).get()) } })
       guardedSet(spec, OLD_KEYS.map(function (k) { return { cv: configEntry(values, k), v: byPath[k].stock } }))
       note('old_config', OLD_KEYS.map(function (k) { return k + '=' + configEntry(values, k).get() }).join(', '))
-      T.level.setBlockAndUpdate(bp(A), Block.getBlock('sophisticatedstorage:iron_chest').defaultBlockState())
-      T.level.setBlockAndUpdate(bp(B), Block.getBlock('sophisticatedstorage:iron_barrel').defaultBlockState())
-      T.level.setBlockAndUpdate(bp(C), Block.getBlock('sophisticatedstorage:limited_iron_barrel_1').defaultBlockState())
+      place(A, Block.getBlock('sophisticatedstorage:iron_chest').defaultBlockState())
+      place(B, Block.getBlock('sophisticatedstorage:iron_barrel').defaultBlockState())
+      place(C, Block.getBlock('sophisticatedstorage:limited_iron_barrel_1').defaultBlockState())
       return false
     }
     if (age < 3) return false
@@ -535,44 +616,24 @@
     st.savedA = snapshot(A)
     st.savedB = snapshot(B)
     st.oldBE = be(A)
+    st.savedBlocks = saveStorages()
     st.cobble = Number(w.getInventoryHandler().getStackInSlot(0).getCount())
     note('old_contents', 'iron chest: 54 stacks (slot 53 a named, enchanted sword) and a pickup upgrade; iron barrel: 54 stacks; limited barrel: ' + st.cobble + ' cobblestone')
     return true
   }
 
-  // the update: the pack's migration raises the stock keys, then the chunk unloads and loads from its saved data
+  // Reload the real storage BEs from their stock-sized native NBT without loading/unloading any chunk.
   function stepUpdate(p, age, st) {
     if (age === 0) {
       var r = global.grindless.storageTiers.apply('test: the update on an old world')
       check('update_raises_old_keys', r.ok && r.raised.length === OLD_KEYS.length, 'raised: ' + r.raised.join(', '))
-      T.server.saveAllChunks(true, true, true)
-      cmd('forceload remove ' + AREA.x0 + ' ' + AREA.z0 + ' ' + AREA.x1 + ' ' + AREA.z1)
-      st.phase = 'unload'
+      reloadStorages(st.savedBlocks)
       return false
     }
-    if (st.phase === 'unload') {
-      if (chunkLoaded() && age < 1200) return false
-      st.unloadedAt = age
-      st.phase = 'wait'
-      return false
-    }
-    if (st.phase === 'wait') {
-      if (age < st.unloadedAt + 100) return false
-      cmd('forceload add ' + AREA.x0 + ' ' + AREA.z0 + ' ' + AREA.x1 + ' ' + AREA.z1)
-      st.phase = 'load'
-      return false
-    }
-    if (st.phase === 'load') {
-      if (!chunkLoaded() && age < st.unloadedAt + 1300) return false
-      st.phase = 'settle'
-      st.loadedAt = age
-      return false
-    }
-    if (age < st.loadedAt + 5) return false
-    var unloaded = st.unloadedAt < 1200
+    if (age < 5) return false
     var fresh = be(A) !== null && !st.oldBE.equals(be(A)) && !!st.oldBE.isRemoved()
-    check('chunk_reloaded', unloaded && fresh, 'the chunk ' + (unloaded ? 'unloaded after ' + st.unloadedAt + ' ticks' : 'did NOT unload in 1,200 ticks') + ' and loaded again; the chest is ' +
-      (fresh ? 'a new block entity read from its saved data' : 'the SAME block entity (no reload)'))
+    check('block_entities_reloaded', fresh, 'native NBT save/load in the existing loaded chunk; the chest is ' +
+      (fresh ? 'a new block entity read from its saved data' : 'the SAME block entity (no reload)') + '; not chunk/disk/reconnect proof')
     var a = slotsOf(A)
     var b = slotsOf(B)
     var ca = compareContents(A, st.savedA)
@@ -604,36 +665,17 @@
     return true
   }
 
-  // a second unload: the grown size was saved
+  // A second native NBT save/load: the grown size was serialized, not merely left in the old object.
   function stepPersist(p, age, st) {
     if (age === 0) {
       st.oldBE = be(A)
-      cmd('forceload remove ' + AREA.x0 + ' ' + AREA.z0 + ' ' + AREA.x1 + ' ' + AREA.z1)
-      st.phase = 'unload'
+      reloadStorages(saveStorages())
       return false
     }
-    if (st.phase === 'unload') {
-      if (chunkLoaded() && age < 1200) return false
-      st.unloadedAt = age
-      st.phase = 'wait'
-      return false
-    }
-    if (st.phase === 'wait') {
-      if (age < st.unloadedAt + 100) return false
-      cmd('forceload add ' + AREA.x0 + ' ' + AREA.z0 + ' ' + AREA.x1 + ' ' + AREA.z1)
-      st.phase = 'load'
-      return false
-    }
-    if (st.phase === 'load') {
-      if (!chunkLoaded() && age < st.unloadedAt + 1300) return false
-      st.phase = 'settle'
-      st.loadedAt = age
-      return false
-    }
-    if (age < st.loadedAt + 5) return false
+    if (age < 5) return false
     var a = slotsOf(A)
     var ca = compareContents(A, st.savedA2)
-    check('grown_size_saved', a.inv === 108 && a.upg === 4 && ca.ok && !st.oldBE.equals(be(A)), 'after a second unload and load: ' + a.inv + ' / ' + a.upg + '; ' + ca.text)
+    check('grown_size_saved', a.inv === 108 && a.upg === 4 && ca.ok && !st.oldBE.equals(be(A)), 'after a second native block-entity NBT save/load: ' + a.inv + ' / ' + a.upg + '; ' + ca.text)
     return true
   }
 
@@ -653,7 +695,7 @@
     check('tier_upgrade_full_chest', blockId(A).indexOf('gold_chest') >= 0 && a.inv === 162 && a.upg === 6 && ca.ok && String(up.getId()) === 'sophisticatedstorage:pickup_upgrade',
       'iron_to_gold_tier_upgrade on the full migrated chest (useOn: ' + st.result + '): ' + blockId(A) + ', ' + a.inv + ' slots / ' + a.upg + ' upgrade slots (stock gold: 81 / 3); ' +
       ca.text + '; ' + st.total.stacks + ' stacks, ' + st.total.items + ' items; upgrade ' + sid(up))
-    T.level.setBlockAndUpdate(bp(D), Block.getBlock('sophisticatedstorage:netherite_chest').defaultBlockState())
+    place(D, Block.getBlock('sophisticatedstorage:netherite_chest').defaultBlockState())
     return true
   }
 
@@ -784,17 +826,7 @@
       try { guardedSet(cls().SSConfig.SERVER_SPEC, T.oldConfig) } catch (e) { check('config_cleanup', false, String(e)) }
     }
     if (T.touched) {
-      try {
-        cmd('forceload add ' + AREA.x0 + ' ' + AREA.z0 + ' ' + AREA.x1 + ' ' + AREA.z1)
-        if (cmd('fill ' + AREA.x0 + ' ' + AREA.y0 + ' ' + AREA.z0 + ' ' + AREA.x1 + ' ' + AREA.y1 + ' ' + AREA.z1 + ' minecraft:air') < 1) {
-          throw new Error('test-band clear command failed')
-        }
-        cmd('kill @e[type=item,x=' + AREA.x0 + ',y=' + AREA.y0 + ',z=' + AREA.z0 + ',dx=16,dy=15,dz=16]')
-      } catch (e) { check('cleanup', false, String(e)) }
-    }
-    // Independent finally-like release even when fill/config/player cleanup fails.
-    if (T.forced) {
-      try { cmd('forceload remove ' + AREA.x0 + ' ' + AREA.z0 + ' ' + AREA.x1 + ' ' + AREA.z1) } catch (e) { check('forceload_cleanup', false, String(e)) }
+      try { cleanupPlaced() } catch (e) { check('cleanup', false, String(e)) }
     }
     var failed = T.failed.filter(function (f, i) { return T.failed.indexOf(f) === i })
     check('all', failed.length === 0, failed.length === 0 ? 'every check passed: ' + T.table.join(', ') : 'failed: ' + failed.join(', '))

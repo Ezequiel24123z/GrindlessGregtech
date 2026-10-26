@@ -1,9 +1,8 @@
 // TEST-ONLY, preparation for ONE fresh-world integrated client run via Invoke-GGTest.
 // Enable ONLY gg_test_v071_integration.json in a scratch overlay, after the parent's
 // final candidate/launch instruction. Individual player-fixture markers must be off.
-// Fixed sequence, not a fixture framework: pending starter map/IN-MEMORY codec,
-// then the existing chest/furnace state machine. Wireless cold-restart coverage
-// is NOT included: attach its confirmed handoff separately before batch acceptance.
+// Final release client sequence: pending chest/furnace behavior, then read-only EMI coverage.
+// Accepted starter/map/codec and wireless proofs are NOT rerun here.
 ;(function () {
   var MARKER = 'kubejs/config/gg_test_v071_integration.json'
   var TAG = 'GGTEST|v071_client|'
@@ -13,11 +12,11 @@
   var S = global.ggV071Integration
   var run = null
   var STAGES = [
-    ['starter_map_codec', 'ggStarterEquipment', 'ggTestStarterEquipmentStart'],
-    ['chest_furnace', 'ggChestFurnace', 'ggTestChestFurnaceStart']
+    ['chest_furnace', 'ggChestFurnace', 'ggTestChestFurnaceStart'],
+    ['emi_coverage', 'ggEmiCoverage', 'ggTestEmiCoverageStart']
   ]
   var OTHER_MARKERS = ['dimension_keys', 'gcyr_flight', 'hidden', 'quest_book', 'gallery', 'qbc', 'projector',
-    'starter_equipment', 'chest_furnace']
+    'starter_equipment', 'chest_furnace', 'emi_coverage']
 
   function log(name, status, detail) {
     console.info(TAG + name + '|' + status + '|' + String(detail).replace(/[\r\n|]+/g, '/'))
@@ -28,7 +27,7 @@
     run.done = true
     S.put('failed', !ok)
     log('all', ok ? 'PASS' : 'FAIL', detail)
-    log('scope', 'NOTE', 'starter map/in-memory codec + chest/furnace only; wireless cold restart NOT covered')
+    log('scope', 'NOTE', 'pending chest/furnace + EMI only; accepted starter/wireless proofs reused')
     S.put('hold', false)
     console.info(TAG + 'DONE')
   }
@@ -44,7 +43,7 @@
         return
       }
     }
-    log('armed', 'NOTE', 'serial client scope; prior reward/boundary and projector proofs reused')
+    log('armed', 'NOTE', 'final client scope; accepted starter/map/codec, wireless and projector proofs reused')
   })
 
   ServerEvents.tick(function () {
