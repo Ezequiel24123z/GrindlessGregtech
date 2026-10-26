@@ -13,7 +13,8 @@
     { "circuit": 1, "name": "enrichment" },
     { "circuit": 2, "name": "fuel" },
     { "circuit": 3, "name": "reprocessing" },
-    { "circuit": 4, "name": "radon" }
+    { "circuit": 4, "name": "radon" },
+    { "circuit": 5, "name": "silicon_28" }
   ],
   "composed": [
     {
@@ -138,6 +139,19 @@
         { "id": "gtceu:xenon", "amount": 50 },
         { "id": "gtceu:krypton", "amount": 10 }
       ]
+    },
+    {
+      "name": "silicon_28_enrichment",
+      "circuit": 5,
+      "eut": 7680,
+      "duration": 600,
+      "itemsIn": [{ "id": "gtceu:silicon_dust", "count": 4 }],
+      "fluidsIn": [{ "id": "gtceu:hydrofluoric_acid", "amount": 16000 }],
+      "itemsOut": [
+        { "id": "grindless:silicon_28_dust", "count": 1 },
+        { "id": "gtceu:silicon_dust", "count": 3 }
+      ],
+      "fluidsOut": [{ "id": "gtceu:hydrofluoric_acid", "amount": 16000 }]
     }
   ]
 }
