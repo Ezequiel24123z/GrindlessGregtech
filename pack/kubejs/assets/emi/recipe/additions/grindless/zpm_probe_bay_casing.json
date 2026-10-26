@@ -1,0 +1,5 @@
+{
+  "type": "emi:info",
+  "stacks": ["item:grindless:probe_bay_casing"],
+  "text": ["emi.grindless.info.probe_bay_casing.0"]
+}
