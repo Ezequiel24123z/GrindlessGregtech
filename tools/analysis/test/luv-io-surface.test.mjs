@@ -30,6 +30,7 @@ const OURS = new Set(['gtceu:fumarole_condenser', 'gtceu:volcanic_intake']);
 const ITEMS = new Set([...IDS.items, ...A1.items, ...A1.blocks, A1.ids.denseTitaniumPlate, ...OURS]);
 const FLUIDS = new Set(IDS.fluids);
 
+const REMOVED = [];
 function run() {
   const asked = { items: new Set(), fluids: new Set() };
   const r = runServerScripts({
@@ -37,6 +38,10 @@ function run() {
     startup: ['kubejs/startup_scripts/grindless/lib/places.js', STARTUP],
     items: (id) => { asked.items.add(id); return ITEMS.has(id); },
     fluids: (id) => { asked.fluids.add(id); return FLUIDS.has(id); },
+    before(sandbox) {
+      const recipes = sandbox.ServerEvents.recipes;
+      sandbox.ServerEvents.recipes = (fn) => recipes((event) => { event.remove = (f) => REMOVED.push(f); fn(event); });
+    },
   });
   return { ...r, asked };
 }
@@ -72,7 +77,7 @@ test('every id is in the native registry snapshot or registered by A1/B6', () =>
   const used = new Set();
   for (const r of RUN.built) {
     for (const m of ['itemInputs', 'itemOutputs', 'chancedInput']) for (const args of calls(r, m)) {
-      (m === 'chancedInput' ? [args[0]] : args).forEach((s) => used.add(stackId(s)));
+      (m === 'chancedInput' ? [args[0]] : args.flat()).forEach((s) => { const id = stackId(s); if (!id.startsWith('#')) used.add(id); });
     }
     if (r.type === 'gtceu:shaped') used.add(r.id);
     for (const m of ['inputFluids', 'outputFluids', 'notConsumableFluid']) for (const args of calls(r, m)) {
@@ -244,4 +249,17 @@ test('recipes: one lookup path each; the intake pays 32,768 EU/t per module from
   assert.equal(Math.round(10000 / (3600 * 20 / 400)), 56);
   const vault = RUN.built.find((r) => r.id === 'grindless:luv/radiation_vault_casing');
   assert.deepEqual(one(vault, 'itemInputs'), ['2x gtceu:dense_titanium_plate', '2x gtceu:tantalum_plate', 'gtceu:hsss_frame']);
+});
+
+test('germanium only from Io: the germanite electrolysis keeps everything but its germanium', () => {
+  assert.deepEqual(REMOVED.filter((f) => f.id === 'gtceu:electrolyzer/decomposition_electrolyzing_germanite').length, 1);
+  const r = RUN.built.find((x) => x.id === 'grindless:germanite');
+  assert.equal(r.type, 'gtceu:electrolyzer');
+  assert.deepEqual(one(r, 'itemInputs'), ['9x #forge:dusts/germanite']);
+  assert.deepEqual(one(r, 'itemOutputs').flat(), ['2x gtceu:zinc_dust', '2x gtceu:iron_dust', '4x gtceu:sulfur_dust']);
+  assert.deepEqual(one(r, 'EUt'), [60]);
+  assert.deepEqual(one(r, 'duration'), [414]);
+  const makers = RUN.built.filter((x) => calls(x, 'itemOutputs').flat(2).some((s) => /germanium/.test(String(s))));
+  assert.deepEqual(makers.map((x) => x.id), ['grindless:separate']);
+  assert.ok(IDS.items.includes('gtca:germanite_dust'));
 });

@@ -13,9 +13,24 @@
       // one bundle about every hour per module: 3,600 s / 20 s = 180 runs, 10,000 / 180 = 56
       bundle: 'grindless:heat_exchanger_bundle', wearChance: 56 }
   }
+  // Germanium only from Io (luv.md "Only from there"): GTCA's Nether germanite is drilled since LV, and GTM's generated electrolysis of
+  // its dust (power-quests-1 dump: 9 germanite -> 2 zinc + 2 iron + 1 germanium + 4 sulfur, 60 EU/t x 414 t) was the only other source
+  // before ZPM. Nothing before LuV asks for germanium (the dump's only other user is UV's quantum alloy), so the electrolysis keeps its
+  // input, its other outputs and its energy, and its germanium stays bound in the slag.
+  IO.germanite = {
+    removed: 'gtceu:electrolyzer/decomposition_electrolyzing_germanite',
+    input: '9x #forge:dusts/germanite',
+    outputs: ['2x gtceu:zinc_dust', '2x gtceu:iron_dust', '4x gtceu:sulfur_dust'],
+    eut: 60,
+    duration: 414
+  }
 
   ServerEvents.recipes(function (event) {
     var gt = event.recipes.gtceu
+    var ge = IO.germanite
+    event.remove({ id: ge.removed })
+    gt.electrolyzer('grindless:germanite')
+      .itemInputs(ge.input).itemOutputs(ge.outputs).EUt(ge.eut).duration(ge.duration)
     var c = R.collect
     G.places.allow(gt[IO.condenser.type]('grindless:collect')
       .circuit(c.circuit)
