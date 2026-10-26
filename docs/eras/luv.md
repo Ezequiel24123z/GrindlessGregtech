@@ -225,6 +225,7 @@ Five GCYR entries (datapack JSON, no Java) and ten dimensions. The ids are final
     - the three enriched sludges and the crystal chip from sludge take the sludge;
     - mutagen takes the enriched sludge.
 - **Germanium only from Io** (GTCA's froth stays ZPM). **Sulfur concrete only on Io.**
+  - GTCA's Nether germanite (drilled since LV) keeps its electrolysis without the germanium (`grindless:electrolyzer/germanite`, B6): nothing before LuV asks for germanium; the dump's only other user is UV's quantum alloy.
 - **The neuro processing unit at LuV only from the organoid lab.**
   - GTM's `circuit_assembler/neuro_processor` (80,000 EU/t) stays a ZPM-voltage recipe. From LuV the biofoundry makes its stem cells and sterile medium, so every machine that could run it on LuV power was checked (spike S0-4, GT-- 1.3.10 bytecode):
     - GT--'s line has a single energy-hatch cell (`GTPPMachines.kt:58-105`). Its `CircuitAssemblyLineMachine.getRealRecipe` (`.kt:78-86`) refuses a circuit-assembler recipe whose EU tier is at or above the tier of the hatch's combined voltage (2 A: the hatch's tier; 4 A: one up; 16 A: two up), and GTM refuses anything above the hatch's own tier. So the NPU is refused on every LuV hatch and on a ZPM 2 A hatch, and runs from a ZPM 4 A hatch.
@@ -677,6 +678,12 @@ Every recipe has a programmed circuit (c*n*) or an input that no other recipe of
   - The KubeJS world gen layer is untested in this pack. One bench run is needed: a fresh belt chunk with the vein.
   - Low gravity has not been tried for playability.
 - **Source:** real: Rosetta's Philae (2014) and OSIRIS-REx's touch-and-go sampler; iron meteorite mineralogy.
+- **As built (B5, `luv/asteroid_belt.js`):**
+  - 7 × 8 × 7: a 5 × 6 pad of regolith casing, four HSS-S harpoon legs, a 3 × 3 × 3 body with the Whipple casing on its back face, a titanium derrick over a tungstensteel drill string.
+  - The veins sit at Y 20–200 *(tune after S0-1)*, weights 40 / 30 / 20. The vein drilling type takes three item inputs (sample, bit, harpoon).
+  - The bit: LuV lathe, a long HSS-S rod, 30,720 EU/t × 200 t. The harpoons: IV assembler, 2 HSS-S rods + a tungsten carbide plate → 2.
+  - The regolith casing: alloy smelter on the belt only, 4 tuff (the drill's stone) + 1 titanium dust → 2.
+  - The belt's seed: chemical reactor on the belt, raw meteoric iron + ender pearl + 250 mB helium-3; `planets.json` gets `belt`.
 
 ### 12. Asteroid processor: `gtceu:asteroid_processor`, type `gtceu:asteroid_processing` (anywhere; built at the belt base)
 
@@ -702,6 +709,10 @@ Every recipe has a programmed circuit (c*n*) or an input that no other recipe of
   - LuV: the ring's magnetic bearings (tetrataenite, through the HTS magnet works), and the optical miner's CO.
 - **Risks:** a KubeJS ore material must keep its GTM byproducts free of PGMs, so that the concentrate stays exclusive.
 - **Source:** real: Ludwig Mond (1890) and the Clydach refinery; carbonyl metallurgy for asteroids (Lewis, 1996).
+- **As built (B5):**
+  - A third recipe, circuit 3: the same Mond from 16 meteoric iron dust. GTM's ore line and the magnetic split leave that dust, and it has no other use.
+  - The magnetic split: 1,920 EU/t × 200 t. It stays voidable; circuits 1 and 3 refuse item voiding.
+  - Hollow 5 × 5 × 6 column, 3 × 3 × 3 separator (the parts and the parallel hatch), a 3 × 2 × 3 glass holder.
 
 ### 13. Optical miner: `gtceu:optical_miner`, type `gtceu:optical_mining` (asteroid belt)
 
@@ -728,6 +739,10 @@ Every recipe has a programmed circuit (c*n*) or an input that no other recipe of
   - IV: the Mercury solar works' heliostat check, and GCYR's aramid and Kapton (the suit line);
   - LuV: the Europan culture and the asteroid processor's CO.
 - **Source:** real: TransAstra's optical mining (Sercel; NASA NIAC, 2016–2019); Mautner, "Planetary bioresources and astroecology" (2002); the OSIRIS-REx samples of Bennu (2025).
+- **As built (B5):**
+  - 13 × 5 × 13. The capture chamber is robust casing with a laminated glass receiver on top; the cold trap is a frostproof column; the hut is 3 × 3 × 3.
+  - Both recipes are belt-only. The capture bag: IV assembler, 7,680 EU/t × 200 t.
+  - The extract's use (the Europan culture) is B8's; until then it is an EMI coverage exception.
 
 ### 14. Fumarole condenser: `gtceu:fumarole_condenser`, type `gtceu:fumarole_condensing` (Io)
 
@@ -878,6 +893,12 @@ This plant takes slot 16 only if spike S0-3 shows that a second station can't be
   - IV: the hot cell's RTG pellets, and the drill family's heat tax;
   - LuV: Io's sulfur concrete and the vault.
 - **Source:** real: cryobot studies (Philberth; VALKYRIE; JPL's PRIME and SESAME), Europa's salt (Trumbo, Brown and Hand, 2019).
+- **As built** (B8, `startup_scripts/grindless/luv/europa.js`):
+  - 5 × 5 × 16: the ice shaft (rows 1–5, packed or blue ice), a sulfur concrete base around a 3 × 3 vault core with the tether opening, a tungsten steel frame derrick and a vault head with a tungstensteel gearbox drum. Base: 1–2 energy hatches, buses and 1–2 output hatches.
+  - GTM's overclock, no parallel: one probe, one sample. The family type is widened (never narrowed) to 3 item inputs and 2 fluid outputs.
+  - The RTG pellet is a 0.56 % chanced input (400 t of the hour's 72,000).
+  - The brine's surplus: a centrifuge splits 1,000 mB into 1,000 mB water, 6 magnesium sulfate (`gtceu:magnesium_sulfate`, new) and 2 salt dust; GTM's generated electrolysis splits both.
+  - Controller: shaped, LuV hull + 2 LuV pumps + LuV sensor + 4 LuV circuits + a tungstensteel gearbox (the drum), so it never matches the zero-g grower's grid. Probe: assembler, melt head + RTG pellet + LuV sensor + 8 optical fibres (the tether) + 4 HSS-S plates, 7,680 EU/t × 600 t. Melt head: 4 tungsten carbide + 2 HSS-S plates + an IV pump, 7,680 EU/t × 400 t.
 
 ### 18. Algae bioreactor: `gtceu:algae_bioreactor`, type `gtceu:bioreactor` (greenhouse step 5; the culture only on Europa)
 
@@ -904,6 +925,7 @@ This plant takes slot 16 only if spike S0-3 shows that a second station can't be
   - GTM's peroxide chemistry;
   - LuV's cryobot, optical miner (belt), biofoundry and sulfur concrete.
 - **Source:** real: ESA's MELiSSA; Europan habitability (Hand and Chyba, 2007; Vance and others, 2016).
+- **As built** (B8): 5 × 5 × 13, the three tubes with lamps between them on a sulfur concrete hall under a vault roof; GTM's overclock; ids `grindless:bioreactor/luv/algae` and `…/europan_culture`. `gtceu:brewery/bacteria` is removed in the same script. The culture takes B5's chondritic extract, so B8 merges after B5.
 
 ### 19. Gravitational-wave detector: `gtceu:gravitational_wave_detector`, type `gtceu:gravitational_wave_astronomy` (observatory step 6; Ganymede)
 
@@ -1308,6 +1330,7 @@ The ten-minute run of every base, untouched, lives only in the bench's integrati
 - **Model:**
   - our generator types are EU sources into the wireless network (`gtceu:orbital_solar`, `gtceu:volcanic_heat`, `gtceu:electrodynamic_tether`);
   - the network's tier is a synthetic step: LuV when the SMES cells exist.
+- **As built (C1):** `tools/analysis/tiers/luv.json`, with seven substages (`luv`, `luv-orbit`, `luv-belt`, then `luv-io`, `luv-europa` and `luv-ganymede` as siblings, then `luv-io-orbit`; the way to the moons is crafted after the belt). Dimension ids come from `tables/orbits.json` and `tables/places.json`. Each package's targets warn until a dump carries it (`packages`), so the config holds the whole design before every package lands. Mode 2 on two IV hatches is in `tiers/iv.json`.
 
 ## Mods and integration
 

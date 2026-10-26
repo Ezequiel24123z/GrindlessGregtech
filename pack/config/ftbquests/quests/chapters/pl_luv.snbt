@@ -1,0 +1,1977 @@
+{
+	autofocus_id: "70F60E9649511A07"
+	consume_items: false
+	default_hide_dependency_lines: false
+	default_quest_shape: ""
+	filename: "pl_luv"
+	group: "3027186E3042DDFB"
+	icon: "gtceu:hts_magnet_works"
+	id: "16F072DBACC93A49"
+	order_index: 6
+	progression_mode: "flexible"
+	quest_links: [
+		{
+			id: "3D407F12B227F1CA"
+			linked_quest: "78C55A0C6115070F"
+			shape: "rsquare"
+			x: 0.5d
+			y: 0.75d
+		}
+		{
+			id: "1F0A79F88C2819DA"
+			linked_quest: "32CCA814F0D16669"
+			shape: "rsquare"
+			x: 2.5d
+			y: 3.75d
+		}
+		{
+			id: "5259F2A4FE982CC0"
+			linked_quest: "1C44BB891BE81D16"
+			shape: "rsquare"
+			x: 2.5d
+			y: 5.25d
+		}
+		{
+			id: "3FD3F7B21941EDCC"
+			linked_quest: "7C00BCD35855B841"
+			shape: "rsquare"
+			x: 9.75d
+			y: 3.75d
+		}
+		{
+			id: "17AB9F4498621403"
+			linked_quest: "5642C3DCC05983B2"
+			shape: "rsquare"
+			x: 9.75d
+			y: 5.25d
+		}
+		{
+			id: "3FDB0A57B5B2F87F"
+			linked_quest: "5856C42F3ADB5B5B"
+			shape: "rsquare"
+			x: 0.5d
+			y: 10.75d
+		}
+		{
+			id: "537A3A1B4974D6E2"
+			linked_quest: "35DCEFE8D74600BF"
+			shape: "rsquare"
+			x: 9.75d
+			y: 12.25d
+		}
+		{
+			id: "39CD94B689807ED7"
+			linked_quest: "3C6755E902FEF468"
+			shape: "rsquare"
+			x: 19.5d
+			y: 9.25d
+		}
+		{
+			id: "3B369EC4693EC06B"
+			linked_quest: "11CBF06B464C189F"
+			shape: "rsquare"
+			x: 5.0d
+			y: 24.5d
+		}
+		{
+			id: "72D92B3C8168025D"
+			linked_quest: "5A5AFC686B2574CF"
+			shape: "rsquare"
+			x: 17.25d
+			y: 26.25d
+		}
+		{
+			id: "5486243F43DCBCA9"
+			linked_quest: "3211798D8D1FE487"
+			shape: "rsquare"
+			x: 2.75d
+			y: 32.75d
+		}
+		{
+			id: "3BCFC0D925FA27A1"
+			linked_quest: "311A139B9FC53881"
+			shape: "rsquare"
+			x: 2.75d
+			y: 34.25d
+		}
+		{
+			id: "1920F705AA18161A"
+			linked_quest: "1C089C47DF30A347"
+			shape: "rsquare"
+			x: 2.75d
+			y: 35.75d
+		}
+		{
+			id: "5424D889FB51894C"
+			linked_quest: "162641406869CF74"
+			shape: "rsquare"
+			x: 7.75d
+			y: 38.75d
+		}
+		{
+			id: "721E601FFB8B404A"
+			linked_quest: "33B9948FCA396811"
+			shape: "rsquare"
+			x: 0.5d
+			y: 46.75d
+		}
+		{
+			id: "7D05C66E8427E081"
+			linked_quest: "5047605FE0A03D21"
+			shape: "rsquare"
+			x: 0.5d
+			y: 48.25d
+		}
+		{
+			id: "1673BD45CECC595A"
+			linked_quest: "7B4176719D90C65C"
+			shape: "rsquare"
+			x: 14.75d
+			y: 72.0d
+		}
+	]
+	quests: [
+		{
+			dependencies: ["78C55A0C6115070F"]
+			icon: "gtceu:enriched_naquadah_oxide_mixture_dust"
+			id: "70F60E9649511A07"
+			size: 1.0d
+			subtitle: "Ore plant: the Venus ore carries a little"
+			tasks: [
+				{ id: "3E85BE63EB57C696", item: "gtceu:enriched_naquadah_oxide_mixture_dust", optional_task: true, type: "item" }
+				{ id: "3560D90B03D0BECA", type: "checkmark" }
+			]
+			title: "Enriched Naquadah Oxide"
+			x: 2.5d
+			y: 0.75d
+		}
+		{
+			icon: "gtceu:fluorine_bucket"
+			id: "18BBF063C8182F73"
+			shape: "rsquare"
+			size: 1.0d
+			subtitle: "The fluorspar kiln's acid, split in the electrolyzer"
+			tasks: [
+				{ id: "3CD82B810E06402F", item: "gtceu:fluorine_bucket", optional_task: true, type: "item" }
+				{ id: "79A134A848AF41BE", type: "checkmark" }
+			]
+			title: "Fluorine"
+			x: 2.5d
+			y: 2.25d
+		}
+		{
+			dependencies: ["70F60E9649511A07", "18BBF063C8182F73", "32CCA814F0D16669", "1C44BB891BE81D16"]
+			description: [
+				"GT--'s enriched line in one hall, and nothing leaks out of it."
+				"The xenon, gold and antimony go in once and stay put. Only the fluorine, the hydrogen and the oxide get used up."
+			]
+			icon: "gtceu:naquadah_plant"
+			id: "5083A8D8AAFBFBB1"
+			shape: "gear"
+			size: 1.5d
+			subtitle: "Circuit 2"
+			tasks: [
+				{ id: "7A0F2755AA52E183", item: "gtceu:naquadah_plant", optional_task: true, type: "item" }
+				{ id: "7AD7B915EC9DF7A8", type: "checkmark" }
+			]
+			title: "Naquadah Plant, Mode 2"
+			x: 5.0d
+			y: 3.0d
+		}
+		{
+			dependencies: ["5083A8D8AAFBFBB1"]
+			icon: "gtceu:enriched_naquadah_sulfate_dust"
+			id: "750EA460CEE61A4E"
+			size: 1.0d
+			tasks: [
+				{ id: "1A8272EA1F15EFD2", item: "gtceu:enriched_naquadah_sulfate_dust", optional_task: true, type: "item" }
+				{ id: "39297CD9DBEB8769", type: "checkmark" }
+			]
+			title: "Enriched Naquadah Sulfate"
+			x: 7.5d
+			y: 0.75d
+		}
+		{
+			dependencies: ["5083A8D8AAFBFBB1"]
+			icon: "gtceu:trinium_sulfide_dust"
+			id: "5E4E2E7E6F37D540"
+			size: 1.0d
+			tasks: [
+				{ id: "1DBC51AC50BD842C", item: "gtceu:trinium_sulfide_dust", optional_task: true, type: "item" }
+				{ id: "3E1EEC04F84AB39B", type: "checkmark" }
+			]
+			title: "Trinium Sulfide"
+			x: 7.5d
+			y: 2.25d
+		}
+		{
+			dependencies: ["5083A8D8AAFBFBB1"]
+			icon: "gtceu:impure_naquadria_solution_bucket"
+			id: "5CF8B7B6B42ABCC1"
+			size: 0.75d
+			subtitle: "Radioactive: tanked and kept for ZPM"
+			tasks: [
+				{ id: "3DB16227313F3EF8", item: "gtceu:impure_naquadria_solution_bucket", optional_task: true, type: "item" }
+				{ id: "3F74B5FBE168E800", type: "checkmark" }
+			]
+			title: "Impure Naquadria Solution"
+			x: 7.5d
+			y: 3.5d
+		}
+		{
+			dependencies: ["5083A8D8AAFBFBB1"]
+			icon: "gtceu:hydrofluoric_acid_bucket"
+			id: "5636312A9E92DD6F"
+			size: 0.75d
+			subtitle: "Back to mode 1, which drinks it"
+			tasks: [
+				{ id: "7BB4CE257D943636", item: "gtceu:hydrofluoric_acid_bucket", optional_task: true, type: "item" }
+				{ id: "1DFB46FDA0507334", type: "checkmark" }
+			]
+			title: "Hydrofluoric Acid"
+			x: 7.5d
+			y: 4.75d
+		}
+		{
+			dependencies: ["5083A8D8AAFBFBB1"]
+			icon: "gtceu:titanium_ingot"
+			id: "10F2AA8E8285F0F7"
+			size: 0.75d
+			subtitle: "Into the titanium you already use"
+			tasks: [
+				{ id: "7E163489C939C85E", item: "gtceu:titanium_ingot", optional_task: true, type: "item" }
+				{ id: "5E1CD7495E6ED45C", type: "checkmark" }
+			]
+			title: "Titanium"
+			x: 7.5d
+			y: 6.0d
+		}
+		{
+			dependencies: ["750EA460CEE61A4E"]
+			icon: "gtceu:hot_enriched_naquadah_ingot"
+			id: "7E4535F203BA2DA8"
+			size: 1.0d
+			subtitle: "EBF at 7,000 K, with hydrogen"
+			tasks: [
+				{ id: "57F9605FE42897FE", item: "gtceu:hot_enriched_naquadah_ingot", optional_task: true, type: "item" }
+				{ id: "1227F66AA11A284B", type: "checkmark" }
+			]
+			title: "Hot Enriched Naquadah"
+			x: 9.75d
+			y: 0.75d
+		}
+		{
+			dependencies: ["5E4E2E7E6F37D540"]
+			icon: "gtceu:hot_trinium_ingot"
+			id: "33104D06F1E5C8B4"
+			size: 1.0d
+			subtitle: "EBF at 7,200 K, with zinc"
+			tasks: [
+				{ id: "35E3C46CA14E778A", item: "gtceu:hot_trinium_ingot", optional_task: true, type: "item" }
+				{ id: "1713B1B5DBC54649", type: "checkmark" }
+			]
+			title: "Hot Trinium"
+			x: 9.75d
+			y: 2.25d
+		}
+		{
+			dependencies: ["7E4535F203BA2DA8", "33104D06F1E5C8B4", "7C00BCD35855B841", "5642C3DCC05983B2"]
+			description: [
+				"Cools hot ingots and keeps the helium. The vacuum freezer throws half of it away every time; this loses a sip."
+				"Liquid nitrogen does the first part of the chill."
+			]
+			icon: "gtceu:helium_refrigerator"
+			id: "1C6FB7F1EAECB4FF"
+			shape: "gear"
+			size: 1.5d
+			tasks: [
+				{ id: "71AFBE3A4F73484C", item: "gtceu:helium_refrigerator", optional_task: true, type: "item" }
+				{ id: "1CEBEF3F3121F3B7", type: "checkmark" }
+			]
+			title: "Helium Refrigerator"
+			x: 12.25d
+			y: 2.25d
+		}
+		{
+			dependencies: ["1C6FB7F1EAECB4FF"]
+			icon: "gtceu:enriched_naquadah_ingot"
+			id: "5079D5197787258F"
+			size: 1.25d
+			subtitle: "Reactor rods, below"
+			tasks: [
+				{ id: "5C0F3B24A8FBF540", item: "gtceu:enriched_naquadah_ingot", optional_task: true, type: "item" }
+				{ id: "5D955D4E50E342FC", type: "checkmark" }
+			]
+			title: "Enriched Naquadah"
+			x: 14.75d
+			y: 0.75d
+		}
+		{
+			dependencies: ["1C6FB7F1EAECB4FF"]
+			icon: "gtceu:trinium_ingot"
+			id: "58DAD9867F70CBC7"
+			size: 1.25d
+			subtitle: "The magnet works' coils, and the naquadah coil"
+			tasks: [
+				{ id: "5AA2F8B2A59E126C", item: "gtceu:trinium_ingot", optional_task: true, type: "item" }
+				{ id: "3C97A49DDE5635A5", type: "checkmark" }
+			]
+			title: "Trinium"
+			x: 14.75d
+			y: 2.25d
+		}
+		{
+			dependencies: ["1C6FB7F1EAECB4FF"]
+			icon: "gtceu:nitrogen_bucket"
+			id: "388B66F4703E3FCC"
+			size: 0.75d
+			subtitle: "Back to the cryogenic plant, or the air"
+			tasks: [
+				{ id: "76618A21DFC3561D", item: "gtceu:nitrogen_bucket", optional_task: true, type: "item" }
+				{ id: "785E20E3088D1AD7", type: "checkmark" }
+			]
+			title: "Nitrogen"
+			x: 14.75d
+			y: 3.75d
+		}
+		{
+			icon: "gtceu:enriched_naquadah_ingot"
+			id: "1C192380DFC07560"
+			shape: "rsquare"
+			size: 1.0d
+			subtitle: "From the refrigerator"
+			tasks: [
+				{ id: "7352A2EF4359C33B", item: "gtceu:enriched_naquadah_ingot", optional_task: true, type: "item" }
+				{ id: "7D2DABD4228CB9B4", type: "checkmark" }
+			]
+			title: "Enriched Naquadah"
+			x: 19.0d
+			y: 0.75d
+		}
+		{
+			dependencies: ["1C192380DFC07560"]
+			icon: "gtceu:long_enriched_naquadah_rod"
+			id: "7BF0DEC5018503E7"
+			size: 1.0d
+			subtitle: "Lathe, then the forge hammer"
+			tasks: [
+				{ id: "58F51DFB3CB8AA33", item: "gtceu:long_enriched_naquadah_rod", optional_task: true, type: "item" }
+				{ id: "5C858562C15FE705", type: "checkmark" }
+			]
+			title: "Long Enriched Naquadah Rod"
+			x: 21.0d
+			y: 0.75d
+		}
+		{
+			dependencies: ["7BF0DEC5018503E7"]
+			icon: "gtnn:luv_naquadah_reactor"
+			id: "3721DCBEA7F509DC"
+			shape: "gear"
+			size: 1.25d
+			subtitle: "GT--'s; its power goes to the network"
+			tasks: [
+				{ id: "5BF834F7D7BA96A7", item: "gtnn:luv_naquadah_reactor", optional_task: true, type: "item" }
+				{ id: "70D0875A31A290AC", type: "checkmark" }
+			]
+			title: "Naquadah Reactor III"
+			x: 23.25d
+			y: 0.75d
+		}
+		{
+			dependencies: ["3721DCBEA7F509DC"]
+			icon: "gtceu:long_naquadah_rod"
+			id: "5331CD2CC1BCA723"
+			size: 1.0d
+			tasks: [
+				{ id: "1847C5EC223F5F00", item: "gtceu:long_naquadah_rod", optional_task: true, type: "item" }
+				{ id: "7F34B45D23DCC572", type: "checkmark" }
+			]
+			title: "Spent Naquadah Rod"
+			x: 25.5d
+			y: 0.75d
+		}
+		{
+			dependencies: ["5331CD2CC1BCA723"]
+			icon: "gtceu:naquadah_dust"
+			id: "122768FF56C716B2"
+			size: 1.0d
+			subtitle: "Macerator"
+			tasks: [
+				{ id: "70A0676A76EE2D8E", item: "gtceu:naquadah_dust", optional_task: true, type: "item" }
+				{ id: "7F090EFED1164715", type: "checkmark" }
+			]
+			title: "Naquadah Dust"
+			x: 27.5d
+			y: 0.75d
+		}
+		{
+			dependencies: ["122768FF56C716B2"]
+			description: ["The plant pulls what's left of the enriched naquadah back out of a spent rod. It's only a fraction, so the reactor still wants fresh fuel."]
+			icon: "gtceu:naquadah_plant"
+			id: "3DC296F1ED99C53C"
+			shape: "circle"
+			size: 0.75d
+			subtitle: "Re-enriched, partly"
+			tasks: [
+				{ id: "34A564F8EAB13A0A", item: "gtceu:naquadah_plant", optional_task: true, type: "item" }
+				{ id: "79EA1F4FAC49705F", type: "checkmark" }
+			]
+			title: "Naquadah Plant, Circuit 3"
+			x: 29.5d
+			y: 0.75d
+		}
+		{
+			icon: "gtceu:nickel_dust"
+			id: "1ACDBD94ED4D0F5F"
+			shape: "rsquare"
+			size: 1.0d
+			tasks: [
+				{ id: "54B2A32DF99244E4", item: "gtceu:nickel_dust", optional_task: true, type: "item" }
+				{ id: "5182C8090546E02C", type: "checkmark" }
+			]
+			title: "Nickel"
+			x: 0.5d
+			y: 9.25d
+		}
+		{
+			icon: "gtceu:indium_tin_barium_titanium_cuprate_dust"
+			id: "17005435984A51E9"
+			shape: "rsquare"
+			size: 1.0d
+			subtitle: "LuV mixer"
+			tasks: [
+				{ id: "3866FC6310D76020", item: "gtceu:indium_tin_barium_titanium_cuprate_dust", optional_task: true, type: "item" }
+				{ id: "13A12EED227D50DE", type: "checkmark" }
+			]
+			title: "ITBTC Dust"
+			x: 0.5d
+			y: 12.25d
+		}
+		{
+			dependencies: ["1ACDBD94ED4D0F5F", "5856C42F3ADB5B5B", "17005435984A51E9"]
+			description: ["Superconductor as tape, a thin film on textured nickel-tungsten. It skips the blast furnace and the liquid helium that GTM's wire wants."]
+			icon: "gtceu:coated_conductor_line"
+			id: "1A2094A4648BCFBC"
+			shape: "gear"
+			size: 1.5d
+			tasks: [
+				{ id: "32DF668CF900FB7C", item: "gtceu:coated_conductor_line", optional_task: true, type: "item" }
+				{ id: "10C6EF9829D96574", type: "checkmark" }
+			]
+			title: "Coated Conductor Line"
+			x: 3.0d
+			y: 10.75d
+		}
+		{
+			dependencies: ["1A2094A4648BCFBC"]
+			icon: "grindless:nickel_tungsten_tape"
+			id: "7377AE2B603F9C15"
+			shape: "circle"
+			size: 0.75d
+			subtitle: "Circuit 1 rolls it, circuit 2 coats it"
+			tasks: [
+				{ id: "31B070A56064F145", item: "grindless:nickel_tungsten_tape", optional_task: true, type: "item" }
+				{ id: "1376CF8710444CC6", type: "checkmark" }
+			]
+			title: "Nickel-Tungsten Tape, Back"
+			x: 5.5d
+			y: 9.25d
+		}
+		{
+			dependencies: ["1A2094A4648BCFBC"]
+			icon: "grindless:itbtc_coated_conductor"
+			id: "33ECE779344B0D2A"
+			size: 1.25d
+			subtitle: "Wound in the magnet works"
+			tasks: [
+				{ id: "53BBA81E48419418", item: "grindless:itbtc_coated_conductor", optional_task: true, type: "item" }
+				{ id: "729B6CCFEF5148D8", type: "checkmark" }
+			]
+			title: "ITBTC Coated Conductor"
+			x: 5.5d
+			y: 10.75d
+		}
+		{
+			icon: "grindless:itbtc_coated_conductor"
+			id: "55A6781AAF1F4955"
+			shape: "rsquare"
+			size: 1.0d
+			subtitle: "The coated conductor line's tape"
+			tasks: [
+				{ id: "3515AFAD89AF252D", item: "grindless:itbtc_coated_conductor", optional_task: true, type: "item" }
+				{ id: "1773F538EEDEF425", type: "checkmark" }
+			]
+			title: "ITBTC Coated Conductor"
+			x: 9.75d
+			y: 9.25d
+		}
+		{
+			icon: "gtceu:trinium_bucket"
+			id: "1000D7F0AC6AD922"
+			shape: "rsquare"
+			size: 1.0d
+			subtitle: "Mode 2's trinium, melted down"
+			tasks: [
+				{ id: "16A5820BC351820D", item: "gtceu:trinium_bucket", optional_task: true, type: "item" }
+				{ id: "3A0C2AD1D690FA2C", type: "checkmark" }
+			]
+			title: "Molten Trinium"
+			x: 9.75d
+			y: 10.75d
+		}
+		{
+			icon: "gtceu:mercury_barium_calcium_cuprate_single_wire"
+			id: "1C185C14C0042F7D"
+			shape: "rsquare"
+			size: 1.0d
+			subtitle: "HV's superconductor"
+			tasks: [
+				{ id: "79134728451772D2", item: "gtceu:mercury_barium_calcium_cuprate_single_wire", optional_task: true, type: "item" }
+				{ id: "13E3B9034C91DB11", type: "checkmark" }
+			]
+			title: "Hg-1223 Wire"
+			x: 9.75d
+			y: 13.75d
+		}
+		{
+			icon: "gtceu:liquid_helium_bucket"
+			id: "7604012D834BDFCF"
+			shape: "rsquare"
+			size: 1.0d
+			subtitle: "The cold-test charge: it never drains"
+			tasks: [
+				{ id: "3BF37241ACC7CCF7", item: "gtceu:liquid_helium_bucket", optional_task: true, type: "item" }
+				{ id: "71FDE433B244B780", type: "checkmark" }
+			]
+			title: "Liquid Helium"
+			x: 9.75d
+			y: 15.25d
+		}
+		{
+			dependencies: ["55A6781AAF1F4955", "1000D7F0AC6AD922", "35DCEFE8D74600BF", "1C185C14C0042F7D", "7604012D834BDFCF"]
+			description: [
+				"Wound, potted in epoxy and tested cold before anything leaves."
+				"A coil wound from tape takes a sliver of the trinium GTM's own coil wants."
+			]
+			icon: "gtceu:hts_magnet_works"
+			id: "1FFCFA949E449B45"
+			shape: "gear"
+			size: 1.5d
+			tasks: [
+				{ id: "70C15128F04EA632", item: "gtceu:hts_magnet_works", optional_task: true, type: "item" }
+				{ id: "7B6DFB87F7CF2D7C", type: "checkmark" }
+			]
+			title: "HTS Magnet Works"
+			x: 12.5d
+			y: 13.0d
+		}
+		{
+			dependencies: ["1FFCFA949E449B45"]
+			icon: "gtceu:superconducting_coil"
+			id: "147050E6DE584E3B"
+			size: 1.25d
+			subtitle: "The fusion reactor's coils"
+			tasks: [
+				{ id: "131D338951EF094D", item: "gtceu:superconducting_coil", optional_task: true, type: "item" }
+				{ id: "33F78BF92EC3F78A", type: "checkmark" }
+			]
+			title: "Superconducting Coil"
+			x: 15.25d
+			y: 10.75d
+		}
+		{
+			dependencies: ["1FFCFA949E449B45"]
+			icon: "grindless:luv_smes_cell"
+			id: "3AFDA1097A1E7BB6"
+			size: 1.25d
+			subtitle: "The network's LuV cell"
+			tasks: [
+				{ id: "7F363E25D58F411C", item: "grindless:luv_smes_cell", optional_task: true, type: "item" }
+				{ id: "115198EDC5F14C06", type: "checkmark" }
+			]
+			title: "LuV SMES Cell"
+			x: 15.25d
+			y: 12.25d
+		}
+		{
+			dependencies: ["1FFCFA949E449B45"]
+			icon: "grindless:coilgun_coil_casing"
+			id: "57D3017A93EE377F"
+			size: 1.25d
+			subtitle: "The coilgun's barrel, on Ganymede"
+			tasks: [
+				{ id: "58E8861C4C59591A", item: "grindless:coilgun_coil_casing", optional_task: true, type: "item" }
+				{ id: "3C4A3DE7D77C0CAB", type: "checkmark" }
+			]
+			title: "Coilgun Coil Casing"
+			x: 15.25d
+			y: 13.75d
+		}
+		{
+			dependencies: ["1FFCFA949E449B45"]
+			icon: "grindless:magnetic_bearing"
+			id: "7826E24E80A68910"
+			size: 1.25d
+			subtitle: "The hydroponic ring's hub"
+			tasks: [
+				{ id: "71E2F2121540F285", item: "grindless:magnetic_bearing", optional_task: true, type: "item" }
+				{ id: "3F0F7B7FA90ECA98", type: "checkmark" }
+			]
+			title: "Magnetic Bearing"
+			x: 15.25d
+			y: 15.25d
+		}
+		{
+			dependencies: ["3C6755E902FEF468"]
+			icon: "gcyr:photovoltaic_cell"
+			id: "79DBFA0B96657BC6"
+			size: 1.0d
+			subtitle: "GCYR's cell, at the crafting table"
+			tasks: [
+				{ id: "7650E90980D45E38", item: "gcyr:photovoltaic_cell", optional_task: true, type: "item" }
+				{ id: "39BF9DFC455A09AD", type: "checkmark" }
+			]
+			title: "Photovoltaic Cell"
+			x: 21.75d
+			y: 9.25d
+		}
+		{
+			icon: "grindless:triple_junction_cell"
+			id: "7A5E10DCDE6B63D2"
+			shape: "rsquare"
+			size: 1.0d
+			subtitle: "The wake shield's wafer, cut"
+			tasks: [
+				{ id: "33FB944AB57CB9CA", item: "grindless:triple_junction_cell", optional_task: true, type: "item" }
+				{ id: "7646EE4CD2F8F29E", type: "checkmark" }
+			]
+			title: "Triple-Junction Cell"
+			x: 21.75d
+			y: 10.75d
+		}
+		{
+			dependencies: ["79DBFA0B96657BC6", "7A5E10DCDE6B63D2"]
+			icon: "grindless:orbital_solar_panel"
+			id: "351308A02FD2CE45"
+			size: 1.0d
+			subtitle: "Assembler; triple-junction cells go further"
+			tasks: [
+				{ id: "3D95D78B1FEF30AD", item: "grindless:orbital_solar_panel", optional_task: true, type: "item" }
+				{ id: "7C3E1D41840D4FC7", type: "checkmark" }
+			]
+			title: "Orbital Solar Panel"
+			x: 24.0d
+			y: 10.0d
+		}
+		{
+			dependencies: ["351308A02FD2CE45"]
+			description: ["Two wings of panels in Earth orbit, where night never comes. Its power goes straight into the network through a wireless dynamo hatch."]
+			icon: "gtceu:orbital_solar_station"
+			id: "501DC5D14F8CA691"
+			shape: "gear"
+			size: 1.5d
+			tasks: [
+				{ id: "7EE7C9011BB72183", item: "gtceu:orbital_solar_station", optional_task: true, type: "item" }
+				{ id: "320C98BF1C5B55C5", type: "checkmark" }
+			]
+			title: "Orbital Solar Station"
+			x: 26.5d
+			y: 10.0d
+		}
+		{
+			icon: "grindless:luv_smes_cell"
+			id: "1933B7C3C6DEA8D0"
+			shape: "rsquare"
+			size: 1.0d
+			subtitle: "The magnet works winds it"
+			tasks: [
+				{ id: "1A598B8AB39004EA", item: "grindless:luv_smes_cell", optional_task: true, type: "item" }
+				{ id: "3B953754484DF9D5", type: "checkmark" }
+			]
+			title: "LuV SMES Cell"
+			x: 24.0d
+			y: 12.25d
+		}
+		{
+			dependencies: ["1933B7C3C6DEA8D0"]
+			icon: "gtceu:wireless_energy_tower"
+			id: "15E30DBACF20CB7E"
+			shape: "gear"
+			size: 1.5d
+			subtitle: "Every tower on SMES cells, and the network goes LuV"
+			tasks: [
+				{ id: "3D78DD1B8A3A183C", item: "gtceu:wireless_energy_tower", optional_task: true, type: "item" }
+				{ id: "5B38AFC6230ED1B7", type: "checkmark" }
+			]
+			title: "Wireless Energy Tower"
+			x: 26.5d
+			y: 12.25d
+		}
+		{
+			dependencies: ["15E30DBACF20CB7E"]
+			icon: "gtceu:luv_wireless_energy_hatch"
+			id: "785DF8E77CFB3285"
+			size: 1.0d
+			subtitle: "Every LuV base draws through it"
+			tasks: [
+				{ id: "34D6E19E1F10EE40", item: "gtceu:luv_wireless_energy_hatch", optional_task: true, type: "item" }
+				{ id: "3F58AAD7BB6DC8F6", type: "checkmark" }
+			]
+			title: "LuV Wireless Energy Hatch"
+			x: 29.0d
+			y: 11.5d
+		}
+		{
+			dependencies: ["15E30DBACF20CB7E"]
+			icon: "gtceu:luv_wireless_dynamo_hatch"
+			id: "3787D3F2D66DB0C0"
+			size: 1.0d
+			subtitle: "Stations and generators feed the network through it"
+			tasks: [
+				{ id: "1D9C4A3BDFAC793C", item: "gtceu:luv_wireless_dynamo_hatch", optional_task: true, type: "item" }
+				{ id: "3F6D76D9BCEEB4D0", type: "checkmark" }
+			]
+			title: "LuV Wireless Dynamo Hatch"
+			x: 29.0d
+			y: 13.0d
+		}
+		{
+			icon: "minecraft:bone"
+			id: "19818207BE27A1BF"
+			shape: "rsquare"
+			size: 1.0d
+			subtitle: "The creature simulator, with the meat"
+			tasks: [
+				{ id: "75687BF600A18BDE", item: "minecraft:bone", optional_task: true, type: "item" }
+				{ id: "3C6F0BFAD985CBD9", type: "checkmark" }
+			]
+			title: "Bone"
+			x: 0.5d
+			y: 23.0d
+		}
+		{
+			icon: "gtceu:bacteria_bucket"
+			id: "37DDBA79833B9A79"
+			shape: "rsquare"
+			size: 1.0d
+			subtitle: "GTM brews it in a sterile cleanroom"
+			tasks: [
+				{ id: "7778D5C6F7E7680A", item: "gtceu:bacteria_bucket", optional_task: true, type: "item" }
+				{ id: "7AB7B416243A1A8B", type: "checkmark" }
+			]
+			title: "Bacteria"
+			x: 0.5d
+			y: 26.0d
+		}
+		{
+			dependencies: ["19818207BE27A1BF", "37DDBA79833B9A79"]
+			description: [
+				"GTM's whole sterile chain in one sealed hall, long before its sterile cleanroom."
+				"The acid and the phosphorus it leaves go back to be used again."
+			]
+			icon: "gtceu:biofoundry"
+			id: "728D8416333B7E53"
+			shape: "gear"
+			size: 1.5d
+			tasks: [
+				{ id: "3505D360A1AB015B", item: "gtceu:biofoundry", optional_task: true, type: "item" }
+				{ id: "1D1EFA4DE713F886", type: "checkmark" }
+			]
+			title: "Biofoundry"
+			x: 2.75d
+			y: 23.0d
+		}
+		{
+			dependencies: ["37DDBA79833B9A79"]
+			icon: "grindless:engineered_barley_seed"
+			id: "1D71D006A7F550F0"
+			size: 1.25d
+			subtitle: "Circuit 9; up to the ring"
+			tasks: [
+				{ id: "13D6B31C634DE245", item: "grindless:engineered_barley_seed", optional_task: true, type: "item" }
+				{ id: "3D656E6C9862F08D", type: "checkmark" }
+			]
+			title: "Engineered Barley Seed"
+			x: 2.75d
+			y: 25.25d
+		}
+		{
+			dependencies: ["37DDBA79833B9A79"]
+			icon: "grindless:engineered_tobacco_seed"
+			id: "313E90B3497230A8"
+			size: 1.25d
+			subtitle: "Circuit 10; up to the ring"
+			tasks: [
+				{ id: "7578E794C695E5B4", item: "grindless:engineered_tobacco_seed", optional_task: true, type: "item" }
+				{ id: "12CE785F4F2AC28F", type: "checkmark" }
+			]
+			title: "Engineered Tobacco Seed"
+			x: 2.75d
+			y: 26.75d
+		}
+		{
+			dependencies: ["728D8416333B7E53"]
+			icon: "gtceu:diluted_sulfuric_acid_bucket"
+			id: "78405AAB8458806E"
+			size: 0.75d
+			subtitle: "Distillery: sulfuric acid again"
+			tasks: [
+				{ id: "7B60C42FF4A15F05", item: "gtceu:diluted_sulfuric_acid_bucket", optional_task: true, type: "item" }
+				{ id: "7DDD12448C9639B6", type: "checkmark" }
+			]
+			title: "Diluted Sulfuric Acid"
+			x: 5.0d
+			y: 20.25d
+		}
+		{
+			dependencies: ["728D8416333B7E53"]
+			icon: "gtceu:collagen_dust"
+			id: "59202F5B9BA3164A"
+			size: 1.0d
+			tasks: [
+				{ id: "59CE40FDBAC689C6", item: "gtceu:collagen_dust", optional_task: true, type: "item" }
+				{ id: "53BD54D756A226B9", type: "checkmark" }
+			]
+			title: "Collagen"
+			x: 5.0d
+			y: 21.5d
+		}
+		{
+			dependencies: ["728D8416333B7E53"]
+			icon: "gtceu:bacterial_sludge_bucket"
+			id: "7DA62C21CBF6BD96"
+			size: 1.0d
+			tasks: [
+				{ id: "5E563D0A13E12B02", item: "gtceu:bacterial_sludge_bucket", optional_task: true, type: "item" }
+				{ id: "11057B2211E1C247", type: "checkmark" }
+			]
+			title: "Bacterial Sludge"
+			x: 5.0d
+			y: 23.0d
+		}
+		{
+			dependencies: ["59202F5B9BA3164A"]
+			icon: "gtceu:phosphorus_dust"
+			id: "5BC4FD2C9BA4AB60"
+			size: 0.75d
+			subtitle: "Phosphoric acid for the next batch"
+			tasks: [
+				{ id: "5270900FC025CBB2", item: "gtceu:phosphorus_dust", optional_task: true, type: "item" }
+				{ id: "3DF8200B7619A6F2", type: "checkmark" }
+			]
+			title: "Phosphorus"
+			x: 7.0d
+			y: 20.25d
+		}
+		{
+			dependencies: ["59202F5B9BA3164A"]
+			icon: "gtceu:gelatin_dust"
+			id: "323C218DE9600486"
+			size: 1.0d
+			tasks: [
+				{ id: "531B8B2DD4457975", item: "gtceu:gelatin_dust", optional_task: true, type: "item" }
+				{ id: "51E50B790D672E45", type: "checkmark" }
+			]
+			title: "Gelatin"
+			x: 7.0d
+			y: 21.5d
+		}
+		{
+			dependencies: ["7DA62C21CBF6BD96", "11CBF06B464C189F"]
+			icon: "gtceu:mutagen_bucket"
+			id: "1C51F11F885E4373"
+			size: 1.0d
+			subtitle: "A pinch of uranium-235"
+			tasks: [
+				{ id: "381B78EDE59FE1A7", item: "gtceu:mutagen_bucket", optional_task: true, type: "item" }
+				{ id: "34301AE7CE18E521", type: "checkmark" }
+			]
+			title: "Mutagen"
+			x: 7.0d
+			y: 23.0d
+		}
+		{
+			dependencies: ["323C218DE9600486"]
+			icon: "gtceu:agar_dust"
+			id: "73E521ECED525856"
+			size: 1.0d
+			tasks: [
+				{ id: "1B00BFF4E3960391", item: "gtceu:agar_dust", optional_task: true, type: "item" }
+				{ id: "3B81CD758FC2EF48", type: "checkmark" }
+			]
+			title: "Agar"
+			x: 9.0d
+			y: 21.5d
+		}
+		{
+			dependencies: ["73E521ECED525856", "1C51F11F885E4373"]
+			icon: "gtceu:sterilized_growth_medium_bucket"
+			id: "1DEEB2A035963003"
+			size: 1.0d
+			subtitle: "With meat, salt and calcium"
+			tasks: [
+				{ id: "384BAECC4B3B8330", item: "gtceu:sterilized_growth_medium_bucket", optional_task: true, type: "item" }
+				{ id: "1330734D70ADFDF9", type: "checkmark" }
+			]
+			title: "Sterilized Growth Medium"
+			x: 11.0d
+			y: 22.25d
+		}
+		{
+			icon: "gtceu:osmiridium_dust"
+			id: "11A6779501E51E32"
+			shape: "rsquare"
+			size: 1.0d
+			subtitle: "LuV mixer"
+			tasks: [
+				{ id: "7EB7C5B8E4DF3DED", item: "gtceu:osmiridium_dust", optional_task: true, type: "item" }
+				{ id: "70A628256C304387", type: "checkmark" }
+			]
+			title: "Osmiridium Dust"
+			x: 11.0d
+			y: 23.75d
+		}
+		{
+			dependencies: ["1DEEB2A035963003"]
+			icon: "gtceu:bacterial_sludge_bucket"
+			id: "189629C7F12027FA"
+			shape: "circle"
+			size: 0.75d
+			subtitle: "Back into mutagen"
+			tasks: [
+				{ id: "3A942D9607CC4FED", item: "gtceu:bacterial_sludge_bucket", optional_task: true, type: "item" }
+				{ id: "791463C7A2871453", type: "checkmark" }
+			]
+			title: "Bacterial Sludge, Back"
+			x: 13.0d
+			y: 21.5d
+		}
+		{
+			dependencies: ["1DEEB2A035963003", "11A6779501E51E32"]
+			icon: "gtceu:stem_cells"
+			id: "73607C76CF2F88A8"
+			size: 1.25d
+			subtitle: "Up to the organoid lab"
+			tasks: [
+				{ id: "17AA068871B6ACF2", item: "gtceu:stem_cells", optional_task: true, type: "item" }
+				{ id: "35135455EFDAD44B", type: "checkmark" }
+			]
+			title: "Stem Cells"
+			x: 13.0d
+			y: 23.0d
+		}
+		{
+			icon: "grindless:engineered_barley_seed"
+			id: "30D0B94B6DB49D66"
+			shape: "rsquare"
+			size: 1.0d
+			subtitle: "The crop replants: it's never used up"
+			tasks: [
+				{ id: "3F32D199CA8081C5", item: "grindless:engineered_barley_seed", optional_task: true, type: "item" }
+				{ id: "5BC3B720A77FB19F", type: "checkmark" }
+			]
+			title: "Engineered Barley Seed"
+			x: 17.25d
+			y: 23.25d
+		}
+		{
+			icon: "grindless:engineered_tobacco_seed"
+			id: "15F47F27750F3FAD"
+			shape: "rsquare"
+			size: 1.0d
+			tasks: [
+				{ id: "39BC223392B96CCE", item: "grindless:engineered_tobacco_seed", optional_task: true, type: "item" }
+				{ id: "19AB82D6F1721203", type: "checkmark" }
+			]
+			title: "Engineered Tobacco Seed"
+			x: 17.25d
+			y: 24.75d
+		}
+		{
+			dependencies: ["30D0B94B6DB49D66", "15F47F27750F3FAD", "5A5AFC686B2574CF"]
+			description: ["A spinning ring of soil under glass, with the sun always up. Engineered barley and tobacco grow human proteins here, sealed away from any field at home."]
+			icon: "gtceu:hydroponic_ring"
+			id: "1B392DB135E14473"
+			shape: "gear"
+			size: 1.5d
+			tasks: [
+				{ id: "113602B565A13371", item: "gtceu:hydroponic_ring", optional_task: true, type: "item" }
+				{ id: "3CC98558EC9A9889", type: "checkmark" }
+			]
+			title: "Rotating Hydroponic Ring"
+			x: 19.75d
+			y: 24.75d
+		}
+		{
+			dependencies: ["1B392DB135E14473"]
+			icon: "grindless:neurotrophic_factor"
+			id: "7FA8142FA93F4A4E"
+			size: 1.0d
+			tasks: [
+				{ id: "1E6ABD18175F26F3", item: "grindless:neurotrophic_factor", optional_task: true, type: "item" }
+				{ id: "10F8FCF5059FC556", type: "checkmark" }
+			]
+			title: "Neurotrophic Factor"
+			x: 22.25d
+			y: 23.25d
+		}
+		{
+			dependencies: ["1B392DB135E14473"]
+			icon: "gtceu:collagen_dust"
+			id: "14D9BB585D5EFCE2"
+			shape: "circle"
+			size: 0.75d
+			subtitle: "To the biofoundry: no meat, no bone"
+			tasks: [
+				{ id: "1C45D7136AEE0156", item: "gtceu:collagen_dust", optional_task: true, type: "item" }
+				{ id: "13724BBB1EED3079", type: "checkmark" }
+			]
+			title: "Plant Collagen, Back"
+			x: 22.25d
+			y: 24.75d
+		}
+		{
+			dependencies: ["1B392DB135E14473"]
+			icon: "gtceu:biomass_bucket"
+			id: "139D2A8953E3134C"
+			size: 0.75d
+			subtitle: "Into bacterial sludge"
+			tasks: [
+				{ id: "510158AF24AC03DD", item: "gtceu:biomass_bucket", optional_task: true, type: "item" }
+				{ id: "79ACA914F2A151F0", type: "checkmark" }
+			]
+			title: "Biomass"
+			x: 22.25d
+			y: 26.0d
+		}
+		{
+			dependencies: ["1B392DB135E14473"]
+			icon: "gtceu:oxygen_bucket"
+			id: "5F94D6EA5D5A7062"
+			size: 0.75d
+			subtitle: "The station's oxygen spreader"
+			tasks: [
+				{ id: "71FC52AD9CB813A4", item: "gtceu:oxygen_bucket", optional_task: true, type: "item" }
+				{ id: "368FDB29A2294F70", type: "checkmark" }
+			]
+			title: "Oxygen"
+			x: 22.25d
+			y: 27.0d
+		}
+		{
+			icon: "gtceu:stem_cells"
+			id: "7D4841A4FF629BC9"
+			shape: "rsquare"
+			size: 1.0d
+			subtitle: "From the biofoundry"
+			tasks: [
+				{ id: "72EABAE69F425F1C", item: "gtceu:stem_cells", optional_task: true, type: "item" }
+				{ id: "54E0D5F076C6FC2A", type: "checkmark" }
+			]
+			title: "Stem Cells"
+			x: 22.25d
+			y: 20.25d
+		}
+		{
+			icon: "gtceu:sterilized_growth_medium_bucket"
+			id: "3BAE961655C104E4"
+			shape: "rsquare"
+			size: 1.0d
+			subtitle: "From the biofoundry"
+			tasks: [
+				{ id: "7BE7AFE9F60A6820", item: "gtceu:sterilized_growth_medium_bucket", optional_task: true, type: "item" }
+				{ id: "5284739F93F34BCA", type: "checkmark" }
+			]
+			title: "Sterilized Growth Medium"
+			x: 22.25d
+			y: 21.75d
+		}
+		{
+			dependencies: ["7D4841A4FF629BC9", "3BAE961655C104E4", "7FA8142FA93F4A4E"]
+			description: ["Stem cells and the ring's factor grow into neural organoids. The lab then builds a neuro processing unit around one, on LuV power instead of ZPM's."]
+			icon: "gtceu:organoid_lab"
+			id: "565B7027E4FEF524"
+			shape: "gear"
+			size: 1.5d
+			tasks: [
+				{ id: "75795A523AA0EE50", item: "gtceu:organoid_lab", optional_task: true, type: "item" }
+				{ id: "5744E2B0E7ED0E12", type: "checkmark" }
+			]
+			title: "Organoid Lab"
+			x: 24.75d
+			y: 21.75d
+		}
+		{
+			dependencies: ["565B7027E4FEF524"]
+			icon: "grindless:neural_organoid"
+			id: "5B7917A2F756FF8C"
+			shape: "circle"
+			size: 0.75d
+			subtitle: "Circuit 2 builds the NPU around it"
+			tasks: [
+				{ id: "51F317BF4103DF5A", item: "grindless:neural_organoid", optional_task: true, type: "item" }
+				{ id: "7BA79517F9ED5A7D", type: "checkmark" }
+			]
+			title: "Neural Organoid, Back"
+			x: 27.25d
+			y: 21.0d
+		}
+		{
+			dependencies: ["565B7027E4FEF524"]
+			icon: "gtceu:neuro_processing_unit"
+			id: "57C33BF93A061247"
+			size: 1.0d
+			tasks: [
+				{ id: "7D09D7A6E7906B39", item: "gtceu:neuro_processing_unit", optional_task: true, type: "item" }
+				{ id: "3DF374AECD16F999", type: "checkmark" }
+			]
+			title: "Neuro Processing Unit"
+			x: 27.25d
+			y: 22.5d
+		}
+		{
+			icon: "gtceu:crystal_cpu"
+			id: "151B61D02792DE52"
+			shape: "rsquare"
+			size: 1.0d
+			subtitle: "The grower's chips, engraved"
+			tasks: [
+				{ id: "3E2A69B7BEF440EE", item: "gtceu:crystal_cpu", optional_task: true, type: "item" }
+				{ id: "1FD015FCF3DDF198", type: "checkmark" }
+			]
+			title: "Crystal CPU"
+			x: 27.25d
+			y: 24.0d
+		}
+		{
+			dependencies: ["57C33BF93A061247", "151B61D02792DE52"]
+			icon: "gtnn:circuit_assembly_line"
+			id: "3D995169815AA303"
+			shape: "gear"
+			size: 1.25d
+			subtitle: "GT--'s, on one LuV energy hatch"
+			tasks: [
+				{ id: "37DCB525F3285194", item: "gtnn:circuit_assembly_line", optional_task: true, type: "item" }
+				{ id: "78620059B3953301", type: "checkmark" }
+			]
+			title: "Circuit Assembly Line"
+			x: 29.75d
+			y: 23.25d
+		}
+		{
+			dependencies: ["3D995169815AA303"]
+			icon: "gtceu:wetware_processor"
+			id: "7C823EA2A22FD4F2"
+			size: 1.25d
+			subtitle: "A whole batch a run, at LuV"
+			tasks: [
+				{ id: "574C318EE60E821B", item: "gtceu:wetware_processor", optional_task: true, type: "item" }
+				{ id: "3E9923CEE20ACED5", type: "checkmark" }
+			]
+			title: "Wetware Processor"
+			x: 32.25d
+			y: 23.25d
+		}
+		{
+			icon: "gtceu:small_zirconium_dust"
+			id: "5EB323E5F1034409"
+			shape: "rsquare"
+			size: 1.0d
+			subtitle: "The End's zircon"
+			tasks: [
+				{ id: "7D1E53B914559967", item: "gtceu:small_zirconium_dust", optional_task: true, type: "item" }
+				{ id: "3236D30B27C14425", type: "checkmark" }
+			]
+			title: "Zirconium"
+			x: 0.5d
+			y: 30.5d
+		}
+		{
+			icon: "gtceu:small_lanthanum_dust"
+			id: "113AE7FAC7133599"
+			shape: "rsquare"
+			size: 1.0d
+			subtitle: "Mars rare earths"
+			tasks: [
+				{ id: "7D39036AC10F3864", item: "gtceu:small_lanthanum_dust", optional_task: true, type: "item" }
+				{ id: "77DCE1F431342F70", type: "checkmark" }
+			]
+			title: "Lanthanum"
+			x: 0.5d
+			y: 32.0d
+		}
+		{
+			dependencies: ["5EB323E5F1034409", "113AE7FAC7133599"]
+			icon: "gtceu:zblan_dust"
+			id: "79A4EE2D01D99D0B"
+			size: 1.0d
+			subtitle: "Large mixer, with fluorine: a fluoride glass"
+			tasks: [
+				{ id: "7790072CB7914D47", item: "gtceu:zblan_dust", optional_task: true, type: "item" }
+				{ id: "136BB5ADA0DBB738", type: "checkmark" }
+			]
+			title: "ZBLAN"
+			x: 2.75d
+			y: 31.25d
+		}
+		{
+			dependencies: ["79A4EE2D01D99D0B", "3211798D8D1FE487", "311A139B9FC53881", "1C089C47DF30A347"]
+			description: ["ZBLAN fibre, metal foam and naquadah alloy, each made better in orbit than on the ground. The alloy skips the coil and the liquid helium altogether."]
+			icon: "gtceu:microgravity_smelter"
+			id: "5C3C83FA1D3C0677"
+			shape: "gear"
+			size: 1.5d
+			tasks: [
+				{ id: "5C1975791A48E68F", item: "gtceu:microgravity_smelter", optional_task: true, type: "item" }
+				{ id: "3551199AC03F06AF", type: "checkmark" }
+			]
+			title: "Microgravity Smelter"
+			x: 5.25d
+			y: 33.5d
+		}
+		{
+			dependencies: ["5C3C83FA1D3C0677"]
+			icon: "gtceu:normal_optical_pipe"
+			id: "307F1088C7469204"
+			size: 1.25d
+			subtitle: "No silver in it: research, below"
+			tasks: [
+				{ id: "190488C673769501", item: "gtceu:normal_optical_pipe", optional_task: true, type: "item" }
+				{ id: "15B84575F941A9DA", type: "checkmark" }
+			]
+			title: "Optical Pipe"
+			x: 7.75d
+			y: 31.25d
+		}
+		{
+			dependencies: ["5C3C83FA1D3C0677"]
+			icon: "grindless:whipple_shield_casing"
+			id: "1592930738780420"
+			size: 1.0d
+			tasks: [
+				{ id: "7CC5A5E8E1BA0151", item: "grindless:whipple_shield_casing", optional_task: true, type: "item" }
+				{ id: "199631E455E1BAFC", type: "checkmark" }
+			]
+			title: "Whipple Shield Casing"
+			x: 7.75d
+			y: 32.75d
+		}
+		{
+			dependencies: ["5C3C83FA1D3C0677"]
+			icon: "gtceu:naquadah_alloy_ingot"
+			id: "3BBE3CEF2848F99D"
+			size: 1.25d
+			subtitle: "Comes out cold; ZPM wants it"
+			tasks: [
+				{ id: "7698424CE1DEF06F", item: "gtceu:naquadah_alloy_ingot", optional_task: true, type: "item" }
+				{ id: "53D0255758A84A86", type: "checkmark" }
+			]
+			title: "Naquadah Alloy"
+			x: 7.75d
+			y: 34.25d
+		}
+		{
+			icon: "gtceu:hpic_wafer"
+			id: "1E56147115157CC4"
+			shape: "rsquare"
+			size: 1.0d
+			subtitle: "Or MPIC, for circuit 2"
+			tasks: [
+				{ id: "560EFF37C011070C", item: "gtceu:hpic_wafer", optional_task: true, type: "item" }
+				{ id: "3E187F45F077669F", type: "checkmark" }
+			]
+			title: "HPIC Wafer"
+			x: 7.75d
+			y: 35.75d
+		}
+		{
+			icon: "gtceu:germanium_plate"
+			id: "36F2D3F115BBD372"
+			shape: "rsquare"
+			size: 1.0d
+			subtitle: "Io's fumaroles"
+			tasks: [
+				{ id: "5A5259BB1CBD6EB4", item: "gtceu:germanium_plate", optional_task: true, type: "item" }
+				{ id: "163D1E4B734FB7DB", type: "checkmark" }
+			]
+			title: "Germanium Plate"
+			x: 7.75d
+			y: 37.25d
+		}
+		{
+			dependencies: ["1592930738780420", "1E56147115157CC4", "36F2D3F115BBD372", "162641406869CF74"]
+			description: ["A disc flying through orbit leaves a wake emptier than any vacuum chamber. Wafers grown in it waste less of their source and take less time."]
+			icon: "gtceu:wake_shield_facility"
+			id: "1E9E38114CF98620"
+			shape: "gear"
+			size: 1.5d
+			tasks: [
+				{ id: "3F510620BD48382E", item: "gtceu:wake_shield_facility", optional_task: true, type: "item" }
+				{ id: "176D6DAF25A172C8", type: "checkmark" }
+			]
+			title: "Wake Shield Facility"
+			x: 10.25d
+			y: 35.0d
+		}
+		{
+			dependencies: ["1E9E38114CF98620"]
+			icon: "gtceu:uhpic_wafer"
+			id: "72BB9376B955D220"
+			size: 1.25d
+			subtitle: "The fusion reactor's chips, and every LuV hatch"
+			tasks: [
+				{ id: "3D69EBB32EA766AD", item: "gtceu:uhpic_wafer", optional_task: true, type: "item" }
+				{ id: "1723C22B6AD1BFAC", type: "checkmark" }
+			]
+			title: "UHPIC Wafer"
+			x: 12.75d
+			y: 34.25d
+		}
+		{
+			dependencies: ["1E9E38114CF98620"]
+			icon: "grindless:triple_junction_wafer"
+			id: "1E35D4D7FBC3F233"
+			size: 1.0d
+			tasks: [
+				{ id: "3F34778285A9F568", item: "grindless:triple_junction_wafer", optional_task: true, type: "item" }
+				{ id: "7AA660E2A720F8B2", type: "checkmark" }
+			]
+			title: "Triple-Junction Wafer"
+			x: 12.75d
+			y: 35.75d
+		}
+		{
+			dependencies: ["1E35D4D7FBC3F233"]
+			icon: "grindless:triple_junction_cell"
+			id: "191E1B5D4417ECB6"
+			size: 1.25d
+			subtitle: "Cutter; the orbital solar panels take it"
+			tasks: [
+				{ id: "70B00F8CD4ABB0B3", item: "grindless:triple_junction_cell", optional_task: true, type: "item" }
+				{ id: "36E780BCF1D87E3E", type: "checkmark" }
+			]
+			title: "Triple-Junction Cell"
+			x: 15.0d
+			y: 35.75d
+		}
+		{
+			icon: "gtceu:exquisite_emerald_gem"
+			id: "3322CEA660659623"
+			shape: "rsquare"
+			size: 1.0d
+			subtitle: "Or exquisite olivine"
+			tasks: [
+				{ id: "12DD38E2D2718EC1", item: "gtceu:exquisite_emerald_gem", optional_task: true, type: "item" }
+				{ id: "7FCC4ECE75647265", type: "checkmark" }
+			]
+			title: "Exquisite Emerald"
+			x: 19.25d
+			y: 30.75d
+		}
+		{
+			icon: "gtceu:europium_bucket"
+			id: "1757139696394203"
+			shape: "rsquare"
+			size: 1.0d
+			subtitle: "The fusion reactor's; GTM's dose, no less"
+			tasks: [
+				{ id: "715F61802BCED66A", item: "gtceu:europium_bucket", optional_task: true, type: "item" }
+				{ id: "1E944F2B89358B85", type: "checkmark" }
+			]
+			title: "Europium"
+			x: 19.25d
+			y: 32.25d
+		}
+		{
+			icon: "gtceu:sapphire_dust"
+			id: "3C35413F4F256A8C"
+			shape: "rsquare"
+			size: 1.0d
+			subtitle: "With an exquisite sapphire as the seed"
+			tasks: [
+				{ id: "7027871128BD996B", item: "gtceu:sapphire_dust", optional_task: true, type: "item" }
+				{ id: "5C9DB820B62BA291", type: "checkmark" }
+			]
+			title: "Sapphire Dust"
+			x: 19.25d
+			y: 33.75d
+		}
+		{
+			dependencies: ["3322CEA660659623", "1757139696394203", "3C35413F4F256A8C"]
+			description: ["Crystal chips grow without striations up here, so every seed takes. They grow faster, too."]
+			icon: "gtceu:zero_g_crystal_grower"
+			id: "1159668F672EEF24"
+			shape: "gear"
+			size: 1.5d
+			tasks: [
+				{ id: "5EF41314C7BF8E6D", item: "gtceu:zero_g_crystal_grower", optional_task: true, type: "item" }
+				{ id: "1E60746C77152BE9", type: "checkmark" }
+			]
+			title: "Zero-G Crystal Grower"
+			x: 21.75d
+			y: 32.25d
+		}
+		{
+			dependencies: ["1159668F672EEF24"]
+			icon: "gtceu:raw_crystal_chip"
+			id: "705B5FD37B8B52C8"
+			size: 1.0d
+			tasks: [
+				{ id: "7F0753A84CC45055", item: "gtceu:raw_crystal_chip", optional_task: true, type: "item" }
+				{ id: "19B486A3AE1C2058", type: "checkmark" }
+			]
+			title: "Raw Crystal Chip"
+			x: 24.25d
+			y: 30.75d
+		}
+		{
+			dependencies: ["1159668F672EEF24"]
+			icon: "grindless:sapphire_test_mass"
+			id: "785F8CEFDCEFD9B9"
+			size: 1.25d
+			subtitle: "The detector's mirrors, on Ganymede"
+			tasks: [
+				{ id: "5B3AA2940AA78608", item: "grindless:sapphire_test_mass", optional_task: true, type: "item" }
+				{ id: "7D49A5A2CB0DB8A1", type: "checkmark" }
+			]
+			title: "Sapphire Test Mass"
+			x: 24.25d
+			y: 33.0d
+		}
+		{
+			dependencies: ["705B5FD37B8B52C8"]
+			icon: "gtceu:crystal_cpu"
+			id: "539E725704369979"
+			size: 1.25d
+			subtitle: "EBF with an emerald plate, then the laser engraver"
+			tasks: [
+				{ id: "51FA8282EA86241A", item: "gtceu:crystal_cpu", optional_task: true, type: "item" }
+				{ id: "5D873E46A24918B3", type: "checkmark" }
+			]
+			title: "Crystal CPU"
+			x: 26.5d
+			y: 30.75d
+		}
+		{
+			icon: "gtceu:superconducting_coil"
+			id: "1F8C4B5D30C692CE"
+			shape: "rsquare"
+			size: 1.0d
+			subtitle: "Wound in the magnet works"
+			tasks: [
+				{ id: "505D99C123FF3D83", item: "gtceu:superconducting_coil", optional_task: true, type: "item" }
+				{ id: "7B0A01AA78349D9A", type: "checkmark" }
+			]
+			title: "Superconducting Coil"
+			x: 0.5d
+			y: 42.25d
+		}
+		{
+			icon: "gtceu:uhpic_chip"
+			id: "5F725A764A77E5AF"
+			shape: "rsquare"
+			size: 1.0d
+			subtitle: "The wake shield's wafers, cut"
+			tasks: [
+				{ id: "5A1459D0C25E9912", item: "gtceu:uhpic_chip", optional_task: true, type: "item" }
+				{ id: "559BA19FE4BA1D4A", type: "checkmark" }
+			]
+			title: "UHPIC Chip"
+			x: 0.5d
+			y: 43.75d
+		}
+		{
+			icon: "gtceu:neodymium_bucket"
+			id: "31FEBAD239D3F335"
+			shape: "rsquare"
+			size: 1.0d
+			subtitle: "Mars neodymium: the EBF, then the extractor"
+			tasks: [
+				{ id: "3D77FE5D3002EB4D", item: "gtceu:neodymium_bucket", optional_task: true, type: "item" }
+				{ id: "56D07A4054969DF3", type: "checkmark" }
+			]
+			title: "Molten Neodymium"
+			x: 0.5d
+			y: 45.25d
+		}
+		{
+			icon: "gtceu:magnesium_bucket"
+			id: "303B104F471510BF"
+			shape: "rsquare"
+			size: 1.0d
+			subtitle: "With oxygen, for GTCA's calcium plasma"
+			tasks: [
+				{ id: "143C2AE69891F6FB", item: "gtceu:magnesium_bucket", optional_task: true, type: "item" }
+				{ id: "54AA9ED38C2C5E7F", type: "checkmark" }
+			]
+			title: "Molten Magnesium"
+			x: 0.5d
+			y: 49.75d
+		}
+		{
+			dependencies: ["1F8C4B5D30C692CE", "5F725A764A77E5AF", "31FEBAD239D3F335", "33B9948FCA396811", "5047605FE0A03D21", "303B104F471510BF"]
+			description: [
+				"GTM's ring, and here it's mostly a materials machine: ZPM's europium comes from nowhere else."
+				"The recipes that made osmium or uranium are gone; those come from their planets."
+			]
+			icon: "gtceu:luv_fusion_reactor"
+			id: "14A92DEFD85EFA36"
+			shape: "gear"
+			size: 1.25d
+			tasks: [
+				{ id: "79F47931E98D6467", item: "gtceu:luv_fusion_reactor", optional_task: true, type: "item" }
+				{ id: "74DB412C865789AB", type: "checkmark" }
+			]
+			title: "Fusion Reactor Mk1"
+			x: 3.0d
+			y: 46.0d
+		}
+		{
+			dependencies: ["14A92DEFD85EFA36"]
+			icon: "gtceu:europium_bucket"
+			id: "56F61AF852C9F612"
+			size: 1.25d
+			subtitle: "ZPM's motor, and the crystal grower"
+			tasks: [
+				{ id: "711B878F6C45CB48", item: "gtceu:europium_bucket", optional_task: true, type: "item" }
+				{ id: "796C4987215D6699", type: "checkmark" }
+			]
+			title: "Europium"
+			x: 5.5d
+			y: 44.5d
+		}
+		{
+			dependencies: ["14A92DEFD85EFA36"]
+			icon: "gtceu:helium_plasma_bucket"
+			id: "5CBE7A43FAB996EA"
+			size: 1.0d
+			tasks: [
+				{ id: "73B4911AF3DF6F57", item: "gtceu:helium_plasma_bucket", optional_task: true, type: "item" }
+				{ id: "183A16FB30EAE233", type: "checkmark" }
+			]
+			title: "Helium Plasma"
+			x: 5.5d
+			y: 46.0d
+		}
+		{
+			dependencies: ["14A92DEFD85EFA36"]
+			icon: "gtca:calcium_plasma_plasma_bucket"
+			id: "1BF228FD87CB0FA3"
+			size: 1.0d
+			tasks: [
+				{ id: "5CA73C122D348FAA", item: "gtca:calcium_plasma_plasma_bucket", optional_task: true, type: "item" }
+				{ id: "7256AB64E19465DD", type: "checkmark" }
+			]
+			title: "Calcium Plasma"
+			x: 5.5d
+			y: 47.5d
+		}
+		{
+			dependencies: ["5CBE7A43FAB996EA", "1BF228FD87CB0FA3"]
+			icon: "gtceu:plasma_large_turbine"
+			id: "55C27EF4F50E9CF8"
+			shape: "gear"
+			size: 1.25d
+			subtitle: "Its power goes to the network"
+			tasks: [
+				{ id: "7CD937814592A579", item: "gtceu:plasma_large_turbine", optional_task: true, type: "item" }
+				{ id: "38542D75284CB716", type: "checkmark" }
+			]
+			title: "Large Plasma Turbine"
+			x: 8.0d
+			y: 46.75d
+		}
+		{
+			icon: "gtceu:normal_optical_pipe"
+			id: "7D92845B5158C44F"
+			shape: "rsquare"
+			size: 1.0d
+			subtitle: "The microgravity smelter's"
+			tasks: [
+				{ id: "385E421E84FFFD16", item: "gtceu:normal_optical_pipe", optional_task: true, type: "item" }
+				{ id: "30A2845630243BC2", type: "checkmark" }
+			]
+			title: "Optical Pipe"
+			x: 12.25d
+			y: 42.5d
+		}
+		{
+			icon: "gtceu:computer_casing"
+			id: "396B2561E7825881"
+			shape: "rsquare"
+			size: 1.0d
+			subtitle: "Iridium, from Mercury"
+			tasks: [
+				{ id: "7E87B48A8D0BD472", item: "gtceu:computer_casing", optional_task: true, type: "item" }
+				{ id: "7288FC6E665620BE", type: "checkmark" }
+			]
+			title: "Computer Casing"
+			x: 12.25d
+			y: 44.0d
+		}
+		{
+			dependencies: ["7D92845B5158C44F", "396B2561E7825881"]
+			icon: "gtceu:data_bank"
+			id: "3C3F6D3C1EFE6B36"
+			size: 1.0d
+			subtitle: "Assembly line"
+			tasks: [
+				{ id: "7B927185C1EEC6D2", item: "gtceu:data_bank", optional_task: true, type: "item" }
+				{ id: "120754053428EE18", type: "checkmark" }
+			]
+			title: "Data Bank"
+			x: 14.5d
+			y: 43.25d
+		}
+		{
+			icon: "gtceu:uranium_rhodium_dinaquadide_double_wire"
+			id: "5C663CF04F5BBF07"
+			shape: "rsquare"
+			size: 1.0d
+			subtitle: "The large mixer, on two LuV hatches"
+			tasks: [
+				{ id: "70642CFD8DED50BF", item: "gtceu:uranium_rhodium_dinaquadide_double_wire", optional_task: true, type: "item" }
+				{ id: "508F925B6D1B4462", type: "checkmark" }
+			]
+			title: "URhNq2 Wire"
+			x: 14.5d
+			y: 44.75d
+		}
+		{
+			dependencies: ["3C3F6D3C1EFE6B36"]
+			icon: "gtceu:high_performance_computation_array"
+			id: "1BD627E6870D2BED"
+			size: 1.25d
+			subtitle: "Computation for the research station"
+			tasks: [
+				{ id: "58BB8090E66BFB7D", item: "gtceu:high_performance_computation_array", optional_task: true, type: "item" }
+				{ id: "3F01441A4E2E5D1F", type: "checkmark" }
+			]
+			title: "HPCA"
+			x: 16.75d
+			y: 42.5d
+		}
+		{
+			dependencies: ["3C3F6D3C1EFE6B36", "5C663CF04F5BBF07"]
+			icon: "gtceu:research_station"
+			id: "7B376F9345F1E3EA"
+			shape: "gear"
+			size: 1.25d
+			tasks: [
+				{ id: "780857997D292F16", item: "gtceu:research_station", optional_task: true, type: "item" }
+				{ id: "3737C986598605D8", type: "checkmark" }
+			]
+			title: "Research Station"
+			x: 16.75d
+			y: 44.0d
+		}
+		{
+			dependencies: ["7B376F9345F1E3EA"]
+			icon: "gtceu:data_orb"
+			id: "5F86B06B8C264457"
+			size: 1.25d
+			subtitle: "The research for ZPM's energy hatch"
+			tasks: [
+				{ id: "5994F2DE10548361", item: "gtceu:data_orb", optional_task: true, type: "item" }
+				{ id: "51A9F74A7FFAF6B1", type: "checkmark" }
+			]
+			title: "Data Orb"
+			x: 19.0d
+			y: 44.0d
+		}
+		{
+			description: ["Volcanic gas drops its rare metals in bands as it cools. The sulfur it leaves makes a concrete that needs no water."]
+			icon: "gtceu:fumarole_condenser"
+			id: "7E0A2580CA4A0E93"
+			shape: "gear"
+			size: 1.5d
+			subtitle: "Over a fumarole field, on Io"
+			tasks: [
+				{ id: "75E2665A259E41E4", item: "gtceu:fumarole_condenser", optional_task: true, type: "item" }
+				{ id: "58E83BE0EA391838", type: "checkmark" }
+			]
+			title: "Fumarole Condenser"
+			x: 0.75d
+			y: 57.0d
+		}
+		{
+			icon: "grindless:heat_exchanger_bundle"
+			id: "1284DAACF546E6C4"
+			shape: "rsquare"
+			size: 1.0d
+			subtitle: "Hot sulfur wears it away"
+			tasks: [
+				{ id: "134FF0112EC528C6", item: "grindless:heat_exchanger_bundle", optional_task: true, type: "item" }
+				{ id: "7927538FF6BA8B3D", type: "checkmark" }
+			]
+			title: "Heat Exchanger Bundle"
+			x: 3.25d
+			y: 53.25d
+		}
+		{
+			dependencies: ["7E0A2580CA4A0E93"]
+			icon: "gtceu:sulfur_dioxide_bucket"
+			id: "5BB6D38E1599F086"
+			size: 1.0d
+			tasks: [
+				{ id: "1745332D09BEC3CB", item: "gtceu:sulfur_dioxide_bucket", optional_task: true, type: "item" }
+				{ id: "5F06D7217208E496", type: "checkmark" }
+			]
+			title: "Sulfur Dioxide"
+			x: 3.25d
+			y: 54.75d
+		}
+		{
+			dependencies: ["7E0A2580CA4A0E93"]
+			icon: "gtceu:sulfur_dust"
+			id: "5F41F1BD39E4235D"
+			size: 0.75d
+			subtitle: "Concrete, or sulfuric acid at home"
+			tasks: [
+				{ id: "12D448A221A4EDD0", item: "gtceu:sulfur_dust", optional_task: true, type: "item" }
+				{ id: "35D74FFD328CF618", type: "checkmark" }
+			]
+			title: "Sulfur"
+			x: 3.25d
+			y: 56.25d
+		}
+		{
+			dependencies: ["7E0A2580CA4A0E93"]
+			icon: "grindless:ionian_sublimate"
+			id: "3BD3B997B860A589"
+			size: 1.0d
+			tasks: [
+				{ id: "5D28D866BF3A3C0B", item: "grindless:ionian_sublimate", optional_task: true, type: "item" }
+				{ id: "58A09876D3285453", type: "checkmark" }
+			]
+			title: "Ionian Sublimate"
+			x: 3.25d
+			y: 57.75d
+		}
+		{
+			icon: "minecraft:basalt"
+			id: "3ED34493941DAA86"
+			shape: "rsquare"
+			size: 1.0d
+			subtitle: "The rock breaker's, or Io's black sand"
+			tasks: [
+				{ id: "368051C0076D7090", item: "minecraft:basalt", optional_task: true, type: "item" }
+				{ id: "3BEFD79540406E8D", type: "checkmark" }
+			]
+			title: "Basalt"
+			x: 0.75d
+			y: 59.25d
+		}
+		{
+			dependencies: ["7E0A2580CA4A0E93", "3ED34493941DAA86"]
+			icon: "grindless:sulfur_concrete_casing"
+			id: "101FB65ED8A82021"
+			size: 1.25d
+			subtitle: "Circuit 3; the Jovian bases are built of it"
+			tasks: [
+				{ id: "1AB1DCCC70044891", item: "grindless:sulfur_concrete_casing", optional_task: true, type: "item" }
+				{ id: "330A007314073154", type: "checkmark" }
+			]
+			title: "Sulfur Concrete Casing"
+			x: 3.25d
+			y: 59.25d
+		}
+		{
+			dependencies: ["1284DAACF546E6C4", "5BB6D38E1599F086"]
+			description: ["Io's own heat, run through a sulfur dioxide loop and into the network. Nothing comes out of it without a patera underneath."]
+			icon: "gtceu:volcanic_intake"
+			id: "7ABE5B6971155933"
+			shape: "gear"
+			size: 1.5d
+			tasks: [
+				{ id: "30CEF27F50B51C9A", item: "gtceu:volcanic_intake", optional_task: true, type: "item" }
+				{ id: "13CE4143A622D9BA", type: "checkmark" }
+			]
+			title: "Volcanic Intake"
+			x: 5.75d
+			y: 54.0d
+		}
+		{
+			dependencies: ["3BD3B997B860A589"]
+			icon: "gtceu:germanium_dust"
+			id: "132326AF4E432EEB"
+			size: 1.25d
+			subtitle: "Circuit 2: the wake shield's cells"
+			tasks: [
+				{ id: "1C4B70FC023F6F11", item: "gtceu:germanium_dust", optional_task: true, type: "item" }
+				{ id: "1C43C1A334F73D8B", type: "checkmark" }
+			]
+			title: "Germanium"
+			x: 5.75d
+			y: 57.0d
+		}
+		{
+			dependencies: ["3BD3B997B860A589"]
+			icon: "gtceu:indium_dust"
+			id: "73AF58A47A9477C1"
+			size: 1.25d
+			subtitle: "ITBTC and indium gallium phosphide"
+			tasks: [
+				{ id: "3874B422930E3E1B", item: "gtceu:indium_dust", optional_task: true, type: "item" }
+				{ id: "35067D35375067CA", type: "checkmark" }
+			]
+			title: "Indium"
+			x: 5.75d
+			y: 58.5d
+		}
+		{
+			icon: "gtceu:data_orb"
+			id: "3A305BB26B1B37CE"
+			shape: "rsquare"
+			size: 1.0d
+			tasks: [
+				{ id: "1106ED19B24A5A92", item: "gtceu:data_orb", optional_task: true, type: "item" }
+				{ id: "312BD8821599BD21", type: "checkmark" }
+			]
+			title: "Data Orb"
+			x: 14.75d
+			y: 73.5d
+		}
+		{
+			icon: "grindless:sapphire_test_mass"
+			id: "78A7E61B9BBCD7C0"
+			shape: "rsquare"
+			size: 1.0d
+			subtitle: "The crystal grower's"
+			tasks: [
+				{ id: "792BEA5E00BB5D94", item: "grindless:sapphire_test_mass", optional_task: true, type: "item" }
+				{ id: "728494B7DF24F0AB", type: "checkmark" }
+			]
+			title: "Sapphire Test Mass"
+			x: 14.75d
+			y: 75.0d
+		}
+		{
+			icon: "gtceu:liquid_helium_bucket"
+			id: "3BC06E41F27947E7"
+			shape: "rsquare"
+			size: 1.0d
+			subtitle: "Make-up for the cryostats"
+			tasks: [
+				{ id: "5EFA8C357EC484E1", item: "gtceu:liquid_helium_bucket", optional_task: true, type: "item" }
+				{ id: "5C9279C773E912BC", type: "checkmark" }
+			]
+			title: "Liquid Helium"
+			x: 14.75d
+			y: 76.5d
+		}
+		{
+			dependencies: ["7B4176719D90C65C", "3A305BB26B1B37CE", "78A7E61B9BBCD7C0", "3BC06E41F27947E7"]
+			description: ["Two long arms buried in quiet ice, listening for space itself to stretch. The Sagittarius A* signal stays in its bus, and the first catalogue holds a black hole merger, heard as a chirp."]
+			icon: "gtceu:gravitational_wave_detector"
+			id: "167AE36A9A365666"
+			shape: "gear"
+			size: 1.5d
+			tasks: [
+				{ id: "519C9C9E79F39BFE", item: "gtceu:gravitational_wave_detector", optional_task: true, type: "item" }
+				{ id: "725ED634457453E0", type: "checkmark" }
+			]
+			title: "Gravitational-Wave Detector"
+			x: 17.25d
+			y: 75.0d
+		}
+		{
+			dependencies: ["167AE36A9A365666"]
+			icon: "grindless:gravitational_wave_catalogue"
+			id: "11BF2ABCAC0B9F53"
+			size: 1.25d
+			tasks: [
+				{ id: "1F8069F741CE65F3", item: "grindless:gravitational_wave_catalogue", optional_task: true, type: "item" }
+				{ id: "7F4AB801EC10304A", type: "checkmark" }
+			]
+			title: "Gravitational-Wave Catalogue"
+			x: 19.75d
+			y: 75.0d
+		}
+		{
+			icon: "grindless:coilgun_coil_casing"
+			id: "1EC23024E57A7DD1"
+			shape: "rsquare"
+			size: 1.0d
+			subtitle: "Wound in the magnet works"
+			tasks: [
+				{ id: "1EFA1358849F6F94", item: "grindless:coilgun_coil_casing", optional_task: true, type: "item" }
+				{ id: "733002AECC798B31", type: "checkmark" }
+			]
+			title: "Coilgun Coil Casing"
+			x: 14.75d
+			y: 78.25d
+		}
+		{
+			icon: "grindless:jupiter_entry_probe"
+			id: "5D718EF6879AA176"
+			shape: "rsquare"
+			size: 1.0d
+			tasks: [
+				{ id: "39E92B496CEA769A", item: "grindless:jupiter_entry_probe", optional_task: true, type: "item" }
+				{ id: "339372BFD51E810B", type: "checkmark" }
+			]
+			title: "Jupiter Entry Probe"
+			x: 14.75d
+			y: 79.75d
+		}
+		{
+			icon: "grindless:saturn_flyby_probe"
+			id: "529ABDE8B994BA68"
+			shape: "rsquare"
+			size: 1.0d
+			tasks: [
+				{ id: "14733DBB2AD0D7FC", item: "grindless:saturn_flyby_probe", optional_task: true, type: "item" }
+				{ id: "50C9DD594A2A2661", type: "checkmark" }
+			]
+			title: "Saturn Flyby Probe"
+			x: 14.75d
+			y: 81.25d
+		}
+		{
+			dependencies: ["1EC23024E57A7DD1", "5D718EF6879AA176", "529ABDE8B994BA68"]
+			description: ["Ganymede's cold lets an HV superconductor work with no cryostat at all. The barrel throws probes off the moon without a rocket."]
+			icon: "gtceu:coilgun_launcher"
+			id: "37C04E4CCA4A739D"
+			shape: "gear"
+			size: 1.5d
+			tasks: [
+				{ id: "73D9D23840123261", item: "gtceu:coilgun_launcher", optional_task: true, type: "item" }
+				{ id: "558E2E32D65BF466", type: "checkmark" }
+			]
+			title: "Coilgun Probe Launcher"
+			x: 17.25d
+			y: 79.75d
+		}
+		{
+			dependencies: ["37C04E4CCA4A739D"]
+			icon: "grindless:jovian_atmosphere_survey"
+			id: "5A2F521BDFB3E46D"
+			size: 1.25d
+			subtitle: "Kept for ZPM"
+			tasks: [
+				{ id: "1773D7A19F448BB2", item: "grindless:jovian_atmosphere_survey", optional_task: true, type: "item" }
+				{ id: "57AFC2859997FB03", type: "checkmark" }
+			]
+			title: "Jovian Atmosphere Survey"
+			x: 19.75d
+			y: 79.0d
+		}
+		{
+			dependencies: ["37C04E4CCA4A739D"]
+			icon: "grindless:saturn_transfer_chart"
+			id: "10D5987D8C963A0F"
+			size: 1.25d
+			subtitle: "The next trip: kept for ZPM"
+			tasks: [
+				{ id: "75C120299781D665", item: "grindless:saturn_transfer_chart", optional_task: true, type: "item" }
+				{ id: "7DF10AA452E243D1", type: "checkmark" }
+			]
+			title: "Saturn Transfer Chart"
+			x: 19.75d
+			y: 80.5d
+		}
+	]
+	subtitle: ["Trinium and enriched naquadah, superconducting tape and magnets, living circuits, and the first factories in orbit."]
+	title: "LuV Lines"
+}

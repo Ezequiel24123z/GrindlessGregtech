@@ -19,6 +19,7 @@
     { "id": "gtceu:samarium_chloride_dust", "role": "use", "category": "gtceu:electrolyzer", "source": "GTM's decomposition recipe, generated from the material's components (startup_scripts/grindless/ev/extraction_cascade.js)" },
     { "id": "gtceu:neodymium_chloride_dust", "role": "use", "category": "gtceu:electrolyzer", "source": "GTM's decomposition recipe, generated from the material's components (startup_scripts/grindless/ev/extraction_cascade.js)" },
     { "id": "gtceu:mixed_rare_earth_chloride_dust", "role": "use", "category": "gtceu:electrolyzer", "source": "GTM's decomposition recipe, generated from the material's components (startup_scripts/grindless/ev/extraction_cascade.js)" },
+    { "id": "gtceu:magnesium_sulfate_dust", "role": "use", "category": "gtceu:electrolyzer", "source": "GTM's decomposition recipe, generated from the material's components (startup_scripts/grindless/luv/europa.js)" },
     { "id": "gtceu:merrillite_dust", "role": "acquisition", "category": "gtceu:ore_crushing", "source": "GTM's ore processing, generated from the material's ore flag (startup_scripts/grindless/ev/foundation.js)" },
     { "id": "gtceu:raw_merrillite", "role": "use", "category": "gtceu:ore_crushing", "source": "GTM's ore processing, generated from the material's ore flag (startup_scripts/grindless/ev/foundation.js)" },
     { "id": "gtceu:iridosmine_dust", "role": "acquisition", "category": "gtceu:ore_crushing", "source": "GTM's ore processing, generated from the material's ore flag (startup_scripts/grindless/iv/foundation.js)" },
@@ -26,7 +27,12 @@
     { "id": "gtceu:deuterium_rich_ice_dust", "role": "acquisition", "category": "gtceu:ore_crushing", "source": "GTM's ore processing, generated from the material's ore flag (startup_scripts/grindless/mars/travel.js)" },
     { "id": "gtceu:raw_deuterium_rich_ice", "role": "use", "category": "gtceu:ore_crushing", "source": "GTM's ore processing, generated from the material's ore flag (startup_scripts/grindless/mars/travel.js)" },
     { "id": "gtceu:zircaloy_dust", "role": "use", "category": "gtceu:electric_blast_furnace", "source": "GTM's blast furnace recipe, generated from the material's blast temperature (startup_scripts/grindless/iv/foundation.js)" },
-    { "id": "gtceu:zircaloy_ingot", "role": "acquisition", "category": "gtceu:vacuum_freezer", "source": "GTM cools the hot ingot of the blast furnace recipe it generates (startup_scripts/grindless/iv/foundation.js)" }
+    { "id": "gtceu:zircaloy_ingot", "role": "acquisition", "category": "gtceu:vacuum_freezer", "source": "GTM cools the hot ingot of the blast furnace recipe it generates (startup_scripts/grindless/iv/foundation.js)" },
+    { "id": "grindless:asteroid_pgm_concentrate", "role": "use", "category": "gtceu:pgm_refining", "source": "server_scripts/grindless/ev/platinum_plant.js composes the platinum plant's mode 4 (circuit 4) from GT--'s live platinum-group line and data/grindless/tables/asteroid_pgm.json" },
+    { "id": "gtceu:raw_tetrataenite", "role": "use", "category": "gtceu:ore_crushing", "source": "GTM's ore processing, generated from the material's ore flag (startup_scripts/grindless/luv/foundation.js)" },
+    { "id": "gtceu:tetrataenite_dust", "role": "use", "category": "minecraft:smelting", "source": "GTM's furnace recipe dust -> ingot, generated for an ingot material with no blast temperature (startup_scripts/grindless/luv/foundation.js)" },
+    { "id": "gtceu:tetrataenite_ingot", "role": "acquisition", "category": "minecraft:smelting", "source": "GTM's furnace recipe dust -> ingot, generated for an ingot material with no blast temperature (startup_scripts/grindless/luv/foundation.js)" },
+    { "id": "gtceu:tetrataenite_ingot", "role": "use", "category": "gtceu:lathe", "source": "GTM's lathe recipe ingot -> rod, generated from the material's GENERATE_ROD flag (startup_scripts/grindless/luv/foundation.js); the rod makes the magnet works' bearings" }
   ],
   "derivedProcesses": [
     { "type": "gtceu:combined_cycle", "source": "server_scripts/grindless/ev/combined_cycle_and_hot_mill.js makes one run per live gas turbine fuel" },
@@ -38,6 +44,7 @@
     { "type": "gtceu:closed_loop_cooling", "source": "server_scripts/grindless/luv/helium_refrigerator.js makes one run per live vacuum freezer recipe that takes liquid helium" }
   ],
   "exceptions": [
-    { "id": "grindless:itbtc_coated_conductor", "role": "use", "reason": "temporary (LuV-A3): its uses, the HTS coil and the SMES cell, are LuV-A4's magnet works; delete this exception when A4 merges" }
+    { "id": "grindless:itbtc_coated_conductor", "role": "use", "reason": "temporary (LuV-A3): its uses, the HTS coil and the SMES cell, are LuV-A4's magnet works; delete this exception when A4 merges" },
+    { "id": "grindless:chondritic_extract", "role": "use", "reason": "temporary (LuV-B5): its use, the Europan culture of the algae bioreactor, is LuV-B8's; delete this exception when B8 merges" }
   ]
 }

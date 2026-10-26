@@ -167,6 +167,8 @@ Gregtech Grindless is a GregTech Modern pack (Minecraft 1.20.1, Forge) in which 
   | LuV fusion and research | 17920–17983, Z 0–63 (Overworld, Y 98–112): the Mk1 at X 17925–17939, the HPCA and the research station at X 17950+ |
   | LuV Io surface: fumarole condenser and volcanic intake (S0-7) | 17152–17215, Z 0–63: the Overworld at Y 98–112 and Io (`G.places.surface('io')`) at Y 198–214 |
   | LuV Ganymede: GW detector (S0-7, buried L) and coilgun | 17664–17727, Z 0–63: the Overworld at Y 98–112; on Ganymede (`G.places.surface('ganymede')`) Y 198–214 (rows at Y 200–204), or, where the ground under the two machines reaches Y 200, five rows from one block above the highest ground |
+  | LuV asteroid belt (B5) | 16896–16959, Z 0–63: Overworld Y 98–112; the stand-in belt (`grindless:asteroid_belt`) at the same X and Z, Y 198–214, and fresh world gen chunks at Z 1024+ |
+  | LuV Europa: cryobot and algae bioreactor (S0-7 ice shaft) | 17408–17471, Z 0–15: the Overworld at Y 98–113 (the cryobot is 16 high); on Europa (`places.json`, once B1 registers it) the same X and Z |
   | chests and furnaces (client) | 18688–18751 (uses X 18688–18703, Z 0–15, Y 98–112) |
   | LuV travel and places (B1) | 18176–18239, Z 0–63: the Overworld at Y 98–112 (the level 4 rocket's scanner pad at X 18180–18182, Z 4–8); on each new surface (belt, Io, Europa, Ganymede) the same X and Z at Y 198–214, read only (one generated chunk, X 18176–18191, Z 0–15) |
 
