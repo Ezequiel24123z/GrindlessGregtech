@@ -1,0 +1,5 @@
+{
+  "type": "emi:info",
+  "stacks": ["item:grindless:sapphire_test_mass"],
+  "text": ["emi.grindless.info.sapphire_test_mass.0"]
+}

@@ -128,6 +128,13 @@ test('pipe cut removes datapack recipes and requests late material-info clearing
 test('ZBLAN uses the exact 53:20:4:3:20 cation ratio and 293 fluorine atoms in a quarter batch', () => {
   const { recipes } = harness();
   const r = recipes.find(r => r.id === 'grindless:zblan');
+  // Pinned GTM 7.5.3 TagPrefix.dustSmall uses idPattern("small_%s_dust"),
+  // which GTMaterialItems applies to the material name when registering its item.
+  assert.deepEqual(calls(r, 'itemInputs'), [[[
+    '53x gtceu:small_zirconium_dust', '20x gtceu:small_barium_dust',
+    '4x gtceu:small_lanthanum_dust', '3x gtceu:small_aluminium_dust',
+    '20x gtceu:small_sodium_dust'
+  ]]]);
   const counts = calls(r, 'itemInputs')[0][0].map(s => Number(s.match(/^\d+/)[0]));
   assert.deepEqual(counts, [53, 20, 4, 3, 20]);
   assert.ok(counts.every(c => c <= 64));

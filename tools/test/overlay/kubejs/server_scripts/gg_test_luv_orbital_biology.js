@@ -201,7 +201,7 @@
       { circuit: 1, items: ['16x gtceu:stem_cells', 'grindless:neurotrophic_factor'],
         fluids: [['gtceu:sterilized_growth_medium', 250]], output: 'grindless:neural_organoid', count: 1 } :
       { circuit: 2, items: ['gtceu:wetware_printed_circuit_board', 'grindless:neural_organoid',
-        '8x gtceu:small_polybenzimidazole_fluid_pipe', '8x gtceu:electrum_plate',
+        '8x gtceu:polybenzimidazole_small_fluid_pipe', '8x gtceu:electrum_plate',
         '16x gtceu:silicone_rubber_foil', '8x gtceu:hsse_bolt'],
         fluids: [['gtceu:sterilized_growth_medium', 250]], output: 'gtceu:neuro_processing_unit', count: 1 }
   }

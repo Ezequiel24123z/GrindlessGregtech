@@ -28,8 +28,8 @@
   // Quarter of the 100-mole formulation: exact elemental ratios with integer mB, five modest stacks.
   // A1's glass blend must disable decomposition: a ZBLAN dust denotes one cation share, not one atom.
   // 73,250 mB exceeds a single mixer's 64 B tank: use IV's GCYM Large Mixing Vessel and a large input hatch.
-  B.zblan = { items: ['53x gtceu:zirconium_small_dust', '20x gtceu:barium_small_dust',
-    '4x gtceu:lanthanum_small_dust', '3x gtceu:aluminium_small_dust', '20x gtceu:sodium_small_dust'],
+  B.zblan = { items: ['53x gtceu:small_zirconium_dust', '20x gtceu:small_barium_dust',
+    '4x gtceu:small_lanthanum_dust', '3x gtceu:small_aluminium_dust', '20x gtceu:small_sodium_dust'],
     fluorine: 73250, output: 25 }
 
   ServerEvents.recipes(function (event) {

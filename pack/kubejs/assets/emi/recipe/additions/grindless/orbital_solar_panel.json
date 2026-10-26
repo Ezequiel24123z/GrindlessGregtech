@@ -1,0 +1,5 @@
+{
+  "type": "emi:info",
+  "stacks": ["item:grindless:orbital_solar_panel"],
+  "text": ["emi.grindless.info.orbital_solar_panel.0"]
+}

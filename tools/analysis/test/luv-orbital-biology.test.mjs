@@ -110,7 +110,7 @@ test('B4 exact crystals, cleanrooms, dose, certainty, circuits and shared orbita
       assert.equal(only(r, 'inputFluids').id, ['gtceu:europium', 'gtceu:europium', 'gtceu:europium',
         'gtceu:bacterial_sludge', 'gtceu:mutagen'][i]);
       assert.equal(only(r, 'itemInputs'), ['gtceu:exquisite_olivine_gem', 'gtceu:exquisite_emerald_gem',
-        'gtceu:raw_crystal_chip_part', 'gtceu:raw_crystal_chip_part', 'gtceu:raw_crystal_chip_part'][i]);
+        'gtceu:raw_crystal_chip_parts', 'gtceu:raw_crystal_chip_parts', 'gtceu:raw_crystal_chip_parts'][i]);
     }
   });
   assert.deepEqual(call(crystals[5], 'itemInputs')[0], ['64x gtceu:sapphire_dust', 'gtceu:exquisite_sapphire_gem']);
@@ -165,7 +165,7 @@ test('B4 NPU preserves GTM materials and 48 M EU at LuV; all controllers have ex
   assert.equal(lab.length, 2);
   assert.deepEqual(call(lab[0], 'itemInputs')[0], ['16x gtceu:stem_cells', 'grindless:neurotrophic_factor']);
   assert.deepEqual(call(lab[1], 'itemInputs')[0], ['gtceu:wetware_printed_circuit_board', 'grindless:neural_organoid',
-    '8x gtceu:small_polybenzimidazole_fluid_pipe', '8x gtceu:electrum_plate',
+    '8x gtceu:polybenzimidazole_small_fluid_pipe', '8x gtceu:electrum_plate',
     '16x gtceu:silicone_rubber_foil', '8x gtceu:hsse_bolt']);
   lab.forEach((r, i) => {
     assert.equal(only(r, 'cleanroom'), 'native-cleanroom');
@@ -240,4 +240,52 @@ test('B4 native fixture compiles, cannot overlap other bands and retains every o
   assert.match(startup, /priority: -10/);
   assert.match(startup, /get\('greenhouse'\)\.setMaxIOSize\(3, 6, 2, 2\)/);
   assert.match(startup, /grindless:block\/luv\/station_truss_casing/);
+});
+
+test('B4 preexisting item/fluid IDs match the pinned native registry, not naming guesses in recipe mocks', () => {
+  // Frozen B4 subset of power-quests-1/results/server/kubejs-exported/items.json (gg-items-1).
+  // Its recipes.json resolves gtceu:circuit_assembler/neuro_processor to the PBI pipe below,
+  // and all three gtceu:autoclave/raw_crystal_chip_from_part_* recipes to raw_crystal_chip_parts.
+  const nativeItems = new Set([
+    'gtceu:exquisite_olivine_gem', 'gtceu:exquisite_emerald_gem', 'gtceu:exquisite_sapphire_gem',
+    'gtceu:raw_crystal_chip_parts', 'gtceu:raw_crystal_chip', 'gtceu:sapphire_dust',
+    'gtceu:collagen_dust', 'gtceu:stem_cells', 'gtceu:wetware_printed_circuit_board',
+    'gtceu:polybenzimidazole_small_fluid_pipe', 'gtceu:electrum_plate',
+    'gtceu:silicone_rubber_foil', 'gtceu:hsse_bolt', 'gtceu:neuro_processing_unit',
+    'gtceu:luv_electric_pump', 'gtceu:luv_sensor', 'gtceu:luv_electric_motor',
+    'gtceu:luv_robot_arm', 'gtceu:luv_machine_hull', 'gtceu:inert_machine_casing',
+    'gtceu:laminated_glass', 'gtceu:tempered_glass', 'gtceu:plascrete',
+    'gtceu:cleanroom_glass', 'gtceu:filter_casing', 'gtceu:titanium_frame',
+    'gtceu:luv_energy_input_hatch', 'gtceu:luv_input_bus', 'gtceu:luv_output_bus',
+    'gtceu:luv_input_hatch', 'gtceu:luv_output_hatch',
+    'gtceu:cleaning_maintenance_hatch', 'gtceu:auto_maintenance_hatch',
+  ]);
+  const nativeFluids = new Set(['minecraft:water', 'gtceu:europium', 'gtceu:bacterial_sludge',
+    'gtceu:mutagen', 'gtceu:carbon_dioxide', 'gtceu:biomass', 'gtceu:oxygen',
+    'gtceu:sterilized_growth_medium']);
+  const checkItem = (text) => {
+    const id = text.replace(/^\d+x /, '');
+    if (id.startsWith('gtceu:')) assert.ok(nativeItems.has(id), `not a pinned native item: ${id}`);
+  };
+  const { G, recipes } = harness();
+  for (const r of recipes) {
+    for (const method of ['itemInputs', 'itemOutputs', 'notConsumable']) {
+      for (const text of call(r, method).flat()) checkItem(text);
+    }
+    for (const method of ['inputFluids', 'outputFluids']) {
+      for (const fluid of call(r, method).flat()) assert.ok(nativeFluids.has(fluid.id), fluid.id);
+    }
+    if (r.type === 'shaped') for (const ingredient of Object.values(r.args[2])) checkItem(ingredient);
+  }
+  function checkSymbol(symbol) {
+    if (symbol.options) symbol.options.forEach(checkSymbol);
+    if (symbol.blocks) symbol.blocks.forEach(checkItem);
+    if (symbol.materials) symbol.materials.forEach((m) => checkItem('gtceu:' + m + '_frame'));
+  }
+  for (const structure of Object.values(G.structures)) Object.values(structure.symbols).forEach(checkSymbol);
+  const fixture = fs.readFileSync(path.join(ROOT,
+    'tools/test/overlay/kubejs/server_scripts/gg_test_luv_orbital_biology.js'), 'utf8');
+  for (const [, id] of fixture.matchAll(/['"](?:\d+x )?(gtceu:[a-z0-9_]+)['"]/g)) {
+    if (id !== 'gtceu:greenhouse') assert.ok(nativeItems.has(id) || nativeFluids.has(id), `fixture native ID: ${id}`);
+  }
 });
