@@ -1684,9 +1684,21 @@
     return true
   }
 
-  function finish() {
+  function finish(stationReason) {
     if (S === null || S.finished) return
     S.finished = true
+    // Station cargo/flight errors occur outside the station driver's tick().
+    // Finalize it before releasing the client hold, even on timeout/reopen exit.
+    if (IS_LUV && (S.stage === 'stations' || S.stage === 'station_reopen')) {
+      try {
+        var driver = global.ggLuvS0Stations
+        if (!driver || typeof driver.abort !== 'function') throw new Error('station abort API is unavailable')
+        driver.abort(stationContext(), stationReason || 'flight owner finished before station completion in ' +
+          S.stage + (FL !== null ? '/' + FL.phase : ''))
+      } catch (finalizeError) {
+        check('station_finalize', false, 'station abort/finalization failed: ' + finalizeError)
+      }
+    }
     shared().put('brake', false)
     shared().put('watch', false)
     shared().put('hold', false)
@@ -1711,7 +1723,7 @@
     S.t = server.getTickCount() - S.tick0
     if (S.t > TEST_TIMEOUT) {
       check('timeout', false, 'the test ran ' + S.t + ' ticks; phase ' + (FL !== null ? FL.phase : 'scanners'))
-      finish()
+      finish('flight owner timeout at ' + S.t + ' ticks')
       return
     }
     try {
@@ -1749,12 +1761,13 @@
         var reopenError = sval('s0sReopenError')
         if (reopenError !== '') {
           check('same_save_reopen', false, reopenError)
-          finish()
+          finish('same-save reopen failed: ' + reopenError)
         }
       }
     } catch (e) {
-      check('step', false, 'exception in ' + S.stage + (FL !== null ? '/' + FL.phase : '') + ': ' + e)
-      finish()
+      var detail = 'exception in ' + S.stage + (FL !== null ? '/' + FL.phase : '') + ': ' + e
+      check('step', false, detail)
+      finish(detail)
     }
   }
 

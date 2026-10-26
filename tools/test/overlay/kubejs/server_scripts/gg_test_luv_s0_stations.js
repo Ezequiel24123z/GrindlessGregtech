@@ -54,7 +54,6 @@
       Package: Java.loadClass('argent_matter.gcyr.common.item.StationContainerBehaviour'),
       Keycard: Java.loadClass('argent_matter.gcyr.common.item.KeyCardBehaviour'),
       Chip: Java.loadClass('argent_matter.gcyr.common.item.PlanetIdChipBehaviour'),
-      EntityUI: Java.loadClass('argent_matter.gcyr.api.gui.factory.EntityUIFactory'),
       Meta: Java.loadClass('com.gregtechceu.gtceu.api.machine.MetaMachine'),
       Mover: Java.loadClass('net.minecraft.world.entity.MoverType'),
       Vec3: Java.loadClass('net.minecraft.world.phys.Vec3'),
@@ -125,11 +124,20 @@
   function levelFor(ctx, id) {
     var p = java().PlanetData.getPlanet(new ResourceLocation(id))
     need(p !== null && p !== undefined, 'missing planet ' + id)
-    var l = ctx.server.getLevel(p.orbitWorld())
+    // KubeJS exposes both vanilla ResourceKey and kjs$ ResourceLocation overloads.
+    // Use the proven string path, preserving the native orbit dimension ID.
+    var l = ctx.server.getLevel(String(p.orbitWorld().location()))
     need(l !== null && l !== undefined, 'missing orbit for ' + id)
     return l
   }
   function holder(e) { return java().Holder.getOrCreate(e.level) }
+  function stationCount(h) {
+    // Pinned GCYR 0.2.9 getFreeStationId() returns stations.size(), without
+    // allocation or mutation. Keep that native count on the holder: Rhino's
+    // NativeJavaMap probes containsKey("size") before resolving map.size(),
+    // which throws String-to-Integer on this fastutil Int2ObjectMap.
+    return Number(h.getFreeStationId())
+  }
   function machine(level, p) { return java().Meta.getMachine(level, pos(p.x, p.y, p.z)) }
   function inside(e, p) {
     return p.x >= e.bounds.minX && p.x + 1 <= e.bounds.maxX &&
@@ -162,11 +170,10 @@
   function mapsExpected() {
     for (var i = 0; i < S.entries.length; i++) {
       var e = S.entries[i]
-      var map = holder(e).getStations()
       // Arrival registers the record before the bridge hands control back.
       // Permit ONLY that one pending candidate during its actual flight phase.
       var pending = S.target === e && (S.phase === 'earth_flight' || S.phase === 'moon_flight')
-      var count = Number(map.size())
+      var count = stationCount(holder(e))
       need(count === (e.arrived ? 1 : 0) || (pending && count === 1),
         'existing/foreign station records in ' + e.dimension)
       if (e.arrived || (pending && count === 1)) {
@@ -182,7 +189,7 @@
   function candidate(ctx, planet, label) {
     var level = levelFor(ctx, planet)
     var h = java().Holder.getOrCreate(level)
-    need(Number(h.getStations().size()) === 0, 'abort: nonfresh station map ' + dim(level))
+    need(stationCount(h) === 0, 'abort: nonfresh station map ' + dim(level))
     var id = Number(h.getFreeStationId())
     var grid = h.getFreeStationPos(id)
     var mult = Number(java().Station.BLOCK_MULTIPLIER)
@@ -371,12 +378,25 @@
   function loadCargo(ctx, rocket, stack) {
     var empty = stack === undefined || stack.isEmpty()
     need(rocket !== null && !rocket.isRemoved(), 'cargo requires the live rocket')
-    need(java().EntityUI.INSTANCE.openUI(rocket, ctx.player), 'native rocket UI refused to open')
+    // GCYR's public HasCustomInventoryScreen entry point delegates to its
+    // native EntityUIFactory. The inherited factory method is not exposed on
+    // INSTANCE in pinned Rhino; do not guess a static variant or synthesize UI.
+    var previousMenuId = String(ctx.player.containerMenu.containerId)
+    rocket.openCustomInventoryScreen(ctx.player)
     var menu = ctx.player.containerMenu
-    // RocketEntity.createUI adds config(40,20), satellite(60,20), then inventory.
-    var slot = menu.getSlot(1)
-    need(Math.abs(Number(slot.x) - 60) <= 1 && Math.abs(Number(slot.y) - 20) <= 1,
-      'unexpected native rocket satellite slot coordinates: ' + slot.x + ',' + slot.y)
+    need(String(menu.containerId) !== previousMenuId, 'native rocket inventory UI did not open a new menu')
+    // RocketEntity.createUI declares config(40,20), satellite(60,20), then
+    // inventory, but LDLib 1.0.40.b adds native slots from a HashMap.keySet().
+    // Menu index 1 is not guaranteed to be cargo. Find its unique native position.
+    var slot = null
+    for (var i = 0; i < menu.slots.size(); i++) {
+      var candidateSlot = menu.slots.get(i)
+      if (Math.abs(Number(candidateSlot.x) - 60) > 1 ||
+          Math.abs(Number(candidateSlot.y) - 20) > 1) continue
+      need(slot === null, 'ambiguous native rocket satellite slot')
+      slot = candidateSlot
+    }
+    need(slot !== null, 'native rocket satellite slot not found at (60,20)')
     need(slot.getItem().isEmpty(), 'refusing to replace preexisting rocket cargo')
     slot.set(empty ? Item.empty : stack)
     var got = slot.getItem()
@@ -406,7 +426,7 @@
       'flight bridge did not retain the real arrival rocket')
     need(r.getY() >= 63 && r.getY() < 100, 'station flight is not yet landed near packaged platform')
     var h = holder(e)
-    need(Number(h.getStations().size()) === 1, 'unexpected/foreign arrival station map')
+    need(stationCount(h) === 1, 'unexpected/foreign arrival station map')
     var st = h.getStation(java().Integer['valueOf(int)'](e.id))
     need(st !== null, 'native arrival did not register candidate id')
     need(String(st.orbitPlanet().orbitWorld().location()) === e.dimension, 'native station has wrong planet')
@@ -591,7 +611,9 @@
       var out = m.out.getInventory()
       for (var i = 0; i < inv.getSlots(); i++) need(inv.getStackInSlot(i).isEmpty(), 'nonempty new input bus')
       for (var j = 0; j < out.getSlots(); j++) need(out.getStackInSlot(j).isEmpty(), 'nonempty new output bus')
-      need(inv.insertItem(0, Item.of('minecraft:sand', 32), false).isEmpty(), 'sand input refused')
+      // One existing GTM compressor/sandstone recipe: 4 sand -> 1 sandstone,
+      // 300 base ticks (450 with the native steam-multiblock x1.5 modifier).
+      need(inv.insertItem(0, Item.of('minecraft:sand', 4), false).isEmpty(), 'sand input refused')
       m.hatch.tank.setFluidInTank(0, Fluid.of('gtceu:steam', 64000).getFluidStack())
       m.startSteam = Number(m.hatch.tank.getFluidInTank(0).getAmount())
       need(m.startSteam > 0, 'native hatch did not accept steam')
@@ -614,9 +636,9 @@
     var left = 0
     var input = m.input.getInventory()
     for (var n = 0; n < input.getSlots(); n++) left += Number(input.getStackInSlot(n).getCount())
-    check('earth_steam_process', count === 8 && other === 0 && left === 0 &&
+    check('earth_steam_process', count === 1 && other === 0 && left === 0 &&
       Number(m.hatch.tank.getFluidInTank(0).getAmount()) < m.startSteam,
-    '32 sand -> ' + count + ' sandstone, other=' + other + ', inputLeft=' + left +
+    '4 sand -> ' + count + ' sandstone, other=' + other + ', inputLeft=' + left +
       ', steamUsed=' + (m.startSteam - Number(m.hatch.tank.getFluidInTank(0).getAmount())))
     ctrl.setWorkingEnabled(false)
     return true
@@ -674,6 +696,7 @@
         'stale/mismatched reopen token')
       need(value(ctx, 's0sReopenClosed') === S.reopenToken,
         'no worldless-client disconnect observation')
+      need(Date.now() - S.atMs < 45000, 'same-save handback exceeded the original 45 s reopen deadline')
       need(String(ctx.server.hashCode()) !== S.serverIdentity, 'same integrated server is still running')
       need(saveRoot(ctx) === S.saveRoot, 'reopen selected a different save')
       need(dim(ctx.player.getLevel()) === 'minecraft:overworld', 'reopened player not on saved Earth return')
@@ -709,6 +732,13 @@
     S.phase = aborted ? 'aborted' : 'done'
     save()
     note('DONE', 'failures=' + S.failures + '; ' + detail + '; manifest=' + EXPORT)
+  }
+  function abort(ctx, detail) {
+    // The flight owner can fail outside tick(), including while loading cargo.
+    // Reuse the same idempotent finalizer, manifest and protection restoration.
+    if (S === null || S.done) return
+    check(S.phase + '_owner_abort', false, String(detail))
+    finish(ctx, true, String(detail))
   }
   function begin(ctx) {
     need(S === null, 'S0-3 driver cannot be started twice in one script lifetime')
@@ -848,7 +878,7 @@
           }
         }
         check('earth_steam_real_reopen', ctrl !== null &&
-          String(ctrl.getDefinition().getId()) === 'gtceu:steam_compressor' && output === 8,
+          String(ctrl.getDefinition().getId()) === 'gtceu:steam_compressor' && output === 1,
           'controller and actual output-bus inventory read from reopened save; persisted sandstone=' + output +
           '; formation/processing already proven before disconnect, no unloaded-chunk ticking assumption')
         S.reopenChecked = true
@@ -864,5 +894,5 @@
       return { done: true, ok: false, failures: S.failures }
     }
   }
-  global.ggLuvS0Stations = { begin: begin, tick: tick, loadCargo: loadCargo, resume: resume }
+  global.ggLuvS0Stations = { begin: begin, tick: tick, loadCargo: loadCargo, resume: resume, abort: abort }
 })()
