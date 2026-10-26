@@ -1450,6 +1450,8 @@
       FL.rocketUuid = uuidOf(newRocket)
       FL.arriveT = S.t
       FL.landStable = 0
+      FL.orbitSettleT = undefined
+      FL.orbitSettleMs = undefined
       FL.lastY = undefined
       FL.minY = yOf(newRocket)
       FL.arrY = yOf(newRocket)
@@ -1520,14 +1522,17 @@
         if (FL.leg !== 'moon') flightSummary()
         return
       }
-      if (orbitLanding && y3 < 550) {
+      var assist = orbitLanding && global.grindless.orbitArrival
+      var assistState = assist && assist.states[uuidOf(r3)]
+      var assistHandled = assistState && String(assistState.handled) === 'true'
+      if (orbitLanding && (y3 < 550 || assistHandled)) {
         if (FL.orbitSettleT === undefined) {
           FL.orbitSettleT = S.t
           FL.orbitSettleMs = Date.now()
         }
         if (S.t - FL.orbitSettleT > 200 || Date.now() - FL.orbitSettleMs > 10000) {
-          check('flight_landing_' + FL.leg, false, 'orbit moved below arrival height but normal landing not proven: y=' +
-            y3 + ', onGround=' + grounded + ', serverMounted=' + serverMounted +
+          check('flight_landing_' + FL.leg, false, 'orbit assist finished or moved below arrival height but normal landing not proven: y=' +
+            y3 + ', assistHandled=' + !!assistHandled + ', onGround=' + grounded + ', serverMounted=' + serverMounted +
             ', clientMounted=' + clientMounted + ', client=' + sval('clientMountedRocketUuid') +
             ', clientY=' + sval('clientMountedRocketY') + ', worldReady=' + sval('clientWorldReady') +
             ', observationError=' + sval('clientMountObservationError'))

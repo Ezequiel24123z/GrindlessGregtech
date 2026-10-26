@@ -20,10 +20,37 @@ const ROCKET_ID = '00000000-0000-0000-0000-000000000042';
 function harness({ mode = 'named', dimension = ORBIT, extraOrbits = [] } = {}) {
   const calls = [];
   const logs = [];
-  const api = (object, named, srg, fn) => {
-    object[mode === 'srg' && srg ? srg : named] = fn;
+  const exposed = [];
+  const dispatches = [];
+  const plain = mode.startsWith('plain');
+  const srgMode = mode.endsWith('srg');
+  const member = (named, srg) => {
+    const selected = srgMode && srg ? srg : named;
+    return plain ? selected.replace(/\(.*/, '') : selected;
   };
-  const invoke = (object, named, srg, ...args) => object[mode === 'srg' && srg ? srg : named](...args);
+  const overloads = new WeakMap();
+  const api = (object, named, srg, fn) => {
+    const name = member(named, srg);
+    exposed.push(name);
+    if (!overloads.has(object)) overloads.set(object, new Map());
+    const methods = overloads.get(object);
+    if (!methods.has(name)) methods.set(name, new Map());
+    const byArity = methods.get(name);
+    assert.ok(!byArity.has(fn.length), `ambiguous native mock ${name}/${fn.length}`);
+    byArity.set(fn.length, fn);
+    object[name] = (...args) => {
+      dispatches.push([name, args.length]);
+      assert.ok(byArity.has(args.length), `uncontracted arity ${name}/${args.length}`);
+      return byArity.get(args.length)(...args);
+    };
+  };
+  // GCYR has no SRG aliases; its single-reference helpers also lose qualified selectors.
+  const unmapped = (methods) => {
+    const object = {};
+    for (const [name, fn] of Object.entries(methods)) api(object, name, null, fn);
+    return object;
+  };
+  const invoke = (object, named, srg, ...args) => object[member(named, srg)](...args);
   const key = (x, y, z) => `${x},${y},${z}`;
   const keyOf = (pos) => key(pos.getX(), pos.getY(), pos.getZ());
   const list = (entries) => ({ size: () => entries.length, get: (n) => entries[n] });
@@ -42,6 +69,10 @@ function harness({ mode = 'named', dimension = ORBIT, extraOrbits = [] } = {}) {
       api(this, 'contains(java.lang.String)', 'm_128441_(java.lang.String)', (k) => k in this.entries);
       api(this, 'getInt(java.lang.String)', 'm_128451_(java.lang.String)',
         (k) => this.entries[k]?.value ?? 0); // Native missing-id -> 0 trap is deliberate.
+      api(this, 'getBoolean(java.lang.String)', 'm_128471_(java.lang.String)', (k) => {
+        calls.push(['launchFlagRead', k]);
+        return this.entries[k]?.value ?? false; // Missing field MUST be rejected before this default.
+      });
       api(this, 'getCompound(java.lang.String)', 'm_128469_(java.lang.String)',
         (k) => this.entries[k]?.value ?? new Tag());
       api(this, 'getList(java.lang.String,int)', 'm_128437_(java.lang.String,int)', (k, t) => {
@@ -153,28 +184,21 @@ function harness({ mode = 'named', dimension = ORBIT, extraOrbits = [] } = {}) {
     rider.z = root.z + 1.5;
   };
   class Rocket {
-    static ROCKET_STARTED = { nativeAccessor: true };
     constructor() {
       Object.assign(this, { x: 0, y: 600, z: 0, floorOffset: 0, started: false, fallDistance: 999,
         motion: [0, -0.5, 0], config: control(), entriesOverride: null, size: 1 });
       position(this);
       api(this, 'getStringUuid', 'm_20149_', () => ROCKET_ID);
       this.getLevel = () => level;
-      api(this, 'getEntityData', 'm_20088_', () => {
-        const data = {};
-        api(data, 'get(net.minecraft.network.syncher.EntityDataAccessor)',
-          'm_135370_(net.minecraft.network.syncher.EntityDataAccessor)', (accessor) => {
-            assert.equal(accessor, Rocket.ROCKET_STARTED); return this.started;
-          });
-        return data;
-      });
       api(this, 'getBoundingBox', 'm_20191_', () =>
         new Bounds(this.x, this.y + this.floorOffset, this.z, this.x + 3, this.y + 4, this.z + 3));
       api(this, 'saveWithoutId(net.minecraft.nbt.CompoundTag)', 'm_20240_(net.minecraft.nbt.CompoundTag)', (tag) => {
         assert.ok(tag instanceof Tag);
-        calls.push(['save', this]);
-        return tag.put('config', 10, new Tag().put('Size', 3, this.size).put('Items', 9,
+        calls.push(['save', this, server.tick]);
+        tag.put('config', 10, new Tag().put('Size', 3, this.size).put('Items', 9,
           (this.entriesOverride ?? [this.config]).map((entry) => entry.clone())));
+        if (!this.omitStarted && typeof this.started === 'boolean') tag.put('isStarted', this.startedType ?? 1, this.started);
+        return tag;
       });
       api(this, 'positionRider(net.minecraft.world.entity.Entity)', 'm_7332_(net.minecraft.world.entity.Entity)',
         (rider) => nativeSeat(this, rider));
@@ -227,7 +251,7 @@ function harness({ mode = 'named', dimension = ORBIT, extraOrbits = [] } = {}) {
     border() { return this.bounds; },
   });
   const records = new Map([[0, station()]]);
-  const holder = {
+  const holder = unmapped({
     'getStation(java.lang.Integer)'(boxed) {
       assert.equal(boxed.boxed, true, 'boxed Integer overload, not int-map lookup');
       calls.push(['station', boxed.value]);
@@ -239,7 +263,7 @@ function harness({ mode = 'named', dimension = ORBIT, extraOrbits = [] } = {}) {
       return records.get(id)?.origin ?? null;
     },
     getStations() { throw new Error('no int-keyed map member access'); },
-  };
+  });
   const Stack = {};
   api(Stack, 'of(net.minecraft.nbt.CompoundTag)', 'm_41712_(net.minecraft.nbt.CompoundTag)', (entry) => {
     calls.push(['stackOf']);
@@ -280,7 +304,7 @@ function harness({ mode = 'named', dimension = ORBIT, extraOrbits = [] } = {}) {
     'net.minecraft.nbt.CompoundTag': Tag,
     'net.minecraft.world.item.ItemStack': Stack,
     'java.lang.Integer': { 'valueOf(int)': (value) => ({ boxed: true, value }) },
-    'argent_matter.gcyr.common.item.PlanetIdChipBehaviour': {
+    'argent_matter.gcyr.common.item.PlanetIdChipBehaviour': unmapped({
       'getSpaceStationId(net.minecraft.world.item.ItemStack)': (stack) => stationFrom(stack, true),
       'getPlanetFromStack(net.minecraft.world.item.ItemStack)': (stack) => planetFrom(stack, true),
       'getSavedPosition(net.minecraft.world.item.ItemStack)'(stack) {
@@ -289,23 +313,23 @@ function harness({ mode = 'named', dimension = ORBIT, extraOrbits = [] } = {}) {
         return { dimension: () => resourceKey(stack.getNbt().entries['gcyr:current_planet'].value),
           pos: () => new Pos(raw.X.value, raw.Y.value, raw.Z.value) };
       },
-    },
-    'argent_matter.gcyr.common.item.KeyCardBehaviour': {
+    }),
+    'argent_matter.gcyr.common.item.KeyCardBehaviour': unmapped({
       'getSavedStation(net.minecraft.world.item.ItemStack)': (stack) => stationFrom(stack, false),
       'getSavedPlanet(net.minecraft.world.item.ItemStack)': (stack) => planetFrom(stack, false),
-    },
+    }),
     'argent_matter.gcyr.common.data.GCYRItems': {
-      ID_CHIP: { 'isIn(net.minecraft.world.item.ItemStack)': (stack) => stack.getId() === 'gcyr:id_chip' },
-      KEYCARD: { 'isIn(net.minecraft.world.item.ItemStack)': (stack) => stack.getId() === 'gcyr:keycard' },
+      ID_CHIP: unmapped({ 'isIn(net.minecraft.world.item.ItemStack)': (stack) => stack.getId() === 'gcyr:id_chip' }),
+      KEYCARD: unmapped({ 'isIn(net.minecraft.world.item.ItemStack)': (stack) => stack.getId() === 'gcyr:keycard' }),
     },
-    'argent_matter.gcyr.data.loader.PlanetData': {
+    'argent_matter.gcyr.data.loader.PlanetData': unmapped({
       'getPlanetId(argent_matter.gcyr.api.space.planet.Planet)': (p) => p.id,
-    },
-    'argent_matter.gcyr.api.capability.GCYRCapabilityHelper': {
+    }),
+    'argent_matter.gcyr.api.capability.GCYRCapabilityHelper': unmapped({
       'getSpaceStations(net.minecraft.server.level.ServerLevel)'(l) {
         assert.equal(l, level); return holder;
       },
-    },
+    }),
     'net.minecraft.core.BlockPos': Pos,
     'net.minecraft.world.level.levelgen.Heightmap$Types': { WORLD_SURFACE: 'WORLD_SURFACE' },
     'net.minecraft.world.phys.shapes.CollisionContext': {},
@@ -342,14 +366,17 @@ function harness({ mode = 'named', dimension = ORBIT, extraOrbits = [] } = {}) {
   const errors = () => logs.filter(([kind]) => kind === 'error').map(([, message]) => message);
   const successes = () => logs.filter(([kind]) => kind === 'info').map(([, message]) => message);
   return { G, rocket, players, level, blocks, records, calls, logs, of, errors, successes,
-    tick, dwell, Tag, Pos, Bounds, control, planet, earth, station, border, makePlayer, classes, invoke };
+    tick, dwell, Tag, Pos, Bounds, control, planet, earth, station, border, makePlayer, classes, invoke,
+    member, exposed, dispatches };
 }
 
-for (const mode of ['named', 'srg']) {
+for (const mode of ['named', 'srg', 'plain', 'plain-srg']) {
   test(`${mode}: installed handler moves root straight down using actual bbox floor/native seats and syncs the existing mount`, () => {
     const h = harness({ mode });
     h.dwell(0, 40);
-    assert.equal(h.of('save').length, 0, 'no huge inventory serialization before stall eligibility');
+    assert.deepEqual(h.of('save').map(([, , tick]) => tick), [0, 10, 20, 30, 40],
+      'proven launch NBT is sampled coarsely, never every tick');
+    assert.equal(h.of('stackOf').length, 0, 'no target/config iteration before stall eligibility');
     assert.equal(h.of('rootTeleport').length, 0);
     h.players[0].age = 1; // Fixture rewinds local age: server tick, not age, is authoritative.
     h.tick(41);
@@ -362,7 +389,9 @@ for (const mode of ['named', 'srg']) {
     assert.equal(h.players[0].fallDistance, 0);
     assert.equal(h.rocket.onGround(), false, 'correction never fabricates native contact');
     assert.deepEqual(h.of('rootTeleport').map(([, ...p]) => p), [[0, 65, 0]]);
-    assert.equal(h.of('save').length, 1);
+    assert.equal(h.of('save').length, 6, 'one fresh snapshot at41 supplies BOTH launch flag and target');
+    assert.equal(h.of('save').filter(([, , tick]) => tick === 41).length, 1);
+    assert.equal(h.of('stackOf').length, 1);
     assert.equal(h.of('pairConstructor').length, 1);
     assert.equal(h.of('pair').length, 1);
     const packets = h.of('packet').map(([, , p]) => p.kind);
@@ -377,6 +406,14 @@ for (const mode of ['named', 'srg']) {
     assert.equal(h.of('broadcast')[0][2].kind, 'observerTeleport');
     assert.deepEqual(h.errors(), []);
     assert.equal(h.successes().length, 1);
+    if (mode.startsWith('plain')) {
+      assert.ok(h.exposed.every((name) => !name.includes('(')), 'no qualified mock selector is installed');
+      assert.ok(h.dispatches.every(([name]) => !name.includes('(')), 'whole installed handler used ordinary members');
+      assert.ok(h.dispatches.some(([name]) => name === (mode === 'plain-srg' ? 'm_128471_' : 'getBoolean')),
+        'launch exclusion uses the proven saved-NBT flag, never a generic metadata bridge');
+      assert.deepEqual(Object.keys(h.classes['java.lang.Integer']), ['valueOf(int)'],
+        'only genuinely ambiguous Java numeric boxing retains its exact selector');
+    }
     const log = h.successes()[0];
     for (const field of [`SUCCESS dimension=${ORBIT} station=0 rocket=${ROCKET_ID}`,
       'stalledServerTicks=41', 'oldRoot=[0,600,0]', 'newRoot=[0,65,0]',
@@ -386,10 +423,120 @@ for (const mode of ['named', 'srg']) {
     }
     h.dwell(42, 200, () => { h.rocket.y = 600; });
     assert.equal(h.of('rootTeleport').length, 1, 'same stale client/hover state never relocates twice');
-    assert.equal(h.of('save').length, 1);
+    assert.equal(h.of('save').length, 21, 'coarse launch observation continues only to detect genuine later launches');
+    assert.equal(h.of('stackOf').length, 1, 'same stalled state never rereads/resolves a destination');
     assert.equal(h.successes().length, 1);
   });
 }
+
+test('selector-absent modes exercise the actual keycard and saved-position helper branches, including typed-ID refusal', () => {
+  for (const mode of ['plain', 'plain-srg']) {
+    const card = harness({ mode });
+    card.rocket.config = card.control({ kind: 'gcyr:keycard', world: 'gcyr:earth' });
+    card.dwell();
+    assert.equal(card.of('rootTeleport').length, 1);
+    assert.equal(card.of('cardPlanet').length, 1);
+    assert.deepEqual(card.errors(), []);
+
+    const chip = harness({ mode });
+    chip.rocket.config.entries.tag.value.put('gcyr:current_planet', 8, ORBIT)
+      .put('gcyr:current_position', 10, new chip.Tag().put('X', 3, 0).put('Y', 3, 600).put('Z', 3, 0));
+    chip.dwell();
+    assert.equal(chip.of('savedPosition').length, 1);
+    assert.equal(chip.of('rootTeleport').length, 1);
+    assert.deepEqual(chip.errors(), []);
+
+    const invalid = harness({ mode });
+    invalid.rocket.config = invalid.control({ kind: 'gcyr:keycard', world: 'gcyr:earth' });
+    delete invalid.rocket.config.entries.tag.value.entries['gcyr:current_station'];
+    invalid.dwell(0, 120);
+    assert.equal(invalid.of('rootTeleport').length, 0);
+    assert.equal(invalid.of('cardStation').length, 0, 'missing typed ID never calls zero-default getter');
+    assert.equal(invalid.errors().length, 1);
+    assert.equal(invalid.successes().length, 0);
+  }
+});
+
+test('saved launch flag is required as BYTE1; missing/malformed/unreadable flags never become a default false', () => {
+  for (const mode of ['plain', 'plain-srg']) {
+    for (const change of [
+      (h) => { h.rocket.omitStarted = true; },
+      (h) => { h.rocket.startedType = 3; },
+      (h) => {
+        const name = h.member('saveWithoutId(net.minecraft.nbt.CompoundTag)', 'm_20240_(net.minecraft.nbt.CompoundTag)');
+        const save = h.rocket[name];
+        h.rocket[name] = (tag) => {
+          const saved = save(tag);
+          saved[h.member('getBoolean(java.lang.String)', 'm_128471_(java.lang.String)')] = () => undefined;
+          return saved;
+        };
+      },
+    ]) {
+      const h = harness({ mode }); change(h); h.dwell(0, 100);
+      assert.deepEqual(h.of('save').map(([, , tick]) => tick), [0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100]);
+      assert.equal(h.of('stackOf').length, 0);
+      assert.equal(h.of('rootTeleport').length, 0);
+      assert.deepEqual(h.rocket.motion, [0, -0.5, 0]);
+      assert.equal(h.errors().length, 1, 'unreadable state fails explicitly and logs once');
+      assert.equal(h.successes().length, 0);
+    }
+  }
+});
+
+test('fresh final NBT launch exclusion catches a launch or missing flag between coarse samples before any target/move', () => {
+  for (const mode of ['plain', 'plain-srg']) {
+    for (const missing of [false, true]) {
+      const h = harness({ mode }); h.dwell(0, 40);
+      if (missing) h.rocket.omitStarted = true;
+      else h.rocket.started = true;
+      h.tick(41);
+      assert.equal(h.of('save').filter(([, , tick]) => tick === 41).length, 1);
+      assert.equal(h.of('stackOf').length, 0, 'the same fresh snapshot excludes launch BEFORE reading target');
+      assert.equal(h.of('rootTeleport').length, 0);
+      assert.deepEqual(h.rocket.motion, [0, -0.5, 0]);
+      assert.equal(h.errors().length, missing ? 1 : 0);
+      assert.equal(h.successes().length, 0);
+    }
+  }
+});
+
+test('simple mapped invocations that throw never retry simple SRG aliases, including partial moves and NBT flag failures', () => {
+  for (const stage of ['root', 'connection', 'flag']) {
+    const h = harness({ mode: 'plain' });
+    const forbidden = () => { h.calls.push(['forbiddenSimpleRetry']); throw new Error('alias retry forbidden'); };
+    if (stage === 'root') {
+      h.rocket.moveFailure = 'after';
+      h.rocket.m_20324_ = forbidden;
+    } else if (stage === 'connection') {
+      h.players[0].syncFailure = true;
+      h.players[0].connection.m_9774_ = forbidden;
+    } else {
+      const save = h.rocket.saveWithoutId;
+      h.rocket.saveWithoutId = (tag) => {
+        const saved = save(tag);
+        saved.getBoolean = () => { throw new Error('native getBoolean began then failed'); };
+        saved.m_128471_ = forbidden;
+        return saved;
+      };
+    }
+    h.dwell(0, 120);
+    assert.equal(h.of('forbiddenSimpleRetry').length, 0, stage);
+    assert.equal(h.of('rootTeleport').length, stage === 'flag' ? 0 : 1, stage);
+    assert.equal(h.errors().length, 1, stage);
+    assert.equal(h.successes().length, 0, stage);
+  }
+
+  const qualified = harness();
+  qualified.rocket.moveFailure = 'after';
+  qualified.rocket.teleportToWithTicket = () => {
+    qualified.calls.push(['forbiddenOrdinaryRetry']); throw new Error('qualified invocation already began');
+  };
+  qualified.dwell(0, 120);
+  assert.equal(qualified.of('rootTeleport').length, 1);
+  assert.equal(qualified.of('forbiddenOrdinaryRetry').length, 0);
+  assert.equal(qualified.errors().length, 1);
+  assert.equal(qualified.successes().length, 0);
+});
 
 test('only shared orbit dimensions qualify; an enabled-test startup addition is read without production table changes', () => {
   for (const dimension of ['minecraft:overworld', 'gcyr:luna', 'grindless:io', 'other:orbit']) {
@@ -402,7 +549,7 @@ test('only shared orbit dimensions qualify; an enabled-test startup addition is 
   const h = harness({ dimension: 'test:disposable_orbit', extraOrbits: ['test:disposable_orbit'] });
   assert.ok(Array.from(h.G.orbitArrival.dimensions).includes('test:disposable_orbit'));
   h.dwell();
-  assert.equal(h.of('save').length, 1, 'allowlist addition reaches actual target guard');
+  assert.equal(h.of('stackOf').length, 1, 'allowlist addition reaches actual target guard');
   assert.equal(h.of('rootTeleport').length, 0, 'wrong actual target still fails closed');
 });
 
@@ -417,7 +564,9 @@ test('player rider and actual GCYR rocket required; active/unreadable launches a
     (h) => { h.rocket.y = NaN; },
   ]) {
     const h = harness(); change(h); h.dwell();
-    assert.equal(h.of('save').length, 0);
+    assert.ok(h.of('save').length <= 5, 'only actual occupied orbit roots get bounded coarse launch reads');
+    if (h.players.length === 0 || h.players[0].vehicle !== h.rocket) assert.equal(h.of('save').length, 0);
+    assert.equal(h.of('stackOf').length, 0);
     assert.equal(h.of('rootTeleport').length, 0);
     assert.deepEqual(h.rocket.motion, [0, -0.5, 0]);
     assert.equal(h.successes().length, 0);
@@ -429,7 +578,8 @@ test('player rider and actual GCYR rocket required; active/unreadable launches a
 test('actual descent and discontinuous observations reset the full server-time window; negative Motion alone does not', () => {
   for (const speed of [0.5, 0.00001]) {
     const h = harness(); h.dwell(0, 80, (n) => { h.rocket.y = 600 - n * speed; });
-    assert.equal(h.of('save').length, 0);
+    assert.equal(h.of('stackOf').length, 0, 'descent never resolves target/config inventory');
+    assert.equal(h.of('save').length, 9, 'launch flag sampled every10 ticks during descent');
     h.dwell(81, 120);
     assert.equal(h.of('rootTeleport').length, 0);
     h.tick(121);
@@ -519,7 +669,7 @@ test('missing/malformed/ambiguous actual slot/control/typed station never become
   for (const corrupt of corruptions) {
     const h = harness(); corrupt(h); h.dwell(0, 120);
     assert.equal(h.of('rootTeleport').length, 0);
-    assert.equal(h.of('save').length, 1);
+    assert.ok(h.of('save').length <= 14, 'coarse flag reads plus one final fresh snapshot, not per-tick saves');
     assert.equal(h.errors().length, 1, 'explicit/log-once failure, not a success-shaped default');
     assert.equal(h.successes().length, 0);
     assert.deepEqual(h.rocket.motion, [0, -0.5, 0]);
@@ -575,7 +725,8 @@ test('no deployed column, collisionless top, obstructed rocket/rider, outside-co
   ]) {
     const h = harness(); change(h); h.dwell(0, 140);
     assert.equal(h.of('rootTeleport').length, 0);
-    assert.equal(h.of('save').length, 1);
+    assert.equal(h.of('station').length, 1, 'missing column does not repeat target lookup');
+    assert.equal(h.of('stackOf').length, 1);
     assert.equal(h.errors().length, 1);
     assert.equal(h.successes().length, 0);
   }
@@ -597,7 +748,8 @@ test('multiple native player riders share one serialization/relocation but each 
   const h = harness();
   h.players.push(h.makePlayer());
   h.dwell();
-  assert.equal(h.of('save').length, 1);
+  assert.equal(h.of('save').length, 6, 'multiple riders share each coarse/final snapshot');
+  assert.equal(h.of('stackOf').length, 1);
   assert.equal(h.of('rootTeleport').length, 1);
   assert.equal(h.of('pairConstructor').length, 1);
   assert.equal(h.of('pair').length, 2);
@@ -631,11 +783,12 @@ test('a genuinely later observed launch/dimension transition rearms, but relocat
     h.rocket.y = 600;
     if (departure === 'launch') h.rocket.started = true;
     else h.level.dimension = 'minecraft:overworld';
-    h.tick(42);
+    h.dwell(42, 51); // A genuine native launch lasts far longer than a coarse10-tick sample.
     h.rocket.started = false; h.level.dimension = ORBIT;
-    h.dwell(43, 83);
+    const nextObservation = departure === 'launch' ? 61 : 52;
+    h.dwell(52, nextObservation + 40);
     assert.equal(h.of('rootTeleport').length, 1);
-    h.tick(84);
+    h.tick(nextObservation + 41);
     assert.equal(h.of('rootTeleport').length, 2);
     assert.equal(h.successes().length, 2);
   }
@@ -645,7 +798,7 @@ test('a genuinely later observed launch/dimension transition rearms, but relocat
   h.rocket.config.entries.tag.value.put('gcyr:current_station', 3, 123);
   h.dwell(43, 140);
   assert.equal(h.of('rootTeleport').length, 1);
-  assert.equal(h.of('save').length, 1);
+  assert.equal(h.of('stackOf').length, 1);
   assert.equal(h.successes().length, 1);
 });
 
@@ -673,4 +826,8 @@ test('production has no synthetic ground/tick, owner/access registry, thermal/ph
   assert.doesNotMatch(source, /(?:get|set)Owner|nearestStation|defaultStation|invulnerable|FIRE_RESISTANCE|setNoGravity|noPhysics/);
   assert.doesNotMatch(source, /stopRiding|startRiding|changeDimension|addPairing|sendChanges|\b(?:rocket|root|rider)\.tick\s*\(/);
   assert.doesNotMatch(source, /getStations\s*\(/);
+  assert.doesNotMatch(source, /getEntityData|m_20088_|EntityDataAccessor|ROCKET_STARTED|m_135370_/);
+  const directSelectors = Array.from(source.matchAll(/\[['"]([^'"]+\([^'"]*\))['"]\]\s*\(/g), (match) => match[1]);
+  assert.deepEqual(directSelectors, ['valueOf(int)'],
+    'only ambiguous Integer boxing may require a qualified selector without ordinary-member fallback');
 });

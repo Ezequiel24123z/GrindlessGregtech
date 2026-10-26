@@ -4,13 +4,14 @@
 // Native pairing restores the existing root's spawn/block/seat data; no second ticking tracker.
 // SUCCESS means verified server correction/sync dispatch, NOT proof of later native landing or
 // client mount recovery. Those require subsequent real collision and client readback.
-// Rhino: var inside repeated callbacks; pinned overloads; no reflection or catch-and-retry moves.
+// Rhino: var inside repeated callbacks; audited overloads; no reflection or catch-and-retry moves.
 (function () {
   var G = global.grindless
   var A = G.orbitArrival = {}
   A.dimensions = G.orbits.dimensions.slice()
   A.minimumY = 550
   A.stallTicks = 40
+  var LAUNCH_SAMPLE_TICKS = 10
   A.states = {}
   var LOG = '[grindless/orbit-arrival] '
   var Rocket = Java.loadClass('argent_matter.gcyr.common.entity.RocketEntity')
@@ -26,7 +27,11 @@
   }
 
   // Resolve first, invoke once. A runtime exception may follow a partial mutation: NEVER try
-  // the SRG alias after that exception. Only an absent method permits the next name.
+  // any other alias after that exception. Only an absent method permits the next name.
+  // R10: qualified Minecraft selectors can be absent even when ordinary members are present.
+  // Each simple fallback below is unambiguous by arity and/or its native reference argument:
+  // Vec3 motion, NBT/tag/stack helpers, physical queries and packet/sync
+  // methods. Integer.valueOf(int) stays explicitly pinned: JS-number/String boxing IS ambiguous.
   function invoke(object, names, args) {
     for (var i = 0; i < names.length; i++) {
       var method = object[names[i]]
@@ -60,12 +65,16 @@
 
   function uuid(entity) { return String(invoke(entity, ['getStringUuid', 'm_20149_'])) }
   function vehicle(player) { return invoke(player, ['getVehicle', 'm_20202_']) }
-  function launching(rocket) {
-    var data = invoke(rocket, ['getEntityData', 'm_20088_'])
-    var started = invoke(data, [
-      'get(net.minecraft.network.syncher.EntityDataAccessor)',
-      'm_135370_(net.minecraft.network.syncher.EntityDataAccessor)'
-    ], [Rocket.ROCKET_STARTED])
+  function snapshot(rocket) {
+    var j = java()
+    return invoke(rocket, ['saveWithoutId(net.minecraft.nbt.CompoundTag)', 'm_20240_(net.minecraft.nbt.CompoundTag)',
+      'saveWithoutId', 'm_20240_'], [new j.Tag()])
+  }
+  function launching(saved) {
+    // This exact saved flag was repeatedly observed natively; no entity-data wrapper bridge.
+    need(has(saved, 'isStarted', 1), 'missing/unreadable typed native isStarted flag')
+    var started = invoke(saved, ['getBoolean(java.lang.String)', 'm_128471_(java.lang.String)',
+      'getBoolean', 'm_128471_'], ['isStarted'])
     need(started !== null && started !== undefined &&
       (String(started) === 'true' || String(started) === 'false'), 'unreadable native launch state')
     return String(started) === 'true'
@@ -78,34 +87,37 @@
   function point(entity) { return [coord(entity, 'x'), coord(entity, 'y'), coord(entity, 'z')] }
   function box(entity) { return invoke(entity, ['getBoundingBox', 'm_20191_']) }
   function movedBox(bounds, dy) {
-    return invoke(bounds, ['move(double,double,double)', 'm_82386_(double,double,double)'], [0, dy, 0])
+    return invoke(bounds, ['move(double,double,double)', 'm_82386_(double,double,double)', 'move', 'm_82386_'], [0, dy, 0])
   }
   function dimension(level) { return String(level.getDimensionKey().location()) }
   function has(tag, key, type) {
-    return invoke(tag, ['contains(java.lang.String,int)', 'm_128425_(java.lang.String,int)'], [key, type])
+    return invoke(tag, ['contains(java.lang.String,int)', 'm_128425_(java.lang.String,int)', 'contains', 'm_128425_'], [key, type])
   }
   function compound(tag, key) {
-    return invoke(tag, ['getCompound(java.lang.String)', 'm_128469_(java.lang.String)'], [key])
+    return invoke(tag, ['getCompound(java.lang.String)', 'm_128469_(java.lang.String)', 'getCompound', 'm_128469_'], [key])
   }
   function intTag(tag, key) {
-    return Number(invoke(tag, ['getInt(java.lang.String)', 'm_128451_(java.lang.String)'], [key]))
+    return Number(invoke(tag, ['getInt(java.lang.String)', 'm_128451_(java.lang.String)', 'getInt', 'm_128451_'], [key]))
   }
   function noCollision(level, entity, bounds) {
     return invoke(level, [
       'noCollision(net.minecraft.world.entity.Entity,net.minecraft.world.phys.AABB)',
-      'm_45756_(net.minecraft.world.entity.Entity,net.minecraft.world.phys.AABB)'
+      'm_45756_(net.minecraft.world.entity.Entity,net.minecraft.world.phys.AABB)', 'noCollision', 'm_45756_'
     ], [entity, bounds])
   }
   function resetFall(entity) { invoke(entity, ['resetFallDistance', 'm_183634_']) }
   function zeroMotion(entity) {
-    invoke(entity, ['setDeltaMovement(net.minecraft.world.phys.Vec3)', 'm_20256_(net.minecraft.world.phys.Vec3)'],
+    invoke(entity, ['setDeltaMovement(net.minecraft.world.phys.Vec3)', 'm_20256_(net.minecraft.world.phys.Vec3)',
+      'setDeltaMovement', 'm_20256_'],
       [java().Vec3.ZERO])
   }
   function positionRider(rocket, player) {
-    invoke(rocket, ['positionRider(net.minecraft.world.entity.Entity)', 'm_7332_(net.minecraft.world.entity.Entity)'], [player])
+    invoke(rocket, ['positionRider(net.minecraft.world.entity.Entity)', 'm_7332_(net.minecraft.world.entity.Entity)',
+      'positionRider', 'm_7332_'], [player])
   }
   function send(player, packet) {
-    invoke(player.connection, ['send(net.minecraft.network.protocol.Packet)', 'm_9829_(net.minecraft.network.protocol.Packet)'], [packet])
+    invoke(player.connection, ['send(net.minecraft.network.protocol.Packet)', 'm_9829_(net.minecraft.network.protocol.Packet)',
+      'send', 'm_9829_'], [packet])
   }
   function association(riders, id) {
     var count = 0
@@ -117,7 +129,8 @@
   }
 
   function fresh(dimension) {
-    return { dimension: dimension, tick: null, y: null, since: null, handled: false }
+    return { dimension: dimension, tick: null, y: null, since: null, handled: false,
+      launchTick: null, launchStarted: null }
   }
 
   function resetWindow(state) {
@@ -126,17 +139,17 @@
     state.since = null
   }
 
-  function readTarget(rocket, level, dim) {
+  function readTarget(saved, level, dim) {
     var j = java()
-    var saved = invoke(rocket, ['saveWithoutId(net.minecraft.nbt.CompoundTag)', 'm_20240_(net.minecraft.nbt.CompoundTag)'], [new j.Tag()])
     need(has(saved, 'config', 10), 'missing typed config inventory')
     var config = compound(saved, 'config')
     need(has(config, 'Size', 3) && intTag(config, 'Size') === 1, 'malformed config inventory size')
     need(has(config, 'Items', 9), 'missing typed config.Items list')
-    var items = invoke(config, ['getList(java.lang.String,int)', 'm_128437_(java.lang.String,int)'], ['Items', 10])
+    var items = invoke(config, ['getList(java.lang.String,int)', 'm_128437_(java.lang.String,int)',
+      'getList', 'm_128437_'], ['Items', 10])
     var entry = null
     for (var i = 0; i < items.size(); i++) {
-      var candidate = invoke(items, ['getCompound(int)', 'm_128728_(int)'], [i])
+      var candidate = invoke(items, ['getCompound(int)', 'm_128728_(int)', 'getCompound', 'm_128728_'], [i])
       need(has(candidate, 'Slot', 3), 'missing/malformed config slot index')
       if (intTag(candidate, 'Slot') === 0) {
         need(entry === null, 'ambiguous config slot 0')
@@ -145,48 +158,50 @@
     }
     need(entry !== null, 'missing actual config slot 0')
     need(has(entry, 'id', 8) && has(entry, 'Count', 1) && has(entry, 'tag', 10), 'malformed control stack entry')
-    var stack = invoke(j.Stack, ['of(net.minecraft.nbt.CompoundTag)', 'm_41712_(net.minecraft.nbt.CompoundTag)'], [entry])
+    var stack = invoke(j.Stack, ['of(net.minecraft.nbt.CompoundTag)', 'm_41712_(net.minecraft.nbt.CompoundTag)',
+      'of', 'm_41712_'], [entry])
     need(!stack.isEmpty(), 'empty config control')
     var controlId = String(stack.getId())
     need(controlId === 'gcyr:id_chip' || controlId === 'gcyr:keycard', 'not a station control')
     var chip = controlId === 'gcyr:id_chip'
-    need((chip ? j.Items.ID_CHIP : j.Items.KEYCARD)['isIn(net.minecraft.world.item.ItemStack)'](stack),
+    need(invoke(chip ? j.Items.ID_CHIP : j.Items.KEYCARD, ['isIn(net.minecraft.world.item.ItemStack)', 'isIn'], [stack]),
       'native control item mismatch')
     var tag = stack.getNbt()
     need(tag !== null && tag !== undefined && has(tag, 'gcyr:current_station', 3) &&
       has(tag, 'gcyr:current_planet', 8), 'missing typed selected station/planet')
     var id = intTag(tag, 'gcyr:current_station')
     need(finite(id) && id >= 0 && Math.floor(id) === id, 'invalid selected station id')
-    var selected = chip ? j.Chip['getSpaceStationId(net.minecraft.world.item.ItemStack)'](stack) :
-      j.Card['getSavedStation(net.minecraft.world.item.ItemStack)'](stack)
+    var selected = chip ? invoke(j.Chip, ['getSpaceStationId(net.minecraft.world.item.ItemStack)', 'getSpaceStationId'], [stack]) :
+      invoke(j.Card, ['getSavedStation(net.minecraft.world.item.ItemStack)', 'getSavedStation'], [stack])
     need(selected !== null && selected !== undefined && Number(selected) === id, 'control station helper mismatch')
     // Chip uses WORLD id; keycard uses PLANET REGISTRY id. Their native helpers resolve these.
-    var planet = chip ? j.Chip['getPlanetFromStack(net.minecraft.world.item.ItemStack)'](stack) :
-      j.Card['getSavedPlanet(net.minecraft.world.item.ItemStack)'](stack)
+    var planet = chip ? invoke(j.Chip, ['getPlanetFromStack(net.minecraft.world.item.ItemStack)', 'getPlanetFromStack'], [stack]) :
+      invoke(j.Card, ['getSavedPlanet(net.minecraft.world.item.ItemStack)', 'getSavedPlanet'], [stack])
     need(planet !== null && planet !== undefined && String(planet.orbitWorld().location()) === dim,
       'selected planet does not resolve to current orbit')
-    var holder = j.Capability['getSpaceStations(net.minecraft.server.level.ServerLevel)'](level)
+    var holder = invoke(j.Capability, ['getSpaceStations(net.minecraft.server.level.ServerLevel)', 'getSpaceStations'], [level])
     need(holder !== null && holder !== undefined, 'missing native station holder')
-    var station = holder['getStation(java.lang.Integer)'](j.Integer['valueOf(int)'](id))
+    var station = invoke(holder, ['getStation(java.lang.Integer)', 'getStation'], [j.Integer['valueOf(int)'](id)])
     need(station !== null && station !== undefined, 'selected station record does not exist')
     var recordPlanet = station.orbitPlanet()
-    var planetId = j.Planets['getPlanetId(argent_matter.gcyr.api.space.planet.Planet)'](planet)
+    var planetId = invoke(j.Planets, ['getPlanetId(argent_matter.gcyr.api.space.planet.Planet)', 'getPlanetId'], [planet])
     var recordId = recordPlanet === null || recordPlanet === undefined ? null :
-      j.Planets['getPlanetId(argent_matter.gcyr.api.space.planet.Planet)'](recordPlanet)
+      invoke(j.Planets, ['getPlanetId(argent_matter.gcyr.api.space.planet.Planet)', 'getPlanetId'], [recordPlanet])
     need(recordPlanet !== null && recordPlanet !== undefined &&
       String(recordPlanet.orbitWorld().location()) === dim &&
       planetId !== null && planetId !== undefined && recordId !== null && recordId !== undefined &&
       String(recordId) === String(planetId),
     'selected station record planet mismatch')
-    var origin = holder['getStationWorldPos(int)'](id)
+    var origin = invoke(holder, ['getStationWorldPos(int)', 'getStationWorldPos'], [id])
     need(origin !== null && origin !== undefined, 'missing native station world position')
     // Native chip position navigation overrides the station destination. Permit it ONLY when
     // the actual helper's orbit and column agree; saved Y is not the station's support height.
-    if (chip && invoke(tag, ['contains(java.lang.String)', 'm_128441_(java.lang.String)'], ['gcyr:current_position'])) {
+    if (chip && invoke(tag, ['contains(java.lang.String)', 'm_128441_(java.lang.String)', 'contains', 'm_128441_'],
+      ['gcyr:current_position'])) {
       need(has(tag, 'gcyr:current_position', 10), 'malformed saved position')
       var raw = compound(tag, 'gcyr:current_position')
       need(has(raw, 'X', 3) && has(raw, 'Y', 3) && has(raw, 'Z', 3), 'malformed saved position coordinates')
-      var override = j.Chip['getSavedPosition(net.minecraft.world.item.ItemStack)'](stack)
+      var override = invoke(j.Chip, ['getSavedPosition(net.minecraft.world.item.ItemStack)', 'getSavedPosition'], [stack])
       need(override !== null && override !== undefined &&
         String(override.dimension().location()) === dim &&
         Number(override.pos().getX()) === Number(origin.getX()) &&
@@ -220,7 +235,7 @@
     need(Math.floor(old[0]) === x && Math.floor(old[2]) === z, 'rocket is not over its selected station column')
     var height = Number(invoke(level, [
       'getHeight(net.minecraft.world.level.levelgen.Heightmap$Types,int,int)',
-      'm_6924_(net.minecraft.world.level.levelgen.Heightmap$Types,int,int)'
+      'm_6924_(net.minecraft.world.level.levelgen.Heightmap$Types,int,int)', 'getHeight', 'm_6924_'
     ], [j.Height.WORLD_SURFACE, x, z]))
     need(finite(height) && height > Number(level.getMinBuildHeight()) &&
       height <= Number(level.getMaxBuildHeight()), 'no physical station column')
@@ -229,10 +244,13 @@
     need(!block.isAir(), 'no physical station column')
     var shape = invoke(block, [
       'getCollisionShape(net.minecraft.world.level.BlockGetter,net.minecraft.core.BlockPos,net.minecraft.world.phys.shapes.CollisionContext)',
-      'm_60742_(net.minecraft.world.level.BlockGetter,net.minecraft.core.BlockPos,net.minecraft.world.phys.shapes.CollisionContext)'
-    ], [level, pos, invoke(j.Context, ['of(net.minecraft.world.entity.Entity)', 'm_82750_(net.minecraft.world.entity.Entity)'], [rocket])])
+      'm_60742_(net.minecraft.world.level.BlockGetter,net.minecraft.core.BlockPos,net.minecraft.world.phys.shapes.CollisionContext)',
+      'getCollisionShape', 'm_60742_'
+    ], [level, pos, invoke(j.Context, ['of(net.minecraft.world.entity.Entity)', 'm_82750_(net.minecraft.world.entity.Entity)',
+      'of', 'm_82750_'], [rocket])])
     need(!shape.isEmpty(), 'highest column block has no collision support')
-    var top = Number(invoke(shape, ['max(net.minecraft.core.Direction$Axis)', 'm_83297_(net.minecraft.core.Direction$Axis)'], [j.Axis.Y]))
+    var top = Number(invoke(shape, ['max(net.minecraft.core.Direction$Axis)', 'm_83297_(net.minecraft.core.Direction$Axis)',
+      'max', 'm_83297_'], [j.Axis.Y]))
     need(finite(top) && top > 0 && top <= 1, 'unsuitable column collision top')
     var oldBox = box(rocket)
     var floor = height - 1 + top
@@ -245,9 +263,9 @@
     return { old: old, oldFloor: Number(oldBox.minY), y: y, dy: dy, floor: floor }
   }
 
-  function correct(rocket, riders, level, state, id, stalled) {
+  function correct(rocket, riders, level, state, id, stalled, saved) {
     var j = java()
-    var target = readTarget(rocket, level, state.dimension)
+    var target = readTarget(saved, level, state.dimension)
     state.station = String(target.id)
     var plan = landing(rocket, level, target)
     var original = association(riders, id)
@@ -261,7 +279,8 @@
     }
     resetFall(rocket)
     zeroMotion(rocket)
-    invoke(rocket, ['teleportToWithTicket(double,double,double)', 'm_20324_(double,double,double)'],
+    invoke(rocket, ['teleportToWithTicket(double,double,double)', 'm_20324_(double,double,double)',
+      'teleportToWithTicket', 'm_20324_'],
       [plan.old[0], plan.y, plan.old[2]])
     var actual = point(rocket)
     need(actual.every(finite) && Math.abs(actual[0] - plan.old[0]) < 0.000001 &&
@@ -285,18 +304,19 @@
       var deliver = function (packet) { send(rider, packet) }
       invoke(pairing, [
         'sendPairingData(net.minecraft.server.level.ServerPlayer,java.util.function.Consumer)',
-        'm_289200_(net.minecraft.server.level.ServerPlayer,java.util.function.Consumer)'
+        'm_289200_(net.minecraft.server.level.ServerPlayer,java.util.function.Consumer)', 'sendPairingData', 'm_289200_'
       ], [rider, deliver])
       var seat = point(rider)
       need(seat.every(finite), 'invalid native seat position')
       invoke(rider.connection, [
-        'teleport(double,double,double,float,float)', 'm_9774_(double,double,double,float,float)'
+        'teleport(double,double,double,float,float)', 'm_9774_(double,double,double,float,float)', 'teleport', 'm_9774_'
       ], [seat[0], seat[1], seat[2], Number(rider.getYaw()), Number(rider.getPitch())])
       var restoredSeat = point(rider)
       need(restoredSeat.every(finite) && Math.abs(restoredSeat[0] - seat[0]) < 0.000001 &&
         Math.abs(restoredSeat[1] - seat[1]) < 0.000001 && Math.abs(restoredSeat[2] - seat[2]) < 0.000001,
       'rider connection seat readback mismatch')
-      invoke(chunks, ['move(net.minecraft.server.level.ServerPlayer)', 'm_8385_(net.minecraft.server.level.ServerPlayer)'], [rider])
+      invoke(chunks, ['move(net.minecraft.server.level.ServerPlayer)', 'm_8385_(net.minecraft.server.level.ServerPlayer)',
+        'move', 'm_8385_'], [rider])
       invoke(rider.connection, ['resetPosition', 'm_9953_'])
       // Every direct player rider receives the native root packet; vanilla applies it only to
       // its locally controlled root. Pairing/passengers must arrive before this correction.
@@ -306,7 +326,7 @@
     zeroMotion(rocket)
     invoke(chunks, [
       'broadcastAndSend(net.minecraft.world.entity.Entity,net.minecraft.network.protocol.Packet)',
-      'm_8394_(net.minecraft.world.entity.Entity,net.minecraft.network.protocol.Packet)'
+      'm_8394_(net.minecraft.world.entity.Entity,net.minecraft.network.protocol.Packet)', 'broadcastAndSend', 'm_8394_'
     ], [rocket, new j.TeleportPacket(rocket)])
     var restored = association(riders, id)
     need(restored === original, 'restored rider association mismatch')
@@ -330,17 +350,29 @@
       resetWindow(state)
       return
     }
-    var started = launching(rocket)
-    if (started) {
+    var y = coord(rocket, 'y')
+    if (!finite(tick) || !finite(y)) {
+      resetWindow(state)
+      return
+    }
+    // Serialize only occupied, observed orbit roots, not every entity or every server tick.
+    // Cache ONLY the launch bit/time, not a stale destination or the large saved rocket tree.
+    var saved = null
+    if (state.launchTick === null || tick < state.launchTick || tick - state.launchTick >= LAUNCH_SAMPLE_TICKS) {
+      state.launchTick = tick
+      state.launchStarted = null
+      saved = snapshot(rocket)
+      state.launchStarted = launching(saved)
+    }
+    if (state.launchStarted === true) {
       state.handled = false
       delete state.station
       delete state.outcome
       resetWindow(state)
       return
     }
-    if (state.handled) return
-    var y = coord(rocket, 'y')
-    if (!finite(tick) || !finite(y) || y < A.minimumY) {
+    if (state.handled || state.launchStarted !== false) return
+    if (y < A.minimumY) {
       resetWindow(state)
       return
     }
@@ -353,7 +385,22 @@
     if (tick - state.since <= A.stallTicks) return
     state.handled = true
     try {
-      correct(rocket, group.riders, level, state, id, tick - state.since)
+      // A cached false flag NEVER authorizes a correction. Reuse only a snapshot taken in THIS
+      // server tick; otherwise obtain a fresh one and check its typed launch flag before moving.
+      if (saved === null) {
+        state.launchTick = tick
+        state.launchStarted = null
+        saved = snapshot(rocket)
+        state.launchStarted = launching(saved)
+      }
+      if (state.launchStarted === true) {
+        state.handled = false
+        delete state.station
+        delete state.outcome
+        resetWindow(state)
+        return
+      }
+      correct(rocket, group.riders, level, state, id, tick - state.since, saved)
     } catch (e) {
       state.outcome = 'error'
       console.error(LOG + 'ERROR dimension=' + dim + ' station=' +
@@ -382,7 +429,11 @@
       }
     }
     Object.keys(A.states).forEach(function (id) {
-      if (!groups[id]) resetWindow(A.states[id])
+      if (!groups[id]) {
+        resetWindow(A.states[id])
+        A.states[id].launchTick = null
+        A.states[id].launchStarted = null
+      }
     })
     Object.keys(groups).forEach(function (id) {
       try {
