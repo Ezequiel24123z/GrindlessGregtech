@@ -29,11 +29,11 @@
     item/wireless/<energy|dynamo>_cover_<tier>.png                       the cover items: a steel plate with the frame and the symbol
     block/wireless/capacitor_cell_<tier>.png                             the tower's cells: a steel frame round three capacitor stacks in
                                                                          the tier's colour
-    block/wireless/smes_cell_luv.png                                     the LuV cell (the table row's texture): a superconducting coil in
-                                                                         a frost-grey cryostat, its tape turns light purple in a window
+    block/wireless/smes_cell_<luv|zpm>.png                               the LuV and ZPM cells (the table rows' textures): a superconducting
+                                                                         coil in a frost-grey cryostat, its tape turns in the tier's colour in a window
     block/multiblock/wireless_energy_tower/overlay_front.png, overlay_front_active.png(+.mcmeta) and
     overlay_front_active_emissive.png(+.mcmeta)                          the tower controller: a gauge of stacked cells under a small mast
-  Tier colours: GTM's (GTValues.VNF: LV grey, MV aqua, HV gold, EV purple, IV blue, LuV light purple). The tiers are the rows of
+  Tier colours: GTM's (GTValues.VNF: LV grey, MV aqua, HV gold, EV purple, IV blue, LuV light purple, ZPM red). The tiers are the rows of
   kubejs/data/grindless/tables/wireless_energy.json; a row with a texture gets that cell texture instead of capacitor_cell_<tier>.
 
   Run from the repo root (PowerShell 5.1 blocks unsigned scripts by default; this bypass only affects that process):
@@ -107,7 +107,7 @@ P=3A3F49 O=262A31
 '@
 
 # GTM's tier colours (GTValues.VNF): the bright tone; Get-TierRamp derives the rest
-$TierColour = @{ lv = 'B8B8B8'; mv = '4FE6EE'; hv = 'F5A623'; ev = 'B04AD6'; iv = '5A6CF2'; luv = 'F26DE8' }
+$TierColour = @{ lv = 'B8B8B8'; mv = '4FE6EE'; hv = 'F5A623'; ev = 'B04AD6'; iv = '5A6CF2'; luv = 'F26DE8'; zpm = 'E5484D' }
 # the tiers and cells: the rows of kubejs/data/grindless/tables/wireless_energy.json (a row's texture, when it has one, is its cell's)
 $TablePath = Join-Path $PSScriptRoot '..\..\pack\kubejs\data\grindless\tables\wireless_energy.json'
 $TableRows = @((Get-Content -Raw -Encoding UTF8 -LiteralPath $TablePath | ConvertFrom-Json).tiers)
