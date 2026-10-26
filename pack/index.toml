@@ -3165,10 +3165,6 @@ file = "kubejs/client_scripts/grindless/wireless_energy_lang.js"
 hash = "a059274b54adc925413ade00b001a40e7cb8097f0537026cc61f1d88f11927ae"
 
 [[files]]
-file = "kubejs/client_scripts/grindless/zpm_actinides_lang.js"
-hash = "139adcee331d63681e9c1e427e3160ce9a9b24b9fb7fabcc49a426c700846a27"
-
-[[files]]
 file = "kubejs/client_scripts/grindless/zpm_europium_lang.js"
 hash = "4f9a137eaa79a4ff50e663fd8723ae2f930165657168cc62e251bb094eb3b503"
 
@@ -3322,7 +3318,7 @@ hash = "1f4b256531a0b42a6ecf399e9b692d9e4730bd4102e53aab3e1fa2c999b69e9d"
 
 [[files]]
 file = "kubejs/data/grindless/tables/hidden_until.json"
-hash = "3059505e98213ba1979b3a71a816ba82131218a9e45774832f98763244341825"
+hash = "4d59a48b64517e72b1a1d440da176dc1acba82ea4011f6d82ec12e4e6a77cf6b"
 
 [[files]]
 file = "kubejs/data/grindless/tables/hot_cell.json"
@@ -3953,10 +3949,6 @@ file = "kubejs/server_scripts/grindless/steam/vein_drilling.js"
 hash = "5547c185e38d18fe64b37420e97d20bc8337650ad15477c37fceb5ece1edf9c4"
 
 [[files]]
-file = "kubejs/server_scripts/grindless/zpm/actinides.js"
-hash = "813ebace99947df3438c9d7a922da1012ee949beec5c9d3caeb263738496fb70"
-
-[[files]]
 file = "kubejs/server_scripts/grindless/zpm/europium.js"
 hash = "bfc444310892c3e9f6bd8240ca44839f77c5288323497128c2f53dc4525cc410"
 
@@ -4303,10 +4295,6 @@ hash = "ecd29a0fd2dbfaec5910bbb24bdfe38de2d4142ea3351a4c517a98de30f87bbd"
 [[files]]
 file = "kubejs/startup_scripts/grindless/steam/small_family.js"
 hash = "98905267da50013b5484caca43e58b62f517cb179d580163e0dc4a2b5502bf20"
-
-[[files]]
-file = "kubejs/startup_scripts/grindless/zpm/actinides.js"
-hash = "c951b912989ad85a9e66c17829e45b0e900b5c6c7354955c59dd823fb325a14f"
 
 [[files]]
 file = "kubejs/startup_scripts/grindless/zpm/europium.js"
