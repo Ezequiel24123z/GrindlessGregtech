@@ -31,6 +31,9 @@ ClientEvents.lang('en_us', event => {
     add('emi.grindless.info.night_sky_radiator.0', 'A structure block: the radiator wings of the Cryogenic Plant, and part of the Venus Heat Engine, the Tritium Removal Facility, the Mercury Vein Drill and the Mercury Solar Field. Facing an open night sky, it sheds heat as infrared light.')
 
     add('emi.grindless.info.solar_wing_panel.0', 'A structure block: the wings of the EV Tripod Drill and the panels of the Lunar Solar Array (one recipe run per panel under open sky). Three more go into the array\'s controller.')
+    add('emi.grindless.info.orbital_solar_panel.0', 'A structure block: the Orbital Solar Station has two wings of 32 panels. In Earth orbit, each panel whose top sees open sky adds 630 EU/t to the next run: 40,320 EU/t with all 64 exposed. Orbital midnight does not stop it.')
+    add('emi.grindless.info.whipple_shield_casing.0', 'A structure block made as metal foam in the Microgravity Smelter. The Wake Shield Facility needs 69 blocks for its octagonal disc. Keep more for the harpoon drill and the orbital tether: the foam and aramid spread micrometeoroid impacts.')
+    add('emi.grindless.info.sapphire_test_mass.0', 'An optical structure block grown in the Zero-G Crystal Grower. Keep four for the Gravitational-Wave Detector on Ganymede: its two vertex mirrors and the mirror at each arm end. The sapphire is a test mass, not a reagent.')
 
     add('emi.grindless.info.hermean_blocks.0', 'Made only on Mercury, in the Mercury Solar Works. The Mercury Vein Drill, the Mercury Solar Field and the Interferometer stand on the heat-shield bricks; the thin-film panels are the Mercury Solar Field\'s panels, and its controller takes some too.')
 
@@ -62,6 +65,9 @@ ClientEvents.lang('es_es', event => {
     add('emi.grindless.info.night_sky_radiator.0', 'Un bloque de estructura: las alas radiadoras de la planta criogénica, y parte del motor térmico de Venus, la planta de extracción de tritio, la perforadora de vetas de Mercurio y el campo solar de Mercurio. Frente a un cielo nocturno abierto, suelta el calor como luz infrarroja.')
 
     add('emi.grindless.info.solar_wing_panel.0', 'Un bloque de estructura: las alas de la perforadora trípode EV y los paneles de la matriz solar lunar (una ejecución de receta por panel a cielo abierto). Tres más van en el controlador de la matriz.')
+    add('emi.grindless.info.orbital_solar_panel.0', 'Un bloque de estructura: la estación solar orbital tiene dos alas de 32 paneles. En la órbita terrestre, cada panel con el cielo abierto encima añade 630 EU/t al siguiente ciclo: 40.320 EU/t con los 64 expuestos. La medianoche orbital no la detiene.')
+    add('emi.grindless.info.whipple_shield_casing.0', 'Un bloque de estructura hecho como espuma metálica en el fundidor de microgravedad. La instalación de escudo de estela necesita 69 bloques para su disco octagonal. Guarda más para la perforadora de arpones y el cable orbital: la espuma y la aramida dispersan los impactos de micrometeoritos.')
+    add('emi.grindless.info.sapphire_test_mass.0', 'Un bloque óptico de estructura cultivado en gravedad cero. Guarda cuatro para el detector de ondas gravitacionales de Ganímedes: dos espejos en el vértice y uno al final de cada brazo. El zafiro es una masa de prueba, no un reactivo.')
 
     add('emi.grindless.info.hermean_blocks.0', 'Solo se hacen en Mercurio, en la planta solar de Mercurio. La perforadora de vetas de Mercurio, el campo solar de Mercurio y el interferómetro se apoyan en los ladrillos de escudo térmico; los paneles de película fina son los paneles del campo solar de Mercurio, y su controlador también lleva algunos.')
 

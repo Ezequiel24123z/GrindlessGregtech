@@ -108,6 +108,8 @@ test('solar output derives from authoritative sunlight; no nighttime or fuel dou
   assert.deepEqual(Array.from(solar.calls.duration), [400]);
   assert.equal(solar.calls.daytime, undefined);
   assert.deepEqual(Array.from(solar.calls.dimension), [table.earth]);
+  const upgraded = recipes.find(r => r.id === 'grindless:luv/orbital_solar_panel_triple_junction');
+  assert.ok(upgraded.calls.itemInputs.includes('4x gtceu:fine_gold_wire'));
   assert.equal(recipes.length, 4);
 });
 test('solar generator uses proven helper, no fuel multiplier and current run-start pricing', () => {

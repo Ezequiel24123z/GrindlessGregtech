@@ -9,9 +9,9 @@
     var crystals = [
       [1, 'gtceu:exquisite_olivine_gem', 'gtceu:europium', 16, 320],
       [2, 'gtceu:exquisite_emerald_gem', 'gtceu:europium', 16, 320],
-      [3, 'gtceu:raw_crystal_chip_part', 'gtceu:europium', 16, 480],
-      [4, 'gtceu:raw_crystal_chip_part', 'gtceu:bacterial_sludge', 250, 480],
-      [5, 'gtceu:raw_crystal_chip_part', 'gtceu:mutagen', 250, 480]
+      [3, 'gtceu:raw_crystal_chip_parts', 'gtceu:europium', 16, 480],
+      [4, 'gtceu:raw_crystal_chip_parts', 'gtceu:bacterial_sludge', 250, 480],
+      [5, 'gtceu:raw_crystal_chip_parts', 'gtceu:mutagen', 250, 480]
     ]
     crystals.forEach(function (r) {
       orbital('microgravity_crystal_growth', 'raw_crystal_chip_' + r[0]).circuit(r[0])
@@ -39,7 +39,7 @@
       .cleanroom(CleanroomType.CLEANROOM).EUt(30720).duration(600)
     orbital('organoid_assembly', 'neuro_processing_unit').circuit(2)
       .itemInputs('gtceu:wetware_printed_circuit_board', 'grindless:neural_organoid',
-        '8x gtceu:small_polybenzimidazole_fluid_pipe', '8x gtceu:electrum_plate',
+        '8x gtceu:polybenzimidazole_small_fluid_pipe', '8x gtceu:electrum_plate',
         '16x gtceu:silicone_rubber_foil', '8x gtceu:hsse_bolt')
       .inputFluids(Fluid.of('gtceu:sterilized_growth_medium', 250))
       .itemOutputs('gtceu:neuro_processing_unit')

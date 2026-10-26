@@ -79,6 +79,6 @@
         Text.translate('grindless.machine.orbital_solar_station.tooltip.1'),
         Text.translate('grindless.machine.orbital_solar_station.tooltip.2')
       ])
-      .workableCasingModel('grindless:block/station_truss_casing', 'grindless:block/multiblock/orbital_solar_station')
+      .workableCasingModel('grindless:block/luv/station_truss_casing', 'grindless:block/multiblock/orbital_solar_station')
   })
 })()
