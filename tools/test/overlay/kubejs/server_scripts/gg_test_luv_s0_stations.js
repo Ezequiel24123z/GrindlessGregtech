@@ -40,6 +40,8 @@
 ;(function () {
   var S = null
   var J = null
+  var ownedMenu = null
+  var menuSerial = 0
   var PREFIX = 'GGTEST|luv_s0_stations|'
   var EXPORT = 'kubejs/exported/gg_test_luv_s0_stations.json'
   var C = { x: 13616, y: 100, z: 4 }
@@ -55,6 +57,8 @@
       Package: Java.loadClass('argent_matter.gcyr.common.item.StationContainerBehaviour'),
       Keycard: Java.loadClass('argent_matter.gcyr.common.item.KeyCardBehaviour'),
       Chip: Java.loadClass('argent_matter.gcyr.common.item.PlanetIdChipBehaviour'),
+      ModularMenu: Java.loadClass('com.lowdragmc.lowdraglib.gui.modular.ModularUIContainer'),
+      PlanetMenu: Java.loadClass('argent_matter.gcyr.common.gui.PlanetSelectionMenu'),
       Meta: Java.loadClass('com.gregtechceu.gtceu.api.machine.MetaMachine'),
       Mover: Java.loadClass('net.minecraft.world.entity.MoverType'),
       Vec3: Java.loadClass('net.minecraft.world.phys.Vec3'),
@@ -81,6 +85,81 @@
     var it = coll.iterator()
     while (it.hasNext()) out.push(it.next())
     return out
+  }
+  function sameNative(a, b) {
+    return a !== null && a !== undefined && b !== null && b !== undefined && a.equals(b)
+  }
+  function menuClass(menu) {
+    if (menu instanceof java().ModularMenu) return 'com.lowdragmc.lowdraglib.gui.modular.ModularUIContainer'
+    if (menu instanceof java().PlanetMenu) return 'argent_matter.gcyr.common.gui.PlanetSelectionMenu'
+    return String(menu) // Native Object.toString diagnostic; never java.lang.Class.
+  }
+  function closeOwnedMenu(ctx) {
+    if (ownedMenu === null) return
+    var owned = ownedMenu
+    ownedMenu = null // Never close twice or retain native handles into reopening.
+    if (ctx.sharedMap) ctx.sharedMap.put('s0sMenuClose', JSON.stringify(owned.marker))
+    if (ctx.player && sameNative(ctx.player, owned.player) &&
+        sameNative(ctx.player.containerMenu, owned.menu) &&
+        String(ctx.player.containerMenu.containerId) === owned.id) {
+      ctx.player.closeMenu() // Native close packet, not a synthetic screen change.
+      note('owned_menu_closed', owned.kind + ', menu=' + owned.id)
+    } else note('owned_menu_preserved', owned.kind + ' menu changed/already closed; no foreign menu touched')
+  }
+  function openOwnedMenu(ctx, kind, holder, action) {
+    closeOwnedMenu(ctx)
+    need(sameNative(ctx.player.containerMenu, ctx.player.inventoryMenu),
+      'refusing to replace a foreign/open menu before ' + kind)
+    var previousMenuId = String(ctx.player.containerMenu.containerId)
+    try {
+      action()
+    } finally {
+      // Capture even if the opener throws AFTER installing its native menu.
+      // An unexpected class/holder is never claimed or closed by the fixture.
+      var menu = ctx.player.containerMenu
+      if (String(menu.containerId) !== previousMenuId) {
+        var name = menuClass(menu)
+        var recognized = kind === 'program' ?
+          name === 'argent_matter.gcyr.common.gui.PlanetSelectionMenu' &&
+            sameNative(menu.getPlayer(), ctx.player) :
+          name === 'com.lowdragmc.lowdraglib.gui.modular.ModularUIContainer' &&
+            sameNative(menu.getModularUI().holder, holder) &&
+            sameNative(menu.getModularUI().entityPlayer, ctx.player)
+        if (recognized) {
+          var marker = { token: (S === null ? 'cargo' : S.run) + ':' + (++menuSerial),
+            kind: kind, id: String(menu.containerId), menuClass: name, since: Date.now() }
+          ownedMenu = { menu: menu, player: ctx.player, id: marker.id, kind: kind, marker: marker }
+          if (ctx.sharedMap) {
+            marker.dimension = dim(ctx.player.getLevel())
+            if (kind === 'pack') marker.at = xyz(holder.getPos())
+            if (kind === 'cargo') marker.rocket = String(holder.getStringUuid())
+            ctx.sharedMap.put('s0sMenuOpen', JSON.stringify(marker))
+          }
+        }
+      }
+    }
+    need(ownedMenu !== null, 'native ' + kind + ' UI did not open a new recognized owned menu')
+    return ownedMenu.menu
+  }
+  function program(ctx, planet, station) {
+    openOwnedMenu(ctx, 'program', null, function () { ctx.program(planet, station) })
+  }
+  function menuDiagnostic(menu) {
+    try {
+      var slots = []
+      for (var i = 0; i < menu.slots.size(); i++) {
+        var slot = menu.slots.get(i)
+        var row = { listIndex: i, index: Number(slot.index), x: Number(slot.x), y: Number(slot.y) }
+        try {
+          var item = slot.getItem()
+          row.item = item.isEmpty() ? 'minecraft:air' : String(item.getId())
+          row.count = Number(item.getCount())
+        } catch (itemError) { row.itemError = String(itemError) }
+        slots.push(row)
+      }
+      note('cargo_menu_diagnostic', JSON.stringify({ menuClass: menuClass(menu), nativeMenu: String(menu),
+        id: String(menu.containerId), slots: slots }))
+    } catch (diagnosticError) { note('cargo_menu_diagnostic', 'inspection failed: ' + diagnosticError) }
   }
   function emit(name, status, detail) {
     console.info(PREFIX + name + '|' + status + '|' +
@@ -121,6 +200,12 @@
     if (S.originalInvulnerable === undefined) S.originalInvulnerable = !!abilities.invulnerable
     abilities.invulnerable = true
     need(abilities.invulnerable === true, 'test-only mechanical protection was not applied')
+  }
+  function restoreProtection(ctx) {
+    if (S.originalInvulnerable !== undefined && ctx.player) {
+      ctx.player.getAbilities().invulnerable = S.originalInvulnerable
+      note('cold_protection_restored', 'test-only invulnerability restored to its original value')
+    }
   }
   function levelFor(ctx, id) {
     var p = java().PlanetData.getPlanet(new ResourceLocation(id))
@@ -299,7 +384,9 @@
     var j = java()
     var hit = new j.Hit(new j.Vec3(C.x + 0.5, C.y + 0.5, C.z),
       j.Direction.NORTH, pos(C.x, C.y, C.z), false)
-    ctx.player.gameMode.useItemOn(ctx.player, S.surface, ctx.player.getMainHandItem(), j.Hand.MAIN_HAND, hit)
+    openOwnedMenu(ctx, 'pack', S.packager, function () {
+      ctx.player.gameMode.useItemOn(ctx.player, S.surface, ctx.player.getMainHandItem(), j.Hand.MAIN_HAND, hit)
+    })
     ctx.sharedMap.put('s0sPackMenu', String(ctx.player.containerMenu.containerId))
     ctx.sharedMap.put('s0sPackRequest', S.run + ':' + S.index)
   }
@@ -382,7 +469,7 @@
     mapsExpected()
     note(e.label + '_candidate_not_registered', 'packager/menu return candidate id; arrival must register it')
     ctx.sharedMap.put('s0sPackRequest', '')
-    ctx.player.closeMenu()
+    closeOwnedMenu(ctx)
     return true
   }
   // Public native UI, not guessed NBT or forbidden reflection. Call AFTER any
@@ -393,47 +480,63 @@
     // GCYR's public HasCustomInventoryScreen entry point delegates to its
     // native EntityUIFactory. The inherited factory method is not exposed on
     // INSTANCE in pinned Rhino; do not guess a static variant or synthesize UI.
-    var previousMenuId = String(ctx.player.containerMenu.containerId)
-    rocket.openCustomInventoryScreen(ctx.player)
-    var menu = ctx.player.containerMenu
-    need(String(menu.containerId) !== previousMenuId, 'native rocket inventory UI did not open a new menu')
-    // RocketEntity.createUI declares config(40,20), satellite(60,20), then
-    // inventory, but LDLib 1.0.40.b adds native slots from a HashMap.keySet().
-    // Menu index 1 is not guaranteed to be cargo. Find its unique native position.
-    var slot = null
-    var config = null
-    for (var i = 0; i < menu.slots.size(); i++) {
-      var candidateSlot = menu.slots.get(i)
-      if (control !== undefined && Math.abs(Number(candidateSlot.x) - 40) <= 1 &&
-          Math.abs(Number(candidateSlot.y) - 20) <= 1) {
-        need(config === null, 'ambiguous native rocket config slot')
-        config = candidateSlot
+    var menu = null
+    try {
+      menu = openOwnedMenu(ctx, 'cargo', rocket, function () { rocket.openCustomInventoryScreen(ctx.player) })
+      // LDLib creates native Slots at (0,0); only a later onPositionUpdate writes
+      // widget.position + 1 - guiLeft/guiTop. Server slots need not be laid out.
+      // Resolve exact root widget coordinates through the PUBLIC Slot->SlotWidget
+      // map, then verify native menu membership. Neither index nor native x/y is
+      // an identity; retain unique config/cargo lookup in every slot order.
+      var slot = null
+      var config = null
+      var it = menu.getModularUI().getSlotMap().entrySet().iterator()
+      while (it.hasNext()) {
+        var entry = it.next()
+        var widget = entry.getValue()
+        if (String(widget.isPlayerContainer) === 'true') continue
+        var at = widget.getSelfPosition()
+        if (Number(at.y) !== 20 || (Number(at.x) !== 40 && Number(at.x) !== 60)) continue
+        var candidateSlot = entry.getKey()
+        need(sameNative(widget.getHandler(), candidateSlot), 'native rocket SlotWidget handler/map mismatch')
+        var members = 0
+        for (var i = 0; i < menu.slots.size(); i++) {
+          if (sameNative(menu.slots.get(i), candidateSlot)) members++
+        }
+        need(members === 1, 'native rocket slot not found or ambiguous in actual menu')
+        if (Number(at.x) === 40) {
+          need(config === null, 'ambiguous native rocket config slot')
+          config = candidateSlot
+        } else {
+          need(slot === null, 'ambiguous native rocket satellite slot')
+          slot = candidateSlot
+        }
       }
-      if (Math.abs(Number(candidateSlot.x) - 60) > 1 ||
-          Math.abs(Number(candidateSlot.y) - 20) > 1) continue
-      need(slot === null, 'ambiguous native rocket satellite slot')
-      slot = candidateSlot
+      need(slot !== null, 'native rocket satellite slot not found for SlotWidget(60,20)')
+      if (control !== undefined) {
+        need(!control.isEmpty() && String(control.getId()) === 'gcyr:id_chip',
+          'station route requires an actual programmed ID chip')
+        need(config !== null, 'native rocket config slot not found for SlotWidget(40,20)')
+        var loadedControl = config.getItem()
+        need(!loadedControl.isEmpty() && String(loadedControl.getId()) === String(control.getId()) &&
+          String(loadedControl.getNbt()) === String(control.getNbt()), 'native rocket control readback differs')
+        note('control_loaded', 'actual native config slot ID chip=' + loadedControl.getNbt())
+      }
+      need(slot.getItem().isEmpty(), 'refusing to replace preexisting rocket cargo')
+      slot.set(empty ? Item.empty : stack)
+      var got = slot.getItem()
+      need(empty ? got.isEmpty() : !got.isEmpty() &&
+        String(got.getId()) === 'gcyr:space_station_package' &&
+        String(got.getNbt()) === String(stack.getNbt()), 'native rocket cargo readback differs')
+      menu.broadcastChanges()
+      note('cargo_loaded', empty ? 'empty native satellite slot' : 'actual package in native satelliteSlot[0]')
+      return true
+    } catch (cargoError) {
+      menuDiagnostic(menu === null ? ctx.player.containerMenu : menu)
+      throw cargoError
+    } finally {
+      closeOwnedMenu(ctx)
     }
-    need(slot !== null, 'native rocket satellite slot not found at (60,20)')
-    if (control !== undefined) {
-      need(!control.isEmpty() && String(control.getId()) === 'gcyr:id_chip',
-        'station route requires an actual programmed ID chip')
-      need(config !== null, 'native rocket config slot not found at (40,20)')
-      var loadedControl = config.getItem()
-      need(!loadedControl.isEmpty() && String(loadedControl.getId()) === String(control.getId()) &&
-        String(loadedControl.getNbt()) === String(control.getNbt()), 'native rocket control readback differs')
-      note('control_loaded', 'actual native config slot ID chip=' + loadedControl.getNbt())
-    }
-    need(slot.getItem().isEmpty(), 'refusing to replace preexisting rocket cargo')
-    slot.set(empty ? Item.empty : stack)
-    var got = slot.getItem()
-    need(empty ? got.isEmpty() : !got.isEmpty() &&
-      String(got.getId()) === 'gcyr:space_station_package' &&
-      String(got.getNbt()) === String(stack.getNbt()), 'native rocket cargo readback differs')
-    menu.broadcastChanges()
-    ctx.player.closeMenu()
-    note('cargo_loaded', empty ? 'empty native satellite slot' : 'actual package in native satelliteSlot[0]')
-    return true
   }
   function fly(ctx, e, control, cargo, next) {
     mapsExpected()
@@ -701,6 +804,10 @@
       Number(item.getCount()) === 7, String(be.saveWithoutMetadata()))
   }
   function prepareReopen(ctx) {
+    closeOwnedMenu(ctx)
+    // Back on Earth: save the ORIGINAL ability before disconnect. A worldless
+    // reopen failure has no server/player handle with which to restore it later.
+    restoreProtection(ctx)
     S.reopenToken = S.run + ':reopen'
     S.serverIdentity = String(ctx.server.hashCode())
     S.saveRoot = saveRoot(ctx)
@@ -753,6 +860,9 @@
   }
   function finish(ctx, aborted, detail) {
     if (S.done) return
+    try { closeOwnedMenu(ctx) } catch (menuError) {
+      check('owned_menu_cleanup', false, String(menuError))
+    }
     if (ctx.sharedMap) {
       ctx.sharedMap.put('s0sPackRequest', '')
       ctx.sharedMap.put('s0sBorderRequest', '')
@@ -760,10 +870,7 @@
     }
     if (!S.reopenChecked) check('same_save_reopen', false,
       'UNPROVEN: real same-client Save/Quit + Select World handback not completed; no /reload or codec substitute')
-    if (S.originalInvulnerable !== undefined && ctx.player) {
-      ctx.player.getAbilities().invulnerable = S.originalInvulnerable
-      note('cold_protection_restored', 'test-only invulnerability restored to its original value')
-    }
+    restoreProtection(ctx)
     S.done = true
     S.report.aborted = !!aborted
     S.report.detail = detail
@@ -825,11 +932,12 @@
           S.index = 0
           packagerStructure(ctx)
           phase(ctx, 'program')
-          ctx.program('gcyr:earth', true)
+          program(ctx, 'gcyr:earth', true)
         }
       } else if (S.phase === 'program') {
         var chip = ctx.player.getMainHandItem()
         if (programmedChip(chip, S.index === 0 ? 'minecraft:overworld' : 'grindless:s0_moon', e.id)) {
+          closeOwnedMenu(ctx)
           e.chipNbt = String(chip.getNbt())
           check(e.label + '_real_menu_chip', true, e.chipNbt)
           packagerStructure(ctx)
@@ -853,16 +961,17 @@
           S.index++
           if (S.index === 1) {
             phase(ctx, 'program')
-            ctx.program('grindless:s0_moon', true)
+            program(ctx, 'grindless:s0_moon', true)
           } else {
             S.index = 0
             phase(ctx, 'home_program')
-            ctx.program('gcyr:earth', false)
+            program(ctx, 'gcyr:earth', false)
           }
         } else need(!timedOut(ctx, 120, 8000), 'real Pack button produced no outputs')
       } else if (S.phase === 'home_program') {
         var home = ctx.player.getMainHandItem()
         if (programmedChip(home, 'minecraft:overworld', null)) {
+          closeOwnedMenu(ctx)
           S.homeChip = home
           check('earth_home_real_menu_chip', true, 'fresh ordinary ID chip, no station/position override: ' + home.getNbt())
           ctx.player.setMainHandItem(Item.empty)

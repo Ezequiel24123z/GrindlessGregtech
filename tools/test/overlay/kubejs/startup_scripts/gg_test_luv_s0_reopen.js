@@ -1,7 +1,9 @@
 // TEST ONLY. One real Save/Quit -> same-save open in the existing client JVM.
 // Dormant unless the flight owner's ConcurrentHashMap has hold=true and a
-// nonempty s0sReopenPending. Never starts a test, clears pending, releases hold,
-// changes sound options, or calls the server's ggLuvS0Stations.resume.
+// nonempty s0sReopenPending. Never starts a test, changes sound options, or calls
+// the server's ggLuvS0Stations.resume. On terminal worldless/partial-load failure
+// ONLY, persist the plain failed snapshot, release hold, and request normal
+// Minecraft.stop() on this captured private client; no process/Runtime access.
 //
 // Owner: preserve this map across server-script reloads; publish the driver's
 // plain JSON s0sReopenSnapshot; suppress normal loggedIn auto-start; rebind fresh
@@ -53,10 +55,52 @@
   function fail(error) {
     if (state.done) return
     state.done = true // Terminal, even if the token remains published.
+    state.failed = true
     var detail = state.token + ' (' + state.phase + '): ' +
       String(error).replace(/[\r\n|]+/g, '/')
     bridge.put('s0sReopenError', detail)
     console.error('GGTEST|luv_s0_reopen|lifecycle|FAIL|' + detail)
+    state.failureDetail = detail
+  }
+  function settleFailure(mc) {
+    if (state === null || !state.failed || state.quitIssued || busy ||
+        state.clientIdentity === undefined || state.saveRoot === undefined ||
+        String(mc.hashCode()) !== state.clientIdentity) return
+    var server = mc.getSingleplayerServer()
+    if (!absent(server) && String(root(server)) !== state.saveRoot) return
+    if (!absent(mc.player) && String(mc.player.getStringUuid()) !== state.playerUuid) return
+    // Close only our exact Pause/Dirt/Title instance, never a foreign screen.
+    // With a loaded player/level the server observes the error, restores/finalizes
+    // and releases hold; mc-runtime-test then has its ordinary screen-null exit.
+    if (!absent(mc.player) && !absent(mc.level)) {
+      if (state.ownedScreen && mc.currentScreen === state.ownedScreen) mc.setCurrentScreen(null)
+      return
+    }
+    // tick-HEAD cannot auto-exit without BOTH player and level. The same native
+    // stop request used by Quit Game ends the normal loop; do not call destroy,
+    // interrupt save IO, edit runtime latches or reach System/Runtime.
+    // The server already restored the original ability BEFORE Save/Quit.
+    state.quitIssued = true // Once, even if persistence or native stop reports an error.
+    try {
+      if (state.snapshot) {
+        var report = state.snapshot.report
+        report.phase = 'aborted'
+        report.aborted = true
+        report.detail = state.failureDetail
+        report.sameSaveReopen = 'failed'
+        report.failures = Number(state.snapshot.failures) + 1
+        report.checks.push({ name: 'same_save_reopen', ok: false, detail: state.failureDetail })
+        JsonIO.write('kubejs/exported/gg_test_luv_s0_stations.json', report)
+      }
+    } catch (saveError) {
+      console.error('GGTEST|luv_s0_reopen|failure_manifest|FAIL|' + saveError)
+    }
+    bridge.put('s0sPackRequest', '')
+    bridge.put('s0sBorderRequest', '')
+    bridge.put('s0sReopenPending', '')
+    bridge.put('hold', false)
+    note('terminal reopen failure without a loaded world; requesting normal owned-client stop')
+    mc.stop()
   }
   function java() {
     if (J !== null) return J
@@ -116,6 +160,7 @@
     // server or player handle in the startup state or shared map.
     state.phase = 'closing'
     var pause = new (java().Pause)(true)
+    state.ownedScreen = pause
     mc.setCurrentScreen(pause)
     need(mc.currentScreen === pause, 'native PauseScreen did not open')
     var quit = button(pause, 'menu.returnToMenu')
@@ -127,8 +172,12 @@
       // its private method/field. No fallback after a failed onPress.
       note('no viable quit widget; using the normal integrated clearLevel flow')
       mc.level.disconnect()
-      mc.clearLevel(new (java().Dirt)(java().Component.translatable('menu.savingLevel')))
-      mc.setCurrentScreen(new (java().Title)())
+      var saving = new (java().Dirt)(java().Component.translatable('menu.savingLevel'))
+      state.ownedScreen = saving
+      mc.clearLevel(saving)
+      var title = new (java().Title)()
+      state.ownedScreen = title
+      mc.setCurrentScreen(title)
     }
   }
   function advance(mc) {
@@ -150,6 +199,7 @@
       var raw = value('s0sReopenSnapshot')
       if (raw === '') return // Pending may be published just before the JSON put.
       var snapshot = JSON.parse(raw)
+      state.snapshot = snapshot
       need(snapshot !== null && String(snapshot.reopenToken) === state.token,
         'snapshot token is missing or mismatched')
       need(isFinite(Number(snapshot.atMs)), 'snapshot has no original reopen deadline')
@@ -175,7 +225,9 @@
       'captured save folder is no longer available in the same level source')
       state.phase = 'opening' // Latch BEFORE native calls can pump client ticks.
       note('opening the captured folder through the native world-entry load API')
-      mc.setCurrentScreen(new (java().Dirt)(java().Component.translatable('selectWorld.data_read')))
+      var loading = new (java().Dirt)(java().Component.translatable('selectWorld.data_read'))
+      state.ownedScreen = loading
+      mc.setCurrentScreen(loading)
       mc.createWorldOpenFlows().loadLevel(new (java().Title)(), state.folder)
       return
     }
@@ -209,7 +261,11 @@
     }
   }
   ForgeEvents.onEvent('net.minecraftforge.event.TickEvent$ClientTickEvent', function (event) {
-    if (String(event.phase) !== 'END' || (state !== null && state.done)) return
+    if (String(event.phase) !== 'END') return
+    if (state !== null && state.done) {
+      settleFailure(Client)
+      return
+    }
     if (state === null) {
       var map = global.ggGcyrFlight
       if (absent(map) || String(map.get('hold')) !== 'true') return
@@ -231,5 +287,6 @@
     } catch (error) {
       fail(error)
     }
+    settleFailure(Client)
   })
 })()
