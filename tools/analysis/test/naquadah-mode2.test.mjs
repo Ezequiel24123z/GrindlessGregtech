@@ -155,7 +155,8 @@ test('S0-11: every recipe of the type has its own circuit and fits the published
   const { G } = run();
   const NP = G.naquadahPlant;
   assert.deepEqual(NP.recipes.map((r) => r.circuit).sort(), [1, 2, 3]);
-  assert.deepEqual(NP.modes, { 1: 'naquadah', 2: 'enriched_naquadah', 3: 'spent_naquadah' });
+  // mode 4 (ZPM-A2) is a direct table recipe, not a composed one, so it is not in NP.recipes
+  assert.deepEqual(NP.modes, { 1: 'naquadah', 2: 'enriched_naquadah', 3: 'spent_naquadah', 4: 'enriched_solution' });
   for (const r of NP.recipes) {
     const itemCharges = r.charges.filter((c) => c.item).length;
     assert.ok(r.itemsIn.length + itemCharges + 1 <= NP.maxIO.itemsIn, r.name);

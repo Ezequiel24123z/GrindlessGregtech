@@ -47,7 +47,8 @@
       try { stack = inner.getFirst() } catch (e) { stack = null }
       if (stack !== null && stack.isEmpty()) stack = null
       var config = -1
-      if (stack !== null && stack.hasTag() && stack.getTag().contains('Configuration')) config = Number(stack.getTag().getInt('Configuration'))
+      var nbt = stack === null ? null : stack.getNbt()
+      if (nbt !== null && nbt !== undefined && nbt.contains('Configuration')) config = Number(nbt.getInt('Configuration'))
       return {
         id: stack === null ? '?' : String(Registries.ITEMS.getKey(stack.getItem())),
         count: ing.getAmount ? Number(ing.getAmount()) : 1,
