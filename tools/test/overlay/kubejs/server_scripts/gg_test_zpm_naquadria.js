@@ -42,8 +42,10 @@
     var Registries = Java.loadClass('net.minecraftforge.registries.ForgeRegistries')
     return array(list).map(function (c) {
       var ing = c.content
-      var stacks = ing.getItems()
-      var stack = stacks.length > 0 ? stacks[0] : null
+      var inner = ing.getInner ? ing.getInner() : ing
+      var stack = null
+      try { stack = inner.getFirst() } catch (e) { stack = null }
+      if (stack !== null && stack.isEmpty()) stack = null
       var config = -1
       if (stack !== null && stack.hasTag() && stack.getTag().contains('Configuration')) config = Number(stack.getTag().getInt('Configuration'))
       return {

@@ -66,7 +66,7 @@ test('the casing has an assembler route and the A2 hiding rule is gone', () => {
 
 test('no neutronium or UV-only input anywhere in A2', () => {
   const text = JSON.stringify(T) + read('startup_scripts', 'grindless', 'zpm', 'naquadria.js') + read('server_scripts', 'grindless', 'zpm', 'naquadria.js');
-  const used = text.split('\n').filter((l) => !/^\s*(\/\/|var REACTOR)/.test(l)).join('\n');
+  const used = text.split('\n').filter((l) => !/^\s*(\/\/|var REACTOR)|frames\/neutronium/.test(l)).join('\n');
   assert.ok(!/neutronium|:uv_|_uv\b/.test(used), 'neutronium or UV input');
 });
 

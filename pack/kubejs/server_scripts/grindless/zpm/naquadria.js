@@ -244,7 +244,8 @@
         var id = ing.item
         if (id === REACTOR.from) { id = REACTOR.to; swapped += count }
         items.push(count + 'x ' + id)
-      } else if (ing.tag) items.push(count + 'x #' + ing.tag)
+      } else if (ing.tag === 'forge:frames/neutronium') { swapped += count; items.push(count + 'x ' + REACTOR.to) }
+      else if (ing.tag) items.push(count + 'x #' + ing.tag)
       else bad = 'item input ' + JSON.stringify(e)
     })
     var fluids = []
@@ -263,7 +264,7 @@
       else bad = 'item output ' + JSON.stringify(e)
     })
     if (bad !== null) return bad
-    if (swapped !== 8) return 'expected 8 ' + REACTOR.from + ', found ' + swapped
+    if (swapped !== 8) return 'expected 8 ' + REACTOR.from + ', found ' + swapped + ' in ' + JSON.stringify(((j.inputs && j.inputs.item) || []).map(function (e) { return e.content })).slice(0, 700)
     if (outs.length !== 1 || (j.outputs && j.outputs.fluid && j.outputs.fluid.length > 0)) return 'not one item output'
     if (!Item.exists(REACTOR.to)) return REACTOR.to + ' does not exist'
     return { items: items, fluids: fluids, output: outs[0], eut: eut, duration: j.duration, research: research[0] }
