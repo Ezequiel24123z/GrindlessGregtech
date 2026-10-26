@@ -6,7 +6,7 @@
 // The pending clusters sit in the bands below the landed ones; their ids follow luv.md and are checked when their package lands.
 import { I, F, M, n, L, via, build, structure, network } from './pl-lib.mjs';
 
-export const LANDED = new Set(['A1', 'A2', 'A3', 'A4', 'A5', 'B2', 'B3', 'B4', 'B5', 'B6', 'B8', 'B9', 'B10']);
+export const LANDED = new Set(['A1', 'A2', 'A3', 'A4', 'A5', 'B1', 'B2', 'B3', 'B4', 'B5', 'B6', 'B8', 'B9', 'B10']);
 
 export default {
   file: 'pl_luv',

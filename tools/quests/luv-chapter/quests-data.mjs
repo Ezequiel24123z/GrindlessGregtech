@@ -13,9 +13,10 @@ const ck = () => ({ type: 'checkmark' });
 const xp = (n) => ({ type: 'xp', xp: n });
 const ri = (item, count) => ({ type: 'item', item, count });
 
+// S03 is spike S0-3: GCYR stations (tables/stations.json enabled); Earth orbit, its machines and what needs their products wait for it.
 // B7 is one of two: the flux-tube tether with a second station (B7T) or the sulfur-iodine plant on Io (B7S), decided by spike S0-3.
-export const PACKAGES = ['A1', 'A2', 'A3', 'A4', 'A5', 'B1', 'B2', 'B3', 'B4', 'B5', 'B6', 'B7T', 'B7S', 'B8', 'B9', 'B10'];
-export const LANDED = ['A1', 'A2', 'A3', 'A4', 'A5', 'B2', 'B3', 'B4', 'B5', 'B6', 'B8', 'B9', 'B10'];
+export const PACKAGES = ['A1', 'A2', 'A3', 'A4', 'A5', 'B1', 'S03', 'B2', 'B3', 'B4', 'B5', 'B6', 'B7T', 'B7S', 'B8', 'B9', 'B10'];
+export const LANDED = ['A1', 'A2', 'A3', 'A4', 'A5', 'B1', 'B2', 'B3', 'B4', 'B5', 'B6', 'B8', 'B9', 'B10'];
 // what gen.mjs --all draws: everything, with the tether
 export const ALL_STATE = PACKAGES.filter((p) => p !== 'B7S');
 
@@ -170,8 +171,8 @@ export const QUESTS = [
 
   // ------------------------------------------------------------------ Earth orbit
   {
-    key: 'PACK', title: 'Packed and Launched', icon: 'gcyr:space_station_packager',
-    deps: ['NETL'], x: 12, y: 0,
+    key: 'PACK', title: 'Packed and Launched', icon: 'gcyr:space_station_packager', pkg: ['S03'],
+    deps: ['NETL'], x: 10, y: -1.5,
     adjust: 'B1: the station flow (packager, package, ID chip, keycard) and the suit freeze protection',
     desc: [
       "GCYR's &6Space Station Packager&r folds a whole station into one package small enough for a rocket. Pack it at home, fly it to Earth orbit and open it there; the GregTech machines go in once you've arrived.",
@@ -181,8 +182,8 @@ export const QUESTS = [
     rewards: [xp(80)],
   },
   {
-    key: 'STAT', title: 'First Station', icon: 'grindless:station_truss_casing', shape: 'rsquare', size: 1.25,
-    deps: ['PACK'], x: 14, y: 0,
+    key: 'STAT', title: 'First Station', icon: 'grindless:station_truss_casing', pkg: ['S03'], shape: 'rsquare', size: 1.25,
+    deps: ['PACK'], x: 10, y: -3,
     adjust: 'B1: the station truss recipe and anything the first station needs on arrival',
     desc: [
       "Earth orbit: no air, no night, and the coldest shade you'll ever stand in. Chunk-load the station, or its machines stop the moment you fly home.",
@@ -191,8 +192,8 @@ export const QUESTS = [
     rewards: [xp(100)],
   },
   {
-    key: 'ENDLESS', title: 'Endless Day', icon: 'gtceu:orbital_solar_station', shape: 'gear', size: 1.25,
-    deps: ['STAT'], x: 16, y: -1.5,
+    key: 'ENDLESS', title: 'Endless Day', icon: 'gtceu:orbital_solar_station', pkg: ['S03'], shape: 'gear', size: 1.25,
+    deps: ['STAT'], x: 12, y: -3,
     desc: [
       "Up here the Sun never sets, and the &6Orbital Solar Station&r makes the most of it: two wings of panels on a truss, and every panel that sees open sky pays. Send the power home through a LuV wireless dynamo hatch.",
       "It burns nothing, so nothing doubles it.",
@@ -201,8 +202,8 @@ export const QUESTS = [
     rewards: [xp(100), ri('gcyr:photovoltaic_cell', 2)],
   },
   {
-    key: 'FIBRE', title: 'Fibre from Nothing', icon: 'gtceu:microgravity_smelter', shape: 'gear', size: 1.25,
-    deps: ['STAT'], x: 16, y: -3,
+    key: 'FIBRE', title: 'Fibre from Nothing', icon: 'gtceu:microgravity_smelter', pkg: ['S03'], shape: 'gear', size: 1.25,
+    deps: ['STAT'], x: 12, y: -4.5,
     desc: [
       "On the ground ZBLAN glass crystallizes while it's drawn; up here it stays clear. The &6Microgravity Smelter&r draws it into optical pipe with no silver at all, foams metal into Whipple shield casing and melts naquadah alloy floating in a field, no crucible.",
       "Mix the ZBLAN at home in the Large Mixing Vessel: a normal mixer can't hold that much fluorine.",
@@ -211,8 +212,8 @@ export const QUESTS = [
     rewards: [xp(100)],
   },
   {
-    key: 'WAKE', title: 'In the Wake', icon: 'gtceu:wake_shield_facility', shape: 'gear', size: 1.25,
-    deps: ['FIBRE'], x: 18, y: -3,
+    key: 'WAKE', title: 'In the Wake', icon: 'gtceu:wake_shield_facility', pkg: ['S03'], shape: 'gear', size: 1.25,
+    deps: ['FIBRE'], x: 14, y: -4.5,
     desc: [
       "Behind a disc flying through orbit, the vacuum is emptier than any chamber you could build. The &6Wake Shield Facility&r grows HPIC and UHPIC wafers there with half the source and half the time.",
       "Its disc is Whipple shield casing, so the smelter goes first. Give it germanium and it grows solar wafers too.",
@@ -221,8 +222,8 @@ export const QUESTS = [
     rewards: [xp(100), ri('gtceu:indium_gallium_phosphide_dust', 4)],
   },
   {
-    key: 'CRYSTAL', title: 'Perfect Crystal', icon: 'gtceu:zero_g_crystal_grower', shape: 'gear', size: 1.25,
-    deps: ['STAT'], x: 16, y: 1.5,
+    key: 'CRYSTAL', title: 'Perfect Crystal', icon: 'gtceu:zero_g_crystal_grower', pkg: ['S03'], shape: 'gear', size: 1.25,
+    deps: ['STAT'], x: 10, y: -4.5,
     desc: [
       "With nothing stirring the melt, a crystal grows without flaws. The &6Zero-G Crystal Grower&r makes raw crystal chips every time instead of now and then, and much faster, with the same dopant GregTech asks for.",
       "Its sapphire test masses are for later; EMI says what for.",
@@ -234,7 +235,7 @@ export const QUESTS = [
   // ------------------------------------------------------------------ level 4 and the belt
   {
     key: 'LVL4', title: 'Level Four', icon: 'grindless:cryogenic_fuel_tank', pkg: ['B1'],
-    deps: ['STAT'], x: 16, y: 0,
+    deps: ['NETL'], x: 12, y: 0,
     desc: [
       "Elite motors and cryogenic fuel tanks make a level 4 rocket, and that reaches past Mars. Pack a landing kit every time: wireless energy covers and hatches, a couple of RTG cells in case, and a waystone.",
     ],
@@ -243,7 +244,7 @@ export const QUESTS = [
   },
   {
     key: 'BELT', title: 'The Belt', icon: 'grindless:asteroid_quantum_seed', pkg: ['B1'],
-    deps: ['LVL4'], x: 18, y: -1.5,
+    deps: ['LVL4'], x: 14, y: -1.5,
     desc: [
       "A floor of rubble with boulders hanging over it, and metal that fell out of the sky. Raw meteoric iron dug on the spot goes into the &6Asteroid Quantum Seed&r, made there in a chemical reactor, and the AE2 bridge reaches the belt.",
     ],
@@ -252,7 +253,7 @@ export const QUESTS = [
   },
   {
     key: 'HARP', title: 'Harpoon', icon: 'gtceu:harpoon_anchor_drill', pkg: ['B1', 'B5'], shape: 'gear', size: 1.25,
-    deps: ['BELT'], x: 20, y: -1.5,
+    deps: ['BELT'], x: 16, y: -1.5,
     desc: [
       "The belt's veins answer to one drill: the &6Harpoon Anchor Drill&r, pinned to the rock by harpoons while its HSS-S bit works. Bits and harpoons both wear slowly. No drilling fluid, it's vacuum, same as Mercury.",
     ],
@@ -261,7 +262,7 @@ export const QUESTS = [
   },
   {
     key: 'MOND', title: 'Mond', icon: 'gtceu:asteroid_processor', pkg: ['B1', 'B5'], shape: 'gear', size: 1.25,
-    deps: ['HARP'], x: 22, y: -1.5,
+    deps: ['HARP'], x: 18, y: -1.5,
     desc: [
       "The &6Asteroid Processor&r runs the Mond process: carbon monoxide carries the iron and nickel away as gas and leaves the platinum metals behind as a concentrate. The CO stays in the machine. The concentrate exists nowhere else, so the processor won't void it.",
       "It also pulls tetrataenite apart by magnet, and the meteoric iron dust that leaves goes back through Mond.",
@@ -271,7 +272,7 @@ export const QUESTS = [
   },
   {
     key: 'STAR', title: 'Star Metal', icon: 'gtceu:platinum_group_sludge_dust', pkg: ['B1', 'B5'],
-    deps: ['MOND'], x: 24, y: -1.5,
+    deps: ['MOND'], x: 20, y: -1.5,
     desc: [
       "The platinum plant's fourth mode dissolves the asteroid concentrate into iridium, osmium and a sludge its old recipes already split into platinum, palladium, rhodium and ruthenium. All six in bulk, in roughly a meteorite's proportions, and Mercury gets a rest.",
     ],
@@ -280,7 +281,7 @@ export const QUESTS = [
   },
   {
     key: 'BOULDER', title: 'Sunlight on a Boulder', icon: 'gtceu:optical_miner', pkg: ['B1', 'B5'], shape: 'gear', size: 1.25,
-    deps: ['BELT'], x: 20, y: -3,
+    deps: ['BELT'], x: 16, y: -3,
     desc: [
       "The &6Optical Miner&r bags crumbly carbon-rich boulders and bakes them with mirrors until water, carbon dioxide and a nitrogen-and-phosphorus extract boil off. It only runs with the Sun on its receiver, and the Sun is faint out here, hence all the mirrors.",
       "Its second recipe turns the carbon dioxide into the processor's CO.",
@@ -289,8 +290,8 @@ export const QUESTS = [
     rewards: [xp(100), ri('grindless:capture_bag', 1)],
   },
   {
-    key: 'RING', title: 'Molecular Farm', icon: 'gtceu:hydroponic_ring', pkg: ['B1', 'B5', 'B8'], shape: 'gear', size: 1.25,
-    deps: ['MOND'], x: 24, y: -3,
+    key: 'RING', title: 'Molecular Farm', icon: 'gtceu:hydroponic_ring', pkg: ['B1', 'B5', 'B8', 'S03'], shape: 'gear', size: 1.25,
+    deps: ['MOND'], x: 20, y: -3,
     desc: [
       "The &6Rotating Hydroponic Ring&r spins for gravity, keeps the Sun on all the time and seals engineered crops away from the wild. The barley makes neurotrophic factor, the tobacco plant collagen, and neither seed gets eaten.",
       'Its hub turns on magnetic bearings: tetrataenite from the processor, wound at the magnet works.',
@@ -302,7 +303,7 @@ export const QUESTS = [
   // ------------------------------------------------------------------ Io and Io orbit (the spine)
   {
     key: 'IO', title: 'Behind the Vault', icon: 'grindless:radiation_vault_casing', pkg: ['B1', 'B6'],
-    deps: ['LVL4'], x: 18, y: 0,
+    deps: ['LVL4'], x: 14, y: 0,
     desc: [
       "Io sits in Jupiter's radiation, and electronics there die young. Every machine on Io, on Europa and in Io's orbit carries &6Radiation Vault Casing&r: titanium, then tantalum, like Juno's vault. You'll be fine in the suit. The machines won't.",
       'Brimstone dug on the spot makes the Ionian quantum seed.',
@@ -312,7 +313,7 @@ export const QUESTS = [
   },
   {
     key: 'FUM', title: 'Fumarole', icon: 'gtceu:fumarole_condenser', pkg: ['B1', 'B6'], shape: 'gear', size: 1.25,
-    deps: ['IO'], x: 20, y: 0,
+    deps: ['IO'], x: 16, y: 0,
     desc: [
       "The &6Fumarole Condenser&r sits over a field of vents and catches what the gas drops as it cools: sulfur dioxide, sulfur, and a sublimate with germanium and indium in it. It's the only germanium before ZPM, and it runs on the wireless hatch you brought.",
       'It also casts sulfur concrete, which needs no water. Jovian bases are built from it.',
@@ -322,7 +323,7 @@ export const QUESTS = [
   },
   {
     key: 'PATERA', title: 'Patera', icon: 'gtceu:volcanic_intake', pkg: ['B1', 'B6'], shape: 'gear', size: 1.25,
-    deps: ['FUM'], x: 22, y: 0,
+    deps: ['FUM'], x: 18, y: 0,
     desc: [
       "The &6Volcanic Intake&r stands on a patera's magma and runs sulfur dioxide through turbines, and the power goes home through the network. It burns nothing, but the exchanger bundles erode in hot sulfur and need replacing.",
       "Its sulfur dioxide charge comes from the condenser next door.",
@@ -332,7 +333,7 @@ export const QUESTS = [
   },
   {
     key: 'TORUS', title: 'Riding the Torus', icon: 'gtceu:flux_tube_tether', pkg: ['B1', 'B7T'], slot: 'io-orbit', shape: 'gear', size: 1.25,
-    deps: ['PATERA'], x: 24, y: 0,
+    deps: ['PATERA'], x: 20, y: 0,
     desc: [
       "Io orbits inside a ring of plasma that turns with Jupiter, much faster than Io moves. The &6Flux-Tube Tether&r hangs a wire into it from a second station and collects the current. No ground and no fuel, only spools and a breath of Mars argon.",
     ],
@@ -341,7 +342,7 @@ export const QUESTS = [
   },
   {
     key: 'IODINE', title: 'Iodine Loop', icon: 'gtceu:sulfur_iodine_plant', pkg: ['B1', 'B7S'], slot: 'io-orbit', shape: 'gear', size: 1.25,
-    deps: ['PATERA'], x: 24, y: 0,
+    deps: ['PATERA'], x: 20, y: 0,
     desc: [
       "The &6Sulfur-Iodine Plant&r splits water into hydrogen and oxygen with Io's heat instead of electricity: sulfuric acid and iodine go round and round, and only the water is used up. The naquadah plant and the fusion ring drink hydrogen by the tank.",
     ],
@@ -352,7 +353,7 @@ export const QUESTS = [
   // ------------------------------------------------------------------ Europa (below the spine)
   {
     key: 'EUR', title: 'Under the Ice', icon: 'grindless:europan_quantum_seed', pkg: ['B1'],
-    deps: ['LVL4'], x: 18, y: 1.5,
+    deps: ['LVL4'], x: 14, y: 1.5,
     desc: [
       "Europa is a shell of ice over an ocean nobody has ever seen. Blue ice dug on the spot makes the &6Europan Quantum Seed&r, and the AE2 bridge reaches the lid of that ocean.",
     ],
@@ -361,7 +362,7 @@ export const QUESTS = [
   },
   {
     key: 'CRYO', title: 'Cryobot', icon: 'gtceu:cryobot', pkg: ['B1', 'B6', 'B8'], shape: 'gear', size: 1.25,
-    deps: ['EUR', 'FUM'], x: 20, y: 1.5,
+    deps: ['EUR', 'FUM'], x: 16, y: 1.5,
     desc: [
       "The &6Cryobot&r melts its way down through the ice, paying out its tether as it sinks. A probe brings back a living ocean sample; after that it just pumps brine. Its base is sulfur concrete, so Io comes first.",
     ],
@@ -370,7 +371,7 @@ export const QUESTS = [
   },
   {
     key: 'ALIVE', title: 'Something Alive', icon: 'gtceu:algae_bioreactor', pkg: ['B1', 'B8'], shape: 'gear', size: 1.25,
-    deps: ['CRYO'], x: 22, y: 1.5,
+    deps: ['CRYO'], x: 18, y: 1.5,
     desc: [
       "Brine, hydrogen, peroxide and the belt's chondritic extract feed the ocean sample in the &6Algae Bioreactor&r, and out come bacteria: the only living matter in the pack. The bioreactor refuses to void them. So should you.",
     ],
@@ -379,7 +380,7 @@ export const QUESTS = [
   },
   {
     key: 'STEM', title: 'Stem Cells', icon: 'gtceu:stem_cells', pkg: ['B1', 'B8'],
-    deps: ['ALIVE'], x: 24, y: 1.5,
+    deps: ['ALIVE'], x: 20, y: 1.5,
     desc: [
       "Back home the biofoundry finally has bacteria: sludge, mutagen, sterile growth medium and then &6Stem Cells&r, grown on osmiridium. The sludge they hand back goes round again.",
     ],
@@ -387,8 +388,8 @@ export const QUESTS = [
     rewards: [xp(80)],
   },
   {
-    key: 'ORGANOID', title: 'Organoid', icon: 'gtceu:organoid_lab', pkg: ['B1', 'B5', 'B8'], shape: 'gear', size: 1.25,
-    deps: ['STEM'], x: 26, y: 1.5,
+    key: 'ORGANOID', title: 'Organoid', icon: 'gtceu:organoid_lab', pkg: ['B1', 'B5', 'B8', 'S03'], shape: 'gear', size: 1.25,
+    deps: ['STEM'], x: 22, y: 1.5,
     desc: [
       "In orbit, neurons grow in three dimensions without a scaffold. The &6Organoid Lab&r turns stem cells, growth medium and the ring's neurotrophic factor into a neural organoid, and that into a neuro processing unit at LuV power. Nothing else makes an NPU before ZPM.",
     ],
@@ -396,8 +397,8 @@ export const QUESTS = [
     rewards: [xp(120)],
   },
   {
-    key: 'LIVING', title: 'Living Circuits', icon: 'gtceu:wetware_processor', pkg: ['B1', 'B5', 'B8'],
-    deps: ['ORGANOID'], x: 28, y: 1.5,
+    key: 'LIVING', title: 'Living Circuits', icon: 'gtceu:wetware_processor', pkg: ['B1', 'B5', 'B8', 'S03'],
+    deps: ['ORGANOID'], x: 24, y: 1.5,
     desc: [
       "GT--'s circuit assembly line puts NPUs and crystal CPUs together into &6Wetware Processors&r, a whole batch a run on a single LuV energy hatch. Feed it from AE2 and let it keep a stock. ZPM goes through these like crisps.",
     ],
@@ -408,7 +409,7 @@ export const QUESTS = [
   // ------------------------------------------------------------------ Ganymede (bottom)
   {
     key: 'GANY', title: 'Quiet Moon', icon: 'grindless:ganymedean_quantum_seed', pkg: ['B1'],
-    deps: ['LVL4'], x: 18, y: 3,
+    deps: ['LVL4'], x: 14, y: 3,
     desc: [
       "Ganymede has no quakes, its own magnetic field and ice deep enough to bury things in. It's also cold enough that an old HV superconductor works with no cryostat at all. Tuff dug on the spot makes the &6Ganymedean Quantum Seed&r.",
     ],
@@ -416,8 +417,8 @@ export const QUESTS = [
     rewards: [xp(100)],
   },
   {
-    key: 'CHIRP', title: 'Chirp', icon: 'gtceu:gravitational_wave_detector', pkg: ['B1', 'B9'], shape: 'gear', size: 1.25,
-    deps: ['GANY'], x: 20, y: 3,
+    key: 'CHIRP', title: 'Chirp', icon: 'gtceu:gravitational_wave_detector', pkg: ['B1', 'B9', 'S03'], shape: 'gear', size: 1.25,
+    deps: ['GANY'], x: 16, y: 3,
     desc: [
       "The &6Gravitational-Wave Detector&r is an L of vacuum tubes buried in packed or blue ice, with your sapphire test masses for mirrors. Put IV's Sagittarius A* signal in its bus, where it stays, and a long observing run writes the catalogue: two black holes merging, heard as a rising chirp.",
       "Copy the catalogue with a data orb. Plain ice won't do for the cover; it melts.",
@@ -427,7 +428,7 @@ export const QUESTS = [
   },
   {
     key: 'COIL', title: 'Coilgun', icon: 'gtceu:coilgun_launcher', pkg: ['B1', 'B9'], shape: 'gear', size: 1.25,
-    deps: ['GANY'], x: 20, y: 4.5,
+    deps: ['GANY'], x: 16, y: 4.5,
     desc: [
       "Out here mercury barium calcium cuprate superconducts on its own, so the magnet works' coils need no cryostat. String them into the barrel of the &6Coilgun Probe Launcher&r and throw probes off the moon with no rocket at all.",
     ],
@@ -436,7 +437,7 @@ export const QUESTS = [
   },
   {
     key: 'CLOUDS', title: 'Into the Clouds', icon: 'grindless:jovian_atmosphere_survey', pkg: ['B1', 'B9'],
-    deps: ['COIL'], x: 22, y: 4.5,
+    deps: ['COIL'], x: 18, y: 4.5,
     desc: [
       "A probe with a heat shield falls into Jupiter and radios back hydrogen, helium and helium-3 until it stops. Keep the &6Jovian Atmosphere Survey&r: nobody mines a gas giant by hand.",
     ],
@@ -445,7 +446,7 @@ export const QUESTS = [
   },
   {
     key: 'SLING', title: 'Slingshot', icon: 'grindless:saturn_transfer_chart', pkg: ['B1', 'B9'],
-    deps: ['COIL'], x: 22, y: 3,
+    deps: ['COIL'], x: 18, y: 3,
     desc: [
       "The flyby probe swings round Jupiter the way Pioneer and the Voyagers did and keeps going. It takes its time reporting back, and what it sends is the &6Saturn Transfer Chart&r: where you're going next, and this time you won't land. Copy it with a data orb and keep it for ZPM.",
     ],
@@ -456,7 +457,7 @@ export const QUESTS = [
   // ------------------------------------------------------------------ fusion, research and the gate
   {
     key: 'FUSION', title: 'Fusion', icon: 'gtceu:luv_fusion_reactor', pkg: ['B10'], shape: 'gear', size: 1.25,
-    deps: ['TORUS', 'IODINE'], x: 26, y: 0,
+    deps: ['TORUS', 'IODINE'], x: 22, y: 0,
     fallback: { unless: ['B1', 'B6'], x: 10, y: 3, deps: ['WIND'] },
     desc: [
       "GregTech's &6Fusion Reactor Mk1&r, built round your own HTS coils. Every energy hatch adds to the buffer that pays for a start, and europium needs a big start, so fit plenty of LuV hatches.",
@@ -467,7 +468,7 @@ export const QUESTS = [
   },
   {
     key: 'EUROP', title: 'Europium', icon: 'gtceu:europium_ingot', pkg: ['B10'],
-    deps: ['FUSION'], x: 28, y: 0,
+    deps: ['FUSION'], x: 24, y: 0,
     fallback: { unless: ['B1', 'B6'], x: 12, y: 3, deps: ['FUSION'] },
     desc: [
       "Mars's neodymium and plain hydrogen go in, &6Europium&r comes out, and nothing else in the pack makes it. It leaves the ring as a very hot liquid, not a plasma, so pipe it accordingly. The ZPM motor wants a lot of it as fine wire.",
@@ -477,7 +478,7 @@ export const QUESTS = [
   },
   {
     key: 'ORB', title: 'First Data Orb', icon: 'gtceu:research_station', pkg: ['B10'], shape: 'gear', size: 1.5,
-    deps: ['EUROP'], x: 30, y: 0,
+    deps: ['EUROP'], x: 26, y: 0,
     fallback: { unless: ['B1', 'B6'], x: 14, y: 3, deps: ['EUROP'] },
     desc: [
       "The &6Research Station&r and the HPCA turn computation into data orbs, and the first one worth writing is the ZPM energy hatch's. Their wiring needs the large mixer on two LuV hatches, and the europium went into the station's ZPM motors.",
@@ -487,8 +488,8 @@ export const QUESTS = [
     rewards: [xp(150), ri('gtceu:data_orb', 2)],
   },
   {
-    key: 'GATE', title: 'Gate to ZPM', icon: 'gtceu:zpm_machine_hull', pkg: ['B1', 'B5', 'B6', 'B8', 'B9', 'B10'], shape: 'diamond', size: 1.75,
-    deps: ['ORB'], x: 32, y: 0,
+    key: 'GATE', title: 'Gate to ZPM', icon: 'gtceu:zpm_machine_hull', pkg: ['B1', 'B5', 'B6', 'B8', 'B9', 'B10', 'S03'], shape: 'diamond', size: 1.75,
+    deps: ['ORB'], x: 28, y: 0,
     desc: [
       "Trinium and naquadah alloy make the &6ZPM Machine Hull&r, and the ZPM energy hatch needs everything you learned out here. Bring the wetware, the catalogue and the Saturn chart along: the next trip starts in orbit and never touches the ground.",
     ],
