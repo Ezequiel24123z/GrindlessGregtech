@@ -32,6 +32,7 @@
     { "type": "gtceu:combined_cycle", "source": "server_scripts/grindless/ev/combined_cycle_and_hot_mill.js makes one run per live gas turbine fuel" },
     { "type": "gtceu:hot_rolling", "source": "server_scripts/grindless/ev/combined_cycle_and_hot_mill.js makes the mill's runs from the live recipes it stands in for" },
     { "type": "gtceu:pgm_refining", "source": "server_scripts/grindless/ev/platinum_plant.js composes the plant's modes from GT--'s live platinum-group line" },
+    { "type": "gtceu:sterile_culture", "source": "server_scripts/grindless/luv/biofoundry.js composes the biofoundry's steps 1-8 from GTM's live sterile chain (its seeds, steps 9-10, are its own)" },
     { "type": "gtceu:bio_distillation", "source": "server_scripts/grindless/mv/biorefinery.js rebuilds GTM's distillation tower recipes of organic fluids" },
     { "type": "gtceu:ore_processing", "source": "server_scripts/grindless/mv/ore_plant.js composes GTM's ore chain of every ore into one recipe" }
   ],

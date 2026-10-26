@@ -141,6 +141,7 @@
     {"id":"grindless:zircaloy_cladding_tube","kind":"item","needUse":true,"needMade":true,"made":["gtceu:fuel_fabrication"],"used":["gtceu:fuel_fabrication","gtceu:hot_cell"]},
     {"id":"gtceu:advanced_multi_smelter","kind":"item","needUse":false,"needMade":true,"made":["gtceu:multiblock_info","minecraft:crafting"],"used":[]},
     {"id":"gtceu:atmosphere_processor","kind":"item","needUse":false,"needMade":true,"made":["gtceu:multiblock_info","minecraft:crafting"],"used":[]},
+    {"id":"gtceu:biofoundry","kind":"item","needUse":false,"needMade":true,"made":["gtceu:assembler","gtceu:multiblock_info"],"used":[]},
     {"id":"gtceu:biorefinery","kind":"item","needUse":false,"needMade":true,"made":["gtceu:multiblock_info","minecraft:crafting"],"used":[]},
     {"id":"gtceu:coking_battery","kind":"item","needUse":false,"needMade":true,"made":["gtceu:multiblock_info","minecraft:crafting"],"used":[]},
     {"id":"gtceu:combined_cycle_plant","kind":"item","needUse":false,"needMade":true,"made":["gtceu:multiblock_info","minecraft:crafting"],"used":[]},
