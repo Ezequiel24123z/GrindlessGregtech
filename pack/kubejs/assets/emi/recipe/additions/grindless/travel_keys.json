@@ -1,0 +1,12 @@
+{
+  "type": "emi:info",
+  "stacks": [
+    "item:grindless:void_key",
+    "item:grindless:flat_key",
+    "item:grindless:end_key"
+  ],
+  "text": [
+    "emi.grindless.info.travel_keys.0",
+    "emi.grindless.info.travel_keys.1"
+  ]
+}

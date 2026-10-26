@@ -1,0 +1,10 @@
+{
+  "type": "emi:info",
+  "stacks": [
+    "item:grindless:sintered_regolith"
+  ],
+  "text": [
+    "emi.grindless.info.sintered_regolith.0",
+    "emi.grindless.info.sintered_regolith.1"
+  ]
+}
