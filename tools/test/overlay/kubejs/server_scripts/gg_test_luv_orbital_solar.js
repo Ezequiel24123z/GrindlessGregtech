@@ -23,6 +23,7 @@
   var FULL = 40320
   var PARTIAL = 39690
   var RUN_EU = FULL * 400
+  var LIGHT_TICKS = 20
   var WIRELESS_ID = 'gtceu:luv_wireless_dynamo_hatch'
   var REQUIRED = 'A4: separate formed LuV wireless dynamo station + LuV tower; automatic entry 38304 EU/t at 5% loss'
 
@@ -156,13 +157,24 @@
       return { x: m.origin.x - Number(p.side), y: m.origin.y + Number(p.up) + 1, z: m.origin.z + Number(p.back) }
     })
   }
+  // Level#canSeeSky reads sky light, which follows a placed or removed block once the light engine runs
+  // (a tick or two, docs/eras/iv.md). The count is checked from the next tick, LIGHT_TICKS at most.
   function cover(m, count) {
     panels(m).forEach(function (p, i) {
       if (i < count) put(p, 'minecraft:stone', false)
       else if (S.owned[key(p)]) put(p, 'minecraft:air', false)
     })
-    check('lit_' + count + '_covered', Number(S.A.litPanels(m.ctrl)) === 64 - count,
-      'lit=' + S.A.litPanels(m.ctrl) + ', covered=' + count)
+    m.cover = { count: count, at: S.tick }
+  }
+  function coverSettled(m) {
+    if (!m.cover) return true
+    var lit = Number(S.A.litPanels(m.ctrl))
+    var waited = S.tick - m.cover.at
+    if (waited < 1 || (lit !== 64 - m.cover.count && waited < LIGHT_TICKS)) return false
+    check('lit_' + m.cover.count + '_covered', lit === 64 - m.cover.count,
+      'lit=' + lit + ', covered=' + m.cover.count + ' after ' + waited + ' ticks of light updates')
+    m.cover = null
+    return true
   }
   function recipeEU(recipe) { return Number(S.G.generators.recipeEUt(recipe)) }
   function phase(name) {
@@ -316,6 +328,7 @@
       return
     }
     measure(m)
+    if (!coverSettled(m)) return
     if (S.phase === 'full') {
       if (m.good >= 40) {
         check('midnight_64', m.bad === 0 && m.parallels === 64, '40 measured working ticks at 40320 EU/t; no day/time commands')

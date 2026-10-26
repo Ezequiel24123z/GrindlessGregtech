@@ -2,8 +2,10 @@
 // Command: kubejs custom_command gg_test_luv_io_surface
 // Marker: GGTEST|luv_io_surface|DONE (owner's marker wait: at most 180 seconds).
 // Requires A1/B6 registrations (G.ioSurface with IO.recipes, G.places, G.structures, G.generators). Never changes any clock or weather.
-// Band: X 17152..17215, Z 0..63; the Overworld at Y 98..112 and Io (G.places.surface('io')) at Y 198..214.
-//   fumarole condenser  controller facing north at X 17160, Z 2 (X 17158..17162, Z 2..6); Overworld Y 98..112, Io Y 198..212
+// Band: X 17152..17215, Z 0..63; the Overworld at Y 98..113 and Io (G.places.surface('io')) at Y 198..214.
+//   fumarole condenser  controller facing north at X 17160, Z 2 (X 17158..17162, Z 2..6); Overworld Y 99..113, Io Y 199..213,
+//                       each fumarole cell on a brimstone block one below (Y 98 / Y 198): BOP's fumarole only survives on
+//                       #biomesoplenty:brimstone_decoration_placeable with a sturdy top, as it stands on Io's ground
 //   volcanic intake     controller facing north at X 17190, Z 2 (X 17185..17195, Z 2..6); Overworld Y 98..109, Io Y 198..209
 // Overworld (S0-7): the condenser does not form with biomesoplenty:brimstone in one fumarole cell and forms with three
 // brimstone fumaroles; the intake does not form with basalt in one magma cell and forms on magma with module a only;
@@ -24,7 +26,7 @@
   var S = null
   var J = null
   var BAND = { x0: 17152, x1: 17215, z0: 0, z1: 63 }
-  var OVERWORLD_Y = { y0: 98, y1: 112 }
+  var OVERWORLD_Y = { y0: 98, y1: 113 }
   var OFFWORLD_Y = { y0: 198, y1: 214 }
   var CONDENSER_X = 17160
   var INTAKE_X = 17190
@@ -33,6 +35,8 @@
   var IO_EU = 2 * MODULE_EU
   var SUBLIMATE = 'grindless:ionian_sublimate'
   var BRIMSTONE = 'biomesoplenty:brimstone'
+  // BOP's BrimstoneFumaroleBlock#canSurvive: brimstone or netherrack below with a sturdy top, else it breaks on the next shape update
+  var FUMAROLE_GROUND = { ch: 'F', id: BRIMSTONE }
   var BASALT = 'minecraft:basalt'
   var NO_VOIDING = /fumarole_condenser\.no_voiding|[Vv]oid/
   var REQUIRED = 'B1: Io surface level present; Io collect (4000 mB SO2 + 8 sulfur + 1 sublimate) and a 2-module intake at 65536 EU/t'
@@ -155,19 +159,34 @@
     })
     return cells
   }
-  function footprintClear(site, id, origin) {
+  // the ground under every cell of symbol ch (the fumaroles' brimstone): below the pattern, so outside its cells
+  function groundOf(cells, ground) {
+    if (!ground) return []
+    return cells.filter(function (c) { return c.ch === ground.ch }).map(function (c) {
+      return { p: { x: c.p.x, y: c.p.y - 1, z: c.p.z }, id: ground.id }
+    })
+  }
+  function footprintClear(site, id, origin, ground) {
     var cells = cellsOf(id, origin)
-    for (var i = 0; i < cells.length; i++) {
-      inside(site, cells[i].p)
-      ticket(site, cells[i].p)
-      if (block(site, cells[i].p) !== 'minecraft:air') return 'occupied at ' + key(site, cells[i].p)
+    var all = cells.map(function (c) { return c.p }).concat(groundOf(cells, ground).map(function (g) { return g.p }))
+    for (var i = 0; i < all.length; i++) {
+      inside(site, all[i])
+      ticket(site, all[i])
+      if (block(site, all[i]) !== 'minecraft:air') return 'occupied at ' + key(site, all[i])
     }
     return ''
   }
   // opts.roles: [[role, ability, block id]] for the first free front-wall cells allowing that ability
   // opts.skip: { symbol: true } cells left as air; opts.swap: { ch, id } the first cell of that symbol gets that block instead
+  // opts.ground: { ch, id } placed one below every cell of that symbol, before the structure
   function build(site, id, origin, opts) {
     var cells = cellsOf(id, origin)
+    var ground = groundOf(cells, opts.ground)
+    ground.forEach(function (g) {
+      inside(site, g.p)
+      ticket(site, g.p)
+      if (block(site, g.p) !== 'minecraft:air') throw new Error('ground cell is occupied at ' + key(site, g.p))
+    })
     var result = { site: site, id: id, origin: origin, pos: {}, cells: {}, swapped: null, removed: 0, total: 0, previous: 0 }
     var roles = (opts.roles || []).slice()
     var plan = []
@@ -193,6 +212,7 @@
     })
     if (roles.length > 0) throw new Error(id + ': no front-wall slot for ' + roles.map(function (r) { return r[0] }).join(', '))
     if (opts.swap && result.swapped === null) throw new Error(id + ': no ' + opts.swap.ch + ' cell to swap')
+    ground.forEach(function (g) { put(site, g.p, g.id, false) })
     plan.forEach(function (c) { put(site, c.p, c.id, c.facing) })
     put(site, origin, id, true)
     return result
@@ -478,15 +498,16 @@
       return
     }
     var site = { dim: S.ioDim, level: level, y0: OFFWORLD_Y.y0, y1: OFFWORLD_Y.y1 }
-    var cOrigin = { x: CONDENSER_X, y: 199, z: ORIGIN_Z }
+    var cOrigin = { x: CONDENSER_X, y: 200, z: ORIGIN_Z }
     var tOrigin = { x: INTAKE_X, y: 200, z: ORIGIN_Z }
-    var busy = footprintClear(site, S.IO.condenser.machine, cOrigin) || footprintClear(site, S.IO.intake.machine, tOrigin)
+    var busy = footprintClear(site, S.IO.condenser.machine, cOrigin, FUMAROLE_GROUND) ||
+      footprintClear(site, S.IO.intake.machine, tOrigin)
     if (busy) {
       unavailable('Io footprint at Y 198..214 not air (' + busy + ')')
       return
     }
     S.io = {
-      condenser: build(site, S.IO.condenser.machine, cOrigin, { roles: CONDENSER_ROLES }),
+      condenser: build(site, S.IO.condenser.machine, cOrigin, { roles: CONDENSER_ROLES, ground: FUMAROLE_GROUND }),
       intake: build(site, S.IO.intake.machine, tOrigin, { roles: INTAKE_ROLES, skip: { c: true, d: true } })
     }
     phase('io_form')
@@ -629,8 +650,8 @@
     var ow = { dim: 'minecraft:overworld', level: level, y0: OVERWORLD_Y.y0, y1: OVERWORLD_Y.y1 }
     staticChecks()
     S.ow = {
-      condenser: build(ow, S.IO.condenser.machine, { x: CONDENSER_X, y: 99, z: ORIGIN_Z },
-        { roles: CONDENSER_ROLES, swap: { ch: 'F', id: BRIMSTONE } }),
+      condenser: build(ow, S.IO.condenser.machine, { x: CONDENSER_X, y: 100, z: ORIGIN_Z },
+        { roles: CONDENSER_ROLES, swap: { ch: 'F', id: BRIMSTONE }, ground: FUMAROLE_GROUND }),
       intake: build(ow, S.IO.intake.machine, { x: INTAKE_X, y: 100, z: ORIGIN_Z },
         { roles: INTAKE_ROLES, skip: { b: true, c: true, d: true }, swap: { ch: 'M', id: BASALT } })
     }

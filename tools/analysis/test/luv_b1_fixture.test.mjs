@@ -143,9 +143,11 @@ class RocketEntity {
 }
 
 // the four surfaces: a column-based stand-in for their generated ground (real ids, heights in their noise settings' ranges)
-function terrain(place) {
+function terrain(place, opts = {}) {
   if (place === 'asteroid_belt') return (x, y, z) => {
     const top = 60 + ((x + z) % 8);
+    // a GTM vein surface indicator lying on the ground of one sampled column (the native S2 run met one at 18186,10)
+    if (opts.beltIndicator && x === 18186 && z === 10 && y === top + 1) return opts.beltIndicator;
     if (y === -64) return 'minecraft:bedrock';
     if (y < top) return 'minecraft:tuff';
     if (y === top) return (x + z) % 3 === 0 ? 'minecraft:gravel' : 'minecraft:cobbled_deepslate';
@@ -343,7 +345,7 @@ function simulate(opts = {}) {
     for (const d of table[k].dimensions) {
       if (levels[d]) continue;
       const place = Object.keys(surfaces).find((p) => surfaces[p] === d);
-      levels[d] = new Level(d, place ? terrain(place) : () => 'minecraft:air');
+      levels[d] = new Level(d, place ? terrain(place, opts) : () => 'minecraft:air');
     }
   }
   if (opts.occupied) levels[EARTH].blocks.set(key3(18181, 101, 5), 'minecraft:dirt');
@@ -463,6 +465,16 @@ test('the whole fixture passes in a simulated server: every check, stations SKIP
   for (const p of Object.values(exp.places)) assert.equal(p.columns.length, 16);
   assertCleanAndRestored(r);
   assertInBand(r);
+});
+
+test('a belt vein\'s GTM surface indicator on belt ground is read through; any other vein\'s indicator fails terrain_belt only', () => {
+  const own = simulate({ beltIndicator: 'gtceu:meteoric_iron_indicator' });
+  assert.deepEqual(failed(own), []);
+  assert.match(byName(own, 'terrain_belt').detail, /vein indicators read through \{"gtceu:meteoric_iron_indicator":1/);
+  const foreign = simulate({ beltIndicator: 'gtceu:cassiterite_indicator' });
+  assert.deepEqual(failed(foreign).map((x) => x.split(':')[0]), ['terrain_belt']);
+  assert.match(byName(foreign, 'terrain_belt').detail, /18186,10=gtceu:cassiterite_indicator@/);
+  assertCleanAndRestored(foreign);
 });
 
 test('stations.json enabled without a station stage fails "stations" only, and the run still ends cleanly', () => {
