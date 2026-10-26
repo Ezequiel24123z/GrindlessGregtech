@@ -20,10 +20,12 @@ ClientEvents.lang('en_us', event => {
     add('emi.grindless.info.capacitor_cells.1', 'The network sends EU out at the tier of the weakest cell in any formed tower. Swapping a cell unforms its tower; the stored EU stays.')
     add('emi.grindless.info.capacitor_cells.2', 'Most cells come from the assembler. The LuV cell is a superconducting magnetic energy storage (SMES) coil, wound and cold-tested in the HTS Magnet Works.')
 
-    add('emi.grindless.info.sagittarius_a_star_signal.0', 'Recorded by the Interferometer on Mercury, at night: it combines a Lunar VLBI Recording from the Moon\'s Deep Space Antenna with the Outer System Chart, which it keeps.')
-    add('emi.grindless.info.sagittarius_a_star_signal.1', 'It closes the IV chapter, and no IV recipe uses it up. Keep it: it is one of the items that open LuV, where the journey to the centre of the galaxy goes on.')
+    add('emi.grindless.info.jovian_atmosphere_survey.0', 'Written on Ganymede by the Coilgun Probe Launcher (circuit 1): a Jupiter entry probe falls into the clouds and radios hydrogen, helium and the helium-3 ratio back, as Galileo\'s probe did in 1995.')
+    add('emi.grindless.info.jovian_atmosphere_survey.1', 'Keep it: it closes the LuV chapter, and ZPM\'s gas giant siphon needs it to know what it is drawing. No LuV recipe uses it up.')
+    add('emi.grindless.info.saturn_transfer_chart.0', 'Written on Ganymede by the Coilgun Probe Launcher (circuit 2): a Saturn flyby probe swings past Jupiter and reaches Saturn, as Pioneer 11, the Voyagers and Cassini did. A data orb copies it by hand.')
+    add('emi.grindless.info.saturn_transfer_chart.1', 'Keep it: it is the next trip, to Saturn, in ZPM. No LuV recipe uses it up.')
     add('emi.grindless.info.coilgun_coil_casing.0', 'Wound in the HTS magnet works (circuit 3) from Hg-1223 superconducting wire on an HSS-S frame, potted in epoxy and cold-tested in liquid helium.')
-    add('emi.grindless.info.coilgun_coil_casing.1', 'Keep them: they are the barrel of the coilgun probe launcher on Ganymede, later in LuV. No other recipe uses them.')
+    add('emi.grindless.info.coilgun_coil_casing.1', 'They are the barrel of the Coilgun Probe Launcher on Ganymede: 33 rings of eight (264 casings) around an open bore. At Ganymede\'s 110 K the Hg-1223 superconducts with no cryostat. No recipe uses them up.')
     add('emi.grindless.info.magnetic_bearing.0', 'Made in the HTS magnet works (circuit 4): 4 tetrataenite rods, an HSS-S ring and 2 titanium plates, cold-tested in liquid helium. Tetrataenite, a meteorite-only magnet, comes only from the asteroid belt.')
     add('emi.grindless.info.magnetic_bearing.1', 'A rare-earth-free permanent-magnet bearing: the hub of the rotating hydroponic ring in Earth orbit.')
 
@@ -65,10 +67,12 @@ ClientEvents.lang('es_es', event => {
     add('emi.grindless.info.capacitor_cells.1', 'La red envía EU al nivel de la celda más débil de todas las torres formadas. Cambiar una celda deshace su torre; la EU guardada se conserva.')
     add('emi.grindless.info.capacitor_cells.2', 'Casi todas las celdas salen del ensamblador. La celda LuV es una bobina superconductora de almacenamiento magnético de energía (SMES), bobinada y probada en frío en la fábrica de imanes HTS.')
 
-    add('emi.grindless.info.sagittarius_a_star_signal.0', 'La graba el interferómetro en Mercurio, de noche: combina una grabación VLBI lunar de la antena de espacio profundo de la Luna con la carta del sistema exterior, que conserva.')
-    add('emi.grindless.info.sagittarius_a_star_signal.1', 'Cierra el capítulo IV y ninguna receta de IV la gasta. Guárdala: es uno de los objetos que abren LuV, donde sigue el viaje al centro de la galaxia.')
+    add('emi.grindless.info.jovian_atmosphere_survey.0', 'Lo escribe en Ganímedes el lanzador de sondas por bobinas (circuito 1): una sonda de entrada cae en las nubes de Júpiter y transmite el hidrógeno, el helio y la proporción de helio-3, como la sonda de Galileo en 1995.')
+    add('emi.grindless.info.jovian_atmosphere_survey.1', 'Guárdalo: cierra el capítulo LuV, y el sifón de gigante gaseoso de ZPM lo necesita para saber qué extrae. Ninguna receta de LuV lo gasta.')
+    add('emi.grindless.info.saturn_transfer_chart.0', 'La escribe en Ganímedes el lanzador de sondas por bobinas (circuito 2): una sonda de sobrevuelo pasa junto a Júpiter y llega a Saturno, como Pioneer 11, las Voyager y Cassini. Un orbe de datos la copia a mano.')
+    add('emi.grindless.info.saturn_transfer_chart.1', 'Guárdala: es el próximo viaje, a Saturno, en ZPM. Ninguna receta de LuV la gasta.')
     add('emi.grindless.info.coilgun_coil_casing.0', 'Se bobina en la fábrica de imanes HTS (circuito 3) con hilo superconductor de Hg-1223 sobre un armazón de HSS-S, se encapsula en epoxi y se prueba en frío en helio líquido.')
-    add('emi.grindless.info.coilgun_coil_casing.1', 'Guárdalas: son el cañón del lanzador de sondas por bobinas de Ganímedes, más adelante en LuV. Ninguna otra receta las usa.')
+    add('emi.grindless.info.coilgun_coil_casing.1', 'Son el cañón del lanzador de sondas por bobinas de Ganímedes: 33 anillos de ocho (264 carcasas) alrededor de un ánima abierta. A los 110 K de Ganímedes el Hg-1223 superconduce sin criostato. Ninguna receta las gasta.')
     add('emi.grindless.info.magnetic_bearing.0', 'Se hace en la fábrica de imanes HTS (circuito 4): 4 varillas de tetrataenita, un anillo de HSS-S y 2 placas de titanio, probado en frío en helio líquido. La tetrataenita, un imán que solo se forma en meteoritos, sale solo del cinturón de asteroides.')
     add('emi.grindless.info.magnetic_bearing.1', 'Un cojinete de imán permanente sin tierras raras: el buje del anillo hidropónico giratorio en la órbita terrestre.')
 

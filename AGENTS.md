@@ -166,6 +166,7 @@ Gregtech Grindless is a GregTech Modern pack (Minecraft 1.20.1, Forge) in which 
   | LuV crystal grower, hydroponic ring and organoid lab | 16640–16703, Z 0–63; Earth orbit Y 198–214 |
   | LuV fusion and research | 17920–17983, Z 0–63 (Overworld, Y 98–112): the Mk1 at X 17925–17939, the HPCA and the research station at X 17950+ |
   | LuV Io surface: fumarole condenser and volcanic intake (S0-7) | 17152–17215, Z 0–63: the Overworld at Y 98–112 and Io (`G.places.surface('io')`) at Y 198–214 |
+  | LuV Ganymede: GW detector (S0-7, buried L) and coilgun | 17664–17727, Z 0–63: the Overworld at Y 98–112; on Ganymede (`G.places.surface('ganymede')`) Y 198–214 (rows at Y 200–204), or, where the ground under the two machines reaches Y 200, five rows from one block above the highest ground |
   | chests and furnaces (client) | 18688–18751 (uses X 18688–18703, Z 0–15, Y 98–112) |
   | LuV travel and places (B1) | 18176–18239, Z 0–63: the Overworld at Y 98–112 (the level 4 rocket's scanner pad at X 18180–18182, Z 4–8); on each new surface (belt, Io, Europa, Ganymede) the same X and Z at Y 198–214, read only (one generated chunk, X 18176–18191, Z 0–15) |
 
@@ -188,6 +189,7 @@ Gregtech Grindless is a GregTech Modern pack (Minecraft 1.20.1, Forge) in which 
 
 - Personal account `Ezequiel24123z`, never the corporate one.
 - Small commits with a clear message.
+- **No `git stash` in parallel work:** the stash is shared by every worktree of the repository, so one session can pop another's. Use a WIP commit on your own branch.
 - **Versions:** before tagging (`vX.Y.Z`), bump `version` in `pack/pack.toml` and run `tools/Update-PackIndex.ps1`. Only what has passed the tier's tests gets tagged.
 
 ## Playable channel

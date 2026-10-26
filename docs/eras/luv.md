@@ -932,6 +932,7 @@ This plant takes slot 16 only if spike S0-3 shows that a second station can't be
   - LuV: the zero-g grower's test masses.
 - **Risks:** the whole L must stay loaded while it runs.
 - **Source:** real: LIGO and GW150914 (2015), Virgo, KAGRA (underground, sapphire mirrors at 20 K).
+- **As built (B9):** 33 × 5 × 33: two hollow 3×3 tubes 25 long and a 3×3×3 end station on each arm, one layer of packed or blue ice over every tube and end station, hatches only on the vertex. The catalogue run also keeps the Sagittarius A* signal (`notConsumable`), the IV crossing above. Spike S0-7's buried L: `gg_test_luv_ganymede`.
 
 ### 20. Coilgun probe launcher: `gtceu:coilgun_launcher`, type `gtceu:probe_launch` (Ganymede)
 
@@ -959,6 +960,7 @@ This plant takes slot 16 only if spike S0-3 shows that a second station can't be
   - LuV: the magnet works;
   - ZPM: the survey and the chart.
 - **Source:** real: O'Neill's mass drivers (1970s), Galileo's entry probe (1995), gravity assists, and Hg-1223 (Schilling and others, 1993).
+- **As built (B9):** 37 × 5 × 8: 33 rings of eight coil casings (264) around an open bore, a 5×5×4 tungstensteel breech with the controller on its rear face, a 3×3×3 tungstensteel pulse bank beside it. Probes in the LuV assembler (30,720 EU/t × 200 t): Jupiter entry = 4 heat-shielding fabrics + LuV sensor + HV lithium battery + 4 titanium plates; Saturn flyby = 2 RTG pellets + LuV sensor + LuV emitter + 4 titanium plates. The Saturn chart copies with a data orb, like every chart.
 
 ## Older machines, new modes (not counted)
 
