@@ -1,0 +1,16 @@
+{
+  "translation": "level.grindless.io",
+  "galaxy": "gcyr:milky_way",
+  "solar_system": "gcyr:solar_system",
+  "world": "grindless:io",
+  "orbit_world": "grindless:io_orbit",
+  "parent_world": "grindless:jupiter",
+  "rocket_tier": 4,
+  "gravity": 1.796,
+  "has_atmosphere": false,
+  "days_in_year": 2,
+  "temperature": 110,
+  "solar_power": 1,
+  "has_oxygen": false,
+  "button_color": 14209331
+}

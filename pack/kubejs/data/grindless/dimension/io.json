@@ -1,0 +1,11 @@
+{
+  "type": "grindless:io",
+  "generator": {
+    "type": "minecraft:noise",
+    "settings": "grindless:io",
+    "biome_source": {
+      "type": "minecraft:fixed",
+      "biome": "grindless:io"
+    }
+  }
+}

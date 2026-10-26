@@ -1,0 +1,52 @@
+{
+  "world": "grindless:io",
+  "stars": {
+    "fancy_count": 13000,
+    "fast_count": 6000,
+    "colored_stars": true,
+    "daylight_visible": true
+  },
+  "sunset_color": "none",
+  "dimension_effects": {
+    "type": "none"
+  },
+  "cloud_effects": "none",
+  "weather_effects": "none",
+  "horizon_angle": 0,
+  "sky_objects": [
+    {
+      "texture": "gcyr:textures/sky/sun.png",
+      "blending": true,
+      "render_type": "dynamic",
+      "scale": 4,
+      "rotation": [
+        0,
+        -90,
+        0
+      ]
+    },
+    {
+      "texture": "gcyr:textures/sky/jupiter.png",
+      "blending": false,
+      "render_type": "static",
+      "scale": 70,
+      "rotation": [
+        30,
+        0,
+        0
+      ]
+    },
+    {
+      "texture": "gcyr:textures/sky/light.png",
+      "blending": true,
+      "render_type": "static",
+      "scale": 112,
+      "color": 13214334,
+      "rotation": [
+        30,
+        0,
+        0
+      ]
+    }
+  ]
+}
