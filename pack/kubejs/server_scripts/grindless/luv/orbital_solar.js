@@ -2,10 +2,9 @@
   var G = global.grindless
   ServerEvents.recipes(function (event) {
     var A = G.orbitalSolar
-    var sunlight = G.readJsonTable('kubejs/data/grindless/tables/sunlight.json')
-    var site = sunlight.sites.filter(function (s) { return s.dimension === G.orbits.earth })[0]
-    if (!site || !(site.factor > 0)) throw new Error('[grindless/orbital_solar] Earth orbit sunlight missing')
-    var eut = Math.round(A.baseEuPerPanel * site.factor * A.junctionMultiplier)
+    var factor = G.sunlight.factor(G.orbits.earth)
+    if (!(factor > 0)) throw new Error('[grindless/orbital_solar] Earth orbit sunlight missing')
+    var eut = Math.round(A.baseEuPerPanel * factor * A.junctionMultiplier)
     event.recipes.gtceu.orbital_solar('grindless:earth')
       .circuit(1).dimension(G.orbits.earth).EUt(-eut).duration(A.duration)
     event.recipes.gtceu.assembler('grindless:luv/orbital_solar_panel')
