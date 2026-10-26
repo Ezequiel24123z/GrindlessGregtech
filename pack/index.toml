@@ -809,6 +809,18 @@ file = "kubejs/assets/grindless/textures/block/multiblock/engine_test_stand/over
 hash = "e9b8025fde1b09b0a4d2a38427b04f98f28a593045be6d177eb2b29164c872b0"
 
 [[files]]
+file = "kubejs/assets/grindless/textures/block/multiblock/europium_reductor/overlay_front.png"
+hash = "c74c88cf83ccb35428681969c48321c4bcb12dee42d54680d1cb6648e10a0c4d"
+
+[[files]]
+file = "kubejs/assets/grindless/textures/block/multiblock/europium_reductor/overlay_front_active.png"
+hash = "6e073583b83fe7973d0d1f9c4f1f32fc3029bf9362894236980fba78ba561595"
+
+[[files]]
+file = "kubejs/assets/grindless/textures/block/multiblock/europium_reductor/overlay_front_active_emissive.png"
+hash = "7c66a121e65898dbc11cb6870d76f396100b79e8b00345388825e829684b48d7"
+
+[[files]]
 file = "kubejs/assets/grindless/textures/block/multiblock/ev_tripod/overlay_front.png"
 hash = "b75c02a002c5a15115900ea97b79e6c467df64414ed4e8040fec68685c964df7"
 
@@ -2882,7 +2894,7 @@ hash = "645bfc815a1689a6161cad21aa41b2cf91cf9bdcdd4baecfc63a0bce10f12f48"
 
 [[files]]
 file = "kubejs/client_scripts/grindless/ev_extraction_cascade_lang.js"
-hash = "03c29813af4ab138776439d326efec7186392ade639d6fe16c0e860fc3481297"
+hash = "a743e4ad4ce3bfdca2d44c37c762f850c9e969dd7a7c330c129702737ece23cc"
 
 [[files]]
 file = "kubejs/client_scripts/grindless/ev_foundation_lang.js"
@@ -3107,6 +3119,10 @@ hash = "313400efd9262ce0bd852e1f43905111d105fa44bc648d3bd5b53be2ad93748a"
 [[files]]
 file = "kubejs/client_scripts/grindless/wireless_energy_lang.js"
 hash = "a059274b54adc925413ade00b001a40e7cb8097f0537026cc61f1d88f11927ae"
+
+[[files]]
+file = "kubejs/client_scripts/grindless/zpm_europium_lang.js"
+hash = "4f9a137eaa79a4ff50e663fd8723ae2f930165657168cc62e251bb094eb3b503"
 
 [[files]]
 file = "kubejs/client_scripts/grindless/zpm_foundation_lang.js"
@@ -3430,7 +3446,7 @@ hash = "c1009fdf8724e66c130340934f82451eac2162998937a51d263d3a0b704a652c"
 
 [[files]]
 file = "kubejs/server_scripts/grindless/ev/extraction_cascade.js"
-hash = "a42f259e01b4e0c274656194983896ea9acac7e9f5d7a29e00d6a2c22311bee7"
+hash = "1e7dd4e5ac8053adc09a6bf31bf774eb1210e6fb1b77e69cfd7bedbfe359390c"
 
 [[files]]
 file = "kubejs/server_scripts/grindless/ev/foundation.js"
@@ -3881,6 +3897,10 @@ file = "kubejs/server_scripts/grindless/steam/vein_drilling.js"
 hash = "5547c185e38d18fe64b37420e97d20bc8337650ad15477c37fceb5ece1edf9c4"
 
 [[files]]
+file = "kubejs/server_scripts/grindless/zpm/europium.js"
+hash = "bfc444310892c3e9f6bd8240ca44839f77c5288323497128c2f53dc4525cc410"
+
+[[files]]
 file = "kubejs/startup_scripts/grindless/dimensions.js"
 hash = "6bbf23878af066772a65a97bde38fb25ff42cf860aed05bd338fb84730c3b37e"
 
@@ -3898,7 +3918,7 @@ hash = "a5211bc44a29f5d99f49e692178238909ab4feee6842818889f7c621e351ff46"
 
 [[files]]
 file = "kubejs/startup_scripts/grindless/ev/extraction_cascade.js"
-hash = "7e9d59ade9aa59b1eebab8a7d165fa26af7bc51e6a55bfce658319a62604ff8e"
+hash = "459b34565b7c65086b281a80d2b8d20440e8512c8963402f28633dd08a52ed4d"
 
 [[files]]
 file = "kubejs/startup_scripts/grindless/ev/foundation.js"
@@ -4219,6 +4239,10 @@ hash = "ecd29a0fd2dbfaec5910bbb24bdfe38de2d4142ea3351a4c517a98de30f87bbd"
 [[files]]
 file = "kubejs/startup_scripts/grindless/steam/small_family.js"
 hash = "98905267da50013b5484caca43e58b62f517cb179d580163e0dc4a2b5502bf20"
+
+[[files]]
+file = "kubejs/startup_scripts/grindless/zpm/europium.js"
+hash = "2a079bac33713fc6d9f935bcb00f8eb6321427a75e4c12e7bde2fd7236631caf"
 
 [[files]]
 file = "kubejs/startup_scripts/grindless/zpm/foundation.js"
