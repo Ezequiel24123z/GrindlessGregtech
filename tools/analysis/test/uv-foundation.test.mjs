@@ -19,7 +19,7 @@ const ITEMS = [
   'antiproton_cartridge', 'fibre_laser_module', 'ytterbium_fibre', 'ingaas_pump_module', 'hpge_crystal', 'snspd_array', 'hbn_dust',
   'bnnt_yarn', 'ented_powder', 'neutronium_am_powder', 'darmstadtium_am_powder', 'tritanium_am_powder', 'light_sail', 'starchip',
   'sailcraft', 'starshot_probe', 'triton_ice_core', 'sputnik_ice_core', 'charon_core', 'planetesimal_sample', 'heliopause_data',
-  'proxima_approach_data', 'sgr_a_star_image', 'uv_smes_cell',
+  'proxima_approach_data', 'sgr_a_star_image',
 ].map((n) => 'grindless:' + n);
 const BLOCKS = ['laser_module_block', 'srf_cryomodule_block', 'bnnt_fuel_tank'].map((n) => 'grindless:' + n);
 const MATERIALS = {
@@ -31,7 +31,7 @@ const MATERIALS = {
 // GTM's own, or owned by a later package or by B1: F1 must not register them
 const NOT_F1 = [
   'grindless:neutronium', 'grindless:gravi_star', 'grindless:quantum_star', 'grindless:americium', 'grindless:plutonium_241',
-  'grindless:uhpic_chip', 'grindless:uv_machine_casing', 'grindless:uv_machine_hull', 'grindless:uv_wireless_energy_cover',
+  'grindless:uhpic_chip', 'grindless:uv_smes_cell', 'grindless:uv_machine_casing', 'grindless:uv_machine_hull', 'grindless:uv_wireless_energy_cover',
   'grindless:uv_wireless_dynamo_cover', 'grindless:neptune', 'grindless:pluto', 'grindless:neptune_orbit', 'grindless:pluto_orbit',
   'grindless:thruster_pod', 'grindless:probe_rtg', 'grindless:penetrator_probe', 'grindless:ion_thruster',
 ];

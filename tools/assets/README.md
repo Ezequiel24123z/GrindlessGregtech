@@ -56,7 +56,7 @@ Generators for the pack's own textures. Everything is procedural 16x16 pixel art
 | `Build-LuVCryogenicsTextures.ps1` | Writes the faces of the LuV helium refrigerator and coated conductor line (LuV-A3: `multiblock/helium_refrigerator/`, `multiblock/coated_conductor_line/`). `-Only refrigerator,line`, `-Preview <png outside the repo>` (optional `-FrostCasing <png>`, `-StainlessCasing <png>`) and `-Credits` (their 10 CREDITS rows). |
 | `Build-LuVFoundationTextures.ps1` | Writes the shared LuV textures (LuV-A1): 29 items (four of them animated quantum seeds) and the ten block textures under `block/luv/` (eight casings and the orbital solar panel's cells and frame). `-Only <output or group>`, `-Preview <png outside the repo>`, `-Credits`. |
 | `Build-ZPMFoundationTextures.ps1` | Writes the shared ZPM textures (ZPM-F1): 31 items and the six block textures under `block/zpm/`. `-Only <output or group>`, `-Preview <png outside the repo>`, `-Credits`. |
-| `Build-UVFoundationTextures.ps1` | Writes the shared UV textures (UV-F1): 34 items and three block textures under `block/uv/`. `-Only <output or group>`, `-Credits`. |
+| `Build-UVFoundationTextures.ps1` | Writes the shared UV textures (UV-F1): 33 items and three block textures under `block/uv/`. `-Only <output or group>`, `-Credits`. |
 | `Build-UVHeatSourcesTextures.ps1` | Writes the four item icons of UV's heat source works (UV-A2): probe RTG, americium micro source, curium RTG pellet, heavy curium oxide. `-Credits`. |
 | `Build-UVAcceleratorsTextures.ps1` | Writes the faces of UV's synchrotron, muon fusion cell and antimatter trap (UV-A5: `multiblock/synchrotron/`, `multiblock/muon_fusion_cell/`, `multiblock/antimatter_trap/`) and the 13 item icons of the LIGA, antiproton and muon fusion lines. `-Credits`. |
 | `Build-UVColdTextures.ps1` | Writes the five item icons of UV's cold works (UV-A4): RRR niobium sheet, niobium scrap, bare SRF cavity, N-doped SRF cavity, mu-metal shield. `-Credits`. |
@@ -854,7 +854,7 @@ powershell -NoProfile -ExecutionPolicy Bypass -File tools\assets\Build-ZPMFounda
 
 ### UV foundation (UV-F1)
 
-`Build-UVFoundationTextures.ps1`: same method and checks as the ZPM foundation, drawn from twelve shape routines with a palette per item. It writes the 34 shared UV items (`item/<id>.png`) and three blocks under `block/uv/` (`laser_module_block`, `srf_cryomodule_block`, `bnnt_fuel_tank_side`). The sixteen materials are GT materials (GTM colours them), so they need no PNG.
+`Build-UVFoundationTextures.ps1`: same method and checks as the ZPM foundation, drawn from twelve shape routines with a palette per item. It writes the 33 shared UV items (`item/<id>.png`) and three blocks under `block/uv/` (`laser_module_block`, `srf_cryomodule_block`, `bnnt_fuel_tank_side`). The sixteen materials are GT materials (GTM colours them), so they need no PNG.
 
 ```powershell
 powershell -NoProfile -ExecutionPolicy Bypass -File tools\assets\Build-UVFoundationTextures.ps1
