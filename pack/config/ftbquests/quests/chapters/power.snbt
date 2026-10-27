@@ -403,6 +403,13 @@
 			y: 73.0d
 		}
 		{
+			id: "1C041F976ACD3D8B"
+			linked_quest: "7AAE7008AA466590"
+			shape: "rsquare"
+			x: 0.5d
+			y: 76.5d
+		}
+		{
 			id: "37EA5C37FB08041B"
 			linked_quest: "39A5A5CC76591697"
 			shape: "rsquare"
@@ -443,6 +450,13 @@
 			shape: "rsquare"
 			x: 0.5d
 			y: 91.0d
+		}
+		{
+			id: "1EAE457BFEA3FBF1"
+			linked_quest: "5E6B4DEB712EECBE"
+			shape: "rsquare"
+			x: 0.5d
+			y: 94.75d
 		}
 	]
 	quests: [
@@ -1714,13 +1728,28 @@
 			y: 73.0d
 		}
 		{
+			dependencies: ["7AAE7008AA466590"]
+			description: ["The segments wear, so keep the refurbishing going: worn ones come back as film and aluminium."]
+			icon: "gtceu:swarm_control_station"
+			id: "7CCD46B118015E92"
+			size: 1.0d
+			subtitle: "UHV. Mercury's segments beam power home; two stations feed one bank, which loses 5%"
+			tasks: [
+				{ id: "5CE71FAE3BAF6696", item: "gtceu:swarm_control_station", optional_task: true, type: "item" }
+				{ id: "7FDF1413F83D50BD", type: "checkmark" }
+			]
+			title: "Swarm Control Station"
+			x: 2.75d
+			y: 76.5d
+		}
+		{
 			icon: "gcyr:dyson_solar_cell"
 			id: "11C73137027F90A3"
 			shape: "circle"
 			size: 1.0d
 			tasks: [{ id: "7ED020059F8C2BA4", type: "checkmark" }]
 			title: "Dyson Solar Cell"
-			x: 0.5d
+			x: 6.75d
 			y: 76.5d
 		}
 		{
@@ -1729,10 +1758,10 @@
 			id: "5C7774A29F329470"
 			shape: "circle"
 			size: 1.0d
-			subtitle: "UHV: a star wrapped in panels"
+			subtitle: "UEV: a star wrapped in panels"
 			tasks: [{ id: "5A8383B9274CEC05", type: "checkmark" }]
 			title: "Dyson Sphere"
-			x: 2.75d
+			x: 9.0d
 			y: 76.5d
 		}
 		{
@@ -1962,10 +1991,28 @@
 			y: 91.0d
 		}
 		{
+			dependencies: ["5E6B4DEB712EECBE"]
+			description: [
+				"The network jumps to UHV only when every formed tower holds these; the nuclear clock keeps it in step."
+				"Holds: UHV SMES 62,914,560,000 EU."
+			]
+			icon: "grindless:uhv_smes_cell"
+			id: "371C6FC4AA86C49E"
+			size: 1.0d
+			subtitle: "Twenty-four UV batteries' worth, wound with RTAN wire"
+			tasks: [
+				{ id: "3172C46D017E0C6C", item: "grindless:uhv_smes_cell", optional_task: true, type: "item" }
+				{ id: "5C40A02807221339", type: "checkmark" }
+			]
+			title: "UHV SMES Cell"
+			x: 2.75d
+			y: 94.75d
+		}
+		{
 			dependencies: ["1A64E503878275AE"]
 			description: [
 				"Energy goes in at any voltage; the cells only limit what comes out."
-				"Comes in 2, 4, 16 and 64 A, LV to UV."
+				"Comes in 2, 4, 16 and 64 A, LV to UHV."
 			]
 			icon: "gtceu:lv_wireless_dynamo_hatch"
 			id: "128CD52291A76880"
@@ -1981,7 +2028,7 @@
 		}
 		{
 			dependencies: ["1A64E503878275AE"]
-			description: ["2 A of its tier, LV to UV."]
+			description: ["2 A of its tier, LV to UHV."]
 			icon: "grindless:lv_wireless_dynamo_cover"
 			id: "54D4653CC016835A"
 			size: 1.0d
@@ -1998,7 +2045,7 @@
 			dependencies: ["1A64E503878275AE"]
 			description: [
 				"Above the network's voltage it gets nothing; shift-right-click it with an empty hand to see why."
-				"Comes in 2, 4, 16 and 64 A, LV to UV."
+				"Comes in 2, 4, 16 and 64 A, LV to UHV."
 			]
 			icon: "gtceu:lv_wireless_energy_hatch"
 			id: "5062E82EF67AFF89"
@@ -2016,7 +2063,7 @@
 			dependencies: ["1A64E503878275AE"]
 			description: [
 				"GTM machines, chargers and battery buffers, not converters or multiblock controllers; shift-right-click with an empty hand for the readout."
-				"2 A of its tier, LV to UV."
+				"2 A of its tier, LV to UHV."
 			]
 			icon: "grindless:lv_wireless_energy_cover"
 			id: "7713822C036911A8"

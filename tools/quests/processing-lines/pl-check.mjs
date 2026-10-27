@@ -484,8 +484,10 @@ function checkFig(nd, f) {
       const cellPending = newCell ? `${f.item} is newer than the dump (registered by this checkout's startup scripts)` : undefined;
       if (!electric) return { ok: true, how: `${wirelessSrc.from}: ${row.capacity}`, pending: cellPending };
       const bat = (electric.items || []).find((x) => x.id === row.referenceBattery);
-      return bat && bat.capacity * 6 === f.eu ? { ok: true, how: `${wirelessSrc.from}: ${row.capacity} = 6 x ${row.referenceBattery} (electric.json: ${bat.capacity})`, pending: cellPending }
-        : fail(`6 x ${row.referenceBattery} = ${bat ? bat.capacity * 6 : 'no entry in electric.json'}`);
+      // a cell holds six reference batteries; the UHV row sets referenceCount 24 (GTM's tier-9 battery is Long.MAX_VALUE: no reference)
+      const count = row.referenceCount ?? 6;
+      return bat && bat.capacity * count === f.eu ? { ok: true, how: `${wirelessSrc.from}: ${row.capacity} = ${count} x ${row.referenceBattery} (electric.json: ${bat.capacity})`, pending: cellPending }
+        : fail(`${count} x ${row.referenceBattery} = ${bat ? bat.capacity * count : 'no entry in electric.json'}`);
     }
     case 'wslots': {
       if (!wireless) return fail('no tables/wireless_energy.json in this checkout or in the dump\'s upload.zip');
