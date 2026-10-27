@@ -102,6 +102,7 @@
     })
     console.info(LOG + 'cryogenic plant recipes added: ' + CRYO.recipes.length)
     addTritonNitricOxide(event)
+    addKuiperNobleGas(event)
   }
 
   // UV-A1 (docs/eras/uv.md, line 3): distillation of Triton nitrogen's oxide. The 15N isotopologue of the oxide is lighter and stays
@@ -124,6 +125,31 @@
       .addDataNumber(NIGHT_KEY, Math.round(TRITON_NO.eut * NIGHT_FACTOR))
       .EUt(TRITON_NO.eut).duration(TRITON_NO.duration)
     console.info(LOG + 'cryogenic plant Triton nitric oxide row added')
+  }
+
+  // UV-B4 (docs/eras/uv.md, line 17): fractional distillation of the Kuiper noble gas the amorphous ice annealer releases on Pluto's
+  // station. Argon boils first (87 K), then krypton (120 K), then xenon (165 K): argon -> the printer, krypton -> the Hall thruster,
+  // xenon -> the ion thruster (UV-A11's thruster works). The only input is the mix: the one recipe that runs with it and nothing else.
+  var KUIPER_NOBLE = { id: 'grindless:cryogenic_processing/kuiper_noble_gas', eut: 7680, duration: 400,
+    input: { id: 'gtceu:kuiper_noble_gas', amount: 1000 },
+    outputs: [{ id: 'gtceu:argon', amount: 400 }, { id: 'gtceu:krypton', amount: 400 }, { id: 'gtceu:xenon', amount: 200 }] }
+  CRYO.kuiperRow = KUIPER_NOBLE
+
+  function addKuiperNobleGas(event) {
+    var ids = [KUIPER_NOBLE.input.id].concat(KUIPER_NOBLE.outputs.map(function (f) { return f.id }))
+    var missing = ids.filter(function (id) { return !Fluid.exists(id) })
+    if (missing.length > 0) {
+      console.error(LOG + 'cryogenic plant Kuiper noble gas row skipped, unknown fluid(s): ' + missing.join(', '))
+      return
+    }
+    var out = KUIPER_NOBLE.outputs
+    event.recipes.gtceu.cryogenic_processing('grindless:kuiper_noble_gas')
+      .inputFluids(Fluid.of(KUIPER_NOBLE.input.id, KUIPER_NOBLE.input.amount))
+      .outputFluids(Fluid.of(out[0].id, out[0].amount), Fluid.of(out[1].id, out[1].amount), Fluid.of(out[2].id, out[2].amount))
+      .dimension(DIMENSION)
+      .addDataNumber(NIGHT_KEY, Math.round(KUIPER_NOBLE.eut * NIGHT_FACTOR))
+      .EUt(KUIPER_NOBLE.eut).duration(KUIPER_NOBLE.duration)
+    console.info(LOG + 'cryogenic plant Kuiper noble gas row added')
   }
 
   function addCrafting(event) {
