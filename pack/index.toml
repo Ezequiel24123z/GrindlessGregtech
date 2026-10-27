@@ -681,6 +681,26 @@ file = "kubejs/assets/grindless/textures/block/multiblock/antimatter_trap/overla
 hash = "491ea51d46bc1f0c0ff11ed9293461cc67de293c7672abbc45f67563f8fe1f1a"
 
 [[files]]
+file = "kubejs/assets/grindless/textures/block/multiblock/ark_biosphere/overlay_front.png"
+hash = "3ac61949dcf47405244fa3c1b0c226e26d533e2d065a024cec0381bc1616f393"
+
+[[files]]
+file = "kubejs/assets/grindless/textures/block/multiblock/ark_biosphere/overlay_front_active.png"
+hash = "776916ca3a4dbea159eb49051901384c185ebfce1112adc76095e99d70b14e11"
+
+[[files]]
+file = "kubejs/assets/grindless/textures/block/multiblock/ark_biosphere/overlay_front_active.png.mcmeta"
+hash = "491ea51d46bc1f0c0ff11ed9293461cc67de293c7672abbc45f67563f8fe1f1a"
+
+[[files]]
+file = "kubejs/assets/grindless/textures/block/multiblock/ark_biosphere/overlay_front_active_emissive.png"
+hash = "24262a00e5c98985b218f2c25d833617d86af634072e5461ae16f6b63fa9c356"
+
+[[files]]
+file = "kubejs/assets/grindless/textures/block/multiblock/ark_biosphere/overlay_front_active_emissive.png.mcmeta"
+hash = "491ea51d46bc1f0c0ff11ed9293461cc67de293c7672abbc45f67563f8fe1f1a"
+
+[[files]]
 file = "kubejs/assets/grindless/textures/block/multiblock/asteroid_processor/overlay_front.png"
 hash = "6807748a5140044979fd56f4b938d7c8c18f43cb5d94a647944f1ae8350789b0"
 
@@ -1877,6 +1897,26 @@ file = "kubejs/assets/grindless/textures/block/multiblock/naquadria_refinery/ove
 hash = "491ea51d46bc1f0c0ff11ed9293461cc67de293c7672abbc45f67563f8fe1f1a"
 
 [[files]]
+file = "kubejs/assets/grindless/textures/block/multiblock/neural_culture_vat/overlay_front.png"
+hash = "e7e27144afdfb9bce27efa87300827c3fa68f1efa32d28530ec2ef43aaab5534"
+
+[[files]]
+file = "kubejs/assets/grindless/textures/block/multiblock/neural_culture_vat/overlay_front_active.png"
+hash = "1a955f72c2b29624c98d3aca5d465dabd6f4c9b932f92b0a6bd0797ec8b97f8b"
+
+[[files]]
+file = "kubejs/assets/grindless/textures/block/multiblock/neural_culture_vat/overlay_front_active.png.mcmeta"
+hash = "491ea51d46bc1f0c0ff11ed9293461cc67de293c7672abbc45f67563f8fe1f1a"
+
+[[files]]
+file = "kubejs/assets/grindless/textures/block/multiblock/neural_culture_vat/overlay_front_active_emissive.png"
+hash = "f429a17d6ee68b17f179cf7937bf7c99ed5f9b26cade5fcfd11ab3c152728b3f"
+
+[[files]]
+file = "kubejs/assets/grindless/textures/block/multiblock/neural_culture_vat/overlay_front_active_emissive.png.mcmeta"
+hash = "491ea51d46bc1f0c0ff11ed9293461cc67de293c7672abbc45f67563f8fe1f1a"
+
+[[files]]
 file = "kubejs/assets/grindless/textures/block/multiblock/neutrino_observatory/overlay_front.png"
 hash = "7ea8a4789b5dad9326e179fe3af956d4b9a3da288cc9ddee769128141582ccde"
 
@@ -2871,6 +2911,10 @@ hash = "0e5cd45ec3e78ec12cc52b3447286bd8516c14dd2f72f672cacb5b175e23e944"
 [[files]]
 file = "kubejs/assets/grindless/textures/item/aerogel_cartridge.png"
 hash = "52e949ec0122a7cacd5ded6a19c25d86d12138f1ed48b8824e41c44e3bc2348c"
+
+[[files]]
+file = "kubejs/assets/grindless/textures/item/algae_culture.png"
+hash = "21f0d2e566d77aefee96fb17d4353c15012893a00133e34115224800d87eb3df"
 
 [[files]]
 file = "kubejs/assets/grindless/textures/item/americium_micro_source.png"
@@ -4057,6 +4101,10 @@ file = "kubejs/client_scripts/grindless/uv_heat_sources_lang.js"
 hash = "82a001176eb5cc48a08ad3eed04c77cba536b1adcd24bf75a53c820413aad01e"
 
 [[files]]
+file = "kubejs/client_scripts/grindless/uv_life_lang.js"
+hash = "e53d5fa247845c2922b24c235bb24e85771ff08c272ffcc4da5f7bd2c88e152e"
+
+[[files]]
 file = "kubejs/client_scripts/grindless/uv_materials_lang.js"
 hash = "6b2c8b404603c85b1b58902ad9617b66409f75bc8ab52de96e8e3bc5950428ed"
 
@@ -4973,6 +5021,10 @@ file = "kubejs/server_scripts/grindless/uv/heat_sources.js"
 hash = "8eb1996be2e94c4e4b702697a6d14b6848c5702a673c2c5ad0d1ef92ff8f6ed1"
 
 [[files]]
+file = "kubejs/server_scripts/grindless/uv/life.js"
+hash = "e8bf9608555bd844e765eaa2f49ef38fbfda728f481632771fab22b8e0da0408"
+
+[[files]]
 file = "kubejs/server_scripts/grindless/uv/materials.js"
 hash = "1b57fd5a87ec2b11d421d0d4e7a6b93043ea6577476341cc2b68fd620eb40988"
 
@@ -5399,6 +5451,10 @@ hash = "9b277b41333ff1fc99933cf0ca223453da5ded76b95ced7fc35e4ca9f2f956ce"
 [[files]]
 file = "kubejs/startup_scripts/grindless/uv/heat_sources.js"
 hash = "ed8ada802862ede0b22f573483c861b8c0f013d1f1708440dd0070823dd70ce3"
+
+[[files]]
+file = "kubejs/startup_scripts/grindless/uv/life.js"
+hash = "9c758df206acd2d87188ff98993281c4f91647ce7189ef5174992b647289f559"
 
 [[files]]
 file = "kubejs/startup_scripts/grindless/uv/materials.js"
