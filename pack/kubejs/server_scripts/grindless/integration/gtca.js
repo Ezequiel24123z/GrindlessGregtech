@@ -64,7 +64,9 @@
     'gtceu:chemical_plant/e85fuel_cp', 'gtceu:combustion_generator/e85fuel',
     'gtceu:gas_turbine/dymethyl_ether', 'gtceu:dehydrator/dymethyl_ether', 'gtceu:thermal_reactor/dymethyl_ether',
     'gtceu:chemical_reactor/nether_star_from_pearl_dust', 'gtceu:large_chemical_reactor/nether_star_from_pearl_dust',
-    'gtceu:uu_matter_fabricator/uumatter_amped'
+    'gtceu:uu_matter_fabricator/uumatter_amped',
+    // GTCA's elevator module test recipes (UHV-S0-8: the modules are hidden until UEV)
+    'gtceu:space_miner/ha', 'gtceu:space_pump/test'
   ]
 
   // items nothing may make any more: the controllers of the removed machines, scrap and the scrap box
