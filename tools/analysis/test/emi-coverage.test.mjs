@@ -297,8 +297,9 @@ test('the dimension markers of the old hidden table (disabled, not index-only) d
   // 40 since UV-B4: the Kuiper noble gas row of the same plant; 41 since UV-B5: the starshot laser-sail launch (no longer pending);
   // 42 since UHV-A6: the 99.999 % neon row of the same plant; 46 since UHV-B2: Mercury's regolith dig and the solar vapour furnace's three rows;
   // 48 since UHV-B4: the sample receiving facility's receive and isolate rows (Earth only); 49 since UHV-B3: the Moon cryogenic plant's oganesson propellant row;
-  // 51 since UHV-B6: the organoid array's two rows (Earth only)
-  assert.equal(markerDropped.length, 51, markerDropped.map((d) => d.id).join('\n'));
+  // 51 since UHV-B6: the organoid array's two rows (Earth only); 53 since UHV-B5: the regolith cell's Proxima tailings row (Moon) and the
+  // sample receiving facility's extremophile row (Earth; shown once the cold-trap drill makes the ice core)
+  assert.equal(markerDropped.length, 53, markerDropped.map((d) => d.id).join('\n'));
   assert.ok(markerDropped.every((d) => d.disabledBy.every((b) => b.startsWith('dimension marker '))));
   const now = new Map(fixtureExpectations(packRun.res).items.map((e) => [e.id, e]));
   const lost = [];
@@ -312,8 +313,9 @@ test('the dimension markers of the old hidden table (disabled, not index-only) d
   // + 11 since UHV-B2: the roles of Mercury's regolith dig and solar vapour furnace rows (regolith, stripped regolith, residue,
   // crucible lining, silicon monoxide, bucket drum, iridosmine sample); + 4 since UHV-B4: the sample receiving facility's roles (flora sample used;
   // characterised strain, sterilised extract and genome data made); + 6 since UHV-B6: the organoid array's roles (organoid processor made and used;
-  // sterilised growth medium, ultrapure water, chitosan scaffold and SiC power module used)
-  assert.equal(lost.length, 77, lost.join('\n'));
+  // sterilised growth medium, ultrapure water, chitosan scaffold and SiC power module used); + 3 since UHV-B5: leached tailings used in the
+  // regolith cell, the Proxima ice core used and sterilised ice organics made in sample receiving
+  assert.equal(lost.length, 80, lost.join('\n'));
   for (const route of ['grindless:mars_chart made in gtceu:deep_space_tracking', 'grindless:vein_sample_ice_mars used in gtceu:vein_drilling',
     'gtceu:liquid_nitrogen made in gtceu:cryogenic_processing', 'gtceu:heavy_water made in gtceu:detritiation',
     'grindless:titanium_drill_bit used in gtceu:vein_drilling', 'grindless:martian_quantum_seed made in gtceu:chemical_reactor']) {
