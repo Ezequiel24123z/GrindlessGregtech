@@ -95,6 +95,7 @@ export default gate({
     ['ivFission', 'ivVenus', 'ivMercury', 'ivSolar'],
     ['luvNaq', 'luvSolar', 'luvFusion'],
     ['luvIo', 'luvTether', 'luvSI'],
+    ['zpmNaq', 'zpmMk2'],
     ['laterDyson'],
     ['gHull', 'gBat', 'gCable', 'gFar', 'gBig'],
     ...(WITH_WIRELESS ? [['gWireless']] : []),
@@ -551,6 +552,28 @@ export default gate({
           figs: [P.uses(30)],
         }),
         n('siH2', 4.5, 0, F('gtceu:hydrogen'), 'Hydrogen', { kind: 'product', from: ['si'], sub: 'For the naquadah plant, the Mk1 and the Europan culture' }),
+      ],
+    },
+    // ---------------------------------------------------------------- ZPM (docs/eras/zpm.md, "Power"); figures wait for a bench measurement
+    zpmNaq: {
+      name: 'Large naquadah reactor',
+      nodes: [
+        E('eqBig', 0, 0, 'zpm_age', '54B43A225E11111F'),
+        n('zpmReactor', 2.25, 0, M('gtnn:large_naquadah_reactor'), 'Large Naquadah Reactor', {
+          kind: 'info', tier: 'zpm', from: ['eqBig'], sub: 'Excited fuel from the Mk2; the spent fuel goes back to the fuel works',
+          desc: 'The era\'s main plant, on duranium frames. It only pays on fuel the Mk2 has excited.',
+        }),
+      ],
+    },
+    zpmMk2: {
+      name: 'Fusion Reactor Mk2',
+      nodes: [
+        E('eqMk2', 0, -0.75, 'zpm_age', '38199670D4113E48'),
+        E('eqDec', 0, 0.75, 'zpm_age', '7E64F29B6EE66B09'),
+        n('zpmFusion', 2.25, 0, M('gtceu:zpm_fusion_reactor'), 'Fusion Reactor Mk2', {
+          kind: 'info', tier: 'zpm', from: ['eqMk2', 'eqDec'], sub: 'Deuterium and helium-3 from Saturn; the plasma goes to a turbine or the converter',
+          desc: 'Helium-3 fusion needs no tritium. Its plasma is worth more in the direct energy converter than in a turbine.',
+        }),
       ],
     },
     // ---------------------------------------------------------------- later
