@@ -1,0 +1,20 @@
+{
+    "earth":  "gcyr:overworld_orbit",
+    "dimensions":  [
+                       "gcyr:overworld_orbit",
+                       "gcyr:luna_orbit",
+                       "gcyr:mars_orbit",
+                       "gcyr:venus_orbit",
+                       "gcyr:mercury_orbit",
+                       "grindless:asteroid_belt_orbit",
+                       "grindless:jupiter_orbit",
+                       "grindless:io_orbit",
+                       "grindless:europa_orbit",
+                       "grindless:ganymede_orbit",
+                       "grindless:saturn_orbit",
+                       "grindless:uranus_orbit",
+                       "grindless:neptune_orbit",
+                       "grindless:pluto_orbit",
+                       "grindless:proxima_b_orbit"
+                   ]
+}
