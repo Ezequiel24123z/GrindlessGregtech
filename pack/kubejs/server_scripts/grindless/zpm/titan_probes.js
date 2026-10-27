@@ -9,6 +9,9 @@
 //     circuit 1  4 tholin + 1,000 mB water -> 1,000 mB nitrile mix
 //     circuit 2  1,000 mB nitrile mix -> 8 carbon fibres + 500 mB ammonia
 //     circuit 3  1,000 mB nitrile mix + 2,000 mB ammonia + zinc dust (not consumed) -> 1,000 mB diaminobenzidine
+//     circuit 4  (UHV-B5, line 18; added by uhv/proxima_ground.js from tables/proxima_ground.json, so it is not in this table) 4
+//                sterilised ice organics (Proxima b's flare-cooked ice organics, sent up by AE2) + 1,000 mB water -> 1,000 mB nitrile
+//                mix: the same hydrolysis as circuit 1, Saturn orbit too
 //   telemetry_decoding (the deep space network of ZPM-A9, Earth; circuits 1-3 are A9's)
 //     circuit 4  Titan probe recording + data orb + ZPM sensor + 1,000 mB liquid helium -> a lake sampler (the lake run's payload)
 // Support: entry probe assembler (the PICA heat shields' use), probe bay casing assembler, the two controllers' crafting recipes.

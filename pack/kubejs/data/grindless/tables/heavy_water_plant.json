@@ -2,7 +2,7 @@
   "_source": "Our own table: the recipes of IV's heavy-water plant, gtceu:heavy_water_plant on its type gtceu:isotope_exchange (docs/eras/iv.md, 'Heavy-water plant', and 'Decisions taken with the raise', decision 10). Real process: the Girdler sulfide (GS) dual-temperature exchange between water and hydrogen sulfide (Spevack, 1943; Savannah River, 1952; Bruce Heavy Water Plant, Ontario), whose product (about 20 % D2O) is finished by vacuum distillation. The energy of each step is GTM's own price for the same physical work, read from the GTM recipe each stage names.",
   "_how_it_is_used": [
     "Read by startup_scripts/grindless/iv/heavy_water_plant.js (the charge, for the controller line; published as global.grindless.heavyWaterPlant) and turned into one gtceu:isotope_exchange recipe per entry by server_scripts/grindless/iv/heavy_water_plant.js, id grindless:isotope_exchange/<name> (GTM's builder puts the type in front). The smoke test gg_test_heavy_water_plant.js checks the live recipes against this table and the stages against GTM's live recipes.",
-    "The programmed circuit is the mode: 1 exchange (Martian ice -> heavy-water concentrate), 2 finishing (concentrate -> heavy water). Each recipe has its own ingredients, so GTM's recipe lookup (one recipe per ingredient path) keeps both.",
+    "The programmed circuit is the mode: 1 exchange (Martian ice -> heavy-water concentrate), 2 finishing (concentrate -> heavy water), 3 Proxima exchange (UHV-B5: Proxima b's deuterium-enriched water -> concentrate, four times the D2O per 1 000 mB of water of the Martian melt; the ice core arrives already melted by the centrifuge's steam, so the row takes no melt stage and no steam). Each recipe has its own ingredients, so GTM's recipe lookup (one recipe per ingredient path) keeps both.",
     "charge: an exchange run needs `amount` mB of this fluid in an input hatch (its own hatch: a plain hatch holds one fluid) and never drains it: GTM's notConsumableFluid (chance 0). It is needed to start, taken once whatever the overclock or parallels, and stays in the plant: it is the GS process's circulating gas, not a cost.",
     "energy: the stages of a recipe, each at the rate of the GTM recipe it names: euPer EU for every `per` units, times `amount` units. The sum is spent at no more than maxEUt: duration = ceil(energy / maxEUt) ticks, EU/t = ceil(energy / duration) (the hot cell's rule: at most one EU/t over the stages per tick).",
     "Exchange: 16 ice melt into 16 000 mB of water (melt at GTM's snow block extraction, 512 EU per 1 000 mB) and give 640 mB of D2O as 3 200 mB of concentrate (the exchange at the deuterium price of GTM's removed hydrogen_separation, 3 200 EU per 40 mB of D: 1 ice -> 40 mB D2O -> 80 mB D through IV-A1's heavy-water electrolysis). The rest of the melt leaves as depleted water (plain water, inert: to the network or voided) and the heating steam condenses into distilled water at GTM's 160 mB of steam per mB of water.",
@@ -41,6 +41,22 @@
       "maxEUt": 480,
       "energy": [
         { "stage": "vacuum distillation", "from": "gtceu:distillation_tower/distill_water_large", "euPer": 19200, "per": 576, "unit": "mB distilled", "amount": 1000 }
+      ]
+    },
+    {
+      "name": "proxima_water_exchange",
+      "mode": "exchange",
+      "circuit": 3,
+      "charge": true,
+      "itemsIn": [],
+      "fluidsIn": [{ "id": "gtceu:deuterium_enriched_water", "amount": 1000 }],
+      "fluidsOut": [
+        { "id": "gtceu:heavy_water_concentrate", "amount": 800 },
+        { "id": "minecraft:water", "amount": 200 }
+      ],
+      "maxEUt": 1920,
+      "energy": [
+        { "stage": "exchange", "from": "gtceu:centrifuge/hydrogen_separation", "euPer": 3200, "per": 40, "unit": "mB of deuterium", "amount": 320 }
       ]
     }
   ]

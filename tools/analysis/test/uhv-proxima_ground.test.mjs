@@ -42,7 +42,10 @@ const MACHINES = {
 };
 const OURS = Object.values(MACHINES).map((m) => m[1]);
 const GTM = ['chemical_reactor', 'mixer', 'centrifuge', 'assembler'];
-const rows = () => Object.entries(T.types).flatMap(([type, t]) => t.recipes.map((r) => ({ ...r, type, dataKey: t.dataKey })));
+const HOSTED = ['pgm_refining', 'tholin_reforming'];
+const rows = () => Object.entries(T.types).flatMap(([type, t]) => t.recipes.map((r) => ({ ...r, type, dataKey: t.dataKey, idPrefix: t.idPrefix || '' })));
+const idOf = (r) => `grindless:${r.type}/${r.idPrefix}${r.name}`;
+const SITE_DIMS = { proxima_b: [PROXIMA], saturn_orbit: ['grindless:saturn_orbit'] };
 
 test('the stand-in runs the Proxima ground scripts without errors, nothing clashing or skipped', () => {
   const errs = run.errors.filter((e) => /proxima_ground/.test(String(e.file)));
@@ -109,7 +112,7 @@ test('recipe lookup: unique names and circuits, no subsets inside a type, every 
     assert.equal(new Set(t.recipes.map((r) => r.name)).size, t.recipes.length, type);
     const circuits = t.recipes.map((r) => r.circuit).filter((c) => c > 0);
     assert.equal(new Set(circuits).size, circuits.length, type);
-    if (OURS.includes(type)) assert.ok(t.recipes.every((r) => r.circuit >= 1 && r.circuit <= 32), type + ' needs circuits');
+    if (OURS.includes(type) || HOSTED.includes(type)) assert.ok(t.recipes.every((r) => r.circuit >= 1 && r.circuit <= 32), type + ' needs circuits');
     else assert.ok(GTM.includes(type) && t.recipes.every((r) => r.circuit === 0), type);
     const keys = t.recipes.map((r) => new Set(inputs(r).concat([`circuit:${r.circuit}`])));
     const sub = (a, b) => [...a].every((k) => b.has(k));
@@ -118,7 +121,7 @@ test('recipe lookup: unique names and circuits, no subsets inside a type, every 
     }
   }
   for (const r of rows()) {
-    const id = `grindless:${r.type}/${r.name}`;
+    const id = idOf(r);
     const d = dump(id);
     assert.ok(d, id);
     assert.equal(PG.recipes.find((x) => x.type === r.type && x.name === r.name).recipeId, id);
@@ -133,14 +136,15 @@ test('recipe lookup: unique names and circuits, no subsets inside a type, every 
   for (const r of rows().filter((x) => GTM.includes(x.type) && !UNKEYED.includes(x.name))) assert.ok(inputs(r).some((i) => i.startsWith('grindless:')), r.name);
 });
 
-test('allowlists: the drill on Proxima b\'s night side only, the heap and the ice-core melt on Proxima b only, the rest anywhere', () => {
+test('allowlists: the drill on Proxima b\'s night side only, the heap and the ice-core melt on Proxima b only, the reformer row in Saturn orbit, the rest anywhere', () => {
   for (const r of rows()) {
-    const d = dump(`grindless:${r.type}/${r.name}`);
+    const d = dump(idOf(r));
     const proxima = OURS.includes(r.type) || r.name === 'proxima_ice_core';
-    assert.equal(r.site, proxima ? 'proxima_b' : undefined, r.name);
-    assert.deepEqual(dimsOf(d), proxima ? [PROXIMA] : [], `${r.type}/${r.name}`);
+    const site = proxima ? 'proxima_b' : r.type === 'tholin_reforming' ? 'saturn_orbit' : undefined;
+    assert.equal(r.site, site, r.name);
+    assert.deepEqual(dimsOf(d), site ? SITE_DIMS[site] : [], idOf(r));
     const biomes = condsOf(d, 'biome').map((c) => (c.args || [])[0]);
-    assert.deepEqual(biomes, r.type === 'cold_trap_drilling' ? [NIGHT_SIDE] : [], `${r.type}/${r.name} biome`);
+    assert.deepEqual(biomes, r.type === 'cold_trap_drilling' ? [NIGHT_SIDE] : [], `${idOf(r)} biome`);
   }
   assert.ok(PG.recipes.filter((x) => x.type === 'cold_trap_drilling').every((x) => x.biome === NIGHT_SIDE), 'the builder took the biome');
 });
@@ -194,6 +198,71 @@ test('every new intermediate and B4 leftover has a destination; the byproducts g
   assert.ok(users('gtceu:ammonium_chloride_dust').includes('grindless:mixer/proxima_ammonium_fertiliser'));
   assert.ok(makers('grindless:sterilised_ice_organics').includes('grindless:centrifuge/proxima_ice_core'));
   assert.deepEqual(makers('gtceu:deuterium_enriched_water'), ['grindless:centrifuge/proxima_ice_core']);
+});
+
+test('the older machines\' Proxima rows: each in the dump on a circuit its type leaves free, inside the host\'s slots, the only users of the new fluids', () => {
+  const older = /(regolith_cell|extraction_cascade|heavy_water_plant|titan_probes|platinum_plant)\.js/;
+  assert.deepEqual(run.errors.filter((e) => older.test(String(e.file))), []);
+  const ROWS = {
+    pgm: ['grindless:pgm_refining/uhv/proxima_liquor', 6],
+    tholin: ['grindless:tholin_reforming/uhv/proxima_organics_hydrolysis', 4],
+    heavy: ['grindless:isotope_exchange/proxima_water_exchange', 3],
+    cascade: ['grindless:solvent_extraction/ev/proxima_ree_liquor', 7],
+    regolith: ['grindless:regolith_processing/ev/proxima_tailings', 2]
+  };
+  const d = {};
+  for (const [k, [id, c]] of Object.entries(ROWS)) {
+    d[k] = dump(id);
+    assert.ok(d[k], id);
+    assert.deepEqual(circuitOf(d[k]), [c], id);
+    // the regolith cell's circuit 2 is its electrolysis mode: three feeds, one per row, so the lookup still sees one recipe each
+    const same = recipes.filter((r) => r.t === d[k].t && r.i !== id && circuitOf(r).includes(c));
+    if (k === 'regolith') assert.ok(same.length > 0 && same.every((r) => !has(ins(r), 'grindless:leached_tailings')), id);
+    else assert.deepEqual(same.map((r) => r.i), [], id);
+  }
+  const slots = (r) => {
+    const items = r.j.inputs.item.filter((i) => i.content.type !== 'gtceu:circuit');
+    return [items.length, r.j.inputs.fluid.length, r.j.outputs.item.length, r.j.outputs.fluid.length];
+  };
+  // the platinum plant: its own maxIO (the circuit takes an item slot), the worn electrode as in its other modes, voiding refused
+  const pp = read('startup_scripts/grindless/ev/platinum_plant.js').match(/PP\.maxIO = \{ itemsIn: (\d+), itemsOut: (\d+), fluidsIn: (\d+), fluidsOut: (\d+) \}/);
+  const [pi, pf, po, pfo] = slots(d.pgm);
+  assert.ok(pp && pi + 1 <= +pp[1] && po <= +pp[2] && pf <= +pp[3] && pfo <= +pp[4], 'platinum plant slots');
+  assert.equal(d.pgm.j.inputs.item.find((i) => JSON.stringify(i).includes('"grindless:platinum_electrode"')).chance, 10);
+  for (const m of ['platinum', 'palladium', 'ruthenium', 'iridium']) assert.ok(has(outs(d.pgm), `gtceu:${m}_dust`), m);
+  assert.equal(T.types.pgm_refining.keep, true);
+  assert.ok(read('server_scripts/grindless/uhv/proxima_ground.js').includes('recipe.addDataBool('));
+  assert.ok(!read('server_scripts/grindless/ev/platinum_plant.js').includes('proxima'), 'the plant\'s own script is untouched');
+  // the tholin reformer: io [1, 1, 2, 1] like its own circuit 1 hydrolysis (the circuit does not take its one item slot), in Saturn orbit
+  const reformer = plain(run.global.grindless.zpmTitanProbes).machines.find((m) => m.type === 'tholin_reforming').io;
+  const [ti, tf, to, tfo] = slots(d.tholin);
+  assert.ok(ti <= reformer[0] && tf <= reformer[1] && to <= reformer[2] && tfo <= reformer[3], 'reformer slots ' + reformer);
+  assert.ok(has(outs(d.tholin), 'gtceu:titan_nitriles') && has(ins(d.tholin), 'grindless:sterilised_ice_organics'));
+  assert.ok(!/name: 'proxima/.test(read('server_scripts/grindless/zpm/titan_probes.js')), 'the probes\' own table keeps its six rows');
+  // the heavy water plant: four times the Martian melt's D2O per 1 000 mB of water, the same charge, no melt and no steam
+  const HW = JSON.parse(read('data/grindless/tables/heavy_water_plant.json')).recipes;
+  const mars = HW.find((r) => r.name === 'martian_ice_exchange');
+  const prox = HW.find((r) => r.name === 'proxima_water_exchange');
+  const conc = (r) => r.fluidsOut.find((x) => x.id === 'gtceu:heavy_water_concentrate').amount;
+  const melt = mars.energy.find((s) => s.stage === 'melt').amount;
+  assert.equal(conc(prox) / prox.fluidsIn[0].amount, 4 * conc(mars) / melt);
+  assert.equal(prox.charge, true);
+  assert.deepEqual(prox.energy.map((s) => s.stage), ['exchange']);
+  assert.ok(!has(ins(d.heavy), 'gtceu:steam'));
+  // the cascade takes the REE liquor; the regolith cell takes the tailings on the Moon with its anode, giving silica, iron and oxygen
+  assert.ok(has(ins(d.cascade), 'gtceu:proxima_ree_liquor'));
+  assert.equal(dimsOf(d.regolith).length, 1);
+  assert.deepEqual(dimsOf(d.regolith), dimsOf(dump('grindless:regolith_processing/ev/regolith_electrolysis')));
+  const tail = d.regolith.j.inputs.item.find((i) => JSON.stringify(i).includes('"grindless:leached_tailings"'));
+  assert.equal(tail.content.count, 16);
+  assert.equal(d.regolith.j.inputs.item.find((i) => JSON.stringify(i).includes('"grindless:platinum_electrode"')).chance, 10);
+  for (const id of ['gtceu:silicon_dioxide_dust', 'gtceu:iron_dust', 'gtceu:oxygen']) assert.ok(has(outs(d.regolith), id), id);
+  // the only users
+  assert.deepEqual(users('gtceu:proxima_pgm_liquor'), [d.pgm.i]);
+  assert.deepEqual(users('gtceu:proxima_ree_liquor'), [d.cascade.i]);
+  assert.deepEqual(users('gtceu:deuterium_enriched_water'), [d.heavy.i]);
+  assert.ok(users('grindless:sterilised_ice_organics').includes(d.tholin.i));
+  assert.ok(users('grindless:leached_tailings').includes(d.regolith.i));
 });
 
 test('controllers: UHV hull and circuits, a shaped pattern no other crafting recipe uses (mirrors too)', () => {
