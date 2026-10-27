@@ -1,3 +1,4 @@
+// priority: 7400
 // LuV B6 names: the fumarole condenser and the volcanic intake (startup_scripts/grindless/luv/io_surface.js).
 ClientEvents.lang('en_us', function (event) {
   function add(k, v) { event.add('grindless', k, v) }

@@ -1,3 +1,4 @@
+// priority: -13524
 // -----------------------------------------------------------------------------------------------
 // gtceu:refining recipes of the Refinery (gtceu:refinery), generated at server load from GTM's own recipes. Nothing is typed by hand: the
 // stages are read from the recipe set (ServerEvents.recipes, original recipes, their JSON) and chained, so the ratios are GTM's by

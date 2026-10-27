@@ -1,3 +1,4 @@
+// priority: -23224
 // -----------------------------------------------------------------------------------------------
 // Recipes of UHV's ultrapure water plant and betavoltaic fab (machines and recipe types: startup_scripts/grindless/uhv/betavoltaics.js;
 // docs/eras/uhv.md, machines 9 and 10, lines 4, 11 and 22; package UHV-A3), generated at every server load from

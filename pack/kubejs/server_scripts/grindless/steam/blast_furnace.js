@@ -1,3 +1,4 @@
+// priority: -22224
 // -----------------------------------------------------------------------------------------------
 // gtceu:steelmaking recipes of the Steam Blast Furnace (gtceu:steam_blast_furnace), its flux tag and its controller.
 //

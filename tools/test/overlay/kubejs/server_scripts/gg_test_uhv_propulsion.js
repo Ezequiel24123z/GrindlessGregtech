@@ -1,3 +1,4 @@
+// priority: -7924
 // TEST ONLY, UHV-A8. Command: kubejs custom_command gg_test_uhv_propulsion
 // Band ONLY: X 28416-28479, Z 0-63, Overworld Y 60-120.
 // Doubt: the ICAN rocket motor (createCustom GCYR RocketMotorBlock) is tier 6 in the real game, so with the BNNT tank (tier 11)

@@ -1,3 +1,4 @@
+// priority: 8700
 // Gregtech Grindless - names and tooltips of IV-B5, travel and network (startup_scripts/grindless/iv/travel_network.js):
 //
 //   gtceu:ev_rtg, gtceu.radioisotope_decay                the RTG cell (machine name and tooltips) and its recipe type

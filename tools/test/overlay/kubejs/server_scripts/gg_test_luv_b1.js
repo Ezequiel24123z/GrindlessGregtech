@@ -1,3 +1,4 @@
+// priority: -3724
 // TEST-ONLY B1 fixture (LuV travel: the level 4 tank, the places, the bridges); prepared for the single integrated LuV validation
 // owner, not a standalone launch. Only the properties of B1's final content that spikes S0-1/S0-2 (disposable ids) left unproven.
 // Command: kubejs custom_command gg_test_luv_b1

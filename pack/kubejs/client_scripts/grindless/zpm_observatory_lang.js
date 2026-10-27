@@ -1,3 +1,4 @@
+// priority: 800
 // Gregtech Grindless - names and tooltips of ZPM's survey network (startup_scripts/grindless/zpm/observatory.js):
 // gtceu:neutrino_observatory, gtceu:deep_space_network, gtceu:kuiper_survey_telescope and their recipe types.
 ClientEvents.lang('en_us', event => {

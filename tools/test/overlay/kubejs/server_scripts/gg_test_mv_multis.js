@@ -1,3 +1,4 @@
+// priority: -5924
 // Gregtech Grindless - smoke test of the MV Vein Drill / Greenhouse (TEST-ONLY overlay: copied over the instance on the test PC,
 // never shipped with the pack).
 //

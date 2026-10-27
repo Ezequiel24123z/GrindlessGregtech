@@ -1,3 +1,4 @@
+// priority: -9524
 // Gregtech Grindless - UV-S0 spike S0-1, test gg_test_uv_s0_flight: one real client flight from the Overworld to the disposable
 // grindless:s0_pluto (tier 7) in a rocket with grindless:s0_uv_tank (tier 11). Adapted from the ZPM-B1 flight test; the comments
 // below describe that origin. Needs the tools/test/uv-s0 data merged over the overlay (see docs/research/uv-s0.md).

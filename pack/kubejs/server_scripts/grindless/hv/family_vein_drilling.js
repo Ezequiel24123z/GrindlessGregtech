@@ -1,3 +1,4 @@
+// priority: -13424
 // -----------------------------------------------------------------------------------------------
 // gtceu:vein_drilling recipes of the HV Vein Drill (gtceu:hv_vein_drill), generated from the vein tables. Every recipe lives under
 // grindless:vein_drilling/hv/... (except the End veins with the vanadium steel bit: mv/, see below): the LV and MV drills skip those

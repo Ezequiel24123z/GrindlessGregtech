@@ -1,3 +1,4 @@
+// priority: -26424
 // -----------------------------------------------------------------------------------------------
 // ZPM-A7: the Mk2 audit, our D + He-3 recipe, and the recipes of machines 7 (plasma quench caster) and 8 (direct energy converter)
 // (docs/eras/zpm.md, "Fusion, and what is not fusion", "Machines 7-8"; machines and types: startup_scripts/grindless/zpm/fusion.js).

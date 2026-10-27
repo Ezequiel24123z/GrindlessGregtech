@@ -1,3 +1,4 @@
+// priority: -18024
 // -----------------------------------------------------------------------------------------------
 // LuV-B10: GTM's Fusion Reactor Mk1 as docs/eras/luv.md integrates it ("Fusion, and what is not fusion", decisions 6, 19 and 20).
 // The audit of every gtceu:fusion_reactor recipe in the native dump, with its fate, is data/grindless/tables/fusion_mk1.json.

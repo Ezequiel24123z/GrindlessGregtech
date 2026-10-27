@@ -1,3 +1,4 @@
+// priority: 7500
 // LuV B7 names: the flux-tube tether and its fallback, the sulfur-iodine plant (startup_scripts/grindless/luv/io_orbit.js). Only one of
 // the two is registered (tables/stations.json); the other's keys are unused.
 ClientEvents.lang('en_us', function (event) {

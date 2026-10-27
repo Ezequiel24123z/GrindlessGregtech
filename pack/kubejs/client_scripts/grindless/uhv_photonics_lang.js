@@ -1,3 +1,4 @@
+// priority: 4400
 // Gregtech Grindless - names and tooltips of UHV's photonics (startup_scripts/grindless/uhv/photonics.js; package UHV-A4):
 //
 //   block.gtceu.<machine>, gtceu.<recipe type>                    machine and recipe type names

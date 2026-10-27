@@ -1,3 +1,4 @@
+// priority: -8924
 ﻿// TEST ONLY, UV-A3. Command: kubejs custom_command gg_test_uv_fusion   Reserved band: X 23808-23871, Z 0-63, Overworld Y 98-112.
 // Run: powershell -File tools\test\Invoke-GGTest.ps1 -Suite server -Commands 'kubejs custom_command gg_test_uv_fusion' `
 //        -WaitForLog 'GGTEST\|uv_fusion\|DONE'

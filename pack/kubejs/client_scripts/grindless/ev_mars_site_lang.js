@@ -1,3 +1,4 @@
+// priority: 10400
 // Gregtech Grindless - names and tooltips of the EV Atmosphere Processor (the Mars base).
 //
 //   gtceu:atmosphere_processor           (machine name + tooltips)

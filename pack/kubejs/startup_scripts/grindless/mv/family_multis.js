@@ -1,3 +1,4 @@
+// priority: -6000
 // -----------------------------------------------------------------------------------------------
 // The MV step of the LV family: same recipe types and same structure shape as LV, aluminium instead of steel, 16 runs at once.
 //

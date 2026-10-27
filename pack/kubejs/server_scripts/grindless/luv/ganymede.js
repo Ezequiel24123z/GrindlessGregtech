@@ -1,3 +1,4 @@
+// priority: -18124
 // -----------------------------------------------------------------------------------------------
 // LuV B9, Ganymede (docs/eras/luv.md, machines 19 and 20; machines and types: startup_scripts/grindless/luv/ganymede.js).
 // Every run is on Ganymede only (G.places, 'ganymede') and keeps its output (no voiding).

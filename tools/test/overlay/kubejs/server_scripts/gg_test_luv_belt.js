@@ -1,3 +1,4 @@
+// priority: -3824
 // TEST ONLY, LuV B5 (the asteroid belt). Command: kubejs custom_command gg_test_luv_belt
 // Prepared for LuV's single integrated run; never launches a JVM. Marker: GGTEST|luv_belt|DONE (wait at most 180 s).
 // Covers only what B5 adds: startup_scripts/grindless/luv/asteroid_belt.js, server_scripts/grindless/luv/asteroid_belt.js and

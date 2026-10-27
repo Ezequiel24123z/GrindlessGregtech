@@ -1,3 +1,4 @@
+// priority: -22624
 // -----------------------------------------------------------------------------------------------
 // Hologram Projector (grindless:hologram_projector): what it does with a multiblock controller. GTM's Terminal (gtceu:terminal)
 // does exactly the same in this pack.

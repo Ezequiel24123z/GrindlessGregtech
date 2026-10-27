@@ -1,4 +1,4 @@
-// priority: 997
+// priority: 500
 // -----------------------------------------------------------------------------------------------
 // Grindless parallel hatch helper (package IV-B6, docs/eras/iv.md "Nothing one at a time"): GTM's Parallel Control Hatch in our plants,
 // the way GTM's GCYM machines take it (GCYMMachines: Predicates.autoAbilities(..., checkParallel) in the pattern and

@@ -1,3 +1,4 @@
+// priority: -13224
 // -----------------------------------------------------------------------------------------------
 // Ender eye, MV era (the End is MV, DECISIONS.md 2026-10-24; it was decision 5 of docs/eras/hv.md): the vanilla recipe (ender pearl +
 // blaze powder, shapeless, minecraft:ender_eye) goes away, so an eye is only made through GregTech's route, which GTM 7.5.3 already

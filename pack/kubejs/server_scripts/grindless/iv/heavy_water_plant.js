@@ -1,3 +1,4 @@
+// priority: -16524
 // -----------------------------------------------------------------------------------------------
 // Recipes of IV's heavy-water plant (machine and recipe type: startup_scripts/grindless/iv/heavy_water_plant.js; docs/eras/iv.md,
 // "Heavy-water plant"; package IV-A5), generated at every server load from data/grindless/tables/heavy_water_plant.json, and the recipe

@@ -1,3 +1,4 @@
+// priority: -224
 // Gregtech Grindless - AE2 integration test (TEST-ONLY overlay: copied over the instance on the test PC, never
 // shipped in the pack). Checks the final recipe set through the recipe manager.
 //

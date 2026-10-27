@@ -1,3 +1,4 @@
+// priority: -27024
 // -----------------------------------------------------------------------------------------------
 // Recipes of ZPM's Saturn science (machines: startup_scripts/grindless/zpm/saturn_science.js; docs/eras/zpm.md "Machines 23-24"; ZPM-B4).
 // Every machine recipe carries .dimension('grindless:saturn_orbit') and its own programmed circuit (one recipe per lookup path).

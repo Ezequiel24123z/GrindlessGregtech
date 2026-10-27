@@ -1,3 +1,4 @@
+// priority: -6524
 // Gregtech Grindless - test overlay (not shipped with the pack)
 //
 // REAL-PLAYER test of AE2WTLib's Quantum Bridge Card in this pack (client suite only): does a wireless terminal reach the home AE2

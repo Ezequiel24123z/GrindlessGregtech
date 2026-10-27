@@ -1,3 +1,4 @@
+// priority: 10500
 // Gregtech Grindless - names and tooltips of the EV Moon base's family steps (startup_scripts/grindless/ev/lunar_power_and_antenna.js):
 //
 //   gtceu:lunar_solar_array, gtceu:deep_space_antenna             (machine names, tooltips and the array's controller lines)

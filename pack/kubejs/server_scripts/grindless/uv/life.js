@@ -1,3 +1,4 @@
+// priority: -25324
 // -----------------------------------------------------------------------------------------------
 // Recipes of UV's life (docs/eras/uv.md, machines 19 and 20, line 19; package UV-A10): the ark biosphere and the neural culture vat
 // (machines: startup_scripts/grindless/uv/life.js). VA[ZPM] = 122,880 EU/t, VA[UV] = 491,520 EU/t. One "biomass" of the design is

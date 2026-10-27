@@ -1,3 +1,4 @@
+// priority: -2800
 // -----------------------------------------------------------------------------------------------
 // One of IV's multiblocks (docs/eras/iv.md, "Hot cell"; package IV-A3): the hot cell and its recipe type.
 //

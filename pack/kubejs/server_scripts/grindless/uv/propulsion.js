@@ -1,3 +1,4 @@
+// priority: -25824
 // -----------------------------------------------------------------------------------------------
 // Recipes of UV's propulsion (docs/eras/uv.md, machines 16 and 17; package UV-A11): the cryotank winder, the thruster works and the side
 // steps that make their parts (machines and items: startup_scripts/grindless/uv/propulsion.js). VA[ZPM] = 122,880 EU/t, VA[UV] = 491,520.

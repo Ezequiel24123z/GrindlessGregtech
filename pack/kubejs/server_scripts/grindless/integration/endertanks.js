@@ -1,3 +1,4 @@
+// priority: -14424
 // -----------------------------------------------------------------------------------------------
 // EnderTanks (endertanks, ShetiPhian): wireless fluid storage is an MV item, same rule as the EnderChests (see enderchests.js):
 // no blaze rods or powder (the blaze is the End trip, MV since v0.5.0), the ender pearl from the LV creature simulator, aluminium plates and an MV circuit.

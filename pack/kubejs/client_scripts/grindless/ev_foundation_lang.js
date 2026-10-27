@@ -1,3 +1,4 @@
+// priority: 10600
 // Gregtech Grindless - names and tooltips of the EV foundation (startup_scripts/grindless/ev/foundation.js):
 //
 //   grindless:sintered_regolith, molten_salt_charge, ruthenium_catalyst, mars_chart     (block and items)

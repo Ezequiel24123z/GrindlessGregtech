@@ -1,3 +1,4 @@
+// priority: -8000
 // -----------------------------------------------------------------------------------------------
 // UHV foundation (package UHV-F1, docs/eras/uhv.md "Build order", F1): the shared registrations the UHV packages build on. No machines,
 // no recipe types, no recipes, no planets, orbits, dimensions or station items (B1 owns them), no wireless hatches, covers or cell (the

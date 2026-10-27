@@ -1,3 +1,4 @@
+// priority: -22524
 // -----------------------------------------------------------------------------------------------
 // gtceu:greenhouse recipes of the Steam Greenhouse, generated from data/greenhouse.js
 // (global.grindless.greenhouse).

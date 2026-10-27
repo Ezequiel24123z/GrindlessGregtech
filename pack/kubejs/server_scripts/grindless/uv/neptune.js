@@ -1,3 +1,4 @@
+// priority: -25524
 // -----------------------------------------------------------------------------------------------
 // Recipes of UV's Neptune orbit (machines: startup_scripts/grindless/uv/neptune.js; docs/eras/uv.md, machines 24-25; UV-B2).
 // Every machine recipe carries .dimension('grindless:neptune_orbit') and its own programmed circuit (one recipe per lookup path).

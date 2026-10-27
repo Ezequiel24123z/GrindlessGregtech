@@ -1,3 +1,4 @@
+// priority: 9600
 // Gregtech Grindless - names and tooltips of the HV refining line.
 //
 //   gtceu:refinery, gtceu:reformer              (machine names + tooltips)

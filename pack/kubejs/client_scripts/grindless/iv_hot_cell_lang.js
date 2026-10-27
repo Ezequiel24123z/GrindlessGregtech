@@ -1,3 +1,4 @@
+// priority: 9100
 // Gregtech Grindless - names and tooltips of IV's Hot Cell (startup_scripts/grindless/iv/hot_cell.js), its recipe type, the EMI line of
 // each of its recipes and the reason it shows when set to void.
 //

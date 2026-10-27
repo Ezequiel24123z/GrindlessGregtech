@@ -1,3 +1,4 @@
+// priority: 7200
 ClientEvents.lang('en_us', function (event) {
   event.add('grindless', 'block.gtceu.microgravity_smelter', 'Microgravity Smelter')
   event.add('grindless', 'block.gtceu.wake_shield_facility', 'Wake Shield Facility')

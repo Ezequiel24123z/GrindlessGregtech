@@ -1,3 +1,4 @@
+// priority: -4724
 // TEST-ONLY B6 fixture (spike S0-7 and B6's mechanism checks); prepared for the single integrated LuV validation owner, not a standalone launch.
 // Command: kubejs custom_command gg_test_luv_io_surface
 // Marker: GGTEST|luv_io_surface|DONE (owner's marker wait: at most 180 seconds).

@@ -1,3 +1,4 @@
+// priority: -12224
 // -----------------------------------------------------------------------------------------------
 // gtceu:cryogenic_processing recipes of the Cryogenic Plant (gtceu:cryogenic_plant, startup_scripts/grindless/ev/cryogenic_plant.js), and
 // the recipes that make the plant and its radiators (EV era, docs/eras/ev.md, "Cryogenic plant").

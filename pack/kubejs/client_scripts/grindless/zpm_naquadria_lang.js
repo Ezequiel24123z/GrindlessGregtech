@@ -1,3 +1,4 @@
+// priority: 900
 // Gregtech Grindless - names and tooltips of ZPM's Naquadria Refinery and Naquadah Fuel Works (startup_scripts/grindless/zpm/naquadria.js),
 // their recipe types and the EMI line of each of their recipes (package ZPM-A2).
 //

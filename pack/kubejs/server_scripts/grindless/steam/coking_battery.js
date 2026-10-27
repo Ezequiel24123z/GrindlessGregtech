@@ -1,3 +1,4 @@
+// priority: -22324
 // -----------------------------------------------------------------------------------------------
 // gtceu:coking recipe of the By-product Coke Battery (gtceu:coking_battery), its controller and the Steam Age recipe of GTM's
 // ULV fluid output hatch.

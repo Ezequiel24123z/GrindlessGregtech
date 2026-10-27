@@ -1,3 +1,4 @@
+// priority: -24024
 // -----------------------------------------------------------------------------------------------
 // Recipes of UHV's Proxima life (machines and recipe types: startup_scripts/grindless/uhv/proxima_life.js; docs/eras/uhv.md, machines
 // 12, 26, 27, 28 and 30, lines 13, 14 and 15; package UHV-B4), generated at every server load from data/grindless/tables/proxima_life.json,

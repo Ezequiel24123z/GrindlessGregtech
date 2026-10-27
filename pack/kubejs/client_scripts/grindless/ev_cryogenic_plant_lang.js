@@ -1,3 +1,4 @@
+// priority: 10800
 // Gregtech Grindless - names and tooltips of the EV Cryogenic Plant and its radiator.
 //
 //   gtceu:cryogenic_plant                        (machine name + tooltips + the controller line about the sky)

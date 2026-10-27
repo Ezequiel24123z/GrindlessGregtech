@@ -1,3 +1,4 @@
+// priority: 8200
 // Gregtech Grindless - names and tooltips of LuV B5, the asteroid belt (startup_scripts/grindless/luv/asteroid_belt.js): the harpoon
 // anchor drill, the asteroid processor, the optical miner, their recipe types and lines, and the belt's vein samples.
 ClientEvents.lang('en_us', function (event) {

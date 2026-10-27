@@ -1,3 +1,4 @@
+// priority: -9600
 // -----------------------------------------------------------------------------------------------
 // UV foundation (package UV-F1, docs/eras/uv.md "Build order", F1): the shared registrations the UV packages build on. No machines,
 // no recipe types, no recipes, no planets, orbits, dimensions or station items (B1 owns them), no wireless hatches, covers or cell (the

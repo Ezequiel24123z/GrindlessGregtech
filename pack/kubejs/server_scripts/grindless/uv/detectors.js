@@ -1,3 +1,4 @@
+// priority: -24824
 // -----------------------------------------------------------------------------------------------
 // Recipes of UV's detectors (docs/eras/uv.md, machines 11 and 12, lines 10 and 21; package UV-A7): the zone refining tower and the
 // optical ground station (machines: startup_scripts/grindless/uv/detectors.js). VA[LuV] = 30,720 EU/t, VA[ZPM] = 122,880 EU/t,

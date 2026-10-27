@@ -1,3 +1,4 @@
+// priority: 300
 // Gregtech Grindless - names and tooltips of ZPM's Titan probes (startup_scripts/grindless/zpm/titan_probes.js):
 // gtceu:entry_probe_bay, gtceu:tholin_reformer, their recipe types, grindless:titan_probe_recording and the material gtceu:titan_nitriles.
 ClientEvents.lang('en_us', event => {

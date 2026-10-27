@@ -1,3 +1,4 @@
+// priority: -5800
 // -----------------------------------------------------------------------------------------------
 // The Biorefinery, the second multiblock of the MV era, and the recipe type it runs.
 //

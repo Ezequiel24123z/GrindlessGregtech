@@ -1,3 +1,4 @@
+// priority: -12000
 // -----------------------------------------------------------------------------------------------
 // ZPM's Titan probes (docs/eras/zpm.md, "Machines 21-22"; package ZPM-B3): two multiblocks of Saturn orbit and their recipe types.
 // Titan itself is not registered (decision 2): it is a probe target, every sample a machine's product.

@@ -1,3 +1,4 @@
+// priority: -19124
 // -----------------------------------------------------------------------------------------------
 // Crafting-table recipes of the LV multiblocks (made by hand from LV parts; nothing here needs a machine):
 //

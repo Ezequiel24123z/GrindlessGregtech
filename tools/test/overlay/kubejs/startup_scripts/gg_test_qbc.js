@@ -1,3 +1,4 @@
+// priority: -400
 // Gregtech Grindless - test overlay (not shipped with the pack): what the quantum bridge card test (server_scripts/gg_test_qbc.js) needs
 // from Forge events, which KubeJS server and client scripts cannot listen to (a startup script; the client event is guarded):
 //   - client: every action-bar and chat message the client receives while the test holds the client (AE2's "Wireless Out Of Range.",

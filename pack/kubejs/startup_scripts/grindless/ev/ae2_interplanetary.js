@@ -1,3 +1,4 @@
+// priority: -600
 // -----------------------------------------------------------------------------------------------
 // The AE2 network between planets, EV step (docs/eras/ev.md, "The AE2 network: EV step"; DECISIONS.md 2026-10-24: AE2 is the
 // backbone between planets, and each quantum bridge has one half built at each end).

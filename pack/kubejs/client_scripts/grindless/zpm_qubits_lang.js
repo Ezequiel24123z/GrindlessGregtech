@@ -1,3 +1,4 @@
+// priority: 600
 // Gregtech Grindless - names and tooltips of ZPM's solid-state qubit chain (startup_scripts/grindless/zpm/qubits.js):
 //   block.gtceu.<diamond_lattice_fab / ion_implanter / qubit_fab>, gtceu.<diamond_cvd / ion_implantation / qubit_fabrication>,
 //   grindless.machine.<machine>.tooltip.0-2, item.grindless.<item> and tooltip.grindless.<item>.0-1 for the five new items.

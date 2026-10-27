@@ -1,3 +1,4 @@
+// priority: -3200
 // -----------------------------------------------------------------------------------------------
 // One of IV's multiblocks (docs/eras/iv.md, "Tritium removal facility"; package IV-B4): the tritium removal facility and its recipe type.
 //

@@ -1,3 +1,4 @@
+// priority: -200
 // Test-only (harness overlay, never part of the player pack). Off unless kubejs/config/gg_test_lean_world.json says
 // {"enabled": true, "viewers": "absent" | "present"} in a private overlay.
 // A lean client world for the integrated client stages: the 4 GB test client ran out of heap when EMI's indexing, YUNG's jigsaw

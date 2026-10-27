@@ -1,3 +1,4 @@
+// priority: -17224
 // -----------------------------------------------------------------------------------------------
 // Recipes of IV's uranium cycle (machines and recipe types: startup_scripts/grindless/iv/uranium_cycle.js; docs/eras/iv.md,
 // "Uranium in-situ leach field" and "Fuel fabrication plant"; package IV-A4), generated at every server load from

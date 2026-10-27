@@ -1,3 +1,4 @@
+// priority: -10100
 // -----------------------------------------------------------------------------------------------
 // UV's materials (docs/eras/uv.md, machines 13, 14 and 15, lines 11, 14 and 15; package UV-A8): three machines, their recipe types, the
 // items only they make and two GT dusts. The F1 ids they consume or make (hbn_dust, bnnt_yarn, ented_powder, <metal>_am_powder,

@@ -1,3 +1,4 @@
+// priority: -26524
 // -----------------------------------------------------------------------------------------------
 // Recipes of ZPM's naquadria magnet works (machine and recipe type: startup_scripts/grindless/zpm/magnet_works.js; docs/eras/zpm.md,
 // "Machine 6"; package ZPM-A5), generated at every server load from data/grindless/tables/magnet_works.json, the cryostat casing's

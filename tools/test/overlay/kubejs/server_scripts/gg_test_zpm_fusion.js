@@ -1,3 +1,4 @@
+// priority: -10724
 // TEST ONLY, ZPM-A7. Command: kubejs custom_command gg_test_zpm_fusion   Reserved band: X 20736-20799, Z 0-63, Overworld Y 98-112.
 // Run: powershell -File tools\test\Invoke-GGTest.ps1 -Suite server -Commands 'kubejs custom_command gg_test_zpm_fusion' `
 //        -WaitForLog 'GGTEST\|zpm_fusion\|DONE'

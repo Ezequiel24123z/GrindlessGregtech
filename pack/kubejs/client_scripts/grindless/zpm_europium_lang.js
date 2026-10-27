@@ -1,3 +1,4 @@
+// priority: 1300
 // Gregtech Grindless - names and tooltips of ZPM's Europium Reductor and the GT materials of its line
 // (startup_scripts/grindless/zpm/europium.js):
 //

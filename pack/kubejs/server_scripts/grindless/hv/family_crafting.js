@@ -1,3 +1,4 @@
+// priority: -13324
 // -----------------------------------------------------------------------------------------------
 // Crafting-table recipes of the HV step of the Vein Drill family (made by hand from HV parts; nothing here needs a machine):
 //

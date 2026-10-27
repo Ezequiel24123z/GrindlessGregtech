@@ -1,3 +1,4 @@
+// priority: 8500
 // Gregtech Grindless - names and tooltips of IV's uranium cycle (startup_scripts/grindless/iv/uranium_cycle.js): the In-Situ Leach Field
 // and the Fuel Fabrication Plant, their recipe types, why the field refuses voiding and why it does not start outside the End.
 //

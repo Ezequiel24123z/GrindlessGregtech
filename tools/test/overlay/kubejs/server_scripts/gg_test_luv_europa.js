@@ -1,3 +1,4 @@
+// priority: -4324
 // Gregtech Grindless - TEST ONLY overlay (never shipped with the pack), package LuV-B8, Europa: the cryobot (gtceu:cryobot, type
 // gtceu:vein_drilling) and the algae bioreactor (gtceu:algae_bioreactor, type gtceu:bioreactor): startup_scripts/grindless/luv/europa.js
 // (global.grindless.europa) and server_scripts/grindless/luv/europa.js (its recipes and the bacteria cut), lib/places.js, lib/no_voiding.js.

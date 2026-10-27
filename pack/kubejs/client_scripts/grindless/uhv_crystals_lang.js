@@ -1,3 +1,4 @@
+// priority: 4800
 // Gregtech Grindless - names and tooltips of UHV's clock and crystals (startup_scripts/grindless/uhv/crystals.js; package UHV-A2):
 //
 //   block.gtceu.<machine>, gtceu.<recipe type>                    machine and recipe type names

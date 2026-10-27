@@ -1,3 +1,4 @@
+// priority: -8024
 // TEST ONLY, UHV-S0. Command: kubejs custom_command gg_test_uhv_s0_dump
 // Disposable read-only spikes, never shipped. Places nothing (band X 27904-27967 is not touched by this file).
 //   s0_1_*   which of the UHV design's ids exist in the live registries (items, fluids, blocks) with highTierContent off, the

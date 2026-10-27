@@ -1,3 +1,4 @@
+// priority: -524
 // Gregtech Grindless - test overlay (not shipped with the pack)
 //
 // REAL-PLAYER test of the stronger chest and furnace tiers (client suite only; table kubejs/data/grindless/tables/chest_furnace_tiers.json).

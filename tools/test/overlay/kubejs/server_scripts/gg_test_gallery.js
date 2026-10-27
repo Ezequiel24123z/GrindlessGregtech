@@ -1,3 +1,4 @@
+// priority: -2024
 // Gregtech Grindless - test overlay (not shipped with the pack)
 //
 // REAL-CLIENT gallery of our machines and check of our items' names and models (client suite only):

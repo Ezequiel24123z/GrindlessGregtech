@@ -1,3 +1,4 @@
+// priority: -19224
 // -----------------------------------------------------------------------------------------------
 // LV era: recipes of the Creature Simulator (see startup_scripts/grindless/lv/creatures.js). Everything is generated
 // from the creature table (kubejs/data/grindless/tables/mobs.json, loaded by the startup script into

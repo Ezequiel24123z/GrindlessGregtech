@@ -1,3 +1,4 @@
+// priority: -12100
 // -----------------------------------------------------------------------------------------------
 // ZPM travel (package ZPM-B1, docs/eras/zpm.md "Route", "Saturn, Uranus and what is only seen", "Bridges and first arrivals").
 //

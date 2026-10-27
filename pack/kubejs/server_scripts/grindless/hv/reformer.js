@@ -1,3 +1,4 @@
+// priority: -13724
 // -----------------------------------------------------------------------------------------------
 // gtceu:reforming recipes of the Catalytic Reformer (gtceu:reformer). GTM has no reforming, so these three are ours, written by hand:
 // desulfurized naphtha over a platinum catalyst becomes benzene, toluene and hydrogen. The programmed circuit picks the mix:

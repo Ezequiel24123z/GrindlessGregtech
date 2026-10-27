@@ -1,3 +1,4 @@
+// priority: -16624
 // -----------------------------------------------------------------------------------------------
 // Recipes of IV's hot cell (machine and recipe type: startup_scripts/grindless/iv/hot_cell.js; docs/eras/iv.md, "Hot cell"; package
 // IV-A3), generated at every server load from data/grindless/tables/hot_cell.json, and the recipe that makes the controller.

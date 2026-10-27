@@ -1,3 +1,4 @@
+// priority: -8700
 // -----------------------------------------------------------------------------------------------
 // UHV's Dyson swarm (docs/eras/uhv.md, machines 22, 23 and 24, lines 23 and 30; package UHV-B3): the swarm segment foundry, the swarm
 // control station (a generator) and the solar probe bay, their recipe types and their two items. All three are station modules in

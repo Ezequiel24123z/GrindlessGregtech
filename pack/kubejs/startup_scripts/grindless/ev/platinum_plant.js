@@ -1,3 +1,4 @@
+// priority: -1300
 // -----------------------------------------------------------------------------------------------
 // The Platinum Plant, the flagship multiblock of the EV era (docs/eras/ev.md), the recipe type it runs and its electrode.
 //

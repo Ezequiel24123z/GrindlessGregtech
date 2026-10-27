@@ -1,3 +1,4 @@
+// priority: -17124
 // -----------------------------------------------------------------------------------------------
 // The tritium removal facility's recipe and controller (machine and recipe type: startup_scripts/grindless/iv/tritium_removal.js;
 // docs/eras/iv.md, "Tritium removal facility"; package IV-B4).

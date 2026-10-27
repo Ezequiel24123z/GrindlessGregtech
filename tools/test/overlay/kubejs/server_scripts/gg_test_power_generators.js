@@ -1,3 +1,4 @@
+// priority: -6324
 // Gregtech Grindless - smoke test of package A3, power-generators (TEST-ONLY overlay: copied over the instance on the test PC, never
 // shipped with the pack): the generator multiblock mechanism of startup_scripts/grindless/lib/generators.js (the spike: a multiblock
 // registered from KubeJS makes EU) and the LV Generator Array, gtceu:generator_array (startup_scripts/grindless/power/generator_array.js).

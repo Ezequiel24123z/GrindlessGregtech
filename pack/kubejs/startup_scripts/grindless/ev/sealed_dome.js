@@ -1,3 +1,4 @@
+// priority: -1500
 // -----------------------------------------------------------------------------------------------
 // The Sealed Dome (gtceu:sealed_dome), the EV step of the Greenhouse family (docs/eras/ev.md, "Sealed dome"): crops where there is
 // no sky, no soil and no air. A dome of tempered glass on a ring of sintered regolith bricks (only the Moon makes them), LED panels

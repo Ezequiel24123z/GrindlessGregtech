@@ -1,3 +1,4 @@
+// priority: -15424
 // -----------------------------------------------------------------------------------------------
 // Addon recipes that collide in GTM's recipe lookup (data/grindless/tables/lookup_collisions.json; AGENTS.md "One recipe per lookup
 // path"). GTM 7.5.3 keeps one recipe per ingredient path, so of two recipes of one type on one path, or one whose path runs into the

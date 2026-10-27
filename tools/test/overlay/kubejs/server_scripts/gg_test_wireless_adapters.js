@@ -1,3 +1,4 @@
+// priority: -10124
 // Gregtech Grindless - focused test of how the wireless network moves EU into and out of GTM machines (TEST-ONLY overlay: copied over
 // the instance on the test PC, never shipped with the pack): server_scripts/grindless/lib/wireless_adapters.js and
 // lib/wireless_registry.js, as lv/wireless_energy.js uses them. The network itself (towers, hatches, covers, unloading, saving) is

@@ -1,3 +1,4 @@
+// priority: -9624
 // TEST ONLY, UV-A1 (the pyroprocessing cell, the accelerator-driven reactor, thorium fuel rows, the Triton NO row).
 // Command: kubejs custom_command gg_test_uv_thorium   Reserved band: X 23296-23359 (no block is placed: live recipe lookups only).
 //

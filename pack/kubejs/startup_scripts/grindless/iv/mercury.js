@@ -1,3 +1,4 @@
+// priority: -2900
 // -----------------------------------------------------------------------------------------------
 // IV on Mercury (docs/eras/iv.md: "Venus and Mercury", "Family steps", "Mercury solar works"; package IV-B2): four multiblocks of ours,
 // all on GCYR's Mercury (gcyr:mercury), which keeps the Overworld's clock: a 24,000-tick day and night (night 12,541 to 23,459,

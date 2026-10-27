@@ -1,3 +1,4 @@
+// priority: -7200
 // -----------------------------------------------------------------------------------------------
 // GregTech Leisure (GTL) idea, reimplemented: our own "Large Steam X" family, a step up from the small steam
 // family (steam/small_family.js, another agent's file) at the Steam -> LV transition. GTL's licence is not

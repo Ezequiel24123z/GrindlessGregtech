@@ -1,3 +1,4 @@
+// priority: -10824
 // Gregtech Grindless - smoke test of ZPM's Naquadria Magnet Works and the ZPM wireless tier (package ZPM-A5; TEST-ONLY overlay:
 // copied over the instance on the test PC, never shipped with the pack).
 //

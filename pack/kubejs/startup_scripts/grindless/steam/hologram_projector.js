@@ -1,3 +1,4 @@
+// priority: -6900
 // -----------------------------------------------------------------------------------------------
 // Hologram Projector (grindless:hologram_projector), the Steam Age multiblock helper:
 //   right-click a multiblock controller       a hologram of the structure for 30 s (GTM's in-world preview; click again to hide it)

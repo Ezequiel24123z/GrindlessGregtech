@@ -1,3 +1,4 @@
+// priority: -18624
 // LuV B3. Orbit IDs come only from G.orbits; the mixer and cutter also work on the ground.
 (function () {
   var G = global.grindless

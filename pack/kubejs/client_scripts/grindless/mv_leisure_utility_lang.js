@@ -1,3 +1,4 @@
+// priority: 6200
 // Gregtech Grindless - names and tooltips of the Leisure utility machines (startup_scripts/grindless/mv/leisure_utility.js).
 //
 //   gtceu:advanced_multi_smelter, gtceu:lava_furnace, gtceu:weather_controller   (machine names + tooltips + their messages)

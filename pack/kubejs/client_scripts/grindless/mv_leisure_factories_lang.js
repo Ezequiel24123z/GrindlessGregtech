@@ -1,3 +1,4 @@
+// priority: 6300
 // Gregtech Grindless - names and tooltips of the four MV universal factories (startup_scripts/grindless/mv/leisure_factories.js).
 //
 //   gtceu:universal_processing_factory, gtceu:universal_assembly_factory, gtceu:universal_separation_factory,

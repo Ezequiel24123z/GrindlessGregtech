@@ -1,3 +1,4 @@
+// priority: -10400
 // -----------------------------------------------------------------------------------------------
 // UV's Pluto ices (docs/eras/uv.md, machines 26 and 27; package UV-B3): two multiblocks of grindless:pluto_orbit and the penetrator.
 //

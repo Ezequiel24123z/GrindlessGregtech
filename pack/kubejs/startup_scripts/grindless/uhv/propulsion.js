@@ -1,3 +1,4 @@
+// priority: -8400
 // -----------------------------------------------------------------------------------------------
 // UHV's ceramics and the level 8 rocket (docs/eras/uhv.md, machine 16, line 26, the thruster works' two UHV rows; package UHV-A8): the
 // spark plasma sinterer, its recipe type, line 26's two package materials, the TaC liner, the oganesson propellant pod and the ICAN

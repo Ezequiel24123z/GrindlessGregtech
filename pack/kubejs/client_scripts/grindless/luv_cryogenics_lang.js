@@ -1,3 +1,4 @@
+// priority: 8000
 // Gregtech Grindless - names and tooltips of LuV's helium refrigerator and coated conductor line (startup_scripts/grindless/luv/
 // helium_refrigerator.js and coated_conductor_line.js; package LuV-A3), their recipe types, the EMI line of their recipes and the
 // refrigerator's controller line.

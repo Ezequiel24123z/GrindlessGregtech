@@ -1,3 +1,4 @@
+// priority: -11300
 // -----------------------------------------------------------------------------------------------
 // One of ZPM's multiblocks (docs/eras/zpm.md, "Machine 6"; package ZPM-A5): the naquadria magnet works and its recipe type.
 //

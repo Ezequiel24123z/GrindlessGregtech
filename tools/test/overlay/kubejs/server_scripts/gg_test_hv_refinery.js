@@ -1,3 +1,4 @@
+// priority: -2724
 // Gregtech Grindless - smoke test of the HV Refinery and Catalytic Reformer (TEST-ONLY overlay: copied over the instance on the test PC,
 // never shipped with the pack).
 //

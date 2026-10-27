@@ -1,3 +1,4 @@
+// priority: -2600
 // -----------------------------------------------------------------------------------------------
 // IV foundation: the shared registrations that the IV packages build on (docs/eras/iv.md, "Raising IV to the target"). No machines
 // and no recipe types here. Every other IV package uses exactly these ids; they are published in global.grindless.ivFoundation.

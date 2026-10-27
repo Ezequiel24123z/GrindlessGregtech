@@ -1,3 +1,4 @@
+// priority: -18224
 // -----------------------------------------------------------------------------------------------
 // Recipes of LuV's HTS magnet works (machine and recipe type: startup_scripts/grindless/luv/hts_magnet_works.js; docs/eras/luv.md,
 // "3. HTS magnet works"; package LuV-A4), generated at every server load from data/grindless/tables/hts_magnet_works.json, and the
