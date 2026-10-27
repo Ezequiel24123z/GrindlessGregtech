@@ -57,8 +57,8 @@
   ],
   "exceptions": [
   { "id": "grindless:c12_diamond_spreader", "role": "use", "reason": "temporary (UHV-A3): its use, the Dyson swarm segment, is UHV-B3's; delete this exception when B3 merges" },
-  { "id": "grindless:nbn_coated_sic_plate", "role": "use", "reason": "temporary (UHV-A5): its use, the Casimir array, is UHV-A6's; delete this exception when A6 merges" },
   { "id": "grindless:geo_assembled_stage", "role": "use", "reason": "temporary (UHV-A7): its use, the level 8 rocket, is UHV-A8's; delete this exception when A8 merges" },
+  { "id": "grindless:antihydrogen_cartridge", "role": "use", "reason": "temporary (UHV-A6): its use, the warp gate, is UHV-B7's; delete this exception when B7 merges" },
   { "id": "grindless:red_tuned_solar_array", "role": "use", "reason": "temporary (UHV-A5): its use, the lunar solar field's Proxima b row, is UHV-B1's; delete this exception when B1 merges" },
   { "id": "grindless:imm_solar_array", "role": "use", "reason": "temporary (UHV-A5): its uses, the swarm segment and its refurbishing, are UHV-B3's; delete this exception when B3 merges" },
   { "id": "grindless:californium_252_source", "role": "use", "reason": "temporary (UHV-A1): its use, the cold-trap drill on Proxima b, is UHV-B5's;   delete this exception when B5 merges" },    { "id": "grindless:itbtc_coated_conductor", "role": "use", "reason": "temporary (LuV-A3): its uses, the HTS coil and the SMES cell, are LuV-A4's magnet works; delete this exception when A4 merges" },
