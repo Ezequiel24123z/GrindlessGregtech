@@ -104,6 +104,7 @@
     addTritonNitricOxide(event)
     addKuiperNobleGas(event)
     addHighPurityNeon(event)
+    addOganessonPropellant(event)
   }
 
   // UV-A1 (docs/eras/uv.md, line 3): distillation of Triton nitrogen's oxide. The 15N isotopologue of the oxide is lighter and stays
@@ -177,6 +178,33 @@
       .addDataNumber(NIGHT_KEY, Math.round(HIGH_PURITY_NEON.eut * NIGHT_FACTOR))
       .EUt(HIGH_PURITY_NEON.eut).duration(HIGH_PURITY_NEON.duration)
     console.info(LOG + 'cryogenic plant high-purity neon row added')
+  }
+
+  // UHV-B3 (docs/eras/uhv.md, line 30): the Mk3 fusion reactor's crude oganesson (its off-gas carries the lighter noble gases it was
+  // bred among) is distilled to pure oganesson, the swarm control station's propellant (-> UHV-A8's propellant pods). Krypton (120 K)
+  // and xenon (165 K) boil off first; oganesson, a solid near room temperature, stays: krypton -> the swarm station's spare fuel or the
+  // Hall thruster, xenon -> the ion thruster (UV-A11's thruster works). The only input is crude oganesson: the one recipe that runs
+  // with it and nothing else.
+  var OGANESSON_PROPELLANT = { id: 'grindless:cryogenic_processing/oganesson_propellant', eut: 7680, duration: 400,
+    input: { id: 'gtceu:oganesson', amount: 1000 },
+    outputs: [{ id: 'gtceu:oganesson_propellant', amount: 900 }, { id: 'gtceu:krypton', amount: 60 }, { id: 'gtceu:xenon', amount: 40 }] }
+  CRYO.oganessonRow = OGANESSON_PROPELLANT
+
+  function addOganessonPropellant(event) {
+    var ids = [OGANESSON_PROPELLANT.input.id].concat(OGANESSON_PROPELLANT.outputs.map(function (f) { return f.id }))
+    var missing = ids.filter(function (id) { return !Fluid.exists(id) })
+    if (missing.length > 0) {
+      console.error(LOG + 'cryogenic plant oganesson propellant row skipped, unknown fluid(s): ' + missing.join(', '))
+      return
+    }
+    var out = OGANESSON_PROPELLANT.outputs
+    event.recipes.gtceu.cryogenic_processing('grindless:oganesson_propellant')
+      .inputFluids(Fluid.of(OGANESSON_PROPELLANT.input.id, OGANESSON_PROPELLANT.input.amount))
+      .outputFluids(Fluid.of(out[0].id, out[0].amount), Fluid.of(out[1].id, out[1].amount), Fluid.of(out[2].id, out[2].amount))
+      .dimension(DIMENSION)
+      .addDataNumber(NIGHT_KEY, Math.round(OGANESSON_PROPELLANT.eut * NIGHT_FACTOR))
+      .EUt(OGANESSON_PROPELLANT.eut).duration(OGANESSON_PROPELLANT.duration)
+    console.info(LOG + 'cryogenic plant oganesson propellant row added')
   }
 
   function addCrafting(event) {
