@@ -64,7 +64,7 @@ var GG_QUESTS_EXPECTED = {
   productive_bees: [12, 14],
   travel_and_teams: [16, 15],
   workshop: [17, 16],
-  welcome: [15, 14],
+  welcome: [16, 15],
   steam_age: [44, 50],
   lv_age: [51, 52],
   mv_age: [49, 60],
