@@ -4,7 +4,7 @@
 // that makes the controller.
 //
 //   gtceu:isotope_exchange   one recipe per entry of the table, id grindless:isotope_exchange/<name> (GTM's builder puts the type in
-//                            front); the programmed circuit is the mode (1 exchange, 2 finishing), and every recipe carries the data key
+//                            front); the programmed circuit is the mode (1 exchange, 2 finishing, 3 Proxima exchange: UHV-B5), and every recipe carries the data key
 //                            grindless_isotope_exchange = <name> (its EMI line).
 //     energy                 the sum of the entry's stages, each at the rate of the GTM recipe it names, spent at no more than the
 //                            entry's maxEUt: duration = ceil(energy / maxEUt), EU/t = ceil(energy / duration) (the hot cell's rule).

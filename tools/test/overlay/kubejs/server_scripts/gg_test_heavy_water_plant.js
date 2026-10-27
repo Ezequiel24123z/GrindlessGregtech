@@ -92,6 +92,8 @@
   var SHARED_FLUIDS = [D2O, CONC, H2S, STEAM, DIST, WATER]
   var EXCHANGE = 'martian_ice_exchange'
   var FINISHING = 'concentrate_finishing'
+  var PROXIMA = 'proxima_water_exchange'
+  var DEW = 'gtceu:deuterium_enriched_water'
   var CHARGE_LOW = /heavy_water_plant\.charge\.low/
   var CHARGE_OK = /heavy_water_plant\.charge\.ok/
 
@@ -104,6 +106,11 @@
   WANT[FINISHING] = {
     circuit: 2, charge: false, sourceEnergy: 19200 * 1000 / 576, maxEut: 480,
     itemsIn: [], fluidsIn: [[CONC, 1000]], fluidsOut: [[D2O, 200], [DIST, 800]]
+  }
+  // UHV-B5: Proxima b's water arrives melted, so the row has only the exchange stage
+  WANT[PROXIMA] = {
+    circuit: 3, charge: true, sourceEnergy: 3200 * 320 / 40, maxEut: 1920,
+    itemsIn: [], fluidsIn: [[DEW, 1000]], fluidsOut: [[CONC, 800], [WATER, 200]]
   }
   // GTM's live recipes whose rates the stages use: [id, EU per `per` mB, per]
   var LIVE_STAGES = [
@@ -441,7 +448,7 @@
         lines.push(name + ': ' + r.stages.map(function (s) { return s.stage + ' ' + s.eu.toFixed(1) + ' (' + short(s.from) + ')' }).join(' + ') + ' = ' +
           r.sourceEnergy.toFixed(1) + ' EU, spent as ' + r.duration + ' t x ' + r.eut + ' EU/t = ' + r.energy + ' EU')
       })
-      check('recipes', problems.length === 0 && (HW().recipes || []).length === 2, lines.join(' ; ') + (problems.length > 0 ? ' | problems: ' + problems.join('; ') : ''))
+      check('recipes', problems.length === 0 && (HW().recipes || []).length === 3, lines.join(' ; ') + (problems.length > 0 ? ' | problems: ' + problems.join('; ') : ''))
     })
 
     safely('live_contents', function () {
@@ -485,7 +492,7 @@
       })
       var live = asArray(S.server.getRecipeManager().getAllRecipesFor(GTRegistries.RECIPE_TYPES.get(rl(TYPE)))).length
       if (live !== recipes.length) problems.push(live + ' live ' + TYPE + ' recipes for ' + recipes.length + ' published')
-      check('live_contents', problems.length === 0 && recipes.length === 2, recipes.length + ' recipes checked against the recipe manager; the exchange keeps ' +
+      check('live_contents', problems.length === 0 && recipes.length === 3, recipes.length + ' recipes checked against the recipe manager; the exchange keeps ' +
         charge.amount + ' mB ' + short(charge.id) + ' at chance 0 (not consumed)' + (problems.length > 0 ? ' | problems: ' + problems.join('; ') : ''))
       S.sets = sets
     })
@@ -527,7 +534,7 @@
           if (subset(sets[i], sets[j]) || subset(sets[j], sets[i])) clashes.push(sets[i].name + ' / ' + sets[j].name)
         }
       }
-      check('lookup_safety', sets.length === 2 && clashes.length === 0, sets.map(function (s) { return s.name + ' {' + s.keys.join(' ') + '}' }).join(' ; ') +
+      check('lookup_safety', sets.length === 3 && clashes.length === 0, sets.map(function (s) { return s.name + ' {' + s.keys.join(' ') + '}' }).join(' ; ') +
         (clashes.length > 0 ? ' | clashes: ' + clashes.join('; ') : ''))
     })
 

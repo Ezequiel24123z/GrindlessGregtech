@@ -107,7 +107,7 @@
         ['tooltip.grindless.sterilised_flora_extract.1', 'Centrifuged into biomass and water.', 'Se centrifuga en biomasa y agua.'],
         ['item.grindless.sterilised_ice_organics', 'Sterilised Ice Organics', 'Orgánicos de hielo esterilizados'],
         ['tooltip.grindless.sterilised_ice_organics.0', 'Tholins and extremophile remains from a Proxima ice core.', 'Tolinas y restos de extremófilos de un testigo de hielo de Próxima.'],
-        ['tooltip.grindless.sterilised_ice_organics.1', 'Centrifuged into water and carbon dioxide.', 'Se centrifugan en agua y dióxido de carbono.'],
+        ['tooltip.grindless.sterilised_ice_organics.1', 'Centrifuged into water and carbon dioxide, or hydrolysed into Titan nitriles by the tholin reformer in Saturn orbit.', 'Se centrifugan en agua y dióxido de carbono, o el reformador de tolinas los hidroliza en nitrilos de Titán en órbita de Saturno.'],
         ['item.grindless.melanin_extract', 'Melanin Extract', 'Extracto de melanina'],
         ['tooltip.grindless.melanin_extract.0', 'Fungal melanin, freed with caustic soda and acid.', 'Melanina fúngica, liberada con sosa cáustica y ácido.'],
         ['tooltip.grindless.melanin_extract.1', 'Bound to chitosan for the flare shield.', 'Se une al quitosano para el escudo contra fulguraciones.'],

@@ -65,6 +65,12 @@
       itemsOut: { 'gtceu:titanium_ingot': 3, 'gtceu:iron_dust': 1 },
       fluidsOut: { 'gtceu:oxygen': 3000 }
     },
+    proxima_tailings: {
+      circuit: 2, duration: 79, eut: 1920,
+      itemsIn: { 'grindless:leached_tailings': [16, 10000], 'grindless:platinum_electrode': [1, 10] },
+      itemsOut: { 'gtceu:silicon_dioxide_dust': 3, 'gtceu:iron_dust': 1 },
+      fluidsOut: { 'gtceu:oxygen': 1000 }
+    },
     sintering: {
       circuit: 3, duration: 100, eut: 1920,
       itemsIn: { 'gtceu:lunar_regolith_dust': [16, 10000] },
@@ -290,7 +296,7 @@
 
     var problems = []
     var have = type ? S.server.getRecipeManager().getAllRecipesFor(type).size() : -1
-    if (have !== 4) problems.push('the type has ' + have + ' recipes, wanted 4')
+    if (have !== 5) problems.push('the type has ' + have + ' recipes, wanted 5')
     Object.keys(WANT).forEach(function (name) {
       var w = WANT[name]
       var p = null

@@ -138,7 +138,7 @@ test('GTCA\'s europium-giving froth reactor is replaced by one without europium'
 
 test('the cascade has circuit 5 (ZPM mode) beside circuits 1 and 2 with no lookup clash', () => {
   const rows = EC.recipes;
-  assert.deepEqual(rows.map((r) => r.circuit).sort(), [1, 2, 5, 6]);
+  assert.deepEqual(rows.map((r) => r.circuit).sort(), [1, 2, 5, 6, 7]);
   const z = rows.find((r) => r.circuit === 5);
   assert.equal(z.name, 'monazite_froth_europium');
   assert.equal(z.mode, 'zpm');

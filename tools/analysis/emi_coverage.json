@@ -57,13 +57,7 @@
   ],
   "exceptions": [
   { "id": "grindless:antihydrogen_cartridge", "role": "use", "reason": "temporary (UHV-A6): its use, the warp gate, is UHV-B7's; delete this exception when B7 merges" },
-  { "id": "grindless:proxima_regolith_survey", "role": "use", "reason": "temporary (UHV-B4): its use, the cold-trap drill's survey catalyst, is UHV-B5's; delete this exception when B5 merges" },
-  { "id": "grindless:chromobacterium_culture", "role": "use", "reason": "temporary (UHV-B4): its use, the biomining heap's PGM leach, is UHV-B5's; delete this exception when B5 merges" },
-  { "id": "grindless:sphingomonas_culture", "role": "use", "reason": "temporary (UHV-B4): its use, the biomining heap's REE leach, is UHV-B5's; delete this exception when B5 merges" },
-  { "id": "grindless:sporosarcina_culture", "role": "use", "reason": "temporary (UHV-B4): its use, the biomining heap's biocement row, is UHV-B5's; delete this exception when B5 merges" },
-  { "id": "grindless:flare_shield_panel", "role": "use", "reason": "temporary (UHV-B4): its use, the Proxima base casing (line 15), is UHV-B5's; delete this exception when B5 merges" },
   { "id": "grindless:infrared_pigment", "role": "use", "reason": "temporary (UHV-B4): its use, the baseline astrometer's coating, is UHV-B7's; delete this exception when B7 merges" },
-  { "id": "grindless:californium_252_source", "role": "use", "reason": "temporary (UHV-A1): its use, the cold-trap drill on Proxima b, is UHV-B5's; delete this exception when B5 merges" },
   { "id": "grindless:zblan_fibre", "role": "use", "reason": "temporary (UHV-A10): its uses, the baseline astrometer's chart and the warp gate, are UHV-B7's; delete this exception when B7 merges" },
   { "id": "grindless:itbtc_coated_conductor", "role": "use", "reason": "temporary (LuV-A3): its uses, the HTS coil and the SMES cell, are LuV-A4's magnet works; delete this exception when A4 merges" },
   { "id": "grindless:chondritic_extract", "role": "use", "reason": "temporary (LuV-B5): its use, the Europan culture of the algae bioreactor, is LuV-B8's; delete this exception when B8 merges" }
