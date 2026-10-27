@@ -944,3 +944,18 @@ powershell -NoProfile -ExecutionPolicy Bypass -File tools\assets\Build-ZPMObserv
 | `block/multiblock/neutrino_observatory/overlay_front*.png` | A dark water window with photomultiplier dots; blue flashes glow when active. |
 | `block/multiblock/deep_space_network/overlay_front*.png` | A dish face with a feed horn; the horn and signal arcs glow green when active. |
 | `block/multiblock/kuiper_survey_telescope/overlay_front*.png` | A mirror with a spider cross; the starfield glows when active. |
+
+## UV pyroprocessing cell, accelerator-driven reactor and U-233 rod (UV-A1)
+
+Procedural, drawn by `Build-UVThoriumTextures.ps1`; nothing is copied from another mod. Steel bezel faces with a window and a run lamp; 4 active frames, frametime 4; the emissive layer holds only the glow and the lamp.
+
+```powershell
+powershell -NoProfile -ExecutionPolicy Bypass -File tools\assets\Build-UVThoriumTextures.ps1
+powershell -NoProfile -ExecutionPolicy Bypass -File tools\assets\Build-UVThoriumTextures.ps1 -Credits
+```
+
+| File (under `textures/`) | Notes |
+|---|---|
+| `block/multiblock/pyroprocessing_cell/overlay_front*.png` | A furnace window; idle a dark salt bath, active an orange molten-salt surface with a green cathode rod. |
+| `block/multiblock/accelerator_driven_reactor/overlay_front*.png` | A beam window; idle dark, active cyan proton bunches running into a violet core. |
+| `item/u233_fuel_rod.png` | A grey zircaloy tube with a pale green fuel column. |
