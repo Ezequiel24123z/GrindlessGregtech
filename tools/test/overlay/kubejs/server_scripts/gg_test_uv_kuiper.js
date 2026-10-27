@@ -80,7 +80,7 @@
       var dims = dimsOf(live)
       var circuits = circuitsOf(live)
       var eu = euOf(live)
-      check('live_' + rec.name, JSON.stringify(dims) === JSON.stringify([ORBIT]) && JSON.stringify(circuits) === '[1]' && eu === rec.eut,
+      check('live_' + rec.name, JSON.stringify(dims) === JSON.stringify([ORBIT]) && JSON.stringify(circuits) === '[1]' && eu === Number(rec.eut),
         rec.recipeId + '; dims=' + dims.join(',') + '; circuits=' + circuits.join(',') + '; EU/t=' + eu)
     })
     var anneal = byId(server, 'grindless:ice_annealing/planetesimal_annealing')
