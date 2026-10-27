@@ -64,6 +64,7 @@ Generators for the pack's own textures. Everything is procedural 16x16 pixel art
 | `Build-UVPhotonicsTextures.ps1` | Writes the nine item icons of UV's photonics (UV-A6): Yb-doped preform, fibre Bragg grating, GaAs and sapphire boules and wafers, InGaAs epi wafer, InGaAs diode bar, NbN film wafer. `-Credits`. |
 | `Build-UVMaterialsTextures.ps1` | Writes the twelve item icons of UV's materials (UV-A8): BNNT dust, silver tube, PIT billet, six porous near-net parts and three printed parts. `-Credits`. |
 | `Build-UVDetectorsTextures.ps1` | Writes the controller faces of UV's detectors (UV-A7): zone refining tower and optical ground station. Checks that `uv/detectors.js` uses both folders. `-Credits`. |
+| `Build-UVLifeTextures.ps1` | Writes the controller faces of UV's life (UV-A10): ark biosphere and neural culture vat, and the algae culture icon. Checks that `uv/life.js` uses all three. `-Credits`. |
 | `Build-ZPMNaquadriaTextures.ps1` | Writes the faces of the ZPM naquadria refinery and naquadah fuel works (ZPM-A2: `multiblock/naquadria_refinery/`, `multiblock/naquadah_fuel_works/`), 10 files. `-Credits` (their CREDITS rows). |
 | `Build-HTSMagnetWorksTextures.ps1` | Writes the LuV HTS magnet works' face (`multiblock/hts_magnet_works/`). `-Only magnet_works`, `-Preview <png outside the repo>` and `-Credits` (its 5 CREDITS rows). |
 | `Build-GanymedeTextures.ps1` | Writes the faces of the LuV gravitational wave detector and coilgun launcher (LuV-B9: `multiblock/gravitational_wave_detector/`, `multiblock/coilgun_launcher/`). `-Only detector,launcher`, `-Preview <png outside the repo>` (optional `-FrostCasing <png>`, `-TungstenCasing <png>`) and `-Credits` (their 10 CREDITS rows). |
@@ -1000,3 +1001,18 @@ powershell -NoProfile -ExecutionPolicy Bypass -File tools\assets\Build-UVDetecto
 |---|---|
 | `block/multiblock/zone_refining_tower/overlay_front*.png` | A germanium bar between RF coil turns; active, an orange melt zone climbs the bar and the coil beside it glows. |
 | `block/multiblock/optical_ground_station/overlay_front*.png` | A night-sky window over a mirror dish; active, a star twinkles and a red laser photon falls onto the detector, which flashes cyan. |
+
+## UV ark biosphere and neural culture vat (UV-A10)
+
+Procedural, drawn by `Build-UVLifeTextures.ps1`; nothing is copied from another mod. Steel bezel faces with a window and a run lamp; 4 active frames, frametime 4; the emissive layer holds only the glow and the lamp.
+
+```powershell
+powershell -NoProfile -ExecutionPolicy Bypass -File tools\assets\Build-UVLifeTextures.ps1
+powershell -NoProfile -ExecutionPolicy Bypass -File tools\assets\Build-UVLifeTextures.ps1 -Credits
+```
+
+| File (under `textures/`) | Notes |
+|---|---|
+| `block/multiblock/ark_biosphere/overlay_front*.png` | A stepped glass dome over green water and an algae tube; active, the grow lamp glows, an oxygen bubble climbs the tube and the algae flicker. |
+| `block/multiblock/neural_culture_vat/overlay_front*.png` | A culture flask of pink medium with four dark neurons; active, they fire one after another in violet. |
+| `item/algae_culture.png` | A corked conical flask half full of bright green algae. |
