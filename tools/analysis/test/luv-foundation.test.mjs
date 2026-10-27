@@ -105,14 +105,14 @@ test('hidden until its package lands: hidden_until.json and the obtain rules lis
   const ruled = new Map();
   for (const r of rules) {
     assert.equal(r.class, 'B');
-    // since v0.8.0 (hidden.js IMPLEMENTED_ERA luv) an A1 id still waiting for its package is held until zpm (v0.9.0, IMPLEMENTED_ERA zpm: until uv), so it stays hidden
-    assert.equal(r.until, 'uv');
+    // since v0.8.0 (hidden.js IMPLEMENTED_ERA luv) an A1 id still waiting for its package is held until zpm     (v0.9.0, IMPLEMENTED_ERA zpm: until uv; v0.10.0, IMPLEMENTED_ERA uv: until uhv), so it stays hidden
+        assert.equal(r.until, 'uhv');
     for (const m of r.materials) ruled.set(m, r.reason);
   }
   const groups = hidden.groups.filter((g) => /^LuV-A1 registration/.test(g.reason || ''));
   assert.deepEqual(groups.map((g) => g.material).sort(), [...ruled.keys()].sort(), 'one hidden group per material of the A1 rules');
   for (const g of groups) {
-    assert.equal(g.until, 'uv', g.material);
+    assert.equal(g.until, 'uhv', g.material);
     assert.equal(g.reason, ruled.get(g.material), g.material);
   }
   // an A1 id that is not hidden any more must have been given a route by its package (the EMI coverage test checks the route)
