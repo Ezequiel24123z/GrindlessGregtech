@@ -25,7 +25,7 @@ A user-directed exception (2026-10-27), inspired by GregTech Leisure's *Fragment
 - **Lore:** the machine was in your pack when you arrived. Nobody remembers building it. Its shard hums at the pitch of the black hole at the end of the journey, and it pulls a trickle of ordinary matter through a horizon the size of a pin. The quest says no more; the mirror shell at MAX (`docs/journey.md:54`) may be where it was made.
 - **Machine:** `gtceu:lv_horizon_collector`, a single-block LV machine (GTM `simple` builder, LV only, no higher tier). Recipe type `gtceu:horizon_collection`. It is never craftable and has no upgrade, parallel or multiblock version.
 - **Catalyst:** `grindless:horizon_shard`, not consumed, never craftable.
-- **Power:** two GTM LV solar panel covers (`gtceu:lv_solar_panel`) come with it. Placed on the machine they run it by day; it stops at night. Energy is not free: the covers are a real GTM source.
+- **Power:** two GTM LV solar panel covers (`gtceu:lv_solar_panel`) come with it. GTM lets a solar cover go only on a top face, so one cover sits on the machine and runs it by day (32 EU/t for a 16 EU/t recipe); it stops at night. The second is a spare for any other LV machine. Energy is not free: the covers are a real GTM source.
 - **Recipes:** 16 EU/t, 1200 ticks (60 s), shard plus programmed circuit:
 
 | Circuit | Output per run |
@@ -268,7 +268,7 @@ You leave the era once you have steel, an LV steam turbine that generates power 
 - **Prohibited:** everything else. In particular `hidden_until.json`, `tools/analysis/tiers/*.json`, `emi_coverage.json`, `lang/*.json`, `emi_info_lang.js`, `lib/**`, `CREDITS.md`, `DECISIONS.md`, `docs/STATUS.md`, `pack/index.toml`, `pack/pack.toml`.
 - **References:**
   - the single-block precedent `startup_scripts/grindless/lv/creatures.js:47-74` (recipe type with circuit overlay, `simple` builder, `workableTieredHullModel`, tooltips) and its server and lang files;
-  - the quest rules in `.github/instructions/quests.instructions.md`; `docs/quests.md` ง7 (rewards) and ง10 (ids); *Arrival* in `welcome.snbt`.
+  - the quest rules in `.github/instructions/quests.instructions.md`; `docs/quests.md` ยง7 (rewards) and ยง10 (ids); *Arrival* in `welcome.snbt`.
 - **Machine:** `event.create('horizon_collector', 'simple').tiers(GTValues.LV)`, so the id is `gtceu:lv_horizon_collector`. No crafting recipe for the machine or the shard. The tooltip says it was not built, cannot be made and runs on the solar covers by day.
 - **Recipes:** ids `grindless:horizon_collection/<output>`; LV, 16 EU/t, 1200 ticks; inputs: `grindless:horizon_shard` not consumed (`chancedInput` 0 or `notConsumable`, as GTM 7.5.3 supports) and `circuit(n)`; outputs from the table; no fluids.
 - **Quest:** title *The Horizon Collector*; depends on *Arrival*; a checkmark task; 3 rewards (1 `gtceu:lv_horizon_collector`, 1 `grindless:horizon_shard`, 2 `gtceu:lv_solar_panel`); 2-4 short lines of lore (the machine was in your pack; nobody built it; it hums like the black hole at the end of the journey; put the two solar covers on it and pick a circuit). New ids, first digit 1-7, unique in the book. It is an explicit exception to the small-reward rule (user-directed); add it to the linter's exception list only if the linter flags it, with the reason.
