@@ -51,7 +51,7 @@
     {"id":"grindless:cryogenic_fuel_tank","kind":"item","needUse":true,"needMade":true,"made":["emi:info","gtceu:assembler"],"used":["emi:info","gtceu:assembler"]},
     {"id":"grindless:cryostat_casing","kind":"item","needUse":true,"needMade":true,"made":["emi:info","gtceu:assembler"],"used":["emi:info","gtceu:multiblock_info"]},
     {"id":"grindless:curium_oxide","kind":"item","needUse":false,"needMade":true,"made":["gtceu:actinide_partitioning"],"used":[]},
-    {"id":"grindless:cvd_diamond_plate","kind":"item","needUse":true,"needMade":true,"made":["gtceu:diamond_cvd"],"used":["gtceu:kuiper_survey"]},
+    {"id":"grindless:cvd_diamond_plate","kind":"item","needUse":true,"needMade":true,"made":["gtceu:diamond_cvd"],"used":["gtceu:kuiper_survey","minecraft:crafting"]},
     {"id":"grindless:donor_qubit_wafer","kind":"item","needUse":true,"needMade":true,"made":["gtceu:ion_implantation"],"used":["gtceu:qubit_fabrication"]},
     {"id":"grindless:empty_vein_probe","kind":"item","needUse":true,"needMade":true,"made":["minecraft:crafting"],"used":["minecraft:crafting"]},
     {"id":"grindless:end_key","kind":"item","needUse":true,"needMade":true,"made":["emi:info","minecraft:crafting"],"used":["emi:info"]},
