@@ -288,9 +288,13 @@ test('the dimension markers of the old hidden table (disabled, not index-only) d
   const { dump, run } = packRun;
   const emi = loadEmiData(path.join(root, 'pack'));
   emi.disabled = [...emi.disabled, ...Object.values(DIMENSION_MARKERS).map((id) => ({ kind: 'item', id }))];
-  const old = auditEmiCoverage({ dump, registry: run.registry, cfg: JSON.parse(fs.readFileSync(path.join(here, '..', 'emi_coverage.json'), 'utf8')), emi, lang: run.lang });
-  assert.equal(old.droppedRoutes.length, 38, old.droppedRoutes.map((d) => d.id).join('\n'));
-  assert.ok(old.droppedRoutes.every((d) => d.disabledBy.every((b) => b.startsWith('dimension marker '))));
+  const cfg = JSON.parse(fs.readFileSync(path.join(here, '..', 'emi_coverage.json'), 'utf8'));
+  const old = auditEmiCoverage({ dump, registry: run.registry, cfg, emi, lang: run.lang });
+  // a pending route (cfg.pendingRoutes) also waits on a stack hidden until its era, so it is not one of the marker routes until then
+  const pendingIds = new Set((cfg.pendingRoutes || []).map((p) => p.id));
+  const markerDropped = old.droppedRoutes.filter((d) => !pendingIds.has(d.id));
+  assert.equal(markerDropped.length, 38, markerDropped.map((d) => d.id).join('\n'));
+  assert.ok(markerDropped.every((d) => d.disabledBy.every((b) => b.startsWith('dimension marker '))));
   const now = new Map(fixtureExpectations(packRun.res).items.map((e) => [e.id, e]));
   const lost = [];
   for (const e of fixtureExpectations(old).items) {
