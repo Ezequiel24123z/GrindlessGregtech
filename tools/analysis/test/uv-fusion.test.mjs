@@ -1,4 +1,4 @@
-// UV-A3: the Mk3 fusion audit (docs/eras/uv.md, "The Mk3 audit"), the laser fusion chamber's table, recipes and structure, the hot cell's boron-11 row,
+﻿// UV-A3: the Mk3 fusion audit (docs/eras/uv.md, "The Mk3 audit"), the laser fusion chamber's table, recipes and structure, the hot cell's boron-11 row,
 // the decaborane chemistry and the lattice fab's capsule rows. No Java, no Minecraft.
 import test from 'node:test';
 import assert from 'node:assert/strict';
@@ -68,23 +68,40 @@ test('UV adds no Mk3 recipe of its own, and the table\'s chamber rows match the 
   ]);
 });
 
-function serverHarness(liveIds) {
+function serverHarness(liveIds, known = () => true) {
   const logs = { info: [], warn: [], error: [] };
+  const added = [];
   const G = { readJsonTable: p => { assert.equal(p, 'kubejs/data/grindless/tables/fusion_mk3.json'); return JSON.parse(read(TABLE)); } };
   const live = liveIds.map(id => {
     const row = table.recipes.find(r => r.id === id);
     const [eut, start] = row ? [row.eut, row.start] : [24576, 100000000];
     return { getId: () => id, json: JSON.stringify({ tickInputs: { eu: [{ content: eut }] }, data: { eu_to_start: start } }) };
   });
+  const builder = (type, id) => {
+    const rec = { type, id, calls: {} };
+    added.push(rec);
+    const b = new Proxy({}, { get: (_, k) => {
+      if (k === 'id') return x => { rec.id = x; return b; };
+      return (...a) => { (rec.calls[k] ||= []).push(a); return b; };
+    } });
+    return b;
+  };
+  const gtceu = new Proxy({}, { get: (_, type) => (id, ...rest) => {
+    if (type === 'shaped') { const b = builder(type, null); rec2(b, id, rest); return b; }
+    return builder(type, id);
+  } });
+  const rec2 = (b, out, rest) => { added[added.length - 1].shaped = { out, rest }; };
   const context = vm.createContext({
     global: { grindless: G },
+    Item: { exists: known },
+    Fluid: { exists: known, of: (id, amount) => ({ id, amount }) },
     console: { info: s => logs.info.push(s), warn: s => logs.warn.push(s), error: s => logs.error.push(s) },
     ServerEvents: { recipes(fn) {
-      fn({ forEachRecipe(q, cb) { assert.equal(q.type, 'gtceu:fusion_reactor'); live.forEach(cb); } });
+      fn({ recipes: { gtceu }, forEachRecipe(q, cb) { assert.equal(q.type, 'gtceu:fusion_reactor'); live.forEach(cb); } });
     } }
   });
   vm.runInContext(read(SERVER), context);
-  return { G, logs };
+  return { G, logs, added };
 }
 
 test('fusion.js audits clean: every live recipe listed, LuV\'s three cuts absent', () => {
@@ -110,4 +127,83 @@ test('fusion.js reports a listed keep recipe that is not in the manager', () => 
   const live = table.recipes.filter(r => r.fate === 'keep').map(r => r.id).slice(1);
   const { G } = serverHarness(live);
   assert.equal(G.uvFusion.missing.length, 1);
+});
+
+test('chamber recipes: capsule + circuit, 2 % module wear in and out, helium (and hydrogen) out, 5x the Mk3 EU/t as a generator', () => {
+  const { added, G, logs } = serverHarness([]);
+  assert.equal(logs.error.length, 0, logs.error.join(' | '));
+  const rows = added.filter(r => r.type === 'laser_fusion');
+  assert.deepEqual(rows.map(r => r.id), ['grindless:laser_fusion/pb11', 'grindless:laser_fusion/d_he3']);
+  const [a, b] = rows;
+  assert.deepEqual(a.calls.itemInputs, [['1x grindless:pb11_capsule']]);
+  assert.deepEqual(b.calls.itemInputs, [['1x grindless:d_he3_capsule']]);
+  assert.deepEqual([a.calls.circuit[0][0], b.calls.circuit[0][0]], [1, 2]);
+  for (const r of rows) {
+    assert.deepEqual(r.calls.chancedInput, [['1x grindless:fibre_laser_module', 200, 0]]);
+    assert.deepEqual(r.calls.chancedOutput, [['1x grindless:spent_laser_module', 200, 0]]);
+    assert.equal(r.calls.EUt[0][0], -2621440);
+  }
+  assert.deepEqual([a.calls.duration[0][0], b.calls.duration[0][0]], [400, 600]);
+  assert.deepEqual(a.calls.outputFluids.map(x => x[0].amount), [3000]);
+  assert.deepEqual(b.calls.outputFluids.map(x => [x[0].id, x[0].amount]), [['gtceu:helium', 1000], ['gtceu:hydrogen', 1000]]);
+  assert.equal(G.uvFusion.chamber.length, 2);
+});
+
+test('chamber crafting recipe and decaborane row are added; unknown ids skip with an error instead of a half recipe', () => {
+  const { added } = serverHarness([]);
+  const craft = added.find(r => r.id === 'grindless:crafting/laser_fusion_chamber');
+  assert.ok(craft && craft.shaped.out === 'gtceu:laser_fusion_chamber');
+  const d = added.find(r => r.id === 'grindless:chemical_reactor/decaborane');
+  assert.ok(d);
+  assert.deepEqual(d.calls.inputFluids.map(x => [x[0].id, x[0].amount]), [['gtceu:boron_11_trifluoride', 3000], ['gtceu:hydrogen', 6000]]);
+  assert.deepEqual(d.calls.outputFluids.map(x => [x[0].id, x[0].amount]), [['gtceu:decaborane', 1000], ['gtceu:hydrofluoric_acid', 9000]]);
+  const s = serverHarness([], id => !/boron_11_trifluoride|pb11_capsule/.test(id));
+  assert.equal(s.added.filter(r => r.type === 'laser_fusion' || r.id === 'grindless:chemical_reactor/decaborane').length, 0);
+  assert.ok(s.logs.error.length >= 2);
+});
+
+test('hot cell: boron-11 is circuit 6 and its row feeds the trifluoride the decaborane route consumes', () => {
+  const hc = JSON.parse(read('pack/kubejs/data/grindless/tables/hot_cell.json'));
+  assert.ok(hc.modes.some(m => m.circuit === 6 && m.name === 'boron_11'));
+  assert.equal(new Set(hc.modes.map(m => m.circuit)).size, hc.modes.length);
+  const r = hc.recipes.find(x => x.name === 'boron_11_enrichment');
+  assert.equal(r.circuit, 6);
+  assert.ok(r.fluidsOut.some(f => f.id === 'gtceu:boron_11_trifluoride'));
+  assert.ok(r.fluidsOut.some(f => f.id === 'gtceu:boron_10_trifluoride'));
+  assert.ok(r.eut <= 7680 * 2);
+});
+
+test('lattice fab: the capsule rows use free circuits 3 and 4 and make the two capsules', () => {
+  const src = read('pack/kubejs/server_scripts/grindless/zpm/qubits.js');
+  assert.match(src, /name: 'pb11_capsule', type: 'diamond_cvd', circuit: 3/);
+  assert.match(src, /name: 'd_he3_capsule', type: 'diamond_cvd', circuit: 4/);
+  assert.match(src, /gtceu:decaborane/);
+  assert.match(src, /grindless:d_he3_capsule/);
+});
+
+function startupPattern() {
+  const src = read('pack/kubejs/startup_scripts/grindless/uv/fusion.js');
+  return src;
+}
+
+test('chamber startup: 13 x 13 x 13 shell with 32 laser module blocks on the beam ring, UV casing, spent module item', () => {
+  const src = startupPattern();
+  assert.match(src, /gtceu:laser_fusion_chamber/);
+  assert.match(src, /gtceu:uv_machine_casing/);
+  assert.match(src, /grindless:laser_module_block/);
+  assert.match(src, /grindless:spent_laser_module/);
+  assert.match(src, /'CLLLLCCCLLLLC'/);
+  const ring = 'CLLLLCCCLLLLC';
+  const perimeter = (z, x) => ring[(z === 0 || z === 12) ? x : z];
+  let lasers = 0;
+  for (let z = 0; z < 13; z++) for (let x = 0; x < 13; x++) if ((z === 0 || z === 12 || x === 0 || x === 12) && perimeter(z, x) === 'L') lasers++;
+  assert.equal(lasers, 32);
+  assert.match(src, /SIZE = 13/);
+});
+
+test('chamber lang: both locales name the machine, recipe type, no-voiding reason and spent module', () => {
+  const src = read('pack/kubejs/client_scripts/grindless/uv_fusion_lang.js');
+  for (const k of ['block.gtceu.laser_fusion_chamber', 'gtceu.laser_fusion', 'grindless.machine.laser_fusion_chamber.no_voiding', 'item.grindless.spent_laser_module']) {
+    assert.equal(src.split("'" + k + "'").length - 1, 2, k + ' in en_us and es_es');
+  }
 });

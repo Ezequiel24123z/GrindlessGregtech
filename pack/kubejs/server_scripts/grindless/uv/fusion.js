@@ -67,4 +67,72 @@
     report.errors.forEach(function (s) { console.error(LOG + s) })
     console.info(LOG + 'audited ' + report.audited.length + ', unaudited ' + report.unaudited.length + ', missing ' + report.missing.length)
   })
+
+  // ---------------------------------------------------------------- the laser fusion chamber (machine 4)
+
+  var CH = table.chamber
+  var MODULE = 'grindless:fibre_laser_module'
+  var SPENT = 'grindless:spent_laser_module'
+  F.chamber = []
+  F.skipped = []
+  F.crafting = { chamber: 'grindless:crafting/laser_fusion_chamber' }
+
+  function addChamber(event) {
+    var missing = [CH.recipes[0].capsule, CH.recipes[1].capsule, MODULE, SPENT].filter(function (id) { return !Item.exists(id) })
+    if (missing.length > 0) {
+      F.skipped.push({ name: 'chamber', reason: 'unknown id(s) ' + missing.join(', ') })
+      console.error(LOG + 'laser fusion chamber recipes skipped, unknown id(s): ' + missing.join(', '))
+      return []
+    }
+    var added = []
+    CH.recipes.forEach(function (r, i) {
+      var b = event.recipes.gtceu.laser_fusion('grindless:laser_fusion/' + r.name)
+      b.itemInputs('1x ' + r.capsule)
+      b.circuit(i + 1)
+      b.chancedInput('1x ' + MODULE, CH.wearChance, 0)
+      b.chancedOutput('1x ' + SPENT, CH.wearChance, 0)
+      b.outputFluids(Fluid.of('gtceu:helium', r.helium))
+      if (r.hydrogen > 0) b.outputFluids(Fluid.of('gtceu:hydrogen', r.hydrogen))
+      b.EUt(-CH.eut).duration(r.duration)
+      added.push({ name: r.name, circuit: i + 1, eut: CH.eut, duration: r.duration })
+    })
+    return added
+  }
+
+  function addCrafting(event) {
+    event.recipes.gtceu.shaped(CH.machine, ['CEC', 'CHC', ' E '], {
+      C: '#gtceu:circuits/uv', E: 'gtceu:uv_emitter', H: 'gtceu:uv_machine_hull'
+    }).id(F.crafting.chamber)
+  }
+
+  // ---------------------------------------------------------------- decaborane (the capsule's boron-11 fuel)
+  // GTM has no diborane, sodium hydride or plain boron trifluoride, so the route of the design (BF3 + NaH -> B2H6 -> B10H14) is one
+  // chemical reactor row from the hot cell's boron-11 trifluoride: 3 BF3 + 6 H -> decaborane, the fluorine leaving as hydrofluoric acid.
+  var DECABORANE = { name: 'decaborane', circuit: 1, eut: 7680, duration: 400,
+    fluidsIn: [{ id: 'gtceu:boron_11_trifluoride', amount: 3000 }, { id: 'gtceu:hydrogen', amount: 6000 }],
+    fluidsOut: [{ id: 'gtceu:decaborane', amount: 1000 }, { id: 'gtceu:hydrofluoric_acid', amount: 9000 }] }
+  F.decaborane = DECABORANE
+
+  function addDecaborane(event) {
+    var d = DECABORANE
+    var missing = d.fluidsIn.concat(d.fluidsOut).filter(function (f) { return !Fluid.exists(f.id) }).map(function (f) { return f.id })
+    if (missing.length > 0) {
+      F.skipped.push({ name: d.name, reason: 'unknown id(s) ' + missing.join(', ') })
+      console.error(LOG + 'decaborane recipe skipped, unknown id(s): ' + missing.join(', '))
+      return []
+    }
+    var b = event.recipes.gtceu.chemical_reactor('grindless:chemical_reactor/' + d.name)
+    b.circuit(d.circuit)
+    d.fluidsIn.forEach(function (f) { b.inputFluids(Fluid.of(f.id, f.amount)) })
+    d.fluidsOut.forEach(function (f) { b.outputFluids(Fluid.of(f.id, f.amount)) })
+    b.EUt(d.eut).duration(d.duration)
+    return [d.name]
+  }
+
+  ServerEvents.recipes(function (event) {
+    try { F.chamber = addChamber(event) } catch (e) { F.chamber = []; console.error(LOG + 'laser fusion chamber recipes failed: ' + e) }
+    try { addCrafting(event) } catch (e2) { console.error(LOG + 'laser fusion chamber crafting failed: ' + e2) }
+    try { F.chemistry = addDecaborane(event) } catch (e3) { F.chemistry = []; console.error(LOG + 'decaborane recipe failed: ' + e3) }
+    console.info(LOG + 'chamber recipes ' + F.chamber.length + ', decaborane recipes ' + F.chemistry.length)
+  })
 })()

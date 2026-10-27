@@ -81,6 +81,20 @@
       fluidsIn: [{ id: 'gtceu:saturn_helium', amount: 10 }], notConsumedFluids: [{ id: 'gtceu:liquid_helium', amount: 4000 }],
       itemsOut: [{ id: ARRAY, count: 1 }], fluidsOut: [],
       eut: ZPM_VA, duration: 1200
+    },
+    {
+      name: 'pb11_capsule', type: 'diamond_cvd', circuit: 3,
+      itemsIn: [{ id: PLATE, count: 1 }], notConsumedItems: [],
+      fluidsIn: [{ id: 'gtceu:decaborane', amount: 500 }],
+      itemsOut: [{ id: 'grindless:pb11_capsule', count: 1 }], fluidsOut: [],
+      eut: ZPM_VA, duration: 400
+    },
+    {
+      name: 'd_he3_capsule', type: 'diamond_cvd', circuit: 4,
+      itemsIn: [{ id: PLATE, count: 1 }], notConsumedItems: [],
+      fluidsIn: [{ id: 'gtceu:deuterium', amount: 1000 }, { id: 'gtceu:helium_3', amount: 1000 }],
+      itemsOut: [{ id: 'grindless:d_he3_capsule', count: 1 }], fluidsOut: [],
+      eut: ZPM_VA, duration: 400
     }
   ]
 
