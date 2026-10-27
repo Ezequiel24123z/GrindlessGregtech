@@ -17,7 +17,7 @@ $ErrorActionPreference = 'Stop'
 [Threading.Thread]::CurrentThread.CurrentCulture = [Globalization.CultureInfo]::InvariantCulture
 if (-not $AllowlistPath) { $AllowlistPath = [IO.Path]::Combine($PSScriptRoot, 'log-allowlist.txt') }
 
-function J([string]$a, [string]$b) { return [IO.Path]::Combine($a, $b) }
+function J([string]$a, [string]$b) { return [IO.Path]::Combine($a, $b.Replace([char]92, [IO.Path]::DirectorySeparatorChar)) }
 function FExists([string]$p) { return [IO.File]::Exists($p) }
 function DExists([string]$p) { return [IO.Directory]::Exists($p) }
 function Files([string]$dir, [string]$pattern, [bool]$recurse) {
