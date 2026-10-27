@@ -69,7 +69,14 @@
   }
   // KubeJS's getLevel(String) (a ResourceKey argument is ambiguous for Rhino)
   function levelOf(id) { return S.server.getLevel(String(id)) }
-  function dimKey(level) { return jcall(level, ['dimension', 'm_46472_']) }
+  // KubeJS shows Level.dimension() as the property level.dimension (a ResourceLocation); GCYR's PlanetData wants the ResourceKey
+  function dimKey(level) {
+    var d = level.dimension
+    var id = typeof d === 'function' ? String(level.dimension().location()) : String(d)
+    var RK = Java.loadClass('net.minecraft.resources.ResourceKey')
+    var Registries = Java.loadClass('net.minecraft.core.registries.Registries')
+    return RK.create(Registries.DIMENSION, rl(id))
+  }
   function holderOf(id) { return classes().Stations.getSpaceStations(levelOf(id)) }
   function countOf(id) { return Number(holderOf(id).getFreeStationId()) }
   function planetName(p) { return p === null || p === undefined ? 'none' : String(p.level().location()) }
