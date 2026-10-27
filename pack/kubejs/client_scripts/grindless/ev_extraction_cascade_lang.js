@@ -1,3 +1,4 @@
+// priority: 10700
 // Gregtech Grindless - names and tooltips of the EV Rare Earth Extraction Cascade and the GT materials of its line
 // (startup_scripts/grindless/ev/extraction_cascade.js):
 //

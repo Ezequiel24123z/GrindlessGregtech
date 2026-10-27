@@ -1,3 +1,4 @@
+// priority: -15824
 // -----------------------------------------------------------------------------------------------
 // Sophisticated Backpacks (sophisticatedbackpacks): the second tier of upgrades is an MV item.
 //   Tier 1 stays as the mod has it (leather / copper / iron backpack, stack upgrades up to tier 1, basic upgrades): LV.

@@ -1,3 +1,4 @@
+// priority: -18724
 (function () {
   var G = global.grindless
   ServerEvents.recipes(function (event) {

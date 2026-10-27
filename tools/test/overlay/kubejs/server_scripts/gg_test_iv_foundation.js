@@ -1,3 +1,4 @@
+// priority: -2824
 // Gregtech Grindless - registration test of the IV foundation (TEST-ONLY overlay: copied over the instance on the test PC, never shipped
 // with the pack).
 //

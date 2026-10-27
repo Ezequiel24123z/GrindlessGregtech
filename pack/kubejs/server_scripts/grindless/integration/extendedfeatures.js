@@ -1,3 +1,4 @@
+// priority: -14724
 // -----------------------------------------------------------------------------------------------
 // GTM Extended Features (extendedfeatures 3.0.0), audited against docs/eras (ev.md, "Decisions taken": no addon may process
 // cheaper than GT in its era or undercut the pack's own multiblocks). Its recipes are generated in Java (the jar's data folder has

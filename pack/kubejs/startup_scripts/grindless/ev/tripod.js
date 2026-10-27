@@ -1,3 +1,4 @@
+// priority: -1600
 // -----------------------------------------------------------------------------------------------
 // The EV step of the Vein Drill family (docs/eras/ev.md, "EV tripod"): a lander that stays. It replaces the HV Lunar Drill on the
 // Moon and is the drill of Mars.

@@ -1,3 +1,4 @@
+// priority: -8500
 // -----------------------------------------------------------------------------------------------
 // UHV's Proxima ground (docs/eras/uhv.md, machines 29 and 31, lines 16, 17 and 18; package UHV-B5): the cold-trap drill and the
 // biomining heap on Proxima b, their recipe types, items and blocks. The recipes come from data/grindless/tables/proxima_ground.json

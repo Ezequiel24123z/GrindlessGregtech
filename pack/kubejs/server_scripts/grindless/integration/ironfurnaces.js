@@ -1,3 +1,4 @@
+// priority: -15324
 // -----------------------------------------------------------------------------------------------
 // Iron Furnaces (ironfurnaces 1.20.1-4.1.6): tiered furnaces (copper, iron, silver, gold, diamond, emerald, crystal, obsidian, netherite)
 // and the upgrade items that turn a placed furnace into the next tier in place, keeping its inventory, augments and progress

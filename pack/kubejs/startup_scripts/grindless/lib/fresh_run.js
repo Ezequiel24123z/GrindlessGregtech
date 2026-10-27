@@ -1,4 +1,4 @@
-// priority: 998
+// priority: 700
 // -----------------------------------------------------------------------------------------------
 // Grindless "a fresh price every run" helper: IV-B2's freshEveryRun (iv/mercury.js), made reusable.
 //

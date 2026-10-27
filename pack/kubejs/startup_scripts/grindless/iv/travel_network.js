@@ -1,3 +1,4 @@
+// priority: -3100
 // -----------------------------------------------------------------------------------------------
 // IV travel and network (docs/eras/iv.md, "Route" steps 5-7, "Venus and Mercury", "On-site power" and "AE2 between planets: the IV
 // step"; package IV-B5). Registrations only; the recipes are in server_scripts/grindless/iv/travel_network.js.

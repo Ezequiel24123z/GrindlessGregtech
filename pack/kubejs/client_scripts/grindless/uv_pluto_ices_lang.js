@@ -1,3 +1,4 @@
+// priority: 2100
 // Gregtech Grindless - names and tooltips of UV's Pluto ices (startup_scripts/grindless/uv/pluto_ices.js): gtceu:penetrator_probe_bay and
 // its recipe type gtceu:penetrator_probe, gtceu:volatile_ice_fractionator and gtceu:ice_fractionation, and the item grindless:penetrator_probe.
 ClientEvents.lang('en_us', event => {

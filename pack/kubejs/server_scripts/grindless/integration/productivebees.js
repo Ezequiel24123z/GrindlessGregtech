@@ -1,3 +1,4 @@
+// priority: -15724
 // -----------------------------------------------------------------------------------------------
 // Productive Bees (productivebees): bees are kept for what they do on their own (wax, honey, pollen, nests, the mob-drop
 // combs below), but combs only give MATERIALS through GregTech machines and never ores, ingots or dusts directly

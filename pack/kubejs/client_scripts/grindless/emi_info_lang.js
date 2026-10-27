@@ -1,3 +1,4 @@
+// priority: 11100
 // Gregtech Grindless - text of our EMI information pages (kubejs/assets/emi/recipe/additions/grindless/*.json: EMI's own data
 // recipes, type emi:info; EMI only reads them in the emi namespace). Each page lists its stacks and these translation keys; EMI shows
 // the page under both the recipes and the uses of every stack on it. They cover what EMI cannot show as a recipe: right-click

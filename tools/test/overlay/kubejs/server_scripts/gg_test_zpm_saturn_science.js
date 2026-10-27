@@ -1,3 +1,4 @@
+// priority: -11324
 // TEST ONLY, ZPM-B4. Command: kubejs custom_command gg_test_zpm_saturn_science
 // Reserved band ONLY: X22272-22335, Z0-63; Saturn orbit Y198-214, Overworld Y98-112.
 // Builds the plume sampler and the ring seismometer in Saturn orbit and runs one real recipe in each (sampler circuit 1: one aerogel cartridge;

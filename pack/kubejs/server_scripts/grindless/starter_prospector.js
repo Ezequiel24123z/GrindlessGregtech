@@ -1,3 +1,4 @@
+// priority: -22124
 // GTM 7.5.3's saved vein cache and prospecting packet, without its block-scanning GUI.
 // The GUI forces chunk generation and cannot fit a 16-chunk radius. See docs/quests.md.
 ;(function () {

@@ -1,3 +1,4 @@
+// priority: -7124
 // Gregtech Grindless - smoke test of the two Steam Age multiblocks (TEST-ONLY overlay: copied over the instance on
 // the test PC, never shipped with the pack).
 //

@@ -1,3 +1,4 @@
+// priority: -16424
 // -----------------------------------------------------------------------------------------------
 // IV foundation on the server (the registrations are in startup_scripts/grindless/iv/foundation.js; docs/eras/iv.md, "Raising IV
 // to the target"):

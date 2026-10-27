@@ -1,3 +1,4 @@
+// priority: 6500
 // Gregtech Grindless - names and tooltips of the Moon (end of HV):
 //
 //   gtceu:lunar_drill, gtceu:lunar_drilling          (machine name + tooltips, recipe type)

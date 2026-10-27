@@ -1,3 +1,4 @@
+// priority: -13924
 // -----------------------------------------------------------------------------------------------
 // Applied Energistics 2 on the LV era (docs/eras/lv.md, "Decisions taken" #1, #2 and #6).
 //

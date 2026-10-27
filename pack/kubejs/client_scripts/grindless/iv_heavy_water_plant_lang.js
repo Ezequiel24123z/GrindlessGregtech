@@ -1,3 +1,4 @@
+// priority: 9200
 // Gregtech Grindless - names and tooltips of IV's Heavy-Water Plant (startup_scripts/grindless/iv/heavy_water_plant.js), its recipe type,
 // the EMI line of each of its recipes, the controller's H2S charge line and the concentrate bucket's tooltip.
 //

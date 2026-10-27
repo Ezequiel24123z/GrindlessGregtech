@@ -1,3 +1,4 @@
+// priority: -16824
 // -----------------------------------------------------------------------------------------------
 // Recipes of IV on Mercury (machines and types: startup_scripts/grindless/iv/mercury.js; package IV-B2):
 //

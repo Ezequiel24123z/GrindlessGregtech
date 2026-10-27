@@ -1,3 +1,4 @@
+// priority: -20724
 // -----------------------------------------------------------------------------------------------
 // gtceu:greenhouse recipes of the MV Greenhouse (gtceu:mv_greenhouse): the FERTILIZER + CO2 variants. The MV greenhouse also runs
 // every steam recipe and every LV one (see steam/greenhouse.js and lv/greenhouse.js); the LV greenhouse skips these (their ids

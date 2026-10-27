@@ -1,3 +1,4 @@
+// priority: 10200
 // Gregtech Grindless - names and tooltips of the EV Regolith Cell.
 //
 //   gtceu:regolith_cell            (machine name + tooltips)

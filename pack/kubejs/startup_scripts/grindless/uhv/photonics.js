@@ -1,3 +1,4 @@
+// priority: -8200
 // -----------------------------------------------------------------------------------------------
 // UHV's photonics (docs/eras/uhv.md, machines 5 and 6, lines 5, 6, 7 and 9; package UHV-A4): the MBE reactor and the photonic foundry,
 // their recipe types, and the package's own items. The recipes come from data/grindless/tables/photonics.json

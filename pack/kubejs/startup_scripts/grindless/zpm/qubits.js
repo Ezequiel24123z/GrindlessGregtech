@@ -1,3 +1,4 @@
+// priority: -11700
 // -----------------------------------------------------------------------------------------------
 // ZPM's solid-state qubit chain (docs/eras/zpm.md, "Machines 10-12"; package ZPM-A6): three multiblocks, their recipe types and the items
 // between them. Recipes: server_scripts/grindless/zpm/qubits.js. Names / tooltips: client_scripts/grindless/zpm_qubits_lang.js.

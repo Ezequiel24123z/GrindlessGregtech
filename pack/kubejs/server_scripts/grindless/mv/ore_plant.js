@@ -1,3 +1,4 @@
+// priority: -21124
 // -----------------------------------------------------------------------------------------------
 // gtceu:ore_processing recipes of the Ore Plant (gtceu:ore_plant), generated at server load for every material that has an OreProperty.
 // No table of our own: the plant does GTM's whole ore chain in one pass, and the chain is read from GTM's own recipes (the ones

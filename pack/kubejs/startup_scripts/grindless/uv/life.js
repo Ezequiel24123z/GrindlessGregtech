@@ -1,3 +1,4 @@
+// priority: -10000
 // -----------------------------------------------------------------------------------------------
 // UV's life (docs/eras/uv.md, machines 19 and 20, line 19; package UV-A10): the greenhouse family's step 7 and the wetware batch vat.
 //

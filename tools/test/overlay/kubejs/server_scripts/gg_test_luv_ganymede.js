@@ -1,3 +1,4 @@
+// priority: -4524
 // TEST ONLY, LuV B9 (Ganymede). Integrated owner: kubejs custom_command gg_test_luv_ganymede
 // Never launches a JVM. Band X 17664..17727, Z 0..63: the Overworld at Y 98..112; on Ganymede (G.places.surface('ganymede')) Y 198..214,
 // or, where the ground under the two machines reaches Y 200, from one block above the highest ground (5 rows).

@@ -1,3 +1,4 @@
+// priority: 3500
 // Gregtech Grindless - names of the UHV wireless tier (package UHV-A9; the UHV row of kubejs/data/grindless/tables/wireless_energy.json,
 // registered by startup_scripts/grindless/lv/wireless_energy.js) and the EMI line of the naquadria magnet works' circuit 5:
 //

@@ -1,3 +1,4 @@
+// priority: -14524
 // -----------------------------------------------------------------------------------------------
 // Expanded AE (modId expandedae, CurseForge build 1.4.x; it builds on ExtendedAE and AE2WTLib) on the HV era
 // (docs/eras/hv.md, "Mods and integration": coprocessors small at HV, the big ones wait for EV-IV).

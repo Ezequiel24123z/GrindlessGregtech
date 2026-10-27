@@ -1,3 +1,4 @@
+// priority: -26624
 // -----------------------------------------------------------------------------------------------
 // Recipes of ZPM's naquadria refinery and naquadah fuel works (machines and recipe types: startup_scripts/grindless/zpm/naquadria.js;
 // docs/eras/zpm.md, machines 1 and 2; package ZPM-A2), generated at every server load from data/grindless/tables/naquadria.json, plus

@@ -1,3 +1,4 @@
+// priority: -23924
 // -----------------------------------------------------------------------------------------------
 // Recipes of UHV's Proxima ground (machines and recipe types: startup_scripts/grindless/uhv/proxima_ground.js; docs/eras/uhv.md,
 // machines 29 and 31, lines 16, 17 and 18; package UHV-B5), generated at every server load from

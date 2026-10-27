@@ -1,3 +1,4 @@
+// priority: -9800
 // -----------------------------------------------------------------------------------------------
 // UV's heat source works (docs/eras/uv.md, machine 3; package UV-A2): the machine, its recipe type and the four items only it makes.
 //

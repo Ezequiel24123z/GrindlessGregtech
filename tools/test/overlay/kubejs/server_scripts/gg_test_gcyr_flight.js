@@ -1,3 +1,4 @@
+// priority: -2124
 // Gregtech Grindless - in-game test of the GCYR rocket flow (Gregicality Rocketry 0.2.9) and of GCYR issues #91 (the server
 // freezes at the interplanetary teleport) and #122 (the Rocket Scanner does not capture the whole rocket).
 // TEST-ONLY overlay: copied over the instance on the test PC, never shipped with the pack.

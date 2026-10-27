@@ -1,3 +1,4 @@
+// priority: -6500
 // -----------------------------------------------------------------------------------------------
 // The observatory family, Steam to MV (docs/journey.md, "Observatory (new family, the one that tells the story of the journey)"): the machines that tell
 // the journey, because navigation data only comes from looking. Each step is its own multiblock with its own recipe type, so each

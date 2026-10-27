@@ -1,3 +1,4 @@
+// priority: 12700
 // Gregtech Grindless - client half of the travel-key test (TEST-ONLY overlay: copied over the instance on the test PC, never
 // shipped with the pack). Partner of server_scripts/gg_test_dimension_keys.js; asleep unless that test sets 'hold' in the map
 // both halves share (global.ggDimensionKeys: in the client suite both run in the same JVM).

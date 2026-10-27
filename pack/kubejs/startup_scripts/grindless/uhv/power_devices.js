@@ -1,3 +1,4 @@
+// priority: -8300
 // -----------------------------------------------------------------------------------------------
 // UHV's power devices and photovoltaics (docs/eras/uhv.md, machines 7 and 8, lines 10 and 21; package UHV-A5): the SiC device fab and
 // the solar array fab, their recipe types, and the package's own items. The recipes come from data/grindless/tables/power_devices.json

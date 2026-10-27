@@ -1,3 +1,4 @@
+// priority: -7824
 // TEST ONLY, UHV-A7. Command: kubejs custom_command gg_test_uhv_elevator
 // Band ONLY: X 28160-28223, Z 0-63, Overworld Y 60-104.
 // Doubt: GTCA's space elevator (a GTCA machine, highTierContent off) runs our real recipe, the GEO lift

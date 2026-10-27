@@ -1,3 +1,4 @@
+// priority: -26124
 // -----------------------------------------------------------------------------------------------
 // UV travel (package UV-B1, docs/eras/uv.md "Bridges and first arrivals", "AE2").
 // Registrations and the rocket rule: startup_scripts/grindless/uv/travel.js.

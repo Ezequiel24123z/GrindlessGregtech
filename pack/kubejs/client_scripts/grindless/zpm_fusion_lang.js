@@ -1,3 +1,4 @@
+// priority: 1100
 // Gregtech Grindless - names and tooltips of ZPM's plasma quench caster and direct energy converter (startup_scripts/grindless/zpm/fusion.js),
 // their recipe types, and the EMI line of each recipe.
 //

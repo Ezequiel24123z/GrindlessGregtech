@@ -1,3 +1,4 @@
+// priority: -17424
 // -----------------------------------------------------------------------------------------------
 // Recipes of the road to the first rocket that make our own parts (the ones that make a GCYR part are in
 // server_scripts/grindless/integration/gcyr_launch_road.js, one file for every GCYR part recipe change):

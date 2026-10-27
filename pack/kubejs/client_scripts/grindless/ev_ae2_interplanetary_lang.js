@@ -1,3 +1,4 @@
+// priority: 11000
 // Gregtech Grindless - names and tooltips of the AE2 network's EV step (startup_scripts/grindless/ev/ae2_interplanetary.js):
 //
 //   grindless:martian_quantum_seed                   (the Martian half of an Earth-Mars quantum pair)

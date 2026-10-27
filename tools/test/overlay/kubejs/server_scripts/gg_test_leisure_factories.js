@@ -1,3 +1,4 @@
+// priority: -3224
 // Gregtech Grindless - smoke test of the four MV universal factories (TEST-ONLY overlay: copied over the instance on the test PC,
 // never shipped with the pack): startup_scripts/grindless/mv/leisure_factories.js (machines, modes, the `bores` cap and the mode
 // veto) and server_scripts/grindless/mv/leisure_factories.js (controller recipes).

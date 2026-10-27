@@ -1,3 +1,4 @@
+// priority: -21024
 // -----------------------------------------------------------------------------------------------
 // Recipes of the Leisure utility package (startup_scripts/grindless/mv/leisure_utility.js; ideas from GregTech Leisure, our own
 // recipes and numbers, docs/research/leisure.md 4.2-4.3):

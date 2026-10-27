@@ -1,3 +1,4 @@
+// priority: -20424
 // -----------------------------------------------------------------------------------------------
 // Ore veins of the Moon and the End (GTCEuServerEvents.oreVeins; it only changes chunks generated from now on):
 //

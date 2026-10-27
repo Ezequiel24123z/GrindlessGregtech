@@ -1,3 +1,4 @@
+// priority: -11100
 // -----------------------------------------------------------------------------------------------
 // ZPM foundation (package ZPM-F1, docs/eras/zpm.md "Build order", F1): the shared registrations the ZPM packages build on. No machines,
 // no recipe types, no recipes, no dimensions, no wireless tier and nothing that waits for spikes S0-1/S0-2 (rocket motors and tanks,

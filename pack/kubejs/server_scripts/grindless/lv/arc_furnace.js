@@ -1,3 +1,4 @@
+// priority: -19024
 // -----------------------------------------------------------------------------------------------
 // gtceu:arc_smelting recipes of the Submerged Arc Furnace (gtceu:submerged_arc_furnace), plus the graphite electrode.
 //

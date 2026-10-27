@@ -1,3 +1,4 @@
+// priority: -5524
 // Gregtech Grindless - test of the Mars travel package (B5a, end of EV). TEST-ONLY overlay: copied over the instance on the test PC,
 // never shipped with the pack.
 //

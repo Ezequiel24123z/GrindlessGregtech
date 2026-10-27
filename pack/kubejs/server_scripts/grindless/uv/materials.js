@@ -1,3 +1,4 @@
+// priority: -25424
 // -----------------------------------------------------------------------------------------------
 // Recipes of UV's materials (docs/eras/uv.md, machines 13, 14 and 15, lines 11, 14 and 15; package UV-A8): the boron nitride reactor,
 // the powder-in-tube line, the powder bed printer and the side steps that feed them (machines and items:

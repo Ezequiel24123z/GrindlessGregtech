@@ -1,3 +1,4 @@
+// priority: -3800
 // -----------------------------------------------------------------------------------------------
 // One of LuV's multiblocks (docs/eras/luv.md, "4. Biofoundry"; package LuV-A5): the biofoundry and its recipe type.
 //

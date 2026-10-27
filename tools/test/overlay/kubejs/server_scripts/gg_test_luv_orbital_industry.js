@@ -1,3 +1,4 @@
+// priority: -4924
 // TEST ONLY, LuV B3. Command: kubejs custom_command gg_test_luv_orbital_industry
 // The integrated validation owner runs this with gg_test_recipe_lookup and a fresh gg_dump.
 // Reserved band ONLY: X16128-16191, Z0-15; Earth orbit Y198-214, Overworld Y98-112.

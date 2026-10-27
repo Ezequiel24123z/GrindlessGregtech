@@ -1,3 +1,4 @@
+// priority: -9324
 // TEST ONLY, UV-A11 (propulsion). Command: kubejs custom_command gg_test_uv_propulsion
 // Band X 25856-25919, Z 0-63, Y 98-112 (tools/test/zones.json, uv_propulsion); it builds, force-loads and clears X 25856-25871, Z 0-15.
 // The doubt it settles: the level of a rocket built from the tier 11 BNNT tank the winder makes and GCYR's elite motor (tier 3).

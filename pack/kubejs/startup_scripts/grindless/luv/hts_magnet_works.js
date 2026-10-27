@@ -1,3 +1,4 @@
+// priority: -4200
 // -----------------------------------------------------------------------------------------------
 // One of LuV's multiblocks (docs/eras/luv.md, "3. HTS magnet works"; package LuV-A4): the HTS magnet works and its recipe type.
 //

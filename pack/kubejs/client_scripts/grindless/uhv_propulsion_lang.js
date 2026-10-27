@@ -1,3 +1,4 @@
+// priority: 4200
 // Gregtech Grindless - names and tooltips of UHV's ceramics and the level 8 rocket (startup_scripts/grindless/uhv/propulsion.js):
 //
 //   gtceu:spark_plasma_sinterer           machine name + four tooltip lines

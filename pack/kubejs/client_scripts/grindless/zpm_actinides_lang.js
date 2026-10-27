@@ -1,3 +1,4 @@
+// priority: 1400
 // Gregtech Grindless - names and tooltips of ZPM's Waste Retrieval Plant and Actinide Partitioning Plant and the GT materials of
 // the partitioning line (startup_scripts/grindless/zpm/actinides.js):
 //

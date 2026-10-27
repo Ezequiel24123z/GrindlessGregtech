@@ -1,3 +1,4 @@
+// priority: 1000
 // Gregtech Grindless - names and tooltips of ZPM's Naquadria Magnet Works (startup_scripts/grindless/zpm/magnet_works.js), its recipe type,
 // the EMI line of each of its recipes, the controller's cold-test charge line, the HTS insert and the EMI info page text of the insert.
 //

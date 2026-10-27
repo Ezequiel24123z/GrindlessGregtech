@@ -1,3 +1,4 @@
+// priority: 12600
 // Gregtech Grindless - EMI coverage, client half (TEST-ONLY overlay: copied over the instance on the test PC, never shipped with the
 // pack). Read-only: no world band, no clicks, nothing placed. Once EMI has finished loading it asks EMI's recipe manager (EmiApi) for the
 // recipes and uses of every item, block item, fluid and machine the pack registers, against the static audit's expectations in

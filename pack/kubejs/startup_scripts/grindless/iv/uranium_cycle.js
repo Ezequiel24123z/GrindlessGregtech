@@ -1,3 +1,4 @@
+// priority: -3400
 // -----------------------------------------------------------------------------------------------
 // IV's uranium cycle (docs/eras/iv.md, "Uranium in-situ leach field" and "Fuel fabrication plant"; package IV-A4): two of our
 // multiblocks and their recipe types. Recipes, from data/grindless/tables/uranium_cycle.json: server_scripts/grindless/iv/

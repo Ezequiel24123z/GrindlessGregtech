@@ -1,3 +1,4 @@
+// priority: -11000
 // -----------------------------------------------------------------------------------------------
 // ZPM's europium reductor (docs/eras/zpm.md, "Machine 3"; package ZPM-A3): the multiblock, its recipe type and the GT materials of its line.
 //

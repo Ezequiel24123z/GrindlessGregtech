@@ -1,3 +1,4 @@
+// priority: -2700
 // -----------------------------------------------------------------------------------------------
 // One of IV's multiblocks (docs/eras/iv.md, "Heavy-water plant"; package IV-A5): the heavy-water plant and its recipe type.
 //

@@ -1,3 +1,4 @@
+// priority: -2924
 // Gregtech Grindless - smoke test of package IV-B2, mercury (TEST-ONLY overlay: copied over the instance on the test PC, never shipped):
 // the four Mercury multiblocks (startup_scripts/grindless/iv/mercury.js), their recipes (server_scripts/grindless/iv/mercury.js) and the
 // tungsten steel bit (startup_scripts/grindless/iv/tungsten_steel_drill_bit.js).

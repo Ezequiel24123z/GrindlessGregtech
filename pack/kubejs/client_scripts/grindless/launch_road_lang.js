@@ -1,3 +1,4 @@
+// priority: 8300
 // Gregtech Grindless - names and tooltips of the road to the first rocket (MV -> HV):
 //
 //   gtceu:engine_test_stand, gtceu:static_fire            (machine name + tooltips, recipe type)

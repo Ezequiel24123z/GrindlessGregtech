@@ -1,3 +1,4 @@
+// priority: -2524
 // Gregtech Grindless - smoke test of package IV-A3, hot-cell (TEST-ONLY overlay: copied over the instance on the test PC, never shipped
 // with the pack): IV's Hot Cell (gtceu:hot_cell and its recipe type gtceu:hot_cell), startup_scripts/grindless/iv/hot_cell.js,
 // server_scripts/grindless/iv/hot_cell.js, server_scripts/grindless/lib/compose.js and data/grindless/tables/hot_cell.json.

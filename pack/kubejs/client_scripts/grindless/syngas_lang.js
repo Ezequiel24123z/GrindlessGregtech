@@ -1,3 +1,4 @@
+// priority: 5200
 // Gregtech Grindless - names and tooltips of the HV Syngas and Shift Plant.
 //
 //   gtceu:syngas_plant            (machine name + tooltips)

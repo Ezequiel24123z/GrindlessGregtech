@@ -1,3 +1,4 @@
+// priority: -7800
 // -----------------------------------------------------------------------------------------------
 // UHV's clock and crystals (docs/eras/uhv.md, machines 3 and 4, lines 3, 5, 7, 8 and 9; package UHV-A2): the nuclear clock lab and the
 // crystal growth furnace, their recipe types, and the package's own items. The recipes come from data/grindless/tables/crystals.json

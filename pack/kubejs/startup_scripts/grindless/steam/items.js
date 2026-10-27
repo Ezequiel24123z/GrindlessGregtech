@@ -1,3 +1,4 @@
+// priority: -7100
 // -----------------------------------------------------------------------------------------------
 // Steam Age items of the Steam Vein Drill:
 //   grindless:bronze_drill_bit, grindless:steel_drill_bit   wear parts (consumed by chance by the drill)

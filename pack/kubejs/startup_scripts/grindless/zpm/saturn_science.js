@@ -1,3 +1,4 @@
+// priority: -11800
 // -----------------------------------------------------------------------------------------------
 // ZPM's Saturn science (docs/eras/zpm.md, "Machines 23-24"; package ZPM-B4): two multiblocks of Saturn orbit and their recipe types.
 //

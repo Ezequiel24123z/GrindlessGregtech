@@ -1,3 +1,4 @@
+// priority: 10100
 // Gregtech Grindless - names and tooltips of the Sealed Dome (gtceu:sealed_dome), the EV step of the Greenhouse family
 // (startup_scripts/grindless/ev/sealed_dome.js, server_scripts/grindless/ev/sealed_dome.js).
 //

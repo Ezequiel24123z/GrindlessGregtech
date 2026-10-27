@@ -1,3 +1,4 @@
+// priority: 6800
 // Gregtech Grindless - LV era: names and tooltips of the Creature Simulator, its recipe type and the creature models.
 //
 // Kept out of pack/kubejs/assets/grindless/lang/* (owned by another agent): Minecraft merges the lang entries of every

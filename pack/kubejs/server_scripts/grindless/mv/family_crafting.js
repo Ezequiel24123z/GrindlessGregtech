@@ -1,3 +1,4 @@
+// priority: -20624
 // -----------------------------------------------------------------------------------------------
 // Crafting-table recipes of the MV Vein Drill family (made by hand from MV parts; nothing here needs a machine):
 //

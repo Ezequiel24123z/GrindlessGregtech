@@ -1,3 +1,4 @@
+// priority: -9700
 // -----------------------------------------------------------------------------------------------
 // UV's laser fusion chamber (docs/eras/uv.md, machine 4; package UV-A3): the machine, its recipe type and the one item only it makes.
 //

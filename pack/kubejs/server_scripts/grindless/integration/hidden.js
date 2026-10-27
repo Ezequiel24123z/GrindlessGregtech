@@ -1,4 +1,4 @@
-// priority: -100
+// priority: -27524
 // -----------------------------------------------------------------------------------------------
 // What cannot be obtained yet, or ever, stays out of the recipe viewer (tools/analysis obtainability audit, 2026-10-24).
 //

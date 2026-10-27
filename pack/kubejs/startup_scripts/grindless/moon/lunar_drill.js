@@ -1,3 +1,4 @@
+// priority: -5700
 // -----------------------------------------------------------------------------------------------
 // The Lunar Drill (gtceu:lunar_drill), the Moon step of the Vein Drill family (docs/journey.md, "The families change shape and
 // parts, not just color"): not a recoloured derrick but a lander. Three stainless steel legs stand on regolith pads, the body is a 3x3x2 block of

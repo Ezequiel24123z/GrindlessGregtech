@@ -1,4 +1,4 @@
-// priority: -100000
+// priority: -100100
 // Gregtech Grindless - GTM recipe lookup guard (TEST-ONLY overlay: copied over the instance on the test PC, never shipped with the
 // pack).
 //

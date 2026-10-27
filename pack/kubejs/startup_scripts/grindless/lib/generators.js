@@ -1,4 +1,4 @@
-// priority: 999
+// priority: 800
 // -----------------------------------------------------------------------------------------------
 // Grindless generator multiblock helper: the one working way, on GTM 7.5.3, for a multiblock registered from KubeJS to GENERATE EU
 // through dynamo hatches. The LV Generator Array (power/generator_array.js) uses it; the later generator multiblocks (EV lunar solar

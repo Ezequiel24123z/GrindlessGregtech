@@ -1,3 +1,4 @@
+// priority: -19424
 // -----------------------------------------------------------------------------------------------
 // gtceu:solar_steam recipes of the Heliostat Tower (gtceu:heliostat_tower), its mirror and its controller.
 //

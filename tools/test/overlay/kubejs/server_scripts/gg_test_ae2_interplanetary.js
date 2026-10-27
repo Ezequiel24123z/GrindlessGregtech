@@ -1,3 +1,4 @@
+// priority: -324
 // Gregtech Grindless - smoke test of the AE2 network's EV step (package ae2-interplanetary). TEST-ONLY overlay: copied over the
 // instance on the test PC, never shipped with the pack.
 //

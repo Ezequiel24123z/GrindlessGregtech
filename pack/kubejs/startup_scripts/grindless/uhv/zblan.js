@@ -1,3 +1,4 @@
+// priority: -9100
 // -----------------------------------------------------------------------------------------------
 // UHV's ZBLAN draw tower (docs/eras/uhv.md, machine 19 and line 31's ZrF4 row; package UHV-A10): the machine, its recipe type, the
 // preform and the zirconium tetrafluoride it is melted from. The fibre is F1's (global.grindless.uhvFoundation: grindless:zblan_fibre)

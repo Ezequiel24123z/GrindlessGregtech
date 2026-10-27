@@ -1,3 +1,4 @@
+// priority: -1024
 // Gregtech Grindless - test overlay (not shipped with the pack)
 //
 // REAL-PATH test of the three travel keys (grindless:void_key / flat_key / end_key) with a real player, the way a person

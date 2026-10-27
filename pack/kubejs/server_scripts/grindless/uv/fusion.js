@@ -1,3 +1,4 @@
+// priority: -25024
 // -----------------------------------------------------------------------------------------------
 // UV-A3: the Mk3 audit, the laser fusion chamber's recipes (machine 4), its controller, and the chemical reactor rows that make decaborane
 // (docs/eras/uv.md, "The Mk3 audit", "Machine 4", "Fusion", package A3; the chamber itself: startup_scripts/grindless/uv/fusion.js).

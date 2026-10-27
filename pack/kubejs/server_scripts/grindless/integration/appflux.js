@@ -1,3 +1,4 @@
+// priority: -14124
 // -----------------------------------------------------------------------------------------------
 // Applied Flux (appflux): FE storage in the ME network (FE cells, flux accessor, induction card). It is an MV mod
 // (docs/eras/mv.md, "Mods and integration"): MV circuits and aluminium, and EU -> FE comes from the GregTech converters

@@ -1,4 +1,4 @@
-// priority: -10
+// priority: -12600
 // -----------------------------------------------------------------------------------------------
 // LuV B9, Ganymede (docs/eras/luv.md, machines 19 and 20). Recipes: server_scripts/grindless/luv/ganymede.js.
 //

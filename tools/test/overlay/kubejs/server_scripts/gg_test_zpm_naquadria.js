@@ -1,3 +1,4 @@
+// priority: -10924
 // TEST ONLY, ZPM-A2 (the naquadria refinery, the naquadah fuel works, the plant's circuit 4, the reactor's duranium frames).
 // Command: kubejs custom_command gg_test_zpm_naquadria   Reserved band: X 19456-19519 (no block is placed: live recipe lookups only).
 //

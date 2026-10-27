@@ -1,3 +1,4 @@
+// priority: -12624
 // -----------------------------------------------------------------------------------------------
 // gtceu:atmosphere_processing recipes of the Atmosphere Processor (gtceu:atmosphere_processor, the Mars base, EV era; registered in
 // startup_scripts/grindless/ev/mars_site.js) and the recipe of its controller. GTM has no Sabatier reaction, so these recipes are ours,

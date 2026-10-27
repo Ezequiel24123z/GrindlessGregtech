@@ -1,3 +1,4 @@
+// priority: 12200
 // Gregtech Grindless - client half of the Hologram Projector test (TEST-ONLY overlay: copied over the instance on the test PC, never
 // shipped). Partner of server_scripts/gg_test_projector.js; asleep unless that test sets 'hold' in the map both halves share
 // (global.ggProjector: in the client suite both run in the same JVM).

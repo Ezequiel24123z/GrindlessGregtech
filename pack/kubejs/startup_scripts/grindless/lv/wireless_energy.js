@@ -1,3 +1,4 @@
+// priority: -5300
 // -----------------------------------------------------------------------------------------------
 // LV: the wireless energy network (DECISIONS.md 2026-10-25, "Wireless energy"; docs/eras/lv.md, "Wireless energy"). One network for
 // the whole server: every dimension puts EU in and takes EU out of the same store, with 5% lost on the way in. Registrations only;

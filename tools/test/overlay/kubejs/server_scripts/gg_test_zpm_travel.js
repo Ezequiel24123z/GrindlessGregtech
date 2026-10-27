@@ -1,3 +1,4 @@
+// priority: -11624
 // Gregtech Grindless - ZPM-B1 native test gg_test_zpm_travel: adapted from gg_test_gcyr_flight.js (the comments below describe
 // that origin). Two real flights from the Overworld: a level-5 rocket (elite motors + naquadah tanks) to grindless:saturn and a
 // level-6 rocket (elite motors + aerogel tanks) to grindless:uranus, then the station slots and the seed recipes (S0-3, S0-4).

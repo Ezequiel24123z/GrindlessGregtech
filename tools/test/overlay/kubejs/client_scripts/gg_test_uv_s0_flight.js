@@ -1,3 +1,4 @@
+// priority: 11700
 // Gregtech Grindless - client half of the GCYR flight test (TEST-ONLY overlay: copied over the instance on the test PC, never
 // shipped with the pack). Partner of server_scripts/gg_test_gcyr_flight.js; asleep unless that test sets 'hold' in the map it
 // shares with this script (global.ggGcyrFlight: in the client suite both halves run in the same JVM).

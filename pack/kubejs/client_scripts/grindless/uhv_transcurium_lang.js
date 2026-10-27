@@ -1,3 +1,4 @@
+// priority: 3800
 // Gregtech Grindless - names and tooltips of UHV's transcurium line (startup_scripts/grindless/uhv/transcurium.js; package UHV-A1):
 //
 //   block.gtceu.<machine>, gtceu.<recipe type>                    machine and recipe type names

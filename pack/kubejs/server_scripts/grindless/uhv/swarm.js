@@ -1,3 +1,4 @@
+// priority: -24124
 // -----------------------------------------------------------------------------------------------
 // Recipes of UHV's Dyson swarm (machines, types and items: startup_scripts/grindless/uhv/swarm.js; docs/eras/uhv.md, machines 22, 23
 // and 24, lines 23 and 30; package UHV-B3). Every recipe of the three machines carries .dimension('gcyr:mercury_orbit'): they are station

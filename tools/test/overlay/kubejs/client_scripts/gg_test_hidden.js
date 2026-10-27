@@ -1,3 +1,4 @@
+// priority: 12300
 // Gregtech Grindless - client half of the hiding test (TEST-ONLY overlay: copied over the instance on the test PC, never shipped with the
 // pack). Partner of server_scripts/gg_test_hidden.js. Asleep unless the instance has kubejs/config/gg_test_hidden.json = {"enabled": true}
 // (copy the overlay to another folder, add the marker and run the harness with -Suite client -OverlayDir <that folder>).

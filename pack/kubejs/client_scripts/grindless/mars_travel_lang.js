@@ -1,3 +1,4 @@
+// priority: 6600
 // Gregtech Grindless - names and tooltips of Mars (end of EV, startup_scripts/grindless/mars/travel.js):
 //
 //   grindless:vein_sample_<Mars vein>     (scheelite_mars, merrillite_mars, ice_mars: data/grindless/tables/veins_mars.json)

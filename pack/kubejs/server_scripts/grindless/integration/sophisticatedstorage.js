@@ -1,3 +1,4 @@
+// priority: -15924
 // -----------------------------------------------------------------------------------------------
 // Sophisticated Storage (sophisticatedstorage): shares the upgrade recipes of Sophisticated Backpacks (library
 // sophisticatedcore), so its "advanced" upgrades follow the same MV rule as sophisticatedbackpacks.js: gold ingots -> aluminium

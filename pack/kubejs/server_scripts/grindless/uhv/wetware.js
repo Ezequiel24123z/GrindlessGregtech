@@ -1,3 +1,4 @@
+// priority: -24424
 // -----------------------------------------------------------------------------------------------
 // Recipes of UHV's organoid array (docs/eras/uhv.md, machine 11 and line 12; package UHV-B6) and the organoid lab's UHV row
 // (uhv.md, "Older machines": the LuV lab's medium). Machine and type: startup_scripts/grindless/uhv/wetware.js; the organoid

@@ -1,3 +1,4 @@
+// priority: -6400
 // -----------------------------------------------------------------------------------------------
 // Items of the observatory family (docs/journey.md: "navigation data only comes from looking"). Each observatory is the only machine that
 // makes its chart, and every chart is a data item that is made once: the next instrument takes it as an input that is never used up,

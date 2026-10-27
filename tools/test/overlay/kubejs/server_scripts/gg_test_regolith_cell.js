@@ -1,3 +1,4 @@
+// priority: -6824
 // Gregtech Grindless - smoke test of the EV Regolith Cell (TEST-ONLY overlay: copied over the instance on the test PC, never shipped with
 // the pack).
 //

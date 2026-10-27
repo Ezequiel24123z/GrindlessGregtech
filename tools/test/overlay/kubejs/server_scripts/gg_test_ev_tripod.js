@@ -1,3 +1,4 @@
+// priority: -1624
 // Gregtech Grindless - smoke test of package B1, ev-tripod (TEST-ONLY overlay: copied over the instance on the test PC, never shipped
 // with the pack): the EV Tripod Drill (gtceu:ev_vein_drill: startup_scripts/grindless/ev/tripod.js, server_scripts/grindless/ev/tripod.js)
 // and the generic tier veto of the vein drill and greenhouse families (rules.recipeTier / isAboveTier, startup_scripts/grindless/lv/multis.js).

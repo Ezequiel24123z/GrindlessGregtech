@@ -1,3 +1,4 @@
+// priority: -624
 // Gregtech Grindless - smoke test of package B7, combined-cycle-and-hot-mill (TEST-ONLY overlay: copied over the instance on the test PC,
 // never shipped with the pack): the EV Combined-Cycle Plant (gtceu:combined_cycle_plant, the first CUSTOM generator recipe type,
 // gtceu:combined_cycle) and the Hot Strip Mill (gtceu:hot_strip_mill, gtceu:hot_rolling), startup_scripts/grindless/ev/

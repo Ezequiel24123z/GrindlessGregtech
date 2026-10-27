@@ -1,3 +1,4 @@
+// priority: -1100
 // -----------------------------------------------------------------------------------------------
 // EV family steps of the Moon base (docs/eras/ev.md, "Family steps"): the power family's lunar solar array and the observatory
 // family's deep space antenna.

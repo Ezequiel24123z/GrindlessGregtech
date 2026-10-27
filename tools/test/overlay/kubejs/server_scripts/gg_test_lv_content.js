@@ -1,3 +1,4 @@
+// priority: -5124
 // Gregtech Grindless - smoke test of the LV "more reinforced" content: the Sulfide Roaster and the Heliostat Tower (TEST-ONLY overlay:
 // copied over the instance on the test PC, never shipped with the pack).
 //

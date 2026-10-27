@@ -1,3 +1,4 @@
+// priority: 5900
 // Gregtech Grindless - names and tooltips of the LV Generator Array, plus the controller lines that every generator multiblock built
 // with startup_scripts/grindless/lib/generators.js shows (grindless.generators.*).
 //

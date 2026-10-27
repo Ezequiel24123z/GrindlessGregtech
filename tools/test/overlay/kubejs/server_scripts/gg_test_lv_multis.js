@@ -1,3 +1,4 @@
+// priority: -5324
 // Gregtech Grindless - smoke test of the LV multiblocks (TEST-ONLY overlay: copied over the instance on the test PC,
 // never shipped with the pack).
 //

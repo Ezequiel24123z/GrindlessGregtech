@@ -1,3 +1,4 @@
+// priority: -3900
 // -----------------------------------------------------------------------------------------------
 // One of LuV's multiblocks (docs/eras/luv.md, "2. Coated conductor line"; package LuV-A3): the coated conductor line and its recipe
 // type.

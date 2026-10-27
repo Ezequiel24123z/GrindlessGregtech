@@ -1,3 +1,4 @@
+// priority: 2600
 // Gregtech Grindless - names and tooltips of UV's Kuiper belt (startup_scripts/grindless/uv/kuiper.js):
 //
 //   gtceu:kuiper_interceptor_bay / amorphous_ice_annealer   machine names + four tooltip lines each

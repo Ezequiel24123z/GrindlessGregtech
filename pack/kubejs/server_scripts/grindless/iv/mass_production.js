@@ -1,3 +1,4 @@
+// priority: -16724
 // -----------------------------------------------------------------------------------------------
 // IV's mass-production kit (docs/eras/iv.md, "Nothing one at a time"; package IV-B6): GTM's own machines for making things in quantity,
 // put at IV. The user's words: "If the player keeps crafting one at a time, the pack is wrong". Recipes only, over GTM's and the

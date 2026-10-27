@@ -1,4 +1,4 @@
-// priority: 1000
+// priority: 900
 // -----------------------------------------------------------------------------------------------
 // How a wireless hatch or cover moves EU into and out of a GTM machine (lv/wireless_energy.js). GTM 7.5.3 keeps a machine's EU in an
 // energy container (TieredEnergyMachine#energyContainer, EnergyHatchPartMachine#energyContainer), and the containers do not all keep

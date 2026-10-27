@@ -1,3 +1,4 @@
+// priority: -2300
 // -----------------------------------------------------------------------------------------------
 // Sophisticated Storage's metal tiers, stronger than the mod's (table kubejs/data/grindless/tables/chest_furnace_tiers.json, section
 // sophisticatedstorage: copper, iron and gold storages get twice the slots, diamond and netherite the engine's 180, every metal tier twice

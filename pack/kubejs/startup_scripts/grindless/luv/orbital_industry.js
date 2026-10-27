@@ -1,3 +1,4 @@
+// priority: -4500
 // LuV B3: docs/eras/luv.md, sections 6 and 8. A1 owns the materials and structure blocks.
 (function () {
   var G = global.grindless

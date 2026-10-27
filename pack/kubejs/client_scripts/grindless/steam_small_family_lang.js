@@ -1,3 +1,4 @@
+// priority: 5300
 // Gregtech Grindless - names and tooltips of the small Steam multiblock family (startup_scripts/grindless/steam/
 // small_family.js, GTL idea - docs/research/leisure.md 4.2 - reimplemented with our own code and textures):
 //

@@ -1,3 +1,4 @@
+// priority: -7400
 // -----------------------------------------------------------------------------------------------
 // Recipe types of the custom Steam Age multiblocks. GTM registers recipe types (and machines) in its own
 // namespace, so the ids are gtceu:vein_drilling and gtceu:greenhouse. The same two types are shared by

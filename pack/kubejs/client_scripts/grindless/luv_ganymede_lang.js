@@ -1,3 +1,4 @@
+// priority: 7700
 // LuV B9 (Ganymede): controller names, recipe categories, tooltips and the no-voiding refusals.
 ClientEvents.lang('en_us', function (event) {
   var entries = {

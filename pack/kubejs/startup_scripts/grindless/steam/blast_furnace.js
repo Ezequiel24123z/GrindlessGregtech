@@ -1,3 +1,4 @@
+// priority: -6700
 // -----------------------------------------------------------------------------------------------
 // Steam Blast Furnace (gtceu:steam_blast_furnace) and its recipe type gtceu:steelmaking.
 //

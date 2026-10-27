@@ -1,3 +1,4 @@
+// priority: -8824
 // TEST ONLY, UV-B5 (the precursor probe bay, the event horizon interferometer, the UHV energy hatch's research).
 // Command: kubejs custom_command gg_test_uv_edge   Reserved band: X 27392-27455 (no block is placed: live recipe lookups only).
 //

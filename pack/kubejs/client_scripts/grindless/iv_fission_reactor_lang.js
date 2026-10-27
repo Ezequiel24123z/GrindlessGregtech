@@ -1,3 +1,4 @@
+// priority: 9500
 // Gregtech Grindless - names and tooltips of IV's Fission Reactor (startup_scripts/grindless/iv/fission_reactor.js), its recipe type, the
 // EMI line of each designed core, the reason it shows when set to void, and its SCRAM line.
 //

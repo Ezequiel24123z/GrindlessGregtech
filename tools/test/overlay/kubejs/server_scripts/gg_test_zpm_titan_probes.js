@@ -1,3 +1,4 @@
+// priority: -11524
 // TEST ONLY, ZPM-B3. Command: kubejs custom_command gg_test_zpm_titan_probes
 // Reserved band ONLY: X22016-22079, Z0-63; Saturn orbit Y198-214, Overworld Y98-112.
 // Builds the entry probe bay and the tholin reformer in Saturn orbit and runs one real recipe in each (bay circuit 1: the haze descent,

@@ -1,3 +1,4 @@
+// priority: 4700
 // Gregtech Grindless - names and tooltips of UHV's fibres and the space elevator (startup_scripts/grindless/uhv/elevator.js):
 //
 //   gtceu:pbo_plant / gtceu:tether_ribbon_works   machine names + four tooltip lines each

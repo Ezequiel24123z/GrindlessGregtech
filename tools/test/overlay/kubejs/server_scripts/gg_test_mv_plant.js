@@ -1,3 +1,4 @@
+// priority: -6024
 // Gregtech Grindless - smoke test of the MV Ore Plant and Biorefinery (TEST-ONLY overlay: copied over the instance on the test PC,
 // never shipped with the pack).
 //

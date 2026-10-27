@@ -1,3 +1,4 @@
+// priority: 7000
 // Gregtech Grindless - names of LuV travel (startup_scripts/grindless/luv/travel.js and data/grindless/gcyr/planets/*.json):
 //
 //   block.grindless.cryogenic_fuel_tank        the level 4 rocket's tank, with two tooltip lines

@@ -1,3 +1,4 @@
+// priority: -8224
 // TEST ONLY, UHV-B3. Command: kubejs custom_command gg_test_uhv_swarm
 // Marker: GGTEST|uhv_swarm|DONE|failures=N (well within 180 seconds).
 // Band ONLY: X 29184-29247, Z 0-63, gcyr:mercury_orbit Y 60-120. All blocks and chunk tickets are owned and removed before DONE.

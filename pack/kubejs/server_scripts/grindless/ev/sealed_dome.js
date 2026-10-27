@@ -1,3 +1,4 @@
+// priority: -13024
 // -----------------------------------------------------------------------------------------------
 // The Sealed Dome (gtceu:sealed_dome, startup_scripts/grindless/ev/sealed_dome.js): its sealed recipes and its crafting recipe.
 //

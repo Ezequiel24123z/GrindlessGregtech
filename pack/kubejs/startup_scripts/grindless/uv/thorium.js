@@ -1,3 +1,4 @@
+// priority: -10700
 // -----------------------------------------------------------------------------------------------
 // UV's thorium line (docs/eras/uv.md, machines 1 and 2, line 3; package UV-A1): the pyroprocessing cell and the accelerator-driven reactor,
 // their recipe types, and the few ids UV-F1 did not register. The recipes come from data/grindless/tables/thorium.json

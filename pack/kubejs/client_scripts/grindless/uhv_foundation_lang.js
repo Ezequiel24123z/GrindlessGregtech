@@ -1,3 +1,4 @@
+// priority: 4600
 // Gregtech Grindless - names and tooltips of the UHV foundation (startup_scripts/grindless/uhv/foundation.js):
 //
 //   grindless:<item> and grindless:<block>   item.grindless.<n> / block.grindless.<n> plus two tooltip lines (tooltip.grindless.<n>.0 and .1)

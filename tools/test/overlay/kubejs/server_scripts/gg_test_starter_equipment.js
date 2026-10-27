@@ -1,3 +1,4 @@
+// priority: -7024
 // TEST-ONLY, opt-in, FRESH DISPOSABLE CLIENT WORLD ONLY. Paired with the client script.
 // Arrival migration + native gift right-click -> native Xaero markers (not the block-scanning GUI).
 // Fixtures are metadata only and intentionally persist in this disposable world's ServerCache.

@@ -1,3 +1,4 @@
+// priority: 6900
 // Gregtech Grindless - names and tooltips of the LV "more reinforced" content: the Sulfide Roaster and the Heliostat Tower.
 //
 //   gtceu:sulfide_roaster, gtceu:heliostat_tower        (machine names + tooltips + the heliostat's "no sun" reason)

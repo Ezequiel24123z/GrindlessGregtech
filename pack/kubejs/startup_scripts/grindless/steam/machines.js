@@ -1,3 +1,4 @@
+// priority: -7300
 // -----------------------------------------------------------------------------------------------
 // The two custom Steam Age multiblocks. Both are SteamParallelMultiblockMachine (GTM's steam multiblock logic:
 // 4 parallels, duration x1.5, steam drawn from a steam hatch; nothing above LV can run) and every pattern is

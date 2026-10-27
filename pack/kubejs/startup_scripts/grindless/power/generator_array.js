@@ -1,3 +1,4 @@
+// priority: -6600
 // -----------------------------------------------------------------------------------------------
 // The LV Generator Array (idea from GregTech Leisure's generator_array, docs/research/leisure.md 4.2; our own structure, code and
 // textures, nothing copied). A convenience multiblock: it counts apart from the x1.35 target of AGENTS.md rule 7.

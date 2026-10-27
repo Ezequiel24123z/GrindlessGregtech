@@ -1,3 +1,4 @@
+// priority: -23424
 // -----------------------------------------------------------------------------------------------
 // Recipes of UHV's fibres and the space elevator (docs/eras/uhv.md, machines 14 and 15, line 24; package UHV-A7): the PBO plant, the
 // tether ribbon works, line 24's side steps, the blocks of GTCA's space elevator and its run recipe (machines, items and materials:

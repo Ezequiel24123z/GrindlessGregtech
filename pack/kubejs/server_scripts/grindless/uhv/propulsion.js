@@ -1,3 +1,4 @@
+// priority: -23824
 // -----------------------------------------------------------------------------------------------
 // Recipes of UHV's ceramics (docs/eras/uhv.md, machine 16, line 26; package UHV-A8): the spark plasma sinterer, line 26's side steps
 // and the ICAN rocket motor's loot table and tool tag (machine, items, materials and the motor: startup_scripts/grindless/uhv/propulsion.js;

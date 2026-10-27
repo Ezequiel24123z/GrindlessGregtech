@@ -1,3 +1,4 @@
+// priority: -8524
 // Gregtech Grindless - smoke test of package IV-A4, uranium-cycle (TEST-ONLY overlay: copied over the instance on the test PC, never
 // shipped with the pack): the In-Situ Leach Field (gtceu:isr_wellfield, type gtceu:in_situ_leaching) and the Fuel Fabrication Plant
 // (gtceu:fuel_fabrication_plant, type gtceu:fuel_fabrication): startup_scripts/grindless/iv/uranium_cycle.js, server_scripts/grindless/

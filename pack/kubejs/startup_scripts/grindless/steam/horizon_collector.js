@@ -1,3 +1,4 @@
+// priority: -7000
 // -----------------------------------------------------------------------------------------------
 // Steam era: the Horizon Collector (docs/eras/steam.md, "The Horizon Collector (the start)"; package STEAM-X1). The machine the
 // player arrives with: a shard (never used up) + a programmed circuit pull a trickle of ordinary matter (logs, cobblestone, sand,

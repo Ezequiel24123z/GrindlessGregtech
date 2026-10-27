@@ -1,3 +1,4 @@
+// priority: -9424
 // TEST ONLY, UV-S0. Command: kubejs custom_command gg_test_uv_s0_dump
 // Disposable read-only spikes, never shipped. Places nothing (band X 23040-23103 is not touched by this file).
 //   s0_8_*   which of the UV design's ids exist in the live registries (items, fluids, materials, blocks), the Mk3 recipe and the

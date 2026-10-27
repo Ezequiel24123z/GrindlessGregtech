@@ -1,4 +1,4 @@
-// priority: 100
+// priority: 88
 // Gregtech Grindless - recipe gates of the GT addons other than Extended Features: GT Community Additions, GT--, GregTech Modern
 // Utilities, Gregtech Terminals, GregTech Storage Drawers, greg paintings, GregTech 7.5.3 Performance Fixes, Gregicality Rocketry
 // and the client-only GTM QoL / Calculator Board (TEST-ONLY overlay: copied over the instance on the test PC, never shipped with

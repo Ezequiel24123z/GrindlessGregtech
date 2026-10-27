@@ -1,3 +1,4 @@
+// priority: -5900
 // -----------------------------------------------------------------------------------------------
 // MV item of the Vein Drill family:
 //   grindless:vanadium_steel_drill_bit   wear part of the MV Vein Drill, the third bit after the bronze and steel ones (item tag

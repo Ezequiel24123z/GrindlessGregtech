@@ -1,3 +1,4 @@
+// priority: -17324
 // -----------------------------------------------------------------------------------------------
 // Recipes of IV on Venus (machines and types: startup_scripts/grindless/iv/venus.js; package IV-B1), built from
 // data/grindless/tables/venus.json at every load (/reload picks up a tune):

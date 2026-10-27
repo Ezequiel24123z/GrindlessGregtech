@@ -1,4 +1,4 @@
-// priority: 999
+// priority: 900
 // -----------------------------------------------------------------------------------------------
 // Grindless heating-coil helper: what lib/patterns.js lacks for coil multiblocks (patterns.js itself stays untouched).
 //
