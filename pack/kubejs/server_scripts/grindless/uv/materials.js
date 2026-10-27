@@ -22,6 +22,8 @@
 //     4 rtan_wire     4 RTAN dust (GTM's mixer) + 1 silver tube -> 8 RTAN single wires + 1 silver dust: the UHV conductor drawn in
 //                     the sheath (docs/eras/uhv.md line 29, package UHV-A9; GTM's mass, 1 ingot = 2 wires, and at least GTM's EU per
 //                     wire). GTM's RTAN routes (blast furnace, freezer, wiremill) stay.                       1,966,080 x 1000 t
+//     5 mgb2_wire     4 MgB2 dust (GTM's mixer, from Mercury's magnesium) + 1 iron tube (uhv/mercury.js) -> 8 MgB2 single wires + 1 iron
+//                     dust (the sheath, back to tubes): line 20, package UHV-B2. GTM's MgB2 routes stay.       491,520 x 400 t
 //   powder bed printer (type gtceu:powder_bed_fusion), from data/grindless/tables/am_powders.json
 //     1 atomise_<metal>  4 ingots + 1,000 mB argon -> 4 AM powder + 950 mB argon                                122,880 x 200 t
 //     2/4/5/6 print_<part>  powder + fibre laser module (2 % wear: spent module out at the same chance) -> near-net part + unsintered
@@ -87,7 +89,9 @@
     row('pit_billet', 'powder_in_tube', 2, [item(ENTED, 4), item(TUBE, 1)], [], [item(BILLET, 1)], [], VA_ZPM, 200),
     row('ented_wire', 'powder_in_tube', 3, [item(BILLET, 1)], [], [item(WIRE, 16), item('gtceu:silver_dust', 1)], [], VA_UV, 600),
     row('rtan_wire', 'powder_in_tube', 4, [item(RTAN + 'dust', 4), item(TUBE, 1)], [], [item(RTAN + 'single_wire', 8), item('gtceu:silver_dust', 1)],
-      [], VA_UHV, 1000)
+      [], VA_UHV, 1000),
+    row('mgb2_wire', 'powder_in_tube', 5, [item('gtceu:magnesium_diboride_dust', 4), item('grindless:iron_tube', 1)], [],
+      [item('gtceu:magnesium_diboride_single_wire', 8), item('gtceu:iron_dust', 1)], [], VA_UV, 400)
   ]
 
   var SIDE = [
