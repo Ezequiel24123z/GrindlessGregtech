@@ -1,0 +1,9 @@
+{
+  "type": "emi:info",
+  "stacks": [
+    "item:grindless:laser_module_block"
+  ],
+  "text": [
+    "emi.grindless.info.laser_module_block.0"
+  ]
+}
