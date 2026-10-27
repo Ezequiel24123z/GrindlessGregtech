@@ -354,46 +354,67 @@
 			y: 64.5d
 		}
 		{
+			id: "3DEE17C29B6345D3"
+			linked_quest: "54B43A225E11111F"
+			shape: "rsquare"
+			x: 0.5d
+			y: 68.0d
+		}
+		{
+			id: "770AD4B1E2F613CC"
+			linked_quest: "38199670D4113E48"
+			shape: "rsquare"
+			x: 6.75d
+			y: 68.0d
+		}
+		{
+			id: "3BAF62D138A80022"
+			linked_quest: "7E64F29B6EE66B09"
+			shape: "rsquare"
+			x: 6.75d
+			y: 69.5d
+		}
+		{
 			id: "37EA5C37FB08041B"
 			linked_quest: "39A5A5CC76591697"
 			shape: "rsquare"
 			x: 0.5d
-			y: 71.5d
+			y: 76.5d
 		}
 		{
 			id: "1FCCBED6CE4452ED"
 			linked_quest: "1DFC0C1A50793CB7"
 			shape: "rsquare"
 			x: 21.5d
-			y: 71.5d
+			y: 76.5d
 		}
 		{
 			id: "3D9F43AA278F3647"
 			linked_quest: "366AB48E5BF50431"
 			shape: "rsquare"
 			x: 19.25d
-			y: 73.0d
+			y: 78.0d
 		}
 		{
 			id: "354C64B97FEDF96E"
 			linked_quest: "42BF2F77456F8773"
 			shape: "rsquare"
 			x: 21.5d
-			y: 73.0d
+			y: 78.0d
 		}
 		{
 			id: "1DB9D03F61275809"
 			linked_quest: "5933ADF51C8949BD"
 			shape: "rsquare"
 			x: 0.5d
-			y: 84.25d
+			y: 89.25d
 		}
 		{
 			id: "3925C695BE99E732"
 			linked_quest: "1FFCFA949E449B45"
 			shape: "rsquare"
 			x: 0.5d
-			y: 82.5d
+			y: 87.5d
 		}
 	]
 	quests: [
@@ -1560,6 +1581,36 @@
 			y: 63.75d
 		}
 		{
+			dependencies: ["54B43A225E11111F"]
+			description: ["The era's main plant, on duranium frames. It only pays on fuel the Mk2 has excited."]
+			icon: "gtnn:large_naquadah_reactor"
+			id: "182B794C971420F3"
+			size: 1.0d
+			subtitle: "ZPM. Excited fuel from the Mk2; the spent fuel goes back to the fuel works"
+			tasks: [
+				{ id: "3BA742E231F6B9BC", item: "gtnn:large_naquadah_reactor", optional_task: true, type: "item" }
+				{ id: "5597043F85AD007B", type: "checkmark" }
+			]
+			title: "Large Naquadah Reactor"
+			x: 2.75d
+			y: 68.0d
+		}
+		{
+			dependencies: ["38199670D4113E48", "7E64F29B6EE66B09"]
+			description: ["Helium-3 fusion needs no tritium. Its plasma is worth more in the direct energy converter than in a turbine."]
+			icon: "gtceu:zpm_fusion_reactor"
+			id: "19B20A8D836A7CF1"
+			size: 1.0d
+			subtitle: "ZPM. Deuterium and helium-3 from Saturn; the plasma goes to a turbine or the converter"
+			tasks: [
+				{ id: "1ECC7E7353E15175", item: "gtceu:zpm_fusion_reactor", optional_task: true, type: "item" }
+				{ id: "3B2110570CB17301", type: "checkmark" }
+			]
+			title: "Fusion Reactor Mk2"
+			x: 9.0d
+			y: 68.75d
+		}
+		{
 			icon: "gcyr:dyson_solar_cell"
 			id: "11C73137027F90A3"
 			shape: "circle"
@@ -1567,7 +1618,7 @@
 			tasks: [{ id: "7ED020059F8C2BA4", type: "checkmark" }]
 			title: "Dyson Solar Cell"
 			x: 0.5d
-			y: 68.0d
+			y: 73.0d
 		}
 		{
 			dependencies: ["11C73137027F90A3"]
@@ -1579,7 +1630,7 @@
 			tasks: [{ id: "5A8383B9274CEC05", type: "checkmark" }]
 			title: "Dyson Sphere"
 			x: 2.75d
-			y: 68.0d
+			y: 73.0d
 		}
 		{
 			icon: "gtceu:lv_machine_hull"
@@ -1592,7 +1643,7 @@
 			]
 			title: "LV Machine Hull"
 			x: 0.5d
-			y: 73.0d
+			y: 78.0d
 		}
 		{
 			dependencies: ["39A5A5CC76591697", "3F30A6656E0CFBCC"]
@@ -1606,7 +1657,7 @@
 			]
 			title: "Transformer"
 			x: 2.75d
-			y: 72.25d
+			y: 77.25d
 		}
 		{
 			dependencies: ["3F30A6656E0CFBCC"]
@@ -1620,7 +1671,7 @@
 			]
 			title: "Battery Buffer"
 			x: 2.75d
-			y: 73.75d
+			y: 78.75d
 		}
 		{
 			icon: "gtceu:lv_battery_hull"
@@ -1633,7 +1684,7 @@
 			]
 			title: "Battery Hull"
 			x: 6.75d
-			y: 71.5d
+			y: 76.5d
 		}
 		{
 			dependencies: ["1DD9B8EADA8EBAC0"]
@@ -1650,7 +1701,7 @@
 			]
 			title: "Batteries"
 			x: 9.0d
-			y: 71.5d
+			y: 76.5d
 		}
 		{
 			icon: "gtceu:tin_single_wire"
@@ -1663,7 +1714,7 @@
 			]
 			title: "Tin Wire"
 			x: 13.0d
-			y: 71.5d
+			y: 76.5d
 		}
 		{
 			dependencies: ["3B2125BC87FC669D"]
@@ -1680,7 +1731,7 @@
 			]
 			title: "Cables"
 			x: 15.25d
-			y: 71.5d
+			y: 76.5d
 		}
 		{
 			dependencies: ["1DFC0C1A50793CB7", "42BF2F77456F8773"]
@@ -1695,7 +1746,7 @@
 			]
 			title: "EU P2P Tunnel"
 			x: 23.75d
-			y: 72.25d
+			y: 77.25d
 		}
 		{
 			dependencies: ["366AB48E5BF50431"]
@@ -1709,7 +1760,7 @@
 			]
 			title: "Quantum Bridge"
 			x: 21.5d
-			y: 74.5d
+			y: 79.5d
 		}
 		{
 			icon: "gtceu:lapotron_crystal"
@@ -1722,7 +1773,7 @@
 			]
 			title: "Lapotron Crystal"
 			x: 27.75d
-			y: 71.5d
+			y: 76.5d
 		}
 		{
 			dependencies: ["56341035C7044592"]
@@ -1736,7 +1787,7 @@
 			]
 			title: "Power Substation"
 			x: 30.0d
-			y: 71.5d
+			y: 76.5d
 		}
 		{
 			icon: "gtceu:lv_lithium_battery"
@@ -1750,7 +1801,7 @@
 			]
 			title: "Batteries"
 			x: 0.5d
-			y: 80.25d
+			y: 85.25d
 		}
 		{
 			dependencies: ["1A5654A5282AA2BB"]
@@ -1768,7 +1819,7 @@
 			]
 			title: "Capacitor Cell"
 			x: 2.75d
-			y: 80.25d
+			y: 85.25d
 		}
 		{
 			dependencies: ["16ABFBB249BDC07B", "7DDF714877C2B39F"]
@@ -1787,7 +1838,7 @@
 			]
 			title: "Wireless Energy Tower"
 			x: 5.0d
-			y: 80.25d
+			y: 85.25d
 		}
 		{
 			dependencies: ["5933ADF51C8949BD", "1FFCFA949E449B45"]
@@ -1805,7 +1856,7 @@
 			]
 			title: "LuV SMES Cell"
 			x: 2.75d
-			y: 82.5d
+			y: 87.5d
 		}
 		{
 			dependencies: ["1A64E503878275AE"]
@@ -1823,7 +1874,7 @@
 			]
 			title: "Wireless Dynamo Hatch"
 			x: 7.25d
-			y: 78.0d
+			y: 83.0d
 		}
 		{
 			dependencies: ["1A64E503878275AE"]
@@ -1838,7 +1889,7 @@
 			]
 			title: "Wireless Dynamo Cover"
 			x: 7.25d
-			y: 79.5d
+			y: 84.5d
 		}
 		{
 			dependencies: ["1A64E503878275AE"]
@@ -1856,7 +1907,7 @@
 			]
 			title: "Wireless Energy Hatch"
 			x: 7.25d
-			y: 81.0d
+			y: 86.0d
 		}
 		{
 			dependencies: ["1A64E503878275AE"]
@@ -1874,7 +1925,7 @@
 			]
 			title: "Wireless Energy Cover"
 			x: 7.25d
-			y: 82.5d
+			y: 87.5d
 		}
 	]
 	subtitle: ["Every way to make power, tier by tier, and what carries it and stores it."]

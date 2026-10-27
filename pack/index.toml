@@ -65,8 +65,12 @@ file = "config/ftbquests/quests/chapters/pl_steam.snbt"
 hash = "a5132ed09dcb09ddd174931514ff4279e1be2553be6a7df2b49e28581a26ea00"
 
 [[files]]
+file = "config/ftbquests/quests/chapters/pl_zpm.snbt"
+hash = "815a752227d295b8874bbd2a0458ae957c1a481823476c861166dd20ba9d77a3"
+
+[[files]]
 file = "config/ftbquests/quests/chapters/power.snbt"
-hash = "0fe667471655b5ef84d0821d7da7bea33f5008fe561a9909db252b1b52822b0e"
+hash = "89aab4054d49dd19adde26b57014be0b46d842c349ccfd488e5fc1c2c4a9f657"
 
 [[files]]
 file = "config/ftbquests/quests/chapters/productive_bees.snbt"
@@ -91,6 +95,10 @@ hash = "e2b78cbd075a1c18a5acfce6dad5f481953ba6ada097de4fe1a934eb66fce97c"
 [[files]]
 file = "config/ftbquests/quests/chapters/workshop.snbt"
 hash = "14a33e2267c5a5a450319228aa7e6dcd86681978f89c95769bd90e90628c28d6"
+
+[[files]]
+file = "config/ftbquests/quests/chapters/zpm_age.snbt"
+hash = "2d663f5c2a106eac7e5205b6c235a45a6a2a87bae5357548896d48f4da46774f"
 
 [[files]]
 file = "config/ftbquests/quests/data.snbt"

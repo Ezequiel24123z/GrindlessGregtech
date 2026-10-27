@@ -208,6 +208,7 @@ powershell -File tools\quests\Render-QuestPreview.ps1 -Chapter steam_age -OutDir
 # Generated chapters: edit the data, then regenerate (the SNBT comes out with the same ids)
 node tools\quests\ev-chapter\gen.mjs                                    # ev_age.snbt from quests-data.mjs (section 14)
 node tools\quests\luv-chapter\gen.mjs [--pending] [--all --out <file>]  # luv_age.snbt; only the landed LuV packages (section 14)
+node tools\quests\zpm-chapter\gen.mjs                                   # zpm_age.snbt (section 14)
 powershell -File tools\quests\processing-lines\run.ps1 -Dump <kubejs-exported> -Write [-Preview]   # Processing Lines and Power (sections 17 and 18)
 ```
 
@@ -250,7 +251,7 @@ Why this order, checked against the recipe dump of v0.4.0:
 
 **Tested in-game (24-10-2026, pack with the Moon):** `gg_test_quests` loads both with all their quests and dependencies; `gg_test_quest_book`, on a real client, completes *Arrival* and *The Neutronium Toolbox*, claims their 22 rewards, and checks that the 20 tools carry GTM's NBT, do not wear out, mine, pick up items with the magnet, break a 3x3 area (mining hammer), and show "Unbreakable" with no durability lines. The book screenshots read from left to right.
 
-The SNBT files are the source: they are edited by hand, following this guide. Exceptions generated from data in `tools/quests/` are `ev_age.snbt` and `luv_age.snbt` (section 14), the Processing Lines (section 17) and Power (section 18). For those, edit the data and regenerate.
+The SNBT files are the source: they are edited by hand, following this guide. Exceptions generated from data in `tools/quests/` are `ev_age.snbt`, `luv_age.snbt` and `zpm_age.snbt` (section 14), the Processing Lines (section 17) and Power (section 18). For those, edit the data and regenerate.
 
 ## 14. Plan for Steam, LV, MV, HV, EV and IV: the Moon through each instrument
 
@@ -356,6 +357,13 @@ Spine: the route from the hot cell and the reactor, through the Moon's tritium a
 - **Generated:** `tools/quests/luv-chapter/quests-data.mjs` → `gen.mjs`. Ids are hashes of the quest keys. Each quest names the LuV packages it needs; only quests whose packages are all in `LANDED` reach the book, a dependency on a left-out quest goes to its parents, and `fallback` places fusion and research at home until Io lands. `S03` stands for spike S0-3 (`tables/stations.json` `enabled`): the station, Earth orbit's machines and what needs their products (the ring, the organoid lab, living circuits, the detector and the gate) wait for it. When a package merges: add it to `LANDED`, check its ids, run `gen.mjs --pending` (what is still waiting), `gen.mjs`, the linter, and update `GG_QUESTS_EXPECTED.luv_age`. `gen.mjs --all --out <file>` draws the finished chapter (it lints clean too). `tools/analysis/test/luv-quests.test.mjs` fails if the book names an id nothing registers or is stale.
 - **The stations switch:** `S03`, `B7T` (the flux-tube tether) and `B7S` (the sulfur-iodine plant) are not listed by hand. `tools/quests/luv-stations.mjs` derives them from `tables/stations.json` with the rule of `lib/stations.js` (`enabled` gives `S03`; `second` null gives `B7S`, else `enabled` gives `B7T`, else neither), and the `LANDED` sets of `quests-data.mjs`, `pl-data-luv.mjs` and `power-data.mjs` add them, so no chapter names the machine the pack leaves out. After the table flips, regenerate in this order (Power links to `luv_age`): `node tools\quests\luv-chapter\gen.mjs`, then `powershell -File tools\quests\processing-lines\run.ps1 -Dump <kubejs-exported> -Write [-Preview]` (`pl_luv` and `power`; it lints the charts and the book), then `node tools\quests\lint.mjs`, and update `GG_QUESTS_EXPECTED` for `luv_age`, `pl_luv` and `power` with the counts the generators print. `tools/analysis/test/luv-stations-quests.test.mjs` draws all three modes from an injected table (`GG_STATIONS_TABLE`).
 - **No low gravity in the text:** GCYR's gravity isn't applied in game.
+
+### ZPM — "ZPM: The Ringed and Ice Giants" (`zpm_age.snbt`; package ZPM-C2)
+
+- **Start:** *Saturn and Beyond*, after *Gate to ZPM*. **Exit:** *Gate to UV* (the UV hull and energy hatch, the Pluto–Kuiper chart and the solar-core survey).
+- **Parts:** home (*Naquadria* → *Fuel* → *Excited* → *The Big Reactor*, europium, the stored waste and americium, URhNq₂ wire, *The Network Goes ZPM*, the Mk2, the quench caster, the ZPM parallel hatch); carbon and qubits (*Graphene* … *Qubits Instead of Circuits*); life and cold (*Vent Life*, *Aerogel*, *Neutrinos*); Saturn (*Level Five*, *Third Station*, ring ice, the siphon, helium-3, Titan, the plume, the seismometer); Uranus (*Level Six*, *Fourth Station*, the ice-giant siphon, diamond slurry, the flyby); exit (*Listening*, *Kuiper Targets*, tritanium, darmstadtium, D + He-3, the direct energy converter, the gate).
+- **Generated:** `tools/quests/zpm-chapter/quests-data.mjs` → `gen.mjs` (every package has landed, so there is no `LANDED` gate). `pl_zpm` comes from `processing-lines/pl-data-zpm.mjs` and Power's ZPM clusters from `power-data.mjs` (no EU/t figures until a bench run measures them). Regenerate in this order (Power links to `zpm_age`): `gen.mjs`, `processing-lines/run.ps1 -Write`, `lint.mjs`, then update `GG_QUESTS_EXPECTED` for `zpm_age`, `pl_zpm` and `power`.
+- **Adapted ideas:** Star Technology (MIT) and Monifactory (LGPL), with attribution in `CREDITS.md`; GTNH and GT Leisure ideas only.
 
 ## 15. Quality of life tabs: what to fix
 

@@ -1,0 +1,682 @@
+{
+	autofocus_id: "7B0EFFD4E295AFAD"
+	default_hide_dependency_lines: false
+	default_quest_shape: ""
+	filename: "zpm_age"
+	group: "3F021F40CD26BF57"
+	icon: "grindless:saturn_transfer_chart"
+	id: "5BA25622CE14713A"
+	order_index: 7
+	quest_links: [ ]
+	quests: [
+		{
+			dependencies: ["1753F1FE9C989F6C"]
+			description: [
+				"The &6Saturn Transfer Chart&r from the Jovian flyby points at rings, a hazy moon and two ice giants. Nothing out there is walkable, so the trip starts in orbit and stays there."
+				"Home first: ZPM needs a lot of naquadria, and a reactor to burn it."
+			]
+			icon: "grindless:saturn_transfer_chart"
+			id: "7B0EFFD4E295AFAD"
+			rewards: [{ id: "54CCF169C15A211E", type: "xp", xp: 50 }]
+			shape: "rsquare"
+			size: 1.5d
+			tasks: [{ id: "1CE1F3E642B9C7FF", type: "checkmark" }]
+			title: "Saturn and Beyond"
+			x: 0.0d
+			y: 0.0d
+		}
+		{
+			dependencies: ["7B0EFFD4E295AFAD"]
+			description: ["The &6Naquadria Refinery&r pushes enriched naquadah one step further, into a dust that wants to burn. Its casing is built to hold something that would rather not be held."]
+			icon: "gtceu:naquadria_dust"
+			id: "32D2F83CE86E19AF"
+			rewards: [{ id: "131E17A76C4C8B78", type: "xp", xp: 60 }]
+			tasks: [
+				{ id: "55E21277D9A464BC", item: "gtceu:naquadria_refinery", type: "item" }
+				{ id: "3DD689077D0AF1F6", item: "grindless:naquadria_containment_casing", type: "item" }
+				{ id: "501AB5AD6C8AA0CF", item: "gtceu:naquadria_dust", type: "item" }
+			]
+			title: "Naquadria"
+			x: 2.0d
+			y: 0.0d
+		}
+		{
+			dependencies: ["32D2F83CE86E19AF"]
+			description: ["The &6Naquadah Fuel Works&r turns naquadria into a liquid fuel and takes spent fuel back, so a burnt tank isn't the end of it."]
+			icon: "gtceu:naquadah_fuel_works"
+			id: "372A1C15CAD94A3D"
+			rewards: [{ id: "36BACFC12B031878", type: "xp", xp: 80 }]
+			shape: "gear"
+			size: 1.25d
+			tasks: [{ id: "369225326A0C150E", item: "gtceu:naquadah_fuel_works", type: "item" }]
+			title: "Fuel"
+			x: 4.0d
+			y: 0.0d
+		}
+		{
+			dependencies: ["372A1C15CAD94A3D"]
+			description: ["Fuel only gets worth burning once the Mk2 has excited it with radon. That's a big start for a small amount, so the Mk2 comes before the reactor in practice."]
+			icon: "gtceu:radon_bucket"
+			id: "5331DFDEAD7A36A2"
+			rewards: [{ id: "5D6F6C796DAB4E2C", type: "xp", xp: 30 }]
+			size: 0.75d
+			tasks: [{ id: "1354C757B5C50938", type: "checkmark" }]
+			title: "Excited"
+			x: 6.0d
+			y: 0.0d
+		}
+		{
+			dependencies: ["5331DFDEAD7A36A2"]
+			description: ["GT--'s &6Large Naquadah Reactor&r on excited fuel is the era's main plant. It asks for duranium frames here, so the Mk2's metal is part of the price. Feed the spent fuel back to the fuel works."]
+			icon: "gtnn:large_naquadah_reactor"
+			id: "54B43A225E11111F"
+			rewards: [{ id: "36B2389775956097", type: "xp", xp: 150 }]
+			shape: "gear"
+			size: 1.5d
+			tasks: [
+				{ id: "1900BFBD83C15B01", item: "gtnn:large_naquadah_reactor", type: "item" }
+				{ id: "3349030F79E58618", item: "gtceu:duranium_frame", type: "item" }
+			]
+			title: "The Big Reactor"
+			x: 8.0d
+			y: 0.0d
+		}
+		{
+			dependencies: ["7B0EFFD4E295AFAD"]
+			description: ["The &6Europium Reductor&r pulls europium out of monazite froth. The Mk1 still makes it, slowly, but a second and third Mk2 are far more reasonable with this running."]
+			icon: "gtceu:europium_reductor"
+			id: "783B3D8BCDE41DB7"
+			rewards: [{ id: "71D803E89598469F", type: "xp", xp: 100 }]
+			shape: "gear"
+			size: 1.25d
+			tasks: [
+				{ id: "12FF6C5A81D9C73B", item: "gtceu:europium_reductor", type: "item" }
+				{ id: "3ABF17274C0EDFF1", item: "gtceu:europium_dust", type: "item" }
+			]
+			title: "Europium Without Fusion"
+			x: 2.0d
+			y: -2.0d
+		}
+		{
+			dependencies: ["783B3D8BCDE41DB7"]
+			description: ["Old reactor waste is still sitting in your storage. The &6Waste Retrieval Plant&r digs it out and gives radon and a radium capsule back. The radon is what the Mk2 wants for excited fuel."]
+			icon: "gtceu:waste_retrieval_plant"
+			id: "7842367875A86D7D"
+			rewards: [{ id: "70333973B75B2708", type: "xp", xp: 100 }]
+			shape: "gear"
+			size: 1.25d
+			tasks: [
+				{ id: "73761016998B19F3", item: "gtceu:waste_retrieval_plant", type: "item" }
+				{ id: "7EDB7CD4E16E95CE", item: "grindless:radium_capsule", type: "item" }
+			]
+			title: "Clean-Up"
+			x: 4.0d
+			y: -2.0d
+		}
+		{
+			dependencies: ["7842367875A86D7D"]
+			description: ["What the plant can't use is locked into a ceramic: &6Synroc&r, a block that doesn't leak. Dangerous byproducts get contained, not poured away."]
+			icon: "grindless:synroc_block"
+			id: "18D00DD290192BBF"
+			rewards: [{ id: "175D843B4A946890", type: "xp", xp: 60 }]
+			tasks: [{ id: "3398486368861082", item: "grindless:synroc_block", type: "item" }]
+			title: "Synroc"
+			x: 6.0d
+			y: -2.0d
+		}
+		{
+			dependencies: ["18D00DD290192BBF"]
+			description: ["The &6Actinide Partitioning Plant&r splits the leftover stream into its elements. Americium and curium come out of it."]
+			icon: "gtceu:americium_dust"
+			id: "71F8D25601FD13DC"
+			rewards: [{ id: "19C54AC1F336B92A", type: "xp", xp: 100 }]
+			shape: "gear"
+			size: 1.25d
+			tasks: [
+				{ id: "16B9D908D535693A", item: "gtceu:actinide_partitioning_plant", type: "item" }
+				{ id: "7F3CA8CBFEA8DACD", item: "gtceu:americium_dust", type: "item" }
+				{ id: "5D1671164B540A5A", item: "grindless:curium_oxide", type: "item" }
+			]
+			title: "Americium"
+			x: 8.0d
+			y: -2.0d
+		}
+		{
+			dependencies: ["7B0EFFD4E295AFAD"]
+			description: ["The &6Naquadria Magnet Works&r winds URhNq2 wire straight from its metals. The same cold room makes the ZPM SMES cell and the HTS insert."]
+			icon: "gtceu:uranium_rhodium_dinaquadide_single_wire"
+			id: "1E01844B88F24C23"
+			rewards: [{ id: "5C536CBAA400CCB2", type: "xp", xp: 100 }]
+			tasks: [
+				{ id: "52848600E203664B", item: "gtceu:naquadria_magnet_works", type: "item" }
+				{ id: "540E94A70B2FA2BE", item: "gtceu:uranium_rhodium_dinaquadide_single_wire", type: "item" }
+				{ id: "35FF524BFBAA10D5", item: "grindless:hts_insert", type: "item" }
+			]
+			title: "Wire Without the Furnace"
+			x: 2.0d
+			y: -4.0d
+		}
+		{
+			dependencies: ["54B43A225E11111F"]
+			description: ["A ZPM SMES cell and a wireless hatch put another tier on the network. Everything in orbit draws from it, so build this before you leave."]
+			icon: "grindless:zpm_smes_cell"
+			id: "57720D544EAFA2F9"
+			rewards: [{ id: "3BD20C011F89364F", type: "xp", xp: 100 }]
+			shape: "rsquare"
+			size: 1.25d
+			tasks: [
+				{ id: "1B058F6328DC468F", item: "grindless:zpm_smes_cell", type: "item" }
+				{ id: "3CD3FF55887D41DB", item: "gtceu:zpm_wireless_energy_hatch", type: "item" }
+			]
+			title: "The Network Goes ZPM"
+			x: 10.0d
+			y: 0.0d
+		}
+		{
+			dependencies: ["57720D544EAFA2F9"]
+			description: ["The &6Fusion Reactor Mk2&r. Its start is huge, so wire in plenty of ZPM hatches. Duranium comes only from here."]
+			icon: "gtceu:zpm_fusion_reactor"
+			id: "38199670D4113E48"
+			rewards: [{ id: "1014D26A05E4BDFE", type: "xp", xp: 150 }]
+			shape: "gear"
+			size: 1.5d
+			tasks: [
+				{ id: "7DACEF768CD1D437", item: "gtceu:zpm_fusion_reactor", type: "item" }
+				{ count: 4L, id: "3FEBA19E1E2F33E5", item: "gtceu:zpm_energy_input_hatch", type: "item" }
+				{ id: "39D334A75BD56C7E", item: "gtceu:duranium_ingot", type: "item" }
+			]
+			title: "Second Ring"
+			x: 12.0d
+			y: 0.0d
+		}
+		{
+			dependencies: ["38199670D4113E48"]
+			description: ["The &6Plasma Quench Caster&r takes the Mk2's molten metal and casts it into plate and foil in one step. Its heat isn't wasted either: it comes out as steam."]
+			icon: "gtceu:plasma_quench_caster"
+			id: "1CADDA82F9A7F5A7"
+			rewards: [{ id: "759397A18AD8C163", type: "xp", xp: 100 }]
+			shape: "gear"
+			size: 1.25d
+			tasks: [{ id: "1ED4B41E6916E51C", item: "gtceu:plasma_quench_caster", type: "item" }]
+			title: "Quenched"
+			x: 14.0d
+			y: -1.5d
+		}
+		{
+			dependencies: ["38199670D4113E48"]
+			description: ["The &6ZPM Parallel Hatch&r runs a machine on far more at a time. Worth a few for any line that keeps backing up."]
+			icon: "gtceu:zpm_parallel_hatch"
+			id: "7BA0FD9FFFA13BFC"
+			optional: true
+			rewards: [{ id: "5A92D1CD5DF49A74", type: "xp", xp: 60 }]
+			size: 0.75d
+			tasks: [{ id: "5F30DE5872812640", item: "gtceu:zpm_parallel_hatch", type: "item" }]
+			title: "Sixty-Four at Once"
+			x: 14.0d
+			y: 1.5d
+		}
+		{
+			dependencies: ["7B0EFFD4E295AFAD"]
+			description: ["The &6Methane Pyrolyser&r cracks methane in a hot tin bath and skims graphene off the top. It's the carbon a lot of ZPM parts depend on."]
+			icon: "gtceu:graphene_dust"
+			id: "375C05ABC626E037"
+			rewards: [{ id: "7DD936739291AC4F", type: "xp", xp: 80 }]
+			shape: "gear"
+			size: 1.25d
+			tasks: [
+				{ id: "7D289EB5051DD675", item: "gtceu:methane_pyrolyser", type: "item" }
+				{ id: "7ED667EB5DD1FFFB", item: "gtceu:graphene_dust", type: "item" }
+			]
+			title: "Graphene"
+			x: 2.0d
+			y: 2.0d
+		}
+		{
+			dependencies: ["375C05ABC626E037"]
+			description: ["The &6Diamond Lattice Fab&r grows flat diamond plates out of gas. They're thinner than anything you can cut."]
+			icon: "grindless:cvd_diamond_plate"
+			id: "57B256A0532B609A"
+			rewards: [{ id: "71A2E98ED4104367", type: "xp", xp: 80 }]
+			shape: "gear"
+			size: 1.25d
+			tasks: [
+				{ id: "33E86CC8982E9EEC", item: "gtceu:diamond_lattice_fab", type: "item" }
+				{ id: "1243FA8351B31FE7", item: "grindless:cvd_diamond_plate", type: "item" }
+			]
+			title: "Grown Diamond"
+			x: 4.0d
+			y: 2.0d
+		}
+		{
+			dependencies: ["57B256A0532B609A"]
+			description: ["Isotopically pure silicon is grown as a boule and cut into wafers. Ordinary silicon has too much noise in it for what comes next."]
+			icon: "grindless:silicon_28_wafer"
+			id: "5D07EB0A82EEE479"
+			rewards: [{ id: "5D72DCF3F381B59F", type: "xp", xp: 80 }]
+			tasks: [
+				{ id: "5A39D0FF474899EA", item: "grindless:silicon_28_boule", type: "item" }
+				{ id: "7742C9FE252CCFBD", item: "grindless:silicon_28_wafer", type: "item" }
+			]
+			title: "Silicon-28"
+			x: 6.0d
+			y: 2.0d
+		}
+		{
+			dependencies: ["5D07EB0A82EEE479"]
+			description: ["The &6Ion Implanter&r fires single donor atoms into a wafer. Slow, and the only way to make a donor qubit."]
+			icon: "gtceu:ion_implanter"
+			id: "74C7DC8E103131DB"
+			rewards: [{ id: "113AF4BC0C22E6E1", type: "xp", xp: 100 }]
+			shape: "gear"
+			size: 1.25d
+			tasks: [
+				{ id: "1377CD6770697ACB", item: "gtceu:ion_implanter", type: "item" }
+				{ id: "7AAF53BE2354BC5B", item: "grindless:donor_qubit_wafer", type: "item" }
+			]
+			title: "Implanted"
+			x: 8.0d
+			y: 2.0d
+		}
+		{
+			dependencies: ["74C7DC8E103131DB"]
+			description: ["Qubits only hold their state when almost nothing is moving. The cryostat casing keeps the fab that cold, and liquid helium gets a second life here."]
+			icon: "grindless:cryostat_casing"
+			id: "119B62380F5F76FC"
+			rewards: [{ id: "1FAA0F12448553D4", type: "xp", xp: 80 }]
+			tasks: [
+				{ id: "7B831BE9E559C9AB", item: "grindless:cryostat_casing", type: "item" }
+				{ id: "3573C463A0CE03E9", item: "grindless:nv_diamond_chip", type: "item" }
+			]
+			title: "Millikelvin"
+			x: 10.0d
+			y: 2.0d
+		}
+		{
+			dependencies: ["119B62380F5F76FC"]
+			description: ["The &6Qubit Fab&r builds &6Qubit Arrays&r, and the HPCA components made from them replace a stack of circuits. Fewer parts, much harder to build."]
+			icon: "grindless:qubit_array"
+			id: "32049634C73ABDE1"
+			rewards: [{ id: "52EA48C2FB46B4F1", type: "xp", xp: 150 }]
+			shape: "gear"
+			size: 1.5d
+			tasks: [
+				{ id: "7E76CA6055B80B5E", item: "gtceu:qubit_fab", type: "item" }
+				{ id: "5020DD07F3FFDB3C", item: "grindless:qubit_array", type: "item" }
+			]
+			title: "Qubits Instead of Circuits"
+			x: 12.0d
+			y: 2.0d
+		}
+		{
+			dependencies: ["7B0EFFD4E295AFAD"]
+			description: ["Archaea that live on hot seabed vents grow in the &6Vent Bioreactor&r. They eat what nothing else in the pack can."]
+			icon: "gtceu:vent_bioreactor"
+			id: "5018E9B05AD69E21"
+			rewards: [{ id: "1E06586620A019AF", type: "xp", xp: 80 }]
+			shape: "gear"
+			size: 1.25d
+			tasks: [
+				{ id: "7F5EDE9F49A0DBB9", item: "gtceu:vent_bioreactor", type: "item" }
+				{ id: "75AB638A6F07E2BE", item: "grindless:archaeal_culture", type: "item" }
+			]
+			title: "Vent Life"
+			x: 2.0d
+			y: 4.0d
+		}
+		{
+			dependencies: ["5018E9B05AD69E21"]
+			description: ["The &6Aerogel Works&r makes &6Silica Aerogel&r, light enough to float and cold enough to catch comet dust. It's also half of the fuel tank for the trip to Uranus."]
+			icon: "grindless:silica_aerogel"
+			id: "50A2AC5A9FDD98C5"
+			rewards: [{ id: "5FC1A4ECD19D99F4", type: "xp", xp: 80 }]
+			shape: "gear"
+			size: 1.25d
+			tasks: [
+				{ id: "1C3D7CE8E1C70A4B", item: "gtceu:aerogel_works", type: "item" }
+				{ id: "54620AD904445E3B", item: "grindless:silica_aerogel", type: "item" }
+			]
+			title: "Aerogel"
+			x: 4.0d
+			y: 4.0d
+		}
+		{
+			dependencies: ["50A2AC5A9FDD98C5"]
+			description: ["A tank of heavy water under photomultipliers catches the odd neutrino from the Sun. The &6Neutrino Observatory&r turns the flashes into a &6Solar Core Survey&r."]
+			icon: "gtceu:neutrino_observatory"
+			id: "54B3C436DF487119"
+			rewards: [{ id: "73359B29DD498ED3", type: "xp", xp: 100 }]
+			shape: "gear"
+			size: 1.25d
+			tasks: [
+				{ id: "1C89F537FB2519D0", item: "gtceu:neutrino_observatory", type: "item" }
+				{ id: "1CA9E8F2CFFE2525", item: "grindless:photomultiplier_casing", type: "item" }
+				{ id: "710F111D37EEFA04", item: "grindless:solar_core_survey", type: "item" }
+			]
+			title: "Neutrinos"
+			x: 6.0d
+			y: 4.0d
+		}
+		{
+			dependencies: ["57720D544EAFA2F9"]
+			description: ["A &6Naquadah Fuel Tank&r and a &6Saturnian Quantum Seed&r are what the rocket to Saturn needs."]
+			icon: "grindless:naquadah_fuel_tank"
+			id: "7B7F696C0E4DF709"
+			rewards: [{ id: "5CC2FE364CA17C96", type: "xp", xp: 100 }]
+			tasks: [
+				{ id: "5C9F7843BB96F43A", item: "grindless:naquadah_fuel_tank", type: "item" }
+				{ id: "33606149899472DC", item: "grindless:saturnian_quantum_seed", type: "item" }
+			]
+			title: "Level Five"
+			x: 12.0d
+			y: -3.0d
+		}
+		{
+			dependencies: ["7B7F696C0E4DF709"]
+			description: ["Saturn orbit: no ground, no air, a very long way from the Sun. Chunk-load the station, or its machines stop the moment you leave."]
+			icon: "grindless:station_truss_casing"
+			id: "3CBBA765447C908A"
+			rewards: [{ id: "5EA5752650290985", type: "xp", xp: 120 }]
+			shape: "rsquare"
+			size: 1.25d
+			tasks: [{ dimension: "grindless:saturn_orbit", id: "150CF4881DA5FB8F", type: "dimension" }]
+			title: "Third Station"
+			x: 14.0d
+			y: -3.0d
+		}
+		{
+			dependencies: ["3CBBA765447C908A"]
+			description: ["The &6Ring Harvester&r sweeps a net through the rings and brings back &6Ring Ice&r. Nobody mines a ring by hand."]
+			icon: "gtceu:ring_harvester"
+			id: "19FA6D9CF0EE02C7"
+			rewards: [{ id: "5CF688405C2A9B72", type: "xp", xp: 100 }]
+			shape: "gear"
+			size: 1.25d
+			tasks: [
+				{ id: "75E4D210EDC14021", item: "gtceu:ring_harvester", type: "item" }
+				{ id: "745270EA3D0A5720", item: "grindless:ring_sail_net", type: "item" }
+				{ id: "3ED316456037D44A", item: "grindless:ring_ice_sample", type: "item" }
+			]
+			title: "Ring Ice"
+			x: 16.0d
+			y: -3.0d
+		}
+		{
+			dependencies: ["3CBBA765447C908A"]
+			description: ["The &6Gas Giant Siphon&r drops a scoop head into Saturn's air and draws up helium and hydrogen. The scoop wears, so keep spares."]
+			icon: "gtceu:gas_giant_siphon"
+			id: "578143AE95F4EB8D"
+			rewards: [{ id: "1B8746FC90A470EC", type: "xp", xp: 100 }]
+			shape: "gear"
+			size: 1.25d
+			tasks: [
+				{ id: "7F8FF6963AD46047", item: "gtceu:gas_giant_siphon", type: "item" }
+				{ id: "38CAB2F038120FF0", item: "grindless:scoop_head", type: "item" }
+			]
+			title: "Scoop"
+			x: 16.0d
+			y: -4.5d
+		}
+		{
+			dependencies: ["578143AE95F4EB8D"]
+			description: ["The &6Isotope Column&r splits Saturn's helium into helium-3, deuterium and helium-4. It's the fuel for the aneutronic burn, and the reason Saturn is worth the trip."]
+			icon: "gtceu:isotope_column"
+			id: "13DF11331D65FE28"
+			rewards: [{ id: "5FA4622C1A460EA5", type: "xp", xp: 120 }]
+			shape: "gear"
+			size: 1.25d
+			tasks: [
+				{ id: "364D535FA7B5FB6D", item: "gtceu:isotope_column", type: "item" }
+				{ id: "163E9F6FDACFE465", item: "gtceu:helium_3_bucket", type: "item" }
+			]
+			title: "Helium-3 in Bulk"
+			x: 18.0d
+			y: -4.5d
+		}
+		{
+			dependencies: ["3CBBA765447C908A"]
+			description: ["A heat-shielded probe falls through Titan's orange haze and radios back what it passes. The &6Entry Probe Bay&r builds and launches it."]
+			icon: "gtceu:entry_probe_bay"
+			id: "73BBBB6062106F00"
+			rewards: [{ id: "7A25F765E0078A10", type: "xp", xp: 100 }]
+			shape: "gear"
+			size: 1.25d
+			tasks: [
+				{ id: "347BA511CB79BF9B", item: "gtceu:entry_probe_bay", type: "item" }
+				{ id: "54B0A891DEA4025A", item: "grindless:titan_entry_probe", type: "item" }
+				{ id: "3C9BD9870B4A63F6", item: "grindless:titan_probe_recording", type: "item" }
+			]
+			title: "Titan's Haze"
+			x: 16.0d
+			y: -6.0d
+		}
+		{
+			dependencies: ["73BBBB6062106F00"]
+			description: ["Titan's haze is organic: &6Tholin&r, a tarry mix of nitriles. The &6Tholin Reformer&r turns it into something the chemistry here can use."]
+			icon: "grindless:tholin"
+			id: "36524835522A60A5"
+			rewards: [{ id: "566F289FD725CD64", type: "xp", xp: 100 }]
+			shape: "gear"
+			size: 1.25d
+			tasks: [
+				{ id: "7975CE7772CFEF01", item: "gtceu:tholin_reformer", type: "item" }
+				{ id: "57A318CBE45A3F3D", item: "grindless:tholin", type: "item" }
+			]
+			title: "Tholins"
+			x: 18.0d
+			y: -6.0d
+		}
+		{
+			dependencies: ["19FA6D9CF0EE02C7"]
+			description: ["Enceladus vents salt water into space. The &6Plume Sampler&r flies through it and collects some, and the brine is the start of the aerogel cartridge."]
+			icon: "gtceu:plume_sampler"
+			id: "5330AC3948DAA01C"
+			rewards: [{ id: "59D110DD5792601D", type: "xp", xp: 100 }]
+			shape: "gear"
+			size: 1.25d
+			tasks: [
+				{ id: "118FD82E395EECEA", item: "gtceu:plume_sampler", type: "item" }
+				{ id: "55074E4DE6CFCDEE", item: "grindless:aerogel_cartridge", type: "item" }
+			]
+			title: "Through the Plume"
+			x: 18.0d
+			y: -3.0d
+		}
+		{
+			dependencies: ["5330AC3948DAA01C"]
+			description: ["The rings ring like a bell when something hits them. The &6Ring Seismometer&r listens and builds a &6Saturn Interior Model&r, which is what the chart to Uranus is made from."]
+			icon: "gtceu:ring_seismometer"
+			id: "32AF9CEF63EB677A"
+			rewards: [{ id: "554B3230DA4BB183", type: "xp", xp: 150 }]
+			shape: "gear"
+			size: 1.25d
+			tasks: [
+				{ id: "54281A6610F69243", item: "gtceu:ring_seismometer", type: "item" }
+				{ id: "361B5511110C4E19", item: "grindless:saturn_interior_model", type: "item" }
+				{ id: "501B757DD6404D21", item: "grindless:uranus_transfer_chart", type: "item" }
+			]
+			title: "Ring Song"
+			x: 20.0d
+			y: -3.0d
+		}
+		{
+			dependencies: ["32AF9CEF63EB677A"]
+			description: ["The next tank is built round aerogel, and the &6Uranian Quantum Seed&r comes from the new chart. Bring plenty of fuel: nothing out there refuels you."]
+			icon: "grindless:aerogel_fuel_tank"
+			id: "3F7C9D7577EC9E61"
+			rewards: [{ id: "188FE67046DD0268", type: "xp", xp: 120 }]
+			tasks: [
+				{ id: "7149935F0949546C", item: "grindless:aerogel_fuel_tank", type: "item" }
+				{ id: "74AC49F8FE952A35", item: "grindless:uranian_quantum_seed", type: "item" }
+			]
+			title: "Level Six"
+			x: 22.0d
+			y: -3.0d
+		}
+		{
+			dependencies: ["3F7C9D7577EC9E61"]
+			description: ["Uranus orbit, tipped on its side and colder than Saturn. Same station, but anything dipping into the air needs a stronger hull."]
+			icon: "grindless:station_truss_casing"
+			id: "53764AAB65F5DEA2"
+			rewards: [{ id: "3489D272D5AABA9A", type: "xp", xp: 120 }]
+			shape: "rsquare"
+			size: 1.25d
+			tasks: [{ dimension: "grindless:uranus_orbit", id: "567006E8CEB1684F", type: "dimension" }]
+			title: "Fourth Station"
+			x: 24.0d
+			y: -3.0d
+		}
+		{
+			dependencies: ["53764AAB65F5DEA2"]
+			description: ["The &6Ice Giant Siphon&r reaches deeper than the one at Saturn, under a hull rated for it. It brings up an &6Ice Giant Atmosphere Sample&r too."]
+			icon: "gtceu:ice_giant_siphon"
+			id: "554FD6C632D87ADB"
+			rewards: [{ id: "51A82BB16CB48C21", type: "xp", xp: 120 }]
+			shape: "gear"
+			size: 1.25d
+			tasks: [
+				{ id: "1336E191014A23E5", item: "gtceu:ice_giant_siphon", type: "item" }
+				{ id: "718F869D6B372A83", item: "grindless:pressure_hull_casing", type: "item" }
+				{ id: "5E90702FDE2DA465", item: "grindless:ice_giant_atmosphere_sample", type: "item" }
+			]
+			title: "Deep Gas"
+			x: 26.0d
+			y: -3.0d
+		}
+		{
+			dependencies: ["53764AAB65F5DEA2"]
+			description: ["Deep in the ice giants carbon is squeezed into diamond. The &6Slurry Separator&r filters a diamond slurry and the seed in it grows a better qubit plate."]
+			icon: "gtceu:slurry_separator"
+			id: "186259C7F1818558"
+			rewards: [{ id: "32C50832A67F673F", type: "xp", xp: 120 }]
+			shape: "gear"
+			size: 1.25d
+			tasks: [
+				{ id: "3499571BE390855E", item: "gtceu:slurry_separator", type: "item" }
+				{ id: "1B8EE9FF13BA4CB5", item: "grindless:ice_giant_diamond_seed", type: "item" }
+			]
+			title: "Diamond Rain"
+			x: 26.0d
+			y: -4.5d
+		}
+		{
+			dependencies: ["554FD6C632D87ADB"]
+			description: ["A flyby probe passes Neptune and Triton and doesn't stop. It reports back late, and what it reports is the last step to the next chart."]
+			icon: "gtceu:flyby_probe_bay"
+			id: "72B6F5C97902310C"
+			rewards: [{ id: "7D73B7D61A4DF7F0", type: "xp", xp: 150 }]
+			shape: "gear"
+			size: 1.25d
+			tasks: [
+				{ id: "100067B46B0EDC53", item: "gtceu:flyby_probe_bay", type: "item" }
+				{ id: "3E45C6A96E8978B6", item: "grindless:neptune_flyby_probe", type: "item" }
+				{ id: "5C553292180F00D4", item: "grindless:neptune_probe_recording", type: "item" }
+			]
+			title: "Past Neptune"
+			x: 28.0d
+			y: -3.0d
+		}
+		{
+			dependencies: ["38199670D4113E48"]
+			description: ["The &6Deep Space Network&r decodes what the probes send home. Feed it the recordings and it hands back flyby data and a &6Multimessenger Catalogue&r."]
+			icon: "gtceu:deep_space_network"
+			id: "7566E1539187E10C"
+			rewards: [{ id: "5C52F543E5E004D8", type: "xp", xp: 120 }]
+			shape: "gear"
+			size: 1.25d
+			tasks: [
+				{ id: "198EB250ED50E96A", item: "gtceu:deep_space_network", type: "item" }
+				{ id: "1C396CF0985DA961", item: "grindless:multimessenger_catalogue", type: "item" }
+				{ id: "7730CDADD3FF58B1", item: "grindless:neptune_flyby_data", type: "item" }
+			]
+			title: "Listening"
+			x: 16.0d
+			y: 0.0d
+		}
+		{
+			dependencies: ["7566E1539187E10C"]
+			description: ["The &6Kuiper Survey Telescope&r picks out the small icy worlds past Neptune. Its &6Pluto-Kuiper Chart&r is where the next era sets off from."]
+			icon: "gtceu:kuiper_survey_telescope"
+			id: "32E94420EE8BE7BD"
+			rewards: [{ id: "129A569BC5DC3F78", type: "xp", xp: 150 }]
+			shape: "gear"
+			size: 1.25d
+			tasks: [
+				{ id: "74C272BB5D402E36", item: "gtceu:kuiper_survey_telescope", type: "item" }
+				{ id: "17C82639B2CFDCBA", item: "grindless:kuiper_target_list", type: "item" }
+				{ id: "137288F6B23DA8B4", item: "grindless:pluto_kuiper_chart", type: "item" }
+			]
+			title: "Kuiper Targets"
+			x: 18.0d
+			y: 0.0d
+		}
+		{
+			dependencies: ["38199670D4113E48"]
+			description: ["Titanium and duranium fuse into &6Tritanium&r in the Mk2. It's a UV metal, made here first."]
+			icon: "gtceu:tritanium_ingot"
+			id: "7431D3D54AC9A142"
+			rewards: [{ id: "53F5634B3871D39B", type: "xp", xp: 100 }]
+			tasks: [{ id: "555E766B6667FAE3", item: "gtceu:tritanium_ingot", type: "item" }]
+			title: "Tritanium"
+			x: 16.0d
+			y: 1.5d
+		}
+		{
+			dependencies: ["7431D3D54AC9A142"]
+			description: ["Arsenic and ruthenium make &6Darmstadtium&r in the same reactor. Another UV metal you'll need ahead of schedule."]
+			icon: "gtceu:darmstadtium_ingot"
+			id: "3D0152B3D0D3DF99"
+			rewards: [{ id: "7B5469AAD4B33388", type: "xp", xp: 100 }]
+			tasks: [{ id: "186EABC836236E71", item: "gtceu:darmstadtium_ingot", type: "item" }]
+			title: "Darmstadtium"
+			x: 18.0d
+			y: 1.5d
+		}
+		{
+			dependencies: ["13DF11331D65FE28"]
+			description: ["Deuterium and helium-3 fuse into helium plasma with almost no stray neutrons. It runs on the Mk2 only, and it's the clean way to turn Saturn's gas into power."]
+			icon: "gtceu:helium_3_bucket"
+			id: "728E2D977FC3D3C5"
+			rewards: [{ id: "118FCFD058C13B9E", type: "xp", xp: 120 }]
+			tasks: [
+				{ id: "3F8ED1D3F8195AAB", item: "gtceu:zpm_fusion_reactor", type: "item" }
+				{ id: "1F7E480BD8256AC3", item: "gtceu:helium_3_bucket", type: "item" }
+			]
+			title: "Aneutronic"
+			x: 20.0d
+			y: -4.5d
+		}
+		{
+			dependencies: ["728E2D977FC3D3C5"]
+			description: ["The &6Direct Energy Converter&r takes charge straight off the plasma, with no turbine in between. It returns the cooled gas, so nothing is lost but the heat."]
+			icon: "gtceu:direct_energy_converter"
+			id: "7E64F29B6EE66B09"
+			rewards: [{ id: "7BBC2F2FE62A8776", type: "xp", xp: 120 }]
+			shape: "gear"
+			size: 1.25d
+			tasks: [{ id: "5E1D2C03F378C17A", item: "gtceu:direct_energy_converter", type: "item" }]
+			title: "Direct Conversion"
+			x: 22.0d
+			y: -4.5d
+		}
+		{
+			dependencies: ["72B6F5C97902310C"]
+			description: ["Tritanium and darmstadtium make the &6UV Machine Hull&r, and the UV energy hatch needs everything you learned out here. Bring the Pluto chart and the Solar Core Survey along."]
+			icon: "gtceu:uv_machine_hull"
+			id: "78B5C3A48F753C53"
+			rewards: [{ id: "3A33AA07F5AC2A6F", type: "xp", xp: 300 }]
+			shape: "diamond"
+			size: 1.75d
+			tasks: [
+				{ id: "78018B0E5272161A", item: "gtceu:uv_machine_hull", type: "item" }
+				{ id: "11BD6BDEFCA55FDE", item: "gtceu:uv_energy_input_hatch", type: "item" }
+				{ id: "3B09F9628867CD8A", item: "grindless:pluto_kuiper_chart", type: "item" }
+				{ id: "5FE036806705D56D", item: "grindless:solar_core_survey", type: "item" }
+			]
+			title: "Gate to UV"
+			x: 30.0d
+			y: -3.0d
+		}
+	]
+	subtitle: ["Naquadria at home, a third and fourth station in orbit, then Saturn, its rings and the ice giants."]
+	title: "ZPM: The Ringed and Ice Giants"
+}
