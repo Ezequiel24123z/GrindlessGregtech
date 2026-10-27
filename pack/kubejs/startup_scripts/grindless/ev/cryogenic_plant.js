@@ -66,7 +66,8 @@
   // recipe data key: the night EU/t, read by the EMI line of the type
   CRYO.nightKey = NIGHT_KEY
   CRYO.dimension = 'gcyr:luna'
-  CRYO.maxIO = { itemsIn: 0, itemsOut: 0, fluidsIn: 1, fluidsOut: 1 }
+  // fluidsOut 3 since UV-B4: the Kuiper noble gas row splits into argon, krypton and xenon
+  CRYO.maxIO = { itemsIn: 0, itemsOut: 0, fluidsIn: 1, fluidsOut: 3 }
   CRYO.hatches = { energy: [1, 2], inputHatches: [1, 2], outputHatches: [1, 4] }
 
   // ---------------------------------------------------------------- pattern

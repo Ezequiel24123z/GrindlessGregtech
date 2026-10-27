@@ -3345,6 +3345,10 @@ file = "kubejs/assets/grindless/textures/item/jupiter_entry_probe.png"
 hash = "c66c11adbaa620451bbeefc112df31eb2c42a13f585b7e0b1000c807d85c4de9"
 
 [[files]]
+file = "kubejs/assets/grindless/textures/item/kuiper_interceptor.png"
+hash = "80cde213ae80bc7ef929f4522abe9376f1ec0af2ca2dde30c3d936cdc8a8d12b"
+
+[[files]]
 file = "kubejs/assets/grindless/textures/item/kuiper_target_list.png"
 hash = "79b41adffd1ef1c68fffc24f4eaaea85795304a95a28d3b0b96505824e55a688"
 
@@ -3659,6 +3663,10 @@ hash = "258d5490c0288e2e93aaa1ede5d9cf2634cfe6b5758fee74787c5c5d7c00c065"
 [[files]]
 file = "kubejs/assets/grindless/textures/item/sailcraft.png"
 hash = "d133ce357878505b1cdb6671b78e139045d534553c5996ae532b2c89025b9689"
+
+[[files]]
+file = "kubejs/assets/grindless/textures/item/sample_canister.png"
+hash = "6359fc55babe88bc0c30eaad2de1dd1f303565d1df9dc8c93b0ea87358be8ff5"
 
 [[files]]
 file = "kubejs/assets/grindless/textures/item/sapphire_boule.png"
@@ -4253,6 +4261,10 @@ file = "kubejs/client_scripts/grindless/uv_heat_sources_lang.js"
 hash = "82a001176eb5cc48a08ad3eed04c77cba536b1adcd24bf75a53c820413aad01e"
 
 [[files]]
+file = "kubejs/client_scripts/grindless/uv_kuiper_lang.js"
+hash = "d366585e96b896ca3631e2eabe8e0c577e1ab777ede33182e490c35471803096"
+
+[[files]]
 file = "kubejs/client_scripts/grindless/uv_life_lang.js"
 hash = "e53d5fa247845c2922b24c235bb24e85771ff08c272ffcc4da5f7bd2c88e152e"
 
@@ -4554,7 +4566,7 @@ hash = "1f4b256531a0b42a6ecf399e9b692d9e4730bd4102e53aab3e1fa2c999b69e9d"
 
 [[files]]
 file = "kubejs/data/grindless/tables/hidden_until.json"
-hash = "c1b713bc99303a0b687e42f2309b5ca45d84b911b2c97881d71eea5356ebcc09"
+hash = "febfb928924ae0546291b6a5ec4d84e806d68aaa0ba1911a5660ac0d4ded6e31"
 
 [[files]]
 file = "kubejs/data/grindless/tables/hot_cell.json"
@@ -4742,7 +4754,7 @@ hash = "fc6951bb414f8274d42a87c0b7ba0e28936bc467dde0009d9bd7aa1a17c9b60e"
 
 [[files]]
 file = "kubejs/server_scripts/grindless/ev/cryogenic_plant.js"
-hash = "e3f9e6456eb6d23d8286cf6fe8e350bc885d0100cacb699bc972277e2dbbac2a"
+hash = "9b3a603cbf877d80efda33942936de57e1af7056431abda86cc684a5f56e0613"
 
 [[files]]
 file = "kubejs/server_scripts/grindless/ev/extraction_cascade.js"
@@ -5217,6 +5229,10 @@ file = "kubejs/server_scripts/grindless/uv/heat_sources.js"
 hash = "8eb1996be2e94c4e4b702697a6d14b6848c5702a673c2c5ad0d1ef92ff8f6ed1"
 
 [[files]]
+file = "kubejs/server_scripts/grindless/uv/kuiper.js"
+hash = "77fc42462e2719d0bf75b54c8ad50a771c24c2ca443e22fda7a87c13217cbd93"
+
+[[files]]
 file = "kubejs/server_scripts/grindless/uv/life.js"
 hash = "e8bf9608555bd844e765eaa2f49ef38fbfda728f481632771fab22b8e0da0408"
 
@@ -5314,7 +5330,7 @@ hash = "2d289116a3b90be46ce144f6b218a741434b60288560e44c850872e46a2c879d"
 
 [[files]]
 file = "kubejs/startup_scripts/grindless/ev/cryogenic_plant.js"
-hash = "a5211bc44a29f5d99f49e692178238909ab4feee6842818889f7c621e351ff46"
+hash = "52e2c7ea4734da41da712b572fd87e7ee925fe0c23a2eb489bc5b12e15b62a33"
 
 [[files]]
 file = "kubejs/startup_scripts/grindless/ev/extraction_cascade.js"
@@ -5663,6 +5679,10 @@ hash = "9b277b41333ff1fc99933cf0ca223453da5ded76b95ced7fc35e4ca9f2f956ce"
 [[files]]
 file = "kubejs/startup_scripts/grindless/uv/heat_sources.js"
 hash = "ed8ada802862ede0b22f573483c861b8c0f013d1f1708440dd0070823dd70ce3"
+
+[[files]]
+file = "kubejs/startup_scripts/grindless/uv/kuiper.js"
+hash = "a82b028fa39fa0e6a172dea966c4d4a4fcea156d4b1464e9615fc321a8eb76ee"
 
 [[files]]
 file = "kubejs/startup_scripts/grindless/uv/life.js"
