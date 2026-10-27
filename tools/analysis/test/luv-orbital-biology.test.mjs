@@ -243,7 +243,9 @@ test('B4 native fixture compiles, cannot overlap other bands and retains every o
     }
   }
   const startup = script('startup_scripts', 'luv/orbital_biology.js');
-  assert.match(startup, /priority: -10/);
+  const bands = JSON.parse(fs.readFileSync(path.join(ROOT, 'tools/analysis/script_order.json'), 'utf8')).bands;
+  assert.equal(bands['startup_scripts/grindless/luv/orbital_biology.js'], -10, 'loads after the default band (INFRA-ORDER stamps the header)');
+  assert.match(startup, /^\/\/ priority: -\d+/);
   assert.match(startup, /get\('greenhouse'\)\.setMaxIOSize\(3, 6, 2, 2\)/);
   assert.match(startup, /grindless:block\/luv\/station_truss_casing/);
 });
