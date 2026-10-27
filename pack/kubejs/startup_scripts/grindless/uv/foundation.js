@@ -1,6 +1,7 @@
 // -----------------------------------------------------------------------------------------------
 // UV foundation (package UV-F1, docs/eras/uv.md "Build order", F1): the shared registrations the UV packages build on. No machines,
-// no recipe types, no recipes, no planets, orbits, dimensions or station items (B1 owns them), no wireless hatches or covers. Every other
+// no recipe types, no recipes, no planets, orbits, dimensions or station items (B1 owns them), no wireless hatches, covers or cell (the
+// UV cell, grindless:uv_smes_cell, is a block of the wireless table: lv/wireless_energy.js registers it, UV-A9). Every other
 // UV package uses exactly these ids; they are published in global.grindless.uvFoundation.
 //
 //   Items (grindless:), names in client_scripts/grindless/uv_foundation_lang.js; machine (uv.md section) that makes each one:
@@ -22,7 +23,6 @@
 //     triton_ice_core, sputnik_ice_core, charon_core                  25, 26
 //     planetesimal_sample, heliopause_data                            28, 30
 //     proxima_approach_data, sgr_a_star_image                         12, 31
-//     uv_smes_cell                                                    the naquadria magnet works' UV mode (the wireless tier's cell)
 //   Fluids and materials (GT materials, gtceu: ids as ZPM's saturn_helium; uv.md writes them with grindless:):
 //     ytterbium, uranium_233, arsine                                  absent from GTM (docs/research/uv-s0.md, S0-8)
 //     thorium_nitride, nitrogen_15, nitrogen_15_oxide, boron_11_trifluoride, boron_10_trifluoride, decaborane
@@ -74,8 +74,7 @@
     planetesimal_sample: { stack: 16 },
     heliopause_data: { stack: 16 },
     proxima_approach_data: { stack: 16 },
-    sgr_a_star_image: { stack: 16 },
-    uv_smes_cell: { stack: 1 }
+    sgr_a_star_image: { stack: 16 }
   }
 
   const BLOCKS = {
