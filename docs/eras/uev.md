@@ -1,0 +1,1572 @@
+# UEV (T10): several stars at once
+
+UEV arrives. A level 9 rocket, pushed by a direct fusion drive, reaches two more stars: Alpha Centauri A and B, 4.37 light years out, and Barnard's Star, 6 light years out. A second drive takes a level 10 rocket to Sirius B, 8.6 light years out. Sirius B is the nearest white dwarf: a Sun's mass squeezed to the size of the Earth, held up by electron degeneracy. The stellar neighbourhood chart that UHV's astrometer made (`docs/eras/uhv.md:910`) names the targets. Each place gives something only it has:
+- Alpha Centauri's orbit sits in the G-cloud, the interstellar gas and dust next to ours;
+- Barnard b, a hot, airless sub-Earth, has a metal-rich crust;
+- Sirius B has degenerate matter.
+
+At home, the era is superheavy atoms, megabar matter, single photons and a fourth fusion ring:
+- a calutron enriches calcium-48 and potassium-40, and a heavy-ion cyclotron fires calcium-48 at UHV's stored berkelium-249 (`docs/eras/uhv.md:700`); the products are tennessine and the superheavy census;
+- a megabar press quenches lanthanum–yttrium superhydride into the UEV superconductor and turns onion carbon into nanotwinned diamond;
+- superconducting nanowire detectors, van der Waals emitters and quantum dots are joined in a photonic integration hall into GT--'s optical computer, the UEV circuit;
+- the Mk4 ring burns deuterium–helium-3 and proton–boron, mostly without neutrons, through ZPM's direct energy converter.
+
+The network goes UEV on a quantum repeater node, entangled from Earth orbit.
+
+**Size (rule 7):** the targets are a guideline, not a quota. No machine or line was added to hit a number.
+
+| | UHV (as designed) | UEV (this design) | Growth | Guideline |
+|---|---|---|---|---|
+| Progression multiblocks | 31 | **25** | ×0.81 | about 42 (×1.35) |
+| New process lines | 32 | **40** | ×1.25 | about 48 (×1.5) |
+| Steps per line, average (items between arrows, counted as UHV's) | 7.0 | **7.4** (none under 6) | ×1.06 | at least 4 each, average at least UHV's |
+| Crossings with lines two or more eras back (UV and older) | 40 | **56** | ×1.40 | about 60 (×1.5) |
+
+- **Why 25 and not 42.** UEV's growth goes into lines, into steps per line and into crossings with UV and older, as the user asked for UHV ("much more, above all processing lines"). It also goes into five systems that rule 7 does not count:
+  - the Mk4's direct fusion drives (two GCYR motors);
+  - the stellar forge (the mega family's UEV member);
+  - the UEV parallel hatch;
+  - the UEV wireless tier and its cell;
+  - three warp-gate relays.
+
+  The machines that would close the gap were each one of these:
+  - a convenience version: an ion-track membrane plant (the cyclotron and GTM's chemical bath do it), a superconducting magnet hall (an assembler row), a molten regolith electrolysis cell on Barnard b (EV's regolith cell does it on the Moon);
+  - a second machine for one chain: a separate target fabrication lab, an accelerator mass spectrometer apart from the dust lab;
+  - a place with no product of its own: Epsilon Eridani's debris belt, Luhman 16, Wolf 359;
+  - content that belongs to UIV: neutron stars, Cygnus X-1, the Penrose engine (`docs/journey.md:51`).
+
+  They are listed under *Considered and dropped*. The count falls because UEV's three new places are deep, not wide, and because most UEV steps run through older machines on purpose: 28 older machines take a UEV mode, and that is where the 56 crossings come from. This is the one size figure that falls; the orchestrator decides (*Decisions proposed*, open question 6).
+- **`docs/research/complexity.md:97`'s ×1.5 for lines from UV on** is not met: lines grow ×1.25 and steps per line ×1.06, so total steps in lines grow ×1.32 (295 against 224). The candidate lines that would reach 48 are in *Considered and dropped*: each was a data chain, an assembly with no feedstock, or a second route to an existing product.
+- **The UEV era in four sentences:**
+  1. Calcium-48 from a calutron meets UHV's berkelium, Cf-252's curium-248, aged californium-249 and reactor-bred plutonium-244 in a heavy-ion cyclotron. The result is tennessine, kept for UIV, and a census of the superheavy elements.
+  2. Megabar pressure, electron beams and single-crystal casting make the UEV parts: a superhydride superconductor, Fe₁₆N₂ magnets, rhenium–ruthenium superalloy blades, SiC/SiC hulls, HfTaCN coils.
+  3. A direct fusion drive reaches Alpha Centauri's orbit and Barnard b:
+     - Alpha Centauri's orbit gives interstellar gas and dust, and pulsar timing over a 4.37 light-year baseline;
+     - Barnard b gives carbonyl iron, nickel and rhenium.
+     
+     A second drive reaches Sirius B, where degenerate matter is harvested into pellets.
+  4. Fermi gases in Earth orbit model degenerate matter, and pulsars timed from Alpha Centauri chart the way to the neutron stars. That chart opens UIV.
+
+## Route
+
+1. **Foundation (F1):**
+   - the UEV hull and energy hatches, generated by KubeJS with `highTierContent` off (*Mods*, S0-1);
+   - the `grindless:uev_*` components, the superhydride superconductor and the HfTaCN coil (S0-7, S0-9);
+   - every material that two packages share.
+2. **Superheavy targets (home):**
+   - the calutron enriches calcium-48, potassium-40, lithium-6 and plutonium-244;
+   - UHV's HFIR and transuranium facility take new rows: plutonium-244, curium-248 from decayed Cf-252, californium-249 from aged Bk-249;
+   - the heavy-ion cyclotron, the recoil separator and the chemistry lab make tennessine and the census.
+3. **Matter under pressure (home):**
+   - the electron-beam furnace refines Re, Hf, Ta and Nb;
+   - the megabar press makes the superhydride and nanotwinned diamond;
+   - the single-crystal foundry, the SiC fibre plant and the CVI furnace make the hull, pump and drive parts.
+4. **Light (home and Earth orbit):**
+   - the SNSPD foundry, the van der Waals stacker and UHV's foundry and MBE rows feed the photonic integration hall: `gtnn:optical_computer`;
+   - the entanglement station in Earth orbit makes the quantum repeater node, the UEV link;
+   - the quantum gas lab in Earth orbit makes the degenerate Fermi gas model.
+5. **Fusion:**
+   - the Mk4 ring on D–He-3 and p–B11, through ZPM's direct energy converter;
+   - the helium-3 polariser raises its yield;
+   - the UV thruster works makes the direct fusion drive: GCYR motor tier 7 for level 9 (S0-2).
+6. **Alpha Centauri AB orbit (station 9) and Barnard b (base), in parallel:**
+   - Alpha Centauri: the nebula collector, the dust lab, the pulsar timing station, a swarm station row at Alpha Centauri A;
+   - Barnard b: the core drill and the carbonyl refinery.
+7. **Sirius B orbit (station 10):** the DFD Mk2 motor (tier 9, with Barnard's rhenium and iron nitride) gives level 10. At Sirius B:
+   - the white dwarf spectrograph measures the gravitational redshift;
+   - the harvester and the containment works make degenerate pellets, the UEV field generator's core.
+8. **Gate to UIV:**
+   - the UIV casing is researched with the pulsar navigation chart;
+   - the network carries 16 A UEV for 60 s;
+   - tennessine and a degenerate pellet are stored.
+
+## Inherited, as built
+
+From UHV (`DECISIONS.md:426-451`, `docs/STATUS.md`; the ids are `pack/kubejs/startup_scripts/grindless/uhv/*.js`). UHV's last packages (B5, B7, C1–C3) are designed and land before UEV opens. If they change, this section is re-checked before F1.
+- **Machines UEV reuses through new modes:**
+  - the high flux reactor and transuranium facility (`uhv/transcurium.js:59`);
+  - the crystal growth furnace (`uhv/crystals.js:72`);
+  - the MBE reactor and photonic foundry (`uhv/photonics.js:74`, `:85`);
+  - the spark plasma sinterer (`uhv/propulsion.js:132`);
+  - the swarm control station (`uhv/swarm.js:77`), written final (DECISIONS.md:447).
+- **Travel:**
+  - rocket level = floor((motor + tank) / 2);
+  - the ICAN motor is a tier 6 `createCustom` `RocketMotorBlock`, because GCYR's KubeJS motor builder is broken (DECISIONS.md:441); UV's BNNT tank is tier 11, so the rocket is level 8;
+  - the planet overrides live in `data/gcyr/gcyr/planets/`;
+  - stations are `more` rows of `tables/stations.json` (slot 7 Mercury orbit, slot 8 `proxima_b_orbit`);
+  - `player.teleportTo` crosses dimensions, and the wireless network works in any dimension (`docs/research/uhv-s0.md`).
+- **Network:**
+  - the UHV cell holds 62,914,560,000 EU (DECISIONS.md:437);
+  - `withTiers` in `lv/wireless_energy.js:286-316` stops at case 9;
+  - the nuclear clock is UHV's link (`tables/crystals.json:11`);
+  - the UHV gate's example mix puts 43,514,928 EU/t in (`docs/eras/uhv.md:744-749`).
+- **Swarm:** c1 2,097,152 EU/t and c2 8,388,608 EU/t, burning oganesson pods (krypton at half duration); T1 run 20261027-205459 (DECISIONS.md:447). Proxima's sunlight is 0.91 and Mercury orbit's 9.35 (DECISIONS.md:443).
+- **Hidden:**
+  - GTCA's elevator miner and pump are `until: uev` (DECISIONS.md:431);
+  - `gtnn:optical_processor` and `gtnn:optical_assembly` are unhidden at `uhv`, while `gtnn:optical_computer` and `gtnn:optical_mainframe` stay hidden (DECISIONS.md:438).
+- **GTM top:** the Tritanium coil, 10,800 K (`docs/eras/mega.md:154`; `lib/coils.js:33`); the UV parallel hatch, ×256; GTM's three fusion rings.
+- **Bench:** the 4 GB bench client runs out of memory on a full save with two flights, so it is one leg per run (`docs/research/uhv-s0.md`). The bench is the Linux VM (3 slots), with the home PC as fallback (`docs/testing/`).
+
+## Places and site rules
+
+| Place | Dimension id | GCYR tier | Reached by | Role |
+|---|---|---|---|---|
+| Earth | `minecraft:overworld` | — | — | most machines (15) |
+| Earth orbit | the station dimension (UV) | — | as built | quantum gas lab, entanglement station |
+| Alpha Centauri AB orbit | `grindless:alpha_centauri_orbit` (new) | 9 | level 9 rocket (DFD Mk1); station 9 | nebula collector, dust lab, pulsar timing station, swarm row at A |
+| Barnard b | `grindless:barnard_b` (new, surface) | 9 | level 9 rocket | core drill, carbonyl refinery |
+| Sirius B orbit | `grindless:sirius_b_orbit` (new) | 10 | level 10 rocket (DFD Mk2); station 10 | spectrograph, harvester, containment works |
+
+- **Alpha Centauri AB orbit:** a station in a wide orbit around the pair. No planet is confirmed: a 2025 JWST candidate gas giant around A is unconfirmed, so the place is an orbit only. It is an orbit dimension with a sky renderer (two suns) and no surface.
+- **Barnard b:**
+  - real: ESPRESSO, 2024, with three more small planets found in 2025;
+  - at least 0.37 Earth masses, a 3.15-day orbit at 0.023 AU, about 400 K, airless and probably tidally locked;
+  - a metal-rich interior like Mercury's is **our stated assumption**, as Proxima b's life was UHV's;
+  - site rules: sealed machines, no combustion, day side only for solar.
+- **Sirius B orbit:**
+  - real: 1.02 solar masses in about 0.008 solar radii, 25,000 K, a hydrogen atmosphere;
+  - its gravitational redshift (80 km/s, Hubble) tests the degenerate equation of state;
+  - Sirius A, 20 AU away, is an A1V star;
+  - site rules: no unsealed machine; every recipe there runs in the station's radiation-hardened casing.
+- **New solar systems:** GCYR 0.2.9 has none of these. A datapack adds them as GCYR solar systems and planets (S0-3). The fallback is arrival by the UHV warp gate only, with a placed platform and the S0-7 teleport (`docs/research/uhv-s0.md`).
+- **Stations 9 and 10** are two more `more` rows in `tables/stations.json` (S0-4).
+- **Gravity, air and temperature** are as GCYR loads them (S0-11). Gravity is never claimed.
+
+### Sunlight (`tables/sunlight.json` rows, B1)
+
+| Place | Sunlight *(tune)* | Spectrum | Note |
+|---|---|---|---|
+| Alpha Centauri AB orbit | 1.0 (A at about 1.2 AU) | G2V, Sun-like | IMM arrays at full yield; the swarm row at A is ×1.5 *(tune)* (A is 1.52 L☉) |
+| Barnard b | 6.7 | M4V, far-red | red-tuned arrays only (UHV's Proxima rule, ×0.65) |
+| Sirius B orbit | 5.6 (B at 0.1 AU) | 25,000 K, hard UV | arrays degrade; no solar row; the network powers the station |
+
+## Bridges and first arrivals
+
+- **Level 9: the direct fusion drive (DFD) Mk1.**
+  - It is a GCYR motor at tier 7, built as a startup `createCustom` motor like the ICAN (DECISIONS.md:441) and made by a new row in UV's thruster works (`uv/propulsion.js:189`);
+  - with UV's tier 11 tank, floor(18 / 2) = 9 (S0-2);
+  - it is real: Princeton Satellite Systems' direct fusion drive concept, a D–He-3 field-reversed configuration.
+- **Level 10: the DFD Mk2.**
+  - It is a motor at tier 9: floor(20 / 2) = 10 (S0-2 checks GCYR accepts tier 9 and a planet at tier 10);
+  - it adds a closed Brayton loop with single-crystal blades (Barnard rhenium) and Fe₁₆N₂ field magnets, so Sirius comes after Barnard;
+  - if GCYR caps at tier 9, Sirius B orbit is tier 9 and reached only through a warp gate relay from Alpha Centauri's orbit (orchestrator).
+- **First arrival:** the rocket lands on Barnard b, or docks at stations 9 and 10 as UHV's Proxima orbit did.
+- **Warp gate relays:** UHV's warp gate (`gtceu:warp_gate`) is built again at each new orbit as an AE2 seed and player transit. These copies are not counted (one machine, built again).
+- **AE2:** each relay seeds its place; Barnard b gets the relay's seed through its orbit, as Proxima b did.
+
+## Automatic resource generation
+
+| Resource | Machine | Place | Catalyst |
+|---|---|---|---|
+| Interstellar gas (H, D, He-3, He-4, Ne) | nebula collector (18) | Alpha Centauri AB orbit | the superhydride scoop coil (not consumed; wears 1 % a run) |
+| Interstellar dust | nebula collector (18), on aerogel tiles | Alpha Centauri AB orbit | aerogel tiles (consumed, line 37) |
+| Barnard core rock | core drill (21) | Barnard b | the gravity survey (quantum gas lab's atom interferometer, 16 c2) |
+| Degenerate matter | degenerate-matter harvester (24) | Sirius B orbit | the Fermi gas model (16) and the mass–radius chart (23) |
+| Sunlight at Alpha Centauri A | swarm control station, new row | Alpha Centauri AB orbit | the coronal field map's Alpha Centauri version (UHV's solar probe bay, new row) |
+
+- The yields are fiction-scale and say so: a real magnetic scoop collects about 0.1 atoms per cm³. The doc, EMI and the quest state it.
+- Nothing is gathered by hand; the drill and collector run unattended on loaded chunks (FTB Chunks).
+
+## Only from there, and cuts
+
+- **Only from Alpha Centauri's orbit:**
+  - interstellar gas at G-cloud ratios: its helium-3 to helium-4 is above the solar wind's *(tune)*;
+  - interstellar dust, with its iron-60 supernova record (real: Koll 2019, Wallner 2016);
+  - pulsar parallaxes over a 4.37 ly baseline;
+  - sunlight from a second G star.
+- **Only from Barnard b:** carbonyl iron, carbonyl nickel and cobalt, and the PGM–rhenium residue.
+- **Only from Sirius B:** degenerate matter and the mass–radius chart.
+- **Only from Earth orbit:** the Fermi gas model (microgravity: NASA's Cold Atom Lab, 2018) and the entangled link (real: Micius, 2017).
+- **Cuts (F2, integrator):**
+  - `gtnn:optical_computer` moves from `never` to `uev`; it gets our recipe (13 c3);
+  - `gtnn:optical_mainframe` stays hidden (UIV);
+  - GTCA's elevator miner and pump stay `until: uev` and unhide only if S0-8 shows they form with buses, as a convenience that is not counted. Otherwise they move to `never` with a note;
+  - GTCA's assembler modules stay hidden (S0-8 in UHV: they don't form with buses, DECISIONS.md:431);
+  - UEV's new ids get their substages.
+
+## Our multiblocks
+
+| Place | Machines | Count |
+|---|---|---|
+| Earth | 1–15 | 15 |
+| Earth orbit | 16–17 | 2 |
+| Alpha Centauri AB orbit | 18–20 | 3 |
+| Barnard b | 21–22 | 2 |
+| Sirius B orbit | 23–25 | 3 |
+| **Total** | | **25** |
+
+**Not counted** (rule 7: they are convenience, uncounted systems, or a machine built again):
+- the stellar forge (`gtceu:stellar_forge`, the mega family's UEV member, *Nothing one at a time*);
+- the UEV parallel hatch;
+- the warp gate relays at stations 9 and 10;
+- GTCA's elevator miner and pump, if S0-8 unhides them;
+- the DFD motors (blocks, not multiblocks).
+
+### Audit (rule 3, every by-product)
+
+| # | Machine | Route only it gives | Keys | Policy |
+|---|---|---|---|---|
+| 1 | Calutron | Ca-48, K-40, Li-6, Pu-244 enrichment | superheavies, Fermi gas, tritium-free Li | kept (depleted streams return to stock) |
+| 2 | Heavy-ion cyclotron | Ca-48 beam on actinide targets; Xe ion tracks | tennessine, census, membranes | contained (activated targets → hot cell) |
+| 3 | Recoil separator | single superheavy atoms out of the beam | tennessine, census | contained (beam dump → hot cell) |
+| 4 | Superheavy chemistry lab | Ts fixed for storage, census data | gate to UIV | contained |
+| 5 | Megabar press | (La,Y)H₁₀, nanotwinned diamond | UEV cable, piston, drill bit | voidable (H₂ to the network's hydrogen stock) |
+| 6 | Electron-beam furnace | 6N Re, Hf, Ta, RRR Nb; EB-PVD YSZ; onion carbon | SX blades, coil, SRF, divertor | kept (skulls to EV platinum plant) |
+| 7 | Single-crystal foundry | Ni-Re-Ru single crystals | UEV pump, DFD Mk2 | kept (gates and risers remelted) |
+| 8 | Nitride magnet works | α″-Fe₁₆N₂ | UEV motor, piston, DFD Mk2 | voidable (NH₃/H₂ recycled; N₂ voided) |
+| 9 | SiC fibre plant | Hi-Nicalon S fibre | SiC/SiC | kept (CH₄, H₂ to the pyrolyser) |
+| 10 | CVI furnace | SiC/SiC, Wf/W | UEV hull, Mk4 first wall, DFD | kept (HCl to the cascade's acid stock) |
+| 11 | SNSPD foundry | WSi nanowire detectors | UEV sensor, entanglement, pulsar station | kept |
+| 12 | van der Waals stacker | hBN emitters, graphene modulators | optical computer, repeater | kept |
+| 13 | Photonic integration hall | `gtnn:optical_computer` | UEV circuit | kept |
+| 14 | Helium-3 polariser | polarised He-3 | Mk4 c3, gate example | kept (depolarised gas back to the cryogenic plant) |
+| 15 | Mk4 fusion ring | 16.8 M EU/t on D–He-3 | power, gate | generator (He-4 ash → EV cryo; tritium → hot cell) |
+| 16 | Quantum gas lab | degenerate Fermi gas model; gravity survey | harvester, containment, core drill | kept |
+| 17 | Entanglement station | quantum repeater node | UEV wireless link | kept |
+| 18 | Nebula collector | interstellar gas and dust | He-3, dust, Fe-60 | kept |
+| 19 | Interstellar dust lab | presolar grains, Fe-60 record | pulsar chart input, silicates | voidable (spent HF neutralised to CaF₂ → IV kiln) |
+| 20 | Pulsar timing station | pulsar navigation chart | UIV casing research | kept (data) |
+| 21 | Barnard core drill | Barnard core rock | Fe, Ni, Co, Re | kept |
+| 22 | Carbonyl refinery | carbonyl Fe, Ni, Co; Re-PGM residue | magnets, superalloy, Re | contained (Ni(CO)₄ never leaves the machine) |
+| 23 | White dwarf spectrograph | mass–radius chart | harvester | kept (data) |
+| 24 | Degenerate-matter harvester | degenerate matter | field generator | contained |
+| 25 | Containment works | degenerate pellets | UEV field generator, gate | contained |
+
+### Voltages and controllers
+
+- Early machines (1–14, 16, 17) run at UHV voltage, and their controllers cost a UHV hull, two UV components and two UHV circuits *(tune)*.
+- Machines after the UEV hull (15, 18–25) run at UEV voltage. Their controllers cost a UEV hull, two UEV components and two `gtnn:optical_computer` *(tune)*.
+- No machine runs above UEV voltage. Two or more UEV hatches give V[UIV], and no recipe asks for it (WorkableElectricMultiblockMachine.java:250-273).
+
+### 1. Calutron: `gtceu:calutron`, type `gtceu:calutron_separation` (Earth)
+
+- **What it gains:** electromagnetic isotope separation of solids, which a centrifuge cannot do at these masses.
+  - real: the Y-12 calutrons;
+  - Ca-48 today comes from Russia's Lesnoy calutrons, and ORNL restarted calutron-style enrichment for Ca-48 in 2018.
+- **Recipes:**
+  - c1: CaCl₂ (natural Ca, 0.19 % Ca-48) → Ca-48 (a 40 % enriched pass at 4,000 ticks, 1,966,080 EU/t *(tune)*);
+  - c2: Ca-48 pass 2 → 97 % Ca-48;
+  - c3: KCl → K-40;
+  - c4: LiCl (GTM lithium) → Li-6;
+  - c5: PuCl₃ from UHV's HFIR c4 (Pu-242 rich) → Pu-244;
+  - c6: Pu-242 pass 1 for the HFIR.
+- **Byproducts:** depleted Ca, K, Li and Pu streams return to stock, and depleted Pu goes to IV fuel fabrication's MOX row *(kept)*.
+- **Structure:** a racetrack magnet, 7 × 5 × 13 *(tune)*, with tank casings, a UV superconductor coil and a vacuum pump hatch.
+- **Crossings:** IV fuel fabrication (MOX), the IV hot cell (Pu), ZPM actinide partitioning, UHV HFIR.
+- **Risks:** the Ca-48 yield sets the whole superheavy chain's pace; 40 % per pass *(tune)*.
+- **Source:** Y-12; Lesnoy; ORNL Ca-48 (2018).
+
+### 2. Heavy-ion cyclotron: `gtceu:heavy_ion_cyclotron`, type `gtceu:heavy_ion_irradiation` (Earth)
+
+- **What it gains:** a calcium-48 beam with an ECR ion source and SRF cavities (line 38). The cyclotron is the only route to element 114 and above.
+- **Recipes** (c1–c5 take 48,000 ticks and 7,864,320 EU/t *(tune)*):
+  - c1: Pu-244 target + Ca-48 → flerovium recoil gas;
+  - c2: Cm-248 → livermorium;
+  - c3: Bk-249 → tennessine recoil;
+  - c4: Cf-249 → oganesson;
+  - c5: Am-243 → moscovium;
+  - c6: Xe beam (EV cryogenic plant xenon) on polycarbonate foil → ion-tracked foil (line 6), 1,966,080 EU/t.
+- **Byproducts:** activated targets and beam stops go to the IV hot cell's decay store *(contained)*.
+- **Structure:** 9 × 5 × 9 *(tune)*, with HTS magnet casings (LuV `hts_magnet_works`), SRF cavity blocks and a beam pipe.
+- **Crossings:** UV superfluid helium (SRF), the IV hot cell (targets), EV cryogenic xenon.
+- **Source:** JINR U-400M, RIKEN SRILAC, FRIB.
+
+### 3. Gas-filled recoil separator: `gtceu:recoil_separator`, type `gtceu:recoil_separation` (Earth)
+
+- **What it gains:** it separates single atoms from 10¹² beam particles a second. This is a step no other machine does.
+- **Recipes:** c1–c5 turn a recoil gas into a superheavy atom sample (3,932,160 EU/t *(tune)*). c3 uses a non-consumed helium-filled chamber.
+- **Byproducts:** the beam dump and scattered target go to the hot cell *(contained)*.
+- **Structure:** a dipole–quadrupole line, 3 × 5 × 15 *(tune)*.
+- **Source:** Dubna DGFRS-2 and GSI TASCA.
+
+### 4. Superheavy chemistry lab: `gtceu:superheavy_chemistry_lab`, type `gtceu:superheavy_chemistry` (Earth)
+
+- **What it gains:** gas-phase chromatography on gold surfaces (the COMPACT detector). It turns atoms into a stored tennessine sample and the census.
+- **Recipes:**
+  - c1: tennessine atoms + hot-cell-sealed capsule → `grindless:tennessine_sample` (stored for UIV);
+  - c2: Fl/Mc/Lv/Og atoms → `grindless:superheavy_census` (data, the UIV hook);
+  - c3: the volatility of flerovium on gold.
+- **Byproducts:** none outside the cell.
+- **Source:** GSI/Mainz flerovium chemistry (2022).
+
+### 5. Megabar press: `gtceu:megabar_press`, type `gtceu:megabar_synthesis` (Earth)
+
+- **What it gains:**
+  - 170–200 GPa and laser heating: the (La,Y)H₁₀ superhydride (real: Drozdov 2019; Semenok 2021);
+  - nanotwinned diamond from onion carbon (real: Huang 2014, Nature).
+- **Recipes:**
+  - c1: La–Y alloy + ammonia borane (line 8) → (La,Y)H₁₀ ingot (7,864,320 EU/t, 2,400 ticks *(tune)*);
+  - c2: onion carbon → nanotwinned diamond.
+- **Stated fiction:** a superhydride kept metastable at ambient pressure after a quench. In reality it decomposes below about 100 GPa, so its use is a named fiction in the doc, EMI and quest.
+- **Byproducts:** hydrogen is voided to the network's stock *(voidable)*.
+- **Structure:** a multi-anvil press, 7 × 7 × 7 *(tune)*, with nanotwinned diamond anvils after c2.
+- **Crossings:** the EV cascade (La, Y), ZPM diamond fab.
+- **Source:** Drozdov 2019; Semenok 2021; Huang 2014.
+
+### 6. Electron-beam furnace: `gtceu:electron_beam_furnace`, type `gtceu:electron_beam_refining` (Earth)
+
+- **What it gains:** cold-hearth melting in a vacuum, which takes refractory metals to 6N and Nb to RRR above 300.
+- **Recipes:**
+  - c1: Re pellet → 6N Re;
+  - c2: Hf;
+  - c3: Ta;
+  - c4: Nb → RRR Nb (line 38);
+  - c5: EB-PVD of yttria-stabilised zirconia on a blade (line 33);
+  - c6: nanodiamond anneal at 1,700 K → onion carbon (line 9).
+  
+  All rows run at 1,966,080 EU/t *(tune)*.
+- **Byproducts:** skulls (crust from the hearth) go to the EV platinum plant *(kept)*.
+- **Structure:** 5 × 5 × 7 *(tune)*, with UV vacuum hatches.
+- **Crossings:** the EV platinum plant.
+- **Source:** ALD Vacuum EB furnaces; the Pratt & Whitney EB-PVD process.
+
+### 7. Single-crystal foundry: `gtceu:single_crystal_foundry`, type `gtceu:single_crystal_casting` (Earth)
+
+- **What it gains:** Bridgman withdrawal with a grain selector. The result is a single-crystal Ni-Re-Ru blade (real: 4th-generation superalloys).
+- **Recipes:**
+  - c1: Ni-Re-Ru melt + ceramic shell → single-crystal blade (3,932,160 EU/t *(tune)*);
+  - c2: single-crystal pump impeller;
+  - c3: Brayton turbine wheel (DFD Mk2).
+- **Byproducts:** gates and risers are remelted *(kept)*.
+- **Crossings:** the EV platinum plant (Ru), EV cascade.
+- **Source:** Rolls-Royce/Pratt; NIMS TMS-138.
+
+### 8. Nitride magnet works: `gtceu:nitride_magnet_works`, type `gtceu:nitride_magnet_synthesis` (Earth)
+
+- **What it gains:** α″-Fe₁₆N₂ by low-temperature nitriding and strain. Real: Niron Magnetics 2022, from carbonyl iron powder.
+- **Recipes:**
+  - c1: carbonyl iron powder + NH₃ → Fe₁₆N₂ powder (3,932,160 EU/t *(tune)*);
+  - c2: bonded magnet;
+  - c3: magnet for the UEV motor and DFD Mk2.
+- **Byproducts:** NH₃/H₂ recycled, N₂ voided *(voidable)*.
+- **Crossings:** HV syngas (H₂).
+- **Source:** Niron Magnetics; Wang (Minnesota).
+
+### 9. SiC fibre plant: `gtceu:sic_fibre_plant`, type `gtceu:sic_fibre_spinning` (Earth)
+
+- **What it gains:** Yajima's route: polycarbosilane spun, e-beam cured, pyrolysed → near-stoichiometric Hi-Nicalon S fibre.
+- **Recipes:**
+  - c1: polycarbosilane → green fibre;
+  - c2: e-beam cure;
+  - c3: pyrolyse to SiC fibre (1,966,080 EU/t *(tune)*).
+- **Byproducts:** CH₄, H₂ to ZPM's methane pyrolyser *(kept)*.
+- **Crossings:** ZPM methane pyrolyser.
+- **Source:** Yajima 1975; Nippon Carbon.
+
+### 10. CVI furnace: `gtceu:cvi_furnace`, type `gtceu:chemical_vapour_infiltration` (Earth)
+
+- **What it gains:** slow chemical vapour infiltration of fibre preforms (weeks in reality, 9,600 ticks here *(tune)*).
+- **Recipes:**
+  - c1: SiC preform with BN interphase (UV boron nitride reactor) + MTS → SiC/SiC panel;
+  - c2: tungsten fibre preform + WF₆ → Wf/W divertor tile (Mk4 first wall).
+- **Byproducts:** HCl goes to the EV cascade's acid stock; HF to the IV kiln *(kept)*.
+- **Crossings:** UV BN reactor, IV fluorspar kiln, HV composite autoclave.
+- **Source:** GE LEAP CMCs; Wendelstein 7-X/IPP Wf/W.
+
+### 11. SNSPD foundry: `gtceu:snspd_foundry`, type `gtceu:snspd_fabrication` (Earth)
+
+- **What it gains:** WSi nanowire on a Ta₂O₅/SiO₂ Bragg mirror, HSQ e-beam patterned. This gives above 90 % detection efficiency at 1,550 nm (real: Marsili, NIST, 2013).
+- **Recipes:**
+  - c1: Bragg mirror wafer;
+  - c2: WSi film;
+  - c3: patterned detector (1,966,080 EU/t *(tune)*);
+  - c4: packaged detector with superfluid cooling → UEV sensor core.
+- **Crossings:** UV superfluid helium, UV zone refining (the Si wafer).
+- **Source:** Marsili 2013.
+
+### 12. van der Waals stacker: `gtceu:vdw_stacker`, type `gtceu:vdw_assembly` (Earth)
+
+- **What it gains:** dry-transfer stacking of hBN and graphene, which makes single-photon emitters and electro-optic modulators.
+- **Recipes:**
+  - c1: CVD hBN (line 19) → hBN emitter chip;
+  - c2: CVD graphene (line 20) → graphene modulator;
+  - c3: hBN-encapsulated graphene (1,966,080 EU/t *(tune)*).
+- **Source:** Tran 2016 (hBN emitters); Romagnoli 2018.
+
+### 13. Photonic integration hall: `gtceu:photonic_integration_hall`, type `gtceu:photonic_integration` (Earth)
+
+- **What it gains:** heterogeneous integration on one chip: SiN waveguides, thin-film lithium niobate, InAs quantum dots, SNSPDs and graphene modulators.
+- **Recipes:**
+  - c1: SiN wafer + LNOI → photonic circuit;
+  - c2: + QD + SNSPD → quantum photonic chip;
+  - c3: chip + UHV optical assembly → `gtnn:optical_computer` (UEV circuit; 7,864,320 EU/t, 1,200 ticks *(tune)*).
+- **Byproducts:** none *(kept)*.
+- **Crossings:** UV synchrotron (lithography), UHV MBE and foundry.
+- **Source:** PsiQuantum; Elshaari 2020 (review).
+
+### 14. Helium-3 polariser: `gtceu:helium3_polariser`, type `gtceu:spin_polarisation` (Earth)
+
+- **What it gains:** metastability-exchange optical pumping at 1,083 nm. This polarises helium-3, which raises the D–He-3 cross-section by about 1.5 (real: Kulsrud 1982).
+- **Recipes:**
+  - c1: He-3 + Yb fibre laser (UV fibre draw tower, line 24) → polarised He-3 (1,966,080 EU/t *(tune)*);
+  - c2: polarised D–He-3 fuel cell for Mk4 c3.
+- **Byproducts:** depolarised gas returns to the EV cryogenic plant *(kept)*.
+- **Crossings:** EV cryogenic plant, UV fibre draw tower.
+- **Source:** Kulsrud 1982; Gentile 2017 (MEOP review).
+
+### 15. Mk4 fusion ring: `gtceu:uev_fusion_reactor`, type GTM `gtceu:fusion_reactor` (Earth)
+
+- **What it gains:** GTM's fusion reactor class at UEV (FusionReactorMachine.java:308-313, `registerFusionTier`). It burns aneutronic fuels through ZPM's direct energy converter.
+- **Recipes** (*Fusion*):
+  - c1: D–He-3;
+  - c2: p–B11;
+  - c3: polarised D–He-3.
+- **Byproducts:**
+  - He-4 ash goes to the EV cryogenic plant;
+  - D–D side tritium goes to the IV hot cell decay store, which returns He-3 *(generator)*.
+- **Structure:** its own pattern. GTM's casing and coil switches cover only LuV, ZPM and UV (FusionReactorMachine.java:330-349). The Mk4 uses `grindless:uev_fusion_casing` and the HfTaCN coil (S0-6).
+- **Risks:** storage overflow; at UEV with 16 hatches it is 2,560,000,000 EU (FusionReactorMachine.java:326-327). S0-6 checks it is `long`.
+- **Source:** Monifactory helical fusion (LGPL, pattern only); TAE Technologies (p–B11); the Lunar He-3 studies.
+
+### 16. Quantum gas lab: `gtceu:quantum_gas_lab`, type `gtceu:quantum_degenerate_gas` (Earth orbit)
+
+- **What it gains:** degenerate Fermi gases in microgravity (real: NASA's Cold Atom Lab, 2018), which model degenerate matter.
+- **Recipes:**
+  - c1: Li-6 + K-40 → degenerate Fermi gas → `grindless:degenerate_eos_model` (the harvester and containment catalyst; the UIV neutron-matter hook);
+  - c2: an atom interferometer gravimeter → `grindless:barnard_gravity_survey` (the core drill catalyst);
+  - c3: the ULE cavity (line 40) as a non-consumed reference.
+  
+  All rows run at 1,966,080 EU/t *(tune)*.
+- **Crossings:** UV fibre draw tower (cooling lasers).
+- **Source:** Cold Atom Lab; DeMarco & Jin 1999.
+
+### 17. Entanglement distribution station: `gtceu:entanglement_station`, type `gtceu:entanglement_distribution` (Earth orbit)
+
+- **What it gains:** satellite entanglement distribution (real: Micius, 2017).
+- **Recipes:**
+  - c1: PPKTP (line 39) source + Eu:YSO memory + QD + SNSPD + hollow-core fibre (line 34) → `grindless:quantum_repeater_node`, the UEV wireless link (3,932,160 EU/t *(tune)*).
+- **Crossings:** UV fibre draw tower, UHV crystal furnace.
+- **Source:** Yin 2017 (Micius); Zhong 2015 (Eu:YSO memory).
+
+### 18. Nebula collector: `gtceu:nebula_collector`, type `gtceu:nebula_collection` (Alpha Centauri AB orbit)
+
+- **What it gains:** a magnetic scoop (a Bussard concept, at stated fiction scale) and aerogel dust traps (real: Stardust).
+- **Recipes:**
+  - c1: superhydride scoop coil (not consumed) → interstellar gas (7,864,320 EU/t *(tune)*);
+  - c2: silica aerogel tile (line 37) → dust-laden aerogel.
+- **Byproducts:** none *(kept)*.
+- **Crossings:** EV cryogenic plant (gas separation, line 26).
+- **Source:** Bussard 1960; NASA Stardust.
+
+### 19. Interstellar dust lab: `gtceu:interstellar_dust_lab`, type `gtceu:interstellar_dust_analysis` (Alpha Centauri AB orbit)
+
+- **What it gains:** grain extraction, HF demineralisation, presolar grains and accelerator mass spectrometry. This gives the iron-60 supernova record (real: Koll 2019; Wallner 2016, 2021).
+- **Recipes:**
+  - c1: dust-laden aerogel → extracted grains;
+  - c2: demineralised grains;
+  - c3: Fe-60 record (data);
+  - c4: silicate liquor → GTM electrolyser.
+- **Byproducts:** spent HF is neutralised to CaF₂ → IV kiln *(voidable)*.
+- **Crossings:** IV fluorspar kiln.
+- **Source:** Koll 2019; Wallner 2021.
+
+### 20. Pulsar timing station: `gtceu:pulsar_timing_station`, type `gtceu:pulsar_timing` (Alpha Centauri AB orbit)
+
+- **What it gains:** observatory step 10. X-ray pulsar timing with lobster-eye optics and silicon drift detectors (real: NICER/SEXTANT 2017), on UHV's nuclear clock, over a 4.37 ly baseline.
+- **Recipes:**
+  - c1: MCP optics (line 36) + SDDs (line 27) + nuclear clock → pulsar timing data;
+  - c2: timing data + the Fe-60 record → `grindless:pulsar_navigation_chart` (UIV casing research).
+- **Crossings:** UV fibre draw tower, UV zone refining, ZPM ion implanter.
+- **Source:** NICER/SEXTANT; NANOGrav 2023.
+
+### 21. Barnard core drill: `gtceu:barnard_core_drill`, type `vein_drilling` (Barnard b)
+
+- **What it gains:** drill step 14, the deep metal-rich crust.
+- **Recipes:** c1, with the gravity survey (not consumed) and a nanotwinned diamond bit (wears) → Barnard core rock (7,864,320 EU/t *(tune)*).
+- **Crossings:** the drill family (`steam/recipe_types.js:14`).
+
+### 22. Carbonyl refinery: `gtceu:carbonyl_refinery`, type `gtceu:carbonyl_refining` (Barnard b)
+
+- **What it gains:** the Mond process with CO from the HV syngas plant, through AE2.
+- **Recipes:**
+  - c1: Barnard rock + CO → Fe(CO)₅ + Ni(CO)₄ + Co₂(CO)₈;
+  - c2: decomposed → carbonyl iron powder, nickel, cobalt;
+  - c3: residue (Re, Os, Ir, Pt, W) → EV platinum plant.
+- **Byproducts:** Ni(CO)₄ never leaves the machine *(contained)*.
+- **Crossings:** HV syngas, EV platinum plant.
+- **Source:** Vale's Clydach refinery; BASF CIP.
+
+### 23. White dwarf spectrograph: `gtceu:white_dwarf_spectrograph`, type `gtceu:gravitational_redshift` (Sirius B orbit)
+
+- **What it gains:** the gravitational redshift of Sirius B (real: Barstow 2005; Joyce 2018, 80.4 km/s).
+- **Recipes:** c1, with ULE cavity + SNSPD → `grindless:mass_radius_chart` (harvester catalyst).
+- **Crossings:** UHV nuclear clock.
+
+### 24. Degenerate-matter harvester: `gtceu:degenerate_matter_harvester`, type `gtceu:degenerate_harvesting` (Sirius B orbit)
+
+- **What it gains:** named fiction. It pulls degenerate matter from Sirius B's surface and keeps it degenerate.
+- **Recipes:** c1, with the EOS model + mass–radius chart (not consumed) → degenerate matter (7,864,320 EU/t, 9,600 ticks *(tune)*).
+- **Byproducts:** *(contained)*.
+
+### 25. Containment works: `gtceu:degenerate_containment_works`, type `gtceu:degenerate_containment` (Sirius B orbit)
+
+- **What it gains:** UHV's Casimir exotic-matter stasis holds a degenerate pellet.
+- **Recipes:** c1, degenerate matter + exotic matter → degenerate pellet (UEV field generator).
+- **Byproducts:** *(contained)*.
+
+## Older machines, new modes
+
+Each row is a new recipe on a machine built in an earlier era. Every row runs in the older machine's own file, so it belongs to the package that names that file (*Build order*). Rows that only feed an input in without a new recipe (the heavy water plant's D₂, the superfluid helium plant's coolant) are crossings, not modes.
+
+| Machine (era) | Mode | Recipe | Feeds |
+|---|---|---|---|
+| Extraction cascade (EV, `ev/extraction_cascade.js:163`) | Zr/Hf thiocyanate–MIBK; Ta MIBK; Tb; La/Y | 4 rows *(tune)* | lines 7, 11, 13, 32, 33 |
+| Cryogenic plant (EV, `ev/cryogenic_plant.js:259`) | interstellar gas distillation; Xe; 6N He-3; He-4 ash recovery | 4 rows | lines 6, 23, 24, 26 |
+| Platinum plant (EV, `ev/platinum_plant.js:161`) | Barnard residue digestion; Ru; Ir crucible | 3 rows | lines 10, 12, 32 |
+| Fluorspar kiln (IV, `iv/fluorspar_kiln.js:218`) | HF for K₂TaF₇, WF₆, FFKM; CaF₂ return | 2 rows | lines 13, 17, 35 |
+| Hot cell (IV, `iv/hot_cell.js:197`, `tables/hot_cell.json`) | target wheels; decay store (Cf-252 → Cm-248, Bk-249 → Cf-249, T → He-3) | 3 table rows | lines 3, 4, 5, 23 |
+| Fuel fabrication plant (IV, `iv/uranium_cycle.js:295`) | depleted-Pu MOX | 1 row | line 2 by-product |
+| Syngas plant (HV, `hv/syngas_plant.js:136`) | CO-rich setting for the Mond process | 1 row | lines 10, 15 |
+| Actinide partitioning plant (ZPM, `zpm/actinides.js:203`) | Pu-242 recovery; Cm/Cf cut; Bk/Cf HDEHP cut | 3 rows | lines 2, 3, 4 |
+| Isotope column (ZPM, `zpm/saturn_siphon.js:138`) | ¹¹BF₃ | 1 row | line 25 |
+| Direct energy converter (ZPM, `zpm/fusion.js:163`) | Mk4 aneutronic plasmas, written final | 3 rows | lines 23, 25 |
+| Naquadria magnet works (ZPM, `zpm/magnet_works.js:208`, `tables/magnet_works.json`) | c6 UEV cell | 1 table row | *Power* |
+| Diamond lattice fab (ZPM, `zpm/qubits.js:43`) | nanodiamond feed | 1 row | line 9 |
+| Ion implanter (ZPM, `zpm/qubits.js:51`) | SDD drift rings | 1 row | line 27 |
+| Methane pyrolyser (ZPM, `zpm/outer_chemistry.js:35`) | floating-catalyst CNT | 1 row | line 31 |
+| Powder-in-tube line (UV, `uv/materials.js:35`) | superhydride wire | 1 row | line 7 |
+| Boron nitride reactor (UV, `uv/materials.js:243`) | BN interphase on SiC fibre | 1 row | line 16 |
+| Synchrotron (UV, `uv/accelerators.js:72`) | SiN lithography | 1 row | line 21 |
+| Zone refining tower (UV, `uv/detectors.js:163`) | FZ Si for SDDs; 7N In | 2 rows | lines 18, 21, 22, 27 |
+| Fibre draw tower (UV, `uv/photonics.js:189`) | Yb fibre; hollow-core; MCP multi-fibre; Li/K cooling lasers | 4 rows | lines 24, 34, 36; 16 |
+| Thruster works (UV, `uv/propulsion.js:189`) | DFD Mk1 (tier 7), DFD Mk2 (tier 9) | 2 rows | *Bridges* |
+| High flux reactor and transuranium facility (UHV, `uhv/transcurium.js:59`) | c4 Pu-242; Pu/Cm/Cf cuts | 3 rows | lines 2, 3, 4 |
+| MBE reactor (UHV, `uhv/photonics.js:74`) | InAs QDs | 1 row | line 22 |
+| Photonic foundry (UHV, `uhv/photonics.js:85`) | SiN + LNOI chips | 1 row | line 21; 13 |
+| Spark plasma sinterer (UHV, `uhv/propulsion.js:132`) | HfTaCN | 1 row | line 14 |
+| Crystal growth furnace (UHV, `uhv/crystals.js:72`) | TGG (Czochralski, Ir crucible); KTP flux | 2 rows | lines 32, 39 |
+| Swarm control station (UHV, `uhv/swarm.js:77`) | Alpha Centauri A row | 1 row (dimension list widened) | *Power* |
+| Solar probe bay (UHV, `uhv/swarm.js:91`) | Alpha Centauri A coronal map | 1 row | swarm row |
+| Warp gate (UHV, `server_scripts/grindless/uhv/gate.js`, landing in UHV-B7) | relay pairs for stations 9 and 10; c3 holds the UIV gate load | 2 rows | *Bridges*, *Gate to UIV* |
+
+**28 older machines** take a UEV mode: 3 EV, 3 IV, 1 HV, 6 ZPM, 6 UV, 9 UHV.
+
+**File order:**
+- A row added to another era's file runs where that file runs. It must not depend on a UEV startup registration loading first.
+- Every UEV item an older file uses is registered in `uev/foundation.js` (F1).
+- The integrator stamps the band in `tools/analysis/script_order.json`, which ships with v0.11.0.
+- A contract that widens another era's recipe type, or its dimension list (the swarm row), names the band as "assigned by integrator" and never relies on alphabetical order.
+
+## Family steps
+
+| Family | Step | Machine | Era before |
+|---|---|---|---|
+| Drill (`vein_drilling`, `steam/recipe_types.js:14`) | 14 | Barnard core drill (21) | 13: UHV cold-trap drill |
+| Observatory | 10 | pulsar timing station (20) | 9: UHV astrometer |
+| Fusion | Mk4 | Mk4 ring (15) | Mk3 (GTM, UV) |
+| Swarm | row 2 | Alpha Centauri A row | UHV Mercury orbit |
+| Warp gate | relays | stations 9 and 10 | UHV Proxima |
+| Mega (`docs/eras/mega.md`) | UEV | stellar forge + UEV parallel hatch | MEGA-1..9 and MEGA-I |
+
+## Reserve, and what was dropped
+
+### Reserve for UIV
+
+| Kept for UIV | Hook in UEV |
+|---|---|
+| Neutron stars, pulsars, neutronium, r-process | the pulsar navigation chart (20), the EOS model (16) |
+| Cygnus X-1 and the Penrose engine | none; journey.md:51 |
+| Elements 119 and 120 (a Ti-50 beam on Bk/Cf; RIKEN and JINR attempts) | the stored tennessine sample, the superheavy census, the cyclotron |
+| `gtnn:optical_mainframe` (UIV circuit) | the photonic integration hall |
+| A UIV fusion ring | the Mk4 pattern |
+| A UIV parallel hatch, ×16,384 | the UEV hatch (S-M3) |
+| GTCA's assembler modules | S0-8 result |
+
+### Considered and dropped
+
+- **Machines** (rule 7: convenience, no product of their own, or UIV):
+  - an ion-track membrane plant (the cyclotron + GTM's chemical bath do it);
+  - a superconducting magnet hall (an assembler row);
+  - a molten regolith electrolysis cell on Barnard b (EV's regolith cell on the Moon);
+  - a target fabrication lab (the hot cell's target wheel row);
+  - a standalone AMS (the dust lab's c3);
+  - a NEG getter plant (GTM chemistry);
+  - Epsilon Eridani's belt, Luhman 16, Wolf 359 (no product of their own);
+  - a neutron-star site (UIV).
+- **Lines** (they would have taken the count to 48):
+  - Ni and Co carbonyl (merged into line 15's chain);
+  - the optical computer assembly (assembly, no feedstock);
+  - the repeater node and the UEV cell (assemblies);
+  - the DFD motors (assemblies);
+  - the census, Fe-60, pulsar and mass–radius data (data, not matter);
+  - a second He-3 route from Jupiter (a second route to an existing product);
+  - an Eu:YSO crystal line (one Czochralski row on the crystal furnace; it is an input of machine 17).
+
+## Power on the wireless network
+
+- **The UEV wireless tier (W, a standalone serial package):**
+  - `withTiers` in `lv/wireless_energy.js:286-316` gets case 10, and `tables/wireless_energy.json` gets a UEV row;
+  - window caps, ×4 of UHV's *(tune)*: 167,772,160 / 335,544,320 / 1,342,177,280 / 5,368,709,120 EU;
+  - the 64 A cap is above the int maximum, so S0-5 checks every field is a `long`.
+- **The UEV cell:**
+  - a ZPM magnet works c6 row makes `grindless:uev_smes_cell` (251,658,240,000 EU, ×4 of UHV's, DECISIONS.md:437) *(tune)*;
+  - its link is the quantum repeater node (17);
+  - S0-5 checks the cell capacity in `long`.
+
+| Source | Place | EU/t | Doubled by `generators.js`? |
+|---|---|---|---|
+| Mk4 ring c1, D–He-3 through the DEC | Earth | 16,777,216 per ring, net *(tune)* | no, written final (`zpm/fusion.js` DEC rows) |
+| Mk4 ring c2, p–B11 through the DEC | Earth | 12,582,912 per ring *(tune)* | no, written final |
+| Mk4 ring c3, polarised D–He-3 | Earth | 25,165,824 per ring *(tune)* | no, written final |
+| Swarm station, Alpha Centauri A row c2 | Alpha Centauri AB orbit | 12,582,912 (×1.5 of 8,388,608) *(tune)* | no, written final (DECISIONS.md:447) |
+| Everything UHV built | — | as built | as built |
+
+### Gate example (the UIV gate's load: 16 A × V[UEV] = 134,217,728 EU/t for 60 s; it needs at least 141,281,819 EU/t in)
+
+| Source | EU/t |
+|---|---|
+| UHV mix, as built | 43,514,928 |
+| 4 Mk4 rings on c3 | 100,663,296 |
+| 2 swarm stations at Alpha Centauri A, c2 | 25,165,824 |
+| **In** | **169,344,048** |
+| **Into the bank (−5 %)** | **160,876,846** |
+
+- **Without polarisation:** 4 rings on c1 give 135,789,616 EU/t in and 129,000,135 into the bank, which fails. The polariser closes the gate.
+- **Rule 8:** every source burns fuel that a line makes (He-3 from three places, B-11 from the column, D from IV heavy water, oganesson pods for the swarm). There is no energy from nothing.
+
+## Fusion, and what is not fusion
+
+- **Mk4** is GTM's own fusion class, with `registerFusionTier(GTValues.UEV, ...)` (FusionReactorMachine.java:308-313), started from KubeJS startup (S0-6).
+  - It gets its own pattern and casings, because GTM's switches stop at UV (:330-349). It also needs UEV energy hatches (F1, S0-1).
+  - Storage is hatches × 2^(tier − LuV) × 10,000,000 (:326-327). With 16 UEV hatches that is 2,560,000,000 EU, above the int maximum (S0-6).
+  - The machine's voltage is the lower of its tier and its hatches (:276). A recipe whose `eu_to_start` is above storage is refused (:185, :294-298).
+- **The recipes are in GTM's `gtceu:fusion_reactor` type:**
+  - c1: `grindless:dhe3_fuel_mix` → helium plasma + protons (eu_to_start about 1,200,000,000 *(tune)*);
+  - c2: `grindless:pb11_fuel` → helium plasma;
+  - c3: `grindless:polarised_dhe3_fuel` → as c1 with ×1.5 output.
+
+  Premixed fuels keep our rows off GTM's D + He-3 Mk1 row. S0-6 dumps GTM's fusion rows to confirm there is no collision.
+- **Not fusion:**
+  - the DFD motors: they hold a fusion plasma in fiction only, as GCYR blocks;
+  - the nebula collector's scoop;
+  - degenerate matter, which is a named fiction (machines 24 and 25).
+- **Neutrons:** D–D side reactions make tritium, and it goes to the IV hot cell's decay store, which returns He-3 (line 23). Activation of the first wall is the Wf/W tile's wear *(tune)*.
+
+## Nothing one at a time
+
+- **Every UEV multiblock** takes `global.grindless.parallelHatch.part()` (`lib/parallel_hatch.js`), with GTM's UV hatch, ×256, until M lands.
+- **The UEV parallel hatch** (package M, after MEGA):
+  - 4^(UEV − EV) = ×4,096 (ParallelHatchPartMachine.java:37);
+  - the MEGA-S S-M3 mechanism (`docs/eras/mega.md:246-248`);
+  - not counted.
+- **The stellar forge** (`gtceu:stellar_forge`, package M), the mega family's UEV member (`docs/eras/mega.md` 4.11, 4.12, 6.6):
+  - EBF recipes only;
+  - effective temperature = coil temperature + a plasma bonus: +900 K with Mk4 helium plasma consumed per run *(tune)*;
+  - parallels = 2^floor(max(0, T − T_recipe) / 450), bound by energy;
+  - at most 16 tall;
+  - real ideas: Star Technology's HELL_FORGE_OC (MIT, credited);
+  - not counted;
+  - with the HfTaCN coil (12,600 K *(tune)*) and the bonus, T = 13,500 K: a 9,000 K recipe runs 2^10 = 1,024 copies, if the energy allows.
+- **The fallback** if MEGA's S-M1 or S-M3 fails (S0-10): built-in parallels in the forge, and the hatch stays UV ×256. Neither changes any UEV count.
+
+## AE2 between stars
+
+- Each warp gate relay (stations 9 and 10) seeds AE2 at its place, as UHV's Proxima relay did. Barnard b is fed from Alpha Centauri's orbit relay through the same mechanism as Proxima b.
+- The carbonyl refinery takes CO from the HV syngas plant through AE2 (line 15). The nebula collector's gas goes home to the EV cryogenic plant (line 26). Sirius B's pellets come home sealed.
+- No new AE2 mechanism. If UHV's relay mechanism changes in its last packages, B1 follows it.
+
+## New process lines
+
+Steps are the items between arrows, counted as UHV's. Every line ends in a UEV part or a stored item.
+
+| # | Line | Steps | By-products → destination |
+|---|---|---|---|
+| 1 | Calcium-48: calcite → CaCl₂ → Ca-48 40 % (calutron) → Ca-48 97 % → Ca-48 metal → ECR oven charge → Ca-48 beam | 7 | depleted Ca → stock; HCl → cascade |
+| 2 | Plutonium-244: Pu (IV hot cell) → PuO₂ target → irradiated target (HFIR c4) → Pu nitrate (ZPM partitioning) → Pu-242-rich PuO₂ → PuCl₃ → Pu-244 (calutron) → Pu-244 oxide → electrodeposited target | 9 | depleted Pu → IV MOX; fission products → hot cell |
+| 3 | Curium-248: Cf-252 (UHV HFIR) → aged Cf-252 (hot cell store) → Cf/Cm mix → Cm cut (ZPM partitioning) → Cm nitrate → CmO₂ → Cm-248 target | 7 | Cf remainder → stock |
+| 4 | Californium-249: Bk-249 (UHV, stored) → aged Bk (330 d, store) → Bk/Cf mix → HDEHP cut (ZPM partitioning) → Cf nitrate → Cf oxide → Cf-249 target | 7 | Bk → line 5 |
+| 5 | Tennessine: Bk-249 → BkO₂ → target wheel → recoil gas (cyclotron) → separated atoms → gold chromatography → sealed capsule → tennessine sample → stored for UIV | 9 | activated wheel → hot cell |
+| 6 | Ion-track membranes: Xe (EV cryo) → Xe beam charge → polycarbonate foil → tracked foil → UV-sensitised foil → etched membrane → filter cartridge | 7 | spent NaOH → neutralised, voided |
+| 7 | Superhydride: La/Y oxide (EV cascade) → La–Y alloy → La–Y foil → (La,Y)H₁₀ (press) → PIT billet (UV) → wire → strand → cable → cable cooled with superfluid He | 9 | H₂ → stock |
+| 8 | Ammonia borane: borax → boric acid → trimethyl borate → NaBH₄ → ammonia borane → pressed charge | 6 | methanol → recycled |
+| 9 | Nanotwinned diamond: CH₄ → CVD diamond (ZPM fab) → nanodiamond → cleaned nanodiamond → onion carbon (EB) → pellet → nanotwinned diamond → bit or anvil | 8 | H₂ → stock |
+| 10 | Rhenium: Barnard rock → carbonyl residue → digest (EV platinum) → Re liquor → NH₄ReO₄ → recrystallised NH₄ReO₄ → Re powder → pellet → 6N Re (EB) | 9 | Os, Ir, Pt → platinum plant |
+| 11 | Hafnium: zircon → (Zr,Hf)Cl₄ → thiocyanate liquor → MIBK cut (EV cascade) → Hf strip → HfO₂ → HfCl₄ → Kroll sponge → 6N Hf (EB) | 9 | Zr → line 33; MgCl₂ → electrolyser |
+| 12 | Single-crystal superalloy: Ni + Re + Ru + Ta → master melt → shell mould → SX casting → blade → heat-treated blade → bond coat → EB-PVD YSZ blade | 8 | gates → remelt |
+| 13 | Tantalum: tantalite → HF digest (IV kiln HF) → MIBK cut (EV cascade) → K₂TaF₇ → Na reduction → Ta powder → 6N Ta (EB) | 7 | NaF, KF → kiln; Nb → line 38 |
+| 14 | HfTaCN coil: HfO₂ (line 11) + Ta₂O₅ (line 13) → milled oxide–carbon blend → (Hf,Ta)C (carbothermal) → (Hf,Ta)CN → milled powder → SPS billet (UHV SPS) → heating element → coil block | 8 | none |
+| 15 | Iron nitride magnets: Barnard rock → Fe(CO)₅ → distilled Fe(CO)₅ → carbonyl iron powder → reduced powder → Fe₁₆N₂ powder → strain-annealed powder → bonded magnet → UEV motor | 9 | CO → recycled; Ni, Co → stock |
+| 16 | SiC/SiC: dichlorodimethylsilane → polydimethylsilane → polycarbosilane → green fibre → cured fibre → SiC fibre → BN-coated fibre (UV BN reactor) → woven preform → CVI matrix → machined panel → SiC/SiC plate | 11 | CH₄, H₂ → pyrolyser; HCl → cascade |
+| 17 | Wf/W divertor: tungsten → W wire → coated wire → woven preform → WF₆ (IV kiln HF) → CVI Wf/W → divertor tile | 7 | HF → kiln |
+| 18 | WSi SNSPD: FZ Si wafer (UV) → Ta₂O₅/SiO₂ mirror → WSi film → HSQ resist → patterned wire → etched detector → packaged detector → cooled detector (UV superfluid He) | 8 | none |
+| 19 | hBN: ammonia borane (line 8) → borazine → CVD hBN on Cu → transferred hBN → annealed hBN → emitter chip | 6 | Cu → recycled |
+| 20 | Graphene: CH₄ → electropolished Cu → CVD graphene → PMMA-coated → transferred → hBN-encapsulated graphene → modulator | 7 | Cu, PMMA → recycled |
+| 21 | SiN waveguides: FZ Si wafer (UV zone refining) → thermal oxide → LPCVD SiN → synchrotron lithography (UV) → etched waveguides → annealed SiN chip | 6 | NH₃ → stock |
+| 22 | InAs quantum dots: indium (LuV Io) → 7N In (UV zone refining) → arsenic source → GaAs substrate → InAs QD growth (UHV MBE) → micropillar → QD source | 7 | AsH₃ scrubbed → contained |
+| 23 | D–He-3 power: He-3 (EV Moon, ZPM Saturn, nebula) → 6N He-3 (EV cryo) → D₂ (IV heavy water) → D–He-3 mix → Mk4 plasma → DEC power (ZPM) → He-4 ash → recovered He-4 (EV cryo) | 8 | tritium → hot cell → He-3 |
+| 24 | Polarised He-3: He-3 → 6N He-3 → Yb fibre (UV draw tower) → 1,083 nm laser → MEOP cell → polarised He-3 → polarised fuel | 7 | depolarised gas → cryo |
+| 25 | Proton–boron: borax → boric acid → BF₃ → ¹¹BF₃ (ZPM column) → ¹¹B powder → p–¹¹B pellet → Mk4 c2 | 7 | ¹⁰BF₃ → hot cell shielding |
+| 26 | Nebula gas: interstellar gas → compressed gas → cryogenic fractions (EV) → H/D → He-3/He-4 (UV superfluid flush) → Ne | 6 | none |
+| 27 | Silicon drift detectors: polysilicon → FZ Si (UV zone refining) → oxidised wafer → drift rings (ZPM implanter) → annealed wafer → metallised → SDD | 7 | none |
+| 28 | Degenerate matter: Sirius B → degenerate matter → stasis field (UHV Casimir) → contained pellet → field generator core → UEV field generator | 6 | none (fiction, contained) |
+| 29 | Lithium-6: lithium → LiCl → Li-6 (calutron) → Li-6 metal → oven charge → laser-cooled Li-6 → Fermi gas | 7 | Li-7 → stock |
+| 30 | Potassium-40: KCl → K-40 chloride (calutron) → K-40 metal → dispenser → cooled cloud → Fermi mixture → EOS model | 7 | K-39 → stock |
+| 31 | CNT muscles: CH₄ (ZPM pyrolyser) → floating-catalyst CNT → CNT sock → densified yarn → twisted yarn → coiled muscle → UEV robot arm | 7 | Fe catalyst → stock |
+| 32 | TGG isolator: Tb (EV cascade) + Ga → oxides → co-precipitated hydroxide → calcined TGG powder → Ir crucible (EV platinum) → TGG boule (UHV crystal furnace) → polished rod → Faraday isolator | 8 | Ir → recycled |
+| 33 | YSZ: Zr (line 11) → ZrO₂ → Y₂O₃ (EV cascade) → YSZ powder → EB-PVD ingot → coated blade | 6 | none |
+| 34 | Hollow-core fibre: silica tube → capillaries (UV draw tower) → stacked preform → caned preform → pressurised draw → coated fibre | 6 | none |
+| 35 | FFKM seals: HF (IV kiln) → CHClF₂ → TFE → PMVE → FFKM rubber → cured seal | 6 | HCl → cascade |
+| 36 | MCP optics: lead glass → etchable-core tube → multi-fibre (UV draw tower) → fused boule → sliced plate → etched, reduced plate → lobster-eye MCP | 7 | spent acid → neutralised |
+| 37 | Silica aerogel: SiCl₄ + ethanol → TEOS → sol → gel → aged gel → aerogel tile (supercritical CO₂) | 6 | ethanol, CO₂ → recycled |
+| 38 | SRF cavities: Nb (line 13) → RRR Nb (EB) → half-cells → welded cavity → electropolished → Sn vapour diffusion → Nb₃Sn cavity → cooled cavity (UV superfluid He) | 8 | none |
+| 39 | PPKTP: KH₂PO₄ + TiO₂ → KTP flux → KTP crystal (UHV furnace) → wafer → electrode pattern → poled PPKTP → coated → SPDC source | 8 | flux → recycled |
+| 40 | ULE cavity: SiCl₄ + TiCl₄ → flame soot → ULE boule → spacer → mirrored spacer (line 18's mirrors) → optical cavity → vacuum-housed reference | 7 | HCl → cascade |
+
+**Totals:** 40 lines, 295 steps, an average of 7.4, none under 6.
+
+**Weakest claims:**
+- Line 28 is fiction and says so.
+- Lines 8, 33, 34, 35 and 37 are six steps each, and are real industrial chains.
+- Line 6's polycarbonate is a new F1 material.
+
+### Crossings with lines two or more eras back (UV and older)
+
+| # | UEV line or machine | Older line or machine | Era |
+|---|---|---|---|
+| 1 | line 2 | hot cell Pu stock | IV |
+| 2 | line 2 | actinide partitioning plant | ZPM |
+| 3 | calutron (line 2 by-product) | fuel fabrication plant MOX | IV |
+| 4 | line 3 | actinide partitioning plant | ZPM |
+| 5 | line 3 | hot cell decay store | IV |
+| 6 | line 4 | hot cell decay store | IV |
+| 7 | line 4 | actinide partitioning plant | ZPM |
+| 8 | line 5 | hot cell (target wheel, capsule) | IV |
+| 9 | cyclotron (2) | HTS magnet works | LuV |
+| 10 | line 6 | cryogenic plant (Xe) | EV |
+| 11 | line 7 | extraction cascade (La, Y) | EV |
+| 12 | line 7 | powder-in-tube line | UV |
+| 13 | line 7 | superfluid helium plant | UV |
+| 14 | line 9 | diamond lattice fab | ZPM |
+| 15 | line 10 | platinum plant | EV |
+| 16 | line 10 | syngas plant (CO) | HV |
+| 17 | line 11 | extraction cascade (MIBK) | EV |
+| 18 | line 12 | platinum plant (Ru) | EV |
+| 19 | line 13 | fluorspar kiln (HF) | IV |
+| 20 | line 13 | extraction cascade | EV |
+| 21 | line 15 | syngas plant (CO, H₂) | HV |
+| 22 | line 16 | boron nitride reactor | UV |
+| 23 | SiC fibre plant (9) | methane pyrolyser | ZPM |
+| 24 | line 17 | fluorspar kiln (WF₆) | IV |
+| 25 | line 18 | zone refining tower | UV |
+| 26 | line 18 | superfluid helium plant | UV |
+| 27 | line 21 | synchrotron | UV |
+| 28 | line 21 | zone refining tower | UV |
+| 29 | line 22 | Io surface indium | LuV |
+| 30 | line 22 | zone refining tower | UV |
+| 31 | line 23 | heavy water plant | IV |
+| 32 | line 23 | regolith cell He-3 (Moon) | EV |
+| 33 | line 23 | Saturn siphon He-3 | ZPM |
+| 34 | line 23 | direct energy converter | ZPM |
+| 35 | line 23 | cryogenic plant (He-4) | EV |
+| 36 | line 23 | hot cell decay store (tritium) | IV |
+| 37 | line 24 | cryogenic plant | EV |
+| 38 | line 24 | fibre draw tower | UV |
+| 39 | line 25 | isotope column | ZPM |
+| 40 | line 25 | direct energy converter | ZPM |
+| 41 | line 26 | cryogenic plant | EV |
+| 42 | line 26 | superfluid helium plant | UV |
+| 43 | line 27 | zone refining tower | UV |
+| 44 | line 27 | ion implanter | ZPM |
+| 45 | line 31 | methane pyrolyser | ZPM |
+| 46 | line 32 | extraction cascade (Tb) | EV |
+| 47 | line 32 | platinum plant (Ir) | EV |
+| 48 | line 33 | extraction cascade (Y) | EV |
+| 49 | line 34 | fibre draw tower | UV |
+| 50 | line 35 | fluorspar kiln | IV |
+| 51 | line 36 | fibre draw tower | UV |
+| 52 | line 38 | superfluid helium plant | UV |
+| 53 | quantum gas lab (16) | fibre draw tower | UV |
+| 54 | DFD motors | thruster works | UV |
+| 55 | UEV cell | naquadria magnet works | ZPM |
+| 56 | dust lab (19) | fluorspar kiln (CaF₂) | IV |
+
+**56 crossings**: 13 EV, 11 IV, 2 HV, 2 LuV, 12 ZPM, 16 UV.
+
+## Quests
+
+Short, in English, each with a small reward. They never block a recipe (rule 5). C2 builds them (`tools/quests/uev-chapter/`, `pl-data-uev.mjs`).
+
+| Part | Quests | Ends with |
+|---|---|---|
+| 1. UEV foundation | 4 | UEV hull, HfTaCN coil, superhydride cable |
+| 2. Superheavy | 6 | tennessine sample stored, census |
+| 3. Under pressure | 6 | nanotwinned diamond, SX blade, SiC/SiC plate |
+| 4. Light | 6 | `gtnn:optical_computer`, quantum repeater node |
+| 5. Mk4 | 4 | a c3 run, the DEC row, polarised He-3 |
+| 6. Alpha Centauri | 5 | DFD Mk1, station 9, interstellar gas, pulsar chart |
+| 7. Barnard b | 4 | core drill, carbonyl iron, Fe₁₆N₂ motor |
+| 8. Sirius B | 5 | DFD Mk2, station 10, mass–radius chart, degenerate pellet |
+| 9. Gate | 3 | UIV casing research, the 60 s load |
+
+43 quests *(tune)*. Fiction quests (the nebula yield, the superhydride quench, degenerate matter) say so in their text.
+
+## Gate to UIV
+
+| What is built or run | What it tests |
+|---|---|
+| `gtceu:uiv_machine_casing` researched with the pulsar navigation chart | Alpha Centauri, the dust lab, the SDD and MCP lines |
+| 16 A × V[UEV] = 134,217,728 EU/t for 60 s over the network, on the warp gate's c3 at Sirius B orbit | the Mk4 c3, the polariser, the swarm row, the W package |
+| A stored tennessine sample, a degenerate pellet and the EOS model | the superheavy chain, Sirius B, Earth orbit |
+| 4 `gtnn:optical_computer` from the hall | the photonics lines |
+| One level 10 flight | the DFD Mk2, Barnard's rhenium and magnets |
+| One representative run per new place | the site rules and stations |
+
+- **It unlocks:** the UIV substage. In it, the hidden `gtnn:optical_mainframe` becomes a target, and UIV's design starts from the reserve.
+- **It cannot unlock:**
+  - anything of MAX+ (DECISIONS.md:450: the Hyper Stargate, creative items);
+  - a neutron-star site;
+  - a UIV hull, which needs UIV's own S0-1.
+
+  UEV adds no creative item or stargate block. Its MAX+ hooks are the pulsar chart, the census, the EOS model and the tennessine sample.
+
+## Validator (`-Tier uev`)
+
+- **Calcium-48, potassium-40, lithium-6 and plutonium-244 only from the calutron.**
+- **Superheavy atoms, the tennessine sample and the census only from the cyclotron, the recoil separator and the chemistry lab.**
+- **(La,Y)H₁₀ and nanotwinned diamond only from the megabar press. Single-crystal parts only from the foundry. Fe₁₆N₂ only from the nitride magnet works.**
+- **`gtnn:optical_computer`:**
+  - it comes only from the photonic integration hall;
+  - it is at `uev`, and `gtnn:optical_mainframe` stays hidden;
+  - GT--'s own recipe for it stays removed.
+- **The Mk4's plasmas only from the Mk4. The Mk4, the DEC rows and the swarm's Alpha Centauri row are written final and not in `power/generators.js`'s list.**
+- **Interstellar gas, dust and the pulsar navigation chart only from Alpha Centauri AB orbit. Barnard core rock and carbonyl iron only from Barnard b. Degenerate matter, the mass–radius chart and pellets only from Sirius B orbit. The EOS model and the repeater node only from Earth orbit.**
+- **Four substages:**
+  - `uev` (Earth and Earth orbit);
+  - `uev-alpha` and `uev-barnard` (in parallel, after the DFD Mk1);
+  - `uev-sirius` (after `uev-barnard`).
+  
+  No Earth recipe takes a far-place product before its substage.
+- **Nothing hand-gathered;** no UIV item in a UEV recipe.
+- **C1 re-counts** the lines' arrows (295 steps, 40 lines) and the 56 crossings.
+
+## Mods and integration
+
+| Mod | Use | Spike |
+|---|---|---|
+| GregTech Modern 7.5.3 | KubeJS UEV hull and energy hatches with `highTierContent` off; `registerFusionTier`; parallel hatch | S0-1, S0-6 |
+| GCYR 0.2.9 | datapack solar systems and planets; tier 7 and 9 motors through `createCustom` | S0-2, S0-3 |
+| GT-- (gtnn, AGPL, in game) | `gtnn:optical_computer` unhidden at `uev` with our recipe | S0-1 |
+| GT Community Additions | elevator miner and pump: unhidden only if they form with buses | S0-8 |
+| AE2 | relays as at UHV | — |
+| FTB Quests, FTB Chunks | chapter, chunk loading | — |
+
+### The `highTierContent` decision: off, with KubeJS generation
+
+- **Evidence:**
+  - the config turns on with the config file, an addon's `requiresHighTier()`, or dev mode (GTCEuAPI.java:47-53);
+  - ON widens GTM's tier sets (GTMachineUtils.java:103-108, :143): every hull, hatch and bus (GTMachines.java:158-168, 617-704), the quantum chest and tank (:569, :572), the 4/16/64 A hatches (:722-814), lasers (:1058) and UHV–OpV components (GTItems.java:703-1405);
+  - it adds **no recipes** ("leaves UHV+ machine recipes to be implemented by addons", MetaTileEntityLoader.java:1223), and no circuits, cables, coils or fusion (`docs/research/space/gtm-tiers.md:32-33`).
+
+  ON would put hundreds of recipe-less ids into the registry, UHV single blocks among them. That changes UHV after it shipped, which the user ruled out.
+- **Choice:** keep it OFF. F1 registers only what UEV needs:
+  - `gtceu:uev_machine_hull`, `gtceu:uev_energy_input_hatch`, `gtceu:uev_energy_output_hatch`;
+  - the UEV wireless tier (W) and the UEV parallel hatch (M);
+  - the `grindless:uev_*` components, in Monifactory's `Post_UV_Components.js` pattern (LGPL, credited).
+
+  `gtceu:uev_machine_casing` already exists with no recipe (UHV S0); F1 gives it one.
+- **S0-1** registers these with the config off, dumps the registry delta and checks for no clash with GTM's own names. If KubeJS cannot make a tiered energy hatch, the fallback is ON with mass hiding; S0-1 records the id count it adds, and the orchestrator decides.
+- **Save risk:** if the config were turned on later, GTM would register the same `gtceu:uev_*` ids. The pack locks the config (*Save compatibility*).
+
+**Startup:** `uev/foundation.js` (F1), one file per package, `lv/wireless_energy.js` (W), `lib/mega.js` (M), DFD motors in `uev/travel.js` (B1); their thruster works rows in `server_scripts/grindless/uv/propulsion.js`.
+**Server:** `server_scripts/grindless/uev/*.js`; older-era rows in their own files (*Older machines*).
+**Data:** `data/gcyr/gcyr/planets/` (and the solar system files S0-3 names), `tables/stations.json`, `tables/sunlight.json`, `tables/wireless_energy.json`, `tables/hot_cell.json`, `tables/magnet_works.json`, `tables/crystals.json`, `tables/fusion_mk4.json` (new).
+
+## Save compatibility
+
+- Nothing registered is removed. New ids only.
+- The new dimension ids (`grindless:alpha_centauri_orbit`, `grindless:barnard_b`, `grindless:sirius_b_orbit`) never change once shipped.
+- `highTierContent` stays off and is written into the shipped `gtceu.yaml`. A note in the release says why: turning it on later would collide with our `gtceu:uev_*` ids (S0-1 records the exact list).
+- **Older-file rows** add recipes only. The swarm station's dimension list is widened, never narrowed.
+- **The Mk4's pattern is new.** GTM's three rings are untouched.
+- **C3 reopens a v0.11.0 save** and checks that UHV machines, stations 7–8 and the network are intact.
+
+## Risks
+
+| Risk | Effect | Mitigation |
+|---|---|---|
+| GCYR datapack solar systems don't load (S0-3) | no new places | gate-only arrival with a placed platform (UHV S0-7 teleport) |
+| GCYR caps rocket tiers at 9 (S0-2) | no level 10 | Sirius B at tier 9, reached only through the Alpha Centauri relay |
+| `registerFusionTier` from KubeJS fails, or storage overflows int (S0-6) | no Mk4 | a KubeJS multiblock with the `fusion_reactor` type and our own start logic; power then from the DEC rows on a GTM ring with UEV recipes |
+| A KubeJS UEV energy hatch fails (S0-1) | no UEV voltage | `highTierContent` ON with mass hiding (orchestrator) |
+| The 64 A wireless cap or the cell overflows (S0-5) | wrong caps | cap the window at the int maximum *(tune)*; the gate's 16 A fits |
+| A KubeJS coil isn't read by the EBF (S0-7) | no HfTaCN | the Tritanium coil plus the forge bonus; HfTaCN as a part only |
+| MEGA S-M1 or S-M3 unproven (S0-10) | no forge or ×4,096 | built-in parallels; hatch stays ×256 |
+| 25 machines against a 42 guideline | the size target is missed | stated; orchestrator's question 6 |
+| Long flights on the 4 GB client | out of memory | one leg per run (UHV rule) |
+| Fiction items (superhydride quench, scoop yield, degenerate matter) | realism | named fiction in the doc, EMI and quests |
+| Era length | a long era | substages: Alpha and Barnard in parallel |
+| UHV's last packages shift an assumption | contracts drift | *Inherited* re-checked before F1 |
+
+## Build order
+
+UEV is built in packages after v0.11.0, as UHV was. Each package below is one work-package issue (`.github/ISSUE_TEMPLATE/work-package.yml`), and its contract is written so the issue can be filled from this section alone:
+- id, objective, allowed and prohibited files;
+- references, dependencies, invariants;
+- acceptance, tests, agent and commits.
+
+Each package's rationale is the machine sections it cites.
+
+**Test bands** are assigned by the integrator when it opens each issue (`tools\test\Get-GGTestZone.ps1 -Next` after UHV-C3's row). The worker adds only that row to `tools/test/zones.json`. F1, F2, C1 and C2 have no native test and no band.
+
+**Script load-order bands** (`tools/analysis/script_order.json`, which ships with v0.11.0) are integrator-owned. A contract never depends on implicit file order. Every cross-file mutation (an older era's recipe type or dimension list widened, a row in another era's file that reads a UEV id) names its band as "assigned by integrator".
+
+### Common to every package
+
+UHV's *Common to every package* (`docs/eras/uhv.md:1017-1031`) applies with `uhv` replaced by `uev` in every path. Each contract below lists only what differs. The changes for UEV:
+
+- **Allowed, always:**
+  - `pack/kubejs/startup_scripts/grindless/uev/<name>.js`, `pack/kubejs/server_scripts/grindless/uev/<name>.js` and `pack/kubejs/client_scripts/grindless/uev_<name>_lang.js`;
+  - new tables `pack/kubejs/data/grindless/tables/<name>*.json`;
+  - `tools/assets/Build-UEV<Name>Textures.ps1` and its outputs;
+  - `pack/kubejs/assets/emi/recipe/additions/grindless/uev_<name>_*.json`;
+  - `tools/analysis/test/uev-<name>.test.mjs`;
+  - `tools/test/overlay/kubejs/server_scripts/gg_test_uev_<name>.js` and the package's row in `tools/test/zones.json`.
+- **Prohibited, always:**
+  - `pack/index.toml`, `pack/pack.toml`, `hidden_until.json`;
+  - `pack/kubejs/*/grindless/lib/**`;
+  - `AGENTS.md`, `docs/STATUS.md`, `DECISIONS.md`, `CREDITS.md`;
+  - every `.snbt`;
+  - `tools/analysis/script_order.json`;
+  - any older file the contract does not list.
+- **Older machines:** each contract lists the older files and table rows it may touch. A file belongs to one package until that package merges (*Parallel and serial*). A row in an older file adds a recipe only; it never edits an existing row.
+- **Invariants, always:**
+  - no UEV recipe takes a UIV-only input (a UIV hull or casing, `gtnn:optical_mainframe`, anything in *Reserve for UIV*);
+  - no UEV recipe takes a UEV output before the machine that makes it;
+  - no Earth recipe takes an Alpha Centauri, Barnard or Sirius product before its substage;
+  - the Mk4, its DEC rows and the swarm's Alpha Centauri row are written at their final figures and not added to `power/generators.js`'s list;
+  - calcium-48, potassium-40, lithium-6 and plutonium-244 only from the calutron;
+  - tennessine and the census only from machines 2–4;
+  - UHV's invariants hold: one recipe per lookup path, written byproduct destinations, no removed or renamed id, *(tune)* figures free while routes, catalysts and sites stay fixed.
+- **Tests:** T0 is `powershell -NoProfile -ExecutionPolicy Bypass -File tools\Check-Fast.ps1`. T1 is the one native test the contract names, run once in its band, on the Linux VM first (`docs/testing/`). The bench runs one JVM per slot.
+- **Repairs and agent:** at most 2 repairs, then escalate with the triage output, the suspected `path:line` and the attempts. The implementer (Sonnet) runs each package unless the contract says otherwise. Opus is used only for a cross-system contradiction.
+- **Proof reuse:**
+  - a plain recipe multiblock through `lib/patterns.js` with no new mechanism needs no T1 beyond the recipe lookup check;
+  - LuV to UHV proved the helper, the dimension allowlist, the station chunks, the wireless hatches, the written-final generators, the research re-registration, the GCYR `createCustom` motor and the swarm station;
+  - the T1s below name only what is new.
+
+### Spikes (S0): disposable, before any permanent id
+
+Spikes run in the S0 band, before F1:
+- **Files:** they stay in the bench overlay and in the S0 row of `tools/test/zones.json`. They register nothing in `pack/`.
+- **Result:** each answers one question and returns pass or fail with its run id.
+- **On a fail:** the named package's contract changes before that package opens.
+- **Write-up:** the S0 worker writes the results to `docs/research/uev-s0.md`.
+
+| Spike | Question | If it fails | Changes |
+|---|---|---|---|
+| **S0-1** | With `highTierContent` off, KubeJS registers `gtceu:uev_machine_hull`, `gtceu:uev_energy_input_hatch` and `gtceu:uev_energy_output_hatch` (2 A, and a 16 A pair if the builder allows). They form in one of our multiblocks and in GTM's assembly line, and the registry delta against v0.11.0 is dumped.<br>The dump also covers:<ul><li>`gtceu:uiv_machine_casing`;</li><li>`gtnn:optical_computer` and `gtnn:optical_mainframe` with their GT-- recipes;</li><li>GTM's calcium, potassium, lithium, hafnium, tantalum, rhenium, ruthenium, terbium, lanthanum, yttrium, plutonium-244, curium, californium and polycarbonate.</li></ul> | `highTierContent` ON with mass hiding (orchestrator decision; S0-1 records how many ids that adds); every missing material is registered as `grindless:` in F1 | F1, W, A7, every package |
+| **S0-2** | A `createCustom` GCYR motor at tier 7 with UV's tier 11 tank builds a level 9 rocket, and a tier 9 motor builds a level 10 rocket. Both launch to a datapack planet of that tier and return. | Sirius B orbit is tier 9, reached only through the Alpha Centauri relay; the DFD Mk2 is dropped and its parts go into the relay | B1, B4 |
+| **S0-3** | A datapack adds GCYR solar systems and planets for Alpha Centauri (an orbit), Barnard (b, a surface) and Sirius (B orbit), with their tiers, sky renderers and orbit dimensions, and keeps every older id | arrival by the warp gate only, with a placed platform (UHV S0-7 teleport) | B1, B2, B3, B4 |
+| **S0-4** | A ninth and a tenth `more` row in `tables/stations.json` deploy two stations that keep across a disk save | escalation: `lib/stations.js` changes in F2 | F2, B1 |
+| **S0-5** | `withTiers` case 10 caps (167,772,160 to 5,368,709,120 EU) and a 251,658,240,000 EU cell are stored and reported as `long`; the table accepts `grindless:quantum_repeater_node` as a link | each figure is capped at the largest safe value, recorded; the gate's 16 A still fits | W |
+| **S0-6** | `registerFusionTier(GTValues.UEV, ...)` from KubeJS startup registers a ring with our pattern and casing that forms with UEV hatches. It stores 2,560,000,000 EU at 16 hatches (long) and starts a recipe with `eu_to_start` about 1.2 G. A dump of GTM's `fusion_reactor` rows shows that our premixed fuels collide with nothing. | a KubeJS multiblock with the `gtceu:fusion_reactor` type and our own start logic | F1, A7 |
+| **S0-7** | A KubeJS coil block at 12,600 K is read by GTM's EBF and by `lib/mega.js`'s `coilParallel` | the Tritanium coil plus the forge bonus; HfTaCN becomes a part only | F1, A5, M2 |
+| **S0-8** | GTCA's elevator miner and pump modules form with buses on UHV's elevator and run a KubeJS recipe | they move to `never`, with a note | F2 |
+| **S0-9** | A KubeJS material `grindless:lay_superhydride` with cable properties at V[UEV], 4 A, zero loss, makes a working `wireGtSingle` and cable | the UEV hull and hatches take UHV superconductor wire ×4; superhydride is a component item; UEV machines run on wireless hatches | F1, A3 |
+| **S0-10** | Run after MEGA-S and MEGA-1..9: a KubeJS UEV `ParallelHatchPartMachine` (tier 10) reports 4,096 and forms in a GTM mega and in one of ours; `lib/mega.js` accepts a plasma bonus | the forge gets built-in parallels; the hatch stays UV ×256 (or UHV ×1,024 if MEGA-0b landed) | M1, M2 |
+| **S0-11** | The atmosphere, temperature and gravity that GCYR loads for the three new places | figures recorded; the site rules stay "no combustion, sealed machines" | B1–B4 |
+
+Order:
+1. S0-1 first, because it fixes F1's list.
+2. S0-2, S0-3 and S0-4, because they fix B1.
+3. S0-5, S0-6, S0-7, S0-8, S0-9 and S0-11.
+4. S0-10 last, when MEGA has landed.
+
+### Foundation (serial)
+
+#### F1. Registrations
+
+- **Objective:** every UEV material, item and shared block that more than one package uses exists, with names and textures and no recipe. The only exception is the UEV hull, hatch and casing recipes, which every machine needs.
+- **`<name>`:** `foundation`.
+- **What:**
+  - the UEV tier: `gtceu:uev_machine_hull` and the UEV energy input and output hatches (S0-1); recipes for the hull, the hatches and `gtceu:uev_machine_casing` (superhydride cable, Mk4 helium plasma);
+  - components `grindless:uev_electric_motor`, `uev_electric_pump`, `uev_conveyor_module`, `uev_electric_piston`, `uev_robot_arm`, `uev_sensor`, `uev_emitter` and `uev_field_generator`, in Monifactory's `Post_UV_Components.js` pattern (LGPL, credited). Their recipes are in the packages that make their parts: the motor in A5, the arm in A8, the field generator in B4, and the rest in A6;
+  - the HfTaCN coil block (12,600 K *(tune)*, S0-7), `grindless:uev_fusion_casing`, the containment casing (24, 25) and the cleanroom-grade photonic casing (11–13);
+  - materials and fluids missing from S0-1's dump: calcium-48, potassium-40, lithium-6, plutonium-244, curium-248, californium-249, tennessine, (La,Y)H₁₀ (S0-9), ammonia borane, Fe₁₆N₂, Fe(CO)₅, HfTaCN, SiC/SiC, WSi, TGG, PPKTP, FFKM, polycarbonate, ULE glass, the interstellar gas fractions;
+  - the premixed fuels: `grindless:dhe3_fuel_mix`, `pb11_fuel`, `polarised_dhe3_fuel`;
+  - items made by one package and used by another:
+    - targets and beams: the Ca-48 beam, the target wheel, the tennessine sample and the superheavy census;
+    - Earth-orbit products: the EOS model, the gravity survey and the quantum repeater node;
+    - charts: the pulsar navigation chart and the mass–radius chart;
+    - Sirius products: degenerate matter and the degenerate pellet;
+    - parts: the SRF cavity, the SX blade, the SiC/SiC plate, the Wf/W tile, the SNSPD, the QD source, the SDD, the MCP, the aerogel tile, the hollow-core fibre, the Faraday isolator and the bonded Fe₁₆N₂ magnet;
+    - Barnard rock;
+    - `grindless:uev_smes_cell`;
+  - the DFD Mk1 and Mk2 motor ids are registered by B1 (S0-2), not here.
+- **Allowed:** the common set, plus:
+  - `startup_scripts/grindless/uev/foundation.js` and `server_scripts/grindless/uev/foundation.js` (the hull, hatch and casing recipes only);
+  - `client_scripts/grindless/uev_foundation_lang.js`;
+  - `tools/assets/Build-UEVFoundationTextures.ps1` and its outputs.
+- **References:**
+  - *Our multiblocks* (the audit) and each machine's *Recipes*; *Mods and integration* (the `highTierContent` decision);
+  - patterns: `startup_scripts/grindless/uhv/foundation.js`, `tools/analysis/test/uhv-foundation.test.mjs` and Monifactory's `Post_UV_Components.js`.
+- **Depends on:** S0-1, S0-6 (the casing), S0-7 (the coil), S0-9 (the cable).
+- **Invariants:**
+  - no machine;
+  - ids exactly as in this file (a changed id is an escalation);
+  - the `gtceu:uev_*` ids are exactly those S0-1 recorded.
+- **Acceptance:**
+  - every cross-package id is registered once, with `en_us` and `es_es`;
+  - `emi-coverage.mjs` lists every id as expected-unobtained until its package;
+  - the hull recipe runs in GTM's assembler at UHV voltage.
+- **Tests:** T0; `tools/analysis/test/uev-foundation.test.mjs`. T1: none (the hull and hatch forming is S0-1's proof).
+- **Commits:** 2 (registrations; textures).
+- **Serial:** alone; every other package depends on it.
+
+#### F2. Integrator step
+
+- **Objective:**
+  - `hidden_until.json`:
+    - `gtnn:optical_computer` moves from `never` to `uev`, and `gtnn:optical_mainframe` stays `never`;
+    - GTCA's elevator miner and pump move from `until: uev` to `uev` if S0-8 passed, and to `never`, with a note, if it failed;
+    - UEV's new ids get their substages (`uev`, `uev-alpha`, `uev-barnard`, `uev-sirius`);
+  - `tools/analysis/script_order.json`: a band for `uev/` and one for each older-file row that reads a UEV id;
+  - `lib/stations.js` changes only if S0-4 failed.
+- **Allowed:** `pack/kubejs/data/grindless/tables/hidden_until.json`, `tools/analysis/script_order.json`, and `pack/kubejs/startup_scripts/grindless/lib/stations.js` only after a failed S0-4.
+- **References:** *Only from there, and cuts*; *Save compatibility*; UHV's F2 (`docs/eras/uhv.md:1071-1080`).
+- **Acceptance:**
+  - the optical computer appears at `uev`, and the mainframe stays hidden;
+  - with S0-4 passed, there is no lib change.
+- **Tests:** T0. T1: none.
+- **Commits:** 1. The integrator runs it; it may overlap W.
+
+#### W. UEV wireless tier (standalone serial)
+
+- **Objective:**
+  - `withTiers` case 10 in `lv/wireless_energy.js:286-316`, with the four window caps (*Power*);
+  - the UEV row in `tables/wireless_energy.json`, with the quantum repeater node as its link;
+  - `grindless:uev_smes_cell` made by the ZPM magnet works c6 (`zpm/magnet_works.js:208`), as a row in `tables/magnet_works.json`.
+- **`<name>`:** `wireless`.
+- **Allowed (extra):**
+  - `pack/kubejs/startup_scripts/grindless/lv/wireless_energy.js` (case 10 only);
+  - `pack/kubejs/data/grindless/tables/wireless_energy.json` (one row);
+  - `pack/kubejs/data/grindless/tables/magnet_works.json` (one row).
+- **References:** *Power on the wireless network*; UHV-A9's case 9 (`DECISIONS.md:437`); S0-5.
+- **Depends on:** F1, S0-5.
+- **Invariants:**
+  - every window cap and the cell are `long`;
+  - the tiers below 10 are untouched.
+- **Acceptance:**
+  - UEV wireless hatches register;
+  - a UEV cell stores and reports 251,658,240,000 EU *(tune)*;
+  - a 16 A UEV draw is served for 60 s.
+- **Tests:** T0; T1: `gg_test_uev_wireless` in the band the integrator assigns. Doubt: long overflow at 64 A, and the cell capacity.
+- **Commits:** 1.
+- **Serial:** alone; it changes a shared mechanism every tier uses.
+
+#### M1. UEV parallel hatch (standalone serial, after MEGA)
+
+- **Objective:** a UEV `ParallelHatchPartMachine`, 4^(UEV − EV) = ×4,096 (ParallelHatchPartMachine.java:37). It is registered through `lib/parallel_hatch.js` as MEGA-0b registered the UHV one, and is usable by every machine through `global.grindless.parallelHatch.part()`.
+- **`<name>`:** `parallel_hatch`.
+- **Allowed (extra):**
+  - `pack/kubejs/startup_scripts/grindless/lib/parallel_hatch.js` (the UEV hatch, and its entry in the list at `:79`);
+  - its recipe in `server_scripts/grindless/uev/parallel_hatch.js`.
+- **References:** *Nothing one at a time*; `docs/eras/mega.md` 4.12 and S-M3 (`mega.md:120`, `:240`, `:300`); S0-10.
+- **Depends on:** MEGA-0b (if it ran), MEGA-1..9 and MEGA-I merged, S0-10, F1.
+- **Invariants:**
+  - the UV and UHV hatches are untouched;
+  - not counted.
+- **Acceptance:**
+  - the hatch reports 4,096;
+  - it forms in a GTM mega and in one UEV machine.
+- **Tests:** T0; T1: `gg_test_uev_parallel_hatch` in the band the integrator assigns. Doubt: tier 10 registration with `highTierContent` off.
+- **Commits:** 1.
+- **Serial:** alone (lib). If S0-10 failed, M1 is dropped and every UEV machine keeps UV's ×256.
+
+### Wave A: home and Earth orbit
+
+Wave A packages depend on F1 and on the spikes named. They run two at a time, in the pairs of *Parallel and serial*.
+
+#### A1. Isotopes
+
+- **Objective:**
+  - machine 1 (calutron);
+  - lines 1, 2, 29 and 30;
+  - the actinide rows that feed the superheavy targets: the HFIR c4 Pu-242 and the Pu/Cm/Cf cuts at the facility, ZPM partitioning's Pu-242 recovery, Cm/Cf cut and Bk/Cf HDEHP cut, and the IV fuel fabrication plant's depleted-Pu MOX.
+- **`<name>`:** `isotopes`.
+- **Allowed (extra):**
+  - `server_scripts/grindless/uhv/transcurium.js` (3 rows);
+  - `server_scripts/grindless/zpm/actinides.js` (3 rows);
+  - `server_scripts/grindless/iv/uranium_cycle.js` (1 row).
+- **References:**
+  - machine 1;
+  - *Older machines, new modes*;
+  - lines 1–4, 29 and 30 (*New process lines*);
+  - patterns: `server_scripts/grindless/zpm/actinides.js:203` and UHV-A1's facility rows.
+- **Depends on:** F1.
+- **Invariants:**
+  - depleted Pu returns to IV MOX;
+  - Ca-40, K-39 and Li-7 go to stock;
+  - the calutron is the only enrichment route for its four isotopes.
+- **Acceptance:**
+  - Ca-48, K-40, Li-6 and Pu-244 come only from the calutron;
+  - Cm and Cf/Bk cuts exist for A2.
+- **Tests:** T0; recipe lookup only (proof reuse). T1: none.
+- **Commits:** 2 (machine; older rows).
+
+#### A2. Superheavy
+
+- **Objective:**
+  - machines 2 (heavy-ion cyclotron), 3 (recoil separator) and 4 (superheavy chemistry lab);
+  - lines 3, 4, 5 and 6;
+  - the IV hot cell's target wheel and decay store rows: Cf-252 → Cm-248, Bk-249 → Cf-249, T → He-3;
+  - the EV cryogenic plant's xenon row.
+- **`<name>`:** `superheavy`.
+- **Allowed (extra):** `pack/kubejs/data/grindless/tables/hot_cell.json` (4 rows); `server_scripts/grindless/ev/cryogenic_plant.js` (1 row).
+- **References:**
+  - machines 2–4;
+  - *Older machines, new modes*;
+  - lines 3–6;
+  - *Reserve for UIV* (the stored tennessine);
+  - pattern: ZPM's silicon-28 row in `tables/hot_cell.json`.
+- **Depends on:** A1 (targets, beam), A4 (the SRF cavity, line 38).
+- **Invariants:**
+  - the cyclotron's helium chamber and the SRF cavities are not consumed;
+  - the activated wheel returns to the hot cell;
+  - the decay store's times are real ingrowth *(tune)*, not inflated difficulty;
+  - tennessine is stored, and no UEV recipe consumes it.
+- **Acceptance:**
+  - the tennessine sample and the census come only from machines 2–4;
+  - tritium from the Mk4 has a destination (T → He-3).
+- **Tests:** T0; T1: `gg_test_uev_superheavy` in the band the integrator assigns. Doubt: the non-consumed chamber, and the decay store's chain across two hot cell rows.
+- **Commits:** 2.
+
+#### A3. Megabar
+
+- **Objective:**
+  - machine 5 (megabar press);
+  - lines 7, 8 and 9;
+  - the UV powder-in-tube line's superhydride wire row and the ZPM diamond lattice fab's nanodiamond row.
+- **`<name>`:** `megabar`.
+- **Allowed (extra):** `server_scripts/grindless/uv/materials.js` (PIT row); `server_scripts/grindless/zpm/qubits.js` (the diamond fab row).
+- **References:**
+  - machine 5;
+  - lines 7–9;
+  - S0-9;
+  - patterns: `server_scripts/grindless/uv/materials.js:35` and `zpm/qubits.js:43`.
+- **Depends on:** F1, S0-9, A4 (La/Y from the cascade, the EB onion carbon).
+- **Invariants:**
+  - the anvil wears *(tune)*;
+  - the superhydride quench is named fiction (EMI and quest text).
+- **Acceptance:**
+  - (La,Y)H₁₀ and nanotwinned diamond come only from the press;
+  - the superhydride cable makes the F1 hull recipe obtainable.
+- **Tests:** T0; recipe lookup only. T1: none.
+- **Commits:** 2.
+
+#### A4. Electron beam and superalloy
+
+- **Objective:**
+  - machines 6 (electron-beam furnace) and 7 (single-crystal foundry);
+  - lines 11, 12, 13, 33 and 38;
+  - older rows in three files:
+    - the EV extraction cascade: Zr/Hf, Ta, Tb and La/Y;
+    - the EV platinum plant: Ru and the Ir crucible;
+    - the IV fluorspar kiln: HF and the CaF₂ return.
+- **`<name>`:** `electron_beam`.
+- **Allowed (extra):**
+  - `server_scripts/grindless/ev/extraction_cascade.js` (4 rows);
+  - `server_scripts/grindless/ev/platinum_plant.js` (2 rows);
+  - `server_scripts/grindless/iv/fluorspar_kiln.js` (2 rows).
+- **References:**
+  - machines 6–7;
+  - lines 11–13, 33 and 38;
+  - patterns: `ev/extraction_cascade.js:163` and `ev/platinum_plant.js:161`.
+- **Depends on:** F1.
+- **Invariants:**
+  - Zr goes to line 33;
+  - Nb goes to line 38;
+  - NaF and KF return to the kiln;
+  - foundry gates are remelted.
+  - The SX blade's rhenium comes only from Barnard (B3): the blade's recipe exists here and EMI shows it at `uev-barnard`.
+- **Acceptance:**
+  - 6N Hf, Ta and Nb come only from the EB furnace;
+  - SX parts come only from the foundry.
+- **Tests:** T0; recipe lookup only. T1: none.
+- **Commits:** 2.
+
+#### A5. Magnets and composites
+
+- **Objective:**
+  - machines 8 (nitride magnet works), 9 (SiC fibre plant) and 10 (CVI furnace);
+  - lines 14, 16, 17 and 35;
+  - the home part of line 15 (Fe₁₆N₂ and the bonded magnet, from B3's carbonyl iron), and the UEV motor's recipe;
+  - two older rows: the UV BN reactor's interphase and the UHV spark plasma sinterer's HfTaCN.
+- **`<name>`:** `composites`.
+- **Allowed (extra):** `server_scripts/grindless/uv/materials.js` (BN row); `server_scripts/grindless/uhv/propulsion.js` (SPS row).
+- **References:**
+  - machines 8–10;
+  - lines 14–17 and 35;
+  - S0-7;
+  - patterns: `uv/materials.js:243` and `uhv/propulsion.js:132`.
+- **Depends on:** A3 (`uv/materials.js`), A4 (Hf, Ta, HF).
+- **Invariants:**
+  - CH₄ and H₂ go to the ZPM pyrolyser;
+  - HCl goes to the cascade.
+  - The motor's recipe exists here; its Fe₁₆N₂ is obtainable at `uev-barnard`.
+- **Acceptance:**
+  - the HfTaCN coil block is obtainable;
+  - SiC/SiC plates come only from the CVI furnace;
+  - Fe₁₆N₂ comes only from the nitride works.
+- **Tests:** T0; recipe lookup only. T1: none (the coil read is S0-7's proof).
+- **Commits:** 2.
+
+#### A6. Photonics
+
+- **Objective:**
+  - machines 11 (SNSPD foundry), 12 (van der Waals stacker) and 13 (photonic integration hall), including `gtnn:optical_computer` (13 c3) with GT--'s own recipe removed;
+  - lines 18, 19, 20, 21, 22 and 27;
+  - the UEV sensor, emitter, pump, conveyor and piston recipes;
+  - older rows: the UHV MBE and foundry, the UV synchrotron, the UV zone refining tower (2 rows) and the ZPM ion implanter.
+- **`<name>`:** `photonics`.
+- **Allowed (extra):**
+  - `server_scripts/grindless/uhv/photonics.js` (2 rows);
+  - `server_scripts/grindless/uv/accelerators.js` (1 row);
+  - `server_scripts/grindless/uv/detectors.js` (2 rows);
+  - `server_scripts/grindless/zpm/qubits.js` (the ion implanter row).
+- **References:**
+  - machines 11–13;
+  - lines 18–22 and 27;
+  - *Only from there, and cuts*;
+  - pattern: UHV-A4's removal and replacement of the GT-- optical processor.
+- **Depends on:** A3 (`zpm/qubits.js`, ammonia borane), F2 (the optical computer unhidden).
+- **Invariants:**
+  - one recipe for `gtnn:optical_computer`;
+  - `gtnn:optical_mainframe` is untouched;
+  - AsH₃ is contained.
+- **Acceptance:**
+  - the optical computer comes only from the hall;
+  - SNSPDs, QD sources and SDDs come only from their lines.
+- **Tests:** T0; T1: `gg_test_uev_photonics` in the band the integrator assigns. Doubt: GT--'s recipe is removed and ours is the only lookup path.
+- **Commits:** 2.
+
+#### A7. Fusion
+
+- **Objective:**
+  - machines 14 (helium-3 polariser) and 15 (Mk4 ring, through `registerFusionTier`, S0-6);
+  - lines 23, 24 and 25;
+  - four sets of older rows:
+    - the ZPM DEC's three Mk4 plasma rows, written final;
+    - the ZPM isotope column's ¹¹BF₃;
+    - the EV cryogenic plant's 6N He-3 and He-4 ash recovery;
+    - the UV fibre draw tower's Yb fibre.
+- **`<name>`:** `fusion`.
+- **Allowed (extra):**
+  - `server_scripts/grindless/zpm/fusion.js` (3 rows);
+  - `server_scripts/grindless/zpm/saturn_siphon.js` (1 row);
+  - `server_scripts/grindless/ev/cryogenic_plant.js` (2 rows);
+  - `server_scripts/grindless/uv/photonics.js` (1 row);
+  - the new `tables/fusion_mk4.json`.
+- **References:**
+  - machines 14–15;
+  - *Fusion, and what is not fusion*;
+  - *Power*;
+  - lines 23–25;
+  - FusionReactorMachine.java:276, :294-298, :308-313 and :326-327;
+  - Monifactory's helical fusion pattern (LGPL, credited).
+- **Depends on:** F1, S0-6, A2 (`ev/cryogenic_plant.js`, the tritium row).
+- **Invariants:**
+  - GTM's three rings are untouched;
+  - our fuels are premixed;
+  - the DEC rows are not in `generators.js`'s list.
+- **Acceptance:**
+  - a Mk4 forms, starts and runs c1, c2 and c3;
+  - the DEC returns 16,777,216, 12,582,912 and 25,165,824 EU/t *(tune)*;
+  - polarised He-3 comes only from the polariser.
+- **Tests:** T0; T1: `gg_test_uev_fusion` in the band the integrator assigns. Doubt: `registerFusionTier` from KubeJS, storage above the int maximum, and the start.
+- **Commits:** 2.
+
+#### A8. Earth orbit
+
+- **Objective:**
+  - machines 16 (quantum gas lab) and 17 (entanglement distribution station, which makes the quantum repeater node);
+  - lines 31, 32, 34, 36, 39 and 40;
+  - the UEV robot arm's recipe;
+  - older rows:
+    - the UV fibre draw tower: hollow-core, MCP multi-fibre, and the Li/K cooling lasers;
+    - the UHV crystal furnace: TGG and KTP;
+    - the ZPM pyrolyser: floating-catalyst CNT.
+- **`<name>`:** `earth_orbit`.
+- **Allowed (extra):**
+  - `server_scripts/grindless/uv/photonics.js` (3 rows);
+  - `server_scripts/grindless/uhv/crystals.js` and `tables/crystals.json` (2 rows);
+  - `server_scripts/grindless/zpm/outer_chemistry.js` (1 row).
+- **References:**
+  - machines 16–17;
+  - lines 31–40 as numbered;
+  - pattern: UHV's Earth-orbit machines (dimension allowlist, proof reuse).
+- **Depends on:**
+  - A1 (Li-6, K-40);
+  - A4 (Tb, the Ir crucible);
+  - A6 (QD, SNSPD);
+  - A7 (`uv/photonics.js`).
+- **Invariants:**
+  - machines 16–17 run only in Earth orbit;
+  - the ULE cavity is not consumed.
+- **Acceptance:**
+  - the EOS model, the gravity survey and the repeater node come only from Earth orbit;
+  - W's link is obtainable.
+- **Tests:** T0; recipe lookup only (the dimension allowlist is proven). T1: none.
+- **Commits:** 2.
+
+### Wave B: three stars
+
+#### B1. Travel, stations, places and sunlight
+
+- **Objective:**
+  - the DFD Mk1 (tier 7) and Mk2 (tier 9) motors, registered with `createCustom` (S0-2) and made by two rows in UV's thruster works;
+  - the GCYR datapack for the three places (S0-3), with their place, planet, orbit and off-world rows;
+  - stations 9 and 10, and the sunlight rows;
+  - the warp gate's relay pairs for both new orbits.
+- **`<name>`:** `travel`.
+- **Allowed (extra):**
+  - `server_scripts/grindless/uv/propulsion.js` (2 rows);
+  - the `pack/kubejs/data/gcyr/...` files S0-3 names;
+  - rows in `tables/stations.json`, `tables/sunlight.json`, `tables/places.json`, `tables/planets.json`, `tables/orbits.json` and `tables/offworld_only.json`;
+  - `client_scripts/grindless/emi_info_lang.js` (UEV place lines);
+  - the warp gate's server file from UHV-B7 (relay pairs only).
+- **References:**
+  - *Places and site rules*, *Sunlight*, *Bridges and first arrivals*, *AE2 between stars*;
+  - UHV-B1 and UHV-A8's ICAN motor (`startup_scripts/grindless/uhv/propulsion.js:11`);
+  - S0-2, S0-3, S0-4 and S0-11.
+- **Depends on:** F1, F2, S0-2, S0-3, S0-4; wave A merged (B1 runs alone). The Mk2 row reads F1 ids; its rhenium and magnets become obtainable with B3.
+- **Invariants:**
+  - every older place, planet and dimension id is unchanged;
+  - the new dimension ids are final once shipped;
+  - one leg per bench run.
+- **Acceptance:**
+  - a level 9 rocket reaches Alpha Centauri AB orbit and Barnard b and returns;
+  - stations 9 and 10 deploy;
+  - the relays seed AE2.
+- **Tests:** T0; T1: `gg_test_uev_travel` in the band the integrator assigns. Doubt: datapack places, the tier 7 motor, the ninth station.
+- **Commits:** 2.
+- **Serial:** alone.
+
+#### B2. Alpha Centauri
+
+- **Objective:**
+  - machines 18 (nebula collector), 19 (interstellar dust lab) and 20 (pulsar timing station, observatory step 10);
+  - lines 26 and 37;
+  - the swarm control station's Alpha Centauri A row (c2 12,582,912 EU/t *(tune)*, written final; the dimension list is widened in the band the integrator assigns) and the solar probe bay's Alpha Centauri map;
+  - the EV cryogenic plant's interstellar gas distillation.
+- **`<name>`:** `alpha_centauri`.
+- **Allowed (extra):** `server_scripts/grindless/uhv/swarm.js` (2 rows, dimension list); `server_scripts/grindless/ev/cryogenic_plant.js` (1 row).
+- **References:**
+  - machines 18–20;
+  - *Automatic resource generation*;
+  - *Power*;
+  - pattern: `uhv/swarm.js:77`, `:91`.
+- **Depends on:**
+  - B1;
+  - A7 (`ev/cryogenic_plant.js`);
+  - A6 (SDD) and A8 (MCP), for the pulsar station.
+- **Invariants:**
+  - the scoop yield is named fiction;
+  - the swarm's Mercury row is untouched;
+  - the dimension list is widened, never narrowed.
+- **Acceptance:**
+  - interstellar gas, dust and the pulsar chart come only from Alpha Centauri's orbit;
+  - two stations give 25,165,824 EU/t.
+- **Tests:** T0; T1: `gg_test_uev_alpha` in the band the integrator assigns. Doubt: the widened swarm dimension list, and the collector at station 9.
+- **Commits:** 2.
+
+#### B3. Barnard b
+
+- **Objective:**
+  - machines 21 (Barnard core drill, drill family step 14) and 22 (carbonyl refinery);
+  - lines 10 and 15 (the Barnard part);
+  - the EV platinum plant's Barnard residue digestion and the HV syngas plant's CO-rich setting.
+- **`<name>`:** `barnard`.
+- **Allowed (extra):** `server_scripts/grindless/ev/platinum_plant.js` (1 row); `server_scripts/grindless/hv/syngas_plant.js` (1 row).
+- **References:**
+  - machines 21–22;
+  - lines 10 and 15;
+  - the drill family (`steam/recipe_types.js:14`);
+  - pattern: UHV's cold-trap drill.
+- **Depends on:** B1; A4 (`ev/platinum_plant.js`); A8 (the gravity survey).
+- **Invariants:**
+  - CO is recycled;
+  - Os, Ir and Pt go to the platinum plant;
+  - no hand gathering.
+- **Acceptance:**
+  - Barnard rock and carbonyl iron come only from Barnard b;
+  - rhenium closes the SX blade;
+  - Fe₁₆N₂ closes the UEV motor.
+- **Tests:** T0; recipe lookup only (drill family and dimension allowlist proven). T1: none.
+- **Commits:** 2.
+
+#### B4. Sirius B
+
+- **Objective:**
+  - machines 23 (white dwarf spectrograph), 24 (degenerate-matter harvester) and 25 (containment works);
+  - line 28;
+  - the UEV field generator's recipe.
+- **`<name>`:** `sirius`.
+- **References:**
+  - machines 23–25;
+  - *Fusion* (not fusion);
+  - *Bridges* (DFD Mk2);
+  - S0-2.
+- **Depends on:**
+  - B1 and B3 (the Mk2's rhenium and magnets);
+  - A8 (the EOS model);
+  - UHV's Casimir array (as built).
+- **Invariants:**
+  - degenerate matter is named fiction;
+  - the pellet is sealed and contained;
+  - nothing is voided.
+- **Acceptance:**
+  - a level 10 rocket reaches Sirius B orbit, or, under S0-2's fallback, the relay does;
+  - degenerate matter, the mass–radius chart and pellets come only from Sirius B orbit.
+- **Tests:** T0; T1: `gg_test_uev_sirius` in the band the integrator assigns. Doubt: the level 10 flight, station 10 and the harvester's site rule.
+- **Commits:** 2.
+
+#### B5. Gate
+
+- **Objective:**
+  - the warp gate's c3 row (16 A × V[UEV] for 60 s, over the network);
+  - `gtceu:uiv_machine_casing`'s research with the pulsar navigation chart;
+  - the UIV gate's stored items (tennessine, degenerate pellet, EOS model, 4 optical computers).
+- **`<name>`:** `gate`.
+- **Allowed (extra):** the warp gate's server file from UHV-B7 (1 row).
+- **References:**
+  - *Gate to UIV*;
+  - *Power* (the gate example);
+  - pattern: UHV-B7 (`docs/eras/uhv.md:1294-1304`).
+- **Depends on:** B2, B4, W, A6 and A7.
+- **Invariants:**
+  - GTM's UIV casing keeps its id;
+  - only our recipe and research are added;
+  - nothing of MAX+.
+- **Acceptance:**
+  - the casing is researched only with the chart;
+  - c3 holds 134,217,728 EU/t for 60 s.
+- **Tests:** T0; T1: `gg_test_uev_gate` in the band the integrator assigns. Doubt: the 16 A UEV load on the gate's hatches over a long network.
+- **Commits:** 2.
+
+#### M2. Stellar forge (after M1, or after S0-10's fallback)
+
+- **Objective:** `gtceu:stellar_forge`, the mega family's UEV member (*Nothing one at a time*):
+  - EBF recipes only;
+  - temperature = coil + 900 K with Mk4 helium plasma *(tune)*;
+  - parallels = 2^floor((T − T_recipe) / 450), bound by energy;
+  - at most 16 tall.
+- **`<name>`:** `stellar_forge`.
+- **References:**
+  - `docs/eras/mega.md` 4.11, 4.12, 6.6;
+  - `lib/mega.js` (used unchanged);
+  - Star Technology's HELL_FORGE_OC (MIT, credited);
+  - S0-7, S0-10.
+- **Depends on:** M1 (or S0-10's fallback), A5 (the coil), A7 (the plasma).
+- **Invariants:** not counted; no new recipe type.
+- **Acceptance:** a 9,000 K recipe runs 1,024 copies at 13,500 K when the energy allows.
+- **Tests:** T0; recipe lookup and its own parallel figure (MEGA proof reuse, `mega.md:287`). T1: none, unless `lib/mega.js` needed a change (then it is a lib package, escalated).
+- **Commits:** 1.
+
+### Wave C
+
+#### C1. Validator (`-Tier uev`)
+
+- **Objective:**
+  - `tools/analysis/tiers/uev.json`, with substages `uev`, `uev-alpha`, `uev-barnard` and `uev-sirius`;
+  - the checks in *Validator*;
+  - the re-count of the lines' arrows (295 steps, 40 lines) and of the 56 crossings.
+- **Allowed:** `tools/analysis/tiers/uev.json` (new), `tools/analysis/test/uev-validator.test.mjs`, `tools/analysis/tiers/obtain.json` (UEV rows only).
+- **References:** *Validator*, *Gate to UIV*, *New process lines*; pattern `tools/analysis/tiers/uhv.json`.
+- **Depends on:** every A and B package merged.
+- **Acceptance:** the validator passes on the integrated pack. It fails on four planted cases:
+  - tennessine outside machines 2–4;
+  - a UIV item in a UEV recipe;
+  - a Barnard product before `uev-barnard`;
+  - a doubled Mk4 DEC row.
+- **Tests:** T0. **Commits:** 1.
+
+#### C2. Quests
+
+- **Objective:** the chapter *UEV — Several Stars* (43 quests *(tune)*) and the UEV rows of the processing-line and power chapters, as data.
+- **Allowed:**
+  - `tools/quests/uev-chapter/` (new, from `uhv-chapter`);
+  - `tools/quests/processing-lines/pl-data-uev.mjs` (new);
+  - `tools/quests/processing-lines/power-data.mjs` (UEV rows);
+  - `GG_QUESTS_EXPECTED` in `tools/test/overlay/kubejs/server_scripts/gg_test_quests.js`.
+- **Prohibited (extra):** every `.snbt` under `pack/config/ftbquests/`, `tools/quests/lint-config.json`.
+- **References:** *Quests*; `docs/quests.md`; `.github/instructions/quests.instructions.md`.
+- **Depends on:** every A and B package merged.
+- **Acceptance:**
+  - `node tools/quests/lint.mjs` gives 0 errors and 0 warnings;
+  - the fiction quests (scoop yield, superhydride quench, degenerate matter) say so.
+- **Tests:** T0. **Commits:** 1.
+
+#### C3. Integrated validation
+
+- **Objective:** one run with:
+  - every package;
+  - all ten stations and the Barnard base loaded;
+  - a v0.11.0 save;
+  - the release notes.
+- **Allowed:** `tools/test/overlay/kubejs/server_scripts/gg_test_uev_c3.js`, its zones row, and the release notes file the integrator names.
+- **References:** *Save compatibility*, *Gate to UIV*, *Power* (the gate example); pattern `gg_test_uhv_c3.js`.
+- **Depends on:** C1, C2 and the integrator's regeneration (index, `hidden_until.json`, chapters, `emi-coverage --expect`, script order).
+- **Acceptance:**
+  - the gate example runs: at least 141,281,819 EU/t in, 160,876,846 into the bank, and 134,217,728 out for 60 s;
+  - a v0.11.0 save opens with its stations, network and UHV machines, and one save and reopen is reported;
+  - the shipped `gtceu.yaml` still has `highTierContent` off;
+  - the validator, the Node suite, `gg_test_recipe_lookup` and the quest tests pass.
+- **Tests:** T0; T2 by the integrator in its band. **Commits:** 1. **Then v0.12.0.**
+
+### Parallel and serial
+
+At most two implementation workers at a time. The bench is the Linux VM (3 slots), with the home PC (one JVM) as fallback.
+
+| Step | Packages | How | Why |
+|---|---|---|---|
+| 1 | S0-1, then S0-2 … S0-9 and S0-11; S0-10 after MEGA | serial | they fix ids and contracts |
+| 2 | F1 | serial, alone | everything reads its ids |
+| 3 | F2 (integrator) ‖ W | W alone among workers | `hidden_until.json` and script order; W changes the shared wireless mechanism |
+| 4a | A1 ‖ A4 | two at a time | disjoint: `uhv/transcurium.js`, `zpm/actinides.js` and `iv/uranium_cycle.js` (A1); the cascade, the platinum plant and the kiln (A4) |
+| 4b | A2 ‖ A3 | two at a time | A2 owns the hot cell table and `ev/cryogenic_plant.js`; A3 owns `uv/materials.js` and `zpm/qubits.js`; both need A4, and A2 also needs A1 |
+| 4c | A6 ‖ A7 | two at a time | A6 takes `zpm/qubits.js` after A3; A7 takes `ev/cryogenic_plant.js` after A2 and `uv/photonics.js` first |
+| 4d | A5 ‖ A8 | two at a time | A5 takes `uv/materials.js` after A3; A8 takes `uv/photonics.js` after A7 |
+| 5 | B1 | serial, alone | GCYR datapack, the place, station and sunlight tables, `emi_info_lang.js`, the gate file |
+| 6 | B2 ‖ B3, then B4, then B5 | two at a time, then serial | B2 takes `uhv/swarm.js` and `ev/cryogenic_plant.js` (after A7); B3 takes `ev/platinum_plant.js` (after A4) and `hv/syngas_plant.js`; B4 needs B3's rhenium and magnets; B5 takes the gate file after B1 |
+| 7 | C1, then C2 | serial | they read every final id |
+| 8 | C3 | integrator | the batch's one T2 |
+| any | M1, then M2 | M1 serial alone (lib) when MEGA has landed; M2 pairs with any package that does not touch its files | the mega family's UEV member; not counted |
+
+The `tools/assets/README.md` and `zones.json` rows are appended by parallel packages; the integrator resolves those one-line merges.
+
+**Every cut lands with its replacement:**
+- `gtnn:optical_computer` unhides (F2) in the same batch as the hall that makes it (A6), and GT--'s own recipe goes in A6;
+- GTCA's miner and pump unhide (F2) only if S0-8 passed; they are a convenience and are not counted;
+- the UIV casing's research (B5) lands with the pulsar station that makes the chart (B2).
+
+## Decisions proposed (architect; for the orchestrator)
+
+The design above follows these proposals; none is in `DECISIONS.md` yet. The orchestrator accepts, changes or rejects each one, and each line is in the `DECISIONS.md` form.
+
+1. `- 2026-xx-xx · UEV size: 25 progression machines (~42 guided; growth went into crossings), 40 new lines (avg 7.4 steps, none under 6), 56 crossings two or more eras back; 28 older machines take a UEV mode; no padding.`
+2. `- 2026-xx-xx · UEV route: level 9 = GCYR motor tier 7 (DFD Mk1, createCustom; S0-2) + UV's tier 11 tank, to Alpha Centauri AB orbit (station 9) and Barnard b; level 10 = DFD Mk2 tier 9 to Sirius B orbit (station 10); the three places are a GCYR datapack (S0-3); warp gate relays at both orbits.`
+3. `- 2026-xx-xx · UEV highTierContent stays off and is locked in the shipped gtceu.yaml; KubeJS registers gtceu:uev_machine_hull and the UEV energy hatches (S0-1); UEV components follow Monifactory's Post_UV_Components pattern (LGPL).`
+4. `- 2026-xx-xx · UEV Mk4 is GTM's fusion class through registerFusionTier(UEV) with our pattern and casing (Monifactory's helical pattern, LGPL); premixed fuels; its DEC rows are written final (16.8 M / 12.6 M / 25.2 M EU/t).`
+5. `- 2026-xx-xx · UEV wireless: case 10 (caps ×4 of UHV's), UEV cell ~251.7 G from the magnet works c6; the quantum repeater node is the UEV link.`
+6. `- 2026-xx-xx · UEV fiction, named: the superhydride quench, the nebula scoop's yield and degenerate matter (EMI, quests).`
+7. `- 2026-xx-xx · UEV unhides gtnn:optical_computer (our recipe, photonic integration hall); gtnn:optical_mainframe stays hidden for UIV.`
+8. `- 2026-xx-xx · UEV superheavies: tennessine is made and stored for UIV; the superheavy census is data; no UEV recipe consumes tennessine.`
+9. `- 2026-xx-xx · UEV mega: the stellar forge (EBF only, coil + 900 K plasma bonus, 2^floor(ΔT/450) parallels; StarT HELL_FORGE_OC, MIT) and the UEV parallel hatch ×4,096 (MEGA S-M3) are not counted; fallback built-in parallels, hatch ×256.`
+10. `- 2026-xx-xx · UEV substages: uev, then uev-alpha and uev-barnard in parallel, then uev-sirius (the DFD Mk2 needs Barnard's rhenium and Fe16N2); the UIV gate needs all three.`
+11. `- 2026-xx-xx · UEV adds nothing of MAX+ (DECISIONS.md:450); its hooks for MAX+ are the pulsar chart, the census, the EOS model and the tennessine sample.`
+
+**CREDITS lines proposed:**
+- Monifactory (LGPL-3.0): the `Post_UV_Components.js` pattern for UEV components and the helical fusion pattern for the Mk4. Code adapted with attribution.
+- Star Technology (MIT): the HELL_FORGE_OC overclock idea for the stellar forge. Adapted with attribution.
+- GregTech Leisure and GTNH: ideas only. These are the coil-scaled parallels (already credited, `docs/eras/mega.md:357`) and the stellar forge concept.
+
+**Open questions for the user (with the architect's default):**
+1. `highTierContent`: **off**, with KubeJS UEV hull and hatches (ON only if S0-1 fails).
+2. Mk4 ring tier: **UEV** (`registerFusionTier(UEV)`), not UHV.
+3. GTCA's elevator miner and pump: **hidden** unless S0-8 shows they form with buses.
+4. Travel: **rocket first** (DFD Mk1 and Mk2), with warp gate relays after arrival.
+5. Degenerate matter: **named fiction**, contained, never voided.
+6. Size: **25 machines** (against a ~42 guideline), with the growth in lines and crossings; no padding.
+7. Substage order: **Alpha Centauri ‖ Barnard, then Sirius**.
+8. Sirius B: **level 10** (relay-only at tier 9 if GCYR caps there).
