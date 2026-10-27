@@ -1,0 +1,29 @@
+{
+  "_source": "UHV-A1 (docs/eras/uhv.md, 'A1. Transcurium' and 'Older machines, new modes'): the spent HFIR driver row of UV's pyroprocessing cell. Real process: the electrorefining of spent metallic and dispersion fuel in molten LiCl (EBR-II at Argonne), the same route as the cell's thorium rows.",
+  "_how_it_is_used": [
+    "Read by server_scripts/grindless/uv/thorium.js: types.pyroprocessing.recipes are merged into thorium.json's pyroprocessing recipes before the checks (name, circuit one per recipe, contents), so this row is built and published exactly like those. Circuit 5: 1-4 are UV's.",
+    "Format: thorium.json's (itemsIn, kept, charge, fluidsIn, itemsOut, fluidsOut; eut x duration).",
+    "Balance: 2 driver elements take 3 uranium-233 (tables/transcurium_fabrication.json); 2 spent ones give 2 back, so a cycle of six burns three (the burn-up). Destinations: the radioactive waste (fission products and the aluminium cladding) -> ZPM's waste retrieval plant; the loaded salt -> cleaned by the cell's circuit 4."
+  ],
+  "types": {
+    "pyroprocessing": {
+      "recipes": [
+        {
+          "name": "hfir_driver",
+          "circuit": 5,
+          "eut": 524288,
+          "duration": 300,
+          "itemsIn": [{ "id": "grindless:spent_hfir_driver_element", "count": 2 }],
+          "kept": [{ "id": "gtceu:lithium_dust", "count": 1 }],
+          "charge": [{ "id": "gtceu:licl_salt", "amount": 1000 }],
+          "fluidsIn": [],
+          "itemsOut": [
+            { "id": "gtceu:uranium_233_ingot", "count": 2 },
+            { "id": "gtnn:radioactive_waste", "count": 1 }
+          ],
+          "fluidsOut": [{ "id": "gtceu:loaded_licl_salt", "amount": 250 }]
+        }
+      ]
+    }
+  }
+}
