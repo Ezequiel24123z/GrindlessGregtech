@@ -1,0 +1,27 @@
+{
+  "_source": "UHV-A1 (docs/eras/uhv.md, 'A1. Transcurium' and 'Older machines, new modes'): the HFIR driver row of IV's fuel fabrication plant. Real process: HFIR's involute fuel plates, a fissile oxide in an aluminium cermet core roll-bonded in aluminium cladding (ORNL); here the fissile charge is UV's uranium-233.",
+  "_how_it_is_used": [
+    "Read by server_scripts/grindless/iv/uranium_cycle.js after the steps of uranium_cycle.json and thorium_fabrication.json; the same format (itemsIn, fluidsIn, fluidsKept, fluidsOut, itemsOut). Circuit 7: 1-3 are IV's, 4-6 UV's.",
+    "energy: one IV assembler stage (1,536,000 EU, as the LEU assembly), spent at the plant's maxEUt like every other row.",
+    "Destination: the driver elements go to UHV's high flux reactor (tables/transcurium.json); the spent ones to UV's pyroprocessing cell (tables/transcurium_pyroprocessing.json), which gives the uranium-233 back."
+  ],
+  "fabrication": [
+    {
+      "name": "hfir_driver_element",
+      "circuit": 7,
+      "itemsIn": [
+        { "id": "gtceu:uranium_233_ingot", "count": 3 },
+        { "id": "gtceu:aluminium_foil", "count": 4 }
+      ],
+      "fluidsIn": [],
+      "fluidsKept": [],
+      "fluidsOut": [],
+      "itemsOut": [
+        { "id": "grindless:hfir_driver_element", "count": 2 }
+      ],
+      "energy": [
+        { "stage": "oxidising the metal, pressing the U3O8-aluminium cermet cores and roll-bonding the involute plates in aluminium: one IV assembler stage", "eu": 1536000, "times": 1 }
+      ]
+    }
+  ]
+}

@@ -15,7 +15,8 @@
     { "circuit": 3, "name": "reprocessing" },
     { "circuit": 4, "name": "radon" },
     { "circuit": 5, "name": "silicon_28" },
-    { "circuit": 6, "name": "boron_11" }
+    { "circuit": 6, "name": "boron_11" },
+    { "circuit": 7, "name": "nickel_62" }
   ],
   "composed": [
     {
@@ -166,6 +167,19 @@
         { "id": "gtceu:boron_11_trifluoride", "amount": 3000 },
         { "id": "gtceu:boron_10_trifluoride", "amount": 1000 }
       ]
+    },
+    {
+      "name": "nickel_62_enrichment",
+      "circuit": 7,
+      "eut": 7680,
+      "duration": 600,
+      "itemsIn": [{ "id": "gtceu:nickel_dust", "count": 4 }],
+      "fluidsIn": [{ "id": "gtceu:carbon_monoxide", "amount": 16000 }],
+      "itemsOut": [
+        { "id": "grindless:nickel_62_target", "count": 1 },
+        { "id": "gtceu:nickel_dust", "count": 3 }
+      ],
+      "fluidsOut": [{ "id": "gtceu:carbon_monoxide", "amount": 16000 }]
     }
   ]
 }

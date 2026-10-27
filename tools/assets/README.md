@@ -1114,3 +1114,17 @@ powershell -NoProfile -ExecutionPolicy Bypass -File tools\assets\Build-UVEdgeTex
 | File (under `textures/`) | Notes |
 |---|---|
 | `item/precursor_probe.png` | A pale high-gain dish over the probe bus, a magnetometer boom to the left and a gold RTG on its boom to the right. |
+
+## UHV high flux reactor and transuranium facility (UHV-A1)
+
+Procedural, drawn by `Build-UHVTranscuriumTextures.ps1`; nothing is copied from another mod. Steel bezel faces with a window and a run lamp; 4 active frames, frametime 4; the emissive layer holds only the glow and the lamp.
+
+```powershell
+powershell -NoProfile -ExecutionPolicy Bypass -File tools\assets\Build-UHVTranscuriumTextures.ps1
+powershell -NoProfile -ExecutionPolicy Bypass -File tools\assets\Build-UHVTranscuriumTextures.ps1 -Credits
+```
+
+| File (under `textures/`) | Notes |
+|---|---|
+| `block/multiblock/high_flux_reactor/overlay_front*.png` | A pool window; idle dark blue water, active a Cherenkov-blue core whose glow pulses outward. |
+| `block/multiblock/transuranium_facility/overlay_front*.png` | A glovebox window with two glove ports; active, the ion-exchange column glows teal and a bubble rises through it. |

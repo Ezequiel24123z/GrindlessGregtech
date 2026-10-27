@@ -29,6 +29,9 @@
 
   function loadTable() {
     var t = G.readJsonTable(TABLE)
+    // UHV-A1's spent HFIR driver row: merged into the cell's recipes before the checks, so its circuit is checked with the others
+    var extra = G.readJsonTable('kubejs/data/grindless/tables/transcurium_pyroprocessing.json')
+    if (t.types && t.types.pyroprocessing && extra.types && extra.types.pyroprocessing) t.types.pyroprocessing.recipes = list(t.types.pyroprocessing.recipes).concat(list(extra.types.pyroprocessing.recipes))
     var problems = []
     var out = []
     Object.keys(t.types || {}).forEach(function (type) {
