@@ -163,7 +163,7 @@
           "fluidsOut": [
             { "id": "gtceu:phosphoric_acid", "amount": 100 },
             { "id": "gtceu:carbon_dioxide", "amount": 2800 },
-            { "id": "gtceu:water", "amount": 2900 }
+            { "id": "minecraft:water", "amount": 2900 }
           ]
         }
       ]
@@ -182,7 +182,7 @@
           "itemsOut": [],
           "fluidsOut": [
             { "id": "gtceu:ethylhexenal", "amount": 1000 },
-            { "id": "gtceu:water", "amount": 1000 }
+            { "id": "minecraft:water", "amount": 1000 }
           ]
         },
         {
@@ -226,7 +226,7 @@
           "fluidsIn": [
             { "id": "gtceu:phosphoryl_chloride", "amount": 1000 },
             { "id": "gtceu:ethylhexanol", "amount": 2000 },
-            { "id": "gtceu:water", "amount": 1000 }
+            { "id": "minecraft:water", "amount": 1000 }
           ],
           "itemsOut": [],
           "fluidsOut": [

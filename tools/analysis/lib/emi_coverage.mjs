@@ -397,7 +397,10 @@ export function auditEmiCoverage({ dump, registry, cfg, emi, lang = null, native
     if (p && d.disabledBy.every((b) => untilEra.has(b.slice(b.indexOf(' ') + 1)))) pendingRoutes.push({ ...d, reason: p.reason || '' });
     else droppedRoutes.push(d);
   }
-  for (const p of pending.values()) if (!pendingRoutes.some((d) => d.id === p.id)) problems.push(`pending route ${p.id}: EMI no longer drops it for stacks disabled until their era; delete the entry`);
+  // a route that carries only hidden stacks is dropped too, but touches nothing shown; it still keeps its process pending
+  const droppedHiddenOnly = (id) => invisible.some((r) => r.id === id && r.dropped
+    && r.disabledBy.every((b) => untilEra.has(b.slice(b.indexOf(' ') + 1))) && !allDropped.some((d) => d.id === id));
+  for (const p of pending.values()) if (!pendingRoutes.some((d) => d.id === p.id) && !droppedHiddenOnly(p.id)) problems.push(`pending route ${p.id}: EMI no longer drops it for stacks disabled until their era; delete the entry`);
   for (const d of droppedRoutes) problems.push(`${d.id} (${d.type}): EMI drops it for ${d.disabledBy.join(', ')}, hiding a route of ${d.ours.join(', ')}`);
 
   // every process of ours (a recipe type our scripts register) shows at least one recipe, unless EMI never shows its type

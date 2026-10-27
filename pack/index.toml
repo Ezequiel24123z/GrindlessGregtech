@@ -1325,6 +1325,26 @@ file = "kubejs/assets/grindless/textures/block/multiblock/helium_refrigerator/ov
 hash = "491ea51d46bc1f0c0ff11ed9293461cc67de293c7672abbc45f67563f8fe1f1a"
 
 [[files]]
+file = "kubejs/assets/grindless/textures/block/multiblock/high_flux_reactor/overlay_front.png"
+hash = "804249e8e39051fffbd3ed9f2795c98c7102ea420671ab72e7a1285c0af3ef79"
+
+[[files]]
+file = "kubejs/assets/grindless/textures/block/multiblock/high_flux_reactor/overlay_front_active.png"
+hash = "b93c494f68a7a72aeae620652a9d745cc1b1318e0015de36b41c9b45479e1a28"
+
+[[files]]
+file = "kubejs/assets/grindless/textures/block/multiblock/high_flux_reactor/overlay_front_active.png.mcmeta"
+hash = "491ea51d46bc1f0c0ff11ed9293461cc67de293c7672abbc45f67563f8fe1f1a"
+
+[[files]]
+file = "kubejs/assets/grindless/textures/block/multiblock/high_flux_reactor/overlay_front_active_emissive.png"
+hash = "564e976c7807a7a6089ab2ed80d3a2f56c604269bf44356bfb75277cd2c264c0"
+
+[[files]]
+file = "kubejs/assets/grindless/textures/block/multiblock/high_flux_reactor/overlay_front_active_emissive.png.mcmeta"
+hash = "491ea51d46bc1f0c0ff11ed9293461cc67de293c7672abbc45f67563f8fe1f1a"
+
+[[files]]
 file = "kubejs/assets/grindless/textures/block/multiblock/hot_cell/overlay_front.png"
 hash = "4d9d8b3a28e6a0ca06d74e348357446f60fd9446331e80d01b085323a0fb32aa"
 
@@ -2659,6 +2679,26 @@ hash = "d39ebf0c37ae53b26285ca203aef9dc80e954ef664961049bcf2ace59d3a2c4a"
 [[files]]
 file = "kubejs/assets/grindless/textures/block/multiblock/tholin_reformer/overlay_front_active_emissive.png"
 hash = "99627b4bcc54baffc5156e005816425e1a9d620d5e26d09b7f4a267b1d1e31e9"
+
+[[files]]
+file = "kubejs/assets/grindless/textures/block/multiblock/transuranium_facility/overlay_front.png"
+hash = "c9ec95090d973e54fbc6b5db1ab11599641875dc9c651bbcfe0174fcdcb2235b"
+
+[[files]]
+file = "kubejs/assets/grindless/textures/block/multiblock/transuranium_facility/overlay_front_active.png"
+hash = "626f6f208efb01d0e08379a102f5471311dfdd174c2c5886c544dcdf4904dd1d"
+
+[[files]]
+file = "kubejs/assets/grindless/textures/block/multiblock/transuranium_facility/overlay_front_active.png.mcmeta"
+hash = "491ea51d46bc1f0c0ff11ed9293461cc67de293c7672abbc45f67563f8fe1f1a"
+
+[[files]]
+file = "kubejs/assets/grindless/textures/block/multiblock/transuranium_facility/overlay_front_active_emissive.png"
+hash = "73a6292193ad2a0539fd8ba02767353c7f39715aeae89d55b7427ee62bc55e37"
+
+[[files]]
+file = "kubejs/assets/grindless/textures/block/multiblock/transuranium_facility/overlay_front_active_emissive.png.mcmeta"
+hash = "491ea51d46bc1f0c0ff11ed9293461cc67de293c7672abbc45f67563f8fe1f1a"
 
 [[files]]
 file = "kubejs/assets/grindless/textures/block/multiblock/tritium_removal_facility/overlay_front.png"
@@ -4217,6 +4257,10 @@ file = "kubejs/assets/grindless/textures/item/zblan_fibre.png"
 hash = "7ee703c30b6fd877324a46059981353296562549dbc6a36f44f1bc50b47c0b92"
 
 [[files]]
+file = "kubejs/assets/grindless/textures/item/zblan_preform.png"
+hash = "72991345da638d7e0fbbc311840d214e6f70b6f021a2ed2a22bfd2cb380c9735"
+
+[[files]]
 file = "kubejs/assets/grindless/textures/item/zircaloy_cladding_tube.png"
 hash = "cb21c66fcc50ae8153fe0f6e366649b676fafa06c08b9399f2dd1a196c94fa02"
 
@@ -4314,7 +4358,7 @@ hash = "df9afb26ef3402b0441545657d01f95d2632050f20885f4731c3c44e96538e9c"
 
 [[files]]
 file = "kubejs/client_scripts/grindless/iv_hot_cell_lang.js"
-hash = "c08000ef58a2ed05779e9a8dcd2c58783c1ddb5922f5395d59cef5c18b4ea640"
+hash = "24b54cc75001744cb1fadf1dfcd33b2d8853b179af562c8010825875991ebc22"
 
 [[files]]
 file = "kubejs/client_scripts/grindless/iv_mass_production_lang.js"
@@ -4477,6 +4521,14 @@ file = "kubejs/client_scripts/grindless/uhv_foundation_lang.js"
 hash = "41b179e2b9fe3a54e962971cfc41d2e6486ee288aa1d5e6561f57fab7e5345a2"
 
 [[files]]
+file = "kubejs/client_scripts/grindless/uhv_transcurium_lang.js"
+hash = "bc2ee9ac5abfa298f8ec96172c9205ed8e3f8b4fd8d47dd3f403f8155525fff4"
+
+[[files]]
+file = "kubejs/client_scripts/grindless/uhv_zblan_lang.js"
+hash = "c78cad0f84d474291ec3f41b14eab46e7440f49bfac5b4d31b872095b6e91479"
+
+[[files]]
 file = "kubejs/client_scripts/grindless/uv_accelerators_lang.js"
 hash = "b1b63d4fd866ccbd4fafcdb7e25b3a9bd2341f9f15adc2bfab28c8df10061d73"
 
@@ -4538,7 +4590,7 @@ hash = "da2fcf2a8bb4fbe4d38c9337c8390e243f8bda7294d720eb1abfc1c3fce9f5fb"
 
 [[files]]
 file = "kubejs/client_scripts/grindless/uv_thorium_lang.js"
-hash = "2992b5477da60d6d74d252054d60206964b0fd0165641a7a1615b70a94004d33"
+hash = "3a32bdec1258291fd6e99d4a2756ef812e5c307910f500f37af3402945afd724"
 
 [[files]]
 file = "kubejs/client_scripts/grindless/uv_travel_lang.js"
@@ -4814,11 +4866,11 @@ hash = "1f4b256531a0b42a6ecf399e9b692d9e4730bd4102e53aab3e1fa2c999b69e9d"
 
 [[files]]
 file = "kubejs/data/grindless/tables/hidden_until.json"
-hash = "2faea5a39d8bed5ead2b76476a780c4507ddb33b5f7133b6e879bf9db22b5b49"
+hash = "557fffe63d329db65ee029cb4e70e1ae982e0e6257b337e5275883ba55fc3dd6"
 
 [[files]]
 file = "kubejs/data/grindless/tables/hot_cell.json"
-hash = "7e482c6063b261a5873fea076a83341779197086ced913aee1b50f5a1535d406"
+hash = "0fb6ab81558a7569d12b5ce53441465807beebd3313283cda11515131fa49e6f"
 
 [[files]]
 file = "kubejs/data/grindless/tables/hts_magnet_works.json"
@@ -4883,6 +4935,18 @@ hash = "6a756366581a3e1d865ee79fc6714fabe6c863a3edfd0f2eacf0779f36e874b6"
 [[files]]
 file = "kubejs/data/grindless/tables/thorium_fabrication.json"
 hash = "a0c9c893baf66484ab4874d7b83bf9bc194de4302718f93b89fdf4f54c3b9c44"
+
+[[files]]
+file = "kubejs/data/grindless/tables/transcurium.json"
+hash = "fdd12475d8df4bdd63ae2a56b6072bc19b3c1ea46aa6d6f20a0113dcdda9199d"
+
+[[files]]
+file = "kubejs/data/grindless/tables/transcurium_fabrication.json"
+hash = "e78a2e1a157a3a8e5fe5218d082f29cdaa0a615e681eb9c603baf7f73ca05afe"
+
+[[files]]
+file = "kubejs/data/grindless/tables/transcurium_pyroprocessing.json"
+hash = "6fc37050ab9868751ac39eb993fea9b64432d1212e4bc73b62784280cd68ce7c"
 
 [[files]]
 file = "kubejs/data/grindless/tables/uranium_cycle.json"
@@ -5206,7 +5270,7 @@ hash = "55d44fd9072e1bb09d28740e8104ecd5f7691f415f97ef7f48936cb852ccb431"
 
 [[files]]
 file = "kubejs/server_scripts/grindless/iv/uranium_cycle.js"
-hash = "ccec5197ee6f9a7293b863fab193a067a97a873cba59fc09f2447f9f1d9c92bd"
+hash = "6793cb84e2b6bd6a6a7ba849b61396324daaaf2e1fbd5a4ab3438064462dca16"
 
 [[files]]
 file = "kubejs/server_scripts/grindless/iv/venus.js"
@@ -5457,6 +5521,14 @@ file = "kubejs/server_scripts/grindless/steam/vein_drilling.js"
 hash = "5547c185e38d18fe64b37420e97d20bc8337650ad15477c37fceb5ece1edf9c4"
 
 [[files]]
+file = "kubejs/server_scripts/grindless/uhv/transcurium.js"
+hash = "3e413dc3ff89df4f33c66cafd858ae16fef6c71d442d7e4a0bb6bf7c12a9d800"
+
+[[files]]
+file = "kubejs/server_scripts/grindless/uhv/zblan.js"
+hash = "a46dbe22652e68840935340f080ee1372532db6554579313d4496604791b15fd"
+
+[[files]]
 file = "kubejs/server_scripts/grindless/uv/accelerators.js"
 hash = "362363c91483db825b6512974786f0a4e97b7707a33f5bb84e7322aeb2b9aa71"
 
@@ -5514,7 +5586,7 @@ hash = "d0f1f02e6188f772ded87e836304c2fb981f8bd4e414abefd9b1d3bbe684e571"
 
 [[files]]
 file = "kubejs/server_scripts/grindless/uv/thorium.js"
-hash = "1dfffff838cdcaf7783dd26c728fe4e4bd2cfb4fcf81a5f9270b6bf6a85ebb03"
+hash = "e5a892112c22e8c58fb72bec20ec4422e7fb080fa878660b417b02ac964504fe"
 
 [[files]]
 file = "kubejs/server_scripts/grindless/uv/travel.js"
@@ -5915,6 +5987,14 @@ hash = "98905267da50013b5484caca43e58b62f517cb179d580163e0dc4a2b5502bf20"
 [[files]]
 file = "kubejs/startup_scripts/grindless/uhv/foundation.js"
 hash = "4db4113f52fc898d67b577b3606ecaf2d011437f5e421f1f1183ac1dcc12362f"
+
+[[files]]
+file = "kubejs/startup_scripts/grindless/uhv/transcurium.js"
+hash = "a7a3c99fe399a8fd242328cf6cff2ad5ff659b8900162b9bb99e90210217de36"
+
+[[files]]
+file = "kubejs/startup_scripts/grindless/uhv/zblan.js"
+hash = "4efe1e3482525525c29adb60ad843d402a7d13b7a1ca64d2c465a50cc0dbb229"
 
 [[files]]
 file = "kubejs/startup_scripts/grindless/uv/accelerators.js"
