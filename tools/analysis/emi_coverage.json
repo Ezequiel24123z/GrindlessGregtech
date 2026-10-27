@@ -61,7 +61,6 @@
   { "id": "grindless:chromobacterium_culture", "role": "use", "reason": "temporary (UHV-B4): its use, the biomining heap's PGM leach, is UHV-B5's; delete this exception when B5 merges" },
   { "id": "grindless:sphingomonas_culture", "role": "use", "reason": "temporary (UHV-B4): its use, the biomining heap's REE leach, is UHV-B5's; delete this exception when B5 merges" },
   { "id": "grindless:sporosarcina_culture", "role": "use", "reason": "temporary (UHV-B4): its use, the biomining heap's biocement row, is UHV-B5's; delete this exception when B5 merges" },
-  { "id": "grindless:xeno_radioprotectant", "role": "use", "reason": "temporary (UHV-B4): its use, the organoid lab's sterilised growth medium row, is UHV-B6's; delete this exception when B6 merges" },
   { "id": "grindless:flare_shield_panel", "role": "use", "reason": "temporary (UHV-B4): its use, the Proxima base casing (line 15), is UHV-B5's; delete this exception when B5 merges" },
   { "id": "grindless:infrared_pigment", "role": "use", "reason": "temporary (UHV-B4): its use, the baseline astrometer's coating, is UHV-B7's; delete this exception when B7 merges" },
   { "id": "grindless:californium_252_source", "role": "use", "reason": "temporary (UHV-A1): its use, the cold-trap drill on Proxima b, is UHV-B5's; delete this exception when B5 merges" },
