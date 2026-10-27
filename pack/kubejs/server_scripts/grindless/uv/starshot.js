@@ -12,6 +12,8 @@
 //     3 release   1 patterned carrier + 500 mB xenon difluoride -> 1 light sail + 250 mB silicon tetrafluoride + 500 mB xenon (XeF2
 //                 etches the silicon away from under the film: Si + 2 XeF2 -> SiF4 + 2 Xe; too thin to survive gravity and air)
 //                                                                                                                122,880 x 400 t
+//     4 film      (UHV-B3) 1 aluminium ingot -> 4 aluminium reflector film (free-standing film rolled thin enough only in
+//                 weightlessness, Drexler's thin-film sail: the swarm segment's mirror)                          122,880 x 200 t
 //   starchip fab (type gtceu:starchip; Earth)
 //     1 chip      1 photonic chip (UV-A5) + 1 NV diamond chip (ZPM's ion implanter) + 1 americium micro source (UV-A2) + 1 neutronium
 //                 wafer (GTM's UV wafer) -> 1 starchip + 1 silicon dust (the kerf)                               491,520 x 1,600 t
@@ -70,6 +72,7 @@
   var HELIOPAUSE = UV.heliopauseData || 'grindless:heliopause_data'
   var HBN = UV.hbnDust || 'grindless:hbn_dust'
   var MODULE = UV.fibreLaserModule || 'grindless:fibre_laser_module'
+  var FILM = (G.uhvFoundation && G.uhvFoundation.ids && G.uhvFoundation.ids.aluminiumReflectorFilm) || 'grindless:aluminium_reflector_film'
   var SPENT = 'grindless:spent_laser_module'
   var PHOTONIC = 'grindless:photonic_chip'
   var MASK = 'grindless:x_ray_mask'
@@ -111,6 +114,8 @@
     { name: 'sail_release', type: 'light_sail', circuit: 3, site: 'earth_orbit', itemsIn: [item(PATTERNED, 1)],
       fluidsIn: [fluid(XEF2, 500)], itemsOut: [item(SAIL, 1)], fluidsOut: [fluid(SIF4, 250), fluid('gtceu:xenon', 500)],
       eut: ZPM, duration: 400 },
+    { name: 'aluminium_reflector_film', type: 'light_sail', circuit: 4, site: 'earth_orbit', itemsIn: [item('gtceu:aluminium_ingot', 1)],
+      itemsOut: [item(FILM, 4)], eut: ZPM, duration: 200 },
     { name: 'starchip', type: 'starchip', circuit: 1,
       itemsIn: [item(PHOTONIC, 1), item(NV, 1), item(AM, 1), item(UV_WAFER, 1)],
       itemsOut: [item(STARCHIP, 1), item('gtceu:silicon_dust', 1)], eut: UVA, duration: 1600 },
