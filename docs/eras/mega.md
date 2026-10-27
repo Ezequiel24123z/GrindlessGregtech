@@ -369,3 +369,5 @@ At most two workers at once; one bench JVM.
 1. The LV to UV picks (wire works, polymer works, ore refinery, smelting complex, assembly hall, mega factory, quantum fabricator): confirm or swap.
 2. `gtca:mega_lcr`: keep it or hide it with a 1:1 conversion to the coil chemical plant.
 3. The UHV parallel hatch (1024): register it if S-M3 passes, or keep UV 256 as the top until UEV.
+
+Integrator defaults until the user answers (2026-10-27, `DECISIONS.md`, "Mega parallels"): 1, the picks above; 2, keep `gtca:mega_lcr` (MEGA-3 does not touch `integration/gtca.js`); 3, register the hatch if S-M3 passes. Revisit before MEGA-3 and MEGA-9 open.
