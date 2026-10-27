@@ -1,0 +1,5 @@
+{
+  "type": "emi:info",
+  "stacks": ["item:grindless:bsl4_casing"],
+  "text": ["emi.grindless.info.bsl4_casing.0"]
+}

@@ -1,0 +1,5 @@
+{
+  "type": "emi:info",
+  "stacks": ["item:grindless:hangar_casing"],
+  "text": ["emi.grindless.info.hangar_casing.0"]
+}
