@@ -295,6 +295,9 @@
   function bigStored(ctrl) {
     var tries = [
       function () { return ctrl.energyBank.getStored() },
+      function () { return ctrl.getEnergyInfo().stored() },
+      function () { return ctrl.getEnergyInfo().stored },
+      function () { return ctrl.getEnergyInfo().getStored() },
       function () { return ctrl.getStored() },
       function () { return ctrl.energyBank.stored }
     ]
@@ -307,6 +310,12 @@
         }
       } catch (e) { /* the next one */ }
     }
+    try {
+      var names = []
+      var ms = ctrl.getClass().getMethods()
+      for (var k = 0; k < ms.length; k++) { var nm = String(ms[k].getName()); if (/nergy|tored|apacity/.test(nm)) names.push(nm) }
+      note('pss_api', ctrl.getClass().getName() + ': ' + names.join(','))
+    } catch (e2) { note('pss_api', 'reflection unavailable: ' + e2) }
     return -1
   }
 
@@ -437,9 +446,14 @@
     check('GATE_IN', din >= NEED_IN, 'drained from the three dynamo hatches ' + Math.round(din) + ' EU/t over ' + ticks + ' ticks (need ' + NEED_IN + '); fed ' + Math.round((b.fed - a.fed) / ticks) + ' EU/t')
     check('GATE_BANK', bank >= NEED_IN * 0.95 - 1 && bank >= 0.94 * din, 'into the bank ' + Math.round(bank) + ' EU/t (the doc\'s example 2,778,750; need ' + Math.round(NEED_IN * 0.95) + '); lost ' + Math.round((b.lost - a.lost) / ticks) + ' EU/t')
     var pssGain = b.pss >= 0 && a.pss >= 0 ? (b.pss - a.pss) / ticks : -1
+    var cells = 0
+    Object.keys(S.pss.batteries).forEach(function (k) { cells += S.pss.batteries[k] })
+    var drainCap = 100000 * cells
+    var implied = outRate - pssGain
     var ok = outRate >= NEED_OUT
-    if (S.loadMode === 'real') ok = ok && pssGain >= NEED_OUT * 0.99
-    check('GATE_OUT', ok, 'out through the ZPM 16 A hatch ' + Math.round(outRate) + ' EU/t over ' + ticks + ' ticks (need ' + NEED_OUT + ')' + (pssGain >= 0 ? '; the substation\'s stored energy rose ' + Math.round(pssGain) + ' EU/t (' + Math.round(a.pss) + ' -> ' + Math.round(b.pss) + ')' : '; substation stored energy unreadable') +
+    // the substation also bleeds passive drain (GTM: at most 100,000 EU/t per battery); the rest of the intake must show as stored energy
+    if (S.loadMode === 'real') ok = ok && pssGain > 0 && implied <= drainCap * 1.001
+    check('GATE_OUT', ok, 'out through the ZPM 16 A hatch ' + Math.round(outRate) + ' EU/t over ' + ticks + ' ticks (need ' + NEED_OUT + ')' + (pssGain >= 0 ? '; the substation\'s stored energy rose ' + Math.round(pssGain) + ' EU/t (' + Math.round(a.pss) + ' -> ' + Math.round(b.pss) + '), the rest ' + Math.round(implied) + ' EU/t is passive drain (cap ' + drainCap + ' for ' + cells + ' batteries)' : '; substation stored energy unreadable') +
       '; the bank ' + Math.round(a.bank) + ' -> ' + Math.round(b.bank) + ' EU')
     note('network', 'up ' + st.up + ', ' + st.towers + ' tower, ' + st.capacity + ' EU, tier ' + st.tier + ', stored ' + st.stored + ', faults ' + JSON.stringify(Object.keys(W().faults).filter(function (k) { return inBand(Number(k.split('|')[1]), Number(k.split('|')[2]), Number(k.split('|')[3])) })))
   }
