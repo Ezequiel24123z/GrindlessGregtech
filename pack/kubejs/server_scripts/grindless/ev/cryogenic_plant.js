@@ -103,6 +103,7 @@
     console.info(LOG + 'cryogenic plant recipes added: ' + CRYO.recipes.length)
     addTritonNitricOxide(event)
     addKuiperNobleGas(event)
+    addHighPurityNeon(event)
   }
 
   // UV-A1 (docs/eras/uv.md, line 3): distillation of Triton nitrogen's oxide. The 15N isotopologue of the oxide is lighter and stays
@@ -150,6 +151,32 @@
       .addDataNumber(NIGHT_KEY, Math.round(KUIPER_NOBLE.eut * NIGHT_FACTOR))
       .EUt(KUIPER_NOBLE.eut).duration(KUIPER_NOBLE.duration)
     console.info(LOG + 'cryogenic plant Kuiper noble gas row added')
+  }
+
+  // UHV-A6 (docs/eras/uhv.md, line 27): 99.999 % neon for the positron accumulator's moderator (a film of solid neon slows sodium-22's
+  // positrons). Neon from GTM's nether air distillation, or the neon a spent positron source gives back, is distilled again: the helium
+  // (boils at 4 K against neon's 27 K) comes off the top -> the superfluid helium plant. The only input is neon: the one recipe that runs
+  // with it and nothing else.
+  var HIGH_PURITY_NEON = { id: 'grindless:cryogenic_processing/high_purity_neon', eut: 7680, duration: 600,
+    input: { id: 'gtceu:neon', amount: 1000 },
+    outputs: [{ id: 'gtceu:high_purity_neon', amount: 950 }, { id: 'gtceu:helium', amount: 50 }] }
+  CRYO.neonRow = HIGH_PURITY_NEON
+
+  function addHighPurityNeon(event) {
+    var ids = [HIGH_PURITY_NEON.input.id].concat(HIGH_PURITY_NEON.outputs.map(function (f) { return f.id }))
+    var missing = ids.filter(function (id) { return !Fluid.exists(id) })
+    if (missing.length > 0) {
+      console.error(LOG + 'cryogenic plant high-purity neon row skipped, unknown fluid(s): ' + missing.join(', '))
+      return
+    }
+    var out = HIGH_PURITY_NEON.outputs
+    event.recipes.gtceu.cryogenic_processing('grindless:high_purity_neon')
+      .inputFluids(Fluid.of(HIGH_PURITY_NEON.input.id, HIGH_PURITY_NEON.input.amount))
+      .outputFluids(Fluid.of(out[0].id, out[0].amount), Fluid.of(out[1].id, out[1].amount))
+      .dimension(DIMENSION)
+      .addDataNumber(NIGHT_KEY, Math.round(HIGH_PURITY_NEON.eut * NIGHT_FACTOR))
+      .EUt(HIGH_PURITY_NEON.eut).duration(HIGH_PURITY_NEON.duration)
+    console.info(LOG + 'cryogenic plant high-purity neon row added')
   }
 
   function addCrafting(event) {

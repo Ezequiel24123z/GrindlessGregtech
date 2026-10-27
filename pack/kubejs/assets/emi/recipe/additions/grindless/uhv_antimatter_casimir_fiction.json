@@ -1,0 +1,10 @@
+{
+  "type": "emi:info",
+  "stacks": [
+    "item:grindless:exotic_matter_cell",
+    "item:gtceu:casimir_array"
+  ],
+  "text": [
+    "emi.grindless.info.casimir_array_fiction.0"
+  ]
+}
