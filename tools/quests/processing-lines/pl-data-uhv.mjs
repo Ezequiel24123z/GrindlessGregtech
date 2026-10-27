@@ -37,9 +37,9 @@ export default {
           ['itt', I('grindless:irradiated_transcurium_target'), 'Irradiated Target'],
           ['tl', F('gtceu:transcurium_liquor'), 'Transcurium Liquor'],
           ['tf', mach('gtceu:transuranium_facility'), 'Transuranium Facility', 'ours', { desc: 'Separates berkelium and californium with HDEHP; the solvent is cleaned and reused.' }],
-          ['cf', I('grindless:californium_252_source'), 'Californium-252 Source'],
+          ['cf', I('grindless:californium_252'), 'Californium-252'],
         ], 'the reactors that cannot start alone'),
-        n('fp', 15, 1.5, F('gtceu:fission_product_liquor'), 'Fission Product Liquor', { kind: 'by', from: ['tf'], end: 'the synroc line, contained' }),
+        n('fp', 7.5, 1.5, F('gtceu:fission_product_liquor'), 'Fission Product Liquor', { kind: 'by', from: ['itt'], end: 'the synroc line, contained' }),
         n('bk', 15, -1.5, I('grindless:berkelium_249'), 'Berkelium-249', { kind: 'by', from: ['tf'], end: 'the next target' }),
         // 2 U-233 driver fuel
         ...chain(3.5, [
@@ -76,6 +76,7 @@ export default {
           ['li', I('gtceu:lithium_dust'), 'Lithium', 'raw', { sub: 'From Mars lithium carbonate' }],
           ['lnb', I('grindless:lithium_niobate_boule'), 'LN Boule'],
           ['lnw', I('grindless:lithium_niobate_wafer'), 'LN Wafer'],
+          ['lni', I('grindless:implanted_ln_wafer'), 'Implanted LN Wafer'],
           ['lnoi', I('grindless:lnoi_wafer'), 'LNOI Wafer'],
           ['mod', I('grindless:thin_film_ln_modulator'), 'Thin-Film Modulator'],
         ], 'the optical processor'),
@@ -89,9 +90,10 @@ export default {
         n('sgst', 7.5, 3.5, I('grindless:spent_gst_target'), 'Spent GST Target', { kind: 'ret', from: ['pf'], sub: 'Remelted into a fresh target' }),
         // 7 quantum memory
         ...chain(5, [
-          ['eu', I('gtceu:europium_dust'), 'Europium', 'raw', { sub: 'With yttrium oxide and silica' }],
-          ['yso', I('grindless:eu_yso_boule'), 'Eu:YSO Boule'],
+          ['eu', I('gtceu:europium_oxide_dust'), 'Europium Oxide', 'raw', { sub: 'With yttrium and silica' }],
           ['cgf', mach('gtceu:crystal_growth_furnace'), 'Crystal Growth Furnace', 'ours', { desc: 'Pulls the boule from an iridium crucible that is reused.' }],
+          ['yso', I('grindless:eu_yso_boule'), 'Eu:YSO Boule'],
+          ['pf2', mach('gtceu:photonic_foundry'), 'Photonic Foundry', 'ours', { desc: 'Cuts and mounts the boule as a memory chip.' }],
           ['qmc', I('grindless:quantum_memory_chip'), 'Quantum Memory Chip'],
         ], 'the optical processor'),
       ],
@@ -101,7 +103,7 @@ export default {
       nodes: [
         // 8 VUV fluoride optics
         ...chain(0, [
-          ['fl', I('gtceu:fluorite_dust'), 'Fluorite', 'raw'],
+          ['fl', I('gcyr:fluorite_dust'), 'Fluorite', 'raw'],
           ['vb', I('grindless:vuv_caf2_boule'), 'VUV CaF2 Boule'],
           ['vo', I('grindless:vuv_caf2_optic'), 'VUV Optic'],
           ['comb', I('grindless:vuv_frequency_comb'), 'VUV Frequency Comb'],
@@ -112,12 +114,12 @@ export default {
           ['inpb', I('grindless:inp_boule'), 'InP Boule'],
           ['inpw', I('grindless:inp_wafer'), 'InP Wafer'],
           ['mbe', mach('gtceu:mbe_reactor'), 'MBE Reactor', 'ours', { desc: 'Grows the superlattice one atomic layer at a time.' }],
+          ['qsw', I('grindless:qcl_superlattice_wafer'), 'Superlattice Wafer'],
           ['qcl', I('grindless:quantum_cascade_laser'), 'Quantum Cascade Laser'],
         ], 'the baseline astrometer'),
-        n('ars', 7.5, 3.5, F('gtceu:arsenic_trioxide'), 'Arsenic', { kind: 'by', from: ['mbe'], end: 'contained: never vented' }),
         // 31 ZBLAN
         ...chain(5, [
-          ['zf', F('gtceu:zirconium_tetrafluoride'), 'Zirconium Tetrafluoride', 'raw'],
+          ['zf', I('gtceu:zirconium_tetrafluoride_dust'), 'Zirconium Tetrafluoride', 'raw'],
           ['pre', I('grindless:zblan_preform'), 'ZBLAN Preform'],
           ['draw', mach('gtceu:zblan_draw_tower'), 'ZBLAN Draw Tower', 'ours', { desc: 'Pulls fibre in microgravity, where the glass does not crystallise.' }],
           ['zbf', I('grindless:zblan_fibre'), 'ZBLAN Fibre'],
@@ -129,7 +131,7 @@ export default {
       nodes: [
         // 10 silicon carbide power
         ...chain(0, [
-          ['sic', I('gtceu:silicon_carbide_dust'), 'Silicon Carbide', 'raw'],
+          ['sic', I('gtca:silicon_carbide_dust'), 'Silicon Carbide', 'raw'],
           ['boule', I('grindless:sic_boule'), 'SiC Boule'],
           ['wafer', I('grindless:sic_wafer'), 'SiC Wafer'],
           ['epi', I('grindless:sic_epi_wafer'), 'Epi Wafer'],
@@ -143,10 +145,9 @@ export default {
           ['plant', mach('gtceu:ultrapure_water_plant'), 'Ultrapure Water Plant', 'ours', { desc: 'Reverse osmosis, deionisation, UV and ozone, degassing and ultrafiltration in one multiblock.' }],
           ['upw', F('gtceu:ultrapure_water'), 'Ultrapure Water'],
         ], 'the fabs'),
-        n('ro', 5, 3.5, F('minecraft:water'), 'RO Concentrate', { kind: 'by', from: ['plant'], end: 'voided: it is only salty water' }),
         // 21 space photovoltaics
         ...chain(5, [
-          ['ga', I('gtceu:gallium_dust'), 'Gallium', 'raw', { sub: 'With indium, arsenic and phosphorus' }],
+          ['ga', I('grindless:gallium_arsenide_wafer'), 'Gallium Arsenide Wafer', 'raw', { sub: 'With phosphorus, indium and arsine' }],
           ['iepi', I('grindless:imm_epi_wafer'), 'IMM Epi Wafer'],
           ['ifilm', I('grindless:imm_film'), 'IMM Film'],
           ['arr', I('grindless:imm_solar_array'), 'IMM Solar Array', 'product', { sub: 'With a cerium coverglass' }],
@@ -214,16 +215,16 @@ export default {
         n('tail', 5, 1.5, I('grindless:leached_tailings'), 'Leached Tailings', { kind: 'by', from: ['heap'], end: 'biocement, and EV\'s regolith cell' }),
         // 17 biocement
         ...chain(3.5, [
-          ['lt', I('grindless:leached_tailings'), 'Leached Tailings', 'raw'],
-          ['sp', I('grindless:sporosarcina_culture'), 'Sporosarcina Culture'],
+          ['sp', I('grindless:sporosarcina_culture'), 'Sporosarcina Culture', 'raw', { sub: 'With urea and calcium chloride' }],
           ['bcr', I('grindless:biocemented_regolith'), 'Biocemented Regolith'],
         ], 'the site casing'),
         // 18 ices
         ...chain(7, [
           ['core', I('grindless:proxima_ice_core'), 'Ice Core', 'raw'],
           ['dw', F('gtceu:deuterium_enriched_water'), 'Deuterium-Rich Water'],
-          ['d2', F('gtceu:deuterium'), 'Deuterium'],
-        ], 'UV\'s muon fusion cell'),
+          ['hwc', F('gtceu:heavy_water_concentrate'), 'Heavy Water Concentrate'],
+          ['hw', F('gtceu:heavy_water'), 'Heavy Water'],
+        ], 'the fusion fuel line'),
       ],
     },
     mercury: {
@@ -235,8 +236,7 @@ export default {
           ['svf', mach('gtceu:solar_vapour_furnace'), 'Solar Vapour Furnace', 'ours', { desc: 'Sunlight on regolith: low heat first, then high.' }],
           ['strip', I('grindless:stripped_mercury_regolith'), 'Stripped Regolith'],
           ['ac', I('grindless:alumina_calcia_residue'), 'Alumina-Calcia'],
-          ['film', I('grindless:aluminium_reflector_film'), 'Reflector Film'],
-        ], 'swarm segments'),
+        ], 'aluminium for the reflector film and the crucible lining'),
         // 23 swarm segments and their wear
         ...chain(2, [
           ['film2', I('grindless:aluminium_reflector_film'), 'Reflector Film', 'raw'],
@@ -245,13 +245,12 @@ export default {
           ['scs', mach('gtceu:swarm_control_station'), 'Swarm Control Station', 'ours', { desc: 'Steers the segments round the Sun and beams the power home.' }],
           ['worn', I('grindless:worn_swarm_segment'), 'Worn Segment'],
         ]),
-        n('refit', 12.5, 3.5, I('grindless:aluminium_reflector_film'), 'Stripped Film', { kind: 'ret', from: ['worn'], sub: 'Refurbished: the aluminium goes round again' }),
+        n('refit', 12.5, 3.5, I('grindless:swarm_segment'), 'Refurbished Segment', { kind: 'ret', from: ['worn'], sub: 'The film and array go round again' }),
         // 20 MgB2 links
         ...chain(5, [
           ['mg', I('gtceu:magnesium_dust'), 'Magnesium', 'raw', { sub: 'With boron' }],
           ['mgb2', I('gtceu:magnesium_diboride_dust'), 'MgB2 Powder'],
           ['wire', I('gtceu:magnesium_diboride_single_wire'), 'MgB2 Wire'],
-          ['cable', I('gtceu:magnesium_diboride_single_cable'), 'MgB2 Cable'],
         ], 'the gate ring and the swarm station'),
         // 30 oganesson propellant
         ...chain(7, [
@@ -265,7 +264,7 @@ export default {
       nodes: [
         // 24 PBO fibre
         ...chain(0, [
-          ['bz', F('gtceu:benzene'), 'Benzene', 'raw', { sub: 'With chlorine' }],
+          ['bz', I('gtceu:diaminoresorcinol_dust'), 'Diaminoresorcinol', 'raw', { sub: 'With terephthalic acid' }],
           ['dope', F('gtceu:pbo_dope'), 'PBO Dope'],
           ['pbop', mach('gtceu:pbo_plant'), 'PBO Plant', 'ours', { desc: 'Spins the dope in polyphosphoric acid, which is recycled.' }],
           ['fib', I('grindless:pbo_fibre'), 'PBO Fibre'],
@@ -280,8 +279,7 @@ export default {
         n('spsol', 7.5, 3.5, F('gtceu:spent_hdehp_solvent'), 'Spent Solvent', { kind: 'by', from: ['sol'], end: 'incinerated; the phosphoric acid comes back' }),
         // 26 UHTC
         ...chain(5, [
-          ['zr', I('gtceu:zirconia_dust'), 'Zirconia', 'raw', { sub: 'With boron carbide' }],
-          ['zrb2', I('gtceu:zirconium_diboride_dust'), 'ZrB2 Powder'],
+          ['zrb2', I('gtceu:uhtc_blend_dust'), 'UHTC Blend', 'raw', { sub: 'Zirconium diboride and carbon' }],
           ['sps', mach('gtceu:spark_plasma_sinterer'), 'Spark Plasma Sinterer', 'ours', { desc: 'Presses the blend to a tile in seconds.' }],
           ['tile', I('grindless:uhtc_tile'), 'UHTC Tile'],
           ['noz', I('grindless:uhtc_nozzle'), 'UHTC Nozzle'],
@@ -313,7 +311,7 @@ export default {
         ]),
         // 29 RTAN superconductor
         ...chain(5, [
-          ['ru', I('gtceu:ruthenium_dust'), 'Ruthenium', 'raw', { sub: 'From Proxima\'s biomining' }],
+          ['ru', I('grindless:uv_smes_cell'), 'UV SMES Cell', 'raw', { sub: 'With RTAN wire' }],
           ['nmw', mach('gtceu:naquadria_magnet_works'), 'Naquadria Magnet Works', 'ours', { desc: 'Winds the UHV cell with RTAN wire and UV cells.' }],
           ['cell', I('grindless:uhv_smes_cell'), 'UHV SMES Cell'],
         ], 'the wireless network'),
