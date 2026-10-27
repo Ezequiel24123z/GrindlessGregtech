@@ -1,0 +1,255 @@
+{
+  "_source": "UHV-A1 (docs/eras/uhv.md, 'A1. Transcurium', machines 1 and 2, lines 1-3 and 25): the recipes of UHV's high flux reactor and transuranium facility, and the GTM chemical reactor rows of line 25. Real processes: ORNL's HFIR (a flux trap at 2.5e15 n/cm2.s; curium and americium-243 targets bred to berkelium-249 and californium-252; nickel-62 to nickel-63) and REDC (targets dissolved in nitric acid, the actinides split by HDEHP extraction and cation exchange; the Bk-249 shipped for tennessine in 2009); thorium-229 milked from aged uranium-233 (ORNL, Karlsruhe); HDEHP made from 2-ethylhexanol (the oxo and aldol route from propene) and phosphoryl chloride.",
+  "_how_it_is_used": [
+    "Read by server_scripts/grindless/uhv/transcurium.js at every server load. Each entry of types.<type>.recipes becomes one gtceu:<type> recipe, id grindless:<type>/<name>, carrying the data key of its type = <name> (its EMI line, gtceu.recipe.<dataKey>.<name>).",
+    "itemsIn / itemsOut: { id, count }; fluidsIn / fluidsOut: { id, amount } in mB; kept: items never used up (GTM notConsumable); charge: fluids never used up (notConsumableFluid). eut x duration.",
+    "The programmed circuit picks the recipe: one per recipe inside a type (1-32). chemical_reactor rows may carry a circuit (0 = none) so GTM's own chemical reactor recipes cannot hide them.",
+    "Loops: the drivers come from IV's fuel fabrication plant (tables/transcurium_fabrication.json) and go back as uranium-233 through UV's pyroprocessing cell (tables/transcurium_pyroprocessing.json). The heavy curium oxide of separate goes into the next target. The decay store's 8 uranium-233 come back whole. The HDEHP solvent comes back less 1 %; the spent part is incinerated to phosphoric acid. The nitric acid of the raffinate and of the evaporator comes back.",
+    "Destinations: radioactive waste (activated cladding, the evaporated fission products) -> ZPM's waste retrieval plant (synroc); berkelium-249 is stored for UEV; californium-252 -> the reactor's circuit 3 (sealed sources); nickel-63 targets -> the betavoltaic line; thorium-229 -> the nuclear clock line; HCl of the HDEHP step -> GTM's HCl uses; water of the aldol step and of the incinerator -> anywhere; CO2 of the incinerator -> GTM's CO2 uses."
+  ],
+  "types": {
+    "high_flux_irradiation": {
+      "dataKey": "grindless_high_flux_irradiation",
+      "recipes": [
+        {
+          "name": "transcurium_target",
+          "circuit": 1,
+          "eut": 1966080,
+          "duration": 2400,
+          "itemsIn": [
+            { "id": "grindless:transcurium_target", "count": 1 },
+            { "id": "grindless:hfir_driver_element", "count": 6 }
+          ],
+          "kept": [],
+          "charge": [{ "id": "gtceu:distilled_water", "amount": 1000 }],
+          "fluidsIn": [],
+          "itemsOut": [
+            { "id": "grindless:irradiated_transcurium_target", "count": 1 },
+            { "id": "grindless:spent_hfir_driver_element", "count": 6 },
+            { "id": "gtnn:radioactive_waste", "count": 1 }
+          ],
+          "fluidsOut": []
+        },
+        {
+          "name": "nickel_target",
+          "circuit": 2,
+          "eut": 1966080,
+          "duration": 2400,
+          "itemsIn": [
+            { "id": "grindless:nickel_62_target", "count": 4 },
+            { "id": "grindless:hfir_driver_element", "count": 6 }
+          ],
+          "kept": [],
+          "charge": [{ "id": "gtceu:distilled_water", "amount": 1000 }],
+          "fluidsIn": [],
+          "itemsOut": [
+            { "id": "grindless:nickel_63_target", "count": 4 },
+            { "id": "grindless:spent_hfir_driver_element", "count": 6 },
+            { "id": "gtnn:radioactive_waste", "count": 1 }
+          ],
+          "fluidsOut": []
+        },
+        {
+          "name": "californium_source",
+          "circuit": 3,
+          "eut": 491520,
+          "duration": 400,
+          "itemsIn": [{ "id": "grindless:californium_252", "count": 1 }],
+          "kept": [],
+          "charge": [],
+          "fluidsIn": [],
+          "itemsOut": [{ "id": "grindless:californium_252_source", "count": 1 }],
+          "fluidsOut": []
+        }
+      ]
+    },
+    "transuranium_processing": {
+      "dataKey": "grindless_transuranium_processing",
+      "recipes": [
+        {
+          "name": "dissolve",
+          "circuit": 1,
+          "eut": 491520,
+          "duration": 400,
+          "itemsIn": [{ "id": "grindless:irradiated_transcurium_target", "count": 1 }],
+          "kept": [],
+          "charge": [],
+          "fluidsIn": [{ "id": "gtceu:nitric_acid", "amount": 1000 }],
+          "itemsOut": [],
+          "fluidsOut": [
+            { "id": "gtceu:transcurium_liquor", "amount": 1000 },
+            { "id": "gtceu:fission_product_liquor", "amount": 250 }
+          ]
+        },
+        {
+          "name": "separate",
+          "circuit": 2,
+          "eut": 1966080,
+          "duration": 1200,
+          "itemsIn": [],
+          "kept": [],
+          "charge": [],
+          "fluidsIn": [
+            { "id": "gtceu:transcurium_liquor", "amount": 1000 },
+            { "id": "gtceu:hdehp_solvent", "amount": 100 }
+          ],
+          "itemsOut": [
+            { "id": "grindless:berkelium_249", "count": 1 },
+            { "id": "grindless:californium_252", "count": 2 },
+            { "id": "grindless:heavy_curium_oxide", "count": 1 }
+          ],
+          "fluidsOut": [
+            { "id": "gtceu:hdehp_solvent", "amount": 99 },
+            { "id": "gtceu:spent_hdehp_solvent", "amount": 1 },
+            { "id": "gtceu:nitric_acid", "amount": 750 }
+          ]
+        },
+        {
+          "name": "decay_store",
+          "circuit": 3,
+          "eut": 491520,
+          "duration": 24000,
+          "itemsIn": [{ "id": "gtceu:uranium_233_ingot", "count": 8 }],
+          "kept": [],
+          "charge": [],
+          "fluidsIn": [],
+          "itemsOut": [
+            { "id": "grindless:thorium_229", "count": 1 },
+            { "id": "gtceu:uranium_233_ingot", "count": 8 }
+          ],
+          "fluidsOut": []
+        },
+        {
+          "name": "target",
+          "circuit": 4,
+          "eut": 491520,
+          "duration": 600,
+          "itemsIn": [
+            { "id": "grindless:heavy_curium_oxide", "count": 1 },
+            { "id": "gtceu:americium_dust", "count": 2 },
+            { "id": "gtceu:aluminium_dust", "count": 1 }
+          ],
+          "kept": [],
+          "charge": [],
+          "fluidsIn": [],
+          "itemsOut": [{ "id": "grindless:transcurium_target", "count": 1 }],
+          "fluidsOut": []
+        },
+        {
+          "name": "evaporate",
+          "circuit": 5,
+          "eut": 122880,
+          "duration": 400,
+          "itemsIn": [],
+          "kept": [],
+          "charge": [],
+          "fluidsIn": [{ "id": "gtceu:fission_product_liquor", "amount": 1000 }],
+          "itemsOut": [{ "id": "gtnn:radioactive_waste", "count": 1 }],
+          "fluidsOut": [{ "id": "gtceu:nitric_acid", "amount": 750 }]
+        },
+        {
+          "name": "incinerate",
+          "circuit": 6,
+          "eut": 122880,
+          "duration": 200,
+          "itemsIn": [],
+          "kept": [],
+          "charge": [],
+          "fluidsIn": [
+            { "id": "gtceu:spent_hdehp_solvent", "amount": 100 },
+            { "id": "gtceu:oxygen", "amount": 8500 }
+          ],
+          "itemsOut": [],
+          "fluidsOut": [
+            { "id": "gtceu:phosphoric_acid", "amount": 100 },
+            { "id": "gtceu:carbon_dioxide", "amount": 2800 },
+            { "id": "gtceu:water", "amount": 2900 }
+          ]
+        }
+      ]
+    },
+    "chemical_reactor": {
+      "recipes": [
+        {
+          "name": "ethylhexenal",
+          "circuit": 1,
+          "eut": 7680,
+          "duration": 200,
+          "itemsIn": [],
+          "kept": [{ "id": "gtceu:sodium_hydroxide_dust", "count": 1 }],
+          "charge": [],
+          "fluidsIn": [{ "id": "gtceu:butyraldehyde", "amount": 2000 }],
+          "itemsOut": [],
+          "fluidsOut": [
+            { "id": "gtceu:ethylhexenal", "amount": 1000 },
+            { "id": "gtceu:water", "amount": 1000 }
+          ]
+        },
+        {
+          "name": "ethylhexanol",
+          "circuit": 2,
+          "eut": 7680,
+          "duration": 200,
+          "itemsIn": [],
+          "kept": [{ "id": "gtceu:nickel_dust", "count": 1 }],
+          "charge": [],
+          "fluidsIn": [
+            { "id": "gtceu:ethylhexenal", "amount": 1000 },
+            { "id": "gtceu:hydrogen", "amount": 4000 }
+          ],
+          "itemsOut": [],
+          "fluidsOut": [{ "id": "gtceu:ethylhexanol", "amount": 1000 }]
+        },
+        {
+          "name": "phosphoryl_chloride",
+          "circuit": 3,
+          "eut": 7680,
+          "duration": 200,
+          "itemsIn": [{ "id": "gtceu:phosphorus_dust", "count": 1 }],
+          "kept": [],
+          "charge": [],
+          "fluidsIn": [
+            { "id": "gtceu:chlorine", "amount": 3000 },
+            { "id": "gtceu:oxygen", "amount": 1000 }
+          ],
+          "itemsOut": [],
+          "fluidsOut": [{ "id": "gtceu:phosphoryl_chloride", "amount": 1000 }]
+        },
+        {
+          "name": "hdehp_extractant",
+          "circuit": 4,
+          "eut": 7680,
+          "duration": 300,
+          "itemsIn": [],
+          "kept": [],
+          "charge": [],
+          "fluidsIn": [
+            { "id": "gtceu:phosphoryl_chloride", "amount": 1000 },
+            { "id": "gtceu:ethylhexanol", "amount": 2000 },
+            { "id": "gtceu:water", "amount": 1000 }
+          ],
+          "itemsOut": [],
+          "fluidsOut": [
+            { "id": "gtceu:hdehp_extractant", "amount": 1000 },
+            { "id": "gtceu:hydrochloric_acid", "amount": 3000 }
+          ]
+        },
+        {
+          "name": "hdehp_solvent",
+          "circuit": 5,
+          "eut": 7680,
+          "duration": 100,
+          "itemsIn": [],
+          "kept": [],
+          "charge": [],
+          "fluidsIn": [
+            { "id": "gtceu:hdehp_extractant", "amount": 1000 },
+            { "id": "gtceu:kerosene", "amount": 1000 }
+          ],
+          "itemsOut": [],
+          "fluidsOut": [{ "id": "gtceu:hdehp_solvent", "amount": 2000 }]
+        }
+      ]
+    }
+  }
+}
