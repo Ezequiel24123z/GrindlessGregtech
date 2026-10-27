@@ -25,7 +25,7 @@ function run({ stations = readPack(STATIONS), table = readPack(TABLE) } = {}) {
   const G = {
     readJsonTable: (p) => JSON.parse(JSON.stringify(p in files ? files[p] : readPack(p))),
     orbits: { dimensions: ['gcyr:overworld_orbit', 'grindless:io_orbit', 'grindless:saturn_orbit', 'grindless:uranus_orbit',
-      'grindless:neptune_orbit', 'grindless:pluto_orbit'] },
+      'grindless:neptune_orbit', 'grindless:pluto_orbit', 'gcyr:mercury_orbit', 'grindless:proxima_b_orbit'] },
   };
   const log = (level) => (...m) => logs.push([level, m.map(String).join(' ')]);
   const sandbox = {

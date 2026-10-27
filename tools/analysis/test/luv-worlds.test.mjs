@@ -168,10 +168,11 @@ test('surface rules carry each world\'s signature blocks', () => {
   assert.equal(json(`${data}/worldgen/noise_settings/io.json`).default_fluid.Name, 'minecraft:lava');
 });
 
-test('every place surface and grindless orbit has a dimension file', () => {
+test('every grindless place surface and grindless orbit has a dimension file', () => {
   const places = json(`${data}/tables/places.json`);
   const orbits = json(`${data}/tables/orbits.json`);
-  const ids = [...Object.values(places.surfaces), ...orbits.dimensions.filter(d => d.startsWith('grindless:'))];
+  // GCYR surfaces (UHV's Proxima b) are GCYR's own dimensions
+  const ids = [...Object.values(places.surfaces), ...orbits.dimensions].filter(d => d.startsWith('grindless:'));
   assert.ok(ids.length >= 9);
   for (const id of ids) assert.ok(fs.existsSync(file(`${data}/dimension/${local(id)}.json`)), id);
 });
