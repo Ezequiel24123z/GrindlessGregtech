@@ -4,8 +4,8 @@
 
 .DESCRIPTION
   1. tools\Update-PackIndex.ps1 (normalizes pack text files to UTF-8 no BOM + LF, then packwiz refresh)
-  2. zips pack\ + tools\test\overlay\   3. uploads to the home test PC
-  4. runs the remote scripts over ssh (one Minecraft JVM globally on the home PC, -Slots on a Linux backend; 1G/4G heap;
+  2. zips pack\ + tools\test\overlay\   3. uploads to the backend: VM first (azure), home PC as fallback (-Backend)
+  4. runs the remote scripts over ssh (-Slots concurrent JVMs on the Linux VM, one globally on the home PC; 1G/4G heap;
      a shared native time budget of at most 600 seconds, then bounded shutdown)
   5. downloads results.zip and prints a concise PASS/FAIL summary (see Show-GGResults.ps1).
 
