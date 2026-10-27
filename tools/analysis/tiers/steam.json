@@ -103,9 +103,9 @@
       "items": [
         "minecraft:sugar_cane", "minecraft:wheat_seeds", "minecraft:wheat", "minecraft:beetroot_seeds", "minecraft:melon_seeds",
         "minecraft:pumpkin_seeds", "minecraft:carrot", "minecraft:potato", "minecraft:cactus", "minecraft:bamboo", "minecraft:vine",
-        "#minecraft:flowers"
+        "#minecraft:flowers", "minecraft:brown_mushroom", "minecraft:red_mushroom"
       ],
-      "note": "Crops and plants from the world."
+      "note": "Crops and plants from the world. Mushrooms grow in dark spots and swamps; one of each seeds the greenhouse (lv/greenhouse.js), which makes the rest (UHV escalation, 2026-10-28: the cladosporium culture's brown mushroom had no source in the model)."
     },
     {
       "id": "fluids",
