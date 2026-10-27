@@ -1045,7 +1045,8 @@
       note('seed_condition_' + lg.key, 'recipe conditions: ' + dimCond)
     })
     var zt = global.grindless && global.grindless.zpmTravel
-    check('zpm_travel_recipes', zt !== undefined && zt !== null && zt.done === true, 'G.zpmTravel.done=' + (zt ? zt.done : 'no G.zpmTravel'))
+    check('zpm_travel_recipes', zt !== undefined && zt !== null && zt.done !== undefined && zt.done.length >= 6,
+      'G.zpmTravel.done lists the ' + (zt && zt.done ? zt.done.length : 'no') + ' recipe ids travel.js added (expected 6: two fuel tanks, two quantum seeds, two singularities)')
   }
 
   function hurtSummary(since) {
