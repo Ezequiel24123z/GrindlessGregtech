@@ -1,3 +1,4 @@
+// priority: -13124
 // -----------------------------------------------------------------------------------------------
 // Recipes of the EV Tripod Drill (gtceu:ev_vein_drill, startup_scripts/grindless/ev/tripod.js) and of its parts.
 //

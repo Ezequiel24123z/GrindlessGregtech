@@ -1,3 +1,4 @@
+// priority: -24224
 // -----------------------------------------------------------------------------------------------
 // Recipes of UHV's high flux reactor and transuranium facility (machines and recipe types: startup_scripts/grindless/uhv/transcurium.js;
 // docs/eras/uhv.md, machines 1 and 2, lines 1-3 and 25; package UHV-A1), generated at every server load from

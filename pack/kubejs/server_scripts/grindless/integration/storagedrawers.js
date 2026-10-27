@@ -1,3 +1,4 @@
+// priority: -16024
 // -----------------------------------------------------------------------------------------------
 // Storage Drawers (storagedrawers): the storage upgrades are the drawer "levels"; the second level is an MV item
 // (docs/eras/mv.md, "Mods and integration": level 2 with aluminium and steel plates). Copper (level 1) stays; the iron upgrade asks

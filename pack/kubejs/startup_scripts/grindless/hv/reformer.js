@@ -1,3 +1,4 @@
+// priority: -2100
 // -----------------------------------------------------------------------------------------------
 // The Catalytic Reformer, the second multiblock of the HV era (the one that can be cut), and the recipe type it runs.
 //

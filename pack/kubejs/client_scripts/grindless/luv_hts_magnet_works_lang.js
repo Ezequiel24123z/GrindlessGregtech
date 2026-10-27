@@ -1,3 +1,4 @@
+// priority: 7600
 // Gregtech Grindless - names and tooltips of LuV's HTS Magnet Works (startup_scripts/grindless/luv/hts_magnet_works.js), its recipe type,
 // the EMI line of each of its recipes and the controller's cold-test charge line.
 //

@@ -1,3 +1,4 @@
+// priority: -5824
 // Gregtech Grindless - smoke test of the Moon (v0.5.0). TEST-ONLY overlay: copied over the instance on the test PC, never shipped.
 //
 //   powershell -File tools\test\Invoke-GGTest.ps1 -Suite server `

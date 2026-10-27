@@ -1,3 +1,4 @@
+// priority: -3500
 // -----------------------------------------------------------------------------------------------
 // The Composite Autoclave (gtceu:composite_autoclave), HV, and the recipe type it runs, gtceu:composite_curing.
 //

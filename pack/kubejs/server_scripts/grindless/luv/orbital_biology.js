@@ -1,3 +1,4 @@
+// priority: -18524
 // B4 keeps GTM's dopant doses and cleanroom conditions; only the orbit changes the crystal yield and time.
 (function () {
   var G = global.grindless

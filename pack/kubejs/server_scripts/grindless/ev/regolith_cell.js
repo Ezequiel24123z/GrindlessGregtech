@@ -1,3 +1,4 @@
+// priority: -12924
 // -----------------------------------------------------------------------------------------------
 // gtceu:regolith_processing recipes of the Regolith Cell (gtceu:regolith_cell, startup_scripts/grindless/ev/regolith_cell.js) and the
 // recipe that makes the cell (EV era, docs/eras/ev.md "Regolith cell"). GTM has no lunar chemistry, so these five recipes are ours,

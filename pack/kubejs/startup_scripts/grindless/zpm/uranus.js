@@ -1,3 +1,4 @@
+// priority: -12200
 // -----------------------------------------------------------------------------------------------
 // ZPM's Uranus orbit (docs/eras/zpm.md, "Machines 25-27"; package ZPM-B5): three multiblocks of Uranus orbit and their recipe types.
 //

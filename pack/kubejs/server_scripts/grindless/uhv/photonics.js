@@ -1,3 +1,4 @@
+// priority: -23624
 // -----------------------------------------------------------------------------------------------
 // Recipes of UHV's MBE reactor and photonic foundry (machines and recipe types: startup_scripts/grindless/uhv/photonics.js;
 // docs/eras/uhv.md, machines 5 and 6, lines 5, 6, 7 and 9; package UHV-A4), generated at every server load from

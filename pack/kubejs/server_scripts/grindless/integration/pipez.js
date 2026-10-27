@@ -1,3 +1,4 @@
+// priority: -15624
 // -----------------------------------------------------------------------------------------------
 // Pipez (pipez): the energy pipe and the universal pipe (which also carries energy) move Forge Energy (FE).
 // Power in this pack is EU over GregTech cables (voltage tiers, amperage, loss). An FE pipe is a cable that skips all of

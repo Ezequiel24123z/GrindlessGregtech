@@ -1,3 +1,4 @@
+// priority: -1200
 // -----------------------------------------------------------------------------------------------
 // The Atmosphere Processor, the multiblock of the Mars base (docs/eras/ev.md, "Atmosphere processor"), and the recipe type it runs.
 //

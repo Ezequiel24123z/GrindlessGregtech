@@ -1,4 +1,4 @@
-// priority: 100
+// priority: -24
 // -----------------------------------------------------------------------------------------------
 // Vein data for recipes (server side). The canonical vein table is kubejs/data/grindless/tables/veins.json
 // (GTM 7.5.3 Overworld veins, see that file for the format and the source); startup scripts load it into

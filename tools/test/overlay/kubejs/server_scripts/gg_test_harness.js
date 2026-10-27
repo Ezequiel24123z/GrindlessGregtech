@@ -1,3 +1,4 @@
+// priority: -2224
 // GG test harness (TEST-ONLY overlay: copied over the instance on the test PC, never shipped in the pack).
 // Markers are parsed by tools/test/Invoke-GGTest.ps1: any log line containing "GGTEST|" is reported.
 ServerEvents.loaded(event => {

@@ -1,3 +1,4 @@
+// priority: 2400
 // Gregtech Grindless - names and tooltips of UV's materials (startup_scripts/grindless/uv/materials.js):
 //
 //   gtceu:boron_nitride_reactor / powder_in_tube_line / powder_bed_printer   machine names + four tooltip lines each

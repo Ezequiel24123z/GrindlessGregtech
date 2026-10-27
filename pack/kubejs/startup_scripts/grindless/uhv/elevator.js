@@ -1,3 +1,4 @@
+// priority: -7900
 // -----------------------------------------------------------------------------------------------
 // UHV's fibres and the space elevator (docs/eras/uhv.md, machines 14 and 15, line 24; package UHV-A7): the PBO plant, the tether ribbon
 // works, their recipe types, line 24's intermediates and the GEO-assembled stage the elevator lifts. GTCA's space elevator

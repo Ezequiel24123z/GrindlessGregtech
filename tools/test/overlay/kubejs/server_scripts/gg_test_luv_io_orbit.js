@@ -1,3 +1,4 @@
+// priority: -4624
 // TEST-ONLY B7 fixture (the Io-orbit slot: the flux-tube tether or its fallback, the Io sulfur-iodine plant); prepared for the single
 // integrated LuV validation owner, not a standalone launch.
 // Command: kubejs custom_command gg_test_luv_io_orbit

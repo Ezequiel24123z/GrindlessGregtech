@@ -1,3 +1,4 @@
+// priority: -17924
 // -----------------------------------------------------------------------------------------------
 // LuV B8, Europa (machines and type: startup_scripts/grindless/luv/europa.js; docs/eras/luv.md, machines 17 and 18).
 //

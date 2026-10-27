@@ -1,3 +1,4 @@
+// priority: -11224
 // TEST ONLY, ZPM-A6 (the diamond lattice fab, the ion implanter, the qubit fab, the hot cell's silicon-28 mode, our two HPCA assembler recipes).
 // Command: kubejs custom_command gg_test_zpm_qubits   Reserved band: X 20480-20543 (no block is placed: live recipe lookups only).
 //

@@ -1,3 +1,4 @@
+// priority: -27224
 // -----------------------------------------------------------------------------------------------
 // Recipes of ZPM's Titan probes (machines: startup_scripts/grindless/zpm/titan_probes.js; docs/eras/zpm.md "Machines 21-22"; ZPM-B3).
 // Every machine recipe carries .dimension('grindless:saturn_orbit') and its own programmed circuit (one recipe per lookup path).

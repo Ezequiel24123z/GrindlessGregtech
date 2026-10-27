@@ -1,3 +1,4 @@
+// priority: 1700
 // Gregtech Grindless - names of UV travel (startup_scripts/grindless/uv/travel.js and data/grindless/gcyr/planets/{neptune,pluto}.json):
 //
 //   level.grindless.<planet>                   GCYR's planet names (each planet file's "translation"), shown in the rocket menu

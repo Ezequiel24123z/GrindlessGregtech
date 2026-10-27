@@ -1,3 +1,4 @@
+// priority: -3624
 // Gregtech Grindless - native fixture of package LuV-A4 (TEST-ONLY overlay: copied over the instance on the test PC, never shipped with
 // the pack): the HTS magnet works (startup_scripts/grindless/luv/hts_magnet_works.js, server_scripts/grindless/luv/hts_magnet_works.js,
 // kubejs/data/grindless/tables/hts_magnet_works.json) and the wireless network's LuV tier (lv/wireless_energy.js, the LuV row of

@@ -1,3 +1,4 @@
+// priority: -20924
 // -----------------------------------------------------------------------------------------------
 // Controller recipes of the four universal factories (startup_scripts/grindless/mv/leisure_factories.js), made by hand from MV parts
 // like the rest of the MV family (mv/family_crafting.js). Each controller is built around the two single-block MV machines that are

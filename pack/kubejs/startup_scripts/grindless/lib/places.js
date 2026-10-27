@@ -1,4 +1,4 @@
-// priority: 899
+// priority: 200
 // LuV surface dimension ids, in one table (tables/places.json) so the ids fixed by spike S0-1 are one edit. Orbits are in orbits.js.
 (function () {
   var G = global.grindless

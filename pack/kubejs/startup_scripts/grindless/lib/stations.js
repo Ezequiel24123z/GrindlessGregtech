@@ -1,4 +1,4 @@
-// priority: 898
+// priority: 100
 // GCYR stations and the Io-orbit slot (docs/eras/luv.md, decisions 3 and 17; packages B1 and B7), from tables/stations.json. Runs after
 // lib/orbits.js (priority 899): the station orbits must be in its table.
 //

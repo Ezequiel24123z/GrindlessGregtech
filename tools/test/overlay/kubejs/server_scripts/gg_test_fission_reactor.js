@@ -1,3 +1,4 @@
+// priority: -1824
 // Gregtech Grindless - smoke test of package IV-A2, fission-reactor (TEST-ONLY overlay: copied over the instance on the test PC, never
 // shipped with the pack): IV's Fission Reactor (gtceu:fission_reactor, generator type gtceu:fission_core), startup_scripts/grindless/iv/
 // fission_reactor.js, server_scripts/grindless/iv/fission_reactor.js and data/grindless/tables/fission_cores.json.

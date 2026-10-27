@@ -1,3 +1,4 @@
+// priority: -19624
 // -----------------------------------------------------------------------------------------------
 // gtceu:sulfide_roasting recipes of the Sulfide Roaster (gtceu:sulfide_roaster), its vanadium contact catalyst and its controller.
 //

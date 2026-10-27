@@ -1,3 +1,4 @@
+// priority: -16924
 // -----------------------------------------------------------------------------------------------
 // Recipes of the naquadah plant (machine and recipe type: startup_scripts/grindless/iv/naquadah_plant.js; docs/eras/iv.md, "Naquadah
 // plant", package IV-B3; mode 2 is LuV's, docs/eras/luv.md "Naquadah plant, mode 2: the exact balance", package A2), generated at every

@@ -1,3 +1,4 @@
+// priority: -15124
 // -----------------------------------------------------------------------------------------------
 // GT Community Additions (gtca 2.2.0), audited against docs/eras (ev.md, "Decisions taken": no addon may process cheaper than
 // GT in its era or undercut the pack's own multiblocks; GCYM-style parallel machines wait for IV). The mod has no config switch

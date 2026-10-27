@@ -1,3 +1,4 @@
+// priority: -25924
 // -----------------------------------------------------------------------------------------------
 // Recipes of UV's Starshot (docs/eras/uv.md, machines 18, 21 and 23, line 20; package UV-A12): the light sail fab, the starchip fab and
 // the laser sail launcher (machines: startup_scripts/grindless/uv/starshot.js), plus the GTM rows that feed the light sail line.

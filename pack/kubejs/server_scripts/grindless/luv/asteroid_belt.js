@@ -1,3 +1,4 @@
+// priority: -17524
 // -----------------------------------------------------------------------------------------------
 // LuV B5 on the server (registrations: startup_scripts/grindless/luv/asteroid_belt.js; docs/eras/luv.md, sections 11-13). The belt's
 // dimension comes only from tables/places.json (G.places, key asteroid_belt). Every number marked (tune) in the design is in

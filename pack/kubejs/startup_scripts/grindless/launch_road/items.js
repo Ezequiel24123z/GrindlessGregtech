@@ -1,3 +1,4 @@
+// priority: -3700
 // -----------------------------------------------------------------------------------------------
 // Items of the road to the first rocket (MV -> HV). They are the parts that make the first rocket an engineering project instead of one
 // assembler recipe; none of them is a block of the rocket (the rocket stays GCYR's own blocks, only their recipes change):

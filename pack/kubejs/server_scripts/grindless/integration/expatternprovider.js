@@ -1,3 +1,4 @@
+// priority: -14624
 // -----------------------------------------------------------------------------------------------
 // ExtendedAE (modId expatternprovider) on the HV era (docs/eras/hv.md, "Mods and integration"), except the wireless
 // connector, re-gated to LV (DECISIONS.md, power pass): it is the cable-free option for whoever does not want to run

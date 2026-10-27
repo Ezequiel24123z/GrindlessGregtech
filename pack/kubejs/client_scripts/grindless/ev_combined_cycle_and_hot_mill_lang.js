@@ -1,3 +1,4 @@
+// priority: 10900
 // Gregtech Grindless - names and tooltips of the EV Combined-Cycle Plant and Hot Strip Mill, their recipe types, and the reason both show
 // when the controller is set to void fluids.
 //

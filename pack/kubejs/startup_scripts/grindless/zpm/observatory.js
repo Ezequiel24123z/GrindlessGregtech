@@ -1,3 +1,4 @@
+// priority: -11500
 // -----------------------------------------------------------------------------------------------
 // ZPM's survey network (docs/eras/zpm.md, "Machines 15-17"; package ZPM-A9): three multiblocks of the UV gate's surveys.
 //

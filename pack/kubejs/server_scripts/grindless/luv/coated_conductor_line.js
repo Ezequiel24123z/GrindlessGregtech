@@ -1,3 +1,4 @@
+// priority: -17824
 // -----------------------------------------------------------------------------------------------
 // Recipes of LuV's coated conductor line (machine and recipe type: startup_scripts/grindless/luv/coated_conductor_line.js;
 // docs/eras/luv.md, "2. Coated conductor line"; package LuV-A3), generated at every server load from

@@ -1,3 +1,4 @@
+// priority: -9124
 // TEST ONLY, UV-B2. Command: kubejs custom_command gg_test_uv_neptune
 // Reserved band ONLY: X26624-26687, Z0-15; Neptune orbit and Uranus orbit Y198-214, Overworld Y98-114.
 // The doubt: one recipe type (ZPM's gtceu:ice_giant_siphon) shared by two machines with a split by dimension, circuit and recipe path.

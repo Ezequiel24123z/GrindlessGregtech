@@ -1,3 +1,4 @@
+// priority: -23724
 // -----------------------------------------------------------------------------------------------
 // Recipes of UHV's SiC device fab and solar array fab (machines and recipe types: startup_scripts/grindless/uhv/power_devices.js;
 // docs/eras/uhv.md, machines 7 and 8, lines 10 and 21; package UHV-A5), generated at every server load from

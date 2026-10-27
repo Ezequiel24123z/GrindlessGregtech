@@ -1,3 +1,4 @@
+// priority: -12324
 // -----------------------------------------------------------------------------------------------
 // gtceu:solvent_extraction recipes of the Rare Earth Extraction Cascade (gtceu:extraction_cascade) and the recipe that makes the cascade
 // (EV era, docs/eras/ev.md "Rare-earth extraction cascade"). GTM has no rare earth leach and no solvent extraction, so these two recipes

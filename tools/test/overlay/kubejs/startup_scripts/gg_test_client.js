@@ -1,3 +1,4 @@
+// priority: 0
 // Test-only (harness overlay, never part of the player pack).
 // Answers Minecraft's "experimental settings" confirm screen when the test client creates its world: the pack ships
 // worldgen datapack content, so Minecraft asks for confirmation and mc-runtime-test would wait for a click forever.

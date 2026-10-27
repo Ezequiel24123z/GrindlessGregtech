@@ -1,3 +1,4 @@
+// priority: -1224
 // Gregtech Grindless - EMI coverage, server half (TEST-ONLY overlay, never shipped with the pack). EMI lives on the client, so this
 // half only arms the client one for a serial integrated run: a dispatcher like gg_test_v071_integration.js adds the stage
 // ['emi_coverage', 'ggEmiCoverage', 'ggTestEmiCoverageStart'] and waits for serverDone and clientDone in global.ggEmiCoverage (failed

@@ -1,3 +1,4 @@
+// priority: -4124
 // Gregtech Grindless - LuV spike S0-4: GT--'s circuit assembly line and GTM's NPU recipe (TEST-ONLY overlay: copied over the
 // instance on the test PC, never shipped with the pack). Prepared by LuV-A5 for LuV's single integrated run; not run yet.
 //

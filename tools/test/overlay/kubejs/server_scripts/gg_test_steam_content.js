@@ -1,3 +1,4 @@
+// priority: -7224
 // Gregtech Grindless - test of the Steam Age additions of the journey plan: the Steam Blast Furnace and the By-product Coke
 // Battery (TEST-ONLY overlay: copied over the instance on the test PC, never shipped with the pack).
 //

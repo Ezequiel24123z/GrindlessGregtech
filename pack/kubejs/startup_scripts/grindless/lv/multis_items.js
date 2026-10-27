@@ -1,3 +1,4 @@
+// priority: -5100
 // -----------------------------------------------------------------------------------------------
 // LV items of the electric multiblocks:
 //   grindless:graphite_electrode     wear part of the Submerged Arc Furnace (consumed by chance, ~3 % of the cycles)

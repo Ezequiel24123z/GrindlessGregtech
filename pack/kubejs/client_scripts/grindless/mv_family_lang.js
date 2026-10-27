@@ -1,3 +1,4 @@
+// priority: 6400
 // Gregtech Grindless - names and tooltips of the MV step of the Vein Drill / Greenhouse family.
 //
 //   gtceu:mv_vein_drill, gtceu:mv_greenhouse   (machine names + tooltips)

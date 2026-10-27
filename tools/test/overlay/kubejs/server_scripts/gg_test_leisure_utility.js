@@ -1,3 +1,4 @@
+// priority: -3324
 // Gregtech Grindless - test of the Leisure utility package (TEST-ONLY overlay: copied over the instance on the test PC, never
 // shipped with the pack): startup_scripts/grindless/mv/leisure_utility.js, lib/coils.js, server_scripts/grindless/mv/leisure_utility.js.
 //

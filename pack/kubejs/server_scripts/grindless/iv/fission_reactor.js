@@ -1,3 +1,4 @@
+// priority: -16224
 // -----------------------------------------------------------------------------------------------
 // Recipes of IV's fission reactor (machine and recipe type: startup_scripts/grindless/iv/fission_reactor.js; docs/eras/iv.md,
 // "Designed-core reactor"; package IV-A2):

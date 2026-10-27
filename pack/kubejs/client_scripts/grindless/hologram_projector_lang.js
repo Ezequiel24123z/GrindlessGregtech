@@ -1,3 +1,4 @@
+// priority: 9800
 // Gregtech Grindless - names, tooltips and messages of the Hologram Projector (grindless:hologram_projector) and the tooltip
 // line of GTM's Terminal, which works like the projector in this pack (server_scripts/grindless/steam/hologram_projector.js).
 // Minecraft merges lang entries from every script, so ClientEvents.lang works wherever it is declared (as steam_content_lang.js).

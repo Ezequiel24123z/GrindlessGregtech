@@ -1,3 +1,4 @@
+// priority: -11024
 // TEST ONLY, ZPM-A9 (the neutrino observatory, the deep space network, the Kuiper survey telescope, the UV energy hatch).
 // Command: kubejs custom_command gg_test_zpm_observatory   Reserved band: X 21248-21311 (no block is placed: live recipe lookups only).
 //

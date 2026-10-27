@@ -1,4 +1,4 @@
-// priority: 100
+// priority: 76
 // -----------------------------------------------------------------------------------------------
 // Steam greenhouse data: what grows from which sapling / seed. Recipes are generated from this table by
 // server_scripts/grindless/steam/greenhouse.js; electric greenhouses of later tiers can reuse it.

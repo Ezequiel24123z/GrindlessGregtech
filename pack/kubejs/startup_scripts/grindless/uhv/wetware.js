@@ -1,3 +1,4 @@
+// priority: -9000
 // -----------------------------------------------------------------------------------------------
 // UHV's organoid array (docs/eras/uhv.md, machine 11 and line 12; package UHV-B6): the machine and its recipe type. The organoid
 // processor, the chitosan scaffold, the SiC power module, ultrapure water and the sterilised growth medium are F1's

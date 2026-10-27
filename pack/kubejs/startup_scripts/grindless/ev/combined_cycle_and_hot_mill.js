@@ -1,3 +1,4 @@
+// priority: -700
 // -----------------------------------------------------------------------------------------------
 // Two EV multiblocks of "Raising EV to the target" (docs/eras/ev.md), both on Earth, and the recipe types they run:
 //

@@ -1,3 +1,4 @@
+// priority: -21224
 // -----------------------------------------------------------------------------------------------
 // Crafting-table recipes of the two MV multiblocks of this file set, made by hand from the machines they replace (nothing here needs a machine):
 //

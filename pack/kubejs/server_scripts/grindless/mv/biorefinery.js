@@ -1,3 +1,4 @@
+// priority: -20524
 // -----------------------------------------------------------------------------------------------
 // gtceu:bio_distillation recipes of the Biorefinery (gtceu:biorefinery), generated at server load from GTM's own gtceu:distillation_tower
 // recipes whose INPUT is an organic fluid. Nothing is typed by hand: the recipes are read from the recipe set (ServerEvents.recipes, original

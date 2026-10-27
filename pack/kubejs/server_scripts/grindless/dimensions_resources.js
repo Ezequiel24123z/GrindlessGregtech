@@ -1,3 +1,4 @@
+// priority: -12024
 // Gregtech Grindless - "Building Dimensions": base fluids in the building dimensions
 //
 // GTM 7.5.3's gas collector only has an Air recipe for the Overworld (plus separate nether_air/ender_air recipes,

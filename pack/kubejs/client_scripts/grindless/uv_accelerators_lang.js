@@ -1,3 +1,4 @@
+// priority: 3300
 // Gregtech Grindless - names and tooltips of UV's accelerators (startup_scripts/grindless/uv/accelerators.js; package UV-A5):
 //
 //   block.gtceu.<machine>, gtceu.<recipe type>                    machine and recipe type names

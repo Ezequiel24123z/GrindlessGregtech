@@ -1,3 +1,4 @@
+// priority: -6624
 // Gregtech Grindless - test overlay (not shipped with the pack)
 //
 // Usage: powershell -File tools\test\Invoke-GGTest.ps1 -Suite server `

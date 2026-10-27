@@ -1,3 +1,4 @@
+// priority: 11500
 // TEST-ONLY: bridge mc-runtime-test's 100-tick exit across serial fixture handoffs.
 // No clicks/teleports/assertion copies here. A paused server must not hide a timeout.
 ;(function () {

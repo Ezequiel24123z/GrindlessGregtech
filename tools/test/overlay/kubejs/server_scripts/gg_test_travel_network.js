@@ -1,3 +1,4 @@
+// priority: -7624
 // Gregtech Grindless - smoke test of package IV-B5, travel-and-network (TEST-ONLY overlay: copied over the instance on the test PC, never
 // shipped with the pack): startup_scripts/grindless/iv/travel_network.js and server_scripts/grindless/iv/travel_network.js.
 //

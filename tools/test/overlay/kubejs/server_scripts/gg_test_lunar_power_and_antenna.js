@@ -1,3 +1,4 @@
+// priority: -3424
 // Gregtech Grindless - smoke test of package B4, lunar power and antenna (TEST-ONLY overlay: copied over the instance on the test PC,
 // never shipped): the Lunar Solar Array (gtceu:lunar_solar_array, the first generator multiblock of the pack with a recipe type of
 // its own, gtceu:lunar_solar) and the Deep Space Antenna (gtceu:deep_space_antenna, gtceu:deep_space_tracking), both in

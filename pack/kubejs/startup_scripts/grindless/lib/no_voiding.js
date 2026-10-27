@@ -1,4 +1,4 @@
-// priority: 998
+// priority: 600
 // -----------------------------------------------------------------------------------------------
 // Grindless "keep what you make" helper: a machine that must not throw its outputs away refuses to run while its controller is set to
 // void them (GTM's IVoidable voiding mode). The mechanism of grindless.steam_outputs.no_voiding (ev/combined_cycle_and_hot_mill.js),

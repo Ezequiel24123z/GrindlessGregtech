@@ -1,3 +1,4 @@
+// priority: -21324
 // -----------------------------------------------------------------------------------------------
 // Crafting-table recipes of the observatory controllers (made by hand from parts of their own era; nothing here needs a machine):
 //

@@ -1,3 +1,4 @@
+// priority: -100
 // Gregtech Grindless - test overlay (not shipped with the pack): records the action-bar messages the client receives while
 // the travel-key test runs (server_scripts/gg_test_dimension_keys.js checks the "key failed" message a player sees).
 // A startup script because KubeJS client scripts cannot listen to Forge events; the event is client-only, hence the guard.

@@ -1,3 +1,4 @@
+// priority: -5000
 // -----------------------------------------------------------------------------------------------
 // The three electric multiblocks of the LV era (every pattern goes through global.grindless.patterns, lib/patterns.js):
 //

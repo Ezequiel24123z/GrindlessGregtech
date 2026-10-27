@@ -1,3 +1,4 @@
+// priority: -11424
 // TEST ONLY, ZPM-B2. Command: kubejs custom_command gg_test_zpm_saturn_siphon
 // Reserved band ONLY: X21760-21823, Z0-63; Saturn orbit Y198-214, Overworld Y98-112.
 // Builds the gas giant siphon, the isotope column and the ring harvester in Saturn orbit and runs one real recipe in each (siphon circuit 1,

@@ -1,3 +1,4 @@
+// priority: -424
 // Gregtech Grindless - Earth's weather stays on Earth (TEST-ONLY overlay: copied over the instance on the test PC, never shipped with
 // the pack). Script under test: pack/kubejs/server_scripts/grindless/space/airless_weather.js.
 //

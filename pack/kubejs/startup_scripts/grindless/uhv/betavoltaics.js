@@ -1,3 +1,4 @@
+// priority: -7700
 // -----------------------------------------------------------------------------------------------
 // UHV's water and betavoltaics (docs/eras/uhv.md, machines 9 and 10, lines 4, 11 and 22; package UHV-A3): the ultrapure water plant and
 // the betavoltaic fab, their recipe types, the p-i-n diamond diode and the materials of lines 4 and 22. The recipes come from

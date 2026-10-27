@@ -1,3 +1,4 @@
+// priority: -3000
 // -----------------------------------------------------------------------------------------------
 // One of IV's multiblocks (docs/eras/iv.md, "Naquadah plant"; package IV-B3): the naquadah plant and its recipe type.
 //

@@ -1,3 +1,4 @@
+// priority: 11600
 // UV-B1: client half of gg_test_uv_travel (copied from client_scripts/gg_test_zpm_travel.js; only the shared map and the tag differ).
 // Gregtech Grindless - client half of the GCYR flight test (TEST-ONLY overlay: copied over the instance on the test PC, never
 // shipped with the pack). Partner of server_scripts/gg_test_gcyr_flight.js; asleep unless that test sets 'hold' in the map it

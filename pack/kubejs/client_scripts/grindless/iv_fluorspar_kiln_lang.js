@@ -1,3 +1,4 @@
+// priority: 9400
 // Gregtech Grindless - names and tooltips of IV's Fluorspar Kiln (startup_scripts/grindless/iv/fluorspar_kiln.js), its recipe type, the EMI
 // line of its recipe and the reason it shows when set to void fluids.
 //

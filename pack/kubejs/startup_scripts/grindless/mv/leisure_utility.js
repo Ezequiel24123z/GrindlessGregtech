@@ -1,3 +1,4 @@
+// priority: -6200
 // -----------------------------------------------------------------------------------------------
 // Leisure utility multiblocks (MV): GregTech Leisure's advanced multi smelter, lava furnace and weather controller, as ideas only
 // (docs/research/leisure.md 4.2: GTL's licence is not permissive, so no code, text or texture of it is used; the numbers, patterns

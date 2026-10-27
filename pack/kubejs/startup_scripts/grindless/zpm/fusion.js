@@ -1,3 +1,4 @@
+// priority: -11200
 // -----------------------------------------------------------------------------------------------
 // Two of ZPM's multiblocks (docs/eras/zpm.md, "Machines 7-8"; package ZPM-A7): the plasma quench caster and the direct energy converter.
 //

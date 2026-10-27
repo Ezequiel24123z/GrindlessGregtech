@@ -1,3 +1,4 @@
+// priority: -10600
 // -----------------------------------------------------------------------------------------------
 // UV's Starshot (docs/eras/uv.md, machines 18, 21 and 23, line 20; package UV-A12): three machines and their recipe types, the light
 // sail's three carriers and the three gases of its line. The light sail, starchip, sail-chip, Starshot probe, hBN dust, heliopause data,

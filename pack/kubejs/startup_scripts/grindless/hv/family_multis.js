@@ -1,3 +1,4 @@
+// priority: -1800
 // -----------------------------------------------------------------------------------------------
 // The HV step of the LV family: same recipe types and same structure shape as LV and MV, stainless steel instead of aluminium,
 // 32 runs at once.

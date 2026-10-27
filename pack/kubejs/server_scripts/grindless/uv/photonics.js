@@ -1,3 +1,4 @@
+// priority: -25624
 // -----------------------------------------------------------------------------------------------
 // Recipes of UV's photonics (docs/eras/uv.md, machines 9 and 10, lines 8 and 9; package UV-A6): the fibre draw tower, the MOCVD reactor
 // and the small side steps that feed them (machines and items: startup_scripts/grindless/uv/photonics.js). VA[LuV] = 30,720 EU/t,

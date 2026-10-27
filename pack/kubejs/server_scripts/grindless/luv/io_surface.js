@@ -1,3 +1,4 @@
+// priority: -18424
 // LuV B6, Io's surface (docs/eras/luv.md, sections 14 and 15). Io's dimension comes only from G.places; every number is marked
 // (tune) in the design. Basalt is GTM's rock breaker product (gtceu:rock_breaker/basalt), so sulfur concrete never needs hand-dug rock;
 // Biomes O' Plenty's black sand from Io's own ground is the other Ionian rock.

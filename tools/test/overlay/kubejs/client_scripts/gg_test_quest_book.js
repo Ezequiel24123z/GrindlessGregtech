@@ -1,3 +1,4 @@
+// priority: 12000
 // Gregtech Grindless - client half of the quest book test (TEST-ONLY overlay, never shipped). Partner of
 // server_scripts/gg_test_quest_book.js; asleep unless that test sets 'hold' in the map both halves share (global.ggQuestBook:
 // in the client suite both run in the same JVM).

@@ -1,3 +1,4 @@
+// priority: 10300
 // Gregtech Grindless - names and tooltips of the EV Platinum Plant and its electrode.
 //
 //   gtceu:platinum_plant                 (machine name + tooltips)

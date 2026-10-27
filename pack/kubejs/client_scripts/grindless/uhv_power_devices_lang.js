@@ -1,3 +1,4 @@
+// priority: 4300
 // Gregtech Grindless - names and tooltips of UHV's power devices and photovoltaics (startup_scripts/grindless/uhv/power_devices.js;
 // package UHV-A5):
 //

@@ -1,3 +1,4 @@
+// priority: -21424
 // -----------------------------------------------------------------------------------------------
 // Recipes of the observatory family (machines: startup_scripts/grindless/observatory/machines.js, items: .../items.js). One chart per
 // observatory, each made once: the chart of one step is a non-consumed input of the next, and every chart copies by hand.

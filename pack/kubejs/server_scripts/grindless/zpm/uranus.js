@@ -1,3 +1,4 @@
+// priority: -27424
 // -----------------------------------------------------------------------------------------------
 // Recipes of ZPM's Uranus orbit (machines: startup_scripts/grindless/zpm/uranus.js; docs/eras/zpm.md "Machines 25-27"; ZPM-B5).
 // Every machine recipe carries .dimension('grindless:uranus_orbit') and its own programmed circuit (one recipe per lookup path).

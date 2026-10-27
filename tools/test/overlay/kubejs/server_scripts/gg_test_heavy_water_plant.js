@@ -1,3 +1,4 @@
+// priority: -2324
 // Gregtech Grindless - smoke test of package IV-A5, heavy-water-plant (TEST-ONLY overlay: copied over the instance on the test PC, never
 // shipped with the pack): IV's Heavy-Water Plant (gtceu:heavy_water_plant and its recipe type gtceu:isotope_exchange),
 // startup_scripts/grindless/iv/heavy_water_plant.js, server_scripts/grindless/iv/heavy_water_plant.js and

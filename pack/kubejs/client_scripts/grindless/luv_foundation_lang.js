@@ -1,3 +1,4 @@
+// priority: 7800
 // Gregtech Grindless - names and tooltips of the LuV foundation (startup_scripts/grindless/luv/foundation.js):
 //
 //   grindless:<item> and grindless:<block>     the shared LuV items and blocks, with two tooltip lines each

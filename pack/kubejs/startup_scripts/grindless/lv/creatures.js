@@ -1,3 +1,4 @@
+// priority: -4800
 // -----------------------------------------------------------------------------------------------
 // LV era: the Creature Simulator. Mob drops without mobs: the model of a creature (never used up) + biomass + the
 // creature's mineral + a programmed circuit give its drops. Nobody is hunted and nothing is farmed by hand.

@@ -1,3 +1,4 @@
+// priority: -9024
 // TEST ONLY, UV-B4 (the Kuiper interceptor bay, the amorphous ice annealer, the cryogenic plant's Kuiper row).
 // Command: kubejs custom_command gg_test_uv_kuiper   Reserved band: X 27136-27199 (no block is placed: live recipe lookups only).
 //

@@ -1,3 +1,4 @@
+// priority: -5600
 // -----------------------------------------------------------------------------------------------
 // Items of the Moon (end of HV, DECISIONS.md 2026-10-24: the Moon is the only source of titanium and helium-3):
 //   grindless:vein_sample_<vein>     one per vein of data/grindless/tables/veins_moon.json: the ilmenite vein of the lunar mare

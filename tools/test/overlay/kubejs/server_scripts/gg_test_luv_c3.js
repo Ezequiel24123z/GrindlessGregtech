@@ -1,3 +1,4 @@
+// priority: -4024
 // Test-only (harness overlay). LuV's integrated run (C3): `kubejs custom_command gg_test_luv_c3_require`, sent BEFORE the
 // fixtures it affects, turns their optional stages into required ones now that every package they wait for has landed:
 //   global.ggTestLuvIoSurfaceRequireIo         gg_test_luv_io_surface: B1's Io must exist (a missing Io stage fails)

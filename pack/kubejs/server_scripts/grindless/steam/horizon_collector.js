@@ -1,3 +1,4 @@
+// priority: -22724
 // -----------------------------------------------------------------------------------------------
 // Steam era: recipes of the Horizon Collector (machine, recipe type and shard: startup_scripts/grindless/steam/horizon_collector.js;
 // docs/eras/steam.md, "The Horizon Collector (the start)"; package STEAM-X1). Generated at every server load from

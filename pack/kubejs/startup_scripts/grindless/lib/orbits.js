@@ -1,4 +1,4 @@
-// priority: 899
+// priority: 300
 (function () {
   var G = global.grindless
   var table = G.readJsonTable('kubejs/data/grindless/tables/orbits.json')

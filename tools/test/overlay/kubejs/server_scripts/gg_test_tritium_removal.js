@@ -1,3 +1,4 @@
+// priority: -7724
 // Gregtech Grindless - smoke test of package IV-B4, tritium-removal (TEST-ONLY overlay: copied over the instance on the test PC, never
 // shipped with the pack): the Tritium Removal Facility (gtceu:tritium_removal_facility, type gtceu:detritiation),
 // startup_scripts/grindless/iv/tritium_removal.js and server_scripts/grindless/iv/tritium_removal.js.

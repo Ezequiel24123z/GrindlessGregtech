@@ -1,3 +1,4 @@
+// priority: 8400
 // Gregtech Grindless - names and tooltips of IV on Venus (startup_scripts/grindless/iv/venus.js): the Pressurized Vein Drill, the Venus
 // Heat Engine and the Venus Acid Works, their recipe types, and the controller lines (off site, and why the acid works refuses voiding).
 //

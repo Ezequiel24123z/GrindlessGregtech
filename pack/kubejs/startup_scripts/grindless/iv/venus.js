@@ -1,4 +1,4 @@
-// priority: -10
+// priority: -12300
 // -----------------------------------------------------------------------------------------------
 // IV on Venus (docs/eras/iv.md: "Venus and Mercury", "Family steps", "On-site power", "Venus acid works"; package IV-B1): three
 // multiblocks of ours and two recipe types. Every number is in data/grindless/tables/venus.json; the recipes are built from it by

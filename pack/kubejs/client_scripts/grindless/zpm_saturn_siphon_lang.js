@@ -1,3 +1,4 @@
+// priority: 400
 // Gregtech Grindless - names and tooltips of ZPM's Saturn siphon machines (startup_scripts/grindless/zpm/saturn_siphon.js):
 // gtceu:gas_giant_siphon, gtceu:isotope_column, gtceu:ring_harvester and their recipe types.
 ClientEvents.lang('en_us', event => {

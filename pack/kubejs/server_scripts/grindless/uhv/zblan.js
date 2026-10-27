@@ -1,3 +1,4 @@
+// priority: -24524
 // -----------------------------------------------------------------------------------------------
 // Recipes of UHV's ZBLAN draw tower (docs/eras/uhv.md, machine 19 and line 31's ZrF4 row; package UHV-A10). Machine, preform and
 // ZrF4: startup_scripts/grindless/uhv/zblan.js; the fibre and zirconia: F1 (startup_scripts/grindless/uhv/foundation.js).

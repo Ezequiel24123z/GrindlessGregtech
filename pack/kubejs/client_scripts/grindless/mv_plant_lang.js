@@ -1,3 +1,4 @@
+// priority: 6100
 // Gregtech Grindless - names and tooltips of the MV Ore Plant and Biorefinery.
 //
 //   gtceu:ore_plant, gtceu:biorefinery            (machine names + tooltips)

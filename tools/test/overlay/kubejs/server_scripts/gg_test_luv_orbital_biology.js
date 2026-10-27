@@ -1,3 +1,4 @@
+// priority: -4824
 // TEST ONLY, B4. Integrated owner: kubejs custom_command gg_test_luv_orbital_biology
 // Never launches a JVM. Band X16640..16703, Z0..31; orbit Y198..214, Earth Y98..112.
 // Live lookup (including the entire greenhouse family), all three shapes, actual recipe runs,

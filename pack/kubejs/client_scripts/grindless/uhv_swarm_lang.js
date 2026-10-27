@@ -1,3 +1,4 @@
+// priority: 3900
 // Gregtech Grindless - names and tooltips of UHV's Dyson swarm (startup_scripts/grindless/uhv/swarm.js):
 //
 //   gtceu:swarm_segment_foundry, gtceu:swarm_control_station, gtceu:solar_probe_bay   machine names + four tooltip lines each

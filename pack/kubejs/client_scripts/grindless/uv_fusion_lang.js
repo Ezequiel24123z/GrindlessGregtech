@@ -1,3 +1,4 @@
+// priority: 2800
 // Gregtech Grindless - names and tooltips of UV's Laser Fusion Chamber and the spent laser module (startup_scripts/grindless/uv/fusion.js):
 //
 //   gtceu:laser_fusion_chamber   machine name + tooltips + no-voiding refusal

@@ -1,3 +1,4 @@
+// priority: -10324
 // Gregtech Grindless - the wireless network across a clean server restart (TEST-ONLY overlay: copied over the instance on the test
 // PC, never shipped with the pack): lv/wireless_energy.js with its list in persistent data as an NBT list of compounds
 // (lib/wireless_registry.js). Two commands, one each side of the harness's bounded restart (gg-server.ps1, @restart: the server's

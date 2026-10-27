@@ -1,3 +1,4 @@
+// priority: -9400
 // -----------------------------------------------------------------------------------------------
 // UV's detectors (docs/eras/uv.md, machines 11 and 12, lines 10 and 21; package UV-A7): two machines and their recipe types. No new
 // item or fluid: the HPGe crystal, the SNSPD array, the Starshot probe and the Proxima approach data are F1's

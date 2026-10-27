@@ -1,3 +1,4 @@
+// priority: -1424
 // Gregtech Grindless - registration test of the EV foundation (TEST-ONLY overlay: copied over the instance on the test PC, never shipped
 // with the pack).
 //

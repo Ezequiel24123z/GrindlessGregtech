@@ -1,3 +1,4 @@
+// priority: 4000
 // Gregtech Grindless - names and tooltips of UHV's Proxima life (startup_scripts/grindless/uhv/proxima_life.js; package UHV-B4):
 //
 //   block.gtceu.<machine>, gtceu.<recipe type>                    machine and recipe type names

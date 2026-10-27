@@ -1,3 +1,4 @@
+// priority: 2700
 // Gregtech Grindless - names and tooltips of UV's Heat Source Works and the four items only it makes
 // (startup_scripts/grindless/uv/heat_sources.js):
 //

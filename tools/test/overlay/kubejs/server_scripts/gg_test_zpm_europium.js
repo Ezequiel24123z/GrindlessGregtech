@@ -1,3 +1,4 @@
+// priority: -10624
 // Gregtech Grindless - smoke test of ZPM's Europium Reductor (package ZPM-A3; TEST-ONLY overlay: copied over the instance on the test PC,
 // never shipped with the pack).
 //

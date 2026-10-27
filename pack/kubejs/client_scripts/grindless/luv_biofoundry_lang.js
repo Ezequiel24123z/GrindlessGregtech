@@ -1,3 +1,4 @@
+// priority: 8100
 // Gregtech Grindless - names and tooltips of LuV's Biofoundry (startup_scripts/grindless/luv/biofoundry.js), its recipe type, the EMI
 // line of each of its recipes and the reason it shows when set to void.
 //

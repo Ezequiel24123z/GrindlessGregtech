@@ -1,3 +1,4 @@
+// priority: 9000
 // Gregtech Grindless - text of IV's mass-production kit (package IV-B6; startup_scripts/grindless/lib/parallel_hatch.js and
 // server_scripts/grindless/iv/mass_production.js).
 //

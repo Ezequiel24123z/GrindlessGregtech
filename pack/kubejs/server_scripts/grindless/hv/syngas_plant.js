@@ -1,3 +1,4 @@
+// priority: -13824
 // -----------------------------------------------------------------------------------------------
 // gtceu:syngas recipes of the Syngas and Shift Plant (gtceu:syngas_plant), its feed tag and the recipes that make the plant and its
 // catalyst (HV era). GTM has no steam gasification and no water-gas shift, so these six recipes are ours, written from the real chemistry

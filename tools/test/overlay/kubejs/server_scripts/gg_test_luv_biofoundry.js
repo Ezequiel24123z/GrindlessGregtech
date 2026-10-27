@@ -1,3 +1,4 @@
+// priority: -3924
 // Gregtech Grindless - smoke test of package LuV-A5, biofoundry (TEST-ONLY overlay: copied over the instance on the test PC, never
 // shipped with the pack): LuV's Biofoundry (gtceu:biofoundry and its recipe type gtceu:sterile_culture), startup_scripts/grindless/luv/
 // biofoundry.js, server_scripts/grindless/luv/biofoundry.js, server_scripts/grindless/lib/compose.js and data/grindless/tables/biofoundry.json.
