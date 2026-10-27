@@ -20,6 +20,10 @@
 //                          outside the line, so it goes; the _p variants (the same with platinum metal dust) go with it. Only the
 //                          GT-- version is removed (its output is concentrated platinum): with the harder line switched off GTM's own
 //                          pgs_from recipes come back and stay.
+//   the etched wetware mainframe chain (laser engraver etched_wetware_processor_mainframe, assembler ..._board, forming press
+//                          ..._base; 3 recipes)  it eats GTM's UHV wetware mainframe for a base nothing reads: before UHV
+//                          the only consumer of that circuit is the Fusion Mk3 (docs/eras/uv.md, Validator). The processor,
+//                          assembly and computer etchings stay (none of them takes a UHV circuit).
 // Re-gated:
 //   Maceration Stack (gtnn:maceration_stack_controller)  a macerator multiblock whose parallels and speed grow with the voltage
 //                          (GT++'s Industrial Maceration Stack): a GCYM-style machine, so IV like GTM's Large Maceration Tower.
@@ -51,6 +55,12 @@
     return ids
   }
 
+  var MAINFRAME_ETCHING = [
+    'gtceu:laser_engraver/item.gtnn.etched_wetware_processor_mainframe',
+    'gtceu:assembler/item.gtnn.etched_wetware_processor_mainframe_board',
+    'gtceu:forming_press/item.gtnn.etched_wetware_processor_mainframe_base'
+  ]
+
   function regateStack(event) {
     if (!Item.exists(STACK) || !Item.exists('gtceu:iv_macerator')) {
       console.warn(LOG + STACK + ' or gtceu:iv_macerator does not exist; Maceration Stack not re-gated')
@@ -70,7 +80,9 @@
     try {
       var taps = removeTaps(event)
       var stack = regateStack(event)
-      console.info(LOG + 'pgs_from taps removed: ' + taps.length + '; Maceration Stack ' + (stack ? 're-gated to IV' : 'left as it is'))
+      MAINFRAME_ETCHING.forEach(function (id) { event.remove({ id: id }) })
+      console.info(LOG + 'pgs_from taps removed: ' + taps.length + '; Maceration Stack ' + (stack ? 're-gated to IV' : 'left as it is') +
+        '; etched mainframe chain removed (' + MAINFRAME_ETCHING.length + ')')
     } catch (e) {
       console.error(LOG + 'recipe changes failed: ' + e)
     }
