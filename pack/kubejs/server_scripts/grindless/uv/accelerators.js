@@ -18,6 +18,11 @@
 // and the reactor's -> any hydrogen use; helium -> the superfluid helium plant (uv/cold.js) or LuV's helium refrigerator; bred tritium ->
 // the vacuum freezer's liquid D-T row; diluted sulfuric acid -> GTM's distillation back to sulfuric acid; the developer is a charge, never
 // drained; empty cartridges and traps come back out and are refilled.
+// UHV rows (UHV-A6, docs/eras/uhv.md line 27; inline in UHV_ROWS, not in the table): synchrotron circuit 5 sodium_22 (24Mg(d,alpha)22Na:
+// the magnesium-24 target from uhv/antimatter.js's assembler row -> the sodium-22 target for the positron accumulator; the helium -> the
+// superfluid helium plant) and antimatter trap circuit 3 antihydrogen (in Earth orbit: an antiproton cartridge and a positron cartridge
+// merged under helium II; the antiproton cartridge's shell comes back, the positron cartridge's trap becomes the antihydrogen cartridge).
+// Their builder id is 'grindless:<name>' (GTM adds the type: grindless:<type>/<name>); published as .uhvRows.
 // Lookup safety: a recipe whose ingredients are a subset of another's of its type can hide it; checked at load (a clash is an error).
 // Published for the smoke test: global.grindless.accelerators.recipes [{ type, name, recipeId, ... }], .skipped, .clashes, .controllerRecipes.
 // Rhino: var + function inside every callback that runs more than once (this Rhino throws "redeclaration of var").
@@ -30,6 +35,20 @@
   var OWN = { synchrotron: true, muon_catalysed_fusion: true, antimatter_storage: true }
   var ORBIT = G.orbits ? G.orbits.earth : 'gcyr:overworld_orbit'
   var CleanroomType = Java.loadClass('com.gregtechceu.gtceu.api.machine.multiblock.CleanroomType')
+
+  // UHV-A6's rows on these UV machines, in the table's rec shape (dataKey and recipeId are filled in by generate)
+  var UHV_ROWS = [
+    { type: 'synchrotron', name: 'sodium_22', circuit: 5, eut: 491520, duration: 800, orbit: false, cleanroom: false,
+      itemsIn: [{ id: 'grindless:magnesium_target', count: 1 }], kept: [], chancedIn: [],
+      fluidsIn: [{ id: 'gtceu:deuterium', amount: 250 }], charge: [],
+      itemsOut: [{ id: 'grindless:sodium_22_target', count: 1 }], chancedOut: [],
+      fluidsOut: [{ id: 'gtceu:helium', amount: 250 }] },
+    { type: 'antimatter_storage', name: 'antihydrogen', circuit: 3, eut: 1966080, duration: 1000, orbit: true, cleanroom: false,
+      itemsIn: [{ id: 'grindless:antiproton_cartridge', count: 1 }, { id: 'grindless:positron_cartridge', count: 1 }], kept: [], chancedIn: [],
+      fluidsIn: [{ id: 'gtceu:superfluid_helium', amount: 100 }], charge: [],
+      itemsOut: [{ id: 'grindless:antihydrogen_cartridge', count: 1 }, { id: 'grindless:empty_antiproton_cartridge', count: 1 }], chancedOut: [],
+      fluidsOut: [{ id: 'gtceu:helium', amount: 100 }] }
+  ]
 
   function list(x) {
     return Array.isArray(x) ? x : []
@@ -112,7 +131,7 @@
   }
 
   function add(event, rec) {
-    var recipe = event.recipes.gtceu[rec.type](rec.recipeId)
+    var recipe = event.recipes.gtceu[rec.type](rec.builderId || rec.recipeId)
     rec.itemsIn.forEach(function (x) { recipe.itemInputs(x.count + 'x ' + x.id) })
     rec.kept.forEach(function (x) { recipe.notConsumable(x.count + 'x ' + x.id) })
     rec.chancedIn.forEach(function (x) { recipe.chancedInput(x.count + 'x ' + x.id, x.chance, 0) })
@@ -159,8 +178,7 @@
       AC.skipped.push({ name: name, reason: reason })
       console.error(LOG + 'accelerators skipped ' + name + ': ' + reason)
     }
-    loadTable().forEach(function (rec) {
-      rec.recipeId = 'grindless:' + rec.type + '/' + rec.name
+    function addOne(rec) {
       var missing = missingIds(rec)
       if (missing.length > 0) return skip(rec.type + '/' + rec.name, 'unknown id(s): ' + missing.join(', '))
       var tooBig = sizeProblem(rec)
@@ -172,6 +190,25 @@
       }
       AC.recipes.push(rec)
       console.info(LOG + rec.type + ' ' + rec.name + ': ' + rec.duration + ' t x ' + rec.eut + ' EU/t')
+    }
+    var tableRecs = loadTable()
+    tableRecs.forEach(function (rec) {
+      rec.recipeId = 'grindless:' + rec.type + '/' + rec.name
+      addOne(rec)
+    })
+    AC.uhvRows = []
+    UHV_ROWS.forEach(function (row) {
+      var rec = {}
+      Object.keys(row).forEach(function (k) { rec[k] = row[k] })
+      var def = null
+      Object.keys(AC.machines).forEach(function (k) { if (AC.machines[k].type === rec.type) def = AC.machines[k] })
+      rec.dataKey = def !== null && def.dataKey ? String(def.dataKey) : ''
+      rec.recipeId = 'grindless:' + rec.type + '/' + rec.name
+      rec.builderId = 'grindless:' + rec.name
+      var taken = tableRecs.some(function (t) { return t.type === rec.type && (t.circuit === rec.circuit || t.name === rec.name) })
+      if (taken) return skip(rec.type + '/' + rec.name, 'circuit ' + rec.circuit + ' or name already used by the table')
+      addOne(rec)
+      if (AC.recipes.indexOf(rec) >= 0) AC.uhvRows.push(rec.recipeId)
     })
     AC.clashes = clashesOf(AC.recipes)
     if (AC.clashes.length > 0) console.error(LOG + 'accelerators: recipes whose ingredients are a subset of another\'s: ' + AC.clashes.join('; '))
