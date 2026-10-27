@@ -4261,6 +4261,10 @@ file = "kubejs/client_scripts/grindless/uv_materials_lang.js"
 hash = "6b2c8b404603c85b1b58902ad9617b66409f75bc8ab52de96e8e3bc5950428ed"
 
 [[files]]
+file = "kubejs/client_scripts/grindless/uv_neptune_lang.js"
+hash = "c584df83e29c0167c6171e399026ce32e5700edb7adeedaf71dc17abc172029f"
+
+[[files]]
 file = "kubejs/client_scripts/grindless/uv_photonics_lang.js"
 hash = "f70e9ce1e60e5f9f56f754335fe7e0278edfec4f8f4d10f28782c699538ad186"
 
@@ -4550,7 +4554,7 @@ hash = "1f4b256531a0b42a6ecf399e9b692d9e4730bd4102e53aab3e1fa2c999b69e9d"
 
 [[files]]
 file = "kubejs/data/grindless/tables/hidden_until.json"
-hash = "ef524f7ee05eac303ea17afe14e7a50267885d00d13fa124b829c017cd292d62"
+hash = "c1b713bc99303a0b687e42f2309b5ca45d84b911b2c97881d71eea5356ebcc09"
 
 [[files]]
 file = "kubejs/data/grindless/tables/hot_cell.json"
@@ -5221,6 +5225,10 @@ file = "kubejs/server_scripts/grindless/uv/materials.js"
 hash = "1b57fd5a87ec2b11d421d0d4e7a6b93043ea6577476341cc2b68fd620eb40988"
 
 [[files]]
+file = "kubejs/server_scripts/grindless/uv/neptune.js"
+hash = "6b27f30611b45e75b8dce3d691055629fec76310d3d84238518bb154538da1fc"
+
+[[files]]
 file = "kubejs/server_scripts/grindless/uv/photonics.js"
 hash = "0b6704a38a371d88efa9a267c22a61d3879c49e17580fe1a7a65ef9cb0a7ffb3"
 
@@ -5665,6 +5673,10 @@ file = "kubejs/startup_scripts/grindless/uv/materials.js"
 hash = "6681434503f5a495e73f223aa864242af247d250b7c2f8a6a8d81d8ac98964e9"
 
 [[files]]
+file = "kubejs/startup_scripts/grindless/uv/neptune.js"
+hash = "7440da6b884af34eabe4bbeba600d50cd4ef98cf42e5300962a32d1766b3d9f8"
+
+[[files]]
 file = "kubejs/startup_scripts/grindless/uv/photonics.js"
 hash = "12363e1669cbcf8f3bc66ded8888e774dfb0d52b201bc4cced977a2aa59e327a"
 
@@ -5738,7 +5750,7 @@ hash = "51dd0427bc8a93b0af6200ba2f1aef81aa3afd0c0afbb196c371751223e4ace6"
 
 [[files]]
 file = "kubejs/startup_scripts/grindless/zpm/uranus.js"
-hash = "10e42770c16f902b401d8d164d40c34ef69a3376bbfa8089c1e38e5b82a2a77d"
+hash = "1d1f2f5779ac665ba599532098ceeff8b537d5b5fb83496e364ecfec579a1765"
 
 [[files]]
 file = "mods/advancement-plaques.pw.toml"

@@ -12,6 +12,8 @@
 //     circuit 2  -> 1 Triton ice core + 2,000 mB Triton nitrogen
 //   cryogenic_isotope_separation (ZPM's Saturn column, Saturn orbit as its other rows), circuit 4:
 //     16,000 mB Neptune hydrogen -> 124 mB deuterium + 15,876 mB hydrogen (Uranus's ratio: both ice giants' D/H are about the same)
+//   circuit 5: 100 mB helium-3 concentrate (the superleak's, uv/cold.js) -> 20 mB helium-3 + 80 mB helium
+//     (per 1,000 mB Neptune helium that is 2 mB helium-3, Saturn helium's 0.2 %; the helium goes back to the LuV liquefier)
 // Destinations: Neptune helium the superleak (uv/cold.js) and the Neptunian seed (uv/travel.js); Neptune hydrogen the isotope column above;
 // methane the pyrolyser; H2S the slurry separator and the sulfur line; Triton nitrogen its nitric oxide (uv/thorium.js); tholin the tholin
 // reformer (zpm/titan_probes.js); the Triton ice core the penetrator probe bay's catalyst (UV-B3). Nothing is voided.
@@ -35,6 +37,7 @@
   var NEPTUNE_HYDROGEN = String(UV.neptuneHydrogen || 'gtceu:neptune_hydrogen')
   var TRITON_NITROGEN = String(UV.tritonNitrogen || 'gtceu:triton_nitrogen')
   var ICE_CORE = String(UV.tritonIceCore || 'grindless:triton_ice_core')
+  var HE3_CONCENTRATE = String(UV.helium3Concentrate || 'gtceu:helium_3_concentrate')
 
   N.items = { neptuneSample: NEPTUNE_SAMPLE, tritonRecording: TRITON_REC, scoop: SCOOP, cartridge: CARTRIDGE, tholin: THOLIN, iceCore: ICE_CORE }
   N.fluids = { neptuneHelium: NEPTUNE_HELIUM, neptuneHydrogen: NEPTUNE_HYDROGEN, tritonNitrogen: TRITON_NITROGEN }
@@ -60,6 +63,11 @@
       itemsIn: [], notConsumed: [], worn: null,
       fluidsIn: [{ id: NEPTUNE_HYDROGEN, amount: 16000 }],
       fluidsOut: [{ id: 'gtceu:deuterium', amount: 124 }, { id: 'gtceu:hydrogen', amount: 15876 }],
+      itemsOut: [], eut: ZPM_VA, duration: 200, dim: 'grindless:saturn_orbit' },
+    { name: 'neptune_helium_three', type: 'cryogenic_isotope_separation', circuit: 5,
+      itemsIn: [], notConsumed: [], worn: null,
+      fluidsIn: [{ id: HE3_CONCENTRATE, amount: 100 }],
+      fluidsOut: [{ id: 'gtceu:helium_3', amount: 20 }, { id: 'gtceu:helium', amount: 80 }],
       itemsOut: [], eut: ZPM_VA, duration: 200, dim: 'grindless:saturn_orbit' }
   ]
 
