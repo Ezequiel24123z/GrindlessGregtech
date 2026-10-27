@@ -1,0 +1,80 @@
+{
+  "_source": "UHV-A2 (docs/eras/uhv.md, 'A2. Clock and crystals', machines 3 and 4, lines 3, 7 and 8): the recipes of UHV's nuclear clock lab and crystal growth furnace, the GTM cutter rows that cut the boules, the iridium crucible's assembler row and its return to EV's platinum plant. Real processes: JILA's 2024 nuclear clock (Zhang et al.; Tiedau et al., Vienna): a VUV frequency comb made by high harmonic generation in xenon, locked to the 8.4 eV isomer of thorium-229 in Th:CaF2; Czochralski LiNbO3 and Eu:YSO pulled from iridium crucibles; vertical gradient freeze CaF2 with a lead fluoride oxygen scavenger (193 nm lithography optics); liquid-encapsulated Czochralski InP under a boron oxide cap.",
+  "_how_it_is_used": [
+    "Read by server_scripts/grindless/uhv/crystals.js at every server load. Each entry of types.<type>.recipes becomes one gtceu:<type> recipe, id grindless:<type>/<idPrefix><name>; the types with a dataKey carry it = <name> (its EMI line, gtceu.recipe.<dataKey>.<name>).",
+    "itemsIn / itemsOut: { id, count, chance? } (chance of 10 000: a chanced input or output below 10 000); fluidsIn / fluidsOut: { id, amount } in mB; kept: items never used up (GTM notConsumable); charge: fluids never used up (notConsumableFluid). eut x duration. An id starting with # is an item tag.",
+    "The programmed circuit picks the recipe: one per recipe inside a type (1-32); the five boules of crystal_growth have one circuit each. cutter, assembler and pgm_refining are GTM's types: circuit 0 = none; pgm_refining carries the platinum plant's keep flag (it refuses voiding) and its own circuit 5 (1-4 are the plant's modes).",
+    "Loops: the iridium crucible wears out in 1 run in 32 (a chanced input) and comes out worn at the same chance; the worn crucible goes back to iridium in EV's platinum plant (circuit 5; 7 of the 8 ingots come back, the rest went into the melts), whose HCl goes back to GTM's HCl uses. The argon (a charge), the xenon (a charge), the lead fluoride scavenger and the boron oxide cap are never used up.",
+    "Destinations: nuclear clock -> the UHV wireless link and the warp gate; VUV optics -> the comb (c1 of the lab); LiNbO3 and InP wafers -> the photonic foundry and the MBE reactor; the Eu:YSO boule -> the photonic foundry; the Th:CaF2 crystal -> the clock. The cutter's water is used up (GTM's cutter rule)."
+  ],
+  "types": {
+    "nuclear_clock": {
+      "dataKey": "grindless_nuclear_clock",
+      "recipes": [
+        { "name": "comb", "circuit": 1, "eut": 491520, "duration": 400,
+          "itemsIn": [{ "id": "grindless:fibre_laser_module", "count": 1 }, { "id": "grindless:vuv_caf2_optic", "count": 2 }],
+          "kept": [], "fluidsIn": [], "charge": [{ "id": "gtceu:xenon", "amount": 1000 }],
+          "itemsOut": [{ "id": "grindless:vuv_frequency_comb", "count": 1 }], "fluidsOut": [] },
+        { "name": "clock", "circuit": 2, "eut": 1966080, "duration": 600,
+          "itemsIn": [{ "id": "grindless:thorium_caf2_crystal", "count": 1 }, { "id": "grindless:vuv_frequency_comb", "count": 1 }, { "id": "#gtceu:circuits/uhv", "count": 1 }],
+          "kept": [], "fluidsIn": [], "charge": [],
+          "itemsOut": [{ "id": "grindless:nuclear_clock", "count": 1 }], "fluidsOut": [] }
+      ]
+    },
+    "crystal_growth": {
+      "dataKey": "grindless_crystal_growth",
+      "recipes": [
+        { "name": "lithium_niobate", "circuit": 1, "eut": 122880, "duration": 600,
+          "itemsIn": [{ "id": "gtceu:lithium_dust", "count": 2 }, { "id": "gtceu:niobium_oxide_dust", "count": 1 }, { "id": "grindless:iridium_crucible", "count": 1, "chance": 313 }],
+          "kept": [], "fluidsIn": [{ "id": "gtceu:oxygen", "amount": 500 }], "charge": [{ "id": "gtceu:argon", "amount": 1000 }],
+          "itemsOut": [{ "id": "grindless:lithium_niobate_boule", "count": 1 }, { "id": "grindless:worn_iridium_crucible", "count": 1, "chance": 313 }], "fluidsOut": [] },
+        { "name": "vuv_caf2", "circuit": 2, "eut": 122880, "duration": 800,
+          "itemsIn": [{ "id": "gcyr:fluorite_dust", "count": 3 }, { "id": "grindless:iridium_crucible", "count": 1, "chance": 313 }],
+          "kept": [{ "id": "gtceu:lead_fluoride_dust", "count": 1 }], "fluidsIn": [], "charge": [{ "id": "gtceu:argon", "amount": 1000 }],
+          "itemsOut": [{ "id": "grindless:vuv_caf2_boule", "count": 1 }, { "id": "grindless:worn_iridium_crucible", "count": 1, "chance": 313 }], "fluidsOut": [] },
+        { "name": "thorium_caf2", "circuit": 3, "eut": 491520, "duration": 800,
+          "itemsIn": [{ "id": "gcyr:fluorite_dust", "count": 3 }, { "id": "grindless:thorium_229", "count": 1 }, { "id": "grindless:iridium_crucible", "count": 1, "chance": 313 }],
+          "kept": [{ "id": "gtceu:lead_fluoride_dust", "count": 1 }], "fluidsIn": [], "charge": [{ "id": "gtceu:argon", "amount": 1000 }],
+          "itemsOut": [{ "id": "grindless:thorium_caf2_crystal", "count": 1 }, { "id": "grindless:worn_iridium_crucible", "count": 1, "chance": 313 }], "fluidsOut": [] },
+        { "name": "eu_yso", "circuit": 4, "eut": 491520, "duration": 800,
+          "itemsIn": [{ "id": "gtceu:yttrium_dust", "count": 2 }, { "id": "gtceu:silicon_dioxide_dust", "count": 1 }, { "id": "gtceu:europium_oxide_dust", "count": 1 }, { "id": "grindless:iridium_crucible", "count": 1, "chance": 313 }],
+          "kept": [], "fluidsIn": [{ "id": "gtceu:oxygen", "amount": 1500 }], "charge": [{ "id": "gtceu:argon", "amount": 1000 }],
+          "itemsOut": [{ "id": "grindless:eu_yso_boule", "count": 1 }, { "id": "grindless:worn_iridium_crucible", "count": 1, "chance": 313 }], "fluidsOut": [] },
+        { "name": "inp", "circuit": 5, "eut": 491520, "duration": 600,
+          "itemsIn": [{ "id": "gtceu:indium_dust", "count": 1 }, { "id": "gtceu:phosphorus_dust", "count": 1 }, { "id": "grindless:iridium_crucible", "count": 1, "chance": 313 }],
+          "kept": [{ "id": "gtceu:boron_trioxide_dust", "count": 1 }], "fluidsIn": [], "charge": [{ "id": "gtceu:argon", "amount": 1000 }],
+          "itemsOut": [{ "id": "grindless:inp_boule", "count": 1 }, { "id": "grindless:worn_iridium_crucible", "count": 1, "chance": 313 }], "fluidsOut": [] }
+      ]
+    },
+    "cutter": {
+      "recipes": [
+        { "name": "vuv_caf2_optics", "circuit": 0, "eut": 30720, "duration": 400,
+          "itemsIn": [{ "id": "grindless:vuv_caf2_boule", "count": 1 }], "kept": [], "fluidsIn": [{ "id": "minecraft:water", "amount": 1000 }], "charge": [],
+          "itemsOut": [{ "id": "grindless:vuv_caf2_optic", "count": 4 }], "fluidsOut": [] },
+        { "name": "lithium_niobate_wafers", "circuit": 0, "eut": 30720, "duration": 800,
+          "itemsIn": [{ "id": "grindless:lithium_niobate_boule", "count": 1 }], "kept": [], "fluidsIn": [{ "id": "minecraft:water", "amount": 1000 }], "charge": [],
+          "itemsOut": [{ "id": "grindless:lithium_niobate_wafer", "count": 16 }], "fluidsOut": [] },
+        { "name": "inp_wafers", "circuit": 0, "eut": 30720, "duration": 800,
+          "itemsIn": [{ "id": "grindless:inp_boule", "count": 1 }], "kept": [], "fluidsIn": [{ "id": "minecraft:water", "amount": 1000 }], "charge": [],
+          "itemsOut": [{ "id": "grindless:inp_wafer", "count": 16 }], "fluidsOut": [] }
+      ]
+    },
+    "assembler": {
+      "recipes": [
+        { "name": "iridium_crucible", "circuit": 24, "eut": 1920, "duration": 400,
+          "itemsIn": [{ "id": "gtceu:iridium_ingot", "count": 8 }], "kept": [], "fluidsIn": [], "charge": [],
+          "itemsOut": [{ "id": "grindless:iridium_crucible", "count": 1 }], "fluidsOut": [] }
+      ]
+    },
+    "pgm_refining": {
+      "idPrefix": "uhv/",
+      "keep": true,
+      "recipes": [
+        { "name": "iridium_crucible", "circuit": 5, "eut": 1920, "duration": 600,
+          "itemsIn": [{ "id": "grindless:worn_iridium_crucible", "count": 1 }, { "id": "grindless:platinum_electrode", "count": 1, "chance": 10 }],
+          "kept": [],           "fluidsIn": [{ "id": "gtceu:chlorine", "amount": 7000 }, { "id": "gtceu:hydrogen", "amount": 7000 }], "charge": [],
+                    "itemsOut": [{ "id": "gtceu:iridium_dust", "count": 7 }], "fluidsOut": [{ "id": "gtceu:hydrochloric_acid", "amount": 7000 }] }
+      ]
+    }
+  }
+}
