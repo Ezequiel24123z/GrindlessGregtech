@@ -295,8 +295,9 @@ test('the dimension markers of the old hidden table (disabled, not index-only) d
   const markerDropped = old.droppedRoutes.filter((d) => !pendingIds.has(d.id));
   // 39 since UV-B2: Triton nitric oxide (Moon cryogenic plant) was a hidden-stack route until Triton nitrogen became obtainable;
   // 40 since UV-B4: the Kuiper noble gas row of the same plant; 41 since UV-B5: the starshot laser-sail launch (no longer pending);
-  // 42 since UHV-A6: the 99.999 % neon row of the same plant; 46 since UHV-B2: Mercury's regolith dig and the solar vapour furnace's three rows
-  assert.equal(markerDropped.length, 46, markerDropped.map((d) => d.id).join('\n'));
+  // 42 since UHV-A6: the 99.999 % neon row of the same plant; 46 since UHV-B2: Mercury's regolith dig and the solar vapour furnace's three rows;
+  // 48 since UHV-B4: the sample receiving facility's receive and isolate rows (Earth only)
+  assert.equal(markerDropped.length, 48, markerDropped.map((d) => d.id).join('\n'));
   assert.ok(markerDropped.every((d) => d.disabledBy.every((b) => b.startsWith('dimension marker '))));
   const now = new Map(fixtureExpectations(packRun.res).items.map((e) => [e.id, e]));
   const lost = [];
@@ -308,8 +309,9 @@ test('the dimension markers of the old hidden table (disabled, not index-only) d
   // + 1 since UV-B4: Kuiper noble gas used in the same plant (its argon, krypton and xenon have other visible makers);
   // + 5 since UV-B5: the five roles of the starshot laser-sail launch row; + 1 since UHV-A6: 99.999 % neon made in the same plant;
   // + 11 since UHV-B2: the roles of Mercury's regolith dig and solar vapour furnace rows (regolith, stripped regolith, residue,
-  // crucible lining, silicon monoxide, bucket drum, iridosmine sample)
-  assert.equal(lost.length, 67, lost.join('\n'));
+  // crucible lining, silicon monoxide, bucket drum, iridosmine sample); + 4 since UHV-B4: the sample receiving facility's roles (flora sample used;
+  // characterised strain, sterilised extract and genome data made)
+  assert.equal(lost.length, 71, lost.join('\n'));
   for (const route of ['grindless:mars_chart made in gtceu:deep_space_tracking', 'grindless:vein_sample_ice_mars used in gtceu:vein_drilling',
     'gtceu:liquid_nitrogen made in gtceu:cryogenic_processing', 'gtceu:heavy_water made in gtceu:detritiation',
     'grindless:titanium_drill_bit used in gtceu:vein_drilling', 'grindless:martian_quantum_seed made in gtceu:chemical_reactor']) {
@@ -322,7 +324,7 @@ test('our info pages live where EMI reads them (the emi namespace) and every pag
   const emi = loadEmiData(path.join(root, 'pack'));
   assert.deepEqual(emi.problems, []);
   assert.ok(emi.pages.length >= 10);
-  for (const p of emi.pages) assert.match(p.file, /^recipe\/additions\/grindless\/[a-z_]+\.json$/);
+  for (const p of emi.pages) assert.match(p.file, /^recipe\/additions\/grindless\/[a-z0-9_]+\.json$/);
   const exp = fixtureExpectations(packRun.res);
   const used = new Set(exp.pages);
   // a page for a stack disabled until its era is used once that era's package lands

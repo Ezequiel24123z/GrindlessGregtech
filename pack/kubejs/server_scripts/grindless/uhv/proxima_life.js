@@ -185,7 +185,7 @@
     // the other UHV controllers' shapes: grep "pattern: [" and "shaped(" in server_scripts/grindless/uhv/*.js (mirrors match too)
     var defs = [
       { key: 'facility', parts: [HULL, ARM], pattern: ['A A', ' H ', 'C C'], ingredients: { C: C, A: ARM, H: HULL } },
-      { key: 'rover', parts: [HULL, MOTOR], pattern: ['MCM', ' H ', ' C '], ingredients: { C: C, M: MOTOR, H: HULL } },
+      { key: 'rover', parts: [HULL, MOTOR], pattern: ['M M', 'CHC', 'M M'], ingredients: { C: C, M: MOTOR, H: HULL } },
       { key: 'greenhouse', parts: [HULL, PUMP], pattern: ['P P', ' H ', 'C C'], ingredients: { C: C, P: PUMP, H: HULL } },
       { key: 'plant', parts: [HULL, PUMP], pattern: ['C C', 'PHP'], ingredients: { C: C, P: PUMP, H: HULL } },
       { key: 'vat', parts: [HULL, PUMP], pattern: [' P ', 'CHC', ' P '], ingredients: { C: C, P: PUMP, H: HULL } }
