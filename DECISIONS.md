@@ -416,3 +416,4 @@ One line per decision. The most recent one is at the bottom.
 - 2026-10-27 · UHV Mk3 keeps oganesson (line 30); no fourth fusion ring until UEV (registerFusionTier, Monifactory's LGPL pattern).
 - 2026-10-27 · UHV nickel-62 is a hot cell row (IV's enrichment cascade stayed a reserve); the platinum plant rows are EV's.
 - 2026-10-27 · UHV substages: uhv, then uhv-mercury and uhv-proxima in parallel; the gate needs both.
+- 2026-10-27 UV-B1: Neptune (tier 6) and Pluto (tier 7) are GCYR datapack planets whose orbits are station slots five and six; Proxima b stays tier 8; the Neptunian and Plutonian quantum seeds take gtceu:neptune_helium and grindless:sputnik_ice_core as catalysts and are made in those orbits; no gravity figure is claimed. The rocket level rule floor((motor + tank)/2) is confirmed in game (elite motor 3 + BNNT tank 11 = level 7, partsTier read by reflection).

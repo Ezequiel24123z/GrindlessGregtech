@@ -6,7 +6,7 @@ Integrator-owned. Read this instead of `DECISIONS.md` and the session notes. Ove
 - **Active development branch:** `ezequiel24123z-gregtech-grindless-modpack`. `main` matches it (PR #4 merged); feature work still branches from the development branch.
 - **Current milestone:** UV build. Design accepted: `docs/eras/uv.md` (queue in its *Build order*: S0 spikes, F1, F2, waves A and B, C1-C3), decisions in `DECISIONS.md` (2026-10-27, "UV").
 - **Last accepted integration batch:** UV era design (`docs/eras/uv.md`): 31 machines, 22 new lines, 24 crossings; Neptune and Pluto from orbit, the Mk3, the Starshot; the space elevator stays hidden until UHV.
-- **Approved packages in flight:** UV-B1 travel and stations (S0, F1, the F2 elevator part and A1-A12 done; F1 ids hidden until their packages land). UHV designed (`docs/eras/uhv.md`); it starts after v0.10.0.
+- **Approved packages in flight:** UV-B2 Neptune (S0, F1, the F2 elevator part, A1-A12 and B1 done; F1 ids hidden until their packages land). UHV designed (`docs/eras/uhv.md`); it starts after v0.10.0.
 - **Repository:** unmerged historical branches are kept only as `archive/*` tags; finished package branches are deleted after integration.
 
 ## Open blockers and known issues
