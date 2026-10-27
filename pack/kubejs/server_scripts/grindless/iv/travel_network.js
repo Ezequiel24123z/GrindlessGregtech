@@ -45,6 +45,7 @@
 // Rhino: var + function inside every callback that runs more than once.
 (function () {
   var LOG = '[grindless/iv] '
+  var CURIUM_RTG_PELLET = 'grindless:curium_rtg_pellet'
   var G = global.grindless || (global.grindless = {})
   var TN = G.travelNetwork || (G.travelNetwork = {})
   var PLANETS = 'kubejs/data/grindless/tables/planets.json'
@@ -200,6 +201,15 @@
       .addData(R.dataKey, Math.round(R.pelletTicks / 72000))
       .EUt(-R.eut)
       .duration(R.duration)
+
+    // UV's curium RTG pellet (heat source works, circuit 5): the same chance and power, 3x the time (one pellet per 3 hours)
+    if (Item.exists(CURIUM_RTG_PELLET)) {
+      event.recipes.gtceu.radioisotope_decay('grindless:curium_rtg_pellet')
+        .chancedInput('1x ' + CURIUM_RTG_PELLET, R.chance, 0)
+        .addData(R.dataKey, Math.round(R.pelletTicks / 72000) * 3)
+        .EUt(-R.eut)
+        .duration(R.duration * 3)
+    }
 
     var craft = event.recipes.gtceu.assembler(R.craftingBuilderId)
     TN.rtgCrafting.itemsIn.forEach(function (e) { craft.itemInputs(e.n + 'x ' + e.id) })
