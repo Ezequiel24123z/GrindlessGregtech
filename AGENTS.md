@@ -14,7 +14,7 @@ GregTech Modern 7.5.3 pack (Minecraft 1.20.1, Forge): nothing is gathered by han
 4. Each era has at least one of our multiblocks that gains something: speed, throughput, a recipe impossible at small scale, or several steps in one.
 5. Quests are short, English, give a small reward and never block recipes.
 6. Where these rules conflict with GTM 7.5.3, GTM wins.
-7. Each era is clearly bigger: about x1.35 progression multiblocks per era from EV (EV 11, IV ~15, LuV ~20), more lines, more crossings with older lines. Convenience versions do not count; Steam to HV only gets small additions (`docs/research/complexity.md`).
+7. Each era is clearly bigger: about x1.35 progression multiblocks per era from EV (EV 11, IV 15, LuV 20, ZPM 27, UV ~36). From UV on, new process lines and crossings with lines two or more eras back grow x1.5 per era (ZPM 14 lines and 13 crossings, so UV at least 21 and 20); each line is a real chain of at least 4 steps. Convenience versions do not count; Steam to HV only gets small additions (`docs/research/complexity.md`).
 8. Power is generous, never free: boilers x8 steam, generators x2 EU per fuel (GregTech Leisure style); later eras keep it with the same or better fuels and more complex plants. No energy from nothing.
 
 ## Map
