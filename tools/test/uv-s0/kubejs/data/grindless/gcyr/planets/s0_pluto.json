@@ -1,0 +1,15 @@
+{
+  "translation": "level.grindless.s0_pluto",
+  "galaxy": "gcyr:milky_way",
+  "solar_system": "gcyr:solar_system",
+  "world": "grindless:s0_pluto",
+  "orbit_world": "grindless:s0_pluto_orbit",
+  "rocket_tier": 7,
+  "gravity": 0.62,
+  "has_atmosphere": false,
+  "days_in_year": 90560,
+  "temperature": -229,
+  "solar_power": 1,
+  "has_oxygen": false,
+  "button_color": 11184810
+}
