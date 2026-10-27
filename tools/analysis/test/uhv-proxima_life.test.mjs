@@ -186,6 +186,39 @@ test('controllers: UHV hull and circuits, a shaped pattern no other crafting rec
   }
 });
 
+test('older rows: the biofoundry\'s xeno steps 11-16 and the algae bioreactor\'s far-red row, Proxima b only', () => {
+  const BFT = JSON.parse(read('data/grindless/tables/biofoundry.json'));
+  const xeno = BFT.recipes.filter((r) => r.circuit > 10);
+  const NAMES = ['far_red_gene_cassette', 'engineered_far_red_algae', 'cladosporium_culture', 'chromobacterium_culture', 'sphingomonas_culture',
+    'sporosarcina_culture'];
+  assert.deepEqual(xeno.map((r) => [r.circuit, r.name]), NAMES.map((n, i) => [11 + i, n]));
+  assert.deepEqual(BFT.steps.filter((s) => s.circuit > 10).map((s) => [s.circuit, s.name]), NAMES.map((n, i) => [11 + i, n]));
+  const bf = plain(run.global.grindless.biofoundry);
+  assert.deepEqual(bf.clashes, []);
+  for (const r of xeno) {
+    const d = dump(`grindless:sterile_culture/${r.name}`);
+    assert.ok(d, r.name);
+    assert.deepEqual(circuitOf(d), [r.circuit], r.name);
+    assert.ok(has(outs(d), `grindless:${r.name}`), r.name);
+    assert.ok(r.eut <= VA_UHV && r.itemsIn.length + 1 <= 5 && r.fluidsIn.length <= 2, r.name);
+    for (const lang of ['en_us', 'es_es']) assert.ok(run.lang[lang][`gtceu.recipe.grindless_biofoundry.${r.name}`], `${lang} ${r.name}`);
+    // the biofoundry is each culture's only maker
+    assert.deepEqual(recipes.filter((x) => has(outs(x), `grindless:${r.name}`)).map((x) => x.i), [d.i], r.name);
+  }
+  assert.ok(has(ins(dump('grindless:sterile_culture/far_red_gene_cassette')), 'grindless:xeno_genome_data'));
+  assert.ok(has(ins(dump('grindless:sterile_culture/engineered_far_red_algae')), 'grindless:algae_culture'));
+  assert.ok(has(ins(dump('grindless:radiotrophic/melanised_biomass')), 'grindless:cladosporium_culture'));
+
+  const farRed = dump('grindless:bioreactor/uhv/far_red_algae');
+  assert.ok(farRed && run.global.grindless.europa.recipes.includes(farRed.i));
+  assert.deepEqual(dimsOf(farRed), [PROXIMA]);
+  assert.deepEqual(circuitOf(farRed), [3]);
+  const algae = farRed.j.inputs.item.find((i) => JSON.stringify(i).includes('grindless:engineered_far_red_algae'));
+  assert.equal(algae.chance, 0, 'the algae are kept');
+  assert.ok(has(outs(farRed), 'gtceu:biomass') && has(outs(farRed), 'gtceu:oxygen'));
+  assert.deepEqual(recipes.filter((x) => has(ins(x), 'grindless:engineered_far_red_algae')).map((x) => x.i), [farRed.i]);
+});
+
 test('no UEV input, and every lang key the package needs is written in en_us and es_es', () => {
   for (const r of rows()) for (const id of inputs(r).concat(outputs(r))) assert.ok(!/(^|[:_])uev(_|$)/.test(id.split(':')[1] || ''), `${r.name}: ${id}`);
   const keys = [];
