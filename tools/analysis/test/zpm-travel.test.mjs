@@ -163,7 +163,7 @@ test('the tank recipes and the AE2 seeds compose with registered ids; each seed 
 });
 
 test('the stations table lists the Saturn and Uranus slots; sunlight has their rows', () => {
-  assert.deepEqual(STATIONS.more, [
+  assert.deepEqual(STATIONS.more.filter((s) => s.era === 'zpm'), [
     { slot: 'saturn', orbit: 'grindless:saturn_orbit', era: 'zpm' },
     { slot: 'uranus', orbit: 'grindless:uranus_orbit', era: 'zpm' },
   ]);

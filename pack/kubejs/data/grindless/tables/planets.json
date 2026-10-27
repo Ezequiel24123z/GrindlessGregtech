@@ -18,7 +18,9 @@
     "europa": { "dimensions": ["grindless:europa", "grindless:europa_orbit"], "pairTag": "europa", "name": { "en_us": "Europa", "es_es": "Europa" } },
     "ganymede": { "dimensions": ["grindless:ganymede", "grindless:ganymede_orbit"], "pairTag": "ganymede", "name": { "en_us": "Ganymede", "es_es": "Ganímedes" } },
     "saturn": { "dimensions": ["grindless:saturn", "grindless:saturn_orbit"], "pairTag": "saturn", "name": { "en_us": "Saturn", "es_es": "Saturno" } },
-    "uranus": { "dimensions": ["grindless:uranus", "grindless:uranus_orbit"], "pairTag": "uranus", "name": { "en_us": "Uranus", "es_es": "Urano" } }
+    "uranus": { "dimensions": ["grindless:uranus", "grindless:uranus_orbit"], "pairTag": "uranus", "name": { "en_us": "Uranus", "es_es": "Urano" } },
+    "neptune": { "dimensions": ["grindless:neptune", "grindless:neptune_orbit"], "pairTag": "neptune", "name": { "en_us": "Neptune", "es_es": "Neptuno" } },
+    "pluto": { "dimensions": ["grindless:pluto", "grindless:pluto_orbit"], "pairTag": "pluto", "name": { "en_us": "Pluto", "es_es": "Plutón" } }
   },
   "dryOnEarth": ["gcyr:overworld_orbit"]
 }

@@ -12,6 +12,8 @@
     "grindless:europa_orbit",
     "grindless:ganymede_orbit",
     "grindless:saturn_orbit",
-    "grindless:uranus_orbit"
+    "grindless:uranus_orbit",
+    "grindless:neptune_orbit",
+    "grindless:pluto_orbit"
   ]
 }
