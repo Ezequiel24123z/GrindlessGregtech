@@ -81,7 +81,7 @@
     output_hatch: { min: 1, max: 4 }
   }
   HC.minCasing = 4
-  HC.modes = { 1: 'enrichment', 2: 'fuel', 3: 'reprocessing', 4: 'radon' }
+  HC.modes = { 1: 'enrichment', 2: 'fuel', 3: 'reprocessing', 4: 'radon', 5: 'silicon_28', 6: 'boron_11' }
   HC.noVoiding = NO_VOIDING
   HC.dataKey = DATA_KEY
   HC.blocks = { shield: SHIELD, floor: FLOOR, window: WINDOW, vessel: VESSEL, filter: FILTER, manipulator: MANIPULATOR }

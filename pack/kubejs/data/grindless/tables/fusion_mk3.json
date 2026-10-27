@@ -1,0 +1,58 @@
+{
+  "_note": "UV-A3 audit of every gtceu:fusion_reactor recipe the Mk3 (gtceu:uv_fusion_reactor) can run: EU/t at most VA[UV] and eu_to_start within 16 energy hatches x 40 M EU = 640 M (UV-S0 S0-4: a 640 M start runs on a formed Mk3 and is refused on the Mk2; the 30 recipes loaded at the time all fit). The Mk3 inherits every recipe LuV and ZPM audited (fusion_mk1.json, fusion_mk2.json) and adds the six GTM recipes above 320 M, which only it can run. fate: keep (the Mk3 runs it as GTM has it), luv_cut (removed by LuV-B10, decision 6; stays removed, so absent from the live manager; listed so the audit does not flag it as unaudited if it ever returns; UV-S0's decision to 'keep the three extra recipes' is read as 'list them', not 'restore them'). ours: none (UV adds no Mk3 recipe of its own; the chamber's fuel is the laser fusion type). mk3Only: the six start-above-320 M recipes (the 'beyond' list of fusion_mk2.json). server_scripts/grindless/uv/fusion.js reads this table; a recipe of the type that the Mk3 could run and that is neither listed here nor ours is logged as unaudited. The figures of eut and start are GTM's (with GTCA's oganesson and Pu-241 + hydrogen), except duranium, whose start is LuV's 200 M re-registration (tables/fusion_mk1.json).",
+  "mk3": { "machine": "gtceu:uv_fusion_reactor", "maxEUt": 524288, "maxStart": 640000000, "energyHatches": 16, "startPerHatch": 40000000 },
+  "recipes": [
+    { "id": "gtceu:fusion_reactor/deuterium_and_tritium_to_helium_plasma", "eut": 4096, "start": 40000000, "fate": "keep", "why": "LuV's small fusion power, limited by the Moon facility's tritium." },
+    { "id": "gtceu:fusion_reactor/lantanum_and_silicon_to_lutetium_plasma", "eut": 7680, "start": 80000000, "fate": "keep", "why": "Lutetium; no ore vein gives it." },
+    { "id": "gtceu:fusion_reactor/hydrogen_and_vanadium_to_chromium_plasma", "eut": 24576, "start": 140000000, "fate": "keep", "why": "Chromium for the lutetium + chromium americium route." },
+    { "id": "gtceu:fusion_reactor/neodymium_and_hydrogen_to_europium_plasma", "eut": 24576, "start": 150000000, "fate": "keep", "why": "Europium: the Mk1's route; the reductor is the cheap one." },
+    { "id": "gtceu:fusion_reactor/calcium_plasma", "eut": 7680, "start": 120000000, "fate": "keep", "why": "GTCA (Mg + O): fusion power not tied to tritium." },
+    { "id": "gtceu:fusion_reactor/gold_and_aluminium_to_uranium_238_plasma", "eut": 24576, "start": 140000000, "fate": "luv_cut", "why": "Cut by LuV (uranium comes from the End or Venus); the Mk3 does not restore it." },
+    { "id": "gtceu:fusion_reactor/mercury_and_magnesium_to_uranium_235_plasma", "eut": 24576, "start": 140000000, "fate": "luv_cut", "why": "Cut by LuV (U-235 comes from the hot cell); the Mk3 does not restore it." },
+    { "id": "gtceu:fusion_reactor/silver_and_copper_to_osmium_plasma", "eut": 24578, "start": 150000000, "fate": "luv_cut", "why": "Cut by LuV (osmium comes from Mercury or the belt); the Mk3 does not restore it." },
+    { "id": "gtceu:fusion_reactor/gallium_and_radon_to_duranium_plasma", "eut": 16384, "start": 200000000, "fate": "keep", "why": "Duranium: LuV's 200 M re-registration, as ZPM audited it." },
+    { "id": "gtceu:fusion_reactor/carbon_and_helium_3_to_oxygen_plasma", "eut": 4096, "start": 180000000, "fate": "keep", "why": "Oxygen plasma for GTM's plasma turbine, as GTM has it." },
+    { "id": "gtceu:fusion_reactor/uranium_based_liquid_fuel_excited", "eut": 7680, "start": 200000000, "fate": "keep", "why": "Burns IV uranium in the large naquadah reactor." },
+    { "id": "gtceu:fusion_reactor/sulfur_plasma", "eut": 10240, "start": 240000000, "fate": "keep", "why": "GTCA (Al + Li): a plasma for the turbine." },
+    { "id": "gtceu:fusion_reactor/beryllium_and_deuterium_to_nitrogen_plasma", "eut": 16384, "start": 280000000, "fate": "keep", "why": "Nitrogen plasma for the turbine." },
+    { "id": "gtceu:fusion_reactor/carbon_and_magnesium_to_argon_plasma", "eut": 24576, "start": 180000000, "fate": "keep", "why": "Argon plasma for the turbine." },
+    { "id": "gtceu:fusion_reactor/silver_and_lithium_to_indium_plasma", "eut": 24576, "start": 280000000, "fate": "keep", "why": "Indium, a rare metal with no vein of its own." },
+    { "id": "gtceu:fusion_reactor/naquadah_based_liquid_fuel_excited", "eut": 26000, "start": 320000000, "fate": "keep", "why": "The large naquadah reactor's fuel, as ZPM audited it." },
+    { "id": "gtceu:fusion_reactor/arsenic_and_ruthenium_to_darmstadtium_plasma", "eut": 30720, "start": 200000000, "fate": "keep", "why": "Darmstadtium, the UV hull (gate)." },
+    { "id": "gtceu:fusion_reactor/gold_and_mercury_to_radon_plasma", "eut": 30720, "start": 200000000, "fate": "keep", "why": "Radon: the waste retrieval plant is the cheap route, not the only one." },
+    { "id": "gtceu:fusion_reactor/titanium_and_duranium_to_tritanium_plasma", "eut": 30720, "start": 200000000, "fate": "keep", "why": "Tritanium for UV's parts, made in ZPM (gate)." },
+    { "id": "gtceu:fusion_reactor/plutonium_based_liquid_fuel_excited", "eut": 30720, "start": 220000000, "fate": "keep", "why": "Burns IV plutonium in the large naquadah reactor." },
+    { "id": "gtceu:fusion_reactor/titanium_plasma", "eut": 49152, "start": 100000000, "fate": "keep", "why": "GTCA (Al + F): a plasma for the turbine." },
+    { "id": "gtceu:fusion_reactor/xenon_and_zinc_to_plutonium_239_plasma", "eut": 49152, "start": 120000000, "fate": "keep", "why": "A second plutonium route, as GTM has it." },
+    { "id": "gtceu:fusion_reactor/zinc_plasma", "eut": 49152, "start": 180000000, "fate": "keep", "why": "GTCA (Cu + T): a plasma for the turbine." },
+    { "id": "gtceu:fusion_reactor/lutenium_and_chromium_to_americium_plasma", "eut": 49152, "start": 200000000, "fate": "keep", "why": "Americium: the partitioning plant is the waste route, not the only one." },
+    { "id": "gtceu:fusion_reactor/krypton_and_cerium_to_plutonium_241_plasma", "eut": 49152, "start": 240000000, "fate": "keep", "why": "Plutonium-241 for the americium line." },
+    { "id": "gtceu:fusion_reactor/silver_and_helium_3_to_tin_plasma", "eut": 49152, "start": 280000000, "fate": "keep", "why": "Saturn's helium-3 into power; the direct energy converter takes its plasma." },
+    { "id": "gtceu:fusion_reactor/californium", "eut": 122880, "start": 120000000, "fate": "keep", "why": "Nothing in UV asks for it; GTM's recipe, as ZPM audited it." },
+    { "id": "gtceu:fusion_reactor/silicon_and_magnesium_to_iron_plasma", "eut": 7680, "start": 360000000, "fate": "keep", "why": "Mk3 only (start above 320 M): iron plasma for the turbine, as GTM has it." },
+    { "id": "gtceu:fusion_reactor/enriched_naquadah_and_radon_to_naquadria_plasma", "eut": 49152, "start": 400000000, "fate": "keep", "why": "Mk3 only: naquadria from enriched naquadah and radon, as GTM has it." },
+    { "id": "gtceu:fusion_reactor/potassium_and_fluorine_to_nickel_plasma", "eut": 30720, "start": 480000000, "fate": "keep", "why": "Mk3 only: nickel plasma for the turbine, as GTM has it." },
+    { "id": "gtceu:fusion_reactor/plutonium_241_and_hydrogen_gas_to_americium_plasma", "eut": 98304, "start": 500000000, "fate": "keep", "why": "Mk3 only: line 1's first step, Pu-241 and hydrogen into americium plasma, as GTM has it." },
+    { "id": "gtceu:fusion_reactor/americium_and_naquadria_to_neutronium_plasma", "eut": 98304, "start": 600000000, "fate": "keep", "why": "Mk3 only: neutronium, line 1's end. The design says 'americium + naquadah'; GTM's recipe takes naquadria, kept as it is." },
+    { "id": "gtceu:fusion_reactor/oganesson", "eut": 122880, "start": 600000000, "fate": "keep", "why": "Mk3 only: oganesson (californium + calcium), inert and voidable." }
+  ],
+  "ours": [],
+  "mk3Only": [
+    "gtceu:fusion_reactor/silicon_and_magnesium_to_iron_plasma",
+    "gtceu:fusion_reactor/enriched_naquadah_and_radon_to_naquadria_plasma",
+    "gtceu:fusion_reactor/potassium_and_fluorine_to_nickel_plasma",
+    "gtceu:fusion_reactor/plutonium_241_and_hydrogen_gas_to_americium_plasma",
+    "gtceu:fusion_reactor/americium_and_naquadria_to_neutronium_plasma",
+    "gtceu:fusion_reactor/oganesson"
+  ],
+  "chamber": {
+    "machine": "gtceu:laser_fusion_chamber",
+    "type": "gtceu:laser_fusion",
+    "eut": 2621440,
+    "wearChance": 200,
+    "recipes": [
+      { "name": "pb11", "capsule": "grindless:pb11_capsule", "duration": 400, "helium": 3000, "hydrogen": 0 },
+      { "name": "d_he3", "capsule": "grindless:d_he3_capsule", "duration": 600, "helium": 1000, "hydrogen": 1000 }
+    ]
+  }
+}

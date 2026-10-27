@@ -3333,6 +3333,10 @@ file = "kubejs/assets/grindless/textures/item/spent_fuel_assembly.png"
 hash = "e8a49db31b27eab07d34049cb47d89d1459a7045d23487dcb1f506c2ade81053"
 
 [[files]]
+file = "kubejs/assets/grindless/textures/item/spent_laser_module.png"
+hash = "cd4bf0e14942311956aff89eb4403d5ce3820b109819c5a15bfc8b6e8717effe"
+
+[[files]]
 file = "kubejs/assets/grindless/textures/item/spent_thorium_nitride_fuel.png"
 hash = "e9c39639b85b34115f12e8f2351bb6455fe2e477d3b3f6d3ede10cdcb16ec557"
 
@@ -3630,7 +3634,7 @@ hash = "df9afb26ef3402b0441545657d01f95d2632050f20885f4731c3c44e96538e9c"
 
 [[files]]
 file = "kubejs/client_scripts/grindless/iv_hot_cell_lang.js"
-hash = "6e3d826e7fdc8a0539db77337cfea39b2d280b43edaa01640a3b9d2778237df5"
+hash = "c08000ef58a2ed05779e9a8dcd2c58783c1ddb5922f5395d59cef5c18b4ea640"
 
 [[files]]
 file = "kubejs/client_scripts/grindless/iv_mass_production_lang.js"
@@ -3795,6 +3799,10 @@ hash = "fba1120948adc7492538d6717acf1996c40ea49e1aa6157d0702077648268164"
 [[files]]
 file = "kubejs/client_scripts/grindless/uv_foundation_lang.js"
 hash = "8250f5b76f79efa3cbb0e52b3f424c1902f151aa9e1452fb6a6b7a06f2352387"
+
+[[files]]
+file = "kubejs/client_scripts/grindless/uv_fusion_lang.js"
+hash = "87eeee34d03c314ea5d0a6b3cda5b17422e31084197b47eac1f517acfa5b2a13"
 
 [[files]]
 file = "kubejs/client_scripts/grindless/uv_heat_sources_lang.js"
@@ -4025,6 +4033,10 @@ file = "kubejs/data/grindless/tables/fusion_mk2.json"
 hash = "f042cb6b0b65def9af3824e4dee67cd85eaca2750e9d8f01d8f116b01bd5e9c6"
 
 [[files]]
+file = "kubejs/data/grindless/tables/fusion_mk3.json"
+hash = "8cfa6a7ccfe0b878109d9ede4caa08fdacbba32a8765e686a50f7274060abbfa"
+
+[[files]]
 file = "kubejs/data/grindless/tables/heavy_water_plant.json"
 hash = "78e0550c5776e33e7e3cf74a25bbe172dbbee4f6a0152be0c819ec768b9b60b9"
 
@@ -4034,11 +4046,11 @@ hash = "1f4b256531a0b42a6ecf399e9b692d9e4730bd4102e53aab3e1fa2c999b69e9d"
 
 [[files]]
 file = "kubejs/data/grindless/tables/hidden_until.json"
-hash = "61075083e258c30814fdb1084ea4e1a96627727e3f0def89fa36dd6c1f4170e4"
+hash = "d663cdbc76d741ce90a74f0b66ad5d81013610bf20f698e68c1a4f61720ddd2a"
 
 [[files]]
 file = "kubejs/data/grindless/tables/hot_cell.json"
-hash = "2ed468204e5de72734309504d0bf3c0a15697ee0e8def87291a47280a43679b7"
+hash = "7e482c6063b261a5873fea076a83341779197086ced913aee1b50f5a1535d406"
 
 [[files]]
 file = "kubejs/data/grindless/tables/hts_magnet_works.json"
@@ -4681,6 +4693,10 @@ file = "kubejs/server_scripts/grindless/uv/cold.js"
 hash = "46369b26bb7b68ae3a10ff6486876319e312b0a843b973fa97d0584f1b805546"
 
 [[files]]
+file = "kubejs/server_scripts/grindless/uv/fusion.js"
+hash = "1c2d1cb7e198072075d03cfc15c90b5a340f0b8a23799a335e36d3cfa69b5386"
+
+[[files]]
 file = "kubejs/server_scripts/grindless/uv/heat_sources.js"
 hash = "8eb1996be2e94c4e4b702697a6d14b6848c5702a673c2c5ad0d1ef92ff8f6ed1"
 
@@ -4718,7 +4734,7 @@ hash = "617d80424e7dfeffc6a41439206c7ad9f528bf150c4ae2864531001c433dff2d"
 
 [[files]]
 file = "kubejs/server_scripts/grindless/zpm/qubits.js"
-hash = "a2bc42a278c491dd26e8a0d516887f15608c10282122b60d3c4a434f06a215df"
+hash = "40d316ce39a49d3aa8286edc330123a93192f78a31d0a1d0912efc6d73ce2106"
 
 [[files]]
 file = "kubejs/server_scripts/grindless/zpm/saturn_science.js"
@@ -4834,7 +4850,7 @@ hash = "77e540922f6f4674e270ae4c488915caa50b76abc6a029852ba15a1bcc84e758"
 
 [[files]]
 file = "kubejs/startup_scripts/grindless/iv/hot_cell.js"
-hash = "63797f4e8e42c47bcf10bc07705bf1febd58ca539f30ac8afb144b15a8e801ad"
+hash = "fad6a801d0aa36d9d68372e922b445f2f51edf10bc5479be211fb8699a85c3bf"
 
 [[files]]
 file = "kubejs/startup_scripts/grindless/iv/mercury.js"
@@ -5087,6 +5103,10 @@ hash = "4c4d17de43525e5a9c05cf3f7e5f20cc016c19d77bfea7b9f9d90b506b44817e"
 [[files]]
 file = "kubejs/startup_scripts/grindless/uv/foundation.js"
 hash = "032deba7b8b2ef8b900f2689306676df677e8ad9d178c2ba204b8fd925ae213a"
+
+[[files]]
+file = "kubejs/startup_scripts/grindless/uv/fusion.js"
+hash = "9b277b41333ff1fc99933cf0ca223453da5ded76b95ced7fc35e4ca9f2f956ce"
 
 [[files]]
 file = "kubejs/startup_scripts/grindless/uv/heat_sources.js"

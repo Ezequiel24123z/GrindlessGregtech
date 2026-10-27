@@ -89,5 +89,7 @@
                 { "id": "zpm_b5", "x": [22528, 22591], "z": [0, 63], "y": [98, 112], "tests": ["zpm_uranus"], "note": "ZPM-B5: the ice-giant siphon, slurry separator and flyby probe bay; Uranus orbit Y 198-214 and Overworld Y 98-112 at the same X/Z" },
     { "id": "zpm_c3", "x": [22784, 22847], "z": [0, 63], "y": [98, 112], "tests": ["zpm_c3"], "note": "ZPM-C3: the Power gate: three ZPM 64 A dynamo hatches, a wireless tower with two ZPM SMES cells and a power substation on a ZPM 16 A wireless energy hatch     (Overworld only)" },
         { "id": "uv_s0", "x": [23040, 23103], "z": [0, 63], "y": [98, 112], "tests": ["uv_s0_flight"], "note": "UV-S0: disposable spikes S0-1..S0-8 (also tools/test/uv-s0: Mk3 fusion, wireless, stations); Overworld Y 98-112 and the orbit         levels at the same X/Z" },
-            { "id": "uv_thorium", "x": [23296, 23359], "tests": ["uv_thorium"], "note": "UV-A1: recipe lookups only (no structure placed): the pyroprocessing cell, accelerator-driven reactor, thorium fuel rows and the Triton NO row" }                  ]
+            { "id": "uv_thorium", "x": [23296, 23359], "tests": ["uv_thorium"], "note": "UV-A1: recipe lookups only (no structure placed): the pyroprocessing cell, accelerator-driven reactor, thorium fuel rows and the Triton NO row" },
+    { "id": "uv_fusion", "x": [23808, 23871], "z": [0, 63], "y": [98, 112], "tests": ["uv_fusion"], "note": "UV-A3: a formed Mk3 runs a 640 M start recipe built from fusion_mk3.json, plus the chamber, hot cell, decaborane and capsule rows (Overworld only)" }
+    ]
 }
