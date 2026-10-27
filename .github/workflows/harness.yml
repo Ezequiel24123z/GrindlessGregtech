@@ -1,6 +1,7 @@
 # Regression checks of the test harness itself, only when it changes. No Minecraft, no SSH, no secrets.
 #   linux:   tools/test/Test-LinuxHelpers.ps1 (the Linux remote runner used by the azure backend) and shellcheck.
-#   windows: tools/test/Test-ResourcePolicy.ps1 (the one-JVM lock policy of the home bench, Windows PowerShell 5.1).
+#   windows: tools/test/Test-ResourcePolicy.ps1 (the one-JVM lock policy of the home bench, Windows PowerShell 5.1);
+#            informational only, see the note on the job.
 name: Harness
 
 on:
@@ -47,14 +48,14 @@ jobs:
     name: Windows lock policy
     runs-on: windows-2022
     timeout-minutes: 15
+    # Informational: on hosted windows-2022 the restart dry run's fake server never stops within 30 s (runs 40564601817,
+    # 40564995189, with and without a Defender exclusion), while it passes on workstations. The home bench remains the
+    # authority for this test (docs/testing/ci.md); do not make this job a required check until that is understood.
+    continue-on-error: true
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
           persist-credentials: false
-      - name: Defender exclusion for the workspace
-        # the test compiles and starts a fake java.exe; real-time scanning of a new exe can stall it past its 30 s bound
-        shell: powershell
-        run: Add-MpPreference -ExclusionPath $env:GITHUB_WORKSPACE, $env:RUNNER_TEMP
       - name: Test-ResourcePolicy
         shell: powershell
         run: .\tools\test\Test-ResourcePolicy.ps1
