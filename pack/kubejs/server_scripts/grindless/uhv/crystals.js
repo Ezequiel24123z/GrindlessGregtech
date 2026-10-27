@@ -9,6 +9,8 @@
 //                          is a chanced input or output (the iridium crucible, worn 1 run in 32).
 //   gtceu:cutter           the boules cut to VUV optics and to LiNbO3 and InP wafers (id grindless:cutter/<name>).
 //   gtceu:assembler        the iridium crucible: 8 iridium ingots, circuit 24 (id grindless:assembler/iridium_crucible).
+//   gtceu:chemical_reactor the two F1 dusts the boules need: niobium + oxygen -> Nb2O5, lead + HF -> PbF2 + hydrogen
+//                          (ids grindless:chemical_reactor/niobium_oxide, /lead_fluoride).
 //   gtceu:pgm_refining     the worn crucible back to iridium in EV's platinum plant, circuit 5 (id grindless:pgm_refining/uhv/iridium_crucible):
 //                          chlorine dissolves it, hydrogen reduces it, the plant's platinum electrode wears as in its other modes, and
 //                          the recipe carries the plant's keep flag (global.grindless.platinumPlant.keepKey: it refuses voiding).
@@ -24,7 +26,7 @@
   var CR = G.crystals || (G.crystals = {})
   var TABLE = CR.table || 'kubejs/data/grindless/tables/crystals.json'
   // GTM's own types: their circuit is optional (0 = none) and their slots are GTM's
-  var GTM_TYPES = { cutter: true, assembler: true, pgm_refining: true }
+  var GTM_TYPES = { cutter: true, assembler: true, pgm_refining: true, chemical_reactor: true }
 
   function list(x) {
     return Array.isArray(x) ? x : []

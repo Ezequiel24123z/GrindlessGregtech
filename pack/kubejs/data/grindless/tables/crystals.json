@@ -59,6 +59,16 @@
           "itemsOut": [{ "id": "grindless:inp_wafer", "count": 16 }], "fluidsOut": [] }
       ]
     },
+    "chemical_reactor": {
+      "recipes": [
+        { "name": "niobium_oxide", "circuit": 0, "eut": 480, "duration": 200,
+          "itemsIn": [{ "id": "gtceu:niobium_dust", "count": 2 }], "kept": [], "fluidsIn": [{ "id": "gtceu:oxygen", "amount": 5000 }], "charge": [],
+          "itemsOut": [{ "id": "gtceu:niobium_oxide_dust", "count": 7 }], "fluidsOut": [] },
+        { "name": "lead_fluoride", "circuit": 0, "eut": 480, "duration": 200,
+          "itemsIn": [{ "id": "gtceu:lead_dust", "count": 1 }], "kept": [], "fluidsIn": [{ "id": "gtceu:hydrofluoric_acid", "amount": 2000 }], "charge": [],
+          "itemsOut": [{ "id": "gtceu:lead_fluoride_dust", "count": 3 }], "fluidsOut": [{ "id": "gtceu:hydrogen", "amount": 2000 }] }
+      ]
+    },
     "assembler": {
       "recipes": [
         { "name": "iridium_crucible", "circuit": 24, "eut": 1920, "duration": 400,

@@ -283,7 +283,7 @@
     var absent = PP.recipes.filter(function (p) { return liveRecipe(p.recipeId) === null }).map(function (p) { return p.recipeId })
     // LuV A2's mode 4 (asteroid) adds a 7th recipe and no live stage (its opening is virtual, its chain is mode 3's)
     check(SCOPE, 'counts', attack.length === 2 && sep.length === 3 && iri.length === 1 && ast.length === 1 && PP.skipped.length === 0 &&
-      PP.stages === STAGE_COUNT && have === 7 && absent.length === 0,
+      PP.stages === STAGE_COUNT && have === 8 && absent.length === 0,
       'pgm_refining=' + have + ' (' + attack.length + ' attack + ' + sep.length + ' separation + ' + iri.length + ' iridosmine + ' + ast.length + ' asteroid) from ' +
       PP.stages +
       ' stages of the live line (want ' + STAGE_COUNT + '), skipped=' + PP.skipped.length +
