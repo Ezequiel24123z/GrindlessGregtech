@@ -56,12 +56,12 @@ The network goes UHV on the nuclear clock.
 5. **Mercury, the seventh station** (substage `uhv-mercury`):
    - the regolith excavator (drill step 12) and the solar vapour furnace on `gcyr:mercury` (lines 19, 20);
    - in `gcyr:mercury_orbit`: the swarm segment foundry, the swarm control station (Kardashev II, a generator) and the solar probe bay (lines 21, 22, 23, 30).
-6. **Level 8 rocket:** UV's thruster works builds the ICAN motor (`grindless:ican_rocket_motor`, tier 5) with a UHTC nozzle from the spark plasma sinterer (16) and UV's ICAN pellets. With UV's tier 11 BNNT tank: floor((5 + 11) / 2) = 8 *(S0-2)*.
+6. **Level 8 rocket:** UV's thruster works builds the ICAN motor (`grindless:ican_rocket_motor`, GCYR motor tier 6) with a UHTC nozzle from the spark plasma sinterer (16) and UV's ICAN pellets. With UV's tier 11 BNNT tank: floor((6 + 11) / 2) = 8 *(S0-2: GCYR 0.2.9's KubeJS motor builder makes a fuel tank, so the motor is a startup `createCustom` `RocketMotorBlock` with its own motor type, tier 6; proven to Proxima b orbit in run 20261027-130053)*.
 7. **Proxima Centauri b** (substage `uhv-proxima`):
    - the eighth station in a new orbit dimension: the baseline astrometer (observatory step 9) and the gate's far end;
    - on the surface: the rover bay, the xenobotany greenhouse (greenhouse step 8), the xenobiochemistry plant, the cold-trap drill (drill step 13), the radiotrophic vat and the biomining heap (lines 13 to 18, 32);
    - samples go home through the sample receiving facility (12).
-8. **The space elevator** (line 24): PBO (14) and the tether ribbon works (15) braid ZPM's nanotube yarn, UV's BNNT yarn and PBO into the ribbon; GTCA's elevator and its assembler module get recipes. Its miner and pump modules stay for UEV.
+8. **The space elevator** (line 24): PBO (14) and the tether ribbon works (15) braid ZPM's nanotube yarn, UV's BNNT yarn and PBO into the ribbon; GTCA's elevator gets our recipes. GTCA 2.2.0's assembler modules don't form with buses or hatches and the elevator never feeds them *(S0-8)*, so they stay hidden with the miner and pump modules (UEV).
 9. **The warp gate pair** (lines 27, 28): exotic matter (Casimir array, 17), antihydrogen (positron accumulator, 13, and UV's trap), the nuclear clock and the Proxima approach data → the warp gate (18), built in Earth orbit and again in Proxima b's orbit: the AE2 bridge to Proxima and a transit for players.
 10. **The gate to UEV:** the stellar neighbourhood chart from the astrometer, with the swarm carrying a 33.5 M EU/t load.
 
@@ -162,7 +162,7 @@ Every item above is a recipe output. Nothing is mined by hand, and nothing comes
 
 - **Cuts on Earth:** none new. GTM's californium (the Mk2's plutonium + beryllium row) stays as it is; only the isotopes Cf-252 and Bk-249 are claimed here.
 - **Oganesson:** stays voidable in the Mk3 audit; UHV adds its first use (line 30) and its policy becomes **kept** where the cryogenic plant's row runs.
-- **GCYR's Dyson swarm items** (`gcyr:dyson_swarm_satellite`, `gcyr:drone_hangar`) stay hidden: our swarm is our machines. `gcyr:dyson_controller` is checked by S0-1 and hidden if present.
+- **GCYR's Dyson swarm items** (`gcyr:dyson_swarm_satellite`, `gcyr:drone_hangar`) stay hidden: our swarm is our machines. `gcyr:dyson_system_controller` (S0-1) and the other `gcyr:dyson_*` blocks stay hidden.
 - **GT--'s optical circuits:** `gtnn:optical_processor` and `gtnn:optical_assembly` get our recipes in the photonic foundry and unhide at `uhv`; the computer and mainframe stay hidden (UEV and up) *(S0-1 prints the ids)*.
 
 ## Our multiblocks
@@ -227,7 +227,7 @@ Every recipe has a programmed circuit or an input no other recipe of its type sh
 
 Voltages: VA[UHV] = 1,966,080 EU/t, VA[UV] = 491,520 EU/t.
 
-Controllers: GTM 7.5.3 registers a UHV hull and UHV hatches but, with `highTierContent` off, no UHV robot arm, sensor or field generator. Every UHV controller therefore takes a UHV hull + two UV components + two UHV circuits (GTM's wetware mainframe) *(tune; S0-1 prints which UHV components exist)*. No controller takes a UEV item.
+Controllers: GTM 7.5.3 registers a UHV hull and UHV hatches but, with `highTierContent` off, no UHV robot arm, sensor or field generator. Every UHV controller therefore takes a UHV hull + two UV components + two UHV circuits (GTM's wetware mainframe) *(tune; S0-1: none exist, and there is no UHV parallel hatch)*. No controller takes a UEV item.
 
 ### 1. High flux reactor: `gtceu:high_flux_reactor`, type `gtceu:high_flux_irradiation` (Earth)
 
@@ -550,7 +550,7 @@ Controllers: GTM 7.5.3 registers a UHV hull and UHV hatches but, with `highTierC
 - **Recipes:**
   - c1: 16 swarm segments (catalyst; each run turns 1 into a worn segment) + 100 mB oganesson propellant (line 30; or 1,000 mB krypton, half the run time) → 2,097,152 EU/t (1 A UHV) for 6,000 t *(tune, S0-6)*;
   - c2: 64 swarm segments (catalyst; each run turns 4 into worn segments) + 1 coronal field map (catalyst; the station dodges coronal mass ejections) + 400 mB oganesson propellant → 8,388,608 EU/t (4 A UHV) for 6,000 t *(tune, S0-6)*.
-- **Rule 8:** the figure is written final and not doubled; a c2 station wears 48 segments an hour, each refurbished with a reflector film and an IMM array; the propellant is spent; the station reaches the bank only through UHV hatches. GCYR's `gcyr:dyson_controller` (if present) stays hidden.
+- **Rule 8:** the figure is written final and not doubled; a c2 station wears 48 segments an hour, each refurbished with a reflector film and an IMM array; the propellant is spent; the station reaches the bank only through UHV hatches. GCYR's `gcyr:dyson_system_controller` stays hidden.
 - **Byproducts:** worn segments → the foundry's c2 *(kept)*.
 - **Structure:** 11×11×5 station casing with a laser receiver array.
 - **Controller:** UHV hull + 2 UV field generators + 2 UHV circuits *(tune)*.
@@ -670,7 +670,7 @@ Controllers: GTM 7.5.3 registers a UHV hull and UHV hatches but, with `highTierC
 | Synchrotron (UV) | sodium-22 | magnesium-24 target + deuteron beam → sodium-22 target | machine 13 |
 | Antimatter trap (UV) | antihydrogen | 1 antiproton cartridge + 1 positron cartridge → 1 `grindless:antihydrogen_cartridge` | machine 18 |
 | Powder-in-tube line (UV) | two rows | RTAN dust in a silver sheath → RTAN wire; MgB₂ powder in iron → MgB₂ wire | lines 29, 20 |
-| Thruster works (UV) | two rows | ICAN pellet cartridge + UHTC nozzle + SiC power modules → `grindless:ican_rocket_motor` (GCYR motor tier 5); oganesson → propellant pod | the level 8 rocket; machine 23 |
+| Thruster works (UV) | two rows | ICAN pellet cartridge + UHTC nozzle + SiC power modules → `grindless:ican_rocket_motor` (GCYR motor tier 6); oganesson → propellant pod | the level 8 rocket; machine 23 |
 | Light sail fab (UV) | reflector | aluminium (Mercury) → aluminium reflector film | machine 22 |
 | Pyroprocessing cell (UV) | HFIR driver | spent HFIR driver → uranium-233 + fission product waste | line 2 |
 | GTM chemical reactor and assembler | rows keyed by our items | the oxo route to HDEHP (line 25); 1,2,3-trichlorobenzene (line 24); zirconium tetrafluoride (line 31); MgB₂ powder (line 20); ¹²CO methanation; melanin–chitosan flare panel (line 15) | the lines named |
@@ -912,7 +912,7 @@ No passive waits: every row is something built or run.
 | Stored: 1 berkelium-249 | transcurium breeding (UEV's superheavy targets) |
 | One representative run at each site: an excavation and a vaporisation (Mercury surface); a segment and a probe launch (Mercury orbit); an astrometry run (Proxima orbit); a rover run, a greenhouse harvest, a cold-trap run, a heap run (Proxima surface) | the stations and the base work |
 | 4 UHV circuits from the organoid array | the batch route |
-| GTCA's space elevator formed, with its assembler module | the ribbon, the climber, GTCA's machine with our recipe |
+| GTCA's space elevator formed and running our recipe | the ribbon, the climber, GTCA's machine with our recipe |
 | A level 8 rocket flown to Proxima b | the ICAN motor, the UHTC nozzle |
 
 The ten-minute run of every base, untouched, lives only in the bench's integration test (C3).
@@ -952,8 +952,8 @@ The ten-minute run of every base, untouched, lives only in the bench's integrati
 
 | Mod | Slug | Use in UHV |
 |---|---|---|
-| GCYR | `gcyr` | Proxima Centauri b (tier 8) gains an orbit by datapack override; two more stations; the ICAN motor as a KubeJS `gcyr:rocket_motor` tier 5; its Dyson swarm items stay hidden |
-| GTCA | `gtca` | the space elevator and its assembler module get our recipes; miner and pump modules stay hidden (UEV) *(S0-8)* |
+| GCYR | `gcyr` | Proxima Centauri b (tier 8) gains an orbit by datapack override; two more stations; the ICAN motor as a startup `createCustom` GCYR motor, tier 6 (S0-2); its Dyson swarm items stay hidden |
+| GTCA | `gtca` | the space elevator gets our recipes; the assembler, miner and pump modules stay hidden (UEV) *(S0-8)* |
 | GTM | `gtceu` | UHV hull and hatches, the wetware mainframe, the Mk3 (oganesson kept), the UEV casing's research, the UV parallel hatch |
 | GT-- | `gtnn` | `gtnn:optical_processor` and `gtnn:optical_assembly` get recipes and unhide; the computer and mainframe stay hidden |
 | EU P2P Tunnel, MEGA Cells, Expanded AE | `eup2p`, `mega`, `expanded-ae` | the AE2 route and capacity, and the Proxima gate seed |
@@ -994,7 +994,7 @@ No new mods.
 
 | Risk | Where | Answer |
 |---|---|---|
-| The ICAN motor (tier 5) and the tier 11 tank do not make a level 8 rocket, or GCYR clamps motor tiers | A8 | S0-2, before any Proxima package; the fallback is a tier 13 tank (orchestrator decision) |
+| The ICAN motor (tier 5) and the tier 11 tank do not make a level 8 rocket, or GCYR clamps motor tiers | A8 | S0-2, before any Proxima package; resolved by S0-2: the motor is a `createCustom` tier 6 motor |
 | GCYR's planet override for Proxima b's orbit breaks the planet | B1 | S0-3; the fallback puts the astrometer and the gate's far end on the surface |
 | Two more station slots | B1 | S0-4; data-driven since ZPM, proven for six in UV |
 | The UHV cell overflows, or the table refuses a grindless link | A9 | S0-5 |
@@ -1071,11 +1071,11 @@ Order: S0-1 first (it fixes F1's list), then S0-2, S0-3 and S0-4 (they fix B1), 
 #### F2. Integrator step
 
 - **Objective:**
-  - `hidden_until.json`: GTCA's elevator miner and pump modules move from `until: uhv` to `until: uev`; `gtnn:optical_processor` and `gtnn:optical_assembly` move from `never` to `uhv`; UHV's new ids get their substages;
+  - `hidden_until.json`: GTCA's elevator miner, pump and assembler modules (`gtca:space_assembler_mki/ii/iii`) move to `until: uev`, and GTCA's test recipes `gtceu:space_miner/ha` and `gtceu:space_pump/test` are removed; `gtnn:optical_processor` and `gtnn:optical_assembly` move from `never` to `uhv`; UHV's new ids get their substages;
   - `lib/stations.js` changes only if S0-4 failed.
 - **Allowed:** `pack/kubejs/data/grindless/tables/hidden_until.json`; `pack/kubejs/startup_scripts/grindless/lib/stations.js` only after a failed S0-4.
 - **References:** *Only from there, and cuts* (`uhv.md:151`); *Save compatibility*; `docs/eras/uv.md:1222-1231` (UV's F2).
-- **Acceptance:** the miner and pump modules stay hidden in a UHV game; the two GT-- circuits appear at `uhv`; with S0-4 passed, no lib change.
+- **Acceptance:** the miner, pump and assembler modules stay hidden in a UHV game; the two GT-- circuits appear at `uhv`; with S0-4 passed, no lib change.
 - **Tests:** T0. T1: none.
 - **Commits:** 1. The integrator runs it; it may overlap wave A.
 
@@ -1160,18 +1160,18 @@ Wave A packages depend on F1 plus the spikes named. They run two at a time, in t
 
 #### A7. Fibres and the elevator
 
-- **Objective:** machines 14 (PBO plant) and 15 (tether ribbon works); line 24's GTM chemical reactor rows (1,2,3-trichlorobenzene); recipes for GTCA's space elevator and assembler module.
+- **Objective:** machines 14 (PBO plant) and 15 (tether ribbon works); line 24's GTM chemical reactor rows (1,2,3-trichlorobenzene); recipes for GTCA's space elevator (type `gtceu:space_elevator`; S0-8: it forms as `SpaceElevatorMachine` and runs a KubeJS recipe; GTCA's assembler modules are dropped).
 - **`<name>`:** `elevator`.
 - **References:** machines 14–15 (`uhv.md:431`, `uhv.md:445`); line 24; *Route* step 8 (`uhv.md:41`); S0-8.
 - **Depends on:** F1, S0-8.
-- **Invariants:** the miner and pump modules get no recipe.
-- **Acceptance:** PBO comes only from the plant; the elevator forms with a ribbon and a climber and runs its assembler module.
+- **Invariants:** the miner, pump and assembler modules get no recipe.
+- **Acceptance:** PBO comes only from the plant; the elevator forms with a ribbon and a climber and runs its own recipe.
 - **Tests:** T0; T1: `gg_test_uhv_elevator` in the band the integrator assigns. Doubt: a GTCA machine with our recipe and `highTierContent` off (S0-8's mechanism with the real recipe).
 - **Commits:** 2.
 
 #### A8. Ceramics and the level 8 rocket
 
-- **Objective:** machine 16 (spark plasma sinterer); line 26's ZrB₂ row; the thruster works' ICAN motor and oganesson pod rows; the motor as a GCYR tier 5 motor.
+- **Objective:** machine 16 (spark plasma sinterer); line 26's ZrB₂ row; the thruster works' ICAN motor and oganesson pod rows; the motor as a GCYR tier 6 motor registered with `createCustom` (`RocketMotorBlock` and its own motor type; reference `tools/test/uhv-s0/kubejs/startup_scripts/gg_test_uhv_s0_parts.js`).
 - **`<name>`:** `propulsion`.
 - **Allowed (extra):** `server_scripts/grindless/uv/propulsion.js` (the thruster works' two rows).
 - **References:** machine 16 (`uhv.md:457`); *Route* step 6 (`uhv.md:41`); line 26; UV-A11's contract (`docs/eras/uv.md:1369`; `uv/propulsion.js` lands with UV-A11, so A8 starts after it merges); S0-2.
@@ -1210,11 +1210,11 @@ Wave A packages depend on F1 plus the spikes named. They run two at a time, in t
 
 - **Objective:**
   - the Proxima b orbit (override, dimension, sky renderer);
-  - two `more` station slots (Mercury orbit, Proxima b orbit);
+  - two `more` station slots (Mercury orbit, Proxima b orbit: the 5th and 6th `more` rows, the 7th and 8th slots);
   - the AE2 seeds for Mercury orbit; `sunlight.json` rows; the lunar solar field's Proxima b row.
 - **`<name>`:** `travel`.
 - **Allowed (extra):**
-  - `data/grindless/gcyr/planets/proxima_centauri_b.json`, `data/grindless/dimension/proxima_b_orbit.json`, `dimension_type/` (1);
+  - `data/gcyr/gcyr/planets/proxima_centauri_b.json` (S0-3's path; it replaces the pack's `orbit_world` `gcyr:proxima_centauri_b_orbit`, which doesn't exist), `data/grindless/dimension/proxima_b_orbit.json`, `dimension_type/` (1);
   - `tables/planets.json`, `tables/orbits.json`, `tables/places.json`, `tables/stations.json`, `tables/sunlight.json` (UHV rows only);
   - `server_scripts/grindless/ev/lunar_power_and_antenna.js` (the Proxima row);
   - `pack/kubejs/client_scripts/grindless/emi_info_lang.js` (UHV travel rows).
@@ -1247,7 +1247,7 @@ Wave A packages depend on F1 plus the spikes named. They run two at a time, in t
   - `server_scripts/grindless/ev/cryogenic_plant.js` (one row, after A6's).
 - **References:** machines 22–24 (`uhv.md:535`, `uhv.md:547`, `uhv.md:560`); *Power* (`uhv.md:725`); lines 23 and 30; pattern UV's written-final generators (`startup_scripts/grindless/uv/thorium.js:75`); S0-6.
 - **Depends on:** B2, A3, A5 and A6 merged.
-- **Invariants:** the station's figure is final and not doubled; each run wears segments; GCYR's swarm items stay hidden.
+- **Invariants:** the station's figure is final and not doubled; each run wears segments; GCYR's swarm items stay hidden; the dynamo holds 8,388,608 EU/t (S0-6: `lib` `dynamoCapacity` at parallel 1 is exactly that; check the hatch amperage).
 - **Acceptance:** a c2 run gives 8,388,608 EU/t into the network, consumes 400 mB oganesson and returns 4 worn segments; the foundry refurbishes them.
 - **Tests:** T0; T1: `gg_test_uhv_swarm` in the band the integrator assigns. Doubt: a generator whose catalysts wear into an output, at its final figure.
 - **Commits:** 2.
@@ -1360,14 +1360,14 @@ The `tools/assets/README.md` and `zones.json` rows are appended by parallel pack
 ## Decisions proposed (architect; for the orchestrator)
 ## Decisions (accepted by the orchestrator, 2026-10-27; recorded in `DECISIONS.md`)
 The design above follows these. None is in `DECISIONS.md` yet; the orchestrator accepts, changes or rejects each. Each line is in the `DECISIONS.md` form.
-All eleven were accepted as proposed, with the architect's recommended answers to the open questions (high-tier content off, no Mk4 until UEV, our Dyson swarm, gate = AE2 seed + player transit, GTCA elevator with our recipes, landing on Proxima b, gtnn optical unhidden, ICAN motor as GCYR tier 5, 31 machines).
+All eleven were accepted as proposed, with the architect's recommended answers to the open questions (high-tier content off, no Mk4 until UEV, our Dyson swarm, gate = AE2 seed + player transit, GTCA elevator with our recipes, landing on Proxima b, gtnn optical unhidden, ICAN motor as GCYR tier 5, 31 machines). After S0 (2026-10-27): the ICAN motor is tier 6 and GTCA's assembler modules are dropped (`docs/research/uhv-s0.md`).
 1. `- 2026-10-27 · UHV size: 31 progression machines (~42 guided; growth went into lines), 32 new lines (avg 7.0 steps, none under 6), 40 crossings two or more eras back; no padding.`
-2. `- 2026-10-27 · UHV route: level 8 = GCYR motor tier 5 (our ICAN motor) + UV's tier 11 tank; Proxima b (tier 8) gains an orbit dimension grindless:proxima_b_orbit by override; stations 7 (Mercury orbit) and 8 (Proxima b orbit).`
+2. `- 2026-10-27 · UHV route: level 8 = GCYR motor tier 6 (our ICAN motor, createCustom; S0-2) + UV's tier 11 tank; Proxima b (tier 8) gains an orbit dimension grindless:proxima_b_orbit by override; stations 7 (Mercury orbit) and 8 (Proxima b orbit).`
 3. `- 2026-10-27 · UHV highTierContent stays off; GTM's UEV casing (registered without recipe) is the gate's research item; UEV hulls and hatches are UEV's first decision.`
 4. `- 2026-10-27 · UHV Dyson swarm is ours (swarm control station, written final, 2.1 M / 8.4 M EU/t, segments wear, oganesson or krypton fuel); GCYR's swarm items stay hidden.`
 5. `- 2026-10-27 · UHV wireless: UHV cell ~62.9 G from the magnet works c5 with RTAN wire; the nuclear clock is the UHV link, the gravi star stays UV's.`
 6. `- 2026-10-27 · UHV warp gate: an AE2 seed for Proxima plus player transit while sustained; no item teleport; Casimir exotic matter is named fiction.`
-7. `- 2026-10-27 · UHV uses GTCA's space elevator and assembler module with our recipes; miner and pump modules move to until: uev.`
+7. `- 2026-10-27 · UHV uses GTCA's space elevator with our recipes; its assembler (S0-8: doesn't form with buses), miner and pump modules move to until: uev.`
 8. `- 2026-10-27 · UHV unhides gtnn:optical_processor and gtnn:optical_assembly (our recipes); GT--'s optical computer and mainframe stay hidden.`
 9. `- 2026-10-27 · UHV Mk3 keeps oganesson (line 30); no fourth fusion ring until UEV (registerFusionTier, Monifactory's LGPL pattern).`
 10. `- 2026-10-27 · UHV nickel-62 is a hot cell row (IV's enrichment cascade stayed a reserve); the platinum plant rows are EV's.`
