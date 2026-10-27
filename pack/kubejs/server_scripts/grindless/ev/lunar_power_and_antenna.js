@@ -5,6 +5,8 @@
 //                              used up, only by day (GTM's daytime condition):
 //                                grindless:lunar_solar/moon  circuit 1, gcyr:luna   420 EU/t per panel, 20 ticks a run
 //                                grindless:lunar_solar/mars  circuit 2, gcyr:mars   129 EU/t per panel
+//                                grindless:lunar_solar/proxima  a red-tuned solar array (UHV, not used up), gcyr:proxima_centauri_b's
+//                                  star-side biome (GCYR fixes its time at midnight), 273 EU/t per panel (x0.65 of the Moon's)
 //                              The array runs one copy per panel under open sky (36 at most), limited by its dynamo hatches. These
 //                              recipes are NOT in power/generators.js's list: they burn no fuel, so there is nothing to double, and
 //                              their conditions would make that script skip them anyway.
@@ -39,6 +41,17 @@
     controllers: ['grindless:crafting/lunar_solar_array', 'grindless:crafting/deep_space_antenna']
   }
 
+  // the Proxima b row (package UHV-B1): 0.65 x the Moon's 420 EU/t per panel (tables/sunlight.json, gcyr:proxima_centauri_b 0.91)
+  LP.proxima = {
+    recipe: 'grindless:lunar_solar/proxima',
+    builderId: 'grindless:proxima',
+    array: 'grindless:red_tuned_solar_array',
+    dimension: 'gcyr:proxima_centauri_b',
+    biome: 'gcyr:proxima_centauri_b_star_side',
+    sky: 'proxima_day',
+    euPerPanel: 273
+  }
+
   ServerEvents.recipes(function (event) {
     try {
       var A = LP.array
@@ -65,6 +78,28 @@
           .EUt(-site.euPerPanel)
           .duration(A.duration)
       })
+
+      // ---- UHV-B1, the Proxima b row (docs/eras/uhv.md "Sunlight", "Older machines"): x0.65 of the Moon's figure, a red-tuned array
+      // in the bus (not used up) instead of a circuit. GCYR fixes Proxima b's time at midnight (it is tidally locked), so the day
+      // side is its star-side biome (GTM's biome condition at the controller), not GTM's daytime check
+      var PX = LP.proxima
+      try {
+        if (Item.exists(PX.array)) {
+          event.recipes.gtceu.lunar_solar(PX.builderId)
+            .notConsumable(PX.array)
+            .addDataString(A.skyKey, PX.sky)
+            .addData(A.panelEuKey, PX.euPerPanel)
+            .dimension(PX.dimension)
+            .biome(PX.biome)
+            .EUt(-PX.euPerPanel)
+            .duration(A.duration)
+          if (LP.recipes.solar.indexOf(PX.recipe) < 0) LP.recipes.solar.push(PX.recipe)
+        } else {
+          console.error(LOG + 'lunar solar Proxima row skipped, unknown item: ' + PX.array)
+        }
+      } catch (e) {
+        console.error(LOG + 'lunar solar Proxima row failed: ' + e)
+      }
 
       // ---- the antenna: the landing-site chart calibrates the dish, a data stick takes the radio fixes of Mars
       event.recipes.gtceu.deep_space_tracking('grindless:mars_chart')

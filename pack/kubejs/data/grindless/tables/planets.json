@@ -20,7 +20,8 @@
     "saturn": { "dimensions": ["grindless:saturn", "grindless:saturn_orbit"], "pairTag": "saturn", "name": { "en_us": "Saturn", "es_es": "Saturno" } },
     "uranus": { "dimensions": ["grindless:uranus", "grindless:uranus_orbit"], "pairTag": "uranus", "name": { "en_us": "Uranus", "es_es": "Urano" } },
     "neptune": { "dimensions": ["grindless:neptune", "grindless:neptune_orbit"], "pairTag": "neptune", "name": { "en_us": "Neptune", "es_es": "Neptuno" } },
-    "pluto": { "dimensions": ["grindless:pluto", "grindless:pluto_orbit"], "pairTag": "pluto", "name": { "en_us": "Pluto", "es_es": "Plutón" } }
+    "pluto": { "dimensions": ["grindless:pluto", "grindless:pluto_orbit"], "pairTag": "pluto", "name": { "en_us": "Pluto", "es_es": "Plutón" } },
+    "proxima": { "dimensions": ["gcyr:proxima_centauri_b", "grindless:proxima_b_orbit"], "pairTag": "proxima", "name": { "en_us": "Proxima b", "es_es": "Próxima b" } }
   },
   "dryOnEarth": ["gcyr:overworld_orbit"]
 }
