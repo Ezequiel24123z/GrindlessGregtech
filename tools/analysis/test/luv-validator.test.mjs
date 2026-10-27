@@ -36,6 +36,17 @@ test('places: tokens take the ids from orbits.json and places.json; ${orbits} an
   assert.equal(resolvePlaceTokens(plain, () => { throw new Error('read'); }), plain);
 });
 
+test('places: an orbit falls back to grindless:<name>_orbit when the surface belongs to another namespace (proxima_b)', () => {
+  const t = {
+    orbits: { earth: 'gcyr:overworld_orbit', dimensions: ['gcyr:overworld_orbit', 'grindless:proxima_b_orbit'] },
+    places: { surfaces: { proxima_b: 'gcyr:proxima_centauri_b', io: 'grindless:io' } },
+  };
+  assert.deepEqual(resolvePlaceTokens({ a: ['${orbit:proxima_b}', '${place:proxima_b}'] }, t), { a: ['grindless:proxima_b_orbit', 'gcyr:proxima_centauri_b'] });
+  assert.throws(() => resolvePlaceTokens({ a: '${orbit:io}' }, t), /grindless:io_orbit isn't in orbits\.json/);
+  const real = readPlaceTables(defaultTablesDir(TIERS));
+  assert.deepEqual(resolvePlaceTokens({ a: '${orbit:proxima_b}' }, real), { a: 'grindless:proxima_b_orbit' });
+});
+
 test('places: loadTierConfig resolves the tokens after inheritance, from the given tables or the pack\'s', () => {
   const files = {
     [path.resolve('/m/tiers/base.json')]: { tier: 'base', conditions: { dimension: { asKeysFor: ['${orbits}'] } } },
