@@ -131,7 +131,8 @@ test('side steps: every thruster part has one maker on a GTM machine', () => {
   assert.notEqual(side.uv_electromagnet.circuit, side.propellant_tank.circuit);
   for (const r of P.side) assert.ok(byId(r.recipeId), r.recipeId);
   for (const n of ['molybdenum_grid', 'lanthanum_hexaboride_cathode', 'bn_discharge_channel', 'uv_electromagnet', 'propellant_tank']) {
-    const makers = recipes.filter((r) => outputs(r).includes(`"grindless:${n}"`));
+    // UHV-B3's swarm station returns the empty tank of each pod it burns: a return, not a maker.
+    const makers = recipes.filter((r) => outputs(r).includes(`"grindless:${n}"`) && !String(r.i).startsWith('grindless:dyson_swarm/'));
     assert.equal(makers.length, 1, n);
   }
 });
