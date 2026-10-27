@@ -5,6 +5,7 @@ $global:GGUrls = @{
     Installer     = 'https://github.com/packwiz/packwiz-installer/releases/download/v0.5.14/packwiz-installer.jar'
     Bootstrap     = 'https://github.com/packwiz/packwiz-installer-bootstrap/releases/download/v0.0.3/packwiz-installer-bootstrap.jar'
     HmcExe        = 'https://github.com/headlesshq/headlessmc/releases/download/3.0.0-RC5/headlessmc-launcher-windows-x64.exe'
+    HmcLinux      = 'https://github.com/headlesshq/headlessmc/releases/download/3.0.0-RC5/headlessmc-launcher-linux-x64'
     HmcJar        = 'https://github.com/headlesshq/headlessmc/releases/download/3.0.0-RC5/headlessmc.jar'
     McRuntimeTest = 'https://github.com/headlesshq/mc-runtime-test-mod/releases/download/1.20.1-5.0.1/mc-runtime-test-1.20.1-forge-5.0.1.jar'
     ForgeMaven    = 'https://maven.minecraftforge.net/net/minecraftforge/forge'

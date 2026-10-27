@@ -15,7 +15,8 @@
             Host          = 'grindless-vm'
             Os            = 'linux'
             Base          = '/var/lib/grindless/bench'
-            Suites        = @('server')
+            # client = HeadlessMC (linux-x64) under Xvfb on the distribution's Mesa llvmpipe (docs/testing/vm.md#client)
+            Suites        = @('server', 'client', 'both')
             # Memory ceiling of the transient systemd scope the whole run starts in (gg-linux-run.sh). Empty = the VM
             # sizes it: GG_BENCH_MEMORY_MAX in its /etc/grindless/bench.env (written by gg-vm-bootstrap.sh), else
             # min((RAM - GG_BENCH_RESERVE_MB (1228)) / Slots, GG_BENCH_RUN_MAX_MB (12288)). Set a value (e.g. '10G') only to
