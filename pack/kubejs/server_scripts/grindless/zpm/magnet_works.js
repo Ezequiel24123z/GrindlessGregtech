@@ -5,7 +5,7 @@
 //
 //   gtceu:naquadria_magnets   one recipe per entry of the table, id grindless:naquadria_magnets/<name> (GTM's builder puts the type in
 //                             front); the programmed circuit picks the product (1 ZPM SMES cell, 2 URhNq2 single wires, 3 HTS insert,
-//                             4 UV SMES cell: UV-A9),
+//                             4 UV SMES cell: UV-A9, 5 UHV SMES cell: UHV-A9),
 //                             every recipe carries the data key grindless_naquadria_magnets = <name> (its EMI line), and an entry with
 //                             "charge": true takes the table's cold-test charge as GTM's non-consumed fluid input (notConsumableFluid).
 //   Lookup safety: GTM's lookup keeps one recipe per set of ingredients (counts ignored), and a recipe whose ingredients are a subset of
