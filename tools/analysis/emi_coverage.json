@@ -14,7 +14,9 @@
     "globs": [],
     "items": [
       { "id": "grindless:synroc_block", "reason": "ZPM-A4: the sealed final form of the waste (zpm.md, machines 4 and 5: kept, inert, a block of its own)" },
-      { "id": "grindless:curium_oxide", "reason": "ZPM-A4: stored for UV (zpm.md: GTM has no curium use before UV)" },
+      { "id": "grindless:probe_rtg", "reason": "UV-A2, temporary: consumed by the penetrator, the Kuiper interceptor (B4) and the precursor probe (B5); delete this entry when the first of them lands" },
+      { "id": "grindless:americium_micro_source", "reason": "UV-A2, temporary: consumed by the starchip (A12); delete this entry when A12 lands" },
+      { "id": "grindless:heavy_curium_oxide", "reason": "UV-A2: the curium-245/246 fraction, stored for UHV (uv.md machine 3: UHV breeds berkelium and californium from it)" },
       { "id": "grindless:multimessenger_catalogue", "reason": "ZPM-A9: the seed of UV's telescope (zpm.md, Bridges and 'What ZPM leaves')" },
       { "id": "grindless:pluto_kuiper_chart", "reason": "ZPM-A9: UV's trip to Pluto and the Kuiper Belt (zpm.md, 'What ZPM leaves')" }
     ]
