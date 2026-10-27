@@ -375,46 +375,74 @@
 			y: 69.5d
 		}
 		{
+			id: "32173E38F76F8F00"
+			linked_quest: "531F95CE48EB6C79"
+			shape: "rsquare"
+			x: 0.5d
+			y: 73.0d
+		}
+		{
+			id: "5836C3C211644432"
+			linked_quest: "11FAD777A18E748F"
+			shape: "rsquare"
+			x: 6.75d
+			y: 73.0d
+		}
+		{
+			id: "78BBCCB26E843CEA"
+			linked_quest: "1225702AF9F2A2E4"
+			shape: "rsquare"
+			x: 13.0d
+			y: 73.0d
+		}
+		{
+			id: "7813790375C096E4"
+			linked_quest: "387E0EB82EC57EC4"
+			shape: "rsquare"
+			x: 19.25d
+			y: 73.0d
+		}
+		{
 			id: "37EA5C37FB08041B"
 			linked_quest: "39A5A5CC76591697"
 			shape: "rsquare"
 			x: 0.5d
-			y: 76.5d
+			y: 80.0d
 		}
 		{
 			id: "1FCCBED6CE4452ED"
 			linked_quest: "1DFC0C1A50793CB7"
 			shape: "rsquare"
 			x: 21.5d
-			y: 76.5d
+			y: 80.0d
 		}
 		{
 			id: "3D9F43AA278F3647"
 			linked_quest: "366AB48E5BF50431"
 			shape: "rsquare"
 			x: 19.25d
-			y: 78.0d
+			y: 81.5d
 		}
 		{
 			id: "354C64B97FEDF96E"
 			linked_quest: "42BF2F77456F8773"
 			shape: "rsquare"
 			x: 21.5d
-			y: 78.0d
+			y: 81.5d
 		}
 		{
 			id: "1DB9D03F61275809"
 			linked_quest: "5933ADF51C8949BD"
 			shape: "rsquare"
 			x: 0.5d
-			y: 89.25d
+			y: 92.75d
 		}
 		{
 			id: "3925C695BE99E732"
 			linked_quest: "1FFCFA949E449B45"
 			shape: "rsquare"
 			x: 0.5d
-			y: 87.5d
+			y: 91.0d
 		}
 	]
 	quests: [
@@ -1626,6 +1654,66 @@
 			y: 69.5d
 		}
 		{
+			dependencies: ["531F95CE48EB6C79"]
+			description: ["A proton beam drives a subcritical thorium core, so it stops the moment the beam does. The lead-bismuth pool is never used up."]
+			icon: "gtceu:accelerator_driven_reactor"
+			id: "17592B238F40E403"
+			size: 1.0d
+			subtitle: "UV. Thorium assemblies; the spent fuel goes to the pyroprocessing cell"
+			tasks: [
+				{ id: "18D39755971C406C", item: "gtceu:accelerator_driven_reactor", optional_task: true, type: "item" }
+				{ id: "56E1BEB980223393", type: "checkmark" }
+			]
+			title: "Accelerator-Driven Reactor"
+			x: 2.75d
+			y: 73.0d
+		}
+		{
+			dependencies: ["11FAD777A18E748F"]
+			description: ["The fibre lasers wear out now and then; the draw tower refurbishes them. The helium goes to the network."]
+			icon: "gtceu:laser_fusion_chamber"
+			id: "32A1ADF3166B684F"
+			size: 1.0d
+			subtitle: "UV. One capsule a shot; boron or D-He3, no neutrons to speak of"
+			tasks: [
+				{ id: "5DC5EDCB076EACC1", item: "gtceu:laser_fusion_chamber", optional_task: true, type: "item" }
+				{ id: "72AEF493863FC124", type: "checkmark" }
+			]
+			title: "Laser Fusion Chamber"
+			x: 9.0d
+			y: 73.0d
+		}
+		{
+			dependencies: ["1225702AF9F2A2E4"]
+			description: ["An extrapolation: real muon-catalysed fusion never broke even, because each muon is lost too soon. This machine assumes it does."]
+			icon: "gtceu:muon_fusion_cell"
+			id: "72A71A499748D5AD"
+			size: 1.0d
+			subtitle: "UV. Liquid D-T; the blanket breeds most of the tritium back"
+			tasks: [
+				{ id: "33242359725C171F", item: "gtceu:muon_fusion_cell", optional_task: true, type: "item" }
+				{ id: "7A85ACC55EAA374B", type: "checkmark" }
+			]
+			title: "Muon Fusion Cell"
+			x: 15.25d
+			y: 73.0d
+		}
+		{
+			dependencies: ["387E0EB82EC57EC4"]
+			description: ["It lights plasmas the Mk2 can't even start. Feed it through UV energy hatches."]
+			icon: "gtceu:uv_fusion_reactor"
+			id: "58DA713E23908C5D"
+			size: 1.0d
+			subtitle: "UV. GregTech's own; its plasma goes to a turbine"
+			tasks: [
+				{ id: "79D96530BFBDF932", item: "gtceu:uv_fusion_reactor", optional_task: true, type: "item" }
+				{ id: "5F19B91A0ADA2676", type: "checkmark" }
+			]
+			title: "Fusion Reactor Mk3"
+			x: 21.5d
+			y: 73.0d
+		}
+		{
 			icon: "gcyr:dyson_solar_cell"
 			id: "11C73137027F90A3"
 			shape: "circle"
@@ -1633,7 +1721,7 @@
 			tasks: [{ id: "7ED020059F8C2BA4", type: "checkmark" }]
 			title: "Dyson Solar Cell"
 			x: 0.5d
-			y: 73.0d
+			y: 76.5d
 		}
 		{
 			dependencies: ["11C73137027F90A3"]
@@ -1645,7 +1733,7 @@
 			tasks: [{ id: "5A8383B9274CEC05", type: "checkmark" }]
 			title: "Dyson Sphere"
 			x: 2.75d
-			y: 73.0d
+			y: 76.5d
 		}
 		{
 			icon: "gtceu:lv_machine_hull"
@@ -1658,7 +1746,7 @@
 			]
 			title: "LV Machine Hull"
 			x: 0.5d
-			y: 78.0d
+			y: 81.5d
 		}
 		{
 			dependencies: ["39A5A5CC76591697", "3F30A6656E0CFBCC"]
@@ -1672,7 +1760,7 @@
 			]
 			title: "Transformer"
 			x: 2.75d
-			y: 77.25d
+			y: 80.75d
 		}
 		{
 			dependencies: ["3F30A6656E0CFBCC"]
@@ -1686,7 +1774,7 @@
 			]
 			title: "Battery Buffer"
 			x: 2.75d
-			y: 78.75d
+			y: 82.25d
 		}
 		{
 			icon: "gtceu:lv_battery_hull"
@@ -1699,7 +1787,7 @@
 			]
 			title: "Battery Hull"
 			x: 6.75d
-			y: 76.5d
+			y: 80.0d
 		}
 		{
 			dependencies: ["1DD9B8EADA8EBAC0"]
@@ -1716,7 +1804,7 @@
 			]
 			title: "Batteries"
 			x: 9.0d
-			y: 76.5d
+			y: 80.0d
 		}
 		{
 			icon: "gtceu:tin_single_wire"
@@ -1729,7 +1817,7 @@
 			]
 			title: "Tin Wire"
 			x: 13.0d
-			y: 76.5d
+			y: 80.0d
 		}
 		{
 			dependencies: ["3B2125BC87FC669D"]
@@ -1746,7 +1834,7 @@
 			]
 			title: "Cables"
 			x: 15.25d
-			y: 76.5d
+			y: 80.0d
 		}
 		{
 			dependencies: ["1DFC0C1A50793CB7", "42BF2F77456F8773"]
@@ -1761,7 +1849,7 @@
 			]
 			title: "EU P2P Tunnel"
 			x: 23.75d
-			y: 77.25d
+			y: 80.75d
 		}
 		{
 			dependencies: ["366AB48E5BF50431"]
@@ -1775,7 +1863,7 @@
 			]
 			title: "Quantum Bridge"
 			x: 21.5d
-			y: 79.5d
+			y: 83.0d
 		}
 		{
 			icon: "gtceu:lapotron_crystal"
@@ -1788,7 +1876,7 @@
 			]
 			title: "Lapotron Crystal"
 			x: 27.75d
-			y: 76.5d
+			y: 80.0d
 		}
 		{
 			dependencies: ["56341035C7044592"]
@@ -1802,7 +1890,7 @@
 			]
 			title: "Power Substation"
 			x: 30.0d
-			y: 76.5d
+			y: 80.0d
 		}
 		{
 			icon: "gtceu:lv_lithium_battery"
@@ -1816,7 +1904,7 @@
 			]
 			title: "Batteries"
 			x: 0.5d
-			y: 85.25d
+			y: 88.75d
 		}
 		{
 			dependencies: ["1A5654A5282AA2BB"]
@@ -1834,7 +1922,7 @@
 			]
 			title: "Capacitor Cell"
 			x: 2.75d
-			y: 85.25d
+			y: 88.75d
 		}
 		{
 			dependencies: ["16ABFBB249BDC07B", "7DDF714877C2B39F"]
@@ -1853,7 +1941,7 @@
 			]
 			title: "Wireless Energy Tower"
 			x: 5.0d
-			y: 85.25d
+			y: 88.75d
 		}
 		{
 			dependencies: ["5933ADF51C8949BD", "1FFCFA949E449B45"]
@@ -1871,13 +1959,13 @@
 			]
 			title: "LuV SMES Cell"
 			x: 2.75d
-			y: 87.5d
+			y: 91.0d
 		}
 		{
 			dependencies: ["1A64E503878275AE"]
 			description: [
 				"Energy goes in at any voltage; the cells only limit what comes out."
-				"Comes in 2, 4, 16 and 64 A, LV to ZPM."
+				"Comes in 2, 4, 16 and 64 A, LV to UV."
 			]
 			icon: "gtceu:lv_wireless_dynamo_hatch"
 			id: "128CD52291A76880"
@@ -1889,11 +1977,11 @@
 			]
 			title: "Wireless Dynamo Hatch"
 			x: 7.25d
-			y: 83.0d
+			y: 86.5d
 		}
 		{
 			dependencies: ["1A64E503878275AE"]
-			description: ["2 A of its tier, LV to ZPM."]
+			description: ["2 A of its tier, LV to UV."]
 			icon: "grindless:lv_wireless_dynamo_cover"
 			id: "54D4653CC016835A"
 			size: 1.0d
@@ -1904,13 +1992,13 @@
 			]
 			title: "Wireless Dynamo Cover"
 			x: 7.25d
-			y: 84.5d
+			y: 88.0d
 		}
 		{
 			dependencies: ["1A64E503878275AE"]
 			description: [
 				"Above the network's voltage it gets nothing; shift-right-click it with an empty hand to see why."
-				"Comes in 2, 4, 16 and 64 A, LV to ZPM."
+				"Comes in 2, 4, 16 and 64 A, LV to UV."
 			]
 			icon: "gtceu:lv_wireless_energy_hatch"
 			id: "5062E82EF67AFF89"
@@ -1922,13 +2010,13 @@
 			]
 			title: "Wireless Energy Hatch"
 			x: 7.25d
-			y: 86.0d
+			y: 89.5d
 		}
 		{
 			dependencies: ["1A64E503878275AE"]
 			description: [
 				"GTM machines, chargers and battery buffers, not converters or multiblock controllers; shift-right-click with an empty hand for the readout."
-				"2 A of its tier, LV to ZPM."
+				"2 A of its tier, LV to UV."
 			]
 			icon: "grindless:lv_wireless_energy_cover"
 			id: "7713822C036911A8"
@@ -1940,7 +2028,7 @@
 			]
 			title: "Wireless Energy Cover"
 			x: 7.25d
-			y: 87.5d
+			y: 91.0d
 		}
 	]
 	subtitle: ["Every way to make power, tier by tier, and what carries it and stores it."]
