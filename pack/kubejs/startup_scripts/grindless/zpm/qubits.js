@@ -43,8 +43,9 @@
       name: 'diamond_lattice_fab', machine: 'gtceu:diamond_lattice_fab', type: 'diamond_cvd', lang: 'Diamond Lattice Fab',
       casing: CLEAN, texture: CLEAN_TEXTURE, appearance: true, minCasings: 12,
       width: 5, depth: 5, height: 5,
-      // items in: the seed and the circuit; out: the plate; fluids in: methane, hydrogen, nitrogen; out: hydrogen
-      maxIO: { itemsIn: 2, itemsOut: 1, fluidsIn: 3, fluidsOut: 1 }
+      // items in: the seed and the circuit (UHV-A3's diodes: plate, boron, phosphorus and the circuit); out: the plate;
+      // fluids in: methane, hydrogen, nitrogen; out: hydrogen
+      maxIO: { itemsIn: 4, itemsOut: 1, fluidsIn: 3, fluidsOut: 1 }
     },
     implanter: {
       name: 'ion_implanter', machine: 'gtceu:ion_implanter', type: 'ion_implantation', lang: 'Ion Implanter',
