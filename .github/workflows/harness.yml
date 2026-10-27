@@ -1,0 +1,61 @@
+# Regression checks of the test harness itself, only when it changes. No Minecraft, no SSH, no secrets.
+#   linux:   tools/test/Test-LinuxHelpers.ps1 (the Linux remote runner used by the azure backend) and shellcheck.
+#   windows: tools/test/Test-ResourcePolicy.ps1 (the one-JVM lock policy of the home bench, Windows PowerShell 5.1);
+#            informational only, see the note on the job.
+name: Harness
+
+on:
+  push:
+    paths:
+      - 'tools/test/**'
+      - 'tools/vm/**'
+      - 'tools/Check-Fast.ps1'
+      - '.github/workflows/harness.yml'
+  pull_request:
+    paths:
+      - 'tools/test/**'
+      - 'tools/vm/**'
+      - 'tools/Check-Fast.ps1'
+      - '.github/workflows/harness.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: harness-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  linux:
+    name: Linux runner checks
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - name: shellcheck
+        run: shellcheck -S warning tools/vm/*.sh tools/test/remote/*.sh
+      - name: Test-LinuxHelpers
+        if: success() || failure()
+        shell: pwsh
+        env:
+          GG_REQUIRE_JAVA: '1' # the runner image ships a JDK 17
+        run: ./tools/test/Test-LinuxHelpers.ps1
+
+  windows:
+    name: Windows lock policy
+    runs-on: windows-2022
+    timeout-minutes: 15
+    # Informational: on hosted windows-2022 the restart dry run's fake server never stops within 30 s (runs 40564601817,
+    # 40564995189, with and without a Defender exclusion), while it passes on workstations. The home bench remains the
+    # authority for this test (docs/testing/ci.md); do not make this job a required check until that is understood.
+    continue-on-error: true
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - name: Test-ResourcePolicy
+        shell: powershell
+        run: .\tools\test\Test-ResourcePolicy.ps1

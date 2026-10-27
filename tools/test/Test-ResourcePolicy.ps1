@@ -77,6 +77,13 @@ $req = New-TestRequest
 $req.slots = 2
 Assert-Rejected { Assert-GGResourceRequest $req } 'uploaded request cannot enable a second JVM'
 $req = New-TestRequest
+Add-Member -InputObject $req -NotePropertyName os -NotePropertyValue 'linux'
+$req.slots = 3
+Assert-GGResourceRequest $req
+$req.slots = 9
+Assert-Rejected { Assert-GGResourceRequest $req } 'a Linux request is capped at 8 slots'
+Assert-Policy ((Get-GGSlotLimit @() 4) -eq 1) 'the Windows slot ceiling stays at one JVM'
+$req = New-TestRequest
 Assert-GGResourceRequest $req
 Assert-Policy ($null -eq $req.PSObject.Properties['slotMinFreeGb']) 'requests need no RAM-floor field'
 foreach ($legacyFloor in @(0, 8, 128, 1000000, -1, [double]::NaN, [double]::PositiveInfinity, $null, 'obsolete')) {
@@ -259,7 +266,7 @@ $probe = [scriptblock]::Create($entry.ParamBlock.Extent.Text + "`n" + $notice[0]
 $defaults = & $probe
 Assert-Policy ($defaults.Slots -eq 1 -and $defaults.ServerXms -eq '1G' -and $defaults.ServerXmx -eq '4G') 'local server defaults match remote policy'
 Assert-Policy ($defaults.ClientXms -eq '1G' -and $defaults.ClientXmx -eq '4G' -and $defaults.Native -eq 600 -and $defaults.LockWait -eq 5) 'local client and queue defaults match remote policy'
-Assert-Rejected { & $probe -Slots 2 } 'local entry rejects extra slots before executing its body'
+Assert-Rejected { & $probe -Slots 9 } 'local entry rejects more than 8 slots before executing its body'
 Assert-Rejected { & $probe -ClientTimeoutSec 1800 } 'local entry rejects the old 30-minute client timeout'
 Assert-Rejected { & $probe -NativeTimeoutSec 601 } 'local entry rejects a longer total budget'
 Assert-Policy ($defaults.SlotMinFreeGb -eq 0) 'local entry has no default RAM floor'

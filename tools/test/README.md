@@ -1,6 +1,8 @@
-# Test bench (home PC)
+# Test bench (VM first, home fallback)
 
-It uploads `pack/` (plus `tools/test/overlay/`) to the home PC, starts a **clean** server or client (new world, no previous state) and returns logs and a PASS/FAIL summary. All the heavy work runs there, in `D:\GregtechGrindless`; here it is only launched and read.
+It uploads `pack/` (plus `tools/test/overlay/`) to the bench, starts a **clean** server or client (new world, no previous state) and returns logs and a PASS/FAIL summary. All the heavy work runs there: on the Linux VM (`/var/lib/grindless/bench`) by default, on the home PC (`D:\GregtechGrindless`) as fallback; here it is only launched and read.
+
+**Backends:** `-Backend azure|home|local` (or `$env:GG_BACKEND`; default `azure`, from `backends.psd1`) chooses the host; `-ShowBackend` prints the resolved values and exits. `azure` is the Linux VM (all suites, 3 concurrent runs); when it is unreachable or fails before the suite starts, the run repeats on `home` (never after a real FAIL; `-NoFallback` turns that off). Where each tier runs, the VM, CI and the home fallback: [docs/testing/](../../docs/testing/README.md). This page describes the bench itself, the same on every backend unless stated; sections about "the home PC" apply to the fallback.
 
 ## How to run it
 
@@ -15,7 +17,7 @@ powershell -NoProfile -ExecutionPolicy Bypass -File tools\test\Invoke-GGTest.ps1
 |---|---|---|
 | `server` | Dedicated Forge (normal world, fixed seed): starts until `Done`, runs `-Commands` over RCON, waits for the `-WaitForLog` patterns, stops with `stop`. | It starts, the commands respond, the markers appear, clean shutdown. |
 | `client` | HeadlessMC + mc-runtime-test: creates a world with one player and exits. The client is the pack's **real** client (Embeddium, ImmediatelyFast, …) with software OpenGL (see "Client without GPU"). | Exit code 0, `Successfully finished.`, no crash report. |
-| `both` | Server and then client (one slot on the PC). | Both. |
+| `both` | Server and then client (one slot on the bench). | Both. |
 
 Useful parameters (all optional):
 
@@ -25,7 +27,7 @@ Useful parameters (all optional):
 - `-Flat` flat world; `-Seed`; `-ServerXms/-ServerXmx` and `-ClientXms/-ClientXmx` (1G/4G each, maximum heap 4 GB); `-ServerProp 'difficulty=peaceful'`.
 - `-BootTimeoutSec` (420), `-ClientTimeoutSec` (600), `-CommandTimeoutSec` (60): defaults are also the maximums. `-NativeTimeoutSec` (600 maximum) is a shared deadline from the first Minecraft launch, not a fresh allowance per stage/suite. Server shutdown has a separate 30-second grace. `-LockWaitMin` defaults to 5 (maximum 15).
 - `-SettleSec` (15): after `Done`, the server waits at least this long before RCON/`-Commands`, and longer while a datapack reload is in progress (e.g. the one that Additional Placements triggers ~2 s after `Done` and that restarts the KubeJS scripts). Its own stage `settle` (`results\server\settle.txt` lists what was detected); `0` disables it. If a reload starts later than the minimum, raise it.
-- `-Slots 1` is mandatory: one Minecraft JVM globally. Available RAM is not a launch condition. Legacy `-SlotMinFreeGb` arguments remain accepted with a deprecation warning and are ignored; new upload requests omit that field (see "The home PC").
+- `-Slots`: concurrent Minecraft JVMs on the bench, default the backend's `Slots` (`azure` 3, `home` 1). The home PC accepts only 1 (one Minecraft JVM globally); a Linux backend 1 to 8. Available RAM is not a launch condition. Legacy `-SlotMinFreeGb` arguments remain accepted with a deprecation warning and are ignored; new upload requests omit that field (see "The home PC").
 - `-ClientRenderer mesa|stub` (default `mesa`) and `-ClientExclude 'regex;;regex'` (only useful with `stub`; see below).
 - `-Strict` also fails on WARN stages, ERROR lines that are not allowed, or KubeJS errors.
 - `-SkipRefresh` (only if the index is already fresh: the bench checks this before uploading and warns if it is not), `-PackDir`, `-OverlayDir`, `-OutDir`, `-ShowWarnings`.
@@ -126,6 +128,6 @@ In the `client` suite the overlay's server scripts run on the integrated server 
 
 ## Files
 
-`Invoke-GGTest.ps1` (local entry point) · `Show-GGResults.ps1` (summary; use it to re-read an old `-OutDir`) · `log-allowlist.txt` · `overlay/` · `remote/` (`gg-common`, `gg-tools`, `gg-server`, `gg-client`, `gg-collect`, `Run-GGTest`).
+`Invoke-GGTest.ps1` (local entry point) · `backends.psd1` (hosts; untracked `backends.local.psd1` overrides) · `Show-GGResults.ps1` (summary; use it to re-read an old `-OutDir`) · `log-allowlist.txt` · `overlay/` · `remote/` (`gg-common`, `gg-tools`, `gg-server`, `gg-client`, `gg-collect`, `Run-GGTest`, `gg-linux-run.sh`). VM scripts: `tools/vm/`.
 
-Run the policy regressions **locally**, without SSH or Minecraft: `powershell -NoProfile -ExecutionPolicy Bypass -File tools\test\Test-ResourcePolicy.ps1`. They cover request rejection, actual parameter defaults, legacy slot exclusion, real cross-process mutex exclusion/release with no metadata file, launch independence from available RAM/counter failures, shared deadlines and a fragmented loopback RCON response.
+Run the policy regressions **locally**, without SSH or Minecraft: `powershell -NoProfile -ExecutionPolicy Bypass -File tools\test\Test-ResourcePolicy.ps1`. They cover request rejection, actual parameter defaults, legacy slot exclusion, real cross-process mutex exclusion/release with no metadata file, launch independence from available RAM/counter failures, shared deadlines and a fragmented loopback RCON response. The Linux runner's equivalent (on Linux, with pwsh 7 and a JDK 17): `pwsh tools/test/Test-LinuxHelpers.ps1`; CI runs both ([docs/testing/ci.md](../../docs/testing/ci.md)).
