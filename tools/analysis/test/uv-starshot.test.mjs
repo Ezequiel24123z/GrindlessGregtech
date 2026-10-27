@@ -92,8 +92,9 @@ test('each machine: unique circuits, whole numbers, UV VA at most, every row in 
       assert.deepEqual(circuitOf(rec), [r.circuit], r.name);
     }
   }
+  // UHV-B3 adds circuit 4, the swarm's aluminium reflector film
   assert.deepEqual(S.recipes.filter((r) => r.type === 'light_sail').map((r) => [r.name, r.circuit]),
-    [['nitride_film', 1], ['metasurface', 2], ['sail_release', 3]]);
+    [['nitride_film', 1], ['metasurface', 2], ['sail_release', 3], ['aluminium_reflector_film', 4]]);
   assert.deepEqual(S.recipes.filter((r) => r.type === 'starchip').map((r) => [r.name, r.circuit]), [['starchip', 1], ['sailcraft', 2]]);
   for (const id of [S.crafting.sailFab, S.crafting.chipFab, S.crafting.launcher]) assert.ok(recipes.find((x) => x.i === id), id);
 });
