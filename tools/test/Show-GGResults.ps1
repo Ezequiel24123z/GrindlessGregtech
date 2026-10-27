@@ -232,6 +232,7 @@ if ($req) {
     if ($req.suite -ne 'client' -and $null -ne $req.settleSec) { $fl += "settle=$($req.settleSec)s" }
     if ($req.slots) { $fl += "slots=$($req.slots)" }
     Emit ('options: ' + ($fl -join ', '))
+    if ($req.backend) { Emit ("backend: {0} ({1})" -f $req.backend, $(if ($req.backendWhy) { $req.backendWhy } else { 'unknown' })) }
 }
 Emit "out: $OutDir"
 Emit ''

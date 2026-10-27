@@ -5,7 +5,7 @@
 .DESCRIPTION
   1. tools\Update-PackIndex.ps1 (normalizes pack text files to UTF-8 no BOM + LF, then packwiz refresh)
   2. zips pack\ + tools\test\overlay\   3. uploads to the home test PC
-  4. runs the remote scripts over ssh (one Minecraft JVM globally, 1G/4G heap, no available-RAM launch floor;
+  4. runs the remote scripts over ssh (one Minecraft JVM globally on the home PC, -Slots on a Linux backend; 1G/4G heap;
      a shared native time budget of at most 600 seconds, then bounded shutdown)
   5. downloads results.zip and prints a concise PASS/FAIL summary (see Show-GGResults.ps1).
 
@@ -29,6 +29,14 @@
 
 .PARAMETER ShowBackend
   Print the resolved backend (GGBACKEND|name|transport|os|host|base|...) and exit 0 without running anything.
+
+.PARAMETER Slots
+  Concurrent Minecraft JVMs the bench may run (each run takes one slot). Default: $env:GG_SLOTS, else the backend's
+  Slots in tools\test\backends.psd1, else 1. The Windows home PC accepts only 1; a Linux backend accepts 1 to 8.
+
+.PARAMETER NoFallback
+  Do not switch to the backend's Fallback (home for azure) when it is unreachable, lacks the suite, or the run fails
+  before the suite starts. A real test FAIL never falls back. $env:GG_NO_FALLBACK=1 does the same.
 
 .PARAMETER SlotMinFreeGb
   Deprecated and ignored for compatibility. Available RAM does not gate slot acquisition or JVM launch.
@@ -58,7 +66,7 @@ param(
     [ValidateRange(1, 600)][int]$ClientTimeoutSec = 600,
     [ValidateRange(1, 600)][int]$NativeTimeoutSec = 600,
     [ValidateRange(1, 15)][int]$LockWaitMin = 5,
-    [ValidateRange(1, 1)][int]$Slots = 1,
+    [ValidateRange(1, 8)][int]$Slots = 1,
     [double]$SlotMinFreeGb = 0,
     [ValidateRange(0, 60)][int]$SettleSec = 15,
     [string]$ServerXms = '1G',
@@ -72,6 +80,7 @@ param(
     [switch]$ShowWarnings,
     [string]$Backend,
     [switch]$ShowBackend,
+    [switch]$NoFallback,
     [string]$RemoteHost,
     [string]$RemoteBase,
     [string]$PackwizExe
@@ -79,6 +88,7 @@ param(
 
 $ErrorActionPreference = 'Stop'
 $ProgressPreference = 'SilentlyContinue'
+$script:BoundArgs = @{} + $PSBoundParameters
 . (Join-Path (Join-Path $PSScriptRoot 'remote') 'gg-resource-policy.ps1')
 if ($PSBoundParameters.ContainsKey('SlotMinFreeGb')) {
     Write-Warning '-SlotMinFreeGb is deprecated and ignored; available RAM does not gate slot acquisition or JVM launch'
@@ -101,8 +111,25 @@ $localIsWin = [Environment]::OSVersion.Platform -eq [PlatformID]::Win32NT
 $sshExe = 'ssh'; $scpExe = 'scp'; $psExe = 'pwsh'
 if ($localIsWin) { $sshExe = 'ssh.exe'; $scpExe = 'scp.exe'; $psExe = 'powershell.exe' }
 
-# ------------------------------------------------------------ backend (tools/test/backends.psd1)
-# Precedence: -Backend > $env:GG_BACKEND > Default. An optional, untracked backends.local.psd1 next to it (or the file
+# VM first, home fallback: re-runs this script on the backend's Fallback and exits with its code. Only for an
+# unreachable backend, a suite it does not run, or a run that failed before its suite started (never a test FAIL).
+function Invoke-GGFallback([string]$Reason, [switch]$Refreshed) {
+    $fbName = $script:beFallback
+    [Console]::Out.WriteLine(('GGFALLBACK|{0}|{1}|{2}' -f $Backend, $fbName, $Reason))
+    [Console]::Out.WriteLine(('{0} [local] backend {1}: {2}; running on the fallback backend {3}' -f [datetime]::Now.ToString('HH:mm:ss'), $Backend, $Reason, $fbName))
+    $a = @{} + $script:BoundArgs
+    foreach ($k in 'Backend', 'RemoteHost', 'RemoteBase', 'Slots', 'NoFallback') { [void]$a.Remove($k) }
+    if ($a.ContainsKey('OutDir') -and $a.OutDir) { $a.OutDir = '{0}-{1}' -f ([string]$a.OutDir).TrimEnd('\', '/'), $fbName }
+    if ($Refreshed) { $a.SkipRefresh = $true }
+    $a.Backend = $fbName
+    $a.NoFallback = $true
+    Remove-Item Env:GG_SLOTS, Env:GG_MEMORY_MAX -ErrorAction SilentlyContinue
+    $env:GG_FALLBACK_FROM = '{0}|{1}' -f $Backend, $Reason
+    try { & $PSCommandPath @a; $fbCode = $LASTEXITCODE } finally { Remove-Item Env:GG_FALLBACK_FROM -ErrorAction SilentlyContinue }
+    exit $fbCode
+}
+
+# ------------------------------------------------------------ backend (tools/test/backends.psd1)# Precedence: -Backend > $env:GG_BACKEND > Default. An optional, untracked backends.local.psd1 next to it (or the file
 # named by $env:GG_BACKENDS_LOCAL) overrides single keys per backend, e.g. a larger VM's MemoryMax.
 $beCfg = Import-PowerShellDataFile (J $PSScriptRoot 'backends.psd1')
 $beLocalPath = $env:GG_BACKENDS_LOCAL
@@ -110,8 +137,10 @@ if (-not $beLocalPath) { $beLocalPath = J $PSScriptRoot 'backends.local.psd1' }
 $beLocal = $null
 if (FExists $beLocalPath) { $beLocal = Import-PowerShellDataFile $beLocalPath }
 if ($beLocal -and $beLocal.Default) { $beCfg.Default = $beLocal.Default }
-if (-not $Backend) { $Backend = $env:GG_BACKEND }
-if (-not $Backend) { $Backend = $beCfg.Default }
+$beWhy = '-Backend'
+if (-not $Backend) { $Backend = $env:GG_BACKEND; $beWhy = '$env:GG_BACKEND' }
+if (-not $Backend) { $Backend = $beCfg.Default; $beWhy = 'default' }
+if ($env:GG_FALLBACK_FROM) { $beWhy = 'fallback from ' + $env:GG_FALLBACK_FROM.Replace('|', ': ') }
 if (-not $beCfg.Backends.ContainsKey($Backend)) {
     throw ("unknown backend '{0}' (known: {1}; see tools/test/backends.psd1)" -f $Backend, (($beCfg.Backends.Keys | Sort-Object) -join ', '))
 }
@@ -124,8 +153,16 @@ if (@('ssh', 'local') -notcontains $beTransport) { throw "backend '$Backend': Tr
 $beOs = [string]$be.Os
 if ($beTransport -eq 'local') { $beOs = $(if ($localIsWin) { 'windows' } else { 'linux' }) }
 if (@('windows', 'linux') -notcontains $beOs) { throw "backend '$Backend': Os must be windows or linux, not '$beOs'" }
-if (@($be.Suites) -notcontains $Suite -or ($beOs -eq 'linux' -and $Suite -ne 'server')) {
-    throw ("backend '{0}' ({1}) does not run -Suite {2}; the client suite needs the Windows bench: -Backend home" -f $Backend, $beOs, $Suite)
+$script:beFallback = ''
+if (-not $NoFallback -and $env:GG_NO_FALLBACK -ne '1' -and $be.Fallback) {
+    $script:beFallback = [string]$be.Fallback
+    if (-not $beCfg.Backends.ContainsKey($script:beFallback)) { throw "backend '$Backend': unknown Fallback '$($script:beFallback)'" }
+}
+if (@($be.Suites) -notcontains $Suite) {
+    if ($script:beFallback -and @($beCfg.Backends[$script:beFallback].Suites) -contains $Suite) {
+        Invoke-GGFallback ("does not run -Suite {0} (Suites: {1})" -f $Suite, (@($be.Suites) -join ', '))
+    }
+    throw ("backend '{0}' ({1}) does not run -Suite {2} (Suites: {3})" -f $Backend, $beOs, $Suite, (@($be.Suites) -join ', '))
 }
 if ($beTransport -eq 'ssh' -and -not $RemoteHost) { $RemoteHost = [string]$be.Host }
 if ($beTransport -eq 'ssh' -and -not $RemoteHost) { throw "backend '$Backend' has no Host" }
@@ -141,6 +178,10 @@ if (-not $beMemoryMax) { $beMemoryMax = [string]$be.MemoryMax }
 $beMemorySwapMax = [string]$be.MemorySwapMax
 foreach ($v in @($beMemoryMax, $beMemorySwapMax)) {
     if ($v -and $v -notmatch '^[0-9]+[KMGT]?$|^infinity$') { throw "backend '$Backend': invalid memory value '$v' (use e.g. 6500M)" }
+}
+# Concurrent JVM slots: -Slots > $env:GG_SLOTS > backend Slots > 1 (Assert-GGResourceRequest enforces the OS limit).
+if (-not $PSBoundParameters.ContainsKey('Slots')) {
+    if ($env:GG_SLOTS) { $Slots = [int]$env:GG_SLOTS } elseif ($be.Slots) { $Slots = [int]$be.Slots }
 }
 
 $repoRoot = [IO.Path]::GetFullPath((J (J $PSScriptRoot '..') '..'))
@@ -167,8 +208,8 @@ $remoteRunner = 'test PC'
 if ($beTransport -eq 'local') { $remoteRunner = 'local runner' } elseif ($beOs -eq 'linux') { $remoteRunner = "test VM ($RemoteHost)" }
 if ($ShowBackend) {
     # dry run: print the resolved backend and stop; touches no bench
-    [Console]::Out.WriteLine(("GGBACKEND|{0}|transport={1}|os={2}|host={3}|base={4}|suite={5}|memoryMax={6}|memorySwapMax={7}" -f `
-        $Backend, $beTransport, $beOs, $RemoteHost, $RemoteBase, $Suite, $(if ($beMemoryMax) { $beMemoryMax } else { 'auto' }), $(if ($beMemorySwapMax) { $beMemorySwapMax } else { 'auto' })))
+    [Console]::Out.WriteLine(("GGBACKEND|{0}|transport={1}|os={2}|host={3}|base={4}|suite={5}|memoryMax={6}|memorySwapMax={7}|slots={8}|fallback={9}|why={10}" -f `
+        $Backend, $beTransport, $beOs, $RemoteHost, $RemoteBase, $Suite, $(if ($beMemoryMax) { $beMemoryMax } else { 'auto' }), $(if ($beMemorySwapMax) { $beMemorySwapMax } else { 'auto' }), $Slots, $(if ($script:beFallback) { $script:beFallback } else { 'none' }), $beWhy))
     exit 0
 }
 $PackDir = [IO.Path]::GetFullPath($PackDir)
@@ -423,6 +464,7 @@ $request = [ordered]@{
     runId             = $runId
     suite             = $Suite
     backend           = $Backend
+    backendWhy        = $beWhy
     os                = $beOs
     commit            = $gitCommit
     dirty             = $gitDirty
@@ -457,9 +499,28 @@ Write-Step "out dir: $OutDir"
 $zipPath = J $OutDir 'upload.zip'
 $remoteScriptsHash = ''
 $script:OomHit = $false
+$script:FallbackWhy = ''
 
 # ------------------------------------------------------------ stages
-$ok = Invoke-LocalStage 'refresh' {
+# Which backend runs and why; for ssh backends a short probe (reachable, base present) decides the fallback.
+$ok = Invoke-LocalStage 'backend' {
+    $d = '{0} ({1})' -f $Backend, $beWhy
+    if ($beTransport -eq 'ssh') {
+        if ($beOs -eq 'linux') { $cmdP = "test -d $remoteFwd && test -w $remoteFwd && echo GGOK" } else { $cmdP = 'echo GGOK' }
+        $pr = Invoke-SshCapture $cmdP
+        if ($pr.Out -notmatch 'GGOK') {
+            $why = ('unreachable or unhealthy over ssh (exit {0}): {1}' -f $pr.Code, (($pr.Err + ' ' + $pr.Out).Trim() -replace '\s+', ' '))
+            if ($why.Length -gt 200) { $why = $why.Substring(0, 200) }
+            if ($script:beFallback) { $script:FallbackWhy = $why }
+            throw $why
+        }
+        $d += ', ssh probe ok'
+    }
+    Set-LocalStage 'PASS' $d
+}
+if ($script:FallbackWhy) { Invoke-GGFallback $script:FallbackWhy }
+
+if ($ok) { $ok = Invoke-LocalStage 'refresh' {
     if (-not (FExists (J $PackDir 'pack.toml'))) { throw "pack not found: $(J $PackDir 'pack.toml') (the pack is not created yet?)" }
     if ($SkipRefresh) { Set-LocalStage 'SKIP' 'skipped (-SkipRefresh)'; return }
     if (-not (FExists $PackwizExe)) { throw "packwiz not found ($PackwizExe); pass -PackwizExe, or -SkipRefresh when the committed index is fresh" }
@@ -482,7 +543,7 @@ $ok = Invoke-LocalStage 'refresh' {
     $detail = [string]$last
     if ($norm -and $norm -ne $last) { $detail = "$norm | $last" }
     Set-LocalStage 'PASS' $detail
-}
+} }
 
 if ($ok) {
     $ok = Invoke-LocalStage 'package' {
@@ -598,18 +659,18 @@ if ($ok) {
 }
 
 if ($ok) {
-    Write-Step "running on the $remoteRunner (streaming remote log; waits for the single global Minecraft slot, regardless of available RAM) ..."
+    Write-Step ("running on the {0} (streaming remote log; waits for a free Minecraft slot of {1}, regardless of available RAM) ..." -f $remoteRunner, $Slots)
     $remoteLog = J $OutDir 'remote-output.log'
     $sw = [Diagnostics.Stopwatch]::StartNew()
     $code = -1
     # Linux runners start through gg-linux-run.sh: a transient systemd scope caps the run's memory (MemoryMax).
-    $memEnv = ''
+    $memEnv = " GG_SLOTS=$Slots"
     if ($beMemoryMax) { $memEnv += " GG_MEMORY_MAX=$beMemoryMax" }
     if ($beMemorySwapMax) { $memEnv += " GG_MEMORY_SWAP_MAX=$beMemorySwapMax" }
     try {
         if ($beTransport -eq 'local') {
             $rdirL = J (J (J $RemoteBase 'tools') 'remote') $remoteScriptsHash
-            $envL = @{ GG_BASE = $RemoteBase }
+            $envL = @{ GG_BASE = $RemoteBase; GG_SLOTS = [string]$Slots }
             if ($beMemoryMax) { $envL.GG_MEMORY_MAX = $beMemoryMax }
             if ($beMemorySwapMax) { $envL.GG_MEMORY_SWAP_MAX = $beMemorySwapMax }
             if ($localIsWin) {
@@ -661,6 +722,23 @@ if ($ok) {
         } else {
             try { Push-Location $OutDir; Invoke-Scp @("${RemoteHost}:$remoteFwd/runs/$runId/run.log", 'remote-run.log') } catch {} finally { Pop-Location }
         }
+    }
+}
+
+# Fallback after an infrastructure failure before the suite started: the upload failed, or the remote runner never
+# reached a suite stage (nothing past extract/lock in its log). A lock timeout (backend busy, not down), an OOM or
+# any started suite is a real result and stays on this backend.
+if ($script:beFallback -and -not $script:OomHit -and -not (FExists (J (J $OutDir 'results') 'stages.json'))) {
+    $failed = @($script:LStages | Where-Object { $_.status -eq 'FAIL' } | ForEach-Object { $_.name })
+    $rlog = @()
+    if (FExists (J $OutDir 'remote-output.log')) { $rlog = [IO.File]::ReadAllLines((J $OutDir 'remote-output.log')) }
+    $started = @($rlog | Where-Object { $_ -match 'STAGE-START\s+(\S+)' -and @('extract', 'lock') -notcontains $Matches[1] }).Count -gt 0
+    $lockBusy = @($rlog | Where-Object { $_ -match 'STAGE\s+lock\s+FAIL' }).Count -gt 0
+    if ($failed -contains 'upload') {
+        Invoke-GGFallback ('upload failed: ' + (@($script:LStages | Where-Object { $_.name -eq 'upload' })[0].detail)) -Refreshed
+    } elseif ($failed -notcontains 'refresh' -and $failed -notcontains 'package' -and -not $started -and -not $lockBusy) {
+        $last = ($rlog | Where-Object { $_.Trim() } | Select-Object -Last 1)
+        Invoke-GGFallback ("the remote runner failed before the suite started (exit {0}): {1}" -f $code, $last) -Refreshed
     }
 }
 
