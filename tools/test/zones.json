@@ -104,6 +104,7 @@
     { "id": "uhv_elevator", "x": [28160, 28223], "z": [0, 63], "y": [60, 104], "tests": ["uhv_elevator"],     "note": "UHV-A7: GTCA space elevator forms and runs the GEO lift" },
         { "id": "uhv_propulsion", "x": [28416, 28479], "z": [0, 63], "y": [60, 120], "tests": ["uhv_propulsion"], "note": "UHV-A8: ICAN rocket motor tier 6 (level 8 with the BNNT tank), placed once at 28440,80,30; A8 recipes load" },        { "id": "uhv_wireless", "x": [28672, 28735], "z": [0, 63], "y": [98, 112], "tests": ["uhv_wireless"], "note": "UHV-A9: two wireless towers (UHV cells, then one UV cell swapped for a UHV cell) and UHV 2 A / 64 A and UV 2 A wireless energy hatches (Overworld only)" },
     { "id": "uhv_travel", "x": [28928, 28991], "z": [0, 63], "y": [60, 120], "tests": ["uhv_travel"], "note": "UHV-B1: registry, recipe and SavedData checks only (no block placed); two stations deployed through GCYR's holder API in gcyr:mercury_orbit and grindless:proxima_b_orbit at the positions GCYR allocates" },
-    { "id": "uhv_swarm", "x": [29184, 29247], "z": [0, 63], "y": [60, 120], "tests": ["uhv_swarm"], "note": "UHV-B3: a swarm control station (11 x 5 x 11) built at 29205-29215, 79-83, 10-20 in gcyr:mercury_orbit runs c2 (full swarm) at 8,388,608 EU/t, fast-forwarded to its wear outputs" }
-  ]
+    { "id": "uhv_swarm", "x": [29184, 29247], "z": [0, 63], "y": [60, 120], "tests": ["uhv_swarm"], "note": "UHV-B3: a swarm control station (11 x 5 x 11) built at 29205-29215, 79-83, 10-20 in gcyr:mercury_orbit runs c2 (full swarm) at 8,388,608 EU/t,     fast-forwarded to its wear outputs" },
+        { "id": "mega_spikes", "x": [29952, 30015], "y": [98, 115], "tests": ["mega_spikes"], "note": "MEGA-S: throwaway spike machines (gg_spike_*); Y to 115 because the mega EBF is 17 high" }
+      ]
 }
