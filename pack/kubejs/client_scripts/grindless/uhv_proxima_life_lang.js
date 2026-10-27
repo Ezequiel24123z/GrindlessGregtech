@@ -83,6 +83,12 @@
         ['gtceu.recipe.grindless_xenobiochemistry.chitosan', 'Chitosan scaffold', 'Andamio de quitosano'],
         ['gtceu.recipe.grindless_xenobiochemistry.lysate', 'Clarified lysate', 'Lisado clarificado'],
         ['gtceu.recipe.grindless_radiotrophic.melanised_biomass', 'Melanised biomass', 'Biomasa melanizada'],
+        ['gtceu.recipe.grindless_biofoundry.far_red_gene_cassette', 'Far-red gene cassette', 'Casete génico de rojo lejano'],
+        ['gtceu.recipe.grindless_biofoundry.engineered_far_red_algae', 'Engineered far-red algae', 'Algas de rojo lejano modificadas'],
+        ['gtceu.recipe.grindless_biofoundry.cladosporium_culture', 'Cladosporium culture', 'Cultivo de Cladosporium'],
+        ['gtceu.recipe.grindless_biofoundry.chromobacterium_culture', 'Chromobacterium culture', 'Cultivo de Chromobacterium'],
+        ['gtceu.recipe.grindless_biofoundry.sphingomonas_culture', 'Sphingomonas culture', 'Cultivo de Sphingomonas'],
+        ['gtceu.recipe.grindless_biofoundry.sporosarcina_culture', 'Sporosarcina culture', 'Cultivo de Sporosarcina'],
 
         ['item.grindless.proxima_rover', 'Proxima Rover', 'Rover de Próxima'],
         ['tooltip.grindless.proxima_rover.0', 'Americium heat, betavoltaic power and a germanium detector on six wheels.', 'Calor de americio, energía betavoltaica y un detector de germanio sobre seis ruedas.'],

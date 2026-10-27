@@ -1,5 +1,5 @@
 {
-  "_source": "Our own table: the recipes of LuV's biofoundry, gtceu:biofoundry (docs/eras/luv.md, '4. Biofoundry', and decision 4, 'Living circuits at LuV'). Steps 1 to 8 are GTM's sterile chain, composed from GTM's live recipes (the plans below name them; the numbers are read from the loaded pack at every load): GTM's own recipes keep their sterile cleanroom condition, ours are the same steps under this type. Steps 9 and 10 are ours: Agrobacterium-mediated transformation, the soil bacterium used as the vector that carries a gene into a plant (real practice, Zambryski et al. 1983; Hiei et al. 1994 for cereals such as barley; tobacco is the classic model plant for it).",
+  "_source": "Our own table: the recipes of LuV's biofoundry, gtceu:biofoundry (docs/eras/luv.md, '4. Biofoundry', and decision 4, 'Living circuits at LuV'). Steps 1 to 8 are GTM's sterile chain, composed from GTM's live recipes (the plans below name them; the numbers are read from the loaded pack at every load): GTM's own recipes keep their sterile cleanroom condition, ours are the same steps under this type. Steps 9 and 10 are ours: Agrobacterium-mediated transformation, the soil bacterium used as the vector that carries a gene into a plant (real practice, Zambryski et al. 1983; Hiei et al. 1994 for cereals such as barley; tobacco is the classic model plant for it). Steps 11 to 16 are UHV's xeno rows (docs/eras/uhv.md, package B4): Proxima b's genome data becomes a far-red gene cassette (the chlorophyll f genes, Ho et al. 2016) that transforms the ark's algae; four cultures serve Proxima's machines as kept catalysts: Cladosporium sphaerospermum (the radiotrophic vat), Chromobacterium violaceum (cyanide leaching of PGMs), Sphingomonas desiccabilis (BioRock's REE leaching) and Sporosarcina pasteurii (biocement).",
   "_how_it_is_used": [
     "Read by server_scripts/grindless/luv/biofoundry.js at every server load (a /reload picks up changes). Each entry becomes one gtceu:sterile_culture recipe, id grindless:sterile_culture/<name> (GTM's builder puts the type in front). The smoke test gg_test_luv_biofoundry.js checks the live recipes against this table.",
     "The programmed circuit is the step, one circuit per recipe: no recipe of the type may take a subset of another's ingredients (GTM's recipe lookup keeps one recipe per set of ingredients, counts ignored, and a recipe whose ingredients are a subset of another's can hide it).",
@@ -18,7 +18,13 @@
     { "circuit": 7, "name": "sterile_growth_medium" },
     { "circuit": 8, "name": "stem_cells" },
     { "circuit": 9, "name": "engineered_barley_seed" },
-    { "circuit": 10, "name": "engineered_tobacco_seed" }
+    { "circuit": 10, "name": "engineered_tobacco_seed" },
+    { "circuit": 11, "name": "far_red_gene_cassette" },
+    { "circuit": 12, "name": "engineered_far_red_algae" },
+    { "circuit": 13, "name": "cladosporium_culture" },
+    { "circuit": 14, "name": "chromobacterium_culture" },
+    { "circuit": 15, "name": "sphingomonas_culture" },
+    { "circuit": 16, "name": "sporosarcina_culture" }
   ],
   "composed": [
     {
@@ -97,6 +103,66 @@
       "itemsIn": [{ "id": "minecraft:beetroot_seeds", "count": 1 }],
       "fluidsIn": [{ "id": "gtceu:bacteria", "amount": 250 }],
       "itemsOut": [{ "id": "grindless:engineered_tobacco_seed", "count": 1 }],
+      "fluidsOut": []
+    },
+    {
+      "name": "far_red_gene_cassette",
+      "circuit": 11,
+      "eut": 7680,
+      "duration": 1200,
+      "itemsIn": [{ "id": "grindless:xeno_genome_data", "count": 1 }],
+      "fluidsIn": [{ "id": "gtceu:bacteria", "amount": 250 }, { "id": "gtceu:sterilized_growth_medium", "amount": 250 }],
+      "itemsOut": [{ "id": "grindless:far_red_gene_cassette", "count": 1 }],
+      "fluidsOut": []
+    },
+    {
+      "name": "engineered_far_red_algae",
+      "circuit": 12,
+      "eut": 7680,
+      "duration": 1200,
+      "itemsIn": [{ "id": "grindless:far_red_gene_cassette", "count": 1 }, { "id": "grindless:algae_culture", "count": 1 }],
+      "fluidsIn": [{ "id": "gtceu:sterilized_growth_medium", "amount": 250 }],
+      "itemsOut": [{ "id": "grindless:engineered_far_red_algae", "count": 1 }],
+      "fluidsOut": []
+    },
+    {
+      "name": "cladosporium_culture",
+      "circuit": 13,
+      "eut": 7680,
+      "duration": 1200,
+      "itemsIn": [{ "id": "minecraft:brown_mushroom", "count": 1 }],
+      "fluidsIn": [{ "id": "gtceu:sterilized_growth_medium", "amount": 250 }],
+      "itemsOut": [{ "id": "grindless:cladosporium_culture", "count": 1 }],
+      "fluidsOut": []
+    },
+    {
+      "name": "chromobacterium_culture",
+      "circuit": 14,
+      "eut": 7680,
+      "duration": 1200,
+      "itemsIn": [],
+      "fluidsIn": [{ "id": "gtceu:bacteria", "amount": 250 }, { "id": "gtceu:sterilized_growth_medium", "amount": 250 }],
+      "itemsOut": [{ "id": "grindless:chromobacterium_culture", "count": 1 }],
+      "fluidsOut": []
+    },
+    {
+      "name": "sphingomonas_culture",
+      "circuit": 15,
+      "eut": 7680,
+      "duration": 1200,
+      "itemsIn": [],
+      "fluidsIn": [{ "id": "gtceu:bacteria", "amount": 250 }, { "id": "gtceu:sterilized_growth_medium", "amount": 250 }],
+      "itemsOut": [{ "id": "grindless:sphingomonas_culture", "count": 1 }],
+      "fluidsOut": []
+    },
+    {
+      "name": "sporosarcina_culture",
+      "circuit": 16,
+      "eut": 7680,
+      "duration": 1200,
+      "itemsIn": [],
+      "fluidsIn": [{ "id": "gtceu:bacteria", "amount": 250 }, { "id": "gtceu:sterilized_growth_medium", "amount": 250 }],
+      "itemsOut": [{ "id": "grindless:sporosarcina_culture", "count": 1 }],
       "fluidsOut": []
     }
   ]

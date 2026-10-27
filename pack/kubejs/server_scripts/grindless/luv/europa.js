@@ -10,6 +10,9 @@
 //   bioreactor/luv/europan_culture           circuit 2, Europa only: 1,000 mB Europan brine + 250 mB H2O2 + 500 mB hydrogen + 1 chondritic
 //                                            extract (the belt's optical miner) + the ocean sample (kept) -> 1,000 mB gtceu:bacteria + 100 mB
 //                                            biomass, 1,920 x 600. The pack's only bacteria.
+//   bioreactor/uhv/far_red_algae             circuit 3, Proxima b only (UHV-B4, docs/eras/uhv.md line 32): the engineered far-red algae (the
+//                                            biofoundry's circuit 12; kept) under Proxima's 1 µm light: 1,000 mB water + 500 mB CO2 -> 500 mB
+//                                            biomass + 400 mB oxygen (the base's air), 1,920 x 400.
 //   centrifuge/europan_brine_separation      1,000 mB Europan brine (H2O + MgSO4 + NaCl) -> 1,000 mB water + 6 magnesium sulfate + 2 salt
 //                                            dust (GTM's mole sizes); GTM's electrolyzer splits both into Mg, S, O, Na and Cl.
 //   The cut, beside its replacement: GTM's brewery/bacteria (4 bio chaff + 1,000 mB distilled water, sterile cleanroom) is removed, so
@@ -23,7 +26,7 @@
   E.cut = ['gtceu:brewery/bacteria']
   E.recipes = [
     'grindless:vein_drilling/luv/cryobot_ocean_sample', 'grindless:vein_drilling/luv/cryobot_brine',
-    'grindless:bioreactor/luv/algae', 'grindless:bioreactor/luv/europan_culture',
+    'grindless:bioreactor/luv/algae', 'grindless:bioreactor/luv/europan_culture', 'grindless:bioreactor/uhv/far_red_algae',
     'grindless:centrifuge/europan_brine_separation', 'grindless:assembler/melt_head', 'grindless:assembler/cryobot_probe',
     'grindless:crafting/cryobot', 'grindless:crafting/algae_bioreactor'
   ]
@@ -61,6 +64,16 @@
       .inputFluids(Fluid.of(BRINE, 1000), Fluid.of('gtceu:hydrogen_peroxide', 250), Fluid.of('gtceu:hydrogen', 500))
       .outputFluids(Fluid.of('gtceu:bacteria', 1000), Fluid.of('gtceu:biomass', 100))
       .EUt(1920).duration(600)
+    if (Item.exists('grindless:engineered_far_red_algae')) {
+      G.places.allow(event.recipes.gtceu.bioreactor('grindless:uhv/far_red_algae'), 'proxima_b')
+        .circuit(3)
+        .notConsumable('grindless:engineered_far_red_algae')
+        .inputFluids(Fluid.of('minecraft:water', 1000), Fluid.of('gtceu:carbon_dioxide', 500))
+        .outputFluids(Fluid.of('gtceu:biomass', 500), Fluid.of('gtceu:oxygen', 400))
+        .EUt(1920).duration(400)
+    } else {
+      console.error('[grindless/luv] europa: grindless:engineered_far_red_algae is missing; bioreactor/uhv/far_red_algae skipped')
+    }
 
     event.recipes.gtceu.centrifuge('grindless:europan_brine_separation')
       .inputFluids(Fluid.of(BRINE, 1000))
