@@ -1,3 +1,4 @@
+// priority: -6124
 // Gregtech Grindless - smoke test of package IV-B3, naquadah-plant (TEST-ONLY overlay: copied over the instance on the test PC, never
 // shipped with the pack): IV's Naquadah Plant (gtceu:naquadah_plant, recipe type gtceu:naquadah_refining; startup_scripts/grindless/iv/
 // naquadah_plant.js, server_scripts/grindless/iv/naquadah_plant.js, data/grindless/tables/naquadah_plant.json) and the EV platinum

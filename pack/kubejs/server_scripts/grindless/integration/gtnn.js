@@ -1,3 +1,4 @@
+// priority: -15224
 // -----------------------------------------------------------------------------------------------
 // GT-- (gtnn 1.3.10), audited against docs/eras (ev.md, "Decisions taken": no addon may process cheaper than GT in its era or
 // undercut the pack's own multiblocks; GCYM-style parallel machines wait for IV). Most of the addon adds work or comes late and

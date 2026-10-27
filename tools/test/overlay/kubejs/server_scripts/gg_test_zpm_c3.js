@@ -1,3 +1,4 @@
+// priority: -10524
 // Gregtech Grindless - native fixture of package ZPM-C3 (TEST-ONLY overlay, never shipped): the Power gate example of docs/eras/zpm.md
 // ("Power", the gate example) on the wireless network at ZPM.
 //

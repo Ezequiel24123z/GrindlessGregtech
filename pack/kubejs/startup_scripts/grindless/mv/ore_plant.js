@@ -1,3 +1,4 @@
+// priority: -6300
 // -----------------------------------------------------------------------------------------------
 // The Ore Plant, the MV era's flagship multiblock, and the recipe type it runs.
 //

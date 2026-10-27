@@ -1,3 +1,4 @@
+// priority: -12424
 // -----------------------------------------------------------------------------------------------
 // Recipes of the EV foundation (the registrations are in startup_scripts/grindless/ev/foundation.js; docs/eras/ev.md):
 //

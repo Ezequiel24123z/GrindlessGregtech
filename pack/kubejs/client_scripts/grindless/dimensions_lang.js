@@ -1,3 +1,4 @@
+// priority: 11200
 // Gregtech Grindless - "Building Dimensions"
 //
 // Item names/tooltips for the three travel keys, and the action-bar message shown when a key fails.

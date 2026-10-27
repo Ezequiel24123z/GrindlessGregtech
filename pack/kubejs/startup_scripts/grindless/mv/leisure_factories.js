@@ -1,3 +1,4 @@
+// priority: -6100
 // -----------------------------------------------------------------------------------------------
 // The four universal factories of the MV era (idea from GregTech Leisure's "Universal Processing / Assembly / Separation / Mixing
 // Plant", docs/research/leisure.md 4.2; GTL credits GTNH for it). Only the idea is taken: GTL's licence does not allow copying, so the

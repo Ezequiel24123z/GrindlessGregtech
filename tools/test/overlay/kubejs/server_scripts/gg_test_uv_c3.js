@@ -1,3 +1,4 @@
+// priority: -8724
 // Gregtech Grindless - native fixture of package UV-C3 (TEST-ONLY overlay, never shipped): the gate example of docs/eras/uv.md
 // ("Power on the wireless network") on the wireless network at UV, the six stations, and a save mark read back after a restart.
 //

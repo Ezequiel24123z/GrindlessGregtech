@@ -1,3 +1,4 @@
+// priority: -10300
 // -----------------------------------------------------------------------------------------------
 // UV's photonics (docs/eras/uv.md, machines 9 and 10, lines 8 and 9; package UV-A6): two machines, their recipe types, the items and
 // fluids only they make. Every other UV id is F1's (global.grindless.uvFoundation): the fibre laser module, the ytterbium fibre, the

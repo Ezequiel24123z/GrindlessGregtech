@@ -1,3 +1,4 @@
+// priority: -724
 // Gregtech Grindless - smoke test of the EV Cryogenic Plant (TEST-ONLY overlay: copied over the instance on the test PC, never shipped with
 // the pack).
 //

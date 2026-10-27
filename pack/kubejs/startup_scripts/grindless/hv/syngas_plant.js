@@ -1,3 +1,4 @@
+// priority: -2200
 // -----------------------------------------------------------------------------------------------
 // The Syngas and Shift Plant, an HV multiblock of the journey plan (docs/journey.md), the recipe type it runs and its catalyst.
 //

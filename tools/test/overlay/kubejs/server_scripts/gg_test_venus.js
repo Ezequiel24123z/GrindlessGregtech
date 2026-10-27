@@ -1,3 +1,4 @@
+// priority: -10024
 // Gregtech Grindless - smoke test of package IV-B1, venus (TEST-ONLY overlay: copied over the instance on the test PC, never shipped with
 // the pack): the Pressurized Vein Drill (gtceu:pressurized_vein_drill), the Venus Heat Engine (gtceu:venus_heat_engine, type
 // gtceu:venus_heat) and the Venus Acid Works (gtceu:venus_acid_works, type gtceu:acid_cracking): startup_scripts/grindless/iv/venus.js,

@@ -1,3 +1,4 @@
+// priority: -20224
 // -----------------------------------------------------------------------------------------------
 // Resources of other worlds do not come from Earth (DECISIONS.md 2026-10-24 and 2026-10-25): titanium and helium-3 only from the
 // Moon; tungsten, samarium and deuterium only from Mars. data/grindless/tables/offworld_only.json lists every Earth source the pack

@@ -1,3 +1,4 @@
+// priority: 3400
 // Gregtech Grindless - names and tooltips of UHV's ZBLAN draw tower (startup_scripts/grindless/uhv/zblan.js):
 //
 //   gtceu:zblan_draw_tower          machine name + four tooltip lines

@@ -1,3 +1,4 @@
+// priority: -8900
 // -----------------------------------------------------------------------------------------------
 // UHV travel (package UHV-B1, docs/eras/uhv.md "Places and site rules", "Sunlight", "Bridges and first arrivals", "AE2").
 //

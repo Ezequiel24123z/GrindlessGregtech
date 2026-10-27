@@ -1,3 +1,4 @@
+// priority: -11400
 // -----------------------------------------------------------------------------------------------
 // ZPM's naquadria multiblocks (docs/eras/zpm.md, "1. Naquadria refinery" and "2. Naquadah fuel works"; package ZPM-A2) and their
 // recipe types. The recipes come from data/grindless/tables/naquadria.json (server_scripts/grindless/zpm/naquadria.js).

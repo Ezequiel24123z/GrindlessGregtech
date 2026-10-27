@@ -1,3 +1,4 @@
+// priority: 3700
 // Gregtech Grindless - names of UHV travel (startup_scripts/grindless/uhv/travel.js, data/grindless/dimension/proxima_b_orbit.json):
 //
 //   dimension.grindless.proxima_b_orbit        the new orbit (Proxima b's surface keeps GCYR's names)

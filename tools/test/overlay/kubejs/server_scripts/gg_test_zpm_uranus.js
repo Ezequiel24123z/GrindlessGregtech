@@ -1,3 +1,4 @@
+// priority: -11724
 // TEST ONLY, ZPM-B5. Command: kubejs custom_command gg_test_zpm_uranus
 // Reserved band ONLY: X22528-22591, Z0-63; Uranus orbit Y198-214, Overworld Y98-112.
 // Builds the ice-giant siphon, the slurry separator and the flyby probe bay in Uranus orbit and runs one real recipe in each (siphon circuit 1:

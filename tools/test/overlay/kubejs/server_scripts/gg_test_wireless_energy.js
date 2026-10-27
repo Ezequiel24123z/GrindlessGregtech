@@ -1,3 +1,4 @@
+// priority: -10224
 // Gregtech Grindless - smoke test of the wireless energy network (TEST-ONLY overlay: copied over the instance on the test PC, never shipped
 // with the pack): startup_scripts/grindless/lv/wireless_energy.js, server_scripts/grindless/lv/wireless_energy.js and the table
 // kubejs/data/grindless/tables/wireless_energy.json.

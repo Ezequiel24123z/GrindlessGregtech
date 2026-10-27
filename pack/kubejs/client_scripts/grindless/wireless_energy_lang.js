@@ -1,3 +1,4 @@
+// priority: 1500
 // Gregtech Grindless - names, tooltips and messages of the wireless energy network (startup_scripts/grindless/lv/wireless_energy.js and
 // server_scripts/grindless/lv/wireless_energy.js):
 //

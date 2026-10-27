@@ -1,3 +1,4 @@
+// priority: 500
 // Gregtech Grindless - names and tooltips of ZPM's Saturn science machines (startup_scripts/grindless/zpm/saturn_science.js):
 // gtceu:plume_sampler, gtceu:ring_seismometer and their recipe types.
 ClientEvents.lang('en_us', event => {

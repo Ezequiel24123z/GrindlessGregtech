@@ -1,3 +1,4 @@
+// priority: 5400
 // -----------------------------------------------------------------------------------------------
 // Names and tooltips of the Large Steam family (startup_scripts/grindless/steam/large_family.js, GTL's "Large
 // Steam X" idea reimplemented with our own code/art - docs/research/leisure.md SS4.2): gtceu:large_steam_

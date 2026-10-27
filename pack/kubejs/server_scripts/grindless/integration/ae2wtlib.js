@@ -1,3 +1,4 @@
+// priority: -14024
 // -----------------------------------------------------------------------------------------------
 // AE2WTLib / AE2 Wireless Terminals (ae2wtlib) and the Wireless Comprehensive Work Terminal (wcwt): wireless terminals are an MV
 // item (docs/eras/mv.md: "bateria GT + circuito MV"). The AE2 internal battery (dense energy cell) is swapped for a GregTech MV

@@ -1,3 +1,4 @@
+// priority: -3600
 // -----------------------------------------------------------------------------------------------
 // The Engine Test Stand (gtceu:engine_test_stand), MV, the first step of the road to the first rocket (docs/journey.md: MV builds the
 // test stand and the radio telescope, HV flies to the Moon), and the recipe type it runs, gtceu:static_fire.

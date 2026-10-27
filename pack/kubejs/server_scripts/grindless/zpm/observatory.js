@@ -1,3 +1,4 @@
+// priority: -26724
 // -----------------------------------------------------------------------------------------------
 // Recipes of ZPM's survey network (machines: startup_scripts/grindless/zpm/observatory.js; docs/eras/zpm.md "Machines 15-17"; ZPM-A9).
 // One recipe per programmed circuit within a type (one lookup path each); every run uses one data orb as the medium.

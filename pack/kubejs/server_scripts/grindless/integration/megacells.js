@@ -1,3 +1,4 @@
+// priority: -15524
 // -----------------------------------------------------------------------------------------------
 // MEGA Cells (modId megacells) on the IV era (docs/eras/lv.md "Despues": MEGA Cells at IV, more than 256k; hv.md keeps it out of HV).
 // Era: IV.

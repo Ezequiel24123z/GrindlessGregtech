@@ -1,3 +1,4 @@
+// priority: -4224
 // Gregtech Grindless - smoke test of package LuV-A3, luv-cryogenics (TEST-ONLY overlay: copied over the instance on the test PC, never
 // shipped with the pack): LuV's Helium Refrigerator (gtceu:helium_refrigerator, recipe type gtceu:closed_loop_cooling) and Coated
 // Conductor Line (gtceu:coated_conductor_line, recipe type gtceu:coated_conductor): startup_scripts/grindless/luv/helium_refrigerator.js

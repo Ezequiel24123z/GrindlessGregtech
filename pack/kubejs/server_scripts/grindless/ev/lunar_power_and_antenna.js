@@ -1,3 +1,4 @@
+// priority: -12524
 // -----------------------------------------------------------------------------------------------
 // Recipes of the EV Moon base's family steps (machines: startup_scripts/grindless/ev/lunar_power_and_antenna.js):
 //

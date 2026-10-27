@@ -1,3 +1,4 @@
+// priority: -3024
 // Gregtech Grindless - smoke test of the road to the first rocket: the Engine Test Stand (MV), the Composite Autoclave (HV) and the GCYR
 // parts they feed (TEST-ONLY overlay: copied over the instance on the test PC, never shipped with the pack).
 //

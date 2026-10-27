@@ -1,3 +1,4 @@
+// priority: 1900
 // Gregtech Grindless - names and tooltips of UV's Starshot (startup_scripts/grindless/uv/starshot.js; package UV-A12):
 //
 //   block.gtceu.<machine>, gtceu.<recipe type>                    machine and recipe type names

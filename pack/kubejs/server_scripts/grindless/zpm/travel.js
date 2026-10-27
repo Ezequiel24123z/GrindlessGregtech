@@ -1,3 +1,4 @@
+// priority: -27324
 // -----------------------------------------------------------------------------------------------
 // ZPM travel (package ZPM-B1, docs/eras/zpm.md "Route" 6, "Saturn, Uranus and what is only seen", "Bridges and first arrivals").
 // Registrations and the rocket rule: startup_scripts/grindless/zpm/travel.js.

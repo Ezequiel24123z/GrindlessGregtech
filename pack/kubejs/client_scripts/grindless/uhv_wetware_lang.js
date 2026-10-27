@@ -1,3 +1,4 @@
+// priority: 3600
 // Gregtech Grindless - names and tooltips of UHV's organoid array (startup_scripts/grindless/uhv/wetware.js; package UHV-B6):
 //
 //   block.gtceu.organoid_array, gtceu.organoid_computing          machine and recipe type names

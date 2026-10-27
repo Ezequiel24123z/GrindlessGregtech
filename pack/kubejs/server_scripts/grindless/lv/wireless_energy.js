@@ -1,3 +1,4 @@
+// priority: -19824
 // -----------------------------------------------------------------------------------------------
 // LV: the wireless energy network (DECISIONS.md 2026-10-25, "Wireless energy"; docs/eras/lv.md, "Wireless energy"). The blocks, covers
 // and the tower are registered in startup_scripts/grindless/lv/wireless_energy.js (global.grindless.wireless); the numbers are in

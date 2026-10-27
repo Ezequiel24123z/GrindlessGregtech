@@ -1,3 +1,4 @@
+// priority: -22924
 // -----------------------------------------------------------------------------------------------
 // Controller crafting recipes of the small Steam multiblock family (startup_scripts/grindless/steam/small_family.js),
 // plus the Steam-era crafting-table recipe for GTM's ULV fluid IMPORT hatch (mixer, chemical bath and ore washer need

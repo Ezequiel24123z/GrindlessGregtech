@@ -1,3 +1,4 @@
+// priority: 8800
 // Gregtech Grindless - names and tooltips of IV's Naquadah Plant (startup_scripts/grindless/iv/naquadah_plant.js), its recipe type and
 // the EMI line of each of its recipes.
 //

@@ -1,3 +1,4 @@
+// priority: -10424
 // Gregtech Grindless - smoke test of ZPM's Waste Retrieval Plant and Actinide Partitioning Plant (package ZPM-A4; TEST-ONLY overlay:
 // copied over the instance on the test PC, never shipped with the pack).
 //

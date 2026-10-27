@@ -1,3 +1,4 @@
+// priority: -12824
 // -----------------------------------------------------------------------------------------------
 // GTM machines of EV whose recipe takes an EV emitter or sensor. Their quantum eye (radon) waits for IV in this pack
 // (docs/eras/ev.md, "Nothing in EV requires anything from IV"; DECISIONS.md 2026-10-25), so the ones an EV line needs take the HV

@@ -1,3 +1,4 @@
+// priority: -14324
 // -----------------------------------------------------------------------------------------------
 // EnderChests (enderchests, ShetiPhian): wireless storage is an MV item. The mod's recipes ask for blaze rods and powder (the
 // blaze is the End trip: an MV creature since v0.5.0) and an ender EYE for the pouch.

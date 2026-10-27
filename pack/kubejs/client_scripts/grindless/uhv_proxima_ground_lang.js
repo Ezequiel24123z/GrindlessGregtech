@@ -1,3 +1,4 @@
+// priority: 4100
 // Gregtech Grindless - names and tooltips of UHV's Proxima ground (startup_scripts/grindless/uhv/proxima_ground.js; package UHV-B5):
 //
 //   block.gtceu.<machine>, gtceu.<recipe type>                    machine and recipe type names

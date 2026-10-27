@@ -1,3 +1,4 @@
+// priority: -10200
 // -----------------------------------------------------------------------------------------------
 // UV's Neptune orbit (docs/eras/uv.md, machines 24 and 25; package UV-B2): two multiblocks of grindless:neptune_orbit.
 //

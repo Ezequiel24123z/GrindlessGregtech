@@ -1,3 +1,4 @@
+// priority: -17724
 // -----------------------------------------------------------------------------------------------
 // GT--'s circuit assembly line at LuV (docs/eras/luv.md, decision 4 "Living circuits at LuV"; spike S0-4; package LuV-A5): its wetware
 // processor at LuV voltage, and the molten cerrobase its own recipe needs.

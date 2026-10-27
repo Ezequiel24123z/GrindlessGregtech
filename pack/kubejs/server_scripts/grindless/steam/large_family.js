@@ -1,3 +1,4 @@
+// priority: -22824
 // -----------------------------------------------------------------------------------------------
 // Crafting-table recipes of the Large Steam family (startup_scripts/grindless/steam/large_family.js). Every
 // controller is steel-tier and expensive on purpose (AGENTS.md rule 4 / the brief: "the controllers are expensive

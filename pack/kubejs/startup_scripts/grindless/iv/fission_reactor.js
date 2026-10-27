@@ -1,3 +1,4 @@
+// priority: -2400
 // -----------------------------------------------------------------------------------------------
 // IV's own multiblock (docs/eras/iv.md, "Designed-core reactor"; package IV-A2): the fission reactor and its recipe type.
 //

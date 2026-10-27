@@ -1,3 +1,4 @@
+// priority: -1000
 // -----------------------------------------------------------------------------------------------
 // EV foundation: the shared registrations that the EV packages build on (docs/eras/ev.md). No machines and no recipe types here.
 //

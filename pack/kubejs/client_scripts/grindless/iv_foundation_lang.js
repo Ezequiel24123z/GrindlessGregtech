@@ -1,3 +1,4 @@
+// priority: 9300
 // Gregtech Grindless - names and tooltips of the IV foundation (startup_scripts/grindless/iv/foundation.js):
 //
 //   grindless:<item> and grindless:<block>                     the shared IV items and the two Mercury blocks, with two tooltip lines each

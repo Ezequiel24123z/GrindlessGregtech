@@ -1,3 +1,4 @@
+// priority: -27124
 // -----------------------------------------------------------------------------------------------
 // Recipes of ZPM's Saturn siphon (machines: startup_scripts/grindless/zpm/saturn_siphon.js; docs/eras/zpm.md "Machines 18-20"; ZPM-B2).
 // Every machine recipe carries .dimension('grindless:saturn_orbit') and its own programmed circuit (one recipe per lookup path).

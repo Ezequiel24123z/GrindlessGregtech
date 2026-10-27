@@ -1,3 +1,4 @@
+// priority: -1700
 // -----------------------------------------------------------------------------------------------
 // HV items of the Vein Drill family:
 //   grindless:stainless_steel_drill_bit  wear part of the HV Vein Drill, the fourth bit after the bronze, steel and vanadium steel

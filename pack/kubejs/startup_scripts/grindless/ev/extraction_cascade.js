@@ -1,3 +1,4 @@
+// priority: -900
 // -----------------------------------------------------------------------------------------------
 // The Rare Earth Extraction Cascade, an EV multiblock of ours (docs/eras/ev.md, "Rare-earth extraction cascade"), the recipe type it runs
 // and the GT materials of its line.

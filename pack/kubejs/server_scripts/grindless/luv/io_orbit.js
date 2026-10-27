@@ -1,3 +1,4 @@
+// priority: -18324
 // LuV B7, Io orbit (docs/eras/luv.md, sections 16 and 16b). Writes the recipes of the slot's active design only (G.ioOrbit.mode, from
 // tables/stations.json); in the 'pending' mode nothing is written and the spool stays hidden (its hidden-table group says unless
 // 'tether'). Every number is marked (tune) in the design.

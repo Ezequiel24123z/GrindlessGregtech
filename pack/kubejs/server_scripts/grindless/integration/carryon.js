@@ -1,3 +1,4 @@
+// priority: -14224
 // -----------------------------------------------------------------------------------------------
 // Carry On (carryon): GregTech machines, multiblock controllers, pipes, cables and covers must not be picked up.
 // A picked-up controller loses its formed state, covers and paint, and moving pipes or cables would duplicate or void

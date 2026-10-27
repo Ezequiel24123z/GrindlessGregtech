@@ -1,3 +1,4 @@
+// priority: -12724
 // -----------------------------------------------------------------------------------------------
 // gtceu:pgm_refining recipes of the Platinum Plant (gtceu:platinum_plant), generated at server load from the LOOSE platinum-group line that
 // is in the recipe set, and the recipes that make the plant and its electrode (EV era; mode 3 is IV's, mode 4 LuV's). Nothing of the line is typed by

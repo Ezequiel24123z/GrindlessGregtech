@@ -1,3 +1,4 @@
+// priority: -8600
 // -----------------------------------------------------------------------------------------------
 // UHV's Proxima life (docs/eras/uhv.md, machines 12, 26, 27, 28 and 30, lines 13, 14, 15 and 32; package UHV-B4): the xenoflora rover
 // bay, the xenobotany greenhouse, the xenobiochemistry plant and the radiotrophic vat on Proxima b, and the sample receiving facility on

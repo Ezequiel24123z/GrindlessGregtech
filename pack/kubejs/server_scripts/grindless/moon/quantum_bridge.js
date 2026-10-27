@@ -1,3 +1,4 @@
+// priority: -20324
 // -----------------------------------------------------------------------------------------------
 // The Earth-Moon quantum bridge (DECISIONS.md 2026-10-24: one half made at each end; you go once, then it works by itself).
 // AE2's quantum bridges link two chambers whose entangled singularities share a frequency, in any dimension. Two kinds of pairs:

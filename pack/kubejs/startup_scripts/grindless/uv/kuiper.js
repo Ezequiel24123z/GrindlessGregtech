@@ -1,3 +1,4 @@
+// priority: -9900
 // -----------------------------------------------------------------------------------------------
 // UV's Kuiper belt (docs/eras/uv.md, "Machines 28-29" and line 17; package UV-B4): two multiblocks of Pluto orbit and their recipe types.
 //

@@ -1,3 +1,4 @@
+// priority: -22024
 // -----------------------------------------------------------------------------------------------
 // GCYR Rocket Scanner (gcyr:rocket_scanner, GCYR 0.2.9): what the pack does when a player right-clicks the controller, before
 // "Build" can be pressed in its UI. Two GCYR bugs behind issue #122 ("the rocket disappears or builds partway"), both reproduced in

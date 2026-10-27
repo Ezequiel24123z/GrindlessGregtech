@@ -1,3 +1,4 @@
+// priority: -4900
 // -----------------------------------------------------------------------------------------------
 // LV "more reinforced" (docs/journey.md, docs/eras/lv.md): the Heliostat Tower, the first solar plant of the pack and the first step
 // of the power family (heliostat tower -> lunar solar field -> orbital solar station -> Dyson sphere).

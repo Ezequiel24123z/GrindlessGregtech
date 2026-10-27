@@ -1,3 +1,4 @@
+// priority: -2500
 // -----------------------------------------------------------------------------------------------
 // One of IV's multiblocks (docs/eras/iv.md, "Fluorspar kiln"; package IV-A6): the fluorspar kiln and its recipe type.
 //

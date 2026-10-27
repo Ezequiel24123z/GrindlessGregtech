@@ -1,3 +1,4 @@
+// priority: -19524
 // -----------------------------------------------------------------------------------------------
 // Perlite (gtceu:perlite_dust): an LV source for the volcanic glass of the basalt deltas (tools/analysis obtainability audit,
 // 2026-10-24: class A, "it opens an automation").

@@ -1,3 +1,4 @@
+// priority: -26324
 // -----------------------------------------------------------------------------------------------
 // gtceu:valence_reduction recipes of ZPM's europium reductor (gtceu:europium_reductor; machine, type and materials:
 // startup_scripts/grindless/zpm/europium.js; docs/eras/zpm.md "Machine 3"; package ZPM-A3), the recipe that makes the controller, and the

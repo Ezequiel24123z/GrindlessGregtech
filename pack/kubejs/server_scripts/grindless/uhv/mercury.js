@@ -1,3 +1,4 @@
+// priority: -23524
 // -----------------------------------------------------------------------------------------------
 // Recipes of UHV on Mercury's ground (machines, types and items: startup_scripts/grindless/uhv/mercury.js; docs/eras/uhv.md, machines 20
 // and 21, lines 19 and 20; package UHV-B2). Every recipe of both machines carries .dimension('gcyr:mercury') (IV's Mercury site); the

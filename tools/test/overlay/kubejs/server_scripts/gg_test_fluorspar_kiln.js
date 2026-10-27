@@ -1,3 +1,4 @@
+// priority: -1924
 // Gregtech Grindless - smoke test of package IV-A6, fluorspar-kiln (TEST-ONLY overlay: copied over the instance on the test PC, never shipped
 // with the pack): IV's Fluorspar Kiln (gtceu:fluorspar_kiln and its recipe type gtceu:fluorspar_digestion),
 // startup_scripts/grindless/iv/fluorspar_kiln.js and server_scripts/grindless/iv/fluorspar_kiln.js.

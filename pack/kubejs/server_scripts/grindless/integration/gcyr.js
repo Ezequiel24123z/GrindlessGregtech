@@ -1,3 +1,4 @@
+// priority: -14824
 // -----------------------------------------------------------------------------------------------
 // Gregicality Rocketry (GCYR 0.2.9): the first rocket and the space suit are HV. The Moon comes at the end of HV with the first rocket
 // (docs/journey.md) and HV has no titanium: every HV part is stainless steel (DECISIONS.md, 2026-10-24). GCYR's mechanics stay as they

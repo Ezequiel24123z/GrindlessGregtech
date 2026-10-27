@@ -1,4 +1,4 @@
-// priority: -200
+// priority: -27724
 // -----------------------------------------------------------------------------------------------
 // Recipes of LuV's helium refrigerator (machine and recipe type: startup_scripts/grindless/luv/helium_refrigerator.js; docs/eras/luv.md,
 // "1. Helium refrigerator"; package LuV-A3), generated at every server load from the live vacuum freezer recipes that take liquid

@@ -1,3 +1,4 @@
+// priority: 700
 // Gregtech Grindless - names and tooltips of ZPM's outer chemistry (startup_scripts/grindless/zpm/outer_chemistry.js):
 //   block.gtceu.<methane_pyrolyser / vent_bioreactor / aerogel_works>, gtceu.<methane_pyrolysis / chemosynthesis / supercritical_drying>,
 //   grindless.machine.<machine>.tooltip.0-2. The items are ZPM-F1's (zpm_foundation_lang.js).

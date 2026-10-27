@@ -1,3 +1,4 @@
+// priority: -7424
 // Gregtech Grindless - test of the small Steam multiblock family (GTL idea, docs/investigacion/leisure.md 4.2;
 // TEST-ONLY overlay: copied over the instance on the test PC, never shipped with the pack).
 //

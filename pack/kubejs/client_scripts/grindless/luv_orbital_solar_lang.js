@@ -1,3 +1,4 @@
+// priority: 7100
 ClientEvents.lang('en_us', function (event) {
   event.add('grindless', 'block.gtceu.orbital_solar_station', 'Orbital Solar Station')
   event.add('grindless', 'gtceu.orbital_solar', 'Orbital Solar Power')

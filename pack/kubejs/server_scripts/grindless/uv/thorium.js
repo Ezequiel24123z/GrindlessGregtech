@@ -1,3 +1,4 @@
+// priority: -26024
 // -----------------------------------------------------------------------------------------------
 // Recipes of UV's pyroprocessing cell and accelerator-driven reactor (machines and recipe types: startup_scripts/grindless/uv/thorium.js;
 // docs/eras/uv.md, machines 1 and 2 and line 3; package UV-A1), generated at every server load from data/grindless/tables/thorium.json,

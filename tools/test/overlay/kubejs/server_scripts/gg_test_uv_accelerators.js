@@ -1,3 +1,4 @@
+// priority: -8624
 // TEST ONLY, UV-A5 (the synchrotron, the muon fusion cell, the antimatter trap and their chains).
 // Command: kubejs custom_command gg_test_uv_accelerators   Reserved band: X 24320-24383, Z 0-63: Overworld Y 98-112 and
 // gcyr:overworld_orbit Y 198-214 at the same X/Z (one trap controller in each, removed at the end).

@@ -1,3 +1,4 @@
+// priority: -19724
 // -----------------------------------------------------------------------------------------------
 // gtceu:vein_drilling recipes of the LV Vein Drill (gtceu:lv_vein_drill), generated from the vein tables:
 //   Overworld  kubejs/data/grindless/tables/veins.json         (global.grindless.veinTable(), from the steam data script)

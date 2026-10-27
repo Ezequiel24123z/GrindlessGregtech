@@ -1,4 +1,4 @@
-// priority: -200
+// priority: -27624
 // -----------------------------------------------------------------------------------------------
 // Recipes of the EV Combined-Cycle Plant (gtceu:combined_cycle_plant, type gtceu:combined_cycle) and Hot Strip Mill (gtceu:hot_strip_mill,
 // type gtceu:hot_rolling), generated at server load from the live recipes they stand in for, and the recipes of both controllers. The

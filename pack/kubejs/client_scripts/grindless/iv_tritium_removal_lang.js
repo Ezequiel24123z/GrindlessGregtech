@@ -1,3 +1,4 @@
+// priority: 8600
 // Gregtech Grindless - names and tooltips of IV's Tritium Removal Facility (startup_scripts/grindless/iv/tritium_removal.js), its recipe
 // type and its controller lines.
 //

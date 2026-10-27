@@ -1,3 +1,4 @@
+// priority: -8100
 // -----------------------------------------------------------------------------------------------
 // UHV on Mercury's ground (docs/eras/uhv.md, machines 20 and 21, lines 19 and 20; package UHV-B2): the regolith excavator and the
 // solar vapour furnace, their recipe types and their items. Both stand on IV's Mercury site

@@ -1,3 +1,4 @@
+// priority: -5200
 // -----------------------------------------------------------------------------------------------
 // LV "more reinforced" (docs/journey.md, docs/eras/lv.md): the Sulfide Roaster with its contact acid plant.
 //

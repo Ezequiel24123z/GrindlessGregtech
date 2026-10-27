@@ -1,3 +1,4 @@
+// priority: 4500
 // Gregtech Grindless - names and tooltips of UHV on Mercury's ground (startup_scripts/grindless/uhv/mercury.js):
 //
 //   gtceu:regolith_excavator, gtceu:solar_vapour_furnace   machine names + four tooltip lines each

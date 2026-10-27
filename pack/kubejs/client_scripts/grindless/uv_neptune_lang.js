@@ -1,3 +1,4 @@
+// priority: 2300
 // Gregtech Grindless - names and tooltips of UV's Neptune orbit machines (startup_scripts/grindless/uv/neptune.js):
 // gtceu:neptune_deep_siphon (on ZPM's gtceu:ice_giant_siphon type), gtceu:triton_geyser_sampler and its recipe type gtceu:triton_plume.
 ClientEvents.lang('en_us', event => {

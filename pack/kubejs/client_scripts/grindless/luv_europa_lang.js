@@ -1,3 +1,4 @@
+// priority: 7900
 // LuV B8, Europa: the cryobot, the algae bioreactor, the bioreactor type and magnesium sulfate (startup_scripts/grindless/luv/europa.js).
 ClientEvents.lang('en_us', function (event) {
   var entries = {

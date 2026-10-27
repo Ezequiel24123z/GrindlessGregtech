@@ -1,3 +1,4 @@
+// priority: -5024
 // TEST-ONLY B2 fixture; prepared for the single integrated LuV validation owner, not a standalone launch.
 // Command: kubejs custom_command gg_test_luv_orbital_solar
 // Marker: GGTEST|luv_orbital_solar|DONE (owner's marker wait: at most 180 seconds).

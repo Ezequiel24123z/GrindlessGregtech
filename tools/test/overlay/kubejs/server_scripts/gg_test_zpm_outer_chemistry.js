@@ -1,3 +1,4 @@
+// priority: -11124
 // TEST ONLY, ZPM-A8 (the methane pyrolyser, the vent bioreactor, the aerogel works).
 // Command: kubejs custom_command gg_test_zpm_outer_chemistry   Reserved band: X 20992-21055 (no block is placed: live recipe lookups only).
 //

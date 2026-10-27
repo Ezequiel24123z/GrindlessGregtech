@@ -1,3 +1,4 @@
+// priority: -11900
 // -----------------------------------------------------------------------------------------------
 // ZPM's Saturn siphon (docs/eras/zpm.md, "Machines 18-20"; package ZPM-B2): three multiblocks of Saturn orbit and their recipe types.
 //

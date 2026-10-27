@@ -1,3 +1,4 @@
+// priority: 12900
 // Gregtech Grindless - client half of the chest and furnace test (TEST-ONLY overlay: copied over the instance on the test PC, never
 // shipped with the pack). Partner of server_scripts/gg_test_chest_furnace.js; asleep unless that test sets 'hold' in the map both halves
 // share (global.ggChestFurnace: in the client suite both run in the same JVM).

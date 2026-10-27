@@ -1,3 +1,4 @@
+// priority: -12124
 // -----------------------------------------------------------------------------------------------
 // The AE2 network between planets, EV step (docs/eras/ev.md, "The AE2 network: EV step"; the item is registered in
 // startup_scripts/grindless/ev/ae2_interplanetary.js). AE2 itself is not changed: every piece below is stock AE2, stock GTM or the

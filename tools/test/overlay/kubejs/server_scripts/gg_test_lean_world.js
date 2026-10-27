@@ -1,3 +1,4 @@
+// priority: -3124
 // Test-only (harness overlay). Off unless kubejs/config/gg_test_lean_world.json says {"enabled": true} (see
 // startup_scripts/gg_test_lean_world.js): the integrated server's saved world must have structures off.
 ServerEvents.loaded(function (event) {

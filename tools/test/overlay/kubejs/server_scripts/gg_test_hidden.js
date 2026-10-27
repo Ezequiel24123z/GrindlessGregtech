@@ -1,3 +1,4 @@
+// priority: -2424
 // Gregtech Grindless - smoke test of the hiding of what cannot be obtained yet or ever (TEST-ONLY overlay: copied over the instance on
 // the test PC, never shipped with the pack). Server half; the client half (EMI and JEI) is client_scripts/gg_test_hidden.js.
 //

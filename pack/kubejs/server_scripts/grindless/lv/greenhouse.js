@@ -1,3 +1,4 @@
+// priority: -19324
 // -----------------------------------------------------------------------------------------------
 // gtceu:greenhouse recipes of the LV Greenhouse (gtceu:lv_greenhouse). The LV greenhouse also runs every steam recipe
 // (server_scripts/grindless/steam/greenhouse.js: sapling or seed as a catalyst that is never used up, no water) and adds:

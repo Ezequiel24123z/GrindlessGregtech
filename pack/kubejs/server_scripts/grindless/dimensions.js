@@ -1,3 +1,4 @@
+// priority: -11824
 // Gregtech Grindless - "Building Dimensions"
 //
 // Behaviour for grindless:void_key / grindless:flat_key / grindless:end_key:

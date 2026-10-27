@@ -1,3 +1,4 @@
+// priority: -4000
 // -----------------------------------------------------------------------------------------------
 // LuV foundation (package LuV-A1, docs/eras/luv.md "Build order"): the shared registrations that the LuV packages build on. No
 // machines, no recipe types, no recipes, no dimensions and no wireless tier here: each later package registers its own machine and

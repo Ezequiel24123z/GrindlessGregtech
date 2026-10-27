@@ -1,3 +1,4 @@
+// priority: 7300
 // B4 controller names, recipe categories and operating/containment instructions.
 ClientEvents.lang('en_us', function (event) {
   var entries = {

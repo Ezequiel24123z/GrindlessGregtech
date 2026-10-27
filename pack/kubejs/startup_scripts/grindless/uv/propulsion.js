@@ -1,3 +1,4 @@
+// priority: -10500
 // -----------------------------------------------------------------------------------------------
 // UV's propulsion (docs/eras/uv.md, machines 16 and 17; package UV-A11): two machines, their recipe types and the items only they or
 // their side steps make. The tier 11 tank they wind (grindless:bnnt_fuel_tank, a gcyr:fuel_tank block) is F1's

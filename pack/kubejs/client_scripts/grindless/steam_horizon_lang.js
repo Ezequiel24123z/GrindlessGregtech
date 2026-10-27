@@ -1,3 +1,4 @@
+// priority: 5500
 // Gregtech Grindless - Steam era: names and tooltips of the Horizon Collector, its recipe type and the Horizon Shard
 // (startup_scripts/grindless/steam/horizon_collector.js; package STEAM-X1).
 (function () {

@@ -1,3 +1,4 @@
+// priority: -15024
 // -----------------------------------------------------------------------------------------------
 // The road to Mars, GCYR side (docs/eras/ev.md, "Mars, end of EV"): the parts of the tier 2 rocket, remade in EV with titanium.
 //

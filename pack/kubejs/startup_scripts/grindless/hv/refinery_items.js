@@ -1,3 +1,4 @@
+// priority: -2000
 // -----------------------------------------------------------------------------------------------
 // Items of the HV refining line (both are the "condition" of a multiblock, like the drill bits and the graphite electrode of the lower tiers):
 //   grindless:hydrotreating_catalyst   cobalt and molybdenum on silica. Goes in the input bus of the Refinery (gtceu:refinery); used up

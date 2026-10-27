@@ -1,3 +1,4 @@
+// priority: 2200
 // Gregtech Grindless - names and tooltips of UV's photonics (startup_scripts/grindless/uv/photonics.js):
 //
 //   gtceu:fibre_draw_tower / gtceu:mocvd_reactor   machine names + four tooltip lines each

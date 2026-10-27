@@ -1,3 +1,4 @@
+// priority: -3300
 // -----------------------------------------------------------------------------------------------
 // The IV drill bit of the Vein Drill family (docs/eras/iv.md, "Family steps"):
 //

@@ -1,3 +1,4 @@
+// priority: 8900
 // Gregtech Grindless - names and tooltips of IV on Mercury (startup_scripts/grindless/iv/mercury.js and iv/tungsten_steel_drill_bit.js):
 //
 //   gtceu:mercury_vein_drill, gtceu:mercury_solar_works, gtceu:mercury_solar_field, gtceu:interferometer   (names, tooltips, lines)

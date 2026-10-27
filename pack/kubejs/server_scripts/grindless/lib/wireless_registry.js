@@ -1,4 +1,4 @@
-// priority: 1000
+// priority: 800
 // -----------------------------------------------------------------------------------------------
 // The wireless energy network's list of blocks (lv/wireless_energy.js), kept in the server's persistent data
 // (kubejs_persistent_data.nbt) as an NBT list of compounds: one compound per tower, hatch or cover. NbtIo writes every string tag with

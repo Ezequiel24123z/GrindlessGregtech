@@ -1,3 +1,4 @@
+// priority: -18824
 // GCYR 0.2.9: recover one stalled, occupied arrival, only in G.orbits dimensions.
 // Authorization is the rocket's retained control + its selected native station record + deployed
 // physical column, NOT ownership, a default/nearest station, a new platform or thermal immunity.

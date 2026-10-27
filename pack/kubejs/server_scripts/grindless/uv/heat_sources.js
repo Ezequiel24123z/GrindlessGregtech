@@ -1,3 +1,4 @@
+// priority: -25124
 // -----------------------------------------------------------------------------------------------
 // Recipes of UV's heat source works (gtceu:heat_source_works), its controller's crafting recipe and the composite autoclave's C-C
 // aeroshell row (machine and items: startup_scripts/grindless/uv/heat_sources.js; docs/eras/uv.md "Machine 3"; package UV-A2).

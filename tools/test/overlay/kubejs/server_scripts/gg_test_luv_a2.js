@@ -1,3 +1,4 @@
+// priority: -3524
 // Gregtech Grindless - smoke test of package LuV A2 (TEST-ONLY overlay: copied over the instance on the test PC, never shipped with the
 // pack): the naquadah plant's LuV modes (circuit 2 enriched naquadah, circuit 3 spent naquadah; startup_scripts/grindless/iv/
 // naquadah_plant.js, server_scripts/grindless/iv/naquadah_plant.js, data/grindless/tables/naquadah_plant.json, composed by

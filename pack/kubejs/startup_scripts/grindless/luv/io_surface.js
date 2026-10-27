@@ -1,3 +1,4 @@
+// priority: -4400
 // LuV B6, Io's surface (docs/eras/luv.md, sections 14 and 15; decision 7). A1 owns the sublimate, the bundle and both casings; the
 // world blocks are Biomes O' Plenty's fumarole and vanilla magma, by id. Io's dimension comes only from G.places (tables/places.json).
 //

@@ -1,3 +1,4 @@
+// priority: -16124
 // -----------------------------------------------------------------------------------------------
 // Tag leaks found by the reachability validator (tools/analysis).
 // Some mods put their own blocks in GT material tags (forge:storage_blocks/<material>). GTM recipes take those tags as

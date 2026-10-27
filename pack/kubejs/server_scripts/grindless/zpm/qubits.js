@@ -1,3 +1,4 @@
+// priority: -26924
 // -----------------------------------------------------------------------------------------------
 // Recipes of ZPM's solid-state qubit chain (machines: startup_scripts/grindless/zpm/qubits.js; docs/eras/zpm.md "Machines 10-12"; package
 // ZPM-A6): the diamond lattice fab, the ion implanter, the qubit fab, the silicon-28 wafer route, our two alternative HPCA assembler

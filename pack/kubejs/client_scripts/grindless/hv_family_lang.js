@@ -1,3 +1,4 @@
+// priority: 9700
 // Gregtech Grindless - names and tooltips of the HV step of the Vein Drill / Greenhouse family.
 //
 //   gtceu:hv_vein_drill, gtceu:hv_greenhouse   (machine names + tooltips)

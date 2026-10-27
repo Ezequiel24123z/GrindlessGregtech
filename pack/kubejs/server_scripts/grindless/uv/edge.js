@@ -1,3 +1,4 @@
+// priority: -24924
 // -----------------------------------------------------------------------------------------------
 // Recipes of UV's edge (machines: startup_scripts/grindless/uv/edge.js; docs/eras/uv.md "Machines 30-31" and "Gate to UHV"; UV-B5).
 // Every machine recipe carries .dimension('grindless:pluto_orbit') and its own programmed circuit (one recipe per lookup path).

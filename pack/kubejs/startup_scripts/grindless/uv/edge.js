@@ -1,3 +1,4 @@
+// priority: -9500
 // -----------------------------------------------------------------------------------------------
 // UV's edge (docs/eras/uv.md, "Machines 30-31"; package UV-B5): two multiblocks of Pluto orbit and their recipe types.
 //

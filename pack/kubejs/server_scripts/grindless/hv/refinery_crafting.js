@@ -1,3 +1,4 @@
+// priority: -13624
 // -----------------------------------------------------------------------------------------------
 // Recipes that make the two multiblocks of the HV refining line and the catalysts they run on (HV era):
 //

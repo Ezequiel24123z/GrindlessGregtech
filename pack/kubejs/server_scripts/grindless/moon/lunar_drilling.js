@@ -1,3 +1,4 @@
+// priority: -20124
 // -----------------------------------------------------------------------------------------------
 // gtceu:lunar_drilling recipes of the Lunar Drill (gtceu:lunar_drill, startup_scripts/grindless/moon/lunar_drill.js), generated from
 // data/grindless/tables/veins_moon.json (global.grindless.tables.veins_moon, loaded by startup_scripts/grindless/moon/items.js).

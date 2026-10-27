@@ -1,3 +1,4 @@
+// priority: -1400
 // -----------------------------------------------------------------------------------------------
 // The Regolith Cell, the chemistry of the Moon base (docs/eras/ev.md, "Regolith cell"), and the recipe type it runs.
 //

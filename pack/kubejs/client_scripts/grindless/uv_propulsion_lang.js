@@ -1,3 +1,4 @@
+// priority: 2000
 // Gregtech Grindless - names and tooltips of UV's propulsion (startup_scripts/grindless/uv/propulsion.js):
 //
 //   gtceu:cryotank_winder / thruster_works              machine names + four tooltip lines each

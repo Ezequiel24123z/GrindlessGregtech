@@ -1,3 +1,4 @@
+// priority: -24724
 // -----------------------------------------------------------------------------------------------
 // Recipes of UV's cold works (docs/eras/uv.md, machines 5 and 6, lines 7 and 13; package UV-A4): the superfluid helium plant, the SRF
 // cavity works and the small side steps that close their loops (machines and items: startup_scripts/grindless/uv/cold.js).

@@ -1,4 +1,4 @@
-// priority: -10
+// priority: -12500
 // -----------------------------------------------------------------------------------------------
 // LuV B8, Europa (docs/eras/luv.md, machines 17 and 18): the only way to Europa's ocean, and the pack's only living matter.
 // Every pattern goes through global.grindless.patterns (lib/patterns.js); Europa's dimension id comes from tables/places.json.

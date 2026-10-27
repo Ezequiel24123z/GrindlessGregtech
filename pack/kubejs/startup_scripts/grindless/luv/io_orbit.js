@@ -1,3 +1,4 @@
+// priority: -4300
 // LuV B7, Io orbit (docs/eras/luv.md, sections 16 and 16b; decisions 3, 7 and 17). One slot, two designs; tables/stations.json picks one
 // through lib/stations.js (G.stations.b7), and only that one is registered:
 //

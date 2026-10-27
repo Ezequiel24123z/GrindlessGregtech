@@ -1,3 +1,4 @@
+// priority: 12500
 // Gregtech Grindless - client half of the gallery test (TEST-ONLY overlay, never shipped). Partner of
 // server_scripts/gg_test_gallery.js; asleep unless that test sets 'hold' in the map both halves share (global.ggGallery: in the
 // client suite both run in the same JVM).

@@ -1,4 +1,4 @@
-// priority: -10
+// priority: -12400
 // -----------------------------------------------------------------------------------------------
 // LuV B5, the asteroid belt (docs/eras/luv.md, sections 11-13, "The belt and Jupiter's moons" and "Platinum plant, mode 4"): three
 // multiblocks of ours, two recipe types, the belt's vein samples and its world gen layer. Every pattern goes through

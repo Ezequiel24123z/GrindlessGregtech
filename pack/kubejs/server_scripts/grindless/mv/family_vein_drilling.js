@@ -1,3 +1,4 @@
+// priority: -20824
 // -----------------------------------------------------------------------------------------------
 // gtceu:vein_drilling recipes of the MV Vein Drill (gtceu:mv_vein_drill) for the VANADIUM STEEL drill bit
 // (grindless:vanadium_steel_drill_bit, listed with mv: true in the BITS table of server_scripts/grindless/lv/vein_drilling.js).

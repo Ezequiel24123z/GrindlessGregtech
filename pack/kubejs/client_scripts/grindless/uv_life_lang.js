@@ -1,3 +1,4 @@
+// priority: 2500
 // Gregtech Grindless - names and tooltips of UV's life (startup_scripts/grindless/uv/life.js):
 //
 //   gtceu:ark_biosphere / gtceu:neural_culture_vat   machine names + four tooltip lines each

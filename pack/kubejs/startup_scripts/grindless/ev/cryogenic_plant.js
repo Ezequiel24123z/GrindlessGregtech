@@ -1,3 +1,4 @@
+// priority: -800
 // -----------------------------------------------------------------------------------------------
 // The Cryogenic Plant, a Moon multiblock of the EV era (docs/eras/ev.md, "Cryogenic plant"), the recipe type it runs and its radiator.
 //

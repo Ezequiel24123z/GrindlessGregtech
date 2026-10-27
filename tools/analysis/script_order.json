@@ -1,0 +1,33 @@
+{
+    "_doc":  "Intended load-order bands for KubeJS scripts (see script-order.mjs). Key: path relative to the kubejs root (pack/kubejs and tools/test/overlay/kubejs share it), or a directory prefix ending in \u0027/\u0027. Value: band, higher loads first; default 0. Within a band scripts load in Windows walk order (NTFS collation, pre-order). Hand-edit only this table; never write \u0027// priority:\u0027 in a script, the integrator stamps the headers.",
+    "bands":  {
+                  "server_scripts/grindless/data/greenhouse.js":  100,
+                  "server_scripts/grindless/data/veins.js":  100,
+                  "server_scripts/grindless/ev/combined_cycle_and_hot_mill.js":  -200,
+                  "server_scripts/grindless/integration/hidden.js":  -100,
+                  "server_scripts/grindless/lib/compose.js":  1000,
+                  "server_scripts/grindless/lib/wireless_adapters.js":  1000,
+                  "server_scripts/grindless/lib/wireless_registry.js":  1000,
+                  "server_scripts/grindless/luv/helium_refrigerator.js":  -200,
+                  "server_scripts/grindless/moon/planets.js":  50,
+                  "startup_scripts/grindless/iv/venus.js":  -10,
+                  "startup_scripts/grindless/lib/coils.js":  999,
+                  "startup_scripts/grindless/lib/fresh_run.js":  998,
+                  "startup_scripts/grindless/lib/generators.js":  999,
+                  "startup_scripts/grindless/lib/no_voiding.js":  998,
+                  "startup_scripts/grindless/lib/orbits.js":  899,
+                  "startup_scripts/grindless/lib/parallel_hatch.js":  997,
+                  "startup_scripts/grindless/lib/patterns.js":  1000,
+                  "startup_scripts/grindless/lib/places.js":  899,
+                  "startup_scripts/grindless/lib/stations.js":  898,
+                  "startup_scripts/grindless/lib/tables.js":  900,
+                  "startup_scripts/grindless/luv/asteroid_belt.js":  -10,
+                  "startup_scripts/grindless/luv/europa.js":  -10,
+                  "startup_scripts/grindless/luv/ganymede.js":  -10,
+                  "startup_scripts/grindless/luv/orbital_biology.js":  -10,
+                  "server_scripts/gg_dump.js":  -100000,
+                  "server_scripts/gg_test_addon_gates_ef.js":  100,
+                  "server_scripts/gg_test_addon_gates_misc.js":  100,
+                  "server_scripts/gg_test_recipe_lookup.js":  -100000
+              }
+}

@@ -1,3 +1,4 @@
+// priority: -7524
 // Gregtech Grindless - smoke test of the HV Syngas and Shift Plant (TEST-ONLY overlay: copied over the instance on the test PC, never shipped
 // with the pack).
 //

@@ -1,3 +1,4 @@
+// priority: -22424
 // -----------------------------------------------------------------------------------------------
 // Crafting-table recipes of the Steam Age drill / greenhouse line. Everything here is made by hand with bronze
 // (and steel for the steel bit): no electricity involved.

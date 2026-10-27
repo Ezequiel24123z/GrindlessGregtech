@@ -1,3 +1,4 @@
+// priority: 10000
 // Gregtech Grindless - names and tooltips of the EV Tripod Drill (the EV step of the Vein Drill family, ev/tripod.js).
 //
 //   gtceu:ev_vein_drill            (machine name + tooltips)

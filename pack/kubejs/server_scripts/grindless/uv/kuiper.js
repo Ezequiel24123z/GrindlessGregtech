@@ -1,3 +1,4 @@
+// priority: -25224
 // -----------------------------------------------------------------------------------------------
 // Recipes of UV's Kuiper belt (machines: startup_scripts/grindless/uv/kuiper.js; docs/eras/uv.md "Machines 28-29", line 17; UV-B4).
 // Every machine recipe carries .dimension('grindless:pluto_orbit') and its own programmed circuit (one recipe per lookup path).

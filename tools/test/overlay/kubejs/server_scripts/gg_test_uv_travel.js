@@ -1,3 +1,4 @@
+// priority: -9724
 // Gregtech Grindless - UV-B1 native test gg_test_uv_travel: adapted from gg_test_zpm_travel.js (itself from gg_test_gcyr_flight.js;
 // the comments below describe that origin). Two real station flights from the Overworld: a level-6 rocket (elite motors + aerogel
 // tanks) to grindless:neptune_orbit and a level-7 rocket (elite motors + BNNT tanks) to grindless:pluto_orbit. Each chip carries a

@@ -1,3 +1,4 @@
+// priority: -17624
 // -----------------------------------------------------------------------------------------------
 // Recipes of LuV's biofoundry (machine and recipe type: startup_scripts/grindless/luv/biofoundry.js; docs/eras/luv.md, "4. Biofoundry";
 // package LuV-A5), generated at every server load from data/grindless/tables/biofoundry.json, and the recipe that makes the controller.

@@ -1,3 +1,4 @@
+// priority: -7324
 // Gregtech Grindless - test of the Large Steam family (TEST-ONLY overlay: copied over the instance on the test PC,
 // never shipped with the pack): startup_scripts/grindless/steam/large_family.js, server_scripts/grindless/steam/
 // large_family.js.

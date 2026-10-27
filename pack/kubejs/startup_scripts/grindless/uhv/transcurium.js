@@ -1,3 +1,4 @@
+// priority: -8800
 // -----------------------------------------------------------------------------------------------
 // UHV's transcurium line (docs/eras/uhv.md, machines 1 and 2, lines 1-3 and 25; package UHV-A1): the high flux reactor and the
 // transuranium facility, their recipe types, and the line-25 materials UHV-F1 did not register. The recipes come from

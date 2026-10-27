@@ -1,3 +1,4 @@
+// priority: -25724
 // -----------------------------------------------------------------------------------------------
 // Recipes of UV's Pluto ices (machines: startup_scripts/grindless/uv/pluto_ices.js; docs/eras/uv.md, machines 26-27, line 16; UV-B3).
 // Every machine recipe carries .dimension('grindless:pluto_orbit') and its own programmed circuit (one recipe per lookup path).

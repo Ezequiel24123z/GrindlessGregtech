@@ -1,3 +1,4 @@
+// priority: 1800
 // Gregtech Grindless - names and tooltips of UV's thorium line (startup_scripts/grindless/uv/thorium.js; package UV-A1):
 //
 //   block.gtceu.<machine>, gtceu.<recipe type>                    machine and recipe type names

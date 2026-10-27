@@ -1,3 +1,4 @@
+// priority: 200
 // Gregtech Grindless - names of ZPM travel (startup_scripts/grindless/zpm/travel.js and data/grindless/gcyr/planets/{saturn,uranus}.json):
 //
 //   level.grindless.<planet>                   GCYR's planet names (each planet file's "translation"), shown in the rocket menu

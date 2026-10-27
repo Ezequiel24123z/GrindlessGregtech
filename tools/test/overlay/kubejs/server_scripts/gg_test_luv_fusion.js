@@ -1,3 +1,4 @@
+// priority: -4424
 // TEST ONLY, LuV B10. Command: kubejs custom_command gg_test_luv_fusion
 // The integrated validation owner runs this with gg_test_recipe_lookup and a fresh gg_dump.
 // Reserved band ONLY: X 17920-17983, Z 0-63, Overworld Y 98-112 (the Mk1 at X 17925-17939, Z 4-18; the HPCA and the research station

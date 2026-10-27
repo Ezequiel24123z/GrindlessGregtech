@@ -1,3 +1,4 @@
+// priority: -9224
 // TEST ONLY, UV-B3. Command: kubejs custom_command gg_test_uv_pluto_ices
 // Reserved band ONLY: X26880-26943, Z0-15; Pluto orbit Y198-214, Overworld Y98-114.
 // The doubt: two new dimension-locked types and a dimension-locked row added to an older HV type (the syngas plant's circuit 5).

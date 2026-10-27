@@ -1,3 +1,4 @@
+// priority: -1900
 // -----------------------------------------------------------------------------------------------
 // The Refinery, the flagship multiblock of the HV era, and the recipe type it runs.
 //

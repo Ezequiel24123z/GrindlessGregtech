@@ -1,3 +1,4 @@
+// priority: -11600
 // -----------------------------------------------------------------------------------------------
 // ZPM's outer chemistry (docs/eras/zpm.md, "Machines 9, 13, 14"; package ZPM-A8): three multiblocks and their recipe types. The items they
 // make (carbon_nanotube_yarn, archaeal_culture, silica_aerogel) are ZPM-F1's, in foundation.js. Recipes: server_scripts/grindless/zpm/

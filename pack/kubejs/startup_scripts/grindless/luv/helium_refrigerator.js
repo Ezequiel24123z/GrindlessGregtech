@@ -1,3 +1,4 @@
+// priority: -4100
 // -----------------------------------------------------------------------------------------------
 // One of LuV's multiblocks (docs/eras/luv.md, "1. Helium refrigerator"; package LuV-A3): the helium refrigerator and its recipe type.
 //

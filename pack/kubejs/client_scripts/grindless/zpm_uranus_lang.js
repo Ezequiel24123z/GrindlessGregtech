@@ -1,3 +1,4 @@
+// priority: 100
 // Gregtech Grindless - names and tooltips of ZPM's Uranus orbit machines (startup_scripts/grindless/zpm/uranus.js):
 // gtceu:ice_giant_siphon, gtceu:slurry_separator, gtceu:flyby_probe_bay and their recipe types.
 ClientEvents.lang('en_us', event => {

@@ -33,6 +33,16 @@ Get-ChildItem -Path $PackDir -Recurse -File | Where-Object { $textExt -contains 
 }
 Write-Output "Normalized: $changed file(s)"
 
+# Stamp the `// priority:` headers (deterministic KubeJS script order, tools/analysis/script-order.mjs) before the index hashes the scripts.
+$nodeExe = $env:GG_NODE
+if (-not $nodeExe) { $cmd = Get-Command node -CommandType Application -ErrorAction SilentlyContinue | Select-Object -First 1; if ($cmd) { $nodeExe = $cmd.Source } }
+if (-not $nodeExe) { $local = Join-Path $PSScriptRoot 'analysis\.work\node\node.exe'; if (Test-Path $local) { $nodeExe = $local } }
+if ($nodeExe) {
+    & $nodeExe (Join-Path $PSScriptRoot 'analysis\script-order.mjs') '--write'
+    if ($LASTEXITCODE -ne 0) { throw "script-order --write failed ($LASTEXITCODE)" }
+}
+else { Write-Warning 'node not found (set GG_NODE): script priorities not stamped; T0 (script-order --check) will flag unstamped scripts' }
+
 Push-Location $PackDir
 try {
     & $Packwiz refresh

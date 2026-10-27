@@ -1,3 +1,4 @@
+// priority: -16324
 // -----------------------------------------------------------------------------------------------
 // The fluorspar kiln's recipe and controller (machine and recipe type: startup_scripts/grindless/iv/fluorspar_kiln.js; docs/eras/iv.md,
 // "Fluorspar kiln"; package IV-A6).

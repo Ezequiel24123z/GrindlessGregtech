@@ -1,3 +1,4 @@
+// priority: -4700
 // -----------------------------------------------------------------------------------------------
 // LuV travel (package LuV-B1, docs/eras/luv.md "The belt and Jupiter's moons", "Cryogenic fuel tank" and decision 2).
 //

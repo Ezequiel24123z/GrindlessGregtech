@@ -1,3 +1,4 @@
+// priority: 11900
 // TEST-ONLY: paired real-client proof, asleep unless the marker-enabled server holds it.
 // No packet injection, production helper call, fake GUI, cache-wide clear or terrain construction.
 ;(function () {

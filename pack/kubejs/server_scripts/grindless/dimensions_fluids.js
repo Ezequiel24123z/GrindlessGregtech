@@ -1,3 +1,4 @@
+// priority: -11924
 // Gregtech Grindless - "Building Dimensions": bedrock fluid deposits in void/flat
 //
 // GTM 7.5.3's six Overworld bedrock fluid veins (gtceu:heavy_oil_deposit, light_oil_deposit,

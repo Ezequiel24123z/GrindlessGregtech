@@ -1,3 +1,4 @@
+// priority: -26824
 // -----------------------------------------------------------------------------------------------
 // Recipes of ZPM's outer chemistry (machines: startup_scripts/grindless/zpm/outer_chemistry.js; docs/eras/zpm.md "Machines 9, 13, 14"; package
 // ZPM-A8): the methane pyrolyser, the vent bioreactor, the aerogel works and the controllers' crafting recipes.

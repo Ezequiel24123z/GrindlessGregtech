@@ -1,4 +1,4 @@
-// priority: 50
+// priority: -124
 // -----------------------------------------------------------------------------------------------
 // Planets: which dimension belongs to which planet (data/grindless/tables/planets.json). The Overworld, the Nether, the End and the
 // pack's own dimensions are Earth; GCYR's Moon and its orbit are the Moon.

@@ -1,3 +1,4 @@
+// priority: -8324
 // TEST ONLY, UHV-B1. Command: kubejs custom_command gg_test_uhv_travel
 // Band ONLY: X 28928-28991, Z 0-63, Overworld Y 60-120 (nothing is placed there: the checks are registry, recipe and SavedData reads).
 // Doubt: the Proxima b override (S0-3's path) and stations seven and eight in the real game: GCYR's Proxima b is tier 8 with orbit
