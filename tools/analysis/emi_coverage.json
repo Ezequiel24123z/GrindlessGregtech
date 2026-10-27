@@ -58,6 +58,7 @@
     { "id": "grindless:ican_pellet", "role": "use", "reason": "temporary (UV-A5): its use, the precursor probe launch, is UV-B5's; delete this exception when B5 merges" },
     { "id": "grindless:hpge_crystal", "role": "use", "reason": "temporary (UV-A7): its first use, the penetrator's HPGe spectrometer, is UV-B3's; delete this exception when B3 merges" },
     { "id": "grindless:printed_probe_frame", "role": "use", "reason": "temporary (UV-A8): its first use, the penetrator probe, is UV-B3's; delete this exception when B3 merges" },
+    { "id": "grindless:triton_ice_core", "role": "use", "reason": "temporary (UV-B2): its use, the penetrator probe bay's catalyst, is UV-B3's; delete this exception when B3 merges" },
     { "id": "grindless:sailcraft", "role": "use", "reason": "temporary (UV-A12): its use, the laser sail launch, holds B5's heliopause_data; delete this exception when B5 merges" },
     { "id": "grindless:snspd_array", "role": "use", "reason": "temporary (UV-A7): its use, the optical downlink, reads A12's probe, which waits on B5's heliopause_data; delete this exception when B5 merges" },
     { "id": "grindless:thruster_pod", "role": "use", "reason": "temporary (UV-A11): its uses are the Kuiper interceptor (B4) and the precursor probe (B5); delete this exception when the first of them merges" },
@@ -65,9 +66,6 @@
       ],
       "pendingRoutes": [
     { "id": "grindless:laser_sail_launch/starshot_probe", "reason": "UV-A12: the launcher aims with grindless:heliopause_data, which UV-B5 (the edge) makes; delete this route when B5 merges" },
-    { "id": "grindless:optical_downlink/proxima_approach_data", "reason": "UV-A7: the ground station reads A12's probe in flight, which waits on UV-B5's heliopause_data; delete this route when B5 merges" },
-    { "id": "grindless:superfluid_helium/superfluid_helium/superleak", "reason": "UV-A4: the superleak takes Neptune helium, which UV-B2 brings; delete this entry when B2 merges" },
-    { "id": "grindless:pyroprocessing/pyroprocessing/nitride", "reason": "UV-A1: the nitride fuel cycle is held until UV-B2 brings Triton nitrogen (the N-15 source); delete this entry when B2 merges" },
-    { "id": "grindless:accelerator_driven/accelerator_driven/thorium_nitride", "reason": "UV-A1: the nitride fuel cycle is held until UV-B2 brings Triton nitrogen (the N-15 source); delete this entry when B2 merges" }
+    { "id": "grindless:optical_downlink/proxima_approach_data", "reason": "UV-A7: the ground station reads A12's probe in flight, which waits on UV-B5's heliopause_data; delete this route when B5 merges" }
   ]
     }

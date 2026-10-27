@@ -293,7 +293,8 @@ test('the dimension markers of the old hidden table (disabled, not index-only) d
   // a pending route (cfg.pendingRoutes) also waits on a stack hidden until its era, so it is not one of the marker routes until then
   const pendingIds = new Set((cfg.pendingRoutes || []).map((p) => p.id));
   const markerDropped = old.droppedRoutes.filter((d) => !pendingIds.has(d.id));
-  assert.equal(markerDropped.length, 38, markerDropped.map((d) => d.id).join('\n'));
+  // 39 since UV-B2: Triton nitric oxide (Moon cryogenic plant) was a hidden-stack route until Triton nitrogen became obtainable
+  assert.equal(markerDropped.length, 39, markerDropped.map((d) => d.id).join('\n'));
   assert.ok(markerDropped.every((d) => d.disabledBy.every((b) => b.startsWith('dimension marker '))));
   const now = new Map(fixtureExpectations(packRun.res).items.map((e) => [e.id, e]));
   const lost = [];
@@ -301,7 +302,8 @@ test('the dimension markers of the old hidden table (disabled, not index-only) d
     const was = now.get(e.id);
     for (const role of ['made', 'used']) for (const c of was[role]) if (!e[role].includes(c)) lost.push(`${e.id} ${role} in ${c}`);
   }
-  assert.equal(lost.length, 47, lost.join('\n'));
+  // 47 from the native run, + 2 since UV-B2: the Triton nitric oxide row (nitrogen-15 oxide made, Triton nitric oxide used)
+  assert.equal(lost.length, 49, lost.join('\n'));
   for (const route of ['grindless:mars_chart made in gtceu:deep_space_tracking', 'grindless:vein_sample_ice_mars used in gtceu:vein_drilling',
     'gtceu:liquid_nitrogen made in gtceu:cryogenic_processing', 'gtceu:heavy_water made in gtceu:detritiation',
     'grindless:titanium_drill_bit used in gtceu:vein_drilling', 'grindless:martian_quantum_seed made in gtceu:chemical_reactor']) {

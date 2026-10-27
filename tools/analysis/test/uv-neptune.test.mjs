@@ -77,6 +77,10 @@ test('the Neptune rows: Neptune orbit only, one circuit per type slot, UV VA; th
   assert.deepEqual(circuitOf(d), [4]);
   const column = recipes.filter((r) => r.t === 'gtceu:cryogenic_isotope_separation').flatMap(circuitOf);
   assert.equal(column.filter((c) => c === 4).length, 1, 'circuit 4 is free in the isotope column');
+  const h = byId('grindless:cryogenic_isotope_separation/neptune_helium_three');
+  assert.ok(h, 'helium-3 concentrate row');
+  assert.deepEqual(circuitOf(h), [5]);
+  assert.equal(column.filter((c) => c === 5).length, 1, 'circuit 5 is free in the isotope column');
 });
 
 test('ZPM\'s Uranus rows on the shared siphon type are unchanged (circuits 1-4, Uranus orbit, ZPM VA)', () => {
