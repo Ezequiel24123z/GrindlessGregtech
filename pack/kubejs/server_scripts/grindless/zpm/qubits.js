@@ -10,6 +10,8 @@
 //   gtceu:qubit_fabrication  circuit 1  4 donor qubit wafers + the helium charge -> 1 qubit array   (the charge, 4,000 mB liquid helium, is
 //                            circuit 2  16 NV diamond chips + the same charge -> 1 qubit array, slower   not consumed; 10 mB of Saturn's
 //                                                                                                        helium is the make-up of a run)
+//                            circuit 3  1 NbN film wafer (UV-A6's MOCVD) + the same charge -> 1 SNSPD array (UV-A7: the optical ground
+//                                       station's detector, patterned and tested cold)
 //   silicon-28 wafers        8 silicon-28 dust + 1,000 mB argon -> 1 boule (EBF, 2,000 K); 1 boule + 100 mB lubricant -> 8 wafers (cutter)
 //   gtceu:assembler          hpca_computation_component: GTM's inputs with 1 qubit array in place of the 4 ZPM circuits (LuV, 200 t)
 //                            hpca_advanced_computation_component: 2 qubit arrays in place of the 4 UV circuits (ZPM, 200 t)
@@ -38,6 +40,8 @@
   var DONOR = 'grindless:donor_qubit_wafer'
   var ARRAY = 'grindless:qubit_array'
   var PHOSPHORUS = 'gtceu:phosphorus_dust'
+  var NBN = 'grindless:nbn_film_wafer'
+  var SNSPD = G.uvFoundation && G.uvFoundation.ids && G.uvFoundation.ids.snspdArray ? G.uvFoundation.ids.snspdArray : 'grindless:snspd_array'
 
   var TABLE = [
     {
@@ -81,6 +85,13 @@
       fluidsIn: [{ id: 'gtceu:saturn_helium', amount: 10 }], notConsumedFluids: [{ id: 'gtceu:liquid_helium', amount: 4000 }],
       itemsOut: [{ id: ARRAY, count: 1 }], fluidsOut: [],
       eut: ZPM_VA, duration: 1200
+    },
+    {
+      name: 'snspd_array', type: 'qubit_fabrication', circuit: 3,
+      itemsIn: [{ id: NBN, count: 1 }], notConsumedItems: [],
+      fluidsIn: [{ id: 'gtceu:saturn_helium', amount: 10 }], notConsumedFluids: [{ id: 'gtceu:liquid_helium', amount: 4000 }],
+      itemsOut: [{ id: SNSPD, count: 1 }], fluidsOut: [],
+      eut: ZPM_VA, duration: 600
     },
     {
       name: 'pb11_capsule', type: 'diamond_cvd', circuit: 3,
