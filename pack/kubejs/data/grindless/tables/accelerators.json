@@ -1,0 +1,162 @@
+{
+  "_source": "UV-A5 (docs/eras/uv.md, machines 7, 8 and 22, lines 5, 18 and 22). Real processes: LIGA X-ray lithography (KIT, Karlsruhe: a PMMA resist exposed through a gold-on-membrane mask, developed in the GG developer); antiproton production on a tungsten/iridium target (CERN's AD and ELENA); muon-catalysed fusion of D-T at liquid-hydrogen temperature (Alvarez 1956, Jones et al. at LAMPF, J-PARC); Penning-trap storage (CERN's BASE) and the antiproton-catalysed ICAN-II microfission pellet (Penn State, Lewis et al.).",
+  "_how_it_is_used": [
+    "Read by server_scripts/grindless/uv/accelerators.js at every server load. startup_scripts/grindless/uv/accelerators.js registers the machines, recipe types and the ids F1 did not.",
+    "types.<type>.recipes: one recipe per entry, id grindless:<type>/<name>. itemsIn / itemsOut: { id, count }; kept: items needed in a bus but never used up; chancedIn / chancedOut: { id, count, chance } with chance out of 10,000 (GTM's chanced input: 200 = the target wears 2 % a run); fluidsIn / fluidsOut: { id, amount }; charge: fluids needed in a hatch but never drained. eut and duration are the final figures; cleanroom: true asks GTM's cleanroom; orbit: true limits the recipe to Earth orbit (G.orbits.earth).",
+    "synchrotron (EU in): c1-c3 the LIGA line at VA[UV] (491,520 EU/t); c4 antiprotons at 4 A UV (2,097,152 EU/t). gtca:proton items come from GTCA's COMET (gtceu:comet/proton_simple: 9 protons a run); 16 stand for the doc's 1,000 mB; most of the beam recombines to hydrogen (250 mB back).",
+    "muon_catalysed_fusion: a generator type; eut is the EU/t GIVEN (the script writes -eut). 786,432 EU/t = 1.5 A UV; the type stays out of server_scripts/grindless/power/generators.js TYPES, so it is not doubled (docs/research/uv-s0.md, S0-6). 500 mB of liquid D-T holds 250 mB of tritium: the blanket breeds back 150 mB (60 %), the other 100 mB (40 %) is make-up from IV's tritium removal facility.",
+    "antimatter_storage (EU in): every row carries orbit: true. c1 at 2 A UV (1,048,576 EU/t).",
+    "The other types are GTM's own machines: rows keyed by our new items or fluids, so none can hide a GTM recipe."
+  ],
+  "types": {
+    "synchrotron": {
+      "dataKey": "grindless_synchrotron",
+      "recipes": [
+        {
+          "name": "expose", "circuit": 1, "eut": 491520, "duration": 200,
+          "itemsIn": [{ "id": "grindless:pmma_coated_wafer", "count": 1 }],
+          "kept": [{ "id": "grindless:x_ray_mask", "count": 1 }],
+          "itemsOut": [{ "id": "grindless:exposed_wafer", "count": 1 }]
+        },
+        {
+          "name": "develop", "circuit": 2, "eut": 491520, "duration": 200,
+          "itemsIn": [{ "id": "grindless:exposed_wafer", "count": 1 }],
+          "charge": [{ "id": "gtceu:liga_developer", "amount": 250 }],
+          "itemsOut": [{ "id": "grindless:patterned_wafer", "count": 1 }]
+        },
+        {
+          "name": "photonic", "circuit": 3, "eut": 491520, "duration": 400,
+          "itemsIn": [{ "id": "grindless:patterned_wafer", "count": 1 }, { "id": "grindless:silicon_nitride_film", "count": 1 }],
+          "itemsOut": [{ "id": "grindless:photonic_chip", "count": 4 }]
+        },
+        {
+          "name": "antiprotons", "circuit": 4, "eut": 2097152, "duration": 2000,
+          "itemsIn": [{ "id": "gtca:proton", "count": 16 }, { "id": "grindless:empty_antiproton_cartridge", "count": 1 }],
+          "chancedIn": [{ "id": "grindless:tungsten_target", "count": 1, "chance": 200 }],
+          "itemsOut": [{ "id": "grindless:antiproton_cartridge", "count": 1 }],
+          "chancedOut": [{ "id": "grindless:activated_tungsten_target", "count": 1, "chance": 200 }],
+          "fluidsOut": [{ "id": "gtceu:hydrogen", "amount": 250 }]
+        }
+      ]
+    },
+    "muon_catalysed_fusion": {
+      "dataKey": "grindless_muon_catalysed_fusion",
+      "recipes": [
+        {
+          "name": "deuterium_tritium", "circuit": 0, "eut": 786432, "duration": 1200,
+          "kept": [{ "id": "grindless:lithium_breeder_blanket", "count": 1 }],
+          "fluidsIn": [{ "id": "gtceu:liquid_deuterium_tritium", "amount": 500 }],
+          "fluidsOut": [{ "id": "gtceu:helium", "amount": 500 }, { "id": "gtceu:tritium", "amount": 150 }]
+        }
+      ]
+    },
+    "antimatter_storage": {
+      "dataKey": "grindless_antimatter_storage",
+      "recipes": [
+        {
+          "name": "stack", "circuit": 1, "eut": 1048576, "duration": 2000, "orbit": true,
+          "itemsIn": [{ "id": "grindless:antiproton_cartridge", "count": 4 }, { "id": "grindless:empty_antiproton_trap", "count": 1 }],
+          "fluidsIn": [{ "id": "gtceu:superfluid_helium", "amount": 100 }],
+          "itemsOut": [{ "id": "grindless:antiproton_trap", "count": 1 }, { "id": "grindless:empty_antiproton_cartridge", "count": 4 }],
+          "fluidsOut": [{ "id": "gtceu:helium", "amount": 100 }]
+        },
+        {
+          "name": "ican", "circuit": 2, "eut": 491520, "duration": 400, "orbit": true,
+          "itemsIn": [{ "id": "grindless:antiproton_trap", "count": 1 }, { "id": "gtceu:uranium_dust", "count": 4 }],
+          "fluidsIn": [{ "id": "gtceu:liquid_deuterium_tritium", "amount": 500 }],
+          "itemsOut": [{ "id": "grindless:ican_pellet", "count": 4 }, { "id": "grindless:empty_antiproton_trap", "count": 1 }]
+        }
+      ]
+    },
+    "vacuum_freezer": {
+      "recipes": [
+        {
+          "name": "liquid_deuterium_tritium", "circuit": 0, "eut": 30720, "duration": 100,
+          "fluidsIn": [{ "id": "gtceu:deuterium", "amount": 250 }, { "id": "gtceu:tritium", "amount": 250 }],
+          "fluidsOut": [{ "id": "gtceu:liquid_deuterium_tritium", "amount": 500 }]
+        }
+      ]
+    },
+    "chemical_reactor": {
+      "recipes": [
+        {
+          "name": "pmma_resist", "circuit": 0, "eut": 7680, "duration": 200,
+          "fluidsIn": [{ "id": "gtceu:acetone", "amount": 1000 }, { "id": "gtceu:methanol", "amount": 1000 }, { "id": "gtceu:sulfuric_acid", "amount": 500 }],
+          "fluidsOut": [{ "id": "gtceu:pmma_resist", "amount": 1000 }, { "id": "gtceu:diluted_sulfuric_acid", "amount": 500 }]
+        },
+        {
+          "name": "silicon_nitride_film", "circuit": 0, "eut": 30720, "duration": 200, "cleanroom": true,
+          "itemsIn": [{ "id": "gtceu:silicon_dust", "count": 1 }],
+          "fluidsIn": [{ "id": "gtceu:ammonia", "amount": 1000 }],
+          "itemsOut": [{ "id": "grindless:silicon_nitride_film", "count": 1 }],
+          "fluidsOut": [{ "id": "gtceu:hydrogen", "amount": 1500 }]
+        }
+      ]
+    },
+    "mixer": {
+      "recipes": [
+        {
+          "name": "liga_developer", "circuit": 0, "eut": 480, "duration": 100,
+          "fluidsIn": [{ "id": "gtceu:ethanol", "amount": 500 }, { "id": "gtceu:ammonia", "amount": 500 }],
+          "fluidsOut": [{ "id": "gtceu:liga_developer", "amount": 1000 }]
+        }
+      ]
+    },
+    "chemical_bath": {
+      "recipes": [
+        {
+          "name": "pmma_coated_wafer", "circuit": 0, "eut": 30720, "duration": 200, "cleanroom": true,
+          "itemsIn": [{ "id": "gtceu:hpic_wafer", "count": 1 }],
+          "fluidsIn": [{ "id": "gtceu:pmma_resist", "amount": 144 }],
+          "itemsOut": [{ "id": "grindless:pmma_coated_wafer", "count": 1 }]
+        },
+        {
+          "name": "cool_activated_target", "circuit": 0, "eut": 120, "duration": 6000,
+          "itemsIn": [{ "id": "grindless:activated_tungsten_target", "count": 1 }],
+          "fluidsIn": [{ "id": "gtceu:distilled_water", "amount": 1000 }],
+          "itemsOut": [{ "id": "gtceu:tungsten_dust", "count": 3 }, { "id": "gtceu:copper_dust", "count": 1 }]
+        }
+      ]
+    },
+    "assembler": {
+      "recipes": [
+        {
+          "name": "x_ray_mask", "circuit": 0, "eut": 122880, "duration": 400, "cleanroom": true,
+          "itemsIn": [{ "id": "grindless:silicon_nitride_film", "count": 1 }, { "id": "gtceu:gold_plate", "count": 2 }],
+          "itemsOut": [{ "id": "grindless:x_ray_mask", "count": 1 }]
+        },
+        {
+          "name": "tungsten_target", "circuit": 0, "eut": 30720, "duration": 200,
+          "itemsIn": [{ "id": "gtceu:tungsten_plate", "count": 4 }, { "id": "gtceu:copper_plate", "count": 2 }],
+          "fluidsIn": [{ "id": "gtceu:soldering_alloy", "amount": 144 }],
+          "itemsOut": [{ "id": "grindless:tungsten_target", "count": 1 }]
+        },
+        {
+          "name": "empty_antiproton_cartridge", "circuit": 0, "eut": 122880, "duration": 400,
+          "itemsIn": [{ "id": "gtceu:zpm_field_generator", "count": 1 }, { "id": "gtceu:tungsten_steel_plate", "count": 4 }],
+          "itemsOut": [{ "id": "grindless:empty_antiproton_cartridge", "count": 1 }]
+        },
+        {
+          "name": "empty_antiproton_trap", "circuit": 0, "eut": 491520, "duration": 400,
+          "itemsIn": [{ "id": "gtceu:uv_field_generator", "count": 1 }, { "id": "gtceu:tritanium_plate", "count": 8 }],
+          "itemsOut": [{ "id": "grindless:empty_antiproton_trap", "count": 1 }]
+        },
+        {
+          "name": "lithium_breeder_blanket", "circuit": 0, "eut": 122880, "duration": 600,
+          "itemsIn": [{ "id": "gtceu:lithium_dust", "count": 16 }, { "id": "gtceu:beryllium_dust", "count": 4 }, { "id": "gtceu:tungsten_steel_frame", "count": 1 }],
+          "itemsOut": [{ "id": "grindless:lithium_breeder_blanket", "count": 1 }]
+        }
+      ]
+    },
+    "cutter": {
+      "recipes": [
+        {
+          "name": "liga_uhpic", "circuit": 0, "eut": 491520, "duration": 900, "cleanroom": true,
+          "itemsIn": [{ "id": "grindless:patterned_wafer", "count": 1 }],
+          "fluidsIn": [{ "id": "gtceu:lubricant", "amount": 50 }],
+          "itemsOut": [{ "id": "gtceu:uhpic_chip", "count": 4 }]
+        }
+      ]
+    }
+  }
+}
