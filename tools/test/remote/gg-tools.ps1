@@ -41,7 +41,7 @@ function Ensure-GGForgeServer {
     param([string]$Mc, [string]$Forge)
     $ver = "$Mc-$Forge"
     $dir = Join-Path $global:GG.Cache "forge-server\$ver"
-    $argsFile = Join-Path $dir "libraries\net\minecraftforge\forge\$ver\win_args.txt"
+    $argsFile = Join-Path $dir "libraries\net\minecraftforge\forge\$ver\$($global:GG.ForgeArgsFile)"
     if ((Test-Path (Join-Path $dir '.ok')) -and (Test-Path $argsFile)) { return @{ Dir = $dir; Cached = $true; Ver = $ver } }
 
     # one run installs, a concurrent one waits and then finds it cached
@@ -102,7 +102,7 @@ function Add-GGOverlay {
     param([string]$OverlayDir, [string]$Instance)
     $rel = @()
     if (-not (Test-Path $OverlayDir)) { return $rel }
-    $root = (Resolve-Path $OverlayDir).Path.TrimEnd('\')
+    $root = (Resolve-Path $OverlayDir).Path.TrimEnd('\', '/')
     foreach ($f in @(Get-ChildItem $OverlayDir -Recurse -File -Force)) {
         $rel += $f.FullName.Substring($root.Length + 1)
     }

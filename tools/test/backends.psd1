@@ -16,11 +16,11 @@
             Os            = 'linux'
             Base          = '/var/lib/grindless/bench'
             Suites        = @('server')
-            # Memory ceiling of the transient systemd scope the whole run starts in (gg-linux-run.sh). Size it to the
-            # VM: about RAM minus 1.2 GiB for the OS and sshd. 6500M fits a 7.7 GiB VM; raise it in
-            # backends.local.psd1 (or here, once the VM is final) for a larger one.
-            MemoryMax     = '6500M'
-            MemorySwapMax = '2G'
+            # Memory ceiling of the transient systemd scope the whole run starts in (gg-linux-run.sh). Empty = the VM
+            # sizes it: GG_BENCH_MEMORY_MAX in its /etc/grindless/bench.env (written by gg-vm-bootstrap.sh), else
+            # RAM minus GG_BENCH_RESERVE_MB (1228). Set a value (e.g. '6500M') only to force one from this side.
+            MemoryMax     = ''
+            MemorySwapMax = ''
         }
         # Home bench PC (Windows, PowerShell 5.1). Fallback: docs/testing/fallback.md.
         home  = @{
@@ -37,8 +37,8 @@
             BaseLinux     = '/var/lib/grindless/bench'
             BaseWindows   = 'D:\GregtechGrindless'
             Suites        = @('server', 'client', 'both')
-            MemoryMax     = '6500M'
-            MemorySwapMax = '2G'
+            MemoryMax     = ''
+            MemorySwapMax = ''
         }
     }
 }
