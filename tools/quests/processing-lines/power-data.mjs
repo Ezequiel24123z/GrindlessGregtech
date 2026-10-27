@@ -96,6 +96,7 @@ export default gate({
     ['luvNaq', 'luvSolar', 'luvFusion'],
     ['luvIo', 'luvTether', 'luvSI'],
     ['zpmNaq', 'zpmMk2'],
+    ['uvThorium', 'uvLaser', 'uvMuon', 'uvMk3'],
     ['laterDyson'],
     ['gHull', 'gBat', 'gCable', 'gFar', 'gBig'],
     ...(WITH_WIRELESS ? [['gWireless']] : []),
@@ -580,6 +581,47 @@ export default gate({
         }),
       ],
     },
+    // ---------------------------------------------------------------- UV (docs/eras/uv.md, "Power"); figures wait for a bench measurement
+    uvThorium: {
+      name: 'Accelerator-driven reactor',
+      nodes: [
+        E('eqAdr', 0, 0, 'uv_age', '531F95CE48EB6C79'),
+        n('uvAdr', 2.25, 0, M('gtceu:accelerator_driven_reactor'), 'Accelerator-Driven Reactor', {
+          kind: 'info', tier: 'uv', from: ['eqAdr'], sub: 'Thorium assemblies; the spent fuel goes to the pyroprocessing cell',
+          desc: 'A proton beam drives a subcritical thorium core, so it stops the moment the beam does. The lead-bismuth pool is never used up.',
+        }),
+      ],
+    },
+    uvLaser: {
+      name: 'Laser fusion chamber',
+      nodes: [
+        E('eqAlpha', 0, 0, 'uv_age', '11FAD777A18E748F'),
+        n('uvLaserF', 2.25, 0, M('gtceu:laser_fusion_chamber'), 'Laser Fusion Chamber', {
+          kind: 'info', tier: 'uv', from: ['eqAlpha'], sub: 'One capsule a shot; boron or D-He3, no neutrons to speak of',
+          desc: 'The fibre lasers wear out now and then; the draw tower refurbishes them. The helium goes to the network.',
+        }),
+      ],
+    },
+    uvMuon: {
+      name: 'Muon fusion cell',
+      nodes: [
+        E('eqMucf', 0, 0, 'uv_age', '1225702AF9F2A2E4'),
+        n('uvMuonF', 2.25, 0, M('gtceu:muon_fusion_cell'), 'Muon Fusion Cell', {
+          kind: 'info', tier: 'uv', from: ['eqMucf'], sub: 'Liquid D-T; the blanket breeds most of the tritium back',
+          desc: 'An extrapolation: real muon-catalysed fusion never broke even, because each muon is lost too soon. This machine assumes it does.',
+        }),
+      ],
+    },
+    uvMk3: {
+      name: 'Fusion Reactor Mk3',
+      nodes: [
+        E('eqMk3', 0, 0, 'uv_age', '387E0EB82EC57EC4'),
+        n('uvFusion', 2.25, 0, M('gtceu:uv_fusion_reactor'), 'Fusion Reactor Mk3', {
+          kind: 'info', tier: 'uv', from: ['eqMk3'], sub: 'GregTech\'s own; its plasma goes to a turbine',
+          desc: 'It lights plasmas the Mk2 can\'t even start. Feed it through UV energy hatches.',
+        }),
+      ],
+    },
     // ---------------------------------------------------------------- later
     laterDyson: {
       name: 'Dyson sphere',
@@ -673,18 +715,18 @@ export default gate({
         }),
         n('wdynH', 6.75, -2.25, I('gtceu:lv_wireless_dynamo_hatch'), 'Wireless Dynamo Hatch', {
           kind: 'info', from: [network('wtower')], sub: 'Generator multiblocks feed the network through it',
-          desc: 'Energy goes in at any voltage; the cells only limit what comes out.', figs: [P.wamps([2, 4, 16, 64], 'lv', 'zpm')],
+          desc: 'Energy goes in at any voltage; the cells only limit what comes out.', figs: [P.wamps([2, 4, 16, 64], 'lv', 'uv')],
         }),
         n('wdynC', 6.75, -0.75, I('grindless:lv_wireless_dynamo_cover'), 'Wireless Dynamo Cover', {
-          kind: 'info', from: [network('wtower')], sub: 'On a generator or a battery buffer, it feeds the network', figs: [P.wcover(2, 'lv', 'zpm')],
+          kind: 'info', from: [network('wtower')], sub: 'On a generator or a battery buffer, it feeds the network', figs: [P.wcover(2, 'lv', 'uv')],
         }),
         n('wenH', 6.75, 0.75, I('gtceu:lv_wireless_energy_hatch'), 'Wireless Energy Hatch', {
           kind: 'info', from: [network('wtower')], sub: 'Multiblocks draw from the network through it',
-          desc: 'Above the network\'s voltage it gets nothing; shift-right-click it with an empty hand to see why.', figs: [P.wamps([2, 4, 16, 64], 'lv', 'zpm')],
+          desc: 'Above the network\'s voltage it gets nothing; shift-right-click it with an empty hand to see why.', figs: [P.wamps([2, 4, 16, 64], 'lv', 'uv')],
         }),
         n('wenC', 6.75, 2.25, I('grindless:lv_wireless_energy_cover'), 'Wireless Energy Cover', {
           kind: 'info', from: [network('wtower')], sub: 'Single machines draw through it, on any side but the front',
-          desc: 'GTM machines, chargers and battery buffers, not converters or multiblock controllers; shift-right-click with an empty hand for the readout.', figs: [P.wcover(2, 'lv', 'zpm')],
+          desc: 'GTM machines, chargers and battery buffers, not converters or multiblock controllers; shift-right-click with an empty hand for the readout.', figs: [P.wcover(2, 'lv', 'uv')],
         }),
       ],
     } } : {}),
