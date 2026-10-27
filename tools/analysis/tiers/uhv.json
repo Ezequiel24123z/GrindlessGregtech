@@ -1,0 +1,2963 @@
+{
+  "tier": "uhv",
+  "title": "UHV era (docs/eras/uhv.md, Validator)",
+  "extends": "uv",
+  "inheritTargets": true,
+  "dropTargets": [
+    "uhv-circuit-only-mk3"
+  ],
+  "note": "UHV era per docs/eras/uhv.md (\"Validator (-Tier uhv)\", \"Gate to UEV\"), in three substages: uhv (home and Earth orbit), then uhv-mercury (Mercury and its orbit, the swarm) and uhv-proxima (Proxima b and its orbit, the gate), reached by different trips and siblings of each other. Dimension ids come from tables/orbits.json and tables/places.json through the orbit and place tokens (gcyr:mercury is IV's). UV's \"nothing UHV\" circuit check is dropped: UHV recipes use the mainframe. \"Nothing in UHV asks for UEV\" is the era rule with the UEV items as a resource.",
+  "conditions": {
+    "ae2_circumstance_explosion": {
+      "needs": [
+        "minecraft:tnt"
+      ]
+    },
+    "dimension": {
+      "asKeysFor": [
+        "gcyr:luna",
+        "gcyr:mars",
+        "gcyr:venus",
+        "gcyr:mercury",
+        "minecraft:the_end",
+        "minecraft:the_nether",
+        "${orbits}",
+        "${places}"
+      ],
+      "note": "LuV's list plus the Nether: GTM's nether air collector only runs there, and UHV is the first era that needs its neon (positron cartridge, antihydrogen, the gate's open run), so a recipe valid there needs the nether-trip's key (UHV escalation, 2026-10-28)."
+    }
+  },
+  "eraOrder": [
+    "steam",
+    "lv",
+    "mv",
+    "hv",
+    "ev",
+    "ev-mars",
+    "iv",
+    "iv-venus",
+    "iv-mercury",
+    "luv",
+    "luv-orbit",
+    "luv-belt",
+    "luv-io",
+    "luv-europa",
+    "luv-ganymede",
+    "luv-io-orbit",
+    "zpm",
+    "zpm-saturn",
+    "zpm-uranus",
+    "uv",
+    "uv-neptune",
+    "uv-pluto",
+    "uhv",
+    "uhv-mercury",
+    "uhv-proxima",
+    "uev",
+    "uiv",
+    "uxv",
+    "opv",
+    "max"
+  ],
+  "eraSiblings": [
+    [
+      "iv-venus",
+      "iv-mercury"
+    ],
+    [
+      "luv-europa",
+      "luv-ganymede"
+    ],
+    [
+      "uhv-mercury",
+      "uhv-proxima"
+    ]
+  ],
+  "packages": {
+    "A1": {
+      "label": "transcurium",
+      "landedWhen": [
+        "gtceu:high_flux_reactor",
+        "gtceu:transuranium_facility"
+      ]
+    },
+    "A2": {
+      "label": "nuclear clock lab and crystal growth furnace",
+      "landedWhen": [
+        "gtceu:nuclear_clock_lab",
+        "gtceu:crystal_growth_furnace"
+      ]
+    },
+    "A3": {
+      "label": "ultrapure water plant and betavoltaic fab",
+      "landedWhen": [
+        "gtceu:ultrapure_water_plant"
+      ]
+    },
+    "A4": {
+      "label": "MBE reactor and photonic foundry",
+      "landedWhen": [
+        "gtceu:photonic_foundry"
+      ]
+    },
+    "A5": {
+      "label": "SiC device fab and solar array fab",
+      "landedWhen": [
+        "gtceu:sic_device_fab"
+      ]
+    },
+    "A6": {
+      "label": "positron accumulator and Casimir array",
+      "landedWhen": [
+        "gtceu:casimir_array"
+      ]
+    },
+    "A7": {
+      "label": "PBO plant, tether ribbon works and the space elevator",
+      "landedWhen": [
+        "gtceu:pbo_plant"
+      ]
+    },
+    "A8": {
+      "label": "spark plasma sinterer and the ICAN motor",
+      "landedWhen": [
+        "gtceu:spark_plasma_sinterer",
+        "grindless:ican_rocket_motor"
+      ]
+    },
+    "A9": {
+      "label": "the UHV network",
+      "landedWhen": [
+        "grindless:uhv_smes_cell"
+      ]
+    },
+    "A10": {
+      "label": "ZBLAN draw tower",
+      "landedWhen": [
+        "gtceu:zblan_draw_tower"
+      ]
+    },
+    "B2": {
+      "label": "Mercury's ground",
+      "landedWhen": [
+        "gtceu:regolith_excavator"
+      ]
+    },
+    "B3": {
+      "label": "the swarm",
+      "landedWhen": [
+        "gtceu:swarm_control_station"
+      ]
+    },
+    "B4": {
+      "label": "Proxima life",
+      "landedWhen": [
+        "gtceu:xenobiochem_plant"
+      ]
+    },
+    "B5": {
+      "label": "Proxima ground",
+      "landedWhen": [
+        "gtceu:cold_trap_drill",
+        "gtceu:biomining_heap"
+      ]
+    },
+    "B6": {
+      "label": "wetware (organoid array)",
+      "landedWhen": [
+        "gtceu:organoid_array"
+      ]
+    },
+    "B7": {
+      "label": "the gate and the edge",
+      "landedWhen": [
+        "gtceu:warp_gate",
+        "gtceu:baseline_astrometer"
+      ]
+    }
+  },
+  "machinesFromRegistry": [
+    {
+      "prefix": "gtceu:uhv_",
+      "maxEUt": 2097152,
+      "needs": [
+        "eu:uhv"
+      ],
+      "excludeTypes": [
+        "gtceu:dummy",
+        "gtceu:steam_turbine",
+        "gtceu:combustion_generator",
+        "gtceu:gas_turbine"
+      ]
+    }
+  ],
+  "machines": [
+    {
+      "machine": "gtceu:high_flux_reactor",
+      "types": [
+        "gtceu:high_flux_irradiation"
+      ],
+      "energy": {
+        "voltage": 2097152
+      },
+      "needs": [
+        "eu:uhv"
+      ],
+      "partsFromStructure": true,
+      "partAbilities": {
+        "energy_input": [
+          "gtceu:uv_energy_input_hatch",
+          "gtceu:uv_energy_input_hatch_4a",
+          "gtceu:uv_energy_input_hatch_16a",
+          "gtceu:uv_wireless_energy_hatch",
+          "gtceu:uv_wireless_energy_hatch_4a",
+          "gtceu:uv_wireless_energy_hatch_16a",
+          "gtceu:uv_wireless_energy_hatch_64a",
+          "gtceu:uhv_energy_input_hatch",
+          "gtceu:uhv_energy_input_hatch_4a",
+          "gtceu:uhv_energy_input_hatch_16a",
+          "gtceu:uhv_wireless_energy_hatch",
+          "gtceu:uhv_wireless_energy_hatch_4a",
+          "gtceu:uhv_wireless_energy_hatch_16a",
+          "gtceu:uhv_wireless_energy_hatch_64a"
+        ]
+      },
+      "package": "A1",
+      "note": "Machine 1: the HFIR (transcurium targets, nickel-63, U-233 drivers)."
+    },
+    {
+      "id": "gtceu:high_flux_reactor@uv2",
+      "machine": "gtceu:high_flux_reactor",
+      "types": [
+        "gtceu:high_flux_irradiation"
+      ],
+      "energy": {
+        "voltage": 524288,
+        "hatches": 2
+      },
+      "needs": [
+        "eu:uv"
+      ],
+      "partsFromStructure": true,
+      "partAbilities": {
+        "energy_input": [
+          "gtceu:uv_energy_input_hatch",
+          "gtceu:uv_energy_input_hatch_4a",
+          "gtceu:uv_energy_input_hatch_16a",
+          "gtceu:uv_wireless_energy_hatch",
+          "gtceu:uv_wireless_energy_hatch_4a",
+          "gtceu:uv_wireless_energy_hatch_16a",
+          "gtceu:uv_wireless_energy_hatch_64a"
+        ]
+      },
+      "package": "A1",
+      "note": "Before the jump (uhv.md, the wireless tier): two UV hatches give UHV voltage (GTM 7.5.3's two-hatch rule), so the UHV recipes run on the UV grid until the UHV cells."
+    },
+    {
+      "machine": "gtceu:transuranium_facility",
+      "types": [
+        "gtceu:transuranium_processing"
+      ],
+      "energy": {
+        "voltage": 2097152
+      },
+      "needs": [
+        "eu:uhv"
+      ],
+      "partsFromStructure": true,
+      "partAbilities": {
+        "energy_input": [
+          "gtceu:uv_energy_input_hatch",
+          "gtceu:uv_energy_input_hatch_4a",
+          "gtceu:uv_energy_input_hatch_16a",
+          "gtceu:uv_wireless_energy_hatch",
+          "gtceu:uv_wireless_energy_hatch_4a",
+          "gtceu:uv_wireless_energy_hatch_16a",
+          "gtceu:uv_wireless_energy_hatch_64a",
+          "gtceu:uhv_energy_input_hatch",
+          "gtceu:uhv_energy_input_hatch_4a",
+          "gtceu:uhv_energy_input_hatch_16a",
+          "gtceu:uhv_wireless_energy_hatch",
+          "gtceu:uhv_wireless_energy_hatch_4a",
+          "gtceu:uhv_wireless_energy_hatch_16a",
+          "gtceu:uhv_wireless_energy_hatch_64a"
+        ]
+      },
+      "package": "A1",
+      "note": "Machine 2: HDEHP separation of Bk-249 and Cf-252 and the thorium-229 decay store."
+    },
+    {
+      "id": "gtceu:transuranium_facility@uv2",
+      "machine": "gtceu:transuranium_facility",
+      "types": [
+        "gtceu:transuranium_processing"
+      ],
+      "energy": {
+        "voltage": 524288,
+        "hatches": 2
+      },
+      "needs": [
+        "eu:uv"
+      ],
+      "partsFromStructure": true,
+      "partAbilities": {
+        "energy_input": [
+          "gtceu:uv_energy_input_hatch",
+          "gtceu:uv_energy_input_hatch_4a",
+          "gtceu:uv_energy_input_hatch_16a",
+          "gtceu:uv_wireless_energy_hatch",
+          "gtceu:uv_wireless_energy_hatch_4a",
+          "gtceu:uv_wireless_energy_hatch_16a",
+          "gtceu:uv_wireless_energy_hatch_64a"
+        ]
+      },
+      "package": "A1",
+      "note": "Before the jump (uhv.md, the wireless tier): two UV hatches give UHV voltage (GTM 7.5.3's two-hatch rule), so the UHV recipes run on the UV grid until the UHV cells."
+    },
+    {
+      "machine": "gtceu:nuclear_clock_lab",
+      "types": [
+        "gtceu:nuclear_clock"
+      ],
+      "energy": {
+        "voltage": 2097152
+      },
+      "needs": [
+        "eu:uhv"
+      ],
+      "partsFromStructure": true,
+      "partAbilities": {
+        "energy_input": [
+          "gtceu:uv_energy_input_hatch",
+          "gtceu:uv_energy_input_hatch_4a",
+          "gtceu:uv_energy_input_hatch_16a",
+          "gtceu:uv_wireless_energy_hatch",
+          "gtceu:uv_wireless_energy_hatch_4a",
+          "gtceu:uv_wireless_energy_hatch_16a",
+          "gtceu:uv_wireless_energy_hatch_64a",
+          "gtceu:uhv_energy_input_hatch",
+          "gtceu:uhv_energy_input_hatch_4a",
+          "gtceu:uhv_energy_input_hatch_16a",
+          "gtceu:uhv_wireless_energy_hatch",
+          "gtceu:uhv_wireless_energy_hatch_4a",
+          "gtceu:uhv_wireless_energy_hatch_16a",
+          "gtceu:uhv_wireless_energy_hatch_64a"
+        ]
+      },
+      "package": "A2",
+      "note": "Machine 3: the nuclear clock."
+    },
+    {
+      "id": "gtceu:nuclear_clock_lab@uv2",
+      "machine": "gtceu:nuclear_clock_lab",
+      "types": [
+        "gtceu:nuclear_clock"
+      ],
+      "energy": {
+        "voltage": 524288,
+        "hatches": 2
+      },
+      "needs": [
+        "eu:uv"
+      ],
+      "partsFromStructure": true,
+      "partAbilities": {
+        "energy_input": [
+          "gtceu:uv_energy_input_hatch",
+          "gtceu:uv_energy_input_hatch_4a",
+          "gtceu:uv_energy_input_hatch_16a",
+          "gtceu:uv_wireless_energy_hatch",
+          "gtceu:uv_wireless_energy_hatch_4a",
+          "gtceu:uv_wireless_energy_hatch_16a",
+          "gtceu:uv_wireless_energy_hatch_64a"
+        ]
+      },
+      "package": "A2",
+      "note": "Before the jump (uhv.md, the wireless tier): two UV hatches give UHV voltage (GTM 7.5.3's two-hatch rule), so the UHV recipes run on the UV grid until the UHV cells."
+    },
+    {
+      "machine": "gtceu:crystal_growth_furnace",
+      "types": [
+        "gtceu:crystal_growth"
+      ],
+      "energy": {
+        "voltage": 2097152
+      },
+      "needs": [
+        "eu:uhv"
+      ],
+      "partsFromStructure": true,
+      "partAbilities": {
+        "energy_input": [
+          "gtceu:uv_energy_input_hatch",
+          "gtceu:uv_energy_input_hatch_4a",
+          "gtceu:uv_energy_input_hatch_16a",
+          "gtceu:uv_wireless_energy_hatch",
+          "gtceu:uv_wireless_energy_hatch_4a",
+          "gtceu:uv_wireless_energy_hatch_16a",
+          "gtceu:uv_wireless_energy_hatch_64a",
+          "gtceu:uhv_energy_input_hatch",
+          "gtceu:uhv_energy_input_hatch_4a",
+          "gtceu:uhv_energy_input_hatch_16a",
+          "gtceu:uhv_wireless_energy_hatch",
+          "gtceu:uhv_wireless_energy_hatch_4a",
+          "gtceu:uhv_wireless_energy_hatch_16a",
+          "gtceu:uhv_wireless_energy_hatch_64a"
+        ]
+      },
+      "package": "A2",
+      "note": "Machine 4: the iridium-crucible boules."
+    },
+    {
+      "id": "gtceu:crystal_growth_furnace@uv2",
+      "machine": "gtceu:crystal_growth_furnace",
+      "types": [
+        "gtceu:crystal_growth"
+      ],
+      "energy": {
+        "voltage": 524288,
+        "hatches": 2
+      },
+      "needs": [
+        "eu:uv"
+      ],
+      "partsFromStructure": true,
+      "partAbilities": {
+        "energy_input": [
+          "gtceu:uv_energy_input_hatch",
+          "gtceu:uv_energy_input_hatch_4a",
+          "gtceu:uv_energy_input_hatch_16a",
+          "gtceu:uv_wireless_energy_hatch",
+          "gtceu:uv_wireless_energy_hatch_4a",
+          "gtceu:uv_wireless_energy_hatch_16a",
+          "gtceu:uv_wireless_energy_hatch_64a"
+        ]
+      },
+      "package": "A2",
+      "note": "Before the jump (uhv.md, the wireless tier): two UV hatches give UHV voltage (GTM 7.5.3's two-hatch rule), so the UHV recipes run on the UV grid until the UHV cells."
+    },
+    {
+      "machine": "gtceu:ultrapure_water_plant",
+      "types": [
+        "gtceu:ultrapure_water"
+      ],
+      "energy": {
+        "voltage": 2097152
+      },
+      "needs": [
+        "eu:uhv"
+      ],
+      "partsFromStructure": true,
+      "partAbilities": {
+        "energy_input": [
+          "gtceu:uv_energy_input_hatch",
+          "gtceu:uv_energy_input_hatch_4a",
+          "gtceu:uv_energy_input_hatch_16a",
+          "gtceu:uv_wireless_energy_hatch",
+          "gtceu:uv_wireless_energy_hatch_4a",
+          "gtceu:uv_wireless_energy_hatch_16a",
+          "gtceu:uv_wireless_energy_hatch_64a",
+          "gtceu:uhv_energy_input_hatch",
+          "gtceu:uhv_energy_input_hatch_4a",
+          "gtceu:uhv_energy_input_hatch_16a",
+          "gtceu:uhv_wireless_energy_hatch",
+          "gtceu:uhv_wireless_energy_hatch_4a",
+          "gtceu:uhv_wireless_energy_hatch_16a",
+          "gtceu:uhv_wireless_energy_hatch_64a"
+        ]
+      },
+      "package": "A3",
+      "note": "Machine 10: ultrapure water."
+    },
+    {
+      "id": "gtceu:ultrapure_water_plant@uv2",
+      "machine": "gtceu:ultrapure_water_plant",
+      "types": [
+        "gtceu:ultrapure_water"
+      ],
+      "energy": {
+        "voltage": 524288,
+        "hatches": 2
+      },
+      "needs": [
+        "eu:uv"
+      ],
+      "partsFromStructure": true,
+      "partAbilities": {
+        "energy_input": [
+          "gtceu:uv_energy_input_hatch",
+          "gtceu:uv_energy_input_hatch_4a",
+          "gtceu:uv_energy_input_hatch_16a",
+          "gtceu:uv_wireless_energy_hatch",
+          "gtceu:uv_wireless_energy_hatch_4a",
+          "gtceu:uv_wireless_energy_hatch_16a",
+          "gtceu:uv_wireless_energy_hatch_64a"
+        ]
+      },
+      "package": "A3",
+      "note": "Before the jump (uhv.md, the wireless tier): two UV hatches give UHV voltage (GTM 7.5.3's two-hatch rule), so the UHV recipes run on the UV grid until the UHV cells."
+    },
+    {
+      "machine": "gtceu:betavoltaic_fab",
+      "types": [
+        "gtceu:betavoltaic"
+      ],
+      "energy": {
+        "voltage": 2097152
+      },
+      "needs": [
+        "eu:uhv"
+      ],
+      "partsFromStructure": true,
+      "partAbilities": {
+        "energy_input": [
+          "gtceu:uv_energy_input_hatch",
+          "gtceu:uv_energy_input_hatch_4a",
+          "gtceu:uv_energy_input_hatch_16a",
+          "gtceu:uv_wireless_energy_hatch",
+          "gtceu:uv_wireless_energy_hatch_4a",
+          "gtceu:uv_wireless_energy_hatch_16a",
+          "gtceu:uv_wireless_energy_hatch_64a",
+          "gtceu:uhv_energy_input_hatch",
+          "gtceu:uhv_energy_input_hatch_4a",
+          "gtceu:uhv_energy_input_hatch_16a",
+          "gtceu:uhv_wireless_energy_hatch",
+          "gtceu:uhv_wireless_energy_hatch_4a",
+          "gtceu:uhv_wireless_energy_hatch_16a",
+          "gtceu:uhv_wireless_energy_hatch_64a"
+        ]
+      },
+      "package": "A3",
+      "note": "Machine 9: the nickel-63 betavoltaic cell."
+    },
+    {
+      "id": "gtceu:betavoltaic_fab@uv2",
+      "machine": "gtceu:betavoltaic_fab",
+      "types": [
+        "gtceu:betavoltaic"
+      ],
+      "energy": {
+        "voltage": 524288,
+        "hatches": 2
+      },
+      "needs": [
+        "eu:uv"
+      ],
+      "partsFromStructure": true,
+      "partAbilities": {
+        "energy_input": [
+          "gtceu:uv_energy_input_hatch",
+          "gtceu:uv_energy_input_hatch_4a",
+          "gtceu:uv_energy_input_hatch_16a",
+          "gtceu:uv_wireless_energy_hatch",
+          "gtceu:uv_wireless_energy_hatch_4a",
+          "gtceu:uv_wireless_energy_hatch_16a",
+          "gtceu:uv_wireless_energy_hatch_64a"
+        ]
+      },
+      "package": "A3",
+      "note": "Before the jump (uhv.md, the wireless tier): two UV hatches give UHV voltage (GTM 7.5.3's two-hatch rule), so the UHV recipes run on the UV grid until the UHV cells."
+    },
+    {
+      "machine": "gtceu:mbe_reactor",
+      "types": [
+        "gtceu:molecular_beam_epitaxy"
+      ],
+      "energy": {
+        "voltage": 2097152
+      },
+      "needs": [
+        "eu:uhv"
+      ],
+      "partsFromStructure": true,
+      "partAbilities": {
+        "energy_input": [
+          "gtceu:uv_energy_input_hatch",
+          "gtceu:uv_energy_input_hatch_4a",
+          "gtceu:uv_energy_input_hatch_16a",
+          "gtceu:uv_wireless_energy_hatch",
+          "gtceu:uv_wireless_energy_hatch_4a",
+          "gtceu:uv_wireless_energy_hatch_16a",
+          "gtceu:uv_wireless_energy_hatch_64a",
+          "gtceu:uhv_energy_input_hatch",
+          "gtceu:uhv_energy_input_hatch_4a",
+          "gtceu:uhv_energy_input_hatch_16a",
+          "gtceu:uhv_wireless_energy_hatch",
+          "gtceu:uhv_wireless_energy_hatch_4a",
+          "gtceu:uhv_wireless_energy_hatch_16a",
+          "gtceu:uhv_wireless_energy_hatch_64a"
+        ]
+      },
+      "package": "A4",
+      "note": "Machine 5."
+    },
+    {
+      "id": "gtceu:mbe_reactor@uv2",
+      "machine": "gtceu:mbe_reactor",
+      "types": [
+        "gtceu:molecular_beam_epitaxy"
+      ],
+      "energy": {
+        "voltage": 524288,
+        "hatches": 2
+      },
+      "needs": [
+        "eu:uv"
+      ],
+      "partsFromStructure": true,
+      "partAbilities": {
+        "energy_input": [
+          "gtceu:uv_energy_input_hatch",
+          "gtceu:uv_energy_input_hatch_4a",
+          "gtceu:uv_energy_input_hatch_16a",
+          "gtceu:uv_wireless_energy_hatch",
+          "gtceu:uv_wireless_energy_hatch_4a",
+          "gtceu:uv_wireless_energy_hatch_16a",
+          "gtceu:uv_wireless_energy_hatch_64a"
+        ]
+      },
+      "package": "A4",
+      "note": "Before the jump (uhv.md, the wireless tier): two UV hatches give UHV voltage (GTM 7.5.3's two-hatch rule), so the UHV recipes run on the UV grid until the UHV cells."
+    },
+    {
+      "machine": "gtceu:photonic_foundry",
+      "types": [
+        "gtceu:photonic_foundry"
+      ],
+      "energy": {
+        "voltage": 2097152
+      },
+      "needs": [
+        "eu:uhv"
+      ],
+      "partsFromStructure": true,
+      "partAbilities": {
+        "energy_input": [
+          "gtceu:uv_energy_input_hatch",
+          "gtceu:uv_energy_input_hatch_4a",
+          "gtceu:uv_energy_input_hatch_16a",
+          "gtceu:uv_wireless_energy_hatch",
+          "gtceu:uv_wireless_energy_hatch_4a",
+          "gtceu:uv_wireless_energy_hatch_16a",
+          "gtceu:uv_wireless_energy_hatch_64a",
+          "gtceu:uhv_energy_input_hatch",
+          "gtceu:uhv_energy_input_hatch_4a",
+          "gtceu:uhv_energy_input_hatch_16a",
+          "gtceu:uhv_wireless_energy_hatch",
+          "gtceu:uhv_wireless_energy_hatch_4a",
+          "gtceu:uhv_wireless_energy_hatch_16a",
+          "gtceu:uhv_wireless_energy_hatch_64a"
+        ]
+      },
+      "package": "A4",
+      "note": "Machine 6: optical processors and assemblies."
+    },
+    {
+      "id": "gtceu:photonic_foundry@uv2",
+      "machine": "gtceu:photonic_foundry",
+      "types": [
+        "gtceu:photonic_foundry"
+      ],
+      "energy": {
+        "voltage": 524288,
+        "hatches": 2
+      },
+      "needs": [
+        "eu:uv"
+      ],
+      "partsFromStructure": true,
+      "partAbilities": {
+        "energy_input": [
+          "gtceu:uv_energy_input_hatch",
+          "gtceu:uv_energy_input_hatch_4a",
+          "gtceu:uv_energy_input_hatch_16a",
+          "gtceu:uv_wireless_energy_hatch",
+          "gtceu:uv_wireless_energy_hatch_4a",
+          "gtceu:uv_wireless_energy_hatch_16a",
+          "gtceu:uv_wireless_energy_hatch_64a"
+        ]
+      },
+      "package": "A4",
+      "note": "Before the jump (uhv.md, the wireless tier): two UV hatches give UHV voltage (GTM 7.5.3's two-hatch rule), so the UHV recipes run on the UV grid until the UHV cells."
+    },
+    {
+      "machine": "gtceu:sic_device_fab",
+      "types": [
+        "gtceu:silicon_carbide"
+      ],
+      "energy": {
+        "voltage": 2097152
+      },
+      "needs": [
+        "eu:uhv"
+      ],
+      "partsFromStructure": true,
+      "partAbilities": {
+        "energy_input": [
+          "gtceu:uv_energy_input_hatch",
+          "gtceu:uv_energy_input_hatch_4a",
+          "gtceu:uv_energy_input_hatch_16a",
+          "gtceu:uv_wireless_energy_hatch",
+          "gtceu:uv_wireless_energy_hatch_4a",
+          "gtceu:uv_wireless_energy_hatch_16a",
+          "gtceu:uv_wireless_energy_hatch_64a",
+          "gtceu:uhv_energy_input_hatch",
+          "gtceu:uhv_energy_input_hatch_4a",
+          "gtceu:uhv_energy_input_hatch_16a",
+          "gtceu:uhv_wireless_energy_hatch",
+          "gtceu:uhv_wireless_energy_hatch_4a",
+          "gtceu:uhv_wireless_energy_hatch_16a",
+          "gtceu:uhv_wireless_energy_hatch_64a"
+        ]
+      },
+      "package": "A5",
+      "note": "Machine 7."
+    },
+    {
+      "id": "gtceu:sic_device_fab@uv2",
+      "machine": "gtceu:sic_device_fab",
+      "types": [
+        "gtceu:silicon_carbide"
+      ],
+      "energy": {
+        "voltage": 524288,
+        "hatches": 2
+      },
+      "needs": [
+        "eu:uv"
+      ],
+      "partsFromStructure": true,
+      "partAbilities": {
+        "energy_input": [
+          "gtceu:uv_energy_input_hatch",
+          "gtceu:uv_energy_input_hatch_4a",
+          "gtceu:uv_energy_input_hatch_16a",
+          "gtceu:uv_wireless_energy_hatch",
+          "gtceu:uv_wireless_energy_hatch_4a",
+          "gtceu:uv_wireless_energy_hatch_16a",
+          "gtceu:uv_wireless_energy_hatch_64a"
+        ]
+      },
+      "package": "A5",
+      "note": "Before the jump (uhv.md, the wireless tier): two UV hatches give UHV voltage (GTM 7.5.3's two-hatch rule), so the UHV recipes run on the UV grid until the UHV cells."
+    },
+    {
+      "machine": "gtceu:solar_array_fab",
+      "types": [
+        "gtceu:space_photovoltaics"
+      ],
+      "energy": {
+        "voltage": 2097152
+      },
+      "needs": [
+        "eu:uhv"
+      ],
+      "partsFromStructure": true,
+      "partAbilities": {
+        "energy_input": [
+          "gtceu:uv_energy_input_hatch",
+          "gtceu:uv_energy_input_hatch_4a",
+          "gtceu:uv_energy_input_hatch_16a",
+          "gtceu:uv_wireless_energy_hatch",
+          "gtceu:uv_wireless_energy_hatch_4a",
+          "gtceu:uv_wireless_energy_hatch_16a",
+          "gtceu:uv_wireless_energy_hatch_64a",
+          "gtceu:uhv_energy_input_hatch",
+          "gtceu:uhv_energy_input_hatch_4a",
+          "gtceu:uhv_energy_input_hatch_16a",
+          "gtceu:uhv_wireless_energy_hatch",
+          "gtceu:uhv_wireless_energy_hatch_4a",
+          "gtceu:uhv_wireless_energy_hatch_16a",
+          "gtceu:uhv_wireless_energy_hatch_64a"
+        ]
+      },
+      "package": "A5",
+      "note": "Machine 8."
+    },
+    {
+      "id": "gtceu:solar_array_fab@uv2",
+      "machine": "gtceu:solar_array_fab",
+      "types": [
+        "gtceu:space_photovoltaics"
+      ],
+      "energy": {
+        "voltage": 524288,
+        "hatches": 2
+      },
+      "needs": [
+        "eu:uv"
+      ],
+      "partsFromStructure": true,
+      "partAbilities": {
+        "energy_input": [
+          "gtceu:uv_energy_input_hatch",
+          "gtceu:uv_energy_input_hatch_4a",
+          "gtceu:uv_energy_input_hatch_16a",
+          "gtceu:uv_wireless_energy_hatch",
+          "gtceu:uv_wireless_energy_hatch_4a",
+          "gtceu:uv_wireless_energy_hatch_16a",
+          "gtceu:uv_wireless_energy_hatch_64a"
+        ]
+      },
+      "package": "A5",
+      "note": "Before the jump (uhv.md, the wireless tier): two UV hatches give UHV voltage (GTM 7.5.3's two-hatch rule), so the UHV recipes run on the UV grid until the UHV cells."
+    },
+    {
+      "machine": "gtceu:positron_accumulator",
+      "types": [
+        "gtceu:positron_accumulation"
+      ],
+      "energy": {
+        "voltage": 2097152
+      },
+      "needs": [
+        "eu:uhv"
+      ],
+      "partsFromStructure": true,
+      "partAbilities": {
+        "energy_input": [
+          "gtceu:uv_energy_input_hatch",
+          "gtceu:uv_energy_input_hatch_4a",
+          "gtceu:uv_energy_input_hatch_16a",
+          "gtceu:uv_wireless_energy_hatch",
+          "gtceu:uv_wireless_energy_hatch_4a",
+          "gtceu:uv_wireless_energy_hatch_16a",
+          "gtceu:uv_wireless_energy_hatch_64a",
+          "gtceu:uhv_energy_input_hatch",
+          "gtceu:uhv_energy_input_hatch_4a",
+          "gtceu:uhv_energy_input_hatch_16a",
+          "gtceu:uhv_wireless_energy_hatch",
+          "gtceu:uhv_wireless_energy_hatch_4a",
+          "gtceu:uhv_wireless_energy_hatch_16a",
+          "gtceu:uhv_wireless_energy_hatch_64a"
+        ]
+      },
+      "package": "A6",
+      "note": "Machine 13: positron cartridges."
+    },
+    {
+      "id": "gtceu:positron_accumulator@uv2",
+      "machine": "gtceu:positron_accumulator",
+      "types": [
+        "gtceu:positron_accumulation"
+      ],
+      "energy": {
+        "voltage": 524288,
+        "hatches": 2
+      },
+      "needs": [
+        "eu:uv"
+      ],
+      "partsFromStructure": true,
+      "partAbilities": {
+        "energy_input": [
+          "gtceu:uv_energy_input_hatch",
+          "gtceu:uv_energy_input_hatch_4a",
+          "gtceu:uv_energy_input_hatch_16a",
+          "gtceu:uv_wireless_energy_hatch",
+          "gtceu:uv_wireless_energy_hatch_4a",
+          "gtceu:uv_wireless_energy_hatch_16a",
+          "gtceu:uv_wireless_energy_hatch_64a"
+        ]
+      },
+      "package": "A6",
+      "note": "Before the jump (uhv.md, the wireless tier): two UV hatches give UHV voltage (GTM 7.5.3's two-hatch rule), so the UHV recipes run on the UV grid until the UHV cells."
+    },
+    {
+      "machine": "gtceu:casimir_array",
+      "types": [
+        "gtceu:casimir_cavity"
+      ],
+      "energy": {
+        "voltage": 2097152
+      },
+      "needs": [
+        "eu:uhv"
+      ],
+      "partsFromStructure": true,
+      "partAbilities": {
+        "energy_input": [
+          "gtceu:uv_energy_input_hatch",
+          "gtceu:uv_energy_input_hatch_4a",
+          "gtceu:uv_energy_input_hatch_16a",
+          "gtceu:uv_wireless_energy_hatch",
+          "gtceu:uv_wireless_energy_hatch_4a",
+          "gtceu:uv_wireless_energy_hatch_16a",
+          "gtceu:uv_wireless_energy_hatch_64a",
+          "gtceu:uhv_energy_input_hatch",
+          "gtceu:uhv_energy_input_hatch_4a",
+          "gtceu:uhv_energy_input_hatch_16a",
+          "gtceu:uhv_wireless_energy_hatch",
+          "gtceu:uhv_wireless_energy_hatch_4a",
+          "gtceu:uhv_wireless_energy_hatch_16a",
+          "gtceu:uhv_wireless_energy_hatch_64a"
+        ]
+      },
+      "package": "A6",
+      "note": "Machine 17: exotic matter (fiction); Earth orbit only."
+    },
+    {
+      "id": "gtceu:casimir_array@uv2",
+      "machine": "gtceu:casimir_array",
+      "types": [
+        "gtceu:casimir_cavity"
+      ],
+      "energy": {
+        "voltage": 524288,
+        "hatches": 2
+      },
+      "needs": [
+        "eu:uv"
+      ],
+      "partsFromStructure": true,
+      "partAbilities": {
+        "energy_input": [
+          "gtceu:uv_energy_input_hatch",
+          "gtceu:uv_energy_input_hatch_4a",
+          "gtceu:uv_energy_input_hatch_16a",
+          "gtceu:uv_wireless_energy_hatch",
+          "gtceu:uv_wireless_energy_hatch_4a",
+          "gtceu:uv_wireless_energy_hatch_16a",
+          "gtceu:uv_wireless_energy_hatch_64a"
+        ]
+      },
+      "package": "A6",
+      "note": "Before the jump (uhv.md, the wireless tier): two UV hatches give UHV voltage (GTM 7.5.3's two-hatch rule), so the UHV recipes run on the UV grid until the UHV cells."
+    },
+    {
+      "machine": "gtceu:pbo_plant",
+      "types": [
+        "gtceu:pbo_synthesis"
+      ],
+      "energy": {
+        "voltage": 2097152
+      },
+      "needs": [
+        "eu:uhv"
+      ],
+      "partsFromStructure": true,
+      "partAbilities": {
+        "energy_input": [
+          "gtceu:uv_energy_input_hatch",
+          "gtceu:uv_energy_input_hatch_4a",
+          "gtceu:uv_energy_input_hatch_16a",
+          "gtceu:uv_wireless_energy_hatch",
+          "gtceu:uv_wireless_energy_hatch_4a",
+          "gtceu:uv_wireless_energy_hatch_16a",
+          "gtceu:uv_wireless_energy_hatch_64a",
+          "gtceu:uhv_energy_input_hatch",
+          "gtceu:uhv_energy_input_hatch_4a",
+          "gtceu:uhv_energy_input_hatch_16a",
+          "gtceu:uhv_wireless_energy_hatch",
+          "gtceu:uhv_wireless_energy_hatch_4a",
+          "gtceu:uhv_wireless_energy_hatch_16a",
+          "gtceu:uhv_wireless_energy_hatch_64a"
+        ]
+      },
+      "package": "A7",
+      "note": "Machine 14."
+    },
+    {
+      "id": "gtceu:pbo_plant@uv2",
+      "machine": "gtceu:pbo_plant",
+      "types": [
+        "gtceu:pbo_synthesis"
+      ],
+      "energy": {
+        "voltage": 524288,
+        "hatches": 2
+      },
+      "needs": [
+        "eu:uv"
+      ],
+      "partsFromStructure": true,
+      "partAbilities": {
+        "energy_input": [
+          "gtceu:uv_energy_input_hatch",
+          "gtceu:uv_energy_input_hatch_4a",
+          "gtceu:uv_energy_input_hatch_16a",
+          "gtceu:uv_wireless_energy_hatch",
+          "gtceu:uv_wireless_energy_hatch_4a",
+          "gtceu:uv_wireless_energy_hatch_16a",
+          "gtceu:uv_wireless_energy_hatch_64a"
+        ]
+      },
+      "package": "A7",
+      "note": "Before the jump (uhv.md, the wireless tier): two UV hatches give UHV voltage (GTM 7.5.3's two-hatch rule), so the UHV recipes run on the UV grid until the UHV cells."
+    },
+    {
+      "machine": "gtceu:tether_ribbon_works",
+      "types": [
+        "gtceu:tether_ribbon"
+      ],
+      "energy": {
+        "voltage": 2097152
+      },
+      "needs": [
+        "eu:uhv"
+      ],
+      "partsFromStructure": true,
+      "partAbilities": {
+        "energy_input": [
+          "gtceu:uv_energy_input_hatch",
+          "gtceu:uv_energy_input_hatch_4a",
+          "gtceu:uv_energy_input_hatch_16a",
+          "gtceu:uv_wireless_energy_hatch",
+          "gtceu:uv_wireless_energy_hatch_4a",
+          "gtceu:uv_wireless_energy_hatch_16a",
+          "gtceu:uv_wireless_energy_hatch_64a",
+          "gtceu:uhv_energy_input_hatch",
+          "gtceu:uhv_energy_input_hatch_4a",
+          "gtceu:uhv_energy_input_hatch_16a",
+          "gtceu:uhv_wireless_energy_hatch",
+          "gtceu:uhv_wireless_energy_hatch_4a",
+          "gtceu:uhv_wireless_energy_hatch_16a",
+          "gtceu:uhv_wireless_energy_hatch_64a"
+        ]
+      },
+      "package": "A7",
+      "note": "Machine 15."
+    },
+    {
+      "id": "gtceu:tether_ribbon_works@uv2",
+      "machine": "gtceu:tether_ribbon_works",
+      "types": [
+        "gtceu:tether_ribbon"
+      ],
+      "energy": {
+        "voltage": 524288,
+        "hatches": 2
+      },
+      "needs": [
+        "eu:uv"
+      ],
+      "partsFromStructure": true,
+      "partAbilities": {
+        "energy_input": [
+          "gtceu:uv_energy_input_hatch",
+          "gtceu:uv_energy_input_hatch_4a",
+          "gtceu:uv_energy_input_hatch_16a",
+          "gtceu:uv_wireless_energy_hatch",
+          "gtceu:uv_wireless_energy_hatch_4a",
+          "gtceu:uv_wireless_energy_hatch_16a",
+          "gtceu:uv_wireless_energy_hatch_64a"
+        ]
+      },
+      "package": "A7",
+      "note": "Before the jump (uhv.md, the wireless tier): two UV hatches give UHV voltage (GTM 7.5.3's two-hatch rule), so the UHV recipes run on the UV grid until the UHV cells."
+    },
+    {
+      "machine": "gtceu:spark_plasma_sinterer",
+      "types": [
+        "gtceu:spark_plasma_sintering"
+      ],
+      "energy": {
+        "voltage": 2097152
+      },
+      "needs": [
+        "eu:uhv"
+      ],
+      "partsFromStructure": true,
+      "partAbilities": {
+        "energy_input": [
+          "gtceu:uv_energy_input_hatch",
+          "gtceu:uv_energy_input_hatch_4a",
+          "gtceu:uv_energy_input_hatch_16a",
+          "gtceu:uv_wireless_energy_hatch",
+          "gtceu:uv_wireless_energy_hatch_4a",
+          "gtceu:uv_wireless_energy_hatch_16a",
+          "gtceu:uv_wireless_energy_hatch_64a",
+          "gtceu:uhv_energy_input_hatch",
+          "gtceu:uhv_energy_input_hatch_4a",
+          "gtceu:uhv_energy_input_hatch_16a",
+          "gtceu:uhv_wireless_energy_hatch",
+          "gtceu:uhv_wireless_energy_hatch_4a",
+          "gtceu:uhv_wireless_energy_hatch_16a",
+          "gtceu:uhv_wireless_energy_hatch_64a"
+        ]
+      },
+      "package": "A8",
+      "note": "Machine 16."
+    },
+    {
+      "id": "gtceu:spark_plasma_sinterer@uv2",
+      "machine": "gtceu:spark_plasma_sinterer",
+      "types": [
+        "gtceu:spark_plasma_sintering"
+      ],
+      "energy": {
+        "voltage": 524288,
+        "hatches": 2
+      },
+      "needs": [
+        "eu:uv"
+      ],
+      "partsFromStructure": true,
+      "partAbilities": {
+        "energy_input": [
+          "gtceu:uv_energy_input_hatch",
+          "gtceu:uv_energy_input_hatch_4a",
+          "gtceu:uv_energy_input_hatch_16a",
+          "gtceu:uv_wireless_energy_hatch",
+          "gtceu:uv_wireless_energy_hatch_4a",
+          "gtceu:uv_wireless_energy_hatch_16a",
+          "gtceu:uv_wireless_energy_hatch_64a"
+        ]
+      },
+      "package": "A8",
+      "note": "Before the jump (uhv.md, the wireless tier): two UV hatches give UHV voltage (GTM 7.5.3's two-hatch rule), so the UHV recipes run on the UV grid until the UHV cells."
+    },
+    {
+      "machine": "gtceu:zblan_draw_tower",
+      "types": [
+        "gtceu:zblan_draw"
+      ],
+      "energy": {
+        "voltage": 2097152
+      },
+      "needs": [
+        "eu:uhv"
+      ],
+      "partsFromStructure": true,
+      "partAbilities": {
+        "energy_input": [
+          "gtceu:uv_energy_input_hatch",
+          "gtceu:uv_energy_input_hatch_4a",
+          "gtceu:uv_energy_input_hatch_16a",
+          "gtceu:uv_wireless_energy_hatch",
+          "gtceu:uv_wireless_energy_hatch_4a",
+          "gtceu:uv_wireless_energy_hatch_16a",
+          "gtceu:uv_wireless_energy_hatch_64a",
+          "gtceu:uhv_energy_input_hatch",
+          "gtceu:uhv_energy_input_hatch_4a",
+          "gtceu:uhv_energy_input_hatch_16a",
+          "gtceu:uhv_wireless_energy_hatch",
+          "gtceu:uhv_wireless_energy_hatch_4a",
+          "gtceu:uhv_wireless_energy_hatch_16a",
+          "gtceu:uhv_wireless_energy_hatch_64a"
+        ]
+      },
+      "package": "A10",
+      "note": "Machine 19: ZBLAN fibre, Earth orbit only (site-uhv-earth-orbit)."
+    },
+    {
+      "id": "gtceu:zblan_draw_tower@uv2",
+      "machine": "gtceu:zblan_draw_tower",
+      "types": [
+        "gtceu:zblan_draw"
+      ],
+      "energy": {
+        "voltage": 524288,
+        "hatches": 2
+      },
+      "needs": [
+        "eu:uv"
+      ],
+      "partsFromStructure": true,
+      "partAbilities": {
+        "energy_input": [
+          "gtceu:uv_energy_input_hatch",
+          "gtceu:uv_energy_input_hatch_4a",
+          "gtceu:uv_energy_input_hatch_16a",
+          "gtceu:uv_wireless_energy_hatch",
+          "gtceu:uv_wireless_energy_hatch_4a",
+          "gtceu:uv_wireless_energy_hatch_16a",
+          "gtceu:uv_wireless_energy_hatch_64a"
+        ]
+      },
+      "package": "A10",
+      "note": "Before the jump (uhv.md, the wireless tier): two UV hatches give UHV voltage (GTM 7.5.3's two-hatch rule), so the UHV recipes run on the UV grid until the UHV cells."
+    },
+    {
+      "machine": "gtceu:regolith_excavator",
+      "types": [
+        "gtceu:regolith_excavation"
+      ],
+      "energy": {
+        "voltage": 2097152
+      },
+      "needs": [
+        "eu:uhv"
+      ],
+      "partsFromStructure": true,
+      "partAbilities": {
+        "energy_input": [
+          "gtceu:uv_energy_input_hatch",
+          "gtceu:uv_energy_input_hatch_4a",
+          "gtceu:uv_energy_input_hatch_16a",
+          "gtceu:uv_wireless_energy_hatch",
+          "gtceu:uv_wireless_energy_hatch_4a",
+          "gtceu:uv_wireless_energy_hatch_16a",
+          "gtceu:uv_wireless_energy_hatch_64a",
+          "gtceu:uhv_energy_input_hatch",
+          "gtceu:uhv_energy_input_hatch_4a",
+          "gtceu:uhv_energy_input_hatch_16a",
+          "gtceu:uhv_wireless_energy_hatch",
+          "gtceu:uhv_wireless_energy_hatch_4a",
+          "gtceu:uhv_wireless_energy_hatch_16a",
+          "gtceu:uhv_wireless_energy_hatch_64a"
+        ]
+      },
+      "package": "B2",
+      "note": "Machine 20: Mercury regolith (Mercury surface)."
+    },
+    {
+      "id": "gtceu:regolith_excavator@uv2",
+      "machine": "gtceu:regolith_excavator",
+      "types": [
+        "gtceu:regolith_excavation"
+      ],
+      "energy": {
+        "voltage": 524288,
+        "hatches": 2
+      },
+      "needs": [
+        "eu:uv"
+      ],
+      "partsFromStructure": true,
+      "partAbilities": {
+        "energy_input": [
+          "gtceu:uv_energy_input_hatch",
+          "gtceu:uv_energy_input_hatch_4a",
+          "gtceu:uv_energy_input_hatch_16a",
+          "gtceu:uv_wireless_energy_hatch",
+          "gtceu:uv_wireless_energy_hatch_4a",
+          "gtceu:uv_wireless_energy_hatch_16a",
+          "gtceu:uv_wireless_energy_hatch_64a"
+        ]
+      },
+      "package": "B2",
+      "note": "Before the jump (uhv.md, the wireless tier): two UV hatches give UHV voltage (GTM 7.5.3's two-hatch rule), so the UHV recipes run on the UV grid until the UHV cells."
+    },
+    {
+      "machine": "gtceu:solar_vapour_furnace",
+      "types": [
+        "gtceu:solar_vaporisation"
+      ],
+      "energy": {
+        "voltage": 2097152
+      },
+      "needs": [
+        "eu:uhv"
+      ],
+      "partsFromStructure": true,
+      "partAbilities": {
+        "energy_input": [
+          "gtceu:uv_energy_input_hatch",
+          "gtceu:uv_energy_input_hatch_4a",
+          "gtceu:uv_energy_input_hatch_16a",
+          "gtceu:uv_wireless_energy_hatch",
+          "gtceu:uv_wireless_energy_hatch_4a",
+          "gtceu:uv_wireless_energy_hatch_16a",
+          "gtceu:uv_wireless_energy_hatch_64a",
+          "gtceu:uhv_energy_input_hatch",
+          "gtceu:uhv_energy_input_hatch_4a",
+          "gtceu:uhv_energy_input_hatch_16a",
+          "gtceu:uhv_wireless_energy_hatch",
+          "gtceu:uhv_wireless_energy_hatch_4a",
+          "gtceu:uhv_wireless_energy_hatch_16a",
+          "gtceu:uhv_wireless_energy_hatch_64a"
+        ]
+      },
+      "package": "B2",
+      "note": "Machine 21: Mercury day side."
+    },
+    {
+      "id": "gtceu:solar_vapour_furnace@uv2",
+      "machine": "gtceu:solar_vapour_furnace",
+      "types": [
+        "gtceu:solar_vaporisation"
+      ],
+      "energy": {
+        "voltage": 524288,
+        "hatches": 2
+      },
+      "needs": [
+        "eu:uv"
+      ],
+      "partsFromStructure": true,
+      "partAbilities": {
+        "energy_input": [
+          "gtceu:uv_energy_input_hatch",
+          "gtceu:uv_energy_input_hatch_4a",
+          "gtceu:uv_energy_input_hatch_16a",
+          "gtceu:uv_wireless_energy_hatch",
+          "gtceu:uv_wireless_energy_hatch_4a",
+          "gtceu:uv_wireless_energy_hatch_16a",
+          "gtceu:uv_wireless_energy_hatch_64a"
+        ]
+      },
+      "package": "B2",
+      "note": "Before the jump (uhv.md, the wireless tier): two UV hatches give UHV voltage (GTM 7.5.3's two-hatch rule), so the UHV recipes run on the UV grid until the UHV cells."
+    },
+    {
+      "machine": "gtceu:swarm_segment_foundry",
+      "types": [
+        "gtceu:swarm_segment"
+      ],
+      "energy": {
+        "voltage": 2097152
+      },
+      "needs": [
+        "eu:uhv"
+      ],
+      "partsFromStructure": true,
+      "partAbilities": {
+        "energy_input": [
+          "gtceu:uv_energy_input_hatch",
+          "gtceu:uv_energy_input_hatch_4a",
+          "gtceu:uv_energy_input_hatch_16a",
+          "gtceu:uv_wireless_energy_hatch",
+          "gtceu:uv_wireless_energy_hatch_4a",
+          "gtceu:uv_wireless_energy_hatch_16a",
+          "gtceu:uv_wireless_energy_hatch_64a",
+          "gtceu:uhv_energy_input_hatch",
+          "gtceu:uhv_energy_input_hatch_4a",
+          "gtceu:uhv_energy_input_hatch_16a",
+          "gtceu:uhv_wireless_energy_hatch",
+          "gtceu:uhv_wireless_energy_hatch_4a",
+          "gtceu:uhv_wireless_energy_hatch_16a",
+          "gtceu:uhv_wireless_energy_hatch_64a"
+        ]
+      },
+      "package": "B3",
+      "note": "Machine 22: swarm segments (Mercury orbit)."
+    },
+    {
+      "id": "gtceu:swarm_segment_foundry@uv2",
+      "machine": "gtceu:swarm_segment_foundry",
+      "types": [
+        "gtceu:swarm_segment"
+      ],
+      "energy": {
+        "voltage": 524288,
+        "hatches": 2
+      },
+      "needs": [
+        "eu:uv"
+      ],
+      "partsFromStructure": true,
+      "partAbilities": {
+        "energy_input": [
+          "gtceu:uv_energy_input_hatch",
+          "gtceu:uv_energy_input_hatch_4a",
+          "gtceu:uv_energy_input_hatch_16a",
+          "gtceu:uv_wireless_energy_hatch",
+          "gtceu:uv_wireless_energy_hatch_4a",
+          "gtceu:uv_wireless_energy_hatch_16a",
+          "gtceu:uv_wireless_energy_hatch_64a"
+        ]
+      },
+      "package": "B3",
+      "note": "Before the jump (uhv.md, the wireless tier): two UV hatches give UHV voltage (GTM 7.5.3's two-hatch rule), so the UHV recipes run on the UV grid until the UHV cells."
+    },
+    {
+      "machine": "gtceu:swarm_control_station",
+      "types": [
+        "gtceu:dyson_swarm"
+      ],
+      "energy": {
+        "voltage": 2097152
+      },
+      "needs": [
+        "eu:uhv"
+      ],
+      "partsFromStructure": true,
+      "partAbilities": {
+        "energy_input": [
+          "gtceu:uv_energy_input_hatch",
+          "gtceu:uv_energy_input_hatch_4a",
+          "gtceu:uv_energy_input_hatch_16a",
+          "gtceu:uv_wireless_energy_hatch",
+          "gtceu:uv_wireless_energy_hatch_4a",
+          "gtceu:uv_wireless_energy_hatch_16a",
+          "gtceu:uv_wireless_energy_hatch_64a",
+          "gtceu:uhv_energy_input_hatch",
+          "gtceu:uhv_energy_input_hatch_4a",
+          "gtceu:uhv_energy_input_hatch_16a",
+          "gtceu:uhv_wireless_energy_hatch",
+          "gtceu:uhv_wireless_energy_hatch_4a",
+          "gtceu:uhv_wireless_energy_hatch_16a",
+          "gtceu:uhv_wireless_energy_hatch_64a"
+        ]
+      },
+      "package": "B3",
+      "note": "Machine 23: the swarm generator (Mercury orbit)."
+    },
+    {
+      "id": "gtceu:swarm_control_station@uv2",
+      "machine": "gtceu:swarm_control_station",
+      "types": [
+        "gtceu:dyson_swarm"
+      ],
+      "energy": {
+        "voltage": 524288,
+        "hatches": 2
+      },
+      "needs": [
+        "eu:uv"
+      ],
+      "partsFromStructure": true,
+      "partAbilities": {
+        "energy_input": [
+          "gtceu:uv_energy_input_hatch",
+          "gtceu:uv_energy_input_hatch_4a",
+          "gtceu:uv_energy_input_hatch_16a",
+          "gtceu:uv_wireless_energy_hatch",
+          "gtceu:uv_wireless_energy_hatch_4a",
+          "gtceu:uv_wireless_energy_hatch_16a",
+          "gtceu:uv_wireless_energy_hatch_64a"
+        ]
+      },
+      "package": "B3",
+      "note": "Before the jump (uhv.md, the wireless tier): two UV hatches give UHV voltage (GTM 7.5.3's two-hatch rule), so the UHV recipes run on the UV grid until the UHV cells."
+    },
+    {
+      "machine": "gtceu:solar_probe_bay",
+      "types": [
+        "gtceu:solar_probe"
+      ],
+      "energy": {
+        "voltage": 2097152
+      },
+      "needs": [
+        "eu:uhv"
+      ],
+      "partsFromStructure": true,
+      "partAbilities": {
+        "energy_input": [
+          "gtceu:uv_energy_input_hatch",
+          "gtceu:uv_energy_input_hatch_4a",
+          "gtceu:uv_energy_input_hatch_16a",
+          "gtceu:uv_wireless_energy_hatch",
+          "gtceu:uv_wireless_energy_hatch_4a",
+          "gtceu:uv_wireless_energy_hatch_16a",
+          "gtceu:uv_wireless_energy_hatch_64a",
+          "gtceu:uhv_energy_input_hatch",
+          "gtceu:uhv_energy_input_hatch_4a",
+          "gtceu:uhv_energy_input_hatch_16a",
+          "gtceu:uhv_wireless_energy_hatch",
+          "gtceu:uhv_wireless_energy_hatch_4a",
+          "gtceu:uhv_wireless_energy_hatch_16a",
+          "gtceu:uhv_wireless_energy_hatch_64a"
+        ]
+      },
+      "package": "B3",
+      "note": "Machine 24: the coronal field map (Mercury orbit)."
+    },
+    {
+      "id": "gtceu:solar_probe_bay@uv2",
+      "machine": "gtceu:solar_probe_bay",
+      "types": [
+        "gtceu:solar_probe"
+      ],
+      "energy": {
+        "voltage": 524288,
+        "hatches": 2
+      },
+      "needs": [
+        "eu:uv"
+      ],
+      "partsFromStructure": true,
+      "partAbilities": {
+        "energy_input": [
+          "gtceu:uv_energy_input_hatch",
+          "gtceu:uv_energy_input_hatch_4a",
+          "gtceu:uv_energy_input_hatch_16a",
+          "gtceu:uv_wireless_energy_hatch",
+          "gtceu:uv_wireless_energy_hatch_4a",
+          "gtceu:uv_wireless_energy_hatch_16a",
+          "gtceu:uv_wireless_energy_hatch_64a"
+        ]
+      },
+      "package": "B3",
+      "note": "Before the jump (uhv.md, the wireless tier): two UV hatches give UHV voltage (GTM 7.5.3's two-hatch rule), so the UHV recipes run on the UV grid until the UHV cells."
+    },
+    {
+      "machine": "gtceu:xenoflora_rover_bay",
+      "types": [
+        "gtceu:xenoflora_rover"
+      ],
+      "energy": {
+        "voltage": 2097152
+      },
+      "needs": [
+        "eu:uhv"
+      ],
+      "partsFromStructure": true,
+      "partAbilities": {
+        "energy_input": [
+          "gtceu:uv_energy_input_hatch",
+          "gtceu:uv_energy_input_hatch_4a",
+          "gtceu:uv_energy_input_hatch_16a",
+          "gtceu:uv_wireless_energy_hatch",
+          "gtceu:uv_wireless_energy_hatch_4a",
+          "gtceu:uv_wireless_energy_hatch_16a",
+          "gtceu:uv_wireless_energy_hatch_64a",
+          "gtceu:uhv_energy_input_hatch",
+          "gtceu:uhv_energy_input_hatch_4a",
+          "gtceu:uhv_energy_input_hatch_16a",
+          "gtceu:uhv_wireless_energy_hatch",
+          "gtceu:uhv_wireless_energy_hatch_4a",
+          "gtceu:uhv_wireless_energy_hatch_16a",
+          "gtceu:uhv_wireless_energy_hatch_64a"
+        ]
+      },
+      "package": "B4",
+      "note": "Machine 26 (Proxima b)."
+    },
+    {
+      "id": "gtceu:xenoflora_rover_bay@uv2",
+      "machine": "gtceu:xenoflora_rover_bay",
+      "types": [
+        "gtceu:xenoflora_rover"
+      ],
+      "energy": {
+        "voltage": 524288,
+        "hatches": 2
+      },
+      "needs": [
+        "eu:uv"
+      ],
+      "partsFromStructure": true,
+      "partAbilities": {
+        "energy_input": [
+          "gtceu:uv_energy_input_hatch",
+          "gtceu:uv_energy_input_hatch_4a",
+          "gtceu:uv_energy_input_hatch_16a",
+          "gtceu:uv_wireless_energy_hatch",
+          "gtceu:uv_wireless_energy_hatch_4a",
+          "gtceu:uv_wireless_energy_hatch_16a",
+          "gtceu:uv_wireless_energy_hatch_64a"
+        ]
+      },
+      "package": "B4",
+      "note": "Before the jump (uhv.md, the wireless tier): two UV hatches give UHV voltage (GTM 7.5.3's two-hatch rule), so the UHV recipes run on the UV grid until the UHV cells."
+    },
+    {
+      "machine": "gtceu:xenobotany_greenhouse",
+      "types": [
+        "gtceu:xenobotany"
+      ],
+      "energy": {
+        "voltage": 2097152
+      },
+      "needs": [
+        "eu:uhv"
+      ],
+      "partsFromStructure": true,
+      "partAbilities": {
+        "energy_input": [
+          "gtceu:uv_energy_input_hatch",
+          "gtceu:uv_energy_input_hatch_4a",
+          "gtceu:uv_energy_input_hatch_16a",
+          "gtceu:uv_wireless_energy_hatch",
+          "gtceu:uv_wireless_energy_hatch_4a",
+          "gtceu:uv_wireless_energy_hatch_16a",
+          "gtceu:uv_wireless_energy_hatch_64a",
+          "gtceu:uhv_energy_input_hatch",
+          "gtceu:uhv_energy_input_hatch_4a",
+          "gtceu:uhv_energy_input_hatch_16a",
+          "gtceu:uhv_wireless_energy_hatch",
+          "gtceu:uhv_wireless_energy_hatch_4a",
+          "gtceu:uhv_wireless_energy_hatch_16a",
+          "gtceu:uhv_wireless_energy_hatch_64a"
+        ]
+      },
+      "package": "B4",
+      "note": "Machine 27 (Proxima b)."
+    },
+    {
+      "id": "gtceu:xenobotany_greenhouse@uv2",
+      "machine": "gtceu:xenobotany_greenhouse",
+      "types": [
+        "gtceu:xenobotany"
+      ],
+      "energy": {
+        "voltage": 524288,
+        "hatches": 2
+      },
+      "needs": [
+        "eu:uv"
+      ],
+      "partsFromStructure": true,
+      "partAbilities": {
+        "energy_input": [
+          "gtceu:uv_energy_input_hatch",
+          "gtceu:uv_energy_input_hatch_4a",
+          "gtceu:uv_energy_input_hatch_16a",
+          "gtceu:uv_wireless_energy_hatch",
+          "gtceu:uv_wireless_energy_hatch_4a",
+          "gtceu:uv_wireless_energy_hatch_16a",
+          "gtceu:uv_wireless_energy_hatch_64a"
+        ]
+      },
+      "package": "B4",
+      "note": "Before the jump (uhv.md, the wireless tier): two UV hatches give UHV voltage (GTM 7.5.3's two-hatch rule), so the UHV recipes run on the UV grid until the UHV cells."
+    },
+    {
+      "machine": "gtceu:xenobiochem_plant",
+      "types": [
+        "gtceu:xenobiochemistry"
+      ],
+      "energy": {
+        "voltage": 2097152
+      },
+      "needs": [
+        "eu:uhv"
+      ],
+      "partsFromStructure": true,
+      "partAbilities": {
+        "energy_input": [
+          "gtceu:uv_energy_input_hatch",
+          "gtceu:uv_energy_input_hatch_4a",
+          "gtceu:uv_energy_input_hatch_16a",
+          "gtceu:uv_wireless_energy_hatch",
+          "gtceu:uv_wireless_energy_hatch_4a",
+          "gtceu:uv_wireless_energy_hatch_16a",
+          "gtceu:uv_wireless_energy_hatch_64a",
+          "gtceu:uhv_energy_input_hatch",
+          "gtceu:uhv_energy_input_hatch_4a",
+          "gtceu:uhv_energy_input_hatch_16a",
+          "gtceu:uhv_wireless_energy_hatch",
+          "gtceu:uhv_wireless_energy_hatch_4a",
+          "gtceu:uhv_wireless_energy_hatch_16a",
+          "gtceu:uhv_wireless_energy_hatch_64a"
+        ]
+      },
+      "package": "B4",
+      "note": "Machine 28 (Proxima b)."
+    },
+    {
+      "id": "gtceu:xenobiochem_plant@uv2",
+      "machine": "gtceu:xenobiochem_plant",
+      "types": [
+        "gtceu:xenobiochemistry"
+      ],
+      "energy": {
+        "voltage": 524288,
+        "hatches": 2
+      },
+      "needs": [
+        "eu:uv"
+      ],
+      "partsFromStructure": true,
+      "partAbilities": {
+        "energy_input": [
+          "gtceu:uv_energy_input_hatch",
+          "gtceu:uv_energy_input_hatch_4a",
+          "gtceu:uv_energy_input_hatch_16a",
+          "gtceu:uv_wireless_energy_hatch",
+          "gtceu:uv_wireless_energy_hatch_4a",
+          "gtceu:uv_wireless_energy_hatch_16a",
+          "gtceu:uv_wireless_energy_hatch_64a"
+        ]
+      },
+      "package": "B4",
+      "note": "Before the jump (uhv.md, the wireless tier): two UV hatches give UHV voltage (GTM 7.5.3's two-hatch rule), so the UHV recipes run on the UV grid until the UHV cells."
+    },
+    {
+      "machine": "gtceu:radiotrophic_vat",
+      "types": [
+        "gtceu:radiotrophic"
+      ],
+      "energy": {
+        "voltage": 2097152
+      },
+      "needs": [
+        "eu:uhv"
+      ],
+      "partsFromStructure": true,
+      "partAbilities": {
+        "energy_input": [
+          "gtceu:uv_energy_input_hatch",
+          "gtceu:uv_energy_input_hatch_4a",
+          "gtceu:uv_energy_input_hatch_16a",
+          "gtceu:uv_wireless_energy_hatch",
+          "gtceu:uv_wireless_energy_hatch_4a",
+          "gtceu:uv_wireless_energy_hatch_16a",
+          "gtceu:uv_wireless_energy_hatch_64a",
+          "gtceu:uhv_energy_input_hatch",
+          "gtceu:uhv_energy_input_hatch_4a",
+          "gtceu:uhv_energy_input_hatch_16a",
+          "gtceu:uhv_wireless_energy_hatch",
+          "gtceu:uhv_wireless_energy_hatch_4a",
+          "gtceu:uhv_wireless_energy_hatch_16a",
+          "gtceu:uhv_wireless_energy_hatch_64a"
+        ]
+      },
+      "package": "B4",
+      "note": "Machine 30 (Proxima b)."
+    },
+    {
+      "id": "gtceu:radiotrophic_vat@uv2",
+      "machine": "gtceu:radiotrophic_vat",
+      "types": [
+        "gtceu:radiotrophic"
+      ],
+      "energy": {
+        "voltage": 524288,
+        "hatches": 2
+      },
+      "needs": [
+        "eu:uv"
+      ],
+      "partsFromStructure": true,
+      "partAbilities": {
+        "energy_input": [
+          "gtceu:uv_energy_input_hatch",
+          "gtceu:uv_energy_input_hatch_4a",
+          "gtceu:uv_energy_input_hatch_16a",
+          "gtceu:uv_wireless_energy_hatch",
+          "gtceu:uv_wireless_energy_hatch_4a",
+          "gtceu:uv_wireless_energy_hatch_16a",
+          "gtceu:uv_wireless_energy_hatch_64a"
+        ]
+      },
+      "package": "B4",
+      "note": "Before the jump (uhv.md, the wireless tier): two UV hatches give UHV voltage (GTM 7.5.3's two-hatch rule), so the UHV recipes run on the UV grid until the UHV cells."
+    },
+    {
+      "id": "gtceu:universal_assembly_factory@uhv2",
+      "machine": "gtceu:universal_assembly_factory",
+      "types": [
+        "gtceu:assembler",
+        "gtceu:circuit_assembler"
+      ],
+      "energy": {
+        "voltage": 524288,
+        "hatches": 2
+      },
+      "needs": [
+        "eu:uv"
+      ],
+      "partsFromStructure": true,
+      "partAbilities": {
+        "energy_input": [
+          "gtceu:uv_energy_input_hatch",
+          "gtceu:uv_energy_input_hatch_4a",
+          "gtceu:uv_energy_input_hatch_16a",
+          "gtceu:uv_wireless_energy_hatch",
+          "gtceu:uv_wireless_energy_hatch_4a",
+          "gtceu:uv_wireless_energy_hatch_16a",
+          "gtceu:uv_wireless_energy_hatch_64a"
+        ]
+      },
+      "note": "Two UV hatches give UHV voltage (GTM 7.5.3's two-hatch rule; HATCH_VOLTAGE_LOCKED only holds back the NPU): the UHV assembler recipes, e.g. the 64 A UHV wireless hatch (1,966,080 EU/t). GTM 7.5.3 has no UHV single-block assembler (UHV escalation, 2026-10-28)."
+    },
+    {
+      "machine": "gtceu:sample_receiving_facility",
+      "types": [
+        "gtceu:sample_receiving"
+      ],
+      "energy": {
+        "voltage": 2097152
+      },
+      "needs": [
+        "eu:uhv"
+      ],
+      "partsFromStructure": true,
+      "partAbilities": {
+        "energy_input": [
+          "gtceu:uv_energy_input_hatch",
+          "gtceu:uv_energy_input_hatch_4a",
+          "gtceu:uv_energy_input_hatch_16a",
+          "gtceu:uv_wireless_energy_hatch",
+          "gtceu:uv_wireless_energy_hatch_4a",
+          "gtceu:uv_wireless_energy_hatch_16a",
+          "gtceu:uv_wireless_energy_hatch_64a",
+          "gtceu:uhv_energy_input_hatch",
+          "gtceu:uhv_energy_input_hatch_4a",
+          "gtceu:uhv_energy_input_hatch_16a",
+          "gtceu:uhv_wireless_energy_hatch",
+          "gtceu:uhv_wireless_energy_hatch_4a",
+          "gtceu:uhv_wireless_energy_hatch_16a",
+          "gtceu:uhv_wireless_energy_hatch_64a"
+        ]
+      },
+      "package": "B4",
+      "note": "Machine 12: the only path from a Proxima sample to Earth."
+    },
+    {
+      "id": "gtceu:sample_receiving_facility@uv2",
+      "machine": "gtceu:sample_receiving_facility",
+      "types": [
+        "gtceu:sample_receiving"
+      ],
+      "energy": {
+        "voltage": 524288,
+        "hatches": 2
+      },
+      "needs": [
+        "eu:uv"
+      ],
+      "partsFromStructure": true,
+      "partAbilities": {
+        "energy_input": [
+          "gtceu:uv_energy_input_hatch",
+          "gtceu:uv_energy_input_hatch_4a",
+          "gtceu:uv_energy_input_hatch_16a",
+          "gtceu:uv_wireless_energy_hatch",
+          "gtceu:uv_wireless_energy_hatch_4a",
+          "gtceu:uv_wireless_energy_hatch_16a",
+          "gtceu:uv_wireless_energy_hatch_64a"
+        ]
+      },
+      "package": "B4",
+      "note": "Before the jump (uhv.md, the wireless tier): two UV hatches give UHV voltage (GTM 7.5.3's two-hatch rule), so the UHV recipes run on the UV grid until the UHV cells."
+    },
+    {
+      "machine": "gtceu:cold_trap_drill",
+      "types": [
+        "gtceu:cold_trap_drilling"
+      ],
+      "energy": {
+        "voltage": 2097152
+      },
+      "needs": [
+        "eu:uhv"
+      ],
+      "partsFromStructure": true,
+      "partAbilities": {
+        "energy_input": [
+          "gtceu:uv_energy_input_hatch",
+          "gtceu:uv_energy_input_hatch_4a",
+          "gtceu:uv_energy_input_hatch_16a",
+          "gtceu:uv_wireless_energy_hatch",
+          "gtceu:uv_wireless_energy_hatch_4a",
+          "gtceu:uv_wireless_energy_hatch_16a",
+          "gtceu:uv_wireless_energy_hatch_64a",
+          "gtceu:uhv_energy_input_hatch",
+          "gtceu:uhv_energy_input_hatch_4a",
+          "gtceu:uhv_energy_input_hatch_16a",
+          "gtceu:uhv_wireless_energy_hatch",
+          "gtceu:uhv_wireless_energy_hatch_4a",
+          "gtceu:uhv_wireless_energy_hatch_16a",
+          "gtceu:uhv_wireless_energy_hatch_64a"
+        ]
+      },
+      "package": "B5",
+      "note": "Machine 29 (Proxima b)."
+    },
+    {
+      "id": "gtceu:cold_trap_drill@uv2",
+      "machine": "gtceu:cold_trap_drill",
+      "types": [
+        "gtceu:cold_trap_drilling"
+      ],
+      "energy": {
+        "voltage": 524288,
+        "hatches": 2
+      },
+      "needs": [
+        "eu:uv"
+      ],
+      "partsFromStructure": true,
+      "partAbilities": {
+        "energy_input": [
+          "gtceu:uv_energy_input_hatch",
+          "gtceu:uv_energy_input_hatch_4a",
+          "gtceu:uv_energy_input_hatch_16a",
+          "gtceu:uv_wireless_energy_hatch",
+          "gtceu:uv_wireless_energy_hatch_4a",
+          "gtceu:uv_wireless_energy_hatch_16a",
+          "gtceu:uv_wireless_energy_hatch_64a"
+        ]
+      },
+      "package": "B5",
+      "note": "Before the jump (uhv.md, the wireless tier): two UV hatches give UHV voltage (GTM 7.5.3's two-hatch rule), so the UHV recipes run on the UV grid until the UHV cells."
+    },
+    {
+      "machine": "gtceu:biomining_heap",
+      "types": [
+        "gtceu:biomining"
+      ],
+      "energy": {
+        "voltage": 2097152
+      },
+      "needs": [
+        "eu:uhv"
+      ],
+      "partsFromStructure": true,
+      "partAbilities": {
+        "energy_input": [
+          "gtceu:uv_energy_input_hatch",
+          "gtceu:uv_energy_input_hatch_4a",
+          "gtceu:uv_energy_input_hatch_16a",
+          "gtceu:uv_wireless_energy_hatch",
+          "gtceu:uv_wireless_energy_hatch_4a",
+          "gtceu:uv_wireless_energy_hatch_16a",
+          "gtceu:uv_wireless_energy_hatch_64a",
+          "gtceu:uhv_energy_input_hatch",
+          "gtceu:uhv_energy_input_hatch_4a",
+          "gtceu:uhv_energy_input_hatch_16a",
+          "gtceu:uhv_wireless_energy_hatch",
+          "gtceu:uhv_wireless_energy_hatch_4a",
+          "gtceu:uhv_wireless_energy_hatch_16a",
+          "gtceu:uhv_wireless_energy_hatch_64a"
+        ]
+      },
+      "package": "B5",
+      "note": "Machine 31 (Proxima b)."
+    },
+    {
+      "id": "gtceu:biomining_heap@uv2",
+      "machine": "gtceu:biomining_heap",
+      "types": [
+        "gtceu:biomining"
+      ],
+      "energy": {
+        "voltage": 524288,
+        "hatches": 2
+      },
+      "needs": [
+        "eu:uv"
+      ],
+      "partsFromStructure": true,
+      "partAbilities": {
+        "energy_input": [
+          "gtceu:uv_energy_input_hatch",
+          "gtceu:uv_energy_input_hatch_4a",
+          "gtceu:uv_energy_input_hatch_16a",
+          "gtceu:uv_wireless_energy_hatch",
+          "gtceu:uv_wireless_energy_hatch_4a",
+          "gtceu:uv_wireless_energy_hatch_16a",
+          "gtceu:uv_wireless_energy_hatch_64a"
+        ]
+      },
+      "package": "B5",
+      "note": "Before the jump (uhv.md, the wireless tier): two UV hatches give UHV voltage (GTM 7.5.3's two-hatch rule), so the UHV recipes run on the UV grid until the UHV cells."
+    },
+    {
+      "machine": "gtceu:organoid_array",
+      "types": [
+        "gtceu:organoid_computing"
+      ],
+      "energy": {
+        "voltage": 2097152
+      },
+      "needs": [
+        "eu:uhv"
+      ],
+      "partsFromStructure": true,
+      "partAbilities": {
+        "energy_input": [
+          "gtceu:uv_energy_input_hatch",
+          "gtceu:uv_energy_input_hatch_4a",
+          "gtceu:uv_energy_input_hatch_16a",
+          "gtceu:uv_wireless_energy_hatch",
+          "gtceu:uv_wireless_energy_hatch_4a",
+          "gtceu:uv_wireless_energy_hatch_16a",
+          "gtceu:uv_wireless_energy_hatch_64a",
+          "gtceu:uhv_energy_input_hatch",
+          "gtceu:uhv_energy_input_hatch_4a",
+          "gtceu:uhv_energy_input_hatch_16a",
+          "gtceu:uhv_wireless_energy_hatch",
+          "gtceu:uhv_wireless_energy_hatch_4a",
+          "gtceu:uhv_wireless_energy_hatch_16a",
+          "gtceu:uhv_wireless_energy_hatch_64a"
+        ]
+      },
+      "package": "B6",
+      "note": "Machine 11: UHV circuits, the second route."
+    },
+    {
+      "id": "gtceu:organoid_array@uv2",
+      "machine": "gtceu:organoid_array",
+      "types": [
+        "gtceu:organoid_computing"
+      ],
+      "energy": {
+        "voltage": 524288,
+        "hatches": 2
+      },
+      "needs": [
+        "eu:uv"
+      ],
+      "partsFromStructure": true,
+      "partAbilities": {
+        "energy_input": [
+          "gtceu:uv_energy_input_hatch",
+          "gtceu:uv_energy_input_hatch_4a",
+          "gtceu:uv_energy_input_hatch_16a",
+          "gtceu:uv_wireless_energy_hatch",
+          "gtceu:uv_wireless_energy_hatch_4a",
+          "gtceu:uv_wireless_energy_hatch_16a",
+          "gtceu:uv_wireless_energy_hatch_64a"
+        ]
+      },
+      "package": "B6",
+      "note": "Before the jump (uhv.md, the wireless tier): two UV hatches give UHV voltage (GTM 7.5.3's two-hatch rule), so the UHV recipes run on the UV grid until the UHV cells."
+    },
+    {
+      "machine": "gtceu:warp_gate",
+      "types": [
+        "gtceu:warp_gate"
+      ],
+      "maxEUt": 33554432,
+      "needs": [
+        "eu:uhv"
+      ],
+      "partsFromStructure": true,
+      "partAbilities": {
+        "energy_input": [
+          "gtceu:uv_energy_input_hatch",
+          "gtceu:uv_energy_input_hatch_4a",
+          "gtceu:uv_energy_input_hatch_16a",
+          "gtceu:uv_wireless_energy_hatch",
+          "gtceu:uv_wireless_energy_hatch_4a",
+          "gtceu:uv_wireless_energy_hatch_16a",
+          "gtceu:uv_wireless_energy_hatch_64a",
+          "gtceu:uhv_energy_input_hatch",
+          "gtceu:uhv_energy_input_hatch_4a",
+          "gtceu:uhv_energy_input_hatch_16a",
+          "gtceu:uhv_wireless_energy_hatch",
+          "gtceu:uhv_wireless_energy_hatch_4a",
+          "gtceu:uhv_wireless_energy_hatch_16a",
+          "gtceu:uhv_wireless_energy_hatch_64a"
+        ]
+      },
+      "package": "B7",
+      "note": "Machine 18: both ends (Earth orbit and Proxima b orbit). The sustain run (31,457,280 EU/t, 16 A UHV) is a fixed load: the gate's overclock returns IDENTITY for it, so it is not capped at 4x one hatch voltage."
+    },
+    {
+      "machine": "gtceu:baseline_astrometer",
+      "types": [
+        "gtceu:baseline_astrometry"
+      ],
+      "energy": {
+        "voltage": 2097152
+      },
+      "needs": [
+        "eu:uhv"
+      ],
+      "partsFromStructure": true,
+      "partAbilities": {
+        "energy_input": [
+          "gtceu:uv_energy_input_hatch",
+          "gtceu:uv_energy_input_hatch_4a",
+          "gtceu:uv_energy_input_hatch_16a",
+          "gtceu:uv_wireless_energy_hatch",
+          "gtceu:uv_wireless_energy_hatch_4a",
+          "gtceu:uv_wireless_energy_hatch_16a",
+          "gtceu:uv_wireless_energy_hatch_64a",
+          "gtceu:uhv_energy_input_hatch",
+          "gtceu:uhv_energy_input_hatch_4a",
+          "gtceu:uhv_energy_input_hatch_16a",
+          "gtceu:uhv_wireless_energy_hatch",
+          "gtceu:uhv_wireless_energy_hatch_4a",
+          "gtceu:uhv_wireless_energy_hatch_16a",
+          "gtceu:uhv_wireless_energy_hatch_64a"
+        ]
+      },
+      "package": "B7",
+      "note": "Machine 25 (Proxima b orbit)."
+    },
+    {
+      "id": "gtceu:baseline_astrometer@uv2",
+      "machine": "gtceu:baseline_astrometer",
+      "types": [
+        "gtceu:baseline_astrometry"
+      ],
+      "energy": {
+        "voltage": 524288,
+        "hatches": 2
+      },
+      "needs": [
+        "eu:uv"
+      ],
+      "partsFromStructure": true,
+      "partAbilities": {
+        "energy_input": [
+          "gtceu:uv_energy_input_hatch",
+          "gtceu:uv_energy_input_hatch_4a",
+          "gtceu:uv_energy_input_hatch_16a",
+          "gtceu:uv_wireless_energy_hatch",
+          "gtceu:uv_wireless_energy_hatch_4a",
+          "gtceu:uv_wireless_energy_hatch_16a",
+          "gtceu:uv_wireless_energy_hatch_64a"
+        ]
+      },
+      "package": "B7",
+      "note": "Before the jump (uhv.md, the wireless tier): two UV hatches give UHV voltage (GTM 7.5.3's two-hatch rule), so the UHV recipes run on the UV grid until the UHV cells."
+    },
+    {
+      "id": "gtceu:naquadria_magnet_works@uhv",
+      "machine": "gtceu:naquadria_magnet_works",
+      "types": [
+        "gtceu:naquadria_magnets"
+      ],
+      "energy": {
+        "voltage": 524288,
+        "hatches": 2
+      },
+      "needs": [
+        "eu:uv"
+      ],
+      "partsFromStructure": true,
+      "partAbilities": {
+        "energy_input": [
+          "gtceu:uv_energy_input_hatch",
+          "gtceu:uv_energy_input_hatch_4a",
+          "gtceu:uv_energy_input_hatch_16a",
+          "gtceu:uv_wireless_energy_hatch",
+          "gtceu:uv_wireless_energy_hatch_4a",
+          "gtceu:uv_wireless_energy_hatch_16a",
+          "gtceu:uv_wireless_energy_hatch_64a"
+        ]
+      },
+      "package": "A9",
+      "note": "The UHV SMES cell's circuit 2 runs at 1,966,080 EU/t: two UV hatches (4x) carry it, so the cell is made on the UV grid before the network is at UHV."
+    },
+    {
+      "machine": "gtca:space_elevator",
+      "types": [
+        "gtceu:space_elevator"
+      ],
+      "energy": {
+        "voltage": 2097152
+      },
+      "needs": [
+        "eu:uhv"
+      ],
+      "partsFromStructure": true,
+      "partAbilities": {
+        "energy_input": [
+          "gtceu:uv_energy_input_hatch",
+          "gtceu:uv_energy_input_hatch_4a",
+          "gtceu:uv_energy_input_hatch_16a",
+          "gtceu:uv_wireless_energy_hatch",
+          "gtceu:uv_wireless_energy_hatch_4a",
+          "gtceu:uv_wireless_energy_hatch_16a",
+          "gtceu:uv_wireless_energy_hatch_64a",
+          "gtceu:uhv_energy_input_hatch",
+          "gtceu:uhv_energy_input_hatch_4a",
+          "gtceu:uhv_energy_input_hatch_16a",
+          "gtceu:uhv_wireless_energy_hatch",
+          "gtceu:uhv_wireless_energy_hatch_4a",
+          "gtceu:uhv_wireless_energy_hatch_16a",
+          "gtceu:uhv_wireless_energy_hatch_64a"
+        ]
+      },
+      "package": "A7",
+      "note": "GTCA's space elevator with our recipe (S0-8: SpaceElevatorMachine, highTierContent off)."
+    }
+  ],
+  "synthetic": [
+    {
+      "id": "wireless-uhv",
+      "package": "A9",
+      "capital": [
+        "gtceu:wireless_energy_tower",
+        "grindless:uhv_smes_cell",
+        "grindless:nuclear_clock"
+      ],
+      "consumes": [
+        "eu:uv"
+      ],
+      "produces": [
+        "eu:uhv",
+        "wireless:uhv"
+      ],
+      "note": "The network's UHV tier (A9): UHV only when every formed tower holds UHV cells, linked by the nuclear clock (tables/wireless_energy.json). wireless:uhv is the gate's \"network at UHV\"."
+    },
+    {
+      "id": "research-chart",
+      "package": "B7",
+      "machines": [
+        "gtceu:research_station"
+      ],
+      "capital": [
+        "grindless:stellar_neighbourhood_chart",
+        "gtceu:data_module",
+        "gtceu:uv_energy_input_hatch"
+      ],
+      "consumes": [
+        "eu:uv"
+      ],
+      "produces": [
+        "research:1x_grindless_stellar_neighbourhood_chart"
+      ],
+      "note": "B7 (uhv/gate.js): the UEV casing's station research (the chart, VA[UV]); stationResearch adds the research_station recipe at load, as in uv.json's research-sgr-a-star."
+    },
+    {
+      "id": "swarm-station",
+      "package": "B3",
+      "recipesOf": [
+        "gtceu:dyson_swarm"
+      ],
+      "produces": [
+        "eu:uv",
+        "eu:uhv"
+      ],
+      "euPerTick": 8388608,
+      "note": "An EU source into the network at 8,388,608 EU/t (c2), written final: not in power/generators.js's doubling list (uhv-validator.test.mjs checks both)."
+    },
+    {
+      "id": "mercury-orbit-trip",
+      "capital": [
+        "gcyr:rocket_scanner",
+        "gcyr:launch_pad",
+        "gtceu:stainless_steel_frame",
+        "gcyr:seat",
+        "gcyr:id_chip",
+        "gcyr:space_helmet",
+        "gcyr:space_chestplate",
+        "gcyr:space_leggings",
+        "gcyr:space_boots",
+        "gcyr:space_suit_thermal_upgrade_smithing_template",
+        "gcyr:heat_shielding_fabric",
+        "gcyr:insulating_fabric",
+        "gcyr:elite_rocket_motor",
+        "grindless:bnnt_fuel_tank",
+        "gcyr:space_station_packager",
+        "gcyr:space_station_package"
+      ],
+      "consumes": [
+        "fluid:gtceu:rocket_fuel",
+        "fluid:gtceu:oxygen"
+      ],
+      "produces": [
+        "dim:gcyr:mercury_orbit"
+      ],
+      "note": "The seventh station (B1): a package launched to Mercury's orbit (tables/orbits.json `mercury`, the level 7 rocket already flies)."
+    },
+    {
+      "id": "proxima-trip",
+      "package": "A8",
+      "capital": [
+        "gcyr:rocket_scanner",
+        "gcyr:launch_pad",
+        "gtceu:stainless_steel_frame",
+        "gcyr:seat",
+        "gcyr:id_chip",
+        "gcyr:space_helmet",
+        "gcyr:space_chestplate",
+        "gcyr:space_leggings",
+        "gcyr:space_boots",
+        "gcyr:space_suit_thermal_upgrade_smithing_template",
+        "gcyr:heat_shielding_fabric",
+        "gcyr:insulating_fabric",
+        "grindless:ican_rocket_motor",
+        "grindless:bnnt_fuel_tank",
+        "gcyr:space_station_packager",
+        "gcyr:space_station_package"
+      ],
+      "consumes": [
+        "fluid:gtceu:rocket_fuel",
+        "fluid:gtceu:oxygen"
+      ],
+      "produces": [
+        "dim:${place:proxima_b}",
+        "dim:${orbit:proxima_b}"
+      ],
+      "note": "The level 8 rocket (A8, B1): the ICAN motor (GCYR motor tier 6) and the tier 11 BNNT tank; reaches Proxima b and its orbit (the eighth station)."
+    },
+    {
+      "id": "nether-trip",
+      "capital": [
+        "minecraft:obsidian",
+        "minecraft:flint_and_steel"
+      ],
+      "produces": [
+        "dim:minecraft:the_nether"
+      ],
+      "note": "The Nether (a portal from the start; LV's era report already lists its veins as a hand trip): GTM's nether air collector runs there, and the factory's vacuum freezer and distillation tower make its neon (UHV escalation, 2026-10-28)."
+    },
+    {
+      "id": "ae2-condenser",
+      "capital": [
+        "ae2:condenser",
+        "ae2:cell_component_256k"
+      ],
+      "consumes": [
+        "minecraft:cobblestone"
+      ],
+      "produces": [
+        "ae2:singularity"
+      ],
+      "note": "AE2's matter condenser with a 256k storage component makes a singularity from 256,000 voided items (CondenserOutput.SINGULARITY): a machine mode, not a recipe, so the dump has none (UHV escalation, 2026-10-28)."
+    }
+  ],
+  "targets": [
+    {
+      "id": "site-offworld",
+      "label": "Site: the solar array only runs off Earth (the Moon, Mars or Proxima b)",
+      "kind": "site",
+      "types": [
+        "gtceu:lunar_solar"
+      ],
+      "dimensions": [
+        "gcyr:luna",
+        "gcyr:mars",
+        "${place:proxima_b}"
+      ],
+      "package": "B5",
+      "note": "EV's target with Proxima b added: grindless:lunar_solar/proxima (B5) is the same panel on Proxima b."
+    },
+    {
+      "id": "transuranics-only-facility",
+      "label": "Berkelium-249, californium-252, nickel-63 and thorium-229 only from the HFIR and the transuranium facility",
+      "anyOf": [
+        "grindless:berkelium_249",
+        "grindless:californium_252",
+        "grindless:nickel_63_target",
+        "grindless:thorium_229"
+      ],
+      "without": [
+        "operate:gtceu:high_flux_reactor*",
+        "operate:gtceu:transuranium_facility*"
+      ],
+      "expect": "unreachable",
+      "package": [
+        "A1",
+        "A3"
+      ]
+    },
+    {
+      "id": "exotic-only-casimir",
+      "label": "Exotic matter only from the Casimir array",
+      "anyOf": [
+        "grindless:exotic_matter_cell"
+      ],
+      "without": [
+        "operate:gtceu:casimir_array*"
+      ],
+      "expect": "unreachable",
+      "package": "A6"
+    },
+    {
+      "id": "antihydrogen-only-trap",
+      "label": "Antihydrogen only from the antimatter trap",
+      "anyOf": [
+        "grindless:antihydrogen_cartridge"
+      ],
+      "without": [
+        "operate:gtceu:antimatter_trap*"
+      ],
+      "expect": "unreachable",
+      "package": "A6"
+    },
+    {
+      "id": "antihydrogen-needs-positrons",
+      "label": "Antihydrogen needs a positron cartridge",
+      "anyOf": [
+        "grindless:antihydrogen_cartridge"
+      ],
+      "without": [
+        "grindless:positron_accumulation/*accumulate"
+      ],
+      "expect": "unreachable",
+      "package": "A6"
+    },
+    {
+      "id": "chart-only-astrometer",
+      "label": "The stellar neighbourhood chart only from the baseline astrometer",
+      "anyOf": [
+        "grindless:stellar_neighbourhood_chart"
+      ],
+      "without": [
+        "operate:gtceu:baseline_astrometer*"
+      ],
+      "expect": "unreachable",
+      "package": "B7"
+    },
+    {
+      "id": "proxima-samples-only-rover",
+      "label": "Proxima flora samples and regolith surveys only from the xenoflora rover",
+      "anyOf": [
+        "grindless:proxima_flora_sample",
+        "grindless:proxima_regolith_survey"
+      ],
+      "without": [
+        "operate:gtceu:xenoflora_rover_bay*"
+      ],
+      "expect": "unreachable",
+      "package": "B4"
+    },
+    {
+      "id": "proxima-ice-only-drill",
+      "label": "Proxima ice cores and cold-trap regolith only from the cold-trap drill",
+      "anyOf": [
+        "grindless:proxima_ice_core",
+        "grindless:cold_trap_regolith"
+      ],
+      "without": [
+        "operate:gtceu:cold_trap_drill*"
+      ],
+      "expect": "unreachable",
+      "package": "B5"
+    },
+    {
+      "id": "proxima-liquors-only-heap",
+      "label": "Proxima PGM and REE liquors only from the biomining heap",
+      "anyOf": [
+        "fluid:gtceu:proxima_pgm_liquor",
+        "fluid:gtceu:proxima_ree_liquor"
+      ],
+      "without": [
+        "operate:gtceu:biomining_heap*"
+      ],
+      "expect": "unreachable",
+      "package": "B5"
+    },
+    {
+      "id": "proxima-life-only-proxima",
+      "label": "Proxima pigments, scaffolds and biomass only from the Proxima life machines",
+      "anyOf": [
+        "grindless:infrared_pigment",
+        "grindless:chitosan_scaffold",
+        "grindless:melanised_biomass"
+      ],
+      "without": [
+        "operate:gtceu:xenobotany_greenhouse*",
+        "operate:gtceu:xenobiochem_plant*",
+        "operate:gtceu:radiotrophic_vat*",
+        "operate:gtceu:xenoflora_rover_bay*",
+        "operate:gtceu:sample_receiving_facility*"
+      ],
+      "expect": "unreachable",
+      "package": "B4"
+    },
+    {
+      "id": "mercury-regolith-only-excavator",
+      "label": "Mercury regolith and its fractions only from the excavator and the vapour furnace",
+      "anyOf": [
+        "grindless:mercury_regolith",
+        "grindless:stripped_mercury_regolith"
+      ],
+      "without": [
+        "operate:gtceu:regolith_excavator*",
+        "operate:gtceu:solar_vapour_furnace*"
+      ],
+      "expect": "unreachable",
+      "package": "B2"
+    },
+    {
+      "id": "coronal-only-probe",
+      "label": "The coronal field map only from the solar probe bay",
+      "anyOf": [
+        "grindless:coronal_field_map"
+      ],
+      "without": [
+        "operate:gtceu:solar_probe_bay*"
+      ],
+      "expect": "unreachable",
+      "package": "B3"
+    },
+    {
+      "id": "segments-only-foundry",
+      "label": "Swarm segments only from the swarm segment foundry",
+      "anyOf": [
+        "grindless:swarm_segment"
+      ],
+      "without": [
+        "operate:gtceu:swarm_segment_foundry*"
+      ],
+      "expect": "unreachable",
+      "package": "B3"
+    },
+    {
+      "id": "site-uhv-earth-orbit",
+      "label": "Site: the ZBLAN draw tower and the Casimir array only in Earth orbit",
+      "kind": "site",
+      "types": [
+        "gtceu:zblan_draw",
+        "gtceu:casimir_cavity"
+      ],
+      "dimensions": [
+        "${orbit:earth}"
+      ],
+      "package": [
+        "A10",
+        "A6"
+      ]
+    },
+    {
+      "id": "site-warp-gate",
+      "label": "Site: the warp gate only at its two ends (Earth orbit and Proxima b orbit)",
+      "kind": "site",
+      "types": [
+        "gtceu:warp_gate"
+      ],
+      "dimensions": [
+        "${orbit:earth}",
+        "${orbit:proxima_b}"
+      ],
+      "package": "B7",
+      "exact": true
+    },
+    {
+      "id": "site-proxima-orbit",
+      "label": "Site: the baseline astrometer only in Proxima b orbit",
+      "kind": "site",
+      "types": [
+        "gtceu:baseline_astrometry"
+      ],
+      "dimensions": [
+        "${orbit:proxima_b}"
+      ],
+      "package": "B7"
+    },
+    {
+      "id": "site-proxima",
+      "label": "Site: the six Proxima machines only on Proxima b",
+      "kind": "site",
+      "types": [
+        "gtceu:xenoflora_rover",
+        "gtceu:xenobotany",
+        "gtceu:xenobiochemistry",
+        "gtceu:radiotrophic",
+        "gtceu:cold_trap_drilling",
+        "gtceu:biomining"
+      ],
+      "dimensions": [
+        "${place:proxima_b}"
+      ],
+      "package": [
+        "B4",
+        "B5"
+      ]
+    },
+    {
+      "id": "site-mercury",
+      "label": "Site: the excavator and the vapour furnace only on Mercury",
+      "kind": "site",
+      "types": [
+        "gtceu:regolith_excavation",
+        "gtceu:solar_vaporisation"
+      ],
+      "dimensions": [
+        "gcyr:mercury"
+      ],
+      "package": "B2"
+    },
+    {
+      "id": "site-mercury-orbit",
+      "label": "Site: the swarm machines and the solar probe only in Mercury orbit",
+      "kind": "site",
+      "types": [
+        "gtceu:swarm_segment",
+        "gtceu:dyson_swarm",
+        "gtceu:solar_probe"
+      ],
+      "dimensions": [
+        "gcyr:mercury_orbit"
+      ],
+      "package": "B3"
+    },
+    {
+      "id": "b5-proxima-tailings",
+      "label": "B5: the regolith cell's Proxima tailings row",
+      "kind": "recipe",
+      "type": "gtceu:regolith_processing",
+      "recipe": [
+        "grindless:regolith_processing/ev/proxima_tailings"
+      ],
+      "package": "B5"
+    },
+    {
+      "id": "b5-proxima-water-exchange",
+      "label": "B5: the isotope exchange row for the cold-trap ice",
+      "kind": "recipe",
+      "type": "gtceu:isotope_exchange",
+      "recipe": [
+        "grindless:isotope_exchange/proxima_water_exchange"
+      ],
+      "package": "B5"
+    },
+    {
+      "id": "b5-proxima-platinum",
+      "label": "B5: the platinum plant's Proxima c6 row",
+      "kind": "recipe",
+      "type": "gtceu:pgm_refining",
+      "recipe": [
+        "grindless:pgm_refining/uhv/proxima_liquor"
+      ],
+      "package": "B5"
+    },
+    {
+      "id": "b5-proxima-tholin",
+      "label": "B5: the tholin reformer's Proxima organics row",
+      "kind": "recipe",
+      "type": "gtceu:tholin_reforming",
+      "recipe": [
+        "grindless:tholin_reforming/uhv/proxima_organics_hydrolysis"
+      ],
+      "package": "B5"
+    },
+    {
+      "id": "b5-proxima-cascade",
+      "label": "B5: the extraction cascade's c7 row",
+      "kind": "recipe",
+      "type": "gtceu:solvent_extraction",
+      "recipe": [
+        "grindless:solvent_extraction/ev/proxima_ree_liquor"
+      ],
+      "package": "B5"
+    },
+    {
+      "id": "b7-warp-gate-seed",
+      "label": "B7: the AE2 transform of the entangled singularity",
+      "kind": "recipe",
+      "type": "ae2:transform",
+      "recipe": [
+        "grindless:transform/proxima_entangled_singularity"
+      ],
+      "package": "B7"
+    },
+    {
+      "id": "b7-warp-gate-casing",
+      "label": "B7: the warp gate ring block",
+      "kind": "recipe",
+      "type": "gtceu:assembler",
+      "recipe": [
+        "grindless:assembler/warp_gate_casing"
+      ],
+      "package": "B7"
+    },
+    {
+      "id": "gate-uev-casing",
+      "label": "Gate: the UEV casing (assembly line, researched with the stellar neighbourhood chart)",
+      "kind": "recipe",
+      "type": "gtceu:assembly_line",
+      "recipe": [
+        "grindless:assembly_line/uev_machine_casing"
+      ],
+      "package": "B7"
+    },
+    {
+      "id": "gate-warp-open",
+      "label": "Gate: the warp gate's c1 (opens, makes the seed)",
+      "kind": "recipe",
+      "type": "gtceu:warp_gate",
+      "recipe": [
+        "grindless:warp_gate/open"
+      ],
+      "package": "B7"
+    },
+    {
+      "id": "gate-warp-sustain",
+      "label": "Gate: the warp gate's c2 (16 A UHV for 60 s)",
+      "kind": "recipe",
+      "type": "gtceu:warp_gate",
+      "recipe": [
+        "grindless:warp_gate/sustain"
+      ],
+      "package": "B7"
+    },
+    {
+      "id": "gate-chart",
+      "label": "Gate: the stellar neighbourhood chart from Proxima b orbit",
+      "kind": "recipe",
+      "type": "gtceu:baseline_astrometry",
+      "recipe": [
+        "grindless:baseline_astrometry/stellar_neighbourhood_chart"
+      ],
+      "package": "B7"
+    },
+    {
+      "id": "gate-swarm-c2",
+      "label": "Gate: a swarm control station run on c2",
+      "kind": "recipe",
+      "type": "gtceu:dyson_swarm",
+      "recipe": [
+        "grindless:dyson_swarm/full_swarm"
+      ],
+      "package": "B3"
+    },
+    {
+      "id": "gate-organoid-mainframes",
+      "label": "Gate: UHV circuits from the organoid array",
+      "kind": "recipe",
+      "type": "gtceu:organoid_computing",
+      "output": "gtceu:wetware_processor_mainframe",
+      "package": "B6"
+    },
+    {
+      "id": "gate-elevator",
+      "label": "Gate: GTCA's space elevator running our recipe",
+      "kind": "recipe",
+      "type": "gtceu:space_elevator",
+      "recipe": [
+        "grindless:space_elevator/*"
+      ],
+      "package": "A7"
+    },
+    {
+      "id": "uhv-circuit-assembly-line",
+      "label": "UHV circuits: GTM's assembly line route stays",
+      "kind": "recipe",
+      "type": "gtceu:assembly_line",
+      "output": "gtceu:wetware_processor_mainframe",
+      "package": "B6"
+    },
+    {
+      "id": "gate-clock",
+      "label": "Gate: the nuclear clock",
+      "item": "grindless:nuclear_clock",
+      "package": "A2"
+    },
+    {
+      "id": "gate-network-uhv",
+      "label": "Gate: the network at UHV feeding a power substation through a 64 A UHV wireless hatch (the 33,554,432 EU/t load)",
+      "allOf": [
+        "wireless:uhv",
+        "gtceu:uhv_wireless_energy_hatch_64a",
+        "gtceu:power_substation"
+      ],
+      "package": "A9"
+    },
+    {
+      "id": "gate-stored",
+      "label": "Gate: stored berkelium-249",
+      "item": "grindless:berkelium_249",
+      "package": "A1"
+    },
+    {
+      "id": "gate-level8",
+      "label": "Gate: the level 8 rocket: Proxima b and its orbit",
+      "allOf": [
+        "dim:${place:proxima_b}",
+        "dim:${orbit:proxima_b}"
+      ],
+      "package": "A8"
+    },
+    {
+      "id": "gate-uhv-circuits-4",
+      "label": "Gate: UHV circuits",
+      "item": "gtceu:wetware_processor_mainframe",
+      "package": "B6"
+    },
+    {
+      "id": "gate-run-regolith-excavation",
+      "label": "Gate: one excavation (Mercury) run",
+      "kind": "recipe",
+      "type": "gtceu:regolith_excavation",
+      "package": "B2"
+    },
+    {
+      "id": "gate-run-solar-vaporisation",
+      "label": "Gate: one vaporisation (Mercury) run",
+      "kind": "recipe",
+      "type": "gtceu:solar_vaporisation",
+      "package": "B2"
+    },
+    {
+      "id": "gate-run-swarm-segment",
+      "label": "Gate: one segment (Mercury orbit) run",
+      "kind": "recipe",
+      "type": "gtceu:swarm_segment",
+      "package": "B3"
+    },
+    {
+      "id": "gate-run-solar-probe",
+      "label": "Gate: one probe (Mercury orbit) run",
+      "kind": "recipe",
+      "type": "gtceu:solar_probe",
+      "package": "B3"
+    },
+    {
+      "id": "gate-run-xenoflora-rover",
+      "label": "Gate: one rover (Proxima b) run",
+      "kind": "recipe",
+      "type": "gtceu:xenoflora_rover",
+      "package": "B4"
+    },
+    {
+      "id": "gate-run-xenobotany",
+      "label": "Gate: one greenhouse (Proxima b) run",
+      "kind": "recipe",
+      "type": "gtceu:xenobotany",
+      "package": "B4"
+    },
+    {
+      "id": "gate-run-cold-trap-drilling",
+      "label": "Gate: one cold-trap drill (Proxima b) run",
+      "kind": "recipe",
+      "type": "gtceu:cold_trap_drilling",
+      "package": "B5"
+    },
+    {
+      "id": "gate-run-biomining",
+      "label": "Gate: one biomining heap (Proxima b) run",
+      "kind": "recipe",
+      "type": "gtceu:biomining",
+      "package": "B5"
+    }
+  ],
+  "eraResources": [
+    {
+      "id": "uev",
+      "era": "uev",
+      "label": "UEV (GTM's UEV items)",
+      "items": [
+        "gtceu:uev_*"
+      ],
+      "note": "Nothing in UHV asks for UEV: the only UEV item reachable is the casing, the gate's own output."
+    },
+    {
+      "id": "mercury-uhv",
+      "era": "uhv-mercury",
+      "label": "Mercury's UHV ground and orbit (tables/orbits.json)",
+      "dimensions": [
+        "gcyr:mercury_orbit"
+      ],
+      "items": [
+        "grindless:mercury_regolith",
+        "grindless:stripped_mercury_regolith",
+        "grindless:swarm_segment",
+        "grindless:worn_swarm_segment",
+        "grindless:coronal_field_map",
+        "grindless:solar_probe"
+      ]
+    },
+    {
+      "id": "proxima",
+      "era": "uhv-proxima",
+      "label": "Proxima b and its orbit (tables/places.json, tables/orbits.json)",
+      "dimensions": [
+        "${place:proxima_b}",
+        "${orbit:proxima_b}"
+      ],
+      "items": [
+        "grindless:proxima_flora_sample",
+        "grindless:proxima_ice_core",
+        "grindless:proxima_regolith_survey",
+        "grindless:cold_trap_regolith",
+        "grindless:americium_micro_source",
+        "grindless:infrared_pigment",
+        "grindless:chitosan_scaffold",
+        "grindless:melanised_biomass",
+        "grindless:biocemented_regolith",
+        "grindless:xeno_*",
+        "fluid:gtceu:proxima_pgm_liquor",
+        "fluid:gtceu:proxima_ree_liquor",
+        "fluid:gtceu:far_red_pigment",
+        "fluid:gtceu:clarified_xeno_lysate"
+      ]
+    }
+  ],
+  "eraItems": [
+    {
+      "id": "uhv-home",
+      "era": "uhv",
+      "label": "UHV at home and in Earth orbit",
+      "items": [
+        "m:gtceu:high_flux_reactor",
+        "m:gtceu:transuranium_facility",
+        "m:gtceu:nuclear_clock_lab",
+        "m:gtceu:crystal_growth_furnace",
+        "m:gtceu:ultrapure_water_plant",
+        "m:gtceu:betavoltaic_fab",
+        "m:gtceu:mbe_reactor",
+        "m:gtceu:photonic_foundry",
+        "m:gtceu:sic_device_fab",
+        "m:gtceu:solar_array_fab",
+        "m:gtceu:positron_accumulator",
+        "m:gtceu:casimir_array",
+        "m:gtceu:pbo_plant",
+        "m:gtceu:tether_ribbon_works",
+        "m:gtceu:spark_plasma_sinterer",
+        "m:gtceu:zblan_draw_tower",
+        "grindless:berkelium_249",
+        "grindless:californium_252",
+        "grindless:thorium_229",
+        "grindless:nickel_63_target",
+        "grindless:nuclear_clock",
+        "grindless:betavoltaic_cell",
+        "grindless:positron_cartridge",
+        "grindless:exotic_matter_cell",
+        "grindless:sic_power_module",
+        "grindless:zblan_fibre",
+        "grindless:pbo_fibre",
+        "grindless:ican_rocket_motor"
+      ]
+    },
+    {
+      "id": "uhv-mercury-outputs",
+      "era": "uhv-mercury",
+      "label": "Mercury's ground and orbit",
+      "optional": true,
+      "items": [
+        "m:gtceu:regolith_excavator",
+        "m:gtceu:solar_vapour_furnace",
+        "m:gtceu:swarm_segment_foundry",
+        "m:gtceu:swarm_control_station",
+        "m:gtceu:solar_probe_bay",
+        "grindless:mercury_regolith",
+        "grindless:stripped_mercury_regolith",
+        "grindless:swarm_segment",
+        "grindless:coronal_field_map"
+      ],
+      "note": "Built after the Mercury orbit trip; they never need Proxima."
+    },
+    {
+      "id": "uhv-proxima-outputs",
+      "era": "uhv-proxima",
+      "label": "Proxima b, its orbit, and what comes home from it",
+      "optional": true,
+      "items": [
+        "m:gtceu:xenoflora_rover_bay",
+        "m:gtceu:xenobotany_greenhouse",
+        "m:gtceu:xenobiochem_plant",
+        "m:gtceu:radiotrophic_vat",
+        "m:gtceu:cold_trap_drill",
+        "m:gtceu:biomining_heap",
+        "m:gtceu:baseline_astrometer",
+        "m:gtceu:sample_receiving_facility",
+        "m:gtceu:organoid_array",
+        "m:gtceu:warp_gate",
+        "grindless:proxima_flora_sample",
+        "grindless:proxima_ice_core",
+        "grindless:chitosan_scaffold",
+        "grindless:organoid_processor",
+        "grindless:stellar_neighbourhood_chart",
+        "grindless:proxima_gate_seed",
+        "grindless:warp_gate_casing",
+        "gtceu:wetware_processor_mainframe"
+      ],
+      "note": "Built after the level 8 trip; they never need Mercury."
+    },
+    {
+      "id": "output-uhv",
+      "era": "uev",
+      "label": "Gate to UEV: what the gate holds",
+      "items": [
+        "gtceu:uev_machine_casing"
+      ],
+      "optional": true,
+      "note": "UEV starts with the gate's output; UHV may not need it."
+    },
+    {
+      "id": "luv-europa",
+      "era": "luv-europa",
+      "label": "Europa and living circuits: its machines formed, the seed, the sample, brine, bacteria, and the life chain downstream (stem cells, seeds, the factor, the organoid, the NPU, wetware)",
+      "items": [
+        "m:gtceu:cryobot",
+        "m:gtceu:algae_bioreactor",
+        "grindless:europan_quantum_seed",
+        "grindless:europan_ocean_sample",
+        "fluid:gtceu:europan_brine",
+        "fluid:gtceu:bacteria",
+        "gtceu:stem_cells",
+        "grindless:engineered_barley_seed",
+        "grindless:engineered_tobacco_seed",
+        "grindless:neurotrophic_factor",
+        "grindless:neural_organoid",
+        "gtceu:neuro_processing_unit",
+        "gtceu:wetware_processor"
+      ],
+      "package": [
+        "B1",
+        "B5",
+        "B8"
+      ],
+      "inputsOf": [
+        "grindless:vein_drilling/luv/cryobot_*",
+        "grindless:bioreactor/luv/*"
+      ],
+      "note": "LuV's group with the bioreactor rows narrowed to LuV's: grindless:bioreactor/uhv/far_red_algae (Proxima life) is UHV content."
+    }
+  ]
+}

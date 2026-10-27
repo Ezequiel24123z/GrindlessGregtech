@@ -41,8 +41,11 @@ function orbitOf(t, name) {
   const surface = t.places.surfaces[name];
   if (!surface) throw new Error(`place tables: \${orbit:${name}}: ${name} isn't a surface in places.json`);
   const orbit = `${surface}_orbit`;
-  if (!t.orbits.dimensions.includes(orbit)) throw new Error(`place tables: \${orbit:${name}}: ${orbit} isn't in orbits.json`);
-  return orbit;
+  if (t.orbits.dimensions.includes(orbit)) return orbit;
+  // a surface owned by another mod (gcyr:proxima_centauri_b) has our orbit under our namespace (grindless:proxima_b_orbit)
+  const own = `grindless:${name}_orbit`;
+  if (t.orbits.dimensions.includes(own)) return own;
+  throw new Error(`place tables: \${orbit:${name}}: ${orbit} isn't in orbits.json`);
 }
 
 function placeOf(t, name) {

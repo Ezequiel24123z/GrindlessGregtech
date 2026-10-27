@@ -367,7 +367,7 @@
     { "id": "site-moon-recipes", "label": "Site: the sintered brick, the lunar seed, the tripod's lunar veins, the dome's lunar mode and the titanium combs only run on the Moon", "kind": "site", "recipe": ["grindless:electric_furnace/sintered_regolith", "grindless:chemical_reactor/lunar_quantum_seed", "grindless:vein_drilling/ev/*_moon_*", "grindless:greenhouse/ev/*_sealed_moon", "grindless:centrifuge/pb/*honeycomb_titanium", "grindless:centrifuge/pb/*honeycomb_ilmenite"], "dimensions": ["gcyr:luna"] },
     { "id": "site-mars-machines", "label": "Site machines: every recipe of the atmosphere processor only runs on Mars", "kind": "site", "types": ["gtceu:atmosphere_processing"], "dimensions": ["gcyr:mars"] },
     { "id": "site-mars-recipes", "label": "Site: the Martian seed, the tripod's Martian veins, the dome's Martian mode and the tungsten combs only run on Mars", "kind": "site", "recipe": ["grindless:chemical_reactor/martian_quantum_seed", "grindless:vein_drilling/ev/*_mars_*", "grindless:greenhouse/ev/*_sealed_mars", "grindless:centrifuge/pb/*honeycomb_tungst*", "grindless:centrifuge/pb/*honeycomb_scheelite"], "dimensions": ["gcyr:mars"] },
-    { "id": "site-offworld", "label": "Site: the solar array only runs off Earth (the Moon or Mars)", "kind": "site", "types": ["gtceu:lunar_solar"], "dimensions": ["gcyr:luna", "gcyr:mars"] },
+    { "id": "site-offworld", "label": "Site: the solar array only runs off Earth (the Moon, Mars or, from UHV, Proxima b)", "kind": "site", "types": ["gtceu:lunar_solar"], "dimensions": ["gcyr:luna", "gcyr:mars", "gcyr:proxima_centauri_b"], "note": "Proxima b (tables/places.json) is UHV's grindless:lunar_solar/proxima (B5); listed here so the earlier tiers' checks read the current pack (UHV escalation, 2026-10-28)." },
     { "id": "site-offworld-family", "label": "Site: the EV family recipes (the tripod's and the sealed dome's) only run on the Moon or Mars", "kind": "site", "recipe": ["grindless:vein_drilling/ev/*", "grindless:greenhouse/ev/*"], "dimensions": ["gcyr:luna", "gcyr:mars"] },
     {
       "id": "site-fuels-air",
@@ -545,7 +545,8 @@
       "era": "ev-mars",
       "label": "What Mars makes: the Martian seed, the samples, and what the Martian tripod, the processor and the cascade need",
       "items": ["grindless:martian_quantum_seed", "grindless:vein_sample_scheelite_mars", "grindless:vein_sample_merrillite_mars", "grindless:vein_sample_ice_mars", "gtceu:hv_fluid_drilling_rig"],
-      "inputsOf": ["grindless:vein_drilling/ev/*_mars_*", "grindless:atmosphere_processing/ev/*", "grindless:solvent_extraction/ev/*"]
+      "inputsOf": ["grindless:vein_drilling/ev/*_mars_*", "grindless:atmosphere_processing/ev/*", "grindless:solvent_extraction/ev/merrillite_leach", "grindless:solvent_extraction/ev/rare_earth_extraction"],
+      "note": "The cascade's EV modes only (leach, extraction): its later modes are their eras' content (ZPM monazite froth europium, UV ytterbium strip, UHV Proxima REE liquor) (UHV escalation, 2026-10-28)."
     },
     {
       "id": "output-ev",
