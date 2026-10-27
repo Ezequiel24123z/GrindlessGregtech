@@ -113,8 +113,10 @@ test('the recipes fit the machines\' slots (startup maxIO; the circuit takes an 
 test('SiC power modules and SiC mirror blanks come only from the SiC device fab', () => {
   assert.deepEqual(producers('grindless:sic_power_module').map(([w]) => w), ['power_devices.json:.types.silicon_carbide.recipes[3]']);
   assert.deepEqual(madeBy('grindless:sic_power_module'), ['grindless:silicon_carbide/sic_power_modules']);
-  assert.deepEqual(producers('grindless:sic_mirror_blank').map(([w]) => w), ['power_devices.json:.types.silicon_carbide.recipes[4]']);
-  assert.deepEqual(madeBy('grindless:sic_mirror_blank'), ['grindless:silicon_carbide/sic_mirror_blank']);
+  // A6's Casimir array strips worn cavity stacks back to blanks for re-coating (uhv.md: worn stacks -> plates re-coated)
+  assert.deepEqual(producers('grindless:sic_mirror_blank').map(([w]) => w),
+    ['antimatter.json:.types.casimir_cavity.recipes[2]', 'power_devices.json:.types.silicon_carbide.recipes[4]']);
+  assert.deepEqual(madeBy('grindless:sic_mirror_blank').sort(), ['grindless:casimir_cavity/strip_stack', 'grindless:silicon_carbide/sic_mirror_blank']);
   // the SiC line in order: boule -> wafers (cutter) -> epi -> A4's aluminium implant -> anneal -> modules
   assert.deepEqual(madeBy('grindless:sic_boule'), ['grindless:silicon_carbide/sic_boule']);
   assert.deepEqual(madeBy('grindless:sic_wafer'), ['grindless:cutter/sic_wafers']);
