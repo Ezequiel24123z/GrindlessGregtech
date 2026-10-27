@@ -95,7 +95,8 @@ test('the BNNT tank comes only from the winder, and the winder consumes A8\'s BN
 
 test('the works: ion on xenon, Hall on krypton (the Kuiper row), 90 % of the gas back, the pod from both', () => {
   const steps = P.recipes.filter((r) => r.type === 'thruster_assembly');
-  assert.deepEqual(steps.map((r) => [r.name, r.circuit]), [['ion_thruster', 1], ['hall_thruster', 2], ['thruster_pod', 3]]);
+  assert.deepEqual(steps.map((r) => [r.name, r.circuit]), [['ion_thruster', 1], ['hall_thruster', 2], ['thruster_pod', 3],
+    ['ican_rocket_motor', 4], ['oganesson_propellant_pod', 5]]);
   const ion = row('ion_thruster');
   assert.ok(ion.itemsIn.some((x) => x.id === 'grindless:printed_thruster_chamber' && x.count === 1), 'A8\'s printed chamber');
   assert.ok(ion.itemsIn.some((x) => x.id === 'grindless:molybdenum_grid' && x.count === 2));
