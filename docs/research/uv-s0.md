@@ -46,3 +46,12 @@ americium double plate, 2 ZPM field generators, 128 uhpic chips, 32 EnTED wires,
   as observed in ZPM-B1 behaves as floor((motor + tank) / 2). The flight is the only way to settle it.
 - S0-3 persistence and the sky renderer are not exercised. A `Material` registry lookup always printed "absent", so S0-8 used items and fluids.
 - The UV hatch ids were confirmed by the S0-4 run (`uv_energy_input_hatch`, `uv_input_hatch`, `uv_output_hatch`).
+
+## Orchestrator decisions (2026-10-27)
+
+- **S0-1:** the design stands. The registry gives tier 11 unclamped and ZPM-B1 observed floor((motor + tank) / 2), so the BNNT tank with an elite motor is level 7. A11's T1 proves the level 7 build and B1's T1 the flight to Pluto orbit (server side, as ZPM-B1). If that flight fails, the `uv.md:1192` fallback applies (Pluto tier 6 with a gate item) and B1 escalates.
+- **S0-3:** persistence rests on the LuV/ZPM station precedent; B1's T1 deploys both new stations and checks them after a save.
+- **S0-4:** the three unlisted GTM fusion recipes (U-238, U-235 and osmium plasma, 140-150 M) are kept on the Mk3 as GTM has them (GTM wins; inside the caps, no neutronium or naquadria). A3 lists them as kept in `tables/fusion_mk3.json`.
+- **S0-6:** UV generators write their final figures in their own recipes and stay out of `generators.js` TYPES (as designed).
+- **S0-7:** protons are items: A5's synchrotron takes `gtca:proton` from GTCA's COMET machine; no ioniser row.
+- **S0-8:** F1 registers `grindless:` ytterbium, uranium_233 and arsine besides the design's list; everything else is GTM's.
