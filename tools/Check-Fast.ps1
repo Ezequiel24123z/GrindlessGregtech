@@ -8,6 +8,7 @@ Runs, in this order (each one's full output goes to -OutDir\<check>.log, ignored
             en_us -> es_es lang parity, and every registered machine, recipe type and grindless: item has both names.
   quests    tools\quests\lint.mjs on the whole book (errors fail; warnings are counted).
   zones     tools\test\Get-GGTestZone.ps1 -Validate (no overlapping test bands, listed tests exist).
+  order     tools\analysis\script-order.mjs --check: every script's `// priority:` header follows the deterministic load order (unstamped = notice).
   analysis  tools\analysis\test\run.mjs, the Node suite (about 70 s; the slowest check).
 Prints one line per check and at most 30 lines in total. Exit 0 = PASS, 1 = a check failed, 2 = tool failure (no Node).
 
@@ -26,7 +27,7 @@ param(
     [string]$OutDir
 )
 $ErrorActionPreference = 'Stop'
-$Checks = @('static', 'quests', 'zones', 'analysis')
+$Checks = @('static', 'quests', 'zones', 'order', 'analysis')
 # -File passes "-Skip a,b" as one string: split it, and treat an unknown name as a usage error (2), not a failed check (1).
 $Skip = @($Skip | ForEach-Object { $_ -split ',' } | ForEach-Object { $_.Trim() } | Where-Object { $_ })
 $unknown = @($Skip | Where-Object { $Checks -notcontains $_ })
@@ -88,6 +89,12 @@ try {
         $r = Invoke-Check 'zones' { & (Join-Path $repo 'tools/test/Get-GGTestZone.ps1') -Validate }
         $r | Add-Member Info ($(if ($r.Code -eq 0) { $r.Out -join '' } else { "$($r.Out.Count) problems" }))
         $r | Add-Member Detail @($(if ($r.Code -ne 0) { $r.Out }))
+        $results += $r
+    }
+    if ($Skip -notcontains 'order') {
+        $r = Invoke-Check 'order' { & $node 'tools/analysis/script-order.mjs' '--check' }
+        $r | Add-Member Info (($r.Out | Where-Object { $_ -match '^(ok script-order|NOTICE)' }) -replace '^ok script-order:\s*', '' -join '; ')
+        $r | Add-Member Detail @($r.Out | Where-Object { $_ -match '^FAIL ' })
         $results += $r
     }
     if ($Skip -notcontains 'analysis') {
