@@ -380,8 +380,9 @@
       if (W.faults[flowKey(e)]) { out.faulted++; return }
       var ha = ad.classify(m)
       if (ha.kind !== 'plain') { fault(e, 'the hatch\'s energy container is ' + (ha.cls || 'missing') + ', not GTM\'s NotifiableEnergyContainer'); out.faulted++; return }
-      if (h.kind === 'dynamo') deposits.push({ a: ha, limit: Number.MAX_SAFE_INTEGER, e: e })
-      else withdrawals.push({ a: ha, limit: Number.MAX_SAFE_INTEGER, tier: e.t, e: e })
+      var hlimit = W.rate(e.t, h.amps) * ticks
+      if (h.kind === 'dynamo') deposits.push({ a: ha, limit: hlimit, e: e })
+      else withdrawals.push({ a: ha, limit: hlimit, tier: e.t, e: e })
     })
     if (changed) saveBlocks(server, keep)
 

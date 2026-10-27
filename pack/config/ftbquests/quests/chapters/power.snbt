@@ -1596,7 +1596,7 @@
 			y: 68.0d
 		}
 		{
-			dependencies: ["38199670D4113E48", "7E64F29B6EE66B09"]
+			dependencies: ["38199670D4113E48"]
 			description: ["Helium-3 fusion needs no tritium. Its plasma is worth more in the direct energy converter than in a turbine."]
 			icon: "gtceu:zpm_fusion_reactor"
 			id: "19B20A8D836A7CF1"
@@ -1608,7 +1608,22 @@
 			]
 			title: "Fusion Reactor Mk2"
 			x: 9.0d
-			y: 68.75d
+			y: 68.0d
+		}
+		{
+			dependencies: ["7E64F29B6EE66B09"]
+			description: ["The cooled gas comes back out, so only the heat is lost."]
+			icon: "gtceu:direct_energy_converter"
+			id: "76C601CDAA2C511E"
+			size: 1.0d
+			subtitle: "ZPM. Takes the charge off the plasma with no turbine"
+			tasks: [
+				{ id: "7DED0E002BA762D4", item: "gtceu:direct_energy_converter", optional_task: true, type: "item" }
+				{ id: "1F90E07AC0705333", type: "checkmark" }
+			]
+			title: "Direct Energy Converter"
+			x: 9.0d
+			y: 69.5d
 		}
 		{
 			icon: "gcyr:dyson_solar_cell"
@@ -1862,7 +1877,7 @@
 			dependencies: ["1A64E503878275AE"]
 			description: [
 				"Energy goes in at any voltage; the cells only limit what comes out."
-				"Comes in 2, 4, 16 and 64 A, LV to LuV."
+				"Comes in 2, 4, 16 and 64 A, LV to ZPM."
 			]
 			icon: "gtceu:lv_wireless_dynamo_hatch"
 			id: "128CD52291A76880"
@@ -1878,7 +1893,7 @@
 		}
 		{
 			dependencies: ["1A64E503878275AE"]
-			description: ["2 A of its tier, LV to LuV."]
+			description: ["2 A of its tier, LV to ZPM."]
 			icon: "grindless:lv_wireless_dynamo_cover"
 			id: "54D4653CC016835A"
 			size: 1.0d
@@ -1895,7 +1910,7 @@
 			dependencies: ["1A64E503878275AE"]
 			description: [
 				"Above the network's voltage it gets nothing; shift-right-click it with an empty hand to see why."
-				"Comes in 2, 4, 16 and 64 A, LV to LuV."
+				"Comes in 2, 4, 16 and 64 A, LV to ZPM."
 			]
 			icon: "gtceu:lv_wireless_energy_hatch"
 			id: "5062E82EF67AFF89"
@@ -1913,7 +1928,7 @@
 			dependencies: ["1A64E503878275AE"]
 			description: [
 				"GTM machines, chargers and battery buffers, not converters or multiblock controllers; shift-right-click with an empty hand for the readout."
-				"2 A of its tier, LV to LuV."
+				"2 A of its tier, LV to ZPM."
 			]
 			icon: "grindless:lv_wireless_energy_cover"
 			id: "7713822C036911A8"

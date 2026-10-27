@@ -78,7 +78,7 @@
       itemsIn: [], notConsumed: [], worn: null,
       fluidsIn: [{ id: 'gtceu:uranus_hydrogen', amount: 8000 }],
       fluidsOut: [{ id: 'gtceu:deuterium', amount: 62 }, { id: 'gtceu:hydrogen', amount: 7938 }],
-      itemsOut: [], eut: ZPM_VA, duration: 200, dim: null }
+      itemsOut: [], eut: ZPM_VA, duration: 200, dim: ORBIT }
   ]
 
   UR.recipes = TABLE.map(function (t) {
