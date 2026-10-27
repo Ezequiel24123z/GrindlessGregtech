@@ -56,6 +56,7 @@ Generators for the pack's own textures. Everything is procedural 16x16 pixel art
 | `Build-LuVCryogenicsTextures.ps1` | Writes the faces of the LuV helium refrigerator and coated conductor line (LuV-A3: `multiblock/helium_refrigerator/`, `multiblock/coated_conductor_line/`). `-Only refrigerator,line`, `-Preview <png outside the repo>` (optional `-FrostCasing <png>`, `-StainlessCasing <png>`) and `-Credits` (their 10 CREDITS rows). |
 | `Build-LuVFoundationTextures.ps1` | Writes the shared LuV textures (LuV-A1): 29 items (four of them animated quantum seeds) and the ten block textures under `block/luv/` (eight casings and the orbital solar panel's cells and frame). `-Only <output or group>`, `-Preview <png outside the repo>`, `-Credits`. |
 | `Build-ZPMFoundationTextures.ps1` | Writes the shared ZPM textures (ZPM-F1): 31 items and the six block textures under `block/zpm/`. `-Only <output or group>`, `-Preview <png outside the repo>`, `-Credits`. |
+| `Build-UVFoundationTextures.ps1` | Writes the shared UV textures (UV-F1): 34 items and three block textures under `block/uv/`. `-Only <output or group>`, `-Credits`. |
 | `Build-ZPMNaquadriaTextures.ps1` | Writes the faces of the ZPM naquadria refinery and naquadah fuel works (ZPM-A2: `multiblock/naquadria_refinery/`, `multiblock/naquadah_fuel_works/`), 10 files. `-Credits` (their CREDITS rows). |
 | `Build-HTSMagnetWorksTextures.ps1` | Writes the LuV HTS magnet works' face (`multiblock/hts_magnet_works/`). `-Only magnet_works`, `-Preview <png outside the repo>` and `-Credits` (its 5 CREDITS rows). |
 | `Build-GanymedeTextures.ps1` | Writes the faces of the LuV gravitational wave detector and coilgun launcher (LuV-B9: `multiblock/gravitational_wave_detector/`, `multiblock/coilgun_launcher/`). `-Only detector,launcher`, `-Preview <png outside the repo>` (optional `-FrostCasing <png>`, `-TungstenCasing <png>`) and `-Credits` (their 10 CREDITS rows). |
@@ -843,6 +844,17 @@ powershell -NoProfile -ExecutionPolicy Bypass -File tools\assets\Build-ZPMFounda
 - `-Preview` (outside the repo, never shipped) writes an x6 sheet: every item on slot grey and every block tiled 3x3.
 - The final check fails the run: 16x16, binary alpha, no pure black, blocks fully opaque, items with a transparent corner and at least 20 opaque pixels, no two identical textures, and the drawn set equals the ids registered in `startup_scripts/grindless/zpm/foundation.js`.
 - `-Credits` prints one CREDITS row per file.
+
+### UV foundation (UV-F1)
+
+`Build-UVFoundationTextures.ps1`: same method and checks as the ZPM foundation, drawn from twelve shape routines with a palette per item. It writes the 34 shared UV items (`item/<id>.png`) and three blocks under `block/uv/` (`laser_module_block`, `srf_cryomodule_block`, `bnnt_fuel_tank_side`). The sixteen materials are GT materials (GTM colours them), so they need no PNG.
+
+```powershell
+powershell -NoProfile -ExecutionPolicy Bypass -File tools\assets\Build-UVFoundationTextures.ps1
+powershell -NoProfile -ExecutionPolicy Bypass -File tools\assets\Build-UVFoundationTextures.ps1 -Only blocks -Credits
+```
+
+Same final check (binary alpha, no pure black, opaque blocks, transparent item corner, no identical textures, drawn set equals `startup_scripts/grindless/uv/foundation.js`). No `-Preview`. Proposed CREDITS "Assets" line: procedural, original.
 
 ## Contrast pass after the gallery test (2026-10-25)
 
