@@ -129,7 +129,8 @@ function Invoke-GGFallback([string]$Reason, [switch]$Refreshed) {
     exit $fbCode
 }
 
-# ------------------------------------------------------------ backend (tools/test/backends.psd1)# Precedence: -Backend > $env:GG_BACKEND > Default. An optional, untracked backends.local.psd1 next to it (or the file
+# ------------------------------------------------------------ backend (tools/test/backends.psd1)
+# Precedence: -Backend > $env:GG_BACKEND > Default. An optional, untracked backends.local.psd1 next to it (or the file
 # named by $env:GG_BACKENDS_LOCAL) overrides single keys per backend, e.g. a larger VM's MemoryMax.
 $beCfg = Import-PowerShellDataFile (J $PSScriptRoot 'backends.psd1')
 $beLocalPath = $env:GG_BACKENDS_LOCAL

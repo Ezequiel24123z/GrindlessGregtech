@@ -24,8 +24,9 @@
             MemoryMax     = ''
             MemorySwapMax = ''
             # Concurrent server JVMs (one slot per run, own ports and run dir, MemoryMax = (RAM - reserve) / Slots up to
-            # the per-run cap). Measured on the 4 vCPU / 32 GiB VM: docs/testing/vm.md#sizing.
-            Slots         = 1
+            # the per-run cap). Measured on the 4 vCPU / 32 GiB VM: 3 runs at once (server or client) pass with about 2x
+            # timeout headroom and 15 GiB free; CPU is the limit (docs/testing/vm.md#sizing). Size it to the VM you use.
+            Slots         = 3
             # Backend that runs instead when this one is unreachable or fails before the suite starts (never after a
             # real test FAIL). -NoFallback disables it for one run.
             Fallback      = 'home'

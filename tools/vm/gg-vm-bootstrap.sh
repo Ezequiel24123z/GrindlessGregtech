@@ -8,7 +8,7 @@
 #   GG_BOOTSTRAP_DRY=1 ...      # print what would change, change nothing
 #
 # Env: GG_USER (bench user, default: you), GG_NODE_VERSION, GG_BENCH_RESERVE_MB (RAM kept for the OS, default 1228),
-# GG_BENCH_RUN_MAX_MB (memory ceiling of one run, default 12288), GG_BENCH_SLOTS (concurrent server JVMs, default 1),
+# GG_BENCH_RUN_MAX_MB (memory ceiling of one run, default 12288), GG_BENCH_SLOTS (concurrent run slots, default from nproc and RAM),
 # GG_LINGER=0 (skip loginctl enable-linger). Nothing is sized for a particular VM: each run's ceiling is computed at
 # launch as min((RAM - reserve) / slots, per-run cap) from this VM's RAM.
 # A new VM from scratch: docs/testing/rebuild.md.
@@ -102,7 +102,14 @@ benv=/etc/grindless/bench.env
 total_mb=$(( $(awk '/^MemTotal:/ {print $2}' /proc/meminfo) / 1024 ))
 reserve_mb="${GG_BENCH_RESERVE_MB:-1228}"
 run_max_mb="${GG_BENCH_RUN_MAX_MB:-12288}"
-bench_slots="${GG_BENCH_SLOTS:-1}"
+# default slots from the hardware: one vCPU stays free, about 8 GiB per run (measured: 4 vCPU / 32 GiB -> 3 slots,
+# docs/testing/vm.md#sizing); GG_BENCH_SLOTS overrides it
+auto_slots=$(( $(nproc) - 1 ))
+mem_slots=$(( (total_mb - reserve_mb) / 8192 ))
+if [ "$mem_slots" -lt "$auto_slots" ]; then auto_slots=$mem_slots; fi
+if [ "$auto_slots" -gt 8 ]; then auto_slots=8; fi
+if [ "$auto_slots" -lt 1 ]; then auto_slots=1; fi
+bench_slots="${GG_BENCH_SLOTS:-$auto_slots}"
 rec_mb=$(( (total_mb - reserve_mb) / bench_slots ))
 if [ "$rec_mb" -gt "$run_max_mb" ]; then rec_mb=$run_max_mb; fi
 if [ ! -f "$benv" ]; then
