@@ -19,6 +19,9 @@
 //     3 ented_wire    1 PIT billet -> 16 EnTED single wires + 1 silver dust (the sheath, back to tubes)          491,520 x 600 t
 //     GTM's own EnTED wire routes (wiremill, extruder, plate + wire cutter) are removed: the line is the only maker. GTM's doubling,
 //     splitting, fine wire and cable recipes stay (they start from the line's single wire).
+//     4 rtan_wire     4 RTAN dust (GTM's mixer) + 1 silver tube -> 8 RTAN single wires + 1 silver dust: the UHV conductor drawn in
+//                     the sheath (docs/eras/uhv.md line 29, package UHV-A9; GTM's mass, 1 ingot = 2 wires, and at least GTM's EU per
+//                     wire). GTM's RTAN routes (blast furnace, freezer, wiremill) stay.                       1,966,080 x 1000 t
 //   powder bed printer (type gtceu:powder_bed_fusion), from data/grindless/tables/am_powders.json
 //     1 atomise_<metal>  4 ingots + 1,000 mB argon -> 4 AM powder + 950 mB argon                                122,880 x 200 t
 //     2/4/5/6 print_<part>  powder + fibre laser module (2 % wear: spent module out at the same chance) -> near-net part + unsintered
@@ -47,6 +50,7 @@
 
   var VA_ZPM = 122880
   var VA_UV = 491520
+  var VA_UHV = 1966080
   var HBN = UV.hbnDust || 'grindless:hbn_dust'
   var YARN = UV.bnntYarn || 'grindless:bnnt_yarn'
   var ENTED = UV.entedPowder || 'grindless:ented_powder'
@@ -58,6 +62,7 @@
   var B2O3 = 'gtceu:boron_trioxide_dust'
   var ENTED_WIRE = 'gtceu:enriched_naquadah_trinium_europium_duranide_'
   var WIRE = ENTED_WIRE + 'single_wire'
+  var RTAN = 'gtceu:ruthenium_trinium_americium_neutronate_'
 
   function item(id, count) { return { id: id, count: count } }
   function fluid(id, amount) { return { id: id, amount: amount } }
@@ -80,7 +85,9 @@
       [item('gtceu:enriched_naquadah_dust', 4), item('gtceu:trinium_dust', 3), item('gtceu:europium_dust', 2), item('gtceu:duranium_dust', 1)],
       [], [item(ENTED, 10)], [], VA_ZPM, 200),
     row('pit_billet', 'powder_in_tube', 2, [item(ENTED, 4), item(TUBE, 1)], [], [item(BILLET, 1)], [], VA_ZPM, 200),
-    row('ented_wire', 'powder_in_tube', 3, [item(BILLET, 1)], [], [item(WIRE, 16), item('gtceu:silver_dust', 1)], [], VA_UV, 600)
+    row('ented_wire', 'powder_in_tube', 3, [item(BILLET, 1)], [], [item(WIRE, 16), item('gtceu:silver_dust', 1)], [], VA_UV, 600),
+    row('rtan_wire', 'powder_in_tube', 4, [item(RTAN + 'dust', 4), item(TUBE, 1)], [], [item(RTAN + 'single_wire', 8), item('gtceu:silver_dust', 1)],
+      [], VA_UHV, 1000)
   ]
 
   var SIDE = [

@@ -1,7 +1,7 @@
 // ZPM's naquadria magnet works and the ZPM wireless tier (package ZPM-A5), no game needed. The pack's scripts run in the stand-in of
 // lib/kubejs_static.mjs:
 //   - startup_scripts/grindless/zpm/magnet_works.js: the recipe type, the machine and its 7 x 7 x 5 pattern, the HTS insert;
-//   - server_scripts/grindless/zpm/magnet_works.js: three recipes (one circuit each, nothing clashing), the cryostat casing and the controller;
+//   - server_scripts/grindless/zpm/magnet_works.js: the recipes (one circuit each, nothing clashing), the cryostat casing and the controller;
 //   - the ZPM row of tables/wireless_energy.json (its cell is wound here), the wire's energy price against GTM's route, en_us and es_es text,
 //     and A5's hide rules gone.
 import assert from 'node:assert/strict';
@@ -54,13 +54,13 @@ test('the pattern: one controller in the front slice, 7 x 7 x 5, GTM part limits
   assert.ok(blocks.includes('grindless:cryostat_casing'));
 });
 
-test('four recipes: one circuit each, the ZPM ones ZPM VA bound and the UV cell UV VA bound, each cell is its row\'s cell, the charge is not consumed', () => {
-  assert.deepEqual(MW.recipes.map((r) => [r.name, r.circuit]), [['zpm_smes_cell', 1], ['urhnq2_wire', 2], ['hts_insert', 3], ['uv_smes_cell', 4]]);
+test('five recipes: one circuit each, the ZPM ones ZPM VA bound, the UV cell UV VA bound and the UHV cell UHV VA bound, each cell is its row\'s cell, the charge is not consumed', () => {
+  assert.deepEqual(MW.recipes.map((r) => [r.name, r.circuit]), [['zpm_smes_cell', 1], ['urhnq2_wire', 2], ['hts_insert', 3], ['uv_smes_cell', 4], ['uhv_smes_cell', 5]]);
   for (const p of MW.recipes) {
     const r = byId(p.recipeId);
     assert.ok(r, p.recipeId + ' added');
     assert.equal(r.t, 'gtceu:naquadria_magnets');
-    assert.ok(Number.isInteger(p.duration) && p.duration > 0 && p.eut <= (p.name === 'uv_smes_cell' ? 4 * ZPM_VA : ZPM_VA), p.name);
+    assert.ok(Number.isInteger(p.duration) && p.duration > 0 && p.eut <= (p.name === 'uhv_smes_cell' ? 16 * ZPM_VA : p.name === 'uv_smes_cell' ? 4 * ZPM_VA : ZPM_VA), p.name);
     const text = JSON.stringify(r.j);
     if (p.charge) assert.match(text, /liquid_helium/, p.name + ' carries the charge');
     else assert.doesNotMatch(text, /liquid_helium/, p.name + ' needs no charge');

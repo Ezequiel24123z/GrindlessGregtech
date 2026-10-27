@@ -101,6 +101,6 @@
     { "id": "uv_edge", "x": [27392, 27455], "z": [0, 63], "y": [98, 112], "tests": ["uv_edge"], "note": "UV-B5: recipe lookups only (no structure placed): the precursor probe bay and event horizon interferometer rows on the Pluto orbit, the probe assembler, and the UHV energy hatch re-added with the Sgr A* image's station research" },
     { "id": "uv_c3", "x": [27648, 27711], "z": [0, 63], "y": [98, 112], "tests": ["uv_c3"], "note": "UV-C3: the gate example of uv.md Power: four UV 64 A dynamo hatches, a wireless tower with two UV SMES cells and a power substation on a UV 16 A wireless energy hatch; then the save mark (a ZPM-cell tower, a ZPM hatch and a chest at X 27690-27711, Z 40-63) read back after a restart (Overworld only)" },
     { "id": "uhv_s0", "x": [27904, 27967], "z": [0, 63], "y": [60, 112], "tests": ["uhv_s0_dump", "uhv_s0_stations"], "note": "UHV-S0: disposable spikes S0-1..S0-9 (also tools/test/uhv-s0: machines spike and spike data); Overworld Y 60-112 and the same X/Z in the orbit, Proxima and Mercury levels" },
-    { "id": "uhv_elevator", "x": [28160, 28223], "z": [0, 63], "y": [60, 104], "tests": ["uhv_elevator"], "note": "UHV-A7: GTCA space elevator forms and runs the GEO lift" }
-                    ]
+    { "id": "uhv_elevator", "x": [28160, 28223], "z": [0, 63], "y": [60, 104], "tests": ["uhv_elevator"],     "note": "UHV-A7: GTCA space elevator forms and runs the GEO lift" },
+        { "id": "uhv_wireless", "x": [28672, 28735], "z": [0, 63], "y": [98, 112], "tests": ["uhv_wireless"], "note": "UHV-A9: two wireless towers (UHV cells, then one UV cell swapped for a UHV cell) and UHV 2 A / 64 A and UV 2 A wireless energy hatches (Overworld only)" }                    ]
 }
