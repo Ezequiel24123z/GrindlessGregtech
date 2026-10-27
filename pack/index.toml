@@ -3597,6 +3597,10 @@ file = "kubejs/assets/grindless/textures/item/pmma_coated_wafer.png"
 hash = "d70570c24389c12cc154676693d75156ee3831586b0efc59b854564c5d03a701"
 
 [[files]]
+file = "kubejs/assets/grindless/textures/item/precursor_probe.png"
+hash = "bbbc131ede0133fdd7569dbff7e779145ae74e17fc4d851df4b9ab7fb0db7059"
+
+[[files]]
 file = "kubejs/assets/grindless/textures/item/printed_array_mount.png"
 hash = "50823f52a2a6556bc260390ec56183016bad6bd5146a3fb020cc9b8607da888a"
 
@@ -4253,6 +4257,10 @@ file = "kubejs/client_scripts/grindless/uv_detectors_lang.js"
 hash = "83f6066581246e98e092a6777977530d9592f083dc33498c9c902bbbd3756b65"
 
 [[files]]
+file = "kubejs/client_scripts/grindless/uv_edge_lang.js"
+hash = "e4e9c1ff264b878db8655d928ea297abbb0648a9c8acc1352e099194cde92882"
+
+[[files]]
 file = "kubejs/client_scripts/grindless/uv_foundation_lang.js"
 hash = "9004ac89722ec6e9efcea19f57100e494827e87ea5df9800a5af395c12a4b253"
 
@@ -4574,7 +4582,7 @@ hash = "1f4b256531a0b42a6ecf399e9b692d9e4730bd4102e53aab3e1fa2c999b69e9d"
 
 [[files]]
 file = "kubejs/data/grindless/tables/hidden_until.json"
-hash = "c855b473313ca31d29e424b769ced529771430ddee74aabbffc883fbd8814f0f"
+hash = "622e8a7b0f81d9fd8abbb9238d093d08c090d94c45aada1b914868cd21bbf4aa"
 
 [[files]]
 file = "kubejs/data/grindless/tables/hot_cell.json"
@@ -5229,6 +5237,10 @@ file = "kubejs/server_scripts/grindless/uv/detectors.js"
 hash = "a16daf74a6596f396bc4d024adbda7e1dbaa74f737fe481a96a3609f3d193840"
 
 [[files]]
+file = "kubejs/server_scripts/grindless/uv/edge.js"
+hash = "6d3609a3cdb50c73378b52295b796715c83829acb1b4e6be03f4876494063d9c"
+
+[[files]]
 file = "kubejs/server_scripts/grindless/uv/fusion.js"
 hash = "1c2d1cb7e198072075d03cfc15c90b5a340f0b8a23799a335e36d3cfa69b5386"
 
@@ -5679,6 +5691,10 @@ hash = "4c4d17de43525e5a9c05cf3f7e5f20cc016c19d77bfea7b9f9d90b506b44817e"
 [[files]]
 file = "kubejs/startup_scripts/grindless/uv/detectors.js"
 hash = "8242848c15828afa3121890b4bf363830a42889eec03dfd1de2d4266acd4dcfb"
+
+[[files]]
+file = "kubejs/startup_scripts/grindless/uv/edge.js"
+hash = "b2a72cbfd1145c5b68b1d5147538af15f7b1ec58538c922c85a4862ebe8789c8"
 
 [[files]]
 file = "kubejs/startup_scripts/grindless/uv/foundation.js"

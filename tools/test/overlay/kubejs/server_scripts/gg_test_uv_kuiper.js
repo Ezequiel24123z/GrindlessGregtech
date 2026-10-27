@@ -74,13 +74,19 @@
       check('registered', Item.exists(id), id)
     })
 
+    // Java strings and boxed numbers make JSON.stringify differ on equal values: compare element-wise.
+    function sameList(a, b) {
+      if (a.length !== b.length) return false
+      for (var i = 0; i < a.length; i++) if (String(a[i]) !== String(b[i])) return false
+      return true
+    }
     ;(K.recipes || []).forEach(function (rec) {
       var live = byId(server, rec.recipeId)
       if (live === null) { check('live_' + rec.name, false, rec.recipeId + ' is not loaded'); return }
       var dims = dimsOf(live)
       var circuits = circuitsOf(live)
       var eu = euOf(live)
-      check('live_' + rec.name, JSON.stringify(dims) === JSON.stringify([ORBIT]) && JSON.stringify(circuits) === '[1]' && eu === Number(rec.eut),
+      check('live_' + rec.name, sameList(dims, [ORBIT]) && sameList(circuits, ['1']) && Number(eu) === Number(rec.eut),
         rec.recipeId + '; dims=' + dims.join(',') + '; circuits=' + circuits.join(',') + '; EU/t=' + eu)
     })
     var anneal = byId(server, 'grindless:ice_annealing/planetesimal_annealing')
@@ -97,9 +103,9 @@
       var cin = fluidIds(classes().Helper.getInputFluids(cryo))
       var cout = fluidIds(classes().Helper.getOutputFluids(cryo))
       var cdims = dimsOf(cryo)
-      check('cryo_row', JSON.stringify(cin) === JSON.stringify([NOBLE + ':1000']) &&
-        JSON.stringify(cout) === JSON.stringify(['gtceu:argon:400', 'gtceu:krypton:400', 'gtceu:xenon:200']) &&
-        JSON.stringify(cdims) === JSON.stringify(['gcyr:luna']) && euOf(cryo) === 7680,
+      check('cryo_row', sameList(cin, [NOBLE + ':1000']) &&
+        sameList(cout, ['gtceu:argon:400', 'gtceu:krypton:400', 'gtceu:xenon:200']) &&
+        sameList(cdims, ['gcyr:luna']) && Number(euOf(cryo)) === 7680,
         'in=' + cin.join(',') + '; out=' + cout.join(',') + '; dims=' + cdims.join(',') + '; EU/t=' + euOf(cryo))
     }
     ;['liquid_oxygen', 'liquid_helium', 'liquid_nitrogen', 'triton_nitric_oxide'].forEach(function (n) {
