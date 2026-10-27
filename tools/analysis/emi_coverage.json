@@ -59,8 +59,7 @@
     { "id": "grindless:photonic_chip", "role": "use", "reason": "temporary (UV-A5): its use, the starchip, is UV-A12's; delete this exception when A12 merges" },
     { "id": "grindless:ican_pellet", "role": "use", "reason": "temporary (UV-A5): its use, the precursor probe launch, is UV-B5's; delete this exception when B5 merges" },
     { "id": "grindless:probe_rtg", "role": "use", "reason": "temporary (UV-A2): its uses are the penetrator, the Kuiper interceptor (B4) and the precursor probe (B5); delete this exception when the first of them merges" },
-    { "id": "grindless:americium_micro_source", "role": "use", "reason": "temporary (UV-A2): its use, the starchip, is UV-A12's;     delete this exception when A12 merges" },
-        { "id": "fluid:gtceu:boron_10_trifluoride", "role": "use", "reason": "temporary (UV-A3): the hot cell's boron-11 split leaves boron-10 trifluoride for the BN reactor (UV-A8, uv.md:807); delete this exception when A8 merges" }
+    { "id": "grindless:americium_micro_source", "role": "use", "reason": "temporary (UV-A2): its use, the starchip, is UV-A12's;     delete this exception when A12 merges" }
       ],
       "pendingRoutes": [
     { "id": "grindless:laser_fusion/pb11", "reason": "UV-A6: the Yb fibre chain starts from germanium tetrachloride, which UV-A7 (the zone refining tower) makes; delete this entry when A7 merges" },

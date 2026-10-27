@@ -1,0 +1,37 @@
+{
+  "_source": "docs/eras/uv.md, '15. Powder bed printer' and line 15 'Printed parts' (package UV-A8). Real: electrode induction-melting gas atomisation (ALD's EIGA atomisers), laser powder bed fusion, hot isostatic pressing, NASA's RAMPT printed rocket chambers.",
+  "_how_it_is_used": [
+    "Read by server_scripts/grindless/uv/materials.js (one gtceu:powder_bed_fusion atomise row per metal, one print and one press row per part, ids grindless:powder_bed_fusion/<atomise|print|press>_<name>) and by tools/analysis/test/uv-materials.test.mjs. Nothing here is repeated in code.",
+    "atomise: circuit 1. ingots in -> the same number of powders out; argonIn of the metal's argon goes in, argonBack comes back (the rest stays in the powder's pores).",
+    "print: the programmed circuit is the part's; powderIn powders and the fibre laser module go in, the near-net part and powderBack powders (the unsintered bed sieved with its spatter) come out. The module is a chanced input at moduleWear (of 10,000) and the worn module comes out at the same chance (2 % wear, as the laser fusion chamber).",
+    "press: circuit 3. the near-net part + argon -> the finished part + all the argon back (hot isostatic pressing).",
+    "metals[]: name, ingot (GTM's), powder (F1's grindless:<metal>_am_powder). parts[]: name, metal, circuit (2 for the GTM parts, 4-6 for the parts GTM lacks), powderIn, powderBack (net powderIn - powderBack: 3 for a GTM gear or rotor, 75 % of GTM's 4 ingots), nearNet, output, gtm (true: a cheaper route to a GTM part, not counted for rule 7)."
+  ],
+  "argon": "gtceu:argon",
+  "module": { "id": "grindless:fibre_laser_module", "spent": "grindless:spent_laser_module", "wear": 200 },
+  "atomise": { "circuit": 1, "ingots": 4, "argonIn": 1000, "argonBack": 950, "eut": 122880, "duration": 200 },
+  "print": { "eut": 122880, "duration": 400 },
+  "press": { "circuit": 3, "argon": 1000, "eut": 491520, "duration": 400 },
+  "metals": [
+    { "name": "neutronium", "ingot": "gtceu:neutronium_ingot", "powder": "grindless:neutronium_am_powder" },
+    { "name": "darmstadtium", "ingot": "gtceu:darmstadtium_ingot", "powder": "grindless:darmstadtium_am_powder" },
+    { "name": "tritanium", "ingot": "gtceu:tritanium_ingot", "powder": "grindless:tritanium_am_powder" }
+  ],
+  "parts": [
+    { "name": "neutronium_gear", "metal": "neutronium", "circuit": 2, "powderIn": 4, "powderBack": 1,
+      "nearNet": "grindless:near_net_neutronium_gear", "output": "gtceu:neutronium_gear", "gtm": true },
+    { "name": "darmstadtium_rotor", "metal": "darmstadtium", "circuit": 2, "powderIn": 4, "powderBack": 1,
+      "nearNet": "grindless:near_net_darmstadtium_rotor", "output": "gtceu:darmstadtium_rotor", "gtm": true },
+    { "name": "tritanium_gear", "metal": "tritanium", "circuit": 2, "powderIn": 4, "powderBack": 1,
+      "nearNet": "grindless:near_net_tritanium_gear", "output": "gtceu:tritanium_gear", "gtm": true },
+    { "name": "thruster_chamber", "metal": "tritanium", "circuit": 4, "powderIn": 8, "powderBack": 2,
+      "_why": "The ion thruster's regeneratively cooled chamber (machine 17): one piece with its cooling channels, which no GTM recipe makes.",
+      "nearNet": "grindless:near_net_thruster_chamber", "output": "grindless:printed_thruster_chamber", "gtm": false },
+    { "name": "array_mount", "metal": "neutronium", "circuit": 5, "powderIn": 8, "powderBack": 2,
+      "_why": "The launcher's laser array mount (machine 23): neutronium does not creep under the array's heat.",
+      "nearNet": "grindless:near_net_array_mount", "output": "grindless:printed_array_mount", "gtm": false },
+    { "name": "probe_frame", "metal": "darmstadtium", "circuit": 6, "powderIn": 6, "powderBack": 2,
+      "_why": "The probes' printed frame (penetrator and precursor probes): a lattice too light to machine.",
+      "nearNet": "grindless:near_net_probe_frame", "output": "grindless:printed_probe_frame", "gtm": false }
+  ]
+}
