@@ -59,8 +59,8 @@ try {
 
         $ok = Invoke-GGStage 'lock' {
             $t0 = Get-Date
-            $slots = 1
-            Enter-GGLock -MaxWaitMin ([int]$req.lockWaitMin)
+            $slots = [math]::Min([math]::Max(1, [int]$req.slots), [int]$global:GG.SlotCeiling)
+            Enter-GGLock -MaxWaitMin ([int]$req.lockWaitMin) -Slots $slots
             $killed = Stop-GGOrphans
             $drive = New-Object IO.DriveInfo([IO.Path]::GetPathRoot([IO.Path]::GetFullPath($global:GG.Base)))
             $driveLabel = $(if ($global:GGIsLinux) { $global:GG.Base } else { $drive.Name.TrimEnd('\') })
@@ -105,6 +105,8 @@ try {
             os         = $(if ($global:GGIsLinux) { 'linux' } else { 'windows' })
             commit     = $(if ($ctl.Req -and $ctl.Req.commit) { [string]$ctl.Req.commit } else { '' })
             dirty      = $(if ($ctl.Req -and $null -ne $ctl.Req.dirty) { [bool]$ctl.Req.dirty } else { $null })
+            slot       = [int]$global:GG.Slot
+            slots      = [int]$global:GG.Slots
         }
         [IO.File]::WriteAllText((Join-Path $resultsDir 'meta.json'), (ConvertTo-Json -InputObject $meta), (New-Object Text.UTF8Encoding($false)))
         if ($global:GGIsLinux) {
