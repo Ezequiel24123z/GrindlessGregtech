@@ -2721,6 +2721,10 @@ file = "kubejs/assets/grindless/textures/item/aerogel_cartridge.png"
 hash = "52e949ec0122a7cacd5ded6a19c25d86d12138f1ed48b8824e41c44e3bc2348c"
 
 [[files]]
+file = "kubejs/assets/grindless/textures/item/americium_micro_source.png"
+hash = "81a48020b9048dc6d5ace14dd1e7906b98daf99af0d23a32fcd86f1624cef980"
+
+[[files]]
 file = "kubejs/assets/grindless/textures/item/anchor_harpoon.png"
 hash = "a55f818ed6977105545582d0d15419d7c41c63346bffabe14b5e8f71bd3ce24e"
 
@@ -2809,6 +2813,10 @@ file = "kubejs/assets/grindless/textures/item/curium_oxide.png"
 hash = "d9d7614947b1b2631bcd40f59e1f7e7681c31786cda724e93c5c6e9bc7bb291c"
 
 [[files]]
+file = "kubejs/assets/grindless/textures/item/curium_rtg_pellet.png"
+hash = "ad019eababd83607e20e7741200a55d8a6347eedc97195d555c8b5c05b4b1579"
+
+[[files]]
 file = "kubejs/assets/grindless/textures/item/cvd_diamond_plate.png"
 hash = "bffa1b5fca9edad5ccd05432ba0d68602c6c9081adc44afa7d04214773c1292a"
 
@@ -2891,6 +2899,10 @@ hash = "6d6dde3e8bdeaa2756efe5953aba3dd105690f7fb39cc835e4fba4d7bf1c11d8"
 [[files]]
 file = "kubejs/assets/grindless/textures/item/heat_exchanger_bundle.png"
 hash = "bbe478629ec334d8dbb681909c293de288fea0fa93bf61dcf0d50adeff888c36"
+
+[[files]]
+file = "kubejs/assets/grindless/textures/item/heavy_curium_oxide.png"
+hash = "6eb4facafa6ff8e123db3d3dd0c504612ecac28f2d5ff8c90fa602adb122a1b2"
 
 [[files]]
 file = "kubejs/assets/grindless/textures/item/heliopause_data.png"
@@ -3143,6 +3155,10 @@ hash = "c3ac2826aff74ac8b737b96ed2e667d34bb705c1f913155a6ee87c425230dbfc"
 [[files]]
 file = "kubejs/assets/grindless/textures/item/pluto_kuiper_chart.png"
 hash = "516baf9ba773a0dc2a76e47a40638c929b8f881645165903a45bd186accc822e"
+
+[[files]]
+file = "kubejs/assets/grindless/textures/item/probe_rtg.png"
+hash = "7979fa0c284356b561b3f2177cdb73642573a858f0488574b9b6a964dee47474"
 
 [[files]]
 file = "kubejs/assets/grindless/textures/item/proxima_approach_data.png"
@@ -3709,6 +3725,10 @@ file = "kubejs/client_scripts/grindless/uv_foundation_lang.js"
 hash = "8250f5b76f79efa3cbb0e52b3f424c1902f151aa9e1452fb6a6b7a06f2352387"
 
 [[files]]
+file = "kubejs/client_scripts/grindless/uv_heat_sources_lang.js"
+hash = "82a001176eb5cc48a08ad3eed04c77cba536b1adcd24bf75a53c820413aad01e"
+
+[[files]]
 file = "kubejs/client_scripts/grindless/wireless_energy_lang.js"
 hash = "069d252799d0644d14c92588cb00918a264dacdba576d274d5eeb813d5f48c5a"
 
@@ -3938,7 +3958,7 @@ hash = "1f4b256531a0b42a6ecf399e9b692d9e4730bd4102e53aab3e1fa2c999b69e9d"
 
 [[files]]
 file = "kubejs/data/grindless/tables/hidden_until.json"
-hash = "ff84183aa70898ff71fdaa33769d3a98cdc7b23977fdc4c393adfec8eea0c7d3"
+hash = "2d2e5cc392ecb4f45b5c5ca42a33e057a748ae8352eb1fdd346652f6aedf5237"
 
 [[files]]
 file = "kubejs/data/grindless/tables/hot_cell.json"
@@ -4314,7 +4334,7 @@ hash = "a00d217cf07819253b94d2f0098585f991b8715083388c9bbfc7b2c471da3092"
 
 [[files]]
 file = "kubejs/server_scripts/grindless/iv/travel_network.js"
-hash = "1ce8b8506ffe9d08cea4a5cce46151503c828ae8af6567ce55c181d060084a79"
+hash = "8d8400e97befcd99a318ede43f10a7f82b9cd7aed1fd964a0021aefe4fb13739"
 
 [[files]]
 file = "kubejs/server_scripts/grindless/iv/tritium_removal.js"
@@ -4571,6 +4591,10 @@ hash = "1541d928bd09ed44323a82ad9d8dddc8f77b114317fc58056ab0a5fef181b021"
 [[files]]
 file = "kubejs/server_scripts/grindless/steam/vein_drilling.js"
 hash = "5547c185e38d18fe64b37420e97d20bc8337650ad15477c37fceb5ece1edf9c4"
+
+[[files]]
+file = "kubejs/server_scripts/grindless/uv/heat_sources.js"
+hash = "8eb1996be2e94c4e4b702697a6d14b6848c5702a673c2c5ad0d1ef92ff8f6ed1"
 
 [[files]]
 file = "kubejs/server_scripts/grindless/zpm/actinides.js"
@@ -4967,6 +4991,10 @@ hash = "98905267da50013b5484caca43e58b62f517cb179d580163e0dc4a2b5502bf20"
 [[files]]
 file = "kubejs/startup_scripts/grindless/uv/foundation.js"
 hash = "032deba7b8b2ef8b900f2689306676df677e8ad9d178c2ba204b8fd925ae213a"
+
+[[files]]
+file = "kubejs/startup_scripts/grindless/uv/heat_sources.js"
+hash = "ed8ada802862ede0b22f573483c861b8c0f013d1f1708440dd0070823dd70ce3"
 
 [[files]]
 file = "kubejs/startup_scripts/grindless/zpm/actinides.js"
