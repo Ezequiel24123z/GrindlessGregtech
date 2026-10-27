@@ -32,6 +32,7 @@
     C = {
       RL: Java.loadClass('net.minecraft.resources.ResourceLocation'),
       ArrayList: Java.loadClass('java.util.ArrayList'),
+      Integer: Java.loadClass('java.lang.Integer'),
       PlanetData: Java.loadClass('argent_matter.gcyr.data.loader.PlanetData'),
       Stations: Java.loadClass('argent_matter.gcyr.api.capability.GCYRCapabilityHelper'),
       StationData: Java.loadClass('argent_matter.gcyr.api.space.station.StationWorldSavedData'),
@@ -137,7 +138,7 @@
         // GCYR's own deploy path (the station item): a free id, its position and the SavedData entry in one call
         var id = Number(holder.allocateStation(pl))
         try { jcall(holder, ['setDirty', 'm_77762_']) } catch (e) { note('station_dirty_' + n.key, String(e)) }
-        var st = holder.getStation(java.lang.Integer.valueOf(id))
+        var st = holder.getStation(L.Integer.valueOf(id))
         var pos = st === null || st === undefined ? 'none' : String(holder.getStationPos(id))
         made[n.key] = id
         check('station_deploy_' + n.key, st !== null && st !== undefined && Number(holder.getFreeStationId()) !== id,
@@ -165,7 +166,7 @@
         var data = tag.getCompound('data')
         var keys = array(data.getCompound('stations').getAllKeys()).map(String)
         var fresh = new L.StationData(lv, data)
-        var back = fresh.getStation(java.lang.Integer.valueOf(made[n.key]))
+        var back = fresh.getStation(L.Integer.valueOf(made[n.key]))
         ok = keys.indexOf(String(made[n.key])) >= 0 && back !== null && back !== undefined
         detail = n.orbit + ' data/' + STATIONS_FILE + '.dat stations {' + keys.join(', ') + '}; reloaded ' + made[n.key] + ': ' +
           (back === null || back === undefined ? 'none' : String(back))
