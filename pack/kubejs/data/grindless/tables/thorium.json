@@ -100,6 +100,13 @@
           "fluidsIn": [],
           "itemsOut": [],
           "fluidsOut": [{ "id": "gtceu:lead_bismuth_eutectic", "amount": 2000 }]
+        },
+        {
+          "name": "polonium_decay", "circuit": 0, "eut": 480, "duration": 2400,
+          "itemsIn": [], "kept": [{ "id": "gtceu:sodium_hydroxide_dust", "count": 1 }], "charge": [],
+          "fluidsIn": [{ "id": "gtceu:polonium_210", "amount": 144 }],
+          "itemsOut": [{ "id": "gtceu:lead_dust", "count": 1 }],
+          "fluidsOut": []
         }
       ]
     }
