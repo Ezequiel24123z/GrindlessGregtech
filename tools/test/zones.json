@@ -87,6 +87,7 @@
     { "id": "zpm_b2", "x": [21760, 21823], "tests": ["zpm_saturn_siphon"], "note": "ZPM-B2: the siphon, column and harvester at Z 0-63; Saturn orbit Y 198-214 and     Overworld Y 98-112" },
         { "id": "zpm_b3", "x": [22016, 22079], "z": [0, 63], "y": [98, 112], "tests": ["zpm_titan_probes"], "note": "ZPM-B3: the entry probe bay and the tholin reformer; Saturn orbit Y 198-214 and Overworld Y 98-112 at the same X/Z" },
         { "id": "zpm_b4", "x": [22272, 22335], "tests": ["zpm_saturn_science"], "note": "ZPM-B4: the plume sampler and ring seismometer at Z 0-63;         Saturn orbit Y 198-214 and Overworld Y 98-112" },
-                { "id": "zpm_b5", "x": [22528, 22591], "z": [0, 63], "y": [98, 112], "tests": ["zpm_uranus"], "note": "ZPM-B5: the ice-giant siphon, slurry separator and flyby probe bay; Uranus orbit Y 198-214 and Overworld Y 98-112 at the same X/Z" }
+                { "id": "zpm_b5", "x": [22528, 22591], "z": [0, 63], "y": [98, 112], "tests": ["zpm_uranus"], "note": "ZPM-B5: the ice-giant siphon, slurry separator and flyby probe bay; Uranus orbit Y 198-214 and Overworld Y 98-112 at the same X/Z" },
+    { "id": "zpm_c3", "x": [22784, 22847], "z": [0, 63], "y": [98, 112], "tests": ["zpm_c3"], "note": "ZPM-C3: the Power gate: three ZPM 64 A dynamo hatches, a wireless tower with two ZPM SMES cells and a power substation on a ZPM 16 A wireless energy hatch (Overworld only)" }
               ]
 }
