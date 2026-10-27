@@ -296,8 +296,8 @@ test('the dimension markers of the old hidden table (disabled, not index-only) d
   // 39 since UV-B2: Triton nitric oxide (Moon cryogenic plant) was a hidden-stack route until Triton nitrogen became obtainable;
   // 40 since UV-B4: the Kuiper noble gas row of the same plant; 41 since UV-B5: the starshot laser-sail launch (no longer pending);
   // 42 since UHV-A6: the 99.999 % neon row of the same plant; 46 since UHV-B2: Mercury's regolith dig and the solar vapour furnace's three rows;
-  // 48 since UHV-B4: the sample receiving facility's receive and isolate rows (Earth only)
-  assert.equal(markerDropped.length, 48, markerDropped.map((d) => d.id).join('\n'));
+  // 48 since UHV-B4: the sample receiving facility's receive and isolate rows (Earth only); 49 since UHV-B3: the Moon cryogenic plant's oganesson propellant row
+  assert.equal(markerDropped.length, 49, markerDropped.map((d) => d.id).join('\n'));
   assert.ok(markerDropped.every((d) => d.disabledBy.every((b) => b.startsWith('dimension marker '))));
   const now = new Map(fixtureExpectations(packRun.res).items.map((e) => [e.id, e]));
   const lost = [];
