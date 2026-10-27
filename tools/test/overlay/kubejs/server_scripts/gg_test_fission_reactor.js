@@ -9,7 +9,7 @@
 // Markers: GGTEST|fission_reactor|<check>|PASS|FAIL|NOTE|<detail>
 //   shared_ids          IV-A1's assemblies, spent assemblies, heavy water and tritiated heavy water exist (the cores need them)
 //   registration        a generator that does not regress while waiting, on gtceu:fission_core, with a structure description
-//   core_table          fission_cores.json loaded: 4 cores, circuits 1-4, 16 384 / 32 768 / 32 768 / 8 192 EU/t a channel, 4 channels,
+//   core_table          fission_cores.json loaded: 5 cores, circuits 1-5, 16 384 / 32 768 / 32 768 / 8 192 / 32 768 EU/t a channel, 4 channels,
 //                       400-tick cycles, wear and spent chance 50 of 10 000, 2 000 mB of water a channel
 //   core_recipes        one live recipe per core with exactly the table's contents: circuit, chanced assembly, water (+ heavy water),
 //                       chanced spent assembly (+ tritiated heavy water), EU/t and the recipe data key
@@ -85,7 +85,9 @@
     leu_light_water: { circuit: 1, fuel: LEU, eut: 16384, moderator: false, spent: SPENT },
     leu_heavy_water: { circuit: 2, fuel: LEU, eut: 32768, moderator: true, spent: SPENT },
     mox_heavy_water: { circuit: 3, fuel: 'grindless:mox_fuel_assembly', eut: 32768, moderator: true, spent: SPENT },
-    breeder: { circuit: 4, fuel: 'grindless:breeder_fuel_assembly', eut: 8192, moderator: false, spent: 'grindless:spent_breeder_assembly' }
+    breeder: { circuit: 4, fuel: 'grindless:breeder_fuel_assembly', eut: 8192, moderator: false, spent: 'grindless:spent_breeder_assembly' },
+    // UV-A1's U-233 rod; the spent rod goes to UV's pyroprocessing cell as spent thorium oxide fuel
+    u233_heavy_water: { circuit: 5, fuel: 'grindless:u233_fuel_rod', eut: 32768, moderator: true, spent: 'grindless:spent_thorium_oxide_fuel' }
   }
   var CYCLE = 400
   var WATER_PER_CHANNEL = 2000
@@ -352,7 +354,7 @@
         if (w.moderator !== (mod !== null && mod !== undefined)) problems.push(name + ' moderator ' + JSON.stringify(mod))
         if (mod && (mod.fluid !== HEAVY || mod.becomes !== TRITIATED || mod.amount !== MODERATOR_PER_CHANNEL)) problems.push(name + ' moderator ' + JSON.stringify(mod))
       })
-      if (names.length !== 4) problems.push(names.length + ' cores: ' + names.join(','))
+      if (names.length !== Object.keys(WANT_CORES).length) problems.push(names.length + ' cores: ' + names.join(','))
       check('core_table', problems.length === 0, names.length + ' cores [' + names.join(', ') + '], ' + F.channels + ' channels, ' + F.cycleTicks +
         ' t cycles, wear ' + F.wearChance + ' and spent ' + F.spentChance + ' of ' + F.maxChance + (problems.length > 0 ? ' | problems: ' + problems.join('; ') : ''))
     })

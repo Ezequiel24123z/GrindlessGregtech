@@ -41,6 +41,14 @@
       "fuel": "grindless:breeder_fuel_assembly",
       "euPerChannel": 8192,
       "spent": "grindless:spent_breeder_assembly"
+    },
+    {
+      "name": "u233_heavy_water",
+      "circuit": 5,
+      "fuel": "grindless:u233_fuel_rod",
+      "euPerChannel": 32768,
+      "moderator": { "fluid": "gtceu:heavy_water", "becomes": "gtceu:tritiated_heavy_water", "amount": 5 },
+      "spent": "grindless:spent_thorium_oxide_fuel"
     }
   ]
 }

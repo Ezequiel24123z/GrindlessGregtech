@@ -14,8 +14,6 @@
     "globs": [],
     "items": [
       { "id": "grindless:synroc_block", "reason": "ZPM-A4: the sealed final form of the waste (zpm.md, machines 4 and 5: kept, inert, a block of its own)" },
-      { "id": "grindless:probe_rtg", "reason": "UV-A2, temporary: consumed by the penetrator, the Kuiper interceptor (B4) and the precursor probe (B5); delete this entry when the first of them lands" },
-      { "id": "grindless:americium_micro_source", "reason": "UV-A2, temporary: consumed by the starchip (A12); delete this entry when A12 lands" },
       { "id": "grindless:heavy_curium_oxide", "reason": "UV-A2: the curium-245/246 fraction, stored for UHV (uv.md machine 3: UHV breeds berkelium and californium from it)" },
       { "id": "grindless:multimessenger_catalogue", "reason": "ZPM-A9: the seed of UV's telescope (zpm.md, Bridges and 'What ZPM leaves')" },
       { "id": "grindless:pluto_kuiper_chart", "reason": "ZPM-A9: UV's trip to Pluto and the Kuiper Belt (zpm.md, 'What ZPM leaves')" }
@@ -41,7 +39,9 @@
     { "id": "gtceu:tetrataenite_dust", "role": "use", "category": "minecraft:smelting", "source": "GTM's furnace recipe dust -> ingot, generated for an ingot material with no blast temperature (startup_scripts/grindless/luv/foundation.js)" },
     { "id": "gtceu:tetrataenite_ingot", "role": "acquisition", "category": "minecraft:smelting", "source": "GTM's furnace recipe dust -> ingot, generated for an ingot material with no blast temperature (startup_scripts/grindless/luv/foundation.js)" },
     { "id": "gtceu:tetrataenite_ingot", "role": "use", "category": "gtceu:lathe", "source": "GTM's lathe recipe ingot -> rod, generated from the material's GENERATE_ROD flag (startup_scripts/grindless/luv/foundation.js); the rod makes the magnet works' bearings" },
-    { "id": "grindless:solar_core_survey", "role": "use", "category": "gtceu:assembly_line", "source": "server_scripts/grindless/zpm/observatory.js re-registers GTM's live UV energy hatch recipe (gtceu:assembly_line/energy_hatch_uv) with the survey as a kept input" }
+    { "id": "grindless:solar_core_survey", "role": "use", "category": "gtceu:assembly_line", "source": "server_scripts/grindless/zpm/observatory.js re-registers GTM's live UV energy hatch recipe (gtceu:assembly_line/energy_hatch_uv) with the survey as a kept input" },
+    { "id": "gtceu:uranium_233_dust", "role": "acquisition", "category": "gtceu:macerator", "source": "GTM's macerator recipe ingot -> dust, generated for the ingot material uranium_233 (startup_scripts/grindless/uv/foundation.js); the ingot comes from UV-A1's pyroprocessing cell" },
+    { "id": "gtceu:uranium_233_dust", "role": "use", "category": "minecraft:smelting", "source": "GTM's furnace recipe dust -> ingot, generated for an ingot material with no blast temperature (startup_scripts/grindless/uv/foundation.js)" }
   ],
   "derivedProcesses": [
     { "type": "gtceu:combined_cycle", "source": "server_scripts/grindless/ev/combined_cycle_and_hot_mill.js makes one run per live gas turbine fuel" },
@@ -54,8 +54,12 @@
   ],
   "exceptions": [
     { "id": "grindless:itbtc_coated_conductor", "role": "use", "reason": "temporary (LuV-A3): its uses, the HTS coil and the SMES cell, are LuV-A4's magnet works; delete this exception when A4 merges" },
-    { "id": "grindless:chondritic_extract", "role": "use", "reason": "temporary (LuV-B5): its use, the Europan culture of the algae bioreactor, is LuV-B8's;     delete this exception when B8 merges" }
+    { "id": "grindless:chondritic_extract", "role": "use", "reason": "temporary (LuV-B5): its use, the Europan culture of the algae bioreactor, is LuV-B8's;     delete this exception when B8 merges" },
+    { "id": "grindless:probe_rtg", "role": "use", "reason": "temporary (UV-A2): its uses are the penetrator, the Kuiper interceptor (B4) and the precursor probe (B5); delete this exception when the first of them merges" },
+    { "id": "grindless:americium_micro_source", "role": "use", "reason": "temporary (UV-A2): its use, the starchip, is UV-A12's; delete this exception when A12 merges" }
       ],
       "pendingRoutes": [
-      ]
+    { "id": "grindless:pyroprocessing/pyroprocessing/nitride", "reason": "UV-A1: the nitride fuel cycle is held until UV-B2 brings Triton nitrogen (the N-15 source); delete this entry when B2 merges" },
+    { "id": "grindless:accelerator_driven/accelerator_driven/thorium_nitride", "reason": "UV-A1: the nitride fuel cycle is held until UV-B2 brings Triton nitrogen (the N-15 source); delete this entry when B2 merges" }
+  ]
     }
