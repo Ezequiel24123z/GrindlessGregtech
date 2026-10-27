@@ -187,7 +187,9 @@
         .tooltip(Text.gray(Text.translate('tooltip.grindless.' + name + '.0')))
         .tooltip(Text.darkGray(Text.translate('tooltip.grindless.' + name + '.1')))
     })
-    if (P.motorRegistered !== true) return
+    // KubeJS can fire this event before the block one (T1 showed it), so no flag check here: the supplier runs in Forge's
+    // item RegisterEvent, after every block is registered, and resolves the motor block then
+    if (typeof event.createCustom !== 'function') return
     try {
       var BlockItem = Java.loadClass('net.minecraft.world.item.BlockItem')
       var ItemProps = Java.loadClass('net.minecraft.world.item.Item$Properties')
@@ -195,6 +197,7 @@
       var RL = Java.loadClass('net.minecraft.resources.ResourceLocation')
       event.createCustom(MOTOR, function () {
         var block = motorBlock !== null ? motorBlock : Forge.BLOCKS.getValue(new RL(MOTOR))
+        if (P.motorRegistered !== true) console.error('[grindless/uhv] ICAN rocket motor item has no motor block (the block registry failed)')
         return new BlockItem(block, new ItemProps())
       })
     } catch (e) {
