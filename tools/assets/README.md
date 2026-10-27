@@ -58,6 +58,7 @@ Generators for the pack's own textures. Everything is procedural 16x16 pixel art
 | `Build-ZPMFoundationTextures.ps1` | Writes the shared ZPM textures (ZPM-F1): 31 items and the six block textures under `block/zpm/`. `-Only <output or group>`, `-Preview <png outside the repo>`, `-Credits`. |
 | `Build-UVFoundationTextures.ps1` | Writes the shared UV textures (UV-F1): 34 items and three block textures under `block/uv/`. `-Only <output or group>`, `-Credits`. |
 | `Build-UVHeatSourcesTextures.ps1` | Writes the four item icons of UV's heat source works (UV-A2): probe RTG, americium micro source, curium RTG pellet, heavy curium oxide. `-Credits`. |
+| `Build-UVAcceleratorsTextures.ps1` | Writes the faces of UV's synchrotron, muon fusion cell and antimatter trap (UV-A5: `multiblock/synchrotron/`, `multiblock/muon_fusion_cell/`, `multiblock/antimatter_trap/`) and the 13 item icons of the LIGA, antiproton and muon fusion lines. `-Credits`. |
 | `Build-UVColdTextures.ps1` | Writes the five item icons of UV's cold works (UV-A4): RRR niobium sheet, niobium scrap, bare SRF cavity, N-doped SRF cavity, mu-metal shield. `-Credits`. || `Build-ZPMNaquadriaTextures.ps1` | Writes the faces of the ZPM naquadria refinery and naquadah fuel works (ZPM-A2: `multiblock/naquadria_refinery/`, `multiblock/naquadah_fuel_works/`), 10 files. `-Credits` (their CREDITS rows). |
 | `Build-HTSMagnetWorksTextures.ps1` | Writes the LuV HTS magnet works' face (`multiblock/hts_magnet_works/`). `-Only magnet_works`, `-Preview <png outside the repo>` and `-Credits` (its 5 CREDITS rows). |
 | `Build-GanymedeTextures.ps1` | Writes the faces of the LuV gravitational wave detector and coilgun launcher (LuV-B9: `multiblock/gravitational_wave_detector/`, `multiblock/coilgun_launcher/`). `-Only detector,launcher`, `-Preview <png outside the repo>` (optional `-FrostCasing <png>`, `-TungstenCasing <png>`) and `-Credits` (their 10 CREDITS rows). |
@@ -959,3 +960,24 @@ powershell -NoProfile -ExecutionPolicy Bypass -File tools\assets\Build-UVThorium
 | `block/multiblock/pyroprocessing_cell/overlay_front*.png` | A furnace window; idle a dark salt bath, active an orange molten-salt surface with a green cathode rod. |
 | `block/multiblock/accelerator_driven_reactor/overlay_front*.png` | A beam window; idle dark, active cyan proton bunches running into a violet core. |
 | `item/u233_fuel_rod.png` | A grey zircaloy tube with a pale green fuel column. |
+
+## UV synchrotron, muon fusion cell, antimatter trap and their items (UV-A5)
+
+Procedural, drawn by `Build-UVAcceleratorsTextures.ps1`; nothing is copied from another mod. Same steel bezel faces as UV-A1 (4 active frames, frametime 4; the emissive layer holds only the glow and the lamp) and the same item method as UV-A4.
+
+```powershell
+powershell -NoProfile -ExecutionPolicy Bypass -File tools\assets\Build-UVAcceleratorsTextures.ps1
+powershell -NoProfile -ExecutionPolicy Bypass -File tools\assets\Build-UVAcceleratorsTextures.ps1 -Credits
+```
+
+| File (under `textures/`) | Notes |
+|---|---|
+| `block/multiblock/synchrotron/overlay_front*.png` | A square beam pipe; active, three pale bunches circle it. |
+| `block/multiblock/muon_fusion_cell/overlay_front*.png` | A tank of liquid D-T; active, it glows teal and violet muon sparks rise through it. |
+| `block/multiblock/antimatter_trap/overlay_front*.png` | A bore between two copper solenoid bars; active, a violet antiproton cloud shimmers in it. |
+| `item/pmma_coated_wafer.png`, `exposed_wafer.png`, `patterned_wafer.png` | Round wafers: pale, violet-exposed and teal-patterned. |
+| `item/x_ray_mask.png`, `silicon_nitride_film.png`, `lithium_breeder_blanket.png` | A gold-on-membrane mask and two sheets. |
+| `item/photonic_chip.png` | A dark die with cyan waveguides and pins. |
+| `item/tungsten_target.png`, `activated_tungsten_target.png` | A tungsten block on copper; the activated one glows green. |
+| `item/empty_antiproton_cartridge.png`, `empty_antiproton_trap.png`, `antiproton_trap.png` | A capsule and two trap modules; the charged one is violet. |
+| `item/ican_pellet.png` | A green uranium pellet with a pale core. |
