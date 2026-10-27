@@ -24,6 +24,9 @@
 //   mixed_rare_earth_chloride      dust, the rest of the rare earths as chlorides (lanthanum, cerium, praseodymium, yttrium and the
 //                                  heavies), components rare_earth 1, Cl 3: electrolysis gives GTM's own rare earth dust, which GTM's
 //                                  centrifuge separates (rare_earth_separation). Formula shown as (La,Ce,Pr,Y)Cl3.
+//   ytterbium_oxide                dust, Yb2O3 (UV-A6: the Yb strip, circuit 6, is its only maker; the fibre draw tower dopes its
+//                                  preforms with it). Formula only, no components (F1's ytterbium registers after this script) and
+//                                  DISABLE_DECOMPOSITION: nothing splits it back.
 //
 // Machine class: GTM's plain electric multiblock (WorkableElectricMultiblockMachine), so its overclock is GTM's. One recipe type with
 // two circuits, not two machine modes, so no recipe of an inactive mode can be cached (the trap A4 found does not apply).
@@ -63,14 +66,16 @@
     solution: 'rare_earth_chloride_solution',
     samarium: 'samarium_chloride',
     neodymium: 'neodymium_chloride',
-    mixed: 'mixed_rare_earth_chloride'
+    mixed: 'mixed_rare_earth_chloride',
+    ytterbiumOxide: 'ytterbium_oxide'
   }
   EC.ids = {
     solution: 'gtceu:rare_earth_chloride_solution',
     samariumChloride: 'gtceu:samarium_chloride_dust',
     neodymiumChloride: 'gtceu:neodymium_chloride_dust',
     mixedChloride: 'gtceu:mixed_rare_earth_chloride_dust',
-    merrillite: 'gtceu:merrillite_dust'
+    merrillite: 'gtceu:merrillite_dust',
+    ytterbiumOxide: 'gtceu:ytterbium_oxide_dust'
   }
   // items in: the merrillite and the programmed circuit; items out: the three chlorides (extraction) or the tricalcium phosphate
   // (leach); fluids in: the solution, the strip acid and the kerosene (extraction); fluids out: two in either mode
@@ -130,6 +135,13 @@
       .iconSet(GTMaterialIconSet.FINE)
       .components('1x rare_earth', '3x chlorine')
       .formula('(La,Ce,Pr,Y)Cl3')
+
+    event.create(EC.materials.ytterbiumOxide)
+      .dust()
+      .color(0xE6F0E8).secondaryColor(0x9CB4A4)
+      .iconSet(GTMaterialIconSet.FINE)
+      .formula('Yb2O3')
+      .flags(GTMaterialFlags.DISABLE_DECOMPOSITION)
   })
 
   // ---------------------------------------------------------------- recipe type
