@@ -46,8 +46,8 @@ test('registration: three recipe types, three machines, one pattern each with on
   assert.deepEqual(dims('qubit_fab'), [5, 5, 9]);
 });
 
-test('the six chain recipes: one circuit per recipe in its type, ZPM VA or less, fits the IO sizes', () => {
-  assert.equal(Q.recipes.length, 6);
+test('the eight chain recipes: one circuit per recipe in its type, ZPM VA or less, fits the IO sizes', () => {
+  assert.equal(Q.recipes.length, 8);
   for (const p of Q.recipes) {
     const r = byId(p.recipeId);
     assert.ok(r, p.recipeId + ' added');
@@ -61,7 +61,8 @@ test('the six chain recipes: one circuit per recipe in its type, ZPM VA or less,
   }
   const q = Q.recipes.filter((r) => r.type === 'qubit_fabrication');
   assert.ok(q.every((r) => r.itemsOut[0].id === 'grindless:qubit_array' && r.notConsumedFluids[0].amount === 4000 && r.fluidsIn[0].amount === 10), 'the helium charge loops, 10 mB is the make-up');
-  const d = Q.recipes.filter((r) => r.type === 'diamond_cvd');
+  const d = Q.recipes.filter((r) => r.type === 'diamond_cvd' && r.fluidsOut.length > 0);
+  assert.equal(d.length, 2, 'the two diamond rows loop hydrogen; UV-A3\'s capsule rows (circuits 3, 4) return nothing');
   assert.ok(d.every((r) => r.fluidsOut[0].amount < r.fluidsIn[1].amount && r.fluidsOut[0].amount >= 0.9 * r.fluidsIn[1].amount), 'hydrogen loops back with a small make-up');
   assert.equal(d[1].fluidsIn[2].amount, 10, 'nitrogen 10 mB');
 });
