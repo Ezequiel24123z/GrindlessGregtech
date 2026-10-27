@@ -162,9 +162,22 @@
     })
   })
 
+  // GTM registers ytterbium as a bare element with no form, so a new material of that name is dropped: it gets its ingot here (verified, which adds the dust and the smelting targets)
+  // (materialModification runs before the items are generated, as ZPM's radium in zpm/actinides.js)
+  GTCEuStartupEvents.materialModification(function (event) {
+    try {
+      var yb = GTMaterials.get('ytterbium')
+      if (yb == null || yb.isNull()) return
+      yb.getProperties().ensureSet(PropertyKey.INGOT, true)
+    } catch (e) {
+      console.error('[grindless/uv] ytterbium: dust and ingot not added: ' + e)
+    }
+  })
+
   GTCEuStartupEvents.registry('gtceu:material', function (event) {
     Object.keys(MATERIALS).forEach(function (name) {
       var spec = MATERIALS[name]
+      if (name === 'ytterbium') return
       var material = event.create(name)
       if (spec.form === 'gas') material.gas()
       else if (spec.form === 'liquid') material.liquid()
