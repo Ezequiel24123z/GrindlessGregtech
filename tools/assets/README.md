@@ -61,6 +61,7 @@ Generators for the pack's own textures. Everything is procedural 16x16 pixel art
 | `Build-UVColdTextures.ps1` | Writes the five item icons of UV's cold works (UV-A4): RRR niobium sheet, niobium scrap, bare SRF cavity, N-doped SRF cavity, mu-metal shield. `-Credits`. |
 | `Build-UVFusionTextures.ps1` | Writes the spent laser module icon of UV's laser fusion chamber (UV-A3). `-Credits`. |
 | `Build-UVPhotonicsTextures.ps1` | Writes the nine item icons of UV's photonics (UV-A6): Yb-doped preform, fibre Bragg grating, GaAs and sapphire boules and wafers, InGaAs epi wafer, InGaAs diode bar, NbN film wafer. `-Credits`. |
+| `Build-UVDetectorsTextures.ps1` | Writes the controller faces of UV's detectors (UV-A7): zone refining tower and optical ground station. Checks that `uv/detectors.js` uses both folders. `-Credits`. |
 | `Build-ZPMNaquadriaTextures.ps1` | Writes the faces of the ZPM naquadria refinery and naquadah fuel works (ZPM-A2: `multiblock/naquadria_refinery/`, `multiblock/naquadah_fuel_works/`), 10 files. `-Credits` (their CREDITS rows). |
 | `Build-HTSMagnetWorksTextures.ps1` | Writes the LuV HTS magnet works' face (`multiblock/hts_magnet_works/`). `-Only magnet_works`, `-Preview <png outside the repo>` and `-Credits` (its 5 CREDITS rows). |
 | `Build-GanymedeTextures.ps1` | Writes the faces of the LuV gravitational wave detector and coilgun launcher (LuV-B9: `multiblock/gravitational_wave_detector/`, `multiblock/coilgun_launcher/`). `-Only detector,launcher`, `-Preview <png outside the repo>` (optional `-FrostCasing <png>`, `-TungstenCasing <png>`) and `-Credits` (their 10 CREDITS rows). |
@@ -962,3 +963,17 @@ powershell -NoProfile -ExecutionPolicy Bypass -File tools\assets\Build-UVThorium
 | `block/multiblock/pyroprocessing_cell/overlay_front*.png` | A furnace window; idle a dark salt bath, active an orange molten-salt surface with a green cathode rod. |
 | `block/multiblock/accelerator_driven_reactor/overlay_front*.png` | A beam window; idle dark, active cyan proton bunches running into a violet core. |
 | `item/u233_fuel_rod.png` | A grey zircaloy tube with a pale green fuel column. |
+
+## UV zone refining tower and optical ground station (UV-A7)
+
+Procedural, drawn by `Build-UVDetectorsTextures.ps1`; nothing is copied from another mod. Steel bezel faces with a window and a run lamp; 4 active frames, frametime 4; the emissive layer holds only the glow and the lamp.
+
+```powershell
+powershell -NoProfile -ExecutionPolicy Bypass -File tools\assets\Build-UVDetectorsTextures.ps1
+powershell -NoProfile -ExecutionPolicy Bypass -File tools\assets\Build-UVDetectorsTextures.ps1 -Credits
+```
+
+| File (under `textures/`) | Notes |
+|---|---|
+| `block/multiblock/zone_refining_tower/overlay_front*.png` | A germanium bar between RF coil turns; active, an orange melt zone climbs the bar and the coil beside it glows. |
+| `block/multiblock/optical_ground_station/overlay_front*.png` | A night-sky window over a mirror dish; active, a star twinkles and a red laser photon falls onto the detector, which flashes cyan. |
