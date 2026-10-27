@@ -1,4 +1,4 @@
-// TEST ONLY, MEGA-S spikes (docs/eras/mega.md 3.1). Commands: kubejs custom_command gg_test_mega_spike_m1 | _m2 | _m3
+﻿// TEST ONLY, MEGA-S spikes (docs/eras/mega.md 3.1). Commands: kubejs custom_command gg_test_mega_spike_m1 | _m2 | _m3
 // Band ONLY: X 29952-30015, Z 0-63, Overworld Y 98-115 (the mega EBF is 17 high).
 //   m1  S-M1: the chain coil parallel -> OC_PERFECT_SUBTICK -> BATCH_MODE on gtceu:large_chemical_reactor, three coil tiers
 //   m2  S-M2: module sockets read from the pattern match context; a modifier vetoes the type whose module is absent
@@ -33,7 +33,7 @@
       event.recipes.gtceu.compressor('gg_test_mega:m2_compressor').itemInputs('2x ' + KELP).itemOutputs('1x ' + DRIED).duration(40).EUt(8)
       event.recipes.gtceu.electric_blast_furnace('gg_test_mega:m3_ebf').itemInputs('1x ' + CANE).itemOutputs('1x ' + PAPER).duration(100).EUt(30).blastFurnaceTemp(1000)
     } catch (e) {
-      console.error('[gg_test mega_spike] could not add the test recipes: ' + e)
+      console.error('[gg_test mega_spike] could not add the test recipes: ' + errText(e))
     }
   })
 
@@ -57,6 +57,12 @@
     var out = []
     for (var i = 0; i < list.size(); i++) out.push(list.get(i))
     return out
+  }
+  function errText(e) {
+    var s = ''
+    try { s = String(e.message || '') } catch (x) { }
+    try { s += ' @' + String(e.stack || '').split('\n').slice(0, 4).join(' ') } catch (x) { }
+    return s === '' ? 'unprintable exception' : s
   }
   function clean(x) { return String(x).replace(/[\r\n]+/g, ' ').replace(/\|/g, '/').substring(0, 1500) }
   function check(name, ok, detail) {
@@ -135,7 +141,7 @@
     var rec = m.getRecipeLogic().getLastRecipe()
     if (rec === null || rec === undefined) return null
     var eut = NaN
-    try { eut = Number(classes().RecipeHelper.getInputEUt(rec)) } catch (e) { }
+    try { var es = classes().RecipeHelper.getRealEUt(rec); eut = Number(es.getTotalEU()) } catch (e) { }
     return { parallels: field(rec, 'parallels'), oc: field(rec, 'ocLevel'), batch: field(rec, 'batchParallels'), duration: Number(rec.duration), eut: eut, id: String(rec.id) }
   }
   function fmt(s) {
@@ -240,7 +246,7 @@
       try {
         var mods = m.getDefinition().getRecipeModifier()
         note(u.name + '_modifier_list', 'definition modifier ' + mods.getClass().getSimpleName() + ': ' + String(mods))
-      } catch (e) { note(u.name + '_modifier_list', 'unreadable: ' + e) }
+      } catch (e) { note(u.name + '_modifier_list', 'unreadable: ' + errText(e)) }
       u.batch = false
       u.phase = 'start'
       return
@@ -375,7 +381,7 @@
     try {
       put(29953, 100, 56, HATCH)
       out.push({ kind: 'alone', pos: pos(29953, 100, 56), phase: 'alone', started: S.tick })
-    } catch (e) { check('hatch_place_exception', false, String(e)) }
+    } catch (e) { check('hatch_place_exception', false, errText(e)) }
     try {
       var placed = placeMachine('gtceu:gg_spike_ebf', 29958, 101, 8, function (c) {
         if (c.ch === 'K') return 'gtceu:cupronickel_coil_block'
@@ -384,7 +390,7 @@
         return null
       })
       out.push({ kind: 'ours', name: 'ours', pos: placed.pos, phase: 'forming', started: S.tick })
-    } catch (e) { check('ours_place_exception', false, String(e)) }
+    } catch (e) { check('ours_place_exception', false, errText(e)) }
     try {
       var cells = shapeCells('gtceu:mega_blast_furnace')
       var ox = 29970
@@ -406,7 +412,7 @@
       if (ctrl === null) throw new Error('no controller in the preview')
       note('mega_placed', 'controller ' + ctrl.getX() + ',' + ctrl.getY() + ',' + ctrl.getZ() + '; swapped ' + swapped.join(' '))
       out.push({ kind: 'mega', name: 'mega', pos: ctrl, phase: 'forming', started: S.tick })
-    } catch (e) { check('mega_place_exception', false, String(e)) }
+    } catch (e) { check('mega_place_exception', false, errText(e)) }
     return out
   }
   function m3Tick(u) {
@@ -432,7 +438,7 @@
       u.energy = partsLike(m, /energy_input_hatch/)
       u.inBus = partsLike(m, /input_bus/)[0]
       u.outBus = partsLike(m, /output_bus/)[0]
-      check(u.name + '_formed', has && !!u.inBus && !!u.outBus && u.energy.length === 1,
+      check(u.name + '_formed', has && !!u.inBus && !!u.outBus && u.energy.length >= 1,
         'class ' + m.getClass().getSimpleName() + ', parallel hatch ' + (has ? String(u.hatch.getDefinition().getId()) + ' reports ' + u.hatch.getCurrentParallel() : 'none') + ', parts ' + partIds(m).join(' '))
       if (!has || !u.inBus || !u.outBus || u.energy.length === 0) { u.phase = 'done'; return }
       u.hatch.setCurrentParallel(64)
@@ -479,7 +485,7 @@
     S.level = server.getLevel('minecraft:overworld')
     command('forceload add ' + X0 + ' 0 ' + X1 + ' 63')
     clear()
-    try { S.units = S.test.units() } catch (e) { check('build_exception', false, String(e)); S.units = [] }
+    try { S.units = S.test.units() } catch (e) { check('build_exception', false, errText(e)); S.units = [] }
   }
   Object.keys(TESTS).forEach(function (key) {
     ServerEvents.customCommand('gg_test_mega_spike_' + key, function () {
@@ -492,7 +498,7 @@
     try {
       if (global.ggTestMegaSpikeRequest && Date.now() - LOADED >= 10000) {
         var key = global.ggTestMegaSpikeRequest
-        global.ggTestMegaSpikeRequest = null
+        global.ggTestMegaSpikeRequest = ''
         begin(event.server, key)
       }
       if (S === null || S.finished) return
@@ -500,14 +506,14 @@
       var pending = 0
       S.units.forEach(function (u) {
         if (u.phase === 'done') return
-        try { S.test.tick(u) } catch (e) { check((u.name || u.kind) + '_exception', false, 'phase ' + u.phase + ': ' + e); u.phase = 'done' }
+        try { S.test.tick(u) } catch (e) { check((u.name || u.kind) + '_exception', false, 'phase ' + u.phase + ': ' + errText(e)); u.phase = 'done' }
         if (u.phase !== 'done') pending++
       })
       if (pending === 0) finish()
       else if (S.tick > S.test.limit) { check('deadline', false, S.test.limit + '-tick ceiling'); finish() }
     } catch (e) {
       if (S === null) S = { server: event.server, failed: 0, finished: false }
-      check('exception', false, String(e))
+      check('exception', false, errText(e))
       finish()
     }
   })

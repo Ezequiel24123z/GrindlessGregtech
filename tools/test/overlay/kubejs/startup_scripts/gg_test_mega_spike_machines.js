@@ -65,7 +65,6 @@
       blocks: MODULES.slice(),
       build: function () {
         var BI = Java.loadClass('com.lowdragmc.lowdraglib.utils.BlockInfo')
-        var Arr = Java.loadClass('java.lang.reflect.Array')
         var HM = Java.loadClass('java.util.HashMap')
         var blocks = MODULES.map(function (id) { return Block.getBlock(id) })
         return Predicates.custom(function (state) {
@@ -79,9 +78,10 @@
           }
           return false
         }, function () {
-          var arr = Arr.newInstance(BI, blocks.length)
-          for (var i = 0; i < blocks.length; i++) Arr.set(arr, i, BI.fromBlockState(blocks[i].defaultBlockState()))
-          return arr
+          // only the structure preview asks for these; formation never calls this supplier
+          var list = []
+          for (var i = 0; i < blocks.length; i++) list.push(BI.fromBlockState(blocks[i].defaultBlockState()))
+          return Java.to(list, BI)
         })
       }
     }
