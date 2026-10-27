@@ -14,10 +14,9 @@
 //     4 module   8 cavities + 4,000 mB superfluid helium + 2 UV field generators + 1 mu-metal shield -> 1 SRF cryomodule 122,880 x 600 t
 //   side steps (no new machine)
 //     electropolish acid  mixer: 500 mB hydrofluoric acid + 500 mB sulfuric acid -> 1,000 mB electropolish acid
-//     scrap               electric furnace: 1 niobium scrap -> 1 niobium ingot (back to step 1: 3 ingots end as 3 sheets)
-//     spent acid          electrolyser: 1,000 mB spent acid -> 1 niobium dust + 1,000 mB diluted hydrofluoric acid;
-//                         chemical reactor: 1,000 mB diluted HF + 1 calcite dust -> 1 fluorite (calcium fluoride) dust + 1,000 mB water;
-//                         GTM's own fluorite + sulfuric acid -> HF recipe closes the loop
+//     scrap               macerator: 1 niobium scrap -> 1 niobium dust (GTM's own dust -> ingot recipe takes it back to step 1)
+//     spent acid          electrolyser: 1,000 mB spent acid -> 1 niobium dust + 500 mB hydrofluoric acid + 500 mB sulfuric acid
+//                         (the dissolved niobium plates out and the two acids go back to the mixer)
 //     mu-metal shield     assembler: 6 nickel plates + 2 iron plates + 1 copper foil -> 1 mu-metal shield
 //     block               crafting: 1 SRF cryomodule <-> 1 SRF cryomodule block (the linacs' structure block; the helium returns on
 //                         deconstruction only, so the block-to-module recipe is the deconstruction)
@@ -71,13 +70,10 @@
   var SIDE = [
     { name: 'electropolish_acid', type: 'mixer', circuit: null, itemsIn: [], fluidsIn: [fluid('gtceu:hydrofluoric_acid', 500), fluid('gtceu:sulfuric_acid', 500)],
       itemsOut: [], fluidsOut: [fluid(ACID, 1000)], eut: 480, duration: 200 },
-    { name: 'niobium_scrap', type: 'electric_furnace', circuit: null, itemsIn: [item(SCRAP, 1)], fluidsIn: [], itemsOut: [item('gtceu:niobium_ingot', 1)],
+    { name: 'niobium_scrap', type: 'macerator', circuit: null, itemsIn: [item(SCRAP, 1)], fluidsIn: [], itemsOut: [item('gtceu:niobium_dust', 1)],
       fluidsOut: [], eut: 120, duration: 100 },
     { name: 'spent_acid_niobium', type: 'electrolyzer', circuit: null, itemsIn: [], fluidsIn: [fluid(SPENT, 1000)],
-      itemsOut: [item('gtceu:niobium_dust', 1)], fluidsOut: [fluid('gtceu:diluted_hydrofluoric_acid', 1000)], eut: 480, duration: 300 },
-    { name: 'spent_acid_fluorite', type: 'chemical_reactor', circuit: null, itemsIn: [item('gtceu:calcite_dust', 1)],
-      fluidsIn: [fluid('gtceu:diluted_hydrofluoric_acid', 1000)], itemsOut: [item('gtceu:fluorite_dust', 1)], fluidsOut: [fluid('minecraft:water', 1000)],
-      eut: 120, duration: 200 },
+      itemsOut: [item('gtceu:niobium_dust', 1)], fluidsOut: [fluid('gtceu:hydrofluoric_acid', 500), fluid('gtceu:sulfuric_acid', 500)], eut: 480, duration: 300 },
     { name: 'mu_metal_shield', type: 'assembler', circuit: null,
       itemsIn: [item('gtceu:nickel_plate', 6), item('gtceu:iron_plate', 2), item('gtceu:copper_foil', 1)], fluidsIn: [],
       itemsOut: [item(SHIELD, 1)], fluidsOut: [], eut: 480, duration: 200 }

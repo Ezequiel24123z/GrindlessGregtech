@@ -59,6 +59,7 @@
     { "id": "grindless:americium_micro_source", "role": "use", "reason": "temporary (UV-A2): its use, the starchip, is UV-A12's; delete this exception when A12 merges" }
       ],
       "pendingRoutes": [
+    { "id": "grindless:superfluid_helium/superfluid_helium/superleak", "reason": "UV-A4: the superleak takes Neptune helium, which UV-B2 brings; delete this entry when B2 merges" },
     { "id": "grindless:pyroprocessing/pyroprocessing/nitride", "reason": "UV-A1: the nitride fuel cycle is held until UV-B2 brings Triton nitrogen (the N-15 source); delete this entry when B2 merges" },
     { "id": "grindless:accelerator_driven/accelerator_driven/thorium_nitride", "reason": "UV-A1: the nitride fuel cycle is held until UV-B2 brings Triton nitrogen (the N-15 source); delete this entry when B2 merges" }
   ]

@@ -59,6 +59,7 @@ ClientEvents.lang('en_us', event => {
     add('emi.grindless.info.aerogel_fuel_tank.0', 'A part of a GCYR rocket: build it into the rocket like any fuel tank. Elite rocket motors with only Aerogel Fuel Tanks make a level 6 rocket, which reaches Uranus orbit. One lower tank in the build drops the level. Each tank holds 256,000 mB.')
     add('emi.grindless.info.saturnian_quantum_seed.0', 'Made only in Saturn orbit, from a ring ice sample, an ender pearl and helium-3. Blow it up beside an AE2 singularity to get the far half of the Earth-Saturn quantum link.')
     add('emi.grindless.info.uranian_quantum_seed.0', 'Made only in Uranus orbit, from an ice-giant atmosphere sample, an ender pearl and helium-3. Blow it up beside an AE2 singularity to get the far half of the Earth-Uranus quantum link.')
+  add('emi.grindless.info.srf_cryomodule_block.0', 'A structure block: one SRF cryomodule (eight nitrogen-doped niobium cavities in superfluid helium, made in the SRF Cavity Works) placed as a block, 1:1 in the crafting grid either way. The Accelerator-Driven Reactor needs four in its back wall: they are the linac that drives its spallation target.')
 })
 
 ClientEvents.lang('es_es', event => {
@@ -114,4 +115,5 @@ ClientEvents.lang('es_es', event => {
     add('emi.grindless.info.aerogel_fuel_tank.0', 'Una pieza de cohete de GCYR: ponlo en el cohete como cualquier tanque de combustible. Motores de cohete de \u00e9lite con solo tanques de aerogel hacen un cohete de nivel 6, que llega a la \u00f3rbita de Urano. Un tanque inferior en el cohete baja el nivel. Cada tanque lleva 256.000 mB.')
     add('emi.grindless.info.saturnian_quantum_seed.0', 'Se hace solo en la \u00f3rbita de Saturno, con una muestra de hielo de los anillos, una perla de ender y helio-3. Hazla explotar junto a una singularidad de AE2 para obtener la mitad lejana del enlace cu\u00e1ntico Tierra-Saturno.')
     add('emi.grindless.info.uranian_quantum_seed.0', 'Se hace solo en la \u00f3rbita de Urano, con una muestra de atm\u00f3sfera del gigante de hielo, una perla de ender y helio-3. Hazla explotar junto a una singularidad de AE2 para obtener la mitad lejana del enlace cu\u00e1ntico Tierra-Urano.')
+  add('emi.grindless.info.srf_cryomodule_block.0', 'Un bloque de estructura: un criom?dulo SRF (ocho cavidades de niobio dopadas con nitr?geno en helio superfluido, hechas en la f?brica de cavidades SRF) colocado como bloque, 1:1 en la mesa de crafteo en ambos sentidos. El reactor accionado por acelerador necesita cuatro en su pared trasera: son el linac que alimenta su blanco de espalaci?n.')
 })

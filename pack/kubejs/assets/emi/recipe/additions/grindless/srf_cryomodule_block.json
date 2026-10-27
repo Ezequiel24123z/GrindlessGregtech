@@ -1,0 +1,5 @@
+{
+  "type": "emi:info",
+  "stacks": ["item:grindless:srf_cryomodule_block"],
+  "text": ["emi.grindless.info.srf_cryomodule_block.0"]
+}
