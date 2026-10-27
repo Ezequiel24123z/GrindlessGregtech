@@ -1,0 +1,114 @@
+// Gregtech Grindless - names and tooltips of UHV's power devices and photovoltaics (startup_scripts/grindless/uhv/power_devices.js;
+// package UHV-A5):
+//
+//   block.gtceu.<machine>, gtceu.<recipe type>                    machine and recipe type names
+//   grindless.machine.<machine>.tooltip.N                         controller tooltips
+//   gtceu.recipe.grindless_<type>.<recipe>                        the EMI line of each recipe
+//   item.grindless.<n>, tooltip.grindless.<n>.0 / .1              the package's own items (the F1 items are in uhv_foundation_lang.js)
+//
+// Kept out of pack/kubejs/assets/grindless/lang/* like the other *_lang.js scripts. Names go in en_us and es_es.
+(function () {
+    // [key, en, es]
+    var ENTRIES = [
+        ['block.gtceu.sic_device_fab', 'SiC Device Fab', 'Fábrica de dispositivos de SiC'],
+        ['gtceu.silicon_carbide', 'Silicon Carbide Devices', 'Dispositivos de carburo de silicio'],
+        ['block.gtceu.solar_array_fab', 'Solar Array Fab', 'Fábrica de paneles solares'],
+        ['gtceu.space_photovoltaics', 'Space Photovoltaics', 'Fotovoltaica espacial'],
+
+        ['grindless.machine.sic_device_fab.tooltip.0',
+            'Silicon carbide switches kilovolts at 200 °C (Cree/Wolfspeed): a boule grown by physical vapour transport at 2,500 °C, an epitaxial drift layer, the ion implanter\'s aluminium and a 1,700 °C anneal. The only maker of SiC power modules and SiC mirror blanks.',
+            'El carburo de silicio conmuta kilovoltios a 200 °C (Cree/Wolfspeed): un lingote crecido por transporte físico de vapor a 2.500 °C, una capa de deriva epitaxial, el aluminio del implantador de iones y un recocido a 1.700 °C. El único fabricante de módulos de potencia de SiC y de bloques de espejo de SiC.'],
+        ['grindless.machine.sic_device_fab.tooltip.1',
+            'Circuit 1: boule. 2: epi wafer (the hydrogen comes back). 3: anneal of the implanted wafer under argon. 4: four power modules. 5: a reaction-bonded mirror blank. Cut the boule into wafers in a cutter.',
+            'Circuito 1: lingote. 2: oblea epitaxial (el hidrógeno vuelve). 3: recocido de la oblea implantada bajo argón. 4: cuatro módulos de potencia. 5: un bloque de espejo por unión reactiva. El lingote se corta en obleas en una cortadora.'],
+        ['grindless.machine.sic_device_fab.tooltip.2',
+            'Parts go in the bottom layer: 1-2 energy hatches, 1-3 input buses, 1-3 input hatches, an output bus, an output hatch. Accepts a parallel hatch.',
+            'Las piezas van en la capa inferior: 1-2 escotillas de energía, 1-3 buses de entrada, 1-3 escotillas de entrada, un bus de salida, una escotilla de salida. Acepta una escotilla de paralelos.'],
+
+        ['grindless.machine.solar_array_fab.tooltip.0',
+            'Inverted metamorphic multijunction cells (NREL): GaInP, GaAs and InGaAs grown upside down, 33 % efficient in sunlight above the air, lifted off their substrate and laminated under cerium-doped coverglass (Rocket Lab/SolAero).',
+            'Células multiunión metamórficas invertidas (NREL): GaInP, GaAs e InGaAs crecidos boca abajo, con un 33 % de eficiencia a la luz del sol sobre la atmósfera, despegadas de su sustrato y laminadas bajo vidrio de cubierta dopado con cerio (Rocket Lab/SolAero).'],
+        ['grindless.machine.solar_array_fab.tooltip.1',
+            'Circuit 1: lift-off of eight IMM wafers: eight films, seven GaAs substrates back, the worn one as gallium arsenide dust, a little arsine for the MOCVD reactor. 2: the IMM solar array. 3: the red-tuned array.',
+            'Circuito 1: despegue de ocho obleas IMM: ocho películas, siete sustratos de GaAs de vuelta, el gastado como polvo de arseniuro de galio, un poco de arsina para el reactor MOCVD. 2: el panel solar IMM. 3: el panel ajustado al rojo.'],
+        ['grindless.machine.solar_array_fab.tooltip.2',
+            'Parts go in the bottom layer: 1-2 energy hatches, 1-3 input buses, an input hatch, 1-3 output buses, an output hatch. Accepts a parallel hatch.',
+            'Las piezas van en la capa inferior: 1-2 escotillas de energía, 1-3 buses de entrada, una escotilla de entrada, 1-3 buses de salida, una escotilla de salida. Acepta una escotilla de paralelos.'],
+
+        ['gtceu.recipe.grindless_silicon_carbide.sic_boule',
+            'Circuit 1: silicon carbide powder sublimed onto a seed at 2,500 °C under argon (never used up)',
+            'Circuito 1: polvo de carburo de silicio sublimado sobre una semilla a 2.500 °C bajo argón (nunca se gasta)'],
+        ['gtceu.recipe.grindless_silicon_carbide.sic_epi',
+            'Circuit 2: a drift layer grown from silane and propane in hydrogen; the hydrogen comes back',
+            'Circuito 2: una capa de deriva crecida con silano y propano en hidrógeno; el hidrógeno vuelve'],
+        ['gtceu.recipe.grindless_silicon_carbide.sic_anneal',
+            'Circuit 3: the implanted wafer annealed at 1,700 °C under argon (never used up)',
+            'Circuito 3: la oblea implantada recocida a 1.700 °C bajo argón (nunca se gasta)'],
+        ['gtceu.recipe.grindless_silicon_carbide.sic_power_modules',
+            'Circuit 4: the device wafer diced and silver-sintered onto copper: four power modules',
+            'Circuito 4: la oblea de dispositivos cortada y sinterizada con plata sobre cobre: cuatro módulos de potencia'],
+        ['gtceu.recipe.grindless_silicon_carbide.sic_mirror_blank',
+            'Circuit 5: silicon carbide powder and carbon infiltrated with molten silicon: a reaction-bonded mirror blank',
+            'Circuito 5: polvo de carburo de silicio y carbono infiltrados con silicio fundido: un bloque de espejo por unión reactiva'],
+        ['gtceu.recipe.grindless_space_photovoltaics.imm_lift_off',
+            'Circuit 1: hydrofluoric acid dissolves the release layer: eight films, seven substrates back, the worn one as dust',
+            'Circuito 1: el ácido fluorhídrico disuelve la capa de liberación: ocho películas, siete sustratos de vuelta, el gastado como polvo'],
+        ['gtceu.recipe.grindless_space_photovoltaics.imm_array',
+            'Circuit 2: four films under coverglass with a SiC power module: an IMM solar array',
+            'Circuito 2: cuatro películas bajo vidrio de cubierta con un módulo de potencia de SiC: un panel solar IMM'],
+        ['gtceu.recipe.grindless_space_photovoltaics.red_tuned_array',
+            'Circuit 3: as circuit 2 with an InGaAs-rich junction for a red sun: a red-tuned array',
+            'Circuito 3: como el circuito 2 con una unión rica en InGaAs para un sol rojo: un panel ajustado al rojo'],
+
+        ['item.grindless.sic_boule', 'SiC Boule', 'Lingote de SiC'],
+        ['tooltip.grindless.sic_boule.0',
+            'A single crystal of 4H silicon carbide grown by physical vapour transport.',
+            'Un monocristal de carburo de silicio 4H crecido por transporte físico de vapor.'],
+        ['tooltip.grindless.sic_boule.1',
+            'Made by the SiC device fab (circuit 1); a cutter slices it into eight wafers.',
+            'La fabrica la fábrica de dispositivos de SiC (circuito 1); una cortadora lo corta en ocho obleas.'],
+        ['item.grindless.sic_wafer', 'SiC Wafer', 'Oblea de SiC'],
+        ['tooltip.grindless.sic_wafer.0',
+            'A polished silicon carbide wafer, hard enough to need a diamond wire.',
+            'Una oblea pulida de carburo de silicio, tan dura que necesita hilo de diamante.'],
+        ['tooltip.grindless.sic_wafer.1',
+            'Cut from a SiC boule; the SiC device fab grows its epi layer (circuit 2).',
+            'Se corta de un lingote de SiC; la fábrica de dispositivos de SiC le crece la capa epitaxial (circuito 2).'],
+        ['item.grindless.sic_device_wafer', 'SiC Device Wafer', 'Oblea de dispositivos de SiC'],
+        ['tooltip.grindless.sic_device_wafer.0',
+            'Annealed silicon carbide transistors, still on the wafer.',
+            'Transistores de carburo de silicio recocidos, todavía en la oblea.'],
+        ['tooltip.grindless.sic_device_wafer.1',
+            'Made by the SiC device fab (circuit 3); diced into four power modules (circuit 4).',
+            'La fabrica la fábrica de dispositivos de SiC (circuito 3); se corta en cuatro módulos de potencia (circuito 4).'],
+        ['item.grindless.imm_epi_wafer', 'IMM Epi Wafer', 'Oblea epitaxial IMM'],
+        ['tooltip.grindless.imm_epi_wafer.0',
+            'GaInP, GaAs and InGaAs junctions grown upside down on a gallium arsenide wafer.',
+            'Uniones de GaInP, GaAs e InGaAs crecidas boca abajo sobre una oblea de arseniuro de galio.'],
+        ['tooltip.grindless.imm_epi_wafer.1',
+            'Made by the MOCVD reactor (circuit 7); lifted off in the solar array fab (circuit 1).',
+            'La fabrica el reactor MOCVD (circuito 7); se despega en la fábrica de paneles solares (circuito 1).'],
+        ['item.grindless.imm_film', 'IMM Film', 'Película IMM'],
+        ['tooltip.grindless.imm_film.0',
+            'A flexible three-junction solar cell a few microns thick, free of its substrate.',
+            'Una célula solar flexible de tres uniones de pocas micras, libre de su sustrato.'],
+        ['tooltip.grindless.imm_film.1',
+            'Made by the solar array fab (circuit 1); four go into each array.',
+            'La fabrica la fábrica de paneles solares (circuito 1); cuatro van en cada panel.'],
+        ['item.grindless.cerium_coverglass', 'Cerium Coverglass', 'Vidrio de cubierta con cerio'],
+        ['tooltip.grindless.cerium_coverglass.0',
+            'Borosilicate glass doped with ceria, which keeps it clear under ultraviolet and protons.',
+            'Vidrio de borosilicato dopado con óxido de cerio, que lo mantiene transparente bajo ultravioleta y protones.'],
+        ['tooltip.grindless.cerium_coverglass.1',
+            'Made in an alloy smelter; two cover each solar array.',
+            'Se hace en una fundidora de aleaciones; dos cubren cada panel solar.']
+    ]
+
+    ;['en_us', 'es_es'].forEach(function (lang, li) {
+        ClientEvents.lang(lang, function (event) {
+            ENTRIES.forEach(function (e) {
+                event.add('grindless', e[0], e[1 + li])
+            })
+        })
+    })
+})()

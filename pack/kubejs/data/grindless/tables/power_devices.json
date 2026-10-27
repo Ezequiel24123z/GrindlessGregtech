@@ -1,0 +1,172 @@
+{
+  "_source": "docs/eras/uhv.md: machines 7 (SiC device fab) and 8 (solar array fab), lines 10 and 21; package UHV-A5",
+  "_how_it_is_used": "server_scripts/grindless/uhv/power_devices.js makes one recipe per entry, id grindless:<type>/<name>, with its programmed circuit (0 = none, GTM's own types only); 'kept' items and 'charge' fluids are not consumed; a 'chance' below 10000 makes a chanced input or output. silicon_carbide and space_photovoltaics are this package's machines (data key = <name>, the EMI line); cutter and alloy_smelter are GTM's machines (the SiC wafers, the cerium coverglass). The MOCVD reactor's two UHV rows (circuits 7-8) are in server_scripts/grindless/uv/photonics.js.",
+  "types": {
+    "silicon_carbide": {
+      "dataKey": "grindless_silicon_carbide",
+      "recipes": [
+        {
+          "name": "sic_boule",
+          "circuit": 1,
+          "eut": 122880,
+          "duration": 600,
+          "itemsIn": [{ "id": "gtca:silicon_carbide_dust", "count": 16 }],
+          "kept": [],
+          "fluidsIn": [],
+          "charge": [{ "id": "gtceu:argon", "amount": 1000 }],
+          "itemsOut": [{ "id": "grindless:sic_boule", "count": 1 }],
+          "fluidsOut": []
+        },
+        {
+          "name": "sic_epi",
+          "circuit": 2,
+          "eut": 1966080,
+          "duration": 400,
+          "itemsIn": [{ "id": "grindless:sic_wafer", "count": 1 }],
+          "kept": [],
+          "fluidsIn": [
+            { "id": "gtceu:silane", "amount": 100 },
+            { "id": "gtceu:propane", "amount": 50 },
+            { "id": "gtceu:hydrogen", "amount": 2000 }
+          ],
+          "charge": [],
+          "itemsOut": [{ "id": "grindless:sic_epi_wafer", "count": 1 }],
+          "fluidsOut": [{ "id": "gtceu:hydrogen", "amount": 2800 }]
+        },
+        {
+          "name": "sic_anneal",
+          "circuit": 3,
+          "eut": 122880,
+          "duration": 300,
+          "itemsIn": [{ "id": "grindless:implanted_sic_wafer", "count": 1 }],
+          "kept": [],
+          "fluidsIn": [],
+          "charge": [{ "id": "gtceu:argon", "amount": 1000 }],
+          "itemsOut": [{ "id": "grindless:sic_device_wafer", "count": 1 }],
+          "fluidsOut": []
+        },
+        {
+          "name": "sic_power_modules",
+          "circuit": 4,
+          "eut": 491520,
+          "duration": 300,
+          "itemsIn": [
+            { "id": "grindless:sic_device_wafer", "count": 1 },
+            { "id": "gtceu:copper_foil", "count": 8 },
+            { "id": "gtceu:silver_dust", "count": 1 }
+          ],
+          "kept": [],
+          "fluidsIn": [],
+          "charge": [],
+          "itemsOut": [{ "id": "grindless:sic_power_module", "count": 4 }],
+          "fluidsOut": []
+        },
+        {
+          "name": "sic_mirror_blank",
+          "circuit": 5,
+          "eut": 122880,
+          "duration": 600,
+          "itemsIn": [
+            { "id": "gtca:silicon_carbide_dust", "count": 6 },
+            { "id": "gtceu:carbon_dust", "count": 1 },
+            { "id": "gtceu:silicon_dust", "count": 2 }
+          ],
+          "kept": [],
+          "fluidsIn": [],
+          "charge": [],
+          "itemsOut": [{ "id": "grindless:sic_mirror_blank", "count": 1 }],
+          "fluidsOut": []
+        }
+      ]
+    },
+    "space_photovoltaics": {
+      "dataKey": "grindless_space_photovoltaics",
+      "recipes": [
+        {
+          "name": "imm_lift_off",
+          "circuit": 1,
+          "eut": 491520,
+          "duration": 400,
+          "itemsIn": [{ "id": "grindless:imm_epi_wafer", "count": 8 }],
+          "kept": [],
+          "fluidsIn": [{ "id": "gtceu:hydrofluoric_acid", "amount": 2000 }],
+          "charge": [],
+          "itemsOut": [
+            { "id": "grindless:imm_film", "count": 8 },
+            { "id": "grindless:gallium_arsenide_wafer", "count": 7 },
+            { "id": "gtceu:gallium_arsenide_dust", "count": 1 }
+          ],
+          "fluidsOut": [{ "id": "gtceu:arsine", "amount": 200 }]
+        },
+        {
+          "name": "imm_array",
+          "circuit": 2,
+          "eut": 1966080,
+          "duration": 400,
+          "itemsIn": [
+            { "id": "grindless:imm_film", "count": 4 },
+            { "id": "grindless:cerium_coverglass", "count": 2 },
+            { "id": "grindless:sic_power_module", "count": 1 }
+          ],
+          "kept": [],
+          "fluidsIn": [{ "id": "gtceu:silicone_rubber", "amount": 144 }],
+          "charge": [],
+          "itemsOut": [{ "id": "grindless:imm_solar_array", "count": 1 }],
+          "fluidsOut": []
+        },
+        {
+          "name": "red_tuned_array",
+          "circuit": 3,
+          "eut": 1966080,
+          "duration": 400,
+          "itemsIn": [
+            { "id": "grindless:imm_film", "count": 4 },
+            { "id": "grindless:cerium_coverglass", "count": 2 },
+            { "id": "grindless:sic_power_module", "count": 1 },
+            { "id": "grindless:ingaas_epi_wafer", "count": 1 }
+          ],
+          "kept": [],
+          "fluidsIn": [{ "id": "gtceu:silicone_rubber", "amount": 144 }],
+          "charge": [],
+          "itemsOut": [{ "id": "grindless:red_tuned_solar_array", "count": 1 }],
+          "fluidsOut": []
+        }
+      ]
+    },
+    "cutter": {
+      "recipes": [
+        {
+          "name": "sic_wafers",
+          "circuit": 0,
+          "eut": 7680,
+          "duration": 400,
+          "itemsIn": [{ "id": "grindless:sic_boule", "count": 1 }],
+          "kept": [],
+          "fluidsIn": [{ "id": "gtceu:lubricant", "amount": 250 }],
+          "charge": [],
+          "itemsOut": [{ "id": "grindless:sic_wafer", "count": 8 }],
+          "fluidsOut": []
+        }
+      ]
+    },
+    "alloy_smelter": {
+      "recipes": [
+        {
+          "name": "cerium_coverglass",
+          "circuit": 0,
+          "eut": 1920,
+          "duration": 200,
+          "itemsIn": [
+            { "id": "gtceu:borosilicate_glass_dust", "count": 3 },
+            { "id": "gtceu:cerium_dust", "count": 1 }
+          ],
+          "kept": [],
+          "fluidsIn": [],
+          "charge": [],
+          "itemsOut": [{ "id": "grindless:cerium_coverglass", "count": 4 }],
+          "fluidsOut": []
+        }
+      ]
+    }
+  }
+}
