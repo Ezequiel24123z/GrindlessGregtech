@@ -107,7 +107,7 @@ P=3A3F49 O=262A31
 '@
 
 # GTM's tier colours (GTValues.VNF): the bright tone; Get-TierRamp derives the rest
-$TierColour = @{ lv = 'B8B8B8'; mv = '4FE6EE'; hv = 'F5A623'; ev = 'B04AD6'; iv = '5A6CF2'; luv = 'F26DE8'; zpm = 'E5484D' }
+$TierColour = @{ lv = 'B8B8B8'; mv = '4FE6EE'; hv = 'F5A623'; ev = 'B04AD6'; iv = '5A6CF2'; luv = 'F26DE8'; zpm = 'E5484D'; uv = '1FB8B0' }
 # the tiers and cells: the rows of kubejs/data/grindless/tables/wireless_energy.json (a row's texture, when it has one, is its cell's)
 $TablePath = Join-Path $PSScriptRoot '..\..\pack\kubejs\data\grindless\tables\wireless_energy.json'
 $TableRows = @((Get-Content -Raw -Encoding UTF8 -LiteralPath $TablePath | ConvertFrom-Json).tiers)

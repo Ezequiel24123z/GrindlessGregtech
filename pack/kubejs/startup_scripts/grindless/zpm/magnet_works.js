@@ -12,7 +12,9 @@
 //                                    circuit 2  URhNq2 wire    uranium + rhodium + 2 naquadah dust + a silver foil -> 2 single wires,
 //                                                              no 9,000 K blast, priced above GTM's route in EU
 //                                    circuit 3  HTS insert     a LuV HTS coil + 4 URhNq2 single wires -> grindless:hts_insert
-//                                Circuit 1 carries the cold-test charge: 1,000 mB of liquid helium as GTM's non-consumed fluid input
+//                                    circuit 4  UV SMES cell   16 EnTED single wires + 8 darmstadtium plates + 16 advanced SMD
+//                                                              capacitors + the charge -> 1 grindless:uv_smes_cell (UV-A9)
+//                                Circuits 1 and 4 carry the cold-test charge: 1,000 mB of liquid helium as GTM's non-consumed fluid input
 //                                (notConsumableFluid, chance 0): needed to start, never drained, taken once whatever the overclock.
 //
 // Byproducts: none (voidable). Machine class: GTM's plain electric multiblock with a parallel hatch's copies, then GTM's default
