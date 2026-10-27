@@ -97,7 +97,7 @@ export default gate({
     ['luvIo', 'luvTether', 'luvSI'],
     ['zpmNaq', 'zpmMk2'],
     ['uvThorium', 'uvLaser', 'uvMuon', 'uvMk3'],
-    ['laterDyson'],
+    ['uhvSwarm', 'laterDyson'],
     ['gHull', 'gBat', 'gCable', 'gFar', 'gBig'],
     ...(WITH_WIRELESS ? [['gWireless']] : []),
   ],
@@ -622,12 +622,24 @@ export default gate({
         }),
       ],
     },
+    // ---------------------------------------------------------------- UHV
+    // figures wait for a bench measurement (as UV's rows): EU/t of the stations is in docs/eras/uhv.md, "Power"
+    uhvSwarm: {
+      name: 'The Swarm (UHV)',
+      nodes: [
+        E('eqSwarm', 0, 0, 'uhv_age', '7AAE7008AA466590'),
+        n('uhvSwarm', 2.25, 0, M('gtceu:swarm_control_station'), 'Swarm Control Station', {
+          kind: 'info', tier: 'uhv', from: ['eqSwarm'], sub: 'Mercury\'s segments beam power home; two stations feed one bank, which loses 5%',
+          desc: 'The segments wear, so keep the refurbishing going: worn ones come back as film and aluminium.',
+        }),
+      ],
+    },
     // ---------------------------------------------------------------- later
     laterDyson: {
       name: 'Dyson sphere',
       nodes: [
         n('dysonCell', 0, 0, I('gcyr:dyson_solar_cell'), 'Dyson Solar Cell', { kind: 'peek' }),
-        n('dyson', 2.25, 0, M('gcyr:dyson_system_controller'), 'Dyson Sphere', { kind: 'peek', from: ['dysonCell'], sub: 'UHV: a star wrapped in panels' }),
+        n('dyson', 2.25, 0, M('gcyr:dyson_system_controller'), 'Dyson Sphere', { kind: 'peek', from: ['dysonCell'], sub: 'UEV: a star wrapped in panels' }),
       ],
     },
     // ---------------------------------------------------------------- what carries and stores it
@@ -713,20 +725,27 @@ export default gate({
           desc: 'The network jumps to LuV only when every formed tower holds these. Until then, a multiblock with two IV wireless energy hatches reaches LuV the usual GregTech way.',
           figs: [P.wcell('grindless:luv_smes_cell', 'LuV SMES', 983040000)],
         }),
+        // UHV's cell: 24 UV naquadria batteries' worth (GTM's tier-9 battery is Long.MAX_VALUE), wound in the naquadria magnet works
+        E('eqUhvCell', 0, 6, 'uhv_age', '5E6B4DEB712EECBE'),
+        n('wuhv', 2.25, 6, I('grindless:uhv_smes_cell'), 'UHV SMES Cell', {
+          kind: 'info', from: ['eqUhvCell'], sub: 'Twenty-four UV batteries\' worth, wound with RTAN wire',
+          desc: 'The network jumps to UHV only when every formed tower holds these; the nuclear clock keeps it in step.',
+          figs: [P.wcell('grindless:uhv_smes_cell', 'UHV SMES', 62914560000)],
+        }),
         n('wdynH', 6.75, -2.25, I('gtceu:lv_wireless_dynamo_hatch'), 'Wireless Dynamo Hatch', {
           kind: 'info', from: [network('wtower')], sub: 'Generator multiblocks feed the network through it',
-          desc: 'Energy goes in at any voltage; the cells only limit what comes out.', figs: [P.wamps([2, 4, 16, 64], 'lv', 'uv')],
+          desc: 'Energy goes in at any voltage; the cells only limit what comes out.', figs: [P.wamps([2, 4, 16, 64], 'lv', 'uhv')],
         }),
         n('wdynC', 6.75, -0.75, I('grindless:lv_wireless_dynamo_cover'), 'Wireless Dynamo Cover', {
-          kind: 'info', from: [network('wtower')], sub: 'On a generator or a battery buffer, it feeds the network', figs: [P.wcover(2, 'lv', 'uv')],
+          kind: 'info', from: [network('wtower')], sub: 'On a generator or a battery buffer, it feeds the network', figs: [P.wcover(2, 'lv', 'uhv')],
         }),
         n('wenH', 6.75, 0.75, I('gtceu:lv_wireless_energy_hatch'), 'Wireless Energy Hatch', {
           kind: 'info', from: [network('wtower')], sub: 'Multiblocks draw from the network through it',
-          desc: 'Above the network\'s voltage it gets nothing; shift-right-click it with an empty hand to see why.', figs: [P.wamps([2, 4, 16, 64], 'lv', 'uv')],
+          desc: 'Above the network\'s voltage it gets nothing; shift-right-click it with an empty hand to see why.', figs: [P.wamps([2, 4, 16, 64], 'lv', 'uhv')],
         }),
         n('wenC', 6.75, 2.25, I('grindless:lv_wireless_energy_cover'), 'Wireless Energy Cover', {
           kind: 'info', from: [network('wtower')], sub: 'Single machines draw through it, on any side but the front',
-          desc: 'GTM machines, chargers and battery buffers, not converters or multiblock controllers; shift-right-click with an empty hand for the readout.', figs: [P.wcover(2, 'lv', 'uv')],
+          desc: 'GTM machines, chargers and battery buffers, not converters or multiblock controllers; shift-right-click with an empty hand for the readout.', figs: [P.wcover(2, 'lv', 'uhv')],
         }),
       ],
     } } : {}),
