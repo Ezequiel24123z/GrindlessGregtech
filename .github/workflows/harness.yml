@@ -37,6 +37,7 @@ jobs:
       - name: shellcheck
         run: shellcheck -S warning tools/vm/*.sh tools/test/remote/*.sh
       - name: Test-LinuxHelpers
+        if: success() || failure()
         shell: pwsh
         env:
           GG_REQUIRE_JAVA: '1' # the runner image ships a JDK 17
@@ -50,6 +51,10 @@ jobs:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
           persist-credentials: false
+      - name: Defender exclusion for the workspace
+        # the test compiles and starts a fake java.exe; real-time scanning of a new exe can stall it past its 30 s bound
+        shell: powershell
+        run: Add-MpPreference -ExclusionPath $env:GITHUB_WORKSPACE, $env:RUNNER_TEMP
       - name: Test-ResourcePolicy
         shell: powershell
         run: .\tools\test\Test-ResourcePolicy.ps1

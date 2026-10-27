@@ -117,4 +117,4 @@ if [ "${GG_LINGER:-1}" = 1 ]; then
   fi
 fi
 
-step done OK "now run tools/vm/gg-vm-health.sh"
+step 'done' OK "now run tools/vm/gg-vm-health.sh"
