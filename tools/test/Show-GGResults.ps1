@@ -17,7 +17,7 @@ $ErrorActionPreference = 'Stop'
 [Threading.Thread]::CurrentThread.CurrentCulture = [Globalization.CultureInfo]::InvariantCulture
 if (-not $AllowlistPath) { $AllowlistPath = [IO.Path]::Combine($PSScriptRoot, 'log-allowlist.txt') }
 
-function J([string]$a, [string]$b) { return [IO.Path]::Combine($a, $b) }
+function J([string]$a, [string]$b) { return [IO.Path]::Combine($a, $b.Replace([char]92, [IO.Path]::DirectorySeparatorChar)) }
 function FExists([string]$p) { return [IO.File]::Exists($p) }
 function DExists([string]$p) { return [IO.Directory]::Exists($p) }
 function Files([string]$dir, [string]$pattern, [bool]$recurse) {
@@ -232,6 +232,7 @@ if ($req) {
     if ($req.suite -ne 'client' -and $null -ne $req.settleSec) { $fl += "settle=$($req.settleSec)s" }
     if ($req.slots) { $fl += "slots=$($req.slots)" }
     Emit ('options: ' + ($fl -join ', '))
+    if ($req.backend) { Emit ("backend: {0} ({1})" -f $req.backend, $(if ($req.backendWhy) { $req.backendWhy } else { 'unknown' })) }
 }
 Emit "out: $OutDir"
 Emit ''

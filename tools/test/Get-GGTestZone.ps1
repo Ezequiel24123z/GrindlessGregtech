@@ -58,7 +58,7 @@ if ($Validate) {
             if ($xo -and $zo) { $problems.Add("overlap: $($a.id) and $($b.id)") }
         }
     }
-    $overlay = Join-Path $here 'overlay\kubejs'
+    $overlay = Join-Path $here 'overlay/kubejs'
     $known = @{}
     Get-ChildItem $overlay -Recurse -Filter 'gg_test_*.js' | ForEach-Object { $known[($_.BaseName -replace '^gg_test_', '')] = $true }
     foreach ($z in $zones) { foreach ($t in @($z.tests)) { if ($t -and -not $known.ContainsKey($t)) { $problems.Add("$($z.id): test gg_test_$t.js not found") } } }

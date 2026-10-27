@@ -12,11 +12,39 @@ try { [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::
 Add-Type -AssemblyName System.IO.Compression
 Add-Type -AssemblyName System.IO.Compression.FileSystem
 
+# Linux benches (pwsh 7, started by gg-linux-run.sh). The Windows code paths are untouched; Linux overrides the few
+# Windows-only helpers at the end of this file, and Join-Path turns the scripts' '\' separators into '/'.
+$global:GGIsLinux = ($PSVersionTable.PSEdition -eq 'Core') -and $IsLinux
+if ($global:GGIsLinux) {
+    function global:Join-Path {
+        [CmdletBinding()]
+        param(
+            [Parameter(Mandatory = $true, Position = 0, ValueFromPipeline = $true)][string[]]$Path,
+            [Parameter(Position = 1)][AllowEmptyString()][string]$ChildPath,
+            [Parameter(ValueFromRemainingArguments = $true)][string[]]$AdditionalChildPath,
+            [switch]$Resolve
+        )
+        process {
+            foreach ($p in $Path) {
+                $a = @{ Path = $p.Replace('\', '/'); ChildPath = ([string]$ChildPath).Replace('\', '/') }
+                if ($AdditionalChildPath) { $a.AdditionalChildPath = @($AdditionalChildPath | ForEach-Object { $_.Replace('\', '/') }) }
+                if ($Resolve) { $a.Resolve = $true }
+                Microsoft.PowerShell.Management\Join-Path @a
+            }
+        }
+    }
+    if (-not $env:COMPUTERNAME) { $env:COMPUTERNAME = [Environment]::MachineName }
+}
+
 if (-not $global:GG) {
     $base = $env:GG_BASE
+    # Linux: the scripts live in <base>/tools/remote/<hash>/ (gg-linux-run.sh also exports GG_BASE)
+    if (-not $base -and $global:GGIsLinux) { $base = [IO.Path]::GetFullPath((Join-Path $PSScriptRoot '../../..')) }
     if (-not $base) { $base = 'D:\GregtechGrindless' }
     $global:GG = @{
         Base         = $base
+        # Forge server launch arguments (the installer writes both; the classpath separator differs)
+        ForgeArgsFile = $(if ($global:GGIsLinux) { 'unix_args.txt' } else { 'win_args.txt' })
         Tools        = Join-Path $base 'tools'
         Cache        = Join-Path $base 'cache'
         Sync         = Join-Path $base 'sync'
@@ -34,6 +62,9 @@ if (-not $global:GG) {
         HasLock      = $false
         Slot         = -1
         Slots        = 1
+        # Hard ceiling of concurrent Minecraft JVMs on this bench: the personal Windows PC stays at one; a dedicated
+        # Linux VM may run up to eight (the caller's -Slots / backend Slots picks the actual count).
+        SlotCeiling  = $(if ($global:GGIsLinux) { 8 } else { 1 })
         NativeBudget = $null
         NativeMutex  = $null
         ReserveGb    = 0.0
@@ -670,23 +701,32 @@ function Invoke-GGTool {
     return $code
 }
 
-# ---------------------------------------------------------------- slot semaphore (one Minecraft JVM globally)
+# ---------------------------------------------------------------- slot semaphore (Minecraft JVMs per bench)
 #
 # A slot is a file created with CreateNew by the run that holds it: runs\.lock (slot 0, the historical single lock,
 # same JSON fields as ever) and runs\.lock.1, runs\.lock.2, ... Holders heartbeat their file (Update-GGLock); a file is
 # stale when its owner is gone or silent for LockStaleMin, and the next waiter reclaims it (and kills the dead run's JVMs).
+# Each slot also has a process-held OS mutex (slot 0: Global\GGHarness-minecraft as always, slot i: ...-minecraft-<i>),
+# so a holder stays exclusive even if its metadata file disappears.
 # Rules for taking a slot (evaluated by one waiter at a time, see the FIFO tickets below):
-#   - always one holder, even if a legacy caller asks for more slots;
-#   - old nonzero slot files are recognized and block new work until their owners finish;
+#   - at most min(requested Slots, SlotCeiling) holders: one on the Windows home PC, whatever a caller asks;
+#   - every holder's own slot count also caps the total (the smallest wins), and old nonzero slot files are recognized;
 #   - available RAM never gates acquisition or launch; heap and native deadlines remain bounded.
 
+function Get-GGNativeMutexName {
+    param([int]$Index = 0)
+    if ($Index -le 0) { return 'Global\GGHarness-minecraft' }
+    return ('Global\GGHarness-minecraft-{0}' -f $Index)
+}
+
 function Try-GGNativeMutex {
-    if ($global:GG.NativeMutex) { return $true }
-    $mutex = New-Object Threading.Mutex($false, 'Global\GGHarness-minecraft')
+    param([int]$Index = 0)
+    if ($global:GG.NativeMutex) { return ([int]$global:GG.NativeMutexIndex -eq $Index) }
+    $mutex = New-Object Threading.Mutex($false, (Get-GGNativeMutexName $Index))
     $held = $false
     try {
         try { $held = $mutex.WaitOne(0) } catch [Threading.AbandonedMutexException] { $held = $true }
-        if ($held) { $global:GG.NativeMutex = $mutex }
+        if ($held) { $global:GG.NativeMutex = $mutex; $global:GG.NativeMutexIndex = $Index }
         return $held
     } finally {
         if (-not $held) { $mutex.Dispose() }
@@ -699,6 +739,7 @@ function Exit-GGNativeMutex {
     try { $mutex.ReleaseMutex() } finally {
         $mutex.Dispose()
         $global:GG.NativeMutex = $null
+        $global:GG.NativeMutexIndex = -1
     }
 }
 
@@ -817,7 +858,8 @@ function Get-GGFreeRamGb {
 # How many runs may be active at once, given the holders that already are.
 function Get-GGSlotLimit {
     param($Others, [int]$Slots)
-    $limit = 1
+    $ceiling = [math]::Max(1, [int]$global:GG.SlotCeiling)
+    $limit = [math]::Min([math]::Max(1, $Slots), $ceiling)
     foreach ($h in @($Others)) {
         if (-not $h.Info.v) { $limit = 1; continue }
         $n = 0
@@ -868,7 +910,7 @@ function Enter-GGLock {
         Write-Warning '-MinFreeGb is deprecated and ignored; slot acquisition does not depend on available RAM'
     }
     New-Item -ItemType Directory -Force -Path $global:GG.Runs | Out-Null
-    $Slots = 1
+    $Slots = [math]::Min([math]::Max(1, $Slots), [math]::Max(1, [int]$global:GG.SlotCeiling))
     $global:GG.Slots = $Slots
     $global:GG.ReserveGb = $ReserveGb
     $global:GG.JvmStarted = ''
@@ -882,50 +924,62 @@ function Enter-GGLock {
             try { [IO.File]::WriteAllText($ticket, [datetime]::UtcNow.ToString('o')) } catch {}
             $earlier = @(Get-GGEarlierWaiters)
             $why = ''
-            if ($earlier.Count -eq 0 -and (Try-GGNativeMutex)) {
-                $dec = Get-GGSlotDecision @(Get-GGActiveSlots) $Slots
+            $dec = $null
+            if ($earlier.Count -eq 0) {
+                $active = @(Get-GGActiveSlots)
+                $dec = Get-GGSlotDecision $active $Slots
                 if ($dec.Index -ge 0) {
-                    $path = Get-GGSlotPath $dec.Index
-                    $global:GG.Slot = $dec.Index
-                    $fs = $null
-                    $created = $false
-                    try {
-                        $global:GG.LockStarted = [datetime]::UtcNow.ToString('o')
-                        $fs = New-Object IO.FileStream($path, [IO.FileMode]::CreateNew, [IO.FileAccess]::Write, ([IO.FileShare]::ReadWrite -bor [IO.FileShare]::Delete))
-                        $bytes = (New-Object Text.UTF8Encoding($false)).GetBytes((New-GGLockBody))
-                        $fs.Write($bytes, 0, $bytes.Length)
-                        $fs.Dispose(); $fs = $null
-                        $created = $true
-                    } catch [IO.IOException], [UnauthorizedAccessException] {
-                        if ($fs) { $fs.Dispose() }
-                        $global:GG.Slot = -1
-                        $why = 'lost a race for the slot, retrying'
+                    # take the OS mutex of the first free slot whose mutex no other runner holds
+                    $used = @($active | ForEach-Object { [int]$_.Index })
+                    $limit = Get-GGSlotLimit $active $Slots
+                    $got = -1
+                    for ($i = [int]$dec.Index; $i -lt $limit; $i++) {
+                        if ($used -notcontains $i -and (Try-GGNativeMutex $i)) { $got = $i; break }
                     }
-                    if ($created) {
-                        $global:GG.LockPath = $path
-                        $global:GG.HasLock = $true
-                        $global:GG.LastBeat = Get-Date
-                        # two runs may have taken different slots in the same instant: re-check the limits
-                        $others = @(Get-GGActiveSlots | Where-Object { [int]$_.Index -ne [int]$dec.Index })
-                        if ($others.Count + 1 -le (Get-GGSlotLimit $others $Slots)) {
-                            $global:GG.SlotOthers = @($others | ForEach-Object { [string]$_.Info.runId })
-                            $global:GG.SlotFree = $dec.Free
-                            return
-                        }
-                        Remove-Item -LiteralPath $path -Force -ErrorAction SilentlyContinue
-                        $global:GG.HasLock = $false
-                        $global:GG.Slot = -1
-                        $global:GG.LockPath = Get-GGSlotPath 0
-                        $why = 'slot limit exceeded by a concurrent start, retrying'
-                        Exit-GGNativeMutex
-                        Start-Sleep -Seconds (Get-Random -Minimum 2 -Maximum 6)
-                        continue
-                    }
-                } else {
-                    $why = [string]$dec.Reason
+                    if ($got -lt 0) {
+                        $dec = @{ Index = -1; Reason = 'another runner holds the Minecraft mutex of every free slot' }
+                    } else { $dec.Index = $got }
                 }
-            } elseif ($earlier.Count -eq 0) {
-                $why = 'another runner holds the global Minecraft mutex'
+            }
+            if ($dec -and $dec.Index -ge 0) {
+                $path = Get-GGSlotPath $dec.Index
+                $global:GG.Slot = $dec.Index
+                $fs = $null
+                $created = $false
+                try {
+                    $global:GG.LockStarted = [datetime]::UtcNow.ToString('o')
+                    $fs = New-Object IO.FileStream($path, [IO.FileMode]::CreateNew, [IO.FileAccess]::Write, ([IO.FileShare]::ReadWrite -bor [IO.FileShare]::Delete))
+                    $bytes = (New-Object Text.UTF8Encoding($false)).GetBytes((New-GGLockBody))
+                    $fs.Write($bytes, 0, $bytes.Length)
+                    $fs.Dispose(); $fs = $null
+                    $created = $true
+                } catch [IO.IOException], [UnauthorizedAccessException] {
+                    if ($fs) { $fs.Dispose() }
+                    $global:GG.Slot = -1
+                    $why = 'lost a race for the slot, retrying'
+                }
+                if ($created) {
+                    $global:GG.LockPath = $path
+                    $global:GG.HasLock = $true
+                    $global:GG.LastBeat = Get-Date
+                    # two runs may have taken different slots in the same instant: re-check the limits
+                    $others = @(Get-GGActiveSlots | Where-Object { [int]$_.Index -ne [int]$dec.Index })
+                    if ($others.Count + 1 -le (Get-GGSlotLimit $others $Slots)) {
+                        $global:GG.SlotOthers = @($others | ForEach-Object { [string]$_.Info.runId })
+                        $global:GG.SlotFree = $dec.Free
+                        return
+                    }
+                    Remove-Item -LiteralPath $path -Force -ErrorAction SilentlyContinue
+                    $global:GG.HasLock = $false
+                    $global:GG.Slot = -1
+                    $global:GG.LockPath = Get-GGSlotPath 0
+                    $why = 'slot limit exceeded by a concurrent start, retrying'
+                    Exit-GGNativeMutex
+                    Start-Sleep -Seconds (Get-Random -Minimum 2 -Maximum 6)
+                    continue
+                }
+            } elseif ($dec) {
+                $why = [string]$dec.Reason
             }
             if (-not $global:GG.HasLock) { Exit-GGNativeMutex }
             if ((Get-Date) -gt $deadline) {
@@ -1008,5 +1062,107 @@ function Remove-GGOldRuns {
     if (Test-Path $scripts) {
         $current = Split-Path -Leaf $PSScriptRoot
         Get-ChildItem $scripts -Directory -ErrorAction SilentlyContinue | Where-Object { $_.Name -ne $current -and ((Get-Date) - $_.LastWriteTime).TotalDays -gt 3 } | ForEach-Object { Remove-GGTree $_.FullName }
+    }
+}
+
+# ---------------------------------------------------------------- Linux overrides (pwsh 7, see GGIsLinux above)
+if ($global:GGIsLinux) {
+    function Copy-GGTree {
+        param([string]$Source, [string]$Dest, [string[]]$ExcludeDirs = @(), [string[]]$ExcludeFiles = @())
+        New-Item -ItemType Directory -Force -Path $Dest | Out-Null
+        $a = @('-a')
+        foreach ($d in $ExcludeDirs) { $a += "--exclude=$d/" }
+        foreach ($f in $ExcludeFiles) { $a += "--exclude=$f" }
+        $a += @(($Source.TrimEnd('/') + '/'), ($Dest.TrimEnd('/') + '/'))
+        $out = & rsync @a 2>&1
+        $code = $LASTEXITCODE
+        $global:LASTEXITCODE = 0
+        if ($code -ne 0) { throw ("rsync failed ({0}): {1} -> {2}: {3}" -f $code, $Source, $Dest, (($out | Select-Object -Last 3) -join ' | ')) }
+    }
+
+    function Remove-GGTree {
+        param([string]$Path)
+        if (-not (Test-Path -LiteralPath $Path)) { return }
+        try { Remove-Item -LiteralPath $Path -Recurse -Force -ErrorAction Stop; return } catch {}
+        & rm -rf -- $Path 2>&1 | Out-Null
+        $global:LASTEXITCODE = 0
+    }
+
+    # Distribution JDK 17 (apt openjdk-17-jdk-headless), else $env:JAVA_HOME
+    function Get-GGJava17 {
+        # java-17-openjdk-amd64 (apt) first, then other JDK 17 layouts such as temurin-17-jdk-amd64 (GitHub runners)
+        $c = @(Get-ChildItem '/usr/lib/jvm' -Directory -ErrorAction SilentlyContinue | Where-Object { $_.Name -match '(^|-)17(-|$)' } |
+                Sort-Object { -not $_.Name.StartsWith('java-17-') }, Name | ForEach-Object { Join-Path $_.FullName 'bin/java' })
+        if ($env:JAVA_HOME) { $c += (Join-Path $env:JAVA_HOME 'bin/java') }
+        foreach ($j in $c) { if (Test-Path -LiteralPath $j) { return $j } }
+        throw 'Java 17 not found under /usr/lib/jvm/java-17-* or $JAVA_HOME (tools/vm/gg-vm-bootstrap.sh installs it)'
+    }
+
+    # The process and all its descendants (from /proc/<pid>/stat), killed with SIGKILL like taskkill /T /F.
+    function Stop-GGTree {
+        param([int]$ProcessId)
+        $kids = @{}
+        foreach ($d in [IO.Directory]::GetDirectories('/proc')) {
+            $n = [IO.Path]::GetFileName($d)
+            if ($n -notmatch '^\d+$') { continue }
+            try { $st = [IO.File]::ReadAllText("$d/stat") } catch { continue }
+            $f = $st.Substring($st.LastIndexOf(')') + 2).Split(' ')
+            $pp = [int]$f[1]
+            if (-not $kids.ContainsKey($pp)) { $kids[$pp] = New-Object Collections.ArrayList }
+            [void]$kids[$pp].Add([int]$n)
+        }
+        $todo = New-Object Collections.Queue
+        $todo.Enqueue($ProcessId)
+        $seen = @{}
+        while ($todo.Count -gt 0) {
+            $p = [int]$todo.Dequeue()
+            if ($seen.ContainsKey($p)) { continue }
+            $seen[$p] = $true
+            if ($kids.ContainsKey($p)) { foreach ($c in $kids[$p]) { $todo.Enqueue($c) } }
+        }
+        foreach ($p in $seen.Keys) { try { [Diagnostics.Process]::GetProcessById($p).Kill() } catch {} }
+    }
+
+    # Every java process with its full command line (from /proc), shaped like the Win32_Process objects used above.
+    function Get-GGManagedProcesses {
+        $r = New-Object Collections.ArrayList
+        foreach ($d in [IO.Directory]::GetDirectories('/proc')) {
+            $n = [IO.Path]::GetFileName($d)
+            if ($n -notmatch '^\d+$' -or [int]$n -eq $PID) { continue }
+            try {
+                $comm = [IO.File]::ReadAllText("$d/comm").Trim()
+                if ($comm -ne 'java') { continue }
+                $cl = [IO.File]::ReadAllText("$d/cmdline").Replace([char]0, ' ').Trim()
+            } catch { continue }
+            if ($cl) { [void]$r.Add([pscustomobject]@{ ProcessId = [int]$n; Name = $comm; CommandLine = $cl }) }
+        }
+        return @($r.ToArray())
+    }
+
+    function Get-GGFreeRamGb {
+        try {
+            $m = [regex]::Match([IO.File]::ReadAllText('/proc/meminfo'), '(?m)^MemAvailable:\s+(\d+)\s+kB')
+            if ($m.Success) { return [math]::Round([double]$m.Groups[1].Value / 1MB, 1) }
+        } catch {}
+        return $null
+    }
+
+    # cgroup v2 memory figures of the scope this run lives in (gg-linux-run.sh), for results/host.json
+    function Get-GGCgroupMemory {
+        $r = [ordered]@{ cgroup = ''; memoryMax = ''; memoryPeakMb = $null; memoryCurrentMb = $null; oomKills = $null }
+        try {
+            $line = @([IO.File]::ReadAllLines('/proc/self/cgroup') | Where-Object { $_ -like '0::*' })[0]
+            if (-not $line) { return $r }
+            $r.cgroup = $line.Substring(3)
+            $dir = '/sys/fs/cgroup' + $r.cgroup
+            $read = { param($n) $p = "$dir/$n"; if ([IO.File]::Exists($p)) { [IO.File]::ReadAllText($p).Trim() } else { '' } }
+            $r.memoryMax = & $read 'memory.max'
+            $pk = & $read 'memory.peak'; if ($pk -match '^\d+$') { $r.memoryPeakMb = [math]::Round([double]$pk / 1MB) }
+            $cu = & $read 'memory.current'; if ($cu -match '^\d+$') { $r.memoryCurrentMb = [math]::Round([double]$cu / 1MB) }
+            $ev = & $read 'memory.events'
+            $m = [regex]::Match($ev, '(?m)^oom_kill\s+(\d+)')
+            if ($m.Success) { $r.oomKills = [int]$m.Groups[1].Value }
+        } catch {}
+        return $r
     }
 }

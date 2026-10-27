@@ -1,6 +1,7 @@
-# Run-GGTest.ps1 - remote (home test PC) entry point. Invoked by tools\test\Invoke-GGTest.ps1 over ssh.
-# Reads D:\GregtechGrindless\incoming\<RunId>.zip (pack\, overlay\, request.json), takes the global lock,
-# runs the requested suites and leaves D:\GregtechGrindless\runs\<RunId>\results.zip for the caller.
+# Run-GGTest.ps1 - remote entry point. Invoked by tools\test\Invoke-GGTest.ps1 over ssh (home: Windows PowerShell 5.1)
+# or through gg-linux-run.sh (azure/local Linux bench: pwsh 7, server suite only).
+# Reads <base>\incoming\<RunId>.zip (pack\, overlay\, request.json), takes the global lock,
+# runs the requested suites and leaves <base>\runs\<RunId>\results.zip for the caller.
 param(
     [Parameter(Mandatory = $true)][string]$RunId
 )
@@ -57,13 +58,15 @@ try {
 
         $ok = Invoke-GGStage 'lock' {
             $t0 = Get-Date
-            $slots = 1
-            Enter-GGLock -MaxWaitMin ([int]$req.lockWaitMin)
+            $slots = [math]::Min([math]::Max(1, [int]$req.slots), [int]$global:GG.SlotCeiling)
+            Enter-GGLock -MaxWaitMin ([int]$req.lockWaitMin) -Slots $slots
             $killed = Stop-GGOrphans
-            $freeGb = [math]::Round((Get-PSDrive D).Free / 1GB, 1)
-            if ($freeGb -lt 10) { throw "only $freeGb GB free on D:" }
+            $drive = New-Object IO.DriveInfo([IO.Path]::GetPathRoot([IO.Path]::GetFullPath($global:GG.Base)))
+            $driveLabel = $(if ($global:GGIsLinux) { $global:GG.Base } else { $drive.Name.TrimEnd('\') })
+            $freeGb = [math]::Round($drive.AvailableFreeSpace / 1GB, 1)
+            if ($freeGb -lt 10) { throw "only $freeGb GB free on $driveLabel" }
             $waited = [int]((Get-Date) - $t0).TotalSeconds
-            Set-GGStage 'PASS' ("acquired slot {0} (of {1}) after {2}s; no RAM launch floor; orphans killed {3}; D: free {4} GB" -f $global:GG.Slot, $slots, $waited, $killed, $freeGb)
+            Set-GGStage 'PASS' ("acquired slot {0} (of {1}) after {2}s; no RAM launch floor; orphans killed {3}; {5} free {4} GB" -f $global:GG.Slot, $slots, $waited, $killed, $freeGb, $driveLabel)
         }
     }
 
@@ -97,8 +100,25 @@ try {
             packVersion = $(if ($packInfo) { $packInfo.version } else { '' })
             minecraft  = $(if ($packInfo) { $packInfo.mc } else { '' })
             forge      = $(if ($packInfo) { $packInfo.forge } else { '' })
+            backend    = $(if ($ctl.Req -and $ctl.Req.backend) { [string]$ctl.Req.backend } else { '' })
+            os         = $(if ($global:GGIsLinux) { 'linux' } else { 'windows' })
+            commit     = $(if ($ctl.Req -and $ctl.Req.commit) { [string]$ctl.Req.commit } else { '' })
+            dirty      = $(if ($ctl.Req -and $null -ne $ctl.Req.dirty) { [bool]$ctl.Req.dirty } else { $null })
+            slot       = [int]$global:GG.Slot
+            slots      = [int]$global:GG.Slots
         }
         [IO.File]::WriteAllText((Join-Path $resultsDir 'meta.json'), (ConvertTo-Json -InputObject $meta), (New-Object Text.UTF8Encoding($false)))
+        if ($global:GGIsLinux) {
+            $hostInfo = [ordered]@{
+                machine = [Environment]::MachineName
+                kernel  = $(try { [IO.File]::ReadAllText('/proc/sys/kernel/osrelease').Trim() } catch { '' })
+                os      = $(try { ([regex]::Match([IO.File]::ReadAllText('/etc/os-release'), '(?m)^PRETTY_NAME="?([^"\r\n]*)')).Groups[1].Value } catch { '' })
+                cpus    = [Environment]::ProcessorCount
+                pwsh    = [string]$PSVersionTable.PSVersion
+                cgroupMemory = Get-GGCgroupMemory
+            }
+            [IO.File]::WriteAllText((Join-Path $resultsDir 'host.json'), (ConvertTo-Json -InputObject $hostInfo -Depth 4), (New-Object Text.UTF8Encoding($false)))
+        }
         Save-GGStages
         Copy-Item -LiteralPath $global:GG.RunLog -Destination (Join-Path $resultsDir 'run.log') -Force -ErrorAction SilentlyContinue
         New-GGResultsZip $resultsDir (Join-Path $runDir 'results.zip')

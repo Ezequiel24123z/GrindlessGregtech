@@ -5,6 +5,7 @@ $global:GGUrls = @{
     Installer     = 'https://github.com/packwiz/packwiz-installer/releases/download/v0.5.14/packwiz-installer.jar'
     Bootstrap     = 'https://github.com/packwiz/packwiz-installer-bootstrap/releases/download/v0.0.3/packwiz-installer-bootstrap.jar'
     HmcExe        = 'https://github.com/headlesshq/headlessmc/releases/download/3.0.0-RC5/headlessmc-launcher-windows-x64.exe'
+    HmcLinux      = 'https://github.com/headlesshq/headlessmc/releases/download/3.0.0-RC5/headlessmc-launcher-linux-x64'
     HmcJar        = 'https://github.com/headlesshq/headlessmc/releases/download/3.0.0-RC5/headlessmc.jar'
     McRuntimeTest = 'https://github.com/headlesshq/mc-runtime-test-mod/releases/download/1.20.1-5.0.1/mc-runtime-test-1.20.1-forge-5.0.1.jar'
     ForgeMaven    = 'https://maven.minecraftforge.net/net/minecraftforge/forge'
@@ -41,7 +42,7 @@ function Ensure-GGForgeServer {
     param([string]$Mc, [string]$Forge)
     $ver = "$Mc-$Forge"
     $dir = Join-Path $global:GG.Cache "forge-server\$ver"
-    $argsFile = Join-Path $dir "libraries\net\minecraftforge\forge\$ver\win_args.txt"
+    $argsFile = Join-Path $dir "libraries\net\minecraftforge\forge\$ver\$($global:GG.ForgeArgsFile)"
     if ((Test-Path (Join-Path $dir '.ok')) -and (Test-Path $argsFile)) { return @{ Dir = $dir; Cached = $true; Ver = $ver } }
 
     # one run installs, a concurrent one waits and then finds it cached
@@ -102,7 +103,7 @@ function Add-GGOverlay {
     param([string]$OverlayDir, [string]$Instance)
     $rel = @()
     if (-not (Test-Path $OverlayDir)) { return $rel }
-    $root = (Resolve-Path $OverlayDir).Path.TrimEnd('\')
+    $root = (Resolve-Path $OverlayDir).Path.TrimEnd('\', '/')
     foreach ($f in @(Get-ChildItem $OverlayDir -Recurse -File -Force)) {
         $rel += $f.FullName.Substring($root.Length + 1)
     }

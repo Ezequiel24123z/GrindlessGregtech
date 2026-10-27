@@ -11,3 +11,5 @@ tools/prism/out/
 tools/.check-fast/
 # Test-ResourcePolicy.ps1's local dry run of a server restart (removed when it ends)
 tools/test/.restart-dryrun-*/
+# Per-machine overrides of tools/test/backends.psd1 (docs/testing/usage.md)
+tools/test/backends.local.psd1
