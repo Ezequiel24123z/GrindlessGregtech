@@ -2281,6 +2281,26 @@ file = "kubejs/assets/grindless/textures/block/multiblock/ore_plant/overlay_fron
 hash = "af915735740bd046c85e66fc03c47bb31517ef64f1721726151ea5de8cf121e3"
 
 [[files]]
+file = "kubejs/assets/grindless/textures/block/multiblock/organoid_array/overlay_front.png"
+hash = "013087659ae8519b1a90f5f7d02b9dd52bd9df2857a3723f604d7d68892d8cd7"
+
+[[files]]
+file = "kubejs/assets/grindless/textures/block/multiblock/organoid_array/overlay_front_active.png"
+hash = "ddf49275279a3eb38101888c0115f700d9ae34b6163c462b4c671c1a2afa3f15"
+
+[[files]]
+file = "kubejs/assets/grindless/textures/block/multiblock/organoid_array/overlay_front_active.png.mcmeta"
+hash = "491ea51d46bc1f0c0ff11ed9293461cc67de293c7672abbc45f67563f8fe1f1a"
+
+[[files]]
+file = "kubejs/assets/grindless/textures/block/multiblock/organoid_array/overlay_front_active_emissive.png"
+hash = "77459671ee41237f6321ec6efa5ba15c51ebfe2d22caff01cdcd4b467a108223"
+
+[[files]]
+file = "kubejs/assets/grindless/textures/block/multiblock/organoid_array/overlay_front_active_emissive.png.mcmeta"
+hash = "491ea51d46bc1f0c0ff11ed9293461cc67de293c7672abbc45f67563f8fe1f1a"
+
+[[files]]
 file = "kubejs/assets/grindless/textures/block/multiblock/organoid_lab/overlay_front.png"
 hash = "6b065cebce84b18eb1cbc9cfdfd710babb0f8bbc66f8ac779cbe4d43ea8be840"
 
@@ -5281,6 +5301,10 @@ file = "kubejs/client_scripts/grindless/uhv_travel_lang.js"
 hash = "57070f9a66d163159aa903ef8a988bbf65740973bbed1d016d23a269fb414bd3"
 
 [[files]]
+file = "kubejs/client_scripts/grindless/uhv_wetware_lang.js"
+hash = "603ee0bbe497aa8c241fa897fabb0dc8df2628352b324c8528d281b648375a5b"
+
+[[files]]
 file = "kubejs/client_scripts/grindless/uhv_wireless_lang.js"
 hash = "6069e3edbd9cc04fd8710958f2d2f6010701560be9861406f98f0e13ad30ace8"
 
@@ -5642,7 +5666,7 @@ hash = "1f4b256531a0b42a6ecf399e9b692d9e4730bd4102e53aab3e1fa2c999b69e9d"
 
 [[files]]
 file = "kubejs/data/grindless/tables/hidden_until.json"
-hash = "adadbd4bf90e3d113caf6dd37db1ba21588af5af0cbceac654675ad0dbd194e7"
+hash = "14845cb20c70b8b3b96e53ce5decbc7317e8b043dc18c1fc8d7229c839e22069"
 
 [[files]]
 file = "kubejs/data/grindless/tables/horizon_collector.json"
@@ -6365,6 +6389,10 @@ file = "kubejs/server_scripts/grindless/uhv/travel.js"
 hash = "780932c854cb8873a90ffb4be9d49b6cf688ca07b1c0c54e0c8693b4b749d4fc"
 
 [[files]]
+file = "kubejs/server_scripts/grindless/uhv/wetware.js"
+hash = "83fd1fd28963fa24b9bec45f83eaf22df87bbd85acb21af91f5e40081441d721"
+
+[[files]]
 file = "kubejs/server_scripts/grindless/uhv/zblan.js"
 hash = "a46dbe22652e68840935340f080ee1372532db6554579313d4496604791b15fd"
 
@@ -6879,6 +6907,10 @@ hash = "a7a3c99fe399a8fd242328cf6cff2ad5ff659b8900162b9bb99e90210217de36"
 [[files]]
 file = "kubejs/startup_scripts/grindless/uhv/travel.js"
 hash = "655186615d9b2cdf266cf8780a96f418d1fdb7166c4ab4ed35f6e7e749f4edc3"
+
+[[files]]
+file = "kubejs/startup_scripts/grindless/uhv/wetware.js"
+hash = "86d9c49fca2624a450fd510c2749ee148b81ef34748ae40a1a6e02ff45fd7d33"
 
 [[files]]
 file = "kubejs/startup_scripts/grindless/uhv/zblan.js"

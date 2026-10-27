@@ -236,7 +236,7 @@ test('the controller crafting: UHV hull, 2 UV sensors, 2 UHV circuits, a shape n
   const [, pattern, keys] = mine.args;
   const grid = (pat, k) => pat.map((row) => [...row].map((ch) => (ch === ' ' ? '' : k[ch])));
   const resolved = plain(grid(pattern, keys));
-  assert.deepEqual(resolved, [['gtceu:uv_sensor', '', 'gtceu:uv_sensor'], ['#gtceu:circuits/uhv', 'gtceu:uhv_machine_hull', '#gtceu:circuits/uhv']]);
+  assert.deepEqual(resolved, [['#gtceu:circuits/uhv', '', '#gtceu:circuits/uhv'], ['gtceu:uv_sensor', 'gtceu:uhv_machine_hull', 'gtceu:uv_sensor']]);
   // every other UHV controller grid (literal ids or the script's var constants), and its mirror
   const dir = path.join(KUBE, 'server_scripts', 'grindless', 'uhv');
   const others = [];

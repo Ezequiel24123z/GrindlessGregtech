@@ -37,7 +37,7 @@ Only the integrator writes, once per batch: generated `pack/index.toml`, `pack/p
 ## Models
 - Orchestrator, integrator, implementer: Claude Sonnet. Repetitive edits, translations, table rows: `mechanical` (Haiku); judgement goes to Sonnet. Failed runs: `triage` (Haiku, read-only).
 - Opus only for era design, cross-system contradictions, or a package that failed 2 repairs (about 2 sessions per era).
-- A subagent answers one bounded question and spawns none unless authorised. At most 3 concurrent workers; one bench JVM.
+- A subagent answers one bounded question and spawns none unless authorised. At most 3 concurrent workers. Bench: the Linux VM first (3 run slots), the home PC only as fallback (one JVM); `docs/testing/`.
 
 ## Git
 Personal account `Ezequiel24123z`, never the corporate one. Small commits, clear messages. No `git stash` (shared by every worktree): use a WIP commit.

@@ -143,7 +143,7 @@
       console.error(LOG + 'organoid array controller crafting skipped, unknown item(s): ' + missing.join(', '))
       return
     }
-    event.recipes.gtceu.shaped('gtceu:organoid_array', ['S S', 'CHC'], {
+    event.recipes.gtceu.shaped('gtceu:organoid_array', ['C C', 'SHS'], {
       S: 'gtceu:uv_sensor', C: '#gtceu:circuits/uhv', H: 'gtceu:uhv_machine_hull'
     }).id(W.crafting.array)
   }
