@@ -133,7 +133,7 @@ test('chamber recipes: capsule + circuit, 2 % module wear in and out, helium (an
   const { added, G, logs } = serverHarness([]);
   assert.equal(logs.error.length, 0, logs.error.join(' | '));
   const rows = added.filter(r => r.type === 'laser_fusion');
-  assert.deepEqual(rows.map(r => r.id), ['grindless:laser_fusion/pb11', 'grindless:laser_fusion/d_he3']);
+  assert.deepEqual(rows.map(r => r.id), ['grindless:pb11', 'grindless:d_he3']);
   const [a, b] = rows;
   assert.deepEqual(a.calls.itemInputs, [['1x grindless:pb11_capsule']]);
   assert.deepEqual(b.calls.itemInputs, [['1x grindless:d_he3_capsule']]);
@@ -153,12 +153,12 @@ test('chamber crafting recipe and decaborane row are added; unknown ids skip wit
   const { added } = serverHarness([]);
   const craft = added.find(r => r.id === 'grindless:crafting/laser_fusion_chamber');
   assert.ok(craft && craft.shaped.out === 'gtceu:laser_fusion_chamber');
-  const d = added.find(r => r.id === 'grindless:chemical_reactor/decaborane');
+  const d = added.find(r => r.id === 'grindless:decaborane');
   assert.ok(d);
   assert.deepEqual(d.calls.inputFluids.map(x => [x[0].id, x[0].amount]), [['gtceu:boron_11_trifluoride', 3000], ['gtceu:hydrogen', 6000]]);
   assert.deepEqual(d.calls.outputFluids.map(x => [x[0].id, x[0].amount]), [['gtceu:decaborane', 1000], ['gtceu:hydrofluoric_acid', 9000]]);
   const s = serverHarness([], id => !/boron_11_trifluoride|pb11_capsule/.test(id));
-  assert.equal(s.added.filter(r => r.type === 'laser_fusion' || r.id === 'grindless:chemical_reactor/decaborane').length, 0);
+  assert.equal(s.added.filter(r => r.type === 'laser_fusion' || r.id === 'grindless:decaborane').length, 0);
   assert.ok(s.logs.error.length >= 2);
 });
 
