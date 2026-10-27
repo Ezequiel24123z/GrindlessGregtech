@@ -4,7 +4,7 @@ The game starts here, without electricity. Coke, bricks, bronze, boilers and ste
 
 ## Route
 
-1. **Start.** Wood, flint and the GT tools (mortar, hammer, file). Hand-mine only what is needed: a little copper, tin, iron and coal. Clay and sand for the bricks.
+1. **Start.** Wood, flint and the GT tools (mortar, hammer, file). Hand-mine only what is needed: a little copper, tin, iron and coal. Clay and sand for the bricks. The **Horizon Collector** you arrive with produces all of these slowly (see below).
 2. **Coke.** Coke oven (`gtceu:coke_oven`): coal to coke, logs to charcoal. Creosote comes out as a byproduct. It fuels the liquid boiler or impregnates wood.
 3. **Bronze.** Bronze dust made with the mortar, then smelted. First plates and gears.
 4. **Steam.** Low-Pressure Boiler, coal-fired (`gtceu:lp_steam_solid_boiler`), and a Primitive Pump (`gtceu:primitive_pump`) for water. Single-block steam machines: Steam Macerator, Steam Compressor, Steam Forge Hammer, Steam Extractor, Steam Furnace and Steam Alloy Smelter.
@@ -17,6 +17,32 @@ The game starts here, without electricity. Coke, bricks, bronze, boilers and ste
    - Later, the **steam blast furnace** (ours) makes steel straight from the ore, faster, in exchange for steam.
    - The **coke battery** (ours) cokes like 6 or 7 coke ovens and stores coal gas for LV.
 7. **Gate to LV.** LV Steam Turbine (`gtceu:lv_steam_turbine`), first LV circuit, LV Machine Hull and rubber-insulated tin cable. Once that works, the era is behind you.
+
+## The Horizon Collector (the start)
+
+A user-directed exception (2026-10-27), inspired by GregTech Leisure's *Fragment World Collection Machine* (idea only: our code, numbers and textures). It replaces most of the very first hand gathering and fades out once steam mining arrives.
+
+- **Lore:** the machine was in your pack when you arrived. Nobody remembers building it. Its shard hums at the pitch of the black hole at the end of the journey, and it pulls a trickle of ordinary matter through a horizon the size of a pin. The quest says no more; the mirror shell at MAX (`docs/journey.md:54`) may be where it was made.
+- **Machine:** `gtceu:lv_horizon_collector`, a single-block LV machine (GTM `simple` builder, LV only, no higher tier). Recipe type `gtceu:horizon_collection`. It is never craftable and has no upgrade, parallel or multiblock version.
+- **Catalyst:** `grindless:horizon_shard`, not consumed, never craftable.
+- **Power:** two GTM LV solar panel covers (`gtceu:lv_solar_panel`) come with it. Placed on the machine they run it by day; it stops at night. Energy is not free: the covers are a real GTM source.
+- **Recipes:** 16 EU/t, 1200 ticks (60 s), shard plus programmed circuit:
+
+| Circuit | Output per run |
+|---|---|
+| 1 | 16 oak logs |
+| 2 | 48 cobblestone |
+| 3 | 32 sand |
+| 4 | 32 gravel |
+| 5 | 32 clay balls |
+| 6 | 12 coal |
+| 7 | 8 raw copper |
+| 8 | 8 raw tin |
+| 9 | 8 raw iron |
+
+- **Why these numbers:** a single machine running at LV with no overclock can never exceed one run a minute. Its ore rate, 8 a minute, is a sixth of the Steam Vein Drill's (40-60); its logs, 16 a minute, are a third of the steam greenhouse's. It carries the first hours and is quickly outgrown. It covers only what the Route's step 1 hand-mines; lead, nickel, gold, redstone and every later ore still need a drill.
+- **How you get it:** the Welcome chapter's quest *The Horizon Collector*, unlocked by *Arrival*, gives the machine, the shard and the two covers once per player.
+- **Saves:** new ids only; nothing is removed or renamed.
 
 ## Storage and furnaces
 
@@ -225,3 +251,30 @@ You leave the era once you have steel, an LV steam turbine that generates power 
 - **Both run with 4 parallels**, like the steam vein drill and the steam greenhouse.
 - **The controller is built with the GTM machine it replaces:** the primitive blast furnace, and two coke ovens. The steam blast furnace also requires steel, so the primitive one is still how steel gets started.
 - **The flux is raw, dust or block calcite.** Pyrite is left out of the blast furnace: it is a sulfide and must be roasted first (LV).
+
+## Work package STEAM-X1: the Horizon Collector
+
+- **Objective:** the machine, catalyst, recipes and quest in *The Horizon Collector (the start)* above, exactly as specified there (ids, numbers, circuits).
+- **`<name>`:** `horizon`.
+- **Allowed:**
+  - `pack/kubejs/startup_scripts/grindless/steam/horizon_collector.js` (recipe type, machine, shard item);
+  - `pack/kubejs/server_scripts/grindless/steam/horizon_collector.js` (the 9 recipes, read from the table);
+  - `pack/kubejs/data/grindless/tables/horizon_collector.json`;
+  - `pack/kubejs/client_scripts/grindless/steam_horizon_lang.js` (`en_us` and `es_es`: machine, shard, recipe type, tooltips);
+  - textures and models under `pack/kubejs/assets/grindless/` for the machine face (idle, active) and the shard, drawn by a new `tools/assets/Build-HorizonCollectorTextures.ps1` (`-Credits` prints its rows);
+  - `pack/config/ftbquests/quests/chapters/welcome.snbt` (one new quest only);
+  - `tools/test/overlay/kubejs/server_scripts/gg_test_quests.js` (`GG_QUESTS_EXPECTED` only, if the linter asks);
+  - `tools/analysis/test/steam-horizon_collector.test.mjs`.
+- **Prohibited:** everything else. In particular `hidden_until.json`, `tools/analysis/tiers/*.json`, `emi_coverage.json`, `lang/*.json`, `emi_info_lang.js`, `lib/**`, `CREDITS.md`, `DECISIONS.md`, `docs/STATUS.md`, `pack/index.toml`, `pack/pack.toml`.
+- **References:**
+  - the single-block precedent `startup_scripts/grindless/lv/creatures.js:47-74` (recipe type with circuit overlay, `simple` builder, `workableTieredHullModel`, tooltips) and its server and lang files;
+  - the quest rules in `.github/instructions/quests.instructions.md`; `docs/quests.md` §7 (rewards) and §10 (ids); *Arrival* in `welcome.snbt`.
+- **Machine:** `event.create('horizon_collector', 'simple').tiers(GTValues.LV)`, so the id is `gtceu:lv_horizon_collector`. No crafting recipe for the machine or the shard. The tooltip says it was not built, cannot be made and runs on the solar covers by day.
+- **Recipes:** ids `grindless:horizon_collection/<output>`; LV, 16 EU/t, 1200 ticks; inputs: `grindless:horizon_shard` not consumed (`chancedInput` 0 or `notConsumable`, as GTM 7.5.3 supports) and `circuit(n)`; outputs from the table; no fluids.
+- **Quest:** title *The Horizon Collector*; depends on *Arrival*; a checkmark task; 3 rewards (1 `gtceu:lv_horizon_collector`, 1 `grindless:horizon_shard`, 2 `gtceu:lv_solar_panel`); 2-4 short lines of lore (the machine was in your pack; nobody built it; it hums like the black hole at the end of the journey; put the two solar covers on it and pick a circuit). New ids, first digit 1-7, unique in the book. It is an explicit exception to the small-reward rule (user-directed); add it to the linter's exception list only if the linter flags it, with the reason.
+- **Invariants:** no existing id changes; no MV or higher tier; nothing generated or shared is edited; English everywhere except the `es_es` names.
+- **Acceptance:** the static validator sees the machine, type, item and 9 recipes; the quest lints with 0 errors and 0 warnings; the node test pins the 9 rows (circuit, output, count, 16 EU/t, 1200 t, shard not consumed) and that no recipe outputs the machine or the shard.
+- **Tests:** T0 (`tools/Check-Fast.ps1`). The expected integrator-class failures (EMI coverage and reachability for two items obtainable only from a quest) are reported, not fixed. T1: none (the `simple` builder and GTM's solar cover are proven).
+- **Repairs:** at most 2, then stop with evidence.
+- **Commits:** content, then textures. No push, no PR.
+- **Handoff (at most 15 lines):** result, files, tests, new ids, the integrator edits needed (obtain class for quest-only items, EMI), a proposed CREDITS block (`-Credits`) and README row, risks.
