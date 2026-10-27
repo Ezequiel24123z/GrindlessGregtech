@@ -117,6 +117,17 @@
     return { which: 'both', name: name, reason: 'grindless.machine.' + name + '.no_voiding' }
   }
 
+  // UV-B2: the type's Neptune rows (recipe path ice_giant_siphon/neptune_*) belong to UV's deep siphon (uv/neptune.js, N.siphonPrefix);
+  // this siphon refuses them even when carried to Neptune orbit
+  const NEPTUNE_ROWS = 'ice_giant_siphon/neptune_'
+  function next(m) {
+    if (m.name !== 'ice_giant_siphon') return G.parallelHatch.overclock
+    return function (machine, recipe) {
+      if (String(recipe.id.getPath()).indexOf(NEPTUNE_ROWS) === 0) return ModifierFunction.NULL
+      return G.parallelHatch.overclock(machine, recipe)
+    }
+  }
+
   GTCEuStartupEvents.registry('gtceu:recipe_type', function (event) {
     UR.machines.forEach(function (m) {
       event.create(m.type)
@@ -137,7 +148,7 @@
         .langValue(m.title)
         .rotationState(RotationState.NON_Y_AXIS)
         .recipeType(m.type)
-        .recipeModifier(G.noVoiding.modifier(keep(m.name), G.parallelHatch.overclock), true)
+        .recipeModifier(G.noVoiding.modifier(keep(m.name), next(m)), true)
         .beforeWorking(G.noVoiding.beforeWorking(keep(m.name)))
         .appearanceBlock(function () { return Block.getBlock(m.casing) })
         .pattern(function (def) { return Pat.build(def, m.spec) })
