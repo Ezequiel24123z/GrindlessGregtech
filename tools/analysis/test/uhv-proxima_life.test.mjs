@@ -120,8 +120,20 @@ test('recipe lookup: unique names and circuits, no subsets inside a type, every 
     if (r.dataKey) assert.equal(PL.recipes.find((x) => x.recipeId === id).dataKey, r.dataKey, id + ' data key');
   }
   assert.ok(read('server_scripts/grindless/uhv/proxima_life.js').includes('recipe.addDataString(rec.dataKey, rec.name)'));
-  // GTM's own rows of these types are never shadowed: ours are keyed by our own items
-  for (const r of rows().filter((x) => GTM.includes(x.type))) assert.ok(inputs(r).some((i) => i.startsWith('grindless:')), r.name);
+  // GTM's own rows of these types are never shadowed: ours are keyed by our own items (the casings by their own outputs, without a circuit)
+  const CASINGS = ['bsl4_casing', 'hangar_casing'];
+  for (const r of rows().filter((x) => GTM.includes(x.type) && !CASINGS.includes(x.name))) assert.ok(inputs(r).some((i) => i.startsWith('grindless:')), r.name);
+});
+
+test('F1\'s casings: one assembler recipe each, 2 a craft, the only maker, so all five multiblocks can be built', () => {
+  for (const n of ['bsl4_casing', 'hangar_casing']) {
+    const d = dump(`grindless:assembler/${n}`);
+    assert.ok(d, n);
+    assert.deepEqual(circuitOf(d), [], n);
+    assert.equal(T.types.assembler.recipes.find((r) => r.name === n).itemsOut[0].count, 2, n);
+    assert.deepEqual(recipes.filter((x) => has(outs(x), `grindless:${n}`)).map((x) => x.i), [d.i], n);
+  }
+  for (const m of Object.values(PL.machines)) assert.ok(['grindless:bsl4_casing', 'grindless:hangar_casing'].includes(m.casing), m.name);
 });
 
 test('allowlists: the rover bay, greenhouse, plant and vat run only on Proxima b; the receiving facility only on Earth; GTM rows anywhere', () => {
