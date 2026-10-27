@@ -24,6 +24,12 @@
 //     5 pump       4 diode bars + 2 copper plates (the heat sink) -> 1 InGaAs pump module                              30,720 x 200 t
 //     6 scrub      1,000 mB arsine -> 1 arsenic dust + 3,000 mB hydrogen (the burn box in the gas cabinet's exhaust:
 //                  2 AsH3 -> 2 As + 3 H2, cracked hot; THE ARSINE SCRUBBER)                                             1,920 x 100 t
+//   MOCVD reactor, UHV rows (package UHV-A5, docs/eras/uhv.md Older machines; published apart in .uhvRows, so .recipes stays UV's)
+//     7 IMM epi    1 gallium arsenide wafer + 1 phosphorus dust + 500 mB trimethylgallium + 250 mB trimethylindium + 1,000 mB arsine
+//                  -> 1 IMM epi wafer + 2,250 mB methane + 500 mB arsine (GaInP/GaAs/InGaAs grown upside down, NREL's inverted
+//                  metamorphic cell; the solar array fab lifts it off and returns the substrate)                    491,520 x 1,200 t
+//     8 NbN plate  1 SiC mirror blank (the SiC device fab) + 2 niobium dust + 200 mB nitrogen -> 1 NbN-coated SiC plate
+//                  (reactive sputtering as in circuit 4)                                                              122,880 x 400 t
 //   side steps (GTM's own machines)
 //     arsine       chemical reactor: 2 arsenic dust + 3 magnesium dust + 6,000 mB hydrochloric acid -> 2,000 mB arsine + 9 magnesium
 //                  chloride (Mg3As2 + 6 HCl -> 2 AsH3 + 3 MgCl2, the magnesium arsenide made and hydrolysed in one step)   480 x 200 t
@@ -43,7 +49,7 @@
 //   chlorine (preform)    -> silicon tetrachloride again (GTCA's chemical reactor: silicon + chlorine) or GTM's hydrochloric acid
 //   glass dust            -> GTM's glass recipes (alloy smelter, furnace)
 //   methane (epi)         -> ZPM's methane pyrolyser (gtceu:methane_pyrolyser: hydrogen and carbon) or GTM's chloromethane step
-//   arsine (epi, unused)  -> back into circuit 2 or into circuit 6, the scrubber; it is never voided
+//   arsine (epi, unused)  -> back into circuit 2 (or 7) or into circuit 6, the scrubber; it is never voided
 //   arsenic (scrub)       -> the arsine step again; hydrogen -> GTM's hydrochloric acid (chlorine + hydrogen)
 //   salt (organometallics) -> GTM's electrolyser (sodium + chlorine; the sodium comes back to circuit 1)
 //   magnesium chloride    -> GTM's electrolyser (magnesium + chlorine; the magnesium comes back to the arsine step)
@@ -53,7 +59,7 @@
 // Lookup: every tower and reactor recipe has its own circuit, so no recipe's keys contain another's (checked at load). Ids not yet
 // registered (the spent laser module until UV-A3 merges) skip their row with a console error. Published in global.grindless.photonics:
 // .recipes [{ name, type, recipeId, circuit, itemsIn, fluidsIn, itemsOut, fluidsOut, eut, duration, temp, notConsumable }], .side,
-// .crafting, .skipped, .clashes.
+// .uhvRows (circuits 7-8, the same shape), .crafting, .skipped, .clashes.
 // Rhino: var + function inside every callback that runs more than once.
 (function () {
   var LOG = '[grindless/uv] '
@@ -122,6 +128,15 @@
       itemsOut: [item('gtceu:arsenic_dust', 1)], fluidsOut: [fluid('gtceu:hydrogen', 3000)], eut: 1920, duration: 100 }
   ]
 
+  // the MOCVD reactor's UHV rows (package UHV-A5): their inputs come from UHV (the SiC mirror blank) or feed only UHV (the IMM wafer)
+  var UHV_ROWS = [
+    { name: 'imm_epi', type: 'mocvd', circuit: 7, itemsIn: [item(GAAS_WAFER, 1), item('gtceu:phosphorus_dust', 1)],
+      fluidsIn: [fluid(TMGA, 500), fluid(TMIN, 250), fluid(ARSINE, 1000)],
+      itemsOut: [item('grindless:imm_epi_wafer', 1)], fluidsOut: [fluid('gtceu:methane', 2250), fluid(ARSINE, 500)], eut: UVA, duration: 1200 },
+    { name: 'nbn_sic_plate', type: 'mocvd', circuit: 8, itemsIn: [item('grindless:sic_mirror_blank', 1), item('gtceu:niobium_dust', 2)],
+      fluidsIn: [fluid('gtceu:nitrogen', 200)], itemsOut: [item('grindless:nbn_coated_sic_plate', 1)], fluidsOut: [], eut: ZPM, duration: 400 }
+  ]
+
   // side steps on GTM's own machines
   var SIDE = [
     { name: 'arsine', type: 'chemical_reactor', circuit: null,
@@ -153,6 +168,8 @@
   }
   P.recipes = TABLE.map(function (t) { return publish(t, 'grindless:' + t.type + '/' + t.name) })
   P.side = SIDE.map(function (t) { return publish(t, 'grindless:' + t.name) })
+  // the id passed is 'grindless:<name>' (GTM puts the type in front: grindless:mocvd/<name>); UV's rows above keep their doubled ids
+  P.uhvRows = UHV_ROWS.map(function (t) { return publish(t, 'grindless:' + t.name) })
   P.skipped = []
   P.clashes = []
   P.crafting = {
@@ -217,10 +234,10 @@
   }
 
   function addMachines(event) {
-    P.clashes = clashesOf(P.recipes)
+    P.clashes = clashesOf(P.recipes.concat(P.uhvRows))
     if (P.clashes.length > 0) console.error(LOG + 'photonics recipes clash in the lookup: ' + P.clashes.join(', '))
-    P.recipes.forEach(function (r) { addRecipe(event, r) })
-    console.info(LOG + 'photonics recipes added: ' + (P.recipes.length - P.skipped.length))
+    P.recipes.concat(P.uhvRows).forEach(function (r) { addRecipe(event, r) })
+    console.info(LOG + 'photonics recipes added: ' + (P.recipes.length + P.uhvRows.length - P.skipped.length))
   }
 
   function addSide(event) {
