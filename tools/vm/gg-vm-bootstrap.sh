@@ -7,7 +7,9 @@
 #   Get-Content -Raw tools\vm\gg-vm-bootstrap.sh | ssh grindless-vm "tr -d '\r' | bash -s"   # Windows PowerShell
 #   GG_BOOTSTRAP_DRY=1 ...      # print what would change, change nothing
 #
-# Rebuilding the VM from scratch: docs/testing/rebuild.md.
+# Env: GG_USER (bench user, default: you), GG_NODE_VERSION, GG_BENCH_RESERVE_MB (RAM kept for the OS, default 1228),
+# GG_LINGER=0 (skip loginctl enable-linger). Nothing is sized for a particular VM: sizing is derived from its RAM.
+# A new VM from scratch: docs/testing/rebuild.md.
 set -euo pipefail
 USER_NAME="${GG_USER:-$(id -un)}"
 NODE_VERSION="${GG_NODE_VERSION:-v24.22.1}"
@@ -89,6 +91,30 @@ if [ ! -f "$lim" ]; then
   if [ "$DRY" != 1 ]; then printf '%s soft nofile 65536\n%s hard nofile 65536\n' "$USER_NAME" "$USER_NAME" | sudo -n tee "$lim" >/dev/null; fi
 else
   step nofile OK "$lim present"
+fi
+
+# --- bench sizing for this VM (read by gg-linux-run.sh; edit the file to change it, a re-run never overwrites it)
+benv=/etc/grindless/bench.env
+total_mb=$(( $(awk '/^MemTotal:/ {print $2}' /proc/meminfo) / 1024 ))
+rec_max="$(( total_mb - ${GG_BENCH_RESERVE_MB:-1228} ))M"
+if [ ! -f "$benv" ]; then
+  step bench-env CHANGE "$benv: GG_BENCH_MEMORY_MAX=$rec_max (RAM ${total_mb}M minus ${GG_BENCH_RESERVE_MB:-1228}M), swap 2G"
+  if [ "$DRY" != 1 ]; then
+    printf '# Grindless bench sizing, sourced by gg-linux-run.sh. Only GG_BENCH_* keys.\n# Written by gg-vm-bootstrap.sh for %s MiB of RAM; re-run it after a resize only after deleting this file.\nGG_BENCH_MEMORY_MAX=%s\nGG_BENCH_MEMORY_SWAP_MAX=2G\n' \
+      "$total_mb" "$rec_max" | sudo -n tee "$benv" >/dev/null
+  fi
+else
+  step bench-env OK "$(grep -h '^GG_BENCH_MEMORY_MAX=' "$benv" || echo "$benv present") (recommended now: $rec_max)"
+fi
+
+# --- user systemd manager without a login session (the run's memory scope lives in it)
+if [ "${GG_LINGER:-1}" = 1 ]; then
+  if [ "$(loginctl show-user "$USER_NAME" -p Linger --value 2>/dev/null)" != yes ]; then
+    step linger CHANGE "loginctl enable-linger $USER_NAME"
+    run sudo -n loginctl enable-linger "$USER_NAME"
+  else
+    step linger OK "enabled"
+  fi
 fi
 
 step done OK "now run tools/vm/gg-vm-health.sh"

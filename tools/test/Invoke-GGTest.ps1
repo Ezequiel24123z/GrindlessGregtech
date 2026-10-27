@@ -168,7 +168,7 @@ if ($beTransport -eq 'local') { $remoteRunner = 'local runner' } elseif ($beOs -
 if ($ShowBackend) {
     # dry run: print the resolved backend and stop; touches no bench
     [Console]::Out.WriteLine(("GGBACKEND|{0}|transport={1}|os={2}|host={3}|base={4}|suite={5}|memoryMax={6}|memorySwapMax={7}" -f `
-        $Backend, $beTransport, $beOs, $RemoteHost, $RemoteBase, $Suite, $beMemoryMax, $beMemorySwapMax))
+        $Backend, $beTransport, $beOs, $RemoteHost, $RemoteBase, $Suite, $(if ($beMemoryMax) { $beMemoryMax } else { 'auto' }), $(if ($beMemorySwapMax) { $beMemorySwapMax } else { 'auto' })))
     exit 0
 }
 $PackDir = [IO.Path]::GetFullPath($PackDir)

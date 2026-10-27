@@ -182,7 +182,7 @@ function Invoke-GGServerRestart {
 
     # the same command line on the same world (no RAM gate: the one global test JVM and its heap caps are the limits)
     [void](Get-GGNativeTimeoutMs $budget 1)
-    $argLine = "-Dgg.run=$($global:GG.RunId) @user_jvm_args.txt @libraries/net/minecraftforge/forge/$($Ctx.ForgeVer)/win_args.txt nogui"
+    $argLine = "-Dgg.run=$($global:GG.RunId) @user_jvm_args.txt @libraries/net/minecraftforge/forge/$($Ctx.ForgeVer)/$($global:GG.ForgeArgsFile) nogui"
     $g2 = [GGProc]::Start($Ctx.Java, $argLine, $Inst, (Join-Path $Res 'server-stdout.log'), (Join-Path $Res 'server-stderr.log'), $null)
     $Ctx.Proc = $g2
     Set-GGSlotState $null $true
@@ -300,7 +300,7 @@ function Invoke-GGServerSuite {
                 if (-not $global:GG.NativeBudget) { $global:GG.NativeBudget = @{ Clock = [Diagnostics.Stopwatch]::StartNew(); TimeoutSec = [int]$Req.nativeTimeoutSec } }
                 [void](Get-GGNativeTimeoutMs $global:GG.NativeBudget 1)
                 # -Dgg.run names the run in the JVM's command line (the other arguments are relative), so JVMs of a dead run can be told apart from the other slot's
-                $argLine = "-Dgg.run=$($global:GG.RunId) @user_jvm_args.txt @libraries/net/minecraftforge/forge/$($ctx.ForgeVer)/win_args.txt nogui"
+                $argLine = "-Dgg.run=$($global:GG.RunId) @user_jvm_args.txt @libraries/net/minecraftforge/forge/$($ctx.ForgeVer)/$($global:GG.ForgeArgsFile) nogui"
                 $g = [GGProc]::Start($ctx.Java, $argLine, $inst, (Join-Path $res 'server-stdout.log'), (Join-Path $res 'server-stderr.log'), $null)
                 $ctx.Proc = $g
                 Set-GGSlotState $null $true

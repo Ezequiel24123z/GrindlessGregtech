@@ -12,11 +12,39 @@ try { [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::
 Add-Type -AssemblyName System.IO.Compression
 Add-Type -AssemblyName System.IO.Compression.FileSystem
 
+# Linux benches (pwsh 7, started by gg-linux-run.sh). The Windows code paths are untouched; Linux overrides the few
+# Windows-only helpers at the end of this file, and Join-Path turns the scripts' '\' separators into '/'.
+$global:GGIsLinux = ($PSVersionTable.PSEdition -eq 'Core') -and $IsLinux
+if ($global:GGIsLinux) {
+    function global:Join-Path {
+        [CmdletBinding()]
+        param(
+            [Parameter(Mandatory = $true, Position = 0, ValueFromPipeline = $true)][string[]]$Path,
+            [Parameter(Position = 1)][AllowEmptyString()][string]$ChildPath,
+            [Parameter(ValueFromRemainingArguments = $true)][string[]]$AdditionalChildPath,
+            [switch]$Resolve
+        )
+        process {
+            foreach ($p in $Path) {
+                $a = @{ Path = $p.Replace('\', '/'); ChildPath = ([string]$ChildPath).Replace('\', '/') }
+                if ($AdditionalChildPath) { $a.AdditionalChildPath = @($AdditionalChildPath | ForEach-Object { $_.Replace('\', '/') }) }
+                if ($Resolve) { $a.Resolve = $true }
+                Microsoft.PowerShell.Management\Join-Path @a
+            }
+        }
+    }
+    if (-not $env:COMPUTERNAME) { $env:COMPUTERNAME = [Environment]::MachineName }
+}
+
 if (-not $global:GG) {
     $base = $env:GG_BASE
+    # Linux: the scripts live in <base>/tools/remote/<hash>/ (gg-linux-run.sh also exports GG_BASE)
+    if (-not $base -and $global:GGIsLinux) { $base = [IO.Path]::GetFullPath((Join-Path $PSScriptRoot '../../..')) }
     if (-not $base) { $base = 'D:\GregtechGrindless' }
     $global:GG = @{
         Base         = $base
+        # Forge server launch arguments (the installer writes both; the classpath separator differs)
+        ForgeArgsFile = $(if ($global:GGIsLinux) { 'unix_args.txt' } else { 'win_args.txt' })
         Tools        = Join-Path $base 'tools'
         Cache        = Join-Path $base 'cache'
         Sync         = Join-Path $base 'sync'
@@ -1008,5 +1036,107 @@ function Remove-GGOldRuns {
     if (Test-Path $scripts) {
         $current = Split-Path -Leaf $PSScriptRoot
         Get-ChildItem $scripts -Directory -ErrorAction SilentlyContinue | Where-Object { $_.Name -ne $current -and ((Get-Date) - $_.LastWriteTime).TotalDays -gt 3 } | ForEach-Object { Remove-GGTree $_.FullName }
+    }
+}
+
+# ---------------------------------------------------------------- Linux overrides (pwsh 7, see GGIsLinux above)
+if ($global:GGIsLinux) {
+    function Copy-GGTree {
+        param([string]$Source, [string]$Dest, [string[]]$ExcludeDirs = @(), [string[]]$ExcludeFiles = @())
+        New-Item -ItemType Directory -Force -Path $Dest | Out-Null
+        $a = @('-a')
+        foreach ($d in $ExcludeDirs) { $a += "--exclude=$d/" }
+        foreach ($f in $ExcludeFiles) { $a += "--exclude=$f" }
+        $a += @(($Source.TrimEnd('/') + '/'), ($Dest.TrimEnd('/') + '/'))
+        $out = & rsync @a 2>&1
+        $code = $LASTEXITCODE
+        $global:LASTEXITCODE = 0
+        if ($code -ne 0) { throw ("rsync failed ({0}): {1} -> {2}: {3}" -f $code, $Source, $Dest, (($out | Select-Object -Last 3) -join ' | ')) }
+    }
+
+    function Remove-GGTree {
+        param([string]$Path)
+        if (-not (Test-Path -LiteralPath $Path)) { return }
+        try { Remove-Item -LiteralPath $Path -Recurse -Force -ErrorAction Stop; return } catch {}
+        & rm -rf -- $Path 2>&1 | Out-Null
+        $global:LASTEXITCODE = 0
+    }
+
+    # Distribution JDK 17 (apt openjdk-17-jdk-headless), else $env:JAVA_HOME
+    function Get-GGJava17 {
+        # java-17-openjdk-amd64 (apt) first, then other JDK 17 layouts such as temurin-17-jdk-amd64 (GitHub runners)
+        $c = @(Get-ChildItem '/usr/lib/jvm' -Directory -ErrorAction SilentlyContinue | Where-Object { $_.Name -match '(^|-)17(-|$)' } |
+                Sort-Object { -not $_.Name.StartsWith('java-17-') }, Name | ForEach-Object { Join-Path $_.FullName 'bin/java' })
+        if ($env:JAVA_HOME) { $c += (Join-Path $env:JAVA_HOME 'bin/java') }
+        foreach ($j in $c) { if (Test-Path -LiteralPath $j) { return $j } }
+        throw 'Java 17 not found under /usr/lib/jvm/java-17-* or $JAVA_HOME (tools/vm/gg-vm-bootstrap.sh installs it)'
+    }
+
+    # The process and all its descendants (from /proc/<pid>/stat), killed with SIGKILL like taskkill /T /F.
+    function Stop-GGTree {
+        param([int]$ProcessId)
+        $kids = @{}
+        foreach ($d in [IO.Directory]::GetDirectories('/proc')) {
+            $n = [IO.Path]::GetFileName($d)
+            if ($n -notmatch '^\d+$') { continue }
+            try { $st = [IO.File]::ReadAllText("$d/stat") } catch { continue }
+            $f = $st.Substring($st.LastIndexOf(')') + 2).Split(' ')
+            $pp = [int]$f[1]
+            if (-not $kids.ContainsKey($pp)) { $kids[$pp] = New-Object Collections.ArrayList }
+            [void]$kids[$pp].Add([int]$n)
+        }
+        $todo = New-Object Collections.Queue
+        $todo.Enqueue($ProcessId)
+        $seen = @{}
+        while ($todo.Count -gt 0) {
+            $p = [int]$todo.Dequeue()
+            if ($seen.ContainsKey($p)) { continue }
+            $seen[$p] = $true
+            if ($kids.ContainsKey($p)) { foreach ($c in $kids[$p]) { $todo.Enqueue($c) } }
+        }
+        foreach ($p in $seen.Keys) { try { [Diagnostics.Process]::GetProcessById($p).Kill() } catch {} }
+    }
+
+    # Every java process with its full command line (from /proc), shaped like the Win32_Process objects used above.
+    function Get-GGManagedProcesses {
+        $r = New-Object Collections.ArrayList
+        foreach ($d in [IO.Directory]::GetDirectories('/proc')) {
+            $n = [IO.Path]::GetFileName($d)
+            if ($n -notmatch '^\d+$' -or [int]$n -eq $PID) { continue }
+            try {
+                $comm = [IO.File]::ReadAllText("$d/comm").Trim()
+                if ($comm -ne 'java') { continue }
+                $cl = [IO.File]::ReadAllText("$d/cmdline").Replace([char]0, ' ').Trim()
+            } catch { continue }
+            if ($cl) { [void]$r.Add([pscustomobject]@{ ProcessId = [int]$n; Name = $comm; CommandLine = $cl }) }
+        }
+        return @($r.ToArray())
+    }
+
+    function Get-GGFreeRamGb {
+        try {
+            $m = [regex]::Match([IO.File]::ReadAllText('/proc/meminfo'), '(?m)^MemAvailable:\s+(\d+)\s+kB')
+            if ($m.Success) { return [math]::Round([double]$m.Groups[1].Value / 1MB, 1) }
+        } catch {}
+        return $null
+    }
+
+    # cgroup v2 memory figures of the scope this run lives in (gg-linux-run.sh), for results/host.json
+    function Get-GGCgroupMemory {
+        $r = [ordered]@{ cgroup = ''; memoryMax = ''; memoryPeakMb = $null; memoryCurrentMb = $null; oomKills = $null }
+        try {
+            $line = @([IO.File]::ReadAllLines('/proc/self/cgroup') | Where-Object { $_ -like '0::*' })[0]
+            if (-not $line) { return $r }
+            $r.cgroup = $line.Substring(3)
+            $dir = '/sys/fs/cgroup' + $r.cgroup
+            $read = { param($n) $p = "$dir/$n"; if ([IO.File]::Exists($p)) { [IO.File]::ReadAllText($p).Trim() } else { '' } }
+            $r.memoryMax = & $read 'memory.max'
+            $pk = & $read 'memory.peak'; if ($pk -match '^\d+$') { $r.memoryPeakMb = [math]::Round([double]$pk / 1MB) }
+            $cu = & $read 'memory.current'; if ($cu -match '^\d+$') { $r.memoryCurrentMb = [math]::Round([double]$cu / 1MB) }
+            $ev = & $read 'memory.events'
+            $m = [regex]::Match($ev, '(?m)^oom_kill\s+(\d+)')
+            if ($m.Success) { $r.oomKills = [int]$m.Groups[1].Value }
+        } catch {}
+        return $r
     }
 }
