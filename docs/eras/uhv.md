@@ -380,7 +380,7 @@ Controllers: GTM 7.5.3 registers a UHV hull and UHV hatches but, with `highTierC
 ### 10. Ultrapure water plant: `gtceu:ultrapure_water_plant`, type `gtceu:ultrapure_water` (Earth)
 
 - **What it gains:** 18.2 MΩ·cm water with parts-per-trillion metals; GTM's distilled water is not it. UHV's wafer, crystal and organoid steps take it.
-- **Recipes:** c1: 8,000 mB water → reverse osmosis → electrodeionisation → 185 nm UV and ozone (organics) → membrane degassing → ultrafiltration → 6,000 mB `grindless:ultrapure_water`.
+- **Recipes:** c1: 8,000 mB water → reverse osmosis → electrodeionisation → 185 nm UV and ozone (organics) → membrane degassing → ultrafiltration → 6,000 mB `gtceu:ultrapure_water`.
 - **Byproducts:** 2,000 mB RO concentrate → voidable (salt water) *(voidable)*; spent resin → regenerated with HCl and NaOH *(kept)*.
 - **Structure:** 9×5×5 water treatment casing (MV's) with membrane racks.
 - **Controller:** UHV hull + 2 UV pumps + 2 UHV circuits *(tune)*.
@@ -638,8 +638,8 @@ Controllers: GTM 7.5.3 registers a UHV hull and UHV hatches but, with `highTierC
 
 - **What it gains:** microbes leach metals from regolith without reagents brought 4 light years: BioRock (ISS, 2019) showed *Sphingomonas desiccabilis* leaching rare earths in microgravity. The heap also cements the regolith into the base's casing with urease bacteria.
 - **Recipes:**
-  - c1 PGM: 16 cold-trap regolith + a cyanogenic culture (*Chromobacterium violaceum*, LuV's biofoundry; catalyst) → 1,000 mB `grindless:proxima_pgm_liquor`;
-  - c2 REE: 16 cold-trap regolith + a *Sphingomonas* culture (catalyst) → 1,000 mB `grindless:proxima_ree_liquor`;
+  - c1 PGM: 16 cold-trap regolith + a cyanogenic culture (*Chromobacterium violaceum*, LuV's biofoundry; catalyst) → 1,000 mB `gtceu:proxima_pgm_liquor`;
+  - c2 REE: 16 cold-trap regolith + a *Sphingomonas* culture (catalyst) → 1,000 mB `gtceu:proxima_ree_liquor`;
   - c3 biocement: 8 cold-trap regolith + urea + calcium (from c2's tailings) + a *Sporosarcina pasteurii* culture (catalyst) → 8 `grindless:biocemented_regolith` (Proxima site casing).
 - **Byproducts:** leached tailings → c3 *(kept)*; spent cyanide → biodegraded in the heap *(contained)*.
 - **Structure:** 9×3×9 heap pad with irrigation.

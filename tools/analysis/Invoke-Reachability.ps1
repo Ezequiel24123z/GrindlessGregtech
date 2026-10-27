@@ -59,8 +59,8 @@ param(
     [switch]$Table,
     [string]$TableFile,
     [string]$Implemented,
-    [int]$DumpTimeoutSec = 240,
-    [int]$LockWaitMin = 120
+    [int]$DumpTimeoutSec = 180,
+    [int]$LockWaitMin = 15
 )
 
 $ErrorActionPreference = 'Stop'
