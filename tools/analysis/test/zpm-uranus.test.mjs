@@ -55,7 +55,7 @@ test('the patterns: one controller in the front slice, uniform size, a symbol fo
 });
 
 test('the machine recipes: Uranus orbit only, one circuit per type slot, ZPM VA, whole numbers', () => {
-  const machine = UR.recipes.filter((p) => p.dim);
+  const machine = UR.recipes.filter((p) => p.dim === 'grindless:uranus_orbit');
   assert.equal(machine.length, 7);
   const seen = new Set();
   for (const p of UR.recipes) {
@@ -67,7 +67,7 @@ test('the machine recipes: Uranus orbit only, one circuit per type slot, ZPM VA,
     seen.add(p.type + p.circuit);
     assert.equal(p.eut, 122880);
     assert.ok(Number.isInteger(p.duration) && p.duration > 0);
-    if (p.dim) assert.match(JSON.stringify(r.j), /grindless:uranus_orbit/, p.name + ' is dimension-locked');
+    if (p.dim) assert.match(JSON.stringify(r.j), new RegExp(p.dim), p.name + ' is dimension-locked');
   }
 });
 
