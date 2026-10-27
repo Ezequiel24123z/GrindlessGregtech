@@ -1,0 +1,65 @@
+{
+  "_source": "UV-A1 (docs/eras/uv.md, 'A1. Thorium' and 'Older machines, new modes'): the three thorium rows of IV's fuel fabrication plant. Real processes: ThO2 fuel for light-water and accelerator-driven cores (Shippingport, MYRRHA studies), carbothermal nitridation of an actinide oxide (ThO2 + 2 C + N2 -> ThN + 2 CO, as for uranium nitride fuel), and the U-233 rod of the thorium cycle.",
+  "_how_it_is_used": [
+    "Read by server_scripts/grindless/iv/uranium_cycle.js after the steps of uranium_cycle.json; the same format (itemsIn, fluidsIn, fluidsKept, itemsOut) plus fluidsOut (the plant's type holds one). Circuits 4-6: 1-3 are IV's.",
+    "energy: plain stages, no 'from' (they are design figures, not GTM recipes): each is one IV assembler stage (1,536,000 EU, as the LEU assembly) or a multiple of it, spent at the plant's maxEUt like every row of uranium_cycle.json."
+  ],
+  "fabrication": [
+    {
+      "name": "thorium_oxide_assembly",
+      "circuit": 4,
+      "itemsIn": [
+        { "id": "gtceu:thorium_dust", "count": 8 }
+      ],
+      "fluidsIn": [
+        { "id": "gtceu:oxygen", "amount": 4000 }
+      ],
+      "fluidsKept": [],
+      "fluidsOut": [],
+      "itemsOut": [
+        { "id": "grindless:thorium_oxide_fuel_assembly", "count": 1 }
+      ],
+      "energy": [
+        { "stage": "burning the metal to ThO2, pressing and sintering the pellets and loading the assembly: two IV assembler stages", "eu": 1536000, "times": 2 }
+      ]
+    },
+    {
+      "name": "thorium_nitride_assembly",
+      "circuit": 5,
+      "itemsIn": [
+        { "id": "gtceu:thorium_dust", "count": 8 },
+        { "id": "gtceu:carbon_dust", "count": 4 }
+      ],
+      "fluidsIn": [
+        { "id": "gtceu:nitrogen_15", "amount": 2000 }
+      ],
+      "fluidsKept": [],
+      "fluidsOut": [
+        { "id": "gtceu:carbon_monoxide", "amount": 4000 }
+      ],
+      "itemsOut": [
+        { "id": "grindless:thorium_nitride_fuel_assembly", "count": 1 }
+      ],
+      "energy": [
+        { "stage": "carbothermal nitridation in the furnace and loading the assembly: three IV assembler stages", "eu": 1536000, "times": 3 }
+      ]
+    },
+    {
+      "name": "uranium_233_rod",
+      "circuit": 6,
+      "itemsIn": [
+        { "id": "gtceu:uranium_233_ingot", "count": 4 },
+        { "id": "grindless:zircaloy_cladding_tube", "count": 4 }
+      ],
+      "fluidsIn": [],
+      "fluidsKept": [],
+      "fluidsOut": [],
+      "itemsOut": [
+        { "id": "grindless:u233_fuel_rod", "count": 1 }
+      ],
+      "energy": [
+        { "stage": "casting the metal slugs, sodium-bonding them into the tubes and closing the rod: one IV assembler stage", "eu": 1536000, "times": 1 }
+      ]
+    }
+  ]
+}

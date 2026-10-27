@@ -1,0 +1,107 @@
+{
+  "_source": "UV-A1 (docs/eras/uv.md, machines 1 and 2, line 3). Real processes: the ANL/INL electrometallurgical pyroprocess (EBR-II; Li-LiCl-KCl molten salt, uranium collected on a cathode), MYRRHA and Rubbia's energy amplifier (a proton beam on a lead-bismuth spallation target drives a subcritical core).",
+  "_how_it_is_used": [
+    "Read by server_scripts/grindless/uv/thorium.js at every server load. startup_scripts/grindless/uv/thorium.js registers the machines, recipe types and the few ids F1 did not (docs/eras/uv.md, A1).",
+    "types.<type>.recipes: one recipe per entry, id grindless:<type>/<name>. itemsIn / itemsOut: { id, count }; kept: items needed in a bus but never used up; fluidsIn / fluidsOut: { id, amount }; charge: fluids needed in a hatch but never drained (GTM's notConsumableFluid). eut and duration are written as the final figures.",
+    "pyroprocessing: UV hull voltage (524,288 EU/t) x the tuned ticks. accelerator_driven: a generator type; eut is the EU/t GIVEN (the script writes it as -eut). 1,572,864 EU/t = 3 A UV, and the type stays out of lib/generators.js TYPES so the recipe is not doubled (docs/research/uv-s0.md, S0-6).",
+    "chemical_reactor: rows of GTM's chemical reactor keyed by our fluids (line 3 and the salt charge)."
+  ],
+  "types": {
+    "pyroprocessing": {
+      "dataKey": "grindless_pyroprocessing",
+      "recipes": [
+        {
+          "name": "reduce", "circuit": 1, "eut": 524288, "duration": 400,
+          "itemsIn": [{ "id": "grindless:spent_thorium_oxide_fuel", "count": 1 }],
+          "kept": [{ "id": "gtceu:lithium_dust", "count": 1 }],
+          "charge": [{ "id": "gtceu:licl_salt", "amount": 1000 }],
+          "fluidsIn": [],
+          "itemsOut": [{ "id": "gtceu:thorium_uranium_metal_dust", "count": 2 }],
+          "fluidsOut": [{ "id": "gtceu:oxygen", "amount": 2000 }]
+        },
+        {
+          "name": "refine", "circuit": 2, "eut": 524288, "duration": 200,
+          "itemsIn": [{ "id": "gtceu:thorium_uranium_metal_dust", "count": 2 }],
+          "kept": [],
+          "charge": [{ "id": "gtceu:licl_salt", "amount": 1000 }],
+          "fluidsIn": [],
+          "itemsOut": [{ "id": "gtceu:uranium_233_ingot", "count": 1 }, { "id": "gtceu:thorium_dust", "count": 1 }],
+          "fluidsOut": [{ "id": "gtceu:loaded_licl_salt", "amount": 250 }]
+        },
+        {
+          "name": "nitride", "circuit": 3, "eut": 524288, "duration": 300,
+          "itemsIn": [{ "id": "grindless:spent_thorium_nitride_fuel", "count": 1 }],
+          "kept": [],
+          "charge": [{ "id": "gtceu:licl_salt", "amount": 1000 }],
+          "fluidsIn": [{ "id": "gtceu:nitrogen", "amount": 25 }],
+          "itemsOut": [{ "id": "gtceu:uranium_233_ingot", "count": 1 }, { "id": "gtceu:thorium_dust", "count": 1 }],
+          "fluidsOut": [{ "id": "gtceu:loaded_licl_salt", "amount": 250 }, { "id": "gtceu:nitrogen_15", "amount": 500 }]
+        },
+        {
+          "name": "salt", "circuit": 4, "eut": 524288, "duration": 200,
+          "itemsIn": [],
+          "kept": [],
+          "charge": [],
+          "fluidsIn": [{ "id": "gtceu:loaded_licl_salt", "amount": 1000 }],
+          "itemsOut": [{ "id": "gtnn:radioactive_waste", "count": 1 }],
+          "fluidsOut": [{ "id": "gtceu:licl_salt", "amount": 1000 }]
+        }
+      ]
+    },
+    "accelerator_driven": {
+      "dataKey": "grindless_accelerator_driven",
+      "recipes": [
+        {
+          "name": "thorium_oxide", "circuit": 0, "eut": 1572864, "duration": 12000,
+          "itemsIn": [{ "id": "grindless:thorium_oxide_fuel_assembly", "count": 1 }],
+          "kept": [],
+          "charge": [{ "id": "gtceu:lead_bismuth_eutectic", "amount": 1000 }],
+          "fluidsIn": [],
+          "itemsOut": [{ "id": "grindless:spent_thorium_oxide_fuel", "count": 1 }],
+          "fluidsOut": [{ "id": "gtceu:polonium_210", "amount": 1 }]
+        },
+        {
+          "name": "thorium_nitride", "circuit": 0, "eut": 1572864, "duration": 16000,
+          "itemsIn": [{ "id": "grindless:thorium_nitride_fuel_assembly", "count": 1 }],
+          "kept": [],
+          "charge": [{ "id": "gtceu:lead_bismuth_eutectic", "amount": 1000 }],
+          "fluidsIn": [],
+          "itemsOut": [{ "id": "grindless:spent_thorium_nitride_fuel", "count": 1 }],
+          "fluidsOut": [{ "id": "gtceu:polonium_210", "amount": 1 }]
+        }
+      ]
+    },
+    "chemical_reactor": {
+      "recipes": [
+        {
+          "name": "triton_nitric_oxide", "circuit": 0, "eut": 7680, "duration": 100,
+          "itemsIn": [], "kept": [], "charge": [],
+          "fluidsIn": [{ "id": "gtceu:triton_nitrogen", "amount": 1000 }, { "id": "gtceu:oxygen", "amount": 1000 }],
+          "itemsOut": [],
+          "fluidsOut": [{ "id": "gtceu:triton_nitric_oxide", "amount": 2000 }]
+        },
+        {
+          "name": "nitrogen_15_reduction", "circuit": 0, "eut": 7680, "duration": 100,
+          "itemsIn": [], "kept": [], "charge": [],
+          "fluidsIn": [{ "id": "gtceu:nitrogen_15_oxide", "amount": 2000 }, { "id": "gtceu:hydrogen", "amount": 2000 }],
+          "itemsOut": [],
+          "fluidsOut": [{ "id": "gtceu:nitrogen_15", "amount": 1000 }, { "id": "minecraft:water", "amount": 2000 }]
+        },
+        {
+          "name": "licl_salt", "circuit": 0, "eut": 1920, "duration": 100,
+          "itemsIn": [{ "id": "gtceu:lithium_dust", "count": 1 }], "kept": [], "charge": [],
+          "fluidsIn": [{ "id": "gtceu:chlorine", "amount": 500 }],
+          "itemsOut": [],
+          "fluidsOut": [{ "id": "gtceu:licl_salt", "amount": 1000 }]
+        },
+        {
+          "name": "lead_bismuth_eutectic", "circuit": 0, "eut": 1920, "duration": 100,
+          "itemsIn": [{ "id": "gtceu:lead_dust", "count": 1 }, { "id": "gtceu:bismuth_dust", "count": 1 }], "kept": [], "charge": [],
+          "fluidsIn": [],
+          "itemsOut": [],
+          "fluidsOut": [{ "id": "gtceu:lead_bismuth_eutectic", "amount": 2000 }]
+        }
+      ]
+    }
+  }
+}

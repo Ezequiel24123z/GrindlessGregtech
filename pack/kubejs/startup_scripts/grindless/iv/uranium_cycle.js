@@ -244,7 +244,7 @@
     machine: PLANT,
     recipeType: 'gtceu:' + PLANT_TYPE,
     // items in: up to two ingredients and the programmed circuit; fluids in: the oxygen and the hydrogen of the sinter
-    maxIO: { itemsIn: 3, itemsOut: 1, fluidsIn: 2, fluidsOut: 0 },
+    maxIO: { itemsIn: 3, itemsOut: 1, fluidsIn: 2, fluidsOut: 1 },
     parts: PLANT_PARTS,
     coils: COILS
   }
