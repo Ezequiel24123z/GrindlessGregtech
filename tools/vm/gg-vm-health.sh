@@ -11,7 +11,7 @@
 # Exit 0 = PASS or WARN (usable), 1 = FAIL (do not start a test run).
 set -u
 BASE="${GG_BASE:-/var/lib/grindless/bench}"
-ROOT=/var/lib/grindless
+ROOT="${GG_ROOT:-/var/lib/grindless}"
 MIN_FREE_GB="${GG_HEALTH_MIN_FREE_GB:-10}"
 WARN_FREE_GB="${GG_HEALTH_WARN_FREE_GB:-20}"
 fails=0; warns=0

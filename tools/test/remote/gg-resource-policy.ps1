@@ -30,7 +30,14 @@ function Assert-GGResourceRequest {
             throw "$key must be an integer between $min and $($caps[$key]) under the personal-PC policy"
         }
     }
-    if ([int]$Req.slots -ne 1) { throw 'The personal-PC policy permits exactly one Minecraft JVM globally (-Slots 1)' }
+    # The Windows home PC runs one Minecraft JVM globally; a dedicated Linux VM (request os = linux) may run up to 8
+    # concurrent slots, each bounded by its own systemd MemoryMax (gg-linux-run.sh). The runner re-caps per bench.
+    $slotsMax = $(if ([string]$Req.os -eq 'linux') { 8 } else { 1 })
+    $n = [double]$Req.slots
+    if ([double]::IsNaN($n) -or $n -lt 1 -or $n -gt $slotsMax -or $n -ne [math]::Floor($n)) {
+        if ($slotsMax -eq 1) { throw 'The personal-PC policy permits exactly one Minecraft JVM globally (-Slots 1)' }
+        throw "slots must be an integer between 1 and $slotsMax on a Linux bench"
+    }
     if ($null -ne $Req.PSObject.Properties['slotMinFreeGb']) {
         Write-Warning 'slotMinFreeGb is deprecated and ignored; available RAM does not gate slot acquisition or JVM launch'
     }

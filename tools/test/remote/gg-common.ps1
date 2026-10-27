@@ -62,6 +62,9 @@ if (-not $global:GG) {
         HasLock      = $false
         Slot         = -1
         Slots        = 1
+        # Hard ceiling of concurrent Minecraft JVMs on this bench: the personal Windows PC stays at one; a dedicated
+        # Linux VM may run up to eight (the caller's -Slots / backend Slots picks the actual count).
+        SlotCeiling  = $(if ($global:GGIsLinux) { 8 } else { 1 })
         NativeBudget = $null
         NativeMutex  = $null
         ReserveGb    = 0.0
@@ -698,23 +701,32 @@ function Invoke-GGTool {
     return $code
 }
 
-# ---------------------------------------------------------------- slot semaphore (one Minecraft JVM globally)
+# ---------------------------------------------------------------- slot semaphore (Minecraft JVMs per bench)
 #
 # A slot is a file created with CreateNew by the run that holds it: runs\.lock (slot 0, the historical single lock,
 # same JSON fields as ever) and runs\.lock.1, runs\.lock.2, ... Holders heartbeat their file (Update-GGLock); a file is
 # stale when its owner is gone or silent for LockStaleMin, and the next waiter reclaims it (and kills the dead run's JVMs).
+# Each slot also has a process-held OS mutex (slot 0: Global\GGHarness-minecraft as always, slot i: ...-minecraft-<i>),
+# so a holder stays exclusive even if its metadata file disappears.
 # Rules for taking a slot (evaluated by one waiter at a time, see the FIFO tickets below):
-#   - always one holder, even if a legacy caller asks for more slots;
-#   - old nonzero slot files are recognized and block new work until their owners finish;
+#   - at most min(requested Slots, SlotCeiling) holders: one on the Windows home PC, whatever a caller asks;
+#   - every holder's own slot count also caps the total (the smallest wins), and old nonzero slot files are recognized;
 #   - available RAM never gates acquisition or launch; heap and native deadlines remain bounded.
 
+function Get-GGNativeMutexName {
+    param([int]$Index = 0)
+    if ($Index -le 0) { return 'Global\GGHarness-minecraft' }
+    return ('Global\GGHarness-minecraft-{0}' -f $Index)
+}
+
 function Try-GGNativeMutex {
-    if ($global:GG.NativeMutex) { return $true }
-    $mutex = New-Object Threading.Mutex($false, 'Global\GGHarness-minecraft')
+    param([int]$Index = 0)
+    if ($global:GG.NativeMutex) { return ([int]$global:GG.NativeMutexIndex -eq $Index) }
+    $mutex = New-Object Threading.Mutex($false, (Get-GGNativeMutexName $Index))
     $held = $false
     try {
         try { $held = $mutex.WaitOne(0) } catch [Threading.AbandonedMutexException] { $held = $true }
-        if ($held) { $global:GG.NativeMutex = $mutex }
+        if ($held) { $global:GG.NativeMutex = $mutex; $global:GG.NativeMutexIndex = $Index }
         return $held
     } finally {
         if (-not $held) { $mutex.Dispose() }
@@ -727,6 +739,7 @@ function Exit-GGNativeMutex {
     try { $mutex.ReleaseMutex() } finally {
         $mutex.Dispose()
         $global:GG.NativeMutex = $null
+        $global:GG.NativeMutexIndex = -1
     }
 }
 
@@ -845,7 +858,8 @@ function Get-GGFreeRamGb {
 # How many runs may be active at once, given the holders that already are.
 function Get-GGSlotLimit {
     param($Others, [int]$Slots)
-    $limit = 1
+    $ceiling = [math]::Max(1, [int]$global:GG.SlotCeiling)
+    $limit = [math]::Min([math]::Max(1, $Slots), $ceiling)
     foreach ($h in @($Others)) {
         if (-not $h.Info.v) { $limit = 1; continue }
         $n = 0
@@ -896,7 +910,7 @@ function Enter-GGLock {
         Write-Warning '-MinFreeGb is deprecated and ignored; slot acquisition does not depend on available RAM'
     }
     New-Item -ItemType Directory -Force -Path $global:GG.Runs | Out-Null
-    $Slots = 1
+    $Slots = [math]::Min([math]::Max(1, $Slots), [math]::Max(1, [int]$global:GG.SlotCeiling))
     $global:GG.Slots = $Slots
     $global:GG.ReserveGb = $ReserveGb
     $global:GG.JvmStarted = ''
@@ -910,50 +924,62 @@ function Enter-GGLock {
             try { [IO.File]::WriteAllText($ticket, [datetime]::UtcNow.ToString('o')) } catch {}
             $earlier = @(Get-GGEarlierWaiters)
             $why = ''
-            if ($earlier.Count -eq 0 -and (Try-GGNativeMutex)) {
-                $dec = Get-GGSlotDecision @(Get-GGActiveSlots) $Slots
+            $dec = $null
+            if ($earlier.Count -eq 0) {
+                $active = @(Get-GGActiveSlots)
+                $dec = Get-GGSlotDecision $active $Slots
                 if ($dec.Index -ge 0) {
-                    $path = Get-GGSlotPath $dec.Index
-                    $global:GG.Slot = $dec.Index
-                    $fs = $null
-                    $created = $false
-                    try {
-                        $global:GG.LockStarted = [datetime]::UtcNow.ToString('o')
-                        $fs = New-Object IO.FileStream($path, [IO.FileMode]::CreateNew, [IO.FileAccess]::Write, ([IO.FileShare]::ReadWrite -bor [IO.FileShare]::Delete))
-                        $bytes = (New-Object Text.UTF8Encoding($false)).GetBytes((New-GGLockBody))
-                        $fs.Write($bytes, 0, $bytes.Length)
-                        $fs.Dispose(); $fs = $null
-                        $created = $true
-                    } catch [IO.IOException], [UnauthorizedAccessException] {
-                        if ($fs) { $fs.Dispose() }
-                        $global:GG.Slot = -1
-                        $why = 'lost a race for the slot, retrying'
+                    # take the OS mutex of the first free slot whose mutex no other runner holds
+                    $used = @($active | ForEach-Object { [int]$_.Index })
+                    $limit = Get-GGSlotLimit $active $Slots
+                    $got = -1
+                    for ($i = [int]$dec.Index; $i -lt $limit; $i++) {
+                        if ($used -notcontains $i -and (Try-GGNativeMutex $i)) { $got = $i; break }
                     }
-                    if ($created) {
-                        $global:GG.LockPath = $path
-                        $global:GG.HasLock = $true
-                        $global:GG.LastBeat = Get-Date
-                        # two runs may have taken different slots in the same instant: re-check the limits
-                        $others = @(Get-GGActiveSlots | Where-Object { [int]$_.Index -ne [int]$dec.Index })
-                        if ($others.Count + 1 -le (Get-GGSlotLimit $others $Slots)) {
-                            $global:GG.SlotOthers = @($others | ForEach-Object { [string]$_.Info.runId })
-                            $global:GG.SlotFree = $dec.Free
-                            return
-                        }
-                        Remove-Item -LiteralPath $path -Force -ErrorAction SilentlyContinue
-                        $global:GG.HasLock = $false
-                        $global:GG.Slot = -1
-                        $global:GG.LockPath = Get-GGSlotPath 0
-                        $why = 'slot limit exceeded by a concurrent start, retrying'
-                        Exit-GGNativeMutex
-                        Start-Sleep -Seconds (Get-Random -Minimum 2 -Maximum 6)
-                        continue
-                    }
-                } else {
-                    $why = [string]$dec.Reason
+                    if ($got -lt 0) {
+                        $dec = @{ Index = -1; Reason = 'another runner holds the Minecraft mutex of every free slot' }
+                    } else { $dec.Index = $got }
                 }
-            } elseif ($earlier.Count -eq 0) {
-                $why = 'another runner holds the global Minecraft mutex'
+            }
+            if ($dec -and $dec.Index -ge 0) {
+                $path = Get-GGSlotPath $dec.Index
+                $global:GG.Slot = $dec.Index
+                $fs = $null
+                $created = $false
+                try {
+                    $global:GG.LockStarted = [datetime]::UtcNow.ToString('o')
+                    $fs = New-Object IO.FileStream($path, [IO.FileMode]::CreateNew, [IO.FileAccess]::Write, ([IO.FileShare]::ReadWrite -bor [IO.FileShare]::Delete))
+                    $bytes = (New-Object Text.UTF8Encoding($false)).GetBytes((New-GGLockBody))
+                    $fs.Write($bytes, 0, $bytes.Length)
+                    $fs.Dispose(); $fs = $null
+                    $created = $true
+                } catch [IO.IOException], [UnauthorizedAccessException] {
+                    if ($fs) { $fs.Dispose() }
+                    $global:GG.Slot = -1
+                    $why = 'lost a race for the slot, retrying'
+                }
+                if ($created) {
+                    $global:GG.LockPath = $path
+                    $global:GG.HasLock = $true
+                    $global:GG.LastBeat = Get-Date
+                    # two runs may have taken different slots in the same instant: re-check the limits
+                    $others = @(Get-GGActiveSlots | Where-Object { [int]$_.Index -ne [int]$dec.Index })
+                    if ($others.Count + 1 -le (Get-GGSlotLimit $others $Slots)) {
+                        $global:GG.SlotOthers = @($others | ForEach-Object { [string]$_.Info.runId })
+                        $global:GG.SlotFree = $dec.Free
+                        return
+                    }
+                    Remove-Item -LiteralPath $path -Force -ErrorAction SilentlyContinue
+                    $global:GG.HasLock = $false
+                    $global:GG.Slot = -1
+                    $global:GG.LockPath = Get-GGSlotPath 0
+                    $why = 'slot limit exceeded by a concurrent start, retrying'
+                    Exit-GGNativeMutex
+                    Start-Sleep -Seconds (Get-Random -Minimum 2 -Maximum 6)
+                    continue
+                }
+            } elseif ($dec) {
+                $why = [string]$dec.Reason
             }
             if (-not $global:GG.HasLock) { Exit-GGNativeMutex }
             if ((Get-Date) -gt $deadline) {

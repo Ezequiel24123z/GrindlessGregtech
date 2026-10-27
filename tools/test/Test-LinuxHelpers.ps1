@@ -103,6 +103,24 @@ try {
     $other = & pwsh -NoProfile -NonInteractive -Command $probe
     Assert-Linux ("$other" -eq 'ACQUIRED') 'Exit-GGLock releases the harness mutex'
 
+    # ---- slots: with -Slots 2 a second runner takes slot 1 while slot 0 is held; a third one times out
+    Enter-GGLock -MaxWaitMin 1 -Slots 2
+    Assert-Linux ($global:GG.HasLock -and $global:GG.Slot -eq 0 -and $global:GG.NativeMutexIndex -eq 0) 'Slots=2: the first runner takes slot 0'
+    $slotChild = { param([string]$Id, [int]$HoldSec)
+        "`$ProgressPreference='SilentlyContinue'; `$env:GG_BASE='$($env:GG_BASE)'; . '$commonPath'; " +
+        "`$global:GG.Runs='$($global:GG.Runs)'; `$global:GG.RunId='$Id'; `$global:GG.RunDir=Join-Path `$global:GG.Runs '$Id'; " +
+        "`$global:GG.LockPath=Join-Path `$global:GG.Runs '.lock'; [void][IO.Directory]::CreateDirectory(`$global:GG.RunDir); " +
+        "try { Enter-GGLock -MaxWaitMin 0 -Slots 2; [Console]::Out.WriteLine('SLOT|' + `$global:GG.Slot); Start-Sleep -Seconds $HoldSec; Exit-GGLock } " +
+        "catch { [Console]::Out.WriteLine('NOSLOT|' + `$_.Exception.Message) }" }
+    $second = Start-Bg 'pwsh' @('-NoProfile', '-NonInteractive', '-Command', (& $slotChild 'linux-test-b' 20))
+    $slotFile = Join-Path $global:GG.Runs '.lock.1'
+    for ($i = 0; $i -lt 150 -and -not (Test-Path $slotFile); $i++) { Start-Sleep -Milliseconds 100 }
+    Assert-Linux (Test-Path $slotFile) 'Slots=2: a second runner holds slot 1 at the same time'
+    $third = @(& pwsh -NoProfile -NonInteractive -Command (& $slotChild 'linux-test-c' 0))
+    Assert-Linux ("$third" -match 'NOSLOT\|.*all 2 slot\(s\) busy') "Slots=2: a third runner finds every slot busy ($third)"
+    Exit-GGLock
+    $second.Kill(); [void]$second.WaitForExit(10000)
+    Remove-Item -LiteralPath $slotFile -Force -ErrorAction SilentlyContinue
     # ---- JVMs: Get-GGManagedProcesses sees a run's java, Stop-GGRunProcesses kills only that run's
     $java = $null
     try { $java = Get-GGJava17 } catch {}
@@ -144,9 +162,13 @@ try {
     Assert-Linux (($o -join "`n") -match 'GGSCOPE\|none\|MemoryMax=1234M') "bench.env sizes the scope ($($o[0]))"
     $o = @(& env -u GG_BASE GG_NO_SCOPE=1 "GG_BENCH_ENV=$benv" GG_MEMORY_MAX=999M bash $sh 'stub-run' 2>&1)
     Assert-Linux (($o -join "`n") -match 'MemoryMax=999M') 'a caller GG_MEMORY_MAX overrides bench.env'
-    $o = @(& env -u GG_BASE -u GG_MEMORY_MAX GG_NO_SCOPE=1 GG_BENCH_ENV=/nonexistent GG_BENCH_RESERVE_MB=1000 bash $sh 'stub-run' 2>&1)
+    $o = @(& env -u GG_BASE -u GG_MEMORY_MAX GG_NO_SCOPE=1 GG_BENCH_ENV=/nonexistent GG_BENCH_RESERVE_MB=1000 GG_BENCH_RUN_MAX_MB=999999 bash $sh 'stub-run' 2>&1)
     $totalMb = [int]([regex]::Match([IO.File]::ReadAllText('/proc/meminfo'), 'MemTotal:\s+(\d+)').Groups[1].Value) / 1024
     Assert-Linux (($o -join "`n") -match ("MemoryMax={0}M" -f ([math]::Floor($totalMb) - 1000))) "without bench.env the ceiling is RAM minus the reserve ($($o[0]))"
+    $o = @(& env -u GG_BASE -u GG_MEMORY_MAX GG_NO_SCOPE=1 GG_BENCH_ENV=/nonexistent GG_BENCH_RESERVE_MB=1000 GG_BENCH_RUN_MAX_MB=1500 bash $sh 'stub-run' 2>&1)
+    Assert-Linux (($o -join "`n") -match 'MemoryMax=1500M') "the per-run cap bounds the ceiling on a large host ($($o[0]))"
+    $o = @(& env -u GG_BASE -u GG_MEMORY_MAX GG_NO_SCOPE=1 GG_BENCH_ENV=/nonexistent GG_BENCH_RESERVE_MB=1000 GG_BENCH_RUN_MAX_MB=999999 GG_SLOTS=2 bash $sh 'stub-run' 2>&1)
+    Assert-Linux (($o -join "`n") -match ("MemoryMax={0}M" -f [math]::Floor(([math]::Floor($totalMb) - 1000) / 2))) "GG_SLOTS=2 halves the ceiling ($($o[0]))"
 
     # ---- a whole Run-GGTest.ps1 run that fails at extract: still meta.json, host.json, results.zip and GGRESULT
     $o = @(& env "GG_BASE=$($env:GG_BASE)" pwsh -NoProfile -NonInteractive -File (Join-Path $remote 'Run-GGTest.ps1') -RunId 'linux-missing-zip' 2>&1)

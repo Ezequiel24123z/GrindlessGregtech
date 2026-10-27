@@ -9,7 +9,8 @@
 # Last line: GGCLASS|<runId>|PASS|FAIL|TIMEOUT|OOM|HARNESS|<sha>|<seconds>s|<artifact dir>. Exit: 0 PASS, 1 FAIL or
 # TIMEOUT, 2 OOM or HARNESS (as Invoke-GGTest). Env (all optional; /etc/grindless/bench.env may set them too):
 #   GG_ROOT (/var/lib/grindless), GG_REPO_URL (the public GitHub repo), GG_ARTIFACT_DAYS (14),
-#   GG_WORKSPACE_KEEP (5 newest checkouts), GG_RUN_LOG (/var/log/grindless/runs.log).
+#   GG_WORKSPACE_KEEP (5 newest checkouts), GG_RUN_LOG (/var/log/grindless/runs.log), GG_SLOTS (GG_BENCH_SLOTS).
+# Several gg-vm-run.sh may run at once: each run waits for one of the bench's slots.
 set -uo pipefail
 # shellcheck disable=SC1090
 if [ -r "${GG_BENCH_ENV:-/etc/grindless/bench.env}" ]; then . "${GG_BENCH_ENV:-/etc/grindless/bench.env}"; fi
@@ -18,6 +19,8 @@ REPO_URL="${GG_REPO_URL:-https://github.com/Ezequiel24123z/GrindlessGregtech.git
 KEEP_DAYS="${GG_ARTIFACT_DAYS:-14}"
 KEEP_WS="${GG_WORKSPACE_KEEP:-5}"
 RUN_LOG="${GG_RUN_LOG:-/var/log/grindless/runs.log}"
+# concurrent server JVMs of this bench (Invoke-GGTest -Slots default); bench.env GG_BENCH_SLOTS, else 1
+export GG_SLOTS="${GG_SLOTS:-${GG_BENCH_SLOTS:-1}}"
 ref="${1:?usage: gg-vm-run.sh <ref> [Invoke-GGTest args...]}"
 shift
 started=$(date +%s)
@@ -36,7 +39,7 @@ finish() { # <class> <exit code> [note]
 
 mkdir -p "$ROOT/workspaces" "$ROOT/artifacts" || finish HARNESS 2 "cannot create $ROOT dirs"
 
-# --- checkout (one at a time; runs themselves are serialised by the harness lock)
+# --- checkout (one at a time; the runs themselves take one of the bench's slots through the harness lock)
 exec 9>"$ROOT/workspaces/.lock"
 flock -w 900 9 || finish HARNESS 2 "workspace lock busy for 15 min"
 if [ -d "$mirror" ]; then
@@ -60,7 +63,7 @@ done
 exec 9>&-
 
 # --- the run
-runId="vm-$(date -u +%Y%m%d-%H%M%S)-${sha:0:8}"
+runId="vm-$(date -u +%Y%m%d-%H%M%S)-${sha:0:8}-$$"
 out="$ROOT/artifacts/$runId"
 mkdir -p "$out"
 GG_OUT_ROOT="$ROOT/artifacts" pwsh -NoProfile -NonInteractive -File "$ws/tools/test/Invoke-GGTest.ps1" \

@@ -6,19 +6,28 @@
 # Env (all optional): GG_BASE (default: three levels above this script), GG_MEMORY_MAX / GG_MEMORY_SWAP_MAX (systemd
 # sizes such as 6500M, set by the caller to force a value), GG_NO_SCOPE=1 (run without a scope).
 # Sizing without a caller value: GG_BENCH_MEMORY_MAX / GG_BENCH_MEMORY_SWAP_MAX from /etc/grindless/bench.env
-# (gg-vm-bootstrap.sh writes it), else MemTotal minus GG_BENCH_RESERVE_MB (default 1228) and swap 2G.
+# (gg-vm-bootstrap.sh writes it), else the smaller of (MemTotal minus GG_BENCH_RESERVE_MB, default 1228) divided by
+# the bench's concurrent slots and the per-run cap GG_BENCH_RUN_MAX_MB (default 12288: one 4G-heap JVM plus native
+# memory and pwsh), and swap 2G. Slots: GG_SLOTS (set by Invoke-GGTest from -Slots / backend Slots), else
+# GG_BENCH_SLOTS from bench.env, else 1.
 # Output: the runner's own output, plus GGSCOPE|<unit>|... first and GGOOM|<runId>|... when the scope was OOM-killed.
 set -u
 run="${1:?usage: gg-linux-run.sh <RunId>}"
 here="$(cd "$(dirname "$0")" && pwd)"
 export GG_BASE="${GG_BASE:-$(cd "$here/../../.." && pwd)}"
+caller_slots="${GG_SLOTS:-}"
 bench_env="${GG_BENCH_ENV:-/etc/grindless/bench.env}"
 # shellcheck disable=SC1090
 if [ -r "$bench_env" ]; then . "$bench_env"; fi
 max="${GG_MEMORY_MAX:-${GG_BENCH_MEMORY_MAX:-}}"
 if [ -z "$max" ]; then
     total_mb=$(( $(awk '/^MemTotal:/ {print $2}' /proc/meminfo) / 1024 ))
-    max="$(( total_mb - ${GG_BENCH_RESERVE_MB:-1228} ))M"
+    slots="${caller_slots:-${GG_BENCH_SLOTS:-1}}"
+    case "$slots" in ''|*[!0-9]*|0) slots=1 ;; esac
+    max_mb=$(( (total_mb - ${GG_BENCH_RESERVE_MB:-1228}) / slots ))
+    cap_mb="${GG_BENCH_RUN_MAX_MB:-12288}"
+    if [ "$max_mb" -gt "$cap_mb" ]; then max_mb=$cap_mb; fi
+    max="${max_mb}M"
 fi
 swap="${GG_MEMORY_SWAP_MAX:-${GG_BENCH_MEMORY_SWAP_MAX:-2G}}"
 unit="gg-run-$(printf '%s' "$run" | tr -c 'A-Za-z0-9_-' '-')"

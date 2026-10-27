@@ -8,7 +8,9 @@
 #   GG_BOOTSTRAP_DRY=1 ...      # print what would change, change nothing
 #
 # Env: GG_USER (bench user, default: you), GG_NODE_VERSION, GG_BENCH_RESERVE_MB (RAM kept for the OS, default 1228),
-# GG_LINGER=0 (skip loginctl enable-linger). Nothing is sized for a particular VM: sizing is derived from its RAM.
+# GG_BENCH_RUN_MAX_MB (memory ceiling of one run, default 12288), GG_BENCH_SLOTS (concurrent server JVMs, default 1),
+# GG_LINGER=0 (skip loginctl enable-linger). Nothing is sized for a particular VM: each run's ceiling is computed at
+# launch as min((RAM - reserve) / slots, per-run cap) from this VM's RAM.
 # A new VM from scratch: docs/testing/rebuild.md.
 set -euo pipefail
 USER_NAME="${GG_USER:-$(id -un)}"
@@ -16,15 +18,16 @@ NODE_VERSION="${GG_NODE_VERSION:-v24.22.1}"
 NODE_DIR=/opt/grindless/runtime/node-$NODE_VERSION-linux-x64
 DRY="${GG_BOOTSTRAP_DRY:-0}"
 
-step() { echo "BOOTSTRAP|$1|$2"; }
+step() { echo "BOOTSTRAP|$1|$2${3:+|$3}"; }
 run() { if [ "$DRY" = 1 ]; then echo "  would run: $*"; else "$@"; fi; }
 
 . /etc/os-release
 [ "$ID" = ubuntu ] || { step os FAIL "only Ubuntu is supported (found $ID $VERSION_ID)"; exit 1; }
 sudo -n true || { step sudo FAIL "passwordless sudo is required"; exit 1; }
 
-# --- packages (Java 17, tools; Xvfb and Mesa only for the experimental Linux client)
-pkgs=(openjdk-17-jdk-headless git git-lfs unzip zip curl rsync jq xvfb libgl1-mesa-dri ca-certificates)
+# --- packages (Java 17, tools; the client suite (T3) needs Xvfb, Mesa llvmpipe and the X11 libraries GLFW loads)
+pkgs=(openjdk-17-jdk-headless git git-lfs unzip zip curl rsync jq ca-certificates
+      xvfb xauth libgl1 libgl1-mesa-dri libglx-mesa0 libegl1 mesa-utils libxcursor1 libxinerama1 libxi6 libxrandr2 libxxf86vm1 libxtst6)
 missing=()
 for p in "${pkgs[@]}"; do dpkg-query -W -f='${Status}' "$p" 2>/dev/null | grep -q 'ok installed' || missing+=("$p"); done
 if [ ${#missing[@]} -gt 0 ]; then
@@ -94,17 +97,30 @@ else
 fi
 
 # --- bench sizing for this VM (read by gg-linux-run.sh; edit the file to change it, a re-run never overwrites it)
+# Only the inputs are stored: each run's MemoryMax is computed at launch as min((RAM - reserve) / slots, per-run cap).
 benv=/etc/grindless/bench.env
 total_mb=$(( $(awk '/^MemTotal:/ {print $2}' /proc/meminfo) / 1024 ))
-rec_max="$(( total_mb - ${GG_BENCH_RESERVE_MB:-1228} ))M"
+reserve_mb="${GG_BENCH_RESERVE_MB:-1228}"
+run_max_mb="${GG_BENCH_RUN_MAX_MB:-12288}"
+bench_slots="${GG_BENCH_SLOTS:-1}"
+rec_mb=$(( (total_mb - reserve_mb) / bench_slots ))
+if [ "$rec_mb" -gt "$run_max_mb" ]; then rec_mb=$run_max_mb; fi
 if [ ! -f "$benv" ]; then
-  step bench-env CHANGE "$benv: GG_BENCH_MEMORY_MAX=$rec_max (RAM ${total_mb}M minus ${GG_BENCH_RESERVE_MB:-1228}M), swap 2G"
+  step bench-env CHANGE "$benv: slots $bench_slots, reserve ${reserve_mb}M, per-run cap ${run_max_mb}M (MemoryMax per run now ${rec_mb}M of ${total_mb}M), swap 2G"
   if [ "$DRY" != 1 ]; then
-    printf '# Grindless bench sizing, sourced by gg-linux-run.sh. Only GG_BENCH_* keys.\n# Written by gg-vm-bootstrap.sh for %s MiB of RAM; re-run it after a resize only after deleting this file.\nGG_BENCH_MEMORY_MAX=%s\nGG_BENCH_MEMORY_SWAP_MAX=2G\n' \
-      "$total_mb" "$rec_max" | sudo -n tee "$benv" >/dev/null
+    printf '%s\n' \
+      '# Grindless bench settings, sourced by gg-linux-run.sh (GG_BENCH_* sizing) and gg-vm-run.sh (optional GG_ROOT,' \
+      '# GG_REPO_URL, GG_ARTIFACT_DAYS, GG_WORKSPACE_KEEP, GG_RUN_LOG). Plain KEY=VALUE lines, no secrets.' \
+      "# Written by gg-vm-bootstrap.sh on a ${total_mb} MiB host. Per-run MemoryMax = min((RAM - reserve) / slots, cap)." \
+      "GG_BENCH_SLOTS=$bench_slots" \
+      "GG_BENCH_RESERVE_MB=$reserve_mb" \
+      "GG_BENCH_RUN_MAX_MB=$run_max_mb" \
+      'GG_BENCH_MEMORY_SWAP_MAX=2G' \
+      '# GG_BENCH_MEMORY_MAX=8192M   # optional fixed per-run ceiling; overrides the computed one' \
+      | sudo -n tee "$benv" >/dev/null
   fi
 else
-  step bench-env OK "$(grep -h '^GG_BENCH_MEMORY_MAX=' "$benv" || echo "$benv present") (recommended now: $rec_max)"
+  step bench-env OK "$(grep -h '^GG_BENCH_\(SLOTS\|MEMORY_MAX\)=' "$benv" | tr '\n' ' ' || true)(per-run MemoryMax for $bench_slots slot(s) now: ${rec_mb}M)"
 fi
 
 # --- user systemd manager without a login session (the run's memory scope lives in it)
