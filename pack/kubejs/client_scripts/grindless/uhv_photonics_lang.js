@@ -1,0 +1,137 @@
+// Gregtech Grindless - names and tooltips of UHV's photonics (startup_scripts/grindless/uhv/photonics.js; package UHV-A4):
+//
+//   block.gtceu.<machine>, gtceu.<recipe type>                    machine and recipe type names
+//   grindless.machine.<machine>.tooltip.N / .no_voiding           controller tooltips and the refusal to void
+//   gtceu.recipe.grindless_<type>.<recipe>                        the EMI line of each recipe
+//   item.grindless.<n>, tooltip.grindless.<n>.0 / .1              the package's own items (the F1 items are in uhv_foundation_lang.js)
+//
+// Kept out of pack/kubejs/assets/grindless/lang/* like the other *_lang.js scripts. Names go in en_us and es_es.
+(function () {
+    // [key, en, es]
+    var ENTRIES = [
+        ['block.gtceu.mbe_reactor', 'MBE Reactor', 'Reactor MBE'],
+        ['gtceu.molecular_beam_epitaxy', 'Molecular Beam Epitaxy', 'Epitaxia de haces moleculares'],
+        ['block.gtceu.photonic_foundry', 'Photonic Foundry', 'Fundición fotónica'],
+        ['gtceu.photonic_foundry', 'Photonic Foundry', 'Fundición fotónica'],
+
+        ['grindless.machine.mbe_reactor.tooltip.0',
+            'Molecular beam epitaxy (Faist et al., Bell Labs, 1994): hundreds of InGaAs/AlInAs layers a few atoms thick on indium phosphide, the quantum cascade lasers of the mid-infrared. Effusion cells fire into ultra-high vacuum past a liquid-nitrogen cryoshroud.',
+            'Epitaxia de haces moleculares (Faist et al., Bell Labs, 1994): cientos de capas de InGaAs/AlInAs de pocos átomos de espesor sobre fosfuro de indio, los láseres de cascada cuántica del infrarrojo medio. Las celdas de efusión disparan en ultra alto vacío junto a un criopanel de nitrógeno líquido.'],
+        ['grindless.machine.mbe_reactor.tooltip.1',
+            'Circuit 1: the superlattice wafer; half the runs scrape an arsenic dust off the cryoshroud. 2: eight quantum cascade lasers from one wafer and gold contacts.',
+            'Circuito 1: la oblea de superred; la mitad de los ciclos raspan un polvo de arsénico del criopanel. 2: ocho láseres de cascada cuántica de una oblea y contactos de oro.'],
+        ['grindless.machine.mbe_reactor.tooltip.2',
+            'Parts go in the bottom layer: 1-2 energy hatches, 1-2 input buses, an input hatch, an output bus, an output hatch. Accepts a parallel hatch.',
+            'Las piezas van en la capa inferior: 1-2 escotillas de energía, 1-2 buses de entrada, una escotilla de entrada, un bus de salida, una escotilla de salida. Acepta una escotilla de paralelos.'],
+        ['grindless.machine.mbe_reactor.no_voiding',
+            'Voiding is off: the arsenic scraped off the cryoshroud is stored, never thrown away.',
+            'El desecho está desactivado: el arsénico raspado del criopanel se guarda, nunca se tira.'],
+
+        ['grindless.machine.photonic_foundry.tooltip.0',
+            'Thin-film lithium niobate on insulator (HyperLight, Harvard), phase-change GST weights (IBM) and europium-doped YSO memory (ANU, 2015) in one clean room: a wafer bonder and a sputter chamber under filters. The only maker of the optical processor and the optical assembly.',
+            'Niobato de litio en capa fina sobre aislante (HyperLight, Harvard), pesos de cambio de fase GST (IBM) y memoria de YSO dopado con europio (ANU, 2015) en una sala limpia: una soldadora de obleas y una cámara de pulverización bajo filtros. El único fabricante del procesador óptico y del ensamblaje óptico.'],
+        ['grindless.machine.photonic_foundry.tooltip.1',
+            'Circuit 1: LNOI by smart-cut. 2: PCM dies. 3: quantum memory chips. 4: optical processors. 5: optical assemblies. 6: thin-film modulators. Every recipe rinses with 1,000 mB of ultrapure water, which comes back as water.',
+            'Circuito 1: LNOI por smart-cut. 2: chips PCM. 3: chips de memoria cuántica. 4: procesadores ópticos. 5: ensamblajes ópticos. 6: moduladores de capa fina. Cada receta enjuaga con 1.000 mB de agua ultrapura, que vuelve como agua.'],
+        ['grindless.machine.photonic_foundry.tooltip.2',
+            'Parts go in the bottom layer: 1-2 energy hatches, 1-3 input buses, 1-3 input hatches, 1-2 output buses, an output hatch. Accepts a parallel hatch.',
+            'Las piezas van en la capa inferior: 1-2 escotillas de energía, 1-3 buses de entrada, 1-3 escotillas de entrada, 1-2 buses de salida, una escotilla de salida. Acepta una escotilla de paralelos.'],
+
+        ['gtceu.recipe.grindless_molecular_beam_epitaxy.qcl_superlattice',
+            'Circuit 1: an InGaAs/AlInAs superlattice grown on indium phosphide; arsenic off the cryoshroud half the time',
+            'Circuito 1: una superred de InGaAs/AlInAs crecida sobre fosfuro de indio; arsénico del criopanel la mitad de las veces'],
+        ['gtceu.recipe.grindless_molecular_beam_epitaxy.quantum_cascade_lasers',
+            'Circuit 2: the superlattice cleaved into eight lasers with gold contacts',
+            'Circuito 2: la superred partida en ocho láseres con contactos de oro'],
+        ['gtceu.recipe.grindless_photonic_foundry.lnoi_wafer',
+            'Circuit 1: the implanted LN wafer bonded to oxidised silicon and split; the donor wafer comes back 2 runs in 3; the HF etch leaves as fluorite',
+            'Circuito 1: la oblea de LN implantada se une a silicio oxidado y se parte; la oblea donante vuelve 2 de cada 3 ciclos; el ataque con HF sale como fluorita'],
+        ['gtceu.recipe.grindless_photonic_foundry.pcm_dies',
+            'Circuit 2: GST sputtered onto LNOI under argon (never used up); the spent target goes back to the blast furnace',
+            'Circuito 2: GST pulverizado sobre LNOI bajo argón (nunca se gasta); el blanco gastado vuelve al alto horno'],
+        ['gtceu.recipe.grindless_photonic_foundry.quantum_memory_chips',
+            'Circuit 3: an Eu:YSO boule diced into four quantum memory chips',
+            'Circuito 3: un lingote de Eu:YSO cortado en cuatro chips de memoria cuántica'],
+        ['gtceu.recipe.grindless_photonic_foundry.optical_processor',
+            'Circuit 4: LNOI, PCM dies, a quantum cascade laser and modulators: two optical processors',
+            'Circuito 4: LNOI, chips PCM, un láser de cascada cuántica y moduladores: dos procesadores ópticos'],
+        ['gtceu.recipe.grindless_photonic_foundry.optical_assembly',
+            'Circuit 5: optical processors and quantum memory: an optical assembly',
+            'Circuito 5: procesadores ópticos y memoria cuántica: un ensamblaje óptico'],
+        ['gtceu.recipe.grindless_photonic_foundry.thin_film_modulators',
+            'Circuit 6: one LNOI wafer patterned into sixteen thin-film modulators',
+            'Circuito 6: una oblea LNOI grabada en dieciséis moduladores de capa fina'],
+
+        ['item.grindless.qcl_superlattice_wafer', 'QCL Superlattice Wafer', 'Oblea de superred QCL'],
+        ['tooltip.grindless.qcl_superlattice_wafer.0',
+            'Hundreds of InGaAs/AlInAs layers, each a few atoms thick, on an indium phosphide wafer.',
+            'Cientos de capas de InGaAs/AlInAs, cada una de pocos átomos, sobre una oblea de fosfuro de indio.'],
+        ['tooltip.grindless.qcl_superlattice_wafer.1',
+            'Grown in the MBE reactor (circuit 1); cleaved into eight quantum cascade lasers (circuit 2).',
+            'Se crece en el reactor MBE (circuito 1); se parte en ocho láseres de cascada cuántica (circuito 2).'],
+        ['item.grindless.implanted_ln_wafer', 'Implanted LN Wafer', 'Oblea de LN implantada'],
+        ['tooltip.grindless.implanted_ln_wafer.0',
+            'Lithium niobate with a buried layer of helium bubbles, ready to split.',
+            'Niobato de litio con una capa enterrada de burbujas de helio, lista para partirse.'],
+        ['tooltip.grindless.implanted_ln_wafer.1',
+            'Made by the ion implanter (circuit 3); bonded and split in the photonic foundry (circuit 1).',
+            'La fabrica el implantador de iones (circuito 3); se une y se parte en la fundición fotónica (circuito 1).'],
+        ['item.grindless.lnoi_wafer', 'LNOI Wafer', 'Oblea LNOI'],
+        ['tooltip.grindless.lnoi_wafer.0',
+            'A film of lithium niobate under a micron thick on oxidised silicon.',
+            'Una película de niobato de litio de menos de una micra sobre silicio oxidado.'],
+        ['tooltip.grindless.lnoi_wafer.1',
+            'Made by the photonic foundry (circuit 1). The base of its PCM dies, modulators and optical processors.',
+            'La fabrica la fundición fotónica (circuito 1). La base de sus chips PCM, moduladores y procesadores ópticos.'],
+        ['item.grindless.gst_target', 'GST Target', 'Blanco de GST'],
+        ['tooltip.grindless.gst_target.0',
+            'A sputtering target of Ge2Sb2Te5, the phase-change alloy of rewritable discs.',
+            'Un blanco de pulverización de Ge2Sb2Te5, la aleación de cambio de fase de los discos regrabables.'],
+        ['tooltip.grindless.gst_target.1',
+            'Cast in an electric blast furnace under argon; sputtered in the photonic foundry (circuit 2).',
+            'Se funde en un alto horno eléctrico bajo argón; se pulveriza en la fundición fotónica (circuito 2).'],
+        ['item.grindless.spent_gst_target', 'Spent GST Target', 'Blanco de GST gastado'],
+        ['tooltip.grindless.spent_gst_target.0',
+            'A target eroded into a racetrack groove by the sputter magnetron.',
+            'Un blanco erosionado en un surco de pista por el magnetrón de pulverización.'],
+        ['tooltip.grindless.spent_gst_target.1',
+            'Three remelt into two new targets in an electric blast furnace.',
+            'Tres se refunden en dos blancos nuevos en un alto horno eléctrico.'],
+        ['item.grindless.pcm_photonic_die', 'PCM Photonic Die', 'Chip fotónico PCM'],
+        ['tooltip.grindless.pcm_photonic_die.0',
+            'LNOI waveguides crossed by GST cells: weights that stay set without power.',
+            'Guías de onda LNOI cruzadas por celdas de GST: pesos que se mantienen sin energía.'],
+        ['tooltip.grindless.pcm_photonic_die.1',
+            'Made by the photonic foundry (circuit 2). Two go into each pair of optical processors.',
+            'La fabrica la fundición fotónica (circuito 2). Dos van en cada par de procesadores ópticos.'],
+        ['item.grindless.quantum_memory_chip', 'Quantum Memory Chip', 'Chip de memoria cuántica'],
+        ['tooltip.grindless.quantum_memory_chip.0',
+            'A slice of europium-doped yttrium orthosilicate that holds light for hours.',
+            'Una lámina de ortosilicato de itrio dopado con europio que guarda luz durante horas.'],
+        ['tooltip.grindless.quantum_memory_chip.1',
+            'Made by the photonic foundry (circuit 3). Two go into each optical assembly.',
+            'La fabrica la fundición fotónica (circuito 3). Dos van en cada ensamblaje óptico.'],
+        ['item.grindless.sic_epi_wafer', 'SiC Epi Wafer', 'Oblea epitaxial de SiC'],
+        ['tooltip.grindless.sic_epi_wafer.0',
+            'A silicon carbide wafer with a grown drift layer.',
+            'Una oblea de carburo de silicio con una capa de deriva crecida.'],
+        ['tooltip.grindless.sic_epi_wafer.1',
+            'Made by the SiC device fab; implanted with aluminium in the ion implanter (circuit 4).',
+            'La fabrica la fábrica de dispositivos de SiC; se implanta con aluminio en el implantador de iones (circuito 4).'],
+        ['item.grindless.implanted_sic_wafer', 'Implanted SiC Wafer', 'Oblea de SiC implantada'],
+        ['tooltip.grindless.implanted_sic_wafer.0',
+            'Aluminium ions in a silicon carbide epi layer, waiting for the 1,700 °C anneal.',
+            'Iones de aluminio en una capa epitaxial de carburo de silicio, esperando el recocido a 1.700 °C.'],
+        ['tooltip.grindless.implanted_sic_wafer.1',
+            'Made by the ion implanter (circuit 4); annealed into device wafers in the SiC device fab.',
+            'La fabrica el implantador de iones (circuito 4); se recuece en obleas de dispositivos en la fábrica de dispositivos de SiC.']
+    ]
+
+    ;['en_us', 'es_es'].forEach(function (lang, li) {
+        ClientEvents.lang(lang, function (event) {
+            ENTRIES.forEach(function (e) {
+                event.add('grindless', e[0], e[1 + li])
+            })
+        })
+    })
+})()
