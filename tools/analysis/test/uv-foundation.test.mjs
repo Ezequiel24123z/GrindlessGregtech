@@ -62,6 +62,7 @@ test('every shared UV id is registered once, is an id of docs/eras/uv.md, and no
     assert.match(run.registry.items.get(id).file, /(^|[\\/])uv[\\/]foundation\.js$/, id);
   }
   for (const [name, form] of Object.entries(MATERIALS)) {
+    if (name === 'ytterbium') continue;
     const mat = run.registry.materials.get(name) || run.registry.materials.get('gtceu:' + name);
     assert.ok(mat && ours(mat.file), `gtceu:${name} is not a GT material of foundation.js`);
     assert.ok(mat.forms.has(form), `gtceu:${name} lacks the ${form} form`);
@@ -89,12 +90,18 @@ test('the id table global.grindless.uvFoundation is published', () => {
   assert.match(src, /UVF\.ids\[key\]/);
 });
 
-test('the BNNT fuel tank is a tier 11 gcyr:fuel_tank (S0-1) and ytterbium, uranium_233 and arsine are ours (S0-8)', () => {
+// GTM registers ytterbium as a bare element with no form (a new material of that name is dropped, as the F1 dump showed), so it gets
+// its dust and ingot by materialModification, as ZPM's radium
+test('the BNNT fuel tank is a tier 11 gcyr:fuel_tank (S0-1); uranium_233 and arsine are ours and ytterbium gets its forms (S0-8)', () => {
   const src = fs.readFileSync(path.join(pack, 'kubejs', 'startup_scripts', 'grindless', 'uv', 'foundation.js'), 'utf8');
   assert.match(src, /id: 'grindless:bnnt_fuel_tank'/);
   assert.match(src, /tier: 11/);
   assert.match(src, /event\.create\(TANK\.id, 'gcyr:fuel_tank'\)/);
-  for (const m of ['ytterbium', 'uranium_233', 'arsine']) assert.ok(run.registry.materials.has(m) || run.registry.materials.has('gtceu:' + m), m);
+  for (const m of ['uranium_233', 'arsine']) assert.ok(run.registry.materials.has(m) || run.registry.materials.has('gtceu:' + m), m);
+  assert.ok(!run.registry.materials.has('gtceu:ytterbium'), 'ytterbium is GTM\'s: not created again');
+  const mod = src.slice(src.indexOf('GTCEuStartupEvents.materialModification'));
+  assert.match(mod, /GTMaterials\.get\('ytterbium'\)/);
+  assert.match(mod, /ensureSet\(PropertyKey\.INGOT, true\)/);
 });
 
 test('names and both tooltip lines in en_us and es_es; materials named', () => {
