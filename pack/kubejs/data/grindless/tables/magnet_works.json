@@ -3,7 +3,7 @@
   "_how_it_is_used": [
     "Read by startup_scripts/grindless/zpm/magnet_works.js (the charge, shown on the controller) and server_scripts/grindless/zpm/magnet_works.js (one gtceu:naquadria_magnets recipe per entry, id grindless:naquadria_magnets/<name>, with the data key grindless_naquadria_magnets = <name> for its EMI line, and the cryostat casing's assembler recipe); by tools/analysis/test/zpm-magnet_works.test.mjs and the smoke test gg_test_zpm_magnet_works. Nothing here is repeated in code.",
     "charge: the cold-test charge every entry with \"charge\": true carries, as GTM's non-consumed fluid input (notConsumableFluid, chance 0): needed in an input hatch to start, never drained, taken once whatever the overclock or the parallel hatch's copies.",
-    "recipes[]: name (the recipe's id and lang key), circuit (the programmed circuit that picks it: every entry has its own, so GTM's lookup keeps one recipe per path), itemsIn / fluidsIn (consumed), itemsOut, eut and duration (GTM's EU/t and ticks; marked (tune) in the design until the integrated bench run). The ZPM cell's output is the ZPM row's cell of tables/wireless_energy.json (its cellMadeBy names this machine); a Node test keeps the two tables in step.",
+    "recipes[]: name (the recipe's id and lang key), circuit (the programmed circuit that picks it: every entry has its own, so GTM's lookup keeps one recipe per path), itemsIn / fluidsIn (consumed), itemsOut, eut and duration (GTM's EU/t and ticks; marked (tune) in the design until the integrated bench run). The ZPM cell's output is the ZPM row's cell of tables/wireless_energy.json and the UV cell's (circuit 4, docs/eras/uv.md, package UV-A9) the UV row's (their cellMadeBy names this machine); a Node test keeps the two tables in step.",
     "wireEconomy: what GTM's own route to a URhNq2 single wire costs, read from its recipes (mixer 122,880 x 150 t for 4 dust; EBF gas variant 7,680 x 1,005 t; vacuum freezer 122,880 x 200 t; wiremill 30 x 348 t for 2 wires). The magnet works' wire recipe is checked against it: per wire, the EU must never be lower (zpm.md A5 invariant).",
     "casing: the cryostat casing's assembler recipe. The design asks for aerogel and gold-plated copper; aerogel is package A8's (hidden until it lands), so the casing is made from what exists when the magnet works does: a frostproof casing with gold and copper plates."
   ],
@@ -47,6 +47,15 @@
       "fluidsIn": [],
       "itemsOut": [ { "id": "grindless:hts_insert", "count": 1 } ],
       "eut": 30720, "duration": 300
+    },
+    {
+      "name": "uv_smes_cell", "circuit": 4, "charge": true,
+      "_why": "The wireless network's UV cell (docs/eras/uv.md, 'Power', package UV-A9): six of GTM's UV naquadria battery, 15,728,640,000 EU (S0-5). EnTED wire comes only from A8's powder in the tube; darmstadtium is GTM's UV hull metal; GTM's advanced SMD capacitors stand for the design's 'UV capacitors'. Cold-tested in the same helium charge as the ZPM cell.",
+      "itemsIn": [ { "id": "gtceu:enriched_naquadah_trinium_europium_duranide_single_wire", "count": 16 }, { "id": "gtceu:darmstadtium_plate", "count": 8 },
+                   { "id": "gtceu:advanced_smd_capacitor", "count": 16 } ],
+      "fluidsIn": [],
+      "itemsOut": [ { "id": "grindless:uv_smes_cell", "count": 1 } ],
+      "eut": 491520, "duration": 600
     }
   ]
 }

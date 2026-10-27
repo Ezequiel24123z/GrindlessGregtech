@@ -54,13 +54,13 @@ test('the pattern: one controller in the front slice, 7 x 7 x 5, GTM part limits
   assert.ok(blocks.includes('grindless:cryostat_casing'));
 });
 
-test('three recipes: one circuit each, ZPM VA bound, the cell is the ZPM row\'s cell, the charge is not consumed', () => {
-  assert.deepEqual(MW.recipes.map((r) => [r.name, r.circuit]), [['zpm_smes_cell', 1], ['urhnq2_wire', 2], ['hts_insert', 3]]);
+test('four recipes: one circuit each, the ZPM ones ZPM VA bound and the UV cell UV VA bound, each cell is its row\'s cell, the charge is not consumed', () => {
+  assert.deepEqual(MW.recipes.map((r) => [r.name, r.circuit]), [['zpm_smes_cell', 1], ['urhnq2_wire', 2], ['hts_insert', 3], ['uv_smes_cell', 4]]);
   for (const p of MW.recipes) {
     const r = byId(p.recipeId);
     assert.ok(r, p.recipeId + ' added');
     assert.equal(r.t, 'gtceu:naquadria_magnets');
-    assert.ok(Number.isInteger(p.duration) && p.duration > 0 && p.eut <= ZPM_VA, p.name);
+    assert.ok(Number.isInteger(p.duration) && p.duration > 0 && p.eut <= (p.name === 'uv_smes_cell' ? 4 * ZPM_VA : ZPM_VA), p.name);
     const text = JSON.stringify(r.j);
     if (p.charge) assert.match(text, /liquid_helium/, p.name + ' carries the charge');
     else assert.doesNotMatch(text, /liquid_helium/, p.name + ' needs no charge');
@@ -84,8 +84,8 @@ test('the wire is never cheaper in EU than GTM\'s own route to a URhNq2 wire', (
   assert.ok(perWire >= gtmPerWire, `${perWire} EU per wire against GTM's ${gtmPerWire}`);
 });
 
-test('nothing at ZPM asks for a UV part; the controller recipe uses ZPM parts', () => {
-  const text = JSON.stringify(TABLE.recipes) + JSON.stringify(TABLE.casing);
+test('nothing at ZPM asks for a UV part (circuit 4, UV-A9\'s UV cell, aside); the controller recipe uses ZPM parts', () => {
+  const text = JSON.stringify(TABLE.recipes.filter((r) => r.circuit <= 3)) + JSON.stringify(TABLE.casing);
   assert.doesNotMatch(text, /uv_|uhv_/);
   const r = byId(MW.craftingRecipe);
   assert.ok(r, 'controller recipe added');
