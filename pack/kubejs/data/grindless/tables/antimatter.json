@@ -1,0 +1,130 @@
+{
+  "_source": "docs/eras/uhv.md: machines 13 (positron accumulator) and 17 (Casimir array), lines 27 and 28; package UHV-A6. Real: ALPHA and AEgIS positron accumulators (CERN): a sodium-22 source under a solid neon moderator feeding a Surko buffer-gas trap; the Casimir force between plates (Lamoreaux, 1997). Fiction, said on the array's EMI page: harvesting it as exotic matter (the Morris-Thorne wormhole requirement).",
+  "_how_it_is_used": "server_scripts/grindless/uhv/antimatter.js makes one recipe per entry, id grindless:<type>/<name>, with its programmed circuit (0 = none, GTM's own types only); 'kept' items and 'charge' fluids are not consumed; a 'chance' below 10000 makes a chanced input or output (out of 10,000; input and output roll apart, as UV's tungsten target). A type with orbit: true adds .dimension(Earth orbit) to every recipe. positron_accumulation and casimir_cavity are this package's machines (data key = <name>, the EMI line); assembler is GTM's (the magnesium-24 target, the empty Penning trap). The synchrotron's sodium-22 row and the antimatter trap's antihydrogen row are in server_scripts/grindless/uv/accelerators.js; the cryogenic plant's 99.999 % neon row in server_scripts/grindless/ev/cryogenic_plant.js.",
+  "types": {
+    "positron_accumulation": {
+      "dataKey": "grindless_positron_accumulation",
+      "recipes": [
+        {
+          "name": "moderated_source",
+          "circuit": 1,
+          "eut": 491520,
+          "duration": 400,
+          "itemsIn": [{ "id": "grindless:sodium_22_target", "count": 1 }],
+          "kept": [],
+          "fluidsIn": [{ "id": "gtceu:high_purity_neon", "amount": 1000 }],
+          "charge": [],
+          "itemsOut": [{ "id": "grindless:moderated_positron_source", "count": 1 }],
+          "fluidsOut": []
+        },
+        {
+          "name": "accumulate",
+          "circuit": 2,
+          "eut": 1966080,
+          "duration": 400,
+          "itemsIn": [
+            { "id": "grindless:moderated_positron_source", "count": 1, "chance": 625 },
+            { "id": "grindless:empty_penning_trap", "count": 1 }
+          ],
+          "kept": [],
+          "fluidsIn": [],
+          "charge": [{ "id": "gtceu:nitrogen", "amount": 100 }],
+          "itemsOut": [
+            { "id": "grindless:positron_cartridge", "count": 1 },
+            { "id": "grindless:spent_positron_source", "count": 1, "chance": 625 }
+          ],
+          "fluidsOut": []
+        },
+        {
+          "name": "strip_source",
+          "circuit": 3,
+          "eut": 122880,
+          "duration": 200,
+          "itemsIn": [{ "id": "grindless:spent_positron_source", "count": 1 }],
+          "kept": [],
+          "fluidsIn": [],
+          "charge": [],
+          "itemsOut": [{ "id": "gtnn:radioactive_waste", "count": 1 }],
+          "fluidsOut": [{ "id": "gtceu:neon", "amount": 1000 }]
+        }
+      ]
+    },
+    "casimir_cavity": {
+      "dataKey": "grindless_casimir_cavity",
+      "orbit": true,
+      "recipes": [
+        {
+          "name": "cavity_stack",
+          "circuit": 1,
+          "eut": 491520,
+          "duration": 600,
+          "itemsIn": [{ "id": "grindless:nbn_coated_sic_plate", "count": 7 }],
+          "kept": [],
+          "fluidsIn": [{ "id": "gtceu:superfluid_helium", "amount": 1000 }],
+          "charge": [],
+          "itemsOut": [{ "id": "grindless:casimir_cavity_stack", "count": 1 }],
+          "fluidsOut": [{ "id": "gtceu:helium", "amount": 1000 }]
+        },
+        {
+          "name": "harvest",
+          "circuit": 2,
+          "eut": 1966080,
+          "duration": 2000,
+          "itemsIn": [{ "id": "grindless:casimir_cavity_stack", "count": 16, "chance": 313 }],
+          "kept": [{ "id": "grindless:nuclear_clock", "count": 1 }],
+          "fluidsIn": [],
+          "charge": [],
+          "itemsOut": [
+            { "id": "grindless:exotic_matter_cell", "count": 1 },
+            { "id": "grindless:worn_casimir_cavity_stack", "count": 16, "chance": 313 }
+          ],
+          "fluidsOut": []
+        },
+        {
+          "name": "strip_stack",
+          "circuit": 3,
+          "eut": 122880,
+          "duration": 200,
+          "itemsIn": [{ "id": "grindless:worn_casimir_cavity_stack", "count": 1 }],
+          "kept": [],
+          "fluidsIn": [],
+          "charge": [],
+          "itemsOut": [{ "id": "grindless:sic_mirror_blank", "count": 7 }],
+          "fluidsOut": []
+        }
+      ]
+    },
+    "assembler": {
+      "recipes": [
+        {
+          "name": "magnesium_target",
+          "circuit": 0,
+          "eut": 1920,
+          "duration": 200,
+          "itemsIn": [{ "id": "gtceu:magnesium_dust", "count": 4 }, { "id": "gtceu:copper_plate", "count": 1 }],
+          "kept": [],
+          "fluidsIn": [],
+          "charge": [],
+          "itemsOut": [{ "id": "grindless:magnesium_target", "count": 1 }],
+          "fluidsOut": []
+        },
+        {
+          "name": "empty_penning_trap",
+          "circuit": 0,
+          "eut": 30720,
+          "duration": 200,
+          "itemsIn": [
+            { "id": "gtceu:gold_plate", "count": 2 },
+            { "id": "gtceu:niobium_titanium_foil", "count": 4 },
+            { "id": "gtceu:titanium_plate", "count": 1 }
+          ],
+          "kept": [],
+          "fluidsIn": [],
+          "charge": [],
+          "itemsOut": [{ "id": "grindless:empty_penning_trap", "count": 1 }],
+          "fluidsOut": []
+        }
+      ]
+    }
+  }
+}
