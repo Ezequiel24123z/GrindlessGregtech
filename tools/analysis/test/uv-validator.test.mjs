@@ -80,7 +80,8 @@ test('real tiers (uv): the Validator\'s checks exist, are leak checks with the r
   un('neutronium-only-mk3', [`operate:${MK3}`], ['gtceu:neutronium_ingot', 'fluid:gtceu:neutronium']);
   un('mk3-recipes-only-mk3', [`operate:${MK3}`]);
   assert.deepEqual(t['mk3-recipes-only-mk3'].recipe, table('fusion_mk3.json').mk3Only);
-  un('uhv-circuit-only-mk3', [MK3_ASSEMBLY]);
+  // GTM's wrap_circuits_uhv only bundles circuits that already exist
+  un('uhv-circuit-only-mk3', [MK3_ASSEMBLY, 'gtceu:assembler/wrap_circuits_uhv']);
   assert.equal(t['uhv-circuit-only-mk3'].input, MAINFRAME);
   // without `type` or `recipe` the engine reads a recipe check as an empty item check, which a leak check always passes
   assert.deepEqual(t['uhv-circuit-only-mk3'].recipe, ['*']);
