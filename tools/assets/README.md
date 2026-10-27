@@ -83,6 +83,7 @@ Generators for the pack's own textures. Everything is procedural 16x16 pixel art
 | `Build-ZPMSaturnScienceTextures.ps1` | Writes the faces of the ZPM Saturn science machines (ZPM-B4): `multiblock/plume_sampler/` and `multiblock/ring_seismometer/` (`overlay_front`, `overlay_front_active` and its emissive layer; the emissive pixels are a subset of the colour layer). Proposed CREDITS "Assets" line: both overlays, procedural, original. |
 | `Build-ZPMUranusTextures.ps1` | Writes the faces of the ZPM Uranus machines (ZPM-B5): `multiblock/ice_giant_siphon/`, `multiblock/slurry_separator/` and `multiblock/flyby_probe_bay/` (`overlay_front`, `overlay_front_active` and its emissive layer; the emissive pixels are a subset of the colour layer). Proposed CREDITS "Assets" line: the three overlays, procedural, original. |
 | `Build-ZPMTravelTextures.ps1` | Writes the ZPM-B1 travel textures: the naquadah and aerogel fuel tank columns (`block/zpm/<tank>_side`, `_end`) and the Saturnian and Uranian quantum seed ampoules (`item/`). `-OutRoot <dir>` writes elsewhere. |
+| `Build-UVTravelTextures.ps1` | Writes the UV-B1 travel textures: the Neptunian and Plutonian quantum seed ampoules (`item/`) and Pluto's orbit sky disc (`sky/pluto.png`; GCYR ships no Pluto sky texture). `-OutRoot <dir>` writes elsewhere; `-Credits` prints the CREDITS rows. |
 | `Build-ZPMMagnetWorksTextures.ps1` | Writes the face of the ZPM naquadria magnet works (ZPM-A5): `multiblock/naquadria_magnet_works/` (`overlay_front`, `overlay_front_active` and its emissive layer; the emissive pixels are a subset of the colour layer) and the `item/hts_insert.png`. The ZPM wireless cell and covers come from `Build-WirelessEnergyTextures.ps1` (the zpm row). Proposed CREDITS "Assets" lines: the overlays, the HTS insert and the ZPM cell/cover textures, procedural, original. |
 | `Build-ZPMFusionTextures.ps1` | Writes the faces of the ZPM plasma quench caster and direct energy converter (ZPM-A7): `multiblock/plasma_quench_caster/` and `multiblock/direct_energy_converter/` (`overlay_front`, `overlay_front_active` and its emissive layer; the emissive pixels are a subset of the colour layer). Proposed CREDITS "Assets" line: both overlays, procedural, original. |
 ## Regenerate
@@ -939,6 +940,14 @@ Procedural, drawn by `Build-ZPMTravelTextures.ps1`; nothing is copied from anoth
 
 ```powershell
 powershell -NoProfile -ExecutionPolicy Bypass -File tools\assets\Build-ZPMTravelTextures.ps1
+```
+
+## UV quantum seeds and Pluto's sky (UV-B1)
+
+Procedural, drawn by `Build-UVTravelTextures.ps1`; nothing is copied from another mod. Each seed is ZPM-B1's ampoule in its planet's colour (Neptune deep blue, Pluto nitrogen-ice tan); `sky/pluto.png` is a 16x16 disc with the dark Cthulhu region and the bright heart-shaped plain, used by `sky_renderers/pluto_orbit.json`.
+
+```powershell
+powershell -NoProfile -ExecutionPolicy Bypass -File tools\assets\Build-UVTravelTextures.ps1 -Credits
 ```
 
 ## ZPM survey network faces (ZPM-A9)

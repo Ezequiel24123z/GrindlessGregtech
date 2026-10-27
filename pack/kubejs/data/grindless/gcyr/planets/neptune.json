@@ -1,0 +1,15 @@
+{
+  "translation": "level.grindless.neptune",
+  "galaxy": "gcyr:milky_way",
+  "solar_system": "gcyr:solar_system",
+  "world": "grindless:neptune",
+  "orbit_world": "grindless:neptune_orbit",
+  "rocket_tier": 6,
+  "gravity": 11.15,
+  "has_atmosphere": false,
+  "days_in_year": 60190,
+  "temperature": 72,
+  "solar_power": 1,
+  "has_oxygen": false,
+  "button_color": 5208063
+}
