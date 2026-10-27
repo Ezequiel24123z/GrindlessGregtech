@@ -24,7 +24,7 @@ swap="${GG_MEMORY_SWAP_MAX:-${GG_BENCH_MEMORY_SWAP_MAX:-2G}}"
 unit="gg-run-$(printf '%s' "$run" | tr -c 'A-Za-z0-9_-' '-')"
 cmd=(pwsh -NoProfile -NonInteractive -File "$here/Run-GGTest.ps1" -RunId "$run")
 
-if [ -z "${XDG_RUNTIME_DIR:-}" ] && [ -d "/run/user/$(id -u)" ]; then export XDG_RUNTIME_DIR="/run/user/$(id -u)"; fi
+if [ -z "${XDG_RUNTIME_DIR:-}" ] && [ -d "/run/user/$(id -u)" ]; then XDG_RUNTIME_DIR="/run/user/$(id -u)"; export XDG_RUNTIME_DIR; fi
 
 if [ "${GG_NO_SCOPE:-0}" != 1 ] && command -v systemd-run >/dev/null 2>&1 \
     && systemctl --user show-environment >/dev/null 2>&1; then
