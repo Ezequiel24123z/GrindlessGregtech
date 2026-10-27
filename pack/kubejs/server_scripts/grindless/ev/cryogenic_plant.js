@@ -101,6 +101,29 @@
         .EUt(r.eut).duration(r.duration)
     })
     console.info(LOG + 'cryogenic plant recipes added: ' + CRYO.recipes.length)
+    addTritonNitricOxide(event)
+  }
+
+  // UV-A1 (docs/eras/uv.md, line 3): distillation of Triton nitrogen's oxide. The 15N isotopologue of the oxide is lighter and stays
+  // in the cold, so the plant splits the mixture into 15NO (-> 15N in a chemical reactor) and ordinary NO (-> nitric acid lines).
+  // The only input is that oxide: it is the one recipe that runs with Triton nitrogen's oxide and nothing else.
+  var TRITON_NO = { id: 'grindless:cryogenic_processing/triton_nitric_oxide', eut: 7680, duration: 400 }
+  CRYO.tritonRow = TRITON_NO
+
+  function addTritonNitricOxide(event) {
+    var ids = ['gtceu:triton_nitric_oxide', 'gtceu:nitrogen_15_oxide', 'gtceu:nitric_oxide']
+    var missing = ids.filter(function (id) { return !Fluid.exists(id) })
+    if (missing.length > 0) {
+      console.error(LOG + 'cryogenic plant Triton nitric oxide row skipped, unknown fluid(s): ' + missing.join(', '))
+      return
+    }
+    event.recipes.gtceu.cryogenic_processing(TRITON_NO.id)
+      .inputFluids(Fluid.of('gtceu:triton_nitric_oxide', 2000))
+      .outputFluids(Fluid.of('gtceu:nitrogen_15_oxide', 1000), Fluid.of('gtceu:nitric_oxide', 1000))
+      .dimension(DIMENSION)
+      .addDataNumber(NIGHT_KEY, Math.round(TRITON_NO.eut * NIGHT_FACTOR))
+      .EUt(TRITON_NO.eut).duration(TRITON_NO.duration)
+    console.info(LOG + 'cryogenic plant Triton nitric oxide row added')
   }
 
   function addCrafting(event) {
