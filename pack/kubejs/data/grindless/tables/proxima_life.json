@@ -1,0 +1,269 @@
+{
+  "_source": "Our own table: the recipes of UHV's Proxima life (docs/eras/uhv.md, machines 12, 26, 27, 28 and 30; lines 13, 14 and 15; package UHV-B4). Real practice behind each step: Mars Sample Return's receiving facility (NASA/ESA), far-red photosynthesis with chlorophyll f (Chen, 2010; Kiang et al., 2007), Dsup-like radioprotective proteins (Hashimoto, 2016), fungal chitosan by deacetylation, and Cladosporium sphaerospermum's radiotrophic growth and melanin shielding (Shunk et al., 2020, ISS).",
+  "_how_it_is_used": [
+    "Read by server_scripts/grindless/uhv/proxima_life.js at every server load. Each entry becomes one recipe of its type, id grindless:<type>/<name> (GTM's builder puts the type in front); our types carry the data key of the type = <name> (the EMI line).",
+    "site: 'proxima_b' runs only on gcyr:proxima_centauri_b (G.places), 'earth' only in minecraft:overworld; no site: anywhere (the GTM rows).",
+    "itemsIn / itemsOut: { id, count, chance? } (chance in 1/10,000; below 10,000 a chanced input or output of 1); kept: items not used up; fluidsIn / fluidsOut: { id, amount } in mB.",
+    "One recipe per lookup path: the circuit is the step on our types; no recipe of a type takes a subset of another's ingredients (checked at load). GTM rows (circuit 0) are keyed by our own items.",
+    "Destinations: the biomass the plants and the vat leave is MV's biorefinery's; the salt water from the caustic steps goes to GTM's electrolyser; the extracts on Earth go to GTM's centrifuge (biomass, water and CO2); the oxygen is the base's air."
+  ],
+  "types": {
+    "xenoflora_rover": {
+      "dataKey": "grindless_xenoflora_rover",
+      "recipes": [
+        {
+          "name": "survey",
+          "circuit": 1,
+          "site": "proxima_b",
+          "eut": 122880,
+          "duration": 1200,
+          "itemsIn": [{ "id": "grindless:proxima_rover", "count": 1, "chance": 1250 }],
+          "kept": [{ "id": "grindless:proxima_approach_data", "count": 1 }],
+          "fluidsIn": [],
+          "itemsOut": [
+            { "id": "grindless:proxima_flora_sample", "count": 4 },
+            { "id": "grindless:proxima_regolith_survey", "count": 1 },
+            { "id": "grindless:americium_micro_source", "count": 1, "chance": 1250 }
+          ],
+          "fluidsOut": []
+        }
+      ]
+    },
+    "sample_receiving": {
+      "dataKey": "grindless_sample_receiving",
+      "recipes": [
+        {
+          "name": "receive",
+          "circuit": 1,
+          "site": "earth",
+          "eut": 491520,
+          "duration": 600,
+          "itemsIn": [{ "id": "grindless:proxima_flora_sample", "count": 1 }],
+          "kept": [],
+          "fluidsIn": [{ "id": "gtceu:hydrogen_peroxide", "amount": 1000 }],
+          "itemsOut": [{ "id": "grindless:sterilised_flora_extract", "count": 1 }, { "id": "grindless:xeno_genome_data", "count": 1 }],
+          "fluidsOut": []
+        },
+        {
+          "name": "isolate",
+          "circuit": 2,
+          "site": "earth",
+          "eut": 491520,
+          "duration": 400,
+          "itemsIn": [{ "id": "grindless:proxima_flora_sample", "count": 1 }],
+          "kept": [],
+          "fluidsIn": [],
+          "itemsOut": [{ "id": "grindless:characterised_xeno_strain", "count": 1 }],
+          "fluidsOut": []
+        },
+        {
+          "name": "extremophile",
+          "circuit": 3,
+          "site": "earth",
+          "eut": 491520,
+          "duration": 400,
+          "itemsIn": [{ "id": "grindless:proxima_ice_core", "count": 1 }],
+          "kept": [],
+          "fluidsIn": [],
+          "itemsOut": [{ "id": "grindless:sterilised_ice_organics", "count": 1 }],
+          "fluidsOut": []
+        }
+      ]
+    },
+    "xenobotany": {
+      "dataKey": "grindless_xenobotany",
+      "recipes": [
+        {
+          "name": "biomass",
+          "circuit": 1,
+          "site": "proxima_b",
+          "eut": 122880,
+          "duration": 600,
+          "itemsIn": [],
+          "kept": [{ "id": "grindless:characterised_xeno_strain", "count": 1 }],
+          "fluidsIn": [{ "id": "minecraft:water", "amount": 1000 }, { "id": "gtceu:carbon_dioxide", "amount": 500 }],
+          "itemsOut": [{ "id": "grindless:xeno_biomass", "count": 8 }],
+          "fluidsOut": [{ "id": "gtceu:oxygen", "amount": 500 }]
+        },
+        {
+          "name": "mushrooms",
+          "circuit": 2,
+          "site": "proxima_b",
+          "eut": 122880,
+          "duration": 600,
+          "itemsIn": [],
+          "kept": [{ "id": "grindless:characterised_xeno_strain", "count": 1 }],
+          "fluidsIn": [{ "id": "minecraft:water", "amount": 1000 }, { "id": "gtceu:carbon_dioxide", "amount": 500 }],
+          "itemsOut": [{ "id": "grindless:xeno_mushroom", "count": 8 }],
+          "fluidsOut": []
+        },
+        {
+          "name": "pigment",
+          "circuit": 3,
+          "site": "proxima_b",
+          "eut": 122880,
+          "duration": 400,
+          "itemsIn": [{ "id": "grindless:xeno_biomass", "count": 8 }],
+          "kept": [],
+          "fluidsIn": [],
+          "itemsOut": [],
+          "fluidsOut": [{ "id": "gtceu:far_red_pigment", "amount": 1000 }, { "id": "gtceu:biomass", "amount": 500 }]
+        }
+      ]
+    },
+    "xenobiochemistry": {
+      "dataKey": "grindless_xenobiochemistry",
+      "recipes": [
+        {
+          "name": "radioprotectant",
+          "circuit": 1,
+          "site": "proxima_b",
+          "eut": 491520,
+          "duration": 400,
+          "itemsIn": [],
+          "kept": [],
+          "fluidsIn": [{ "id": "gtceu:clarified_xeno_lysate", "amount": 1000 }, { "id": "gtceu:phosphoric_acid", "amount": 250 }],
+          "itemsOut": [{ "id": "grindless:xeno_radioprotectant", "count": 1 }],
+          "fluidsOut": []
+        },
+        {
+          "name": "infrared_pigment",
+          "circuit": 2,
+          "site": "proxima_b",
+          "eut": 491520,
+          "duration": 400,
+          "itemsIn": [],
+          "kept": [],
+          "fluidsIn": [{ "id": "gtceu:far_red_pigment", "amount": 1000 }, { "id": "gtceu:ethanol", "amount": 500 }],
+          "itemsOut": [{ "id": "grindless:infrared_pigment", "count": 1 }],
+          "fluidsOut": []
+        },
+        {
+          "name": "chitosan",
+          "circuit": 3,
+          "site": "proxima_b",
+          "eut": 491520,
+          "duration": 600,
+          "itemsIn": [{ "id": "grindless:xeno_mushroom", "count": 8 }, { "id": "gtceu:sodium_hydroxide_dust", "count": 4 }],
+          "kept": [],
+          "fluidsIn": [{ "id": "gtceu:hydrochloric_acid", "amount": 1000 }],
+          "itemsOut": [{ "id": "grindless:chitosan_scaffold", "count": 2 }],
+          "fluidsOut": [{ "id": "gtceu:salt_water", "amount": 1000 }]
+        },
+        {
+          "name": "lysate",
+          "circuit": 4,
+          "site": "proxima_b",
+          "eut": 491520,
+          "duration": 400,
+          "itemsIn": [{ "id": "grindless:xeno_biomass", "count": 16 }],
+          "kept": [],
+          "fluidsIn": [{ "id": "gtceu:ultrapure_water", "amount": 1000 }],
+          "itemsOut": [],
+          "fluidsOut": [{ "id": "gtceu:clarified_xeno_lysate", "amount": 1000 }, { "id": "gtceu:biomass", "amount": 500 }]
+        }
+      ]
+    },
+    "radiotrophic": {
+      "dataKey": "grindless_radiotrophic",
+      "recipes": [
+        {
+          "name": "melanised_biomass",
+          "circuit": 1,
+          "site": "proxima_b",
+          "eut": 122880,
+          "duration": 800,
+          "itemsIn": [{ "id": "grindless:xeno_biomass", "count": 4 }],
+          "kept": [{ "id": "grindless:cladosporium_culture", "count": 1 }],
+          "fluidsIn": [{ "id": "minecraft:water", "amount": 1000 }],
+          "itemsOut": [{ "id": "grindless:melanised_biomass", "count": 8 }],
+          "fluidsOut": [{ "id": "gtceu:biomass", "amount": 500 }]
+        }
+      ]
+    },
+    "chemical_reactor": {
+      "recipes": [
+        {
+          "name": "melanin_extract",
+          "circuit": 0,
+          "eut": 122880,
+          "duration": 400,
+          "itemsIn": [{ "id": "grindless:melanised_biomass", "count": 8 }, { "id": "gtceu:sodium_hydroxide_dust", "count": 2 }],
+          "kept": [],
+          "fluidsIn": [{ "id": "gtceu:hydrochloric_acid", "amount": 1000 }],
+          "itemsOut": [{ "id": "grindless:melanin_extract", "count": 1 }],
+          "fluidsOut": [{ "id": "gtceu:salt_water", "amount": 1000 }]
+        },
+        {
+          "name": "melanin_chitosan_composite",
+          "circuit": 0,
+          "eut": 122880,
+          "duration": 400,
+          "itemsIn": [{ "id": "grindless:melanin_extract", "count": 2 }, { "id": "grindless:chitosan_scaffold", "count": 1 }],
+          "kept": [],
+          "fluidsIn": [{ "id": "gtceu:acetic_acid", "amount": 500 }],
+          "itemsOut": [{ "id": "grindless:melanin_chitosan_composite", "count": 2 }],
+          "fluidsOut": []
+        }
+      ]
+    },
+    "assembler": {
+      "recipes": [
+        {
+          "name": "proxima_rover",
+          "circuit": 0,
+          "eut": 491520,
+          "duration": 600,
+          "itemsIn": [
+            { "id": "grindless:americium_micro_source", "count": 1 },
+            { "id": "grindless:betavoltaic_cell", "count": 2 },
+            { "id": "grindless:hpge_crystal", "count": 1 },
+            { "id": "gtceu:uv_sensor", "count": 1 },
+            { "id": "gtceu:hsss_plate", "count": 2 }
+          ],
+          "kept": [],
+          "fluidsIn": [],
+          "itemsOut": [{ "id": "grindless:proxima_rover", "count": 1 }],
+          "fluidsOut": []
+        },
+        {
+          "name": "flare_shield_panel",
+          "circuit": 0,
+          "eut": 491520,
+          "duration": 400,
+          "itemsIn": [{ "id": "grindless:melanin_chitosan_composite", "count": 4 }, { "id": "gtceu:naquadah_alloy_plate", "count": 2 }],
+          "kept": [],
+          "fluidsIn": [],
+          "itemsOut": [{ "id": "grindless:flare_shield_panel", "count": 1 }],
+          "fluidsOut": []
+        }
+      ]
+    },
+    "centrifuge": {
+      "recipes": [
+        {
+          "name": "sterilised_flora_extract",
+          "circuit": 0,
+          "eut": 7680,
+          "duration": 200,
+          "itemsIn": [{ "id": "grindless:sterilised_flora_extract", "count": 1 }],
+          "kept": [],
+          "fluidsIn": [],
+          "itemsOut": [],
+          "fluidsOut": [{ "id": "gtceu:biomass", "amount": 500 }, { "id": "minecraft:water", "amount": 250 }]
+        },
+        {
+          "name": "sterilised_ice_organics",
+          "circuit": 0,
+          "eut": 7680,
+          "duration": 200,
+          "itemsIn": [{ "id": "grindless:sterilised_ice_organics", "count": 1 }],
+          "kept": [],
+          "fluidsIn": [],
+          "itemsOut": [],
+          "fluidsOut": [{ "id": "minecraft:water", "amount": 500 }, { "id": "gtceu:carbon_dioxide", "amount": 250 }]
+        }
+      ]
+    }
+  }
+}
