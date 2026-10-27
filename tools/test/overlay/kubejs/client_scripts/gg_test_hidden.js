@@ -9,7 +9,7 @@
 //   client_index    EMI's index (EmiStackList.stacks) has no hidden item or fluid (nor the old sample), and has perlite dust, obsidian dust,
 //                   the LV sifter, the Moon's titanium dust, moon sand and helium-3, Mars' rock and the titanium drill bit (EV), and IV's
 //                   naquadah, Venus rock, iridosmine, U-235 and deuterium, and LuV's circuit assembly line, molten cerrobase 140, chondritic extract,
-//                   germanium and bacteria (LuV is implemented since v0.8.0's switch, 2026-10-26)
+//                   germanium and bacteria (LuV is implemented since v0.8.0's switch, ZPM since v0.9.0's, 2026-10-27)
 //   client_recipes  EMI shows no recipe that makes or uses a hidden item; it shows the LV sifter's perlite, perlite's electrolysis and the
 //                   old sample's conversion into an empty vein probe
 //   client_jei      JEI runs under EMI: its ingredient list and recipe screen are EMI's (JEMI), so JEI shows nothing of its own
@@ -73,7 +73,7 @@
     // EMI hands out JDK immutable lists (ImmutableCollections$ListN); Rhino cannot call their methods (module access): copy them
     var jlist = function (c) { return new ArrayList(c) }
 
-    var hiddenItems = ['gcyr:space_elevator_support', 'gtceu:damascus_steel_ingot', 'gtca:scrap', 'gcyr:proxima_centauri_b_regolith']
+    var hiddenItems = ['gcyr:gps_satellite', 'gtceu:damascus_steel_ingot', 'gtca:scrap', 'gcyr:proxima_centauri_b_regolith']
     var hiddenFluids = ['gtceu:plutonium_based_liquid_fuel', 'gtceu:molten_stainless_steel']
     var shownItems = ['gtceu:perlite_dust', 'gtceu:obsidian_dust', 'gtceu:lv_sifter', 'gtceu:basalt_dust', 'gtceu:titanium_dust', 'gcyr:moon_sand',
       'gcyr:martian_rock', 'grindless:titanium_drill_bit', 'gtceu:naquadah_dust', 'gcyr:venus_rock', 'gtceu:raw_iridosmine', 'gtceu:uranium_235_dust',
@@ -119,7 +119,7 @@
     // the constructors, not EmiStack.of: Rhino finds of(ItemStack) and of(ItemLike) equally good for a KubeJS item stack
     var stackOf = function (id) { return new ItemEmiStack(Item.of(id)) }
     var problems = []
-    ;['gcyr:space_elevator_support', 'gtceu:damascus_steel_ingot'].forEach(function (id) {
+    ;['gcyr:gps_satellite', 'gtceu:damascus_steel_ingot'].forEach(function (id) {
       var made = count(rm.getRecipesByOutput(stackOf(id)))
       var used = count(rm.getRecipesByInput(stackOf(id)))
       if (made + used > 0) problems.push(id + ' made by ' + made + ', used by ' + used)
