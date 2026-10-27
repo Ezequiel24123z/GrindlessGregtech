@@ -19,6 +19,7 @@ applyTo: "pack/kubejs/**,tools/test/overlay/kubejs/**,tools/analysis/lib/kubejs_
 - EMI never shows `gtceu:electric_furnace` recipes (GTM does not register that category). A route that only exists there needs an EMI info page.
 
 ## Rhino and KubeJS 2001.6.5
+- Script load order: never write or edit `// priority:` by hand (line 1 of every script is a generated header). To make a script load earlier or later, set a band in `tools/analysis/script_order.json`; the integrator stamps the headers (`Update-PackIndex.ps1`). A `// requires:`/`// ignored:`/`// priority` comment anywhere else is a KubeJS property: avoid it. `script-order.mjs --check` is part of T0.
 - Inside functions or callbacks that run more than once, use `var`, not `const`/`let` ("redeclaration of var").
 - Renamed members (the Mojang name does not exist): `getYRot`/`getXRot` -> `getYaw`/`getPitch`, `getStringUUID` -> `getStringUuid`, `tickCount` -> `age`, `Level#getGameTime` -> `getTime`, `ItemStack#getTag` -> `getNbt`; `Entity#level()` is hidden (use `getLevel()`). Full list in `tools/test/README.md`. Anything that uses a player is tested in the `client` suite.
 - An empty `ItemStack` (`ItemStack.EMPTY` included) compares `=== null`. Test stacks with `isEmpty()`, never against null.
