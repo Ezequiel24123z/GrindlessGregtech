@@ -102,14 +102,14 @@ GTCA (`mordgren/GTCA` `02cbd6d`, LGPL) shows the conservative end: batch plus a 
 | Modifier chains | `recipeModifier(mod)` (`:579`), `recipeModifier(mod, alwaysTry)` (`:584`), `recipeModifiers(...)` (`:589`), `alwaysTryModifyRecipe` (`:269`) | proven (`mv/leisure_utility.js:464-466`) |
 | Compose two GTM modifiers in JS | `GTRecipeModifiers.PARALLEL_HATCH.getModifier(machine, recipe)` then `.andThen(...)`, `ModifierFunction.NULL` on fail | proven (`lib/parallel_hatch.js:55-77`) |
 | Coil temperature | `CoilWorkableElectricMultiblockMachine.getCoilType()` (coil from match context `"CoilType"`, `CoilWorkableElectricMultiblockMachine.java:28`); our `Coils.temperature(m)` (`lib/coils.js:58`) | proven |
-| Energy-bound parallels | `ParallelLogic.getParallelAmount(machine, recipe, max)` (`api/recipe/modifier/ParallelLogic.java:34`; checks inputs, output room and EU) and `getParallelAmountWithoutEU` (`:158`) | public static; used by GTM's `hatchParallel` (`GTRecipeModifiers.java:91-104`) |
+| Energy-bound parallels | `ParallelLogic.getParallelAmount(machine, recipe, max)` (`api/recipe/modifier/ParallelLogic.java:34`; checks inputs and output room only, **not EU**: S-M1) and `getParallelAmountWithoutEU` (`:158`) | public static; used by GTM's `hatchParallel` (`GTRecipeModifiers.java:91-104`). The energy bound is ours to add: `floor(max voltage / recipe EU/t)`, the `bores` rule |
 | Apply n parallels | `ModifierFunction.builder()...parallels(n).eutMultiplier(n)` with content × n | proven (`iv/fluorspar_kiln.js:172-175`) |
 | Overclock | `GTRecipeModifiers.OC_PERFECT_SUBTICK` / `OC_NON_PERFECT_SUBTICK` (`GTRecipeModifiers.java:49-52`). Perfect: duration × 0.25 per ×4 voltage (energy-neutral); non-perfect: × 0.5 (energy per operation doubles) | GTM |
-| Batch mode | `GTRecipeModifiers.BATCH_MODE` (`:79`, `batchMode` `:107-124`): needs `isBatchEnabled()` (`WorkableElectricMultiblockMachine.java:54, 90`) and a duration under `batchDuration`; multiplies inputs, outputs and duration, EU/t unchanged | **unproven on a KubeJS coil machine** (S-M1) |
+| Batch mode | `GTRecipeModifiers.BATCH_MODE` (`:79`, `batchMode` `:107-124`): needs `isBatchEnabled()` (`WorkableElectricMultiblockMachine.java:54, 90`) and a duration under `batchDuration`; multiplies inputs, outputs and duration, EU/t unchanged | proven on a KubeJS coil machine (S-M1, run 20261027-223750-server-bda: batchDuration 100 gave 2 batch parallels, duration 100, outputs × 2); the bench set it with `setBatchEnabled`, the screen toggle is unchecked (T3) |
 | Coil EU discount precedent | `ebfOverclock` (`GTRecipeModifiers.java:170-193`): × 0.95 per 900 K above the recipe | GTM precedent |
-| Parallel hatch above UV | `ParallelHatchPartMachine.java:37`: `4^(tier − EV)`, so a UHV hatch is 1024 by GTM's own formula; GTM does not register it with `highTierContent` off | **unproven from KubeJS** (S-M3) |
+| Parallel hatch above UV | `ParallelHatchPartMachine.java:37`: `4^(tier − EV)`, so a UHV hatch is 1024 by GTM's own formula; GTM does not register it with `highTierContent` off | proven from KubeJS (S-M3, run 20261027-223750-server-946): `event.create(<name>, 'custom').tiers(9).machine(h => new ParallelHatchPartMachine(h, 9))` + `abilities(PartAbility.PARALLEL_HATCH)` reports 1024 and runs 64 parallels in GTM's mega EBF and in ours through `lib/parallel_hatch.js` |
 | Structures larger than 16 tall | `lib/patterns.js:60` caps rows per slice (height) at 16; slices (depth) are unbounded | **design rule: every mega is ≤16 tall and grows in width and depth.** No lib change. |
-| Detect installed modules | read which module blocks the formed structure holds (the match context or a scan of the pattern's cells on `onStructureFormed`) | **unproven** (S-M2) |
+| Detect installed modules | read which module blocks the formed structure holds (the match context or a scan of the pattern's cells on `onStructureFormed`) | proven (S-M2, run 20261027-223751-server-2ea): a `Predicates.custom` socket stores pos → module id in `getMatchContext().getOrCreate('GGModules', HashMap)`; a recipe modifier reads it and `ModifierFunction.cancel(Text)` vetoes an absent type (inputs untouched, reason shown); several types via `.recipeTypes(a, b)`. `java.lang.reflect.Array` is class-filtered: use `Java.to` for `BlockInfo[]` |
 
 ### 3.1 Spikes (disposable, bench overlay only, before MEGA-0)
 
@@ -127,10 +127,10 @@ The results go in the PR body of the spike package (no new doc).
 
 ### 4.1 Family rules
 
-1. **Energy-bound.** Every parallel goes through `ParallelLogic.getParallelAmount`: each copy pays the recipe's full EU/t, and the hatches cap the total. A machine's formula is a ceiling, never a promise.
+1. **Energy-bound.** Every parallel goes through `ParallelLogic.getParallelAmount` (inputs and output room) and is then capped at `floor(max voltage / recipe EU/t)` by `lib/mega.js`, because GTM's call does not check EU (S-M1): each copy pays the recipe's full EU/t, and the energy hatches cap the total. A machine's formula is a ceiling, never a promise.
 2. **No energy from nothing.** No discount below GTM's own precedents. The only discount in the family is the coil discount on the chemical machines, at GTM's EBF rate (× 0.95 per coil step, floor × 0.80). No machine generates power; `lib/generators.js` is untouched.
 3. **Overclock.** Non-perfect subtick (the GCYM mega precedent), except chemistry (perfect subtick, GTM's LCR rule) and the UHV fabricator (section 4.10). Parallels are applied first, then OC on the voltage left over (GTM's order).
-4. **Batch mode** on every mega if S-M1 passes.
+4. **Batch mode** on every mega (S-M1 passed; `BATCH_MODE` must come after the overclock in the chain).
 5. **Growth by era.** Each era's mega is bigger in footprint, parallel ceiling and number of steps it folds. Height ≤16 (`lib/patterns.js:60`).
 6. **Cost.** The controller is built from N of the machines it replaces (`CREDITS.md:44`) plus the era's circuits and a casing in the era's material. The structure needs the era's casing in bulk.
 7. **No new process recipes.** A mega runs GTM's or our live recipe types. "Steps in one" uses `global.grindless.compose` (`server_scripts/grindless/lib/compose.js:202-225`): the composed recipe is the line's sum, so ratios and byproducts stay honest by construction.
@@ -153,7 +153,7 @@ The results go in the PR body of the spike package (no new doc).
 
 `coilPar(K)`: Cupronickel 1800 K → 4, Kanthal 2700 → 8, Nichrome 3600 → 16, RTM 4500 → 32, HSS-G 5400 → 64, Naquadah 7200 → 256, Trinium 9001 → 1024, Tritanium 10800 → 4096 (`common/block/CoilBlock.java:59-67`).
 
-Parallel hatch: IV 4, LuV 16, ZPM 64, UV 256, UHV 1024 if S-M3 passes (`ParallelHatchPartMachine.java:37`).
+Parallel hatch: IV 4, LuV 16, ZPM 64, UV 256, UHV 1024 (S-M3 passed; `ParallelHatchPartMachine.java:37`).
 
 ### 4.3 LV: Wire Works (`gtceu:wire_works`)
 
@@ -215,7 +215,7 @@ The user's "parallelised LCR that scales with the coil and is better in general"
 
 - **Runs:** two modes: `large_chemical_reactor` (every LCR and chemical reactor recipe), and composed chemistry lines (our own multi-step lines up to LuV that end in a product the player bulk-consumes, chosen in MEGA-6 from the live recipes; e.g. PTFE from fluorspar/HF/chloroform, epoxy, para-aramid). The line list is MEGA-6's table, *(tune)*.
 - **Structure:** 15×15×15, PTFE casings, PTFE pipe casings, 4 coil rings (≈ 112 coils), a central reaction column, HSS-S frames, laminated glass.
-- **Parallels:** `coilPar(K) × hatch`, energy-bound: HSS-G 64 × LuV 16 = 1024 at LuV; Naquadah 256 × ZPM 64 = 16384; Trinium 1024 × UV 256 = 262144; Tritanium 4096 × UHV 1024 (if S-M3) ≈ 4.2 M. The real figure is set by the energy hatches and output room.
+- **Parallels:** `coilPar(K) × hatch`, energy-bound: HSS-G 64 × LuV 16 = 1024 at LuV; Naquadah 256 × ZPM 64 = 16384; Trinium 1024 × UV 256 = 262144; Tritanium 4096 × UHV 1024 ≈ 4.2 M. The real figure is set by the energy hatches and output room.
 - **OC:** perfect subtick. Coil discount as (a), floor × 0.80. Batch.
 - **Controller:** 4 coil chemical plants + 16 LuV chemical reactors + 4 LuV circuits + PTFE frames.
 - **Gains:** the massive LCR: thousands of parallels with the power to feed them, and whole lines in one recipe. This is the one place the family reaches GTL scale, honestly: every copy pays its EU.
@@ -237,7 +237,7 @@ The user's "parallelised LCR that scales with the coil and is better in general"
 
 ### 4.11 UHV: Quantum Fabricator (`gtceu:quantum_fabricator`) and the UHV parallel hatch
 
-- **UHV parallel hatch** (`gtceu:uhv_parallel_hatch` or GTM's own id if S-M3 reuses it): 1024 by GTM's formula. Usable by every machine through `lib/parallel_hatch.js` and by GTM's megas.
+- **UHV parallel hatch** (`gtceu:uhv_parallel_hatch`, registered by MEGA-0b with the S-M3 mechanism; GTM leaves the id free with `highTierContent` off): 1024 by GTM's formula. Usable by every machine through `lib/parallel_hatch.js` and by GTM's megas.
 - **Runs:** `assembler`, `circuit_assembler`, `forming_press`, `laser_engraver`, `cutter`.
 - **Structure:** 17×13×17, our UHV casing (or `uhv.md`'s F1 casing), a field generator ring.
 - **Parallels:** `1024 × hatch`, energy-bound. **Perfect subtick OC** (the gain; energy-neutral, so no EU from nothing).
@@ -292,12 +292,13 @@ UHV's *Common to every package* (`docs/eras/uhv.md:1017-1033`) applies with thes
 - **Allowed:** bench overlay files `gg_test_mega_spike*.js` and the S row of `tools/test/zones.json`. Nothing in `pack/`.
 - **Depends on:** UHV v0.11.0 shipped.
 - **Acceptance:** three answers in the PR body; a fail rewrites the named packages' contracts before they open.
+- **Result (2026-10-27, VM backend, merged 81b7b87):** all three PASS. S-M1 `20261027-223750-server-bda`: chain order `coilParallel → OC_PERFECT_SUBTICK → BATCH_MODE` through `.recipeModifiers(true, ...)` (overclock before batch); base 30 EU/t × 200 t gave Cupronickel p 4 → 480 EU/t 50 t (HV hatch), Nichrome p 16 → 1920 EU/t (EV), Tritanium p 64 → 7680 EU/t (IV); batch on: 2 batch parallels, 100 t, outputs × 2. S-M2 `20261027-223751-server-2ea` and S-M3 `20261027-223750-server-946`: see section 3. Correction carried into rule 1 and MEGA-0: `getParallelAmount` does not check EU. Never set a `global.*` value to null (Java map NPE).
 - **Tests:** the three spikes, one after another. **Commits:** 1. **Serial:** alone.
 
 ### 6.3 MEGA-0. Shared library (serial; integrator-owned files)
 
-- **Objective:** `startup_scripts/grindless/lib/mega.js`: `coilParallel(capOrNull)` (`2^floor(K/900)`, `ParallelLogic.getParallelAmount`), `coilDiscount(step, floor)`, `withHatch(next)` (reuses `lib/parallel_hatch.js` `modifier`), `chain(...)` in S-M1's proven order, and `modules(machine)` if S-M2 passed.
-- **Allowed:** `lib/mega.js` (new), `tools/analysis/test/mega-lib.test.mjs`, overlay `gg_test_mega_lib.js`, its zones row. **MEGA-0b** (only if S-M3 passed): `lib/parallel_hatch.js` registers the UHV hatch and adds it to the list at `:79`.
+- **Objective:** `startup_scripts/grindless/lib/mega.js`: `coilParallel(capOrNull)` (`2^floor(K/900)`, `ParallelLogic.getParallelAmount`, then the energy cap `floor(max voltage / recipe EU/t)` that GTM's call lacks), `coilDiscount(step, floor)`, `withHatch(next)` (reuses `lib/parallel_hatch.js` `modifier`), `chain(...)` in S-M1's proven order (parallel, discount, OC, batch), and `modules(machine)` with S-M2's mechanism (`Predicates.custom` sockets, match context `GGModules`, `ModifierFunction.cancel`). Copy the proven calls from `tools/test/overlay/kubejs/startup_scripts/gg_test_mega_spike_machines.js` and `server_scripts/gg_test_mega_spikes.js`.
+- **Allowed:** `lib/mega.js` (new), `tools/analysis/test/mega-lib.test.mjs`, overlay `gg_test_mega_lib.js`, its zones row. **MEGA-0b** (S-M3 passed): `lib/parallel_hatch.js` registers the UHV hatch (S-M3's registration; no change to `part()`, `hasHatch()` or `modifier()`, which are ability-based) and adds it to the list at `:79`.
 - **References:** `lib/parallel_hatch.js:55-77`, `mv/leisure_utility.js:364-366, 464-466`, `GTRecipeModifiers.java:91-124`, `ParallelLogic.java:34`.
 - **Depends on:** MEGA-S.
 - **Invariants:** existing users of `parallel_hatch.js` unchanged (same exports, same figures).
