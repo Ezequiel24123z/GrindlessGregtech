@@ -34,6 +34,6 @@
       "emitter": "gtceu:luv_emitter", "sensor": "gtceu:luv_sensor", "signalParts": 1, "link": "gtceu:quantum_star", "plate": "gtceu:rhodium_plated_palladium_plate", "frame": null, "wire": "niobium_titanium" },
     { "tier": 7, "name": "zpm", "cell": "grindless:zpm_smes_cell", "capacity": 3932160000, "referenceBattery": "gtceu:zpm_naquadria_battery", "batteries": null,
       "cellMadeBy": "gtceu:naquadria_magnet_works", "texture": "grindless:block/wireless/smes_cell_zpm",
-      "emitter": "gtceu:zpm_emitter", "sensor": "gtceu:zpm_sensor", "signalParts": 1, "link": "gtceu:gravi_star", "plate": "gtceu:osmiridium_plate", "frame": null, "wire": "vanadium_gallium" }
+      "emitter": "gtceu:zpm_emitter", "sensor": "gtceu:zpm_sensor", "signalParts": 1, "link": "gtceu:quantum_star", "plate": "gtceu:osmiridium_plate", "frame": null, "wire": "vanadium_gallium" }
   ]
 }
