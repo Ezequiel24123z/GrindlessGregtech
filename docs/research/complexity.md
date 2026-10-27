@@ -94,6 +94,8 @@ Rules: additive, without changing the shape of any multiblock, without raising q
 
 The axis that can really compound without inflating quantities is the **density of cross-links**: adding multiblocks is not enough. Each new line must be required to link to **more earlier and more distant lines** than the previous era.
 
+**Updated 2026-10-27.** Measured as built: EV 11 / IV 15 / LuV 20 / ZPM 27 multiblocks; 13 / 8 / 9 / 14 new process lines; ZPM 13 crossings. The user asked for much faster growth, above all in processing lines. From UV on, new lines and crossings (two or more eras back) grow ×1.5 per era, so UV needs at least 21 lines and 20 crossings, with about 36 multiblocks (`DECISIONS.md`, 2026-10-27). This replaces the UV and UHV+ rows of the table below.
+
 ### Target table (EV–UV) and general rule after that
 
 | Era | New own multiblocks | Family steps | New lines | Required cross-links (looking ≥2 eras back) | Planetary sites |
