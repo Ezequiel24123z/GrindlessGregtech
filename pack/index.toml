@@ -3553,6 +3553,10 @@ file = "kubejs/assets/grindless/textures/item/pb11_capsule.png"
 hash = "f8df5a7e6848906d3608d93a39641bc4c1e9a54ae7623ff25295d51bde966e6e"
 
 [[files]]
+file = "kubejs/assets/grindless/textures/item/penetrator_probe.png"
+hash = "1aefcde3178b67c107e6a69b224cdb4e518f00d2deb2c4cd044ca3733eb9acc3"
+
+[[files]]
 file = "kubejs/assets/grindless/textures/item/photographic_plate.png"
 hash = "62a039747b5a3aab30e1faac804585384e2ef41e6a20f73f1db0f07b0a58eb53"
 
@@ -4230,7 +4234,7 @@ hash = "6293f1b244503530e33babbbe0e02337027ec8afa4de980ef198639ec5676652"
 
 [[files]]
 file = "kubejs/client_scripts/grindless/syngas_lang.js"
-hash = "c35cee5fb663e4ab3f79319d986d822bc7a608426dd6a1273f8b93145989c5e4"
+hash = "1ab731994730a999a9d906c8fb4f73420a1b0c138c31183526e14572613d1529"
 
 [[files]]
 file = "kubejs/client_scripts/grindless/travelers_titles_lang.js"
@@ -4279,6 +4283,10 @@ hash = "c584df83e29c0167c6171e399026ce32e5700edb7adeedaf71dc17abc172029f"
 [[files]]
 file = "kubejs/client_scripts/grindless/uv_photonics_lang.js"
 hash = "f70e9ce1e60e5f9f56f754335fe7e0278edfec4f8f4d10f28782c699538ad186"
+
+[[files]]
+file = "kubejs/client_scripts/grindless/uv_pluto_ices_lang.js"
+hash = "297519e013b4b12e95ba9cb7ec382837d599bf45aad60e86c728ef1657c732d6"
 
 [[files]]
 file = "kubejs/client_scripts/grindless/uv_propulsion_lang.js"
@@ -4566,7 +4574,7 @@ hash = "1f4b256531a0b42a6ecf399e9b692d9e4730bd4102e53aab3e1fa2c999b69e9d"
 
 [[files]]
 file = "kubejs/data/grindless/tables/hidden_until.json"
-hash = "febfb928924ae0546291b6a5ec4d84e806d68aaa0ba1911a5660ac0d4ded6e31"
+hash = "c855b473313ca31d29e424b769ced529771430ddee74aabbffc883fbd8814f0f"
 
 [[files]]
 file = "kubejs/data/grindless/tables/hot_cell.json"
@@ -4818,7 +4826,7 @@ hash = "248f77f6b62f4bcc187e3af6a1682a7992dacbf7586faf8a36e56a138475a88d"
 
 [[files]]
 file = "kubejs/server_scripts/grindless/hv/syngas_plant.js"
-hash = "87468b1b59ee9aa8fb7500f0b864bfe76c4f9376b86c6c2326dc57b6a7d8c0c3"
+hash = "e86bdc1e2b030a1d20d13e268f838a5a8733807304da9736c63119b807b9b594"
 
 [[files]]
 file = "kubejs/server_scripts/grindless/integration/ae2.js"
@@ -5247,6 +5255,10 @@ hash = "6b27f30611b45e75b8dce3d691055629fec76310d3d84238518bb154538da1fc"
 [[files]]
 file = "kubejs/server_scripts/grindless/uv/photonics.js"
 hash = "0b6704a38a371d88efa9a267c22a61d3879c49e17580fe1a7a65ef9cb0a7ffb3"
+
+[[files]]
+file = "kubejs/server_scripts/grindless/uv/pluto_ices.js"
+hash = "8e6fe2163a42028dd2fc95ba35d5f7267739428e149765225ad5fdd83b445a79"
 
 [[files]]
 file = "kubejs/server_scripts/grindless/uv/propulsion.js"
@@ -5699,6 +5711,10 @@ hash = "7440da6b884af34eabe4bbeba600d50cd4ef98cf42e5300962a32d1766b3d9f8"
 [[files]]
 file = "kubejs/startup_scripts/grindless/uv/photonics.js"
 hash = "12363e1669cbcf8f3bc66ded8888e774dfb0d52b201bc4cced977a2aa59e327a"
+
+[[files]]
+file = "kubejs/startup_scripts/grindless/uv/pluto_ices.js"
+hash = "8649c244a7b27c52bae5df6ef9cef5270b6aa6d0f0039f07ffeee198f74b8479"
 
 [[files]]
 file = "kubejs/startup_scripts/grindless/uv/propulsion.js"

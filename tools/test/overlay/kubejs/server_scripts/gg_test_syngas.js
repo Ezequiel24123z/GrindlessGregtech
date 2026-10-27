@@ -517,8 +517,10 @@
     var have = recipeCount(TYPE_ID)
     try {
       var rp = recipeChecks()
-      check(SCOPE, 'recipes', rp.length === 0 && have === SYN.recipes.length,
-        'gtceu:syngas recipes=' + have + '/' + SYN.recipes.length + ' [' + SYN.recipes.map(function (p) {
+      // Orbit-only rows (UV-B3 Pluto shift, c5) live in SYN.orbitRecipes and are checked by gg_test_uv_pluto_ices.
+      var expected = SYN.recipes.length + (SYN.orbitRecipes || []).length
+      check(SCOPE, 'recipes', rp.length === 0 && have === expected,
+        'gtceu:syngas recipes=' + have + '/' + expected + ' [' + SYN.recipes.map(function (p) {
           return p.name + ' c' + p.circuit + ' ' + p.eut + 'x' + p.duration
         }).join(', ') + ']' + (rp.length > 0 ? ' problems=' + rp.join(' ; ') : ''))
     } catch (e1) {

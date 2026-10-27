@@ -56,9 +56,6 @@
     { "id": "grindless:itbtc_coated_conductor", "role": "use", "reason": "temporary (LuV-A3): its uses, the HTS coil and the SMES cell, are LuV-A4's magnet works; delete this exception when A4 merges" },
     { "id": "grindless:chondritic_extract", "role": "use", "reason": "temporary (LuV-B5): its use, the Europan culture of the algae bioreactor, is LuV-B8's;     delete this exception when B8 merges" },
     { "id": "grindless:ican_pellet", "role": "use", "reason": "temporary (UV-A5): its use, the precursor probe launch, is UV-B5's; delete this exception when B5 merges" },
-    { "id": "grindless:hpge_crystal", "role": "use", "reason": "temporary (UV-A7): its first use, the penetrator's HPGe spectrometer, is UV-B3's; delete this exception when B3 merges" },
-    { "id": "grindless:printed_probe_frame", "role": "use", "reason": "temporary (UV-A8): its first use, the penetrator probe, is UV-B3's; delete this exception when B3 merges" },
-    { "id": "grindless:triton_ice_core", "role": "use", "reason": "temporary (UV-B2): its use, the penetrator probe bay's catalyst, is UV-B3's; delete this exception when B3 merges" },
     { "id": "grindless:sailcraft", "role": "use", "reason": "temporary (UV-A12): its use, the laser sail launch, holds B5's heliopause_data; delete this exception when B5 merges" },
     { "id": "grindless:snspd_array", "role": "use", "reason": "temporary (UV-A7): its use, the optical downlink, reads A12's probe, which waits on B5's heliopause_data; delete this exception when B5 merges" }
       ],
