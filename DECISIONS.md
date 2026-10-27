@@ -375,3 +375,13 @@ One line per decision. The most recent one is at the bottom.
 - 2026-10-27 · ZPM-D1: in `tiers/zpm.json` the sterile clean room is modelled as a cleanroom with sterilizing filter casings (no new machine).
 - 2026-10-27 · GTCA's space elevator and its modules (20 hidden groups) move from ZPM to UV: GTCA gives them no recipe and docs/eras/zpm.md already places them in UV. The obtain table generator keeps a B rule's `unless` row (the tether spool) when the dump obtains it with the switch on.
 - 2026-10-27 · Growth from UV on (user: "debe escalar mucho más, sobre todo en líneas de procesamiento"): as a guide, new process lines and crossings with lines two or more eras back grow about ×1.5 per era (ZPM 14 and 13, so UV about 21 and 20); progression multiblocks stay at about ×1.35 (UV about 36). User: "debe ser orientativo": the figures are guidance, not quotas, but each era must be clearly bigger. A line is a real chain of at least 4 steps, and the average steps per line never falls; splitting one chain does not count.
+- 2026-10-27 · UV size: 31 progression machines (guide ~36; the gap was convenience or second machines for one chain, dropped), 22 new process lines (avg 6.9 steps, none under 5), 24 crossings two or more eras back; complexity.md:105 superseded; no padding.
+- 2026-10-27 · UV route: Neptune (tier 6) and Pluto (tier 7) are orbit-only stations 5 and 6; level 7 = elite motor + tier 11 BNNT tank; Proxima b stays tier 8 and opens in UHV.
+- 2026-10-27 · UV wireless: UV cell ~15.7 G from the magnet works c4; the gravi star is the UV link, the quantum star stays ZPM’s.
+- 2026-10-27 · UV Mk3: GTM’s ring with a custom audit (tables/fusion_mk3.json); neutronium only from the Mk3; naquadria from the stored solution or the Mk3.
+- 2026-10-27 · UV Mk3 asks for four UHV wetware mainframes (GTM wins); the validator allows them; the neural culture vat makes them reachable in UV.
+- 2026-10-27 · UV generators (accelerator-driven, laser fusion, muon fusion) are written at final figures and are not in generators.js’s doubling list.
+- 2026-10-27 · UV keeps GTCA’s space elevator hidden: its until moves from uv to uhv (GTCA gives it no recipe).
+- 2026-10-27 · UV Starshot: the probe launches in UV and its approach data gate UHV; the arrival at Proxima is UHV.
+- 2026-10-27 · UV extrapolations named in the doc and quests: net-power muon-catalysed fusion and Pluto–Earth VLBI.
+- 2026-10-27 · UV open questions decided by the orchestrator with the architect’s recommendations: accept 31 machines; COMET as proton source with S0-7 fallback; Dyson swarm in UHV; naquadria second route via the Mk3 allowed.

@@ -4,9 +4,9 @@ Integrator-owned. Read this instead of `DECISIONS.md` and the session notes. Ove
 
 - **Playable version:** v0.9.0 "ZPM: Saturn and Uranus" (`049fc96`). `playable` and `jugable` both point to it.
 - **Active development branch:** `ezequiel24123z-gregtech-grindless-modpack`. `main` matches it (PR #4 merged); feature work still branches from the development branch.
-- **Current milestone:** UV design. The era doc `docs/eras/uv.md` is being written by the architecture session; ZPM is complete (`docs/eras/zpm.md`).
-- **Last accepted integration batch:** ZPM-C3 integrated validation (#23) and ZPM-D1 release blockers (#24): every C3 stage passed (home 169, sites 82, power gate, book, EMI, travel); D1 fixed the naquadria casing loop, the Uranus deuterium dimension, the implanter gate and the wireless hatch rating; `-Tier zpm`, `-Tier luv` and `pl-check --strict --era zpm` pass, and the space elevator moved to UV. T0 passes (622).
-- **Approved packages in flight:** UV era architecture (Opus design session).
+- **Current milestone:** UV build. Design accepted: `docs/eras/uv.md` (queue in its *Build order*: S0 spikes, F1, F2, waves A and B, C1-C3), decisions in `DECISIONS.md` (2026-10-27, "UV").
+- **Last accepted integration batch:** UV era design (`docs/eras/uv.md`): 31 machines, 22 new lines, 24 crossings; Neptune and Pluto from orbit, the Mk3, the Starshot; the space elevator stays hidden until UHV.
+- **Approved packages in flight:** UV-S0 spikes (band 23040).
 - **Repository:** unmerged historical branches are kept only as `archive/*` tags; finished package branches are deleted after integration.
 
 ## Open blockers and known issues
