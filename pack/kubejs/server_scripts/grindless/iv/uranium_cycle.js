@@ -42,6 +42,8 @@
 
   var TABLE = UC.table || 'kubejs/data/grindless/tables/uranium_cycle.json'
   var MAX_CHANCE = 10000
+  // UV-A1's thorium rows (the same format, plus fluidsOut): appended after the table's own steps
+  var THORIUM_TABLE = 'kubejs/data/grindless/tables/thorium_fabrication.json'
 
   var FIELD = 'gtceu:isr_wellfield'
   var PLANT = 'gtceu:fuel_fabrication_plant'
@@ -124,7 +126,8 @@
     var steps = []
     var names = {}
     var circuits = {}
-    list(t.fabrication).forEach(function (s) {
+    var fabrication = list(t.fabrication).concat(list(G.readJsonTable(THORIUM_TABLE).fabrication))
+    fabrication.forEach(function (s) {
       var name = String(s.name || '')
       var circuit = Number(s.circuit)
       if (!/^[a-z0-9_]+$/.test(name) || names[name]) {
@@ -143,6 +146,7 @@
         itemsIn: items(name, s.itemsIn, false),
         fluidsIn: fluids(name, s.fluidsIn),
         fluidsKept: fluids(name, s.fluidsKept),
+        fluidsOut: fluids(name, s.fluidsOut),
         itemsOut: items(name, s.itemsOut, true),
         stages: energyOf(name, s.energy)
       }
@@ -173,7 +177,7 @@
     if (rec.sample) item(rec.sample)
     rec.itemsIn.forEach(function (x) { item(x.id) })
     rec.itemsOut.forEach(function (x) { item(x.id) })
-    rec.fluidsIn.concat(rec.fluidsKept).forEach(function (x) { fluid(x.id) })
+    rec.fluidsIn.concat(rec.fluidsKept, rec.fluidsOut).forEach(function (x) { fluid(x.id) })
     return missing
   }
 
@@ -188,6 +192,7 @@
     if (itemsIn > limits.itemsIn) return itemsIn + ' item inputs (the type holds ' + limits.itemsIn + ')'
     if (itemsOut > limits.itemsOut) return itemsOut + ' item outputs (the type holds ' + limits.itemsOut + ')'
     if (fluidsIn > limits.fluidsIn) return fluidsIn + ' fluid inputs (the type holds ' + limits.fluidsIn + ')'
+    if (rec.fluidsOut.length > limits.fluidsOut) return rec.fluidsOut.length + ' fluid outputs (the type holds ' + limits.fluidsOut + ')'
     return null
   }
 
@@ -225,6 +230,7 @@
     rec.fluidsIn.forEach(function (x) { recipe.inputFluids(Fluid.of(x.id, x.amount)) })
     rec.fluidsKept.forEach(function (x) { recipe.notConsumableFluid(Fluid.of(x.id, x.amount)) })
     outputsOf(recipe, rec)
+    rec.fluidsOut.forEach(function (x) { recipe.outputFluids(Fluid.of(x.id, x.amount)) })
     recipe.EUt(rec.eut)
       .duration(rec.duration)
   }
@@ -273,6 +279,7 @@
           itemsIn: [{ id: table.leaching.resin.id, count: 1, chance: table.leaching.resin.chance }],
           fluidsIn: table.leaching.fluidsIn,
           fluidsKept: [],
+          fluidsOut: [],
           itemsOut: table.leaching.itemsOut,
           dimension: table.leaching.dimension,
           stages: table.leaching.stages,
@@ -296,6 +303,7 @@
         itemsIn: s.itemsIn,
         fluidsIn: s.fluidsIn,
         fluidsKept: s.fluidsKept,
+        fluidsOut: s.fluidsOut,
         itemsOut: s.itemsOut,
         dimension: null,
         stages: s.stages,
