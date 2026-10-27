@@ -1385,9 +1385,9 @@ test('LuV wireless jump: LuV only when every formed tower holds LuV cells; above
   assert.equal(st.capacity, 32 * SMES_EU + 4 * IV_EU);
   assert.equal(st.skippedAbove, 1, 'the LuV hatch is above the network\'s tier');
   assert.equal(luv2.energyContainer.getEnergyStored(), 0, 'and gets nothing');
-  assert.equal(iv2.energyContainer.getEnergyStored(), 262144, 'the IV 2 A hatch filled: V x 16 x 2');
-  assert.equal(iv64.energyContainer.getEnergyStored(), 8388608, 'the IV 64 A hatch filled: V x 16 x 64');
-  assert.equal(st.out, 262144 + 8388608);
+  assert.equal(iv2.energyContainer.getEnergyStored(), 163840, 'the IV 2 A hatch filled: V x 2 x 10 ticks (its rated amperage per window)');
+  assert.equal(iv64.energyContainer.getEnergyStored(), 5242880, 'the IV 64 A hatch filled: V x 64 x 10 ticks');
+  assert.equal(st.out, 163840 + 5242880);
   assert.equal(W.stored(server), 10000000000 - st.out);
   const above = W.readout(server, LUV, true);
   assert.equal(above.key, 'message.grindless.wireless.above_tier');
@@ -1402,8 +1402,8 @@ test('LuV wireless jump: LuV only when every formed tower holds LuV cells; above
   assert.equal(jump.tier, LUV);
   assert.equal(jump.capacity, 32 * SMES_EU, '31,457,280,000 EU: past an int');
   assert.equal(jump.skippedAbove, 0);
-  assert.equal(luv2.energyContainer.getEnergyStored(), 1048576, 'the LuV 2 A hatch filled: V x 16 x 2');
-  assert.equal(jump.out, 1048576);
+  assert.equal(luv2.energyContainer.getEnergyStored(), 655360, 'the LuV 2 A hatch filled: V x 2 x 10 ticks');
+  assert.equal(jump.out, 655360 + (262144 - 163840) + (8388608 - 5242880), 'and the IV hatches top up their buffers');
   const reading = W.readout(server, LUV, true);
   assert.equal(reading.key, 'message.grindless.wireless.readout');
   assert.equal(reading.args[0], 'LuV');
@@ -1419,7 +1419,7 @@ test('LuV wireless jump: LuV only when every formed tower holds LuV cells; above
   w.earth.put(smesTower.at[5].x, smesTower.at[5].y, smesTower.at[5].z, SMES);
   const back = W.settle(server);
   assert.equal(back.tier, LUV);
-  assert.equal(luv2.energyContainer.getEnergyStored(), 1048576);
+  assert.equal(luv2.energyContainer.getEnergyStored(), 655360);
   assert.deepEqual(plain(Object.keys(W.faults)), []);
   assert.deepEqual(errors, []);
 });
@@ -1438,24 +1438,25 @@ test('LuV wireless dynamo: a 64 A LuV dynamo hatch puts 19/20 of what it gives i
   W.paused = true;
   W.setStored(server, 0);
   const st = W.settle(server);
-  assert.equal(st.drained, 134217720, 'a whole multiple of 20; 8 EU wait in the hatch');
-  assert.equal(st.in, 127506834);
+  assert.equal(st.drained, 20971520, 'a whole multiple of 20: the rated V x 64 x 10 ticks of one window');
+  assert.equal(st.in, 19922944);
   assert.equal(st.in * 20, st.drained * 19, 'exactly 19/20');
   assert.equal(st.lost, st.drained - st.in);
-  assert.equal(dyn.energyContainer.getEnergyStored(), 8);
-  assert.equal(W.stored(server), 127506834);
-  // the rest waits until it makes 20
+  assert.equal(dyn.energyContainer.getEnergyStored(), buffer - 20971520, 'the rest waits for the next windows');
+  assert.equal(W.stored(server), 19922944);
+  // a remainder under 20 waits until it makes 20
+  dyn.energyContainer.setEnergyStored(8);
   assert.equal(W.settle(server).drained, 0);
   dyn.energyContainer.setEnergyStored(20);
   const next = W.settle(server);
   assert.deepEqual([next.drained, next.in, next.lost], [20, 19, 1]);
-  // a 64 A LuV energy hatch takes its whole buffer (V x 16 x 64) in one settlement
+  // a 64 A LuV energy hatch takes at most V x 64 x 10 ticks in one settlement, and no more than the store holds
   W.track(w.earth, new Pos(LX + 18, 100, 40));
   const fill = W.settle(server);
-  assert.equal(in64.energyContainer.getEnergyStored(), 33554432);
-  assert.equal(fill.out, 33554432);
-  assert.equal(W.stored(server), 127506834 + 19 - 33554432);
-  assert.equal(W.totals.in, 127506834 + 19);
+  assert.equal(in64.energyContainer.getEnergyStored(), 19922963);
+  assert.equal(fill.out, 19922963);
+  assert.equal(W.stored(server), 0);
+  assert.equal(W.totals.in, 19922944 + 19);
   assert.deepEqual(errors, []);
 });
 
