@@ -570,9 +570,13 @@ export default gate({
       nodes: [
         E('eqMk2', 0, -0.75, 'zpm_age', '38199670D4113E48'),
         E('eqDec', 0, 0.75, 'zpm_age', '7E64F29B6EE66B09'),
-        n('zpmFusion', 2.25, 0, M('gtceu:zpm_fusion_reactor'), 'Fusion Reactor Mk2', {
-          kind: 'info', tier: 'zpm', from: ['eqMk2', 'eqDec'], sub: 'Deuterium and helium-3 from Saturn; the plasma goes to a turbine or the converter',
+        n('zpmFusion', 2.25, -0.75, M('gtceu:zpm_fusion_reactor'), 'Fusion Reactor Mk2', {
+          kind: 'info', tier: 'zpm', from: ['eqMk2'], sub: 'Deuterium and helium-3 from Saturn; the plasma goes to a turbine or the converter',
           desc: 'Helium-3 fusion needs no tritium. Its plasma is worth more in the direct energy converter than in a turbine.',
+        }),
+        n('zpmConv', 2.25, 0.75, I('gtceu:direct_energy_converter'), 'Direct Energy Converter', {
+          kind: 'info', tier: 'zpm', from: ['eqDec'], sub: 'Takes the charge off the plasma with no turbine',
+          desc: 'The cooled gas comes back out, so only the heat is lost.',
         }),
       ],
     },
@@ -669,18 +673,18 @@ export default gate({
         }),
         n('wdynH', 6.75, -2.25, I('gtceu:lv_wireless_dynamo_hatch'), 'Wireless Dynamo Hatch', {
           kind: 'info', from: [network('wtower')], sub: 'Generator multiblocks feed the network through it',
-          desc: 'Energy goes in at any voltage; the cells only limit what comes out.', figs: [P.wamps([2, 4, 16, 64], 'lv', 'luv')],
+          desc: 'Energy goes in at any voltage; the cells only limit what comes out.', figs: [P.wamps([2, 4, 16, 64], 'lv', 'zpm')],
         }),
         n('wdynC', 6.75, -0.75, I('grindless:lv_wireless_dynamo_cover'), 'Wireless Dynamo Cover', {
-          kind: 'info', from: [network('wtower')], sub: 'On a generator or a battery buffer, it feeds the network', figs: [P.wcover(2, 'lv', 'luv')],
+          kind: 'info', from: [network('wtower')], sub: 'On a generator or a battery buffer, it feeds the network', figs: [P.wcover(2, 'lv', 'zpm')],
         }),
         n('wenH', 6.75, 0.75, I('gtceu:lv_wireless_energy_hatch'), 'Wireless Energy Hatch', {
           kind: 'info', from: [network('wtower')], sub: 'Multiblocks draw from the network through it',
-          desc: 'Above the network\'s voltage it gets nothing; shift-right-click it with an empty hand to see why.', figs: [P.wamps([2, 4, 16, 64], 'lv', 'luv')],
+          desc: 'Above the network\'s voltage it gets nothing; shift-right-click it with an empty hand to see why.', figs: [P.wamps([2, 4, 16, 64], 'lv', 'zpm')],
         }),
         n('wenC', 6.75, 2.25, I('grindless:lv_wireless_energy_cover'), 'Wireless Energy Cover', {
           kind: 'info', from: [network('wtower')], sub: 'Single machines draw through it, on any side but the front',
-          desc: 'GTM machines, chargers and battery buffers, not converters or multiblock controllers; shift-right-click with an empty hand for the readout.', figs: [P.wcover(2, 'lv', 'luv')],
+          desc: 'GTM machines, chargers and battery buffers, not converters or multiblock controllers; shift-right-click with an empty hand for the readout.', figs: [P.wcover(2, 'lv', 'zpm')],
         }),
       ],
     } } : {}),

@@ -117,7 +117,7 @@
 
   Q.crafting = [
     { id: 'grindless:crafting/diamond_lattice_fab', output: 'gtceu:diamond_lattice_fab', pattern: ['CEC', ' H ', 'CCC'], keys: { C: '#gtceu:circuits/zpm', E: 'gtceu:zpm_emitter', H: 'gtceu:zpm_machine_hull' } },
-    { id: 'grindless:crafting/ion_implanter', output: 'gtceu:ion_implanter', pattern: ['CEC', 'FHC', 'CCC'], keys: { C: '#gtceu:circuits/zpm', E: 'gtceu:zpm_emitter', F: 'gtceu:zpm_field_generator', H: 'gtceu:zpm_machine_hull' } },
+    { id: 'grindless:crafting/ion_implanter', output: 'gtceu:ion_implanter', pattern: ['CEC', 'FHD', 'CCC'], keys: { C: '#gtceu:circuits/zpm', D: PLATE, E: 'gtceu:zpm_emitter', F: 'gtceu:zpm_field_generator', H: 'gtceu:zpm_machine_hull' } },
     { id: 'grindless:crafting/qubit_fab', output: 'gtceu:qubit_fab', pattern: ['CSC', ' H ', 'CSC'], keys: { C: '#gtceu:circuits/zpm', S: 'gtceu:zpm_sensor', H: 'gtceu:zpm_machine_hull' } }
   ]
 

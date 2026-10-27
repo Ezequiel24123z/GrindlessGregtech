@@ -230,7 +230,7 @@ Solar is useless out there. The stations draw from the wireless network, and the
 - A machine that takes a not-consumed fluid charge uses IV-A5's `notConsumableFluid`.
 
 **Shared blocks** (package F1):
-- naquadria containment casing (naquadah alloy frame + 4 naquadria-plated tungstensteel plates → 2, 122,880 EU/t × 100 t *(tune)*): machines 1 and 2;
+- naquadria containment casing (naquadah alloy frame + 4 tungstensteel plates + 2 naquadah alloy plates → 2, 122,880 EU/t × 100 t *(tune)*): machines 1 and 2;
 - pressure hull casing (2 dense tungstensteel + 2 tritanium-free duranium plates + a naquadah alloy frame → 2 *(tune)*): machines 25 and 26;
 - photomultiplier casing (machine 15);
 - cryostat casing (a mK shield: aerogel + gold-plated copper): machines 12 and 6;
