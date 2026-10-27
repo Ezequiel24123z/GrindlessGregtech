@@ -6,7 +6,7 @@ Integrator-owned. Read this instead of `DECISIONS.md` and the session notes. Ove
 - **Active development branch:** `ezequiel24123z-gregtech-grindless-modpack`. `main` matches it (PR #4 merged); feature work still branches from the development branch.
 - **Current milestone:** UHV build. Design accepted: `docs/eras/uhv.md` (queue in its *Build order*: S0 spikes, F1, F2, waves A and B, C1-C3), decisions in `DECISIONS.md` (2026-10-27, "UHV").
 - **Last accepted integration batch:** UV era (v0.10.0): 31 machines, 22 lines, 24 crossings; `-Tier uv` PASS (20261027-142608-uv); UV-C3 T2 bench PASS (20261027-144119-server) and v0.9.0 save reopen PASS.
-- **Approved packages in flight:** UHV wave A (S0, F1, F2, A1 and A10 done: F1 ids held until uhv, one obtain rule per package; A7 and A2 running). Order: A1+A10, A2+A3, A4+A7, A5+A9, A6+A8; then B1; B2+B4, B3+B5, B6, B7; C1-C3; v0.11.0.
+- **Approved packages in flight:** UHV wave A (S0, F1, F2, A1, A10, A7, A2 and A3 done: F1 ids held until uhv, one obtain rule per package; A9 and A4 running). Order: A9+A4, A5, A6+A8; then B1; B2+B4, B3+B5, B6, B7; C1-C3; v0.11.0.
 - **Repository:** unmerged historical branches are kept only as `archive/*` tags; finished package branches are deleted after integration.
 
 ## Open blockers and known issues
