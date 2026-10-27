@@ -1,7 +1,7 @@
 <#
 .SYNOPSIS
   Procedural 16x16 pixel art for the foundations of the UV era of Gregtech Grindless (package UV-F1, shared registrations):
-  34 items and three block textures (GregTech style: top-left light, 3-4 tones per material, selective outlines).
+  33 items and three block textures (GregTech style: top-left light, 3-4 tones per material, selective outlines).
 
 .DESCRIPTION
   Every pixel is drawn by this script (twelve small shape routines with a palette per item); nothing is copied or edited from GregTech
@@ -9,7 +9,7 @@
   the position, not from a random generator). The sixteen materials need no PNG: GregTech draws them from their colour.
 
   Writes (under pack/kubejs/assets/grindless/textures/):
-    item/<name>.png for the 34 items that startup_scripts/grindless/uv/foundation.js registers (see $Items below for the shape kind
+    item/<name>.png for the 33 items that startup_scripts/grindless/uv/foundation.js registers (see $Items below for the shape kind
     and the two colours of each: heaps, orbs, cards, vials, cartridges, spools, crystals, modules, capsules, chips, sails, assemblies).
     block/uv/laser_module_block.png      dark plates with two rows of red lenses; seamless.
     block/uv/srf_cryomodule_block.png    frosted white-blue shell with niobium-grey ribs and copper bands; seamless.
@@ -87,7 +87,6 @@ $Items = [ordered]@{
     heliopause_data               = @('card', 'E0A030', '3A4ABA')
     proxima_approach_data         = @('card', 'C04A38', 'F0D8A0')
     sgr_a_star_image              = @('card', '1E1A2E', 'FF9A30')
-    uv_smes_cell                  = @('crystal', '5A2E8A', 'FF60D0')
 }
 $Blocks = @('laser_module_block', 'srf_cryomodule_block', 'bnnt_fuel_tank_side')
 

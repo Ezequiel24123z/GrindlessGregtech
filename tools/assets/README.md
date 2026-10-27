@@ -56,7 +56,7 @@ Generators for the pack's own textures. Everything is procedural 16x16 pixel art
 | `Build-LuVCryogenicsTextures.ps1` | Writes the faces of the LuV helium refrigerator and coated conductor line (LuV-A3: `multiblock/helium_refrigerator/`, `multiblock/coated_conductor_line/`). `-Only refrigerator,line`, `-Preview <png outside the repo>` (optional `-FrostCasing <png>`, `-StainlessCasing <png>`) and `-Credits` (their 10 CREDITS rows). |
 | `Build-LuVFoundationTextures.ps1` | Writes the shared LuV textures (LuV-A1): 29 items (four of them animated quantum seeds) and the ten block textures under `block/luv/` (eight casings and the orbital solar panel's cells and frame). `-Only <output or group>`, `-Preview <png outside the repo>`, `-Credits`. |
 | `Build-ZPMFoundationTextures.ps1` | Writes the shared ZPM textures (ZPM-F1): 31 items and the six block textures under `block/zpm/`. `-Only <output or group>`, `-Preview <png outside the repo>`, `-Credits`. |
-| `Build-UVFoundationTextures.ps1` | Writes the shared UV textures (UV-F1): 34 items and three block textures under `block/uv/`. `-Only <output or group>`, `-Credits`. |
+| `Build-UVFoundationTextures.ps1` | Writes the shared UV textures (UV-F1): 33 items and three block textures under `block/uv/`. `-Only <output or group>`, `-Credits`. |
 | `Build-UVHeatSourcesTextures.ps1` | Writes the four item icons of UV's heat source works (UV-A2): probe RTG, americium micro source, curium RTG pellet, heavy curium oxide. `-Credits`. |
 | `Build-UVAcceleratorsTextures.ps1` | Writes the faces of UV's synchrotron, muon fusion cell and antimatter trap (UV-A5: `multiblock/synchrotron/`, `multiblock/muon_fusion_cell/`, `multiblock/antimatter_trap/`) and the 13 item icons of the LIGA, antiproton and muon fusion lines. `-Credits`. |
 | `Build-UVColdTextures.ps1` | Writes the five item icons of UV's cold works (UV-A4): RRR niobium sheet, niobium scrap, bare SRF cavity, N-doped SRF cavity, mu-metal shield. `-Credits`. |
@@ -65,6 +65,7 @@ Generators for the pack's own textures. Everything is procedural 16x16 pixel art
 | `Build-UVMaterialsTextures.ps1` | Writes the twelve item icons of UV's materials (UV-A8): BNNT dust, silver tube, PIT billet, six porous near-net parts and three printed parts. `-Credits`. |
 | `Build-UVDetectorsTextures.ps1` | Writes the controller faces of UV's detectors (UV-A7): zone refining tower and optical ground station. Checks that `uv/detectors.js` uses both folders. `-Credits`. |
 | `Build-UVLifeTextures.ps1` | Writes the controller faces of UV's life (UV-A10): ark biosphere and neural culture vat, and the algae culture icon. Checks that `uv/life.js` uses all three. `-Credits`. |
+| `Build-UVWirelessTextures.ps1` | Writes the UV wireless tier (UV-A9): the UV SMES cell (`block/wireless/smes_cell_uv.png`, the table's uv row texture) and the UV covers' faces and items, with `Build-WirelessEnergyTextures.ps1`'s routines and palette (read from its syntax tree) in GTM's UV dark aqua. `-Credits`. |
 | `Build-ZPMNaquadriaTextures.ps1` | Writes the faces of the ZPM naquadria refinery and naquadah fuel works (ZPM-A2: `multiblock/naquadria_refinery/`, `multiblock/naquadah_fuel_works/`), 10 files. `-Credits` (their CREDITS rows). |
 | `Build-HTSMagnetWorksTextures.ps1` | Writes the LuV HTS magnet works' face (`multiblock/hts_magnet_works/`). `-Only magnet_works`, `-Preview <png outside the repo>` and `-Credits` (its 5 CREDITS rows). |
 | `Build-GanymedeTextures.ps1` | Writes the faces of the LuV gravitational wave detector and coilgun launcher (LuV-B9: `multiblock/gravitational_wave_detector/`, `multiblock/coilgun_launcher/`). `-Only detector,launcher`, `-Preview <png outside the repo>` (optional `-FrostCasing <png>`, `-TungstenCasing <png>`) and `-Credits` (their 10 CREDITS rows). |
@@ -855,7 +856,7 @@ powershell -NoProfile -ExecutionPolicy Bypass -File tools\assets\Build-ZPMFounda
 
 ### UV foundation (UV-F1)
 
-`Build-UVFoundationTextures.ps1`: same method and checks as the ZPM foundation, drawn from twelve shape routines with a palette per item. It writes the 34 shared UV items (`item/<id>.png`) and three blocks under `block/uv/` (`laser_module_block`, `srf_cryomodule_block`, `bnnt_fuel_tank_side`). The sixteen materials are GT materials (GTM colours them), so they need no PNG.
+`Build-UVFoundationTextures.ps1`: same method and checks as the ZPM foundation, drawn from twelve shape routines with a palette per item. It writes the 33 shared UV items (`item/<id>.png`) and three blocks under `block/uv/` (`laser_module_block`, `srf_cryomodule_block`, `bnnt_fuel_tank_side`). The sixteen materials are GT materials (GTM colours them), so they need no PNG.
 
 ```powershell
 powershell -NoProfile -ExecutionPolicy Bypass -File tools\assets\Build-UVFoundationTextures.ps1
@@ -1016,3 +1017,18 @@ powershell -NoProfile -ExecutionPolicy Bypass -File tools\assets\Build-UVLifeTex
 | `block/multiblock/ark_biosphere/overlay_front*.png` | A stepped glass dome over green water and an algae tube; active, the grow lamp glows, an oxygen bubble climbs the tube and the algae flicker. |
 | `block/multiblock/neural_culture_vat/overlay_front*.png` | A culture flask of pink medium with four dark neurons; active, they fire one after another in violet. |
 | `item/algae_culture.png` | A corked conical flask half full of bright green algae. |
+
+## UV wireless tier (UV-A9)
+
+Procedural, drawn by `Build-UVWirelessTextures.ps1` with the routines and palette of `Build-WirelessEnergyTextures.ps1` (loaded from its syntax tree; nothing else of it runs); nothing is copied from another mod. GTM's UV colour (dark aqua). `Build-WirelessEnergyTextures.ps1` itself stops at a table tier without a colour in its `$TierColour`: add `uv` there before re-running it.
+
+```powershell
+powershell -NoProfile -ExecutionPolicy Bypass -File tools\assets\Build-UVWirelessTextures.ps1
+powershell -NoProfile -ExecutionPolicy Bypass -File tools\assets\Build-UVWirelessTextures.ps1 -Credits
+```
+
+| File (under `textures/`) | Notes |
+|---|---|
+| `block/wireless/smes_cell_uv.png` | The UV cell: a superconducting coil in a frost-grey cryostat, its tape turns dark aqua in the window. |
+| `block/cover/wireless_<energy\|dynamo>_cover_uv.png` | The covers on a machine's face: a dark aqua frame round the dish or the mast. |
+| `item/wireless/<energy\|dynamo>_cover_uv.png` | The cover items: a steel plate with the frame and the symbol. |

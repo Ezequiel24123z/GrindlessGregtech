@@ -173,7 +173,7 @@
     if (!cell || Number(cell.tier) !== 7 || Number(cell.capacity) !== WANT_CAPACITY || String(cell.madeBy) !== MACHINE_ID) {
       problems.push('W.cells[' + CELL_ID + '] is ' + JSON.stringify(cell || null))
     }
-    if (Number(w.tiers[w.tiers.length - 1]) !== 7) problems.push('the last wireless tier is ' + w.tiers[w.tiers.length - 1])
+    if (!w.tiers.some(function (t) { return Number(t) === 7 })) problems.push('no ZPM wireless tier in ' + w.tiers.join(','))
     if (w.recipes.some(function (r) { return String(r.output) === CELL_ID })) problems.push('the ZPM cell has an assembler recipe')
     check('registration_items', problems.length === 0, problems.join(' ; ') || 'cell, insert, casing, covers and hatches exist; the ZPM row: tier 7, ' + WANT_CAPACITY + ' EU, made by ' + MACHINE_ID)
 
