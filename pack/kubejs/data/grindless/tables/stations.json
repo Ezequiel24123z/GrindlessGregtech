@@ -13,7 +13,9 @@
     { "slot": "saturn", "orbit": "grindless:saturn_orbit", "era": "zpm" },
     { "slot": "uranus", "orbit": "grindless:uranus_orbit", "era": "zpm" },
     { "slot": "neptune", "orbit": "grindless:neptune_orbit", "era": "uv" },
-    { "slot": "pluto", "orbit": "grindless:pluto_orbit", "era": "uv" }
+    { "slot": "pluto", "orbit": "grindless:pluto_orbit", "era": "uv" },
+    { "slot": "mercury", "orbit": "gcyr:mercury_orbit", "era": "uhv" },
+    { "slot": "proxima", "orbit": "grindless:proxima_b_orbit", "era": "uhv" }
   ],
   "plot": 512,
   "pieces": ["gcyr:space_station_packager", "gcyr:space_station_package", "gcyr:id_chip", "gcyr:keycard"]
