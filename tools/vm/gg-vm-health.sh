@@ -36,7 +36,13 @@ if [ "$ma" -lt $((5 * 1048576)) ]; then s=WARN; else s=OK; fi
 say memory "$s" "$(gib "$ma") GiB available of $(gib "$mt") GiB"
 if [ "$st" -gt 0 ]; then say swap OK "$(gib "$st") GiB, $(gib $((st - sf))) GiB used, swappiness $(cat /proc/sys/vm/swappiness)"; else say swap WARN "no swap"; fi
 if grep -qw memory /sys/fs/cgroup/cgroup.controllers 2>/dev/null; then say cgroup OK "cgroup v2 with the memory controller"; else say cgroup WARN "no cgroup v2 memory controller: runs are not memory-contained"; fi
-if systemctl --user show-environment >/dev/null 2>&1; then say user-systemd OK "user manager reachable (memory scope available)"; else say user-systemd WARN "no user systemd manager: runs start without a memory scope"; fi
+# the bench owner's user manager hosts each run's memory scope; linger keeps it up without a login (and after reboot)
+bu=$(stat -c %U "$BASE" 2>/dev/null || id -un); bid=$(id -u "$bu" 2>/dev/null || id -u)
+if [ "$(id -un)" = "$bu" ]; then uctl() { XDG_RUNTIME_DIR="/run/user/$bid" systemctl --user "$@"; }
+else uctl() { sudo -n -u "$bu" XDG_RUNTIME_DIR="/run/user/$bid" systemctl --user "$@"; }; fi
+linger=$(loginctl show-user "$bu" -p Linger --value 2>/dev/null)
+if uctl show-environment >/dev/null 2>&1; then say user-systemd OK "$bu's user manager reachable (memory scope available), linger=${linger:-unknown}"
+else say user-systemd WARN "no user systemd manager for $bu (linger=${linger:-unknown}): runs start without a memory scope"; fi
 
 # --- disk and directories
 if [ -d "$ROOT" ]; then

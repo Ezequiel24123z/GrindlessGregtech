@@ -45,7 +45,9 @@ if [ "${GG_NO_SCOPE:-0}" != 1 ] && command -v systemd-run >/dev/null 2>&1 \
     rc=$?
     if [ "$rc" -ne 0 ]; then
         sleep 1
-        if journalctl --user -u "$unit.scope" --since "$since" -o cat 2>/dev/null | grep -qi 'oom'; then
+        # only systemd's own unit messages: pwsh script-block logging also lands in this unit's journal
+        if journalctl --user -u "$unit.scope" --since "$since" -o cat 2>/dev/null \
+            | grep -qE "^$unit\.scope: (A process of this unit has been killed by the OOM killer|Failed with result 'oom-kill')"; then
             echo "GGOOM|$run|scope $unit was OOM-killed at MemoryMax=$max (exit $rc)"
         fi
     fi
