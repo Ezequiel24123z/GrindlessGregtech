@@ -86,7 +86,7 @@
     }
     var added = []
     CH.recipes.forEach(function (r, i) {
-      var b = event.recipes.gtceu.laser_fusion('grindless:laser_fusion/' + r.name)
+      var b = event.recipes.gtceu.laser_fusion('grindless:' + r.name)
       b.itemInputs('1x ' + r.capsule)
       b.circuit(i + 1)
       b.chancedInput('1x ' + MODULE, CH.wearChance, 0)
@@ -121,7 +121,7 @@
       console.error(LOG + 'decaborane recipe skipped, unknown id(s): ' + missing.join(', '))
       return []
     }
-    var b = event.recipes.gtceu.chemical_reactor('grindless:chemical_reactor/' + d.name)
+    var b = event.recipes.gtceu.chemical_reactor('grindless:' + d.name)
     b.circuit(d.circuit)
     d.fluidsIn.forEach(function (f) { b.inputFluids(Fluid.of(f.id, f.amount)) })
     d.fluidsOut.forEach(function (f) { b.outputFluids(Fluid.of(f.id, f.amount)) })
