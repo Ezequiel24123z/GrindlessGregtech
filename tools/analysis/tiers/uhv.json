@@ -12,6 +12,19 @@
       "needs": [
         "minecraft:tnt"
       ]
+    },
+    "dimension": {
+      "asKeysFor": [
+        "gcyr:luna",
+        "gcyr:mars",
+        "gcyr:venus",
+        "gcyr:mercury",
+        "minecraft:the_end",
+        "minecraft:the_nether",
+        "${orbits}",
+        "${places}"
+      ],
+      "note": "LuV's list plus the Nether: GTM's nether air collector only runs there, and UHV is the first era that needs its neon (positron cartridge, antihydrogen, the gate's open run), so a recipe valid there needs the nether-trip's key (UHV escalation, 2026-10-28)."
     }
   },
   "eraOrder": [
@@ -1705,6 +1718,34 @@
       "note": "Before the jump (uhv.md, the wireless tier): two UV hatches give UHV voltage (GTM 7.5.3's two-hatch rule), so the UHV recipes run on the UV grid until the UHV cells."
     },
     {
+      "id": "gtceu:universal_assembly_factory@uhv2",
+      "machine": "gtceu:universal_assembly_factory",
+      "types": [
+        "gtceu:assembler",
+        "gtceu:circuit_assembler"
+      ],
+      "energy": {
+        "voltage": 524288,
+        "hatches": 2
+      },
+      "needs": [
+        "eu:uv"
+      ],
+      "partsFromStructure": true,
+      "partAbilities": {
+        "energy_input": [
+          "gtceu:uv_energy_input_hatch",
+          "gtceu:uv_energy_input_hatch_4a",
+          "gtceu:uv_energy_input_hatch_16a",
+          "gtceu:uv_wireless_energy_hatch",
+          "gtceu:uv_wireless_energy_hatch_4a",
+          "gtceu:uv_wireless_energy_hatch_16a",
+          "gtceu:uv_wireless_energy_hatch_64a"
+        ]
+      },
+      "note": "Two UV hatches give UHV voltage (GTM 7.5.3's two-hatch rule; HATCH_VOLTAGE_LOCKED only holds back the NPU): the UHV assembler recipes, e.g. the 64 A UHV wireless hatch (1,966,080 EU/t). GTM 7.5.3 has no UHV single-block assembler (UHV escalation, 2026-10-28)."
+    },
+    {
       "machine": "gtceu:sample_receiving_facility",
       "types": [
         "gtceu:sample_receiving"
@@ -2211,6 +2252,31 @@
         "dim:${orbit:proxima_b}"
       ],
       "note": "The level 8 rocket (A8, B1): the ICAN motor (GCYR motor tier 6) and the tier 11 BNNT tank; reaches Proxima b and its orbit (the eighth station)."
+    },
+    {
+      "id": "nether-trip",
+      "capital": [
+        "minecraft:obsidian",
+        "minecraft:flint_and_steel"
+      ],
+      "produces": [
+        "dim:minecraft:the_nether"
+      ],
+      "note": "The Nether (a portal from the start; LV's era report already lists its veins as a hand trip): GTM's nether air collector runs there, and the factory's vacuum freezer and distillation tower make its neon (UHV escalation, 2026-10-28)."
+    },
+    {
+      "id": "ae2-condenser",
+      "capital": [
+        "ae2:condenser",
+        "ae2:cell_component_256k"
+      ],
+      "consumes": [
+        "minecraft:cobblestone"
+      ],
+      "produces": [
+        "ae2:singularity"
+      ],
+      "note": "AE2's matter condenser with a 256k storage component makes a singularity from 256,000 voided items (CondenserOutput.SINGULARITY): a machine mode, not a recipe, so the dump has none (UHV escalation, 2026-10-28)."
     }
   ],
   "targets": [
@@ -2862,36 +2928,6 @@
       ],
       "optional": true,
       "note": "UEV starts with the gate's output; UHV may not need it."
-    },
-    {
-      "id": "luv-europa",
-      "era": "luv-europa",
-      "label": "Europa and living circuits: its machines formed, the seed, the sample, brine, bacteria, and the life chain downstream (stem cells, seeds, the factor, the organoid, the NPU, wetware)",
-      "items": [
-        "m:gtceu:cryobot",
-        "m:gtceu:algae_bioreactor",
-        "grindless:europan_quantum_seed",
-        "grindless:europan_ocean_sample",
-        "fluid:gtceu:europan_brine",
-        "fluid:gtceu:bacteria",
-        "gtceu:stem_cells",
-        "grindless:engineered_barley_seed",
-        "grindless:engineered_tobacco_seed",
-        "grindless:neurotrophic_factor",
-        "grindless:neural_organoid",
-        "gtceu:neuro_processing_unit",
-        "gtceu:wetware_processor"
-      ],
-      "package": [
-        "B1",
-        "B5",
-        "B8"
-      ],
-      "inputsOf": [
-        "grindless:vein_drilling/luv/cryobot_*",
-        "grindless:bioreactor/luv/*"
-      ],
-      "note": "LuV's group with the bioreactor rows narrowed to LuV's: grindless:bioreactor/uhv/far_red_algae (Proxima life) is UHV content."
     },
     {
       "id": "luv-europa",
