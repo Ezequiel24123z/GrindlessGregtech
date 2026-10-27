@@ -315,8 +315,12 @@ test('our info pages live where EMI reads them (the emi namespace) and every pag
   assert.deepEqual(emi.problems, []);
   assert.ok(emi.pages.length >= 10);
   for (const p of emi.pages) assert.match(p.file, /^recipe\/additions\/grindless\/[a-z_]+\.json$/);
-  const used = new Set(fixtureExpectations(packRun.res).pages);
-  for (const p of emi.pages) assert.ok(used.has(p.id), p.file + ' covers no audited stack');
+  const exp = fixtureExpectations(packRun.res);
+  const used = new Set(exp.pages);
+  // a page for a stack disabled until its era is used once that era's package lands
+  const pending = new Set(exp.hidden);
+  const waits = (p) => (p.stacks || []).some((s) => s.id && pending.has((s.kind === 'fluid' ? 'fluid:' : '') + s.id));
+  for (const p of emi.pages) assert.ok(used.has(p.id) || waits(p), p.file + ' covers no audited stack');
 });
 
 test('the native fixture\'s expectations are current (node tools/analysis/emi-coverage.mjs --expect)', () => {
