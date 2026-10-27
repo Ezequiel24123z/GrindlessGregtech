@@ -1,0 +1,48 @@
+{
+  "_note": "UV-S0 test table (S0-4), never shipped: the shape of tables/fusion_mk2.json for the Mk3, loaded by gg_test_uv_s0_fusion.js, a copy of the ZPM audit.",
+  "mk3": { "machine": "gtceu:uv_fusion_reactor", "maxEUt": 524288, "maxStart": 640000000, "energyHatches": 16, "startPerHatch": 40000000 },
+  "recipes": [
+    { "id": "gtceu:fusion_reactor/americium_and_naquadria_to_neutronium_plasma", "eut": 98304, "start": 600000000, "fate": "keep", "why": "s0" },
+    { "id": "gtceu:fusion_reactor/arsenic_and_ruthenium_to_darmstadtium_plasma", "eut": 30720, "start": 200000000, "fate": "keep", "why": "s0" },
+    { "id": "gtceu:fusion_reactor/beryllium_and_deuterium_to_nitrogen_plasma", "eut": 16384, "start": 280000000, "fate": "keep", "why": "s0" },
+    { "id": "gtceu:fusion_reactor/calcium_plasma", "eut": 7680, "start": 120000000, "fate": "keep", "why": "s0" },
+    { "id": "gtceu:fusion_reactor/californium", "eut": 122880, "start": 120000000, "fate": "keep", "why": "s0" },
+    { "id": "gtceu:fusion_reactor/carbon_and_helium_3_to_oxygen_plasma", "eut": 4096, "start": 180000000, "fate": "keep", "why": "s0" },
+    { "id": "gtceu:fusion_reactor/carbon_and_magnesium_to_argon_plasma", "eut": 24576, "start": 180000000, "fate": "keep", "why": "s0" },
+    { "id": "gtceu:fusion_reactor/deuterium_and_tritium_to_helium_plasma", "eut": 4096, "start": 40000000, "fate": "keep", "why": "s0" },
+    { "id": "gtceu:fusion_reactor/enriched_naquadah_and_radon_to_naquadria_plasma", "eut": 49152, "start": 400000000, "fate": "keep", "why": "s0" },
+    { "id": "gtceu:fusion_reactor/gallium_and_radon_to_duranium_plasma", "eut": 16384, "start": 200000000, "fate": "keep", "why": "s0" },
+    { "id": "gtceu:fusion_reactor/gold_and_mercury_to_radon_plasma", "eut": 30720, "start": 200000000, "fate": "keep", "why": "s0" },
+    { "id": "gtceu:fusion_reactor/hydrogen_and_vanadium_to_chromium_plasma", "eut": 24576, "start": 140000000, "fate": "keep", "why": "s0" },
+    { "id": "gtceu:fusion_reactor/krypton_and_cerium_to_plutonium_241_plasma", "eut": 49152, "start": 240000000, "fate": "keep", "why": "s0" },
+    { "id": "gtceu:fusion_reactor/lantanum_and_silicon_to_lutetium_plasma", "eut": 7680, "start": 80000000, "fate": "keep", "why": "s0" },
+    { "id": "gtceu:fusion_reactor/lutenium_and_chromium_to_americium_plasma", "eut": 49152, "start": 200000000, "fate": "keep", "why": "s0" },
+    { "id": "gtceu:fusion_reactor/naquadah_based_liquid_fuel_excited", "eut": 26000, "start": 320000000, "fate": "keep", "why": "s0" },
+    { "id": "gtceu:fusion_reactor/neodymium_and_hydrogen_to_europium_plasma", "eut": 24576, "start": 150000000, "fate": "keep", "why": "s0" },
+    { "id": "gtceu:fusion_reactor/oganesson", "eut": 122880, "start": 600000000, "fate": "keep", "why": "s0" },
+    { "id": "gtceu:fusion_reactor/plutonium_241_and_hydrogen_gas_to_americium_plasma", "eut": 98304, "start": 500000000, "fate": "keep", "why": "s0" },
+    { "id": "gtceu:fusion_reactor/plutonium_based_liquid_fuel_excited", "eut": 30720, "start": 220000000, "fate": "keep", "why": "s0" },
+    { "id": "gtceu:fusion_reactor/potassium_and_fluorine_to_nickel_plasma", "eut": 30720, "start": 480000000, "fate": "keep", "why": "s0" },
+    { "id": "gtceu:fusion_reactor/silicon_and_magnesium_to_iron_plasma", "eut": 7680, "start": 360000000, "fate": "keep", "why": "s0" },
+    { "id": "gtceu:fusion_reactor/silver_and_helium_3_to_tin_plasma", "eut": 49152, "start": 280000000, "fate": "keep", "why": "s0" },
+    { "id": "gtceu:fusion_reactor/silver_and_lithium_to_indium_plasma", "eut": 24576, "start": 280000000, "fate": "keep", "why": "s0" },
+    { "id": "gtceu:fusion_reactor/sulfur_plasma", "eut": 10240, "start": 240000000, "fate": "keep", "why": "s0" },
+    { "id": "gtceu:fusion_reactor/titanium_and_duranium_to_tritanium_plasma", "eut": 30720, "start": 200000000, "fate": "keep", "why": "s0" },
+    { "id": "gtceu:fusion_reactor/titanium_plasma", "eut": 49152, "start": 100000000, "fate": "keep", "why": "s0" },
+    { "id": "gtceu:fusion_reactor/uranium_based_liquid_fuel_excited", "eut": 7680, "start": 200000000, "fate": "keep", "why": "s0" },
+    { "id": "gtceu:fusion_reactor/xenon_and_zinc_to_plutonium_239_plasma", "eut": 49152, "start": 120000000, "fate": "keep", "why": "s0" },
+    { "id": "gtceu:fusion_reactor/zinc_plasma", "eut": 49152, "start": 180000000, "fate": "keep", "why": "s0" }
+  ],
+  "ours": [
+    {
+      "id": "grindless:fusion_reactor/s0_mk3_d_he3",
+      "builderId": "grindless:s0_mk3_d_he3",
+      "eut": 65536,
+      "duration": 32,
+      "start": 640000000,
+      "inputs": [{ "fluid": "gtceu:argon", "amount": 125 }, { "fluid": "gtceu:helium_3", "amount": 125 }],
+      "output": { "id": "gtceu:helium_plasma", "amount": 125 },
+      "why": "S0-4: a 640 M start, above the Mk2's 320 M and equal to the Mk3's 16 x 40 M."
+    }
+  ]
+}

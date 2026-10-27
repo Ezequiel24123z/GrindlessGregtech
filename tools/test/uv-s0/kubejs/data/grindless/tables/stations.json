@@ -1,0 +1,14 @@
+{
+  "_source": "UV-S0 test table (merged over the pack at run time, never shipped): the pack's stations table plus a fifth and a sixth `more` row.",
+  "enabled": true,
+  "first": "gcyr:overworld_orbit",
+  "second": "grindless:io_orbit",
+  "more": [
+    { "slot": "saturn", "orbit": "grindless:saturn_orbit", "era": "zpm" },
+    { "slot": "uranus", "orbit": "grindless:uranus_orbit", "era": "zpm" },
+    { "slot": "neptune", "orbit": "grindless:s0_neptune_orbit", "era": "uv" },
+    { "slot": "pluto", "orbit": "grindless:s0_pluto_orbit", "era": "uv" }
+  ],
+  "plot": 512,
+  "pieces": ["gcyr:space_station_packager", "gcyr:space_station_package", "gcyr:id_chip", "gcyr:keycard"]
+}
