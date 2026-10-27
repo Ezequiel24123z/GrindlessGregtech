@@ -219,8 +219,8 @@ export const QUESTS = [
   ], [it('gtceu:uhv_wireless_energy_hatch')], 200),
 
   // ------------------------------------------------------------------ exit
-  P('GATE', 'Gate to UEV', 'gtceu:uev_machine_hull', ['BASE'], 22, 4, [
+  P('GATE', 'Gate to UEV', 'gtceu:uev_machine_casing', ['BASE'], 22, 4, [
     'The &6Stellar Neighbourhood Chart&r is the research for the UEV machine casing, and the hull comes with it. Keep the gate and the swarm running.',
-  ], [it('gtceu:uev_machine_hull'), it('grindless:stellar_neighbourhood_chart'), it('grindless:coronal_field_map')], 300,
+  ], [it('gtceu:uev_machine_casing'), it('grindless:stellar_neighbourhood_chart'), it('grindless:coronal_field_map')], 300,
   { shape: 'diamond', size: 1.75 }),
 ];
