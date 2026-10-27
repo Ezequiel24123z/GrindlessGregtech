@@ -845,6 +845,26 @@ file = "kubejs/assets/grindless/textures/block/multiblock/atmosphere_processor/o
 hash = "af915735740bd046c85e66fc03c47bb31517ef64f1721726151ea5de8cf121e3"
 
 [[files]]
+file = "kubejs/assets/grindless/textures/block/multiblock/baseline_astrometer/overlay_front.png"
+hash = "f5144af81d9ca4c8419725fbcf70d45773f750ab07375f8f469d32316fec21a7"
+
+[[files]]
+file = "kubejs/assets/grindless/textures/block/multiblock/baseline_astrometer/overlay_front_active.png"
+hash = "21e9a44b59da08c76f7c8d75d1f8471a97a03f854c3509e011cc7fdb45ed5150"
+
+[[files]]
+file = "kubejs/assets/grindless/textures/block/multiblock/baseline_astrometer/overlay_front_active.png.mcmeta"
+hash = "491ea51d46bc1f0c0ff11ed9293461cc67de293c7672abbc45f67563f8fe1f1a"
+
+[[files]]
+file = "kubejs/assets/grindless/textures/block/multiblock/baseline_astrometer/overlay_front_active_emissive.png"
+hash = "fcc1fbb6f1107042b875e50d9bb6ff4ebdece6726561c5c815c99c04fb391c1e"
+
+[[files]]
+file = "kubejs/assets/grindless/textures/block/multiblock/baseline_astrometer/overlay_front_active_emissive.png.mcmeta"
+hash = "491ea51d46bc1f0c0ff11ed9293461cc67de293c7672abbc45f67563f8fe1f1a"
+
+[[files]]
 file = "kubejs/assets/grindless/textures/block/multiblock/betavoltaic_fab/overlay_front.png"
 hash = "0fded865d15ba9721413b04e748020e245526aecc065c5d82192bf2618872f79"
 
@@ -3341,6 +3361,26 @@ file = "kubejs/assets/grindless/textures/block/multiblock/wake_shield_facility/o
 hash = "06936dcf67ca6017137ad4304a8c6494e9ad5bed6f9d37fa5d7c69b690aeb7f3"
 
 [[files]]
+file = "kubejs/assets/grindless/textures/block/multiblock/warp_gate/overlay_front.png"
+hash = "203a3d115a34e1f1e1c93aacdfdf211879e4fac5a3b68f5e495a1d0888f8c704"
+
+[[files]]
+file = "kubejs/assets/grindless/textures/block/multiblock/warp_gate/overlay_front_active.png"
+hash = "4c8bbca346d553714d95fd7c82af2b7a0773cd512de33a4da0e339605193c89e"
+
+[[files]]
+file = "kubejs/assets/grindless/textures/block/multiblock/warp_gate/overlay_front_active.png.mcmeta"
+hash = "491ea51d46bc1f0c0ff11ed9293461cc67de293c7672abbc45f67563f8fe1f1a"
+
+[[files]]
+file = "kubejs/assets/grindless/textures/block/multiblock/warp_gate/overlay_front_active_emissive.png"
+hash = "0503509cf68c43ebab29d7fc0a64bc8ffd18a6ce3d5b5221e813ebc3f4105e2e"
+
+[[files]]
+file = "kubejs/assets/grindless/textures/block/multiblock/warp_gate/overlay_front_active_emissive.png.mcmeta"
+hash = "491ea51d46bc1f0c0ff11ed9293461cc67de293c7672abbc45f67563f8fe1f1a"
+
+[[files]]
 file = "kubejs/assets/grindless/textures/block/multiblock/weather_controller/overlay_front.png"
 hash = "378138160e64b875546aef61bfdd1687ec949d890df523fe3b9dfd308b8e1cfc"
 
@@ -5333,6 +5373,10 @@ file = "kubejs/client_scripts/grindless/uhv_foundation_lang.js"
 hash = "b5c93ce4fb97de3f256c8153ec14afef07bc8b3738f36f4a498d25c5f9939d37"
 
 [[files]]
+file = "kubejs/client_scripts/grindless/uhv_gate_lang.js"
+hash = "3ba16b5df337a20cc75179002f0ef7aad47f362cc3e1da70ffb24d35bc2ded33"
+
+[[files]]
 file = "kubejs/client_scripts/grindless/uhv_mercury_lang.js"
 hash = "ff82d4b1ad3e53d2378f0b0bebe74ae58ace4485a8fb35e859cea7832d644152"
 
@@ -5723,6 +5767,10 @@ hash = "f042cb6b0b65def9af3824e4dee67cd85eaca2750e9d8f01d8f116b01bd5e9c6"
 [[files]]
 file = "kubejs/data/grindless/tables/fusion_mk3.json"
 hash = "8cfa6a7ccfe0b878109d9ede4caa08fdacbba32a8765e686a50f7274060abbfa"
+
+[[files]]
+file = "kubejs/data/grindless/tables/gate.json"
+hash = "9ac6730405129fc9c99b69b3476d6546381e6e7a187ac9534c8d9bcc4ffd5d91"
 
 [[files]]
 file = "kubejs/data/grindless/tables/heavy_water_plant.json"
@@ -6429,6 +6477,10 @@ file = "kubejs/server_scripts/grindless/uhv/elevator.js"
 hash = "24f04cd9b93c13e3cd2a18b5b296bd8b6fc1d3f54ab80fcd7620c3d0e9daaf14"
 
 [[files]]
+file = "kubejs/server_scripts/grindless/uhv/gate.js"
+hash = "9cc73a024ad8e4edd78451ab0563b7870e55b835dcb4a438d9daf8a821fd9198"
+
+[[files]]
 file = "kubejs/server_scripts/grindless/uhv/mercury.js"
 hash = "e231db1ae2b6c10af365ef4f74048f8a2c3ab34cce6ed05bac71f9de98408a26"
 
@@ -6951,6 +7003,10 @@ hash = "45feb9dff34c58f8b83fd101dff09a4022d2e203b1b32dcf054cf2c489812353"
 [[files]]
 file = "kubejs/startup_scripts/grindless/uhv/foundation.js"
 hash = "4db4113f52fc898d67b577b3606ecaf2d011437f5e421f1f1183ac1dcc12362f"
+
+[[files]]
+file = "kubejs/startup_scripts/grindless/uhv/gate.js"
+hash = "13c70fad83a352fa0a536451d2dd1ec63d7604d530d177580fed6d5accf89e6b"
 
 [[files]]
 file = "kubejs/startup_scripts/grindless/uhv/mercury.js"
