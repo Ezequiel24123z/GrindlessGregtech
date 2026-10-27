@@ -16,6 +16,11 @@
 //                                                                                                               491,520 x 400 t
 //     3 thruster_pod    1 gridded ion thruster (cruise) + 1 Hall thruster (thrust) + 1 UV circuit (the power processing unit) +
 //                       1 propellant tank -> 1 thruster pod                                                    491,520 x 600 t
+//     4 ican_rocket_motor  (UHV-A8) 1 ICAN pellet + 1 UHTC nozzle (the spark plasma sinterer) + 2 SiC power modules (the pellet's
+//                       ignition pulse) + 1 GEO-assembled stage (the space elevator's GEO lift: the heavy stage the motor is mounted
+//                       on) -> 1 ICAN rocket motor (GCYR motor tier 6: with the BNNT tank, level 8)          1,966,080 x 800 t
+//     5 oganesson_propellant_pod  (UHV-A8) 1 propellant tank + 1,000 mB oganesson propellant (line 30) -> 1 oganesson propellant pod
+//                       (the swarm control station's fuel, UHV-B3)                                              491,520 x 200 t
 //   side steps (no new machine)
 //     molybdenum grid   laser engraver: 4 molybdenum foil, sapphire lens kept -> 1 grid (the laser-drilled aperture pattern)
 //     LaB6 cathode      electric blast furnace (2,500 K): 1 lanthanum dust (EV's extraction cascade) + 6 boron dust + 1,000 mB argon
@@ -43,6 +48,7 @@
   var VA_UV = 491520
   var VA_LUV = 30720
   var VA_IV = 7680
+  var VA_UHV = 1966080
   var TANK = ids.bnntFuelTank || UV.bnntFuelTank || 'grindless:bnnt_fuel_tank'
   var HBN = UV.hbnDust || 'grindless:hbn_dust'
   var YARN = UV.bnntYarn || 'grindless:bnnt_yarn'
@@ -62,6 +68,14 @@
   var EPOXY = 'gtceu:epoxy'
   var XENON = 'gtceu:xenon'
   var KRYPTON = 'gtceu:krypton'
+  // UHV-A8's rows: ids of F1 (startup_scripts/grindless/uhv/foundation.js), A5, A7 and A8 (startup_scripts/grindless/uhv/propulsion.js)
+  var ICAN_PELLET = 'grindless:ican_pellet'
+  var UHTC_NOZZLE = 'grindless:uhtc_nozzle'
+  var SIC_MODULE = 'grindless:sic_power_module'
+  var GEO_STAGE = 'grindless:geo_assembled_stage'
+  var ICAN_MOTOR = 'grindless:ican_rocket_motor'
+  var OG_PROPELLANT = 'gtceu:oganesson_propellant'
+  var OG_POD = 'grindless:oganesson_propellant_pod'
 
   function item(id, count) { return { id: id, count: count } }
   function fluid(id, amount) { return { id: id, amount: amount } }
@@ -82,7 +96,11 @@
     row('hall_thruster', 'thruster_assembly', 2, [item(CHANNEL, 1), item(MAGNET, 4), item(CATHODE, 1)], [fluid(KRYPTON, 4000)],
       [item(HALL, 1)], [fluid(KRYPTON, 3600)], VA_UV, 400),
     row('thruster_pod', 'thruster_assembly', 3, [item(ION, 1), item(HALL, 1), item(PPU, 1), item(PROPELLANT_TANK, 1)], [],
-      [item(POD, 1)], [], VA_UV, 600)
+      [item(POD, 1)], [], VA_UV, 600),
+    row('ican_rocket_motor', 'thruster_assembly', 4, [item(ICAN_PELLET, 1), item(UHTC_NOZZLE, 1), item(SIC_MODULE, 2), item(GEO_STAGE, 1)],
+      [], [item(ICAN_MOTOR, 1)], [], VA_UHV, 800),
+    row('oganesson_propellant_pod', 'thruster_assembly', 5, [item(PROPELLANT_TANK, 1)], [fluid(OG_PROPELLANT, 1000)], [item(OG_POD, 1)], [],
+      VA_UV, 200)
   ]
 
   var SIDE = [
