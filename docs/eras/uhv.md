@@ -1358,9 +1358,9 @@ The `tools/assets/README.md` and `zones.json` rows are appended by parallel pack
 - the UEV casing's research (B7) lands with the astrometer that makes the chart.
 
 ## Decisions proposed (architect; for the orchestrator)
-
+## Decisions (accepted by the orchestrator, 2026-10-27; recorded in `DECISIONS.md`)
 The design above follows these. None is in `DECISIONS.md` yet; the orchestrator accepts, changes or rejects each. Each line is in the `DECISIONS.md` form.
-
+All eleven were accepted as proposed, with the architect's recommended answers to the open questions (high-tier content off, no Mk4 until UEV, our Dyson swarm, gate = AE2 seed + player transit, GTCA elevator with our recipes, landing on Proxima b, gtnn optical unhidden, ICAN motor as GCYR tier 5, 31 machines).
 1. `- 2026-10-27 · UHV size: 31 progression machines (~42 guided; growth went into lines), 32 new lines (avg 7.0 steps, none under 6), 40 crossings two or more eras back; no padding.`
 2. `- 2026-10-27 · UHV route: level 8 = GCYR motor tier 5 (our ICAN motor) + UV's tier 11 tank; Proxima b (tier 8) gains an orbit dimension grindless:proxima_b_orbit by override; stations 7 (Mercury orbit) and 8 (Proxima b orbit).`
 3. `- 2026-10-27 · UHV highTierContent stays off; GTM's UEV casing (registered without recipe) is the gate's research item; UEV hulls and hatches are UEV's first decision.`
