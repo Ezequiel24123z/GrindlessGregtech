@@ -36,7 +36,8 @@
       { "id": "mercury-ground", "mode": "manual", "items": ["gcyr:mercury_rock", "gcyr:mercury_cobblestone"], "note": "Mercury's ground (gcyr:mercury, by hand with the tier 3 rocket in IV since v0.7.0): the Mercury drill's stone, which any macerator makes Hermean regolith." },
       { "id": "coal-pile", "mode": "auto", "via": ["gtceu:charcoal_pile_igniter"], "items": ["gtceu:brittle_charcoal"], "note": "GTM's charcoal pile igniter burns logs in the world and leaves brittle charcoal: it isn't a recipe." },
       { "id": "station-packager", "mode": "auto", "via": ["gcyr:space_station_packager"], "items": ["gcyr:keycard"], "note": "GCYR's station packager puts a keycard out with every packed station (SpaceStationPackagerMachine): it isn't a recipe. Shown since S0-3 passed (tables/stations.json enabled)." },
-      { "id": "recipes-special", "mode": "manual", "items": ["gtceu:facade_cover"], "note": "The facade cover comes from a special recipe (gtceu:crafting_facade_cover) that the analysis doesn't read." }
+      { "id": "recipes-special", "mode": "manual", "items": ["gtceu:facade_cover"], "note": "The facade cover comes from a special recipe (gtceu:crafting_facade_cover) that the analysis doesn't read." },
+      { "id": "horizon-collector-quest", "mode": "manual", "items": ["gtceu:lv_horizon_collector", "grindless:horizon_shard"], "note": "STEAM-X1: the Horizon Collector and its shard are never crafted; the welcome quest The Horizon Collector gives them (EMI info page steam_horizon_collector.json)." }
     ],
 
     "ignoreOreBlocks": true,

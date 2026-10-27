@@ -98,7 +98,7 @@ hash = "7c7a7e88fa43ef15674fdf862f8c2bb96510fd76bfd6238ec9bf26a9a18d05f3"
 
 [[files]]
 file = "config/ftbquests/quests/chapters/welcome.snbt"
-hash = "e2b78cbd075a1c18a5acfce6dad5f481953ba6ada097de4fe1a934eb66fce97c"
+hash = "acddd22fb5e78f5e94e5b352ae102be719227529a64e4cdb28b814a4dd5ced68"
 
 [[files]]
 file = "config/ftbquests/quests/chapters/workshop.snbt"
@@ -233,12 +233,20 @@ file = "kubejs/assets/emi/recipe/additions/grindless/station_truss_casing.json"
 hash = "ea98fe4113e7c5790ac4c3196e9bce5a2d7822950d3af64ff81723113387d8a5"
 
 [[files]]
+file = "kubejs/assets/emi/recipe/additions/grindless/steam_horizon_collector.json"
+hash = "4e0f1457b5f2ba26293418ea769c36da44ea5bb0fdda0a35acb579411021f5b9"
+
+[[files]]
 file = "kubejs/assets/emi/recipe/additions/grindless/travel_keys.json"
 hash = "8d321702a4185fd914ce3a340dab477a324f3af6a504233e9216b6f189959691"
 
 [[files]]
 file = "kubejs/assets/emi/recipe/additions/grindless/uhv_antimatter_casimir_fiction.json"
 hash = "9acf58ef64317b69bafde2bc0a3f31158b3400663884963bd8d963a165e97191"
+
+[[files]]
+file = "kubejs/assets/emi/recipe/additions/grindless/uhv_travel_hermean_quantum_seed.json"
+hash = "2408d1e6914dc05c3b8327420bdacfd151daed336e8282e58555bca70a7b6307"
 
 [[files]]
 file = "kubejs/assets/emi/recipe/additions/grindless/uranian_quantum_seed.json"
@@ -311,6 +319,10 @@ hash = "1510c8eb91a57050e01ac522c15caf1ae05044377e58ddc18bab9c1759e19321"
 [[files]]
 file = "kubejs/assets/grindless/gcyr/planet_assets/sky_renderers/pluto_orbit.json"
 hash = "faf14a8213ca292ef68894f9c21fb6caacb414e8c7cc1dc691828ff5034303f9"
+
+[[files]]
+file = "kubejs/assets/grindless/gcyr/planet_assets/sky_renderers/proxima_b_orbit.json"
+hash = "d8383204098abc0e7a19aa37f8d3c1d8a11bdf86b44be6ab05f4f1aff090c2db"
 
 [[files]]
 file = "kubejs/assets/grindless/gcyr/planet_assets/sky_renderers/saturn_orbit.json"
@@ -578,6 +590,26 @@ hash = "f0507a2cdae6fcbf0aa6f4656be1d8de7f569f66528e677e4ca503579ef11f24"
 
 [[files]]
 file = "kubejs/assets/grindless/textures/block/machines/creature_simulator/overlay_front_active_emissive.png.mcmeta"
+hash = "af915735740bd046c85e66fc03c47bb31517ef64f1721726151ea5de8cf121e3"
+
+[[files]]
+file = "kubejs/assets/grindless/textures/block/machines/horizon_collector/overlay_front.png"
+hash = "b9726eea2b90ce3473a81a0b34cdb2c2e1177aaa90e8cf8f0136ecc8e159a9ea"
+
+[[files]]
+file = "kubejs/assets/grindless/textures/block/machines/horizon_collector/overlay_front_active.png"
+hash = "9ba5127bf8a69834d442b488e2924e89548d62d4c45044af37db5f11fdd3cec8"
+
+[[files]]
+file = "kubejs/assets/grindless/textures/block/machines/horizon_collector/overlay_front_active.png.mcmeta"
+hash = "af915735740bd046c85e66fc03c47bb31517ef64f1721726151ea5de8cf121e3"
+
+[[files]]
+file = "kubejs/assets/grindless/textures/block/machines/horizon_collector/overlay_front_active_emissive.png"
+hash = "7563df4277d180a8d23a276e67ba9434b1e8bf3563e709da038bbbf1b3d7dd63"
+
+[[files]]
+file = "kubejs/assets/grindless/textures/block/machines/horizon_collector/overlay_front_active_emissive.png.mcmeta"
 hash = "af915735740bd046c85e66fc03c47bb31517ef64f1721726151ea5de8cf121e3"
 
 [[files]]
@@ -3649,6 +3681,10 @@ file = "kubejs/assets/grindless/textures/item/hologram_projector.png.mcmeta"
 hash = "491ea51d46bc1f0c0ff11ed9293461cc67de293c7672abbc45f67563f8fe1f1a"
 
 [[files]]
+file = "kubejs/assets/grindless/textures/item/horizon_shard.png"
+hash = "29dd7e15e197d2adbbf1f035b72c4d582ed9b7fdd838a4eca17c0e72d17e749f"
+
+[[files]]
 file = "kubejs/assets/grindless/textures/item/hpge_crystal.png"
 hash = "1e7083a005dec671606eb9f966a6038243e759f65afe118e83e978c02b1b3e43"
 
@@ -4646,7 +4682,7 @@ hash = "597286ab53fe25d3ed999a8c75d31f5a52741a4ba3e132008120686679cf8ca3"
 
 [[files]]
 file = "kubejs/client_scripts/grindless/emi_info_lang.js"
-hash = "f874ef78dc23093532fce9fc2e5be4e0d4992a20d8ead7fdfecd9c4ea10234e8"
+hash = "d833b15cfffcad01b20cfe463cbb083badf81c066dfc554a39676fb92041ac51"
 
 [[files]]
 file = "kubejs/client_scripts/grindless/ev_ae2_interplanetary_lang.js"
@@ -4869,6 +4905,10 @@ file = "kubejs/client_scripts/grindless/steam_content_lang.js"
 hash = "8ec503c51da14d8c034d548cbcb724f7a2afc0330bcd72dadc194882ec6c7e7b"
 
 [[files]]
+file = "kubejs/client_scripts/grindless/steam_horizon_lang.js"
+hash = "859312e5e30cb665ff83d409f554bccddf8cfbaff0ef3faf267a5f267f3c56f6"
+
+[[files]]
 file = "kubejs/client_scripts/grindless/steam_large_family_lang.js"
 hash = "ce59ecc4b92b2facf4670af27444810fad706294eee0d9b3750a5c41311b7ee4"
 
@@ -4919,6 +4959,10 @@ hash = "2046021b89dfdad575dbcb913b23e4e5410ba9fbdb32b5ec1232d0267bf03401"
 [[files]]
 file = "kubejs/client_scripts/grindless/uhv_transcurium_lang.js"
 hash = "bc2ee9ac5abfa298f8ec96172c9205ed8e3f8b4fd8d47dd3f403f8155525fff4"
+
+[[files]]
+file = "kubejs/client_scripts/grindless/uhv_travel_lang.js"
+hash = "57070f9a66d163159aa903ef8a988bbf65740973bbed1d016d23a269fb414bd3"
 
 [[files]]
 file = "kubejs/client_scripts/grindless/uhv_wireless_lang.js"
@@ -5066,7 +5110,7 @@ hash = "1cb9eb28f91d7294d0a6174f7c31198205592268fcb67746d4b3fb3ea99b15e4"
 
 [[files]]
 file = "kubejs/data/gcyr/gcyr/planets/proxima_centauri_b.json"
-hash = "09ddf74e59e5d76a314416ab9b2681c58d0649f590d27a8fb28df54f8c55b359"
+hash = "c05003d64669b6dbf6265042150bd7a7de8a97539f0fe3643af93acf58d57f0f"
 
 [[files]]
 file = "kubejs/data/gcyr/gcyr/planets/venus.json"
@@ -5130,6 +5174,10 @@ hash = "a616d38296854ee437b299bad517415b425cab549d6ef72e46b44803ca5a1ce9"
 
 [[files]]
 file = "kubejs/data/grindless/dimension/pluto_orbit.json"
+hash = "a616d38296854ee437b299bad517415b425cab549d6ef72e46b44803ca5a1ce9"
+
+[[files]]
+file = "kubejs/data/grindless/dimension/proxima_b_orbit.json"
 hash = "a616d38296854ee437b299bad517415b425cab549d6ef72e46b44803ca5a1ce9"
 
 [[files]]
@@ -5281,6 +5329,10 @@ file = "kubejs/data/grindless/tables/hidden_until.json"
 hash = "f80949f9db95e16072dfc0ebebe52613547993077b7883b9e022745a8b8a521a"
 
 [[files]]
+file = "kubejs/data/grindless/tables/horizon_collector.json"
+hash = "d3a791f0e8140afaac313beaf30f2a1793b28e641d34bd23d23b253f06e7f94f"
+
+[[files]]
 file = "kubejs/data/grindless/tables/hot_cell.json"
 hash = "0fb6ab81558a7569d12b5ce53441465807beebd3313283cda11515131fa49e6f"
 
@@ -5314,7 +5366,7 @@ hash = "67a7297880c3f098cbc88440a691b8ebd9e356459cda7d0f270edeb653c5bdaa"
 
 [[files]]
 file = "kubejs/data/grindless/tables/orbits.json"
-hash = "c0f18393b10db81c86fdece9df1349c206adf2a438bc263ab999a82c7d2f2fb3"
+hash = "2bf2fe8c4d80499e728781b89e43e53aae4ee6e2971980989e9fc48a7336109f"
 
 [[files]]
 file = "kubejs/data/grindless/tables/photonics.json"
@@ -5322,11 +5374,11 @@ hash = "860450c7fae9f5e5ee34eeabbf7d6cec65233d4ad4138788492cff35525a6b08"
 
 [[files]]
 file = "kubejs/data/grindless/tables/places.json"
-hash = "d4844d236e46544198573f44b08033a94b3269cb2a7e793ef01cc768bd0740e5"
+hash = "7c22b24916041910473f536b9fadb32a6614debf4f4fa202977bf0defe50db9b"
 
 [[files]]
 file = "kubejs/data/grindless/tables/planets.json"
-hash = "4325c0e9db9bd46d0f0074a7818e6c7ece3082701c2b3f2bf59eea0f4f20c53b"
+hash = "371053348ddaf07798253b29b79d3d57cc2eaada4743f1d025a472362fbff50c"
 
 [[files]]
 file = "kubejs/data/grindless/tables/power_devices.json"
@@ -5338,7 +5390,7 @@ hash = "229e0fdba455888292da0eb59628876cca82add03fea653ed4d4fb105ed8ed46"
 
 [[files]]
 file = "kubejs/data/grindless/tables/stations.json"
-hash = "5d3154c48f4326ddc7b56497694af7c25012a6249c33112fddb1af4c69f2c238"
+hash = "0e98a64613fe6f31287298f9bbdc3716b9245d5bb8302f9806b3690b79bba600"
 
 [[files]]
 file = "kubejs/data/grindless/tables/steam_blast_furnace.json"
@@ -5346,7 +5398,7 @@ hash = "612abed0a7d196efbbcb7dd98cedf24f86eac618bf651b343e1a2e186befd607"
 
 [[files]]
 file = "kubejs/data/grindless/tables/sunlight.json"
-hash = "993080d5edde2763b57d1769af98bd24c706da0d76bb3fa03725ebf1caee5a32"
+hash = "be85a6810040e5105af5d4a26d538e59cfce85a2037e3223c683ce68bfc43d66"
 
 [[files]]
 file = "kubejs/data/grindless/tables/thorium.json"
@@ -5498,7 +5550,7 @@ hash = "40f72e44ac2e5b75d0ef30c60a307623f2f423899b56c3ce59a532eb28d3800e"
 
 [[files]]
 file = "kubejs/server_scripts/grindless/ev/lunar_power_and_antenna.js"
-hash = "c72a8dc670523ef59435e17a0ed227d12844c0f157cac60ee271b3457b072c01"
+hash = "9c97b2ee4358e696f841b221e6ee4f54e238b8bf739396e8dd2070982fbfc2bb"
 
 [[files]]
 file = "kubejs/server_scripts/grindless/ev/mars_site.js"
@@ -5929,6 +5981,10 @@ file = "kubejs/server_scripts/grindless/steam/hologram_projector.js"
 hash = "b4f7d4ba89b755aa3aa70e7f6df24144ed19a1495afdbe919588d222e7241e7b"
 
 [[files]]
+file = "kubejs/server_scripts/grindless/steam/horizon_collector.js"
+hash = "dda492001f7a9ad1b29caf2131397b2233569625349e25899fd4129d210c1468"
+
+[[files]]
 file = "kubejs/server_scripts/grindless/steam/large_family.js"
 hash = "9ce2c1310872a0ec93f5ecfbc08a3fc17b8763451efc4114b8d60380f3af05e8"
 
@@ -5971,6 +6027,10 @@ hash = "cb865d3cd0e2549fda6f67e79ae67ed6f0f3fd376a51df1459390a517c95a381"
 [[files]]
 file = "kubejs/server_scripts/grindless/uhv/transcurium.js"
 hash = "3e413dc3ff89df4f33c66cafd858ae16fef6c71d442d7e4a0bb6bf7c12a9d800"
+
+[[files]]
+file = "kubejs/server_scripts/grindless/uhv/travel.js"
+hash = "780932c854cb8873a90ffb4be9d49b6cf688ca07b1c0c54e0c8693b4b749d4fc"
 
 [[files]]
 file = "kubejs/server_scripts/grindless/uhv/zblan.js"
@@ -6413,6 +6473,10 @@ file = "kubejs/startup_scripts/grindless/steam/hologram_projector.js"
 hash = "366270173fb2f0324711ac3ca6a356c2b0d5d85a07067d3d799224906ebedc62"
 
 [[files]]
+file = "kubejs/startup_scripts/grindless/steam/horizon_collector.js"
+hash = "1e604505009325307f61b13d9d838fbe4c64add55cbbc3b475c83353a630aae1"
+
+[[files]]
 file = "kubejs/startup_scripts/grindless/steam/items.js"
 hash = "76ac3d8aab4e1140283478c33c677ac50e56a6253e1824a160f231de970ae709"
 
@@ -6467,6 +6531,10 @@ hash = "029761c194103190e4f3b0a357ce5a5d0f2710c9c0fcedf61d7c03056d19b648"
 [[files]]
 file = "kubejs/startup_scripts/grindless/uhv/transcurium.js"
 hash = "a7a3c99fe399a8fd242328cf6cff2ad5ff659b8900162b9bb99e90210217de36"
+
+[[files]]
+file = "kubejs/startup_scripts/grindless/uhv/travel.js"
+hash = "655186615d9b2cdf266cf8780a96f418d1fdb7166c4ab4ed35f6e7e749f4edc3"
 
 [[files]]
 file = "kubejs/startup_scripts/grindless/uhv/zblan.js"

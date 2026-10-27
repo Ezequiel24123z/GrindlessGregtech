@@ -1,0 +1,5 @@
+{
+  "type": "emi:info",
+  "stacks": ["item:gtceu:lv_horizon_collector", "item:grindless:horizon_shard"],
+  "text": ["emi.grindless.info.horizon_collector.0"]
+}
