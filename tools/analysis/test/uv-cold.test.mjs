@@ -110,13 +110,14 @@ test('the cryomodule needs He-II, niobium and the electropolish, and has one mak
   assert.ok(makers.length <= 1);
 });
 
-test('byproduct destinations: scrap back to the ingot, spent acid to niobium and fluorite, acid made from HF + sulfuric', () => {
+test('byproduct destinations: scrap back to niobium dust, spent acid to niobium and the two acids, acid made from HF + sulfuric', () => {
   const side = Object.fromEntries(C.side.map((r) => [r.name, r]));
   assert.deepEqual(side.niobium_scrap.itemsIn, [{ id: 'grindless:niobium_scrap', count: 1 }]);
-  assert.deepEqual(side.niobium_scrap.itemsOut, [{ id: 'gtceu:niobium_ingot', count: 1 }]);
+  assert.deepEqual(side.niobium_scrap.itemsOut, [{ id: 'gtceu:niobium_dust', count: 1 }]);
   assert.deepEqual(side.spent_acid_niobium.fluidsIn, [{ id: 'gtceu:spent_electropolish_acid', amount: 1000 }]);
   assert.equal(side.spent_acid_niobium.itemsOut[0].id, 'gtceu:niobium_dust');
-  assert.equal(side.spent_acid_fluorite.itemsOut[0].id, 'gtceu:fluorite_dust');
+  assert.deepEqual(side.spent_acid_niobium.fluidsOut, [{ id: 'gtceu:hydrofluoric_acid', amount: 500 }, { id: 'gtceu:sulfuric_acid', amount: 500 }]);
+  assert.equal(side.spent_acid_fluorite, undefined);
   assert.deepEqual(side.electropolish_acid.fluidsIn.map((f) => f.id), ['gtceu:hydrofluoric_acid', 'gtceu:sulfuric_acid']);
   assert.deepEqual(side.electropolish_acid.fluidsOut, [{ id: 'gtceu:electropolish_acid', amount: 1000 }]);
 });
