@@ -1,0 +1,5 @@
+{
+  "type": "emi:info",
+  "stacks": ["item:grindless:warp_gate_casing"],
+  "text": ["emi.grindless.info.warp_gate_casing.0"]
+}

@@ -1,0 +1,55 @@
+{
+  "_how_it_is_used": "server_scripts/grindless/uhv/gate.js makes one recipe per entry, id grindless:<type>/<name>, with its programmed circuit (one recipe per lookup path). 'kept' items are catalysts (not consumed). site: orbits = Earth orbit and Proxima b's orbit (the two ends of the gate); proxima_b_orbit = Proxima b's orbit only. Machine 18 (warp gate) and machine 25 (baseline astrometer): docs/eras/uhv.md lines 483-495 and 570-585.",
+  "types": {
+    "warp_gate": {
+      "dataKey": "grindless_warp_gate",
+      "recipes": [
+        {
+          "name": "open",
+          "circuit": 1, "eut": 1966080, "duration": 1200, "site": "orbits",
+          "itemsIn": [
+            { "id": "grindless:exotic_matter_cell", "count": 4 },
+            { "id": "grindless:antihydrogen_cartridge", "count": 4 }
+          ],
+          "kept": [
+            { "id": "grindless:proxima_approach_data", "count": 1 },
+            { "id": "grindless:nuclear_clock", "count": 1 },
+            { "id": "grindless:organoid_processor", "count": 1 }
+          ],
+          "itemsOut": [
+            { "id": "grindless:proxima_gate_seed", "count": 1 },
+            { "id": "grindless:empty_antiproton_cartridge", "count": 4 }
+          ]
+        },
+        {
+          "name": "sustain",
+          "circuit": 2, "eut": 31457280, "duration": 1200, "site": "orbits",
+          "itemsIn": [{ "id": "grindless:exotic_matter_cell", "count": 1 }],
+          "kept": [],
+          "itemsOut": []
+        }
+      ]
+    },
+    "baseline_astrometry": {
+      "dataKey": "grindless_baseline_astrometry",
+      "recipes": [
+        {
+          "name": "stellar_neighbourhood_chart",
+          "circuit": 1, "eut": 1966080, "duration": 2400, "site": "proxima_b_orbit",
+          "itemsIn": [
+            { "id": "grindless:sic_mirror_blank", "count": 4 },
+            { "id": "grindless:zblan_fibre", "count": 8 },
+            { "id": "grindless:quantum_cascade_laser", "count": 4 },
+            { "id": "grindless:thin_film_ln_modulator", "count": 4 },
+            { "id": "grindless:infrared_pigment", "count": 1 }
+          ],
+          "kept": [
+            { "id": "grindless:sgr_a_star_image", "count": 1 },
+            { "id": "grindless:organoid_processor", "count": 1 }
+          ],
+          "itemsOut": [{ "id": "grindless:stellar_neighbourhood_chart", "count": 1 }]
+        }
+      ]
+    }
+  }
+}

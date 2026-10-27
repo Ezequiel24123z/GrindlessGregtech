@@ -268,12 +268,13 @@ test('EMI shows how every item, block, fluid and machine of the pack is obtained
   const gtRecipe = (list) => list.some((m) => m.source === 'recipe' && m.category.startsWith('gtceu:'));
   const charts = res.results.filter((x) => /_chart$|chart_draft$|lunar_map$|lunar_ephemeris$|vlbi_recording$/.test(x.key));
   const samples = res.results.filter((x) => x.key.startsWith('grindless:vein_sample_'));
-  assert.equal(charts.length, 11);
+  assert.equal(charts.length, 12);
   assert.ok(samples.length > 40);
   // LuV B9: the Saturn Transfer Chart is made by the coilgun (a GT recipe) and is the ZPM trip: until ZPM its use is its copy and a page
   const nextEra = new Set(['grindless:saturn_transfer_chart']);
-  // ZPM-A9's Pluto-Kuiper chart got its GT use in UV-B4 (the Kuiper interceptor bay holds it)
-  const pending = new Set([]);
+  // ZPM-A9's Pluto-Kuiper chart got its GT use in UV-B4 (the Kuiper interceptor bay holds it). UHV-B7's stellar neighbourhood chart is
+  // used only as the UEV casing's station research, which GTM generates and the stand-in cannot see (an emi_coverage.json exception)
+  const pending = new Set(['grindless:stellar_neighbourhood_chart']);
   for (const r of charts.filter((x) => !pending.has(x.key))) {
     // an info page lists its stack as both made and used, so the chart's page shows on both sides
     assert.ok(gtRecipe(r.made) && (nextEra.has(r.key) || !r.made.some((m) => m.source === 'page')), r.key);

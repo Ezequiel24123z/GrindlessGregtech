@@ -1142,3 +1142,17 @@ powershell -NoProfile -ExecutionPolicy Bypass -File tools\assets\Build-UHVTransc
 |---|---|
 | `block/multiblock/high_flux_reactor/overlay_front*.png` | A pool window; idle dark blue water, active a Cherenkov-blue core whose glow pulses outward. |
 | `block/multiblock/transuranium_facility/overlay_front*.png` | A glovebox window with two glove ports; active, the ion-exchange column glows teal and a bubble rises through it. |
+
+## UHV warp gate and baseline astrometer (UHV-B7)
+
+Procedural, drawn by `Build-UHVGateTextures.ps1`; nothing is copied from another mod. Same steel bezel as UHV-B5; 4 active frames, frametime 4; the emissive layer holds only the glow and the lamp.
+
+```powershell
+powershell -NoProfile -ExecutionPolicy Bypass -File tools\assets\Build-UHVGateTextures.ps1
+powershell -NoProfile -ExecutionPolicy Bypass -File tools\assets\Build-UHVGateTextures.ps1 -Credits
+```
+
+| File (under `textures/`) | Notes |
+|---|---|
+| `block/multiblock/warp_gate/overlay_front*.png` | A ring seen edge-on round a dark gap; active, a violet-white shimmer fills the ring and sweeps. |
+| `block/multiblock/baseline_astrometer/overlay_front*.png` | A dish on a mast looking up at two stars; active, the dish scans and the stars blink. |
