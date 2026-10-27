@@ -44,12 +44,18 @@ function Set-GGEarlyWindowOff {
 function Ensure-GGHmc {
     param([string]$Mc, [string]$Renderer = 'mesa')
     $exe = Join-Path $global:GG.Tools 'headlessmc-launcher-windows-x64.exe'
+    $exeUrl = $global:GGUrls.HmcExe
+    if ($global:GGIsLinux) {
+        $exe = Join-Path $global:GG.Tools 'headlessmc-launcher-linux-x64'
+        $exeUrl = $global:GGUrls.HmcLinux
+    }
     $mcrtName = "mc-runtime-test-$Mc-forge-5.0.1.jar"
     $mcrt = Join-Path $global:GG.Tools $mcrtName
     $url = "https://github.com/headlesshq/mc-runtime-test-mod/releases/download/$Mc-5.0.1/$mcrtName"
     $dl = [bool](Invoke-GGExclusive 'tools' {
-            $n1 = Get-GGFile $global:GGUrls.HmcExe $exe 50000000
+            $n1 = Get-GGFile $exeUrl $exe 50000000
             $n2 = Get-GGFile $url $mcrt 100000
+            if ($global:GGIsLinux) { & chmod 755 $exe; $global:LASTEXITCODE = 0 }
             ($n1 -or $n2)
         })
     $hmcRoot = $global:GG.Hmc
@@ -60,7 +66,10 @@ function Ensure-GGHmc {
     New-Item -ItemType Directory -Force -Path $hmcHome | Out-Null
     New-Item -ItemType Directory -Force -Path $mcDir | Out-Null
     $mesa = $null
-    if ($Renderer -eq 'mesa') {
+    if ($Renderer -eq 'mesa' -and $global:GGIsLinux) {
+        $mesa = Get-GGSystemMesa
+        $javaHome = $mesa.JavaHome
+    } elseif ($Renderer -eq 'mesa') {
         $mesa = Ensure-GGMesa
         $javaHome = $mesa.JavaHome.Replace('\', '/')
     } else {
@@ -260,12 +269,19 @@ function Invoke-GGClientSuite {
                 if ($renderer -eq 'stub') { $lw = '-lwjgl ' }
                 $argLine = "launch --offline $($lw)--packwiz `"$inst`" client --jvm `"-Xms$($Req.clientXms) -Xmx$($Req.clientXmx) -Djava.awt.headless=true -DMcRuntimeGameTest=false`""
                 $envs = @("HMC_FILES_LOCATION=$($ctx.Hmc.Home)")
+                $file = $ctx.Hmc.Exe
+                if ($global:GGIsLinux) {
+                    # no display on the VM: a private Xvfb per run (-a picks a free display, so slots never share one)
+                    $argLine = "-a -s `"-screen 0 1280x720x24 -nolisten tcp`" `"$($ctx.Hmc.Exe)`" $argLine"
+                    $file = 'xvfb-run'
+                    if ($renderer -eq 'mesa') { $envs += 'LIBGL_ALWAYS_SOFTWARE=1' }
+                }
                 if ($renderer -eq 'mesa') {
                     # software OpenGL; llvmpipe threads are capped so the PC stays usable for its owner
                     $envs += 'GALLIUM_DRIVER=llvmpipe'
                     $envs += "LP_NUM_THREADS=$([math]::Max(2, [math]::Min(6, [int]([Environment]::ProcessorCount / 3))))"
                 }
-                $g = [GGProc]::Start($ctx.Hmc.Exe, $argLine, $inst, (Join-Path $res 'client-hmc-stdout.log'), (Join-Path $res 'client-hmc-stderr.log'), $envs)
+                $g = [GGProc]::Start($file, $argLine, $inst, (Join-Path $res 'client-hmc-stdout.log'), (Join-Path $res 'client-hmc-stderr.log'), $envs)
                 $ctx.Proc = $g
                 Set-GGSlotState $null $true
                 Write-GGLog "HeadlessMC started (pid $($g.Id), renderer $renderer); first run installs the Forge client (slow)"
@@ -330,5 +346,35 @@ function Invoke-GGClientSuite {
         Set-GGSlotState $null $false
         if (Test-Path (Join-Path $inst 'logs\kubejs')) { [void](Invoke-GGStage 'client-kubejs' { Invoke-GGKubeJsCheck $inst $res }) }
         Save-GGInstanceResults $inst $res
+    }
+}
+
+# ---------------------------------------------------------------- Linux overrides (pwsh 7 on the VM bench)
+if ($global:GGIsLinux) {
+    # The distribution's Mesa (libgl1-mesa-dri, installed by tools/vm/gg-vm-bootstrap.sh) under Xvfb: no private JDK
+    # copy is needed, LIBGL_ALWAYS_SOFTWARE=1 + GALLIUM_DRIVER=llvmpipe select the software rasteriser.
+    function Get-GGSystemMesa {
+        $ver = ''
+        try { $ver = (& dpkg-query -W -f '${Version}' libgl1-mesa-dri 2>$null | Out-String).Trim() } catch {}
+        $global:LASTEXITCODE = 0
+        if (-not $ver) { throw 'system Mesa not found (libgl1-mesa-dri); run tools/vm/gg-vm-bootstrap.sh' }
+        if (-not (Get-Command xvfb-run -ErrorAction SilentlyContinue)) { throw 'xvfb-run not found (package xvfb); run tools/vm/gg-vm-bootstrap.sh' }
+        $ver = ($ver -replace '^\d+:', '') -replace '-.*$', ''
+        $javaHome = Split-Path -Parent (Split-Path -Parent (Get-GGJava17))
+        return @{ JavaHome = $javaHome; Version = $ver; Cached = $true }
+    }
+
+    # Proof from /proc/<pid>/maps that the game JVM mapped Mesa's GL (libgallium / swrast), not HeadlessMC's stub.
+    function Get-GGMesaProof {
+        param([string]$Instance)
+        try {
+            foreach ($p in @(Get-GGManagedProcesses)) {
+                if ($p.CommandLine -notlike "*$Instance*") { continue }
+                $libs = @([IO.File]::ReadAllLines("/proc/$($p.ProcessId)/maps") | ForEach-Object { ($_ -split '\s+', 6)[5] } |
+                        Where-Object { $_ -match '/(libgallium[^/]*|swrast_dri\.so|libGLX_mesa\.so[^/]*)$' } | Sort-Object -Unique)
+                if ($libs.Count -gt 0) { return ('pid {0}: {1}' -f $p.ProcessId, ($libs -join ', ')) }
+            }
+        } catch { }
+        return $null
     }
 }

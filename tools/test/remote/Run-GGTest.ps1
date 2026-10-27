@@ -42,7 +42,6 @@ try {
         if (-not (Test-Path $reqPath)) { throw 'request.json missing in upload' }
         $ctl.Req = (Get-Content -LiteralPath $reqPath -Raw -Encoding UTF8) | ConvertFrom-Json
         Assert-GGResourceRequest $ctl.Req
-        if ($global:GGIsLinux -and [string]$ctl.Req.suite -ne 'server') { throw "suite '$($ctl.Req.suite)' is not supported on a Linux bench (server only; the client suite runs on the home bench)" }
         $packToml = Join-Path $runDir 'pack\pack.toml'
         if (-not (Test-Path $packToml)) { throw 'pack\pack.toml missing in upload' }
         $ctl.PackInfo = Read-GGPackToml $packToml
