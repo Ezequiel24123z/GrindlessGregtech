@@ -5,8 +5,8 @@ Integrator-owned. Read this instead of `DECISIONS.md` and the session notes. Ove
 - **Playable version:** v0.8.0 "LuV, the outer system" (`15a7f85`). `playable` and `jugable` both point to it.
 - **Active development branch:** `ezequiel24123z-gregtech-grindless-modpack`. `main` matches it (PR #4 merged); feature work still branches from the development branch.
 - **Current milestone:** ZPM build. Design accepted: `docs/eras/zpm.md` (queue in its *Build order*), decisions in `DECISIONS.md` (2026-10-26, "ZPM").
-- **Last accepted integration batch:** ZPM-C1 validator (#21) and ZPM-C2 quests (#22): `-Tier zpm` with three substages (home, Saturn, Uranus), and the ZPM chapter (44 quests), the ZPM processing lines (38) and Power's ZPM clusters; T0 passes (621) and quest lint has 0 errors. Before it: ZPM-B5 Uranus (#20): the ice-giant siphon, slurry separator and flyby probe bay; T1 passed. Wave B is complete.
-- **Approved packages in flight:** C3 (integrated validation, one staged T2 in band 22784). Then v0.9.0.
+- **Last accepted integration batch:** ZPM-C3 integrated validation (#23) and ZPM-D1 release blockers (#24): every C3 stage passed (home 169, sites 82, power gate, book, EMI, travel); D1 fixed the naquadria casing loop, the Uranus deuterium dimension, the implanter gate and the wireless hatch rating; `-Tier zpm`, `-Tier luv` and `pl-check --strict --era zpm` pass, and the space elevator moved to UV. T0 passes (622).
+- **Approved packages in flight:** none. v0.9.0 (ZPM) is being released.
 - **Repository:** unmerged historical branches are kept only as `archive/*` tags; finished package branches are deleted after integration.
 
 ## Open blockers and known issues

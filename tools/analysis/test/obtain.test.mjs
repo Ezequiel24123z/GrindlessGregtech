@@ -472,3 +472,12 @@ test('CLI: --pass obtain with --config writes text, JSON and Markdown and exits 
     fs.rmSync(work, { recursive: true, force: true });
   }
 });
+
+test('hidden table: an unused B rule with unless (its switch was on in the dump) keeps its exact ids as rows', () => {
+  const res = { model: { g: { keyIndex: new Map(), rules: [] } }, groups: [], unusedRules: [
+    { class: 'B', until: 'uv', unless: 'tether', reason: 'held', materials: ['grindless:spool', 'gtca:glob_*'], items: [] },
+    { class: 'B', until: 'uv', reason: 'no switch', materials: ['grindless:other'], items: [] },
+  ] };
+  const table = hiddenTable(res);
+  assert.deepEqual(table.groups, [{ material: 'grindless:spool', until: 'uv', reason: 'held', items: ['grindless:spool'], fluids: [], unless: 'tether' }]);
+});

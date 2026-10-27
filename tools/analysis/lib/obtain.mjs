@@ -536,7 +536,7 @@ export function runObtain(dump, raw, opts = {}) {
   const byClass = { A: count('A'), B: count('B'), C: count('C'), '?': count('?') };
   const allRecipes = new Set();
   for (const grp of neverGroups) for (const r of [...grp.uses, ...grp.makes]) allRecipes.add(r);
-  const unusedRules = compiled.filter((c) => c.used === 0).map((c) => ({ index: c.idx, class: c.rule.class, reason: c.rule.reason || '', materials: asArray(c.rule.materials), items: asArray(c.rule.items) }));
+  const unusedRules = compiled.filter((c) => c.used === 0).map((c) => ({ index: c.idx, class: c.rule.class, reason: c.rule.reason || '', materials: asArray(c.rule.materials), items: asArray(c.rule.items), until: c.rule.until || null, unless: c.rule.unless || null }));
   const hidingBad = !!hiding && (hiding.obtainable.length > 0 || (hiding.visible !== null && hiding.visible.length > 0) ||
     (hiding.landed !== null && hiding.landed.length > 0));
   const verdict = byClass['?'].groups > 0 || hidingBad ? 'FAIL' : 'PASS';
@@ -715,7 +715,13 @@ export function hiddenTable(res, opts = {}) {
     return e;
   };
   const rank = (u) => (u === 'never' ? ERA_IDS.length : ERA_IDS.indexOf(u));
-  const groups = [...B, ...C].filter((grp) => grp.until).map(entry)
+  // a B rule with `unless` whose items the dump obtains (its stations switch was on when the dump was taken) keeps its
+  // row: hidden.js shows it while the switch is on, and the row hides it again if the table turns the switch off
+  const switched = asArray(res.unusedRules)
+    .filter((u) => u.class === 'B' && u.unless && u.until)
+    .flatMap((u) => [...u.materials, ...u.items].filter((id) => id.includes(':') && !/[*?]/.test(id))
+      .map((id) => ({ material: id, until: u.until, reason: u.reason, items: [id], fluids: [], unless: u.unless })));
+  const groups = [...[...B, ...C].filter((grp) => grp.until).map(entry), ...switched]
     .sort((a, b) => rank(a.until) - rank(b.until) || (a.material < b.material ? -1 : a.material > b.material ? 1 : 0));
   return {
     _source: `tools/analysis obtainability audit: node tools/analysis/reachability.mjs --pass obtain --dump <dump> --table <this file> (config tools/analysis/tiers/obtain.json${opts.dump ? `, dump ${opts.dump}` : ''}${opts.date ? `, ${opts.date}` : ''}). Do not edit by hand: change the audit config and regenerate.`,

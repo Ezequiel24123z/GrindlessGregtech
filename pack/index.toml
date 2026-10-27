@@ -66,11 +66,11 @@ hash = "a5132ed09dcb09ddd174931514ff4279e1be2553be6a7df2b49e28581a26ea00"
 
 [[files]]
 file = "config/ftbquests/quests/chapters/pl_zpm.snbt"
-hash = "815a752227d295b8874bbd2a0458ae957c1a481823476c861166dd20ba9d77a3"
+hash = "085581c14090bcf12bf1837b4bbb142422b3b2525703f9f61a3393ed76be803b"
 
 [[files]]
 file = "config/ftbquests/quests/chapters/power.snbt"
-hash = "89aab4054d49dd19adde26b57014be0b46d842c349ccfd488e5fc1c2c4a9f657"
+hash = "e2d6013aeabd651199c3352ac57895e8c976d7f954de1388257a96a1f730e911"
 
 [[files]]
 file = "config/ftbquests/quests/chapters/productive_bees.snbt"
@@ -3786,7 +3786,7 @@ hash = "1f4b256531a0b42a6ecf399e9b692d9e4730bd4102e53aab3e1fa2c999b69e9d"
 
 [[files]]
 file = "kubejs/data/grindless/tables/hidden_until.json"
-hash = "efb18c7f240c35f27d763c013e89040488213d2f262d32a4d7a3ee28624c004d"
+hash = "47334755c7a6c825784fdd212d853a66da048866bdfa7f312a1e325bd537cd47"
 
 [[files]]
 file = "kubejs/data/grindless/tables/hot_cell.json"
@@ -3814,7 +3814,7 @@ hash = "6cda325e75f5bd0fb69aca568258448eefc658ab786eef294709203b01cd1871"
 
 [[files]]
 file = "kubejs/data/grindless/tables/naquadria.json"
-hash = "9845494bcde38854165f1bf06154fd1140ce2412becbe7f06796f6b514e5dbca"
+hash = "dc2e6a7f4f8e6ad758fb37d2a095bbf71296ade1f3edfb4c39036f9e34fb188f"
 
 [[files]]
 file = "kubejs/data/grindless/tables/offworld_only.json"
@@ -3902,7 +3902,7 @@ hash = "4822cf86f95d7a146f59bde5b2d6e00bac21980a8e586bb686bd7c3db19a5ced"
 
 [[files]]
 file = "kubejs/data/grindless/tables/wireless_energy.json"
-hash = "c7b6b8b4a014d5369be4c62a9631b8e75b9e4c40508169f22fcdfba14d9cb18c"
+hash = "09000da5650ecafcf15b8176cf968cefe6deef91d9bf6bf1ee3e95512ff27bd1"
 
 [[files]]
 file = "kubejs/data/grindless/worldgen/biome/asteroid_belt.json"
@@ -4090,7 +4090,7 @@ hash = "114780cc91ce3c258ea25768a9b0bbc90685664c7e4ff88d4e6c031bc6336a77"
 
 [[files]]
 file = "kubejs/server_scripts/grindless/integration/hidden.js"
-hash = "a8cdf5c827516f51beb93b18affd08f0d7fbb4046fc6c743ca8e626c0ebd8ef9"
+hash = "c95e106171a3a4036bfcf4c4bc0fde5c26b136276d25edcc2d47b19eb81ed9d6"
 
 [[files]]
 file = "kubejs/server_scripts/grindless/integration/ironfurnaces.js"
@@ -4290,7 +4290,7 @@ hash = "9af48a45ee5890463d463d3216e0cc0873b2f04971f1bc49870266db56c95dcc"
 
 [[files]]
 file = "kubejs/server_scripts/grindless/lv/wireless_energy.js"
-hash = "f7385ad658c580484b0445018436cf658a39e7b06cdd5df24f0be5cd19c905d2"
+hash = "229ad32168e5b2526251e8d4416083d6c0aa5faca26dde08b3934d25d8099d1d"
 
 [[files]]
 file = "kubejs/server_scripts/grindless/mars/travel.js"
@@ -4450,7 +4450,7 @@ hash = "617d80424e7dfeffc6a41439206c7ad9f528bf150c4ae2864531001c433dff2d"
 
 [[files]]
 file = "kubejs/server_scripts/grindless/zpm/qubits.js"
-hash = "c035b52d7378c9e0a5b47ac4ac4dc9605d29fdebbd31adb4d9840d1e96b13511"
+hash = "a2bc42a278c491dd26e8a0d516887f15608c10282122b60d3c4a434f06a215df"
 
 [[files]]
 file = "kubejs/server_scripts/grindless/zpm/saturn_science.js"
@@ -4470,7 +4470,7 @@ hash = "8784cc2635089e5bde67d5c4475362cf184008cf1fa785baa3d3d19c13fd4aae"
 
 [[files]]
 file = "kubejs/server_scripts/grindless/zpm/uranus.js"
-hash = "6d6330e82c879827aa80865860bdfd7338fa956b6f02a3683278249810d080d7"
+hash = "e7a571e6d2865d245392ac6ce60ca9f1cc193f8af680e11e72a227e3adc1f531"
 
 [[files]]
 file = "kubejs/startup_scripts/grindless/dimensions.js"
