@@ -85,6 +85,7 @@ Generators for the pack's own textures. Everything is procedural 16x16 pixel art
 | `Build-ZPMTravelTextures.ps1` | Writes the ZPM-B1 travel textures: the naquadah and aerogel fuel tank columns (`block/zpm/<tank>_side`, `_end`) and the Saturnian and Uranian quantum seed ampoules (`item/`). `-OutRoot <dir>` writes elsewhere. |
 | `Build-UVTravelTextures.ps1` | Writes the UV-B1 travel textures: the Neptunian and Plutonian quantum seed ampoules (`item/`) and Pluto's orbit sky disc (`sky/pluto.png`; GCYR ships no Pluto sky texture). `-OutRoot <dir>` writes elsewhere; `-Credits` prints the CREDITS rows. |
 | `Build-UVKuiperTextures.ps1` | Writes the two item icons of UV's Kuiper belt (UV-B4): the Kuiper interceptor and the sample canister. The interceptor bay and the ice annealer reuse the entry probe bay's and the helium refrigerator's faces on the station truss casing. `-Credits`. |
+| `Build-UVEdgeTextures.ps1` | Writes the item icon of UV's edge (UV-B5): the precursor probe. The precursor probe bay and the event horizon interferometer reuse the flyby probe bay's and the interferometer's faces on the station truss casing. `-Credits`. |
 | `Build-ZPMMagnetWorksTextures.ps1` | Writes the face of the ZPM naquadria magnet works (ZPM-A5): `multiblock/naquadria_magnet_works/` (`overlay_front`, `overlay_front_active` and its emissive layer; the emissive pixels are a subset of the colour layer) and the `item/hts_insert.png`. The ZPM wireless cell and covers come from `Build-WirelessEnergyTextures.ps1` (the zpm row). Proposed CREDITS "Assets" lines: the overlays, the HTS insert and the ZPM cell/cover textures, procedural, original. |
 | `Build-ZPMFusionTextures.ps1` | Writes the faces of the ZPM plasma quench caster and direct energy converter (ZPM-A7): `multiblock/plasma_quench_caster/` and `multiblock/direct_energy_converter/` (`overlay_front`, `overlay_front_active` and its emissive layer; the emissive pixels are a subset of the colour layer). Proposed CREDITS "Assets" line: both overlays, procedural, original. |
 ## Regenerate
@@ -1078,3 +1079,16 @@ powershell -NoProfile -ExecutionPolicy Bypass -File tools\assets\Build-UVKuiperT
 |---|---|
 | `item/kuiper_interceptor.png` | A grey probe body with gold solar wings, a gold RTG band and a flared nozzle below. |
 | `item/sample_canister.png` | A pale titanium capsule with two white seal bands and a small sensor window. |
+
+## UV precursor probe bay and event horizon interferometer item (UV-B5)
+
+Procedural, drawn by `Build-UVEdgeTextures.ps1`; nothing is copied from another mod. Item icon only: the two controllers reuse the flyby probe bay's and the interferometer's faces on the station truss casing.
+
+```powershell
+powershell -NoProfile -ExecutionPolicy Bypass -File tools\assets\Build-UVEdgeTextures.ps1
+powershell -NoProfile -ExecutionPolicy Bypass -File tools\assets\Build-UVEdgeTextures.ps1 -Credits
+```
+
+| File (under `textures/`) | Notes |
+|---|---|
+| `item/precursor_probe.png` | A pale high-gain dish over the probe bus, a magnetometer boom to the left and a gold RTG on its boom to the right. |
