@@ -11,6 +11,12 @@
 //   circuit 5  ZPM mode    (ZPM-A3, the europium reductor's feed) 4 000 mB GTCA monazite froth + 3 000 mB hydrochloric acid -> 4 000 mB
 //                          europium chloride solution + 1 000 mB phosphoric acid (the froth's phosphate)     122 880 EU/t, 40 t (ZPM hatch)
 //                          The solution goes to the europium reductor (zpm/europium.js); its depleted liquor comes back into circuit 2.
+//   circuit 6  UV mode     (UV-A6, the Yb strip: ytterbium oxide's only maker) 32 mixed rare earth chloride + 3 000 mB water + 1 000 mB
+//                          kerosene -> 5 ytterbium oxide + 24 mixed rare earth chloride + 950 mB kerosene + 6 000 mB hydrochloric acid
+//                                                                                                    122 880 EU/t, 100 t (ZPM hatch)
+//                          A last heavy cut of the mixed chloride: 8 moles in (4 dust each), 2 of them are the heavies, reckoned as
+//                          ytterbium, and are stripped and precipitated as the oxide: 2 YbCl3 + 3 H2O -> Yb2O3 + 6 HCl (Yb2O3 is 5 dust,
+//                          one per atom, GTM's convention). The other 6 moles go back out as mixed chloride, to GTM's electrolyzer.
 //
 // The chemistry. Merrillite (A1: Ca8(Mg,Fe)(REE)(PO4)7 per half cell) is three (Ca,Mg)3(PO4)2 and one rare earth phosphate in one
 // lattice. The leach, net of the cascade's own recycling of calcium and phosphate inside, is
@@ -46,6 +52,8 @@
 //   phosphoric acid       -> GTM's cumene and phenol (epoxy) and gelatin; it is a mild, inert acid: the surplus can be voided
 //   tricalcium phosphate  -> GTM's fertilizer recipes and its centrifuge (calcium + phosphate); inert: the surplus can be voided
 //   The hydrogen of the HCl ends in the phosphoric acid: the HCl loop needs hydrogen from outside, 3 000 mB per mole.
+//   ytterbium oxide       -> the fibre draw tower's preform (uv/photonics.js); nothing else makes it
+//   HCl of the Yb strip   -> back into the leach (circuit 1) and the strip (circuit 2)
 //
 // Published in global.grindless.extractionCascade for the smoke test:
 //   .recipes  [{ id (what the builder got), recipeId (the final id), name, mode, circuit, itemsIn: [{ id, count }], fluidsIn: [{ id, amount }],
@@ -99,6 +107,14 @@
       itemsOut: [],
       fluidsOut: [{ id: 'gtceu:europium_chloride_solution', amount: 4000 }, { id: PHOSPHORIC, amount: 1000 }],
       eut: 122880, duration: 40
+    },
+    {
+      name: 'ytterbium_strip', mode: 'uv', circuit: 6,
+      itemsIn: [{ id: MIX_CL, count: 32 }],
+      fluidsIn: [{ id: 'minecraft:water', amount: 3000 }, { id: KEROSENE, amount: 1000 }],
+      itemsOut: [{ id: 'gtceu:ytterbium_oxide_dust', count: 5 }, { id: MIX_CL, count: 24 }],
+      fluidsOut: [{ id: KEROSENE, amount: 950 }, { id: HCL, amount: 6000 }],
+      eut: 122880, duration: 100
     }
   ]
 

@@ -55,15 +55,17 @@
   "exceptions": [
     { "id": "grindless:itbtc_coated_conductor", "role": "use", "reason": "temporary (LuV-A3): its uses, the HTS coil and the SMES cell, are LuV-A4's magnet works; delete this exception when A4 merges" },
     { "id": "grindless:chondritic_extract", "role": "use", "reason": "temporary (LuV-B5): its use, the Europan culture of the algae bioreactor, is LuV-B8's;     delete this exception when B8 merges" },
+    { "id": "grindless:nbn_film_wafer", "role": "use", "reason": "temporary (UV-A6): its use, the SNSPD array, is UV-A7's; delete this exception when A7 merges" },
     { "id": "grindless:probe_rtg", "role": "use", "reason": "temporary (UV-A2): its uses are the penetrator, the Kuiper interceptor (B4) and the precursor probe (B5); delete this exception when the first of them merges" },
     { "id": "grindless:americium_micro_source", "role": "use", "reason": "temporary (UV-A2): its use, the starchip, is UV-A12's;     delete this exception when A12 merges" },
         { "id": "fluid:gtceu:boron_10_trifluoride", "role": "use", "reason": "temporary (UV-A3): the hot cell's boron-11 split leaves boron-10 trifluoride for the BN reactor (UV-A8, uv.md:807); delete this exception when A8 merges" }
       ],
       "pendingRoutes": [
-    { "id": "grindless:laser_fusion/pb11", "reason": "UV-A3: the laser fusion chamber burns a fibre laser module (2% wear), which UV-A6 makes; delete this entry when A6 merges" },
-    { "id": "grindless:laser_fusion/d_he3", "reason": "UV-A3: the laser fusion chamber burns a fibre laser module (2% wear), which UV-A6 makes; delete this entry when A6 merges" },
-    { "id": "grindless:laser_fusion/pb11", "reason": "UV-A3: the laser fusion chamber burns a fibre laser module (2% wear), which UV-A6 makes; delete this entry when A6 merges" },
-    { "id": "grindless:laser_fusion/d_he3", "reason": "UV-A3: the laser fusion chamber burns a fibre laser module (2% wear), which UV-A6 makes; delete this entry when A6 merges" },
+    { "id": "grindless:laser_fusion/pb11", "reason": "UV-A6: the Yb fibre chain starts from germanium tetrachloride, which UV-A7 (the zone refining tower) makes; delete this entry when A7 merges" },
+    { "id": "grindless:laser_fusion/d_he3", "reason": "UV-A6: the Yb fibre chain starts from germanium tetrachloride, which UV-A7 (the zone refining tower) makes; delete this entry when A7 merges" },
+    { "id": "grindless:fibre_draw/fibre_draw/preform", "reason": "UV-A6: the Yb fibre chain starts from germanium tetrachloride, which UV-A7 (the zone refining tower) makes; delete this entry when A7 merges" },
+    { "id": "grindless:fibre_draw/fibre_draw/draw", "reason": "UV-A6: the Yb fibre chain starts from germanium tetrachloride, which UV-A7 (the zone refining tower) makes; delete this entry when A7 merges" },
+    { "id": "grindless:fibre_draw/fibre_draw/laser_module", "reason": "UV-A6: the Yb fibre chain starts from germanium tetrachloride, which UV-A7 (the zone refining tower) makes; delete this entry when A7 merges" },
     { "id": "grindless:superfluid_helium/superfluid_helium/superleak", "reason": "UV-A4: the superleak takes Neptune helium, which UV-B2 brings; delete this entry when B2 merges" },
     { "id": "grindless:pyroprocessing/pyroprocessing/nitride", "reason": "UV-A1: the nitride fuel cycle is held until UV-B2 brings Triton nitrogen (the N-15 source); delete this entry when B2 merges" },
     { "id": "grindless:accelerator_driven/accelerator_driven/thorium_nitride", "reason": "UV-A1: the nitride fuel cycle is held until UV-B2 brings Triton nitrogen (the N-15 source); delete this entry when B2 merges" }
