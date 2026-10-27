@@ -24,13 +24,13 @@ applyTo: "tools/test/**,tools/analysis/**,tools/Check-Fast.ps1"
 - On FAIL, hand `summary.json` plus at most 40 lines around the first relevant error to the `triage` agent; it returns at most 20 lines with file:line evidence.
 - T0 fails while `tools/test/overlay/kubejs/config/gg_test_emi_coverage_expect.json` is stale. A package may regenerate it (`node tools/analysis/emi-coverage.mjs --expect`); on a merge conflict the integrator regenerates it. Other generated files stay integrator-only (`release.instructions.md`).
 
-## Bench and home PC
-- Bench: `tools/test/Invoke-GGTest.ps1` uploads the pack to the home PC, starts a clean server or client and returns a summary.
-- Access `ezequiel@192.168.1.150`. Writes only inside `D:\GregtechGrindless`. Never touch the user's PrismLauncher folder, `D:\Grindless` or their `.minecraft`.
-- Only one Minecraft test JVM globally, across all agents and worktrees; the bench enforces it (a global OS mutex held through native cleanup), even for legacy slot requests. Stages run serially, never with overlapping JVMs.
+## Bench: VM first, home fallback
+- Bench: `tools/test/Invoke-GGTest.ps1` uploads the pack to the Linux VM (backend `azure`, default), starts a clean server or client and returns a summary. Only when the VM is unreachable or fails before the suite starts does the run repeat on the home PC (backend `home`); the summary's `backend:` line says which ran and why. Never re-run a real FAIL elsewhere. Docs: `docs/testing/`.
+- VM: alias `grindless-vm` (user-provided ssh config, never in the repo); 3 concurrent runs, the harness's slots enforce it. Do not start Minecraft on the VM outside the harness.
+- Home PC (fallback): access `ezequiel@192.168.1.150`. Writes only inside `D:\GregtechGrindless`. Never touch the user's PrismLauncher folder, `D:\Grindless` or their `.minecraft`. Only one Minecraft test JVM there, across all agents and worktrees; the bench enforces it (a global OS mutex held through native cleanup), even for legacy slot requests.
 - Client and server use `-Xms1G -Xmx4G` (heap, not total RAM). Available RAM is not a launch condition and unreadable counters do not block a run.
 - Native budget: at most 600 s per stage (startup included), 30 s for server shutdown, commands 60 s, marker waits 180 s. These are failure ceilings, not targets. Never raise heap, time or concurrency limits or automatically retry a resource failure.
-- Do source/static validation locally, not on the home PC. Before using an older worktree, merge the current bench resource-policy changes; never use a historical launcher to bypass the limits.
+- Do source/static validation locally, not on a bench. Before using an older worktree, merge the current bench resource-policy changes; never use a historical launcher to bypass the limits.
 - Test clients start with all sound at zero (`Set-GGClientOptions` in `tools/test/remote/gg-client.ps1`).
 
 ## Test scripts and zones
