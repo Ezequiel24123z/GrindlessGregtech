@@ -46,8 +46,8 @@ test('registration: three recipe types, three machines, one pattern each with on
   assert.deepEqual(dims('qubit_fab'), [5, 5, 9]);
 });
 
-test('the eight chain recipes: one circuit per recipe in its type, ZPM VA or less, fits the IO sizes', () => {
-  assert.equal(Q.recipes.length, 8);
+test('the nine chain recipes: one circuit per recipe in its type, ZPM VA or less, fits the IO sizes', () => {
+  assert.equal(Q.recipes.length, 9);
   for (const p of Q.recipes) {
     const r = byId(p.recipeId);
     assert.ok(r, p.recipeId + ' added');
@@ -60,7 +60,12 @@ test('the eight chain recipes: one circuit per recipe in its type, ZPM VA or les
     assert.equal(new Set(circuits).size, circuits.length, t + ' circuits differ');
   }
   const q = Q.recipes.filter((r) => r.type === 'qubit_fabrication');
-  assert.ok(q.every((r) => r.itemsOut[0].id === 'grindless:qubit_array' && r.notConsumedFluids[0].amount === 4000 && r.fluidsIn[0].amount === 10), 'the helium charge loops, 10 mB is the make-up');
+  assert.ok(q.every((r) => r.notConsumedFluids[0].amount === 4000 && r.fluidsIn[0].amount === 10), 'the helium charge loops, 10 mB is the make-up');
+  assert.deepEqual(q.map((r) => r.itemsOut[0].id), ['grindless:qubit_array', 'grindless:qubit_array', 'grindless:snspd_array'],
+    'circuits 1-2 make the qubit array; UV-A7\'s circuit 3 the SNSPD array');
+  const snspd = q.find((r) => r.name === 'snspd_array');
+  assert.equal(snspd.circuit, 3);
+  assert.deepEqual(snspd.itemsIn, [{ id: 'grindless:nbn_film_wafer', count: 1 }]);
   const d = Q.recipes.filter((r) => r.type === 'diamond_cvd' && r.fluidsOut.length > 0);
   assert.equal(d.length, 2, 'the two diamond rows loop hydrogen; UV-A3\'s capsule rows (circuits 3, 4) return nothing');
   assert.ok(d.every((r) => r.fluidsOut[0].amount < r.fluidsIn[1].amount && r.fluidsOut[0].amount >= 0.9 * r.fluidsIn[1].amount), 'hydrogen loops back with a small make-up');
