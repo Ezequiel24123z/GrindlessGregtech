@@ -138,7 +138,7 @@
         // GCYR's own deploy path (the station item): allocateStation(Planet) -> Pair<id, station>, which also files the SavedData entry
         var id = Number(holder.allocateStation(pl).getFirst())
         try { jcall(holder, ['setDirty', 'm_77762_']) } catch (e) { note('station_dirty_' + n.key, String(e)) }
-        var st = holder.getStation(L.Integer.valueOf(id))
+        var st = holder.getStation(L.Integer.valueOf(String(id | 0)))
         var pos = st === null || st === undefined ? 'none' : String(holder.getStationPos(id))
         made[n.key] = id
         check('station_deploy_' + n.key, st !== null && st !== undefined && Number(holder.getFreeStationId()) !== id,
@@ -166,7 +166,7 @@
         var data = tag.getCompound('data')
         var keys = array(data.getCompound('stations').getAllKeys()).map(String)
         var fresh = new L.StationData(lv, data)
-        var back = fresh.getStation(L.Integer.valueOf(made[n.key]))
+        var back = fresh.getStation(L.Integer.valueOf(String(made[n.key] | 0)))
         ok = keys.indexOf(String(made[n.key])) >= 0 && back !== null && back !== undefined
         detail = n.orbit + ' data/' + STATIONS_FILE + '.dat stations {' + keys.join(', ') + '}; reloaded ' + made[n.key] + ': ' +
           (back === null || back === undefined ? 'none' : String(back))
