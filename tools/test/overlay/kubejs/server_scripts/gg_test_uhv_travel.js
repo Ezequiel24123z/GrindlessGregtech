@@ -135,8 +135,10 @@
         var holder = L.Stations.getSpaceStations(lv)
         var pl = fromOrbit(lv)
         if (pl === null) throw new Error('no planet for this orbit')
-        // GCYR's own deploy path (the station item): allocateStation(Planet) -> Pair<id, station>, which also files the SavedData entry
-        var id = Number(holder.allocateStation(pl).getFirst())
+        // GCYR's own deploy path (the station item): allocateStation(Planet) -> Pair<id, station>, then addStation(id, station) files it
+        var pair = holder.allocateStation(pl)
+        var id = Number(pair.getFirst())
+        holder.addStation(id | 0, pair.getSecond())
         try { jcall(holder, ['setDirty', 'm_77762_']) } catch (e) { note('station_dirty_' + n.key, String(e)) }
         var st = holder.getStation(L.Integer.valueOf(String(id | 0)))
         var pos = st === null || st === undefined ? 'none' : String(holder.getStationPos(id))
