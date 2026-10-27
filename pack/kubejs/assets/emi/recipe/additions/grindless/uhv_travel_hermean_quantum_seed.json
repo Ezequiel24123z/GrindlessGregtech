@@ -1,0 +1,5 @@
+{
+  "type": "emi:info",
+  "stacks": ["item:grindless:hermean_quantum_seed"],
+  "text": ["emi.grindless.info.hermean_quantum_seed.0"]
+}
