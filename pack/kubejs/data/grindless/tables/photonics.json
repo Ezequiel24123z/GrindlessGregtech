@@ -1,0 +1,241 @@
+{
+  "_source": "docs/eras/uhv.md: machines 5 (MBE reactor) and 6 (photonic foundry), lines 5, 6, 7 and 9, Older machines (ion implanter); package UHV-A4",
+  "_how_it_is_used": "server_scripts/grindless/uhv/photonics.js makes one recipe per entry, id grindless:<type>/<name>, with its programmed circuit (0 = none, GTM's own types only); 'kept' items and 'charge' fluids are not consumed; a 'chance' below 10000 makes a chanced input or output; 'temp' is the blast furnace temperature. molecular_beam_epitaxy and photonic_foundry are this package's machines (data key = <name>, the EMI line); ion_implantation (ZPM ion implanter, circuits 3-4; circuits 1-2 stay in zpm/qubits.js), electric_blast_furnace and large_chemical_reactor (GTM) are older machines' rows.",
+  "types": {
+    "molecular_beam_epitaxy": {
+      "dataKey": "grindless_molecular_beam_epitaxy",
+      "recipes": [
+        {
+          "name": "qcl_superlattice",
+          "circuit": 1,
+          "eut": 1966080,
+          "duration": 1600,
+          "itemsIn": [
+            { "id": "grindless:inp_wafer", "count": 1 },
+            { "id": "gtceu:indium_dust", "count": 1 },
+            { "id": "gtceu:gallium_dust", "count": 1 },
+            { "id": "gtceu:aluminium_dust", "count": 1 },
+            { "id": "gtceu:arsenic_dust", "count": 1 }
+          ],
+          "kept": [],
+          "fluidsIn": [{ "id": "gtceu:liquid_nitrogen", "amount": 1000 }],
+          "charge": [],
+          "itemsOut": [
+            { "id": "grindless:qcl_superlattice_wafer", "count": 1 },
+            { "id": "gtceu:arsenic_dust", "count": 1, "chance": 5000 }
+          ],
+          "fluidsOut": [{ "id": "gtceu:nitrogen", "amount": 1000 }]
+        },
+        {
+          "name": "quantum_cascade_lasers",
+          "circuit": 2,
+          "eut": 491520,
+          "duration": 300,
+          "itemsIn": [
+            { "id": "grindless:qcl_superlattice_wafer", "count": 1 },
+            { "id": "gtceu:gold_dust", "count": 1 }
+          ],
+          "kept": [],
+          "fluidsIn": [],
+          "charge": [],
+          "itemsOut": [{ "id": "grindless:quantum_cascade_laser", "count": 8 }],
+          "fluidsOut": []
+        }
+      ]
+    },
+    "photonic_foundry": {
+      "dataKey": "grindless_photonic_foundry",
+      "recipes": [
+        {
+          "name": "lnoi_wafer",
+          "circuit": 1,
+          "eut": 491520,
+          "duration": 400,
+          "itemsIn": [
+            { "id": "grindless:implanted_ln_wafer", "count": 1 },
+            { "id": "gtceu:silicon_wafer", "count": 1 },
+            { "id": "gtceu:quicklime_dust", "count": 2 }
+          ],
+          "kept": [],
+          "fluidsIn": [
+            { "id": "gtceu:ultrapure_water", "amount": 1000 },
+            { "id": "gtceu:oxygen", "amount": 1000 },
+            { "id": "gtceu:hydrofluoric_acid", "amount": 2000 }
+          ],
+          "charge": [],
+          "itemsOut": [
+            { "id": "grindless:lnoi_wafer", "count": 1 },
+            { "id": "grindless:lithium_niobate_wafer", "count": 1, "chance": 6667 },
+            { "id": "gcyr:fluorite_dust", "count": 3 }
+          ],
+          "fluidsOut": [{ "id": "minecraft:water", "amount": 2000 }]
+        },
+        {
+          "name": "pcm_dies",
+          "circuit": 2,
+          "eut": 491520,
+          "duration": 300,
+          "itemsIn": [
+            { "id": "grindless:lnoi_wafer", "count": 1 },
+            { "id": "grindless:gst_target", "count": 1 }
+          ],
+          "kept": [],
+          "fluidsIn": [{ "id": "gtceu:ultrapure_water", "amount": 1000 }],
+          "charge": [{ "id": "gtceu:argon", "amount": 1000 }],
+          "itemsOut": [
+            { "id": "grindless:pcm_photonic_die", "count": 8 },
+            { "id": "grindless:spent_gst_target", "count": 1 }
+          ],
+          "fluidsOut": [{ "id": "minecraft:water", "amount": 1000 }]
+        },
+        {
+          "name": "quantum_memory_chips",
+          "circuit": 3,
+          "eut": 491520,
+          "duration": 400,
+          "itemsIn": [{ "id": "grindless:eu_yso_boule", "count": 1 }],
+          "kept": [],
+          "fluidsIn": [{ "id": "gtceu:ultrapure_water", "amount": 1000 }],
+          "charge": [],
+          "itemsOut": [{ "id": "grindless:quantum_memory_chip", "count": 4 }],
+          "fluidsOut": [{ "id": "minecraft:water", "amount": 1000 }]
+        },
+        {
+          "name": "optical_processor",
+          "circuit": 4,
+          "eut": 1966080,
+          "duration": 600,
+          "itemsIn": [
+            { "id": "grindless:lnoi_wafer", "count": 1 },
+            { "id": "grindless:pcm_photonic_die", "count": 2 },
+            { "id": "grindless:quantum_cascade_laser", "count": 1 },
+            { "id": "grindless:thin_film_ln_modulator", "count": 4 }
+          ],
+          "kept": [],
+          "fluidsIn": [{ "id": "gtceu:ultrapure_water", "amount": 1000 }],
+          "charge": [],
+          "itemsOut": [{ "id": "gtnn:optical_processor", "count": 2 }],
+          "fluidsOut": [{ "id": "minecraft:water", "amount": 1000 }]
+        },
+        {
+          "name": "optical_assembly",
+          "circuit": 5,
+          "eut": 1966080,
+          "duration": 800,
+          "itemsIn": [
+            { "id": "gtnn:optical_processor", "count": 2 },
+            { "id": "grindless:quantum_memory_chip", "count": 2 }
+          ],
+          "kept": [],
+          "fluidsIn": [{ "id": "gtceu:ultrapure_water", "amount": 1000 }],
+          "charge": [],
+          "itemsOut": [{ "id": "gtnn:optical_assembly", "count": 1 }],
+          "fluidsOut": [{ "id": "minecraft:water", "amount": 1000 }]
+        },
+        {
+          "name": "thin_film_modulators",
+          "circuit": 6,
+          "eut": 491520,
+          "duration": 200,
+          "itemsIn": [{ "id": "grindless:lnoi_wafer", "count": 1 }],
+          "kept": [],
+          "fluidsIn": [{ "id": "gtceu:ultrapure_water", "amount": 1000 }],
+          "charge": [],
+          "itemsOut": [{ "id": "grindless:thin_film_ln_modulator", "count": 16 }],
+          "fluidsOut": [{ "id": "minecraft:water", "amount": 1000 }]
+        }
+      ]
+    },
+    "ion_implantation": {
+      "recipes": [
+        {
+          "name": "ln_smart_cut",
+          "circuit": 3,
+          "eut": 491520,
+          "duration": 400,
+          "itemsIn": [{ "id": "grindless:lithium_niobate_wafer", "count": 1 }],
+          "kept": [],
+          "fluidsIn": [{ "id": "gtceu:helium", "amount": 100 }],
+          "charge": [],
+          "itemsOut": [{ "id": "grindless:implanted_ln_wafer", "count": 1 }],
+          "fluidsOut": []
+        },
+        {
+          "name": "sic_aluminium_implant",
+          "circuit": 4,
+          "eut": 491520,
+          "duration": 400,
+          "itemsIn": [
+            { "id": "grindless:sic_epi_wafer", "count": 1 },
+            { "id": "gtceu:aluminium_dust", "count": 1 }
+          ],
+          "kept": [],
+          "fluidsIn": [],
+          "charge": [],
+          "itemsOut": [{ "id": "grindless:implanted_sic_wafer", "count": 1 }],
+          "fluidsOut": []
+        }
+      ]
+    },
+    "electric_blast_furnace": {
+      "recipes": [
+        {
+          "name": "gst_target",
+          "circuit": 0,
+          "eut": 30720,
+          "duration": 300,
+          "temp": 1200,
+          "itemsIn": [
+            { "id": "gtceu:germanium_dust", "count": 2 },
+            { "id": "gtceu:antimony_dust", "count": 2 },
+            { "id": "gtceu:tellurium_dust", "count": 5 }
+          ],
+          "kept": [],
+          "fluidsIn": [{ "id": "gtceu:argon", "amount": 1000 }],
+          "charge": [],
+          "itemsOut": [{ "id": "grindless:gst_target", "count": 1 }],
+          "fluidsOut": []
+        },
+        {
+          "name": "gst_target_remelt",
+          "circuit": 0,
+          "eut": 30720,
+          "duration": 200,
+          "temp": 1200,
+          "itemsIn": [{ "id": "grindless:spent_gst_target", "count": 3 }],
+          "kept": [],
+          "fluidsIn": [{ "id": "gtceu:argon", "amount": 1000 }],
+          "charge": [],
+          "itemsOut": [{ "id": "grindless:gst_target", "count": 2 }],
+          "fluidsOut": []
+        }
+      ]
+    },
+    "large_chemical_reactor": {
+      "recipes": [
+        {
+          "name": "tellurium_from_metal_sludge",
+          "circuit": 0,
+          "eut": 122880,
+          "duration": 300,
+          "itemsIn": [
+            { "id": "gtceu:metal_sludge_dust", "count": 4 },
+            { "id": "gtceu:soda_ash_dust", "count": 1 }
+          ],
+          "kept": [],
+          "fluidsIn": [
+            { "id": "gtceu:sulfuric_acid", "amount": 1000 },
+            { "id": "gtceu:sulfur_dioxide", "amount": 1000 }
+          ],
+          "charge": [],
+          "itemsOut": [
+            { "id": "gtceu:tellurium_dust", "count": 1 },
+            { "id": "gtceu:nickel_dust", "count": 1 },
+            { "id": "gtceu:copper_dust", "count": 1 }
+          ],
+          "fluidsOut": [{ "id": "gtceu:diluted_sulfuric_acid", "amount": 2000 }]
+        }
+      ]
+    }
+  }
+}
