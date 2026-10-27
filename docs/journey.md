@@ -44,7 +44,7 @@ The supporting research is in `docs/research/space/`:
 | **EV** (T4) | automated lunar base, connected to home; **Mars** at the end | tungsten, rare earths, deuterium ice | platinum plant, regolith cell with volatiles furnace and cryogenic plant (Moon), atmosphere processor (Mars), EV tripod and lunar solar field; combined-cycle plant, hot strip mill and rare-earth extraction cascade (Earth), and sealed dome (Moon and Mars), added for the ×1.35 target | IV: tungsten steel |
 | **IV** (T5) | **Venus and Mercury** at once | naquadah (Venus veins at 90 bar), iridium and osmium (Mercury crust) | fission reactor (designed cores), hot cell (radiochemistry and RTG pellets), naquadah plant, pressurized drill (Venus) and night-side drill (Mercury), Venus heat engine, Mercury solar field | LuV |
 | **LuV** (T6) | **the asteroid belt and Jupiter's moons** (Io, Europa, Ganymede); first orbital station, in Earth orbit | living matter from Europa's ocean (wetware circuits); asteroid metals: meteoric iron, tetrataenite and the platinum-metal concentrate (belt); germanium (Io) | helium refrigerator, coated conductor line, HTS magnet works and biofoundry (Earth); orbital solar station, microgravity smelter, zero-g crystal grower, wake shield facility, rotating hydroponic ring and organoid lab (Earth orbit); harpoon anchor drill, asteroid processor and optical miner (belt); fumarole condenser and volcanic intake (Io); flux-tube tether (Io orbit) or the sulfur–iodine plant (Io); cryobot and algae bioreactor (Europa); gravitational-wave detector and coilgun probe launcher (Ganymede) | ZPM |
-| **ZPM** (T7) | **Saturn** (Titan, Enceladus) and the ice giants **from orbit, without landing** | bulk helium-3 and deuterium, Titan tholins | fusion as infrastructure, orbital mining laser, gas giant siphon, orbital shipyard (the space elevator moves to UV). **Kardashev I**: the whole solar system works | UV |
+| **ZPM** (T7) | **Saturn** (Titan, Enceladus) and the ice giants **from orbit, without landing** | bulk helium-3 and deuterium, Titan tholins | fusion as infrastructure, orbital mining laser, gas giant siphon, orbital shipyard (the space elevator moves to UV, then UHV). **Kardashev I**: the whole solar system works | UV |
 | **UV** (T8) | Pluto and the Kuiper belt from orbit; first probe to another star | exotic ices | particle accelerator, laser sail launcher | UHV |
 | **UHV** (T9) | **Alpha Centauri** (Proxima b): the probe opens the first gate | alien flora | pair of warp gates, Dyson swarm around the Sun. **Kardashev II** | UEV |
 | **UEV** (T10) | several stars at once (Sirius, Barnard…) | white dwarf degenerate matter | stellar forge, nebula collector | UIV |
@@ -161,7 +161,7 @@ In English, one chapter per era. Each chapter tells the step that brings you clo
 
 - **GTNH:**
   - **Planets by tier:** the Moon in HV, Mars, Venus and Mercury in EV, etc.
-  - **Space elevator (UV):** modules that mine planets without landing.
+  - **Space elevator (UHV):** modules that mine planets without landing (moved from UV: the UV design does not use it, `docs/eras/uv.md`).
   - **Final megastructures:** the Eye of Harmony and the Forge of the Gods.
   - **The "pseudo-stable" black hole:** it is seeded and decays if it is not tended. It is the best precedent for our ending.
   - **The real ending:** the Stellar Gate.
