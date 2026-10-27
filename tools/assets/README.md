@@ -63,6 +63,7 @@ Generators for the pack's own textures. Everything is procedural 16x16 pixel art
 | `Build-UVFusionTextures.ps1` | Writes the spent laser module icon of UV's laser fusion chamber (UV-A3). `-Credits`. |
 | `Build-UVPhotonicsTextures.ps1` | Writes the nine item icons of UV's photonics (UV-A6): Yb-doped preform, fibre Bragg grating, GaAs and sapphire boules and wafers, InGaAs epi wafer, InGaAs diode bar, NbN film wafer. `-Credits`. |
 | `Build-UVMaterialsTextures.ps1` | Writes the twelve item icons of UV's materials (UV-A8): BNNT dust, silver tube, PIT billet, six porous near-net parts and three printed parts. `-Credits`. |
+| `Build-UVPropulsionTextures.ps1` | Writes the eight item icons of UV's propulsion (UV-A11): ion and Hall thrusters, thruster pod, molybdenum grid, LaB6 cathode, BN discharge channel, UV electromagnet, propellant tank. `-Credits`. |
 | `Build-UVDetectorsTextures.ps1` | Writes the controller faces of UV's detectors (UV-A7): zone refining tower and optical ground station. Checks that `uv/detectors.js` uses both folders. `-Credits`. |
 | `Build-UVLifeTextures.ps1` | Writes the controller faces of UV's life (UV-A10): ark biosphere and neural culture vat, and the algae culture icon. Checks that `uv/life.js` uses all three. `-Credits`. |
 | `Build-UVWirelessTextures.ps1` | Writes the UV wireless tier (UV-A9): the UV SMES cell (`block/wireless/smes_cell_uv.png`, the table's uv row texture) and the UV covers' faces and items, with `Build-WirelessEnergyTextures.ps1`'s routines and palette (read from its syntax tree) in GTM's UV dark aqua. `-Credits`. |
@@ -1033,3 +1034,23 @@ powershell -NoProfile -ExecutionPolicy Bypass -File tools\assets\Build-UVWireles
 | `block/wireless/smes_cell_uv.png` | The UV cell: a superconducting coil in a frost-grey cryostat, its tape turns dark aqua in the window. |
 | `block/cover/wireless_<energy\|dynamo>_cover_uv.png` | The covers on a machine's face: a dark aqua frame round the dish or the mast. |
 | `item/wireless/<energy\|dynamo>_cover_uv.png` | The cover items: a steel plate with the frame and the symbol. |
+
+## UV cryotank winder and thruster works items (UV-A11)
+
+Procedural, drawn by `Build-UVPropulsionTextures.ps1`; nothing is copied from another mod. Item icons only: the two controllers reuse the composite autoclave's and the engine test stand's faces on the UV casing, and the BNNT fuel tank's column is F1's.
+
+```powershell
+powershell -NoProfile -ExecutionPolicy Bypass -File tools\assets\Build-UVPropulsionTextures.ps1
+powershell -NoProfile -ExecutionPolicy Bypass -File tools\assets\Build-UVPropulsionTextures.ps1 -Credits
+```
+
+| File (under `textures/`) | Notes |
+|---|---|
+| `item/ion_thruster.png` | A pink printed chamber behind a round blue chequered grid face. |
+| `item/hall_thruster.png` | A pale ceramic annulus round a violet plasma core. |
+| `item/thruster_pod.png` | A grey box with two flared blue nozzles below. |
+| `item/molybdenum_grid.png` | A round molybdenum disc pierced by a lattice of apertures, dark rim. |
+| `item/lanthanum_hexaboride_cathode.png` | A violet LaB6 rod under a copper-coloured cap. |
+| `item/bn_discharge_channel.png` | A white boron nitride ring with a grey outer edge. |
+| `item/uv_electromagnet.png` | A copper winding framed by a grey iron core. |
+| `item/propellant_tank.png` | A dark composite capsule with a light diagonal overwrap pattern. |

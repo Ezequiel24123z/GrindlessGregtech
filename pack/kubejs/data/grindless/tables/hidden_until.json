@@ -27,7 +27,6 @@
     "max"
   ],
   "groups": [
-    {"material":"grindless:bnnt_fuel_tank","until":"uv","reason":"UV-F1 registration (startup_scripts/grindless/uv/foundation.js): package A11, propulsion and the tier 11 tank, writes its recipes; the integrator then deletes this rule and its groups in hidden_until.json","items":["grindless:bnnt_fuel_tank"],"fluids":[]},
     {"material":"grindless:charon_core","until":"uv","reason":"UV-F1 registration (startup_scripts/grindless/uv/foundation.js): package B3, Pluto's ices, writes its recipes; the integrator then deletes this rule and its groups in hidden_until.json","items":["grindless:charon_core"],"fluids":[]},
     {"material":"grindless:heliopause_data","until":"uv","reason":"UV-F1 registration (startup_scripts/grindless/uv/foundation.js): package B5, the edge, writes its recipes; the integrator then deletes this rule and its groups in hidden_until.json","items":["grindless:heliopause_data"],"fluids":[]},
     {"material":"grindless:planetesimal_sample","until":"uv","reason":"UV-F1 registration (startup_scripts/grindless/uv/foundation.js): package B4, the Kuiper belt, writes its recipes; the integrator then deletes this rule and its groups in hidden_until.json","items":["grindless:planetesimal_sample"],"fluids":[]},

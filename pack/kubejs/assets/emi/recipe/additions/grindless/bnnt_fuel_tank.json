@@ -1,0 +1,5 @@
+{
+  "type": "emi:info",
+  "stacks": ["item:grindless:bnnt_fuel_tank"],
+  "text": ["emi.grindless.info.bnnt_fuel_tank.0"]
+}
