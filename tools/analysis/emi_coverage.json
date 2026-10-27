@@ -56,11 +56,12 @@
     { "type": "gtceu:closed_loop_cooling", "source": "server_scripts/grindless/luv/helium_refrigerator.js makes one run per live vacuum freezer recipe that takes liquid helium" }
   ],
   "exceptions": [
+  { "id": "grindless:c12_diamond_spreader", "role": "use", "reason": "temporary (UHV-A3): its use, the Dyson swarm segment, is UHV-B3's; delete this exception when B3 merges" },
+  { "id": "fluid:gtceu:ultrapure_water", "role": "use", "reason": "temporary (UHV-A3): its uses, the photonic foundry's rows, are UHV-A4's; delete this exception when A4 merges" },
   { "id": "grindless:nuclear_clock", "role": "use", "reason": "temporary (UHV-A2): its uses, the wireless network's UHV link, the Casimir array and the warp gate, are UHV-A9's, A6's and B7's; delete this exception when A9 merges" },
   { "id": "grindless:lithium_niobate_wafer", "role": "use", "reason": "temporary (UHV-A2): its use, the photonic foundry's LNOI modulator, is UHV-A4's; delete this exception when A4 merges" },
   { "id": "grindless:eu_yso_boule", "role": "use", "reason": "temporary (UHV-A2): its use, the photonic foundry's quantum memory, is UHV-A4's; delete this exception when A4 merges" },
   { "id": "grindless:inp_wafer", "role": "use", "reason": "temporary (UHV-A2): its use, the QCL superlattice, is UHV-A4's; delete this exception when A4 merges" },
-  { "id": "grindless:nickel_63_target", "role": "use", "reason": "temporary (UHV-A1): its use, the betavoltaic fab, is UHV-A3's; delete this exception when A3 merges" },
   { "id": "grindless:californium_252_source", "role": "use", "reason": "temporary (UHV-A1): its use, the cold-trap drill on Proxima b, is UHV-B5's;   delete this exception when B5 merges" },    { "id": "grindless:itbtc_coated_conductor", "role": "use", "reason": "temporary (LuV-A3): its uses, the HTS coil and the SMES cell, are LuV-A4's magnet works; delete this exception when A4 merges" },
     { "id": "grindless:chondritic_extract", "role": "use", "reason": "temporary (LuV-B5): its use, the Europan culture of the algae bioreactor, is LuV-B8's;     delete this exception when B8 merges" }
       ],
