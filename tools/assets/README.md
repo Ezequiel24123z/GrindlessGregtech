@@ -84,6 +84,7 @@ Generators for the pack's own textures. Everything is procedural 16x16 pixel art
 | `Build-ZPMUranusTextures.ps1` | Writes the faces of the ZPM Uranus machines (ZPM-B5): `multiblock/ice_giant_siphon/`, `multiblock/slurry_separator/` and `multiblock/flyby_probe_bay/` (`overlay_front`, `overlay_front_active` and its emissive layer; the emissive pixels are a subset of the colour layer). Proposed CREDITS "Assets" line: the three overlays, procedural, original. |
 | `Build-ZPMTravelTextures.ps1` | Writes the ZPM-B1 travel textures: the naquadah and aerogel fuel tank columns (`block/zpm/<tank>_side`, `_end`) and the Saturnian and Uranian quantum seed ampoules (`item/`). `-OutRoot <dir>` writes elsewhere. |
 | `Build-UVTravelTextures.ps1` | Writes the UV-B1 travel textures: the Neptunian and Plutonian quantum seed ampoules (`item/`) and Pluto's orbit sky disc (`sky/pluto.png`; GCYR ships no Pluto sky texture). `-OutRoot <dir>` writes elsewhere; `-Credits` prints the CREDITS rows. |
+| `Build-UVKuiperTextures.ps1` | Writes the two item icons of UV's Kuiper belt (UV-B4): the Kuiper interceptor and the sample canister. The interceptor bay and the ice annealer reuse the entry probe bay's and the helium refrigerator's faces on the station truss casing. `-Credits`. |
 | `Build-ZPMMagnetWorksTextures.ps1` | Writes the face of the ZPM naquadria magnet works (ZPM-A5): `multiblock/naquadria_magnet_works/` (`overlay_front`, `overlay_front_active` and its emissive layer; the emissive pixels are a subset of the colour layer) and the `item/hts_insert.png`. The ZPM wireless cell and covers come from `Build-WirelessEnergyTextures.ps1` (the zpm row). Proposed CREDITS "Assets" lines: the overlays, the HTS insert and the ZPM cell/cover textures, procedural, original. |
 | `Build-ZPMFusionTextures.ps1` | Writes the faces of the ZPM plasma quench caster and direct energy converter (ZPM-A7): `multiblock/plasma_quench_caster/` and `multiblock/direct_energy_converter/` (`overlay_front`, `overlay_front_active` and its emissive layer; the emissive pixels are a subset of the colour layer). Proposed CREDITS "Assets" line: both overlays, procedural, original. |
 ## Regenerate
@@ -1063,3 +1064,17 @@ powershell -NoProfile -ExecutionPolicy Bypass -File tools\assets\Build-UVPropuls
 | `item/bn_discharge_channel.png` | A white boron nitride ring with a grey outer edge. |
 | `item/uv_electromagnet.png` | A copper winding framed by a grey iron core. |
 | `item/propellant_tank.png` | A dark composite capsule with a light diagonal overwrap pattern. |
+
+## UV Kuiper interceptor bay and amorphous ice annealer items (UV-B4)
+
+Procedural, drawn by `Build-UVKuiperTextures.ps1`; nothing is copied from another mod. Item icons only: the two controllers reuse the entry probe bay's and the helium refrigerator's faces on the station truss casing.
+
+```powershell
+powershell -NoProfile -ExecutionPolicy Bypass -File tools\assets\Build-UVKuiperTextures.ps1
+powershell -NoProfile -ExecutionPolicy Bypass -File tools\assets\Build-UVKuiperTextures.ps1 -Credits
+```
+
+| File (under `textures/`) | Notes |
+|---|---|
+| `item/kuiper_interceptor.png` | A grey probe body with gold solar wings, a gold RTG band and a flared nozzle below. |
+| `item/sample_canister.png` | A pale titanium capsule with two white seal bands and a small sensor window. |
