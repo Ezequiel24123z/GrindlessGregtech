@@ -10,7 +10,6 @@ Integrator-owned. Read this instead of `DECISIONS.md` and the session notes. Ove
 - **Repository:** unmerged historical branches are kept only as `archive/*` tags; finished package branches are deleted after integration.
 
 ## Open blockers and known issues
-- UHV-B1 station deploy/save (Mercury and Proxima b slots) is unproven in T1: runs up to 20261027-192456-server failed only on harness bugs; the Integer fix is in, rerun gg_test_uhv_travel with the next T1 batch. The other 8 checks pass.
 - `tools/test/places.mjs` resolves ${orbit:proxima_b} to the nonexistent gcyr:proxima_centauri_b_orbit (derives <surface>_orbit); no config uses the token. Fix in UHV-C3 (read the orbit from GCYR's orbit_world).
 - GCYR's configured low gravity is not applied in game (menu only); the design no longer claims it.
 - A same-save reopen in the headless test client deadlocks on our fixture's synchronous Rhino callback (not a persistence defect).
