@@ -10,7 +10,9 @@
 //                          "kept" entries are GTM's non-consumed item inputs; a "chance" below 10,000 is a chanced input or output of 1
 //                          (the rover wears out 1 run in 8 and gives its americium source back as often).
 //   gtceu:chemical_reactor / assembler / centrifuge   GTM rows keyed by our items (no circuit): line 15's melanin extract, the
-//                          melanin-chitosan composite and the flare shield panel; the rover; the Earth extracts' destinations.
+//                          melanin-chitosan composite and the flare shield panel; the rover; the Earth extracts' destinations;
+//                          and F1's two casings, 2 a craft: bsl4_casing (HSS-S, PTFE, a sterilising filter) and hangar_casing
+//                          (tungstensteel and naquadah alloy on a frame).
 //   crafting               the controllers: UHV hull + 2 UV parts + 2 UHV circuits, shaped recipes grindless:crafting/<machine>.
 //
 // The older rows of the package are read elsewhere: biofoundry.json circuits 11-16 (luv/biofoundry.js) and the algae bioreactor's
