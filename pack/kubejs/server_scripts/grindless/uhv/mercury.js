@@ -74,7 +74,7 @@
       [], 1920, 200, { temp: 1700 }),
     row('regolith_crucible_lining', 'electric_blast_furnace', null, [item('gtceu:sapphire_dust', 2), item('gtceu:quicklime_dust', 2)], [],
       [item(LINING, 1)], [], 1920, 400, { temp: 1800 }),
-    row('iron_tube', 'extruder', null, [item('gtceu:iron_ingot', 1)], [], [item(IRON_TUBE, 1)], [], 480, 100,
+    row('iron_tube', 'extruder', null, [item('minecraft:iron_ingot', 1)], [], [item(IRON_TUBE, 1)], [], 480, 100,
       { notConsumed: ['gtceu:tiny_pipe_extruder_mold'] }),
     row('excavator_bucket_drum', 'assembler', null,
       [item('gtceu:tungsten_steel_plate', 6), item('gtceu:naquadah_alloy_plate', 2), item('gtceu:tungsten_steel_frame', 1)], [],
