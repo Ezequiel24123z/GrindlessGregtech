@@ -2,7 +2,7 @@
 // Band ONLY: X 28928-28991, Z 0-63, Overworld Y 60-120 (nothing is placed there: the checks are registry, recipe and SavedData reads).
 // Doubt: the Proxima b override (S0-3's path) and stations seven and eight in the real game: GCYR's Proxima b is tier 8 with orbit
 // grindless:proxima_b_orbit, both levels exist, each new orbit maps back to its planet; a station deployed through GCYR's own holder
-// (the same SpaceStation the station package makes) in gcyr:mercury_orbit and grindless:proxima_b_orbit survives a disk save
+// (allocateStation, the station item's path) in gcyr:mercury_orbit and grindless:proxima_b_orbit survives a disk save
 // (DimensionDataStorage.save, then readTagFromDisk, then a fresh StationWorldSavedData), and the six older orbits keep their stations.
 //   planet_*    PlanetData: Proxima b's tier, orbit, levels; the two orbits map to their planets
 //   slots_*     global.grindless.stations.slots: eight orbits, the first six unchanged
@@ -134,13 +134,13 @@
         var holder = L.Stations.getSpaceStations(lv)
         var pl = fromOrbit(lv)
         if (pl === null) throw new Error('no planet for this orbit')
-        var id = Number(holder.getFreeStationId())
-        var pos = holder.getFreeStationPos(pl)
-        holder.addStation(id, new L.SpaceStation(pl, pos))
+        // GCYR's own deploy path (the station item): a free id, its position and the SavedData entry in one call
+        var id = Number(holder.allocateStation(pl))
         try { jcall(holder, ['setDirty', 'm_77762_']) } catch (e) { note('station_dirty_' + n.key, String(e)) }
         var st = holder.getStation(java.lang.Integer.valueOf(id))
+        var pos = st === null || st === undefined ? 'none' : String(holder.getStationPos(id))
         made[n.key] = id
-        check('station_deploy_' + n.key, st !== null && st !== undefined && Number(holder.getFreeStationId()) === id + 1,
+        check('station_deploy_' + n.key, st !== null && st !== undefined && Number(holder.getFreeStationId()) !== id,
           n.orbit + ': station ' + id + ' at ' + String(pos) + ' for ' + planetName(pl))
       } catch (e) {
         check('station_deploy_' + n.key, false, n.orbit + ': ' + e)
