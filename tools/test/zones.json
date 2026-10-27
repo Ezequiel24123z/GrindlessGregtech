@@ -106,6 +106,7 @@
     { "id": "uhv_travel", "x": [28928, 28991], "z": [0, 63], "y": [60, 120], "tests": ["uhv_travel"], "note": "UHV-B1: registry, recipe and SavedData checks only (no block placed); two stations deployed through GCYR's holder API in gcyr:mercury_orbit and grindless:proxima_b_orbit at the positions GCYR allocates" },
     { "id": "uhv_swarm", "x": [29184, 29247], "z": [0, 63], "y": [60, 120], "tests": ["uhv_swarm"], "note": "UHV-B3: a swarm control station (11 x 5 x 11) built at 29205-29215, 79-83, 10-20 in gcyr:mercury_orbit runs c2 (full swarm) at 8,388,608 EU/t,     fast-forwarded to its wear outputs" },
         { "id": "uhv_gate", "x": [29440, 29503], "z": [0, 63], "y": [60, 120], "tests": ["uhv_gate"], "note": "UHV-B7: a warp gate ring (15 x 15 x 3) built at 29465-29479, 79-81, 10-24 in gcyr:overworld_orbit and in grindless:proxima_b_orbit, each running c2 (sustain, 31,457,280 EU/t); the transit step with a stand-in player" },
-        { "id": "mega_spikes", "x": [29952, 30015], "y": [98, 115], "tests": ["mega_spikes"], "note": "MEGA-S: throwaway spike machines (gg_spike_*); Y to 115 because the mega EBF is 17 high" }
+        { "id": "mega_spikes", "x": [29952, 30015], "y": [98, 115], "tests": ["mega_spikes"], "note": "MEGA-S: throwaway spike machines (gg_spike_*); Y to 115 because the mega EBF is 17 high" },
+        { "id": "mega_lib", "x": [30208, 30271], "y": [98, 115], "tests": ["mega_lib"], "note": "MEGA-0: throwaway coil machines (gg_lib_*) using global.grindless.mega.chain, and the UHV parallel hatch forming in a plant" }
       ]
 }
