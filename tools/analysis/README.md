@@ -11,7 +11,7 @@ Separately, a step that doesn't belong to any tier: the **obtain audit** (`--pas
 ## How to run it
 
 ```powershell
-powershell -NoProfile -ExecutionPolicy Bypass -File tools\analysis\Invoke-Reachability.ps1 -Tier luv   # steam | lv | mv | hv | ev | iv | luv (or next/<tier>: prepared layer; none exists today)
+powershell -NoProfile -ExecutionPolicy Bypass -File tools\analysis\Invoke-Reachability.ps1 -Tier luv   # steam | lv | mv | hv | ev | iv | luv | zpm (or next/<tier>: prepared layer; none exists today)
 ```
 
 One single command: uploads `pack\` and a minimal overlay (just `gg_dump.js`) to the home PC with `tools\test\Invoke-GGTest.ps1`, starts a clean server, runs `kubejs custom_command gg_dump`, retrieves `kubejs\exported\*.json`, and runs `reachability.mjs` with Node. Takes 2-8 min (longer if the PC is busy: only one JVM at a time). The report prints to the console and goes to `tools\analysis\out\<date>-<tier>\report-<tier>.txt/.json`. Exit code: `0` PASS, `1` FAIL/WARN, `2` tool failure.

@@ -219,6 +219,7 @@ No literal text has been copied from any book. Structure and task design convent
 | Spine and branches of the starting chapter, small restock rewards | Monifactory, `config/ftbquests/quests/chapters/groundwork.snbt` | LGPL-3.0 | Structure |
 | Tools that do not break at the start, spine in one row with branches above and below, one-line warnings about what breaks playthroughs | GregTech Leisure (the user's instance) | No clear licence | Ideas only (`docs/quests.md`, section 12) |
 | LuV chapter: the Mk1 asked with its superconducting coils, energy hatches as the start buffer, and the warning that the fusion reactor's europium comes out as a hot liquid, not a plasma | GregTech Community Pack Modern (GregTechCEu/GregTech-Modern-Community-Pack), `config/ftbquests/quests/chapters/luv__ludicrous_voltage.snbt` (*Fusion Reactor I*, *Europium*) | LGPL-2.1 | Task design and the warnings, checked against GTM 7.5.3; new texts |
+| ZPM chapter (`zpm_age`, `pl_zpm`, Power's ZPM clusters): the same chained tasks, spine with branches and small rewards | Star Technology and Monifactory (rows above) | MIT / LGPL-3.0 | Conventions only; new texts. GTNH and GT Leisure ideas only |
 
 ## Assets
 

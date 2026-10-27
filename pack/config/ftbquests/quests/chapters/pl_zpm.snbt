@@ -1,0 +1,550 @@
+{
+	autofocus_id: "1288F08BE5D83F0B"
+	consume_items: false
+	default_hide_dependency_lines: false
+	default_quest_shape: ""
+	filename: "pl_zpm"
+	group: "3027186E3042DDFB"
+	icon: "gtceu:naquadria_refinery"
+	id: "165E6C18BABFC89F"
+	order_index: 7
+	progression_mode: "flexible"
+	quest_links: [
+		{
+			id: "3FADF1CD21445CF8"
+			linked_quest: "5CF8B7B6B42ABCC1"
+			shape: "rsquare"
+			x: 0.5d
+			y: 0.75d
+		}
+	]
+	quests: [
+		{
+			dependencies: ["5CF8B7B6B42ABCC1"]
+			description: ["The solution the naquadah plant had to tank and keep finally gets used."]
+			icon: "gtceu:naquadria_refinery"
+			id: "1288F08BE5D83F0B"
+			shape: "gear"
+			size: 1.5d
+			subtitle: "The LuV plant's radioactive solution, refined"
+			tasks: [
+				{ id: "37257641715D781A", item: "gtceu:naquadria_refinery", optional_task: true, type: "item" }
+				{ id: "109AA4BB5B3CF992", type: "checkmark" }
+			]
+			title: "Naquadria Refinery"
+			x: 3.0d
+			y: 0.75d
+		}
+		{
+			dependencies: ["1288F08BE5D83F0B"]
+			icon: "gtceu:naquadria_dust"
+			id: "396E57A73776D727"
+			size: 1.25d
+			subtitle: "Into the fuel works"
+			tasks: [
+				{ id: "749E023C99C03C69", item: "gtceu:naquadria_dust", optional_task: true, type: "item" }
+				{ id: "3A1C9F00F41CFB9A", type: "checkmark" }
+			]
+			title: "Naquadria Dust"
+			x: 5.5d
+			y: 0.75d
+		}
+		{
+			dependencies: ["396E57A73776D727"]
+			description: ["Makes the fuel and takes the spent fuel back, so the loop closes."]
+			icon: "gtceu:naquadah_fuel_works"
+			id: "1357FF0B9B84D726"
+			shape: "gear"
+			size: 1.5d
+			tasks: [
+				{ id: "1103E02C122AE2BB", item: "gtceu:naquadah_fuel_works", optional_task: true, type: "item" }
+				{ id: "73CA121EE2B97BFE", type: "checkmark" }
+			]
+			title: "Naquadah Fuel Works"
+			x: 8.0d
+			y: 0.75d
+		}
+		{
+			dependencies: ["1357FF0B9B84D726"]
+			icon: "gtnn:large_naquadah_reactor"
+			id: "51800F0BFFE6B2DD"
+			shape: "gear"
+			size: 1.25d
+			subtitle: "Burns fuel the Mk2 has excited; its power goes to the network"
+			tasks: [
+				{ id: "1CE2CBB79DBC28E0", item: "gtnn:large_naquadah_reactor", optional_task: true, type: "item" }
+				{ id: "7E09ABF1929E515A", type: "checkmark" }
+			]
+			title: "Large Naquadah Reactor"
+			x: 10.5d
+			y: 0.75d
+		}
+		{
+			dependencies: ["51800F0BFFE6B2DD"]
+			icon: "gtceu:naquadria_dust"
+			id: "36552FE04ADAEB55"
+			shape: "circle"
+			size: 0.75d
+			subtitle: "The spent fuel returns to the fuel works"
+			tasks: [
+				{ id: "70873C73A9E07867", item: "gtceu:naquadria_dust", optional_task: true, type: "item" }
+				{ id: "56B98C61D809258B", type: "checkmark" }
+			]
+			title: "Naquadria Dust, Back"
+			x: 13.0d
+			y: 0.75d
+		}
+		{
+			description: ["Takes the old reactor waste back out of storage and gives it a use."]
+			icon: "gtceu:waste_retrieval_plant"
+			id: "7377EBA6D8DFAC14"
+			shape: "gear"
+			size: 1.5d
+			tasks: [
+				{ id: "5936D2EF66F3000C", item: "gtceu:waste_retrieval_plant", optional_task: true, type: "item" }
+				{ id: "3020F6C0D8F23301", type: "checkmark" }
+			]
+			title: "Waste Retrieval Plant"
+			x: 17.25d
+			y: 2.25d
+		}
+		{
+			dependencies: ["7377EBA6D8DFAC14"]
+			icon: "grindless:radium_capsule"
+			id: "5851B1AEB93F027B"
+			size: 1.25d
+			subtitle: "Radon for the Mk2, with no uranium spent"
+			tasks: [
+				{ id: "718940DF87A6E6C6", item: "grindless:radium_capsule", optional_task: true, type: "item" }
+				{ id: "1912606164F91956", type: "checkmark" }
+			]
+			title: "Radium Capsule"
+			x: 19.75d
+			y: 0.75d
+		}
+		{
+			dependencies: ["7377EBA6D8DFAC14"]
+			icon: "gtceu:radon_bucket"
+			id: "7B88FC90CAE8777B"
+			size: 1.25d
+			tasks: [
+				{ id: "768B045596697EA5", item: "gtceu:radon_bucket", optional_task: true, type: "item" }
+				{ id: "7F96B9568B911960", type: "checkmark" }
+			]
+			title: "Radon"
+			x: 19.75d
+			y: 2.25d
+		}
+		{
+			dependencies: ["7377EBA6D8DFAC14"]
+			icon: "gtceu:actinide_partitioning_plant"
+			id: "197673DD11471D5A"
+			shape: "gear"
+			size: 1.5d
+			subtitle: "What the capsule line leaves"
+			tasks: [
+				{ id: "305B6E88AF647596", item: "gtceu:actinide_partitioning_plant", optional_task: true, type: "item" }
+				{ id: "5BBC9A59C2D603C4", type: "checkmark" }
+			]
+			title: "Actinide Partitioning Plant"
+			x: 19.75d
+			y: 4.5d
+		}
+		{
+			dependencies: ["197673DD11471D5A"]
+			icon: "gtceu:americium_dust"
+			id: "1BD444892D1D43B2"
+			size: 1.25d
+			tasks: [
+				{ id: "106C043DD8381703", item: "gtceu:americium_dust", optional_task: true, type: "item" }
+				{ id: "31A43B6603E517FD", type: "checkmark" }
+			]
+			title: "Americium"
+			x: 22.25d
+			y: 3.0d
+		}
+		{
+			dependencies: ["197673DD11471D5A"]
+			icon: "grindless:curium_oxide"
+			id: "36CF1F534231A122"
+			size: 1.25d
+			tasks: [
+				{ id: "5DAF59464256EBE4", item: "grindless:curium_oxide", optional_task: true, type: "item" }
+				{ id: "1B9DC2BD36B15D01", type: "checkmark" }
+			]
+			title: "Curium Oxide"
+			x: 22.25d
+			y: 4.5d
+		}
+		{
+			dependencies: ["197673DD11471D5A"]
+			icon: "grindless:synroc_block"
+			id: "7ECE9EB75721B2DC"
+			size: 0.75d
+			tasks: [
+				{ id: "52E9C0932AE1FC93", item: "grindless:synroc_block", optional_task: true, type: "item" }
+				{ id: "759D2AFBAE1748E7", type: "checkmark" }
+			]
+			title: "Synroc"
+			x: 22.25d
+			y: 6.0d
+		}
+		{
+			dependencies: ["5851B1AEB93F027B"]
+			icon: "grindless:radium_capsule"
+			id: "378D625D9967B2A1"
+			size: 0.75d
+			tasks: [
+				{ id: "3593CFF6408BA7A5", item: "grindless:radium_capsule", optional_task: true, type: "item" }
+				{ id: "187501F273292CDB", type: "checkmark" }
+			]
+			title: "Radium Capsule"
+			x: 22.25d
+			y: 0.75d
+		}
+		{
+			icon: "gtca:monazite_froth_bucket"
+			id: "7B96CD20F6103ED1"
+			shape: "rsquare"
+			size: 1.0d
+			subtitle: "Flotation, then the thermal reactor"
+			tasks: [
+				{ id: "16A85477FD969D42", item: "gtca:monazite_froth_bucket", optional_task: true, type: "item" }
+				{ id: "7D32C9868B329A96", type: "checkmark" }
+			]
+			title: "Monazite Froth"
+			x: 0.5d
+			y: 10.25d
+		}
+		{
+			dependencies: ["7B96CD20F6103ED1"]
+			description: ["Pulls europium out of the froth with zinc and chlorides."]
+			icon: "gtceu:europium_reductor"
+			id: "1E556D306521C54E"
+			shape: "gear"
+			size: 1.5d
+			tasks: [
+				{ id: "749F70BCC0FEF61E", item: "gtceu:europium_reductor", optional_task: true, type: "item" }
+				{ id: "31B33BC06F33C18C", type: "checkmark" }
+			]
+			title: "Europium Reductor"
+			x: 3.0d
+			y: 10.25d
+		}
+		{
+			dependencies: ["1E556D306521C54E"]
+			icon: "gtceu:europium_dust"
+			id: "11144A7B045D6A16"
+			size: 1.25d
+			tasks: [
+				{ id: "523BAF267892B538", item: "gtceu:europium_dust", optional_task: true, type: "item" }
+				{ id: "518497AE37E9A73D", type: "checkmark" }
+			]
+			title: "Europium"
+			x: 5.5d
+			y: 9.5d
+		}
+		{
+			dependencies: ["1E556D306521C54E"]
+			icon: "gtceu:rare_earth_chloride_solution_bucket"
+			id: "1EAEA850CB67B453"
+			size: 0.75d
+			tasks: [
+				{ id: "199AE651751A01D5", item: "gtceu:rare_earth_chloride_solution_bucket", optional_task: true, type: "item" }
+				{ id: "73C43EE3DDE31CA8", type: "checkmark" }
+			]
+			title: "Rare Earth Chloride"
+			x: 5.5d
+			y: 11.0d
+		}
+		{
+			icon: "gtceu:methane_bucket"
+			id: "71589491A5213B7C"
+			shape: "rsquare"
+			size: 1.0d
+			tasks: [
+				{ id: "7983E477E97E5E78", item: "gtceu:methane_bucket", optional_task: true, type: "item" }
+				{ id: "39926178F5862B9D", type: "checkmark" }
+			]
+			title: "Methane"
+			x: 9.75d
+			y: 11.0d
+		}
+		{
+			dependencies: ["71589491A5213B7C"]
+			description: ["Cracks methane in a tin bath."]
+			icon: "gtceu:methane_pyrolyser"
+			id: "54AAA19892B3E354"
+			shape: "gear"
+			size: 1.5d
+			tasks: [
+				{ id: "532222029155355D", item: "gtceu:methane_pyrolyser", optional_task: true, type: "item" }
+				{ id: "5C6213EE4404CC20", type: "checkmark" }
+			]
+			title: "Methane Pyrolyser"
+			x: 12.25d
+			y: 9.5d
+		}
+		{
+			dependencies: ["54AAA19892B3E354"]
+			icon: "gtceu:graphene_dust"
+			id: "7C70A114BA82E084"
+			size: 1.25d
+			tasks: [
+				{ id: "7E83C7DAEAF214E2", item: "gtceu:graphene_dust", optional_task: true, type: "item" }
+				{ id: "12F592C4ECE1A79E", type: "checkmark" }
+			]
+			title: "Graphene"
+			x: 14.75d
+			y: 9.5d
+		}
+		{
+			dependencies: ["71589491A5213B7C"]
+			description: ["Grows flat diamond from gas."]
+			icon: "gtceu:diamond_lattice_fab"
+			id: "73DADB6BD8E4EFEC"
+			shape: "gear"
+			size: 1.5d
+			tasks: [
+				{ id: "570EE761B8995AA8", item: "gtceu:diamond_lattice_fab", optional_task: true, type: "item" }
+				{ id: "3F000C7EB5B3B1F2", type: "checkmark" }
+			]
+			title: "Diamond Lattice Fab"
+			x: 12.25d
+			y: 12.5d
+		}
+		{
+			dependencies: ["73DADB6BD8E4EFEC"]
+			icon: "grindless:cvd_diamond_plate"
+			id: "556DE618DC0980FF"
+			size: 1.25d
+			tasks: [
+				{ id: "1EAF03A32C26CCDC", item: "grindless:cvd_diamond_plate", optional_task: true, type: "item" }
+				{ id: "114039BFDE5FF24F", type: "checkmark" }
+			]
+			title: "CVD Diamond Plate"
+			x: 14.75d
+			y: 12.5d
+		}
+		{
+			dependencies: ["556DE618DC0980FF"]
+			description: ["Builds qubit arrays inside a cryostat."]
+			icon: "gtceu:qubit_fab"
+			id: "72F6ED01E3639891"
+			shape: "gear"
+			size: 1.5d
+			tasks: [
+				{ id: "56908F8274BB1252", item: "gtceu:qubit_fab", optional_task: true, type: "item" }
+				{ id: "1515333092808CD0", type: "checkmark" }
+			]
+			title: "Qubit Fab"
+			x: 17.25d
+			y: 12.5d
+		}
+		{
+			dependencies: ["72F6ED01E3639891"]
+			icon: "grindless:qubit_array"
+			id: "37E66CB7391E2B68"
+			size: 1.25d
+			tasks: [
+				{ id: "7284F00F1618B985", item: "grindless:qubit_array", optional_task: true, type: "item" }
+				{ id: "525DCEFC15C3DE06", type: "checkmark" }
+			]
+			title: "Qubit Array"
+			x: 19.75d
+			y: 12.5d
+		}
+		{
+			icon: "grindless:scoop_head"
+			id: "7956A8EF745D7CDC"
+			shape: "rsquare"
+			size: 1.0d
+			subtitle: "A wear part: build spares"
+			tasks: [
+				{ id: "392DC58D012D81EB", item: "grindless:scoop_head", optional_task: true, type: "item" }
+				{ id: "3789168E8BDB3A9B", type: "checkmark" }
+			]
+			title: "Scoop Head"
+			x: 0.5d
+			y: 18.0d
+		}
+		{
+			dependencies: ["7956A8EF745D7CDC"]
+			description: ["Draws helium and hydrogen out of Saturn's air."]
+			icon: "gtceu:gas_giant_siphon"
+			id: "5D9A96B3F6E9A881"
+			shape: "gear"
+			size: 1.5d
+			tasks: [
+				{ id: "79EB89BC0BB0D64A", item: "gtceu:gas_giant_siphon", optional_task: true, type: "item" }
+				{ id: "1B97329A558EFCBB", type: "checkmark" }
+			]
+			title: "Gas Giant Siphon"
+			x: 3.0d
+			y: 18.0d
+		}
+		{
+			dependencies: ["5D9A96B3F6E9A881"]
+			icon: "gtceu:saturn_helium_bucket"
+			id: "594B50550C05B34C"
+			size: 1.25d
+			tasks: [
+				{ id: "1BF5117A444697A3", item: "gtceu:saturn_helium_bucket", optional_task: true, type: "item" }
+				{ id: "1F7918C88F45412A", type: "checkmark" }
+			]
+			title: "Saturn Helium"
+			x: 5.5d
+			y: 18.0d
+		}
+		{
+			dependencies: ["594B50550C05B34C"]
+			icon: "gtceu:isotope_column"
+			id: "1FBE5B82BD953882"
+			shape: "gear"
+			size: 1.5d
+			tasks: [
+				{ id: "10EAD402588566FF", item: "gtceu:isotope_column", optional_task: true, type: "item" }
+				{ id: "374768B6885F384C", type: "checkmark" }
+			]
+			title: "Isotope Column"
+			x: 8.0d
+			y: 18.0d
+		}
+		{
+			dependencies: ["1FBE5B82BD953882"]
+			icon: "gtceu:helium_3_bucket"
+			id: "73C9096FE61142F2"
+			size: 1.25d
+			tasks: [
+				{ id: "7C2978E332249322", item: "gtceu:helium_3_bucket", optional_task: true, type: "item" }
+				{ id: "59575B82C6093258", type: "checkmark" }
+			]
+			title: "Helium-3"
+			x: 10.5d
+			y: 16.5d
+		}
+		{
+			dependencies: ["1FBE5B82BD953882"]
+			icon: "gtceu:deuterium_bucket"
+			id: "5D2BE4D6FF7FE7F2"
+			size: 1.25d
+			tasks: [
+				{ id: "3C1566ABCADD28B8", item: "gtceu:deuterium_bucket", optional_task: true, type: "item" }
+				{ id: "534B4CBFF5ED7794", type: "checkmark" }
+			]
+			title: "Deuterium"
+			x: 10.5d
+			y: 18.0d
+		}
+		{
+			dependencies: ["1FBE5B82BD953882"]
+			icon: "gtceu:helium_bucket"
+			id: "160969087F939D2C"
+			size: 0.75d
+			tasks: [
+				{ id: "5F01A76546C2B925", item: "gtceu:helium_bucket", optional_task: true, type: "item" }
+				{ id: "5B1FC427B6649750", type: "checkmark" }
+			]
+			title: "Helium-4"
+			x: 10.5d
+			y: 19.5d
+		}
+		{
+			dependencies: ["7956A8EF745D7CDC"]
+			description: ["Sweeps a net through the rings."]
+			icon: "gtceu:ring_harvester"
+			id: "568471EE39A4D062"
+			shape: "gear"
+			size: 1.5d
+			tasks: [
+				{ id: "5BA089A8CD1DB402", item: "gtceu:ring_harvester", optional_task: true, type: "item" }
+				{ id: "7F0FA003243A4D36", type: "checkmark" }
+			]
+			title: "Ring Harvester"
+			x: 3.0d
+			y: 21.0d
+		}
+		{
+			dependencies: ["568471EE39A4D062"]
+			icon: "gtceu:ring_ice_bucket"
+			id: "319FA44DC3686C34"
+			size: 1.25d
+			tasks: [
+				{ id: "188FCFBAFA262C2F", item: "gtceu:ring_ice_bucket", optional_task: true, type: "item" }
+				{ id: "1F9637967E553716", type: "checkmark" }
+			]
+			title: "Ring Ice"
+			x: 5.5d
+			y: 21.0d
+		}
+		{
+			description: ["Reaches deeper than the Saturn siphon, under a pressure hull."]
+			icon: "gtceu:ice_giant_siphon"
+			id: "5DDEF91736D3712A"
+			shape: "gear"
+			size: 1.5d
+			tasks: [
+				{ id: "75ADAC4C35CFA55E", item: "gtceu:ice_giant_siphon", optional_task: true, type: "item" }
+				{ id: "733AABA0FECFDF25", type: "checkmark" }
+			]
+			title: "Ice Giant Siphon"
+			x: 15.0d
+			y: 17.25d
+		}
+		{
+			dependencies: ["5DDEF91736D3712A"]
+			icon: "gtceu:uranus_hydrogen_bucket"
+			id: "3CC37585936DEA61"
+			size: 1.25d
+			tasks: [
+				{ id: "7FD2923E5E2A524D", item: "gtceu:uranus_hydrogen_bucket", optional_task: true, type: "item" }
+				{ id: "1F8E53F98498BDDB", type: "checkmark" }
+			]
+			title: "Uranus Hydrogen"
+			x: 17.5d
+			y: 16.5d
+		}
+		{
+			dependencies: ["5DDEF91736D3712A"]
+			icon: "gtceu:diamond_slurry_bucket"
+			id: "55496C9B11B1741A"
+			size: 1.25d
+			tasks: [
+				{ id: "145506666284A268", item: "gtceu:diamond_slurry_bucket", optional_task: true, type: "item" }
+				{ id: "5BF3CACA5B6B3B95", type: "checkmark" }
+			]
+			title: "Diamond Slurry"
+			x: 17.5d
+			y: 18.0d
+		}
+		{
+			dependencies: ["55496C9B11B1741A"]
+			icon: "gtceu:slurry_separator"
+			id: "3308C66EDB5CD1F0"
+			shape: "gear"
+			size: 1.5d
+			tasks: [
+				{ id: "3D0B88B778FE2593", item: "gtceu:slurry_separator", optional_task: true, type: "item" }
+				{ id: "5709B600CE9F6B1C", type: "checkmark" }
+			]
+			title: "Slurry Separator"
+			x: 20.0d
+			y: 18.0d
+		}
+		{
+			dependencies: ["3308C66EDB5CD1F0"]
+			icon: "grindless:ice_giant_diamond_seed"
+			id: "56F246CBBF881ECB"
+			size: 1.25d
+			tasks: [
+				{ id: "57F6EED8C0CDCC02", item: "grindless:ice_giant_diamond_seed", optional_task: true, type: "item" }
+				{ id: "31283AD5288E97ED", type: "checkmark" }
+			]
+			title: "Ice Giant Diamond Seed"
+			x: 22.5d
+			y: 18.0d
+		}
+	]
+	subtitle: ["Naquadria and its fuel, actinides, europium, carbon and qubits, and the gas giants."]
+	title: "ZPM Lines"
+}
