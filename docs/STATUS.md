@@ -2,11 +2,11 @@
 
 Integrator-owned. Read this instead of `DECISIONS.md` and the session notes. Overwrite it at each accepted batch; do not append history.
 
-- **Playable version:** v0.9.0 "ZPM: Saturn and Uranus" (`049fc96`). `playable` and `jugable` both point to it.
+- **Playable version:** v0.10.0 "UV: Neptune, Pluto and the edge". `playable` and `jugable` both point to it.
 - **Active development branch:** `ezequiel24123z-gregtech-grindless-modpack`. `main` matches it (PR #4 merged); feature work still branches from the development branch.
-- **Current milestone:** UV build. Design accepted: `docs/eras/uv.md` (queue in its *Build order*: S0 spikes, F1, F2, waves A and B, C1-C3), decisions in `DECISIONS.md` (2026-10-27, "UV").
-- **Last accepted integration batch:** UV era design (`docs/eras/uv.md`): 31 machines, 22 new lines, 24 crossings; Neptune and Pluto from orbit, the Mk3, the Starshot; the space elevator stays hidden until UHV.
-- **Approved packages in flight:** UV-C3, then v0.10.0 (S0, F1, the F2 elevator part, A1-A12, B1-B5, C1, C2 done; `-Tier uv` PASS). UHV designed (`docs/eras/uhv.md`); UHV-S0 spikes running, the rest starts after v0.10.0.
+- **Current milestone:** UHV build. Design accepted: `docs/eras/uhv.md` (queue in its *Build order*: S0 spikes, F1, F2, waves A and B, C1-C3), decisions in `DECISIONS.md` (2026-10-27, "UHV").
+- **Last accepted integration batch:** UV era (v0.10.0): 31 machines, 22 lines, 24 crossings; `-Tier uv` PASS (20261027-142608-uv); UV-C3 T2 bench PASS (20261027-144119-server) and v0.9.0 save reopen PASS.
+- **Approved packages in flight:** UHV: S0 done (`docs/research/uhv-s0.md`, folded into uhv.md), F1 handed off; then F2, waves A and B, C1-C3, v0.11.0.
 - **Repository:** unmerged historical branches are kept only as `archive/*` tags; finished package branches are deleted after integration.
 
 ## Open blockers and known issues

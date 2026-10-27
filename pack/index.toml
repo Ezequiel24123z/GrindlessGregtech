@@ -4590,7 +4590,7 @@ hash = "1f4b256531a0b42a6ecf399e9b692d9e4730bd4102e53aab3e1fa2c999b69e9d"
 
 [[files]]
 file = "kubejs/data/grindless/tables/hidden_until.json"
-hash = "622e8a7b0f81d9fd8abbb9238d093d08c090d94c45aada1b914868cd21bbf4aa"
+hash = "0746b93fe72af8f0a5a12893bd7718ed3a1a2266b8f43b7f0aacbfa740545c68"
 
 [[files]]
 file = "kubejs/data/grindless/tables/hot_cell.json"
@@ -4898,11 +4898,11 @@ hash = "b0c82c87254c331d472f2449c005d6a584bcddaa7cb6009c7994b977960a21ea"
 
 [[files]]
 file = "kubejs/server_scripts/grindless/integration/gtnn.js"
-hash = "114780cc91ce3c258ea25768a9b0bbc90685664c7e4ff88d4e6c031bc6336a77"
+hash = "9ed5e0cf953c81984321fc1f44e40f3381d0d22b2e32bb163bf93b6ab123ade1"
 
 [[files]]
 file = "kubejs/server_scripts/grindless/integration/hidden.js"
-hash = "c95e106171a3a4036bfcf4c4bc0fde5c26b136276d25edcc2d47b19eb81ed9d6"
+hash = "6a45e3ada686de02441324fa089be2d8ea90a7d56ea0b0f4b9aef43895b47161"
 
 [[files]]
 file = "kubejs/server_scripts/grindless/integration/ironfurnaces.js"
