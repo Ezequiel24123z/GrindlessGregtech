@@ -3325,6 +3325,10 @@ file = "kubejs/assets/grindless/textures/item/ganymedean_quantum_seed.png.mcmeta
 hash = "af915735740bd046c85e66fc03c47bb31517ef64f1721726151ea5de8cf121e3"
 
 [[files]]
+file = "kubejs/assets/grindless/textures/item/geo_assembled_stage.png"
+hash = "a0396c6c7f0e0b17427a4c83a0fd01cafb67cd1027b562133062fe0b9295ca8c"
+
+[[files]]
 file = "kubejs/assets/grindless/textures/item/gphs_module.png"
 hash = "d1b79b39439375bcdcfe249fd612e82025d1c1a3f9e38d62b7721fab99926b71"
 
@@ -4517,6 +4521,10 @@ file = "kubejs/client_scripts/grindless/travelers_titles_lang.js"
 hash = "313400efd9262ce0bd852e1f43905111d105fa44bc648d3bd5b53be2ad93748a"
 
 [[files]]
+file = "kubejs/client_scripts/grindless/uhv_elevator_lang.js"
+hash = "8754d01a2ffe68ff9814879cc8b7eb295a9a294d9cbb3b41e9e5e3acc349849f"
+
+[[files]]
 file = "kubejs/client_scripts/grindless/uhv_foundation_lang.js"
 hash = "41b179e2b9fe3a54e962971cfc41d2e6486ee288aa1d5e6561f57fab7e5345a2"
 
@@ -4866,7 +4874,7 @@ hash = "1f4b256531a0b42a6ecf399e9b692d9e4730bd4102e53aab3e1fa2c999b69e9d"
 
 [[files]]
 file = "kubejs/data/grindless/tables/hidden_until.json"
-hash = "557fffe63d329db65ee029cb4e70e1ae982e0e6257b337e5275883ba55fc3dd6"
+hash = "e9879811d06e8a9df2cdbf1416b87dbba568266e3a25dcecef603e0b766ae8f2"
 
 [[files]]
 file = "kubejs/data/grindless/tables/hot_cell.json"
@@ -5521,6 +5529,10 @@ file = "kubejs/server_scripts/grindless/steam/vein_drilling.js"
 hash = "5547c185e38d18fe64b37420e97d20bc8337650ad15477c37fceb5ece1edf9c4"
 
 [[files]]
+file = "kubejs/server_scripts/grindless/uhv/elevator.js"
+hash = "24f04cd9b93c13e3cd2a18b5b296bd8b6fc1d3f54ab80fcd7620c3d0e9daaf14"
+
+[[files]]
 file = "kubejs/server_scripts/grindless/uhv/transcurium.js"
 hash = "3e413dc3ff89df4f33c66cafd858ae16fef6c71d442d7e4a0bb6bf7c12a9d800"
 
@@ -5983,6 +5995,10 @@ hash = "ecd29a0fd2dbfaec5910bbb24bdfe38de2d4142ea3351a4c517a98de30f87bbd"
 [[files]]
 file = "kubejs/startup_scripts/grindless/steam/small_family.js"
 hash = "98905267da50013b5484caca43e58b62f517cb179d580163e0dc4a2b5502bf20"
+
+[[files]]
+file = "kubejs/startup_scripts/grindless/uhv/elevator.js"
+hash = "45feb9dff34c58f8b83fd101dff09a4022d2e203b1b32dcf054cf2c489812353"
 
 [[files]]
 file = "kubejs/startup_scripts/grindless/uhv/foundation.js"

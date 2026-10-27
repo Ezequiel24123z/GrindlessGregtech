@@ -63,6 +63,8 @@
       ],
       "pendingRoutes": [
         { "id": "grindless:zblan_draw/zblan_draw/glass", "reason": "temporary (UHV-A10): carries ZBLAN stacks held until UHV, because ZrF4 needs zirconia from UHV-A8; delete when A8 merges" },
-        { "id": "grindless:zblan_draw/zblan_draw/draw", "reason": "temporary (UHV-A10): carries ZBLAN stacks held until UHV, because ZrF4 needs zirconia from UHV-A8; delete when A8 merges" }
+        { "id": "grindless:zblan_draw/zblan_draw/draw", "reason": "temporary (UHV-A10): carries ZBLAN stacks held until UHV, because ZrF4 needs zirconia from UHV-A8; delete when A8 merges" },
+        { "id": "grindless:tether_ribbon/climber", "reason": "temporary (UHV-A7): the climber takes UHV-A3's betavoltaic cell and UHV-A5's SiC power module; delete when A5 merges" },
+        { "id": "grindless:space_elevator/geo_lift", "reason": "temporary (UHV-A7): the GEO lift takes the climber and UHV-A5's SiC power module; delete when A5 merges" }
       ]
     }
