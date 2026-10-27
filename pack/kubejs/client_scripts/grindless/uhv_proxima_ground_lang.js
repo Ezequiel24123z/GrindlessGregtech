@@ -44,7 +44,7 @@
 
         ['item.grindless.leached_tailings', 'Leached Tailings', 'Relaves lixiviados'],
         ['tooltip.grindless.leached_tailings.0', 'What the bacteria leave behind: silicates, calcium and iron.', 'Lo que dejan las bacterias: silicatos, calcio y hierro.'],
-        ['tooltip.grindless.leached_tailings.1', 'Hydrochloric acid gives calcium chloride and silica (chemical reactor); the Moon\'s regolith cell takes them too (circuit 4).', 'El ácido clorhídrico da cloruro de calcio y sílice (reactor químico); la celda de regolito de la Luna también los acepta (circuito 4).'],
+        ['tooltip.grindless.leached_tailings.1', 'Hydrochloric acid gives calcium chloride and silica (chemical reactor); the Moon\'s regolith cell makes oxygen, iron and silica from them (circuit 2).', 'El ácido clorhídrico da cloruro de calcio y sílice (reactor químico); la celda de regolito de la Luna saca de ellos oxígeno, hierro y sílice (circuito 2).'],
         ['item.grindless.urea', 'Urea', 'Urea'],
         ['tooltip.grindless.urea.0', 'Ammonia and carbon dioxide under pressure (Bosch-Meiser), in a chemical reactor.', 'Amoníaco y dióxido de carbono a presión (Bosch-Meiser), en un reactor químico.'],
         ['tooltip.grindless.urea.1', 'Sporosarcina splits it to set calcite in the biomining heap.', 'Sporosarcina la descompone para fijar calcita en la pila de biominería.'],

@@ -17,6 +17,10 @@
 //                          A last heavy cut of the mixed chloride: 8 moles in (4 dust each), 2 of them are the heavies, reckoned as
 //                          ytterbium, and are stripped and precipitated as the oxide: 2 YbCl3 + 3 H2O -> Yb2O3 + 6 HCl (Yb2O3 is 5 dust,
 //                          one per atom, GTM's convention). The other 6 moles go back out as mixed chloride, to GTM's electrolyzer.
+//   circuit 7  UHV mode    (UHV-B5, Proxima b's rare earths: the biomining heap's Sphingomonas leach, its only source) 1 000 mB Proxima REE
+//                          liquor + 3 000 mB hydrochloric acid -> 1 000 mB rare earth chloride solution + 1 000 mB water   1 920 EU/t, 40 t
+//                          Ion exchange: the cascade's resin loads the dilute rare earths from the liquor (the barren water leaves, back to
+//                          the heap) and the acid elutes them as REECl3; the solution then takes circuit 2, the existing route.
 //
 // The chemistry. Merrillite (A1: Ca8(Mg,Fe)(REE)(PO4)7 per half cell) is three (Ca,Mg)3(PO4)2 and one rare earth phosphate in one
 // lattice. The leach, net of the cascade's own recycling of calcium and phosphate inside, is
@@ -54,6 +58,7 @@
 //   The hydrogen of the HCl ends in the phosphoric acid: the HCl loop needs hydrogen from outside, 3 000 mB per mole.
 //   ytterbium oxide       -> the fibre draw tower's preform (uv/photonics.js); nothing else makes it
 //   HCl of the Yb strip   -> back into the leach (circuit 1) and the strip (circuit 2)
+//   water of circuit 7    -> the biomining heap's leach water (uhv/proxima_ground.js), or the network
 //
 // Published in global.grindless.extractionCascade for the smoke test:
 //   .recipes  [{ id (what the builder got), recipeId (the final id), name, mode, circuit, itemsIn: [{ id, count }], fluidsIn: [{ id, amount }],
@@ -115,6 +120,14 @@
       itemsOut: [{ id: 'gtceu:ytterbium_oxide_dust', count: 5 }, { id: MIX_CL, count: 24 }],
       fluidsOut: [{ id: KEROSENE, amount: 950 }, { id: HCL, amount: 6000 }],
       eut: 122880, duration: 100
+    },
+    {
+      name: 'proxima_ree_liquor', mode: 'uhv', circuit: 7,
+      itemsIn: [],
+      fluidsIn: [{ id: 'gtceu:proxima_ree_liquor', amount: 1000 }, { id: HCL, amount: 3000 }],
+      itemsOut: [],
+      fluidsOut: [{ id: SOLUTION, amount: 1000 }, { id: 'minecraft:water', amount: 1000 }],
+      eut: 1920, duration: 40
     }
   ]
 

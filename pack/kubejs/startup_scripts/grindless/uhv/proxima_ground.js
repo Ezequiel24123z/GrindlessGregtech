@@ -1,9 +1,9 @@
 // -----------------------------------------------------------------------------------------------
 // UHV's Proxima ground (docs/eras/uhv.md, machines 29 and 31, lines 16, 17 and 18; package UHV-B5): the cold-trap drill and the
 // biomining heap on Proxima b, their recipe types, items and blocks. The recipes come from data/grindless/tables/proxima_ground.json
-// (server_scripts/grindless/uhv/proxima_ground.js); the older rows from ev/platinum_plant.js (circuit 6), ev/extraction_cascade.js
-// (circuit 7), ev/regolith_cell.js (circuit 4), tables/heavy_water_plant.json (circuit 3) and zpm/titan_probes.js (the tholin
-// reformer, circuit 4).
+// (server_scripts/grindless/uhv/proxima_ground.js), with the platinum plant's row (circuit 6) and the tholin reformer's (circuit 4)
+// hosted in that table; the other older rows are in ev/extraction_cascade.js (circuit 7), ev/regolith_cell.js (circuit 2) and
+// tables/heavy_water_plant.json (circuit 3).
 //
 //   gtceu:cold_trap_drill   the drill family's step 13: a tidally locked planet freezes its volatiles on the night side; a
 //                           californium-252 source logs the ice by neutrons and the regolith survey tells where, then a coring head
@@ -13,7 +13,7 @@
 //                           gtceu:biomining.
 //
 // New ids (the F1 ones are in uhv/foundation.js and the B4 ones in uhv/proxima_life.js; none is registered again):
-//   items   leached_tailings (heap c1/c2 -> GTM chemical reactor's calcium row, EV regolith cell c4), urea (GTM chemical reactor ->
+//   items   leached_tailings (heap c1/c2 -> GTM chemical reactor's calcium row, EV regolith cell c2), urea (GTM chemical reactor ->
 //           heap c3/c4), cold_trap_coring_head (assembler -> the drill's worn head, 3.13 % a run)
 //   blocks  biocemented_regolith (heap c3/c4 -> proxima_base_casing), proxima_base_casing (assembler: a flare shield panel, line 15's
 //           end, + biocemented regolith on a naquadah alloy frame; the drill's pad)
