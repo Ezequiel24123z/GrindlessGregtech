@@ -177,7 +177,7 @@
     var SENSOR = 'gtceu:uv_sensor'
     var defs = [
       { machine: BV.machines.water.machine, parts: [HULL, PUMP, SENSOR], pattern: ['CSC', 'PHP', 'C C'], ingredients: { C: '#gtceu:circuits/uhv', S: SENSOR, P: PUMP, H: HULL }, name: 'ultrapure_water_plant' },
-      { machine: BV.machines.fab.machine, parts: [HULL, ARM, SENSOR], pattern: ['CSC', 'AHA', 'C C'], ingredients: { C: '#gtceu:circuits/uhv', S: SENSOR, A: ARM, H: HULL }, name: 'betavoltaic_fab' }
+      { machine: BV.machines.fab.machine, parts: [HULL, ARM, SENSOR], pattern: ['CAC', 'SHS', 'C C'], ingredients: { C: '#gtceu:circuits/uhv', S: SENSOR, A: ARM, H: HULL }, name: 'betavoltaic_fab' }
     ]
     BV.controllerRecipes = []
     defs.forEach(function (d) {
