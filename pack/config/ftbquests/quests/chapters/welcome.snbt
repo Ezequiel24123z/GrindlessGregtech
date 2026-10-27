@@ -79,6 +79,25 @@
 		{
 			dependencies: ["69BDA9FBB0EB66F2"]
 			description: [
+				"The &6Horizon Collector&r was in your pack when you arrived. Nobody remembers building it, and nobody can make another."
+				"Its shard hums at the pitch of the black hole at the end of the journey. Something ordinary leaks out of a horizon the size of a pin."
+				"Put a solar cover on top and pick a circuit; the circuit decides what comes through."
+			]
+			icon: "gtceu:lv_horizon_collector"
+			id: "3E1C0D04479070D2"
+			rewards: [
+				{ id: "7A4EA4331D45813F", item: "gtceu:lv_horizon_collector", type: "item" }
+				{ id: "59CB02D975542719", item: "grindless:horizon_shard", type: "item" }
+				{ count: 2, id: "5942E056E1AF13B0", item: "gtceu:lv_solar_panel", type: "item" }
+			]
+			tasks: [{ id: "5D417825FEC2B0C1", type: "checkmark" }]
+			title: "The Horizon Collector"
+			x: 2.0d
+			y: -1.5d
+		}
+		{
+			dependencies: ["69BDA9FBB0EB66F2"]
+			description: [
 				"The &6Void Key&r takes you to an empty dimension and leaves a small platform under your feet, which beats falling forever. Use it again to land back where you left the Overworld."
 				"Lose it and a spare is cheap; EMI has the recipe."
 			]
