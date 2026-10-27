@@ -14,6 +14,7 @@
                   "startup_scripts/grindless/lib/coils.js":  999,
                   "startup_scripts/grindless/lib/fresh_run.js":  998,
                   "startup_scripts/grindless/lib/generators.js":  999,
+                  "startup_scripts/grindless/lib/mega.js":  996,
                   "startup_scripts/grindless/lib/no_voiding.js":  998,
                   "startup_scripts/grindless/lib/orbits.js":  899,
                   "startup_scripts/grindless/lib/parallel_hatch.js":  997,
