@@ -1,12 +1,13 @@
 // -----------------------------------------------------------------------------------------------
 // gtceu:regolith_processing recipes of the Regolith Cell (gtceu:regolith_cell, startup_scripts/grindless/ev/regolith_cell.js) and the
-// recipe that makes the cell (EV era, docs/eras/ev.md "Regolith cell"). GTM has no lunar chemistry, so these four recipes are ours,
+// recipe that makes the cell (EV era, docs/eras/ev.md "Regolith cell"). GTM has no lunar chemistry, so these five recipes are ours,
 // written from the real processes in a table. Every recipe carries the Moon's dimension condition (the dimension of
 // data/grindless/tables/veins_moon.json, like every lunar recipe): the cell only works on the Moon. The programmed circuit picks the mode:
 //
 //   circuit 1  volatiles            16 lunar regolith dust -> 2,000 mB hydrogen + 250 helium + 200 nitrogen + 1 helium-3
 //   circuit 2  regolith electrolysis 16 lunar regolith dust + platinum anode -> 7,000 mB oxygen + 3 silicon dust + 1 iron dust
 //              titanium              5 ilmenite dust + platinum anode + Molten Salt Charge -> 3 titanium ingots + 1 iron dust + 3,000 oxygen
+//              Proxima tailings      16 leached tailings + platinum anode -> 3 silicon dioxide dust + 1 iron dust + 1,000 mB oxygen (UHV-B5)
 //   circuit 3  sintering             16 lunar regolith dust -> 4 Sintered Regolith Bricks
 //
 // Volatiles. The solar wind implants hydrogen, helium and a trace of helium-3 in the regolith grains (lunar soil also holds nitrogen);
@@ -37,6 +38,13 @@
 // The Kroll's magnesium and chlorine loop (magnesium chloride + sodium in the chemical reactor, salt electrolysis) is not counted: ev.md
 // names the four stages above. The cell pays with the platinum anode, the charge, the trip and the site instead.
 //
+// Proxima tailings (UHV-B5, docs/eras/uhv.md line 16). The biomining heap's leached tailings (Proxima b's basalt, its PGM, rare earths
+// and part of its calcium taken by the cultures) come to the Moon by AE2. The cell runs the melt below silicon's potential: the iron
+// and its oxygen come off (1 iron, as in the regolith row, and its 1,000 mB of oxygen), the silica crystallises from the cooled melt (the
+// regolith row's 3 silicon, left as 3 silicon dioxide dust) and the rest (calcium, magnesium and aluminium oxides) is dumped as slag. Energy: the
+// regolith row's EU per mB of oxygen for the iron's 1,000 mB plus the volatiles row's 96,000 EU to heat a batch = 150,858 EU, 79 ticks.
+// The row is skipped alone (logged) if a UHV id is missing, so the EV rows never depend on it.
+//
 // Sintering. Lunar regolith dust fused into bricks: the same 4 dust per brick and the same energy per brick (48,000 EU) as the electric
 // furnace that makes the first ones on the Moon (server_scripts/grindless/ev/foundation.js: 120 EU/t, 400 ticks), four at a time: 1,920
 // EU/t, 100 ticks. Four times an EV electric furnace (which overclocks to the same 1,920 EU/t but makes one brick in 100 ticks), at a
@@ -47,8 +55,8 @@
 //
 // Destinations (docs/eras/ev.md): oxygen and nitrogen -> the cryogenic plant, suits or the network; helium -> the cryogenic plant (liquid
 // helium for IV); helium-3 -> the fusion reserve (LuV); hydrogen -> the home network (the refinery); iron -> steel for the base; silicon ->
-// the solar array's panels and wafers; titanium -> EV hulls, pipes and drums; bricks -> every lunar structure. Water and slag: inert,
-// vented and dumped.
+// the solar array's panels and wafers; titanium -> EV hulls, pipes and drums; bricks -> every lunar structure; silicon dioxide (the
+// Proxima row) -> glass and GTM's silicon chain. Water and slag: inert, vented and dumped.
 //
 // Each recipe of the type has its own circuit or its own first ingredient (GTM's lookup prefix rule, lv/multis.js).
 // Published in global.grindless.regolithCell for the smoke test:
@@ -77,6 +85,8 @@
   const SI = 'gtceu:silicon_dust'
   const FE = 'gtceu:iron_dust'
   const TI = 'gtceu:titanium_ingot'
+  const TAILINGS = 'grindless:leached_tailings'
+  const SILICA = 'gtceu:silicon_dioxide_dust'
 
   // GTM 7.5.3's titanium chain (the recipes the titanium mode replaces): EU/t, ticks and runs per batch of 5 ilmenite (3 ingots)
   const STAGES = [
@@ -103,6 +113,11 @@
     {
       name: 'titanium_from_ilmenite', mode: 'electrolysis', circuit: 2, feed: [ILMENITE, 5], electrode: true, charge: true,
       out: [[TI, 3], [FE, 1]], fluids: [[O2, 3000]], vented: '', energy: KROLL_ENERGY
+    },
+    {
+      name: 'proxima_tailings', mode: 'electrolysis', circuit: 2, feed: [TAILINGS, 16], electrode: true,
+      out: [[SILICA, 3], [FE, 1]], fluids: [[O2, 1000]], vented: 'the slag (calcium, magnesium and aluminium oxides)',
+      energy: Math.ceil(384000 / 7000 * 1000) + 96000
     },
     {
       name: 'sintering', mode: 'sintering', circuit: 3, feed: [REGOLITH, 16],
@@ -173,7 +188,14 @@
     }
     var dimension = moonDimension()
     RC.dimension = dimension
+    var added = 0
     RC.recipes.forEach(function (r) {
+      var unknown = r.itemsIn.concat(r.itemsOut).filter(function (x) { return !Item.exists(x.id) }).map(function (x) { return x.id })
+      if (unknown.length > 0) {
+        console.error('[grindless/ev] regolith cell recipe ' + r.name + ' skipped, unknown id(s): ' + unknown.join(', '))
+        return
+      }
+      added++
       var recipe = event.recipes.gtceu.regolith_processing(ID_PREFIX + r.name)
       r.itemsIn.forEach(function (x) {
         if (x.chance >= 10000) recipe.itemInputs(x.count + 'x ' + x.id)
@@ -186,7 +208,7 @@
       recipe.dimension(dimension)
       recipe.EUt(r.eut).duration(r.duration)
     })
-    console.info('[grindless/ev] regolith cell recipes added: ' + RC.recipes.length + ' (only in ' + dimension + '; titanium at ' +
+    console.info('[grindless/ev] regolith cell recipes added: ' + added + ' (only in ' + dimension + '; titanium at ' +
       KROLL_ENERGY + ' EU, the Kroll stages)')
   }
 

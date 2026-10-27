@@ -1,0 +1,236 @@
+{
+  "_source": "Our own table: the recipes of UHV's Proxima ground (docs/eras/uhv.md, machines 29 and 31; lines 16, 17 and 18; package UHV-B5). Real practice behind each step: neutron spectrometers finding buried ice (LRO's LEND, Mars Odyssey) and a tidally locked planet's night-side cold traps (Turbet et al., 2016); Rodwell-style steam melting of an ice core; bioleaching of basalt by Sphingomonas desiccabilis in microgravity (BioRock, Cockell et al., 2020) and of precious metals by cyanogenic Chromobacterium violaceum; microbially induced calcite precipitation with Sporosarcina pasteurii (MICP, bioMASON), also shown on lunar regolith simulant (Dikshit et al., 2021); urea from ammonia and carbon dioxide (Bosch-Meiser).",
+  "_how_it_is_used": [
+    "Read by server_scripts/grindless/uhv/proxima_ground.js at every server load. Each entry becomes one recipe of its type, id grindless:<type>/<name> (GTM's builder puts the type in front); our types carry the data key of the type = <name> (the EMI line). pgm_refining and tholin_reforming are older machines' types hosting one row each (uhv/crystals.js's precedent): id grindless:<type>/uhv/<name>, the slots of the host machine; the platinum plant's row carries its keep flag (no voiding).",
+    "site: 'proxima_b' runs only on gcyr:proxima_centauri_b (G.places); 'saturn_orbit' only on grindless:saturn_orbit (the tholin reformer's station); no site: anywhere. biome: a GTM biome condition (the cold-trap drill digs only in the night side's gcyr:proxima_centauri_b_opp_side; the planet is always dark, so GTM's daytime condition says nothing there).",
+    "itemsIn / itemsOut: { id, count, chance? } (chance in 1/10,000; below 10,000 a chanced input or output of 1); kept: items not used up; fluidsIn / fluidsOut: { id, amount } in mB.",
+    "One recipe per lookup path: the circuit is the step on our types; no recipe of a type takes a subset of another's ingredients (checked at load). GTM rows (circuit 0) are keyed by our own items, except the urea row (no GTM chemical reactor recipe takes ammonia and carbon dioxide together).",
+    "Destinations: the PGM liquor goes to EV's platinum plant (circuit 6, the pgm_refining row below), the REE liquor to EV's extraction cascade (circuit 7), the leached tailings to the calcium row below and to EV's regolith cell on the Moon (circuit 2, by AE2: oxygen, iron and silica); the spent cyanide of the PGM leach is biodegraded in the heap; the ammonium chloride of the biocement steps becomes greenhouse fertiliser (mixer row); the ice core's deuterium-rich water goes to IV's heavy water plant (circuit 3), its carbon dioxide to the greenhouses and its flare organics to ZPM's tholin reformer (circuit 4, the tholin_reforming row below).",
+    "Bootstrap: the drill stands on Proxima base casing (biocemented regolith), and biocement needs the drill's regolith, so the heap (inert casing) also cements lunar regolith (c4, half the yield of c3) for the first pad."
+  ],
+  "types": {
+    "cold_trap_drilling": {
+      "dataKey": "grindless_cold_trap_drilling",
+      "recipes": [
+        {
+          "name": "dig",
+          "circuit": 1,
+          "site": "proxima_b",
+          "biome": "gcyr:proxima_centauri_b_opp_side",
+          "eut": 122880,
+          "duration": 400,
+          "itemsIn": [{ "id": "grindless:cold_trap_coring_head", "count": 1, "chance": 313 }],
+          "kept": [
+            { "id": "grindless:proxima_regolith_survey", "count": 1 },
+            { "id": "grindless:californium_252_source", "count": 1 }
+          ],
+          "fluidsIn": [],
+          "itemsOut": [
+            { "id": "grindless:proxima_ice_core", "count": 1 },
+            { "id": "grindless:cold_trap_regolith", "count": 16 }
+          ],
+          "fluidsOut": []
+        }
+      ]
+    },
+    "biomining": {
+      "dataKey": "grindless_biomining",
+      "recipes": [
+        {
+          "name": "pgm_leach",
+          "circuit": 1,
+          "site": "proxima_b",
+          "eut": 122880,
+          "duration": 600,
+          "itemsIn": [{ "id": "grindless:cold_trap_regolith", "count": 16 }],
+          "kept": [{ "id": "grindless:chromobacterium_culture", "count": 1 }],
+          "fluidsIn": [{ "id": "minecraft:water", "amount": 1000 }],
+          "itemsOut": [{ "id": "grindless:leached_tailings", "count": 4 }],
+          "fluidsOut": [{ "id": "gtceu:proxima_pgm_liquor", "amount": 1000 }]
+        },
+        {
+          "name": "ree_leach",
+          "circuit": 2,
+          "site": "proxima_b",
+          "eut": 122880,
+          "duration": 600,
+          "itemsIn": [{ "id": "grindless:cold_trap_regolith", "count": 16 }],
+          "kept": [{ "id": "grindless:sphingomonas_culture", "count": 1 }],
+          "fluidsIn": [{ "id": "minecraft:water", "amount": 1000 }],
+          "itemsOut": [{ "id": "grindless:leached_tailings", "count": 4 }],
+          "fluidsOut": [{ "id": "gtceu:proxima_ree_liquor", "amount": 1000 }]
+        },
+        {
+          "name": "biocement",
+          "circuit": 3,
+          "site": "proxima_b",
+          "eut": 122880,
+          "duration": 400,
+          "itemsIn": [
+            { "id": "grindless:cold_trap_regolith", "count": 8 },
+            { "id": "grindless:urea", "count": 1 },
+            { "id": "gtceu:calcium_chloride_dust", "count": 3 }
+          ],
+          "kept": [{ "id": "grindless:sporosarcina_culture", "count": 1 }],
+          "fluidsIn": [{ "id": "minecraft:water", "amount": 1000 }],
+          "itemsOut": [
+            { "id": "grindless:biocemented_regolith", "count": 8 },
+            { "id": "gtceu:ammonium_chloride_dust", "count": 2 }
+          ],
+          "fluidsOut": []
+        },
+        {
+          "name": "lunar_biocement",
+          "circuit": 4,
+          "site": "proxima_b",
+          "eut": 122880,
+          "duration": 400,
+          "itemsIn": [
+            { "id": "gtceu:lunar_regolith_dust", "count": 8 },
+            { "id": "grindless:urea", "count": 1 },
+            { "id": "gtceu:calcium_chloride_dust", "count": 3 }
+          ],
+          "kept": [{ "id": "grindless:sporosarcina_culture", "count": 1 }],
+          "fluidsIn": [{ "id": "minecraft:water", "amount": 1000 }],
+          "itemsOut": [
+            { "id": "grindless:biocemented_regolith", "count": 4 },
+            { "id": "gtceu:ammonium_chloride_dust", "count": 2 }
+          ],
+          "fluidsOut": []
+        }
+      ]
+    },
+    "chemical_reactor": {
+      "recipes": [
+        {
+          "name": "proxima_tailings_calcium",
+          "circuit": 0,
+          "eut": 7680,
+          "duration": 200,
+          "itemsIn": [{ "id": "grindless:leached_tailings", "count": 4 }],
+          "kept": [],
+          "fluidsIn": [{ "id": "gtceu:hydrochloric_acid", "amount": 2000 }],
+          "itemsOut": [{ "id": "gtceu:calcium_chloride_dust", "count": 3 }, { "id": "gtceu:silicon_dioxide_dust", "count": 3 }],
+          "fluidsOut": [{ "id": "minecraft:water", "amount": 1000 }]
+        },
+        {
+          "name": "urea",
+          "circuit": 0,
+          "eut": 1920,
+          "duration": 160,
+          "itemsIn": [],
+          "kept": [],
+          "fluidsIn": [{ "id": "gtceu:ammonia", "amount": 2000 }, { "id": "gtceu:carbon_dioxide", "amount": 1000 }],
+          "itemsOut": [{ "id": "grindless:urea", "count": 1 }],
+          "fluidsOut": [{ "id": "minecraft:water", "amount": 1000 }]
+        }
+      ]
+    },
+    "mixer": {
+      "recipes": [
+        {
+          "name": "proxima_ammonium_fertiliser",
+          "circuit": 0,
+          "eut": 30,
+          "duration": 100,
+          "itemsIn": [{ "id": "gtceu:ammonium_chloride_dust", "count": 2 }, { "id": "gtceu:tricalcium_phosphate_dust", "count": 1 }],
+          "kept": [],
+          "fluidsIn": [{ "id": "minecraft:water", "amount": 1000 }],
+          "itemsOut": [{ "id": "gtceu:fertilizer", "count": 4 }],
+          "fluidsOut": []
+        }
+      ]
+    },
+    "centrifuge": {
+      "recipes": [
+        {
+          "name": "proxima_ice_core",
+          "circuit": 0,
+          "site": "proxima_b",
+          "eut": 7680,
+          "duration": 400,
+          "itemsIn": [{ "id": "grindless:proxima_ice_core", "count": 1 }],
+          "kept": [],
+          "fluidsIn": [{ "id": "gtceu:steam", "amount": 1000 }],
+          "itemsOut": [{ "id": "grindless:sterilised_ice_organics", "count": 1, "chance": 2500 }],
+          "fluidsOut": [{ "id": "gtceu:deuterium_enriched_water", "amount": 4000 }, { "id": "gtceu:carbon_dioxide", "amount": 1000 }]
+        }
+      ]
+    },
+    "assembler": {
+      "recipes": [
+        {
+          "name": "proxima_base_casing",
+          "circuit": 0,
+          "eut": 7680,
+          "duration": 100,
+          "itemsIn": [
+            { "id": "grindless:flare_shield_panel", "count": 1 },
+            { "id": "grindless:biocemented_regolith", "count": 4 },
+            { "id": "gtceu:naquadah_alloy_frame", "count": 1 }
+          ],
+          "kept": [],
+          "fluidsIn": [],
+          "itemsOut": [{ "id": "grindless:proxima_base_casing", "count": 2 }],
+          "fluidsOut": []
+        },
+        {
+          "name": "cold_trap_coring_head",
+          "circuit": 0,
+          "eut": 30720,
+          "duration": 400,
+          "itemsIn": [
+            { "id": "grindless:hss_s_drill_bit", "count": 1 },
+            { "id": "gtceu:naquadah_alloy_plate", "count": 4 },
+            { "id": "gtceu:tungsten_carbide_plate", "count": 2 }
+          ],
+          "kept": [],
+          "fluidsIn": [],
+          "itemsOut": [{ "id": "grindless:cold_trap_coring_head", "count": 1 }],
+          "fluidsOut": []
+        }
+      ]
+    },
+    "pgm_refining": {
+      "idPrefix": "uhv/",
+      "keep": true,
+      "recipes": [
+        {
+          "name": "proxima_liquor",
+          "circuit": 6,
+          "eut": 1920,
+          "duration": 1200,
+          "itemsIn": [{ "id": "grindless:platinum_electrode", "count": 1, "chance": 10 }],
+          "kept": [],
+          "fluidsIn": [{ "id": "gtceu:proxima_pgm_liquor", "amount": 1000 }],
+          "itemsOut": [
+            { "id": "gtceu:platinum_dust", "count": 3 },
+            { "id": "gtceu:palladium_dust", "count": 2 },
+            { "id": "gtceu:ruthenium_dust", "count": 3 },
+            { "id": "gtceu:iridium_dust", "count": 3 }
+          ],
+          "fluidsOut": [{ "id": "minecraft:water", "amount": 1000 }, { "id": "gtceu:oxygen", "amount": 500 }]
+        }
+      ]
+    },
+    "tholin_reforming": {
+      "_note": "ZPM's tholin reformer (zpm/titan_probes.js): its slots are 1 item in, 1 out, 2 fluids in, 1 out, and its own circuit-1 row (4 tholin + water) puts the circuit beside its one item, so the circuit is not counted against the item slot here either (circuitSlot false).",
+      "idPrefix": "uhv/",
+      "circuitSlot": false,
+      "recipes": [
+        {
+          "name": "proxima_organics_hydrolysis",
+          "circuit": 4,
+          "site": "saturn_orbit",
+          "eut": 122880,
+          "duration": 200,
+          "itemsIn": [{ "id": "grindless:sterilised_ice_organics", "count": 4 }],
+          "kept": [],
+          "fluidsIn": [{ "id": "minecraft:water", "amount": 1000 }],
+          "itemsOut": [],
+          "fluidsOut": [{ "id": "gtceu:titan_nitriles", "amount": 1000 }]
+        }
+      ]
+    }
+  }
+}
