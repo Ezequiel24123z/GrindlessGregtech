@@ -1,3 +1,4 @@
+// priority: -23102
 // -----------------------------------------------------------------------------------------------
 // The UIV machine casing's research (docs/eras/uev.md "Gate to UIV", package UEV-B5). The warp gate's c3 row lives in
 // server_scripts/grindless/uhv/gate.js (the UHV-B7 table loader), because the gate type's rows are generated there.

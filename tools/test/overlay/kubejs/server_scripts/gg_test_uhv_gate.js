@@ -183,7 +183,8 @@
   // ---------------------------------------------------------------- static
   function statics() {
     var WG = S.G.warpGate
-    if (!check('static_published', WG && WG.recipes && WG.recipes.length === 3, 'global.grindless.warpGate recipes ' +
+    // 4 since UEV-B5 added the c3 hold row (grindless:warp_gate/hold)
+    if (!check('static_published', WG && WG.recipes && WG.recipes.length === 4, 'global.grindless.warpGate recipes ' +
       (WG && WG.recipes ? WG.recipes.length : 'none'))) throw new Error('warpGate is not published')
     var ids = ['grindless:warp_gate/open', SUSTAIN, 'grindless:baseline_astrometry/stellar_neighbourhood_chart']
       .concat((WG.controllerRecipes || []).map(String))

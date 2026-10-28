@@ -1,3 +1,4 @@
+// priority: 5026
 // Gregtech Grindless - the EMI line of the warp gate's UEV row (server_scripts/grindless/uhv/gate.js; package UEV-B5):
 //   gtceu.recipe.grindless_warp_gate.hold   the c3 row: the UIV gate load, 16 A UEV for 60 s at Sirius B's orbit
 // Kept out of pack/kubejs/assets/grindless/lang/* like the other *_lang.js scripts. Names go in en_us and es_es.
