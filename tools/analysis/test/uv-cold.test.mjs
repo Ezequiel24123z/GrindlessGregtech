@@ -74,7 +74,8 @@ test('the plant: He-II needs liquid helium, the superleak takes only Neptune hel
 });
 
 test('the works: four steps on circuits 1 to 4, whole numbers, UV tier bound', () => {
-  const steps = C.recipes.filter((r) => r.type === 'srf_cavity');
+  // UIV-A2 appends c5 (para_h2_target) on srf_cavity; UV's four steps stay as built
+  const steps = C.recipes.filter((r) => r.type === 'srf_cavity' && r.circuit <= 4);
   assert.deepEqual(steps.map((r) => [r.name, r.circuit]), [['rrr', 1], ['cavity', 2], ['surface', 3], ['cryomodule', 4]]);
   for (const r of steps) {
     assert.ok(Number.isInteger(r.duration) && r.duration > 0 && Number.isInteger(r.eut) && r.eut <= VA, r.name);
