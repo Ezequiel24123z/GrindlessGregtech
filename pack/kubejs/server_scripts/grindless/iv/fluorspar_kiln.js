@@ -78,6 +78,46 @@
       CHARGE.eut + ' EU/t = ' + CHARGE.energy + ' EU per charge, up to ' + (FK.maxCharges || 256) + ' charges at once')
   }
 
+  // UEV-A4 rows: the electron beam line's NaF and KF come back as HF, and its calcium comes back as fluorite. The kiln has one item slot,
+  // so the input item tells the rows apart.
+  var UEV_ROWS = [
+    {
+      name: 'hf_from_alkali_fluoride',
+      itemIn: { id: 'grindless:alkali_fluoride_dust', count: 4 }, fluidIn: { id: 'gtceu:sulfuric_acid', amount: 1000 },
+      itemOut: { id: 'grindless:alkali_sulfate_dust', count: 7 }, fluidOut: { id: 'gtceu:hydrofluoric_acid', amount: 2000 },
+      eut: 30, duration: 64
+    },
+    {
+      name: 'calcium_fluoride_return',
+      itemIn: { id: 'gtceu:calcium_dust', count: 1 }, fluidIn: { id: 'gtceu:hydrofluoric_acid', amount: 2000 },
+      itemOut: { id: 'gcyr:fluorite_dust', count: 3 }, fluidOut: { id: 'gtceu:hydrogen', amount: 2000 },
+      eut: 30, duration: 64
+    }
+  ]
+
+  function addUevRows(event) {
+    UEV_ROWS.forEach(function (r) {
+      var missing = []
+      if (!Item.exists(r.itemIn.id)) missing.push(r.itemIn.id)
+      if (!Item.exists(r.itemOut.id)) missing.push(r.itemOut.id)
+      if (!Fluid.exists(r.fluidIn.id)) missing.push(r.fluidIn.id)
+      if (!Fluid.exists(r.fluidOut.id)) missing.push(r.fluidOut.id)
+      if (missing.length > 0) {
+        console.error(LOG + 'fluorspar kiln row ' + r.name + ' skipped, unknown id(s): ' + missing.join(', '))
+        return
+      }
+      event.recipes.gtceu.fluorspar_digestion('grindless:' + r.name)
+        .itemInputs(r.itemIn.count + 'x ' + r.itemIn.id)
+        .inputFluids(Fluid.of(r.fluidIn.id, r.fluidIn.amount))
+        .itemOutputs(r.itemOut.count + 'x ' + r.itemOut.id)
+        .outputFluids(Fluid.of(r.fluidOut.id, r.fluidOut.amount))
+        .addDataString(FK.dataKey || 'grindless_fluorspar_kiln', r.name)
+        .EUt(r.eut)
+        .duration(r.duration)
+      FK.recipes.push('grindless:' + TYPE_PATH + '/' + r.name)
+    })
+  }
+
   function addController(event) {
     var missing = CONTROLLER_PARTS.filter(function (id) { return !Item.exists(id) })
     if (missing.length > 0) {
@@ -101,6 +141,11 @@
       addCharge(event)
     } catch (e) {
       console.error(LOG + 'fluorspar kiln recipe failed: ' + e)
+    }
+    try {
+      addUevRows(event)
+    } catch (e3) {
+      console.error(LOG + 'fluorspar kiln UEV rows failed: ' + e3)
     }
     try {
       addController(event)
