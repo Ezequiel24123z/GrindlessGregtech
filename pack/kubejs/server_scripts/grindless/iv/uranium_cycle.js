@@ -47,6 +47,8 @@
   var THORIUM_TABLE = 'kubejs/data/grindless/tables/thorium_fabrication.json'
   // UHV-A1's HFIR driver row (the same format): appended after the thorium rows
   var TRANSCURIUM_TABLE = 'kubejs/data/grindless/tables/transcurium_fabrication.json'
+  // UEV-A1's depleted-plutonium MOX row (the same format): appended after the transcurium rows
+  var ISOTOPES_TABLE = 'kubejs/data/grindless/tables/isotopes_fabrication.json'
 
   var FIELD = 'gtceu:isr_wellfield'
   var PLANT = 'gtceu:fuel_fabrication_plant'
@@ -129,7 +131,7 @@
     var steps = []
     var names = {}
     var circuits = {}
-    var fabrication = list(t.fabrication).concat(list(G.readJsonTable(THORIUM_TABLE).fabrication), list(G.readJsonTable(TRANSCURIUM_TABLE).fabrication))
+    var fabrication = list(t.fabrication).concat(list(G.readJsonTable(THORIUM_TABLE).fabrication), list(G.readJsonTable(TRANSCURIUM_TABLE).fabrication), list(G.readJsonTable(ISOTOPES_TABLE).fabrication))
     fabrication.forEach(function (s) {
       var name = String(s.name || '')
       var circuit = Number(s.circuit)
