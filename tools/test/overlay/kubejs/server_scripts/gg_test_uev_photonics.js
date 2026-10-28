@@ -132,6 +132,13 @@
       })
       check('uev_parts', bad.length === 0, bad.length === 0 ? 'five assembler recipes live' : 'missing ' + bad.join(','))
     })
+    safely('inputs', function () {
+      var casing = liveRecipe('grindless:assembler/photonic_casing')
+      var wsi = liveRecipe('grindless:electric_blast_furnace/tungsten_silicide_sinter')
+      var ok = casing !== null && ids(casing, false).indexOf('grindless:photonic_casing') >= 0 &&
+        wsi !== null && ids(wsi, false).indexOf('gtceu:tungsten_silicide_dust') >= 0
+      check('inputs', ok, 'photonic_casing and tungsten_silicide recipes live: ' + ok)
+    })
   }
 
   ServerEvents.tick(function (event) {
