@@ -1,3 +1,4 @@
+// priority: -9172
 // -----------------------------------------------------------------------------------------------
 // UIV's PSR J0437-4715 machines (docs/eras/uiv.md, machines 18 to 20, lines 34, 38 and 45; package UIV-B3): the machines, their recipe types,
 // the package's own items and the pair-plasma fluids. The recipes come from data/grindless/tables/j0437.json

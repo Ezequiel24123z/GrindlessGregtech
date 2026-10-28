@@ -1,3 +1,4 @@
+// priority: -24571
 // -----------------------------------------------------------------------------------------------
 // Recipes of UIV's PSR J0437-4715 machines (machines and recipe types: startup_scripts/grindless/uiv/j0437.js; docs/eras/uiv.md,
 // machines 18 to 20, lines 34, 38 and 45; package UIV-B3), generated at every server load from data/grindless/tables/j0437.json, plus the
