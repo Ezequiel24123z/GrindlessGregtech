@@ -62,7 +62,8 @@
     { "type": "gtceu:bio_distillation", "source": "server_scripts/grindless/mv/biorefinery.js rebuilds GTM's distillation tower recipes of organic fluids" },
     { "type": "gtceu:ore_processing", "source": "server_scripts/grindless/mv/ore_plant.js composes GTM's ore chain of every ore into one recipe" },
     { "type": "gtceu:closed_loop_cooling", "source": "server_scripts/grindless/luv/helium_refrigerator.js makes one run per live vacuum freezer recipe that takes liquid helium" },
-    { "type": "gtceu:polymer_works", "source": "server_scripts/grindless/mv/mega_polymer_works.js composes GTM's live polyethylene and rubber lines into one recipe each (tables/mega_polymer_works.json, lib/compose.js)" }
+    { "type": "gtceu:polymer_works", "source": "server_scripts/grindless/mv/mega_polymer_works.js composes GTM's live polyethylene and rubber lines into one recipe each (tables/mega_polymer_works.json, lib/compose.js)" },
+    { "type": "gtceu:ore_refinery", "source": "server_scripts/grindless/ev/mega_ore_refinery.js composes GTM's live raw ore line (macerator, plain-water ore washer, thermal centrifuge, macerator) into one recipe per ore (tables/mega_ore_refinery.json, lib/compose.js)" }
   ],
   "exceptions": [
   { "id": "grindless:itbtc_coated_conductor", "role": "use", "reason": "temporary (LuV-A3): its uses, the HTS coil and the SMES cell, are LuV-A4's magnet works; delete this exception when A4 merges" },
@@ -85,6 +86,8 @@
     { "id": "grindless:pgm_refining/uev/sx_dross", "reason": "UEV-A4: SX dross comes from the master alloy, held until UEV-B3 (rhenium); B3 deletes the SX entries with that rule" },
     { "id": "grindless:nitride_magnet_synthesis/bonded_magnet", "reason": "UEV-A5: needs strain-annealed Fe16N2, whose carbonyl iron route waits for UEV-B3's iron pentacarbonyl (obtain rule UEV (B3)); B3 deletes the Fe16N2 entries with that rule" },
     { "id": "grindless:assembler/uev_electric_motor", "reason": "UEV-A5: needs the bonded Fe16N2 magnet, held until UEV-B3 (iron pentacarbonyl); B3 deletes the Fe16N2 entries with that rule" },
-    { "id": "grindless:quantum_degenerate_gas/barnard_gravity_survey", "reason": "UEV-A8: reads Barnard core rock, held until UEV-B3 (obtain rule UEV (B3)); B3 deletes this entry with that rule" }
+    { "id": "grindless:quantum_degenerate_gas/barnard_gravity_survey", "reason": "UEV-A8: reads Barnard core rock, held until UEV-B3 (obtain rule UEV (B3)); B3 deletes this entry with that rule" },
+    { "id": "grindless:thruster_assembly/dfd_mk1_motor", "reason": "UEV-B1: needs the UEV motor, held until UEV-B3 (iron pentacarbonyl, obtain rule UEV (B3)); B3 deletes this entry with that rule" },
+    { "id": "grindless:thruster_assembly/dfd_mk2_motor", "reason": "UEV-B1: needs the Brayton turbine wheel and the bonded Fe16N2 magnet, held until UEV-B3 (rhenium, iron pentacarbonyl); B3 deletes this entry with that rule" }
   ]
 }

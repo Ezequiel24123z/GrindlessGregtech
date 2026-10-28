@@ -1,3 +1,4 @@
+// priority: -1250
 // -----------------------------------------------------------------------------------------------
 // EV Ore Refinery, gtceu:ore_refinery (package MEGA-4, docs/eras/mega.md 4.6): a titanium hall that takes a raw ore (what the drills and
 // the vein drills deliver) through the whole ore line in one pass, up to 64 copies at once. It has its own recipe type, gtceu:ore_refinery,

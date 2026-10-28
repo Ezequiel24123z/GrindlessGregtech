@@ -79,9 +79,8 @@
   var OG_POD = 'grindless:oganesson_propellant_pod'
   // UEV-B1's rows (docs/eras/uev.md B1; motors registered in startup_scripts/grindless/uev/travel.js; F1 parts in uev/foundation.js)
   var VA_UEV = 7864320
-  // F1's ids by camelCase name (startup_scripts/grindless/uev/foundation.js); an empty id is skipped with a console.error by addRecipe
-  var F1 = G.uevFoundation && G.uevFoundation.ids ? G.uevFoundation.ids : {}
-  var SX_BLADE = F1.sxBlade || ''
+  // the Mk2's closed Brayton loop: UEV-A4's wheel (eight coated SX blades on Barnard's rhenium, single-crystal foundry c3, uev.md machine 7)
+  var BRAYTON_WHEEL = 'grindless:brayton_turbine_wheel'
   var DFD_MK1 = 'grindless:dfd_mk1_motor'
   var DFD_MK2 = 'grindless:dfd_mk2_motor'
   function item(id, count) { return { id: id, count: count } }
@@ -112,8 +111,8 @@
     row('dfd_mk1_motor', 'thruster_assembly', 6, [item('grindless:wf_w_tile', 4), item('grindless:sic_sic_plate', 4),
       item('gtceu:hftacn_ingot', 8), item('grindless:uev_electric_motor', 1)], [fluid('gtceu:dhe3_fuel_mix', 4000)],
       [item(DFD_MK1, 1)], [], VA_UEV, 1000),
-    row('dfd_mk2_motor', 'thruster_assembly', 7, [item(DFD_MK1, 1), item(SX_BLADE, 8), item('grindless:bonded_fe16n2_magnet', 8),
-      item('gtceu:rhenium_ingot', 4), item('gtceu:hftacn_ingot', 8)], [], [item(DFD_MK2, 1)], [], VA_UEV, 1200)
+    row('dfd_mk2_motor', 'thruster_assembly', 7, [item(DFD_MK1, 1), item(BRAYTON_WHEEL, 1), item('grindless:bonded_fe16n2_magnet', 8),
+      item('gtceu:hftacn_ingot', 8)], [], [item(DFD_MK2, 1)], [], VA_UEV, 1200)
   ]
 
   var SIDE = [

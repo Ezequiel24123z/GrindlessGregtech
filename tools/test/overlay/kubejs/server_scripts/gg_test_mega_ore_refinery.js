@@ -1,3 +1,4 @@
+// priority: -5736
 // TEST ONLY, MEGA-4 (gtceu:ore_refinery). Command: kubejs custom_command gg_test_mega_ore_refinery
 // Band ONLY: X 33024-33087, Z 0-63, Overworld Y 98-115.
 //   Checks (T1 of docs/eras/mega.md 6.4):

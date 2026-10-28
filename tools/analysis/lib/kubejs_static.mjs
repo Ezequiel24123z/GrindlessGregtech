@@ -537,6 +537,11 @@ export function runPackScripts(packDir, { originals = [] } = {}) {
           tag: (p, a) => { addTag(blockTags, a[0], b.id); },
         });
       },
+      // KubeJS's createCustom registers what the supplier builds (GCYR rocket motors): the id only, never the supplier, and no item
+      createCustom: (id) => {
+        registry.blocks.set(String(id), { id: String(id), kind: 'custom', file: l.file, item: false });
+        return recorder({});
+      },
     }, 'block registry');
   }
   for (const b of registry.blocks.values()) if (b.item) registry.items.set(b.id, { id: b.id, kind: 'block', file: b.file, block: true });
@@ -547,6 +552,10 @@ export function runPackScripts(packDir, { originals = [] } = {}) {
         const it = { id: String(id), kind: kind ? String(kind) : 'basic', file: l.file };
         registry.items.set(it.id, it);
         return recorder({ tag: (p, a) => { addTag(itemTags, a[0], it.id); } });
+      },
+      createCustom: (id) => {
+        registry.items.set(String(id), { id: String(id), kind: 'custom', file: l.file });
+        return recorder({});
       },
     }, 'item registry');
   }

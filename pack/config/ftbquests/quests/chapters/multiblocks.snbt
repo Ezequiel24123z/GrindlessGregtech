@@ -936,6 +936,17 @@
 			y: 20.0d
 		}
 		{
+			icon: "gtceu:ore_refinery"
+			id: "607B8B472BC526F9"
+			rewards: [{ id: "50008DB8B88F5230", type: "xp", xp: 10 }]
+			shape: "gear"
+			size: 1.5d
+			subtitle: "EV, Grindless"
+			tasks: [{ id: "1E4088D2F14FD877", item: "gtceu:ore_refinery", type: "item" }]
+			x: 18.0d
+			y: 20.0d
+		}
+		{
 			icon: "gtceu:platinum_plant"
 			id: "5D10EC9A719C9AEF"
 			rewards: [{ id: "5905915D449C7523", type: "xp", xp: 10 }]
@@ -943,7 +954,7 @@
 			size: 1.5d
 			subtitle: "EV, Grindless"
 			tasks: [{ id: "2FEB498F0A7E6476", item: "gtceu:platinum_plant", type: "item" }]
-			x: 18.0d
+			x: 20.0d
 			y: 20.0d
 		}
 		{
@@ -954,7 +965,7 @@
 			size: 1.5d
 			subtitle: "EV, Grindless"
 			tasks: [{ id: "3C72E474941841F5", item: "gtceu:regolith_cell", type: "item" }]
-			x: 20.0d
+			x: 22.0d
 			y: 20.0d
 		}
 		{
@@ -965,7 +976,7 @@
 			size: 1.5d
 			subtitle: "EV, Grindless"
 			tasks: [{ id: "6C9EC44B4EEBA26B", item: "gtceu:sealed_dome", type: "item" }]
-			x: 22.0d
+			x: 24.0d
 			y: 20.0d
 		}
 		{
@@ -976,8 +987,8 @@
 			size: 1.25d
 			subtitle: "EV, GregTech"
 			tasks: [{ id: "25744CFE7EF2011E", item: "gtceu:ev_large_miner", type: "item" }]
-			x: 24.0d
-			y: 20.0d
+			x: 2.0d
+			y: 22.0d
 		}
 		{
 			icon: "gtceu:gas_large_turbine"
@@ -987,7 +998,7 @@
 			size: 1.25d
 			subtitle: "EV, GregTech"
 			tasks: [{ id: "12E550169EA8A779", item: "gtceu:gas_large_turbine", type: "item" }]
-			x: 2.0d
+			x: 4.0d
 			y: 22.0d
 		}
 		{
@@ -998,7 +1009,7 @@
 			size: 1.25d
 			subtitle: "EV, GregTech"
 			tasks: [{ id: "4DB5DCE170BD670D", item: "gtceu:hv_fluid_drilling_rig", type: "item" }]
-			x: 4.0d
+			x: 6.0d
 			y: 22.0d
 		}
 		{
@@ -1009,7 +1020,7 @@
 			size: 1.25d
 			subtitle: "EV, GregTech"
 			tasks: [{ id: "60351C594182AF94", item: "gtceu:large_combustion_engine", type: "item" }]
-			x: 6.0d
+			x: 8.0d
 			y: 22.0d
 		}
 		{
@@ -1020,7 +1031,7 @@
 			size: 1.25d
 			subtitle: "EV, GT Community Additions"
 			tasks: [{ id: "1305D602EF301E3A", item: "gtca:thermal_reactor", type: "item" }]
-			x: 8.0d
+			x: 10.0d
 			y: 22.0d
 		}
 		{
@@ -1031,7 +1042,7 @@
 			size: 1.25d
 			subtitle: "EV, GregTech"
 			tasks: [{ id: "284C3CFD2AB65A68", item: "gtceu:titanium_large_boiler", type: "item" }]
-			x: 10.0d
+			x: 12.0d
 			y: 22.0d
 		}
 		{
@@ -1042,7 +1053,7 @@
 			size: 1.25d
 			subtitle: "EV, GregTech"
 			tasks: [{ id: "300B53A93E434B01", item: "gtceu:vacuum_freezer", type: "item" }]
-			x: 12.0d
+			x: 14.0d
 			y: 22.0d
 		}
 		{

@@ -1,4 +1,4 @@
-// priority: 4937
+// priority: 4957
 // Gregtech Grindless - names of UEV travel (startup_scripts/grindless/uev/travel.js and data/grindless/gcyr/planets/{alpha_centauri_orbit,barnard_b,sirius_b_orbit}.json):
 //
 //   level.grindless.<planet>                   GCYR's planet names (each planet file's "translation"), shown in the rocket menu
