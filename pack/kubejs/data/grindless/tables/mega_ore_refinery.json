@@ -1,0 +1,19 @@
+{
+  "_source": "Our own table: the plan of the EV Ore Refinery, gtceu:ore_refinery (docs/eras/mega.md 4.6). Every ore line is composed from GTM's live recipes by server_scripts/grindless/lib/compose.js: the recipe takes and gives what the whole line takes and gives, with the energy of every stage summed (rule 7) and spent at maxEUt (EV, 512 EU/t).",
+  "_how_it_is_used": [
+    "Read by server_scripts/grindless/ev/mega_ore_refinery.js at every server load. The script walks the live macerator recipes whose id matches `rawMacerate` (raw ore -> 2 crushed ore, the ore the drills deliver), and for each ore <m> builds the four stage ids from the templates below ({m} = the material name). An ore whose four stages (or whose raw / crushed / purified / refined item) are not all live is skipped and logged with the missing piece: nothing is made up.",
+    "Line: raw ore (1) -> macerator -> 2 crushed ore -> ore washer -> 2 purified ore -> thermal centrifuge -> 2 refined ore -> macerator -> 2 dust. Every chanced byproduct of the four stages stays in the outputs (compose turns fractions into chances).",
+    "Water variant: ONE for every ore, the plain one (1000 mB of water per washing run, 400 ticks, 16 EU/t). The distilled variant needs distilled water, and the `_fast` variant needs a programmed circuit and costs a fraction of the energy of the plain run: it would make the line cheaper than the loose machines.",
+    "`given` is one raw ore; the three intermediates (crushed, purified and refined ore) are linked and net to zero, so given + linked = the four stages."
+  ],
+  "maxEUt": 512,
+  "rawMacerate": "^gtceu:macerator/macerate_raw_(.+)_ore_to_crushed_ore$",
+  "vanillaRaw": ["iron", "copper", "gold"],
+  "stages": {
+    "macerateRaw": "gtceu:macerator/macerate_raw_{m}_ore_to_crushed_ore",
+    "wash": "gtceu:ore_washer/wash_{m}_crushed_ore_to_purified_ore",
+    "centrifuge": "gtceu:thermal_centrifuge/centrifuge_{m}_purified_ore_to_refined_ore",
+    "macerateRefined": "gtceu:macerator/macerate_{m}_refined_ore_to_dust"
+  },
+  "given": 1
+}
