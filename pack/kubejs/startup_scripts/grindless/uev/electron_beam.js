@@ -168,6 +168,11 @@
 
   // ---------------------------------------------------------------- recipe types
 
+  // the pack has no rhenium: the material is ours (B3 adds its Barnard producer); dust and ingot, formula Re
+  GTCEuStartupEvents.registry('gtceu:material', function (event) {
+    event.create('rhenium').ingot().iconSet(GTMaterialIconSet.METALLIC).color(0x8a9096).formula('Re').flags(GTMaterialFlags.DISABLE_DECOMPOSITION)
+  })
+
   GTCEuStartupEvents.registry('gtceu:recipe_type', function (event) {
     var f = EB.machines.furnace
     event.create(f.type)
