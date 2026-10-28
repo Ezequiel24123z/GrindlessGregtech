@@ -1,0 +1,5 @@
+{
+  "type": "emi:info",
+  "stacks": ["item:gtceu:cvi_furnace"],
+  "text": ["emi.grindless.info.cvi_furnace.0"]
+}
