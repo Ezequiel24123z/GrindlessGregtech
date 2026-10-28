@@ -139,7 +139,7 @@
         Pat.part('input_bus', { min: 1, max: 2 }),
         Pat.part('output_bus', { min: 1, max: 2 }),
         Pat.part('energy_input', { min: 1, max: 2 })),
-      F: Pat.frame(['tungstensteel']),
+      F: Pat.frame(['tungsten_steel']),
       T: Pat.block(TUNGSTEN_PIPE),
       D: Pat.block(GEARBOX)
     }

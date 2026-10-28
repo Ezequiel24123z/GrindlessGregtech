@@ -3,6 +3,7 @@
   "title": "Reachability: UEV (Earth and Earth orbit, then Alpha Centauri AB and Barnard b, then Sirius B)",
   "extends": "uhv",
   "inheritTargets": true,
+  "dropTargets": ["auto-titanium-without-moon-drills", "auto-tungsten-without-tripod"],
   "note": "UEV-C1 (docs/eras/uev.md \"Validator\", \"Gate to UIV\"): UHV's pack plus the 25 UEV machines, the three trips, the UEV wireless tier and the checks of the Validator. Substages: uev (Earth and Earth orbit), uev-alpha and uev-barnard (parallel siblings after the DFD Mk1), uev-sirius (after uev-barnard).",
   "conditions": {
     "dimension": {
@@ -1240,6 +1241,29 @@
   ],
   "targets": [
     {
+      "id": "auto-titanium-without-moon-drills-uev",
+      "label": "Without the lunar drill, the tripod, the pressurized drill and Barnard's core drill, titanium isn't automated (IV's check; at UEV Barnard's residue gives tungsten for the tungstensteel that recycling turns into titanium)",
+      "item": "gtceu:titanium_ingot",
+      "without": [
+        "operate:gtceu:lunar_drill",
+        "operate:gtceu:ev_vein_drill",
+        "operate:gtceu:pressurized_vein_drill",
+        "operate:gtceu:barnard_core_drill"
+      ],
+      "expect": "not-automatic"
+    },
+    {
+      "id": "auto-tungsten-without-tripod-uev",
+      "label": "Without the tripod, the pressurized drill and Barnard's core drill, tungsten isn't automated (IV's check; Barnard's residue gives tungsten dust in the platinum plant, uev.md:177)",
+      "item": "gtceu:tungsten_ingot",
+      "without": [
+        "operate:gtceu:ev_vein_drill",
+        "operate:gtceu:pressurized_vein_drill",
+        "operate:gtceu:barnard_core_drill"
+      ],
+      "expect": "not-automatic"
+    },
+    {
       "id": "isotopes-only-calutron",
       "label": "Calcium-48, potassium-40, lithium-6 and plutonium-244 only from the calutron",
       "anyOf": [
@@ -1719,7 +1743,6 @@
         "grindless:target_wheel",
         "grindless:tennessine_sample",
         "grindless:superheavy_census",
-        "grindless:sx_blade",
         "grindless:sic_sic_plate",
         "grindless:wf_w_tile",
         "grindless:snspd",
@@ -1728,7 +1751,6 @@
         "grindless:aerogel_tile",
         "grindless:hollow_core_fibre",
         "grindless:faraday_isolator",
-        "grindless:bonded_fe16n2_magnet",
         "grindless:degenerate_eos_model",
         "grindless:quantum_repeater_node",
         "gtnn:optical_computer",
@@ -1767,7 +1789,10 @@
         "m:gtceu:carbonyl_refinery",
         "grindless:barnard_core_rock",
         "grindless:barnard_residue",
-        "fluid:gtceu:iron_pentacarbonyl"
+        "fluid:gtceu:iron_pentacarbonyl",
+        "grindless:sx_blade",
+        "grindless:bonded_fe16n2_magnet",
+        "grindless:uev_electric_motor"
       ]
     },
     {
