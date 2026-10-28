@@ -140,3 +140,42 @@ test('the datapack: dimension, planet (tier 11, no air, no gravity) and sky of e
   }
   assert.ok(!fs.existsSync(path.join(data, 'dimension', 'black_hole_orbit.json')));
 });
+
+test('the three jump rows, the relay pairs and the platform table', () => {
+  const rows = table('gate.json').types.warp_gate.recipes.filter((r) => /^UIV-B1:/.test(r._why || ''));
+  assert.deepEqual(rows.map((r) => [r.name, r.circuit]), [['hold_rx_j1856', 4], ['hold_psr_j0437', 5], ['hold_cygnus_x1', 6]]);
+  for (const r of rows) {
+    assert.equal(r.eut, 31457280, r.name);
+    assert.equal(r.duration, 1200, r.name);
+    assert.equal(r.site, 'sirius_b_orbit', r.name);
+    assert.deepEqual(r.itemsOut, [], r.name);
+    assert.deepEqual(r.kept, [{ id: 'grindless:pulsar_navigation_chart', count: 1 }], r.name);
+    assert.ok(r.itemsIn.some((i) => i.id === 'grindless:launched_relay_seed'), r.name);
+  }
+  assert.deepEqual(rows[2].itemsIn.map((i) => i.id).sort(), ['grindless:launched_relay_seed', 'grindless:neutronium_pellet', 'grindless:pulsar_navigation_solution']);
+  const WG = plain(run.global.grindless.warpGate);
+  assert.deepEqual(WG.skipped || [], []);
+  assert.deepEqual(WG.clashes || [], []);
+  for (const k of ['rx_j1856', 'psr_j0437', 'cygnus_x1']) {
+    assert.ok((WG.pairs || []).some((p) => p.id === `grindless:transform/${k}_entangled_singularity` && p.tag === k), k + ' relay pair');
+  }
+  const seeds = (WG.pairs || []).map((p) => p.seed);
+  assert.equal(new Set(seeds).size, seeds.length, 'one seed per pair');
+  const gate = read('server_scripts', 'grindless', 'uhv', 'gate.js');
+  assert.match(gate, /SITES\.cygnus_x1_orbit = \['grindless:cygnus_x1_orbit'\]/);
+  const plat = table('relay_platforms.json');
+  assert.deepEqual(plat.platforms.map((p) => [p.place, p.jump, p.dimension]), [
+    ['rx_j1856', 'hold_rx_j1856', 'grindless:rx_j1856_orbit'],
+    ['psr_j0437', 'hold_psr_j0437', 'grindless:psr_j0437_orbit'],
+    ['cygnus_x1', 'hold_cygnus_x1', 'grindless:cygnus_x1_orbit']]);
+  for (const p of plat.platforms) assert.ok(rows.some((r) => r.name === p.jump), p.place);
+  assert.equal(plat.ring.machine, 'gtceu:warp_gate');
+});
+
+test('the jump rows have their EMI lines in en_us and es_es', () => {
+  const lang = read('client_scripts', 'grindless', 'uiv_travel_lang.js');
+  for (const n of ['hold_rx_j1856', 'hold_psr_j0437', 'hold_cygnus_x1']) {
+    assert.ok(lang.includes(`'${n}'`), n);
+  }
+  assert.match(lang, /gtceu\.recipe\.' \+ [^\n]*|gtceu\.recipe\.grindless_warp_gate/);
+});

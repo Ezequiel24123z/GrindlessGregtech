@@ -1,0 +1,17 @@
+{
+  "_why": "UIV-B1: the arrival platforms the c4-c6 jumps place (UIV-S0-2, S0-4). One row per place; the controller faces north and the 15 x 15 ring runs to +z. The front wall carries the ring's parts; the wireless pair and the AE2 seed stand beside the ring.",
+  "ring": {
+    "machine": "gtceu:warp_gate",
+    "energy": "gtceu:uiv_wireless_energy_hatch_16a",
+    "inputBus": "gtceu:uhv_input_bus",
+    "outputBus": "gtceu:uhv_output_bus",
+    "stock": { "id": "grindless:exotic_matter_cell", "count": 8 },
+    "dynamo": "gtceu:uiv_wireless_dynamo_hatch_16a",
+    "ae2": ["ae2:controller", "ae2:drive"]
+  },
+  "platforms": [
+    { "place": "rx_j1856", "jump": "hold_rx_j1856", "dimension": "grindless:rx_j1856_orbit", "x": 64, "y": 100, "z": 64 },
+    { "place": "psr_j0437", "jump": "hold_psr_j0437", "dimension": "grindless:psr_j0437_orbit", "x": 64, "y": 100, "z": 64 },
+    { "place": "cygnus_x1", "jump": "hold_cygnus_x1", "dimension": "grindless:cygnus_x1_orbit", "x": 64, "y": 100, "z": 64 }
+  ]
+}

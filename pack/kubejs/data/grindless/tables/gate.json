@@ -27,6 +27,34 @@
           "itemsIn": [{ "id": "grindless:exotic_matter_cell", "count": 1 }],
           "kept": [],
           "itemsOut": []
+        },
+        {
+          "_why": "UIV-B1: c4 jump to RX J1856 from Sirius B; named hold_ so the gate's overclock stays identity at 16 A UIV",
+          "name": "hold_rx_j1856",
+          "circuit": 4, "eut": 31457280, "duration": 1200, "site": "sirius_b_orbit",
+          "itemsIn": [{ "id": "grindless:launched_relay_seed", "count": 1 }],
+          "kept": [{ "id": "grindless:pulsar_navigation_chart", "count": 1 }],
+          "itemsOut": []
+        },
+        {
+          "_why": "UIV-B1: c5 jump to PSR J0437 from Sirius B",
+          "name": "hold_psr_j0437",
+          "circuit": 5, "eut": 31457280, "duration": 1200, "site": "sirius_b_orbit",
+          "itemsIn": [{ "id": "grindless:launched_relay_seed", "count": 1 }],
+          "kept": [{ "id": "grindless:pulsar_navigation_chart", "count": 1 }],
+          "itemsOut": []
+        },
+        {
+          "_why": "UIV-B1: c6 jump to Cygnus X-1 from Sirius B; reads B2's pellet and B3's solution by their F1 ids",
+          "name": "hold_cygnus_x1",
+          "circuit": 6, "eut": 31457280, "duration": 1200, "site": "sirius_b_orbit",
+          "itemsIn": [
+            { "id": "grindless:launched_relay_seed", "count": 1 },
+            { "id": "grindless:pulsar_navigation_solution", "count": 1 },
+            { "id": "grindless:neutronium_pellet", "count": 1 }
+          ],
+          "kept": [{ "id": "grindless:pulsar_navigation_chart", "count": 1 }],
+          "itemsOut": []
         }
       ]
     },
