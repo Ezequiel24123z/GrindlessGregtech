@@ -169,17 +169,15 @@
     entries(K.ItemCap).forEach(function (c) {
       var s = share(c)
       if (s <= 0) return
-      var ing = c.getContent()
-      var stack = ing.getItems()[0]
-      var amount = Number(stack.getCount())
-      try { if (typeof ing.getAmount === 'function') amount = Number(ing.getAmount()) } catch (e) { }
-      var key = 'i:' + String(K.Registries.ITEMS.getKey(stack.getItem()))
+      var ing = K.ItemCap.of(c.content)
+      var amount = ing.getAmount !== undefined ? Number(ing.getAmount()) : 1
+      var key = 'i:' + String(ing.getItemIds()[0])
       res[key] = (res[key] || 0) + amount * s
     })
     entries(K.FluidCap).forEach(function (c) {
       var s = share(c)
       if (s <= 0) return
-      var fi = c.getContent()
+      var fi = K.FluidCap.of(c.content)
       var fs = fi.getStacks()[0]
       var key = 'f:' + String(K.Registries.FLUIDS.getKey(fs.getFluid()))
       res[key] = (res[key] || 0) + Number(fi.getAmount()) * s
@@ -193,7 +191,8 @@
     var outs = side(rec, true)
     Object.keys(ins).forEach(function (k) { net[k] = (net[k] || 0) - ins[k] })
     Object.keys(outs).forEach(function (k) { net[k] = (net[k] || 0) + outs[k] })
-    var eut = Number(classes().RecipeHelper.getInputEUt(rec).getTotalEU())
+    var eu = rec.getInputEUt()
+    var eut = Number(eu.voltage()) * Number(eu.amperage())
     return { net: net, eut: eut, duration: Number(rec.duration), energy: eut * Number(rec.duration) }
   }
 
