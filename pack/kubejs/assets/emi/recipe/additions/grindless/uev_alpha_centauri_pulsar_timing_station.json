@@ -1,0 +1,5 @@
+{
+  "type": "emi:info",
+  "stacks": ["item:gtceu:pulsar_timing_station"],
+  "text": ["emi.grindless.info.pulsar_timing_station.0"]
+}
