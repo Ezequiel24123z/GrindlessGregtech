@@ -95,6 +95,11 @@
       [item('gtceu:magnesium_diboride_single_wire', 8), item('gtceu:iron_dust', 1)], [], VA_UV, 400)
   ]
 
+  // UEV-A5: the BN interphase on the SiC fibre (circuit 5), before the CVI furnace's matrix
+  REACTOR.push(row('sic_fibre_bn_interphase', 'boron_nitride', 5,
+    [item('grindless:sic_fibre', 1), item(B2O3, 1)], [fluid('gtceu:ammonia', 1000)],
+    [item('grindless:bn_coated_sic_fibre', 1)], [fluid('gtceu:steam', 1500)], VA_UHV, 300))
+
   // UEV-A3: the (La,Y)H10 wire, the only producer of the superhydride cable's wire (GTM's covering recipes make the cable)
   LINE.push(row('lay_wire', 'powder_in_tube', 6, [item('gtceu:lay_superhydride_dust', 4), item(TUBE, 1)], [],
     [item('gtceu:lay_superhydride_single_wire', 8), item('gtceu:silver_dust', 1)], [], VA_UHV, 800))

@@ -75,6 +75,11 @@
     row('uhtc_nozzle', 'spark_plasma_sintering', 3, [item(TILE, 4), item(LINER, 1)], [], [item(NOZZLE, 1)], [], UHVA, 600)
   ]
 
+  // UEV-A5: the HfTaCN billet (the coil block's heating elements), circuit 4; the 6N hafnium dopes the grain boundaries (UEV-A4)
+  TABLE.push(row('hftacn_billet', 'spark_plasma_sintering', 4,
+    [item('grindless:hftacn_powder', 4), item('grindless:six_n_hafnium', 1), item('gtceu:graphite_dust', 1)], [],
+    [item('gtceu:hftacn_ingot', 2), item(CARBON, 1)], [], UHVA, 600))
+
   var SIDE = [
     row('zirconia', 'electric_blast_furnace', null, [item(ZIRCON, 4)], [],
       [item(ZIRCONIA, 3), item('gtceu:silicon_dioxide_dust', 1)], [], IV, 400, 2100),

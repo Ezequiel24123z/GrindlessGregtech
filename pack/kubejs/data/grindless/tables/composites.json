@@ -1,0 +1,134 @@
+{
+  "types": {
+    "nitride_magnet_synthesis": {
+      "dataKey": "grindless_nitride_magnet_synthesis",
+      "recipes": [
+        { "name": "fe16n2_powder", "circuit": 1, "eut": 1966080, "duration": 600,
+          "itemsIn": [{ "id": "grindless:reduced_iron_powder", "count": 16 }], "kept": [], "fluidsIn": [{ "id": "gtceu:ammonia", "amount": 2000 }], "charge": [],
+          "itemsOut": [{ "id": "gtceu:fe16n2_dust", "count": 1 }], "fluidsOut": [{ "id": "gtceu:hydrogen", "amount": 3000 }] },
+        { "name": "strain_anneal", "circuit": 2, "eut": 1966080, "duration": 400,
+          "itemsIn": [{ "id": "gtceu:fe16n2_dust", "count": 1 }], "kept": [], "fluidsIn": [], "charge": [],
+          "itemsOut": [{ "id": "grindless:strain_annealed_fe16n2_powder", "count": 1 }], "fluidsOut": [] },
+        { "name": "bonded_magnet", "circuit": 3, "eut": 1966080, "duration": 300,
+          "itemsIn": [{ "id": "grindless:strain_annealed_fe16n2_powder", "count": 4 }, { "id": "gtceu:polycarbonate_dust", "count": 1 }], "kept": [], "fluidsIn": [], "charge": [],
+          "itemsOut": [{ "id": "grindless:bonded_fe16n2_magnet", "count": 2 }], "fluidsOut": [] }
+      ]
+    },
+    "sic_fibre_spinning": {
+      "dataKey": "grindless_sic_fibre_spinning",
+      "recipes": [
+        { "name": "green_fibre", "circuit": 1, "eut": 1966080, "duration": 300,
+          "itemsIn": [{ "id": "grindless:polycarbosilane_dust", "count": 1 }], "kept": [], "fluidsIn": [], "charge": [],
+          "itemsOut": [{ "id": "grindless:green_sic_fibre", "count": 1 }], "fluidsOut": [] },
+        { "name": "ebeam_cure", "circuit": 2, "eut": 1966080, "duration": 200,
+          "itemsIn": [{ "id": "grindless:green_sic_fibre", "count": 1 }], "kept": [], "fluidsIn": [], "charge": [],
+          "itemsOut": [{ "id": "grindless:cured_sic_fibre", "count": 1 }], "fluidsOut": [] },
+        { "name": "sic_fibre", "circuit": 3, "eut": 1966080, "duration": 400,
+          "itemsIn": [{ "id": "grindless:cured_sic_fibre", "count": 1 }], "kept": [], "fluidsIn": [], "charge": [],
+          "itemsOut": [{ "id": "grindless:sic_fibre", "count": 1 }], "fluidsOut": [{ "id": "gtceu:methane", "amount": 500 }, { "id": "gtceu:hydrogen", "amount": 1000 }] }
+      ]
+    },
+    "chemical_vapour_infiltration": {
+      "dataKey": "grindless_chemical_vapour_infiltration",
+      "recipes": [
+        { "name": "sic_sic_plate", "circuit": 1, "eut": 1966080, "duration": 9600,
+          "itemsIn": [{ "id": "grindless:sic_fibre_preform", "count": 1 }], "kept": [], "fluidsIn": [{ "id": "gtceu:methyltrichlorosilane", "amount": 1000 }], "charge": [],
+          "itemsOut": [{ "id": "grindless:sic_sic_plate", "count": 1 }], "fluidsOut": [{ "id": "gtceu:hydrochloric_acid", "amount": 3000 }] },
+        { "name": "wf_w_tile", "circuit": 2, "eut": 1966080, "duration": 9600,
+          "itemsIn": [{ "id": "grindless:w_fibre_preform", "count": 1 }], "kept": [], "fluidsIn": [{ "id": "gtceu:tungsten_hexafluoride", "amount": 1000 }, { "id": "gtceu:hydrogen", "amount": 3000 }], "charge": [],
+          "itemsOut": [{ "id": "grindless:wf_w_tile", "count": 1 }], "fluidsOut": [{ "id": "gtceu:hydrofluoric_acid", "amount": 6000 }] }
+      ]
+    },
+    "chemical_reactor": {
+      "recipes": [
+        { "name": "tantalum_pentoxide", "circuit": 0, "eut": 1920, "duration": 200,
+          "itemsIn": [{ "id": "grindless:tantalum_powder", "count": 2 }], "kept": [], "fluidsIn": [{ "id": "gtceu:oxygen", "amount": 5000 }], "charge": [],
+          "itemsOut": [{ "id": "grindless:tantalum_pentoxide_dust", "count": 1 }], "fluidsOut": [] },
+        { "name": "hftacn_nitriding", "circuit": 0, "eut": 30720, "duration": 400,
+          "itemsIn": [{ "id": "grindless:hftac_dust", "count": 2 }], "kept": [], "fluidsIn": [{ "id": "gtceu:nitrogen", "amount": 1000 }], "charge": [],
+          "itemsOut": [{ "id": "grindless:hftacn_crude_dust", "count": 2 }], "fluidsOut": [] },
+        { "name": "carbonyl_iron_powder", "circuit": 0, "eut": 7680, "duration": 200,
+          "itemsIn": [], "kept": [], "fluidsIn": [{ "id": "gtceu:iron_pentacarbonyl", "amount": 1000 }], "charge": [],
+          "itemsOut": [{ "id": "grindless:carbonyl_iron_powder", "count": 1 }], "fluidsOut": [{ "id": "gtceu:carbon_monoxide", "amount": 5000 }] },
+        { "name": "polydimethylsilane", "circuit": 0, "eut": 7680, "duration": 300,
+          "itemsIn": [{ "id": "gtceu:sodium_dust", "count": 2 }], "kept": [], "fluidsIn": [{ "id": "gtceu:dimethyldichlorosilane", "amount": 1000 }], "charge": [],
+          "itemsOut": [{ "id": "grindless:polydimethylsilane_dust", "count": 1 }, { "id": "gtceu:salt_dust", "count": 4 }], "fluidsOut": [] },
+        { "name": "polycarbosilane", "circuit": 0, "eut": 30720, "duration": 400,
+          "itemsIn": [{ "id": "grindless:polydimethylsilane_dust", "count": 2 }], "kept": [], "fluidsIn": [], "charge": [],
+          "itemsOut": [{ "id": "grindless:polycarbosilane_dust", "count": 2 }], "fluidsOut": [{ "id": "gtceu:methane", "amount": 1000 }, { "id": "gtceu:hydrogen", "amount": 1000 }] },
+        { "name": "methyltrichlorosilane", "circuit": 0, "eut": 7680, "duration": 300,
+          "itemsIn": [{ "id": "gtceu:silicon_dust", "count": 1 }], "kept": [], "fluidsIn": [{ "id": "gtceu:methane", "amount": 1000 }, { "id": "gtceu:chlorine", "amount": 3000 }], "charge": [],
+          "itemsOut": [], "fluidsOut": [{ "id": "gtceu:methyltrichlorosilane", "amount": 1000 }, { "id": "gtceu:hydrochloric_acid", "amount": 3000 }] },
+        { "name": "coated_w_wire", "circuit": 0, "eut": 30720, "duration": 300,
+          "itemsIn": [{ "id": "gtceu:tungsten_single_wire", "count": 8 }, { "id": "grindless:yttrium_oxide_dust", "count": 1 }], "kept": [], "fluidsIn": [], "charge": [],
+          "itemsOut": [{ "id": "grindless:coated_w_wire", "count": 8 }], "fluidsOut": [] },
+        { "name": "tungsten_hexafluoride", "circuit": 0, "eut": 7680, "duration": 200,
+          "itemsIn": [{ "id": "gtceu:tungsten_dust", "count": 1 }], "kept": [], "fluidsIn": [{ "id": "gtceu:fluorine", "amount": 6000 }], "charge": [],
+          "itemsOut": [], "fluidsOut": [{ "id": "gtceu:tungsten_hexafluoride", "amount": 1000 }] },
+        { "name": "chlorodifluoromethane", "circuit": 0, "eut": 7680, "duration": 300,
+          "itemsIn": [], "kept": [], "fluidsIn": [{ "id": "gtceu:hydrofluoric_acid", "amount": 2000 }, { "id": "gtceu:methane", "amount": 1000 }, { "id": "gtceu:chlorine", "amount": 3000 }], "charge": [],
+          "itemsOut": [], "fluidsOut": [{ "id": "gtceu:chlorodifluoromethane", "amount": 1000 }, { "id": "gtceu:hydrochloric_acid", "amount": 5000 }] },
+        { "name": "ffkm_tfe", "circuit": 0, "eut": 30720, "duration": 300,
+          "itemsIn": [], "kept": [], "fluidsIn": [{ "id": "gtceu:chlorodifluoromethane", "amount": 2000 }], "charge": [],
+          "itemsOut": [], "fluidsOut": [{ "id": "gtceu:tetrafluoroethylene", "amount": 1000 }, { "id": "gtceu:hydrochloric_acid", "amount": 2000 }] },
+        { "name": "pmve", "circuit": 0, "eut": 30720, "duration": 300,
+          "itemsIn": [], "kept": [], "fluidsIn": [{ "id": "gtceu:tetrafluoroethylene", "amount": 2000 }, { "id": "gtceu:oxygen", "amount": 1000 }, { "id": "gtceu:fluorine", "amount": 2000 }], "charge": [],
+          "itemsOut": [], "fluidsOut": [{ "id": "gtceu:pmve", "amount": 1000 }] },
+        { "name": "ffkm_rubber", "circuit": 0, "eut": 30720, "duration": 400,
+          "itemsIn": [], "kept": [], "fluidsIn": [{ "id": "gtceu:pmve", "amount": 1000 }, { "id": "gtceu:tetrafluoroethylene", "amount": 4000 }], "charge": [],
+          "itemsOut": [{ "id": "gtceu:ffkm_dust", "count": 5 }], "fluidsOut": [] }
+      ]
+    },
+    "mixer": {
+      "recipes": [
+        { "name": "hftac_blend", "circuit": 0, "eut": 7680, "duration": 200,
+          "itemsIn": [{ "id": "grindless:hafnia_dust", "count": 2 }, { "id": "grindless:tantalum_pentoxide_dust", "count": 1 }, { "id": "gtceu:carbon_dust", "count": 5 }], "kept": [], "fluidsIn": [], "charge": [],
+          "itemsOut": [{ "id": "grindless:hftac_blend_dust", "count": 8 }], "fluidsOut": [] }
+      ]
+    },
+    "electric_blast_furnace": {
+      "temp": 3600,
+      "recipes": [
+        { "name": "hftac_carbothermal", "circuit": 0, "eut": 30720, "duration": 600,
+          "itemsIn": [{ "id": "grindless:hftac_blend_dust", "count": 8 }], "kept": [], "fluidsIn": [], "charge": [],
+          "itemsOut": [{ "id": "grindless:hftac_dust", "count": 4 }], "fluidsOut": [{ "id": "gtceu:carbon_monoxide", "amount": 7000 }] },
+        { "name": "iron_hydrogen_reduction", "circuit": 0, "eut": 7680, "duration": 300,
+          "itemsIn": [{ "id": "grindless:carbonyl_iron_powder", "count": 1 }], "kept": [], "fluidsIn": [{ "id": "gtceu:hydrogen", "amount": 2000 }], "charge": [],
+          "itemsOut": [{ "id": "grindless:reduced_iron_powder", "count": 1 }], "fluidsOut": [{ "id": "gtceu:steam", "amount": 2000 }] }
+      ]
+    },
+    "macerator": {
+      "recipes": [
+        { "name": "hftacn_milling", "circuit": 0, "eut": 1920, "duration": 200,
+          "itemsIn": [{ "id": "grindless:hftacn_crude_dust", "count": 1 }], "kept": [], "fluidsIn": [], "charge": [],
+          "itemsOut": [{ "id": "grindless:hftacn_powder", "count": 1 }], "fluidsOut": [] }
+      ]
+    },
+    "compressor": {
+      "recipes": [
+        { "name": "ffkm_seal", "circuit": 0, "eut": 480, "duration": 200,
+          "itemsIn": [{ "id": "gtceu:ffkm_dust", "count": 4 }], "kept": [], "fluidsIn": [], "charge": [],
+          "itemsOut": [{ "id": "grindless:ffkm_seal", "count": 1 }], "fluidsOut": [] }
+      ]
+    },
+    "assembler": {
+      "recipes": [
+        { "name": "hftacn_heating_element", "circuit": 0, "eut": 30720, "duration": 200,
+          "itemsIn": [{ "id": "gtceu:hftacn_ingot", "count": 2 }, { "id": "gtceu:tritanium_foil", "count": 4 }], "kept": [], "fluidsIn": [], "charge": [],
+          "itemsOut": [{ "id": "grindless:hftacn_heating_element", "count": 1 }], "fluidsOut": [] },
+        { "name": "hftacn_coil_block", "circuit": 0, "eut": 122880, "duration": 300,
+          "itemsIn": [{ "id": "grindless:hftacn_heating_element", "count": 8 }, { "id": "gtceu:tritanium_plate", "count": 2 }], "kept": [], "fluidsIn": [], "charge": [],
+          "itemsOut": [{ "id": "grindless:hftacn_coil_block", "count": 1 }], "fluidsOut": [] },
+        { "name": "sic_fibre_preform", "circuit": 0, "eut": 30720, "duration": 300,
+          "itemsIn": [{ "id": "grindless:bn_coated_sic_fibre", "count": 8 }], "kept": [], "fluidsIn": [], "charge": [],
+          "itemsOut": [{ "id": "grindless:sic_fibre_preform", "count": 1 }], "fluidsOut": [] },
+        { "name": "w_fibre_preform", "circuit": 0, "eut": 30720, "duration": 300,
+          "itemsIn": [{ "id": "grindless:coated_w_wire", "count": 16 }], "kept": [], "fluidsIn": [], "charge": [],
+          "itemsOut": [{ "id": "grindless:w_fibre_preform", "count": 1 }], "fluidsOut": [] },
+        { "name": "uev_electric_motor", "circuit": 0, "eut": 2097152, "duration": 300,
+          "itemsIn": [{ "id": "grindless:bonded_fe16n2_magnet", "count": 2 }, { "id": "gtceu:lay_superhydride_single_cable", "count": 4 }, { "id": "grindless:sic_sic_plate", "count": 2 }, { "id": "grindless:ffkm_seal", "count": 2 }], "kept": [], "fluidsIn": [], "charge": [],
+          "itemsOut": [{ "id": "grindless:uev_electric_motor", "count": 1 }], "fluidsOut": [] }
+      ]
+    }
+  }
+}
