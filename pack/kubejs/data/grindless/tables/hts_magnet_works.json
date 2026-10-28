@@ -39,6 +39,14 @@
       "fluidsIn": [],
       "itemsOut": [ { "id": "grindless:magnetic_bearing", "count": 1 } ],
       "eut": 1920, "duration": 200
+    },
+    {
+      "name": "seeded_gdbco_growth", "circuit": 5, "charge": true,
+      "_why": "UIV-A8, line 23: top-seeded melt growth of bulk GdBCO: a neodymium-based seed crystal on the Gd-123 melt in the cold-test helium, grown over hours (Cardwell and Durrell's single-domain bulks).",
+      "itemsIn": [ { "id": "gtceu:gd_123_dust", "count": 8 }, { "id": "gtceu:neodymium_dust", "count": 1 } ],
+      "fluidsIn": [],
+      "itemsOut": [ { "id": "grindless:bulk_gdbco", "count": 1 } ],
+      "eut": 30720, "duration": 4800
     }
   ]
 }

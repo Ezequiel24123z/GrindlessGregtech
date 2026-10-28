@@ -34,6 +34,22 @@
       "itemsOut": [{ "id": "grindless:itbtc_coated_conductor", "count": 16 }],
       "eut": 30720,
       "duration": 300
+    },
+    {
+      "name": "gd_123_precursor",
+      "step": "precursor",
+      "_why": "UIV-A8, line 23: gadolinium oxide and the barium-copper blend fired in oxygen to the Gd-123 phase (GdBa2Cu3O7), the bulk GdBCO's feed.",
+      "circuit": 3,
+      "itemsIn": [
+        { "id": "gtceu:gadolinium_oxide_dust", "count": 1 },
+        { "id": "grindless:ba_cu_blend", "count": 10 }
+      ],
+      "fluidsIn": [
+        { "id": "gtceu:oxygen", "amount": 7000 }
+      ],
+      "itemsOut": [{ "id": "gtceu:gd_123_dust", "count": 2 }],
+      "eut": 30720,
+      "duration": 400
     }
   ]
 }

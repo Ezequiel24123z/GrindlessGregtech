@@ -15,7 +15,8 @@
   "metals": [
     { "name": "neutronium", "ingot": "gtceu:neutronium_ingot", "powder": "grindless:neutronium_am_powder" },
     { "name": "darmstadtium", "ingot": "gtceu:darmstadtium_ingot", "powder": "grindless:darmstadtium_am_powder" },
-    { "name": "tritanium", "ingot": "gtceu:tritanium_ingot", "powder": "grindless:tritanium_am_powder" }
+    { "name": "tritanium", "ingot": "gtceu:tritanium_ingot", "powder": "grindless:tritanium_am_powder" },
+    { "name": "rhea", "ingot": "gtceu:rhea_ingot", "powder": "grindless:rhea_am_powder" }
   ],
   "parts": [
     { "name": "neutronium_gear", "metal": "neutronium", "circuit": 2, "powderIn": 4, "powderBack": 1,
@@ -32,6 +33,9 @@
       "nearNet": "grindless:near_net_array_mount", "output": "grindless:printed_array_mount", "gtm": false },
     { "name": "probe_frame", "metal": "darmstadtium", "circuit": 6, "powderIn": 6, "powderBack": 2,
       "_why": "The probes' printed frame (penetrator and precursor probes): a lattice too light to machine.",
-      "nearNet": "grindless:near_net_probe_frame", "output": "grindless:printed_probe_frame", "gtm": false }
+      "nearNet": "grindless:near_net_probe_frame", "output": "grindless:printed_probe_frame", "gtm": false },
+    { "name": "rhea_impeller", "metal": "rhea", "circuit": 7, "powderIn": 6, "powderBack": 2,
+      "_why": "UIV-A8, line 6: the UIV pump's impeller, one piece with its curved blades; the RHEA's atomised powder (the metals entry above) is printed, then HIPed at the megabar press.",
+      "nearNet": "grindless:near_net_rhea_impeller", "output": "grindless:printed_rhea_impeller", "gtm": false }
   ]
 }

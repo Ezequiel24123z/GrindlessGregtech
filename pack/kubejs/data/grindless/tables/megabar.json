@@ -9,7 +9,10 @@
           "itemsOut": [{ "id": "gtceu:lay_superhydride_ingot", "count": 2 }], "fluidsOut": [{ "id": "gtceu:hydrogen", "amount": 4000 }] },
         { "name": "nanotwinned_diamond", "circuit": 2, "eut": 3932160, "duration": 1600,
           "itemsIn": [{ "id": "grindless:nanodiamond_pellet", "count": 2 }], "kept": [], "fluidsIn": [], "charge": [],
-          "itemsOut": [{ "id": "grindless:nanotwinned_diamond", "count": 1 }], "fluidsOut": [] }
+          "itemsOut": [{ "id": "grindless:nanotwinned_diamond", "count": 1 }], "fluidsOut": [] },
+        { "_why": "UIV-A8, line 6: HIP of the printed RHEA impeller.", "name": "rhea_impeller_hip", "circuit": 3, "eut": 3932160, "duration": 1200,
+          "itemsIn": [{ "id": "grindless:printed_rhea_impeller", "count": 1 }, { "id": "grindless:nanotwinned_diamond_anvil", "count": 1, "chance": 1000 }], "kept": [], "fluidsIn": [], "charge": [],
+          "itemsOut": [{ "id": "grindless:dense_rhea_impeller", "count": 1 }], "fluidsOut": [] }
       ]
     },
     "electric_blast_furnace": {

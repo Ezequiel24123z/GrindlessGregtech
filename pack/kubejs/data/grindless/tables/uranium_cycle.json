@@ -101,6 +101,24 @@
           "from": { "recipe": "gtceu:assembler/energy_hatch_iv" }
         }
       ]
+    },
+    {
+      "name": "kroll_zr_sponge",
+      "_why": "UIV-A8, line 8: Kroll reduction of hafnium-free zirconium tetrachloride with magnesium; the cake keeps its magnesium chloride until the vacuum distillation of the UIV components line (uiv_components.json).",
+      "circuit": 9,
+      "itemsIn": [
+        { "id": "grindless:zirconium_chloride_dust", "count": 4 },
+        { "id": "gtceu:magnesium_dust", "count": 8 }
+      ],
+      "fluidsIn": [],
+      "fluidsKept": [],
+      "fluidsOut": [],
+      "itemsOut": [
+        { "id": "grindless:zirconium_sponge", "count": 4 }
+      ],
+      "energy": [
+        { "stage": "reducing the tetrachloride under argon in the retort: one IV assembler stage", "eu": 1536000, "times": 1 }
+      ]
     }
   ]
 }

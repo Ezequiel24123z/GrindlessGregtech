@@ -1,0 +1,75 @@
+{
+  "_why": "UIV-A8 (docs/eras/uiv.md, lines 6, 8 and 23): the steps of the UIV pump (RHEA impeller), robot arm (BMG strain-wave gear) and motor (bulk GdBCO) that GTM's own machines run, the three component recipes and the melter's returns. The older machines' own rows (printer, megabar, fuel plant, coated conductor line, HTS magnet works, nitride magnet works) sit in their tables, marked UIV-A8. Amounts per run; circuit 0 means none (GTM's types only).",
+  "types": {
+    "mixer": {
+      "recipes": [
+        { "name": "ba_cu_blend", "circuit": 0, "eut": 7680, "duration": 200,
+          "itemsIn": [{ "id": "gtceu:barium_dust", "count": 4 }, { "id": "gtceu:copper_dust", "count": 6 }], "kept": [], "fluidsIn": [], "charge": [],
+          "itemsOut": [{ "id": "grindless:ba_cu_blend", "count": 10 }], "fluidsOut": [] }
+      ]
+    },
+    "electric_blast_furnace": {
+      "temp": 1800,
+      "recipes": [
+        { "name": "zr_sponge_distillation", "circuit": 0, "eut": 30720, "duration": 600,
+          "itemsIn": [{ "id": "grindless:zirconium_sponge", "count": 4 }], "kept": [], "fluidsIn": [], "charge": [],
+          "itemsOut": [{ "id": "gtceu:zirconium_dust", "count": 4 }, { "id": "gtceu:magnesium_chloride_dust", "count": 8 }], "fluidsOut": [] },
+        { "name": "bmg_suction_casting", "circuit": 0, "eut": 122880, "duration": 300,
+          "itemsIn": [{ "id": "gtceu:zrticunibe_glass_dust", "count": 4 }], "kept": [{ "id": "gtceu:copper_plate", "count": 1 }], "fluidsIn": [], "charge": [],
+          "itemsOut": [{ "id": "grindless:bmg_blank", "count": 1 }, { "id": "grindless:bmg_gate", "count": 1 }], "fluidsOut": [] }
+      ]
+    },
+    "lathe": {
+      "recipes": [
+        { "name": "rhea_impeller_machining", "circuit": 0, "eut": 491520, "duration": 400,
+          "itemsIn": [{ "id": "grindless:dense_rhea_impeller", "count": 1 }], "kept": [], "fluidsIn": [], "charge": [],
+          "itemsOut": [{ "id": "grindless:machined_rhea_impeller", "count": 1 }, { "id": "grindless:rhea_swarf", "count": 1 }], "fluidsOut": [] },
+        { "name": "bmg_flexspline_machining", "circuit": 0, "eut": 491520, "duration": 400,
+          "itemsIn": [{ "id": "grindless:bmg_blank", "count": 1 }], "kept": [], "fluidsIn": [], "charge": [],
+          "itemsOut": [{ "id": "grindless:bmg_flexspline", "count": 1 }], "fluidsOut": [] }
+      ]
+    },
+    "chemical_reactor": {
+      "recipes": [
+        { "name": "gdbco_oxygenation", "circuit": 0, "eut": 30720, "duration": 2400,
+          "itemsIn": [{ "id": "grindless:bulk_gdbco", "count": 1 }], "kept": [], "fluidsIn": [{ "id": "gtceu:oxygen", "amount": 3000 }], "charge": [],
+          "itemsOut": [{ "id": "grindless:oxygenated_gdbco", "count": 1 }], "fluidsOut": [] }
+      ]
+    },
+    "levitation_melting": {
+      "recipes": [
+        { "name": "rhea_swarf_remelt", "circuit": 6, "eut": 7864320, "duration": 1800,
+          "itemsIn": [{ "id": "grindless:rhea_swarf", "count": 4 }], "kept": [], "fluidsIn": [{ "id": "gtceu:helium", "amount": 1000 }], "charge": [],
+          "itemsOut": [{ "id": "gtceu:rhea_ingot", "count": 3 }, { "id": "grindless:melter_dross", "count": 1 }], "fluidsOut": [] },
+        { "name": "rhea_powder_remelt", "circuit": 7, "eut": 7864320, "duration": 1800,
+          "itemsIn": [{ "id": "grindless:rhea_am_powder", "count": 4 }], "kept": [], "fluidsIn": [{ "id": "gtceu:helium", "amount": 1000 }], "charge": [],
+          "itemsOut": [{ "id": "gtceu:rhea_ingot", "count": 4 }], "fluidsOut": [] },
+        { "name": "bmg_gate_remelt", "circuit": 8, "eut": 7864320, "duration": 2400,
+          "itemsIn": [{ "id": "grindless:bmg_gate", "count": 4 }], "kept": [], "fluidsIn": [{ "id": "gtceu:helium", "amount": 1000 }], "charge": [],
+          "itemsOut": [{ "id": "gtceu:zrticunibe_glass_dust", "count": 4 }, { "id": "grindless:beryllium_oxide_dust", "count": 1 }, { "id": "grindless:melter_dross", "count": 1 }], "fluidsOut": [] }
+      ]
+    },
+    "assembler": {
+      "recipes": [
+        { "name": "rhea_impeller_balancing", "circuit": 0, "eut": 491520, "duration": 300,
+          "itemsIn": [{ "id": "grindless:machined_rhea_impeller", "count": 1 }, { "id": "gtceu:tungsten_foil", "count": 2 }], "kept": [], "fluidsIn": [], "charge": [],
+          "itemsOut": [{ "id": "grindless:balanced_rhea_impeller", "count": 1 }], "fluidsOut": [] },
+        { "name": "strain_wave_gear", "circuit": 0, "eut": 491520, "duration": 300,
+          "itemsIn": [{ "id": "grindless:bmg_flexspline", "count": 1 }, { "id": "gtceu:rhea_plate", "count": 2 }], "kept": [], "fluidsIn": [], "charge": [],
+          "itemsOut": [{ "id": "grindless:strain_wave_gear", "count": 1 }], "fluidsOut": [] },
+        { "name": "gdbco_impregnation", "circuit": 0, "eut": 122880, "duration": 300,
+          "itemsIn": [{ "id": "grindless:oxygenated_gdbco", "count": 1 }], "kept": [], "fluidsIn": [{ "id": "gtceu:epoxy", "amount": 144 }], "charge": [],
+          "itemsOut": [{ "id": "grindless:impregnated_gdbco", "count": 1 }], "fluidsOut": [] },
+        { "name": "uiv_electric_pump", "circuit": 0, "eut": 7864320, "duration": 400,
+          "itemsIn": [{ "id": "grindless:uev_electric_pump", "count": 1 }, { "id": "grindless:balanced_rhea_impeller", "count": 1 }, { "id": "gtceu:rhea_plate", "count": 2 }, { "id": "#gtceu:circuits/uiv", "count": 1 }], "kept": [], "fluidsIn": [], "charge": [],
+          "itemsOut": [{ "id": "grindless:uiv_electric_pump", "count": 1 }], "fluidsOut": [] },
+        { "name": "uiv_robot_arm", "circuit": 0, "eut": 7864320, "duration": 400,
+          "itemsIn": [{ "id": "grindless:uev_robot_arm", "count": 1 }, { "id": "grindless:strain_wave_gear", "count": 3 }, { "id": "grindless:uiv_electric_piston", "count": 1 }, { "id": "#gtceu:circuits/uiv", "count": 1 }], "kept": [], "fluidsIn": [], "charge": [],
+          "itemsOut": [{ "id": "grindless:uiv_robot_arm", "count": 1 }], "fluidsOut": [] },
+        { "name": "uiv_electric_motor", "circuit": 0, "eut": 7864320, "duration": 400,
+          "itemsIn": [{ "id": "grindless:uev_electric_motor", "count": 1 }, { "id": "grindless:field_cooled_gdbco", "count": 2 }, { "id": "grindless:mh_winding", "count": 4 }, { "id": "gtceu:metallic_hydrogen_single_cable", "count": 4 }, { "id": "#gtceu:circuits/uiv", "count": 1 }], "kept": [], "fluidsIn": [], "charge": [],
+          "itemsOut": [{ "id": "grindless:uiv_electric_motor", "count": 1 }], "fluidsOut": [] }
+      ]
+    }
+  }
+}
