@@ -40,6 +40,21 @@
           "charge": [],
           "itemsOut": [{ "id": "grindless:quantum_cascade_laser", "count": 8 }],
           "fluidsOut": []
+        },
+        {
+          "name": "inas_quantum_dots",
+          "circuit": 3,
+          "eut": 1966080,
+          "duration": 1400,
+          "itemsIn": [
+            { "id": "grindless:gallium_arsenide_wafer", "count": 1 },
+            { "id": "grindless:seven_n_indium", "count": 1 }
+          ],
+          "kept": [],
+          "fluidsIn": [{ "id": "gtceu:arsine", "amount": 500 }],
+          "charge": [],
+          "itemsOut": [{ "id": "grindless:inas_qd_wafer", "count": 1 }],
+          "fluidsOut": [{ "id": "gtceu:hydrogen", "amount": 750 }]
         }
       ]
     },
@@ -142,6 +157,18 @@
           "fluidsIn": [{ "id": "gtceu:ultrapure_water", "amount": 1000 }],
           "charge": [],
           "itemsOut": [{ "id": "grindless:thin_film_ln_modulator", "count": 16 }],
+          "fluidsOut": [{ "id": "minecraft:water", "amount": 1000 }]
+        },
+        {
+          "name": "sin_waveguide_anneal",
+          "circuit": 7,
+          "eut": 1966080,
+          "duration": 400,
+          "itemsIn": [{ "id": "grindless:sin_etched_wafer", "count": 1 }],
+          "kept": [],
+          "fluidsIn": [{ "id": "gtceu:ultrapure_water", "amount": 1000 }],
+          "charge": [{ "id": "gtceu:argon", "amount": 1000 }],
+          "itemsOut": [{ "id": "grindless:annealed_sin_chip", "count": 1 }],
           "fluidsOut": [{ "id": "minecraft:water", "amount": 1000 }]
         }
       ]
