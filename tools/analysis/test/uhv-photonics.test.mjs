@@ -89,9 +89,9 @@ test('one recipe per lookup path, with the ZPM implanter rows: unique circuits, 
   // UEV's implanter row (c5) is in photonics_uev.json; UIV-A5 added ZPM qubits.js c6
   assert.deepEqual(all.filter((r) => r.type === 'ion_implantation').map((r) => r.circuit).sort(), [1, 2, 3, 4, 6]);
   // UEV-A6 added MBE c3 and foundry c7 (UEV rows in the same table); UIV-A1 added MBE c4; UIV-A4 added foundry c8-11;
-  // UIV-A5 added MBE c5-6 and foundry c12
-  assert.deepEqual(rowsOf('molecular_beam_epitaxy').map((r) => r.circuit), [1, 2, 3, 4, 5, 6]);
-  assert.deepEqual(rowsOf('photonic_foundry').map((r) => r.circuit), [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]);
+  // UIV-A5 added MBE c5-6 and foundry c12; UIV-A7 added MBE c7 (thf4_film) and foundry c13 (pcm_crossbar)
+  assert.deepEqual(rowsOf('molecular_beam_epitaxy').map((r) => r.circuit), [1, 2, 3, 4, 5, 6, 7]);
+  assert.deepEqual(rowsOf('photonic_foundry').map((r) => r.circuit), [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13]);
   // GTM's own types take no circuit here; the blast furnace rows carry a temperature
   for (const type of ['electric_blast_furnace', 'large_chemical_reactor']) for (const r of rowsOf(type)) assert.equal(r.circuit, 0, r.name);
   for (const r of rowsOf('electric_blast_furnace')) assert.ok(r.temp > 0, r.name);
@@ -185,8 +185,9 @@ test('no UEV input, and every lang key the package needs is written in en_us and
     for (const id of inputs(r).concat(outputs(r))) assert.ok(!/(^|[:_])uev(_|$)/.test(id.split(':')[1] || ''), `${r.name}: ${id}`);
   }
   // UEV-A6's two UEV rows in these UHV types keep their keys in uev_photonics_lang.js; UIV-A1's MBE c4 in uiv_isotopes_lang.js;
-  // UIV-A4's foundry c8-11 in uiv_tfln_femtosecond_lang.js; UIV-A5's MBE c5-6 and foundry c12 in uiv_beuv_stm_lang.js
-  const lang = ['uhv_photonics_lang.js', 'uev_photonics_lang.js', 'uiv_isotopes_lang.js', 'uiv_tfln_femtosecond_lang.js', 'uiv_beuv_stm_lang.js']
+  // UIV-A4's foundry c8-11 in uiv_tfln_femtosecond_lang.js; UIV-A5's MBE c5-6 and foundry c12 in uiv_beuv_stm_lang.js;
+  // UIV-A7's MBE c7 and foundry c13 in uiv_mainframe_lang.js
+  const lang = ['uhv_photonics_lang.js', 'uev_photonics_lang.js', 'uiv_isotopes_lang.js', 'uiv_tfln_femtosecond_lang.js', 'uiv_beuv_stm_lang.js', 'uiv_mainframe_lang.js']
     .map((f) => fs.readFileSync(path.join(kube, 'client_scripts', 'grindless', f), 'utf8')).join('\n');
   for (const [type, t] of Object.entries(T.types)) {
     if (!t.dataKey) continue;

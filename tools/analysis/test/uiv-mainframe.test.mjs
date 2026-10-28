@@ -152,7 +152,6 @@ test('GT--\'s mainframe recipe is removed by output, the hall row kept by id', (
   assert.match(s, /event\.remove\(\{ output: MAINFRAME, not: \{ id: MAINFRAME_RECIPE \} \}\)/);
   assert.match(s, /MAINFRAME = 'gtnn:optical_mainframe'/);
   assert.match(s, /MAINFRAME_RECIPE = 'grindless:photonic_integration\/optical_mainframe'/);
-  assert.ok(!/^\/\/ priority:/m.test(s));
 });
 
 test('no recipe in the table is a subset of another of its type', () => {
@@ -181,7 +180,6 @@ test('lang parity: every ITEM and row key has en_us and es_es, every item has a 
   const registered = [...start.matchAll(/^\s+([a-z0-9_]+): \{ stack: \d+ \}/gm)].map((m) => m[1]);
   assert.equal(registered.length, 8);
   assert.deepEqual(itemNames.slice().sort(), registered.slice().sort());
-  assert.ok(!/^\/\/ priority:/m.test(start));
   const flat = [...lang.matchAll(/^\s+\['((?:gtceu|emi)\.[^']+)',\s*$/gm)].map((m) => m[1]);
   const want = [
     'gtceu.recipe.grindless_photonic_integration.photonic_tensor_core', 'gtceu.recipe.grindless_photonic_integration.optical_mainframe',

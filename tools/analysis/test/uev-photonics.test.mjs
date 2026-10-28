@@ -59,9 +59,10 @@ test("one recipe per lookup path: no recipe's ingredients are a subset of anothe
 test('the three machines and their types are registered; every data-keyed recipe has its EMI line in en_us and es_es', () => {
   for (const m of ['snspd_foundry', 'vdw_stacker', 'photonic_integration_hall']) assert.ok(startup.includes(`'${m}'`), m);
   for (const k of ['snspd_fabrication', 'vdw_assembly', 'photonic_integration']) assert.ok(startup.includes(`'${k}'`), k);
+  const lines = lang + read(path.join(kube, 'client_scripts', 'grindless', 'uiv_mainframe_lang.js')); // UIV-A7's hall rows c4-c6
   for (const [type, t] of Object.entries(T.types)) {
     if (!t.dataKey) continue;
-    for (const r of t.recipes) assert.ok(lang.includes(`'gtceu.recipe.${t.dataKey}.${r.name}'`), `${t.dataKey}.${r.name}`);
+    for (const r of t.recipes) assert.ok(lines.includes(`'gtceu.recipe.${t.dataKey}.${r.name}'`), `${t.dataKey}.${r.name}`);
   }
   for (const k of ['grindless_molecular_beam_epitaxy.inas_quantum_dots', 'grindless_photonic_foundry.sin_waveguide_anneal', 'grindless_synchrotron.sin_waveguide_lithography']) {
     assert.ok(lang.includes(`gtceu.recipe.${k}'`), k);
@@ -84,14 +85,16 @@ test('only from there: SNSPDs, QD sources and SDDs come only from their lines', 
   }
 });
 
-test('exactly one recipe makes gtnn:optical_computer: the hall, circuit 3; GT--s own is removed; the mainframe is untouched', () => {
+test('exactly one recipe makes gtnn:optical_computer: the hall, circuit 3; GT--s own is removed; this script leaves the mainframe to UIV-A7', () => {
   const p = producers('gtnn:optical_computer');
   assert.equal(p.length, 1);
   assert.equal(`${p[0].type}/${p[0].name}/${p[0].circuit}`, 'photonic_integration/optical_computer/3');
   assert.ok(inputs(p[0]).includes('gtnn:optical_assembly') && inputs(p[0]).includes('grindless:quantum_photonic_chip'));
   assert.match(server, /event\.remove\(\{ output: COMPUTER, not: \{ id: COMPUTER_RECIPE \} \}\)/);
   assert.ok(server.includes("COMPUTER = 'gtnn:optical_computer'") && server.includes("COMPUTER_RECIPE = 'grindless:photonic_integration/optical_computer'"));
-  assert.ok(!/optical_mainframe/.test(server.replace(/^\/\/.*$/gm, '')) && !all.some((r) => outputs(r).concat(inputs(r)).includes('gtnn:optical_mainframe')));
+  // UIV-A7 makes the mainframe in the hall (c5) and removes GT--'s recipe in uiv/mainframe.js; this package's script never names it
+  assert.ok(!/optical_mainframe/.test(server.replace(/^\/\/.*$/gm, '')));
+  assert.deepEqual(producers('gtnn:optical_mainframe').map((r) => `${r.type}/${r.name}/${r.circuit}`), ['photonic_integration/optical_mainframe/5']);
 });
 
 test('arsine is contained: no recipe of the package outputs or vents it, and the MBE row uses it all up', () => {

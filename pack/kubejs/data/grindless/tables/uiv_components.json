@@ -37,6 +37,7 @@
       ]
     },
     "levitation_melting": {
+      "dataKey": "grindless_levitation_melting",
       "recipes": [
         { "name": "rhea_swarf_remelt", "circuit": 6, "eut": 7864320, "duration": 1800,
           "itemsIn": [{ "id": "grindless:rhea_swarf", "count": 4 }], "kept": [], "fluidsIn": [{ "id": "gtceu:helium", "amount": 1000 }], "charge": [],

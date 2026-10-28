@@ -1,8 +1,10 @@
-// priority: 3321
+// priority: 2953
 // Gregtech Grindless - names and tooltips of the items of UIV's pump, robot arm and motor lines (startup_scripts/grindless/uiv/uiv_components.js;
 // package UIV-A8):
 //
 //   item.grindless.<n>, tooltip.grindless.<n>.0 / .1   the package's own items
+//   gtceu.recipe.grindless_<type>.<recipe>             the EMI line of its rows in data-keyed types (melter c6-c8, magnet works c5,
+//                                                      coated conductor c3, megabar c3, nitride magnet synthesis c6)
 //
 // Kept out of pack/kubejs/assets/grindless/lang/* like the other *_lang.js scripts. Names go in en_us and es_es.
 (function () {
@@ -27,7 +29,16 @@
         ['field_cooled_gdbco', 'Field-Cooled GdBCO', 'GdBCO enfriado en campo', 'A superconducting block that traps a strong field.', 'Un bloque superconductor que atrapa un campo intenso.', 'The rotor magnet of the UIV electric motor.', 'El imán de rotor del motor eléctrico UIV.']
     ]
 
-    var ENTRIES = []
+    // the EMI lines of the package's rows in data-keyed types (its own melter rows and the older tables' rows)
+    var ENTRIES = [
+        ['gtceu.recipe.grindless_levitation_melting.rhea_swarf_remelt', 'Remelts impeller swarf into RHEA ingots; the oxide skin goes to the cascade as dross.', 'Refunde las virutas del impulsor en lingotes RHEA; la piel de óxido va a la cascada como escoria.'],
+        ['gtceu.recipe.grindless_levitation_melting.rhea_powder_remelt', 'Remelts the spent powder bed into RHEA ingots.', 'Refunde el lecho de polvo gastado en lingotes RHEA.'],
+        ['gtceu.recipe.grindless_levitation_melting.bmg_gate_remelt', 'Remelts casting gates into metallic glass; the beryllium fume is captured as BeO.', 'Refunde los bebederos en vidrio metálico; el humo de berilio se captura como BeO.'],
+        ['gtceu.recipe.grindless_magnet_winding.seeded_gdbco_growth', 'Circuit 5: a single-domain bulk GdBCO grown from a neodymium seed in the helium charge', 'Circuito 5: un bloque de GdBCO monodominio crecido desde una semilla de neodimio en la carga de helio'],
+        ['gtceu.recipe.grindless_coated_conductor.gd_123_precursor', 'Step 3: gadolinium oxide and the barium-copper blend fired in oxygen to the Gd-123 phase', 'Paso 3: óxido de gadolinio y la mezcla de bario y cobre cocidos en oxígeno hasta la fase Gd-123'],
+        ['gtceu.recipe.grindless_megabar.rhea_impeller_hip', 'Hot isostatic pressing closes the printed impeller\'s last pores. Anvil wear: 10 % per run.', 'El prensado isostático en caliente cierra los últimos poros del impulsor impreso. Desgaste del yunque: 10 % por ciclo.'],
+        ['gtceu.recipe.grindless_nitride_magnet_synthesis.gdbco_field_cool', 'Cools the impregnated GdBCO in liquid helium inside a field so it traps that field.', 'Enfría el GdBCO impregnado en helio líquido dentro de un campo para que lo atrape.']
+    ]
     ITEMS.forEach(function (i) {
         ENTRIES.push(['item.grindless.' + i[0], i[1], i[2]])
         ENTRIES.push(['tooltip.grindless.' + i[0] + '.0', i[3], i[4]])

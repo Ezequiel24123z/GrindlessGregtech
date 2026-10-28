@@ -127,7 +127,8 @@ test('the coated conductor line: c1 substrate and c2 tape, from the table', () =
   const solids = (r) => r.j.inputs.item.filter((e) => !isCircuit(e)).map(itemOf);
   assert.deepEqual(c1.j.inputs.item.filter(isCircuit).length, 1, 'c1 has its programmed circuit');
   assert.deepEqual(c2.j.inputs.item.filter(isCircuit).length, 1, 'c2 has its programmed circuit');
-  assert.deepEqual(plain(CCL.recipes.map((r) => [r.circuit, r.eut, r.duration])), [[1, 7680, 400], [2, 30720, 300]]);
+  // UIV-A8 appends c3 gd_123_precursor (line 23), whose ids its own test proves
+  assert.deepEqual(plain(CCL.recipes.map((r) => [r.circuit, r.eut, r.duration])), [[1, 7680, 400], [2, 30720, 300], [3, 30720, 400]]);
   assert.deepEqual(solids(c1).map((x) => [x.id, x.count]), [['gtceu:nickel_dust', 19], ['gtceu:tungsten_dust', 1]]);
   assert.deepEqual(c1.j.outputs.item.map(itemOf).map((x) => [x.id, x.count]), [['grindless:nickel_tungsten_tape', 20]]);
   assert.equal(euOf(c1), 7680);
@@ -171,7 +172,11 @@ test('every id A3 names is in the pinned native registry, not a naming guess the
   const problems = [];
   const item = (id, where) => { if (!nativeItems.has(id) && !registered.has(id)) problems.push(`${where}: item ${id}`); };
   const fluid = (id, where) => { if (!nativeFluids.has(id)) problems.push(`${where}: fluid ${id}`); };
-  for (const r of ours) {
+  // rows later eras append to A3's tables (_why "UIV-..."): their own tests prove their ids
+  const later = (r) => /^UIV-/.test((r && r._why) || '');
+  const laterIds = new Set(JSON.parse(fs.readFileSync(path.join(pack, 'kubejs', 'data', 'grindless', 'tables', 'coated_conductor_line.json'), 'utf8'))
+    .recipes.filter(later).map((r) => 'grindless:coated_conductor/' + r.name));
+  for (const r of ours.filter((x) => !laterIds.has(x.i))) {
     const walk = (o, key) => {
       if (Array.isArray(o)) return o.forEach((x) => walk(x, key));
       if (!o || typeof o !== 'object') return;
@@ -198,7 +203,7 @@ test('every id A3 names is in the pinned native registry, not a naming guess the
       else if (typeof o.id === 'string' && o.count !== undefined) item(o.id, table);
       Object.values(o).forEach(walk);
     };
-    walk(t);
+    walk({ ...t, recipes: (t.recipes || []).filter((r) => !later(r)) });
   }
   assert.deepEqual(problems, []);
   // the native fixture names more: its parts, the recipe types it scans for recycling, and one live recipe id

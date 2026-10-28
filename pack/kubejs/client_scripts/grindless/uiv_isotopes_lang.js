@@ -1,4 +1,4 @@
-// priority: 3370
+// priority: 3100
 // Gregtech Grindless - names and tooltips of UIV's isotopes and element 120 (startup_scripts/grindless/uiv/isotopes.js; package UIV-A1):
 //   item.grindless.<n>, tooltip.grindless.<n>.0/.1               the four items
 //   material.gtceu.<n>                                           the new GT materials

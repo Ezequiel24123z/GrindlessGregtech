@@ -1,4 +1,4 @@
-// priority: 3200
+// priority: 2890
 // Gregtech Grindless - names and tooltips of UV's cold works (startup_scripts/grindless/uv/cold.js):
 //
 //   gtceu:superfluid_helium_plant / gtceu:srf_cavity_works   machine names + four tooltip lines each

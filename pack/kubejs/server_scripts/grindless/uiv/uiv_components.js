@@ -1,4 +1,4 @@
-// priority: -24673
+// priority: -24686
 // -----------------------------------------------------------------------------------------------
 // Recipes of UIV's pump, robot arm and motor lines (items: startup_scripts/grindless/uiv/uiv_components.js; docs/eras/uiv.md, lines 6, 8 and
 // 23; package UIV-A8), generated at every server load from data/grindless/tables/uiv_components.json:

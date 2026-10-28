@@ -1,3 +1,4 @@
+// priority: 3058
 // Gregtech Grindless - names and tooltips of UIV's optical mainframe line (startup_scripts/grindless/uiv/mainframe.js; package UIV-A7):
 //
 //   gtceu.recipe.grindless_<type>.<recipe>             the EMI line of each row the package appends to an older table

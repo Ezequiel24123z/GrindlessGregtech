@@ -82,7 +82,14 @@ test('RHEA, Wf/RHEA, Ti-50, the glass and PrNi5 come only from the melter', () =
     const mine = Object.entries(T.types).flatMap(([type, t]) => t.recipes.filter((r) => outputs(r).includes(id)).map((r) => `${type}/${r.name}`));
     assert.deepEqual(mine, [`levitation_melting/${name}`], id);
     for (const f of OTHER_TABLES) {
-      const txt = fs.readFileSync(path.join(tables, f), 'utf8');
+      let txt = fs.readFileSync(path.join(tables, f), 'utf8');
+      // UIV-A8's remelt rows (uiv_components.json, c6-c8) run in the melter too: only other machines count
+      const tbl = JSON.parse(txt);
+      if (tbl.types && tbl.types.levitation_melting) {
+        const types = { ...tbl.types };
+        delete types.levitation_melting;
+        txt = JSON.stringify({ ...tbl, types });
+      }
       assert.ok(!new RegExp(`"(?:itemsOut|fluidsOut)"\\s*:\\s*\\[[^\\]]*"${id}"`).test(txt), `${f} produces ${id}`);
     }
     for (const f of scripts(kube)) {
@@ -134,9 +141,11 @@ test('the five older rows exist', () => {
   assert.ok(ids(button.itemsOut).includes('grindless:nb_ta_button'));
   const comp = JSON.parse(fs.readFileSync(path.join(tables, 'composites.json'), 'utf8')).types;
   const halbach = comp.nitride_magnet_synthesis.recipes;
-  assert.equal(halbach[halbach.length - 1].name, 'halbach_array');
-  assert.equal(halbach[halbach.length - 2].name, 'uiv_smes_cell');
-  assert.equal(halbach[halbach.length - 1].circuit, 5);
+  // A3's halbach_array follows uiv_smes_cell; UIV-A8 appended gdbco_field_cool (c6) after it
+  const h = halbach.findIndex((r) => r.name === 'halbach_array');
+  assert.ok(h > 0);
+  assert.equal(halbach[h - 1].name, 'uiv_smes_cell');
+  assert.equal(halbach[h].circuit, 5);
   const cvi = comp.chemical_vapour_infiltration.recipes;
   assert.deepEqual(cvi.map((r) => [r.name, r.circuit]), [['sic_sic_plate', 1], ['wf_w_tile', 2], ['w_preform_densify', 3]]);
   assert.ok(ids(cvi[2].itemsOut).includes('grindless:densified_w_preform'));

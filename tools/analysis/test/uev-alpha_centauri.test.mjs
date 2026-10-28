@@ -39,7 +39,8 @@ test('every recipe has a unique name, positive EU/t and duration; circuits are u
       assert.ok(GTM.has(type) ? r.circuit >= 0 : r.circuit >= 1 && r.circuit <= 32, `${type}/${r.name}: circuit`);
     }
   }
-  assert.equal(mine.length, 19);
+  // 19 of UEV-B2's own and UIV-A7's pulsar_timing c3 repeater_discipline
+  assert.equal(mine.length, 20);
 });
 
 test('the dimension allowlist: the three own types are flagged and the script applies the Alpha Centauri orbit', () => {
@@ -137,7 +138,9 @@ test('every item has a name, tooltips in en_us and es_es form, and a texture; th
   assert.match(lang, /named fiction/);
   assert.match(lang, /ficción declarada/);
   assert.match(lang, /\['en_us', 'es_es'\]/);
+  // later packages' rows (UIV-A7: repeater_discipline) carry their EMI line in their own lang script
+  const lines = lang + read(path.join(kube, 'client_scripts', 'grindless', 'uiv_mainframe_lang.js'));
   for (const r of mine.filter((x) => OWN_TYPES.includes(x.type))) {
-    assert.ok(lang.includes(`gtceu.recipe.${T.types[r.type].dataKey}.${r.name}'`), `recipe line ${r.type}/${r.name}`);
+    assert.ok(lines.includes(`gtceu.recipe.${T.types[r.type].dataKey}.${r.name}'`), `recipe line ${r.type}/${r.name}`);
   }
 });

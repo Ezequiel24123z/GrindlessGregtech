@@ -906,7 +906,9 @@ test('its plan stays in its band and its sub-bands, builds what lib/patterns.js 
 test('every item, block and fluid id it uses is in the native dump exactly or, new since it, registered by the pack; its other ids check out', (t) => {
   const { sim, W, G, global } = jvm({ server: false });
   const MW = G.htsMagnetWorks;
+  // the four LuV rows it checks; later eras' rows (UIV-A8's seeded_gdbco_growth) are another package's to prove
   const table = JSON.parse(fs.readFileSync(path.join(KJS, 'data', 'grindless', 'tables', 'hts_magnet_works.json'), 'utf8'));
+  table.recipes = table.recipes.filter((r) => ['hts_coil', 'luv_smes_cell', 'coilgun_coil_casing', 'magnetic_bearing'].includes(r.name));
   // fluids: the recipes' consumed fluids (it stocks them), the cold-test charge, the orbit array's steam
   const fluids = new Set([MW.charge.id, 'gtceu:steam', ...table.recipes.flatMap((r) => r.fluidsIn.map((f) => f.id))]);
   // items and blocks: what it places (every stage of its plan), what it stocks and expects (the published recipes come from the table), what it

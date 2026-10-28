@@ -1,3 +1,4 @@
+// priority: -9199
 // -----------------------------------------------------------------------------------------------
 // The items of UIV's optical mainframe line (docs/eras/uiv.md, lines 17 and 22; package UIV-A7): no machine, only items. The recipes
 // come from the older tables the package appends to (photonics.json, photonics_uev.json, crystals.json, alpha_centauri.json, the
