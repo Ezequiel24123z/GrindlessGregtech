@@ -91,6 +91,8 @@
         ENTRIES.push(['tooltip.grindless.' + i[0] + '.1', i[5], i[6]])
     })
 
+    ENTRIES.push(['material.gtceu.rhenium', 'Rhenium', 'Renio'])
+
     ;['en_us', 'es_es'].forEach(function (lang, li) {
         ClientEvents.lang(lang, function (event) {
             ENTRIES.forEach(function (e) {
