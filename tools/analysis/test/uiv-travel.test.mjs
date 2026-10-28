@@ -78,3 +78,65 @@ test('starshot rows: starchip c3 and c4, launch c2 at the Moon; the older rows a
     assert.ok(run.registry.items.has(id), id);
   }
 });
+
+const PLACES = { rx_j1856: [700000, 'rx_j1856'], psr_j0437: [3000000, 'psr_j0437'], cygnus_x1: [10000000, 'cygnus_x1'] };
+const DIM = (k) => `grindless:${k}_orbit`;
+const readJson = (...p) => JSON.parse(fs.readFileSync(path.join(...p), 'utf8'));
+
+test('planets.json, orbits.json: three new places, own pair tags; older ids unchanged; stations.json does not grow', () => {
+  const p = table('planets.json').planets;
+  for (const k of Object.keys(PLACES)) {
+    assert.deepEqual(p[k].dimensions, [DIM(k)], k);
+    assert.equal(p[k].pairTag, k);
+    assert.ok(p[k].name.en_us && p[k].name.es_es, k);
+  }
+  const olderTags = Object.entries(p).filter(([k]) => !PLACES[k]).map(([, v]) => v.pairTag);
+  for (const k of Object.keys(PLACES)) assert.ok(!olderTags.includes(p[k].pairTag), k + ' pair tag is its own');
+  assert.equal(p.sirius.pairTag, 'sirius');
+  assert.deepEqual(p.barnard.dimensions, ['grindless:barnard_b', 'grindless:barnard_b_orbit']);
+  const o = table('orbits.json').dimensions;
+  assert.equal(o.indexOf('grindless:sirius_b_orbit'), 17, 'older orbits keep their order');
+  assert.deepEqual(o.slice(18), Object.keys(PLACES).map(DIM));
+  assert.equal(new Set(o).size, o.length);
+  assert.ok(!o.some((x) => /black_hole/.test(x)), 'no black_hole_orbit');
+  const more = table('stations.json').more;
+  assert.equal(more.length, 8);
+  assert.ok(!JSON.stringify(more).includes('uiv') && !more.some((m) => Object.keys(PLACES).some((k) => m.orbit === DIM(k))), 'UIV has no station');
+  assert.equal(Object.keys(table('places.json').surfaces).length, 10, 'no surface place');
+});
+
+test('sunlight.json: three rows (RX 0, PSR 0, Cygnus 0.6), era uiv, always', () => {
+  const d = table('sunlight.json').dimensions;
+  assert.equal(d[DIM('rx_j1856')].factor, 0);
+  assert.equal(d[DIM('psr_j0437')].factor, 0);
+  assert.equal(d[DIM('cygnus_x1')].factor, 0.6);
+  for (const k of Object.keys(PLACES)) {
+    assert.equal(d[DIM(k)].when, 'always', k);
+    assert.equal(d[DIM(k)].era, 'uiv', k);
+    assert.match(d[DIM(k)].note, /^UIV-B1:/, k);
+  }
+  assert.equal(d['grindless:sirius_b_orbit'].factor, 5.6);
+});
+
+test('the datapack: dimension, planet (tier 11, no air, no gravity) and sky of each place; the figures of S0-3', () => {
+  for (const [k, [temp]] of Object.entries(PLACES)) {
+    assert.deepEqual(readJson(data, 'dimension', `${k}_orbit.json`), { type: 'gcyr:space', generator: { type: 'gcyr:space' } }, k);
+    const pl = readJson(data, 'gcyr', 'planets', `${k}_orbit.json`);
+    assert.equal(pl.rocket_tier, 11, k);
+    assert.equal(pl.temperature, temp, k);
+    assert.equal(pl.world, DIM(k));
+    assert.equal(pl.orbit_world, DIM(k));
+    assert.equal(pl.translation, `level.grindless.${k}_orbit`);
+    assert.equal(pl.solar_system, `grindless:${k}`);
+    assert.equal(pl.gravity, 0);
+    assert.equal(pl.has_atmosphere, false);
+    assert.equal(pl.has_oxygen, false);
+    assert.equal(readJson(kube, 'assets', 'grindless', 'gcyr', 'planet_assets', 'sky_renderers', `${k}_orbit.json`).world, DIM(k), k + ' sky');
+  }
+  // no rocket offers a tier 11 place: UEV's tier 10 is the highest rocket, UIV's places are jump-only
+  for (const f of fs.readdirSync(path.join(data, 'gcyr', 'planets'))) {
+    const pl = readJson(data, 'gcyr', 'planets', f);
+    if (pl.rocket_tier === 11) assert.ok(Object.keys(PLACES).some((k) => f === `${k}_orbit.json`), f);
+  }
+  assert.ok(!fs.existsSync(path.join(data, 'dimension', 'black_hole_orbit.json')));
+});

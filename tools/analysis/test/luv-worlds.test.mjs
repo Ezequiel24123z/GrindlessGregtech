@@ -8,7 +8,7 @@ const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..', '.
 const file = p => path.join(root, ...p.split('/'));
 const json = p => JSON.parse(fs.readFileSync(file(p), 'utf8'));
 const data = 'pack/kubejs/data/grindless';
-const local = id => { assert.match(id, /^grindless:[a-z_]+$/); return id.slice('grindless:'.length); };
+const local = id => { assert.match(id, /^grindless:[a-z0-9_]+$/); return id.slice('grindless:'.length); }; // UIV-B1: digits, for rx_j1856_orbit
 
 const SURFACES = ['asteroid_belt', 'io', 'europa', 'ganymede'];
 const SPACE = ['jupiter', 'jupiter_orbit', 'asteroid_belt_orbit', 'io_orbit', 'europa_orbit', 'ganymede_orbit'];

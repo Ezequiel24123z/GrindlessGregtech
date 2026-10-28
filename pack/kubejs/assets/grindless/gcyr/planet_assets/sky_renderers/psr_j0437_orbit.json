@@ -1,0 +1,14 @@
+{
+  "world": "grindless:psr_j0437_orbit",
+  "stars": { "fancy_count": 13000, "fast_count": 6000, "colored_stars": true, "daylight_visible": true },
+  "sunset_color": "none",
+  "dimension_effects": { "type": "none" },
+  "cloud_effects": "none",
+  "weather_effects": "none",
+  "horizon_angle": 0,
+  "sky_objects": [
+    { "texture": "gcyr:textures/sky/sun.png", "blending": true, "render_type": "dynamic", "scale": 0.5, "rotation": [0, -90, 0] },
+    { "texture": "gcyr:textures/sky/light.png", "blending": true, "render_type": "static", "scale": 32, "color": 10526975, "rotation": [0, 0, 0] },
+    { "texture": "gcyr:textures/sky/light.png", "blending": true, "render_type": "static", "scale": 32, "color": 10526975, "rotation": [0, 0, 90] }
+  ]
+}
