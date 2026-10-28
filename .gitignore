@@ -13,3 +13,5 @@ tools/.check-fast/
 tools/test/.restart-dryrun-*/
 # Per-machine overrides of tools/test/backends.psd1 (docs/testing/usage.md)
 tools/test/backends.local.psd1
+# Portable tools and raw downloads of the asset generators (tools/assets/New-MachineSound.ps1)
+/.work/
