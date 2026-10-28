@@ -1,3 +1,4 @@
+// priority: -4450
 // -----------------------------------------------------------------------------------------------
 // LuV Mega Chemical Complex, gtceu:mega_chemical_complex (package MEGA-6, docs/eras/mega.md 4.8): the massive large chemical reactor,
 // the coil chemical plant (MEGA-3) with the parallel hatch of the Assembly Hall (MEGA-7), in two modes the player picks in the

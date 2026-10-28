@@ -1,3 +1,4 @@
+// priority: -18474
 // -----------------------------------------------------------------------------------------------
 // Recipes of the LuV Mega Chemical Complex (machine and recipe type: startup_scripts/grindless/luv/mega_chemical_complex.js; docs/eras/mega.md
 // 4.8; package MEGA-6), generated at every server load from data/grindless/tables/mega_chemical_complex.json, and the recipe that makes the

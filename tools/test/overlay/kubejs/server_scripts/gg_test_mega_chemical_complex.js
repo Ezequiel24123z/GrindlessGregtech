@@ -1,3 +1,4 @@
+// priority: -5661
 // TEST ONLY, MEGA-6 (gtceu:mega_chemical_complex). Command: kubejs custom_command gg_test_mega_chemical_complex
 // Band ONLY: X 34048-34111, Z 0-63, Overworld Y 98-115.
 //   T1 of docs/eras/mega.md 6.4 (the named uncertainty: coil x parallel hatch together on one LCR-mode recipe):
@@ -6,7 +7,8 @@
 //     composed_*    each composed recipe equals the sum of its LIVE stage recipes (read from the recipe manager, not from the table)
 //     formed        two real complexes (15 x 15 x 15) form: HSS-G coils + one LuV parallel hatch + one LuV energy hatch, and Naquadah coils +
 //                   one ZPM parallel hatch + one ZPM energy hatch
-//     parallels     a probe LCR recipe (8 EU/t, a non-consumed input and a chanced output, so no stock limits the copies) goes through the
+//     parallels     a probe LCR recipe (8 EU/t, one non-consumed poppy placed in the input bus and no output, so neither stock nor
+//                   output space limits the copies: GTM refuses a recipe with no inputs and counts chanced outputs) goes through the
 //                   machine's own modifiers: LuV 64 x 16 = 1,024 copies (energy cap 4,096 at 32,768 V), ZPM 256 x 64 = 16,384 copies
 //                   (energy cap floor(131,072 / 8) = 16,384): the figures need ONE LuV energy hatch and ONE ZPM energy hatch respectively
 (function () {
@@ -44,7 +46,7 @@
 
   ServerEvents.recipes(function (event) {
     try {
-      event.recipes.gtceu.large_chemical_reactor(PROBE).notConsumable('1x ' + POPPY).chancedOutput('1x ' + RED, 100, 0).duration(200).EUt(PROBE_EUT)
+      event.recipes.gtceu.large_chemical_reactor(PROBE).notConsumable('1x ' + POPPY).duration(200).EUt(PROBE_EUT)
     } catch (e) {
       console.error('[gg_test mega_chemical_complex] could not add the probe recipe: ' + String(e))
     }
@@ -319,6 +321,9 @@
     var probe = rm.byKey(new (classes().RL)('gg_test_mega:large_chemical_reactor/cc_probe'))
     if (!probe.isPresent()) { check(u.name + '_parallels', false, 'probe recipe is not loaded'); u.phase = 'done'; return }
     energy.forEach(function (p) { var c = p.energyContainer; c.setEnergyStored(c.getEnergyCapacity()) })
+    var inBus = partsLike(m, /input_bus/)
+    if (!inBus.length) { check(u.name + '_parallels', false, 'no input bus for the probe poppy'); u.phase = 'done'; return }
+    inBus[0].getInventory().storage.setStackInSlot(0, Item.of(POPPY, 1))
     var volt = Number(m.getMaxVoltage())
     var want = Math.min(coilCeil * hatchPar, Math.floor(volt / PROBE_EUT))
     var full = m.fullModifyRecipe(probe.get())

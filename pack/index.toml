@@ -34,7 +34,7 @@ hash = "5f22a74d9b40045bbe17eaf500f156a7aa7ff0eba726ae808cf66fdb19893783"
 
 [[files]]
 file = "config/ftbquests/quests/chapters/multiblocks.snbt"
-hash = "0c14b08228eb550aded9b2417cde092d13646d15ddf7eebe8e92ab14c979e064"
+hash = "9b3906e5f1b5c5b6622d0a60933c7e935621f5f1f918687d37b8151f13b036a1"
 
 [[files]]
 file = "config/ftbquests/quests/chapters/mv_age.snbt"
@@ -2379,6 +2379,18 @@ hash = "47f6407733b608ba45c45eaf0f52fb24fec183119b0a419870de4c41f6552b2a"
 [[files]]
 file = "kubejs/assets/grindless/textures/block/multiblock/mbe_reactor/overlay_front_active_emissive.png.mcmeta"
 hash = "491ea51d46bc1f0c0ff11ed9293461cc67de293c7672abbc45f67563f8fe1f1a"
+
+[[files]]
+file = "kubejs/assets/grindless/textures/block/multiblock/mega_chemical_complex/overlay_front.png"
+hash = "cd1ad4ff105d334f598a310ceebef9dc3507dbc3178a24087461b1a53adb35bf"
+
+[[files]]
+file = "kubejs/assets/grindless/textures/block/multiblock/mega_chemical_complex/overlay_front_active.png"
+hash = "79f2e27fc34fcc87ef1ac100c498501d8853a5988a353bdefe96897623d85086"
+
+[[files]]
+file = "kubejs/assets/grindless/textures/block/multiblock/mega_chemical_complex/overlay_front_active_emissive.png"
+hash = "350457c2bbe9c01cb24afb029e099e5dda4ef4f7ec5e5b3afd274fcf45e0d7cc"
 
 [[files]]
 file = "kubejs/assets/grindless/textures/block/multiblock/megabar_press/overlay_front.png"
@@ -6793,6 +6805,10 @@ file = "kubejs/client_scripts/grindless/luv_io_surface_lang.js"
 hash = "a71d5acab54590257c1e8b63f92b2bba99ba8b259b5c27821a406e14429aa62b"
 
 [[files]]
+file = "kubejs/client_scripts/grindless/luv_mega_chemical_complex_lang.js"
+hash = "888ead8d1db91bffbc9d4da20790fcb395ebb7e5a0a058bdeee34f6dc03237ee"
+
+[[files]]
 file = "kubejs/client_scripts/grindless/luv_orbital_biology_lang.js"
 hash = "203d0d769bbd8b6915e444140106bc48356f4cf10828b825295b6781e92d9237"
 
@@ -7473,6 +7489,10 @@ file = "kubejs/data/grindless/tables/magnet_works.json"
 hash = "50f5ccc7fb189cb706363ce265fe12e4be18e6ed42b0ff18ead8f25df1cd75eb"
 
 [[files]]
+file = "kubejs/data/grindless/tables/mega_chemical_complex.json"
+hash = "c35d0d05d9f9b114711f1ec813805f8249af164e9570574484e4457f998c8c32"
+
+[[files]]
 file = "kubejs/data/grindless/tables/mega_ore_refinery.json"
 hash = "b33e3c7f5e3d0c3a27a3d5a9bd689014cea1925f1f838e1d577ffb713176a4b2"
 
@@ -7979,6 +7999,10 @@ hash = "7056133920178a8abb452030c829375f2f98a149905a8f20aad5cc009659c8cb"
 [[files]]
 file = "kubejs/server_scripts/grindless/luv/io_surface.js"
 hash = "cac8a42dd88e8430f5f4c0a4c240200b3e926e5ce75ef718be42489e531c9cdc"
+
+[[files]]
+file = "kubejs/server_scripts/grindless/luv/mega_chemical_complex.js"
+hash = "568609be594923326716f53480dda607c1a1968bc5164d49ffea14ac3e9cfb7d"
 
 [[files]]
 file = "kubejs/server_scripts/grindless/luv/orbit_arrival.js"
@@ -8647,6 +8671,10 @@ hash = "4d7f9ae60c53e7f85d3480621476aa255b66f3e3f3d31aae7f49a40b35281f11"
 [[files]]
 file = "kubejs/startup_scripts/grindless/luv/io_surface.js"
 hash = "46cad82560e19404ec4ca604b0c40a5b0bb00f14ecba16f94f1cb6f0a9d5fb55"
+
+[[files]]
+file = "kubejs/startup_scripts/grindless/luv/mega_chemical_complex.js"
+hash = "e2428f81b2026b08e646093b197b2a0d70866b7828be870c472269b5d1003c2b"
 
 [[files]]
 file = "kubejs/startup_scripts/grindless/luv/orbital_biology.js"
