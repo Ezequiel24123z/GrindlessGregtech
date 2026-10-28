@@ -1,0 +1,5 @@
+{
+  "type": "emi:info",
+  "stacks": ["item:gtnn:optical_mainframe", "item:grindless:photonic_tensor_core", "item:grindless:pulsar_timed_repeater", "item:grindless:uiv_sensor"],
+  "text": ["emi.grindless.info.uiv_mainframe.0", "emi.grindless.info.uiv_mainframe.1"]
+}
