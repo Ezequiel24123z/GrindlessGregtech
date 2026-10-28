@@ -39,7 +39,7 @@ Everything is built against uiv.md as designed; where a UIV package is not merge
 6. **Vela.** The pasta extractor works the crust at glitch time; the phase sorter (each phase leaves in a `grindless:cage_part` made by a new mode of UIV's neutronium cage at RX J1856) splits spaghetti, lasagna, gnocchi and the anti-phases; the draw bench makes the UXV strand cable, the laminator the hull plate. `gtceu:uxv_machine_hull` and UXV hatches follow. The polar cap tap gives power.
 7. **Cassiopeia A.** The ejecta knot sweeper gathers Ti-rich dust; the EV extraction cascade, UEV calutron and IV hot cell make a sealed Ti-44/Sc-44 core; the annihilation laser works turns it into a gamma laser module and `grindless:uxv_emitter`.
 8. **Parts, power and scale.** The UXV motor, pump, conveyor, piston, arm and field generator; the Mk6 stellar burning ring; wireless case 12 and the UXV SMES cell; the x65,536 parallel hatch; the stellar fractionation hall (mega).
-9. **Gate to OpV.** The UIV Matrioshka computes the arm chart (Vela glitch record, Cas A Ti-44 map, Cygnus elevator log); the Cygnus warp gate holds 16 A x V[UXV] = 2^31 EU/t and returns `grindless:bulge_chart`, which researches `gtceu:opv_machine_casing`.
+9. **Gate to OpV.** The UIV Matrioshka computes the arm chart (Vela glitch record, Cas A Ti-44 map, Cygnus elevator log, EHT VLBI record); the Cygnus warp gate holds 16 A x V[UXV] = 2^31 EU/t and returns `grindless:bulge_chart`, which researches `gtceu:opv_machine_casing`.
 
 ## Inherited, as built
 
@@ -403,7 +403,7 @@ Placement per DECISIONS.md:508. Circuits are taken by each package after `git gr
 | CVI (UEV, `uev/composites.js:22`) | W-184 preform | W-184 fibre → `w184_cvi_preform` | Mk6 casing |
 | Photonic hall (UEV, `uev/photonics.js:25`) | spintronic mainframe | dies → `gtnn:spintronic_mainframe` | circuit |
 | Ergosphere probe bay (UIV-B4) | Kerr sling | `relay_seed` → `launched_relay_seed` | travel |
-| Matrioshka (UIV-A10) | arm chart | three records → `arm_chart` | gate |
+| Matrioshka (UIV-A10) | arm chart | four records → `arm_chart` | gate |
 | Neutronium cage (UIV-B2, RX J1856 site) | cage parts | `neutronium_pellet` → `grindless:cage_part` (carried to Vela) | phase sorter |
 | R-process decompressor (UIV-B2) | gnocchi | `gnocchi_fragment` → r-process stock | by-product |
 | Levitation melter (UIV-A3) | CoFeB, Heusler, Terfenol-D, Ni-Mn-Ga | four melts → `cofeb_ingot`, `heusler_ingot`, `terfenol_d_ingot`, `ni_mn_ga_ingot` | targets, piston, conveyor |
@@ -642,7 +642,7 @@ Short, in English, each with a small reward. They never block a recipe (rule 5).
 | `gtceu:opv_machine_casing` researched with `grindless:bulge_chart` (the casing exists in the dump; the research and the casing's assembly-line recipe go in `server_scripts/grindless/uxv/gate.js`, B6, by the pattern of `uhv/gate.js:206-219` and uiv.md:1627) | the arm chart, the Matrioshka, all three places |
 | Warp gate c10 at Cygnus X-1 orbit: 16 A x V[UXV] = 2,147,483,648 EU/t for 1,200 t *(tune)* over the network through two UXV 16 A input hatches (S0-2; fallback 15 A = 2,013,265,920 EU/t) | the BZ dynamo with two polar cap taps, or the Mk6 through DEC; wireless case 12; the UXV hatches (after Vela) |
 | The c10 row consumes 1 `grindless:frc_cartridge` and keeps (not consumed, the six slots of `uhv/gate.js:90-97`) `grindless:superheavy_census_iii`, `grindless:island_chart`, `grindless:arm_chart`, `grindless:pasta_core_sample` and 4 `gtnn:spintronic_mainframe`; it outputs 1 `grindless:bulge_chart` | Cygnus, superheavies III, the MNT collider, Vela, Cas A (through the arm chart's Ti-44 map), the spintronic lines |
-| `grindless:arm_chart` on UIV's Matrioshka (new row) from `vela_glitch_record`, `ti44_map` and `elevator_log` | the three places' data, held to both substages |
+| `grindless:arm_chart` on UIV's Matrioshka (new row) from `vela_glitch_record`, `ti44_map`, `elevator_log` and `cygnus_vlbi_record` | the three places' data, held to both substages |
 | One representative run per new place and the substages `uxv`, `uxv-vela` and `uxv-cas-a` reached | the site rules and platforms |
 
 - **It unlocks:** the OpV substage `opv` (the stage grant follows `uhv/gate.js:294`). OpV's design starts from *Reserve for OpV*: industrial antimatter, stable exotic matter, the Kugelblitz forge, self-replicating probes and the galactic bulge (journey.md:53) are its lines.
@@ -745,5 +745,185 @@ Short, in English, each with a small reward. They never block a recipe (rule 5).
 | Mk6 controller | UXV hull and motor, pump, field generator (not the emitter) | `uxv-vela` | no: the Mk6 is never needed for the hull or the parts |
 | `uxv_emitter` | Ti-44 (Cas A), `mtj_die`, UIV gamma cavity | `uxv-cas-a` | no |
 | Gate c10 | cartridge, census III, island chart, arm chart, core sample, mainframes; 2^31 EU/t from BZ + taps or Mk6 | both substages | no |
+
+## Build order
+
+UXV is built in packages after v0.13.0, as UIV was. Each package below is one work-package issue (`.github/ISSUE_TEMPLATE/work-package.yml`), and its contract is written so the issue can be filled from this section alone. Each package's rationale is the machine sections and lines it cites.
+
+**Test bands** are assigned by the integrator when it opens each issue (`tools\test\Get-GGTestZone.ps1 -Next` after UIV-C3's row). The worker adds only that row to `tools/test/zones.json`. F1, F2, C1 and C2 have no native test and no band.
+
+**Script load-order bands** (`tools/analysis/script_order.json`) are integrator-owned. Every cross-file mutation names its band as "assigned by integrator"; packages never add `// priority:` lines (the integrator stamps them).
+
+### Common to every package
+
+UIV's *Common to every package* (uiv.md:981-1018) applies with `uiv` replaced by `uxv` in every path. The changes for UXV:
+
+- **Allowed, always:** `startup_scripts/grindless/uxv/<name>.js`, `server_scripts/grindless/uxv/<name>.js`, `client_scripts/grindless/uxv_<name>_lang.js`, new tables `tables/<name>*.json`, `tools/assets/Build-UXV<Name>Textures.ps1` and its outputs, `assets/emi/recipe/additions/grindless/uxv_<name>_*.json`, `tools/analysis/test/uxv-<name>.test.mjs`, `tools/test/overlay/kubejs/server_scripts/gg_test_uxv_<name>.js` and the package's row in `tools/test/zones.json`.
+  - **Its own obtain rule:** the package deletes its own class B rule in `tools/analysis/tiers/obtain.json` (F2 adds one per producing package, DECISIONS.md:431 pattern) and every `tools/analysis/emi_coverage.json` "use" exception its recipes resolve. Nothing else in either file.
+  - **Pinned older tests:** a test that pins the row count, circuit list or lang keys of an older table the package appends to (named in each contract) is an allowed edit, limited to adding the new row with a comment naming the package, or appending the package's lang file to a lang check.
+- **Prohibited, always:** as UIV's (`pack/index.toml`, `pack/pack.toml`, `hidden_until.json`, `lib/**`, `AGENTS.md`, `docs/STATUS.md`, `DECISIONS.md`, `CREDITS.md`, every `.snbt`, `script_order.json`), and any older file or table the contract does not list.
+- **Older rows:** placed per DECISIONS.md:508 (the machine's table or inline array first; a companion table second; the package's own file only for GTM types and generated rows, such as the hot strip mill). One package owns a table per wave (*Parallel and serial*). A row adds a recipe and never edits an existing one.
+- **Circuits:** the table below was read on 2026-10-28. The worker re-reads every row of the type before writing; if a number has been taken since, it takes the next free one and records it in the handoff.
+- **Ids:** exactly as in this file. A new cross-package id, or a changed one, is an escalation.
+- **Bootstrap:** every controller, travel item and gate input is checked against the *Bootstrap check* table (Risks). An input that arrives only in a later substage is an escalation, never a quiet change.
+- **Invariants, always:**
+  - no UXV recipe takes an OpV-only input (`gtceu:opv_machine_casing` is only researched) or anything in *Reserve for OpV* except as listed there;
+  - no Earth, Mercury or Cygnus recipe takes a Vela or Cas A product before its substage;
+  - Ti-44, Fm-257, Es-254, Cm-248 and W-184 only from the calutron; elements 121 and 122 and census III only from the cyclotron, the recoil separator and the chem lab;
+  - the Mk6, its DEC rows, the BZ dynamo and the polar cap tap are written final, not in `power/generators.js`'s list;
+  - no recipe EU/t above 2^31; only B6's c10 row reaches it (S0-2);
+  - the pump's sodium is ordinary sodium and the MgO comes from magnesite (never Mk6 ash);
+  - UIV's invariants hold.
+- **Controllers** as *Voltages and controllers*. Only the Mk6 and M2 take the UXV hull.
+- **Tests:** T0 is `tools\Check-Fast.ps1`. T1 is the one native test the contract names, run once in its band on the Linux VM first (`docs/testing/`), client legs one per run.
+- **Repairs and agent:** at most 2 repairs, then escalate with the triage output, the suspected `path:line` and the attempts. The implementer (Sonnet) runs each package; `mechanical` (Haiku) may take A2's rows; Opus only for a cross-system contradiction.
+- **Proof reuse:** UIV proved, and no UXV T1 re-proves:
+  - the UEV builders with a second tier (UIV-S0-1);
+  - `registerFusionTier(11)` with long storage and starts (UIV-A9, run 20261028-192609-server);
+  - wireless case 11 long caps (UIV-S0-5, W);
+  - the x16,384 hatch (UIV-M1, run 20261028-151927-server-b3b);
+  - relay platforms, teleport and chunk loading (UIV-S0-2, -4, B1);
+  - tier 11 datapack places (UIV-S0-3);
+  - KubeJS cable at V[UIV] (UIV-S0-7);
+  - `.dimension` rows.
+
+  A plain recipe multiblock through `lib/patterns.js` needs only the recipe lookup check.
+
+**Circuits by type** (in use as read; UXV numbers by package):
+
+| Type (where its rows live) | In use | UXV |
+|---|---|---|
+| Calutron (`tables/isotopes.json`) | 1-9, 20-26 | A1 10-13; B5 14 |
+| Cyclotron, recoil separator, chem lab (`tables/superheavy.json`) | 1-7, 20-25 | A1 8-11 per type |
+| Transuranium (`tables/transcurium.json`) | 0-6 | A1 7-9 |
+| Actinide partitioning, waste retrieval (`zpm/actinides.js:58`, `:85`) | 1-5 | A1 6-12 |
+| Electron beam furnace (`tables/electron_beam.json`) | 0-7, 23, 25, 26 | A3 8-21 |
+| Nitride magnet works, CVI (`tables/composites.json`) | 0-6 | W 7; A3 8-15 |
+| Crystal growth (`tables/crystals.json`) | 0-9, 24 | A3 10-17 |
+| Megabar (`tables/megabar.json`) | 0-3 | A3 4 |
+| Levitation melter (`tables/levitation_melter.json`) | 1-5 | A3 6-9 |
+| Foundry (`tables/photonics.json`) | 0-13 | A3 14-16 |
+| MOCVD (`uv/photonics.js:143`) | 1-11 | A3 12-13 |
+| Ion implanter (`zpm/qubits.js:47`) | 1-4, 6, 7 | A3 8-9 |
+| Photonic hall (`tables/photonics_uev.json`) | 0-6 | A5 7 |
+| Extraction cascade (`ev/extraction_cascade.js:92`) | 1-2, 5-13 | A2 14-21; B5 22 |
+| Platinum plant (`ev/platinum_plant.js:598`) | 1-4, 7-9 | A2 10-13 |
+| Powder bed (`tables/am_powders.json`) | 1-7 | A2 8-13 |
+| Zone refining (`uv/detectors.js:56`) | 1-3, 6, 7 | A2 8-9 |
+| Eu reductor (`zpm/europium.js:105`) | 1-9 | A2 10-11 |
+| Cryogenic plant, fluorspar kiln | none (rows keyed by input) | A2: distinct inputs |
+| Hot strip mill (generated, `ev/combined_cycle_and_hot_mill.js:464`) | own file | A2, A8: first free in their own files |
+| Cold (`uv/cold.js:55`) | 1-5 | A6 6 |
+| Fuel fabrication (`iv/uranium_cycle.js:44`) | 1-3, 9 | A6 10 |
+| Synchrotron (`tables/accelerators.json`) | 0-4, 7 | A6 8 |
+| Quench caster, DEC (`zpm/fusion.js:97`, `:149-170`) | 1-2 | A7 3-5; DEC rows keyed by plasma |
+| Magnet works (`tables/magnet_works.json`) | 1-7 | A8 8; B3 9 |
+| HTS magnet works (`luv/hts_magnet_works.js:32`) | 1-5 | A8 6 |
+| Coated conductor line (`luv/coated_conductor_line.js:32`) | 1-3 | A8 4 |
+| Tether works (`uhv/elevator.js:106`) | 1-6, 16 | B1 7 |
+| Warp gate (`tables/gate.json`) | 1-2, UIV-B5's c7 | B1 8-9; B6 10 |
+| EHT (`uv/edge.js:46`), syngas (`hv/syngas_plant.js:82`) | 1; 0-6 | B2 2; B2 7 |
+| DSN (`zpm/observatory.js:30`), GW detector (`luv/ganymede.js:48`) | 1-3; 1-2 | B4 4; B4 3 |
+| Hot cell (`tables/hot_cell.json`) | 1-12 | B5 13-14 |
+| UIV machines (probe bay, cage, decompressor, profiler, Matrioshka) | read at package start | next free (B1, B4, B5, B6) |
+
+### Spikes (S0): disposable, before any permanent id
+
+As UIV's (uiv.md:1020-1026): bench overlay and the S0 row of `zones.json` only, nothing in `pack/`. One question each, pass or fail with a run id. A fail changes the named contract before it opens. The S0 worker writes `docs/research/uxv-s0.md`.
+
+| Spike | Question | If it fails | Changes |
+|---|---|---|---|
+| **S0-1** | With `highTierContent` off, UEV's builders widened to `.tiers(UEV, GTValues.UIV, GTValues.UXV)` (`uev/foundation.js:180`, `:193`) register `gtceu:uxv_machine_hull`, `gtceu:uxv_energy_input_hatch`, `gtceu:uxv_energy_output_hatch` and their `_16a` pair, with tier-named labels. The UEV and UIV ids, labels and recipes are unchanged; the UXV ones form in one of our multiblocks and in GTM's assembly line; the 16 A buffer is a long. The dump also covers `gtceu:opv_machine_casing`, `gtnn:spintronic_mainframe` and its GT-- recipe id, the GT-- and extendedfeatures UXV-tier items, and GTM's cobalt, manganese, gallium, dysprosium, yttrium, scandium, gadolinium, terbium, ruthenium, iridium, tantalum, tungsten, curium, einsteinium and fermium. | `highTierContent` ON with mass hiding (orchestrator decision; S0-1 records the id count). Every missing material is registered as `gtceu:` in F1 | F1, every package |
+| **S0-2** | A KubeJS recipe at 2,147,483,648 EU/t (a long) on GTM's warp gate type runs on two UXV 16 A input hatches fed by wireless case 12 for 1,200 t, and the EMI and Jade read-outs do not overflow | 15 A = 2,013,265,920 EU/t, duration scaled to the same EU *(tune)* | B6 |
+| **S0-3** | A datapack adds two GCYR solar systems at tier 12 (Vela pulsar orbit with a pulsar sky; Cassiopeia A remnant with a nebula sky) and keeps every older id, `cygnus_x1_orbit` included. No rocket offers them. | tier 11, as Cygnus | B1, B4, B5 |
+| **S0-4** | `registerFusionTier(GTValues.UXV, ...)` from KubeJS registers a third ring beside the Mk4 and Mk5, with our pattern and casing, that forms with 16 UXV energy hatches, stores 10,240,000,000 EU (long) and starts a recipe at 10 G. A dump of every `fusion_reactor` row shows the four Mk6 fuels collide with nothing; `direct_conversion` takes four more rows | every start under 2^31 *(tune)*; else a KubeJS multiblock with the `fusion_reactor` type (uiv.md's Mk5 fallback) | F1, A7 |
+| **S0-5** | `gtnn:spintronic_mainframe` is in `#gtceu:circuits/uxv` and GT--'s lower spintronic circuits in theirs; GT--'s recipe id for it is known | F2 adds the tag in a data file | F2, A5 |
+| **S0-6** | A tier 12 `ParallelHatchPartMachine` (`gtceu:uxv_parallel_hatch`) from `lib/parallel_hatch.js` reports 65,536 and forms in the stellar forge and one UXV machine; parallels x EU/t stays a long and the hatches still bound it | the hatch stays x16,384 and M1 is dropped | M1, M2 |
+| **S0-7** | `withTiers` case 12 caps (2,684,354,560 to 85,899,345,920 EU) and a 4,026,531,840,000 EU cell are stored and reported as long; the table accepts `grindless:pasta_strand_repeater` as a link | each figure capped at the largest safe value, recorded; the gate's 16 A still fits | W |
+| **S0-8** | A KubeJS material `gtceu:pasta_strand` with cable properties at V[UXV], 4 A, zero loss makes `gtceu:pasta_strand_single_wire` and its cable (as `uev/foundation.js:165`) | a superconductor flag; else the hull takes UIV metallic hydrogen cable x4 and the strand is an item | F1, B4 |
+| **S0-9** | The atmosphere, temperature and gravity GCYR loads for the two new places | figures recorded; site rules stay "no combustion, sealed machines" | B1, B4, B5 |
+| **S0-10** | A `launched_relay_seed` thrown through a warp gate row places a relay platform (pre-formed far ring, wireless hatch pair, AE2 seed) in an unvisited dimension, for two more rows of `tables/relay_platforms.json`; the platform's chunks stay loaded with nobody there | a one-way arrival kit, as UIV-S0-2's fallback | B1 |
+
+Order: S0-1 first (it fixes F1's list); S0-3, S0-9 and S0-10 (they fix B1); then S0-2, S0-4, S0-5, S0-7 and S0-8; S0-6 any time (UIV-M1 is merged).
+
+### Foundation (serial)
+
+#### F1. Registrations
+
+- **Objective:** every UXV material, item and shared block that more than one package uses exists, with names and textures and no recipe; the UXV hull and hatches exist on UEV's builders.
+- **`<name>`:** `foundation`.
+- **What:**
+  - the UXV tier: `gtceu:uxv_machine_hull`, `gtceu:uxv_energy_input_hatch`, `gtceu:uxv_energy_output_hatch`, `gtceu:uxv_energy_input_hatch_16a`, `gtceu:uxv_energy_output_hatch_16a` (S0-1). Their recipes are B4's (lasagna plate, strand cable);
+  - components `grindless:uxv_electric_motor`, `uxv_electric_pump`, `uxv_conveyor_module`, `uxv_electric_piston`, `uxv_robot_arm`, `uxv_sensor`, `uxv_emitter`, `uxv_field_generator` (Monifactory `Post_UV_Components.js` pattern, LGPL, credited) and `tables/uxv_components.json` with no rows. Recipes: sensor A6; motor, pump, piston, conveyor, arm A8; field generator B3; emitter B5;
+  - blocks: `grindless:uxv_fusion_casing` (S0-4);
+  - materials (`gtceu:`): `pasta_strand` with cable properties (S0-8); `titanium_44`, `fermium_257`, `einsteinium_254`, `curium_248`, `tungsten_184`; CoFeB, Co₂MnSi, Terfenol-D, Ni₂MnGa, DyScO₃, SrRuO₃, La-BFO, GGG, YIG, hBN, WTe₂, Fe₃GeTe₂; and every material S0-1's dump shows missing;
+  - fluids (`grindless:`): `stellar_plasma`, `disk_plasma`, `filtered_disk_plasma`, `flux_loaded_plasma`, the four cuts (`stellar_hydrogen_cut`, `stellar_helium_cut`, `stellar_cno_cut`, `stellar_heavy_cut`), `triple_alpha_fuel`, `carbon_burning_fuel`, `oxygen_burning_fuel`, the four ash plasmas (`cno_ash_plasma`, `helium_burning_ash_plasma`, `carbon_burning_ash_plasma`, `oxygen_burning_ash_plasma`), `lpe_flux`, `he_6n`, `mnt_product_gas`. They are here because older files (`zpm/fusion.js`, `ev/cryogenic_plant.js`) read them;
+  - items made by one package and used by another:
+    - spintronics: `cofeb_target`, `mgo_target`, `heusler_target`, `saf_target_set`, `ta_seed_target`, `srruo3_target`, `la_bfo_target`, `cofeb_ingot`, `heusler_ingot`, `terfenol_d_ingot`, `ni_mn_ga_ingot`, `ta_foil`, `pt_sheet`, `dysco3_substrate`, `ggg_wafer`, `hbn_crystal`, `wte2_crystal`, `fgt_crystal`, `mtj_stack_wafer`, `mram_stack_wafer`, `saf_track_wafer`, `mtj_die`, `mram_wafer`, `srruo3_electrode_wafer`, `me_switch_wafer`, `sot_readout_stack`, `meso_logic_die`, `racetrack_chip`, `magnonic_bus`, `sin_membrane`, `nanoaperture_array`, `rf_carpet_board`, `caf2_window`, `kr_f2_premix`, `krf_excimer_laser`, `pt_lpe_crucible`, `gas_stopping_cell`, `shequid_gyro`, `nv_diamond_chip` if S0-1 shows it missing;
+    - superheavy: `fm257_target`, `es254_target`, `cm248_target`, `element_121_recoil`, `element_122_recoil`, `superheavy_census_iii`, `u238_ion_source`, `u238_beam_charge`, `island_nuclide`, `island_chart`;
+    - parts: `tetrataenite_lamination`, `tetrataenite_rotor`, `strand_stator`, `strand_tape`, `alip_duct`, `w184_cvi_preform`, `terfenol_d_rod`, `ni_mn_ga_crystal`, `cnt_bumper_weave`, `cnt_whipple_shield`, `frc_cartridge`, `gamma_laser_module`, `positron_stack`, `ti44_core`, `si28_ash`;
+    - far products: `raw_pasta`, `spaghetti_phase`, `lasagna_phase`, `gnocchi_fragment`, `anti_phase_residue`, `cage_part`, `lasagna_plate`, `pasta_core_sample`, `polar_cap_electrode`, `ejecta_knot_dust`, the four condensates;
+    - data and charts: `vela_glitch_timing`, `vela_glitch_record`, `cygnus_vlbi_record`, `elevator_log`, `ti44_map`, `arm_chart`, `bulge_chart`; the link `grindless:pasta_strand_repeater`;
+  - not here: `grindless:uxv_smes_cell` (W's `wireless_energy.json` row registers it, `lv/wireless_energy.js:149`), and each machine's own-only intermediates (its package).
+- **Allowed (extra):**
+  - `startup_scripts/grindless/uxv/foundation.js`, `client_scripts/grindless/uxv_foundation_lang.js`, `tools/assets/Build-UXVFoundationTextures.ps1` and outputs;
+  - `startup_scripts/grindless/uev/foundation.js`: two lines, `:180` and `:193` → `.tiers(UEV, GTValues.UIV, GTValues.UXV)`, and the label ternaries beside them; the header comment at `:171`;
+  - pinned tests: `tools/analysis/test/uiv-foundation.test.mjs` and the UEV foundation test, if they pin the tier list.
+- **References:** *Mods and integration*; `uev/foundation.js:165` (cable), `:172` (registry), `:178-180` (hatch helper), `:192-193` (hull); `startup_scripts/grindless/uiv/foundation.js:1-30` (header pattern); `uiv/uiv_components.js` (component pattern); Monifactory's `Post_UV_Components.js`.
+- **Depends on:** S0-1, S0-4 (casing), S0-8 (cable); UIV shipped (v0.13.0).
+- **Invariants:**
+  - no machine, no recipe;
+  - the UEV and UIV hulls and hatches keep their ids, labels and recipes;
+  - ids exactly as here.
+- **Acceptance:**
+  - every id registered once, with `en_us` and `es_es`;
+  - `emi-coverage.mjs` lists each as expected-unobtained until its package;
+  - the UXV hull and hatches appear in EMI with a UXV label.
+- **Tests:** T0; `tools/analysis/test/uxv-foundation.test.mjs`. T1: none (S0-1 is the proof).
+- **Commits:** 2 (registrations; textures).
+- **Serial:** alone; every package depends on it.
+
+#### F2. Integrator step
+
+- **Objective:**
+  - `hidden_until.json`: `gtnn:spintronic_mainframe` from `never` to `uxv`; `gtceu:opv_machine_casing` stays hidden until `opv`;
+  - F1's ids are class B until `uxv` in `tools/analysis/tiers/obtain.json`, one rule per producing package, named for it (each package deletes its own);
+  - cuts by output (*Only from there and cuts*): GT--'s recipe for `gtnn:spintronic_mainframe`, the GT-- and extendedfeatures UXV-tier items a UXV part replaces (S0-1 list), the generic wiremill and extruder rows for `pasta_strand`;
+  - the `#gtceu:circuits/uxv` tag if S0-5 failed;
+  - `script_order.json`: a band for `uxv/` and one for each older file in *Older machines* that gets a row reading a UXV id.
+- **Allowed:** `hidden_until.json`, `tools/analysis/tiers/obtain.json`, `script_order.json`, `server_scripts/grindless/uxv/cuts.js` (new), and a tag file only after a failed S0-5.
+- **References:** *Only from there and cuts*; *Save compatibility*; UIV's F2 (uiv.md:1092-1105); DECISIONS.md:528.
+- **Acceptance:** the mainframe appears at `uxv`, in the same release as A5's row; no lib change.
+- **Tests:** T0. T1: none.
+- **Commits:** 1. The integrator runs it; it may overlap W.
+
+#### W. UXV wireless tier (standalone serial)
+
+- **Objective:**
+  - `withTiers` case 12 after case 11 (`lv/wireless_energy.js:304`), with the four caps of *Power* as long;
+  - the UXV row in `tables/wireless_energy.json` after the UIV row (`:47`), link `grindless:pasta_strand_repeater` (F1 id, made by B4), cell `grindless:uxv_smes_cell`, capacity 4,026,531,840,000 *(tune)*, `referenceCount` 1,536 *(tune)*;
+  - the cell's row in `tables/composites.json` (nitride magnet works, circuit 7; the UIV cell row at `:15-17` is the pattern): 4 `uiv_smes_cell`, 16 `strand_tape`, 2 `lasagna_plate`, charge 1,000 mB isotopically pure He-II (A6's cold row) *(tune)*.
+- **`<name>`:** `wireless`.
+- **Allowed (extra):** `lv/wireless_energy.js` (case 12 only); `tables/wireless_energy.json` (1 row); `tables/composites.json` (1 row); pinned tests `uiv-wireless.test.mjs`, `uev-wireless.test.mjs`, `wireless_network.test.mjs`, `uev-composites.test.mjs`, `uiv-uiv_components.test.mjs` (row and tier counts only).
+- **References:** *Power*; UIV's W (uiv.md:1107-1126); DECISIONS.md:501; S0-7.
+- **Depends on:** F1, S0-7.
+- **Invariants:** every cap and the cell are long; tiers below 12 are untouched.
+- **Acceptance:** UXV wireless hatches register; the cell stores and reports 4,026,531,840,000 EU; a 16 A UXV draw (2,147,483,648 EU/t) is served for 60 s, or 15 A if S0-2 failed.
+- **Tests:** T0; T1: `gg_test_uxv_wireless`, band assigned by integrator. Doubt: a draw at 2^31 EU/t and a cell above 2^41 held as long through the loader, the hatch and the network sum.
+- **Commits:** 1.
+- **Serial:** alone among workers (shared mechanism). It opens the `composites.json` sequence.
+
+#### M1. UXV parallel hatch (standalone serial)
+
+- **Objective:** `gtceu:uxv_parallel_hatch`, x65,536 = 4^(12-4) (ParallelHatchPartMachine.java:37), from the one create in `lib/parallel_hatch.js` (`.tiers(9, 10, 11, 12)` at `:81`, the name ternary at `:85`, the list at `:103`), usable through `global.grindless.parallelHatch.part()`.
+- **`<name>`:** `parallel_hatch`.
+- **Allowed (extra):** `lib/parallel_hatch.js` (the three places named); its recipe in `server_scripts/grindless/uxv/parallel_hatch.js` (UXV hull, 4 spintronic mainframes, UXV field generator and emitter *(tune)*, by `server_scripts/grindless/uiv/parallel_hatch.js:17`); pinned tests that list the hatches.
+- **References:** *Nothing one at a time*; mega.md 4.12; UIV-M1 (uiv.md:1128-1146; DECISIONS.md:530); S0-6.
+- **Depends on:** F1, S0-6.
+- **Invariants:** the UV to UIV hatches untouched; not counted.
+- **Acceptance:** reports 65,536; forms in the stellar forge and in one UXV machine. Reachable after B4 and B5 (hull, emitter); C1 checks.
+- **Tests:** T0; T1: `gg_test_uxv_parallel_hatch`, band assigned by integrator. Doubt: tier 12 with `highTierContent` off, and 65,536 copies still bound by energy as a long.
+- **Commits:** 1.
+- **Serial:** alone (lib). If S0-6 failed, M1 is dropped.
 
 <!-- CONTINUE -->
