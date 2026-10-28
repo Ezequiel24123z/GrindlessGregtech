@@ -4,7 +4,7 @@ applyTo: "pack/config/ftbquests/**,tools/quests/**,docs/quests.md"
 # Quest rules
 
 - Quests are short, in English, give a small reward, and never block recipes. Before writing a chapter, look at how other packs solve it; copy and adapt only from packs whose licence allows it (`CREDITS.md`, "Quests"), always with attribution (proposed in the handoff).
-- Guide: `docs/quests.md`. Read only the section you need: layout §4, dependencies §5, tasks §6, rewards §7, writing and banned phrases §8, ids §10, tools §11, the era's chapter plan §14, Processing Lines §17, Power §18.
+- Guide: `docs/quests.md`. Read only the section you need: layout §4, dependencies §5, tasks §6, rewards §7, writing and banned phrases §8, ids §10, tools §11, the era's chapter plan §14, Processing Lines §17, Power §18, Multiblocks §19.
 
 ## Generated chapters (never edit the SNBT by hand)
 | Chapter | Source to edit | Regenerate |
@@ -12,6 +12,7 @@ applyTo: "pack/config/ftbquests/**,tools/quests/**,docs/quests.md"
 | `chapters/ev_age.snbt` | `tools/quests/ev-chapter/quests-data.mjs` | `node tools/quests/ev-chapter/gen.mjs` |
 | `chapters/luv_age.snbt` | `tools/quests/luv-chapter/quests-data.mjs` | `node tools/quests/luv-chapter/gen.mjs` |
 | `chapters/pl_*.snbt`, `chapters/power.snbt`, the Processing Lines group in `chapter_groups.snbt`, their entries in `tools/quests/lint-config.json` | `tools/quests/processing-lines/pl-data-*.mjs`, `power-data.mjs` | `tools/quests/processing-lines/run.ps1 -Dump <kubejs-exported> -Write` |
+| `chapters/multiblocks.snbt`, its entries in `tools/quests/lint-config.json` | `tools/quests/multiblocks/mb-data.mjs` | `node tools/quests/multiblocks/gen.mjs --dump <kubejs-exported> --write` (after the Processing Lines run) |
 
 - A quest package edits only the data file. It may run the generator to lint the result, but restores the chapter before committing (`git restore <chapter>`). The integrator regenerates generated chapters, `lint-config.json` and `chapter_groups.snbt` once per batch.
 

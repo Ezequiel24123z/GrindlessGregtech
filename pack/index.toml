@@ -33,6 +33,10 @@ file = "config/ftbquests/quests/chapters/lv_age.snbt"
 hash = "5f22a74d9b40045bbe17eaf500f156a7aa7ff0eba726ae808cf66fdb19893783"
 
 [[files]]
+file = "config/ftbquests/quests/chapters/multiblocks.snbt"
+hash = "161b5d5541d3356741a200abb2b3f991d6d210ee384734fde25bb39e4aeb0299"
+
+[[files]]
 file = "config/ftbquests/quests/chapters/mv_age.snbt"
 hash = "3b9f0bb77ca9ed9014216ffe28ad29738eae518644199b6748fb61ab482d0184"
 
