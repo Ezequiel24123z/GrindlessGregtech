@@ -55,6 +55,23 @@
           "charge": [],
           "itemsOut": [{ "id": "grindless:inas_qd_wafer", "count": 1 }],
           "fluidsOut": [{ "id": "gtceu:hydrogen", "amount": 750 }]
+        },
+        {
+          "_": "UIV-A1: the nickel-58/titanium multilayer of the neutron supermirror (circuit 4)",
+          "name": "ni58_ti_multilayer",
+          "circuit": 4,
+          "eut": 1966080,
+          "duration": 1600,
+          "itemsIn": [
+            { "id": "gtceu:glass_plate", "count": 1 },
+            { "id": "gtceu:nickel_58_dust", "count": 1 },
+            { "id": "gtceu:titanium_dust", "count": 1 }
+          ],
+          "kept": [],
+          "fluidsIn": [{ "id": "gtceu:liquid_nitrogen", "amount": 1000 }],
+          "charge": [],
+          "itemsOut": [{ "id": "grindless:ni58_ti_multilayer", "count": 2 }],
+          "fluidsOut": [{ "id": "gtceu:nitrogen", "amount": 1000 }]
         }
       ]
     },

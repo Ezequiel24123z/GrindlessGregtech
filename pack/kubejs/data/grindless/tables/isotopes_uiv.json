@@ -1,0 +1,101 @@
+{
+  "_": "UIV-A1 (docs/eras/uiv.md, lines 9 and 24): the steps in GTM's own types round the calutron. Read by server_scripts/grindless/uiv/isotopes.js. circuit 0 = no programmed circuit.",
+  "types": {
+    "vacuum_freezer": {
+      "recipes": [
+        {
+          "name": "titanium_tetrachloride_ice",
+          "circuit": 0,
+          "eut": 7680,
+          "duration": 400,
+          "itemsIn": [],
+          "kept": [],
+          "charge": [],
+          "fluidsIn": [{ "id": "gtceu:titanium_tetrachloride", "amount": 1000 }],
+          "itemsOut": [{ "id": "gtceu:titanium_tetrachloride_ice_dust", "count": 1 }],
+          "fluidsOut": []
+        }
+      ]
+    },
+    "chemical_reactor": {
+      "recipes": [
+        {
+          "name": "nickel_chloride",
+          "circuit": 30,
+          "eut": 7680,
+          "duration": 200,
+          "itemsIn": [{ "id": "gtceu:nickel_dust", "count": 1 }],
+          "kept": [],
+          "charge": [],
+          "fluidsIn": [{ "id": "gtceu:chlorine", "amount": 2000 }],
+          "itemsOut": [{ "id": "gtceu:nickel_chloride_dust", "count": 3 }],
+          "fluidsOut": []
+        }
+      ]
+    },
+    "assembler": {
+      "recipes": [
+        {
+          "name": "ti50_oven_charge",
+          "circuit": 29,
+          "eut": 524288,
+          "duration": 200,
+          "itemsIn": [
+            { "id": "gtceu:titanium_50_dust", "count": 4 },
+            { "id": "gtceu:titanium_foil", "count": 1 }
+          ],
+          "kept": [],
+          "charge": [],
+          "fluidsIn": [],
+          "itemsOut": [{ "id": "grindless:ti50_oven_charge", "count": 1 }],
+          "fluidsOut": []
+        },
+        {
+          "name": "neutron_supermirror",
+          "circuit": 30,
+          "eut": 524288,
+          "duration": 300,
+          "itemsIn": [
+            { "id": "grindless:ni58_ti_multilayer", "count": 2 },
+            { "id": "gtceu:aluminium_plate", "count": 1 }
+          ],
+          "kept": [],
+          "charge": [],
+          "fluidsIn": [],
+          "itemsOut": [{ "id": "grindless:neutron_supermirror", "count": 1 }],
+          "fluidsOut": []
+        },
+        {
+          "name": "neutron_guide",
+          "circuit": 31,
+          "eut": 524288,
+          "duration": 300,
+          "itemsIn": [
+            { "id": "grindless:neutron_supermirror", "count": 4 },
+            { "id": "gtceu:aluminium_frame", "count": 1 }
+          ],
+          "kept": [],
+          "charge": [],
+          "fluidsIn": [],
+          "itemsOut": [{ "id": "grindless:neutron_guide", "count": 1 }],
+          "fluidsOut": []
+        },
+        {
+          "name": "cage_part",
+          "circuit": 32,
+          "eut": 524288,
+          "duration": 400,
+          "itemsIn": [
+            { "id": "grindless:neutron_guide", "count": 2 },
+            { "id": "gtceu:stainless_steel_plate", "count": 2 }
+          ],
+          "kept": [],
+          "charge": [],
+          "fluidsIn": [],
+          "itemsOut": [{ "id": "grindless:cage_part", "count": 1 }],
+          "fluidsOut": []
+        }
+      ]
+    }
+  }
+}
