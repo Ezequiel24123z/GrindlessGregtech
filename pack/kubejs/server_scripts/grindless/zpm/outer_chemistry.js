@@ -91,7 +91,7 @@
     // UIV-B3 (docs/eras/uiv.md, line 34): Ps-converter mesoporous silica, the aerogel re-dried from ethanol with its pores tuned to stop positronium
     // (circuit 1: the silica_aerogel row above has none); the lab at PSR J0437 takes it
     {
-      name: 'ps_converter_aerogel', type: 'supercritical_drying', circuit: 1,
+      name: 'ps_converter_aerogel', type: 'supercritical_drying', circuit: 0,
       itemsIn: [{ id: AEROGEL, count: 2 }], notConsumedItems: [],
       fluidsIn: [{ id: 'gtceu:ethanol', amount: 500 }], notConsumedFluids: [{ id: 'gtceu:carbon_dioxide', amount: 1000 }],
       itemsOut: [{ id: 'grindless:ps_converter_aerogel', count: 2 }], fluidsOut: [{ id: 'gtceu:ethanol', amount: 500 }],
