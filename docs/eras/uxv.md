@@ -690,7 +690,7 @@ Short, in English, each with a small reward. They never block a recipe (rule 5).
 
 **Startup:** `uev/foundation.js` (F1, two lines), `uxv/foundation.js` (F1: components and shared items), one file per package, `lv/wireless_energy.js` (W), `lib/parallel_hatch.js` (M1), `lib/mega.js` (read unchanged by M2), `uxv/travel.js` (B1).
 **Server:** `server_scripts/grindless/uxv/*.js`; older-era rows in their own files (*Older machines*).
-**Data:** `data/gcyr/gcyr/planets/` and the solar system files S0-3 names, `tables/relay_platforms.json` (two rows), `tables/sunlight.json`, `tables/wireless_energy.json`, `tables/fusion_mk6.json` (new), `tables/uxv_components.json` (new), and the older tables each contract names (*Build order*).
+**Data:** `data/gcyr/gcyr/planets/` and the solar system files S0-3 names, `tables/relay_platforms.json` (two rows), `tables/sunlight.json`, `tables/wireless_energy.json`, `tables/fusion_mk6.json` (new), and the older tables each contract names (*Build order*).
 
 ## Save compatibility
 
@@ -808,7 +808,7 @@ UIV's *Common to every package* (uiv.md:981-1018) applies with `uiv` replaced by
 | Photonic hall (`tables/photonics_uev.json`) | 0-6 | A5 7 |
 | Extraction cascade (`ev/extraction_cascade.js:92`) | 1-2, 5-13 | A2 14-21; B5 22 |
 | Platinum plant (`ev/platinum_plant.js:598`) | 1-4, 7-9 | A2 10-13 |
-| Powder bed (`tables/am_powders.json`) | 1-7 | A2 8-13 |
+| Powder bed (`tables/am_powders.json`) | 1-7 | A2 8-15 |
 | Zone refining (`uv/detectors.js:56`) | 1-3, 6, 7 | A2 8-9 |
 | Eu reductor (`zpm/europium.js:105`) | 1-9 | A2 10-11 |
 | Cryogenic plant, fluorspar kiln | none (rows keyed by input) | A2: distinct inputs |
@@ -854,13 +854,13 @@ Order: S0-1 first (it fixes F1's list); S0-3, S0-9 and S0-10 (they fix B1); then
 - **`<name>`:** `foundation`.
 - **What:**
   - the UXV tier: `gtceu:uxv_machine_hull`, `gtceu:uxv_energy_input_hatch`, `gtceu:uxv_energy_output_hatch`, `gtceu:uxv_energy_input_hatch_16a`, `gtceu:uxv_energy_output_hatch_16a` (S0-1). Their recipes are B4's (lasagna plate, strand cable);
-  - components `grindless:uxv_electric_motor`, `uxv_electric_pump`, `uxv_conveyor_module`, `uxv_electric_piston`, `uxv_robot_arm`, `uxv_sensor`, `uxv_emitter`, `uxv_field_generator` (Monifactory `Post_UV_Components.js` pattern, LGPL, credited) and `tables/uxv_components.json` with no rows. Recipes: sensor A6; motor, pump, piston, conveyor, arm A8; field generator B3; emitter B5;
+  - components `grindless:uxv_electric_motor`, `uxv_electric_pump`, `uxv_conveyor_module`, `uxv_electric_piston`, `uxv_robot_arm`, `uxv_sensor`, `uxv_emitter`, `uxv_field_generator` (Monifactory `Post_UV_Components.js` pattern, LGPL, credited). Each recipe goes in its maker's own server file, so no table is shared: sensor A6; motor, pump, piston, conveyor, arm A8; field generator B3; emitter B5;
   - blocks: `grindless:uxv_fusion_casing` (S0-4);
-  - materials (`gtceu:`): `pasta_strand` with cable properties (S0-8); `titanium_44`, `fermium_257`, `einsteinium_254`, `curium_248`, `tungsten_184`; CoFeB, Co₂MnSi, Terfenol-D, Ni₂MnGa, DyScO₃, SrRuO₃, La-BFO, GGG, YIG, hBN, WTe₂, Fe₃GeTe₂; and every material S0-1's dump shows missing;
+  - materials (`gtceu:`): `pasta_strand` with cable properties (S0-8); `titanium_44`, `fermium_257`, `einsteinium_254`, `curium_248`, `tungsten_184` (with a wire form), `oxygen_16` (fluid; `gtceu:carbon_12` is UIV's, `uiv/foundation.js:97`); CoFeB, Co₂MnSi, Terfenol-D, Ni₂MnGa, DyScO₃, SrRuO₃, La-BFO, GGG, YIG, hBN, WTe₂, Fe₃GeTe₂; and every material S0-1's dump shows missing;
   - fluids (`grindless:`): `stellar_plasma`, `disk_plasma`, `filtered_disk_plasma`, `flux_loaded_plasma`, the four cuts (`stellar_hydrogen_cut`, `stellar_helium_cut`, `stellar_cno_cut`, `stellar_heavy_cut`), `triple_alpha_fuel`, `carbon_burning_fuel`, `oxygen_burning_fuel`, the four ash plasmas (`cno_ash_plasma`, `helium_burning_ash_plasma`, `carbon_burning_ash_plasma`, `oxygen_burning_ash_plasma`), `lpe_flux`, `he_6n`, `mnt_product_gas`. They are here because older files (`zpm/fusion.js`, `ev/cryogenic_plant.js`) read them;
   - items made by one package and used by another:
     - spintronics: `cofeb_target`, `mgo_target`, `heusler_target`, `saf_target_set`, `ta_seed_target`, `srruo3_target`, `la_bfo_target`, `cofeb_ingot`, `heusler_ingot`, `terfenol_d_ingot`, `ni_mn_ga_ingot`, `ta_foil`, `pt_sheet`, `dysco3_substrate`, `ggg_wafer`, `hbn_crystal`, `wte2_crystal`, `fgt_crystal`, `mtj_stack_wafer`, `mram_stack_wafer`, `saf_track_wafer`, `mtj_die`, `mram_wafer`, `srruo3_electrode_wafer`, `me_switch_wafer`, `sot_readout_stack`, `meso_logic_die`, `racetrack_chip`, `magnonic_bus`, `sin_membrane`, `nanoaperture_array`, `rf_carpet_board`, `caf2_window`, `kr_f2_premix`, `krf_excimer_laser`, `pt_lpe_crucible`, `gas_stopping_cell`, `shequid_gyro`, `nv_diamond_chip` if S0-1 shows it missing;
-    - superheavy: `fm257_target`, `es254_target`, `cm248_target`, `element_121_recoil`, `element_122_recoil`, `superheavy_census_iii`, `u238_ion_source`, `u238_beam_charge`, `island_nuclide`, `island_chart`;
+    - superheavy: `fm257_target`, `es254_target`, `cm248_target`, `element_121_recoil`, `element_122_recoil`, `superheavy_census_iii`, `spent_actinide_target` (every spent Fm, Es and Cm target: A1's cyclotron rows and A6's collider make it, A1's waste retrieval row takes it), `u238_ion_source`, `u238_beam_charge`, `island_nuclide`, `island_chart`;
     - parts: `tetrataenite_lamination`, `tetrataenite_rotor`, `strand_stator`, `strand_tape`, `alip_duct`, `w184_cvi_preform`, `terfenol_d_rod`, `ni_mn_ga_crystal`, `cnt_bumper_weave`, `cnt_whipple_shield`, `frc_cartridge`, `gamma_laser_module`, `positron_stack`, `ti44_core`, `si28_ash`;
     - far products: `raw_pasta`, `spaghetti_phase`, `lasagna_phase`, `gnocchi_fragment`, `anti_phase_residue`, `cage_part`, `lasagna_plate`, `pasta_core_sample`, `polar_cap_electrode`, `ejecta_knot_dust`, the four condensates;
     - data and charts: `vela_glitch_timing`, `vela_glitch_record`, `cygnus_vlbi_record`, `elevator_log`, `ti44_map`, `arm_chart`, `bulge_chart`; the link `grindless:pasta_strand_repeater`;
@@ -925,5 +925,203 @@ Order: S0-1 first (it fixes F1's list); S0-3, S0-9 and S0-10 (they fix B1); then
 - **Tests:** T0; T1: `gg_test_uxv_parallel_hatch`, band assigned by integrator. Doubt: tier 12 with `highTierContent` off, and 65,536 copies still bound by energy as a long.
 - **Commits:** 1.
 - **Serial:** alone (lib). If S0-6 failed, M1 is dropped.
+
+### Wave A: home (Earth)
+
+Two at a time, in the pairs of *Parallel and serial*. A row whose input is made by a later package reads that input's F1 id, and C1 checks reachability. Wave A is reachable at `uxv`, except A7 and A8, which wait for Vela products (`uxv-vela`); they are written in Wave A because their tables are free then.
+
+#### A1. Superheavies III (rows only)
+
+- **Objective:** lines 19-23. Fm-257, Es-254, Cm-248 and W-184 come from the calutron; elements 121 and 122 and census III from the cyclotron, the recoil separator and the chem lab; the three targets are plated and sintered; spent targets are recovered. No new machine.
+- **`<name>`:** `superheavy`.
+- **Allowed (extra):**
+  - `tables/isotopes.json`: calutron c10-13 (Fm-257, Es-254, Cm-248, W-184); c14 is reserved for B5;
+  - `tables/superheavy.json`: cyclotron c8-9 (Ti-50 on `es254_target`, on `fm257_target`), recoil separator c8-9, chem lab c8-11 (Es/Fm split, 121 catch, 122 catch, census III). The Ti-50 charge is the one UIV-A1's rows use;
+  - `tables/transcurium.json`: c7-9 (molecular plating of Fm, Es, Cm on Ti);
+  - `zpm/actinides.js`: actinide partitioning array at `:85` c6-8 (Es/Fm dissolve, Cm cut from spent MOX, `grindless:mnt_product_gas` → Pb, Hg, Pt); waste retrieval array at `:58` c6 (`spent_actinide_target` → stock);
+  - sintering in `server_scripts/grindless/uxv/superheavy.js` (GTM type, first free circuit);
+  - pinned tests: `uev-isotopes`, `uiv-isotopes`, `uev-superheavy`, `uhv-transcurium`, `uhv-betavoltaics`, `uhv-antimatter`, `zpm-actinides` (`.test.mjs`).
+- **References:** lines 19-23; *Older machines* (calutron, cyclotron, recoil separator, chem lab, transuranium, actinide partitioning, waste retrieval); `uev/isotopes.js:21`; `uev/superheavy.js:21`; `uhv/transcurium.js:25`; DECISIONS.md:504 (census II, Fm to stock).
+- **Depends on:** F1; UIV line 32's debris row (as merged).
+- **Invariants:**
+  - the isotopes only from the calutron; census III only from the chem lab;
+  - Fm-255, Es-253, Cm-244 and Cm-246 go to stock, never voided;
+  - the island nuclide is A6's.
+- **Acceptance:** `fm257_target`, `es254_target`, `cm248_target`, both recoils and `superheavy_census_iii` are obtainable at `uxv` in EMI; `gtceu:tungsten_184` is obtainable for A3 and A7.
+- **Tests:** T0. T1: none (rows on proven types; C1 checks reachability).
+- **Commits:** 2 (tables; own file and lang).
+- **Serial:** owns `isotopes.json`, `superheavy.json`, `transcurium.json` and `zpm/actinides.js` in Wave A (B5 follows on `isotopes.json`). Pair: A2.
+
+#### A2. Spintronic feedstock (rows on EV to UV plants)
+
+- **Objective:** the plant-side steps of lines 1-5, 9-11, 13-14, 16-17, 26-29 (fuel prep), 38, 41, 42 and 43, and the bonded targets.
+- **`<name>`:** `spin_feed`.
+- **Allowed (extra):**
+  - `ev/extraction_cascade.js` (array at `:92`) c14-21: cobaltite → Co; magnesite → MgCl₂ brine → Mg(OH)₂; CaCl₂ liquor recycle; Sc₂O₃; W charge for the WTe₂ ampoule; scheelite → WO₃; Bi fume → Bi; LPE dross → Pb;
+  - `ev/platinum_plant.js` (`:598`) c10-13: 5N Pt, 5N Ru, 5N Ir, etch and redeposit recovery;
+  - `iv/fluorspar_kiln.js` (`:83`), six rows keyed by input: 5N MgO, DyScO₃, SrRuO₃, La-BFO, GGG oxide, HF → F₂;
+  - `zpm/europium.js` (`:105`) c10-11: Dy₂O₃, Y₂O₃;
+  - `tables/am_powders.json` c8-15: CoFeB atomise, Heusler atomise, HIP blank, MgO press and sinter, SAF set, SrRuO₃ target, La-BFO target, spent re-press;
+  - `uv/detectors.js` (`:56`) c8-9: 7N Te, 7N Ge;
+  - `ev/cryogenic_plant.js` (`:40`), four rows keyed by input: `stellar_helium_cut` → `triple_alpha_fuel`; `gtceu:oxygen_16` → `oxygen_burning_fuel`; air → Kr; He → `he_6n`;
+  - `server_scripts/grindless/uxv/spin_feed.js`: hot strip mill rows (5N Ta → `ta_foil`, 5N Pt → `pt_sheet`; first free circuits, the `ev/combined_cycle_and_hot_mill.js:464` pattern) and the seven bonded targets (`cofeb_target` to `la_bfo_target`) on GTM types;
+  - pinned tests that read these files (as `git grep` shows on 2026-10-28): `uev-composites`, `uev-electron_beam`, `uhv-proxima_ground`, `uiv-levitation_melter`, `uv-photonics`, `zpm-europium`, `luv-a2-ids`, `platinum-asteroid`, `uev-barnard`, `uhv-crystals`, `uhv-photonics`, `uhv-zblan`, `uiv-mainframe`, `uiv-isotopes`, `uiv-uiv_components`, `uv-materials`, `uv-detectors`, `uev-alpha_centauri`, `uev-fusion`, `uev-superheavy`, `uhv-antimatter`, `uhv-swarm`, `uiv-metallic_hydrogen`, `uv-kuiper`, `uv-pluto-ices`.
+- **References:** lines 1-5, 9-11, 13-14, 16-17, 27, 29, 38, 41-43; *Older machines*; DECISIONS.md:508.
+- **Depends on:** F1.
+- **Invariants:**
+  - MgO from magnesite only;
+  - CO₂ voided (inert), every other by-product to the destination its line names;
+  - the knot-dust row is B5's (cascade c22).
+- **Acceptance:** the seven targets, `ta_foil`, `pt_sheet`, `he_6n` and the two Mk6 fuels are obtainable in EMI (the fuels after B2 and A7).
+- **Tests:** T0. T1: none (rows on proven types).
+- **Agent:** `mechanical` may write the rows after the Sonnet implementer fixes the row shapes; judgement goes to Sonnet.
+- **Commits:** 2-3 (EV-IV rows; ZPM-UV rows; own file).
+- **Serial:** owns those seven files in Wave A (B5 follows on the cascade). Pair: A1.
+
+#### A3. Spintronic rows (UHV to UIV shared tables)
+
+- **Objective:** the shared-machine steps of lines 1, 3, 5-9, 11-18, 28, 36-38, 42 and 43.
+- **`<name>`:** `spin_rows`.
+- **Allowed (extra):**
+  - `tables/electron_beam.json` c8-21:
+    - 5N Co, Fe, Mn, Si, Ta, Ni, Ga;
+    - Pt melt;
+    - `nanoaperture_array` milling;
+    - racetrack track writing;
+    - YIG waveguides;
+    - vdW edge contacts;
+    - ME switch patterning;
+    - C-12 vapour → `carbon_burning_fuel`;
+  - `tables/composites.json`, after W:
+    - nitride magnet works c8-13: MTJ, MRAM and SAF anneals, Heusler homogenise, SOT anneal, Ni-Mn-Ga twin training;
+    - CVI c14: W-184 fibre → `w184_cvi_preform`;
+  - `tables/crystals.json` c10-17: GGG and DyScO₃ Czochralski (Ir crucible), WTe₂ and FGT CVT, CaF₂ windows → `caf2_window`, Terfenol-D rod, Ni-Mn-Ga crystal, recrystallise;
+  - `tables/levitation_melter.json` c6-9: the four melts;
+  - `tables/megabar.json` c4: Ba-BN → `hbn_crystal` (raw; the leach is in the own file);
+  - `tables/photonics.json` (foundry) c14-16: MESO integration → `meso_logic_die`, MRAM Cu back end, `rf_carpet_board`;
+  - `uv/photonics.js:143` (era array, a `UXV_ROWS` block in the same pattern) c12-13: SiN cap, `sin_membrane`;
+  - `zpm/qubits.js:47` c8-9: MTJ and MRAM ion-beam etch;
+  - `server_scripts/grindless/uxv/spin_rows.js`: slicing and polishing to `dysco3_substrate` and `ggg_wafer`, the hBN leach, the WTe₂ and FGT anneals, the W-184 wire (GTM types, first free circuits);
+  - pinned tests for these tables: `uev-barnard`, `uev-electron_beam`, `uev-sirius`, `uiv-levitation_melter`, `uev-composites`, `uiv-uiv_components`, `uiv-wireless`, `uev-earth_orbit`, `uhv-crystals`, `uhv-photonics`, `uiv-mainframe`, `uiv-memories_cryostat`, `uev-megabar`, `uev-photonics`, `uhv-power_devices`, `uiv-beuv_stm`, `uiv-isotopes`, `uiv-tfln_femtosecond`, `zpm-qubits`, `uhv-betavoltaics`, `uv-detectors`, `uv-fusion`.
+- **References:** the lines above; *Older machines*; `uev/electron_beam.js:23`; `uev/composites.js:22`; `uhv/crystals.js:28`; `uhv/photonics.js:32`; `uv/photonics.js:133`, `:143`.
+- **Depends on:** F1; W (on `composites.json`); A2 for the reachability of inputs.
+- **Invariants:**
+  - one row per step;
+  - melt skulls, kerf and offcuts re-melted;
+  - the Mk6 ash is never an input except C-12 (line 28).
+- **Acceptance:** every listed output is obtainable at `uxv` in EMI (`carbon_burning_fuel` after A7).
+- **Tests:** T0. T1: none (rows on proven types).
+- **Commits:** 3 (UEV and UIV tables; UHV and UV tables; own file).
+- **Serial:** owns those eight tables in Wave A. Pair: A4.
+
+#### A4. Deposition (machines 1, 2; line 41)
+
+- **Objective:** the MTJ sputter cluster and the oxide PLD chamber, and the KrF laser they share.
+- **`<name>`:** `spin_deposition`.
+- **What:**
+  - machine 1 c1-c3 (`mtj_stack_wafer`, `mram_stack_wafer`, `saf_track_wafer`);
+  - machine 2 c1-c3 (`srruo3_electrode_wafer`, `bfo_film_wafer`, `me_switch_wafer`'s CoFe layer), with `krf_excimer_laser` as catalyst;
+  - line 41's `kr_f2_premix` (mixer), discharge tube with `caf2_window`, pulsed-power head and the laser itself (own file, GTM types).
+- **Allowed (extra):** own files only.
+- **References:** machines 1-2 (uxv.md:174-192); lines 6-8, 10-11, 41; `lib/patterns.js`; `uiv/beuv_stm.js` (a UIV plain multiblock, the pattern).
+- **Depends on:** F1; A2 and A3 for inputs.
+- **Invariants:**
+  - the controllers as *Voltages and controllers* (UIV hull, 2 `gtnn:optical_mainframe`);
+  - the laser is a catalyst, never consumed;
+  - spent targets → A2's powder bed re-press.
+- **Acceptance:** both machines form and run c1 at `uxv`.
+- **Tests:** T0. T1: `gg_test_uxv_spin_deposition`, band assigned by integrator. Doubt: the first 1 A x V[UXV] recipe runs on two UIV energy hatches (one tier up, WorkableElectricMultiblockMachine.java:250-273); every later UXV machine reuses this proof.
+- **Commits:** 2.
+- **Serial:** no shared table. Pair: A3.
+
+#### A5. Logic (machines 3, 4, 5; line 42; the mainframe)
+
+- **Objective:**
+  - the vdW stacking cell (c1-c4), the racetrack fab (c1-c2) and the YIG LPE furnace (c1-c3);
+  - line 42's `pt_lpe_crucible` (spun and welded from `pt_sheet`, own file);
+  - the spintronic mainframe: one row in `tables/photonics_uev.json` (photonic hall c7): `meso_logic_die`, `racetrack_chip`, `mram_wafer`, `magnonic_bus`, `mtj_die` *(tune)* → `gtnn:spintronic_mainframe`.
+- **`<name>`:** `spin_logic`.
+- **Allowed (extra):** `tables/photonics_uev.json` (1 row); pinned tests `uev-earth_orbit`, `uev-photonics`, `uhv-photonics`, `uiv-mainframe`.
+- **References:** machines 3-5 (uxv.md:193-219); lines 4, 8, 12-17, 42; *Family steps*; `uev/photonics.js:25`; S0-5.
+- **Depends on:** F1, F2 (mainframe unhidden, GT--'s recipe cut); A3, A4 for inputs.
+- **Invariants:**
+  - the crucible is a catalyst;
+  - spent flux → A2's cascade Pb row;
+  - the mainframe only from this row.
+- **Acceptance:**
+  - `gtnn:spintronic_mainframe` is obtainable at `uxv` and accepted by a GTM recipe that asks for `#gtceu:circuits/uxv`;
+  - the package deletes F2's class B rule for the mainframe chain.
+- **Tests:** T0. T1: `gg_test_uxv_spin_logic`, band assigned by integrator. Doubt: our row's `gtnn:spintronic_mainframe` (plain, no NBT) satisfies `#gtceu:circuits/uxv` in an assembly-line recipe (S0-5 proved the tag on GT--'s own item).
+- **Commits:** 2.
+- **Serial:** owns `photonics_uev.json`. Pair: A6.
+
+#### A6. Sensor and MNT (machines 6, 7; lines 18, 24, 43)
+
+- **Objective:**
+  - the SHeQUID works (c1 `weak_link_cell`, c2 `shequid_gyro`) and the `grindless:uxv_sensor` recipe (own file: gyro, `nv_diamond_chip`, `mtj_die`, UIV sensor *(tune)*);
+  - the MNT collider (c1-c3, `gas_stopping_cell` as catalyst; c1 also returns `spent_actinide_target`);
+  - line 43's stopping cell (own file).
+- **`<name>`:** `shequid_mnt`.
+- **Allowed (extra):**
+  - `uv/cold.js` (`:55`) c6: He-II → isotopically pure He-II;
+  - `iv/uranium_cycle.js` (`:44`) c10: depleted UF₆ → `u238_ion_source`;
+  - `tables/accelerators.json` (synchrotron) c8: `u238_ion_source` → `u238_beam_charge`;
+  - pinned tests `uv-cold`, `uev-electron_beam`, `uiv-memories_cryostat`, `uiv-metallic_hydrogen`, `uev-isotopes`, `uhv-transcurium`, `uiv-uiv_components`, `uhv-antimatter`, `uiv-tfln_femtosecond`, `uv-accelerators`, `uv-validator`.
+- **References:** machines 6-7 (uxv.md:220-238); lines 18, 24, 43; `uv/accelerators.js:34`; Monifactory's components pattern (CREDITS).
+- **Depends on:** F1; A1 (`cm248_target`), A3 (`sin_membrane`, `rf_carpet_board`, `nanoaperture_array`), A4 (`mtj_die` comes from A4's stacks after A3's etch).
+- **Invariants:**
+  - the sensor uses no Vela or Cas A product (bootstrap);
+  - He boil-off → UV cold;
+  - MNT fragments leave as `mnt_product_gas` (A1's partitioning row).
+- **Acceptance:** `uxv_sensor`, `island_nuclide` and `island_chart` are obtainable at `uxv`; controllers 7, 8 and 10-21 become craftable.
+- **Tests:** T0. T1: `gg_test_uxv_shequid_mnt`, band assigned by integrator. Doubt: the collider's chained circuits keep the `gas_stopping_cell` (catalyst) and consume the beam charge and the target in one run, returning the spent target.
+- **Commits:** 2.
+- **Serial:** owns `uv/cold.js`, `iv/uranium_cycle.js` and `accelerators.json` in Wave A. Pair: A5.
+
+#### A7. Mk6 stellar burning ring (machine 9; lines 26-29, 38)
+
+- **Objective:**
+  - `gtceu:uxv_fusion_reactor` via `registerFusionTier(GTValues.UXV, ' (UXV)')` in `startup_scripts/grindless/uxv/fusion_mk6.js` (`uev/fusion.js:55`, UIV-A9's Mk5 file as merged), with `grindless:uxv_fusion_casing`;
+  - `tables/fusion_mk6.json` c1-c4 (*Fusion*);
+  - the casing chain of line 38: `w184_cvi_preform` → `wf_rhea_billet` (UIV) → casing (own file);
+  - DEC rows in `zpm/fusion.js` (array at `:149-170`, keyed by plasma): the four ash plasmas → EU + ash;
+  - quench caster c3-5 (`zpm/fusion.js:97`): He-burning ash → `gtceu:carbon_12` + `gtceu:oxygen_16`; C ash → Ne, Na, Mg; O ash → `si28_ash`, S, P.
+- **`<name>`:** `fusion_mk6`.
+- **Allowed (extra):** `zpm/fusion.js` (the two arrays); `tables/fusion_mk6.json` (new); pinned tests `zpm-fusion`, `uev-fusion` and UIV-A9's fusion test (tier list only).
+- **References:** machine 9 (uxv.md:249-258); *Fusion*; lines 26-29, 38; DECISIONS.md:500; FusionReactorMachine.java :185, :276, :294-298, :326-327 as uiv.md cites; S0-4.
+- **Depends on:** F1, S0-4, UIV-A9; A1 (W-184), A3 (CVI); reachable after A8, B3 and B4 (hull, motor, pump, field generator).
+- **Invariants:**
+  - written final, not in `power/generators.js`;
+  - storage and starts are long;
+  - the Mk4 and Mk5 are untouched;
+  - c1 returns 95% of the CNO cut;
+  - Si-28 to stock for OpV.
+- **Acceptance:** the ring forms with 16 UXV energy hatches, stores 10,240,000,000 EU and runs c1-c4. DEC rows return EU and ash; the quench caster splits all three ashes.
+- **Tests:** T0. T1: `gg_test_uxv_fusion_mk6`, band assigned by integrator. Doubt: our pattern and casing on the third ring hold 10.24 G and start c4 at 10 G as long, with four rows that collide with no older fuel (beyond S0-4's bare registration).
+- **Commits:** 2.
+- **Serial:** owns `zpm/fusion.js`. Pair: A8.
+
+#### A8. UXV parts (lines 34-37; robot arm)
+
+- **Objective:**
+  - `uxv_electric_motor`, `uxv_electric_pump`, `uxv_electric_piston`, `uxv_conveyor_module` and `uxv_robot_arm` (the arm is an assembly with no line of its own), in `server_scripts/grindless/uxv/uxv_parts.js` (assembly line, the Monifactory pattern);
+  - their older rows.
+- **`<name>`:** `uxv_parts`.
+- **Allowed (extra):**
+  - `tables/magnet_works.json` c8: `tetrataenite_lamination` → `tetrataenite_rotor`;
+  - `luv/hts_magnet_works.js` (`:32`) c6: strand wire + lamination → `strand_stator`;
+  - `luv/coated_conductor_line.js` (`:32`) c4: strand wire → `strand_tape`;
+  - in the own file: hot strip mill (`grindless:tetrataenite` → `tetrataenite_lamination`; `lasagna_plate` → `alip_duct`), NaK (UHV's `sodium_potassium`, `uhv/mercury.js`, reused if its recipe exists; else a mixer row from ordinary Na and K);
+  - pinned tests `zpm-magnet_works`, `hts_magnet_works`, `luv_a4_fixture`, `uev-wireless`, `uhv-wireless`, `uiv-metallic_hydrogen`, `uiv-uiv_components`, `uv-wireless`, `wireless_network`, `luv-cryogenics`, `luv-foundation`.
+- **References:** lines 34-37; *Older machines*; `zpm/magnet_works.js:27`; `uiv/uiv_components.js` (UIV parts, the pattern).
+- **Depends on:** F1; A3 (melts, crystals); reachable after B4 (strand wire, lasagna).
+- **Invariants:**
+  - Na is ordinary sodium (never Mk6 ash);
+  - scrap and offcuts re-melted;
+  - no part takes the emitter or a Cas A product.
+- **Acceptance:** the five parts are obtainable at `uxv-vela`. C1 confirms the Mk6 controller then needs nothing from Cas A.
+- **Tests:** T0. T1: none (assembly-line rows; the UIV components proof).
+- **Commits:** 2.
+- **Serial:** owns `magnet_works.json` in Wave A (B3 follows), `hts_magnet_works.js` and `coated_conductor_line.js`. Pair: A7.
 
 <!-- CONTINUE -->
