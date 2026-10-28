@@ -97,7 +97,8 @@ test('the hot cell\'s boron-10 trifluoride has a destination: the reactor\'s cir
 
 test('the line: GTM\'s EnTED composition, the billet, 16 wires and the sheath back', () => {
   const steps = M.recipes.filter((r) => r.type === 'powder_in_tube');
-  assert.deepEqual(steps.map((r) => [r.name, r.circuit]), [['ented_powder', 1], ['pit_billet', 2], ['ented_wire', 3], ['rtan_wire', 4], ['mgb2_wire', 5]]);
+  // UEV-A3 adds the (La,Y)H10 superhydride wire at circuit 6
+  assert.deepEqual(steps.map((r) => [r.name, r.circuit]), [['ented_powder', 1], ['pit_billet', 2], ['ented_wire', 3], ['rtan_wire', 4], ['mgb2_wire', 5], ['lay_wire', 6]]);
   assert.deepEqual(row('ented_powder').itemsIn.map((x) => [x.id, x.count]), [['gtceu:enriched_naquadah_dust', 4], ['gtceu:trinium_dust', 3],
     ['gtceu:europium_dust', 2], ['gtceu:duranium_dust', 1]]);
   assert.deepEqual(row('ented_powder').itemsOut, [{ id: 'grindless:ented_powder', count: 10 }]);

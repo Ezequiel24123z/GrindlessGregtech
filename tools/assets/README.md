@@ -1257,3 +1257,44 @@ powershell -NoProfile -ExecutionPolicy Bypass -File tools\assets\Build-UEVElectr
 |---|---|
 | `block/multiblock/electron_beam_furnace/overlay_front*.png`, `block/multiblock/single_crystal_foundry/overlay_front*.png` | The two controller faces: still, active and active emissive. |
 | `item/*.png` (33, listed by `-Credits`) | 6N Hf/Ta/Nb/Re, the Zr/Hf and Ta/Nb intermediates, YSZ, the SX blade stages, gate, dross, skull, pump impeller, Brayton wheel and the Nb3Sn cavity. |
+
+## ZPM Assembly Hall (MEGA-7)
+
+Procedural, drawn by `Build-MegaAssemblyHallTextures.ps1`; nothing is copied from another mod. The controller face of `gtceu:assembly_hall` (assembler and circuit assembler modes, run inside a cleanroom); still, active and emissive frames.
+
+```powershell
+powershell -NoProfile -ExecutionPolicy Bypass -File tools\assets\Build-MegaAssemblyHallTextures.ps1
+powershell -NoProfile -ExecutionPolicy Bypass -File tools\assets\Build-MegaAssemblyHallTextures.ps1 -Credits
+```
+
+| File (under `textures/`) | Notes |
+|---|---|
+| `block/multiblock/assembly_hall/overlay_front*.png` | The Assembly Hall controller face: still, active and active emissive. |
+
+## UEV Megabar Press and items (UEV-A3)
+
+Procedural, drawn by `Build-UEVMegabarTextures.ps1`; nothing is copied from another mod. The controller face of `gtceu:megabar_press` (still, animated active and emissive frames) and the 12 items of the superhydride and nanotwinned diamond lines.
+
+```powershell
+powershell -NoProfile -ExecutionPolicy Bypass -File tools\assets\Build-UEVMegabarTextures.ps1
+powershell -NoProfile -ExecutionPolicy Bypass -File tools\assets\Build-UEVMegabarTextures.ps1 -Credits
+```
+
+| File (under `textures/`) | Notes |
+|---|---|
+| `block/multiblock/megabar_press/overlay_front*.png` (+ `.mcmeta`) | The Megabar Press controller face: still, active and active emissive. |
+| `item/*.png` (12, listed by `-Credits`) | La-Y alloy ingot and foil, trimethyl borate ampoule, sodium hydride, borohydride and methoxide, ammonia borane charge, nanodiamond dust and pellet, nanotwinned diamond, its anvil and bit. |
+
+## UEV heavy-ion machines and items (UEV-A2)
+
+Procedural, drawn by `Build-UEVSuperheavyTextures.ps1`; nothing is copied from another mod. The controller faces of `gtceu:heavy_ion_cyclotron`, `gtceu:recoil_separator` and `gtceu:superheavy_chemistry_lab` (still, animated active and emissive frames) and the 12 items of the superheavy lines.
+
+```powershell
+powershell -NoProfile -ExecutionPolicy Bypass -File tools\assets\Build-UEVSuperheavyTextures.ps1
+powershell -NoProfile -ExecutionPolicy Bypass -File tools\assets\Build-UEVSuperheavyTextures.ps1 -Credits
+```
+
+| File (under `textures/`) | Notes |
+|---|---|
+| `block/multiblock/{heavy_ion_cyclotron,recoil_separator,superheavy_chemistry_lab}/overlay_front*.png` (+ `.mcmeta`) | The three controller faces: still, active and active emissive. |
+| `item/*.png` (12, listed by `-Credits`) | Target wheel blank and activated wheel, sealed capsule, the five superheavy atom samples (Fl, Lv, Ts, Og, Mc), polycarbonate foil, ion-tracked foil, etched membrane and berkelium oxide. |

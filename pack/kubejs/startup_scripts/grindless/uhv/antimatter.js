@@ -1,4 +1,4 @@
-// priority: -7600
+// priority: -7668
 // -----------------------------------------------------------------------------------------------
 // UHV's antimatter and Casimir machines (docs/eras/uhv.md, machines 13 and 17, lines 27 and 28; package UHV-A6): the positron
 // accumulator and the Casimir array, their recipe types, the package's own items and the 99.999 % neon. The recipes come from
