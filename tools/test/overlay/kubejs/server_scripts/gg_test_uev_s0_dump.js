@@ -95,7 +95,6 @@
       check('s0_1_registered_' + id.substring(5), ok, ok ? 'block, item and machine definition exist' : 'MISSING')
     })
     try { note('s0_1_high_tier_content', 'machines.highTierContent = ' + Java.loadClass('com.gregtechceu.gtceu.config.ConfigHolder').INSTANCE.machines.highTierContent) } catch (e) { }
-    var uiv = ids(R, /x/, 0)
     var casing = ['gtceu:uiv_machine_casing', 'gtceu:uiv_machine_hull', 'gtceu:uev_machine_casing', 'gtceu:uhv_machine_casing', 'gtceu:uhv_machine_hull']
     casing.forEach(function (id) { note('s0_1_exists_' + id.substring(5), String(R.BLOCKS.containsKey(rl(id)))) })
     var uivAny = ids(R.BLOCKS, /uiv/, 20)
@@ -121,6 +120,20 @@
         ' fluid ' + R.FLUIDS.containsKey(rl('gtceu:' + name)) : 'not in GTMaterials')
     })
     note('s0_1_materials_found', found + ' of ' + MATERIALS.length)
+    ;['plutonium', 'polycarbonate', 'polyvinyl'].forEach(function (w) {
+      note('s0_1_alt_' + w, 'items ' + ids(R.ITEMS, new RegExp(w), 12).join(', ') + ' / fluids ' + ids(R.FLUIDS, new RegExp(w), 12).join(', '))
+    })
+    var made = {}
+    recipes().forEach(function (r) {
+      try {
+        if (r.outputs === undefined) return
+        var out = items(r, 'out')
+        if (/gtnn:optical_(computer|mainframe)/.test(out)) made[String(r.getId())] = describe(r)
+      } catch (e) { }
+    })
+    var keys = Object.keys(made).sort()
+    note('s0_1_optical_recipes', keys.length + ' recipes output gtnn:optical_computer or optical_mainframe')
+    keys.slice(0, 6).forEach(function (k) { note('s0_1_optical_recipe', made[k]) })
   }
 
   // ---------------------------------------------------------------- S0-3 / S0-11
@@ -148,10 +161,10 @@
       var ok = pl !== null && pl !== undefined
       check('s0_3_place_' + id.substring(10), ok, ok ? planetInfo(pl) : 'not loaded')
       if (!ok) return
-      var orbit = String(pl.orbitWorld ? pl.orbitWorld() : '')
-      var dimOk = false
+      var orbitKey = pl.orbitWorld()
+      var orbit = String(orbitKey.location())
       var dims = array(S.server.levelKeys()).map(function (k) { return String(k.location()) })
-      var want = [String(orbit), String(pl.world ? pl.world() : '')]
+      var want = [orbit, String(pl.level().location())]
       var present = want.map(function (w) { return w + ':' + (dims.indexOf(w) >= 0) })
       check('s0_3_dimensions_' + id.substring(10), want.every(function (w) { return dims.indexOf(w) >= 0 }), present.join(', '))
       try {
@@ -160,7 +173,7 @@
           ', temperature ' + pl.temperature() + ', solar_power ' + pl.solarPower() + ', days_in_year ' + pl.daysInYear())
       } catch (e) { note('s0_11_figures_' + id.substring(10), 'accessor failed ' + e) }
       try {
-        var back = PD.getPlanetFromOrbit(rl(orbit))
+        var back = PD.getPlanetFromOrbit(orbitKey)
         check('s0_3_from_orbit_' + id.substring(10), back !== null && back !== undefined, 'getPlanetFromOrbit(' + orbit + ') = ' + String(back))
       } catch (e) { check('s0_3_from_orbit_' + id.substring(10), false, String(e)) }
     })
@@ -282,7 +295,7 @@
     }
     ;['wireGtSingle', 'wireGtDouble', 'wireGtQuadruple', 'wireGtOctal', 'wireGtHex', 'cableGtSingle', 'cableGtDouble', 'cableGtQuadruple', 'cableGtOctal', 'cableGtHex'].forEach(function (p) {
       try {
-        var stack = CH.get(TP[p], m)
+        var stack = CH.get(TP[p], m, 1)
         var empty = stack === null || stack.isEmpty()
         check('s0_9_' + p, !empty && (p === 'wireGtSingle' || p === 'cableGtSingle' || true), empty ? 'no item' : String(R.ITEMS.getKey(stack.getItem())))
       } catch (e) { check('s0_9_' + p, false, 'lookup failed ' + e) }

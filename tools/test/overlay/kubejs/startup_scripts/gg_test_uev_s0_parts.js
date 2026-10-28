@@ -176,7 +176,7 @@
       var FRM = Java.loadClass('com.gregtechceu.gtceu.common.machine.multiblock.electric.FusionReactorMachine')
       FRM.registerFusionTier(UEV, ' (UEV)')
       var CAS = 'gtceu:fusion_casing_mk3'
-      var floor = Pat.oneOf(Pat.block(CAS), Pat.part('energy_input', { min: 1, max: 16 }))
+      var floor = Pat.part('energy_input', {})
       var SPEC = {
         slices: [
           ['EEEEE', 'CCCCC', 'EEEEE'],

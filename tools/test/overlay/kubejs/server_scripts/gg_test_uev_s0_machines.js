@@ -114,7 +114,13 @@
     }
     return m.isFormed()
   }
-  function why(m) { try { return String(m.getMultiblockState().error) } catch (e) { return 'unknown' } }
+  function why(m) {
+    try {
+      var err = m.getMultiblockState().error
+      var p = err.getPos()
+      return String(err.getErrorInfo().getString()) + ' at ' + (p ? p.getX() + ',' + p.getY() + ',' + p.getZ() : '?')
+    } catch (e) { return 'unknown ' + e }
+  }
   function field(o, name) {
     try {
       var v = o[name]
@@ -154,7 +160,7 @@
     var controller = null
     var count = 0
     cells.forEach(function (c) {
-      c.x = cx - (c.ci - ctrl.ci)
+      c.x = cx + (c.ci - ctrl.ci)
       c.y = cy + (c.ri - ctrl.ri)
       c.z = cz - (c.si - ctrl.si)
     })
@@ -177,6 +183,36 @@
     })
     put(controller.x, controller.y, controller.z, id + '[facing=north]')
     return { pos: pos(controller.x, controller.y, controller.z), blocks: count + 1 }
+  }
+
+  // placement from the preview shape (GTM machines without a lib/patterns description); hatchFor(cellId) returns a replacement block id or null
+  function placeShape(id, cx, cy, cz, hatchFor) {
+    var def = Java.loadClass('com.gregtechceu.gtceu.api.registry.GTRegistries').MACHINES.get(new (classes().RL)(id))
+    var blocks = array(def.getMatchingShapes())[0].getBlocks()
+    var cells = []
+    var ctrl = null
+    for (var x = 0; x < blocks.length; x++) for (var y = 0; y < blocks[x].length; y++) for (var z = 0; z < blocks[x][y].length; z++) {
+      var info = blocks[x][y][z]
+      if (info === null || info === undefined) continue
+      var state = info.getBlockState()
+      var bid = String(Block.getId(state.getBlock()))
+      if (bid === 'minecraft:air') continue
+      var cell = { x: x, y: y, z: z, state: state, id: bid }
+      if (bid === id) ctrl = cell
+      cells.push(cell)
+    }
+    var count = 0
+    var out = null
+    cells.forEach(function (c) {
+      var px = cx + c.x - ctrl.x, py = cy + c.y - ctrl.y, pz = cz + c.z - ctrl.z
+      if (!inBand(px, py, pz)) throw new Error('refused: ' + px + ',' + py + ',' + pz + ' is outside the band')
+      var rep = c === ctrl ? null : hatchFor(c.id)
+      if (rep) put(px, py, pz, rep + '[facing=north]')
+      else S.level.setBlock(pos(px, py, pz), c.state, 3)
+      count++
+      if (c === ctrl) out = pos(px, py, pz)
+    })
+    return { pos: out, blocks: count }
   }
 
   function placeCheck(u, placed) {
@@ -202,6 +238,10 @@
     { name: 'assembly_line', machine: 'gtceu:assembly_line', hatch: HATCH2, ampsWant: 2, x: 30495, z: 20 }
   ]
   function s1Build(u) {
+    if (u.machine === 'gtceu:assembly_line') {
+      placeCheck(u, placeShape(u.machine, u.x, 74, u.z, function (id) { return /energy_input_hatch/.test(id) ? u.hatch : null }))
+      return
+    }
     placeCheck(u, placeMachine(u.machine, u.x, 74, u.z, function (c) {
       if (c.sym.kind === 'part' && c.sym.ability === 'energy_input') return u.hatch
       return null
@@ -239,7 +279,7 @@
   function s6Build(u) {
     var n = 0
     placeCheck(u, placeMachine('gtceu:gg_uev_s0_fusion', u.x, 80, u.z, function (c) {
-      if (c.ch === 'E' && n < 16) { n++; return HATCH16 }
+      if (c.ch === 'E') { n++; return HATCH16 }
       return null
     }))
     u.hatchesPlaced = n
