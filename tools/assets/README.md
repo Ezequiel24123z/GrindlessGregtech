@@ -1408,3 +1408,16 @@ powershell -NoProfile -ExecutionPolicy Bypass -File tools\assets\Build-UEVSirius
 | File (under `textures/`) | Notes |
 |---|---|
 | `block/multiblock/{white_dwarf_spectrograph,degenerate_harvester,containment_works}/overlay_front*.png` (+ `.mcmeta`) | The three Sirius B controller faces: still, active and active emissive. |
+
+## LuV Mega Chemical Complex (MEGA-6)
+
+Procedural, drawn by `Build-MegaChemicalComplexTextures.ps1`; nothing is copied from another mod. The controller face of `gtceu:mega_chemical_complex` (the large chemical reactor and the composed PTFE, epoxy and para-aramid lines, coil-scaled parallels times the parallel hatch); still, active and emissive frames.
+
+```powershell
+powershell -NoProfile -ExecutionPolicy Bypass -File tools\assets\Build-MegaChemicalComplexTextures.ps1
+powershell -NoProfile -ExecutionPolicy Bypass -File tools\assets\Build-MegaChemicalComplexTextures.ps1 -Credits
+```
+
+| File (under `textures/`) | Notes |
+|---|---|
+| `block/multiblock/mega_chemical_complex/overlay_front*.png` | The Mega Chemical Complex controller face: a PTFE door with a reaction column between two coil rings; still, active and active emissive. |

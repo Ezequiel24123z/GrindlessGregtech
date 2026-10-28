@@ -1,3 +1,4 @@
+// priority: 7350
 // Gregtech Grindless - names and tooltips of the LuV Mega Chemical Complex (startup_scripts/grindless/luv/mega_chemical_complex.js).
 //
 //   gtceu:mega_chemical_complex   (machine name + 4 tooltip lines, en_us and es_es)

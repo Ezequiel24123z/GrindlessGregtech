@@ -1717,6 +1717,17 @@
 			y: 36.0d
 		}
 		{
+			icon: "gtceu:mega_chemical_complex"
+			id: "1C43863D7E45C52E"
+			rewards: [{ id: "7B59B64AC46BE1A5", type: "xp", xp: 10 }]
+			shape: "gear"
+			size: 1.5d
+			subtitle: "LuV, Grindless"
+			tasks: [{ id: "2BE2B54AAEC7D458", item: "gtceu:mega_chemical_complex", type: "item" }]
+			x: 4.0d
+			y: 36.0d
+		}
+		{
 			icon: "gtceu:microgravity_smelter"
 			id: "2AE297B417663143"
 			rewards: [{ id: "48812BF96C1CC6D9", type: "xp", xp: 10 }]
@@ -1724,7 +1735,7 @@
 			size: 1.5d
 			subtitle: "LuV, Grindless"
 			tasks: [{ id: "750B846C58E1BA18", item: "gtceu:microgravity_smelter", type: "item" }]
-			x: 4.0d
+			x: 6.0d
 			y: 36.0d
 		}
 		{
@@ -1735,7 +1746,7 @@
 			size: 1.5d
 			subtitle: "LuV, Grindless"
 			tasks: [{ id: "2B241773755796E2", item: "gtceu:optical_miner", type: "item" }]
-			x: 6.0d
+			x: 8.0d
 			y: 36.0d
 		}
 		{
@@ -1746,7 +1757,7 @@
 			size: 1.5d
 			subtitle: "LuV, Grindless"
 			tasks: [{ id: "31D3F783BA5AB5E8", item: "gtceu:orbital_solar_station", type: "item" }]
-			x: 8.0d
+			x: 10.0d
 			y: 36.0d
 		}
 		{
@@ -1757,7 +1768,7 @@
 			size: 1.5d
 			subtitle: "LuV, Grindless"
 			tasks: [{ id: "6A9B0D743A16ACB0", item: "gtceu:organoid_lab", type: "item" }]
-			x: 10.0d
+			x: 12.0d
 			y: 36.0d
 		}
 		{
@@ -1768,7 +1779,7 @@
 			size: 1.5d
 			subtitle: "LuV, Grindless"
 			tasks: [{ id: "17AEDD3B1EEC91D2", item: "gtceu:volcanic_intake", type: "item" }]
-			x: 12.0d
+			x: 14.0d
 			y: 36.0d
 		}
 		{
@@ -1779,7 +1790,7 @@
 			size: 1.5d
 			subtitle: "LuV, Grindless"
 			tasks: [{ id: "51D02FBEC200949F", item: "gtceu:wake_shield_facility", type: "item" }]
-			x: 14.0d
+			x: 16.0d
 			y: 36.0d
 		}
 		{
@@ -1790,7 +1801,7 @@
 			size: 1.5d
 			subtitle: "LuV, Grindless"
 			tasks: [{ id: "56E78CE393436490", item: "gtceu:zero_g_crystal_grower", type: "item" }]
-			x: 16.0d
+			x: 18.0d
 			y: 36.0d
 		}
 		{
@@ -1801,7 +1812,7 @@
 			size: 1.25d
 			subtitle: "LuV, GregTech"
 			tasks: [{ id: "2D06F196E24ECA50", item: "gtceu:active_transformer", type: "item" }]
-			x: 18.0d
+			x: 20.0d
 			y: 36.0d
 		}
 		{
@@ -1812,7 +1823,7 @@
 			size: 1.25d
 			subtitle: "LuV, GT Community Additions"
 			tasks: [{ id: "7B21572375D3E2C3", item: "gtca:advanced_ebf", type: "item" }]
-			x: 20.0d
+			x: 22.0d
 			y: 36.0d
 		}
 		{
@@ -1823,7 +1834,7 @@
 			size: 1.25d
 			subtitle: "LuV, GT--"
 			tasks: [{ id: "7BEC3A88E2F1EE99", item: "gtnn:circuit_assembly_line", type: "item" }]
-			x: 22.0d
+			x: 24.0d
 			y: 36.0d
 		}
 		{
@@ -1834,8 +1845,8 @@
 			size: 1.25d
 			subtitle: "LuV, GregTech"
 			tasks: [{ id: "6C8630F5D02E070E", item: "gtceu:data_bank", type: "item" }]
-			x: 24.0d
-			y: 36.0d
+			x: 2.0d
+			y: 38.0d
 		}
 		{
 			icon: "gtceu:ev_fluid_drilling_rig"
@@ -1845,7 +1856,7 @@
 			size: 1.25d
 			subtitle: "LuV, GregTech"
 			tasks: [{ id: "359B441D1CD7426C", item: "gtceu:ev_fluid_drilling_rig", type: "item" }]
-			x: 2.0d
+			x: 4.0d
 			y: 38.0d
 		}
 		{
@@ -1856,7 +1867,7 @@
 			size: 1.25d
 			subtitle: "LuV, GT--"
 			tasks: [{ id: "5D3A6ED560E1C13F", item: "gtnn:large_dehydrator", type: "item" }]
-			x: 4.0d
+			x: 6.0d
 			y: 38.0d
 		}
 		{
@@ -1867,7 +1878,7 @@
 			size: 1.25d
 			subtitle: "LuV, GregTech"
 			tasks: [{ id: "54F9BBDF568E163C", item: "gtceu:large_mixer", type: "item" }]
-			x: 6.0d
+			x: 8.0d
 			y: 38.0d
 		}
 		{
@@ -1878,7 +1889,7 @@
 			size: 1.25d
 			subtitle: "LuV, GregTech"
 			tasks: [{ id: "5AE8179449593ED4", item: "gtceu:luv_large_miner", type: "item" }]
-			x: 8.0d
+			x: 10.0d
 			y: 38.0d
 		}
 		{
@@ -1889,7 +1900,7 @@
 			size: 1.25d
 			subtitle: "LuV, GregTech"
 			tasks: [{ id: "675114A4C225050B", item: "gtceu:plasma_large_turbine", type: "item" }]
-			x: 10.0d
+			x: 12.0d
 			y: 38.0d
 		}
 		{
@@ -1900,7 +1911,7 @@
 			size: 1.25d
 			subtitle: "LuV, GregTech"
 			tasks: [{ id: "4C77CA0C00F8880E", item: "gtceu:power_substation", type: "item" }]
-			x: 12.0d
+			x: 14.0d
 			y: 38.0d
 		}
 		{
@@ -1911,7 +1922,7 @@
 			size: 1.25d
 			subtitle: "LuV, Gregicality Rocketry"
 			tasks: [{ id: "4D95F1E100FB0DC2", item: "gcyr:space_station_packager", type: "item" }]
-			x: 14.0d
+			x: 16.0d
 			y: 38.0d
 		}
 		{

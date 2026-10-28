@@ -65,7 +65,8 @@
     { "type": "gtceu:closed_loop_cooling", "source": "server_scripts/grindless/luv/helium_refrigerator.js makes one run per live vacuum freezer recipe that takes liquid helium" },
     { "type": "gtceu:polymer_works", "source": "server_scripts/grindless/mv/mega_polymer_works.js composes GTM's live polyethylene and rubber lines into one recipe each (tables/mega_polymer_works.json, lib/compose.js)" },
     { "type": "gtceu:ore_refinery", "source": "server_scripts/grindless/ev/mega_ore_refinery.js composes GTM's live raw ore line (macerator, plain-water ore washer, thermal centrifuge, macerator) into one recipe per ore (tables/mega_ore_refinery.json, lib/compose.js)" },
-    { "type": "gtceu:smelting_complex", "source": "server_scripts/grindless/iv/mega_smelting_complex.js composes GTM's live electric blast furnace and vacuum freezer recipes into one recipe per hot ingot (tables/mega_smelting_complex.json, lib/compose.js)" }
+    { "type": "gtceu:smelting_complex", "source": "server_scripts/grindless/iv/mega_smelting_complex.js composes GTM's live electric blast furnace and vacuum freezer recipes into one recipe per hot ingot (tables/mega_smelting_complex.json, lib/compose.js)" },
+    { "type": "gtceu:mega_chemical_complex", "source": "server_scripts/grindless/luv/mega_chemical_complex.js composes GTM's and Gregicality's live chemical reactor lines (PTFE, epoxy, para-aramid) into one recipe each (tables/mega_chemical_complex.json, lib/compose.js)" }
   ],
   "exceptions": [
   { "id": "grindless:itbtc_coated_conductor", "role": "use", "reason": "temporary (LuV-A3): its uses, the HTS coil and the SMES cell, are LuV-A4's magnet works; delete this exception when A4 merges" },
