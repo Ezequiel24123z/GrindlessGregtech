@@ -1,0 +1,5 @@
+{
+  "type": "emi:info",
+  "stacks": ["item:gtceu:sic_fibre_plant"],
+  "text": ["emi.grindless.info.sic_fibre_plant.0"]
+}

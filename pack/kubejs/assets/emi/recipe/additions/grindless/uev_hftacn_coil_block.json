@@ -1,0 +1,5 @@
+{
+  "type": "emi:info",
+  "stacks": ["item:grindless:hftacn_coil_block"],
+  "text": ["emi.grindless.info.hftacn_coil_block.0"]
+}

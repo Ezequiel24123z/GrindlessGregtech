@@ -1312,3 +1312,17 @@ powershell -NoProfile -ExecutionPolicy Bypass -File tools\assets\Build-UEVPhoton
 |---|---|
 | `block/multiblock/{snspd_foundry,vdw_stacker,photonic_integration_hall}/overlay_front*.png` (+ `.mcmeta`) | The three controller faces: still, active and active emissive. |
 | `item/*.png` (29, listed by `-Credits`) | Float-zone silicon boule and wafer, the SDD and SiN wafer steps, the WSi wafer, nanowire wafer and SNSPD die, borazine, the hBN films and emitter chip, the graphene transfer foils, film, encapsulated graphene and modulator, 7N indium, the InAs quantum-dot and micropillar wafers, the waveguide circuit and the quantum photonic chip. |
+
+## UEV composites machines and items (UEV-A5)
+
+Procedural, drawn by `Build-UEVCompositesTextures.ps1`; nothing is copied from another mod. The controller faces of `gtceu:nitride_magnet_works`, `gtceu:sic_fibre_plant` and `gtceu:cvi_furnace` (still, animated active and emissive frames) and the 19 items of the HfTaCN, Fe16N2, SiC fibre and Wf/W lines. The HfTaCN coil block borrows GTM's tritanium coil texture (F1); the SiC/SiC plate, Wf/W tile, bonded magnet and UEV motor textures are F1's.
+
+```powershell
+powershell -NoProfile -ExecutionPolicy Bypass -File tools\assets\Build-UEVCompositesTextures.ps1
+powershell -NoProfile -ExecutionPolicy Bypass -File tools\assets\Build-UEVCompositesTextures.ps1 -Credits
+```
+
+| File (under `textures/`) | Notes |
+|---|---|
+| `block/multiblock/{nitride_magnet_works,sic_fibre_plant,cvi_furnace}/overlay_front*.png` (+ `.mcmeta`) | The three controller faces: still, active and active emissive. |
+| `item/*.png` (19, listed by `-Credits`) | Ta2O5 dust, the HfTaC blend and carbide, crude and milled HfTaCN, the HfTaCN heating element, carbonyl and reduced iron powder, strain-annealed Fe16N2 powder, polydimethylsilane and polycarbosilane, green, cured, plain and BN-coated SiC fibre, the SiC fibre preform, coated W wire, the W fibre preform and the FFKM seal. |
