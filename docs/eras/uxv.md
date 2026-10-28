@@ -375,7 +375,7 @@ Placement per DECISIONS.md:508. Circuits are taken by each package after `git gr
 | GW detector (LuV, `luv/ganymede.js:48`) | Vela strain record | `vela_glitch_timing` → `vela_glitch_record` (data) | arm chart |
 | Eu reductor (ZPM, `zpm/europium.js:105`) | Dy oxide; Dy metal | depleted liquor → Dy₂O₃ (c10); Dy₂O₃ + La → Dy (c11, as c6 does for Tb; Tb and Gd rows exist, `:107-119`; Y₂O₃ and La₂O₃ are the cascade's c11, as built) | DyScO₃, Terfenol-D |
 | Magnet works (ZPM, `zpm/magnet_works.js:27`) | rotor; encoder ring | `tetrataenite_lamination` → `tetrataenite_rotor`; `encoder_ring` → multipole-magnetised | motor, encoder |
-| Quench caster (ZPM, `zpm/fusion.js:97`) | Mk6 ash x3; planar flow casting | He-burning ash → C-12 + O-16; C ash → Ne-20, Na-23, Mg-24; O ash → Si-28, S-32, P-31; Fe-Si-B-Nb-Cu melt → 20 µm `finemet_ribbon` (open question 11) | Mk6 c3, c4; stock; voltage coil |
+| Quench caster (ZPM, `zpm/fusion.js:97`) | Mk6 ash x3; planar flow casting | He-burning ash → C-12 + O-16; C ash → Ne-20, Na-23, Mg-24; O ash → Si-28, S-32, P-31; Fe-Si-B-Nb-Cu melt → 20 µm `finemet_ribbon` (open question 13) | Mk6 c3, c4; stock; voltage coil |
 | Ion implanter (ZPM, `zpm/qubits.js:47`) | ion-beam etch; STNO milling | annealed `mtj_stack_wafer`, `mram_stack_wafer` → etched; defined `stno_stack_wafer` → milled pillars | `mtj_die`, `mram_wafer`, `stno_array` |
 | Actinide partitioning (ZPM, `zpm/actinides.js:85`) | fragments | MNT fragments → Pb, Hg, Pt (the Cm and Es/Fm cuts are as built, UIV-B2) | MNT |
 | Waste retrieval (ZPM, `zpm/actinides.js:58`) | MNT target | activated target → stock | by-product |
@@ -468,7 +468,7 @@ OpV is built right after UXV (user direction). Each OpV line below has its feed,
 
 **Places** with no product of their own: Eta Carinae (N-rich ejecta: second route to the CNO cut), WR 104 (carbon dust), the Crab (a second pulsar), Przybylski's star (unconfirmed actinide lines), 3 Cen A (He-3), SS 433 (jets: OpV), PSR J1719−1438 b (diamond), BPM 37093 (second route to Sirius B's degenerate matter), Pa 30, TMC-1, NGC 7027, Westerlund 1.
 
-**Lines** (the 26 that would reach 69):
+**Lines** (29 judged and not counted; the gap to ~69 is 20):
 
 1. Si-28 from Mk6 oxygen ash as UIV's H-Si28 wafer: second route; the ash is stocked for OpV.
 2. Neon from carbon ash for UIV's solid neon moderator: second route; stock.
@@ -478,24 +478,27 @@ OpV is built right after UXV (user direction). Each OpV line below has its feed,
 6. Skyrmion logic track: a second logic family; MESO is the logic.
 7. YIG/Pt spin Seebeck thermopile: power from heat already counted.
 8. Microquasar jet protons: OpV.
-9. Spin-torque nano-oscillator: nothing needs it.
-10. Antiferromagnet or altermagnet memory: a second memory.
-11. Quantum anomalous Hall interconnect: nothing needs it; the pasta strand is the conductor.
-12. Synthetic tetrataenite by irradiation: second route (LuV meteorite matter).
-13. CNT yarn muscle actuator: second route (UEV).
-14. Pasta core sample as a line: three steps; it is a gate token.
-15. Polar cap electrode as a line: two steps.
-16. Gnocchi to r-process nuclei: second route to UIV line 31.
-17. Corona pairs from Cygnus X-1: second positron route.
-18. Stellar He-3 cut: second route to UIV line 27.
-19. Cas A Fe, Ca, Si, S, Ar: inert; voided.
-20. Eta Carinae nitrogen: second route to the CNO cut.
-21. WR 104 carbon dust: second route to carbon.
-22. Crab pasta: a second pasta source.
-23. Przybylski's star actinides: unconfirmed lines; second route to UIV actinides.
-24. Magnetar field tap: OpV bulge.
-25. Platform supply from the condensation tower: second route to ordinary materials (machine 12's product, not a line).
-26. Assemblies with no feedstock of their own: robot arm, hull, mainframe join, `pasta_strand_repeater`.
+9. Antiferromagnet or altermagnet memory: a second memory.
+10. Quantum anomalous Hall interconnect: nothing needs it; the pasta strand is the conductor.
+11. Synthetic tetrataenite by irradiation: second route (LuV meteorite matter).
+12. CNT yarn muscle actuator: second route (UEV).
+13. Pasta core sample as a line: three steps; it is a gate token.
+14. Polar cap electrode as a line: two steps.
+15. Gnocchi to r-process nuclei: second route to UIV line 31.
+16. Corona pairs from Cygnus X-1: second positron route.
+17. Stellar He-3 cut: second route to UIV line 27.
+18. Cas A Fe, Ca, Si, S, Ar: inert; voided.
+19. Eta Carinae nitrogen: second route to the CNO cut.
+20. WR 104 carbon dust: second route to carbon.
+21. Crab pasta: a second pasta source.
+22. Przybylski's star actinides: unconfirmed lines; second route to UIV actinides.
+23. Magnetar field tap: OpV bulge.
+24. Platform supply from the condensation tower: AE2 relays ship home materials to the far platforms (DECISIONS.md:59; *AE2*), so the tower's cuts are not the only route there; they stay machine 12's product, not a line.
+25. Assemblies with no feedstock of their own: the hull, the mainframe join and `pasta_strand_repeater` (strand wire, `pulsar_timed_repeater`, `mtj_die` and `stno_array`, all made by other lines). The robot arm now has lines 45 and 49, the hatches lines 46 and 48, the mainframe's package line 47.
+26. Dy metal as its own line: a branch of line 36, two steps from line 9's Dy?O?.
+27. TSV silicon interposer: a second route to UIV's `glass_interposer` (UIV line 12); line 47 shields that one instead.
+28. CaF? window for the KrF laser: a second route to UHV's `vuv_caf2_optic` (`uhv/crystals.js:16`).
+29. Neon-burning Mk6 fuel: no product beyond EU (its O-16 and Mg-24 are stock already); silicon burning is OpV's (`si28_ash`).
 
 The seven data chains (arm chart, island chart, glitch record, VLBI record, Ti-44 map, elevator log, bulge chart) do not count either.
 
@@ -604,7 +607,7 @@ Steps count item nodes as uiv.md does: from the first raw or older product, with
 - Lines 32-33: pasta as a drawn conductor and a plate is named fiction on real physics (Caplan 2018).
 - Lines 41-43 are machine parts (UIV counted parts such as line 19's wick and line 20's droplet sheet); each is a real laboratory part: PLD runs on KrF lasers, YIG LPE uses Pt crucibles, MNT products are caught in gas cells.
 - Shared older prefixes count again (Si-28 in lines 6-8 and 44; U-238 flash in 19-20; Ti-50 in 21-22; tetrataenite in 34 and 49; pentlandite in 4 and 42), as UIV counted its CVD diamond prefix in three lines.
-- Line 48's planar flow casting is a new mode on the ZPM quench caster, which quenches plasma ash; a 10⁶ K/s chill wheel is the same job on a melt (open question 11).
+- Line 48's planar flow casting is a new mode on the ZPM quench caster, which quenches plasma ash; a 10⁶ K/s chill wheel is the same job on a melt (open question 13).
 - Lines 44-49 are real hardware: phase-locked STNO arrays (Kaka 2005, Mancoff 2005, Nature 437:389, :393) driving spin waves (Madami 2011, Nat. Nanotech. 6:635); gum metal (Saito 2003, Science 300:464) as the flexspline of a strain-wave gear, as UIV-A8's BMG flexspline (DECISIONS.md:539); β-Ga₂O₃ power transistors (Higashiwaki 2012, APL 100:013504; EFG wafers, Kuramata 2016); mu-metal shielded MRAM packages; Finemet cores (Yoshizawa 1988, J. Appl. Phys. 64:6044) in solid-state transformers; TMR angle encoders.
 - Line 25's Ti-44 activity at game scale is *(tune)*; Cas A holds about 1.5 x 10⁻⁴ M☉ of it (Grefenstette 2014).
 
@@ -664,7 +667,7 @@ Short, in English, each with a small reward. They never block a recipe (rule 5).
 
 ## Validator (`-Tier uxv`)
 
-- **Ti-44, Fm-257, Es-254, Cm-248 and W-184 only from the UEV calutron** (with UIV's and UEV's calutron isotopes as built). Ti-44 only from Cas A knot dust.
+- **Ti-44, Fm-257 and W-184 only from the UEV calutron** (with UIV's and UEV's calutron isotopes as built). Ti-44 only from Cas A knot dust. Es-254 only from the UHV transuranium HDEHP split (UIV-B2) and Cm-248 only from the IV hot cell's Cf-252 decay store (`hot_cell.json:184-191`), both as built; no second route.
 - **Elements 121 and 122 and census III only from the cyclotron, the recoil separator and the chem lab; `island_nuclide` and `island_chart` only from the MNT collider.**
 - **Spintronic intermediates only from their machines:** MTJ, MRAM and SAF stacks from the sputter cluster; oxide films from the PLD chamber; vdW stacks from the stacking cell; tracks from the racetrack fab; YIG from the LPE furnace; gyros from the SHeQUID works.
 - **`gtnn:spintronic_mainframe`:** only from the UEV photonic integration hall row; at `uxv`; GT--'s own recipe stays removed (F2).
@@ -678,7 +681,7 @@ Short, in English, each with a small reward. They never block a recipe (rule 5).
   No Earth recipe takes a Vela or Cas A product before its substage; `gtceu:uxv_machine_hull`, the UXV hatches, the Mk6 and every UXV component except the sensor are held to `uxv-vela`, and `uxv_emitter` to `uxv-cas-a`.
 - **Long values:** the c10 row's EU/t and the 16 A UXV hatch buffer are read as long (S0-2); no recipe EU/t is above 2^31.
 - **Nothing hand-gathered;** no OpV item in a UXV recipe (the OpV casing is only researched).
-- **C1 re-counts** the lines' nodes (263 steps, 43 lines), the 132 crossings and the 46 older machines.
+- **C1 re-counts** the lines' nodes (359 steps, 49 lines, average 7.33, none under 5), the 178 crossings (44 machines of UEV or older) and the 46 older machines with a mode, by UIV's method (*New process lines*).
 
 ## Mods and integration
 
@@ -716,7 +719,7 @@ Short, in English, each with a small reward. They never block a recipe (rule 5).
 
 | Risk | Effect | Mitigation |
 |---|---|---|
-| **Lines 43 against ~69 (x0.93 of UIV's 46)** | the rule 7 guideline is missed in the measure the user stressed | every missing line named under Considered and dropped; open question 9 (default accept, no padding) |
+| **Lines 49 against ~69 (x1.07 of UIV's 46)** | the rule 7 guideline is missed in the measure the user stressed; the average (7.33) holds | every missing line named under Considered and dropped; open question 9 (default accept, no padding) |
 | 21 multiblocks against ~30 | size target missed | per item under Considered and dropped; open question 1 |
 | A third tier on UEV's builders fails (S0-1) | no UXV voltage | ON with mass hiding (orchestrator) |
 | A 2^31 recipe EU/t or 16 A UXV hatch overflows (S0-2) | gate cannot hold | 15 A = 2,013,265,920 EU/t, time scaled to the same EU *(tune)* |
@@ -741,7 +744,10 @@ Short, in English, each with a small reward. They never block a recipe (rule 5).
 | Controllers 1-6 | UIV hull, `gtnn:optical_mainframe`, UIV components | `uxv` | no |
 | `mgo_target` (MTJ die, sensor) | magnesite through EV, IV, UV plants | `uxv` | no: never Mk6 ash (fixed in this design) |
 | `uxv_sensor` | `mtj_die`, SHeQUID gyro, `nv_diamond_chip` | `uxv` | no |
-| `gtnn:spintronic_mainframe` | machines 1-5, home older plants | `uxv` | no |
+| `gtnn:spintronic_mainframe` | machines 1-5, home older plants; `shielded_interposer` (mu-metal through UEV, EV plants; UIV `glass_interposer`); magnonic bus with `stno_array` (UIV Si-28 wafer, machine 1 c4) | `uxv` | no: every input is home or UIV |
+| `ga2o3_power_die` | ordinary Ga, UHV crystal growth, UV MOCVD, UEV electron beam furnace, UHV foundry | `uxv` | no |
+| `uxv_strain_wave_gear`, `tmr_encoder` (arm) | `six_n_niobium` (as built), UV powder bed, EV hot strip mill; LuV tetrataenite, ZPM magnet works, `mtj_die` | `uxv` (the arm at `uxv-vela`) | no |
+| `uxv_voltage_coil` (hatches) | `finemet_ribbon` (UIV levitation melter, ZPM quench caster c6), UEV nitride anneal, strand wire (Vela) | `uxv-vela` | no: the hatches are held there already |
 | Controllers 7, 8, 10-21 | UIV hull, 2 spintronic mainframes, `uxv_sensor`, UIV components | `uxv` (built at home, carried) | no |
 | `frc_cartridge` (Vela travel) | disk plasma skimmed on `mh_winding` (UIV), never pasta | `uxv` | no |
 | `cnt_whipple_shield` (Cas A travel) | UHV tether works, RHEA plate (UIV), `whipple_shield_casing` (LuV); no lasagna | `uxv` | no |
@@ -778,7 +784,7 @@ UIV's *Common to every package* (uiv.md:981-1018) applies with `uiv` replaced by
 - **Invariants, always:**
   - no UXV recipe takes an OpV-only input (`gtceu:opv_machine_casing` is only researched) or anything in *Reserve for OpV* except as listed there;
   - no Earth, Mercury or Cygnus recipe takes a Vela or Cas A product before its substage;
-  - Ti-44, Fm-257, Es-254, Cm-248 and W-184 only from the calutron; elements 121 and 122 and census III only from the cyclotron, the recoil separator and the chem lab;
+  - Ti-44, Fm-257 and W-184 only from the calutron; Es-254 and Cm-248 only as built (UHV transuranium, IV hot cell c8); elements 121 and 122 and census III only from the cyclotron, the recoil separator and the chem lab;
   - the Mk6, its DEC rows, the BZ dynamo and the polar cap tap are written final, not in `power/generators.js`'s list;
   - no recipe EU/t above 2^31; only B6's c10 row reaches it (S0-2);
   - the pump's sodium is ordinary sodium and the MgO comes from magnesite (never Mk6 ash);
@@ -802,31 +808,31 @@ UIV's *Common to every package* (uiv.md:981-1018) applies with `uiv` replaced by
 
 | Type (where its rows live) | In use | UXV |
 |---|---|---|
-| Calutron (`tables/isotopes.json`) | 1-9, 20-26 | A1 10-13; B5 14 |
-| Cyclotron, recoil separator, chem lab (`tables/superheavy.json`) | 1-7, 20-25 | A1 8-11 per type |
+| Calutron (`tables/isotopes.json`) | 1-9, 20-26 | A1 10, 13; B5 14 |
+| Cyclotron, recoil separator, chem lab (`tables/superheavy.json`) | 1-7, 20-25 | A1 8-9 (cyclotron, recoil separator), 8-10 (chem lab) |
 | Transuranium (`tables/transcurium.json`) | 0-6 | A1 7-9 |
-| Actinide partitioning, waste retrieval (`zpm/actinides.js:58`, `:85`) | 1-5 | A1 6-12 |
-| Electron beam furnace (`tables/electron_beam.json`) | 0-7, 23, 25, 26 | A3 8-21 |
-| Nitride magnet works, CVI (`tables/composites.json`) | 0-6 | W 7; A3 8-15 |
+| Actinide partitioning, waste retrieval (`zpm/actinides.js:58`, `:85`) | 1-5 | A1 6 each |
+| Electron beam furnace (`tables/electron_beam.json`) | 0-7, 23, 25, 26 | A3 8-21, 27-29 |
+| Nitride magnet works, CVI (`tables/composites.json`) | 0-6 | W 7; A3 8-16 |
 | Crystal growth (`tables/crystals.json`) | 0-9, 24 | A3 10-17 |
 | Megabar (`tables/megabar.json`) | 0-3 | A3 4 |
-| Levitation melter (`tables/levitation_melter.json`) | 1-5 | A3 6-9 |
-| Foundry (`tables/photonics.json`) | 0-13 | A3 14-16 |
-| MOCVD (`uv/photonics.js:143`) | 1-11 | A3 12-13 |
-| Ion implanter (`zpm/qubits.js:47`) | 1-4, 6, 7 | A3 8-9 |
+| Levitation melter (`tables/levitation_melter.json`) | 1-5 | A3 6-10 |
+| Foundry (`tables/photonics.json`) | 0-13 | A3 14-19 |
+| MOCVD (`uv/photonics.js:143`) | 1-11 | A3 12-15 |
+| Ion implanter (`zpm/qubits.js:47`) | 1-4, 6, 7 | A3 8-10 |
 | Photonic hall (`tables/photonics_uev.json`) | 0-6 | A5 7 |
 | Extraction cascade (`ev/extraction_cascade.js:92`) | 1-2, 5-13 | A2 14-21; B5 22 |
 | Platinum plant (`ev/platinum_plant.js:598`) | 1-4, 7-9 | A2 10-13 |
-| Powder bed (`tables/am_powders.json`) | 1-7 | A2 8-15 |
+| Powder bed (`tables/am_powders.json`) | 1-7 | A2 8-16 |
 | Zone refining (`uv/detectors.js:56`) | 1-3, 6, 7 | A2 8-9 |
 | Eu reductor (`zpm/europium.js:105`) | 1-9 | A2 10-11 |
 | Cryogenic plant, fluorspar kiln | none (rows keyed by input) | A2: distinct inputs |
-| Hot strip mill (generated, `ev/combined_cycle_and_hot_mill.js:464`) | own file | A2, A8: first free in their own files |
+| Hot strip mill (generated, `ev/combined_cycle_and_hot_mill.js:464`) | own file | A2, A3, A8: first free in their own files |
 | Cold (`uv/cold.js:55`) | 1-5 | A6 6 |
 | Fuel fabrication (`iv/uranium_cycle.js:44`) | 1-3, 9 | A6 10 |
 | Synchrotron (`tables/accelerators.json`) | 0-4, 7 | A6 8 |
-| Quench caster, DEC (`zpm/fusion.js:97`, `:149-170`) | 1-2 | A7 3-5; DEC rows keyed by plasma |
-| Magnet works (`tables/magnet_works.json`) | 1-7 | A8 8; B3 9 |
+| Quench caster, DEC (`zpm/fusion.js:97`, `:149-170`) | 1-2 | A7 3-6; DEC rows keyed by plasma |
+| Magnet works (`tables/magnet_works.json`) | 1-7 | A8 8, 10; B3 9 |
 | HTS magnet works (`luv/hts_magnet_works.js:32`) | 1-5 | A8 6 |
 | Coated conductor line (`luv/coated_conductor_line.js:32`) | 1-3 | A8 4 |
 | Tether works (`uhv/elevator.js:106`) | 1-6, 16 | B1 7 |
@@ -1014,7 +1020,7 @@ Two at a time, in the pairs of *Parallel and serial*. A row whose input is made 
   - `uv/photonics.js:143` (era array, a `UXV_ROWS` block in the same pattern) c12-15: SiN cap, `sin_membrane`; c14 STNO SiN planarisation; c15 Sn-doped Ga₂O₃ homoepitaxy;
   - `zpm/qubits.js:47` c8-10: MTJ and MRAM ion-beam etch; c10 STNO pillar milling;
   - `server_scripts/grindless/uxv/spin_rows.js`: slicing and polishing to `dysco3_substrate`, `ggg_wafer` and (010) `ga2o3_wafer`, the hBN leach, the WTe₂ and FGT anneals, the W-184 wire, the hot strip mill rows (mu-metal ingot → hot band → `mu_metal_foil`) and the drawn shield can (GTM types, first free circuits);
-  - pinned tests for these tables: `uev-barnard`, `uev-electron_beam`, `uev-sirius`, `uiv-levitation_melter`, `uev-composites`, `uiv-uiv_components`, `uiv-wireless`, `uev-earth_orbit`, `uhv-crystals`, `uhv-photonics`, `uiv-mainframe`, `uiv-memories_cryostat`, `uev-megabar`, `uev-photonics`, `uhv-power_devices`, `uiv-beuv_stm`, `uiv-isotopes`, `uiv-tfln_femtosecond`, `zpm-qubits`, `uhv-betavoltaics`, `uv-detectors`, `uv-fusion`.
+  - pinned tests for these tables: `uev-barnard`, `uev-electron_beam`, `uev-sirius`, `uiv-levitation_melter`, `uev-composites`, `uiv-uiv_components`, `uiv-wireless`, `uev-earth_orbit`, `uhv-crystals`, `uhv-photonics`, `uiv-mainframe`, `uiv-memories_cryostat`, `uev-megabar`, `uev-photonics`, `uhv-power_devices`, `uiv-beuv_stm`, `uiv-isotopes`, `uiv-tfln_femtosecond`, `zpm-qubits`, `uhv-betavoltaics`, `uv-detectors`, `uv-fusion`, `uv-photonics`.
 - **References:** the lines above; *Older machines*; `uev/electron_beam.js:23`; `uev/composites.js:22`; `uhv/crystals.js:28`; `uhv/photonics.js:32`; `uv/photonics.js:133`, `:143`.
 - **Depends on:** F1; W (on `composites.json`); A2 for the reachability of inputs; A4 for `stno_stack_wafer` (the c27 row reads its F1 id; C1 checks reachability).
 - **Invariants:**
@@ -1099,11 +1105,11 @@ Two at a time, in the pairs of *Parallel and serial*. A row whose input is made 
   - the casing chain of line 38: `w184_cvi_preform` → `wf_rhea_billet` (UIV) → casing (own file);
   - DEC rows in `zpm/fusion.js` (array at `:149-170`, keyed by plasma): the four ash plasmas → EU + ash;
   - quench caster c3-5 (`zpm/fusion.js:97`): He-burning ash → `gtceu:carbon_12` + `gtceu:oxygen_16`; C ash → Ne, Na, Mg; O ash → `si28_ash`, S, P;
-  - quench caster c6 (same array; line 48, open question 11): A3's Finemet melt → 20 µm amorphous `finemet_ribbon` by planar flow casting; trim → re-melted.
+  - quench caster c6 (same array; line 48, open question 13): A3's Finemet melt → 20 µm amorphous `finemet_ribbon` by planar flow casting; trim → re-melted.
 - **`<name>`:** `fusion_mk6`.
 - **Allowed (extra):** `zpm/fusion.js` (the two arrays); `tables/fusion_mk6.json` (new); pinned tests `zpm-fusion`, `uev-fusion` and UIV-A9's fusion test (tier list only).
 - **References:** machine 9 (uxv.md:249-258); *Fusion*; lines 26-29, 38; DECISIONS.md:500; FusionReactorMachine.java :185, :276, :294-298, :326-327 as uiv.md cites; S0-4.
-- **Depends on:** F1, S0-4, UIV-A9; A1 (W-184), A3 (CVI); reachable after A8, B3 and B4 (hull, motor, pump, field generator).
+- **Depends on:** F1, S0-4, UIV-A9; A1 (W-184), A3 (CVI, c10 Finemet melt); reachable after A8, B3 and B4 (hull, motor, pump, field generator).
 - **Invariants:**
   - written final, not in `power/generators.js`;
   - storage and starts are long;
@@ -1307,7 +1313,7 @@ B1 opens both places. B2 and B3 work at Cygnus X-1 orbit (UIV's platform) and ca
 
 - **Objective:**
   - `-Tier uxv` with the rules of *Validator*;
-  - re-count the lines' nodes (43 lines, 263 steps), the 132 crossings and the 46 older machines;
+  - re-count the lines' nodes (49 lines, 359 steps, average 7.33), the 178 crossings and the 46 older machines, by UIV's method;
   - the reachability of every F1 id at its substage;
   - the *Bootstrap check* table.
 - **Allowed:** `tools/analysis/tiers/uxv.json` (new), `tools/analysis/test/uxv-validator.test.mjs`, and the validator's era list (one line).
@@ -1340,12 +1346,14 @@ Order: S0 (one worker) → F1 → F2 ∥ W → M1 → A1 ∥ A2 → A3 ∥ A4 �
 | `tables/gate.json` | B1 → B6 |
 | `lib/parallel_hatch.js` | M1 alone |
 | `zpm/fusion.js` A7; `zpm/actinides.js` A1; `tables/photonics.json`, `tables/electron_beam.json`, `tables/crystals.json`, `uv/photonics.js` A3; `tables/photonics_uev.json` A5 | one writer each |
-| hot strip mill rows | each package's own file (A2, A8) |
+| hot strip mill rows | each package's own file (A2, A3, A8) |
+
+A3 ? A4 holds: A3's c27 row reads `stno_stack_wafer` by its F1 id and writes none of A4's files; C1 checks the reachability. A8 needs A2, A3 and A4 merged, which the order gives; B4 needs A3 (die, anneal) and A7 (ribbon), merged in Wave A.
 
 ## Decisions proposed
 
 - 2026-10-28 UXV route: home spintronics, the SHeQUID sensor and superheavies III; Cygnus X-1 orbit for star lifting and disk skimming; the Kerr sling (UIV probe bay mode + warp gate c8/c9) to Vela (nuclear pasta) and Cassiopeia A (Ti-44); gate c10 at Cygnus returns `bulge_chart`. Substages `uxv`, `uxv-vela`, `uxv-cas-a`.
-- 2026-10-28 UXV size: 21 multiblocks, 43 lines (263 steps, average 6.1), 132 crossings, 46 older machines. Rule 7's ~69 lines and ~30 machines are missed on purpose, with no padding; every missing item is named under *Considered and dropped*.
+- 2026-10-28 UXV size: 21 multiblocks (growth goes to lines and crossings, DECISIONS.md:455, :497), 49 lines (359 steps, average 7.33 against UIV's 7.2, counted by UIV's method), 178 crossings with UEV and older (x1.78), 46 older machines. Rule 7's ~69 lines and ~30 machines are missed with no padding; every missing item is named under *Considered and dropped*.
 - 2026-10-28 UXV hull and hatches: `highTierContent` stays off; UEV's builders take a third tier (`.tiers(UEV, GTValues.UIV, GTValues.UXV)`). The hull sits on GTM's `uxv_machine_casing` (UIV gate research) with `lasagna_plate` and strand cable and is held to `uxv-vela`.
 - 2026-10-28 UXV circuit: `gtnn:spintronic_mainframe`, unhidden at `uxv`, made only by our UEV photonic hall row; GT--'s recipe cut.
 - 2026-10-28 UXV Mk6: `registerFusionTier(12)`, the stellar burning ring (fiction), four fuels from a massive star's sequence (hot CNO, triple-alpha, carbon, oxygen burning); 10,240,000,000 EU storage; starts 6-10 G as long; DEC and quench caster rows.
@@ -1369,8 +1377,9 @@ Order: S0 (one worker) → F1 → F2 ∥ W → M1 → A1 ∥ A2 → A3 ∥ A4 �
 5. **The Mk6 at UXV rather than OpV?** **Default: yes**; OpV gets antimatter power.
 6. **M2's overclock?** **Default: as the stellar forge** (mega.md 5).
 7. **Keep the polar cap tap** (a second far generator)? **Default: keep**; Vela's source (rule 8).
-8. **Cm-248 already registered by an older era?** **Default: reuse it**; F1 registers only what S0-1 shows missing.
-9. **Lines: 43 against ~69?** **Default: accept, no padding**; growth resumes at OpV with the antimatter and exotic matter lines.
+8. **Cm-248:** settled by the dump; `gtceu:curium_248_dust` is as built (IV hot cell c8, `hot_cell.json:184-191`), so F1 registers no Cm-248. Open only if the decay store's rate starves line 23: **default: tune its time, no second route** *(tune)*.
+9. **Lines: 49 against ~69?** **Default: accept, no padding** (average 7.33 holds, crossings x1.78); growth resumes at OpV with the antimatter and exotic matter lines.
 10. **Keep the condensation tower** (its condensates feed syngas and stock)? **Default: keep.**
 11. **The UIV gamma laser cavity's id** (uiv.md:439 names the item, not the id)? **Default: B5 reads the id UIV-B3 ships.**
 12. **The Cas A sweeper on wireless case 11?** **Default: yes**, at or under 4 A x V[UIV], so Cas A does not wait for Vela.
+13. **Planar flow casting (line 48) on the ZPM quench caster** (a new mode on a plasma-ash quencher)? **Default: yes, A7's c6**; fallback a UIV levitation melter row with a chill wheel, in A3.
