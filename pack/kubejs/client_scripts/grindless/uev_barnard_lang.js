@@ -1,3 +1,4 @@
+// priority: 5138
 // Gregtech Grindless - names and tooltips of UEV's Barnard b (startup_scripts/grindless/uev/barnard.js; package UEV-B3):
 //
 //   block.gtceu.barnard_core_drill, block.gtceu.carbonyl_refinery, gtceu.barnard_core_drilling, gtceu.carbonyl_refining   machine and recipe type names

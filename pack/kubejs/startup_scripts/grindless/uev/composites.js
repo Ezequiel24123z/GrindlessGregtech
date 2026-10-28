@@ -1,4 +1,4 @@
-// priority: -7512
+// priority: -7493
 // -----------------------------------------------------------------------------------------------
 // UEV's magnets and composites (docs/eras/uev.md, machines 8-10, lines 14-17 and 35; package UEV-A5): the nitride magnet works, the SiC fibre
 // plant and the CVI furnace, their recipe types, the package's own items and the few GT materials GTM does not have. The recipes come from

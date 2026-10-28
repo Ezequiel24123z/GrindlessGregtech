@@ -1,4 +1,4 @@
-// priority: -7500
+// priority: -7431
 // -----------------------------------------------------------------------------------------------
 // Small Steam multiblock family (GTL idea, docs/research/leisure.md 4.2: "small steam multiblock family
 // ... 8 parallels over the single-block recipe", GTLCore LargeSteamParallelMultiblockMachine - idea only,

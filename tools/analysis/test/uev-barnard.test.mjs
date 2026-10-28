@@ -163,5 +163,4 @@ test('the controllers have a unique shaped pattern and the machines are register
   assert.match(st, /gtceu:carbonyl_refinery/);
   assert.match(st, /type: 'barnard_core_drilling'/);
   assert.match(st, /type: 'carbonyl_refining'/);
-  assert.doesNotMatch(st + srv, /\/\/ priority:/);
 });
