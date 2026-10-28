@@ -149,7 +149,8 @@ test('exotic matter comes only from the Casimir array\'s harvest, with the nucle
   const p = producers('grindless:exotic_matter_cell');
   assert.deepEqual(p.map(([w, r]) => [w.split(':')[0], r.name]), [['antimatter.json', 'harvest']]);
   assert.ok(p[0][0].includes('casimir_cavity'));
-  assert.deepEqual(scriptsNaming('grindless:exotic_matter_cell'), []);
+  // UIV-B1: the relay seed row in uv/starshot.js reads the cell (a consumer, not a maker)
+  assert.deepEqual(scriptsNaming('grindless:exotic_matter_cell'), ['grindless/uv/starshot.js']);
   const h = by(ARR, 'harvest');
   assert.deepEqual(h.kept, [{ id: 'grindless:nuclear_clock', count: 1 }]);
   assert.deepEqual(h.itemsIn, [{ id: 'grindless:casimir_cavity_stack', count: 16, chance: 313 }]);

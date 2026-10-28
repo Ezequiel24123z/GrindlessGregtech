@@ -1,0 +1,5 @@
+{
+  "type": "emi:info",
+  "stacks": ["item:grindless:relay_seed", "item:grindless:launched_relay_seed", "item:grindless:ergosphere_probe"],
+  "text": ["emi.grindless.info.uiv_travel.0"]
+}
