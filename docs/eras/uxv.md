@@ -9,19 +9,19 @@ UXV is the twelfth tier: V[UXV] = 134,217,728 EU/t. The journey calls it "the ga
 
 Everything is built against uiv.md as designed; where a UIV package is not merged yet, the dependency is named (UIV-A10, B1-B5, M2, C1-C3). Nothing in UIV is reworked.
 
-**Size (rule 7):** guidance, never padding. Counted as uiv.md:20-39 counts: a progression multiblock has a product of its own; a line is a real chain of at least 6 steps that ends in a UXV part, a stored item or a fuel; a crossing is a UXV line that consumes, or feeds, a line or machine of UEV or older (UIV is one era back and does not count).
+**Size (rule 7):** guidance, never padding. Counted as uiv.md:20-39 counts: a progression multiblock has a product of its own; a line is a real chain of at least 4 steps (rule 7) that ends in a UXV part, a stored item or a fuel; a crossing is a UXV line that consumes, or feeds, a line or machine of UEV or older (UIV is one era back and does not count).
 
 | | UIV (as designed) | UXV (this design) | Growth | Guideline |
 |---|---|---|---|---|
 | Progression multiblocks | 22 | 21 | x0.95 | ~30 (x1.35) |
-| Process lines | 46 (333 steps, avg 7.2) | 61 (453 steps, avg 7.4) | x1.33 | ~69 (x1.5) |
-| Crossings with lines two or more eras back | 100 (UHV and older) | 152 (UEV and older) | x1.52 | ~150 |
-| Older machines with a new mode | 58 | 45 (about 80 rows) | x0.78 | none |
+| Process lines | 46 (333 steps, avg 7.2) | 43 (264 steps, avg 6.1) | x0.93 | ~69 (x1.5) |
+| Crossings with lines two or more eras back | 100 (UHV and older) | 132 (UEV and older) | x1.32 | ~150 |
+| Older machines with a new mode | 58 | 46 (about 120 rows) | x0.79 | none |
 | Places with a product of their own | 3 | 3 (+ home) | x1.0 | breadth |
 
 **Why 21 machines:** every machine has a route only it gives; the nine candidates that would reach ~30 are second routes to existing products (tetrataenite `luv/foundation.js:12`, CNT muscles `uev/earth_orbit.js:27`), convenience versions or OpV material, listed with reasons under Considered and dropped. A 22nd for parity is an open question (default no).
 
-**Why 61 lines, not 69:** the eight missing lines are each a second route, a data chain or an OpV pre-emption (named one by one under Considered and dropped). Crossings meet the guideline because every UXV line is fed by older plants: the stellar burning ring feeds its own ash back as the next fuel through ZPM and UEV machines, and spintronics pulls on six older eras' chemistry.
+**Why 43 lines, not 69:** this is the headline shortfall, and it is honest. The 26 missing lines are each a second route to a product UXV or an older era already has, a data chain, an assembly with no feedstock, a chain under 4 steps, or OpV material (named one by one under Considered and dropped, Lines). Steps per line (6.1) are also below UIV's 7.2: UIV counted as-built upstream steps more generously, UXV counts from the first older product it touches. Crossings (132, x1.32) come closer because every UXV line is fed by older plants: the stellar burning ring feeds its own ash back as the next fuel through ZPM and UEV machines, and spintronics pulls on six older eras' chemistry. Accepting the count is an open question (default accept: growth resumes with OpV's bulge, journey.md:53).
 
 - complexity.md:97: difficulty is steps, conditions, multiblocks and crossings, never quantity. UXV adds conditions (glitch timing, Roche-lobe lifting, site locks, fuel sequences that need the previous fuel's ash) rather than bigger numbers.
 - No UXV coil: nothing in UXV needs more than the UIV metallic hydrogen coil's 14,400 K.
@@ -196,7 +196,7 @@ UXV recipes run up to 1 A x V[UXV] = 134,217,728 EU/t on two UIV energy hatches,
 **Byproducts:** flake offcuts → recrystallised on the UHV crystal growth furnace (c5 back, 50%).
 **Structure:** 5x3x5 glovebox, cleanroom glass, argon input hatch.
 **Crossings:** UHV crystal growth (CVT crystals), UEV megabar (hBN), UV BN reactor, EV cryogenic plant (argon).
-**Source:** MacNeill 2017 (Nature Phys 13:300); Alghamdi 2019 (Nano Lett 19:4400); Shin 2022 (Adv Mater 34:2101730); Mannix 2022 (Nature Nanotech 17:361).
+**Source:** MacNeill 2017 (Nature Phys 13:300); Alghamdi 2019 (Nano Lett 19:4400); Shin 2022 (Adv Mater); Mannix 2022 (Nature Nanotech 17:361).
 
 ### 4. Racetrack fab: `gtceu:racetrack_fab`, type `gtceu:racetrack_patterning` (Earth)
 
@@ -248,7 +248,7 @@ UXV recipes run up to 1 A x V[UXV] = 134,217,728 EU/t on two UIV energy hatches,
 ### 9. Mk6 fusion ring: `gtceu:uxv_fusion_reactor`, type GTM `gtceu:fusion_reactor` (Earth)
 
 **What it gains:** the "stellar burning ring" (named fiction, DECISIONS.md:502): a second `registerFusionTier(12)` ring that burns a star's sequence, each fuel made from the previous fuel's ash.
-**Recipes:** c1 stellar H cut + CNO cut → helium-4 plasma (67,108,864 EU/t, start 6,000,000,000); c2 triple-alpha fuel + triple-alpha fuel → helium-burning ash plasma (100,663,296 EU/t, start 8,000,000,000); c3 carbon-burning fuel x2 → carbon-burning ash plasma (134,217,728 EU/t, start 9,000,000,000); c4 oxygen-burning fuel x2 → oxygen-burning ash plasma (268,435,456 EU/t, start 10,000,000,000). All *(tune)*; the type takes fluids only, 2 in and 1 out (FusionReactorMachine.java:308-313, :330-349).
+**Recipes:** c1 stellar H cut + CNO cut → `cno_ash_plasma` (67,108,864 EU/t, start 6,000,000,000); c2 triple-alpha fuel + triple-alpha fuel → helium-burning ash plasma (100,663,296 EU/t, start 8,000,000,000); c3 carbon-burning fuel x2 → carbon-burning ash plasma (134,217,728 EU/t, start 9,000,000,000); c4 oxygen-burning fuel x2 → oxygen-burning ash plasma (268,435,456 EU/t, start 10,000,000,000). All *(tune)*; the type takes fluids only, 2 in and 1 out (FusionReactorMachine.java:308-313, :330-349).
 **Byproducts:** plasmas → ZPM DEC rows (`zpm/fusion.js:149-170`) → EU and ash (Fusion).
 **Structure:** GTM fusion ring through the lib tier helper as Mk5 (UIV-A9 as built), `grindless:uxv_fusion_casing`, Mk5 coil, `gtceu:fusion_glass`.
 **Crossings:** ZPM DEC, ZPM quench caster, UEV calutron, UEV electron beam furnace, EV cryogenic plant.
@@ -361,20 +361,21 @@ Placement per DECISIONS.md:508. Circuits are taken by each package after `git gr
 
 | Machine (era, file:line) | Mode | Recipe | Feeds |
 |---|---|---|---|
-| Cryogenic plant (EV, `ev/cryogenic_plant.js:40`) | He-4 polish; O-16 liquefaction | `stellar_helium_cut` → `triple_alpha_fuel`; O-16 → `oxygen_burning_fuel` | Mk6 c2, c4 |
-| Extraction cascade (EV, `ev/extraction_cascade.js:92`) | knot dust; flux dross | `ejecta_knot_dust` → Ti fraction + Si, S, Ca, Fe; LPE dross → Pb | Ti-44 line; YIG |
-| Platinum plant (EV, `ev/platinum_plant.js:598`) | sputter grade; etch recovery | 5N Pt, Ru, Ir → `saf_target_set` feed; etch residue → Pt, Ru | targets |
-| Hot strip mill (EV, `ev/combined_cycle_and_hot_mill.js:464`) | tetrataenite lamination | `grindless:tetrataenite` rod → `tetrataenite_lamination` | motor |
+| Cryogenic plant (EV, `ev/cryogenic_plant.js:40`) | He-4 polish; O-16 liquefaction; Kr; 6N He | `stellar_helium_cut` → `triple_alpha_fuel`; O-16 → `oxygen_burning_fuel`; air → Kr; He → `he_6n` | Mk6 c2, c4; KrF laser; stopping cell |
+| Extraction cascade (EV, `ev/extraction_cascade.js:92`) | knot dust; flux dross; Bi fume | `ejecta_knot_dust` → Ti fraction + Si, S, Ca, Fe; LPE dross → Pb; BFO fume → Bi (columbite split exists, `:166-168`) | Ti-44 line; YIG; MESO |
+| Platinum plant (EV, `ev/platinum_plant.js:598`) | sputter grade; etch and redeposit recovery | 5N Pt, Ru, Ir → `saf_target_set` and `pt_lpe_crucible` feed; etch residue, sputter redeposit (lines 4, 6-8, 10) → Pt, Ru | targets, crucible |
+| Hot strip mill (EV, `ev/combined_cycle_and_hot_mill.js:464`) | lamination; foil; sheet; duct | `grindless:tetrataenite` → `tetrataenite_lamination`; 5N Ta → `ta_foil`; 5N Pt → `pt_sheet`; `lasagna_plate` → `alip_duct` | motor, Ta target, crucible, pump |
 | Syngas plant (HV, `hv/syngas_plant.js:82`) | platform syngas | `volatile_condensate` → syngas | platform plastics |
 | Fuel fabrication (IV, `iv/uranium_cycle.js:44`) | ion-source charge | depleted U → `u238_ion_source` | MNT |
 | Hot cell (IV, `iv/hot_cell.js:36`) | sealed core; spent core | Ti-44 → `ti44_core`; spent core → Ca-44 | gamma laser |
-| Fluorspar kiln (IV, `iv/fluorspar_kiln.js:83`) | MgO calcine | Mg-24 carbonate → 5N MgO | `mgo_target` |
+| Fluorspar kiln (IV, `iv/fluorspar_kiln.js:83`) | oxide calcines; F₂ | Mg-24 carbonate → 5N MgO; DyScO₃, SrRuO₃, La-BFO, GGG oxides; HF → F₂ | targets, substrates, KrF laser |
 | HTS magnet works (LuV, `luv/hts_magnet_works.js:32`) | strand stator | strand wire + lamination → `strand_stator` | motor |
 | Coated conductor line (LuV, `luv/coated_conductor_line.js:32`) | strand tape | strand wire → `strand_tape` | field generator, SMES |
 | GW detector (LuV, `luv/ganymede.js:48`) | Vela strain record | `vela_glitch_timing` → `vela_glitch_record` (data) | arm chart |
+| Eu reductor (ZPM, `zpm/europium.js:105`) | Dy, Y oxides | depleted liquor → Dy₂O₃, Y₂O₃ (Tb, Gd, La rows exist, `:107-119`) | DyScO₃, YIG, Terfenol-D |
 | Magnet works (ZPM, `zpm/magnet_works.js:27`) | rotor | `tetrataenite_lamination` → `tetrataenite_rotor` | motor |
 | Quench caster (ZPM, `zpm/fusion.js:97`) | Mk6 ash x3 | He-burning ash → C-12 + O-16; C ash → Ne-20, Na-23, Mg-24; O ash → Si-28, S-32, P-31 | Mk6 c3, c4; MgO |
-| Ion implanter (ZPM, `zpm/qubits.js:47`) | ion-beam etch | `mtj_stack_wafer` (annealed) → `mtj_die` | sensor, racetrack |
+| Ion implanter (ZPM, `zpm/qubits.js:47`) | ion-beam etch | annealed `mtj_stack_wafer`, `mram_stack_wafer` → etched | `mtj_die`, `mram_wafer` |
 | Actinide partitioning (ZPM, `zpm/actinides.js:85`) | Cm cut; fragments | Cm fraction → calutron; MNT fragments → Pb, Hg, Pt | MNT |
 | Waste retrieval (ZPM, `zpm/actinides.js:58`) | MNT target | activated target → stock | by-product |
 | DEC (ZPM, `zpm/fusion.js:149-170`) | Mk6 plasmas x4 | four plasmas → EU + ash | power, ash |
@@ -386,8 +387,8 @@ Placement per DECISIONS.md:508. Circuits are taken by each package after `git gr
 | Synchrotron (UV, `uv/accelerators.js:34`) | U-238 injector | `u238_ion_source` → `u238_beam_charge` | MNT |
 | Antimatter trap (UV, `uv/accelerators.js:146`) | positron stacking; own file, `.dimension` overworld | slow positrons → `positron_stack` | gamma laser |
 | EHT (UV, `uv/edge.js:46`) | VLBI parallax | → `cygnus_vlbi_record` (data) | arm chart |
-| Crystal growth (UHV, `uhv/crystals.js:28`) | GGG, DyScO₃ (Czochralski); WTe₂, FGT (CVT); recrystallise | five rows | spintronics |
-| Foundry (UHV, `uhv/photonics.js:32`) | MESO integration | `me_switch_wafer` + `sot_readout_stack` → `meso_logic_die` | mainframe |
+| Crystal growth (UHV, `uhv/crystals.js:28`) | GGG, DyScO₃ (Czochralski); WTe₂, FGT (CVT); CaF₂ windows; Terfenol-D, Ni-Mn-Ga (Bridgman); recrystallise | eight rows | spintronics, components, KrF laser |
+| Foundry (UHV, `uhv/photonics.js:32`) | MESO integration; Cu back end; RF carpet | `me_switch_wafer` + `sot_readout_stack` → `meso_logic_die`; MRAM back end; `rf_carpet_board` | mainframe, MRAM, stopping cell |
 | Transuranium (UHV, `uhv/transcurium.js:25`) | molecular plating | Fm-257, Es-254, Cm-248 → targets | superheavies, MNT |
 | Tether works (UHV, `uhv/elevator.js:106`) | Whipple bumper | `cnt_densified_yarn` → `cnt_bumper_weave` | Whipple shield |
 | Warp gate (UHV, `uhv/gate.js:28`) | c8 Vela, c9 Cas A, c10 OpV gate | Gate | travel, gate |
@@ -396,18 +397,18 @@ Placement per DECISIONS.md:508. Circuits are taken by each package after `git gr
 | Recoil separator (UEV, `uev/superheavy.js:21`) | 121, 122 | → recoils | census III |
 | Chem lab (UEV, `uev/superheavy.js:21`) | Es/Fm split; census III | UIV line 32 debris → Es, Fm; recoils → census | superheavies |
 | Megabar (UEV, `uev/megabar.js:23`) | Ba-BN growth | BN + Ba → `hbn_crystal` | vdW |
-| Electron beam furnace (UEV, `uev/electron_beam.js:23`) | apertures, tracks, bus, C-12 vapour | four rows | SHeQUID, racetrack, YIG, Mk6 c3 |
-| Nitride magnet works (UEV, `uev/composites.js:22`) | field anneal; SMES cell | MTJ, MRAM anneal; `uxv_smes_cell` | spintronics, W |
+| Electron beam furnace (UEV, `uev/electron_beam.js:23`) | 5N Co, Fe, Mn, Si, Ta, Ni, Ga; Pt melt; apertures, tracks, waveguides, contacts, ME patterning; C-12 vapour | about 14 rows | targets, SHeQUID, racetrack, YIG, vdW, MESO, Mk6 c3 |
+| Nitride magnet works (UEV, `uev/composites.js:22`) | field anneals; twin training; SMES cell | MTJ, MRAM, SAF, Heusler, SOT anneals; Ni-Mn-Ga twin training; `uxv_smes_cell` | spintronics, conveyor, W |
 | CVI (UEV, `uev/composites.js:22`) | W-184 preform | W-184 fibre → `w184_cvi_preform` | Mk6 casing |
 | Photonic hall (UEV, `uev/photonics.js:25`) | spintronic mainframe | dies → `gtnn:spintronic_mainframe` | circuit |
 | Ergosphere probe bay (UIV-B4) | Kerr sling | `relay_seed` → `launched_relay_seed` | travel |
 | Matrioshka (UIV-A10) | arm chart | three records → `arm_chart` | gate |
 | Neutronium cage (UIV-B2) | pasta caging | phases → caged phases | Vela |
 | R-process decompressor (UIV-B2) | gnocchi | `gnocchi_fragment` → r-process stock | by-product |
-| Levitation melter (UIV-A3) | Heusler | Co, Mn, Si → `heusler_ingot` | MRAM |
+| Levitation melter (UIV-A3) | CoFeB, Heusler, Terfenol-D, Ni-Mn-Ga | four melts → `cofeb_ingot`, `heusler_ingot`, `terfenol_d_ingot`, `ni_mn_ga_ingot` | targets, piston, conveyor |
 | X-ray pulse profiler (UIV-B3) | Ti-44 line map | knot dust sample → `ti44_map` (data) | arm chart |
 
-**Count:** 45 older machines take about 80 rows (39 UEV-and-older machines, 6 UIV). UIV counted 58 machines; UXV leans on fewer machines but harder (152 crossings, Crossings).
+**Count:** 46 older machines take about 120 rows (40 UEV-and-older machines, 6 UIV). UIV counted 58 machines; UXV leans on fewer machines but harder (132 crossings, Crossings).
 
 **File order:** each row goes in the older machine's table or inline array (DECISIONS.md:508) by the package that consumes it; the antimatter trap row goes in the package's own file with `.dimension` and a free circuit. Two packages never append to one table in the same wave (Parallel and serial).
 
@@ -466,7 +467,7 @@ OpV is built right after UXV (user direction). Each OpV line below has its feed,
 
 **Places** with no product of their own: Eta Carinae (N-rich ejecta: second route to the CNO cut), WR 104 (carbon dust), the Crab (a second pulsar), Przybylski's star (unconfirmed actinide lines), 3 Cen A (He-3), SS 433 (jets: OpV), PSR J1719−1438 b (diamond), BPM 37093 (second route to Sirius B's degenerate matter), Pa 30, TMC-1, NGC 7027, Westerlund 1.
 
-**Lines** (the eight that would reach 69):
+**Lines** (the 26 that would reach 69):
 
 1. Si-28 from Mk6 oxygen ash as UIV's H-Si28 wafer: second route; the ash is stocked for OpV.
 2. Neon from carbon ash for UIV's solid neon moderator: second route; stock.
@@ -476,8 +477,26 @@ OpV is built right after UXV (user direction). Each OpV line below has its feed,
 6. Skyrmion logic track: a second logic family; MESO is the logic.
 7. YIG/Pt spin Seebeck thermopile: power from heat already counted.
 8. Microquasar jet protons: OpV.
+9. Spin-torque nano-oscillator: nothing needs it.
+10. Antiferromagnet or altermagnet memory: a second memory.
+11. Quantum anomalous Hall interconnect: nothing needs it; the pasta strand is the conductor.
+12. Synthetic tetrataenite by irradiation: second route (LuV meteorite matter).
+13. CNT yarn muscle actuator: second route (UEV).
+14. Pasta core sample as a line: three steps; it is a gate token.
+15. Polar cap electrode as a line: two steps.
+16. Gnocchi to r-process nuclei: second route to UIV line 31.
+17. Corona pairs from Cygnus X-1: second positron route.
+18. Stellar He-3 cut: second route to UIV line 27.
+19. Cas A Fe, Ca, Si, S, Ar: inert; voided.
+20. Eta Carinae nitrogen: second route to the CNO cut.
+21. WR 104 carbon dust: second route to carbon.
+22. Crab pasta: a second pasta source.
+23. Przybylski's star actinides: unconfirmed lines; second route to UIV actinides.
+24. Magnetar field tap: OpV bulge.
+25. Platform supply from the condensation tower: second route to ordinary materials (machine 12's product, not a line).
+26. Assemblies with no feedstock of their own: robot arm, hull, mainframe join, `pasta_strand_repeater`.
 
-Data chains (arm chart, island chart, glitch record, VLBI record, Ti-44 map, elevator log, bulge chart) and the hull and hatch assemblies do not count.
+The seven data chains (arm chart, island chart, glitch record, VLBI record, Ti-44 map, elevator log, bulge chart) do not count either.
 
 ## Power
 
@@ -518,5 +537,82 @@ The Mk6 is a second `registerFusionTier(12)` ring (`tables/fusion_mk6.json`, A7)
 ## AE2
 
 Nothing new. Stellar cuts and plasmas are fluids in existing fluid cells; caged pasta phases are items; site-locked fluids (`disk_plasma`, `stellar_plasma`) are processed where they are made. No new cell tier, no cross-dimension bridge; wireless energy is the only link between places.
+
+## New process lines
+
+Steps count nodes, as uiv.md does. Numbers in brackets are UXV machines (Our multiblocks); "UIV line n" is uiv.md's line. The Cr column counts crossings: the machines of UEV or older that the line consumes from or feeds (Crossings).
+
+| # | Line | Steps | Cr | By-products → destination |
+|---|---|---|---|---|
+| 1 | CoFeB target: cobaltite → Co (EV extraction cascade) → 5N Co (UEV electron beam furnace) → CoFeB melt with Fe, B (UIV levitation melter) → atomised (UV powder bed) → HIP blank (UV powder bed) → bonded `cofeb_target` | 7 | 3 | spent target → re-pressed (UV powder bed) |
+| 2 | MgO target: carbon-burning ash plasma (9 c3) → Ne/Na/Mg split (ZPM quench caster) → Mg-24 carbonate → 5N MgO (IV fluorspar kiln) → pressed (UV powder bed) → sintered `mgo_target` | 6 | 3 | Ne-20 → stock; Na-23 → line 35; CO₂ → voided (inert) |
+| 3 | Heusler target: Mn, Si → 5N (UEV electron beam furnace) → Co₂MnSi `heusler_ingot` with line 1's Co (UIV levitation melter) → homogenised (UEV nitride magnet works) → atomised (UV powder bed) → HIP `heusler_target` | 6 | 3 | melt skull → re-melted |
+| 4 | SAF target set: PGM residue (EV platinum plant) → Pt, Ru, Ir salts → 5N metals (EV platinum plant) → powders → pressed (UV powder bed) → HIP-bonded `saf_target_set` | 6 | 2 | etch residue → Pt, Ru (EV platinum plant) |
+| 5 | Ta seed target: columbite → Nb/Ta split (EV extraction cascade) → Ta₂O₅ → Ta → 5N Ta (UEV electron beam furnace) → rolled (EV hot strip mill) → bonded `ta_seed_target` | 7 | 3 | Nb → stock |
+| 6 | MTJ die: `grindless:h_si28_wafer` (UIV) → Ta/CoFeB/MgO/CoFeB/Ru stack (1 c1) → field anneal (UEV nitride magnet works) → ion-beam etch (ZPM ion implanter) → SiN cap (UV MOCVD) → probed, diced `mtj_die` | 6 | 4 | redeposit → EV platinum plant |
+| 7 | MRAM wafer: `h_si28_wafer` → Heusler/MgO stack (1 c2) → L2₁ anneal (UEV nitride magnet works) → ion-beam etch (ZPM ion implanter) → Cu back end (UHV foundry) → tested `mram_wafer` | 6 | 4 | as line 6 |
+| 8 | Racetrack chip: `saf_target_set` → SAF track stack (1 c3) → field anneal (UEV nitride magnet works) → tracks written (UEV electron beam furnace) → notch-etched (4 c1) → `racetrack_chip` with `mtj_die` read heads (4 c2) | 6 | 3 | etch residue → EV platinum plant |
+| 9 | DyScO₃: Dy₂O₃ (ZPM Eu reductor) + Sc₂O₃ (EV extraction cascade) → calcined (IV fluorspar kiln) → Czochralski boule (UHV crystal growth) → (110) slices → polished → terrace-annealed `dysco3_substrate` | 6 | 4 | kerf → re-melted |
+| 10 | SrRuO₃ electrode: 5N Ru (line 4) + SrCO₃ → SrRuO₃ (IV fluorspar kiln) → `srruo3_target` (UV powder bed) → film on `dysco3_substrate` (2 c1) → O₂-annealed `srruo3_electrode_wafer` | 5 | 3 | RuO₄ fume → EV platinum plant |
+| 11 | MESO logic die: monazite → La₂O₃ (ZPM Eu reductor) → La-BFO powder with Bi₂O₃, Fe₂O₃ (IV fluorspar kiln) → `la_bfo_target` (UV powder bed) → BFO film on line 10's wafer (2 c2) → CoFe magnet (2 c3) → patterned `me_switch_wafer` (UEV electron beam furnace) → MESO cell with `sot_readout_stack` (UHV foundry) → `meso_logic_die` | 9 | 6 | Bi fume → EV extraction cascade |
+| 12 | hBN flake: air → N₂ (EV cryogenic plant) → BN (UV BN reactor) → Ba-BN charge → HPHT crystal (UEV megabar) → acid-leached `hbn_crystal` → exfoliated `hbn_flake` (3 c3) | 7 | 3 | Ba liquor → recycled |
+| 13 | WTe₂ flake: Te → 7N Te (UV zone refining) → ampoule with W (EV extraction cascade) → CVT crystal (UHV crystal growth) → Te-flux annealed `wte2_crystal` → exfoliated `wte2_flake` (3 c1) | 6 | 3 | I₂ carrier → recovered |
+| 14 | FGT flake: GeO₂ → Ge → 7N Ge, Te (UV zone refining) → Fe₃GeTe₂ charge with 5N Fe (UEV electron beam furnace) → CVT `fgt_crystal` (UHV crystal growth) → exfoliated `fgt_flake` (3 c2) | 6 | 3 | as line 13 |
+| 15 | SOT readout stack: `hbn_flake` → bottom hBN picked up → WTe₂ → FGT → top hBN (3 c4, four transfers in argon from the EV cryogenic plant) → edge contacts (UEV electron beam furnace) → annealed `sot_readout_stack` (UEV nitride magnet works) | 7 | 3 | broken flakes → re-exfoliated |
+| 16 | GGG wafer: gadolinite → Gd₂O₃ (ZPM Eu reductor) → GGG oxide with Ga₂O₃ (IV fluorspar kiln) → Czochralski boule in an Ir crucible (UHV crystal growth; Ir from the EV platinum plant) → (111) slices → polished, O₂-annealed `ggg_wafer` | 6 | 4 | kerf → re-melted |
+| 17 | Magnonic bus: xenotime → Y₂O₃ (ZPM Eu reductor) → `lpe_flux` with Fe₂O₃, PbO-B₂O₃ (5 c1, in a `pt_lpe_crucible`) → YIG film on `ggg_wafer` (5 c2) → annealed → waveguides written (UEV electron beam furnace) → `magnonic_bus` with line 4's Pt antennas | 7 | 3 | spent flux (5 c3) → Pb dross (EV extraction cascade) |
+| 18 | UXV sensor: SiH₂Cl₂ + NH₃ → SiN membrane (UV MOCVD) → back-etched → 70 nm `nanoaperture_array` (UEV electron beam furnace) → `weak_link_cell` (6 c1) → `shequid_gyro` with heat-flushed He-II (UV cold) and `mtj_die` (6 c2) → `uxv_sensor` with `nv_diamond_chip` | 7 | 3 | He-II boil-off → UV cold |
+| 19 | Fm-257 target: Es/Fm debris (UIV line 32) → dissolved (ZPM actinide partitioning) → Es/Fm split (UEV chem lab) → Fm-257 (UEV calutron) → molecular-plated on Ti (UHV transuranium) → sintered `fm257_target` | 6 | 5 | spent target → ZPM waste retrieval; Fm-255 → stock |
+| 20 | Es-254 target: line 19's Es fraction → Es-254 (UEV calutron) → plated (UHV transuranium) → sintered `es254_target` → spent target recovered (ZPM waste retrieval) | 5 | 3 | Es-253 → stock |
+| 21 | Element 121: Ti-50 sponge (UIV line 9) → ion-source charge → Ti-50 beam on `es254_target` (UEV cyclotron) → recoils separated (UEV recoil separator) → caught on foil → `element_121_recoil` (UEV chem lab) | 6 | 3 | target activation → ZPM waste retrieval |
+| 22 | Element 122, census III: Ti-50 beam on `fm257_target` (UEV cyclotron) → recoils (UEV recoil separator) → caught → `element_122_recoil` → `superheavy_census_iii` with line 21's recoil (UEV chem lab) | 5 | 3 | as line 21 |
+| 23 | Cm-248 target: spent MOX → Cm cut (ZPM actinide partitioning) → Cm-248 (UEV calutron) → plated (UHV transuranium) → sintered `cm248_target` → activated target recovered (ZPM waste retrieval) | 6 | 4 | Cm-244, Cm-246 → stock |
+| 24 | Island nuclides: depleted UF₆ → UF₄ → U metal charge (IV fuel fabrication) → U-238 beam (UV synchrotron) → on `cm248_target` (7 c1, through the `gas_stopping_cell`) → thermalised (7 c2) → MR-TOF-selected `island_nuclide` (7 c3) | 7 | 3 | fragments → Pb, Hg, Pt (ZPM actinide partitioning) |
+| 25 | Gamma-ray emitter: Cas A knots → `ejecta_knot_dust` (21) → Ti fraction (EV extraction cascade) → TiCl₄ → Ti-44 (UEV calutron) → sealed `ti44_core` (IV hot cell) → positronium moderated on solid Ne (8 c1) → `positron_stack` (UV antimatter trap) → `gamma_laser_module` with the UIV gamma cavity and `mtj_die` (8 c2) → `uxv_emitter` | 10 | 4 | Si, S, Ar, Ca, Fe → voided (inert); spent core → Ca-44 (IV hot cell) |
+| 26 | Hot CNO fuel: `stellar_plasma` lifted with He coolant (10; UV cold) → H and CNO cuts (11 c1) → burned (9 c1) → `cno_ash_plasma` → EU (ZPM DEC) → He-4 and 95% of the CNO back | 6 | 2 | none; the catalyst returns |
+| 27 | Triple-alpha fuel: He-4 cut (11 c1) with line 26's He-4 → polished `triple_alpha_fuel` (EV cryogenic plant) → burned (9 c2) → ash plasma → EU (ZPM DEC) → C-12 + O-16 (ZPM quench caster) | 6 | 3 | Ne, H frozen out → stock |
+| 28 | Carbon-burning fuel: C-12 (line 27) → vapour-purified `carbon_burning_fuel` (UEV electron beam furnace) → burned (9 c3) → EU (ZPM DEC) → Ne-20, Na-23, Mg-24 (ZPM quench caster) | 5 | 3 | Mg-24 → line 2; Na-23 → line 35 |
+| 29 | Oxygen-burning fuel: O-16 (line 27) → liquefied `oxygen_burning_fuel` (EV cryogenic plant) → burned (9 c4) → EU (ZPM DEC) → Si-28, S-32, P-31 (ZPM quench caster) | 5 | 3 | `si28_ash` → stock for OpV; S, P → stock |
+| 30 | Field generator: `disk_plasma` skimmed on `mh_winding` (13) → filtered (11 c2) → FRC formed (14 c1) → `frc_cartridge` → in a strand coil (strand tape, LuV coated conductor line; wound, ZPM magnet works) → `uxv_field_generator` | 6 | 3 | cartridges also → warp gate c8 (UHV) |
+| 31 | BZ power: `mh_winding` → `disk_plasma` (13) → filtered (11 c2) → `flux_loaded_plasma` (14 c2) → burned at 2^30 EU/t (15) | 5 | 0 | none; the jet carries it off |
+| 32 | Pasta strand: Vela timing (ZPM DSN) → `raw_pasta` (16) → `spaghetti_phase` (17) → caged (UIV neutronium cage) → drawn in an aerogel sheath (18; ZPM aerogel) → `gtceu:pasta_strand_single_wire` | 6 | 2 | gnocchi → r-process stock (UIV decompressor) |
+| 33 | Lasagna plate, UXV hull: `raw_pasta` → `lasagna_phase` (17) → caged (UIV cage) → pressed with `wf_rhea_billet` into `lasagna_plate` (19 c1) → `gtceu:uxv_machine_casing` → `gtceu:uxv_machine_hull` | 6 | 0 | anti-phases → `pasta_core_sample` (17 c2) |
+| 34 | UXV motor: `grindless:tetrataenite` (LuV) → rolled (EV hot strip mill) → laminations → magnetised rotor (ZPM magnet works) → stator of strand tape (LuV coated conductor line, wound on LuV HTS magnet works) → `uxv_electric_motor` | 6 | 4 | lamination scrap → re-melted |
+| 35 | UXV pump: Na-23 (line 28) + K → NaK → ALIP duct rolled from `lasagna_plate` (EV hot strip mill) → three-phase strand coils (LuV coated conductor line; ZPM magnet works) → NaK-filled, sealed → `uxv_electric_pump` | 6 | 3 | none |
+| 36 | UXV piston: Tb₄O₇, Dy₂O₃ (ZPM Eu reductor) → Tb, Dy → Terfenol-D melt (UIV levitation melter) → [112] Bridgman rod (UHV crystal growth) → prestressed in a `lasagna_plate` housing → `uxv_electric_piston` with a strand drive coil (LuV coated conductor line) | 6 | 3 | rod ends → re-melted |
+| 37 | UXV conveyor: Ni, Mn, Ga → 5N (UEV electron beam furnace) → Ni₂MnGa melt (UIV levitation melter) → single crystal (UHV crystal growth) → twin-trained (UEV nitride magnet works) → `uxv_conveyor_module` (MSM elements driven by strand coils, LuV coated conductor line) | 6 | 4 | offcuts → re-melted |
+| 38 | Mk6 casing: scheelite → WO₃ (EV extraction cascade) → W-184 (UEV calutron) → W-184 wire → fibre preform (UEV CVI) → infiltrated `wf_rhea_billet` (UIV) → `uxv_fusion_casing` | 7 | 3 | W-182, W-186 → stock |
+| 39 | SMES cell: strand wire (line 32) → strand tape (LuV coated conductor line) → solenoid (UEV nitride magnet works) → `lasagna_plate` case → He-II cooled (UV cold) → `uxv_smes_cell` | 6 | 3 | none |
+| 40 | Whipple shield: CNT yarn (UHV tether works) → `cnt_densified_yarn` (as built) → `cnt_bumper_weave` (UHV tether works) → on `whipple_shield_casing` with RHEA plate → `cnt_whipple_shield` (spent at warp gate c9, UHV) | 5 | 2 | none |
+| 41 | KrF laser (PLD part): air → Kr (EV cryogenic plant) → KrF premix with F₂ (IV fluorspar kiln) → discharge tube with CaF₂ windows (UHV crystal growth) → pulsed-power head → `krf_excimer_laser` | 6 | 3 | spent premix → F₂ scrubbed (IV) |
+| 42 | LPE crucible: PGM residue → 5N Pt (EV platinum plant) → electron-beam melted (UEV electron beam furnace) → sheet (EV hot strip mill) → spun, welded `pt_lpe_crucible` | 5 | 3 | worn crucible → EV platinum plant |
+| 43 | Gas stopping cell (MNT part): He (UV cold) → 6N He (EV cryogenic plant) → RF carpet board (UHV foundry) → cryogenic cell → `gas_stopping_cell` | 5 | 3 | He → recovered |
+
+**Totals:** 43 lines, 264 steps, an average of 6.1, none under 5 (rule 7's floor is 4); 132 crossings.
+
+**Weakest claims:**
+- Lines 26-29 burn a massive star's sequence in a ring: the reactions are textbook (B²FH 1957), the ring is named fiction.
+- Line 31 is the shortest and has no crossing: power from the Kerr black hole, kept because the BZ dynamo is the Cygnus platform's source (rule 8).
+- Line 33's casing has no crossing: pasta plate is a Vela product; the hull's other inputs are UIV.
+- Lines 32-33: pasta as a drawn conductor and a plate is named fiction on real physics (Caplan 2018).
+- Lines 41-43 are machine parts (UIV counted parts such as line 19's wick and line 20's droplet sheet); each is a real laboratory part: PLD runs on KrF lasers, YIG LPE uses Pt crucibles, MNT products are caught in gas cells.
+- Line 25's Ti-44 activity at game scale is *(tune)*; Cas A holds about 1.5 x 10⁻⁴ M☉ of it (Grefenstette 2014).
+
+## Crossings
+
+A crossing is one (UXV line, older machine) pair from the Cr column; UIV is one era back and does not count (uiv.md counted UHV and older for UIV, so UXV counts UEV and older). The lines table is the list; this is the summary.
+
+| Era | Crossings | Machines met |
+|---|---|---|
+| UEV | 33 | electron beam furnace (12), nitride magnet works (7), calutron (5), chem lab (3), cyclotron (2), recoil separator (2), megabar, CVI |
+| ZPM | 26 | Eu reductor (5), quench caster (4), DEC (4), magnet works (3), actinide partitioning (3), waste retrieval (3), ion implanter (2), DSN, aerogel |
+| EV | 25 | extraction cascade (8), platinum plant (7), cryogenic plant (6), hot strip mill (4) |
+| UV | 17 | powder bed (6), cold (4), zone refining (2), MOCVD (2), BN reactor, synchrotron, antimatter trap |
+| UHV | 16 | crystal growth (7), foundry (3), transuranium (3), warp gate (2), tether works |
+| IV | 8 | fluorspar kiln (6), hot cell, fuel fabrication |
+| LuV | 7 | coated conductor line (6), HTS magnet works |
+| **Total** | **132** | 38 older machines; HV and below give ordinary stock only |
+
+A line that meets one machine twice counts once; a by-product destination counts when it is a row on that machine. C1 checks the pairs against the built rows (Validator).
 
 <!-- CONTINUE -->
