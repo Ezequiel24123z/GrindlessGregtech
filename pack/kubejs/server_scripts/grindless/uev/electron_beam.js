@@ -10,8 +10,8 @@
 //                          niobium cavity into the Nb3Sn cavity (id grindless:srf_cavity/nb3sn_diffusion).
 //   gtceu:chemical_reactor, mixer, assembler, compressor, bender, macerator, electric_blast_furnace   the line steps GTM can run
 //                          (ids grindless:<type>/<name>); the EBF row carries the table's temperature.
-//   crafting               the controllers: UHV hull + 2 UV emitters + 2 UHV circuits (furnace) and UHV hull + 2 UV robot arms + 2 UHV
-//                          circuits (foundry), shaped recipes grindless:crafting/<machine>.
+//   assembly line          the controllers: UHV hull + 2 UV emitters (or robot arms) + 4 UHV circuits + the UV cryomodule and SRF cavities, soldering alloy
+//                          and neutronium, with station research; ids grindless:assembly_line/<machine>.
 //
 // Lookup safety: a recipe whose ingredients are a subset of another's of its type can hide it; checked at load (a clash is an error).
 // Published for the smoke test: global.grindless.electronBeam.recipes, .skipped, .clashes, .controllerRecipes.
@@ -176,13 +176,19 @@
     console.info(LOG + 'electron beam: ' + EB.recipes.length + ' recipes; skipped ' + EB.skipped.length)
   }
 
+  // ASSEMBLY LINE with station research (the UV emitter / robot arm of the machine, scanned into a data module): UHV hull + the
+  // machine's UV tool + 4 UHV circuits + the UV cryomodule and cavities that are its beam optics / pull head + 2 B soldering alloy
+  // + neutronium (the shielding of the chamber). The ids are grindless:assembly_line/<name>.
   function addControllers(event) {
     var HULL = 'gtceu:uhv_machine_hull'
     var EMITTER = 'gtceu:uv_emitter'
     var ARM = 'gtceu:uv_robot_arm'
+    var CRYO = 'grindless:srf_cryomodule'
+    var CAVITY = 'grindless:srf_cavity'
+    var GEAR = 'grindless:near_net_neutronium_gear'
     var defs = [
-      { machine: EB.machines.furnace.machine, parts: [HULL, EMITTER], pattern: [' C ', 'EHE', ' C '], ingredients: { C: '#gtceu:circuits/uhv', E: EMITTER, H: HULL }, name: 'electron_beam_furnace' },
-      { machine: EB.machines.foundry.machine, parts: [HULL, ARM], pattern: [' C ', 'AHA', ' C '], ingredients: { C: '#gtceu:circuits/uhv', A: ARM, H: HULL }, name: 'single_crystal_foundry' }
+      { machine: EB.machines.furnace.machine, tool: EMITTER, parts: [HULL, EMITTER, CRYO, CAVITY, GEAR], ins: [HULL, '2x ' + EMITTER, '4x #gtceu:circuits/uhv', '2x ' + CRYO, '4x ' + CAVITY, '2x ' + GEAR], name: 'electron_beam_furnace' },
+      { machine: EB.machines.foundry.machine, tool: ARM, parts: [HULL, ARM, CRYO, CAVITY, GEAR], ins: [HULL, '2x ' + ARM, '4x #gtceu:circuits/uhv', CRYO, '2x ' + CAVITY, '4x ' + GEAR], name: 'single_crystal_foundry' }
     ]
     EB.controllerRecipes = []
     defs.forEach(function (d) {
@@ -191,8 +197,14 @@
         console.error(LOG + d.name + ' controller recipe skipped, unknown item(s): ' + missing.join(', '))
         return
       }
-      event.recipes.gtceu.shaped(d.machine, d.pattern, d.ingredients).id('grindless:crafting/' + d.name)
-      EB.controllerRecipes.push('grindless:crafting/' + d.name)
+      var id = 'grindless:assembly_line/' + d.name
+      var b = event.recipes.gtceu.assembly_line('grindless:' + d.name)
+      b.itemInputs(d.ins)
+      b.inputFluids(Fluid.of('gtceu:soldering_alloy', 2304), Fluid.of('gtceu:neutronium', 288))
+      b.itemOutputs(d.machine)
+      b.stationResearch(function (r) { return r.researchStack(Item.of(d.tool)).CWUt(64).EUt(491520) })
+      b.EUt(491520).duration(2400)
+      EB.controllerRecipes.push(id)
     })
   }
 

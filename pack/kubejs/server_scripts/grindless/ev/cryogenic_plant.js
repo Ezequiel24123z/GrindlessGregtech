@@ -17,7 +17,8 @@
 // liquid helium -> ingots of 5,000 K or more (IV; GTM's freezer already takes it). Nothing is voided: each output hatch holds one liquid,
 // and a recipe only starts when its liquid has room.
 //
-//   Plant: CRAFTING TABLE, EV hull + GTM vacuum freezer + 2 EV electric pumps + 4 EV circuits.
+//   Plant: ASSEMBLER (grindless:assembler/cryogenic_plant), EV hull + GTM vacuum freezer + 2 EV electric pumps + 4 night-sky radiators
+//          + 8 sintered regolith (the cold hall) + 4 EV circuits + 2 B ammonia (the first coolant charge).
 //   Night-Sky Radiator: ASSEMBLER (MV), 2 aluminium small fluid pipes (the heat pipes) + 4 aluminium plates (the face sheets) + 1 aluminium
 //   frame (the core) + 100 mB ammonia (the heat pipes' working fluid, as in real spacecraft radiators) -> 2 radiators, 120 EU/t, 200 ticks.
 //   The pipe goes first: GTM's frost-proof casing recipe starts with aluminium plates and a frame, and the lookup must keep both.
@@ -66,8 +67,10 @@
   const FRAME = 'gtceu:aluminium_frame'
   const AMMONIA = 'gtceu:ammonia'
 
-  CRYO.craftingRecipes = { plant: 'grindless:crafting/cryogenic_plant', radiator: 'grindless:assembler/night_sky_radiator' }
-  CRYO.craftingParts = [PLANT, RADIATOR, HULL, FREEZER, PUMP, HEAT_PIPE, PLATE, FRAME]
+  const BRICK = 'grindless:sintered_regolith'
+
+  CRYO.craftingRecipes = { plant: 'grindless:assembler/cryogenic_plant', radiator: 'grindless:assembler/night_sky_radiator' }
+  CRYO.craftingParts = [PLANT, RADIATOR, HULL, FREEZER, PUMP, HEAT_PIPE, PLATE, FRAME, BRICK]
 
   // an uncaught error here would stop KubeJS from running the recipe handlers of the scripts that load after this one
   ServerEvents.recipes(function (event) {
@@ -325,12 +328,11 @@
       console.error(LOG + 'cryogenic plant crafting skipped, unknown id(s): ' + missing.join(', '))
       return
     }
-    event.recipes.gtceu.shaped(PLANT, ['CVC', 'PHP', 'C C'], {
-      C: '#gtceu:circuits/ev',
-      V: FREEZER,
-      P: PUMP,
-      H: HULL
-    }).id(CRYO.craftingRecipes.plant)
+    event.recipes.gtceu.assembler('grindless:cryogenic_plant')
+      .itemInputs(HULL, FREEZER, '2x ' + PUMP, '4x ' + RADIATOR, '8x ' + BRICK, '4x #gtceu:circuits/ev')
+      .inputFluids(Fluid.of(AMMONIA, 2000))
+      .itemOutputs(PLANT)
+      .EUt(120).duration(400)
 
     event.recipes.gtceu.assembler('grindless:night_sky_radiator')
       .itemInputs('2x ' + HEAT_PIPE, '4x ' + PLATE, '1x ' + FRAME)
