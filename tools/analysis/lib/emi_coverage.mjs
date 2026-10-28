@@ -389,7 +389,9 @@ export function auditEmiCoverage({ dump, registry, cfg, emi, lang = null, native
   // a pending route waits for a later package of the era under construction: it may only be dropped for our own stacks disabled until
   // their era, and a stale entry (no longer dropped) is a problem, so each one is deleted when its package merges
   // ours: the audited stacks, plus the other forms GTM makes of our materials (a wire, a plate), which the audit does not list
+  // GTM registers the forms of every KubeJS material as gtceu: ids, a grindless: material included
   const ourMaterials = [...(registry.materials ? registry.materials.values() : [])].map((m) => m.name.split(':'))
+    .flatMap(([ns, n]) => (ns === 'gtceu' ? [[ns, n]] : [[ns, n], ['gtceu', n]]))
     .concat([...(registry.modifiedMaterials || [])].map((id) => id.split(':')));
   const ourForm = (k) => {
     const [ns, p] = (k.startsWith(FLUID) ? k.slice(FLUID.length) : k).split(':');
