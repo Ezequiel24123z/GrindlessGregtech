@@ -40,9 +40,10 @@ test('registration: three recipe types and machines, one controller each', () =>
   });
 });
 
-test('the five recipes exist with their circuits; the aerogel run has none', () => {
-  const want = { graphene: 1, nanotube_yarn: 2, archaeal_culture: 1, growth_medium_broth: 2, silica_aerogel: 0 };
-  assert.equal(OC.recipes.length, 5);
+test('the six recipes exist with their circuits; the aerogel run has none', () => {
+  // cnt_sock: UEV-A8's floating-catalyst CNT row (docs/eras/uev.md, A8)
+  const want = { graphene: 1, nanotube_yarn: 2, cnt_sock: 3, archaeal_culture: 1, growth_medium_broth: 2, silica_aerogel: 0 };
+  assert.equal(OC.recipes.length, 6);
   for (const p of OC.recipes) {
     const r = byId(p.recipeId);
     assert.ok(r, p.recipeId + ' added');

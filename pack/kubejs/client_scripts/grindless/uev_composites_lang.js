@@ -1,4 +1,4 @@
-// priority: 5076
+// priority: 5088
 // Gregtech Grindless - names and tooltips of UEV's nitride magnet works, SiC fibre plant and CVI furnace (startup_scripts/grindless/uev/composites.js; package UEV-A5):
 //
 //   block.gtceu.<machine>, gtceu.<recipe type>                    machine and recipe type names

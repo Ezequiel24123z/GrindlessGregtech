@@ -1,0 +1,181 @@
+{
+  "_comment": [
+    "UEV-A8 (docs/eras/uev.md, machines 16 and 17, lines 31, 32, 34, 36, 39 and 40), read by server_scripts/grindless/uev/earth_orbit.js.",
+    "types.<type>.recipes: name, circuit, eut, duration, itemsIn [{id,count,chance?}], kept [same, never consumed], fluidsIn [{id,amount}], charge [fluid not consumed], itemsOut, fluidsOut.",
+    "chance is out of 10000 (omitted = always). circuit 0 = none (GTM's own types only). 'dimension': true makes every recipe of the type carry the Earth-orbit dimension.",
+    "'temp' is the blast furnace temperature of the type. The older machines' rows of these lines are in uv/photonics.js (fibre_draw 6-8), uhv/crystals.js + crystals.json (crystal_growth 6-7) and zpm/outer_chemistry.js (methane_pyrolysis 3).",
+    "Nothing is voided: every spent reagent leaves as a fluid or dust with a user (chlorine, water, salt, hydrogen, iron, recycled kerf)."
+  ],
+  "types": {
+    "quantum_degenerate_gas": {
+      "dataKey": "grindless_quantum_degenerate_gas", "dimension": true,
+      "recipes": [
+        { "name": "degenerate_eos_model", "circuit": 1, "eut": 1966080, "duration": 1200,
+          "itemsIn": [{ "id": "gtceu:lithium_6_dust", "count": 4 }, { "id": "gtceu:potassium_40_dust", "count": 4 }],
+          "kept": [{ "id": "grindless:li_cooling_laser", "count": 1 }, { "id": "grindless:k_cooling_laser", "count": 1 }],
+          "fluidsIn": [], "charge": [{ "id": "gtceu:helium", "amount": 1000 }],
+          "itemsOut": [{ "id": "grindless:degenerate_eos_model", "count": 1 }], "fluidsOut": [] },
+        { "name": "barnard_gravity_survey", "circuit": 2, "eut": 1966080, "duration": 1200,
+          "itemsIn": [{ "id": "grindless:calibrated_gravimeter", "count": 1 }, { "id": "grindless:barnard_core_rock", "count": 4 }],
+          "kept": [], "fluidsIn": [], "charge": [],
+          "itemsOut": [{ "id": "grindless:barnard_gravity_survey", "count": 1 }], "fluidsOut": [] },
+        { "name": "calibrate_gravimeter", "circuit": 3, "eut": 1966080, "duration": 800,
+          "itemsIn": [{ "id": "grindless:atom_interferometer", "count": 1 }],
+          "kept": [{ "id": "grindless:ule_cavity", "count": 1 }], "fluidsIn": [], "charge": [{ "id": "gtceu:helium", "amount": 1000 }],
+          "itemsOut": [{ "id": "grindless:calibrated_gravimeter", "count": 1 }], "fluidsOut": [] }
+      ]
+    },
+    "entanglement_distribution": {
+      "dataKey": "grindless_entanglement_distribution", "dimension": true,
+      "recipes": [
+        { "name": "quantum_repeater_node", "circuit": 1, "eut": 3932160, "duration": 1200,
+          "itemsIn": [{ "id": "grindless:spdc_source", "count": 1 }, { "id": "grindless:eu_yso_boule", "count": 1 }, { "id": "grindless:qd_source", "count": 1 },
+            { "id": "grindless:snspd", "count": 2 }, { "id": "grindless:hollow_core_fibre", "count": 2 }],
+          "kept": [], "fluidsIn": [], "charge": [{ "id": "gtceu:superfluid_helium", "amount": 1000 }],
+          "itemsOut": [{ "id": "grindless:quantum_repeater_node", "count": 1 }], "fluidsOut": [] }
+      ]
+    },
+    "chemical_reactor": {
+      "recipes": [
+        { "name": "cnt_densify", "circuit": 0, "eut": 122880, "duration": 300,
+          "itemsIn": [{ "id": "grindless:cnt_sock", "count": 1 }], "kept": [], "fluidsIn": [{ "id": "gtceu:ethanol", "amount": 500 }], "charge": [],
+          "itemsOut": [{ "id": "grindless:cnt_densified_yarn", "count": 1 }, { "id": "gtceu:iron_dust", "count": 1 }], "fluidsOut": [] },
+        { "name": "gallium_oxide", "circuit": 0, "eut": 122880, "duration": 200,
+          "itemsIn": [{ "id": "gtceu:gallium_dust", "count": 2 }], "kept": [], "fluidsIn": [{ "id": "gtceu:oxygen", "amount": 3000 }], "charge": [],
+          "itemsOut": [{ "id": "grindless:gallium_oxide_dust", "count": 1 }], "fluidsOut": [] },
+        { "name": "tgg_coprecipitate", "circuit": 0, "eut": 122880, "duration": 300,
+          "itemsIn": [{ "id": "grindless:terbium_oxide_dust", "count": 1 }, { "id": "grindless:gallium_oxide_dust", "count": 2 }], "kept": [],
+          "fluidsIn": [{ "id": "gtceu:ammonia", "amount": 1000 }], "charge": [],
+          "itemsOut": [{ "id": "grindless:tgg_hydroxide_cake", "count": 1 }], "fluidsOut": [{ "id": "minecraft:water", "amount": 1000 }] },
+        { "name": "hollow_core_coat", "circuit": 0, "eut": 122880, "duration": 200,
+          "itemsIn": [{ "id": "grindless:drawn_hollow_fibre", "count": 1 }], "kept": [], "fluidsIn": [{ "id": "gtceu:epoxy", "amount": 144 }], "charge": [],
+          "itemsOut": [{ "id": "grindless:hollow_core_fibre", "count": 1 }], "fluidsOut": [] },
+        { "name": "mcp_core_etch", "circuit": 0, "eut": 122880, "duration": 300,
+          "itemsIn": [{ "id": "grindless:mcp_plate", "count": 1 }], "kept": [], "fluidsIn": [{ "id": "gtceu:hydrochloric_acid", "amount": 1000 }], "charge": [],
+          "itemsOut": [{ "id": "grindless:mcp_etched_plate", "count": 1 }, { "id": "gtceu:salt_dust", "count": 1 }], "fluidsOut": [{ "id": "minecraft:water", "amount": 500 }] },
+        { "name": "kh2po4", "circuit": 0, "eut": 122880, "duration": 200,
+          "itemsIn": [{ "id": "gtceu:potassium_hydroxide_dust", "count": 1 }], "kept": [], "fluidsIn": [{ "id": "gtceu:phosphoric_acid", "amount": 1000 }], "charge": [],
+          "itemsOut": [{ "id": "grindless:kh2po4_dust", "count": 1 }], "fluidsOut": [{ "id": "minecraft:water", "amount": 1000 }] },
+        { "name": "ktp_flux", "circuit": 0, "eut": 122880, "duration": 200,
+          "itemsIn": [{ "id": "grindless:kh2po4_dust", "count": 1 }, { "id": "gtceu:rutile_dust", "count": 1 }], "kept": [], "fluidsIn": [], "charge": [],
+          "itemsOut": [{ "id": "grindless:ktp_flux", "count": 2 }], "fluidsOut": [] },
+        { "name": "ule_soot", "circuit": 0, "eut": 122880, "duration": 300,
+          "itemsIn": [{ "id": "gtca:silicon_tetrachloride_dust", "count": 4 }], "kept": [],
+          "fluidsIn": [{ "id": "gtceu:titanium_tetrachloride", "amount": 250 }, { "id": "gtceu:oxygen", "amount": 2000 }], "charge": [],
+          "itemsOut": [{ "id": "grindless:ule_soot", "count": 2 }], "fluidsOut": [{ "id": "gtceu:chlorine", "amount": 2000 }] }
+      ]
+    },
+    "electric_blast_furnace": {
+      "temp": 3600,
+      "recipes": [
+        { "name": "tgg_calcine", "circuit": 0, "eut": 491520, "duration": 400,
+          "itemsIn": [{ "id": "grindless:tgg_hydroxide_cake", "count": 1 }], "kept": [], "fluidsIn": [{ "id": "gtceu:oxygen", "amount": 1000 }], "charge": [],
+          "itemsOut": [{ "id": "gtceu:tgg_dust", "count": 1 }], "fluidsOut": [{ "id": "minecraft:water", "amount": 500 }] },
+        { "name": "fused_silica_tube", "circuit": 0, "eut": 491520, "duration": 300,
+          "itemsIn": [{ "id": "gtceu:silicon_dioxide_dust", "count": 4 }], "kept": [], "fluidsIn": [], "charge": [],
+          "itemsOut": [{ "id": "grindless:fused_silica_tube", "count": 1 }], "fluidsOut": [] },
+        { "name": "hollow_core_cane", "circuit": 0, "eut": 491520, "duration": 400,
+          "itemsIn": [{ "id": "grindless:stacked_preform", "count": 1 }], "kept": [], "fluidsIn": [{ "id": "gtceu:helium", "amount": 500 }], "charge": [],
+          "itemsOut": [{ "id": "grindless:caned_preform", "count": 1 }], "fluidsOut": [{ "id": "gtceu:helium", "amount": 500 }] },
+        { "name": "mcp_fuse", "circuit": 0, "eut": 491520, "duration": 400,
+          "itemsIn": [{ "id": "grindless:mcp_multifibre", "count": 4 }], "kept": [], "fluidsIn": [], "charge": [],
+          "itemsOut": [{ "id": "grindless:mcp_boule", "count": 1 }], "fluidsOut": [] },
+        { "name": "mcp_hydrogen_reduce", "circuit": 0, "eut": 491520, "duration": 400,
+          "itemsIn": [{ "id": "grindless:mcp_etched_plate", "count": 1 }], "kept": [], "fluidsIn": [{ "id": "gtceu:hydrogen", "amount": 1000 }], "charge": [],
+          "itemsOut": [{ "id": "grindless:mcp_reduced_plate", "count": 1 }], "fluidsOut": [{ "id": "minecraft:water", "amount": 1000 }] },
+        { "name": "ule_sinter", "circuit": 0, "eut": 491520, "duration": 600,
+          "itemsIn": [{ "id": "grindless:ule_soot", "count": 2 }], "kept": [], "fluidsIn": [], "charge": [],
+          "itemsOut": [{ "id": "grindless:ule_boule", "count": 1 }, { "id": "gtceu:ule_glass_dust", "count": 1 }], "fluidsOut": [] },
+        { "name": "ule_kerf_remelt", "circuit": 0, "eut": 491520, "duration": 600,
+          "itemsIn": [{ "id": "gtceu:ule_glass_dust", "count": 4 }], "kept": [], "fluidsIn": [], "charge": [],
+          "itemsOut": [{ "id": "grindless:ule_boule", "count": 1 }], "fluidsOut": [] }
+      ]
+    },
+    "cutter": {
+      "recipes": [
+        { "name": "tgg_rods", "circuit": 0, "eut": 122880, "duration": 200,
+          "itemsIn": [{ "id": "grindless:tgg_boule", "count": 1 }], "kept": [], "fluidsIn": [], "charge": [],
+          "itemsOut": [{ "id": "grindless:tgg_rod", "count": 4 }, { "id": "gtceu:tgg_dust", "count": 1 }], "fluidsOut": [] },
+        { "name": "mcp_plates", "circuit": 0, "eut": 122880, "duration": 200,
+          "itemsIn": [{ "id": "grindless:mcp_boule", "count": 1 }], "kept": [], "fluidsIn": [], "charge": [],
+          "itemsOut": [{ "id": "grindless:mcp_plate", "count": 4 }, { "id": "grindless:mcp_lead_glass", "count": 1 }], "fluidsOut": [] },
+        { "name": "ktp_wafers", "circuit": 0, "eut": 122880, "duration": 200,
+          "itemsIn": [{ "id": "grindless:ktp_boule", "count": 1 }], "kept": [], "fluidsIn": [], "charge": [],
+          "itemsOut": [{ "id": "grindless:ktp_wafer", "count": 4 }, { "id": "grindless:ktp_flux", "count": 1 }], "fluidsOut": [] }
+      ]
+    },
+    "lathe": {
+      "recipes": [
+        { "name": "tgg_polish", "circuit": 0, "eut": 122880, "duration": 200,
+          "itemsIn": [{ "id": "grindless:tgg_rod", "count": 1 }], "kept": [], "fluidsIn": [], "charge": [],
+          "itemsOut": [{ "id": "grindless:tgg_polished_rod", "count": 1 }, { "id": "gtceu:tgg_dust", "count": 1 }], "fluidsOut": [] },
+        { "name": "ule_spacer", "circuit": 0, "eut": 122880, "duration": 300,
+          "itemsIn": [{ "id": "grindless:ule_boule", "count": 1 }], "kept": [], "fluidsIn": [], "charge": [],
+          "itemsOut": [{ "id": "grindless:ule_spacer", "count": 1 }, { "id": "gtceu:ule_glass_dust", "count": 1 }], "fluidsOut": [] }
+      ]
+    },
+    "mixer": {
+      "recipes": [
+        { "name": "mcp_lead_glass", "circuit": 0, "eut": 122880, "duration": 200,
+          "itemsIn": [{ "id": "gtceu:glass_dust", "count": 4 }, { "id": "gtceu:lead_dust", "count": 1 }], "kept": [], "fluidsIn": [], "charge": [],
+          "itemsOut": [{ "id": "grindless:mcp_lead_glass", "count": 4 }], "fluidsOut": [] }
+      ]
+    },
+    "wiremill": {
+      "recipes": [
+        { "name": "hollow_core_draw", "circuit": 0, "eut": 122880, "duration": 300,
+          "itemsIn": [{ "id": "grindless:caned_preform", "count": 1 }], "kept": [], "fluidsIn": [], "charge": [],
+          "itemsOut": [{ "id": "grindless:drawn_hollow_fibre", "count": 2 }], "fluidsOut": [] }
+      ]
+    },
+    "polarizer": {
+      "recipes": [
+        { "name": "ppktp_poling", "circuit": 0, "eut": 122880, "duration": 300,
+          "itemsIn": [{ "id": "grindless:ktp_electroded_wafer", "count": 1 }], "kept": [], "fluidsIn": [], "charge": [],
+          "itemsOut": [{ "id": "gtceu:ppktp_dust", "count": 2 }], "fluidsOut": [] }
+      ]
+    },
+    "assembler": {
+      "recipes": [
+        { "name": "cnt_twist", "circuit": 0, "eut": 491520, "duration": 200,
+          "itemsIn": [{ "id": "grindless:cnt_densified_yarn", "count": 4 }], "kept": [], "fluidsIn": [], "charge": [],
+          "itemsOut": [{ "id": "grindless:cnt_twisted_yarn", "count": 1 }], "fluidsOut": [] },
+        { "name": "cnt_coil", "circuit": 0, "eut": 491520, "duration": 200,
+          "itemsIn": [{ "id": "grindless:cnt_twisted_yarn", "count": 2 }, { "id": "gtceu:polytetrafluoroethylene_foil", "count": 1 }], "kept": [], "fluidsIn": [], "charge": [],
+          "itemsOut": [{ "id": "grindless:cnt_coiled_muscle", "count": 1 }], "fluidsOut": [] },
+        { "name": "uev_robot_arm", "circuit": 0, "eut": 491520, "duration": 400,
+          "itemsIn": [{ "id": "gtceu:uv_robot_arm", "count": 1 }, { "id": "grindless:cnt_coiled_muscle", "count": 4 }, { "id": "grindless:uev_sensor", "count": 1 }, { "id": "grindless:uev_emitter", "count": 1 }],
+          "kept": [], "fluidsIn": [], "charge": [],
+          "itemsOut": [{ "id": "grindless:uev_robot_arm", "count": 1 }], "fluidsOut": [] },
+        { "name": "faraday_isolator", "circuit": 0, "eut": 491520, "duration": 300,
+          "itemsIn": [{ "id": "grindless:tgg_polished_rod", "count": 1 }, { "id": "gtceu:magnetic_neodymium_rod", "count": 2 }, { "id": "gtceu:glass_plate", "count": 2 }],
+          "kept": [], "fluidsIn": [], "charge": [],
+          "itemsOut": [{ "id": "grindless:faraday_isolator", "count": 1 }], "fluidsOut": [] },
+        { "name": "hollow_core_stack", "circuit": 0, "eut": 491520, "duration": 200,
+          "itemsIn": [{ "id": "grindless:hollow_capillaries", "count": 6 }, { "id": "grindless:fused_silica_tube", "count": 1 }], "kept": [], "fluidsIn": [], "charge": [],
+          "itemsOut": [{ "id": "grindless:stacked_preform", "count": 1 }], "fluidsOut": [] },
+        { "name": "mcp_core_tube", "circuit": 0, "eut": 491520, "duration": 200,
+          "itemsIn": [{ "id": "grindless:mcp_lead_glass", "count": 2 }, { "id": "gtceu:glass_tube", "count": 1 }], "kept": [], "fluidsIn": [], "charge": [],
+          "itemsOut": [{ "id": "grindless:etchable_core_tube", "count": 1 }], "fluidsOut": [] },
+        { "name": "lobster_eye_mcp", "circuit": 0, "eut": 491520, "duration": 300,
+          "itemsIn": [{ "id": "grindless:mcp_reduced_plate", "count": 1 }, { "id": "gtceu:gold_foil", "count": 2 }], "kept": [], "fluidsIn": [], "charge": [],
+          "itemsOut": [{ "id": "grindless:lobster_eye_mcp", "count": 1 }], "fluidsOut": [] },
+        { "name": "ktp_electrodes", "circuit": 0, "eut": 491520, "duration": 200,
+          "itemsIn": [{ "id": "grindless:ktp_wafer", "count": 1 }, { "id": "gtceu:gold_foil", "count": 1 }], "kept": [], "fluidsIn": [], "charge": [],
+          "itemsOut": [{ "id": "grindless:ktp_electroded_wafer", "count": 1 }], "fluidsOut": [] },
+        { "name": "spdc_source", "circuit": 0, "eut": 491520, "duration": 300,
+          "itemsIn": [{ "id": "gtceu:ppktp_dust", "count": 2 }, { "id": "gtceu:uv_emitter", "count": 1 }, { "id": "grindless:faraday_isolator", "count": 1 }, { "id": "gtceu:glass_plate", "count": 2 }], "kept": [], "fluidsIn": [], "charge": [],
+          "itemsOut": [{ "id": "grindless:spdc_source", "count": 1 }], "fluidsOut": [] },
+        { "name": "ule_mirror_coat", "circuit": 0, "eut": 491520, "duration": 300,
+          "itemsIn": [{ "id": "grindless:ule_spacer", "count": 1 }, { "id": "grindless:tantalum_pentoxide_dust", "count": 2 }, { "id": "gtceu:silicon_dioxide_dust", "count": 2 }], "kept": [], "fluidsIn": [], "charge": [],
+          "itemsOut": [{ "id": "grindless:ule_mirrored_spacer", "count": 1 }], "fluidsOut": [] },
+        { "name": "ule_cavity", "circuit": 0, "eut": 491520, "duration": 300,
+          "itemsIn": [{ "id": "grindless:ule_mirrored_spacer", "count": 1 }, { "id": "gtceu:glass_tube", "count": 1 }, { "id": "gtceu:glass_plate", "count": 2 }], "kept": [], "fluidsIn": [], "charge": [],
+          "itemsOut": [{ "id": "grindless:ule_cavity", "count": 1 }], "fluidsOut": [] },
+        { "name": "atom_interferometer", "circuit": 0, "eut": 491520, "duration": 300,
+          "itemsIn": [{ "id": "grindless:uev_sensor", "count": 1 }, { "id": "grindless:li_cooling_laser", "count": 1 }, { "id": "grindless:k_cooling_laser", "count": 1 }], "kept": [], "fluidsIn": [], "charge": [],
+          "itemsOut": [{ "id": "grindless:atom_interferometer", "count": 1 }], "fluidsOut": [] }
+      ]
+    }
+  }
+}
