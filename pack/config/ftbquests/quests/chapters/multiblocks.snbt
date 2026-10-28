@@ -34,6 +34,72 @@
 			y: 0.0d
 		}
 		{
+			icon: "gtceu:large_steam_centrifuge"
+			id: "5ED91AE346033593"
+			rewards: [{ id: "6A1D0EEB543A5A6E", type: "xp", xp: 10 }]
+			shape: "gear"
+			size: 1.5d
+			subtitle: "Steam, Grindless"
+			tasks: [{ id: "67ED43F8F4BACB6D", item: "gtceu:large_steam_centrifuge", type: "item" }]
+			x: 4.0d
+			y: 0.0d
+		}
+		{
+			icon: "gtceu:large_steam_chemical_bath"
+			id: "5DB15F9E64C74E29"
+			rewards: [{ id: "60B2AEB4553F991D", type: "xp", xp: 10 }]
+			shape: "gear"
+			size: 1.5d
+			subtitle: "Steam, Grindless"
+			tasks: [{ id: "14AC7BA55FE0ADD5", item: "gtceu:large_steam_chemical_bath", type: "item" }]
+			x: 6.0d
+			y: 0.0d
+		}
+		{
+			icon: "gtceu:large_steam_macerator"
+			id: "15A610045A9D9B00"
+			rewards: [{ id: "334ABFDD31BE1555", type: "xp", xp: 10 }]
+			shape: "gear"
+			size: 1.5d
+			subtitle: "Steam, Grindless"
+			tasks: [{ id: "51271E3F7067E514", item: "gtceu:large_steam_macerator", type: "item" }]
+			x: 8.0d
+			y: 0.0d
+		}
+		{
+			icon: "gtceu:large_steam_ore_washer"
+			id: "19AFE3398A92A237"
+			rewards: [{ id: "407757D7C799A5ED", type: "xp", xp: 10 }]
+			shape: "gear"
+			size: 1.5d
+			subtitle: "Steam, Grindless"
+			tasks: [{ id: "17145EDCE71AD061", item: "gtceu:large_steam_ore_washer", type: "item" }]
+			x: 10.0d
+			y: 0.0d
+		}
+		{
+			icon: "gtceu:large_steam_thermal_centrifuge"
+			id: "1284411C295CBFEA"
+			rewards: [{ id: "4F1A99421CCB9EC8", type: "xp", xp: 10 }]
+			shape: "gear"
+			size: 1.5d
+			subtitle: "Steam, Grindless"
+			tasks: [{ id: "50BEDF1AE15F909F", item: "gtceu:large_steam_thermal_centrifuge", type: "item" }]
+			x: 12.0d
+			y: 0.0d
+		}
+		{
+			icon: "gtceu:steam_alloy_smelter"
+			id: "4D532A1DAC165D28"
+			rewards: [{ id: "7FA00093DB863D01", type: "xp", xp: 10 }]
+			shape: "gear"
+			size: 1.5d
+			subtitle: "Steam, Grindless"
+			tasks: [{ id: "72EE63E95DAE9209", item: "gtceu:steam_alloy_smelter", type: "item" }]
+			x: 14.0d
+			y: 0.0d
+		}
+		{
 			icon: "gtceu:steam_blast_furnace"
 			id: "306479D8E07E2475"
 			rewards: [{ id: "284630C2CDBA6800", type: "xp", xp: 10 }]
@@ -41,7 +107,40 @@
 			size: 1.5d
 			subtitle: "Steam, Grindless"
 			tasks: [{ id: "188ABCA7213B6C73", item: "gtceu:steam_blast_furnace", type: "item" }]
-			x: 4.0d
+			x: 16.0d
+			y: 0.0d
+		}
+		{
+			icon: "gtceu:steam_chemical_bath"
+			id: "2B05A0B9BBE9F03D"
+			rewards: [{ id: "7BFDDD4439AEDA59", type: "xp", xp: 10 }]
+			shape: "gear"
+			size: 1.5d
+			subtitle: "Steam, Grindless"
+			tasks: [{ id: "2D6D2E46E736F895", item: "gtceu:steam_chemical_bath", type: "item" }]
+			x: 18.0d
+			y: 0.0d
+		}
+		{
+			icon: "gtceu:steam_compressor"
+			id: "261F98B4D40A95DA"
+			rewards: [{ id: "2A217197D32DC295", type: "xp", xp: 10 }]
+			shape: "gear"
+			size: 1.5d
+			subtitle: "Steam, Grindless"
+			tasks: [{ id: "4ADB0084AF8DAE52", item: "gtceu:steam_compressor", type: "item" }]
+			x: 20.0d
+			y: 0.0d
+		}
+		{
+			icon: "gtceu:steam_forge_hammer"
+			id: "2DE7273B3627252E"
+			rewards: [{ id: "47EBF962DE8E5BED", type: "xp", xp: 10 }]
+			shape: "gear"
+			size: 1.5d
+			subtitle: "Steam, Grindless"
+			tasks: [{ id: "723AD83215DB8A57", item: "gtceu:steam_forge_hammer", type: "item" }]
+			x: 22.0d
 			y: 0.0d
 		}
 		{
@@ -52,8 +151,19 @@
 			size: 1.5d
 			subtitle: "Steam, Grindless"
 			tasks: [{ id: "374ECC64A0F9CCF8", item: "gtceu:steam_greenhouse", type: "item" }]
-			x: 6.0d
+			x: 24.0d
 			y: 0.0d
+		}
+		{
+			icon: "gtceu:steam_mixer"
+			id: "3371AC7401C26888"
+			rewards: [{ id: "214660F8C88A8600", type: "xp", xp: 10 }]
+			shape: "gear"
+			size: 1.5d
+			subtitle: "Steam, Grindless"
+			tasks: [{ id: "3DCF3EDACFAD5231", item: "gtceu:steam_mixer", type: "item" }]
+			x: 2.0d
+			y: 2.0d
 		}
 		{
 			icon: "gtceu:steam_observatory"
@@ -63,8 +173,19 @@
 			size: 1.5d
 			subtitle: "Steam, Grindless"
 			tasks: [{ id: "199E2D4AB95A2BD9", item: "gtceu:steam_observatory", type: "item" }]
-			x: 8.0d
-			y: 0.0d
+			x: 4.0d
+			y: 2.0d
+		}
+		{
+			icon: "gtceu:steam_ore_washer"
+			id: "17C35615EF15D6A1"
+			rewards: [{ id: "3521D5A606ED2233", type: "xp", xp: 10 }]
+			shape: "gear"
+			size: 1.5d
+			subtitle: "Steam, Grindless"
+			tasks: [{ id: "1182A0744A9F623C", item: "gtceu:steam_ore_washer", type: "item" }]
+			x: 6.0d
+			y: 2.0d
 		}
 		{
 			icon: "gtceu:steam_vein_drill"
@@ -74,8 +195,8 @@
 			size: 1.5d
 			subtitle: "Steam, Grindless"
 			tasks: [{ id: "4348D49780697DED", item: "gtceu:steam_vein_drill", type: "item" }]
-			x: 10.0d
-			y: 0.0d
+			x: 8.0d
+			y: 2.0d
 		}
 		{
 			icon: "gtceu:bronze_multiblock_tank"
@@ -85,8 +206,8 @@
 			size: 1.25d
 			subtitle: "Steam, GregTech"
 			tasks: [{ id: "5C93C367BA19401D", item: "gtceu:bronze_multiblock_tank", type: "item" }]
-			x: 12.0d
-			y: 0.0d
+			x: 10.0d
+			y: 2.0d
 		}
 		{
 			icon: "gtceu:charcoal_pile_igniter"
@@ -96,8 +217,8 @@
 			size: 1.25d
 			subtitle: "Steam, GregTech"
 			tasks: [{ id: "675391105D4A5073", item: "gtceu:charcoal_pile_igniter", type: "item" }]
-			x: 14.0d
-			y: 0.0d
+			x: 12.0d
+			y: 2.0d
 		}
 		{
 			icon: "gtceu:coke_oven"
@@ -107,62 +228,7 @@
 			size: 1.25d
 			subtitle: "Steam, GregTech"
 			tasks: [{ id: "48E78F3727AC952E", item: "gtceu:coke_oven", type: "item" }]
-			x: 16.0d
-			y: 0.0d
-		}
-		{
-			icon: "gtceu:large_steam_centrifuge"
-			id: "5ED91AE346033593"
-			rewards: [{ id: "6A1D0EEB543A5A6E", type: "xp", xp: 10 }]
-			shape: "gear"
-			size: 1.25d
-			subtitle: "Steam, GregTech"
-			tasks: [{ id: "67ED43F8F4BACB6D", item: "gtceu:large_steam_centrifuge", type: "item" }]
-			x: 18.0d
-			y: 0.0d
-		}
-		{
-			icon: "gtceu:large_steam_chemical_bath"
-			id: "5DB15F9E64C74E29"
-			rewards: [{ id: "60B2AEB4553F991D", type: "xp", xp: 10 }]
-			shape: "gear"
-			size: 1.25d
-			subtitle: "Steam, GregTech"
-			tasks: [{ id: "14AC7BA55FE0ADD5", item: "gtceu:large_steam_chemical_bath", type: "item" }]
-			x: 20.0d
-			y: 0.0d
-		}
-		{
-			icon: "gtceu:large_steam_macerator"
-			id: "15A610045A9D9B00"
-			rewards: [{ id: "334ABFDD31BE1555", type: "xp", xp: 10 }]
-			shape: "gear"
-			size: 1.25d
-			subtitle: "Steam, GregTech"
-			tasks: [{ id: "51271E3F7067E514", item: "gtceu:large_steam_macerator", type: "item" }]
-			x: 22.0d
-			y: 0.0d
-		}
-		{
-			icon: "gtceu:large_steam_ore_washer"
-			id: "19AFE3398A92A237"
-			rewards: [{ id: "407757D7C799A5ED", type: "xp", xp: 10 }]
-			shape: "gear"
-			size: 1.25d
-			subtitle: "Steam, GregTech"
-			tasks: [{ id: "17145EDCE71AD061", item: "gtceu:large_steam_ore_washer", type: "item" }]
-			x: 24.0d
-			y: 0.0d
-		}
-		{
-			icon: "gtceu:large_steam_thermal_centrifuge"
-			id: "1284411C295CBFEA"
-			rewards: [{ id: "4F1A99421CCB9EC8", type: "xp", xp: 10 }]
-			shape: "gear"
-			size: 1.25d
-			subtitle: "Steam, GregTech"
-			tasks: [{ id: "50BEDF1AE15F909F", item: "gtceu:large_steam_thermal_centrifuge", type: "item" }]
-			x: 2.0d
+			x: 14.0d
 			y: 2.0d
 		}
 		{
@@ -173,7 +239,7 @@
 			size: 1.25d
 			subtitle: "Steam, GregTech"
 			tasks: [{ id: "1DE7E82EEF5A3CB8", item: "gtceu:primitive_blast_furnace", type: "item" }]
-			x: 4.0d
+			x: 16.0d
 			y: 2.0d
 		}
 		{
@@ -184,51 +250,7 @@
 			size: 1.25d
 			subtitle: "Steam, GregTech"
 			tasks: [{ id: "1E68FE878D940DF1", item: "gtceu:primitive_pump", type: "item" }]
-			x: 6.0d
-			y: 2.0d
-		}
-		{
-			icon: "gtceu:steam_alloy_smelter"
-			id: "4D532A1DAC165D28"
-			rewards: [{ id: "7FA00093DB863D01", type: "xp", xp: 10 }]
-			shape: "gear"
-			size: 1.25d
-			subtitle: "Steam, GregTech"
-			tasks: [{ id: "72EE63E95DAE9209", item: "gtceu:steam_alloy_smelter", type: "item" }]
-			x: 8.0d
-			y: 2.0d
-		}
-		{
-			icon: "gtceu:steam_chemical_bath"
-			id: "2B05A0B9BBE9F03D"
-			rewards: [{ id: "7BFDDD4439AEDA59", type: "xp", xp: 10 }]
-			shape: "gear"
-			size: 1.25d
-			subtitle: "Steam, GregTech"
-			tasks: [{ id: "2D6D2E46E736F895", item: "gtceu:steam_chemical_bath", type: "item" }]
-			x: 10.0d
-			y: 2.0d
-		}
-		{
-			icon: "gtceu:steam_compressor"
-			id: "261F98B4D40A95DA"
-			rewards: [{ id: "2A217197D32DC295", type: "xp", xp: 10 }]
-			shape: "gear"
-			size: 1.25d
-			subtitle: "Steam, GregTech"
-			tasks: [{ id: "4ADB0084AF8DAE52", item: "gtceu:steam_compressor", type: "item" }]
-			x: 12.0d
-			y: 2.0d
-		}
-		{
-			icon: "gtceu:steam_forge_hammer"
-			id: "2DE7273B3627252E"
-			rewards: [{ id: "47EBF962DE8E5BED", type: "xp", xp: 10 }]
-			shape: "gear"
-			size: 1.25d
-			subtitle: "Steam, GregTech"
-			tasks: [{ id: "723AD83215DB8A57", item: "gtceu:steam_forge_hammer", type: "item" }]
-			x: 14.0d
+			x: 18.0d
 			y: 2.0d
 		}
 		{
@@ -239,28 +261,6 @@
 			size: 1.25d
 			subtitle: "Steam, GregTech"
 			tasks: [{ id: "2810E3CC8167165B", item: "gtceu:steam_grinder", type: "item" }]
-			x: 16.0d
-			y: 2.0d
-		}
-		{
-			icon: "gtceu:steam_mixer"
-			id: "3371AC7401C26888"
-			rewards: [{ id: "214660F8C88A8600", type: "xp", xp: 10 }]
-			shape: "gear"
-			size: 1.25d
-			subtitle: "Steam, GregTech"
-			tasks: [{ id: "3DCF3EDACFAD5231", item: "gtceu:steam_mixer", type: "item" }]
-			x: 18.0d
-			y: 2.0d
-		}
-		{
-			icon: "gtceu:steam_ore_washer"
-			id: "17C35615EF15D6A1"
-			rewards: [{ id: "3521D5A606ED2233", type: "xp", xp: 10 }]
-			shape: "gear"
-			size: 1.25d
-			subtitle: "Steam, GregTech"
-			tasks: [{ id: "1182A0744A9F623C", item: "gtceu:steam_ore_washer", type: "item" }]
 			x: 20.0d
 			y: 2.0d
 		}
@@ -386,6 +386,17 @@
 			y: 7.0d
 		}
 		{
+			icon: "gtceu:wire_works"
+			id: "40D95D8098B2E426"
+			rewards: [{ id: "58143CB200D30CBB", type: "xp", xp: 10 }]
+			shape: "gear"
+			size: 1.5d
+			subtitle: "LV, Grindless"
+			tasks: [{ id: "1150830AC1B82215", item: "gtceu:wire_works", type: "item" }]
+			x: 16.0d
+			y: 7.0d
+		}
+		{
 			icon: "gtceu:wireless_energy_tower"
 			id: "6F5D9E501D2F5AC0"
 			rewards: [{ id: "2177896D9904B1E6", type: "xp", xp: 10 }]
@@ -393,7 +404,7 @@
 			size: 1.5d
 			subtitle: "LV, Grindless"
 			tasks: [{ id: "26A00719E2F7F4F7", item: "gtceu:wireless_energy_tower", type: "item" }]
-			x: 16.0d
+			x: 18.0d
 			y: 7.0d
 		}
 		{
@@ -404,7 +415,7 @@
 			size: 1.25d
 			subtitle: "LV, GregTech"
 			tasks: [{ id: "734D488866963FF6", item: "gtceu:bronze_large_boiler", type: "item" }]
-			x: 18.0d
+			x: 20.0d
 			y: 7.0d
 		}
 		{
@@ -415,17 +426,6 @@
 			size: 1.25d
 			subtitle: "LV, GregTech"
 			tasks: [{ id: "1585CB652318374F", item: "gtceu:electric_blast_furnace", type: "item" }]
-			x: 20.0d
-			y: 7.0d
-		}
-		{
-			icon: "gtceu:wire_works"
-			id: "40D95D8098B2E426"
-			rewards: [{ id: "58143CB200D30CBB", type: "xp", xp: 10 }]
-			shape: "gear"
-			size: 1.25d
-			subtitle: "LV, GregTech"
-			tasks: [{ id: "1150830AC1B82215", item: "gtceu:wire_works", type: "item" }]
 			x: 22.0d
 			y: 7.0d
 		}
@@ -518,6 +518,17 @@
 			y: 10.0d
 		}
 		{
+			icon: "gtceu:polymer_works"
+			id: "64FFC14E96B36A6E"
+			rewards: [{ id: "191910797C26AE33", type: "xp", xp: 10 }]
+			shape: "gear"
+			size: 1.5d
+			subtitle: "MV, Grindless"
+			tasks: [{ id: "10FB398149645F17", item: "gtceu:polymer_works", type: "item" }]
+			x: 16.0d
+			y: 10.0d
+		}
+		{
 			icon: "gtceu:radio_telescope"
 			id: "569A944C44AA8950"
 			rewards: [{ id: "2D9E66DC58420E56", type: "xp", xp: 10 }]
@@ -525,8 +536,52 @@
 			size: 1.5d
 			subtitle: "MV, Grindless"
 			tasks: [{ id: "1218994666B6F51B", item: "gtceu:radio_telescope", type: "item" }]
-			x: 16.0d
+			x: 18.0d
 			y: 10.0d
+		}
+		{
+			icon: "gtceu:universal_assembly_factory"
+			id: "16260B2372DB264E"
+			rewards: [{ id: "1F4AAA80C84E9573", type: "xp", xp: 10 }]
+			shape: "gear"
+			size: 1.5d
+			subtitle: "MV, Grindless"
+			tasks: [{ id: "2BA75F30BD3878AC", item: "gtceu:universal_assembly_factory", type: "item" }]
+			x: 20.0d
+			y: 10.0d
+		}
+		{
+			icon: "gtceu:universal_mixing_factory"
+			id: "1ECDD358A6715784"
+			rewards: [{ id: "6BF132A4CEED0A83", type: "xp", xp: 10 }]
+			shape: "gear"
+			size: 1.5d
+			subtitle: "MV, Grindless"
+			tasks: [{ id: "68563488393CC8D0", item: "gtceu:universal_mixing_factory", type: "item" }]
+			x: 22.0d
+			y: 10.0d
+		}
+		{
+			icon: "gtceu:universal_processing_factory"
+			id: "592B74D357539428"
+			rewards: [{ id: "287A45D9461BDE69", type: "xp", xp: 10 }]
+			shape: "gear"
+			size: 1.5d
+			subtitle: "MV, Grindless"
+			tasks: [{ id: "5F90AC1ED41C78E4", item: "gtceu:universal_processing_factory", type: "item" }]
+			x: 24.0d
+			y: 10.0d
+		}
+		{
+			icon: "gtceu:universal_separation_factory"
+			id: "34F4FE30D13C680D"
+			rewards: [{ id: "14F17215E0894F54", type: "xp", xp: 10 }]
+			shape: "gear"
+			size: 1.5d
+			subtitle: "MV, Grindless"
+			tasks: [{ id: "7B4BECD2EE40481A", item: "gtceu:universal_separation_factory", type: "item" }]
+			x: 2.0d
+			y: 12.0d
 		}
 		{
 			icon: "gtceu:weather_controller"
@@ -536,8 +591,8 @@
 			size: 1.5d
 			subtitle: "MV, Grindless"
 			tasks: [{ id: "2BAE0574938ECC36", item: "gtceu:weather_controller", type: "item" }]
-			x: 18.0d
-			y: 10.0d
+			x: 4.0d
+			y: 12.0d
 		}
 		{
 			icon: "gtceu:central_monitor"
@@ -547,8 +602,8 @@
 			size: 1.25d
 			subtitle: "MV, GregTech"
 			tasks: [{ id: "612E070826B5D90D", item: "gtceu:central_monitor", type: "item" }]
-			x: 20.0d
-			y: 10.0d
+			x: 6.0d
+			y: 12.0d
 		}
 		{
 			icon: "gtnn:exxonmobil_chemical_plant"
@@ -558,8 +613,8 @@
 			size: 1.25d
 			subtitle: "MV, GT--"
 			tasks: [{ id: "7843F3224D69183E", item: "gtnn:exxonmobil_chemical_plant", type: "item" }]
-			x: 22.0d
-			y: 10.0d
+			x: 8.0d
+			y: 12.0d
 		}
 		{
 			icon: "gtceu:mv_fluid_drilling_rig"
@@ -569,18 +624,7 @@
 			size: 1.25d
 			subtitle: "MV, GregTech"
 			tasks: [{ id: "570F6D24D377C17D", item: "gtceu:mv_fluid_drilling_rig", type: "item" }]
-			x: 24.0d
-			y: 10.0d
-		}
-		{
-			icon: "gtceu:polymer_works"
-			id: "64FFC14E96B36A6E"
-			rewards: [{ id: "191910797C26AE33", type: "xp", xp: 10 }]
-			shape: "gear"
-			size: 1.25d
-			subtitle: "MV, GregTech"
-			tasks: [{ id: "10FB398149645F17", item: "gtceu:polymer_works", type: "item" }]
-			x: 2.0d
+			x: 10.0d
 			y: 12.0d
 		}
 		{
@@ -591,50 +635,6 @@
 			size: 1.25d
 			subtitle: "MV, GregTech"
 			tasks: [{ id: "1BC85D35B2AD50F2", item: "gtceu:pyrolyse_oven", type: "item" }]
-			x: 4.0d
-			y: 12.0d
-		}
-		{
-			icon: "gtceu:universal_assembly_factory"
-			id: "16260B2372DB264E"
-			rewards: [{ id: "1F4AAA80C84E9573", type: "xp", xp: 10 }]
-			shape: "gear"
-			size: 1.25d
-			subtitle: "MV, GregTech"
-			tasks: [{ id: "2BA75F30BD3878AC", item: "gtceu:universal_assembly_factory", type: "item" }]
-			x: 6.0d
-			y: 12.0d
-		}
-		{
-			icon: "gtceu:universal_mixing_factory"
-			id: "1ECDD358A6715784"
-			rewards: [{ id: "6BF132A4CEED0A83", type: "xp", xp: 10 }]
-			shape: "gear"
-			size: 1.25d
-			subtitle: "MV, GregTech"
-			tasks: [{ id: "68563488393CC8D0", item: "gtceu:universal_mixing_factory", type: "item" }]
-			x: 8.0d
-			y: 12.0d
-		}
-		{
-			icon: "gtceu:universal_processing_factory"
-			id: "592B74D357539428"
-			rewards: [{ id: "287A45D9461BDE69", type: "xp", xp: 10 }]
-			shape: "gear"
-			size: 1.25d
-			subtitle: "MV, GregTech"
-			tasks: [{ id: "5F90AC1ED41C78E4", item: "gtceu:universal_processing_factory", type: "item" }]
-			x: 10.0d
-			y: 12.0d
-		}
-		{
-			icon: "gtceu:universal_separation_factory"
-			id: "34F4FE30D13C680D"
-			rewards: [{ id: "14F17215E0894F54", type: "xp", xp: 10 }]
-			shape: "gear"
-			size: 1.25d
-			subtitle: "MV, GregTech"
-			tasks: [{ id: "7B4BECD2EE40481A", item: "gtceu:universal_separation_factory", type: "item" }]
 			x: 12.0d
 			y: 12.0d
 		}
@@ -650,6 +650,17 @@
 			y: 15.0d
 		}
 		{
+			icon: "gtceu:coil_chemical_plant"
+			id: "2C48E959FF731A56"
+			rewards: [{ id: "7C8D0B67D9E5102A", type: "xp", xp: 10 }]
+			shape: "gear"
+			size: 1.5d
+			subtitle: "HV, Grindless"
+			tasks: [{ id: "3C2CBA4CF91513AD", item: "gtceu:coil_chemical_plant", type: "item" }]
+			x: 2.0d
+			y: 15.0d
+		}
+		{
 			icon: "gtceu:composite_autoclave"
 			id: "5BCB782C237BC876"
 			rewards: [{ id: "51B2F7D6E9E0E8EE", type: "xp", xp: 10 }]
@@ -657,7 +668,7 @@
 			size: 1.5d
 			subtitle: "HV, Grindless"
 			tasks: [{ id: "314706A299DDC374", item: "gtceu:composite_autoclave", type: "item" }]
-			x: 2.0d
+			x: 4.0d
 			y: 15.0d
 		}
 		{
@@ -668,7 +679,7 @@
 			size: 1.5d
 			subtitle: "HV, Grindless"
 			tasks: [{ id: "7DC311EA3177443A", item: "gtceu:hv_greenhouse", type: "item" }]
-			x: 4.0d
+			x: 6.0d
 			y: 15.0d
 		}
 		{
@@ -679,7 +690,7 @@
 			size: 1.5d
 			subtitle: "HV, Grindless"
 			tasks: [{ id: "74192319D54395A4", item: "gtceu:hv_vein_drill", type: "item" }]
-			x: 6.0d
+			x: 8.0d
 			y: 15.0d
 		}
 		{
@@ -690,7 +701,7 @@
 			size: 1.5d
 			subtitle: "HV, Grindless"
 			tasks: [{ id: "2EBDE67A56C54C23", item: "gtceu:lunar_drill", type: "item" }]
-			x: 8.0d
+			x: 10.0d
 			y: 15.0d
 		}
 		{
@@ -701,7 +712,7 @@
 			size: 1.5d
 			subtitle: "HV, Grindless"
 			tasks: [{ id: "4191391B5728FA93", item: "gtceu:refinery", type: "item" }]
-			x: 10.0d
+			x: 12.0d
 			y: 15.0d
 		}
 		{
@@ -712,7 +723,7 @@
 			size: 1.5d
 			subtitle: "HV, Grindless"
 			tasks: [{ id: "571F0E8570BC47A5", item: "gtceu:reformer", type: "item" }]
-			x: 12.0d
+			x: 14.0d
 			y: 15.0d
 		}
 		{
@@ -723,7 +734,7 @@
 			size: 1.5d
 			subtitle: "HV, Grindless"
 			tasks: [{ id: "613904876D2C67E6", item: "gtceu:syngas_plant", type: "item" }]
-			x: 14.0d
+			x: 16.0d
 			y: 15.0d
 		}
 		{
@@ -734,17 +745,6 @@
 			size: 1.25d
 			subtitle: "HV, GregTech"
 			tasks: [{ id: "4E94339FB6258A0C", item: "gtceu:cleanroom", type: "item" }]
-			x: 16.0d
-			y: 15.0d
-		}
-		{
-			icon: "gtceu:coil_chemical_plant"
-			id: "2C48E959FF731A56"
-			rewards: [{ id: "7C8D0B67D9E5102A", type: "xp", xp: 10 }]
-			shape: "gear"
-			size: 1.25d
-			subtitle: "HV, GregTech"
-			tasks: [{ id: "3C2CBA4CF91513AD", item: "gtceu:coil_chemical_plant", type: "item" }]
 			x: 18.0d
 			y: 15.0d
 		}
@@ -1552,6 +1552,17 @@
 			y: 34.0d
 		}
 		{
+			icon: "gtceu:algae_bioreactor"
+			id: "591CA887EAA6EEFC"
+			rewards: [{ id: "6B9D1B69AE88C9D3", type: "xp", xp: 10 }]
+			shape: "gear"
+			size: 1.5d
+			subtitle: "LuV, Grindless"
+			tasks: [{ id: "4DD92C99057C94DC", item: "gtceu:algae_bioreactor", type: "item" }]
+			x: 2.0d
+			y: 34.0d
+		}
+		{
 			icon: "gtceu:asteroid_processor"
 			id: "1B210CCD722F3E1D"
 			rewards: [{ id: "63579A9ADF4CFD28", type: "xp", xp: 10 }]
@@ -1559,7 +1570,7 @@
 			size: 1.5d
 			subtitle: "LuV, Grindless"
 			tasks: [{ id: "6B46E690E283A79C", item: "gtceu:asteroid_processor", type: "item" }]
-			x: 2.0d
+			x: 4.0d
 			y: 34.0d
 		}
 		{
@@ -1570,7 +1581,7 @@
 			size: 1.5d
 			subtitle: "LuV, Grindless"
 			tasks: [{ id: "362856C5816F8246", item: "gtceu:biofoundry", type: "item" }]
-			x: 4.0d
+			x: 6.0d
 			y: 34.0d
 		}
 		{
@@ -1581,7 +1592,29 @@
 			size: 1.5d
 			subtitle: "LuV, Grindless"
 			tasks: [{ id: "7EC98A2DE01DEEE6", item: "gtceu:coated_conductor_line", type: "item" }]
-			x: 6.0d
+			x: 8.0d
+			y: 34.0d
+		}
+		{
+			icon: "gtceu:coilgun_launcher"
+			id: "26706A70BF39ED97"
+			rewards: [{ id: "730D6CB1F2741FA6", type: "xp", xp: 10 }]
+			shape: "gear"
+			size: 1.5d
+			subtitle: "LuV, Grindless"
+			tasks: [{ id: "4A2F70681149C28D", item: "gtceu:coilgun_launcher", type: "item" }]
+			x: 10.0d
+			y: 34.0d
+		}
+		{
+			icon: "gtceu:cryobot"
+			id: "63ADF3FC6B861ACA"
+			rewards: [{ id: "2A41CEB400AB0DBD", type: "xp", xp: 10 }]
+			shape: "gear"
+			size: 1.5d
+			subtitle: "LuV, Grindless"
+			tasks: [{ id: "30DD233407BA34AA", item: "gtceu:cryobot", type: "item" }]
+			x: 12.0d
 			y: 34.0d
 		}
 		{
@@ -1592,7 +1625,7 @@
 			size: 1.5d
 			subtitle: "LuV, Grindless"
 			tasks: [{ id: "2A21CA90D8C9D88B", item: "gtceu:flux_tube_tether", type: "item" }]
-			x: 8.0d
+			x: 14.0d
 			y: 34.0d
 		}
 		{
@@ -1603,7 +1636,18 @@
 			size: 1.5d
 			subtitle: "LuV, Grindless"
 			tasks: [{ id: "434493CC716D5096", item: "gtceu:fumarole_condenser", type: "item" }]
-			x: 10.0d
+			x: 16.0d
+			y: 34.0d
+		}
+		{
+			icon: "gtceu:gravitational_wave_detector"
+			id: "71F548FDAE03C784"
+			rewards: [{ id: "3E23F3478A51C08B", type: "xp", xp: 10 }]
+			shape: "gear"
+			size: 1.5d
+			subtitle: "LuV, Grindless"
+			tasks: [{ id: "713989D6B2B897EC", item: "gtceu:gravitational_wave_detector", type: "item" }]
+			x: 18.0d
 			y: 34.0d
 		}
 		{
@@ -1614,7 +1658,7 @@
 			size: 1.5d
 			subtitle: "LuV, Grindless"
 			tasks: [{ id: "25384B5A5ED0931A", item: "gtceu:harpoon_anchor_drill", type: "item" }]
-			x: 12.0d
+			x: 20.0d
 			y: 34.0d
 		}
 		{
@@ -1625,7 +1669,7 @@
 			size: 1.5d
 			subtitle: "LuV, Grindless"
 			tasks: [{ id: "28568F0F8C6F5CA0", item: "gtceu:helium_refrigerator", type: "item" }]
-			x: 14.0d
+			x: 22.0d
 			y: 34.0d
 		}
 		{
@@ -1636,8 +1680,30 @@
 			size: 1.5d
 			subtitle: "LuV, Grindless"
 			tasks: [{ id: "730971CF36342D50", item: "gtceu:hts_magnet_works", type: "item" }]
-			x: 16.0d
+			x: 24.0d
 			y: 34.0d
+		}
+		{
+			icon: "gtceu:hydroponic_ring"
+			id: "2779D16C5C137879"
+			rewards: [{ id: "4DA16F5E823AF74C", type: "xp", xp: 10 }]
+			shape: "gear"
+			size: 1.5d
+			subtitle: "LuV, Grindless"
+			tasks: [{ id: "34316BC968610D1B", item: "gtceu:hydroponic_ring", type: "item" }]
+			x: 2.0d
+			y: 36.0d
+		}
+		{
+			icon: "gtceu:microgravity_smelter"
+			id: "2AE297B417663143"
+			rewards: [{ id: "48812BF96C1CC6D9", type: "xp", xp: 10 }]
+			shape: "gear"
+			size: 1.5d
+			subtitle: "LuV, Grindless"
+			tasks: [{ id: "750B846C58E1BA18", item: "gtceu:microgravity_smelter", type: "item" }]
+			x: 4.0d
+			y: 36.0d
 		}
 		{
 			icon: "gtceu:optical_miner"
@@ -1647,8 +1713,8 @@
 			size: 1.5d
 			subtitle: "LuV, Grindless"
 			tasks: [{ id: "2B241773755796E2", item: "gtceu:optical_miner", type: "item" }]
-			x: 18.0d
-			y: 34.0d
+			x: 6.0d
+			y: 36.0d
 		}
 		{
 			icon: "gtceu:orbital_solar_station"
@@ -1658,8 +1724,19 @@
 			size: 1.5d
 			subtitle: "LuV, Grindless"
 			tasks: [{ id: "31D3F783BA5AB5E8", item: "gtceu:orbital_solar_station", type: "item" }]
-			x: 20.0d
-			y: 34.0d
+			x: 8.0d
+			y: 36.0d
+		}
+		{
+			icon: "gtceu:organoid_lab"
+			id: "59CD4B8EE9C736FE"
+			rewards: [{ id: "39235D2C88702920", type: "xp", xp: 10 }]
+			shape: "gear"
+			size: 1.5d
+			subtitle: "LuV, Grindless"
+			tasks: [{ id: "6A9B0D743A16ACB0", item: "gtceu:organoid_lab", type: "item" }]
+			x: 10.0d
+			y: 36.0d
 		}
 		{
 			icon: "gtceu:volcanic_intake"
@@ -1669,8 +1746,30 @@
 			size: 1.5d
 			subtitle: "LuV, Grindless"
 			tasks: [{ id: "17AEDD3B1EEC91D2", item: "gtceu:volcanic_intake", type: "item" }]
-			x: 22.0d
-			y: 34.0d
+			x: 12.0d
+			y: 36.0d
+		}
+		{
+			icon: "gtceu:wake_shield_facility"
+			id: "2B5E53706D11FCB1"
+			rewards: [{ id: "318FC7550638C98D", type: "xp", xp: 10 }]
+			shape: "gear"
+			size: 1.5d
+			subtitle: "LuV, Grindless"
+			tasks: [{ id: "51D02FBEC200949F", item: "gtceu:wake_shield_facility", type: "item" }]
+			x: 14.0d
+			y: 36.0d
+		}
+		{
+			icon: "gtceu:zero_g_crystal_grower"
+			id: "18B509925B755CD1"
+			rewards: [{ id: "681E993693F37FB0", type: "xp", xp: 10 }]
+			shape: "gear"
+			size: 1.5d
+			subtitle: "LuV, Grindless"
+			tasks: [{ id: "56E78CE393436490", item: "gtceu:zero_g_crystal_grower", type: "item" }]
+			x: 16.0d
+			y: 36.0d
 		}
 		{
 			icon: "gtceu:active_transformer"
@@ -1680,8 +1779,8 @@
 			size: 1.25d
 			subtitle: "LuV, GregTech"
 			tasks: [{ id: "2D06F196E24ECA50", item: "gtceu:active_transformer", type: "item" }]
-			x: 24.0d
-			y: 34.0d
+			x: 18.0d
+			y: 36.0d
 		}
 		{
 			icon: "gtca:advanced_ebf"
@@ -1691,18 +1790,7 @@
 			size: 1.25d
 			subtitle: "LuV, GT Community Additions"
 			tasks: [{ id: "7B21572375D3E2C3", item: "gtca:advanced_ebf", type: "item" }]
-			x: 2.0d
-			y: 36.0d
-		}
-		{
-			icon: "gtceu:algae_bioreactor"
-			id: "591CA887EAA6EEFC"
-			rewards: [{ id: "6B9D1B69AE88C9D3", type: "xp", xp: 10 }]
-			shape: "gear"
-			size: 1.25d
-			subtitle: "LuV, GregTech"
-			tasks: [{ id: "4DD92C99057C94DC", item: "gtceu:algae_bioreactor", type: "item" }]
-			x: 4.0d
+			x: 20.0d
 			y: 36.0d
 		}
 		{
@@ -1713,29 +1801,7 @@
 			size: 1.25d
 			subtitle: "LuV, GT--"
 			tasks: [{ id: "7BEC3A88E2F1EE99", item: "gtnn:circuit_assembly_line", type: "item" }]
-			x: 6.0d
-			y: 36.0d
-		}
-		{
-			icon: "gtceu:coilgun_launcher"
-			id: "26706A70BF39ED97"
-			rewards: [{ id: "730D6CB1F2741FA6", type: "xp", xp: 10 }]
-			shape: "gear"
-			size: 1.25d
-			subtitle: "LuV, GregTech"
-			tasks: [{ id: "4A2F70681149C28D", item: "gtceu:coilgun_launcher", type: "item" }]
-			x: 8.0d
-			y: 36.0d
-		}
-		{
-			icon: "gtceu:cryobot"
-			id: "63ADF3FC6B861ACA"
-			rewards: [{ id: "2A41CEB400AB0DBD", type: "xp", xp: 10 }]
-			shape: "gear"
-			size: 1.25d
-			subtitle: "LuV, GregTech"
-			tasks: [{ id: "30DD233407BA34AA", item: "gtceu:cryobot", type: "item" }]
-			x: 10.0d
+			x: 22.0d
 			y: 36.0d
 		}
 		{
@@ -1746,7 +1812,7 @@
 			size: 1.25d
 			subtitle: "LuV, GregTech"
 			tasks: [{ id: "6C8630F5D02E070E", item: "gtceu:data_bank", type: "item" }]
-			x: 12.0d
+			x: 24.0d
 			y: 36.0d
 		}
 		{
@@ -1757,30 +1823,8 @@
 			size: 1.25d
 			subtitle: "LuV, GregTech"
 			tasks: [{ id: "359B441D1CD7426C", item: "gtceu:ev_fluid_drilling_rig", type: "item" }]
-			x: 14.0d
-			y: 36.0d
-		}
-		{
-			icon: "gtceu:gravitational_wave_detector"
-			id: "71F548FDAE03C784"
-			rewards: [{ id: "3E23F3478A51C08B", type: "xp", xp: 10 }]
-			shape: "gear"
-			size: 1.25d
-			subtitle: "LuV, GregTech"
-			tasks: [{ id: "713989D6B2B897EC", item: "gtceu:gravitational_wave_detector", type: "item" }]
-			x: 16.0d
-			y: 36.0d
-		}
-		{
-			icon: "gtceu:hydroponic_ring"
-			id: "2779D16C5C137879"
-			rewards: [{ id: "4DA16F5E823AF74C", type: "xp", xp: 10 }]
-			shape: "gear"
-			size: 1.25d
-			subtitle: "LuV, GregTech"
-			tasks: [{ id: "34316BC968610D1B", item: "gtceu:hydroponic_ring", type: "item" }]
-			x: 18.0d
-			y: 36.0d
+			x: 2.0d
+			y: 38.0d
 		}
 		{
 			icon: "gtnn:large_dehydrator"
@@ -1790,8 +1834,8 @@
 			size: 1.25d
 			subtitle: "LuV, GT--"
 			tasks: [{ id: "5D3A6ED560E1C13F", item: "gtnn:large_dehydrator", type: "item" }]
-			x: 20.0d
-			y: 36.0d
+			x: 4.0d
+			y: 38.0d
 		}
 		{
 			icon: "gtceu:large_mixer"
@@ -1801,8 +1845,8 @@
 			size: 1.25d
 			subtitle: "LuV, GregTech"
 			tasks: [{ id: "54F9BBDF568E163C", item: "gtceu:large_mixer", type: "item" }]
-			x: 22.0d
-			y: 36.0d
+			x: 6.0d
+			y: 38.0d
 		}
 		{
 			icon: "gtceu:luv_large_miner"
@@ -1812,29 +1856,7 @@
 			size: 1.25d
 			subtitle: "LuV, GregTech"
 			tasks: [{ id: "5AE8179449593ED4", item: "gtceu:luv_large_miner", type: "item" }]
-			x: 24.0d
-			y: 36.0d
-		}
-		{
-			icon: "gtceu:microgravity_smelter"
-			id: "2AE297B417663143"
-			rewards: [{ id: "48812BF96C1CC6D9", type: "xp", xp: 10 }]
-			shape: "gear"
-			size: 1.25d
-			subtitle: "LuV, GregTech"
-			tasks: [{ id: "750B846C58E1BA18", item: "gtceu:microgravity_smelter", type: "item" }]
-			x: 2.0d
-			y: 38.0d
-		}
-		{
-			icon: "gtceu:organoid_lab"
-			id: "59CD4B8EE9C736FE"
-			rewards: [{ id: "39235D2C88702920", type: "xp", xp: 10 }]
-			shape: "gear"
-			size: 1.25d
-			subtitle: "LuV, GregTech"
-			tasks: [{ id: "6A9B0D743A16ACB0", item: "gtceu:organoid_lab", type: "item" }]
-			x: 4.0d
+			x: 8.0d
 			y: 38.0d
 		}
 		{
@@ -1845,7 +1867,7 @@
 			size: 1.25d
 			subtitle: "LuV, GregTech"
 			tasks: [{ id: "675114A4C225050B", item: "gtceu:plasma_large_turbine", type: "item" }]
-			x: 6.0d
+			x: 10.0d
 			y: 38.0d
 		}
 		{
@@ -1856,7 +1878,7 @@
 			size: 1.25d
 			subtitle: "LuV, GregTech"
 			tasks: [{ id: "4C77CA0C00F8880E", item: "gtceu:power_substation", type: "item" }]
-			x: 8.0d
+			x: 12.0d
 			y: 38.0d
 		}
 		{
@@ -1867,28 +1889,6 @@
 			size: 1.25d
 			subtitle: "LuV, Gregicality Rocketry"
 			tasks: [{ id: "4D95F1E100FB0DC2", item: "gcyr:space_station_packager", type: "item" }]
-			x: 10.0d
-			y: 38.0d
-		}
-		{
-			icon: "gtceu:wake_shield_facility"
-			id: "2B5E53706D11FCB1"
-			rewards: [{ id: "318FC7550638C98D", type: "xp", xp: 10 }]
-			shape: "gear"
-			size: 1.25d
-			subtitle: "LuV, GregTech"
-			tasks: [{ id: "51D02FBEC200949F", item: "gtceu:wake_shield_facility", type: "item" }]
-			x: 12.0d
-			y: 38.0d
-		}
-		{
-			icon: "gtceu:zero_g_crystal_grower"
-			id: "18B509925B755CD1"
-			rewards: [{ id: "681E993693F37FB0", type: "xp", xp: 10 }]
-			shape: "gear"
-			size: 1.25d
-			subtitle: "LuV, GregTech"
-			tasks: [{ id: "56E78CE393436490", item: "gtceu:zero_g_crystal_grower", type: "item" }]
 			x: 14.0d
 			y: 38.0d
 		}
@@ -1915,6 +1915,28 @@
 			y: 41.0d
 		}
 		{
+			icon: "gtceu:assembly_hall"
+			id: "3FBB9E901329E367"
+			rewards: [{ id: "673BAC95E49D6D0A", type: "xp", xp: 10 }]
+			shape: "gear"
+			size: 1.5d
+			subtitle: "ZPM, Grindless"
+			tasks: [{ id: "66D4754DC27CB26F", item: "gtceu:assembly_hall", type: "item" }]
+			x: 4.0d
+			y: 41.0d
+		}
+		{
+			icon: "gtceu:deep_space_network"
+			id: "4FF52F79BEE42532"
+			rewards: [{ id: "12E5BBD15CC9CC8E", type: "xp", xp: 10 }]
+			shape: "gear"
+			size: 1.5d
+			subtitle: "ZPM, Grindless"
+			tasks: [{ id: "6F7E1657E0F66014", item: "gtceu:deep_space_network", type: "item" }]
+			x: 6.0d
+			y: 41.0d
+		}
+		{
 			icon: "gtceu:direct_energy_converter"
 			id: "50D2A8ED4EF3360F"
 			rewards: [{ id: "2890310DC666A6CE", type: "xp", xp: 10 }]
@@ -1922,7 +1944,18 @@
 			size: 1.5d
 			subtitle: "ZPM, Grindless"
 			tasks: [{ id: "26A4C96421D941AB", item: "gtceu:direct_energy_converter", type: "item" }]
-			x: 4.0d
+			x: 8.0d
+			y: 41.0d
+		}
+		{
+			icon: "gtceu:entry_probe_bay"
+			id: "7A54170A3E456D8A"
+			rewards: [{ id: "78B2E29D0C710CEF", type: "xp", xp: 10 }]
+			shape: "gear"
+			size: 1.5d
+			subtitle: "ZPM, Grindless"
+			tasks: [{ id: "1F69772D9D59D1A7", item: "gtceu:entry_probe_bay", type: "item" }]
+			x: 10.0d
 			y: 41.0d
 		}
 		{
@@ -1933,7 +1966,73 @@
 			size: 1.5d
 			subtitle: "ZPM, Grindless"
 			tasks: [{ id: "3D15C1D5DF92E261", item: "gtceu:europium_reductor", type: "item" }]
-			x: 6.0d
+			x: 12.0d
+			y: 41.0d
+		}
+		{
+			icon: "gtceu:flyby_probe_bay"
+			id: "345AA6FA725D354C"
+			rewards: [{ id: "3045933143011906", type: "xp", xp: 10 }]
+			shape: "gear"
+			size: 1.5d
+			subtitle: "ZPM, Grindless"
+			tasks: [{ id: "1F9074521BB57408", item: "gtceu:flyby_probe_bay", type: "item" }]
+			x: 14.0d
+			y: 41.0d
+		}
+		{
+			icon: "gtceu:gas_giant_siphon"
+			id: "1FB566A9440FA39C"
+			rewards: [{ id: "2E3F00A554E5E8BD", type: "xp", xp: 10 }]
+			shape: "gear"
+			size: 1.5d
+			subtitle: "ZPM, Grindless"
+			tasks: [{ id: "2CEBAAAC02AF5BB6", item: "gtceu:gas_giant_siphon", type: "item" }]
+			x: 16.0d
+			y: 41.0d
+		}
+		{
+			icon: "gtceu:ice_giant_siphon"
+			id: "33BADC21286544F3"
+			rewards: [{ id: "1FC7C932C4CFF6FB", type: "xp", xp: 10 }]
+			shape: "gear"
+			size: 1.5d
+			subtitle: "ZPM, Grindless"
+			tasks: [{ id: "2E45061A235E88D9", item: "gtceu:ice_giant_siphon", type: "item" }]
+			x: 18.0d
+			y: 41.0d
+		}
+		{
+			icon: "gtceu:isotope_column"
+			id: "21054CAB76336A49"
+			rewards: [{ id: "5EE1CDC7427415EA", type: "xp", xp: 10 }]
+			shape: "gear"
+			size: 1.5d
+			subtitle: "ZPM, Grindless"
+			tasks: [{ id: "69F18893DFAECB03", item: "gtceu:isotope_column", type: "item" }]
+			x: 20.0d
+			y: 41.0d
+		}
+		{
+			icon: "gtceu:kuiper_survey_telescope"
+			id: "365B56DC19F60F0C"
+			rewards: [{ id: "2D846987106C8F4C", type: "xp", xp: 10 }]
+			shape: "gear"
+			size: 1.5d
+			subtitle: "ZPM, Grindless"
+			tasks: [{ id: "56072379D787B9CC", item: "gtceu:kuiper_survey_telescope", type: "item" }]
+			x: 22.0d
+			y: 41.0d
+		}
+		{
+			icon: "gtceu:naquadah_fuel_works"
+			id: "2B5A7F5908B2F123"
+			rewards: [{ id: "5A8A60970910C394", type: "xp", xp: 10 }]
+			shape: "gear"
+			size: 1.5d
+			subtitle: "ZPM, Grindless"
+			tasks: [{ id: "287241A020AAB09D", item: "gtceu:naquadah_fuel_works", type: "item" }]
+			x: 24.0d
 			y: 41.0d
 		}
 		{
@@ -1944,8 +2043,30 @@
 			size: 1.5d
 			subtitle: "ZPM, Grindless"
 			tasks: [{ id: "62E37F667841CD7B", item: "gtceu:naquadria_magnet_works", type: "item" }]
-			x: 8.0d
-			y: 41.0d
+			x: 2.0d
+			y: 43.0d
+		}
+		{
+			icon: "gtceu:naquadria_refinery"
+			id: "5858935A6C8E986B"
+			rewards: [{ id: "2A31FD03B7938D94", type: "xp", xp: 10 }]
+			shape: "gear"
+			size: 1.5d
+			subtitle: "ZPM, Grindless"
+			tasks: [{ id: "6F83EE92EF58EDB7", item: "gtceu:naquadria_refinery", type: "item" }]
+			x: 4.0d
+			y: 43.0d
+		}
+		{
+			icon: "gtceu:neutrino_observatory"
+			id: "311B12EAF13C410B"
+			rewards: [{ id: "25BBED7C244AB27D", type: "xp", xp: 10 }]
+			shape: "gear"
+			size: 1.5d
+			subtitle: "ZPM, Grindless"
+			tasks: [{ id: "5CE9CDF032EF21E7", item: "gtceu:neutrino_observatory", type: "item" }]
+			x: 6.0d
+			y: 43.0d
 		}
 		{
 			icon: "gtceu:plasma_quench_caster"
@@ -1955,8 +2076,63 @@
 			size: 1.5d
 			subtitle: "ZPM, Grindless"
 			tasks: [{ id: "1DCCC4FE87A0C985", item: "gtceu:plasma_quench_caster", type: "item" }]
+			x: 8.0d
+			y: 43.0d
+		}
+		{
+			icon: "gtceu:plume_sampler"
+			id: "539662A51786B105"
+			rewards: [{ id: "75F2E06FF843823A", type: "xp", xp: 10 }]
+			shape: "gear"
+			size: 1.5d
+			subtitle: "ZPM, Grindless"
+			tasks: [{ id: "42E41D1DD59A33FD", item: "gtceu:plume_sampler", type: "item" }]
 			x: 10.0d
-			y: 41.0d
+			y: 43.0d
+		}
+		{
+			icon: "gtceu:ring_harvester"
+			id: "7F8B441C6E52C8F4"
+			rewards: [{ id: "397467F7DF7A3466", type: "xp", xp: 10 }]
+			shape: "gear"
+			size: 1.5d
+			subtitle: "ZPM, Grindless"
+			tasks: [{ id: "7C29782A793CA736", item: "gtceu:ring_harvester", type: "item" }]
+			x: 12.0d
+			y: 43.0d
+		}
+		{
+			icon: "gtceu:ring_seismometer"
+			id: "11CA4A97B04FD172"
+			rewards: [{ id: "599D5F5E86689681", type: "xp", xp: 10 }]
+			shape: "gear"
+			size: 1.5d
+			subtitle: "ZPM, Grindless"
+			tasks: [{ id: "1FD452D20D5CF2AC", item: "gtceu:ring_seismometer", type: "item" }]
+			x: 14.0d
+			y: 43.0d
+		}
+		{
+			icon: "gtceu:slurry_separator"
+			id: "724455DBB5DAEEAF"
+			rewards: [{ id: "29CFD9F07DE513AD", type: "xp", xp: 10 }]
+			shape: "gear"
+			size: 1.5d
+			subtitle: "ZPM, Grindless"
+			tasks: [{ id: "4DD50CD8E7FDB672", item: "gtceu:slurry_separator", type: "item" }]
+			x: 16.0d
+			y: 43.0d
+		}
+		{
+			icon: "gtceu:tholin_reformer"
+			id: "1E7C157CC1365AE2"
+			rewards: [{ id: "6C63633D8BCD75C8", type: "xp", xp: 10 }]
+			shape: "gear"
+			size: 1.5d
+			subtitle: "ZPM, Grindless"
+			tasks: [{ id: "50B16B666F53422B", item: "gtceu:tholin_reformer", type: "item" }]
+			x: 18.0d
+			y: 43.0d
 		}
 		{
 			icon: "gtceu:waste_retrieval_plant"
@@ -1966,8 +2142,8 @@
 			size: 1.5d
 			subtitle: "ZPM, Grindless"
 			tasks: [{ id: "289312620DE3F974", item: "gtceu:waste_retrieval_plant", type: "item" }]
-			x: 12.0d
-			y: 41.0d
+			x: 20.0d
+			y: 43.0d
 		}
 		{
 			icon: "gtceu:aerogel_works"
@@ -1977,30 +2153,8 @@
 			size: 1.25d
 			subtitle: "ZPM, GregTech"
 			tasks: [{ id: "176AA8FDF4486D1D", item: "gtceu:aerogel_works", type: "item" }]
-			x: 14.0d
-			y: 41.0d
-		}
-		{
-			icon: "gtceu:assembly_hall"
-			id: "3FBB9E901329E367"
-			rewards: [{ id: "673BAC95E49D6D0A", type: "xp", xp: 10 }]
-			shape: "gear"
-			size: 1.25d
-			subtitle: "ZPM, GregTech"
-			tasks: [{ id: "66D4754DC27CB26F", item: "gtceu:assembly_hall", type: "item" }]
-			x: 16.0d
-			y: 41.0d
-		}
-		{
-			icon: "gtceu:deep_space_network"
-			id: "4FF52F79BEE42532"
-			rewards: [{ id: "12E5BBD15CC9CC8E", type: "xp", xp: 10 }]
-			shape: "gear"
-			size: 1.25d
-			subtitle: "ZPM, GregTech"
-			tasks: [{ id: "6F7E1657E0F66014", item: "gtceu:deep_space_network", type: "item" }]
-			x: 18.0d
-			y: 41.0d
+			x: 22.0d
+			y: 43.0d
 		}
 		{
 			icon: "gtceu:diamond_lattice_fab"
@@ -2010,40 +2164,7 @@
 			size: 1.25d
 			subtitle: "ZPM, GregTech"
 			tasks: [{ id: "41700A436284C2B1", item: "gtceu:diamond_lattice_fab", type: "item" }]
-			x: 20.0d
-			y: 41.0d
-		}
-		{
-			icon: "gtceu:entry_probe_bay"
-			id: "7A54170A3E456D8A"
-			rewards: [{ id: "78B2E29D0C710CEF", type: "xp", xp: 10 }]
-			shape: "gear"
-			size: 1.25d
-			subtitle: "ZPM, GregTech"
-			tasks: [{ id: "1F69772D9D59D1A7", item: "gtceu:entry_probe_bay", type: "item" }]
-			x: 22.0d
-			y: 41.0d
-		}
-		{
-			icon: "gtceu:flyby_probe_bay"
-			id: "345AA6FA725D354C"
-			rewards: [{ id: "3045933143011906", type: "xp", xp: 10 }]
-			shape: "gear"
-			size: 1.25d
-			subtitle: "ZPM, GregTech"
-			tasks: [{ id: "1F9074521BB57408", item: "gtceu:flyby_probe_bay", type: "item" }]
 			x: 24.0d
-			y: 41.0d
-		}
-		{
-			icon: "gtceu:gas_giant_siphon"
-			id: "1FB566A9440FA39C"
-			rewards: [{ id: "2E3F00A554E5E8BD", type: "xp", xp: 10 }]
-			shape: "gear"
-			size: 1.25d
-			subtitle: "ZPM, GregTech"
-			tasks: [{ id: "2CEBAAAC02AF5BB6", item: "gtceu:gas_giant_siphon", type: "item" }]
-			x: 2.0d
 			y: 43.0d
 		}
 		{
@@ -2054,19 +2175,8 @@
 			size: 1.25d
 			subtitle: "ZPM, GregTech"
 			tasks: [{ id: "7BB9ED4904F56EDF", item: "gtceu:high_performance_computation_array", type: "item" }]
-			x: 4.0d
-			y: 43.0d
-		}
-		{
-			icon: "gtceu:ice_giant_siphon"
-			id: "33BADC21286544F3"
-			rewards: [{ id: "1FC7C932C4CFF6FB", type: "xp", xp: 10 }]
-			shape: "gear"
-			size: 1.25d
-			subtitle: "ZPM, GregTech"
-			tasks: [{ id: "2E45061A235E88D9", item: "gtceu:ice_giant_siphon", type: "item" }]
-			x: 6.0d
-			y: 43.0d
+			x: 2.0d
+			y: 45.0d
 		}
 		{
 			icon: "gtceu:ion_implanter"
@@ -2076,30 +2186,8 @@
 			size: 1.25d
 			subtitle: "ZPM, GregTech"
 			tasks: [{ id: "765DCD3A27E77AC1", item: "gtceu:ion_implanter", type: "item" }]
-			x: 8.0d
-			y: 43.0d
-		}
-		{
-			icon: "gtceu:isotope_column"
-			id: "21054CAB76336A49"
-			rewards: [{ id: "5EE1CDC7427415EA", type: "xp", xp: 10 }]
-			shape: "gear"
-			size: 1.25d
-			subtitle: "ZPM, GregTech"
-			tasks: [{ id: "69F18893DFAECB03", item: "gtceu:isotope_column", type: "item" }]
-			x: 10.0d
-			y: 43.0d
-		}
-		{
-			icon: "gtceu:kuiper_survey_telescope"
-			id: "365B56DC19F60F0C"
-			rewards: [{ id: "2D846987106C8F4C", type: "xp", xp: 10 }]
-			shape: "gear"
-			size: 1.25d
-			subtitle: "ZPM, GregTech"
-			tasks: [{ id: "56072379D787B9CC", item: "gtceu:kuiper_survey_telescope", type: "item" }]
-			x: 12.0d
-			y: 43.0d
+			x: 4.0d
+			y: 45.0d
 		}
 		{
 			icon: "gtceu:luv_fusion_reactor"
@@ -2109,8 +2197,8 @@
 			size: 1.25d
 			subtitle: "ZPM, GregTech"
 			tasks: [{ id: "4C1BABACBC849A5A", item: "gtceu:luv_fusion_reactor", type: "item" }]
-			x: 14.0d
-			y: 43.0d
+			x: 6.0d
+			y: 45.0d
 		}
 		{
 			icon: "gtceu:methane_pyrolyser"
@@ -2120,52 +2208,8 @@
 			size: 1.25d
 			subtitle: "ZPM, GregTech"
 			tasks: [{ id: "7F38C5B651787031", item: "gtceu:methane_pyrolyser", type: "item" }]
-			x: 16.0d
-			y: 43.0d
-		}
-		{
-			icon: "gtceu:naquadah_fuel_works"
-			id: "2B5A7F5908B2F123"
-			rewards: [{ id: "5A8A60970910C394", type: "xp", xp: 10 }]
-			shape: "gear"
-			size: 1.25d
-			subtitle: "ZPM, GregTech"
-			tasks: [{ id: "287241A020AAB09D", item: "gtceu:naquadah_fuel_works", type: "item" }]
-			x: 18.0d
-			y: 43.0d
-		}
-		{
-			icon: "gtceu:naquadria_refinery"
-			id: "5858935A6C8E986B"
-			rewards: [{ id: "2A31FD03B7938D94", type: "xp", xp: 10 }]
-			shape: "gear"
-			size: 1.25d
-			subtitle: "ZPM, GregTech"
-			tasks: [{ id: "6F83EE92EF58EDB7", item: "gtceu:naquadria_refinery", type: "item" }]
-			x: 20.0d
-			y: 43.0d
-		}
-		{
-			icon: "gtceu:neutrino_observatory"
-			id: "311B12EAF13C410B"
-			rewards: [{ id: "25BBED7C244AB27D", type: "xp", xp: 10 }]
-			shape: "gear"
-			size: 1.25d
-			subtitle: "ZPM, GregTech"
-			tasks: [{ id: "5CE9CDF032EF21E7", item: "gtceu:neutrino_observatory", type: "item" }]
-			x: 22.0d
-			y: 43.0d
-		}
-		{
-			icon: "gtceu:plume_sampler"
-			id: "539662A51786B105"
-			rewards: [{ id: "75F2E06FF843823A", type: "xp", xp: 10 }]
-			shape: "gear"
-			size: 1.25d
-			subtitle: "ZPM, GregTech"
-			tasks: [{ id: "42E41D1DD59A33FD", item: "gtceu:plume_sampler", type: "item" }]
-			x: 24.0d
-			y: 43.0d
+			x: 8.0d
+			y: 45.0d
 		}
 		{
 			icon: "gtceu:qubit_fab"
@@ -2175,7 +2219,7 @@
 			size: 1.25d
 			subtitle: "ZPM, GregTech"
 			tasks: [{ id: "53F6B72030710859", item: "gtceu:qubit_fab", type: "item" }]
-			x: 2.0d
+			x: 10.0d
 			y: 45.0d
 		}
 		{
@@ -2186,50 +2230,6 @@
 			size: 1.25d
 			subtitle: "ZPM, GregTech"
 			tasks: [{ id: "7566512207E0292A", item: "gtceu:research_station", type: "item" }]
-			x: 4.0d
-			y: 45.0d
-		}
-		{
-			icon: "gtceu:ring_harvester"
-			id: "7F8B441C6E52C8F4"
-			rewards: [{ id: "397467F7DF7A3466", type: "xp", xp: 10 }]
-			shape: "gear"
-			size: 1.25d
-			subtitle: "ZPM, GregTech"
-			tasks: [{ id: "7C29782A793CA736", item: "gtceu:ring_harvester", type: "item" }]
-			x: 6.0d
-			y: 45.0d
-		}
-		{
-			icon: "gtceu:ring_seismometer"
-			id: "11CA4A97B04FD172"
-			rewards: [{ id: "599D5F5E86689681", type: "xp", xp: 10 }]
-			shape: "gear"
-			size: 1.25d
-			subtitle: "ZPM, GregTech"
-			tasks: [{ id: "1FD452D20D5CF2AC", item: "gtceu:ring_seismometer", type: "item" }]
-			x: 8.0d
-			y: 45.0d
-		}
-		{
-			icon: "gtceu:slurry_separator"
-			id: "724455DBB5DAEEAF"
-			rewards: [{ id: "29CFD9F07DE513AD", type: "xp", xp: 10 }]
-			shape: "gear"
-			size: 1.25d
-			subtitle: "ZPM, GregTech"
-			tasks: [{ id: "4DD50CD8E7FDB672", item: "gtceu:slurry_separator", type: "item" }]
-			x: 10.0d
-			y: 45.0d
-		}
-		{
-			icon: "gtceu:tholin_reformer"
-			id: "1E7C157CC1365AE2"
-			rewards: [{ id: "6C63633D8BCD75C8", type: "xp", xp: 10 }]
-			shape: "gear"
-			size: 1.25d
-			subtitle: "ZPM, GregTech"
-			tasks: [{ id: "50B16B666F53422B", item: "gtceu:tholin_reformer", type: "item" }]
 			x: 12.0d
 			y: 45.0d
 		}
@@ -2256,6 +2256,39 @@
 			y: 48.0d
 		}
 		{
+			icon: "gtceu:accelerator_driven_reactor"
+			id: "4CBE26183F94278E"
+			rewards: [{ id: "3585A7B2AE139A53", type: "xp", xp: 10 }]
+			shape: "gear"
+			size: 1.5d
+			subtitle: "UV, Grindless"
+			tasks: [{ id: "7F1E5D3E4BDFFB78", item: "gtceu:accelerator_driven_reactor", type: "item" }]
+			x: 2.0d
+			y: 48.0d
+		}
+		{
+			icon: "gtceu:amorphous_ice_annealer"
+			id: "2F8136A0CAEE1FA9"
+			rewards: [{ id: "19EBAAF99C9AB183", type: "xp", xp: 10 }]
+			shape: "gear"
+			size: 1.5d
+			subtitle: "UV, Grindless"
+			tasks: [{ id: "281968C69CC3D842", item: "gtceu:amorphous_ice_annealer", type: "item" }]
+			x: 4.0d
+			y: 48.0d
+		}
+		{
+			icon: "gtceu:antimatter_trap"
+			id: "20B31C7E2804E62C"
+			rewards: [{ id: "1851509D2F0047C1", type: "xp", xp: 10 }]
+			shape: "gear"
+			size: 1.5d
+			subtitle: "UV, Grindless"
+			tasks: [{ id: "1C2CAF613EBBD56E", item: "gtceu:antimatter_trap", type: "item" }]
+			x: 6.0d
+			y: 48.0d
+		}
+		{
 			icon: "gtceu:ark_biosphere"
 			id: "51D71DC430663CA3"
 			rewards: [{ id: "68FA602201A73105", type: "xp", xp: 10 }]
@@ -2263,7 +2296,40 @@
 			size: 1.5d
 			subtitle: "UV, Grindless"
 			tasks: [{ id: "6F928595E159DEE5", item: "gtceu:ark_biosphere", type: "item" }]
-			x: 2.0d
+			x: 8.0d
+			y: 48.0d
+		}
+		{
+			icon: "gtceu:boron_nitride_reactor"
+			id: "430D06D841825501"
+			rewards: [{ id: "1805B340CB093732", type: "xp", xp: 10 }]
+			shape: "gear"
+			size: 1.5d
+			subtitle: "UV, Grindless"
+			tasks: [{ id: "43549896BC7BEEDF", item: "gtceu:boron_nitride_reactor", type: "item" }]
+			x: 10.0d
+			y: 48.0d
+		}
+		{
+			icon: "gtceu:cryotank_winder"
+			id: "37C1BD273001C5FD"
+			rewards: [{ id: "41E02013DE3A4D4B", type: "xp", xp: 10 }]
+			shape: "gear"
+			size: 1.5d
+			subtitle: "UV, Grindless"
+			tasks: [{ id: "71DD01DBFB60AA35", item: "gtceu:cryotank_winder", type: "item" }]
+			x: 12.0d
+			y: 48.0d
+		}
+		{
+			icon: "gtceu:event_horizon_interferometer"
+			id: "766D17633FCE72E0"
+			rewards: [{ id: "784598B0D46E5609", type: "xp", xp: 10 }]
+			shape: "gear"
+			size: 1.5d
+			subtitle: "UV, Grindless"
+			tasks: [{ id: "20C92FD83C8A3F75", item: "gtceu:event_horizon_interferometer", type: "item" }]
+			x: 14.0d
 			y: 48.0d
 		}
 		{
@@ -2274,7 +2340,7 @@
 			size: 1.5d
 			subtitle: "UV, Grindless"
 			tasks: [{ id: "243A83F1F7DB04D9", item: "gtceu:fibre_draw_tower", type: "item" }]
-			x: 4.0d
+			x: 16.0d
 			y: 48.0d
 		}
 		{
@@ -2285,7 +2351,18 @@
 			size: 1.5d
 			subtitle: "UV, Grindless"
 			tasks: [{ id: "6008FF497B3A4742", item: "gtceu:heat_source_works", type: "item" }]
-			x: 6.0d
+			x: 18.0d
+			y: 48.0d
+		}
+		{
+			icon: "gtceu:kuiper_interceptor_bay"
+			id: "412D80A0C190FE4A"
+			rewards: [{ id: "30C1986D11B87368", type: "xp", xp: 10 }]
+			shape: "gear"
+			size: 1.5d
+			subtitle: "UV, Grindless"
+			tasks: [{ id: "764559B29F82A083", item: "gtceu:kuiper_interceptor_bay", type: "item" }]
+			x: 20.0d
 			y: 48.0d
 		}
 		{
@@ -2296,7 +2373,7 @@
 			size: 1.5d
 			subtitle: "UV, Grindless"
 			tasks: [{ id: "2F3EBECF74802900", item: "gtceu:laser_fusion_chamber", type: "item" }]
-			x: 8.0d
+			x: 22.0d
 			y: 48.0d
 		}
 		{
@@ -2307,7 +2384,7 @@
 			size: 1.5d
 			subtitle: "UV, Grindless"
 			tasks: [{ id: "2DC0BDCA35D69157", item: "gtceu:laser_sail_launcher", type: "item" }]
-			x: 10.0d
+			x: 24.0d
 			y: 48.0d
 		}
 		{
@@ -2318,8 +2395,8 @@
 			size: 1.5d
 			subtitle: "UV, Grindless"
 			tasks: [{ id: "3E3D3E9DD210A148", item: "gtceu:light_sail_fab", type: "item" }]
-			x: 12.0d
-			y: 48.0d
+			x: 2.0d
+			y: 50.0d
 		}
 		{
 			icon: "gtceu:mocvd_reactor"
@@ -2329,8 +2406,30 @@
 			size: 1.5d
 			subtitle: "UV, Grindless"
 			tasks: [{ id: "4BBE0E10A7044B05", item: "gtceu:mocvd_reactor", type: "item" }]
-			x: 14.0d
-			y: 48.0d
+			x: 4.0d
+			y: 50.0d
+		}
+		{
+			icon: "gtceu:muon_fusion_cell"
+			id: "346E6DE4860E3065"
+			rewards: [{ id: "1446BF1BDA37A609", type: "xp", xp: 10 }]
+			shape: "gear"
+			size: 1.5d
+			subtitle: "UV, Grindless"
+			tasks: [{ id: "3915D157116D9532", item: "gtceu:muon_fusion_cell", type: "item" }]
+			x: 6.0d
+			y: 50.0d
+		}
+		{
+			icon: "gtceu:neptune_deep_siphon"
+			id: "4DD74BE2F4246F78"
+			rewards: [{ id: "68A4B083B50FA65E", type: "xp", xp: 10 }]
+			shape: "gear"
+			size: 1.5d
+			subtitle: "UV, Grindless"
+			tasks: [{ id: "220851F230203B28", item: "gtceu:neptune_deep_siphon", type: "item" }]
+			x: 8.0d
+			y: 50.0d
 		}
 		{
 			icon: "gtceu:neural_culture_vat"
@@ -2340,8 +2439,8 @@
 			size: 1.5d
 			subtitle: "UV, Grindless"
 			tasks: [{ id: "4B63522B030EEF01", item: "gtceu:neural_culture_vat", type: "item" }]
-			x: 16.0d
-			y: 48.0d
+			x: 10.0d
+			y: 50.0d
 		}
 		{
 			icon: "gtceu:optical_ground_station"
@@ -2351,8 +2450,63 @@
 			size: 1.5d
 			subtitle: "UV, Grindless"
 			tasks: [{ id: "7FB4F74AFD902AFC", item: "gtceu:optical_ground_station", type: "item" }]
+			x: 12.0d
+			y: 50.0d
+		}
+		{
+			icon: "gtceu:penetrator_probe_bay"
+			id: "4A212DB8EB89A71D"
+			rewards: [{ id: "6844B79C5BBD1D9C", type: "xp", xp: 10 }]
+			shape: "gear"
+			size: 1.5d
+			subtitle: "UV, Grindless"
+			tasks: [{ id: "38289EAECA2F2F72", item: "gtceu:penetrator_probe_bay", type: "item" }]
+			x: 14.0d
+			y: 50.0d
+		}
+		{
+			icon: "gtceu:powder_bed_printer"
+			id: "284EAFB506673BCF"
+			rewards: [{ id: "7B2CD75A802FB667", type: "xp", xp: 10 }]
+			shape: "gear"
+			size: 1.5d
+			subtitle: "UV, Grindless"
+			tasks: [{ id: "2FE5AA5B1243F776", item: "gtceu:powder_bed_printer", type: "item" }]
+			x: 16.0d
+			y: 50.0d
+		}
+		{
+			icon: "gtceu:powder_in_tube_line"
+			id: "78F529F70089340F"
+			rewards: [{ id: "4450A3C61F8B3983", type: "xp", xp: 10 }]
+			shape: "gear"
+			size: 1.5d
+			subtitle: "UV, Grindless"
+			tasks: [{ id: "3698CE238355F9AB", item: "gtceu:powder_in_tube_line", type: "item" }]
 			x: 18.0d
-			y: 48.0d
+			y: 50.0d
+		}
+		{
+			icon: "gtceu:precursor_probe_bay"
+			id: "7086FC78E0ECA518"
+			rewards: [{ id: "2C1274FE38C3E937", type: "xp", xp: 10 }]
+			shape: "gear"
+			size: 1.5d
+			subtitle: "UV, Grindless"
+			tasks: [{ id: "4F91DCB78D1DB71B", item: "gtceu:precursor_probe_bay", type: "item" }]
+			x: 20.0d
+			y: 50.0d
+		}
+		{
+			icon: "gtceu:pyroprocessing_cell"
+			id: "606C26D9A44E1DF4"
+			rewards: [{ id: "193E66B417274AD9", type: "xp", xp: 10 }]
+			shape: "gear"
+			size: 1.5d
+			subtitle: "UV, Grindless"
+			tasks: [{ id: "10E949763B316188", item: "gtceu:pyroprocessing_cell", type: "item" }]
+			x: 22.0d
+			y: 50.0d
 		}
 		{
 			icon: "gtceu:srf_cavity_works"
@@ -2362,8 +2516,8 @@
 			size: 1.5d
 			subtitle: "UV, Grindless"
 			tasks: [{ id: "3143F410FECD4485", item: "gtceu:srf_cavity_works", type: "item" }]
-			x: 20.0d
-			y: 48.0d
+			x: 24.0d
+			y: 50.0d
 		}
 		{
 			icon: "gtceu:starchip_fab"
@@ -2373,8 +2527,8 @@
 			size: 1.5d
 			subtitle: "UV, Grindless"
 			tasks: [{ id: "2D1AA1B3B72BAE09", item: "gtceu:starchip_fab", type: "item" }]
-			x: 22.0d
-			y: 48.0d
+			x: 2.0d
+			y: 52.0d
 		}
 		{
 			icon: "gtceu:superfluid_helium_plant"
@@ -2384,8 +2538,52 @@
 			size: 1.5d
 			subtitle: "UV, Grindless"
 			tasks: [{ id: "1143A5A5F1AA7864", item: "gtceu:superfluid_helium_plant", type: "item" }]
-			x: 24.0d
-			y: 48.0d
+			x: 4.0d
+			y: 52.0d
+		}
+		{
+			icon: "gtceu:synchrotron"
+			id: "55B5494F608F6D79"
+			rewards: [{ id: "631AF43F1747DFCB", type: "xp", xp: 10 }]
+			shape: "gear"
+			size: 1.5d
+			subtitle: "UV, Grindless"
+			tasks: [{ id: "328EA0564D02DF2D", item: "gtceu:synchrotron", type: "item" }]
+			x: 6.0d
+			y: 52.0d
+		}
+		{
+			icon: "gtceu:thruster_works"
+			id: "2CD54606ED4E3578"
+			rewards: [{ id: "1E747A9AB8C5C797", type: "xp", xp: 10 }]
+			shape: "gear"
+			size: 1.5d
+			subtitle: "UV, Grindless"
+			tasks: [{ id: "7805A32BE3317343", item: "gtceu:thruster_works", type: "item" }]
+			x: 8.0d
+			y: 52.0d
+		}
+		{
+			icon: "gtceu:triton_geyser_sampler"
+			id: "40B6642A6F63C9D5"
+			rewards: [{ id: "71088369A1779DEE", type: "xp", xp: 10 }]
+			shape: "gear"
+			size: 1.5d
+			subtitle: "UV, Grindless"
+			tasks: [{ id: "235C99AA886EAFE9", item: "gtceu:triton_geyser_sampler", type: "item" }]
+			x: 10.0d
+			y: 52.0d
+		}
+		{
+			icon: "gtceu:volatile_ice_fractionator"
+			id: "69CD5117212408E1"
+			rewards: [{ id: "55E5032E66EF2343", type: "xp", xp: 10 }]
+			shape: "gear"
+			size: 1.5d
+			subtitle: "UV, Grindless"
+			tasks: [{ id: "473292A8313BDFFB", item: "gtceu:volatile_ice_fractionator", type: "item" }]
+			x: 12.0d
+			y: 52.0d
 		}
 		{
 			icon: "gtceu:zone_refining_tower"
@@ -2395,52 +2593,8 @@
 			size: 1.5d
 			subtitle: "UV, Grindless"
 			tasks: [{ id: "481D5618F44FABEA", item: "gtceu:zone_refining_tower", type: "item" }]
-			x: 2.0d
-			y: 50.0d
-		}
-		{
-			icon: "gtceu:accelerator_driven_reactor"
-			id: "4CBE26183F94278E"
-			rewards: [{ id: "3585A7B2AE139A53", type: "xp", xp: 10 }]
-			shape: "gear"
-			size: 1.25d
-			subtitle: "UV, GregTech"
-			tasks: [{ id: "7F1E5D3E4BDFFB78", item: "gtceu:accelerator_driven_reactor", type: "item" }]
-			x: 4.0d
-			y: 50.0d
-		}
-		{
-			icon: "gtceu:amorphous_ice_annealer"
-			id: "2F8136A0CAEE1FA9"
-			rewards: [{ id: "19EBAAF99C9AB183", type: "xp", xp: 10 }]
-			shape: "gear"
-			size: 1.25d
-			subtitle: "UV, GregTech"
-			tasks: [{ id: "281968C69CC3D842", item: "gtceu:amorphous_ice_annealer", type: "item" }]
-			x: 6.0d
-			y: 50.0d
-		}
-		{
-			icon: "gtceu:antimatter_trap"
-			id: "20B31C7E2804E62C"
-			rewards: [{ id: "1851509D2F0047C1", type: "xp", xp: 10 }]
-			shape: "gear"
-			size: 1.25d
-			subtitle: "UV, GregTech"
-			tasks: [{ id: "1C2CAF613EBBD56E", item: "gtceu:antimatter_trap", type: "item" }]
-			x: 8.0d
-			y: 50.0d
-		}
-		{
-			icon: "gtceu:boron_nitride_reactor"
-			id: "430D06D841825501"
-			rewards: [{ id: "1805B340CB093732", type: "xp", xp: 10 }]
-			shape: "gear"
-			size: 1.25d
-			subtitle: "UV, GregTech"
-			tasks: [{ id: "43549896BC7BEEDF", item: "gtceu:boron_nitride_reactor", type: "item" }]
-			x: 10.0d
-			y: 50.0d
+			x: 14.0d
+			y: 52.0d
 		}
 		{
 			icon: "gtca:comet"
@@ -2450,30 +2604,8 @@
 			size: 1.25d
 			subtitle: "UV, GT Community Additions"
 			tasks: [{ id: "148156009EFB315C", item: "gtca:comet", type: "item" }]
-			x: 12.0d
-			y: 50.0d
-		}
-		{
-			icon: "gtceu:cryotank_winder"
-			id: "37C1BD273001C5FD"
-			rewards: [{ id: "41E02013DE3A4D4B", type: "xp", xp: 10 }]
-			shape: "gear"
-			size: 1.25d
-			subtitle: "UV, GregTech"
-			tasks: [{ id: "71DD01DBFB60AA35", item: "gtceu:cryotank_winder", type: "item" }]
-			x: 14.0d
-			y: 50.0d
-		}
-		{
-			icon: "gtceu:event_horizon_interferometer"
-			id: "766D17633FCE72E0"
-			rewards: [{ id: "784598B0D46E5609", type: "xp", xp: 10 }]
-			shape: "gear"
-			size: 1.25d
-			subtitle: "UV, GregTech"
-			tasks: [{ id: "20C92FD83C8A3F75", item: "gtceu:event_horizon_interferometer", type: "item" }]
 			x: 16.0d
-			y: 50.0d
+			y: 52.0d
 		}
 		{
 			icon: "gtca:flotation_cell_regulator"
@@ -2484,7 +2616,7 @@
 			subtitle: "UV, GT Community Additions"
 			tasks: [{ id: "4387BC1FEA58FAAC", item: "gtca:flotation_cell_regulator", type: "item" }]
 			x: 18.0d
-			y: 50.0d
+			y: 52.0d
 		}
 		{
 			icon: "gtca:isamill"
@@ -2495,18 +2627,7 @@
 			subtitle: "UV, GT Community Additions"
 			tasks: [{ id: "3FDE119905DEC2B0", item: "gtca:isamill", type: "item" }]
 			x: 20.0d
-			y: 50.0d
-		}
-		{
-			icon: "gtceu:kuiper_interceptor_bay"
-			id: "412D80A0C190FE4A"
-			rewards: [{ id: "30C1986D11B87368", type: "xp", xp: 10 }]
-			shape: "gear"
-			size: 1.25d
-			subtitle: "UV, GregTech"
-			tasks: [{ id: "764559B29F82A083", item: "gtceu:kuiper_interceptor_bay", type: "item" }]
-			x: 22.0d
-			y: 50.0d
+			y: 52.0d
 		}
 		{
 			icon: "gtnn:large_naquadah_reactor"
@@ -2516,8 +2637,8 @@
 			size: 1.25d
 			subtitle: "UV, GT--"
 			tasks: [{ id: "58693D53827378A2", item: "gtnn:large_naquadah_reactor", type: "item" }]
-			x: 24.0d
-			y: 50.0d
+			x: 22.0d
+			y: 52.0d
 		}
 		{
 			icon: "gtceu:mega_blast_furnace"
@@ -2527,7 +2648,7 @@
 			size: 1.25d
 			subtitle: "UV, GregTech"
 			tasks: [{ id: "324CF1E04E576544", item: "gtceu:mega_blast_furnace", type: "item" }]
-			x: 2.0d
+			x: 24.0d
 			y: 52.0d
 		}
 		{
@@ -2538,30 +2659,8 @@
 			size: 1.25d
 			subtitle: "UV, GregTech"
 			tasks: [{ id: "7C696D29179FE07E", item: "gtceu:mega_vacuum_freezer", type: "item" }]
-			x: 4.0d
-			y: 52.0d
-		}
-		{
-			icon: "gtceu:muon_fusion_cell"
-			id: "346E6DE4860E3065"
-			rewards: [{ id: "1446BF1BDA37A609", type: "xp", xp: 10 }]
-			shape: "gear"
-			size: 1.25d
-			subtitle: "UV, GregTech"
-			tasks: [{ id: "3915D157116D9532", item: "gtceu:muon_fusion_cell", type: "item" }]
-			x: 6.0d
-			y: 52.0d
-		}
-		{
-			icon: "gtceu:neptune_deep_siphon"
-			id: "4DD74BE2F4246F78"
-			rewards: [{ id: "68A4B083B50FA65E", type: "xp", xp: 10 }]
-			shape: "gear"
-			size: 1.25d
-			subtitle: "UV, GregTech"
-			tasks: [{ id: "220851F230203B28", item: "gtceu:neptune_deep_siphon", type: "item" }]
-			x: 8.0d
-			y: 52.0d
+			x: 2.0d
+			y: 54.0d
 		}
 		{
 			icon: "gtceu:network_switch"
@@ -2571,74 +2670,8 @@
 			size: 1.25d
 			subtitle: "UV, GregTech"
 			tasks: [{ id: "2A102870D900A19D", item: "gtceu:network_switch", type: "item" }]
-			x: 10.0d
-			y: 52.0d
-		}
-		{
-			icon: "gtceu:penetrator_probe_bay"
-			id: "4A212DB8EB89A71D"
-			rewards: [{ id: "6844B79C5BBD1D9C", type: "xp", xp: 10 }]
-			shape: "gear"
-			size: 1.25d
-			subtitle: "UV, GregTech"
-			tasks: [{ id: "38289EAECA2F2F72", item: "gtceu:penetrator_probe_bay", type: "item" }]
-			x: 12.0d
-			y: 52.0d
-		}
-		{
-			icon: "gtceu:powder_bed_printer"
-			id: "284EAFB506673BCF"
-			rewards: [{ id: "7B2CD75A802FB667", type: "xp", xp: 10 }]
-			shape: "gear"
-			size: 1.25d
-			subtitle: "UV, GregTech"
-			tasks: [{ id: "2FE5AA5B1243F776", item: "gtceu:powder_bed_printer", type: "item" }]
-			x: 14.0d
-			y: 52.0d
-		}
-		{
-			icon: "gtceu:powder_in_tube_line"
-			id: "78F529F70089340F"
-			rewards: [{ id: "4450A3C61F8B3983", type: "xp", xp: 10 }]
-			shape: "gear"
-			size: 1.25d
-			subtitle: "UV, GregTech"
-			tasks: [{ id: "3698CE238355F9AB", item: "gtceu:powder_in_tube_line", type: "item" }]
-			x: 16.0d
-			y: 52.0d
-		}
-		{
-			icon: "gtceu:precursor_probe_bay"
-			id: "7086FC78E0ECA518"
-			rewards: [{ id: "2C1274FE38C3E937", type: "xp", xp: 10 }]
-			shape: "gear"
-			size: 1.25d
-			subtitle: "UV, GregTech"
-			tasks: [{ id: "4F91DCB78D1DB71B", item: "gtceu:precursor_probe_bay", type: "item" }]
-			x: 18.0d
-			y: 52.0d
-		}
-		{
-			icon: "gtceu:pyroprocessing_cell"
-			id: "606C26D9A44E1DF4"
-			rewards: [{ id: "193E66B417274AD9", type: "xp", xp: 10 }]
-			shape: "gear"
-			size: 1.25d
-			subtitle: "UV, GregTech"
-			tasks: [{ id: "10E949763B316188", item: "gtceu:pyroprocessing_cell", type: "item" }]
-			x: 20.0d
-			y: 52.0d
-		}
-		{
-			icon: "gtceu:synchrotron"
-			id: "55B5494F608F6D79"
-			rewards: [{ id: "631AF43F1747DFCB", type: "xp", xp: 10 }]
-			shape: "gear"
-			size: 1.25d
-			subtitle: "UV, GregTech"
-			tasks: [{ id: "328EA0564D02DF2D", item: "gtceu:synchrotron", type: "item" }]
-			x: 22.0d
-			y: 52.0d
+			x: 4.0d
+			y: 54.0d
 		}
 		{
 			icon: "gtca:tegmark_forge"
@@ -2648,39 +2681,6 @@
 			size: 1.25d
 			subtitle: "UV, GT Community Additions"
 			tasks: [{ id: "7A0E8E34DB802F48", item: "gtca:tegmark_forge", type: "item" }]
-			x: 24.0d
-			y: 52.0d
-		}
-		{
-			icon: "gtceu:thruster_works"
-			id: "2CD54606ED4E3578"
-			rewards: [{ id: "1E747A9AB8C5C797", type: "xp", xp: 10 }]
-			shape: "gear"
-			size: 1.25d
-			subtitle: "UV, GregTech"
-			tasks: [{ id: "7805A32BE3317343", item: "gtceu:thruster_works", type: "item" }]
-			x: 2.0d
-			y: 54.0d
-		}
-		{
-			icon: "gtceu:triton_geyser_sampler"
-			id: "40B6642A6F63C9D5"
-			rewards: [{ id: "71088369A1779DEE", type: "xp", xp: 10 }]
-			shape: "gear"
-			size: 1.25d
-			subtitle: "UV, GregTech"
-			tasks: [{ id: "235C99AA886EAFE9", item: "gtceu:triton_geyser_sampler", type: "item" }]
-			x: 4.0d
-			y: 54.0d
-		}
-		{
-			icon: "gtceu:volatile_ice_fractionator"
-			id: "69CD5117212408E1"
-			rewards: [{ id: "55E5032E66EF2343", type: "xp", xp: 10 }]
-			shape: "gear"
-			size: 1.25d
-			subtitle: "UV, GregTech"
-			tasks: [{ id: "473292A8313BDFFB", item: "gtceu:volatile_ice_fractionator", type: "item" }]
 			x: 6.0d
 			y: 54.0d
 		}
@@ -2718,6 +2718,105 @@
 			y: 57.0d
 		}
 		{
+			icon: "gtceu:baseline_astrometer"
+			id: "2131A9A0D383410B"
+			rewards: [{ id: "49D7CB44785D06AC", type: "xp", xp: 10 }]
+			shape: "gear"
+			size: 1.5d
+			subtitle: "UHV, Grindless"
+			tasks: [{ id: "3684F02C5FB8EA46", item: "gtceu:baseline_astrometer", type: "item" }]
+			x: 2.0d
+			y: 57.0d
+		}
+		{
+			icon: "gtceu:betavoltaic_fab"
+			id: "22DD7FF469D5D223"
+			rewards: [{ id: "71D6A8DD80410CB6", type: "xp", xp: 10 }]
+			shape: "gear"
+			size: 1.5d
+			subtitle: "UHV, Grindless"
+			tasks: [{ id: "6257437B55C8A474", item: "gtceu:betavoltaic_fab", type: "item" }]
+			x: 4.0d
+			y: 57.0d
+		}
+		{
+			icon: "gtceu:biomining_heap"
+			id: "7FABCA8FA53D669E"
+			rewards: [{ id: "1BF93D259E05C03B", type: "xp", xp: 10 }]
+			shape: "gear"
+			size: 1.5d
+			subtitle: "UHV, Grindless"
+			tasks: [{ id: "5A098349BD678B50", item: "gtceu:biomining_heap", type: "item" }]
+			x: 6.0d
+			y: 57.0d
+		}
+		{
+			icon: "gtceu:casimir_array"
+			id: "67F8877F2AF37435"
+			rewards: [{ id: "25FF23342AF54380", type: "xp", xp: 10 }]
+			shape: "gear"
+			size: 1.5d
+			subtitle: "UHV, Grindless"
+			tasks: [{ id: "27429905FD87C790", item: "gtceu:casimir_array", type: "item" }]
+			x: 8.0d
+			y: 57.0d
+		}
+		{
+			icon: "gtceu:cold_trap_drill"
+			id: "24B4EC90E3F365B5"
+			rewards: [{ id: "27D54813CFC99C92", type: "xp", xp: 10 }]
+			shape: "gear"
+			size: 1.5d
+			subtitle: "UHV, Grindless"
+			tasks: [{ id: "732D53C843CEAD7C", item: "gtceu:cold_trap_drill", type: "item" }]
+			x: 10.0d
+			y: 57.0d
+		}
+		{
+			icon: "gtceu:crystal_growth_furnace"
+			id: "1E394F278A2ADDD9"
+			rewards: [{ id: "124F247078D580A3", type: "xp", xp: 10 }]
+			shape: "gear"
+			size: 1.5d
+			subtitle: "UHV, Grindless"
+			tasks: [{ id: "2A99BD7745B77BC7", item: "gtceu:crystal_growth_furnace", type: "item" }]
+			x: 12.0d
+			y: 57.0d
+		}
+		{
+			icon: "gtceu:high_flux_reactor"
+			id: "31C565B40FFD1963"
+			rewards: [{ id: "2B194D8A15CEE04B", type: "xp", xp: 10 }]
+			shape: "gear"
+			size: 1.5d
+			subtitle: "UHV, Grindless"
+			tasks: [{ id: "16425B566C2556D7", item: "gtceu:high_flux_reactor", type: "item" }]
+			x: 14.0d
+			y: 57.0d
+		}
+		{
+			icon: "gtceu:mbe_reactor"
+			id: "4244397A77EA51BE"
+			rewards: [{ id: "796D8FD90EADE816", type: "xp", xp: 10 }]
+			shape: "gear"
+			size: 1.5d
+			subtitle: "UHV, Grindless"
+			tasks: [{ id: "56D94F05284517D5", item: "gtceu:mbe_reactor", type: "item" }]
+			x: 16.0d
+			y: 57.0d
+		}
+		{
+			icon: "gtceu:nuclear_clock_lab"
+			id: "29A9C7FF5B9375A2"
+			rewards: [{ id: "187AAA8B77C7DBBE", type: "xp", xp: 10 }]
+			shape: "gear"
+			size: 1.5d
+			subtitle: "UHV, Grindless"
+			tasks: [{ id: "2E0C505A6A384460", item: "gtceu:nuclear_clock_lab", type: "item" }]
+			x: 18.0d
+			y: 57.0d
+		}
+		{
 			icon: "gtceu:organoid_array"
 			id: "1177306395448CEA"
 			rewards: [{ id: "6A1396B6737676BD", type: "xp", xp: 10 }]
@@ -2725,7 +2824,7 @@
 			size: 1.5d
 			subtitle: "UHV, Grindless"
 			tasks: [{ id: "21BAF1ACA57B1C0C", item: "gtceu:organoid_array", type: "item" }]
-			x: 2.0d
+			x: 20.0d
 			y: 57.0d
 		}
 		{
@@ -2736,8 +2835,74 @@
 			size: 1.5d
 			subtitle: "UHV, Grindless"
 			tasks: [{ id: "637E5BBCC113E116", item: "gtceu:pbo_plant", type: "item" }]
-			x: 4.0d
+			x: 22.0d
 			y: 57.0d
+		}
+		{
+			icon: "gtceu:photonic_foundry"
+			id: "1739ABB8ED587478"
+			rewards: [{ id: "1D820AAC56779E7C", type: "xp", xp: 10 }]
+			shape: "gear"
+			size: 1.5d
+			subtitle: "UHV, Grindless"
+			tasks: [{ id: "2D09C189DF39A1BA", item: "gtceu:photonic_foundry", type: "item" }]
+			x: 24.0d
+			y: 57.0d
+		}
+		{
+			icon: "gtceu:positron_accumulator"
+			id: "31F9C84682E2B2AD"
+			rewards: [{ id: "34C0AD91EAFE927E", type: "xp", xp: 10 }]
+			shape: "gear"
+			size: 1.5d
+			subtitle: "UHV, Grindless"
+			tasks: [{ id: "6FB63D6AFF420A45", item: "gtceu:positron_accumulator", type: "item" }]
+			x: 2.0d
+			y: 59.0d
+		}
+		{
+			icon: "gtceu:radiotrophic_vat"
+			id: "6C6ECB0217202758"
+			rewards: [{ id: "5DDA87BA178A9408", type: "xp", xp: 10 }]
+			shape: "gear"
+			size: 1.5d
+			subtitle: "UHV, Grindless"
+			tasks: [{ id: "2830038BCA623AFE", item: "gtceu:radiotrophic_vat", type: "item" }]
+			x: 4.0d
+			y: 59.0d
+		}
+		{
+			icon: "gtceu:sample_receiving_facility"
+			id: "15183EE803B25E83"
+			rewards: [{ id: "3CB2746777CA400A", type: "xp", xp: 10 }]
+			shape: "gear"
+			size: 1.5d
+			subtitle: "UHV, Grindless"
+			tasks: [{ id: "238E762DE93740C6", item: "gtceu:sample_receiving_facility", type: "item" }]
+			x: 6.0d
+			y: 59.0d
+		}
+		{
+			icon: "gtceu:sic_device_fab"
+			id: "60BB37937A137607"
+			rewards: [{ id: "4F9509D04E6602E1", type: "xp", xp: 10 }]
+			shape: "gear"
+			size: 1.5d
+			subtitle: "UHV, Grindless"
+			tasks: [{ id: "2657949220D7A3E7", item: "gtceu:sic_device_fab", type: "item" }]
+			x: 8.0d
+			y: 59.0d
+		}
+		{
+			icon: "gtceu:solar_array_fab"
+			id: "6D506019470CEFD6"
+			rewards: [{ id: "1FA6431D04173F9F", type: "xp", xp: 10 }]
+			shape: "gear"
+			size: 1.5d
+			subtitle: "UHV, Grindless"
+			tasks: [{ id: "78E93F0549688BBD", item: "gtceu:solar_array_fab", type: "item" }]
+			x: 10.0d
+			y: 59.0d
 		}
 		{
 			icon: "gtceu:spark_plasma_sinterer"
@@ -2747,8 +2912,8 @@
 			size: 1.5d
 			subtitle: "UHV, Grindless"
 			tasks: [{ id: "3FB4EFE3DD372961", item: "gtceu:spark_plasma_sinterer", type: "item" }]
-			x: 6.0d
-			y: 57.0d
+			x: 12.0d
+			y: 59.0d
 		}
 		{
 			icon: "gtceu:tether_ribbon_works"
@@ -2758,8 +2923,74 @@
 			size: 1.5d
 			subtitle: "UHV, Grindless"
 			tasks: [{ id: "22CA6E52A3276AB5", item: "gtceu:tether_ribbon_works", type: "item" }]
-			x: 8.0d
-			y: 57.0d
+			x: 14.0d
+			y: 59.0d
+		}
+		{
+			icon: "gtceu:transuranium_facility"
+			id: "7B97773B2C230340"
+			rewards: [{ id: "657D2748CA75CFF6", type: "xp", xp: 10 }]
+			shape: "gear"
+			size: 1.5d
+			subtitle: "UHV, Grindless"
+			tasks: [{ id: "160B7DDECA073E67", item: "gtceu:transuranium_facility", type: "item" }]
+			x: 16.0d
+			y: 59.0d
+		}
+		{
+			icon: "gtceu:ultrapure_water_plant"
+			id: "67AB3D4E89CBE4A9"
+			rewards: [{ id: "1564A79A39CD37CB", type: "xp", xp: 10 }]
+			shape: "gear"
+			size: 1.5d
+			subtitle: "UHV, Grindless"
+			tasks: [{ id: "72E432BEA0593180", item: "gtceu:ultrapure_water_plant", type: "item" }]
+			x: 18.0d
+			y: 59.0d
+		}
+		{
+			icon: "gtceu:warp_gate"
+			id: "7D150A4230ED8964"
+			rewards: [{ id: "7079A43DF0F08413", type: "xp", xp: 10 }]
+			shape: "gear"
+			size: 1.5d
+			subtitle: "UHV, Grindless"
+			tasks: [{ id: "5FB8CB3887746746", item: "gtceu:warp_gate", type: "item" }]
+			x: 20.0d
+			y: 59.0d
+		}
+		{
+			icon: "gtceu:xenobiochem_plant"
+			id: "53F61D09381386DE"
+			rewards: [{ id: "709729E2E268C09D", type: "xp", xp: 10 }]
+			shape: "gear"
+			size: 1.5d
+			subtitle: "UHV, Grindless"
+			tasks: [{ id: "510EBA5D06A1DB2C", item: "gtceu:xenobiochem_plant", type: "item" }]
+			x: 22.0d
+			y: 59.0d
+		}
+		{
+			icon: "gtceu:xenobotany_greenhouse"
+			id: "195D4FED496C2E72"
+			rewards: [{ id: "2907A8B7F225EEC3", type: "xp", xp: 10 }]
+			shape: "gear"
+			size: 1.5d
+			subtitle: "UHV, Grindless"
+			tasks: [{ id: "482ED8E02AF24565", item: "gtceu:xenobotany_greenhouse", type: "item" }]
+			x: 24.0d
+			y: 59.0d
+		}
+		{
+			icon: "gtceu:xenoflora_rover_bay"
+			id: "40D02D8AD541A8B2"
+			rewards: [{ id: "1DF398CE407723E0", type: "xp", xp: 10 }]
+			shape: "gear"
+			size: 1.5d
+			subtitle: "UHV, Grindless"
+			tasks: [{ id: "3F348B4494726357", item: "gtceu:xenoflora_rover_bay", type: "item" }]
+			x: 2.0d
+			y: 61.0d
 		}
 		{
 			icon: "gtceu:zblan_draw_tower"
@@ -2769,96 +3000,8 @@
 			size: 1.5d
 			subtitle: "UHV, Grindless"
 			tasks: [{ id: "10FDCA95CD058CD7", item: "gtceu:zblan_draw_tower", type: "item" }]
-			x: 10.0d
-			y: 57.0d
-		}
-		{
-			icon: "gtceu:baseline_astrometer"
-			id: "2131A9A0D383410B"
-			rewards: [{ id: "49D7CB44785D06AC", type: "xp", xp: 10 }]
-			shape: "gear"
-			size: 1.25d
-			subtitle: "UHV, GregTech"
-			tasks: [{ id: "3684F02C5FB8EA46", item: "gtceu:baseline_astrometer", type: "item" }]
-			x: 12.0d
-			y: 57.0d
-		}
-		{
-			icon: "gtceu:betavoltaic_fab"
-			id: "22DD7FF469D5D223"
-			rewards: [{ id: "71D6A8DD80410CB6", type: "xp", xp: 10 }]
-			shape: "gear"
-			size: 1.25d
-			subtitle: "UHV, GregTech"
-			tasks: [{ id: "6257437B55C8A474", item: "gtceu:betavoltaic_fab", type: "item" }]
-			x: 14.0d
-			y: 57.0d
-		}
-		{
-			icon: "gtceu:biomining_heap"
-			id: "7FABCA8FA53D669E"
-			rewards: [{ id: "1BF93D259E05C03B", type: "xp", xp: 10 }]
-			shape: "gear"
-			size: 1.25d
-			subtitle: "UHV, GregTech"
-			tasks: [{ id: "5A098349BD678B50", item: "gtceu:biomining_heap", type: "item" }]
-			x: 16.0d
-			y: 57.0d
-		}
-		{
-			icon: "gtceu:calutron"
-			id: "4F644391CF72D06D"
-			rewards: [{ id: "7E5C9534213D47C2", type: "xp", xp: 10 }]
-			shape: "gear"
-			size: 1.25d
-			subtitle: "UHV, GregTech"
-			tasks: [{ id: "2551C29EDB9A4863", item: "gtceu:calutron", type: "item" }]
-			x: 18.0d
-			y: 57.0d
-		}
-		{
-			icon: "gtceu:casimir_array"
-			id: "67F8877F2AF37435"
-			rewards: [{ id: "25FF23342AF54380", type: "xp", xp: 10 }]
-			shape: "gear"
-			size: 1.25d
-			subtitle: "UHV, GregTech"
-			tasks: [{ id: "27429905FD87C790", item: "gtceu:casimir_array", type: "item" }]
-			x: 20.0d
-			y: 57.0d
-		}
-		{
-			icon: "gtceu:cold_trap_drill"
-			id: "24B4EC90E3F365B5"
-			rewards: [{ id: "27D54813CFC99C92", type: "xp", xp: 10 }]
-			shape: "gear"
-			size: 1.25d
-			subtitle: "UHV, GregTech"
-			tasks: [{ id: "732D53C843CEAD7C", item: "gtceu:cold_trap_drill", type: "item" }]
-			x: 22.0d
-			y: 57.0d
-		}
-		{
-			icon: "gtceu:crystal_growth_furnace"
-			id: "1E394F278A2ADDD9"
-			rewards: [{ id: "124F247078D580A3", type: "xp", xp: 10 }]
-			shape: "gear"
-			size: 1.25d
-			subtitle: "UHV, GregTech"
-			tasks: [{ id: "2A99BD7745B77BC7", item: "gtceu:crystal_growth_furnace", type: "item" }]
-			x: 24.0d
-			y: 57.0d
-		}
-		{
-			icon: "gtceu:cvi_furnace"
-			id: "62FBED569E821682"
-			rewards: [{ id: "3C4ECA57A637AC9D", type: "xp", xp: 10 }]
-			shape: "gear"
-			size: 1.25d
-			subtitle: "UHV, GregTech"
-			tasks: [{ id: "71CA47AD905E3A7B", item: "gtceu:cvi_furnace", type: "item" }]
-			x: 2.0d
-			y: 59.0d
+			x: 4.0d
+			y: 61.0d
 		}
 		{
 			icon: "gcyr:dyson_system_controller"
@@ -2868,19 +3011,8 @@
 			size: 1.25d
 			subtitle: "UHV, Gregicality Rocketry"
 			tasks: [{ id: "3291114D1413BD3F", item: "gcyr:dyson_system_controller", type: "item" }]
-			x: 4.0d
-			y: 59.0d
-		}
-		{
-			icon: "gtceu:electron_beam_furnace"
-			id: "79E57101AD46F9AE"
-			rewards: [{ id: "1AD6F32DDBDF6996", type: "xp", xp: 10 }]
-			shape: "gear"
-			size: 1.25d
-			subtitle: "UHV, GregTech"
-			tasks: [{ id: "53CB0D8A357CC797", item: "gtceu:electron_beam_furnace", type: "item" }]
 			x: 6.0d
-			y: 59.0d
+			y: 61.0d
 		}
 		{
 			icon: "gtceu:heavy_ion_cyclotron"
@@ -2891,116 +3023,6 @@
 			subtitle: "UHV, GregTech"
 			tasks: [{ id: "5631459FDCA9DA54", item: "gtceu:heavy_ion_cyclotron", type: "item" }]
 			x: 8.0d
-			y: 59.0d
-		}
-		{
-			icon: "gtceu:helium3_polariser"
-			id: "40160D8AF2BD266D"
-			rewards: [{ id: "10851114F6A2D492", type: "xp", xp: 10 }]
-			shape: "gear"
-			size: 1.25d
-			subtitle: "UHV, GregTech"
-			tasks: [{ id: "4F48C84D4368B599", item: "gtceu:helium3_polariser", type: "item" }]
-			x: 10.0d
-			y: 59.0d
-		}
-		{
-			icon: "gtceu:high_flux_reactor"
-			id: "31C565B40FFD1963"
-			rewards: [{ id: "2B194D8A15CEE04B", type: "xp", xp: 10 }]
-			shape: "gear"
-			size: 1.25d
-			subtitle: "UHV, GregTech"
-			tasks: [{ id: "16425B566C2556D7", item: "gtceu:high_flux_reactor", type: "item" }]
-			x: 12.0d
-			y: 59.0d
-		}
-		{
-			icon: "gtceu:mbe_reactor"
-			id: "4244397A77EA51BE"
-			rewards: [{ id: "796D8FD90EADE816", type: "xp", xp: 10 }]
-			shape: "gear"
-			size: 1.25d
-			subtitle: "UHV, GregTech"
-			tasks: [{ id: "56D94F05284517D5", item: "gtceu:mbe_reactor", type: "item" }]
-			x: 14.0d
-			y: 59.0d
-		}
-		{
-			icon: "gtceu:megabar_press"
-			id: "1EFB53DC4687D63A"
-			rewards: [{ id: "61E06A2867E23293", type: "xp", xp: 10 }]
-			shape: "gear"
-			size: 1.25d
-			subtitle: "UHV, GregTech"
-			tasks: [{ id: "6136643781C0A739", item: "gtceu:megabar_press", type: "item" }]
-			x: 16.0d
-			y: 59.0d
-		}
-		{
-			icon: "gtceu:nitride_magnet_works"
-			id: "2FA86CA55F2E6FD8"
-			rewards: [{ id: "26DE0085F32C870C", type: "xp", xp: 10 }]
-			shape: "gear"
-			size: 1.25d
-			subtitle: "UHV, GregTech"
-			tasks: [{ id: "156EE7475AEE23C6", item: "gtceu:nitride_magnet_works", type: "item" }]
-			x: 18.0d
-			y: 59.0d
-		}
-		{
-			icon: "gtceu:nuclear_clock_lab"
-			id: "29A9C7FF5B9375A2"
-			rewards: [{ id: "187AAA8B77C7DBBE", type: "xp", xp: 10 }]
-			shape: "gear"
-			size: 1.25d
-			subtitle: "UHV, GregTech"
-			tasks: [{ id: "2E0C505A6A384460", item: "gtceu:nuclear_clock_lab", type: "item" }]
-			x: 20.0d
-			y: 59.0d
-		}
-		{
-			icon: "gtceu:photonic_foundry"
-			id: "1739ABB8ED587478"
-			rewards: [{ id: "1D820AAC56779E7C", type: "xp", xp: 10 }]
-			shape: "gear"
-			size: 1.25d
-			subtitle: "UHV, GregTech"
-			tasks: [{ id: "2D09C189DF39A1BA", item: "gtceu:photonic_foundry", type: "item" }]
-			x: 22.0d
-			y: 59.0d
-		}
-		{
-			icon: "gtceu:photonic_integration_hall"
-			id: "7D3B1A6F4FF811C5"
-			rewards: [{ id: "13718070427E06D8", type: "xp", xp: 10 }]
-			shape: "gear"
-			size: 1.25d
-			subtitle: "UHV, GregTech"
-			tasks: [{ id: "61DDBD3D847F2C16", item: "gtceu:photonic_integration_hall", type: "item" }]
-			x: 24.0d
-			y: 59.0d
-		}
-		{
-			icon: "gtceu:positron_accumulator"
-			id: "31F9C84682E2B2AD"
-			rewards: [{ id: "34C0AD91EAFE927E", type: "xp", xp: 10 }]
-			shape: "gear"
-			size: 1.25d
-			subtitle: "UHV, GregTech"
-			tasks: [{ id: "6FB63D6AFF420A45", item: "gtceu:positron_accumulator", type: "item" }]
-			x: 2.0d
-			y: 61.0d
-		}
-		{
-			icon: "gtceu:radiotrophic_vat"
-			id: "6C6ECB0217202758"
-			rewards: [{ id: "5DDA87BA178A9408", type: "xp", xp: 10 }]
-			shape: "gear"
-			size: 1.25d
-			subtitle: "UHV, GregTech"
-			tasks: [{ id: "2830038BCA623AFE", item: "gtceu:radiotrophic_vat", type: "item" }]
-			x: 4.0d
 			y: 61.0d
 		}
 		{
@@ -3011,7 +3033,7 @@
 			size: 1.25d
 			subtitle: "UHV, GregTech"
 			tasks: [{ id: "7E17012800BE7EAD", item: "gtceu:recoil_separator", type: "item" }]
-			x: 6.0d
+			x: 10.0d
 			y: 61.0d
 		}
 		{
@@ -3022,73 +3044,7 @@
 			size: 1.25d
 			subtitle: "UHV, GregTech"
 			tasks: [{ id: "3CDDDA1F45DCC76B", item: "gtceu:regolith_excavator", type: "item" }]
-			x: 8.0d
-			y: 61.0d
-		}
-		{
-			icon: "gtceu:sample_receiving_facility"
-			id: "15183EE803B25E83"
-			rewards: [{ id: "3CB2746777CA400A", type: "xp", xp: 10 }]
-			shape: "gear"
-			size: 1.25d
-			subtitle: "UHV, GregTech"
-			tasks: [{ id: "238E762DE93740C6", item: "gtceu:sample_receiving_facility", type: "item" }]
-			x: 10.0d
-			y: 61.0d
-		}
-		{
-			icon: "gtceu:sic_device_fab"
-			id: "60BB37937A137607"
-			rewards: [{ id: "4F9509D04E6602E1", type: "xp", xp: 10 }]
-			shape: "gear"
-			size: 1.25d
-			subtitle: "UHV, GregTech"
-			tasks: [{ id: "2657949220D7A3E7", item: "gtceu:sic_device_fab", type: "item" }]
 			x: 12.0d
-			y: 61.0d
-		}
-		{
-			icon: "gtceu:sic_fibre_plant"
-			id: "3F8AF19814DC31CE"
-			rewards: [{ id: "69BE7911F19D4D33", type: "xp", xp: 10 }]
-			shape: "gear"
-			size: 1.25d
-			subtitle: "UHV, GregTech"
-			tasks: [{ id: "25620CEB48039CDD", item: "gtceu:sic_fibre_plant", type: "item" }]
-			x: 14.0d
-			y: 61.0d
-		}
-		{
-			icon: "gtceu:single_crystal_foundry"
-			id: "6F954D3328586F36"
-			rewards: [{ id: "1BB0D92761722F85", type: "xp", xp: 10 }]
-			shape: "gear"
-			size: 1.25d
-			subtitle: "UHV, GregTech"
-			tasks: [{ id: "130E42987299B812", item: "gtceu:single_crystal_foundry", type: "item" }]
-			x: 16.0d
-			y: 61.0d
-		}
-		{
-			icon: "gtceu:snspd_foundry"
-			id: "3AE5F1EAD4D0D237"
-			rewards: [{ id: "786C0B213686A1B9", type: "xp", xp: 10 }]
-			shape: "gear"
-			size: 1.25d
-			subtitle: "UHV, GregTech"
-			tasks: [{ id: "455545D50D2C2EB5", item: "gtceu:snspd_foundry", type: "item" }]
-			x: 18.0d
-			y: 61.0d
-		}
-		{
-			icon: "gtceu:solar_array_fab"
-			id: "6D506019470CEFD6"
-			rewards: [{ id: "1FA6431D04173F9F", type: "xp", xp: 10 }]
-			shape: "gear"
-			size: 1.25d
-			subtitle: "UHV, GregTech"
-			tasks: [{ id: "78E93F0549688BBD", item: "gtceu:solar_array_fab", type: "item" }]
-			x: 20.0d
 			y: 61.0d
 		}
 		{
@@ -3099,7 +3055,7 @@
 			size: 1.25d
 			subtitle: "UHV, GregTech"
 			tasks: [{ id: "6C1D4A576F9229DB", item: "gtceu:solar_probe_bay", type: "item" }]
-			x: 22.0d
+			x: 14.0d
 			y: 61.0d
 		}
 		{
@@ -3110,7 +3066,7 @@
 			size: 1.25d
 			subtitle: "UHV, GregTech"
 			tasks: [{ id: "6BBFA515C45F0AC0", item: "gtceu:solar_vapour_furnace", type: "item" }]
-			x: 24.0d
+			x: 16.0d
 			y: 61.0d
 		}
 		{
@@ -3121,8 +3077,8 @@
 			size: 1.25d
 			subtitle: "UHV, Gregicality Rocketry"
 			tasks: [{ id: "5E3C65EDFCDC7AF1", item: "gcyr:space_elevator", type: "item" }]
-			x: 2.0d
-			y: 63.0d
+			x: 18.0d
+			y: 61.0d
 		}
 		{
 			icon: "gtca:space_elevator"
@@ -3132,8 +3088,8 @@
 			size: 1.25d
 			subtitle: "UHV, GT Community Additions"
 			tasks: [{ id: "32E7E88DD3BF5190", item: "gtca:space_elevator", type: "item" }]
-			x: 4.0d
-			y: 63.0d
+			x: 20.0d
+			y: 61.0d
 		}
 		{
 			icon: "gtceu:superheavy_chemistry_lab"
@@ -3143,8 +3099,8 @@
 			size: 1.25d
 			subtitle: "UHV, GregTech"
 			tasks: [{ id: "183F537BCC5DF383", item: "gtceu:superheavy_chemistry_lab", type: "item" }]
-			x: 6.0d
-			y: 63.0d
+			x: 22.0d
+			y: 61.0d
 		}
 		{
 			icon: "gtceu:swarm_control_station"
@@ -3154,8 +3110,8 @@
 			size: 1.25d
 			subtitle: "UHV, GregTech"
 			tasks: [{ id: "49111C11C3F9FE4E", item: "gtceu:swarm_control_station", type: "item" }]
-			x: 8.0d
-			y: 63.0d
+			x: 24.0d
+			y: 61.0d
 		}
 		{
 			icon: "gtceu:swarm_segment_foundry"
@@ -3165,29 +3121,7 @@
 			size: 1.25d
 			subtitle: "UHV, GregTech"
 			tasks: [{ id: "3CA6369573864333", item: "gtceu:swarm_segment_foundry", type: "item" }]
-			x: 10.0d
-			y: 63.0d
-		}
-		{
-			icon: "gtceu:transuranium_facility"
-			id: "7B97773B2C230340"
-			rewards: [{ id: "657D2748CA75CFF6", type: "xp", xp: 10 }]
-			shape: "gear"
-			size: 1.25d
-			subtitle: "UHV, GregTech"
-			tasks: [{ id: "160B7DDECA073E67", item: "gtceu:transuranium_facility", type: "item" }]
-			x: 12.0d
-			y: 63.0d
-		}
-		{
-			icon: "gtceu:ultrapure_water_plant"
-			id: "67AB3D4E89CBE4A9"
-			rewards: [{ id: "1564A79A39CD37CB", type: "xp", xp: 10 }]
-			shape: "gear"
-			size: 1.25d
-			subtitle: "UHV, GregTech"
-			tasks: [{ id: "72E432BEA0593180", item: "gtceu:ultrapure_water_plant", type: "item" }]
-			x: 14.0d
+			x: 2.0d
 			y: 63.0d
 		}
 		{
@@ -3198,29 +3132,7 @@
 			size: 1.25d
 			subtitle: "UHV, GregTech"
 			tasks: [{ id: "701EE34E9C35A985", item: "gtceu:uv_fusion_reactor", type: "item" }]
-			x: 16.0d
-			y: 63.0d
-		}
-		{
-			icon: "gtceu:vdw_stacker"
-			id: "27AC4FB57750AE84"
-			rewards: [{ id: "66073BEE70ACA983", type: "xp", xp: 10 }]
-			shape: "gear"
-			size: 1.25d
-			subtitle: "UHV, GregTech"
-			tasks: [{ id: "6296AFE4825844EB", item: "gtceu:vdw_stacker", type: "item" }]
-			x: 18.0d
-			y: 63.0d
-		}
-		{
-			icon: "gtceu:warp_gate"
-			id: "7D150A4230ED8964"
-			rewards: [{ id: "7079A43DF0F08413", type: "xp", xp: 10 }]
-			shape: "gear"
-			size: 1.25d
-			subtitle: "UHV, GregTech"
-			tasks: [{ id: "5FB8CB3887746746", item: "gtceu:warp_gate", type: "item" }]
-			x: 20.0d
+			x: 4.0d
 			y: 63.0d
 		}
 		{
@@ -3231,41 +3143,173 @@
 			size: 1.25d
 			subtitle: "UHV, GregTech Modern Utilities"
 			tasks: [{ id: "54EE82F8F5DFDC78", item: "gtmutils:web_hub", type: "item" }]
-			x: 22.0d
+			x: 6.0d
 			y: 63.0d
 		}
 		{
-			icon: "gtceu:xenobiochem_plant"
-			id: "53F61D09381386DE"
-			rewards: [{ id: "709729E2E268C09D", type: "xp", xp: 10 }]
-			shape: "gear"
-			size: 1.25d
-			subtitle: "UHV, GregTech"
-			tasks: [{ id: "510EBA5D06A1DB2C", item: "gtceu:xenobiochem_plant", type: "item" }]
-			x: 24.0d
-			y: 63.0d
+			icon: "gtceu:uev_machine_hull"
+			id: "2C3C1001005BB5B7"
+			shape: "rsquare"
+			size: 1.5d
+			subtitle: "UEV multiblocks"
+			tasks: [{ id: "44D8F66EB1A35992", type: "checkmark" }]
+			title: "UEV"
+			x: 0.0d
+			y: 66.0d
 		}
 		{
-			icon: "gtceu:xenobotany_greenhouse"
-			id: "195D4FED496C2E72"
-			rewards: [{ id: "2907A8B7F225EEC3", type: "xp", xp: 10 }]
+			icon: "gtceu:calutron"
+			id: "4F644391CF72D06D"
+			rewards: [{ id: "7E5C9534213D47C2", type: "xp", xp: 10 }]
 			shape: "gear"
-			size: 1.25d
-			subtitle: "UHV, GregTech"
-			tasks: [{ id: "482ED8E02AF24565", item: "gtceu:xenobotany_greenhouse", type: "item" }]
+			size: 1.5d
+			subtitle: "UEV, Grindless"
+			tasks: [{ id: "2551C29EDB9A4863", item: "gtceu:calutron", type: "item" }]
 			x: 2.0d
-			y: 65.0d
+			y: 66.0d
 		}
 		{
-			icon: "gtceu:xenoflora_rover_bay"
-			id: "40D02D8AD541A8B2"
-			rewards: [{ id: "1DF398CE407723E0", type: "xp", xp: 10 }]
+			icon: "gtceu:cvi_furnace"
+			id: "62FBED569E821682"
+			rewards: [{ id: "3C4ECA57A637AC9D", type: "xp", xp: 10 }]
 			shape: "gear"
-			size: 1.25d
-			subtitle: "UHV, GregTech"
-			tasks: [{ id: "3F348B4494726357", item: "gtceu:xenoflora_rover_bay", type: "item" }]
+			size: 1.5d
+			subtitle: "UEV, Grindless"
+			tasks: [{ id: "71CA47AD905E3A7B", item: "gtceu:cvi_furnace", type: "item" }]
 			x: 4.0d
-			y: 65.0d
+			y: 66.0d
+		}
+		{
+			icon: "gtceu:electron_beam_furnace"
+			id: "79E57101AD46F9AE"
+			rewards: [{ id: "1AD6F32DDBDF6996", type: "xp", xp: 10 }]
+			shape: "gear"
+			size: 1.5d
+			subtitle: "UEV, Grindless"
+			tasks: [{ id: "53CB0D8A357CC797", item: "gtceu:electron_beam_furnace", type: "item" }]
+			x: 6.0d
+			y: 66.0d
+		}
+		{
+			icon: "gtceu:entanglement_station"
+			id: "5EE4535CEB958DE1"
+			rewards: [{ id: "239054D82E9C3FAE", type: "xp", xp: 10 }]
+			shape: "gear"
+			size: 1.5d
+			subtitle: "UEV, Grindless"
+			tasks: [{ id: "505A1347A7BD011A", item: "gtceu:entanglement_station", type: "item" }]
+			x: 8.0d
+			y: 66.0d
+		}
+		{
+			icon: "gtceu:helium3_polariser"
+			id: "40160D8AF2BD266D"
+			rewards: [{ id: "10851114F6A2D492", type: "xp", xp: 10 }]
+			shape: "gear"
+			size: 1.5d
+			subtitle: "UEV, Grindless"
+			tasks: [{ id: "4F48C84D4368B599", item: "gtceu:helium3_polariser", type: "item" }]
+			x: 10.0d
+			y: 66.0d
+		}
+		{
+			icon: "gtceu:megabar_press"
+			id: "1EFB53DC4687D63A"
+			rewards: [{ id: "61E06A2867E23293", type: "xp", xp: 10 }]
+			shape: "gear"
+			size: 1.5d
+			subtitle: "UEV, Grindless"
+			tasks: [{ id: "6136643781C0A739", item: "gtceu:megabar_press", type: "item" }]
+			x: 12.0d
+			y: 66.0d
+		}
+		{
+			icon: "gtceu:nitride_magnet_works"
+			id: "2FA86CA55F2E6FD8"
+			rewards: [{ id: "26DE0085F32C870C", type: "xp", xp: 10 }]
+			shape: "gear"
+			size: 1.5d
+			subtitle: "UEV, Grindless"
+			tasks: [{ id: "156EE7475AEE23C6", item: "gtceu:nitride_magnet_works", type: "item" }]
+			x: 14.0d
+			y: 66.0d
+		}
+		{
+			icon: "gtceu:photonic_integration_hall"
+			id: "7D3B1A6F4FF811C5"
+			rewards: [{ id: "13718070427E06D8", type: "xp", xp: 10 }]
+			shape: "gear"
+			size: 1.5d
+			subtitle: "UEV, Grindless"
+			tasks: [{ id: "61DDBD3D847F2C16", item: "gtceu:photonic_integration_hall", type: "item" }]
+			x: 16.0d
+			y: 66.0d
+		}
+		{
+			icon: "gtceu:quantum_gas_lab"
+			id: "7CFD373ACA7C2AF1"
+			rewards: [{ id: "392964019AD697EB", type: "xp", xp: 10 }]
+			shape: "gear"
+			size: 1.5d
+			subtitle: "UEV, Grindless"
+			tasks: [{ id: "2C6D9F7424BADAA4", item: "gtceu:quantum_gas_lab", type: "item" }]
+			x: 18.0d
+			y: 66.0d
+		}
+		{
+			icon: "gtceu:sic_fibre_plant"
+			id: "3F8AF19814DC31CE"
+			rewards: [{ id: "69BE7911F19D4D33", type: "xp", xp: 10 }]
+			shape: "gear"
+			size: 1.5d
+			subtitle: "UEV, Grindless"
+			tasks: [{ id: "25620CEB48039CDD", item: "gtceu:sic_fibre_plant", type: "item" }]
+			x: 20.0d
+			y: 66.0d
+		}
+		{
+			icon: "gtceu:single_crystal_foundry"
+			id: "6F954D3328586F36"
+			rewards: [{ id: "1BB0D92761722F85", type: "xp", xp: 10 }]
+			shape: "gear"
+			size: 1.5d
+			subtitle: "UEV, Grindless"
+			tasks: [{ id: "130E42987299B812", item: "gtceu:single_crystal_foundry", type: "item" }]
+			x: 22.0d
+			y: 66.0d
+		}
+		{
+			icon: "gtceu:snspd_foundry"
+			id: "3AE5F1EAD4D0D237"
+			rewards: [{ id: "786C0B213686A1B9", type: "xp", xp: 10 }]
+			shape: "gear"
+			size: 1.5d
+			subtitle: "UEV, Grindless"
+			tasks: [{ id: "455545D50D2C2EB5", item: "gtceu:snspd_foundry", type: "item" }]
+			x: 24.0d
+			y: 66.0d
+		}
+		{
+			icon: "gtceu:uev_fusion_reactor"
+			id: "6D65EE3A62D28EEF"
+			rewards: [{ id: "7A7D2780817ECC6D", type: "xp", xp: 10 }]
+			shape: "gear"
+			size: 1.5d
+			subtitle: "UEV, Grindless"
+			tasks: [{ id: "37C3574666B137F4", item: "gtceu:uev_fusion_reactor", type: "item" }]
+			x: 2.0d
+			y: 68.0d
+		}
+		{
+			icon: "gtceu:vdw_stacker"
+			id: "27AC4FB57750AE84"
+			rewards: [{ id: "66073BEE70ACA983", type: "xp", xp: 10 }]
+			shape: "gear"
+			size: 1.5d
+			subtitle: "UEV, Grindless"
+			tasks: [{ id: "6296AFE4825844EB", item: "gtceu:vdw_stacker", type: "item" }]
+			x: 4.0d
+			y: 68.0d
 		}
 	]
 	subtitle: ["Every multiblock controller you can build, tier by tier"]
