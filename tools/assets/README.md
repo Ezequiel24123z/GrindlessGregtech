@@ -1395,3 +1395,16 @@ powershell -NoProfile -ExecutionPolicy Bypass -File tools\assets\Build-MegaSmelt
 | File (under `textures/`) | Notes |
 |---|---|
 | `block/multiblock/smelting_complex/overlay_front*.png` | The Smelting Complex controller face: still, active and active emissive. |
+
+## UEV Sirius B (UEV-B4)
+
+Procedural, drawn by `Build-UEVSiriusTextures.ps1`; nothing is copied from another mod. The controller faces of `gtceu:white_dwarf_spectrograph`, `gtceu:degenerate_harvester` and `gtceu:containment_works` (still, animated active and emissive frames). B4 adds no item textures: its items and the containment casing were drawn by UEV-F1.
+
+```powershell
+powershell -NoProfile -ExecutionPolicy Bypass -File tools\assets\Build-UEVSiriusTextures.ps1
+powershell -NoProfile -ExecutionPolicy Bypass -File tools\assets\Build-UEVSiriusTextures.ps1 -Credits
+```
+
+| File (under `textures/`) | Notes |
+|---|---|
+| `block/multiblock/{white_dwarf_spectrograph,degenerate_harvester,containment_works}/overlay_front*.png` (+ `.mcmeta`) | The three Sirius B controller faces: still, active and active emissive. |

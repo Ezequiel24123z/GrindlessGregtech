@@ -1,4 +1,4 @@
-// priority: 5170
+// priority: 4980
 // Gregtech Grindless - names and tooltips of UEV's Sirius B machines (startup_scripts/grindless/uev/sirius.js; package UEV-B4):
 //
 //   block.gtceu.<machine>, gtceu.<type>                                machine and recipe type names
@@ -68,7 +68,10 @@
             'La carta masa-radio solo se fabrica en la órbita de Sirio B. Es el catalizador que se conserva en la cosechadora y nunca se consume.'],
         ['emi.grindless.info.containment_works.0',
             'The pellet is the core of the UEV field generator (assembler, with a pump rotor of single-crystal rhenium alloy) and the seed of the Sirius warp gate.',
-            'El pellet es el núcleo del generador de campo UEV (ensamblador, con un rotor de bomba de aleación monocristalina de renio) y la semilla de la puerta de salto de Sirio.']
+            'El pellet es el núcleo del generador de campo UEV (ensamblador, con un rotor de bomba de aleación monocristalina de renio) y la semilla de la puerta de salto de Sirio.'],
+        ['emi.grindless.info.containment_works.1',
+            'The degenerate containment casing (assembler) walls the harvester and the containment works; it is built only into those two shells.',
+            'La carcasa de contención degenerada (ensamblador) forma las paredes de la cosechadora y de la obra de contención; solo se usa en esas dos estructuras.']
     ]
 
     ;['en_us', 'es_es'].forEach(function (lang, li) {

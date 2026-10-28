@@ -285,13 +285,14 @@ test('EMI shows how every item, block, fluid and machine of the pack is obtained
   const gtRecipe = (list) => list.some((m) => m.source === 'recipe' && m.category.startsWith('gtceu:'));
   const charts = res.results.filter((x) => /_chart$|chart_draft$|lunar_map$|lunar_ephemeris$|vlbi_recording$/.test(x.key));
   const samples = res.results.filter((x) => x.key.startsWith('grindless:vein_sample_'));
-  assert.equal(charts.length, 12);
+  assert.equal(charts.length, 14);
   assert.ok(samples.length > 40);
   // LuV B9: the Saturn Transfer Chart is made by the coilgun (a GT recipe) and is the ZPM trip: until ZPM its use is its copy and a page
   const nextEra = new Set(['grindless:saturn_transfer_chart']);
   // ZPM-A9's Pluto-Kuiper chart got its GT use in UV-B4 (the Kuiper interceptor bay holds it). UHV-B7's stellar neighbourhood chart is
-  // used only as the UEV casing's station research, which GTM generates and the stand-in cannot see (an emi_coverage.json exception)
-  const pending = new Set(['grindless:stellar_neighbourhood_chart']);
+  // used only as the UEV casing's station research, which GTM generates and the stand-in cannot see (an emi_coverage.json end item);
+  // UEV-B2's pulsar navigation chart likewise researches the UIV casing (UEV-B5). UEV-B4's mass-radius chart is a kept GT catalyst
+  const pending = new Set(['grindless:stellar_neighbourhood_chart', 'grindless:pulsar_navigation_chart']);
   for (const r of charts.filter((x) => !pending.has(x.key))) {
     // an info page lists its stack as both made and used, so the chart's page shows on both sides
     assert.ok(gtRecipe(r.made) && (nextEra.has(r.key) || !r.made.some((m) => m.source === 'page')), r.key);
@@ -317,8 +318,9 @@ test('the dimension markers of the old hidden table (disabled, not index-only) d
   // 48 since UHV-B4: the sample receiving facility's receive and isolate rows (Earth only); 49 since UHV-B3: the Moon cryogenic plant's oganesson propellant row;
   // 51 since UHV-B6: the organoid array's two rows (Earth only); 53 since UHV-B5: the regolith cell's Proxima tailings row (Moon) and the
   // sample receiving facility's extremophile row (Earth; shown once the cold-trap drill makes the ice core); 55 since UEV-A7: the Moon
-  // cryogenic plant's 6N helium-3 and helium-4 ash rows
-  assert.equal(markerDropped.length, 55, markerDropped.map((d) => d.id).join('\n'));
+  // cryogenic plant's 6N helium-3 and helium-4 ash rows; 56 since UEV-B4: UEV-B2's interstellar gas row of the same plant (pending
+  // until B4 made the UEV field generator)
+  assert.equal(markerDropped.length, 56, markerDropped.map((d) => d.id).join('\n'));
   assert.ok(markerDropped.every((d) => d.disabledBy.every((b) => b.startsWith('dimension marker '))));
   const now = new Map(fixtureExpectations(packRun.res).items.map((e) => [e.id, e]));
   const lost = [];
@@ -334,8 +336,9 @@ test('the dimension markers of the old hidden table (disabled, not index-only) d
   // characterised strain, sterilised extract and genome data made); + 6 since UHV-B6: the organoid array's roles (organoid processor made and used;
   // sterilised growth medium, ultrapure water, chitosan scaffold and SiC power module used); + 3 since UHV-B5: leached tailings used in the
   // regolith cell, the Proxima ice core used and sterilised ice organics made in sample receiving; + 2 since UEV-A7: 6N helium-3 made and
-  // helium-4 ash used in the Moon cryogenic plant
-  assert.equal(lost.length, 82, lost.join('\n'));
+  // helium-4 ash used in the Moon cryogenic plant; + 3 since UEV-B4: UEV-B2's interstellar gas row of the same plant (compressed
+  // interstellar gas used; hydrogen-deuterium and helium fractions made)
+  assert.equal(lost.length, 85, lost.join('\n'));
   for (const route of ['grindless:mars_chart made in gtceu:deep_space_tracking', 'grindless:vein_sample_ice_mars used in gtceu:vein_drilling',
     'gtceu:liquid_nitrogen made in gtceu:cryogenic_processing', 'gtceu:heavy_water made in gtceu:detritiation',
     'grindless:titanium_drill_bit used in gtceu:vein_drilling', 'grindless:martian_quantum_seed made in gtceu:chemical_reactor']) {
