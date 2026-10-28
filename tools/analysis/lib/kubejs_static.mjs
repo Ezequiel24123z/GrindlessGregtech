@@ -702,6 +702,8 @@ export function runPackScripts(packDir, { originals = [] } = {}) {
       daytime: cond('daytime'), rain: cond('rain'), thunder: cond('thunder'), posY: cond('pos_y'), cleanroom: cond('cleanroom'),
       biome: cond('biome'), environmentalHazard: cond('environmental_hazard'),
       researchWithoutRecipe: (p, a) => { j.recipeConditions.push({ type: 'research', research: String(a[0]) }); },
+      stationResearch: () => { j.recipeConditions.push({ type: 'research', research: [{ researchId: 'station', dataItem: { id: 'gtceu:data_module', Count: 1 } }] }); },
+      scannerResearch: () => { j.recipeConditions.push({ type: 'research', research: [{ researchId: 'scanner', dataItem: { id: 'gtceu:data_stick', Count: 1 } }] }); },
       id: (p, a) => { rec.i = String(a[0]); },
     }, { __recipe: rec });
     add(rec, file);

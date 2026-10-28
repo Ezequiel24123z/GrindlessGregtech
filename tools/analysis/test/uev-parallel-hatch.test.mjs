@@ -64,23 +64,29 @@ test('x4096 is 4^(tier - EV) at tier 10; the list ends UV, UHV, UEV', () => {
   assert.equal(new Set(list).size, list.length);
 });
 
-test('the recipe is the UHV one a tier up, guarded, with a stable id', () => {
+test('the recipe is an assembly line with station research and fluids, guarded, with a stable id', () => {
   const src = read('server_scripts', 'grindless/uev/parallel_hatch.js');
-  const recipes = [];
+  const calls = { ins: null, fluids: null, out: null, research: false, id: null };
   const G = {};
+  const b = {
+    itemInputs: (v) => { calls.ins = v; }, inputFluids: (...v) => { calls.fluids = v; }, itemOutputs: (v) => { calls.out = v; },
+    stationResearch: () => { calls.research = true; }, EUt: () => b, duration: () => b,
+  };
   const context = vm.createContext({
     global: { grindless: G },
     console: { info() {}, warn() {}, log() {}, error() {} },
-    Item: { exists: () => true },
-    ServerEvents: { recipes: (cb) => cb({ shaped: (out, pattern, key) => { recipes.push({ out, pattern, key }); return { id: (i) => { recipes[recipes.length - 1].id = i; } }; } }) },
+    Item: { exists: () => true, of: (x) => x },
+    Fluid: { of: (id, n) => `${id}:${n}` },
+    ServerEvents: { recipes: (cb) => cb({ recipes: { gtceu: { assembly_line: (id) => { calls.id = id; return b; } } } }) },
   });
   vm.runInContext(src, context);
-  assert.equal(recipes.length, 1);
-  assert.equal(recipes[0].out, 'gtceu:uev_parallel_hatch');
-  assert.deepEqual(plain(recipes[0].pattern), ['SZE', 'ZHZ', 'CZC']);
-  assert.equal(recipes[0].key.H, 'gtceu:uev_machine_hull');
-  assert.equal(recipes[0].key.Z, '#gtceu:circuits/uev');
-  assert.equal(recipes[0].id, 'grindless:crafting/uev_parallel_hatch');
+  assert.equal(calls.out, 'gtceu:uev_parallel_hatch');
+  assert.ok(plain(calls.ins).includes('gtceu:uev_machine_hull'));
+  assert.ok(plain(calls.ins).includes('4x #gtceu:circuits/uev'));
+  assert.equal(calls.fluids.length, 2);
+  assert.equal(calls.research, true);
+  assert.equal(calls.id, 'grindless:uev_parallel_hatch');
+  assert.equal(G.uevParallelHatch.recipeId, 'grindless:assembly_line/uev_parallel_hatch');
   assert.equal(G.uevParallelHatch.done, true);
 });
 
