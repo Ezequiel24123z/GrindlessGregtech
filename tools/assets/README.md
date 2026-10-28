@@ -1216,3 +1216,16 @@ Procedural, drawn by `Build-UEVWirelessTextures.ps1` with the routines and palet
 powershell -NoProfile -ExecutionPolicy Bypass -File tools\assets\Build-UEVWirelessTextures.ps1
 powershell -NoProfile -ExecutionPolicy Bypass -File tools\assets\Build-UEVWirelessTextures.ps1 -Credits
 ```
+
+## HV Coil Chemical Plant (MEGA-3)
+
+Procedural, drawn by `Build-MegaCoilChemicalPlantTextures.ps1`; nothing is copied from another mod. The controller face of `gtceu:coil_chemical_plant` (the large chemical reactor type with coil-scaled parallels up to 64, the coil discount and perfect overclock); still, active and emissive frames.
+
+```powershell
+powershell -NoProfile -ExecutionPolicy Bypass -File tools\assets\Build-MegaCoilChemicalPlantTextures.ps1
+powershell -NoProfile -ExecutionPolicy Bypass -File tools\assets\Build-MegaCoilChemicalPlantTextures.ps1 -Credits
+```
+
+| File (under `textures/`) | Notes |
+|---|---|
+| `block/multiblock/coil_chemical_plant/overlay_front*.png` | The Coil Chemical Plant controller face: still, active and active emissive. |

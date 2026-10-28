@@ -542,6 +542,7 @@
     {"id":"gtceu:casimir_array","kind":"item","needUse":false,"needMade":true,"made":["emi:info","gtceu:multiblock_info","minecraft:crafting"],"used":["emi:info"]},
     {"id":"gtceu:chlorodinitroresorcinol_dust","kind":"item","needUse":true,"needMade":true,"made":["gtceu:pbo_synthesis"],"used":["gtceu:pbo_synthesis"]},
     {"id":"gtceu:coated_conductor_line","kind":"item","needUse":false,"needMade":true,"made":["gtceu:multiblock_info","minecraft:crafting"],"used":[]},
+    {"id":"gtceu:coil_chemical_plant","kind":"item","needUse":false,"needMade":true,"made":["gtceu:assembler","gtceu:multiblock_info"],"used":[]},
     {"id":"gtceu:coilgun_launcher","kind":"item","needUse":false,"needMade":true,"made":["gtceu:multiblock_info","minecraft:crafting"],"used":[]},
     {"id":"gtceu:coking_battery","kind":"item","needUse":false,"needMade":true,"made":["gtceu:multiblock_info","minecraft:crafting"],"used":[]},
     {"id":"gtceu:cold_trap_drill","kind":"item","needUse":false,"needMade":true,"made":["gtceu:multiblock_info","minecraft:crafting"],"used":[]},
