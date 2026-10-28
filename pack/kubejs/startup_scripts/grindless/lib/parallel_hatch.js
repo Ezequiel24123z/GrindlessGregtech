@@ -72,11 +72,33 @@
     }
   }
 
+  // MEGA-0b: the UHV hatch (x1024), one tier above GTM's UV one (x256); GTM's ParallelHatchPartMachine at tier 9, the S-M3 registration.
+  // The overlay folder is ours (GTM's art stops at parallel_hatch_mk4: tools/assets/Build-UHVParallelHatchTextures.ps1).
+  GTCEuStartupEvents.registry('gtceu:machine', function (event) {
+    var PHPM = Java.loadClass('com.gregtechceu.gtceu.common.machine.multiblock.part.ParallelHatchPartMachine')
+    var RL = Java.loadClass('net.minecraft.resources.ResourceLocation')
+    event.create('parallel_hatch', 'custom')
+      .tiers(9)
+      .machine(function (holder, tier, tankScaling) { return new PHPM(holder, tier) })
+      .definition(function (tier, builder) {
+        builder
+          .langValue('Hyper Parallel Control Hatch')
+          .rotationState(RotationState.ALL)
+          .abilities(PartAbility.PARALLEL_HATCH)
+        builder.modelPropertyBool(GTModelProperties.IS_FORMED, false)
+        builder['overlayTieredHullModel(net.minecraft.resources.ResourceLocation)'](new RL('grindless', 'block/machines/uhv_parallel_hatch'))
+        builder['tooltips(net.minecraft.network.chat.Component[])']([
+          Text.translate('grindless.machine.uhv_parallel_hatch.tooltip'),
+          Text.translate('gtceu.part_sharing.disabled')
+        ])
+      })
+  })
+
   G.parallelHatch = {
     ability: ABILITY,
     limits: LIMITS,
-    // the IV hatch (x4, IV-B6's recipe); GTM's LuV, ZPM and UV ones (x16, x64, x256) fit the same cell
-    hatches: ['gtceu:iv_parallel_hatch', 'gtceu:luv_parallel_hatch', 'gtceu:zpm_parallel_hatch', 'gtceu:uv_parallel_hatch'],
+    // the IV hatch (x4, IV-B6's recipe); GTM's LuV, ZPM and UV ones (x16, x64, x256) fit the same cell; ours at UHV (x1024, MEGA-0b)
+    hatches: ['gtceu:iv_parallel_hatch', 'gtceu:luv_parallel_hatch', 'gtceu:zpm_parallel_hatch', 'gtceu:uv_parallel_hatch', 'gtceu:uhv_parallel_hatch'],
     part: part,
     hasHatch: hasHatch,
     modifier: modifier,
