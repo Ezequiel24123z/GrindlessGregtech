@@ -36,6 +36,9 @@
       "nearNet": "grindless:near_net_probe_frame", "output": "grindless:printed_probe_frame", "gtm": false },
     { "name": "rhea_impeller", "metal": "rhea", "circuit": 7, "powderIn": 6, "powderBack": 2,
       "_why": "UIV-A8, line 6: the UIV pump's impeller, one piece with its curved blades; the RHEA's atomised powder (the metals entry above) is printed, then HIPed at the megabar press.",
-      "nearNet": "grindless:near_net_rhea_impeller", "output": "grindless:printed_rhea_impeller", "gtm": false }
+      "nearNet": "grindless:near_net_rhea_impeller", "output": "grindless:printed_rhea_impeller", "gtm": false },
+    { "name": "w_mesh", "metal": "rhea", "circuit": 8, "powderIn": 6, "powderBack": 2,
+      "_why": "UIV-A9, line 29: the capillary porous mesh of the divertor, printed from the RHEA powder (no tungsten powder exists), then wetted with Li-Sn.",
+      "nearNet": "grindless:near_net_w_mesh", "output": "grindless:w_mesh", "gtm": false }
   ]
 }

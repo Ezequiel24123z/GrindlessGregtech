@@ -70,7 +70,13 @@
       itemsOut: [item('grindless:solid_para_h2_target', 1)], fluidsOut: [fluid('gtceu:helium', 100)], eut: VA, duration: 400 },
     // UIV-A6 (docs/eras/uiv.md, line 44): the He-3 concentrate diluted with He-4 into the dilution refrigerator's mixture charge
     { name: 'he3_he4_mixture', type: 'superfluid_helium', circuit: null, itemsIn: [], fluidsIn: [fluid('gtceu:helium_3_concentrate', 200)],
-      itemsOut: [], fluidsOut: [fluid('gtceu:he3_he4_mixture', 200)], eut: VA, duration: 200 }
+      itemsOut: [], fluidsOut: [fluid('gtceu:he3_he4_mixture', 200)], eut: VA, duration: 200 },
+    // UIV-A9 (docs/eras/uiv.md, machine 9): the p-Li6 ash split in the superfluid bath into He-3 and He-4 (a fusion product, honest destination)
+    { name: 'pli6_ash_split', type: 'superfluid_helium', circuit: null, itemsIn: [], fluidsIn: [fluid('gtceu:pli6_ash', 1000)],
+      itemsOut: [], fluidsOut: [fluid('gtceu:helium_3', 500), fluid('gtceu:helium', 500)], eut: VA, duration: 200 },
+    // UIV-A9 (docs/eras/uiv.md, line 25): the RF-dissociated polarised H frozen in a superfluid helium bath into its ice
+    { name: 'polarised_h_ice', type: 'srf_cavity', circuit: 6, itemsIn: [], fluidsIn: [fluid('gtceu:polarised_h_gas', 1000), fluid(SUPERFLUID, 100)],
+      itemsOut: [item('grindless:polarised_h_ice', 1)], fluidsOut: [fluid('gtceu:helium', 100)], eut: VA, duration: 400 }
   ]
 
   // side steps on GTM's own machines

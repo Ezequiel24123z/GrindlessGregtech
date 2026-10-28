@@ -114,6 +114,22 @@
       .EUt(RUN.eut)
       .duration(RUN.duration)
     TRF.recipes.push(RUN.recipeId)
+    // UIV-A9 (docs/eras/uiv.md, line 25): the same facility strips tritium from protium; 1,000 mB in, 950 detritiated + 50 tritium
+    var missing2 = ['gtceu:protium', 'gtceu:deuterium', 'gtceu:detritiated_protium', 'gtceu:tritium'].filter(function (id) { return !Fluid.exists(id) })
+    if (missing2.length > 0) {
+      console.error(LOG + 'detritiated_protium skipped, unknown fluid(s): ' + missing2.join(', '))
+    } else {
+      event.recipes.gtceu.detritiation('grindless:detritiated_protium')
+        .inputFluids(Fluid.of('gtceu:protium', 1000))
+        .notConsumableFluid(Fluid.of('gtceu:deuterium', 100))
+        .outputFluids(Fluid.of('gtceu:detritiated_protium', 950))
+        .outputFluids(Fluid.of('gtceu:tritium', 50))
+        .dimension(RUN.dimension)
+        .addDataNumber(TRF.nightKey || 'grindless_night_eut', 3840)
+        .EUt(7680)
+        .duration(400)
+      TRF.recipes.push('grindless:detritiation/detritiated_protium')
+    }
     console.info(LOG + 'tritium removal facility: ' + RUN.recipeId + ' ' + RUN.feed.amount + ' mB tritiated heavy water (' + RUN.carrier.amount +
       ' mB deuterium not consumed) -> ' + RUN.heavyWater.amount + ' mB heavy water + ' + RUN.tritium.amount + ' mB tritium, ' + RUN.duration + ' t x ' +
       RUN.eut + ' EU/t = ' + RUN.energy + ' EU for ' + RUN.sourceEnergy + ' EU of stages (' + RUN.stages.map(function (s) { return s.stage + ' ' + s.total }).join(', ') +

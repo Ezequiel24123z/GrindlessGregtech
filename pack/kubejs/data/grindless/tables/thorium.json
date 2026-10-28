@@ -45,6 +45,16 @@
           "fluidsIn": [{ "id": "gtceu:loaded_licl_salt", "amount": 1000 }],
           "itemsOut": [{ "id": "gtnn:radioactive_waste", "count": 1 }],
           "fluidsOut": [{ "id": "gtceu:licl_salt", "amount": 1000 }]
+        },
+        {
+          "_why": "UIV-A9: the Li-Sn eutectic of the divertor's capillary porous system (line 29), melted from Li and Sn in the cell",
+          "name": "li_sn_eutectic", "circuit": 9, "eut": 524288, "duration": 200,
+          "itemsIn": [{ "id": "gtceu:lithium_dust", "count": 1 }, { "id": "gtceu:tin_dust", "count": 4 }],
+          "kept": [],
+          "charge": [],
+          "fluidsIn": [],
+          "itemsOut": [],
+          "fluidsOut": [{ "id": "gtceu:li_sn", "amount": 1000 }]
         }
       ]
     },
