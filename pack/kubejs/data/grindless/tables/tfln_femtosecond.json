@@ -1,0 +1,138 @@
+{
+  "_why": "UIV-A4 (docs/eras/uiv.md, machines 3 and 4, lines 10, 12, 18, 36, 40): the TFLN fab (ion slicing) and the femtosecond writer, with the GTM-machine steps of their lines. Read by server_scripts/grindless/uiv/tfln_femtosecond.js. Ids are grindless:<type>/<name>.",
+  "types": {
+    "ion_slicing": {
+      "dataKey": "grindless_ion_slicing",
+      "recipes": [
+        {
+          "name": "ln_on_sin", "circuit": 1, "eut": 31457280, "duration": 1600,
+          "itemsIn": [{ "id": "grindless:lnoi_wafer", "count": 1 }, { "id": "grindless:sin_coated_wafer", "count": 1 }],
+          "itemsOut": [{ "id": "grindless:ln_on_sin_wafer", "count": 1 }]
+        },
+        {
+          "name": "si28_soi", "circuit": 2, "eut": 31457280, "duration": 1600,
+          "itemsIn": [{ "id": "grindless:h_si28_wafer", "count": 1 }, { "id": "grindless:oxidised_wafer", "count": 1 }],
+          "itemsOut": [{ "id": "grindless:si28_soi_wafer", "count": 1 }, { "id": "grindless:si28_donor_wafer", "count": 1 }],
+          "fluidsOut": [{ "id": "gtceu:hydrogen", "amount": 1000 }]
+        },
+        {
+          "name": "poled_lnoi", "circuit": 3, "eut": 31457280, "duration": 1200,
+          "itemsIn": [{ "id": "grindless:lnoi_wafer", "count": 1 }],
+          "itemsOut": [{ "id": "grindless:poled_lnoi_wafer", "count": 1 }]
+        },
+        {
+          "name": "eo_microcomb", "circuit": 4, "eut": 31457280, "duration": 1600,
+          "itemsIn": [{ "id": "grindless:annealed_damascene_ring", "count": 1 }, { "id": "grindless:lnoi_wafer", "count": 1 }],
+          "itemsOut": [{ "id": "grindless:eo_microcomb", "count": 1 }]
+        }
+      ]
+    },
+    "femtosecond_writing": {
+      "dataKey": "grindless_femtosecond_writing",
+      "recipes": [
+        {
+          "name": "interposer_blank", "circuit": 1, "eut": 7864320, "duration": 800,
+          "itemsIn": [{ "id": "grindless:ule_boule", "count": 1 }],
+          "itemsOut": [{ "id": "grindless:written_interposer_blank", "count": 1 }, { "id": "gtceu:ule_glass_dust", "count": 2 }]
+        },
+        {
+          "name": "lattice_2pp", "circuit": 2, "eut": 7864320, "duration": 600,
+          "itemsIn": [{ "id": "gtceu:glass_plate", "count": 1 }],
+          "fluidsIn": [{ "id": "gtceu:photoresin", "amount": 1000 }],
+          "itemsOut": [{ "id": "grindless:lattice_2pp", "count": 1 }],
+          "fluidsOut": [{ "id": "gtceu:uncured_photoresin", "amount": 800 }]
+        },
+        {
+          "name": "orifice_plate", "circuit": 3, "eut": 7864320, "duration": 600,
+          "itemsIn": [{ "id": "gtceu:rhea_plate", "count": 1 }],
+          "itemsOut": [{ "id": "grindless:orifice_plate", "count": 1 }, { "id": "gtceu:rhea_dust", "count": 1 }]
+        },
+        {
+          "name": "crystal_blank", "circuit": 4, "eut": 7864320, "duration": 1000,
+          "itemsIn": [{ "id": "grindless:silica_storage_preform", "count": 1 }],
+          "itemsOut": [{ "id": "grindless:written_crystal_blank", "count": 1 }, { "id": "gtceu:glass_dust", "count": 2 }]
+        }
+      ]
+    },
+    "chemical_reactor": {
+      "recipes": [
+        {
+          "name": "photoresin", "circuit": 0, "eut": 30720, "duration": 200,
+          "fluidsIn": [{ "id": "gtceu:acrylate_coating", "amount": 1000 }, { "id": "gtceu:ethanol", "amount": 250 }],
+          "fluidsOut": [{ "id": "gtceu:photoresin", "amount": 1000 }]
+        },
+        {
+          "name": "interposer_koh_etch", "circuit": 0, "eut": 30720, "duration": 300,
+          "itemsIn": [{ "id": "grindless:written_interposer_blank", "count": 1 }, { "id": "gtceu:potassium_hydroxide_dust", "count": 2 }],
+          "fluidsIn": [{ "id": "minecraft:water", "amount": 1000 }],
+          "itemsOut": [{ "id": "grindless:etched_interposer_blank", "count": 1 }],
+          "fluidsOut": [{ "id": "gtceu:spent_koh_etchant", "amount": 1000 }]
+        },
+        {
+          "name": "spent_koh_neutralise", "circuit": 0, "eut": 480, "duration": 200,
+          "fluidsIn": [{ "id": "gtceu:spent_koh_etchant", "amount": 1000 }, { "id": "gtceu:hydrochloric_acid", "amount": 1000 }],
+          "itemsOut": [{ "id": "gtceu:salt_dust", "count": 2 }],
+          "fluidsOut": [{ "id": "minecraft:water", "amount": 1000 }]
+        },
+        {
+          "name": "sin_trench_fill", "circuit": 0, "eut": 30720, "duration": 400,
+          "itemsIn": [{ "id": "grindless:trenched_oxide_wafer", "count": 1 }],
+          "fluidsIn": [{ "id": "gtceu:silane", "amount": 750 }, { "id": "gtceu:ammonia", "amount": 1000 }],
+          "itemsOut": [{ "id": "grindless:damascene_sin_wafer", "count": 1 }],
+          "fluidsOut": [{ "id": "gtceu:hydrogen", "amount": 3000 }]
+        }
+      ]
+    },
+    "distillery": {
+      "recipes": [
+        {
+          "name": "uncured_photoresin_recovery", "circuit": 0, "eut": 480, "duration": 200,
+          "fluidsIn": [{ "id": "gtceu:uncured_photoresin", "amount": 1000 }],
+          "fluidsOut": [{ "id": "gtceu:ethanol", "amount": 250 }]
+        }
+      ]
+    },
+    "cutter": {
+      "recipes": [
+        {
+          "name": "ln_on_sin_thin", "circuit": 0, "eut": 30720, "duration": 300,
+          "itemsIn": [{ "id": "grindless:ln_on_sin_wafer", "count": 1 }],
+          "fluidsIn": [{ "id": "gtceu:lubricant", "amount": 100 }],
+          "itemsOut": [{ "id": "grindless:ln_on_sin_thinned", "count": 1 }, { "id": "gtceu:silicon_dust", "count": 1 }]
+        }
+      ]
+    },
+    "assembler": {
+      "recipes": [
+        {
+          "name": "shg_486_stage", "circuit": 0, "eut": 1966080, "duration": 400,
+          "itemsIn": [{ "id": "grindless:ppln_waveguide", "count": 1 }, { "id": "grindless:uev_emitter", "count": 1 }],
+          "itemsOut": [{ "id": "grindless:shg_486_stage", "count": 1 }]
+        },
+        {
+          "name": "ps_cooling_laser", "circuit": 0, "eut": 1966080, "duration": 400,
+          "itemsIn": [{ "id": "grindless:shg_486_stage", "count": 1 }, { "id": "grindless:ppln_waveguide", "count": 1 }],
+          "itemsOut": [{ "id": "grindless:ps_cooling_laser", "count": 1 }]
+        }
+      ]
+    },
+    "laser_engraver": {
+      "recipes": [
+        {
+          "name": "crystal_read_verify", "circuit": 0, "eut": 491520, "duration": 400,
+          "itemsIn": [{ "id": "grindless:written_crystal_blank", "count": 1 }],
+          "itemsOut": [{ "id": "grindless:verified_crystal", "count": 1 }]
+        }
+      ]
+    },
+    "electric_blast_furnace": {
+      "recipes": [
+        {
+          "name": "crystal_anneal", "circuit": 0, "eut": 491520, "duration": 600, "temp": 9001,
+          "itemsIn": [{ "id": "grindless:verified_crystal", "count": 1 }],
+          "itemsOut": [{ "id": "grindless:data_crystal_5d", "count": 1 }]
+        }
+      ]
+    }
+  }
+}
