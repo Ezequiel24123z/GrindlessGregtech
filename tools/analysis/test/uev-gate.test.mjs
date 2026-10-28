@@ -40,7 +40,9 @@ test('c3 holds the stored items and fits the gate (6 item inputs)', () => {
 });
 
 test('c3 does not clash with the table rows (circuits 1 and 2 stay)', () => {
-  const circuits = gateJson.types.warp_gate.recipes.map((r) => r.circuit).sort();
+  // UIV-B1 appends hold_* rows on c4-c6 (rows whose _why starts with "UIV-B1:")
+  const older = gateJson.types.warp_gate.recipes.filter((r) => !/^UIV-B1:/.test(r._why || ''));
+  const circuits = older.map((r) => r.circuit).sort();
   assert.deepEqual(circuits, [1, 2]);
   assert.ok(!gateJson.types.warp_gate.recipes.some((r) => r.name === 'hold'), 'gate.json is untouched');
 });
