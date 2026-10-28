@@ -126,7 +126,7 @@ hash = "2791f469e47423518db67636d05116c6bc63d290198b227980e7d0da1919c086"
 
 [[files]]
 file = "config/gtceu.yaml"
-hash = "609120cddc56b3d6f4db26c0e04498da3e3a8c6f5bf2965b98e148d0d26f53f6"
+hash = "2ebaf68f44f01b72d2fafc98aaf77f43e47001907312207a12dbb291e8a7a96f"
 
 [[files]]
 file = "config/ironfurnaces-client.toml"
