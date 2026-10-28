@@ -1,0 +1,5 @@
+{
+  "type": "emi:info",
+  "stacks": ["item:gtceu:carbonyl_refinery"],
+  "text": ["emi.grindless.info.carbonyl_refinery.0"]
+}
