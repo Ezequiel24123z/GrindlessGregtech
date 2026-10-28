@@ -188,8 +188,8 @@
     if (def) array(def.getRecipeTypes()).forEach(function (t) { types.push(String(t.registryName)) })
     check('modes', !!def && types.join(',') === 'gtceu:wiremill,gtceu:bender', 'machine ' + ID + ' registered=' + !!def + ' modes [' + types.join(',') + ']')
     var rm = S.server.getRecipeManager()
-    var wire = rm.byKey(new (classes().RL)('gg_test_mega:ww_wire'))
-    var bend = rm.byKey(new (classes().RL)('gg_test_mega:ww_bend'))
+    var wire = rm.byKey(new (classes().RL)('gg_test_mega:wiremill/ww_wire'))
+    var bend = rm.byKey(new (classes().RL)('gg_test_mega:bender/ww_bend'))
     check('lookup', wire.isPresent() && bend.isPresent() &&
       String(wire.get().getType()).indexOf('wiremill') >= 0 && String(bend.get().getType()).indexOf('bender') >= 0,
       'wiremill recipe ' + wire.isPresent() + ' (' + (wire.isPresent() ? wire.get().getType() : '-') + '), bender recipe ' + bend.isPresent() +
@@ -257,8 +257,11 @@
     if (u.phase === 'run') {
       var rlg = m.getRecipeLogic()
       if (u.snap === null && rlg.isWorking()) {
-        u.snap = snapshot(m)
-        u.consumed = u.initial - (items(u.inBus)[u.input] || 0)
+        var sn = snapshot(m)
+        if (sn !== null && sn.id.indexOf(u.mode === 'wiremill' ? 'ww_wire' : 'ww_bend') >= 0) {
+          u.snap = sn
+          u.consumed = u.initial - (items(u.inBus)[u.input] || 0)
+        }
       }
       var out = u.mode === 'wiremill' ? RED : YELLOW
       var got = items(u.outBus)[out] || 0
