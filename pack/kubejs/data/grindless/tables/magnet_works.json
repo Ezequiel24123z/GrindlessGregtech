@@ -74,6 +74,14 @@
       "fluidsIn": [],
       "itemsOut": [ { "id": "grindless:uev_smes_cell", "count": 1 } ],
       "eut": 7864320, "duration": 600
+    },
+    {
+      "name": "mh_winding", "circuit": 7, "charge": true,
+      "_why": "UIV-A2 (docs/eras/uiv.md, line 2): the metallic hydrogen coil winding, the first step of the UIV coil line (the RHEA former and later steps are UIV-A3's). Sixteen MH single wires, laid on a tungsten form, are cold-tested in the same helium charge as the cells. VA[UEV]: one UEV energy hatch carries it. Unobtainable until the pulser makes the MH rod.",
+      "itemsIn": [ { "id": "gtceu:metallic_hydrogen_single_wire", "count": 16 }, { "id": "gtceu:tungsten_plate", "count": 2 } ],
+      "fluidsIn": [],
+      "itemsOut": [ { "id": "grindless:mh_winding", "count": 1 } ],
+      "eut": 7864320, "duration": 400
     }
   ]
 }
