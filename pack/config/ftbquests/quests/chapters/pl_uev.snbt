@@ -1,0 +1,983 @@
+{
+	autofocus_id: "5E2A2F6DCA7C26AB"
+	consume_items: false
+	default_hide_dependency_lines: false
+	default_quest_shape: ""
+	filename: "pl_uev"
+	group: "3027186E3042DDFB"
+	icon: "gtceu:calutron"
+	id: "5EEDC8CC5EA8EEDE"
+	order_index: 10
+	progression_mode: "flexible"
+	quest_links: [ ]
+	quests: [
+		{
+			icon: "gtceu:calcium_chloride_dust"
+			id: "7BFCB563A45B0FC0"
+			shape: "rsquare"
+			size: 1.0d
+			tasks: [
+				{ id: "19CB71089FB8ED3C", item: "gtceu:calcium_chloride_dust", optional_task: true, type: "item" }
+				{ id: "5F7DE2F4BE65C9FF", type: "checkmark" }
+			]
+			title: "Calcium Chloride"
+			x: 0.5d
+			y: 0.75d
+		}
+		{
+			dependencies: ["7BFCB563A45B0FC0"]
+			description: ["Bends an ion beam in a magnet; each isotope lands in its own cup."]
+			icon: "gtceu:calutron"
+			id: "5E2A2F6DCA7C26AB"
+			shape: "gear"
+			size: 1.5d
+			tasks: [
+				{ id: "193A09AE1512D55F", item: "gtceu:calutron", optional_task: true, type: "item" }
+				{ id: "7E939E3E9F1E1203", type: "checkmark" }
+			]
+			title: "Calutron"
+			x: 3.0d
+			y: 0.75d
+		}
+		{
+			dependencies: ["5E2A2F6DCA7C26AB"]
+			icon: "gtceu:calcium_48_enriched_dust"
+			id: "5F9396C120C2D279"
+			size: 1.25d
+			tasks: [
+				{ id: "3437E5F91D917F72", item: "gtceu:calcium_48_enriched_dust", optional_task: true, type: "item" }
+				{ id: "5796094D782BAB14", type: "checkmark" }
+			]
+			title: "Enriched Calcium"
+			x: 5.5d
+			y: 0.75d
+		}
+		{
+			icon: "gtceu:calcium_48_enriched_chloride_dust"
+			id: "589197F96E2B3C2C"
+			size: 1.25d
+			subtitle: "Chlorinated again"
+			tasks: [
+				{ id: "506C196B183D9B6F", item: "gtceu:calcium_48_enriched_chloride_dust", optional_task: true, type: "item" }
+				{ id: "5A4B261935D5E512", type: "checkmark" }
+			]
+			title: "Enriched Chloride"
+			x: 8.0d
+			y: 0.75d
+		}
+		{
+			dependencies: ["589197F96E2B3C2C"]
+			icon: "gtceu:calutron"
+			id: "79337E385FAE63CA"
+			shape: "gear"
+			size: 1.5d
+			tasks: [
+				{ id: "7A3844B8790BBF62", item: "gtceu:calutron", optional_task: true, type: "item" }
+				{ id: "316F50AA0A532912", type: "checkmark" }
+			]
+			title: "Calutron, second pass"
+			x: 10.5d
+			y: 0.75d
+		}
+		{
+			dependencies: ["79337E385FAE63CA"]
+			icon: "gtceu:calcium_48_dust"
+			id: "7F9DDF5CFE6D6DDE"
+			size: 1.25d
+			tasks: [
+				{ id: "33078A604F89AAF9", item: "gtceu:calcium_48_dust", optional_task: true, type: "item" }
+				{ id: "590400F4A70B5675", type: "checkmark" }
+			]
+			title: "Calcium-48"
+			x: 13.0d
+			y: 0.75d
+		}
+		{
+			icon: "grindless:plutonium_244_target"
+			id: "3B1D8FAFAD4889EC"
+			shape: "rsquare"
+			size: 1.0d
+			tasks: [
+				{ id: "3A5EBEE56334C968", item: "grindless:plutonium_244_target", optional_task: true, type: "item" }
+				{ id: "5AFE69BC99A62E6E", type: "checkmark" }
+			]
+			title: "Plutonium-244 Target"
+			x: 0.5d
+			y: 2.75d
+		}
+		{
+			dependencies: ["3B1D8FAFAD4889EC"]
+			description: ["A calcium-48 beam on an actinide target; the atoms fly out as recoil gas."]
+			icon: "gtceu:heavy_ion_cyclotron"
+			id: "5BEB5EB8C1FEDA05"
+			shape: "gear"
+			size: 1.5d
+			tasks: [
+				{ id: "722697B5A83498EA", item: "gtceu:heavy_ion_cyclotron", optional_task: true, type: "item" }
+				{ id: "318D54B85F415FD5", type: "checkmark" }
+			]
+			title: "Heavy Ion Cyclotron"
+			x: 3.0d
+			y: 2.75d
+		}
+		{
+			dependencies: ["5BEB5EB8C1FEDA05"]
+			icon: "gtceu:flerovium_recoil_gas_bucket"
+			id: "14BF30D9670EA555"
+			size: 1.25d
+			tasks: [
+				{ id: "3F11C459FE8D0B5A", item: "gtceu:flerovium_recoil_gas_bucket", optional_task: true, type: "item" }
+				{ id: "73194836FFFC4650", type: "checkmark" }
+			]
+			title: "Flerovium Recoil Gas"
+			x: 5.5d
+			y: 2.75d
+		}
+		{
+			dependencies: ["14BF30D9670EA555"]
+			description: ["Sends the gas through an etched membrane; the helium returns."]
+			icon: "gtceu:recoil_separator"
+			id: "76E459AEB0F029AC"
+			shape: "gear"
+			size: 1.5d
+			tasks: [
+				{ id: "39DE7DC89901A794", item: "gtceu:recoil_separator", optional_task: true, type: "item" }
+				{ id: "124923C42D8C2B6E", type: "checkmark" }
+			]
+			title: "Recoil Separator"
+			x: 8.0d
+			y: 2.75d
+		}
+		{
+			dependencies: ["76E459AEB0F029AC"]
+			icon: "grindless:flerovium_atoms"
+			id: "7CF7B495109C8E4E"
+			size: 1.25d
+			tasks: [
+				{ id: "508EA5E60327EB61", item: "grindless:flerovium_atoms", optional_task: true, type: "item" }
+				{ id: "56E4FE5D2957B9CC", type: "checkmark" }
+			]
+			title: "Flerovium Atoms"
+			x: 10.5d
+			y: 2.75d
+		}
+		{
+			icon: "grindless:polycarbonate_foil"
+			id: "7EA3013ED38E9972"
+			shape: "rsquare"
+			size: 1.0d
+			tasks: [
+				{ id: "3782BA0D51A3C891", item: "grindless:polycarbonate_foil", optional_task: true, type: "item" }
+				{ id: "7B38C4F0106F14C0", type: "checkmark" }
+			]
+			title: "Polycarbonate Foil"
+			x: 0.5d
+			y: 4.75d
+		}
+		{
+			dependencies: ["7EA3013ED38E9972"]
+			icon: "grindless:ion_tracked_foil"
+			id: "394B5B2674A8D6C7"
+			size: 1.25d
+			tasks: [
+				{ id: "1D706205263A9451", item: "grindless:ion_tracked_foil", optional_task: true, type: "item" }
+				{ id: "5DAA27175601889E", type: "checkmark" }
+			]
+			title: "Ion-Tracked Foil"
+			x: 3.0d
+			y: 4.75d
+		}
+		{
+			dependencies: ["394B5B2674A8D6C7"]
+			icon: "grindless:etched_membrane"
+			id: "7A33F85A6D71D1CA"
+			size: 1.25d
+			tasks: [
+				{ id: "3F96CE95E4E7D03E", item: "grindless:etched_membrane", optional_task: true, type: "item" }
+				{ id: "1A6956DB24D576F5", type: "checkmark" }
+			]
+			title: "Etched Membrane"
+			x: 5.5d
+			y: 4.75d
+		}
+		{
+			dependencies: ["7A33F85A6D71D1CA"]
+			icon: "gtceu:recoil_separator"
+			id: "7800EE3D24217C0C"
+			shape: "gear"
+			size: 1.5d
+			tasks: [
+				{ id: "5078DFD94647BD1D", item: "gtceu:recoil_separator", optional_task: true, type: "item" }
+				{ id: "3C1D5402D77EAA83", type: "checkmark" }
+			]
+			title: "Recoil Separator"
+			x: 8.0d
+			y: 4.75d
+		}
+		{
+			dependencies: ["7800EE3D24217C0C"]
+			icon: "grindless:flerovium_atoms"
+			id: "55B0491E4EB31356"
+			size: 1.25d
+			tasks: [
+				{ id: "7497F30D160F6D79", item: "grindless:flerovium_atoms", optional_task: true, type: "item" }
+				{ id: "5C39426FA3816885", type: "checkmark" }
+			]
+			title: "Flerovium Atoms"
+			x: 10.5d
+			y: 4.75d
+		}
+		{
+			icon: "grindless:nanodiamond_pellet"
+			id: "39926D52380B7DA7"
+			shape: "rsquare"
+			size: 1.0d
+			tasks: [
+				{ id: "7AB9A2C8A86BDF0F", item: "grindless:nanodiamond_pellet", optional_task: true, type: "item" }
+				{ id: "7C5CDD4DFE67E7A0", type: "checkmark" }
+			]
+			title: "Nanodiamond Pellet"
+			x: 17.25d
+			y: 0.75d
+		}
+		{
+			dependencies: ["39926D52380B7DA7"]
+			description: ["Squeezes the pellet between anvils into nanotwinned diamond."]
+			icon: "gtceu:megabar_press"
+			id: "12D1DF3E70DB863A"
+			shape: "gear"
+			size: 1.5d
+			tasks: [
+				{ id: "12AEF126F37ACB6C", item: "gtceu:megabar_press", optional_task: true, type: "item" }
+				{ id: "3E9A395FDF40F152", type: "checkmark" }
+			]
+			title: "Megabar Press"
+			x: 19.75d
+			y: 0.75d
+		}
+		{
+			dependencies: ["12D1DF3E70DB863A"]
+			icon: "grindless:nanotwinned_diamond"
+			id: "15F80AA42E350911"
+			size: 1.25d
+			tasks: [
+				{ id: "7A9A816AEB096B46", item: "grindless:nanotwinned_diamond", optional_task: true, type: "item" }
+				{ id: "3CCA7A2566BD2C40", type: "checkmark" }
+			]
+			title: "Nanotwinned Diamond"
+			x: 22.25d
+			y: 0.75d
+		}
+		{
+			dependencies: ["15F80AA42E350911"]
+			icon: "grindless:nanotwinned_diamond_anvil"
+			id: "33D5B3EC5852BEC1"
+			size: 1.25d
+			tasks: [
+				{ id: "7FB922A2D8709CA4", item: "grindless:nanotwinned_diamond_anvil", optional_task: true, type: "item" }
+				{ id: "1B2F4638C6E4C231", type: "checkmark" }
+			]
+			title: "Diamond Anvil"
+			x: 24.75d
+			y: 0.75d
+		}
+		{
+			dependencies: ["33D5B3EC5852BEC1"]
+			description: ["Fiction: the real hydride needs over 100 GPa."]
+			icon: "gtceu:megabar_press"
+			id: "7F3C27639CA163A1"
+			shape: "gear"
+			size: 1.5d
+			tasks: [
+				{ id: "3012A1082069CAEC", item: "gtceu:megabar_press", optional_task: true, type: "item" }
+				{ id: "78EED4F2C5B69FE6", type: "checkmark" }
+			]
+			title: "Megabar Press"
+			x: 27.25d
+			y: 0.75d
+		}
+		{
+			dependencies: ["7F3C27639CA163A1"]
+			icon: "gtceu:lay_superhydride_ingot"
+			id: "36053A225A0B0667"
+			size: 1.25d
+			tasks: [
+				{ id: "592F488B2BA63ADB", item: "gtceu:lay_superhydride_ingot", optional_task: true, type: "item" }
+				{ id: "7462238C99971DEB", type: "checkmark" }
+			]
+			title: "Superhydride Ingot"
+			x: 29.75d
+			y: 0.75d
+		}
+		{
+			icon: "grindless:bond_coated_sx_blade"
+			id: "745677096D8A395E"
+			shape: "rsquare"
+			size: 1.0d
+			tasks: [
+				{ id: "7D6B51D782BC98CE", item: "grindless:bond_coated_sx_blade", optional_task: true, type: "item" }
+				{ id: "324629DED5C3C4C5", type: "checkmark" }
+			]
+			title: "Bond-Coated Blade"
+			x: 17.25d
+			y: 2.75d
+		}
+		{
+			dependencies: ["745677096D8A395E"]
+			description: ["Coats the blade in vacuum with a ceramic that resists heat."]
+			icon: "gtceu:electron_beam_furnace"
+			id: "353D2EF1FF2B8950"
+			shape: "gear"
+			size: 1.5d
+			tasks: [
+				{ id: "3FC0E66A46DB19A0", item: "gtceu:electron_beam_furnace", optional_task: true, type: "item" }
+				{ id: "51FF86BB92D90E5D", type: "checkmark" }
+			]
+			title: "Electron Beam Furnace"
+			x: 19.75d
+			y: 2.75d
+		}
+		{
+			dependencies: ["353D2EF1FF2B8950"]
+			icon: "grindless:coated_sx_blade"
+			id: "74FE2DAA691C590B"
+			size: 1.25d
+			tasks: [
+				{ id: "721CA0F2097CA748", item: "grindless:coated_sx_blade", optional_task: true, type: "item" }
+				{ id: "3B7B89E7F9657576", type: "checkmark" }
+			]
+			title: "Coated SX Blade"
+			x: 22.25d
+			y: 2.75d
+		}
+		{
+			dependencies: ["74FE2DAA691C590B"]
+			description: ["Casts the wheel as one crystal."]
+			icon: "gtceu:single_crystal_foundry"
+			id: "1163A063E3B93FAF"
+			shape: "gear"
+			size: 1.5d
+			tasks: [
+				{ id: "72C27EEE346553DC", item: "gtceu:single_crystal_foundry", optional_task: true, type: "item" }
+				{ id: "573D1623763D9E10", type: "checkmark" }
+			]
+			title: "Single-Crystal Foundry"
+			x: 24.75d
+			y: 2.75d
+		}
+		{
+			dependencies: ["1163A063E3B93FAF"]
+			icon: "grindless:brayton_turbine_wheel"
+			id: "55A891D96D016D94"
+			size: 1.25d
+			tasks: [
+				{ id: "54A7017025BF3EEA", item: "grindless:brayton_turbine_wheel", optional_task: true, type: "item" }
+				{ id: "348BD9A2FE7F7BBB", type: "checkmark" }
+			]
+			title: "Brayton Turbine Wheel"
+			x: 27.25d
+			y: 2.75d
+		}
+		{
+			icon: "grindless:polycarbosilane_dust"
+			id: "32BA7829718BF951"
+			shape: "rsquare"
+			size: 1.0d
+			tasks: [
+				{ id: "7A7FAA43055D2761", item: "grindless:polycarbosilane_dust", optional_task: true, type: "item" }
+				{ id: "325F4DFF80EB1E6C", type: "checkmark" }
+			]
+			title: "Polycarbosilane"
+			x: 17.25d
+			y: 4.75d
+		}
+		{
+			dependencies: ["32BA7829718BF951"]
+			description: ["Spins, cures with a beam and fires the fibre."]
+			icon: "gtceu:sic_fibre_plant"
+			id: "31DEE6CE57860953"
+			shape: "gear"
+			size: 1.5d
+			tasks: [
+				{ id: "3EBBA88DC62C83CE", item: "gtceu:sic_fibre_plant", optional_task: true, type: "item" }
+				{ id: "1AE9934186709847", type: "checkmark" }
+			]
+			title: "SiC Fibre Plant"
+			x: 19.75d
+			y: 4.75d
+		}
+		{
+			dependencies: ["31DEE6CE57860953"]
+			icon: "grindless:green_sic_fibre"
+			id: "3A596FB7FACB2B96"
+			size: 1.25d
+			tasks: [
+				{ id: "76D9EEBB2A8CAA46", item: "grindless:green_sic_fibre", optional_task: true, type: "item" }
+				{ id: "11627732C63CC319", type: "checkmark" }
+			]
+			title: "Green Fibre"
+			x: 22.25d
+			y: 4.75d
+		}
+		{
+			dependencies: ["3A596FB7FACB2B96"]
+			description: ["The electron beam cures the green fibre."]
+			icon: "gtceu:sic_fibre_plant"
+			id: "17DB1F174BD27582"
+			shape: "gear"
+			size: 1.5d
+			tasks: [
+				{ id: "5DF800878BFA2898", item: "gtceu:sic_fibre_plant", optional_task: true, type: "item" }
+				{ id: "7CE7E80E7BF8A123", type: "checkmark" }
+			]
+			title: "SiC Fibre Plant"
+			x: 24.75d
+			y: 4.75d
+		}
+		{
+			dependencies: ["17DB1F174BD27582"]
+			icon: "grindless:cured_sic_fibre"
+			id: "58280A816383E4AB"
+			size: 1.25d
+			tasks: [
+				{ id: "11640DEE907A7E74", item: "grindless:cured_sic_fibre", optional_task: true, type: "item" }
+				{ id: "16ABC514BEB31A07", type: "checkmark" }
+			]
+			title: "Cured Fibre"
+			x: 27.25d
+			y: 4.75d
+		}
+		{
+			dependencies: ["58280A816383E4AB"]
+			description: ["Fires the fibre; the methane and hydrogen are caught."]
+			icon: "gtceu:sic_fibre_plant"
+			id: "1E8F11BB78F2EF58"
+			shape: "gear"
+			size: 1.5d
+			tasks: [
+				{ id: "5AF2D82DD0940F32", item: "gtceu:sic_fibre_plant", optional_task: true, type: "item" }
+				{ id: "7B1BA4F2055266FF", type: "checkmark" }
+			]
+			title: "SiC Fibre Plant"
+			x: 29.75d
+			y: 4.75d
+		}
+		{
+			dependencies: ["1E8F11BB78F2EF58"]
+			icon: "grindless:sic_fibre"
+			id: "1D985596CF0D782F"
+			size: 1.25d
+			tasks: [
+				{ id: "3FF34957F88CAF3B", item: "grindless:sic_fibre", optional_task: true, type: "item" }
+				{ id: "52B01F67941D214B", type: "checkmark" }
+			]
+			title: "SiC Fibre"
+			x: 32.25d
+			y: 4.75d
+		}
+		{
+			icon: "grindless:sic_fibre_preform"
+			id: "17E8860ADDE629E2"
+			shape: "rsquare"
+			size: 1.0d
+			subtitle: "Woven from the fibre above"
+			tasks: [
+				{ id: "3E19ECE541592CB8", item: "grindless:sic_fibre_preform", optional_task: true, type: "item" }
+				{ id: "1BB7DCB0371CA0D3", type: "checkmark" }
+			]
+			title: "Fibre Preform"
+			x: 17.25d
+			y: 6.75d
+		}
+		{
+			dependencies: ["17E8860ADDE629E2"]
+			description: ["Grows silicon carbide into the preform."]
+			icon: "gtceu:cvi_furnace"
+			id: "1B955F70A8A2B6B9"
+			shape: "gear"
+			size: 1.5d
+			tasks: [
+				{ id: "3CEE83687773C6BF", item: "gtceu:cvi_furnace", optional_task: true, type: "item" }
+				{ id: "7B1B65D54D4EE09A", type: "checkmark" }
+			]
+			title: "CVI Furnace"
+			x: 19.75d
+			y: 6.75d
+		}
+		{
+			dependencies: ["1B955F70A8A2B6B9"]
+			icon: "grindless:sic_sic_plate"
+			id: "584EFD0319F4A5A1"
+			size: 1.25d
+			tasks: [
+				{ id: "1307160E81506E47", item: "grindless:sic_sic_plate", optional_task: true, type: "item" }
+				{ id: "747C7D0643F36FC9", type: "checkmark" }
+			]
+			title: "SiC/SiC Plate"
+			x: 22.25d
+			y: 6.75d
+		}
+		{
+			dependencies: ["1B955F70A8A2B6B9"]
+			icon: "gtceu:hydrochloric_acid_bucket"
+			id: "70ECB1A3DB27422D"
+			size: 0.75d
+			tasks: [
+				{ id: "7DA616F812DE5CAB", item: "gtceu:hydrochloric_acid_bucket", optional_task: true, type: "item" }
+				{ id: "559101EB7EB06986", type: "checkmark" }
+			]
+			title: "Hydrochloric Acid"
+			x: 22.25d
+			y: 8.25d
+		}
+		{
+			icon: "grindless:reduced_iron_powder"
+			id: "721988CD83636776"
+			shape: "rsquare"
+			size: 1.0d
+			subtitle: "From carbonyl iron"
+			tasks: [
+				{ id: "115D77D75E5EEEC3", item: "grindless:reduced_iron_powder", optional_task: true, type: "item" }
+				{ id: "33AFE001A8EFF6E4", type: "checkmark" }
+			]
+			title: "Reduced Iron Powder"
+			x: 17.25d
+			y: 10.25d
+		}
+		{
+			dependencies: ["721988CD83636776"]
+			description: ["Nitrides the iron with ammonia."]
+			icon: "gtceu:nitride_magnet_works"
+			id: "7F75EE581D64854A"
+			shape: "gear"
+			size: 1.5d
+			tasks: [
+				{ id: "1E50DADEA3653611", item: "gtceu:nitride_magnet_works", optional_task: true, type: "item" }
+				{ id: "708656BA126394CA", type: "checkmark" }
+			]
+			title: "Nitride Magnet Works"
+			x: 19.75d
+			y: 10.25d
+		}
+		{
+			dependencies: ["7F75EE581D64854A"]
+			icon: "gtceu:fe16n2_dust"
+			id: "5660E1A1CB7929B7"
+			size: 1.25d
+			tasks: [
+				{ id: "78FB3BFDE9D1CFE6", item: "gtceu:fe16n2_dust", optional_task: true, type: "item" }
+				{ id: "74A2836540C7B9C3", type: "checkmark" }
+			]
+			title: "Fe16N2 Powder"
+			x: 22.25d
+			y: 10.25d
+		}
+		{
+			dependencies: ["5660E1A1CB7929B7"]
+			description: ["Anneals the powder under strain."]
+			icon: "gtceu:nitride_magnet_works"
+			id: "3C2E9187F7323C88"
+			shape: "gear"
+			size: 1.5d
+			tasks: [
+				{ id: "32A13953438EAFC2", item: "gtceu:nitride_magnet_works", optional_task: true, type: "item" }
+				{ id: "5D8B7C16F9857D7A", type: "checkmark" }
+			]
+			title: "Nitride Magnet Works"
+			x: 24.75d
+			y: 10.25d
+		}
+		{
+			dependencies: ["3C2E9187F7323C88"]
+			icon: "grindless:strain_annealed_fe16n2_powder"
+			id: "5680D944BD248B0F"
+			size: 1.25d
+			tasks: [
+				{ id: "502A7C1D2E3463BE", item: "grindless:strain_annealed_fe16n2_powder", optional_task: true, type: "item" }
+				{ id: "7096D811B40E2E2D", type: "checkmark" }
+			]
+			title: "Strain-Annealed Powder"
+			x: 27.25d
+			y: 10.25d
+		}
+		{
+			dependencies: ["5680D944BD248B0F"]
+			description: ["Bonds the powder in polycarbonate."]
+			icon: "gtceu:nitride_magnet_works"
+			id: "53A5FBE98C1D67A6"
+			shape: "gear"
+			size: 1.5d
+			tasks: [
+				{ id: "3325F3A7BD772A55", item: "gtceu:nitride_magnet_works", optional_task: true, type: "item" }
+				{ id: "34CC1EA16042433B", type: "checkmark" }
+			]
+			title: "Nitride Magnet Works"
+			x: 29.75d
+			y: 10.25d
+		}
+		{
+			dependencies: ["53A5FBE98C1D67A6"]
+			icon: "grindless:bonded_fe16n2_magnet"
+			id: "7F5ADA20C74AFD25"
+			size: 1.25d
+			tasks: [
+				{ id: "3CAFA5566A2F7533", item: "grindless:bonded_fe16n2_magnet", optional_task: true, type: "item" }
+				{ id: "3EA6719F00D3A82D", type: "checkmark" }
+			]
+			title: "Bonded Magnet"
+			x: 32.25d
+			y: 10.25d
+		}
+		{
+			icon: "grindless:fz_silicon_wafer"
+			id: "58BB14BEA9C15CE0"
+			shape: "rsquare"
+			size: 1.0d
+			tasks: [
+				{ id: "1C0980026FD41B74", item: "grindless:fz_silicon_wafer", optional_task: true, type: "item" }
+				{ id: "7055C5CF0304FE2A", type: "checkmark" }
+			]
+			title: "Float-Zone Wafer"
+			x: 0.5d
+			y: 14.25d
+		}
+		{
+			dependencies: ["58BB14BEA9C15CE0"]
+			icon: "grindless:wsi_wafer"
+			id: "5851B740A992714E"
+			size: 1.25d
+			tasks: [
+				{ id: "7B9CB8B5432A5945", item: "grindless:wsi_wafer", optional_task: true, type: "item" }
+				{ id: "13B30C97696786C1", type: "checkmark" }
+			]
+			title: "WSi Wafer"
+			x: 3.0d
+			y: 14.25d
+		}
+		{
+			dependencies: ["5851B740A992714E"]
+			icon: "grindless:wsi_nanowire_wafer"
+			id: "54CE5F1104E4E3C3"
+			size: 1.25d
+			tasks: [
+				{ id: "3884C69C4E3DCC06", item: "grindless:wsi_nanowire_wafer", optional_task: true, type: "item" }
+				{ id: "519B33C156937962", type: "checkmark" }
+			]
+			title: "Nanowire Wafer"
+			x: 5.5d
+			y: 14.25d
+		}
+		{
+			dependencies: ["54CE5F1104E4E3C3"]
+			icon: "grindless:snspd_die"
+			id: "3C57A1D42E9B9A88"
+			size: 1.25d
+			tasks: [
+				{ id: "5AD39FF7D53C191F", item: "grindless:snspd_die", optional_task: true, type: "item" }
+				{ id: "55A97AEF154331ED", type: "checkmark" }
+			]
+			title: "SNSPD Die"
+			x: 8.0d
+			y: 14.25d
+		}
+		{
+			dependencies: ["3C57A1D42E9B9A88"]
+			icon: "grindless:snspd"
+			id: "39FEB2C60BF5247C"
+			size: 1.25d
+			tasks: [
+				{ id: "714E69E3195CC669", item: "grindless:snspd", optional_task: true, type: "item" }
+				{ id: "717428BA98FF3BAC", type: "checkmark" }
+			]
+			title: "SNSPD"
+			x: 10.5d
+			y: 14.25d
+		}
+		{
+			icon: "grindless:annealed_sin_chip"
+			id: "54070654215B50F1"
+			shape: "rsquare"
+			size: 1.0d
+			tasks: [
+				{ id: "77DBAC8393AC1FDD", item: "grindless:annealed_sin_chip", optional_task: true, type: "item" }
+				{ id: "576799445C23E05A", type: "checkmark" }
+			]
+			title: "Annealed SiN Chip"
+			x: 0.5d
+			y: 16.25d
+		}
+		{
+			dependencies: ["54070654215B50F1"]
+			icon: "grindless:waveguide_circuit"
+			id: "5A150CAF205FB323"
+			size: 1.25d
+			tasks: [
+				{ id: "3633942080B62FC2", item: "grindless:waveguide_circuit", optional_task: true, type: "item" }
+				{ id: "1E99447292119D53", type: "checkmark" }
+			]
+			title: "Waveguide Circuit"
+			x: 3.0d
+			y: 16.25d
+		}
+		{
+			dependencies: ["5A150CAF205FB323"]
+			icon: "grindless:quantum_photonic_chip"
+			id: "1608B86864521F8A"
+			size: 1.25d
+			tasks: [
+				{ id: "3B6F9C855FA8AA76", item: "grindless:quantum_photonic_chip", optional_task: true, type: "item" }
+				{ id: "7F82FB44D442DC48", type: "checkmark" }
+			]
+			title: "Quantum Photonic Chip"
+			x: 5.5d
+			y: 16.25d
+		}
+		{
+			dependencies: ["1608B86864521F8A"]
+			description: ["Bonds the chip to the optical assembly."]
+			icon: "gtceu:photonic_integration_hall"
+			id: "5D79DF5C73ADDE95"
+			shape: "gear"
+			size: 1.5d
+			tasks: [
+				{ id: "3AF02C3586054F4A", item: "gtceu:photonic_integration_hall", optional_task: true, type: "item" }
+				{ id: "72ABB9B72810308C", type: "checkmark" }
+			]
+			title: "Photonic Integration Hall"
+			x: 8.0d
+			y: 16.25d
+		}
+		{
+			dependencies: ["5D79DF5C73ADDE95"]
+			icon: "gtnn:optical_computer"
+			id: "7ECF04283A4F72E1"
+			size: 1.25d
+			tasks: [
+				{ id: "5CC675AD38C9AEB2", item: "gtnn:optical_computer", optional_task: true, type: "item" }
+				{ id: "7D719311DF75EEA6", type: "checkmark" }
+			]
+			title: "Optical Computer"
+			x: 10.5d
+			y: 16.25d
+		}
+		{
+			icon: "gtceu:helium_3_6n_bucket"
+			id: "1AFA54094FF10CCF"
+			shape: "rsquare"
+			size: 1.0d
+			tasks: [
+				{ id: "79EA2BFF561F11F4", item: "gtceu:helium_3_6n_bucket", optional_task: true, type: "item" }
+				{ id: "1E485CDB518153AD", type: "checkmark" }
+			]
+			title: "Helium-3, 6N"
+			x: 0.5d
+			y: 18.25d
+		}
+		{
+			dependencies: ["1AFA54094FF10CCF"]
+			description: ["Lines up the nuclear spins with a 1083 nm laser."]
+			icon: "gtceu:helium3_polariser"
+			id: "112A063F65301F5E"
+			shape: "gear"
+			size: 1.5d
+			tasks: [
+				{ id: "1F66248575872FEC", item: "gtceu:helium3_polariser", optional_task: true, type: "item" }
+				{ id: "1FA9367270E77C37", type: "checkmark" }
+			]
+			title: "Helium-3 Polariser"
+			x: 3.0d
+			y: 18.25d
+		}
+		{
+			dependencies: ["112A063F65301F5E"]
+			icon: "gtceu:polarised_helium_3_bucket"
+			id: "56E2D5AE1DD573EB"
+			size: 1.25d
+			tasks: [
+				{ id: "1CD842AA6E7D6A67", item: "gtceu:polarised_helium_3_bucket", optional_task: true, type: "item" }
+				{ id: "5C79EDB4B76B9B50", type: "checkmark" }
+			]
+			title: "Polarised Helium-3"
+			x: 5.5d
+			y: 18.25d
+		}
+		{
+			dependencies: ["56E2D5AE1DD573EB"]
+			icon: "gtceu:polarised_dhe3_fuel_bucket"
+			id: "38F75FA8FD451751"
+			size: 1.25d
+			tasks: [
+				{ id: "57D7263742E285C1", item: "gtceu:polarised_dhe3_fuel_bucket", optional_task: true, type: "item" }
+				{ id: "16A1B93ACEB89D1E", type: "checkmark" }
+			]
+			title: "Polarised D-He-3 Fuel"
+			x: 8.0d
+			y: 18.25d
+		}
+		{
+			icon: "grindless:aerogel_tile"
+			id: "7ED31F785D070242"
+			shape: "rsquare"
+			size: 1.0d
+			tasks: [
+				{ id: "589F7C6C1F6D4BBF", item: "grindless:aerogel_tile", optional_task: true, type: "item" }
+				{ id: "5CBC36FC1CBA3C7A", type: "checkmark" }
+			]
+			title: "Aerogel Tile"
+			x: 15.0d
+			y: 14.25d
+		}
+		{
+			dependencies: ["7ED31F785D070242"]
+			description: ["Drags the tile through thin gas. Fiction: the real yield is tiny."]
+			icon: "gtceu:nebula_collector"
+			id: "7A4F2A5EE5F71DC5"
+			shape: "gear"
+			size: 1.5d
+			tasks: [
+				{ id: "5AEF67EDC9C0FD12", item: "gtceu:nebula_collector", optional_task: true, type: "item" }
+				{ id: "59493C40A08EBC18", type: "checkmark" }
+			]
+			title: "Nebula Collector"
+			x: 17.5d
+			y: 14.25d
+		}
+		{
+			dependencies: ["7A4F2A5EE5F71DC5"]
+			icon: "grindless:dust_laden_aerogel"
+			id: "3036DE8372B3BE79"
+			size: 1.25d
+			tasks: [
+				{ id: "371A6E5DB3011FEC", item: "grindless:dust_laden_aerogel", optional_task: true, type: "item" }
+				{ id: "540D099A8A65CDE8", type: "checkmark" }
+			]
+			title: "Dust-Laden Aerogel"
+			x: 20.0d
+			y: 14.25d
+		}
+		{
+			dependencies: ["3036DE8372B3BE79"]
+			description: ["Frees and cleans the grains, then measures iron-60."]
+			icon: "gtceu:interstellar_dust_lab"
+			id: "1A00552E1CB281EA"
+			shape: "gear"
+			size: 1.5d
+			tasks: [
+				{ id: "3245657F7B6CCDFF", item: "gtceu:interstellar_dust_lab", optional_task: true, type: "item" }
+				{ id: "7C143E07D763F6A0", type: "checkmark" }
+			]
+			title: "Interstellar Dust Lab"
+			x: 22.5d
+			y: 14.25d
+		}
+		{
+			dependencies: ["1A00552E1CB281EA"]
+			icon: "grindless:extracted_grains"
+			id: "34ABD1A2399183AD"
+			size: 1.25d
+			tasks: [
+				{ id: "3017AB67FA82273F", item: "grindless:extracted_grains", optional_task: true, type: "item" }
+				{ id: "70AE278C7A965C8C", type: "checkmark" }
+			]
+			title: "Extracted Grains"
+			x: 25.0d
+			y: 14.25d
+		}
+		{
+			dependencies: ["34ABD1A2399183AD"]
+			icon: "grindless:demineralised_grains"
+			id: "7B07B66B62632573"
+			size: 1.25d
+			tasks: [
+				{ id: "79807CA153F59408", item: "grindless:demineralised_grains", optional_task: true, type: "item" }
+				{ id: "1A6B4AC408DCC9E9", type: "checkmark" }
+			]
+			title: "Demineralised Grains"
+			x: 27.5d
+			y: 14.25d
+		}
+		{
+			dependencies: ["7B07B66B62632573"]
+			icon: "grindless:fe60_record"
+			id: "1A6D7D484E2C6B30"
+			size: 1.25d
+			tasks: [
+				{ id: "5BCFFEB1B0E71B2C", item: "grindless:fe60_record", optional_task: true, type: "item" }
+				{ id: "5DE7851AFDA5233E", type: "checkmark" }
+			]
+			title: "Iron-60 Record"
+			x: 30.0d
+			y: 14.25d
+		}
+		{
+			description: ["Sinks a drill into the iron planet."]
+			icon: "gtceu:barnard_core_drill"
+			id: "1C31B57049181D37"
+			shape: "gear"
+			size: 1.5d
+			tasks: [
+				{ id: "76D9E3624175EA88", item: "gtceu:barnard_core_drill", optional_task: true, type: "item" }
+				{ id: "123AE2FFE07CAD19", type: "checkmark" }
+			]
+			title: "Barnard Core Drill"
+			x: 15.0d
+			y: 16.25d
+		}
+		{
+			dependencies: ["1C31B57049181D37"]
+			icon: "grindless:barnard_core_rock"
+			id: "7B2D60CA4155C53A"
+			size: 1.25d
+			tasks: [
+				{ id: "36BFC64557085AFF", item: "grindless:barnard_core_rock", optional_task: true, type: "item" }
+				{ id: "5BC3ECB86A4C708E", type: "checkmark" }
+			]
+			title: "Barnard Core Rock"
+			x: 17.5d
+			y: 16.25d
+		}
+		{
+			dependencies: ["7B2D60CA4155C53A"]
+			description: ["Carbon monoxide lifts the iron out as a gas."]
+			icon: "gtceu:carbonyl_refinery"
+			id: "33863A0D7C4AA1D7"
+			shape: "gear"
+			size: 1.5d
+			tasks: [
+				{ id: "5747B547EA9993B4", item: "gtceu:carbonyl_refinery", optional_task: true, type: "item" }
+				{ id: "14ACF050D3876C55", type: "checkmark" }
+			]
+			title: "Carbonyl Refinery"
+			x: 20.0d
+			y: 16.25d
+		}
+		{
+			dependencies: ["33863A0D7C4AA1D7"]
+			icon: "gtceu:iron_pentacarbonyl_bucket"
+			id: "78C60FA6FA0D6DE5"
+			size: 1.25d
+			tasks: [
+				{ id: "178768D5C1D3BFCB", item: "gtceu:iron_pentacarbonyl_bucket", optional_task: true, type: "item" }
+				{ id: "7C465A1163F9ACCE", type: "checkmark" }
+			]
+			title: "Iron Pentacarbonyl"
+			x: 22.5d
+			y: 16.25d
+		}
+		{
+			dependencies: ["33863A0D7C4AA1D7"]
+			icon: "grindless:barnard_residue"
+			id: "39E172B2EC363AFA"
+			size: 0.75d
+			tasks: [
+				{ id: "5E9D9EDB84E99125", item: "grindless:barnard_residue", optional_task: true, type: "item" }
+				{ id: "73A32E20EB3AB9FE", type: "checkmark" }
+			]
+			title: "Barnard Residue"
+			x: 22.5d
+			y: 17.75d
+		}
+	]
+	subtitle: ["Isotopes and the heaviest atoms, pressure and fibres, light for computers and clocks, and the dust and rock of other stars."]
+	title: "UEV Lines"
+}

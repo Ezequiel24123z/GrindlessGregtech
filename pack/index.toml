@@ -69,6 +69,10 @@ file = "config/ftbquests/quests/chapters/pl_steam.snbt"
 hash = "a5132ed09dcb09ddd174931514ff4279e1be2553be6a7df2b49e28581a26ea00"
 
 [[files]]
+file = "config/ftbquests/quests/chapters/pl_uev.snbt"
+hash = "4ac29c0b0f4fff2070882c9dcb27fda13f7dcb9d8c0f9c2b3d2e28e889d1d263"
+
+[[files]]
 file = "config/ftbquests/quests/chapters/pl_uhv.snbt"
 hash = "1f345a2bbcafe435c1f3aa55e70e999c933782d3a96b992130a2a82a434060af"
 
@@ -82,7 +86,7 @@ hash = "085581c14090bcf12bf1837b4bbb142422b3b2525703f9f61a3393ed76be803b"
 
 [[files]]
 file = "config/ftbquests/quests/chapters/power.snbt"
-hash = "946386f196401fb0c2b5986cc3e99f6068afddfdafeffc750be4a26953ce28de"
+hash = "0c3e9eeba62056a9d310e1584b4e5931528e1e83b4318da02efff54bd6898e19"
 
 [[files]]
 file = "config/ftbquests/quests/chapters/productive_bees.snbt"
@@ -99,6 +103,10 @@ hash = "ae4a7c088d8e6d8b12e22177b83bd1083da20e3430a498868bcf7aa1b1846905"
 [[files]]
 file = "config/ftbquests/quests/chapters/travel_and_teams.snbt"
 hash = "0ee7b8c399b8327c36dce2359cccec2ddf82c7a4a52058049d618c4e9cbe19dc"
+
+[[files]]
+file = "config/ftbquests/quests/chapters/uev_age.snbt"
+hash = "8e3206de213a1b9174371990b45169a2f21865be0a04f3f8f18c37dbaefb6ef4"
 
 [[files]]
 file = "config/ftbquests/quests/chapters/uhv_age.snbt"
