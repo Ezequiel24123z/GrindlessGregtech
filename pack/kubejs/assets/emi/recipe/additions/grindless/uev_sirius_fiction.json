@@ -1,0 +1,12 @@
+{
+  "type": "emi:info",
+  "stacks": [
+    "item:grindless:degenerate_matter",
+    "item:grindless:degenerate_pellet",
+    "item:gtceu:degenerate_harvester"
+  ],
+  "text": [
+    "emi.grindless.info.sirius_fiction.0",
+    "emi.grindless.info.sirius_fiction.1"
+  ]
+}
