@@ -1,4 +1,4 @@
-// priority: -23124
+// priority: -23192
 // -----------------------------------------------------------------------------------------------
 // Recipes of UHV's positron accumulator and Casimir array (machines and recipe types: startup_scripts/grindless/uhv/antimatter.js;
 // docs/eras/uhv.md, machines 13 and 17, lines 27 and 28; package UHV-A6), generated at every server load from

@@ -1,3 +1,4 @@
+// priority: 4975
 // Gregtech Grindless - names and tooltips of UEV's superheavy line (startup_scripts/grindless/uev/superheavy.js; package UEV-A2):
 //
 //   block.gtceu.<machine>, gtceu.<type>                           machine and recipe type names (three of each)

@@ -166,7 +166,8 @@ test('line 22: CO -> C-12 monoxide (Saturn orbit) -> methanation -> C-12 methane
   // ZPM's own isotope column rows (helium-3, deuterium) and diamond lattice fab rows keep their circuits and fluids
   const col = SS.recipes.filter((r) => r.type === 'cryogenic_isotope_separation');
   assert.deepEqual(col.map((r) => [r.name, r.circuit, ids(r.fluidsIn)]), [['helium_three', 1, ['gtceu:saturn_helium']], ['deuterium', 2, ['gtceu:hydrogen']]]);
-  assert.deepEqual(Q.recipes.filter((r) => r.type === 'diamond_cvd').map((r) => r.circuit), [1, 2, 3, 4]);
+  // UEV-A3 adds the nanodiamond row at circuit 7
+  assert.deepEqual(Q.recipes.filter((r) => r.type === 'diamond_cvd').map((r) => r.circuit), [1, 2, 3, 4, 7]);
 });
 
 test('no UEV input, and every lang key the package needs is written in en_us and es_es', () => {

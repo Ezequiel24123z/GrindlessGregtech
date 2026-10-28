@@ -1,4 +1,4 @@
-// priority: 5038
+// priority: 5025
 // Gregtech Grindless - names and tooltips of UEV's isotope separation (startup_scripts/grindless/uev/isotopes.js; package UEV-A1):
 //
 //   block.gtceu.calutron, gtceu.calutron_separation               machine and recipe type names

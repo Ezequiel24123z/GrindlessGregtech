@@ -46,8 +46,8 @@ test('registration: three recipe types, three machines, one pattern each with on
   assert.deepEqual(dims('qubit_fab'), [5, 5, 9]);
 });
 
-test('the nine chain recipes: one circuit per recipe in its type, ZPM VA or less, fits the IO sizes', () => {
-  assert.equal(Q.recipes.length, 9);
+test('the chain recipes (nine, plus UEV-A3\'s nanodiamond row): one circuit per recipe in its type, ZPM VA or less, fits the IO sizes', () => {
+  assert.equal(Q.recipes.length, 10);
   for (const p of Q.recipes) {
     const r = byId(p.recipeId);
     assert.ok(r, p.recipeId + ' added');
@@ -66,8 +66,11 @@ test('the nine chain recipes: one circuit per recipe in its type, ZPM VA or less
   const snspd = q.find((r) => r.name === 'snspd_array');
   assert.equal(snspd.circuit, 3);
   assert.deepEqual(snspd.itemsIn, [{ id: 'grindless:nbn_film_wafer', count: 1 }]);
-  const d = Q.recipes.filter((r) => r.type === 'diamond_cvd' && r.fluidsOut.length > 0);
+  const d = Q.recipes.filter((r) => r.type === 'diamond_cvd' && r.fluidsOut.length > 0 && r.name !== 'nanodiamond');
   assert.equal(d.length, 2, 'the two diamond rows loop hydrogen; UV-A3\'s capsule rows (circuits 3, 4) return nothing');
+  const nd = Q.recipes.find((r) => r.name === 'nanodiamond');
+  assert.equal(nd.circuit, 7, 'UEV-A3\'s nanodiamond row: circuit 7 (UHV betavoltaics owns 5 and 6)');
+  assert.ok(nd.fluidsOut[0].amount < nd.fluidsIn[0].amount, 'the spalling consumes part of its hydrogen');
   assert.ok(d.every((r) => r.fluidsOut[0].amount < r.fluidsIn[1].amount && r.fluidsOut[0].amount >= 0.9 * r.fluidsIn[1].amount), 'hydrogen loops back with a small make-up');
   assert.equal(d[1].fluidsIn[2].amount, 10, 'nitrogen 10 mB');
 });
