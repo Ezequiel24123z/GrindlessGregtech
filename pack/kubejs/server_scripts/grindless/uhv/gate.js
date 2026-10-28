@@ -28,7 +28,14 @@
   var TABLE = WG.table || 'kubejs/data/grindless/tables/gate.json'
   var PLANETS = 'kubejs/data/grindless/tables/planets.json'
   var SITES = { orbits: ['gcyr:overworld_orbit', 'grindless:proxima_b_orbit', 'grindless:alpha_centauri_orbit', 'grindless:sirius_b_orbit'],
-    proxima_b_orbit: ['grindless:proxima_b_orbit'] }
+    proxima_b_orbit: ['grindless:proxima_b_orbit'], sirius_b_orbit: ['grindless:sirius_b_orbit'] }
+  // UEV-B5, c3 "hold" (docs/eras/uev.md "Gate to UIV"): 16 A x V[UEV] = 134,217,728 EU/t for 60 s at Sirius B's orbit. The stored items are
+  // held (catalysts, never consumed: no UEV recipe uses up the stored items). Nothing comes out.
+  var UEV_HOLD = { name: 'hold', circuit: 3, eut: 134217728, duration: 1200, site: 'sirius_b_orbit',
+    itemsIn: [],
+    kept: [{ id: 'grindless:tennessine_sample', count: 1 }, { id: 'grindless:degenerate_pellet', count: 1 },
+      { id: 'grindless:degenerate_eos_model', count: 1 }, { id: 'gtnn:optical_computer', count: 4 }],
+    itemsOut: [] }
   var VA_UV = 491520
   var VA_UHV = 1966080
   var CHART = 'grindless:stellar_neighbourhood_chart'
@@ -43,6 +50,9 @@
 
   function loadTable() {
     var t = G.readJsonTable(TABLE)
+    if (t && t.types && t.types.warp_gate && !(t.types.warp_gate.recipes || []).some(function (r) { return r.name === UEV_HOLD.name })) {
+      t.types.warp_gate.recipes = list(t.types.warp_gate.recipes).concat([UEV_HOLD])
+    }
     var problems = []
     var out = []
     Object.keys((t && t.types) || {}).forEach(function (type) {
@@ -68,7 +78,7 @@
         var rec = { type: type, name: n, circuit: circuit, eut: eut, duration: duration, site: site,
           dataKey: String(def.dataKey || ''), itemsIn: list(r.itemsIn).map(stack), kept: list(r.kept).map(stack),
           itemsOut: list(r.itemsOut).map(stack) }
-        if (bad || rec.itemsIn.length === 0) {
+        if (bad || (rec.itemsIn.length === 0 && rec.kept.length === 0)) {
           problems.push(type + '/' + n + ': contents')
           return
         }
