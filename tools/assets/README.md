@@ -1221,6 +1221,21 @@ powershell -NoProfile -ExecutionPolicy Bypass -File tools\assets\Build-MegaOreRe
 |---|---|
 | `block/multiblock/ore_refinery/overlay_front*.png` | The Ore Refinery controller face: still, active and active emissive. |
 
+## UEV Barnard b (UEV-B3)
+
+Procedural, drawn by `Build-UEVBarnardTextures.ps1`; nothing is copied from another mod. The controller faces of `gtceu:barnard_core_drill` and `gtceu:carbonyl_refinery` (still, active and emissive frames, animated), and the rhenium line's four items.
+
+```powershell
+powershell -NoProfile -ExecutionPolicy Bypass -File tools\assets\Build-UEVBarnardTextures.ps1
+powershell -NoProfile -ExecutionPolicy Bypass -File tools\assets\Build-UEVBarnardTextures.ps1 -Credits
+```
+
+| File (under `textures/`) | Notes |
+|---|---|
+| `block/multiblock/barnard_core_drill/overlay_front*.png(.mcmeta)` | The Barnard core drill controller face. |
+| `block/multiblock/carbonyl_refinery/overlay_front*.png(.mcmeta)` | The carbonyl refinery controller face. |
+| `item/barnard_residue.png`, `item/crude_ammonium_perrhenate.png`, `item/ammonium_perrhenate.png`, `item/rhenium_pellet.png` | The Barnard residue and the rhenium line (crude and recrystallised perrhenate, pellet). |
+
 ## UEV wireless tier (UEV-W)
 
 Procedural, drawn by `Build-UEVWirelessTextures.ps1` with the routines and palette of `Build-WirelessEnergyTextures.ps1` (loaded from its syntax tree; nothing else of it runs); nothing is copied from another mod. GTM's UEV colour (green, 3FD05A). It writes the UEV SMES cell (`block/wireless/smes_cell_uev`, the table's uev row texture), the covers on a machine's face (`block/cover/wireless_{energy,dynamo}_cover_uev`) and the cover items (`item/wireless/{energy,dynamo}_cover_uev`): 5 files. The hatch overlays and the covers' emissive layer are the wireless script's.

@@ -39,8 +39,11 @@ const ZPM_A2 = ['gtceu:enriched_naquadah_dust'];
 // UEV-A4's platinum plant rows (circuits 7 and 8): its two residues (startup_scripts/grindless/uev/electron_beam.js) and GTM's
 // ruthenium dust, already in the plant's ITEM_ORDER
 const UEV_A4 = ['grindless:sx_dross', 'grindless:eb_skull', 'gtceu:ruthenium_dust'];
-const ITEMS = new Set([...IDS.items, ...A1, ...ZPM_A2, ...UEV_A4]);
-const FLUIDS = new Set(IDS.fluids);
+// UEV-B3's platinum plant row (circuit 9): the Barnard residue in, crude ammonium perrhenate out (startup_scripts/grindless/uev/barnard.js),
+// plus three GTM materials the snapshot predates (present in the 20261028-083545 native dump items.json)
+const UEV_B3 = ['grindless:barnard_residue', 'grindless:crude_ammonium_perrhenate', 'gtceu:platinum_dust', 'gtceu:tungsten_dust'];
+const ITEMS = new Set([...IDS.items, ...A1, ...ZPM_A2, ...UEV_A4, ...UEV_B3]);
+const FLUIDS = new Set([...IDS.fluids, 'gtceu:nitric_acid']);
 
 function strictRun(scripts, startup, recipes, before) {
   const asked = { items: new Set(), fluids: new Set() };

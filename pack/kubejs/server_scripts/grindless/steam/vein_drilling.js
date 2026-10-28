@@ -1,4 +1,4 @@
-// priority: -23024
+// priority: -22955
 // -----------------------------------------------------------------------------------------------
 // gtceu:vein_drilling recipes of the Steam Vein Drill, generated from the vein table
 // (kubejs/data/grindless/tables/veins.json via global.grindless.veinTable()).

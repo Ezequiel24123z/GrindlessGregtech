@@ -1,3 +1,4 @@
+// priority: -22986
 // -----------------------------------------------------------------------------------------------
 // Recipes of UEV's Barnard b (machines and recipe type: startup_scripts/grindless/uev/barnard.js; docs/eras/uev.md, machines 21 and 22,
 // lines 10 and 15; package UEV-B3), generated at every server load from data/grindless/tables/barnard.json, plus the two controllers.

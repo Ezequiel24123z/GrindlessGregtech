@@ -1,3 +1,4 @@
+// priority: -7462
 // -----------------------------------------------------------------------------------------------
 // UEV's Barnard b (docs/eras/uev.md, machines 21 and 22, lines 10 and 15; package UEV-B3): the Barnard core drill, the carbonyl refinery,
 // the two recipe types and the package's own items. The recipes come from data/grindless/tables/barnard.json
