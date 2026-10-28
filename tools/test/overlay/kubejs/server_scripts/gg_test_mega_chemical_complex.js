@@ -27,9 +27,9 @@
   // unit: coil block, kelvin, coil parallel, hatch parallel, expected copies, hatches
   var UNITS = [
     { name: 'luv', coil: 'gtceu:hssg_coil_block', coilPar: 64, hatchPar: 16, par: 1024, x: 34080, z: 20,
-      parts: { 2: 'gtceu:maintenance_hatch', 3: 'gtceu:luv_energy_input_hatch', 4: 'gtceu:hv_input_bus', 6: 'gtceu:hv_output_bus', 7: 'gtceu:luv_parallel_hatch', 8: 'gtceu:hv_input_hatch', 9: 'gtceu:hv_output_hatch' } },
-    { name: 'zpm', coil: 'gtceu:naquadah_coil_block', coilPar: 256, hatchPar: 64, par: 16384, x: 34080, z: 50,
-      parts: { 2: 'gtceu:maintenance_hatch', 3: 'gtceu:zpm_energy_input_hatch', 4: 'gtceu:hv_input_bus', 6: 'gtceu:hv_output_bus', 7: 'gtceu:zpm_parallel_hatch', 8: 'gtceu:hv_input_hatch', 9: 'gtceu:hv_output_hatch' } }
+      parts: { 2: 'gtceu:maintenance_hatch', 3: 'gtceu:luv_energy_input_hatch', 4: 'gtceu:hv_input_bus', 6: 'gtceu:hv_output_bus', 5: 'gtceu:luv_parallel_hatch', 8: 'gtceu:hv_input_hatch', 9: 'gtceu:hv_output_hatch' } },
+    { name: 'zpm', coil: 'gtceu:naquadah_coil_block', coilPar: 256, hatchPar: 64, par: 16384, x: 34080, z: 49,
+      parts: { 2: 'gtceu:maintenance_hatch', 3: 'gtceu:zpm_energy_input_hatch', 4: 'gtceu:hv_input_bus', 6: 'gtceu:hv_output_bus', 5: 'gtceu:zpm_parallel_hatch', 8: 'gtceu:hv_input_hatch', 9: 'gtceu:hv_output_hatch' } }
   ]
   // the stage recipes of each composed line and how many runs of each the table's batch makes (solved by hand from its given amounts)
   var LINES = [
@@ -184,7 +184,7 @@
       var e = expected[k] || 0
       var g = got.net[k] || 0
       // the intermediates cancel to 0 inside; whole items, fluids rounded to the millibucket
-      if (Math.abs(e - g) > 0.5) bad.push(k + ' stages ' + e + ' vs composed ' + g)
+      if (Math.abs(e - g) >= 1) bad.push(k + ' stages ' + e + ' vs composed ' + g)
     })
     var eutOk = got.eut > 0 && got.eut <= 32768
     var energyOk = got.energy >= energy - 1e-6 && got.energy - energy < got.duration
@@ -236,7 +236,7 @@
 
   // ---------------------------------------------------------------- the machine
 
-  // front slice (the last one) floor row, by column, as UNITS[].parts
+  // front slice (the last one), the controller's row, by column, as UNITS[].parts
   function placeMachine(u) {
     var desc = global.grindless.patterns.describe(ID)
     if (!desc) throw new Error('no structure description for ' + ID)
@@ -269,7 +269,7 @@
       if (sym.kind === 'frames') block = 'gtceu:' + sym.materials[0] + '_frame'
       else if (sym.kind === 'blocks') block = c.ch === 'K' ? u.coil : sym.blocks[0]
       else if (sym.kind === 'oneOf') {
-        if (c.si === last && c.ri === 0 && u.parts[c.ci]) { block = u.parts[c.ci]; isPart = true }
+        if (c.si === last && c.ri === ctrl.ri && u.parts[c.ci]) { block = u.parts[c.ci]; isPart = true }
         else sym.options.forEach(function (o) { if (!block && o.kind === 'blocks') block = o.blocks[0] })
       }
       if (!block) return
