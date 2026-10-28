@@ -1229,3 +1229,31 @@ powershell -NoProfile -ExecutionPolicy Bypass -File tools\assets\Build-MegaCoilC
 | File (under `textures/`) | Notes |
 |---|---|
 | `block/multiblock/coil_chemical_plant/overlay_front*.png` | The Coil Chemical Plant controller face: still, active and active emissive. |
+
+## UEV Calutron and isotope items (UEV-A1)
+
+Procedural, drawn by `Build-UEVIsotopesTextures.ps1`; nothing is copied from another mod. The controller face of `gtceu:calutron` (still, animated active and emissive frames) and the four isotope-line items.
+
+```powershell
+powershell -NoProfile -ExecutionPolicy Bypass -File tools\assets\Build-UEVIsotopesTextures.ps1
+powershell -NoProfile -ExecutionPolicy Bypass -File tools\assets\Build-UEVIsotopesTextures.ps1 -Credits
+```
+
+| File (under `textures/`) | Notes |
+|---|---|
+| `block/multiblock/calutron/overlay_front*.png` (+ `.mcmeta`) | The Calutron controller face: still, active and active emissive. |
+| `item/ca48_oven_charge.png`, `item/plutonium_oxide_target.png`, `item/irradiated_plutonium_target.png`, `item/plutonium_244_target.png` | The Ca-48 oven charge and the three plutonium targets of the HFIR breeding loop. |
+
+## UEV Electron Beam Furnace, Single-Crystal Foundry and parts (UEV-A4)
+
+Procedural, drawn by `Build-UEVElectronBeamTextures.ps1`; nothing is copied from another mod. The controller faces of `gtceu:electron_beam_furnace` and `gtceu:single_crystal_foundry` and the 33 items of the 6N metal and single-crystal lines.
+
+```powershell
+powershell -NoProfile -ExecutionPolicy Bypass -File tools\assets\Build-UEVElectronBeamTextures.ps1
+powershell -NoProfile -ExecutionPolicy Bypass -File tools\assets\Build-UEVElectronBeamTextures.ps1 -Credits
+```
+
+| File (under `textures/`) | Notes |
+|---|---|
+| `block/multiblock/electron_beam_furnace/overlay_front*.png`, `block/multiblock/single_crystal_foundry/overlay_front*.png` | The two controller faces: still, active and active emissive. |
+| `item/*.png` (33, listed by `-Credits`) | 6N Hf/Ta/Nb/Re, the Zr/Hf and Ta/Nb intermediates, YSZ, the SX blade stages, gate, dross, skull, pump impeller, Brayton wheel and the Nb3Sn cavity. |

@@ -60,7 +60,8 @@ test('both patterns: one controller in the front slice, GTM part limits, one wid
 
 test('the five recipes: one circuit each, the waste item pinned by id, ZPM VA bound, whole numbers', () => {
   assert.deepEqual(AC.retrieval.map((r) => [r.name, r.circuit]), [['retrieve', 1], ['emanate', 2], ['capsule', 3]]);
-  assert.deepEqual(AC.partition.map((r) => [r.name, r.circuit]), [['strip', 1], ['split', 2]]);
+  // circuits 3-5: UEV-A1's plutonium recovery and the Cm and Bk/Cf cuts
+  assert.deepEqual(AC.partition.map((r) => [r.name, r.circuit]), [['strip', 1], ['split', 2], ['plutonium_recovery', 3], ['curium_cut', 4], ['berkelium_cut', 5]]);
   for (const p of AC.retrieval.concat(AC.partition)) {
     const r = byId(p.recipeId);
     assert.ok(r, p.recipeId + ' added');
