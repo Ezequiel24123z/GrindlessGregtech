@@ -5,7 +5,8 @@
 //   on the floor, its front one block off the cleanroom wall. Nothing else here is synthetic except one shortcut: once the cleanroom has
 //   formed, adjustCleanAmount(100) skips the wait for GTM's own cleaning cycle (the cleanroom is formed and powered all the same).
 //   Checks: the machine registers [assembler, circuit_assembler]; the lookup finds both types and the controller recipe; the cleanroom
-//   forms and the hall is its receiver; the hall forms; in the circuit assembler mode a cleanroom-conditioned recipe (1 poppy -> 1 red dye,
+//   forms and the hall is its receiver; the hall forms; in the circuit assembler mode a cleanroom-conditioned recipe (1 poppy + 144 mB
+//   molten tin, which GTM's circuit_assembler build hook adds -> 1 red dye,
 //   1,024 EU/t, 200 ticks, batch off) runs with one LuV parallel hatch (ceiling 64 x 16 = 1,024) and one ZPM hatch (524,288 V):
 //   the energy cap floor(131072/1024) = 128 binds, so 128 copies, 131,072 EU/t, 200 ticks.
 (function () {
@@ -134,7 +135,61 @@
     return NaN
   }
   function diagFind(m) {
-    try { var r = m.getRecipeType().getLookup().findRecipe(m); return r ? String(r.id) : 'null' } catch (e) { return 'err ' + errText(e) }
+    try {
+      var ids = []
+      var it = m.getRecipeType().searchRecipe(m, function (r) { return true })
+      while (it.hasNext() && ids.length < 6) { var r = it.next(); ids.push(r ? String(r.id) : 'null') }
+      return '[' + ids.join(',') + ']'
+    } catch (e) { return 'err ' + errText(e) }
+  }
+  function res(a) {
+    try { return a.isSuccess() ? 'ok' : 'FAIL ' + (a.reason() ? a.reason().getString() : 'no reason') } catch (e) { return 'err ' + errText(e) }
+  }
+  function eu(r) {
+    try { var es = classes().RecipeHelper.getRealEUt(r); return es.voltage() + 'Vx' + es.amperage() + 'A' } catch (e) { return 'err ' + errText(e) }
+  }
+  // each step RecipeLogic takes for one recipe, so a silent stop (no failure reason) shows where it happens
+  function diag(m, rid) {
+    var RH = classes().RecipeHelper
+    var rlg = m.getRecipeLogic()
+    var out = []
+    var step = function (label, f) { try { out.push(label + ' ' + f()) } catch (e) { out.push(label + ' err ' + errText(e)) } }
+    step('logic', function () { return 'status ' + rlg.getStatus() + ' suspend ' + rlg.isSuspend() + ' enabled ' + m.isWorkingEnabled() + ' last ' + rlg.getLastRecipe() })
+    step('search', function () { return diagFind(m) })
+    var r = null
+    try { var o = S.server.getRecipeManager().byKey(new (classes().RL)(rid)); if (o.isPresent()) r = o.get() } catch (e) { out.push('byKey err ' + errText(e)) }
+    if (r === null) { out.push('recipe ' + rid + ' missing'); return out.join('; ') }
+    step('conditions', function () { return res(RH.checkConditions(r, rlg)) })
+    step('contents', function () { return res(RH.matchContents(m, r)) })
+    array(m.getParts()).forEach(function (p) {
+      step('part ' + p.getDefinition().getId(), function () {
+        var x = p.modifyRecipe(r)
+        var extra = ''
+        try { if (typeof p.hasMaintenanceProblems === 'function') extra = ' problems ' + p.getNumMaintenanceProblems() } catch (e) { }
+        return (x === null || x === undefined ? 'NULL' : 'ok') + extra
+      })
+    })
+    var cur = r
+    var MF = Java.loadClass('com.gregtechceu.gtceu.api.recipe.modifier.ModifierFunction')
+    var list = [function (mm, rr) { return String(rr.getType().registryName) !== String(mm.getRecipeType().registryName) ? MF.NULL : MF.IDENTITY }]
+      .concat(global.grindless.mega.chain({ parallel: 'fixed', cap: 64, hatch: true, oc: 'nonperfect', batch: true }))
+    list.forEach(function (mod, i) {
+      if (cur === null) return
+      step('mod' + i, function () {
+        var f = typeof mod === 'function' ? mod(m, cur) : mod.getModifier(m, cur)
+        var nx = f.apply(cur)
+        cur = nx === null || nx === undefined ? null : nx
+        return cur === null ? 'NULL (' + f.getFailReason().getString() + ')' : 'parallels ' + cur.parallels + ' ' + eu(cur) + ' duration ' + cur.duration
+      })
+    })
+    var full = null
+    step('full', function () { full = m.fullModifyRecipe(r); return full === null || full === undefined ? 'NULL' : 'parallels ' + full.parallels + ' ' + eu(full) })
+    if (full !== null && full !== undefined) {
+      step('full_conditions', function () { return res(RH.checkConditions(full, rlg)) })
+      step('full_contents', function () { return res(RH.matchContents(m, full)) })
+    }
+    step('energy', function () { var c = m.energyContainer; return 'stored ' + c.getEnergyStored() + ' in ' + c.getInputVoltage() + 'Vx' + c.getInputAmperage() + 'A oc ' + m.getOverclockVoltage() + ' tier ' + m.getTier() })
+    return out.join('; ')
   }
   function snapshot(m) {
     var rec = m.getRecipeLogic().getLastRecipe()
@@ -293,6 +348,9 @@
       empty(u.outBus)
       fill(u.inBus, POPPY, 576)
       u.initial = items(u.inBus)[POPPY] || 0
+      // GTM's circuit_assembler onRecipeBuild adds 144 mB molten tin to every fluid-less recipe (and a _soldering_alloy copy)
+      u.inHatch = partsLike(m, /^gtceu:hv_input_hatch$/)[0]
+      if (u.inHatch) u.inHatch.tank.setFluidInTank(0, Fluid.of('gtceu:tin', 32000).getFluidStack())
       topUp(u.energy)
       m.getRecipeLogic().updateTickSubscription()
       u.phase = 'run'
@@ -304,6 +362,12 @@
     topUp(u.crEnergy)
     if (u.phase === 'run') {
       var rlg = m.getRecipeLogic()
+      if (!u.diagged && S.tick - u.started === 40 && !rlg.isWorking()) {
+        u.diagged = true
+        note('diag', diag(m, 'gg_test_mega:circuit_assembler/ah_circuit'))
+        try { rlg.findAndHandleRecipe() } catch (e) { note('kick_err', errText(e)) }
+        note('kick', 'after findAndHandleRecipe: status ' + rlg.getStatus() + ', last ' + rlg.getLastRecipe() + ', reasons ' + String(rlg.getFailureReasons()))
+      }
       if (u.snap === null && rlg.isWorking()) {
         var sn = snapshot(m)
         if (sn !== null && sn.id.indexOf('ah_circuit') >= 0) {
@@ -317,6 +381,25 @@
         note('measured', fmt(s) + '; consumed ' + u.consumed + ', out ' + got + '; max voltage ' + m.getMaxVoltage() + '; reasons ' + String(rlg.getFailureReasons()) + '; status ' + String(rlg.getStatus()) + '; clean ' + (m.getCleanroom() ? m.getCleanroom().isClean() : 'none') + '; found ' + diagFind(m))
         var ok = s !== null && s.parallels === 128 && got === 128 && u.consumed === 128 && s.duration === 200 && Math.abs(s.eut - 131072) <= 1
         check('cleanroom_recipe_parallels', ok, 'expected 128 copies (ceiling 1024, energy cap 128), EU/t 131072, duration 200; got ' + fmt(s) + ', out ' + got + ', consumed ' + u.consumed)
+        u.phase = 'done'
+        if (!ok) {
+          // control: the same hall in assembler mode with the 8 EU/t recipe (no cleanroom condition)
+          m.setActiveRecipeType(0)
+          empty(u.inBus)
+          empty(u.outBus)
+          fill(u.inBus, DANDELION, 64)
+          m.getRecipeLogic().updateTickSubscription()
+          u.phase = 'control'
+          u.started = S.tick
+        }
+      }
+      return
+    }
+    if (u.phase === 'control') {
+      var yel = items(u.outBus)[YELLOW] || 0
+      if (yel > 0 || S.tick - u.started > 300) {
+        var cs = snapshot(m)
+        note('control', 'assembler mode: ' + fmt(cs) + ', out ' + yel + ', status ' + m.getRecipeLogic().getStatus() + ', reasons ' + String(m.getRecipeLogic().getFailureReasons()) + (yel > 0 ? '' : '; diag ' + diag(m, 'gg_test_mega:assembler/ah_asm')))
         u.phase = 'done'
       }
     }
