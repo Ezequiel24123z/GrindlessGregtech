@@ -1,0 +1,10 @@
+{
+  "type": "emi:info",
+  "stacks": [
+    "item:grindless:mass_radius_chart",
+    "item:gtceu:white_dwarf_spectrograph"
+  ],
+  "text": [
+    "emi.grindless.info.white_dwarf_spectrograph.0"
+  ]
+}

@@ -1,0 +1,49 @@
+{
+  "_source": "docs/eras/uev.md machines 23-25, line 28 (Sirius B, degenerate matter, contained pellet) and the UEV field generator (package UEV-B4). Degenerate matter is named fiction (EMI info grindless:uev_sirius_fiction).",
+  "_how_it_is_used": "server_scripts/grindless/uev/sirius.js reads it at every server load. types.<type>.recipes[]: name, circuit, eut, duration, itemsIn[{id,count}], kept[] (not consumed), fluidsIn[{id,amount}], charge[] (fluid not consumed), itemsOut, fluidsOut. 'dimension': true = Sirius B orbit only (grindless:sirius_b_orbit); 'dataKey' = the EMI line key. gtceu:assembler is GTM's own (circuit 0, anywhere). The harvester consumes the EOS model and keeps the mass-radius chart; the pellet is sealed in the stasis field (the Casimir array's exotic matter cell) and nothing is voided.",
+  "types": {
+    "gravitational_redshift": {
+      "dataKey": "grindless_gravitational_redshift",
+      "dimension": true,
+      "recipes": [
+        { "name": "mass_radius_chart", "circuit": 1, "eut": 7864320, "duration": 4800,
+          "itemsIn": [{ "id": "grindless:ule_cavity", "count": 1 }, { "id": "grindless:snspd", "count": 2 }],
+          "kept": [{ "id": "grindless:nuclear_clock", "count": 1 }], "fluidsIn": [], "charge": [],
+          "itemsOut": [{ "id": "grindless:mass_radius_chart", "count": 1 }], "fluidsOut": [] }
+      ]
+    },
+    "degenerate_harvesting": {
+      "dataKey": "grindless_degenerate_harvesting",
+      "dimension": true,
+      "recipes": [
+        { "name": "degenerate_matter", "circuit": 1, "eut": 7864320, "duration": 9600,
+          "itemsIn": [{ "id": "grindless:degenerate_eos_model", "count": 1 }],
+          "kept": [{ "id": "grindless:mass_radius_chart", "count": 1 }],
+          "fluidsIn": [], "charge": [{ "id": "gtceu:liquid_helium", "amount": 1000 }],
+          "itemsOut": [{ "id": "grindless:degenerate_matter", "count": 1 }], "fluidsOut": [] }
+      ]
+    },
+    "degenerate_containment": {
+      "dataKey": "grindless_degenerate_containment",
+      "dimension": true,
+      "recipes": [
+        { "name": "degenerate_pellet", "circuit": 1, "eut": 7864320, "duration": 4800,
+          "itemsIn": [{ "id": "grindless:degenerate_matter", "count": 1 }, { "id": "grindless:exotic_matter_cell", "count": 1 }],
+          "kept": [], "fluidsIn": [], "charge": [],
+          "itemsOut": [{ "id": "grindless:degenerate_pellet", "count": 1 }], "fluidsOut": [] }
+      ]
+    },
+    "assembler": {
+      "recipes": [
+        { "name": "degenerate_containment_casing", "circuit": 0, "eut": 1966080, "duration": 300,
+          "itemsIn": [{ "id": "gtceu:uev_machine_casing", "count": 1 }, { "id": "grindless:sic_sic_plate", "count": 4 }, { "id": "grindless:hollow_core_fibre", "count": 1 }],
+          "kept": [], "fluidsIn": [], "charge": [],
+          "itemsOut": [{ "id": "grindless:degenerate_containment_casing", "count": 1 }], "fluidsOut": [] },
+        { "name": "uev_field_generator", "circuit": 0, "eut": 7864320, "duration": 600,
+          "itemsIn": [{ "id": "grindless:degenerate_pellet", "count": 1 }, { "id": "grindless:sx_pump_impeller", "count": 1 }, { "id": "grindless:uev_emitter", "count": 2 }, { "id": "grindless:uev_sensor", "count": 2 }],
+          "kept": [], "fluidsIn": [], "charge": [],
+          "itemsOut": [{ "id": "grindless:uev_field_generator", "count": 1 }], "fluidsOut": [] }
+      ]
+    }
+  }
+}
