@@ -73,7 +73,8 @@ test('the pattern: one controller in the front slice, parts with GTM limits, a J
 });
 
 test('the five reductions: one circuit each, ZPM VA, the mercury bath not consumed, whole numbers', () => {
-  assert.deepEqual(ER.recipes.map((r) => [r.name, r.circuit]), [['reduction', 1], ['roasting', 2], ['metallothermic_reduction', 3], ['zinc_recovery', 4], ['lanthanum_recovery', 5]]);
+  // UIV-A1 appended circuits 6-9 (pinned in uiv-isotopes.test.mjs); the loop below still checks every row
+  assert.deepEqual(ER.recipes.filter((r) => r.circuit <= 5).map((r) => [r.name, r.circuit]), [['reduction', 1], ['roasting', 2], ['metallothermic_reduction', 3], ['zinc_recovery', 4], ['lanthanum_recovery', 5]]);
   for (const p of ER.recipes) {
     const r = byId(p.recipeId);
     assert.ok(r, p.recipeId + ' added');
