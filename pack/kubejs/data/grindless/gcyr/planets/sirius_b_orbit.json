@@ -1,0 +1,15 @@
+{
+  "translation": "level.grindless.sirius_b_orbit",
+  "galaxy": "gcyr:milky_way",
+  "solar_system": "grindless:sirius",
+  "world": "grindless:sirius_b_orbit",
+  "orbit_world": "grindless:sirius_b_orbit",
+  "rocket_tier": 10,
+  "gravity": 0.0,
+  "has_atmosphere": false,
+  "days_in_year": 600,
+  "temperature": 25000,
+  "solar_power": 40,
+  "has_oxygen": false,
+  "button_color": 14212095
+}
