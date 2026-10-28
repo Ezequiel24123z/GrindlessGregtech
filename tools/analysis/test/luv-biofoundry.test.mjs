@@ -238,10 +238,10 @@ test('molten cerrobase 140 is no longer hidden (its recipe is ours: EMI drops a 
   assert.deepEqual(hidden.filter((g) => (g.fluids || []).includes(MOLTEN_CERROBASE)).map((g) => g.material), []);
   const rules = JSON.parse(fs.readFileSync(path.join(root, 'tools', 'analysis', 'tiers', 'obtain.json'), 'utf8')).obtain.classes;
   // v0.8.0: the hidden table was regenerated from C3's dump, taken before this recipe; an A rule (a source, never hidden) names it for
-  // cerrobase 140 and the line until the next dump finds both obtainable
+  // cerrobase 140 and the line until the next dump finds both obtainable (v0.11.0's obtain dump 20261028-014809 did: the rule is gone)
   assert.deepEqual(rules.filter((c) => (c.materials || []).includes('cerrobase_140') && c.class !== 'A'), [], 'no obtain rule hides cerrobase 140');
   const line = rules.find((c) => (c.materials || []).includes('gtnn:circuit_assembly_line'));
-  assert.ok(line && (line.class === 'A' ? /fluid_heater\/molten_cerrobase_140/.test(line.source) : line.until === 'luv' && !/missing molten cerrobase/.test(line.reason)),
+  assert.ok(!line || (line.class === 'A' ? /fluid_heater\/molten_cerrobase_140/.test(line.source) : line.until === 'luv' && !/missing molten cerrobase/.test(line.reason)),
     'the line is LuV content with a source for its molten cerrobase');
 });
 
