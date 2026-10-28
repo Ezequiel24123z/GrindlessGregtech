@@ -1,0 +1,40 @@
+{
+  "_doc": "Specs for tools/assets/New-MachineSound.ps1. One row per working-sound loop. id = the sound event path under the grindless namespace and the file name in assets/grindless/sounds/. recipeType is documentation only (the wiring lives in startup_scripts/grindless/sounds.js and tools/analysis/test/sounds.test.mjs keeps both in step). duration in seconds (0.5-30, ElevenLabs limit), volume and attenuation (blocks, default 16) go into sounds.json, quality is the libvorbis -q (budget: each .ogg at most 100 KB).",
+  "model": "eleven_text_to_sound_v2",
+  "sampleRate": 44100,
+  "sounds": [
+    {
+      "id": "loop_observatory",
+      "recipeType": "gtceu:radio_astronomy",
+      "prompt": "Seamless looping ambience of a radio observatory control room: a low steady electronic hum, soft slow data-processing pings and faint cooling fans, calm and scientific, no voices, no music",
+      "duration": 8,
+      "loop": true,
+      "promptInfluence": 0.5,
+      "volume": 0.6,
+      "attenuation": 24,
+      "quality": 1
+    },
+    {
+      "id": "loop_mega_chemical_complex",
+      "recipeType": "gtceu:mega_chemical_complex",
+      "prompt": "Seamless looping industrial sound of a huge chemical plant: bubbling reactors, steady pump drone, hissing steam vents and a deep pipe rumble, heavy machinery, no voices, no music",
+      "duration": 8,
+      "loop": true,
+      "promptInfluence": 0.5,
+      "volume": 0.7,
+      "attenuation": 32,
+      "quality": 1
+    },
+    {
+      "id": "loop_plasma_quench_caster",
+      "recipeType": "gtceu:plasma_quench",
+      "prompt": "Seamless looping sound of a fusion plasma caster: a deep resonant energy hum rising and falling, crackling electric arcs, a faint magnetic whine, sci-fi reactor, no voices, no music",
+      "duration": 8,
+      "loop": true,
+      "promptInfluence": 0.5,
+      "volume": 0.7,
+      "attenuation": 32,
+      "quality": 1
+    }
+  ]
+}
