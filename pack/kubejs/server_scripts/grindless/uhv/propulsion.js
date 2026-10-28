@@ -80,6 +80,9 @@
     [item('grindless:hftacn_powder', 4), item('grindless:six_n_hafnium', 1), item('gtceu:graphite_dust', 1)], [],
     [item('gtceu:hftacn_ingot', 2), item(CARBON, 1)], [], UHVA, 600))
 
+  // UIV-A5: the boron carbide target of the BEUV mirror (circuit 5; the La/B4C multilayer is MBE circuit 5 in tables/photonics.json)
+  TABLE.push(row('b4c_target', 'spark_plasma_sintering', 5, [item(B4C, 4)], [], [item('grindless:b4c_target', 1)], [], UHVA, 500))
+
   var SIDE = [
     row('zirconia', 'electric_blast_furnace', null, [item(ZIRCON, 4)], [],
       [item(ZIRCONIA, 3), item('gtceu:silicon_dioxide_dust', 1)], [], IV, 400, 2100),
