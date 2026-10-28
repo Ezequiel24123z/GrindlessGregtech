@@ -60,11 +60,12 @@
         ['gtceu.recipe.grindless_r_process_decompression.flash_target', 'Circuit 2: a uranium-238 target flashed with drip neutrons', 'Circuito 2: un blanco de uranio-238 fulminado con neutrones de goteo'],
         ['gtceu.recipe.grindless_decay_heat.kilonova_decay', 'Circuit 1: a sealed kilonova capsule ages for 12,000 ticks and gives 33,554,432 EU/t', 'Circuito 1: una cápsula de kilonova sellada envejece 12 000 ticks y da 33 554 432 EU/t'],
         ['gtceu.recipe.grindless_decay_heat.capsule_opening', 'Circuit 2: the aged capsule opened into r-process ash and helium-4', 'Circuito 2: la cápsula envejecida abierta en cenizas del proceso r y helio-4'],
-        ['gtceu.recipe.grindless_decay_heat.fragment_burn', 'Circuit 3: fission fragments and outer-crust ions burn down to iron and helium-4', 'Circuito 3: fragmentos de fisión e iones de corteza externa se consumen hasta hierro y helio-4'],
+        ['gtceu.recipe.grindless_decay_heat.fragment_burn', 'Circuit 3: fission fragments burn down to iron and helium-4', 'Circuito 3: los fragmentos de fisión se consumen hasta hierro y helio-4'],
+        ['gtceu.recipe.grindless_decay_heat.ion_burn', 'Circuit 4: outer-crust ions burn down to iron and helium-4', 'Circuito 4: los iones de corteza externa se consumen hasta hierro y helio-4'],
 
         ['gtceu.recipe.grindless_hot_cell.es_fm_debris', 'Mode 13: the flashed target dissolved in nitric acid into an einsteinium and fermium liquor', 'Modo 13: el blanco fulminado disuelto en ácido nítrico en un licor de einstenio y fermio'],
         ['gtceu.recipe.grindless_hot_cell.ash_actinide_cut', 'Mode 14: the actinide cut of the r-process ash', 'Modo 14: el corte de actínidos de las cenizas del proceso r'],
-        ['gtceu.recipe.grindless_transuranium_processing.es254_extraction', 'Circuit 7: einsteinium-254 pulled out of the actinide liquor with HDEHP; the solvent is kept', 'Circuito 7: einstenio-254 extraído del licor de actínidos con HDEHP; el disolvente se conserva'],
+        ['gtceu.recipe.grindless_transuranium_processing.es254_extraction', 'Circuit 9: einsteinium-254 pulled out of the actinide liquor with HDEHP; the solvent is kept', 'Circuito 9: einstenio-254 extraído del licor de actínidos con HDEHP; el disolvente se conserva'],
         ['gtceu.recipe.grindless_heavy_ion_irradiation.es254_bombard', 'Circuit 8: a calcium-48 beam on the einsteinium-254 target; the wheel comes back activated', 'Circuito 8: un haz de calcio-48 sobre el blanco de einstenio-254; la rueda vuelve activada'],
         ['gtceu.recipe.grindless_recoil_separation.element_119_recoil', 'Circuit 7: element 119 caught from its recoil gas on the membrane', 'Circuito 7: el elemento 119 recogido de su gas de retroceso en la membrana'],
         ['gtceu.recipe.grindless_superheavy_chemistry.census_ii', 'Circuit 3: elements 119 and 120 counted in a sealed capsule', 'Circuito 3: los elementos 119 y 120 contados en una cápsula sellada']

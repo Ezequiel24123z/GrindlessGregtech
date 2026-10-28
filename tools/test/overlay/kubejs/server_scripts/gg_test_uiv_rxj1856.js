@@ -181,7 +181,12 @@
     if (S.phase === 'build') {
       S.pos = {}
       MACHINES.forEach(function (m, i) { S.pos[m] = { O: farPos(i), p: build(FAR, m, farPos(i)) } })
-      S.near = { O: { x: X0 + 6, y: BASE_Y, z: 40 }, p: build(NEAR, 'crust_lift', { x: X0 + 6, y: BASE_Y, z: 40 }) }
+      var NO = { x: X0 + 24, y: BASE_Y, z: 40 }
+      for (var cx = 0; cx < 3; cx++) for (var cz = 0; cz < 3; cz++) {
+        ticket(NEAR, { x: X0 + cx * 16, z: cz * 16 })
+        cmd(NEAR, 'fill ' + (X0 + cx * 16) + ' 90 ' + (cz * 16) + ' ' + (X0 + cx * 16 + 15) + ' 125 ' + (cz * 16 + 15) + ' minecraft:air')
+      }
+      S.near = { O: NO, p: build(NEAR, 'crust_lift', NO) }
       phase('form')
       return
     }
@@ -248,7 +253,7 @@
       if (global.ggTestUivRxj1856Request && Date.now() - LOADED_AT >= 10000) {
         global.ggTestUivRxj1856Request = false
         S = { server: event.server, G: global.grindless, failed: 0, finished: false, tick: 0, phase: 'build', phaseAt: 0, order: [], tickets: [], chunks: {}, older: [
-          ['es_fm_debris', 'hot cell c13'], ['ash_actinide_cut', 'hot cell c14'], ['es254_extraction', 'transcurium c7'], ['es254_bombard', 'cyclotron c8'],
+          ['es_fm_debris', 'hot cell c13'], ['ash_actinide_cut', 'hot cell c14'], ['es254_extraction', 'transcurium c9'], ['es254_bombard', 'cyclotron c8'],
           ['element_119_recoil', 'recoil separator c7: element 119'], ['census_ii', 'chemistry lab c3: census II'], ['u238_flash_target', 'uranium cycle c10'],
           ['uiv/r_process_ash', 'platinum plant c10'], ['es_fm_cut', 'actinide partitioning c6'], ['mh_tether', 'tether works c3'],
           ['worn_tether_scrap', 'tether works c4: the worn tether returns'], ['bn_coated_cnt_yarn', 'BN reactor c6']
