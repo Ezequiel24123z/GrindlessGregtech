@@ -18,7 +18,12 @@
         { "name": "clock", "circuit": 2, "eut": 1966080, "duration": 600,
           "itemsIn": [{ "id": "grindless:thorium_caf2_crystal", "count": 1 }, { "id": "grindless:vuv_frequency_comb", "count": 1 }, { "id": "#gtceu:circuits/uhv", "count": 1 }],
           "kept": [], "fluidsIn": [], "charge": [],
-          "itemsOut": [{ "id": "grindless:nuclear_clock", "count": 1 }], "fluidsOut": [] }
+          "itemsOut": [{ "id": "grindless:nuclear_clock", "count": 1 }], "fluidsOut": [] },
+        { "name": "chip_clock", "circuit": 3, "eut": 1966080, "duration": 600,
+          "_why": "UIV-A7 (uiv.md line 22): the comb interrogates a capped ThF4 film into a chip-scale nuclear clock; the comb is not consumed",
+          "itemsIn": [{ "id": "grindless:capped_thf4_film", "count": 1 }, { "id": "#gtceu:circuits/uhv", "count": 1 }],
+          "kept": [{ "id": "grindless:vuv_frequency_comb", "count": 1 }], "fluidsIn": [], "charge": [],
+          "itemsOut": [{ "id": "grindless:chip_nuclear_clock", "count": 1 }], "fluidsOut": [] }
       ]
     },
     "crystal_growth": {

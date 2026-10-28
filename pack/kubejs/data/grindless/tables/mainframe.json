@@ -1,0 +1,26 @@
+{
+  "_source": "UIV-A7 (docs/eras/uiv.md, 'A7. Optical mainframe and the UIV sensor', lines 17, 18 and 22): the GTM assembler steps of the optical mainframe line, the chip nuclear clock and the UIV sensor. Real processes: Feldmann et al. 2021 (phase-change photonic in-memory computing on a crossbar), Zhang et al. 2024 (thorium-229 nuclear clock in a ThF4 thin film).",
+  "_how_it_is_used": [
+    "Read by server_scripts/grindless/uiv/mainframe.js at every server load. Each entry of types.<type>.recipes becomes one gtceu:<type> recipe, id grindless:<type>/<name>.",
+    "itemsIn / itemsOut: { id, count, chance? }; fluidsIn / fluidsOut: { id, amount } in mB; kept: items never used up; charge: fluids never used up. eut x duration. Circuit 0 = none (GTM's assembler).",
+    "The other rows of the line are appended to older tables (photonics.json foundry c13 and MBE c7, photonics_uev.json hall c4-c6, crystals.json nuclear clock lab c3, alpha_centauri.json pulsar timing c3, the fluorspar kiln's UIV_ROWS)."
+  ],
+  "types": {
+    "assembler": {
+      "recipes": [
+        { "name": "crossbar_on_interposer", "circuit": 0, "eut": 7864320, "duration": 400,
+          "itemsIn": [{ "id": "grindless:pcm_crossbar", "count": 1 }, { "id": "grindless:glass_interposer", "count": 1 }],
+          "kept": [], "fluidsIn": [], "charge": [],
+          "itemsOut": [{ "id": "grindless:crossbar_on_interposer", "count": 1 }], "fluidsOut": [] },
+        { "name": "capped_thf4_film", "circuit": 0, "eut": 491520, "duration": 300,
+          "itemsIn": [{ "id": "grindless:thf4_film", "count": 1 }, { "id": "gtceu:glass_plate", "count": 1 }],
+          "kept": [], "fluidsIn": [], "charge": [],
+          "itemsOut": [{ "id": "grindless:capped_thf4_film", "count": 1 }], "fluidsOut": [] },
+        { "name": "uiv_sensor", "circuit": 0, "eut": 7864320, "duration": 400,
+          "itemsIn": [{ "id": "grindless:uev_sensor", "count": 1 }, { "id": "grindless:eo_microcomb", "count": 1 }, { "id": "grindless:chip_nuclear_clock", "count": 1 }],
+          "kept": [], "fluidsIn": [], "charge": [],
+          "itemsOut": [{ "id": "grindless:uiv_sensor", "count": 1 }], "fluidsOut": [] }
+      ]
+    }
+  }
+}

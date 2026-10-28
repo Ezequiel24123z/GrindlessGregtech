@@ -95,8 +95,18 @@
     }
   ]
 
-  function addUevRows(event) {
-    UEV_ROWS.forEach(function (r) {
+  // UIV-A7 row (uiv.md line 22): Th-229 metal fluorinated to ThF4, Th + 4 HF -> ThF4 + 2 H2 (the hydrogen goes back to the plant).
+  var UIV_ROWS = [
+    {
+      name: 'thf4_from_thorium_229',
+      itemIn: { id: 'grindless:thorium_229', count: 1 }, fluidIn: { id: 'gtceu:hydrofluoric_acid', amount: 4000 },
+      itemOut: { id: 'grindless:thf4', count: 1 }, fluidOut: { id: 'gtceu:hydrogen', amount: 2000 },
+      eut: 30, duration: 64
+    }
+  ]
+
+  function addUevRows(event, rows) {
+    ;(rows || UEV_ROWS).forEach(function (r) {
       var missing = []
       if (!Item.exists(r.itemIn.id)) missing.push(r.itemIn.id)
       if (!Item.exists(r.itemOut.id)) missing.push(r.itemOut.id)
@@ -146,6 +156,11 @@
       addUevRows(event)
     } catch (e3) {
       console.error(LOG + 'fluorspar kiln UEV rows failed: ' + e3)
+    }
+    try {
+      addUevRows(event, UIV_ROWS)
+    } catch (e4) {
+      console.error(LOG + 'fluorspar kiln UIV rows failed: ' + e4)
     }
     try {
       addController(event)

@@ -108,6 +108,22 @@
           "charge": [],
           "itemsOut": [{ "id": "grindless:p_si_die", "count": 1 }],
           "fluidsOut": [{ "id": "gtceu:nitrogen", "amount": 1000 }]
+        },
+        {
+          "_why": "UIV-A7 (uiv.md line 22): a Th-fluoride film grown on a silicon wafer, the nuclear clock's active layer (circuit 7)",
+          "name": "thf4_film",
+          "circuit": 7,
+          "eut": 1966080,
+          "duration": 1800,
+          "itemsIn": [
+            { "id": "gtceu:silicon_wafer", "count": 1 },
+            { "id": "grindless:thf4", "count": 1 }
+          ],
+          "kept": [],
+          "fluidsIn": [{ "id": "gtceu:liquid_nitrogen", "amount": 1000 }],
+          "charge": [],
+          "itemsOut": [{ "id": "grindless:thf4_film", "count": 1 }],
+          "fluidsOut": [{ "id": "gtceu:nitrogen", "amount": 1000 }]
         }
       ]
     },
@@ -290,6 +306,25 @@
           "fluidsIn": [{ "id": "gtceu:ultrapure_water", "amount": 1000 }],
           "charge": [],
           "itemsOut": [{ "id": "grindless:hfo2_resist_wafer", "count": 1 }],
+          "fluidsOut": [{ "id": "minecraft:water", "amount": 1000 }]
+        },
+        {
+          "_why": "UIV-A7 (uiv.md line 17): a 64 x 64 GST crossbar cut from a PCM die and patterned with a GST target (circuit 13)",
+          "name": "pcm_crossbar",
+          "circuit": 13,
+          "eut": 7864320,
+          "duration": 600,
+          "itemsIn": [
+            { "id": "grindless:pcm_photonic_die", "count": 4 },
+            { "id": "grindless:gst_target", "count": 1 }
+          ],
+          "kept": [],
+          "fluidsIn": [{ "id": "gtceu:ultrapure_water", "amount": 1000 }],
+          "charge": [{ "id": "gtceu:argon", "amount": 1000 }],
+          "itemsOut": [
+            { "id": "grindless:pcm_crossbar", "count": 1 },
+            { "id": "grindless:spent_gst_target", "count": 1 }
+          ],
           "fluidsOut": [{ "id": "minecraft:water", "amount": 1000 }]
         }
       ]

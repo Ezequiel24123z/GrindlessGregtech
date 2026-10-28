@@ -51,7 +51,12 @@
         { "name": "pulsar_navigation_chart", "circuit": 2, "eut": 1966080, "duration": 600,
           "itemsIn": [{ "id": "grindless:pulsar_timing_data", "count": 1 }, { "id": "grindless:fe60_record", "count": 1 }], "kept": [],
           "fluidsIn": [], "charge": [],
-          "itemsOut": [{ "id": "grindless:pulsar_navigation_chart", "count": 1 }], "fluidsOut": [] }
+          "itemsOut": [{ "id": "grindless:pulsar_navigation_chart", "count": 1 }], "fluidsOut": [] },
+        { "name": "repeater_discipline", "circuit": 3, "eut": 1966080, "duration": 900,
+          "_why": "UIV-A7 (uiv.md lines 16 and 44): a repeater clock core is locked to the pulsar chart; the nuclear clock is not consumed",
+          "itemsIn": [{ "id": "grindless:pulsar_navigation_chart", "count": 1 }, { "id": "grindless:sdd", "count": 2 }],
+          "kept": [{ "id": "grindless:nuclear_clock", "count": 1 }], "fluidsIn": [], "charge": [],
+          "itemsOut": [{ "id": "grindless:disciplined_clock_core", "count": 1 }], "fluidsOut": [] }
       ]
     },
     "assembler": {
