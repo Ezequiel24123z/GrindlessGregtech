@@ -100,6 +100,54 @@
             { "id": "gtceu:depleted_plutonium_oxide_dust", "count": 12 }
           ],
           "fluidsOut": []
+        },
+        {
+          "_": "UIV-A1: titanium-50 (the oven charge of element 120); the depleted rest goes to stock",
+          "name": "titanium_50",
+          "circuit": 7,
+          "eut": 1966080,
+          "duration": 4000,
+          "itemsIn": [{ "id": "gtceu:titanium_tetrachloride_ice_dust", "count": 16 }],
+          "kept": [],
+          "charge": [],
+          "fluidsIn": [],
+          "itemsOut": [
+            { "id": "gtceu:titanium_50_chloride_dust", "count": 1 },
+            { "id": "gtceu:titanium_tetrachloride_ice_dust", "count": 15 }
+          ],
+          "fluidsOut": []
+        },
+        {
+          "_": "UIV-A1: europium-151 (the photonics and reductor line); the depleted europium oxide goes to stock",
+          "name": "europium_151",
+          "circuit": 8,
+          "eut": 1966080,
+          "duration": 4000,
+          "itemsIn": [{ "id": "gtceu:europium_oxide_dust", "count": 4 }],
+          "kept": [],
+          "charge": [],
+          "fluidsIn": [],
+          "itemsOut": [
+            { "id": "gtceu:europium_151_dust", "count": 1 },
+            { "id": "gtceu:europium_oxide_dust", "count": 3 }
+          ],
+          "fluidsOut": []
+        },
+        {
+          "_": "UIV-A1: nickel-58 (the neutron supermirror and the cage); the depleted chloride goes to stock",
+          "name": "nickel_58",
+          "circuit": 9,
+          "eut": 1966080,
+          "duration": 4000,
+          "itemsIn": [{ "id": "gtceu:nickel_chloride_dust", "count": 3 }],
+          "kept": [],
+          "charge": [],
+          "fluidsIn": [],
+          "itemsOut": [
+            { "id": "gtceu:nickel_58_chloride_dust", "count": 2 },
+            { "id": "gtceu:nickel_chloride_dust", "count": 1 }
+          ],
+          "fluidsOut": []
         }
       ]
     },
