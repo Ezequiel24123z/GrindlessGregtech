@@ -26,6 +26,8 @@
 // GTRecipeType#searchRecipe only walks the tree, so GTM's search never returns them (GT-- empties GTM's own platinum and naquadah
 // separation steps that way; GCYR's Dyson sphere controller has two). An empty one of ours is a FAIL: no machine could run it.
 // Bench probes (ids in a gg_test_* namespace, added by other test overlays and never shipped) are not checked; `scan` counts them.
+// They are never "ours" either, and a recipe whose only collision partners are probes is lost in the bench alone: INFO (probe),
+// exported under probeShadowed, not under unreachable, so tools/analysis keeps it in its model (UEV-C3: 7 false FAILs).
 //
 // BASELINE below: the addon-vs-addon conflicts we accept, each with its reason. Which recipe of a conflicting group is the one left
 // out depends on the order GTM stages them (hash order), so an entry lists the whole group: an unreachable recipe is accepted when
@@ -44,7 +46,8 @@
 //
 // Markers: GGTEST|lookup|<check>|PASS|FAIL|INFO (detail), last line GGTEST|lookup|DONE
 //   start              INFO: how many types, recipes and proxy recipes the scan covers
-//   <recipe id>        FAIL: unreachable and not in the baseline (with what it collides with); INFO: an accepted baseline conflict
+//   <recipe id>        FAIL: unreachable and not in the baseline (with what it collides with); INFO: an accepted baseline conflict,
+//                      or a recipe lost to test probes only (bench-only)
 //   must_reach:<id>    PASS when the recipe exists and the lookup finds it (gtceu:gas_collector/air: 59a9bd2's fix; the lookup
 //                      collision fixes and the recipes they collided with)
 //   collisions         PASS when integration/lookup_collisions.js applied its table with no failure and every recipe it removed or
@@ -117,7 +120,12 @@
     return ids.slice(0, MAX_LISTED).join(', ') + (ids.length > MAX_LISTED ? ' and ' + (ids.length - MAX_LISTED) + ' more' : '')
   }
 
+  function isProbe(id) {
+    return String(id).indexOf('gg_test') === 0
+  }
+
   function isOurs(id) {
+    if (isProbe(id)) return false
     return id.indexOf('grindless:') === 0 || (touched !== null && touched.ids[id] !== undefined)
   }
 
@@ -279,7 +287,7 @@
 
   function checkOne(T, recipe, index) {
     // a bench probe (gg_test_*: ids, added by other test overlays, never shipped) may share its inputs on purpose
-    if (String(recipe.id).indexOf('gg_test') === 0) {
+    if (isProbe(recipe.id)) {
       S.probes++
       return
     }
@@ -428,7 +436,8 @@
       note: 'GT recipes that GTM 7.5.3\'s recipe lookup never finds from their own inputs. A proxy recipe (proxy: true, e.g. smelting ' +
         'converted for the electric furnace) is only lost in that GT type; type is the GT recipe type that loses it.',
       types: S.typeCount, recipes: S.recipes, proxies: S.proxies, checked: S.checked, skipped: S.skipped,
-      unreachable: rows,
+      unreachable: rows.filter(function (r) { return r.verdict !== 'probe' }),
+      probeShadowed: rows.filter(function (r) { return r.verdict === 'probe' }),
       emptyPath: empty
     }
     try {
@@ -447,7 +456,8 @@
       })
       var json = Java.loadClass('com.google.gson.JsonParser').parseString(JSON.stringify(doc))
       JsonIO.write(EXPORT, json)
-      emit('export', 'PASS', EXPORT + ': ' + rows.length + ' unreachable recipes and ' + empty.length + ' with no item or fluid input' +
+      emit('export', 'PASS', EXPORT + ': ' + doc.unreachable.length + ' unreachable recipes, ' + doc.probeShadowed.length +
+        ' lost to test probes only and ' + empty.length + ' with no item or fluid input' +
         (made ? '' : ' (the directory was not created here: ' + dirErrors.join(' ; ') + ')'))
       return true
     } catch (e2) {
@@ -462,6 +472,7 @@
     var unreachableIds = S.unreachable.map(function (u) { return u.id })
     var accepted = 0
     var fresh = 0
+    var probeShadowed = 0
     var hitEntries = []
     var rows = []
 
@@ -479,13 +490,19 @@
         row.shadowedBy = shadow
         row.alsoOut = alsoOut
         var partners = reached.concat(shadow)
+        var probes = partners.filter(isProbe)
+        partners = partners.filter(function (id) { return !isProbe(id) })
         var how = 'type ' + u.T.id + (row.proxy ? ' (proxy recipe)' : '') + '; with its own inputs the lookup reaches ' + listed(reached)
         if (shadow.length > 0) how += '; recipes holding all of its keys (its path ends inside theirs): ' + listed(shadow)
         if (alsoOut.length > 0) how += '; also left out with all of its keys: ' + listed(alsoOut)
         if (cover.keyless > 0) how += '; ' + cover.keyless + ' of its inputs give no lookup key'
         var ours = [u.id].concat(partners).filter(isOurs)
         var base = baselineFor(u.id, partners)
-        if (ours.length > 0) {
+        if (probes.length > 0 && partners.length === 0 && alsoOut.length === 0) {
+          probeShadowed++
+          row.verdict = 'probe'
+          emit(u.id, 'INFO', 'unreachable in the bench only, its path is taken by test probes (' + probes.join(', ') + '); ' + how)
+        } else if (ours.length > 0) {
           fresh++
           row.verdict = 'ours'
           emit(u.id, 'FAIL', 'unreachable, recipes of ours involved (' + ours.join(', ') + '): fix them, never baseline them; ' + how)
@@ -549,7 +566,7 @@
     var failed = fresh + (emptyOurs.length > 0 ? 1 : 0) + (policy.length > 0 ? 1 : 0) + (MUST_REACH.length - mustOk) +
       (collisionsOk ? 0 : 1) + (exported ? 0 : 1)
     emit('scan', failed === 0 ? 'PASS' : 'FAIL', 'types=' + S.typeCount + ' recipes=' + S.recipes + ' proxies=' + S.proxies + ' checked=' + S.checked +
-      ' skipped=' + S.skipped + ' probes=' + S.probes + ' unreachable=' + S.unreachable.length + ' accepted=' + accepted + ' new=' + fresh +
+      ' skipped=' + S.skipped + ' probes=' + S.probes + ' unreachable=' + S.unreachable.length + ' accepted=' + accepted + ' probeShadowed=' + probeShadowed + ' new=' + fresh +
       ' scanMs=' + scanMs + ' busyMs=' + S.busy + ' ticks=' + S.ticks + ' reportMs=' + (Date.now() - t0) + ' predicate=' + L.predicate)
   }
 
