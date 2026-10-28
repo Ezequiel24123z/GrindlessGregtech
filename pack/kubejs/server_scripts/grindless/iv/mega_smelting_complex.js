@@ -82,7 +82,7 @@
   }
 
   function add(event, rec) {
-    var recipe = event.recipes.gtceu.smelting_complex(rec.recipeId)
+    var recipe = event.recipes.gtceu.smelting_complex(rec.id)
     rec.itemsIn.forEach(function (x) {
       if (x.chance >= MAX_CHANCE) recipe.itemInputs(x.count + 'x ' + x.id)
       else recipe.chancedInput(x.count + 'x ' + x.id, x.chance, 0)

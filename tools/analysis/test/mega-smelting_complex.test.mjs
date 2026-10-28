@@ -243,14 +243,14 @@ test('composed lines equal the sum of their two stage recipes: black bronze with
 
   // what the builder received
   const built = Object.fromEntries(out.complex.map((r) => [r.id, r]));
-  const b = built['grindless:smelting_complex/blast_europium_gas'];
+  const b = built['grindless:blast_europium_gas'];
   assert.ok(b, 'builder called with the final id');
   assert.equal(b.circuit, 2);
   assert.equal(b.temp, 6000);
   assert.equal(b.eut, eg.eut);
   assert.equal(b.duration, eg.duration);
   assert.ok(b.itemInputs.includes('1x gtceu:europium_dust'));
-  assert.deepEqual(plain(built['grindless:smelting_complex/blast_molded'].notConsumable), ['1x gtceu:ingot_casting_mold']);
+  assert.deepEqual(plain(built['grindless:blast_molded'].notConsumable), ['1x gtceu:ingot_casting_mold']);
   assert.deepEqual(plain(h.G.megaSmeltingComplex.clashes), [], 'gas and no-gas variants never clash');
 });
 
