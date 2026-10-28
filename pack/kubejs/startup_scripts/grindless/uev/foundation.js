@@ -4,8 +4,8 @@
 // (the DFD motors are B1's, S0-2), no recipe types, no worldgen and no dimension. Every other UEV package uses exactly these ids; they
 // are published in global.grindless.uevFoundation. GTM already registers gtceu:uev_machine_casing and the UEV wires of its own metals,
 // and its calcium, potassium, lithium, hafnium, tantalum, rhenium, ruthenium, terbium, lanthanum, yttrium, curium, californium and
-// tennessine, so none of those is re-registered (S0-1 dump; tennessine is in GTM's lang, contract F1 lists it by mistake). There is no
-// UIV hull (S0-1): nothing here refers to one.
+// tennessine, so none of those is re-registered (S0-1 dump; tennessine is in GTM's lang, contract F1 lists it by mistake). The hull and
+// energy hatch builders also register the UIV ones (UIV-S0-1: a second create of the same id clashes), `.tiers(UEV, UIV)`.
 //
 //   Components (grindless:, Monifactory's Post_UV_Components.js pattern, LGPL, credited): uev_electric_motor (A5), uev_robot_arm (A8),
 //     uev_field_generator (B4), uev_electric_pump, uev_conveyor_module, uev_electric_piston, uev_sensor, uev_emitter (A6).
@@ -167,7 +167,8 @@
     })
   })
 
-  // S0-1: the hull and the four hatches register and form with highTierContent off
+  // S0-1: the hull and the four hatches register and form with highTierContent off. UIV-F1 (S0-1 fallback): the builder key is the base
+  // id, so UIV's five gtceu:uiv_* come from these same builders (.tiers(UEV, UIV)); the labels are named by tier
   GTCEuStartupEvents.registry('gtceu:machine', function (event) {
     var HullMachine = Java.loadClass('com.gregtechceu.gtceu.common.machine.electric.HullMachine')
     var EHPM = Java.loadClass('com.gregtechceu.gtceu.common.machine.multiblock.part.EnergyHatchPartMachine')
@@ -176,11 +177,11 @@
 
     function hatch(id, label, io, amps, ability, model) {
       event.create(id, 'custom')
-        .tiers(UEV)
+        .tiers(UEV, GTValues.UIV)
         .machine(function (holder, tier) { return new EHPM(holder, tier, io, amps) })
         .definition(function (tier, builder) {
           builder
-            .langValue(label)
+            .langValue(GTValues.VN[tier] + ' ' + label)
             .rotationState(RotationState.ALL)
             .abilities(ability)
           builder.modelPropertyBool(GTModelProperties.IS_FORMED, false)
@@ -189,18 +190,18 @@
     }
 
     event.create('machine_hull', 'custom')
-      .tiers(UEV)
+      .tiers(UEV, GTValues.UIV)
       .machine(function (holder, tier) { return new HullMachine(holder, tier) })
       .definition(function (tier, builder) {
         builder
-          .langValue('UEV Machine Hull')
+          .langValue(GTValues.VN[tier] + ' Machine Hull')
           .rotationState(RotationState.ALL)
           .abilities(PartAbility.PASSTHROUGH_HATCH)
         builder['overlayTieredHullModel(java.lang.String)']('hull')
       })
-    hatch('energy_input_hatch', 'UEV Energy Hatch', IO.IN, 2, PartAbility.INPUT_ENERGY, 'block/machines/energy_hatch.input')
-    hatch('energy_output_hatch', 'UEV Dynamo Hatch', IO.OUT, 2, PartAbility.OUTPUT_ENERGY, 'block/machines/energy_hatch.output')
-    hatch('energy_input_hatch_16a', 'UEV 16A Energy Hatch', IO.IN, 16, PartAbility.INPUT_ENERGY, 'block/machines/energy_hatch.input_16a')
-    hatch('energy_output_hatch_16a', 'UEV 16A Dynamo Hatch', IO.OUT, 16, PartAbility.OUTPUT_ENERGY, 'block/machines/energy_hatch.output_16a')
+    hatch('energy_input_hatch', 'Energy Hatch', IO.IN, 2, PartAbility.INPUT_ENERGY, 'block/machines/energy_hatch.input')
+    hatch('energy_output_hatch', 'Dynamo Hatch', IO.OUT, 2, PartAbility.OUTPUT_ENERGY, 'block/machines/energy_hatch.output')
+    hatch('energy_input_hatch_16a', '16A Energy Hatch', IO.IN, 16, PartAbility.INPUT_ENERGY, 'block/machines/energy_hatch.input_16a')
+    hatch('energy_output_hatch_16a', '16A Dynamo Hatch', IO.OUT, 16, PartAbility.OUTPUT_ENERGY, 'block/machines/energy_hatch.output_16a')
   })
 })()

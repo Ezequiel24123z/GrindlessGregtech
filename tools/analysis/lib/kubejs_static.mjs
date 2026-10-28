@@ -590,9 +590,12 @@ export function runPackScripts(packDir, { originals = [] } = {}) {
     }
   }
 
-  // material forms GTM makes from the flags (the primary forms the pack's recipes use)
+  // material forms GTM makes from the flags (the primary forms the pack's recipes use); GTM registers them with its own
+  // registrate, so they are gtceu: ids whatever the material's namespace (UIV-F1 dump: grindless:metallic_hydrogen gives
+  // gtceu:metallic_hydrogen_ingot, grindless:he3he3_fuel the fluid gtceu:he3he3_fuel)
   for (const m of registry.materials.values()) {
-    const [ns, name] = m.name.split(':');
+    const name = m.name.split(':')[1];
+    const ns = 'gtceu';
     if (m.forms.has('dust') || m.forms.has('ingot') || m.forms.has('gem')) registry.items.set(`${ns}:${name}_dust`, { id: `${ns}:${name}_dust`, kind: 'material', file: m.file, material: m.name });
     if (m.forms.has('ingot')) registry.items.set(`${ns}:${name}_ingot`, { id: `${ns}:${name}_ingot`, kind: 'material', file: m.file, material: m.name });
     if (m.forms.has('gem')) registry.items.set(`${ns}:${name}_gem`, { id: `${ns}:${name}_gem`, kind: 'material', file: m.file, material: m.name });

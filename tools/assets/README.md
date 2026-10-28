@@ -59,6 +59,7 @@ Generators for the pack's own textures. Everything is procedural 16x16 pixel art
 | `Build-UVFoundationTextures.ps1` | Writes the shared UV textures (UV-F1): 33 items and three block textures under `block/uv/`. `-Only <output or group>`, `-Credits`. |
 | `Build-UHVFoundationTextures.ps1` | Writes the shared UHV textures (UHV-F1): 52 items and three casings under `block/uhv/`. `-Only <output or group>`, `-Credits`. |
 | `Build-UEVFoundationTextures.ps1` | Writes the shared UEV textures (UEV-F1): 31 items and three casings under `block/uev/`. `-Only <output or group>`, `-Credits`. |
+| `Build-UIVFoundationTextures.ps1` | Writes the shared UIV textures (UIV-F1): 34 items and two casings under `block/uiv/`. `-Only <output or group>`, `-Credits`. |
 | `Build-UHVZblanTextures.ps1` | Writes the ZBLAN preform (UHV-A10, `item/zblan_preform.png`). The ZBLAN draw tower reuses UV's draw tower casing. `-Credits`. |
 | `Build-UVHeatSourcesTextures.ps1` | Writes the four item icons of UV's heat source works (UV-A2): probe RTG, americium micro source, curium RTG pellet, heavy curium oxide. `-Credits`. |
 | `Build-UVAcceleratorsTextures.ps1` | Writes the faces of UV's synchrotron, muon fusion cell and antimatter trap (UV-A5: `multiblock/synchrotron/`, `multiblock/muon_fusion_cell/`, `multiblock/antimatter_trap/`) and the 13 item icons of the LIGA, antiproton and muon fusion lines. `-Credits`. |
@@ -1194,6 +1195,17 @@ powershell -NoProfile -ExecutionPolicy Bypass -File tools\assets\Build-UEVFounda
 ```
 
 Same final check as UHV, against `startup_scripts/grindless/uev/foundation.js`, in both directions. Proposed CREDITS "Assets" line: procedural, original.
+
+## UIV foundation (UIV-F1)
+
+`Build-UIVFoundationTextures.ps1`: the UEV foundation script with a new palette per item. It writes the 34 shared UIV items (`item/<id>.png`) and two casings under `block/uiv/` (`uiv_fusion_casing`, `neutron_star_site_casing`). The materials are GT materials and need no PNG; the metallic hydrogen coil block borrows GregTech's tritanium coil texture.
+
+```powershell
+powershell -NoProfile -ExecutionPolicy Bypass -File tools\assets\Build-UIVFoundationTextures.ps1
+powershell -NoProfile -ExecutionPolicy Bypass -File tools\assets\Build-UIVFoundationTextures.ps1 -Only blocks -Credits
+```
+
+Same final check as UEV, against `startup_scripts/grindless/uiv/foundation.js`, in both directions. CREDITS "Assets" lines: procedural, original.
 
 ## MV Polymer Works (MEGA-2)
 
