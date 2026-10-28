@@ -95,6 +95,10 @@
       [item('gtceu:magnesium_diboride_single_wire', 8), item('gtceu:iron_dust', 1)], [], VA_UV, 400)
   ]
 
+  // UEV-A3: the (La,Y)H10 wire, the only producer of the superhydride cable's wire (GTM's covering recipes make the cable)
+  LINE.push(row('lay_wire', 'powder_in_tube', 6, [item('gtceu:lay_superhydride_dust', 4), item(TUBE, 1)], [],
+    [item('gtceu:lay_superhydride_single_wire', 8), item('gtceu:silver_dust', 1)], [], VA_UHV, 800))
+
   var SIDE = [
     row('boric_acid', 'chemical_reactor', null, [item('gtceu:borax_dust', 1)], [fluid('gtceu:hydrochloric_acid', 2000)],
       [item(BORIC, 4), item('gtceu:salt_dust', 2)], [fluid('minecraft:water', 5000)], 1920, 200),
