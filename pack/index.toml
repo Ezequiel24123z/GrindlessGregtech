@@ -7582,7 +7582,7 @@ hash = "1f4b256531a0b42a6ecf399e9b692d9e4730bd4102e53aab3e1fa2c999b69e9d"
 
 [[files]]
 file = "kubejs/data/grindless/tables/hidden_until.json"
-hash = "9e322faadadb9f6c8c74a98773b1f63e56ff8aaef17f00fff2d31d7ce6a60be4"
+hash = "416e445d2abd46ef77df7a7e544c26bdb0c21e26b7367a46d7953f6c98f18df6"
 
 [[files]]
 file = "kubejs/data/grindless/tables/horizon_collector.json"
@@ -8042,7 +8042,7 @@ hash = "bc0010deb0948c5d7413f382531a6f33b0688c4491f4a880f3c0cf24757243ba"
 
 [[files]]
 file = "kubejs/server_scripts/grindless/iv/mega_smelting_complex.js"
-hash = "ce1a938720ae10609f2bf351039b5860d5ceff3682d09d74089a03867f0a1753"
+hash = "2f4c53c679d64ac32f6e82932fb53bef5bb494a6a5ffa133c38adacae366b251"
 
 [[files]]
 file = "kubejs/server_scripts/grindless/iv/mercury.js"
