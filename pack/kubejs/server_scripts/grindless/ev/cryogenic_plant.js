@@ -109,6 +109,19 @@
     addXenonCut(event)
     addHelium3SixN(event)
     addHelium4Ash(event)
+    addInterstellarGas(event)
+  }
+
+  // UEV-B2 (docs/eras/uev.md, line 26): the nebula collector's compressed interstellar gas is split by boiling point. Hydrogen and deuterium
+  // come out as one fraction (the H/D distillation tower splits it), helium as another (helium-3 and helium-4), and the neon is drawn off.
+  // The only input is the compressed gas, which exists only after the Alpha Centauri orbit's collector.
+  var INTERSTELLAR_GAS = { id: 'grindless:cryogenic_processing/interstellar_gas', eut: 7680, duration: 600,
+    input: { id: 'gtceu:compressed_interstellar_gas', amount: 4000 },
+    outputs: [{ id: 'gtceu:hydrogen_deuterium_fraction', amount: 2400 }, { id: 'gtceu:helium_fraction', amount: 1200 }, { id: 'gtceu:neon', amount: 400 }] }
+  CRYO.interstellarGasRow = INTERSTELLAR_GAS
+
+  function addInterstellarGas(event) {
+    addCryoRow(event, INTERSTELLAR_GAS, 'interstellar_gas', 'interstellar gas')
   }
 
   // UEV-A7 (docs/eras/uev.md, line 23): helium-3 to 6N helium-3, the fusion fuel's grade. The impurities (helium-4 and the hydrogen
