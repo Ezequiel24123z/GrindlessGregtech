@@ -1,0 +1,128 @@
+{
+  "_source": "docs/eras/uiv.md, machines 9 and 10, lines 7 and 25-29 (package UIV-A9). Real: atomic beam sources (RF dissociator, sextupole magnets), dynamic nuclear polarisation of frozen 15NH3 and 6LiD targets (CERN SMC, COMPASS; Crabb & Meyer 1997), polarised fusion fuel (Kulsrud 1982), capillary porous system divertors (lithium-wetted tungsten mesh).",
+  "_how_it_is_used": "Read by server_scripts/grindless/uiv/mk5.js: one recipe per row, id grindless:<type>/<name> (GTM puts the type in front), circuit 0 meaning none (GTM's machines). 'kept' are non-consumed item inputs, 'charge' non-consumed fluid inputs. A row with 'start' is a fusion_reactor row (fusionStartEU). Nothing here is repeated in code; tools/analysis/test/uiv-mk5.test.mjs pins every row.",
+  "types": {
+    "proton_polarisation": {
+      "dataKey": "grindless_proton_polarisation",
+      "recipes": [
+        { "name": "rf_dissociation", "circuit": 1, "eut": 31457280, "duration": 800,
+          "itemsIn": [], "kept": [], "charge": [],
+          "fluidsIn": [{ "id": "gtceu:detritiated_protium", "amount": 1000 }],
+          "itemsOut": [],
+          "fluidsOut": [{ "id": "gtceu:polarised_h_gas", "amount": 800 }, { "id": "gtceu:hydrogen", "amount": 200 }] },
+        { "name": "li6h_polarisation", "circuit": 2, "eut": 31457280, "duration": 800,
+          "itemsIn": [{ "id": "grindless:li6_hydride", "count": 1 }], "kept": [], "charge": [],
+          "fluidsIn": [],
+          "itemsOut": [{ "id": "grindless:polarised_li6h", "count": 1 }],
+          "fluidsOut": [] },
+        { "name": "nh3_polarisation", "circuit": 3, "eut": 31457280, "duration": 800,
+          "itemsIn": [], "kept": [], "charge": [],
+          "fluidsIn": [{ "id": "gtceu:nitrogen_15_ammonia", "amount": 1000 }],
+          "itemsOut": [{ "id": "grindless:polarised_15nh3_ice", "count": 1 }],
+          "fluidsOut": [] }
+      ]
+    },
+    "chemical_reactor": {
+      "recipes": [
+        { "name": "li6_hydride", "circuit": 0, "eut": 480, "duration": 200,
+          "itemsIn": [{ "id": "gtceu:lithium_6_metal_dust", "count": 2 }], "kept": [], "charge": [],
+          "fluidsIn": [{ "id": "gtceu:hydrogen", "amount": 1000 }],
+          "itemsOut": [{ "id": "grindless:li6_hydride", "count": 2 }], "fluidsOut": [] },
+        { "name": "nitrogen_15_ammonia", "circuit": 0, "eut": 480, "duration": 200,
+          "itemsIn": [], "kept": [], "charge": [],
+          "fluidsIn": [{ "id": "gtceu:nitrogen_15", "amount": 1000 }, { "id": "gtceu:hydrogen", "amount": 3000 }],
+          "itemsOut": [], "fluidsOut": [{ "id": "gtceu:nitrogen_15_ammonia", "amount": 2000 }] },
+        { "name": "polarised_he3_cell", "circuit": 0, "eut": 1920, "duration": 100,
+          "itemsIn": [{ "id": "gtceu:silicon_dioxide_dust", "count": 1 }], "kept": [], "charge": [],
+          "fluidsIn": [{ "id": "gtceu:polarised_helium_3", "amount": 250 }],
+          "itemsOut": [{ "id": "grindless:polarised_he3_cell", "count": 1 }], "fluidsOut": [] }
+      ]
+    },
+    "compressor": {
+      "recipes": [
+        { "name": "polarised_h_pellet", "circuit": 0, "eut": 1920, "duration": 100,
+          "itemsIn": [{ "id": "grindless:polarised_h_ice", "count": 1 }], "kept": [], "charge": [],
+          "fluidsIn": [], "itemsOut": [{ "id": "grindless:polarised_h_pellet", "count": 4 }], "fluidsOut": [] },
+        { "name": "polarised_li6h_pellet", "circuit": 0, "eut": 1920, "duration": 100,
+          "itemsIn": [{ "id": "grindless:polarised_li6h", "count": 1 }], "kept": [], "charge": [],
+          "fluidsIn": [], "itemsOut": [{ "id": "grindless:polarised_li6h_pellet", "count": 4 }], "fluidsOut": [] },
+        { "name": "polarised_15nh3_pellet", "circuit": 0, "eut": 1920, "duration": 100,
+          "itemsIn": [{ "id": "grindless:polarised_15nh3_ice", "count": 1 }], "kept": [], "charge": [],
+          "fluidsIn": [], "itemsOut": [{ "id": "grindless:polarised_15nh3_pellet", "count": 4 }], "fluidsOut": [] }
+      ]
+    },
+    "mixer": {
+      "recipes": [
+        { "name": "he3he3_fuel", "circuit": 0, "eut": 7680, "duration": 100,
+          "itemsIn": [{ "id": "grindless:polarised_he3_cell", "count": 1 }], "kept": [], "charge": [],
+          "fluidsIn": [{ "id": "gtceu:helium", "amount": 1000 }],
+          "itemsOut": [{ "id": "gtceu:silicon_dioxide_dust", "count": 1 }],
+          "fluidsOut": [{ "id": "gtceu:he3he3_fuel", "amount": 1000 }] },
+        { "name": "pli6_fuel", "circuit": 0, "eut": 7680, "duration": 100,
+          "itemsIn": [{ "id": "grindless:polarised_li6h_pellet", "count": 1 }, { "id": "grindless:polarised_h_pellet", "count": 1 }], "kept": [], "charge": [],
+          "fluidsIn": [{ "id": "gtceu:helium", "amount": 1000 }],
+          "itemsOut": [], "fluidsOut": [{ "id": "gtceu:pli6_fuel", "amount": 1000 }] },
+        { "name": "pn15_fuel", "circuit": 0, "eut": 7680, "duration": 100,
+          "itemsIn": [{ "id": "grindless:polarised_15nh3_pellet", "count": 1 }, { "id": "grindless:polarised_h_pellet", "count": 1 }], "kept": [], "charge": [],
+          "fluidsIn": [{ "id": "gtceu:helium", "amount": 1000 }],
+          "itemsOut": [], "fluidsOut": [{ "id": "gtceu:pn15_fuel", "amount": 1000 }] }
+      ]
+    },
+    "centrifuge": {
+      "recipes": [
+        { "name": "he3he3_ash_split", "circuit": 0, "eut": 1920, "duration": 100,
+          "itemsIn": [], "kept": [], "charge": [],
+          "fluidsIn": [{ "id": "gtceu:he3he3_ash", "amount": 1000 }],
+          "itemsOut": [], "fluidsOut": [{ "id": "gtceu:helium", "amount": 500 }, { "id": "gtceu:hydrogen", "amount": 1000 }] },
+        { "name": "pn15_ash_split", "circuit": 0, "eut": 1920, "duration": 100,
+          "itemsIn": [], "kept": [], "charge": [],
+          "fluidsIn": [{ "id": "gtceu:pn15_ash", "amount": 1000 }],
+          "itemsOut": [{ "id": "gtceu:carbon_12_dust", "count": 1 }], "fluidsOut": [{ "id": "gtceu:helium", "amount": 1000 }] }
+      ]
+    },
+    "assembler": {
+      "recipes": [
+        { "name": "first_wall_tile", "circuit": 0, "eut": 30720, "duration": 200,
+          "itemsIn": [{ "id": "grindless:plasma_sprayed_tile", "count": 1 }, { "id": "gtceu:tungsten_steel_plate", "count": 2 }], "kept": [], "charge": [],
+          "fluidsIn": [], "itemsOut": [{ "id": "grindless:first_wall_tile", "count": 1 }], "fluidsOut": [] },
+        { "name": "li_sn_armoured_tile", "circuit": 0, "eut": 30720, "duration": 200,
+          "itemsIn": [{ "id": "grindless:first_wall_tile", "count": 1 }], "kept": [], "charge": [],
+          "fluidsIn": [{ "id": "gtceu:li_sn", "amount": 144 }],
+          "itemsOut": [{ "id": "grindless:li_sn_armoured_tile", "count": 1 }], "fluidsOut": [] },
+        { "name": "uiv_fusion_casing_wall", "circuit": 0, "eut": 122880, "duration": 300,
+          "itemsIn": [{ "id": "grindless:li_sn_armoured_tile", "count": 1 }, { "id": "grindless:w_fibre_preform", "count": 1 }], "kept": [], "charge": [],
+          "fluidsIn": [{ "id": "gtceu:li_sn", "amount": 144 }],
+          "itemsOut": [{ "id": "grindless:uiv_fusion_casing", "count": 1 }], "fluidsOut": [] },
+        { "name": "cps_wetted_mesh", "circuit": 0, "eut": 30720, "duration": 200,
+          "itemsIn": [{ "id": "grindless:w_mesh", "count": 1 }], "kept": [], "charge": [],
+          "fluidsIn": [{ "id": "gtceu:li_sn", "amount": 250 }],
+          "itemsOut": [{ "id": "grindless:cps_wetted_mesh", "count": 1 }], "fluidsOut": [] },
+        { "name": "divertor_cassette", "circuit": 0, "eut": 30720, "duration": 200,
+          "itemsIn": [{ "id": "grindless:cps_wetted_mesh", "count": 4 }, { "id": "gtceu:tungsten_steel_plate", "count": 2 }], "kept": [], "charge": [],
+          "fluidsIn": [], "itemsOut": [{ "id": "grindless:divertor_cassette", "count": 1 }], "fluidsOut": [] },
+        { "name": "divertor", "circuit": 0, "eut": 30720, "duration": 300,
+          "itemsIn": [{ "id": "grindless:divertor_cassette", "count": 2 }, { "id": "grindless:w_fibre_preform", "count": 1 }], "kept": [], "charge": [],
+          "fluidsIn": [], "itemsOut": [{ "id": "grindless:divertor", "count": 1 }], "fluidsOut": [] },
+        { "name": "uiv_fusion_casing_divertor", "circuit": 0, "eut": 122880, "duration": 300,
+          "itemsIn": [{ "id": "grindless:divertor", "count": 1 }, { "id": "gtceu:fusion_casing_mk3", "count": 2 }], "kept": [], "charge": [],
+          "fluidsIn": [], "itemsOut": [{ "id": "grindless:uiv_fusion_casing", "count": 2 }], "fluidsOut": [] }
+      ]
+    },
+    "fusion_reactor": {
+      "recipes": [
+        { "name": "uiv_he3he3", "circuit": 0, "eut": 31457280, "duration": 16, "start": 4000000000,
+          "itemsIn": [], "kept": [], "charge": [],
+          "fluidsIn": [{ "id": "gtceu:he3he3_fuel", "amount": 128 }],
+          "itemsOut": [], "fluidsOut": [{ "id": "gtceu:he3he3_plasma", "amount": 1024 }] },
+        { "name": "uiv_pli6", "circuit": 0, "eut": 25165824, "duration": 16, "start": 3000000000,
+          "itemsIn": [], "kept": [], "charge": [],
+          "fluidsIn": [{ "id": "gtceu:pli6_fuel", "amount": 128 }],
+          "itemsOut": [], "fluidsOut": [{ "id": "gtceu:pli6_plasma", "amount": 1024 }] },
+        { "name": "uiv_pn15", "circuit": 0, "eut": 31457280, "duration": 16, "start": 4800000000,
+          "itemsIn": [], "kept": [], "charge": [],
+          "fluidsIn": [{ "id": "gtceu:pn15_fuel", "amount": 128 }],
+          "itemsOut": [], "fluidsOut": [{ "id": "gtceu:pn15_plasma", "amount": 1024 }] }
+      ]
+    }
+  }
+}
