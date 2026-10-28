@@ -78,15 +78,30 @@
     return s
   }
 
+  // QR-B0 pilot: a boiler house, not a solid cube. Surface: steel casing/parts, frame posts at the four corners and two glass
+  // sight windows on every face (the row of the controller). Inside: a 3x3x3 air hall with a steel gearbox and a bronze pipe riser
+  // in the middle (the steam line). TOTAL_X_CELLS counts the 'X' cells of the result.
   function buildShellSlices(size) {
-    var full = repeatChar('X', size)
-    var edge = 'F' + repeatChar('X', size - 2) + 'F'
     var mid = Math.floor(size / 2)
     var slices = []
     for (var z = 0; z < size; z++) {
-      var isEdgeSlice = (z === 0 || z === size - 1)
       var rows = []
-      for (var y = 0; y < size; y++) rows.push(isEdgeSlice ? edge : full)
+      for (var y = 0; y < size; y++) {
+        var row = ''
+        for (var x = 0; x < size; x++) {
+          var onX = (x === 0 || x === size - 1)
+          var onZ = (z === 0 || z === size - 1)
+          var ch
+          if (onX && onZ) ch = 'F'
+          else if (onX || onZ || y === 0 || y === size - 1) {
+            var along = onZ ? x : z
+            ch = (y === mid && (along === 1 || along === size - 2) && y !== 0 && y !== size - 1) ? 'G' : 'X'
+          } else if (x === mid && z === mid) ch = y === 1 ? 'B' : 'P'
+          else ch = '#'
+          row += ch
+        }
+        rows.push(row)
+      }
       if (z === size - 1) {
         var chars = rows[mid].split('')
         chars[mid] = 'S'
@@ -98,8 +113,12 @@
   }
 
   const SHELL_SLICES = buildShellSlices(CUBE_SIZE)
-  // 125 cells - 20 frame corners (4 x 5 layers) - 1 controller = 104 'X' cells per machine.
-  const TOTAL_X_CELLS = CUBE_SIZE * CUBE_SIZE * CUBE_SIZE - 4 * CUBE_SIZE - 1
+  // casing count of the 'X' cells of the result
+  const TOTAL_X_CELLS = (function () {
+    var n = 0
+    SHELL_SLICES.forEach(function (rows) { rows.forEach(function (row) { n += row.split('X').length - 1 }) })
+    return n
+  })()
 
   // base parts every machine in the family has: 1 steam hatch, 1 steam input bus (4 slots, item inputs are at
   // most 2), 2 steam output buses (8 slots, item outputs are at most 6 and 64 parallels can need more than one
@@ -115,7 +134,11 @@
     return {
       S: Pat.controller(),
       X: Pat.oneOf.apply(null, options),
-      F: Pat.frame(FRAME_MATERIALS)
+      F: Pat.frame(FRAME_MATERIALS),
+      G: Pat.block('minecraft:glass'),
+      B: Pat.block('gtceu:steel_gearbox'),
+      P: Pat.block('gtceu:bronze_pipe_casing'),
+      '#': Pat.air()
     }
   }
 
