@@ -1,3 +1,4 @@
+// priority: -25474
 // -----------------------------------------------------------------------------------------------
 // Recipes of the UV Mega Factory (startup_scripts/grindless/uv/mega_factory.js, docs/eras/mega.md 4.10, family rule 6): assembler
 // recipes built from the machines they replace, the same way GTM builds its own large controllers. Each module block: 8 UV machines

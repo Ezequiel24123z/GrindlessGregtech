@@ -2432,6 +2432,17 @@
 			y: 50.0d
 		}
 		{
+			icon: "gtceu:mega_factory"
+			id: "11643F62BB3FFD6D"
+			rewards: [{ id: "2E5B102B74E1ECFE", type: "xp", xp: 10 }]
+			shape: "gear"
+			size: 1.5d
+			subtitle: "UV, Grindless"
+			tasks: [{ id: "6BA6ABDCF3CCED44", item: "gtceu:mega_factory", type: "item" }]
+			x: 4.0d
+			y: 50.0d
+		}
+		{
 			icon: "gtceu:mocvd_reactor"
 			id: "18B302AF1B81CB7C"
 			rewards: [{ id: "1E814B3A55CDD99F", type: "xp", xp: 10 }]
@@ -2439,7 +2450,7 @@
 			size: 1.5d
 			subtitle: "UV, Grindless"
 			tasks: [{ id: "4BBE0E10A7044B05", item: "gtceu:mocvd_reactor", type: "item" }]
-			x: 4.0d
+			x: 6.0d
 			y: 50.0d
 		}
 		{
@@ -2450,7 +2461,7 @@
 			size: 1.5d
 			subtitle: "UV, Grindless"
 			tasks: [{ id: "3915D157116D9532", item: "gtceu:muon_fusion_cell", type: "item" }]
-			x: 6.0d
+			x: 8.0d
 			y: 50.0d
 		}
 		{
@@ -2461,7 +2472,7 @@
 			size: 1.5d
 			subtitle: "UV, Grindless"
 			tasks: [{ id: "220851F230203B28", item: "gtceu:neptune_deep_siphon", type: "item" }]
-			x: 8.0d
+			x: 10.0d
 			y: 50.0d
 		}
 		{
@@ -2472,7 +2483,7 @@
 			size: 1.5d
 			subtitle: "UV, Grindless"
 			tasks: [{ id: "4B63522B030EEF01", item: "gtceu:neural_culture_vat", type: "item" }]
-			x: 10.0d
+			x: 12.0d
 			y: 50.0d
 		}
 		{
@@ -2483,7 +2494,7 @@
 			size: 1.5d
 			subtitle: "UV, Grindless"
 			tasks: [{ id: "7FB4F74AFD902AFC", item: "gtceu:optical_ground_station", type: "item" }]
-			x: 12.0d
+			x: 14.0d
 			y: 50.0d
 		}
 		{
@@ -2494,7 +2505,7 @@
 			size: 1.5d
 			subtitle: "UV, Grindless"
 			tasks: [{ id: "38289EAECA2F2F72", item: "gtceu:penetrator_probe_bay", type: "item" }]
-			x: 14.0d
+			x: 16.0d
 			y: 50.0d
 		}
 		{
@@ -2505,7 +2516,7 @@
 			size: 1.5d
 			subtitle: "UV, Grindless"
 			tasks: [{ id: "2FE5AA5B1243F776", item: "gtceu:powder_bed_printer", type: "item" }]
-			x: 16.0d
+			x: 18.0d
 			y: 50.0d
 		}
 		{
@@ -2516,7 +2527,7 @@
 			size: 1.5d
 			subtitle: "UV, Grindless"
 			tasks: [{ id: "3698CE238355F9AB", item: "gtceu:powder_in_tube_line", type: "item" }]
-			x: 18.0d
+			x: 20.0d
 			y: 50.0d
 		}
 		{
@@ -2527,7 +2538,7 @@
 			size: 1.5d
 			subtitle: "UV, Grindless"
 			tasks: [{ id: "4F91DCB78D1DB71B", item: "gtceu:precursor_probe_bay", type: "item" }]
-			x: 20.0d
+			x: 22.0d
 			y: 50.0d
 		}
 		{
@@ -2538,7 +2549,7 @@
 			size: 1.5d
 			subtitle: "UV, Grindless"
 			tasks: [{ id: "10E949763B316188", item: "gtceu:pyroprocessing_cell", type: "item" }]
-			x: 22.0d
+			x: 24.0d
 			y: 50.0d
 		}
 		{
@@ -2549,8 +2560,8 @@
 			size: 1.5d
 			subtitle: "UV, Grindless"
 			tasks: [{ id: "3143F410FECD4485", item: "gtceu:srf_cavity_works", type: "item" }]
-			x: 24.0d
-			y: 50.0d
+			x: 2.0d
+			y: 52.0d
 		}
 		{
 			icon: "gtceu:starchip_fab"
@@ -2560,7 +2571,7 @@
 			size: 1.5d
 			subtitle: "UV, Grindless"
 			tasks: [{ id: "2D1AA1B3B72BAE09", item: "gtceu:starchip_fab", type: "item" }]
-			x: 2.0d
+			x: 4.0d
 			y: 52.0d
 		}
 		{
@@ -2571,7 +2582,7 @@
 			size: 1.5d
 			subtitle: "UV, Grindless"
 			tasks: [{ id: "1143A5A5F1AA7864", item: "gtceu:superfluid_helium_plant", type: "item" }]
-			x: 4.0d
+			x: 6.0d
 			y: 52.0d
 		}
 		{
@@ -2582,7 +2593,7 @@
 			size: 1.5d
 			subtitle: "UV, Grindless"
 			tasks: [{ id: "328EA0564D02DF2D", item: "gtceu:synchrotron", type: "item" }]
-			x: 6.0d
+			x: 8.0d
 			y: 52.0d
 		}
 		{
@@ -2593,7 +2604,7 @@
 			size: 1.5d
 			subtitle: "UV, Grindless"
 			tasks: [{ id: "7805A32BE3317343", item: "gtceu:thruster_works", type: "item" }]
-			x: 8.0d
+			x: 10.0d
 			y: 52.0d
 		}
 		{
@@ -2604,7 +2615,7 @@
 			size: 1.5d
 			subtitle: "UV, Grindless"
 			tasks: [{ id: "235C99AA886EAFE9", item: "gtceu:triton_geyser_sampler", type: "item" }]
-			x: 10.0d
+			x: 12.0d
 			y: 52.0d
 		}
 		{
@@ -2615,7 +2626,7 @@
 			size: 1.5d
 			subtitle: "UV, Grindless"
 			tasks: [{ id: "473292A8313BDFFB", item: "gtceu:volatile_ice_fractionator", type: "item" }]
-			x: 12.0d
+			x: 14.0d
 			y: 52.0d
 		}
 		{
@@ -2626,7 +2637,7 @@
 			size: 1.5d
 			subtitle: "UV, Grindless"
 			tasks: [{ id: "481D5618F44FABEA", item: "gtceu:zone_refining_tower", type: "item" }]
-			x: 14.0d
+			x: 16.0d
 			y: 52.0d
 		}
 		{
@@ -2637,7 +2648,7 @@
 			size: 1.25d
 			subtitle: "UV, GT Community Additions"
 			tasks: [{ id: "148156009EFB315C", item: "gtca:comet", type: "item" }]
-			x: 16.0d
+			x: 18.0d
 			y: 52.0d
 		}
 		{
@@ -2648,7 +2659,7 @@
 			size: 1.25d
 			subtitle: "UV, GT Community Additions"
 			tasks: [{ id: "4387BC1FEA58FAAC", item: "gtca:flotation_cell_regulator", type: "item" }]
-			x: 18.0d
+			x: 20.0d
 			y: 52.0d
 		}
 		{
@@ -2659,7 +2670,7 @@
 			size: 1.25d
 			subtitle: "UV, GT Community Additions"
 			tasks: [{ id: "3FDE119905DEC2B0", item: "gtca:isamill", type: "item" }]
-			x: 20.0d
+			x: 22.0d
 			y: 52.0d
 		}
 		{
@@ -2670,7 +2681,7 @@
 			size: 1.25d
 			subtitle: "UV, GT--"
 			tasks: [{ id: "58693D53827378A2", item: "gtnn:large_naquadah_reactor", type: "item" }]
-			x: 22.0d
+			x: 24.0d
 			y: 52.0d
 		}
 		{
@@ -2681,8 +2692,8 @@
 			size: 1.25d
 			subtitle: "UV, GregTech"
 			tasks: [{ id: "324CF1E04E576544", item: "gtceu:mega_blast_furnace", type: "item" }]
-			x: 24.0d
-			y: 52.0d
+			x: 2.0d
+			y: 54.0d
 		}
 		{
 			icon: "gtceu:mega_vacuum_freezer"
@@ -2692,7 +2703,7 @@
 			size: 1.25d
 			subtitle: "UV, GregTech"
 			tasks: [{ id: "7C696D29179FE07E", item: "gtceu:mega_vacuum_freezer", type: "item" }]
-			x: 2.0d
+			x: 4.0d
 			y: 54.0d
 		}
 		{
@@ -2703,7 +2714,7 @@
 			size: 1.25d
 			subtitle: "UV, GregTech"
 			tasks: [{ id: "2A102870D900A19D", item: "gtceu:network_switch", type: "item" }]
-			x: 4.0d
+			x: 6.0d
 			y: 54.0d
 		}
 		{
@@ -2714,7 +2725,7 @@
 			size: 1.25d
 			subtitle: "UV, GT Community Additions"
 			tasks: [{ id: "7A0E8E34DB802F48", item: "gtca:tegmark_forge", type: "item" }]
-			x: 6.0d
+			x: 8.0d
 			y: 54.0d
 		}
 		{
@@ -2725,7 +2736,7 @@
 			size: 1.25d
 			subtitle: "UV, GregTech Modern Utilities"
 			tasks: [{ id: "3602CC0E03FE404F", item: "gtmutils:web_receiver", type: "item" }]
-			x: 8.0d
+			x: 10.0d
 			y: 54.0d
 		}
 		{
@@ -2736,7 +2747,7 @@
 			size: 1.25d
 			subtitle: "UV, GregTech"
 			tasks: [{ id: "29C9F1B842CB6D8E", item: "gtceu:zpm_fusion_reactor", type: "item" }]
-			x: 10.0d
+			x: 12.0d
 			y: 54.0d
 		}
 		{
