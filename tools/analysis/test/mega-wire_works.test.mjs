@@ -156,9 +156,9 @@ test('controller recipe: 4 LV wiremills, 4 LV benders, 4 LV circuits, steel plat
   assert.deepEqual(plain(h.errors), []);
 });
 
-test('no priority line, no old files touched; the lang file names the machine and its tooltips in en_us and es_es', () => {
+test('the integrator stamped the priority line; the lang file names the machine and its tooltips in en_us and es_es', () => {
   for (const [kind, file] of [['startup_scripts', 'lv/mega_wire_works.js'], ['server_scripts', 'lv/mega_wire_works.js']]) {
-    assert.ok(!/^\/\/ priority:/m.test(read(kind, file)), file);
+    assert.ok(/^\/\/ priority: -?\d+\r?\n/.test(read(kind, file)), file);
   }
   const lang = read('client_scripts', 'lv_mega_wire_works_lang.js');
   const store = {};

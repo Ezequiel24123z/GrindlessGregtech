@@ -795,6 +795,7 @@
     {"id":"gtceu:warp_gate","kind":"item","needUse":false,"needMade":true,"made":["gtceu:multiblock_info","minecraft:crafting"],"used":[]},
     {"id":"gtceu:waste_retrieval_plant","kind":"item","needUse":false,"needMade":true,"made":["gtceu:multiblock_info","minecraft:crafting"],"used":[]},
     {"id":"gtceu:weather_controller","kind":"item","needUse":false,"needMade":true,"made":["gtceu:multiblock_info","minecraft:crafting"],"used":[]},
+    {"id":"gtceu:wire_works","kind":"item","needUse":false,"needMade":true,"made":["gtceu:assembler","gtceu:multiblock_info"],"used":[]},
     {"id":"gtceu:wireless_energy_tower","kind":"item","needUse":false,"needMade":true,"made":["emi:info","gtceu:assembler","gtceu:multiblock_info"],"used":["emi:info"]},
     {"id":"gtceu:xenobiochem_plant","kind":"item","needUse":false,"needMade":true,"made":["gtceu:multiblock_info","minecraft:crafting"],"used":[]},
     {"id":"gtceu:xenobotany_greenhouse","kind":"item","needUse":false,"needMade":true,"made":["gtceu:multiblock_info","minecraft:crafting"],"used":[]},

@@ -1,3 +1,4 @@
+// priority: -7760
 // Gregtech Grindless - UEV-S0 spike gg_test_uev_s0_stations (S0-2, S0-4, S0-11 flights): adapted from gg_test_uhv_s0_stations.js (the
 // comments below describe its origin). Needs the spike overlay tools/test/uhv-s0/kubejs merged over the overlay (spike blocks
 // grindless:s0_motor6 / s0_uhv_tank, the Proxima orbit override, the 7th/8th station rows, the s0 swarm control).
