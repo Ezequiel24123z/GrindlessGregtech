@@ -1,3 +1,4 @@
+// priority: 950
 // Gregtech Grindless - names and tooltips of the ZPM Assembly Hall (startup_scripts/grindless/zpm/mega_assembly_hall.js).
 //
 //   gtceu:assembly_hall   (machine name + 4 tooltip lines, en_us and es_es)

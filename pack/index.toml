@@ -849,6 +849,18 @@ file = "kubejs/assets/grindless/textures/block/multiblock/ark_biosphere/overlay_
 hash = "491ea51d46bc1f0c0ff11ed9293461cc67de293c7672abbc45f67563f8fe1f1a"
 
 [[files]]
+file = "kubejs/assets/grindless/textures/block/multiblock/assembly_hall/overlay_front.png"
+hash = "6eaed15b0064a4e8297e9ed44ed394dc0fb6b4aae924fe94074e8642c164c9f5"
+
+[[files]]
+file = "kubejs/assets/grindless/textures/block/multiblock/assembly_hall/overlay_front_active.png"
+hash = "74b5ba6d78523d385f34375dce3ec0b050673d6f3de4cbf8a05f95bce4467eaa"
+
+[[files]]
+file = "kubejs/assets/grindless/textures/block/multiblock/assembly_hall/overlay_front_active_emissive.png"
+hash = "ce4b06139b2eb5e1f7563501569e0fbd2ba7343fc5b5d98a722891f8e1801ed4"
+
+[[files]]
 file = "kubejs/assets/grindless/textures/block/multiblock/asteroid_processor/overlay_front.png"
 hash = "6807748a5140044979fd56f4b938d7c8c18f43cb5d94a647944f1ae8350789b0"
 
@@ -2082,6 +2094,26 @@ hash = "47f6407733b608ba45c45eaf0f52fb24fec183119b0a419870de4c41f6552b2a"
 
 [[files]]
 file = "kubejs/assets/grindless/textures/block/multiblock/mbe_reactor/overlay_front_active_emissive.png.mcmeta"
+hash = "491ea51d46bc1f0c0ff11ed9293461cc67de293c7672abbc45f67563f8fe1f1a"
+
+[[files]]
+file = "kubejs/assets/grindless/textures/block/multiblock/megabar_press/overlay_front.png"
+hash = "ecfdee96fbd9e15c4ab579813474a53424b574ee91a46954436e1152d5306485"
+
+[[files]]
+file = "kubejs/assets/grindless/textures/block/multiblock/megabar_press/overlay_front_active.png"
+hash = "92ae51e6a0c809878f405c024d8f00fe92c985e2198111418d0651f98fb60a71"
+
+[[files]]
+file = "kubejs/assets/grindless/textures/block/multiblock/megabar_press/overlay_front_active.png.mcmeta"
+hash = "491ea51d46bc1f0c0ff11ed9293461cc67de293c7672abbc45f67563f8fe1f1a"
+
+[[files]]
+file = "kubejs/assets/grindless/textures/block/multiblock/megabar_press/overlay_front_active_emissive.png"
+hash = "de3ca05deff5464ec94fe72ab1bcc4bf69fcab5eb67dee20b8e3b92f4123dbea"
+
+[[files]]
+file = "kubejs/assets/grindless/textures/block/multiblock/megabar_press/overlay_front_active_emissive.png.mcmeta"
 hash = "491ea51d46bc1f0c0ff11ed9293461cc67de293c7672abbc45f67563f8fe1f1a"
 
 [[files]]
@@ -3841,6 +3873,10 @@ file = "kubejs/assets/grindless/textures/item/americium_micro_source.png"
 hash = "81a48020b9048dc6d5ace14dd1e7906b98daf99af0d23a32fcd86f1624cef980"
 
 [[files]]
+file = "kubejs/assets/grindless/textures/item/ammonia_borane_charge.png"
+hash = "48ab3d907f4672423d4e45de668d30160a3b13bef10a2f9e83505da1377e1e1b"
+
+[[files]]
 file = "kubejs/assets/grindless/textures/item/anchor_harpoon.png"
 hash = "a55f818ed6977105545582d0d15419d7c41c63346bffabe14b5e8f71bd3ce24e"
 
@@ -4421,6 +4457,14 @@ file = "kubejs/assets/grindless/textures/item/kuiper_target_list.png"
 hash = "79b41adffd1ef1c68fffc24f4eaaea85795304a95a28d3b0b96505824e55a688"
 
 [[files]]
+file = "kubejs/assets/grindless/textures/item/la_y_alloy_ingot.png"
+hash = "96ae3ef23d707f08327fb444ed431e7915bc3edb1ae527f714e0f76cf3e3d936"
+
+[[files]]
+file = "kubejs/assets/grindless/textures/item/la_y_foil.png"
+hash = "99432a38f2fad9ac6d3a61d9f0148436307cb7f4ec91911c37ce91eca493f1df"
+
+[[files]]
 file = "kubejs/assets/grindless/textures/item/lake_sampler.png"
 hash = "6a66f65a9ea90b5caad7087df93e414889db57907d7f2bf422fdf21788bbad68"
 
@@ -4571,6 +4615,26 @@ hash = "d68106a7720fb0a3882ca95a7ed0fcacdf707a46e39f4b0d3447ffc4b7c81c9f"
 [[files]]
 file = "kubejs/assets/grindless/textures/item/multimessenger_catalogue.png"
 hash = "fbc3f5347a8f09f2733ebd788515bb80d6d0139d2c5511b93feac91f5f84148d"
+
+[[files]]
+file = "kubejs/assets/grindless/textures/item/nanodiamond_dust.png"
+hash = "776b56bc1e8d661529990627b7aa88d823fa9a64f95ed61d642898f1df1d3025"
+
+[[files]]
+file = "kubejs/assets/grindless/textures/item/nanodiamond_pellet.png"
+hash = "9994a3d092422a778a623682a977f3bb783e31619a683e4ee29b3567caa70f4f"
+
+[[files]]
+file = "kubejs/assets/grindless/textures/item/nanotwinned_diamond.png"
+hash = "2ed44c58cf3fc95734a1c88f5447a77a46715c6662ab0101c28196d2b8b15a2f"
+
+[[files]]
+file = "kubejs/assets/grindless/textures/item/nanotwinned_diamond_anvil.png"
+hash = "57fe2cbd0bd2688003f342250728178de347d6090ef73e9d8880e146f126efbb"
+
+[[files]]
+file = "kubejs/assets/grindless/textures/item/nanotwinned_diamond_bit.png"
+hash = "73b5c405386987e6655174aa1d40a5528d64debfb85e999ccf2539f6a71f0bf5"
 
 [[files]]
 file = "kubejs/assets/grindless/textures/item/nb3sn_srf_cavity.png"
@@ -5033,6 +5097,18 @@ file = "kubejs/assets/grindless/textures/item/sodium_22_target.png"
 hash = "4e8f19ddcce444cc0de3b3d3ae6d28e7ec03ec9de57f8b55e54491da1a6b571f"
 
 [[files]]
+file = "kubejs/assets/grindless/textures/item/sodium_borohydride_dust.png"
+hash = "de14ee06c1bf43ac9bdce2f5dc7285052724cf7bb5384d39f4b5e35996d6fb2b"
+
+[[files]]
+file = "kubejs/assets/grindless/textures/item/sodium_hydride_dust.png"
+hash = "bfdf25a9c4d3a453bea47d96c879e6c3f2a04769fd5401da27ae18a2ef1fa21f"
+
+[[files]]
+file = "kubejs/assets/grindless/textures/item/sodium_methoxide_dust.png"
+hash = "d3d52b48e42d456eed005234505baf04aef014fe710a8a01da1e65bfed0ab204"
+
+[[files]]
 file = "kubejs/assets/grindless/textures/item/sodium_potassium_heat_pipe.png"
 hash = "fa18d083149f68dbac6cf98d1835129c6d0219d494bdea782b2f8010a0023c04"
 
@@ -5235,6 +5311,10 @@ hash = "de58569dda7519183cc7c1f4913b9582778e558371da719dc5653c8d9d92e83b"
 [[files]]
 file = "kubejs/assets/grindless/textures/item/transcurium_target.png"
 hash = "7205c5288e9a44c09ea6821b210b8a5497c6dd0ff8bed53d874306a20f794e18"
+
+[[files]]
+file = "kubejs/assets/grindless/textures/item/trimethyl_borate_ampoule.png"
+hash = "56d815b39e5efa8a9b5ee6d63731c91da4adf83609665ce863647514b4b57bab"
 
 [[files]]
 file = "kubejs/assets/grindless/textures/item/triple_junction_cell.png"
@@ -5813,8 +5893,12 @@ file = "kubejs/client_scripts/grindless/uev_isotopes_lang.js"
 hash = "aa52e59f54bf394dd759cc33f374b7522266a633e7ca75d7de4d8c23911ac339"
 
 [[files]]
+file = "kubejs/client_scripts/grindless/uev_megabar_lang.js"
+hash = "136e68856da4c33e79ef32a433f8fdd8447e58ab004344b11d0410cab93011d3"
+
+[[files]]
 file = "kubejs/client_scripts/grindless/uev_wireless_lang.js"
-hash = "ecfcba49a156ea80b73a0f8976793bab44ee0c914d9f9e0feb4340f040128efa"
+hash = "fe5445a9fedf9d4ee70a2586e06509d9ada79faca09764878e8b419d336fe9ca"
 
 [[files]]
 file = "kubejs/client_scripts/grindless/uhv_antimatter_lang.js"
@@ -5987,6 +6071,10 @@ hash = "34ffa192b34ae5f7b2ce4ecce11a4e08e4b0f4a4c55a3cfc55d5bbacb6b68ad1"
 [[files]]
 file = "kubejs/client_scripts/grindless/zpm_magnet_works_lang.js"
 hash = "b87541a2dd8f330be41e6a14ed226a1b8491b97409ce676e11666bc87ec3c850"
+
+[[files]]
+file = "kubejs/client_scripts/grindless/zpm_mega_assembly_hall_lang.js"
+hash = "24d8535d7447aac1903c2ee25a35b0b289d933e7a1272cc6a88eb498a1872ee9"
 
 [[files]]
 file = "kubejs/client_scripts/grindless/zpm_naquadria_lang.js"
@@ -6291,6 +6379,10 @@ hash = "50f5ccc7fb189cb706363ce265fe12e4be18e6ed42b0ff18ead8f25df1cd75eb"
 [[files]]
 file = "kubejs/data/grindless/tables/mega_polymer_works.json"
 hash = "3676f7ffbe77b2f2e215804a1b1b96feaffd79f17889885bc37946bca963dfbb"
+
+[[files]]
+file = "kubejs/data/grindless/tables/megabar.json"
+hash = "1b261cb3e9ec3d038d67fd1ba4db871e70c7ef6864ff1dbba9358a2042e58ca6"
 
 [[files]]
 file = "kubejs/data/grindless/tables/mobs.json"
@@ -6973,6 +7065,10 @@ file = "kubejs/server_scripts/grindless/uev/isotopes.js"
 hash = "3be9da0025f9e1d95782dcaa6c6373c9b44664f8631d9d81682b91f941cd76a7"
 
 [[files]]
+file = "kubejs/server_scripts/grindless/uev/megabar.js"
+hash = "ddd7e2a620c791613b3044388960d0c32902b3253ce1329db212533aac059498"
+
+[[files]]
 file = "kubejs/server_scripts/grindless/uhv/antimatter.js"
 hash = "309dfab539f490ebe2c1e2fe06ae702e575c11a951269d8a25fd4844e9227c6e"
 
@@ -7074,7 +7170,7 @@ hash = "591d77b2321f35b06d8a2e3bbd9e996f259df238eb5d015f54b376bd0d5009c5"
 
 [[files]]
 file = "kubejs/server_scripts/grindless/uv/materials.js"
-hash = "ba0e40b7aeb87bd219655feea2f24188645ee374e51ec94cc2edce7c8c8c3b76"
+hash = "8b65503528e5370c96f34bcbb4df7cf184b825347780c0b95948b79f2e34318a"
 
 [[files]]
 file = "kubejs/server_scripts/grindless/uv/neptune.js"
@@ -7121,6 +7217,10 @@ file = "kubejs/server_scripts/grindless/zpm/magnet_works.js"
 hash = "c8df24feca452a950cef3ce88aec842447ef9a8647937bce7a6b5b7f18d4f91a"
 
 [[files]]
+file = "kubejs/server_scripts/grindless/zpm/mega_assembly_hall.js"
+hash = "58270d480f8b32478c8eed51591d0c75d1bef45c65de024bb54e962d959311a6"
+
+[[files]]
 file = "kubejs/server_scripts/grindless/zpm/naquadria.js"
 hash = "3a68111424e78e36e5c3767c6fce006956468dd3cfbe4489a9eed8739bff6e60"
 
@@ -7134,7 +7234,7 @@ hash = "0df4946cf110fbe7779d08bae2535bd0f93628bc94d3cf40fc59373023841734"
 
 [[files]]
 file = "kubejs/server_scripts/grindless/zpm/qubits.js"
-hash = "ac0b7102e8c2dca7dddaede02a3b07690d1c049b9a350c8ec0ba6f31af495f1f"
+hash = "76a52ef203307010fc6f98886e1dd5cf926c8c867f09da8e20441cd3bfda601f"
 
 [[files]]
 file = "kubejs/server_scripts/grindless/zpm/saturn_science.js"
@@ -7529,6 +7629,10 @@ file = "kubejs/startup_scripts/grindless/uev/isotopes.js"
 hash = "3e594c0b072ecad51fac34721d507d7188120ee6c7296697a0821d664426a307"
 
 [[files]]
+file = "kubejs/startup_scripts/grindless/uev/megabar.js"
+hash = "650ce45aab7783bb254eaa2105ab8046e16fa2aca7db02a92c309fec63f1ac1f"
+
+[[files]]
 file = "kubejs/startup_scripts/grindless/uhv/antimatter.js"
 hash = "fa07f04ec1c39a25c34f5e19ad6df4106309fdfce6c3f7ab6cff6052ece97dc7"
 
@@ -7683,6 +7787,10 @@ hash = "3fb629e9d4a3fb61cb2930b14c3102897f91888af2f33bf88fa370b22b2ef771"
 [[files]]
 file = "kubejs/startup_scripts/grindless/zpm/magnet_works.js"
 hash = "c16bfcee637fb24951abc7a1f0a2803693a79b434b480b92b887ade62eb54753"
+
+[[files]]
+file = "kubejs/startup_scripts/grindless/zpm/mega_assembly_hall.js"
+hash = "e13ed72e942385faadc4be607997c199a4fef67a4ac54d4ab27b0d30c46c9254"
 
 [[files]]
 file = "kubejs/startup_scripts/grindless/zpm/naquadria.js"

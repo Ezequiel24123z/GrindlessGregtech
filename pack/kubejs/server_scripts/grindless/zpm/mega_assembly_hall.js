@@ -1,3 +1,4 @@
+// priority: -26574
 // -----------------------------------------------------------------------------------------------
 // Controller recipe of the ZPM Assembly Hall (startup_scripts/grindless/zpm/mega_assembly_hall.js, docs/eras/mega.md 4.9, family
 // rule 6): an assembler recipe built from the machines it replaces, 16 ZPM assemblers + 16 ZPM circuit assemblers, plus 4 ZPM

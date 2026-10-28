@@ -1,4 +1,5 @@
-﻿// -----------------------------------------------------------------------------------------------
+// priority: -11350
+// -----------------------------------------------------------------------------------------------
 // ZPM Assembly Hall, gtceu:assembly_hall (package MEGA-7, docs/eras/mega.md 4.9): an assembly-line-casing hall that runs GTM's own
 // assembler and circuit assembler recipes, one mode at a time (the player picks it in the controller's machine mode tab). The
 // assembly line itself stays out.
