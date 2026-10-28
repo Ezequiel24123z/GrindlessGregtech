@@ -1609,3 +1609,12 @@ Procedural, drawn by `Build-UIVMatrioshkaTextures.ps1`; nothing is copied from a
 powershell -NoProfile -ExecutionPolicy Bypass -File tools\assets\Build-UIVMatrioshkaTextures.ps1
 powershell -NoProfile -ExecutionPolicy Bypass -File tools\assets\Build-UIVMatrioshkaTextures.ps1 -Credits
 ```
+
+## UIV relay seeds and the ergosphere probe (UIV-B1)
+
+Procedural, drawn by `Build-UIVTravelTextures.ps1`; nothing is copied from another mod. Three item icons (`item/<id>.png`): the relay seed (a starchip with its sealed degenerate pellet and exotic-matter cell), the launched relay seed and the rad-hard ergosphere probe for Cygnus X-1.
+
+```powershell
+powershell -NoProfile -ExecutionPolicy Bypass -File tools\assets\Build-UIVTravelTextures.ps1
+powershell -NoProfile -ExecutionPolicy Bypass -File tools\assets\Build-UIVTravelTextures.ps1 -Credits
+```

@@ -1,3 +1,4 @@
+// priority: -8502
 // UIV-B1 T1: the jump rows and the arrival platform. Band: grindless:sirius_b_orbit X 35584-35647, Z 0-63, Y 98-115 (the near ring at X 35600, Y 100, Z 20).
 // The far side is the platform the jump itself places, in grindless:rx_j1856_orbit (the dimension of this run; leg 'cygnus' visits grindless:cygnus_x1_orbit).
 // Doubt: a platform placed in an unvisited tier 11 datapack dimension, and the jump rows at the Sirius B relay. Commands (one leg per bench run):
