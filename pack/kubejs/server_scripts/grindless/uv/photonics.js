@@ -167,9 +167,9 @@
       notConsumable: t.notConsumable || null
     }
   }
-  P.recipes = TABLE.map(function (t) { return publish(t, 'grindless:' + t.type + '/' + t.name) })
+  // the id passed is 'grindless:<name>' for mocvd (GTM puts the type in front: grindless:mocvd/<name>); fibre_draw keeps its doubled ids
+  P.recipes = TABLE.map(function (t) { return publish(t, t.type === 'mocvd' ? 'grindless:' + t.name : 'grindless:' + t.type + '/' + t.name) })
   P.side = SIDE.map(function (t) { return publish(t, 'grindless:' + t.name) })
-  // the id passed is 'grindless:<name>' (GTM puts the type in front: grindless:mocvd/<name>); UV's rows above keep their doubled ids
   P.uhvRows = UHV_ROWS.map(function (t) { return publish(t, 'grindless:' + t.name) })
   P.skipped = []
   P.clashes = []
