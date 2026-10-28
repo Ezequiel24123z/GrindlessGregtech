@@ -1,0 +1,5 @@
+{
+  "type": "emi:info",
+  "stacks": ["item:grindless:neutronium_pellet", "item:grindless:cage_part"],
+  "text": ["emi.grindless.info.uiv_rx_j1856_pellet.0"]
+}
