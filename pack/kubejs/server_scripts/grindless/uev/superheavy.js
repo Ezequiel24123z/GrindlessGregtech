@@ -1,4 +1,4 @@
-// priority: -23163
+// priority: -23274
 // -----------------------------------------------------------------------------------------------
 // Recipes of UEV's superheavy line (docs/eras/uev.md, machines 2-4, lines 3-6; package UEV-A2), generated at every server load from
 // data/grindless/tables/superheavy.json (machines and recipe types: startup_scripts/grindless/uev/superheavy.js), plus the three

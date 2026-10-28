@@ -1,4 +1,4 @@
-// priority: -23116
+// priority: -23202
 // -----------------------------------------------------------------------------------------------
 // Recipes of UEV's isotope separation (docs/eras/uev.md, machine 1, lines 1, 2, 29 and 30; package UEV-A1), generated at every server
 // load from data/grindless/tables/isotopes.json (machine and recipe type: startup_scripts/grindless/uev/isotopes.js), plus the

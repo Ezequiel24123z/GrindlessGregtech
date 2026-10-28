@@ -38,6 +38,9 @@ export const QUESTS = [
   P('HATCH', 'UEV Hatches', 'gtceu:uev_energy_input_hatch', ['PARTS'], 6, 0, [
     'The &6UEV Energy Hatch&r takes the power of a whole swarm. The wireless hatches wait for a quantum link, later in the chapter.',
   ], [it('gtceu:uev_energy_input_hatch')], 100),
+  P('PARH', 'Parallel Control', 'gtceu:uev_parallel_hatch', ['HATCH'], 8.5, -0.5, [
+    'The &6Ultimate Parallel Control Hatch&r lets a mega machine run up to 4,096 copies of a recipe at once. Energy is still the limit: every copy pays its own EU/t.',
+  ], [it('gtceu:uev_parallel_hatch')], 150),
   P('MK1', 'Drive Mk1', 'grindless:dfd_mk1_motor', ['HATCH'], 11, 0, [
     'The &6DFD Mk1 Motor&r is made at home: its antenna is a UEV emitter. It carries a level 9 rocket to the next star, and needs nothing from abroad.',
   ], [it('grindless:dfd_mk1_motor')], 150),
@@ -83,6 +86,10 @@ export const QUESTS = [
   P('COIL', 'HfTaCN Coil', 'grindless:hftacn_coil_block', ['CVI'], 12, -2, [
     'Hafnium, tantalum, carbon and nitrogen make the most heat-proof ceramic known. The &6HfTaCN Coil Block&r lines a hotter fusion reactor.',
   ], [it('grindless:hftacn_coil_block')], 150),
+  M('FORGE', 'Stellar Forge', 'gtceu:stellar_forge', ['COIL'], 14, -4, [
+    'The &6Stellar Forge&r runs blast furnace recipes on four rings of coils. Every 450 K its coils run above a recipe doubles the copies it may run, up to the parallel hatch.',
+    'A full charge of &6UEV D-He-3 Plasma&r makes one run 900 K hotter, and comes back as helium-4 ash. A recipe hotter than the coils is never run.',
+  ], [it('gtceu:stellar_forge')], 200),
 
   // ------------------------------------------------------------------ light
   M('SNSPD', 'One Photon', 'gtceu:snspd_foundry', ['START'], 2, 2, [

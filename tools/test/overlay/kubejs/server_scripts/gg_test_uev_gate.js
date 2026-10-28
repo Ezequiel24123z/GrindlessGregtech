@@ -1,4 +1,4 @@
-// priority: -7684
+// priority: -7681
 // TEST ONLY, UEV-B5. Command: kubejs custom_command gg_test_uev_gate
 // Marker: GGTEST|uev_gate|DONE|failures=N (well within 180 seconds of game time: the hold is 1,200 ticks).
 // Band ONLY: X 34816-34879, Z 0-63, Y 60-120, in grindless:sirius_b_orbit. All blocks and chunk tickets are owned and removed before DONE.

@@ -1,0 +1,5 @@
+{
+  "type": "emi:info",
+  "stacks": ["item:gtceu:stellar_forge"],
+  "text": ["emi.grindless.info.stellar_forge.0"]
+}

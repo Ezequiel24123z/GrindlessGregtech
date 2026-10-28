@@ -1,4 +1,4 @@
-// priority: 4939
+// priority: 4864
 // Gregtech Grindless - names of the UEV wireless tier (package UEV-W; the UEV row of kubejs/data/grindless/tables/wireless_energy.json,
 // registered by startup_scripts/grindless/lv/wireless_energy.js) and the EMI line of the naquadria magnet works' circuit 6:
 //

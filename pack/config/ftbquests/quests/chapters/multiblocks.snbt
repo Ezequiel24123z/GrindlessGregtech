@@ -3422,6 +3422,17 @@
 			y: 68.0d
 		}
 		{
+			icon: "gtceu:stellar_forge"
+			id: "2C589CF6E760192A"
+			rewards: [{ id: "192302C7FE71E38F", type: "xp", xp: 10 }]
+			shape: "gear"
+			size: 1.5d
+			subtitle: "UEV, Grindless"
+			tasks: [{ id: "1B44BF85591305E0", item: "gtceu:stellar_forge", type: "item" }]
+			x: 16.0d
+			y: 68.0d
+		}
+		{
 			icon: "gtceu:uev_fusion_reactor"
 			id: "6D65EE3A62D28EEF"
 			rewards: [{ id: "7A7D2780817ECC6D", type: "xp", xp: 10 }]
@@ -3429,7 +3440,7 @@
 			size: 1.5d
 			subtitle: "UEV, Grindless"
 			tasks: [{ id: "37C3574666B137F4", item: "gtceu:uev_fusion_reactor", type: "item" }]
-			x: 16.0d
+			x: 18.0d
 			y: 68.0d
 		}
 		{
@@ -3440,7 +3451,7 @@
 			size: 1.5d
 			subtitle: "UEV, Grindless"
 			tasks: [{ id: "6296AFE4825844EB", item: "gtceu:vdw_stacker", type: "item" }]
-			x: 18.0d
+			x: 20.0d
 			y: 68.0d
 		}
 		{
@@ -3451,7 +3462,7 @@
 			size: 1.5d
 			subtitle: "UEV, Grindless"
 			tasks: [{ id: "4D30A547C6E82998", item: "gtceu:white_dwarf_spectrograph", type: "item" }]
-			x: 20.0d
+			x: 22.0d
 			y: 68.0d
 		}
 	]

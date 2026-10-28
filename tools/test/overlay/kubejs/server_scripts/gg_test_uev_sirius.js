@@ -1,4 +1,4 @@
-// priority: -7753
+// priority: -7749
 // TEST ONLY, UEV-B4. Command: kubejs custom_command gg_test_uev_sirius
 // Marker: GGTEST|uev_sirius|DONE|failures=N
 // Band ONLY: X 33536-33599, Z 0-63, grindless:sirius_b_orbit Y 60-120. All blocks and chunk tickets are owned and removed before DONE.

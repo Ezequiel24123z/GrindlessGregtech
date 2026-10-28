@@ -1,4 +1,4 @@
-// priority: -23152
+// priority: -23250
 // -----------------------------------------------------------------------------------------------
 // Recipes of UEV's white dwarf spectrograph, degenerate harvester and containment works (machines and recipe types:
 // startup_scripts/grindless/uev/sirius.js; docs/eras/uev.md, machines 23-25 and line 28; package UEV-B4), generated at every server load from

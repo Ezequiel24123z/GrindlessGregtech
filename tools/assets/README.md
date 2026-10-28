@@ -1449,3 +1449,29 @@ powershell -NoProfile -ExecutionPolicy Bypass -File tools\assets\Build-MegaQuant
 |---|---|
 | `block/multiblock/quantum_fabricator/overlay_front*.png` | The Quantum Fabricator controller face; still, active and active emissive. |
 | `block/uhv/field_ring_casing.png` | The field ring casing round the fabricator's walls. |
+
+## UEV parallel hatch (UEV-M1)
+
+Procedural, drawn by `Build-UEVParallelHatchTextures.ps1` in GTM's UEV colour; nothing is copied from another mod. The UEV hatch (`gtceu:uev_parallel_hatch`, x4096) follows the UHV hatch's layout; 2 active frames.
+
+```powershell
+powershell -NoProfile -ExecutionPolicy Bypass -File tools\assets\Build-UEVParallelHatchTextures.ps1
+powershell -NoProfile -ExecutionPolicy Bypass -File tools\assets\Build-UEVParallelHatchTextures.ps1 -Credits
+```
+
+| File (under `textures/`) | Notes |
+|---|---|
+| `block/machines/uev_parallel_hatch/overlay_front*.png` | A dark panel with parallel bars of the UEV colour; active, the bars brighten from the top down. |
+
+## UEV Stellar Forge (UEV-M2)
+
+Procedural, drawn by `Build-UEVStellarForgeTextures.ps1`; nothing is copied from another mod. The controller face of `gtceu:stellar_forge` (EBF recipes, 7 x 16 x 7, parallels from coil surplus); its walls use GTM's heatproof casing.
+
+```powershell
+powershell -NoProfile -ExecutionPolicy Bypass -File tools\assets\Build-UEVStellarForgeTextures.ps1
+powershell -NoProfile -ExecutionPolicy Bypass -File tools\assets\Build-UEVStellarForgeTextures.ps1 -Credits
+```
+
+| File (under `textures/`) | Notes |
+|---|---|
+| `block/multiblock/stellar_forge/overlay_front*.png` | The Stellar Forge controller face; still, active and active emissive. |

@@ -1,4 +1,4 @@
-// priority: -7628
+// priority: -7626
 // -----------------------------------------------------------------------------------------------
 // UEV's Sirius B machines (docs/eras/uev.md, machines 23-25 and line 28; package UEV-B4): the white dwarf spectrograph, the degenerate harvester,
 // the containment works and their recipe types. The recipes come from data/grindless/tables/sirius.json (server_scripts/grindless/uev/sirius.js);

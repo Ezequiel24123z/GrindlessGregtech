@@ -1,4 +1,4 @@
-// priority: -23175
+// priority: -23286
 // -----------------------------------------------------------------------------------------------
 // UEV travel, server side (package UEV-B1; motors and places: startup_scripts/grindless/uev/travel.js).
 // The DFD motors are createCustom blocks: KubeJS gives them no loot table and no tool tag, so both are added here (UHV-A8's ICAN

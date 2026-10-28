@@ -56,6 +56,17 @@
 		}
 		{
 			dependencies: ["58C1564694482EBE"]
+			description: ["The &6Ultimate Parallel Control Hatch&r lets a mega machine run up to 4,096 copies of a recipe at once. Energy is still the limit: every copy pays its own EU/t."]
+			icon: "gtceu:uev_parallel_hatch"
+			id: "3CE8ED7227C70D82"
+			rewards: [{ id: "37FEEAB9B356500E", type: "xp", xp: 150 }]
+			tasks: [{ id: "5C72191EADDB5B20", item: "gtceu:uev_parallel_hatch", type: "item" }]
+			title: "Parallel Control"
+			x: 8.5d
+			y: -0.5d
+		}
+		{
+			dependencies: ["58C1564694482EBE"]
 			description: ["The &6DFD Mk1 Motor&r is made at home: its antenna is a UEV emitter. It carries a level 9 rocket to the next star, and needs nothing from abroad."]
 			icon: "grindless:dfd_mk1_motor"
 			id: "19984A527170882C"
@@ -247,6 +258,22 @@
 			title: "HfTaCN Coil"
 			x: 12.0d
 			y: -2.0d
+		}
+		{
+			dependencies: ["76EFA041DAC4B333"]
+			description: [
+				"The &6Stellar Forge&r runs blast furnace recipes on four rings of coils. Every 450 K its coils run above a recipe doubles the copies it may run, up to the parallel hatch."
+				"A full charge of &6UEV D-He-3 Plasma&r makes one run 900 K hotter, and comes back as helium-4 ash. A recipe hotter than the coils is never run."
+			]
+			icon: "gtceu:stellar_forge"
+			id: "3875C96B236BA596"
+			rewards: [{ id: "5D071458EA723917", type: "xp", xp: 200 }]
+			shape: "gear"
+			size: 1.25d
+			tasks: [{ id: "55C52864C928DD6C", item: "gtceu:stellar_forge", type: "item" }]
+			title: "Stellar Forge"
+			x: 14.0d
+			y: -4.0d
 		}
 		{
 			dependencies: ["3622F47EE2F048E9"]
