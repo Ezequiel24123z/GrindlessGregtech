@@ -1,0 +1,10 @@
+{
+  "type": "emi:info",
+  "stacks": [
+    "item:grindless:uev_field_generator",
+    "item:gtceu:containment_works"
+  ],
+  "text": [
+    "emi.grindless.info.containment_works.0"
+  ]
+}
