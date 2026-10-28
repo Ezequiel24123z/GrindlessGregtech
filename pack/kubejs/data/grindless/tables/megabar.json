@@ -1,0 +1,73 @@
+{
+  "_": "UEV-A3 (docs/eras/uev.md, A3): the megabar press (5), lines 7, 8 and 9. Read by server_scripts/grindless/uev/megabar.js. Amounts per run; a GTM type's circuit 0 means none. Chance 1000 = 10 %.",
+  "types": {
+    "megabar_synthesis": {
+      "dataKey": "grindless_megabar",
+      "recipes": [
+        { "name": "superhydride", "circuit": 1, "eut": 7864320, "duration": 2400,
+          "itemsIn": [{ "id": "grindless:la_y_foil", "count": 4 }, { "id": "grindless:ammonia_borane_charge", "count": 2 }, { "id": "grindless:nanotwinned_diamond_anvil", "count": 1, "chance": 1000 }], "kept": [], "fluidsIn": [], "charge": [],
+          "itemsOut": [{ "id": "gtceu:lay_superhydride_ingot", "count": 2 }], "fluidsOut": [{ "id": "gtceu:hydrogen", "amount": 4000 }] },
+        { "name": "nanotwinned_diamond", "circuit": 2, "eut": 3932160, "duration": 1600,
+          "itemsIn": [{ "id": "grindless:nanodiamond_pellet", "count": 2 }], "kept": [], "fluidsIn": [], "charge": [],
+          "itemsOut": [{ "id": "grindless:nanotwinned_diamond", "count": 1 }], "fluidsOut": [] }
+      ]
+    },
+    "electric_blast_furnace": {
+      "temp": 1800,
+      "recipes": [
+        { "name": "la_y_alloy", "circuit": 0, "eut": 7680, "duration": 400,
+          "itemsIn": [{ "id": "gtceu:lanthanum_oxide_dust", "count": 1 }, { "id": "grindless:yttrium_oxide_dust", "count": 1 }, { "id": "gtceu:calcium_dust", "count": 3 }], "kept": [], "fluidsIn": [], "charge": [],
+          "itemsOut": [{ "id": "grindless:la_y_alloy_ingot", "count": 2 }, { "id": "gtceu:quicklime_dust", "count": 3 }], "fluidsOut": [] }
+      ]
+    },
+    "bender": {
+      "recipes": [
+        { "name": "la_y_foil", "circuit": 0, "eut": 1920, "duration": 200,
+          "itemsIn": [{ "id": "grindless:la_y_alloy_ingot", "count": 1 }], "kept": [], "fluidsIn": [], "charge": [],
+          "itemsOut": [{ "id": "grindless:la_y_foil", "count": 2 }], "fluidsOut": [] }
+      ]
+    },
+    "chemical_reactor": {
+      "recipes": [
+        { "name": "trimethyl_borate", "circuit": 0, "eut": 1920, "duration": 200,
+          "itemsIn": [{ "id": "gtceu:boric_acid_dust", "count": 2 }], "kept": [], "fluidsIn": [{ "id": "gtceu:methanol", "amount": 6000 }], "charge": [],
+          "itemsOut": [{ "id": "grindless:trimethyl_borate_ampoule", "count": 2 }], "fluidsOut": [{ "id": "minecraft:water", "amount": 6000 }] },
+        { "name": "sodium_hydride", "circuit": 0, "eut": 1920, "duration": 200,
+          "itemsIn": [{ "id": "gtceu:sodium_dust", "count": 4 }], "kept": [], "fluidsIn": [{ "id": "gtceu:hydrogen", "amount": 2000 }], "charge": [],
+          "itemsOut": [{ "id": "grindless:sodium_hydride_dust", "count": 4 }], "fluidsOut": [] },
+        { "name": "sodium_borohydride", "circuit": 0, "eut": 1920, "duration": 300,
+          "itemsIn": [{ "id": "grindless:trimethyl_borate_ampoule", "count": 1 }, { "id": "grindless:sodium_hydride_dust", "count": 4 }], "kept": [], "fluidsIn": [], "charge": [],
+          "itemsOut": [{ "id": "grindless:sodium_borohydride_dust", "count": 1 }, { "id": "grindless:sodium_methoxide_dust", "count": 3 }], "fluidsOut": [] },
+        { "name": "methoxide_hydrolysis", "circuit": 0, "eut": 1920, "duration": 200,
+          "itemsIn": [{ "id": "grindless:sodium_methoxide_dust", "count": 3 }], "kept": [], "fluidsIn": [{ "id": "minecraft:water", "amount": 3000 }], "charge": [],
+          "itemsOut": [{ "id": "gtceu:sodium_hydroxide_dust", "count": 3 }], "fluidsOut": [{ "id": "gtceu:methanol", "amount": 3000 }] },
+        { "name": "ammonia_borane", "circuit": 0, "eut": 1920, "duration": 300,
+          "itemsIn": [{ "id": "grindless:sodium_borohydride_dust", "count": 1 }, { "id": "gtceu:ammonium_chloride_dust", "count": 1 }], "kept": [], "fluidsIn": [], "charge": [],
+          "itemsOut": [{ "id": "gtceu:ammonia_borane_dust", "count": 1 }, { "id": "gtceu:salt_dust", "count": 1 }], "fluidsOut": [{ "id": "gtceu:hydrogen", "amount": 2000 }] },
+        { "name": "nanodiamond_cleaning", "circuit": 0, "eut": 7680, "duration": 300,
+          "itemsIn": [{ "id": "grindless:nanodiamond_dust", "count": 4 }], "kept": [], "fluidsIn": [{ "id": "gtceu:hydrogen", "amount": 2000 }], "charge": [],
+          "itemsOut": [{ "id": "gtceu:diamond_dust", "count": 4 }], "fluidsOut": [{ "id": "gtceu:methane", "amount": 500 }] }
+      ]
+    },
+    "compressor": {
+      "recipes": [
+        { "name": "ammonia_borane_charge", "circuit": 0, "eut": 1920, "duration": 100,
+          "itemsIn": [{ "id": "gtceu:ammonia_borane_dust", "count": 2 }], "kept": [], "fluidsIn": [], "charge": [],
+          "itemsOut": [{ "id": "grindless:ammonia_borane_charge", "count": 1 }], "fluidsOut": [] },
+        { "name": "nanodiamond_pellet", "circuit": 0, "eut": 7680, "duration": 200,
+          "itemsIn": [{ "id": "grindless:onion_carbon", "count": 4 }], "kept": [], "fluidsIn": [], "charge": [],
+          "itemsOut": [{ "id": "grindless:nanodiamond_pellet", "count": 1 }], "fluidsOut": [] }
+      ]
+    },
+    "assembler": {
+      "recipes": [
+        { "name": "nanotwinned_diamond_anvil", "circuit": 0, "eut": 1966080, "duration": 400,
+          "itemsIn": [{ "id": "grindless:nanotwinned_diamond", "count": 4 }, { "id": "gtceu:tungsten_steel_plate", "count": 2 }], "kept": [], "fluidsIn": [], "charge": [],
+          "itemsOut": [{ "id": "grindless:nanotwinned_diamond_anvil", "count": 1 }], "fluidsOut": [] },
+        { "name": "nanotwinned_diamond_bit", "circuit": 0, "eut": 1966080, "duration": 300,
+          "itemsIn": [{ "id": "grindless:nanotwinned_diamond", "count": 2 }, { "id": "gtceu:tungsten_steel_rod", "count": 2 }], "kept": [], "fluidsIn": [], "charge": [],
+          "itemsOut": [{ "id": "grindless:nanotwinned_diamond_bit", "count": 1 }], "fluidsOut": [] }
+      ]
+    }
+  }
+}
