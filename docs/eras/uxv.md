@@ -1322,7 +1322,7 @@ Order: S0 (one worker) → F1 → F2 ∥ W → M1 → A1 ∥ A2 → A3 ∥ A4 �
 | `tables/magnet_works.json` | A8 → B3 |
 | `tables/gate.json` | B1 → B6 |
 | `lib/parallel_hatch.js` | M1 alone |
-| `zpm/fusion.js`, `zpm/actinides.js`, `tables/photonics*.json`, `tables/electron_beam.json`, `tables/crystals.json` | one writer each (A7; A1; A3 and A5; A3; A3) |
+| `zpm/fusion.js` A7; `zpm/actinides.js` A1; `tables/photonics.json`, `tables/electron_beam.json`, `tables/crystals.json`, `uv/photonics.js` A3; `tables/photonics_uev.json` A5 | one writer each |
 | hot strip mill rows | each package's own file (A2, A8) |
 
 ## Decisions proposed
