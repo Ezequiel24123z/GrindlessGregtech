@@ -111,6 +111,22 @@
           "fluidsIn": [],
           "itemsOut": [{ "id": "grindless:activated_target_wheel", "count": 1 }],
           "fluidsOut": [{ "id": "gtceu:element_120_recoil_gas", "amount": 1000 }]
+        },
+        {
+          "_why": "UIV-B2: element 119, a calcium-48 beam on an einsteinium-254 target; the activated wheel goes back to the hot cell",
+          "name": "es254_bombard",
+          "circuit": 8,
+          "eut": 7864320,
+          "duration": 48000,
+          "itemsIn": [
+            { "id": "grindless:es254_target", "count": 1 },
+            { "id": "grindless:ca48_beam", "count": 1 }
+          ],
+          "kept": [{ "id": "grindless:nb3sn_srf_cavity", "count": 1 }],
+          "charge": [{ "id": "gtceu:helium", "amount": 1000 }],
+          "fluidsIn": [],
+          "itemsOut": [{ "id": "grindless:activated_target_wheel", "count": 1 }],
+          "fluidsOut": [{ "id": "gtceu:element_119_recoil_gas", "amount": 1000 }]
         }
       ]
     },
@@ -189,6 +205,19 @@
           "fluidsIn": [{ "id": "gtceu:element_120_recoil_gas", "amount": 1000 }],
           "itemsOut": [{ "id": "grindless:element_120_recoil", "count": 1 }],
           "fluidsOut": [{ "id": "gtceu:helium", "amount": 1000 }]
+        },
+        {
+          "_why": "UIV-B2: element 119 collected from its recoil gas",
+          "name": "element_119_recoil",
+          "circuit": 7,
+          "eut": 3932160,
+          "duration": 2400,
+          "itemsIn": [{ "id": "grindless:etched_membrane", "count": 1 }],
+          "kept": [],
+          "charge": [],
+          "fluidsIn": [{ "id": "gtceu:element_119_recoil_gas", "amount": 1000 }],
+          "itemsOut": [{ "id": "grindless:element_119_recoil", "count": 1 }],
+          "fluidsOut": [{ "id": "gtceu:helium", "amount": 1000 }]
         }
       ]
     },
@@ -226,6 +255,23 @@
           "charge": [],
           "fluidsIn": [],
           "itemsOut": [{ "id": "grindless:superheavy_census", "count": 1 }],
+          "fluidsOut": []
+        },
+        {
+          "_why": "UIV-B2: elements 119 and 120 counted together in a sealed capsule (census II)",
+          "name": "census_ii",
+          "circuit": 3,
+          "eut": 3932160,
+          "duration": 2400,
+          "itemsIn": [
+            { "id": "grindless:element_119_recoil", "count": 1 },
+            { "id": "grindless:element_120_recoil", "count": 1 },
+            { "id": "grindless:sealed_capsule", "count": 1 }
+          ],
+          "kept": [],
+          "charge": [],
+          "fluidsIn": [],
+          "itemsOut": [{ "id": "grindless:superheavy_census_ii", "count": 1 }],
           "fluidsOut": []
         }
       ]

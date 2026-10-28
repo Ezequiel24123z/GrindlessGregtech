@@ -641,6 +641,37 @@
     })
   }
 
+  // UIV-B2 row (circuit 10; 1-4 plans, 5-6 UHV, 7-9 UEV): the r-process ash's platinum-group cut (line 31); same electrode wear, nothing voided
+  var UIV_ROWS = [
+    {
+      name: 'r_process_ash', circuit: 10,
+      itemIn: 'grindless:r_process_ash', fluidsIn: [['gtceu:hydrochloric_acid', 3000], ['gtceu:nitric_acid', 1000]],
+      itemsOut: [['gtceu:osmium_dust', 1], ['gtceu:iridium_dust', 1], ['gtceu:platinum_dust', 1], ['gtceu:gold_dust', 1]],
+      fluidsOut: [['minecraft:water', 2000]],
+      eut: 1920, duration: 300
+    }
+  ]
+
+  function addUivRows(event) {
+    UIV_ROWS.forEach(function (r) {
+      var missing = [r.itemIn].concat(r.itemsOut.map(function (o) { return o[0] })).filter(function (id) { return !Item.exists(id) })
+        .concat(r.fluidsIn.concat(r.fluidsOut).map(function (f) { return f[0] }).filter(function (id) { return !Fluid.exists(id) }))
+      if (missing.length > 0) {
+        console.error(LOG + 'pgm_refining row ' + r.name + ' skipped, unknown id(s): ' + missing.join(', '))
+        return
+      }
+      var recipe = event.recipes.gtceu.pgm_refining('grindless:uiv/' + r.name)
+      recipe.itemInputs('1x ' + r.itemIn)
+      recipe.chancedInput('1x ' + ELECTRODE, ELECTRODE_WEAR, 0)
+      recipe.circuit(r.circuit)
+      r.fluidsIn.forEach(function (f) { recipe.inputFluids(Fluid.of(f[0], f[1])) })
+      r.itemsOut.forEach(function (o) { recipe.itemOutputs(o[1] + 'x ' + o[0]) })
+      r.fluidsOut.forEach(function (f) { recipe.outputFluids(Fluid.of(f[0], f[1])) })
+      recipe.EUt(r.eut).duration(r.duration)
+      recipe.addDataBool(KEEP_KEY, true)
+    })
+  }
+
   // ---------------------------------------------------------------- crafting
 
   function missingOf(ids) {
@@ -681,6 +712,11 @@
       addUevRows(event)
     } catch (e3) {
       console.error(LOG + 'platinum plant UEV rows failed: ' + e3)
+    }
+    try {
+      addUivRows(event)
+    } catch (e4) {
+      console.error(LOG + 'platinum plant UIV rows failed: ' + e4)
     }
     try {
       addCrafting(event)

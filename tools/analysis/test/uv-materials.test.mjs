@@ -69,14 +69,14 @@ test('patterns: one controller in the front slice, the contract sizes, every sym
 
 test('the reactor: four steps on circuits 1 to 4, the contract numbers', () => {
   const steps = M.recipes.filter((r) => r.type === 'boron_nitride');
-  assert.deepEqual(steps.map((r) => [r.name, r.circuit]), [['hbn', 1], ['bnnt', 2], ['bnnt_yarn', 3], ['hbn_boron_10', 4], ['sic_fibre_bn_interphase', 5]]);
+  assert.deepEqual(steps.map((r) => [r.name, r.circuit]), [['hbn', 1], ['bnnt', 2], ['bnnt_yarn', 3], ['hbn_boron_10', 4], ['sic_fibre_bn_interphase', 5], ['bn_coated_cnt_yarn', 6]]); // UIV-B2 appended c6
   assert.deepEqual(row('hbn').itemsIn, [{ id: 'gtceu:boron_trioxide_dust', count: 2 }]);
   assert.deepEqual(row('hbn').fluidsOut, [{ id: 'gtceu:steam', amount: 3000 }, { id: 'gtceu:ammonia', amount: 500 }]);
   assert.deepEqual(row('bnnt').fluidsIn, row('bnnt').fluidsOut, 'the hydrogen carrier comes back');
   assert.deepEqual(row('bnnt_yarn').itemsOut, [{ id: 'grindless:bnnt_yarn', count: 1 }, { id: 'grindless:hbn_dust', count: 1 }]);
   for (const r of steps) {
     // UEV-A5's interphase row (c5) runs at UHV voltage
-    assert.equal(r.eut, r.name === 'sic_fibre_bn_interphase' ? VA_UHV : VA_ZPM, r.name);
+    assert.equal(r.eut, ['sic_fibre_bn_interphase', 'bn_coated_cnt_yarn'].includes(r.name) ? VA_UHV : VA_ZPM, r.name);
     const rec = byId(r.recipeId);
     assert.ok(rec, r.recipeId);
     assert.deepEqual(circuitOf(rec), [r.circuit]);

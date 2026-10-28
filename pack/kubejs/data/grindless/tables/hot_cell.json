@@ -234,6 +234,28 @@
       "fluidsIn": [],
       "itemsOut": [{ "id": "grindless:cf249_target_wheel", "count": 1 }],
       "fluidsOut": []
+    },
+    {
+      "_why": "UIV-B2: the flashed U-238 target dissolved in nitric acid; the einsteinium and fermium go on to the actinide partitioning plant, the unspent uranium comes back as dust",
+      "name": "es_fm_debris",
+      "circuit": 13,
+      "eut": 7680,
+      "duration": 1800,
+      "itemsIn": [{ "id": "grindless:flashed_target", "count": 1 }],
+      "fluidsIn": [{ "id": "gtceu:nitric_acid", "amount": 2000 }],
+      "itemsOut": [{ "id": "gtceu:uranium_dust", "count": 3 }],
+      "fluidsOut": [{ "id": "gtceu:es_fm_liquor", "amount": 1000 }]
+    },
+    {
+      "_why": "UIV-B2: the actinide cut of the r-process ash (line 31), the curium it carries",
+      "name": "ash_actinide_cut",
+      "circuit": 14,
+      "eut": 7680,
+      "duration": 1200,
+      "itemsIn": [{ "id": "grindless:r_process_ash", "count": 1 }],
+      "fluidsIn": [{ "id": "gtceu:nitric_acid", "amount": 1000 }],
+      "itemsOut": [{ "id": "gtceu:curium_248_dust", "count": 1 }],
+      "fluidsOut": []
     }
   ]
 }

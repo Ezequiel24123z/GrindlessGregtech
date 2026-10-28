@@ -1,0 +1,5 @@
+{
+  "type": "emi:info",
+  "stacks": ["item:grindless:neutron_star_site_casing"],
+  "text": ["emi.grindless.info.uiv_rx_j1856_site_casing.0"]
+}
