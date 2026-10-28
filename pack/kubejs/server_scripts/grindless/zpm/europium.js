@@ -137,6 +137,16 @@
       itemsOut: [{ id: 'gtceu:praseodymium_oxide_dust', count: 5 }, { id: 'gtceu:salt_dust', count: 6 }],
       fluidsOut: [{ id: DEPLETED, amount: 3000 }, { id: 'minecraft:water', amount: 3000 }],
       eut: ZPM_VA, duration: 100
+    },
+    // UIV-B2: the lanthanide cut of the r-process ash (line 31), circuit 10
+    {
+      name: 'r_process_ash', circuit: 10,
+      itemsIn: [{ id: 'grindless:r_process_ash', count: 1 }],
+      fluidsIn: [{ id: 'gtceu:hydrochloric_acid', amount: 2000 }],
+      notConsumed: [],
+      itemsOut: [{ id: 'gtceu:lanthanum_oxide_dust', count: 2 }, { id: 'gtceu:neodymium_dust', count: 1 }],
+      fluidsOut: [{ id: DEPLETED, amount: 1000 }],
+      eut: ZPM_VA, duration: 200
     }
   ]
 

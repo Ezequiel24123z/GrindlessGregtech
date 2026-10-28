@@ -120,7 +120,12 @@
     { name: 'ribbon', type: 'tether_ribbon', circuit: 1, itemsIn: [item(CNT, 8), item(BNNT, 4), item(PBO, 4)], fluidsIn: [],
       itemsOut: [item(SEGMENT, 1)], fluidsOut: [], eut: UHVA, duration: 800 },
     { name: 'climber', type: 'tether_ribbon', circuit: 2, itemsIn: [item(EPI, 1), item(SIC, 2), item(BETA, 2)], fluidsIn: [],
-      itemsOut: [item(CLIMBER, 1)], fluidsOut: [], eut: UVA, duration: 600 }
+      itemsOut: [item(CLIMBER, 1)], fluidsOut: [], eut: UVA, duration: 600 },
+    // UIV-B2: the MH-braided ribbon pressed into the tether (circuit 3) and the worn crust lift tether's scrap (circuit 4)
+    { name: 'mh_tether', type: 'tether_ribbon', circuit: 3, itemsIn: [item('grindless:braided_mh_tether', 1), item(SEGMENT, 1)], fluidsIn: [],
+      itemsOut: [item('grindless:mh_tether', 1)], fluidsOut: [], eut: UHVA, duration: 800 },
+    { name: 'worn_tether_scrap', type: 'tether_ribbon', circuit: 4, itemsIn: [item('grindless:worn_crust_lift_tether', 1)], fluidsIn: [],
+      itemsOut: [item(CNT, 4)], fluidsOut: [], eut: UHVA, duration: 400 }
   ]
 
   // line 24's side steps on GTM's own machines

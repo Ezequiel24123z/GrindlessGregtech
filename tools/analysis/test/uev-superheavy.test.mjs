@@ -124,8 +124,8 @@ test('the older hot cell rows chain Cf-252 -> Cm-248 and Bk-249 -> Cf-249 into t
   assert.ok(outputs(cf).includes('gtceu:californium_249_dust'));
   assert.ok(CYC.some((r) => inputs(r).includes('gtceu:curium_248_dust')));
   assert.ok(CYC.some((r) => inputs(r).includes('gtceu:californium_249_dust')));
-  // UIV-A1 appended separator c6 (element 120)
-  assert.ok(SEP.length === 6 && LAB.length === 2);
+  // UIV-A1 appended separator c6 (element 120); UIV-B2 appended separator c7 (element 119) and chemistry c3 (census II)
+  assert.ok(SEP.length === 7 && LAB.length === 3);
 });
 
 test('the cryogenic plant has the xenon row', () => {
