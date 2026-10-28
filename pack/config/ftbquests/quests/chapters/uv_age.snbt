@@ -725,6 +725,19 @@
 			y: 0.0d
 		}
 		{
+			dependencies: ["51C58090D6955D24"]
+			description: ["The &6Mega Factory&r has sockets, and each takes a module: separation, forming, cutting, mixing or heat. A module adds its own recipe types, and every installed one drinks PCB coolant to keep running."]
+			icon: "gtceu:mega_factory"
+			id: "1A2F724B54F17B1E"
+			rewards: [{ id: "7094975ADD1BB9B1", type: "xp", xp: 200 }]
+			shape: "gear"
+			size: 1.25d
+			tasks: [{ id: "5859EA0AFFFAF02C", item: "gtceu:mega_factory", type: "item" }]
+			title: "Mega Factory"
+			x: 14.0d
+			y: 1.5d
+		}
+		{
 			dependencies: ["5D40D7F4F07C52B6", "1DE611D0B4511CCC"]
 			description: ["The &6UHV Energy Hatch&r is researched from the Sgr A* image, and the hull comes with it. Bring the Proxima data along, and keep heavy curium and uranium-233 in store."]
 			icon: "gtceu:uhv_machine_hull"

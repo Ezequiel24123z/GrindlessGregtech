@@ -218,6 +218,10 @@ export const QUESTS = [
     'Move your towers onto &6UHV SMES Cells&r and the wireless network carries UHV, out to the stations and now to Mercury and Proxima.',
   ], [it('gtceu:uhv_wireless_energy_hatch')], 200),
 
+  M('QFAB', 'Quantum Fabricator', 'gtceu:quantum_fabricator', ['START'], 2, 0, [
+    'The &6Quantum Fabricator&r does the work of the assembler, circuit assembler, forming press, laser engraver and cutter in one cleanroom machine. A parallel hatch multiplies it, and it overclocks perfectly. Your Assembly Hall goes into it.',
+  ], [it('gtceu:quantum_fabricator')], 250),
+
   // ------------------------------------------------------------------ exit
   P('GATE', 'Gate to UEV', 'gtceu:uev_machine_casing', ['BASE'], 22, 4, [
     'The &6Stellar Neighbourhood Chart&r is the research for the UEV machine casing, and the hull comes with it. Keep the gate and the swarm running.',

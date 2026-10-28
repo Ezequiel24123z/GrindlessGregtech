@@ -67,15 +67,15 @@ var GG_QUESTS_EXPECTED = {
   workshop: [17, 16],
   welcome: [16, 15],
   steam_age: [44, 50],
-  lv_age: [51, 52],
-  mv_age: [49, 60],
-  hv_age: [32, 40],
-  ev_age: [55, 63],
-  iv_age: [53, 74],
-  luv_age: [46, 49],
-  zpm_age: [44, 44],
-  uv_age: [49, 52],
-  uhv_age: [57, 59]
+  lv_age: [52, 53],
+  mv_age: [50, 61],
+  hv_age: [33, 41],
+  ev_age: [56, 64],
+  iv_age: [54, 75],
+  luv_age: [47, 50],
+  zpm_age: [45, 45],
+  uv_age: [50, 53],
+  uhv_age: [58, 60]
 }
 // chapters that sit outside every chapter group on purpose (shown above the groups)
 var GG_UNGROUPED = { welcome: true }
@@ -96,10 +96,10 @@ GG_QUESTS_EXPECTED.multiblocks = [313, 0]
 // The LuV chapters follow tables/stations.json (tools/quests/luv-stations.mjs adds S03, B7T or B7S; lib/stations.js gives the same
 // mode in game). After flipping the table and regenerating them (docs/quests.md), these are the counts of each mode.
 var GG_QUESTS_LUV_MODES = {
-  pending: { luv_age: [34, 37], pl_luv: [175, 176], power: [99, 110] },
-  tether: { luv_age: [46, 49], pl_luv: [178, 178], power: [102, 113] },
-  sulfur_iodine_stations_off: { luv_age: [35, 38], pl_luv: [181, 181], power: [102, 112] },
-  sulfur_iodine_stations_on: { luv_age: [46, 49], pl_luv: [181, 181], power: [102, 113] }
+  pending: { luv_age: [35, 38], pl_luv: [175, 176], power: [99, 110] },
+  tether: { luv_age: [47, 50], pl_luv: [178, 178], power: [102, 113] },
+  sulfur_iodine_stations_off: { luv_age: [36, 39], pl_luv: [181, 181], power: [102, 112] },
+  sulfur_iodine_stations_on: { luv_age: [47, 50], pl_luv: [181, 181], power: [102, 113] }
 }
 ;(function () {
   var st = global.grindless && global.grindless.stations
