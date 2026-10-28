@@ -1,4 +1,4 @@
-// TEST ONLY, UIV-S0. Command: kubejs custom_command gg_test_uiv_s0_dump
+﻿// TEST ONLY, UIV-S0. Command: kubejs custom_command gg_test_uiv_s0_dump
 // Disposable read-only spikes, never shipped. Places nothing.
 //   s0_1_*   the registry delta (counts, the UIV ids, our throwaway ids), UXV casing, gtnn optical parts and their recipes, the 18 GTM materials
 //   s0_3_*   the three datapack places as GCYR loads them, and every older planet id kept (PlanetData)
@@ -277,7 +277,7 @@
     recipes().forEach(function (r) {
       var id = String(r.getId())
       if (id.indexOf('gtceu:research_station/') === 0) rs++
-      if (id.indexOf('gg_uiv_s0') >= 0) ours.push(id)
+      if (id.indexOf('gg_uiv_s0') >= 0 || (id.indexOf('gtceu:research_station/') === 0 && /diamond|probe/.test(id))) ours.push(id)
     })
     note('s0_9_research_station_recipes', rs + ' rows of gtceu:research_station; ours ' + ours.join(', '))
     var wrote = ours.filter(function (id) { return id.indexOf('research_station') >= 0 })
