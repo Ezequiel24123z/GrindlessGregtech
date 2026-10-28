@@ -110,6 +110,27 @@
     addHelium3SixN(event)
     addHelium4Ash(event)
     addInterstellarGas(event)
+    addParaHydrogen(event)
+    addLiquidParaHydrogen(event)
+  }
+
+  // UIV-A2 (docs/eras/uiv.md, line 1): protium (the heavy water plant's draw-off, and the ramp-compression pulser's H2 shards) is converted
+  // from ortho to para hydrogen over a catalyst bed in the cold, then liquefied. Only the gas goes in; the liquid is the target's coolant.
+  var PARA_HYDROGEN = { id: 'grindless:cryogenic_processing/para_hydrogen', eut: 7680, duration: 400,
+    input: { id: 'gtceu:protium', amount: 1000 },
+    outputs: [{ id: 'gtceu:para_hydrogen', amount: 1000 }] }
+  CRYO.paraHydrogenRow = PARA_HYDROGEN
+  var LIQUID_PARA_HYDROGEN = { id: 'grindless:cryogenic_processing/liquid_para_hydrogen', eut: 7680, duration: 400,
+    input: { id: 'gtceu:para_hydrogen', amount: 1000 },
+    outputs: [{ id: 'gtceu:liquid_para_hydrogen', amount: 1000 }] }
+  CRYO.liquidParaHydrogenRow = LIQUID_PARA_HYDROGEN
+
+  function addParaHydrogen(event) {
+    addCryoRow(event, PARA_HYDROGEN, 'para_hydrogen', 'para hydrogen')
+  }
+
+  function addLiquidParaHydrogen(event) {
+    addCryoRow(event, LIQUID_PARA_HYDROGEN, 'liquid_para_hydrogen', 'liquid para hydrogen')
   }
 
   // UEV-B2 (docs/eras/uev.md, line 26): the nebula collector's compressed interstellar gas is split by boiling point. Hydrogen and deuterium
