@@ -1,0 +1,148 @@
+{
+  "_why": "UIV-B2 (docs/eras/uiv.md, machines 13-17, lines 30-33): the crust lift, the neutron drip separator, the neutronium cage, the r-process decompressor and the decay heat vault at RX J1856.5-3754, and the GTM steps of their lines. Figures marked tune in the contract are tuned here.",
+  "types": {
+    "crust_lifting": {
+      "dataKey": "grindless_crust_lifting",
+      "recipes": [
+        {
+          "name": "crust_lift", "circuit": 1, "eut": 31457280, "duration": 2400, "site": true,
+          "_why": "UIV-B2 line 30: the tether lifts neutron-star crust through the polar-cap electrode; the tether wears (one in ten is spent) and the worn tether goes to the elevator's scrap row.",
+          "wear": [ { "id": "grindless:crust_lift_tether", "count": 1, "chance": 1000 } ],
+          "kept": [ { "id": "grindless:polar_cap_electrode", "count": 1 } ],
+          "itemsOut": [ { "id": "grindless:neutron_star_crust", "count": 4 }, { "id": "grindless:worn_crust_lift_tether", "count": 1, "chance": 1000 } ]
+        }
+      ]
+    },
+    "neutron_drip_separation": {
+      "dataKey": "grindless_neutron_drip_separation",
+      "recipes": [
+        {
+          "name": "inner_crust", "circuit": 1, "eut": 31457280, "duration": 1200, "site": true,
+          "_why": "UIV-B2 line 30: the crust is split at the neutron-drip line behind a Ni-58 supermirror guide (kept); the outer-crust ions go to the decay heat vault.",
+          "kept": [ { "id": "grindless:neutron_supermirror", "count": 1 } ],
+          "itemsIn": [ { "id": "grindless:neutron_star_crust", "count": 4 } ],
+          "itemsOut": [ { "id": "grindless:inner_crust_matter", "count": 2 }, { "id": "grindless:outer_crust_ions", "count": 2 } ]
+        },
+        {
+          "name": "drip_neutrons", "circuit": 2, "eut": 31457280, "duration": 1200, "site": true,
+          "_why": "UIV-B2 lines 30 and 31: the inner crust boils its neutrons off (a fluid, never vented) and leaves the crust nuclei for the r-process decompressor.",
+          "kept": [ { "id": "grindless:neutron_supermirror", "count": 1 } ],
+          "itemsIn": [ { "id": "grindless:inner_crust_matter", "count": 2 } ],
+          "itemsOut": [ { "id": "grindless:crust_nuclei", "count": 2 } ],
+          "fluidsOut": [ { "id": "gtceu:drip_neutrons", "amount": 4000 } ]
+        }
+      ]
+    },
+    "neutronium_caging": {
+      "dataKey": "grindless_neutronium_caging",
+      "recipes": [
+        {
+          "name": "neutron_superfluid", "circuit": 1, "eut": 31457280, "duration": 2400, "site": true,
+          "_why": "UIV-B2 line 30: the drip neutrons are cooled in superfluid helium into a neutron superfluid; the neutrons that leak out decay to protium.",
+          "fluidsIn": [ { "id": "gtceu:drip_neutrons", "amount": 4000 }, { "id": "gtceu:superfluid_helium", "amount": 1000 } ],
+          "fluidsOut": [ { "id": "gtceu:neutron_superfluid", "amount": 1000 }, { "id": "gtceu:protium", "amount": 1000 } ]
+        },
+        {
+          "name": "neutronium_pellet", "circuit": 2, "eut": 31457280, "duration": 2400, "site": true,
+          "_why": "UIV-B2 line 30: the neutron superfluid is caged in a Ni-58 cage part inside the metallic-hydrogen coil; a neutronium pellet is never gtceu:neutronium.",
+          "itemsIn": [ { "id": "grindless:cage_part", "count": 1 } ],
+          "fluidsIn": [ { "id": "gtceu:neutron_superfluid", "amount": 2000 } ],
+          "itemsOut": [ { "id": "grindless:neutronium_pellet", "count": 1 } ],
+          "fluidsOut": [ { "id": "gtceu:protium", "amount": 500 } ]
+        }
+      ]
+    },
+    "r_process_decompression": {
+      "dataKey": "grindless_r_process_decompression",
+      "recipes": [
+        {
+          "name": "hot_r_process_mix", "circuit": 1, "eut": 31457280, "duration": 1600, "site": true,
+          "_why": "UIV-B2 line 31: crust nuclei swell in the drip neutrons into a hot r-process mix; the fission fragments go to the decay heat vault.",
+          "itemsIn": [ { "id": "grindless:crust_nuclei", "count": 2 } ],
+          "fluidsIn": [ { "id": "gtceu:drip_neutrons", "amount": 4000 } ],
+          "itemsOut": [ { "id": "grindless:fission_fragments", "count": 2 } ],
+          "fluidsOut": [ { "id": "gtceu:hot_r_process_mix", "amount": 1000 } ]
+        },
+        {
+          "name": "flash_target", "circuit": 2, "eut": 31457280, "duration": 1600, "site": true,
+          "_why": "UIV-B2 line 32: a U-238 flash target in the same neutron flood leaves Es/Fm debris (it never makes Pu-244).",
+          "itemsIn": [ { "id": "grindless:u238_flash_target", "count": 1 } ],
+          "fluidsIn": [ { "id": "gtceu:drip_neutrons", "amount": 4000 } ],
+          "itemsOut": [ { "id": "grindless:flashed_target", "count": 1 } ]
+        }
+      ]
+    },
+    "decay_heat": {
+      "dataKey": "grindless_decay_heat", "generator": true,
+      "recipes": [
+        {
+          "name": "kilonova_decay", "circuit": 1, "eut": 33554432, "duration": 12000, "site": true,
+          "_why": "UIV-B2 line 31: the vault is a local generator written final: 12,000 ticks at 33,554,432 EU/t into its own UIV dynamo hatch.",
+          "itemsIn": [ { "id": "grindless:kilonova_capsule", "count": 1 } ],
+          "itemsOut": [ { "id": "grindless:aged_kilonova_capsule", "count": 1 } ]
+        },
+        {
+          "name": "capsule_opening", "circuit": 2, "eut": 32, "duration": 200, "site": true,
+          "_why": "UIV-B2 line 31: the aged capsule is opened for its ash and a little helium-4 (the vault's trivial draw).",
+          "itemsIn": [ { "id": "grindless:aged_kilonova_capsule", "count": 1 } ],
+          "itemsOut": [ { "id": "grindless:r_process_ash", "count": 4 } ],
+          "fluidsOut": [ { "id": "gtceu:helium_4_ash", "amount": 1000 } ]
+        },
+        {
+          "name": "fragment_burn", "circuit": 3, "eut": 4194304, "duration": 4800, "site": true,
+          "_why": "UIV-B2 lines 30-31: the vault's inputs get a destination: the decompressor's fission fragments and the separator's outer-crust ions burn down to iron and helium-4.",
+          "itemsIn": [ { "id": "grindless:fission_fragments", "count": 2 }, { "id": "grindless:outer_crust_ions", "count": 2 } ],
+          "itemsOut": [ { "id": "gtceu:iron_dust", "count": 4 } ],
+          "fluidsOut": [ { "id": "gtceu:helium_4_ash", "amount": 500 } ]
+        }
+      ]
+    },
+    "assembler": {
+      "recipes": [
+        {
+          "name": "mh_laminate", "circuit": 0, "eut": 1966080, "duration": 400,
+          "_why": "UIV-B2 line 33: the BN-coated nanotube yarn is laminated with metallic-hydrogen foil.",
+          "itemsIn": [ { "id": "grindless:bn_coated_cnt_yarn", "count": 2 }, { "id": "gtceu:metallic_hydrogen_foil", "count": 2 } ],
+          "itemsOut": [ { "id": "grindless:mh_laminated_yarn", "count": 1 } ]
+        },
+        {
+          "name": "mh_braid", "circuit": 0, "eut": 1966080, "duration": 400,
+          "_why": "UIV-B2 line 33: four laminated yarns braid into the tether strand.",
+          "itemsIn": [ { "id": "grindless:mh_laminated_yarn", "count": 4 } ],
+          "itemsOut": [ { "id": "grindless:braided_mh_tether", "count": 1 } ]
+        },
+        {
+          "name": "polar_cap_electrode", "circuit": 0, "eut": 1966080, "duration": 600,
+          "_why": "UIV-B2 line 33: the metallic-hydrogen tether wound on iridium plates is the polar-cap electrode (kept by the crust lift).",
+          "itemsIn": [ { "id": "grindless:mh_tether", "count": 1 }, { "id": "gtceu:iridium_plate", "count": 4 } ],
+          "itemsOut": [ { "id": "grindless:polar_cap_electrode", "count": 1 } ]
+        },
+        {
+          "name": "crust_lift_tether", "circuit": 0, "eut": 1966080, "duration": 600,
+          "_why": "UIV-B2 line 33: two metallic-hydrogen tethers and tungsten-carbide plates make the crust lift tether.",
+          "itemsIn": [ { "id": "grindless:mh_tether", "count": 2 }, { "id": "gtceu:tungsten_carbide_plate", "count": 2 } ],
+          "itemsOut": [ { "id": "grindless:crust_lift_tether", "count": 1 } ]
+        },
+        {
+          "name": "kilonova_capsule", "circuit": 0, "eut": 1966080, "duration": 300,
+          "_why": "UIV-B2 line 31: the hot r-process mix sealed into a capsule for the decay heat vault.",
+          "itemsIn": [ { "id": "grindless:sealed_capsule", "count": 1 } ],
+          "fluidsIn": [ { "id": "gtceu:hot_r_process_mix", "amount": 1000 } ],
+          "itemsOut": [ { "id": "grindless:kilonova_capsule", "count": 1 } ]
+        },
+        {
+          "name": "es254_target", "circuit": 0, "eut": 1966080, "duration": 300,
+          "_why": "UIV-B2 line 32: einsteinium dust pressed into a target wheel blank (the element 119 target).",
+          "itemsIn": [ { "id": "grindless:target_wheel_blank", "count": 1 }, { "id": "gtceu:einsteinium_dust", "count": 1 } ],
+          "itemsOut": [ { "id": "grindless:es254_target", "count": 1 } ]
+        },
+        {
+          "name": "uiv_field_generator", "circuit": 0, "eut": 31457280, "duration": 400,
+          "_why": "UIV-B2 line 30: the neutronium pellet is the heart of the UIV field generator.",
+          "itemsIn": [ { "id": "grindless:neutronium_pellet", "count": 1 }, { "id": "#gtceu:circuits/uiv", "count": 2 }, { "id": "grindless:uiv_sensor", "count": 1 }, { "id": "gtceu:metallic_hydrogen_plate", "count": 4 } ],
+          "itemsOut": [ { "id": "grindless:uiv_field_generator", "count": 1 } ]
+        }
+      ]
+    }
+  }
+}

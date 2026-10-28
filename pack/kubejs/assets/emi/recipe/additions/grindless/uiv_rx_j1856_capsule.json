@@ -1,0 +1,5 @@
+{
+  "type": "emi:info",
+  "stacks": ["item:grindless:kilonova_capsule", "item:grindless:aged_kilonova_capsule", "item:grindless:r_process_ash"],
+  "text": ["emi.grindless.info.uiv_rx_j1856_capsule.0"]
+}
