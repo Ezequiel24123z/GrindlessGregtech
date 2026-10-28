@@ -22,12 +22,8 @@
   const UP = G.uevPhotonics || (G.uevPhotonics = {})
   const LOG = '[grindless/uev] '
 
-  const FROST = 'gtceu:frostproof_machine_casing'
-  const FROST_TEXTURE = 'gtceu:block/casings/solid/machine_casing_frost_proof'
-  const CLEAN = 'gtceu:clean_machine_casing'
-  const CLEAN_TEXTURE = 'gtceu:block/casings/solid/machine_casing_clean_stainless_steel'
-  const UV_CASING = 'gtceu:uv_machine_casing'
-  const UV_TEXTURE = 'gtceu:block/casings/voltage/uv/side'
+  const PHOTONIC = 'grindless:photonic_casing'
+  const PHOTONIC_TEXTURE = 'grindless:block/uev/photonic_casing'
 
   UP.table = 'kubejs/data/grindless/tables/photonics_uev.json'
   // item name -> stack size; every item carries two tooltip lines (tooltip.grindless.<name>.0 and .1)
@@ -70,7 +66,7 @@
       type: 'snspd_fabrication',
       dataKey: 'grindless_snspd_fabrication',
       lang: 'SNSPD Foundry',
-      casing: FROST, texture: FROST_TEXTURE, sound: 'ARC',
+      casing: PHOTONIC, texture: PHOTONIC_TEXTURE, sound: 'ARC',
       // items in: the wafer or die, one part, the circuit; out: the wafer or the detector; fluids in: argon, resist or superfluid helium
       maxIO: { itemsIn: 4, itemsOut: 1, fluidsIn: 2, fluidsOut: 0 },
       width: 5, height: 5, depth: 7
@@ -81,7 +77,7 @@
       type: 'vdw_assembly',
       dataKey: 'grindless_vdw_assembly',
       lang: 'Van der Waals Stacker',
-      casing: CLEAN, texture: CLEAN_TEXTURE, sound: 'ARC',
+      casing: PHOTONIC, texture: PHOTONIC_TEXTURE, sound: 'ARC',
       // items in: up to three films or chips and the circuit; out: the stack; no fluids
       maxIO: { itemsIn: 4, itemsOut: 1, fluidsIn: 1, fluidsOut: 0 },
       width: 5, height: 5, depth: 5
@@ -92,7 +88,7 @@
       type: 'photonic_integration',
       dataKey: 'grindless_photonic_integration',
       lang: 'Photonic Integration Hall',
-      casing: UV_CASING, texture: UV_TEXTURE, sound: 'ARC',
+      casing: PHOTONIC, texture: PHOTONIC_TEXTURE, sound: 'ARC',
       // items in: the circuit 2 chip takes six parts and the circuit; out: the chip or the computer; no fluids
       maxIO: { itemsIn: 8, itemsOut: 2, fluidsIn: 1, fluidsOut: 0 },
       width: 5, height: 5, depth: 7
