@@ -15,6 +15,8 @@
 //              grindless:pluto_orbit only: one Sputnik ice core's CO (uv/pluto_ices.js) with Charon's water, fed liquid; in orbit the
 //              reaction heat and the radiators vaporise it, so it needs no boiler. Same stages and energy as circuit 4 per mole. It is
 //              published apart (.orbitRecipes) so the six rows above, and their checks, stay as they were.
+//   circuit 6  CO-rich (UEV-B3)      C + CO2 -> 2 CO                    1 dust + 1 000 CO2 -> 2 000 CO (+ ash); the Boudouard row, published
+//              apart (.uevRecipes): Barnard b's carbonyl refinery takes its CO through AE2 and gives it back in the iron route.
 //
 // Units are GTM's: 1 000 mB of a fluid is one mole of its formula, and GTM's hydrogen and oxygen fluids are atoms (water electrolysis gives
 // 2 000 mB of hydrogen per 1 000 mB of water). Steam is H2O in GTM's own material (components H2 O1), and 1 000 mB of it is one mole of
@@ -92,6 +94,11 @@
     { name: 'pluto_shift', circuit: 5, co: 2000, water: 2000, out: { h2: 4000, co2: 2000 }, gasify: 0, shift: 2, dim: 'grindless:pluto_orbit' }
   ]
 
+  // UEV-B3's CO-rich setting (circuit 6): the Boudouard reaction, C + CO2 -> 2 CO, feeds Barnard b's carbonyl refinery (through AE2)
+  const UEV_TABLE = [
+    { name: 'co_rich', circuit: 6, feed: 1, co2: 1000, out: { co: 2000 }, gasify: 1, shift: 0 }
+  ]
+
   function addAtoms(sum, atoms, moles, sign) {
     sum.c += sign * atoms.c * moles
     sum.h += sign * atoms.h * moles
@@ -102,6 +109,7 @@
     var fluidsIn = []
     if (t.heavy) fluidsIn.push({ id: HEAVY, amount: t.heavy })
     if (t.co) fluidsIn.push({ id: CO, amount: t.co })
+    if (t.co2) fluidsIn.push({ id: CO2, amount: t.co2 })
     if (t.steam) fluidsIn.push({ id: STEAM, amount: t.steam })
     if (t.water) fluidsIn.push({ id: WATER, amount: t.water })
     var fluidsOut = []
@@ -140,6 +148,7 @@
   SYN.stageEnergy = { gasify: GASIFY_EU, shift: SHIFT_EU }
   SYN.recipes = TABLE.map(planOf)
   SYN.orbitRecipes = ORBIT_TABLE.map(planOf)
+  SYN.uevRecipes = UEV_TABLE.map(planOf)
 
   const HULL = 'gtceu:hv_machine_hull'
   const REACTOR = 'gtceu:hv_chemical_reactor'
@@ -180,7 +189,7 @@
       console.error('[grindless/hv] syngas recipes skipped, unknown id(s): ' + missing.join(', '))
       return
     }
-    SYN.recipes.concat(SYN.orbitRecipes).forEach(function (r) {
+    SYN.recipes.concat(SYN.orbitRecipes, SYN.uevRecipes).forEach(function (r) {
       var recipe = event.recipes.gtceu.syngas(ID_PREFIX + r.name)
       if (r.feed) recipe.itemInputs(r.feed.count + 'x #' + r.feed.tag)
       if (r.catalyst) recipe.chancedInput(CATALYST, CATALYST_WEAR, 0)
@@ -191,7 +200,7 @@
       if (r.dim) recipe.dimension(r.dim)
       recipe.EUt(r.eut).duration(r.duration)
     })
-    console.info('[grindless/hv] syngas recipes added: ' + (SYN.recipes.length + SYN.orbitRecipes.length))
+    console.info('[grindless/hv] syngas recipes added: ' + (SYN.recipes.length + SYN.orbitRecipes.length + SYN.uevRecipes.length))
   }
 
   // Plant: CRAFTING TABLE, HV hull + HV chemical reactor (the shift) + HV centrifuge (the gas separation) + 2 HV electric pumps + 4 HV

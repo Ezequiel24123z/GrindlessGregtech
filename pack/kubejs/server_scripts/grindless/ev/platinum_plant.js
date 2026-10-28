@@ -593,7 +593,7 @@
       ' stages; skipped ' + PP.skipped.length)
   }
 
-  // UEV-A4 rows (circuits 7 and 8; 1-4 are the plans, 5 is UHV's iridium crucible, 6 its Proxima liquor): the superalloy's dross gives its ruthenium and the
+  // UEV-A4 rows (circuits 7 and 8; 1-4 are the plans, 5 is UHV's iridium crucible, 6 its Proxima liquor; UEV-B3 adds circuit 9): the superalloy's dross gives its ruthenium and the
   // electron beam's skull gives its iridium. Same electrode wear and no voiding of the cargo, as the plans.
   var UEV_ROWS = [
     {
@@ -607,6 +607,16 @@
       itemIn: 'grindless:eb_skull', fluidsIn: [['gtceu:chlorine', 1000]],
       itemsOut: [['gtceu:iridium_dust', 1]], fluidsOut: [['gtceu:hydrochloric_acid', 1000]],
       eut: 1920, duration: 200
+    },
+    {
+      // UEV-B3 (circuit 9): the Barnard residue of the carbonyl refinery (Re, Os, Ir, Pt, W) digested in aqua regia; the platinum metals and the
+      // tungsten come out as dust, the rhenium as crude ammonium perrhenate (line 10 goes on in tables/barnard.json). Barnard b only.
+      name: 'barnard_residue', circuit: 9, site: 'barnard_b',
+      itemIn: 'grindless:barnard_residue', fluidsIn: [['gtceu:hydrochloric_acid', 3000], ['gtceu:nitric_acid', 1000], ['gtceu:ammonia', 1000]],
+      itemsOut: [['gtceu:osmium_dust', 1], ['gtceu:iridium_dust', 1], ['gtceu:platinum_dust', 1], ['gtceu:tungsten_dust', 1],
+        ['grindless:crude_ammonium_perrhenate', 1]],
+      fluidsOut: [['minecraft:water', 2000]],
+      eut: 1920, duration: 300
     }
   ]
 
@@ -626,6 +636,7 @@
       r.itemsOut.forEach(function (o) { recipe.itemOutputs(o[1] + 'x ' + o[0]) })
       r.fluidsOut.forEach(function (f) { recipe.outputFluids(Fluid.of(f[0], f[1])) })
       recipe.EUt(r.eut).duration(r.duration)
+      if (r.site && global.grindless.places) global.grindless.places.allow(recipe, r.site)
       recipe.addDataBool(KEEP_KEY, true)
     })
   }
