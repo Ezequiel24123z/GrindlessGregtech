@@ -108,6 +108,8 @@ test('6N hafnium, tantalum and niobium come only from the electron beam furnace'
     for (const [w] of ps) assert.equal(typeOf(w), 'electron_beam_refining', `${id}: ${w}`);
     for (const f of serverScripts()) {
       if (f.endsWith(path.join('uev', 'electron_beam.js'))) continue;
+      // UEV-A5's HfTaCN billet (uhv/propulsion.js, SPS c4) consumes 6N hafnium; consumers are fine, producers are not
+      if (id === 'six_n_hafnium' && f.endsWith(path.join('uhv', 'propulsion.js'))) continue;
       assert.ok(!read(f).includes(`grindless:${id}`), `${id} named in ${path.relative(kube, f)}`);
     }
   }

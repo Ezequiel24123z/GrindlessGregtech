@@ -1,0 +1,5 @@
+{
+  "type": "emi:info",
+  "stacks": ["item:grindless:photonic_casing"],
+  "text": ["emi.grindless.info.photonic_casing.0"]
+}

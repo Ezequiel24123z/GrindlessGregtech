@@ -30,6 +30,7 @@ const MACHINES = [['gtceu:boron_nitride_reactor', 'gtceu:boron_nitride', 7, 7, 9
   ['gtceu:powder_bed_printer', 'gtceu:powder_bed_fusion', 7, 7, 7]];
 const WIRE = 'gtceu:enriched_naquadah_trinium_europium_duranide_single_wire';
 const VA_ZPM = 122880;
+const VA_UHV = 1966080;
 const VA_UV = 491520;
 
 test('the stand-in runs the materials scripts without errors, nothing clashing, the table clean', () => {
@@ -68,16 +69,18 @@ test('patterns: one controller in the front slice, the contract sizes, every sym
 
 test('the reactor: four steps on circuits 1 to 4, the contract numbers', () => {
   const steps = M.recipes.filter((r) => r.type === 'boron_nitride');
-  assert.deepEqual(steps.map((r) => [r.name, r.circuit]), [['hbn', 1], ['bnnt', 2], ['bnnt_yarn', 3], ['hbn_boron_10', 4]]);
+  assert.deepEqual(steps.map((r) => [r.name, r.circuit]), [['hbn', 1], ['bnnt', 2], ['bnnt_yarn', 3], ['hbn_boron_10', 4], ['sic_fibre_bn_interphase', 5]]);
   assert.deepEqual(row('hbn').itemsIn, [{ id: 'gtceu:boron_trioxide_dust', count: 2 }]);
   assert.deepEqual(row('hbn').fluidsOut, [{ id: 'gtceu:steam', amount: 3000 }, { id: 'gtceu:ammonia', amount: 500 }]);
   assert.deepEqual(row('bnnt').fluidsIn, row('bnnt').fluidsOut, 'the hydrogen carrier comes back');
   assert.deepEqual(row('bnnt_yarn').itemsOut, [{ id: 'grindless:bnnt_yarn', count: 1 }, { id: 'grindless:hbn_dust', count: 1 }]);
   for (const r of steps) {
-    assert.equal(r.eut, VA_ZPM, r.name);
+    // UEV-A5's interphase row (c5) runs at UHV voltage
+    assert.equal(r.eut, r.name === 'sic_fibre_bn_interphase' ? VA_UHV : VA_ZPM, r.name);
     const rec = byId(r.recipeId);
     assert.ok(rec, r.recipeId);
     assert.deepEqual(circuitOf(rec), [r.circuit]);
+    assert.ok(r.itemsIn.length + 1 <= M.reactorIO.itemsIn && r.fluidsIn.length <= M.reactorIO.fluidsIn, r.name + ' IO');
   }
 });
 
