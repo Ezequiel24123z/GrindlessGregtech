@@ -65,6 +65,15 @@
       "fluidsIn": [],
       "itemsOut": [ { "id": "grindless:uhv_smes_cell", "count": 1 } ],
       "eut": 1966080, "duration": 600
+    },
+    {
+      "name": "uev_smes_cell", "circuit": 6, "charge": true,
+      "_why": "The wireless network's UEV cell (docs/eras/uev.md, 'Power on the wireless network', package UEV-W): four UHV cells' worth, 251,658,240,000 EU. Four UHV cells are rewound into one: their coils stay, sixteen lay superhydride windings (the (La,Y)H10 single wire, which takes the RTAN wire's place of the UHV cell) take the UEV field, lay superhydride plate is the cryostat's wall. Cold-tested in the same helium charge as the ZPM, UV and UHV cells. VA[UEV] (7,864,320): one UEV energy hatch carries it. The cell stays unobtainable until the lay superhydride line (UEV-A3) and the UHV cells' own chain are made.",
+      "itemsIn": [ { "id": "grindless:uhv_smes_cell", "count": 4 }, { "id": "gtceu:lay_superhydride_single_wire", "count": 16 },
+                   { "id": "gtceu:lay_superhydride_plate", "count": 8 } ],
+      "fluidsIn": [],
+      "itemsOut": [ { "id": "grindless:uev_smes_cell", "count": 1 } ],
+      "eut": 7864320, "duration": 600
     }
   ]
 }
