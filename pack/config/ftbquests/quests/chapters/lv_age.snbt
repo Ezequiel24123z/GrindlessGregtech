@@ -761,6 +761,24 @@
 			x: 2.0d
 			y: -1.5d
 		}
+		{
+			dependencies: ["1AC672110DFD0C14"]
+			description: [
+				"The &6Wire Works&r puts a wiremill and a bender in one box, so wire and plate come off the same line. Several recipes run side by side, as many as your hatch voltage can feed."
+			]
+			icon: "gtceu:wire_works"
+			id: "70655BD4956EB088"
+			rewards: [
+				{ id: "3C4547840227F1B1", type: "xp", xp: 40 }
+				{ count: 8, id: "3C08ECF9B5FC68EA", item: "gtceu:steel_plate", type: "item" }
+			]
+			shape: "gear"
+			size: 1.25d
+			tasks: [{ id: "791A459098A43495", item: "gtceu:wire_works", type: "item" }]
+			title: "Wire Works"
+			x: 0.0d
+			y: 2.0d
+		}
 	]
 	subtitle: ["Electricity at last: ore lines, a little chemistry, AE2, and the Moon on film."]
 	title: "LV: The First Spark"

@@ -549,6 +549,15 @@ export const QUESTS = [
     rewards: [xp(60, "18399F59E4F03505")],
   },
   {
+    key: "ORER", title: "Ore to Dust in One Pass", icon: "gtceu:ore_refinery", shape: "gear", size: 1.25,
+    deps: ["TI"], x: 6, y: 1.5,
+    desc: [
+      "The &6Ore Refinery&r takes raw ore through the macerator, the washer, the thermal centrifuge and the sifter in a single recipe. The washer uses plain water here, and many ores go through at once.",
+    ],
+    tasks: [it("gtceu:ore_refinery", 1)],
+    rewards: [xp(80), ri("gtceu:steel_plate", 8)],
+  },
+  {
     key: "IVH", id: "7AF6FD3F4F3B06B4", title: "IV Machine Hull", icon: "gtceu:iv_machine_hull", shape: "diamond", size: 1.75,
     deps: ["TS", "NPC"], x: 28, y: 0,
     desc: [

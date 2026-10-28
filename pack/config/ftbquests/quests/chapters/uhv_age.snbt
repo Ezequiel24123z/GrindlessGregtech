@@ -814,6 +814,19 @@
 			y: -2.0d
 		}
 		{
+			dependencies: ["7547756221DFC688"]
+			description: ["The &6Quantum Fabricator&r does the work of the assembler, circuit assembler, forming press, laser engraver and cutter in one cleanroom machine. A parallel hatch multiplies it, and it overclocks perfectly. Your Assembly Hall goes into it."]
+			icon: "gtceu:quantum_fabricator"
+			id: "1A714B616F2F3010"
+			rewards: [{ id: "57E37DFAF7195F0E", type: "xp", xp: 250 }]
+			shape: "gear"
+			size: 1.25d
+			tasks: [{ id: "5B0B675A6B7F3B45", item: "gtceu:quantum_fabricator", type: "item" }]
+			title: "Quantum Fabricator"
+			x: 2.0d
+			y: 0.0d
+		}
+		{
 			dependencies: ["198E84EB67959EFD"]
 			description: ["The &6Stellar Neighbourhood Chart&r is the research for the UEV machine casing, and the hull comes with it. Keep the gate and the swarm running."]
 			icon: "gtceu:uev_machine_casing"
