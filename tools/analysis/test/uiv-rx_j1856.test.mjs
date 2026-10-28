@@ -126,7 +126,10 @@ test('line 31: crust nuclei -> hot mix (fission fragments to the vault) -> capsu
   // the vault's other inputs have a destination
   const v3 = by('decay_heat', 'fragment_burn');
   assert.equal(v3.circuit, 3);
-  assert.deepEqual(inputs(v3), ['grindless:fission_fragments', 'grindless:outer_crust_ions']);
+  assert.deepEqual(inputs(v3), ['grindless:fission_fragments']);
+  const v4 = by('decay_heat', 'ion_burn');
+  assert.equal(v4.circuit, 4);
+  assert.deepEqual(inputs(v4), ['grindless:outer_crust_ions']);
 });
 
 test('line 32: the flash target never makes Pu-244; its debris goes to the hot cell', () => {
@@ -239,7 +242,7 @@ test('older rows: 13 in 9 files, each carries UIV-B2 and the free circuit', () =
   assert.ok(u && u.circuit === 10 && mine(u));
   assert.deepEqual(ids(u.itemsOut), ['grindless:u238_flash_target']);
   const tc = find('transcurium.json', 'transuranium_processing', 'es254_extraction');
-  assert.ok(tc && tc.circuit === 7 && mine(tc));
+  assert.ok(tc && tc.circuit === 9 && mine(tc));
   assert.deepEqual(ids(tc.itemsOut), ['gtceu:einsteinium_dust']);
   const bomb = find('superheavy.json', 'heavy_ion_irradiation', 'es254_bombard');
   assert.ok(bomb && bomb.circuit === 8 && mine(bomb));

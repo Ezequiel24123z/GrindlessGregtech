@@ -91,9 +91,16 @@
         {
           "name": "fragment_burn", "circuit": 3, "eut": 4194304, "duration": 4800, "site": true,
           "_why": "UIV-B2 lines 30-31: the vault's inputs get a destination: the decompressor's fission fragments and the separator's outer-crust ions burn down to iron and helium-4.",
-          "itemsIn": [ { "id": "grindless:fission_fragments", "count": 2 }, { "id": "grindless:outer_crust_ions", "count": 2 } ],
-          "itemsOut": [ { "id": "gtceu:iron_dust", "count": 4 } ],
-          "fluidsOut": [ { "id": "gtceu:helium_4_ash", "amount": 500 } ]
+          "itemsIn": [ { "id": "grindless:fission_fragments", "count": 2 } ],
+          "itemsOut": [ { "id": "gtceu:iron_dust", "count": 2 } ],
+          "fluidsOut": [ { "id": "gtceu:helium_4_ash", "amount": 250 } ]
+        },
+        {
+          "name": "ion_burn", "circuit": 4, "eut": 4194304, "duration": 4800, "site": true,
+          "_why": "UIV-B2 line 30: the separator's outer-crust ions burn down to iron and helium-4 in the vault (a type holds two item inputs, so one row each).",
+          "itemsIn": [ { "id": "grindless:outer_crust_ions", "count": 2 } ],
+          "itemsOut": [ { "id": "gtceu:iron_dust", "count": 2 } ],
+          "fluidsOut": [ { "id": "gtceu:helium_4_ash", "amount": 250 } ]
         }
       ]
     },
