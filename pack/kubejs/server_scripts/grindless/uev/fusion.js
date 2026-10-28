@@ -6,10 +6,12 @@
 //   gtceu:spin_polarisation     the helium-3 polariser: circuit 1 polarise 6N helium-3 (the depolarised part comes back), 2 polarised fuel.
 //   gtceu:mixer                 circuit 24 D-He-3 mix, 25 p-11B fuel (the fuels are mixed upstream of the ring).
 //   gtceu:chemical_reactor      circuits 24-27: borax -> boric acid -> boron trioxide -> boron trifluoride; boron-11 trifluoride -> boron-11.
+//   gtceu:assembler             grindless:uev_fusion_casing (table 'casing').
 //   crafting                    the two controllers.
 // The other rows of the lines are in the older files the package may extend: zpm/fusion.js (the converter's Mk4 rows), zpm/saturn_siphon.js
 // (boron-11 trifluoride), ev/cryogenic_plant.js (6N helium-3, helium-4 ash), uv/photonics.js (the 1,083 nm laser).
-// Published: global.grindless.uevFusion.recipes [{ name, type, recipeId, circuit, eut, duration, ... }], .skipped, .controllerRecipes.
+// Published: global.grindless.uevFusion.recipes [{ name, type, recipeId, circuit, eut, duration, ... }], .skipped, .controllerRecipes,
+// .casingRecipe.
 // Rhino: var + function inside every callback that runs more than once.
 // -----------------------------------------------------------------------------------------------
 (function () {
@@ -63,14 +65,14 @@
     console.info(LOG + 'fusion recipes added: ' + (UF.recipes.length - UF.skipped.length))
   }
 
-  // the UV parts of the UEV hull: GTM has no UHV or UEV pumps, emitters or field generators
+  // docs/eras/uev.md "Voltages and controllers": the polariser (14) is an early machine (UHV hull, two UV parts, two UHV circuits);
+  // the ring (15) comes after the UEV hull (UEV hull, two UEV parts of UEV-A6, two optical computers from the photonic hall)
   function addControllers(event) {
-    var HULL = 'gtceu:uev_machine_hull'
-    var EMITTER = 'gtceu:uv_emitter'
-    var FIELD = 'gtceu:uv_field_generator'
     var defs = [
-      { machine: table.polariser.machine, parts: [HULL, EMITTER], pattern: ['CEC', 'EHE', 'C C'], ingredients: { C: '#gtceu:circuits/uhv', E: EMITTER, H: HULL }, name: 'helium3_polariser' },
-      { machine: table.ring.machine, parts: [HULL, FIELD], pattern: ['CFC', 'FHF', 'CFC'], ingredients: { C: '#gtceu:circuits/uhv', F: FIELD, H: HULL }, name: 'uev_fusion_reactor' }
+      { machine: table.polariser.machine, parts: ['gtceu:uhv_machine_hull', 'gtceu:uv_emitter'], pattern: [' C ', 'EHE', ' C '],
+        ingredients: { C: '#gtceu:circuits/uhv', E: 'gtceu:uv_emitter', H: 'gtceu:uhv_machine_hull' }, name: 'helium3_polariser' },
+      { machine: table.ring.machine, parts: ['gtceu:uev_machine_hull', 'grindless:uev_emitter', 'grindless:uev_sensor', 'gtnn:optical_computer'], pattern: [' O ', 'EHS', ' O '],
+        ingredients: { O: 'gtnn:optical_computer', E: 'grindless:uev_emitter', S: 'grindless:uev_sensor', H: 'gtceu:uev_machine_hull' }, name: 'uev_fusion_reactor' }
     ]
     defs.forEach(function (d) {
       var missing = d.parts.concat([d.machine]).filter(function (id) { return !Item.exists(id) })
@@ -83,9 +85,24 @@
     })
   }
 
+  // the Mk4 casing: GTM's Mk3 casing faced with the Wf/W divertor tile and a SiC/SiC blanket plate (UEV-A5's CVI furnace)
+  function addCasing(event) {
+    var c = table.casing
+    var missing = c.itemsIn.map(function (x) { return x.id }).concat([c.output]).filter(function (id) { return !Item.exists(id) })
+    if (missing.length > 0) {
+      console.error(LOG + 'casing recipe skipped, unknown item(s): ' + missing.join(', '))
+      return
+    }
+    var b = event.recipes.gtceu.assembler('grindless:' + c.name)
+    c.itemsIn.forEach(function (x) { b.itemInputs(x.count + 'x ' + x.id) })
+    b.itemOutputs(c.count + 'x ' + c.output).EUt(c.eut).duration(c.duration)
+    UF.casingRecipe = 'grindless:assembler/' + c.name
+  }
+
   // an uncaught error here would stop KubeJS from running the recipe handlers of the scripts that load after this one
   ServerEvents.recipes(function (event) {
     try { addRows(event) } catch (e) { console.error(LOG + 'fusion recipes failed: ' + e) }
+    try { addCasing(event) } catch (e3) { console.error(LOG + 'casing recipe failed: ' + e3) }
     try { addControllers(event) } catch (e2) { console.error(LOG + 'controller recipes failed: ' + e2) }
   })
 })()

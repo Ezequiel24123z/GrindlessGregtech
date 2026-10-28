@@ -1,10 +1,13 @@
 // priority: -7747
 // TEST ONLY, UEV-A7. Command: kubejs custom_command gg_test_uev_fusion
 // Band ONLY: X 32512-32575, Z 0-63, Overworld Y 70-100.
-//   a7_ring_*   gtceu:uev_fusion_reactor forms (registerFusionTier from KubeJS in the real pack), its buffer is above the int maximum, and it
-//               starts and runs c1 (dhe3_fuel_mix, 1.2 G), c2 (pb11_fuel, 3.2 G, above the int maximum) and c3 (polarised_dhe3_fuel)
+//   a7_ring_*   gtceu:uev_fusion_reactor forms (registerFusionTier from KubeJS in the real pack) with 16 UEV hatches; its internal buffer
+//               (FusionReactorMachine.energyContainer, read by reflection: Rhino's m.energyContainer is the hatch list) is above the int
+//               maximum, and it starts and runs c1 (dhe3_fuel_mix, 1.2 G), c2 (pb11_fuel, 2.4 G, above the int maximum) and c3
+//               (polarised_dhe3_fuel)
 //   a7_pol_*    gtceu:helium3_polariser forms and polarises 6N helium-3 (circuit 1) with the 1,083 nm laser as a tool
 //   a7_dec_*    the converter's three Mk4 rows return 16,777,216, 12,582,912 and 25,165,824 EU/t at 128 parallels
+//   a7_casing   the Mk4 casing recipe is live
 (function () {
   var S = null
   var C = null
@@ -20,7 +23,7 @@
   var POLARISER = 'gtceu:helium3_polariser'
   var RUNS = [
     { name: 'c1', fuel: 'gtceu:dhe3_fuel_mix', recipe: 'uev_dhe3', start: 1200000000, x: 32520 },
-    { name: 'c2', fuel: 'gtceu:pb11_fuel', recipe: 'uev_pb11', start: 3200000000, x: 32535 },
+    { name: 'c2', fuel: 'gtceu:pb11_fuel', recipe: 'uev_pb11', start: 2400000000, x: 32535 },
     { name: 'c3', fuel: 'gtceu:polarised_dhe3_fuel', recipe: 'uev_polarised_dhe3', start: 1200000000, x: 32550 }
   ]
   var DEC = [
@@ -88,6 +91,13 @@
     return left
   }
   function topUp(list) { list.forEach(function (p) { var c = p.energyContainer; c.setEnergyStored(c.getEnergyCapacity()) }) }
+  // the ring's own NotifiableEnergyContainer (capacity = hatches x 160,000,000 at tier 10), not the hatch list Rhino returns for m.energyContainer
+  function ringBuffer(m) {
+    var f = m.getClass().getDeclaredField('energyContainer')
+    f.setAccessible(true)
+    return f.get(m)
+  }
+  function chargeRing(m) { var b = ringBuffer(m); b.setEnergyStored(b.getEnergyCapacity()) }
   function formCheck(m, waited) {
     if (m.isFormed()) return true
     if (waited >= 100 && waited % 50 === 0) {
@@ -180,7 +190,7 @@
     var i = 0
     var o = 0
     placeCheck(u, placeMachine(RING, u.x, 80, 30, function (c) {
-      if (c.ch === 'E' && e < 4) { e++; return HATCH16 }
+      if (c.ch === 'E' && e < 16) { e++; return HATCH16 }
       if (c.ch === 'I' && i < 1) { i++; return 'gtceu:hv_input_hatch' }
       if (c.ch === 'O' && o < 1) { o++; return 'gtceu:hv_output_hatch' }
       return null
@@ -194,20 +204,20 @@
       u.energy = partsLike(m, /uev_energy_input_hatch_16a/)
       u.inHatches = partsLike(m, /input_hatch/).filter(function (p) { return !/energy/.test(String(p.getDefinition().getId())) })
       var cap = NaN
-      try { cap = Number(m.energyContainer.getEnergyCapacity()) } catch (x) { }
+      try { cap = Number(ringBuffer(m).getEnergyCapacity()) } catch (x) { note(u.name + '_buffer', 'reflection failed: ' + errText(x)) }
       var tier = NaN
       try { tier = Number(m.getTier()) } catch (x) { }
       if (u.name === 'ring_c1') {
-        check('a7_ring_formed', u.energy.length > 0, 'class ' + m.getClass().getSimpleName() + ', tier ' + tier + ', UEV 16 A hatches ' + u.energy.length + ', parts ' + partIds(m))
-        check('a7_ring_buffer_long', cap > 2147483647, 'buffer ' + cap + ' EU, int maximum 2147483647')
-      } else check(u.name + '_formed', u.energy.length > 0, 'parts ' + partIds(m) + ', buffer ' + cap)
+        check('a7_ring_formed', u.energy.length === 16, 'class ' + m.getClass().getSimpleName() + ', tier ' + tier + ', UEV 16 A hatches ' + u.energy.length + ', parts ' + partIds(m))
+        check('a7_ring_buffer_long', cap === 2560000000, 'internal buffer ' + cap + ' EU (want 16 x 160,000,000 = 2,560,000,000), int maximum 2147483647')
+      } else check(u.name + '_formed', u.energy.length === 16, 'parts ' + partIds(m) + ', buffer ' + cap)
       u.phase = 'start'
       return
     }
     if (u.phase === 'start') {
       try { setTank(u.inHatches[0], u.run.fuel, 4000) } catch (x) { note(u.name + '_fill', 'fill failed: ' + errText(x)) }
       topUp(u.energy)
-      try { var buf = m.energyContainer; buf.setEnergyStored(buf.getEnergyCapacity()) } catch (x) { }
+      try { chargeRing(m) } catch (x) { note(u.name + '_charge', 'charge failed: ' + errText(x)) }
       m.getRecipeLogic().updateTickSubscription()
       u.phase = 'run'
       u.started = S.tick
@@ -216,11 +226,13 @@
     if (u.phase === 'run') {
       topUp(u.energy)
       var rlg = m.getRecipeLogic()
+      if (!rlg.isWorking()) { try { chargeRing(m) } catch (x) { } }
       if (!u.diag && !rlg.isWorking() && S.tick - u.started > 300) {
         u.diag = true
         var heat = 'n/a'
         try { var hf = m.getClass().getDeclaredField('heat'); hf.setAccessible(true); heat = String(hf.getLong(m)) } catch (x) { heat = 'err ' + errText(x) }
-        note('a7_ring_' + u.run.name + '_diag', 'stored ' + m.energyContainer.getEnergyStored() + ', cap ' + m.energyContainer.getEnergyCapacity() + ', heat ' + heat + ', progress ' + rlg.getProgress() + ', status ' + rlg.getStatus())
+        var rb = ringBuffer(m)
+        note('a7_ring_' + u.run.name + '_diag', 'stored ' + rb.getEnergyStored() + ', cap ' + rb.getEnergyCapacity() + ', heat ' + heat + ', progress ' + rlg.getProgress() + ', status ' + rlg.getStatus())
       }
       if (rlg.isWorking() || S.tick - u.started > 600) {
         var s = snapshot(m)
@@ -241,6 +253,7 @@
         if (x === 2) return 'gtceu:hv_input_hatch'
         if (x === 3) return 'gtceu:hv_output_hatch'
         if (x === 4) return HATCH16
+        if (x === 5) return 'gtceu:hv_output_hatch'
       }
       return null
     }))
@@ -292,6 +305,10 @@
       note('a7_dec_' + d.name + '_raw', raw)
       check('a7_dec_' + d.name, per * 128 === d.total, 'row ' + per + ' EU/t x 128 = ' + (per * 128) + ', want ' + d.total)
     })
+    var casing = 'grindless:assembler/uev_fusion_casing'
+    var live = false
+    try { live = S.server.getRecipeManager().byKey(new (classes().RL)(casing)).isPresent() } catch (x) { }
+    check('a7_casing', live, 'recipe ' + casing + (live ? ' live' : ' not found') + ', published ' + global.grindless.uevFusion.casingRecipe)
     u.phase = 'done'
   }
 
