@@ -14,7 +14,10 @@
           "itemsOut": [{ "id": "grindless:bonded_fe16n2_magnet", "count": 2 }], "fluidsOut": [] },
         { "name": "uiv_smes_cell", "circuit": 4, "eut": 1966080, "duration": 600,
           "itemsIn": [{ "id": "grindless:uev_smes_cell", "count": 4 }, { "id": "gtceu:metallic_hydrogen_single_wire", "count": 16 }], "kept": [], "fluidsIn": [], "charge": [{ "id": "gtceu:liquid_helium", "amount": 1000 }],
-          "itemsOut": [{ "id": "grindless:uiv_smes_cell", "count": 1 }], "fluidsOut": [] }
+          "itemsOut": [{ "id": "grindless:uiv_smes_cell", "count": 1 }], "fluidsOut": [] },
+        { "name": "halbach_array", "circuit": 5, "eut": 1966080, "duration": 300,
+          "itemsIn": [{ "id": "grindless:bonded_fe16n2_magnet", "count": 4 }, { "id": "gtceu:polybenzimidazole_dust", "count": 1 }], "kept": [], "fluidsIn": [], "charge": [],
+          "itemsOut": [{ "id": "grindless:halbach_array", "count": 1 }], "fluidsOut": [] }
       ]
     },
     "sic_fibre_spinning": {
@@ -39,7 +42,10 @@
           "itemsOut": [{ "id": "grindless:sic_sic_plate", "count": 1 }], "fluidsOut": [{ "id": "gtceu:hydrochloric_acid", "amount": 3000 }] },
         { "name": "wf_w_tile", "circuit": 2, "eut": 1966080, "duration": 9600,
           "itemsIn": [{ "id": "grindless:w_fibre_preform", "count": 1 }], "kept": [], "fluidsIn": [{ "id": "gtceu:tungsten_hexafluoride", "amount": 1000 }, { "id": "gtceu:hydrogen", "amount": 3000 }], "charge": [],
-          "itemsOut": [{ "id": "grindless:wf_w_tile", "count": 1 }], "fluidsOut": [{ "id": "gtceu:hydrofluoric_acid", "amount": 6000 }] }
+          "itemsOut": [{ "id": "grindless:wf_w_tile", "count": 1 }], "fluidsOut": [{ "id": "gtceu:hydrofluoric_acid", "amount": 6000 }] },
+        { "name": "w_preform_densify", "circuit": 3, "eut": 1966080, "duration": 4800,
+          "itemsIn": [{ "id": "grindless:w_fibre_preform", "count": 1 }], "kept": [], "fluidsIn": [{ "id": "gtceu:tungsten_hexafluoride", "amount": 500 }, { "id": "gtceu:hydrogen", "amount": 1500 }], "charge": [],
+          "itemsOut": [{ "id": "grindless:densified_w_preform", "count": 1 }], "fluidsOut": [{ "id": "gtceu:hydrofluoric_acid", "amount": 3000 }] }
       ]
     },
     "chemical_reactor": {

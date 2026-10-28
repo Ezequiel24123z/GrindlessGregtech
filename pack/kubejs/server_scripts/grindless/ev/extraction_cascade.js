@@ -162,6 +162,23 @@
       itemsOut: [{ id: 'grindless:yttrium_oxide_dust', count: 5 }, { id: 'gtceu:lanthanum_oxide_dust', count: 5 }, { id: MIX_CL, count: 16 }],
       fluidsOut: [{ id: KEROSENE, amount: 950 }, { id: HCL, amount: 6000 }],
       eut: 1920, duration: 100
+    },
+    // UIV-A3: the columbite split and the melter dross digestion (docs/eras/uiv.md, lines 5 and 7)
+    {
+      name: 'columbite_niobium_split', mode: 'uev', circuit: 12,
+      itemsIn: [{ id: 'grindless:niobium_oxyfluoride_dust', count: 4 }],
+      fluidsIn: [{ id: 'minecraft:water', amount: 3000 }, { id: KEROSENE, amount: 1000 }],
+      itemsOut: [{ id: 'gtceu:niobium_pentoxide_dust', count: 2 }],
+      fluidsOut: [{ id: KEROSENE, amount: 950 }, { id: 'gtceu:hydrofluoric_acid', amount: 2000 }],
+      eut: 1920, duration: 100
+    },
+    {
+      name: 'melter_dross_digestion', mode: 'uev', circuit: 13,
+      itemsIn: [{ id: 'grindless:melter_dross', count: 4 }],
+      fluidsIn: [{ id: 'gtceu:hydrofluoric_acid', amount: 3000 }, { id: KEROSENE, amount: 1000 }],
+      itemsOut: [{ id: 'grindless:niobium_oxyfluoride_dust', count: 1 }, { id: 'grindless:hafnium_chloride_dust', count: 1 }],
+      fluidsOut: [{ id: KEROSENE, amount: 950 }, { id: 'minecraft:water', amount: 1000 }],
+      eut: 1920, duration: 100
     }
   ]
 
