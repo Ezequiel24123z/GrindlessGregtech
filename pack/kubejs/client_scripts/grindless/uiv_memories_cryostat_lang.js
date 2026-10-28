@@ -11,7 +11,30 @@
     // [key, en, es]
     var ENTRIES = [
         ['block.gtceu.spectral_hole_burner', 'Spectral Hole Burner', 'Quemador de huecos espectrales'],
+        ['block.gtceu.millikelvin_cryostat_works', 'Millikelvin Cryostat Works', 'Taller de criostatos de milikelvin'],
         ['gtceu.spectral_hole_burning', 'Spectral Hole Burning', 'Quemado de huecos espectrales'],
+        ['gtceu.nuclear_demagnetisation', 'Nuclear Demagnetisation', 'Desmagnetización nuclear'],
+        ['material.gtceu.he3_he4_mixture', 'He-3/He-4 Mixture', 'Mezcla He-3/He-4'],
+        ['material.gtceu.erbium_chloride_solution', 'Erbium Chloride Solution', 'Solución de cloruro de erbio'],
+
+        ['grindless.machine.millikelvin_cryostat_works.tooltip.0',
+            'A magnet-ringed cryostat that cools copper nuclei to millikelvin by adiabatic demagnetisation: the only maker of the mK cryostat module and the characterised P:Si processor.',
+            'Un criostato rodeado de imanes que enfría núcleos de cobre hasta milikelvin por desmagnetización adiabática: el único que fabrica el módulo criostato de mK y el procesador P:Si caracterizado.'],
+        ['grindless.machine.millikelvin_cryostat_works.tooltip.1',
+            'Circuit 1 nuclear stage, 2 mK cryostat module (the He-3/He-4 mixture comes back out), 3 characterised P:Si processor (the module is kept, not consumed).',
+            'Circuito 1 etapa nuclear, 2 módulo criostato de mK (la mezcla He-3/He-4 vuelve a salir), 3 procesador P:Si caracterizado (el módulo se conserva, no se consume).'],
+        ['grindless.machine.millikelvin_cryostat_works.tooltip.2',
+            'Needs a belt of metallic hydrogen coil blocks. Parts go in the bottom layer: 1-2 energy hatches, 1-2 input buses, 1-2 output buses, optional fluid hatches. Accepts a parallel hatch.',
+            'Necesita un cinturón de bloques de bobina de hidrógeno metálico. Las piezas van en la capa inferior: 1-2 escotillas de energía, 1-2 buses de entrada, 1-2 buses de salida, escotillas de fluidos opcionales. Acepta una escotilla de paralelos.'],
+        ['gtceu.recipe.grindless_nuclear_demagnetisation.nuclear_stage',
+            'Circuit 1: PrNi5 and copper plates make the nuclear demagnetisation stage.',
+            'Circuito 1: PrNi5 y placas de cobre forman la etapa de desmagnetización nuclear.'],
+        ['gtceu.recipe.grindless_nuclear_demagnetisation.mk_module',
+            'Circuit 2: the nuclear stage, a cold plate and the dilution mixture make a mK cryostat module; the mixture is returned.',
+            'Circuito 2: la etapa nuclear, una placa fría y la mezcla de dilución forman un módulo criostato de mK; la mezcla se devuelve.'],
+        ['gtceu.recipe.grindless_nuclear_demagnetisation.p_si_processor',
+            'Circuit 3: the overgrown P:Si die is characterised at millikelvin; the module is a catalyst.',
+            'Circuito 3: el dado de P:Si sobrecrecido se caracteriza a milikelvin; el módulo es un catalizador.'],
 
         ['grindless.machine.spectral_hole_burner.tooltip.0',
             'A cryostat that burns an atomic frequency comb into a rare-earth YSO slab held in superfluid helium: the only maker of the six-hour and telecom memory slabs.',
@@ -46,7 +69,14 @@
         ['er_yso_slab', 'Er:YSO Slab', 'Losa de Er:YSO', 'A polished slab cut from the boule.', 'Una losa pulida cortada del lingote.', 'Goes into the spectral hole burner (circuit 2).', 'Va al quemador de huecos espectrales (circuito 2).'],
         ['six_hour_memory_slab', 'Six-Hour Memory Slab', 'Losa de memoria de seis horas', 'A slab with an atomic frequency comb that holds a state for hours.', 'Una losa con un peine de frecuencias atómicas que conserva un estado durante horas.', 'Mounted with a cryostat module into a six-hour memory.', 'Se monta con un módulo criostato en una memoria de seis horas.'],
         ['telecom_memory_slab', 'Telecom Memory Slab', 'Losa de memoria telecom', 'A slab that stores light at telecom wavelength.', 'Una losa que almacena luz en longitud de onda telecom.', 'Spliced to ytterbium fibre in the fibre drawer.', 'Se empalma a fibra de iterbio en la estiradora de fibra.'],
-        ['six_hour_memory', 'Six-Hour Quantum Memory', 'Memoria cuántica de seis horas', 'A cooled Eu-151:YSO memory with its sensor.', 'Una memoria de Eu-151:YSO enfriada con su sensor.', 'Consumes one millikelvin cryostat module.', 'Consume un módulo criostato de milikelvin.']
+        ['six_hour_memory', 'Six-Hour Quantum Memory', 'Memoria cuántica de seis horas', 'A cooled Eu-151:YSO memory with its sensor.', 'Una memoria de Eu-151:YSO enfriada con su sensor.', 'Consumes one millikelvin cryostat module.', 'Consume un módulo criostato de milikelvin.'],
+        ['nuclear_stage', 'Nuclear Demagnetisation Stage', 'Etapa de desmagnetización nuclear', 'A PrNi5 and copper stage that cools nuclei by demagnetisation.', 'Una etapa de PrNi5 y cobre que enfría núcleos por desmagnetización.', 'Goes into the mK cryostat module.', 'Va al módulo criostato de mK.'],
+        ['cold_plate', 'Cold Plate', 'Placa fría', 'A copper plate soaked in superfluid helium.', 'Una placa de cobre empapada en helio superfluido.', 'Carries the heat from the nuclear stage.', 'Lleva el calor de la etapa nuclear.'],
+        ['p_si_processor', 'Characterised P:Si Processor', 'Procesador P:Si caracterizado', 'An overgrown phosphorus-in-silicon die, mapped at millikelvin.', 'Un dado de fósforo en silicio sobrecrecido, mapeado a milikelvin.', 'Made only in the millikelvin cryostat works (circuit 3).', 'Solo se fabrica en el taller de criostatos de milikelvin (circuito 3).'],
+        ['er_preform', 'Er-Doped Preform', 'Preforma dopada con Er', 'A silica preform doped with erbium and aluminium.', 'Una preforma de sílice dopada con erbio y aluminio.', 'Drawn into erbium fibre.', 'Se estira en fibra de erbio.'],
+        ['er_fibre', 'Erbium Fibre', 'Fibra de erbio', 'Gain fibre for telecom amplifiers.', 'Fibra de ganancia para amplificadores telecom.', 'Coiled with a ytterbium fibre lead.', 'Se enrolla con un cable de fibra de iterbio.'],
+        ['er_fibre_coil', 'Erbium Fibre Coil', 'Bobina de fibra de erbio', 'A coil of gain fibre with its lead spliced on.', 'Una bobina de fibra de ganancia con su cable empalmado.', 'Pumped by two InGaAs pump modules.', 'Se bombea con dos módulos de bombeo de InGaAs.'],
+        ['pumped_edfa', 'Pumped EDFA', 'EDFA bombeado', 'An erbium-doped fibre amplifier for telecom light.', 'Un amplificador de fibra dopada con erbio para luz telecom.', 'Keeps the telecom memory network alive.', 'Mantiene viva la red de memorias telecom.']
     ]
 
     ITEMS.forEach(function (i) {

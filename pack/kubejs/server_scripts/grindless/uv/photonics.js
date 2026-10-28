@@ -163,7 +163,11 @@
       fluidsOut: [fluid('gtceu:hydrochloric_acid', 4000)], eut: 122880, duration: 600 },
     // UIV-A6 (docs/eras/uiv.md, line 16): the Er:YSO slab spliced to ytterbium fibre becomes the telecom memory
     { name: 'er_yso_pigtail', type: 'fibre_draw', circuit: 10, itemsIn: [item('grindless:telecom_memory_slab', 1), item('grindless:ytterbium_fibre', 2)],
-      fluidsIn: [], itemsOut: [item('grindless:telecom_memory', 1)], fluidsOut: [], eut: 122880, duration: 400 }
+      fluidsIn: [], itemsOut: [item('grindless:telecom_memory', 1)], fluidsOut: [], eut: 122880, duration: 400 },
+    // UIV-A6 (docs/eras/uiv.md, line 44): an erbium-doped preform deposited from SiCl4, Al and the ErCl3 solution; the chlorine goes on to the cascade
+    { name: 'er_mcvd_preform', type: 'fibre_draw', circuit: 11, itemsIn: [item('gtca:silicon_tetrachloride_dust', 5), item('gtceu:aluminium_dust', 1)],
+      fluidsIn: [fluid('gtceu:erbium_chloride_solution', 100), fluid('gtceu:oxygen', 3700)], itemsOut: [item('grindless:er_preform', 1)],
+      fluidsOut: [fluid('gtceu:chlorine', 4400)], eut: 122880, duration: 600 }
   ]
 
   // side steps on GTM's own machines

@@ -67,7 +67,10 @@
       fluidsIn: [fluid(SUPERFLUID, 4000)], itemsOut: [item(CRYOMODULE, 1)], fluidsOut: [], eut: VA, duration: 600 },
     // UIV-A2 (docs/eras/uiv.md, line 1): liquid para-H2 frozen in a superfluid helium bath into the solid target the pulser compresses
     { name: 'para_h2_target', type: 'srf_cavity', circuit: 5, itemsIn: [], fluidsIn: [fluid('gtceu:liquid_para_hydrogen', 1000), fluid(SUPERFLUID, 100)],
-      itemsOut: [item('grindless:solid_para_h2_target', 1)], fluidsOut: [fluid('gtceu:helium', 100)], eut: VA, duration: 400 }
+      itemsOut: [item('grindless:solid_para_h2_target', 1)], fluidsOut: [fluid('gtceu:helium', 100)], eut: VA, duration: 400 },
+    // UIV-A6 (docs/eras/uiv.md, line 44): the He-3 concentrate diluted with He-4 into the dilution refrigerator's mixture charge
+    { name: 'he3_he4_mixture', type: 'superfluid_helium', circuit: null, itemsIn: [], fluidsIn: [fluid('gtceu:helium_3_concentrate', 200)],
+      itemsOut: [], fluidsOut: [fluid('gtceu:he3_he4_mixture', 200)], eut: VA, duration: 200 }
   ]
 
   // side steps on GTM's own machines

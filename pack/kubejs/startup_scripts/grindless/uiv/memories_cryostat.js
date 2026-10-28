@@ -7,8 +7,10 @@
 //   gtceu:spectral_hole_burner   5 x 5 x 5 in grindless:cryostat_casing, UIV (31,457,280 EU/t). Burns atomic-frequency combs into rare-earth
 //                                YSO slabs held in superfluid helium. Recipe type gtceu:spectral_hole_burning (circuit 1 six-hour
 //                                memory slab, 2 telecom memory slab).
+//   gtceu:millikelvin_cryostat_works   5 x 7 x 5 in cryostat casing with a belt of grindless:metallic_hydrogen_coil_block, UIV. Recipe type
+//                                gtceu:nuclear_demagnetisation (circuit 1 nuclear stage, 2 mK cryostat module, 3 characterised P:Si processor).
 //
-// New ids: the items below (grindless:). Textures: tools/assets/Build-UIVMemoriesCryostatTextures.ps1.
+// New ids: the items below (grindless:) and the fluids gtceu:he3_he4_mixture and gtceu:erbium_chloride_solution. Textures: tools/assets/Build-UIVMemoriesCryostatTextures.ps1.
 // Names: client_scripts/grindless/uiv_memories_cryostat_lang.js. Published for the recipe script: global.grindless.memoriesCryostat.
 (function () {
   const G = global.grindless
@@ -28,10 +30,20 @@
     er_yso_slab: { stack: 32 },
     six_hour_memory_slab: { stack: 16 },
     telecom_memory_slab: { stack: 16 },
-    six_hour_memory: { stack: 16 }
+    six_hour_memory: { stack: 16 },
+    nuclear_stage: { stack: 16 },
+    cold_plate: { stack: 32 },
+    p_si_processor: { stack: 16 },
+    er_preform: { stack: 16 },
+    er_fibre: { stack: 32 },
+    er_fibre_coil: { stack: 16 },
+    pumped_edfa: { stack: 16 }
   }
 
-  MC.fluids = {}
+  MC.fluids = {
+    'gtceu:he3_he4_mixture': { colour: 0xC8E8F8, formula: '3He/4He' },
+    'gtceu:erbium_chloride_solution': { colour: 0xF0A8C0, formula: 'ErCl3(aq)' }
+  }
 
   // items in include the programmed circuit
   MC.machines = [
@@ -40,6 +52,12 @@
       lang: 'Spectral Hole Burner',
       maxIO: { itemsIn: 2, itemsOut: 1, fluidsIn: 1, fluidsOut: 0 },
       width: 5, height: 5, depth: 5, casing: CRYO, texture: CRYO_TEXTURE, magnet: null
+    },
+    {
+      name: 'millikelvin_cryostat_works', machine: 'gtceu:millikelvin_cryostat_works', type: 'nuclear_demagnetisation', dataKey: 'grindless_nuclear_demagnetisation',
+      lang: 'Millikelvin Cryostat Works',
+      maxIO: { itemsIn: 3, itemsOut: 1, fluidsIn: 1, fluidsOut: 1 },
+      width: 5, height: 7, depth: 5, casing: CRYO, texture: CRYO_TEXTURE, magnet: 'grindless:metallic_hydrogen_coil_block'
     }
   ]
 
