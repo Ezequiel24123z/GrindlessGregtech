@@ -101,6 +101,39 @@
       itemsOut: [{ id: LANTHANUM, count: 2 }],
       fluidsOut: [{ id: 'gtceu:carbon_monoxide', amount: 3000 }],
       eut: ZPM_VA, duration: 20
+    },
+    // UIV-A1: the four heavier rare-earth metals, the same lanthanum reduction (circuits 6-9; the lanthanum loops through circuit 5)
+    {
+      name: 'terbium_reduction', circuit: 6,
+      itemsIn: [{ id: 'grindless:terbium_oxide_dust', count: 1 }, { id: LANTHANUM, count: 2 }],
+      fluidsIn: [], notConsumed: [],
+      itemsOut: [{ id: 'gtceu:terbium_dust', count: 2 }, { id: LA_OXIDE, count: 1 }],
+      fluidsOut: [],
+      eut: ZPM_VA, duration: 20
+    },
+    {
+      name: 'gadolinium_reduction', circuit: 7,
+      itemsIn: [{ id: 'gtceu:gadolinium_oxide_dust', count: 1 }, { id: LANTHANUM, count: 2 }],
+      fluidsIn: [], notConsumed: [],
+      itemsOut: [{ id: 'gtceu:gadolinium_dust', count: 2 }, { id: LA_OXIDE, count: 1 }],
+      fluidsOut: [],
+      eut: ZPM_VA, duration: 20
+    },
+    {
+      name: 'erbium_reduction', circuit: 8,
+      itemsIn: [{ id: 'gtceu:erbium_oxide_dust', count: 1 }, { id: LANTHANUM, count: 2 }],
+      fluidsIn: [], notConsumed: [],
+      itemsOut: [{ id: 'gtceu:erbium_dust', count: 2 }, { id: LA_OXIDE, count: 1 }],
+      fluidsOut: [],
+      eut: ZPM_VA, duration: 20
+    },
+    {
+      name: 'praseodymium_reduction', circuit: 9,
+      itemsIn: [{ id: 'gtceu:praseodymium_oxide_dust', count: 1 }, { id: LANTHANUM, count: 2 }],
+      fluidsIn: [], notConsumed: [],
+      itemsOut: [{ id: 'gtceu:praseodymium_dust', count: 2 }, { id: LA_OXIDE, count: 1 }],
+      fluidsOut: [],
+      eut: ZPM_VA, duration: 20
     }
   ]
 

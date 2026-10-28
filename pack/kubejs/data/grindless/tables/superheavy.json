@@ -95,6 +95,22 @@
           "fluidsIn": [{ "id": "gtceu:xenon", "amount": 1000 }],
           "itemsOut": [{ "id": "grindless:ion_tracked_foil", "count": 4 }],
           "fluidsOut": [{ "id": "gtceu:xenon", "amount": 900 }]
+        },
+        {
+          "_": "UIV-A1: element 120, a titanium-50 beam on a californium-249 wheel; the activated wheel goes back to the hot cell",
+          "name": "element_120",
+          "circuit": 7,
+          "eut": 7864320,
+          "duration": 48000,
+          "itemsIn": [
+            { "id": "grindless:cf249_target_wheel", "count": 1 },
+            { "id": "grindless:ti50_oven_charge", "count": 1 }
+          ],
+          "kept": [{ "id": "grindless:nb3sn_srf_cavity", "count": 1 }],
+          "charge": [{ "id": "gtceu:helium", "amount": 1000 }],
+          "fluidsIn": [],
+          "itemsOut": [{ "id": "grindless:activated_target_wheel", "count": 1 }],
+          "fluidsOut": [{ "id": "gtceu:element_120_recoil_gas", "amount": 1000 }]
         }
       ]
     },
@@ -159,6 +175,19 @@
           "charge": [],
           "fluidsIn": [{ "id": "gtceu:moscovium_recoil_gas", "amount": 1000 }],
           "itemsOut": [{ "id": "grindless:moscovium_atoms", "count": 1 }],
+          "fluidsOut": [{ "id": "gtceu:helium", "amount": 1000 }]
+        },
+        {
+          "_": "UIV-A1: element 120 collected from its recoil gas",
+          "name": "element_120",
+          "circuit": 6,
+          "eut": 3932160,
+          "duration": 2400,
+          "itemsIn": [{ "id": "grindless:etched_membrane", "count": 1 }],
+          "kept": [],
+          "charge": [],
+          "fluidsIn": [{ "id": "gtceu:element_120_recoil_gas", "amount": 1000 }],
+          "itemsOut": [{ "id": "grindless:element_120_recoil", "count": 1 }],
           "fluidsOut": [{ "id": "gtceu:helium", "amount": 1000 }]
         }
       ]
