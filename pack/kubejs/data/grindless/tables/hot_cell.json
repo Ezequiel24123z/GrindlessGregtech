@@ -180,6 +180,46 @@
         { "id": "gtceu:nickel_dust", "count": 3 }
       ],
       "fluidsOut": [{ "id": "gtceu:carbon_monoxide", "amount": 16000 }]
+    },
+    {
+      "name": "californium_252_store",
+      "circuit": 8,
+      "eut": 7680,
+      "duration": 6000,
+      "itemsIn": [{ "id": "grindless:californium_252", "count": 1 }],
+      "fluidsIn": [],
+      "itemsOut": [{ "id": "gtceu:curium_248_dust", "count": 1 }],
+      "fluidsOut": []
+    },
+    {
+      "name": "berkelium_249_store",
+      "circuit": 9,
+      "eut": 7680,
+      "duration": 6000,
+      "itemsIn": [{ "id": "grindless:berkelium_249", "count": 1 }],
+      "fluidsIn": [],
+      "itemsOut": [{ "id": "gtceu:californium_249_dust", "count": 1 }],
+      "fluidsOut": []
+    },
+    {
+      "name": "tritium_store",
+      "circuit": 10,
+      "eut": 7680,
+      "duration": 2400,
+      "itemsIn": [],
+      "fluidsIn": [{ "id": "gtceu:tritium", "amount": 1000 }],
+      "itemsOut": [],
+      "fluidsOut": [{ "id": "gtceu:helium_3", "amount": 1000 }]
+    },
+    {
+      "name": "target_wheel_return",
+      "circuit": 11,
+      "eut": 7680,
+      "duration": 1200,
+      "itemsIn": [{ "id": "grindless:activated_target_wheel", "count": 1 }],
+      "fluidsIn": [],
+      "itemsOut": [{ "id": "grindless:target_wheel_blank", "count": 1 }],
+      "fluidsOut": []
     }
   ]
 }
