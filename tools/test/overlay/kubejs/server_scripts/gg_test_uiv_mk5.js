@@ -224,6 +224,7 @@
   // ---------------------------------------------------------------- the proton source
   function srcBuild(u) {
     var inB = 0
+    var outB = 0
     var inH = 0
     var en = 0
     var outH = 0
@@ -231,8 +232,9 @@
       if (c.sym.kind !== 'oneOf' || c.ch !== 'X') return null
       if (en < 1) { en++; return 'gtceu:uiv_energy_input_hatch' }
       if (inB < 1) { inB++; return 'gtceu:hv_input_bus' }
+      if (outB < 1) { outB++; return 'gtceu:hv_output_bus' }
       if (inH < 1) { inH++; return 'gtceu:hv_input_hatch' }
-      if (outH < 1) { outH++; return 'gtceu:hv_output_hatch' }
+      if (outH < 2) { outH++; return 'gtceu:hv_output_hatch' }
       return null
     }))
   }
