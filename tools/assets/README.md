@@ -1618,3 +1618,12 @@ Procedural, drawn by `Build-UIVTravelTextures.ps1`; nothing is copied from anoth
 powershell -NoProfile -ExecutionPolicy Bypass -File tools\assets\Build-UIVTravelTextures.ps1
 powershell -NoProfile -ExecutionPolicy Bypass -File tools\assets\Build-UIVTravelTextures.ps1 -Credits
 ```
+
+## UIV PSR J0437 machines and the positronium line (UIV-B3)
+
+Procedural, drawn by `Build-UIVJ0437Textures.ps1`; nothing is copied from another mod. Front overlays (idle, animated active and emissive) for the pulsar wind trap, the positronium condensate lab and the X-ray pulse profiler, and thirteen item icons (`item/<id>.png`): the cooled positron bunch, the Ps-converter aerogel and positronium in it, laser-cooled positronium, the Ps BEC, the gamma laser cavity, the three C-12 Bragg plates (HPHT, (004) cut, ion-milled), the gamma Bragg mirror, the solid and annealed neon cones and the neon moderator cartridge.
+
+```powershell
+powershell -NoProfile -ExecutionPolicy Bypass -File tools\assets\Build-UIVJ0437Textures.ps1
+powershell -NoProfile -ExecutionPolicy Bypass -File tools\assets\Build-UIVJ0437Textures.ps1 -Credits
+```

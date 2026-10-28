@@ -1,3 +1,4 @@
+// priority: 3090
 // Gregtech Grindless - names and tooltips of UIV's PSR J0437-4715 machines (startup_scripts/grindless/uiv/j0437.js; package UIV-B3):
 //
 //   block.gtceu.<machine>, gtceu.<type>                machine and recipe type names
