@@ -1,3 +1,4 @@
+// priority: -7659
 // Gregtech Grindless - native fixture of package UEV-C3 (TEST-ONLY overlay, never shipped): the gate example of docs/eras/uev.md
 // ("Power on the wireless network") on the wireless network at UEV, the ten stations with the Barnard base, and a save mark read back
 // after a restart.
@@ -417,6 +418,10 @@
     S = { server: server, earth: server.overworld(), tick0: server.getTickCount(), t: 0, phase: 'start', phaseAt: 0, finished: false, areaTouched: false,
       reported: {}, stopReason: '', dynamo: [], loadMode: 'real' }
     guarded('registry', checkRegistry)
+    guarded('high_tier_content', function () {
+      var v = Java.loadClass('com.gregtechceu.gtceu.config.ConfigHolder').INSTANCE.machines.highTierContent
+      check('high_tier_content', String(v) === 'false', 'machines.highTierContent = ' + v + ' (pack/config/gtceu.yaml keeps it off; want false)')
+    })
     var w = W()
     w.paused = true
     S.pausedByUs = true
