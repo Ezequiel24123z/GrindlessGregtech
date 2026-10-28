@@ -97,19 +97,21 @@
     }
   }
 
-  // the spike of S0-6, slices back to front, three rows each: energy cells above and below, the fuel in at the left and out at the right
+  // the spike of S0-6, slices back to front, three rows each: the HfTaCN coil (UEV-A5) wraps the plasma channel, energy cells around it,
+  // the fuel in at the left and out at the right. At most 16 energy hatches, as GTM's rings: 16 x 160,000,000 = 2,560,000,000 EU buffer
   UF.ring.spec = {
     slices: [
-      ['EEEEE', 'CCCCC', 'EEEEE'],
-      ['EEEEE', 'I###C', 'EEEEE'],
-      ['EEEEE', 'I###C', 'EEEEE'],
-      ['EEEEE', 'C###O', 'EEEEE'],
+      ['EEEEE', 'CKKKC', 'EEEEE'],
+      ['EKKKE', 'I###C', 'EKKKE'],
+      ['EKKKE', 'I###C', 'EKKKE'],
+      ['EKKKE', 'C###O', 'EKKKE'],
       ['EEEEE', 'CCSCC', 'EEEEE']
     ],
     symbols: {
       S: Pat.controller(),
       C: Pat.block(CASING),
-      E: Pat.oneOf(Pat.block(CASING), Pat.part('energy_input', { min: 1 })),
+      K: Pat.block('grindless:hftacn_coil_block'),
+      E: Pat.oneOf(Pat.block(CASING), Pat.part('energy_input', { min: 1, max: 16 })),
       I: Pat.oneOf(Pat.block(CASING), Pat.part('input_hatch', { min: 1, max: 3 })),
       O: Pat.oneOf(Pat.block(CASING), Pat.part('output_hatch', { min: 1, max: 3 })),
       '#': Pat.air()

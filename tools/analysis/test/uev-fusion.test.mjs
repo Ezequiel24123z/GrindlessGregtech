@@ -29,8 +29,18 @@ test('the three Mk4 rows are premixed: one fluid in, plasma out, under the tier-
     assert.equal(r.itemsIn.length, 0);
     assert.ok(r.eut < 8388608);
     assert.ok(r.start >= 1e9);
+    assert.ok(r.start <= 16 * 160000000, 'a start above 16 hatches x 160,000,000 EU never fits the tier-10 buffer');
   });
   assert.ok(by(rs, 'uev_pb11').start > 2 ** 31, 'c2 starts above the int maximum');
+});
+
+test('the Mk4 casing is assembled from the Mk3 casing and UEV-A5 composites; the ring caps energy hatches at 16 and uses the HfTaCN coil', () => {
+  const c = T.casing;
+  assert.equal(c.output, 'grindless:uev_fusion_casing');
+  assert.deepEqual(c.itemsIn.map((x) => x.id), ['gtceu:fusion_casing_mk3', 'grindless:wf_w_tile', 'grindless:sic_sic_plate']);
+  const startup = read('startup_scripts', 'grindless', 'uev', 'fusion.js');
+  assert.ok(startup.includes("Pat.part('energy_input', { min: 1, max: 16 })"));
+  assert.ok(startup.includes("Pat.block('grindless:hftacn_coil_block')"));
 });
 
 test('the converter returns 16,777,216, 12,582,912 and 25,165,824 EU/t at 128 parallels', () => {
