@@ -1,0 +1,5 @@
+{
+  "type": "emi:info",
+  "stacks": ["item:grindless:uev_fusion_casing"],
+  "text": ["emi.grindless.info.uev_fusion_casing.0"]
+}

@@ -163,9 +163,10 @@ test('line 22: CO -> C-12 monoxide (Saturn orbit) -> methanation -> C-12 methane
   const spreader = by('diamond_cvd', 'c12_diamond_spreader');
   assert.ok(inputs(spreader).includes('gtceu:carbon_12_methane'));
   assert.deepEqual(producers('grindless:c12_diamond_spreader').map(([, r]) => r.name), ['c12_diamond_spreader']);
-  // ZPM's own isotope column rows (helium-3, deuterium) and diamond lattice fab rows keep their circuits and fluids
+  // ZPM's own isotope column rows (helium-3, deuterium) and diamond lattice fab rows keep their circuits and fluids; UEV-A7 adds boron-11 trifluoride
   const col = SS.recipes.filter((r) => r.type === 'cryogenic_isotope_separation');
-  assert.deepEqual(col.map((r) => [r.name, r.circuit, ids(r.fluidsIn)]), [['helium_three', 1, ['gtceu:saturn_helium']], ['deuterium', 2, ['gtceu:hydrogen']]]);
+  assert.deepEqual(col.map((r) => [r.name, r.circuit, ids(r.fluidsIn)]), [['helium_three', 1, ['gtceu:saturn_helium']], ['deuterium', 2, ['gtceu:hydrogen']],
+    ['boron_11_trifluoride', 20, ['gtceu:boron_trifluoride']]]);
   // UEV-A3 adds the nanodiamond row at circuit 7
   assert.deepEqual(Q.recipes.filter((r) => r.type === 'diamond_cvd').map((r) => r.circuit), [1, 2, 3, 4, 7]);
 });

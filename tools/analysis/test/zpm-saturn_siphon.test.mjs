@@ -55,7 +55,8 @@ test('the patterns: one controller in the front slice, uniform size, a symbol fo
 });
 
 test('the six recipes: Saturn orbit only, one circuit per type slot, ZPM VA, whole numbers', () => {
-  assert.equal(SS.recipes.length, 6);
+  // UEV-A7 adds the boron-11 trifluoride row
+  assert.equal(SS.recipes.length, 7);
   const seen = new Set();
   for (const p of SS.recipes) {
     const r = byId(p.recipeId);
