@@ -129,6 +129,22 @@
     eut: 491520, duration: 600
   })
 
+  // UIV-A10 (uiv.md lines 21 and 43): C-12 CVD diamond from the methanated fusion ash (diamond_cvd circuit 8), and its boron doping (ion_implantation circuit 7)
+  TABLE.push({
+    name: 'c12_cvd_plate', type: 'diamond_cvd', circuit: 8,
+    itemsIn: [], notConsumedItems: [SEED],
+    fluidsIn: [{ id: 'gtceu:carbon_12_methane', amount: 1000 }, { id: 'gtceu:hydrogen', amount: 10000 }],
+    itemsOut: [{ id: 'grindless:c12_cvd_plate', count: 1 }], fluidsOut: [{ id: 'gtceu:hydrogen', amount: 9500 }],
+    eut: 491520, duration: 1200
+  })
+  TABLE.push({
+    name: 'c12_boron_diamond', type: 'ion_implantation', circuit: 7,
+    itemsIn: [{ id: 'grindless:c12_cvd_plate', count: 1 }, { id: 'gtceu:boron_dust', count: 1 }], notConsumedItems: [],
+    fluidsIn: [],
+    itemsOut: [{ id: 'grindless:c12_boron_diamond', count: 1 }], fluidsOut: [],
+    eut: 491520, duration: 600
+  })
+
   Q.recipes = TABLE.map(function (t) {
     return {
       name: t.name, type: t.type, recipeId: 'grindless:' + t.type + '/' + t.name, circuit: t.circuit,
