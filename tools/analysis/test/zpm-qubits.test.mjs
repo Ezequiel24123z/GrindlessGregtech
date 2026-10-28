@@ -46,14 +46,15 @@ test('registration: three recipe types, three machines, one pattern each with on
   assert.deepEqual(dims('qubit_fab'), [5, 5, 9]);
 });
 
-test('the chain recipes (nine, plus UEV-A3\'s nanodiamond row): one circuit per recipe in its type, ZPM VA or less, fits the IO sizes', () => {
-  assert.equal(Q.recipes.length, 10);
+test('the chain recipes (nine, plus UEV-A3\'s nanodiamond row and UIV-A5\'s H-implanted Si-28 wafer): one circuit per recipe in its type, ZPM VA or less, fits the IO sizes', () => {
+  assert.equal(Q.recipes.length, 11);
   for (const p of Q.recipes) {
     const r = byId(p.recipeId);
     assert.ok(r, p.recipeId + ' added');
     assert.equal(r.t, 'gtceu:' + p.type);
     assert.deepEqual(r.j.inputs.item.filter((i) => i.content.type === 'gtceu:circuit').map((i) => i.content.configuration), [p.circuit]);
-    assert.ok(p.eut <= ZPM_VA && Number.isInteger(p.duration));
+    // UIV-A5's implanter row runs at 491,520 EU/t, as UHV's implanter rows c3-c4 in tables/photonics.json do
+    assert.ok(p.eut <= (p.name === 'h_si28_wafer' ? 491520 : ZPM_VA) && Number.isInteger(p.duration), p.name);
   }
   for (const t of TYPES) {
     const circuits = Q.recipes.filter((r) => r.type === t).map((r) => r.circuit);

@@ -1,4 +1,4 @@
-// priority: 3348
+// priority: 3340
 // Gregtech Grindless - names and tooltips of UIV's ramp-compression pulser (startup_scripts/grindless/uiv/metallic_hydrogen.js; package UIV-A2):
 //
 //   block.gtceu.ramp_compression_pulser, gtceu.ramp_compression   machine and recipe type names

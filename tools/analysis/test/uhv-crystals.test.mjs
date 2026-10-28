@@ -18,8 +18,8 @@ const ASM = T.types.assembler.recipes;
 const PGM = T.types.pgm_refining.recipes;
 const startup = fs.readFileSync(path.join(kube, 'startup_scripts', 'grindless', 'uhv', 'crystals.js'), 'utf8');
 const server = fs.readFileSync(path.join(kube, 'server_scripts', 'grindless', 'uhv', 'crystals.js'), 'utf8');
-// UEV-A8's TGG and KTP rows keep their lang keys in the UEV file
-const lang = ['uhv_crystals_lang.js', 'uev_earth_orbit_lang.js'].map((f) => fs.readFileSync(path.join(kube, 'client_scripts', 'grindless', f), 'utf8')).join('\n');
+// UEV-A8's TGG and KTP rows keep their lang keys in the UEV file; UIV-A6's Eu-151 and Er:YSO rows in the UIV file
+const lang = ['uhv_crystals_lang.js', 'uev_earth_orbit_lang.js', 'uiv_memories_cryostat_lang.js'].map((f) => fs.readFileSync(path.join(kube, 'client_scripts', 'grindless', f), 'utf8')).join('\n');
 
 const ids = (xs) => (Array.isArray(xs) ? xs : []).map((x) => x.id);
 const inputs = (r) => ids(r.itemsIn).concat(ids(r.kept), ids(r.fluidsIn), ids(r.charge));
@@ -31,8 +31,8 @@ const by = (rs, name) => {
 };
 const CRUCIBLE = 'grindless:iridium_crucible';
 const WORN = 'grindless:worn_iridium_crucible';
-// tgg and ktp: UEV-A8 rows (docs/eras/uev.md, A8)
-const BOULES = ['grindless:lithium_niobate_boule', 'grindless:vuv_caf2_boule', 'grindless:thorium_caf2_crystal', 'grindless:eu_yso_boule', 'grindless:inp_boule', 'grindless:tgg_boule', 'grindless:ktp_boule'];
+// tgg and ktp: UEV-A8 rows (docs/eras/uev.md, A8); eu151_yso and er_yso: UIV-A6 rows (docs/eras/uiv.md lines 15-16)
+const BOULES = ['grindless:lithium_niobate_boule', 'grindless:vuv_caf2_boule', 'grindless:thorium_caf2_crystal', 'grindless:eu_yso_boule', 'grindless:inp_boule', 'grindless:tgg_boule', 'grindless:ktp_boule', 'grindless:eu151_yso_boule', 'grindless:er_yso_boule'];
 
 // every recipe-producing row of every table, as [table/path, recipe]
 function allRows() {
@@ -112,7 +112,7 @@ test('the nuclear clock comes only from the lab; the comb from the lab\'s circui
   assert.deepEqual(producers('grindless:vuv_caf2_optic').map(([, r]) => r.name), ['vuv_caf2_optics']);
 });
 
-test('the seven boules each have their own circuit and a single maker; thorium-229 is used here, made only by the decay store', () => {
+test('the nine boules each have their own circuit and a single maker; thorium-229 is used here, made only by the decay store', () => {
   const circuits = BOULES.map((id) => {
     const p = producers(id);
     assert.equal(p.length, 1, id);

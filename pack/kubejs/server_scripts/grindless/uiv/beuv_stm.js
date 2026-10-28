@@ -1,3 +1,4 @@
+// priority: -24536
 // -----------------------------------------------------------------------------------------------
 // Recipes of UIV's BEUV scanner and STM lithography cell (machines and recipe types: startup_scripts/grindless/uiv/beuv_stm.js;
 // docs/eras/uiv.md, machines 5 and 7, lines 11 (up to the overgrown P:Si die), 13 and 14; package UIV-A5), generated at every server

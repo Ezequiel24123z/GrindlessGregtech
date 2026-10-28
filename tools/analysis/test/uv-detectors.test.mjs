@@ -85,8 +85,9 @@ test('each machine: unique circuits, whole numbers, UV VA at most, every row in 
       assert.deepEqual(circuitOf(rec), r.circuit === null ? [] : [r.circuit], r.name);
     }
   }
+  // UIV-A5 appended the Si-28 float-zone ingot (c6) and the donor regrow (c7); circuits 4-5 are UEV's rows in uev/photonics.js
   assert.deepEqual(D.recipes.filter((r) => r.type === 'zone_refining').map((r) => [r.name, r.circuit]),
-    [['germanium_tetrachloride', 1], ['germanium_reduction', 2], ['hpge_crystal', 3]]);
+    [['germanium_tetrachloride', 1], ['germanium_reduction', 2], ['hpge_crystal', 3], ['si28_fz_ingot', 6], ['si28_donor_regrow', 7]]);
   for (const id of [D.crafting.tower, D.crafting.station]) assert.ok(recipes.find((x) => x.i === id), id);
 });
 
