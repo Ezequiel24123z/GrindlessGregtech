@@ -493,6 +493,16 @@ export const QUESTS = [
     rewards: [xp(150), ri('gtceu:data_orb', 2)],
   },
   {
+    key: 'XAL', title: 'Any Order', icon: 'extendedfeatures:expanded_assembly_line', shape: 'gear', size: 1.25,
+    deps: ['ORB'], x: 26, y: 3,
+    desc: [
+      'The &6Expanded Assembly Line&r runs the normal line\'s recipes in any input order. It is built in the normal Assembly Line, which takes the old controller as an ingredient.',
+      'Research data reaches it only through a wireless data receptor, linked to a transmissor in a Matrix Data Relay that holds your data access hatches.',
+    ],
+    tasks: [it('extendedfeatures:expanded_assembly_line'), it('extendedfeatures:matrix_data_relay')],
+    rewards: [xp(100), ri('gtceu:data_stick', 2)],
+  },
+  {
     key: 'MCC', title: 'Chemical Complex', icon: 'gtceu:mega_chemical_complex', shape: 'gear', size: 1.25,
     deps: ['WIND'], x: 8, y: 3,
     desc: [

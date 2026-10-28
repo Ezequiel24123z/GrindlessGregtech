@@ -1286,6 +1286,14 @@ Chapter **"LuV — The Outer System"**: in English, about 40 small-reward quests
 - the space and fusion quests of Star Technology (MIT) and Monifactory (LGPL), adapted with attribution;
 - GTNH and GT Leisure: ideas only.
 
+## Expanded Assembly Line (QR-G0)
+
+`extendedfeatures:expanded_assembly_line` (GTM Extended Features 3.0.0) is the order-free Assembly Line: same `gtceu:assembly_line` recipes, inputs may sit in any bus. It is available at LuV and made in the normal `gtceu:assembly_line` (30,720 EU/t, 600 t) from the normal controller, a LuV hull, robot arms, conveyors, a LuV input bus, LuV circuits, soldering alloy and lubricant, so the normal line comes first.
+
+- **Data path.** Its structure has no slot for GTM's data access hatch; the wireless optical receptor is mandatory. Research data comes receptor -> transmissor (inside a Matrix Data Relay) -> a data access hatch in the relay holding the stick; the transmissor's scan links them. LuV receptor, LuV transmissor and the relay are assembly-line recipes at LuV. The relay needs 131,072 EU/t for the LuV transmissor plus the data bank's draw, and 144 mB/s PCB coolant (`gtceu:mixer/pcb_coolant`, available at LuV).
+- **Differences from the normal line.** Subtick parallels and batching, AE2 stocking hatch support, a mandatory receptor, no maintenance. Parallels and batching are the strong part; if play shows they outrun the normal line, cap them by raising these recipes' cost (more LuV circuits, or a ZPM part) rather than touching Java.
+- ZPM, UV and UHV variants of the addon parts stay recipe-less.
+
 ## Gate to ZPM
 
 No passive waits (decision 12): every row is something built or run.
