@@ -1,3 +1,4 @@
+// priority: -4950
 // -----------------------------------------------------------------------------------------------
 // LV Wire Works, gtceu:wire_works (package MEGA-1, docs/eras/mega.md 4.3): the first mega of the family. A steel hall that runs GTM's
 // own wiremill and bender recipes, one mode at a time (the player picks it in the controller's machine mode tab), with up to 8

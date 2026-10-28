@@ -1169,3 +1169,16 @@ powershell -NoProfile -ExecutionPolicy Bypass -File tools\assets\Build-UHVParall
 | File (under `textures/`) | Notes |
 |---|---|
 | `block/machines/uhv_parallel_hatch/overlay_front*.png` | A dark panel with four parallel bars of the UHV colour; active, the bars brighten from the top down. |
+
+## LV Wire Works (MEGA-1)
+
+Procedural, drawn by `Build-MegaWireWorksTextures.ps1`; nothing is copied from another mod. The controller face of `gtceu:wire_works` (wiremill and bender modes, up to 8 parallels, energy-bound); still, active and emissive frames.
+
+```powershell
+powershell -NoProfile -ExecutionPolicy Bypass -File tools\assets\Build-MegaWireWorksTextures.ps1
+powershell -NoProfile -ExecutionPolicy Bypass -File tools\assets\Build-MegaWireWorksTextures.ps1 -Credits
+```
+
+| File (under `textures/`) | Notes |
+|---|---|
+| `block/multiblock/wire_works/overlay_front*.png` | The Wire Works controller face: still, active and active emissive. |

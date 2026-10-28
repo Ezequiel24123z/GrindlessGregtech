@@ -1,3 +1,4 @@
+// priority: -19474
 // -----------------------------------------------------------------------------------------------
 // Controller recipe of the LV Wire Works (startup_scripts/grindless/lv/mega_wire_works.js, docs/eras/mega.md 4.3, family rule 6): an
 // assembler recipe built from the machines it replaces, 4 LV wiremills + 4 LV benders, plus 4 LV circuits and 8 steel plates.

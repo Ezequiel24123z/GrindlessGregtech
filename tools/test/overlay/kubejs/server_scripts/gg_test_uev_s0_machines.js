@@ -1,3 +1,4 @@
+// priority: -7748
 // TEST ONLY, UEV-S0. Command: kubejs custom_command gg_test_uev_s0_machines
 // Band ONLY: X 30464-30527, Z 0-63, Overworld Y 70-100. Machines come from startup_scripts/gg_test_uev_s0_parts.js (gated by its marker).
 //   s0_1_*  the UEV hull and hatches form in gtceu:gg_uev_s0_frame (2 A and 16 A) and in gtceu:assembly_line; the hull is placed and read

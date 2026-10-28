@@ -1,3 +1,4 @@
+// priority: -450
 // TEST ONLY (bench overlay, never shipped). UEV-S0 disposable registrations, off unless kubejs/config/gg_test_uev_s0.json says {"enabled": true}.
 //   S0-1  gtceu:uev_machine_hull, gtceu:uev_energy_input_hatch / _output_hatch (2 A) and the 16 A pair, with highTierContent off
 //   S0-2  grindless:s0_motor7 and grindless:s0_motor9 (createCustom GCYR motors, tiers 7 and 9)

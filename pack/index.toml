@@ -3437,6 +3437,18 @@ file = "kubejs/assets/grindless/textures/block/multiblock/weather_controller/ove
 hash = "e9b8025fde1b09b0a4d2a38427b04f98f28a593045be6d177eb2b29164c872b0"
 
 [[files]]
+file = "kubejs/assets/grindless/textures/block/multiblock/wire_works/overlay_front.png"
+hash = "b981e627526a7aebf3d757296500707f33dd3da0b47a6edb145c1b4d799f1bc5"
+
+[[files]]
+file = "kubejs/assets/grindless/textures/block/multiblock/wire_works/overlay_front_active.png"
+hash = "ed4ea48290d29775371d6cf4998f8f64a16695000ac1288d3d54c317de04dc24"
+
+[[files]]
+file = "kubejs/assets/grindless/textures/block/multiblock/wire_works/overlay_front_active_emissive.png"
+hash = "aa6938df41d80bdf70826ad87998f2581176569003023d65af2ee5eacf0476f3"
+
+[[files]]
 file = "kubejs/assets/grindless/textures/block/multiblock/wireless_energy_tower/overlay_front.png"
 hash = "6a2d14bc84a1f7db8984f3c9afea7ee1b75859c361fb1c655d9fc23c67d9bfce"
 
@@ -5321,6 +5333,10 @@ file = "kubejs/client_scripts/grindless/lv_creatures_lang.js"
 hash = "a483147a5cb01293e4d8181526b19ddca0ca9cd53d0b701c4daef5e7a05fa80a"
 
 [[files]]
+file = "kubejs/client_scripts/grindless/lv_mega_wire_works_lang.js"
+hash = "4338e3e4dbfacf41925c371fadf1c34ab842268d6435ca4c7378cfcb5faa5217"
+
+[[files]]
 file = "kubejs/client_scripts/grindless/lv_multis_lang.js"
 hash = "658638eacee46ffed403a906d5a1a72580589dd075eb12cde4bfb4b361df9ef2"
 
@@ -6353,6 +6369,10 @@ file = "kubejs/server_scripts/grindless/lv/heliostat_tower.js"
 hash = "47dc4885560cadf6304289497f2094d1b86bd42ccfb1f9fa0402ffa4a4f37512"
 
 [[files]]
+file = "kubejs/server_scripts/grindless/lv/mega_wire_works.js"
+hash = "a34aa1aed2c575ce6d1995e77f9bfa8c1aa54780929ae343e4637bee98f79b69"
+
+[[files]]
 file = "kubejs/server_scripts/grindless/lv/perlite.js"
 hash = "c1d8de6a4894578914b60dee1a63f9f31dda8161307c9913e24c606fb059165f"
 
@@ -6927,6 +6947,10 @@ hash = "fa9e43c496362a8da2c065c1e82ebe635870d7de87d8eeb5d052c36617f0754b"
 [[files]]
 file = "kubejs/startup_scripts/grindless/lv/heliostat_tower.js"
 hash = "011a2a60a9f6ddb58dd481b4ea19bd357e4ee81c46ba143f9830a97ba0b1a8f4"
+
+[[files]]
+file = "kubejs/startup_scripts/grindless/lv/mega_wire_works.js"
+hash = "ca847ab258959bc2af001856bb7437fb5b06524cb44062f1b44cce7d3560f990"
 
 [[files]]
 file = "kubejs/startup_scripts/grindless/lv/multis.js"

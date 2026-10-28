@@ -1,3 +1,4 @@
+// priority: -5799
 // TEST ONLY, MEGA-1 (gtceu:wire_works). Command: kubejs custom_command gg_test_mega_wire_works
 // Band ONLY: X 30720-30783, Z 0-63, Overworld Y 98-115.
 //   Two real Wire Works are placed (maintenance, one energy hatch, input and output bus); test recipes at 8 EU/t, 200 ticks, batch off:
