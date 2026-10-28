@@ -1,0 +1,5 @@
+{
+  "type": "emi:info",
+  "stacks": ["item:grindless:matrioshka_node", "item:grindless:matrioshka_logic_tile", "item:grindless:matrioshka_tpv_shell", "item:grindless:matrioshka_emitter_shell", "item:grindless:droplet_radiator_module"],
+  "text": ["emi.grindless.info.uiv_matrioshka.0"]
+}

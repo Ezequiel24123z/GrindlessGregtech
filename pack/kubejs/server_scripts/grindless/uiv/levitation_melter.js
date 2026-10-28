@@ -1,4 +1,4 @@
-// priority: -24586
+// priority: -24584
 // -----------------------------------------------------------------------------------------------
 // Recipes of UIV's levitation melter (machine and recipe type: startup_scripts/grindless/uiv/levitation_melter.js; docs/eras/uiv.md, machine 2,
 // lines 2, 4, 5, 7, 8, 9 and 39; package UIV-A3), generated at every server load from data/grindless/tables/levitation_melter.json, plus the

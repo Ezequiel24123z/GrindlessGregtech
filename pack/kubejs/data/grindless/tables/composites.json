@@ -48,7 +48,10 @@
           "itemsOut": [{ "id": "grindless:wf_w_tile", "count": 1 }], "fluidsOut": [{ "id": "gtceu:hydrofluoric_acid", "amount": 6000 }] },
         { "name": "w_preform_densify", "circuit": 3, "eut": 1966080, "duration": 4800,
           "itemsIn": [{ "id": "grindless:w_fibre_preform", "count": 1 }], "kept": [], "fluidsIn": [{ "id": "gtceu:tungsten_hexafluoride", "amount": 500 }, { "id": "gtceu:hydrogen", "amount": 1500 }], "charge": [],
-          "itemsOut": [{ "id": "grindless:densified_w_preform", "count": 1 }], "fluidsOut": [{ "id": "gtceu:hydrofluoric_acid", "amount": 3000 }] }
+          "itemsOut": [{ "id": "grindless:densified_w_preform", "count": 1 }], "fluidsOut": [{ "id": "gtceu:hydrofluoric_acid", "amount": 3000 }] },
+        { "_why": "UIV-A10, line 19: the 2PP lattice pyrolysed to glassy carbon in methane (circuit 4); the hydrogen goes back to stock.", "name": "glassy_carbon_lattice", "circuit": 4, "eut": 1966080, "duration": 4800,
+          "itemsIn": [{ "id": "grindless:lattice_2pp", "count": 1 }], "kept": [], "fluidsIn": [{ "id": "gtceu:methane", "amount": 1000 }], "charge": [],
+          "itemsOut": [{ "id": "grindless:glassy_carbon_lattice", "count": 1 }], "fluidsOut": [{ "id": "gtceu:hydrogen", "amount": 2000 }] }
       ]
     },
     "chemical_reactor": {

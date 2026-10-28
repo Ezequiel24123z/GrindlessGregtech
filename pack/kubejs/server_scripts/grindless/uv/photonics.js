@@ -167,7 +167,11 @@
     // UIV-A6 (docs/eras/uiv.md, line 44): an erbium-doped preform deposited from SiCl4, Al and the ErCl3 solution; the chlorine goes on to the cascade
     { name: 'er_mcvd_preform', type: 'fibre_draw', circuit: 11, itemsIn: [item('gtca:silicon_tetrachloride_dust', 5), item('gtceu:aluminium_dust', 1)],
       fluidsIn: [fluid('gtceu:erbium_chloride_solution', 100), fluid('gtceu:oxygen', 3700)], itemsOut: [item('grindless:er_preform', 1)],
-      fluidsOut: [fluid('gtceu:chlorine', 4400)], eut: 122880, duration: 600 }
+      fluidsOut: [fluid('gtceu:chlorine', 4400)], eut: 122880, duration: 600 },
+    // UIV-A10 (docs/eras/uiv.md, line 37): the InGaAsSb epi of the TPV cell, grown on a GaAs wafer from the mixed dust; the arsine and the stibine come back (scrubbed in the Matrioshka tables)
+    { name: 'ingaasb_epi', type: 'mocvd', circuit: 12, itemsIn: [item(GAAS_WAFER, 1), item('gtceu:ingaasb_dust', 1)],
+      fluidsIn: [fluid(ARSINE, 500), fluid('gtceu:stibine', 500)], itemsOut: [item('grindless:ingaasb_epi_wafer', 1)],
+      fluidsOut: [fluid('gtceu:hydrogen', 1500), fluid('gtceu:arsine', 250)], eut: 1966080, duration: 1200 }
   ]
 
   // side steps on GTM's own machines

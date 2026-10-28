@@ -83,6 +83,10 @@
   // UIV-A5: the boron carbide target of the BEUV mirror (circuit 5; the La/B4C multilayer is MBE circuit 5 in tables/photonics.json)
   TABLE.push(row('b4c_target', 'spark_plasma_sintering', 5, [item(B4C, 4)], [], [item('grindless:b4c_target', 1)], [], UHVA, 500))
 
+  // UIV-A10 (uiv.md lines 41 and 46): the niobium target of the Josephson trilayer (circuit 6) and the tungsten target of the photonic crystal (circuit 7)
+  TABLE.push(row('nb_target', 'spark_plasma_sintering', 6, [item('gtceu:niobium_dust', 4)], [], [item('grindless:nb_target', 1)], [], UHVA, 500))
+  TABLE.push(row('w_target', 'spark_plasma_sintering', 7, [item('gtceu:tungsten_dust', 4)], [], [item('grindless:w_target', 1)], [], UHVA, 500))
+
   var SIDE = [
     row('zirconia', 'electric_blast_furnace', null, [item(ZIRCON, 4)], [],
       [item(ZIRCONIA, 3), item('gtceu:silicon_dioxide_dust', 1)], [], IV, 400, 2100),

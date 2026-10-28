@@ -47,14 +47,14 @@ test('registration: three recipe types, three machines, one pattern each with on
 });
 
 test('the chain recipes (nine, plus UEV-A3\'s nanodiamond row and UIV-A5\'s H-implanted Si-28 wafer): one circuit per recipe in its type, ZPM VA or less, fits the IO sizes', () => {
-  assert.equal(Q.recipes.length, 11);
+  assert.equal(Q.recipes.length, 13); // UIV-A10 adds c12_cvd_plate and c12_boron_diamond
   for (const p of Q.recipes) {
     const r = byId(p.recipeId);
     assert.ok(r, p.recipeId + ' added');
     assert.equal(r.t, 'gtceu:' + p.type);
     assert.deepEqual(r.j.inputs.item.filter((i) => i.content.type === 'gtceu:circuit').map((i) => i.content.configuration), [p.circuit]);
     // UIV-A5's implanter row runs at 491,520 EU/t, as UHV's implanter rows c3-c4 in tables/photonics.json do
-    assert.ok(p.eut <= (p.name === 'h_si28_wafer' ? 491520 : ZPM_VA) && Number.isInteger(p.duration), p.name);
+    assert.ok(p.eut <= (['h_si28_wafer', 'c12_cvd_plate', 'c12_boron_diamond'].includes(p.name) ? 491520 : ZPM_VA) && Number.isInteger(p.duration), p.name);
   }
   for (const t of TYPES) {
     const circuits = Q.recipes.filter((r) => r.type === t).map((r) => r.circuit);
@@ -67,7 +67,7 @@ test('the chain recipes (nine, plus UEV-A3\'s nanodiamond row and UIV-A5\'s H-im
   const snspd = q.find((r) => r.name === 'snspd_array');
   assert.equal(snspd.circuit, 3);
   assert.deepEqual(snspd.itemsIn, [{ id: 'grindless:nbn_film_wafer', count: 1 }]);
-  const d = Q.recipes.filter((r) => r.type === 'diamond_cvd' && r.fluidsOut.length > 0 && r.name !== 'nanodiamond');
+  const d = Q.recipes.filter((r) => r.type === 'diamond_cvd' && r.fluidsOut.length > 0 && r.name !== 'nanodiamond' && r.name !== 'c12_cvd_plate'); // UIV-A10's c12_cvd_plate loops hydrogen too
   assert.equal(d.length, 2, 'the two diamond rows loop hydrogen; UV-A3\'s capsule rows (circuits 3, 4) return nothing');
   const nd = Q.recipes.find((r) => r.name === 'nanodiamond');
   assert.equal(nd.circuit, 7, 'UEV-A3\'s nanodiamond row: circuit 7 (UHV betavoltaics owns 5 and 6)');

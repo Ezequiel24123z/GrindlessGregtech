@@ -112,6 +112,11 @@
       [fluid('gtceu:sodium_potassium', 250)], [item(HEAT_PIPE, 1)], [], ZPM, 200)
   ]
 
+  // UIV-A10 (uiv.md, Matrioshka computer): the Mercury swarm's feed run that carries the two UIV works (31,457,280 EU/t each); 16 x 2,097,152 =
+  // 33,554,432 EU/t covers one Matrioshka computer plus part of a droplet radiator works. Circuit 4 (1-3 are taken)
+  ROWS.push(row('matrioshka_feed', STATION, 4, [item(SEGMENT, 16), item(POD, 16)], [], [item(WORN, 16), item(TANK, 16)], [], 16 * UHV_A, 6000,
+    gen([item(SEGMENT, 60), item(MAP, 1)])))
+
   function missingIds(r) {
     var missing = []
     var items = r.itemsIn.concat(r.itemsOut).concat(r.kept).map(function (x) { return x.id })
