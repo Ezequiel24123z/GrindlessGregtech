@@ -7802,7 +7802,7 @@ hash = "1f4b256531a0b42a6ecf399e9b692d9e4730bd4102e53aab3e1fa2c999b69e9d"
 
 [[files]]
 file = "kubejs/data/grindless/tables/hidden_until.json"
-hash = "dc15819fadf9dc2907f698572e9cb451577dc2e1790e1b032af7a7e0c0dc5978"
+hash = "3153322fa58ef063db28ecc37a2c5801ea63d9f555261cd14633c11d867a3fba"
 
 [[files]]
 file = "kubejs/data/grindless/tables/horizon_collector.json"
@@ -8774,7 +8774,7 @@ hash = "1483ecf8e78a75127e0afca0b095e066a4b0ee42aafad98090fcfa9a20e228c9"
 
 [[files]]
 file = "kubejs/server_scripts/grindless/zpm/europium.js"
-hash = "f3a04aefbd1e89e28e7733458a3ec70ed5664b9cbd47d73b717c802b233517e1"
+hash = "a60f2de51279ed4b9e38db1eb4e79c06ac89da6048c2566ed695049c7a09c259"
 
 [[files]]
 file = "kubejs/server_scripts/grindless/zpm/fusion.js"
