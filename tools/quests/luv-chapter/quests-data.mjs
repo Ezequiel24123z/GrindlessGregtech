@@ -493,6 +493,15 @@ export const QUESTS = [
     rewards: [xp(150), ri('gtceu:data_orb', 2)],
   },
   {
+    key: 'MCC', title: 'Chemical Complex', icon: 'gtceu:mega_chemical_complex', shape: 'gear', size: 1.25,
+    deps: ['WIND'], x: 8, y: 3,
+    desc: [
+      'The &6Mega Chemical Complex&r joins whole lines into one recipe: PTFE, epoxy and para-aramid each go from raw inputs to finished product without a single hand-off. The Coil Chemical Plants you built at HV go into it.',
+    ],
+    tasks: [it('gtceu:mega_chemical_complex')],
+    rewards: [xp(100), ri('gtceu:polytetrafluoroethylene_ingot', 8)],
+  },
+  {
     key: 'GATE', title: 'Gate to ZPM', icon: 'gtceu:zpm_machine_hull', pkg: ['B1', 'B5', 'B6', 'B8', 'B9', 'B10', 'S03'], shape: 'diamond', size: 1.75,
     deps: ['ORB'], x: 28, y: 0,
     desc: [

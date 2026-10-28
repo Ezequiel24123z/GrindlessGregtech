@@ -419,6 +419,15 @@ export const QUESTS = [
     rewards: [xp(120)],
   },
   {
+    key: 'ASMH', title: 'Assembly Hall', icon: 'gtceu:assembly_hall', shape: 'gear', size: 1.25,
+    deps: ['SIXTYFOUR'], x: 14, y: 3,
+    desc: [
+      'The &6Assembly Hall&r runs assembler and circuit assembler recipes in parallel. It has to stand inside a cleanroom, and the circuit assembler recipes want molten tin on top.',
+    ],
+    tasks: [it('gtceu:assembly_hall')],
+    rewards: [xp(150)],
+  },
+  {
     key: 'GATE', title: 'Gate to UV', icon: 'gtceu:uv_machine_hull', shape: 'diamond', size: 1.75,
     deps: ['NEPT'], x: 30, y: -3,
     desc: [

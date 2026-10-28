@@ -475,6 +475,15 @@ export const QUESTS = [
 
   // ------------------------------------------------------------------ exit
   {
+    key: 'MFAC', title: 'Mega Factory', icon: 'gtceu:mega_factory', shape: 'gear', size: 1.25,
+    deps: ['NETUV'], x: 14, y: 1.5,
+    desc: [
+      'The &6Mega Factory&r has sockets, and each takes a module: separation, forming, cutting, mixing or heat. A module adds its own recipe types, and every installed one drinks PCB coolant to keep running.',
+    ],
+    tasks: [it('gtceu:mega_factory')],
+    rewards: [xp(200)],
+  },
+  {
     key: 'GATE', title: 'Gate to UHV', icon: 'gtceu:uhv_machine_hull', shape: 'diamond', size: 1.75,
     deps: ['PROX', 'SHADOW'], x: 36, y: -0.75,
     desc: [

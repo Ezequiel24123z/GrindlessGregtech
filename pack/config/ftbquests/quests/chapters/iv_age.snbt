@@ -878,6 +878,24 @@
 			x: 40.0d
 			y: 0.0d
 		}
+		{
+			dependencies: ["3FB9EA4152DCD1D3"]
+			description: [
+				"The &6Smelting Complex&r runs the blast furnace and the vacuum freezer as one recipe, so a hot ingot never has to be carried between machines. EMI shows which ingots it takes."
+			]
+			icon: "gtceu:smelting_complex"
+			id: "14682D455D2C4F7C"
+			rewards: [
+				{ id: "3350CA5D8B5CEB38", type: "xp", xp: 80 }
+				{ count: 16, id: "3D006D8F2B740DEF", item: "gtceu:steel_ingot", type: "item" }
+			]
+			shape: "gear"
+			size: 1.25d
+			tasks: [{ id: "1939718ECD2BF659", item: "gtceu:smelting_complex", type: "item" }]
+			title: "Smelt and Freeze in One"
+			x: 2.0d
+			y: 1.5d
+		}
 	]
 	subtitle: ["Split the atom at home, then go where it's hot: Venus for naquadah, Mercury for iridium and osmium."]
 	title: "IV: Inner Planets"

@@ -499,6 +499,24 @@
 			x: 2.0d
 			y: 1.5d
 		}
+		{
+			dependencies: ["35719B747A75F7B6"]
+			description: [
+				"The &6Coil Chemical Plant&r is a large chemical reactor that heats with coils. The better the coil, the more recipes it runs at once, and a good coil also trims the energy bill."
+			]
+			icon: "gtceu:coil_chemical_plant"
+			id: "5731FF20BC9CBDD9"
+			rewards: [
+				{ id: "5ADAE012D2D4306D", type: "xp", xp: 60 }
+				{ count: 8, id: "5DD443E3F7E1A431", item: "gtceu:polytetrafluoroethylene_plate", type: "item" }
+			]
+			shape: "gear"
+			size: 1.25d
+			tasks: [{ id: "332A714483469ADA", item: "gtceu:coil_chemical_plant", type: "item" }]
+			title: "Coil Chemical Plant"
+			x: 12.0d
+			y: 1.5d
+		}
 	]
 	subtitle: ["Crude oil becomes chemistry, and the chemistry becomes a rocket to the Moon."]
 	title: "HV: Moonshot"

@@ -31,6 +31,9 @@ const NATIVE = new Set([
   'gtceu:carbon_monoxide_bucket', 'gtceu:carbon_dioxide_bucket', 'gtceu:germanium_dust', 'gtceu:bacteria_bucket',
   'gtceu:sterilized_growth_medium_bucket', 'gtceu:stem_cells', 'gtceu:neuro_processing_unit', 'gtnn:circuit_assembly_line',
   'gtceu:wetware_processor', 'gtceu:zpm_machine_hull', 'gtceu:zpm_energy_input_hatch',
+  'gtceu:polytetrafluoroethylene_ingot',
+  // MEGA-track controller, registered by its own package (obtain dump 20261028-120239)
+  'gtceu:mega_chemical_complex',
   // this pack's own, registered before LuV (same dump)
   'grindless:outer_system_chart', 'grindless:sagittarius_a_star_signal',
 ]);
