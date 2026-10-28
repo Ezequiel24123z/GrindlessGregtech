@@ -100,6 +100,11 @@
     [item('grindless:sic_fibre', 1), item(B2O3, 1)], [fluid('gtceu:ammonia', 1000)],
     [item('grindless:bn_coated_sic_fibre', 1)], [fluid('gtceu:steam', 1500)], VA_UHV, 300))
 
+  // UIV-B2: the BN coat on the CNT yarn (circuit 6), line 33
+  REACTOR.push(row('bn_coated_cnt_yarn', 'boron_nitride', 6,
+    [item('grindless:carbon_nanotube_yarn', 2), item(B2O3, 1)], [fluid('gtceu:ammonia', 1000)],
+    [item('grindless:bn_coated_cnt_yarn', 2)], [fluid('minecraft:water', 1500)], VA_UHV, 300))
+
   // UEV-A3: the (La,Y)H10 wire, the only producer of the superhydride cable's wire (GTM's covering recipes make the cable)
   LINE.push(row('lay_wire', 'powder_in_tube', 6, [item('gtceu:lay_superhydride_dust', 4), item(TUBE, 1)], [],
     [item('gtceu:lay_superhydride_single_wire', 8), item('gtceu:silver_dust', 1)], [], VA_UHV, 800))

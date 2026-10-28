@@ -247,7 +247,12 @@
     try {
       if (global.ggTestUivRxj1856Request && Date.now() - LOADED_AT >= 10000) {
         global.ggTestUivRxj1856Request = false
-        S = { server: event.server, G: global.grindless, failed: 0, finished: false, tick: 0, phase: 'build', phaseAt: 0, order: [], tickets: [], chunks: {}, older: [] }
+        S = { server: event.server, G: global.grindless, failed: 0, finished: false, tick: 0, phase: 'build', phaseAt: 0, order: [], tickets: [], chunks: {}, older: [
+          ['es_fm_debris', 'hot cell c13'], ['ash_actinide_cut', 'hot cell c14'], ['es254_extraction', 'transcurium c7'], ['es254_bombard', 'cyclotron c8'],
+          ['element_119_recoil', 'recoil separator c7: element 119'], ['census_ii', 'chemistry lab c3: census II'], ['u238_flash_target', 'uranium cycle c10'],
+          ['uiv/r_process_ash', 'platinum plant c10'], ['es_fm_cut', 'actinide partitioning c6'], ['mh_tether', 'tether works c3'],
+          ['worn_tether_scrap', 'tether works c4: the worn tether returns'], ['bn_coated_cnt_yarn', 'BN reactor c6']
+        ] }
         S.recipe = function (id) { return event.server.getRecipeManager().getRecipes().stream().anyMatch(function (r) { return String(r.getId()).indexOf(id) >= 0 }) }
         try { statics() } catch (e) { check('static_exception', false, errText(e)) }
       }

@@ -225,3 +225,50 @@ test('no // priority: line in the package\'s scripts (the integrator stamps them
 });
 
 // ---------------------------------------------------------------------------------------- older rows (commit 3)
+
+test('older rows: 13 in 9 files, each carries UIV-B2 and the free circuit', () => {
+  const find = (f, type, name) => json(f).types ? json(f).types[type].recipes.find((r) => r.name === name) : null;
+  const hot = json('hot_cell.json').recipes;
+  for (const [n, c] of [['es_fm_debris', 13], ['ash_actinide_cut', 14]]) {
+    const r = hot.find((x) => x.name === n);
+    assert.ok(r && r.circuit === c && mine(r), n);
+  }
+  assert.ok(ids(hot.find((x) => x.name === 'es_fm_debris').itemsIn).includes('grindless:flashed_target'));
+  assert.ok(ids(hot.find((x) => x.name === 'ash_actinide_cut').itemsIn).includes('grindless:r_process_ash'));
+  const u = json('uranium_cycle.json').fabrication.find((x) => x.name === 'u238_flash_target');
+  assert.ok(u && u.circuit === 10 && mine(u));
+  assert.deepEqual(ids(u.itemsOut), ['grindless:u238_flash_target']);
+  const tc = find('transcurium.json', 'transuranium_processing', 'es254_extraction');
+  assert.ok(tc && tc.circuit === 7 && mine(tc));
+  assert.deepEqual(ids(tc.itemsOut), ['gtceu:einsteinium_dust']);
+  const bomb = find('superheavy.json', 'heavy_ion_irradiation', 'es254_bombard');
+  assert.ok(bomb && bomb.circuit === 8 && mine(bomb));
+  assert.ok(ids(bomb.itemsIn).includes('grindless:es254_target') && ids(bomb.itemsIn).includes('grindless:ca48_beam'));
+  const rec = find('superheavy.json', 'recoil_separation', 'element_119_recoil');
+  assert.ok(rec && rec.circuit === 7 && mine(rec));
+  assert.deepEqual(ids(rec.itemsOut), ['grindless:element_119_recoil']);
+  const cen = find('superheavy.json', 'superheavy_chemistry', 'census_ii');
+  assert.ok(cen && cen.circuit === 3 && mine(cen) && cen.itemsIn.length <= 6);
+  assert.ok(ids(cen.itemsIn).includes('grindless:element_120_recoil') && ids(cen.itemsIn).includes('grindless:element_119_recoil'));
+  assert.deepEqual(ids(cen.itemsOut), ['grindless:superheavy_census_ii']);
+  const plat = read('server_scripts', 'grindless', 'ev', 'platinum_plant.js');
+  assert.match(plat, /UIV_ROWS = \[[\s\S]*?circuit: 10,[\s\S]*?r_process_ash/);
+  assert.match(plat, /addUivRows\(event\)/);
+  assert.match(read('server_scripts', 'grindless', 'zpm', 'europium.js'), /UIV-B2[\s\S]*?name: 'r_process_ash', circuit: 10/);
+  assert.match(read('server_scripts', 'grindless', 'zpm', 'actinides.js'), /UIV-B2[\s\S]*?name: 'es_fm_cut', circuit: 6/);
+  const el = read('server_scripts', 'grindless', 'uhv', 'elevator.js');
+  assert.match(el, /name: 'mh_tether', type: 'tether_ribbon', circuit: 3/);
+  assert.match(el, /name: 'worn_tether_scrap', type: 'tether_ribbon', circuit: 4/);
+  assert.match(el, /worn_crust_lift_tether[\s\S]{0,120}CNT, 4/);
+  assert.match(read('server_scripts', 'grindless', 'uv', 'materials.js'), /UIV-B2[\s\S]*?'bn_coated_cnt_yarn', 'boron_nitride', 6/);
+});
+
+test('older rows: the F1 ids and cage_part / element_120_recoil each have a real use', () => {
+  const rows = [...all];
+  assert.ok(rows.some((r) => ids(r.itemsIn).includes('grindless:cage_part')));
+  assert.ok(json('superheavy.json').types.superheavy_chemistry.recipes.some((r) => ids(r.itemsIn).includes('grindless:element_120_recoil')));
+  const sh = JSON.stringify(json('superheavy.json'));
+  for (const id of ['grindless:element_119_recoil', 'grindless:superheavy_census_ii']) assert.equal(sh.split(`"${id}"`).length - 1 >= 1, true, id);
+  assert.ok(JSON.stringify(json('transcurium.json')).includes('gtceu:einsteinium_dust'));
+  assert.ok(read('server_scripts', 'grindless', 'zpm', 'actinides.js').includes('gtceu:fermium_dust'));
+});

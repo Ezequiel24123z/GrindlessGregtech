@@ -76,7 +76,7 @@ test('each machine: unique circuits, whole numbers, every row in the dump with i
     }
   }
   assert.deepEqual(E.recipes.filter((r) => r.type === 'pbo_synthesis').map((r) => r.name), ['nitrate', 'hydrolyse', 'reduce', 'polymerise', 'spin']);
-  assert.deepEqual(E.recipes.filter((r) => r.type === 'tether_ribbon').map((r) => r.name), ['ribbon', 'climber']);
+  assert.deepEqual(E.recipes.filter((r) => r.type === 'tether_ribbon').map((r) => r.name), ['ribbon', 'climber', 'mh_tether', 'worn_tether_scrap']); // UIV-B2 appended the last two
 });
 
 test('line 24: trichlorobenzene to PBO fibre, every intermediate made before it is used', () => {

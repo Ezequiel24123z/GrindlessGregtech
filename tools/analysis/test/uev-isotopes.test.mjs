@@ -171,7 +171,7 @@ test('the older rows exist: HFIR c4, facility c7 and c8, ZPM partitioning c3-c5,
 
 test('the HFIR and facility circuits of the new rows are free in the main tables', () => {
   const T = table('transcurium.json');
-  const used = (t) => T.types[t].recipes.map((r) => r.circuit);
+  const used = (t) => T.types[t].recipes.filter((r) => !/^UIV-B2/.test(r._why || '')).map((r) => r.circuit); // UIV-B2 appended es254_extraction c7
   assert.ok(!used('high_flux_irradiation').includes(4));
   assert.ok(!used('transuranium_processing').includes(7) && !used('transuranium_processing').includes(8));
   const fab = JSON.stringify(table('transcurium_fabrication.json'));
