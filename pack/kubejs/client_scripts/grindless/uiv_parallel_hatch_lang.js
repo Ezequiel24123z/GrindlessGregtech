@@ -1,4 +1,4 @@
-// priority: 4971
+// priority: 3332
 // Gregtech Grindless - text of the UIV parallel hatch (package UIV-M1; startup_scripts/grindless/lib/parallel_hatch.js and
 // server_scripts/grindless/uiv/parallel_hatch.js).
 //
