@@ -34,7 +34,7 @@ Everything is built against uiv.md as designed; where a UIV package is not merge
 1. **Spintronics (home, substage `uxv`).** MTJ sputter cluster, oxide PLD chamber, vdW stacking cell, racetrack fab and YIG LPE furnace; their dies are joined into `gtnn:spintronic_mainframe` on the UEV photonic integration hall (new row). The mainframe is the UXV circuit (`#gtceu:circuits/uxv`, S0-5). Before UXV hatches exist, UXV recipes run on two UIV hatches (WorkableElectricMultiblockMachine.java:250-273, as uiv.md cites).
 2. **The sensor.** The SHeQUID works makes the superfluid gyroscope; with the MTJ die and the existing `grindless:nv_diamond_chip` (`zpm/qubits.js:28`) it becomes `grindless:uxv_sensor`, the only UXV component made before Vela.
 3. **Superheavies III.** UIV line 32's Es/Fm debris is split on the UEV chem lab and calutron into Fm-257 and Es-254 targets; the UEV cyclotron makes elements 121 and 122 with UIV's Ti-50 (`grindless:superheavy_census_iii`); the MNT collider reaches the N=184 island (`grindless:island_chart`).
-4. **Back to Cygnus X-1.** The stellar elevator lifts HDE 226868's envelope at L1; the plasma mass filter splits it into H, He-4, CNO and heavy cuts; the condensation tower feeds the rockless platforms. The accretion disk skimmer takes disk plasma, the FRC former traps it as `grindless:frc_cartridge`, and the BZ dynamo draws power from the black hole's spin.
+4. **Back to Cygnus X-1.** The stellar elevator lifts HDE 226868's envelope at L1; the plasma mass filter splits it into H, He-4, CNO and heavy cuts; the condensation tower is the heavy cut's destination (rule 3). The accretion disk skimmer takes disk plasma, the FRC former traps it as `grindless:frc_cartridge`, and the BZ dynamo draws power from the black hole's spin.
 5. **The Kerr sling.** UIV's ergosphere probe bay slings a relay seed (new mode); the Cygnus warp gate throws the player to Vela (consumes an FRC cartridge, the M2P2 shield) or to Cas A (consumes a CNT Whipple shield). Substages `uxv-vela` and `uxv-cas-a` run in parallel.
 6. **Vela.** The pasta extractor works the crust at glitch time; the phase sorter (each phase leaves in a `grindless:cage_part` made by a new mode of UIV's neutronium cage at RX J1856) splits spaghetti, lasagna, gnocchi and the anti-phases; the draw bench makes the UXV strand cable, the laminator the hull plate. `gtceu:uxv_machine_hull` and UXV hatches follow. The polar cap tap gives power.
 7. **Cassiopeia A.** The ejecta knot sweeper gathers Ti-rich dust; the EV extraction cascade, UEV calutron and IV hot cell make a sealed Ti-44/Sc-44 core; the annihilation laser works turns it into a gamma laser module and `grindless:uxv_emitter`.
@@ -98,7 +98,7 @@ Site rules (as UIV, DECISIONS.md:498): new places are void datapack dimensions (
 | `grindless:superheavy_census_iii`, `island_chart` | home → gate | home accelerators only |
 | `grindless:cage_part` | RX J1856 (UIV cage mode) → Vela sorter | the neutronium cage is site-locked at RX J1856 (uiv.md:381) |
 
-First arrival on Vela and Cas A is UIV-B1's platform kit (a row each in `relay_platforms.json`, same kit, S0-10), plus the volatile cut of the condensation tower carried from Cygnus for water and air. No platform receives a product of its place.
+First arrival on Vela and Cas A is UIV-B1's platform kit (a row each in `relay_platforms.json`, same kit, S0-10) with its AE2 seed (uiv.md:677-679): home materials, water and air arrive over AE2, the backbone between planets (DECISIONS.md:59). No platform receives a product of its place.
 
 **Bootstrap (UEV-C1 lesson, DECISIONS.md:516-517).** Vela travel needs the FRC cartridge, made at Cygnus with UIV `mh_winding` coils, never pasta. Cas A travel needs the Whipple shield, made without lasagna. Every Vela and Cas A controller uses only home and Cygnus products. Checked one by one under Risks.
 
@@ -112,7 +112,7 @@ First arrival on Vela and Cas A is UIV-B1's platform kit (a row each in `relay_p
 | Pasta slurry | pasta extractor | Vela | `grindless:vela_glitch_timing` (kept) |
 | Ejecta knot dust (Ti, Si, S, Ar, Ca, Fe) | ejecta knot sweeper | Cas A | none (site) |
 
-The condensation cuts are the platforms' supply (rule 1), not line endpoints. Ash of the Mk6 ring returns as fuel or stock (Fusion).
+The condensation cuts are the honest destination of the filter's heavy cut (rule 3): ordinary materials made automatically at Cygnus and sent to stock over AE2. They are not line endpoints and not the platforms' supply (AE2 ships home materials, DECISIONS.md:59). Ash of the Mk6 ring returns as fuel or stock (Fusion).
 
 ## Only from there and cuts
 
@@ -156,7 +156,7 @@ Keys: what the era needs the machine for. Policy: H home (runs on two UIV hatche
 | 9 | Mk6 fusion ring | CNO, helium, carbon and oxygen burning | power, ash chain | H, G-fed |
 | 10 | Stellar elevator | stellar plasma | fuels, condensation | S |
 | 11 | Plasma mass filter | mass-split stellar and disk cuts | Mk6 fuels | S (c1-c3) |
-| 12 | Stellar condensation tower | platform supply by condensation | rule 1 at Vela, Cas A | S |
+| 12 | Stellar condensation tower | heavy cut condensed in sequence | rule 3 for the heavy cut; syngas, stock | S |
 | 13 | Accretion disk skimmer | disk plasma | FRC, BZ, OpV reserve | S |
 | 14 | FRC former | trapped compact toroids | Vela travel, field generator, gate | S (c1) |
 | 15 | BZ dynamo | black-hole spin power | power | S, G |
@@ -276,7 +276,7 @@ UXV recipes run up to 1 A x V[UXV] = 134,217,728 EU/t on two UIV energy hatches,
 
 ### 12. Stellar condensation tower: `gtceu:stellar_condensation_tower`, type `gtceu:stellar_condensation` (Cygnus X-1 orbit)
 
-**What it gains:** cools the heavy cut along the equilibrium condensation sequence (Ca-Al-Ti oxides near 1,700 K, Fe-Ni metal near 1,350 K, forsterite near 1,300 K, troilite near 700 K, then ices) and draws each cut at its stage; the supply of the rockless platforms (rule 1).
+**What it gains:** cools the heavy cut along the equilibrium condensation sequence (Ca-Al-Ti oxides near 1,700 K, Fe-Ni metal near 1,350 K, forsterite near 1,300 K, troilite near 700 K, then ices) and draws each cut at its stage; the honest destination of the filter's heavy cut (rule 3), whose cuts go to syngas and stock over AE2.
 **Recipes:** c1 100 mB `stellar_heavy_cut` + 100 mB `stellar_hydrogen_cut` → `refractory_condensate` + `metal_condensate` + `silicate_condensate` + 100 mB `volatile_condensate` (33,554,432 EU/t, 600 t). The cuts separate into ordinary GT materials on EV and HV plants as built.
 **Structure:** 5x5x21 tower, 7 stages, `gtceu:uxv_machine_casing`.
 **Crossings:** EV extraction cascade, HV syngas plant (volatiles).
@@ -537,7 +537,7 @@ The Mk6 is a second `registerFusionTier(12)` ring (`tables/fusion_mk6.json`, A7)
 
 ## AE2
 
-Nothing new. Stellar cuts and plasmas are fluids in existing fluid cells; caged pasta phases are items; site-locked fluids (`disk_plasma`, `stellar_plasma`) are processed where they are made. No new cell tier, no cross-dimension bridge; wireless energy is the only link between places.
+Nothing new. Each arrival platform seeds AE2 through its far ring, as at UIV (uiv.md:677-679): AE2 stays the backbone between places (DECISIONS.md:59), so home materials and fluids reach Vela and Cas A without a second route. Stellar cuts are fluids in existing fluid cells; caged pasta phases are items; site-locked fluids (`disk_plasma`, `stellar_plasma`) are processed where they are made. No new cell tier, no new AE2 mechanism.
 
 ## New process lines
 
