@@ -1,0 +1,141 @@
+{
+  "_why": "UIV-B3 (docs/eras/uiv.md, machines 18 to 20, lines 34, 38 and 45): the pulsar wind trap, the positronium condensate lab, the X-ray pulse profiler, the two own rows on UHV's positron accumulator and UV's antimatter trap (circuit 4 each; they are locked to PSR J0437 by 'site', so they cannot live in antimatter.json or accelerators.json, whose orbit flag means Earth orbit) and the GTM steps of lines 34, 38 and 45. 'site': true adds .dimension(grindless:psr_j0437_orbit). Machine figures are marked tune in the contract.",
+  "types": {
+    "pulsar_wind_trapping": {
+      "dataKey": "grindless_pulsar_wind_trapping",
+      "recipes": [
+        {
+          "name": "pair_plasma", "circuit": 1, "eut": 31457280, "duration": 1200, "site": true,
+          "_why": "UIV-B3 machine 18: a metallic hydrogen coil block (the magnet, kept) traps a sample of the pulsar's pair wind. The annihilation gamma rays are absorbed as heat in the tungsten lining (voidable, no output); the unused electrons go back into the wind.",
+          "itemsIn": [], "kept": [ { "id": "grindless:metallic_hydrogen_coil_block", "count": 1 } ], "fluidsIn": [],
+          "itemsOut": [], "fluidsOut": [ { "id": "gtceu:pair_plasma", "amount": 4000 }, { "id": "gtceu:wind_electrons", "amount": 2000 } ]
+        }
+      ]
+    },
+    "positronium_condensation": {
+      "dataKey": "grindless_positronium_condensation",
+      "recipes": [
+        {
+          "name": "ps_in_aerogel", "circuit": 1, "eut": 31457280, "duration": 800, "site": true,
+          "_why": "UIV-B3 machine 19 c1 (line 34): cooled positrons stopped by a solid-neon moderator form positronium in the pores of the Ps-converter aerogel.",
+          "itemsIn": [ { "id": "grindless:cooled_positron_bunch", "count": 1 }, { "id": "grindless:neon_moderator_cartridge", "count": 1 }, { "id": "grindless:ps_converter_aerogel", "count": 1 } ],
+          "kept": [], "fluidsIn": [],
+          "itemsOut": [ { "id": "grindless:ps_in_aerogel", "count": 1 } ], "fluidsOut": []
+        },
+        {
+          "name": "laser_cooled_ps", "circuit": 2, "eut": 31457280, "duration": 1200, "site": true,
+          "_why": "UIV-B3 machine 19 c2 (line 34): the 243 nm cooling laser (kept) cools the positronium to a few kelvin.",
+          "itemsIn": [ { "id": "grindless:ps_in_aerogel", "count": 1 } ], "kept": [ { "id": "grindless:ps_cooling_laser", "count": 1 } ], "fluidsIn": [],
+          "itemsOut": [ { "id": "grindless:laser_cooled_ps", "count": 1 } ], "fluidsOut": []
+        },
+        {
+          "name": "gamma_laser_cavity", "circuit": 3, "eut": 31457280, "duration": 1600, "site": true,
+          "_why": "UIV-B3 machine 19 c3 (lines 34 and 38): the Ps BEC between a pair of gamma Bragg mirrors is a gamma-ray laser cavity.",
+          "itemsIn": [ { "id": "grindless:ps_bec", "count": 1 }, { "id": "grindless:gamma_bragg_mirror", "count": 2 } ], "kept": [], "fluidsIn": [],
+          "itemsOut": [ { "id": "grindless:gamma_laser_cavity", "count": 1 } ], "fluidsOut": []
+        }
+      ]
+    },
+    "xray_pulse_profiling": {
+      "dataKey": "grindless_xray_pulse_profiling",
+      "recipes": [
+        {
+          "name": "j0437_pulse_raw", "circuit": 1, "eut": 31457280, "duration": 2400, "site": true,
+          "_why": "UIV-B3 machine 20 c1: the UEV pulsar navigation chart (kept) points the profiler; four raw profiles of J0437's 5.76 ms pulse come out, each to be timed against home.",
+          "itemsIn": [], "kept": [ { "id": "grindless:pulsar_navigation_chart", "count": 1 } ], "fluidsIn": [],
+          "itemsOut": [ { "id": "grindless:j0437_pulse_raw", "count": 4 } ], "fluidsOut": []
+        },
+        {
+          "name": "pulsar_navigation_solution", "circuit": 2, "eut": 31457280, "duration": 3000, "site": true,
+          "_why": "UIV-B3 machine 20 c2: four timed profiles and the neutron-star EOS chart give the navigation solution.",
+          "itemsIn": [ { "id": "grindless:xray_pulse_timed", "count": 4 }, { "id": "grindless:ns_eos_chart", "count": 1 } ], "kept": [], "fluidsIn": [],
+          "itemsOut": [ { "id": "grindless:pulsar_navigation_solution", "count": 1 } ], "fluidsOut": []
+        }
+      ]
+    },
+    "positron_accumulation": {
+      "dataKey": "grindless_positron_accumulation",
+      "recipes": [
+        {
+          "name": "pair_plasma_cooling", "circuit": 4, "eut": 1966080, "duration": 600, "site": true,
+          "_why": "UIV-B3 line 34: the accumulator's Penning trap cools pair plasma into a bunch of cooled positrons (at J0437 only: pair plasma does not travel); the electrons go back.",
+          "itemsIn": [], "kept": [], "fluidsIn": [ { "id": "gtceu:pair_plasma", "amount": 1000 } ],
+          "itemsOut": [ { "id": "grindless:cooled_positron_bunch", "count": 1 } ], "fluidsOut": [ { "id": "gtceu:wind_electrons", "amount": 500 } ]
+        }
+      ]
+    },
+    "antimatter_storage": {
+      "dataKey": "grindless_antimatter_storage",
+      "recipes": [
+        {
+          "name": "ps_bec", "circuit": 4, "eut": 1966080, "duration": 800, "site": true,
+          "_why": "UIV-B3 line 34: the trap stores laser-cooled positronium in superfluid helium until it condenses into a BEC (at J0437 only).",
+          "itemsIn": [ { "id": "grindless:laser_cooled_ps", "count": 1 } ], "kept": [], "fluidsIn": [ { "id": "gtceu:superfluid_helium", "amount": 100 } ],
+          "itemsOut": [ { "id": "grindless:ps_bec", "count": 1 } ], "fluidsOut": [ { "id": "gtceu:helium", "amount": 100 } ]
+        }
+      ]
+    },
+    "cutter": {
+      "recipes": [
+        {
+          "name": "c12_004_cut", "circuit": 0, "eut": 491520, "duration": 300,
+          "_why": "UIV-B3 line 38: the HPHT-annealed C-12 plate is cut along the (004) plane into two Bragg blanks; the offcut graphite goes back to stock.",
+          "itemsIn": [ { "id": "grindless:c12_hpht_plate", "count": 1 } ], "kept": [], "fluidsIn": [],
+          "itemsOut": [ { "id": "grindless:c12_004_plate", "count": 2 }, { "id": "gtceu:graphite_dust", "count": 1 } ], "fluidsOut": []
+        }
+      ]
+    },
+    "laser_engraver": {
+      "recipes": [
+        {
+          "name": "c12_ion_mill", "circuit": 0, "eut": 1966080, "duration": 400,
+          "_why": "UIV-B3 line 38: the (004) blank is ion-milled to a flat, strain-free surface under a diamond lens.",
+          "itemsIn": [ { "id": "grindless:c12_004_plate", "count": 1 } ], "kept": [ { "id": "gtceu:diamond_lens", "count": 1 } ], "fluidsIn": [],
+          "itemsOut": [ { "id": "grindless:c12_ion_milled_plate", "count": 1 } ], "fluidsOut": []
+        }
+      ]
+    },
+    "assembler": {
+      "recipes": [
+        {
+          "name": "gamma_bragg_mirror", "circuit": 0, "eut": 1966080, "duration": 600,
+          "_why": "UIV-B3 line 38: ion-milled C-12 plates and tungsten foils are stacked into a pair of gamma Bragg mirrors.",
+          "itemsIn": [ { "id": "grindless:c12_ion_milled_plate", "count": 4 }, { "id": "gtceu:tungsten_foil", "count": 4 } ], "kept": [], "fluidsIn": [],
+          "itemsOut": [ { "id": "grindless:gamma_bragg_mirror", "count": 2 } ], "fluidsOut": []
+        },
+        {
+          "name": "neon_moderator_cartridge", "circuit": 0, "eut": 491520, "duration": 300,
+          "_why": "UIV-B3 line 45: the annealed solid-neon cone is sealed in a stainless cartridge.",
+          "itemsIn": [ { "id": "grindless:annealed_neon_cone", "count": 1 }, { "id": "gtceu:stainless_steel_plate", "count": 2 } ], "kept": [], "fluidsIn": [],
+          "itemsOut": [ { "id": "grindless:neon_moderator_cartridge", "count": 1 } ], "fluidsOut": []
+        },
+        {
+          "name": "uiv_emitter", "circuit": 0, "eut": 7864320, "duration": 600,
+          "_why": "UIV-B3 line 34: the gamma laser cavity is the core of a UEV emitter rebuilt on RHEA plates; this unlocks the UIV wireless hatches and the UIV parallel hatch.",
+          "itemsIn": [ { "id": "grindless:gamma_laser_cavity", "count": 1 }, { "id": "grindless:uev_emitter", "count": 1 }, { "id": "gtceu:rhea_plate", "count": 2 } ], "kept": [], "fluidsIn": [],
+          "itemsOut": [ { "id": "grindless:uiv_emitter", "count": 1 } ], "fluidsOut": []
+        }
+      ]
+    },
+    "distillery": {
+      "recipes": [
+        {
+          "name": "purify_neon", "circuit": 0, "eut": 491520, "duration": 400,
+          "_why": "UIV-B3 line 45: 6N neon is passed over a getter into purified neon (the rest is vented).",
+          "itemsIn": [], "kept": [], "fluidsIn": [ { "id": "gtceu:neon_6n", "amount": 1000 } ],
+          "itemsOut": [], "fluidsOut": [ { "id": "gtceu:purified_neon", "amount": 950 } ]
+        }
+      ]
+    },
+    "vacuum_freezer": {
+      "recipes": [
+        {
+          "name": "anneal_neon_cone", "circuit": 0, "eut": 491520, "duration": 200,
+          "_why": "UIV-B3 line 45: the solid-neon cone is annealed just below its melting point in the freezer.",
+          "itemsIn": [ { "id": "grindless:solid_neon_cone", "count": 1 } ], "kept": [], "fluidsIn": [],
+          "itemsOut": [ { "id": "grindless:annealed_neon_cone", "count": 1 } ], "fluidsOut": []
+        }
+      ]
+    }
+  }
+}
