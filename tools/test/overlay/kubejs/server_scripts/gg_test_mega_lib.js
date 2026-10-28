@@ -3,7 +3,7 @@
 // Band ONLY: X 30208-30271, Z 0-63, Overworld Y 98-115.
 //   Throwaway machines come from startup_scripts/gg_test_mega_lib_machines.js; one recipe, 2 poppy -> 1 red dye (30 EU/t, 200 ticks) on
 //   gtceu:large_chemical_reactor, 128 poppies in the bus, batch off, energy hatches topped up every tick. parallels = min(coil, inputs, energy).
-//     cupro   cupronickel (1800 K -> 4), EV hatch                       4 copies, 480 EU/t, 50 ticks (one perfect overclock)
+//     cupro   cupronickel (1800 K -> 4), EV hatch                       4 copies, 1920 EU/t, 12 ticks (two perfect overclocks: 120 -> 480 -> 1920 fits EV's 2048)
 //     trit    tritanium (10800 K -> 4096), IV hatch                     64 copies (the inputs), 7680 EU/t, 50 ticks
 //     small   tritanium, HV hatch (512 V): energy cap floor(512/30)=17   17 copies, 510 EU/t, 200 ticks (no room to overclock)
 //     disc    nichrome (3600 K -> 16), EV hatch, discount 0.95^2         16 copies, about 1733 EU/t, 50 ticks
@@ -178,7 +178,7 @@
   }
 
   var UNITS = [
-    { name: 'cupro', id: 'gtceu:gg_lib_coil', coil: 'gtceu:cupronickel_coil_block', hatch: 'gtceu:ev_energy_input_hatch', par: 4, eut: 480, dur: 50, x: 30213 },
+    { name: 'cupro', id: 'gtceu:gg_lib_coil', coil: 'gtceu:cupronickel_coil_block', hatch: 'gtceu:ev_energy_input_hatch', par: 4, eut: 1920, dur: 12, x: 30213 },
     { name: 'trit', id: 'gtceu:gg_lib_coil', coil: 'gtceu:tritanium_coil_block', hatch: 'gtceu:iv_energy_input_hatch', par: 64, eut: 7680, dur: 50, x: 30221 },
     { name: 'small', id: 'gtceu:gg_lib_coil', coil: 'gtceu:tritanium_coil_block', hatch: 'gtceu:hv_energy_input_hatch', par: 17, eut: 510, dur: 200, x: 30229 },
     { name: 'disc', id: 'gtceu:gg_lib_disc', coil: 'gtceu:nichrome_coil_block', hatch: 'gtceu:ev_energy_input_hatch', par: 16, eut: 1733, tol: 6, dur: 50, x: 30237 },
