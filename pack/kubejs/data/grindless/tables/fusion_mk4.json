@@ -42,7 +42,12 @@
         { "name": "polarised_dhe3_fuel", "circuit": 2, "itemsIn": [], "notConsumed": ["grindless:laser_1083nm"],
           "fluidsIn": [{ "id": "gtceu:polarised_helium_3", "amount": 1000 }, { "id": "gtceu:deuterium", "amount": 1000 }],
           "fluidsOut": [{ "id": "gtceu:polarised_dhe3_fuel", "amount": 2000 }],
-          "itemsOut": [], "eut": 1966080, "duration": 100 }
+          "itemsOut": [], "eut": 1966080, "duration": 100 },
+        { "_why": "UIV-A9: the Mk5 ring's He-3 charge, polarised again from the cell's He-3 (line 25)",
+          "name": "polarise_helium_3_mk5", "circuit": 3, "itemsIn": [], "notConsumed": ["grindless:laser_1083nm"],
+          "fluidsIn": [{ "id": "gtceu:helium_3", "amount": 1000 }],
+          "fluidsOut": [{ "id": "gtceu:polarised_helium_3", "amount": 850 }, { "id": "gtceu:helium_3", "amount": 150 }],
+          "itemsOut": [], "eut": 1966080, "duration": 200 }
       ]
     },
     "mixer": {
