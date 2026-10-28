@@ -6,7 +6,7 @@
 //                          (core_survey, no circuit); with only the bit and circuit 1 the drill cores a small pilot (the bootstrap: the
 //                          survey itself needs 4 rock, earth_orbit.json).
 //   gtceu:carbonyl_refining  circuit 1: the Mond process, Barnard rock + CO -> Fe(CO)5, nickel, cobalt, residue. Barnard b only.
-//   gtceu:chemical_reactor / compressor / electric_furnace   GTM rows (circuit 0), Barnard b only: crude ammonium perrhenate ->
+//   gtceu:chemical_reactor / compressor / electric_blast_furnace   GTM rows (circuit 0), Barnard b only: crude ammonium perrhenate ->
 //                          ammonium perrhenate -> gtceu:rhenium_dust -> pellet -> gtceu:rhenium_ingot. The platinum plant's circuit 9
 //                          row (ev/platinum_plant.js) makes the crude salt from the residue.
 //   crafting               the controllers: UEV hull + 2 optical computers + 2 UEV parts, shaped recipes grindless:crafting/<machine>.
@@ -20,7 +20,7 @@
   var G = global.grindless || (global.grindless = {})
   var BA = G.barnard || (G.barnard = {})
   var TABLE = BA.table || 'kubejs/data/grindless/tables/barnard.json'
-  var GTM_TYPES = ['chemical_reactor', 'compressor', 'electric_furnace']
+  var GTM_TYPES = ['chemical_reactor', 'compressor', 'electric_blast_furnace']
   var HOSTED = []
   var SITES = ['barnard_b']
   var MAX_CHANCE = 10000
@@ -45,10 +45,11 @@
         var duration = Number(r.duration)
         var circuit = Number(r.circuit)
         var site = String(r.site || '')
+        var temp = r.temp === undefined ? 0 : Number(r.temp)
         var zeroOk = gtm || def.circuitOptional === true
         var circuitOk = (zeroOk && circuit === 0) || (circuit >= 1 && circuit <= 32 && circuit % 1 === 0 && !circuits[circuit])
         if (!/^[a-z0-9_]+$/.test(n) || names[n] || !circuitOk || !(eut > 0) || eut % 1 !== 0 || !(duration > 0) || duration % 1 !== 0 ||
-          SITES.indexOf(site) < 0) {
+          SITES.indexOf(site) < 0 || !(temp >= 0) || (temp > 0 && type !== 'electric_blast_furnace')) {
           problems.push(type + '/' + n + ': name, circuit ' + r.circuit + ', eut ' + r.eut + ', duration ' + r.duration + ', site ' + site)
           return
         }
@@ -63,7 +64,7 @@
           if (String(f.id || '').indexOf(':') < 0 || !(Number(f.amount) >= 1)) bad = true
           return { id: String(f.id), amount: Number(f.amount) }
         }
-        var rec = { type: type, name: n, circuit: circuit, eut: eut, duration: duration, site: site, hosted: hosted,
+        var rec = { type: type, name: n, circuit: circuit, eut: eut, duration: duration, site: site, temp: temp, hosted: hosted,
           dataKey: def.dataKey ? String(def.dataKey) : '', idPrefix: def.idPrefix ? String(def.idPrefix) : '',
           itemsIn: list(r.itemsIn).map(stack), kept: list(r.kept).map(stack), fluidsIn: list(r.fluidsIn).map(fluid),
           itemsOut: list(r.itemsOut).map(stack), fluidsOut: list(r.fluidsOut).map(fluid) }
@@ -117,6 +118,7 @@
     })
     rec.fluidsOut.forEach(function (x) { recipe.outputFluids(Fluid.of(x.id, x.amount)) })
     if (rec.dataKey !== '') recipe.addDataString(rec.dataKey, rec.name)
+    if (rec.temp > 0) recipe.blastFurnaceTemp(rec.temp)
     G.places.allow(recipe, rec.site)
     recipe.EUt(rec.eut).duration(rec.duration)
   }
