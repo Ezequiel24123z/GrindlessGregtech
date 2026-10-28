@@ -200,10 +200,12 @@
     })
   })
 
-  // The sustain load (16 A UHV) is above one UHV hatch's voltage tier, which GTM's overclock refuses ("insufficient voltage"): that
-  // run is a fixed load, so it takes the recipe as it is (the energy hatches still have to supply it); c1 overclocks as usual.
+  // The sustain load (16 A UHV) and the hold load (16 A UEV) are above one hatch's voltage tier, which GTM's overclock refuses
+  // ("insufficient voltage"): both are fixed loads, so they take the recipe as it is (the energy hatches still have to supply
+  // them); c1 overclocks as usual.
   function gateOverclock(machine, recipe) {
-    if (String(recipe.id).indexOf('/sustain') >= 0) return ModifierFunction.IDENTITY
+    var id = String(recipe.id)
+    if (id.indexOf('/sustain') >= 0 || id.indexOf('/hold') >= 0) return ModifierFunction.IDENTITY
     return GTRecipeModifiers.OC_NON_PERFECT.getModifier(machine, recipe)
   }
 
