@@ -1,4 +1,4 @@
-// priority: -24680
+// priority: -24636
 // -----------------------------------------------------------------------------------------------
 // Recipes of UIV's polarised proton source and Mk5 fusion ring, lines 7 and 25-29 (machines and recipe type:
 // startup_scripts/grindless/uiv/mk5.js; docs/eras/uiv.md, machines 9 and 10; package UIV-A9), generated at every server load from

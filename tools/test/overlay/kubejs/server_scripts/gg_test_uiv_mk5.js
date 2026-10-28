@@ -1,4 +1,4 @@
-// priority: -8441
+// priority: -8440
 // TEST ONLY, UIV-A9. Command: kubejs custom_command gg_test_uiv_mk5
 // Band ONLY: X 35456-35519, Z 0-63, Overworld Y 70-100.
 //   a9_ring_*    gtceu:uiv_fusion_reactor (second registerFusionTier ring beside the Mk4) forms with 16 UIV 16 A hatches; its internal buffer
