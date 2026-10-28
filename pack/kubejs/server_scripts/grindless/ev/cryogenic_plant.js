@@ -112,6 +112,18 @@
     addInterstellarGas(event)
     addParaHydrogen(event)
     addLiquidParaHydrogen(event)
+    addNeonSixN(event)
+  }
+
+  // UIV-B3 (docs/eras/uiv.md, line 45): the 5N neon of UHV's moderator is distilled once more to 6N, the grade of the solid-neon cone that
+  // moderates the positronium lab's positrons (Mills & Gullikson 1986). The impurity-rich cut goes back as neon. The only input is 5N neon.
+  var NEON_6N = { id: 'grindless:cryogenic_processing/neon_6n', eut: 7680, duration: 600,
+    input: { id: 'gtceu:high_purity_neon', amount: 1000 },
+    outputs: [{ id: 'gtceu:neon_6n', amount: 900 }, { id: 'gtceu:neon', amount: 100 }] }
+  CRYO.neon6nRow = NEON_6N
+
+  function addNeonSixN(event) {
+    addCryoRow(event, NEON_6N, 'neon_6n', 'neon 6N')
   }
 
   // UIV-A2 (docs/eras/uiv.md, line 1): protium (the heavy water plant's draw-off, and the ramp-compression pulser's H2 shards) is converted

@@ -76,7 +76,11 @@
       itemsOut: [], fluidsOut: [fluid('gtceu:helium_3', 500), fluid('gtceu:helium', 500)], eut: VA, duration: 200 },
     // UIV-A9 (docs/eras/uiv.md, line 25): the RF-dissociated polarised H frozen in a superfluid helium bath into its ice
     { name: 'polarised_h_ice', type: 'srf_cavity', circuit: 6, itemsIn: [], fluidsIn: [fluid('gtceu:polarised_h_gas', 1000), fluid(SUPERFLUID, 100)],
-      itemsOut: [item('grindless:polarised_h_ice', 1)], fluidsOut: [fluid('gtceu:helium', 100)], eut: VA, duration: 400 }
+      itemsOut: [item('grindless:polarised_h_ice', 1)], fluidsOut: [fluid('gtceu:helium', 100)], eut: VA, duration: 400 },
+    // UIV-B3 (docs/eras/uiv.md, line 45): purified neon frozen on a cooled cone in a superfluid helium bath into the solid-neon moderator; the
+    // neon boil-off goes back to the EV cryogenic plant
+    { name: 'solid_neon_cone', type: 'srf_cavity', circuit: 7, itemsIn: [], fluidsIn: [fluid('gtceu:purified_neon', 1000), fluid(SUPERFLUID, 100)],
+      itemsOut: [item('grindless:solid_neon_cone', 1)], fluidsOut: [fluid('gtceu:neon', 100)], eut: VA, duration: 400 }
   ]
 
   // side steps on GTM's own machines
