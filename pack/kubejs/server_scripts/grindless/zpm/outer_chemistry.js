@@ -52,6 +52,13 @@
       eut: ZPM_VA, duration: 800
     },
     {
+      name: 'cnt_sock', type: 'methane_pyrolysis', circuit: 3,
+      itemsIn: [], notConsumedItems: [],
+      fluidsIn: [{ id: 'gtceu:methane', amount: 1000 }, { id: 'gtceu:iron', amount: 144 }], notConsumedFluids: [{ id: 'gtceu:tin', amount: 1000 }],
+      itemsOut: [{ id: 'grindless:cnt_sock', count: 1 }], fluidsOut: [{ id: 'gtceu:hydrogen', amount: 2000 }],
+      eut: ZPM_VA, duration: 800
+    },
+    {
       name: 'archaeal_culture', type: 'chemosynthesis', circuit: 1,
       itemsIn: [], notConsumedItems: [],
       fluidsIn: [{ id: 'gtceu:bacteria', amount: 250 }, { id: 'gtceu:enceladus_brine', amount: 1000 }, { id: 'gtceu:hydrogen', amount: 500 }, { id: 'gtceu:carbon_dioxide', amount: 250 }],

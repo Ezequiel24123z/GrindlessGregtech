@@ -1,4 +1,4 @@
-// priority: -23048
+// priority: -23036
 // -----------------------------------------------------------------------------------------------
 // Recipes of UEV's nitride magnet works, SiC fibre plant and CVI furnace (machines and recipe types: startup_scripts/grindless/uev/composites.js;
 // docs/eras/uev.md, machines 8-10, lines 14-17 and 35; package UEV-A5), generated at every server load from

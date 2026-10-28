@@ -18,7 +18,8 @@ const ASM = T.types.assembler.recipes;
 const PGM = T.types.pgm_refining.recipes;
 const startup = fs.readFileSync(path.join(kube, 'startup_scripts', 'grindless', 'uhv', 'crystals.js'), 'utf8');
 const server = fs.readFileSync(path.join(kube, 'server_scripts', 'grindless', 'uhv', 'crystals.js'), 'utf8');
-const lang = fs.readFileSync(path.join(kube, 'client_scripts', 'grindless', 'uhv_crystals_lang.js'), 'utf8');
+// UEV-A8's TGG and KTP rows keep their lang keys in the UEV file
+const lang = ['uhv_crystals_lang.js', 'uev_earth_orbit_lang.js'].map((f) => fs.readFileSync(path.join(kube, 'client_scripts', 'grindless', f), 'utf8')).join('\n');
 
 const ids = (xs) => (Array.isArray(xs) ? xs : []).map((x) => x.id);
 const inputs = (r) => ids(r.itemsIn).concat(ids(r.kept), ids(r.fluidsIn), ids(r.charge));
@@ -30,7 +31,8 @@ const by = (rs, name) => {
 };
 const CRUCIBLE = 'grindless:iridium_crucible';
 const WORN = 'grindless:worn_iridium_crucible';
-const BOULES = ['grindless:lithium_niobate_boule', 'grindless:vuv_caf2_boule', 'grindless:thorium_caf2_crystal', 'grindless:eu_yso_boule', 'grindless:inp_boule'];
+// tgg and ktp: UEV-A8 rows (docs/eras/uev.md, A8)
+const BOULES = ['grindless:lithium_niobate_boule', 'grindless:vuv_caf2_boule', 'grindless:thorium_caf2_crystal', 'grindless:eu_yso_boule', 'grindless:inp_boule', 'grindless:tgg_boule', 'grindless:ktp_boule'];
 
 // every recipe-producing row of every table, as [table/path, recipe]
 function allRows() {
@@ -110,15 +112,15 @@ test('the nuclear clock comes only from the lab; the comb from the lab\'s circui
   assert.deepEqual(producers('grindless:vuv_caf2_optic').map(([, r]) => r.name), ['vuv_caf2_optics']);
 });
 
-test('the five boules each have their own circuit and a single maker; thorium-229 is used here, made only by the decay store', () => {
+test('the seven boules each have their own circuit and a single maker; thorium-229 is used here, made only by the decay store', () => {
   const circuits = BOULES.map((id) => {
     const p = producers(id);
     assert.equal(p.length, 1, id);
     assert.ok(p[0][0].startsWith('crystals.json:.types.crystal_growth'), id);
     return p[0][1].circuit;
   });
-  assert.equal(new Set(circuits).size, 5);
-  assert.equal(GROW.length, 5);
+  assert.equal(new Set(circuits).size, BOULES.length);
+  assert.equal(GROW.length, BOULES.length);
   assert.deepEqual(producers('grindless:thorium_229').map(([, r]) => r.name), ['decay_store']);
   assert.ok(inputs(by(GROW, 'thorium_caf2')).includes('grindless:thorium_229'));
   // the scavenger and the cap are kept, the argon is a charge

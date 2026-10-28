@@ -1,4 +1,4 @@
-// priority: 5075
+// priority: 5064
 // Gregtech Grindless - names and tooltips of UEV's electron beam furnace and single-crystal foundry (startup_scripts/grindless/uev/electron_beam.js; package UEV-A4):
 //
 //   block.gtceu.<machine>, gtceu.<recipe type>                    machine and recipe type names

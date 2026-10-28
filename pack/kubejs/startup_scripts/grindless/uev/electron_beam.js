@@ -1,4 +1,4 @@
-// priority: -7525
+// priority: -7536
 // -----------------------------------------------------------------------------------------------
 // UEV's electron beam and superalloy (docs/eras/uev.md, machines 6 and 7, lines 11, 12, 13, 33 and 38; package UEV-A4): the electron
 // beam furnace and the single-crystal foundry, their recipe types and the package's own items. The recipes come from
