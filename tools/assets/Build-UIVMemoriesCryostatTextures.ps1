@@ -88,6 +88,16 @@ function New-Face {
             Set-Both $c $e $bx 5 $beam; Set-Both $c $e $bx 6 $beam; Set-Both $c $e $bx 7 $beam
         }
     }
+    if ($Kind -eq 'cryo') {
+        # a frosted cylinder; a cyan ring of frost steps down it
+        $body = Hex '9CB8C8'; $rim = Hex '5C7888'
+        foreach ($x in 6, 7, 8, 9) { foreach ($y in 4, 5, 6, 7, 8) { Set-Px $c $x $y $body }; Set-Px $c $x 9 $rim }
+        if ($Active) {
+            $fr = @((Hex '40C8FF'), (Hex '80E0FF'), (Hex 'C0F0FF'), (Hex 'FFFFFF'))[$Frame % 4]
+            $by = 4 + $Frame
+            foreach ($x in 6, 7, 8, 9) { Set-Both $c $e $x $by $fr }
+        }
+    }
     # run lamp under the window
     Set-Px $c 7 12 $(if ($Active) { $LampOn } else { $LampOff })
     Set-Px $c 8 12 $(if ($Active) { $LampOn } else { $LampOff })
@@ -97,8 +107,8 @@ function New-Face {
     return @{ C = $c; E = $e }
 }
 
-$Dirs = @('block/multiblock/spectral_hole_burner')
-$Kinds = @('hole')
+$Dirs = @('block/multiblock/spectral_hole_burner', 'block/multiblock/millikelvin_cryostat_works')
+$Kinds = @('hole', 'cryo')
 for ($m = 0; $m -lt $Dirs.Count; $m++) {
     $idle = New-Face $Kinds[$m] 0 $false
     Out-Tex $idle.C "$($Dirs[$m])/overlay_front.png"
@@ -149,7 +159,10 @@ $items = @(
     @('eu151_yso_boule', 'tube', 'E8D8F0'), @('er_yso_boule', 'tube', 'F0C8D8'),
     @('eu151_yso_slab', 'ingot', 'D8C8E8'), @('er_yso_slab', 'ingot', 'E8B8C8'),
     @('six_hour_memory_slab', 'blade', 'B890F0'), @('telecom_memory_slab', 'blade', 'F090B0'),
-    @('six_hour_memory', 'disk', 'A070E8')
+    @('six_hour_memory', 'disk', 'A070E8'),
+    @('nuclear_stage', 'ingot', 'C08060'), @('cold_plate', 'blade', '9CC8E0'), @('p_si_processor', 'disk', '70B8A8'),
+    @('er_preform', 'tube', 'F0B8C8'), @('er_fibre', 'blade', 'F098B8'), @('er_fibre_coil', 'disk', 'E88CAC'),
+    @('pumped_edfa', 'disk', 'D07090')
 )
 foreach ($it in $items) {
     $map = $shapes[$it[1]]

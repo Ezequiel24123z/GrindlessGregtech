@@ -113,18 +113,76 @@ test('the older rows exist, each marked UIV-A6', () => {
   assert.match(fibre, /UIV-A6[\s\S]*?name: 'er_yso_pigtail', type: 'fibre_draw', circuit: 10[\s\S]*?grindless:telecom_memory_slab[\s\S]*?grindless:telecom_memory'/);
 });
 
+test('millikelvin cryostat works: circuits 1-3, 31457280 EU/t, module is a catalyst in c3, mixture returned', () => {
+  const rc = T.types.nuclear_demagnetisation.recipes;
+  assert.deepEqual(rc.map((r) => [r.name, r.circuit]), [['nuclear_stage', 1], ['mk_module', 2], ['p_si_processor', 3]]);
+  for (const r of rc) assert.equal(r.eut, 31457280, r.name);
+  assert.equal(rc[0].duration, 1600);
+  assert.deepEqual(inputs(rc[0]), ['gtceu:prni5_dust', 'gtceu:copper_plate']);
+  assert.deepEqual(outputs(rc[0]), ['grindless:nuclear_stage']);
+  assert.deepEqual(inputs(rc[1]), ['grindless:nuclear_stage', 'grindless:cold_plate', 'gtceu:he3_he4_mixture']);
+  assert.deepEqual(outputs(rc[1]), ['grindless:mk_cryostat_module', 'gtceu:he3_he4_mixture']);
+  assert.deepEqual(ids(rc[2].itemsIn), ['grindless:p_si_die']);
+  assert.deepEqual(ids(rc[2].kept), ['grindless:mk_cryostat_module']);
+  assert.deepEqual(outputs(rc[2]), ['grindless:p_si_processor']);
+  for (const r of rc) assert.ok(r.itemsIn.length + ids(r.kept).length + 1 <= 3, r.name);
+});
+
+test('line 42 and 44 steps: Pr metal is the oxide only consumer, ErCl3, cold plate, fibre chain; no second PrNi5 row', () => {
+  assert.deepEqual(inputs(by('electric_blast_furnace', 'praseodymium_metal')), ['gtceu:praseodymium_oxide_dust', 'gtceu:hydrogen']);
+  assert.deepEqual(outputs(by('electric_blast_furnace', 'praseodymium_metal')), ['gtceu:praseodymium_dust', 'minecraft:water']);
+  assert.deepEqual(inputs(by('chemical_reactor', 'erbium_chloride_solution')), ['gtceu:erbium_oxide_dust', 'gtceu:hydrochloric_acid']);
+  assert.deepEqual(outputs(by('chemical_reactor', 'erbium_chloride_solution')), ['gtceu:erbium_chloride_solution', 'minecraft:water']);
+  assert.deepEqual(outputs(by('assembler', 'cold_plate')), ['grindless:cold_plate']);
+  assert.deepEqual(outputs(by('assembler', 'er_fibre')), ['grindless:er_fibre']);
+  assert.deepEqual(outputs(by('assembler', 'er_fibre_coil')), ['grindless:er_fibre_coil']);
+  assert.deepEqual(inputs(by('assembler', 'pumped_edfa')), ['grindless:er_fibre_coil', 'grindless:ingaas_pump_module']);
+  assert.deepEqual(outputs(by('assembler', 'pumped_edfa')), ['grindless:pumped_edfa']);
+  for (const f of scripts(path.join(kube, 'server_scripts')).concat(OTHER_TABLES.map((n) => path.join(tables, n)))) {
+    if (f.endsWith(path.join('uiv', 'memories_cryostat.js')) || f.endsWith(path.join('zpm', 'europium.js'))) continue; // europium.js is the producer
+    assert.ok(!fs.readFileSync(f, 'utf8').includes('gtceu:praseodymium_oxide_dust'), `${path.relative(kube, f)}     reads the Pr oxide`);
+  }
+});
+
+test('older rows: cold.js he3_he4_mixture and photonics er_mcvd_preform, marked UIV-A6', () => {
+  const cold = read('server_scripts', 'grindless', 'uv', 'cold.js');
+  assert.match(cold, /UIV-A6[^\n]*\n\s*\{ name: 'he3_he4_mixture', type: 'superfluid_helium', circuit: null, itemsIn: \[\], fluidsIn: \[fluid\('gtceu:helium_3_concentrate', 200\)\],\s*itemsOut: \[\], fluidsOut: \[fluid\('gtceu:he3_he4_mixture', 200\)\]/);
+  assert.ok(cold.indexOf("name: 'para_h2_target'") < cold.indexOf("name: 'he3_he4_mixture'"));
+  const ph = read('server_scripts', 'grindless', 'uv', 'photonics.js');
+  assert.match(ph, /UIV-A6[^\n]*\n\s*\{ name: 'er_mcvd_preform', type: 'fibre_draw', circuit: 11[\s\S]*?gtceu:erbium_chloride_solution[\s\S]*?grindless:er_preform/);
+});
+
+test('"only from" claims for the cryostat chain', () => {
+  const claims = {
+    'grindless:nuclear_stage': 'nuclear_demagnetisation/nuclear_stage',
+    'grindless:mk_cryostat_module': 'nuclear_demagnetisation/mk_module',
+    'grindless:p_si_processor': 'nuclear_demagnetisation/p_si_processor',
+    'grindless:cold_plate': 'assembler/cold_plate',
+    'grindless:pumped_edfa': 'assembler/pumped_edfa',
+    'grindless:er_fibre_coil': 'assembler/er_fibre_coil'
+  };
+  for (const [id, where] of Object.entries(claims)) {
+    const mine = Object.entries(T.types).flatMap(([type, t]) => t.recipes.filter((r) => outputs(r).includes(id)).map((r) => `${type}/${r.name}`));
+    assert.deepEqual(mine, [where], id);
+    for (const f of OTHER_TABLES) {
+      const txt = fs.readFileSync(path.join(tables, f), 'utf8');
+      assert.equal([...txt.matchAll(new RegExp(`"(?:itemsOut|fluidsOut)"\\s*:\\s*\\[[^\\]]*"${id}"`, 'g'))].length, 0, `${f} produces ${id}`);
+    }
+  }
+});
+
 test('lang parity: every ENTRY and ITEM has en_us and es_es, every item has a texture', () => {
   const lang = read('client_scripts', 'grindless', 'uiv_memories_cryostat_lang.js');
   const itemNames = [...lang.matchAll(/^\s+\['([a-z0-9_]+)', '[^']+', '[^']+', /gm)].map((m) => m[1]);
   const start = read('startup_scripts', 'grindless', 'uiv', 'memories_cryostat.js');
   const registered = [...start.matchAll(/^\s+([a-z0-9_]+): \{ stack: \d+ \}/gm)].map((m) => m[1]);
-  assert.equal(registered.length, 7);
+  assert.equal(registered.length, 14);
   assert.deepEqual(itemNames.sort(), registered.slice().sort());
   const keys = [...lang.matchAll(/^\s+\['((?:block|gtceu|material|grindless)\.[^']+)',\s*$/gm)].map((m) => m[1]);
   const flat = [...lang.matchAll(/^\s+\['((?:block|gtceu|material)\.[^']+)', '[^']+', '[^']+'\]/gm)].map((m) => m[1]);
-  for (const k of ['block.gtceu.spectral_hole_burner', 'gtceu.spectral_hole_burning']) assert.ok(flat.includes(k), k);
+  for (const k of ['block.gtceu.spectral_hole_burner', 'gtceu.spectral_hole_burning', 'block.gtceu.millikelvin_cryostat_works', 'gtceu.nuclear_demagnetisation', 'material.gtceu.he3_he4_mixture', 'material.gtceu.erbium_chloride_solution']) assert.ok(flat.includes(k), k);
   for (const n of ['eu151_yso', 'er_yso']) assert.ok(keys.includes(`gtceu.recipe.grindless_crystal_growth.${n}`), n);
-  for (const m of ['spectral_hole_burner']) for (let i = 0; i < 3; i++) assert.ok(keys.includes(`grindless.machine.${m}.tooltip.${i}`), `${m} ${i}`);
+  for (const m of ['spectral_hole_burner', 'millikelvin_cryostat_works']) for (let i = 0; i < 3; i++) assert.ok(keys.includes(`grindless.machine.${m}.tooltip.${i}`), `${m} ${i}`);
   for (const [type, t] of Object.entries(T.types)) {
     if (!t.dataKey) continue;
     for (const r of t.recipes) assert.ok(keys.includes(`gtceu.recipe.${t.dataKey}.${r.name}`), `${t.dataKey}.${r.name}`);
@@ -132,7 +190,7 @@ test('lang parity: every ENTRY and ITEM has en_us and es_es, every item has a te
   for (const n of registered) {
     assert.ok(fs.existsSync(path.join(kube, 'assets', 'grindless', 'textures', 'item', `${n}.png`)), n);
   }
-  for (const m of ['spectral_hole_burner']) {
+  for (const m of ['spectral_hole_burner', 'millikelvin_cryostat_works']) {
     for (const f of ['overlay_front.png', 'overlay_front_active.png', 'overlay_front_active_emissive.png']) {
       assert.ok(fs.existsSync(path.join(kube, 'assets', 'grindless', 'textures', 'block', 'multiblock', m, f)), `${m}/${f}`);
     }

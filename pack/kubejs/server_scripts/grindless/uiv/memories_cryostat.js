@@ -165,7 +165,7 @@
   function addControllers(event) {
     var HULL = 'gtceu:uiv_machine_hull'
     var COMPUTER = 'gtnn:optical_computer'
-    var parts = { spectral_hole_burner: 'grindless:uev_sensor' }
+    var parts = { spectral_hole_burner: 'grindless:uev_sensor', millikelvin_cryostat_works: 'grindless:uev_electric_pump' }
     MC.controllerRecipes = []
     Object.keys(parts).forEach(function (name) {
       var machine = 'gtceu:' + name
