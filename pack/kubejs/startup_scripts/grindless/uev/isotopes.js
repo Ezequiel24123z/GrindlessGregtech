@@ -1,3 +1,4 @@
+// priority: -7575
 // -----------------------------------------------------------------------------------------------
 // UEV's isotope separation (docs/eras/uev.md, machine 1, lines 1, 2, 29 and 30; package UEV-A1): the calutron, its recipe type, the
 // intermediate GT materials of the four lines and the four items that carry them to the superheavy package (UEV-A2). The recipes come

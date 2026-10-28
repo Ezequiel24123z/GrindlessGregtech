@@ -6,6 +6,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { test } from 'node:test';
 import { fileURLToPath } from 'node:url';
+import { runPackScripts } from '../lib/kubejs_static.mjs';
 
 const here = path.dirname(fileURLToPath(import.meta.url));
 const root = path.resolve(here, '..', '..', '..');
@@ -131,6 +132,17 @@ test('the blade waits on Barnard\'s rhenium: the 6N rhenium row eats GTM\'s rhen
   assert.ok(inputs(by('mixer', 'sx_master_alloy')).includes('grindless:six_n_rhenium'));
   assert.ok(!inputs(by('mixer', 'sx_master_alloy')).includes('gtceu:rhenium_ingot'));
   assert.ok(inputs(by('single_crystal_casting', 'sx_blade')).includes('grindless:sx_master_alloy_dust'));
+});
+
+test('rhenium is GTM\'s bare element: it gets its ingot in materialModification, never a second material of that name', () => {
+  assert.doesNotMatch(startup, /event\.create\('rhenium'\)/);
+  const mod = startup.slice(startup.indexOf('GTCEuStartupEvents.materialModification'));
+  assert.match(mod, /GTMaterials\.get\('rhenium'\)/);
+  assert.match(mod, /ensureSet\(PropertyKey\.INGOT, true\)/);
+  const run = runPackScripts(path.join(root, 'pack'));
+  assert.ok(run.registry.modifiedMaterials.has('gtceu:rhenium'), 'the static run records the form it adds');
+  assert.ok(run.registry.modifiedMaterials.has('gtceu:ytterbium'), 'UV\'s ytterbium too');
+  assert.ok(!run.registry.materials.has('gtceu:rhenium'));
 });
 
 test('gates are remelted and the dross has a destination; the foundry refuses to void', () => {

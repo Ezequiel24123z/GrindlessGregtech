@@ -322,6 +322,7 @@ export function runPackScripts(packDir, { originals = [] } = {}) {
     fluids: new Map(), // id -> {id, file, material?}
     blocks: new Map(),
     materials: new Map(), // name -> {name, forms:Set, file}
+    modifiedMaterials: new Set(), // gtceu:<name> of GTM's own materials a script gives a form (materialModification ensureSet)
     recipeTypes: new Map(), // id -> {id, file}
     machines: new Map(), // id -> {id, kind, recipeTypes:[], file, name}
   };
@@ -499,10 +500,15 @@ export function runPackScripts(packDir, { originals = [] } = {}) {
   sctx.GTFluidBuilder = function () {
     return recorder({ name: (p, a) => { queuedFluids.push({ name: String(a[0]), file: currentFile }); } });
   };
-  // GTM's own materials: a fluid property with nothing queued yet, so a script can queue one more fluid (liquid nitrogen)
+  // GTM's own materials: a fluid property with nothing queued yet, so a script can queue one more fluid (liquid nitrogen); a form
+  // added with getProperties().ensureSet(...) (a bare GTM element such as ytterbium or rhenium) records the material as one of ours
   const fluidProperty = () => recorder({ getQueuedBuilder: () => null, get: () => null });
-  const material = recorder({ getProperty: () => fluidProperty(), hasProperty: () => true });
-  sctx.GTMaterials = new Proxy({}, { get: (t, prop) => (prop === 'get' ? () => material : typeof prop === 'string' ? material : undefined) });
+  const material = (name) => recorder({
+    getProperty: () => fluidProperty(), hasProperty: () => true, isNull: () => false,
+    getProperties: () => recorder({ ensureSet: () => { registry.modifiedMaterials.add('gtceu:' + name); } }),
+  });
+  const snake = (s) => s.replace(/([a-z0-9])([A-Z])/g, '$1_$2').toLowerCase();
+  sctx.GTMaterials = new Proxy({}, { get: (t, prop) => (prop === 'get' ? (n) => material(String(n)) : typeof prop === 'string' ? material(snake(prop)) : undefined) });
   for (const l of take('GTCEuStartupEvents', 'materialModification')) fire(sctx, l, any, 'materialModification');
   for (const q of queuedFluids) registry.fluids.set('gtceu:' + q.name, { id: 'gtceu:' + q.name, file: q.file, queued: true });
 

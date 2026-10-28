@@ -1,3 +1,4 @@
+// priority: -23049
 // -----------------------------------------------------------------------------------------------
 // Recipes of UEV's electron beam furnace and single-crystal foundry (machines and recipe types: startup_scripts/grindless/uev/electron_beam.js;
 // docs/eras/uev.md, machines 6 and 7, lines 11, 12, 13, 33 and 38; package UEV-A4), generated at every server load from

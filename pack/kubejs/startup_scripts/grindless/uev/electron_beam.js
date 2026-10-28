@@ -1,3 +1,4 @@
+// priority: -7525
 // -----------------------------------------------------------------------------------------------
 // UEV's electron beam and superalloy (docs/eras/uev.md, machines 6 and 7, lines 11, 12, 13, 33 and 38; package UEV-A4): the electron
 // beam furnace and the single-crystal foundry, their recipe types and the package's own items. The recipes come from
@@ -168,9 +169,16 @@
 
   // ---------------------------------------------------------------- recipe types
 
-  // the pack has no rhenium: the material is ours (B3 adds its Barnard producer); dust and ingot, formula Re
-  GTCEuStartupEvents.registry('gtceu:material', function (event) {
-    event.create('rhenium').ingot().iconSet(GTMaterialIconSet.METALLIC).color(0x8a9096).formula('Re').flags(GTMaterialFlags.DISABLE_DECOMPOSITION)
+  // GTM registers rhenium as a bare element with no form, so a new material of that name is dropped (as UV's ytterbium,
+  // uv/foundation.js): it gets its ingot here, which adds the dust; B3 adds its Barnard producer
+  GTCEuStartupEvents.materialModification(function (event) {
+    try {
+      var re = GTMaterials.get('rhenium')
+      if (re == null || re.isNull()) return
+      re.getProperties().ensureSet(PropertyKey.INGOT, true)
+    } catch (e) {
+      console.error(LOG + 'rhenium: dust and ingot not added: ' + e)
+    }
   })
 
   GTCEuStartupEvents.registry('gtceu:recipe_type', function (event) {
