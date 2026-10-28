@@ -23,8 +23,8 @@
   var TYPES = ['gtceu:assembler', 'gtceu:circuit_assembler', 'gtceu:forming_press', 'gtceu:laser_engraver', 'gtceu:cutter']
   var POPPY = 'minecraft:poppy'
   var RED = 'minecraft:red_dye'
-  var DANDELION = 'minecraft:dandelion'
-  var YELLOW = 'minecraft:yellow_dye'
+  var DANDELION = 'minecraft:lily_of_the_valley'
+  var YELLOW = 'minecraft:white_dye'
   var PROBE_EUT = 2
   var ASM_EUT = 2048
   var CIRCUIT_EUT = 1024
@@ -376,14 +376,16 @@
         rlg.updateTickSubscription()
         u.started = S.tick
       }
-      if (u.snap === null && rlg.isWorking()) {
+      if (u.snap === null) {
         var sn = snapshot(m)
-        if (sn !== null && sn.id.indexOf('qf_asm') >= 0) {
+        if (sn !== null) {
           u.snap = sn
           u.consumed = u.initial - sumItems(u.inBus, DANDELION)
+          u.snapTick = S.tick - u.started
         }
       }
       var yel = sumItems(u.outBus, YELLOW)
+      if (yel > 0 && S.tick - u.started < 3) note('asm_early', 'output ' + yel + ' at tick ' + (S.tick - u.started) + '; snap ' + fmt(u.snap))
       if (yel > 0 || S.tick - u.started > 600) {
         var volt = Number(m.getMaxVoltage())
         var want = Math.min(u.def.ceiling, Math.floor(volt / ASM_EUT), u.initial)
