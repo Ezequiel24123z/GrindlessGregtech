@@ -1207,3 +1207,12 @@ powershell -NoProfile -ExecutionPolicy Bypass -File tools\assets\Build-MegaPolym
 | File (under `textures/`) | Notes |
 |---|---|
 | `block/multiblock/polymer_works/overlay_front*.png` | The Polymer Works controller face: still, active and active emissive. |
+
+## UEV wireless tier (UEV-W)
+
+Procedural, drawn by `Build-UEVWirelessTextures.ps1` with the routines and palette of `Build-WirelessEnergyTextures.ps1` (loaded from its syntax tree; nothing else of it runs); nothing is copied from another mod. GTM's UEV colour (green, 3FD05A). It writes the UEV SMES cell (`block/wireless/smes_cell_uev`, the table's uev row texture), the covers on a machine's face (`block/cover/wireless_{energy,dynamo}_cover_uev`) and the cover items (`item/wireless/{energy,dynamo}_cover_uev`): 5 files. The hatch overlays and the covers' emissive layer are the wireless script's.
+
+```powershell
+powershell -NoProfile -ExecutionPolicy Bypass -File tools\assets\Build-UEVWirelessTextures.ps1
+powershell -NoProfile -ExecutionPolicy Bypass -File tools\assets\Build-UEVWirelessTextures.ps1 -Credits
+```
