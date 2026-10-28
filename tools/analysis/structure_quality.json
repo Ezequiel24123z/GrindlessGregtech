@@ -679,54 +679,34 @@
   "c": 195
  },
  "gtceu:large_steam_centrifuge": {
-  "v": [
-   "solid-cuboid",
-   "dominant-share",
-   "few-block-types"
-  ],
-  "bt": 2,
-  "ds": 0.839,
-  "c": 125
+  "v": [],
+  "bt": 5,
+  "ds": 0.69,
+  "c": 101
  },
  "gtceu:large_steam_chemical_bath": {
-  "v": [
-   "solid-cuboid",
-   "dominant-share",
-   "few-block-types"
-  ],
-  "bt": 2,
-  "ds": 0.839,
-  "c": 125
+  "v": [],
+  "bt": 5,
+  "ds": 0.69,
+  "c": 101
  },
  "gtceu:large_steam_macerator": {
-  "v": [
-   "solid-cuboid",
-   "dominant-share",
-   "few-block-types"
-  ],
-  "bt": 2,
-  "ds": 0.839,
-  "c": 125
+  "v": [],
+  "bt": 5,
+  "ds": 0.69,
+  "c": 101
  },
  "gtceu:large_steam_ore_washer": {
-  "v": [
-   "solid-cuboid",
-   "dominant-share",
-   "few-block-types"
-  ],
-  "bt": 2,
-  "ds": 0.839,
-  "c": 125
+  "v": [],
+  "bt": 5,
+  "ds": 0.69,
+  "c": 101
  },
  "gtceu:large_steam_thermal_centrifuge": {
-  "v": [
-   "solid-cuboid",
-   "dominant-share",
-   "few-block-types"
-  ],
-  "bt": 2,
-  "ds": 0.839,
-  "c": 125
+  "v": [],
+  "bt": 5,
+  "ds": 0.69,
+  "c": 101
  },
  "gtceu:laser_fusion_chamber": {
   "v": [
@@ -865,16 +845,10 @@
   "c": 85
  },
  "gtceu:methane_pyrolyser": {
-  "v": [
-   "hollow-box",
-   "mono-block",
-   "dominant-share",
-   "few-block-types",
-   "no-functional-detail"
-  ],
-  "bt": 1,
-  "ds": 1,
-  "c": 98
+  "v": [],
+  "bt": 5,
+  "ds": 0.431,
+  "c": 103
  },
  "gtceu:microgravity_smelter": {
   "v": [
