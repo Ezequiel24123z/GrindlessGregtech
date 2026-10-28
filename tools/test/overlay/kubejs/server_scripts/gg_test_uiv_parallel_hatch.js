@@ -1,4 +1,4 @@
-// priority: -8524
+// priority: -8440
 // TEST ONLY, UIV-M1 (gtceu:uiv_parallel_hatch). Command: kubejs custom_command gg_test_uiv_parallel_hatch
 // Band ONLY: X 35392-35455, Z 0-63, Overworld Y 98-115.
 //   T1 (named uncertainty: tier 11 registration of ParallelHatchPartMachine with highTierContent off, and its use in a mega):

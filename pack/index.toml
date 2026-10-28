@@ -857,6 +857,30 @@ file = "kubejs/assets/grindless/textures/block/machines/uhv_parallel_hatch/overl
 hash = "da963211e2d29a1db069c8feb15e8e5c31136f9683b9e1f9028397dfbc12dd86"
 
 [[files]]
+file = "kubejs/assets/grindless/textures/block/machines/uiv_parallel_hatch/overlay_front.png"
+hash = "569e0dabd6039a4414487ffdafe7b169705e7dae8946afe4039dc8fe4a8bd671"
+
+[[files]]
+file = "kubejs/assets/grindless/textures/block/machines/uiv_parallel_hatch/overlay_front_active.png"
+hash = "a7fe372596bcc4411055f560b91deba881de0d84dad565ad334bc327622ec598"
+
+[[files]]
+file = "kubejs/assets/grindless/textures/block/machines/uiv_parallel_hatch/overlay_front_active.png.mcmeta"
+hash = "d1e77f71dc0860d72b053363c7fefc41f2ea8ee6be779921d44f4fd8cba1faf3"
+
+[[files]]
+file = "kubejs/assets/grindless/textures/block/machines/uiv_parallel_hatch/overlay_front_active_emissive.png"
+hash = "e7490d43952d60b88ebfced8bd622760716e1485a21eb5805bd454c49fa223c4"
+
+[[files]]
+file = "kubejs/assets/grindless/textures/block/machines/uiv_parallel_hatch/overlay_front_active_emissive.png.mcmeta"
+hash = "d1e77f71dc0860d72b053363c7fefc41f2ea8ee6be779921d44f4fd8cba1faf3"
+
+[[files]]
+file = "kubejs/assets/grindless/textures/block/machines/uiv_parallel_hatch/overlay_front_emissive.png"
+hash = "b521a8c26a2a3d8190c8de96e5b3e0b4c705e811eaa729bcbafcff9bb526dbfc"
+
+[[files]]
 file = "kubejs/assets/grindless/textures/block/machines/wireless/overlay_dynamo.png"
 hash = "26443766e7e351a51a6c7c3eaef8c7ab36c14df09c2c9be84e3b39ea84d2b961"
 
@@ -7333,6 +7357,10 @@ file = "kubejs/client_scripts/grindless/uiv_foundation_lang.js"
 hash = "7dd96866d06ce1377199eef0776238dfe01b8a24c2d5dbf9dd11088d539ce310"
 
 [[files]]
+file = "kubejs/client_scripts/grindless/uiv_parallel_hatch_lang.js"
+hash = "dbf0b65264cb54c83321fb32fc0dc717b8445cae11716af0d57053280ec3c0b0"
+
+[[files]]
 file = "kubejs/client_scripts/grindless/uiv_wireless_lang.js"
 hash = "650b896eafb8d62676e6fdaa06b05bc3c64b945fad2d135b20f7591918720213"
 
@@ -7754,7 +7782,7 @@ hash = "1f4b256531a0b42a6ecf399e9b692d9e4730bd4102e53aab3e1fa2c999b69e9d"
 
 [[files]]
 file = "kubejs/data/grindless/tables/hidden_until.json"
-hash = "a9305fd0dc824599c04a9f906bcd87dc787f97a3834739f26cb7b84d6858966e"
+hash = "dc15819fadf9dc2907f698572e9cb451577dc2e1790e1b032af7a7e0c0dc5978"
 
 [[files]]
 file = "kubejs/data/grindless/tables/horizon_collector.json"
@@ -8641,6 +8669,10 @@ file = "kubejs/server_scripts/grindless/uiv/foundation.js"
 hash = "9313cf07845319649974587dca7c0d2452ca249cd9bb25f24fa2a2aa671605ea"
 
 [[files]]
+file = "kubejs/server_scripts/grindless/uiv/parallel_hatch.js"
+hash = "2e1905a1814f9f5276336e2b88ffcb745c2006572af665d486390ea68548daae"
+
+[[files]]
 file = "kubejs/server_scripts/grindless/uv/accelerators.js"
 hash = "1f50f04b4c0acb7500c4cc43f55e83767ecbe3932eeb4c1853ecefead4099979"
 
@@ -8938,7 +8970,7 @@ hash = "e1b314c357892c3eb62496ca43d74fb32423889b577fb84cd6cf6785b060e5c5"
 
 [[files]]
 file = "kubejs/startup_scripts/grindless/lib/parallel_hatch.js"
-hash = "dad5ee86ab67bae7fdcef8f3e7da19a3e20dbe1e3f09b461efacbf71067dfa2e"
+hash = "36c0032e46f85fc7389f17c3105ab34166208ab3cea484a32a6cb317210072b7"
 
 [[files]]
 file = "kubejs/startup_scripts/grindless/lib/patterns.js"

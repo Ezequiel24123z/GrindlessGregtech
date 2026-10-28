@@ -1496,3 +1496,16 @@ powershell -NoProfile -ExecutionPolicy Bypass -File tools\assets\Build-UEVStella
 | File (under `textures/`) | Notes |
 |---|---|
 | `block/multiblock/stellar_forge/overlay_front*.png` | The Stellar Forge controller face; still, active and active emissive. |
+
+## UIV parallel hatch (UIV-M1)
+
+Procedural, drawn by `Build-UIVParallelHatchTextures.ps1` with a magenta accent (an approximation chosen to set it apart from the UEV hatch's green, not read from GTM); nothing is copied from another mod. The UIV hatch (`gtceu:uiv_parallel_hatch`, x16384) follows the UHV and UEV hatches' layout; 2 active frames.
+
+```powershell
+powershell -NoProfile -ExecutionPolicy Bypass -File tools\assets\Build-UIVParallelHatchTextures.ps1
+powershell -NoProfile -ExecutionPolicy Bypass -File tools\assets\Build-UIVParallelHatchTextures.ps1 -Credits
+```
+
+| File (under `textures/`) | Notes |
+|---|---|
+| `block/machines/uiv_parallel_hatch/overlay_front*.png` | A dark panel with four parallel bars of the accent colour split by a centre rib; active, the bars brighten. |
