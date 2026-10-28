@@ -41,7 +41,7 @@
     ],
 
     "ignoreOreBlocks": true,
-    "ignore": ["*:*_indicator"],
+    "ignore": ["*:*_indicator", "gcyr:proxima_centauri_b_*", "gcyr:prb_*"],
     "creative": ["*:creative_*", "*:*_creative_*", "*:debug_*", "gtceu:portable_debug_scanner"],
 
     "later": [
@@ -50,11 +50,11 @@
 
     "unlockLimit": 200,
     "classes": [
-      { "class": "B", "materials": ["grindless:tether_spool"], "era": "LuV (B7, held)", "until": "uhv", "unless": "tether", "reason": "LuV-A1 registration (startup_scripts/grindless/luv/foundation.js) held hidden while tables/stations.json is not in the tether mode (package B7, Io orbit: the flux-tube tether, spike S0-3); until zpm, so IMPLEMENTED_ERA luv keeps it out, and unless tether, so hidden.js shows it as soon as the table turns the tether mode on. In the tether mode its recipes exist and the group drops out on the next regeneration; in the sulfur-iodine mode it stays hidden (reclassify it as class C then)" },
+      { "class": "B", "materials": ["grindless:tether_spool"], "era": "LuV (B7, held)", "until": "uev", "unless": "tether", "reason": "LuV-A1 registration (startup_scripts/grindless/luv/foundation.js) held hidden while tables/stations.json is not in the tether mode (package B7, Io orbit: the flux-tube tether, spike S0-3); until zpm, so IMPLEMENTED_ERA luv keeps it out, and unless tether, so hidden.js shows it as soon as the table turns the tether mode on. In the tether mode its recipes exist and the group drops out on the next regeneration; in the sulfur-iodine mode it stays hidden (reclassify it as class C then)" },
 
       { "class": "C", "materials": ["ytterbium"], "reason": "UV-F1 registered ytterbium metal (S0-8), but UV-A6 dopes the fibre preform with ytterbium oxide from the EV cascade's Yb strip and nothing reduces the oxide: the metal has no producer; kept registered for saves, future use undecided" },
       { "class": "C", "materials": ["thorium_nitride"], "reason": "UV-F1 registered thorium nitride as a material, but UV-A1 makes the nitride fuel assembly straight from thorium dust, carbon and nitrogen-15 (tables/thorium_fabrication.json, carbothermal nitridation inside the row): the loose material has no producer or consumer" },
-      { "class": "B", "materials": ["gcyr:dyson_*", "gcyr:drone_hangar"], "era": "UHV (Dyson swarm)", "until": "uhv", "reason": "Dyson swarm from docs/journey.md (UHV): GCYR gives no recipe for these parts" },
+      { "class": "C", "materials": ["gcyr:dyson_*", "gcyr:drone_hangar"], "reason": "GCYR's Dyson swarm parts stay hidden for good (docs/eras/uhv.md, Dyson swarm): our swarm is our own machines (UHV-B3), so GCYR's satellite, drone hangar and Dyson blocks have no recipe and no use" },
       { "class": "C", "materials": ["gcyr:*_satellite", "gcyr:gps_tracker", "gcyr:beam_receiver", "gcyr:airlock_door"], "reason": "GCYR 0.2.9's satellites, GPS tracker, beam receiver and airlock door: no recipe and no deploy (docs/eras/luv.md, Considered and dropped: the satellites, the rectenna); they stay hidden" },
       { "class": "B", "materials": ["gtca:space_miner_*", "gtca:space_pump_*", "gtca:space_assembler_*"], "era": "UEV (elevator modules)", "until": "uev", "reason": "GTCA 2.2.0's elevator modules: the assembler modules form only without buses and the elevator never feeds them (UHV-S0-8, docs/research/uhv-s0.md); miner and pump are not in the UHV design; GTCA's test recipes are removed (integration/gtca.js)" },
       { "class": "B", "materials": ["gtceu:uev_machine_casing", "gtceu:uiv_machine_casing", "gtceu:uxv_machine_casing", "gtceu:opv_machine_casing", "gtceu:max_machine_casing"], "era": "UEV–MAX", "until": "uev", "reason": "casings for the UEV–MAX tiers from docs/journey.md: GTM gives them no recipe" },
