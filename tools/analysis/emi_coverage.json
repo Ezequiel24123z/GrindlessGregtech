@@ -14,6 +14,7 @@
     "globs": [],
     "items": [
       { "id": "grindless:synroc_block", "reason": "ZPM-A4: the sealed final form of the waste (zpm.md, machines 4 and 5: kept, inert, a block of its own)" },
+      { "id": "grindless:alkali_sulfate_dust", "reason": "UEV-A4: the fluorspar kiln's inert Na/K sulfate leftover, voided (principle 3: inert byproducts may be voided)" },
       { "id": "grindless:heavy_curium_oxide", "reason": "UV-A2: the curium-245/246 fraction, stored for UHV (uv.md machine 3: UHV breeds berkelium and californium from it)" },
       { "id": "grindless:multimessenger_catalogue", "reason": "ZPM-A9: the seed of UV's telescope (zpm.md, Bridges and 'What ZPM leaves')" },
       { "id": "grindless:pluto_kuiper_chart", "reason": "ZPM-A9: UV's trip to Pluto and the Kuiper Belt (zpm.md, 'What ZPM leaves')" },
@@ -59,9 +60,27 @@
   ],
   "exceptions": [
   { "id": "grindless:itbtc_coated_conductor", "role": "use", "reason": "temporary (LuV-A3): its uses, the HTS coil and the SMES cell, are LuV-A4's magnet works; delete this exception when A4 merges" },
-  { "id": "grindless:chondritic_extract", "role": "use", "reason": "temporary (LuV-B5): its use, the Europan culture of the algae bioreactor, is LuV-B8's; delete this exception when B8 merges" }
+  { "id": "grindless:chondritic_extract", "role": "use", "reason": "temporary (LuV-B5): its use, the Europan culture of the algae bioreactor, is LuV-B8's; delete this exception when B8 merges" },
+  { "id": "grindless:ca48_oven_charge", "role": "use", "reason": "temporary (UEV-A1): its use, the Ca-48 beam (uev.md line 1), is UEV-A2's; delete this exception when A2 merges" },
+  { "id": "grindless:plutonium_244_target", "role": "use", "reason": "temporary (UEV-A1): its use, the flerovium run (uev.md A2 c1), is UEV-A2's; delete this exception when A2 merges" },
+  { "id": "fluid:gtceu:curium_nitrate", "role": "use", "reason": "temporary (UEV-A1): its use, the Cm-248 cut, is UEV-A2's; delete this exception when A2 merges" },
+  { "id": "fluid:gtceu:californium_nitrate", "role": "use", "reason": "temporary (UEV-A1): its use, the Cf-249 cut, is UEV-A2's; delete this exception when A2 merges" },
+  { "id": "fluid:gtceu:berkelium_nitrate", "role": "use", "reason": "temporary (UEV-A1): its use, the Bk target cut, is UEV-A2's; delete this exception when A2 merges" },
+  { "id": "grindless:nb3sn_srf_cavity", "role": "use", "reason": "temporary (UEV-A4): its use, the superheavy cyclotron's SRF stage (uev.md line 38, A2 depends on A4), is UEV-A2's; delete this exception when A2 merges" },
+  { "id": "grindless:onion_carbon", "role": "use", "reason": "temporary (UEV-A4): its use, nanotwinned diamond in the megabar press (c2), is UEV-A3's; delete this exception when A3 merges" },
+  { "id": "grindless:six_n_hafnium", "role": "use", "reason": "temporary (UEV-A4): its use, the HfTaCN spark plasma sinterer row, is UEV-A5's; delete this exception when A5 merges" },
+  { "id": "grindless:terbium_oxide_dust", "role": "use", "reason": "temporary (UEV-A4): its use, the TGG isolator (uev.md line 32, UHV crystal furnace row), is UEV-A8's; delete this exception when A8 merges" },
+  { "id": "gtceu:potassium_40_dust", "role": "use", "reason": "temporary (UEV-A1): its use, the Fermi mixture (uev.md line 30, c1 Li-6 + K-40), is UEV-A8's; delete this exception when A8 merges" },
+  { "id": "gtceu:lithium_6_dust", "role": "use", "reason": "temporary (UEV-A1): its use, the Fermi gas (uev.md line 29, c1 Li-6 + K-40), is UEV-A8's; delete this exception when A8 merges" }
   ],
   "pendingRoutes": [
-    { "id": "grindless:naquadria_magnets/uev_smes_cell", "reason": "UEV-W: the UEV SMES cell is made from 4 UHV cells plus lay_superhydride wire and plate, held until UEV; the last of A3, A6 and A8 to merge deletes this entry with the UEV (W) obtain rule" }
+    { "id": "grindless:naquadria_magnets/uev_smes_cell", "reason": "UEV-W: the UEV SMES cell is made from 4 UHV cells plus lay_superhydride wire and plate, held until UEV; the last of A3, A6 and A8 to merge deletes this entry with the UEV (W) obtain rule" },
+    { "id": "grindless:electron_beam_refining/rhenium", "reason": "UEV-A4: GT rhenium has no producer before UEV-B3's Barnard line (obtain rule UEV (B3)); B3 deletes the SX entries with that rule" },
+    { "id": "grindless:mixer/sx_master_alloy", "reason": "UEV-A4: needs 6N rhenium, held until UEV-B3 (obtain rule UEV (B3)); B3 deletes the SX entries with that rule" },
+    { "id": "grindless:single_crystal_casting/sx_blade", "reason": "UEV-A4: needs the SX master alloy, held until UEV-B3 (rhenium); B3 deletes the SX entries with that rule" },
+    { "id": "grindless:single_crystal_casting/pump_impeller", "reason": "UEV-A4: needs the SX master alloy, held until UEV-B3 (rhenium); B3 deletes the SX entries with that rule" },
+    { "id": "grindless:single_crystal_casting/turbine_wheel", "reason": "UEV-A4: needs the coated SX blade and master alloy, held until UEV-B3 (rhenium); B3 deletes the SX entries with that rule" },
+    { "id": "grindless:electron_beam_refining/ysz_coating", "reason": "UEV-A4: coats the bond-coated SX blade, held until UEV-B3 (rhenium); B3 deletes the SX entries with that rule" },
+    { "id": "grindless:pgm_refining/uev/sx_dross", "reason": "UEV-A4: SX dross comes from the master alloy, held until UEV-B3 (rhenium); B3 deletes the SX entries with that rule" }
   ]
 }
