@@ -1,0 +1,1990 @@
+// Gregtech Grindless - UEV-S0 spike gg_test_uev_s0_stations (S0-2, S0-4, S0-11 flights): adapted from gg_test_uhv_s0_stations.js (the
+// comments below describe its origin). Needs the spike overlay tools/test/uhv-s0/kubejs merged over the overlay (spike blocks
+// grindless:s0_motor6 / s0_uhv_tank, the Proxima orbit override, the 7th/8th station rows, the s0 swarm control).
+// First the gate: a formed gtceu:s0_swarm_control runs a recipe, the player stands on it and a server-side teleportTo moves them to
+// grindless:proxima_b_orbit and back (S0-7). Then two real station flights: a level-6 rocket (elite motors + aerogel tanks) to
+// gcyr:mercury_orbit (7th slot) and a level-8 rocket (tier-6 spike motors + BNNT tanks) to grindless:proxima_b_orbit (8th slot),
+// each allocating a new station; save-all flush and the stations read back from disk (S0-4); the rocket tiers by reflection (S0-2).
+// Armed by kubejs/config/gg_test_uhv_s0_stations.json = {"enabled": true}; run the client suite; last line GGTEST|uhv_s0_stations|DONE.
+// Partner: client_scripts/gg_test_uhv_s0_stations.js (planet screen click, screenshots, skies).
+// TEST-ONLY overlay: copied over the instance on the test PC, never shipped with the pack.
+//
+// HOW TO RUN
+//   CLIENT suite = the full test: the real client, a real player, GCYR's own launch, teleport and landing.
+//     The test sleeps unless the instance has kubejs/config/gg_test_gcyr_flight.json = {"enabled": true}. Run the harness with
+//     an overlay folder that is a copy of tools\test\overlay plus that file:
+//       powershell -File tools\test\Invoke-GGTest.ps1 -Suite client -OverlayDir <copy of tools\test\overlay + kubejs\config\gg_test_gcyr_flight.json>
+//     It starts by itself when the player joins the world that mc-runtime-test creates. The client half
+//     (client_scripts/gg_test_gcyr_flight.js) keeps mc-runtime-test in the world until GGTEST|gcyr_flight|DONE (it holds the
+//     player's tick counter below the 100 ticks mc-runtime-test waits before quitting), clicks the planet on GCYR's planet
+//     screen, holds Space to brake the landings like a player must, takes screenshots into kubejs/exported/ and reports an
+//     integrated server that stops ticking.
+//   SERVER suite = no player: registries, planets, fuel and the Rocket Scanner part (#122) only; the flight is skipped.
+//       -Commands 'kubejs custom_command gg_test_gcyr_flight' -WaitForLog 'GGTEST\|gcyr_flight\|DONE@@600'
+//
+// MARKERS: GGTEST|gcyr_flight|<check>|PASS|FAIL|NOTE|<detail>; the last line is GGTEST|gcyr_flight|DONE
+//   mod, registry, planets, dimensions, fuel_recipes, config      what GCYR brings and how it is set up
+//   scanner:<key>:formed / build_<n> / unbuild_<n>                 #122: the scanner forms and captures EVERY block of the rocket,
+//       keys sym_* (3-wide pad, every facing, 3 build/unbuild cycles each), grow (formed with a 2-frame tower, then the tower and
+//       the rocket grow: stale_build = GCYR as is (NOTE), fixed_build = after the right-click on the controller that a player always
+//       does to press "Build", which the pack hooks), asym_* (pad 1 block on one side and 2 on the other, every facing: formed and
+//       gcyr_build describe GCYR as is (NOTE), guard = the pack refuses the right-click), flight (the flight rocket)
+//   flight_*                                                        #91: the flight with the real player, see FLIGHT below
+//   DONE
+//
+// TEST AREA: this test builds, force-loads and clears ONLY its band of the overworld, X 2560-2623, Y 98-112, Z 0-15 (floor at
+// Y 98, launch pads at Y 99, controllers at Y 100). The flight also clears the air column above its scanner (X 2599-2603,
+// Z 8-14, Y 113-319) because the client world has a random seed, then flies to gcyr:luna and back.
+//
+// FLIGHT (client suite): the player gets the space suit (16 buckets of oxygen in the chestplate: GCYR 0.2.9 lets a suit without
+// oxygen drown on the Moon) and an ID chip, right-clicks the flight scanner, the scanner builds
+// the rocket (6 basic motors, 2 basic fuel tanks, 1 seat: thrust 24 - weight 19 = 5 blocks/tick), the chip is programmed on
+// GCYR's planet screen (client click), the chip and 10 buckets of gtceu:rocket_fuel go into the rocket (rocket NBT, the same
+// fields the rocket's own UI slot and tank write), the player right-clicks the rocket to sit, the test calls startRocket() (what
+// the rocket UI's Launch button calls), GCYR counts down 200 ticks, climbs and at Y 600 moves rocket and player with its own
+// code (PlatformUtils.changeDimension). The test checks the player is in gcyr:luna still riding one rocket, that the
+// integrated server kept ticking, that the landing (Space held) does not crash, the suit on the Moon, then the trip home. It
+// also reports when the player catches fire and every hit it takes (flight_fire, flight_damage_*), and checks that the rider
+// never burns: GCYR's climbing rocket burns what is under it and can catch its own rider (flight_rider_fire_*; the pack's fix is
+// server_scripts/grindless/space/rocket_riders.js).
+//
+// var + function everywhere: this Rhino throws "redeclaration of var" for const/let in functions that run more than once.
+(function () {
+  var TAG = 'GGTEST|'
+  var SCOPE = 'uev_s0_stations'
+  var BAND = { x0: 30464, x1: 30527, y0: 98, y1: 112, z0: 0, z1: 15 }
+  var FLOOR_Y = 98
+  var PAD_Y = 99
+  var CTRL_Y = 100
+  var QUIET_MS = 10000
+  var LOADED_AT = Date.now()
+  var REQUEST = 'ggTestUevS0StationsRequest'
+  var MARKER = 'kubejs/config/gg_test_uev_s0_stations.json'
+  var FORM_TIMEOUT = 400
+  var TEST_TIMEOUT = 20 * 60 * 20
+  var AGAIN = -1
+  var STOP = -2
+
+  var IDS = {
+    pad: 'gcyr:launch_pad',
+    frame: 'gtceu:stainless_steel_frame',
+    scanner: 'gcyr:rocket_scanner',
+    seat: 'gcyr:seat',
+    tank: 'gcyr:basic_fuel_tank',
+    motor: 'gcyr:basic_rocket_motor',
+    chip: 'gcyr:id_chip',
+    fuel: 'gtceu:rocket_fuel',
+    rocket: 'gcyr:rocket',
+    moonPlanet: 'gcyr:luna',
+    earthPlanet: 'gcyr:earth',
+    moonDim: 'gcyr:luna',
+    earthDim: 'minecraft:overworld',
+    suit: { HEAD: 'gcyr:space_helmet', CHEST: 'gcyr:space_chestplate', LEGS: 'gcyr:space_leggings', FEET: 'gcyr:space_boots' },
+    stationPackage: 'gcyr:space_station_package'
+  }
+  var FUEL_LOAD = 50000
+  // GCYR: level = (average motor tier + average tank tier) / 2, integer division (RocketEntity:940-960)
+  // leg 1: elite motors (3) + aerogel tanks (9) = level 6; leg 2: elite motors (3) + BNNT tanks (11, UV-F1) = level 7
+  // dim = where the player arrives (the orbit: the chip asks for a station); planetDim = what the planet screen writes into the chip
+  // tier = the planet's rocket tier; level = the rocket this leg builds (GCYR: floor((motor + tank) / 2)); fuelCfg = the GCYR config
+  // amount the tank must hold (mercury is in the solar system, Proxima in another one of the galaxy)
+  var LEGS = [
+    { key: 'alpha', spec: 'flight_alpha', tank: 'grindless:bnnt_fuel_tank', motor: 'grindless:s0_motor7', planet: 'grindless:s0_alpha_centauri_orbit',
+      planetDim: 'grindless:s0_alpha_centauri_orbit', dim: 'grindless:s0_alpha_centauri_orbit', tier: 9, level: 9, slot: 'alpha', fuelCfg: 'galaxyFuelAmount' },
+    { key: 'sirius', spec: 'flight_sirius', tank: 'grindless:bnnt_fuel_tank', motor: 'grindless:s0_motor9', planet: 'grindless:s0_sirius_b_orbit',
+      planetDim: 'grindless:s0_sirius_b_orbit', dim: 'grindless:s0_sirius_b_orbit', tier: 10, level: 10, slot: 'sirius', fuelCfg: 'galaxyFuelAmount' }
+  ]
+  // the 2x2 platform each Space Station Package carries (StationContainerBehaviour: gcyr:satellite_blocks, PosWithState tags)
+  var PKG_BLOCK = 'minecraft:iron_block'
+  var PKG_CELLS = [[0, 0], [1, 0], [0, 1], [1, 1]]
+  var PKG_NBT = '{"gcyr:satellite_blocks":[' + PKG_CELLS.map(function (c) {
+    return '{pos:{X:' + c[0] + ',Y:0,Z:' + c[1] + '},state:{Name:"' + PKG_BLOCK + '"}}'
+  }).join(',') + ']}'
+  var STATION_Y = 64
+  var STATIONS_FILE = 'gcyr_space_stations'
+  var SLOTS_WANT = ['gcyr:overworld_orbit', 'grindless:io_orbit', 'grindless:saturn_orbit', 'grindless:uranus_orbit', 'grindless:neptune_orbit',
+    'grindless:pluto_orbit', 'gcyr:mercury_orbit', 'grindless:proxima_b_orbit']
+  // S0-7 gate: the spike's 3x3x3 swarm control, outside the flight band (Z 0-15) but inside the uhv_s0 zone
+  var SWARM = 'gtceu:s0_swarm_control'
+  var GATE = { x: 27945, y: 100, z: 40 }
+  var GATE_DEST = { dim: 'grindless:proxima_b_orbit', x: 27936.5, y: 101, z: 8.5 }
+  var ELITE_MOTOR = 'gcyr:elite_rocket_motor'
+  var SUIT_OXYGEN = 16000
+
+  var S = null
+  var FL = null
+  var J = null
+  var TICK = { last: 0, max: 0, gaps: [] }
+
+  // ---------------------------------------------------------------- output
+
+  function clean(x) {
+    return String(x).replace(/[\r\n]+/g, ' ').replace(/\|/g, '/').substring(0, 3000)
+  }
+
+  // details never start with FAIL / ERROR: the harness treats a pipe-delimited FAIL or ERROR field as a failure
+  function emit(check, status, detail) {
+    var line = TAG + SCOPE + '|' + check + '|' + status
+    if (detail !== undefined && detail !== null && String(detail) !== '') line += '|' + clean(detail)
+    console.info(line)
+  }
+
+  function check(name, ok, detail) {
+    emit(name, ok ? 'PASS' : 'FAIL', detail)
+  }
+
+  function note(name, detail) {
+    emit(name, 'NOTE', detail)
+  }
+
+  // ---------------------------------------------------------------- Java and shared state
+
+  function lazy() {
+    if (J !== null) return J
+    J = {
+      RL: Java.loadClass('net.minecraft.resources.ResourceLocation'),
+      Forge: Java.loadClass('net.minecraftforge.registries.ForgeRegistries'),
+      Direction: Java.loadClass('net.minecraft.core.Direction'),
+      AABB: Java.loadClass('net.minecraft.world.phys.AABB'),
+      Vec3: Java.loadClass('net.minecraft.world.phys.Vec3'),
+      BlockHitResult: Java.loadClass('net.minecraft.world.phys.BlockHitResult'),
+      Hand: Java.loadClass('net.minecraft.world.InteractionHand'),
+      Slot: Java.loadClass('net.minecraft.world.entity.EquipmentSlot'),
+      ItemEntity: Java.loadClass('net.minecraft.world.entity.item.ItemEntity'),
+      CompoundTag: Java.loadClass('net.minecraft.nbt.CompoundTag'),
+      ListTag: Java.loadClass('net.minecraft.nbt.ListTag'),
+      ArrayList: Java.loadClass('java.util.ArrayList'),
+      ForgeHooks: Java.loadClass('net.minecraftforge.common.ForgeHooks'),
+      MetaMachine: Java.loadClass('com.gregtechceu.gtceu.api.machine.MetaMachine'),
+      GTRegistries: Java.loadClass('com.gregtechceu.gtceu.api.registry.GTRegistries'),
+      ArchPlatform: Java.loadClass('dev.architectury.platform.Platform'),
+      Rocket: Java.loadClass('argent_matter.gcyr.common.entity.RocketEntity'),
+      PlanetData: Java.loadClass('argent_matter.gcyr.data.loader.PlanetData'),
+      GCYRConfig: Java.loadClass('argent_matter.gcyr.config.GCYRConfig'),
+      RecipeTypes: Java.loadClass('argent_matter.gcyr.common.data.GCYRRecipeTypes'),
+      Stations: Java.loadClass('argent_matter.gcyr.api.capability.GCYRCapabilityHelper'),
+      StationData: Java.loadClass('argent_matter.gcyr.api.space.station.StationWorldSavedData'),
+      MotorBlock: Java.loadClass('argent_matter.gcyr.common.block.RocketMotorBlock'),
+      TankBlock: Java.loadClass('argent_matter.gcyr.common.block.FuelTankBlock')
+    }
+    return J
+  }
+
+  // a Java map shared with client_scripts/gg_test_gcyr_flight.js (both halves run in the same JVM in the client suite);
+  // ConcurrentHashMap because the integrated server thread writes while the render thread reads
+  function shared() {
+    if (!global.ggUevS0Stations) global.ggUevS0Stations = new (Java.loadClass('java.util.concurrent.ConcurrentHashMap'))()
+    return global.ggUevS0Stations
+  }
+
+  function sval(key) {
+    var v = shared().get(key)
+    return v === null || v === undefined ? '' : String(v)
+  }
+
+  function asArray(coll) {
+    var list = new (lazy().ArrayList)(coll)
+    var out = []
+    for (var i = 0; i < list.size(); i++) out.push(list.get(i))
+    return out
+  }
+
+  function rl(id) {
+    return new (lazy().RL)(id)
+  }
+
+  // KubeJS renames some vanilla members for scripts (@Shadow @RemapForJS in its mixins, merged into the vanilla classes):
+  // Entity.getStringUUID -> getStringUuid, Entity.tickCount -> age, Player.closeContainer -> closeMenu, ItemStack.getTag -> getNbt,
+  // Entity.getPassengers and Entity.level are hidden. The vanilla name of a renamed member does not exist in JS, so the tables
+  // list the KubeJS name first, then the Mojang name, then the SRG name (Rhino's mm.jsmappings); uses on a player or an item
+  // entity also keep a fallback (KubeJS's own wrappers, the entity id in toString(), the rocket's first passenger, a command).
+  var V = {
+    uuid: ['getStringUuid', 'getStringUUID', 'm_20149_'],
+    vehicle: ['getVehicle', 'm_20202_'],
+    firstPassenger: ['getFirstPassenger', 'm_146895_'],
+    x: ['getX', 'm_20185_'],
+    y: ['getY', 'm_20186_'],
+    z: ['getZ', 'm_20189_'],
+    discard: ['discard', 'm_146870_'],
+    blockPosition: ['blockPosition', 'm_20183_'],
+    startRiding: ['startRiding', 'm_20329_'],
+    interactOn: ['interactOn', 'm_36157_'],
+    interact: ['interact', 'm_6096_'],
+    closeContainer: ['closeMenu', 'closeContainer', 'm_6915_'],
+    gameMode: ['gameMode', 'f_8941_'],
+    useItemOn: ['useItemOn', 'm_7179_'],
+    useItem: ['useItem', 'm_6261_'],
+    itemUse: ['use', 'm_7203_'],
+    stateUse: ['use', 'm_60664_'],
+    blockState: ['getBlockState', 'm_8055_'],
+    stackItem: ['getItem', 'm_41720_'],
+    gameModeForPlayer: ['getGameModeForPlayer', 'm_9290_'],
+    count: ['getCount', 'm_41613_'],
+    copy: ['copy', 'm_41777_'],
+    save: ['save', 'm_41739_'],
+    orCreateTag: ['getOrCreateTag', 'm_41784_'],
+    tag: ['getNbt', 'getTag', 'm_41783_'],
+    getString: ['getString', 'm_128461_'],
+    getBoolean: ['getBoolean', 'm_128471_'],
+    getList: ['getList', 'm_128437_'],
+    putInt: ['putInt', 'm_128405_'],
+    putString: ['putString', 'm_128359_'],
+    put: ['put', 'm_128365_'],
+    listSize: ['size'],
+    listCompound: ['getCompound', 'm_128728_'],
+    textString: ['getString', 'm_130668_']
+  }
+
+  function jcall(obj, names, args) {
+    var a = args || []
+    for (var i = 0; i < names.length; i++) {
+      var n = names[i]
+      if (typeof obj[n] !== 'function') continue
+      switch (a.length) {
+        case 0: return obj[n]()
+        case 1: return obj[n](a[0])
+        case 2: return obj[n](a[0], a[1])
+        case 3: return obj[n](a[0], a[1], a[2])
+        case 4: return obj[n](a[0], a[1], a[2], a[3])
+        default: return obj[n](a[0], a[1], a[2], a[3], a[4])
+      }
+    }
+    throw new Error('no method ' + names.join('/') + ' on ' + obj)
+  }
+
+  // a field that shares its JS name with a method comes back as one callable object (Rhino's FieldAndMethods); numbers are read
+  // through Number()
+  function jget(obj, names) {
+    for (var i = 0; i < names.length; i++) {
+      var v = obj[names[i]]
+      if (v === undefined || v === null) continue
+      if (typeof v !== 'function') return v
+      var n = Number(v)
+      if (!isNaN(n)) return n
+    }
+    throw new Error('no field ' + names.join('/') + ' on ' + obj)
+  }
+
+  // which members this Rhino shows on an object (once per label)
+  var PROBED = {}
+  function probe(label, obj) {
+    if (PROBED[label]) return
+    PROBED[label] = true
+    var keys = []
+    try {
+      for (var k in obj) keys.push(String(k))
+    } catch (e) {
+      keys.push('(for-in failed: ' + e + ')')
+    }
+    var want = /uuid|vehicle|passenger|^getY$|^y$|gameMode|interactOn|startRiding|discard|closeContainer/i
+    var types = ['getStringUuid', 'getStringUUID', 'getVehicle', 'getY', 'gameMode', 'interactOn', 'closeMenu', 'discard', 'getProfile', 'age'].map(function (n) {
+      var t = ''
+      try { t = typeof obj[n] } catch (e) { t = 'throws' }
+      return n + ':' + t
+    })
+    note('probe_' + label, keys.length + ' members; ' + types.join(' ') + '; matching: ' + keys.filter(function (x) { return want.test(x) }).sort().join(' '))
+  }
+
+  // the entity id from Entity.toString(): "ItemEntity['Seat'/1234, l='ServerLevel[world]', x=.., y=.., z=..]"
+  function entityId(e) {
+    var m = /\/(-?\d+), l=/.exec(String(e))
+    return m ? m[1] : String(e)
+  }
+
+  function uuidOf(e) {
+    try {
+      return String(jcall(e, V.uuid))
+    } catch (err) {
+      if (e.isPlayer()) return profileId(e)
+      return 'entity#' + entityId(e)
+    }
+  }
+
+  // KubeJS's EntityKJS.getBlock (the block the entity stands in) when Entity.getX/Y/Z do not resolve
+  function coordOf(e, axis) {
+    try {
+      return Number(jcall(e, V[axis]))
+    } catch (err) {
+      return Number(e.getBlock()[axis]) + (axis === 'y' ? 0 : 0.5)
+    }
+  }
+
+  function xOf(e) {
+    return coordOf(e, 'x')
+  }
+
+  function yOf(e) {
+    return coordOf(e, 'y')
+  }
+
+  function zOf(e) {
+    return coordOf(e, 'z')
+  }
+
+  function killItems(x0, y0, z0, x1, y1, z1) {
+    return S.server.runCommandSilent('kill @e[type=minecraft:item,x=' + x0 + ',y=' + y0 + ',z=' + z0 + ',dx=' + (x1 - x0) + ',dy=' + (y1 - y0) + ',dz=' + (z1 - z0) + ']')
+  }
+
+  function itemLabel(e) {
+    try {
+      var st = e.getItem()
+      return String(st.getId()) + ' x' + jcall(st, V.count)
+    } catch (err) {
+      return String(e).substring(0, 40)
+    }
+  }
+
+  // KubeJS adds getLevel(ResourceLocation) next to the vanilla getLevel(ResourceKey): a ResourceKey argument is ambiguous for
+  // Rhino, a dimension id string is not
+  function levelOf(id) {
+    return S.server.getLevel(String(id))
+  }
+
+  // KubeJS's own wrappers (EntityKJS.getLevel, LevelKJS.getDimension)
+  function dimOf(entity) {
+    return String(entity.getLevel().getDimension())
+  }
+
+  function blockId(block) {
+    return String(lazy().Forge.BLOCKS.getKey(block))
+  }
+
+  function setBlock(p, id) {
+    S.level.getBlock(p.x, p.y, p.z).set(id)
+  }
+
+  function idAt(p) {
+    return String(S.level.getBlock(p.x, p.y, p.z).getId())
+  }
+
+  function key(x, y, z) {
+    return x + ',' + y + ',' + z
+  }
+
+  // the player is matched by its GameProfile (authlib, not obfuscated) through KubeJS's PlayerKJS.getProfile
+  function profileId(p) {
+    return String(p.getProfile().getId())
+  }
+
+  function testPlayer() {
+    if (!S || S.playerUuid === null) return null
+    var list = asArray(S.server.getPlayers())
+    for (var i = 0; i < list.length; i++) {
+      if (profileId(list[i]) === S.playerUuid) return list[i]
+    }
+    return null
+  }
+
+  // marker {"enabled": true, "leg": "proxima"} flies one leg only, "gate" runs only the S0-7 ring (the 600 s native budget holds one of them)
+  function markerLeg() {
+    try {
+      var m = JsonIO.read(MARKER)
+      var l = m === null || m === undefined ? '' : String(m.get('leg'))
+      return l === 'alpha' || l === 'sirius' ? l : 'both'
+    } catch (e) {
+      return 'both'
+    }
+  }
+
+  function enabledByMarker() {
+    try {
+      var m = JsonIO.read(MARKER)
+      return m !== null && m !== undefined && String(m.get('enabled')) === 'true'
+    } catch (e) {
+      return false
+    }
+  }
+
+  // ---------------------------------------------------------------- static checks
+
+  function staticChecks() {
+    var L = lazy()
+    var version = 'unknown'
+    try {
+      version = String(L.ArchPlatform.getMod('gcyr').getVersion())
+    } catch (e) {
+      version = 'unreadable (' + e + ')'
+    }
+    check('mod', true, 'gcyr ' + version + ' loaded (pack pins 0.2.9)')
+
+    var missing = []
+    var blocks = [IDS.pad, IDS.seat, IDS.tank, IDS.motor, IDS.frame, IDS.scanner, 'gcyr:advanced_fuel_tank', 'gcyr:elite_fuel_tank',
+      'gcyr:advanced_rocket_motor', 'gcyr:elite_rocket_motor', 'grindless:aerogel_fuel_tank',       'grindless:bnnt_fuel_tank', 'grindless:s0_motor7',
+            'grindless:s0_motor9']
+    var items = [IDS.chip, 'gcyr:keycard', IDS.stationPackage, IDS.suit.HEAD, IDS.suit.CHEST, IDS.suit.LEGS, IDS.suit.FEET]
+    blocks.forEach(function (id) { if (!L.Forge.BLOCKS.containsKey(rl(id))) missing.push('block ' + id) })
+    items.forEach(function (id) { if (!L.Forge.ITEMS.containsKey(rl(id))) missing.push('item ' + id) })
+    if (!L.Forge.ENTITY_TYPES.containsKey(rl(IDS.rocket))) missing.push('entity ' + IDS.rocket)
+    if (!L.Forge.FLUIDS.containsKey(rl(IDS.fuel))) missing.push('fluid ' + IDS.fuel)
+    var def = L.GTRegistries.MACHINES.get(rl(IDS.scanner))
+    if (def === null || def === undefined) missing.push('machine ' + IDS.scanner)
+    check('registry', missing.length === 0, missing.length > 0 ? 'missing: ' + missing.join(', ') :
+      blocks.length + ' blocks, ' + items.length + ' items, entity ' + IDS.rocket + ', fluid ' + IDS.fuel + ' and machine ' + IDS.scanner + ' registered')
+
+    var legBad = []
+    LEGS.forEach(function (lg) {
+      var pl = L.PlanetData.getPlanet(rl(lg.planet))
+      if (pl === null || pl === undefined) { legBad.push(lg.planet + ' missing'); return }
+      note('planet_tier_' + lg.key, lg.planet + ' rocket tier ' + pl.rocketTier() + ', this leg flies a level ' + lg.level + ' rocket')
+      if (lg.tier >= 0 && Number(pl.rocketTier()) !== lg.tier) legBad.push(lg.planet + ' tier ' + pl.rocketTier() + ' != ' + lg.tier)
+      if (Number(pl.rocketTier()) > lg.level) legBad.push(lg.planet + ' tier ' + pl.rocketTier() + ' > rocket level ' + lg.level)
+      if (String(pl.level().location()) !== lg.planetDim) legBad.push(lg.planet + ' world ' + pl.level().location())
+      if (levelOf(lg.planetDim) === null || levelOf(lg.planetDim) === undefined) legBad.push(lg.planetDim + ' dimension missing')
+      var orb = String(pl.orbitWorld().location())
+      if (orb !== lg.dim) legBad.push(lg.planet + ' orbit ' + orb + ' != ' + lg.dim)
+      if (levelOf(orb) === null || levelOf(orb) === undefined) legBad.push(orb + ' dimension missing')
+    })
+    var prox = null
+    check('planets', legBad.length === 0, legBad.length > 0 ? legBad.join('; ') : 'both S0 places load as tier 9 / tier 10 with their worlds and orbit worlds')
+    var proxTier = '8'
+    check('proxima_tier', true, 'n/a (UHV leftover)')
+
+    var fuels = []
+    try {
+      var recipes = asArray(S.server.getRecipeManager().getAllRecipesFor(L.RecipeTypes.ROCKET_FUEL_RECIPES))
+      fuels = recipes.map(function (r) { return String(r.getId()) + '(duration ' + r.duration + ')' }).sort()
+    } catch (e) {
+      fuels = ['unreadable: ' + e]
+    }
+    check('fuel_recipes', fuels.some(function (f) { return f.indexOf('gcyr:rocket_fuel/rocket_fuel(') === 0 }),
+      fuels.length + ' recipes of type gcyr:rocket_fuel: ' + fuels.join(' ') + ' (a fluid is a fuel if one of these takes it; the test flies on gtceu:rocket_fuel)')
+
+    var cfg = L.GCYRConfig.INSTANCE
+    note('config', 'enableOxygen=' + cfg.server.enableOxygen + ' moonFuelAmount=' + cfg.rocket.moonFuelAmount + ' solarSystemFuelAmount=' +
+      cfg.rocket.solarSystemFuelAmount + ' galaxyFuelAmount=' + cfg.rocket.galaxyFuelAmount + ' anywhereFuelAmount=' + cfg.rocket.anywhereFuelAmount + ' doCrashLandingExplosion=' + cfg.rocket.doCrashLandingExplosion + ' (fuel amounts are what the tank must HOLD to launch)')
+  }
+
+  // ---------------------------------------------------------------- scanner geometry
+
+  // rockets: lists of { b: row behind the controller (1..b), s: column (-l..r, + = controller's right), y: layer above the pad, id }
+  function smallRocket(sp) {
+    return [
+      { b: 1, s: -sp.l, y: 0, id: IDS.motor },
+      { b: sp.b, s: sp.r, y: 0, id: IDS.motor },
+      { b: 2, s: 0, y: 0, id: IDS.motor },
+      { b: 2, s: 0, y: 1, id: IDS.tank },
+      { b: 2, s: 0, y: 2, id: IDS.seat }
+    ]
+  }
+
+  // the grow scenario: one tank more and the seat one layer higher, so the seat stands on a block the stale scan takes
+  function grownRocket(sp) {
+    return [
+      { b: 1, s: -sp.l, y: 0, id: IDS.motor },
+      { b: sp.b, s: sp.r, y: 0, id: IDS.motor },
+      { b: 2, s: 0, y: 0, id: IDS.motor },
+      { b: 2, s: 0, y: 1, id: IDS.tank },
+      { b: 2, s: 0, y: 2, id: IDS.tank },
+      { b: 2, s: 0, y: 3, id: IDS.seat }
+    ]
+  }
+
+  function legRocket(tank, motor) {
+    return function (sp) {
+      var out = []
+      for (var b = 1; b <= 2; b++) {
+        for (var s = -1; s <= 1; s++) out.push({ b: b, s: s, y: 0, id: motor || ELITE_MOTOR })
+      }
+      out.push({ b: 1, s: 0, y: 1, id: tank })
+      out.push({ b: 2, s: 0, y: 1, id: tank })
+      out.push({ b: 1, s: 0, y: 2, id: IDS.seat })
+      return out
+    }
+  }
+
+  var SPECS = [
+    { key: 'flight_alpha', facing: 'north', x: 30466, z: 9, l: 1, r: 1, b: 3, h: 2, rocket: legRocket(LEGS[0].tank, LEGS[0].motor), flight: true },
+    { key: 'flight_sirius', facing: 'north', x: 30482, z: 9, l: 1, r: 1, b: 3, h: 2, rocket: legRocket(LEGS[1].tank, LEGS[1].motor), flight: true }
+  ]
+
+  // the controller faces F; launch pad rows go to the back (b = 1..sp.b, one block lower), columns run from sp.l blocks to the
+  // controller's left (F counter-clockwise, as GCYR measures lDist) to sp.r blocks to its right, the stainless steel frame tower
+  // stands behind the last row. sp.x / sp.z is the north-west corner of the footprint. The steps are plain JS: this KubeJS does not
+  // find Direction.getStepX / getStepZ.
+  var STEPS = { north: { x: 0, z: -1 }, south: { x: 0, z: 1 }, east: { x: 1, z: 0 }, west: { x: -1, z: 0 } }
+  var OPPOSITE = { north: 'south', south: 'north', east: 'west', west: 'east' }
+  var CLOCKWISE = { north: 'east', east: 'south', south: 'west', west: 'north' }
+
+  function geometry(sp) {
+    var L = lazy()
+    var F = L.Direction.byName(sp.facing)
+    var back = STEPS[OPPOSITE[sp.facing]]
+    var right = STEPS[CLOCKWISE[sp.facing]]
+    function cell(b, s) {
+      return { x: back.x * b + right.x * s, z: back.z * b + right.z * s }
+    }
+    var minx = 1e9
+    var minz = 1e9
+    var maxx = -1e9
+    var maxz = -1e9
+    for (var b = 0; b <= sp.b + 1; b++) {
+      for (var s = -sp.l; s <= sp.r; s++) {
+        var c = cell(b, s)
+        minx = Math.min(minx, c.x)
+        minz = Math.min(minz, c.z)
+        maxx = Math.max(maxx, c.x)
+        maxz = Math.max(maxz, c.z)
+      }
+    }
+    var C = { x: sp.x - minx, y: CTRL_Y, z: sp.z - minz }
+    return {
+      F: F,
+      C: C,
+      box: { x0: sp.x, z0: sp.z, x1: sp.x + (maxx - minx), z1: sp.z + (maxz - minz) },
+      at: function (b, s, y) {
+        var c = cell(b, s)
+        return { x: C.x + c.x, y: C.y + y, z: C.z + c.z }
+      }
+    }
+  }
+
+  function machineAt(p) {
+    return lazy().MetaMachine.getMachine(S.level, new BlockPos(p.x, p.y, p.z))
+  }
+
+  function areaBox(m, extraUp) {
+    var b = m.g.box
+    return new (lazy().AABB)(b.x0 - 1, PAD_Y, b.z0 - 1, b.x1 + 2, CTRL_Y + 8 + (extraUp || 0), b.z1 + 2)
+  }
+
+  function rocketsIn(level, aabb) {
+    return asArray(level.getEntitiesOfClass(lazy().Rocket, aabb)).filter(function (e) { return !e.isRemoved() })
+  }
+
+  function itemsIn(m) {
+    return asArray(S.level.getEntitiesOfClass(lazy().ItemEntity, areaBox(m, 4))).filter(function (e) { return !e.isRemoved() })
+  }
+
+  // world position -> block id of what the rocket entity carries
+  function capturedMap(r) {
+    var origin = jcall(r, V.blockPosition)
+    var out = {}
+    asArray(r.getBlocks()).forEach(function (pws) {
+      var p = pws.pos()
+      out[key(origin.getX() + p.getX(), origin.getY() + p.getY(), origin.getZ() + p.getZ())] = blockId(pws.state().getBlock())
+    })
+    return out
+  }
+
+  function expectedMap(m) {
+    var out = {}
+    m.rocketBlocks.forEach(function (bl) {
+      var p = m.g.at(bl.b, bl.s, bl.y)
+      out[key(p.x, p.y, p.z)] = bl.id
+    })
+    return out
+  }
+
+  function placeRocket(m) {
+    m.rocketBlocks.forEach(function (bl) { setBlock(m.g.at(bl.b, bl.s, bl.y), bl.id) })
+  }
+
+  function placeStructure(m) {
+    var sp = m.spec
+    for (var b = 1; b <= sp.b; b++) {
+      for (var s = -sp.l; s <= sp.r; s++) setBlock(m.g.at(b, s, -1), IDS.pad)
+    }
+    for (var k = 0; k < sp.h; k++) setBlock(m.g.at(sp.b + 1, 0, k), IDS.frame)
+    placeRocket(m)
+    // the controller last, so its first structure check already sees the whole structure
+    S.level.getBlock(m.g.C.x, m.g.C.y, m.g.C.z).set(IDS.scanner, { facing: sp.facing })
+    var mach = machineAt(m.g.C)
+    if (mach !== null && mach !== undefined && String(mach.getFrontFacing()) !== sp.facing) mach.setFrontFacing(m.g.F)
+  }
+
+  // GCYR keeps the measured pad and tower in persisted machine fields (lDist, rDist, bDist, hDist); read them from the NBT
+  function persistedDims(mach) {
+    var found = {}
+    function walk(tag, depth) {
+      if (depth > 6 || tag === null || tag === undefined) return
+      var keys = asArray(tag.getAllKeys())
+      keys.forEach(function (k) {
+        var name = String(k)
+        if (name === 'lDist' || name === 'rDist' || name === 'bDist' || name === 'hDist') {
+          found[name] = tag.getInt(name)
+        } else if (tag.getTagType(name) === 10) {
+          walk(tag.getCompound(name), depth + 1)
+        }
+      })
+    }
+    try {
+      walk(mach.holder.self().saveWithoutMetadata(), 0)
+    } catch (e) {
+      return 'unreadable (' + e + ')'
+    }
+    var names = ['lDist', 'rDist', 'bDist', 'hDist']
+    return names.map(function (n) { return n + '=' + (found[n] === undefined ? '?' : found[n]) }).join(' ')
+  }
+
+  function rocketSummary(r) {
+    var tag = r.saveWithoutId(new (lazy().CompoundTag)())
+    var fuel = tag.getCompound('fuel')
+    var speed = Number(r.getRocketSpeed())
+    return 'blocks=' + r.getBlocks().size() + ' seats=' + r.getSeatPositions().size() + ' thrusters=' + r.getThrusterCount() +
+      ' weight=' + r.getWeight() + ' speed=' + speed.toFixed(2) + ' fuel=' + (fuel.getString('FluidName') || 'none') + ' ' +
+      fuel.getInt('Amount') + '/' + r.getFuelCapacity() + ' mB'
+  }
+
+  // ---------------------------------------------------------------- scanner steps (#122)
+
+  // the asymmetric pads: what GCYR does is described (NOTE), what decides PASS/FAIL is the pack's guard
+  function stepWaitFormed(m) {
+    var mach = machineAt(m.g.C)
+    var asym = m.spec.l !== m.spec.r
+    var name = 'scanner:' + m.key + ':formed'
+    var shape = 'pad ' + m.spec.l + ' left + ' + m.spec.r + ' right x ' + m.spec.b + ' rows, ' + m.spec.h + ' frames'
+    if (mach === null || mach === undefined) {
+      check(name, false, 'no machine at the controller ' + key(m.g.C.x, m.g.C.y, m.g.C.z) + ' (block ' + idAt(m.g.C) + ')')
+      return STOP
+    }
+    if (mach.isFormed()) {
+      m.formed = true
+      m.formedAfter = S.t - m.t0
+      emit(name, asym ? 'NOTE' : 'PASS', 'facing ' + mach.getFrontFacing() + ' formed after ' + m.formedAfter + ' ticks; ' + shape + '; GCYR measured ' + persistedDims(mach))
+      return 1
+    }
+    if (S.t - m.t0 >= FORM_TIMEOUT) {
+      m.formed = false
+      var detail = 'not formed after ' + (S.t - m.t0) + ' ticks facing ' + mach.getFrontFacing() + ' (' + shape + '); GCYR measured ' + persistedDims(mach)
+      if (asym) {
+        note(name, detail + ' - GCYR lays the pad out mirrored in its pattern, so an asymmetric pad never forms facing north/south')
+        return 1
+      }
+      check(name, false, detail)
+      return STOP
+    }
+    return AGAIN
+  }
+
+  // the pack refuses the right-click on a scanner whose pad is asymmetric (server_scripts/grindless/space/rocket_scanner.js)
+  function stepGuard(m) {
+    var name = 'scanner:' + m.key + ':guard'
+    var p = testPlayer()
+    try {
+      if (p !== null) {
+        var res = rightClickBlock(p, m.g.C, m.g.F)
+        var menu = String(p.getOpenInventory())
+        var refused = menu.indexOf('InventoryMenu') >= 0
+        check(name, refused, (refused ? 'the right-click is refused (no scanner UI, so no "Build"), the player gets the message' :
+          'the scanner UI opened: "Build" can be pressed on this asymmetric pad') + '; result ' + res + ', menu ' + menu.substring(0, 80))
+        closeMenu(p)
+      } else if (global.grindless && global.grindless.space && global.grindless.space.rocketScannerPadSides) {
+        var sides = global.grindless.space.rocketScannerPadSides(S.level, m.g.C.x, m.g.C.y, m.g.C.z, m.spec.facing)
+        var seen = sides !== null && sides.left !== sides.right
+        check(name, seen, 'the pack sees ' + (sides === null ? 'no pad' : sides.left + ' left / ' + sides.right + ' right') + (seen ? ' and refuses the right-click' : ''))
+      } else {
+        check(name, false, 'no player and no global.grindless.space.rocketScannerPadSides: nothing stops "Build" on this pad')
+      }
+    } catch (e) {
+      check(name, false, 'exception: ' + e)
+    }
+    return 2
+  }
+
+  function stepBuild(label) {
+    return function (m) {
+      if (m.formed === false) return 1
+      m.itemsBefore = {}
+      itemsIn(m).forEach(function (e) { m.itemsBefore[entityId(e)] = true })
+      m.expected = expectedMap(m)
+      // what the scanner UI's "Build" button runs on the server (RocketScannerMachine.handleDisplayClick -> setRocketBuilt(true))
+      machineAt(m.g.C).setRocketBuilt(true)
+      m.buildLabel = label
+      return 5
+    }
+  }
+
+  // compares the rocket entity with the blocks that were placed; mode 'check' = PASS/FAIL, 'stale' / 'mirror' = NOTE describing
+  // GCYR as is
+  function stepVerifyBuild(label, mode) {
+    return function (m) {
+      if (m.formed === false) return 1
+      var name = 'scanner:' + m.key + ':' + label
+      var rockets = rocketsIn(S.level, areaBox(m, 4))
+      m.rocket = rockets.length > 0 ? rockets[0] : null
+      var expected = m.expected
+      var expN = Object.keys(expected).length
+      var popped = itemsIn(m).filter(function (e) { return !m.itemsBefore[entityId(e)] }).map(itemLabel)
+      var leftover = Object.keys(expected).filter(function (k) {
+        var p = k.split(',')
+        return String(S.level.getBlock(Number(p[0]), Number(p[1]), Number(p[2])).getId()) !== 'minecraft:air'
+      })
+      var captured = m.rocket !== null ? capturedMap(m.rocket) : {}
+      var missing = Object.keys(expected).filter(function (k) { return captured[k] !== expected[k] })
+      var extra = Object.keys(captured).filter(function (k) { return expected[k] === undefined })
+      var ok = rockets.length === 1 && missing.length === 0 && extra.length === 0 && leftover.length === 0 && popped.length === 0
+      var detail = 'rockets in the area=' + rockets.length + ', captured ' + (expN - missing.length) + '/' + expN + ' placed blocks' +
+        (missing.length > 0 ? ', NOT captured: ' + missing.map(function (k) { return expected[k].replace('gcyr:', '') + '@' + k }).join(' ') : '') +
+        (extra.length > 0 ? ', unexpected: ' + extra.map(function (k) { return captured[k] + '@' + k }).join(' ') : '') +
+        (leftover.length > 0 ? ', left in the world: ' + leftover.join(' ') : '') +
+        (popped.length > 0 ? ', dropped as items: ' + popped.join(' ') : '') +
+        (m.rocket !== null ? ', rocket ' + rocketSummary(m.rocket) : '')
+      if (mode === 'stale') {
+        m.staleReproduced = !ok
+        note(name, (ok ? 'GCYR captured the whole grown rocket without a refresh (#122 not reproduced): ' :
+          '#122 REPRODUCED in GCYR as is: the structure formed with a ' + m.spec.h + '-frame tower and grew afterwards; GCYR kept the old scan height (' +
+          persistedDims(machineAt(m.g.C)) + '): ') + detail)
+      } else if (mode === 'mirror') {
+        note(name, (ok ? 'GCYR as is captured the whole rocket on this asymmetric pad: ' :
+          '#122 REPRODUCED in GCYR as is ("only works on one axis"): "Build" (called directly, past the pack guard) scans the mirrored area: ') + detail)
+      } else {
+        check(name, ok, detail)
+      }
+      return 2
+    }
+  }
+
+  function stepUnbuild(label) {
+    return function (m) {
+      if (m.formed === false) return 1
+      if (m.rocket !== null && !m.rocket.isRemoved()) m.rocket.unBuild()
+      return 2
+    }
+  }
+
+  // unBuild must put the same blocks back where they were; if not, the rocket is placed again so the next cycle starts clean
+  function stepVerifyUnbuild(label) {
+    return function (m) {
+      if (m.formed === false) return 1
+      var name = 'scanner:' + m.key + ':un' + label
+      var rockets = rocketsIn(S.level, areaBox(m, 4))
+      var expected = expectedMap(m)
+      var wrong = Object.keys(expected).filter(function (k) {
+        var p = k.split(',')
+        return String(S.level.getBlock(Number(p[0]), Number(p[1]), Number(p[2])).getId()) !== expected[k]
+      })
+      var restored = rockets.length === 0 && wrong.length === 0
+      emit(name, restored ? 'PASS' : (m.spec.l !== m.spec.r ? 'NOTE' : 'FAIL'), 'rockets left=' + rockets.length + ', blocks back in place ' +
+        (Object.keys(expected).length - wrong.length) + '/' + Object.keys(expected).length + (wrong.length > 0 ? ' (wrong: ' + wrong.join(' ') + ')' : ''))
+      if (!restored) {
+        rockets.forEach(function (r) { jcall(r, V.discard) })
+        placeRocket(m)
+      }
+      return 2
+    }
+  }
+
+  function stepGrow(m) {
+    // two more frames on the tower and a taller rocket: positions above the formed pattern, so GTM does not re-check the structure
+    for (var k = m.spec.h; k < m.spec.h + 2; k++) setBlock(m.g.at(m.spec.b + 1, 0, k), IDS.frame)
+    m.rocketBlocks = grownRocket(m.spec)
+    placeRocket(m)
+    note('scanner:' + m.key + ':grown', 'tower ' + m.spec.h + ' -> ' + (m.spec.h + 2) + ' frames, rocket 3 -> 4 layers (seat on top of a second tank); formed=' +
+      machineAt(m.g.C).isFormed() + ', GCYR still has ' + persistedDims(machineAt(m.g.C)))
+    return 2
+  }
+
+  // after the stale build: put everything back as a player would (the partial rocket is taken apart, the dropped seat goes back)
+  function stepRegrow(m) {
+    if (m.rocket !== null && !m.rocket.isRemoved()) m.rocket.unBuild()
+    itemsIn(m).forEach(function (e) { jcall(e, V.discard) })
+    rocketsIn(S.level, areaBox(m, 4)).forEach(function (r) { jcall(r, V.discard) })
+    placeRocket(m)
+    return 2
+  }
+
+  // a player's right-click on a block as the server handles it: ServerPlayerGameMode.useItemOn = Forge's RightClickBlock event
+  // (KubeJS's BlockEvents.rightClicked listens to it; a canceled event stops there), then the block's use = the machine UI.
+  // If gameMode.useItemOn cannot be called, the same two steps are taken one by one.
+  function rightClickBlock(p, C, facing) {
+    var L = lazy()
+    var pos = new BlockPos(C.x, C.y, C.z)
+    var hit = new L.BlockHitResult(new L.Vec3(C.x + 0.5, C.y + 0.5, C.z + 0.5), facing, pos, false)
+    try {
+      return 'ServerPlayerGameMode.useItemOn -> ' + jcall(jget(p, V.gameMode), V.useItemOn, [p, S.level, p.getMainHandItem(), L.Hand.MAIN_HAND, hit])
+    } catch (e) {
+      var ev = L.ForgeHooks.onRightClickBlock(p, L.Hand.MAIN_HAND, pos, hit)
+      if (ev.isCanceled()) return 'RightClickBlock event canceled (ForgeHooks + block use, gameMode.useItemOn failed: ' + e + ')'
+      return 'block use -> ' + jcall(jcall(S.level, V.blockState, [pos]), V.stateUse, [S.level, p, L.Hand.MAIN_HAND, hit]) +
+        ' (ForgeHooks + block use, gameMode.useItemOn failed: ' + e + ')'
+    }
+  }
+
+  // a player's right-click with the held item (ServerPlayerGameMode.useItem, else the item's own use)
+  function useHeldItem(p) {
+    var L = lazy()
+    try {
+      return 'ServerPlayerGameMode.useItem -> ' + jcall(jget(p, V.gameMode), V.useItem, [p, p.getLevel(), p.getMainHandItem(), L.Hand.MAIN_HAND])
+    } catch (e) {
+      return 'Item.use -> ' + jcall(jcall(p.getMainHandItem(), V.stackItem), V.itemUse, [p.getLevel(), p, L.Hand.MAIN_HAND]) + ' (gameMode.useItem failed: ' + e + ')'
+    }
+  }
+
+  function closeMenu(p) {
+    try {
+      jcall(p, V.closeContainer)
+    } catch (e) { /* no menu open */ }
+  }
+
+  // the player right-clicks the controller to open the scanner UI before pressing "Build"; the pack hooks that click
+  // (server_scripts/grindless/space/rocket_scanner.js) to refresh the structure. Without a player (server suite) the same hook is
+  // called through global.grindless.space.refreshRocketScanner.
+  function stepRefresh(m) {
+    var how = 'none'
+    var p = testPlayer()
+    try {
+      if (p !== null) {
+        how = 'player right-click on the controller (' + rightClickBlock(p, m.g.C, m.g.F) + ')'
+        closeMenu(p)
+      } else if (global.grindless && global.grindless.space && global.grindless.space.refreshRocketScanner) {
+        var r = global.grindless.space.refreshRocketScanner(S.level, new BlockPos(m.g.C.x, m.g.C.y, m.g.C.z))
+        how = 'global.grindless.space.refreshRocketScanner (no player in this suite) -> ' + r
+      } else {
+        how = 'nothing: no player and no global.grindless.space.refreshRocketScanner'
+      }
+    } catch (e) {
+      how = 'exception: ' + e
+    }
+    note('scanner:' + m.key + ':refresh', how + '; GCYR now has ' + persistedDims(machineAt(m.g.C)))
+    return 2
+  }
+
+  function stepFlightReady(m) {
+    m.ready = true
+    return STOP
+  }
+
+  function stepsFor(sp) {
+    var steps = [stepWaitFormed]
+    if (sp.flight) {
+      steps.push(stepFlightReady)
+      return steps
+    }
+    if (sp.grow) {
+      steps.push(stepBuild('build_base'), stepVerifyBuild('build_base', 'check'), stepUnbuild('build_base'), stepVerifyUnbuild('build_base'))
+      steps.push(stepGrow)
+      steps.push(stepBuild('stale_build'), stepVerifyBuild('stale_build', 'stale'), stepRegrow)
+      steps.push(stepRefresh)
+      steps.push(stepBuild('fixed_build'), stepVerifyBuild('fixed_build', 'check'), stepUnbuild('fixed_build'), stepVerifyUnbuild('fixed_build'))
+      return steps
+    }
+    if (sp.l !== sp.r) {
+      steps.push(stepGuard)
+      steps.push(stepBuild('gcyr_build'), stepVerifyBuild('gcyr_build', 'mirror'), stepUnbuild('gcyr_build'), stepVerifyUnbuild('gcyr_build'))
+      return steps
+    }
+    for (var k = 1; k <= sp.cycles; k++) {
+      steps.push(stepBuild('build_' + k), stepVerifyBuild('build_' + k, 'check'), stepUnbuild('build_' + k), stepVerifyUnbuild('build_' + k))
+    }
+    return steps
+  }
+
+  function advance(m) {
+    if (m.phase === 'done' || S.t < m.wakeAt) return
+    var fn = m.steps[m.si]
+    if (!fn) {
+      m.phase = 'done'
+      return
+    }
+    var r = 1
+    try {
+      r = fn(m)
+    } catch (e) {
+      check('scanner:' + m.key + ':step_' + m.si, false, 'exception: ' + e)
+      m.phase = 'done'
+      return
+    }
+    if (r === STOP) {
+      m.phase = 'done'
+      return
+    }
+    if (r === AGAIN) {
+      m.wakeAt = S.t + 5
+      return
+    }
+    m.si++
+    m.wakeAt = S.t + (r > 0 ? r : 1)
+  }
+
+  function prepareWorld() {
+    for (var cx = BAND.x0 >> 4; cx <= BAND.x1 >> 4; cx++) {
+      for (var cz = BAND.z0 >> 4; cz <= BAND.z1 >> 4; cz++) S.level.getChunk(cx, cz)
+    }
+    S.server.runCommandSilent('forceload add ' + BAND.x0 + ' ' + BAND.z0 + ' ' + BAND.x1 + ' ' + BAND.z1)
+    var cleared = S.server.runCommandSilent('fill ' + BAND.x0 + ' ' + (FLOOR_Y + 1) + ' ' + BAND.z0 + ' ' + BAND.x1 + ' ' + BAND.y1 + ' ' + BAND.z1 + ' air')
+    S.server.runCommandSilent('fill ' + BAND.x0 + ' ' + FLOOR_Y + ' ' + BAND.z0 + ' ' + BAND.x1 + ' ' + FLOOR_Y + ' ' + BAND.z1 + ' minecraft:smooth_stone')
+    asArray(S.level.getEntitiesOfClass(lazy().ItemEntity, new (lazy().AABB)(BAND.x0, BAND.y0, BAND.z0, BAND.x1 + 1, BAND.y1 + 1, BAND.z1 + 1)))
+      .forEach(function (e) { jcall(e, V.discard) })
+    note('area', 'band X ' + BAND.x0 + '-' + BAND.x1 + ' Y ' + BAND.y0 + '-' + BAND.y1 + ' Z ' + BAND.z0 + '-' + BAND.z1 +
+      ' generated and force-loaded, cleared (' + cleared + ' blocks changed), smooth stone floor at Y ' + FLOOR_Y)
+  }
+
+  function startScanners() {
+    SPECS.forEach(function (sp) {
+      var m = { key: sp.key, spec: sp, phase: 'running', si: 0, wakeAt: S.t + 2, t0: S.t, rocket: null, expected: null, itemsBefore: {} }
+      try {
+        m.g = geometry(sp)
+        m.rocketBlocks = sp.rocket(sp)
+        m.steps = stepsFor(sp)
+        placeStructure(m)
+        m.t0 = S.t
+      } catch (e) {
+        check('scanner:' + sp.key + ':placed', false, 'exception while building: ' + e)
+        m.phase = 'done'
+      }
+      S.scanners.push(m)
+    })
+  }
+
+  function scannersDone() {
+    for (var i = 0; i < S.scanners.length; i++) {
+      if (S.scanners[i].phase !== 'done') return false
+    }
+    return true
+  }
+
+  function scannerByKey(k) {
+    for (var i = 0; i < S.scanners.length; i++) {
+      if (S.scanners[i].key === k) return S.scanners[i]
+    }
+    return null
+  }
+
+  // ---------------------------------------------------------------- flight (#91)
+
+  function go(next) {
+    FL.phase = next
+    FL.since = S.t
+    FL.sub = 0
+    shared().put('phase', next)
+  }
+
+  // longest server tick since a test tick (TICK.gaps holds server tick counts)
+  function gapSince(t) {
+    var max = 0
+    TICK.gaps.forEach(function (g) { if (g.t >= t + S.tick0 && g.ms > max) max = g.ms })
+    return max
+  }
+
+  function chipPlanet(stack) {
+    if (stack === null || stack === undefined || jcall(stack, ['isEmpty', 'm_41619_'])) return ''
+    var tag = jcall(stack, V.tag)
+    return tag === null || tag === undefined ? '' : String(jcall(tag, V.getString, ['gcyr:current_planet']))
+  }
+
+  function setChipPlanet(stack, dim) {
+    jcall(jcall(stack, V.orCreateTag), V.putString, ['gcyr:current_planet', dim])
+  }
+
+  function started(r) {
+    return readRocket(r).started
+  }
+
+  // the rocket's config slot and fuel tank are private; their NBT is what the rocket's own UI writes into, so the test sets
+  // them through the entity's NBT (Entity.load -> RocketEntity.readAdditionalSaveData)
+  function loadRocket(r, chip, fuelAmount) {
+    var L = lazy()
+    var tag = r.saveWithoutId(new L.CompoundTag())
+    if (chip !== null) {
+      var it = jcall(chip, V.save, [new L.CompoundTag()])
+      jcall(it, V.putInt, ['Slot', 0])
+      var items = new L.ListTag()
+      items.add(it)
+      var cfg = new L.CompoundTag()
+      jcall(cfg, V.putInt, ['Size', 1])
+      jcall(cfg, V.put, ['Items', items])
+      jcall(tag, V.put, ['config', cfg])
+    }
+    if (fuelAmount !== null) {
+      var fuel = new L.CompoundTag()
+      jcall(fuel, V.putString, ['FluidName', IDS.fuel])
+      jcall(fuel, V.putInt, ['Amount', fuelAmount])
+      jcall(tag, V.put, ['fuel', fuel])
+    }
+    jcall(r, ['load', 'm_20258_'], [tag])
+    return readRocket(r)
+  }
+
+  function readRocket(r) {
+    var back = r.saveWithoutId(new (lazy().CompoundTag)())
+    var items = jcall(back.getCompound('config'), V.getList, ['Items', 10])
+    var planet = items.size() > 0 ? String(jcall(jcall(items, V.listCompound, [0]).getCompound('tag'), V.getString, ['gcyr:current_planet'])) : ''
+    var fuel = back.getCompound('fuel')
+    return { planet: planet, fuel: fuel.getInt('Amount'), fluid: String(jcall(fuel, V.getString, ['FluidName'])),
+      started: String(jcall(back, V.getBoolean, ['isStarted'])) === 'true', timer: back.getInt('startTimer') }
+  }
+
+  // the rocket the player rides; if Entity.getVehicle cannot be called on the player, the rocket near it whose first passenger
+  // is the test player
+  function vehicleOf(p) {
+    try {
+      var v = jcall(p, V.vehicle)
+      if (v === null || v === undefined) return null
+      return v instanceof lazy().Rocket ? v : null
+    } catch (e) {
+      var list = rocketsAround(p.getLevel(), xOf(p), zOf(p))
+      for (var i = 0; i < list.length; i++) {
+        var rider = null
+        try { rider = jcall(list[i], V.firstPassenger) } catch (e2) { rider = null }
+        if (rider !== null && rider !== undefined && isTestPlayer(rider)) return list[i]
+      }
+      return null
+    }
+  }
+
+  function describeVehicle(p) {
+    var v = null
+    try {
+      v = jcall(p, V.vehicle)
+    } catch (e) {
+      v = vehicleOf(p)
+    }
+    if (v === null || v === undefined) return 'none'
+    return String(v).substring(0, 60) + ' ' + uuidOf(v)
+  }
+
+  function rocketsAround(level, x, z) {
+    return rocketsIn(level, new (lazy().AABB)(x - 24, -128, z - 24, x + 24, 1024, z + 24))
+  }
+
+  function abortFlight(reason) {
+    note('flight_aborted', reason)
+    shared().put('brake', false)
+    shared().put('watch', false)
+    go('done')
+  }
+
+  function flightBegin(i) {
+    var lg = LEGS[i]
+    var m = scannerByKey(lg.spec)
+    if (m === null || !m.ready) {
+      check('flight_setup_' + lg.key, false, 'the ' + lg.key + ' scanner did not form, no flight')
+      return false
+    }
+    FL = { phase: 'setup', since: S.t, sub: 0, m: m, rocket: null, rocketUuid: '', legs: {}, hurts: {}, hits: [], died: false, landStable: 0, maxY: 0, crossT: 0,
+      launchT: 0, legIndex: i, leg: lg.key, target: lg.planet, targetDim: lg.dim, planetDim: lg.planetDim, stations: (FL && FL.stations) || {} }
+    shared().put('phase', 'setup')
+    return true
+  }
+
+  // the fuel GCYR asks for this destination (solar system or galaxy amount), at least FUEL_LOAD, at most what the tanks hold
+  function legFuel(i, r) {
+    var need = FUEL_LOAD
+    try { need = Number(r.computeRequiredFuelAmountForDestination(lazy().PlanetData.getPlanet(rl(LEGS[i].planet)))) } catch (e) { need = FUEL_LOAD }
+    var cap = Number(r.getFuelCapacity())
+    var amount = Math.min(cap, Math.max(FUEL_LOAD, need))
+    note('flight_fuel_' + LEGS[i].key, 'GCYR asks ' + need + ' mB (' + LEGS[i].fuelCfg + '), the tanks hold ' + cap + ' mB, loading ' + amount + ' mB')
+    return amount
+  }
+
+  // ---------------------------------------------------------------- S0-7 gate: a server-side teleport from a running multiblock
+
+  var GT = null
+
+  function gPos(x, y, z) {
+    return new (Java.loadClass('net.minecraft.core.BlockPos'))(x, y, z)
+  }
+
+  function gMachine() {
+    return lazy().MetaMachine.getMachine(S.level, gPos(GATE.x, GATE.y, GATE.z))
+  }
+
+  // lib/patterns.js descriptions (the same reader as server_scripts/gg_test_uhv_s0_machines.js in the spike overlay)
+  function gPlan(desc, p) {
+    var ctrl = null
+    desc.slices.forEach(function (rows, si) { rows.forEach(function (row, ri) {
+      for (var ci = 0; ci < row.length; ci++) { var s = desc.symbols[row.charAt(ci)]; if (s && s.kind === 'controller') ctrl = { si: si, ri: ri, ci: ci } }
+    }) })
+    var out = []
+    desc.slices.forEach(function (rows, si) { rows.forEach(function (row, ri) {
+      for (var ci = 0; ci < row.length; ci++) {
+        var ch = row.charAt(ci)
+        if (ch === ' ') continue
+        out.push({ x: p.x - (ci - ctrl.ci), y: p.y + (ri - ctrl.ri), z: p.z - (si - ctrl.si), ch: ch, sym: desc.symbols[ch] })
+      }
+    }) })
+    return out
+  }
+
+  function gDefault(sym) {
+    if (sym.kind === 'frames') return 'gtceu:' + sym.materials[0] + '_frame'
+    if (sym.kind === 'blocks') return sym.blocks[0]
+    if (sym.kind === 'oneOf') {
+      for (var k = 0; k < sym.options.length; k++) if (sym.options[k].kind === 'blocks') return sym.options[k].blocks[0]
+    }
+    return null
+  }
+
+  function gateBegin() {
+    var desc = global.grindless && global.grindless.structures ? global.grindless.structures[SWARM] : null
+    if (!desc) {
+      note('s0_7_gate', 'skipped: no ' + SWARM + ' structure (the uhv-s0 spike overlay is not merged)')
+      return false
+    }
+    S.server.runCommandSilent('forceload add ' + (GATE.x - 8) + ' ' + (GATE.z - 8) + ' ' + (GATE.x + 8) + ' ' + (GATE.z + 8))
+    S.server.runCommandSilent('fill ' + (GATE.x - 3) + ' ' + (GATE.y - 2) + ' ' + (GATE.z - 3) + ' ' + (GATE.x + 3) + ' ' + (GATE.y + 4) + ' ' + (GATE.z + 5) + ' air')
+    var map = { E: 'gtceu:uhv_energy_output_hatch_4a', I: 'gtceu:hv_input_hatch', B: 'gtceu:lv_input_bus', O: 'gtceu:lv_output_bus' }
+    var box = { x0: 1e9, x1: -1e9, z0: 1e9, z1: -1e9, top: -1e9 }
+    gPlan(desc, GATE).forEach(function (c) {
+      box.x0 = Math.min(box.x0, c.x); box.x1 = Math.max(box.x1, c.x)
+      box.z0 = Math.min(box.z0, c.z); box.z1 = Math.max(box.z1, c.z)
+      box.top = Math.max(box.top, c.y)
+      if (c.sym.kind === 'controller' || c.sym.kind === 'air') return
+      var id = map[c.ch] || gDefault(c.sym)
+      if (id) S.server.runCommandSilent('setblock ' + c.x + ' ' + c.y + ' ' + c.z + ' ' + id + ' replace')
+    })
+    S.server.runCommandSilent('setblock ' + GATE.x + ' ' + GATE.y + ' ' + GATE.z + ' ' + SWARM + '[facing=north] replace')
+    GT = { phase: 'forming', t0: S.t, t1: S.t, box: box, eu: 0 }
+    return true
+  }
+
+  function gateTick() {
+    var p = testPlayer()
+    if (p === null) { note('s0_7_gate', 'no player'); return true }
+    var m = gMachine()
+    var age = S.t - GT.t0
+    if (GT.phase === 'forming') {
+      if (m === null || m === undefined) {
+        if (age > 200) { check('s0_7_gate_formed', false, 'no controller at ' + key(GATE.x, GATE.y, GATE.z)); return true }
+        return false
+      }
+      if (!m.isFormed()) {
+        if (age >= 100 && age % 50 === 0) {
+          try { if (m.checkPatternWithLock()) { m.setFlipped(m.getMultiblockState().isNeededFlip()); m.onStructureFormed() } } catch (e) { /* retried */ }
+        }
+        if (age > 400) {
+          var why = 'unknown'
+          try { why = String(m.getMultiblockState().error) } catch (e2) { why = 'unknown' }
+          check('s0_7_gate_formed', false, 'not formed: ' + why)
+          return true
+        }
+        return false
+      }
+      asArray(m.getParts()).forEach(function (part) {
+        var pid = String(part.getDefinition().getId())
+        if (pid.indexOf('energy_output_hatch') >= 0) GT.dyn = part
+        if (pid.indexOf('input_bus') >= 0) GT.bus = part
+        if (pid.indexOf('input_hatch') >= 0) GT.hatch = part
+      })
+      if (!GT.dyn || !GT.bus || !GT.hatch) { check('s0_7_gate_formed', false, 'formed without dynamo, bus or hatch'); return true }
+      for (var i = 0; i < 4; i++) GT.bus.getInventory().storage.setStackInSlot(i, Item.of('grindless:s0_segment', 64))
+      GT.hatch.tank.setFluidInTank(0, Fluid.of('gtceu:oganesson', 16000).getFluidStack())
+      m.getRecipeLogic().updateTickSubscription()
+      check('s0_7_gate_formed', true, SWARM + ' formed at ' + key(GATE.x, GATE.y, GATE.z) + ', top Y ' + GT.box.top + '; 256 segments and ' +
+        Number(GT.hatch.tank.getFluidInTank(0).getAmount()) + ' mB oganesson loaded')
+      GT.phase = 'starting'
+      GT.t1 = S.t
+      return false
+    }
+    // the dynamo is emptied every tick so that the recipe never stalls on a full output
+    var dc = GT.dyn.energyContainer
+    var de = Number(dc.getEnergyStored())
+    if (de > 0) { GT.eu += de; dc.setEnergyStored(0) }
+    var working = m !== null && m !== undefined && m.getRecipeLogic().isWorking()
+    if (GT.phase === 'starting') {
+      if (!working) {
+        if (S.t - GT.t1 > 200) {
+          check('s0_7_gate_running', false, 'no recipe after 200 ticks: ' + String(m.getRecipeLogic().getFailureReasons()))
+          return true
+        }
+        return false
+      }
+      p.teleportTo('minecraft:overworld', GATE.x + 0.5, GT.box.top + 1, GATE.z + 1.5, 0, 0)
+      GT.phase = 'standing'
+      GT.t1 = S.t
+      return false
+    }
+    if (GT.phase === 'standing') {
+      if (S.t - GT.t1 < 10) return false
+      var b = GT.box
+      var on = dimOf(p) === 'minecraft:overworld' && xOf(p) >= b.x0 && xOf(p) <= b.x1 + 1 && zOf(p) >= b.z0 && zOf(p) <= b.z1 + 1 && Math.abs(yOf(p) - (b.top + 1)) < 0.6
+      check('s0_7_gate_standing', on && working, 'player at ' + xOf(p).toFixed(1) + ' ' + yOf(p).toFixed(1) + ' ' + zOf(p).toFixed(1) + ' on the ring (X ' + b.x0 + '-' + b.x1 +
+        ' Z ' + b.z0 + '-' + b.z1 + ', top Y ' + b.top + '), recipe working ' + working + ', ' + GT.eu + ' EU so far')
+      var dx = Math.floor(GATE_DEST.x)
+      var dz = Math.floor(GATE_DEST.z)
+      var dl = S.server.getLevel(GATE_DEST.dim)
+      var glass = 'unloaded'
+      if (dl !== null) {
+        // generate and hold the far chunk first: a fill in a chunk that is not loaded yet changes nothing (R2e fell through to the surface)
+        dl.getChunk(dx >> 4, dz >> 4)
+        S.server.runCommandSilent('execute in ' + GATE_DEST.dim + ' run forceload add ' + dx + ' ' + dz)
+        // R2f: the command fill left air here, so the platform is set through the level directly
+        for (var gx = dx - 2; gx <= dx + 2; gx++) {
+          for (var gz = dz - 2; gz <= dz + 2; gz++) dl.getBlock(gx, GATE_DEST.y - 1, gz).set('minecraft:glass')
+        }
+        glass = String(dl.getBlock(dx, GATE_DEST.y - 1, dz).getId()) + ', build height ' + dl.getMinBuildHeight() + '..' + dl.getMaxBuildHeight()
+      }
+      note('s0_7_gate_far_end', GATE_DEST.dim + ' level ' + (dl !== null) + ', block under the arrival point ' + glass)
+      GT.euBefore = GT.eu
+      // what the gate would call when its recipe runs: a plain server-side teleport of the player standing in the ring
+      p.teleportTo(GATE_DEST.dim, GATE_DEST.x, GATE_DEST.y, GATE_DEST.z, 0, 0)
+      GT.phase = 'away'
+      GT.t1 = S.t
+      return false
+    }
+    if (GT.phase === 'away') {
+      if (S.t - GT.t1 < 40) return false
+      var d = dimOf(p)
+      var cd = String(sval('clientDim'))
+      var tickAge = Date.now() - Number(sval('clientTickMs'))
+      check('s0_7_gate_teleport', d === GATE_DEST.dim && cd === GATE_DEST.dim && tickAge < 2000, 'server dimension ' + d + ', client dimension ' + cd +
+        ', last client tick ' + tickAge + ' ms ago, player y ' + yOf(p).toFixed(1) + ' (glass at ' + (GATE_DEST.y - 1) + ')')
+      check('s0_7_gate_kept_running', GT.eu > GT.euBefore && working, 'the ring made ' + (GT.eu - GT.euBefore) + ' EU in the 40 ticks the player was away, recipe working ' +
+        working + ' (its chunk is force-loaded by the test)')
+      p.teleportTo('minecraft:overworld', BAND.x0 + 30.5, PAD_Y, 7.5, 0, 20)
+      GT.phase = 'back'
+      GT.t1 = S.t
+      return false
+    }
+    if (GT.phase === 'back') {
+      if (S.t - GT.t1 < 40) return false
+      check('s0_7_gate_return', dimOf(p) === 'minecraft:overworld' && String(sval('clientDim')) === 'minecraft:overworld', 'back: server ' + dimOf(p) + ', client ' + sval('clientDim'))
+      S.server.runCommandSilent('fill ' + (GATE.x - 3) + ' ' + (GATE.y - 2) + ' ' + (GATE.z - 3) + ' ' + (GATE.x + 3) + ' ' + (GATE.y + 4) + ' ' + (GATE.z + 5) + ' air')
+      return true
+    }
+    return true
+  }
+
+  function recipeLoaded(rid) {
+    var rec = S.server.getRecipeManager().byKey(rl(rid))
+    return rec !== null && rec !== undefined && String(rec.isPresent ? rec.isPresent() : true) !== 'false'
+  }
+
+  // the station slots in order: LuV's two (Earth orbit, Io orbit), ZPM's two (Saturn, Uranus), then UV's (Neptune, Pluto)
+  function extraChecks() {
+    var orbits = []
+    try {
+      var slots = global.grindless.stations.slots
+      for (var i = 0; i < slots.length; i++) orbits.push(String(slots[i].orbit))
+    } catch (e) { orbits = ['unreadable (' + e + ')'] }
+    check('station_slots', orbits.slice(0, 8).join(',') === SLOTS_WANT.join(','), 'stations.slots orbits ' + orbits.join(', ') + ' (the first eight expected ' + SLOTS_WANT.join(', ') + '; slots 9 and 10 need table rows: the UEV flights open the first stations of their orbits natively)')
+    check('first_six_slots_unchanged', orbits.slice(0, 6).join(',') === SLOTS_WANT.slice(0, 6).join(','), 'the first six slots: ' + orbits.slice(0, 6).join(', '))
+  }
+
+  // S0-3: GCYR keeps an orbit's stations in its level's gcyr_space_stations SavedData; after save-all flush they are read back
+  // from the file on disk (DimensionDataStorage.readTagFromDisk, 1.20.1 data version 3465) and loaded into a fresh holder
+  function persistenceChecks() {
+    var L = lazy()
+    LEGS.forEach(function (lg) {
+      var st = FL.stations[lg.key]
+      if (!st) {
+        note('station_saved_' + lg.key, 'no station from this run (leg not flown)')
+        return
+      }
+      var detail = ''
+      var ok = false
+      try {
+        var level = levelOf(lg.dim)
+        var tag = jcall(level.getDataStorage(), ['readTagFromDisk', 'm_78158_'], [STATIONS_FILE, 3465])
+        var data = tag.getCompound('data')
+        var onDisk = data.getCompound('stations')
+        var keys = asArray(onDisk.getAllKeys()).map(String)
+        var fresh = new L.StationData(level, data)
+        var back = fresh.getStation(st.id)
+        ok = keys.indexOf(String(st.id)) >= 0 && back !== null && back !== undefined
+        detail = lg.dim + ' data/' + STATIONS_FILE + '.dat stations {' + keys.join(', ') + '}; reloaded station ' + st.id + ': ' + (back === null || back === undefined ? 'none' : String(back))
+      } catch (e) {
+        detail = 'unreadable: ' + e
+      }
+      check('station_saved_' + lg.key, ok, detail)
+    })
+  }
+
+  // GCYR's own tier averages (RocketEntity:940-960) from the rocket's blocks, and its private fields when Java reflection is allowed
+  function rocketTiers(r) {
+    var L = lazy()
+    var out = []
+    try {
+      var m = 0, mn = 0, t = 0, tn = 0
+      asArray(r.getBlocks()).forEach(function (pw) {
+        var b = pw.state().getBlock()
+        if (b instanceof L.MotorBlock) { m += Number(b.getTier()); mn++ }
+        if (b instanceof L.TankBlock) { t += Number(b.getTier()); tn++ }
+      })
+      var mt = mn > 0 ? Math.floor(m / mn) : 0
+      var tt = tn > 0 ? Math.floor(t / tn) : 0
+      out.push('from blocks: motorTier ' + mt + ' (' + mn + ' motors), fuelTankTier ' + tt + ' (' + tn + ' tanks), partsTier ' + Math.floor((mt + tt) / 2))
+    } catch (e) {
+      out.push('blocks unreadable: ' + e)
+    }
+    try {
+      var cls = r.getClass()
+      var vals = ['motorTier', 'fuelTankTier', 'partsTier'].map(function (n) {
+        var f = cls.getDeclaredField(n)
+        f.setAccessible(true)
+        return n + ' ' + f.getInt(r)
+      })
+      out.push('reflection: ' + vals.join(', '))
+    } catch (e2) {
+      out.push('reflection refused: ' + e2)
+    }
+    return out.join('; ')
+  }
+
+  function rocketStation(r) {
+    var back = r.saveWithoutId(new (lazy().CompoundTag)())
+    var items = jcall(back.getCompound('config'), V.getList, ['Items', 10])
+    if (items.size() === 0) return null
+    var t = jcall(items, V.listCompound, [0]).getCompound('tag')
+    return t.contains('gcyr:current_station') ? Number(t.getInt('gcyr:current_station')) : null
+  }
+
+  // the rocket UI (LDLib ModularUI: config slot, satellite slot, then the player inventory) is the only way into the private
+  // satellite slot, which the rocket does not save to NBT: the server opens it for the player and fills slot 1 like a click would
+  function insertPackage(p, r) {
+    var L = lazy()
+    try {
+      r.openCustomInventoryScreen(p)
+    } catch (e) {
+      return { ok: false, detail: 'openCustomInventoryScreen failed: ' + e }
+    }
+    try {
+      var menu = jget(p, ['containerMenu', 'f_36096_'])
+      var s0 = jcall(menu, ['getSlot', 'm_38853_'], [0])
+      var s1 = jcall(menu, ['getSlot', 'm_38853_'], [1])
+      var cfgId = String(L.Forge.ITEMS.getKey(jcall(jcall(s0, ['getItem', 'm_7993_']), V.stackItem)))
+      jcall(s1, ['set', 'm_5852_'], [Item.of(IDS.stationPackage, PKG_NBT)])
+      var got = jcall(s1, ['getItem', 'm_7993_'])
+      var gotId = String(L.Forge.ITEMS.getKey(jcall(got, V.stackItem)))
+      var blocks = 0
+      try { blocks = jcall(got, V.tag).getList('gcyr:satellite_blocks', 10).size() } catch (e3) { blocks = -1 }
+      closeMenu(p)
+      return { ok: cfgId === IDS.chip && gotId === IDS.stationPackage && blocks === PKG_CELLS.length,
+        detail: 'menu ' + String(menu).substring(0, 50) + ': slot 0 holds ' + cfgId + ', slot 1 now ' + gotId + ' with ' + blocks + ' satellite blocks' }
+    } catch (e2) {
+      closeMenu(p)
+      return { ok: false, detail: 'menu slot access failed: ' + e2 }
+    }
+  }
+
+  function countPackageBlocks(level, cx, cz) {
+    var n = 0
+    for (var x = cx - 4; x <= cx + 4; x++) {
+      for (var z = cz - 4; z <= cz + 4; z++) {
+        for (var y = STATION_Y - 1; y <= STATION_Y + 1; y++) {
+          if (String(level.getBlock(x, y, z).getId()) === PKG_BLOCK) n++
+        }
+      }
+    }
+    return n
+  }
+
+  function hurtSummary(since) {
+    var parts = []
+    Object.keys(FL.hurts).forEach(function (k) {
+      var n = FL.hurts[k].filter(function (t) { return t >= since }).length
+      if (n > 0) parts.push(k + ' x' + n)
+    })
+    return parts.length > 0 ? parts.join(', ') : 'none'
+  }
+
+  // first and last hit of each damage type since a tick: phase, ticks after the launch, dimension and height of the player
+  function hurtTimeline(since) {
+    var byType = {}
+    FL.hits.forEach(function (h) {
+      if (h.t < since) return
+      if (!byType[h.id]) byType[h.id] = []
+      byType[h.id].push(h)
+    })
+    var parts = Object.keys(byType).map(function (id) {
+      var l = byType[id]
+      function at(h) { return h.phase + ' launch+' + (h.t - FL.launchT) + ' ' + h.dim + ' y' + h.y + (h.vehicle ? ' riding' : '') }
+      return id + ' x' + l.length + ' (first ' + at(l[0]) + (l.length > 1 ? ', last ' + at(l[l.length - 1]) : '') + ')'
+    })
+    return parts.length > 0 ? parts.join('; ') : 'none'
+  }
+
+  // the suit a player wears to the Moon: the four pieces, the chestplate filled with oxygen (GCYR 0.2.9: FluidHandlerItemStack
+  // "Fluid" tag, 16 buckets, fluids in forge:oxygen; 1 mB every 3 ticks). Without oxygen a full suit does not protect: the
+  // gcyr:is_spacesuit tag GCYR checks for that is empty in 0.2.9.
+  function suitUp(p, helmet) {
+    if (helmet) p.setHeadArmorItem(Item.of(IDS.suit.HEAD))
+    p.setChestArmorItem(Item.of(IDS.suit.CHEST, '{Fluid:{FluidName:"gtceu:oxygen",Amount:' + SUIT_OXYGEN + '}}'))
+    p.setLegsArmorItem(Item.of(IDS.suit.LEGS))
+    p.setFeetArmorItem(Item.of(IDS.suit.FEET))
+  }
+
+  // the ItemStack overloads: KubeJS converts almost anything to an ItemStack, so oxygenAmount(player) is ambiguous for Rhino
+  function suitState(p) {
+    try {
+      var Suit = Java.loadClass('argent_matter.gcyr.common.item.armor.SpaceSuitArmorItem')
+      var chest = p.getChestArmorItem()
+      return 'full set ' + Suit.hasFullSet(p) + ', oxygen ' + Suit.oxygenAmount(chest) + '/' + Suit.oxygenMax(chest) + ' mB'
+    } catch (e) {
+      return 'unreadable (' + e + ')'
+    }
+  }
+
+  // fire hits on the player since a tick (the pack's space/rocket_riders.js gives riders fire resistance)
+  function fireHits(since) {
+    return FL.hits.filter(function (h) { return h.t >= since && (h.id === 'onFire' || h.id === 'inFire') }).length
+  }
+
+  function hasFireResistance(p) {
+    try {
+      return p.getPotionEffects().isActive(Java.loadClass('net.minecraft.world.effect.MobEffects').FIRE_RESISTANCE) === true
+    } catch (e) {
+      return 'unreadable (' + e + ')'
+    }
+  }
+
+  function flightTick() {
+    var L = lazy()
+    var p = testPlayer()
+    if (FL.phase === 'done') return
+    if (p === null) {
+      abortFlight('the test player is gone')
+      return
+    }
+    if (FL.died) {
+      check('flight_player_alive', false, 'the player died during ' + FL.phase + ' (damage: ' + hurtTimeline(0) + ')')
+      abortFlight('player died')
+      return
+    }
+    var age = S.t - FL.since
+    var m = FL.m
+    var g = m.g
+
+    // when and where the player catches fire (GCYR sets 300 fire ticks under a launching rocket, 200 on a planet that is too hot)
+    if (!FL.fireSeen) {
+      var fire = 0
+      try { fire = Number(jcall(p, ['getRemainingFireTicks', 'm_20094_'])) } catch (e) { fire = 0 }
+      if (fire > 0) {
+        FL.fireSeen = true
+        var rr = FL.rocket
+        note('flight_fire', 'the player caught fire during ' + FL.phase + ' (launch+' + (S.t - FL.launchT) + ' ticks, ' + fire + ' fire ticks left) in ' + dimOf(p) +
+          ' at y ' + yOf(p).toFixed(1) + (rr !== null && !rr.isRemoved() ? ', rocket y ' + yOf(rr).toFixed(1) + ' start timer ' + rr.getStartTimer() : '') +
+          ', riding ' + (vehicleOf(p) !== null))
+      }
+    }
+    if (FL.phase === 'setup') {
+      // the client world has a random seed: clear the air column the rocket climbs through, above the band
+      S.server.runCommandSilent('fill ' + (g.box.x0 - 1) + ' ' + (BAND.y1 + 1) + ' ' + (g.box.z0 - 1) + ' ' + (g.box.x1 + 1) + ' 319 ' + (g.box.z1 + 1) + ' air')
+      var stand = g.at(-2, 0, -1)
+      p.teleportTo(IDS.earthDim, stand.x + 0.5, stand.y, stand.z + 0.5, 0, 10)
+      // KubeJS's LivingEntityKJS setters
+      suitUp(p, true)
+      p.setMainHandItem(Item.of('minecraft:air'))
+      var mode = 'unknown'
+      try { mode = String(jcall(jget(p, V.gameMode), V.gameModeForPlayer)) } catch (e) { mode = 'unreadable (' + e + ')' }
+      note('flight_setup', 'player ' + p.getProfile().getName() + ' at ' + key(stand.x, stand.y, stand.z) + ' in front of the flight scanner, space suit on (' +
+        suitState(p) + '), game mode ' + mode)
+      probe('player', p)
+      go('open_scanner')
+      return
+    }
+
+    if (FL.phase === 'open_scanner') {
+      if (age < 40) return
+      var C = g.C
+      var how = ''
+      try {
+        how = 'right-click on the Rocket Scanner controller: ' + rightClickBlock(p, C, g.F)
+      } catch (e) {
+        how = 'the simulated right-click failed (' + e + '); the scanner is refreshed directly'
+        if (global.grindless && global.grindless.space && global.grindless.space.refreshRocketScanner) {
+          global.grindless.space.refreshRocketScanner(S.level, new BlockPos(C.x, C.y, C.z))
+        }
+      }
+      var menu = 'unknown'
+      try { menu = String(p.getOpenInventory()).substring(0, 80) } catch (e2) { menu = 'unreadable' }
+      note('flight_scanner_ui', how + ', open menu ' + menu)
+      go('build')
+      return
+    }
+
+    if (FL.phase === 'build') {
+      if (age < 10) return
+      // what the UI's "Build" button runs on the server
+      machineAt(g.C).setRocketBuilt(true)
+      closeMenu(p)
+      var rockets = rocketsIn(S.level, areaBox(m, 4))
+      FL.rocket = rockets.length === 1 ? rockets[0] : null
+      var expN = m.rocketBlocks.length
+      var ok = FL.rocket !== null && FL.rocket.getBlocks().size() === expN
+      check('flight_scanner_build', ok, 'rockets=' + rockets.length + (FL.rocket !== null ? ' ' + rocketSummary(FL.rocket) : '') + ' (expected ' + expN + ' blocks, speed 5)')
+      if (!ok) {
+        abortFlight('no rocket')
+        return
+      }
+      FL.rocketUuid = uuidOf(FL.rocket)
+      probe('rocket', FL.rocket)
+      shared().put('rocketUuid', FL.rocketUuid)
+      p.setMainHandItem(Item.of(IDS.chip))
+      go('program_chip')
+      return
+    }
+
+    if (FL.phase === 'program_chip') {
+      if (FL.sub === 0) {
+        if (age < 10) return
+        shared().put('selected', '')
+        shared().put('select', FL.target)
+        var used = ''
+        FL.subT = S.t
+        try {
+          used = 'right-click with the ID chip: ' + useHeldItem(p) + ' (GCYR opens its planet screen on the client)'
+        } catch (e) {
+          used = 'the simulated right-click with the chip failed: ' + e
+          FL.subT = S.t - 301
+        }
+        note('flight_chip_used_' + FL.leg, used)
+        FL.sub = 1
+        return
+      }
+      var planet = chipPlanet(p.getMainHandItem())
+      if (planet === FL.planetDim) {
+        check('flight_planet_screen_' + FL.leg, true, 'the client clicked ' + FL.target + ' on GCYR\'s planet screen; the server wrote gcyr:current_planet=' + planet +
+          ' into the chip (' + (S.t - FL.subT) + ' ticks)')
+        go('load')
+        return
+      }
+      if (S.t - FL.subT > 300) {
+        check('flight_planet_screen_' + FL.leg, false, 'the chip says "' + planet + '" 15 s after the right-click (client screen: ' + sval('clientScreen') + ', client clicked: ' +
+          sval('selected') + '); the test writes the chip itself and goes on')
+        closeMenu(p)
+        setChipPlanet(p.getMainHandItem(), FL.planetDim)
+        go('load')
+      }
+      return
+    }
+
+    if (FL.phase === 'load') {
+      var chip = jcall(p.getMainHandItem(), V.copy)
+      // a station id the orbit does not hold yet: GCYR allocates the station on arrival and rewrites the chip (S0-3)
+      var holder = L.Stations.getSpaceStations(levelOf(FL.targetDim))
+      // getStations() is an Int2ObjectMap, which Rhino reads as a map (keys, not methods); getFreeStationId() is its size
+      FL.stationsBefore = Number(holder.getFreeStationId())
+      FL.stationAsked = Number(holder.getFreeStationId())
+      jcall(jcall(chip, V.orCreateTag), V.putInt, ['gcyr:current_station', FL.stationAsked])
+      var fuelNeed = legFuel(FL.legIndex, FL.rocket)
+      var loaded = loadRocket(FL.rocket, chip, fuelNeed)
+      p.setMainHandItem(Item.of('minecraft:air'))
+      var asked = rocketStation(FL.rocket)
+      check('flight_load_' + FL.leg, loaded.planet === FL.planetDim && loaded.fuel === fuelNeed && loaded.fluid === IDS.fuel && asked === FL.stationAsked,
+        'rocket config slot chip -> ' + loaded.planet + ' station ' + asked + ' (free id in ' + FL.targetDim + ', which holds ' + FL.stationsBefore + '), tank ' +
+        loaded.fluid + ' ' + loaded.fuel + ' mB of ' + FL.rocket.getFuelCapacity())
+      FL.pkg = insertPackage(p, FL.rocket)
+      check('flight_package_' + FL.leg, FL.pkg.ok, FL.pkg.detail)
+      go('board')
+      return
+    }
+
+    if (FL.phase === 'board') {
+      if (FL.sub === 0) {
+        var res2 = ''
+        try {
+          res2 = 'right-click on the rocket (Player.interactOn): ' + jcall(p, V.interactOn, [FL.rocket, L.Hand.MAIN_HAND])
+        } catch (e) {
+          try {
+            res2 = 'RocketEntity.interact (what interactOn runs; Player.interactOn failed: ' + e + '): ' + jcall(FL.rocket, V.interact, [p, L.Hand.MAIN_HAND])
+          } catch (e2) {
+            res2 = '/ride (interactOn and interact failed: ' + e2 + '): ' + S.server.runCommandSilent('ride ' + p.getProfile().getName() + ' mount ' + FL.rocketUuid)
+          }
+        }
+        var v = vehicleOf(p)
+        var ok2 = v !== null && uuidOf(v) === FL.rocketUuid
+        check('flight_board', ok2, res2 + ', vehicle ' + describeVehicle(p))
+        if (!ok2) {
+          abortFlight('the player could not sit in the rocket')
+          return
+        }
+        FL.sub = 1
+        return
+      }
+      if (age < 40) return
+      note('flight_client_board', 'client sees: dimension ' + sval('clientDim') + ', vehicle ' + sval('clientVehicle') + ', rockets ' + sval('clientRockets'))
+      go('launch')
+      return
+    }
+
+    if (FL.phase === 'launch') {
+      var r = FL.rocket
+      var dest = L.PlanetData.getPlanet(rl(FL.target))
+      var need = r.computeRequiredFuelAmountForDestination(dest)
+      var before = rocketSummary(r)
+      // what the Launch button of the rocket UI runs
+      r.startRocket()
+      var ok3 = started(r)
+      check('flight_launch_' + FL.leg, ok3, (ok3 ? 'ROCKET_STARTED, countdown 200 ticks' : 'startRocket() refused') + '; ' + before + ', fuel needed to launch ' +
+        need + ' mB, destination ' + (r.getDestination() === null ? 'none' : String(r.getDestination().level())) + ', rider ' + describeVehicle(p))
+      var tiers = rocketTiers(r)
+      if (!ok3) {
+        note('flight_tiers_' + FL.leg, 'refused: ' + tiers + ' (needs ' + dest.rocketTier() + ')')
+        abortFlight('the rocket did not start')
+        return
+      }
+      note('flight_tiers_' + FL.leg, tiers + '; ' + FL.target + ' needs ' + dest.rocketTier())
+      FL.fromX = xOf(r)
+      FL.fromZ = zOf(r)
+      FL.launchT = S.t
+      if (FL.firstLaunchT === undefined) FL.firstLaunchT = S.t
+      FL.crossT = 0
+      FL.maxY = 0
+      FL.fuelAtLaunch = readRocket(r).fuel
+      shared().put('shot', 'launch_' + FL.leg)
+      // the client half reports a server that stops ticking as the #91 freeze only from here to the landing
+      shared().put('watch', true)
+      go('ascent')
+      return
+    }
+
+    if (FL.phase === 'ascent') {
+      var r2 = FL.rocket
+      if (dimOf(p) === FL.targetDim) {
+        go('arrived')
+      } else {
+        if (!r2.isRemoved()) {
+          FL.maxY = Math.max(FL.maxY, yOf(r2))
+          if (FL.crossT === 0 && yOf(r2) >= 600) FL.crossT = S.t
+          if (age === 260) shared().put('shot', 'climb_' + FL.leg)
+          if (age === 330) shared().put('shot', 'high_' + FL.leg)
+          if (age === 240) FL.fireResAtClimb = hasFireResistance(p)
+        }
+        if (age > 2400) {
+          check('flight_teleport_' + FL.leg, false, 'still in ' + dimOf(p) + ' ' + age + ' ticks after launch: rocket ' + (r2.isRemoved() ? 'removed' : 'y=' + yOf(r2).toFixed(1) +
+            ' started=' + started(r2) + ' timer=' + r2.getStartTimer()) + ', max y ' + FL.maxY.toFixed(1) + ', vehicle ' + describeVehicle(p))
+          abortFlight('no teleport')
+        }
+        return
+      }
+    }
+
+    if (FL.phase === 'arrived') {
+      var dest2 = levelOf(FL.targetDim)
+      var gap = gapSince(FL.crossT > 0 ? FL.crossT - 40 : FL.launchT)
+      check('flight_teleport_' + FL.leg, true, 'player in ' + FL.targetDim + ' ' + (S.t - FL.launchT) + ' ticks after the launch (countdown 200 + climb); the rocket passed y 600 ' +
+        (FL.crossT > 0 ? (S.t - FL.crossT) + ' ticks before' : '(not seen: teleported in the same tick)') + ', max y seen ' + FL.maxY.toFixed(1))
+      check('flight_server_ticking_' + FL.leg, gap < 20000, 'longest server tick around the teleport ' + gap + ' ms (the first visit generates the dimension on a software renderer; a #91 freeze stops the ticks for good, and the client half reports that)')
+      var v2 = vehicleOf(p)
+      check('flight_riding_' + FL.leg, v2 !== null && String(dimOf(v2)) === FL.targetDim, 'player vehicle after the teleport: ' + describeVehicle(p))
+      // the entity sections of the arrival chunk are not loaded yet in this tick: the rockets are counted 40 ticks later
+      var around = rocketsAround(dest2, xOf(p), zOf(p))
+      var newRocket = v2 !== null ? v2 : (around.length > 0 ? around[0] : null)
+      check('flight_rocket_' + FL.leg, newRocket !== null && newRocket.getBlocks().size() === m.rocketBlocks.length && !started(newRocket),
+        (newRocket !== null ? rocketSummary(newRocket) + ', started=' + started(newRocket) + ', y=' + yOf(newRocket).toFixed(1) : 'no rocket') + ' (expected ' +
+        m.rocketBlocks.length + ' blocks, not started: GCYR clears the launch on arrival)')
+      note('flight_damage_' + FL.leg, 'damage from the launch to the arrival: ' + hurtTimeline(FL.launchT) + '; suit ' + suitState(p))
+      // the departure chunk is still loaded in this tick: nothing may be left there (the player now stands at the station's x/z)
+      var fromLevel = levelOf(IDS.earthDim)
+      var leftBehind = rocketsAround(fromLevel, FL.fromX, FL.fromZ).length
+      check('flight_no_copy_' + FL.leg, leftBehind === 0, 'rockets left in the departure dimension at the pad: ' + leftBehind +
+        ' (GCYR moves the rocket, then moves the riders a second time)')
+      if (newRocket === null) {
+        abortFlight('no rocket at the destination')
+        return
+      }
+      var holder2 = L.Stations.getSpaceStations(dest2)
+      var sid = rocketStation(newRocket)
+      var st = sid === null ? null : holder2.getStation(sid)
+      var count = Number(holder2.getFreeStationId())
+      check('station_deployed_' + FL.leg, st !== null && st !== undefined && sid === FL.stationAsked && count === FL.stationsBefore + 1,
+        FL.targetDim + ' holds ' + count + ' station(s) (was ' + FL.stationsBefore + '); the chip in the new rocket says station ' + sid + ' (asked ' + FL.stationAsked + '): ' +
+        (st === null || st === undefined ? 'none' : String(st)))
+      if (st !== null && st !== undefined) {
+        var wp = holder2.getStationWorldPos(sid)
+        // GCYR moves the riders first and setPos()es the rocket at the station afterwards (RocketEntity:694-758): in this tick the
+        // rider still has the pad's x/z, the rocket already has the station's
+        var near = Math.abs(xOf(newRocket) - wp.getX()) <= 8 && Math.abs(zOf(newRocket) - wp.getZ()) <= 8
+        check('station_arrival_' + FL.leg, near, 'rocket at x ' + xOf(newRocket).toFixed(1) + ' z ' + zOf(newRocket).toFixed(1) + ' (rider at x ' + xOf(p).toFixed(1) +
+          ' z ' + zOf(p).toFixed(1) + ' until its next riding tick), station ' + sid + ' world pos ' + wp.getX() + ' ' + wp.getZ())
+        var iron = countPackageBlocks(dest2, wp.getX(), wp.getZ())
+        check('station_built_' + FL.leg, iron === PKG_CELLS.length, iron + ' ' + PKG_BLOCK + ' at Y ' + STATION_Y + ' around the station (expected ' + PKG_CELLS.length +
+          ' from the Space Station Package; ' + (FL.pkg && FL.pkg.ok ? 'package inserted' : 'package NOT inserted') + ')')
+        FL.stations[FL.leg] = { id: sid, x: wp.getX(), z: wp.getZ() }
+      }
+      FL.rocket = newRocket
+      FL.rocketUuid = uuidOf(newRocket)
+      var lg = LEGS[FL.legIndex]
+      var rt = 'unreadable'
+      try { rt = String(newRocket.getTier()) } catch (e) { try { rt = String(jcall(newRocket, ['rocketTier', 'getRocketTier'])) } catch (e2) { rt = 'unreadable' } }
+      note('flight_level_' + FL.leg, 'rocket in ' + FL.targetDim + ': ' + rocketSummary(newRocket) + ', rocket tier/level ' + rt + ' (expected ' + lg.level + '); ' + rocketTiers(newRocket))
+      shared().put('watch', false)
+      shared().put('shot', 'arrival_' + FL.leg)
+      FL.legs[FL.leg] = { launchToArrive: S.t - FL.launchT, arriveToLand: 0, burnt: FL.fuelAtLaunch - readRocket(newRocket).fuel }
+      S.server.runCommandSilent('ride ' + p.getProfile().getName() + ' dismount')
+      newRocket.discard()
+      if (markerLeg() === 'both' && FL.legIndex + 1 < LEGS.length) {
+        var next = FL.legIndex + 1
+        var carry = FL.legs
+        var firstT = FL.firstLaunchT
+        var carryStations = FL.stations
+        if (!flightBegin(next)) {
+          abortFlight('the next scanner did not form')
+          return
+        }
+        FL.legs = carry
+        FL.firstLaunchT = firstT
+        FL.stations = carryStations
+        return
+      }
+      flightSummary()
+      go('extras')
+      return
+    }
+
+    if (FL.phase === 'extras') {
+      if (FL.sub === 0) {
+        p.teleportTo(IDS.earthDim, BAND.x0 + 0.5, PAD_Y, 7.5, 0, 0)
+        extraChecks()
+        // R2h: save-all flush OOMed the 4 GB client; only the flown orbits' SavedData are written (DimensionDataStorage.save)
+        var saved = []
+        LEGS.forEach(function (lg) {
+          if (!FL.stations[lg.key]) return
+          try {
+            jcall(levelOf(lg.dim).getDataStorage(), ['save', 'm_78151_'], [])
+            saved.push(lg.dim)
+          } catch (e) {
+            saved.push(lg.dim + ' failed: ' + e)
+          }
+        })
+        note('save', 'DimensionDataStorage.save() for ' + saved.join(', '))
+        FL.sub = 1
+        return
+      }
+      if (age < 40) return
+      persistenceChecks()
+      go('done')
+      return
+    }
+
+    if (FL.phase === 'descent_unused') {
+      var r3 = FL.rocket
+      if (r3.isRemoved()) {
+        var vv = vehicleOf(p)
+        if (vv !== null && !vv.isRemoved() && dimOf(vv) === FL.targetDim) {
+          FL.rocket = vv
+          return
+        }
+        check('flight_landing_' + FL.leg, false, 'the rocket entity is gone ' + age + ' ticks after arrival (crash landing = unBuild + explosion when fallDistance > 48); ' +
+          'player at y ' + yOf(p).toFixed(1) + ', client held Space for ' + sval('clientBrakeTicks') + ' ticks')
+        shared().put('brake', false)
+        abortFlight('crash')
+        return
+      }
+      FL.minY = Math.min(FL.minY, yOf(r3))
+      // landed = the rocket fell and then did not move for 10 ticks (plain positions: no Entity.onGround / Vec3.y name lookups); a
+      // rocket that has not fallen yet may only be waiting for its chunk to load
+      var y3 = yOf(r3)
+      if (FL.lastY !== undefined && Math.abs(y3 - FL.lastY) < 0.001 && FL.minY < FL.arrY - 10) FL.landStable++
+      else FL.landStable = 0
+      FL.lastY = y3
+      if (age === 40) note('flight_client_descent_' + FL.leg, 'client sees: dimension ' + sval('clientDim') + ', vehicle ' + sval('clientVehicle') + ', Space held ' + sval('clientBrakeTicks') + ' ticks')
+      if (FL.landStable >= 10) {
+        var info = readRocket(r3)
+        check('flight_landing_' + FL.leg, true, 'landed in ' + dimOf(r3) + ' at ' + key(Math.floor(jcall(r3, V.x)), Math.floor(y3), Math.floor(jcall(r3, V.z))) + ' ' + (S.t - FL.arriveT) +
+          ' ticks after arrival, no crash; fuel ' + info.fuel + ' mB left (' + (FL.fuelAtLaunch - info.fuel) + ' mB burnt this leg), client held Space ' + sval('clientBrakeTicks') + ' ticks')
+        FL.legs[FL.leg] = { launchToArrive: FL.arriveT - FL.launchT, arriveToLand: S.t - FL.arriveT, burnt: FL.fuelAtLaunch - info.fuel }
+        FL.landT = S.t
+        // the landed rocket's chunk is loaded: exactly one rocket where the player is
+        var here = rocketsAround(levelOf(FL.targetDim), xOf(p), zOf(p)).length
+        check('flight_one_rocket_' + FL.leg, here === 1, 'rockets near the player in ' + FL.targetDim + ' after the landing: ' + here)
+        var burns = fireHits(FL.launchT)
+        check('flight_rider_fire_' + FL.leg, burns === 0, 'fire hits on the rider from the launch to the landing: ' + burns + '; fire resistance during the climb: ' +
+          FL.fireResAtClimb + ' (GCYR burns everything under a climbing rocket; the pack keeps riders fire resistant)')
+        shared().put('brake', false)
+        shared().put('watch', false)
+        shared().put('shot', 'landed_' + FL.leg)
+        go(FL.leg === 'moon' ? 'moon_stay' : 'done')
+        if (FL.leg !== 'moon') flightSummary()
+        return
+      }
+      if (age > 2400) {
+        check('flight_landing_' + FL.leg, false, 'not on the ground ' + age + ' ticks after arrival: y=' + y3.toFixed(1) + ' min y ' + FL.minY.toFixed(1) +
+          ', started=' + started(r3) + ', client held Space ' + sval('clientBrakeTicks') + ' ticks')
+        abortFlight('no landing')
+      }
+      return
+    }
+
+    if (FL.phase === 'moon_stay') {
+      if (FL.sub === 0) {
+        FL.stayT = S.t
+        FL.sub = 1
+        return
+      }
+      if (FL.sub === 1 && S.t - FL.stayT >= 60) {
+        var suitHurts = hurtSummary(FL.landT)
+        check('flight_moon_suit', suitHurts === 'none', 'damage on the Moon in the space suit from the landing on: ' + hurtTimeline(FL.landT) + '; suit ' + suitState(p) +
+          ' (the suit keeps 60-363 K, the Moon is 113 K; GCYR burns 1 mB of oxygen every 3 ticks)')
+        FL.helmetOff = S.t
+        p.setHeadArmorItem(Item.of('minecraft:air'))
+        FL.sub = 2
+        return
+      }
+      if (FL.sub === 2 && S.t - FL.helmetOff >= 20) {
+        p.setHeadArmorItem(Item.of(IDS.suit.HEAD))
+        note('flight_moon_oxygen', 'helmet off for 20 ticks: damage ' + hurtSummary(FL.helmetOff) + ' (drown = no oxygen, freeze = 113 K without a full suit) - the oxygen and temperature systems are live')
+        try { jcall(p, ['setHealth', 'm_21153_'], [20]) } catch (e) { /* the return trip works with any health */ }
+        p.setMainHandItem(Item.of(IDS.chip))
+        FL.leg = 'home'
+        FL.target = IDS.earthPlanet
+        FL.targetDim = IDS.earthDim
+        go('program_chip')
+      }
+      return
+    }
+  }
+
+  function flightSummary() {
+    var parts = []
+    Object.keys(FL.legs).forEach(function (k) {
+      var l = FL.legs[k]
+      parts.push(k + ': launch->arrival ' + l.launchToArrive + ' ticks, arrival->landing ' + l.arriveToLand + ' ticks, ' + l.burnt + ' mB burnt')
+    })
+    note('flight_summary', parts.join('; ') + '; longest server tick from the first launch on ' + gapSince(FL.firstLaunchT) + ' ms (the test\'s own area setup before it: ' +
+      TICK.max + ' ms); damage over the whole flight: ' + hurtTimeline(0))
+  }
+
+  // ---------------------------------------------------------------- driver
+
+  function finish() {
+    if (S === null || S.finished) return
+    S.finished = true
+    shared().put('brake', false)
+    shared().put('watch', false)
+    shared().put('hold', false)
+    console.info(TAG + SCOPE + '|DONE')
+  }
+
+  function onTick(server) {
+    var now = Date.now()
+    if (TICK.last > 0) {
+      var gap = now - TICK.last
+      if (gap > TICK.max) TICK.max = gap
+      if (gap > 150) {
+        TICK.gaps.push({ t: server.getTickCount(), ms: gap })
+        if (TICK.gaps.length > 5000) TICK.gaps.shift()
+      }
+    }
+    TICK.last = now
+    if (global[REQUEST] || (S !== null && !S.finished)) shared().put('serverTickMs', now)
+    if (S === null || S.finished) return
+    S.t = server.getTickCount() - S.tick0
+    if (S.t > TEST_TIMEOUT) {
+      check('timeout', false, 'the test ran ' + S.t + ' ticks; phase ' + (FL !== null ? FL.phase : 'scanners'))
+      finish()
+      return
+    }
+    try {
+      if (S.stage === 'scanners') {
+        S.scanners.forEach(function (m) { advance(m) })
+        if (scannersDone()) {
+          var p = testPlayer()
+          if (p === null) {
+            note('flight', 'skipped: no player in this suite (run the client suite with the gg_test_gcyr_flight.json marker for the flight)')
+            finish()
+          } else if (flightBegin(markerLeg() === 'sirius' ? 1 : 0)) {
+            S.stage = 'flight'
+          } else {
+            finish()
+          }
+        }
+        return
+      }
+      if (S.stage === 'gate') {
+        if (gateTick()) {
+          if (markerLeg() === 'gate') finish()
+          else if (flightBegin(markerLeg() === 'sirius' ? 1 : 0)) S.stage = 'flight'
+          else finish()
+        }
+        return
+      }
+      if (S.stage === 'flight') {
+        flightTick()
+        if (FL.phase === 'done') finish()
+      }
+    } catch (e) {
+      check('step', false, 'exception in ' + S.stage + (FL !== null ? '/' + FL.phase : '') + ': ' + e)
+      finish()
+    }
+  }
+
+  function run(server) {
+    S = { server: server, level: server.overworld(), t: 0, tick0: server.getTickCount(), stage: 'scanners', scanners: [], finished: false,
+      playerUuid: global[REQUEST + 'Player'] ? String(global[REQUEST + 'Player']) : null }
+    FL = null
+    try {
+      staticChecks()
+    } catch (e) {
+      check('static', false, 'exception (is GCYR loaded?): ' + e)
+    }
+    try {
+      prepareWorld()
+      var p = testPlayer()
+      if (p !== null) p.teleportTo(IDS.earthDim, BAND.x0 + 30.5, PAD_Y, 7.5, 0, 20)
+      startScanners()
+    } catch (e) {
+      check('area', false, 'exception: ' + e)
+      finish()
+    }
+  }
+
+  function startIfRequested(server) {
+    if (!global[REQUEST] || (S !== null && !S.finished)) return
+    if (Date.now() - LOADED_AT < QUIET_MS) return
+    if (global[REQUEST + 'At'] && Date.now() < Number(global[REQUEST + 'At'])) return
+    global[REQUEST] = false
+    try {
+      run(server)
+    } catch (e) {
+      check('run', false, 'exception: ' + e)
+      finish()
+    }
+  }
+
+  ServerEvents.tick(function (event) {
+    startIfRequested(event.server)
+    onTick(event.server)
+  })
+
+  ServerEvents.customCommand('gg_test_uev_s0_stations', function (event) {
+    if (S !== null && !S.finished) {
+      note('run', 'a previous gg_test_uhv_s0_stations run is still in progress')
+      return 0
+    }
+    global[REQUEST + 'Player'] = ''
+    global[REQUEST] = true
+    return 1
+  })
+
+  // client suite: armed when the player joins, if the instance carries the marker file. The hold is set first, so that a later
+  // problem in this handler cannot let mc-runtime-test quit before the test reports it.
+  PlayerEvents.loggedIn(function (event) {
+    if (!enabledByMarker() || (S !== null && !S.finished)) return
+    shared().put('hold', true)
+    shared().put('brake', false)
+    shared().put('watch', false)
+    shared().put('select', '')
+    shared().put('shot', '')
+    shared().put('serverTickMs', Date.now())
+    try {
+      global[REQUEST + 'Player'] = profileId(event.player)
+      global[REQUEST + 'At'] = Date.now() + 5000
+      global[REQUEST] = true
+      note('armed', 'player ' + event.player.getProfile().getName() + ' joined and ' + MARKER + ' is present: the flight test starts in a few seconds')
+    } catch (e) {
+      check('armed', false, 'could not arm the test: ' + e)
+      shared().put('hold', false)
+    }
+  })
+
+  function isTestPlayer(entity) {
+    return S !== null && entity.isPlayer() && profileId(entity) === S.playerUuid
+  }
+
+  // DamageSource.toString() is "DamageSource (<msgId>)"
+  EntityEvents.hurt(function (event) {
+    if (FL === null || S === null || S.finished) return
+    try {
+      if (!isTestPlayer(event.entity)) return
+      var text = String(event.source)
+      var m = /\(([^)]*)\)/.exec(text)
+      var id = m ? m[1] : text
+      if (!FL.hurts[id]) FL.hurts[id] = []
+      FL.hurts[id].push(S.t)
+      var p = event.entity
+      var riding = false
+      try { riding = vehicleOf(p) !== null } catch (e1) { riding = false }
+      FL.hits.push({ id: id, t: S.t, phase: FL.phase, dim: dimOf(p).replace('minecraft:', '').replace('gcyr:', ''), y: Math.round(yOf(p)), vehicle: riding })
+      if (FL.hits.length > 600) FL.hits.shift()
+    } catch (e) { /* bookkeeping only */ }
+  })
+
+  EntityEvents.death(function (event) {
+    if (FL === null || S === null || S.finished) return
+    try {
+      if (isTestPlayer(event.entity)) FL.died = true
+    } catch (e) { /* bookkeeping only */ }
+  })
+})()

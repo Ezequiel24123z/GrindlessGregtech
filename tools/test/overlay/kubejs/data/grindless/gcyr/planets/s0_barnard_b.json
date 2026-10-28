@@ -1,0 +1,15 @@
+{
+  "translation": "level.grindless.s0_barnard_b",
+  "galaxy": "gcyr:milky_way",
+  "solar_system": "grindless:s0_barnard",
+  "world": "grindless:s0_barnard_b",
+  "orbit_world": "grindless:s0_barnard_b_orbit",
+  "rocket_tier": 9,
+  "gravity": 12.5,
+  "has_atmosphere": true,
+  "days_in_year": 233,
+  "temperature": 190,
+  "solar_power": 2,
+  "has_oxygen": false,
+  "button_color": 12603471
+}
