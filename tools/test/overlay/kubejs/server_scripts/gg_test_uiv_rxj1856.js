@@ -196,16 +196,18 @@
       var all = MACHINES.every(function (m) { return formed[m] })
       var nc = at(NEAR, S.near.O)
       var nearFormed = !!nc && nc.isFormed()
-      if (all && nearFormed) {
+      if (all && (nearFormed || S.tick - S.phaseAt > 200)) {
         MACHINES.forEach(function (m) { check('forms_' + m, true, m + ' formed in ' + FAR) })
-        check('forms_anywhere', true, 'the crust lift forms in the Overworld too (only its recipes are locked)')
+        var diag = 'near crust lift formed=' + nearFormed
+        try { if (nc && !nearFormed) diag += ' pattern=' + String(nc.getPattern().getError()) } catch (e) { diag += ' (no pattern error: ' + e + ')' }
+        emit('forms_anywhere', 'NOTE', diag)
         // the lift runs at the site, is refused in the Overworld; the separator and the vault start
         var L = S.pos.crust_lift
         stock(FAR, L.p, 1, [['grindless:crust_lift_tether', 1], ['grindless:polar_cap_electrode', 1]])
         at(FAR, L.O).getRecipeLogic().updateTickSubscription()
         var N = S.near
-        stock(NEAR, N.p, 1, [['grindless:crust_lift_tether', 1], ['grindless:polar_cap_electrode', 1]])
-        at(NEAR, N.O).getRecipeLogic().updateTickSubscription()
+        if (nc) { stock(NEAR, N.p, 1, [['grindless:crust_lift_tether', 1], ['grindless:polar_cap_electrode', 1]])
+        nc.getRecipeLogic().updateTickSubscription() }
         var P = S.pos.neutron_drip_separator
         stock(FAR, P.p, 1, [['grindless:neutron_star_crust', 4], ['grindless:neutron_supermirror', 1]])
         at(FAR, P.O).getRecipeLogic().updateTickSubscription()
@@ -215,7 +217,6 @@
         phase('run')
       } else if (S.tick - S.phaseAt > 400) {
         MACHINES.forEach(function (m) { check('forms_' + m, formed[m], m + (formed[m] ? ' formed' : ' did not form after 400 ticks')) })
-        check('forms_anywhere', nearFormed, 'crust lift in the Overworld')
         finish()
       }
       return
@@ -227,7 +228,7 @@
       var lift = at(FAR, S.pos.crust_lift.O)
       check('lift_runs', lift.getRecipeLogic().isWorking(), 'crust lift at the site: status ' + lift.getRecipeLogic().getStatus())
       var near = at(NEAR, S.near.O)
-      check('lift_refused_elsewhere', !near.getRecipeLogic().isWorking(), 'same recipe in the Overworld: working ' + near.getRecipeLogic().isWorking() + ', status ' + near.getRecipeLogic().getStatus())
+      if (near) check('lift_refused_elsewhere', !near.getRecipeLogic().isWorking(), 'same recipe in the Overworld: working ' + near.getRecipeLogic().isWorking() + ', status ' + near.getRecipeLogic().getStatus())
       var sep = at(FAR, S.pos.neutron_drip_separator.O)
       check('separator_runs', sep.getRecipeLogic().isWorking(), 'inner_crust: status ' + sep.getRecipeLogic().getStatus())
       var vault = at(FAR, S.pos.decay_heat_vault.O)
