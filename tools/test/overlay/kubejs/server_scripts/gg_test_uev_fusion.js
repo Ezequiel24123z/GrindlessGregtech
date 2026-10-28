@@ -216,6 +216,12 @@
     if (u.phase === 'run') {
       topUp(u.energy)
       var rlg = m.getRecipeLogic()
+      if (!u.diag && !rlg.isWorking() && S.tick - u.started > 300) {
+        u.diag = true
+        var heat = 'n/a'
+        try { var hf = m.getClass().getDeclaredField('heat'); hf.setAccessible(true); heat = String(hf.getLong(m)) } catch (x) { heat = 'err ' + errText(x) }
+        note('a7_ring_' + u.run.name + '_diag', 'stored ' + m.energyContainer.getEnergyStored() + ', cap ' + m.energyContainer.getEnergyCapacity() + ', heat ' + heat + ', progress ' + rlg.getProgress() + ', status ' + rlg.getStatus())
+      }
       if (rlg.isWorking() || S.tick - u.started > 600) {
         var s = snapshot(m)
         var ok = rlg.isWorking() && s !== null && s.id.indexOf(u.run.recipe) >= 0
@@ -252,7 +258,7 @@
       return
     }
     if (u.phase === 'start') {
-      try { fill(u.bus, 'grindless:laser_1083nm', 1); setTank(u.hatch, 'gtceu:helium_3_6n', 4000) } catch (x) { note('a7_pol_fill', errText(x)) }
+      try { fill(u.bus, 'grindless:laser_1083nm', 1); u.bus.getInventory().storage.setStackInSlot(1, Item.of('gtceu:programmed_circuit', '{Configuration:1}')); setTank(u.hatch, 'gtceu:helium_3_6n', 4000) } catch (x) { note('a7_pol_fill', errText(x)) }
       topUp(u.energy)
       m.getRecipeLogic().updateTickSubscription()
       u.phase = 'run'
@@ -281,8 +287,8 @@
       if (rec === null) { check('a7_dec_' + d.name, false, 'recipe ' + d.id + ' not found'); return }
       var per = NaN
       var raw = ''
-      try { per = Math.abs(Number(classes().RecipeHelper.getOutputEUt(rec))); raw += 'outEUt ' + per } catch (x) { raw += ' outEUt err' }
-      try { raw += ', total ' + classes().RecipeHelper.getRealEUtWithIO(rec).getTotalEU() + ', duration ' + rec.duration + ', tickOut ' + rec.tickOutputs + ', tickIn ' + rec.tickInputs } catch (y) { raw += ' total err' }
+      try { per = Math.abs(Number(classes().RecipeHelper.getRealEUtWithIO(rec).getTotalEU())) } catch (x) { raw += ' total err' }
+      try { raw += ', total ' + per + ', duration ' + rec.duration + ', tickOut ' + rec.tickOutputs + ', tickIn ' + rec.tickInputs } catch (y) { raw += ' total err' }
       note('a7_dec_' + d.name + '_raw', raw)
       check('a7_dec_' + d.name, per * 128 === d.total, 'row ' + per + ' EU/t x 128 = ' + (per * 128) + ', want ' + d.total)
     })
