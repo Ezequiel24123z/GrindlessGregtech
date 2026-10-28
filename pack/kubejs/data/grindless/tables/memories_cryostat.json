@@ -1,0 +1,113 @@
+{
+  "_why": "UIV-A6 (docs/eras/uiv.md, machines 6 and 8, lines 11, 15, 16, 42 and 44): the spectral hole burner and the millikelvin cryostat works, with the GTM-machine steps of their lines. Read by server_scripts/grindless/uiv/memories_cryostat.js. Ids are grindless:<type>/<name>.",
+  "types": {
+    "spectral_hole_burning": {
+      "dataKey": "grindless_spectral_hole_burning",
+      "recipes": [
+        {
+          "name": "six_hour_slab", "circuit": 1, "eut": 31457280, "duration": 1200,
+          "itemsIn": [{ "id": "grindless:eu151_yso_slab", "count": 1 }],
+          "charge": [{ "id": "gtceu:superfluid_helium", "amount": 1000 }],
+          "itemsOut": [{ "id": "grindless:six_hour_memory_slab", "count": 1 }]
+        },
+        {
+          "name": "telecom_slab", "circuit": 2, "eut": 31457280, "duration": 1200,
+          "itemsIn": [{ "id": "grindless:er_yso_slab", "count": 1 }],
+          "charge": [{ "id": "gtceu:superfluid_helium", "amount": 1000 }],
+          "itemsOut": [{ "id": "grindless:telecom_memory_slab", "count": 1 }]
+        }
+      ]
+    },
+    "cutter": {
+      "recipes": [
+        {
+          "name": "eu151_yso_slabs", "circuit": 1, "eut": 30720, "duration": 400,
+          "itemsIn": [{ "id": "grindless:eu151_yso_boule", "count": 1 }],
+          "fluidsIn": [{ "id": "gtceu:lubricant", "amount": 100 }],
+          "itemsOut": [{ "id": "grindless:eu151_yso_slab", "count": 4 }]
+        },
+        {
+          "name": "er_yso_slabs", "circuit": 2, "eut": 30720, "duration": 400,
+          "itemsIn": [{ "id": "grindless:er_yso_boule", "count": 1 }],
+          "fluidsIn": [{ "id": "gtceu:lubricant", "amount": 100 }],
+          "itemsOut": [{ "id": "grindless:er_yso_slab", "count": 4 }]
+        }
+      ]
+    },
+    "assembler": {
+      "recipes": [
+        {
+          "name": "six_hour_memory", "circuit": 20, "eut": 491520, "duration": 600,
+          "itemsIn": [{ "id": "grindless:six_hour_memory_slab", "count": 1 }, { "id": "grindless:mk_cryostat_module", "count": 1 }, { "id": "grindless:uev_sensor", "count": 1 }],
+          "itemsOut": [{ "id": "grindless:six_hour_memory", "count": 1 }]
+        },
+        {
+          "name": "cold_plate", "circuit": 21, "eut": 122880, "duration": 300,
+          "itemsIn": [{ "id": "gtceu:copper_plate", "count": 6 }],
+          "fluidsIn": [{ "id": "gtceu:superfluid_helium", "amount": 500 }],
+          "itemsOut": [{ "id": "grindless:cold_plate", "count": 1 }]
+        },
+        {
+          "name": "er_fibre", "circuit": 22, "eut": 122880, "duration": 400,
+          "itemsIn": [{ "id": "grindless:er_preform", "count": 1 }],
+          "fluidsIn": [{ "id": "gtceu:acrylate_coating", "amount": 250 }],
+          "itemsOut": [{ "id": "grindless:er_fibre", "count": 8 }]
+        },
+        {
+          "name": "er_fibre_coil", "circuit": 23, "eut": 122880, "duration": 300,
+          "itemsIn": [{ "id": "grindless:er_fibre", "count": 4 }, { "id": "grindless:ytterbium_fibre", "count": 1 }],
+          "itemsOut": [{ "id": "grindless:er_fibre_coil", "count": 1 }]
+        },
+        {
+          "name": "pumped_edfa", "circuit": 25, "eut": 491520, "duration": 400,
+          "itemsIn": [{ "id": "grindless:er_fibre_coil", "count": 1 }, { "id": "grindless:ingaas_pump_module", "count": 2 }],
+          "itemsOut": [{ "id": "grindless:pumped_edfa", "count": 1 }]
+        }
+      ]
+    },
+    "electric_blast_furnace": {
+      "recipes": [
+        {
+          "name": "praseodymium_metal", "circuit": 4, "eut": 491520, "duration": 600, "temp": 1800,
+          "itemsIn": [{ "id": "gtceu:praseodymium_oxide_dust", "count": 1 }],
+          "fluidsIn": [{ "id": "gtceu:hydrogen", "amount": 4000 }],
+          "itemsOut": [{ "id": "gtceu:praseodymium_dust", "count": 2 }],
+          "fluidsOut": [{ "id": "minecraft:water", "amount": 4000 }]
+        }
+      ]
+    },
+    "chemical_reactor": {
+      "recipes": [
+        {
+          "name": "erbium_chloride_solution", "circuit": 5, "eut": 1966080, "duration": 300,
+          "itemsIn": [{ "id": "gtceu:erbium_oxide_dust", "count": 1 }],
+          "fluidsIn": [{ "id": "gtceu:hydrochloric_acid", "amount": 6000 }],
+          "fluidsOut": [{ "id": "gtceu:erbium_chloride_solution", "amount": 2000 }, { "id": "minecraft:water", "amount": 3000 }]
+        }
+      ]
+    },
+    "nuclear_demagnetisation": {
+      "dataKey": "grindless_nuclear_demagnetisation",
+      "recipes": [
+        {
+          "name": "nuclear_stage", "circuit": 1, "eut": 31457280, "duration": 1600,
+          "itemsIn": [{ "id": "gtceu:prni5_dust", "count": 2 }, { "id": "gtceu:copper_plate", "count": 4 }],
+          "itemsOut": [{ "id": "grindless:nuclear_stage", "count": 1 }]
+        },
+        {
+          "name": "mk_module", "circuit": 2, "eut": 31457280, "duration": 1600,
+          "itemsIn": [{ "id": "grindless:nuclear_stage", "count": 1 }, { "id": "grindless:cold_plate", "count": 1 }],
+          "fluidsIn": [{ "id": "gtceu:he3_he4_mixture", "amount": 200 }],
+          "itemsOut": [{ "id": "grindless:mk_cryostat_module", "count": 1 }],
+          "fluidsOut": [{ "id": "gtceu:he3_he4_mixture", "amount": 200 }]
+        },
+        {
+          "name": "p_si_processor", "circuit": 3, "eut": 31457280, "duration": 1200,
+          "itemsIn": [{ "id": "grindless:p_si_die", "count": 1 }],
+          "kept": [{ "id": "grindless:mk_cryostat_module", "count": 1 }],
+          "itemsOut": [{ "id": "grindless:p_si_processor", "count": 1 }]
+        }
+      ]
+    }
+  }
+}
