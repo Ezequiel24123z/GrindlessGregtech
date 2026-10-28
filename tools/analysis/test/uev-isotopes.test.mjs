@@ -15,7 +15,8 @@ const table = (name) => JSON.parse(fs.readFileSync(path.join(tables, name), 'utf
 const ISO = table('isotopes.json');
 const FAC = table('isotopes_facility.json');
 const FAB = table('isotopes_fabrication.json');
-const CAL = ISO.types.calutron_separation.recipes;
+// UEV's calutron rows; UIV-A1 appended its own (marked "_": "UIV-...") and pins them in uiv-isotopes.test.mjs
+const CAL = ISO.types.calutron_separation.recipes.filter((r) => !String(r._ || '').startsWith('UIV-'));
 
 const ids = (xs) => (Array.isArray(xs) ? xs : []).map((x) => x.id);
 const inputs = (r) => ids(r.itemsIn).concat(ids(r.kept), ids(r.fluidsIn), ids(r.charge));
