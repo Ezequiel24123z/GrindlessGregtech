@@ -27,7 +27,8 @@
   var WG = G.warpGate || (G.warpGate = {})
   var TABLE = WG.table || 'kubejs/data/grindless/tables/gate.json'
   var PLANETS = 'kubejs/data/grindless/tables/planets.json'
-  var SITES = { orbits: ['gcyr:overworld_orbit', 'grindless:proxima_b_orbit'], proxima_b_orbit: ['grindless:proxima_b_orbit'] }
+  var SITES = { orbits: ['gcyr:overworld_orbit', 'grindless:proxima_b_orbit', 'grindless:alpha_centauri_orbit', 'grindless:sirius_b_orbit'],
+    proxima_b_orbit: ['grindless:proxima_b_orbit'] }
   var VA_UV = 491520
   var VA_UHV = 1966080
   var CHART = 'grindless:stellar_neighbourhood_chart'
@@ -201,6 +202,25 @@
       result: { item: ids[1], count: 2, nbt: { grindless_planet: String(def.pairTag) } }
     }).id(id)
     WG.pair = { id: id, tag: String(def.pairTag), seed: ids[2] }
+    // UEV-B1: the Alpha Centauri and Sirius pairs; the seed differs per pair so no AE2 transform matches two recipes (Barnard b shares Alpha's pair)
+    WG.pairs = [WG.pair]
+    var uev = [
+      { planet: 'alpha', seed: 'grindless:quantum_repeater_node', name: 'alpha_entangled_singularity' },
+      { planet: 'sirius', seed: 'grindless:degenerate_pellet', name: 'sirius_entangled_singularity' }
+    ]
+    uev.forEach(function (p) {
+      var d = table.planets[p.planet]
+      if (!d || !d.pairTag) { console.error(LOG + 'planets.json has no ' + p.planet + ' pairTag: relay pair skipped'); return }
+      if (!Item.exists(p.seed)) { console.error(LOG + p.planet + ' relay pair skipped, unknown item: ' + p.seed); return }
+      var pid = 'grindless:transform/' + p.name
+      event.custom({
+        type: 'ae2:transform',
+        circumstance: { type: 'explosion' },
+        ingredients: [{ item: ids[0] }, { item: p.seed }],
+        result: { item: ids[1], count: 2, nbt: { grindless_planet: String(d.pairTag) } }
+      }).id(pid)
+      WG.pairs.push({ id: pid, tag: String(d.pairTag), seed: p.seed })
+    })
   }
 
   // GTM registers the UEV casing without a recipe; ours stands on the station research of the chart (UV's UHV hatch pattern)

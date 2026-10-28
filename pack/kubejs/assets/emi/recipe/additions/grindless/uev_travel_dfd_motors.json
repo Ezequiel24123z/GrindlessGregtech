@@ -1,0 +1,5 @@
+{
+  "type": "emi:info",
+  "stacks": ["item:grindless:dfd_mk1_motor", "item:grindless:dfd_mk2_motor"],
+  "text": ["emi.grindless.info.dfd_motors.0"]
+}

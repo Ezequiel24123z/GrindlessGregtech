@@ -77,7 +77,13 @@
   var ICAN_MOTOR = 'grindless:ican_rocket_motor'
   var OG_PROPELLANT = 'gtceu:oganesson_propellant'
   var OG_POD = 'grindless:oganesson_propellant_pod'
-
+  // UEV-B1's rows (docs/eras/uev.md B1; motors registered in startup_scripts/grindless/uev/travel.js; F1 parts in uev/foundation.js)
+  var VA_UEV = 7864320
+  // F1's ids by camelCase name (startup_scripts/grindless/uev/foundation.js); an empty id is skipped with a console.error by addRecipe
+  var F1 = G.uevFoundation && G.uevFoundation.ids ? G.uevFoundation.ids : {}
+  var SX_BLADE = F1.sxBlade || ''
+  var DFD_MK1 = 'grindless:dfd_mk1_motor'
+  var DFD_MK2 = 'grindless:dfd_mk2_motor'
   function item(id, count) { return { id: id, count: count } }
   function fluid(id, amount) { return { id: id, amount: amount } }
   function row(name, type, circuit, itemsIn, fluidsIn, itemsOut, fluidsOut, eut, duration) {
@@ -101,7 +107,13 @@
     row('ican_rocket_motor', 'thruster_assembly', 4, [item(ICAN_PELLET, 1), item(UHTC_NOZZLE, 1), item(SIC_MODULE, 2), item(GEO_STAGE, 1)],
       [], [item(ICAN_MOTOR, 1)], [], VA_UHV, 800),
     row('oganesson_propellant_pod', 'thruster_assembly', 5, [item(PROPELLANT_TANK, 1)], [fluid(OG_PROPELLANT, 1000)], [item(OG_POD, 1)], [],
-      VA_UV, 200)
+      VA_UV, 200),
+    // circuits 6 and 7 are free on thruster_assembly (1-5 above; no other script uses this type)
+    row('dfd_mk1_motor', 'thruster_assembly', 6, [item('grindless:wf_w_tile', 4), item('grindless:sic_sic_plate', 4),
+      item('gtceu:hftacn_ingot', 8), item('grindless:uev_electric_motor', 1)], [fluid('gtceu:dhe3_fuel_mix', 4000)],
+      [item(DFD_MK1, 1)], [], VA_UEV, 1000),
+    row('dfd_mk2_motor', 'thruster_assembly', 7, [item(DFD_MK1, 1), item(SX_BLADE, 8), item('grindless:bonded_fe16n2_magnet', 8),
+      item('gtceu:rhenium_ingot', 4), item('gtceu:hftacn_ingot', 8)], [], [item(DFD_MK2, 1)], [], VA_UEV, 1200)
   ]
 
   var SIDE = [

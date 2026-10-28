@@ -72,6 +72,7 @@ ClientEvents.lang('en_us', event => {
   add('emi.grindless.info.uev_fusion_casing.0', 'A structure block: the Mk4 first wall, a Mk3 fusion casing faced with tungsten-fibre tungsten tiles and backed by a SiC/SiC plate, made in the Assembler. It builds the Mk4 Fusion Reactor.')
   add('emi.grindless.info.hftacn_coil_block.0', 'A heating coil: 12,600 K, the hottest in the pack. Eight HfTaCN heating elements on a tritanium frame, made in the Assembler. It fits every coil slot: the Electric Blast Furnace and the other multiblocks that read coil temperature or coil parallels.')
   add('emi.grindless.info.horizon_collector.0', 'Not craftable: the quest The Horizon Collector gives the machine, its horizon shard and two LV solar covers. Put the shard in the machine (it is never used up), set a circuit from 1 to 9 and power it with a solar cover on top: each run gives a stack of logs, cobblestone, sand, gravel, clay, coal or raw copper, tin or iron.')
+  add('emi.grindless.info.dfd_motors.0', 'A GCYR rocket motor made in the Thruster Works (UV). The Mk1 is motor tier 7: with UV\'s BNNT tank it makes a level 9 rocket (Alpha Centauri AB orbit, Barnard b). The Mk2 is motor tier 9: with the same tank it makes a level 10 rocket (Sirius B orbit).')
 })
 
 ClientEvents.lang('es_es', event => {
@@ -139,4 +140,5 @@ ClientEvents.lang('es_es', event => {
   add('emi.grindless.info.uev_fusion_casing.0', 'Un bloque de estructura: la primera pared Mk4, una carcasa de fusi\u00f3n Mk3 revestida de baldosas de tungsteno reforzado con fibra de tungsteno y respaldada por una placa de SiC/SiC, hecha en el ensamblador. Construye el reactor de fusi\u00f3n Mk4.')
   add('emi.grindless.info.hftacn_coil_block.0', 'Una bobina calefactora: 12.600 K, la m\u00e1s caliente del pack. Ocho elementos calefactores de HfTaCN sobre un armaz\u00f3n de tritanio, hecha en el ensamblador. Sirve en cualquier hueco de bobina: el alto horno el\u00e9ctrico y los dem\u00e1s multibloques que leen la temperatura o los paralelos de la bobina.')
   add('emi.grindless.info.horizon_collector.0', 'No se fabrica: la misi\u00f3n The Horizon Collector da la m\u00e1quina, su fragmento del horizonte y dos cubiertas solares LV. Pon el fragmento en la m\u00e1quina (nunca se gasta), elige un circuito del 1 al 9 y alim\u00e9ntala con una cubierta solar encima: cada ciclo da troncos, roca, arena, grava, arcilla, carb\u00f3n o cobre, esta\u00f1o o hierro en bruto.')
+  add('emi.grindless.info.dfd_motors.0', 'Un motor de cohete GCYR hecho en las obras de propulsores (UV). El Mk1 es de nivel de motor 7: con el tanque de BNNT da un cohete de nivel 9 (\u00f3rbita de Alfa Centauri AB, Barnard b). El Mk2 es de nivel de motor 9: con el mismo tanque da un cohete de nivel 10 (\u00f3rbita de Sirio B).')
 })
