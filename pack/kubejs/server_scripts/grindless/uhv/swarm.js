@@ -80,6 +80,9 @@
     Object.keys(extra || {}).forEach(function (k) { r[k] = extra[k] })
     return r
   }
+  // UEV-B2: Alpha Centauri A's orbit is a second site (the list of sites is widened, Mercury's rows keep SITE)
+  var ALPHA_SITE = 'grindless:alpha_centauri_orbit'
+  var ALPHA_MAP = 'grindless:alpha_coronal_field_map'
   var HERE = { site: SITE }
   function gen(kept) { return { site: SITE, generator: true, kept: kept } }
 
@@ -95,7 +98,13 @@
       gen([item(SEGMENT, 15)])),
     row('full_swarm', STATION, 2, [item(SEGMENT, 4), item(POD, 4)], [], [item(WORN, 4), item(TANK, 4)], [], 4 * UHV_A, 6000,
       gen([item(SEGMENT, 60), item(MAP, 1)])),
+    // UEV-B2: Alpha Centauri A (1.52 solar luminosities), 6 segments and 6 pods a run: the same 12,582,912,000 EU per worn segment
+    row('alpha_full_swarm', STATION, 3, [item(SEGMENT, 6), item(POD, 6)], [], [item(WORN, 6), item(TANK, 6)], [], 12582912, 6000,
+      { site: ALPHA_SITE, generator: true, kept: [item(SEGMENT, 60), item(ALPHA_MAP, 1)] }),
     row('corona', BAY, 1, [item(PROBE, 1)], [], [item(MAP, 1)], [], UVA, 400, { site: SITE, kept: [item(HELIOPAUSE, 1)] }),
+    // UEV-B2: the Mercury map is the reference the Alpha probe is calibrated against (kept); the heliopause data is kept too
+    row('alpha_corona', BAY, 3, [item(PROBE, 1)], [], [item(ALPHA_MAP, 1)], [], UVA, 400,
+      { site: ALPHA_SITE, kept: [item(MAP, 1), item(HELIOPAUSE, 1)] }),
     row('probe', BAY, 2,
       [item(AEROSHELL, 1), item(UHTC, 4), item(SIC, 1), item(BETAVOLTAIC, 2), item(HPGE, 1), item('gtceu:uv_sensor', 1)], [],
       [item(PROBE, 1)], [], UVA, 800, HERE),

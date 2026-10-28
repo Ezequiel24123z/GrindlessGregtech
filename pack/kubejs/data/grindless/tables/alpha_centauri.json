@@ -1,0 +1,117 @@
+{
+  "_comment": [
+    "UEV-B2 (docs/eras/uev.md, machines 18, 19 and 20, lines 26 and 37), read by server_scripts/grindless/uev/alpha_centauri.js.",
+    "types.<type>.recipes: name, circuit, eut, duration, itemsIn [{id,count,chance?}], kept [same, never consumed], fluidsIn [{id,amount}], charge [fluid not consumed], itemsOut, fluidsOut.",
+    "chance is out of 10000 (omitted = always). circuit 0 = none (GTM's own types only). 'dimension': true makes every recipe of the type carry the Alpha Centauri orbit dimension (grindless:alpha_centauri_orbit).",
+    "Line 26 (nebula gas): collector c1 (interstellar gas) -> chemical reactor (compression) -> EV cryogenic plant (ev/cryogenic_plant.js, interstellar_gas row: H/D fraction, helium fraction, neon) -> distillation tower (H/D -> deuterium + hydrogen) -> distillation tower (helium fraction -> helium-3 + helium-4).",
+    "Line 37 (silica aerogel): SiCl4 + ethanol -> TEOS -> sol -> gel -> aged gel -> aerogel tile (supercritical CO2). The ethanol the gel releases and the CO2 that dries it go back to the line.",
+    "Nothing is voided: HCl, hydrogen, helium-4, ethanol, CO2, SiO2 and the neutralised fluorite all have users (HCl and fluorite: the IV fluorspar kiln and the chlorine users; hydrogen and helium: every plant)."
+  ],
+  "types": {
+    "nebula_collection": {
+      "dataKey": "grindless_nebula_collection", "dimension": true,
+      "recipes": [
+        { "name": "interstellar_gas", "circuit": 1, "eut": 7864320, "duration": 400,
+          "itemsIn": [], "kept": [{ "id": "grindless:superhydride_scoop_coil", "count": 1 }],
+          "fluidsIn": [{ "id": "gtceu:liquid_helium", "amount": 100 }], "charge": [],
+          "itemsOut": [], "fluidsOut": [{ "id": "gtceu:interstellar_gas", "amount": 8000 }] },
+        { "name": "dust_laden_aerogel", "circuit": 2, "eut": 1966080, "duration": 600,
+          "itemsIn": [{ "id": "grindless:aerogel_tile", "count": 1 }], "kept": [], "fluidsIn": [], "charge": [],
+          "itemsOut": [{ "id": "grindless:dust_laden_aerogel", "count": 1 }], "fluidsOut": [] }
+      ]
+    },
+    "interstellar_dust_analysis": {
+      "dataKey": "grindless_interstellar_dust_analysis", "dimension": true,
+      "recipes": [
+        { "name": "extract_grains", "circuit": 1, "eut": 1966080, "duration": 400,
+          "itemsIn": [{ "id": "grindless:dust_laden_aerogel", "count": 1 }], "kept": [],
+          "fluidsIn": [{ "id": "minecraft:water", "amount": 1000 }], "charge": [],
+          "itemsOut": [{ "id": "grindless:extracted_grains", "count": 4 }, { "id": "gtceu:silicon_dioxide_dust", "count": 2 }], "fluidsOut": [] },
+        { "name": "demineralise_grains", "circuit": 2, "eut": 1966080, "duration": 600,
+          "itemsIn": [{ "id": "grindless:extracted_grains", "count": 4 }], "kept": [],
+          "fluidsIn": [{ "id": "gtceu:hydrofluoric_acid", "amount": 1000 }], "charge": [],
+          "itemsOut": [{ "id": "grindless:demineralised_grains", "count": 2 }], "fluidsOut": [{ "id": "gtceu:silicon_tetrafluoride", "amount": 500 }] },
+        { "name": "fe60_record", "circuit": 3, "eut": 7864320, "duration": 800,
+          "itemsIn": [{ "id": "grindless:demineralised_grains", "count": 2 }], "kept": [{ "id": "grindless:uev_sensor", "count": 1 }],
+          "fluidsIn": [], "charge": [],
+          "itemsOut": [{ "id": "grindless:fe60_record", "count": 1 }], "fluidsOut": [] },
+        { "name": "silicate_residue", "circuit": 4, "eut": 1966080, "duration": 400,
+          "itemsIn": [{ "id": "grindless:extracted_grains", "count": 4 }], "kept": [],
+          "fluidsIn": [{ "id": "minecraft:water", "amount": 500 }], "charge": [],
+          "itemsOut": [{ "id": "grindless:silicate_residue", "count": 3 }], "fluidsOut": [] }
+      ]
+    },
+    "pulsar_timing": {
+      "dataKey": "grindless_pulsar_timing", "dimension": true,
+      "recipes": [
+        { "name": "timing_survey", "circuit": 1, "eut": 7864320, "duration": 1200,
+          "itemsIn": [{ "id": "grindless:lobster_eye_mcp", "count": 1 }, { "id": "grindless:sdd", "count": 2 }],
+          "kept": [{ "id": "grindless:nuclear_clock", "count": 1 }], "fluidsIn": [], "charge": [],
+          "itemsOut": [{ "id": "grindless:pulsar_timing_data", "count": 1 }], "fluidsOut": [] },
+        { "name": "pulsar_navigation_chart", "circuit": 2, "eut": 1966080, "duration": 600,
+          "itemsIn": [{ "id": "grindless:pulsar_timing_data", "count": 1 }, { "id": "grindless:fe60_record", "count": 1 }], "kept": [],
+          "fluidsIn": [], "charge": [],
+          "itemsOut": [{ "id": "grindless:pulsar_navigation_chart", "count": 1 }], "fluidsOut": [] }
+      ]
+    },
+    "assembler": {
+      "recipes": [
+        { "name": "superhydride_scoop_coil", "circuit": 0, "eut": 491520, "duration": 400,
+          "itemsIn": [{ "id": "gtceu:lay_superhydride_single_wire", "count": 16 }, { "id": "gtceu:lay_superhydride_plate", "count": 4 }, { "id": "grindless:uev_field_generator", "count": 1 }],
+          "kept": [], "fluidsIn": [], "charge": [],
+          "itemsOut": [{ "id": "grindless:superhydride_scoop_coil", "count": 1 }], "fluidsOut": [] }
+      ]
+    },
+    "chemical_reactor": {
+      "recipes": [
+        { "name": "compress_interstellar_gas", "circuit": 0, "eut": 7680, "duration": 300,
+          "itemsIn": [], "kept": [], "fluidsIn": [{ "id": "gtceu:interstellar_gas", "amount": 8000 }], "charge": [],
+          "itemsOut": [], "fluidsOut": [{ "id": "gtceu:compressed_interstellar_gas", "amount": 4000 }] },
+        { "name": "teos_synthesis", "circuit": 0, "eut": 480, "duration": 200,
+          "itemsIn": [{ "id": "gtca:silicon_tetrachloride_dust", "count": 1 }], "kept": [], "fluidsIn": [{ "id": "gtceu:ethanol", "amount": 4000 }], "charge": [],
+          "itemsOut": [{ "id": "grindless:teos_flask", "count": 1 }], "fluidsOut": [{ "id": "gtceu:hydrochloric_acid", "amount": 4000 }] },
+        { "name": "silica_gel", "circuit": 0, "eut": 480, "duration": 400,
+          "itemsIn": [{ "id": "grindless:silica_sol", "count": 1 }], "kept": [], "fluidsIn": [], "charge": [{ "id": "gtceu:ammonia", "amount": 100 }],
+          "itemsOut": [{ "id": "grindless:silica_wet_gel", "count": 1 }], "fluidsOut": [{ "id": "gtceu:ethanol", "amount": 4000 }] },
+        { "name": "aerogel_drying", "circuit": 0, "eut": 1920, "duration": 600,
+          "itemsIn": [{ "id": "grindless:silica_aged_gel", "count": 1 }], "kept": [], "fluidsIn": [{ "id": "gtceu:carbon_dioxide", "amount": 2000 }], "charge": [],
+          "itemsOut": [{ "id": "grindless:aerogel_tile", "count": 1 }], "fluidsOut": [{ "id": "gtceu:carbon_dioxide", "amount": 1900 }] },
+        { "name": "neutralise_spent_hf", "circuit": 0, "eut": 480, "duration": 200,
+          "itemsIn": [{ "id": "gtceu:calcium_hydroxide_dust", "count": 4 }], "kept": [], "fluidsIn": [{ "id": "gtceu:silicon_tetrafluoride", "amount": 1000 }], "charge": [],
+          "itemsOut": [{ "id": "gcyr:fluorite_dust", "count": 6 }, { "id": "gtceu:silicon_dioxide_dust", "count": 1 }], "fluidsOut": [{ "id": "minecraft:water", "amount": 2000 }] }
+      ]
+    },
+    "mixer": {
+      "recipes": [
+        { "name": "silica_sol", "circuit": 0, "eut": 480, "duration": 200,
+          "itemsIn": [{ "id": "grindless:teos_flask", "count": 1 }], "kept": [], "fluidsIn": [{ "id": "minecraft:water", "amount": 2000 }], "charge": [],
+          "itemsOut": [{ "id": "grindless:silica_sol", "count": 1 }], "fluidsOut": [] }
+      ]
+    },
+    "autoclave": {
+      "recipes": [
+        { "name": "silica_aging", "circuit": 0, "eut": 480, "duration": 600,
+          "itemsIn": [{ "id": "grindless:silica_wet_gel", "count": 1 }], "kept": [], "fluidsIn": [{ "id": "gtceu:ethanol", "amount": 250 }], "charge": [],
+          "itemsOut": [{ "id": "grindless:silica_aged_gel", "count": 1 }], "fluidsOut": [] }
+      ]
+    },
+    "distillation_tower": {
+      "recipes": [
+        { "name": "hydrogen_deuterium_split", "circuit": 0, "eut": 1920, "duration": 400,
+          "itemsIn": [], "kept": [], "fluidsIn": [{ "id": "gtceu:hydrogen_deuterium_fraction", "amount": 1000 }], "charge": [],
+          "itemsOut": [], "fluidsOut": [{ "id": "gtceu:hydrogen", "amount": 800 }, { "id": "gtceu:deuterium", "amount": 200 }] },
+        { "name": "helium_isotope_split", "circuit": 0, "eut": 1920, "duration": 400,
+          "itemsIn": [], "kept": [], "fluidsIn": [{ "id": "gtceu:helium_fraction", "amount": 1000 }], "charge": [],
+          "itemsOut": [], "fluidsOut": [{ "id": "gtceu:helium_3", "amount": 100 }, { "id": "gtceu:helium", "amount": 900 }] }
+      ]
+    },
+    "electrolyzer": {
+      "recipes": [
+        { "name": "silicate_residue", "circuit": 0, "eut": 1920, "duration": 400,
+          "itemsIn": [{ "id": "grindless:silicate_residue", "count": 4 }], "kept": [], "fluidsIn": [], "charge": [],
+          "itemsOut": [{ "id": "gtceu:silicon_dust", "count": 2 }, { "id": "gtceu:iron_dust", "count": 1 }, { "id": "gtceu:magnesium_dust", "count": 1 }],
+          "fluidsOut": [{ "id": "gtceu:oxygen", "amount": 3000 }] }
+      ]
+    }
+  }
+}
