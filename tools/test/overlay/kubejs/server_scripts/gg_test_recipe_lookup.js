@@ -25,6 +25,7 @@
 // Recipes with no item or fluid input are skipped and listed: addRecursive accepts an empty path without storing anything, and
 // GTRecipeType#searchRecipe only walks the tree, so GTM's search never returns them (GT-- empties GTM's own platinum and naquadah
 // separation steps that way; GCYR's Dyson sphere controller has two). An empty one of ours is a FAIL: no machine could run it.
+// Bench probes (ids in a gg_test_* namespace, added by other test overlays and never shipped) are not checked; `scan` counts them.
 //
 // BASELINE below: the addon-vs-addon conflicts we accept, each with its reason. Which recipe of a conflicting group is the one left
 // out depends on the order GTM stages them (hash order), so an entry lists the whole group: an unreachable recipe is accepted when
@@ -270,13 +271,18 @@
     }
     S = {
       server: server, rm: rm, types: types, typeCount: all.size(), recipes: recipes, proxies: proxies, ti: 0, ri: 0, n: 0,
-      checked: 0, skipped: 0, unreachable: [], t0: Date.now(), busy: 0, ticks: 0
+      checked: 0, skipped: 0, probes: 0, unreachable: [], t0: Date.now(), busy: 0, ticks: 0
     }
     emit('start', 'INFO', 'GT recipe types=' + all.size() + ' (with recipes ' + types.length + ') recipes=' + recipes +
       ' proxies=' + proxies + '; ' + SLICE_MS + ' ms of work per tick')
   }
 
   function checkOne(T, recipe, index) {
+    // a bench probe (gg_test_*: ids, added by other test overlays, never shipped) may share its inputs on purpose
+    if (String(recipe.id).indexOf('gg_test') === 0) {
+      S.probes++
+      return
+    }
     var map = searchInputs(recipe)
     if (map === null) {
       T.empty.push(String(recipe.id))
@@ -543,7 +549,7 @@
     var failed = fresh + (emptyOurs.length > 0 ? 1 : 0) + (policy.length > 0 ? 1 : 0) + (MUST_REACH.length - mustOk) +
       (collisionsOk ? 0 : 1) + (exported ? 0 : 1)
     emit('scan', failed === 0 ? 'PASS' : 'FAIL', 'types=' + S.typeCount + ' recipes=' + S.recipes + ' proxies=' + S.proxies + ' checked=' + S.checked +
-      ' skipped=' + S.skipped + ' unreachable=' + S.unreachable.length + ' accepted=' + accepted + ' new=' + fresh +
+      ' skipped=' + S.skipped + ' probes=' + S.probes + ' unreachable=' + S.unreachable.length + ' accepted=' + accepted + ' new=' + fresh +
       ' scanMs=' + scanMs + ' busyMs=' + S.busy + ' ticks=' + S.ticks + ' reportMs=' + (Date.now() - t0) + ' predicate=' + L.predicate)
   }
 
