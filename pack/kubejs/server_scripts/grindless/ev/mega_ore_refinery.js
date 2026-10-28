@@ -1,3 +1,4 @@
+// priority: -12674
 // Recipes of the EV Ore Refinery (machine and recipe type: startup_scripts/grindless/ev/mega_ore_refinery.js; docs/eras/mega.md 4.6;
 // package MEGA-4), generated at every server load from data/grindless/tables/mega_ore_refinery.json, and the recipe that makes the controller.
 //

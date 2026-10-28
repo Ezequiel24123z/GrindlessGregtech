@@ -124,6 +124,8 @@ test('SX parts come only from the single-crystal foundry', () => {
   for (const f of serverScripts()) {
     if (f.endsWith(path.join('uev', 'electron_beam.js'))) continue;
     for (const id of ['sx_blade', 'sx_pump_impeller', 'brayton_turbine_wheel']) {
+      // UEV-B1: the DFD Mk2 row of the thruster works is the wheel's one use (uev.md machine 7, c3)
+      if (id === 'brayton_turbine_wheel' && f.endsWith(path.join('uv', 'propulsion.js'))) continue;
       assert.ok(!read(f).includes(`grindless:${id}`), `${id} named in ${path.relative(kube, f)}`);
     }
   }

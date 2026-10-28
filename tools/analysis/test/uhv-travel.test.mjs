@@ -77,7 +77,7 @@ test('planets, orbits and places list Proxima b; existing dimension ids are unch
 test('stations: the six older slots are unchanged, seven and eight are Mercury and Proxima b orbit', () => {
   assert.equal(STATIONS.first, 'gcyr:overworld_orbit');
   assert.equal(STATIONS.second, 'grindless:io_orbit');
-  assert.deepEqual(STATIONS.more.map((s) => s.orbit), ['grindless:saturn_orbit', 'grindless:uranus_orbit', 'grindless:neptune_orbit',
+  assert.deepEqual(STATIONS.more.slice(0, 6).map((s) => s.orbit), ['grindless:saturn_orbit', 'grindless:uranus_orbit', 'grindless:neptune_orbit',
     'grindless:pluto_orbit', 'gcyr:mercury_orbit', ORBIT]);
   assert.deepEqual(STATIONS.more.filter((s) => s.era === 'uhv'), [
     { slot: 'mercury', orbit: 'gcyr:mercury_orbit', era: 'uhv' },

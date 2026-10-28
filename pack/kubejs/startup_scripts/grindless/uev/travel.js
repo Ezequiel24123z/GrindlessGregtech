@@ -50,7 +50,7 @@
   var motorBlocks = {}
 
   StartupEvents.registry('block', function (event) {
-    // KubeJS 6 always has createCustom; the static stand-in (tools/analysis/lib/kubejs_static.mjs) does not
+    // KubeJS 6 always has createCustom; the static stand-in (tools/analysis/lib/kubejs_static.mjs) registers the id without the supplier
     if (typeof event.createCustom !== 'function') {
       console.warn('[grindless/uev] DFD motors skipped: this registry event has no createCustom')
       return

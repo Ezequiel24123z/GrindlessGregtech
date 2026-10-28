@@ -1,3 +1,4 @@
+// priority: 10350
 // Gregtech Grindless - names and tooltips of the EV Ore Refinery (startup_scripts/grindless/ev/mega_ore_refinery.js).
 //
 //   gtceu:ore_refinery / gtceu.ore_refinery   (machine name + 3 tooltip lines, recipe type name; en_us and es_es)

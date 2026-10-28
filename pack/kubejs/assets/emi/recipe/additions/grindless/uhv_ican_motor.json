@@ -1,0 +1,5 @@
+{
+  "type": "emi:info",
+  "stacks": ["item:grindless:ican_rocket_motor"],
+  "text": ["emi.grindless.info.ican_motor.0"]
+}

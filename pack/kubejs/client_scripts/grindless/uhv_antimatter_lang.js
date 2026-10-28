@@ -1,4 +1,4 @@
-// priority: 4925
+// priority: 4921
 // Gregtech Grindless - names and tooltips of UHV's antimatter and Casimir machines (startup_scripts/grindless/uhv/antimatter.js;
 // package UHV-A6):
 //

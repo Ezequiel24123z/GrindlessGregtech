@@ -153,7 +153,7 @@
   P.motorRegistered = false
 
   StartupEvents.registry('block', function (event) {
-    // KubeJS 6 always has createCustom; the static stand-in (tools/analysis/lib/kubejs_static.mjs) does not
+    // KubeJS 6 always has createCustom; the static stand-in (tools/analysis/lib/kubejs_static.mjs) registers the id without the supplier
     if (typeof event.createCustom !== 'function') {
       console.warn('[grindless/uhv] ICAN rocket motor skipped: this registry event has no createCustom')
       return
