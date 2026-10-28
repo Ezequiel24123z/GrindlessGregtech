@@ -49,7 +49,7 @@
     for (let y = 0; y < 7; y++) {
       let row = ''
       for (let x = 0; x < 7; x++) {
-        const edge = x === 0 || x === 6 || z === 0 || z === 10
+        var edge = x === 0 || x === 6 || z === 0 || z === 10
         let c = ' '
         if (y === 0) c = 'X'
         else if (y === 6) c = 'C'
@@ -82,7 +82,7 @@
     for (let y = 0; y < 5; y++) {
       let row = ''
       for (let x = 0; x < 9; x++) {
-        const edge = x === 0 || x === 8 || z === 0 || z === 8
+        var edge = x === 0 || x === 8 || z === 0 || z === 8
         let c = ' '
         if (y === 0) c = 'X'
         else if (edge) c = z === 8 && y === 1 ? (x === 4 ? 'S' : 'X') : 'C'

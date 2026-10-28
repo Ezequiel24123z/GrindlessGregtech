@@ -43,7 +43,7 @@
     for (let y = 0; y < h; y++) {
       let row = ''
       for (let x = 0; x < w; x++) {
-        const edge = x === 0 || x === w - 1 || z === 0 || z === d - 1
+        var edge = x === 0 || x === w - 1 || z === 0 || z === d - 1
         let c = ' '
         if (y === 0) c = 'X'
         else if (y === h - 1) c = 'C'
