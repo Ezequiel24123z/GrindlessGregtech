@@ -18,6 +18,9 @@
     "grindless:proxima_b_orbit",
     "grindless:alpha_centauri_orbit",
     "grindless:barnard_b_orbit",
-    "grindless:sirius_b_orbit"
+    "grindless:sirius_b_orbit",
+    "grindless:rx_j1856_orbit",
+    "grindless:psr_j0437_orbit",
+    "grindless:cygnus_x1_orbit"
   ]
 }

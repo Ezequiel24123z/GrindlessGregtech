@@ -81,6 +81,13 @@
   var AM = 'grindless:americium_micro_source'
   var MOUNT = 'grindless:printed_array_mount'
   var UV_WAFER = 'gtceu:neutronium_wafer'
+  // UIV-B1
+  var PELLET = 'grindless:degenerate_pellet'
+  var CELL = 'grindless:exotic_matter_cell'
+  var RAD_HARD = 'grindless:rad_hard_controller'
+  var RELAY_SEED = 'grindless:relay_seed'
+  var LAUNCHED_SEED = 'grindless:launched_relay_seed'
+  var ERGO_PROBE = 'grindless:ergosphere_probe'
 
   var EPI = 'grindless:epitaxial_silicon_wafer'
   var COATED = 'grindless:nitride_coated_carrier'
@@ -134,7 +141,16 @@
       fluidsOut: [fluid(XEF2, 1000)], eut: IV, duration: 200 },
     { name: 'silicon_tetrafluoride_hydrolysis', type: 'chemical_reactor',
       fluidsIn: [fluid(SIF4, 1000), fluid('minecraft:water', 2000)], itemsOut: [item('gtceu:silicon_dioxide_dust', 3)],
-      fluidsOut: [fluid('gtceu:hydrofluoric_acid', 4000)], eut: EV, duration: 200 }
+      fluidsOut: [fluid('gtceu:hydrofluoric_acid', 4000)], eut: EV, duration: 200 },
+    // UIV-B1 (docs/eras/uiv.md "B1. Travel"; items: startup_scripts/grindless/uiv/travel.js): the relay seed (starchip c3), the ergosphere
+    // probe (starchip c4) and the launch of the seed from the Moon (laser_sail_launch c2), its module wearing as the probe's does
+    { name: 'relay_seed', type: 'starchip', circuit: 3, itemsIn: [item(STARCHIP, 1), item(PELLET, 1), item(CELL, 1)],
+      itemsOut: [item(RELAY_SEED, 1)], eut: UVA, duration: 800 },
+    { name: 'ergosphere_probe', type: 'starchip', circuit: 4, itemsIn: [item(STARCHIP, 1), item(RAD_HARD, 1)],
+      itemsOut: [item(ERGO_PROBE, 1)], eut: UVA, duration: 800 },
+    { name: 'relay_seed_launch', type: 'laser_sail_launch', circuit: 2, site: MOON, itemsIn: [item(RELAY_SEED, 1)],
+      chancedIn: [chanced(MODULE, 1, S.wearChance)], itemsOut: [item(LAUNCHED_SEED, 1)], chancedOut: [chanced(SPENT, 1, S.wearChance)],
+      eut: UVA, amps: S.launchAmps, duration: 200 }
   ].map(row)
   S.skipped = []
   S.clashes = []

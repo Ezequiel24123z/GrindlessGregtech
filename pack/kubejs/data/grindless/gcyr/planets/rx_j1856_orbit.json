@@ -1,0 +1,15 @@
+{
+  "translation": "level.grindless.rx_j1856_orbit",
+  "galaxy": "gcyr:milky_way",
+  "solar_system": "grindless:rx_j1856",
+  "world": "grindless:rx_j1856_orbit",
+  "orbit_world": "grindless:rx_j1856_orbit",
+  "rocket_tier": 11,
+  "gravity": 0.0,
+  "has_atmosphere": false,
+  "days_in_year": 900,
+  "temperature": 700000,
+  "solar_power": 60,
+  "has_oxygen": false,
+  "button_color": 12632319
+}

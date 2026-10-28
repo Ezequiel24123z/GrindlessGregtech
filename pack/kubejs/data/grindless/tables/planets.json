@@ -24,7 +24,10 @@
     "proxima": { "dimensions": ["gcyr:proxima_centauri_b", "grindless:proxima_b_orbit"], "pairTag": "proxima", "name": { "en_us": "Proxima b", "es_es": "Próxima b" } },
     "alpha": { "dimensions": ["grindless:alpha_centauri_orbit"], "pairTag": "alpha", "name": { "en_us": "Alpha Centauri", "es_es": "Alfa Centauri" } },
     "barnard": { "dimensions": ["grindless:barnard_b", "grindless:barnard_b_orbit"], "pairTag": "alpha", "name": { "en_us": "Barnard b", "es_es": "Barnard b" } },
-    "sirius": { "dimensions": ["grindless:sirius_b_orbit"], "pairTag": "sirius", "name": { "en_us": "Sirius B", "es_es": "Sirio B" } }
+    "sirius": { "dimensions": ["grindless:sirius_b_orbit"], "pairTag": "sirius", "name": { "en_us": "Sirius B", "es_es": "Sirio B" } },
+    "rx_j1856": { "dimensions": ["grindless:rx_j1856_orbit"], "pairTag": "rx_j1856", "name": { "en_us": "RX J1856", "es_es": "RX J1856" } },
+    "psr_j0437": { "dimensions": ["grindless:psr_j0437_orbit"], "pairTag": "psr_j0437", "name": { "en_us": "PSR J0437", "es_es": "PSR J0437" } },
+    "cygnus_x1": { "dimensions": ["grindless:cygnus_x1_orbit"], "pairTag": "cygnus_x1", "name": { "en_us": "Cygnus X-1", "es_es": "Cygnus X-1" } }
   },
   "dryOnEarth": ["gcyr:overworld_orbit"]
 }
