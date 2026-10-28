@@ -145,6 +145,17 @@
       itemsOut: [item('grindless:laser_1083nm', 1)], fluidsOut: [], eut: ZPM, duration: 400 }
   ]
 
+  // UEV-A8 (docs/eras/uev.md, lines 34, 36 and machine 16): hollow-core capillaries, the MCP multi-fibre and the Li and K cooling lasers
+  var A8_ROWS = [
+    { name: 'hollow_capillaries', type: 'fibre_draw', circuit: 6, itemsIn: [item('grindless:fused_silica_tube', 1)],
+      fluidsIn: [fluid('gtceu:argon', 500)], itemsOut: [item('grindless:hollow_capillaries', 4)], fluidsOut: [], eut: ZPM, duration: 400 },
+    { name: 'mcp_multifibre', type: 'fibre_draw', circuit: 7, itemsIn: [item('grindless:etchable_core_tube', 4)],
+      fluidsIn: [fluid('gtceu:argon', 500)], itemsOut: [item('grindless:mcp_multifibre', 1)], fluidsOut: [], eut: ZPM, duration: 600 },
+    { name: 'cooling_lasers', type: 'fibre_draw', circuit: 8,
+      itemsIn: [item('grindless:uev_emitter', 1), item('gtceu:lithium_6_dust', 1), item('gtceu:potassium_40_dust', 1)], fluidsIn: [],
+      itemsOut: [item('grindless:li_cooling_laser', 1), item('grindless:k_cooling_laser', 1)], fluidsOut: [], eut: ZPM, duration: 400 }
+  ]
+
   // side steps on GTM's own machines
   var SIDE = [
     { name: 'arsine', type: 'chemical_reactor', circuit: null,
@@ -179,6 +190,7 @@
   P.side = SIDE.map(function (t) { return publish(t, 'grindless:' + t.name) })
   P.uhvRows = UHV_ROWS.map(function (t) { return publish(t, 'grindless:' + t.name) })
   P.uevRows = UEV_ROWS.map(function (t) { return publish(t, 'grindless:' + t.type + '/' + t.name) })
+  P.a8Rows = A8_ROWS.map(function (t) { return publish(t, 'grindless:' + t.name) })
   P.skipped = []
   P.clashes = []
   P.crafting = {
@@ -243,10 +255,10 @@
   }
 
   function addMachines(event) {
-    P.clashes = clashesOf(P.recipes.concat(P.uhvRows, P.uevRows))
+    P.clashes = clashesOf(P.recipes.concat(P.uhvRows, P.uevRows, P.a8Rows))
     if (P.clashes.length > 0) console.error(LOG + 'photonics recipes clash in the lookup: ' + P.clashes.join(', '))
-    P.recipes.concat(P.uhvRows, P.uevRows).forEach(function (r) { addRecipe(event, r) })
-    console.info(LOG + 'photonics recipes added: ' + (P.recipes.length + P.uhvRows.length + P.uevRows.length - P.skipped.length))
+    P.recipes.concat(P.uhvRows, P.uevRows, P.a8Rows).forEach(function (r) { addRecipe(event, r) })
+    console.info(LOG + 'photonics recipes added: ' + (P.recipes.length + P.uhvRows.length + P.uevRows.length + P.a8Rows.length - P.skipped.length))
   }
 
   function addSide(event) {
