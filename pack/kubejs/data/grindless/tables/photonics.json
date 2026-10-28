@@ -187,6 +187,58 @@
           "charge": [{ "id": "gtceu:argon", "amount": 1000 }],
           "itemsOut": [{ "id": "grindless:annealed_sin_chip", "count": 1 }],
           "fluidsOut": [{ "id": "minecraft:water", "amount": 1000 }]
+        },
+        {
+          "_why": "UIV-A4 (uiv.md line 10): the thinned LN-on-Si3N4 wafer takes platinum electrodes",
+          "name": "eo_transceiver",
+          "circuit": 8,
+          "eut": 7864320,
+          "duration": 400,
+          "itemsIn": [{ "id": "grindless:ln_on_sin_thinned", "count": 1 }, { "id": "grindless:platinum_electrode", "count": 2 }],
+          "kept": [],
+          "fluidsIn": [{ "id": "gtceu:ultrapure_water", "amount": 1000 }],
+          "charge": [],
+          "itemsOut": [{ "id": "grindless:eo_transceiver", "count": 1 }],
+          "fluidsOut": [{ "id": "minecraft:water", "amount": 1000 }]
+        },
+        {
+          "_why": "UIV-A4 (uiv.md line 12): copper fills the etched channels of the interposer",
+          "name": "glass_interposer",
+          "circuit": 9,
+          "eut": 7864320,
+          "duration": 400,
+          "itemsIn": [{ "id": "grindless:etched_interposer_blank", "count": 1 }, { "id": "gtceu:copper_dust", "count": 4 }],
+          "kept": [],
+          "fluidsIn": [{ "id": "gtceu:ultrapure_water", "amount": 1000 }],
+          "charge": [],
+          "itemsOut": [{ "id": "grindless:glass_interposer", "count": 1 }],
+          "fluidsOut": [{ "id": "minecraft:water", "amount": 1000 }]
+        },
+        {
+          "_why": "UIV-A4 (uiv.md line 18): CMP and anneal of the damascene Si3N4 wafer; the polished-off silica goes back to stock",
+          "name": "damascene_ring",
+          "circuit": 10,
+          "eut": 1966080,
+          "duration": 400,
+          "itemsIn": [{ "id": "grindless:damascene_sin_wafer", "count": 1 }],
+          "kept": [],
+          "fluidsIn": [{ "id": "gtceu:ultrapure_water", "amount": 1000 }],
+          "charge": [{ "id": "gtceu:argon", "amount": 1000 }],
+          "itemsOut": [{ "id": "grindless:annealed_damascene_ring", "count": 1 }, { "id": "gtceu:quartz_sand_dust", "count": 2 }],
+          "fluidsOut": [{ "id": "minecraft:water", "amount": 1000 }]
+        },
+        {
+          "_why": "UIV-A4 (uiv.md line 36): a poled LNOI wafer diced into PPLN waveguides",
+          "name": "ppln_waveguide",
+          "circuit": 11,
+          "eut": 7864320,
+          "duration": 400,
+          "itemsIn": [{ "id": "grindless:poled_lnoi_wafer", "count": 1 }],
+          "kept": [],
+          "fluidsIn": [{ "id": "gtceu:ultrapure_water", "amount": 1000 }],
+          "charge": [],
+          "itemsOut": [{ "id": "grindless:ppln_waveguide", "count": 2 }],
+          "fluidsOut": [{ "id": "minecraft:water", "amount": 1000 }]
         }
       ]
     },
