@@ -1,4 +1,4 @@
-// priority: -7774
+// priority: -7805
 // Gregtech Grindless - native fixture of package UHV-C3 (TEST-ONLY overlay, never shipped): the gate example of docs/eras/uhv.md
 // ("Power on the wireless network") on the wireless network at UHV, the eight stations with the Proxima base, and a save mark read back
 // after a restart.
