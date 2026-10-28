@@ -1,0 +1,5 @@
+{
+  "type": "emi:info",
+  "stacks": ["item:grindless:rad_hard_controller", "item:grindless:ingaasb_epi_wafer"],
+  "text": ["emi.grindless.info.uiv_matrioshka.1"]
+}
