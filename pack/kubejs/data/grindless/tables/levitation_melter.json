@@ -1,0 +1,95 @@
+{
+  "_why": "UIV's levitation melter (docs/eras/uiv.md, machine 2; package UIV-A3): five melts in a cold crucible, plus the GTM steps of lines 2, 4, 5, 8 and 39 that lead to and from them. Every melt runs under helium; the oxide dross goes to EV's extraction cascade (melter_dross_digestion), the beryllium fume is captured as BeO and electrolysed back to metal, the CaO of the niobium reduction goes to stock.",
+  "types": {
+    "levitation_melting": {
+      "dataKey": "grindless_levitation_melting",
+      "recipes": [
+        { "name": "rhea_melt", "circuit": 1, "eut": 7864320, "duration": 2400,
+          "itemsIn": [{ "id": "gtceu:tungsten_dust", "count": 1 }, { "id": "gtceu:molybdenum_dust", "count": 1 }, { "id": "grindless:nb_ta_button", "count": 2 }, { "id": "grindless:six_n_hafnium", "count": 1 }], "kept": [], "fluidsIn": [{ "id": "gtceu:helium", "amount": 1000 }], "charge": [],
+          "itemsOut": [{ "id": "gtceu:rhea_ingot", "count": 5 }, { "id": "grindless:melter_dross", "count": 1 }], "fluidsOut": [] },
+        { "name": "wf_rhea_melt", "circuit": 2, "eut": 7864320, "duration": 3000,
+          "itemsIn": [{ "id": "grindless:densified_w_preform", "count": 1 }, { "id": "gtceu:rhea_ingot", "count": 4 }], "kept": [], "fluidsIn": [{ "id": "gtceu:helium", "amount": 1000 }], "charge": [],
+          "itemsOut": [{ "id": "grindless:wf_rhea_billet", "count": 1 }, { "id": "grindless:melter_dross", "count": 1 }], "fluidsOut": [] },
+        { "name": "ti50_melt", "circuit": 3, "eut": 7864320, "duration": 1800,
+          "itemsIn": [{ "id": "gtceu:titanium_50_sponge_dust", "count": 4 }], "kept": [], "fluidsIn": [{ "id": "gtceu:helium", "amount": 1000 }], "charge": [],
+          "itemsOut": [{ "id": "gtceu:titanium_50_dust", "count": 3 }, { "id": "grindless:melter_dross", "count": 1 }], "fluidsOut": [] },
+        { "name": "bmg_melt", "circuit": 4, "eut": 7864320, "duration": 2400,
+          "itemsIn": [{ "id": "grindless:zr_master_alloy", "count": 4 }], "kept": [], "fluidsIn": [{ "id": "gtceu:helium", "amount": 1000 }], "charge": [],
+          "itemsOut": [{ "id": "gtceu:zrticunibe_glass_dust", "count": 4 }, { "id": "grindless:beryllium_oxide_dust", "count": 1 }, { "id": "grindless:melter_dross", "count": 1 }], "fluidsOut": [] },
+        { "name": "prni5_melt", "circuit": 5, "eut": 7864320, "duration": 1800,
+          "itemsIn": [{ "id": "gtceu:praseodymium_dust", "count": 1 }, { "id": "gtceu:nickel_dust", "count": 5 }], "kept": [], "fluidsIn": [{ "id": "gtceu:helium", "amount": 1000 }], "charge": [],
+          "itemsOut": [{ "id": "gtceu:prni5_dust", "count": 6 }], "fluidsOut": [] }
+      ]
+    },
+    "mixer": {
+      "recipes": [
+        { "name": "zr_master_alloy_mix", "circuit": 0, "eut": 1920, "duration": 200,
+          "itemsIn": [{ "id": "gtceu:zirconium_dust", "count": 4 }, { "id": "gtceu:titanium_dust", "count": 1 }, { "id": "gtceu:copper_dust", "count": 2 }, { "id": "gtceu:nickel_dust", "count": 1 }, { "id": "gtceu:beryllium_dust", "count": 1 }], "kept": [], "fluidsIn": [], "charge": [],
+          "itemsOut": [{ "id": "grindless:zr_master_alloy", "count": 9 }], "fluidsOut": [] }
+      ]
+    },
+    "electrolyzer": {
+      "recipes": [
+        { "name": "beo_electrolysis", "circuit": 0, "eut": 7680, "duration": 300,
+          "itemsIn": [{ "id": "grindless:beryllium_oxide_dust", "count": 2 }], "kept": [], "fluidsIn": [], "charge": [],
+          "itemsOut": [{ "id": "gtceu:beryllium_dust", "count": 2 }], "fluidsOut": [{ "id": "gtceu:oxygen", "amount": 2000 }] }
+      ]
+    },
+    "chemical_reactor": {
+      "recipes": [
+        { "name": "niobium_pentoxide_calciothermic", "circuit": 0, "eut": 1920, "duration": 400,
+          "itemsIn": [{ "id": "gtceu:niobium_pentoxide_dust", "count": 1 }, { "id": "gtceu:calcium_dust", "count": 5 }], "kept": [], "fluidsIn": [], "charge": [],
+          "itemsOut": [{ "id": "grindless:niobium_powder", "count": 2 }, { "id": "gtceu:quicklime_dust", "count": 5 }], "fluidsOut": [] }
+      ]
+    },
+    "electric_blast_furnace": {
+      "temp": 3600,
+      "recipes": [
+        { "name": "rhea_homogenise", "circuit": 0, "eut": 30720, "duration": 600,
+          "itemsIn": [{ "id": "gtceu:rhea_ingot", "count": 1 }], "kept": [], "fluidsIn": [], "charge": [],
+          "itemsOut": [{ "id": "grindless:rhea_slab", "count": 1 }], "fluidsOut": [] }
+      ]
+    },
+    "hot_rolling": {
+      "recipes": [
+        { "name": "rhea_hot_forge", "circuit": 4, "eut": 122880, "duration": 200,
+          "itemsIn": [{ "id": "grindless:rhea_slab", "count": 1 }], "kept": [], "fluidsIn": [{ "id": "minecraft:water", "amount": 3840 }], "charge": [],
+          "itemsOut": [{ "id": "gtceu:rhea_plate", "count": 1 }], "fluidsOut": [{ "id": "gtceu:steam", "amount": 3840 }] }
+      ]
+    },
+    "assembler": {
+      "recipes": [
+        { "name": "rhea_former", "circuit": 0, "eut": 30720, "duration": 200,
+          "itemsIn": [{ "id": "gtceu:rhea_plate", "count": 2 }, { "id": "gtceu:rhea_ingot", "count": 1 }], "kept": [], "fluidsIn": [], "charge": [],
+          "itemsOut": [{ "id": "grindless:rhea_former", "count": 1 }], "fluidsOut": [] },
+        { "name": "wound_rhea_former", "circuit": 0, "eut": 122880, "duration": 300,
+          "itemsIn": [{ "id": "grindless:rhea_former", "count": 1 }, { "id": "grindless:mh_winding", "count": 4 }], "kept": [], "fluidsIn": [], "charge": [],
+          "itemsOut": [{ "id": "grindless:wound_rhea_former", "count": 1 }], "fluidsOut": [] },
+        { "name": "impregnated_mh_coil", "circuit": 0, "eut": 122880, "duration": 300,
+          "itemsIn": [{ "id": "grindless:wound_rhea_former", "count": 1 }], "kept": [], "fluidsIn": [{ "id": "gtceu:epoxy", "amount": 288 }], "charge": [],
+          "itemsOut": [{ "id": "grindless:impregnated_mh_coil", "count": 1 }], "fluidsOut": [] },
+        { "name": "metallic_hydrogen_coil_block", "circuit": 0, "eut": 491520, "duration": 400,
+          "itemsIn": [{ "id": "grindless:impregnated_mh_coil", "count": 4 }, { "id": "gtceu:rhea_plate", "count": 2 }], "kept": [], "fluidsIn": [], "charge": [],
+          "itemsOut": [{ "id": "grindless:metallic_hydrogen_coil_block", "count": 1 }], "fluidsOut": [] },
+        { "name": "rhea_cased_charge", "circuit": 0, "eut": 122880, "duration": 300,
+          "itemsIn": [{ "id": "grindless:quenched_cg_nitrogen", "count": 4 }, { "id": "gtceu:rhea_plate", "count": 1 }], "kept": [], "fluidsIn": [], "charge": [],
+          "itemsOut": [{ "id": "grindless:rhea_cased_charge", "count": 1 }], "fluidsOut": [] },
+        { "name": "sled_charge", "circuit": 0, "eut": 491520, "duration": 400,
+          "itemsIn": [{ "id": "grindless:rhea_cased_charge", "count": 1 }, { "id": "gtceu:tungsten_foil", "count": 4 }], "kept": [], "fluidsIn": [], "charge": [],
+          "itemsOut": [{ "id": "grindless:sled_charge", "count": 1 }], "fluidsOut": [] },
+        { "name": "rhea_cased_halbach", "circuit": 0, "eut": 122880, "duration": 300,
+          "itemsIn": [{ "id": "grindless:halbach_array", "count": 1 }, { "id": "gtceu:rhea_plate", "count": 2 }], "kept": [], "fluidsIn": [], "charge": [],
+          "itemsOut": [{ "id": "grindless:rhea_cased_halbach", "count": 1 }], "fluidsOut": [] },
+        { "name": "potted_mh_stator", "circuit": 0, "eut": 122880, "duration": 300,
+          "itemsIn": [{ "id": "grindless:rhea_cased_halbach", "count": 1 }, { "id": "grindless:mh_winding", "count": 2 }], "kept": [], "fluidsIn": [{ "id": "gtceu:epoxy", "amount": 144 }], "charge": [],
+          "itemsOut": [{ "id": "grindless:potted_mh_stator", "count": 1 }], "fluidsOut": [] },
+        { "name": "maglev_stator", "circuit": 0, "eut": 491520, "duration": 300,
+          "itemsIn": [{ "id": "grindless:potted_mh_stator", "count": 1 }, { "id": "gtceu:metallic_hydrogen_single_cable", "count": 2 }], "kept": [], "fluidsIn": [], "charge": [],
+          "itemsOut": [{ "id": "grindless:maglev_stator", "count": 1 }], "fluidsOut": [] },
+        { "name": "uiv_conveyor_module", "circuit": 0, "eut": 491520, "duration": 400,
+          "itemsIn": [{ "id": "grindless:maglev_stator", "count": 1 }, { "id": "grindless:uev_conveyor_module", "count": 1 }], "kept": [], "fluidsIn": [], "charge": [],
+          "itemsOut": [{ "id": "grindless:uiv_conveyor_module", "count": 1 }], "fluidsOut": [] }
+      ]
+    }
+  }
+}
