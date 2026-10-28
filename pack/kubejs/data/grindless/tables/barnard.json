@@ -8,7 +8,7 @@
     "Bootstrap: the drill's survey (A8, tables/earth_orbit.json: grindless:barnard_gravity_survey, circuit 2) is made from 4 Barnard core rock, and the rock comes from this drill. So circuit 1 of the drill, with the bit only, cores a small pilot (2 rock, no survey, programmed circuit 1); with the survey the drill cores 8 rock a run (the survey is kept) and needs no circuit. Both wear the bit 5 % a run.",
     "CO: the refinery takes 5,000 mB of CO per 1,000 mB of Fe(CO)5, and A5's nitride works (tables/composites.json, carbonyl_iron_powder) gives the same 5,000 mB of CO back; the HV syngas plant's CO-rich row (circuit 6, C + CO2 -> 2 CO) makes the CO. Nickel and cobalt carbonyls are formed and cracked inside the vessel (contained): CO nets to zero there.",
     "Destinations: the residue goes to EV's platinum plant (circuit 9, server_scripts/grindless/ev/platinum_plant.js: Os, Ir and Pt dust and tungsten dust come out, the rhenium as crude ammonium perrhenate), the nickel and cobalt to the network's stock, the ammonia of the reduction back to the platinum plant's digest, the ammonium chloride of the recrystallisation to GTM's ammonia loop, the water to the network's water.",
-    "Rhenium: gtceu:rhenium_dust is made only here (reduction row), and gtceu:rhenium_ingot only from the pellet; GTM's own smelting route (dust -> ingot in a furnace) and the electron beam's rhenium row (2 ingots -> 2 grindless:six_n_rhenium, A4) take them on from there."
+    "Rhenium: gtceu:rhenium_dust is made only here (reduction row), and gtceu:rhenium_ingot only from the pellet; GTM's own smelting route (dust -> ingot in a furnace) is not needed: the pellet is sintered in a hydrogen atmosphere in the electric blast furnace (2700 K, about 80 % of rhenium's melting point, tune; GTM gives rhenium no blast recipe of its own; the hydrogen is used up keeping the oxide out). The electron beam's rhenium row (2 ingots -> 2 grindless:six_n_rhenium, A4) take them on from there."
   ],
   "types": {
     "barnard_core_drilling": {
@@ -109,17 +109,18 @@
         }
       ]
     },
-    "electric_furnace": {
+    "electric_blast_furnace": {
       "recipes": [
         {
           "name": "rhenium_ingot",
           "circuit": 0,
           "site": "barnard_b",
-          "eut": 120,
+          "temp": 2700,
+          "eut": 480,
           "duration": 400,
           "itemsIn": [{ "id": "grindless:rhenium_pellet", "count": 1 }],
           "kept": [],
-          "fluidsIn": [],
+          "fluidsIn": [{ "id": "gtceu:hydrogen", "amount": 500 }],
           "itemsOut": [{ "id": "gtceu:rhenium_ingot", "count": 1 }],
           "fluidsOut": []
         }
