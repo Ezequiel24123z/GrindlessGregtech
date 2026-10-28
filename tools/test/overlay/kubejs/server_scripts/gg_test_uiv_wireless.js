@@ -439,8 +439,9 @@
     // a long all the way: set the whole three cells, read it back from the status before any settlement moves it
     w.setStored(S.server, want)
     var full = w.status(S.server)
-    check('STORED', Number(full.stored) === want && Number(full.capacity) === want && want > Math.pow(2, 39),
-      'set ' + want + ' EU (3 x ' + CELL_EU + ', above 2^39), the network reports stored ' + full.stored + ' of ' + full.capacity)
+    // the capacity in status() is the last settlement's: JUMP checks it after the next one
+    check('STORED', Number(full.stored) === want && want > Math.pow(2, 39),
+      'set ' + want + ' EU (3 x ' + CELL_EU + ', above 2^39), the network reports stored ' + full.stored)
     var before = snapshot()
     var st = w.settle(S.server)
     var after = snapshot()
