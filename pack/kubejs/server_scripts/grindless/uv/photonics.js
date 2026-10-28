@@ -138,6 +138,13 @@
       fluidsIn: [fluid('gtceu:nitrogen', 200)], itemsOut: [item('grindless:nbn_coated_sic_plate', 1)], fluidsOut: [], eut: ZPM, duration: 400 }
   ]
 
+  // UEV-A7 (docs/eras/uev.md, line 24): the 1,083 nm line of the helium-3 polariser's optical pumping, drawn from the Yb fibre laser module
+  // and a Bragg grating. The polariser (uev/fusion.js) keeps it as its tool: it is never consumed there.
+  var UEV_ROWS = [
+    { name: 'laser_1083nm', type: 'fibre_draw', circuit: 5, itemsIn: [item(FIBRE_MODULE, 1), item(GRATING, 1)], fluidsIn: [],
+      itemsOut: [item('grindless:laser_1083nm', 1)], fluidsOut: [], eut: ZPM, duration: 400 }
+  ]
+
   // side steps on GTM's own machines
   var SIDE = [
     { name: 'arsine', type: 'chemical_reactor', circuit: null,
@@ -171,6 +178,7 @@
   P.recipes = TABLE.map(function (t) { return publish(t, t.type === 'mocvd' ? 'grindless:' + t.name : 'grindless:' + t.type + '/' + t.name) })
   P.side = SIDE.map(function (t) { return publish(t, 'grindless:' + t.name) })
   P.uhvRows = UHV_ROWS.map(function (t) { return publish(t, 'grindless:' + t.name) })
+  P.uevRows = UEV_ROWS.map(function (t) { return publish(t, 'grindless:' + t.type + '/' + t.name) })
   P.skipped = []
   P.clashes = []
   P.crafting = {
@@ -235,10 +243,10 @@
   }
 
   function addMachines(event) {
-    P.clashes = clashesOf(P.recipes.concat(P.uhvRows))
+    P.clashes = clashesOf(P.recipes.concat(P.uhvRows, P.uevRows))
     if (P.clashes.length > 0) console.error(LOG + 'photonics recipes clash in the lookup: ' + P.clashes.join(', '))
-    P.recipes.concat(P.uhvRows).forEach(function (r) { addRecipe(event, r) })
-    console.info(LOG + 'photonics recipes added: ' + (P.recipes.length + P.uhvRows.length - P.skipped.length))
+    P.recipes.concat(P.uhvRows, P.uevRows).forEach(function (r) { addRecipe(event, r) })
+    console.info(LOG + 'photonics recipes added: ' + (P.recipes.length + P.uhvRows.length + P.uevRows.length - P.skipped.length))
   }
 
   function addSide(event) {

@@ -107,6 +107,45 @@
     addHighPurityNeon(event)
     addOganessonPropellant(event)
     addXenonCut(event)
+    addHelium3SixN(event)
+    addHelium4Ash(event)
+  }
+
+  // UEV-A7 (docs/eras/uev.md, line 23): helium-3 to 6N helium-3, the fusion fuel's grade. The impurities (helium-4 and the hydrogen
+  // isotopologues) condense first and come out as helium. The only input is helium-3: the depolarised gas of the polariser comes back here.
+  var HELIUM3_6N = { id: 'grindless:cryogenic_processing/helium_3_6n', eut: 7680, duration: 400,
+    input: { id: 'gtceu:helium_3', amount: 1000 },
+    outputs: [{ id: 'gtceu:helium_3_6n', amount: 950 }, { id: 'gtceu:helium', amount: 50 }] }
+  CRYO.helium3Row = HELIUM3_6N
+
+  // UEV-A7 (line 23): the ash of the Mk4 ring's plasma, after the direct energy converter, is helium-4: it is recovered as helium. The only
+  // input is the ash.
+  var HELIUM4_ASH = { id: 'grindless:cryogenic_processing/helium_4_ash', eut: 7680, duration: 200,
+    input: { id: 'gtceu:helium_4_ash', amount: 1000 },
+    outputs: [{ id: 'gtceu:helium', amount: 1000 }] }
+  CRYO.helium4Row = HELIUM4_ASH
+
+  function addCryoRow(event, row, name, label) {
+    var ids = [row.input.id].concat(row.outputs.map(function (f) { return f.id }))
+    var missing = ids.filter(function (id) { return !Fluid.exists(id) })
+    if (missing.length > 0) {
+      console.error(LOG + 'cryogenic plant ' + label + ' row skipped, unknown fluid(s): ' + missing.join(', '))
+      return
+    }
+    var b = event.recipes.gtceu.cryogenic_processing('grindless:' + name)
+      .inputFluids(Fluid.of(row.input.id, row.input.amount))
+    row.outputs.forEach(function (o) { b.outputFluids(Fluid.of(o.id, o.amount)) })
+    b.dimension(DIMENSION)
+      .addDataNumber(NIGHT_KEY, Math.round(row.eut * NIGHT_FACTOR))
+      .EUt(row.eut).duration(row.duration)
+    console.info(LOG + 'cryogenic plant ' + label + ' row added')
+  }
+  function addHelium3SixN(event) {
+    addCryoRow(event, HELIUM3_6N, 'helium_3_6n', 'helium-3 6N')
+  }
+
+  function addHelium4Ash(event) {
+    addCryoRow(event, HELIUM4_ASH, 'helium_4_ash', 'helium-4 ash')
   }
 
   // UEV-A2 (docs/eras/uev.md, line 6): the xenon of the heavy ion cyclotron's track-etch beam. Liquid nether air is cooled further:

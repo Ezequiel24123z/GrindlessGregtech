@@ -1326,3 +1326,17 @@ powershell -NoProfile -ExecutionPolicy Bypass -File tools\assets\Build-UEVCompos
 |---|---|
 | `block/multiblock/{nitride_magnet_works,sic_fibre_plant,cvi_furnace}/overlay_front*.png` (+ `.mcmeta`) | The three controller faces: still, active and active emissive. |
 | `item/*.png` (19, listed by `-Credits`) | Ta2O5 dust, the HfTaC blend and carbide, crude and milled HfTaCN, the HfTaCN heating element, carbonyl and reduced iron powder, strain-annealed Fe16N2 powder, polydimethylsilane and polycarbosilane, green, cured, plain and BN-coated SiC fibre, the SiC fibre preform, coated W wire, the W fibre preform and the FFKM seal. |
+
+## UEV fusion machines and items (UEV-A7)
+
+Procedural, drawn by `Build-UEVFusionTextures.ps1`; nothing is copied from another mod. The controller faces of `gtceu:helium3_polariser` and `gtceu:uev_fusion_reactor` (still, animated active and emissive frames) and the 2 items of the fuel lines. The Mk4 fusion casing texture is F1's; the ring's coil is UEV-A5's HfTaCN coil block.
+
+```powershell
+powershell -NoProfile -ExecutionPolicy Bypass -File tools\assets\Build-UEVFusionTextures.ps1
+powershell -NoProfile -ExecutionPolicy Bypass -File tools\assets\Build-UEVFusionTextures.ps1 -Credits
+```
+
+| File (under `textures/`) | Notes |
+|---|---|
+| `block/multiblock/{helium3_polariser,uev_fusion_reactor}/overlay_front*.png` (+ `.mcmeta`) | The two controller faces: still, active and active emissive. |
+| `item/{boron_11_powder,laser_1083nm}.png` | Boron-11 powder (the p-B11 fuel) and the 1083 nm pump laser of the He-3 polariser. |

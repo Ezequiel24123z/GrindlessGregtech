@@ -73,8 +73,7 @@
   { "id": "gtceu:lithium_6_dust", "role": "use", "reason": "temporary (UEV-A1): its use, the Fermi gas (uev.md line 29, c1 Li-6 + K-40), is UEV-A8's; delete this exception when A8 merges" },
   { "id": "grindless:uev_electric_pump", "role": "use", "reason": "temporary (UEV-A6): its use, a part of the controllers of the UEV-voltage machines 18-25 (uev.md, Voltages and controllers), is UEV-B2/B3/B4's; the first of them that uses it deletes this exception" },
   { "id": "grindless:uev_conveyor_module", "role": "use", "reason": "temporary (UEV-A6): its use, a part of the controllers of the UEV-voltage machines 18-25 (uev.md, Voltages and controllers), is UEV-B2/B3/B4's; the first of them that uses it deletes this exception" },
-  { "id": "grindless:uev_electric_piston", "role": "use", "reason": "temporary (UEV-A6): its use, a part of the controllers of the UEV-voltage machines 18-25 (uev.md, Voltages and controllers), is UEV-B2/B3/B4's; the first of them that uses it deletes this exception" },
-  { "id": "grindless:wf_w_tile", "role": "use", "reason": "temporary (UEV-A5): its use, the Mk4 first wall (grindless:uev_fusion_casing, uev.md line 17 and machine 10), is UEV-A7's; delete this exception when A7 merges" }
+  { "id": "grindless:uev_electric_piston", "role": "use", "reason": "temporary (UEV-A6): its use, a part of the controllers of the UEV-voltage machines 18-25 (uev.md, Voltages and controllers), is UEV-B2/B3/B4's; the first of them that uses it deletes this exception" }
   ],
   "pendingRoutes": [
     { "id": "grindless:electron_beam_refining/rhenium", "reason": "UEV-A4: GT rhenium has no producer before UEV-B3's Barnard line (obtain rule UEV (B3)); B3 deletes the SX entries with that rule" },

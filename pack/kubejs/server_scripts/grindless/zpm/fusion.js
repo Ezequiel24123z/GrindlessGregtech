@@ -146,6 +146,28 @@
     return made
   }
 
+  // ---------------------------------------------------------------- UEV-A7: the converter's Mk4 rows, written final
+  // 128 parallels x the row's EU/t (data/grindless/tables/fusion_mk4.json): 16,777,216, 12,582,912 and 25,165,824 EU/t. Not in
+  // power/generators.js's list (the plasma generator is), so never doubled.
+  function addMk4Converter(event) {
+    var mk4 = G.readJsonTable('kubejs/data/grindless/tables/fusion_mk4.json').converter
+    var made = []
+    mk4.recipes.forEach(function (r) {
+      var bad = missingFluids([r.input, r.output])
+      if (bad.length > 0) {
+        console.error(LOG + 'direct_conversion ' + r.name + ' skipped, unknown fluid(s): ' + bad.join(', '))
+        return
+      }
+      event.recipes.gtceu.direct_conversion('grindless:' + r.name)
+        .inputFluids(fluidOf(r.input, 1))
+        .outputFluids(fluidOf(r.output, 1))
+        .EUt(-r.eut)
+        .duration(r.duration)
+      made.push('grindless:direct_conversion/' + r.name)
+    })
+    return made
+  }
+
   // ---------------------------------------------------------------- the controllers
 
   function addControllers(event) {
@@ -173,6 +195,7 @@
     try { F.quench = addCaster(event) } catch (e2) { F.quench = []; report.errors.push('caster: ' + e2) }
     try { F.converter = addConverter(event) } catch (e3) { F.converter = []; report.errors.push('converter: ' + e3) }
     try { addControllers(event) } catch (e4) { report.errors.push('controllers: ' + e4) }
+    try { F.mk4Converter = addMk4Converter(event) } catch (e5) { F.mk4Converter = []; report.errors.push('Mk4 converter: ' + e5) }
     F.audited = report.audited
     F.unaudited = report.unaudited
     F.missing = report.missing

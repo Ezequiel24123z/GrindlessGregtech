@@ -1,0 +1,81 @@
+{
+  "_how_it_is_used": "server_scripts/grindless/uev/fusion.js makes one recipe per entry of 'types' (id grindless:<name>, GTM puts the type in front), with its programmed circuit; server_scripts/grindless/zpm/fusion.js makes the direct energy converter's three Mk4 rows from 'converter'. Package UEV-A7 (docs/eras/uev.md, machines 14-15, lines 23-25). Figures marked (tune) are the package's to set.",
+  "_ring": "The Mk4 ring (gtceu:uev_fusion_reactor) is tier 10: at most 8,388,608 EU/t, storage a long (at most 16 energy hatches x 160,000,000 = 2,560,000,000 EU, so no start may exceed that). Every fuel is premixed: one fluid per recipe, mixed upstream. Each recipe makes 1,024 mB of plasma per 16 t = 64 mB/t, which is what the converter eats at 128 parallels of 1 mB per 2 t.",
+  "_converter": "128 parallels x row EU/t = 16,777,216 (c1), 12,582,912 (c2), 25,165,824 (c3) EU/t. The rows are final: power/generators.js lists the plasma generator, not gtceu:direct_conversion, so the x2 is never applied to them.",
+  "ring": { "machine": "gtceu:uev_fusion_reactor", "type": "gtceu:fusion_reactor", "tier": 10, "plasmaPerTick": 64 },
+  "_casing": "grindless:uev_fusion_casing, the Mk4 first wall: GTM's Mk3 casing faced with UEV-A5's Wf/W divertor tile and SiC/SiC blanket plate, in the assembler at UHV voltage (the ring needs it before it can run).",
+  "casing": { "name": "uev_fusion_casing", "output": "grindless:uev_fusion_casing", "count": 1, "eut": 1966080, "duration": 200,
+    "itemsIn": [{ "id": "gtceu:fusion_casing_mk3", "count": 1 }, { "id": "grindless:wf_w_tile", "count": 2 }, { "id": "grindless:sic_sic_plate", "count": 1 }] },
+  "polariser": { "machine": "gtceu:helium3_polariser", "type": "gtceu:spin_polarisation", "laser": "grindless:laser_1083nm" },
+  "converter": {
+    "machine": "gtceu:direct_energy_converter",
+    "parallels": 128,
+    "recipes": [
+      { "name": "uev_dhe3_plasma", "input": "gtceu:uev_dhe3_plasma", "output": "gtceu:helium_4_ash", "duration": 2, "eut": 131072, "total": 16777216 },
+      { "name": "uev_pb11_plasma", "input": "gtceu:uev_pb11_plasma", "output": "gtceu:helium_4_ash", "duration": 2, "eut": 98304, "total": 12582912 },
+      { "name": "uev_polarised_plasma", "input": "gtceu:uev_polarised_plasma", "output": "gtceu:helium_4_ash", "duration": 2, "eut": 196608, "total": 25165824 }
+    ]
+  },
+  "types": {
+    "fusion_reactor": {
+      "recipes": [
+        { "name": "uev_dhe3", "circuit": null, "itemsIn": [], "notConsumed": [],
+          "fluidsIn": [{ "id": "gtceu:dhe3_fuel_mix", "amount": 128 }],
+          "fluidsOut": [{ "id": "gtceu:uev_dhe3_plasma", "amount": 1024 }],
+          "itemsOut": [], "eut": 7864320, "duration": 16, "start": 1200000000 },
+        { "name": "uev_pb11", "circuit": null, "itemsIn": [], "notConsumed": [],
+          "fluidsIn": [{ "id": "gtceu:pb11_fuel", "amount": 128 }],
+          "fluidsOut": [{ "id": "gtceu:uev_pb11_plasma", "amount": 1024 }],
+          "itemsOut": [], "eut": 6291456, "duration": 16, "start": 2400000000 },
+        { "name": "uev_polarised_dhe3", "circuit": null, "itemsIn": [], "notConsumed": [],
+          "fluidsIn": [{ "id": "gtceu:polarised_dhe3_fuel", "amount": 128 }],
+          "fluidsOut": [{ "id": "gtceu:uev_polarised_plasma", "amount": 1024 }],
+          "itemsOut": [], "eut": 7864320, "duration": 16, "start": 1200000000 }
+      ]
+    },
+    "spin_polarisation": {
+      "recipes": [
+        { "name": "polarise_helium_3", "circuit": 1, "itemsIn": [], "notConsumed": ["grindless:laser_1083nm"],
+          "fluidsIn": [{ "id": "gtceu:helium_3_6n", "amount": 1000 }],
+          "fluidsOut": [{ "id": "gtceu:polarised_helium_3", "amount": 900 }, { "id": "gtceu:helium_3", "amount": 100 }],
+          "itemsOut": [], "eut": 1966080, "duration": 200 },
+        { "name": "polarised_dhe3_fuel", "circuit": 2, "itemsIn": [], "notConsumed": ["grindless:laser_1083nm"],
+          "fluidsIn": [{ "id": "gtceu:polarised_helium_3", "amount": 1000 }, { "id": "gtceu:deuterium", "amount": 1000 }],
+          "fluidsOut": [{ "id": "gtceu:polarised_dhe3_fuel", "amount": 2000 }],
+          "itemsOut": [], "eut": 1966080, "duration": 100 }
+      ]
+    },
+    "mixer": {
+      "recipes": [
+        { "name": "dhe3_fuel_mix", "circuit": 24, "itemsIn": [], "notConsumed": [],
+          "fluidsIn": [{ "id": "gtceu:deuterium", "amount": 1000 }, { "id": "gtceu:helium_3_6n", "amount": 1000 }],
+          "fluidsOut": [{ "id": "gtceu:dhe3_fuel_mix", "amount": 2000 }],
+          "itemsOut": [], "eut": 7680, "duration": 100 },
+        { "name": "pb11_fuel", "circuit": 25, "itemsIn": [{ "id": "grindless:boron_11_powder", "count": 1 }], "notConsumed": [],
+          "fluidsIn": [{ "id": "gtceu:hydrogen", "amount": 1000 }],
+          "fluidsOut": [{ "id": "gtceu:pb11_fuel", "amount": 1000 }],
+          "itemsOut": [], "eut": 7680, "duration": 100 }
+      ]
+    },
+    "chemical_reactor": {
+      "recipes": [
+        { "name": "boric_acid_from_borax", "circuit": 24, "itemsIn": [{ "id": "gtceu:borax_dust", "count": 1 }], "notConsumed": [],
+          "fluidsIn": [{ "id": "gtceu:sulfuric_acid", "amount": 1000 }, { "id": "minecraft:water", "amount": 5000 }],
+          "fluidsOut": [],
+          "itemsOut": [{ "id": "gtceu:boric_acid_dust", "count": 4 }, { "id": "gtceu:sodium_sulfate_dust", "count": 1 }], "eut": 480, "duration": 200 },
+        { "name": "boron_trioxide", "circuit": 25, "itemsIn": [{ "id": "gtceu:boric_acid_dust", "count": 2 }], "notConsumed": [],
+          "fluidsIn": [],
+          "fluidsOut": [{ "id": "minecraft:water", "amount": 3000 }],
+          "itemsOut": [{ "id": "gtceu:boron_trioxide_dust", "count": 1 }], "eut": 480, "duration": 200 },
+        { "name": "boron_trifluoride", "circuit": 26, "itemsIn": [{ "id": "gtceu:boron_trioxide_dust", "count": 1 }], "notConsumed": [],
+          "fluidsIn": [{ "id": "gtceu:hydrofluoric_acid", "amount": 6000 }],
+          "fluidsOut": [{ "id": "gtceu:boron_trifluoride", "amount": 2000 }, { "id": "minecraft:water", "amount": 3000 }],
+          "itemsOut": [], "eut": 1920, "duration": 200 },
+        { "name": "boron_11_powder", "circuit": 27, "itemsIn": [], "notConsumed": [],
+          "fluidsIn": [{ "id": "gtceu:boron_11_trifluoride", "amount": 2000 }, { "id": "gtceu:hydrogen", "amount": 3000 }],
+          "fluidsOut": [{ "id": "gtceu:hydrofluoric_acid", "amount": 6000 }],
+          "itemsOut": [{ "id": "grindless:boron_11_powder", "count": 2 }], "eut": 7680, "duration": 200 }
+      ]
+    }
+  }
+}
