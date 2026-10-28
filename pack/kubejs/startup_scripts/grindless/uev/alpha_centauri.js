@@ -1,4 +1,4 @@
-// priority: -7664
+// priority: -7446
 // -----------------------------------------------------------------------------------------------
 // UEV's Alpha Centauri machines (docs/eras/uev.md, machines 18, 19 and 20, lines 26 and 37; package UEV-B2): the nebula collector, the
 // interstellar dust lab, the pulsar timing station, their recipe types and the package's own items. The recipes come from

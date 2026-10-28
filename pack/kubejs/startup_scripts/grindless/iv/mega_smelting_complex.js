@@ -1,3 +1,4 @@
+// priority: -2850
 // -----------------------------------------------------------------------------------------------
 // IV Smelting Complex, gtceu:smelting_complex (package MEGA-5, docs/eras/mega.md 4.7): a blast furnace and a vacuum freezer in one machine.
 // Its own recipe type, gtceu:smelting_complex, holds one recipe per live electric blast furnace recipe that makes a hot ingot, composed

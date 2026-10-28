@@ -1,3 +1,4 @@
+// priority: 8950
 // Gregtech Grindless - names and tooltips of the IV Smelting Complex (startup_scripts/grindless/iv/mega_smelting_complex.js).
 //
 //   gtceu:smelting_complex / gtceu.smelting_complex   (machine name + 3 tooltip lines, recipe type name; en_us and es_es)

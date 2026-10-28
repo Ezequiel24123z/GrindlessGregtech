@@ -1368,3 +1368,30 @@ powershell -NoProfile -ExecutionPolicy Bypass -File tools\assets\Build-UEVFusion
 |---|---|
 | `block/multiblock/{helium3_polariser,uev_fusion_reactor}/overlay_front*.png` (+ `.mcmeta`) | The two controller faces: still, active and active emissive. |
 | `item/{boron_11_powder,laser_1083nm}.png` | Boron-11 powder (the p-B11 fuel) and the 1083 nm pump laser of the He-3 polariser. |
+
+## UEV Alpha Centauri (UEV-B2)
+
+Procedural, drawn by `Build-UEVAlphaCentauriTextures.ps1`; nothing is copied from another mod. The controller faces of `gtceu:nebula_collector`, `gtceu:interstellar_dust_lab` and `gtceu:pulsar_timing_station` (still, animated active and emissive frames) and the 12 items of the nebula, interstellar dust, pulsar timing and silica aerogel lines.
+
+```powershell
+powershell -NoProfile -ExecutionPolicy Bypass -File tools\assets\Build-UEVAlphaCentauriTextures.ps1
+powershell -NoProfile -ExecutionPolicy Bypass -File tools\assets\Build-UEVAlphaCentauriTextures.ps1 -Credits
+```
+
+| File (under `textures/`) | Notes |
+|---|---|
+| `block/multiblock/{nebula_collector,interstellar_dust_lab,pulsar_timing_station}/overlay_front*.png` (+ `.mcmeta`) | The three controller faces: still, active and active emissive. |
+| `item/*.png` (12, listed by `-Credits`) | The superhydride scoop coil, dust-laden aerogel, extracted and demineralised grains, the Fe-60 record, silicate residue, pulsar timing data, the Alpha coronal field map, the TEOS flask and the silica sol, wet gel and aged gel. |
+
+## IV Smelting Complex (MEGA-5)
+
+Procedural, drawn by `Build-MegaSmeltingComplexTextures.ps1`; nothing is copied from another mod. The controller face of `gtceu:smelting_complex` (the electric blast furnace and vacuum freezer composed per hot ingot, coil-scaled parallels up to 64, GTM's EBF overclock); still, active and emissive frames.
+
+```powershell
+powershell -NoProfile -ExecutionPolicy Bypass -File tools\assets\Build-MegaSmeltingComplexTextures.ps1
+powershell -NoProfile -ExecutionPolicy Bypass -File tools\assets\Build-MegaSmeltingComplexTextures.ps1 -Credits
+```
+
+| File (under `textures/`) | Notes |
+|---|---|
+| `block/multiblock/smelting_complex/overlay_front*.png` | The Smelting Complex controller face: still, active and active emissive. |

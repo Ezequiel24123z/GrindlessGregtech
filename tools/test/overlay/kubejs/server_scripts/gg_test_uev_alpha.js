@@ -1,4 +1,4 @@
-// priority: -7790
+// priority: -7654
 // TEST ONLY, UEV-B2. Command: kubejs custom_command gg_test_uev_alpha
 // Marker: GGTEST|uev_alpha|DONE|failures=N
 // Band ONLY: X 33280-33343, Z 0-63, grindless:alpha_centauri_orbit Y 60-120. All blocks and chunk tickets are owned and removed before DONE.

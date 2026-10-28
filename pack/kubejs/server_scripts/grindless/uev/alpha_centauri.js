@@ -1,4 +1,4 @@
-// priority: -23190
+// priority: -22970
 // -----------------------------------------------------------------------------------------------
 // Recipes of UEV's nebula collector, interstellar dust lab and pulsar timing station (machines and recipe types:
 // startup_scripts/grindless/uev/alpha_centauri.js; docs/eras/uev.md, machines 18, 19 and 20, lines 26 and 37; package UEV-B2), generated at

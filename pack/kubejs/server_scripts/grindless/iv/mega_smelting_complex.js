@@ -1,3 +1,4 @@
+// priority: -16774
 // Recipes of the IV Smelting Complex (machine and recipe type: startup_scripts/grindless/iv/mega_smelting_complex.js; docs/eras/mega.md 4.7;
 // package MEGA-5), generated at every server load from data/grindless/tables/mega_smelting_complex.json, and the recipe that makes the controller.
 //

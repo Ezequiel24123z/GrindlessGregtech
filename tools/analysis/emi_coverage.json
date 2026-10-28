@@ -63,16 +63,21 @@
     { "type": "gtceu:ore_processing", "source": "server_scripts/grindless/mv/ore_plant.js composes GTM's ore chain of every ore into one recipe" },
     { "type": "gtceu:closed_loop_cooling", "source": "server_scripts/grindless/luv/helium_refrigerator.js makes one run per live vacuum freezer recipe that takes liquid helium" },
     { "type": "gtceu:polymer_works", "source": "server_scripts/grindless/mv/mega_polymer_works.js composes GTM's live polyethylene and rubber lines into one recipe each (tables/mega_polymer_works.json, lib/compose.js)" },
-    { "type": "gtceu:ore_refinery", "source": "server_scripts/grindless/ev/mega_ore_refinery.js composes GTM's live raw ore line (macerator, plain-water ore washer, thermal centrifuge, macerator) into one recipe per ore (tables/mega_ore_refinery.json, lib/compose.js)" }
+    { "type": "gtceu:ore_refinery", "source": "server_scripts/grindless/ev/mega_ore_refinery.js composes GTM's live raw ore line (macerator, plain-water ore washer, thermal centrifuge, macerator) into one recipe per ore (tables/mega_ore_refinery.json, lib/compose.js)" },
+    { "type": "gtceu:smelting_complex", "source": "server_scripts/grindless/iv/mega_smelting_complex.js composes GTM's live electric blast furnace and vacuum freezer recipes into one recipe per hot ingot (tables/mega_smelting_complex.json, lib/compose.js)" }
   ],
   "exceptions": [
   { "id": "grindless:itbtc_coated_conductor", "role": "use", "reason": "temporary (LuV-A3): its uses, the HTS coil and the SMES cell, are LuV-A4's magnet works; delete this exception when A4 merges" },
   { "id": "grindless:chondritic_extract", "role": "use", "reason": "temporary (LuV-B5): its use, the Europan culture of the algae bioreactor, is LuV-B8's; delete this exception when B8 merges" },
   { "id": "grindless:uev_conveyor_module", "role": "use", "reason": "temporary (UEV-A6): its use, a part of the controllers of the UEV-voltage machines 18-25 (uev.md, Voltages and controllers), is UEV-B2/B3/B4's; the first of them that uses it deletes this exception" },
-  { "id": "grindless:uev_robot_arm", "role": "use", "reason": "temporary (UEV-A8): its use, a part of the controllers of the UEV-voltage machines 18-25 (uev.md, Voltages and controllers), is UEV-B2/B3/B4's; the first of them that uses it deletes this exception" },
-  { "id": "grindless:lobster_eye_mcp", "role": "use", "reason": "temporary (UEV-A8): its use, the pulsar timing station's c1 (uev.md machine 20), is UEV-B2's; delete this exception when B2 merges" },
   { "id": "grindless:degenerate_eos_model", "role": "use", "reason": "temporary (UEV-A8): its use, the degenerate-matter harvester's c1, kept (uev.md machine 24), is UEV-B4's; delete this exception when B4 merges" },
   { "id": "grindless:sx_pump_impeller", "role": "use", "reason": "temporary (UEV-A4, found at the B3 merge): uev.md machine 7 c2 makes it but names no consumer; UEV-B4 (Sirius, after Barnard's rhenium, so no cycle) gives it one; delete this exception when B4 merges" }
   ],
-  "pendingRoutes": []
+  "pendingRoutes": [
+    { "id": "grindless:crafting/nebula_collector", "reason": "UEV-B2: the Alpha Centauri collector chain needs grindless:uev_field_generator (nebula collector controller, superhydride scoop coil), held until UEV-B4 (obtain rule UEV (B4)); B4 deletes the Alpha Centauri entries with that rule" },
+    { "id": "grindless:nebula_collection/dust_laden_aerogel", "reason": "UEV-B2: the Alpha Centauri collector chain needs grindless:uev_field_generator (nebula collector controller, superhydride scoop coil), held until UEV-B4 (obtain rule UEV (B4)); B4 deletes the Alpha Centauri entries with that rule" },
+    { "id": "grindless:interstellar_dust_analysis/demineralise_grains", "reason": "UEV-B2: the Alpha Centauri collector chain needs grindless:uev_field_generator (nebula collector controller, superhydride scoop coil), held until UEV-B4 (obtain rule UEV (B4)); B4 deletes the Alpha Centauri entries with that rule" },
+    { "id": "grindless:interstellar_dust_analysis/fe60_record", "reason": "UEV-B2: the Alpha Centauri collector chain needs grindless:uev_field_generator (nebula collector controller, superhydride scoop coil), held until UEV-B4 (obtain rule UEV (B4)); B4 deletes the Alpha Centauri entries with that rule" },
+    { "id": "grindless:pulsar_timing/pulsar_navigation_chart", "reason": "UEV-B2: the Alpha Centauri collector chain needs grindless:uev_field_generator (nebula collector controller, superhydride scoop coil), held until UEV-B4 (obtain rule UEV (B4)); B4 deletes the Alpha Centauri entries with that rule" }
+  ]
 }
