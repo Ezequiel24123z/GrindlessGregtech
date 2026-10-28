@@ -22,6 +22,51 @@
             { "id": "gtnn:radioactive_waste", "count": 1 }
           ],
           "fluidsOut": [{ "id": "gtceu:loaded_licl_salt", "amount": 250 }]
+        },
+        {
+          "_": "UIV-A1: Kroll-like reduction of the calutron's titanium-50 chloride; the magnesium chloride is UV's",
+          "name": "titanium_50_sponge",
+          "circuit": 6,
+          "eut": 524288,
+          "duration": 400,
+          "itemsIn": [
+            { "id": "gtceu:titanium_50_chloride_dust", "count": 1 },
+            { "id": "gtceu:magnesium_dust", "count": 2 }
+          ],
+          "kept": [],
+          "charge": [],
+          "fluidsIn": [],
+          "itemsOut": [
+            { "id": "gtceu:titanium_50_sponge_dust", "count": 1 },
+            { "id": "gtceu:magnesium_chloride_dust", "count": 2 }
+          ],
+          "fluidsOut": []
+        },
+        {
+          "_": "UIV-A1: hydrogen reduction of the calutron's nickel-58 chloride",
+          "name": "nickel_58_metal",
+          "circuit": 7,
+          "eut": 524288,
+          "duration": 300,
+          "itemsIn": [{ "id": "gtceu:nickel_58_chloride_dust", "count": 1 }],
+          "kept": [],
+          "charge": [],
+          "fluidsIn": [{ "id": "gtceu:hydrogen", "amount": 2000 }],
+          "itemsOut": [{ "id": "gtceu:nickel_58_dust", "count": 1 }],
+          "fluidsOut": [{ "id": "gtceu:hydrochloric_acid", "amount": 2000 }]
+        },
+        {
+          "_": "UIV-A1: UEV's lithium-6 reduced to metal in the LiCl melt (the tritium breeder of the fusion line)",
+          "name": "lithium_6_metal",
+          "circuit": 8,
+          "eut": 524288,
+          "duration": 300,
+          "itemsIn": [{ "id": "gtceu:lithium_6_dust", "count": 4 }],
+          "kept": [{ "id": "gtceu:lithium_dust", "count": 1 }],
+          "charge": [{ "id": "gtceu:licl_salt", "amount": 1000 }],
+          "fluidsIn": [],
+          "itemsOut": [{ "id": "gtceu:lithium_6_metal_dust", "count": 3 }],
+          "fluidsOut": [{ "id": "gtceu:loaded_licl_salt", "amount": 250 }]
         }
       ]
     }
