@@ -1,0 +1,202 @@
+{
+  "_how_it_is_used": "server_scripts/grindless/uiv/beuv_stm.js makes one recipe per entry, id grindless:<type>/<name>, with its programmed circuit (0 = none, GTM's own types only); 'kept' items and 'charge' fluids are not consumed; a 'chance' below 10000 makes a chanced output. beuv_lithography and stm_lithography are package UIV-A5's machine types (data key = dataKey, the EMI line); chemical_reactor, assembler and cutter are GTM's. Older machines' rows of this package (SPS, MBE, photonic foundry, zone refining, ion implantation) live in their own files, marked UIV-A5.",
+  "types": {
+    "beuv_lithography": {
+      "dataKey": "grindless_beuv_lithography",
+      "recipes": [
+        {
+          "_why": "uiv.md line 13: a terbium droplet target lit at 6.7 nm exposes the HfO2 resist film; the mirror comes out fouled by Tb debris",
+          "name": "exposure",
+          "circuit": 1,
+          "eut": 31457280,
+          "duration": 2000,
+          "itemsIn": [
+            { "id": "grindless:tb_droplet_target", "count": 1 },
+            { "id": "grindless:hfo2_resist_wafer", "count": 1 },
+            { "id": "grindless:beuv_mirror", "count": 1 }
+          ],
+          "kept": [],
+          "fluidsIn": [],
+          "charge": [],
+          "itemsOut": [
+            { "id": "grindless:beuv_exposed_wafer", "count": 1 },
+            { "id": "grindless:fouled_beuv_mirror", "count": 1 }
+          ],
+          "fluidsOut": []
+        },
+        {
+          "_why": "uiv.md line 13: the exposed film is developed in an ethanol bath (not consumed) and cut into driver ASICs",
+          "name": "driver_asic",
+          "circuit": 2,
+          "eut": 31457280,
+          "duration": 1200,
+          "itemsIn": [{ "id": "grindless:beuv_exposed_wafer", "count": 1 }],
+          "kept": [],
+          "fluidsIn": [],
+          "charge": [{ "id": "gtceu:ethanol", "amount": 100 }],
+          "itemsOut": [{ "id": "grindless:beuv_driver_asic", "count": 4 }],
+          "fluidsOut": []
+        },
+        {
+          "_why": "uiv.md machine 5, c3: the fouled collector mirror is cleaned and the Tb debris comes back as metal",
+          "name": "mirror_cleaning",
+          "circuit": 3,
+          "eut": 7864320,
+          "duration": 600,
+          "itemsIn": [{ "id": "grindless:fouled_beuv_mirror", "count": 1 }],
+          "kept": [],
+          "fluidsIn": [],
+          "charge": [],
+          "itemsOut": [
+            { "id": "grindless:beuv_mirror", "count": 1 },
+            { "id": "gtceu:terbium_dust", "count": 1 }
+          ],
+          "fluidsOut": []
+        }
+      ]
+    },
+    "stm_lithography": {
+      "dataKey": "grindless_stm_lithography",
+      "recipes": [
+        {
+          "_why": "uiv.md line 11: the Si-28 SOI surface is passivated with hydrogen",
+          "name": "h_terminate",
+          "circuit": 1,
+          "eut": 7864320,
+          "duration": 1200,
+          "itemsIn": [{ "id": "grindless:si28_soi_wafer", "count": 1 }],
+          "kept": [],
+          "fluidsIn": [{ "id": "gtceu:hydrogen", "amount": 1000 }],
+          "charge": [],
+          "itemsOut": [{ "id": "grindless:h_terminated_wafer", "count": 1 }],
+          "fluidsOut": []
+        },
+        {
+          "_why": "uiv.md machine 7, c2: the tip removes single hydrogen atoms in the pattern; liquid helium cools the stage and boils off as helium",
+          "name": "stm_pattern",
+          "circuit": 2,
+          "eut": 31457280,
+          "duration": 4000,
+          "itemsIn": [{ "id": "grindless:h_terminated_wafer", "count": 1 }],
+          "kept": [],
+          "fluidsIn": [{ "id": "gtceu:liquid_helium", "amount": 100 }],
+          "charge": [],
+          "itemsOut": [{ "id": "grindless:stm_patterned_wafer", "count": 1 }],
+          "fluidsOut": [{ "id": "gtceu:helium", "amount": 100 }]
+        },
+        {
+          "_why": "uiv.md line 11: phosphine adsorbs on the bare silicon; the excess comes out as gas and goes to the phosphine scrubber (chemical_reactor/phosphine_scrub)",
+          "name": "ph3_dose",
+          "circuit": 3,
+          "eut": 7864320,
+          "duration": 1000,
+          "itemsIn": [{ "id": "grindless:stm_patterned_wafer", "count": 1 }],
+          "kept": [],
+          "fluidsIn": [{ "id": "gtceu:phosphine", "amount": 1000 }],
+          "charge": [],
+          "itemsOut": [{ "id": "grindless:ph3_dosed_wafer", "count": 1 }],
+          "fluidsOut": [{ "id": "gtceu:phosphine", "amount": 800 }]
+        }
+      ]
+    },
+    "chemical_reactor": {
+      "recipes": [
+        {
+          "_why": "uiv.md line 11: phosphine for the STM cell (2 P + 3 H2 -> 2 PH3)",
+          "name": "phosphine",
+          "circuit": 1,
+          "eut": 7680,
+          "duration": 300,
+          "itemsIn": [{ "id": "gtceu:phosphorus_dust", "count": 2 }],
+          "kept": [],
+          "fluidsIn": [{ "id": "gtceu:hydrogen", "amount": 3000 }],
+          "charge": [],
+          "itemsOut": [],
+          "fluidsOut": [{ "id": "gtceu:phosphine", "amount": 2000 }]
+        },
+        {
+          "_why": "uiv.md machine 7: the excess phosphine is burned to phosphoric acid (2 PH3 + 4 O2 -> 2 H3PO4), which goes to stock",
+          "name": "phosphine_scrub",
+          "circuit": 2,
+          "eut": 1920,
+          "duration": 200,
+          "itemsIn": [],
+          "kept": [],
+          "fluidsIn": [
+            { "id": "gtceu:phosphine", "amount": 2000 },
+            { "id": "gtceu:oxygen", "amount": 4000 }
+          ],
+          "charge": [],
+          "itemsOut": [],
+          "fluidsOut": [{ "id": "gtceu:phosphoric_acid", "amount": 2000 }]
+        },
+        {
+          "_why": "uiv.md line 14: the LaN barrier between the La/B4C layers",
+          "name": "lan_barrier",
+          "circuit": 3,
+          "eut": 491520,
+          "duration": 400,
+          "itemsIn": [{ "id": "grindless:la_b4c_multilayer", "count": 1 }],
+          "kept": [],
+          "fluidsIn": [{ "id": "gtceu:nitrogen", "amount": 1000 }],
+          "charge": [],
+          "itemsOut": [{ "id": "grindless:lan_barrier_mirror", "count": 1 }],
+          "fluidsOut": []
+        }
+      ]
+    },
+    "assembler": {
+      "recipes": [
+        {
+          "_why": "uiv.md line 13: a terbium droplet target (a tin carrier carries the terbium)",
+          "name": "tb_droplet_target",
+          "circuit": 1,
+          "eut": 1966080,
+          "duration": 300,
+          "itemsIn": [
+            { "id": "gtceu:terbium_dust", "count": 2 },
+            { "id": "gtceu:tin_dust", "count": 1 }
+          ],
+          "kept": [],
+          "fluidsIn": [],
+          "charge": [],
+          "itemsOut": [{ "id": "grindless:tb_droplet_target", "count": 1 }],
+          "fluidsOut": []
+        },
+        {
+          "_why": "uiv.md line 14: the ruthenium cap that finishes the BEUV mirror",
+          "name": "beuv_mirror",
+          "circuit": 2,
+          "eut": 1966080,
+          "duration": 400,
+          "itemsIn": [
+            { "id": "grindless:lan_barrier_mirror", "count": 1 },
+            { "id": "gtceu:ruthenium_dust", "count": 1 }
+          ],
+          "kept": [],
+          "fluidsIn": [],
+          "charge": [],
+          "itemsOut": [{ "id": "grindless:beuv_mirror", "count": 1 }],
+          "fluidsOut": []
+        }
+      ]
+    },
+    "cutter": {
+      "recipes": [
+        {
+          "_why": "uiv.md line 11: the float-zone Si-28 ingot is sliced into wafers",
+          "name": "si28_fz_wafers",
+          "circuit": 0,
+          "eut": 30720,
+          "duration": 400,
+          "itemsIn": [{ "id": "grindless:si28_fz_ingot", "count": 1 }],
+          "kept": [],
+          "fluidsIn": [{ "id": "minecraft:water", "amount": 100 }],
+          "charge": [],
+          "itemsOut": [{ "id": "grindless:si28_fz_wafer", "count": 8 }],
+          "fluidsOut": []
+        }
+      ]
+    }
+  }
+}

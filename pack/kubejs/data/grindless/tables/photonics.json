@@ -72,6 +72,42 @@
           "charge": [],
           "itemsOut": [{ "id": "grindless:ni58_ti_multilayer", "count": 2 }],
           "fluidsOut": [{ "id": "gtceu:nitrogen", "amount": 1000 }]
+        },
+        {
+          "_why": "UIV-A5 (uiv.md line 14): La and B4C deposited in alternating layers on glass; the B4C offcuts go back to stock (circuit 5)",
+          "name": "la_b4c_multilayer",
+          "circuit": 5,
+          "eut": 1966080,
+          "duration": 1600,
+          "itemsIn": [
+            { "id": "grindless:b4c_target", "count": 1 },
+            { "id": "gtceu:lanthanum_dust", "count": 2 },
+            { "id": "gtceu:glass_plate", "count": 1 }
+          ],
+          "kept": [],
+          "fluidsIn": [{ "id": "gtceu:liquid_nitrogen", "amount": 1000 }],
+          "charge": [],
+          "itemsOut": [
+            { "id": "grindless:la_b4c_multilayer", "count": 1 },
+            { "id": "gtceu:boron_carbide_dust", "count": 1 }
+          ],
+          "fluidsOut": [{ "id": "gtceu:nitrogen", "amount": 1000 }]
+        },
+        {
+          "_why": "UIV-A5 (uiv.md line 11): a Si-28 overgrowth buries the phosphorus-dosed pattern (circuit 6)",
+          "name": "psi_overgrowth",
+          "circuit": 6,
+          "eut": 1966080,
+          "duration": 2400,
+          "itemsIn": [
+            { "id": "grindless:ph3_dosed_wafer", "count": 1 },
+            { "id": "grindless:silicon_28_dust", "count": 1 }
+          ],
+          "kept": [],
+          "fluidsIn": [{ "id": "gtceu:liquid_nitrogen", "amount": 1000 }],
+          "charge": [],
+          "itemsOut": [{ "id": "grindless:p_si_die", "count": 1 }],
+          "fluidsOut": [{ "id": "gtceu:nitrogen", "amount": 1000 }]
         }
       ]
     },
@@ -238,6 +274,22 @@
           "fluidsIn": [{ "id": "gtceu:ultrapure_water", "amount": 1000 }],
           "charge": [],
           "itemsOut": [{ "id": "grindless:ppln_waveguide", "count": 2 }],
+          "fluidsOut": [{ "id": "minecraft:water", "amount": 1000 }]
+        },
+        {
+          "_why": "UIV-A5 (uiv.md line 13): a hafnia film spun on a silicon wafer is the BEUV resist (circuit 12)",
+          "name": "hfo2_resist",
+          "circuit": 12,
+          "eut": 7864320,
+          "duration": 400,
+          "itemsIn": [
+            { "id": "gtceu:silicon_wafer", "count": 1 },
+            { "id": "grindless:hafnia_dust", "count": 1 }
+          ],
+          "kept": [],
+          "fluidsIn": [{ "id": "gtceu:ultrapure_water", "amount": 1000 }],
+          "charge": [],
+          "itemsOut": [{ "id": "grindless:hfo2_resist_wafer", "count": 1 }],
           "fluidsOut": [{ "id": "minecraft:water", "amount": 1000 }]
         }
       ]
