@@ -1,0 +1,12 @@
+{
+  "_source": "Our own table: the plan of the IV Smelting Complex, gtceu:smelting_complex (docs/eras/mega.md 4.7). Every recipe is composed from GTM's live recipes by server_scripts/grindless/lib/compose.js: one electric blast furnace run that makes a hot ingot, joined to the vacuum freezer recipe that cools that hot ingot.",
+  "_how_it_is_used": [
+    "Read by server_scripts/grindless/iv/mega_smelting_complex.js at every server load. The script reads the live gtceu:electric_blast_furnace/* recipes that output a hot ingot (an item whose id matches `hotIngot`) and the live gtceu:vacuum_freezer/* recipes that take it. An EBF recipe whose hot ingot has no live freezer recipe is skipped and logged: nothing is made up.",
+    "Line: the EBF's inputs (dusts, the gas of a gas variant) -> hot ingot + the EBF's byproducts -> vacuum freezer (the coolant in, its return gas out) -> ingot. The hot ingot is the linked key and never leaves; the batch is one EBF run (`given` is the first item the EBF takes, in the amount of one run). The gas and no-gas EBF variants are separate recipes: each is composed, and the EBF's programmed circuit and ebf_temp are carried into the composed recipe.",
+    "maxEUt: IV, 8192 EU/t. The composed recipe takes the SUM of the EU of both stages (family rule 7), spent at that EU/t, so it never costs less than the stages."
+  ],
+  "maxEUt": 8192,
+  "ebfPrefix": "gtceu:electric_blast_furnace/",
+  "freezerPrefix": "gtceu:vacuum_freezer/",
+  "hotIngot": "^[a-z0-9_]+:hot_.+_ingot$"
+}
