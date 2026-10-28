@@ -45,7 +45,12 @@
       fluidsIn: [{ id: HELIUM, amount: 1000 }], itemsOut: [{ id: 'grindless:pluto_kuiper_chart', count: 1 }], eut: ZPM_VA, duration: 1200 },
     { name: 'kuiper_target_list', type: 'kuiper_survey', circuit: 1, orbit: true,
       itemsIn: [{ id: ORB, count: 1 }, { id: 'grindless:cvd_diamond_plate', count: 1 }], notConsumed: [],
-      fluidsIn: [], itemsOut: [{ id: 'grindless:kuiper_target_list', count: 1 }], eut: ZPM_VA, duration: 1200 }
+      fluidsIn: [], itemsOut: [{ id: 'grindless:kuiper_target_list', count: 1 }], eut: ZPM_VA, duration: 1200 },
+    // UIV-B3 (docs/eras/uiv.md, machine 20, line 34's navigation branch): a raw J0437 profile timed against home (Earth orbit) into an X-ray pulse
+    // profile; circuits 1-3 are A9's, 4 the Titan probes'
+    { name: 'j0437_pulse_timed', type: 'telemetry_decoding', circuit: 5, orbit: true,
+      itemsIn: [{ id: 'grindless:j0437_pulse_raw', count: 1 }, { id: ORB, count: 1 }], notConsumed: [],
+      fluidsIn: [{ id: HELIUM, amount: 1000 }], itemsOut: [{ id: 'grindless:xray_pulse_timed', count: 1 }], eut: ZPM_VA, duration: 1200 }
   ]
 
   OB.recipes = TABLE.map(function (t) {
