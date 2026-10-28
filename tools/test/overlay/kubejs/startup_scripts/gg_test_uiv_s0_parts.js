@@ -9,14 +9,18 @@
 ;(function () {
   var marker = JsonIO.read('kubejs/config/gg_test_uiv_s0.json')
   var ON = marker !== null && String(marker.get('enabled')) === 'true'
+  var FALLBACK = marker !== null && String(marker.get('fallback')) === 'true'
   var UIV = 11
   var seen = {}
   function guard(key, fn) {
+    if (FALLBACK && (key === 'hull' || key.indexOf('hatch_') === 0)) return
     try { fn(); console.info('[uiv-s0] ' + key + ' registered') } catch (e) {
       if (!seen[key]) { seen[key] = true; console.error('[uiv-s0] ' + key + ' failed: ' + e) }
     }
   }
   if (!ON) return
+  // "fallback": true means the bench overlay also carries a copy of uev/foundation.js with .tiers(UEV, UIV) on the hull and the four hatches,
+  // so this file must not create the same builder keys again (GTRegistryInfo#addBuilder rejects a duplicate key whatever the tiers)
 
   var TEXTURE = 'gtceu:block/casings/solid/machine_casing_solid_steel'
   var OVERLAY = 'gtceu:block/multiblock/implosion_compressor'

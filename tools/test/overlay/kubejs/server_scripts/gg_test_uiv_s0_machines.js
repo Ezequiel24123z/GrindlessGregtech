@@ -1,4 +1,4 @@
-// TEST ONLY, UIV-S0. Commands: kubejs custom_command gg_test_uiv_s0_machines | gg_test_uiv_s0_platform | gg_test_uiv_s0_platform_check
+﻿// TEST ONLY, UIV-S0. Commands: kubejs custom_command gg_test_uiv_s0_machines | gg_test_uiv_s0_platform | gg_test_uiv_s0_platform_check
 // Band ONLY: X 35264-35327, Z 0-63. Overworld Y 70-100 (machines); grindless:s0_rx_j1856_orbit Y 70-100 (the relay platform).
 // Machines come from startup_scripts/gg_test_uiv_s0_parts.js (gated by its marker).
 //   s0_1_*   the UIV hull and hatches form in gtceu:gg_uiv_s0_frame (2 A and 16 A) and in gtceu:assembly_line; the hull is placed and read; the 16 A buffer as a long
@@ -25,8 +25,8 @@
   var CHECK_REQUEST = 'ggTestUivS0PlatformCheckRequest'
   var POPPY = 'minecraft:poppy'
   var RED = 'minecraft:red_dye'
-  var CANE = 'minecraft:sugar_cane'
-  var PAPER = 'minecraft:paper'
+  var CANE = 'minecraft:kelp'
+  var PAPER = 'minecraft:dried_kelp'
   var FUSION_START = 4800000000
   var OVERWORLD = 'minecraft:overworld'
   var ORBIT = 'grindless:s0_rx_j1856_orbit'
@@ -36,7 +36,7 @@
     try {
       event.recipes.gtceu.macerator('gg_test_uiv_s0:frame').itemInputs('1x minecraft:cobblestone').itemOutputs('1x minecraft:gravel').duration(20).EUt(8)
       event.recipes.gtceu.electric_blast_furnace('gg_test_uiv_s0:ebf_14000').itemInputs('1x ' + CANE).itemOutputs('1x ' + PAPER).duration(100).EUt(30).blastFurnaceTemp(14000)
-      event.recipes.gtceu.fusion_reactor('gg_test_uiv_s0:fusion').inputFluids('minecraft:water 100', 'minecraft:lava 100').outputFluids('gtceu:helium 100')
+      event.recipes.gtceu.fusion_reactor('gg_test_uiv_s0:fusion').inputFluids('gtceu:nitrogen 100', 'gtceu:argon 100').outputFluids('gtceu:helium 100')
         .EUt(8000000).duration(200).fusionStartEU(FUSION_START)
     } catch (e) {
       console.error('[gg_test uiv_s0] could not add the test recipes: ' + errText(e))
@@ -44,7 +44,7 @@
     try {
       // S0-9 (second question): an assembly_line recipe with research should make a research_station row that writes the data
       event.recipes.gtceu.assembly_line('gg_uiv_s0_research_probe').itemInputs('4x minecraft:iron_ingot').itemOutputs('1x minecraft:gold_ingot')
-        .duration(200).EUt(480).researchWithoutRecipe('gg_uiv_s0_research_probe')
+        .duration(200).EUt(480).stationResearch(function (r) { return r.researchStack(Item.of('minecraft:diamond')).CWUt(32).EUt(480) })
     } catch (e) {
       console.error('[gg_test uiv_s0] research probe recipe failed: ' + errText(e))
       global.ggTestUivS0ResearchProbeError = errText(e)
@@ -320,7 +320,7 @@
     if (u.phase === 'start') {
       var set = 0
       u.inHatches.forEach(function (h, i) {
-        try { h.tank.setFluidInTank(0, (i === 0 ? Fluid.of('minecraft:water', 4000) : Fluid.of('minecraft:lava', 4000)).getFluidStack()); set++ } catch (e) { }
+        try { h.tank.setFluidInTank(0, (i === 0 ? Fluid.of('gtceu:nitrogen', 4000) : Fluid.of('gtceu:argon', 4000)).getFluidStack()); set++ } catch (e) { }
       })
       note('s0_6_fill', 'fluid input hatches filled ' + set + ' of ' + u.inHatches.length)
       topUp(u.energy)
@@ -390,7 +390,7 @@
       if (got > 0 || S.tick - u.started > 600) {
         var s = u.snap
         if (u.kind === 'ebf') {
-          check('s0_11_ebf_14000', got >= 1, 'a blastFurnaceTemp 14000 recipe on the 14,400 K coil: out ' + got + ' paper, recipe ' + (s ? s.id + ' ' + s.eut + ' EU/t ' + s.duration + ' t' : 'none') + ', reasons ' + String(rlg.getFailureReasons()))
+          check('s0_11_ebf_14000', got >= 1, 'a blastFurnaceTemp 14000 recipe on the 14,400 K coil: out ' + got + ' dried kelp, recipe ' + (s ? s.id + ' ' + s.eut + ' EU/t ' + s.duration + ' t' : 'none') + ', reasons ' + String(rlg.getFailureReasons()))
         } else {
           check('s0_11_coil_parallel', s !== null && s.parallels === 64 && got === 64, 'expected 2^floor(14400/900) = 2^16 capped at 64: parallels ' + (s ? s.parallels : 'none') + ', out ' + got + ' dye, ' + (s ? s.duration + ' t / ' + s.eut + ' EU/t' : '') + ', reasons ' + String(rlg.getFailureReasons()))
         }
@@ -474,15 +474,18 @@
   function finish() {
     if (S.finished) return
     S.finished = true
-    try { clear() } catch (e) { }
-    command('forceload remove ' + X0 + ' 0 ' + X1 + ' 63')
+    if (!S.keep) {
+      try { clear() } catch (e) { }
+      command('forceload remove ' + X0 + ' 0 ' + X1 + ' 63')
+    }
     console.info('GGTEST|' + NAME + '|DONE|failures=' + S.failed)
   }
   function begin(server, dim, mode) {
     S = { server: server, tick: 0, failed: 0, finished: false, units: [], dim: dim }
     S.level = server.getLevel(dim)
-    command('forceload add ' + X0 + ' 0 ' + X1 + ' 63')
     if (mode === 'check') { platformCheck(); return }
+    command('forceload add ' + X0 + ' 0 ' + X1 + ' 63')
+    S.keep = mode === 'platform'
     clear()
     var groups = mode === 'platform' ? [] : [[S1_UNITS, s1Build, s1Tick], [S6_UNITS, s6Build, s6Tick], [S7_UNITS, s7Build, s7Tick], [S9_UNITS, s9Build, s9Tick]]
     groups.forEach(function (g) {
