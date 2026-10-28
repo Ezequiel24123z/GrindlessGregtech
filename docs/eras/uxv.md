@@ -365,7 +365,7 @@ Placement per DECISIONS.md:508. Circuits are taken by each package after `git gr
 | Cryogenic plant (EV, `ev/cryogenic_plant.js:40`) | He-4 polish; O-16 liquefaction; Kr; 6N He | `stellar_helium_cut` → `triple_alpha_fuel`; O-16 → `oxygen_burning_fuel`; air → Kr; He → `he_6n` | Mk6 c2, c4; KrF laser; stopping cell |
 | Extraction cascade (EV, `ev/extraction_cascade.js:92`) | knot dust; flux dross; Bi fume | `ejecta_knot_dust` → Ti fraction + Si, S, Ca, Fe; magnesite → Mg(OH)₂; LPE dross → Pb; BFO fume → Bi (columbite split exists, `:166-168`) | Ti-44 line; YIG; MESO |
 | Platinum plant (EV, `ev/platinum_plant.js:598`) | sputter grade; etch and redeposit recovery | 5N Pt, Ru, Ir → `saf_target_set` and `pt_lpe_crucible` feed; etch residue, sputter redeposit (lines 4, 6-8, 10) → Pt, Ru | targets, crucible |
-| Hot strip mill (EV, `ev/combined_cycle_and_hot_mill.js:464`) | lamination; foil; sheet; duct | `grindless:tetrataenite` → `tetrataenite_lamination`; 5N Ta → `ta_foil`; 5N Pt → `pt_sheet`; `lasagna_plate` → `alip_duct` | motor, Ta target, crucible, pump |
+| Hot strip mill (EV, `ev/combined_cycle_and_hot_mill.js:464`) | lamination; foil; sheet; duct; mu-metal band; gum metal forge; encoder ring | `gtceu:tetrataenite_ingot` → `tetrataenite_lamination`; 5N Ta → `ta_foil`; 5N Pt → `pt_sheet`; `lasagna_plate` → `alip_duct`; mu-metal ingot → hot band → `mu_metal_foil`; sintered gum metal → hot-forged `gum_metal_blank`; tetrataenite ingot → `encoder_ring` | motor, Ta target, crucible, pump, interposer, gear, encoder |
 | Syngas plant (HV, `hv/syngas_plant.js:82`) | platform syngas | `volatile_condensate` → syngas | platform plastics |
 | Fuel fabrication (IV, `iv/uranium_cycle.js:44`) | ion-source charge | depleted U → `u238_ion_source` | MNT |
 | Hot cell (IV, `iv/hot_cell.js:36`) | sealed core; spent core | Ti-44 → `ti44_core`; spent core → Ca-44 | gamma laser |
@@ -373,43 +373,43 @@ Placement per DECISIONS.md:508. Circuits are taken by each package after `git gr
 | HTS magnet works (LuV, `luv/hts_magnet_works.js:32`) | strand stator | strand wire + lamination → `strand_stator` | motor |
 | Coated conductor line (LuV, `luv/coated_conductor_line.js:32`) | strand tape | strand wire → `strand_tape` | field generator, SMES |
 | GW detector (LuV, `luv/ganymede.js:48`) | Vela strain record | `vela_glitch_timing` → `vela_glitch_record` (data) | arm chart |
-| Eu reductor (ZPM, `zpm/europium.js:105`) | Dy, Y oxides | depleted liquor → Dy₂O₃, Y₂O₃ (Tb, Gd, La rows exist, `:107-119`) | DyScO₃, YIG, Terfenol-D |
-| Magnet works (ZPM, `zpm/magnet_works.js:27`) | rotor | `tetrataenite_lamination` → `tetrataenite_rotor` | motor |
-| Quench caster (ZPM, `zpm/fusion.js:97`) | Mk6 ash x3 | He-burning ash → C-12 + O-16; C ash → Ne-20, Na-23, Mg-24; O ash → Si-28, S-32, P-31 | Mk6 c3, c4; stock |
-| Ion implanter (ZPM, `zpm/qubits.js:47`) | ion-beam etch | annealed `mtj_stack_wafer`, `mram_stack_wafer` → etched | `mtj_die`, `mram_wafer` |
-| Actinide partitioning (ZPM, `zpm/actinides.js:85`) | Cm cut; fragments | Cm fraction → calutron; MNT fragments → Pb, Hg, Pt | MNT |
+| Eu reductor (ZPM, `zpm/europium.js:105`) | Dy oxide; Dy metal | depleted liquor → Dy₂O₃ (c10); Dy₂O₃ + La → Dy (c11, as c6 does for Tb; Tb and Gd rows exist, `:107-119`; Y₂O₃ and La₂O₃ are the cascade's c11, as built) | DyScO₃, Terfenol-D |
+| Magnet works (ZPM, `zpm/magnet_works.js:27`) | rotor; encoder ring | `tetrataenite_lamination` → `tetrataenite_rotor`; `encoder_ring` → multipole-magnetised | motor, encoder |
+| Quench caster (ZPM, `zpm/fusion.js:97`) | Mk6 ash x3; planar flow casting | He-burning ash → C-12 + O-16; C ash → Ne-20, Na-23, Mg-24; O ash → Si-28, S-32, P-31; Fe-Si-B-Nb-Cu melt → 20 µm `finemet_ribbon` (open question 11) | Mk6 c3, c4; stock; voltage coil |
+| Ion implanter (ZPM, `zpm/qubits.js:47`) | ion-beam etch; STNO milling | annealed `mtj_stack_wafer`, `mram_stack_wafer` → etched; defined `stno_stack_wafer` → milled pillars | `mtj_die`, `mram_wafer`, `stno_array` |
+| Actinide partitioning (ZPM, `zpm/actinides.js:85`) | fragments | MNT fragments → Pb, Hg, Pt (the Cm and Es/Fm cuts are as built, UIV-B2) | MNT |
 | Waste retrieval (ZPM, `zpm/actinides.js:58`) | MNT target | activated target → stock | by-product |
 | DEC (ZPM, `zpm/fusion.js:149-170`) | Mk6 plasmas x4 | four plasmas → EU + ash | power, ash |
 | DSN (ZPM, `zpm/observatory.js:30`) | Vela timing | → `vela_glitch_timing` (kept) | extractor |
 | Cold (UV, `uv/cold.js:55`) | heat flush | He-II → isotopically pure He-II | SHeQUID |
-| Powder bed (UV, `uv/materials.js:52`) | targets x5 | CoFeB, MgO, Heusler, SrRuO₃, La-BFO powders → targets; spent re-press | spintronics |
+| Powder bed (UV, `uv/materials.js:52`) | targets x5; gum metal | CoFeB, MgO, Heusler, SrRuO₃, La-BFO powders → targets; spent re-press; Ti-Nb-Ta-Zr-O blend → sintered gum metal | spintronics, gear |
 | Zone refining (UV, `uv/detectors.js:56`) | 7N Te, Ge | Te, Ge → 7N | CVT crystals |
-| MOCVD (UV, `uv/photonics.js:143`) | LPCVD SiN | → `sin_membrane` | SHeQUID |
+| MOCVD (UV, `uv/photonics.js:143`) | LPCVD SiN; STNO planarisation; Ga₂O₃ epi | → `sin_membrane`; milled STNO wafer → SiN-planarised; (010) `ga2o3_wafer` → Sn-doped homoepitaxy | SHeQUID, STNO, power die |
 | Synchrotron (UV, `uv/accelerators.js:34`) | U-238 injector | `u238_ion_source` → `u238_beam_charge` | MNT |
 | Antimatter trap (UV, `uv/accelerators.js:146`) | positron stacking; own file, `.dimension` overworld | slow positrons → `positron_stack` | gamma laser |
 | EHT (UV, `uv/edge.js:46`) | VLBI parallax | → `cygnus_vlbi_record` (data) | arm chart |
-| Crystal growth (UHV, `uhv/crystals.js:28`) | GGG, DyScO₃ (Czochralski); WTe₂, FGT (CVT); CaF₂ windows; Terfenol-D, Ni-Mn-Ga (Bridgman); recrystallise | eight rows | spintronics, components, KrF laser |
-| Foundry (UHV, `uhv/photonics.js:32`) | MESO integration; Cu back end; RF carpet | `me_switch_wafer` + `sot_readout_stack` → `meso_logic_die`; MRAM back end; `rf_carpet_board` | mainframe, MRAM, stopping cell |
-| Transuranium (UHV, `uhv/transcurium.js:25`) | molecular plating | Fm-257, Es-254, Cm-248 → targets | superheavies, MNT |
+| Crystal growth (UHV, `uhv/crystals.js:28`) | GGG, DyScO₃ (Czochralski); WTe₂, FGT (CVT); Ga₂O₃ (EFG, Ir die); Terfenol-D, Ni-Mn-Ga (Bridgman); recrystallise | eight rows; the KrF laser reuses `vuv_caf2_optic` (as built, `uhv/crystals.js:16`) | spintronics, components, power die |
+| Foundry (UHV, `uhv/photonics.js:32`) | MESO integration; Cu back end; RF carpet; STNO contacts; Ga₂O₃ packaging; interposer bonding | `me_switch_wafer` + `sot_readout_stack` → `meso_logic_die`; MRAM back end; `rf_carpet_board`; planarised STNO wafer → `stno_array`; gated wafer → `ga2o3_power_die`; shield can + `glass_interposer` → `shielded_interposer` | mainframe, MRAM, stopping cell, NV chip, hatches |
+| Transuranium (UHV, `uhv/transcurium.js:25`) | molecular plating | Fm-257, Es-254, Cm-248 → targets (the Es/Fm HDEHP split is as built, UIV-B2) | superheavies, MNT |
 | Tether works (UHV, `uhv/elevator.js:106`) | Whipple bumper | `cnt_densified_yarn` → `cnt_bumper_weave` | Whipple shield |
 | Warp gate (UHV, `uhv/gate.js:28`) | c8 Vela, c9 Cas A, c10 OpV gate | Gate | travel, gate |
-| Calutron (UEV, `uev/isotopes.js:21`) | Ti-44, Fm-257, Es-254, Cm-248, W-184 | five rows | lines |
+| Calutron (UEV, `uev/isotopes.js:21`) | Ti-44, Fm-257, W-184 | three rows (Es-254 and Cm-248 are as built: UHV transuranium, IV hot cell c8) | lines 19, 22, 25 |
 | Cyclotron (UEV, `uev/superheavy.js:21`) | 121, 122 | Ti-50 + Es-254 / Fm-257 | census III |
 | Recoil separator (UEV, `uev/superheavy.js:21`) | 121, 122 | → recoils | census III |
-| Chem lab (UEV, `uev/superheavy.js:21`) | Es/Fm split; census III | UIV line 32 debris → Es, Fm; recoils → census | superheavies |
+| Chem lab (UEV, `uev/superheavy.js:21`) | 121, 122 catch; census III | recoils → caught 121, 122 → census | superheavies |
 | Megabar (UEV, `uev/megabar.js:23`) | Ba-BN growth | BN + Ba → `hbn_crystal` | vdW |
-| Electron beam furnace (UEV, `uev/electron_beam.js:23`) | 5N Co, Fe, Mn, Si, Ta, Ni, Ga; Pt melt; apertures, tracks, waveguides, contacts, ME patterning; C-12 vapour | about 14 rows | targets, SHeQUID, racetrack, YIG, vdW, MESO, Mk6 c3 |
-| Nitride magnet works (UEV, `uev/composites.js:22`) | field anneals; twin training; SMES cell | MTJ, MRAM, SAF, Heusler, SOT anneals; Ni-Mn-Ga twin training; `uxv_smes_cell` | spintronics, conveyor, W |
+| Electron beam furnace (UEV, `uev/electron_beam.js:23`) | 5N Co, Fe, Mn, Si, Ta, Ni, Ga; Pt melt; mu-metal melt; apertures, tracks, waveguides, contacts, ME patterning, STNO pillars, Ga₂O₃ gates; C-12 vapour | about 17 rows | targets, SHeQUID, racetrack, YIG, vdW, MESO, STNO, interposer, power die, Mk6 c3 |
+| Nitride magnet works (UEV, `uev/composites.js:22`) | field anneals; twin training; SMES cell; shield and core anneals | MTJ, MRAM, SAF, Heusler, SOT anneals; Ni-Mn-Ga twin training; `uxv_smes_cell`; `mu_metal_foil` H₂ anneal; Finemet toroid field anneal | spintronics, conveyor, W, interposer, voltage coil |
 | CVI (UEV, `uev/composites.js:22`) | W-184 preform | W-184 fibre → `w184_cvi_preform` | Mk6 casing |
 | Photonic hall (UEV, `uev/photonics.js:25`) | spintronic mainframe | dies → `gtnn:spintronic_mainframe` | circuit |
 | Ergosphere probe bay (UIV-B4) | Kerr sling | `relay_seed` → `launched_relay_seed` | travel |
 | Matrioshka (UIV-A10) | arm chart | four records → `arm_chart` | gate |
 | Neutronium cage (UIV-B2, RX J1856 site) | cage parts | `neutronium_pellet` → `grindless:cage_part` (carried to Vela) | phase sorter |
 | R-process decompressor (UIV-B2) | gnocchi | `gnocchi_fragment` → r-process stock | by-product |
-| Levitation melter (UIV-A3) | CoFeB, Heusler, Terfenol-D, Ni-Mn-Ga | four melts → `cofeb_ingot`, `heusler_ingot`, `terfenol_d_ingot`, `ni_mn_ga_ingot` | targets, piston, conveyor |
+| Levitation melter (UIV-A3) | CoFeB, Heusler, Terfenol-D, Ni-Mn-Ga, Finemet | five melts → `cofeb_ingot`, `heusler_ingot`, `terfenol_d_ingot`, `ni_mn_ga_ingot`, Finemet melt; STNO mill redeposit re-melted | targets, piston, conveyor, voltage coil |
 | X-ray pulse profiler (UIV-B3) | Ti-44 line map | knot dust sample → `ti44_map` (data) | arm chart |
 
-**Count:** 46 older machines take about 120 rows (40 UEV-and-older machines, 6 UIV). UIV counted 58 machines; UXV leans on fewer machines but harder (132 crossings, Crossings).
+**Count:** 46 older machines take about 135 rows (40 UEV-and-older machines, 6 UIV). UIV counted 58 machines; UXV leans on fewer machines but harder: its lines meet 44 UEV-and-older machines, as-built upstream included, for 178 crossings (Crossings).
 
 **File order:** each row goes in the older machine's table or inline array (DECISIONS.md:508) by the package that consumes it; the antimatter trap row goes in the package's own file with `.dimension` and a free circuit. Two packages never append to one table in the same wave (Parallel and serial).
 
