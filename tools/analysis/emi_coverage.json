@@ -50,7 +50,9 @@
     { "id": "gtceu:uranium_233_dust", "role": "acquisition", "category": "gtceu:macerator", "source": "GTM's macerator recipe ingot -> dust, generated for the ingot material uranium_233 (startup_scripts/grindless/uv/foundation.js); the ingot comes from UV-A1's pyroprocessing cell" },
     { "id": "gtceu:uranium_233_dust", "role": "use", "category": "minecraft:smelting", "source": "GTM's furnace recipe dust -> ingot, generated for an ingot material with no blast temperature (startup_scripts/grindless/uv/foundation.js)" },
     { "id": "gtceu:lay_superhydride_dust", "role": "acquisition", "category": "gtceu:macerator", "source": "GTM's macerator recipe ingot -> dust, generated for the ingot material lay_superhydride (startup_scripts/grindless/uev/foundation.js); the ingot comes only from UEV-A3's megabar press, the dust feeds UV's powder-in-tube wire (circuit 6)" },
-    { "id": "gtceu:lay_superhydride_ingot", "role": "use", "category": "gtceu:macerator", "source": "GTM's macerator recipe ingot -> dust, generated for the ingot material lay_superhydride (startup_scripts/grindless/uev/foundation.js); GTM's bender also makes the plate of W's UEV SMES cell from it" }
+    { "id": "gtceu:lay_superhydride_ingot", "role": "use", "category": "gtceu:macerator", "source": "GTM's macerator recipe ingot -> dust, generated for the ingot material lay_superhydride (startup_scripts/grindless/uev/foundation.js); GTM's bender also makes the plate of W's UEV SMES cell from it" },
+    { "id": "gtceu:hftacn_dust", "role": "acquisition", "category": "gtceu:macerator", "source": "GTM's macerator recipe ingot -> dust, generated for the ingot material hftacn (startup_scripts/grindless/uev/foundation.js); the ingot comes only from UEV-A5's billet row in the UHV spark plasma sinterer (circuit 4)" },
+    { "id": "gtceu:hftacn_dust", "role": "use", "category": "minecraft:smelting", "source": "GTM's furnace recipe dust -> ingot, generated for an ingot material with no blast temperature (startup_scripts/grindless/uev/foundation.js)" }
   ],
   "derivedProcesses": [
     { "type": "gtceu:combined_cycle", "source": "server_scripts/grindless/ev/combined_cycle_and_hot_mill.js makes one run per live gas turbine fuel" },
@@ -65,14 +67,14 @@
   "exceptions": [
   { "id": "grindless:itbtc_coated_conductor", "role": "use", "reason": "temporary (LuV-A3): its uses, the HTS coil and the SMES cell, are LuV-A4's magnet works; delete this exception when A4 merges" },
   { "id": "grindless:chondritic_extract", "role": "use", "reason": "temporary (LuV-B5): its use, the Europan culture of the algae bioreactor, is LuV-B8's; delete this exception when B8 merges" },
-  { "id": "grindless:six_n_hafnium", "role": "use", "reason": "temporary (UEV-A4): its use, the HfTaCN spark plasma sinterer row, is UEV-A5's; delete this exception when A5 merges" },
   { "id": "grindless:nanotwinned_diamond_bit", "role": "use", "reason": "temporary (UEV-A3): its use, the wearing bit of the Barnard core drill (uev.md machine 21, c1), is UEV-B3's; delete this exception when B3 merges" },
   { "id": "grindless:terbium_oxide_dust", "role": "use", "reason": "temporary (UEV-A4): its use, the TGG isolator (uev.md line 32, UHV crystal furnace row), is UEV-A8's; delete this exception when A8 merges" },
   { "id": "gtceu:potassium_40_dust", "role": "use", "reason": "temporary (UEV-A1): its use, the Fermi mixture (uev.md line 30, c1 Li-6 + K-40), is UEV-A8's; delete this exception when A8 merges" },
   { "id": "gtceu:lithium_6_dust", "role": "use", "reason": "temporary (UEV-A1): its use, the Fermi gas (uev.md line 29, c1 Li-6 + K-40), is UEV-A8's; delete this exception when A8 merges" },
   { "id": "grindless:uev_electric_pump", "role": "use", "reason": "temporary (UEV-A6): its use, a part of the controllers of the UEV-voltage machines 18-25 (uev.md, Voltages and controllers), is UEV-B2/B3/B4's; the first of them that uses it deletes this exception" },
   { "id": "grindless:uev_conveyor_module", "role": "use", "reason": "temporary (UEV-A6): its use, a part of the controllers of the UEV-voltage machines 18-25 (uev.md, Voltages and controllers), is UEV-B2/B3/B4's; the first of them that uses it deletes this exception" },
-  { "id": "grindless:uev_electric_piston", "role": "use", "reason": "temporary (UEV-A6): its use, a part of the controllers of the UEV-voltage machines 18-25 (uev.md, Voltages and controllers), is UEV-B2/B3/B4's; the first of them that uses it deletes this exception" }
+  { "id": "grindless:uev_electric_piston", "role": "use", "reason": "temporary (UEV-A6): its use, a part of the controllers of the UEV-voltage machines 18-25 (uev.md, Voltages and controllers), is UEV-B2/B3/B4's; the first of them that uses it deletes this exception" },
+  { "id": "grindless:wf_w_tile", "role": "use", "reason": "temporary (UEV-A5): its use, the Mk4 first wall (grindless:uev_fusion_casing, uev.md line 17 and machine 10), is UEV-A7's; delete this exception when A7 merges" }
   ],
   "pendingRoutes": [
     { "id": "grindless:electron_beam_refining/rhenium", "reason": "UEV-A4: GT rhenium has no producer before UEV-B3's Barnard line (obtain rule UEV (B3)); B3 deletes the SX entries with that rule" },
@@ -82,6 +84,8 @@
     { "id": "grindless:single_crystal_casting/turbine_wheel", "reason": "UEV-A4: needs the coated SX blade and master alloy, held until UEV-B3 (rhenium); B3 deletes the SX entries with that rule" },
     { "id": "grindless:electron_beam_refining/ysz_coating", "reason": "UEV-A4: coats the bond-coated SX blade, held until UEV-B3 (rhenium); B3 deletes the SX entries with that rule" },
     { "id": "grindless:pgm_refining/uev/sx_dross", "reason": "UEV-A4: SX dross comes from the master alloy, held until UEV-B3 (rhenium); B3 deletes the SX entries with that rule" },
+    { "id": "grindless:nitride_magnet_synthesis/bonded_magnet", "reason": "UEV-A5: needs strain-annealed Fe16N2, whose carbonyl iron route waits for UEV-B3's iron pentacarbonyl (obtain rule UEV (B3)); B3 deletes the Fe16N2 entries with that rule" },
+    { "id": "grindless:assembler/uev_electric_motor", "reason": "UEV-A5: needs the bonded Fe16N2 magnet, held until UEV-B3 (iron pentacarbonyl); B3 deletes the Fe16N2 entries with that rule" },
     { "id": "grindless:assembler/uev_wireless_energy_hatch", "reason": "UEV-W: needs UEV-A8's quantum repeater node (obtain rule UEV (W)); A8 deletes the W entries with that rule" },
     { "id": "grindless:assembler/uev_wireless_dynamo_hatch", "reason": "UEV-W: needs UEV-A8's quantum repeater node (obtain rule UEV (W)); A8 deletes the W entries with that rule" },
     { "id": "grindless:assembler/uev_wireless_energy_cover", "reason": "UEV-W: needs UEV-A8's quantum repeater node (obtain rule UEV (W)); A8 deletes the W entries with that rule" },
