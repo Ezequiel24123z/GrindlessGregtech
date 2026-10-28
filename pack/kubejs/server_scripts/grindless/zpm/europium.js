@@ -102,7 +102,7 @@
       fluidsOut: [{ id: 'gtceu:carbon_monoxide', amount: 3000 }],
       eut: ZPM_VA, duration: 20
     },
-    // UIV-A1: the four heavier rare-earth metals, the same lanthanum reduction (circuits 6-9; the lanthanum loops through circuit 5)
+    // UIV-A1: the heavier rare earths out of the reductor's own depleted liquor (circuits 6-9; the lanthanum loops through circuit 5)
     {
       name: 'terbium_reduction', circuit: 6,
       itemsIn: [{ id: 'grindless:terbium_oxide_dust', count: 1 }, { id: LANTHANUM, count: 2 }],
@@ -112,28 +112,31 @@
       eut: ZPM_VA, duration: 20
     },
     {
-      name: 'gadolinium_reduction', circuit: 7,
-      itemsIn: [{ id: 'gtceu:gadolinium_oxide_dust', count: 1 }, { id: LANTHANUM, count: 2 }],
-      fluidsIn: [], notConsumed: [],
-      itemsOut: [{ id: 'gtceu:gadolinium_dust', count: 2 }, { id: LA_OXIDE, count: 1 }],
-      fluidsOut: [],
-      eut: ZPM_VA, duration: 20
+      name: 'gadolinium_oxide', circuit: 7,
+      itemsIn: [{ id: 'gtceu:sodium_hydroxide_dust', count: 6 }],
+      fluidsIn: [{ id: DEPLETED, amount: 4000 }],
+      notConsumed: [],
+      itemsOut: [{ id: 'gtceu:gadolinium_oxide_dust', count: 5 }, { id: 'gtceu:salt_dust', count: 6 }],
+      fluidsOut: [{ id: DEPLETED, amount: 3000 }, { id: 'minecraft:water', amount: 3000 }],
+      eut: ZPM_VA, duration: 100
     },
     {
-      name: 'erbium_reduction', circuit: 8,
-      itemsIn: [{ id: 'gtceu:erbium_oxide_dust', count: 1 }, { id: LANTHANUM, count: 2 }],
-      fluidsIn: [], notConsumed: [],
-      itemsOut: [{ id: 'gtceu:erbium_dust', count: 2 }, { id: LA_OXIDE, count: 1 }],
-      fluidsOut: [],
-      eut: ZPM_VA, duration: 20
+      name: 'erbium_oxide', circuit: 8,
+      itemsIn: [{ id: 'gtceu:ammonium_chloride_dust', count: 4 }],
+      fluidsIn: [{ id: DEPLETED, amount: 4000 }, { id: 'gtceu:oxygen', amount: 1000 }],
+      notConsumed: [],
+      itemsOut: [{ id: 'gtceu:erbium_oxide_dust', count: 5 }],
+      fluidsOut: [{ id: DEPLETED, amount: 3000 }, { id: 'gtceu:ammonia', amount: 4000 }],
+      eut: ZPM_VA, duration: 100
     },
     {
-      name: 'praseodymium_reduction', circuit: 9,
-      itemsIn: [{ id: 'gtceu:praseodymium_oxide_dust', count: 1 }, { id: LANTHANUM, count: 2 }],
-      fluidsIn: [], notConsumed: [],
-      itemsOut: [{ id: 'gtceu:praseodymium_dust', count: 2 }, { id: LA_OXIDE, count: 1 }],
-      fluidsOut: [],
-      eut: ZPM_VA, duration: 20
+      name: 'praseodymium_oxide', circuit: 9,
+      itemsIn: [{ id: 'gtceu:sodium_hydroxide_dust', count: 6 }],
+      fluidsIn: [{ id: DEPLETED, amount: 4000 }, { id: 'gtceu:oxygen', amount: 2000 }],
+      notConsumed: [],
+      itemsOut: [{ id: 'gtceu:praseodymium_oxide_dust', count: 5 }, { id: 'gtceu:salt_dust', count: 6 }],
+      fluidsOut: [{ id: DEPLETED, amount: 3000 }, { id: 'minecraft:water', amount: 3000 }],
+      eut: ZPM_VA, duration: 100
     }
   ]
 
