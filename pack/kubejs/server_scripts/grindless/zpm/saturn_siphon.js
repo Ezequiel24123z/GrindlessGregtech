@@ -9,6 +9,7 @@
 //   cryogenic_isotope_separation
 //     circuit 1  10,000 mB Saturn helium -> 20 mB helium-3 + 9,980 mB helium     (about 2 in 1,000: the game's ~14x of the real 1.4e-4)
 //     circuit 2  16,000 mB hydrogen -> 50 mB deuterium + 15,950 mB hydrogen      (the loop is the column's own: hydrogen returns)
+//     circuit 20 10,000 mB boron trifluoride -> 8,000 mB boron-11 + 2,000 mB boron-10 trifluoride (UEV-A7, line 25)
 //   ring_harvesting (sail net worn, 0.25 % per run)
 //     circuit 1  4,000 mB ring ice + 1 silicon dioxide dust (the silicate grit)
 //     circuit 2  1 glass bottle -> 1 ring ice sample (the first run: the bottle is the sample jar)
@@ -48,6 +49,13 @@
       itemsIn: [], notConsumed: [], worn: null,
       fluidsIn: [{ id: 'gtceu:hydrogen', amount: 16000 }],
       fluidsOut: [{ id: 'gtceu:deuterium', amount: 50 }, { id: 'gtceu:hydrogen', amount: 15950 }],
+      itemsOut: [], eut: ZPM_VA, duration: 200 },
+    // UEV-A7 (docs/eras/uev.md, line 25): natural boron trifluoride -> the boron-11 form (about 80 %) and the boron-10 form (about 20 %, the
+    // hot cell's neutron shielding). Circuit 20: the column's circuits 1-5 are taken by the Saturn, Uranus and Neptune rows.
+    { name: 'boron_11_trifluoride', type: 'cryogenic_isotope_separation', circuit: 20,
+      itemsIn: [], notConsumed: [], worn: null,
+      fluidsIn: [{ id: 'gtceu:boron_trifluoride', amount: 10000 }],
+      fluidsOut: [{ id: 'gtceu:boron_11_trifluoride', amount: 8000 }, { id: 'gtceu:boron_10_trifluoride', amount: 2000 }],
       itemsOut: [], eut: ZPM_VA, duration: 200 },
     { name: 'ring_ice', type: 'ring_harvesting', circuit: 1,
       itemsIn: [], notConsumed: [], worn: NET,
