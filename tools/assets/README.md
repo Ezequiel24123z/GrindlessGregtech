@@ -60,6 +60,7 @@ Generators for the pack's own textures. Everything is procedural 16x16 pixel art
 | `Build-UHVFoundationTextures.ps1` | Writes the shared UHV textures (UHV-F1): 52 items and three casings under `block/uhv/`. `-Only <output or group>`, `-Credits`. |
 | `Build-UEVFoundationTextures.ps1` | Writes the shared UEV textures (UEV-F1): 31 items and three casings under `block/uev/`. `-Only <output or group>`, `-Credits`. |
 | `Build-UIVFoundationTextures.ps1` | Writes the shared UIV textures (UIV-F1): 34 items and two casings under `block/uiv/`. `-Only <output or group>`, `-Credits`. |
+| `Build-UIVIsotopesTextures.ps1` | Writes the four item icons of UIV's isotopes (UIV-A1): Cf-249 target wheel, Ni-58/Ti multilayer, neutron supermirror, neutron guide. `-Credits`. |
 | `Build-UHVZblanTextures.ps1` | Writes the ZBLAN preform (UHV-A10, `item/zblan_preform.png`). The ZBLAN draw tower reuses UV's draw tower casing. `-Credits`. |
 | `Build-UVHeatSourcesTextures.ps1` | Writes the four item icons of UV's heat source works (UV-A2): probe RTG, americium micro source, curium RTG pellet, heavy curium oxide. `-Credits`. |
 | `Build-UVAcceleratorsTextures.ps1` | Writes the faces of UV's synchrotron, muon fusion cell and antimatter trap (UV-A5: `multiblock/synchrotron/`, `multiblock/muon_fusion_cell/`, `multiblock/antimatter_trap/`) and the 13 item icons of the LIGA, antiproton and muon fusion lines. `-Credits`. |
@@ -1509,3 +1510,12 @@ powershell -NoProfile -ExecutionPolicy Bypass -File tools\assets\Build-UIVParall
 | File (under `textures/`) | Notes |
 |---|---|
 | `block/machines/uiv_parallel_hatch/overlay_front*.png` | A dark panel with four parallel bars of the accent colour split by a centre rib; active, the bars brighten. |
+
+## UIV isotopes (UIV-A1)
+
+Procedural, drawn by `Build-UIVIsotopesTextures.ps1`; nothing is copied from another mod. Four item icons: the Cf-249 target wheel, the Ni-58/Ti multilayer, the neutron supermirror and the neutron guide (`item/<id>.png`).
+
+```powershell
+powershell -NoProfile -ExecutionPolicy Bypass -File tools\assets\Build-UIVIsotopesTextures.ps1
+powershell -NoProfile -ExecutionPolicy Bypass -File tools\assets\Build-UIVIsotopesTextures.ps1 -Credits
+```
