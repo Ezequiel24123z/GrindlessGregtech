@@ -106,6 +106,31 @@
     addKuiperNobleGas(event)
     addHighPurityNeon(event)
     addOganessonPropellant(event)
+    addXenonCut(event)
+  }
+
+  // UEV-A2 (docs/eras/uev.md, line 6): the xenon of the heavy ion cyclotron's track-etch beam. Liquid nether air is cooled further:
+  // xenon (165 K) condenses first and is drawn off; the rest of the nether air is given back as gas. The only input is liquid nether air.
+  var XENON_CUT = { id: 'grindless:cryogenic_processing/xenon_cut', eut: 7680, duration: 400,
+    input: { id: 'gtceu:liquid_nether_air', amount: 2000 },
+    outputs: [{ id: 'gtceu:xenon', amount: 100 }, { id: 'gtceu:nether_air', amount: 1900 }] }
+  CRYO.xenonRow = XENON_CUT
+
+  function addXenonCut(event) {
+    var ids = [XENON_CUT.input.id].concat(XENON_CUT.outputs.map(function (f) { return f.id }))
+    var missing = ids.filter(function (id) { return !Fluid.exists(id) })
+    if (missing.length > 0) {
+      console.error(LOG + 'cryogenic plant xenon row skipped, unknown fluid(s): ' + missing.join(', '))
+      return
+    }
+    var out = XENON_CUT.outputs
+    event.recipes.gtceu.cryogenic_processing('grindless:xenon_cut')
+      .inputFluids(Fluid.of(XENON_CUT.input.id, XENON_CUT.input.amount))
+      .outputFluids(Fluid.of(out[0].id, out[0].amount), Fluid.of(out[1].id, out[1].amount))
+      .dimension(DIMENSION)
+      .addDataNumber(NIGHT_KEY, Math.round(XENON_CUT.eut * NIGHT_FACTOR))
+      .EUt(XENON_CUT.eut).duration(XENON_CUT.duration)
+    console.info(LOG + 'cryogenic plant xenon row added')
   }
 
   // UV-A1 (docs/eras/uv.md, line 3): distillation of Triton nitrogen's oxide. The 15N isotopologue of the oxide is lighter and stays
