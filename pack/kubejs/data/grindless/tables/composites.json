@@ -17,7 +17,10 @@
           "itemsOut": [{ "id": "grindless:uiv_smes_cell", "count": 1 }], "fluidsOut": [] },
         { "name": "halbach_array", "circuit": 5, "eut": 1966080, "duration": 300,
           "itemsIn": [{ "id": "grindless:bonded_fe16n2_magnet", "count": 4 }, { "id": "gtceu:polybenzimidazole_dust", "count": 1 }], "kept": [], "fluidsIn": [], "charge": [],
-          "itemsOut": [{ "id": "grindless:halbach_array", "count": 1 }], "fluidsOut": [] }
+          "itemsOut": [{ "id": "grindless:halbach_array", "count": 1 }], "fluidsOut": [] },
+        { "_why": "UIV-A8, line 23: field-cooling of the impregnated GdBCO block.", "name": "gdbco_field_cool", "circuit": 6, "eut": 1966080, "duration": 600,
+          "itemsIn": [{ "id": "grindless:impregnated_gdbco", "count": 1 }], "kept": [], "fluidsIn": [{ "id": "gtceu:liquid_helium", "amount": 1000 }], "charge": [],
+          "itemsOut": [{ "id": "grindless:field_cooled_gdbco", "count": 1 }], "fluidsOut": [{ "id": "gtceu:helium", "amount": 1000 }] }
       ]
     },
     "sic_fibre_spinning": {
