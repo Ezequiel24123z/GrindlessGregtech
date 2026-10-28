@@ -92,11 +92,49 @@ async function reachTiers(dumpDir, ids) {
   return out;
 }
 
+// nominal tier of one recipe json: the machine hull input, else the highest circuit tag tier, else null
+export function recipeNominal(j) {
+  const { result, outputs, ...inputs } = j;
+  const s = JSON.stringify(inputs);
+  const hull = [...s.matchAll(/gtceu:([a-z]+)_machine_hull/g)].map((m) => m[1]).filter((t) => TIERS.includes(t));
+  if (hull.length) return hull.reduce((a, b) => (TIERS.indexOf(b) < TIERS.indexOf(a) ? b : a));
+  const circ = [...s.matchAll(/(?:forge|gtceu):circuits\/([a-z]+)/g)].map((m) => m[1]).filter((t) => TIERS.includes(t));
+  if (circ.length) return circ.reduce((a, b) => (TIERS.indexOf(b) > TIERS.indexOf(a) ? b : a));
+  return null;
+}
+
+// Map id -> nominal tier: the minimum over every recipe that outputs the controller
+export function nominalTiers(recipes, ids) {
+  const idSet = new Set(ids);
+  const out = new Map();
+  const outputsOf = (j) => {
+    const found = new Set();
+    for (const m of JSON.stringify({ r: j.result, o: j.outputs }).matchAll(/"(?:item|id)":"([a-z0-9_.-]+:[a-z0-9_/.-]+)"/g)) if (idSet.has(m[1])) found.add(m[1]);
+    return found;
+  };
+  for (const raw of recipes) {
+    const r = typeof raw === 'string' ? raw : JSON.stringify(raw);
+    if (!/machine_hull|circuits\//.test(r) || ![...idSet].some((id) => r.includes(id))) continue;
+    const j = (typeof raw === 'string' ? JSON.parse(raw) : raw).j;
+    if (!j) continue;
+    const outs = outputsOf(j);
+    if (!outs.size) continue;
+    const nom = recipeNominal(j);
+    if (!nom) continue;
+    for (const id of outs) {
+      const cur = out.get(id);
+      if (!cur || TIERS.indexOf(nom) < TIERS.indexOf(cur)) out.set(id, nom);
+    }
+  }
+  return out;
+}
+
 // ---------------------------------------------------------------- the decision, pure so the test can feed it
-export function classify({ machines, items, hidden, ours, reach }) {
+export function classify({ machines, items, hidden, ours, reach, nominal = new Map() }) {
   const controllers = [];
   const excluded = [];
   const mismatches = [];
+  const shifted = [];
   for (const m of machines) {
     if (m.mb !== 1) continue;
     const id = m.id;
@@ -109,11 +147,15 @@ export function classify({ machines, items, hidden, ours, reach }) {
     else if (folder && ERA_FOLDERS.has(folder)) {
       tier = folder;
       if (reached !== folder) mismatches.push({ id, folder, reached });
-    } else if (reached) tier = reached;
+    } else if (reached) {
+      const nom = nominal.get(id);
+      tier = nom && TIERS.indexOf(nom) > TIERS.indexOf(reached) ? nom : reached;
+      if (nom && nom !== reached) shifted.push({ id, reach: reached, nominal: nom, chosen: tier });
+    }
     else { excluded.push({ id, why: folder ? `ours in "${folder}": not an era folder and no gate reaches it` : 'no gate up to uhv reaches it' }); continue; }
     controllers.push({ id, name: titleOf(id), tier, ours: !!folder });
   }
-  return { controllers, excluded, mismatches };
+  return { controllers, excluded, mismatches, shifted };
 }
 
 // ---------------------------------------------------------------- lint-config.json: the chapter is a map, so every quest is a root and alone
@@ -159,7 +201,8 @@ async function main() {
   const ours = oursFromScripts();
   const candidates = machines.filter((m) => m.mb === 1 && !hidden.has(m.id) && items.has(m.id)).map((m) => m.id);
   const reach = await reachTiers(dumpDir, candidates);
-  const { controllers, excluded, mismatches } = classify({ machines, items, hidden, ours, reach });
+  const nominal = nominalTiers(read('recipes.json').recipes, candidates);
+  const { controllers, excluded, mismatches, shifted } = classify({ machines, items, hidden, ours, reach, nominal });
   const bands = layoutBands(controllers);
   const out = chapterSnbt(bands);
 
@@ -178,6 +221,10 @@ async function main() {
   const idsOf = (s) => new Set([...s.matchAll(/\n\t\t\tid: "([0-9A-F]{16})"/g)].map((m) => m[1]));
   const a = idsOf(prev), b = idsOf(out);
   console.log(`diff vs ${path.relative(REPO, CHAPTER_FILE)}: ${prev === out ? 'identical' : `+${[...b].filter((x) => !a.has(x)).length} -${[...a].filter((x) => !b.has(x)).length} quests, bytes differ`}`);
+  if (args.includes('--list')) {
+    console.log(`non-ours nominal != reach, ${shifted.length}:`);
+    for (const s of shifted) console.log(`  ${s.id}: reach ${s.reach}, nominal ${s.nominal}, chosen ${s.chosen}`);
+  }
   if (args.includes('--list')) for (const b2 of bands) console.log(tierName(b2.tier) + ': ' + b2.cells.map((c) => c.id.split(':')[1] + (c.ours ? '*' : '')).join(' '));
 
   if (args.includes('--write')) {
