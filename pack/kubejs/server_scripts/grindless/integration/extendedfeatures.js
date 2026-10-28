@@ -23,13 +23,15 @@
 //   Robust Alloy Materializer   GTM's alloy_blast_smelter recipes with perfect overclocks: cheaper than GTM's Alloy Blast Smelter
 //                         in every era. GTM's type and recipes stay; only the controller is kept out.
 // IV at the earliest (GCYM-style parallel machines, ev.md decision 5), uncraftable today so nothing to raise: Large Cracking
-// Machine (gtceu:cracker), Large Pyrolysis Oven (gtceu:pyrolyse_oven), Expanded Assembly Line (gtceu:assembly_line, needs the
-// addon's LuV wireless optical receptor). If the IV wave wants them, their controller follows GTM's GCYM recipes: IV circuits +
-// the IV machine they enlarge + tungsten steel parts.
+// Machine (gtceu:cracker), Large Pyrolysis Oven (gtceu:pyrolyse_oven). If the IV wave wants them, their controller follows GTM's
+// GCYM recipes: IV circuits + the IV machine they enlarge + tungsten steel parts.
+// Expanded Assembly Line (gtceu:assembly_line, input order does not matter): craftable since package QR-G0, at LuV, in the normal
+// assembly line, with the LuV wireless data receptor, transmissor and Matrix Data Relay it needs for research data
+// (luv/expanded_assembly_line.js). The ZPM, UV and UHV variants of those parts stay without a recipe.
 // Kept: Large Gas Collector (IV recipe: IV circuits, motor, pump and gas collector; air, nether air and ender air, each in its
 // dimension), the universal circuits (assembler, 1 circuit of a tier -> 1 universal circuit in the same #gtceu:circuits/<tier>
-// tag: not a shortcut) and the parts without a recipe (Matrix Data Relay, Power Transformer, LuV-UHV data access and wireless
-// optical hatches, configurable cleaning maintenance hatch). GTM's own cleaning hatch moved from UV to an HV recipe of ours on
+// tag: not a shortcut) and the parts without a recipe (Power Transformer, ZPM-UHV wireless optical hatches, ZPM-UHV data access
+// hatches, configurable cleaning maintenance hatch). GTM's own cleaning hatch moved from UV to an HV recipe of ours on
 // 2026-10-25 (mv/leisure_utility.js, a GregTech Leisure idea), so the addon's configurable one stays without a recipe.
 // Cleaner, but not a server script: MultiblocksConfig in config/extendedfeatures.yaml unregisters the removed machines.
 // Era: never for the removed machines; IV or later for the large ones.

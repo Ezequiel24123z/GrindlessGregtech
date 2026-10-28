@@ -1,0 +1,14 @@
+{
+  "type": "emi:info",
+  "stacks": [
+    "item:extendedfeatures:expanded_assembly_line",
+    "item:extendedfeatures:luv_wireless_data_receptor",
+    "item:extendedfeatures:luv_wireless_data_transmissor",
+    "item:extendedfeatures:matrix_data_relay"
+  ],
+  "text": [
+    "emi.grindless.info.expanded_assembly_line.0",
+    "emi.grindless.info.expanded_assembly_line.1",
+    "emi.grindless.info.expanded_assembly_line.2"
+  ]
+}
