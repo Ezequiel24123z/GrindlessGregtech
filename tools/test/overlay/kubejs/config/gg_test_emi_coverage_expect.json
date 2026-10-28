@@ -762,6 +762,7 @@
     {"id":"gtceu:tritium_removal_facility","kind":"item","needUse":false,"needMade":true,"made":["gtceu:multiblock_info","minecraft:crafting"],"used":[]},
     {"id":"gtceu:triton_geyser_sampler","kind":"item","needUse":false,"needMade":true,"made":["gtceu:multiblock_info","minecraft:crafting"],"used":[]},
     {"id":"gtceu:uhtc_blend_dust","kind":"item","needUse":true,"needMade":true,"made":["gtceu:mixer"],"used":["gtceu:spark_plasma_sintering"]},
+    {"id":"gtceu:uhv_parallel_hatch","kind":"item","needUse":false,"needMade":true,"made":["minecraft:crafting"],"used":[]},
     {"id":"gtceu:uhv_wireless_dynamo_hatch","kind":"item","needUse":false,"needMade":true,"made":["gtceu:assembler"],"used":["gtceu:assembler"]},
     {"id":"gtceu:uhv_wireless_dynamo_hatch_16a","kind":"item","needUse":false,"needMade":true,"made":["gtceu:assembler"],"used":["gtceu:assembler"]},
     {"id":"gtceu:uhv_wireless_dynamo_hatch_4a","kind":"item","needUse":false,"needMade":true,"made":["gtceu:assembler"],"used":["gtceu:assembler"]},

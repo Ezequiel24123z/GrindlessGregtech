@@ -1,4 +1,4 @@
-// priority: -300
+// priority: -350
 // TEST ONLY, MEGA-S spikes (docs/eras/mega.md 3.1). Throwaway registrations, never shipped; ids gtceu:gg_spike_*.
 //   S-M1  gtceu:gg_spike_lcr_chain         a coil machine (Coils.create) on gtceu:large_chemical_reactor with the chain
 //                                          coil parallel -> OC_PERFECT_SUBTICK -> BATCH_MODE

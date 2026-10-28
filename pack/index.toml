@@ -665,6 +665,30 @@ file = "kubejs/assets/grindless/textures/block/machines/rtg/overlay_top_active_e
 hash = "b6f3f2c480a9c07e47a300cc72a2110b36cab57a41bee2c8c3ac996bff160710"
 
 [[files]]
+file = "kubejs/assets/grindless/textures/block/machines/uhv_parallel_hatch/overlay_front.png"
+hash = "093d4e6f5c62d394c11a0dbec44c2f98e6e1aa022b5cd6b9d113136a770cc5ea"
+
+[[files]]
+file = "kubejs/assets/grindless/textures/block/machines/uhv_parallel_hatch/overlay_front_active.png"
+hash = "8c2b0dc4bc82b22706e4a67ef2e6c6f9097c27b1e74447862719bb9981ae533b"
+
+[[files]]
+file = "kubejs/assets/grindless/textures/block/machines/uhv_parallel_hatch/overlay_front_active.png.mcmeta"
+hash = "d1e77f71dc0860d72b053363c7fefc41f2ea8ee6be779921d44f4fd8cba1faf3"
+
+[[files]]
+file = "kubejs/assets/grindless/textures/block/machines/uhv_parallel_hatch/overlay_front_active_emissive.png"
+hash = "9c45a5c94dc1655773be685da49343421531e052aed201ec4c996aa51571f1e7"
+
+[[files]]
+file = "kubejs/assets/grindless/textures/block/machines/uhv_parallel_hatch/overlay_front_active_emissive.png.mcmeta"
+hash = "d1e77f71dc0860d72b053363c7fefc41f2ea8ee6be779921d44f4fd8cba1faf3"
+
+[[files]]
+file = "kubejs/assets/grindless/textures/block/machines/uhv_parallel_hatch/overlay_front_emissive.png"
+hash = "da963211e2d29a1db069c8feb15e8e5c31136f9683b9e1f9028397dfbc12dd86"
+
+[[files]]
 file = "kubejs/assets/grindless/textures/block/machines/wireless/overlay_dynamo.png"
 hash = "26443766e7e351a51a6c7c3eaef8c7ab36c14df09c2c9be84e3b39ea84d2b961"
 
@@ -5393,6 +5417,10 @@ file = "kubejs/client_scripts/grindless/uhv_mercury_lang.js"
 hash = "24815cb24adbdbe06cfd6871041d36d41f87329a020729428cca1ea8afb42c4a"
 
 [[files]]
+file = "kubejs/client_scripts/grindless/uhv_parallel_hatch_lang.js"
+hash = "21ca4097d57bf52026f5e1b0b57d22e31ff147da085b9ce30848630ebb568a9d"
+
+[[files]]
 file = "kubejs/client_scripts/grindless/uhv_photonics_lang.js"
 hash = "6bf967ef7716f5448f875a18a44db479df7b06411e87ed07a9875e03e82bd1d9"
 
@@ -6497,6 +6525,10 @@ file = "kubejs/server_scripts/grindless/uhv/mercury.js"
 hash = "f86a0733c8f18d50a376fcaa3019b129dbb6cff12542943e3742418e0f89b0e7"
 
 [[files]]
+file = "kubejs/server_scripts/grindless/uhv/parallel_hatch.js"
+hash = "6f276ada9b02e50e1e4424a9862e3f33d369d8683160d5811a8f50d4641b2116"
+
+[[files]]
 file = "kubejs/server_scripts/grindless/uhv/photonics.js"
 hash = "68e07c4c955a7e266b0358167e486c47f3e6c49ba511503e459770ff8e9735bf"
 
@@ -6801,6 +6833,10 @@ file = "kubejs/startup_scripts/grindless/lib/generators.js"
 hash = "402c24c6bf10d343328d18ce277478c57f9b983fe3b0104a75cec8fcf35db799"
 
 [[files]]
+file = "kubejs/startup_scripts/grindless/lib/mega.js"
+hash = "1bee8e8c6ecc856303aa5365f5b1e6de9e516a357d87eaaf330d1c21f1c1d990"
+
+[[files]]
 file = "kubejs/startup_scripts/grindless/lib/no_voiding.js"
 hash = "6bdbebffca97ff76447c69e35733eb63b9d16139d83654a4bebf56ac6f3557bd"
 
@@ -6810,7 +6846,7 @@ hash = "e1b314c357892c3eb62496ca43d74fb32423889b577fb84cd6cf6785b060e5c5"
 
 [[files]]
 file = "kubejs/startup_scripts/grindless/lib/parallel_hatch.js"
-hash = "939d59a32fcb75d365c8db4cdd18f2b40ffb22d125d8ca57d3a8172519e99186"
+hash = "c5604d8298e7e9f7361eab0cd3ca95677b612d5f0e38f691389b562f013e2829"
 
 [[files]]
 file = "kubejs/startup_scripts/grindless/lib/patterns.js"

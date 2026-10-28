@@ -1156,3 +1156,16 @@ powershell -NoProfile -ExecutionPolicy Bypass -File tools\assets\Build-UHVGateTe
 |---|---|
 | `block/multiblock/warp_gate/overlay_front*.png` | A ring seen edge-on round a dark gap; active, a violet-white shimmer fills the ring and sweeps. |
 | `block/multiblock/baseline_astrometer/overlay_front*.png` | A dish on a mast looking up at two stars; active, the dish scans and the stars blink. |
+
+## UHV parallel hatch (MEGA-0b)
+
+Procedural, drawn by `Build-UHVParallelHatchTextures.ps1` in GTM's UHV colour; nothing is copied from another mod. GTM ships parallel hatch overlays only up to the UV one, so the UHV hatch (`gtceu:uhv_parallel_hatch`, x1024) needs its own; 2 active frames.
+
+```powershell
+powershell -NoProfile -ExecutionPolicy Bypass -File tools\assets\Build-UHVParallelHatchTextures.ps1
+powershell -NoProfile -ExecutionPolicy Bypass -File tools\assets\Build-UHVParallelHatchTextures.ps1 -Credits
+```
+
+| File (under `textures/`) | Notes |
+|---|---|
+| `block/machines/uhv_parallel_hatch/overlay_front*.png` | A dark panel with four parallel bars of the UHV colour; active, the bars brighten from the top down. |
