@@ -107,9 +107,9 @@
     return pos
   }
   function fill(m) { m.energyContainer.setEnergyStored(m.energyContainer.getEnergyCapacity()) }
-  function fakePlayer(dim, x, y, z) {
+  function fakePlayer(dim, x, y, z, id) {
     var f = { dim: dim, x: x, y: y, z: z, calls: [] }
-    f.getUuid = function () { return 'gg-fake-uiv' }
+    f.getUuid = function () { return 'gg-fake-uiv-' + (id || 'a') }
     f.getLevel = function () { return { getDimension: function () { return f.dim } } }
     f.getX = function () { return f.x }
     f.getY = function () { return f.y }
@@ -265,7 +265,7 @@
       stepAs(f)
       check('ride_there', f.calls.length === 1 && f.dim === FAR, 'calls ' + JSON.stringify(f.calls) + ' now ' + f.dim)
       var farC = { x: FARO.x + 0.5, y: FARO.y, z: FARO.z + 7.5 }
-      var g = fakePlayer(FAR, farC.x, farC.y, farC.z)
+      var g = fakePlayer(FAR, farC.x, farC.y, farC.z, 'b')
       stepAs(g)
       check('ride_back', g.calls.length === 1 && g.dim === SIRIUS, 'calls ' + JSON.stringify(g.calls) + ' now ' + g.dim)
       finish()
@@ -297,18 +297,19 @@
   }
   function request(leg) {
     return function () {
-      if ((S && !S.finished) || global.ggTestUivTravelRequest) { emit('request', 'NOTE', 'already requested or running'); return }
+      if ((S && !S.finished) || global.ggTestUivTravelRequest !== '') { emit('request', 'NOTE', 'already requested or running'); return }
       global.ggTestUivTravelRequest = leg
     }
   }
+  global.ggTestUivTravelRequest = ''
   ServerEvents.customCommand('gg_test_uiv_travel', request('c4'))
   ServerEvents.customCommand('gg_test_uiv_travel_check', request('check'))
   ServerEvents.customCommand('gg_test_uiv_travel_c6', request('c6'))
   ServerEvents.tick(function (event) {
     try {
-      if (global.ggTestUivTravelRequest && (!S || S.finished) && Date.now() - LOADED_AT >= 10000) {
+      if (global.ggTestUivTravelRequest !== '' && (!S || S.finished) && Date.now() - LOADED_AT >= 10000) {
         var leg = global.ggTestUivTravelRequest
-        global.ggTestUivTravelRequest = null
+        global.ggTestUivTravelRequest = ''
         start(event.server, leg)
       }
       if (!S || S.finished || S.leg === 'check') return
