@@ -1,4 +1,4 @@
-// priority: -23086
+// priority: -23088
 // -----------------------------------------------------------------------------------------------
 // Recipes of UEV's fusion (docs/eras/uev.md, machines 14-15, lines 23, 24, 25; package UEV-A7). Machines and ids: startup_scripts/grindless/
 // uev/fusion.js. The rows are in data/grindless/tables/fusion_mk4.json, read at every server load; one recipe per row, id grindless:<name>.

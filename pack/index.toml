@@ -6937,8 +6937,12 @@ file = "kubejs/client_scripts/grindless/uev_fusion_lang.js"
 hash = "a3a5ebe0a31ab125e1f853ecc77273e485bbd58ec236a2579b1f4915bc44a480"
 
 [[files]]
+file = "kubejs/client_scripts/grindless/uev_gate_lang.js"
+hash = "7b3ab36aba6a69a4d061901f05ddb549d9e47e837245ed85509ec11d118f09fb"
+
+[[files]]
 file = "kubejs/client_scripts/grindless/uev_isotopes_lang.js"
-hash = "775814439e08bb9c40ef3ecb74b0bcddf86b2b7a218d3fb6b39be0fad0a39062"
+hash = "75c1711aa8da01a87c1142641d435c67f25b9ac8f13316310aefde4f60b8547a"
 
 [[files]]
 file = "kubejs/client_scripts/grindless/uev_megabar_lang.js"
@@ -7454,7 +7458,7 @@ hash = "1f4b256531a0b42a6ecf399e9b692d9e4730bd4102e53aab3e1fa2c999b69e9d"
 
 [[files]]
 file = "kubejs/data/grindless/tables/hidden_until.json"
-hash = "0087c18acd2deb26409d9260b714438bd7030e0803220b153ae20b7b7e11540e"
+hash = "9e322faadadb9f6c8c74a98773b1f63e56ff8aaef17f00fff2d31d7ce6a60be4"
 
 [[files]]
 file = "kubejs/data/grindless/tables/horizon_collector.json"
@@ -7850,7 +7854,7 @@ hash = "b107386cb085933ee476734075299560857c078a56c4e938ebf0cd7a7dc10a84"
 
 [[files]]
 file = "kubejs/server_scripts/grindless/integration/hidden.js"
-hash = "0a09cb5529b307cac48b9b1337fa5d710433ca6efd5139f999f90103824406c7"
+hash = "bd4abb496f9e370fe77d4d722be454bf5b7d4ce84a8e9a7d62ffa9384ef81164"
 
 [[files]]
 file = "kubejs/server_scripts/grindless/integration/ironfurnaces.js"
@@ -8226,11 +8230,15 @@ hash = "84078b49738b4212996c495572caa1fcec675fb26d6479e29a523d20d11b7705"
 
 [[files]]
 file = "kubejs/server_scripts/grindless/uev/fusion.js"
-hash = "aea18430829b0940abfea23e1a8b61ba954a4ea57c450c930a7cd4138d5c8978"
+hash = "daf93b6f55bd89a30c164b6a60c9bb14356f190bb8445b15b52ed4cc8489891a"
+
+[[files]]
+file = "kubejs/server_scripts/grindless/uev/gate.js"
+hash = "f40261693ed83d4939115cec91ed276e256f7f37dd07da43de4145e74dad00af"
 
 [[files]]
 file = "kubejs/server_scripts/grindless/uev/isotopes.js"
-hash = "3be9da0025f9e1d95782dcaa6c6373c9b44664f8631d9d81682b91f941cd76a7"
+hash = "08507a37039e16b2a3d16fd1de0e455fb99891a8bfd24928a7eb277932297b08"
 
 [[files]]
 file = "kubejs/server_scripts/grindless/uev/megabar.js"
@@ -8270,7 +8278,7 @@ hash = "8c8d2139def12eca919a70d5a45ac5086224cf2fe9e9c99b7374111b77275724"
 
 [[files]]
 file = "kubejs/server_scripts/grindless/uhv/gate.js"
-hash = "ada30fd2ec0e4fe80bae2c565a70620aaf484190ff7902c50e62739442634da6"
+hash = "5e2d4b6d56394365ee25a4686cc228280cd6bcbb03117462f793cffd76cf5ac2"
 
 [[files]]
 file = "kubejs/server_scripts/grindless/uhv/mercury.js"
@@ -8886,7 +8894,7 @@ hash = "33c7f0385b9a7ec57f6cd3ccd693897a4d0e70b40a30d7c10fa408890fb779b5"
 
 [[files]]
 file = "kubejs/startup_scripts/grindless/uhv/gate.js"
-hash = "0e69a994664a3cfa97f185c237280f8180e0529b3670d579981f3496bf726690"
+hash = "b70517b9c0c8353f2479e7e9cd71e50b26741a845933408faf1a905a8900e29a"
 
 [[files]]
 file = "kubejs/startup_scripts/grindless/uhv/mercury.js"

@@ -4,8 +4,8 @@
 //
 //   kubejs custom_command gg_test_hidden      ->  GGTEST|hidden|<check>|PASS|FAIL|NOTE ... and GGTEST|hidden|DONE
 //
-//   table           server_scripts/grindless/integration/hidden.js read kubejs/data/grindless/tables/hidden_until.json, is implemented up to UHV
-//                   (v0.11.0's switch) and hides something
+//   table           server_scripts/grindless/integration/hidden.js read kubejs/data/grindless/tables/hidden_until.json, is implemented up to UEV
+//                   (v0.12.0's switch) and hides something
 //   tag_b / tag_c   later-era items and a fluid (GCYR's station keycard, hidden exactly while tables/stations.json is off; GT--'s plutonium fuel, UIV; GCYR's drone hangar, never;
 //                   Proxima b's regolith and the space elevator are shown since UHV) and junk (a GCYR satellite, scrap, damascus steel, molten stainless steel, GTCA's dead samarium-terbium branch, U-235's ore
 //                   forms) are in #c:hidden_from_recipe_viewers
@@ -71,7 +71,7 @@
       check('table', false, 'global.grindless.hidden is not published (hidden.js did not load)')
       return
     }
-    check('table', H.groups.length > 0 && H.hidden.groups > 0 && H.implementedEra === 'uhv',
+    check('table', H.groups.length > 0 && H.hidden.groups > 0 && H.implementedEra === 'uev',
       H.groups.length + ' groups in the table, ' + H.hidden.groups + ' hidden (' + H.hidden.items.length + ' items, ' + H.hidden.fluids.length +
       ' fluids), implemented up to ' + H.implementedEra)
 

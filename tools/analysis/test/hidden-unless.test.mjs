@@ -51,8 +51,8 @@ function run({ stations = readPack(STATIONS), table = readPack(TABLE) } = {}) {
 
 const fixture = (unless) => ({
   groups: [
-    { material: 'grindless:switched', until: 'uev', reason: 'r', items: ['grindless:switched'], fluids: [], ...(unless ? { unless } : {}) },
-    { material: 'grindless:plain', until: 'uev', reason: 'r', items: ['grindless:plain'], fluids: [] },
+    { material: 'grindless:switched', until: 'uiv', reason: 'r', items: ['grindless:switched'], fluids: [], ...(unless ? { unless } : {}) },
+    { material: 'grindless:plain', until: 'uiv', reason: 'r', items: ['grindless:plain'], fluids: [] },
   ],
 });
 
