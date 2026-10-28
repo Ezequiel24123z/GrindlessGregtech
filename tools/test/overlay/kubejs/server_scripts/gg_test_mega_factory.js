@@ -165,7 +165,7 @@
     return s === null ? 'no recipe' : 'recipe ' + s.id + ' parallels ' + s.parallels + ' ocLevel ' + s.oc + ' duration ' + s.duration + ' EU/t ' + s.eut
   }
   function coolant(u, mb) {
-    u.tankFluid.tank.setFluidInTank(0, mb > 0 ? Fluid.of('gtceu:pcb_coolant', mb).getFluidStack() : Fluid.empty().getFluidStack())
+    u.tankFluid.tank.setFluidInTank(0, mb > 0 ? Fluid.of('gtceu:pcb_coolant', mb).getFluidStack() : Java.loadClass('net.minecraftforge.fluids.FluidStack').EMPTY)
   }
   function coolantLeft(u) {
     try { return Number(u.tankFluid.tank.getFluidInTank(0).getAmount()) } catch (e) { return NaN }
