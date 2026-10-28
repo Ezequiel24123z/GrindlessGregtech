@@ -1,0 +1,1797 @@
+{
+  "tier": "uev",
+  "title": "Reachability: UEV (Earth and Earth orbit, then Alpha Centauri AB and Barnard b, then Sirius B)",
+  "extends": "uhv",
+  "inheritTargets": true,
+  "note": "UEV-C1 (docs/eras/uev.md \"Validator\", \"Gate to UIV\"): UHV's pack plus the 25 UEV machines, the three trips, the UEV wireless tier and the checks of the Validator. Substages: uev (Earth and Earth orbit), uev-alpha and uev-barnard (parallel siblings after the DFD Mk1), uev-sirius (after uev-barnard).",
+  "conditions": {
+    "dimension": {
+      "asKeysFor": [
+        "gcyr:luna",
+        "gcyr:mars",
+        "gcyr:venus",
+        "gcyr:mercury",
+        "minecraft:the_end",
+        "minecraft:the_nether",
+        "${orbits}",
+        "${places}"
+      ],
+      "note": "UHV's list: its orbit and place tokens already cover the UEV orbits and Barnard b."
+    }
+  },
+  "eraOrder": [
+    "steam",
+    "lv",
+    "mv",
+    "hv",
+    "ev",
+    "ev-mars",
+    "iv",
+    "iv-venus",
+    "iv-mercury",
+    "luv",
+    "luv-orbit",
+    "luv-belt",
+    "luv-io",
+    "luv-europa",
+    "luv-ganymede",
+    "luv-io-orbit",
+    "zpm",
+    "zpm-saturn",
+    "zpm-uranus",
+    "uv",
+    "uv-neptune",
+    "uv-pluto",
+    "uhv",
+    "uhv-mercury",
+    "uhv-proxima",
+    "uev",
+    "uev-alpha",
+    "uev-barnard",
+    "uev-sirius",
+    "uiv",
+    "uxv",
+    "opv",
+    "max"
+  ],
+  "eraSiblings": [
+    [
+      "iv-venus",
+      "iv-mercury"
+    ],
+    [
+      "luv-europa",
+      "luv-ganymede"
+    ],
+    [
+      "uhv-mercury",
+      "uhv-proxima"
+    ],
+    [
+      "uev-alpha",
+      "uev-barnard"
+    ]
+  ],
+  "packages": {
+    "A1": {
+      "label": "isotopes (calutron)",
+      "landedWhen": [
+        "gtceu:calutron"
+      ]
+    },
+    "A2": {
+      "label": "superheavy chain",
+      "landedWhen": [
+        "gtceu:heavy_ion_cyclotron",
+        "gtceu:recoil_separator",
+        "gtceu:superheavy_chemistry_lab"
+      ]
+    },
+    "A3": {
+      "label": "megabar press",
+      "landedWhen": [
+        "gtceu:megabar_press"
+      ]
+    },
+    "A4": {
+      "label": "electron beam furnace and single-crystal foundry",
+      "landedWhen": [
+        "gtceu:electron_beam_furnace",
+        "gtceu:single_crystal_foundry"
+      ]
+    },
+    "A5": {
+      "label": "magnets and composites",
+      "landedWhen": [
+        "gtceu:nitride_magnet_works",
+        "gtceu:sic_fibre_plant",
+        "gtceu:cvi_furnace"
+      ]
+    },
+    "A6": {
+      "label": "photonics",
+      "landedWhen": [
+        "gtceu:snspd_foundry",
+        "gtceu:vdw_stacker",
+        "gtceu:photonic_integration_hall"
+      ]
+    },
+    "A7": {
+      "label": "fusion Mk4 and the polariser",
+      "landedWhen": [
+        "gtceu:uev_fusion_reactor",
+        "gtceu:helium3_polariser"
+      ]
+    },
+    "A8": {
+      "label": "Earth orbit",
+      "landedWhen": [
+        "gtceu:quantum_gas_lab",
+        "gtceu:entanglement_station"
+      ]
+    },
+    "B1": {
+      "label": "travel, stations, places and sunlight",
+      "landedWhen": [
+        "grindless:dfd_mk1_motor",
+        "grindless:dfd_mk2_motor"
+      ]
+    },
+    "B2": {
+      "label": "Alpha Centauri AB",
+      "landedWhen": [
+        "gtceu:nebula_collector",
+        "gtceu:interstellar_dust_lab",
+        "gtceu:pulsar_timing_station"
+      ]
+    },
+    "B3": {
+      "label": "Barnard b",
+      "landedWhen": [
+        "gtceu:barnard_core_drill",
+        "gtceu:carbonyl_refinery"
+      ]
+    },
+    "B4": {
+      "label": "Sirius B",
+      "landedWhen": [
+        "gtceu:white_dwarf_spectrograph",
+        "gtceu:degenerate_harvester",
+        "gtceu:containment_works"
+      ]
+    },
+    "B5": {
+      "label": "the gate to UIV",
+      "landedWhen": [
+        "gtceu:uiv_machine_casing"
+      ]
+    },
+    "W": {
+      "label": "UEV wireless tier",
+      "landedWhen": [
+        "grindless:uev_smes_cell"
+      ]
+    }
+  },
+  "machines": [
+    {
+      "machine": "gtceu:calutron",
+      "types": [
+        "gtceu:calutron_separation"
+      ],
+      "maxEUt": 1966080,
+      "needs": [
+        "eu:uhv"
+      ],
+      "partsFromStructure": true,
+      "partAbilities": {
+        "energy_input": [
+          "gtceu:uv_energy_input_hatch",
+          "gtceu:uv_energy_input_hatch_4a",
+          "gtceu:uv_energy_input_hatch_16a",
+          "gtceu:uv_wireless_energy_hatch",
+          "gtceu:uv_wireless_energy_hatch_4a",
+          "gtceu:uv_wireless_energy_hatch_16a",
+          "gtceu:uv_wireless_energy_hatch_64a",
+          "gtceu:uhv_energy_input_hatch",
+          "gtceu:uhv_energy_input_hatch_4a",
+          "gtceu:uhv_energy_input_hatch_16a",
+          "gtceu:uhv_wireless_energy_hatch",
+          "gtceu:uhv_wireless_energy_hatch_4a",
+          "gtceu:uhv_wireless_energy_hatch_16a",
+          "gtceu:uhv_wireless_energy_hatch_64a"
+        ]
+      },
+      "package": "A1",
+      "note": "Machine 1."
+    },
+    {
+      "machine": "gtceu:heavy_ion_cyclotron",
+      "types": [
+        "gtceu:heavy_ion_irradiation"
+      ],
+      "maxEUt": 7864320,
+      "needs": [
+        "eu:uhv"
+      ],
+      "partsFromStructure": true,
+      "partAbilities": {
+        "energy_input": [
+          "gtceu:uv_energy_input_hatch",
+          "gtceu:uv_energy_input_hatch_4a",
+          "gtceu:uv_energy_input_hatch_16a",
+          "gtceu:uv_wireless_energy_hatch",
+          "gtceu:uv_wireless_energy_hatch_4a",
+          "gtceu:uv_wireless_energy_hatch_16a",
+          "gtceu:uv_wireless_energy_hatch_64a",
+          "gtceu:uhv_energy_input_hatch",
+          "gtceu:uhv_energy_input_hatch_4a",
+          "gtceu:uhv_energy_input_hatch_16a",
+          "gtceu:uhv_wireless_energy_hatch",
+          "gtceu:uhv_wireless_energy_hatch_4a",
+          "gtceu:uhv_wireless_energy_hatch_16a",
+          "gtceu:uhv_wireless_energy_hatch_64a"
+        ]
+      },
+      "package": "A2",
+      "note": "Machine 2."
+    },
+    {
+      "machine": "gtceu:recoil_separator",
+      "types": [
+        "gtceu:recoil_separation"
+      ],
+      "maxEUt": 3932160,
+      "needs": [
+        "eu:uhv"
+      ],
+      "partsFromStructure": true,
+      "partAbilities": {
+        "energy_input": [
+          "gtceu:uv_energy_input_hatch",
+          "gtceu:uv_energy_input_hatch_4a",
+          "gtceu:uv_energy_input_hatch_16a",
+          "gtceu:uv_wireless_energy_hatch",
+          "gtceu:uv_wireless_energy_hatch_4a",
+          "gtceu:uv_wireless_energy_hatch_16a",
+          "gtceu:uv_wireless_energy_hatch_64a",
+          "gtceu:uhv_energy_input_hatch",
+          "gtceu:uhv_energy_input_hatch_4a",
+          "gtceu:uhv_energy_input_hatch_16a",
+          "gtceu:uhv_wireless_energy_hatch",
+          "gtceu:uhv_wireless_energy_hatch_4a",
+          "gtceu:uhv_wireless_energy_hatch_16a",
+          "gtceu:uhv_wireless_energy_hatch_64a"
+        ]
+      },
+      "package": "A2",
+      "note": "Machine 3."
+    },
+    {
+      "machine": "gtceu:superheavy_chemistry_lab",
+      "types": [
+        "gtceu:superheavy_chemistry"
+      ],
+      "maxEUt": 3932160,
+      "needs": [
+        "eu:uhv"
+      ],
+      "partsFromStructure": true,
+      "partAbilities": {
+        "energy_input": [
+          "gtceu:uv_energy_input_hatch",
+          "gtceu:uv_energy_input_hatch_4a",
+          "gtceu:uv_energy_input_hatch_16a",
+          "gtceu:uv_wireless_energy_hatch",
+          "gtceu:uv_wireless_energy_hatch_4a",
+          "gtceu:uv_wireless_energy_hatch_16a",
+          "gtceu:uv_wireless_energy_hatch_64a",
+          "gtceu:uhv_energy_input_hatch",
+          "gtceu:uhv_energy_input_hatch_4a",
+          "gtceu:uhv_energy_input_hatch_16a",
+          "gtceu:uhv_wireless_energy_hatch",
+          "gtceu:uhv_wireless_energy_hatch_4a",
+          "gtceu:uhv_wireless_energy_hatch_16a",
+          "gtceu:uhv_wireless_energy_hatch_64a"
+        ]
+      },
+      "package": "A2",
+      "note": "Machine 4."
+    },
+    {
+      "machine": "gtceu:megabar_press",
+      "types": [
+        "gtceu:megabar_synthesis"
+      ],
+      "maxEUt": 7864320,
+      "needs": [
+        "eu:uhv"
+      ],
+      "partsFromStructure": true,
+      "partAbilities": {
+        "energy_input": [
+          "gtceu:uv_energy_input_hatch",
+          "gtceu:uv_energy_input_hatch_4a",
+          "gtceu:uv_energy_input_hatch_16a",
+          "gtceu:uv_wireless_energy_hatch",
+          "gtceu:uv_wireless_energy_hatch_4a",
+          "gtceu:uv_wireless_energy_hatch_16a",
+          "gtceu:uv_wireless_energy_hatch_64a",
+          "gtceu:uhv_energy_input_hatch",
+          "gtceu:uhv_energy_input_hatch_4a",
+          "gtceu:uhv_energy_input_hatch_16a",
+          "gtceu:uhv_wireless_energy_hatch",
+          "gtceu:uhv_wireless_energy_hatch_4a",
+          "gtceu:uhv_wireless_energy_hatch_16a",
+          "gtceu:uhv_wireless_energy_hatch_64a"
+        ]
+      },
+      "package": "A3",
+      "note": "Machine 5."
+    },
+    {
+      "machine": "gtceu:electron_beam_furnace",
+      "types": [
+        "gtceu:electron_beam_refining"
+      ],
+      "maxEUt": 1966080,
+      "needs": [
+        "eu:uhv"
+      ],
+      "partsFromStructure": true,
+      "partAbilities": {
+        "energy_input": [
+          "gtceu:uv_energy_input_hatch",
+          "gtceu:uv_energy_input_hatch_4a",
+          "gtceu:uv_energy_input_hatch_16a",
+          "gtceu:uv_wireless_energy_hatch",
+          "gtceu:uv_wireless_energy_hatch_4a",
+          "gtceu:uv_wireless_energy_hatch_16a",
+          "gtceu:uv_wireless_energy_hatch_64a",
+          "gtceu:uhv_energy_input_hatch",
+          "gtceu:uhv_energy_input_hatch_4a",
+          "gtceu:uhv_energy_input_hatch_16a",
+          "gtceu:uhv_wireless_energy_hatch",
+          "gtceu:uhv_wireless_energy_hatch_4a",
+          "gtceu:uhv_wireless_energy_hatch_16a",
+          "gtceu:uhv_wireless_energy_hatch_64a"
+        ]
+      },
+      "package": "A4",
+      "note": "Machine 6."
+    },
+    {
+      "machine": "gtceu:single_crystal_foundry",
+      "types": [
+        "gtceu:single_crystal_casting"
+      ],
+      "maxEUt": 3932160,
+      "needs": [
+        "eu:uhv"
+      ],
+      "partsFromStructure": true,
+      "partAbilities": {
+        "energy_input": [
+          "gtceu:uv_energy_input_hatch",
+          "gtceu:uv_energy_input_hatch_4a",
+          "gtceu:uv_energy_input_hatch_16a",
+          "gtceu:uv_wireless_energy_hatch",
+          "gtceu:uv_wireless_energy_hatch_4a",
+          "gtceu:uv_wireless_energy_hatch_16a",
+          "gtceu:uv_wireless_energy_hatch_64a",
+          "gtceu:uhv_energy_input_hatch",
+          "gtceu:uhv_energy_input_hatch_4a",
+          "gtceu:uhv_energy_input_hatch_16a",
+          "gtceu:uhv_wireless_energy_hatch",
+          "gtceu:uhv_wireless_energy_hatch_4a",
+          "gtceu:uhv_wireless_energy_hatch_16a",
+          "gtceu:uhv_wireless_energy_hatch_64a"
+        ]
+      },
+      "package": "A4",
+      "note": "Machine 7."
+    },
+    {
+      "machine": "gtceu:nitride_magnet_works",
+      "types": [
+        "gtceu:nitride_magnet_synthesis"
+      ],
+      "maxEUt": 1966080,
+      "needs": [
+        "eu:uhv"
+      ],
+      "partsFromStructure": true,
+      "partAbilities": {
+        "energy_input": [
+          "gtceu:uv_energy_input_hatch",
+          "gtceu:uv_energy_input_hatch_4a",
+          "gtceu:uv_energy_input_hatch_16a",
+          "gtceu:uv_wireless_energy_hatch",
+          "gtceu:uv_wireless_energy_hatch_4a",
+          "gtceu:uv_wireless_energy_hatch_16a",
+          "gtceu:uv_wireless_energy_hatch_64a",
+          "gtceu:uhv_energy_input_hatch",
+          "gtceu:uhv_energy_input_hatch_4a",
+          "gtceu:uhv_energy_input_hatch_16a",
+          "gtceu:uhv_wireless_energy_hatch",
+          "gtceu:uhv_wireless_energy_hatch_4a",
+          "gtceu:uhv_wireless_energy_hatch_16a",
+          "gtceu:uhv_wireless_energy_hatch_64a"
+        ]
+      },
+      "package": "A5",
+      "note": "Machine 8."
+    },
+    {
+      "machine": "gtceu:sic_fibre_plant",
+      "types": [
+        "gtceu:sic_fibre_spinning"
+      ],
+      "maxEUt": 1966080,
+      "needs": [
+        "eu:uhv"
+      ],
+      "partsFromStructure": true,
+      "partAbilities": {
+        "energy_input": [
+          "gtceu:uv_energy_input_hatch",
+          "gtceu:uv_energy_input_hatch_4a",
+          "gtceu:uv_energy_input_hatch_16a",
+          "gtceu:uv_wireless_energy_hatch",
+          "gtceu:uv_wireless_energy_hatch_4a",
+          "gtceu:uv_wireless_energy_hatch_16a",
+          "gtceu:uv_wireless_energy_hatch_64a",
+          "gtceu:uhv_energy_input_hatch",
+          "gtceu:uhv_energy_input_hatch_4a",
+          "gtceu:uhv_energy_input_hatch_16a",
+          "gtceu:uhv_wireless_energy_hatch",
+          "gtceu:uhv_wireless_energy_hatch_4a",
+          "gtceu:uhv_wireless_energy_hatch_16a",
+          "gtceu:uhv_wireless_energy_hatch_64a"
+        ]
+      },
+      "package": "A5",
+      "note": "Machine 9."
+    },
+    {
+      "machine": "gtceu:cvi_furnace",
+      "types": [
+        "gtceu:chemical_vapour_infiltration"
+      ],
+      "maxEUt": 1966080,
+      "needs": [
+        "eu:uhv"
+      ],
+      "partsFromStructure": true,
+      "partAbilities": {
+        "energy_input": [
+          "gtceu:uv_energy_input_hatch",
+          "gtceu:uv_energy_input_hatch_4a",
+          "gtceu:uv_energy_input_hatch_16a",
+          "gtceu:uv_wireless_energy_hatch",
+          "gtceu:uv_wireless_energy_hatch_4a",
+          "gtceu:uv_wireless_energy_hatch_16a",
+          "gtceu:uv_wireless_energy_hatch_64a",
+          "gtceu:uhv_energy_input_hatch",
+          "gtceu:uhv_energy_input_hatch_4a",
+          "gtceu:uhv_energy_input_hatch_16a",
+          "gtceu:uhv_wireless_energy_hatch",
+          "gtceu:uhv_wireless_energy_hatch_4a",
+          "gtceu:uhv_wireless_energy_hatch_16a",
+          "gtceu:uhv_wireless_energy_hatch_64a"
+        ]
+      },
+      "package": "A5",
+      "note": "Machine 10."
+    },
+    {
+      "machine": "gtceu:snspd_foundry",
+      "types": [
+        "gtceu:snspd_fabrication"
+      ],
+      "maxEUt": 1966080,
+      "needs": [
+        "eu:uhv"
+      ],
+      "partsFromStructure": true,
+      "partAbilities": {
+        "energy_input": [
+          "gtceu:uv_energy_input_hatch",
+          "gtceu:uv_energy_input_hatch_4a",
+          "gtceu:uv_energy_input_hatch_16a",
+          "gtceu:uv_wireless_energy_hatch",
+          "gtceu:uv_wireless_energy_hatch_4a",
+          "gtceu:uv_wireless_energy_hatch_16a",
+          "gtceu:uv_wireless_energy_hatch_64a",
+          "gtceu:uhv_energy_input_hatch",
+          "gtceu:uhv_energy_input_hatch_4a",
+          "gtceu:uhv_energy_input_hatch_16a",
+          "gtceu:uhv_wireless_energy_hatch",
+          "gtceu:uhv_wireless_energy_hatch_4a",
+          "gtceu:uhv_wireless_energy_hatch_16a",
+          "gtceu:uhv_wireless_energy_hatch_64a"
+        ]
+      },
+      "package": "A6",
+      "note": "Machine 11."
+    },
+    {
+      "machine": "gtceu:vdw_stacker",
+      "types": [
+        "gtceu:vdw_assembly"
+      ],
+      "maxEUt": 1966080,
+      "needs": [
+        "eu:uhv"
+      ],
+      "partsFromStructure": true,
+      "partAbilities": {
+        "energy_input": [
+          "gtceu:uv_energy_input_hatch",
+          "gtceu:uv_energy_input_hatch_4a",
+          "gtceu:uv_energy_input_hatch_16a",
+          "gtceu:uv_wireless_energy_hatch",
+          "gtceu:uv_wireless_energy_hatch_4a",
+          "gtceu:uv_wireless_energy_hatch_16a",
+          "gtceu:uv_wireless_energy_hatch_64a",
+          "gtceu:uhv_energy_input_hatch",
+          "gtceu:uhv_energy_input_hatch_4a",
+          "gtceu:uhv_energy_input_hatch_16a",
+          "gtceu:uhv_wireless_energy_hatch",
+          "gtceu:uhv_wireless_energy_hatch_4a",
+          "gtceu:uhv_wireless_energy_hatch_16a",
+          "gtceu:uhv_wireless_energy_hatch_64a"
+        ]
+      },
+      "package": "A6",
+      "note": "Machine 12."
+    },
+    {
+      "machine": "gtceu:photonic_integration_hall",
+      "types": [
+        "gtceu:photonic_integration"
+      ],
+      "maxEUt": 1966080,
+      "needs": [
+        "eu:uhv"
+      ],
+      "partsFromStructure": true,
+      "partAbilities": {
+        "energy_input": [
+          "gtceu:uv_energy_input_hatch",
+          "gtceu:uv_energy_input_hatch_4a",
+          "gtceu:uv_energy_input_hatch_16a",
+          "gtceu:uv_wireless_energy_hatch",
+          "gtceu:uv_wireless_energy_hatch_4a",
+          "gtceu:uv_wireless_energy_hatch_16a",
+          "gtceu:uv_wireless_energy_hatch_64a",
+          "gtceu:uhv_energy_input_hatch",
+          "gtceu:uhv_energy_input_hatch_4a",
+          "gtceu:uhv_energy_input_hatch_16a",
+          "gtceu:uhv_wireless_energy_hatch",
+          "gtceu:uhv_wireless_energy_hatch_4a",
+          "gtceu:uhv_wireless_energy_hatch_16a",
+          "gtceu:uhv_wireless_energy_hatch_64a"
+        ]
+      },
+      "package": "A6",
+      "note": "Machine 13."
+    },
+    {
+      "machine": "gtceu:helium3_polariser",
+      "types": [
+        "gtceu:spin_polarisation"
+      ],
+      "maxEUt": 1966080,
+      "needs": [
+        "eu:uhv"
+      ],
+      "partsFromStructure": true,
+      "partAbilities": {
+        "energy_input": [
+          "gtceu:uv_energy_input_hatch",
+          "gtceu:uv_energy_input_hatch_4a",
+          "gtceu:uv_energy_input_hatch_16a",
+          "gtceu:uv_wireless_energy_hatch",
+          "gtceu:uv_wireless_energy_hatch_4a",
+          "gtceu:uv_wireless_energy_hatch_16a",
+          "gtceu:uv_wireless_energy_hatch_64a",
+          "gtceu:uhv_energy_input_hatch",
+          "gtceu:uhv_energy_input_hatch_4a",
+          "gtceu:uhv_energy_input_hatch_16a",
+          "gtceu:uhv_wireless_energy_hatch",
+          "gtceu:uhv_wireless_energy_hatch_4a",
+          "gtceu:uhv_wireless_energy_hatch_16a",
+          "gtceu:uhv_wireless_energy_hatch_64a"
+        ]
+      },
+      "package": "A7",
+      "note": "Machine 14."
+    },
+    {
+      "machine": "gtceu:uev_fusion_reactor",
+      "types": [
+        "gtceu:fusion_reactor"
+      ],
+      "maxEUt": 7864320,
+      "needs": [
+        "eu:uhv"
+      ],
+      "partsFromStructure": true,
+      "partAbilities": {
+        "energy_input": [
+          "gtceu:uv_energy_input_hatch",
+          "gtceu:uv_energy_input_hatch_4a",
+          "gtceu:uv_energy_input_hatch_16a",
+          "gtceu:uv_wireless_energy_hatch",
+          "gtceu:uv_wireless_energy_hatch_4a",
+          "gtceu:uv_wireless_energy_hatch_16a",
+          "gtceu:uv_wireless_energy_hatch_64a",
+          "gtceu:uhv_energy_input_hatch",
+          "gtceu:uhv_energy_input_hatch_4a",
+          "gtceu:uhv_energy_input_hatch_16a",
+          "gtceu:uhv_wireless_energy_hatch",
+          "gtceu:uhv_wireless_energy_hatch_4a",
+          "gtceu:uhv_wireless_energy_hatch_16a",
+          "gtceu:uhv_wireless_energy_hatch_64a"
+        ]
+      },
+      "package": "A7",
+      "note": "Machine 15: the Mk4 ring (tier 10); its three rows are premixed and start from its own buffer."
+    },
+    {
+      "machine": "gtceu:quantum_gas_lab",
+      "types": [
+        "gtceu:quantum_degenerate_gas"
+      ],
+      "maxEUt": 1966080,
+      "needs": [
+        "eu:uhv"
+      ],
+      "partsFromStructure": true,
+      "partAbilities": {
+        "energy_input": [
+          "gtceu:uv_energy_input_hatch",
+          "gtceu:uv_energy_input_hatch_4a",
+          "gtceu:uv_energy_input_hatch_16a",
+          "gtceu:uv_wireless_energy_hatch",
+          "gtceu:uv_wireless_energy_hatch_4a",
+          "gtceu:uv_wireless_energy_hatch_16a",
+          "gtceu:uv_wireless_energy_hatch_64a",
+          "gtceu:uhv_energy_input_hatch",
+          "gtceu:uhv_energy_input_hatch_4a",
+          "gtceu:uhv_energy_input_hatch_16a",
+          "gtceu:uhv_wireless_energy_hatch",
+          "gtceu:uhv_wireless_energy_hatch_4a",
+          "gtceu:uhv_wireless_energy_hatch_16a",
+          "gtceu:uhv_wireless_energy_hatch_64a"
+        ]
+      },
+      "package": "A8",
+      "note": "Machine 16."
+    },
+    {
+      "machine": "gtceu:entanglement_station",
+      "types": [
+        "gtceu:entanglement_distribution"
+      ],
+      "maxEUt": 3932160,
+      "needs": [
+        "eu:uhv"
+      ],
+      "partsFromStructure": true,
+      "partAbilities": {
+        "energy_input": [
+          "gtceu:uv_energy_input_hatch",
+          "gtceu:uv_energy_input_hatch_4a",
+          "gtceu:uv_energy_input_hatch_16a",
+          "gtceu:uv_wireless_energy_hatch",
+          "gtceu:uv_wireless_energy_hatch_4a",
+          "gtceu:uv_wireless_energy_hatch_16a",
+          "gtceu:uv_wireless_energy_hatch_64a",
+          "gtceu:uhv_energy_input_hatch",
+          "gtceu:uhv_energy_input_hatch_4a",
+          "gtceu:uhv_energy_input_hatch_16a",
+          "gtceu:uhv_wireless_energy_hatch",
+          "gtceu:uhv_wireless_energy_hatch_4a",
+          "gtceu:uhv_wireless_energy_hatch_16a",
+          "gtceu:uhv_wireless_energy_hatch_64a"
+        ]
+      },
+      "package": "A8",
+      "note": "Machine 17."
+    },
+    {
+      "machine": "gtceu:nebula_collector",
+      "types": [
+        "gtceu:nebula_collection"
+      ],
+      "maxEUt": 7864320,
+      "needs": [
+        "eu:uev"
+      ],
+      "partsFromStructure": true,
+      "partAbilities": {
+        "energy_input": [
+          "gtceu:uhv_energy_input_hatch",
+          "gtceu:uhv_energy_input_hatch_4a",
+          "gtceu:uhv_energy_input_hatch_16a",
+          "gtceu:uhv_wireless_energy_hatch",
+          "gtceu:uhv_wireless_energy_hatch_4a",
+          "gtceu:uhv_wireless_energy_hatch_16a",
+          "gtceu:uhv_wireless_energy_hatch_64a",
+          "gtceu:uev_energy_input_hatch",
+          "gtceu:uev_energy_input_hatch_16a",
+          "gtceu:uev_wireless_energy_hatch",
+          "gtceu:uev_wireless_energy_hatch_4a",
+          "gtceu:uev_wireless_energy_hatch_16a",
+          "gtceu:uev_wireless_energy_hatch_64a"
+        ]
+      },
+      "package": "B2",
+      "note": "Machine 18."
+    },
+    {
+      "machine": "gtceu:interstellar_dust_lab",
+      "types": [
+        "gtceu:interstellar_dust_analysis"
+      ],
+      "maxEUt": 7864320,
+      "needs": [
+        "eu:uev"
+      ],
+      "partsFromStructure": true,
+      "partAbilities": {
+        "energy_input": [
+          "gtceu:uhv_energy_input_hatch",
+          "gtceu:uhv_energy_input_hatch_4a",
+          "gtceu:uhv_energy_input_hatch_16a",
+          "gtceu:uhv_wireless_energy_hatch",
+          "gtceu:uhv_wireless_energy_hatch_4a",
+          "gtceu:uhv_wireless_energy_hatch_16a",
+          "gtceu:uhv_wireless_energy_hatch_64a",
+          "gtceu:uev_energy_input_hatch",
+          "gtceu:uev_energy_input_hatch_16a",
+          "gtceu:uev_wireless_energy_hatch",
+          "gtceu:uev_wireless_energy_hatch_4a",
+          "gtceu:uev_wireless_energy_hatch_16a",
+          "gtceu:uev_wireless_energy_hatch_64a"
+        ]
+      },
+      "package": "B2",
+      "note": "Machine 19."
+    },
+    {
+      "machine": "gtceu:pulsar_timing_station",
+      "types": [
+        "gtceu:pulsar_timing"
+      ],
+      "maxEUt": 7864320,
+      "needs": [
+        "eu:uev"
+      ],
+      "partsFromStructure": true,
+      "partAbilities": {
+        "energy_input": [
+          "gtceu:uhv_energy_input_hatch",
+          "gtceu:uhv_energy_input_hatch_4a",
+          "gtceu:uhv_energy_input_hatch_16a",
+          "gtceu:uhv_wireless_energy_hatch",
+          "gtceu:uhv_wireless_energy_hatch_4a",
+          "gtceu:uhv_wireless_energy_hatch_16a",
+          "gtceu:uhv_wireless_energy_hatch_64a",
+          "gtceu:uev_energy_input_hatch",
+          "gtceu:uev_energy_input_hatch_16a",
+          "gtceu:uev_wireless_energy_hatch",
+          "gtceu:uev_wireless_energy_hatch_4a",
+          "gtceu:uev_wireless_energy_hatch_16a",
+          "gtceu:uev_wireless_energy_hatch_64a"
+        ]
+      },
+      "package": "B2",
+      "note": "Machine 20."
+    },
+    {
+      "machine": "gtceu:barnard_core_drill",
+      "types": [
+        "gtceu:barnard_core_drilling"
+      ],
+      "maxEUt": 7864320,
+      "needs": [
+        "eu:uev"
+      ],
+      "partsFromStructure": true,
+      "partAbilities": {
+        "energy_input": [
+          "gtceu:uhv_energy_input_hatch",
+          "gtceu:uhv_energy_input_hatch_4a",
+          "gtceu:uhv_energy_input_hatch_16a",
+          "gtceu:uhv_wireless_energy_hatch",
+          "gtceu:uhv_wireless_energy_hatch_4a",
+          "gtceu:uhv_wireless_energy_hatch_16a",
+          "gtceu:uhv_wireless_energy_hatch_64a",
+          "gtceu:uev_energy_input_hatch",
+          "gtceu:uev_energy_input_hatch_16a",
+          "gtceu:uev_wireless_energy_hatch",
+          "gtceu:uev_wireless_energy_hatch_4a",
+          "gtceu:uev_wireless_energy_hatch_16a",
+          "gtceu:uev_wireless_energy_hatch_64a"
+        ]
+      },
+      "package": "B3",
+      "note": "Machine 21."
+    },
+    {
+      "machine": "gtceu:carbonyl_refinery",
+      "types": [
+        "gtceu:carbonyl_refining"
+      ],
+      "maxEUt": 1966080,
+      "needs": [
+        "eu:uev"
+      ],
+      "partsFromStructure": true,
+      "partAbilities": {
+        "energy_input": [
+          "gtceu:uhv_energy_input_hatch",
+          "gtceu:uhv_energy_input_hatch_4a",
+          "gtceu:uhv_energy_input_hatch_16a",
+          "gtceu:uhv_wireless_energy_hatch",
+          "gtceu:uhv_wireless_energy_hatch_4a",
+          "gtceu:uhv_wireless_energy_hatch_16a",
+          "gtceu:uhv_wireless_energy_hatch_64a",
+          "gtceu:uev_energy_input_hatch",
+          "gtceu:uev_energy_input_hatch_16a",
+          "gtceu:uev_wireless_energy_hatch",
+          "gtceu:uev_wireless_energy_hatch_4a",
+          "gtceu:uev_wireless_energy_hatch_16a",
+          "gtceu:uev_wireless_energy_hatch_64a"
+        ]
+      },
+      "package": "B3",
+      "note": "Machine 22."
+    },
+    {
+      "machine": "gtceu:white_dwarf_spectrograph",
+      "types": [
+        "gtceu:gravitational_redshift"
+      ],
+      "maxEUt": 7864320,
+      "needs": [
+        "eu:uev"
+      ],
+      "partsFromStructure": true,
+      "partAbilities": {
+        "energy_input": [
+          "gtceu:uhv_energy_input_hatch",
+          "gtceu:uhv_energy_input_hatch_4a",
+          "gtceu:uhv_energy_input_hatch_16a",
+          "gtceu:uhv_wireless_energy_hatch",
+          "gtceu:uhv_wireless_energy_hatch_4a",
+          "gtceu:uhv_wireless_energy_hatch_16a",
+          "gtceu:uhv_wireless_energy_hatch_64a",
+          "gtceu:uev_energy_input_hatch",
+          "gtceu:uev_energy_input_hatch_16a",
+          "gtceu:uev_wireless_energy_hatch",
+          "gtceu:uev_wireless_energy_hatch_4a",
+          "gtceu:uev_wireless_energy_hatch_16a",
+          "gtceu:uev_wireless_energy_hatch_64a"
+        ]
+      },
+      "package": "B4",
+      "note": "Machine 23."
+    },
+    {
+      "machine": "gtceu:degenerate_harvester",
+      "types": [
+        "gtceu:degenerate_harvesting"
+      ],
+      "maxEUt": 7864320,
+      "needs": [
+        "eu:uev"
+      ],
+      "partsFromStructure": true,
+      "partAbilities": {
+        "energy_input": [
+          "gtceu:uhv_energy_input_hatch",
+          "gtceu:uhv_energy_input_hatch_4a",
+          "gtceu:uhv_energy_input_hatch_16a",
+          "gtceu:uhv_wireless_energy_hatch",
+          "gtceu:uhv_wireless_energy_hatch_4a",
+          "gtceu:uhv_wireless_energy_hatch_16a",
+          "gtceu:uhv_wireless_energy_hatch_64a",
+          "gtceu:uev_energy_input_hatch",
+          "gtceu:uev_energy_input_hatch_16a",
+          "gtceu:uev_wireless_energy_hatch",
+          "gtceu:uev_wireless_energy_hatch_4a",
+          "gtceu:uev_wireless_energy_hatch_16a",
+          "gtceu:uev_wireless_energy_hatch_64a"
+        ]
+      },
+      "package": "B4",
+      "note": "Machine 24."
+    },
+    {
+      "machine": "gtceu:containment_works",
+      "types": [
+        "gtceu:degenerate_containment"
+      ],
+      "maxEUt": 7864320,
+      "needs": [
+        "eu:uev"
+      ],
+      "partsFromStructure": true,
+      "partAbilities": {
+        "energy_input": [
+          "gtceu:uhv_energy_input_hatch",
+          "gtceu:uhv_energy_input_hatch_4a",
+          "gtceu:uhv_energy_input_hatch_16a",
+          "gtceu:uhv_wireless_energy_hatch",
+          "gtceu:uhv_wireless_energy_hatch_4a",
+          "gtceu:uhv_wireless_energy_hatch_16a",
+          "gtceu:uhv_wireless_energy_hatch_64a",
+          "gtceu:uev_energy_input_hatch",
+          "gtceu:uev_energy_input_hatch_16a",
+          "gtceu:uev_wireless_energy_hatch",
+          "gtceu:uev_wireless_energy_hatch_4a",
+          "gtceu:uev_wireless_energy_hatch_16a",
+          "gtceu:uev_wireless_energy_hatch_64a"
+        ]
+      },
+      "package": "B4",
+      "note": "Machine 25."
+    },
+    {
+      "machine": "gtceu:warp_gate",
+      "types": [
+        "gtceu:warp_gate"
+      ],
+      "maxEUt": 134217728,
+      "needs": [
+        "eu:uev"
+      ],
+      "partsFromStructure": true,
+      "partAbilities": {
+        "energy_input": [
+          "gtceu:uhv_energy_input_hatch",
+          "gtceu:uhv_energy_input_hatch_4a",
+          "gtceu:uhv_energy_input_hatch_16a",
+          "gtceu:uhv_wireless_energy_hatch",
+          "gtceu:uhv_wireless_energy_hatch_4a",
+          "gtceu:uhv_wireless_energy_hatch_16a",
+          "gtceu:uhv_wireless_energy_hatch_64a",
+          "gtceu:uev_energy_input_hatch",
+          "gtceu:uev_energy_input_hatch_16a",
+          "gtceu:uev_wireless_energy_hatch",
+          "gtceu:uev_wireless_energy_hatch_4a",
+          "gtceu:uev_wireless_energy_hatch_16a",
+          "gtceu:uev_wireless_energy_hatch_64a"
+        ]
+      },
+      "package": "B5",
+      "note": "UHV's warp gate with the c3 hold row (16 A UEV, 134,217,728 EU/t at Sirius B orbit)."
+    },
+    {
+      "id": "gtceu:thruster_works@uev",
+      "machine": "gtceu:thruster_works",
+      "types": [
+        "gtceu:thruster_assembly"
+      ],
+      "energy": {
+        "voltage": 2097152,
+        "hatches": 2
+      },
+      "needs": [
+        "eu:uhv"
+      ],
+      "partsFromStructure": true,
+      "partAbilities": {
+        "energy_input": [
+          "gtceu:uhv_energy_input_hatch",
+          "gtceu:uhv_energy_input_hatch_4a",
+          "gtceu:uhv_energy_input_hatch_16a",
+          "gtceu:uhv_wireless_energy_hatch",
+          "gtceu:uhv_wireless_energy_hatch_4a",
+          "gtceu:uhv_wireless_energy_hatch_16a",
+          "gtceu:uhv_wireless_energy_hatch_64a"
+        ]
+      },
+      "package": "B1",
+      "note": "The DFD motors (circuits 6 and 7) run at 7,864,320 EU/t: two UHV hatches (4x) give UEV voltage."
+    },
+    {
+      "id": "gtceu:naquadria_magnet_works@uev",
+      "machine": "gtceu:naquadria_magnet_works",
+      "types": [
+        "gtceu:naquadria_magnets"
+      ],
+      "energy": {
+        "voltage": 2097152,
+        "hatches": 2
+      },
+      "needs": [
+        "eu:uhv"
+      ],
+      "partsFromStructure": true,
+      "partAbilities": {
+        "energy_input": [
+          "gtceu:uhv_energy_input_hatch",
+          "gtceu:uhv_energy_input_hatch_4a",
+          "gtceu:uhv_energy_input_hatch_16a",
+          "gtceu:uhv_wireless_energy_hatch",
+          "gtceu:uhv_wireless_energy_hatch_4a",
+          "gtceu:uhv_wireless_energy_hatch_16a",
+          "gtceu:uhv_wireless_energy_hatch_64a"
+        ]
+      },
+      "package": "A5",
+      "note": "UEV rows of the magnet works: two UHV hatches give UEV voltage."
+    },
+    {
+      "id": "gtceu:large_assembler@uev",
+      "machine": "gtceu:large_assembler",
+      "energy": {
+        "voltage": 8388608,
+        "hatches": 1
+      },
+      "needs": [
+        "eu:uev"
+      ],
+      "parts": [
+        "gtceu:large_scale_assembler_casing",
+        "gtceu:tempered_glass",
+        "gtceu:uev_energy_input_hatch",
+        "gtceu:lv_input_bus",
+        "gtceu:lv_output_bus",
+        "gtceu:lv_input_hatch",
+        "gtceu:lv_output_hatch",
+        {
+          "anyOf": [
+            "gtceu:maintenance_hatch"
+          ],
+          "onlyIf": {
+            "config": "machines.enableMaintenance",
+            "equals": true
+          }
+        }
+      ],
+      "package": "A6",
+      "note": "GCYM large assembler on exactly one UEV hatch: the 7,864,320 EU/t assembler rows."
+    },
+    {
+      "id": "gtceu:electric_blast_furnace@uv-zpm",
+      "machine": "gtceu:electric_blast_furnace",
+      "types": [
+        "gtceu:electric_blast_furnace"
+      ],
+      "energy": {
+        "voltage": 131072,
+        "hatches": 2
+      },
+      "needs": [
+        "eu:zpm"
+      ],
+      "coilTemp": 9001,
+      "parts": [
+        "gtceu:heatproof_machine_casing",
+        "gtceu:trinium_coil_block",
+        "gtceu:zpm_energy_input_hatch",
+        "gtceu:lv_input_bus",
+        "gtceu:lv_output_bus",
+        "gtceu:lv_input_hatch",
+        "gtceu:lv_output_hatch",
+        "gtceu:lv_muffler_hatch",
+        {
+          "anyOf": [
+            "gtceu:maintenance_hatch"
+          ],
+          "onlyIf": {
+            "config": "machines.enableMaintenance",
+            "equals": true
+          }
+        }
+      ],
+      "package": "A6",
+      "note": "Trinium-coil EBF on two ZPM hatches (UV voltage, 524,288 EU/t): the 491,520 EU/t orbit rows."
+    }
+  ],
+  "synthetic": [
+    {
+      "id": "wireless-uev",
+      "package": "W",
+      "capital": [
+        "gtceu:wireless_energy_tower",
+        "grindless:uev_smes_cell",
+        "grindless:quantum_repeater_node"
+      ],
+      "consumes": [
+        "eu:uhv"
+      ],
+      "produces": [
+        "eu:uev",
+        "wireless:uev"
+      ],
+      "note": "The network's UEV tier (W): UEV only when every formed tower holds UEV cells, linked by the quantum repeater node (tables/wireless_energy.json)."
+    },
+    {
+      "id": "research-pulsar-chart",
+      "package": "B5",
+      "machines": [
+        "gtceu:research_station"
+      ],
+      "capital": [
+        "grindless:pulsar_navigation_chart",
+        "gtceu:data_module",
+        "gtceu:uv_energy_input_hatch"
+      ],
+      "consumes": [
+        "eu:uv"
+      ],
+      "produces": [
+        "research:1x_grindless_pulsar_navigation_chart"
+      ],
+      "note": "The UIV casing's station research (uev/gate.js: the chart, VA[UV]); stationResearch adds the research_station recipe at load, as UHV's research-chart."
+    },
+    {
+      "id": "swarm-station",
+      "package": "B2",
+      "recipesOf": [
+        "gtceu:dyson_swarm"
+      ],
+      "produces": [
+        "eu:uv",
+        "eu:uhv",
+        "eu:uev"
+      ],
+      "euPerTick": 12582912,
+      "note": "UHV's swarm source with the Alpha Centauri row (alpha_full_swarm, 12,582,912 EU/t), written final: not in power/generators.js's doubling list (uev-validator.test.mjs checks both)."
+    },
+    {
+      "id": "alpha-trip",
+      "package": "B1",
+      "capital": [
+        "gcyr:rocket_scanner",
+        "gcyr:launch_pad",
+        "gtceu:stainless_steel_frame",
+        "gcyr:seat",
+        "gcyr:id_chip",
+        "gcyr:space_helmet",
+        "gcyr:space_chestplate",
+        "gcyr:space_leggings",
+        "gcyr:space_boots",
+        "gcyr:space_suit_thermal_upgrade_smithing_template",
+        "gcyr:heat_shielding_fabric",
+        "gcyr:insulating_fabric",
+        "grindless:dfd_mk1_motor",
+        "grindless:bnnt_fuel_tank",
+        "gcyr:space_station_packager",
+        "gcyr:space_station_package"
+      ],
+      "consumes": [
+        "fluid:gtceu:rocket_fuel",
+        "fluid:gtceu:oxygen"
+      ],
+      "produces": [
+        "dim:grindless:alpha_centauri_orbit"
+      ],
+      "note": "The level 9 rocket (B1): the DFD Mk1 motor and the tier 11 BNNT tank reach Alpha Centauri AB's orbit (the ninth station)."
+    },
+    {
+      "id": "barnard-trip",
+      "package": "B1",
+      "capital": [
+        "gcyr:rocket_scanner",
+        "gcyr:launch_pad",
+        "gtceu:stainless_steel_frame",
+        "gcyr:seat",
+        "gcyr:id_chip",
+        "gcyr:space_helmet",
+        "gcyr:space_chestplate",
+        "gcyr:space_leggings",
+        "gcyr:space_boots",
+        "gcyr:space_suit_thermal_upgrade_smithing_template",
+        "gcyr:heat_shielding_fabric",
+        "gcyr:insulating_fabric",
+        "grindless:dfd_mk1_motor",
+        "grindless:bnnt_fuel_tank",
+        "gcyr:space_station_packager",
+        "gcyr:space_station_package"
+      ],
+      "consumes": [
+        "fluid:gtceu:rocket_fuel",
+        "fluid:gtceu:oxygen"
+      ],
+      "produces": [
+        "dim:${place:barnard_b}",
+        "dim:${orbit:barnard_b}"
+      ],
+      "note": "The level 9 rocket (B1): Barnard b and its orbit."
+    },
+    {
+      "id": "sirius-trip",
+      "package": "B1",
+      "capital": [
+        "gcyr:rocket_scanner",
+        "gcyr:launch_pad",
+        "gtceu:stainless_steel_frame",
+        "gcyr:seat",
+        "gcyr:id_chip",
+        "gcyr:space_helmet",
+        "gcyr:space_chestplate",
+        "gcyr:space_leggings",
+        "gcyr:space_boots",
+        "gcyr:space_suit_thermal_upgrade_smithing_template",
+        "gcyr:heat_shielding_fabric",
+        "gcyr:insulating_fabric",
+        "grindless:dfd_mk2_motor",
+        "grindless:bnnt_fuel_tank",
+        "gcyr:space_station_packager",
+        "gcyr:space_station_package"
+      ],
+      "consumes": [
+        "fluid:gtceu:rocket_fuel",
+        "fluid:gtceu:oxygen"
+      ],
+      "produces": [
+        "dim:grindless:sirius_b_orbit"
+      ],
+      "note": "The level 10 rocket (B1): the DFD Mk2 motor reaches Sirius B's orbit (the tenth station)."
+    }
+  ],
+  "targets": [
+    {
+      "id": "isotopes-only-calutron",
+      "label": "Calcium-48, potassium-40, lithium-6 and plutonium-244 only from the calutron",
+      "anyOf": [
+        "gtceu:calcium_48_dust",
+        "gtceu:potassium_40_dust",
+        "gtceu:lithium_6_dust",
+        "gtceu:plutonium_244_dust"
+      ],
+      "without": [
+        "operate:gtceu:calutron*"
+      ],
+      "expect": "unreachable",
+      "package": "A1"
+    },
+    {
+      "id": "superheavy-only-chain",
+      "label": "Superheavy atoms, the tennessine sample and the census only from the cyclotron, the recoil separator and the chemistry lab",
+      "anyOf": [
+        "grindless:flerovium_atoms",
+        "grindless:livermorium_atoms",
+        "grindless:tennessine_atoms",
+        "grindless:oganesson_atoms",
+        "grindless:moscovium_atoms",
+        "grindless:tennessine_sample",
+        "grindless:superheavy_census"
+      ],
+      "without": [
+        "operate:gtceu:heavy_ion_cyclotron*",
+        "operate:gtceu:recoil_separator*",
+        "operate:gtceu:superheavy_chemistry_lab*"
+      ],
+      "expect": "unreachable",
+      "package": "A2"
+    },
+    {
+      "id": "megabar-only-press",
+      "label": "(La,Y)H10 and nanotwinned diamond only from the megabar press",
+      "anyOf": [
+        "gtceu:lay_superhydride_ingot",
+        "grindless:nanotwinned_diamond"
+      ],
+      "without": [
+        "operate:gtceu:megabar_press*"
+      ],
+      "expect": "unreachable",
+      "package": "A3"
+    },
+    {
+      "id": "single-crystal-only-foundry",
+      "label": "Single-crystal parts only from the single-crystal foundry",
+      "anyOf": [
+        "grindless:sx_blade",
+        "grindless:sx_pump_impeller",
+        "grindless:brayton_turbine_wheel"
+      ],
+      "without": [
+        "operate:gtceu:single_crystal_foundry*"
+      ],
+      "expect": "unreachable",
+      "package": "A4"
+    },
+    {
+      "id": "fe16n2-only-works",
+      "label": "Fe16N2 only from the nitride magnet works",
+      "anyOf": [
+        "gtceu:fe16n2_dust"
+      ],
+      "without": [
+        "operate:gtceu:nitride_magnet_works*"
+      ],
+      "expect": "unreachable",
+      "package": "A5"
+    },
+    {
+      "id": "optical-computer-only-hall",
+      "label": "gtnn:optical_computer only from the photonic integration hall",
+      "anyOf": [
+        "gtnn:optical_computer"
+      ],
+      "without": [
+        "operate:gtceu:photonic_integration_hall*"
+      ],
+      "expect": "unreachable",
+      "package": "A6"
+    },
+    {
+      "id": "mk4-plasmas-only-mk4",
+      "label": "The Mk4 plasmas only from the Mk4 ring",
+      "anyOf": [
+        "fluid:gtceu:uev_dhe3_plasma",
+        "fluid:gtceu:uev_pb11_plasma",
+        "fluid:gtceu:uev_polarised_plasma"
+      ],
+      "without": [
+        "operate:gtceu:uev_fusion_reactor*"
+      ],
+      "expect": "unreachable",
+      "package": "A7"
+    },
+    {
+      "id": "eos-only-quantum-lab",
+      "label": "The EOS model only from the quantum gas lab",
+      "anyOf": [
+        "grindless:degenerate_eos_model"
+      ],
+      "without": [
+        "operate:gtceu:quantum_gas_lab*"
+      ],
+      "expect": "unreachable",
+      "package": "A8"
+    },
+    {
+      "id": "repeater-only-entanglement",
+      "label": "The repeater node only from the entanglement station",
+      "anyOf": [
+        "grindless:quantum_repeater_node"
+      ],
+      "without": [
+        "operate:gtceu:entanglement_station*"
+      ],
+      "expect": "unreachable",
+      "package": "A8"
+    },
+    {
+      "id": "alpha-gas-dust-only-collector",
+      "label": "Interstellar gas and dust only from the nebula collector",
+      "anyOf": [
+        "fluid:gtceu:interstellar_gas",
+        "grindless:dust_laden_aerogel"
+      ],
+      "without": [
+        "operate:gtceu:nebula_collector*"
+      ],
+      "expect": "unreachable",
+      "package": "B2"
+    },
+    {
+      "id": "pulsar-chart-only-station",
+      "label": "The pulsar navigation chart only from the pulsar timing station",
+      "anyOf": [
+        "grindless:pulsar_navigation_chart"
+      ],
+      "without": [
+        "operate:gtceu:pulsar_timing_station*"
+      ],
+      "expect": "unreachable",
+      "package": "B2"
+    },
+    {
+      "id": "barnard-rock-only-drill",
+      "label": "Barnard core rock only from the Barnard core drill",
+      "anyOf": [
+        "grindless:barnard_core_rock"
+      ],
+      "without": [
+        "operate:gtceu:barnard_core_drill*"
+      ],
+      "expect": "unreachable",
+      "package": "B3"
+    },
+    {
+      "id": "carbonyl-only-refinery",
+      "label": "Carbonyl iron only from the carbonyl refinery",
+      "anyOf": [
+        "fluid:gtceu:iron_pentacarbonyl"
+      ],
+      "without": [
+        "operate:gtceu:carbonyl_refinery*"
+      ],
+      "expect": "unreachable",
+      "package": "B3"
+    },
+    {
+      "id": "degenerate-matter-only-harvester",
+      "label": "Degenerate matter only from the degenerate harvester",
+      "anyOf": [
+        "grindless:degenerate_matter"
+      ],
+      "without": [
+        "operate:gtceu:degenerate_harvester*"
+      ],
+      "expect": "unreachable",
+      "package": "B4"
+    },
+    {
+      "id": "mass-radius-only-spectrograph",
+      "label": "The mass-radius chart only from the white dwarf spectrograph",
+      "anyOf": [
+        "grindless:mass_radius_chart"
+      ],
+      "without": [
+        "operate:gtceu:white_dwarf_spectrograph*"
+      ],
+      "expect": "unreachable",
+      "package": "B4"
+    },
+    {
+      "id": "pellets-only-containment",
+      "label": "Degenerate pellets only from the containment works",
+      "anyOf": [
+        "grindless:degenerate_pellet"
+      ],
+      "without": [
+        "operate:gtceu:containment_works*"
+      ],
+      "expect": "unreachable",
+      "package": "B4"
+    },
+    {
+      "id": "site-warp-gate",
+      "label": "Site: the warp gate only at its four ends (Earth orbit, Proxima b, Alpha Centauri AB and Sirius B orbits)",
+      "kind": "site",
+      "types": [
+        "gtceu:warp_gate"
+      ],
+      "dimensions": [
+        "${orbit:earth}",
+        "${orbit:proxima_b}",
+        "grindless:alpha_centauri_orbit",
+        "grindless:sirius_b_orbit"
+      ],
+      "package": "B5",
+      "note": "UHV's target with the two UEV orbits (tables/gate.json `orbits`)."
+    },
+    {
+      "id": "site-mercury-orbit",
+      "label": "Site: the swarm machines and the solar probe only in Mercury orbit or at Alpha Centauri AB",
+      "kind": "site",
+      "types": [
+        "gtceu:swarm_segment",
+        "gtceu:dyson_swarm",
+        "gtceu:solar_probe"
+      ],
+      "dimensions": [
+        "gcyr:mercury_orbit",
+        "grindless:alpha_centauri_orbit"
+      ],
+      "package": "B2",
+      "note": "UHV's target plus the Alpha Centauri rows (alpha_full_swarm, alpha_corona)."
+    },
+    {
+      "id": "site-uev-earth-orbit",
+      "label": "Site: the quantum gas lab and the entanglement station only in Earth orbit",
+      "kind": "site",
+      "types": [
+        "gtceu:quantum_degenerate_gas",
+        "gtceu:entanglement_distribution"
+      ],
+      "dimensions": [
+        "${orbit:earth}"
+      ],
+      "package": "A8"
+    },
+    {
+      "id": "site-alpha-orbit",
+      "label": "Site: the nebula collector, the dust lab and the pulsar station only at Alpha Centauri AB's orbit",
+      "kind": "site",
+      "types": [
+        "gtceu:nebula_collection",
+        "gtceu:interstellar_dust_analysis",
+        "gtceu:pulsar_timing"
+      ],
+      "dimensions": [
+        "grindless:alpha_centauri_orbit"
+      ],
+      "package": "B2"
+    },
+    {
+      "id": "site-barnard",
+      "label": "Site: the core drill and the carbonyl refinery only on Barnard b",
+      "kind": "site",
+      "types": [
+        "gtceu:barnard_core_drilling",
+        "gtceu:carbonyl_refining"
+      ],
+      "dimensions": [
+        "${place:barnard_b}"
+      ],
+      "package": "B3"
+    },
+    {
+      "id": "site-sirius-orbit",
+      "label": "Site: the spectrograph, the harvester and the containment works only at Sirius B's orbit",
+      "kind": "site",
+      "types": [
+        "gtceu:gravitational_redshift",
+        "gtceu:degenerate_harvesting",
+        "gtceu:degenerate_containment"
+      ],
+      "dimensions": [
+        "grindless:sirius_b_orbit"
+      ],
+      "package": "B4"
+    },
+    {
+      "id": "gate-uiv-casing",
+      "label": "Gate: the UIV casing (assembly line, researched with the pulsar navigation chart)",
+      "kind": "recipe",
+      "type": "gtceu:assembly_line",
+      "recipe": [
+        "grindless:assembly_line/uiv_machine_casing"
+      ],
+      "package": "B5"
+    },
+    {
+      "id": "gate-warp-hold",
+      "label": "Gate: the warp gate's c3 (16 A UEV for 60 s at Sirius B orbit)",
+      "kind": "recipe",
+      "type": "gtceu:warp_gate",
+      "recipe": [
+        "grindless:warp_gate/hold"
+      ],
+      "package": "B5"
+    },
+    {
+      "id": "gate-pulsar-chart",
+      "label": "Gate: the pulsar navigation chart from Alpha Centauri AB orbit",
+      "kind": "recipe",
+      "type": "gtceu:pulsar_timing",
+      "recipe": [
+        "grindless:pulsar_timing/pulsar_navigation_chart"
+      ],
+      "package": "B2"
+    },
+    {
+      "id": "gate-tennessine",
+      "label": "Gate: the tennessine sample",
+      "item": "grindless:tennessine_sample",
+      "package": "A2"
+    },
+    {
+      "id": "gate-pellet",
+      "label": "Gate: a degenerate pellet",
+      "item": "grindless:degenerate_pellet",
+      "package": "B4"
+    },
+    {
+      "id": "gate-eos",
+      "label": "Gate: the EOS model",
+      "item": "grindless:degenerate_eos_model",
+      "package": "A8"
+    },
+    {
+      "id": "gate-optical-computer",
+      "label": "Gate: the optical computers",
+      "item": "gtnn:optical_computer",
+      "package": "A6"
+    },
+    {
+      "id": "gate-level10",
+      "label": "Gate: the level 10 flight to Sirius B orbit",
+      "allOf": [
+        "dim:grindless:sirius_b_orbit"
+      ],
+      "package": "B1"
+    },
+    {
+      "id": "gate-network-uev",
+      "label": "Gate: the network at UEV",
+      "allOf": [
+        "wireless:uev"
+      ],
+      "package": "W"
+    },
+    {
+      "id": "gate-run-nebula",
+      "label": "Gate: one nebula collection run",
+      "kind": "recipe",
+      "type": "gtceu:nebula_collection",
+      "recipe": [
+        "grindless:nebula_collection/interstellar_gas"
+      ],
+      "package": "B2"
+    },
+    {
+      "id": "gate-run-core-drilling",
+      "label": "Gate: one Barnard b core drilling run",
+      "kind": "recipe",
+      "type": "gtceu:barnard_core_drilling",
+      "recipe": [
+        "grindless:barnard_core_drilling/pilot_core"
+      ],
+      "package": "B3"
+    },
+    {
+      "id": "gate-run-harvesting",
+      "label": "Gate: one Sirius B degenerate harvesting run",
+      "kind": "recipe",
+      "type": "gtceu:degenerate_harvesting",
+      "recipe": [
+        "grindless:degenerate_harvesting/degenerate_matter"
+      ],
+      "package": "B4"
+    }
+  ],
+  "eraResources": [
+    {
+      "id": "uiv",
+      "era": "uiv",
+      "label": "UIV (GTM's UIV items and the hidden optical mainframe)",
+      "items": [
+        "gtceu:uiv_*",
+        "gtnn:optical_mainframe"
+      ],
+      "note": "Nothing in UEV asks for UIV: the only UIV item reachable is the casing, the gate's own output."
+    },
+    {
+      "id": "alpha",
+      "era": "uev-alpha",
+      "label": "Alpha Centauri AB's orbit and what comes home from it",
+      "dimensions": [
+        "grindless:alpha_centauri_orbit"
+      ],
+      "items": [
+        "fluid:gtceu:interstellar_gas",
+        "grindless:dust_laden_aerogel",
+        "grindless:extracted_grains",
+        "grindless:demineralised_grains",
+        "grindless:fe60_record",
+        "grindless:pulsar_timing_data",
+        "grindless:pulsar_navigation_chart",
+        "grindless:alpha_coronal_field_map"
+      ]
+    },
+    {
+      "id": "barnard",
+      "era": "uev-barnard",
+      "label": "Barnard b and what comes home from it",
+      "dimensions": [
+        "${place:barnard_b}",
+        "${orbit:barnard_b}"
+      ],
+      "items": [
+        "grindless:barnard_core_rock",
+        "grindless:barnard_residue",
+        "fluid:gtceu:iron_pentacarbonyl"
+      ]
+    },
+    {
+      "id": "sirius",
+      "era": "uev-sirius",
+      "label": "Sirius B's orbit and what comes home from it",
+      "dimensions": [
+        "grindless:sirius_b_orbit"
+      ],
+      "items": [
+        "grindless:degenerate_matter",
+        "grindless:degenerate_pellet",
+        "grindless:mass_radius_chart"
+      ]
+    }
+  ],
+  "eraItems": [
+    {
+      "id": "uev-home",
+      "era": "uev",
+      "label": "UEV on Earth and in Earth orbit: nothing of it needs a far place",
+      "items": [
+        "m:gtceu:calutron",
+        "m:gtceu:heavy_ion_cyclotron",
+        "m:gtceu:recoil_separator",
+        "m:gtceu:superheavy_chemistry_lab",
+        "m:gtceu:megabar_press",
+        "m:gtceu:electron_beam_furnace",
+        "m:gtceu:single_crystal_foundry",
+        "m:gtceu:nitride_magnet_works",
+        "m:gtceu:sic_fibre_plant",
+        "m:gtceu:cvi_furnace",
+        "m:gtceu:snspd_foundry",
+        "m:gtceu:vdw_stacker",
+        "m:gtceu:photonic_integration_hall",
+        "m:gtceu:helium3_polariser",
+        "m:gtceu:uev_fusion_reactor",
+        "m:gtceu:quantum_gas_lab",
+        "m:gtceu:entanglement_station",
+        "grindless:ca48_beam",
+        "grindless:target_wheel",
+        "grindless:tennessine_sample",
+        "grindless:superheavy_census",
+        "grindless:sx_blade",
+        "grindless:sic_sic_plate",
+        "grindless:wf_w_tile",
+        "grindless:snspd",
+        "grindless:qd_source",
+        "grindless:sdd",
+        "grindless:aerogel_tile",
+        "grindless:hollow_core_fibre",
+        "grindless:faraday_isolator",
+        "grindless:bonded_fe16n2_magnet",
+        "grindless:degenerate_eos_model",
+        "grindless:quantum_repeater_node",
+        "gtnn:optical_computer",
+        "gtceu:lay_superhydride_ingot",
+        "grindless:uev_fusion_casing",
+        "grindless:hftacn_coil_block",
+        "grindless:photonic_casing"
+      ]
+    },
+    {
+      "id": "uev-alpha-outputs",
+      "era": "uev-alpha",
+      "label": "Alpha Centauri AB and what comes home from it",
+      "optional": true,
+      "items": [
+        "m:gtceu:nebula_collector",
+        "m:gtceu:interstellar_dust_lab",
+        "m:gtceu:pulsar_timing_station",
+        "fluid:gtceu:interstellar_gas",
+        "grindless:dust_laden_aerogel",
+        "grindless:extracted_grains",
+        "grindless:demineralised_grains",
+        "grindless:fe60_record",
+        "grindless:pulsar_timing_data",
+        "grindless:pulsar_navigation_chart",
+        "grindless:alpha_coronal_field_map"
+      ]
+    },
+    {
+      "id": "uev-barnard-outputs",
+      "era": "uev-barnard",
+      "label": "Barnard b and what comes home from it",
+      "optional": true,
+      "items": [
+        "m:gtceu:barnard_core_drill",
+        "m:gtceu:carbonyl_refinery",
+        "grindless:barnard_core_rock",
+        "grindless:barnard_residue",
+        "fluid:gtceu:iron_pentacarbonyl"
+      ]
+    },
+    {
+      "id": "uev-sirius-outputs",
+      "era": "uev-sirius",
+      "label": "Sirius B and what comes home from it",
+      "optional": true,
+      "items": [
+        "m:gtceu:white_dwarf_spectrograph",
+        "m:gtceu:degenerate_harvester",
+        "m:gtceu:containment_works",
+        "grindless:degenerate_matter",
+        "grindless:degenerate_pellet",
+        "grindless:mass_radius_chart"
+      ]
+    },
+    {
+      "id": "output-uev",
+      "era": "uiv",
+      "label": "The gate's own output",
+      "optional": true,
+      "items": [
+        "gtceu:uiv_machine_casing"
+      ]
+    }
+  ]
+}
