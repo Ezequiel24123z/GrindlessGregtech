@@ -149,7 +149,7 @@
       }
       if (!block) return
       if (sym.kind === 'controller') { controller = { x: c.x, y: c.y, z: c.z }; return }
-      var props = (sym.kind === 'part' || sym.kind === 'oneOf' || /hatch|bus/.test(block)) ? '[facing=north]' : ''
+      var props = /hatch|bus/.test(block) ? '[facing=north]' : ''
       put(c.x, c.y, c.z, block + props)
       count++
     })
@@ -280,8 +280,10 @@
       } catch (x) { }
       if (rec === null) { check('a7_dec_' + d.name, false, 'recipe ' + d.id + ' not found'); return }
       var per = NaN
-      try { per = Math.abs(Number(classes().RecipeHelper.getOutputEUt(rec))) } catch (x) { }
-      if (isNaN(per)) { try { per = Math.abs(Number(classes().RecipeHelper.getRealEUtWithIO(rec).getTotalEU() / rec.duration)) } catch (y) { } }
+      var raw = ''
+      try { per = Math.abs(Number(classes().RecipeHelper.getOutputEUt(rec))); raw += 'outEUt ' + per } catch (x) { raw += ' outEUt err' }
+      try { raw += ', total ' + classes().RecipeHelper.getRealEUtWithIO(rec).getTotalEU() + ', duration ' + rec.duration + ', tickOut ' + rec.tickOutputs + ', tickIn ' + rec.tickInputs } catch (y) { raw += ' total err' }
+      note('a7_dec_' + d.name + '_raw', raw)
       check('a7_dec_' + d.name, per * 128 === d.total, 'row ' + per + ' EU/t x 128 = ' + (per * 128) + ', want ' + d.total)
     })
     u.phase = 'done'
