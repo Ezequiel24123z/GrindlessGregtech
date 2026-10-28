@@ -1,0 +1,126 @@
+{
+  "_": "UEV-A4 (docs/eras/uev.md, A4): the electron beam furnace (6) and the single-crystal foundry (7), lines 11, 12, 13, 33 and 38. Read by server_scripts/grindless/uev/electron_beam.js. Amounts per run; a GTM type's circuit 0 means none.",
+  "types": {
+    "electron_beam_refining": {
+      "dataKey": "grindless_electron_beam",
+      "recipes": [
+        { "name": "rhenium", "circuit": 1, "eut": 1966080, "duration": 400,
+          "itemsIn": [{ "id": "gtceu:rhenium_ingot", "count": 2 }], "kept": [], "fluidsIn": [], "charge": [],
+          "itemsOut": [{ "id": "grindless:six_n_rhenium", "count": 2 }, { "id": "grindless:eb_skull", "count": 1 }], "fluidsOut": [] },
+        { "name": "hafnium", "circuit": 2, "eut": 1966080, "duration": 400,
+          "itemsIn": [{ "id": "grindless:hafnium_sponge", "count": 2 }], "kept": [], "fluidsIn": [], "charge": [],
+          "itemsOut": [{ "id": "grindless:six_n_hafnium", "count": 2 }, { "id": "grindless:eb_skull", "count": 1 }], "fluidsOut": [] },
+        { "name": "tantalum", "circuit": 3, "eut": 1966080, "duration": 400,
+          "itemsIn": [{ "id": "grindless:tantalum_powder", "count": 2 }], "kept": [], "fluidsIn": [], "charge": [],
+          "itemsOut": [{ "id": "grindless:six_n_tantalum", "count": 2 }, { "id": "grindless:eb_skull", "count": 1 }], "fluidsOut": [] },
+        { "name": "niobium_rrr", "circuit": 4, "eut": 1966080, "duration": 600,
+          "itemsIn": [{ "id": "grindless:niobium_powder", "count": 2 }], "kept": [], "fluidsIn": [], "charge": [],
+          "itemsOut": [{ "id": "grindless:six_n_niobium", "count": 2 }, { "id": "grindless:eb_skull", "count": 1 }], "fluidsOut": [] },
+        { "name": "ysz_coating", "circuit": 5, "eut": 1966080, "duration": 600,
+          "itemsIn": [{ "id": "grindless:bond_coated_sx_blade", "count": 1 }, { "id": "grindless:ysz_ingot", "count": 1 }], "kept": [], "fluidsIn": [], "charge": [],
+          "itemsOut": [{ "id": "grindless:coated_sx_blade", "count": 1 }, { "id": "grindless:eb_skull", "count": 1 }], "fluidsOut": [] },
+        { "name": "onion_carbon", "circuit": 6, "eut": 1966080, "duration": 400,
+          "itemsIn": [{ "id": "gtceu:diamond_dust", "count": 4 }], "kept": [], "fluidsIn": [], "charge": [],
+          "itemsOut": [{ "id": "grindless:onion_carbon", "count": 4 }], "fluidsOut": [] }
+      ]
+    },
+    "single_crystal_casting": {
+      "dataKey": "grindless_single_crystal_casting",
+      "recipes": [
+        { "name": "sx_blade", "circuit": 1, "eut": 3932160, "duration": 800,
+          "itemsIn": [{ "id": "grindless:sx_master_alloy_dust", "count": 4 }, { "id": "grindless:ceramic_shell_mould", "count": 1 }], "kept": [], "fluidsIn": [], "charge": [{ "id": "gtceu:argon", "amount": 1000 }],
+          "itemsOut": [{ "id": "grindless:sx_blade", "count": 1 }, { "id": "grindless:sx_gate", "count": 1 }], "fluidsOut": [] },
+        { "name": "pump_impeller", "circuit": 2, "eut": 1966080, "duration": 800,
+          "itemsIn": [{ "id": "grindless:sx_master_alloy_dust", "count": 6 }, { "id": "grindless:ceramic_shell_mould", "count": 1 }], "kept": [], "fluidsIn": [], "charge": [{ "id": "gtceu:argon", "amount": 1000 }],
+          "itemsOut": [{ "id": "grindless:sx_pump_impeller", "count": 1 }, { "id": "grindless:sx_dross", "count": 1 }], "fluidsOut": [] },
+        { "name": "turbine_wheel", "circuit": 3, "eut": 3932160, "duration": 1200,
+          "itemsIn": [{ "id": "grindless:coated_sx_blade", "count": 8 }, { "id": "grindless:sx_master_alloy_dust", "count": 2 }, { "id": "grindless:ceramic_shell_mould", "count": 1 }], "kept": [], "fluidsIn": [], "charge": [{ "id": "gtceu:argon", "amount": 1000 }],
+          "itemsOut": [{ "id": "grindless:brayton_turbine_wheel", "count": 1 }, { "id": "grindless:sx_gate", "count": 1 }], "fluidsOut": [] }
+      ]
+    },
+    "mixer": {
+      "recipes": [
+        { "name": "sx_master_alloy", "circuit": 0, "eut": 1920, "duration": 200,
+          "itemsIn": [{ "id": "gtceu:nickel_dust", "count": 6 }, { "id": "grindless:six_n_rhenium", "count": 1 }, { "id": "gtceu:ruthenium_dust", "count": 1 }, { "id": "grindless:six_n_tantalum", "count": 1 }], "kept": [], "fluidsIn": [], "charge": [],
+          "itemsOut": [{ "id": "grindless:sx_master_alloy_dust", "count": 9 }], "fluidsOut": [] },
+        { "name": "ysz_powder", "circuit": 0, "eut": 480, "duration": 200,
+          "itemsIn": [{ "id": "gtceu:zirconia_dust", "count": 8 }, { "id": "grindless:yttrium_oxide_dust", "count": 1 }], "kept": [], "fluidsIn": [], "charge": [],
+          "itemsOut": [{ "id": "grindless:ysz_powder", "count": 9 }], "fluidsOut": [] }
+      ]
+    },
+    "assembler": {
+      "recipes": [
+        { "name": "ceramic_shell_mould", "circuit": 25, "eut": 480, "duration": 200,
+          "itemsIn": [{ "id": "gtceu:zirconia_dust", "count": 2 }, { "id": "gtceu:alumina_dust", "count": 2 }], "kept": [], "fluidsIn": [], "charge": [],
+          "itemsOut": [{ "id": "grindless:ceramic_shell_mould", "count": 1 }], "fluidsOut": [] },
+        { "name": "bond_coat", "circuit": 26, "eut": 1920, "duration": 300,
+          "itemsIn": [{ "id": "grindless:heat_treated_sx_blade", "count": 1 }, { "id": "gtceu:platinum_dust", "count": 1 }, { "id": "gtceu:aluminium_dust", "count": 1 }], "kept": [], "fluidsIn": [], "charge": [],
+          "itemsOut": [{ "id": "grindless:bond_coated_sx_blade", "count": 1 }], "fluidsOut": [] }
+      ]
+    },
+    "electric_blast_furnace": {
+      "temp": 1500,
+      "recipes": [
+        { "name": "sx_heat_treatment", "circuit": 0, "eut": 1920, "duration": 400,
+          "itemsIn": [{ "id": "grindless:sx_blade", "count": 1 }], "kept": [], "fluidsIn": [{ "id": "gtceu:argon", "amount": 1000 }], "charge": [],
+          "itemsOut": [{ "id": "grindless:heat_treated_sx_blade", "count": 1 }], "fluidsOut": [] }
+      ]
+    },
+    "macerator": {
+      "recipes": [
+        { "name": "sx_gate_remelt", "circuit": 0, "eut": 120, "duration": 100,
+          "itemsIn": [{ "id": "grindless:sx_gate", "count": 1 }], "kept": [], "fluidsIn": [], "charge": [],
+          "itemsOut": [{ "id": "grindless:sx_master_alloy_dust", "count": 3 }], "fluidsOut": [] }
+      ]
+    },
+    "compressor": {
+      "recipes": [
+        { "name": "ysz_ingot", "circuit": 0, "eut": 120, "duration": 200,
+          "itemsIn": [{ "id": "grindless:ysz_powder", "count": 9 }], "kept": [], "fluidsIn": [], "charge": [],
+          "itemsOut": [{ "id": "grindless:ysz_ingot", "count": 1 }], "fluidsOut": [] }
+      ]
+    },
+    "bender": {
+      "recipes": [
+        { "name": "rrr_niobium_sheet", "circuit": 23, "eut": 480, "duration": 100,
+          "itemsIn": [{ "id": "grindless:six_n_niobium", "count": 1 }], "kept": [], "fluidsIn": [], "charge": [],
+          "itemsOut": [{ "id": "grindless:rrr_niobium_sheet", "count": 1 }], "fluidsOut": [] }
+      ]
+    },
+    "chemical_reactor": {
+      "recipes": [
+        { "name": "zircon_chlorination", "circuit": 0, "eut": 1920, "duration": 300,
+          "itemsIn": [{ "id": "gtca:red_zircon_dust", "count": 6 }, { "id": "gtceu:carbon_dust", "count": 2 }], "kept": [], "fluidsIn": [{ "id": "gtceu:chlorine", "amount": 4000 }], "charge": [],
+          "itemsOut": [{ "id": "grindless:zr_hf_chloride_dust", "count": 5 }], "fluidsOut": [{ "id": "gtceu:silicon_tetrachloride", "amount": 1000 }, { "id": "gtceu:carbon_dioxide", "amount": 2000 }] },
+        { "name": "zirconia_hydrolysis", "circuit": 0, "eut": 480, "duration": 200,
+          "itemsIn": [{ "id": "grindless:zirconium_chloride_dust", "count": 5 }], "kept": [], "fluidsIn": [{ "id": "minecraft:water", "amount": 2000 }], "charge": [],
+          "itemsOut": [{ "id": "gtceu:zirconia_dust", "count": 3 }], "fluidsOut": [{ "id": "gtceu:hydrochloric_acid", "amount": 4000 }] },
+        { "name": "hafnia_hydrolysis", "circuit": 0, "eut": 480, "duration": 200,
+          "itemsIn": [{ "id": "grindless:hafnium_chloride_dust", "count": 5 }], "kept": [], "fluidsIn": [{ "id": "minecraft:water", "amount": 2000 }], "charge": [],
+          "itemsOut": [{ "id": "grindless:hafnia_dust", "count": 3 }], "fluidsOut": [{ "id": "gtceu:hydrochloric_acid", "amount": 4000 }] },
+        { "name": "hafnia_chlorination", "circuit": 0, "eut": 1920, "duration": 300,
+          "itemsIn": [{ "id": "grindless:hafnia_dust", "count": 3 }, { "id": "gtceu:carbon_dust", "count": 2 }], "kept": [], "fluidsIn": [{ "id": "gtceu:chlorine", "amount": 2000 }], "charge": [],
+          "itemsOut": [{ "id": "grindless:hafnium_tetrachloride_dust", "count": 5 }], "fluidsOut": [{ "id": "gtceu:carbon_monoxide", "amount": 2000 }] },
+        { "name": "hafnium_kroll", "circuit": 0, "eut": 1920, "duration": 600,
+          "itemsIn": [{ "id": "grindless:hafnium_tetrachloride_dust", "count": 5 }, { "id": "gtceu:magnesium_dust", "count": 2 }], "kept": [], "fluidsIn": [], "charge": [],
+          "itemsOut": [{ "id": "grindless:hafnium_sponge", "count": 1 }, { "id": "gtceu:magnesium_chloride_dust", "count": 6 }], "fluidsOut": [] },
+        { "name": "tantalite_digestion", "circuit": 0, "eut": 480, "duration": 300,
+          "itemsIn": [{ "id": "gtceu:tantalite_dust", "count": 4 }], "kept": [], "fluidsIn": [{ "id": "gtceu:hydrofluoric_acid", "amount": 4000 }], "charge": [],
+          "itemsOut": [{ "id": "grindless:tantalite_fluoride_cake", "count": 4 }], "fluidsOut": [{ "id": "minecraft:water", "amount": 2000 }] },
+        { "name": "tantalum_sodium_reduction", "circuit": 0, "eut": 1920, "duration": 400,
+          "itemsIn": [{ "id": "grindless:k2taf7_dust", "count": 10 }, { "id": "gtceu:sodium_dust", "count": 5 }], "kept": [], "fluidsIn": [], "charge": [],
+          "itemsOut": [{ "id": "grindless:tantalum_powder", "count": 1 }, { "id": "grindless:alkali_fluoride_dust", "count": 14 }], "fluidsOut": [] },
+        { "name": "niobium_sodium_reduction", "circuit": 0, "eut": 1920, "duration": 400,
+          "itemsIn": [{ "id": "grindless:niobium_oxyfluoride_dust", "count": 3 }, { "id": "gtceu:sodium_dust", "count": 2 }], "kept": [], "fluidsIn": [], "charge": [],
+          "itemsOut": [{ "id": "grindless:niobium_powder", "count": 1 }, { "id": "grindless:alkali_fluoride_dust", "count": 4 }], "fluidsOut": [] }
+      ]
+    },
+    "srf_cavity": {
+      "recipes": [
+        { "name": "nb3sn_diffusion", "circuit": 5, "eut": 122880, "duration": 400,
+          "itemsIn": [{ "id": "grindless:srf_cavity", "count": 1 }, { "id": "gtceu:tin_dust", "count": 2 }], "kept": [], "fluidsIn": [], "charge": [{ "id": "gtceu:argon", "amount": 1000 }],
+          "itemsOut": [{ "id": "grindless:nb3sn_srf_cavity", "count": 1 }], "fluidsOut": [] }
+      ]
+    }
+  }
+}
