@@ -614,16 +614,16 @@ A crossing is one (UXV line, older machine) pair from the Cr column; UIV is one 
 
 | Era | Crossings | Machines met |
 |---|---|---|
-| UEV | 33 | electron beam furnace (12), nitride magnet works (7), calutron (5), chem lab (3), cyclotron (2), recoil separator (2), megabar, CVI |
-| ZPM | 25 | Eu reductor (5), quench caster (3), DEC (4), magnet works (3), actinide partitioning (3), waste retrieval (3), ion implanter (2), DSN, aerogel |
-| EV | 26 | extraction cascade (9), platinum plant (7), cryogenic plant (6), hot strip mill (4) |
-| UV | 17 | powder bed (6), cold (4), zone refining (2), MOCVD (2), BN reactor, synchrotron, antimatter trap |
-| UHV | 16 | crystal growth (7), foundry (3), transuranium (3), warp gate (2), tether works |
-| IV | 8 | fluorspar kiln (6), hot cell, fuel fabrication |
-| LuV | 7 | coated conductor line (6), HTS magnet works |
-| **Total** | **132** | 38 older machines; HV and below give ordinary stock only |
+| UEV | 38 | electron beam furnace (16), nitride magnet works (9), calutron (5), chem lab (2), cyclotron (2), recoil separator (2), megabar, CVI |
+| EV | 34 | extraction cascade (12), platinum plant (9), hot strip mill (7), cryogenic plant (6) |
+| ZPM | 31 | waste retrieval (5), quench caster (4), DEC (4), magnet works (4), actinide partitioning (4), ion implanter (4), Eu reductor (3), DSN, aerogel, methane pyrolyser |
+| UV | 27 | powder bed (7), zone refining (6), cold (4), MOCVD (4), pyroprocessing (2), BN reactor, synchrotron, antimatter trap, heat source works |
+| UHV | 21 | crystal growth (8), foundry (6), transuranium (3), warp gate (2), HFIR, tether works |
+| IV | 17 | hot cell (8), fluorspar kiln (6), fuel fabrication (3) |
+| LuV | 10 | coated conductor line (6), asteroid belt (2), HTS magnet works, Io surface |
+| **Total** | **178** | 44 older machines (x1.78 on UIV's 100); HV and below give ordinary stock only |
 
-A line that meets one machine twice counts once; a by-product destination counts when it is a row on that machine. C1 checks the pairs against the built rows (Validator).
+Counted by UIV's method: as-built upstream rows count (cascade, platinum plant, hot cell, EBF and zone-refining rows the chain actually runs), and a by-product destination counts when it is a row on that machine. A line that meets one machine twice counts once; a by-product destination counts when it is a row on that machine. C1 checks the pairs against the built rows (Validator).
 
 ## Quests
 
