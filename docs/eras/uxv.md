@@ -36,7 +36,7 @@ Everything is built against uiv.md as designed; where a UIV package is not merge
 3. **Superheavies III.** UIV line 32's Es/Fm debris is split on the UEV chem lab and calutron into Fm-257 and Es-254 targets; the UEV cyclotron makes elements 121 and 122 with UIV's Ti-50 (`grindless:superheavy_census_iii`); the MNT collider reaches the N=184 island (`grindless:island_chart`).
 4. **Back to Cygnus X-1.** The stellar elevator lifts HDE 226868's envelope at L1; the plasma mass filter splits it into H, He-4, CNO and heavy cuts; the condensation tower feeds the rockless platforms. The accretion disk skimmer takes disk plasma, the FRC former traps it as `grindless:frc_cartridge`, and the BZ dynamo draws power from the black hole's spin.
 5. **The Kerr sling.** UIV's ergosphere probe bay slings a relay seed (new mode); the Cygnus warp gate throws the player to Vela (consumes an FRC cartridge, the M2P2 shield) or to Cas A (consumes a CNT Whipple shield). Substages `uxv-vela` and `uxv-cas-a` run in parallel.
-6. **Vela.** The pasta extractor works the crust at glitch time; the phase sorter (caged in UIV's neutronium cage) splits spaghetti, lasagna, gnocchi and the anti-phases; the draw bench makes the UXV strand cable, the laminator the hull plate. `gtceu:uxv_machine_hull` and UXV hatches follow. The polar cap tap gives power.
+6. **Vela.** The pasta extractor works the crust at glitch time; the phase sorter (each phase leaves in a `grindless:cage_part` made by a new mode of UIV's neutronium cage at RX J1856) splits spaghetti, lasagna, gnocchi and the anti-phases; the draw bench makes the UXV strand cable, the laminator the hull plate. `gtceu:uxv_machine_hull` and UXV hatches follow. The polar cap tap gives power.
 7. **Cassiopeia A.** The ejecta knot sweeper gathers Ti-rich dust; the EV extraction cascade, UEV calutron and IV hot cell make a sealed Ti-44/Sc-44 core; the annihilation laser works turns it into a gamma laser module and `grindless:uxv_emitter`.
 8. **Parts, power and scale.** The UXV motor, pump, conveyor, piston, arm and field generator; the Mk6 stellar burning ring; wireless case 12 and the UXV SMES cell; the x65,536 parallel hatch; the stellar fractionation hall (mega).
 9. **Gate to OpV.** The UIV Matrioshka computes the arm chart (Vela glitch record, Cas A Ti-44 map, Cygnus elevator log); the Cygnus warp gate holds 16 A x V[UXV] = 2^31 EU/t and returns `grindless:bulge_chart`, which researches `gtceu:opv_machine_casing`.
@@ -96,6 +96,7 @@ Site rules (as UIV, DECISIONS.md:498): new places are void datapack dimensions (
 | `grindless:ti44_core` | home (from Cas A dust) → annihilation works | Ti-44 exists only in Cas A |
 | stellar H, He-4 and CNO cuts | Cygnus → home Mk6 | stellar plasma is site-locked |
 | `grindless:superheavy_census_iii`, `island_chart` | home → gate | home accelerators only |
+| `grindless:cage_part` | RX J1856 (UIV cage mode) → Vela sorter | the neutronium cage is site-locked at RX J1856 (uiv.md:381) |
 
 First arrival on Vela and Cas A is UIV-B1's platform kit (a row each in `relay_platforms.json`, same kit, S0-10), plus the volatile cut of the condensation tower carried from Cygnus for water and air. No platform receives a product of its place.
 
@@ -362,19 +363,19 @@ Placement per DECISIONS.md:508. Circuits are taken by each package after `git gr
 | Machine (era, file:line) | Mode | Recipe | Feeds |
 |---|---|---|---|
 | Cryogenic plant (EV, `ev/cryogenic_plant.js:40`) | He-4 polish; O-16 liquefaction; Kr; 6N He | `stellar_helium_cut` → `triple_alpha_fuel`; O-16 → `oxygen_burning_fuel`; air → Kr; He → `he_6n` | Mk6 c2, c4; KrF laser; stopping cell |
-| Extraction cascade (EV, `ev/extraction_cascade.js:92`) | knot dust; flux dross; Bi fume | `ejecta_knot_dust` → Ti fraction + Si, S, Ca, Fe; LPE dross → Pb; BFO fume → Bi (columbite split exists, `:166-168`) | Ti-44 line; YIG; MESO |
+| Extraction cascade (EV, `ev/extraction_cascade.js:92`) | knot dust; flux dross; Bi fume | `ejecta_knot_dust` → Ti fraction + Si, S, Ca, Fe; magnesite → Mg(OH)₂; LPE dross → Pb; BFO fume → Bi (columbite split exists, `:166-168`) | Ti-44 line; YIG; MESO |
 | Platinum plant (EV, `ev/platinum_plant.js:598`) | sputter grade; etch and redeposit recovery | 5N Pt, Ru, Ir → `saf_target_set` and `pt_lpe_crucible` feed; etch residue, sputter redeposit (lines 4, 6-8, 10) → Pt, Ru | targets, crucible |
 | Hot strip mill (EV, `ev/combined_cycle_and_hot_mill.js:464`) | lamination; foil; sheet; duct | `grindless:tetrataenite` → `tetrataenite_lamination`; 5N Ta → `ta_foil`; 5N Pt → `pt_sheet`; `lasagna_plate` → `alip_duct` | motor, Ta target, crucible, pump |
 | Syngas plant (HV, `hv/syngas_plant.js:82`) | platform syngas | `volatile_condensate` → syngas | platform plastics |
 | Fuel fabrication (IV, `iv/uranium_cycle.js:44`) | ion-source charge | depleted U → `u238_ion_source` | MNT |
 | Hot cell (IV, `iv/hot_cell.js:36`) | sealed core; spent core | Ti-44 → `ti44_core`; spent core → Ca-44 | gamma laser |
-| Fluorspar kiln (IV, `iv/fluorspar_kiln.js:83`) | oxide calcines; F₂ | Mg-24 carbonate → 5N MgO; DyScO₃, SrRuO₃, La-BFO, GGG oxides; HF → F₂ | targets, substrates, KrF laser |
+| Fluorspar kiln (IV, `iv/fluorspar_kiln.js:83`) | oxide calcines; F₂ | Mg(OH)₂ → 5N MgO; DyScO₃, SrRuO₃, La-BFO, GGG oxides; HF → F₂ | targets, substrates, KrF laser |
 | HTS magnet works (LuV, `luv/hts_magnet_works.js:32`) | strand stator | strand wire + lamination → `strand_stator` | motor |
 | Coated conductor line (LuV, `luv/coated_conductor_line.js:32`) | strand tape | strand wire → `strand_tape` | field generator, SMES |
 | GW detector (LuV, `luv/ganymede.js:48`) | Vela strain record | `vela_glitch_timing` → `vela_glitch_record` (data) | arm chart |
 | Eu reductor (ZPM, `zpm/europium.js:105`) | Dy, Y oxides | depleted liquor → Dy₂O₃, Y₂O₃ (Tb, Gd, La rows exist, `:107-119`) | DyScO₃, YIG, Terfenol-D |
 | Magnet works (ZPM, `zpm/magnet_works.js:27`) | rotor | `tetrataenite_lamination` → `tetrataenite_rotor` | motor |
-| Quench caster (ZPM, `zpm/fusion.js:97`) | Mk6 ash x3 | He-burning ash → C-12 + O-16; C ash → Ne-20, Na-23, Mg-24; O ash → Si-28, S-32, P-31 | Mk6 c3, c4; MgO |
+| Quench caster (ZPM, `zpm/fusion.js:97`) | Mk6 ash x3 | He-burning ash → C-12 + O-16; C ash → Ne-20, Na-23, Mg-24; O ash → Si-28, S-32, P-31 | Mk6 c3, c4; stock |
 | Ion implanter (ZPM, `zpm/qubits.js:47`) | ion-beam etch | annealed `mtj_stack_wafer`, `mram_stack_wafer` → etched | `mtj_die`, `mram_wafer` |
 | Actinide partitioning (ZPM, `zpm/actinides.js:85`) | Cm cut; fragments | Cm fraction → calutron; MNT fragments → Pb, Hg, Pt | MNT |
 | Waste retrieval (ZPM, `zpm/actinides.js:58`) | MNT target | activated target → stock | by-product |
@@ -403,7 +404,7 @@ Placement per DECISIONS.md:508. Circuits are taken by each package after `git gr
 | Photonic hall (UEV, `uev/photonics.js:25`) | spintronic mainframe | dies → `gtnn:spintronic_mainframe` | circuit |
 | Ergosphere probe bay (UIV-B4) | Kerr sling | `relay_seed` → `launched_relay_seed` | travel |
 | Matrioshka (UIV-A10) | arm chart | three records → `arm_chart` | gate |
-| Neutronium cage (UIV-B2) | pasta caging | phases → caged phases | Vela |
+| Neutronium cage (UIV-B2, RX J1856 site) | cage parts | `neutronium_pellet` → `grindless:cage_part` (carried to Vela) | phase sorter |
 | R-process decompressor (UIV-B2) | gnocchi | `gnocchi_fragment` → r-process stock | by-product |
 | Levitation melter (UIV-A3) | CoFeB, Heusler, Terfenol-D, Ni-Mn-Ga | four melts → `cofeb_ingot`, `heusler_ingot`, `terfenol_d_ingot`, `ni_mn_ga_ingot` | targets, piston, conveyor |
 | X-ray pulse profiler (UIV-B3) | Ti-44 line map | knot dust sample → `ti44_map` (data) | arm chart |
@@ -521,7 +522,7 @@ The Mk6 is a second `registerFusionTier(12)` ring (`tables/fusion_mk6.json`, A7)
 |---|---|---|---|---|
 | c1 hot CNO | `stellar_hydrogen_cut` + `stellar_cno_cut` | `cno_ash_plasma` | He-4, CNO cut (95% back) | c2 |
 | c2 triple-alpha | `triple_alpha_fuel` x2 | `helium_burning_ash_plasma` | C-12 + O-16 (quench caster) | c3, c4 |
-| c3 carbon burning | `carbon_burning_fuel` x2 | `carbon_burning_ash_plasma` | Ne-20, Na-23, Mg-24 | MgO target; stock |
+| c3 carbon burning | `carbon_burning_fuel` x2 | `carbon_burning_ash_plasma` | Ne-20, Na-23, Mg-24 | stock (ordinary Ne, Na, Mg) |
 | c4 oxygen burning | `oxygen_burning_fuel` x2 | `oxygen_burning_ash_plasma` | Si-28, S-32, P-31 | `si28_ash` (OpV); stock |
 
 - Fuel prep: `triple_alpha_fuel` on the EV cryogenic plant from the He-4 cut and c1 ash; `carbon_burning_fuel` is C-12 vapour from the UEV electron beam furnace; `oxygen_burning_fuel` is O-16 liquefied on the EV cryogenic plant.
@@ -545,7 +546,7 @@ Steps count nodes, as uiv.md does. Numbers in brackets are UXV machines (Our mul
 | # | Line | Steps | Cr | By-products → destination |
 |---|---|---|---|---|
 | 1 | CoFeB target: cobaltite → Co (EV extraction cascade) → 5N Co (UEV electron beam furnace) → CoFeB melt with Fe, B (UIV levitation melter) → atomised (UV powder bed) → HIP blank (UV powder bed) → bonded `cofeb_target` | 7 | 3 | spent target → re-pressed (UV powder bed) |
-| 2 | MgO target: carbon-burning ash plasma (9 c3) → Ne/Na/Mg split (ZPM quench caster) → Mg-24 carbonate → 5N MgO (IV fluorspar kiln) → pressed (UV powder bed) → sintered `mgo_target` | 6 | 3 | Ne-20 → stock; Na-23 → line 35; CO₂ → voided (inert) |
+| 2 | MgO target: magnesite → MgCl₂ brine purified (EV extraction cascade) → Mg(OH)₂ precipitate → 5N MgO (IV fluorspar kiln) → pressed (UV powder bed) → sintered `mgo_target` | 6 | 3 | CO₂ → voided (inert); CaCl₂ liquor → EV extraction cascade |
 | 3 | Heusler target: Mn, Si → 5N (UEV electron beam furnace) → Co₂MnSi `heusler_ingot` with line 1's Co (UIV levitation melter) → homogenised (UEV nitride magnet works) → atomised (UV powder bed) → HIP `heusler_target` | 6 | 3 | melt skull → re-melted |
 | 4 | SAF target set: PGM residue (EV platinum plant) → Pt, Ru, Ir salts → 5N metals (EV platinum plant) → powders → pressed (UV powder bed) → HIP-bonded `saf_target_set` | 6 | 2 | etch residue → Pt, Ru (EV platinum plant) |
 | 5 | Ta seed target: columbite → Nb/Ta split (EV extraction cascade) → Ta₂O₅ → Ta → 5N Ta (UEV electron beam furnace) → rolled (EV hot strip mill) → bonded `ta_seed_target` | 7 | 3 | Nb → stock |
@@ -571,14 +572,14 @@ Steps count nodes, as uiv.md does. Numbers in brackets are UXV machines (Our mul
 | 25 | Gamma-ray emitter: Cas A knots → `ejecta_knot_dust` (21) → Ti fraction (EV extraction cascade) → TiCl₄ → Ti-44 (UEV calutron) → sealed `ti44_core` (IV hot cell) → positronium moderated on solid Ne (8 c1) → `positron_stack` (UV antimatter trap) → `gamma_laser_module` with the UIV gamma cavity and `mtj_die` (8 c2) → `uxv_emitter` | 10 | 4 | Si, S, Ar, Ca, Fe → voided (inert); spent core → Ca-44 (IV hot cell) |
 | 26 | Hot CNO fuel: `stellar_plasma` lifted with He coolant (10; UV cold) → H and CNO cuts (11 c1) → burned (9 c1) → `cno_ash_plasma` → EU (ZPM DEC) → He-4 and 95% of the CNO back | 6 | 2 | none; the catalyst returns |
 | 27 | Triple-alpha fuel: He-4 cut (11 c1) with line 26's He-4 → polished `triple_alpha_fuel` (EV cryogenic plant) → burned (9 c2) → ash plasma → EU (ZPM DEC) → C-12 + O-16 (ZPM quench caster) | 6 | 3 | Ne, H frozen out → stock |
-| 28 | Carbon-burning fuel: C-12 (line 27) → vapour-purified `carbon_burning_fuel` (UEV electron beam furnace) → burned (9 c3) → EU (ZPM DEC) → Ne-20, Na-23, Mg-24 (ZPM quench caster) | 5 | 3 | Mg-24 → line 2; Na-23 → line 35 |
+| 28 | Carbon-burning fuel: C-12 (line 27) → vapour-purified `carbon_burning_fuel` (UEV electron beam furnace) → burned (9 c3) → EU (ZPM DEC) → Ne-20, Na-23, Mg-24 (ZPM quench caster) | 5 | 3 | Ne-20, Na-23, Mg-24 → stock (ordinary Ne, Na, Mg) |
 | 29 | Oxygen-burning fuel: O-16 (line 27) → liquefied `oxygen_burning_fuel` (EV cryogenic plant) → burned (9 c4) → EU (ZPM DEC) → Si-28, S-32, P-31 (ZPM quench caster) | 5 | 3 | `si28_ash` → stock for OpV; S, P → stock |
 | 30 | Field generator: `disk_plasma` skimmed on `mh_winding` (13) → filtered (11 c2) → FRC formed (14 c1) → `frc_cartridge` → in a strand coil (strand tape, LuV coated conductor line; wound, ZPM magnet works) → `uxv_field_generator` | 6 | 3 | cartridges also → warp gate c8 (UHV) |
 | 31 | BZ power: `mh_winding` → `disk_plasma` (13) → filtered (11 c2) → `flux_loaded_plasma` (14 c2) → burned at 2^30 EU/t (15) | 5 | 0 | none; the jet carries it off |
-| 32 | Pasta strand: Vela timing (ZPM DSN) → `raw_pasta` (16) → `spaghetti_phase` (17) → caged (UIV neutronium cage) → drawn in an aerogel sheath (18; ZPM aerogel) → `gtceu:pasta_strand_single_wire` | 6 | 2 | gnocchi → r-process stock (UIV decompressor) |
-| 33 | Lasagna plate, UXV hull: `raw_pasta` → `lasagna_phase` (17) → caged (UIV cage) → pressed with `wf_rhea_billet` into `lasagna_plate` (19 c1) → `gtceu:uxv_machine_casing` → `gtceu:uxv_machine_hull` | 6 | 0 | anti-phases → `pasta_core_sample` (17 c2) |
+| 32 | Pasta strand: Vela timing (ZPM DSN) → `raw_pasta` (16) → `spaghetti_phase` (17) → caged in a `cage_part` (UIV neutronium cage mode) → drawn in an aerogel sheath (18; ZPM aerogel) → `gtceu:pasta_strand_single_wire` | 6 | 2 | gnocchi → r-process stock (UIV decompressor) |
+| 33 | Lasagna plate, UXV hull: `raw_pasta` → `lasagna_phase` (17) → caged in a `cage_part` → pressed with `wf_rhea_billet` into `lasagna_plate` (19 c1) → `gtceu:uxv_machine_casing` → `gtceu:uxv_machine_hull` | 6 | 0 | anti-phases → `pasta_core_sample` (17 c2) |
 | 34 | UXV motor: `grindless:tetrataenite` (LuV) → rolled (EV hot strip mill) → laminations → magnetised rotor (ZPM magnet works) → stator of strand tape (LuV coated conductor line, wound on LuV HTS magnet works) → `uxv_electric_motor` | 6 | 4 | lamination scrap → re-melted |
-| 35 | UXV pump: Na-23 (line 28) + K → NaK → ALIP duct rolled from `lasagna_plate` (EV hot strip mill) → three-phase strand coils (LuV coated conductor line; ZPM magnet works) → NaK-filled, sealed → `uxv_electric_pump` | 6 | 3 | none |
+| 35 | UXV pump: Na + K (ordinary stock; natural Na is all Na-23) → NaK → ALIP duct rolled from `lasagna_plate` (EV hot strip mill) → three-phase strand coils (LuV coated conductor line; ZPM magnet works) → NaK-filled, sealed → `uxv_electric_pump` | 6 | 3 | none |
 | 36 | UXV piston: Tb₄O₇, Dy₂O₃ (ZPM Eu reductor) → Tb, Dy → Terfenol-D melt (UIV levitation melter) → [112] Bridgman rod (UHV crystal growth) → prestressed in a `lasagna_plate` housing → `uxv_electric_piston` with a strand drive coil (LuV coated conductor line) | 6 | 3 | rod ends → re-melted |
 | 37 | UXV conveyor: Ni, Mn, Ga → 5N (UEV electron beam furnace) → Ni₂MnGa melt (UIV levitation melter) → single crystal (UHV crystal growth) → twin-trained (UEV nitride magnet works) → `uxv_conveyor_module` (MSM elements driven by strand coils, LuV coated conductor line) | 6 | 4 | offcuts → re-melted |
 | 38 | Mk6 casing: scheelite → WO₃ (EV extraction cascade) → W-184 (UEV calutron) → W-184 wire → fibre preform (UEV CVI) → infiltrated `wf_rhea_billet` (UIV) → `uxv_fusion_casing` | 7 | 3 | W-182, W-186 → stock |
@@ -605,8 +606,8 @@ A crossing is one (UXV line, older machine) pair from the Cr column; UIV is one 
 | Era | Crossings | Machines met |
 |---|---|---|
 | UEV | 33 | electron beam furnace (12), nitride magnet works (7), calutron (5), chem lab (3), cyclotron (2), recoil separator (2), megabar, CVI |
-| ZPM | 26 | Eu reductor (5), quench caster (4), DEC (4), magnet works (3), actinide partitioning (3), waste retrieval (3), ion implanter (2), DSN, aerogel |
-| EV | 25 | extraction cascade (8), platinum plant (7), cryogenic plant (6), hot strip mill (4) |
+| ZPM | 25 | Eu reductor (5), quench caster (3), DEC (4), magnet works (3), actinide partitioning (3), waste retrieval (3), ion implanter (2), DSN, aerogel |
+| EV | 26 | extraction cascade (9), platinum plant (7), cryogenic plant (6), hot strip mill (4) |
 | UV | 17 | powder bed (6), cold (4), zone refining (2), MOCVD (2), BN reactor, synchrotron, antimatter trap |
 | UHV | 16 | crystal growth (7), foundry (3), transuranium (3), warp gate (2), tether works |
 | IV | 8 | fluorspar kiln (6), hot cell, fuel fabrication |
