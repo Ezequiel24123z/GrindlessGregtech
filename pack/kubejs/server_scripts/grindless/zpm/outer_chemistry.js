@@ -79,6 +79,14 @@
       fluidsIn: [{ id: 'gtceu:ethanol', amount: 1000 }], notConsumedFluids: [{ id: 'gtceu:carbon_dioxide', amount: 1000 }],
       itemsOut: [{ id: AEROGEL, count: 4 }], fluidsOut: [{ id: 'gtceu:ethanol', amount: 1000 }],
       eut: LUV_VA, duration: 600
+    },
+    // UIV-A2 (docs/eras/uiv.md, line 3): shock-grade pyrolytic graphite, the ramp-compression pulser's lonsdaleite feed (circuit 4)
+    {
+      name: 'pyrolytic_graphite', type: 'methane_pyrolysis', circuit: 4,
+      itemsIn: [], notConsumedItems: [],
+      fluidsIn: [{ id: 'gtceu:methane', amount: 1000 }], notConsumedFluids: [{ id: 'gtceu:tin', amount: 1000 }, { id: 'gtceu:nickel', amount: 1000 }],
+      itemsOut: [{ id: 'grindless:pyrolytic_graphite', count: 1 }], fluidsOut: [{ id: 'gtceu:hydrogen', amount: 2000 }],
+      eut: ZPM_VA, duration: 600
     }
   ]
 

@@ -58,6 +58,22 @@
       "energy": [
         { "stage": "exchange", "from": "gtceu:centrifuge/hydrogen_separation", "euPer": 3200, "per": 40, "unit": "mB of deuterium", "amount": 320 }
       ]
+    },
+    {
+      "name": "protium_draw_off",
+      "_why": "UIV-A2 (docs/eras/uiv.md, line 1): the plant's distilled water is deuterium-depleted, so the hydrogen drawn off its electrolysis is protium, the feed of the cryogenic plant's ortho-para conversion. Energy at GTM's distilled-water electrolysis price.",
+      "mode": "draw-off",
+      "circuit": 4,
+      "itemsIn": [],
+      "fluidsIn": [{ "id": "gtceu:distilled_water", "amount": 1000 }],
+      "fluidsOut": [
+        { "id": "gtceu:protium", "amount": 2000 },
+        { "id": "gtceu:oxygen", "amount": 1000 }
+      ],
+      "maxEUt": 1920,
+      "energy": [
+        { "stage": "electrolysis", "from": "gtceu:electrolyzer/distilled_water_electrolysis", "euPer": 45000, "per": 1000, "unit": "mB of distilled water", "amount": 1000 }
+      ]
     }
   ]
 }
