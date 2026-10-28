@@ -593,6 +593,43 @@
       ' stages; skipped ' + PP.skipped.length)
   }
 
+  // UEV-A4 rows (circuits 7 and 8; 1-4 are the plans, 5 is UHV's iridium crucible, 6 its Proxima liquor): the superalloy's dross gives its ruthenium and the
+  // electron beam's skull gives its iridium. Same electrode wear and no voiding of the cargo, as the plans.
+  var UEV_ROWS = [
+    {
+      name: 'sx_dross', circuit: 7,
+      itemIn: 'grindless:sx_dross', fluidsIn: [['gtceu:chlorine', 3000], ['gtceu:hydrogen', 3000]],
+      itemsOut: [['gtceu:ruthenium_dust', 1], ['gtceu:nickel_dust', 1]], fluidsOut: [['gtceu:hydrochloric_acid', 3000]],
+      eut: 1920, duration: 200
+    },
+    {
+      name: 'eb_skull', circuit: 8,
+      itemIn: 'grindless:eb_skull', fluidsIn: [['gtceu:chlorine', 1000]],
+      itemsOut: [['gtceu:iridium_dust', 1]], fluidsOut: [['gtceu:hydrochloric_acid', 1000]],
+      eut: 1920, duration: 200
+    }
+  ]
+
+  function addUevRows(event) {
+    UEV_ROWS.forEach(function (r) {
+      var missing = [r.itemIn].concat(r.itemsOut.map(function (o) { return o[0] })).filter(function (id) { return !Item.exists(id) })
+        .concat(r.fluidsIn.concat(r.fluidsOut).map(function (f) { return f[0] }).filter(function (id) { return !Fluid.exists(id) }))
+      if (missing.length > 0) {
+        console.error(LOG + 'pgm_refining row ' + r.name + ' skipped, unknown id(s): ' + missing.join(', '))
+        return
+      }
+      var recipe = event.recipes.gtceu.pgm_refining('grindless:uev/' + r.name)
+      recipe.itemInputs('1x ' + r.itemIn)
+      recipe.chancedInput('1x ' + ELECTRODE, ELECTRODE_WEAR, 0)
+      recipe.circuit(r.circuit)
+      r.fluidsIn.forEach(function (f) { recipe.inputFluids(Fluid.of(f[0], f[1])) })
+      r.itemsOut.forEach(function (o) { recipe.itemOutputs(o[1] + 'x ' + o[0]) })
+      r.fluidsOut.forEach(function (f) { recipe.outputFluids(Fluid.of(f[0], f[1])) })
+      recipe.EUt(r.eut).duration(r.duration)
+      recipe.addDataBool(KEEP_KEY, true)
+    })
+  }
+
   // ---------------------------------------------------------------- crafting
 
   function missingOf(ids) {
@@ -628,6 +665,11 @@
       generate(event)
     } catch (e) {
       console.error(LOG + 'platinum plant recipe generation failed: ' + e)
+    }
+    try {
+      addUevRows(event)
+    } catch (e3) {
+      console.error(LOG + 'platinum plant UEV rows failed: ' + e3)
     }
     try {
       addCrafting(event)
