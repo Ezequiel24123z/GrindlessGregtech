@@ -78,17 +78,19 @@
     var PHPM = Java.loadClass('com.gregtechceu.gtceu.common.machine.multiblock.part.ParallelHatchPartMachine')
     var RL = Java.loadClass('net.minecraft.resources.ResourceLocation')
     event.create('parallel_hatch', 'custom')
-      .tiers(9)
+      .tiers(9, 10)
       .machine(function (holder, tier, tankScaling) { return new PHPM(holder, tier) })
       .definition(function (tier, builder) {
+        // UEV (x4096, UEV-M): the same registration one tier up; a second event.create of the same name would clash
+        var name = tier === 10 ? 'uev_parallel_hatch' : 'uhv_parallel_hatch'
         builder
-          .langValue('Hyper Parallel Control Hatch')
+          .langValue(tier === 10 ? 'Ultimate Parallel Control Hatch' : 'Hyper Parallel Control Hatch')
           .rotationState(RotationState.ALL)
           .abilities(PartAbility.PARALLEL_HATCH)
         builder.modelPropertyBool(GTModelProperties.IS_FORMED, false)
-        builder['overlayTieredHullModel(net.minecraft.resources.ResourceLocation)'](new RL('grindless', 'block/machines/uhv_parallel_hatch'))
+        builder['overlayTieredHullModel(net.minecraft.resources.ResourceLocation)'](new RL('grindless', 'block/machines/' + name))
         builder['tooltips(net.minecraft.network.chat.Component[])']([
-          Text.translate('grindless.machine.uhv_parallel_hatch.tooltip'),
+          Text.translate('grindless.machine.' + name + '.tooltip'),
           Text.translate('gtceu.part_sharing.disabled')
         ])
       })
@@ -98,7 +100,7 @@
     ability: ABILITY,
     limits: LIMITS,
     // the IV hatch (x4, IV-B6's recipe); GTM's LuV, ZPM and UV ones (x16, x64, x256) fit the same cell; ours at UHV (x1024, MEGA-0b)
-    hatches: ['gtceu:iv_parallel_hatch', 'gtceu:luv_parallel_hatch', 'gtceu:zpm_parallel_hatch', 'gtceu:uv_parallel_hatch', 'gtceu:uhv_parallel_hatch'],
+    hatches: ['gtceu:iv_parallel_hatch', 'gtceu:luv_parallel_hatch', 'gtceu:zpm_parallel_hatch', 'gtceu:uv_parallel_hatch', 'gtceu:uhv_parallel_hatch', 'gtceu:uev_parallel_hatch'],
     part: part,
     hasHatch: hasHatch,
     modifier: modifier,
