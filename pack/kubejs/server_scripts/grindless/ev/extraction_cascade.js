@@ -129,6 +129,39 @@
       itemsOut: [],
       fluidsOut: [{ id: SOLUTION, amount: 1000 }, { id: 'minecraft:water', amount: 1000 }],
       eut: 1920, duration: 40
+    },
+    // UEV-A4 modes (circuits 8-11): the Zr/Hf, Ta/Nb, Tb and La/Y cuts that feed the electron beam furnace and the superalloy lines
+    {
+      name: 'zr_hf_cut', mode: 'uev', circuit: 8,
+      itemsIn: [{ id: 'grindless:zr_hf_chloride_dust', count: 4 }],
+      fluidsIn: [{ id: 'minecraft:water', amount: 2000 }, { id: KEROSENE, amount: 1000 }, { id: HCL, amount: 1000 }],
+      itemsOut: [{ id: 'grindless:zirconium_chloride_dust', count: 3 }, { id: 'grindless:hafnium_chloride_dust', count: 1 }],
+      fluidsOut: [{ id: KEROSENE, amount: 950 }, { id: DILUTED_HCL, amount: 1000 }],
+      eut: 1920, duration: 100
+    },
+    {
+      name: 'tantalum_cut', mode: 'uev', circuit: 9,
+      itemsIn: [{ id: 'grindless:tantalite_fluoride_cake', count: 4 }],
+      fluidsIn: [{ id: 'gtceu:hydrofluoric_acid', amount: 2000 }, { id: KEROSENE, amount: 1000 }, { id: 'minecraft:water', amount: 1000 }],
+      itemsOut: [{ id: 'grindless:k2taf7_dust', count: 2 }, { id: 'grindless:niobium_oxyfluoride_dust', count: 1 }],
+      fluidsOut: [{ id: KEROSENE, amount: 950 }, { id: 'gtceu:hydrofluoric_acid', amount: 1000 }],
+      eut: 1920, duration: 100
+    },
+    {
+      name: 'terbium_strip', mode: 'uev', circuit: 10,
+      itemsIn: [{ id: MIX_CL, count: 32 }],
+      fluidsIn: [{ id: 'minecraft:water', amount: 3000 }, { id: KEROSENE, amount: 1000 }],
+      itemsOut: [{ id: 'grindless:terbium_oxide_dust', count: 5 }, { id: MIX_CL, count: 24 }],
+      fluidsOut: [{ id: KEROSENE, amount: 950 }, { id: HCL, amount: 6000 }],
+      eut: 1920, duration: 100
+    },
+    {
+      name: 'lanthanum_yttrium_strip', mode: 'uev', circuit: 11,
+      itemsIn: [{ id: MIX_CL, count: 32 }],
+      fluidsIn: [{ id: 'minecraft:water', amount: 3000 }, { id: KEROSENE, amount: 1000 }],
+      itemsOut: [{ id: 'gtceu:yttrium_oxide_dust', count: 5 }, { id: 'gtceu:lanthanum_oxide_dust', count: 5 }, { id: MIX_CL, count: 16 }],
+      fluidsOut: [{ id: KEROSENE, amount: 950 }, { id: HCL, amount: 6000 }],
+      eut: 1920, duration: 100
     }
   ]
 

@@ -187,3 +187,18 @@ test('every new item is named and tooltipped in en_us and es_es, and every item 
     for (const r of T.types[type].recipes) assert.ok(lang.includes(`'gtceu.recipe.${dataKey}.${r.name}'`), `${type}/${r.name}`);
   }
 });
+
+test('the eight older rows exist: cascade circuits 8-11, platinum plant circuits 7-8, kiln HF and CaF2', () => {
+  const sv = path.join(kube, 'server_scripts', 'grindless');
+  const casc = read(path.join(sv, 'ev', 'extraction_cascade.js'));
+  for (const [n, c] of [['zr_hf_cut', 8], ['tantalum_cut', 9], ['terbium_strip', 10], ['lanthanum_yttrium_strip', 11]]) {
+    assert.match(casc, new RegExp(`name: '${n}', mode: 'uev', circuit: ${c}\\b`), n);
+  }
+  const pp = read(path.join(sv, 'ev', 'platinum_plant.js'));
+  assert.match(pp, /name: 'sx_dross', circuit: 7/);
+  assert.match(pp, /name: 'eb_skull', circuit: 8/);
+  assert.match(pp, /KEEP_KEY, true/);
+  const fk = read(path.join(sv, 'iv', 'fluorspar_kiln.js'));
+  assert.match(fk, /name: 'hf_from_alkali_fluoride'/);
+  assert.match(fk, /name: 'calcium_fluoride_return'/);
+});
