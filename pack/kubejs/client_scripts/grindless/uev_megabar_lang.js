@@ -1,3 +1,4 @@
+// priority: 5026
 // Gregtech Grindless - names and tooltips of UEV's megabar press (startup_scripts/grindless/uev/megabar.js; package UEV-A3):
 //
 //   block.gtceu.megabar_press, gtceu.megabar_synthesis            machine and recipe type names
