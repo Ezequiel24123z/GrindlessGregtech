@@ -24,7 +24,10 @@
           "itemsOut": [{ "id": "grindless:onion_carbon", "count": 4 }], "fluidsOut": [] },
         { "name": "nb_ta_button", "circuit": 7, "eut": 1966080, "duration": 500,
           "itemsIn": [{ "id": "grindless:niobium_powder", "count": 2 }, { "id": "grindless:tantalum_powder", "count": 1 }], "kept": [], "fluidsIn": [], "charge": [],
-          "itemsOut": [{ "id": "grindless:nb_ta_button", "count": 3 }, { "id": "grindless:eb_skull", "count": 1 }], "fluidsOut": [] }
+          "itemsOut": [{ "id": "grindless:nb_ta_button", "count": 3 }, { "id": "grindless:eb_skull", "count": 1 }], "fluidsOut": [] },
+        { "_why": "UIV-A10, line 20: electron-beam distillation of tin for the droplet generator (circuit 8); the skull goes back to the melt.", "name": "tin_distill", "circuit": 8, "eut": 1966080, "duration": 400,
+          "itemsIn": [{ "id": "gtceu:tin_ingot", "count": 4 }], "kept": [], "fluidsIn": [], "charge": [],
+          "itemsOut": [{ "id": "grindless:eb_distilled_tin", "count": 3 }, { "id": "grindless:eb_skull", "count": 1 }], "fluidsOut": [] }
       ]
     },
     "single_crystal_casting": {
