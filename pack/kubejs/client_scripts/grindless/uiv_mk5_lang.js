@@ -1,4 +1,4 @@
-// priority: 3150
+// priority: 3006
 // Gregtech Grindless - names and tooltips of UIV's polarised proton source and Mk5 fusion ring (startup_scripts/grindless/uiv/mk5.js; package UIV-A9):
 //
 //   block.gtceu.<machine>, gtceu.<type>, material.gtceu.<id>   machine, recipe type and gas names

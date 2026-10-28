@@ -1,4 +1,4 @@
-// priority: -8457
+// priority: -8472
 ﻿// TEST ONLY, UIV-S0. Command: kubejs custom_command gg_test_uiv_s0_dump
 // Disposable read-only spikes, never shipped. Places nothing.
 //   s0_1_*   the registry delta (counts, the UIV ids, our throwaway ids), UXV casing, gtnn optical parts and their recipes, the 18 GTM materials

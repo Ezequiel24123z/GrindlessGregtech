@@ -68,6 +68,7 @@ Generators for the pack's own textures. Everything is procedural 16x16 pixel art
 | `Build-UIVMemoriesCryostatTextures.ps1` | Writes the spectral hole burner's and millikelvin cryostat works' controller faces and the fourteen item icons of UIV's memory and millikelvin lines (UIV-A6). `-Credits`. |
 | `Build-UIVMainframeTextures.ps1` | Writes the eight item icons of UIV's optical mainframe, ThF4 and chip-clock lines (UIV-A7). `-Credits`. |
 | `Build-UIVUivComponentsTextures.ps1` | Writes the seventeen item icons of UIV's impeller, strain-wave gear and GdBCO lines behind the UIV pump, robot arm and motor (UIV-A8). `-Credits`. |
+| `Build-UIVMk5Textures.ps1` | Writes the controller overlays of the polarised proton source and the UIV (Mk5) fusion ring and the sixteen item icons of the polarised fuel, first-wall and divertor lines (UIV-A9). `-Credits`. |
 | `Build-UHVZblanTextures.ps1` | Writes the ZBLAN preform (UHV-A10, `item/zblan_preform.png`). The ZBLAN draw tower reuses UV's draw tower casing. `-Credits`. |
 | `Build-UVHeatSourcesTextures.ps1` | Writes the four item icons of UV's heat source works (UV-A2): probe RTG, americium micro source, curium RTG pellet, heavy curium oxide. `-Credits`. |
 | `Build-UVAcceleratorsTextures.ps1` | Writes the faces of UV's synchrotron, muon fusion cell and antimatter trap (UV-A5: `multiblock/synchrotron/`, `multiblock/muon_fusion_cell/`, `multiblock/antimatter_trap/`) and the 13 item icons of the LIGA, antiproton and muon fusion lines. `-Credits`. |
@@ -1588,4 +1589,13 @@ Procedural, drawn by `Build-UIVUivComponentsTextures.ps1`; nothing is copied fro
 ```powershell
 powershell -NoProfile -ExecutionPolicy Bypass -File tools\assets\Build-UIVUivComponentsTextures.ps1
 powershell -NoProfile -ExecutionPolicy Bypass -File tools\assets\Build-UIVUivComponentsTextures.ps1 -Credits
+```
+
+## UIV Mk5 fusion and polarised fuels (UIV-A9)
+
+Procedural, drawn by `Build-UIVMk5Textures.ps1`; nothing is copied from another mod. Controller overlays (`block/multiblock/<id>/overlay_front*`, animated active and emissive layers) for `polarised_proton_source` and `uiv_fusion_reactor`, and sixteen item icons (`item/<id>.png`): Li-6 hydride, polarised Li-6 hydride, polarised hydrogen ice, polarised 15N ammonia ice, polarised hydrogen, Li-6 hydride and 15N ammonia pellets, polarised helium-3 cell, plasma-sprayed tile, first-wall tile, Li-Sn armoured tile, near-net and finished W mesh, CPS wetted mesh, divertor cassette and divertor.
+
+```powershell
+powershell -NoProfile -ExecutionPolicy Bypass -File tools\assets\Build-UIVMk5Textures.ps1
+powershell -NoProfile -ExecutionPolicy Bypass -File tools\assets\Build-UIVMk5Textures.ps1 -Credits
 ```
