@@ -915,6 +915,22 @@
 			y: 0.0d
 		}
 		{
+			dependencies: ["14DF849D657D6AEF"]
+			description: ["The &6Ore Refinery&r takes raw ore through the macerator, the washer, the thermal centrifuge and the sifter in a single recipe. The washer uses plain water here, and many ores go through at once."]
+			icon: "gtceu:ore_refinery"
+			id: "77E698504E2588EF"
+			rewards: [
+				{ id: "5D609A8EA5A94F14", type: "xp", xp: 80 }
+				{ count: 8, id: "317F49D6060AD547", item: "gtceu:steel_plate", type: "item" }
+			]
+			shape: "gear"
+			size: 1.25d
+			tasks: [{ id: "17CC74FF30958C80", item: "gtceu:ore_refinery", type: "item" }]
+			title: "Ore to Dust in One Pass"
+			x: 6.0d
+			y: 1.5d
+		}
+		{
 			dependencies: ["11BD5A24AAF314BC", "1D65975B45CF7836"]
 			description: [
 				"The &6IV Machine Hull&r puts Martian tungsten steel, platinum cable and PTFE into one box."

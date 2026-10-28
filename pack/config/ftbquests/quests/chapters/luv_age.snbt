@@ -807,6 +807,22 @@
 			y: 0.0d
 		}
 		{
+			dependencies: ["38F8454E1AEB4E72"]
+			description: ["The &6Mega Chemical Complex&r joins whole lines into one recipe: PTFE, epoxy and para-aramid each go from raw inputs to finished product without a single hand-off. The Coil Chemical Plants you built at HV go into it."]
+			icon: "gtceu:mega_chemical_complex"
+			id: "3A90AC0F5D813B89"
+			rewards: [
+				{ id: "3F7E7EBCE074DC44", type: "xp", xp: 100 }
+				{ count: 8, id: "5FF60EBA8289D2D2", item: "gtceu:polytetrafluoroethylene_ingot", type: "item" }
+			]
+			shape: "gear"
+			size: 1.25d
+			tasks: [{ id: "5FC8A4EEE57F6C4A", item: "gtceu:mega_chemical_complex", type: "item" }]
+			title: "Chemical Complex"
+			x: 8.0d
+			y: 3.0d
+		}
+		{
 			dependencies: ["32CEA916CCFD8B21"]
 			description: ["Trinium and naquadah alloy make the &6ZPM Machine Hull&r, and the ZPM energy hatch needs everything you learned out here. Bring the wetware, the catalogue and the Saturn chart along: the next trip starts in orbit and never touches the ground."]
 			icon: "gtceu:zpm_machine_hull"

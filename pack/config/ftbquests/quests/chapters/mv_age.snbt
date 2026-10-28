@@ -735,6 +735,24 @@
 			x: 6.0d
 			y: -6.0d
 		}
+		{
+			dependencies: ["0D69D5BBC371A5B7"]
+			description: [
+				"The &6Polymer Works&r turns raw inputs into polyethylene and rubber sheets in a single recipe, with no chemical reactor, mixer and solidifier chain in between. It runs several at once, up to what your hatch voltage allows."
+			]
+			icon: "gtceu:polymer_works"
+			id: "3B42346CE2FA1CC4"
+			rewards: [
+				{ id: "3236E3D5ABD0F3DA", type: "xp", xp: 50 }
+				{ count: 16, id: "1CC5EF3BF4664077", item: "gtceu:polyethylene_plate", type: "item" }
+			]
+			shape: "gear"
+			size: 1.25d
+			tasks: [{ id: "15FEC3AC6D61B5F5", item: "gtceu:polymer_works", type: "item" }]
+			title: "Plastic by the Sheet"
+			x: 16.0d
+			y: 4.5d
+		}
 	]
 	subtitle: ["The End for ore, silicon and plastics at home, and a landing site picked by radar."]
 	title: "MV: The Far End"
