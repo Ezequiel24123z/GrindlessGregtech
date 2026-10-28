@@ -16,7 +16,7 @@ Everything is built against uiv.md as designed; where a UIV package is not merge
 | Progression multiblocks | 22 | 21 | x0.95 | ~30 (x1.35) |
 | Process lines | 46 (333 steps, avg 7.2) | 61 (453 steps, avg 7.4) | x1.33 | ~69 (x1.5) |
 | Crossings with lines two or more eras back | 100 (UHV and older) | 152 (UEV and older) | x1.52 | ~150 |
-| Older machines with a new mode | 58 | 66 | x1.14 | none |
+| Older machines with a new mode | 58 | 45 (about 80 rows) | x0.78 | none |
 | Places with a product of their own | 3 | 3 (+ home) | x1.0 | breadth |
 
 **Why 21 machines:** every machine has a route only it gives; the nine candidates that would reach ~30 are second routes to existing products (tetrataenite `luv/foundation.js:12`, CNT muscles `uev/earth_orbit.js:27`), convenience versions or OpV material, listed with reasons under Considered and dropped. A 22nd for parity is an open question (default no).
@@ -254,5 +254,161 @@ UXV recipes run up to 1 A x V[UXV] = 134,217,728 EU/t on two UIV energy hatches,
 **Crossings:** ZPM DEC, ZPM quench caster, UEV calutron, UEV electron beam furnace, EV cryogenic plant.
 **Risks:** storage 10,240,000,000 at 16 hatches and the starts are long values (S0-4).
 **Source:** Burbidge, Burbidge, Fowler & Hoyle 1957 (Rev Mod Phys 29:547); Hoyle 1954 (ApJS 1:121).
+
+### 10. Stellar elevator: `gtceu:stellar_elevator`, type `gtceu:star_lifting` (Cygnus X-1 orbit)
+
+**What it gains:** star lifting at L1 (named fiction): HDE 226868 nearly fills its Roche lobe, so a ring current and surface heating beneath the inner Lagrange point push its envelope over the saddle into a magnetic funnel. Nothing older takes matter from a star.
+**Recipes:** c1 1,000 mB liquid helium (coolant, 90% back) → 1,000 mB `stellar_plasma` (134,217,728 EU/t, 1,200 t); c2 → `elevator_log` (data, every 64 runs: the arm chart's Cygnus piece; 8,388,608 EU/t).
+**Byproducts:** warm helium → UV cold (recondensed).
+**Structure:** 9x9x19, `gtceu:uxv_machine_casing`, `gtceu:superconducting_coil`.
+**Crossings:** UV cold, LuV helium refrigerator (as built coolant).
+**Source:** Criswell 1985 (Interstellar Migration and the Human Experience, 50-87); Miller-Jones 2021 (Science 371:1046); Miškovičová 2016 (A&A 590:A114).
+
+### 11. Plasma mass filter: `gtceu:plasma_mass_filter`, type `gtceu:plasma_mass_filtering` (Cygnus X-1 orbit, c1-c2)
+
+**What it gains:** an Archimedes band-gap filter: in a rotating plasma with crossed E and B fields, ions above a cutoff mass are ejected radially while light ions stay confined, a one-pass mass split at fluid rates.
+**Recipes:** c1 1,000 mB `stellar_plasma` → 700 mB `stellar_hydrogen_cut` + 270 mB `stellar_helium_cut` + 15 mB `stellar_cno_cut` + 15 mB `stellar_heavy_cut` (67,108,864 EU/t, 400 t); c2 1,000 mB `disk_plasma` → 900 mB `filtered_disk_plasma` + 100 mB `stellar_heavy_cut` (67,108,864 EU/t, 400 t).
+**Byproducts:** none; every cut has a use (Lines).
+**Structure:** 7x7x11, `gtceu:superconducting_coil`, `gtceu:high_power_casing`.
+**Crossings:** UEV calutron (heavy cut isotopes), EV cryogenic plant (He-4 cut).
+**Source:** Ohkawa & Miller 2002 (Phys Plasmas 9:5116); Gueroult, Rax & Fisch 2018 (J Clean Prod 182:1060).
+
+### 12. Stellar condensation tower: `gtceu:stellar_condensation_tower`, type `gtceu:stellar_condensation` (Cygnus X-1 orbit)
+
+**What it gains:** cools the heavy cut along the equilibrium condensation sequence (Ca-Al-Ti oxides near 1,700 K, Fe-Ni metal near 1,350 K, forsterite near 1,300 K, troilite near 700 K, then ices) and draws each cut at its stage; the supply of the rockless platforms (rule 1).
+**Recipes:** c1 100 mB `stellar_heavy_cut` + 100 mB `stellar_hydrogen_cut` → `refractory_condensate` + `metal_condensate` + `silicate_condensate` + 100 mB `volatile_condensate` (33,554,432 EU/t, 600 t). The cuts separate into ordinary GT materials on EV and HV plants as built.
+**Structure:** 5x5x21 tower, 7 stages, `gtceu:uxv_machine_casing`.
+**Crossings:** EV extraction cascade, HV syngas plant (volatiles).
+**Source:** Grossman 1972 (GCA 36:597); Lodders 2003 (ApJ 591:1220).
+
+### 13. Accretion disk skimmer: `gtceu:accretion_disk_skimmer`, type `gtceu:disk_skimming` (Cygnus X-1 orbit)
+
+**What it gains:** a magnetic scoop in the outer disk (journey.md:119; named fiction). Cygnus X-1's disk is fed by the focused wind and its inner edge reaches about 1 keV; nothing older reaches disk plasma.
+**Recipes:** c1 → 1,000 mB `disk_plasma` (134,217,728 EU/t, 1,200 t), consumes 1 `grindless:mh_winding` at 5% *(tune)*.
+**Structure:** 9x5x15, `gtceu:uxv_machine_casing`, `gtceu:superconducting_coil`.
+**Crossings:** none of its own; its product feeds the FRC and BZ lines.
+**Source:** Shakura & Sunyaev 1973 (A&A 24:337); Gou 2011 (ApJ 742:85).
+
+### 14. FRC former: `gtceu:frc_former`, type `gtceu:frc_forming` (Cygnus X-1 orbit, c1)
+
+**What it gains:** theta-pinch formation of field-reversed configurations, compact toroids with closed poloidal flux and no central post, trapped in a cartridge; the M2P2 shield that carries the player through Vela's wind. The cartridge's indefinite life is named fiction.
+**Recipes:** c1 500 mB `filtered_disk_plasma` + 4 `grindless:mh_winding` (10% consumed) → `frc_cartridge` (134,217,728 EU/t, 1,600 t); c2 500 mB `filtered_disk_plasma` → 500 mB `flux_loaded_plasma` (BZ fuel, 67,108,864 EU/t, 400 t).
+**Structure:** 5x5x13 linear theta-pinch, `gtceu:superconducting_coil`, `gtceu:fusion_glass`.
+**Crossings:** none (UIV windings are one era back).
+**Source:** Tuszewski 1988 (Nucl Fusion 28:2033); Binderbauer 2015 (Phys Plasmas 22:056110); Winglee 2000 (JGR 105:21067).
+
+### 15. BZ dynamo: `gtceu:bz_dynamo`, type `gtceu:blandford_znajek`, generator (Cygnus X-1 orbit)
+
+**What it gains:** power from the black hole's spin (a* > 0.95) through field lines threading the horizon; uiv.md reserved relativistic jets and Blandford-Znajek for UXV. Not free (rule 8): the field must be loaded, and the jet carries the flux-loaded plasma away.
+**Recipes:** c1 50 mB/t `flux_loaded_plasma` → 1,073,741,824 EU/t (8 A x V[UXV] = 2^30) for 200 t *(tune)*, out through two UIV 16 A dynamo hatches (2^29 each) or one UXV 16 A dynamo hatch.
+**Structure:** 11x11x7 ring around the scoop line, `gtceu:uxv_machine_casing`.
+**Crossings:** none; power only.
+**Risks:** output below 2^31 by design (S0-2 not needed).
+**Source:** Blandford & Znajek 1977 (MNRAS 179:433); Tchekhovskoy, Narayan & McKinney 2011 (MNRAS 418:L79).
+
+### 16. Pasta extractor: `gtceu:pasta_extractor`, type `gtceu:pasta_extraction` (Vela pulsar orbit)
+
+**What it gains:** at a glitch, pinned superfluid vortices unpin and the crust slips; the extractor draws inner-crust matter out along the flux tubes into a cage (named fiction; the glitch is real). Nothing older reaches the pasta layers.
+**Recipes:** c1 `vela_glitch_timing` (kept) + `grindless:neutronium_pellet` (ballast, 10% consumed) → `raw_pasta` (134,217,728 EU/t, 2,400 t).
+**Structure:** 9x9x15, `grindless:neutron_star_site_casing`, `gtceu:superconducting_coil`.
+**Crossings:** ZPM DSN (glitch timing), LuV GW detector (glitch record).
+**Source:** Anderson & Itoh 1975 (Nature 256:25); Link, Epstein & Lattimer 1999 (PRL 83:3362).
+
+### 17. Pasta phase sorter: `gtceu:pasta_phase_sorter`, type `gtceu:pasta_sorting` (Vela pulsar orbit)
+
+**What it gains:** splits raw pasta along the inner crust's density sequence: gnocchi, spaghetti, lasagna, then the inverted phases (anti-spaghetti, bubbles).
+**Recipes:** c1 `raw_pasta` → `spaghetti_phase` + `lasagna_phase` + `gnocchi_fragment` + `anti_phase_residue` (67,108,864 EU/t, 1,200 t); each phase leaves only in a cage (UIV neutronium cage new mode, `grindless:cage_part`); c2 16 `anti_phase_residue` → `pasta_core_sample` (134,217,728 EU/t, 2,400 t).
+**Byproducts:** gnocchi → UIV r-process decompressor (new row): r-process elements to stock.
+**Structure:** 7x7x9, `grindless:neutron_star_site_casing`.
+**Source:** Ravenhall, Pethick & Wilson 1983 (PRL 50:2066); Hashimoto, Seki & Yamada 1984 (Prog Theor Phys 71:320); Caplan & Horowitz 2017 (Rev Mod Phys 89:041002).
+
+### 18. Pasta draw bench: `gtceu:pasta_draw_bench`, type `gtceu:pasta_drawing` (Vela pulsar orbit)
+
+**What it gains:** draws caged spaghetti into a continuous strand inside a field sheath that stands in for crust pressure (named fiction): the UXV superconductor.
+**Recipes:** c1 caged `spaghetti_phase` + aerogel (ZPM, as built) → 8 `gtceu:pasta_strand_single_wire` (134,217,728 EU/t, 1,200 t).
+**Structure:** 3x3x17 draw line, `grindless:neutron_star_site_casing`.
+**Crossings:** ZPM aerogel.
+**Risks:** material `pasta_strand` with superconductor properties at V[UXV] (S0-8); generic wiremill and extruder rows for it are cut (F2).
+**Source:** Baym, Pethick & Pines 1969 (Nature 224:673); Caplan & Horowitz 2017.
+
+### 19. Pasta laminator: `gtceu:pasta_laminator`, type `gtceu:pasta_lamination` (Vela pulsar orbit)
+
+**What it gains:** presses caged lasagna sheets into plate. Pasta is the stiffest material computed: shear modulus near 10³⁰ erg/cm³, breaking strain near 0.1 (Caplan 2018).
+**Recipes:** c1 caged `lasagna_phase` + `grindless:wf_rhea_billet` (frame) → 4 `lasagna_plate` (134,217,728 EU/t, 1,200 t); c2 `lasagna_plate` + 2 strand wire → `polar_cap_electrode` (33,554,432 EU/t, 400 t).
+**Structure:** 5x5x7 press, `grindless:neutron_star_site_casing`.
+**Source:** Caplan, Schneider & Horowitz 2018 (PRL 121:132701).
+
+### 20. Polar cap tap: `gtceu:polar_cap_tap`, type `gtceu:polar_cap_tapping`, generator (Vela pulsar orbit)
+
+**What it gains:** a share of the open-field-line potential (named fiction): Vela's polar-cap drop is near 10¹⁵ V and its spin-down power near 7 x 10³⁶ erg/s. The tap draws current through a lasagna electrode that sputters away (rule 8).
+**Recipes:** c1 1 `polar_cap_electrode` → 536,870,912 EU/t (4 A x V[UXV]) for 2,400 t *(tune)*, out through one UIV 16 A dynamo hatch.
+**Structure:** 7x7x7, `grindless:neutron_star_site_casing`.
+**Risks:** weakest machine claim: UIV dropped a pulsar-wind dynamo at J0437. It counts because its electrode is a Vela product and it powers the Vela platform with no sunlight.
+**Source:** Goldreich & Julian 1969 (ApJ 157:869); Ruderman & Sutherland 1975 (ApJ 196:51).
+
+### 21. Ejecta knot sweeper: `gtceu:ejecta_knot_sweeper`, type `gtceu:ejecta_sweeping` (Cassiopeia A)
+
+**What it gains:** a magnetic scoop through Cas A's Ti-rich knots collects ejecta dust; young Ti-44 exists in reach only here.
+**Recipes:** c1 → `ejecta_knot_dust` (67,108,864 EU/t, 1,200 t), consumes 1 `grindless:mh_winding` at 2% *(tune)*.
+**Byproducts:** Si, S, Ar, Ca, Fe in the dust: inert, split on the EV extraction cascade, voidable (rule 3).
+**Structure:** 9x5x9, `grindless:whipple_shield_casing`, `gtceu:superconducting_coil`.
+**Crossings:** EV extraction cascade, UEV calutron, IV hot cell.
+**Source:** Grefenstette 2014 (Nature 506:339); Sato 2021 (Nature 592:537); Vink 2012 (A&ARv 20:49).
+
+## Older machines, new modes
+
+Placement per DECISIONS.md:508. Circuits are taken by each package after `git grep` of the type (Common). UIV machines are one era back: they take modes but are not crossings.
+
+| Machine (era, file:line) | Mode | Recipe | Feeds |
+|---|---|---|---|
+| Cryogenic plant (EV, `ev/cryogenic_plant.js:40`) | He-4 polish | `stellar_helium_cut` → `triple_alpha_fuel` (H and Ne frozen out) | Mk6 c2 |
+| Extraction cascade (EV, `ev/extraction_cascade.js:92`) | knot dust; flux dross | `ejecta_knot_dust` → Ti fraction + Si, S, Ca, Fe; LPE dross → Pb | Ti-44 line; YIG |
+| Platinum plant (EV, `ev/platinum_plant.js:598`) | sputter grade; etch recovery | 5N Pt, Ru, Ir → `saf_target_set` feed; etch residue → Pt, Ru | targets |
+| Hot strip mill (EV, `ev/combined_cycle_and_hot_mill.js:464`) | tetrataenite lamination | `grindless:tetrataenite` rod → `tetrataenite_lamination` | motor |
+| Syngas plant (HV, `hv/syngas_plant.js:82`) | platform syngas | `volatile_condensate` → syngas | platform plastics |
+| Fuel fabrication (IV, `iv/uranium_cycle.js:44`) | ion-source charge | depleted U → `u238_ion_source` | MNT |
+| Hot cell (IV, `iv/hot_cell.js:36`) | sealed core; spent core | Ti-44 → `ti44_core`; spent core → Ca-44 | gamma laser |
+| Fluorspar kiln (IV, `iv/fluorspar_kiln.js:83`) | MgO calcine | Mg-24 carbonate → 5N MgO | `mgo_target` |
+| HTS magnet works (LuV, `luv/hts_magnet_works.js:32`) | strand stator | strand wire + lamination → `strand_stator` | motor |
+| Coated conductor line (LuV, `luv/coated_conductor_line.js:32`) | strand tape | strand wire → `strand_tape` | field generator, SMES |
+| GW detector (LuV, `luv/ganymede.js:48`) | Vela strain record | `vela_glitch_timing` → `vela_glitch_record` (data) | arm chart |
+| Magnet works (ZPM, `zpm/magnet_works.js:27`) | rotor | `tetrataenite_lamination` → `tetrataenite_rotor` | motor |
+| Quench caster (ZPM, `zpm/fusion.js:97`) | Mk6 ash x3 | He-burning ash → C-12 + O-16; C ash → Ne-20, Na-23, Mg-24; O ash → Si-28, S-32, P-31 | Mk6 c3, c4; MgO |
+| Ion implanter (ZPM, `zpm/qubits.js:47`) | ion-beam etch | `mtj_stack_wafer` (annealed) → `mtj_die` | sensor, racetrack |
+| Actinide partitioning (ZPM, `zpm/actinides.js:85`) | Cm cut; fragments | Cm fraction → calutron; MNT fragments → Pb, Hg, Pt | MNT |
+| Waste retrieval (ZPM, `zpm/actinides.js:58`) | MNT target | activated target → stock | by-product |
+| DEC (ZPM, `zpm/fusion.js:149-170`) | Mk6 plasmas x4 | four plasmas → EU + ash | power, ash |
+| DSN (ZPM, `zpm/observatory.js:30`) | Vela timing | → `vela_glitch_timing` (kept) | extractor |
+| Cold (UV, `uv/cold.js:55`) | heat flush | He-II → isotopically pure He-II | SHeQUID |
+| Powder bed (UV, `uv/materials.js:52`) | targets x5 | CoFeB, MgO, Heusler, SrRuO₃, La-BFO powders → targets; spent re-press | spintronics |
+| Zone refining (UV, `uv/detectors.js:56`) | 7N Te, Ge | Te, Ge → 7N | CVT crystals |
+| MOCVD (UV, `uv/photonics.js:143`) | LPCVD SiN | → `sin_membrane` | SHeQUID |
+| Synchrotron (UV, `uv/accelerators.js:34`) | U-238 injector | `u238_ion_source` → `u238_beam_charge` | MNT |
+| Antimatter trap (UV, `uv/accelerators.js:146`) | positron stacking; own file, `.dimension` overworld | slow positrons → `positron_stack` | gamma laser |
+| EHT (UV, `uv/edge.js:46`) | VLBI parallax | → `cygnus_vlbi_record` (data) | arm chart |
+| Crystal growth (UHV, `uhv/crystals.js:28`) | GGG, DyScO₃ (Czochralski); WTe₂, FGT (CVT); recrystallise | five rows | spintronics |
+| Foundry (UHV, `uhv/photonics.js:32`) | MESO integration | `me_switch_wafer` + `sot_readout_stack` → `meso_logic_die` | mainframe |
+| Transuranium (UHV, `uhv/transcurium.js:25`) | molecular plating | Fm-257, Es-254, Cm-248 → targets | superheavies, MNT |
+| Tether works (UHV, `uhv/elevator.js:106`) | Whipple bumper | `cnt_densified_yarn` → `cnt_bumper_weave` | Whipple shield |
+| Warp gate (UHV, `uhv/gate.js:28`) | c8 Vela, c9 Cas A, c10 OpV gate | Gate | travel, gate |
+| Calutron (UEV, `uev/isotopes.js:21`) | Ti-44, Fm-257, Es-254, Cm-248, W-184 | five rows | lines |
+| Cyclotron (UEV, `uev/superheavy.js:21`) | 121, 122 | Ti-50 + Es-254 / Fm-257 | census III |
+| Recoil separator (UEV, `uev/superheavy.js:21`) | 121, 122 | → recoils | census III |
+| Chem lab (UEV, `uev/superheavy.js:21`) | Es/Fm split; census III | UIV line 32 debris → Es, Fm; recoils → census | superheavies |
+| Megabar (UEV, `uev/megabar.js:23`) | Ba-BN growth | BN + Ba → `hbn_crystal` | vdW |
+| Electron beam furnace (UEV, `uev/electron_beam.js:23`) | apertures, tracks, bus, C-12 vapour | four rows | SHeQUID, racetrack, YIG, Mk6 c3 |
+| Nitride magnet works (UEV, `uev/composites.js:22`) | field anneal; SMES cell | MTJ, MRAM anneal; `uxv_smes_cell` | spintronics, W |
+| CVI (UEV, `uev/composites.js:22`) | W-184 preform | W-184 fibre → `w184_cvi_preform` | Mk6 casing |
+| Photonic hall (UEV, `uev/photonics.js:25`) | spintronic mainframe | dies → `gtnn:spintronic_mainframe` | circuit |
+| Ergosphere probe bay (UIV-B4) | Kerr sling | `relay_seed` → `launched_relay_seed` | travel |
+| Matrioshka (UIV-A10) | arm chart | three records → `arm_chart` | gate |
+| Neutronium cage (UIV-B2) | pasta caging | phases → caged phases | Vela |
+| R-process decompressor (UIV-B2) | gnocchi | `gnocchi_fragment` → r-process stock | by-product |
+| Levitation melter (UIV-A3) | Heusler | Co, Mn, Si → `heusler_ingot` | MRAM |
+| X-ray pulse profiler (UIV-B3) | Ti-44 line map | knot dust sample → `ti44_map` (data) | arm chart |
+
+**Count:** 45 older machines take about 80 rows (39 UEV-and-older machines, 6 UIV). UIV counted 58 machines; UXV leans on fewer machines but harder (152 crossings, Crossings).
+
+**File order:** each row goes in the older machine's table or inline array (DECISIONS.md:508) by the package that consumes it; the antimatter trap row goes in the package's own file with `.dimension` and a free circuit. Two packages never append to one table in the same wave (Parallel and serial).
 
 <!-- CONTINUE -->
