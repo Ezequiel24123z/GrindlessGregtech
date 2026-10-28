@@ -1,6 +1,23 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { hid, layoutBands, COLS, PITCH_X, PITCH_Y } from '../../quests/multiblocks/mb-lib.mjs';
+import { oursFromScripts } from '../../quests/multiblocks/gen.mjs';
+import fs from 'node:fs';
+import os from 'node:os';
+import path from 'node:path';
+
+test('variable-registered controller is ours, in its folder; built-in ids stay out', () => {
+  const root = fs.mkdtempSync(path.join(os.tmpdir(), 'mbours-'));
+  fs.mkdirSync(path.join(root, 'uev'));
+  fs.writeFileSync(path.join(root, 'uev', 'a.js'), "const L = [{ name: 'foo_lab' }, { name: 'cleanroom' }];\nL.forEach((m) => event.create(m.name, 'multiblock'));\n");
+  const lang = new Map([['uev', "['block.gtceu.foo_lab', 'Foo Lab', 'x'],"]]);
+  const conflicts = [];
+  const ours = oursFromScripts(root, ['gtceu:foo_lab', 'gtceu:cleanroom'], lang, path.join(root, 'none'), conflicts);
+  assert.equal(ours.get('gtceu:foo_lab'), 'uev');
+  assert.equal(ours.has('gtceu:cleanroom'), false);
+  assert.equal(conflicts.length, 0);
+  fs.rmSync(root, { recursive: true });
+});
 
 const mk = (n, tier, ours = false, name = 'M' + String(n).padStart(3, '0')) => ({ id: 'gtceu:m' + n, name, tier, ours });
 

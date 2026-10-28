@@ -36,20 +36,52 @@ export function findDump(dir) {
   throw new Error(`machines.json not found in ${dir} (pass a gg_dump folder)`);
 }
 
-// our multiblocks: machine id -> startup folder
-export function oursFromScripts(root = STARTUP) {
+// our multiblocks: machine id -> startup folder.
+// 1) literal event.create('name', 'multiblock'); 2) controllers registered through variables: for each script mentioning 'multiblock', every
+// dump multiblock gtceu:x whose name is a quoted token in the script (or in a data/grindless/tables/*.json the script names) AND that has a
+// block.gtceu.x name in client_scripts/grindless/*_lang.js (a GTM/addon id quoted in our script has none). Literal wins; conflicts are returned.
+export function oursFromScripts(root = STARTUP, candidates = [], langText = '', tablesDir = path.join(REPO, 'pack', 'kubejs', 'data', 'grindless', 'tables'), conflicts = []) {
   const out = new Map();
+  const langOf = (f) => (langText instanceof Map ? langText.get(f) || '' : '');
+  const langAll = langText instanceof Map ? [...langText.values()].join('\n') : langText;
+  const literal = new Set();
+  const loose = new Map(); // id -> [{ folder, hasCreate }]
+  const tables = fs.existsSync(tablesDir) ? fs.readdirSync(tablesDir).filter((f) => f.endsWith('.json')) : [];
   const walk = (dir, folder) => {
     for (const e of fs.readdirSync(dir, { withFileTypes: true })) {
       const p = path.join(dir, e.name);
       if (e.isDirectory()) walk(p, folder || e.name);
       else if (e.name.endsWith('.js') && folder) {
         const text = fs.readFileSync(p, 'utf8');
-        for (const m of text.matchAll(/\.create\(\s*['"]([a-z0-9_]+)['"]\s*,\s*['"]multiblock['"]/g)) out.set('gtceu:' + m[1], folder);
+        for (const m of text.matchAll(/\.create\(\s*['"]([a-z0-9_]+)['"]\s*,\s*['"]multiblock['"]/g)) {
+          out.set('gtceu:' + m[1], folder);
+          literal.add('gtceu:' + m[1]);
+        }
+        if (!/['"]multiblock['"]/.test(text)) continue;
+        let hay = text;
+        for (const t of tables) if (text.includes(t) || text.includes(t.replace(/\.json$/, ''))) hay += '\n' + fs.readFileSync(path.join(tablesDir, t), 'utf8');
+        const hasCreate = /\.create\(/.test(text);
+        for (const id of candidates) {
+          const n = id.split(':')[1];
+          if (id.startsWith('gtceu:') && new RegExp(`['"]${n}['"]`).test(hay) && langAll.includes(`block.gtceu.${n}'`)) {
+            if (!loose.has(id)) loose.set(id, []);
+            loose.get(id).push({ folder, hasCreate });
+          }
+        }
       }
     }
   };
   walk(root, '');
+  for (const [id, hits] of loose) {
+    if (literal.has(id)) continue;
+    const folders = [...new Set(hits.map((h) => h.folder))];
+    const named = folders.filter((f) => langOf(f).includes(`block.gtceu.${id.split(':')[1]}'`));
+    const pool = named.length ? hits.filter((h) => named.includes(h.folder)) : hits;
+    const poolFolders = [...new Set(pool.map((h) => h.folder))];
+    const pick = poolFolders.length === 1 ? poolFolders[0] : (pool.find((h) => h.hasCreate) || pool[0]).folder;
+    if (poolFolders.length > 1) conflicts.push({ id, folders: poolFolders, chosen: pick });
+    out.set(id, pick);
+  }
   return out;
 }
 
@@ -198,7 +230,15 @@ async function main() {
     implemented = (info.hidden && info.hidden.implementedEra) || implemented;
   }
   const hidden = hiddenIds(JSON.parse(fs.readFileSync(HIDDEN, 'utf8')), implemented);
-  const ours = oursFromScripts();
+  const langDir = path.join(REPO, 'pack', 'kubejs', 'client_scripts', 'grindless');
+  const langByFolder = new Map();
+  for (const f of fs.readdirSync(langDir).filter((x) => x.endsWith('_lang.js'))) {
+    const folder = f.split('_')[0];
+    langByFolder.set(folder, (langByFolder.get(folder) || '') + '\n' + fs.readFileSync(path.join(langDir, f), 'utf8'));
+  }
+  const conflicts = [];
+  const ours = oursFromScripts(STARTUP, machines.filter((m) => m.mb === 1).map((m) => m.id), langByFolder, undefined, conflicts);
+  for (const c of conflicts) console.log(`ownership conflict: ${c.id} in ${c.folders.join(', ')} -> ${c.chosen}`);
   const candidates = machines.filter((m) => m.mb === 1 && !hidden.has(m.id) && items.has(m.id)).map((m) => m.id);
   const reach = await reachTiers(dumpDir, candidates);
   const nominal = nominalTiers(read('recipes.json').recipes, candidates);
