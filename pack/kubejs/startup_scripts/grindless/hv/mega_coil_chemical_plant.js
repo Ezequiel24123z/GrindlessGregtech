@@ -1,3 +1,4 @@
+// priority: -1850
 // -----------------------------------------------------------------------------------------------
 // HV Coil Chemical Plant, gtceu:coil_chemical_plant (package MEGA-3, docs/eras/mega.md 4.5): the coil-scaled parallel large chemical
 // reactor. It runs GTM's gtceu:large_chemical_reactor recipe type (which already holds every chemical_reactor recipe) and is better

@@ -1,3 +1,4 @@
+// priority: 9650
 // Gregtech Grindless - names and tooltips of the HV Coil Chemical Plant (startup_scripts/grindless/hv/mega_coil_chemical_plant.js).
 //
 //   gtceu:coil_chemical_plant   (machine name + 3 tooltip lines, en_us and es_es)

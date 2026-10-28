@@ -1029,6 +1029,18 @@ file = "kubejs/assets/grindless/textures/block/multiblock/coated_conductor_line/
 hash = "491ea51d46bc1f0c0ff11ed9293461cc67de293c7672abbc45f67563f8fe1f1a"
 
 [[files]]
+file = "kubejs/assets/grindless/textures/block/multiblock/coil_chemical_plant/overlay_front.png"
+hash = "fc608b5e48ea63e814647c303a82418688e138022ad5851adddb78f6faa19ee9"
+
+[[files]]
+file = "kubejs/assets/grindless/textures/block/multiblock/coil_chemical_plant/overlay_front_active.png"
+hash = "0ee67ad1777483957a09898ea2ba5f7cc86c4e4547a62d45dfd1cebbbea98902"
+
+[[files]]
+file = "kubejs/assets/grindless/textures/block/multiblock/coil_chemical_plant/overlay_front_active_emissive.png"
+hash = "c1fcbe7db9d2e0bcbae46c637f2dbe28256931b1d760f25c47708f269728177c"
+
+[[files]]
 file = "kubejs/assets/grindless/textures/block/multiblock/coilgun_launcher/overlay_front.png"
 hash = "b06feed14861022f8a7936041ffc56ba80ae10f26cdec54bc49bcb7cb7833914"
 
@@ -5385,6 +5397,10 @@ file = "kubejs/client_scripts/grindless/hv_family_lang.js"
 hash = "c74668f278870cc96606f9413053ab47cb4210f5109a85b550e6224d0d47f1fc"
 
 [[files]]
+file = "kubejs/client_scripts/grindless/hv_mega_coil_chemical_plant_lang.js"
+hash = "e89f57acd8e3a55d6abc4977834b72d33773f78973c02dbf0858eeeafd8379a3"
+
+[[files]]
 file = "kubejs/client_scripts/grindless/hv_refinery_lang.js"
 hash = "6e007cde7864ac6f343cbeaaec6d4d319714249e266c6dd90f6c871d0ea6d838"
 
@@ -6293,6 +6309,10 @@ file = "kubejs/server_scripts/grindless/hv/family_vein_drilling.js"
 hash = "c2e3db753542bae895a3bc7c5b76a31ad8f02bff298974da6574b40eb5c41ff4"
 
 [[files]]
+file = "kubejs/server_scripts/grindless/hv/mega_coil_chemical_plant.js"
+hash = "747660f391fac3b63e32dce57d4d64a768092b553039bb3d3567e0c9886d0b40"
+
+[[files]]
 file = "kubejs/server_scripts/grindless/hv/refinery.js"
 hash = "9e60cfdcfc3d5f301fe7743d46aeb4c1f5287f202610b721fdcdd4f01759ac18"
 
@@ -6951,6 +6971,10 @@ hash = "019c583d29c2ac1eb410a34b162b6c9e4122bfd1cf6776af048ccedfefa769e0"
 [[files]]
 file = "kubejs/startup_scripts/grindless/hv/family_multis.js"
 hash = "ec857a3cf21bad3c9f42f97de5d5cbe28790bf8f7ba731291a6310dec5e80ab9"
+
+[[files]]
+file = "kubejs/startup_scripts/grindless/hv/mega_coil_chemical_plant.js"
+hash = "0e469f165021a8eeb99f6adfb8b7b9da7f896f8d7a8645a463ab03a91a63dbd0"
 
 [[files]]
 file = "kubejs/startup_scripts/grindless/hv/refinery.js"

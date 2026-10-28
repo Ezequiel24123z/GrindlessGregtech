@@ -1,3 +1,4 @@
+// priority: -13474
 // -----------------------------------------------------------------------------------------------
 // Controller recipe of the HV Coil Chemical Plant (startup_scripts/grindless/hv/mega_coil_chemical_plant.js, docs/eras/mega.md 4.5,
 // family rule 6): an HV assembler recipe built from the machines it replaces, 2 large chemical reactor controllers + 4 HV chemical
