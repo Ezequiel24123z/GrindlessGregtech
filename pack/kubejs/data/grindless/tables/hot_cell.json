@@ -220,6 +220,20 @@
       "fluidsIn": [],
       "itemsOut": [{ "id": "grindless:target_wheel_blank", "count": 1 }],
       "fluidsOut": []
+    },
+    {
+      "_": "UIV-A1: the berkelium-249 store's californium-249 pressed on a blank wheel (the target of element 120)",
+      "name": "cf249_target_wheel",
+      "circuit": 12,
+      "eut": 7680,
+      "duration": 1800,
+      "itemsIn": [
+        { "id": "gtceu:californium_249_dust", "count": 1 },
+        { "id": "grindless:target_wheel_blank", "count": 1 }
+      ],
+      "fluidsIn": [],
+      "itemsOut": [{ "id": "grindless:cf249_target_wheel", "count": 1 }],
+      "fluidsOut": []
     }
   ]
 }
