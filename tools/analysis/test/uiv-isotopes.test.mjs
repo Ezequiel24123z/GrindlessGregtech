@@ -105,19 +105,23 @@ test('pyroprocessing rows: circuits 6-8, at most 3 inputs with the circuit, Ti-5
   }
 });
 
-test('europium reductor: Tb, Gd, Er and Pr oxides reduced by lanthanum, circuits 6-9, the lanthanum loops', () => {
+test('europium reductor: Tb metal (c6) and Gd, Er, Pr oxides cut from the depleted liquor (c7-9): more in than back, no metal rows', () => {
   const src = text('server_scripts', 'grindless', 'zpm', 'europium.js');
-  const want = [['terbium_reduction', 6, 'grindless:terbium_oxide_dust', 'gtceu:terbium_dust'],
-    ['gadolinium_reduction', 7, 'gtceu:gadolinium_oxide_dust', 'gtceu:gadolinium_dust'],
-    ['erbium_reduction', 8, 'gtceu:erbium_oxide_dust', 'gtceu:erbium_dust'],
-    ['praseodymium_reduction', 9, 'gtceu:praseodymium_oxide_dust', 'gtceu:praseodymium_dust']];
-  for (const [name, circuit, oxide, metal] of want) {
-    const at = src.indexOf(`name: '${name}', circuit: ${circuit},`);
+  const block = (name, circuit) => {
+    const at = src.indexOf("name: '" + name + "', circuit: " + circuit + ',');
     assert.ok(at > 0, name);
-    const block = src.slice(at, src.indexOf('eut: ZPM_VA', at));
-    assert.ok(block.includes(`id: '${oxide}', count: 1`) && block.includes('id: LANTHANUM, count: 2'), name);
-    assert.ok(block.includes(`id: '${metal}', count: 2`) && block.includes('id: LA_OXIDE, count: 1'), name);
+    return src.slice(at, src.indexOf('eut: ZPM_VA', at));
+  };
+  const tb = block('terbium_reduction', 6);
+  assert.ok(tb.includes("'grindless:terbium_oxide_dust', count: 1") && tb.includes('id: LANTHANUM, count: 2') && tb.includes("'gtceu:terbium_dust', count: 2"));
+  for (const [name, circuit, oxide] of [['gadolinium_oxide', 7, 'gtceu:gadolinium_oxide_dust'], ['erbium_oxide', 8, 'gtceu:erbium_oxide_dust'], ['praseodymium_oxide', 9, 'gtceu:praseodymium_oxide_dust']]) {
+    const b = block(name, circuit);
+    assert.ok(b.includes("'" + oxide + "', count: 5"), name);
+    assert.ok(b.includes('{ id: DEPLETED, amount: 4000 }') && b.includes('{ id: DEPLETED, amount: 3000 }'), name + ': the rest of the liquor returns');
+    assert.equal(src.split("'" + oxide + "'").length - 1, 1, oxide + ' produced once');
   }
+  assert.ok(block('praseodymium_oxide', 9).includes("'gtceu:oxygen', amount: 2000"), 'Pr(IV) is oxidative');
+  assert.ok(!/gtceu:(gadolinium|erbium|praseodymium)_dust/.test(src));
 });
 
 test('hot cell: the Cf-249 target wheel (circuit 12) and the activated wheel still returns through the hot cell; Si-28 stays IV\'s', () => {
