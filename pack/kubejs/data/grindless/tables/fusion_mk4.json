@@ -1,4 +1,4 @@
-﻿{
+{
   "_how_it_is_used": "server_scripts/grindless/uev/fusion.js makes one recipe per entry of 'types' (id grindless:<name>, GTM puts the type in front), with its programmed circuit; server_scripts/grindless/zpm/fusion.js makes the direct energy converter's three Mk4 rows from 'converter'. Package UEV-A7 (docs/eras/uev.md, machines 14-15, lines 23-25). Figures marked (tune) are the package's to set.",
   "_ring": "The Mk4 ring (gtceu:uev_fusion_reactor) is tier 10: at most 8,388,608 EU/t, storage a long. Every fuel is premixed: one fluid per recipe, mixed upstream. Each recipe makes 1,024 mB of plasma per 16 t = 64 mB/t, which is what the converter eats at 128 parallels of 1 mB per 2 t.",
   "_converter": "128 parallels x row EU/t = 16,777,216 (c1), 12,582,912 (c2), 25,165,824 (c3) EU/t. The rows are final: power/generators.js lists the plasma generator, not gtceu:direct_conversion, so the x2 is never applied to them.",
