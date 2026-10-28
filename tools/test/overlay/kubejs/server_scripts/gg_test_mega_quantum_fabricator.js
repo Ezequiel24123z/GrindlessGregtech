@@ -1,3 +1,4 @@
+// priority: -5760
 // TEST ONLY, MEGA-9 (gtceu:quantum_fabricator). Command: kubejs custom_command gg_test_mega_quantum_fabricator
 // Band ONLY: X 34560-34623, Z 0-63, Overworld Y 98-115.
 //   Two real GTM cleanrooms (15 x 15 x 12: plascrete shell, filter casing ceiling, EV energy hatch, maintenance hatch, controller in the

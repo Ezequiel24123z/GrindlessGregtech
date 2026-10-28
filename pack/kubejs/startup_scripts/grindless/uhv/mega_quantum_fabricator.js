@@ -1,3 +1,4 @@
+// priority: -8075
 // -----------------------------------------------------------------------------------------------
 // UHV Quantum Fabricator, gtceu:quantum_fabricator (package MEGA-9, docs/eras/mega.md 4.11): a UHV machine casing hall with a field
 // generator ring that runs GTM's own assembler, circuit assembler, forming press, laser engraver and cutter recipes, one mode at a
