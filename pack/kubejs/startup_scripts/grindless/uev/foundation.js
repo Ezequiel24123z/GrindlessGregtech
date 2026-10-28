@@ -16,7 +16,7 @@
 //     degenerate_matter, degenerate_pellet                                Sirius products
 //     sx_blade, sic_sic_plate, wf_w_tile, snspd, qd_source, sdd, lobster_eye_mcp, aerogel_tile, hollow_core_fibre,
 //     faraday_isolator, bonded_fe16n2_magnet                              parts
-//     barnard_core_rock, uev_smes_cell
+//     barnard_core_rock
 //   Blocks (grindless:): uev_fusion_casing, degenerate_containment_casing (24, 25), photonic_casing (cleanroom grade 11-13),
 //     hftacn_coil_block (a gtceu:coil, 12,600 K, S0-7).
 //   Materials (GT materials, gtceu: ids as UHV's, DECISIONS UV-F1; uev.md writes the lay superhydride and the three fuels with grindless:).
@@ -61,8 +61,7 @@
     hollow_core_fibre: { stack: 64 },
     faraday_isolator: { stack: 64 },
     bonded_fe16n2_magnet: { stack: 64 },
-    barnard_core_rock: { stack: 64 },
-    uev_smes_cell: { stack: 16 }
+    barnard_core_rock: { stack: 64 }
   }
 
   const BLOCKS = {
