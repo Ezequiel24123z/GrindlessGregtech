@@ -1,4 +1,4 @@
-// priority: -24574
+// priority: -24549
 // UIV foundation recipes (package UIV-F1): only the hull and the four hatches every UIV machine needs. gtceu:uiv_machine_casing is GTM's own
 // block; its assembly-line recipe is UEV's gate (uev/gate.js, researched with the pulsar navigation chart), so it is not made twice here.
 // Every other UIV recipe is made by the package that makes its parts. Ids: startup_scripts/grindless/uiv/foundation.js. All run in GTM's

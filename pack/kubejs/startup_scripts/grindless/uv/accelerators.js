@@ -1,4 +1,4 @@
-// priority: -9200
+// priority: -9275
 // -----------------------------------------------------------------------------------------------
 // UV's accelerators (docs/eras/uv.md, machines 7, 8 and 22, lines 5, 18 and 22; package UV-A5): the synchrotron, the muon fusion cell and
 // the antimatter trap, their recipe types, and the ids UV-F1 did not register. The recipes come from data/grindless/tables/accelerators.json

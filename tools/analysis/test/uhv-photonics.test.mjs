@@ -87,9 +87,9 @@ test('one recipe per lookup path, with the ZPM implanter rows: unique circuits, 
     }
   }
   assert.deepEqual(all.filter((r) => r.type === 'ion_implantation').map((r) => r.circuit).sort(), [1, 2, 3, 4]);
-  // UEV-A6 added MBE c3 and foundry c7 (UEV rows in the same table); UIV-A1 added MBE c4
+  // UEV-A6 added MBE c3 and foundry c7 (UEV rows in the same table); UIV-A1 added MBE c4; UIV-A4 added foundry c8-11
   assert.deepEqual(rowsOf('molecular_beam_epitaxy').map((r) => r.circuit), [1, 2, 3, 4]);
-  assert.deepEqual(rowsOf('photonic_foundry').map((r) => r.circuit), [1, 2, 3, 4, 5, 6, 7]);
+  assert.deepEqual(rowsOf('photonic_foundry').map((r) => r.circuit), [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]);
   // GTM's own types take no circuit here; the blast furnace rows carry a temperature
   for (const type of ['electric_blast_furnace', 'large_chemical_reactor']) for (const r of rowsOf(type)) assert.equal(r.circuit, 0, r.name);
   for (const r of rowsOf('electric_blast_furnace')) assert.ok(r.temp > 0, r.name);
@@ -182,8 +182,9 @@ test('no UEV input, and every lang key the package needs is written in en_us and
   for (const r of Object.values(T.types).flatMap((t) => t.recipes)) {
     for (const id of inputs(r).concat(outputs(r))) assert.ok(!/(^|[:_])uev(_|$)/.test(id.split(':')[1] || ''), `${r.name}: ${id}`);
   }
-  // UEV-A6's two UEV rows in these UHV types keep their keys in uev_photonics_lang.js; UIV-A1's MBE c4 in uiv_isotopes_lang.js
-  const lang = ['uhv_photonics_lang.js', 'uev_photonics_lang.js', 'uiv_isotopes_lang.js']
+  // UEV-A6's two UEV rows in these UHV types keep their keys in uev_photonics_lang.js; UIV-A1's MBE c4 in uiv_isotopes_lang.js;
+  // UIV-A4's foundry c8-11 in uiv_tfln_femtosecond_lang.js
+  const lang = ['uhv_photonics_lang.js', 'uev_photonics_lang.js', 'uiv_isotopes_lang.js', 'uiv_tfln_femtosecond_lang.js']
     .map((f) => fs.readFileSync(path.join(kube, 'client_scripts', 'grindless', f), 'utf8')).join('\n');
   for (const [type, t] of Object.entries(T.types)) {
     if (!t.dataKey) continue;

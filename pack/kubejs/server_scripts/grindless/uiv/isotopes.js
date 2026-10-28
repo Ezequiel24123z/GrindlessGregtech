@@ -1,4 +1,4 @@
-// priority: -24586
+// priority: -24574
 // -----------------------------------------------------------------------------------------------
 // Recipes of UIV's isotope chains in GTM's own types (docs/eras/uiv.md, lines 9 and 24; package UIV-A1), generated at every server load
 // from data/grindless/tables/isotopes_uiv.json (registrations: startup_scripts/grindless/uiv/isotopes.js).

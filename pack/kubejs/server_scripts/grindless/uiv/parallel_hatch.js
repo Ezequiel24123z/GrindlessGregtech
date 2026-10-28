@@ -1,4 +1,4 @@
-// priority: -24610
+// priority: -24649
 // Gregtech Grindless - the UIV parallel hatch's recipe (package UIV-M1; the hatch is registered in startup_scripts/grindless/lib/parallel_hatch.js).
 //
 //   gtceu:uiv_parallel_hatch (Insane Parallel Control Hatch, up to 16384 copies of a recipe) -> grindless:crafting/uiv_parallel_hatch
