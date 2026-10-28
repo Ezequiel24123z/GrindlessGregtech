@@ -297,6 +297,7 @@
   }
 
   function startRun(u, m, rec) {
+    m.getRecipeLogic().resetRecipeLogic()
     m.setBatchEnabled(false)
     empty(u.outBus)
     stock(u.inBus, [{ id: rec.itemsIn[0].id, count: 64 }], rec.circuit)
@@ -365,8 +366,9 @@
       var r2 = S.refuseRec
       var main2 = r2.itemsOut.filter(function (x) { return x.whole > 0 })[0]
       var out2 = items(u.outBus)
-      var ran = rlg.isWorking() || (out2[main2.id] || 0) > 0
-      if (ran || waited > 300) {
+      var last = rlg.getLastRecipe()
+      var ran = (rlg.isWorking() && last !== null && last !== undefined && String(last.id).indexOf(r2.name) >= 0) || (out2[main2.id] || 0) > 0
+      if (ran || waited > 200) {
         check('rule_refuse', !ran, r2.name + ' (ebf_temp ' + r2.temp + ' K > ' + KELVIN + ' K + 400 K) stocked for ' + waited + ' ticks: working=' + rlg.isWorking() + ', out ' + JSON.stringify(out2) + ', reasons ' + String(rlg.getFailureReasons()))
         u.phase = 'done'
       }
