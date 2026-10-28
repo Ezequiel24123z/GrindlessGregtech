@@ -64,7 +64,10 @@
     { name: 'surface', type: 'srf_cavity', circuit: 3, itemsIn: [item(BARE, 1)], fluidsIn: [fluid(ACID, 500), fluid('gtceu:nitrogen', 100)],
       itemsOut: [item(CAVITY, 1)], fluidsOut: [fluid(SPENT, 500)], eut: VA, duration: 200 },
     { name: 'cryomodule', type: 'srf_cavity', circuit: 4, itemsIn: [item(CAVITY, 8), item('gtceu:uv_field_generator', 2), item(SHIELD, 1)],
-      fluidsIn: [fluid(SUPERFLUID, 4000)], itemsOut: [item(CRYOMODULE, 1)], fluidsOut: [], eut: VA, duration: 600 }
+      fluidsIn: [fluid(SUPERFLUID, 4000)], itemsOut: [item(CRYOMODULE, 1)], fluidsOut: [], eut: VA, duration: 600 },
+    // UIV-A2 (docs/eras/uiv.md, line 1): liquid para-H2 frozen in a superfluid helium bath into the solid target the pulser compresses
+    { name: 'para_h2_target', type: 'srf_cavity', circuit: 5, itemsIn: [], fluidsIn: [fluid('gtceu:liquid_para_hydrogen', 1000), fluid(SUPERFLUID, 100)],
+      itemsOut: [item('grindless:solid_para_h2_target', 1)], fluidsOut: [fluid('gtceu:helium', 100)], eut: VA, duration: 400 }
   ]
 
   // side steps on GTM's own machines
