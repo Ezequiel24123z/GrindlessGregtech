@@ -21,7 +21,10 @@
     "uranus": { "dimensions": ["grindless:uranus", "grindless:uranus_orbit"], "pairTag": "uranus", "name": { "en_us": "Uranus", "es_es": "Urano" } },
     "neptune": { "dimensions": ["grindless:neptune", "grindless:neptune_orbit"], "pairTag": "neptune", "name": { "en_us": "Neptune", "es_es": "Neptuno" } },
     "pluto": { "dimensions": ["grindless:pluto", "grindless:pluto_orbit"], "pairTag": "pluto", "name": { "en_us": "Pluto", "es_es": "Plutón" } },
-    "proxima": { "dimensions": ["gcyr:proxima_centauri_b", "grindless:proxima_b_orbit"], "pairTag": "proxima", "name": { "en_us": "Proxima b", "es_es": "Próxima b" } }
+    "proxima": { "dimensions": ["gcyr:proxima_centauri_b", "grindless:proxima_b_orbit"], "pairTag": "proxima", "name": { "en_us": "Proxima b", "es_es": "Próxima b" } },
+    "alpha": { "dimensions": ["grindless:alpha_centauri_orbit"], "pairTag": "alpha", "name": { "en_us": "Alpha Centauri", "es_es": "Alfa Centauri" } },
+    "barnard": { "dimensions": ["grindless:barnard_b", "grindless:barnard_b_orbit"], "pairTag": "alpha", "name": { "en_us": "Barnard b", "es_es": "Barnard b" } },
+    "sirius": { "dimensions": ["grindless:sirius_b_orbit"], "pairTag": "sirius", "name": { "en_us": "Sirius B", "es_es": "Sirio B" } }
   },
   "dryOnEarth": ["gcyr:overworld_orbit"]
 }
