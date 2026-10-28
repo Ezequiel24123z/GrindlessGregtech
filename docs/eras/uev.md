@@ -989,10 +989,10 @@ Order:
     - Earth-orbit products: the EOS model, the gravity survey and the quantum repeater node;
     - charts: the pulsar navigation chart and the mass–radius chart;
     - Sirius products: degenerate matter and the degenerate pellet;
-    - parts: the SRF cavity, the SX blade, the SiC/SiC plate, the Wf/W tile, the SNSPD, the QD source, the SDD, the MCP, the aerogel tile, the hollow-core fibre, the Faraday isolator and the bonded Fe₁₆N₂ magnet;
+    - parts: the SX blade, the SiC/SiC plate, the Wf/W tile, the SNSPD, the QD source, the SDD, the MCP, the aerogel tile, the hollow-core fibre, the Faraday isolator and the bonded Fe₁₆N₂ magnet (the SRF cavity is UV's `grindless:srf_cavity`, reused);
     - Barnard rock;
-    - `grindless:uev_smes_cell`;
-  - the DFD Mk1 and Mk2 motor ids are registered by B1 (S0-2), not here.
+  - the DFD Mk1 and Mk2 motor ids are registered by B1 (S0-2), not here;
+  - `grindless:uev_smes_cell` is not registered here: W's `tables/wireless_energy.json` row registers it, as every cell (`lv/wireless_energy.js:149`); tennessine is GTM's (as built, DECISIONS UEV-F1).
 - **Allowed:** the common set, plus:
   - `startup_scripts/grindless/uev/foundation.js` and `server_scripts/grindless/uev/foundation.js` (the hull, hatch and casing recipes only);
   - `client_scripts/grindless/uev_foundation_lang.js`;
@@ -1019,7 +1019,7 @@ Order:
   - `hidden_until.json`:
     - `gtnn:optical_computer` moves from `never` to `uev`, and `gtnn:optical_mainframe` stays `never`;
     - GTCA's elevator miner and pump move from `until: uev` to `uev` if S0-8 passed, and to `never`, with a note, if it failed;
-    - UEV's new ids get their substages (`uev`, `uev-alpha`, `uev-barnard`, `uev-sirius`);
+    - UEV's new ids are class B until `uev`, one obtain rule per producing package (hidden_until takes era ids only; the substages `uev`, `uev-alpha`, `uev-barnard` and `uev-sirius` are C1's validator);
   - `tools/analysis/script_order.json`: a band for `uev/` and one for each older-file row that reads a UEV id;
   - `lib/stations.js` changes only if S0-4 failed.
 - **Allowed:** `pack/kubejs/data/grindless/tables/hidden_until.json`, `tools/analysis/script_order.json`, and `pack/kubejs/startup_scripts/grindless/lib/stations.js` only after a failed S0-4.

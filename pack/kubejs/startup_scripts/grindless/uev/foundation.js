@@ -1,3 +1,4 @@
+// priority: -7550
 // -----------------------------------------------------------------------------------------------
 // UEV foundation (package UEV-F1, docs/eras/uev.md "Build order", F1): the shared registrations the UEV packages build on. No machines
 // (the DFD motors are B1's, S0-2), no recipe types, no worldgen and no dimension. Every other UEV package uses exactly these ids; they

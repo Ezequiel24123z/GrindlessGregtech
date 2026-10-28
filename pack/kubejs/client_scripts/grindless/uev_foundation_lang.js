@@ -1,3 +1,4 @@
+// priority: 5050
 // Gregtech Grindless - names and tooltips of the UEV foundation (startup_scripts/grindless/uev/foundation.js):
 //
 //   grindless:<item> and grindless:<block>   item.grindless.<n> / block.grindless.<n> plus two tooltip lines (tooltip.grindless.<n>.0 and .1)
