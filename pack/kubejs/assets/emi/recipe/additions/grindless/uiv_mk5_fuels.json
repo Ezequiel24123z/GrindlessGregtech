@@ -1,0 +1,5 @@
+{
+  "type": "emi:info",
+  "stacks": ["item:gtceu:polarised_proton_source", "item:gtceu:uiv_fusion_reactor", "item:grindless:polarised_h_pellet", "item:grindless:divertor"],
+  "text": ["emi.grindless.info.uiv_mk5.0", "emi.grindless.info.uiv_mk5.1"]
+}
