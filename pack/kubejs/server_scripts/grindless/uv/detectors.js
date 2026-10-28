@@ -67,6 +67,13 @@
       eut: UVA, duration: 6000 }
   ]
 
+  // UIV-A5 (uiv.md line 11): the float-zone Si-28 ingot (circuit 6) and the donor wafers regrown into one (circuit 7, lossy: 10 donors
+  // make an ingot that cuts 8 wafers, so the silicon is never free; the Si-28 itself comes only from the IV hot cell)
+  TABLE.push({ name: 'si28_fz_ingot', type: 'zone_refining', circuit: 6, itemsIn: [item('grindless:silicon_28_dust', 8)],
+    fluidsIn: [fluid('gtceu:argon', 1000)], itemsOut: [item('grindless:si28_fz_ingot', 1)], fluidsOut: [], eut: UVA, duration: 800 })
+  TABLE.push({ name: 'si28_donor_regrow', type: 'zone_refining', circuit: 7, itemsIn: [item('grindless:si28_donor_wafer', 10)],
+    fluidsIn: [fluid('gtceu:argon', 1000)], itemsOut: [item('grindless:si28_fz_ingot', 1)], fluidsOut: [], eut: UVA, duration: 800 })
+
   D.recipes = TABLE.map(function (t) {
     return {
       name: t.name, type: t.type, recipeId: 'grindless:' + t.type + '/' + t.name, circuit: t.circuit, itemsIn: t.itemsIn,

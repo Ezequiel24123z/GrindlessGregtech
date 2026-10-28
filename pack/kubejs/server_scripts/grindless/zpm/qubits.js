@@ -120,6 +120,15 @@
     eut: ZPM_VA, duration: 400
   })
 
+  // UIV-A5 (uiv.md line 11): a Si-28 wafer implanted with hydrogen for the smart-cut (circuit 6; 1-2 ZPM, 3-4 UHV, 5 UEV)
+  TABLE.push({
+    name: 'h_si28_wafer', type: 'ion_implantation', circuit: 6,
+    itemsIn: [{ id: 'grindless:si28_fz_wafer', count: 1 }], notConsumedItems: [],
+    fluidsIn: [{ id: 'gtceu:hydrogen', amount: 500 }],
+    itemsOut: [{ id: 'grindless:h_si28_wafer', count: 1 }], fluidsOut: [],
+    eut: 491520, duration: 600
+  })
+
   Q.recipes = TABLE.map(function (t) {
     return {
       name: t.name, type: t.type, recipeId: 'grindless:' + t.type + '/' + t.name, circuit: t.circuit,
