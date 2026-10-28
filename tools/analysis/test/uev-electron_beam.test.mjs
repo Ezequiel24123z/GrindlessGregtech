@@ -17,7 +17,8 @@ const T = JSON.parse(read(path.join(tables, 'electron_beam.json')));
 const startup = read(path.join(kube, 'startup_scripts', 'grindless', 'uev', 'electron_beam.js'));
 // UIV-A3 appended c7 nb_ta_button; its recipe key lives in the melter's lang file.
 const lang = read(path.join(kube, 'client_scripts', 'grindless', 'uev_electron_beam_lang.js'))
-    + read(path.join(kube, 'client_scripts', 'grindless', 'uiv_levitation_melter_lang.js'));
+    + read(path.join(kube, 'client_scripts', 'grindless', 'uiv_levitation_melter_lang.js'))
+    + read(path.join(kube, 'client_scripts', 'grindless', 'uiv_matrioshka_lang.js')); // UIV-A10's tin_distill
 
 const GTM = new Set(['mixer', 'assembler', 'compressor', 'bender', 'macerator', 'chemical_reactor', 'electric_blast_furnace']);
 const ids = (xs) => (Array.isArray(xs) ? xs : []).map((x) => x.id);
@@ -195,11 +196,13 @@ test('every new item is named and tooltipped in en_us and es_es, and every item 
   const uv = read(path.join(kube, 'startup_scripts', 'grindless', 'uv', 'cold.js'));
   // UIV-A3 appends c7 (nb_ta_button) and registers its items in its own startup
   const a3 = read(path.join(kube, 'startup_scripts', 'grindless', 'uiv', 'levitation_melter.js'));
+  // UIV-A10 appends tin_distill (c8) and registers eb_distilled_tin in its own startup
+  const a10 = read(path.join(kube, 'startup_scripts', 'grindless', 'uiv', 'matrioshka.js'));
   for (const [, r] of allRows().filter(([w]) => w.startsWith('electron_beam.json'))) {
     for (const id of outputs(r).concat(ids(r.itemsIn))) {
       if (!id.startsWith('grindless:')) continue;
       const n = id.slice('grindless:'.length);
-      assert.ok(registered.has(id) || f1.includes(n) || uv.includes(n) || a3.includes(n), `${id} is registered nowhere`);
+      assert.ok(registered.has(id) || f1.includes(n) || uv.includes(n) || a3.includes(n) || a10.includes(n), `${id} is registered nowhere`);
     }
   }
   for (const key of ['block.gtceu.electron_beam_furnace', 'block.gtceu.single_crystal_foundry', 'gtceu.electron_beam_refining', 'gtceu.single_crystal_casting']) {

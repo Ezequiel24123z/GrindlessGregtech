@@ -69,6 +69,7 @@ Generators for the pack's own textures. Everything is procedural 16x16 pixel art
 | `Build-UIVMainframeTextures.ps1` | Writes the eight item icons of UIV's optical mainframe, ThF4 and chip-clock lines (UIV-A7). `-Credits`. |
 | `Build-UIVUivComponentsTextures.ps1` | Writes the seventeen item icons of UIV's impeller, strain-wave gear and GdBCO lines behind the UIV pump, robot arm and motor (UIV-A8). `-Credits`. |
 | `Build-UIVMk5Textures.ps1` | Writes the controller overlays of the polarised proton source and the UIV (Mk5) fusion ring and the sixteen item icons of the polarised fuel, first-wall and divertor lines (UIV-A9). `-Credits`. |
+| `Build-UIVMatrioshkaTextures.ps1` | Writes the controller overlays of the Matrioshka computer and the droplet radiator works, their five structure blocks and the twenty-eight item icons of the TPV, AQFP, C-12 diamond, droplet radiator and rad-hard controller lines (UIV-A10). `-Credits`. |
 | `Build-UHVZblanTextures.ps1` | Writes the ZBLAN preform (UHV-A10, `item/zblan_preform.png`). The ZBLAN draw tower reuses UV's draw tower casing. `-Credits`. |
 | `Build-UVHeatSourcesTextures.ps1` | Writes the four item icons of UV's heat source works (UV-A2): probe RTG, americium micro source, curium RTG pellet, heavy curium oxide. `-Credits`. |
 | `Build-UVAcceleratorsTextures.ps1` | Writes the faces of UV's synchrotron, muon fusion cell and antimatter trap (UV-A5: `multiblock/synchrotron/`, `multiblock/muon_fusion_cell/`, `multiblock/antimatter_trap/`) and the 13 item icons of the LIGA, antiproton and muon fusion lines. `-Credits`. |
@@ -1598,4 +1599,13 @@ Procedural, drawn by `Build-UIVMk5Textures.ps1`; nothing is copied from another 
 ```powershell
 powershell -NoProfile -ExecutionPolicy Bypass -File tools\assets\Build-UIVMk5Textures.ps1
 powershell -NoProfile -ExecutionPolicy Bypass -File tools\assets\Build-UIVMk5Textures.ps1 -Credits
+```
+
+## UIV Matrioshka computer and droplet radiator works (UIV-A10)
+
+Procedural, drawn by `Build-UIVMatrioshkaTextures.ps1`; nothing is copied from another mod. Controller overlays (`block/multiblock/<id>/overlay_front*`, animated active and emissive layers) for `matrioshka_computer` and `droplet_radiator_works`; five structure blocks (`block/uiv/<id>.png`): Matrioshka node, logic tile, emitter shell and TPV shell, droplet radiator module; twenty-eight item icons (`item/<id>.png`) for the InGaAsSb TPV cell and tile line, the W photonic crystal and selective emitter, the Nb trilayer, Josephson-junction wafer, air bridges and AQFP die and module, the C-12 CVD, polished, boron-doped and metallised diamond plates, diamond contacts and Schottky die, the glassy carbon and SiC-coated lattices, the e-beam distilled tin, droplet wick and collector, the Nb and W sputter targets, sputtered W wafer, Ti/Pt/Au stack, HfO2-passivated crystal and the rad-hard controller.
+
+```powershell
+powershell -NoProfile -ExecutionPolicy Bypass -File tools\assets\Build-UIVMatrioshkaTextures.ps1
+powershell -NoProfile -ExecutionPolicy Bypass -File tools\assets\Build-UIVMatrioshkaTextures.ps1 -Credits
 ```

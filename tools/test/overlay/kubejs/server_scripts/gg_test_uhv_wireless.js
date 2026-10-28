@@ -1,4 +1,4 @@
-// priority: -8424
+// priority: -8357
 // Gregtech Grindless - smoke test of UHV's wireless tier (package UHV-A9; TEST-ONLY overlay: copied over the instance on the test PC, never
 // shipped with the pack): the UHV row of tables/wireless_energy.json (registered by lv/wireless_energy.js), the naquadria magnet works'
 // circuit 5 (tables/magnet_works.json), which makes the UHV cell, and the powder-in-tube line's RTAN row (uv/materials.js, circuit 4).

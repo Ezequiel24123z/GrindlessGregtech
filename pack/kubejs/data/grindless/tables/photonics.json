@@ -124,6 +124,22 @@
           "charge": [],
           "itemsOut": [{ "id": "grindless:thf4_film", "count": 1 }],
           "fluidsOut": [{ "id": "gtceu:nitrogen", "amount": 1000 }]
+        },
+        {
+          "_why": "UIV-A10 (uiv.md line 41): the Nb / Al-AlOx / Nb trilayer grown on silicon from a sintered Nb target (circuit 8)",
+          "name": "nb_trilayer",
+          "circuit": 8,
+          "eut": 1966080,
+          "duration": 900,
+          "itemsIn": [
+            { "id": "gtceu:silicon_wafer", "count": 1 },
+            { "id": "grindless:nb_target", "count": 1 }
+          ],
+          "kept": [],
+          "fluidsIn": [{ "id": "gtceu:oxygen", "amount": 100 }],
+          "charge": [],
+          "itemsOut": [{ "id": "grindless:nb_trilayer", "count": 1 }],
+          "fluidsOut": []
         }
       ]
     },
@@ -325,6 +341,51 @@
             { "id": "grindless:pcm_crossbar", "count": 1 },
             { "id": "grindless:spent_gst_target", "count": 1 }
           ],
+          "fluidsOut": [{ "id": "minecraft:water", "amount": 1000 }]
+        },
+        {
+          "_why": "UIV-A10 (uiv.md line 37): an air-bridge reflector etched under the InGaAsSb epi, gold-plated (circuit 14)",
+          "name": "air_bridge",
+          "circuit": 14,
+          "eut": 7864320,
+          "duration": 600,
+          "itemsIn": [
+            { "id": "grindless:ingaasb_epi_wafer", "count": 1 },
+            { "id": "gtceu:gold_dust", "count": 1 }
+          ],
+          "kept": [],
+          "fluidsIn": [{ "id": "gtceu:ultrapure_water", "amount": 1000 }],
+          "charge": [],
+          "itemsOut": [{ "id": "grindless:air_bridge_wafer", "count": 1 }],
+          "fluidsOut": [{ "id": "minecraft:water", "amount": 1000 }]
+        },
+        {
+          "_why": "UIV-A10 (uiv.md line 43): Ti/Pt/Au ohmic contacts evaporated on boron-doped C-12 diamond (circuit 15)",
+          "name": "diamond_contacts",
+          "circuit": 15,
+          "eut": 7864320,
+          "duration": 600,
+          "itemsIn": [
+            { "id": "grindless:c12_boron_diamond", "count": 1 },
+            { "id": "grindless:tipt_au_stack", "count": 1 }
+          ],
+          "kept": [],
+          "fluidsIn": [{ "id": "gtceu:ultrapure_water", "amount": 1000 }],
+          "charge": [{ "id": "gtceu:argon", "amount": 1000 }],
+          "itemsOut": [{ "id": "grindless:diamond_contact_wafer", "count": 1 }],
+          "fluidsOut": [{ "id": "minecraft:water", "amount": 1000 }]
+        },
+        {
+          "_why": "UIV-A10 (uiv.md line 46): the sputtered tungsten film etched into a photonic crystal (circuit 16)",
+          "name": "w_photonic_crystal",
+          "circuit": 16,
+          "eut": 7864320,
+          "duration": 800,
+          "itemsIn": [{ "id": "grindless:sputtered_w_wafer", "count": 1 }],
+          "kept": [],
+          "fluidsIn": [{ "id": "gtceu:ultrapure_water", "amount": 1000 }],
+          "charge": [],
+          "itemsOut": [{ "id": "grindless:w_photonic_crystal", "count": 1 }],
           "fluidsOut": [{ "id": "minecraft:water", "amount": 1000 }]
         }
       ]

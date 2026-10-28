@@ -1,0 +1,217 @@
+{
+  "_why": "UIV-A10 (docs/eras/uiv.md, machines 11 and 12, lines 19, 20, 21, 37, 41, 43 and 46): the Matrioshka computer, the droplet radiator works and the GTM steps of their lines. Machine figures are marked tune in the contract.",
+  "types": {
+    "matrioshka_computing": {
+      "dataKey": "grindless_matrioshka_computing",
+      "recipes": [
+        {
+          "name": "research_write", "circuit": 1, "eut": 31457280, "duration": 6000, "site": true,
+          "_why": "UIV-A10: the only writer of UIV research (S0-9): a 5D data crystal burns the radiation-hardened controller's research into a blank data module.",
+          "itemsIn": [ { "id": "grindless:data_crystal_5d", "count": 1 }, { "id": "gtceu:data_module", "count": 1 } ],
+          "itemsOut": [ { "id": "gtceu:data_module", "count": 1, "nbt": "{assembly_line_research:{research_id:\"rad_hard_controller\",research_type:\"gtceu:assembly_line\"}}" } ]
+        },
+        {
+          "name": "ns_eos_chart", "circuit": 2, "eut": 31457280, "duration": 6000, "site": true,
+          "_why": "UIV-A10: the neutron-star equation-of-state chart from a timed X-ray pulse and a degenerate pellet.",
+          "itemsIn": [ { "id": "grindless:xray_pulse_timed", "count": 1 }, { "id": "grindless:degenerate_pellet", "count": 1 } ],
+          "itemsOut": [ { "id": "grindless:ns_eos_chart", "count": 1 } ]
+        },
+        {
+          "name": "kerr_chart", "circuit": 3, "eut": 31457280, "duration": 4800, "site": true,
+          "_why": "UIV-A10: the Kerr chart from correlated Kerr data.",
+          "itemsIn": [ { "id": "grindless:correlated_kerr_data", "count": 1 } ],
+          "itemsOut": [ { "id": "grindless:kerr_chart", "count": 1 } ]
+        }
+      ]
+    },
+    "droplet_radiator_assembly": {
+      "dataKey": "grindless_droplet_radiator_assembly",
+      "recipes": [
+        {
+          "name": "radiator_module", "circuit": 1, "eut": 31457280, "duration": 1200, "site": true,
+          "_why": "UIV-A10: the droplet generator (orifice plate) sprays four distilled tin onto a collector; the tin overflow goes back to stock.",
+          "itemsIn": [ { "id": "grindless:orifice_plate", "count": 1 }, { "id": "grindless:eb_distilled_tin", "count": 4 }, { "id": "grindless:droplet_collector", "count": 1 } ],
+          "itemsOut": [ { "id": "grindless:droplet_radiator_module", "count": 1 }, { "id": "gtceu:tin_ingot", "count": 1 } ]
+        },
+        {
+          "name": "tpv_tile", "circuit": 2, "eut": 31457280, "duration": 900, "site": true,
+          "_why": "UIV-A10: four TPV cells and a selective emitter make a TPV tile in vacuum.",
+          "itemsIn": [ { "id": "grindless:ingaasb_tpv_cell", "count": 4 }, { "id": "grindless:selective_emitter", "count": 1 } ],
+          "itemsOut": [ { "id": "grindless:tpv_tile", "count": 1 } ]
+        }
+      ]
+    },
+    "chemical_reactor": {
+      "recipes": [
+        {
+          "name": "sic_coat_lattice", "circuit": 0, "eut": 1966080, "duration": 400,
+          "_why": "UIV-A10 line 19: the glassy-carbon lattice is coated with SiC from methyltrichlorosilane; the HCl comes out.",
+          "itemsIn": [ { "id": "grindless:glassy_carbon_lattice", "count": 1 } ],
+          "fluidsIn": [ { "id": "gtceu:methyltrichlorosilane", "amount": 500 } ],
+          "itemsOut": [ { "id": "grindless:sic_coated_lattice", "count": 1 } ],
+          "fluidsOut": [ { "id": "gtceu:hydrochloric_acid", "amount": 500 } ]
+        },
+        {
+          "name": "c12_metallise", "circuit": 0, "eut": 1966080, "duration": 400,
+          "_why": "UIV-A10 line 21: the polished C-12 plate is metallised with titanium under argon.",
+          "itemsIn": [ { "id": "grindless:c12_polished_plate", "count": 1 }, { "id": "gtceu:titanium_dust", "count": 1 } ],
+          "fluidsIn": [ { "id": "gtceu:argon", "amount": 1000 } ],
+          "itemsOut": [ { "id": "grindless:c12_metallised_plate", "count": 1 } ]
+        },
+        {
+          "name": "stibine", "circuit": 0, "eut": 1966080, "duration": 400,
+          "_why": "UIV-A10 line 37: stibine from antimony and magnesium in hydrochloric acid (the arsine route); the magnesium chloride is kept.",
+          "itemsIn": [ { "id": "gtceu:antimony_dust", "count": 2 }, { "id": "gtceu:magnesium_dust", "count": 3 } ],
+          "fluidsIn": [ { "id": "gtceu:hydrochloric_acid", "amount": 6000 } ],
+          "itemsOut": [ { "id": "gtceu:magnesium_chloride_dust", "count": 3 } ],
+          "fluidsOut": [ { "id": "gtceu:stibine", "amount": 2000 } ]
+        },
+        {
+          "name": "stibine_scrub", "circuit": 0, "eut": 1966080, "duration": 300,
+          "_why": "UIV-A10 line 37: the unreacted stibine is scrubbed back to antimony and hydrogen (contained, never vented).",
+          "itemsIn": [ { "id": "gtceu:small_antimony_dust", "count": 1 } ],
+          "fluidsIn": [ { "id": "gtceu:stibine", "amount": 250 } ],
+          "itemsOut": [ { "id": "gtceu:antimony_dust", "count": 1 } ],
+          "fluidsOut": [ { "id": "gtceu:hydrogen", "amount": 375 } ]
+        },
+        {
+          "name": "w_sputter", "circuit": 0, "eut": 1966080, "duration": 600,
+          "_why": "UIV-A10 line 46: the tungsten target is sputtered onto a silicon wafer under argon.",
+          "itemsIn": [ { "id": "grindless:w_target", "count": 1 }, { "id": "gtceu:silicon_wafer", "count": 1 } ],
+          "fluidsIn": [ { "id": "gtceu:argon", "amount": 1000 } ],
+          "itemsOut": [ { "id": "grindless:sputtered_w_wafer", "count": 1 } ]
+        },
+        {
+          "name": "hfo2_passivate", "circuit": 0, "eut": 1966080, "duration": 600,
+          "_why": "UIV-A10 line 46: the tungsten photonic crystal is passivated with hafnia in oxygen.",
+          "itemsIn": [ { "id": "grindless:w_photonic_crystal", "count": 1 }, { "id": "grindless:hafnia_dust", "count": 1 } ],
+          "fluidsIn": [ { "id": "gtceu:oxygen", "amount": 1000 } ],
+          "itemsOut": [ { "id": "grindless:hfo2_passivated_crystal", "count": 1 } ]
+        }
+      ]
+    },
+    "assembler": {
+      "recipes": [
+        {
+          "name": "droplet_wick", "circuit": 0, "eut": 1966080, "duration": 300,
+          "_why": "UIV-A10 line 19: the SiC-coated lattice and tungsten foil make a wick.",
+          "itemsIn": [ { "id": "grindless:sic_coated_lattice", "count": 1 }, { "id": "gtceu:tungsten_foil", "count": 2 } ],
+          "itemsOut": [ { "id": "grindless:droplet_wick", "count": 1 } ]
+        },
+        {
+          "name": "droplet_collector", "circuit": 0, "eut": 1966080, "duration": 300,
+          "_why": "UIV-A10 line 19: two wicks and titanium plates make the collector.",
+          "itemsIn": [ { "id": "grindless:droplet_wick", "count": 2 }, { "id": "gtceu:titanium_plate", "count": 2 } ],
+          "itemsOut": [ { "id": "grindless:droplet_collector", "count": 1 } ]
+        },
+        {
+          "name": "matrioshka_node", "circuit": 0, "eut": 1966080, "duration": 400,
+          "_why": "UIV-A10 line 21: two metallised C-12 plates and a tungsten plate make a computing node block.",
+          "itemsIn": [ { "id": "grindless:c12_metallised_plate", "count": 2 }, { "id": "gtceu:tungsten_plate", "count": 1 } ],
+          "itemsOut": [ { "id": "grindless:matrioshka_node", "count": 1 } ]
+        },
+        {
+          "name": "tpv_segment", "circuit": 0, "eut": 1966080, "duration": 300,
+          "_why": "UIV-A10 line 37: four TPV tiles and gold plates make a segment.",
+          "itemsIn": [ { "id": "grindless:tpv_tile", "count": 4 }, { "id": "gtceu:gold_plate", "count": 2 } ],
+          "itemsOut": [ { "id": "grindless:tpv_segment", "count": 1 } ]
+        },
+        {
+          "name": "matrioshka_tpv_shell", "circuit": 0, "eut": 1966080, "duration": 400,
+          "_why": "UIV-A10 line 37: four segments and tungsten plates make a TPV shell block.",
+          "itemsIn": [ { "id": "grindless:tpv_segment", "count": 4 }, { "id": "gtceu:tungsten_plate", "count": 2 } ],
+          "itemsOut": [ { "id": "grindless:matrioshka_tpv_shell", "count": 1 } ]
+        },
+        {
+          "name": "aqfp_bond", "circuit": 0, "eut": 1966080, "duration": 300,
+          "_why": "UIV-A10 line 41: an AQFP die is bonded to a glass interposer.",
+          "itemsIn": [ { "id": "grindless:aqfp_die", "count": 1 }, { "id": "grindless:glass_interposer", "count": 1 } ],
+          "itemsOut": [ { "id": "grindless:aqfp_module", "count": 1 } ]
+        },
+        {
+          "name": "logic_tile_block", "circuit": 0, "eut": 1966080, "duration": 400,
+          "_why": "UIV-A10 line 41: four AQFP modules and niobium make a logic tile block.",
+          "itemsIn": [ { "id": "grindless:aqfp_module", "count": 4 }, { "id": "gtceu:niobium_ingot", "count": 2 } ],
+          "itemsOut": [ { "id": "grindless:matrioshka_logic_tile", "count": 1 } ]
+        },
+        {
+          "name": "schottky_die", "circuit": 0, "eut": 1966080, "duration": 300,
+          "_why": "UIV-A10 line 43: a diamond-contact wafer and SiC make a Schottky die.",
+          "itemsIn": [ { "id": "grindless:diamond_contact_wafer", "count": 1 }, { "id": "gtca:silicon_carbide_dust", "count": 1 } ],
+          "itemsOut": [ { "id": "grindless:diamond_schottky_die", "count": 1 } ]
+        },
+        {
+          "name": "selective_emitter", "circuit": 0, "eut": 1966080, "duration": 300,
+          "_why": "UIV-A10 line 46: the passivated crystal and tungsten foil make a selective emitter.",
+          "itemsIn": [ { "id": "grindless:hfo2_passivated_crystal", "count": 1 }, { "id": "gtceu:tungsten_foil", "count": 2 } ],
+          "itemsOut": [ { "id": "grindless:selective_emitter", "count": 1 } ]
+        },
+        {
+          "name": "emitter_shell", "circuit": 0, "eut": 1966080, "duration": 400,
+          "_why": "UIV-A10 line 46: four selective emitters and titanium plates make an emitter shell block.",
+          "itemsIn": [ { "id": "grindless:selective_emitter", "count": 4 }, { "id": "gtceu:titanium_plate", "count": 2 } ],
+          "itemsOut": [ { "id": "grindless:matrioshka_emitter_shell", "count": 1 } ]
+        }
+      ]
+    },
+    "lathe": {
+      "recipes": [
+        {
+          "name": "c12_polish", "circuit": 0, "eut": 1966080, "duration": 300,
+          "_why": "UIV-A10 line 21: the C-12 CVD plate is polished; the swarf is diamond dust.",
+          "itemsIn": [ { "id": "grindless:c12_cvd_plate", "count": 1 } ],
+          "itemsOut": [ { "id": "grindless:c12_polished_plate", "count": 1 }, { "id": "gtceu:diamond_dust", "count": 1 } ]
+        }
+      ]
+    },
+    "mixer": {
+      "recipes": [
+        {
+          "name": "ingaasb_dust", "circuit": 0, "eut": 1966080, "duration": 300,
+          "_why": "UIV-A10 line 37: indium, gallium, arsenic and antimony dust are mixed into the InGaAsSb feed.",
+          "itemsIn": [ { "id": "gtceu:indium_dust", "count": 1 }, { "id": "gtceu:gallium_dust", "count": 1 }, { "id": "gtceu:arsenic_dust", "count": 1 }, { "id": "gtceu:antimony_dust", "count": 1 } ],
+          "itemsOut": [ { "id": "gtceu:ingaasb_dust", "count": 4 } ]
+        },
+        {
+          "name": "tipt_au_stack", "circuit": 0, "eut": 1966080, "duration": 300,
+          "_why": "UIV-A10 line 43: titanium, platinum and gold dust make the Ti/Pt/Au contact stack (the gold is recycled from the scrap).",
+          "itemsIn": [ { "id": "gtceu:titanium_dust", "count": 1 }, { "id": "gtceu:platinum_dust", "count": 1 }, { "id": "gtceu:gold_dust", "count": 2 } ],
+          "itemsOut": [ { "id": "grindless:tipt_au_stack", "count": 4 } ]
+        }
+      ]
+    },
+    "cutter": {
+      "recipes": [
+        {
+          "name": "tpv_dicing", "circuit": 0, "eut": 1966080, "duration": 300,
+          "_why": "UIV-A10 line 37: the air-bridge wafer is diced into TPV cells.",
+          "itemsIn": [ { "id": "grindless:air_bridge_wafer", "count": 1 } ],
+          "fluidsIn": [ { "id": "gtceu:lubricant", "amount": 50 } ],
+          "itemsOut": [ { "id": "grindless:ingaasb_tpv_cell", "count": 8 } ]
+        }
+      ]
+    },
+    "laser_engraver": {
+      "recipes": [
+        {
+          "name": "aqfp_die", "circuit": 0, "eut": 1966080, "duration": 300,
+          "_why": "UIV-A10 line 41: the Josephson wafer is engraved into AQFP dies.",
+          "itemsIn": [ { "id": "grindless:nb_jj_wafer", "count": 1 } ],
+          "kept": [ { "id": "gtceu:purple_glass_lens", "count": 1 } ],
+          "itemsOut": [ { "id": "grindless:aqfp_die", "count": 2 } ]
+        }
+      ]
+    },
+    "assembly_line": {
+      "recipes": [
+        {
+          "name": "rad_hard_controller", "circuit": 0, "eut": 1966080, "duration": 1200, "research": "rad_hard_controller",
+          "_why": "UIV-A10 line 43: the radiation-hardened controller of the Matrioshka; its research is written only by the Matrioshka computer (circuit 1).",
+          "itemsIn": [ { "id": "grindless:diamond_schottky_die", "count": 4 }, { "id": "gtceu:tungsten_plate", "count": 4 }, { "id": "gtnn:optical_mainframe", "count": 1 } ],
+          "fluidsIn": [ { "id": "gtceu:lubricant", "amount": 1000 } ],
+          "itemsOut": [ { "id": "grindless:rad_hard_controller", "count": 1 } ]
+        }
+      ]
+    }
+  }
+}

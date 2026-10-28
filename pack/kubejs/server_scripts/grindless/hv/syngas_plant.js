@@ -99,6 +99,16 @@
     { name: 'co_rich', circuit: 6, feed: 1, co2: 1000, out: { co: 2000 }, gasify: 1, shift: 0 }
   ]
 
+  // UIV-A10 (docs/eras/uiv.md, line 21): C-12 methanation of the fusion ash, C + 2 H2 -> CH4 with the carbon-12 kept apart; the 12C dust is
+  // the ash centrifuge's (UIV-A9). c12: dust of C12; methanate: moles through a methanation stage
+  const C12 = 'gtceu:carbon_12_dust'
+  const C12_METHANE = 'gtceu:carbon_12_methane'
+  const METHANATE_EU = 19200
+  ATOMS[C12_METHANE] = { c: 1, h: 4, o: 0 }
+  const UIV_TABLE = [
+    { name: 'c12_methanation', circuit: 7, c12: 1, h2: 2000, out: { ch4: 1000 }, gasify: 0, shift: 0, methanate: 1 }
+  ]
+
   function addAtoms(sum, atoms, moles, sign) {
     sum.c += sign * atoms.c * moles
     sum.h += sign * atoms.h * moles
@@ -112,20 +122,24 @@
     if (t.co2) fluidsIn.push({ id: CO2, amount: t.co2 })
     if (t.steam) fluidsIn.push({ id: STEAM, amount: t.steam })
     if (t.water) fluidsIn.push({ id: WATER, amount: t.water })
+    if (t.h2) fluidsIn.push({ id: H2, amount: t.h2 })
     var fluidsOut = []
+    if (t.out.ch4) fluidsOut.push({ id: C12_METHANE, amount: t.out.ch4 })
     if (t.out.co) fluidsOut.push({ id: CO, amount: t.out.co })
     if (t.out.h2) fluidsOut.push({ id: H2, amount: t.out.h2 })
     if (t.out.co2) fluidsOut.push({ id: CO2, amount: t.out.co2 })
     var atoms = { c: 0, h: 0, o: 0 }
     if (t.feed) addAtoms(atoms, FEED_ATOMS, t.feed, 1)
+    if (t.c12) addAtoms(atoms, FEED_ATOMS, t.c12, 1)
     fluidsIn.forEach(function (f) { addAtoms(atoms, ATOMS[f.id], f.amount / 1000, 1) })
     fluidsOut.forEach(function (f) { addAtoms(atoms, ATOMS[f.id], f.amount / 1000, -1) })
-    var energy = t.gasify * GASIFY_EU + t.shift * SHIFT_EU
+    var energy = t.gasify * GASIFY_EU + t.shift * SHIFT_EU + (t.methanate || 0) * METHANATE_EU
     var plan = {
       id: 'grindless:syngas/hv/' + t.name,
       name: t.name,
       circuit: t.circuit,
       feed: t.feed ? { tag: FEED_TAG, count: t.feed } : null,
+      c12: t.c12 ? { id: C12, count: t.c12 } : null,
       fluidsIn: fluidsIn,
       fluidsOut: fluidsOut,
       ash: t.feed ? Math.min(9999, ASH_PER_MOLE * t.feed) : 0,
@@ -149,6 +163,7 @@
   SYN.recipes = TABLE.map(planOf)
   SYN.orbitRecipes = ORBIT_TABLE.map(planOf)
   SYN.uevRecipes = UEV_TABLE.map(planOf)
+  SYN.uivRecipes = UIV_TABLE.map(planOf)
 
   const HULL = 'gtceu:hv_machine_hull'
   const REACTOR = 'gtceu:hv_chemical_reactor'
@@ -189,9 +204,11 @@
       console.error('[grindless/hv] syngas recipes skipped, unknown id(s): ' + missing.join(', '))
       return
     }
-    SYN.recipes.concat(SYN.orbitRecipes, SYN.uevRecipes).forEach(function (r) {
+    SYN.recipes.concat(SYN.orbitRecipes, SYN.uevRecipes, SYN.uivRecipes).forEach(function (r) {
+      if (r.c12 && !Item.exists(r.c12.id)) return console.error('[grindless/hv] syngas row ' + r.name + ' skipped, unknown ' + r.c12.id)
       var recipe = event.recipes.gtceu.syngas(ID_PREFIX + r.name)
       if (r.feed) recipe.itemInputs(r.feed.count + 'x #' + r.feed.tag)
+      if (r.c12) recipe.itemInputs(r.c12.count + 'x ' + r.c12.id)
       if (r.catalyst) recipe.chancedInput(CATALYST, CATALYST_WEAR, 0)
       recipe.circuit(r.circuit)
       r.fluidsIn.forEach(function (f) { recipe.inputFluids(Fluid.of(f.id, f.amount)) })
@@ -200,7 +217,7 @@
       if (r.dim) recipe.dimension(r.dim)
       recipe.EUt(r.eut).duration(r.duration)
     })
-    console.info('[grindless/hv] syngas recipes added: ' + (SYN.recipes.length + SYN.orbitRecipes.length + SYN.uevRecipes.length))
+    console.info('[grindless/hv] syngas recipes added: ' + (SYN.recipes.length + SYN.orbitRecipes.length + SYN.uevRecipes.length + SYN.uivRecipes.length))
   }
 
   // Plant: CRAFTING TABLE, HV hull + HV chemical reactor (the shift) + HV centrifuge (the gas separation) + 2 HV electric pumps + 4 HV

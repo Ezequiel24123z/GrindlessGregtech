@@ -81,19 +81,19 @@ test('hall rows: circuits 4-6 after the three UEV rows, within the hall slots (8
 
 test('older rows: foundry c13 crossbar, MBE c7 ThF4 film, clock lab c3, pulsar timing c3, marked UIV-A7 and appended last', () => {
   const f = PH.types.photonic_foundry.recipes;
-  const x = f[f.length - 1];
+  const x = f[f.findIndex((r) => r.name === 'pcm_crossbar')]; // UIV-A10 appends c14-16 after it
   assert.equal(x.name, 'pcm_crossbar');
   assert.equal(x.circuit, 13);
-  assert.equal(f[f.length - 2].circuit, 12);
+  assert.equal(f[f.indexOf(x) - 1].circuit, 12);
   assert.match(x._why, /UIV-A7/);
   assert.deepEqual(ids(x.itemsIn), ['grindless:pcm_photonic_die', 'grindless:gst_target']);
   assert.deepEqual(ids(x.itemsOut), ['grindless:pcm_crossbar', 'grindless:spent_gst_target']);
   assert.ok(x.itemsIn.length + 1 <= 6 && x.itemsOut.length <= 3);
   const m = PH.types.molecular_beam_epitaxy.recipes;
-  const y = m[m.length - 1];
+  const y = m[m.findIndex((r) => r.name === 'thf4_film')];
   assert.equal(y.name, 'thf4_film');
   assert.equal(y.circuit, 7);
-  assert.equal(m[m.length - 2].circuit, 6);
+  assert.equal(m[m.indexOf(y) - 1].circuit, 6);
   assert.match(y._why, /UIV-A7/);
   assert.deepEqual(inputs(y), ['gtceu:silicon_wafer', 'grindless:thf4', 'gtceu:liquid_nitrogen']);
   assert.deepEqual(outputs(y), ['grindless:thf4_film', 'gtceu:nitrogen']);

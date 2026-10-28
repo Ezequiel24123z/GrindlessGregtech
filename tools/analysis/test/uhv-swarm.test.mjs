@@ -55,7 +55,8 @@ test('the stand-in runs the swarm scripts without errors, nothing clashing or sk
   assert.deepEqual(SW.clashes, []);
   assert.deepEqual(SW.skipped, []);
   // UEV-B2 adds the Alpha Centauri rows alpha_full_swarm and alpha_corona
-  assert.equal(SW.recipes.length, 10);
+  // UIV-A10 adds the Mercury row matrioshka_feed
+  assert.equal(SW.recipes.length, 11);
 });
 
 test('registration: three types, three machines, two items with textures; F1\'s ids are not registered again', () => {
@@ -124,7 +125,8 @@ test('the generator rows: EU out at the final figure, nothing in; kept segments 
     formation: { eu: 2097152, dur: 6000, kept: [[SEG, 15]], used: [[POD, 1], [SEG, 1]], out: [[TANK, 1], [WORN, 1]], circuit: 1 },
     formation_krypton: { eu: 2097152, dur: 3000, kept: [[SEG, 15]], used: [[SEG, 1]], out: [[WORN, 1]], circuit: 1 },
     full_swarm: { eu: 8388608, dur: 6000, kept: [[MAP, 1], [SEG, 60]], used: [[POD, 4], [SEG, 4]], out: [[TANK, 4], [WORN, 4]], circuit: 2 },
-    alpha_full_swarm: { eu: 12582912, dur: 6000, kept: [[ALPHA_MAP, 1], [SEG, 60]], used: [[POD, 6], [SEG, 6]], out: [[TANK, 6], [WORN, 6]], circuit: 3 }
+    alpha_full_swarm: { eu: 12582912, dur: 6000, kept: [[ALPHA_MAP, 1], [SEG, 60]], used: [[POD, 6], [SEG, 6]], out: [[TANK, 6], [WORN, 6]], circuit: 3 },
+    matrioshka_feed: { eu: 33554432, dur: 6000, kept: [[MAP, 1], [SEG, 60]], used: [[POD, 16], [SEG, 16]], out: [[TANK, 16], [WORN, 16]], circuit: 4 } // UIV-A10
   };
   const gens = SW.recipes.filter((r) => r.generator).map((r) => r.name).sort();
   assert.deepEqual(gens, Object.keys(want).sort());
