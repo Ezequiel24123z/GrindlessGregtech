@@ -1,0 +1,15 @@
+{
+  "translation": "level.grindless.s0_alpha_centauri_orbit",
+  "galaxy": "gcyr:milky_way",
+  "solar_system": "gcyr:alpha_centauri",
+  "world": "grindless:s0_alpha_centauri_orbit",
+  "orbit_world": "grindless:s0_alpha_centauri_orbit",
+  "rocket_tier": 9,
+  "gravity": 0.0,
+  "has_atmosphere": false,
+  "days_in_year": 400,
+  "temperature": 3,
+  "solar_power": 20,
+  "has_oxygen": false,
+  "button_color": 16764006
+}
