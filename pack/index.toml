@@ -34,7 +34,7 @@ hash = "5f22a74d9b40045bbe17eaf500f156a7aa7ff0eba726ae808cf66fdb19893783"
 
 [[files]]
 file = "config/ftbquests/quests/chapters/multiblocks.snbt"
-hash = "9b3906e5f1b5c5b6622d0a60933c7e935621f5f1f918687d37b8151f13b036a1"
+hash = "da8d0229fe255c647c678e736b3058116c2acf2342f9a927acc35660ca650b64"
 
 [[files]]
 file = "config/ftbquests/quests/chapters/mv_age.snbt"
@@ -343,6 +343,10 @@ hash = "2408d1e6914dc05c3b8327420bdacfd151daed336e8282e58555bca70a7b6307"
 [[files]]
 file = "kubejs/assets/emi/recipe/additions/grindless/uranian_quantum_seed.json"
 hash = "a614ec4a71c8721d3c838b4917a0956adefba24658775a439346789d56f4c544"
+
+[[files]]
+file = "kubejs/assets/emi/recipe/additions/grindless/uv_mega_factory_modules.json"
+hash = "dbf84f441faf785869736d1ace34b4cf8315e6b809cca021a851ed27517d88dc"
 
 [[files]]
 file = "kubejs/assets/emi/recipe/additions/grindless/uv_travel_neptunian_quantum_seed.json"
@@ -2393,6 +2397,18 @@ file = "kubejs/assets/grindless/textures/block/multiblock/mega_chemical_complex/
 hash = "350457c2bbe9c01cb24afb029e099e5dda4ef4f7ec5e5b3afd274fcf45e0d7cc"
 
 [[files]]
+file = "kubejs/assets/grindless/textures/block/multiblock/mega_factory/overlay_front.png"
+hash = "b5f330bb2114496d2874b153aa6729aa9e9d67cbaee490c766dd03f18de8732c"
+
+[[files]]
+file = "kubejs/assets/grindless/textures/block/multiblock/mega_factory/overlay_front_active.png"
+hash = "f7264010c48ae3b4e89a14735ece26dd84aa9b0ce206959b7534e2af79905ab5"
+
+[[files]]
+file = "kubejs/assets/grindless/textures/block/multiblock/mega_factory/overlay_front_active_emissive.png"
+hash = "cac476e49d140ead397821dd3ea76dff9444f0db2a8c64cf54f176caa6416695"
+
+[[files]]
 file = "kubejs/assets/grindless/textures/block/multiblock/megabar_press/overlay_front.png"
 hash = "ecfdee96fbd9e15c4ab579813474a53424b574ee91a46954436e1152d5306485"
 
@@ -4305,8 +4321,28 @@ file = "kubejs/assets/grindless/textures/block/uv/bnnt_fuel_tank_side.png"
 hash = "859d196f825c4583cd7744bc2e3c53f48822eeb41c342f3fe83fcb47d3bb1626"
 
 [[files]]
+file = "kubejs/assets/grindless/textures/block/uv/cutting_module.png"
+hash = "68c349211918dbb75d4bb67a05bd26ea02321dae39dd44ab5a7f1f781dcaf4cd"
+
+[[files]]
+file = "kubejs/assets/grindless/textures/block/uv/forming_module.png"
+hash = "a35a4b74870b3f62f9f8161520032143a5e9e3c1d2b8fc2426e4313fe8125a59"
+
+[[files]]
+file = "kubejs/assets/grindless/textures/block/uv/heat_module.png"
+hash = "55e66d98108971b7400a3d8d711635a1cda1ba6b4567cfb1c6e7533f9cd4df45"
+
+[[files]]
 file = "kubejs/assets/grindless/textures/block/uv/laser_module_block.png"
 hash = "8237c8def801d4dcf94f3aec9fb1acae2fcdc63338277da4defbf2ddc2828ec1"
+
+[[files]]
+file = "kubejs/assets/grindless/textures/block/uv/mixing_module.png"
+hash = "41289cbd95acf8357fbb4e726b3319b8c4df50697eedfe35b593ff6d40701118"
+
+[[files]]
+file = "kubejs/assets/grindless/textures/block/uv/separation_module.png"
+hash = "c83291e18aa650734a7bb72d5e5eeca474b918740aab96c0d9c66960f9d3b881"
 
 [[files]]
 file = "kubejs/assets/grindless/textures/block/uv/srf_cryomodule_block.png"
@@ -7085,6 +7121,10 @@ file = "kubejs/client_scripts/grindless/uv_materials_lang.js"
 hash = "8f15fb1930b8d1c33a070d74bd2a6c42f6d4df8261acae842f8a012263ebac9c"
 
 [[files]]
+file = "kubejs/client_scripts/grindless/uv_mega_factory_lang.js"
+hash = "3cdaa52f56a641d8539196889ebc10335b193f3429b74b849d7b6fe76fe9d009"
+
+[[files]]
 file = "kubejs/client_scripts/grindless/uv_neptune_lang.js"
 hash = "d4b0951f5dc54e89719479bc7edaec765663c1a60770ddf47caa49a1fa9d3d41"
 
@@ -8365,6 +8405,10 @@ file = "kubejs/server_scripts/grindless/uv/materials.js"
 hash = "012e403fd7e287cb7208e4d4d3d88fdb6ab4b6af355d0a8b58c2d95575944dac"
 
 [[files]]
+file = "kubejs/server_scripts/grindless/uv/mega_factory.js"
+hash = "0a2f7a32bfc7c276f7484d4f0dde6a42e0a23d732b255f8b56d7db074cdf1d0f"
+
+[[files]]
 file = "kubejs/server_scripts/grindless/uv/neptune.js"
 hash = "71db6df8fc1898aba490078f2322e808811f014389feca4d9b7a95522ece3bf6"
 
@@ -8979,6 +9023,10 @@ hash = "957be0523c0a485b7171c77a836402a33add549146be2e0721c5efc92b2a45cf"
 [[files]]
 file = "kubejs/startup_scripts/grindless/uv/materials.js"
 hash = "8c92175b2fdc94733c212ddec40ad58de51f60fc34bf1920a89dd7b3b4894368"
+
+[[files]]
+file = "kubejs/startup_scripts/grindless/uv/mega_factory.js"
+hash = "b851afa4ddf7bbf23df0d5b9c425950ab4ab72ca302dd551f3d47315e75cab5a"
 
 [[files]]
 file = "kubejs/startup_scripts/grindless/uv/neptune.js"

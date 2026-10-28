@@ -1421,3 +1421,17 @@ powershell -NoProfile -ExecutionPolicy Bypass -File tools\assets\Build-MegaChemi
 | File (under `textures/`) | Notes |
 |---|---|
 | `block/multiblock/mega_chemical_complex/overlay_front*.png` | The Mega Chemical Complex controller face: a PTFE door with a reaction column between two coil rings; still, active and active emissive. |
+
+## UV Mega Factory (MEGA-8)
+
+Procedural, drawn by `Build-MegaFactoryTextures.ps1`; nothing is copied from another mod. The controller face of `gtceu:mega_factory` (15 machine types picked by the module blocks in its four sockets, PCB coolant upkeep per module) and the five module blocks.
+
+```powershell
+powershell -NoProfile -ExecutionPolicy Bypass -File tools\assets\Build-MegaFactoryTextures.ps1
+powershell -NoProfile -ExecutionPolicy Bypass -File tools\assets\Build-MegaFactoryTextures.ps1 -Credits
+```
+
+| File (under `textures/`) | Notes |
+|---|---|
+| `block/multiblock/mega_factory/overlay_front*.png` | The Mega Factory controller face; still, active and active emissive. |
+| `block/uv/{separation,forming,cutting,mixing,heat}_module.png` | The five module blocks that go in the factory's sockets. |

@@ -1,0 +1,14 @@
+{
+  "type": "emi:info",
+  "stacks": [
+    "item:grindless:separation_module",
+    "item:grindless:forming_module",
+    "item:grindless:cutting_module",
+    "item:grindless:mixing_module",
+    "item:grindless:heat_module",
+    "item:gtceu:mega_factory"
+  ],
+  "text": [
+    "emi.grindless.info.mega_factory_modules.0"
+  ]
+}

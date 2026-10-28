@@ -1,3 +1,4 @@
+// priority: -10150
 // -----------------------------------------------------------------------------------------------
 // UV Mega Factory, gtceu:mega_factory (package MEGA-8, docs/eras/mega.md 4.10): a UV casing frame with four module sockets, in the spirit
 // of Star Technology's K.O.M.A.R.U. (docs/journey.md:176-179; MIT, ideas reused with attribution). It runs GTM's own recipes of 15 types;
@@ -23,8 +24,8 @@
 //   GTM checks the modified recipe (RecipeLogic#checkRecipe) before it starts it and drains the inputs once when it starts, so a run
 //   with too little coolant never starts and the coolant is consumed once. The modifier builds a copy of the recipe with a fresh fluid
 //   input list (GTRecipe#copy shares the lists of the original: the precedent is mv/leisure_utility.js).
-//   Figure: 250 mB per module is a quarter of a bucket; PCB coolant is a mixer product (1,000 mB from 750 mB PCB-grade biphenyl and 250 mB
-//   distilled water), so a full 4-module factory burns one mixer batch per run, enough to need a coolant line, small next to the EU.
+//   Figure: 250 mB per module is a quarter of a bucket; PCB coolant is a mixer product (gtceu:mixer/pcb_coolant: 1,000 mB from 750 mB
+//   polychlorinated biphenyl and 250 mB distilled water, 480 EU/t), so a full 4-module factory burns one mixer batch per run, enough to need a coolant line, small next to the EU.
 //
 // Structure (15 x 12 x 21, lib/patterns.js): a hollow shell of UV machine casing with an empty interior; four module sockets in the side
 // walls (x 0 and 14, row 5, depth 6 and 14); the controller in the middle of the front wall, one row up. Parts go in any casing cell:
