@@ -1,4 +1,4 @@
-// priority: 3360
+// priority: 3079
 // Gregtech Grindless - names and tooltips of UIV's levitation melter (startup_scripts/grindless/uiv/levitation_melter.js; package UIV-A3):
 //
 //   block.gtceu.levitation_melter, gtceu.levitation_melting   machine and recipe type names

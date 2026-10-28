@@ -1,4 +1,4 @@
-// priority: 3320
+// priority: 2974
 // Gregtech Grindless - names and tooltips of UIV's TFLN fab and femtosecond writer (startup_scripts/grindless/uiv/tfln_femtosecond.js; package UIV-A4):
 //
 //   block.gtceu.<machine>, gtceu.<type>                machine and recipe type names

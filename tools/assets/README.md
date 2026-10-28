@@ -66,6 +66,8 @@ Generators for the pack's own textures. Everything is procedural 16x16 pixel art
 | `Build-UIVTflnFemtosecondTextures.ps1` | Writes the TFLN fab's and femtosecond writer's controller faces and the nineteen item icons of UIV's thin-film lithium niobate and laser-written glass lines (UIV-A4). `-Credits`. |
 | `Build-UIVBeuvStmTextures.ps1` | Writes the BEUV scanner's and STM lithography cell's controller faces and the fourteen item icons of UIV's 6.7 nm lithography and P:Si lines (UIV-A5). `-Credits`. |
 | `Build-UIVMemoriesCryostatTextures.ps1` | Writes the spectral hole burner's and millikelvin cryostat works' controller faces and the fourteen item icons of UIV's memory and millikelvin lines (UIV-A6). `-Credits`. |
+| `Build-UIVMainframeTextures.ps1` | Writes the eight item icons of UIV's optical mainframe, ThF4 and chip-clock lines (UIV-A7). `-Credits`. |
+| `Build-UIVUivComponentsTextures.ps1` | Writes the seventeen item icons of UIV's impeller, strain-wave gear and GdBCO lines behind the UIV pump, robot arm and motor (UIV-A8). `-Credits`. |
 | `Build-UHVZblanTextures.ps1` | Writes the ZBLAN preform (UHV-A10, `item/zblan_preform.png`). The ZBLAN draw tower reuses UV's draw tower casing. `-Credits`. |
 | `Build-UVHeatSourcesTextures.ps1` | Writes the four item icons of UV's heat source works (UV-A2): probe RTG, americium micro source, curium RTG pellet, heavy curium oxide. `-Credits`. |
 | `Build-UVAcceleratorsTextures.ps1` | Writes the faces of UV's synchrotron, muon fusion cell and antimatter trap (UV-A5: `multiblock/synchrotron/`, `multiblock/muon_fusion_cell/`, `multiblock/antimatter_trap/`) and the 13 item icons of the LIGA, antiproton and muon fusion lines. `-Credits`. |
@@ -1568,4 +1570,22 @@ Procedural, drawn by `Build-UIVMemoriesCryostatTextures.ps1`; nothing is copied 
 ```powershell
 powershell -NoProfile -ExecutionPolicy Bypass -File tools\assets\Build-UIVMemoriesCryostatTextures.ps1
 powershell -NoProfile -ExecutionPolicy Bypass -File tools\assets\Build-UIVMemoriesCryostatTextures.ps1 -Credits
+```
+
+## UIV optical mainframe (UIV-A7)
+
+Procedural, drawn by `Build-UIVMainframeTextures.ps1`; nothing is copied from another mod. Eight item icons (`item/<id>.png`): PCM crossbar, crossbar on interposer, photonic tensor core, ThF4, ThF4 film, capped ThF4 film, chip nuclear clock, disciplined clock core.
+
+```powershell
+powershell -NoProfile -ExecutionPolicy Bypass -File tools\assets\Build-UIVMainframeTextures.ps1
+powershell -NoProfile -ExecutionPolicy Bypass -File tools\assets\Build-UIVMainframeTextures.ps1 -Credits
+```
+
+## UIV components (UIV-A8)
+
+Procedural, drawn by `Build-UIVUivComponentsTextures.ps1`; nothing is copied from another mod. Seventeen item icons (`item/<id>.png`): RHEA AM powder, near-net, printed, dense, machined and balanced RHEA impellers, RHEA swarf, zirconium sponge, BMG blank, BMG gate, BMG flexspline, strain-wave gear, Ba-Cu blend, bulk, oxygenated, impregnated and field-cooled GdBCO.
+
+```powershell
+powershell -NoProfile -ExecutionPolicy Bypass -File tools\assets\Build-UIVUivComponentsTextures.ps1
+powershell -NoProfile -ExecutionPolicy Bypass -File tools\assets\Build-UIVUivComponentsTextures.ps1 -Credits
 ```

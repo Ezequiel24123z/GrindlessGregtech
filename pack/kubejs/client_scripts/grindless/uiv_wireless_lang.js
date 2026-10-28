@@ -1,4 +1,4 @@
-// priority: 3310
+// priority: 2932
 // Gregtech Grindless - names of the UIV wireless tier (package UIV-W; the UIV row of kubejs/data/grindless/tables/wireless_energy.json,
 // registered by startup_scripts/grindless/lv/wireless_energy.js) and the EMI line of the nitride magnet works' circuit 4:
 //

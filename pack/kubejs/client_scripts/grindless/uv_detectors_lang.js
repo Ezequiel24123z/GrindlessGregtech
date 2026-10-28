@@ -1,4 +1,4 @@
-// priority: 3100
+// priority: 2869
 // Gregtech Grindless - names and tooltips of UV's detectors (startup_scripts/grindless/uv/detectors.js):
 //
 //   gtceu:zone_refining_tower / gtceu:optical_ground_station   machine names + four tooltip lines each

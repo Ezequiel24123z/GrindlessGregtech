@@ -1,4 +1,4 @@
-// priority: -24611
+// priority: -24610
 // -----------------------------------------------------------------------------------------------
 // Recipes of UIV's spectral hole burner and millikelvin cryostat works (machines and recipe types:
 // startup_scripts/grindless/uiv/memories_cryostat.js; docs/eras/uiv.md, machines 6 and 8, lines 11, 15, 16, 42 and 44; package UIV-A6),

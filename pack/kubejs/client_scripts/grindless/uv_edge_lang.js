@@ -1,4 +1,4 @@
-// priority: 3000
+// priority: 2848
 // Gregtech Grindless - names and tooltips of UV's edge (startup_scripts/grindless/uv/edge.js):
 //
 //   gtceu:precursor_probe_bay / event_horizon_interferometer   machine names + four tooltip lines each
