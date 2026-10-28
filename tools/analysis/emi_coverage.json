@@ -82,6 +82,7 @@
   { "id": "grindless:uiv_robot_arm", "role": "use", "reason": "temporary (UIV-A8, assembler): like the UIV piston, its uses are the controllers of machines 9-22 (docs/eras/uiv.md 'Voltages and controllers'), written by A9, A10 and wave B; delete this exception when the first controller that reads it merges" }
   ],
   "pendingRoutes": [
+    { "id": "grindless:warp_gate/hold_cygnus_x1", "reason": "UIV-B1: the jump to Cygnus X-1 (warp gate c6) reads the neutronium pellet of UIV-B2 and the pulsar navigation solution of UIV-B3 beside the launched relay seed; the integrator deletes this entry when it merges the last of B2 and B3" },
     { "id": "grindless:matrioshka_computing/ns_eos_chart", "reason": "UIV-A10: the Matrioshka computer's neutron-star EOS chart (c2) reads the X-ray timed pulse of UIV-B3 beside the Sirius degenerate pellet (visible since UHV); the integrator deletes this entry when it merges B3" },
     { "id": "grindless:crafting/uiv_parallel_hatch", "reason": "UIV-M1: the UIV parallel hatch reads the UIV sensor (A7), the UIV emitter (B3) and metallic hydrogen cable (A2), all hidden until their producers merge; the integrator deletes this entry when it merges the last of A2, A7 and B3" },
     { "id": "grindless:assembler/uiv_wireless_dynamo_hatch", "reason": "UIV-W: the UIV wireless dynamo hatch reads the UIV dynamo hatch (visible since A3), the UIV emitter (B3) and the pulsar-timed repeater (A7); the integrator deletes this entry when it merges the last of A7 and B3" },

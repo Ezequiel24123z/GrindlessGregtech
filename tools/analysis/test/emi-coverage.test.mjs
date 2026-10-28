@@ -320,8 +320,8 @@ test('the dimension markers of the old hidden table (disabled, not index-only) d
   // sample receiving facility's extremophile row (Earth; shown once the cold-trap drill makes the ice core); 55 since UEV-A7: the Moon
   // cryogenic plant's 6N helium-3 and helium-4 ash rows; 56 since UEV-B4: UEV-B2's interstellar gas row of the same plant (pending
   // until B4 made the UEV field generator); 58 since UIV-A2: the same plant's para hydrogen and liquid para hydrogen rows; 59 since
-  // UIV-A9: the Moon tritium removal plant's detritiated protium row
-  assert.equal(markerDropped.length, 59, markerDropped.map((d) => d.id).join('\n'));
+  // UIV-A9: the Moon tritium removal plant's detritiated protium row; 60 since UIV-B1: the laser sail launcher's relay seed launch (Moon)
+  assert.equal(markerDropped.length, 60, markerDropped.map((d) => d.id).join('\n'));
   assert.ok(markerDropped.every((d) => d.disabledBy.every((b) => b.startsWith('dimension marker '))));
   const now = new Map(fixtureExpectations(packRun.res).items.map((e) => [e.id, e]));
   const lost = [];
@@ -340,8 +340,9 @@ test('the dimension markers of the old hidden table (disabled, not index-only) d
   // helium-4 ash used in the Moon cryogenic plant; + 3 since UEV-B4: UEV-B2's interstellar gas row of the same plant (compressed
   // interstellar gas used; hydrogen-deuterium and helium fractions made); + 4 since UIV-A2: the same plant's para hydrogen rows (protium
   // used, para hydrogen made and used, liquid para hydrogen made); + 2 since UIV-A9: the Moon tritium removal plant's detritiated
-  // protium row (protium used, detritiated protium made)
-  assert.equal(lost.length, 91, lost.join('\n'));
+  // protium row (protium used, detritiated protium made); + 2 since UIV-B1: the laser sail launcher's relay seed launch (relay seed used,
+  // launched relay seed made)
+  assert.equal(lost.length, 93, lost.join('\n'));
   for (const route of ['grindless:mars_chart made in gtceu:deep_space_tracking', 'grindless:vein_sample_ice_mars used in gtceu:vein_drilling',
     'gtceu:liquid_nitrogen made in gtceu:cryogenic_processing', 'gtceu:heavy_water made in gtceu:detritiation',
     'grindless:titanium_drill_bit used in gtceu:vein_drilling', 'grindless:martian_quantum_seed made in gtceu:chemical_reactor']) {
