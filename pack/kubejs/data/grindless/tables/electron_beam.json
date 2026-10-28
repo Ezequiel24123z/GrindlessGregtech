@@ -51,7 +51,7 @@
     "assembler": {
       "recipes": [
         { "name": "ceramic_shell_mould", "circuit": 25, "eut": 480, "duration": 200,
-          "itemsIn": [{ "id": "gtceu:zirconia_dust", "count": 2 }, { "id": "gtceu:alumina_dust", "count": 2 }], "kept": [], "fluidsIn": [], "charge": [],
+          "itemsIn": [{ "id": "gtceu:zirconia_dust", "count": 2 }, { "id": "gtceu:sapphire_dust", "count": 2 }], "kept": [], "fluidsIn": [], "charge": [],
           "itemsOut": [{ "id": "grindless:ceramic_shell_mould", "count": 1 }], "fluidsOut": [] },
         { "name": "bond_coat", "circuit": 26, "eut": 1920, "duration": 300,
           "itemsIn": [{ "id": "grindless:heat_treated_sx_blade", "count": 1 }, { "id": "gtceu:platinum_dust", "count": 1 }, { "id": "gtceu:aluminium_dust", "count": 1 }], "kept": [], "fluidsIn": [], "charge": [],
@@ -91,7 +91,7 @@
       "recipes": [
         { "name": "zircon_chlorination", "circuit": 0, "eut": 1920, "duration": 300,
           "itemsIn": [{ "id": "gtca:red_zircon_dust", "count": 6 }, { "id": "gtceu:carbon_dust", "count": 2 }], "kept": [], "fluidsIn": [{ "id": "gtceu:chlorine", "amount": 4000 }], "charge": [],
-          "itemsOut": [{ "id": "grindless:zr_hf_chloride_dust", "count": 5 }], "fluidsOut": [{ "id": "gtceu:silicon_tetrachloride", "amount": 1000 }, { "id": "gtceu:carbon_dioxide", "amount": 2000 }] },
+          "itemsOut": [{ "id": "grindless:zr_hf_chloride_dust", "count": 5 }, { "id": "gtca:silicon_tetrachloride_dust", "count": 1 }], "fluidsOut": [{ "id": "gtceu:carbon_dioxide", "amount": 2000 }] },
         { "name": "zirconia_hydrolysis", "circuit": 0, "eut": 480, "duration": 200,
           "itemsIn": [{ "id": "grindless:zirconium_chloride_dust", "count": 5 }], "kept": [], "fluidsIn": [{ "id": "minecraft:water", "amount": 2000 }], "charge": [],
           "itemsOut": [{ "id": "gtceu:zirconia_dust", "count": 3 }], "fluidsOut": [{ "id": "gtceu:hydrochloric_acid", "amount": 4000 }] },

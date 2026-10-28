@@ -159,7 +159,7 @@
       name: 'lanthanum_yttrium_strip', mode: 'uev', circuit: 11,
       itemsIn: [{ id: MIX_CL, count: 32 }],
       fluidsIn: [{ id: 'minecraft:water', amount: 3000 }, { id: KEROSENE, amount: 1000 }],
-      itemsOut: [{ id: 'gtceu:yttrium_oxide_dust', count: 5 }, { id: 'gtceu:lanthanum_oxide_dust', count: 5 }, { id: MIX_CL, count: 16 }],
+      itemsOut: [{ id: 'grindless:yttrium_oxide_dust', count: 5 }, { id: 'gtceu:lanthanum_oxide_dust', count: 5 }, { id: MIX_CL, count: 16 }],
       fluidsOut: [{ id: KEROSENE, amount: 950 }, { id: HCL, amount: 6000 }],
       eut: 1920, duration: 100
     }
