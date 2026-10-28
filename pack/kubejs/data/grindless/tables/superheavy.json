@@ -1,0 +1,378 @@
+{
+  "_source": "UEV-A2 (docs/eras/uev.md, machines 2-4, lines 3-6): the heavy ion cyclotron, the recoil separator and the superheavy chemistry lab, and the chemistry round them. Real processes: JINR Dubna's U-400 cyclotron fires a Ca-48 beam at actinide targets (Pu-244 -> flerovium, Cm-248 -> livermorium, Cf-249 -> oganesson, Am-243 -> moscovium, a Bk-249 target wheel -> tennessine), a gas-filled recoil separator (DGFRS) filters the recoiling atoms with helium and magnets, and a gas-phase chemistry lab (COMPACT, Fl/Cn volatility on gold) measures them; polycarbonate foil irradiated with heavy ions and etched in NaOH gives track-etched membranes.",
+  "_how_it_is_used": [
+    "Read by server_scripts/grindless/uev/superheavy.js at every server load. Each entry becomes one recipe of its type, id grindless:<type>/<name>. The three UEV types carry the data key of the type = <name> (their EMI line); the programmed circuit picks the recipe (circuits 1-6, unique inside a type). gtceu:assembler and gtceu:chemical_reactor rows take circuits 20 and up so GTM's own recipes cannot hide a row.",
+    "kept[] are non-consumed items (the SRF cavity), charge[] non-consumed fluids (the helium chamber): they survive a run. Every recoil gas goes to the separator, every atom item to the lab; tennessine is stored in a sealed capsule and no UEV recipe takes it. The activated target wheel decays in IV's hot cell (hot_cell.json, target_wheel_return) and comes back as a blank wheel.",
+    "The spent sodium hydroxide of the etch is neutralised with hydrochloric acid to salt (GTM's electrolysis takes it); phosgene and the chlorine round it stay in the reactor chain."
+  ],
+  "types": {
+    "heavy_ion_irradiation": {
+      "dataKey": "grindless_heavy_ion_irradiation",
+      "recipes": [
+        {
+          "name": "flerovium",
+          "circuit": 1,
+          "eut": 7864320,
+          "duration": 48000,
+          "itemsIn": [
+            { "id": "grindless:plutonium_244_target", "count": 1 },
+            { "id": "grindless:ca48_beam", "count": 1 }
+          ],
+          "kept": [{ "id": "grindless:nb3sn_srf_cavity", "count": 1 }],
+          "charge": [{ "id": "gtceu:helium", "amount": 1000 }],
+          "fluidsIn": [],
+          "itemsOut": [],
+          "fluidsOut": [{ "id": "gtceu:flerovium_recoil_gas", "amount": 1000 }]
+        },
+        {
+          "name": "livermorium",
+          "circuit": 2,
+          "eut": 7864320,
+          "duration": 48000,
+          "itemsIn": [
+            { "id": "gtceu:curium_248_dust", "count": 1 },
+            { "id": "grindless:ca48_beam", "count": 1 }
+          ],
+          "kept": [{ "id": "grindless:nb3sn_srf_cavity", "count": 1 }],
+          "charge": [{ "id": "gtceu:helium", "amount": 1000 }],
+          "fluidsIn": [],
+          "itemsOut": [],
+          "fluidsOut": [{ "id": "gtceu:livermorium_recoil_gas", "amount": 1000 }]
+        },
+        {
+          "name": "tennessine",
+          "circuit": 3,
+          "eut": 7864320,
+          "duration": 48000,
+          "itemsIn": [
+            { "id": "grindless:target_wheel", "count": 1 },
+            { "id": "grindless:ca48_beam", "count": 1 }
+          ],
+          "kept": [{ "id": "grindless:nb3sn_srf_cavity", "count": 1 }],
+          "charge": [{ "id": "gtceu:helium", "amount": 1000 }],
+          "fluidsIn": [],
+          "itemsOut": [{ "id": "grindless:activated_target_wheel", "count": 1 }],
+          "fluidsOut": [{ "id": "gtceu:tennessine_recoil_gas", "amount": 1000 }]
+        },
+        {
+          "name": "oganesson",
+          "circuit": 4,
+          "eut": 7864320,
+          "duration": 48000,
+          "itemsIn": [
+            { "id": "gtceu:californium_249_dust", "count": 1 },
+            { "id": "grindless:ca48_beam", "count": 1 }
+          ],
+          "kept": [{ "id": "grindless:nb3sn_srf_cavity", "count": 1 }],
+          "charge": [{ "id": "gtceu:helium", "amount": 1000 }],
+          "fluidsIn": [],
+          "itemsOut": [],
+          "fluidsOut": [{ "id": "gtceu:oganesson_recoil_gas", "amount": 1000 }]
+        },
+        {
+          "name": "moscovium",
+          "circuit": 5,
+          "eut": 7864320,
+          "duration": 48000,
+          "itemsIn": [
+            { "id": "gtceu:americium_dust", "count": 1 },
+            { "id": "grindless:ca48_beam", "count": 1 }
+          ],
+          "kept": [{ "id": "grindless:nb3sn_srf_cavity", "count": 1 }],
+          "charge": [{ "id": "gtceu:helium", "amount": 1000 }],
+          "fluidsIn": [],
+          "itemsOut": [],
+          "fluidsOut": [{ "id": "gtceu:moscovium_recoil_gas", "amount": 1000 }]
+        },
+        {
+          "name": "ion_track",
+          "circuit": 6,
+          "eut": 1966080,
+          "duration": 1200,
+          "itemsIn": [{ "id": "grindless:polycarbonate_foil", "count": 4 }],
+          "kept": [{ "id": "grindless:nb3sn_srf_cavity", "count": 1 }],
+          "charge": [],
+          "fluidsIn": [{ "id": "gtceu:xenon", "amount": 1000 }],
+          "itemsOut": [{ "id": "grindless:ion_tracked_foil", "count": 4 }],
+          "fluidsOut": [{ "id": "gtceu:xenon", "amount": 900 }]
+        }
+      ]
+    },
+    "recoil_separation": {
+      "dataKey": "grindless_recoil_separation",
+      "recipes": [
+        {
+          "name": "flerovium",
+          "circuit": 1,
+          "eut": 3932160,
+          "duration": 2400,
+          "itemsIn": [{ "id": "grindless:etched_membrane", "count": 1 }],
+          "kept": [],
+          "charge": [],
+          "fluidsIn": [{ "id": "gtceu:flerovium_recoil_gas", "amount": 1000 }],
+          "itemsOut": [{ "id": "grindless:flerovium_atoms", "count": 1 }],
+          "fluidsOut": [{ "id": "gtceu:helium", "amount": 1000 }]
+        },
+        {
+          "name": "livermorium",
+          "circuit": 2,
+          "eut": 3932160,
+          "duration": 2400,
+          "itemsIn": [{ "id": "grindless:etched_membrane", "count": 1 }],
+          "kept": [],
+          "charge": [],
+          "fluidsIn": [{ "id": "gtceu:livermorium_recoil_gas", "amount": 1000 }],
+          "itemsOut": [{ "id": "grindless:livermorium_atoms", "count": 1 }],
+          "fluidsOut": [{ "id": "gtceu:helium", "amount": 1000 }]
+        },
+        {
+          "name": "tennessine",
+          "circuit": 3,
+          "eut": 3932160,
+          "duration": 2400,
+          "itemsIn": [{ "id": "grindless:etched_membrane", "count": 1 }],
+          "kept": [],
+          "charge": [],
+          "fluidsIn": [{ "id": "gtceu:tennessine_recoil_gas", "amount": 1000 }],
+          "itemsOut": [{ "id": "grindless:tennessine_atoms", "count": 1 }],
+          "fluidsOut": [{ "id": "gtceu:helium", "amount": 1000 }]
+        },
+        {
+          "name": "oganesson",
+          "circuit": 4,
+          "eut": 3932160,
+          "duration": 2400,
+          "itemsIn": [{ "id": "grindless:etched_membrane", "count": 1 }],
+          "kept": [],
+          "charge": [],
+          "fluidsIn": [{ "id": "gtceu:oganesson_recoil_gas", "amount": 1000 }],
+          "itemsOut": [{ "id": "grindless:oganesson_atoms", "count": 1 }],
+          "fluidsOut": [{ "id": "gtceu:helium", "amount": 1000 }]
+        },
+        {
+          "name": "moscovium",
+          "circuit": 5,
+          "eut": 3932160,
+          "duration": 2400,
+          "itemsIn": [{ "id": "grindless:etched_membrane", "count": 1 }],
+          "kept": [],
+          "charge": [],
+          "fluidsIn": [{ "id": "gtceu:moscovium_recoil_gas", "amount": 1000 }],
+          "itemsOut": [{ "id": "grindless:moscovium_atoms", "count": 1 }],
+          "fluidsOut": [{ "id": "gtceu:helium", "amount": 1000 }]
+        }
+      ]
+    },
+    "superheavy_chemistry": {
+      "dataKey": "grindless_superheavy_chemistry",
+      "recipes": [
+        {
+          "name": "tennessine_sample",
+          "circuit": 1,
+          "eut": 3932160,
+          "duration": 1200,
+          "itemsIn": [
+            { "id": "grindless:tennessine_atoms", "count": 1 },
+            { "id": "grindless:sealed_capsule", "count": 1 }
+          ],
+          "kept": [],
+          "charge": [],
+          "fluidsIn": [],
+          "itemsOut": [{ "id": "grindless:tennessine_sample", "count": 1 }],
+          "fluidsOut": []
+        },
+        {
+          "name": "superheavy_census",
+          "circuit": 2,
+          "eut": 3932160,
+          "duration": 2400,
+          "itemsIn": [
+            { "id": "grindless:flerovium_atoms", "count": 1 },
+            { "id": "grindless:livermorium_atoms", "count": 1 },
+            { "id": "grindless:moscovium_atoms", "count": 1 },
+            { "id": "grindless:oganesson_atoms", "count": 1 },
+            { "id": "gtceu:gold_foil", "count": 1 }
+          ],
+          "kept": [],
+          "charge": [],
+          "fluidsIn": [],
+          "itemsOut": [{ "id": "grindless:superheavy_census", "count": 1 }],
+          "fluidsOut": []
+        }
+      ]
+    },
+    "assembler": {
+      "recipes": [
+        {
+          "name": "ca48_beam",
+          "circuit": 20,
+          "eut": 131072,
+          "duration": 400,
+          "itemsIn": [{ "id": "grindless:ca48_oven_charge", "count": 1 }],
+          "kept": [{ "id": "gtceu:uv_emitter", "count": 1 }],
+          "charge": [],
+          "fluidsIn": [],
+          "itemsOut": [{ "id": "grindless:ca48_beam", "count": 4 }],
+          "fluidsOut": []
+        },
+        {
+          "name": "target_wheel_blank",
+          "circuit": 21,
+          "eut": 131072,
+          "duration": 300,
+          "itemsIn": [
+            { "id": "gtceu:titanium_plate", "count": 6 },
+            { "id": "gtceu:titanium_foil", "count": 6 }
+          ],
+          "kept": [],
+          "charge": [],
+          "fluidsIn": [],
+          "itemsOut": [{ "id": "grindless:target_wheel_blank", "count": 1 }],
+          "fluidsOut": []
+        },
+        {
+          "name": "target_wheel",
+          "circuit": 22,
+          "eut": 131072,
+          "duration": 600,
+          "itemsIn": [
+            { "id": "grindless:target_wheel_blank", "count": 1 },
+            { "id": "grindless:berkelium_oxide_dust", "count": 4 }
+          ],
+          "kept": [],
+          "charge": [],
+          "fluidsIn": [],
+          "itemsOut": [{ "id": "grindless:target_wheel", "count": 1 }],
+          "fluidsOut": []
+        },
+        {
+          "name": "sealed_capsule",
+          "circuit": 23,
+          "eut": 131072,
+          "duration": 200,
+          "itemsIn": [
+            { "id": "gtceu:lead_foil", "count": 4 },
+            { "id": "gtceu:titanium_plate", "count": 1 }
+          ],
+          "kept": [],
+          "charge": [],
+          "fluidsIn": [],
+          "itemsOut": [{ "id": "grindless:sealed_capsule", "count": 1 }],
+          "fluidsOut": []
+        },
+        {
+          "name": "polycarbonate_foil",
+          "circuit": 24,
+          "eut": 131072,
+          "duration": 200,
+          "itemsIn": [{ "id": "gtceu:polycarbonate_dust", "count": 2 }],
+          "kept": [],
+          "charge": [],
+          "fluidsIn": [],
+          "itemsOut": [{ "id": "grindless:polycarbonate_foil", "count": 4 }],
+          "fluidsOut": []
+        }
+      ]
+    },
+    "chemical_reactor": {
+      "recipes": [
+        {
+          "name": "curium_248",
+          "circuit": 20,
+          "eut": 131072,
+          "duration": 400,
+          "itemsIn": [],
+          "kept": [],
+          "charge": [],
+          "fluidsIn": [
+            { "id": "gtceu:curium_nitrate", "amount": 1000 },
+            { "id": "minecraft:water", "amount": 1000 }
+          ],
+          "itemsOut": [{ "id": "gtceu:curium_248_dust", "count": 1 }],
+          "fluidsOut": [{ "id": "gtceu:nitric_acid", "amount": 1000 }]
+        },
+        {
+          "name": "californium_249",
+          "circuit": 21,
+          "eut": 131072,
+          "duration": 400,
+          "itemsIn": [],
+          "kept": [],
+          "charge": [],
+          "fluidsIn": [
+            { "id": "gtceu:californium_nitrate", "amount": 1000 },
+            { "id": "minecraft:water", "amount": 1000 }
+          ],
+          "itemsOut": [{ "id": "gtceu:californium_249_dust", "count": 1 }],
+          "fluidsOut": [{ "id": "gtceu:nitric_acid", "amount": 1000 }]
+        },
+        {
+          "name": "berkelium_oxide",
+          "circuit": 22,
+          "eut": 131072,
+          "duration": 400,
+          "itemsIn": [],
+          "kept": [],
+          "charge": [],
+          "fluidsIn": [
+            { "id": "gtceu:berkelium_nitrate", "amount": 1000 },
+            { "id": "gtceu:oxygen", "amount": 1000 }
+          ],
+          "itemsOut": [{ "id": "grindless:berkelium_oxide_dust", "count": 4 }],
+          "fluidsOut": [{ "id": "gtceu:nitric_acid", "amount": 1000 }]
+        },
+        {
+          "name": "phosgene",
+          "circuit": 23,
+          "eut": 131072,
+          "duration": 200,
+          "itemsIn": [],
+          "kept": [],
+          "charge": [],
+          "fluidsIn": [
+            { "id": "gtceu:chlorine", "amount": 1000 },
+            { "id": "gtceu:carbon_monoxide", "amount": 1000 }
+          ],
+          "itemsOut": [],
+          "fluidsOut": [{ "id": "gtceu:phosgene", "amount": 1000 }]
+        },
+        {
+          "name": "polycarbonate",
+          "circuit": 24,
+          "eut": 131072,
+          "duration": 400,
+          "itemsIn": [{ "id": "gtceu:sodium_hydroxide_dust", "count": 4 }],
+          "kept": [],
+          "charge": [],
+          "fluidsIn": [
+            { "id": "gtceu:bisphenol_a", "amount": 1000 },
+            { "id": "gtceu:phosgene", "amount": 1000 }
+          ],
+          "itemsOut": [
+            { "id": "gtceu:polycarbonate_dust", "count": 4 },
+            { "id": "gtceu:salt_dust", "count": 2 }
+          ],
+          "fluidsOut": [{ "id": "minecraft:water", "amount": 2000 }]
+        },
+        {
+          "name": "etched_membrane",
+          "circuit": 25,
+          "eut": 131072,
+          "duration": 300,
+          "itemsIn": [
+            { "id": "grindless:ion_tracked_foil", "count": 1 },
+            { "id": "gtceu:sodium_hydroxide_dust", "count": 1 }
+          ],
+          "kept": [],
+          "charge": [],
+          "fluidsIn": [{ "id": "gtceu:hydrochloric_acid", "amount": 100 }],
+          "itemsOut": [
+            { "id": "grindless:etched_membrane", "count": 1 },
+            { "id": "gtceu:salt_dust", "count": 1 }
+          ],
+          "fluidsOut": []
+        }
+      ]
+    }
+  }
+}
