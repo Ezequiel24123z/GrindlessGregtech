@@ -1,0 +1,67 @@
+{
+  "_source": "UEV-A1 (docs/eras/uev.md, 'A1. Isotopes', line 2 and the Cm/Cf/Bk cuts for A2): three rows of UHV's high flux reactor and transuranium facility. Real processes: plutonium-242 targets irradiated in HFIR breed plutonium-244 by two neutron captures; ORNL's REDC dissolves the targets in nitric acid and cuts the transcurium liquor by HDEHP extraction into curium-californium and berkelium-californium fractions.",
+  "_how_it_is_used": [
+    "Read by server_scripts/grindless/uhv/transcurium.js after tables/transcurium.json; the same format; its types are merged into the main table's, whose data keys stand. Circuits continue the main table's: high_flux_irradiation 4, transuranium_processing 7 and 8.",
+    "The spent drivers of plutonium_target go back to UV's pyroprocessing cell with the others; the irradiated target goes to the facility's plutonium_dissolve (-> ZPM's partitioning, plutonium_recovery).",
+    "The curium-californium and berkelium-californium nitrates go to ZPM's partitioning cuts (curium_cut, berkelium_cut), whose curium and californium feed UEV's superheavy facility (A2)."
+  ],
+  "types": {
+    "high_flux_irradiation": {
+      "recipes": [
+        {
+          "name": "plutonium_target",
+          "circuit": 4,
+          "eut": 1966080,
+          "duration": 4000,
+          "itemsIn": [
+            { "id": "grindless:plutonium_oxide_target", "count": 1 },
+            { "id": "grindless:hfir_driver_element", "count": 6 }
+          ],
+          "kept": [],
+          "charge": [{ "id": "gtceu:distilled_water", "amount": 1000 }],
+          "fluidsIn": [],
+          "itemsOut": [
+            { "id": "grindless:irradiated_plutonium_target", "count": 1 },
+            { "id": "grindless:spent_hfir_driver_element", "count": 6 },
+            { "id": "gtnn:radioactive_waste", "count": 1 }
+          ],
+          "fluidsOut": []
+        }
+      ]
+    },
+    "transuranium_processing": {
+      "recipes": [
+        {
+          "name": "plutonium_dissolve",
+          "circuit": 7,
+          "eut": 1966080,
+          "duration": 1200,
+          "itemsIn": [{ "id": "grindless:irradiated_plutonium_target", "count": 1 }],
+          "kept": [],
+          "charge": [],
+          "fluidsIn": [{ "id": "gtceu:nitric_acid", "amount": 2000 }],
+          "itemsOut": [],
+          "fluidsOut": [
+            { "id": "gtceu:plutonium_nitrate", "amount": 1000 },
+            { "id": "gtceu:fission_product_liquor", "amount": 500 }
+          ]
+        },
+        {
+          "name": "curium_californium_cut",
+          "circuit": 8,
+          "eut": 1966080,
+          "duration": 1200,
+          "itemsIn": [],
+          "kept": [],
+          "charge": [{ "id": "gtceu:hdehp_solvent", "amount": 100 }],
+          "fluidsIn": [{ "id": "gtceu:transcurium_liquor", "amount": 1000 }],
+          "itemsOut": [],
+          "fluidsOut": [
+            { "id": "gtceu:curium_californium_nitrate", "amount": 500 },
+            { "id": "gtceu:berkelium_californium_nitrate", "amount": 500 }
+          ]
+        }
+      ]
+    }
+  }
+}

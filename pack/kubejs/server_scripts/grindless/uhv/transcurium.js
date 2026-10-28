@@ -23,6 +23,8 @@
   var G = global.grindless || (global.grindless = {})
   var TC = G.transcurium || (G.transcurium = {})
   var TABLE = TC.table || 'kubejs/data/grindless/tables/transcurium.json'
+  // UEV-A1's rows (the same format): merged after the main table's, so circuits are checked across both
+  var ISOTOPES_TABLE = 'kubejs/data/grindless/tables/isotopes_facility.json'
 
   function list(x) {
     return Array.isArray(x) ? x : []
@@ -30,6 +32,11 @@
 
   function loadTable() {
     var t = G.readJsonTable(TABLE)
+    var extra = G.readJsonTable(ISOTOPES_TABLE)
+    Object.keys(extra.types || {}).forEach(function (type) {
+      if (!t.types[type]) t.types[type] = { recipes: [] }
+      t.types[type].recipes = list(t.types[type].recipes).concat(list(extra.types[type].recipes))
+    })
     var problems = []
     var out = []
     Object.keys(t.types || {}).forEach(function (type) {

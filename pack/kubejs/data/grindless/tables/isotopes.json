@@ -1,0 +1,266 @@
+{
+  "_source": "UEV-A1 (docs/eras/uev.md, 'A1. Isotopes', machine 1, lines 1, 2, 29 and 30): the calutron's recipes and the GTM chemical reactor, mixer and assembler rows round them. Real processes: the Y-12 calutrons (electromagnetic separation of the ionised chloride, the isotopes caught in collector pockets); calcium-48 from the Lesnoy calutrons and ORNL's 2018 restart; HFIR-bred plutonium-244 (the target's plutonium-242 captures two neutrons) recovered by nitrate chemistry (Pu nitrate, oxide, chloride); electrodeposited actinide targets on aluminium foil.",
+  "_how_it_is_used": [
+    "Read by server_scripts/grindless/uev/isotopes.js at every server load. Each entry of types.<type>.recipes becomes one gtceu:<type> recipe, id grindless:<type>/<name>. calutron_separation rows carry the data key of the type = <name> (their EMI line). The programmed circuit picks the recipe: one per recipe inside calutron_separation (1-6); the GTM types use circuits 20 and up so GTM's own recipes cannot hide a row.",
+    "itemsIn / itemsOut: { id, count }; fluidsIn / fluidsOut: { id, amount } in mB; kept: items never used up; charge: fluids never used up. eut x duration.",
+    "Only from the calutron: gtceu:calcium_48_dust, gtceu:potassium_40_dust, gtceu:lithium_6_dust, gtceu:plutonium_244_dust (the collector pockets give the metal). The calutron's tails return to stock: Ca-40, K-39 and Li-7 come back as the natural chloride (GTM's calcium chloride, rock salt, lithium chloride, which the feeds start from); the depleted plutonium goes to IV's fuel fabrication plant through the MOX blend (tables/isotopes_fabrication.json, circuit 8).",
+    "Line 2 loop: hot cell plutonium -> oxide -> calutron c6 (plutonium-242) -> target -> HFIR c4 (tables/isotopes_facility.json) -> facility c7 (nitrate) -> ZPM partitioning c3 (plutonium-244-rich oxide; the nitric acid comes back) -> chloride -> calutron c5 -> plutonium-244 -> oxide -> electrodeposited target. The fission products of the facility go to its evaporator (waste, ZPM's synroc).",
+    "Destinations: the Ca-48 oven charge and the plutonium-244 target go to UEV's superheavy facility (A2); lithium-6 and potassium-40 go to the quantum gas lab; chlorine of the reductions and the HCl of the chlorinations go to GTM's chlorine and hydrochloric acid uses; the carbon dioxide and water of the calcite step go anywhere."
+  ],
+  "types": {
+    "calutron_separation": {
+      "dataKey": "grindless_calutron_separation",
+      "recipes": [
+        {
+          "name": "calcium_pass_1",
+          "circuit": 1,
+          "eut": 1966080,
+          "duration": 4000,
+          "itemsIn": [{ "id": "gtceu:calcium_chloride_dust", "count": 32 }],
+          "kept": [],
+          "charge": [],
+          "fluidsIn": [],
+          "itemsOut": [
+            { "id": "gtceu:calcium_48_enriched_dust", "count": 1 },
+            { "id": "gtceu:calcium_chloride_dust", "count": 31 }
+          ],
+          "fluidsOut": []
+        },
+        {
+          "name": "calcium_pass_2",
+          "circuit": 2,
+          "eut": 1966080,
+          "duration": 4000,
+          "itemsIn": [{ "id": "gtceu:calcium_48_enriched_chloride_dust", "count": 4 }],
+          "kept": [],
+          "charge": [],
+          "fluidsIn": [],
+          "itemsOut": [
+            { "id": "gtceu:calcium_48_dust", "count": 1 },
+            { "id": "gtceu:calcium_chloride_dust", "count": 3 }
+          ],
+          "fluidsOut": []
+        },
+        {
+          "name": "potassium_40",
+          "circuit": 3,
+          "eut": 1966080,
+          "duration": 3000,
+          "itemsIn": [{ "id": "gtceu:rock_salt_dust", "count": 64 }],
+          "kept": [],
+          "charge": [],
+          "fluidsIn": [],
+          "itemsOut": [
+            { "id": "gtceu:potassium_40_dust", "count": 1 },
+            { "id": "gtceu:rock_salt_dust", "count": 63 }
+          ],
+          "fluidsOut": []
+        },
+        {
+          "name": "lithium_6",
+          "circuit": 4,
+          "eut": 1966080,
+          "duration": 3000,
+          "itemsIn": [{ "id": "gtceu:lithium_chloride_dust", "count": 16 }],
+          "kept": [],
+          "charge": [],
+          "fluidsIn": [],
+          "itemsOut": [
+            { "id": "gtceu:lithium_6_dust", "count": 1 },
+            { "id": "gtceu:lithium_chloride_dust", "count": 15 }
+          ],
+          "fluidsOut": []
+        },
+        {
+          "name": "plutonium_244",
+          "circuit": 5,
+          "eut": 1966080,
+          "duration": 6000,
+          "itemsIn": [{ "id": "gtceu:plutonium_244_rich_chloride_dust", "count": 16 }],
+          "kept": [],
+          "charge": [],
+          "fluidsIn": [],
+          "itemsOut": [
+            { "id": "gtceu:plutonium_244_dust", "count": 1 },
+            { "id": "gtceu:depleted_plutonium_oxide_dust", "count": 14 }
+          ],
+          "fluidsOut": []
+        },
+        {
+          "name": "plutonium_242",
+          "circuit": 6,
+          "eut": 1966080,
+          "duration": 4000,
+          "itemsIn": [{ "id": "gtceu:plutonium_oxide_feed_dust", "count": 16 }],
+          "kept": [],
+          "charge": [],
+          "fluidsIn": [],
+          "itemsOut": [
+            { "id": "gtceu:plutonium_242_oxide_dust", "count": 4 },
+            { "id": "gtceu:depleted_plutonium_oxide_dust", "count": 12 }
+          ],
+          "fluidsOut": []
+        }
+      ]
+    },
+    "chemical_reactor": {
+      "recipes": [
+        {
+          "name": "calcite_to_calcium_chloride",
+          "circuit": 20,
+          "eut": 480,
+          "duration": 100,
+          "itemsIn": [{ "id": "gtceu:calcite_dust", "count": 1 }],
+          "kept": [],
+          "charge": [],
+          "fluidsIn": [{ "id": "gtceu:hydrochloric_acid", "amount": 2000 }],
+          "itemsOut": [{ "id": "gtceu:calcium_chloride_dust", "count": 1 }],
+          "fluidsOut": [
+            { "id": "gtceu:carbon_dioxide", "amount": 1000 },
+            { "id": "minecraft:water", "amount": 1000 }
+          ]
+        },
+        {
+          "name": "calcium_48_chlorination",
+          "circuit": 21,
+          "eut": 480,
+          "duration": 100,
+          "itemsIn": [{ "id": "gtceu:calcium_48_enriched_dust", "count": 1 }],
+          "kept": [],
+          "charge": [],
+          "fluidsIn": [{ "id": "gtceu:chlorine", "amount": 2000 }],
+          "itemsOut": [{ "id": "gtceu:calcium_48_enriched_chloride_dust", "count": 1 }],
+          "fluidsOut": []
+        },
+        {
+          "name": "lithium_to_lithium_chloride",
+          "circuit": 22,
+          "eut": 480,
+          "duration": 100,
+          "itemsIn": [{ "id": "gtceu:lithium_dust", "count": 1 }],
+          "kept": [],
+          "charge": [],
+          "fluidsIn": [{ "id": "gtceu:chlorine", "amount": 1000 }],
+          "itemsOut": [{ "id": "gtceu:lithium_chloride_dust", "count": 1 }],
+          "fluidsOut": []
+        },
+        {
+          "name": "potassium_chloride_feed",
+          "circuit": 23,
+          "eut": 480,
+          "duration": 100,
+          "itemsIn": [{ "id": "gtceu:potassium_hydroxide_dust", "count": 1 }],
+          "kept": [],
+          "charge": [],
+          "fluidsIn": [{ "id": "gtceu:hydrochloric_acid", "amount": 1000 }],
+          "itemsOut": [{ "id": "gtceu:rock_salt_dust", "count": 1 }],
+          "fluidsOut": [{ "id": "minecraft:water", "amount": 1000 }]
+        },
+        {
+          "name": "plutonium_oxide",
+          "circuit": 24,
+          "eut": 1920,
+          "duration": 200,
+          "itemsIn": [{ "id": "gtceu:plutonium_dust", "count": 1 }],
+          "kept": [],
+          "charge": [],
+          "fluidsIn": [{ "id": "gtceu:oxygen", "amount": 2000 }],
+          "itemsOut": [{ "id": "gtceu:plutonium_oxide_feed_dust", "count": 1 }],
+          "fluidsOut": []
+        },
+        {
+          "name": "plutonium_244_chlorination",
+          "circuit": 25,
+          "eut": 1920,
+          "duration": 200,
+          "itemsIn": [{ "id": "gtceu:plutonium_244_rich_oxide_dust", "count": 1 }],
+          "kept": [],
+          "charge": [],
+          "fluidsIn": [{ "id": "gtceu:hydrochloric_acid", "amount": 3000 }],
+          "itemsOut": [{ "id": "gtceu:plutonium_244_rich_chloride_dust", "count": 1 }],
+          "fluidsOut": [{ "id": "minecraft:water", "amount": 1000 }]
+        },
+        {
+          "name": "plutonium_244_oxidation",
+          "circuit": 26,
+          "eut": 1920,
+          "duration": 200,
+          "itemsIn": [{ "id": "gtceu:plutonium_244_dust", "count": 1 }],
+          "kept": [],
+          "charge": [],
+          "fluidsIn": [{ "id": "gtceu:oxygen", "amount": 2000 }],
+          "itemsOut": [{ "id": "gtceu:plutonium_244_oxide_dust", "count": 1 }],
+          "fluidsOut": []
+        }
+      ]
+    },
+    "mixer": {
+      "recipes": [
+        {
+          "name": "mox_blend",
+          "circuit": 20,
+          "eut": 1920,
+          "duration": 200,
+          "itemsIn": [
+            { "id": "gtceu:depleted_plutonium_oxide_dust", "count": 2 },
+            { "id": "gtceu:uranium_dust", "count": 8 }
+          ],
+          "kept": [],
+          "charge": [],
+          "fluidsIn": [],
+          "itemsOut": [{ "id": "gtceu:mox_blend_powder_dust", "count": 10 }],
+          "fluidsOut": []
+        }
+      ]
+    },
+    "assembler": {
+      "recipes": [
+        {
+          "name": "ca48_oven_charge",
+          "circuit": 20,
+          "eut": 1920,
+          "duration": 200,
+          "itemsIn": [
+            { "id": "gtceu:calcium_48_dust", "count": 4 },
+            { "id": "gtceu:platinum_foil", "count": 1 }
+          ],
+          "kept": [],
+          "charge": [],
+          "fluidsIn": [],
+          "itemsOut": [{ "id": "grindless:ca48_oven_charge", "count": 1 }],
+          "fluidsOut": []
+        },
+        {
+          "name": "plutonium_oxide_target",
+          "circuit": 21,
+          "eut": 1920,
+          "duration": 200,
+          "itemsIn": [
+            { "id": "gtceu:plutonium_242_oxide_dust", "count": 4 },
+            { "id": "grindless:zircaloy_cladding_tube", "count": 1 }
+          ],
+          "kept": [],
+          "charge": [],
+          "fluidsIn": [],
+          "itemsOut": [{ "id": "grindless:plutonium_oxide_target", "count": 1 }],
+          "fluidsOut": []
+        },
+        {
+          "name": "plutonium_244_target",
+          "circuit": 22,
+          "eut": 1920,
+          "duration": 200,
+          "itemsIn": [
+            { "id": "gtceu:plutonium_244_oxide_dust", "count": 1 },
+            { "id": "gtceu:aluminium_foil", "count": 2 }
+          ],
+          "kept": [],
+          "charge": [],
+          "fluidsIn": [],
+          "itemsOut": [{ "id": "grindless:plutonium_244_target", "count": 1 }],
+          "fluidsOut": []
+        }
+      ]
+    }
+  }
+}
