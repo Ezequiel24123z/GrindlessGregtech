@@ -15,6 +15,9 @@
     "grindless:uranus_orbit",
     "grindless:neptune_orbit",
     "grindless:pluto_orbit",
-    "grindless:proxima_b_orbit"
+    "grindless:proxima_b_orbit",
+    "grindless:alpha_centauri_orbit",
+    "grindless:barnard_b_orbit",
+    "grindless:sirius_b_orbit"
   ]
 }

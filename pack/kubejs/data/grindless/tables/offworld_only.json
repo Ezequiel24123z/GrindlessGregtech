@@ -35,6 +35,15 @@
         "fluids": ["gtceu:osmium_tetroxide", "gtceu:iridium", "gtceu:osmium"],
         "inputPattern": "iridosmine|rarest_metal|iridium|osmium|asteroid_pgm"
       }
+    },
+    "barnard": {
+      "dimension": "grindless:barnard_b",
+      "combs": [],
+      "watched": {
+        "items": ["gtceu:rhenium_dust", "gtceu:small_rhenium_dust", "gtceu:tiny_rhenium_dust", "gtceu:rhenium_ingot", "gtceu:raw_rhenium"],
+        "fluids": ["gtceu:rhenium"],
+        "inputPattern": "rhenium"
+      }
     }
   },
   "allowedLate": [
