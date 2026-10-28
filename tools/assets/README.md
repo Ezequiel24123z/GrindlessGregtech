@@ -1435,3 +1435,17 @@ powershell -NoProfile -ExecutionPolicy Bypass -File tools\assets\Build-MegaFacto
 |---|---|
 | `block/multiblock/mega_factory/overlay_front*.png` | The Mega Factory controller face; still, active and active emissive. |
 | `block/uv/{separation,forming,cutting,mixing,heat}_module.png` | The five module blocks that go in the factory's sockets. |
+
+## UHV Quantum Fabricator (MEGA-9)
+
+Procedural, drawn by `Build-MegaQuantumFabricatorTextures.ps1`; nothing is copied from another mod. The controller face of `gtceu:quantum_fabricator` (assembler, circuit assembler, forming press, laser engraver and cutter in one cleanroom-sized hall) and its field ring casing.
+
+```powershell
+powershell -NoProfile -ExecutionPolicy Bypass -File tools\assets\Build-MegaQuantumFabricatorTextures.ps1
+powershell -NoProfile -ExecutionPolicy Bypass -File tools\assets\Build-MegaQuantumFabricatorTextures.ps1 -Credits
+```
+
+| File (under `textures/`) | Notes |
+|---|---|
+| `block/multiblock/quantum_fabricator/overlay_front*.png` | The Quantum Fabricator controller face; still, active and active emissive. |
+| `block/uhv/field_ring_casing.png` | The field ring casing round the fabricator's walls. |

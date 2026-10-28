@@ -1,4 +1,4 @@
-// priority: -5774
+// priority: -5784
 ﻿// TEST ONLY, MEGA-S spikes (docs/eras/mega.md 3.1). Commands: kubejs custom_command gg_test_mega_spike_m1 | _m2 | _m3
 // Band ONLY: X 29952-30015, Z 0-63, Overworld Y 98-115 (the mega EBF is 17 high).
 //   m1  S-M1: the chain coil parallel -> OC_PERFECT_SUBTICK -> BATCH_MODE on gtceu:large_chemical_reactor, three coil tiers

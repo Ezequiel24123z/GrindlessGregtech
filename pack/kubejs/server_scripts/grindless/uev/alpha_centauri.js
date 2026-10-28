@@ -170,7 +170,7 @@
     var HULL = 'gtceu:uev_machine_hull'
     var C = '#gtceu:circuits/uhv'
     var defs = [
-      { machine: AC.machines.collector.machine, name: AC.machines.collector.name, pattern: ['CFC', 'PHP', 'C C'], keys: { F: 'grindless:uev_field_generator', P: 'grindless:uev_electric_pump' } },
+      { machine: AC.machines.collector.machine, name: AC.machines.collector.name, pattern: ['CFC', 'PHP', 'C C'], keys: { F: 'gtceu:uv_field_generator', P: 'grindless:uev_electric_pump' } },
       { machine: AC.machines.lab.machine, name: AC.machines.lab.name, pattern: ['PCP', 'AHA', ' C '], keys: { A: 'grindless:uev_robot_arm', P: 'grindless:uev_electric_pump' } },
       { machine: AC.machines.station.machine, name: AC.machines.station.name, pattern: ['ECS', ' H ', 'CSC'], keys: { E: 'grindless:uev_emitter', S: 'grindless:uev_sensor' } }
     ]

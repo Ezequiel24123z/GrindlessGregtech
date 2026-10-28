@@ -1,3 +1,4 @@
+// priority: -23499
 // -----------------------------------------------------------------------------------------------
 // Recipes of the UHV Quantum Fabricator (startup_scripts/grindless/uhv/mega_quantum_fabricator.js, docs/eras/mega.md 4.11, family
 // rule 6): assembler recipes built from the machines they replace, the same way GTM builds its own large controllers.
