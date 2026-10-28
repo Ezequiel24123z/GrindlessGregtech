@@ -71,10 +71,19 @@
   "exceptions": [
   { "id": "grindless:itbtc_coated_conductor", "role": "use", "reason": "temporary (LuV-A3): its uses, the HTS coil and the SMES cell, are LuV-A4's magnet works; delete this exception when A4 merges" },
   { "id": "grindless:chondritic_extract", "role": "use", "reason": "temporary (LuV-B5): its use, the Europan culture of the algae bioreactor, is LuV-B8's; delete this exception when B8 merges" },
-  { "id": "grindless:uev_conveyor_module", "role": "use", "reason": "deferred (UEV-A6; B2/B3/B4 controllers used other parts): its only use is the last step of UIV line 39, the UIV conveyor (docs/eras/uiv.md line 39 row, package UIV-A3); delete this exception when UIV-A3 merges" }
+  { "id": "grindless:uev_conveyor_module", "role": "use", "reason": "deferred (UEV-A6; B2/B3/B4 controllers used other parts): its only use is the last step of UIV line 39, the UIV conveyor (docs/eras/uiv.md line 39 row, package UIV-A3); delete this exception when UIV-A3 merges" },
+  { "id": "gtceu:titanium_50_sponge_dust", "role": "use", "reason": "temporary (UIV-A1): its use, melting into Ti-50 metal, is the levitation melter c3 of UIV-A3 (docs/eras/uiv.md line 9 row); delete this exception when A3 merges" },
+  { "id": "gtceu:europium_151_dust", "role": "use", "reason": "temporary (UIV-A1): its use, the 151Eu:YSO boule in the crystal growth furnace, is UIV-A6's (docs/eras/uiv.md line 15 row); delete this exception when A6 merges" },
+  { "id": "gtceu:lithium_6_metal_dust", "role": "use", "reason": "temporary (UIV-A1): its use, Li-6 hydride for the polarised proton source c2, is UIV-A9's (docs/eras/uiv.md line 26 row); delete this exception when A9 merges" },
+  { "id": "grindless:cage_part", "role": "use", "reason": "temporary (UIV-A1): its use, the neutronium cage c2 (contained neutronium pellet), is UIV-B2's (docs/eras/uiv.md line 24 row, machine 15); delete this exception when B2 merges" },
+  { "id": "gtceu:erbium_oxide_dust", "role": "use", "reason": "temporary (UIV-A1, reductor c8): its uses, the Er:YSO boule and the ErCl3 doping of the MCVD preform, are UIV-A6's (docs/eras/uiv.md line 16 and 44 rows); delete this exception when A6 merges" },
+  { "id": "gtceu:praseodymium_oxide_dust", "role": "use", "reason": "temporary (UIV-A1, reductor c9): its use, the praseodymium metal step, is UIV-A6's; delete this exception when A6 merges" },
+  { "id": "gtceu:gadolinium_oxide_dust", "role": "use", "reason": "temporary (UIV-A1, reductor c7): its use, the Gd-123 superconductor, is UIV-A8's; delete this exception when A8 merges" }
   ],
   "pendingRoutes": [
     { "id": "grindless:nitride_magnet_synthesis/uiv_smes_cell", "reason": "UIV-W: the UIV SMES cell is wound from metallic hydrogen wire, held until A2 makes metallic hydrogen; the integrator deletes this entry when it merges A2" },
-    { "id": "grindless:crafting/uiv_parallel_hatch", "reason": "UIV-M1: the UIV parallel hatch reads the UIV sensor (A7), the UIV emitter (B3) and metallic hydrogen cable (A2), all hidden until their producers merge; the integrator deletes this entry when it merges the last of A2, A7 and B3" }
+    { "id": "grindless:crafting/uiv_parallel_hatch", "reason": "UIV-M1: the UIV parallel hatch reads the UIV sensor (A7), the UIV emitter (B3) and metallic hydrogen cable (A2), all hidden until their producers merge; the integrator deletes this entry when it merges the last of A2, A7 and B3" },
+    { "id": "grindless:heavy_ion_irradiation/element_120", "reason": "UIV-A1: the Ti-50 beam on the Cf-249 wheel reads the Ti-50 oven charge, held until A3's levitation melter makes Ti-50 metal (obtain rule UIV (A3)); the integrator deletes this entry when it merges A3" },
+    { "id": "grindless:recoil_separation/element_120", "reason": "UIV-A1: element 120 recoil separation reads the recoil gas and makes the recoil sample, both held until A3 (obtain rule UIV (A3)); the integrator deletes this entry when it merges A3" }
   ]
 }
