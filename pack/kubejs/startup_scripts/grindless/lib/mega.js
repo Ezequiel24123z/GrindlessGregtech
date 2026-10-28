@@ -8,6 +8,8 @@
 //                                                   floor(max input voltage / the recipe's EU/t). GTM's getParallelAmount does NOT check
 //                                                   EU (S-M1), so without that cap a machine would start a run its hatches cannot pay;
 //                                                   every copy costs the recipe's full EU/t (family rule 1)
+//   global.grindless.mega.fixedParallel(cap, hatch) the same core with a fixed ceiling cap; coilParallel(cap, hatch) too: with hatch true the
+//                                                   ceiling is min(base, cap) x the formed parallel hatch's parallel (cap before the hatch)
 //   global.grindless.mega.coilDiscount(rate, floor, baseK)
 //                                                   a recipe modifier: the EU/t times rate^steps, steps = floor((K - baseK) / 900)
 //                                                   (baseK 1800, Cupronickel), never below `floor`; GTM's EBF coil rate is 0.95 and
@@ -15,7 +17,8 @@
 //   global.grindless.mega.withHatch(next)           lib/parallel_hatch.js's modifier: a formed parallel hatch scales the recipe first,
 //                                                   then next(machine, recipe) runs on the scaled one; without a hatch, next alone
 //   global.grindless.mega.chain(opts)               the modifier list in the order S-M1 proved: parallel, discount, overclock, batch.
-//                                                   opts { parallel: 'coil' (default) | 'hatch' | 'none', cap, discount: { rate, floor,
+//                                                   opts { parallel: 'coil' (default) | 'fixed' | 'hatch' (legacy: GTM's parallel hatch, no energy cap) | 'none', cap (fixed: the
+//                                                   ceiling), hatch: true multiplies coil/fixed by the formed parallel hatch, discount: { rate, floor,
 //                                                   baseK } | null, oc: 'perfect' (default) | 'nonperfect' | 'none', batch: true }
 //   global.grindless.mega.install(builder, list)    builder.recipeModifiers(true, ...list): the overclock must come before the batch
 //                                                   and `true` makes GTM run the modifiers on every recipe, as S-M1 did
@@ -77,7 +80,16 @@
     return Math.max(floor, Math.min(1, m))
   }
 
+  // base ceiling cut by cap (null: none), times the formed parallel hatch's parallel (1 without one): the cap applies before the hatch
+  function ceiling(base, cap, hatchParallel) {
+    var b = Math.max(1, Number(base))
+    if (cap !== null && cap !== undefined) b = Math.min(b, cap)
+    var h = Number(hatchParallel)
+    return Math.max(1, b) * (h >= 1 ? Math.floor(h) : 1)
+  }
+
   const formulas = {
+    ceiling: ceiling,
     stepKelvin: STEP_K,
     baseKelvin: BASE_K,
     coilCeiling: coilCeiling,
@@ -119,23 +131,44 @@
     return ModifierFunction.builder().modifyAllContents(C.CM.multiplier(n)).eutMultiplier(n).parallels(n).build()
   }
 
-  function coilParallel(cap) {
+  // the parallel of the formed parallel hatch (machine.getParallelHatch(), an Optional); 1 without one
+  function hatchParallel(machine) {
+    try {
+      var o = machine.getParallelHatch()
+      if (o !== null && o !== undefined && o.isPresent()) return Number(o.get().getCurrentParallel())
+    } catch (e) { }
+    return 1
+  }
+
+  // the shared core: ceiling(machine) -> energy cap floor(maxVoltage / recipe EU/t) -> ParallelLogic.getParallelAmount
+  function bound(name, ceilingOf) {
     return function (machine, recipe) {
       try {
-        var k = G.coils.temperature(machine)
-        var want = parallels(coilCeiling(k, cap), energyCap(maxVoltage(machine), recipeEut(recipe)), null)
+        var want = parallels(ceilingOf(machine), energyCap(maxVoltage(machine), recipeEut(recipe)), null)
         if (want < 1) return ModifierFunction.NULL
         var n = classes().PL.getParallelAmount(machine, recipe, want)
         if (n < 1) return ModifierFunction.NULL
         if (n === 1) return ModifierFunction.IDENTITY
         return scaling(n)
       } catch (e) {
-        once('coilParallel', e)
+        once(name, e)
         return ModifierFunction.NULL
       }
     }
   }
 
+  // hatch (default false): multiply the ceiling by the formed parallel hatch's parallel; cap applies to the base, before it
+  function coilParallel(cap, hatch) {
+    return bound('coilParallel', function (machine) {
+      return ceiling(coilCeiling(G.coils.temperature(machine), null), cap, hatch ? hatchParallel(machine) : 1)
+    })
+  }
+
+  function fixedParallel(cap, hatch) {
+    return bound('fixedParallel', function (machine) {
+      return ceiling(cap, null, hatch ? hatchParallel(machine) : 1)
+    })
+  }
   function coilDiscount(rate, floor, baseK) {
     return function (machine, recipe) {
       try {
@@ -185,7 +218,9 @@
     else if (oc === 'nonperfect') tail.push(GTRecipeModifiers.OC_NON_PERFECT)
     if (o.batch !== false) tail.push(GTRecipeModifiers.BATCH_MODE)
     if (parallel === 'hatch') return [withHatch(sequence(tail))]
-    if (parallel === 'coil') return [coilParallel(o.cap === undefined ? null : o.cap)].concat(tail)
+    var cap = o.cap === undefined ? null : o.cap
+    if (parallel === 'coil') return [coilParallel(cap, o.hatch === true)].concat(tail)
+    if (parallel === 'fixed') return [fixedParallel(cap, o.hatch === true)].concat(tail)
     return tail
   }
 
@@ -264,6 +299,7 @@
 
   G.mega = {
     coilParallel: coilParallel,
+    fixedParallel: fixedParallel,
     coilDiscount: coilDiscount,
     withHatch: withHatch,
     chain: chain,

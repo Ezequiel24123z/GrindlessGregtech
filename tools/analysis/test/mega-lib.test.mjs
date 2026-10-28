@@ -60,3 +60,34 @@ test('discountMultiplier: 0.95 per coil step above Cupronickel, floor 0.80', () 
   assert.equal(m(10800), 0.8);
   assert.equal(m(900), 1);
 });
+
+test('MEGA-0c: fixedParallel is exported and ceiling() multiplies min(base, cap) by the hatch', () => {
+  assert.ok(mega.fixedParallel);
+  assert.equal(F.ceiling(8, null, 1), 8);
+  assert.equal(F.ceiling(4, null, 4), 16);
+  assert.equal(F.ceiling(1024, 64, 1), 64);
+  assert.equal(F.ceiling(1024, 64, 4), 256);
+  assert.equal(F.ceiling(4096, null, 4), 16384);
+  assert.equal(F.ceiling(64, null, 1024), 65536);
+  assert.equal(F.ceiling(8, null, 0), 8);
+  assert.equal(F.ceiling(8, null, undefined), 8);
+  assert.equal(F.ceiling(0, null, 2), 2);
+});
+
+test('MEGA-0c: the energy cap still binds a fixed ceiling', () => {
+  assert.equal(F.parallels(F.ceiling(8, null, 1), F.energyCap(128, 30), null), 4);
+  assert.equal(F.parallels(F.ceiling(8, null, 1), F.energyCap(32, 30), null), 1);
+  assert.equal(F.parallels(F.ceiling(4, null, 4), F.energyCap(2048, 30), 100), 16);
+});
+
+test('MEGA-0c: chain builds fixed and coil-times-hatch lists in the proven order', () => {
+  sandbox.GTRecipeModifiers = { OC_PERFECT_SUBTICK: 'oc', OC_NON_PERFECT: 'nonoc', BATCH_MODE: 'batch' };
+  const fixed = mega.chain({ parallel: 'fixed', cap: 8, batch: false });
+  assert.equal(fixed.length, 2);
+  assert.equal(typeof fixed[0], 'function');
+  assert.equal(fixed[1], 'oc');
+  const coil = mega.chain({ hatch: true, discount: { rate: 0.95, floor: 0.8 } });
+  assert.equal(coil.length, 4);
+  assert.equal(coil[3], 'batch');
+  assert.equal(mega.chain({ parallel: 'none', batch: false }).length, 1);
+});

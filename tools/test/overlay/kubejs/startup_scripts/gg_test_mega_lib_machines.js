@@ -2,6 +2,8 @@
 // TEST ONLY, MEGA-0 (lib/mega.js). Throwaway registrations, never shipped; ids gtceu:gg_lib_*.
 //   gg_lib_coil   a coil machine on gtceu:large_chemical_reactor: G.mega.chain({ cap: null })
 //   gg_lib_disc   the same with the coil discount (0.95 per coil step, floor 0.80)
+//   gg_lib_fixed  a coil-less machine (the plant's shape): G.mega.chain({ parallel: 'fixed', cap: 8 })  (MEGA-0c)
+//   gg_lib_ch     a coil machine with a parallel-hatch slot: G.mega.chain({ hatch: true })            (MEGA-0c)
 //   gg_lib_plant  a coil-less machine with a parallel-hatch slot: G.mega.chain({ parallel: 'hatch' }) (withHatch)
 (function () {
   GTCEuStartupEvents.registry('gtceu:machine', function (event) {
@@ -20,8 +22,9 @@
       return s
     }
 
-    function coilMachine(name, label, opts) {
-      var spec = { slices: [['CCC', 'CKC', 'CCC'], ['CCC', 'CKC', 'CCC'], ['CCC', 'BSO', 'CEC']], symbols: front({ K: Coils.predicate() }) }
+    function coilMachine(name, label, opts, withHatch) {
+      var spec = { slices: [['CCC', 'CKC', 'CCC'], ['CCC', 'CKC', 'CCC'], [withHatch ? 'CHC' : 'CCC', 'BSO', 'CEC']], symbols: front({ K: Coils.predicate() }) }
+      if (withHatch) spec.symbols.H = Pat.oneOf(Pat.block(CASING), PH.part())
       Pat.register('gtceu:' + name, spec)
       G.mega.install(event.create(name, 'multiblock')
         .langValue(label)
@@ -34,6 +37,7 @@
     }
 
     coilMachine('gg_lib_coil', 'Lib coil machine', { cap: null })
+    coilMachine('gg_lib_ch', 'Lib coil machine with hatch', { cap: null, hatch: true }, true)
     coilMachine('gg_lib_disc', 'Lib coil machine with discount', { cap: null, discount: { rate: 0.95, floor: 0.8 } })
 
     var PLANT = {
@@ -45,6 +49,15 @@
       .langValue('Lib hatch plant')
       .rotationState(RotationState.NON_Y_AXIS)
       .recipeType('large_chemical_reactor'), G.mega.chain({ parallel: 'hatch' }))
+      .appearanceBlock(GTBlocks.CASING_STEEL_SOLID)
+      .pattern(function (def) { return Pat.build(def, PLANT) })
+      .workableCasingModel(TEXTURE, OVERLAY)
+
+    Pat.register('gtceu:gg_lib_fixed', PLANT)
+    G.mega.install(event.create('gg_lib_fixed', 'multiblock')
+      .langValue('Lib fixed machine')
+      .rotationState(RotationState.NON_Y_AXIS)
+      .recipeType('large_chemical_reactor'), G.mega.chain({ parallel: 'fixed', cap: 8 }))
       .appearanceBlock(GTBlocks.CASING_STEEL_SOLID)
       .pattern(function (def) { return Pat.build(def, PLANT) })
       .workableCasingModel(TEXTURE, OVERLAY)

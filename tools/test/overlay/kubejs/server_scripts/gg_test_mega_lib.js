@@ -8,6 +8,8 @@
 //     small   tritanium, HV hatch (512 V): energy cap floor(512/30)=17   17 copies, 510 EU/t, 200 ticks (no room to overclock)
 //     disc    nichrome (3600 K -> 16), EV hatch, discount 0.95^2         16 copies, about 1733 EU/t, 50 ticks
 //     plant   a coil-less plant: the UHV parallel hatch set to 64 (reports 1024 at rest), IV hatch   64 copies, 7680 EU/t, 50 ticks
+//     fixed   (MEGA-0c) fixed ceiling 8, MV hatch (128 V): energy cap floor(128/30)=4   4 copies, 120 EU/t, 200 ticks
+//     coilhatch (MEGA-0c) cupronickel (4) x GTM's IV parallel hatch set to 4, EV hatch  16 copies, 1920 EU/t, 50 ticks (480 -> 1920: one overclock)
 //     hatch   the UHV hatch alone reports 1024
 (function () {
   var S = null
@@ -182,7 +184,9 @@
     { name: 'trit', id: 'gtceu:gg_lib_coil', coil: 'gtceu:tritanium_coil_block', hatch: 'gtceu:iv_energy_input_hatch', par: 64, eut: 7680, dur: 50, x: 30221 },
     { name: 'small', id: 'gtceu:gg_lib_coil', coil: 'gtceu:tritanium_coil_block', hatch: 'gtceu:hv_energy_input_hatch', par: 17, eut: 510, dur: 200, x: 30229 },
     { name: 'disc', id: 'gtceu:gg_lib_disc', coil: 'gtceu:nichrome_coil_block', hatch: 'gtceu:ev_energy_input_hatch', par: 16, eut: 1733, tol: 6, dur: 50, x: 30237 },
-    { name: 'plant', id: 'gtceu:gg_lib_plant', hatch: 'gtceu:iv_energy_input_hatch', par: 64, eut: 7680, dur: 50, x: 30245, setPar: 64 }
+    { name: 'plant', id: 'gtceu:gg_lib_plant', hatch: 'gtceu:iv_energy_input_hatch', par: 64, eut: 7680, dur: 50, x: 30245, setPar: 64, rest: 1024 },
+    { name: 'fixed', id: 'gtceu:gg_lib_fixed', hatch: 'gtceu:mv_energy_input_hatch', par: 4, eut: 120, dur: 200, x: 30253 },
+    { name: 'coilhatch', id: 'gtceu:gg_lib_ch', coil: 'gtceu:cupronickel_coil_block', hatch: 'gtceu:ev_energy_input_hatch', hatchBlock: 'gtceu:iv_parallel_hatch', par: 16, eut: 1920, dur: 50, x: 30261, setPar: 4 }
   ]
 
   function build() {
@@ -196,7 +200,7 @@
         var placed = placeMachine(u.id, u.x, 101, 8, function (c) {
           if (c.ch === 'K') return u.coil
           if (c.ch === 'E') return u.hatch
-          if (c.ch === 'H') return HATCH
+          if (c.ch === 'H') return u.hatchBlock || HATCH
           return null
         })
         u.pos = placed.pos
@@ -238,7 +242,7 @@
       check(u.name + '_formed', !!u.inBus && !!u.outBus && u.energy.length === 1 && (!u.setPar || !!ph), 'class ' + m.getClass().getSimpleName() + extra + ', parts ' + partIds(m).join(' '))
       if (!u.inBus || !u.outBus || u.energy.length !== 1 || (u.setPar && !ph)) { u.phase = 'done'; return }
       if (ph) {
-        check('plant_hatch_reports', Number(ph.getCurrentParallel()) === 1024, 'at rest ' + ph.getCurrentParallel())
+        if (u.rest) check(u.name + '_hatch_reports', Number(ph.getCurrentParallel()) === u.rest, 'at rest ' + ph.getCurrentParallel())
         ph.setCurrentParallel(u.setPar)
       }
       u.m = m
