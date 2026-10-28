@@ -174,7 +174,18 @@
           "itemsOut": [{ "id": "grindless:quantum_photonic_chip", "count": 1 }] },
         { "name": "optical_computer", "circuit": 3, "eut": 1966080, "duration": 1200,
           "itemsIn": [{ "id": "grindless:quantum_photonic_chip", "count": 1 }, { "id": "gtnn:optical_assembly", "count": 1 }],
-          "itemsOut": [{ "id": "gtnn:optical_computer", "count": 1 }] }
+          "itemsOut": [{ "id": "gtnn:optical_computer", "count": 1 }] },
+        { "_why": "UIV-A7 (uiv.md line 11): the BEUV driver ASIC drives a photonic tensor core", "name": "photonic_tensor_core", "circuit": 4, "eut": 1966080, "duration": 1200,
+          "itemsIn": [{ "id": "grindless:beuv_driver_asic", "count": 1 }, { "id": "grindless:quantum_photonic_chip", "count": 1 }, { "id": "grindless:thin_film_ln_modulator", "count": 4 }],
+          "itemsOut": [{ "id": "grindless:photonic_tensor_core", "count": 1 }] },
+        { "_why": "UIV-A7 (uiv.md line 17): GST crossbar on a glass interposer, six-hour memory and P:Si processor under a tensor core", "name": "optical_mainframe", "circuit": 5, "eut": 1966080, "duration": 2400,
+          "itemsIn": [{ "id": "grindless:crossbar_on_interposer", "count": 1 }, { "id": "grindless:six_hour_memory", "count": 1 }, { "id": "grindless:p_si_processor", "count": 1 },
+                      { "id": "grindless:photonic_tensor_core", "count": 1 }, { "id": "gtnn:optical_assembly", "count": 1 }],
+          "itemsOut": [{ "id": "gtnn:optical_mainframe", "count": 1 }] },
+        { "_why": "UIV-A7 (uiv.md lines 10, 16 and 44): the pulsar-timed repeater, EO interface, telecom memory and EDFA around a disciplined clock core", "name": "pulsar_timed_repeater", "circuit": 6, "eut": 1966080, "duration": 1200,
+          "itemsIn": [{ "id": "grindless:eo_transceiver", "count": 1 }, { "id": "grindless:telecom_memory", "count": 1 }, { "id": "grindless:pumped_edfa", "count": 1 },
+                      { "id": "grindless:disciplined_clock_core", "count": 1 }],
+          "itemsOut": [{ "id": "grindless:pulsar_timed_repeater", "count": 1 }] }
       ]
     }
   }
