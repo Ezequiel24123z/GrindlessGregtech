@@ -1,0 +1,174 @@
+{
+  "_source": "docs/eras/uev.md: machines 11 (SNSPD foundry), 12 (van der Waals stacker), 13 (photonic integration hall), lines 18, 19, 20, 21, 22 and 27, the UEV sensor, emitter, pump, conveyor and piston; package UEV-A6",
+  "_how_it_is_used": "server_scripts/grindless/uev/photonics.js makes one recipe per entry, id grindless:<type>/<name>, with its programmed circuit (0 = none, GTM's own types only); 'kept' items and 'charge' fluids are not consumed; a 'chance' below 10000 makes a chanced output; 'temp' is the blast furnace temperature. snspd_fabrication, vdw_assembly and photonic_integration are this package's machines (data key = <name>, the EMI line). zone_refining (UV, circuits 1-3 and here 4-5), synchrotron (UV, 1-5 and here 6) and ion_implantation (ZPM 1-2, UHV 3-4 and here 5) are older machines' rows; the older MBE (circuit 3) and photonic foundry (circuit 7) rows are in photonics.json. Arsine is never made here and never left over: the MBE row (photonics.json) consumes it all.",
+  "types": {
+    "zone_refining": {
+      "recipes": [
+        { "name": "fz_silicon", "circuit": 4, "eut": 491520, "duration": 600,
+          "itemsIn": [{ "id": "gtceu:silicon_boule", "count": 1 }], "fluidsIn": [{ "id": "gtceu:argon", "amount": 1000 }],
+          "itemsOut": [{ "id": "grindless:fz_silicon_boule", "count": 1 }] },
+        { "name": "seven_n_indium", "circuit": 5, "eut": 491520, "duration": 800,
+          "itemsIn": [{ "id": "gtceu:indium_ingot", "count": 2 }], "fluidsIn": [{ "id": "gtceu:argon", "amount": 1000 }],
+          "itemsOut": [{ "id": "grindless:seven_n_indium", "count": 2 }] }
+      ]
+    },
+    "cutter": {
+      "recipes": [
+        { "name": "fz_silicon_wafers", "circuit": 0, "eut": 1920, "duration": 400,
+          "itemsIn": [{ "id": "grindless:fz_silicon_boule", "count": 1 }], "fluidsIn": [{ "id": "minecraft:water", "amount": 100 }],
+          "itemsOut": [{ "id": "grindless:fz_silicon_wafer", "count": 8 }] }
+      ]
+    },
+    "electric_blast_furnace": {
+      "temp": 1800,
+      "recipes": [
+        { "name": "thermal_oxide", "circuit": 0, "eut": 30720, "duration": 300,
+          "itemsIn": [{ "id": "grindless:fz_silicon_wafer", "count": 1 }], "fluidsIn": [{ "id": "gtceu:oxygen", "amount": 1000 }],
+          "itemsOut": [{ "id": "grindless:oxidised_wafer", "count": 1 }] },
+        { "name": "sdd_anneal", "circuit": 0, "eut": 30720, "duration": 300,
+          "itemsIn": [{ "id": "grindless:sdd_implanted_wafer", "count": 1 }], "fluidsIn": [{ "id": "gtceu:argon", "amount": 1000 }],
+          "itemsOut": [{ "id": "grindless:sdd_annealed_wafer", "count": 1 }] },
+        { "name": "hbn_anneal", "circuit": 0, "eut": 30720, "duration": 400,
+          "itemsIn": [{ "id": "grindless:hbn_film", "count": 1 }], "fluidsIn": [{ "id": "gtceu:argon", "amount": 1000 }],
+          "itemsOut": [{ "id": "grindless:annealed_hbn_film", "count": 1 }] }
+      ]
+    },
+    "ion_implantation": {
+      "recipes": [
+        { "name": "sdd_drift_rings", "circuit": 5, "eut": 122880, "duration": 400,
+          "itemsIn": [{ "id": "grindless:oxidised_wafer", "count": 1 }, { "id": "gtceu:boron_dust", "count": 1 }],
+          "itemsOut": [{ "id": "grindless:sdd_implanted_wafer", "count": 1 }] }
+      ]
+    },
+    "synchrotron": {
+      "dataKey": "grindless_synchrotron",
+      "recipes": [
+        { "name": "sin_waveguide_lithography", "circuit": 6, "eut": 491520, "duration": 300,
+          "itemsIn": [{ "id": "grindless:sin_coated_wafer", "count": 1 }],
+          "kept": [{ "id": "grindless:x_ray_mask", "count": 1 }],
+          "fluidsIn": [{ "id": "gtceu:pmma_resist", "amount": 100 }],
+          "itemsOut": [{ "id": "grindless:sin_lithographed_wafer", "count": 1 }] }
+      ]
+    },
+    "chemical_reactor": {
+      "recipes": [
+        { "name": "sin_lpcvd", "circuit": 0, "eut": 30720, "duration": 400,
+          "itemsIn": [{ "id": "grindless:oxidised_wafer", "count": 1 }],
+          "fluidsIn": [{ "id": "gtceu:silane", "amount": 750 }, { "id": "gtceu:ammonia", "amount": 1000 }],
+          "itemsOut": [{ "id": "grindless:sin_coated_wafer", "count": 1 }], "fluidsOut": [{ "id": "gtceu:hydrogen", "amount": 3000 }] },
+        { "name": "sin_etch", "circuit": 0, "eut": 30720, "duration": 300,
+          "itemsIn": [{ "id": "grindless:sin_lithographed_wafer", "count": 1 }],
+          "charge": [{ "id": "gtceu:hydrofluoric_acid", "amount": 250 }],
+          "itemsOut": [{ "id": "grindless:sin_etched_wafer", "count": 1 }] },
+        { "name": "borazine", "circuit": 0, "eut": 7680, "duration": 300,
+          "itemsIn": [{ "id": "gtceu:ammonia_borane_dust", "count": 3 }],
+          "itemsOut": [{ "id": "grindless:borazine_ampoule", "count": 1 }], "fluidsOut": [{ "id": "gtceu:hydrogen", "amount": 6000 }] },
+        { "name": "hbn_cvd", "circuit": 0, "eut": 30720, "duration": 400,
+          "itemsIn": [{ "id": "grindless:borazine_ampoule", "count": 1 }, { "id": "gtceu:copper_foil", "count": 1 }],
+          "itemsOut": [{ "id": "grindless:hbn_copper_foil", "count": 1 }], "fluidsOut": [{ "id": "gtceu:hydrogen", "amount": 1000 }] },
+        { "name": "hbn_transfer", "circuit": 0, "eut": 7680, "duration": 300,
+          "itemsIn": [{ "id": "grindless:hbn_copper_foil", "count": 1 }],
+          "charge": [{ "id": "gtceu:sodium_persulfate", "amount": 1000 }],
+          "itemsOut": [{ "id": "grindless:hbn_film", "count": 1 }, { "id": "gtceu:copper_foil", "count": 1 }] },
+        { "name": "copper_electropolish", "circuit": 0, "eut": 7680, "duration": 200,
+          "itemsIn": [{ "id": "gtceu:copper_foil", "count": 1 }],
+          "charge": [{ "id": "gtceu:hydrochloric_acid", "amount": 100 }],
+          "itemsOut": [{ "id": "grindless:electropolished_copper_foil", "count": 1 }] },
+        { "name": "graphene_cvd", "circuit": 0, "eut": 30720, "duration": 400,
+          "itemsIn": [{ "id": "grindless:electropolished_copper_foil", "count": 1 }],
+          "fluidsIn": [{ "id": "gtceu:methane", "amount": 1000 }],
+          "itemsOut": [{ "id": "grindless:graphene_copper_foil", "count": 1 }], "fluidsOut": [{ "id": "gtceu:hydrogen", "amount": 2000 }] },
+        { "name": "graphene_pmma_coat", "circuit": 0, "eut": 7680, "duration": 200,
+          "itemsIn": [{ "id": "grindless:graphene_copper_foil", "count": 1 }],
+          "fluidsIn": [{ "id": "gtceu:pmma_resist", "amount": 100 }],
+          "itemsOut": [{ "id": "grindless:pmma_graphene_foil", "count": 1 }] },
+        { "name": "graphene_transfer", "circuit": 0, "eut": 7680, "duration": 300,
+          "itemsIn": [{ "id": "grindless:pmma_graphene_foil", "count": 1 }],
+          "charge": [{ "id": "gtceu:sodium_persulfate", "amount": 1000 }],
+          "itemsOut": [{ "id": "grindless:pmma_graphene_film", "count": 1 }, { "id": "gtceu:copper_foil", "count": 1 }] },
+        { "name": "graphene_pmma_strip", "circuit": 0, "eut": 7680, "duration": 200,
+          "itemsIn": [{ "id": "grindless:pmma_graphene_film", "count": 1 }],
+          "charge": [{ "id": "gtceu:acetone", "amount": 100 }],
+          "itemsOut": [{ "id": "grindless:graphene_film", "count": 1 }], "fluidsOut": [{ "id": "gtceu:pmma_resist", "amount": 100 }] },
+        { "name": "qd_micropillars", "circuit": 0, "eut": 30720, "duration": 300,
+          "itemsIn": [{ "id": "grindless:inas_qd_wafer", "count": 1 }],
+          "charge": [{ "id": "gtceu:hydrofluoric_acid", "amount": 100 }],
+          "itemsOut": [{ "id": "grindless:micropillar_wafer", "count": 1 }] }
+      ]
+    },
+    "assembler": {
+      "recipes": [
+        { "name": "sdd_metallise", "circuit": 0, "eut": 30720, "duration": 300,
+          "itemsIn": [{ "id": "grindless:sdd_annealed_wafer", "count": 1 }, { "id": "gtceu:gold_dust", "count": 1 }],
+          "itemsOut": [{ "id": "grindless:sdd", "count": 1 }] },
+        { "name": "qd_source_mount", "circuit": 0, "eut": 30720, "duration": 300,
+          "itemsIn": [{ "id": "grindless:micropillar_wafer", "count": 1 }, { "id": "gtceu:gold_dust", "count": 1 }],
+          "itemsOut": [{ "id": "grindless:qd_source", "count": 1 }] },
+        { "name": "uev_sensor", "circuit": 0, "eut": 1966080, "duration": 400,
+          "itemsIn": [{ "id": "gtceu:uv_sensor", "count": 1 }, { "id": "grindless:snspd", "count": 2 }, { "id": "grindless:sdd", "count": 1 }, { "id": "grindless:six_n_niobium", "count": 4 }],
+          "itemsOut": [{ "id": "grindless:uev_sensor", "count": 1 }] },
+        { "name": "uev_emitter", "circuit": 0, "eut": 1966080, "duration": 400,
+          "itemsIn": [{ "id": "gtceu:uv_emitter", "count": 1 }, { "id": "grindless:qd_source", "count": 2 }, { "id": "grindless:graphene_modulator", "count": 1 }, { "id": "grindless:six_n_tantalum", "count": 4 }],
+          "itemsOut": [{ "id": "grindless:uev_emitter", "count": 1 }] },
+        { "name": "uev_electric_pump", "circuit": 0, "eut": 1966080, "duration": 400,
+          "itemsIn": [{ "id": "gtceu:uv_electric_pump", "count": 1 }, { "id": "grindless:annealed_hbn_film", "count": 2 }, { "id": "grindless:six_n_hafnium", "count": 4 }],
+          "itemsOut": [{ "id": "grindless:uev_electric_pump", "count": 1 }] },
+        { "name": "uev_conveyor_module", "circuit": 0, "eut": 1966080, "duration": 400,
+          "itemsIn": [{ "id": "gtceu:uv_conveyor_module", "count": 1 }, { "id": "grindless:graphene_film", "count": 2 }, { "id": "grindless:six_n_tantalum", "count": 4 }],
+          "itemsOut": [{ "id": "grindless:uev_conveyor_module", "count": 1 }] },
+        { "name": "uev_electric_piston", "circuit": 0, "eut": 1966080, "duration": 400,
+          "itemsIn": [{ "id": "gtceu:uv_electric_piston", "count": 1 }, { "id": "grindless:graphene_film", "count": 2 }, { "id": "grindless:six_n_niobium", "count": 4 }],
+          "itemsOut": [{ "id": "grindless:uev_electric_piston", "count": 1 }] }
+      ]
+    },
+    "snspd_fabrication": {
+      "dataKey": "grindless_snspd_fabrication",
+      "recipes": [
+        { "name": "wsi_film", "circuit": 1, "eut": 1966080, "duration": 400,
+          "itemsIn": [{ "id": "grindless:fz_silicon_wafer", "count": 1 }, { "id": "gtceu:tungsten_silicide_dust", "count": 1 }],
+          "fluidsIn": [{ "id": "gtceu:argon", "amount": 1000 }],
+          "itemsOut": [{ "id": "grindless:wsi_wafer", "count": 1 }] },
+        { "name": "nanowire_write", "circuit": 2, "eut": 1966080, "duration": 600,
+          "itemsIn": [{ "id": "grindless:wsi_wafer", "count": 1 }],
+          "fluidsIn": [{ "id": "gtceu:pmma_resist", "amount": 100 }],
+          "itemsOut": [{ "id": "grindless:wsi_nanowire_wafer", "count": 1 }] },
+        { "name": "waveguide_mount", "circuit": 3, "eut": 1966080, "duration": 600,
+          "itemsIn": [{ "id": "grindless:wsi_nanowire_wafer", "count": 1 }, { "id": "grindless:annealed_sin_chip", "count": 1 }],
+          "itemsOut": [{ "id": "grindless:snspd_die", "count": 1 }] },
+        { "name": "cool_and_package", "circuit": 4, "eut": 1966080, "duration": 600,
+          "itemsIn": [{ "id": "grindless:snspd_die", "count": 1 }, { "id": "gtceu:gold_dust", "count": 1 }],
+          "fluidsIn": [{ "id": "gtceu:superfluid_helium", "amount": 100 }],
+          "itemsOut": [{ "id": "grindless:snspd", "count": 1 }] }
+      ]
+    },
+    "vdw_assembly": {
+      "dataKey": "grindless_vdw_assembly",
+      "recipes": [
+        { "name": "hbn_emitter_chip", "circuit": 1, "eut": 1966080, "duration": 500,
+          "itemsIn": [{ "id": "grindless:annealed_hbn_film", "count": 2 }, { "id": "gtceu:gold_dust", "count": 1 }],
+          "itemsOut": [{ "id": "grindless:hbn_emitter_chip", "count": 1 }] },
+        { "name": "graphene_modulator", "circuit": 2, "eut": 1966080, "duration": 500,
+          "itemsIn": [{ "id": "grindless:encapsulated_graphene", "count": 1 }, { "id": "gtceu:gold_dust", "count": 1 }],
+          "itemsOut": [{ "id": "grindless:graphene_modulator", "count": 1 }] },
+        { "name": "encapsulate_graphene", "circuit": 3, "eut": 1966080, "duration": 700,
+          "itemsIn": [{ "id": "grindless:graphene_film", "count": 1 }, { "id": "grindless:annealed_hbn_film", "count": 2 }],
+          "itemsOut": [{ "id": "grindless:encapsulated_graphene", "count": 1 }] }
+      ]
+    },
+    "photonic_integration": {
+      "dataKey": "grindless_photonic_integration",
+      "recipes": [
+        { "name": "waveguide_circuit", "circuit": 1, "eut": 1966080, "duration": 600,
+          "itemsIn": [{ "id": "grindless:annealed_sin_chip", "count": 1 }, { "id": "grindless:lnoi_wafer", "count": 1 }],
+          "itemsOut": [{ "id": "grindless:waveguide_circuit", "count": 1 }] },
+        { "name": "quantum_photonic_chip", "circuit": 2, "eut": 1966080, "duration": 900,
+          "itemsIn": [{ "id": "grindless:waveguide_circuit", "count": 1 }, { "id": "grindless:qd_source", "count": 1 }, { "id": "grindless:snspd", "count": 1 },
+                      { "id": "grindless:sdd", "count": 1 }, { "id": "grindless:graphene_modulator", "count": 1 }, { "id": "grindless:hbn_emitter_chip", "count": 1 }],
+          "itemsOut": [{ "id": "grindless:quantum_photonic_chip", "count": 1 }] },
+        { "name": "optical_computer", "circuit": 3, "eut": 1966080, "duration": 1200,
+          "itemsIn": [{ "id": "grindless:quantum_photonic_chip", "count": 1 }, { "id": "gtnn:optical_assembly", "count": 1 }],
+          "itemsOut": [{ "id": "gtnn:optical_computer", "count": 1 }] }
+      ]
+    }
+  }
+}
