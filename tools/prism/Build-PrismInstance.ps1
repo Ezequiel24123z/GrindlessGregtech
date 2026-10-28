@@ -1,11 +1,11 @@
-# Builds the Prism Launcher instance of the playable channel: a zip the player imports once
+# Builds the Prism Launcher instance of the releases channel: a zip the player imports once
 # (Prism: Add Instance > Import > zip). On every launch the instance updates itself from the
-# `playable` branch with packwiz-installer-bootstrap (MIT), which only moves to tested releases.
+# `releases` branch with packwiz-installer-bootstrap (MIT), which only moves to tested releases.
 # With a version tag as the channel (-Channel v0.5.0) it builds a fixed instance of that version, for the GitHub release
 # of each version: the tag never moves, so that instance never updates.
-#   powershell -NoProfile -ExecutionPolicy Bypass -File tools\prism\Build-PrismInstance.ps1 [-Channel playable|vX.Y.Z] [-OutDir <dir>]
+#   powershell -NoProfile -ExecutionPolicy Bypass -File tools\prism\Build-PrismInstance.ps1 [-Channel releases|vX.Y.Z] [-OutDir <dir>]
 param(
-    [string]$Channel = 'playable',
+    [string]$Channel = 'releases',
     [string]$OutDir = (Join-Path $PSScriptRoot 'out'),
     [int]$MinMemMb = 4096,
     [int]$MaxMemMb = 10240
@@ -17,7 +17,7 @@ $bootUrl = 'https://github.com/packwiz/packwiz-installer-bootstrap/releases/down
 $pinned = $Channel -match '^v\d'
 $name = if ($pinned) { "Gregtech Grindless $Channel" } else { 'Gregtech Grindless' }
 $folder = if ($pinned) { "GregtechGrindless-$Channel" } else { 'GregtechGrindless' }
-$notes = if ($pinned) { "Gregtech Grindless ${Channel}: pinned version, does not update. To play on the latest version, use the playable-channel instance." } else { "Gregtech Grindless: $Channel channel. Updates itself on launch only (tested versions only)." }
+$notes = if ($pinned) { "Gregtech Grindless ${Channel}: pinned version, does not update. To play on the latest version, use the releases-channel instance." } else { "Gregtech Grindless: $Channel channel. Updates itself on launch only (tested versions only)." }
 
 $work = Join-Path ([IO.Path]::GetTempPath()) ("gg-prism-" + [guid]::NewGuid().ToString('N'))
 $inst = Join-Path $work $folder

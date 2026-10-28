@@ -1,0 +1,5 @@
+{
+  "type": "emi:info",
+  "stacks": ["item:gtceu:nitride_magnet_works"],
+  "text": ["emi.grindless.info.nitride_magnet_works.0"]
+}

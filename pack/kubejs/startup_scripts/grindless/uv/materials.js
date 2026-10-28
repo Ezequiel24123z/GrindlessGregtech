@@ -93,10 +93,10 @@
     boricAcidDust: 'gtceu:boric_acid_dust',
     boronTrioxideDust: 'gtceu:boron_trioxide_dust'
   }
-  // reactor: items in 2 (a dust and the circuit), out 2 (product and hBN fines), fluids in 2 (ammonia and hydrogen or BF3), out 2;
+  // reactor: items in 3 (a dust and the circuit; UEV-A5's interphase: SiC fibre, B2O3 and the circuit), out 2 (product and hBN fines), fluids in 2 (ammonia and hydrogen or BF3), out 2;
   // line: items in 5 (four dusts and the circuit), out 2 (wire and the sheath's silver), no fluids;
   // printer: items in 3 (powder, laser module, circuit), out 3 (part, powder back, spent module), argon in and out
-  M.reactorIO = { itemsIn: 2, itemsOut: 2, fluidsIn: 2, fluidsOut: 2 }
+  M.reactorIO = { itemsIn: 3, itemsOut: 2, fluidsIn: 2, fluidsOut: 2 }
   M.lineIO = { itemsIn: 5, itemsOut: 2, fluidsIn: 0, fluidsOut: 0 }
   M.printerIO = { itemsIn: 3, itemsOut: 3, fluidsIn: 1, fluidsOut: 1 }
   M.parts = {

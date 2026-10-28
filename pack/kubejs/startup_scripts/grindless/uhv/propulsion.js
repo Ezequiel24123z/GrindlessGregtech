@@ -65,8 +65,9 @@
     var key = name.replace(/_([a-z0-9])/g, function (m, c) { return c.toUpperCase() })
     P.ids[key] = (MATERIALS[name] ? 'gtceu:' : 'grindless:') + name
   })
-  // items in 3 (blend + graphite + circuit; tantalum + carbon + circuit; tiles + liner + circuit), out 2 (tile + carbon), no fluids
-  P.io = { itemsIn: 3, itemsOut: 2, fluidsIn: 0, fluidsOut: 0 }
+  // items in 4 (blend + graphite + circuit; tantalum + carbon + circuit; tiles + liner + circuit; UEV-A5's HfTaCN billet: powder +
+  // 6N hafnium + graphite + circuit), out 2 (tile + carbon), no fluids
+  P.io = { itemsIn: 4, itemsOut: 2, fluidsIn: 0, fluidsOut: 0 }
   P.parts = {
     energy_input: { min: 1, max: 2 },
     input_bus: { min: 1, max: 2 },

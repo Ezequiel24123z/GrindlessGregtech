@@ -17,25 +17,25 @@ Huge GregTech pack for Minecraft 1.20.1 (Forge) on top of GregTech Modern 7.5.3.
 
 ## How to play (Prism Launcher)
 
-**Playable channel (recommended).** It updates by itself and keeps your world.
+**Releases channel (recommended).** It updates by itself and keeps your world.
 
-1. Download `Gregtech-Grindless-playable.zip` from the [playable channel release](https://github.com/Ezequiel24123z/GrindlessGregtech/releases/tag/playable-channel).
+1. Download `Gregtech-Grindless-releases.zip` from the [releases channel release](https://github.com/Ezequiel24123z/GrindlessGregtech/releases/tag/releases-channel).
 2. In Prism: *Add instance → Import → choose the zip*.
 3. Launch it. The first time, it downloads about 400 MB of mods.
 
-Before each launch, the instance updates from the `playable` branch, which only moves to tested versions. FTB Backups 2 makes copies of the world in the instance's `backups` folder.
+Before each launch, the instance updates from the `releases` branch, which only moves to tested versions. FTB Backups 2 makes copies of the world in the instance's `backups` folder.
 
 ### Updating without starting a new world
 
-Keep using the **same Prism instance**. Once a tested release reaches `playable`, close Minecraft and launch that instance again: packwiz updates the managed pack files, not your `saves` folder. There is no need to import another zip or start another world for each pack release.
+Keep using the **same Prism instance**. Once a tested release reaches `releases`, close Minecraft and launch that instance again: packwiz updates the managed pack files, not your `saves` folder. There is no need to import another zip or start another world for each pack release.
 
-**Versioned release zips are different.** An instance imported from `Gregtech-Grindless-v0.7.0.zip`, for example, is pinned to that tag and does not automatically follow later releases. To switch it to the playable channel without moving the world, close Minecraft, open *Edit instance → Settings → Custom commands*, and change the existing pre-launch command to:
+**Versioned release zips are different.** An instance imported from `Gregtech-Grindless-v0.7.0.zip`, for example, is pinned to that tag and does not automatically follow later releases. To switch it to the releases channel without moving the world, close Minecraft, open *Edit instance → Settings → Custom commands*, and change the existing pre-launch command to:
 
 ```
-"$INST_JAVA" -jar packwiz-installer-bootstrap.jar https://raw.githubusercontent.com/Ezequiel24123z/GrindlessGregtech/playable/pack/pack.toml
+"$INST_JAVA" -jar packwiz-installer-bootstrap.jar https://raw.githubusercontent.com/Ezequiel24123z/GrindlessGregtech/releases/pack/pack.toml
 ```
 
-This is a one-time change; the release zips already include the bootstrap jar. The same change moves an instance imported before the channel was renamed from `jugable` to `playable` (its command ends in `/jugable/pack/pack.toml`). To stay pinned instead, keep the same instance and replace only the version tag in its existing command when choosing a newer release.
+This is a one-time change; the release zips already include the bootstrap jar. The same change moves an instance from the older channel names: a command ending in `/playable/pack/pack.toml` (still updated during the transition) or `/jugable/pack/pack.toml` (that branch no longer exists, so the instance stops updating until changed). To stay pinned instead, keep the same instance and replace only the version tag in its existing command when choosing a newer release.
 
 Before updating a world you care about, make a fresh backup of its folder under `saves`, with Minecraft closed. FTB Backups 2's periodic copies are useful, but the updater does not itself guarantee a fresh pre-update backup. Do not downgrade an updated world; restore a matching world backup and pack version instead.
 
