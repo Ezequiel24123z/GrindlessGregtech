@@ -1,4 +1,4 @@
-// priority: -7699
+// priority: -7705
 // Gregtech Grindless - T1 of package UEV-A6 (TEST-ONLY overlay, never shipped): the photonics machines' live recipes.
 //
 //   powershell -File tools\test\Invoke-GGTest.ps1 -Suite server `

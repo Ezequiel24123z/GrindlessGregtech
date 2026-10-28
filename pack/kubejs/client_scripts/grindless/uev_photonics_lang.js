@@ -1,4 +1,4 @@
-// priority: 4990
+// priority: 4954
 // Gregtech Grindless - names and tooltips of UEV's SNSPD foundry, van der Waals stacker and photonic integration hall (startup_scripts/grindless/uev/photonics.js; package UEV-A6):
 //
 //   block.gtceu.<machine>, gtceu.<recipe type>                    machine and recipe type names

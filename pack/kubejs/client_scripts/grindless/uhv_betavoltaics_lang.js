@@ -1,4 +1,4 @@
-// priority: 4900
+// priority: 4828
 // Gregtech Grindless - names and tooltips of UHV's water and betavoltaics (startup_scripts/grindless/uhv/betavoltaics.js; package UHV-A3):
 //
 //   block.gtceu.<machine>, gtceu.<recipe type>                    machine and recipe type names

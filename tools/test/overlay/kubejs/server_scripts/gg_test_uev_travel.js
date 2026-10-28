@@ -1,4 +1,4 @@
-// priority: -7777
+// priority: -7779
 // TEST ONLY, UEV-B1. Command: kubejs custom_command gg_test_uev_travel
 // Band ONLY: X 32768-32831, Z 0-63, Overworld Y 60-120 (nothing is placed there: the checks are registry and SavedData reads).
 // Doubts: the datapack places load with the final ids, the DFD motors register at GCYR tiers 7 and 9, and stations nine and ten
