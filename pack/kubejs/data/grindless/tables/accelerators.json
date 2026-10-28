@@ -36,6 +36,14 @@
           "itemsOut": [{ "id": "grindless:antiproton_cartridge", "count": 1 }],
           "chancedOut": [{ "id": "grindless:activated_tungsten_target", "count": 1, "chance": 200 }],
           "fluidsOut": [{ "id": "gtceu:hydrogen", "amount": 250 }]
+        },
+        {
+          "_why": "UIV-A4 (uiv.md line 18): the ring trenches of the damascene wafer, exposed through the X-ray mask",
+          "name": "damascene_trench", "circuit": 7, "eut": 491520, "duration": 300,
+          "itemsIn": [{ "id": "grindless:oxidised_wafer", "count": 1 }],
+          "kept": [{ "id": "grindless:x_ray_mask", "count": 1 }],
+          "fluidsIn": [{ "id": "gtceu:pmma_resist", "amount": 100 }],
+          "itemsOut": [{ "id": "grindless:trenched_oxide_wafer", "count": 1 }]
         }
       ]
     },
