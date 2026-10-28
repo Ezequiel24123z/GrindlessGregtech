@@ -300,7 +300,8 @@
         case 7: return b.tiers(t[0], t[1], t[2], t[3], t[4], t[5], t[6])
         case 8: return b.tiers(t[0], t[1], t[2], t[3], t[4], t[5], t[6], t[7])
         case 9: return b.tiers(t[0], t[1], t[2], t[3], t[4], t[5], t[6], t[7], t[8])
-        default: throw new Error(LOG + 'wireless_energy.json: 1 to 9 tiers supported (got ' + t.length + ')')
+        case 10: return b.tiers(t[0], t[1], t[2], t[3], t[4], t[5], t[6], t[7], t[8], t[9])
+        default: throw new Error(LOG + 'wireless_energy.json: 1 to 10 tiers supported (got ' + t.length + ')')
       }
     }
     W.hatchKindList.forEach(function (kind) {
