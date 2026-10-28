@@ -11,7 +11,10 @@
           "itemsOut": [{ "id": "grindless:strain_annealed_fe16n2_powder", "count": 1 }], "fluidsOut": [] },
         { "name": "bonded_magnet", "circuit": 3, "eut": 1966080, "duration": 300,
           "itemsIn": [{ "id": "grindless:strain_annealed_fe16n2_powder", "count": 4 }, { "id": "gtceu:polycarbonate_dust", "count": 1 }], "kept": [], "fluidsIn": [], "charge": [],
-          "itemsOut": [{ "id": "grindless:bonded_fe16n2_magnet", "count": 2 }], "fluidsOut": [] }
+          "itemsOut": [{ "id": "grindless:bonded_fe16n2_magnet", "count": 2 }], "fluidsOut": [] },
+        { "name": "uiv_smes_cell", "circuit": 4, "eut": 1966080, "duration": 600,
+          "itemsIn": [{ "id": "grindless:uev_smes_cell", "count": 4 }, { "id": "gtceu:metallic_hydrogen_single_wire", "count": 16 }], "kept": [], "fluidsIn": [], "charge": [{ "id": "gtceu:liquid_helium", "amount": 1000 }],
+          "itemsOut": [{ "id": "grindless:uiv_smes_cell", "count": 1 }], "fluidsOut": [] }
       ]
     },
     "sic_fibre_spinning": {

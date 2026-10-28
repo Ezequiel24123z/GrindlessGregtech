@@ -170,7 +170,7 @@ hash = "150351d8d1578002add5dffd560202c0bd18ff2dc65bb3e98c975570da6aa5cf"
 
 [[files]]
 file = "kubejs/assets/emi/recipe/additions/grindless/capacitor_cells.json"
-hash = "9713c7f17bbabe68d8bd449fbdb617f52a150c0c2c3e82a81ceeb70d33a92d1e"
+hash = "fa0f5a1d85e0763a4d03c970314779aa9c76b032f455696bf9bb6f2606dec164"
 
 [[files]]
 file = "kubejs/assets/emi/recipe/additions/grindless/coilgun_coil_casing.json"
@@ -382,7 +382,7 @@ hash = "d2f84f6fc58f472c3755ab7c80561707710c8a9ced22877e259dc27110bd82a9"
 
 [[files]]
 file = "kubejs/assets/emi/recipe/additions/grindless/wireless_covers.json"
-hash = "eb4ece8abe457520327b9189a9ad216ede764f790d682dd571b62245e928ac5a"
+hash = "7b7043671417a0b475b48508899888d8aec756042d71358d91f554597019b699"
 
 [[files]]
 file = "kubejs/assets/emi/recipe/additions/grindless/zpm_cryostat_casing.json"
@@ -601,6 +601,10 @@ file = "kubejs/assets/grindless/textures/block/cover/wireless_dynamo_cover_uhv.p
 hash = "c9989cb503346587a42a1a05d8f31968ff3447074d79df4768048801e6eef313"
 
 [[files]]
+file = "kubejs/assets/grindless/textures/block/cover/wireless_dynamo_cover_uiv.png"
+hash = "8a99eb1af15c39ed23e061f6acbcc50d2c7a241698ae6f6f865b1a7a85c19d12"
+
+[[files]]
 file = "kubejs/assets/grindless/textures/block/cover/wireless_dynamo_cover_uv.png"
 hash = "56b6fe1c3fdea19ce3a3df2fac60b6006d3f026429758c38ca8810dd49a1ad73"
 
@@ -647,6 +651,10 @@ hash = "af954571a224bca9f84983f6cf49d8998cc00a99c72ed276bd296779ae0fc479"
 [[files]]
 file = "kubejs/assets/grindless/textures/block/cover/wireless_energy_cover_uhv.png"
 hash = "dac4f4e6318fc45d97a67a919a757aa374df7388d3b7a5e00524f16371d7d287"
+
+[[files]]
+file = "kubejs/assets/grindless/textures/block/cover/wireless_energy_cover_uiv.png"
+hash = "d5d901e8fc34ccb4bfaa483ceceb923e92b66f8744a4e7d4b5000137707b7447"
 
 [[files]]
 file = "kubejs/assets/grindless/textures/block/cover/wireless_energy_cover_uv.png"
@@ -4461,6 +4469,10 @@ file = "kubejs/assets/grindless/textures/block/wireless/smes_cell_uhv.png"
 hash = "d4fff6ba0ea9bfc063f72f4c29b11838bc662d2ca4447396b88497675612fb78"
 
 [[files]]
+file = "kubejs/assets/grindless/textures/block/wireless/smes_cell_uiv.png"
+hash = "56ad00f4e5eb2be5a532ba6809a727539cf1745e90e7577acb5855f96d0da6a4"
+
+[[files]]
 file = "kubejs/assets/grindless/textures/block/wireless/smes_cell_uv.png"
 hash = "3643dc71f3a7fa74e206e4edf61e77409f2ccda223cb42f41d18d8d5a5a29992"
 
@@ -6749,6 +6761,10 @@ file = "kubejs/assets/grindless/textures/item/wireless/dynamo_cover_uhv.png"
 hash = "63b38f4f276a733e654a4bef07d47626efc5a3c34da58ebae72d03265973ad69"
 
 [[files]]
+file = "kubejs/assets/grindless/textures/item/wireless/dynamo_cover_uiv.png"
+hash = "12bbf1f1ae9773b02eacdbbc9ce82c924d0860995868d9cf2464e9829d5037ed"
+
+[[files]]
 file = "kubejs/assets/grindless/textures/item/wireless/dynamo_cover_uv.png"
 hash = "f5387152ff867733db6dc018b08cb60d764e480860ef76fdf8190023f75dfadb"
 
@@ -6787,6 +6803,10 @@ hash = "d00917c5a01bdb7af3fe54f2435020084cfab492a9633c6b9eed2291dff33d79"
 [[files]]
 file = "kubejs/assets/grindless/textures/item/wireless/energy_cover_uhv.png"
 hash = "1daa0c5476fb56c8c786237b9d10730326254d9a3da5cf74fc55eb1f059ef94d"
+
+[[files]]
+file = "kubejs/assets/grindless/textures/item/wireless/energy_cover_uiv.png"
+hash = "2bbacac4ecaba46031e433ae261feee58963b0f42b34b79e4fa9e0074c6facd7"
 
 [[files]]
 file = "kubejs/assets/grindless/textures/item/wireless/energy_cover_uv.png"
@@ -7313,6 +7333,10 @@ file = "kubejs/client_scripts/grindless/uiv_foundation_lang.js"
 hash = "7dd96866d06ce1377199eef0776238dfe01b8a24c2d5dbf9dd11088d539ce310"
 
 [[files]]
+file = "kubejs/client_scripts/grindless/uiv_wireless_lang.js"
+hash = "650b896eafb8d62676e6fdaa06b05bc3c64b945fad2d135b20f7591918720213"
+
+[[files]]
 file = "kubejs/client_scripts/grindless/uv_accelerators_lang.js"
 hash = "f57a9925aabdddbab989915e519dd3b406ecccdae7d2c18b5d5e40255758e0ef"
 
@@ -7682,7 +7706,7 @@ hash = "e7afc7668903c820afb04bc88f7752dbba4563f03a2affce9a1cb19d5576a461"
 
 [[files]]
 file = "kubejs/data/grindless/tables/composites.json"
-hash = "22d0de86fdf519c7f16e69dad7ee41d88bcb50101144f70382432370a94e3e1f"
+hash = "aa52fdd839711fc95454dbcd95b2b46240e44ed25444fbaf0381d4a494b2a57e"
 
 [[files]]
 file = "kubejs/data/grindless/tables/crystals.json"
@@ -7730,7 +7754,7 @@ hash = "1f4b256531a0b42a6ecf399e9b692d9e4730bd4102e53aab3e1fa2c999b69e9d"
 
 [[files]]
 file = "kubejs/data/grindless/tables/hidden_until.json"
-hash = "9e15216167e9eb45fe7b64eef6c014a901e54902e22620614961e65ee9aed128"
+hash = "a9305fd0dc824599c04a9f906bcd87dc787f97a3834739f26cb7b84d6858966e"
 
 [[files]]
 file = "kubejs/data/grindless/tables/horizon_collector.json"
@@ -7930,7 +7954,7 @@ hash = "4822cf86f95d7a146f59bde5b2d6e00bac21980a8e586bb686bd7c3db19a5ced"
 
 [[files]]
 file = "kubejs/data/grindless/tables/wireless_energy.json"
-hash = "b50051de1bc8b1614c470c76fc730889907fb0b0998d211b23b25bd499d0bd3a"
+hash = "50e1b5cce500e1bddfd5862549ee98dda16ed7fcff9f00d533984f1239c76c3c"
 
 [[files]]
 file = "kubejs/data/grindless/worldgen/biome/asteroid_belt.json"
@@ -9018,7 +9042,7 @@ hash = "79794bc2f184d1ac8d84cb218227fe06b35c77c2a2118bd56aed0ec0408ac829"
 
 [[files]]
 file = "kubejs/startup_scripts/grindless/lv/wireless_energy.js"
-hash = "f10c048407365f5ae4039c9ae645e8cc3c9fe24074c5c644a81dd1596a43a6f4"
+hash = "f8c44d99d43fc886cf0994c6b75e48813eeac99e0503c1e1f44ef31886a2c2d0"
 
 [[files]]
 file = "kubejs/startup_scripts/grindless/mars/travel.js"

@@ -52,7 +52,7 @@ test('the UEV row: tier 10, 96 UV naquadria batteries (251,658,240,000 EU, past 
   const rows = WIRELESS.tiers.filter((r) => r.name === 'uev');
   assert.equal(rows.length, 1);
   const uev = rows[0];
-  assert.equal(WIRELESS.tiers[WIRELESS.tiers.length - 1], uev, 'the last row');
+  assert.equal(WIRELESS.tiers[9], uev, 'the tenth row (UIV-W appends uiv after it)');
   assert.deepEqual([uev.tier, uev.cell, uev.capacity, uev.referenceBattery, uev.referenceCount],
     [UEV, CELL, CELL_EU, 'gtceu:uv_naquadria_battery', 96]);
   assert.equal(uev.capacity, uev.referenceCount * UV_NAQUADRIA_EU);
@@ -67,10 +67,10 @@ test('the UEV row: tier 10, 96 UV naquadria batteries (251,658,240,000 EU, past 
     ['grindless:uev_emitter', 'grindless:uev_sensor', 1, LINK, PLATE, 'lay_superhydride']);
 });
 
-test('withTiers case 10 is spelled out and the default message says 1 to 10 tiers', () => {
+test('withTiers case 10 is spelled out and the default message covers at least 10 tiers', () => {
   const src = fs.readFileSync(path.join(pack, 'kubejs', 'startup_scripts', 'grindless', 'lv', 'wireless_energy.js'), 'utf8');
   assert.match(src, /case 10:\s*return b\.tiers\(t\[0\], t\[1\], t\[2\], t\[3\], t\[4\], t\[5\], t\[6\], t\[7\], t\[8\], t\[9\]\)/);
-  assert.match(src, /1 to 10 tiers/);
+  assert.match(src, /1 to 1\d tiers/);
 });
 
 test('registration: the cell is a block, eight hatches and two covers, all from lv/wireless_energy.js; F1 does not register the cell', () => {
@@ -142,7 +142,7 @@ test('the UEV hatches and covers: assembler recipes at VA[UEV] with the quantum 
 
 test('tiers below UEV are untouched: ids, capacities and the 9 existing rows', () => {
   assert.deepEqual(WIRELESS.tiers.map((r) => r.name).slice(0, 9), ['lv', 'mv', 'hv', 'ev', 'iv', 'luv', 'zpm', 'uv', 'uhv'].slice(0, 9));
-  assert.equal(WIRELESS.tiers.length, 10);
+  assert.ok(WIRELESS.tiers.length >= 10, 'UEV is row 10; later eras append');
   assert.equal(WIRELESS.tiers.find((r) => r.name === 'uhv').capacity, 62914560000);
 });
 

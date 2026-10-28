@@ -1257,6 +1257,15 @@ powershell -NoProfile -ExecutionPolicy Bypass -File tools\assets\Build-UEVWirele
 powershell -NoProfile -ExecutionPolicy Bypass -File tools\assets\Build-UEVWirelessTextures.ps1 -Credits
 ```
 
+## UIV wireless tier (UIV-W)
+
+Procedural, drawn by `Build-UIVWirelessTextures.ps1` the same way as the UEV set (the routines and palette of `Build-WirelessEnergyTextures.ps1`); nothing is copied from another mod. GTM's UIV colour (dark green, 00AA00). It writes the UIV SMES cell (`block/wireless/smes_cell_uiv`, the table's uiv row texture), the covers on a machine's face (`block/cover/wireless_{energy,dynamo}_cover_uiv`) and the cover items (`item/wireless/{energy,dynamo}_cover_uiv`): 5 files.
+
+```powershell
+powershell -NoProfile -ExecutionPolicy Bypass -File tools\assets\Build-UIVWirelessTextures.ps1
+powershell -NoProfile -ExecutionPolicy Bypass -File tools\assets\Build-UIVWirelessTextures.ps1 -Credits
+```
+
 ## HV Coil Chemical Plant (MEGA-3)
 
 Procedural, drawn by `Build-MegaCoilChemicalPlantTextures.ps1`; nothing is copied from another mod. The controller face of `gtceu:coil_chemical_plant` (the large chemical reactor type with coil-scaled parallels up to 64, the coil discount and perfect overclock); still, active and emissive frames.

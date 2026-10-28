@@ -74,5 +74,6 @@
   { "id": "grindless:uev_conveyor_module", "role": "use", "reason": "deferred (UEV-A6; B2/B3/B4 controllers used other parts): its only use is the last step of UIV line 39, the UIV conveyor (docs/eras/uiv.md line 39 row, package UIV-A3); delete this exception when UIV-A3 merges" }
   ],
   "pendingRoutes": [
+    { "id": "grindless:nitride_magnet_synthesis/uiv_smes_cell", "reason": "UIV-W: the UIV SMES cell is wound from metallic hydrogen wire, held until A2 makes metallic hydrogen; the integrator deletes this entry when it merges A2" }
   ]
 }
