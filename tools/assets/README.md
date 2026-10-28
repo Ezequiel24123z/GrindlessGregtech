@@ -58,7 +58,7 @@ Generators for the pack's own textures. Everything is procedural 16x16 pixel art
 | `Build-ZPMFoundationTextures.ps1` | Writes the shared ZPM textures (ZPM-F1): 31 items and the six block textures under `block/zpm/`. `-Only <output or group>`, `-Preview <png outside the repo>`, `-Credits`. |
 | `Build-UVFoundationTextures.ps1` | Writes the shared UV textures (UV-F1): 33 items and three block textures under `block/uv/`. `-Only <output or group>`, `-Credits`. |
 | `Build-UHVFoundationTextures.ps1` | Writes the shared UHV textures (UHV-F1): 52 items and three casings under `block/uhv/`. `-Only <output or group>`, `-Credits`. |
-| `Build-UEVFoundationTextures.ps1` | Writes the shared UEV textures (UEV-F1): 32 items and three casings under `block/uev/`. `-Only <output or group>`, `-Credits`. |
+| `Build-UEVFoundationTextures.ps1` | Writes the shared UEV textures (UEV-F1): 31 items and three casings under `block/uev/`. `-Only <output or group>`, `-Credits`. |
 | `Build-UHVZblanTextures.ps1` | Writes the ZBLAN preform (UHV-A10, `item/zblan_preform.png`). The ZBLAN draw tower reuses UV's draw tower casing. `-Credits`. |
 | `Build-UVHeatSourcesTextures.ps1` | Writes the four item icons of UV's heat source works (UV-A2): probe RTG, americium micro source, curium RTG pellet, heavy curium oxide. `-Credits`. |
 | `Build-UVAcceleratorsTextures.ps1` | Writes the faces of UV's synchrotron, muon fusion cell and antimatter trap (UV-A5: `multiblock/synchrotron/`, `multiblock/muon_fusion_cell/`, `multiblock/antimatter_trap/`) and the 13 item icons of the LIGA, antiproton and muon fusion lines. `-Credits`. |
@@ -1186,7 +1186,7 @@ powershell -NoProfile -ExecutionPolicy Bypass -File tools\assets\Build-MegaWireW
 
 ## UEV foundation (UEV-F1)
 
-`Build-UEVFoundationTextures.ps1`: the UHV foundation script with a new palette. It writes the 32 shared UEV items (`item/<id>.png`) and three casings under `block/uev/` (`uev_fusion_casing`, `degenerate_containment_casing`, `photonic_casing`). The materials are GT materials and need no PNG; the HfTaCN coil block borrows GregTech's tritanium coil texture (S0-7).
+`Build-UEVFoundationTextures.ps1`: the UHV foundation script with a new palette. It writes the 31 shared UEV items (`item/<id>.png`) and three casings under `block/uev/` (`uev_fusion_casing`, `degenerate_containment_casing`, `photonic_casing`). The materials are GT materials and need no PNG; the HfTaCN coil block borrows GregTech's tritanium coil texture (S0-7).
 
 ```powershell
 powershell -NoProfile -ExecutionPolicy Bypass -File tools\assets\Build-UEVFoundationTextures.ps1

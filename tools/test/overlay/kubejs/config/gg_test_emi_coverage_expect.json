@@ -472,7 +472,6 @@
     {"id":"grindless:uev_fusion_casing","kind":"item","needUse":true,"needMade":true,"made":[],"used":[]},
     {"id":"grindless:uev_robot_arm","kind":"item","needUse":true,"needMade":true,"made":[],"used":[]},
     {"id":"grindless:uev_sensor","kind":"item","needUse":true,"needMade":true,"made":[],"used":[]},
-    {"id":"grindless:uev_smes_cell","kind":"item","needUse":true,"needMade":true,"made":[],"used":[]},
     {"id":"grindless:uhtc_nozzle","kind":"item","needUse":true,"needMade":true,"made":["gtceu:spark_plasma_sintering"],"used":["gtceu:thruster_assembly"]},
     {"id":"grindless:uhtc_tile","kind":"item","needUse":true,"needMade":true,"made":["gtceu:spark_plasma_sintering"],"used":["gtceu:solar_probe","gtceu:spark_plasma_sintering"]},
     {"id":"grindless:uhv_smes_cell","kind":"item","needUse":true,"needMade":true,"made":["emi:info","gtceu:naquadria_magnets"],"used":["emi:info"]},

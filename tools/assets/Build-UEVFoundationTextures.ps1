@@ -1,7 +1,7 @@
 <#
 .SYNOPSIS
   Procedural 16x16 pixel art for the foundations of the UEV era of Gregtech Grindless (package UEV-F1, shared registrations):
-  32 items and three block textures (GregTech style: top-left light, 3-4 tones per material, selective outlines).
+  31 items and three block textures (GregTech style: top-left light, 3-4 tones per material, selective outlines).
 
 .DESCRIPTION
   Every pixel is drawn by this script (the shape routines of the UHV foundation script with a new palette per item); nothing is copied
@@ -10,7 +10,7 @@
   colour), and the HfTaCN coil block borrows GregTech's tritanium coil texture, the one S0-7 proved.
 
   Writes (under pack/kubejs/assets/grindless/textures/):
-      item/<name>.png for the 32 items that startup_scripts/grindless/uev/foundation.js registers (see $Items below).
+      item/<name>.png for the 31 items that startup_scripts/grindless/uev/foundation.js registers (see $Items below).
       block/uev/uev_fusion_casing.png               dark tungsten tiles with a hot orange seam; seamless.
       block/uev/degenerate_containment_casing.png   violet-black shell with a bright core ring; seamless.
       block/uev/photonic_casing.png                 white cleanroom panels with a cyan light strip; seamless.
@@ -85,7 +85,6 @@ $Items = [ordered]@{
     faraday_isolator              = @('cartridge', '4A5A4A', '9AE8A0')
     bonded_fe16n2_magnet          = @('capsule', '4A4E5A', 'E85A5A')
     barnard_core_rock             = @('heap', '7A4A3A', 'E8A878')
-    uev_smes_cell                 = @('cartridge', '2E3A5A', '7AF0FF')
 }
 $Blocks = @('uev_fusion_casing', 'degenerate_containment_casing', 'photonic_casing')
 

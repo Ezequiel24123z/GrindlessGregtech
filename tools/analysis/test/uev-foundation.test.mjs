@@ -19,7 +19,6 @@ const ITEMS = [
   'degenerate_eos_model', 'barnard_gravity_survey', 'quantum_repeater_node', 'pulsar_navigation_chart', 'mass_radius_chart',
   'degenerate_matter', 'degenerate_pellet', 'sx_blade', 'sic_sic_plate', 'wf_w_tile', 'snspd', 'qd_source', 'sdd',
   'lobster_eye_mcp', 'aerogel_tile', 'hollow_core_fibre', 'faraday_isolator', 'bonded_fe16n2_magnet', 'barnard_core_rock',
-  'uev_smes_cell',
 ].map((n) => 'grindless:' + n);
 const PLAIN_BLOCKS = ['uev_fusion_casing', 'degenerate_containment_casing', 'photonic_casing'].map((n) => 'grindless:' + n);
 const COIL = 'grindless:hftacn_coil_block';
@@ -61,7 +60,7 @@ test('the stand-in runs the UEV foundation without errors', () => {
 });
 
 test('the id list is pinned: count and every id', () => {
-  assert.equal(ITEMS.length, 32);
+  assert.equal(ITEMS.length, 31);
   assert.equal(PLAIN_BLOCKS.length + 1, 4);
   assert.equal(Object.keys(MATERIALS).length, 25);
   const got = run.global.grindless.uevFoundation;
