@@ -1,0 +1,30 @@
+{
+  "_source": "Our own table: the two lines of the MV Polymer Works, gtceu:polymer_works (docs/eras/mega.md 4.4). Each line is composed from GTM's live recipes by server_scripts/grindless/lib/compose.js: the recipe takes and gives what the whole line takes and gives, with the energy of every stage summed (rule 7) and spent at maxEUt (MV, 128 EU/t).",
+  "_how_it_is_used": [
+    "Read by server_scripts/grindless/mv/mega_polymer_works.js at every server load. Each entry becomes one gtceu:polymer_works recipe, id grindless:polymer_works/<name>. `stages` are GTM recipe ids read from the loaded pack, `given` is the batch (keys 'i:<item>' or 'f:<fluid>'), `linked` are the intermediates that net to zero; given + linked must equal the number of stages.",
+    "Polyethylene: ethanol + sulfuric acid -> ethylene (the diluted sulfuric acid is the byproduct and leaves through the output hatch), ethylene + oxygen -> polyethylene, polyethylene -> plate in the fluid solidifier. 1152 mB of ethanol is exactly 12 plates (1152 mB ethylene = 8 runs of 144 mB = 1728 mB polyethylene = 12 x 144 mB). The plate mold of the solidifier is a catalyst that is never used up and is not part of the recipe.",
+    "Rubber: raw rubber + sulfur -> rubber, rubber -> plate in the fluid solidifier. 9 raw rubber dust is one run of the vulcanisation (1296 mB) and exactly 9 plates."
+  ],
+  "maxEUt": 128,
+  "composed": [
+    {
+      "name": "polyethylene_plate",
+      "stages": [
+        "gtceu:chemical_reactor/ethylene_from_ethanol",
+        "gtceu:chemical_reactor/polyethylene_from_oxygen",
+        "gtceu:fluid_solidifier/solidify_polyethylene_to_plate"
+      ],
+      "given": { "f:gtceu:ethanol": 1152 },
+      "linked": ["f:gtceu:ethylene", "f:gtceu:polyethylene"]
+    },
+    {
+      "name": "rubber_plate",
+      "stages": [
+        "gtceu:chemical_reactor/rubber",
+        "gtceu:fluid_solidifier/solidify_rubber_to_plate"
+      ],
+      "given": { "i:gtceu:raw_rubber_dust": 9 },
+      "linked": ["f:gtceu:rubber"]
+    }
+  ]
+}
