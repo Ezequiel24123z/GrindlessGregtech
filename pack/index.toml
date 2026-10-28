@@ -14,23 +14,23 @@ hash = "bdc77acda90cb38472bc6c2559b7e647439b49af77a7c67b8c601eaa8448aa8e"
 
 [[files]]
 file = "config/ftbquests/quests/chapters/ev_age.snbt"
-hash = "1a2b7a44c3422cbd08876867b6ef4dd6e401749990170f797f270b37206fad54"
+hash = "a4b936e4dc2d7f48b5dbee34ecfcb765cbe7cc3971ac37a22684e5fd21dec83d"
 
 [[files]]
 file = "config/ftbquests/quests/chapters/hv_age.snbt"
-hash = "091fa80b05cf76e1c84922ccc52b8a5fd46c5c644e9e95659481ba6f169bb5c2"
+hash = "c52b68a161e82a366714a1afebccc0241dee0da5a325ffd6d05e86476f493819"
 
 [[files]]
 file = "config/ftbquests/quests/chapters/iv_age.snbt"
-hash = "dce0225dd68761818b94972909be4ce0d019b07c83c68f3a4c0fa7a51e0d3bd1"
+hash = "9ff4af6df46c5b44952cf9603ab25d118ec4dc7c74ef27691bc916df3ddb6f31"
 
 [[files]]
 file = "config/ftbquests/quests/chapters/luv_age.snbt"
-hash = "ce6a5ed708af7ef69a468b0afdb3a9e86816b080778f699b5c9499858e190e82"
+hash = "e2945863796c13797edbf847dd7dff1b074cc8a12114ca0b7f3e218fd519c11a"
 
 [[files]]
 file = "config/ftbquests/quests/chapters/lv_age.snbt"
-hash = "5f22a74d9b40045bbe17eaf500f156a7aa7ff0eba726ae808cf66fdb19893783"
+hash = "4316279bd5d50156936d2635bbbe2063e65b4b8f58b754ed918ad2de046320e5"
 
 [[files]]
 file = "config/ftbquests/quests/chapters/multiblocks.snbt"
@@ -38,7 +38,7 @@ hash = "8d64e2e2ec3a157e1c0c5ea3d87c43dfdadb3f894c1d0ef63c5349d3b10c49d8"
 
 [[files]]
 file = "config/ftbquests/quests/chapters/mv_age.snbt"
-hash = "3b9f0bb77ca9ed9014216ffe28ad29738eae518644199b6748fb61ab482d0184"
+hash = "569976697675d7db44ba22e958f016fd15a4a8a2e4d329430734247b6a758513"
 
 [[files]]
 file = "config/ftbquests/quests/chapters/pl_ev.snbt"
@@ -102,11 +102,11 @@ hash = "0ee7b8c399b8327c36dce2359cccec2ddf82c7a4a52058049d618c4e9cbe19dc"
 
 [[files]]
 file = "config/ftbquests/quests/chapters/uhv_age.snbt"
-hash = "63654bb0c77b86ac0ce79db7d78d1e9ea4ac3fa7ee0f09360a2ddb944a85ed11"
+hash = "6152c1b83df41be25acb8bb24fda67f2f67a4871afa735c28b08d2d81461b5c9"
 
 [[files]]
 file = "config/ftbquests/quests/chapters/uv_age.snbt"
-hash = "7c7a7e88fa43ef15674fdf862f8c2bb96510fd76bfd6238ec9bf26a9a18d05f3"
+hash = "8fb49ee3b95d0338727ac78f9e59ec7d292b7bdae92e82884071851deae2b6dd"
 
 [[files]]
 file = "config/ftbquests/quests/chapters/welcome.snbt"
@@ -118,7 +118,7 @@ hash = "14a33e2267c5a5a450319228aa7e6dcd86681978f89c95769bd90e90628c28d6"
 
 [[files]]
 file = "config/ftbquests/quests/chapters/zpm_age.snbt"
-hash = "2d663f5c2a106eac7e5205b6c235a45a6a2a87bae5357548896d48f4da46774f"
+hash = "069fd21c82c9aa56afe73771bf2737e6667f5b696a15cf5ebb297587b8dcca09"
 
 [[files]]
 file = "config/ftbquests/quests/data.snbt"
