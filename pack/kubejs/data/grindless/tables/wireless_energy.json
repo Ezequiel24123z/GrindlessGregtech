@@ -43,6 +43,9 @@
       "emitter": "gtceu:uv_emitter", "sensor": "gtceu:uv_sensor", "signalParts": 2, "link": "grindless:nuclear_clock", "plate": "gtceu:neutronium_plate", "frame": null, "wire": "ruthenium_trinium_americium_neutronate" },
     { "tier": 10, "name": "uev", "cell": "grindless:uev_smes_cell", "capacity": 251658240000, "referenceBattery": "gtceu:uv_naquadria_battery", "referenceCount": 96, "batteries": null,
       "cellMadeBy": "gtceu:naquadria_magnet_works", "texture": "grindless:block/wireless/smes_cell_uev",
-      "emitter": "grindless:uev_emitter", "sensor": "grindless:uev_sensor", "signalParts": 1, "link": "grindless:quantum_repeater_node", "plate": "gtceu:lay_superhydride_plate", "frame": null, "wire": "lay_superhydride" }
+      "emitter": "grindless:uev_emitter", "sensor": "grindless:uev_sensor", "signalParts": 1, "link": "grindless:quantum_repeater_node", "plate": "gtceu:lay_superhydride_plate", "frame": null, "wire": "lay_superhydride" },
+    { "tier": 11, "name": "uiv", "cell": "grindless:uiv_smes_cell", "capacity": 1006632960000, "referenceBattery": "gtceu:uv_naquadria_battery", "referenceCount": 384, "batteries": null,
+      "cellMadeBy": "gtceu:nitride_magnet_works", "texture": "grindless:block/wireless/smes_cell_uiv",
+      "emitter": "grindless:uiv_emitter", "sensor": "grindless:uiv_sensor", "signalParts": 1, "link": "grindless:pulsar_timed_repeater", "plate": "gtceu:rhea_plate", "frame": null, "wire": "metallic_hydrogen" }
   ]
 }
