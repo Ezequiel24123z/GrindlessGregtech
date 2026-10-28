@@ -23,7 +23,7 @@ const ORBITS = JSON.parse(read('data/grindless/tables/orbits.json'));
 const row = (name) => Z.recipes.find((r) => r.name === name);
 const side = (name) => Z.side.find((r) => r.name === name);
 const dump = (id) => recipes.find((r) => r.i === id);
-// GTM's builder puts the type in front of the path: grindless:zblan_draw/glass is dumped as grindless:zblan_draw/zblan_draw/glass
+// GTM's builder puts the type in front of the path: the id passed is grindless:glass, dumped as grindless:zblan_draw/glass
 const idOf = (r) => `grindless:${r.type}/${r.recipeId.split(':')[1]}`;
 const circuitOf = (r) => r.j.inputs.item.filter((i) => i.content.type === 'gtceu:circuit').map((i) => i.content.configuration);
 const dimsOf = (r) => (r.j.recipeConditions || []).filter((c) => c.type === 'dimension');

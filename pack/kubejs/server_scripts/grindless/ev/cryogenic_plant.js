@@ -121,7 +121,7 @@
       console.error(LOG + 'cryogenic plant Triton nitric oxide row skipped, unknown fluid(s): ' + missing.join(', '))
       return
     }
-    event.recipes.gtceu.cryogenic_processing(TRITON_NO.id)
+    event.recipes.gtceu.cryogenic_processing('grindless:triton_nitric_oxide')
       .inputFluids(Fluid.of('gtceu:triton_nitric_oxide', 2000))
       .outputFluids(Fluid.of('gtceu:nitrogen_15_oxide', 1000), Fluid.of('gtceu:nitric_oxide', 1000))
       .dimension(DIMENSION)

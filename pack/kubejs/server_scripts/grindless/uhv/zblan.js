@@ -78,7 +78,7 @@
     }
   }
   Z.site = ORBIT
-  Z.recipes = TABLE.map(function (t) { return publish(t, 'grindless:' + t.type + '/' + t.name) })
+  Z.recipes = TABLE.map(function (t) { return publish(t, 'grindless:' + t.name) })
   Z.side = SIDE.map(function (t) { return publish(t, 'grindless:' + t.name) })
   Z.skipped = []
   Z.clashes = []
