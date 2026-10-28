@@ -154,32 +154,30 @@
     var shapes = array(def.getMatchingShapes())
     if (shapes.length === 0) throw new Error('no preview shape for ' + GCYM)
     var grid = shapes[0].getBlocks()
+    var cells = []
     var ctl = null
     var hatches = 0
     var placed = 0
-    for (var x = 0; x < grid.length; x++) for (var y = 0; y < grid[x].length; y++) for (var z = 0; z < grid[x][y].length; z++) {
-      var info = grid[x][y][z]
-      if (!info) continue
-      var state = info.getBlockState()
-      var s = String(state)
-      if (/air/.test(s) && s.indexOf('gtceu') < 0) continue
-      if (state.getBlock() === def.getBlock()) ctl = { x: x, y: y, z: z }
+    var i, j, k
+    for (i = 0; i < grid.length; i++) {
+      for (j = 0; j < grid[i].length; j++) {
+        for (k = 0; k < grid[i][j].length; k++) {
+          if (grid[i][j][k]) cells.push({ x: i, y: j, z: k, state: grid[i][j][k].getBlockState() })
+        }
+      }
     }
+    cells.forEach(function (c) { if (c.state.getBlock() === def.getBlock()) ctl = c })
     if (ctl === null) throw new Error('no controller in the preview shape')
-    for (x = 0; x < grid.length; x++) for (y = 0; y < grid[x].length; y++) for (z = 0; z < grid[x][y].length; z++) {
-      info = grid[x][y][z]
-      if (!info) continue
-      state = info.getBlockState()
-      s = String(state)
-      if (/Block\{minecraft:air\}/.test(s)) continue
+    cells.forEach(function (c) {
+      var s = String(c.state)
+      if (/Block\{minecraft:air\}/.test(s)) return
       var m = /Block\{([^}]+)\}(\[.*\])?/.exec(s)
-      if (!m) continue
+      if (!m) return
       var id = m[1]
-      var props = m[2] || ''
       if (/parallel_hatch/.test(id)) { hatches++; id = 'gtceu:uiv_parallel_hatch' }
-      put(ox + x - ctl.x, oy + y - ctl.y, oz + z - ctl.z, id + props)
+      put(ox + c.x - ctl.x, oy + c.y - ctl.y, oz + c.z - ctl.z, id + (m[2] || ''))
       placed++
-    }
+    })
     return { pos: pos(ox, oy, oz), placed: placed, hatches: hatches }
   }
 
