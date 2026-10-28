@@ -110,6 +110,7 @@
         { "id": "mega_spikes", "x": [29952, 30015], "y": [98, 115], "tests": ["mega_spikes"], "note": "MEGA-S: throwaway spike machines (gg_spike_*); Y to 115 because the mega EBF is 17 high" },
         { "id": "mega_lib", "x": [30208, 30271], "y": [98, 115], "tests": ["mega_lib"], "note": "MEGA-0: throwaway coil machines (gg_lib_*) using global.grindless.mega.chain, and the UHV parallel hatch forming in a plant" },
         { "id": "uev_s0", "x": [30464, 30527], "z": [0, 63], "y": [60, 120], "tests": ["uev_s0_dump", "uev_s0_machines", "uev_s0_stations"], "note": "UEV-S0: throwaway spikes (gg_uev_s0_*); machines are built in the Overworld at Y 70-100; the flights use grindless:s0_* orbit dimensions at the same X/Z" },
-        { "id": "mega_wire_works", "x": [30720, 30783], "y": [98, 115], "tests": ["mega_wire_works"], "note": "MEGA-1: the LV Wire Works (gtceu:wire_works) forms, runs a wiremill and a bender recipe in its two modes, parallels at an LV and an MV hatch" }
+        { "id": "mega_wire_works", "x": [30720, 30783], "y": [98, 115], "tests": ["mega_wire_works"], "note": "MEGA-1: the LV Wire Works (gtceu:wire_works) forms, runs a wiremill and a bender recipe in its two modes, parallels at an LV and an MV hatch" },
+        { "id": "mega_polymer_works", "x": [30976, 31039], "y": [98, 115], "tests": ["mega_polymer_works"], "note": "MEGA-2: the MV Polymer Works (gtceu:polymer_works) forms, its two composed recipes equal the sum of their live stages, parallels at an MV hatch" }
       ]
 }
