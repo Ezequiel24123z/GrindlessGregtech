@@ -36,7 +36,10 @@ function mercuryFusion() {
 const A1 = a1Items();
 // ZPM-A2's mode 4 (enriched solution) output: a GTM material dust, resolved natively in gg_test_zpm_naquadria (no skipped ids)
 const ZPM_A2 = ['gtceu:enriched_naquadah_dust'];
-const ITEMS = new Set([...IDS.items, ...A1, ...ZPM_A2]);
+// UEV-A4's platinum plant rows (circuits 7 and 8): its two residues (startup_scripts/grindless/uev/electron_beam.js) and GTM's
+// ruthenium dust, already in the plant's ITEM_ORDER
+const UEV_A4 = ['grindless:sx_dross', 'grindless:eb_skull', 'gtceu:ruthenium_dust'];
+const ITEMS = new Set([...IDS.items, ...A1, ...ZPM_A2, ...UEV_A4]);
 const FLUIDS = new Set(IDS.fluids);
 
 function strictRun(scripts, startup, recipes, before) {

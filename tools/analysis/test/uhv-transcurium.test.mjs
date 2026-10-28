@@ -119,7 +119,8 @@ test('the uranium-233 driver loop closes: fuel plant c7 -> driver -> reactor -> 
   assert.ok(!TH.types.pyroprocessing.recipes.some((r) => r.circuit === 5 || r.name === 'hfir_driver'), 'pyroprocessing circuit 5 is free');
   assert.ok(ids(pyro.itemsIn).includes('grindless:spent_hfir_driver_element') && ids(pyro.itemsOut).includes('gtceu:uranium_233_ingot'));
   // the spent drivers are made only by the reactor and used only by the cell
-  assert.deepEqual(producers('grindless:spent_hfir_driver_element').map(([, r]) => r.name).sort(), ['nickel_target', 'transcurium_target']);
+  // UEV-A1's Pu-242 target (tables/isotopes_facility.json) is driven in the same reactor
+  assert.deepEqual(producers('grindless:spent_hfir_driver_element').map(([, r]) => r.name).sort(), ['nickel_target', 'plutonium_target', 'transcurium_target']);
   for (const src of ['uv/thorium.js', 'iv/uranium_cycle.js']) {
     const s = fs.readFileSync(path.join(kube, 'server_scripts', 'grindless', ...src.split('/')), 'utf8');
     assert.ok(s.includes(src.startsWith('uv') ? 'transcurium_pyroprocessing.json' : 'transcurium_fabrication.json'), src);
