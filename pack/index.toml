@@ -5794,7 +5794,7 @@ hash = "1f4b256531a0b42a6ecf399e9b692d9e4730bd4102e53aab3e1fa2c999b69e9d"
 
 [[files]]
 file = "kubejs/data/grindless/tables/hidden_until.json"
-hash = "49acc6006fc0e54fce1b26ecd7a5731a38738fd4e1e9e4410717569fd93866db"
+hash = "979f42916d7af71756eda2597c6138adae7fa61fe75ceb3cf0a6f21efb4977fc"
 
 [[files]]
 file = "kubejs/data/grindless/tables/horizon_collector.json"
@@ -6014,7 +6014,7 @@ hash = "be963db4b6b93b19084a4feb6f711497b6d53ceffad846192be2171f650cc50e"
 
 [[files]]
 file = "kubejs/server_scripts/grindless/ev/cryogenic_plant.js"
-hash = "d7832bf8e1ce37e02deca365193976423a0938d8b91d75d48445ddc7e164b4dc"
+hash = "035d153da739cb1402d83ac007e19032a328721daffc7fcf8fcac6758ac7a7e1"
 
 [[files]]
 file = "kubejs/server_scripts/grindless/ev/extraction_cascade.js"
@@ -6138,7 +6138,7 @@ hash = "b107386cb085933ee476734075299560857c078a56c4e938ebf0cd7a7dc10a84"
 
 [[files]]
 file = "kubejs/server_scripts/grindless/integration/hidden.js"
-hash = "047bd7a63c1bbadd0f60424052de80976f0ae55085efd57455603ff3f8eab47f"
+hash = "0a09cb5529b307cac48b9b1337fa5d710433ca6efd5139f999f90103824406c7"
 
 [[files]]
 file = "kubejs/server_scripts/grindless/integration/ironfurnaces.js"
@@ -6534,7 +6534,7 @@ hash = "31950863e04702e815a241706a36e0fd68c4ed99d024b0a6234defc281895c38"
 
 [[files]]
 file = "kubejs/server_scripts/grindless/uhv/zblan.js"
-hash = "f1954d3c214ba8b8a0909eb06c16dc9686a0dc428e98aff33abc86d3a1e70c4e"
+hash = "b4089d56aa06f5cb11bac11cff9cbf93f15d15675d341247ce547d6163b2b7ca"
 
 [[files]]
 file = "kubejs/server_scripts/grindless/uv/accelerators.js"
@@ -6578,7 +6578,7 @@ hash = "71db6df8fc1898aba490078f2322e808811f014389feca4d9b7a95522ece3bf6"
 
 [[files]]
 file = "kubejs/server_scripts/grindless/uv/photonics.js"
-hash = "d0fe21d9491b9fa5830b50dd2df801c5abb00a54af781a4529909d42d50927ae"
+hash = "24e13e325048ae70115fbf41c97f47377071cf4d18d9bd06f66808fd17edc3a1"
 
 [[files]]
 file = "kubejs/server_scripts/grindless/uv/pluto_ices.js"
