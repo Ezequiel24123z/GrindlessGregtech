@@ -11,7 +11,7 @@
   var MACHINES = ['gtceu:matrioshka_computer', 'gtceu:droplet_radiator_works']
   var RECIPES = ['research_write', 'ns_eos_chart', 'kerr_chart', 'radiator_module', 'tpv_tile', 'sic_coat_lattice', 'droplet_wick',
     'droplet_collector', 'c12_polish', 'c12_metallise', 'matrioshka_node', 'tpv_dicing', 'tpv_segment', 'matrioshka_tpv_shell', 'aqfp_die',
-    'aqfp_bond', 'matrioshka_logic_tile', 'schottky_die', 'rad_hard_controller', 'w_sputter', 'hfo2_passivate', 'selective_emitter', 'emitter_shell',
+    'aqfp_bond', 'logic_tile_block', 'schottky_die', 'rad_hard_controller', 'w_sputter', 'hfo2_passivate', 'selective_emitter', 'emitter_shell',
     'ingaasb_dust', 'stibine', 'stibine_scrub']
   var ORBIT = ['research_write', 'ns_eos_chart', 'kerr_chart', 'radiator_module', 'tpv_tile']
 
@@ -33,16 +33,36 @@
     if (!ok) S.failed++
     console.info('GGTEST|' + NAME + '|' + name + '|' + (ok ? 'PASS' : 'FAIL') + '|' + clean(detail))
   }
+  // GTM prefixes the recipe type to the id: ours are indexed by full path and by last segment.
+  var index = null
   function recipe(id) {
-    var o = S.server.getRecipeManager().byKey(new (classes().RL)('grindless', id))
-    return o.isPresent() ? o.get() : null
+    if (index === null) {
+      index = {}
+      var it = S.server.getRecipeManager().getRecipes().iterator()
+      while (it.hasNext()) {
+        var r = it.next()
+        var rid = r.getId()
+        if (String(rid.getNamespace()) !== 'grindless') continue
+        var p = String(rid.getPath())
+        index[p] = r
+        var last = p.substring(p.lastIndexOf('/') + 1)
+        if (!index[last]) index[last] = r
+      }
+    }
+    return index[id] || null
+  }
+
+  function condText(r) {
+    var s = ''
+    r.conditions.forEach(function (c) { s += String(c.serialize()) })
+    return s
   }
 
   function run() {
     var missing = []
     MACHINES.forEach(function (m) {
       var rl = new (classes().RL)(m)
-      if (!classes().Regs.MACHINES.containsKey(rl)) missing.push(m)
+      if (!classes().Regs.MACHINES.get(rl)) missing.push(m)
     })
     check('machines', missing.length === 0, 'missing ' + missing.join(','))
     var absent = []
@@ -53,7 +73,7 @@
     var bad = []
     ORBIT.forEach(function (n) {
       var r = recipe(n)
-      if (r === null || String(r.conditions).indexOf('mercury_orbit') < 0) bad.push(n)
+      if (r === null || condText(r).indexOf('mercury_orbit') < 0) bad.push(n)
     })
     check('orbit_condition', bad.length === 0, 'without the mercury_orbit condition: ' + bad.join(','))
     var w = recipe('research_write')
