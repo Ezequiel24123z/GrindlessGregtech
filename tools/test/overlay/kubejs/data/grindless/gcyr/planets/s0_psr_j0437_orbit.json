@@ -1,0 +1,15 @@
+{
+  "translation": "level.grindless.s0_psr_j0437_orbit",
+  "galaxy": "gcyr:milky_way",
+  "solar_system": "grindless:s0_psr_j0437",
+  "world": "grindless:s0_psr_j0437_orbit",
+  "orbit_world": "grindless:s0_psr_j0437_orbit",
+  "rocket_tier": 11,
+  "gravity": 0.0,
+  "has_atmosphere": false,
+  "days_in_year": 1,
+  "temperature": 3000000,
+  "solar_power": 80,
+  "has_oxygen": false,
+  "button_color": 10526975
+}
