@@ -58,7 +58,7 @@ test('the UHV row: tier 9, 24 UV naquadria batteries (62,914,560,000 EU), UV par
   const rows = WIRELESS.tiers.filter((r) => r.name === 'uhv');
   assert.equal(rows.length, 1);
   const uhv = rows[0];
-  assert.equal(WIRELESS.tiers[WIRELESS.tiers.length - 1], uhv, 'the last row');
+  assert.equal(WIRELESS.tiers.indexOf(uhv), UHV - 1, 'the ninth row (UEV-W adds the tenth)');
   assert.deepEqual([uhv.tier, uhv.cell, uhv.capacity, uhv.referenceBattery, uhv.referenceCount],
     [UHV, CELL, CELL_EU, 'gtceu:uv_naquadria_battery', 24]);
   assert.equal(uhv.capacity, uhv.referenceCount * UV_NAQUADRIA_EU);
