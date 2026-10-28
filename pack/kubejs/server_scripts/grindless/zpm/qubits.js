@@ -110,6 +110,15 @@
     }
   ]
 
+  // UEV-A3: a plate spalled to nanodiamond grit under hydrogen, the feed of the megabar line (data/grindless/tables/megabar.json)
+  TABLE.push({
+    name: 'nanodiamond', type: 'diamond_cvd', circuit: 5,
+    itemsIn: [{ id: PLATE, count: 1 }], notConsumedItems: [],
+    fluidsIn: [{ id: 'gtceu:hydrogen', amount: 2000 }],
+    itemsOut: [{ id: 'grindless:nanodiamond_dust', count: 4 }], fluidsOut: [{ id: 'gtceu:hydrogen', amount: 1500 }],
+    eut: ZPM_VA, duration: 400
+  })
+
   Q.recipes = TABLE.map(function (t) {
     return {
       name: t.name, type: t.type, recipeId: 'grindless:' + t.type + '/' + t.name, circuit: t.circuit,
