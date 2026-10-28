@@ -2473,6 +2473,18 @@ file = "kubejs/assets/grindless/textures/block/multiblock/plume_sampler/overlay_
 hash = "5f2af91c12b65da62d8d7c37143b5db1b278a0d1c5237d63f52abca637164eab"
 
 [[files]]
+file = "kubejs/assets/grindless/textures/block/multiblock/polymer_works/overlay_front.png"
+hash = "38a7dabca06ff1799865cdd63b85faf01074787a614fc5da518777bb66c29cb2"
+
+[[files]]
+file = "kubejs/assets/grindless/textures/block/multiblock/polymer_works/overlay_front_active.png"
+hash = "267a9292083b2954673a8e628f2815ff00e91b838e0b441e8355c7805c2acae9"
+
+[[files]]
+file = "kubejs/assets/grindless/textures/block/multiblock/polymer_works/overlay_front_active_emissive.png"
+hash = "ed093910c19c9e121e0135255dafb733e7e08c1053e7d3a24f7512b42a6f0062"
+
+[[files]]
 file = "kubejs/assets/grindless/textures/block/multiblock/positron_accumulator/overlay_front.png"
 hash = "d8bdc4d8ddab8e67980fb59d1f09d2d0720bfe1ef3d3078e34b3fdb376bb83e4"
 
@@ -5497,6 +5509,10 @@ file = "kubejs/client_scripts/grindless/mv_leisure_utility_lang.js"
 hash = "5032c11667fa39240627fd1327b8332fd8caa577336fe962df565b90a71056eb"
 
 [[files]]
+file = "kubejs/client_scripts/grindless/mv_mega_polymer_works_lang.js"
+hash = "f94b6caea13ef4932280fde5aca63d239202d12f30828c066aaf3fb217f73cec"
+
+[[files]]
 file = "kubejs/client_scripts/grindless/mv_plant_lang.js"
 hash = "a1dccd2b90cfba94ac2104db2284236d1fb53906cd5707e401ff3c0deb5d430a"
 
@@ -5999,6 +6015,10 @@ hash = "5c9f199e89bb1b70e826db6db037575fdd7d8fd1680adccb9f4a6e449927d950"
 [[files]]
 file = "kubejs/data/grindless/tables/magnet_works.json"
 hash = "1e1a1d14ca683dc54a2262e40832520e6b8a4d3dccb7b3fb7f8955064d16bf16"
+
+[[files]]
+file = "kubejs/data/grindless/tables/mega_polymer_works.json"
+hash = "3676f7ffbe77b2f2e215804a1b1b96feaffd79f17889885bc37946bca963dfbb"
 
 [[files]]
 file = "kubejs/data/grindless/tables/mobs.json"
@@ -6581,6 +6601,10 @@ file = "kubejs/server_scripts/grindless/mv/leisure_utility.js"
 hash = "7752b0660cc2b1e3469bbb9bdbf2b8578ddae742319341c04d4f9beb2878d026"
 
 [[files]]
+file = "kubejs/server_scripts/grindless/mv/mega_polymer_works.js"
+hash = "813cd73d229024aae2b4cd6f003d60ffd760d7a0a86d96dfaa5b791bf54c68e0"
+
+[[files]]
 file = "kubejs/server_scripts/grindless/mv/ore_plant.js"
 hash = "b4854ab947234c5050bc06e1a0266a27129f522e5d159d8d57813ef823706702"
 
@@ -7147,6 +7171,10 @@ hash = "6eff3353b0481311f3bf270bc9bab67a2541e2180a2dfba21594ecc3f140acec"
 [[files]]
 file = "kubejs/startup_scripts/grindless/mv/leisure_utility.js"
 hash = "bbb8fd730a6d293e5769d0ca69a78c2e2eace99c2b66b59e8de86682b58fe488"
+
+[[files]]
+file = "kubejs/startup_scripts/grindless/mv/mega_polymer_works.js"
+hash = "274b0278e941cf9e4695e483d4ac65fc063378e993e98a96299776debe8e3cda"
 
 [[files]]
 file = "kubejs/startup_scripts/grindless/mv/ore_plant.js"

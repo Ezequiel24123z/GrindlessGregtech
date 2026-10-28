@@ -1,3 +1,4 @@
+// priority: -21074
 // -----------------------------------------------------------------------------------------------
 // Recipes of the MV Polymer Works (machine and recipe type: startup_scripts/grindless/mv/mega_polymer_works.js; docs/eras/mega.md 4.4;
 // package MEGA-2), generated at every server load from data/grindless/tables/mega_polymer_works.json, and the recipe that makes the

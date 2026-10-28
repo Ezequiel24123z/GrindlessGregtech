@@ -703,6 +703,7 @@
     {"id":"gtceu:plasma_quench_caster","kind":"item","needUse":false,"needMade":true,"made":["gtceu:multiblock_info","minecraft:crafting"],"used":[]},
     {"id":"gtceu:platinum_plant","kind":"item","needUse":false,"needMade":true,"made":["gtceu:assembler","gtceu:multiblock_info"],"used":[]},
     {"id":"gtceu:plume_sampler","kind":"item","needUse":false,"needMade":true,"made":["gtceu:multiblock_info","minecraft:crafting"],"used":[]},
+    {"id":"gtceu:polymer_works","kind":"item","needUse":false,"needMade":true,"made":["gtceu:assembler","gtceu:multiblock_info"],"used":[]},
     {"id":"gtceu:positron_accumulator","kind":"item","needUse":false,"needMade":true,"made":["gtceu:multiblock_info","minecraft:crafting"],"used":[]},
     {"id":"gtceu:powder_bed_printer","kind":"item","needUse":false,"needMade":true,"made":["gtceu:multiblock_info","minecraft:crafting"],"used":[]},
     {"id":"gtceu:powder_in_tube_line","kind":"item","needUse":false,"needMade":true,"made":["gtceu:multiblock_info","minecraft:crafting"],"used":[]},

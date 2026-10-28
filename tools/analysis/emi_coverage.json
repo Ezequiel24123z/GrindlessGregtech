@@ -54,7 +54,8 @@
     { "type": "gtceu:sterile_culture", "source": "server_scripts/grindless/luv/biofoundry.js composes the biofoundry's steps 1-8 from GTM's live sterile chain (its seeds, steps 9-10, are its own)" },
     { "type": "gtceu:bio_distillation", "source": "server_scripts/grindless/mv/biorefinery.js rebuilds GTM's distillation tower recipes of organic fluids" },
     { "type": "gtceu:ore_processing", "source": "server_scripts/grindless/mv/ore_plant.js composes GTM's ore chain of every ore into one recipe" },
-    { "type": "gtceu:closed_loop_cooling", "source": "server_scripts/grindless/luv/helium_refrigerator.js makes one run per live vacuum freezer recipe that takes liquid helium" }
+    { "type": "gtceu:closed_loop_cooling", "source": "server_scripts/grindless/luv/helium_refrigerator.js makes one run per live vacuum freezer recipe that takes liquid helium" },
+    { "type": "gtceu:polymer_works", "source": "server_scripts/grindless/mv/mega_polymer_works.js composes GTM's live polyethylene and rubber lines into one recipe each (tables/mega_polymer_works.json, lib/compose.js)" }
   ],
   "exceptions": [
   { "id": "grindless:itbtc_coated_conductor", "role": "use", "reason": "temporary (LuV-A3): its uses, the HTS coil and the SMES cell, are LuV-A4's magnet works; delete this exception when A4 merges" },
