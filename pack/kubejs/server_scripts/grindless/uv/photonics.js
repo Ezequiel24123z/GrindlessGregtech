@@ -156,6 +156,13 @@
       itemsOut: [item('grindless:li_cooling_laser', 1), item('grindless:k_cooling_laser', 1)], fluidsOut: [], eut: ZPM, duration: 400 }
   ]
 
+  // UIV-A4 (docs/eras/uiv.md, line 40): the silica storage preform of the 5D data crystal, drawn from SiCl4 and water; the HCl goes back to stock
+  var UIV_ROWS = [
+    { name: 'silica_storage_preform', type: 'fibre_draw', circuit: 9, itemsIn: [item('gtca:silicon_tetrachloride_dust', 5)],
+      fluidsIn: [fluid('minecraft:water', 2000)], itemsOut: [item('grindless:silica_storage_preform', 1)],
+      fluidsOut: [fluid('gtceu:hydrochloric_acid', 4000)], eut: 122880, duration: 600 }
+  ]
+
   // side steps on GTM's own machines
   var SIDE = [
     { name: 'arsine', type: 'chemical_reactor', circuit: null,
@@ -191,6 +198,7 @@
   P.uhvRows = UHV_ROWS.map(function (t) { return publish(t, 'grindless:' + t.name) })
   P.uevRows = UEV_ROWS.map(function (t) { return publish(t, 'grindless:' + t.type + '/' + t.name) })
   P.a8Rows = A8_ROWS.map(function (t) { return publish(t, 'grindless:' + t.name) })
+  P.uivRows = UIV_ROWS.map(function (t) { return publish(t, 'grindless:' + t.type + '/' + t.name) })
   P.skipped = []
   P.clashes = []
   P.crafting = {
@@ -255,10 +263,10 @@
   }
 
   function addMachines(event) {
-    P.clashes = clashesOf(P.recipes.concat(P.uhvRows, P.uevRows, P.a8Rows))
+    P.clashes = clashesOf(P.recipes.concat(P.uhvRows, P.uevRows, P.a8Rows, P.uivRows))
     if (P.clashes.length > 0) console.error(LOG + 'photonics recipes clash in the lookup: ' + P.clashes.join(', '))
-    P.recipes.concat(P.uhvRows, P.uevRows, P.a8Rows).forEach(function (r) { addRecipe(event, r) })
-    console.info(LOG + 'photonics recipes added: ' + (P.recipes.length + P.uhvRows.length + P.uevRows.length + P.a8Rows.length - P.skipped.length))
+    P.recipes.concat(P.uhvRows, P.uevRows, P.a8Rows, P.uivRows).forEach(function (r) { addRecipe(event, r) })
+    console.info(LOG + 'photonics recipes added: ' + (P.recipes.length + P.uhvRows.length + P.uevRows.length + P.a8Rows.length + P.uivRows.length - P.skipped.length))
   }
 
   function addSide(event) {
