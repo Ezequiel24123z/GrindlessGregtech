@@ -78,7 +78,7 @@
     var stationsOn = !!(global.grindless.stations && global.grindless.stations.enabled === true)
     check('tag_b', itemHidden('gcyr:keycard') === !stationsOn && fluidHidden('gtceu:plutonium_based_liquid_fuel') &&
       itemHidden('gcyr:drone_hangar'),
-      'GCYR keycard (hidden exactly while the stations are off; stations ' + (stationsOn ? 'on' : 'off') + '), GT--\'s plutonium fuel (UIV), GCYR's drone hangar (never) hidden: ' + itemHidden('gcyr:keycard') +
+      'GCYR keycard (hidden exactly while the stations are off; stations ' + (stationsOn ? 'on' : 'off') + '), GT--\'s plutonium fuel (UIV), GCYR\'s drone hangar (never) hidden: ' + itemHidden('gcyr:keycard') +
       ' / ' + fluidHidden('gtceu:plutonium_based_liquid_fuel') + ' / ' + itemHidden('gcyr:drone_hangar'))
     check('tag_c', itemHidden('gtceu:damascus_steel_ingot') && itemHidden('gtca:scrap') && fluidHidden('gtceu:molten_stainless_steel') &&
       itemHidden('gtceu:terbium_dust') && itemHidden('gtca:samarium_terbium_mixture_dust') && itemHidden('gtceu:raw_uranium_235'),
