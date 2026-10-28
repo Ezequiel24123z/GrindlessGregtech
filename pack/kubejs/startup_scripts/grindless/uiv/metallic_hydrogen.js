@@ -1,3 +1,4 @@
+// priority: -9187
 // -----------------------------------------------------------------------------------------------
 // UIV's ramp-compression pulser (docs/eras/uiv.md, machine 1, lines 1 to 4; package UIV-A2): the machine, its recipe type, the package's
 // own items and the three hydrogen fluids. The recipes come from data/grindless/tables/metallic_hydrogen.json

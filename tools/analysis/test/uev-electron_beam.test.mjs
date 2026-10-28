@@ -173,7 +173,8 @@ test('Zr goes to line 33 (YSZ) and Nb to line 38 (the Nb3Sn cavity)', () => {
 
 test('UV\'s circuits 1-4 on srf_cavity are untouched; the new row never duplicates an input set of UV\'s', () => {
   const cold = read(path.join(kube, 'server_scripts', 'grindless', 'uv', 'cold.js'));
-  assert.ok(/circuit: 4/.test(cold) && !/circuit: 5/.test(cold));
+  // UIV-A2 adds c5 (para_h2_target, the pulser's solid target): the only circuit-5 row, and nothing above it
+  assert.ok(/circuit: 4/.test(cold) && (cold.match(/circuit: 5/g) || []).length === 1 && /name: 'para_h2_target', type: 'srf_cavity', circuit: 5/.test(cold) && !/circuit: 6/.test(cold));
   assert.ok(!startup.includes("registry('gtceu:recipe_type'") || !startup.includes("create('srf_cavity')"));
 });
 

@@ -61,6 +61,7 @@ Generators for the pack's own textures. Everything is procedural 16x16 pixel art
 | `Build-UEVFoundationTextures.ps1` | Writes the shared UEV textures (UEV-F1): 31 items and three casings under `block/uev/`. `-Only <output or group>`, `-Credits`. |
 | `Build-UIVFoundationTextures.ps1` | Writes the shared UIV textures (UIV-F1): 34 items and two casings under `block/uiv/`. `-Only <output or group>`, `-Credits`. |
 | `Build-UIVIsotopesTextures.ps1` | Writes the four item icons of UIV's isotopes (UIV-A1): Cf-249 target wheel, Ni-58/Ti multilayer, neutron supermirror, neutron guide. `-Credits`. |
+| `Build-UIVMetallicHydrogenTextures.ps1` | Writes the ramp-compression pulser's controller face and the eight item icons of UIV's metallic hydrogen, lonsdaleite and cg-N lines (UIV-A2). `-Credits`. |
 | `Build-UHVZblanTextures.ps1` | Writes the ZBLAN preform (UHV-A10, `item/zblan_preform.png`). The ZBLAN draw tower reuses UV's draw tower casing. `-Credits`. |
 | `Build-UVHeatSourcesTextures.ps1` | Writes the four item icons of UV's heat source works (UV-A2): probe RTG, americium micro source, curium RTG pellet, heavy curium oxide. `-Credits`. |
 | `Build-UVAcceleratorsTextures.ps1` | Writes the faces of UV's synchrotron, muon fusion cell and antimatter trap (UV-A5: `multiblock/synchrotron/`, `multiblock/muon_fusion_cell/`, `multiblock/antimatter_trap/`) and the 13 item icons of the LIGA, antiproton and muon fusion lines. `-Credits`. |
@@ -1518,4 +1519,13 @@ Procedural, drawn by `Build-UIVIsotopesTextures.ps1`; nothing is copied from ano
 ```powershell
 powershell -NoProfile -ExecutionPolicy Bypass -File tools\assets\Build-UIVIsotopesTextures.ps1
 powershell -NoProfile -ExecutionPolicy Bypass -File tools\assets\Build-UIVIsotopesTextures.ps1 -Credits
+```
+
+## UIV metallic hydrogen (UIV-A2)
+
+Procedural, drawn by `Build-UIVMetallicHydrogenTextures.ps1`; nothing is copied from another mod. The ramp-compression pulser's controller face (`block/multiblock/ramp_compression_pulser/overlay_front*.png`: two copper pulse coils closing on a target that glows orange to white when working, 4 frames) and eight item icons: solid para-H2 target, pyrolytic graphite, leached lonsdaleite, lonsdaleite race, lonsdaleite bearing, DAC charge, laser-heated N2 charge, quenched cg-N (`item/<id>.png`).
+
+```powershell
+powershell -NoProfile -ExecutionPolicy Bypass -File tools\assets\Build-UIVMetallicHydrogenTextures.ps1
+powershell -NoProfile -ExecutionPolicy Bypass -File tools\assets\Build-UIVMetallicHydrogenTextures.ps1 -Credits
 ```
