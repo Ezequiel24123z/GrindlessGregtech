@@ -67,7 +67,7 @@ function serverHarness(liveIds) {
   const added = [], logs = { info: [], warn: [], error: [] }, shaped = [];
   const G = { readJsonTable: p => {
     // UEV-A7 adds the converter's three Mk4 rows, read from its own table
-    if (p === 'kubejs/data/grindless/tables/fusion_mk4.json') return JSON.parse(read('pack/' + p));
+    if (p === 'kubejs/data/grindless/tables/fusion_mk4.json' || p === 'kubejs/data/grindless/tables/fusion_mk5.json') return JSON.parse(read('pack/' + p)); // UIV-A9: the Mk5 converter table
     assert.equal(p, 'kubejs/data/grindless/tables/fusion_mk2.json'); return JSON.parse(read(TABLE));
   } };
   const live = liveIds.map(id => {
@@ -108,11 +108,11 @@ test('fusion.js adds our recipe, five caster recipes, two converter recipes and 
   assert.deepEqual(f[0].calls.fusionStartEU, [[200000000]]);
   const q = added.filter(a => a.type === 'plasma_quench');
   assert.deepEqual(q.map(a => a.id).sort(), ['grindless:darmstadtium_plate', 'grindless:duranium_foil', 'grindless:duranium_plate',
-    'grindless:tritanium_foil', 'grindless:tritanium_plate']);
+      'grindless:plasma_sprayed_tile', 'grindless:tritanium_foil', 'grindless:tritanium_plate']); // UIV-A9 adds plasma_sprayed_tile
   for (const a of q) assert.deepEqual(a.calls.EUt, [[30720]]);
   // UEV-A7 adds the three Mk4 rows (2-tick, at the converter's own EU/t)
   const d = added.filter(a => a.type === 'direct_conversion');
-  assert.deepEqual(d.map(a => a.calls.duration[0][0]), [80, 256, 2, 2, 2]);
+  assert.deepEqual(d.map(a => a.calls.duration[0][0]), [80, 256, 2, 2, 2, 2, 2, 2]); // UIV-A9 adds the three Mk5 rows
   for (const a of d.slice(0, 2)) assert.deepEqual(a.calls.EUt, [[-2560]]);
   assert.deepEqual(shaped.map(s => s[s.length - 1]).sort(), ['grindless:crafting/direct_energy_converter', 'grindless:crafting/plasma_quench_caster']);
   assert.deepEqual(Array.from(G.zpmFusion.unaudited), []);

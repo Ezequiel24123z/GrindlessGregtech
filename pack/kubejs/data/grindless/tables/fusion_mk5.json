@@ -1,0 +1,11 @@
+{
+  "_source": "docs/eras/uiv.md, machine 10 'Byproducts' and Power (package UIV-A9).",
+  "_how_it_is_used": "server_scripts/grindless/zpm/fusion.js (addMk5Converter) makes one gtceu:direct_conversion recipe per entry of 'converter.recipes' (id grindless:<name>), 1 mB in, 1 mB out, 2 ticks, at -eut EU/t. The converter runs 128 parallels, so a row's EU/t is 128 x the row's: 67,108,864 (he3he3), 50,331,648 (pli6) and 100,663,296 (pn15) EU/t. The rows are final: power/generators.js lists the plasma generator, not gtceu:direct_conversion, so the x2 is never applied to them.",
+  "converter": {
+    "recipes": [
+      { "name": "uiv_he3he3_plasma", "input": "gtceu:he3he3_plasma", "output": "gtceu:he3he3_ash", "duration": 2, "eut": 524288, "total": 67108864 },
+      { "name": "uiv_pli6_plasma", "input": "gtceu:pli6_plasma", "output": "gtceu:pli6_ash", "duration": 2, "eut": 393216, "total": 50331648 },
+      { "name": "uiv_pn15_plasma", "input": "gtceu:pn15_plasma", "output": "gtceu:pn15_ash", "duration": 2, "eut": 786432, "total": 100663296 }
+    ]
+  }
+}

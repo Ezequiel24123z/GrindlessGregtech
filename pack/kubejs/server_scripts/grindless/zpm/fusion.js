@@ -168,6 +168,45 @@
     return made
   }
 
+  // ---------------------------------------------------------------- UIV-A9: the Mk5 converter rows and the first-wall quench
+  // Converter rows: data/grindless/tables/fusion_mk5.json, final like the Mk4's. Quench: the Wf/RHEA billet sprayed in argon into
+  // the plasma-sprayed tile of line 7 (no circuit: the caster holds one item input).
+  function addMk5Converter(event) {
+    var mk5 = G.readJsonTable('kubejs/data/grindless/tables/fusion_mk5.json').converter
+    var made = []
+    mk5.recipes.forEach(function (r) {
+      var bad = missingFluids([r.input, r.output])
+      if (bad.length > 0) {
+        console.error(LOG + 'direct_conversion ' + r.name + ' skipped, unknown fluid(s): ' + bad.join(', '))
+        return
+      }
+      event.recipes.gtceu.direct_conversion('grindless:' + r.name)
+        .inputFluids(fluidOf(r.input, 1))
+        .outputFluids(fluidOf(r.output, 1))
+        .EUt(-r.eut)
+        .duration(r.duration)
+      made.push('grindless:direct_conversion/' + r.name)
+    })
+    return made
+  }
+
+  function addMk5Quench(event) {
+    var q = table.quench
+    var bad = missingFluids([q.argon.id, q.steam.id]).concat(missingItems(['grindless:wf_rhea_billet', 'grindless:plasma_sprayed_tile']))
+    if (bad.length > 0) {
+      console.error(LOG + 'plasma_quench plasma_sprayed_tile skipped, unknown id(s): ' + bad.join(', '))
+      return []
+    }
+    event.recipes.gtceu.plasma_quench('grindless:plasma_sprayed_tile')
+      .itemInputs('1x grindless:wf_rhea_billet')
+      .inputFluids(fluidOf(q.argon.id, q.argon.amount))
+      .itemOutputs('1x grindless:plasma_sprayed_tile')
+      .outputFluids(fluidOf(q.argon.id, q.argon.returned), fluidOf(q.steam.id, q.steam.amount))
+      .EUt(q.eut)
+      .duration(q.duration)
+    return ['grindless:plasma_quench/plasma_sprayed_tile']
+  }
+
   // ---------------------------------------------------------------- the controllers
 
   function addControllers(event) {
@@ -196,6 +235,8 @@
     try { F.converter = addConverter(event) } catch (e3) { F.converter = []; report.errors.push('converter: ' + e3) }
     try { addControllers(event) } catch (e4) { report.errors.push('controllers: ' + e4) }
     try { F.mk4Converter = addMk4Converter(event) } catch (e5) { F.mk4Converter = []; report.errors.push('Mk4 converter: ' + e5) }
+    try { F.mk5Converter = addMk5Converter(event) } catch (e6) { F.mk5Converter = []; report.errors.push('Mk5 converter: ' + e6) }
+    try { F.mk5Quench = addMk5Quench(event) } catch (e7) { F.mk5Quench = []; report.errors.push('Mk5 quench: ' + e7) }
     F.audited = report.audited
     F.unaudited = report.unaudited
     F.missing = report.missing

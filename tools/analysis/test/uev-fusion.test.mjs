@@ -65,7 +65,7 @@ test('polarised He-3 and its fuel come only from the polariser', () => {
     }
   }
   assert.deepEqual([...new Set(producers)], ['spin_polarisation']);
-  for (const f of fs.readdirSync(tables).filter((n) => n.endsWith('.json') && n !== 'fusion_mk4.json' && n !== 'hidden_until.json')) {
+  for (const f of fs.readdirSync(tables).filter((n) => n.endsWith('.json') && n !== 'fusion_mk4.json' && n !== 'mk5.json' && n !== 'hidden_until.json')) { // UIV-A9: mk5.json reads polarised He-3 (its input only; the producer check above still covers it)
     const txt = fs.readFileSync(path.join(tables, f), 'utf8');
     assert.ok(!/polarised_(helium_3|dhe3_fuel)/.test(txt), f);
   }
