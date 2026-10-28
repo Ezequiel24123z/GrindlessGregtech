@@ -7,7 +7,7 @@
 //   Checks: the machine registers [assembler, circuit_assembler]; the lookup finds both types and the controller recipe; the cleanroom
 //   forms and the hall is its receiver; the hall forms; in the circuit assembler mode a cleanroom-conditioned recipe (1 poppy -> 1 red dye,
 //   1,024 EU/t, 200 ticks, batch off) runs with one LuV parallel hatch (ceiling 64 x 16 = 1,024) and one ZPM hatch (524,288 V):
-//   the energy cap floor(524288/1024) = 512 binds, so 512 copies, 524,288 EU/t, 200 ticks.
+//   the energy cap floor(131072/1024) = 128 binds, so 128 copies, 131,072 EU/t, 200 ticks.
 (function () {
   var S = null
   var C = null
@@ -133,6 +133,9 @@
     } catch (e) { }
     return NaN
   }
+  function diagFind(m) {
+    try { var r = m.getRecipeType().getLookup().findRecipe(m); return r ? String(r.id) : 'null' } catch (e) { return 'err ' + errText(e) }
+  }
   function snapshot(m) {
     var rec = m.getRecipeLogic().getLastRecipe()
     if (rec === null || rec === undefined) return null
@@ -206,7 +209,7 @@
     put(x1, FLOOR + 2, CZ, 'gtceu:ev_energy_input_hatch[facing=north]')
     put(x2, FLOOR + 2, CZ, 'gtceu:maintenance_hatch[facing=north]')
   }
-  function placeCleanroomController() { put(CX, CEIL, CZ, 'gtceu:cleanroom[facing=north]') }
+  function placeCleanroomController() { put(CX, CEIL, CZ, 'gtceu:cleanroom') }
 
   function registrationChecks() {
     var def = classes().GTRegistries.MACHINES.get(new (classes().RL)(ID))
@@ -247,7 +250,12 @@
     if (u.phase === 'cleanroom') {
       var cr = machine(u.crPos)
       if (!cr || !formCheck(cr, waited)) {
-        if (waited > 600) { check('cleanroom_formed', false, cr ? 'not formed: ' + why(cr) : 'no controller'); u.phase = 'done' }
+        if (waited > 600) {
+          var bid = ''
+          try { bid = String(S.level.getBlockState(u.crPos)) } catch (e) { bid = errText(e) }
+          check('cleanroom_formed', false, cr ? 'not formed: ' + why(cr) : 'no controller; block there ' + bid)
+          u.phase = 'done'
+        }
         return
       }
       u.crEnergy = partsLike(cr, /energy_input_hatch/)
@@ -306,9 +314,9 @@
       var got = items(u.outBus)[RED] || 0
       if (got > 0 || S.tick - u.started > 600) {
         var s = u.snap
-        note('measured', fmt(s) + '; consumed ' + u.consumed + ', out ' + got + '; max voltage ' + m.getMaxVoltage() + '; reasons ' + String(rlg.getFailureReasons()))
-        var ok = s !== null && s.parallels === 512 && got === 512 && u.consumed === 512 && s.duration === 200 && Math.abs(s.eut - 524288) <= 1
-        check('cleanroom_recipe_parallels', ok, 'expected 512 copies (ceiling 1024, energy cap 512), EU/t 524288, duration 200; got ' + fmt(s) + ', out ' + got + ', consumed ' + u.consumed)
+        note('measured', fmt(s) + '; consumed ' + u.consumed + ', out ' + got + '; max voltage ' + m.getMaxVoltage() + '; reasons ' + String(rlg.getFailureReasons()) + '; status ' + String(rlg.getStatus()) + '; clean ' + (m.getCleanroom() ? m.getCleanroom().isClean() : 'none') + '; found ' + diagFind(m))
+        var ok = s !== null && s.parallels === 128 && got === 128 && u.consumed === 128 && s.duration === 200 && Math.abs(s.eut - 131072) <= 1
+        check('cleanroom_recipe_parallels', ok, 'expected 128 copies (ceiling 1024, energy cap 128), EU/t 131072, duration 200; got ' + fmt(s) + ', out ' + got + ', consumed ' + u.consumed)
         u.phase = 'done'
       }
     }
