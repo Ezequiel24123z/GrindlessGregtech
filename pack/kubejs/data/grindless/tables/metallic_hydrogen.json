@@ -1,0 +1,117 @@
+{
+  "_why": "UIV-A2, metallic hydrogen (docs/eras/uiv.md, machine 1 and lines 1 to 4). Read by server_scripts/grindless/uiv/metallic_hydrogen.js. Each recipe: name (unique), circuit (a GTM type takes 0 = none), eut, duration, itemsIn/kept/itemsOut [{id,count,chance?}], fluidsIn/charge/fluidsOut [{id,amount}]. The pulser's three recipes are picked by the programmed circuit.",
+  "types": {
+    "ramp_compression": {
+      "dataKey": "grindless_ramp_compression",
+      "recipes": [
+        {
+          "name": "mh_quench", "circuit": 1, "eut": 7864320, "duration": 1200,
+          "itemsIn": [ { "id": "grindless:solid_para_h2_target", "count": 1 } ],
+          "itemsOut": [ { "id": "gtceu:metallic_hydrogen_ingot", "count": 1 } ],
+          "fluidsOut": [ { "id": "gtceu:para_hydrogen", "amount": 500 } ]
+        },
+        {
+          "name": "lonsdaleite_shock", "circuit": 2, "eut": 7864320, "duration": 600,
+          "itemsIn": [ { "id": "grindless:pyrolytic_graphite", "count": 2 } ],
+          "itemsOut": [ { "id": "gtceu:lonsdaleite_dust", "count": 1 }, { "id": "gtceu:graphite_dust", "count": 1 } ]
+        },
+        {
+          "name": "cg_nitrogen_shock", "circuit": 3, "eut": 7864320, "duration": 900,
+          "itemsIn": [ { "id": "grindless:laser_heated_n2_charge", "count": 1 } ],
+          "itemsOut": [ { "id": "gtceu:cubic_gauche_nitrogen_dust", "count": 1 } ],
+          "fluidsOut": [ { "id": "gtceu:nitrogen", "amount": 500 } ]
+        }
+      ]
+    },
+    "wiremill": {
+      "recipes": [
+        {
+          "name": "mh_wire", "circuit": 1, "eut": 1966080, "duration": 100,
+          "itemsIn": [ { "id": "gtceu:metallic_hydrogen_ingot", "count": 1 } ],
+          "itemsOut": [ { "id": "gtceu:metallic_hydrogen_single_wire", "count": 2 } ]
+        }
+      ]
+    },
+    "assembler": {
+      "recipes": [
+        {
+          "name": "mh_cable_single", "circuit": 1, "eut": 1966080, "duration": 100,
+          "itemsIn": [ { "id": "gtceu:metallic_hydrogen_single_wire", "count": 1 }, { "id": "grindless:ffkm_seal", "count": 1 } ],
+          "itemsOut": [ { "id": "gtceu:metallic_hydrogen_single_cable", "count": 1 }, { "id": "gtceu:tiny_ffkm_dust", "count": 1, "chance": 2500 } ]
+        },
+        {
+          "name": "mh_cable_double", "circuit": 2, "eut": 1966080, "duration": 100,
+          "itemsIn": [ { "id": "gtceu:metallic_hydrogen_double_wire", "count": 1 }, { "id": "grindless:ffkm_seal", "count": 1 } ],
+          "itemsOut": [ { "id": "gtceu:metallic_hydrogen_double_cable", "count": 1 }, { "id": "gtceu:tiny_ffkm_dust", "count": 1, "chance": 2500 } ]
+        },
+        {
+          "name": "mh_cable_quadruple", "circuit": 4, "eut": 1966080, "duration": 100,
+          "itemsIn": [ { "id": "gtceu:metallic_hydrogen_quadruple_wire", "count": 1 }, { "id": "grindless:ffkm_seal", "count": 2 } ],
+          "itemsOut": [ { "id": "gtceu:metallic_hydrogen_quadruple_cable", "count": 1 }, { "id": "gtceu:tiny_ffkm_dust", "count": 2, "chance": 2500 } ]
+        },
+        {
+          "name": "mh_cable_octal", "circuit": 8, "eut": 1966080, "duration": 100,
+          "itemsIn": [ { "id": "gtceu:metallic_hydrogen_octal_wire", "count": 1 }, { "id": "grindless:ffkm_seal", "count": 3 } ],
+          "itemsOut": [ { "id": "gtceu:metallic_hydrogen_octal_cable", "count": 1 }, { "id": "gtceu:tiny_ffkm_dust", "count": 3, "chance": 2500 } ]
+        },
+        {
+          "name": "mh_cable_hex", "circuit": 16, "eut": 1966080, "duration": 100,
+          "itemsIn": [ { "id": "gtceu:metallic_hydrogen_hex_wire", "count": 1 }, { "id": "grindless:ffkm_seal", "count": 5 } ],
+          "itemsOut": [ { "id": "gtceu:metallic_hydrogen_hex_cable", "count": 1 }, { "id": "gtceu:tiny_ffkm_dust", "count": 5, "chance": 2500 } ]
+        },
+        {
+          "name": "lonsdaleite_bearing", "circuit": 5, "eut": 1966080, "duration": 200,
+          "itemsIn": [ { "id": "grindless:lonsdaleite_race", "count": 2 }, { "id": "gtceu:tungsten_plate", "count": 1 } ],
+          "fluidsIn": [ { "id": "gtceu:lubricant", "amount": 100 } ],
+          "itemsOut": [ { "id": "grindless:lonsdaleite_bearing", "count": 1 } ]
+        },
+        {
+          "name": "uiv_electric_piston", "circuit": 6, "eut": 7864320, "duration": 300,
+          "itemsIn": [ { "id": "grindless:uev_electric_piston", "count": 1 }, { "id": "grindless:lonsdaleite_bearing", "count": 2 },
+                       { "id": "gtceu:metallic_hydrogen_single_cable", "count": 2 } ],
+          "itemsOut": [ { "id": "grindless:uiv_electric_piston", "count": 1 } ]
+        },
+        {
+          "name": "dac_charge", "circuit": 7, "eut": 1966080, "duration": 200,
+          "itemsIn": [ { "id": "gtceu:diamond_plate", "count": 2 } ],
+          "fluidsIn": [ { "id": "gtceu:nitrogen", "amount": 1000 } ],
+          "itemsOut": [ { "id": "grindless:dac_charge", "count": 1 } ]
+        }
+      ]
+    },
+    "chemical_reactor": {
+      "recipes": [
+        {
+          "name": "lonsdaleite_leach", "circuit": 0, "eut": 1966080, "duration": 200,
+          "itemsIn": [ { "id": "gtceu:lonsdaleite_dust", "count": 1 } ],
+          "fluidsIn": [ { "id": "gtceu:hydrochloric_acid", "amount": 500 } ],
+          "itemsOut": [ { "id": "grindless:leached_lonsdaleite", "count": 1 } ],
+          "fluidsOut": [ { "id": "gtceu:diluted_hydrochloric_acid", "amount": 500 } ]
+        },
+        {
+          "name": "cg_nitrogen_quench", "circuit": 0, "eut": 7864320, "duration": 200,
+          "itemsIn": [ { "id": "gtceu:cubic_gauche_nitrogen_dust", "count": 1 } ],
+          "fluidsIn": [ { "id": "gtceu:liquid_helium", "amount": 500 } ],
+          "itemsOut": [ { "id": "grindless:quenched_cg_nitrogen", "count": 1 } ],
+          "fluidsOut": [ { "id": "gtceu:helium", "amount": 500 } ]
+        }
+      ]
+    },
+    "laser_engraver": {
+      "recipes": [
+        {
+          "name": "lonsdaleite_race", "circuit": 1, "eut": 1966080, "duration": 200,
+          "itemsIn": [ { "id": "grindless:leached_lonsdaleite", "count": 1 } ],
+          "kept": [ { "id": "gtceu:ruby_lens", "count": 1 } ],
+          "itemsOut": [ { "id": "grindless:lonsdaleite_race", "count": 1 } ]
+        },
+        {
+          "name": "laser_heated_n2", "circuit": 2, "eut": 1966080, "duration": 200,
+          "itemsIn": [ { "id": "grindless:dac_charge", "count": 1 } ],
+          "kept": [ { "id": "gtceu:ruby_lens", "count": 1 } ],
+          "itemsOut": [ { "id": "grindless:laser_heated_n2_charge", "count": 1 } ]
+        }
+      ]
+    }
+  }
+}
