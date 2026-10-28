@@ -361,7 +361,7 @@ Placement per DECISIONS.md:508. Circuits are taken by each package after `git gr
 
 | Machine (era, file:line) | Mode | Recipe | Feeds |
 |---|---|---|---|
-| Cryogenic plant (EV, `ev/cryogenic_plant.js:40`) | He-4 polish | `stellar_helium_cut` → `triple_alpha_fuel` (H and Ne frozen out) | Mk6 c2 |
+| Cryogenic plant (EV, `ev/cryogenic_plant.js:40`) | He-4 polish; O-16 liquefaction | `stellar_helium_cut` → `triple_alpha_fuel`; O-16 → `oxygen_burning_fuel` | Mk6 c2, c4 |
 | Extraction cascade (EV, `ev/extraction_cascade.js:92`) | knot dust; flux dross | `ejecta_knot_dust` → Ti fraction + Si, S, Ca, Fe; LPE dross → Pb | Ti-44 line; YIG |
 | Platinum plant (EV, `ev/platinum_plant.js:598`) | sputter grade; etch recovery | 5N Pt, Ru, Ir → `saf_target_set` feed; etch residue → Pt, Ru | targets |
 | Hot strip mill (EV, `ev/combined_cycle_and_hot_mill.js:464`) | tetrataenite lamination | `grindless:tetrataenite` rod → `tetrataenite_lamination` | motor |
@@ -410,5 +410,113 @@ Placement per DECISIONS.md:508. Circuits are taken by each package after `git gr
 **Count:** 45 older machines take about 80 rows (39 UEV-and-older machines, 6 UIV). UIV counted 58 machines; UXV leans on fewer machines but harder (152 crossings, Crossings).
 
 **File order:** each row goes in the older machine's table or inline array (DECISIONS.md:508) by the package that consumes it; the antimatter trap row goes in the package's own file with `.dimension` and a free circuit. Two packages never append to one table in the same wave (Parallel and serial).
+
+## Family steps
+
+| Family | Step | Machine | Era before |
+|---|---|---|---|
+| Circuits | `gtnn:spintronic_mainframe` | UEV photonic hall row | `gtnn:optical_mainframe` (UIV-A7) |
+| Superheavies | census III: elements 121, 122; the island chart | UEV cyclotron rows, MNT collider | census II: 119, 120 (UIV-A1) |
+| Fusion | Mk6 stellar burning ring | `gtceu:uxv_fusion_reactor` | Mk5 (UIV-A9) |
+| Neutron star matter | nuclear pasta | Vela machines | neutronium (UIV-B2) |
+| Positrons | gamma laser module | annihilation laser works | positronium condensate (UIV-B3) |
+| Black holes | disk skimming, BZ dynamo | Cygnus machines | ergosphere probes, Penrose engine (UIV-B4) |
+| Travel | Kerr sling, M2P2 and Whipple shields | probe bay mode, warp gate c8-c9 | relay seed jump (UIV-B1) |
+| Sensor | SHeQUID gyroscope | SHeQUID works | UIV sensor (UIV-A7) |
+| Mega | stellar fractionation hall | M2 | neutronium compression hall (UIV-M2) |
+| Parallel hatch | x65,536 | M1 | x16,384 (UIV-M1) |
+| Wireless | case 12 | W | case 11 (UIV-W) |
+
+## Reserve for OpV
+
+OpV is built right after UXV (user direction). Each OpV line below has its feed, place or machine already made by UXV, and UXV itself makes none of these OpV products (journey.md:53).
+
+| Kept for OpV | Hook in UXV (id) |
+|---|---|
+| Industrial antimatter | Cygnus X-1's jet: LHAASO sees microquasar jets accelerating particles to PeV energies (LHAASO Collaboration 2024, arXiv:2410.08988). UXV leaves the jet beam line undone; `gtceu:bz_dynamo` and `grindless:flux_loaded_plasma` power it, `grindless:gamma_laser_module` drives γγ pair production |
+| Stable exotic matter | `grindless:disk_plasma` (journey.md:119, :139); the skimmer exists, no exotic matter is made |
+| Kugelblitz forge | `grindless:gamma_laser_module` (pump), `grindless:frc_cartridge` (confinement) |
+| Self-replicating probes | `grindless:launched_relay_seed`, the Kerr sling mode, `grindless:shequid_gyro` (inertial navigation), `gtnn:spintronic_mainframe` |
+| The galactic bulge | `grindless:bulge_chart` (gate output). Candidate OpV places: Terzan 5 (bulge cluster with 39+ millisecond pulsars; Ransom 2005, Science 307:892), SGR 1806−20 |
+| The inner core | `grindless:pasta_core_sample` (anti-phases); PSR J0952−0607 at 2.35 M☉ (Romani 2022, ApJL 934:L17) is the OpV place for quark matter |
+| Island of stability, element 124 on | `grindless:island_chart`, `grindless:island_nuclide`, `grindless:superheavy_census_iii` |
+| Kardashev III | wireless case 12 across four places; OpV is case 13 |
+| OpV fusion tier | `registerFusionTier(13)`: silicon burning; Mk6 c4 ash Si-28 is stocked for it (`grindless:si28_ash`) |
+| OpV parallel hatch | `lib/parallel_hatch.js` tier 13 (x262,144), not in UXV |
+| OpV hull and hatches | widen `uev/foundation.js:177-204` again (`.tiers(UEV, UIV, UXV, OpV)`) after S0-1 proves three |
+
+**OpV-bound ids made in UXV:** `grindless:bulge_chart`, `pasta_core_sample`, `island_chart`, `island_nuclide`, `superheavy_census_iii`, `gamma_laser_module`, `frc_cartridge`, `flux_loaded_plasma`, `disk_plasma`, `stellar_plasma`, `si28_ash`, `shequid_gyro`. **Existing OpV ids (dump):** `gtceu:opv_machine_casing` (researched by the gate), `gtnn:component_assline_casing_opv`, `gtnn:opv_wrap_circuit`, `extendedfeatures:opv_universal_circuit`.
+
+**MAX and MAX+** keep everything DECISIONS.md:450 and :507 give them: GCYR `black_hole_orbit`, Sagittarius A*, the hyper stargate and creative items. UXV adds none of them; the BZ dynamo and the polar cap tap are generators with fuels, never creative sources.
+
+## Considered and dropped
+
+**Machines** (the nine that would reach ~30):
+
+- Field irradiation hall (synthetic tetrataenite): second route; tetrataenite is LuV meteorite matter (`luv/foundation.js:12`).
+- CNT yarn muscle spinner: second route (`uev/earth_orbit.js:27`).
+- FRC merging compressor: a second machine for one chain; FRC former c1 suffices.
+- UXV computation hall: second route to compute (UIV Matrioshka).
+- Sc-44 elution column: the IV hot cell's mode does it.
+- Jet beam line: OpV industrial antimatter.
+- Corona pair tap: second positron route (UIV pulsar wind trap; the Ti-44 core).
+- Antiferromagnet or altermagnet memory: a second memory; MRAM and racetrack cover cache and storage.
+- Spintronic mainframe hall: convenience; the photonic hall row joins the dies.
+- Also dropped: QAH interconnect (nothing needs it), SMES winder (UEV nitride magnet works), EM pump works (the ALIP pump is an assembly), Kerr sling launcher (a probe bay mode), magnetar tap (OpV bulge), Cas A's compact object (no product of its own).
+
+**Places** with no product of their own: Eta Carinae (N-rich ejecta: second route to the CNO cut), WR 104 (carbon dust), the Crab (a second pulsar), Przybylski's star (unconfirmed actinide lines), 3 Cen A (He-3), SS 433 (jets: OpV), PSR J1719−1438 b (diamond), BPM 37093 (second route to Sirius B's degenerate matter), Pa 30, TMC-1, NGC 7027, Westerlund 1.
+
+**Lines** (the eight that would reach 69):
+
+1. Si-28 from Mk6 oxygen ash as UIV's H-Si28 wafer: second route; the ash is stocked for OpV.
+2. Neon from carbon ash for UIV's solid neon moderator: second route; stock.
+3. Sc-44 eluate as a positron source for the UHV accumulator: second route to positrons.
+4. C-13 and N-14 from the CNO cut as products: no use beyond the Mk6 c1 catalyst.
+5. Rare earths from the stellar heavy cut: second route; the condensation cuts are supply.
+6. Skyrmion logic track: a second logic family; MESO is the logic.
+7. YIG/Pt spin Seebeck thermopile: power from heat already counted.
+8. Microquasar jet protons: OpV.
+
+Data chains (arm chart, island chart, glitch record, VLBI record, Ti-44 map, elevator log, bulge chart) and the hull and hatch assemblies do not count.
+
+## Power
+
+**Wireless case 12** (`lv/wireless_energy.js:291-308`, W): caps V[UXV] x amps x 10 as long: 2 A 2,684,354,560; 4 A 5,368,709,120; 16 A 21,474,836,480; 64 A 85,899,345,920 (long caps proven by UIV-S0-5 and W). Link item `grindless:pasta_strand_repeater` (strand wire + `grindless:pulsar_timed_repeater` + `mtj_die`); the cell `grindless:uxv_smes_cell` holds 4,026,531,840,000 EU *(tune)*, made on the UEV nitride magnet works (`composites.json` row) from `strand_tape` and `lasagna_plate`. Cas A has no source of its own: it runs on wireless from home and Cygnus.
+
+| Source | Place | EU/t | Doubled by generators.js? |
+|---|---|---|---|
+| Mk6 c1-c4 plasmas in ZPM DEC rows | Earth | 2x the fusion EU/t, net *(tune)* | no (DEC rows sized directly) |
+| BZ dynamo | Cygnus X-1 | 1,073,741,824 (2^30) | no |
+| Polar cap tap | Vela | 536,870,912 | no |
+| Penrose engine (UIV-B4) | Cygnus X-1 | as built | as built |
+
+**Gate example:** 16 A x V[UXV] = 2,147,483,648 EU/t (2^31) for 1,200 t *(tune)* = 2,576,980,377,600 EU: one BZ dynamo (2^30) plus two polar cap taps on wireless (2 x 2^29), or the Mk6 through DEC. S0-2 proves a 2^31 recipe EU/t and the 16 A hatch; fallback 15 A = 2,013,265,920 EU/t.
+
+**Rule 8:** every source has a fuel or consumable (plasma, flux-loaded plasma, a lasagna electrode); no source exceeds 2^30 per machine.
+
+## Fusion
+
+The Mk6 is a second `registerFusionTier(12)` ring (`tables/fusion_mk6.json`, A7), named the stellar burning ring (fiction): it burns a massive star's sequence, and each fuel comes from the previous fuel's ash.
+
+| Recipe | Fuel (both inputs) | Plasma out | DEC returns | Ash goes to |
+|---|---|---|---|---|
+| c1 hot CNO | `stellar_hydrogen_cut` + `stellar_cno_cut` | `cno_ash_plasma` | He-4, CNO cut (95% back) | c2 |
+| c2 triple-alpha | `triple_alpha_fuel` x2 | `helium_burning_ash_plasma` | C-12 + O-16 (quench caster) | c3, c4 |
+| c3 carbon burning | `carbon_burning_fuel` x2 | `carbon_burning_ash_plasma` | Ne-20, Na-23, Mg-24 | MgO target; stock |
+| c4 oxygen burning | `oxygen_burning_fuel` x2 | `oxygen_burning_ash_plasma` | Si-28, S-32, P-31 | `si28_ash` (OpV); stock |
+
+- Fuel prep: `triple_alpha_fuel` on the EV cryogenic plant from the He-4 cut and c1 ash; `carbon_burning_fuel` is C-12 vapour from the UEV electron beam furnace; `oxygen_burning_fuel` is O-16 liquefied on the EV cryogenic plant.
+- Storage: 10,240,000,000 EU at 16 hatches (twice Mk5's 5,120,000,000, run 20261028-192609-server) *(tune)*; starts 6, 8, 9 and 10 billion *(tune)*; all long (S0-4). FusionReactorMachine.java :185, :276, :294-298, :326-327 as uiv.md cites.
+- Casing `grindless:uxv_fusion_casing`: W-184 (UEV calutron) → CVI preform (UEV CVI) → `grindless:wf_rhea_billet` (UIV) → casing.
+- Real physics: CNO and triple-alpha are textbook (B²FH 1957; Hoyle 1954). Burning carbon and oxygen in a ring at these rates is fiction.
+
+## Nothing one at a time
+
+- **Stellar fractionation hall** (`gtceu:stellar_fractionation_hall`, M2, mega.md 4.1, 4.11, 4.12, 5, 6.6): the UXV member of the mega family. It runs GTM `gtceu:distillation_tower` and `gtceu:distillery` recipes; parallels are energy-bound times the parallel hatch; the overclock rule follows mega.md 5 as the stellar forge (open question 6). It gains over GTCA's `gtceu:large_distillery` by parallels up to x65,536 in one hall. GTNH's mega distillation tower is an idea only (CREDITS.md).
+- **UXV parallel hatch** (`gtceu:uxv_parallel_hatch`, M1): `lib/parallel_hatch.js:80-81` → `.tiers(9, 10, 11, 12)`, name ternary at :84; x65,536 = 4^(12-4). Recipe mirrors server `uiv/parallel_hatch.js:17` with spintronic mainframes and UXV parts. Parallel x EU/t overflow is checked by S0-6.
+
+## AE2
+
+Nothing new. Stellar cuts and plasmas are fluids in existing fluid cells; caged pasta phases are items; site-locked fluids (`disk_plasma`, `stellar_plasma`) are processed where they are made. No new cell tier, no cross-dimension bridge; wireless energy is the only link between places.
 
 <!-- CONTINUE -->
