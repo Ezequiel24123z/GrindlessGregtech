@@ -1,4 +1,4 @@
-// priority: -7670
+// priority: -7669
 // TEST ONLY, UEV-A7. Command: kubejs custom_command gg_test_uev_fusion
 // Band ONLY: X 32512-32575, Z 0-63, Overworld Y 70-100.
 //   a7_ring_*   gtceu:uev_fusion_reactor forms (registerFusionTier from KubeJS in the real pack) with 16 UEV hatches; its internal buffer

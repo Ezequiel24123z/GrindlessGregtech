@@ -43,6 +43,9 @@ const WORN = 'grindless:worn_swarm_segment';
 const POD = 'grindless:oganesson_propellant_pod';
 const TANK = 'grindless:propellant_tank';
 const MAP = 'grindless:coronal_field_map';
+// UEV-B2: Alpha Centauri A's orbit is a second site; its rows are named alpha_*
+const ALPHA = 'grindless:alpha_centauri_orbit';
+const ALPHA_MAP = 'grindless:alpha_coronal_field_map';
 const VA_UHV = 1966080;
 const MACHINES = { 'gtceu:swarm_segment_foundry': 'swarm_segment', 'gtceu:swarm_control_station': 'dyson_swarm', 'gtceu:solar_probe_bay': 'solar_probe' };
 
@@ -51,7 +54,8 @@ test('the stand-in runs the swarm scripts without errors, nothing clashing or sk
   assert.deepEqual(errs, [], errs.map((e) => `${e.stage} ${e.file}: ${e.message}`).join('\n'));
   assert.deepEqual(SW.clashes, []);
   assert.deepEqual(SW.skipped, []);
-  assert.equal(SW.recipes.length, 8);
+  // UEV-B2 adds the Alpha Centauri rows alpha_full_swarm and alpha_corona
+  assert.equal(SW.recipes.length, 10);
 });
 
 test('registration: three types, three machines, two items with textures; F1\'s ids are not registered again', () => {
@@ -97,13 +101,13 @@ test('patterns: 9 x 7 x 9 foundry, 11 x 5 x 11 station (energy out), 7 x 5 x 7 b
   }
 });
 
-test('recipe lookup: every row is in the manager with its circuit, Mercury orbit on all but the assembler', () => {
+test('recipe lookup: every row is in the manager with its circuit, Mercury (or Alpha Centauri) orbit on all but the assembler', () => {
   for (const r of SW.recipes) {
     const rec = dump(r.recipeId);
     assert.ok(rec, r.recipeId);
     assert.equal(rec.t, 'gtceu:' + r.type, r.name);
     assert.deepEqual(circuitOf(rec), r.circuit == null ? [] : [r.circuit], r.name);
-    assert.deepEqual(dimsOf(rec), r.type === 'assembler' ? [] : [ORBIT], r.name);
+    assert.deepEqual(dimsOf(rec), r.type === 'assembler' ? [] : [r.name.startsWith('alpha_') ? ALPHA : ORBIT], r.name);
     assert.ok(Number.isInteger(r.duration) && r.duration > 0, r.name);
   }
   for (const [m, t] of Object.entries(MACHINES)) {
@@ -119,7 +123,8 @@ test('the generator rows: EU out at the final figure, nothing in; kept segments 
   const want = {
     formation: { eu: 2097152, dur: 6000, kept: [[SEG, 15]], used: [[POD, 1], [SEG, 1]], out: [[TANK, 1], [WORN, 1]], circuit: 1 },
     formation_krypton: { eu: 2097152, dur: 3000, kept: [[SEG, 15]], used: [[SEG, 1]], out: [[WORN, 1]], circuit: 1 },
-    full_swarm: { eu: 8388608, dur: 6000, kept: [[MAP, 1], [SEG, 60]], used: [[POD, 4], [SEG, 4]], out: [[TANK, 4], [WORN, 4]], circuit: 2 }
+    full_swarm: { eu: 8388608, dur: 6000, kept: [[MAP, 1], [SEG, 60]], used: [[POD, 4], [SEG, 4]], out: [[TANK, 4], [WORN, 4]], circuit: 2 },
+    alpha_full_swarm: { eu: 12582912, dur: 6000, kept: [[ALPHA_MAP, 1], [SEG, 60]], used: [[POD, 6], [SEG, 6]], out: [[TANK, 6], [WORN, 6]], circuit: 3 }
   };
   const gens = SW.recipes.filter((r) => r.generator).map((r) => r.name).sort();
   assert.deepEqual(gens, Object.keys(want).sort());
@@ -135,6 +140,7 @@ test('the generator rows: EU out at the final figure, nothing in; kept segments 
   // the swarm is linear in segments: c2 is four c1 rows with the map, EU per worn segment equal
   const perWorn = (n) => { const r = row(n); return (r.eut * r.duration) / r.itemsOut.find((x) => x.id === WORN).count; };
   assert.equal(perWorn('formation'), perWorn('full_swarm'));
+  assert.equal(perWorn('formation'), perWorn('alpha_full_swarm'), 'Alpha: more segments a run, same EU per worn segment');
   assert.equal(perWorn('formation') / 2, perWorn('formation_krypton'), 'krypton is the poorer fuel');
   const krypton = dump(row('formation_krypton').recipeId);
   assert.ok(JSON.stringify(krypton.j.inputs.fluid).includes('gtceu:krypton'));

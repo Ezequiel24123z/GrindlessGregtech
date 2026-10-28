@@ -1,4 +1,4 @@
-// priority: 4925
+// priority: 5154
 // Gregtech Grindless - names and tooltips of UEV's nebula collector, interstellar dust lab and pulsar timing station (startup_scripts/grindless/uev/alpha_centauri.js; package UEV-B2):
 //
 //   block.gtceu.<machine>, gtceu.<recipe type>                    machine and recipe type names

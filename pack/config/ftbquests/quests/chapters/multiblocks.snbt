@@ -1200,6 +1200,17 @@
 			y: 25.0d
 		}
 		{
+			icon: "gtceu:smelting_complex"
+			id: "174C1144D9E05053"
+			rewards: [{ id: "1353CE34DB5287A9", type: "xp", xp: 10 }]
+			shape: "gear"
+			size: 1.5d
+			subtitle: "IV, Grindless"
+			tasks: [{ id: "5E4425232F5E5D9E", item: "gtceu:smelting_complex", type: "item" }]
+			x: 2.0d
+			y: 27.0d
+		}
+		{
 			icon: "gtceu:tritium_removal_facility"
 			id: "31CFC43E89548C76"
 			rewards: [{ id: "55AED255A8E9F83D", type: "xp", xp: 10 }]
@@ -1207,7 +1218,7 @@
 			size: 1.5d
 			subtitle: "IV, Grindless"
 			tasks: [{ id: "3CA8B914677593AF", item: "gtceu:tritium_removal_facility", type: "item" }]
-			x: 2.0d
+			x: 4.0d
 			y: 27.0d
 		}
 		{
@@ -1218,7 +1229,7 @@
 			size: 1.5d
 			subtitle: "IV, Grindless"
 			tasks: [{ id: "3D92E77154DA9D6A", item: "gtceu:venus_acid_works", type: "item" }]
-			x: 4.0d
+			x: 6.0d
 			y: 27.0d
 		}
 		{
@@ -1229,7 +1240,7 @@
 			size: 1.5d
 			subtitle: "IV, Grindless"
 			tasks: [{ id: "289B134B335084CF", item: "gtceu:venus_heat_engine", type: "item" }]
-			x: 6.0d
+			x: 8.0d
 			y: 27.0d
 		}
 		{
@@ -1240,7 +1251,7 @@
 			size: 1.25d
 			subtitle: "IV, GregTech"
 			tasks: [{ id: "6DD9EEA9C828D32C", item: "gtceu:alloy_blast_smelter", type: "item" }]
-			x: 8.0d
+			x: 10.0d
 			y: 27.0d
 		}
 		{
@@ -1251,7 +1262,7 @@
 			size: 1.25d
 			subtitle: "IV, GregTech"
 			tasks: [{ id: "399D21E756DE2B9E", item: "gtceu:assembly_line", type: "item" }]
-			x: 10.0d
+			x: 12.0d
 			y: 27.0d
 		}
 		{
@@ -1262,7 +1273,7 @@
 			size: 1.25d
 			subtitle: "IV, GregTech"
 			tasks: [{ id: "6F9F50D8A6097846", item: "gtceu:extreme_combustion_engine", type: "item" }]
-			x: 12.0d
+			x: 14.0d
 			y: 27.0d
 		}
 		{
@@ -1273,7 +1284,7 @@
 			size: 1.25d
 			subtitle: "IV, GregTech"
 			tasks: [{ id: "77A0ACA834CC91A7", item: "gtceu:iv_large_miner", type: "item" }]
-			x: 14.0d
+			x: 16.0d
 			y: 27.0d
 		}
 		{
@@ -1284,7 +1295,7 @@
 			size: 1.25d
 			subtitle: "IV, GregTech"
 			tasks: [{ id: "7C903986C3B7A18A", item: "gtceu:large_arc_smelter", type: "item" }]
-			x: 16.0d
+			x: 18.0d
 			y: 27.0d
 		}
 		{
@@ -1295,7 +1306,7 @@
 			size: 1.25d
 			subtitle: "IV, GregTech"
 			tasks: [{ id: "42238DAB5A57A391", item: "gtceu:large_assembler", type: "item" }]
-			x: 18.0d
+			x: 20.0d
 			y: 27.0d
 		}
 		{
@@ -1306,7 +1317,7 @@
 			size: 1.25d
 			subtitle: "IV, GregTech"
 			tasks: [{ id: "43AEB038EF920FBE", item: "gtceu:large_autoclave", type: "item" }]
-			x: 20.0d
+			x: 22.0d
 			y: 27.0d
 		}
 		{
@@ -1317,7 +1328,7 @@
 			size: 1.25d
 			subtitle: "IV, GregTech"
 			tasks: [{ id: "29CCF0298F7073E0", item: "gtceu:large_brewer", type: "item" }]
-			x: 22.0d
+			x: 24.0d
 			y: 27.0d
 		}
 		{
@@ -1328,8 +1339,8 @@
 			size: 1.25d
 			subtitle: "IV, GregTech"
 			tasks: [{ id: "4C4E24D7F4022992", item: "gtceu:large_centrifuge", type: "item" }]
-			x: 24.0d
-			y: 27.0d
+			x: 2.0d
+			y: 29.0d
 		}
 		{
 			icon: "gtceu:large_chemical_bath"
@@ -1339,7 +1350,7 @@
 			size: 1.25d
 			subtitle: "IV, GregTech"
 			tasks: [{ id: "17FD6B6432E37DAC", item: "gtceu:large_chemical_bath", type: "item" }]
-			x: 2.0d
+			x: 4.0d
 			y: 29.0d
 		}
 		{
@@ -1350,7 +1361,7 @@
 			size: 1.25d
 			subtitle: "IV, GregTech"
 			tasks: [{ id: "26CEF2A025283B27", item: "gtceu:large_circuit_assembler", type: "item" }]
-			x: 4.0d
+			x: 6.0d
 			y: 29.0d
 		}
 		{
@@ -1361,7 +1372,7 @@
 			size: 1.25d
 			subtitle: "IV, GregTech"
 			tasks: [{ id: "49E1D3BEEBED24A4", item: "gtceu:large_cutter", type: "item" }]
-			x: 6.0d
+			x: 8.0d
 			y: 29.0d
 		}
 		{
@@ -1372,7 +1383,7 @@
 			size: 1.25d
 			subtitle: "IV, GregTech"
 			tasks: [{ id: "61BF731F1FFDD028", item: "gtceu:large_distillery", type: "item" }]
-			x: 8.0d
+			x: 10.0d
 			y: 29.0d
 		}
 		{
@@ -1383,7 +1394,7 @@
 			size: 1.25d
 			subtitle: "IV, GregTech"
 			tasks: [{ id: "4AAD88465C18D6D2", item: "gtceu:large_electrolyzer", type: "item" }]
-			x: 10.0d
+			x: 12.0d
 			y: 29.0d
 		}
 		{
@@ -1394,7 +1405,7 @@
 			size: 1.25d
 			subtitle: "IV, GregTech"
 			tasks: [{ id: "377C4533978E8D7A", item: "gtceu:large_electromagnet", type: "item" }]
-			x: 12.0d
+			x: 14.0d
 			y: 29.0d
 		}
 		{
@@ -1405,7 +1416,7 @@
 			size: 1.25d
 			subtitle: "IV, GregTech"
 			tasks: [{ id: "7DDA2B3E30A257CA", item: "gtceu:large_engraving_laser", type: "item" }]
-			x: 14.0d
+			x: 16.0d
 			y: 29.0d
 		}
 		{
@@ -1416,7 +1427,7 @@
 			size: 1.25d
 			subtitle: "IV, GregTech"
 			tasks: [{ id: "2E818D83420A8040", item: "gtceu:large_extractor", type: "item" }]
-			x: 16.0d
+			x: 18.0d
 			y: 29.0d
 		}
 		{
@@ -1427,7 +1438,7 @@
 			size: 1.25d
 			subtitle: "IV, GregTech"
 			tasks: [{ id: "1E931A16DAB3808E", item: "gtceu:large_extruder", type: "item" }]
-			x: 18.0d
+			x: 20.0d
 			y: 29.0d
 		}
 		{
@@ -1438,7 +1449,7 @@
 			size: 1.25d
 			subtitle: "IV, GTM Extended Features"
 			tasks: [{ id: "579712A07BD246F4", item: "extendedfeatures:large_gas_collector", type: "item" }]
-			x: 20.0d
+			x: 22.0d
 			y: 29.0d
 		}
 		{
@@ -1449,7 +1460,7 @@
 			size: 1.25d
 			subtitle: "IV, GregTech"
 			tasks: [{ id: "639B96B9EBB690EE", item: "gtceu:large_maceration_tower", type: "item" }]
-			x: 22.0d
+			x: 24.0d
 			y: 29.0d
 		}
 		{
@@ -1460,8 +1471,8 @@
 			size: 1.25d
 			subtitle: "IV, GregTech"
 			tasks: [{ id: "2F9C7873D871CF0B", item: "gtceu:large_material_press", type: "item" }]
-			x: 24.0d
-			y: 29.0d
+			x: 2.0d
+			y: 31.0d
 		}
 		{
 			icon: "gtceu:large_packer"
@@ -1471,7 +1482,7 @@
 			size: 1.25d
 			subtitle: "IV, GregTech"
 			tasks: [{ id: "76F8E6D888E60D87", item: "gtceu:large_packer", type: "item" }]
-			x: 2.0d
+			x: 4.0d
 			y: 31.0d
 		}
 		{
@@ -1482,7 +1493,7 @@
 			size: 1.25d
 			subtitle: "IV, GregTech"
 			tasks: [{ id: "489333C44572C6BB", item: "gtceu:large_sifting_funnel", type: "item" }]
-			x: 4.0d
+			x: 6.0d
 			y: 31.0d
 		}
 		{
@@ -1493,7 +1504,7 @@
 			size: 1.25d
 			subtitle: "IV, GregTech"
 			tasks: [{ id: "3F14F42735B226F3", item: "gtceu:large_solidifier", type: "item" }]
-			x: 6.0d
+			x: 8.0d
 			y: 31.0d
 		}
 		{
@@ -1504,7 +1515,7 @@
 			size: 1.25d
 			subtitle: "IV, GregTech"
 			tasks: [{ id: "19B936FFF08B381E", item: "gtceu:large_wiremill", type: "item" }]
-			x: 8.0d
+			x: 10.0d
 			y: 31.0d
 		}
 		{
@@ -1515,7 +1526,7 @@
 			size: 1.25d
 			subtitle: "IV, GT--"
 			tasks: [{ id: "2B467A0EFC42CCAE", item: "gtnn:maceration_stack_controller", type: "item" }]
-			x: 10.0d
+			x: 12.0d
 			y: 31.0d
 		}
 		{
@@ -1526,7 +1537,7 @@
 			size: 1.25d
 			subtitle: "IV, GT Community Additions"
 			tasks: [{ id: "640E7D29A2BC8135", item: "gtca:mega_lcr", type: "item" }]
-			x: 12.0d
+			x: 14.0d
 			y: 31.0d
 		}
 		{
@@ -1537,7 +1548,7 @@
 			size: 1.25d
 			subtitle: "IV, GT Community Additions"
 			tasks: [{ id: "43780A99DD9F903A", item: "gtca:mega_oil_cracking_unit", type: "item" }]
-			x: 14.0d
+			x: 16.0d
 			y: 31.0d
 		}
 		{
@@ -1548,7 +1559,7 @@
 			size: 1.25d
 			subtitle: "IV, GregTech"
 			tasks: [{ id: "2C8489405D2DC60B", item: "gtceu:tungstensteel_large_boiler", type: "item" }]
-			x: 16.0d
+			x: 18.0d
 			y: 31.0d
 		}
 		{
@@ -3246,6 +3257,17 @@
 			y: 66.0d
 		}
 		{
+			icon: "gtceu:interstellar_dust_lab"
+			id: "6B65FFFCCF78439E"
+			rewards: [{ id: "7A7A4AF769954B81", type: "xp", xp: 10 }]
+			shape: "gear"
+			size: 1.5d
+			subtitle: "UEV, Grindless"
+			tasks: [{ id: "2351747AFC9AA376", item: "gtceu:interstellar_dust_lab", type: "item" }]
+			x: 16.0d
+			y: 66.0d
+		}
+		{
 			icon: "gtceu:megabar_press"
 			id: "1EFB53DC4687D63A"
 			rewards: [{ id: "61E06A2867E23293", type: "xp", xp: 10 }]
@@ -3253,7 +3275,7 @@
 			size: 1.5d
 			subtitle: "UEV, Grindless"
 			tasks: [{ id: "6136643781C0A739", item: "gtceu:megabar_press", type: "item" }]
-			x: 16.0d
+			x: 18.0d
 			y: 66.0d
 		}
 		{
@@ -3264,7 +3286,7 @@
 			size: 1.5d
 			subtitle: "UEV, Grindless"
 			tasks: [{ id: "156EE7475AEE23C6", item: "gtceu:nitride_magnet_works", type: "item" }]
-			x: 18.0d
+			x: 20.0d
 			y: 66.0d
 		}
 		{
@@ -3275,7 +3297,18 @@
 			size: 1.5d
 			subtitle: "UEV, Grindless"
 			tasks: [{ id: "61DDBD3D847F2C16", item: "gtceu:photonic_integration_hall", type: "item" }]
-			x: 20.0d
+			x: 22.0d
+			y: 66.0d
+		}
+		{
+			icon: "gtceu:pulsar_timing_station"
+			id: "435DC529E628884D"
+			rewards: [{ id: "100717D81BA1B19A", type: "xp", xp: 10 }]
+			shape: "gear"
+			size: 1.5d
+			subtitle: "UEV, Grindless"
+			tasks: [{ id: "49841830FD453667", item: "gtceu:pulsar_timing_station", type: "item" }]
+			x: 24.0d
 			y: 66.0d
 		}
 		{
@@ -3286,8 +3319,8 @@
 			size: 1.5d
 			subtitle: "UEV, Grindless"
 			tasks: [{ id: "2C6D9F7424BADAA4", item: "gtceu:quantum_gas_lab", type: "item" }]
-			x: 22.0d
-			y: 66.0d
+			x: 2.0d
+			y: 68.0d
 		}
 		{
 			icon: "gtceu:sic_fibre_plant"
@@ -3297,8 +3330,8 @@
 			size: 1.5d
 			subtitle: "UEV, Grindless"
 			tasks: [{ id: "25620CEB48039CDD", item: "gtceu:sic_fibre_plant", type: "item" }]
-			x: 24.0d
-			y: 66.0d
+			x: 4.0d
+			y: 68.0d
 		}
 		{
 			icon: "gtceu:single_crystal_foundry"
@@ -3308,7 +3341,7 @@
 			size: 1.5d
 			subtitle: "UEV, Grindless"
 			tasks: [{ id: "130E42987299B812", item: "gtceu:single_crystal_foundry", type: "item" }]
-			x: 2.0d
+			x: 6.0d
 			y: 68.0d
 		}
 		{
@@ -3319,7 +3352,7 @@
 			size: 1.5d
 			subtitle: "UEV, Grindless"
 			tasks: [{ id: "455545D50D2C2EB5", item: "gtceu:snspd_foundry", type: "item" }]
-			x: 4.0d
+			x: 8.0d
 			y: 68.0d
 		}
 		{
@@ -3330,7 +3363,7 @@
 			size: 1.5d
 			subtitle: "UEV, Grindless"
 			tasks: [{ id: "37C3574666B137F4", item: "gtceu:uev_fusion_reactor", type: "item" }]
-			x: 6.0d
+			x: 10.0d
 			y: 68.0d
 		}
 		{
@@ -3341,7 +3374,7 @@
 			size: 1.5d
 			subtitle: "UEV, Grindless"
 			tasks: [{ id: "6296AFE4825844EB", item: "gtceu:vdw_stacker", type: "item" }]
-			x: 8.0d
+			x: 12.0d
 			y: 68.0d
 		}
 	]

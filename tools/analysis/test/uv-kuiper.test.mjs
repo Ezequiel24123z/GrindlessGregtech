@@ -144,8 +144,8 @@ test('the cryogenic plant: the Kuiper row on the Moon splits the mix into argon,
   assert.ok(JSON.stringify(rec.j.recipeConditions || []).includes('gcyr:luna'), 'on the Moon');
   const cryo = recipes.filter((r) => r.t === 'gtceu:cryogenic_processing').map((r) => r.i.split('/').pop()).sort();
   // UHV-A6 adds the 99.999 % neon row, UHV-B3 the oganesson propellant row, UEV-A2 the nether-air xenon cut
-  // UEV-A7 adds the 6N helium-3 and helium-4 ash rows
-  assert.deepEqual(cryo, ['helium_3_6n', 'helium_4_ash', 'high_purity_neon', 'kuiper_noble_gas', 'liquid_helium', 'liquid_nitrogen', 'liquid_oxygen', 'oganesson_propellant',
+  // UEV-A7 adds the 6N helium-3 and helium-4 ash rows, UEV-B2 the interstellar gas row
+  assert.deepEqual(cryo, ['helium_3_6n', 'helium_4_ash', 'high_purity_neon', 'interstellar_gas', 'kuiper_noble_gas', 'liquid_helium', 'liquid_nitrogen', 'liquid_oxygen', 'oganesson_propellant',
     'triton_nitric_oxide', 'xenon_cut']);
   for (const [name, gas, liquid] of [['liquid_oxygen', 'gtceu:oxygen', 'gtceu:liquid_oxygen'], ['liquid_helium', 'gtceu:helium', 'gtceu:liquid_helium'],
     ['liquid_nitrogen', 'gtceu:nitrogen', 'gtceu:liquid_nitrogen']]) {

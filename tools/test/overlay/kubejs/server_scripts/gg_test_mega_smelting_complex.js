@@ -1,3 +1,4 @@
+// priority: -5761
 // TEST ONLY, MEGA-5 (gtceu:smelting_complex). Command: kubejs custom_command gg_test_mega_smelting_complex
 // Band ONLY: X 33792-33855, Z 0-63, Overworld Y 98-115.
 //   T1 of docs/eras/mega.md 6.4, on one real plant with Cupronickel coils (1800 K, parallel ceiling 4) and a LuV energy hatch:

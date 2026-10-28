@@ -139,7 +139,8 @@ test('the launcher runs only on the Moon: one sail-chip and the heliopause data 
 test('gases: silane, xenon difluoride and silicon tetrafluoride each have one maker and a destination', () => {
   assert.deepEqual(makersOf('gtceu:silane'), [row('silane').recipeId]);
   assert.deepEqual(makersOf('gtceu:xenon_difluoride'), [row('xenon_difluoride').recipeId]);
-  assert.deepEqual(makersOf('gtceu:silicon_tetrafluoride'), [row('sail_release').recipeId]);
+  // UEV-B2's interstellar dust lab also makes SiF4 (HF on the silicate grains); the HF hydrolysis row takes both
+  assert.deepEqual(makersOf('gtceu:silicon_tetrafluoride').sort(), [row('sail_release').recipeId, 'grindless:interstellar_dust_analysis/demineralise_grains'].sort());
   assert.ok(recipes.some((x) => inputsOf(x).includes('gtceu:silicon_tetrafluoride')), 'SiF4 is consumed');
   assert.deepEqual(row('silane').fluidsOut, [{ id: 'gtceu:silane', amount: 1000 }]);
   assert.deepEqual(row('silicon_tetrafluoride_hydrolysis').fluidsOut, [{ id: 'gtceu:hydrofluoric_acid', amount: 4000 }]);
