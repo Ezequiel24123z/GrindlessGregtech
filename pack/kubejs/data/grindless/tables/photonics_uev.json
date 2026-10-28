@@ -145,7 +145,11 @@
         { "name": "cool_and_package", "circuit": 4, "eut": 1966080, "duration": 600,
           "itemsIn": [{ "id": "grindless:snspd_die", "count": 1 }, { "id": "gtceu:gold_dust", "count": 1 }],
           "fluidsIn": [{ "id": "gtceu:superfluid_helium", "amount": 100 }],
-          "itemsOut": [{ "id": "grindless:snspd", "count": 1 }] }
+          "itemsOut": [{ "id": "grindless:snspd", "count": 1 }] },
+        { "_why": "UIV-A10, line 41: Nb/AlOx/Nb trilayer patterned into Josephson junctions on the SNSPD foundry (circuit 5).", "name": "nb_jj_wafer", "circuit": 5, "eut": 1966080, "duration": 600,
+          "itemsIn": [{ "id": "grindless:nb_trilayer", "count": 1 }],
+          "fluidsIn": [{ "id": "gtceu:pmma_resist", "amount": 100 }],
+          "itemsOut": [{ "id": "grindless:nb_jj_wafer", "count": 1 }] }
       ]
     },
     "vdw_assembly": {

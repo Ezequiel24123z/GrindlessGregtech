@@ -168,7 +168,7 @@ test('line 22: CO -> C-12 monoxide (Saturn orbit) -> methanation -> C-12 methane
   assert.deepEqual(col.map((r) => [r.name, r.circuit, ids(r.fluidsIn)]), [['helium_three', 1, ['gtceu:saturn_helium']], ['deuterium', 2, ['gtceu:hydrogen']],
     ['boron_11_trifluoride', 20, ['gtceu:boron_trifluoride']]]);
   // UEV-A3 adds the nanodiamond row at circuit 7
-  assert.deepEqual(Q.recipes.filter((r) => r.type === 'diamond_cvd').map((r) => r.circuit), [1, 2, 3, 4, 7]);
+  assert.deepEqual(Q.recipes.filter((r) => r.type === 'diamond_cvd').map((r) => r.circuit), [1, 2, 3, 4, 7, 8]); // UIV-A10 adds c8 (c12_cvd_plate)
 });
 
 test('no UEV input, and every lang key the package needs is written in en_us and es_es', () => {

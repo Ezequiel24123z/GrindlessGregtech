@@ -111,7 +111,7 @@ test('the HV syngas plant has the CO-rich row at circuit 6 (C + CO2 -> 2 CO)', (
   const s = read('server_scripts', 'grindless', 'hv', 'syngas_plant.js');
   assert.match(s, /name: 'co_rich', circuit: 6, feed: 1, co2: 1000, out: \{ co: 2000 \}/);
   assert.match(s, /SYN\.uevRecipes = UEV_TABLE\.map\(planOf\)/);
-  assert.match(s, /SYN\.recipes\.concat\(SYN\.orbitRecipes, SYN\.uevRecipes\)/);
+  assert.match(s, /SYN\.recipes\.concat\(SYN\.orbitRecipes, SYN\.uevRecipes(?:, SYN\.uivRecipes)?\)/);
 });
 
 test('the EV platinum plant has the Barnard residue row at circuit 9, locked to Barnard b, no voiding', () => {
