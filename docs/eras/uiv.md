@@ -724,7 +724,7 @@ Steps are the items between arrows, counted as UEV's. Every line ends in a UIV p
 | 36 | Ps cooling laser: LNOI (UHV, as built) → poled (3 c3) → PPLN waveguide (UHV foundry) → 486 nm SHG → 243 nm SHG → Ps cooling laser | 6 | none |
 | 37 | TPV shell: In/Ga/As/Sb → InGaAsSb epi (UV MOCVD) → air-bridge reflector (UHV foundry) → diced cell → TPV tile (12 c2) → wired segment → outer shell (LaPotin 2022) | 7 | AsH₃, SbH₃ → scrubbed, contained |
 | 38 | Gamma mirror: C-12 methane → CVD diamond (ZPM diamond lattice) → HPHT (UEV megabar) → (004) cut → ion-milled → gamma Bragg mirror → Ps cavity | 7 | graphite → stock |
-| 39 | Maglev conveyor: Fe₁₆N₂ (UEV) → bonded Halbach → RHEA-cased (2) → MH winding (ZPM magnet works) → potted → maglev stator → UIV conveyor | 7 | offcuts → remelt |
+| 39 | Maglev conveyor: Fe₁₆N₂ (UEV) → bonded Halbach → RHEA-cased (2) → MH winding (ZPM magnet works) → potted → maglev stator + 1 `grindless:uev_conveyor_module` (the belt frame it rebuilds; its only use) → UIV conveyor | 7 | offcuts → remelt |
 | 40 | 5D data crystal: SiCl₄ → soot → preform (UV fibre draw) → fs voxels (4 c4) → read-verified → annealed → 5D data crystal (Zhang, Kazansky 2016) | 7 | HCl → cascade |
 | 41 | AQFP logic: Nb (EV extraction cascade) → Nb target (UHV SPS) → Nb/Al-AlOx/Nb trilayer (UHV MBE) → JJ wafer (UEV SNSPD foundry mode) → AQFP die (Takeuchi 2013) → bonded on interposer → Matrioshka logic tile | 7 | Al → stock |
 | 42 | mK cryostat: Pr₆O₁₁ (ZPM Eu reductor) → Pr metal → PrNi₅ (2 c5) → nuclear stage (8 c1) → dilution unit with He-3/He-4 (UV superfluid He) → mK cryostat module (8 c2) → used by P:Si and the memories | 7 | Ni → stock; mixture → returned |

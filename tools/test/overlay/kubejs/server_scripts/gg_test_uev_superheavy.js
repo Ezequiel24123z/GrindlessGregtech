@@ -1,4 +1,4 @@
-// priority: -7772
+// priority: -7765
 ﻿// Gregtech Grindless - T1 of package UEV-A2 (TEST-ONLY overlay, never shipped): the superheavy machines' live recipes.
 //
 //   powershell -File tools\test\Invoke-GGTest.ps1 -Suite server `

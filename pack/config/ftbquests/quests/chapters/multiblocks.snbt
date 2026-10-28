@@ -3213,6 +3213,17 @@
 			y: 66.0d
 		}
 		{
+			icon: "gtceu:containment_works"
+			id: "14FAD5BF28AFE7E0"
+			rewards: [{ id: "323714DD274968DC", type: "xp", xp: 10 }]
+			shape: "gear"
+			size: 1.5d
+			subtitle: "UEV, Grindless"
+			tasks: [{ id: "5DAE23ED9F3ED648", item: "gtceu:containment_works", type: "item" }]
+			x: 8.0d
+			y: 66.0d
+		}
+		{
 			icon: "gtceu:cvi_furnace"
 			id: "62FBED569E821682"
 			rewards: [{ id: "3C4ECA57A637AC9D", type: "xp", xp: 10 }]
@@ -3220,7 +3231,18 @@
 			size: 1.5d
 			subtitle: "UEV, Grindless"
 			tasks: [{ id: "71CA47AD905E3A7B", item: "gtceu:cvi_furnace", type: "item" }]
-			x: 8.0d
+			x: 10.0d
+			y: 66.0d
+		}
+		{
+			icon: "gtceu:degenerate_harvester"
+			id: "65DCBA9D9F1A359C"
+			rewards: [{ id: "3F3C01801512B240", type: "xp", xp: 10 }]
+			shape: "gear"
+			size: 1.5d
+			subtitle: "UEV, Grindless"
+			tasks: [{ id: "7732AE3E85D5CB9C", item: "gtceu:degenerate_harvester", type: "item" }]
+			x: 12.0d
 			y: 66.0d
 		}
 		{
@@ -3231,7 +3253,7 @@
 			size: 1.5d
 			subtitle: "UEV, Grindless"
 			tasks: [{ id: "53CB0D8A357CC797", item: "gtceu:electron_beam_furnace", type: "item" }]
-			x: 10.0d
+			x: 14.0d
 			y: 66.0d
 		}
 		{
@@ -3242,7 +3264,7 @@
 			size: 1.5d
 			subtitle: "UEV, Grindless"
 			tasks: [{ id: "505A1347A7BD011A", item: "gtceu:entanglement_station", type: "item" }]
-			x: 12.0d
+			x: 16.0d
 			y: 66.0d
 		}
 		{
@@ -3253,7 +3275,7 @@
 			size: 1.5d
 			subtitle: "UEV, Grindless"
 			tasks: [{ id: "4F48C84D4368B599", item: "gtceu:helium3_polariser", type: "item" }]
-			x: 14.0d
+			x: 18.0d
 			y: 66.0d
 		}
 		{
@@ -3264,7 +3286,7 @@
 			size: 1.5d
 			subtitle: "UEV, Grindless"
 			tasks: [{ id: "2351747AFC9AA376", item: "gtceu:interstellar_dust_lab", type: "item" }]
-			x: 16.0d
+			x: 20.0d
 			y: 66.0d
 		}
 		{
@@ -3275,7 +3297,18 @@
 			size: 1.5d
 			subtitle: "UEV, Grindless"
 			tasks: [{ id: "6136643781C0A739", item: "gtceu:megabar_press", type: "item" }]
-			x: 18.0d
+			x: 22.0d
+			y: 66.0d
+		}
+		{
+			icon: "gtceu:nebula_collector"
+			id: "7C5BD6EE7FC69885"
+			rewards: [{ id: "55D0DB0ACF29555A", type: "xp", xp: 10 }]
+			shape: "gear"
+			size: 1.5d
+			subtitle: "UEV, Grindless"
+			tasks: [{ id: "170FA2B0CCAE369B", item: "gtceu:nebula_collector", type: "item" }]
+			x: 24.0d
 			y: 66.0d
 		}
 		{
@@ -3286,8 +3319,8 @@
 			size: 1.5d
 			subtitle: "UEV, Grindless"
 			tasks: [{ id: "156EE7475AEE23C6", item: "gtceu:nitride_magnet_works", type: "item" }]
-			x: 20.0d
-			y: 66.0d
+			x: 2.0d
+			y: 68.0d
 		}
 		{
 			icon: "gtceu:photonic_integration_hall"
@@ -3297,8 +3330,8 @@
 			size: 1.5d
 			subtitle: "UEV, Grindless"
 			tasks: [{ id: "61DDBD3D847F2C16", item: "gtceu:photonic_integration_hall", type: "item" }]
-			x: 22.0d
-			y: 66.0d
+			x: 4.0d
+			y: 68.0d
 		}
 		{
 			icon: "gtceu:pulsar_timing_station"
@@ -3308,8 +3341,8 @@
 			size: 1.5d
 			subtitle: "UEV, Grindless"
 			tasks: [{ id: "49841830FD453667", item: "gtceu:pulsar_timing_station", type: "item" }]
-			x: 24.0d
-			y: 66.0d
+			x: 6.0d
+			y: 68.0d
 		}
 		{
 			icon: "gtceu:quantum_gas_lab"
@@ -3319,7 +3352,7 @@
 			size: 1.5d
 			subtitle: "UEV, Grindless"
 			tasks: [{ id: "2C6D9F7424BADAA4", item: "gtceu:quantum_gas_lab", type: "item" }]
-			x: 2.0d
+			x: 8.0d
 			y: 68.0d
 		}
 		{
@@ -3330,7 +3363,7 @@
 			size: 1.5d
 			subtitle: "UEV, Grindless"
 			tasks: [{ id: "25620CEB48039CDD", item: "gtceu:sic_fibre_plant", type: "item" }]
-			x: 4.0d
+			x: 10.0d
 			y: 68.0d
 		}
 		{
@@ -3341,7 +3374,7 @@
 			size: 1.5d
 			subtitle: "UEV, Grindless"
 			tasks: [{ id: "130E42987299B812", item: "gtceu:single_crystal_foundry", type: "item" }]
-			x: 6.0d
+			x: 12.0d
 			y: 68.0d
 		}
 		{
@@ -3352,7 +3385,7 @@
 			size: 1.5d
 			subtitle: "UEV, Grindless"
 			tasks: [{ id: "455545D50D2C2EB5", item: "gtceu:snspd_foundry", type: "item" }]
-			x: 8.0d
+			x: 14.0d
 			y: 68.0d
 		}
 		{
@@ -3363,7 +3396,7 @@
 			size: 1.5d
 			subtitle: "UEV, Grindless"
 			tasks: [{ id: "37C3574666B137F4", item: "gtceu:uev_fusion_reactor", type: "item" }]
-			x: 10.0d
+			x: 16.0d
 			y: 68.0d
 		}
 		{
@@ -3374,7 +3407,18 @@
 			size: 1.5d
 			subtitle: "UEV, Grindless"
 			tasks: [{ id: "6296AFE4825844EB", item: "gtceu:vdw_stacker", type: "item" }]
-			x: 12.0d
+			x: 18.0d
+			y: 68.0d
+		}
+		{
+			icon: "gtceu:white_dwarf_spectrograph"
+			id: "75F14D51D80BB977"
+			rewards: [{ id: "7FA895C17D290F28", type: "xp", xp: 10 }]
+			shape: "gear"
+			size: 1.5d
+			subtitle: "UEV, Grindless"
+			tasks: [{ id: "4D30A547C6E82998", item: "gtceu:white_dwarf_spectrograph", type: "item" }]
+			x: 20.0d
 			y: 68.0d
 		}
 	]

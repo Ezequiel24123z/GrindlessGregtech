@@ -1,4 +1,4 @@
-// priority: -7637
+// priority: -7639
 // -----------------------------------------------------------------------------------------------
 // UEV's superheavy element line (docs/eras/uev.md, machines 2-4, lines 3-6; package UEV-A2): the heavy ion cyclotron, the recoil
 // separator and the superheavy chemistry lab, their recipe types and the intermediate items and gases. The recipes come from
