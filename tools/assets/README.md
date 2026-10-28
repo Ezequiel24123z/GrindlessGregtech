@@ -64,6 +64,8 @@ Generators for the pack's own textures. Everything is procedural 16x16 pixel art
 | `Build-UIVMetallicHydrogenTextures.ps1` | Writes the ramp-compression pulser's controller face and the eight item icons of UIV's metallic hydrogen, lonsdaleite and cg-N lines (UIV-A2). `-Credits`. |
 | `Build-UIVLevitationMelterTextures.ps1` | Writes the levitation melter's controller face and the fourteen item icons of UIV's RHEA, metallic-glass and maglev parts (UIV-A3). `-Credits`. |
 | `Build-UIVTflnFemtosecondTextures.ps1` | Writes the TFLN fab's and femtosecond writer's controller faces and the nineteen item icons of UIV's thin-film lithium niobate and laser-written glass lines (UIV-A4). `-Credits`. |
+| `Build-UIVBeuvStmTextures.ps1` | Writes the BEUV scanner's and STM lithography cell's controller faces and the fourteen item icons of UIV's 6.7 nm lithography and P:Si lines (UIV-A5). `-Credits`. |
+| `Build-UIVMemoriesCryostatTextures.ps1` | Writes the spectral hole burner's and millikelvin cryostat works' controller faces and the fourteen item icons of UIV's memory and millikelvin lines (UIV-A6). `-Credits`. |
 | `Build-UHVZblanTextures.ps1` | Writes the ZBLAN preform (UHV-A10, `item/zblan_preform.png`). The ZBLAN draw tower reuses UV's draw tower casing. `-Credits`. |
 | `Build-UVHeatSourcesTextures.ps1` | Writes the four item icons of UV's heat source works (UV-A2): probe RTG, americium micro source, curium RTG pellet, heavy curium oxide. `-Credits`. |
 | `Build-UVAcceleratorsTextures.ps1` | Writes the faces of UV's synchrotron, muon fusion cell and antimatter trap (UV-A5: `multiblock/synchrotron/`, `multiblock/muon_fusion_cell/`, `multiblock/antimatter_trap/`) and the 13 item icons of the LIGA, antiproton and muon fusion lines. `-Credits`. |
@@ -1548,4 +1550,22 @@ Procedural, drawn by `Build-UIVTflnFemtosecondTextures.ps1`; nothing is copied f
 ```powershell
 powershell -NoProfile -ExecutionPolicy Bypass -File tools\assets\Build-UIVTflnFemtosecondTextures.ps1
 powershell -NoProfile -ExecutionPolicy Bypass -File tools\assets\Build-UIVTflnFemtosecondTextures.ps1 -Credits
+```
+
+## UIV BEUV scanner and STM cell (UIV-A5)
+
+Procedural, drawn by `Build-UIVBeuvStmTextures.ps1`; nothing is copied from another mod. The controller faces of the BEUV scanner and the STM lithography cell (`block/multiblock/beuv_scanner/overlay_front*.png`, `block/multiblock/stm_lithography_cell/overlay_front*.png`, animated when working) and fourteen item icons: Tb droplet target, HfO2 resist wafer, BEUV-exposed wafer, fouled BEUV mirror, BEUV driver ASIC, B4C target, La/B4C multilayer, LaN barrier mirror, BEUV mirror, Si-28 float-zone ingot, Si-28 float-zone wafer, H-terminated wafer, STM-patterned wafer, PH3-dosed wafer.
+
+```powershell
+powershell -NoProfile -ExecutionPolicy Bypass -File tools\assets\Build-UIVBeuvStmTextures.ps1
+powershell -NoProfile -ExecutionPolicy Bypass -File tools\assets\Build-UIVBeuvStmTextures.ps1 -Credits
+```
+
+## UIV memories and millikelvin cryostat (UIV-A6)
+
+Procedural, drawn by `Build-UIVMemoriesCryostatTextures.ps1`; nothing is copied from another mod. The controller faces of the spectral hole burner and the millikelvin cryostat works (`block/multiblock/spectral_hole_burner/overlay_front*.png`, `block/multiblock/millikelvin_cryostat_works/overlay_front*.png`, animated when working) and fourteen item icons: Eu-151:YSO and Er:YSO boules and slabs, six-hour and telecom memory slabs, six-hour memory, nuclear stage, cold plate, P:Si processor, Er preform, Er fibre, Er fibre coil, pumped EDFA.
+
+```powershell
+powershell -NoProfile -ExecutionPolicy Bypass -File tools\assets\Build-UIVMemoriesCryostatTextures.ps1
+powershell -NoProfile -ExecutionPolicy Bypass -File tools\assets\Build-UIVMemoriesCryostatTextures.ps1 -Credits
 ```

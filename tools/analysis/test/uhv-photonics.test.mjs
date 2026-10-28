@@ -86,10 +86,12 @@ test('one recipe per lookup path, with the ZPM implanter rows: unique circuits, 
       for (let j = i + 1; j < ks.length; j++) assert.ok(!sub(ks[i], ks[j]) && !sub(ks[j], ks[i]), `${type}: ${rs[i].name} / ${rs[j].name}`);
     }
   }
-  assert.deepEqual(all.filter((r) => r.type === 'ion_implantation').map((r) => r.circuit).sort(), [1, 2, 3, 4]);
-  // UEV-A6 added MBE c3 and foundry c7 (UEV rows in the same table); UIV-A1 added MBE c4; UIV-A4 added foundry c8-11
-  assert.deepEqual(rowsOf('molecular_beam_epitaxy').map((r) => r.circuit), [1, 2, 3, 4]);
-  assert.deepEqual(rowsOf('photonic_foundry').map((r) => r.circuit), [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]);
+  // UEV's implanter row (c5) is in photonics_uev.json; UIV-A5 added ZPM qubits.js c6
+  assert.deepEqual(all.filter((r) => r.type === 'ion_implantation').map((r) => r.circuit).sort(), [1, 2, 3, 4, 6]);
+  // UEV-A6 added MBE c3 and foundry c7 (UEV rows in the same table); UIV-A1 added MBE c4; UIV-A4 added foundry c8-11;
+  // UIV-A5 added MBE c5-6 and foundry c12
+  assert.deepEqual(rowsOf('molecular_beam_epitaxy').map((r) => r.circuit), [1, 2, 3, 4, 5, 6]);
+  assert.deepEqual(rowsOf('photonic_foundry').map((r) => r.circuit), [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]);
   // GTM's own types take no circuit here; the blast furnace rows carry a temperature
   for (const type of ['electric_blast_furnace', 'large_chemical_reactor']) for (const r of rowsOf(type)) assert.equal(r.circuit, 0, r.name);
   for (const r of rowsOf('electric_blast_furnace')) assert.ok(r.temp > 0, r.name);
@@ -155,8 +157,8 @@ test('the ion implanter\'s rows: helium smart-cut of lithium niobate (3), alumin
   assert.deepEqual(outputs(sic), ['grindless:implanted_sic_wafer']);
   // the wafers and boules come from UHV-A2's crystal growth furnace
   for (const id of ['grindless:lithium_niobate_wafer', 'grindless:eu_yso_boule', 'grindless:inp_wafer']) assert.ok(producers(id).some(([w]) => w.startsWith('crystals.json')), id);
-  // ZPM's implanter rows keep circuits 1-2 and their inputs; the A3 change to the diamond lattice fab stays
-  assert.deepEqual(Q.recipes.filter((r) => r.type === 'ion_implantation').map((r) => [r.name, r.circuit]), [['nv_diamond_chips', 1], ['donor_qubit_wafer', 2]]);
+  // ZPM's implanter rows keep circuits 1-2 and their inputs; the A3 change to the diamond lattice fab stays; UIV-A5 appended c6
+  assert.deepEqual(Q.recipes.filter((r) => r.type === 'ion_implantation').map((r) => [r.name, r.circuit]), [['nv_diamond_chips', 1], ['donor_qubit_wafer', 2], ['h_si28_wafer', 6]]);
 });
 
 test('the byproducts have destinations: arsenic and the LN donor go back, fluorite to the kiln, the spent target to the furnace; tellurium from sludge', () => {
@@ -183,8 +185,8 @@ test('no UEV input, and every lang key the package needs is written in en_us and
     for (const id of inputs(r).concat(outputs(r))) assert.ok(!/(^|[:_])uev(_|$)/.test(id.split(':')[1] || ''), `${r.name}: ${id}`);
   }
   // UEV-A6's two UEV rows in these UHV types keep their keys in uev_photonics_lang.js; UIV-A1's MBE c4 in uiv_isotopes_lang.js;
-  // UIV-A4's foundry c8-11 in uiv_tfln_femtosecond_lang.js
-  const lang = ['uhv_photonics_lang.js', 'uev_photonics_lang.js', 'uiv_isotopes_lang.js', 'uiv_tfln_femtosecond_lang.js']
+  // UIV-A4's foundry c8-11 in uiv_tfln_femtosecond_lang.js; UIV-A5's MBE c5-6 and foundry c12 in uiv_beuv_stm_lang.js
+  const lang = ['uhv_photonics_lang.js', 'uev_photonics_lang.js', 'uiv_isotopes_lang.js', 'uiv_tfln_femtosecond_lang.js', 'uiv_beuv_stm_lang.js']
     .map((f) => fs.readFileSync(path.join(kube, 'client_scripts', 'grindless', f), 'utf8')).join('\n');
   for (const [type, t] of Object.entries(T.types)) {
     if (!t.dataKey) continue;

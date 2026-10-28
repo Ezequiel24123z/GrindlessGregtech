@@ -1,4 +1,4 @@
-// priority: 3320
+// priority: 3350
 // Gregtech Grindless - names and tooltips of UIV's spectral hole burner (startup_scripts/grindless/uiv/memories_cryostat.js; package UIV-A6):
 //
 //   block.gtceu.<machine>, gtceu.<type>                machine and recipe type names

@@ -1,3 +1,4 @@
+// priority: 3390
 // Gregtech Grindless - names and tooltips of UIV's BEUV scanner and STM lithography cell (startup_scripts/grindless/uiv/beuv_stm.js; package UIV-A5):
 //
 //   block.gtceu.<machine>, gtceu.<type>                machine and recipe type names

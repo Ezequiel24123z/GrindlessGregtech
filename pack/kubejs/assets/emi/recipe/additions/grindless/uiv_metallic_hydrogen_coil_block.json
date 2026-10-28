@@ -1,0 +1,5 @@
+{
+  "type": "emi:info",
+  "stacks": ["item:grindless:metallic_hydrogen_coil_block"],
+  "text": ["emi.grindless.info.metallic_hydrogen_coil_block.0"]
+}

@@ -1310,7 +1310,7 @@ Wave A packages depend on F1 and F2 and on the spikes named. They run two at a t
   - GT--'s own `gtnn:optical_mainframe` recipe removed by output, as server `uev/photonics.js:186-190` does for the optical computer (F2 unhides the item at `uiv`).
 - **`<name>`:** `mainframe`.
 - **Allowed (extra):**
-  - `tables/photonics_uev.json` (3 rows: the photonic integration hall's photonic tensor core, `gtnn:optical_mainframe` and the pulsar-timed repeater, which also reads `grindless:eo_transceiver` from line 10 as its electro-optic interface; server `uev/photonics.js:25`; the hall is startup `uev/photonics.js:87`);
+  - `tables/photonics_uev.json` (3 rows: the photonic integration hall's photonic tensor core, which also reads A5's `grindless:beuv_driver_asic` as its drive electronics (line 11's end); `gtnn:optical_mainframe`, which also reads A6's `grindless:six_hour_memory` (line 15's end) and `grindless:p_si_processor` (line 14's end); and the pulsar-timed repeater, which also reads `grindless:eo_transceiver` from line 10 as its electro-optic interface and A6's `grindless:telecom_memory` and `grindless:pumped_edfa` (lines 16 and 44); server `uev/photonics.js:25`; the hall is startup `uev/photonics.js:87`);
   - `tables/photonics.json` (2 rows: the foundry's 64 × 64 PCM crossbar and the MBE reactor's ThF₄ thin film, each at the next free circuit after A5's rows; server `uhv/photonics.js:32`);
   - the UEV pulsar timing station's row file or table (UEV machine 20, `gtceu:pulsar_timing_station`, `docs/eras/uev.md:463`; the file lands in UEV's wave B, and the integrator names it in the issue): 1 row, repeater clock discipline, at Alpha Centauri AB orbit;
   - `server_scripts/grindless/iv/fluorspar_kiln.js` (1 row: ThF₄ from Th-229, in a new `UIV_ROWS` array beside `UEV_ROWS`, `:83`, read where `UEV_ROWS` is read);
@@ -1323,7 +1323,8 @@ Wave A packages depend on F1 and F2 and on the spikes named. They run two at a t
   - ThF₄ only from the kiln, from Th-229 only;
   - the repeater's clock discipline only at the pulsar timing station's site.
 - **Acceptance:**
-  - `gtnn:optical_mainframe` resolves from GST and the glass interposer, and no other recipe outputs it;
+  - `gtnn:optical_mainframe` resolves from GST, the glass interposer, the six-hour memory and the P:Si processor, and no other recipe outputs it;
+  - the tensor core resolves from the BEUV driver ASIC;
   - the UIV sensor resolves from the comb and the chip nuclear clock;
   - the pulsar-timed repeater resolves (W reads it as the case 11 link).
 - **Tests:** T0; recipe lookup only (the removal by output is UEV-A6's proof). T1: none.
