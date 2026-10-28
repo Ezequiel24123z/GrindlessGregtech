@@ -1,4 +1,4 @@
-// priority: -8350
+// priority: -7782
 // TEST ONLY, UEV-B1. Command: kubejs custom_command gg_test_uev_travel
 // Band ONLY: X 32768-32831, Z 0-63, Overworld Y 60-120 (nothing is placed there: the checks are registry and SavedData reads).
 // Doubts: the datapack places load with the final ids, the DFD motors register at GCYR tiers 7 and 9, and stations nine and ten
@@ -23,8 +23,8 @@
     'grindless:pluto_orbit', 'gcyr:mercury_orbit', 'grindless:proxima_b_orbit']
   var SLOTS_WANT = OLDER.concat([ALPHA, SIRIUS])
   var NEW = [
-    { key: 'alpha', orbit: ALPHA, planet: 'gcyr:alpha_centauri' },
-    { key: 'sirius', orbit: SIRIUS, planet: 'grindless:sirius' }
+    { key: 'alpha', orbit: ALPHA, planet: ALPHA },
+    { key: 'sirius', orbit: SIRIUS, planet: SIRIUS }
   ]
 
   function classes() {
@@ -89,7 +89,7 @@
 
   function places() {
     var PD = classes().PlanetData
-    var wantTier = { 'gcyr:alpha_centauri': 9, 'grindless:barnard': 9, 'grindless:sirius': 10 }
+    var wantTier = {}; wantTier[ALPHA] = 9; wantTier[BARNARD] = 9; wantTier[SIRIUS] = 10
     var parts = []
     var ok = true
     Object.keys(wantTier).forEach(function (id) {
@@ -104,7 +104,7 @@
     check('place_levels', lv.every(function (s) { return /true$/.test(s) }), lv.join(', '))
     var back = []
     var mapOk = true
-    NEW.concat([{ orbit: BARNARD_ORBIT, planet: 'grindless:barnard' }]).forEach(function (n) {
+    NEW.concat([{ orbit: BARNARD_ORBIT, planet: BARNARD }]).forEach(function (n) {
       var level = levelOf(n.orbit)
       if (level === null) { mapOk = false; back.push(n.orbit + ' no level'); return }
       var got = planetName(fromOrbit(level))
