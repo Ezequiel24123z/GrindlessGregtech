@@ -52,8 +52,8 @@ test('the patterns: one controller in the front slice, uniform size, a symbol fo
   }
 });
 
-test('the six recipes: one circuit per type slot, ZPM VA, whole numbers, the telescope in Earth orbit only', () => {
-  assert.equal(OB.recipes.length, 6);
+test('the seven recipes: one circuit per type slot, ZPM VA, whole numbers, Earth orbit only for the telescope and UIV-B3\'s timing row', () => {
+  assert.equal(OB.recipes.length, 7); // UIV-B3 adds j0437_pulse_timed (telemetry_decoding circuit 5)
   for (const p of OB.recipes) {
     const r = byId(p.recipeId);
     assert.ok(r, p.recipeId + ' added');
@@ -61,7 +61,7 @@ test('the six recipes: one circuit per type slot, ZPM VA, whole numbers, the tel
     assert.deepEqual(circuitOf(r), [p.circuit]);
     assert.equal(p.eut, 122880);
     assert.ok(Number.isInteger(p.duration) && p.duration > 0);
-    assert.equal(/overworld_orbit/.test(JSON.stringify(r.j)), p.type === 'kuiper_survey', p.name + ' dimension');
+    assert.equal(/overworld_orbit/.test(JSON.stringify(r.j)), p.type === 'kuiper_survey' || p.name === 'j0437_pulse_timed', p.name + ' dimension');
   }
 });
 
