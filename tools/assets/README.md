@@ -62,6 +62,8 @@ Generators for the pack's own textures. Everything is procedural 16x16 pixel art
 | `Build-UIVFoundationTextures.ps1` | Writes the shared UIV textures (UIV-F1): 34 items and two casings under `block/uiv/`. `-Only <output or group>`, `-Credits`. |
 | `Build-UIVIsotopesTextures.ps1` | Writes the four item icons of UIV's isotopes (UIV-A1): Cf-249 target wheel, Ni-58/Ti multilayer, neutron supermirror, neutron guide. `-Credits`. |
 | `Build-UIVMetallicHydrogenTextures.ps1` | Writes the ramp-compression pulser's controller face and the eight item icons of UIV's metallic hydrogen, lonsdaleite and cg-N lines (UIV-A2). `-Credits`. |
+| `Build-UIVLevitationMelterTextures.ps1` | Writes the levitation melter's controller face and the fourteen item icons of UIV's RHEA, metallic-glass and maglev parts (UIV-A3). `-Credits`. |
+| `Build-UIVTflnFemtosecondTextures.ps1` | Writes the TFLN fab's and femtosecond writer's controller faces and the nineteen item icons of UIV's thin-film lithium niobate and laser-written glass lines (UIV-A4). `-Credits`. |
 | `Build-UHVZblanTextures.ps1` | Writes the ZBLAN preform (UHV-A10, `item/zblan_preform.png`). The ZBLAN draw tower reuses UV's draw tower casing. `-Credits`. |
 | `Build-UVHeatSourcesTextures.ps1` | Writes the four item icons of UV's heat source works (UV-A2): probe RTG, americium micro source, curium RTG pellet, heavy curium oxide. `-Credits`. |
 | `Build-UVAcceleratorsTextures.ps1` | Writes the faces of UV's synchrotron, muon fusion cell and antimatter trap (UV-A5: `multiblock/synchrotron/`, `multiblock/muon_fusion_cell/`, `multiblock/antimatter_trap/`) and the 13 item icons of the LIGA, antiproton and muon fusion lines. `-Credits`. |
@@ -1528,4 +1530,22 @@ Procedural, drawn by `Build-UIVMetallicHydrogenTextures.ps1`; nothing is copied 
 ```powershell
 powershell -NoProfile -ExecutionPolicy Bypass -File tools\assets\Build-UIVMetallicHydrogenTextures.ps1
 powershell -NoProfile -ExecutionPolicy Bypass -File tools\assets\Build-UIVMetallicHydrogenTextures.ps1 -Credits
+```
+
+## UIV levitation melter (UIV-A3)
+
+Procedural, drawn by `Build-UIVLevitationMelterTextures.ps1`; nothing is copied from another mod. The levitation melter's controller face (`block/multiblock/levitation_melter/overlay_front*.png`, animated when working) and fourteen item icons: melter dross, Nb-Ta button, densified W preform, Zr master alloy, beryllium oxide dust, RHEA slab, RHEA former, wound RHEA former, impregnated MH coil, RHEA-cased charge, Halbach array, RHEA-cased Halbach, potted MH stator, maglev stator (`item/<id>.png`).
+
+```powershell
+powershell -NoProfile -ExecutionPolicy Bypass -File tools\assets\Build-UIVLevitationMelterTextures.ps1
+powershell -NoProfile -ExecutionPolicy Bypass -File tools\assets\Build-UIVLevitationMelterTextures.ps1 -Credits
+```
+
+## UIV TFLN fab and femtosecond writer (UIV-A4)
+
+Procedural, drawn by `Build-UIVTflnFemtosecondTextures.ps1`; nothing is copied from another mod. The controller faces of the TFLN fab and the femtosecond writer (`block/multiblock/tfln_fab/overlay_front*.png`, `block/multiblock/femtosecond_writer/overlay_front*.png`, animated when working) and nineteen item icons: LN-on-Si3N4 wafer, thinned LN-on-Si3N4, EO transceiver, Si-28 SOI wafer, Si-28 donor wafer, poled LNOI wafer, written, etched and finished glass interposer, trenched oxide wafer, damascene SiN wafer, annealed damascene ring, PPLN waveguide, SHG 486 nm stage, 2PP lattice, orifice plate, silica storage preform, written crystal blank, verified crystal (`item/<id>.png`).
+
+```powershell
+powershell -NoProfile -ExecutionPolicy Bypass -File tools\assets\Build-UIVTflnFemtosecondTextures.ps1
+powershell -NoProfile -ExecutionPolicy Bypass -File tools\assets\Build-UIVTflnFemtosecondTextures.ps1 -Credits
 ```

@@ -62,7 +62,22 @@
             'Circuito 3: una placa de aleación de renio perforada con microorificios; el polvo ablacionado vuelve al almacén.'],
         ['gtceu.recipe.grindless_femtosecond_writing.crystal_blank',
             'Circuit 4: voxels written inside a silica storage preform (5D optical storage); the ablated dust goes back to stock.',
-            'Circuito 4: vóxeles escritos dentro de una preforma de sílice de almacenamiento (almacenamiento óptico 5D); el polvo ablacionado vuelve al almacén.']
+            'Circuito 4: vóxeles escritos dentro de una preforma de sílice de almacenamiento (almacenamiento óptico 5D); el polvo ablacionado vuelve al almacén.'],
+        ['gtceu.recipe.grindless_photonic_foundry.eo_transceiver',
+            'Circuit 8: platinum electrodes on a thinned LN-on-Si3N4 wafer make the electro-optic transceiver.',
+            'Circuito 8: electrodos de platino sobre una oblea LN sobre Si3N4 adelgazada forman el transceptor electroóptico.'],
+        ['gtceu.recipe.grindless_photonic_foundry.glass_interposer',
+            'Circuit 9: the written interposer blank is etched and filled with copper vias.',
+            'Circuito 9: el bloque de interpositor escrito se graba y se rellena con vías de cobre.'],
+        ['gtceu.recipe.grindless_photonic_foundry.damascene_ring',
+            'Circuit 10: the damascene Si3N4 wafer is polished and annealed into rings; the polishing silica goes back as quartz sand.',
+            'Circuito 10: la oblea damascena de Si3N4 se pule y se recuece en anillos; la sílice del pulido vuelve como arena de cuarzo.'],
+        ['gtceu.recipe.grindless_photonic_foundry.ppln_waveguide',
+            'Circuit 11: a poled LNOI wafer is etched into periodically poled waveguides.',
+            'Circuito 11: una oblea LNOI polarizada se graba en guías de onda de polarización periódica.'],
+        ['gtceu.recipe.grindless_synchrotron.damascene_trench',
+            'Circuit 7: X-ray lithography cuts deep trenches into an oxidised wafer for damascene Si3N4.',
+            'Circuito 7: la litografía de rayos X abre trincheras profundas en una oblea oxidada para el Si3N4 damasceno.']
     ]
 
     // [name, en, es, tooltip 0 en, es, tooltip 1 en, es]

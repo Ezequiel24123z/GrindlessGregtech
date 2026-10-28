@@ -1,4 +1,4 @@
-// priority: -9193
+// priority: -9200
 // -----------------------------------------------------------------------------------------------
 // UIV's levitation melter (docs/eras/uiv.md, machine 2, lines 2, 4, 5, 7, 8, 9 and 39; package UIV-A3): the machine, its recipe type and the
 // package's own items. The recipes come from data/grindless/tables/levitation_melter.json (server_scripts/grindless/uiv/levitation_melter.js).

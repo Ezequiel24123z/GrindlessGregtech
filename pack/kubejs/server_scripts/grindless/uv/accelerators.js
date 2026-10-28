@@ -1,4 +1,4 @@
-// priority: -24624
+// priority: -24699
 // -----------------------------------------------------------------------------------------------
 // Recipes of UV's synchrotron, muon fusion cell and antimatter trap (machines and recipe types: startup_scripts/grindless/uv/accelerators.js;
 // docs/eras/uv.md, machines 7, 8 and 22, lines 5, 18 and 22; package UV-A5), generated at every server load from
