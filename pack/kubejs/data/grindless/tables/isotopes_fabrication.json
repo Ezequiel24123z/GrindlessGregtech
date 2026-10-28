@@ -1,0 +1,27 @@
+{
+  "_source": "UEV-A1 (docs/eras/uev.md, 'A1. Isotopes', line 2): the depleted-plutonium MOX row of IV's fuel fabrication plant. Real process: mixed-oxide fuel blends plutonium dioxide with uranium dioxide and sinters it into pellets in zircaloy tubes (MELOX, Sellafield MOX plant); the calutron's depleted plutonium is ordinary reactor-grade plutonium oxide.",
+  "_how_it_is_used": [
+    "Read by server_scripts/grindless/iv/uranium_cycle.js after the transcurium rows; the same format. Circuit 8: 1-3 are IV's, 4-6 UV's, 7 UHV's.",
+    "The blend comes from the mixer row mox_blend of tables/isotopes.json (depleted plutonium oxide + uranium). The assembly is the same grindless:mox_fuel_assembly the hot cell makes (hot_cell.json), so the depleted plutonium returns to IV's MOX loop.",
+    "energy: one IV assembler stage (1,536,000 EU)."
+  ],
+  "fabrication": [
+    {
+      "name": "depleted_pu_mox",
+      "circuit": 8,
+      "itemsIn": [
+        { "id": "gtceu:mox_blend_powder_dust", "count": 10 },
+        { "id": "grindless:zircaloy_cladding_tube", "count": 4 }
+      ],
+      "fluidsIn": [],
+      "fluidsKept": [],
+      "fluidsOut": [],
+      "itemsOut": [
+        { "id": "grindless:mox_fuel_assembly", "count": 1 }
+      ],
+      "energy": [
+        { "stage": "pressing and sintering the blend into pellets and loading them in zircaloy tubes: one IV assembler stage", "eu": 1536000, "times": 1 }
+      ]
+    }
+  ]
+}

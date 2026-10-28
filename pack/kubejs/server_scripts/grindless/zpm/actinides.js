@@ -46,6 +46,14 @@
   var LANTHANIDES = 'gtceu:lanthanide_nitrate'
   var RE_CHLORIDE = 'gtceu:rare_earth_chloride_solution'
   var KEROSENE = 'gtceu:kerosene'
+  // UEV-A1's partitioning cuts (materials: startup_scripts/grindless/uev/isotopes.js)
+  var PU_NITRATE = 'gtceu:plutonium_nitrate'
+  var PU_RICH_OXIDE = 'gtceu:plutonium_244_rich_oxide_dust'
+  var CM_CF_NITRATE = 'gtceu:curium_californium_nitrate'
+  var BK_CF_NITRATE = 'gtceu:berkelium_californium_nitrate'
+  var CM_NITRATE = 'gtceu:curium_nitrate'
+  var CF_NITRATE = 'gtceu:californium_nitrate'
+  var BK_NITRATE = 'gtceu:berkelium_nitrate'
 
   var RETRIEVAL = [
     {
@@ -89,6 +97,30 @@
       fluidsIn: [{ id: STRIP, amount: 1000 }], notConsumed: [],
       itemsOut: [{ id: AMERICIUM, count: 2 }, { id: CURIUM, count: 1 }, { id: SYNROC, count: 1 }], chancedOut: [],
       fluidsOut: [],
+      eut: 30720, duration: 200
+    },
+    {
+      name: 'plutonium_recovery', circuit: 3,
+      itemsIn: [], chancedIn: [],
+      fluidsIn: [{ id: PU_NITRATE, amount: 1000 }], notConsumed: [{ id: KEROSENE, amount: 100 }],
+      itemsOut: [{ id: PU_RICH_OXIDE, count: 1 }], chancedOut: [],
+      fluidsOut: [{ id: 'gtceu:nitric_acid', amount: 2000 }],
+      eut: 30720, duration: 200
+    },
+    {
+      name: 'curium_cut', circuit: 4,
+      itemsIn: [], chancedIn: [],
+      fluidsIn: [{ id: CM_CF_NITRATE, amount: 1000 }], notConsumed: [],
+      itemsOut: [], chancedOut: [],
+      fluidsOut: [{ id: CM_NITRATE, amount: 500 }, { id: CF_NITRATE, amount: 500 }],
+      eut: 30720, duration: 200
+    },
+    {
+      name: 'berkelium_cut', circuit: 5,
+      itemsIn: [], chancedIn: [],
+      fluidsIn: [{ id: BK_CF_NITRATE, amount: 1000 }], notConsumed: [{ id: 'gtceu:hdehp_solvent', amount: 100 }],
+      itemsOut: [], chancedOut: [],
+      fluidsOut: [{ id: BK_NITRATE, amount: 500 }, { id: CF_NITRATE, amount: 500 }],
       eut: 30720, duration: 200
     }
   ]
