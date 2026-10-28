@@ -61,5 +61,7 @@
   { "id": "grindless:itbtc_coated_conductor", "role": "use", "reason": "temporary (LuV-A3): its uses, the HTS coil and the SMES cell, are LuV-A4's magnet works; delete this exception when A4 merges" },
   { "id": "grindless:chondritic_extract", "role": "use", "reason": "temporary (LuV-B5): its use, the Europan culture of the algae bioreactor, is LuV-B8's; delete this exception when B8 merges" }
   ],
-  "pendingRoutes": []
+  "pendingRoutes": [
+    { "id": "grindless:naquadria_magnets/uev_smes_cell", "reason": "UEV-W: the UEV SMES cell is made from 4 UHV cells plus lay_superhydride wire and plate, held until UEV; the last of A3, A6 and A8 to merge deletes this entry with the UEV (W) obtain rule" }
+  ]
 }

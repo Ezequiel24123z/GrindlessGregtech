@@ -388,7 +388,13 @@ export function auditEmiCoverage({ dump, registry, cfg, emi, lang = null, native
   })).filter((d) => d.ours.length > 0);
   // a pending route waits for a later package of the era under construction: it may only be dropped for our own stacks disabled until
   // their era, and a stale entry (no longer dropped) is a problem, so each one is deleted when its package merges
-  const untilEra = new Set(hiddenOurs.map((h) => h.key));
+  // ours: the audited stacks, plus the other forms GTM makes of our materials (a wire, a plate), which the audit does not list
+  const ourMaterials = registry.materials ? [...registry.materials.values()].map((m) => m.name.split(':')) : [];
+  const ourForm = (k) => {
+    const [ns, p] = (k.startsWith(FLUID) ? k.slice(FLUID.length) : k).split(':');
+    return ourMaterials.some(([mns, n]) => mns === ns && (p === n || p.startsWith(n + '_') || p.endsWith('_' + n) || p.includes('_' + n + '_')));
+  };
+  const untilEra = new Set([...hiddenOurs.map((h) => h.key), ...[...disabled].filter(ourForm)]);
   const pending = new Map((cfg.pendingRoutes || []).map((p) => [p.id, p]));
   const pendingRoutes = [];
   const droppedRoutes = [];

@@ -1,3 +1,4 @@
+// priority: -7786
 // Gregtech Grindless - smoke test of UEV's wireless tier (package UEV-W; TEST-ONLY overlay: copied over the instance on the test PC, never
 // shipped with the pack): the UEV row of tables/wireless_energy.json (registered by lv/wireless_energy.js) and the naquadria magnet works'
 // circuit 6 (tables/magnet_works.json), which makes the UEV cell from four UHV cells.

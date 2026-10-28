@@ -117,6 +117,23 @@ test('a pending route is dropped only for our stacks disabled until their era; a
   assert.ok(res.problems.some((p) => p.startsWith('t:assembler/other (gtceu:assembler): EMI drops it')), res.problems.join('\n'));
 });
 
+test('a pending route may be dropped for any form of our material (a wire the audit does not list), not for a look-alike name', () => {
+  const dump = mkDump({
+    recipes: [
+      gt('t:magnets/cell', 'gtceu:magnets', { ins: [gi('t:small_cell'), gi('t:foo_single_wire', 16)], outs: [gi('t:big_cell')] }),
+      gt('t:magnets/other', 'gtceu:magnets', { ins: [gi('t:small_cell'), gi('t:foobar_plate')], outs: [gi('t:big_cell')] }),
+    ],
+    tagsItem: { 't:hidden_with_recipes': ['t:foo_single_wire', 't:foobar_plate', 't:big_cell'] },
+  });
+  const emi = { ...noEmi, disabled: [parseEmiStack('#item:t:hidden_with_recipes')] };
+  const registry = { ...reg({ items: ['t:small_cell', 't:big_cell', 't:foo_ingot'], types: ['gtceu:magnets'] }),
+    materials: new Map([['t:foo', { name: 't:foo', forms: new Set(['ingot']) }]]) };
+  const pendingRoutes = [{ id: 't:magnets/cell', reason: 'the wire is a later package' }, { id: 't:magnets/other' }];
+  const res = audit({ dump, registry, emi, cfg: { ...cfg0, pendingRoutes } });
+  assert.deepEqual(res.pendingRoutes.map((d) => d.id), ['t:magnets/cell']);
+  assert.deepEqual(res.droppedRoutes.map((d) => d.id), ['t:magnets/other'], 't:foobar_plate is not a form of t:foo');
+});
+
 test('what only a pending route gives is pending, not a gap, and a process whose recipes are all pending routes is not a problem', () => {
   const dump = mkDump({
     recipes: [gt('t:cvd/plate', 'gtceu:cvd', { ins: [gi('t:seed', 1, 0), gi('t:methane')], outs: [gi('t:plate')] })],
