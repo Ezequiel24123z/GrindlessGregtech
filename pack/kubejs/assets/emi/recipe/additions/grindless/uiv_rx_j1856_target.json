@@ -1,0 +1,5 @@
+{
+  "type": "emi:info",
+  "stacks": ["item:grindless:flashed_target", "item:grindless:es254_target", "item:grindless:u238_flash_target"],
+  "text": ["emi.grindless.info.uiv_rx_j1856_target.0"]
+}

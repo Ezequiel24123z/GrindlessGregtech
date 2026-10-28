@@ -122,6 +122,15 @@
       itemsOut: [], chancedOut: [],
       fluidsOut: [{ id: BK_NITRATE, amount: 500 }, { id: CF_NITRATE, amount: 500 }],
       eut: 30720, duration: 200
+    },
+    // UIV-B2: the Es/Fm cut of the dissolved flash target (line 32), circuit 6: the fermium goes to stock, the einsteinium on to the HDEHP cut
+    {
+      name: 'es_fm_cut', circuit: 6,
+      itemsIn: [], chancedIn: [],
+      fluidsIn: [{ id: 'gtceu:es_fm_liquor', amount: 1000 }], notConsumed: [],
+      itemsOut: [{ id: 'gtceu:fermium_dust', count: 1 }], chancedOut: [],
+      fluidsOut: [{ id: 'gtceu:es_254_solution', amount: 1000 }],
+      eut: 30720, duration: 200
     }
   ]
 

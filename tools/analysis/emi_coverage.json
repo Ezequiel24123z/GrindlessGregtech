@@ -75,13 +75,12 @@
   "exceptions": [
   { "id": "grindless:itbtc_coated_conductor", "role": "use", "reason": "temporary (LuV-A3): its uses, the HTS coil and the SMES cell, are LuV-A4's magnet works; delete this exception when A4 merges" },
   { "id": "grindless:chondritic_extract", "role": "use", "reason": "temporary (LuV-B5): its use, the Europan culture of the algae bioreactor, is LuV-B8's; delete this exception when B8 merges" },
-  { "id": "grindless:cage_part", "role": "use", "reason": "temporary (UIV-A1): its use, the neutronium cage c2 (contained neutronium pellet), is UIV-B2's (docs/eras/uiv.md line 24 row, machine 15); delete this exception when B2 merges" },
-  { "id": "grindless:element_120_recoil", "role": "use", "reason": "temporary (UIV-A1, recoil separator c6; resolved by A3's Ti-50): its use, the superheavy census II entry, is UIV-B2's (docs/eras/uiv.md line 9 row); delete this exception when B2 merges" },
   { "id": "grindless:sled_charge", "role": "use", "reason": "temporary (UIV-A3, assembler): its use, the Cygnus X-1 sleds, is UIV-B4's (docs/eras/uiv.md line 4 row); delete this exception when B4 merges" },
+  { "id": "grindless:uiv_field_generator", "role": "use", "reason": "temporary (UIV-B2, assembler): its uses are the controllers of machines 21-22 (docs/eras/uiv.md 'Voltages and controllers'), written by UIV-B4; delete this exception when B4 merges" },
+  { "id": "grindless:superheavy_census_ii", "role": "use", "reason": "temporary (UIV-B2, superheavy chemistry): it is kept by the warp gate's c7 hold row, written by UIV-B5 (docs/eras/uiv.md 'B5. Gate'); delete this exception when B5 merges" },
   { "id": "grindless:uiv_electric_motor", "role": "use", "reason": "temporary (UIV-A8, assembler): like the UIV piston, its uses are the controllers of machines 9-22 (docs/eras/uiv.md 'Voltages and controllers'), written by A9, A10 and wave B; delete this exception when the first controller that reads it merges" },
   { "id": "grindless:uiv_robot_arm", "role": "use", "reason": "temporary (UIV-A8, assembler): like the UIV piston, its uses are the controllers of machines 9-22 (docs/eras/uiv.md 'Voltages and controllers'), written by A9, A10 and wave B; delete this exception when the first controller that reads it merges" }
   ],
   "pendingRoutes": [
-    { "id": "grindless:warp_gate/hold_cygnus_x1", "reason": "UIV-B1: the jump to Cygnus X-1 (warp gate c6) reads the neutronium pellet of UIV-B2 and the pulsar navigation solution of UIV-B3 beside the launched relay seed; the integrator deletes this entry when it     merges the last of B2 and B3" }
-      ]
+  ]
 }

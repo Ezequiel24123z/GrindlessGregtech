@@ -119,6 +119,24 @@
       "energy": [
         { "stage": "reducing the tetrachloride under argon in the retort: one IV assembler stage", "eu": 1536000, "times": 1 }
       ]
+    },
+    {
+      "name": "u238_flash_target",
+      "_why": "UIV-B2, line 32: natural uranium (U-238) cast into the foil-backed target that the r-process decompressor floods with neutrons.",
+      "circuit": 10,
+      "itemsIn": [
+        { "id": "gtceu:uranium_dust", "count": 4 },
+        { "id": "gtceu:tungsten_ingot", "count": 1 }
+      ],
+      "fluidsIn": [],
+      "fluidsKept": [],
+      "fluidsOut": [],
+      "itemsOut": [
+        { "id": "grindless:u238_flash_target", "count": 1 }
+      ],
+      "energy": [
+        { "stage": "casting the uranium into its tungsten backing in the glovebox: one IV assembler stage", "eu": 1536000, "times": 1 }
+      ]
     }
   ]
 }
