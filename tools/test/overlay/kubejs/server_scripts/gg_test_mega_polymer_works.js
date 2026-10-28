@@ -1,3 +1,4 @@
+// priority: -5749
 // TEST ONLY, MEGA-2 (gtceu:polymer_works). Command: kubejs custom_command gg_test_mega_polymer_works
 // Band ONLY: X 30976-31039, Z 0-63, Overworld Y 98-115.
 //   Checks (T1 of docs/eras/mega.md 6.4):

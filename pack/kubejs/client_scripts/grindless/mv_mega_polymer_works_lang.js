@@ -1,3 +1,4 @@
+// priority: 6150
 // Gregtech Grindless - names and tooltips of the MV Polymer Works (startup_scripts/grindless/mv/mega_polymer_works.js).
 //
 //   gtceu:polymer_works / gtceu.polymer_works   (machine name + 3 tooltip lines, recipe type name; en_us and es_es)

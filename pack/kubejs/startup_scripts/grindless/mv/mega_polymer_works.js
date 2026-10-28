@@ -1,3 +1,4 @@
+// priority: -6250
 // -----------------------------------------------------------------------------------------------
 // MV Polymer Works, gtceu:polymer_works (package MEGA-2, docs/eras/mega.md 4.4): the second mega of the family. A steel hall around a
 // coil that runs two whole plastic and rubber lines in one pass, with up to 16 copies at once. It has its own recipe type,

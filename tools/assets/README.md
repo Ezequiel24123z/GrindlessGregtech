@@ -1194,3 +1194,16 @@ powershell -NoProfile -ExecutionPolicy Bypass -File tools\assets\Build-UEVFounda
 ```
 
 Same final check as UHV, against `startup_scripts/grindless/uev/foundation.js`, in both directions. Proposed CREDITS "Assets" line: procedural, original.
+
+## MV Polymer Works (MEGA-2)
+
+Procedural, drawn by `Build-MegaPolymerWorksTextures.ps1`; nothing is copied from another mod. The controller face of `gtceu:polymer_works` (composed polyethylene and rubber plate lines, up to 16 parallels, energy-bound); still, active and emissive frames.
+
+```powershell
+powershell -NoProfile -ExecutionPolicy Bypass -File tools\assets\Build-MegaPolymerWorksTextures.ps1
+powershell -NoProfile -ExecutionPolicy Bypass -File tools\assets\Build-MegaPolymerWorksTextures.ps1 -Credits
+```
+
+| File (under `textures/`) | Notes |
+|---|---|
+| `block/multiblock/polymer_works/overlay_front*.png` | The Polymer Works controller face: still, active and active emissive. |
