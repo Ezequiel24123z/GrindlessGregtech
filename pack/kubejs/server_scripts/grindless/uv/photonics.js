@@ -160,7 +160,10 @@
   var UIV_ROWS = [
     { name: 'silica_storage_preform', type: 'fibre_draw', circuit: 9, itemsIn: [item('gtca:silicon_tetrachloride_dust', 5)],
       fluidsIn: [fluid('minecraft:water', 2000)], itemsOut: [item('grindless:silica_storage_preform', 1)],
-      fluidsOut: [fluid('gtceu:hydrochloric_acid', 4000)], eut: 122880, duration: 600 }
+      fluidsOut: [fluid('gtceu:hydrochloric_acid', 4000)], eut: 122880, duration: 600 },
+    // UIV-A6 (docs/eras/uiv.md, line 16): the Er:YSO slab spliced to ytterbium fibre becomes the telecom memory
+    { name: 'er_yso_pigtail', type: 'fibre_draw', circuit: 10, itemsIn: [item('grindless:telecom_memory_slab', 1), item('grindless:ytterbium_fibre', 2)],
+      fluidsIn: [], itemsOut: [item('grindless:telecom_memory', 1)], fluidsOut: [], eut: 122880, duration: 400 }
   ]
 
   // side steps on GTM's own machines

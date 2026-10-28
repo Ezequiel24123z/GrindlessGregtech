@@ -51,7 +51,15 @@
         { "name": "ktp", "circuit": 7, "eut": 491520, "duration": 800,
           "itemsIn": [{ "id": "grindless:ktp_flux", "count": 4 }, { "id": "grindless:iridium_crucible", "count": 1, "chance": 313 }],
           "kept": [], "fluidsIn": [], "charge": [{ "id": "gtceu:argon", "amount": 1000 }],
-          "itemsOut": [{ "id": "grindless:ktp_boule", "count": 1 }, { "id": "grindless:worn_iridium_crucible", "count": 1, "chance": 313 }], "fluidsOut": [] }
+          "itemsOut": [{ "id": "grindless:ktp_boule", "count": 1 }, { "id": "grindless:worn_iridium_crucible", "count": 1, "chance": 313 }], "fluidsOut": [] },
+        { "name": "eu151_yso", "circuit": 8, "eut": 491520, "duration": 800,
+          "itemsIn": [{ "id": "gtceu:yttrium_dust", "count": 2 }, { "id": "gtceu:silicon_dioxide_dust", "count": 1 }, { "id": "gtceu:europium_151_dust", "count": 1 }, { "id": "grindless:iridium_crucible", "count": 1, "chance": 313 }],
+          "kept": [], "fluidsIn": [{ "id": "gtceu:oxygen", "amount": 1500 }], "charge": [{ "id": "gtceu:argon", "amount": 1000 }],
+          "itemsOut": [{ "id": "grindless:eu151_yso_boule", "count": 1 }, { "id": "grindless:worn_iridium_crucible", "count": 1, "chance": 313 }], "fluidsOut": [] },
+        { "name": "er_yso", "circuit": 9, "eut": 491520, "duration": 800,
+          "itemsIn": [{ "id": "gtceu:yttrium_dust", "count": 2 }, { "id": "gtceu:silicon_dioxide_dust", "count": 1 }, { "id": "gtceu:erbium_oxide_dust", "count": 1 }, { "id": "grindless:iridium_crucible", "count": 1, "chance": 313 }],
+          "kept": [], "fluidsIn": [{ "id": "gtceu:oxygen", "amount": 1500 }], "charge": [{ "id": "gtceu:argon", "amount": 1000 }],
+          "itemsOut": [{ "id": "grindless:er_yso_boule", "count": 1 }, { "id": "grindless:worn_iridium_crucible", "count": 1, "chance": 313 }], "fluidsOut": [] }
       ]
     },
     "cutter": {

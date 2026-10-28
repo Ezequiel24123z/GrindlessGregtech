@@ -1,0 +1,47 @@
+{
+  "_why": "UIV-A6 (docs/eras/uiv.md, machines 6 and 8, lines 11, 15, 16, 42 and 44): the spectral hole burner and the millikelvin cryostat works, with the GTM-machine steps of their lines. Read by server_scripts/grindless/uiv/memories_cryostat.js. Ids are grindless:<type>/<name>.",
+  "types": {
+    "spectral_hole_burning": {
+      "dataKey": "grindless_spectral_hole_burning",
+      "recipes": [
+        {
+          "name": "six_hour_slab", "circuit": 1, "eut": 31457280, "duration": 1200,
+          "itemsIn": [{ "id": "grindless:eu151_yso_slab", "count": 1 }],
+          "charge": [{ "id": "gtceu:superfluid_helium", "amount": 1000 }],
+          "itemsOut": [{ "id": "grindless:six_hour_memory_slab", "count": 1 }]
+        },
+        {
+          "name": "telecom_slab", "circuit": 2, "eut": 31457280, "duration": 1200,
+          "itemsIn": [{ "id": "grindless:er_yso_slab", "count": 1 }],
+          "charge": [{ "id": "gtceu:superfluid_helium", "amount": 1000 }],
+          "itemsOut": [{ "id": "grindless:telecom_memory_slab", "count": 1 }]
+        }
+      ]
+    },
+    "cutter": {
+      "recipes": [
+        {
+          "name": "eu151_yso_slabs", "circuit": 1, "eut": 30720, "duration": 400,
+          "itemsIn": [{ "id": "grindless:eu151_yso_boule", "count": 1 }],
+          "fluidsIn": [{ "id": "gtceu:lubricant", "amount": 100 }],
+          "itemsOut": [{ "id": "grindless:eu151_yso_slab", "count": 4 }]
+        },
+        {
+          "name": "er_yso_slabs", "circuit": 2, "eut": 30720, "duration": 400,
+          "itemsIn": [{ "id": "grindless:er_yso_boule", "count": 1 }],
+          "fluidsIn": [{ "id": "gtceu:lubricant", "amount": 100 }],
+          "itemsOut": [{ "id": "grindless:er_yso_slab", "count": 4 }]
+        }
+      ]
+    },
+    "assembler": {
+      "recipes": [
+        {
+          "name": "six_hour_memory", "circuit": 20, "eut": 491520, "duration": 600,
+          "itemsIn": [{ "id": "grindless:six_hour_memory_slab", "count": 1 }, { "id": "grindless:mk_cryostat_module", "count": 1 }, { "id": "grindless:uev_sensor", "count": 1 }],
+          "itemsOut": [{ "id": "grindless:six_hour_memory", "count": 1 }]
+        }
+      ]
+    }
+  }
+}
