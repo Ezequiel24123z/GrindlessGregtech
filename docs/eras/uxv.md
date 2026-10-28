@@ -494,10 +494,10 @@ OpV is built right after UXV (user direction). Each OpV line below has its feed,
 22. Przybylski's star actinides: unconfirmed lines; second route to UIV actinides.
 23. Magnetar field tap: OpV bulge.
 24. Platform supply from the condensation tower: AE2 relays ship home materials to the far platforms (DECISIONS.md:59; *AE2*), so the tower's cuts are not the only route there; they stay machine 12's product, not a line.
-25. Assemblies with no feedstock of their own: the hull, the mainframe join and `pasta_strand_repeater` (strand wire, `pulsar_timed_repeater`, `mtj_die` and `stno_array`, all made by other lines). The robot arm now has lines 45 and 49, the hatches lines 46 and 48, the mainframe's package line 47.
-26. Dy metal as its own line: a branch of line 36, two steps from line 9's Dy?O?.
+25. Assemblies with no feedstock of their own: the hull, the mainframe join and `pasta_strand_repeater` (strand wire, `pulsar_timed_repeater` and `mtj_die`, all made by other lines). The robot arm now has lines 45 and 49, the hatches lines 46 and 48, the mainframe's package line 47.
+26. Dy metal as its own line: a branch of line 36, two steps from line 9's Dy₂O₃.
 27. TSV silicon interposer: a second route to UIV's `glass_interposer` (UIV line 12); line 47 shields that one instead.
-28. CaF? window for the KrF laser: a second route to UHV's `vuv_caf2_optic` (`uhv/crystals.js:16`).
+28. CaF₂ window for the KrF laser: a second route to UHV's `vuv_caf2_optic` (`uhv/crystals.js:16`).
 29. Neon-burning Mk6 fuel: no product beyond EU (its O-16 and Mg-24 are stock already); silicon burning is OpV's (`si28_ash`).
 
 The seven data chains (arm chart, island chart, glitch record, VLBI record, Ti-44 map, elevator log, bulge chart) do not count either.
@@ -872,10 +872,10 @@ Order: S0-1 first (it fixes F1's list); S0-3, S0-9 and S0-10 (they fix B1); then
   - components `grindless:uxv_electric_motor`, `uxv_electric_pump`, `uxv_conveyor_module`, `uxv_electric_piston`, `uxv_robot_arm`, `uxv_sensor`, `uxv_emitter`, `uxv_field_generator` (Monifactory `Post_UV_Components.js` pattern, LGPL, credited). Each recipe goes in its maker's own server file, so no table is shared: sensor A6; motor, pump, piston, conveyor, arm A8; field generator B3; emitter B5;
   - blocks: `grindless:uxv_fusion_casing` (S0-4);
   - materials (`gtceu:`): `pasta_strand` with cable properties (S0-8); `titanium_44`, `fermium_257`, `einsteinium_254`, `curium_248`, `tungsten_184` (with a wire form), `oxygen_16` (fluid; `gtceu:carbon_12` is UIV's, `uiv/foundation.js:97`); CoFeB, Co₂MnSi, Terfenol-D, Ni₂MnGa, DyScO₃, SrRuO₃, La-BFO, GGG, YIG, hBN, WTe₂, Fe₃GeTe₂; and every material S0-1's dump shows missing;
-  - fluids (`grindless:`): `stellar_plasma`, `disk_plasma`, `filtered_disk_plasma`, `flux_loaded_plasma`, the four cuts (`stellar_hydrogen_cut`, `stellar_helium_cut`, `stellar_cno_cut`, `stellar_heavy_cut`), `triple_alpha_fuel`, `carbon_burning_fuel`, `oxygen_burning_fuel`, the four ash plasmas (`cno_ash_plasma`, `helium_burning_ash_plasma`, `carbon_burning_ash_plasma`, `oxygen_burning_ash_plasma`), `lpe_flux`, `he_6n`, `mnt_product_gas`. They are here because older files (`zpm/fusion.js`, `ev/cryogenic_plant.js`) read them;
+  - fluids (`grindless:`): `stellar_plasma`, `disk_plasma`, `filtered_disk_plasma`, `flux_loaded_plasma`, the four cuts (`stellar_hydrogen_cut`, `stellar_helium_cut`, `stellar_cno_cut`, `stellar_heavy_cut`), `triple_alpha_fuel`, `carbon_burning_fuel`, `oxygen_burning_fuel`, the four ash plasmas (`cno_ash_plasma`, `helium_burning_ash_plasma`, `carbon_burning_ash_plasma`, `oxygen_burning_ash_plasma`), `lpe_flux`, `he_6n`, `mnt_product_gas`, `finemet_melt`. They are here because older files (`zpm/fusion.js`, `ev/cryogenic_plant.js`) read them;
   - items made by one package and used by another:
     - spintronics: `cofeb_target`, `mgo_target`, `heusler_target`, `saf_target_set`, `ta_seed_target`, `srruo3_target`, `la_bfo_target`, `cofeb_ingot`, `heusler_ingot`, `terfenol_d_ingot`, `ni_mn_ga_ingot`, `ta_foil`, `pt_sheet`, `dysco3_substrate`, `ggg_wafer`, `hbn_crystal`, `wte2_crystal`, `fgt_crystal`, `mtj_stack_wafer`, `mram_stack_wafer`, `saf_track_wafer`, `mtj_die`, `mram_wafer`, `srruo3_electrode_wafer`, `me_switch_wafer`, `sot_readout_stack`, `meso_logic_die`, `racetrack_chip`, `magnonic_bus`, `sin_membrane`, `nanoaperture_array`, `rf_carpet_board`, `kr_f2_premix`, `krf_excimer_laser`, `pt_lpe_crucible`, `gas_stopping_cell`, `shequid_gyro`, `nv_diamond_chip` if S0-1 shows it missing;
-    - lines 44-49: `stno_stack_wafer`, `stno_array`, `gum_metal_blank`, `gum_metal_flexspline`, `uxv_strain_wave_gear`, `encoder_ring`, `tmr_encoder`, `ga2o3_wafer`, `ga2o3_power_die`, `mu_metal_foil`, `shielded_interposer`, `finemet_ribbon`, `uxv_voltage_coil` (the KrF laser reuses `grindless:vuv_caf2_optic`; no new window id);
+    - lines 44-49: `stno_stack_wafer`, `stno_array`, `gum_metal_billet` (A2 → A8), `gum_metal_blank`, `gum_metal_flexspline`, `uxv_strain_wave_gear`, `encoder_ring`, `tmr_encoder`, `ga2o3_wafer`, `ga2o3_power_die`, `mu_metal_foil`, `shielded_interposer`, `finemet_ribbon` (A7 → B4), `finemet_toroid` (B4 → A3), `finemet_core` (A3 → B4), `uxv_voltage_coil` (the KrF laser reuses `grindless:vuv_caf2_optic`; no new window id);
     - superheavy: `fm257_target`, `es254_target`, `cm248_target`, `element_121_recoil`, `element_122_recoil`, `superheavy_census_iii`, `spent_actinide_target` (every spent Fm, Es and Cm target: A1's cyclotron rows and A6's collider make it, A1's waste retrieval row takes it), `u238_ion_source`, `u238_beam_charge`, `island_nuclide`, `island_chart`;
     - parts: `tetrataenite_lamination`, `tetrataenite_rotor`, `strand_stator`, `strand_tape`, `alip_duct`, `w184_cvi_preform`, `terfenol_d_rod`, `ni_mn_ga_crystal`, `cnt_bumper_weave`, `cnt_whipple_shield`, `frc_cartridge`, `gamma_laser_module`, `positron_stack`, `ti44_core`, `si28_ash`;
     - far products: `raw_pasta`, `spaghetti_phase`, `lasagna_phase`, `gnocchi_fragment`, `anti_phase_residue`, `cage_part`, `lasagna_plate`, `pasta_core_sample`, `polar_cap_electrode`, `ejecta_knot_dust`, the four condensates;
@@ -977,7 +977,7 @@ Two at a time, in the pairs of *Parallel and serial*. A row whose input is made 
   - `ev/platinum_plant.js` (`:598`) c10-13: 5N Pt, 5N Ru, 5N Ir, etch and redeposit recovery;
   - `iv/fluorspar_kiln.js` (`:83`), six rows keyed by input: 5N MgO, DyScO₃, SrRuO₃, La-BFO, GGG oxide, HF → F₂;
   - `zpm/europium.js` (`:105`) c10-11: Dy₂O₃; Dy₂O₃ + La → Dy (the c6 Tb pattern; Y₂O₃ and La₂O₃ are the cascade's c11, as built);
-  - `tables/am_powders.json` c8-16: CoFeB atomise, Heusler atomise, HIP blank, MgO press and sinter, SAF set, SrRuO₃ target, La-BFO target, spent re-press; c16 Ti-Nb-Ta-Zr-O blend (from `six_n_niobium`, as built) → sintered gum metal (line 45);
+  - `tables/am_powders.json` c8-16: CoFeB atomise, Heusler atomise, HIP blank, MgO press and sinter, SAF set, SrRuO₃ target, La-BFO target, spent re-press; c16 Ti-Nb-Ta-Zr-O blend (from `six_n_niobium`, as built) → sintered `gum_metal_billet` (line 45);
   - `uv/detectors.js` (`:56`) c8-9: 7N Te, 7N Ge;
   - `ev/cryogenic_plant.js` (`:40`), four rows keyed by input: `stellar_helium_cut` → `triple_alpha_fuel`; `gtceu:oxygen_16` → `oxygen_burning_fuel`; air → Kr; He → `he_6n`;
   - `server_scripts/grindless/uxv/spin_feed.js`: hot strip mill rows (5N Ta → `ta_foil`, 5N Pt → `pt_sheet`; first free circuits, the `ev/combined_cycle_and_hot_mill.js:464` pattern) and the seven bonded targets (`cofeb_target` to `la_bfo_target`) on GTM types;
@@ -1012,9 +1012,9 @@ Two at a time, in the pairs of *Parallel and serial*. A row whose input is made 
   - `tables/composites.json`, after W:
     - nitride magnet works c8-13: MTJ, MRAM and SAF anneals, Heusler homogenise, SOT anneal, Ni-Mn-Ga twin training;
     - CVI c14: W-184 fibre → `w184_cvi_preform`;
-    - nitride magnet works c15 `mu_metal_foil` H₂ anneal, c16 Finemet toroid field anneal;
+    - nitride magnet works c15 `mu_metal_foil` H₂ anneal, c16 `finemet_toroid` → `finemet_core` (field anneal);
   - `tables/crystals.json` c10-17: GGG and DyScO₃ Czochralski (Ir crucible), WTe₂ and FGT CVT, Ga₂O₃ EFG from an Ir die (`gallium_oxide_dust`), Terfenol-D rod, Ni-Mn-Ga crystal, recrystallise;
-  - `tables/levitation_melter.json` c6-10: the four melts; c10 Fe-Si-B-Nb-Cu → Finemet melt;
+  - `tables/levitation_melter.json` c6-10: the four melts; c10 Fe-Si-B-Nb-Cu → `grindless:finemet_melt`;
   - `tables/megabar.json` c4: Ba-BN → `hbn_crystal` (raw; the leach is in the own file);
   - `tables/photonics.json` (foundry) c14-19: MESO integration → `meso_logic_die`, MRAM Cu back end, `rf_carpet_board`; c17 Au contacts → `stno_array`; c18 dicing and packaging → `ga2o3_power_die`; c19 shield can + `glass_interposer` → `shielded_interposer`;
   - `uv/photonics.js:143` (era array, a `UXV_ROWS` block in the same pattern) c12-15: SiN cap, `sin_membrane`; c14 STNO SiN planarisation; c15 Sn-doped Ga₂O₃ homoepitaxy;
@@ -1105,7 +1105,7 @@ Two at a time, in the pairs of *Parallel and serial*. A row whose input is made 
   - the casing chain of line 38: `w184_cvi_preform` → `wf_rhea_billet` (UIV) → casing (own file);
   - DEC rows in `zpm/fusion.js` (array at `:149-170`, keyed by plasma): the four ash plasmas → EU + ash;
   - quench caster c3-5 (`zpm/fusion.js:97`): He-burning ash → `gtceu:carbon_12` + `gtceu:oxygen_16`; C ash → Ne, Na, Mg; O ash → `si28_ash`, S, P;
-  - quench caster c6 (same array; line 48, open question 13): A3's Finemet melt → 20 µm amorphous `finemet_ribbon` by planar flow casting; trim → re-melted.
+  - quench caster c6 (same array; line 48, open question 13): A3's `finemet_melt` → 20 µm amorphous `finemet_ribbon` by planar flow casting; trim → re-melted.
 - **`<name>`:** `fusion_mk6`.
 - **Allowed (extra):** `zpm/fusion.js` (the two arrays); `tables/fusion_mk6.json` (new); pinned tests `zpm-fusion`, `uev-fusion` and UIV-A9's fusion test (tier list only).
 - **References:** machine 9 (uxv.md:249-258); *Fusion*; lines 26-29, 38; DECISIONS.md:500; FusionReactorMachine.java :185, :276, :294-298, :326-327 as uiv.md cites; S0-4.
@@ -1125,7 +1125,7 @@ Two at a time, in the pairs of *Parallel and serial*. A row whose input is made 
 
 - **Objective:**
   - `uxv_electric_motor`, `uxv_electric_pump`, `uxv_electric_piston`, `uxv_conveyor_module` and `uxv_robot_arm` (the arm drives on `uxv_strain_wave_gear` with a `tmr_encoder`, the UIV-A8 strain-wave pattern, DECISIONS.md:539), in `server_scripts/grindless/uxv/uxv_parts.js` (assembly line, the Monifactory pattern);
-  - line 45 after A2's sintered gum metal: hot-forged `gum_metal_blank`, cold-swaged cup, hobbed and shot-peened `gum_metal_flexspline`, `uxv_strain_wave_gear`;
+  - line 45 after A2's `gum_metal_billet`: hot-forged `gum_metal_blank`, cold-swaged cup, hobbed and shot-peened `gum_metal_flexspline`, `uxv_strain_wave_gear`;
   - line 49: `gtceu:tetrataenite_ingot` → rolled `encoder_ring`, multipole-magnetised, `tmr_encoder` with an `mtj_die` bridge;
   - their older rows.
 - **`<name>`:** `uxv_parts`.
@@ -1133,7 +1133,7 @@ Two at a time, in the pairs of *Parallel and serial*. A row whose input is made 
   - `tables/magnet_works.json` c8: `tetrataenite_lamination` → `tetrataenite_rotor`; c10: `encoder_ring` → multipole-magnetised (c9 is B3's);
   - `luv/hts_magnet_works.js` (`:32`) c6: strand wire + lamination → `strand_stator`;
   - `luv/coated_conductor_line.js` (`:32`) c4: strand wire → `strand_tape`;
-  - in the own file: hot strip mill (`gtceu:tetrataenite_ingot` → `tetrataenite_lamination`; `lasagna_plate` → `alip_duct`; gum metal → `gum_metal_blank`; tetrataenite ingot → `encoder_ring`), the swage, hob and gear rows (GTM types), NaK (UHV's `sodium_potassium`, `uhv/mercury.js`, reused if its recipe exists; else a mixer row from ordinary Na and K);
+  - in the own file: hot strip mill (`gtceu:tetrataenite_ingot` → `tetrataenite_lamination`; `lasagna_plate` → `alip_duct`; `gum_metal_billet` → `gum_metal_blank`; tetrataenite ingot → `encoder_ring`), the swage, hob and gear rows (GTM types), NaK (UHV's `sodium_potassium`, `uhv/mercury.js`, reused if its recipe exists; else a mixer row from ordinary Na and K);
   - pinned tests `zpm-magnet_works`, `hts_magnet_works`, `luv_a4_fixture`, `uev-wireless`, `uhv-wireless`, `uiv-metallic_hydrogen`, `uiv-uiv_components`, `uv-wireless`, `wireless_network`, `luv-cryogenics`, `luv-foundation`.
 - **References:** lines 34-37, 45, 49; *Older machines*; `zpm/magnet_works.js:27`; `uiv/uiv_components.js:25-26` (UIV's `bmg_flexspline` and `strain_wave_gear`, the pattern); DECISIONS.md:539.
 - **Depends on:** F1; A2 (gum metal sinter), A3 (melts, crystals), A4 (`mtj_die` after A3's etch); reachable after B4 (strand wire, lasagna).
@@ -1222,7 +1222,7 @@ B1 opens both places. B2 and B3 work at Cygnus X-1 orbit (UIV's platform) and ca
 
 - **Objective:**
   - the pasta extractor, the phase sorter (c1 phases, c2 `pasta_core_sample`), the draw bench (`gtceu:pasta_strand_single_wire`), the laminator (`lasagna_plate`) and the polar cap tap (generator, through one UIV 16 A dynamo hatch);
-  - line 48's last steps: A7's `finemet_ribbon` → wound toroid → (A3's c16 field anneal) → strand-wound `uxv_voltage_coil` (own file, GTM types);
+  - line 48's last steps: A7's `finemet_ribbon` → wound `finemet_toroid` → (A3's c16 field anneal) `finemet_core` + strand wire → `uxv_voltage_coil` (own file, GTM types);
   - in `server_scripts/grindless/uxv/foundation.js`: the recipes of `gtceu:uxv_machine_hull` (on GTM's `uxv_machine_casing`, UIV-B5) and the four UXV hatches, each taking `uxv_voltage_coil` and A3's `ga2o3_power_die` *(tune)*;
   - `pasta_strand_repeater` (own file).
 - **`<name>`:** `vela_pasta`.
@@ -1348,7 +1348,7 @@ Order: S0 (one worker) → F1 → F2 ∥ W → M1 → A1 ∥ A2 → A3 ∥ A4 �
 | `zpm/fusion.js` A7; `zpm/actinides.js` A1; `tables/photonics.json`, `tables/electron_beam.json`, `tables/crystals.json`, `uv/photonics.js` A3; `tables/photonics_uev.json` A5 | one writer each |
 | hot strip mill rows | each package's own file (A2, A3, A8) |
 
-A3 ? A4 holds: A3's c27 row reads `stno_stack_wafer` by its F1 id and writes none of A4's files; C1 checks the reachability. A8 needs A2, A3 and A4 merged, which the order gives; B4 needs A3 (die, anneal) and A7 (ribbon), merged in Wave A.
+A3 ∥ A4 holds: A3's c27 row reads `stno_stack_wafer` by its F1 id and writes none of A4's files; C1 checks the reachability. A8 needs A2, A3 and A4 merged, which the order gives; B4 needs A3 (die, anneal) and A7 (ribbon), merged in Wave A.
 
 ## Decisions proposed
 
