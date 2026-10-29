@@ -113,6 +113,8 @@ test('6N hafnium, tantalum and niobium come only from the electron beam furnace'
       if (f.endsWith(path.join('uev', 'electron_beam.js'))) continue;
       // UEV-A5's HfTaCN billet (uhv/propulsion.js, SPS c4) consumes 6N hafnium; consumers are fine, producers are not
       if (id === 'six_n_hafnium' && f.endsWith(path.join('uhv', 'propulsion.js'))) continue;
+      // UXV-A2's hot strip mill foil and gum-metal blend (uxv/spin_feed.js) only consume 6N tantalum and niobium
+      if ((id === 'six_n_tantalum' || id === 'six_n_niobium') && f.endsWith(path.join('uxv', 'spin_feed.js'))) continue;
       assert.ok(!read(f).includes(`grindless:${id}`), `${id} named in ${path.relative(kube, f)}`);
     }
   }
