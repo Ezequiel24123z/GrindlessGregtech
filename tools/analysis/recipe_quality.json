@@ -17,7 +17,8 @@
   "uv": 8,
   "uhv": 9,
   "uev": 10,
-  "uiv": 11
+  "uiv": 11,
+  "uxv": 12
  },
  "solder": [
   "^gtceu:soldering_alloy$"
@@ -57,7 +58,8 @@
   "8": 7.5,
   "9": 8,
   "10": 8.5,
-  "11": 9
+  "11": 9,
+  "12": 9.5
  },
  "sosoMaxDistinct": 2,
  "sosoIgnore": [
