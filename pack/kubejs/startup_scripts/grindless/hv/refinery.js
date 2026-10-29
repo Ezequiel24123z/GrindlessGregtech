@@ -21,6 +21,9 @@
 // cracking of naphtha) instead of 2-12, and every layer needs exactly one output hatch, so no fraction is ever voided. Tower specifics
 // kept: the parts are sorted by height (the class reads the hatches bottom to top) and no extended facing (the layers stay vertical).
 //
+// QR-S1: the column is a framed tower, a steel frame post on each corner, a glass sight strip down the front and the pipe up the middle;
+// 3 casing cells per layer take its output hatch.
+//
 // Geometry (slices are listed back -> front, rows bottom -> top; the controller is in the front slice, middle column, row 1):
 //   row 0        floor, 7x7
 //   row 1        walls of the reactor hall around a 5x5 empty chamber; a steel pipe column rises from its centre
@@ -66,15 +69,17 @@
   function patternRow(si, ri) {
     if (ri === 0) return 'XXXXXXX'
     if (ri === 1) {
-      if (si === 0) return 'XXXXXXX'
-      if (si === 6) return 'XXXSXXX'
-      return si === 3 ? 'X##P##X' : 'X#####X'
+      if (si === 0) return 'FXGXGXF'
+      if (si === 6) return 'FGXSXGF'
+      if (si === 3) return 'X##P##X'
+      return si === 2 || si === 4 ? 'G#####G' : 'X#####X'
     }
     if (ri === 2) return si === 3 ? 'XXXPXXX' : 'XXXXXXX'
     if (si < 2 || si > 4) return '       '
-    if (ri === ROWS - 1) return '  CCC  '
+    if (ri === ROWS - 1) return si === 3 ? '  CPC  ' : '  FCF  '
     var layer = LETTERS.charAt(ri - FIRST_LAYER_ROW)
-    return si === 3 ? '  ' + layer + 'P' + layer + '  ' : '  ' + layer + layer + layer + '  '
+    if (si === 3) return '  ' + layer + 'P' + layer + '  '
+    return si === 2 ? '  F' + layer + 'F  ' : '  FGF  '
   }
 
   function patternSlices() {
@@ -90,16 +95,18 @@
   function patternSymbols() {
     var symbols = {
       S: Pat.controller(),
-      // 120 cells of floor, hall walls and roof: 5 or 6 are parts (1-2 energy hatches, the catalyst bus, the carbon bus, the crude and the
+      // 108 cells of floor, hall walls and roof (corner posts are frames, the walls have glass windows): 5 or 6 are parts (1-2 energy hatches, the catalyst bus, the carbon bus, the crude and the
       // hydrogen / steam hatches), the rest clean casing
       X: Pat.oneOf(
-        Pat.block(CLEAN, { min: 112 }),
+        Pat.block(CLEAN, { min: 100 }),
         Pat.part('energy_input', { min: 1, max: 2 }),
         Pat.part('input_bus', { exact: 1 }),
         Pat.part('output_bus', { exact: 1 }),
         Pat.part('input_hatch', { exact: 2 })
       ),
       P: Pat.block(PIPE),
+      F: Pat.frame(['steel']),
+      G: Pat.block('minecraft:glass'),
       C: Pat.block(CLEAN),
       '#': Pat.air()
     }
