@@ -24,7 +24,7 @@ new era follows so it does not happen again. The per-area standards live in the 
 | 14 | Old shapes in comments, docs and tests | Reshapes updated the pattern but not the header comment | Each structure handoff lists stale comments; a mechanical pass (QR-M1) fixes them |
 | 15 | Each era reshaped file by file, with silhouettes that did not match from one machine to the next | No shared shape vocabulary per era; a helper used at script top level breaks when it loads after its user | One shape helper per era (`uev/shapes.js`: hall, tower, ring, gantry, dish, mast, dome, ridge; `uiv/shapes.js`: halls, beamlines, drums, cryostat stacks, shaft, torus, lattice shells, fusion annulus), used only inside registry callbacks (QR-S5, QR-S6). Size grows with the era by silhouette, not by bulk: median blocks per structure UHV 211, UV 273, UEV 349, UIV 517 |
 | 16 | Controllers that need their own product: 110 machines unreachable on main after QR-R2 and QR-R4 (mercury solar works, fumarole condenser, ark biosphere, BN reactor, PIT line, fibre draw tower, light sail fab, heat source works, zone refining tower and everything after them); QR-R5 repeated it once (the SiC device fab researched from a SiC plate only its own line makes, which stranded six UHV machines) | "Own-line" research and domain items were picked from what the machine makes; T0 had no reachability check and native reachability needs a dump | `recipe-cycles.mjs` (in T0) fails on any controller that cannot be built from what exists before it; research and domain inputs come from earlier machines (QR-F3). The integrator reruns it after every merge, because two packages that each pass alone can form a cycle together |
-
+| 17 | "Depth raisers": QR-R6's first handoff met the UEV complexity floor by pasting one deep part (the HfTaCN heating element) as a consumable into yarns, wafers, preforms and targets, and 1000 mB of helium into about 20 assembler rows | The complexity score counts depth and distinct inputs but cannot see whether an input belongs to the item's process | The review rejects it: a machine's heater or tool is never a per-item consumable, an inert gas only where the process needs one, and the score is raised by a real step or an intermediate of the item's own line (QR-R6 repair) |
 ## Checklist for every new era (UIV, UXV and later)
 
 Design (`docs/eras/<era>.md`):
@@ -32,6 +32,7 @@ Design (`docs/eras/<era>.md`):
 - [ ] Each controller, hatch and part names its recipe form on the ladder: research item, era fluid, 3 domain inputs, 8+ distinct ingredients from UXV.
 - [ ] A controller's research item and domain inputs come from machines built before it, never from the machine itself or anything after it.
 - [ ] Each process step names its second input or byproduct and where every byproduct goes; nothing comes from nothing.
+- [ ] Each input of a component belongs to its own process; no generic deep part or gas added only to clear the complexity floor.
 - [ ] Structure blocks used in bulk wrap their component 1:1.
 - [ ] Shapes come from the era's shape helper (`<era>/shapes.js`), called inside registry callbacks; a new silhouette goes into the helper, not into one file.
 
