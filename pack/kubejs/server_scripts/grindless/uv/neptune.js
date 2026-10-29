@@ -124,23 +124,32 @@
     console.info(LOG + 'neptune recipes added: ' + (N.recipes.length - N.skipped.length))
   }
 
-  // CRAFTING TABLE: UV hull + the machine's own parts + 4 UV circuits
+  // ASSEMBLY LINE: UV hull + the machine's own parts + 4 UV circuits + 3 line items, researched at the station from a line component
   function addCrafting(event) {
     var HULL = 'gtceu:uv_machine_hull'
     var list = [
-      { id: 'gtceu:neptune_deep_siphon', pattern: ['CPC', 'MHM', 'CPC'], extra: { P: 'gtceu:uv_electric_pump', M: 'gtceu:uv_electric_motor' } },
-      { id: 'gtceu:triton_geyser_sampler', pattern: ['CRC', ' H ', 'CRC'], extra: { R: 'gtceu:uv_robot_arm' } }
+      { id: 'gtceu:neptune_deep_siphon', research: 'grindless:scoop_head',
+        parts: [HULL, '2x gtceu:uv_electric_pump', '2x gtceu:uv_electric_motor'],
+        domain: ['4x grindless:scoop_head', '4x grindless:aerogel_cartridge', '2x grindless:probe_rtg'] },
+      { id: 'gtceu:triton_geyser_sampler', research: 'grindless:aerogel_cartridge',
+        parts: [HULL, '4x gtceu:uv_robot_arm'],
+        domain: ['4x grindless:aerogel_cartridge', '2x grindless:scoop_head', '2x grindless:printed_probe_frame'] }
     ]
     list.forEach(function (m) {
-      var keys = { C: '#gtceu:circuits/uv', H: HULL }
-      Object.keys(m.extra).forEach(function (k) { keys[k] = m.extra[k] })
-      var parts = Object.keys(keys).map(function (k) { return keys[k] }).filter(function (v) { return v.charAt(0) !== '#' })
-      var missing = parts.filter(function (id) { return !Item.exists(id) })
+      var ids = [m.id, m.research].concat(m.parts, m.domain).map(function (s) { return s.replace(/^\d+x /, '') })
+      var missing = ids.filter(function (id) { return !Item.exists(id) })
       if (missing.length > 0) {
-        console.error(LOG + 'neptune crafting of ' + m.id + ' skipped, unknown item(s): ' + missing.join(', '))
+        console.error(LOG + 'neptune controller recipe of ' + m.id + ' skipped, unknown item(s): ' + missing.join(', '))
         return
       }
-      event.recipes.gtceu.shaped(m.id, m.pattern, keys).id('grindless:crafting/' + m.id.split(':')[1])
+      var b = event.recipes.gtceu.assembly_line('grindless:' + m.id.split(':')[1])
+      m.parts.forEach(function (s) { b.itemInputs(s) })
+      b.itemInputs('4x #gtceu:circuits/uv')
+      m.domain.forEach(function (s) { b.itemInputs(s) })
+      b.inputFluids(Fluid.of('gtceu:soldering_alloy', 1152), Fluid.of('gtceu:lubricant', 1000), Fluid.of('gtceu:tritanium', 576))
+      b.itemOutputs(m.id)
+      b.stationResearch(function (r) { return r.researchStack(Item.of(m.research)).CWUt(64).EUt(491520) })
+      b.EUt(491520).duration(1200)
     })
   }
 

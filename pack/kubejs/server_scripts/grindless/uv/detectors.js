@@ -16,8 +16,7 @@
 //     1 downlink    1 Starshot probe in flight (F1's id; its maker is a later package) + 100 mB superfluid helium + the SNSPD array
 //                   (not consumed: the ZPM qubit fab's circuit 3) -> 1 Proxima approach data + 100 mB helium (the detector's bath,
 //                   boiled off)                                                                                    491,520 x 6,000 t
-//   controllers (crafting grid): UV hull + UV motor + 2 UV emitters + 4 UV circuits (tower); UV hull + 2 UV sensors + 4 UV circuits
-//   (station)
+//   controllers (assembly line, station research, UV hull + parts + 4 UV circuits + 3 line items + soldering alloy, lubricant, tritanium)
 //
 // Destinations (rule 3 of AGENTS.md):
 //   germanium tetrachloride -> circuit 2, or UV-A6's fibre preform (gtceu:fibre_draw circuit 1)
@@ -83,7 +82,7 @@
   })
   D.skipped = []
   D.clashes = []
-  D.crafting = { tower: 'grindless:crafting/zone_refining_tower', station: 'grindless:crafting/optical_ground_station' }
+  D.crafting = { tower: 'grindless:assembly_line/zone_refining_tower', station: 'grindless:assembly_line/optical_ground_station' }
   D.craftingParts = ['gtceu:uv_machine_hull', 'gtceu:uv_electric_motor', 'gtceu:uv_emitter', 'gtceu:uv_sensor']
 
   function keysOf(r) {
@@ -151,12 +150,31 @@
       console.error(LOG + 'detectors controller crafting skipped, unknown item(s): ' + missing.join(', '))
       return
     }
-    event.recipes.gtceu.shaped('gtceu:zone_refining_tower', ['CEC', 'EHM', 'C C'], {
-      C: '#gtceu:circuits/uv', E: 'gtceu:uv_emitter', M: 'gtceu:uv_electric_motor', H: 'gtceu:uv_machine_hull'
-    }).id(D.crafting.tower)
-    event.recipes.gtceu.shaped('gtceu:optical_ground_station', ['CSC', 'CHC', ' S '], {
-      C: '#gtceu:circuits/uv', S: 'gtceu:uv_sensor', H: 'gtceu:uv_machine_hull'
-    }).id(D.crafting.station)
+    // station research of a component of each line; different parts and research so GTM's lookup (which ignores counts) tells them apart
+    var defs = [
+      { id: 'zone_refining_tower', name: 'gtceu:zone_refining_tower', research: 'grindless:si28_donor_wafer',
+        parts: ['gtceu:uv_machine_hull', '2x gtceu:uv_emitter', '2x gtceu:uv_electric_motor'],
+        domain: ['4x grindless:si28_donor_wafer', '8x grindless:silicon_28_dust', '2x grindless:hpge_crystal'] },
+      { id: 'optical_ground_station', name: 'gtceu:optical_ground_station', research: 'grindless:snspd_array',
+        parts: ['gtceu:uv_machine_hull', '4x gtceu:uv_sensor'],
+        domain: ['4x grindless:snspd_array', '2x grindless:hpge_crystal', '4x grindless:silicon_28_dust'] }
+    ]
+    defs.forEach(function (d) {
+      var ids = [d.name, d.research].concat(d.domain.map(function (s) { return s.replace(/^\d+x /, '') }))
+      var gone = ids.filter(function (id) { return !Item.exists(id) })
+      if (gone.length > 0) {
+        console.error(LOG + d.id + ' controller recipe skipped, unknown item(s): ' + gone.join(', '))
+        return
+      }
+      var b = event.recipes.gtceu.assembly_line('grindless:' + d.id)
+      d.parts.forEach(function (s) { b.itemInputs(s) })
+      b.itemInputs('4x #gtceu:circuits/uv')
+      d.domain.forEach(function (s) { b.itemInputs(s) })
+      b.inputFluids(Fluid.of('gtceu:soldering_alloy', 1152), Fluid.of('gtceu:lubricant', 1000), Fluid.of('gtceu:tritanium', 576))
+      b.itemOutputs(d.name)
+      b.stationResearch(function (r) { return r.researchStack(Item.of(d.research)).CWUt(64).EUt(491520) })
+      b.EUt(491520).duration(1200)
+    })
   }
 
   ServerEvents.recipes(function (event) {

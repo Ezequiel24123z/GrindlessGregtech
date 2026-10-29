@@ -16,11 +16,12 @@
           "name": "expose", "circuit": 1, "eut": 491520, "duration": 200,
           "itemsIn": [{ "id": "grindless:pmma_coated_wafer", "count": 1 }],
           "kept": [{ "id": "grindless:x_ray_mask", "count": 1 }],
+          "fluidsIn": [{ "id": "gtceu:liquid_helium", "amount": 100 }],
           "itemsOut": [{ "id": "grindless:exposed_wafer", "count": 1 }]
         },
         {
           "name": "develop", "circuit": 2, "eut": 491520, "duration": 200,
-          "itemsIn": [{ "id": "grindless:exposed_wafer", "count": 1 }],
+          "itemsIn": [{ "id": "grindless:exposed_wafer", "count": 1 }, { "id": "gtceu:gold_foil", "count": 1 }],
           "charge": [{ "id": "gtceu:liga_developer", "amount": 250 }],
           "itemsOut": [{ "id": "grindless:patterned_wafer", "count": 1 }]
         },
@@ -130,28 +131,32 @@
       "recipes": [
         {
           "name": "x_ray_mask", "circuit": 0, "eut": 122880, "duration": 400, "cleanroom": true,
-          "itemsIn": [{ "id": "grindless:silicon_nitride_film", "count": 1 }, { "id": "gtceu:gold_plate", "count": 2 }],
+          "itemsIn": [{ "id": "grindless:silicon_nitride_film", "count": 1 }, { "id": "gtceu:gold_plate", "count": 2 }, { "id": "gtceu:tungsten_plate", "count": 2 }, { "id": "gtceu:tritanium_plate", "count": 1 }, { "id": "gtceu:uv_sensor", "count": 1 }],
+          "fluidsIn": [{ "id": "gtceu:pmma_resist", "amount": 100 }, { "id": "gtceu:soldering_alloy", "amount": 72 }],
           "itemsOut": [{ "id": "grindless:x_ray_mask", "count": 1 }]
         },
         {
           "name": "tungsten_target", "circuit": 0, "eut": 30720, "duration": 200,
-          "itemsIn": [{ "id": "gtceu:tungsten_plate", "count": 4 }, { "id": "gtceu:copper_plate", "count": 2 }],
-          "fluidsIn": [{ "id": "gtceu:soldering_alloy", "amount": 144 }],
+          "itemsIn": [{ "id": "gtceu:tungsten_plate", "count": 4 }, { "id": "gtceu:copper_plate", "count": 2 }, { "id": "grindless:silicon_nitride_film", "count": 1 }, { "id": "gtceu:tungsten_steel_plate", "count": 1 }, { "id": "gtceu:molybdenum_plate", "count": 2 }],
+          "fluidsIn": [{ "id": "gtceu:soldering_alloy", "amount": 144 }, { "id": "gtceu:lubricant", "amount": 50 }],
           "itemsOut": [{ "id": "grindless:tungsten_target", "count": 1 }]
         },
         {
           "name": "empty_antiproton_cartridge", "circuit": 0, "eut": 122880, "duration": 400,
-          "itemsIn": [{ "id": "gtceu:zpm_field_generator", "count": 1 }, { "id": "gtceu:tungsten_steel_plate", "count": 4 }],
+          "itemsIn": [{ "id": "gtceu:zpm_field_generator", "count": 1 }, { "id": "gtceu:tungsten_steel_plate", "count": 4 }, { "id": "grindless:silicon_nitride_film", "count": 1 }, { "id": "gtceu:gold_plate", "count": 2 }, { "id": "gtceu:tritanium_plate", "count": 1 }],
+          "fluidsIn": [{ "id": "gtceu:soldering_alloy", "amount": 144 }, { "id": "gtceu:liquid_helium", "amount": 500 }],
           "itemsOut": [{ "id": "grindless:empty_antiproton_cartridge", "count": 1 }]
         },
         {
           "name": "empty_antiproton_trap", "circuit": 0, "eut": 491520, "duration": 400,
-          "itemsIn": [{ "id": "gtceu:uv_field_generator", "count": 1 }, { "id": "gtceu:tritanium_plate", "count": 8 }],
+          "itemsIn": [{ "id": "gtceu:uv_field_generator", "count": 1 }, { "id": "gtceu:tritanium_plate", "count": 8 }, { "id": "grindless:silicon_nitride_film", "count": 1 }, { "id": "gtceu:uv_sensor", "count": 1 }, { "id": "gtceu:gold_plate", "count": 2 }],
+          "fluidsIn": [{ "id": "gtceu:soldering_alloy", "amount": 144 }, { "id": "gtceu:liquid_helium", "amount": 1000 }],
           "itemsOut": [{ "id": "grindless:empty_antiproton_trap", "count": 1 }]
         },
         {
           "name": "lithium_breeder_blanket", "circuit": 0, "eut": 122880, "duration": 600,
-          "itemsIn": [{ "id": "gtceu:lithium_dust", "count": 16 }, { "id": "gtceu:beryllium_dust", "count": 4 }, { "id": "gtceu:tungsten_steel_frame", "count": 1 }],
+          "itemsIn": [{ "id": "gtceu:lithium_dust", "count": 16 }, { "id": "gtceu:beryllium_dust", "count": 4 }, { "id": "gtceu:tungsten_steel_frame", "count": 1 }, { "id": "grindless:silicon_nitride_film", "count": 1 }, { "id": "gtceu:tungsten_plate", "count": 4 }],
+          "fluidsIn": [{ "id": "gtceu:soldering_alloy", "amount": 144 }, { "id": "gtceu:lubricant", "amount": 50 }],
           "itemsOut": [{ "id": "grindless:lithium_breeder_blanket", "count": 1 }]
         }
       ]

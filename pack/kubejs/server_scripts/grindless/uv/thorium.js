@@ -10,8 +10,8 @@
 //                          items. The generator's eut is the EU/t GIVEN, written as -eut.
 //   gtceu:chemical_reactor  the rows of types.chemical_reactor (id grindless:chemical_reactor/<name>): the Triton nitrogen's oxide, the
 //                          15N back from its oxide, and the LiCl salt's first charge.
-//   crafting               the controllers: UV hull + 2 UV robot arms + UV sensor + 4 UV circuits (cell) and UV hull + 2 UV field
-//                          generators + 4 UV circuits (reactor), shaped recipes grindless:crafting/<machine>.
+//   crafting               the controllers: assembly lines with station research, UV hull + parts + 4 UV circuits + 3 line items +
+//                          soldering alloy, lubricant, tritanium; recipes grindless:assembly_line/<machine>.
 //
 // Destinations: radioactive waste -> ZPM's waste retrieval plant; the loaded salt -> cleaned by circuit 4 and back into the charge;
 // 15N -> the fuel fabrication plant's nitride row; the carbon monoxide of that row -> GTM's CO uses; polonium-210 stays in the output hatch.
@@ -165,18 +165,30 @@
     var SENSOR = 'gtceu:uv_sensor'
     var FIELD = 'gtceu:uv_field_generator'
     var defs = [
-      { machine: TH.machines.cell.machine, parts: [HULL, ARM, SENSOR], pattern: ['CSC', 'AHA', 'C C'], ingredients: { C: '#gtceu:circuits/uv', S: SENSOR, A: ARM, H: HULL }, name: 'pyroprocessing_cell' },
-      { machine: TH.machines.reactor.machine, parts: [HULL, FIELD], pattern: ['CFC', 'FHF', 'C C'], ingredients: { C: '#gtceu:circuits/uv', F: FIELD, H: HULL }, name: 'accelerator_driven_reactor' }
+      { machine: TH.machines.cell.machine, name: 'pyroprocessing_cell', research: 'grindless:thorium_oxide_fuel_assembly',
+        parts: [HULL, '2x ' + ARM, '2x ' + SENSOR],
+        domain: ['4x grindless:thorium_oxide_fuel_assembly', '4x grindless:thorium_nitride_fuel_assembly', '2x grindless:molten_salt_charge'] },
+      { machine: TH.machines.reactor.machine, name: 'accelerator_driven_reactor', research: 'grindless:spent_thorium_oxide_fuel',
+        parts: [HULL, '4x ' + FIELD],
+        domain: ['4x grindless:spent_thorium_oxide_fuel', '4x grindless:thorium_caf2_crystal', '2x grindless:u233_fuel_rod'] }
     ]
     TH.controllerRecipes = []
     defs.forEach(function (d) {
-      var missing = d.parts.concat([d.machine]).filter(function (id) { return !Item.exists(id) })
+      var ids = [d.machine, d.research].concat(d.parts, d.domain).map(function (s) { return s.replace(/^\d+x /, '') })
+      var missing = ids.filter(function (id) { return !Item.exists(id) })
       if (missing.length > 0) {
         console.error(LOG + d.name + ' controller recipe skipped, unknown item(s): ' + missing.join(', '))
         return
       }
-      event.recipes.gtceu.shaped(d.machine, d.pattern, d.ingredients).id('grindless:crafting/' + d.name)
-      TH.controllerRecipes.push('grindless:crafting/' + d.name)
+      var b = event.recipes.gtceu.assembly_line('grindless:' + d.name)
+      d.parts.forEach(function (s) { b.itemInputs(s) })
+      b.itemInputs('4x #gtceu:circuits/uv')
+      d.domain.forEach(function (s) { b.itemInputs(s) })
+      b.inputFluids(Fluid.of('gtceu:soldering_alloy', 1152), Fluid.of('gtceu:lubricant', 1000), Fluid.of('gtceu:tritanium', 576))
+      b.itemOutputs(d.machine)
+      b.stationResearch(function (r) { return r.researchStack(Item.of(d.research)).CWUt(64).EUt(491520) })
+      b.EUt(491520).duration(1200)
+      TH.controllerRecipes.push('grindless:assembly_line/' + d.name)
     })
   }
 

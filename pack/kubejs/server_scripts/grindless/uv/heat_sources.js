@@ -84,7 +84,7 @@
   }
   HS.skipped = []
   HS.clashes = []
-  HS.crafting = { works: 'grindless:crafting/heat_source_works' }
+  HS.crafting = { works: 'grindless:assembly_line/heat_source_works' }
   HS.craftingParts = ['gtceu:zpm_machine_hull', 'gtceu:uv_robot_arm']
 
   function keysOf(r) {
@@ -153,16 +153,22 @@
     recipe.EUt(a.eut).duration(a.duration)
   }
 
-  // CRAFTING TABLE: ZPM hull + 2 UV robot arms (the manipulators) + 4 UV circuits
+  // ASSEMBLY LINE: ZPM hull + 4 UV robot arms (the manipulators) + 4 UV circuits + 3 line items, station research from the GPHS module
   function addCrafting(event) {
-    var missing = HS.craftingParts.filter(function (id) { return !Item.exists(id) })
+    var domain = ['4x grindless:curium_oxide', '2x grindless:carbon_carbon_aeroshell', '4x grindless:gphs_module']
+    var ids = HS.craftingParts.concat(['gtceu:heat_source_works', 'grindless:curium_oxide', 'grindless:carbon_carbon_aeroshell', 'grindless:gphs_module'])
+    var missing = ids.filter(function (id) { return !Item.exists(id) })
     if (missing.length > 0) {
       console.error(LOG + 'heat source works crafting skipped, unknown item(s): ' + missing.join(', '))
       return
     }
-    event.recipes.gtceu.shaped('gtceu:heat_source_works', ['CRC', ' H ', 'C C'], {
-      C: '#gtceu:circuits/uv', R: 'gtceu:uv_robot_arm', H: 'gtceu:zpm_machine_hull'
-    }).id(HS.crafting.works)
+    var b = event.recipes.gtceu.assembly_line('grindless:heat_source_works')
+    b.itemInputs('gtceu:zpm_machine_hull', '4x gtceu:uv_robot_arm', '4x #gtceu:circuits/uv')
+    domain.forEach(function (s) { b.itemInputs(s) })
+    b.inputFluids(Fluid.of('gtceu:soldering_alloy', 1152), Fluid.of('gtceu:lubricant', 1000), Fluid.of('gtceu:tritanium', 576))
+    b.itemOutputs('gtceu:heat_source_works')
+    b.stationResearch(function (r) { return r.researchStack(Item.of('grindless:gphs_module')).CWUt(64).EUt(491520) })
+    b.EUt(491520).duration(1200)
   }
 
   ServerEvents.recipes(function (event) {

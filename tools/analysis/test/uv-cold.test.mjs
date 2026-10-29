@@ -69,7 +69,7 @@ test('the plant: He-II needs liquid helium, the superleak takes only Neptune hel
     assert.equal(r.duration, 200);
     assert.ok(byId(r.recipeId) || C.skipped.some((s) => s.name === r.name), r.recipeId);
   }
-  const makers = recipes.filter((r) => JSON.stringify(r.j.outputs || {}).includes('gtceu:superfluid_helium') && !JSON.stringify(r.j.inputs || {}).includes('gtceu:superfluid_helium'));
+  const makers = recipes.filter((r) => !r.i.startsWith('grindless:assembly_line/') && JSON.stringify(r.j.outputs || {}).includes('gtceu:superfluid_helium') && !JSON.stringify(r.j.inputs || {}).includes('gtceu:superfluid_helium'));
   assert.deepEqual(makers.map((r) => r.i).sort(), ['grindless:superfluid_helium/superfluid_helium/he2', 'grindless:superfluid_helium/superfluid_helium/superleak']);
 });
 
@@ -123,13 +123,13 @@ test('byproduct destinations: scrap back to niobium dust, spent acid to niobium 
   assert.deepEqual(side.electropolish_acid.fluidsOut, [{ id: 'gtceu:electropolish_acid', amount: 1000 }]);
 });
 
-test('the controllers and the cryomodule block are craftable', () => {
-  assert.equal(C.crafting.plant, 'grindless:crafting/superfluid_helium_plant');
-  assert.equal(C.crafting.works, 'grindless:crafting/srf_cavity_works');
-  for (const id of [C.crafting.plant, C.crafting.works]) assert.ok(byId(id) || run.docs.recipes.crafting?.some?.((r) => r.i === id) || true, id);
+test('the controllers are assembly lines and the cryomodule block an assembler row', () => {
+  assert.equal(C.crafting.plant, 'grindless:assembly_line/superfluid_helium_plant');
+  assert.equal(C.crafting.works, 'grindless:assembly_line/srf_cavity_works');
   const src = read('server_scripts/grindless/uv/cold.js');
   assert.match(src, /uv_machine_hull/);
-  assert.match(src, /shapeless\(CRYOMODULE_BLOCK/);
+  assert.match(src, /assembly_line\(/);
+  assert.match(src, /stationResearch/);
 });
 
 test('names: en_us and es_es for both machines, both types, the items and the fluids', () => {

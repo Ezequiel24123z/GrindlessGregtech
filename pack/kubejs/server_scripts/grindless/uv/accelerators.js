@@ -223,20 +223,27 @@
     var EMITTER = 'gtceu:uv_emitter'
     var PUMP = 'gtceu:uv_electric_pump'
     var C = '#gtceu:circuits/uv'
+    // station research of a component of the line; each controller reads a different one and takes different parts (GTM's lookup ignores counts)
     var defs = [
-      { machine: AC.machines.synchrotron.machine, parts: [HULL, FIELD, SENSOR], pattern: ['CSC', 'FHF', 'CSC'], ingredients: { C: C, S: SENSOR, F: FIELD, H: HULL }, name: 'synchrotron' },
-      { machine: AC.machines.cell.machine, parts: [HULL, EMITTER, PUMP], pattern: ['CEC', 'PHP', 'C C'], ingredients: { C: C, E: EMITTER, P: PUMP, H: HULL }, name: 'muon_fusion_cell' },
-      { machine: AC.machines.trap.machine, parts: [HULL, FIELD, SENSOR], pattern: ['CFC', 'SHS', 'C C'], ingredients: { C: C, F: FIELD, S: SENSOR, H: HULL }, name: 'antimatter_trap' }
+      { machine: AC.machines.synchrotron.machine, parts: [HULL, FIELD, SENSOR], domain: ['2x grindless:x_ray_mask', '8x grindless:silicon_nitride_film', '4x grindless:pmma_coated_wafer'], research: 'grindless:x_ray_mask', name: 'synchrotron' },
+      { machine: AC.machines.cell.machine, parts: [HULL, EMITTER, PUMP], domain: ['2x grindless:tungsten_target', '2x grindless:empty_antiproton_cartridge', 'grindless:lithium_breeder_blanket'], research: 'grindless:tungsten_target', name: 'muon_fusion_cell' },
+      { machine: AC.machines.trap.machine, parts: [HULL, FIELD, SENSOR], domain: ['4x grindless:empty_antiproton_cartridge', '2x grindless:tungsten_target', 'grindless:empty_antiproton_trap'], research: 'grindless:empty_antiproton_trap', name: 'antimatter_trap' }
     ]
     AC.controllerRecipes = []
     defs.forEach(function (d) {
-      var missing = d.parts.concat([d.machine]).filter(function (id) { return !Item.exists(id) })
+      var missing = d.parts.concat([d.machine, d.research]).filter(function (id) { return !Item.exists(id) })
       if (missing.length > 0) {
         console.error(LOG + d.name + ' controller recipe skipped, unknown item(s): ' + missing.join(', '))
         return
       }
-      event.recipes.gtceu.shaped(d.machine, d.pattern, d.ingredients).id('grindless:crafting/' + d.name)
-      AC.controllerRecipes.push('grindless:crafting/' + d.name)
+      var b = event.recipes.gtceu.assembly_line('grindless:' + d.name)
+      b.itemInputs(d.parts[0], '2x ' + d.parts[1], '2x ' + d.parts[2], '4x ' + C)
+      d.domain.forEach(function (s) { b.itemInputs(s) })
+      b.inputFluids(Fluid.of('gtceu:soldering_alloy', 1152), Fluid.of('gtceu:lubricant', 1000), Fluid.of('gtceu:tritanium', 576))
+      b.itemOutputs(d.machine)
+      b.stationResearch(function (r) { return r.researchStack(Item.of(d.research)).CWUt(64).EUt(491520) })
+      b.EUt(491520).duration(1200)
+      AC.controllerRecipes.push('grindless:assembly_line/' + d.name)
     })
   }
 

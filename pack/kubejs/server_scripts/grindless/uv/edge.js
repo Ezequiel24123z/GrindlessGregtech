@@ -66,8 +66,8 @@
   E.recipes = TABLE.map(publish)
   E.support = SUPPORT.map(publish)
   E.crafting = {
-    bay: 'grindless:crafting/precursor_probe_bay',
-    interferometer: 'grindless:crafting/event_horizon_interferometer'
+    bay: 'grindless:assembly_line/precursor_probe_bay',
+    interferometer: 'grindless:assembly_line/event_horizon_interferometer'
   }
   E.craftingParts = ['gtceu:uv_machine_hull', 'gtceu:uv_robot_arm', 'gtceu:uv_sensor']
   E.skipped = []
@@ -120,24 +120,33 @@
     console.info(LOG + 'edge recipes added: ' + (E.recipes.length + E.support.length - E.skipped.length))
   }
 
-  // CRAFTING TABLE: UV hull + the machine's own parts + 4 UV circuits
+  // ASSEMBLY LINE: UV hull + the machine's own parts + 4 UV circuits + 3 line items, researched at the station from a line component
   function addCrafting(event) {
     var HULL = 'gtceu:uv_machine_hull'
     var list = [
-      { id: 'gtceu:precursor_probe_bay', recipe: E.crafting.bay, pattern: ['CAC', ' H ', 'CAC'], extra: { A: 'gtceu:uv_robot_arm' } },
-      { id: 'gtceu:event_horizon_interferometer', recipe: E.crafting.interferometer, pattern: ['CSC', ' H ', 'CSC'], extra: { S: 'gtceu:uv_sensor' } }
+      { id: 'gtceu:precursor_probe_bay', recipe: 'precursor_probe_bay', research: 'grindless:printed_probe_frame',
+        parts: [HULL, '4x gtceu:uv_robot_arm'],
+        domain: ['2x grindless:precursor_probe', '4x grindless:printed_probe_frame', '2x grindless:hpge_crystal'] },
+      { id: 'gtceu:event_horizon_interferometer', recipe: 'event_horizon_interferometer', research: 'grindless:atom_interferometer',
+        parts: [HULL, '4x gtceu:uv_sensor'],
+        domain: ['2x grindless:atom_interferometer', '4x grindless:hpge_crystal', '2x grindless:multimessenger_catalogue'] }
     ]
     list.forEach(function (m) {
-      var keys = { C: '#gtceu:circuits/uv', H: HULL }
-      Object.keys(m.extra).forEach(function (k) { keys[k] = m.extra[k] })
-      var need = [m.id].concat(Object.keys(keys).map(function (k) { return keys[k] }).filter(function (v) { return v.charAt(0) !== '#' }))
-      var missing = need.filter(function (id) { return !Item.exists(id) })
+      var ids = [m.id, m.research].concat(m.parts, m.domain).map(function (s) { return s.replace(/^\d+x /, '') })
+      var missing = ids.filter(function (id) { return !Item.exists(id) })
       if (missing.length > 0) {
         E.skipped.push({ name: m.recipe, reason: 'unknown id(s) ' + missing.join(', ') })
-        console.error(LOG + 'edge crafting of ' + m.id + ' skipped, unknown item(s): ' + missing.join(', '))
+        console.error(LOG + 'edge controller recipe of ' + m.id + ' skipped, unknown item(s): ' + missing.join(', '))
         return
       }
-      event.recipes.gtceu.shaped(m.id, m.pattern, keys).id(m.recipe)
+      var b = event.recipes.gtceu.assembly_line('grindless:' + m.recipe)
+      m.parts.forEach(function (s) { b.itemInputs(s) })
+      b.itemInputs('4x #gtceu:circuits/uv')
+      m.domain.forEach(function (s) { b.itemInputs(s) })
+      b.inputFluids(Fluid.of('gtceu:soldering_alloy', 1152), Fluid.of('gtceu:lubricant', 1000), Fluid.of('gtceu:tritanium', 576))
+      b.itemOutputs(m.id)
+      b.stationResearch(function (r) { return r.researchStack(Item.of(m.research)).CWUt(64).EUt(491520) })
+      b.EUt(491520).duration(1200)
     })
   }
 

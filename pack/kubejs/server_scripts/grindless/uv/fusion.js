@@ -76,7 +76,7 @@
   var SPENT = 'grindless:spent_laser_module'
   F.chamber = []
   F.skipped = []
-  F.crafting = { chamber: 'grindless:crafting/laser_fusion_chamber' }
+  F.crafting = { chamber: 'grindless:assembly_line/laser_fusion_chamber' }
 
   function addChamber(event) {
     var missing = [CH.recipes[0].capsule, CH.recipes[1].capsule, MODULE, SPENT].filter(function (id) { return !Item.exists(id) })
@@ -101,9 +101,20 @@
   }
 
   function addCrafting(event) {
-    event.recipes.gtceu.shaped(CH.machine, ['CEC', 'CHC', ' E '], {
-      C: '#gtceu:circuits/uv', E: 'gtceu:uv_emitter', H: 'gtceu:uv_machine_hull'
-    }).id(F.crafting.chamber)
+    var domain = ['4x ' + CH.recipes[0].capsule, '4x ' + CH.recipes[1].capsule, '2x ' + MODULE]
+    var ids = [CH.machine, MODULE, CH.recipes[0].capsule, CH.recipes[1].capsule, 'gtceu:uv_emitter', 'gtceu:uv_machine_hull']
+    var gone = ids.filter(function (id) { return !Item.exists(id) })
+    if (gone.length > 0) {
+      console.error(LOG + 'laser fusion chamber controller recipe skipped, unknown id(s): ' + gone.join(', '))
+      return
+    }
+    var b = event.recipes.gtceu.assembly_line('grindless:laser_fusion_chamber')
+    b.itemInputs('gtceu:uv_machine_hull', '4x gtceu:uv_emitter', '4x #gtceu:circuits/uv')
+    domain.forEach(function (s) { b.itemInputs(s) })
+    b.inputFluids(Fluid.of('gtceu:soldering_alloy', 1152), Fluid.of('gtceu:lubricant', 1000), Fluid.of('gtceu:tritanium', 576))
+    b.itemOutputs(CH.machine)
+    b.stationResearch(function (r) { return r.researchStack(Item.of(MODULE)).CWUt(64).EUt(491520) })
+    b.EUt(491520).duration(1200)
   }
 
   // ---------------------------------------------------------------- decaborane (the capsule's boron-11 fuel)

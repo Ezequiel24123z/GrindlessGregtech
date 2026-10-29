@@ -41,10 +41,11 @@
 //     sapphire boule  electric blast furnace, 2,400 K: 1 sapphire block + 1,000 mB argon -> 1 sapphire boule (Kyropoulos growth;
 //                  a block, not dust: GTM's blast furnace already turns sapphire dust into aluminium)                 7,680 x 600 t
 //     sapphire wafers  cutter: 1 sapphire boule + 100 mB lubricant -> 8 sapphire wafers                                 1,920 x 200 t
-//     Bragg grating  laser engraver, purple lens kept: 1 ytterbium fibre spool -> 1 fibre Bragg grating                 30,720 x 200 t
-//   crafting: 1 fibre laser module <-> 1 laser module block (the laser fusion chamber's and Starshot's structure block)
-//   controllers (crafting grid): UV hull + 2 UV motors + UV sensor + 4 UV circuits (tower); UV hull + 2 UV pumps + UV sensor + 4 UV
-//   circuits (reactor)
+//     Bragg grating  assembler, purple lens kept: 1 ytterbium fibre spool + 1 germanium dust + 100 mB hydrogen (hydrogen loading) ->
+//                  1 fibre Bragg grating                                                                              30,720 x 200 t
+//   block: assembler: 4 fibre laser modules + 4 tritanium plates + 1 silicon nitride film + 2 tungsten steel plates + 144 mB soldering alloy
+//   + 100 mB lubricant -> 1 laser module block (the laser fusion chamber's and Starshot's structure block; there is no way back)
+//   controllers (assembly line, station research, UV hull + parts + 4 UV circuits + 3 line items + soldering alloy, lubricant, tritanium)
 //
 // Destinations (rule 3 of AGENTS.md):
 //   chlorine (preform)    -> silicon tetrachloride again (GTCA's chemical reactor: silicon + chlorine) or GTM's hydrochloric acid
@@ -192,8 +193,10 @@
       itemsOut: [item(SAPPHIRE_BOULE, 1)], fluidsOut: [], eut: 7680, duration: 600 },
     { name: 'sapphire_wafer', type: 'cutter', circuit: null, itemsIn: [item(SAPPHIRE_BOULE, 1)], fluidsIn: [fluid('gtceu:lubricant', 100)],
       itemsOut: [item(SAPPHIRE_WAFER, 8)], fluidsOut: [], eut: 1920, duration: 200 },
-    { name: 'fibre_bragg_grating', type: 'laser_engraver', circuit: null, notConsumable: 'gtceu:purple_glass_lens',
-      itemsIn: [item(FIBRE, 1)], fluidsIn: [], itemsOut: [item(GRATING, 1)], fluidsOut: [], eut: LUV, duration: 200 }
+    // hydrogen loading (photosensitising) the germanium-doped fibre before the lens writes the grating; assembler: the engraver has no
+    // room for a second item or any fluid
+    { name: 'fibre_bragg_grating', type: 'assembler', circuit: 5, notConsumable: 'gtceu:purple_glass_lens',
+      itemsIn: [item(FIBRE, 1), item('gtceu:germanium_dust', 1)], fluidsIn: [fluid('gtceu:hydrogen', 100)], itemsOut: [item(GRATING, 1)], fluidsOut: [], eut: LUV, duration: 200 }
   ]
 
   function publish(t, recipeId) {
@@ -213,10 +216,9 @@
   P.skipped = []
   P.clashes = []
   P.crafting = {
-    tower: 'grindless:crafting/fibre_draw_tower',
-    reactor: 'grindless:crafting/mocvd_reactor',
-    moduleToBlock: 'grindless:crafting/laser_module_block',
-    blockToModule: 'grindless:crafting/fibre_laser_module_from_block'
+    tower: 'grindless:assembly_line/fibre_draw_tower',
+    reactor: 'grindless:assembly_line/mocvd_reactor',
+    moduleBlock: 'grindless:assembler/laser_module_block'
   }
   P.craftingParts = ['gtceu:uv_machine_hull', 'gtceu:uv_electric_motor', 'gtceu:uv_electric_pump', 'gtceu:uv_sensor']
 
@@ -285,23 +287,40 @@
   }
 
   function addCrafting(event) {
-    if (Item.exists(FIBRE_MODULE) && Item.exists(MODULE_BLOCK)) {
-      event.shapeless(MODULE_BLOCK, [FIBRE_MODULE]).id(P.crafting.moduleToBlock)
-      event.shapeless(FIBRE_MODULE, [MODULE_BLOCK]).id(P.crafting.blockToModule)
+    if (Item.exists(FIBRE_MODULE) && Item.exists(MODULE_BLOCK) && Item.exists('grindless:silicon_nitride_film')) {
+      // the structure block is built, not folded: modules in a tritanium frame with nitride film shielding, soldered and cooled
+      event.recipes.gtceu.assembler('grindless:laser_module_block')
+        .itemInputs('4x ' + FIBRE_MODULE, '4x gtceu:tritanium_plate', 'grindless:silicon_nitride_film', '2x gtceu:tungsten_steel_plate')
+        .inputFluids(Fluid.of('gtceu:soldering_alloy', 144), Fluid.of('gtceu:lubricant', 100))
+        .itemOutputs(MODULE_BLOCK)
+        .EUt(ZPM).duration(300)
     } else {
-      console.error(LOG + 'laser module block crafting skipped: ' + FIBRE_MODULE + ' or ' + MODULE_BLOCK + ' unknown')
+      console.error(LOG + 'laser module block recipe skipped: ' + FIBRE_MODULE + ', ' + MODULE_BLOCK + ' or the nitride film unknown')
     }
-    var missing = P.craftingParts.filter(function (id) { return !Item.exists(id) })
-    if (missing.length > 0) {
-      console.error(LOG + 'photonics controller crafting skipped, unknown item(s): ' + missing.join(', '))
-      return
-    }
-    event.recipes.gtceu.shaped('gtceu:fibre_draw_tower', ['CSC', 'MHM', 'C C'], {
-      C: '#gtceu:circuits/uv', S: 'gtceu:uv_sensor', M: 'gtceu:uv_electric_motor', H: 'gtceu:uv_machine_hull'
-    }).id(P.crafting.tower)
-    event.recipes.gtceu.shaped('gtceu:mocvd_reactor', ['CSC', 'PHP', 'C C'], {
-      C: '#gtceu:circuits/uv', S: 'gtceu:uv_sensor', P: 'gtceu:uv_electric_pump', H: 'gtceu:uv_machine_hull'
-    }).id(P.crafting.reactor)
+    var list = [
+      { id: 'gtceu:fibre_draw_tower', research: FIBRE,
+        parts: ['gtceu:uv_machine_hull', '2x gtceu:uv_electric_motor', '2x gtceu:uv_sensor'],
+        domain: ['4x ' + FIBRE, '4x grindless:fused_silica_tube', '2x ' + GRATING] },
+      { id: 'gtceu:mocvd_reactor', research: GAAS_WAFER,
+        parts: ['gtceu:uv_machine_hull', '2x gtceu:uv_electric_pump', '2x gtceu:uv_sensor'],
+        domain: ['4x ' + GAAS_WAFER, '4x ' + SAPPHIRE_WAFER, '2x ' + GRATING] }
+    ]
+    list.forEach(function (m) {
+      var ids = [m.id, m.research].concat(m.parts, m.domain).map(function (s) { return s.replace(/^\d+x /, '') })
+      var missing = ids.filter(function (id) { return !Item.exists(id) })
+      if (missing.length > 0) {
+        console.error(LOG + 'photonics controller recipe of ' + m.id + ' skipped, unknown item(s): ' + missing.join(', '))
+        return
+      }
+      var b = event.recipes.gtceu.assembly_line('grindless:' + m.id.split(':')[1])
+      m.parts.forEach(function (s) { b.itemInputs(s) })
+      b.itemInputs('4x #gtceu:circuits/uv')
+      m.domain.forEach(function (s) { b.itemInputs(s) })
+      b.inputFluids(Fluid.of('gtceu:soldering_alloy', 1152), Fluid.of('gtceu:lubricant', 1000), Fluid.of('gtceu:tritanium', 576))
+      b.itemOutputs(m.id)
+      b.stationResearch(function (r) { return r.researchStack(Item.of(m.research)).CWUt(64).EUt(491520) })
+      b.EUt(491520).duration(1200)
+    })
   }
 
   ServerEvents.recipes(function (event) {
