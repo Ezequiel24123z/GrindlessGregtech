@@ -129,7 +129,7 @@ test('the names, the tooltip and the info page exist in en_us and es_es', () => 
     assert.equal(src.split(`'${key}'`).length - 1, 2, key);
   }
   assert.ok(src.includes('65536'));
-  assert.ok(!/^\/\/ priority:/m.test(src));
+  assert.ok(/^\/\/ priority: \d+/m.test(src), 'the integrator stamps the load priority');
   const info = JSON.parse(fs.readFileSync(path.join(KJS, 'assets/emi/recipe/additions/grindless/uxv_parallel_hatch.json'), 'utf8'));
   assert.deepEqual(info.stacks, ['item:gtceu:uxv_parallel_hatch']);
 });

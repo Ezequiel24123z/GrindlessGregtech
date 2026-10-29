@@ -399,16 +399,22 @@ export function auditEmiCoverage({ dump, registry, cfg, emi, lang = null, native
   };
   const untilEra = new Set([...hiddenOurs.map((h) => h.key), ...[...disabled].filter(ourForm)]);
   const pending = new Map((cfg.pendingRoutes || []).map((p) => [p.id, p]));
+  // an entry may name foreign stacks our own table holds until the era (another mod's item that gets our recipe later); each must still be disabled
+  const heldFor = (id) => (b) => {
+    const k = b.slice(b.indexOf(' ') + 1);
+    return untilEra.has(k) || ((pending.get(id) || {}).foreign || []).includes(k);
+  };
+  for (const p of pending.values()) for (const f of p.foreign || []) if (!disabled.has(f)) problems.push(`pending route ${p.id}: foreign stack ${f} is no longer disabled; drop it from the entry`);
   const pendingRoutes = [];
   const droppedRoutes = [];
   for (const d of allDropped) {
     const p = pending.get(d.id);
-    if (p && d.disabledBy.every((b) => untilEra.has(b.slice(b.indexOf(' ') + 1)))) pendingRoutes.push({ ...d, reason: p.reason || '' });
+    if (p && d.disabledBy.every(heldFor(d.id))) pendingRoutes.push({ ...d, reason: p.reason || '' });
     else droppedRoutes.push(d);
   }
   // a route that carries only hidden stacks is dropped too, but touches nothing shown; it still keeps its process pending
   const droppedHiddenOnly = (id) => invisible.some((r) => r.id === id && r.dropped
-    && r.disabledBy.every((b) => untilEra.has(b.slice(b.indexOf(' ') + 1))) && !allDropped.some((d) => d.id === id));
+    && r.disabledBy.every(heldFor(id)) && !allDropped.some((d) => d.id === id));
   for (const p of pending.values()) if (!pendingRoutes.some((d) => d.id === p.id) && !droppedHiddenOnly(p.id)) problems.push(`pending route ${p.id}: EMI no longer drops it for stacks disabled until their era; delete the entry`);
   for (const d of droppedRoutes) problems.push(`${d.id} (${d.type}): EMI drops it for ${d.disabledBy.join(', ')}, hiding a route of ${d.ours.join(', ')}`);
 

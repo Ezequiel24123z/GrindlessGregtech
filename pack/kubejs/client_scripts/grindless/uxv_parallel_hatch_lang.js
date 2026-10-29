@@ -1,3 +1,4 @@
+// priority: 1538
 // Gregtech Grindless - text of the UXV parallel hatch (package UXV-M1; startup_scripts/grindless/lib/parallel_hatch.js and
 // server_scripts/grindless/uxv/parallel_hatch.js).
 //

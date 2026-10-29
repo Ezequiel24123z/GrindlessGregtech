@@ -1,3 +1,4 @@
+// priority: -26199
 // Gregtech Grindless - the UXV parallel hatch's recipe (package UXV-M1; the hatch is registered in startup_scripts/grindless/lib/parallel_hatch.js).
 //
 //   gtceu:uxv_parallel_hatch (Extreme Parallel Control Hatch, up to 65536 copies of a recipe) -> grindless:assembly_line/uxv_parallel_hatch

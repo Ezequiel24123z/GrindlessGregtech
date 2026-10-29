@@ -6,7 +6,7 @@
     "requirePages: an item made by a recipe of an invisible type, or whose only use is a place in a structure, also needs an info page (kubejs/assets/emi/recipe/additions/grindless/).",
     "derived: routes the static stand-in cannot see, because a script derives them from the mods' own recipes or GTM generates them from a material's flags. Each one is checked against a native dump with --dump (category = EMI category).",
     "exceptions: an item that genuinely has no acquisition or no use, with the reason. Keep it empty unless the design says so.",
-    "pendingRoutes: temporary, while an era is built. A recipe of ours EMI drops only because a stack of ours is disabled until its era (an input another package of the era makes). Each entry names the package that deletes it; an entry EMI no longer drops is a problem."
+    "pendingRoutes: temporary, while an era is built. A recipe of ours EMI drops only because a stack of ours is disabled until its era (an input another package of the era makes). Each entry names the package that deletes it; an entry EMI no longer drops is a problem. `foreign` names another mod's stacks our own table holds until the era (GT--'s mainframe until A5 writes its recipe); an unnamed foreign stack, or a named one no longer disabled, is a problem."
   ],
   "invisibleTypes": ["gtceu:electric_furnace", "gtceu:dummy"],
   "requirePages": { "invisibleRoutes": true, "previewOnlyUses": true },
@@ -75,6 +75,7 @@
   "exceptions": [
   ],
   "pendingRoutes": [
-    { "id": "grindless:nitride_magnet_synthesis/uxv_smes_cell", "reason": "UXV-W landed before Wave A: grindless:strand_tape is held until UXV-A8 writes its producer; A8 deletes this entry with its hold rule" }
-  ]
+    { "id": "grindless:nitride_magnet_synthesis/uxv_smes_cell", "reason": "UXV-W landed before Wave A: grindless:strand_tape is held until UXV-A8 writes its producer;     A8 deletes this entry with its hold rule" },
+        { "id": "grindless:assembly_line/uxv_parallel_hatch", "foreign": ["gtnn:spintronic_mainframe"], "reason": "UXV-M1 landed before Wave A: its inputs are held until A5 (GT--'s spintronic mainframe, held by our A5 rule until A5 writes its recipe), B3 (field generator, filtered disk plasma), B4 (hull) and B5 (emitter) write their producers; B5 lands last and deletes this entry with its hold rule" }
+      ]
 }
