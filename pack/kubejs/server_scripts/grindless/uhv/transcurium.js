@@ -11,7 +11,8 @@
 //                          oxo recipe) -> 2-ethylhexenal -> 2-ethylhexanol; phosphorus -> POCl3; both -> HDEHP; HDEHP + kerosene -> the
 //                          solvent. Each carries its own circuit so GTM's chemical reactor recipes cannot hide it.
 //   crafting               the controllers: UHV hull + 2 UV field generators + UV sensor + 4 UHV circuits (reactor) and UHV hull +
-//                          2 UV robot arms + UV sensor + 4 UHV circuits (facility), shaped recipes grindless:crafting/<machine>.
+//                          2 UV robot arms + UV sensor + 4 UHV circuits (facility), assembly lines grindless:assembly_line/<machine>.
+//                          Each is an assembly line: station research, tritanium + soldering alloy + lubricant, 3 domain items of its own line.
 //
 // The older rows of the package are read elsewhere: the driver elements by iv/uranium_cycle.js (transcurium_fabrication.json), the
 // spent drivers by uv/thorium.js (transcurium_pyroprocessing.json), the nickel-62 targets by iv/hot_cell.js (hot_cell.json, mode 7).
@@ -169,18 +170,25 @@
     var SENSOR = 'gtceu:uv_sensor'
     var FIELD = 'gtceu:uv_field_generator'
     var defs = [
-      { machine: TC.machines.reactor.machine, parts: [HULL, FIELD, SENSOR], pattern: ['CSC', 'FHF', 'C C'], ingredients: { C: '#gtceu:circuits/uhv', S: SENSOR, F: FIELD, H: HULL }, name: 'high_flux_reactor' },
-      { machine: TC.machines.facility.machine, parts: [HULL, ARM, SENSOR], pattern: ['CSC', 'AHA', 'C C'], ingredients: { C: '#gtceu:circuits/uhv', S: SENSOR, A: ARM, H: HULL }, name: 'transuranium_facility' }
+      { machine: TC.machines.reactor.machine, parts: [HULL, FIELD, SENSOR], research: 'grindless:lithium_breeder_blanket', domain: ['4x grindless:srf_cryomodule', '2x grindless:mu_metal_shield', '2x grindless:uv_electromagnet'], name: 'high_flux_reactor' },
+      { machine: TC.machines.facility.machine, parts: [HULL, ARM, SENSOR], research: 'grindless:pmma_coated_wafer', domain: ['4x grindless:hpge_crystal', '2x grindless:silicon_nitride_film', '2x grindless:mu_metal_shield'], name: 'transuranium_facility' }
     ]
     TC.controllerRecipes = []
     defs.forEach(function (d) {
-      var missing = d.parts.concat([d.machine]).filter(function (id) { return !Item.exists(id) })
+      var missing = d.parts.concat([d.machine, d.research], d.domain.map(function (s) { return s.replace(/^\d+x /, '') })).filter(function (id) { return !Item.exists(id) })
       if (missing.length > 0) {
         console.error(LOG + d.name + ' controller recipe skipped, unknown item(s): ' + missing.join(', '))
         return
       }
-      event.recipes.gtceu.shaped(d.machine, d.pattern, d.ingredients).id('grindless:crafting/' + d.name)
-      TC.controllerRecipes.push('grindless:crafting/' + d.name)
+      var b = event.recipes.gtceu.assembly_line('grindless:' + d.name)
+      d.parts.forEach(function (s, i) { b.itemInputs(i === 0 ? s : '2x ' + s) })
+      b.itemInputs('4x #gtceu:circuits/uhv')
+      d.domain.forEach(function (s) { b.itemInputs(s) })
+      b.inputFluids(Fluid.of('gtceu:soldering_alloy', 2304), Fluid.of('gtceu:lubricant', 2000), Fluid.of('gtceu:tritanium', 1152))
+      b.itemOutputs(d.machine)
+      b.stationResearch(function (r) { return r.researchStack(Item.of(d.research)).CWUt(64).EUt(1966080) })
+      b.EUt(1966080).duration(1500)
+      TC.controllerRecipes.push('grindless:assembly_line/' + d.name)
     })
   }
 

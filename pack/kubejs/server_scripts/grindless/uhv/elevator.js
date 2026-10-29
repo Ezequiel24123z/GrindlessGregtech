@@ -144,21 +144,27 @@
   // GTCA's space elevator blocks (assembler)
   var BLOCKS = [
     { name: 'ultra_high_strength_concrete_floor', type: 'assembler', circuit: 1,
-      itemsIn: [item('gtceu:steel_rod', 4), item('gtceu:silicon_dioxide_dust', 2)], fluidsIn: [fluid('gtceu:concrete', 1000)],
+      itemsIn: [item('gtceu:steel_rod', 4), item('gtceu:silicon_dioxide_dust', 2), item('grindless:silica_aerogel', 1), item('grindless:mu_metal_shield', 1)],
+      fluidsIn: [fluid('gtceu:concrete', 1000), fluid('gtceu:lubricant', 250)],
       itemsOut: [item(GTCA.floor, 16)], fluidsOut: [], eut: LUV, duration: 200 },
     { name: 'space_elevator_base_casing', type: 'assembler', circuit: 2,
-      itemsIn: [item('gtceu:naquadah_alloy_plate', 8), item('gtceu:neutronium_frame', 1)], fluidsIn: [],
+      itemsIn: [item('gtceu:naquadah_alloy_plate', 8), item('gtceu:neutronium_frame', 1), item('grindless:nbn_coated_sic_plate', 1), item('grindless:srf_cavity', 1)],
+      fluidsIn: [fluid('gtceu:soldering_alloy', 144), fluid('gtceu:lubricant', 250)],
       itemsOut: [item(GTCA.base, 16)], fluidsOut: [], eut: UVA, duration: 200 },
     { name: 'space_elevator_support_structure', type: 'assembler', circuit: 3,
-      itemsIn: [item('gtceu:hsss_plate', 4), item('gtceu:tungsten_steel_rod', 2)], fluidsIn: [],
+      itemsIn: [item('gtceu:hsss_plate', 4), item('gtceu:tungsten_steel_rod', 2), item('grindless:silica_aerogel', 1), item('grindless:uv_electromagnet', 1)],
+      fluidsIn: [fluid('gtceu:soldering_alloy', 144), fluid('gtceu:lubricant', 250)],
       itemsOut: [item(GTCA.support, 16)], fluidsOut: [], eut: ZPM, duration: 200 },
     { name: 'space_elevator_internal_structure', type: 'assembler', circuit: 4,
-      itemsIn: [item('gtceu:naquadah_alloy_plate', 4), item(PBO, 1)], fluidsIn: [],
+      itemsIn: [item('gtceu:naquadah_alloy_plate', 4), item(PBO, 1), item('grindless:ytterbium_fibre', 1), item('grindless:mu_metal_shield', 1)],
+      fluidsIn: [fluid('gtceu:soldering_alloy', 144), fluid('gtceu:lubricant', 250)],
       itemsOut: [item(GTCA.internal, 16)], fluidsOut: [], eut: UVA, duration: 200 },
-    { name: 'space_elevator_cable', type: 'assembler', circuit: 5, itemsIn: [item(SEGMENT, 1)], fluidsIn: [fluid(DOPE, 144)],
+    { name: 'space_elevator_cable', type: 'assembler', circuit: 5, itemsIn: [item(SEGMENT, 1), item(CNT, 2), item(BNNT, 2), item('grindless:nbn_coated_sic_plate', 1)],
+      fluidsIn: [fluid(DOPE, 144), fluid('gtceu:lubricant', 250)],
       itemsOut: [item(GTCA.cable, 1)], fluidsOut: [], eut: UHVA, duration: 400 },
     { name: 'space_elevator_motor_mk_1', type: 'assembler', circuit: 6,
-      itemsIn: [item(GTCA.cable, 1), item('gtceu:uv_electric_motor', 1), item('#gtceu:circuits/uv', 2)], fluidsIn: [],
+      itemsIn: [item(GTCA.cable, 1), item('gtceu:uv_electric_motor', 1), item('#gtceu:circuits/uv', 2), item('grindless:srf_cryomodule', 1), item('grindless:uv_electromagnet', 1)],
+      fluidsIn: [fluid('gtceu:soldering_alloy', 144), fluid('gtceu:lubricant', 250)],
       itemsOut: [item(GTCA.motor, 8)], fluidsOut: [], eut: UHVA, duration: 400 }
   ]
 
@@ -184,12 +190,13 @@
   E.skipped = []
   E.clashes = []
   E.crafting = {
-    plant: 'grindless:crafting/pbo_plant',
-    works: 'grindless:crafting/tether_ribbon_works',
-    elevator: 'grindless:crafting/space_elevator'
+    plant: 'grindless:assembly_line/pbo_plant',
+    works: 'grindless:assembly_line/tether_ribbon_works',
+    elevator: 'grindless:assembly_line/space_elevator'
   }
   var CRAFTING_PARTS = ['gtceu:uhv_machine_hull', 'gtceu:uv_electric_pump', 'gtceu:uv_conveyor_module', 'gtceu:uv_field_generator',
-    'gtceu:uv_electric_motor', CLIMBER, 'gtca:space_elevator']
+    'gtceu:uv_electric_motor', CLIMBER, 'gtca:space_elevator', 'gtca:space_elevator_cable', 'gtca:space_elevator_motor_mk_1', 'gtca:ultra_high_strength_concrete_floor',
+    'grindless:fused_silica_tube', 'grindless:silica_aerogel', 'grindless:cvd_diamond_plate', 'grindless:srf_cryomodule', 'grindless:ytterbium_fibre', 'grindless:nbn_coated_sic_plate', 'grindless:mu_metal_shield', 'grindless:thruster_pod']
 
   function keysOf(r) {
     var keys = {}
@@ -261,15 +268,41 @@
       console.error(LOG + 'elevator controller crafting skipped, unknown item(s): ' + missing.join(', '))
       return
     }
-    event.recipes.gtceu.shaped('gtceu:pbo_plant', ['CPC', ' H ', 'CPC'], {
-      C: '#gtceu:circuits/uhv', P: 'gtceu:uv_electric_pump', H: 'gtceu:uhv_machine_hull'
-    }).id(E.crafting.plant)
-    event.recipes.gtceu.shaped('gtceu:tether_ribbon_works', ['CVC', ' H ', 'CVC'], {
-      C: '#gtceu:circuits/uhv', V: 'gtceu:uv_conveyor_module', H: 'gtceu:uhv_machine_hull'
-    }).id(E.crafting.works)
-    event.recipes.gtceu.shaped('gtca:space_elevator', ['CFC', 'MHM', 'CTC'], {
-      C: '#gtceu:circuits/uhv', F: 'gtceu:uv_field_generator', M: 'gtceu:uv_electric_motor', H: 'gtceu:uhv_machine_hull', T: CLIMBER
-    }).id(E.crafting.elevator)
+    var b = event.recipes.gtceu.assembly_line('grindless:pbo_plant')
+    b.itemInputs('gtceu:uhv_machine_hull')
+    b.itemInputs('2x gtceu:uv_electric_pump')
+    b.itemInputs('4x #gtceu:circuits/uhv')
+    b.itemInputs('4x grindless:fused_silica_tube')
+    b.itemInputs('2x grindless:silica_aerogel')
+    b.itemInputs('2x grindless:cvd_diamond_plate')
+    b.inputFluids(Fluid.of('gtceu:soldering_alloy', 2304), Fluid.of('gtceu:lubricant', 2000), Fluid.of('gtceu:tritanium', 1152))
+    b.itemOutputs('gtceu:pbo_plant')
+    b.stationResearch(function (r) { return r.researchStack(Item.of('gtca:space_elevator_cable')).CWUt(64).EUt(1966080) })
+    b.EUt(1966080).duration(1500)
+    b = event.recipes.gtceu.assembly_line('grindless:tether_ribbon_works')
+    b.itemInputs('gtceu:uhv_machine_hull')
+    b.itemInputs('2x gtceu:uv_conveyor_module')
+    b.itemInputs('4x #gtceu:circuits/uhv')
+    b.itemInputs('2x grindless:srf_cryomodule')
+    b.itemInputs('4x grindless:ytterbium_fibre')
+    b.itemInputs('2x grindless:nbn_coated_sic_plate')
+    b.inputFluids(Fluid.of('gtceu:soldering_alloy', 2304), Fluid.of('gtceu:lubricant', 2000), Fluid.of('gtceu:tritanium', 1152))
+    b.itemOutputs('gtceu:tether_ribbon_works')
+    b.stationResearch(function (r) { return r.researchStack(Item.of('gtca:space_elevator_motor_mk_1')).CWUt(64).EUt(1966080) })
+    b.EUt(1966080).duration(1500)
+    b = event.recipes.gtceu.assembly_line('grindless:space_elevator')
+    b.itemInputs('gtceu:uhv_machine_hull')
+    b.itemInputs('2x gtceu:uv_field_generator')
+    b.itemInputs('2x gtceu:uv_electric_motor')
+    b.itemInputs(CLIMBER)
+    b.itemInputs('4x #gtceu:circuits/uhv')
+    b.itemInputs('2x grindless:srf_cryomodule')
+    b.itemInputs('4x grindless:mu_metal_shield')
+    b.itemInputs('2x grindless:thruster_pod')
+    b.inputFluids(Fluid.of('gtceu:soldering_alloy', 2304), Fluid.of('gtceu:lubricant', 2000), Fluid.of('gtceu:tritanium', 1152))
+    b.itemOutputs('gtca:space_elevator')
+    b.stationResearch(function (r) { return r.researchStack(Item.of('gtca:ultra_high_strength_concrete_floor')).CWUt(64).EUt(1966080) })
+    b.EUt(1966080).duration(1500)
   }
 
   ServerEvents.recipes(function (event) {

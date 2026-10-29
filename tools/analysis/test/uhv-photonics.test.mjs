@@ -67,7 +67,7 @@ test('the scripts load: every row made, nothing skipped, no clash, both controll
   assert.equal(PH.recipes.length, rows.length);
   assert.deepEqual(PH.skipped, []);
   assert.deepEqual(PH.clashes, []);
-  assert.deepEqual(PH.controllerRecipes, ['grindless:crafting/mbe_reactor', 'grindless:crafting/photonic_foundry']);
+  assert.deepEqual(PH.controllerRecipes, ['grindless:assembly_line/mbe_reactor', 'grindless:assembly_line/photonic_foundry']);
   const made = new Set(run.docs.recipes.recipes.map((r) => r.i));
   for (const r of PH.recipes) assert.ok(made.has(r.recipeId), r.recipeId);
   // the namespace global.grindless.photonics is UV's fibre tower and MOCVD; this package publishes as uhvPhotonics
