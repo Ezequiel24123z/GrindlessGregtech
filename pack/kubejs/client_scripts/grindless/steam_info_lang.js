@@ -1,3 +1,4 @@
+// priority: 5450
 // Gregtech Grindless - EMI information pages of the Steam era multiblocks (kubejs/assets/emi/recipe/additions/grindless/<id>.json, type emi:info).
 // One page per controller: what it does, what it is for, what it needs. Their recipes show in EMI under the controller itself.
 // Names and tooltips live in steam_small_family_lang.js, steam_large_family_lang.js and steam_content_lang.js; every key is in en_us and es_es.
