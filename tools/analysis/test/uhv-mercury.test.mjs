@@ -173,19 +173,16 @@ test('line 20: the MgB2 powder-in-tube row, circuit 5, in an iron tube; GTM\'s m
   assert.match(read('server_scripts/grindless/uv/materials.js'), /5 mgb2_wire/, 'header line');
 });
 
-test('controllers: UHV hull + 2 UV motors + 2 UHV circuits; UHV hull + 2 UV sensors + 2 UHV circuits; unique patterns', () => {
-  assert.deepEqual(HM.crafting, ['grindless:crafting/regolith_excavator', 'grindless:crafting/solar_vapour_furnace']);
-  const parts = { 'grindless:crafting/regolith_excavator': 'gtceu:uv_electric_motor', 'grindless:crafting/solar_vapour_furnace': 'gtceu:uv_sensor' };
+test('controllers: assembly lines with station research, UHV hull + 2 UV parts + UHV circuits + 3 line items + tritanium', () => {
+  assert.deepEqual(HM.crafting, ['grindless:assembly_line/regolith_excavator', 'grindless:assembly_line/solar_vapour_furnace']);
+  const parts = { 'grindless:assembly_line/regolith_excavator': 'gtceu:uv_electric_motor', 'grindless:assembly_line/solar_vapour_furnace': 'gtceu:uv_sensor' };
   for (const id of HM.crafting) {
     const r = dump(id);
     assert.ok(r, id);
+    assert.equal(r.t, 'gtceu:assembly_line', id);
     const text = JSON.stringify(r.j);
-    for (const p of ['gtceu:uhv_machine_hull', parts[id], 'gtceu:circuits/uhv']) assert.ok(text.includes(p), `${id} ${p}`);
+    for (const p of ['gtceu:uhv_machine_hull', parts[id], 'gtceu:circuits/uhv', 'gtceu:tritanium', '"research"']) assert.ok(text.includes(p), `${id} ${p}`);
   }
-  const shapeOf = (r) => JSON.stringify(r.j.pattern) + JSON.stringify(r.j.key);
-  const others = recipes.filter((r) => r.j && r.j.pattern && !HM.crafting.includes(r.i)).map(shapeOf);
-  for (const id of HM.crafting) assert.ok(!others.includes(shapeOf(dump(id))), id + ' shares pattern and ingredients with another recipe');
-  assert.notEqual(shapeOf(dump(HM.crafting[0])), shapeOf(dump(HM.crafting[1])));
 });
 
 test('names: en_us and es_es for both machines, both types and every item', () => {

@@ -246,10 +246,11 @@
             { "id": "gtceu:hsss_plate", "count": 6 },
             { "id": "gtceu:polytetrafluoroethylene_plate", "count": 2 },
             { "id": "gtceu:sterilizing_filter_casing", "count": 1 },
-            { "id": "gtceu:hsss_frame", "count": 1 }
+            { "id": "gtceu:hsss_frame", "count": 1 },
+            { "id": "grindless:fused_silica_tube", "count": 1 }
           ],
           "kept": [],
-          "fluidsIn": [],
+          "fluidsIn": [{ "id": "gtceu:lubricant", "amount": 250 }],
           "itemsOut": [{ "id": "grindless:bsl4_casing", "count": 2 }],
           "fluidsOut": []
         },
@@ -261,10 +262,11 @@
           "itemsIn": [
             { "id": "gtceu:tungsten_steel_plate", "count": 4 },
             { "id": "gtceu:naquadah_alloy_plate", "count": 2 },
-            { "id": "gtceu:naquadah_alloy_frame", "count": 1 }
+            { "id": "gtceu:naquadah_alloy_frame", "count": 1 },
+            { "id": "grindless:mu_metal_shield", "count": 1 }
           ],
           "kept": [],
-          "fluidsIn": [],
+          "fluidsIn": [{ "id": "gtceu:lubricant", "amount": 250 }],
           "itemsOut": [{ "id": "grindless:hangar_casing", "count": 2 }],
           "fluidsOut": []
         }

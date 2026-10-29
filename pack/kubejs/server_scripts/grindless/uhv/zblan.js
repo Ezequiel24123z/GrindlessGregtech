@@ -82,8 +82,8 @@
   Z.side = SIDE.map(function (t) { return publish(t, 'grindless:' + t.name) })
   Z.skipped = []
   Z.clashes = []
-  Z.crafting = { tower: 'grindless:crafting/zblan_draw_tower' }
-  Z.craftingParts = ['gtceu:uhv_machine_hull', 'gtceu:uv_electric_motor']
+  Z.crafting = { tower: 'grindless:assembly_line/zblan_draw_tower' }
+  Z.craftingParts = ['gtceu:uhv_machine_hull', 'gtceu:uv_electric_motor', 'grindless:mu_metal_shield', 'grindless:fused_silica_tube', 'grindless:fibre_bragg_grating', 'grindless:ytterbium_fibre']
 
   function keysOf(r) {
     var keys = {}
@@ -151,9 +151,17 @@
       console.error(LOG + 'zblan controller crafting skipped, unknown item(s): ' + missing.join(', '))
       return
     }
-    event.recipes.gtceu.shaped('gtceu:zblan_draw_tower', ['CHC', 'M M'], {
-      C: '#gtceu:circuits/uhv', M: 'gtceu:uv_electric_motor', H: 'gtceu:uhv_machine_hull'
-    }).id(Z.crafting.tower)
+    var b = event.recipes.gtceu.assembly_line('grindless:zblan_draw_tower')
+    b.itemInputs('gtceu:uhv_machine_hull')
+    b.itemInputs('2x gtceu:uv_electric_motor')
+    b.itemInputs('4x #gtceu:circuits/uhv')
+    b.itemInputs('4x grindless:fused_silica_tube')
+    b.itemInputs('2x grindless:fibre_bragg_grating')
+    b.itemInputs('2x grindless:ytterbium_fibre')
+    b.inputFluids(Fluid.of('gtceu:soldering_alloy', 2304), Fluid.of('gtceu:lubricant', 2000), Fluid.of('gtceu:tritanium', 1152))
+    b.itemOutputs('gtceu:zblan_draw_tower')
+    b.stationResearch(function (r) { return r.researchStack(Item.of('grindless:mu_metal_shield')).CWUt(64).EUt(1966080) })
+    b.EUt(1966080).duration(1500)
   }
 
   ServerEvents.recipes(function (event) {

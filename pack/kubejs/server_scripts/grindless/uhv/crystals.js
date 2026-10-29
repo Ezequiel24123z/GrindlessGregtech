@@ -16,7 +16,8 @@
 //                          chlorine dissolves it, hydrogen reduces it, the plant's platinum electrode wears as in its other modes, and
 //                          the recipe carries the plant's keep flag (global.grindless.platinumPlant.keepKey: it refuses voiding).
 //   crafting               the controllers: UHV hull + 2 UV sensors + 2 UHV circuits (lab) and UHV hull + 2 UV robot arms + 2 UHV
-//                          circuits (furnace), shaped recipes grindless:crafting/<machine>.
+//                          circuits (furnace), assembly lines grindless:assembly_line/<machine>.
+//                          Each is an assembly line: station research, tritanium + soldering alloy + lubricant, 3 domain items of its own line.
 //
 // Lookup safety: a recipe whose ingredients are a subset of another's of its type can hide it; checked at load (a clash is an error).
 // Published for the smoke test: global.grindless.crystals.recipes [{ type, name, recipeId, ... }], .skipped, .clashes, .controllerRecipes.
@@ -180,18 +181,25 @@
     var ARM = 'gtceu:uv_robot_arm'
     var SENSOR = 'gtceu:uv_sensor'
     var defs = [
-      { machine: CR.machines.lab.machine, parts: [HULL, SENSOR], pattern: [' C ', 'SHS', ' C '], ingredients: { C: '#gtceu:circuits/uhv', S: SENSOR, H: HULL }, name: 'nuclear_clock_lab' },
-      { machine: CR.machines.furnace.machine, parts: [HULL, ARM], pattern: [' C ', 'AHA', ' C '], ingredients: { C: '#gtceu:circuits/uhv', A: ARM, H: HULL }, name: 'crystal_growth_furnace' }
+      { machine: CR.machines.lab.machine, parts: [HULL, SENSOR], research: 'grindless:fibre_bragg_grating', domain: ['4x grindless:sapphire_wafer', '2x grindless:srf_cavity', '2x grindless:ytterbium_fibre'], name: 'nuclear_clock_lab' },
+      { machine: CR.machines.furnace.machine, parts: [HULL, ARM], research: 'grindless:iridium_crucible', domain: ['2x grindless:iridium_crucible', '4x grindless:hpge_crystal', '2x grindless:cvd_diamond_plate'], name: 'crystal_growth_furnace' }
     ]
     CR.controllerRecipes = []
     defs.forEach(function (d) {
-      var missing = d.parts.concat([d.machine]).filter(function (id) { return !Item.exists(id) })
+      var missing = d.parts.concat([d.machine, d.research], d.domain.map(function (s) { return s.replace(/^\d+x /, '') })).filter(function (id) { return !Item.exists(id) })
       if (missing.length > 0) {
         console.error(LOG + d.name + ' controller recipe skipped, unknown item(s): ' + missing.join(', '))
         return
       }
-      event.recipes.gtceu.shaped(d.machine, d.pattern, d.ingredients).id('grindless:crafting/' + d.name)
-      CR.controllerRecipes.push('grindless:crafting/' + d.name)
+      var b = event.recipes.gtceu.assembly_line('grindless:' + d.name)
+      d.parts.forEach(function (s, i) { b.itemInputs(i === 0 ? s : '2x ' + s) })
+      b.itemInputs('4x #gtceu:circuits/uhv')
+      d.domain.forEach(function (s) { b.itemInputs(s) })
+      b.inputFluids(Fluid.of('gtceu:soldering_alloy', 2304), Fluid.of('gtceu:lubricant', 2000), Fluid.of('gtceu:tritanium', 1152))
+      b.itemOutputs(d.machine)
+      b.stationResearch(function (r) { return r.researchStack(Item.of(d.research)).CWUt(64).EUt(1966080) })
+      b.EUt(1966080).duration(1500)
+      CR.controllerRecipes.push('grindless:assembly_line/' + d.name)
     })
   }
 

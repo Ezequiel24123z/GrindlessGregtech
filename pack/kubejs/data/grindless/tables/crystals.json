@@ -93,7 +93,8 @@
     "assembler": {
       "recipes": [
         { "name": "iridium_crucible", "circuit": 24, "eut": 1920, "duration": 400,
-          "itemsIn": [{ "id": "gtceu:iridium_ingot", "count": 8 }], "kept": [], "fluidsIn": [], "charge": [],
+          "itemsIn": [{ "id": "gtceu:iridium_ingot", "count": 8 }, { "id": "grindless:silica_aerogel", "count": 1 }, { "id": "grindless:cvd_diamond_plate", "count": 1 }], "kept": [],
+          "fluidsIn": [{ "id": "gtceu:soldering_alloy", "amount": 144 }, { "id": "gtceu:lubricant", "amount": 250 }], "charge": [],
           "itemsOut": [{ "id": "grindless:iridium_crucible", "count": 1 }], "fluidsOut": [] }
       ]
     },

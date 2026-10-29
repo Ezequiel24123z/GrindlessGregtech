@@ -186,15 +186,16 @@ test('line 27\'s older rows: synchrotron c5 sodium-22, the magnesium target, the
   assert.deepEqual(scriptsNaming('gtceu:high_purity_neon'), ['grindless/ev/cryogenic_plant.js']);
 });
 
-test('the controllers have shapes no other UHV controller uses', () => {
+test('the controllers are assembly lines with station research, each reading a different research item', () => {
   const dir = path.join(kube, 'server_scripts', 'grindless', 'uhv');
-  const shapes = [];
+  const research = [];
   for (const f of fs.readdirSync(dir).filter((n) => n.endsWith('.js'))) {
     const s = fs.readFileSync(path.join(dir, f), 'utf8');
-    for (const m of s.matchAll(/pattern: (\[[^\]]*\]), ingredients: (\{[^}]*\})/g)) shapes.push(`${m[1]} ${m[2].replace(/: [A-Z_]+/g, '')}`);
+    assert.ok(!/gtceu\.shaped\(/.test(s), f + ' still has a crafting-grid controller');
+    for (const m of s.matchAll(/research: '([^']+)', domain: \[/g)) research.push(m[1]);
   }
-  assert.ok(shapes.length >= 2);
-  assert.equal(new Set(shapes).size, shapes.length, shapes.join('\n'));
+  assert.ok(research.length >= 2);
+  assert.equal(new Set(research).size, research.length, research.join('\n'));
 });
 
 test('no UEV input; every item has a texture; every lang key is written in en_us and es_es', () => {

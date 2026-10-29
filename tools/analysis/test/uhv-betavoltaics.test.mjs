@@ -68,7 +68,7 @@ test('the scripts load: every row made, nothing skipped, no clash, both controll
   assert.equal(BV.recipes.length, rows.length);
   assert.deepEqual(BV.skipped, []);
   assert.deepEqual(BV.clashes, []);
-  assert.deepEqual(BV.controllerRecipes, ['grindless:crafting/ultrapure_water_plant', 'grindless:crafting/betavoltaic_fab']);
+  assert.deepEqual(BV.controllerRecipes, ['grindless:assembly_line/ultrapure_water_plant', 'grindless:assembly_line/betavoltaic_fab']);
   const made = new Set(run.docs.recipes.recipes.map((r) => r.i));
   for (const r of BV.recipes) assert.ok(made.has(r.recipeId), r.recipeId);
   const isotope = run.docs.recipes.recipes.find((r) => r.i === 'grindless:cryogenic_isotope_separation/carbon_12');

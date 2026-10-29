@@ -225,44 +225,13 @@ test('the destinations: the radioprotectant comes from Proxima b, the spent medi
   for (const kind of ['server_scripts', 'startup_scripts']) assert.doesNotMatch(script(kind, 'uhv/wetware.js'), /remove\(/);
 });
 
-test('the controller crafting: UHV hull, 2 UV sensors, 2 UHV circuits, a shape no other UHV controller uses', () => {
+test('the controller is an assembly line with station research and no crafting-grid recipe', () => {
   const { W, recipes } = harness();
-  const shaped = recipes.filter((r) => r.type === 'shaped');
-  assert.equal(shaped.length, 1, 'the LuV controllers are assembly-line recipes now');
-  const mine = shaped.find((r) => r.args[0] === 'gtceu:organoid_array');
+  assert.equal(recipes.filter((r) => r.type === 'shaped').length, 0);
+  const mine = recipes.find((r) => r.type === 'assembly_line' && r.args[0] === 'grindless:organoid_array');
   assert.ok(mine);
-  assert.equal(only(mine.calls, 'id'), W.crafting.array);
-  assert.equal(W.crafting.array, 'grindless:crafting/organoid_array');
-  const [, pattern, keys] = mine.args;
-  const grid = (pat, k) => pat.map((row) => [...row].map((ch) => (ch === ' ' ? '' : k[ch])));
-  const resolved = plain(grid(pattern, keys));
-  assert.deepEqual(resolved, [['#gtceu:circuits/uhv', '', '#gtceu:circuits/uhv'], ['gtceu:uv_sensor', 'gtceu:uhv_machine_hull', 'gtceu:uv_sensor']]);
-  // every other UHV controller grid (literal ids or the script's var constants), and its mirror
-  const dir = path.join(KUBE, 'server_scripts', 'grindless', 'uhv');
-  const others = [];
-  for (const f of fs.readdirSync(dir).filter((n) => n.endsWith('.js') && n !== 'wetware.js')) {
-    const src = fs.readFileSync(path.join(dir, f), 'utf8');
-    const value = (tok) => {
-      tok = tok.trim();
-      const lit = /^'([^']*)'$/.exec(tok);
-      if (lit) return lit[1];
-      const v = new RegExp(`var ${tok} = [^\\n]*?'([^']+)'`).exec(src);
-      return v ? v[1] : tok;
-    };
-    const re = /(?:pattern: |shaped\([^,]+, )\[([^\]]*)\],\s*(?:ingredients: )?\{([^}]*)\}/g;
-    for (const m of src.matchAll(re)) {
-      const pat = [...m[1].matchAll(/'([^']*)'/g)].map((x) => x[1]);
-      const k = {};
-      for (const kv of m[2].matchAll(/([A-Z])\s*:\s*([^,]+)/g)) k[kv[1]] = value(kv[2]);
-      others.push([f, grid(pat, k)]);
-    }
-  }
-  assert.ok(others.length >= 15, `found ${others.length} other UHV controller grids`);
-  const mirror = (g) => g.map((row) => [...row].reverse());
-  for (const [f, g] of others) {
-    assert.notDeepEqual(g, resolved, f);
-    assert.notDeepEqual(mirror(g), resolved, `${f} (mirrored)`);
-  }
+  assert.equal(W.crafting.array, 'grindless:assembly_line/organoid_array');
+  assert.ok(mine.calls.some((c) => c[0] === 'stationResearch' || c.name === 'stationResearch'), 'station research');
 });
 
 test('names in en_us and es_es, no UEV ids, and the controller overlays exist', () => {
