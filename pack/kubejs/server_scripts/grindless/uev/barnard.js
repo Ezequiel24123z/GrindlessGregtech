@@ -10,7 +10,7 @@
 //   gtceu:chemical_reactor / compressor / electric_blast_furnace   GTM rows (circuit 0), Barnard b only: crude ammonium perrhenate ->
 //                          ammonium perrhenate -> gtceu:rhenium_dust -> pellet -> gtceu:rhenium_ingot. The platinum plant's circuit 9
 //                          row (ev/platinum_plant.js) makes the crude salt from the residue.
-//   crafting               the controllers: UEV hull + 2 optical computers + 2 UEV parts, shaped recipes grindless:crafting/<machine>.
+//   assembly line          the controllers: station research, UEV-era circuits, 3 domain parts of the line, soldering alloy and lubricant, grindless:assembly_line/<machine>.
 //
 // No load-order line: nothing here reads another script's data at load, only inside the recipe callback.
 // Lookup safety: a recipe whose ingredients are a subset of another's of its type can hide it; checked at load (a clash is an error).

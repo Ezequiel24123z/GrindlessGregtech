@@ -2,11 +2,11 @@
 // -----------------------------------------------------------------------------------------------
 // UV's Kuiper belt (docs/eras/uv.md, "Machines 28-29" and line 17; package UV-B4): two multiblocks of Pluto orbit and their recipe types.
 //
-//   gtceu:kuiper_interceptor_bay   type kuiper_intercept. 7 x 9 x 7 station truss casing around a hollow probe hangar: a launch rail
+//   gtceu:kuiper_interceptor_bay   type kuiper_intercept. 7 x 7 x 9 station truss casing around a hollow probe hangar: a launch rail
 //                                  (titanium frames) along its floor and a sample airlock (laminated glass) at its far end. An
 //                                  ion-propelled interceptor visits a cold classical Kuiper Belt object (Arrokoth's kind) and brings a
 //                                  sample back, as Hayabusa2 did from Ryugu.
-//   gtceu:amorphous_ice_annealer   type ice_annealing. 5 x 5 x 7 station truss casing around a cryostat (the sample warms through its
+//   gtceu:amorphous_ice_annealer   type ice_annealing. 5 x 7 x 5 station truss casing around a cryostat (the sample warms through its
 //                                  crystallisation at about 140 K) under a gas collection manifold (tungsten steel pipe casing).
 //
 // Also registered here: grindless:kuiper_interceptor (a thruster pod, a probe RTG and a sample canister) and grindless:sample_canister
