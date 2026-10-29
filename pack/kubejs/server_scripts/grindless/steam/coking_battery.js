@@ -68,7 +68,8 @@
       .EUt(EUT).duration(DURATION)
 
     // the controller is built around two of GTM's coke ovens (the machine it replaces), the gas main and the pusher gears
-    event.recipes.gtceu.shaped('gtceu:coking_battery', ['PTP', 'OGO', 'CwC'], {
+    event.recipes.gtceu.shaped('gtceu:coking_battery', ['DTP', 'OGO', 'CwC'], {
+      D: 'grindless:bronze_drill_bit',
       P: '#forge:plates/bronze',
       T: 'gtceu:bronze_normal_fluid_pipe',
       O: 'gtceu:coke_oven',

@@ -35,7 +35,8 @@
         D: 'grindless:steel_drill_bit'
       }).id('grindless:crafting/lv_vein_drill')
 
-      event.recipes.gtceu.shaped('gtceu:lv_greenhouse', ['GSG', 'MHP', 'CFC'], {
+      event.recipes.gtceu.shaped('gtceu:lv_greenhouse', ['DSG', 'MHP', 'CFC'], {
+        D: 'grindless:steel_drill_bit',
         G: '#forge:glass',
         S: '#minecraft:saplings',
         M: 'gtceu:lv_electric_motor',

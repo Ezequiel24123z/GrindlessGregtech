@@ -37,7 +37,7 @@
 
   var CONTROLLER = 'gtceu:polymer_works'
   var MACHINES = ['gtceu:mv_chemical_reactor', 'gtceu:mv_fluid_solidifier', 'gtceu:mv_mixer']
-  var INPUTS = ['2x gtceu:mv_chemical_reactor', '2x gtceu:mv_fluid_solidifier', '2x gtceu:mv_mixer', '4x #gtceu:circuits/mv']
+  var INPUTS = ['2x gtceu:mv_chemical_reactor', '2x gtceu:mv_fluid_solidifier', '2x gtceu:mv_mixer', '4x #gtceu:circuits/mv', '2x grindless:contact_catalyst']
   PW.crafting = 'grindless:polymer_works'
   PW.craftingInputs = INPUTS.slice()
 
@@ -208,7 +208,7 @@
       return
     }
     event.recipes.gtceu.assembler(PW.crafting)
-      .itemInputs(INPUTS[0], INPUTS[1], INPUTS[2], INPUTS[3])
+      .itemInputs(INPUTS[0], INPUTS[1], INPUTS[2], INPUTS[3], INPUTS[4])
       .itemOutputs(CONTROLLER)
       .EUt(120)
       .duration(400)

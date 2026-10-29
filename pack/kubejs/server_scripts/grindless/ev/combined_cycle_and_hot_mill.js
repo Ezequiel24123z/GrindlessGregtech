@@ -93,11 +93,11 @@
   const FREEZER_PATH = /^vacuum_freezer\/cool_hot_(.+)_ingot$/
   const SHAPING_PATH = /^(bender\/bend_.+_(to_plate|ingot_to_foil)|extruder\/extrude_.+_(to_plate|to_rod|ingot_to_foil))$/
 
-  const PLANT_PARTS = ['gtceu:combined_cycle_plant', 'gtceu:ev_machine_hull', 'gtceu:gas_large_turbine', 'gtceu:ev_electric_pump']
-  const MILL_PARTS = ['gtceu:hot_strip_mill', 'gtceu:ev_machine_hull', 'gtceu:ev_bender', 'gtceu:vacuum_freezer', 'gtceu:ev_electric_pump']
-  CC.craftingRecipe = 'grindless:crafting/combined_cycle_plant'
+  const PLANT_PARTS = ['gtceu:combined_cycle_plant', 'gtceu:ev_machine_hull', 'gtceu:gas_large_turbine', 'gtceu:ev_electric_pump', 'grindless:night_sky_radiator', 'grindless:platinum_electrode']
+  const MILL_PARTS = ['gtceu:hot_strip_mill', 'gtceu:ev_machine_hull', 'gtceu:ev_bender', 'gtceu:vacuum_freezer', 'gtceu:ev_electric_pump', 'grindless:night_sky_radiator', 'grindless:graphite_electrode']
+  CC.craftingRecipe = 'grindless:assembler/combined_cycle_plant'
   CC.craftingParts = PLANT_PARTS
-  HM.craftingRecipe = 'grindless:crafting/hot_strip_mill'
+  HM.craftingRecipe = 'grindless:assembler/hot_strip_mill'
   HM.craftingParts = MILL_PARTS
   CC.steamShare = STEAM_SHARE
   CC.steamPerWater = STEAM_PER_WATER
@@ -485,19 +485,16 @@
       console.error(LOG + 'combined-cycle plant and hot strip mill controller recipes skipped, unknown item(s): ' + missing.join(', '))
       return
     }
-    event.recipes.gtceu.shaped('gtceu:combined_cycle_plant', ['CTC', 'PHP', 'C C'], {
-      C: '#gtceu:circuits/ev',
-      T: 'gtceu:gas_large_turbine',
-      P: 'gtceu:ev_electric_pump',
-      H: 'gtceu:ev_machine_hull'
-    }).id(CC.craftingRecipe)
-    event.recipes.gtceu.shaped('gtceu:hot_strip_mill', ['CBC', 'PHP', 'CFC'], {
-      C: '#gtceu:circuits/ev',
-      B: 'gtceu:ev_bender',
-      F: 'gtceu:vacuum_freezer',
-      P: 'gtceu:ev_electric_pump',
-      H: 'gtceu:ev_machine_hull'
-    }).id(HM.craftingRecipe)
+    event.recipes.gtceu.assembler('grindless:combined_cycle_plant')
+      .itemInputs('gtceu:ev_machine_hull', 'gtceu:gas_large_turbine', '2x gtceu:ev_electric_pump', '4x #gtceu:circuits/ev', '2x grindless:night_sky_radiator', '2x grindless:platinum_electrode')
+      .inputFluids(Fluid.of('gtceu:lubricant', 1000))
+      .itemOutputs('gtceu:combined_cycle_plant')
+      .EUt(120).duration(400)
+    event.recipes.gtceu.assembler('grindless:hot_strip_mill')
+      .itemInputs('gtceu:ev_machine_hull', 'gtceu:ev_bender', 'gtceu:vacuum_freezer', '2x gtceu:ev_electric_pump', '4x #gtceu:circuits/ev', '2x grindless:night_sky_radiator', '2x grindless:graphite_electrode')
+      .inputFluids(Fluid.of('gtceu:lubricant', 1000))
+      .itemOutputs('gtceu:hot_strip_mill')
+      .EUt(120).duration(400)
     console.info(LOG + 'combined-cycle plant and hot strip mill controller recipes added')
   }
 

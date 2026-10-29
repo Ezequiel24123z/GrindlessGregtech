@@ -263,7 +263,7 @@ test('controller recipe: 4 EV macerators, 4 EV ore washers, 4 EV thermal centrif
   assert.equal(out.assembler.length, 1);
   const r = out.assembler[0];
   assert.equal(r.id, h.G.megaOreRefinery.crafting);
-  assert.deepEqual(plain(r.itemInputs), ['4x gtceu:ev_macerator', '4x gtceu:ev_ore_washer', '4x gtceu:ev_thermal_centrifuge', '4x gtceu:ev_sifter', '4x #gtceu:circuits/ev']);
+  assert.deepEqual(plain(r.itemInputs), ['4x gtceu:ev_macerator', '4x gtceu:ev_ore_washer', '4x gtceu:ev_thermal_centrifuge', '4x gtceu:ev_sifter', '4x #gtceu:circuits/ev', '2x grindless:titanium_drill_bit', '2x grindless:contact_catalyst']);
   assert.deepEqual(plain(r.itemOutputs), ['gtceu:ore_refinery']);
   assert.ok(r.eut > 0 && r.duration > 0);
 });

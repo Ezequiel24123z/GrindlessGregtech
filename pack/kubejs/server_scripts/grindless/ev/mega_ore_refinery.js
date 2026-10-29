@@ -36,7 +36,7 @@
 
   var CONTROLLER = 'gtceu:ore_refinery'
   var MACHINES = ['gtceu:ev_macerator', 'gtceu:ev_ore_washer', 'gtceu:ev_thermal_centrifuge', 'gtceu:ev_sifter']
-  var INPUTS = ['4x gtceu:ev_macerator', '4x gtceu:ev_ore_washer', '4x gtceu:ev_thermal_centrifuge', '4x gtceu:ev_sifter', '4x #gtceu:circuits/ev']
+  var INPUTS = ['4x gtceu:ev_macerator', '4x gtceu:ev_ore_washer', '4x gtceu:ev_thermal_centrifuge', '4x gtceu:ev_sifter', '4x #gtceu:circuits/ev', '2x grindless:titanium_drill_bit', '2x grindless:contact_catalyst']
   OR.crafting = 'grindless:ore_refinery'
   OR.craftingInputs = INPUTS.slice()
 
@@ -256,7 +256,8 @@
       return
     }
     event.recipes.gtceu.assembler(OR.crafting)
-      .itemInputs(INPUTS[0], INPUTS[1], INPUTS[2], INPUTS[3], INPUTS[4])
+      .itemInputs(INPUTS[0], INPUTS[1], INPUTS[2], INPUTS[3], INPUTS[4], INPUTS[5], INPUTS[6])
+      .inputFluids(Fluid.of('gtceu:sulfuric_acid', 2000))
       .itemOutputs(CONTROLLER)
       .EUt(1920)
       .duration(400)

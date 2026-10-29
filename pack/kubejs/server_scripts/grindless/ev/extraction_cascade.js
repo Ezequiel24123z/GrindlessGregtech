@@ -213,8 +213,8 @@
   const MIXER = 'gtceu:ev_mixer'
   const CENTRIFUGE = 'gtceu:ev_centrifuge'
   const REACTOR = 'gtceu:ev_chemical_reactor'
-  EC.craftingParts = [HULL, MIXER, CENTRIFUGE, REACTOR, EC.machine || 'gtceu:extraction_cascade']
-  EC.craftingRecipe = 'grindless:crafting/extraction_cascade'
+  EC.craftingParts = [HULL, MIXER, CENTRIFUGE, REACTOR, 'grindless:reforming_catalyst', 'grindless:hydrotreating_catalyst', EC.machine || 'gtceu:extraction_cascade']
+  EC.craftingRecipe = 'grindless:assembler/extraction_cascade'
 
   // an uncaught error here would stop KubeJS from running the recipe handlers of the scripts that load after this one
   ServerEvents.recipes(function (event) {
@@ -260,13 +260,11 @@
       console.error(LOG + 'extraction cascade crafting skipped, unknown item(s): ' + missing.join(', '))
       return
     }
-    event.recipes.gtceu.shaped('gtceu:extraction_cascade', ['CMC', 'RHG', 'C C'], {
-      C: '#gtceu:circuits/ev',
-      M: MIXER,
-      R: REACTOR,
-      H: HULL,
-      G: CENTRIFUGE
-    }).id(EC.craftingRecipe)
+    event.recipes.gtceu.assembler('grindless:extraction_cascade')
+      .itemInputs(HULL, '2x ' + MIXER, '2x ' + CENTRIFUGE, REACTOR, '4x #gtceu:circuits/ev', '2x grindless:reforming_catalyst', '2x grindless:hydrotreating_catalyst')
+      .inputFluids(Fluid.of('gtceu:hydrochloric_acid', 2000))
+      .itemOutputs('gtceu:extraction_cascade')
+      .EUt(120).duration(400)
     console.info(LOG + 'extraction cascade crafting recipe added')
   }
 })()

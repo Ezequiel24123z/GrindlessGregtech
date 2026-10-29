@@ -163,8 +163,8 @@
   const ELECTROLYZER = 'gtceu:ev_electrolyzer'
   const FURNACE = 'gtceu:ev_electric_furnace'
   const PUMP = 'gtceu:ev_electric_pump'
-  RC.craftingParts = [HULL, ELECTROLYZER, FURNACE, PUMP, 'gtceu:regolith_cell']
-  RC.craftingRecipes = { cell: 'grindless:crafting/regolith_cell' }
+  RC.craftingParts = [HULL, ELECTROLYZER, FURNACE, PUMP, ELECTRODE, 'grindless:graphite_electrode', 'gtceu:regolith_cell']
+  RC.craftingRecipes = { cell: 'grindless:assembler/regolith_cell' }
 
   // an uncaught error here would stop KubeJS from running the recipe handlers of the scripts that load after this one
   ServerEvents.recipes(function (event) {
@@ -221,12 +221,10 @@
       console.error('[grindless/ev] regolith cell crafting skipped, unknown item(s): ' + missing.join(', '))
       return
     }
-    event.recipes.gtceu.shaped('gtceu:regolith_cell', ['CEC', 'PHP', 'CFC'], {
-      C: '#gtceu:circuits/ev',
-      E: ELECTROLYZER,
-      P: PUMP,
-      H: HULL,
-      F: FURNACE
-    }).id(RC.craftingRecipes.cell)
+    event.recipes.gtceu.assembler('grindless:regolith_cell')
+      .itemInputs(HULL, ELECTROLYZER, FURNACE, '2x ' + PUMP, '4x #gtceu:circuits/ev', '2x ' + ELECTRODE, '2x grindless:graphite_electrode')
+      .inputFluids(Fluid.of(O2, 1000))
+      .itemOutputs('gtceu:regolith_cell')
+      .EUt(120).duration(400)
   }
 })()

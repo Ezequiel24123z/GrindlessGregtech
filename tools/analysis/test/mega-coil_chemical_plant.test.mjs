@@ -178,7 +178,7 @@ test('controller recipe: 2 large chemical reactors, 4 HV chemical reactors, 4 HV
   assert.equal(out.length, 1);
   const r = out[0];
   assert.equal(r.id, h.G.megaCoilChemicalPlant.crafting);
-  assert.deepEqual(plain(r.itemInputs), ['2x gtceu:large_chemical_reactor', '4x gtceu:hv_chemical_reactor', '4x #gtceu:circuits/hv', '8x #forge:plates/polytetrafluoroethylene', '4x gtceu:kanthal_coil_block']);
+  assert.deepEqual(plain(r.itemInputs), ['2x gtceu:large_chemical_reactor', '4x gtceu:hv_chemical_reactor', '4x #gtceu:circuits/hv', '8x #forge:plates/polytetrafluoroethylene', '4x gtceu:kanthal_coil_block', '2x grindless:reforming_catalyst']);
   assert.deepEqual(plain(r.itemOutputs), ['gtceu:coil_chemical_plant']);
   assert.ok(r.eut <= 512 && r.eut > 0);
   assert.ok(r.duration > 0);
