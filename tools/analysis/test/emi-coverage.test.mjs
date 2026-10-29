@@ -285,7 +285,7 @@ test('EMI shows how every item, block, fluid and machine of the pack is obtained
   const gtRecipe = (list) => list.some((m) => m.source === 'recipe' && m.category.startsWith('gtceu:'));
   const charts = res.results.filter((x) => /_chart$|chart_draft$|lunar_map$|lunar_ephemeris$|vlbi_recording$/.test(x.key));
   const samples = res.results.filter((x) => x.key.startsWith('grindless:vein_sample_'));
-  assert.equal(charts.length, 15);
+  assert.equal(charts.length, 16); // 16 since UIV-B4: the Kerr chart (Matrioshka c3, kept by the Penrose engine)
   assert.ok(samples.length > 40);
   // LuV B9: the Saturn Transfer Chart is made by the coilgun (a GT recipe) and is the ZPM trip: until ZPM its use is its copy and a page
   const nextEra = new Set(['grindless:saturn_transfer_chart']);
