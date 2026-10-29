@@ -5,13 +5,14 @@
 // data/grindless/tables/gate.json (server_scripts/grindless/uhv/gate.js). Every item and block they use is F1's (uhv/foundation.js)
 // or older; this file registers machines only.
 //
-//   gtceu:warp_gate           type gtceu:warp_gate. A 15 x 15 x 3 ring of grindless:warp_gate_casing round open air, with six
+//   gtceu:warp_gate           type gtceu:warp_gate. A 15 x 15 x 5 ring of grindless:warp_gate_casing round open air (tungstensteel
+//                             posts, a fusion-glass window band and a superconducting coil band), with six
 //                             modulator mounts (UHV casing, where the thin-film lithium niobate modulators sit) on its top row. c1
 //                             opens the gate and makes the Proxima gate seed; c2 holds it open for a minute: while it runs, a player
 //                             standing in the ring is carried to the other ring (the transit lives in server_scripts/.../gate.js;
 //                             beforeWorking below records each run). Items do not cross: they go by AE2.
-//   gtceu:baseline_astrometer type gtceu:baseline_astrometry (observatory step 9). 7 x 5 x 7: a station truss deck and roof on four
-//                             frame posts round a gearbox dish drive. Proxima b's orbit only: the chart is made where the baseline is.
+//   gtceu:baseline_astrometer type gtceu:baseline_astrometry (observatory step 9). 9 x 9 x 9: a station truss deck with a pipe cross, a frame mast on a
+//                             gearbox dish drive and a stepped fusion-glass mirror dish, braced by four corner posts. Proxima b's orbit only: the chart is made where the baseline is.
 //
 // Geometry (lib/patterns.js: slices back -> front, rows bottom -> top; S is the controller on the front face).
 // Published: global.grindless.warpGate (.machines, .gates (runs recorded by beforeWorking), .order, .ids).
@@ -44,7 +45,7 @@
       texture: GATE_TEXTURE,
       // items in: the exotic matter cells, the cartridges, the approach data, the clock, the processor and the circuit
       maxIO: { itemsIn: 6, itemsOut: 2, fluidsIn: 0, fluidsOut: 0 },
-      width: 15, depth: 15, height: 3
+      width: 15, depth: 15, height: 5
     },
     astrometer: {
       name: 'baseline_astrometer',
@@ -56,12 +57,13 @@
       texture: STATION_TEXTURE,
       // items in: the Sgr A* image, mirror blanks, fibre, lasers, modulators, the processor, the pigment and the circuit
       maxIO: { itemsIn: 8, itemsOut: 1, fluidsIn: 0, fluidsOut: 0 },
-      width: 7, depth: 7, height: 5
+      width: 9, depth: 9, height: 9
     }
   }
 
-  // The ring: row 0 the floor of the ring wall (X: casing or a part), rows 1-2 the wall (B), S the controller (front middle, row 1);
-  // M the six modulator mounts on the top row: the four corners and the middle of both sides. The inside is air.
+  // The ring: row 0 the floor of the ring wall (X: casing or a part), rows 1-4 the wall. S is the controller (front middle, row 1).
+  // Eight tungstensteel posts (corners and wall middles, F) carry a superconducting coil band (K, row 3) over fusion-glass windows (G,
+  // row 2); M the six modulator mounts on the top row: the four corners and the middle of both sides. The inside is air.
   function gateSlices(m) {
     var slices = []
     var last = m.depth - 1
@@ -74,11 +76,15 @@
           var edge = si === 0 || si === last || c === 0 || c === m.width - 1
           var corner = (si === 0 || si === last) && (c === 0 || c === m.width - 1)
           var sideMid = si === mid && (c === 0 || c === m.width - 1)
+          var post = corner || sideMid || (c === mid && (si === 0 || si === last))
           var ch
           if (!edge) ch = '#'
           else if (r === 0) ch = 'X'
           else if (r === 1 && si === last && c === mid) ch = 'S'
-          else if (r === 2 && (corner || sideMid)) ch = 'M'
+          else if (r === m.height - 1 && (corner || sideMid)) ch = 'M'
+          else if (post) ch = 'F'
+          else if (r === 2) ch = 'G'
+          else if (r === 3) ch = 'K'
           else ch = 'B'
           row += ch
         }
@@ -89,8 +95,9 @@
     return slices
   }
 
-  // The astrometer: row 0 the deck (X: station casing or a part; S the controller, front middle), rows 1-3 four frame posts (F) and
-  // a gearbox dish drive (D) in the middle of row 1, row 4 the roof ring (B). ' ' is anything.
+  // The astrometer, 9 x 9 x 9: row 0 the deck (X: station casing or a part, on the rim; S the controller, front middle) with a pipe
+  // cross over its casing floor; a gearbox (D) drives a frame mast (F) up the middle, braced by four corner posts; the dish on top is three
+  // stepped rings (rows 6-8: casing, casing, fusion-glass mirror). ' ' is anything.
   function astroSlices(m) {
     var slices = []
     var last = m.depth - 1
@@ -100,13 +107,18 @@
       for (var r = 0; r < m.height; r++) {
         var row = ''
         for (var c = 0; c < m.width; c++) {
-          var edge = si === 0 || si === last || c === 0 || c === m.width - 1
+          var rim = si === 0 || si === last || c === 0 || c === m.width - 1
           var corner = (si === 0 || si === last) && (c === 0 || c === m.width - 1)
-          var ch
-          if (r === 0) ch = si === last && c === mid ? 'S' : 'X'
-          else if (r === m.height - 1) ch = edge ? 'B' : ' '
-          else if (r === 1 && si === mid && c === mid) ch = 'D'
-          else ch = corner ? 'F' : ' '
+          var dz = Math.abs(si - mid)
+          var dx = Math.abs(c - mid)
+          var ring = Math.max(dz, dx)
+          var ch = ' '
+          if (r === 0) ch = si === last && c === mid ? 'S' : rim ? 'X' : (dz === 0 || dx === 0 ? 'P' : 'B')
+          else if (si === mid && c === mid) ch = r === 1 ? 'D' : r <= 6 ? 'F' : ' '
+          else if (corner && r <= 4) ch = 'F'
+          else if (r === 6 && ring === 1) ch = 'B'
+          else if (r === 7 && ring === 2) ch = 'B'
+          else if (r === 8 && ring === 3) ch = 'W'
           row += ch
         }
         rows.push(row)
@@ -115,7 +127,6 @@
     }
     return slices
   }
-
   var M = WG.machines
   M.gate.spec = {
     slices: gateSlices(M.gate),
@@ -127,6 +138,9 @@
         Pat.part('energy_input', { min: 1, max: 4 })),
       B: Pat.block(GATE_CASING),
       M: Pat.block(MOUNT),
+      F: Pat.frame(['tungsten_steel']),
+      G: Pat.block('gtceu:fusion_glass'),
+      K: Pat.block('gtceu:superconducting_coil'),
       '#': Pat.air()
     }
   }
@@ -140,7 +154,9 @@
         Pat.part('energy_input', { min: 1, max: 2 })),
       B: Pat.block(STATION),
       F: Pat.frame(['stainless_steel']),
-      D: Pat.block(GEARBOX)
+      D: Pat.block(GEARBOX),
+      P: Pat.block('gtceu:tungstensteel_pipe_casing'),
+      W: Pat.block('gtceu:fusion_glass')
     }
   }
   WG.order = ['gate', 'astrometer']

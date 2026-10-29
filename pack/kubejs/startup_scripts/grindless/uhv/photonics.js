@@ -22,8 +22,8 @@
 //   items qcl_superlattice_wafer (MBE c1), implanted_ln_wafer (ion implanter c3), lnoi_wafer (foundry c1), gst_target and
 //         spent_gst_target (blast furnace, foundry c2), pcm_photonic_die (foundry c2), quantum_memory_chip (foundry c3),
 //         sic_epi_wafer (A5's SiC device fab c2 makes it) and implanted_sic_wafer (ion implanter c4, read by A5's c3)
-// Geometry (lib/patterns.js: slices back -> front, rows bottom -> top): the reactor is 5 wide x 5 high x 7 deep, the foundry
-// 9 wide x 5 high x 9 deep (clean casing, a laminated-glass window in the front wall).
+// Geometry (lib/patterns.js: slices back -> front, rows bottom -> top): the reactor is 7 wide x 5 high x 9 deep, the foundry
+// 11 wide x 5 high x 9 deep (framed glass walls, an accent course at the foot, ribbed roof).
 // Textures: tools/assets/Build-UHVPhotonicsTextures.ps1. Names: client_scripts/grindless/uhv_photonics_lang.js.
 // Published for the recipe script: global.grindless.uhvPhotonics (global.grindless.photonics is UV's fibre tower and MOCVD).
 (function () {
@@ -77,10 +77,11 @@
       type: 'molecular_beam_epitaxy',
       dataKey: 'grindless_molecular_beam_epitaxy',
       lang: 'MBE Reactor',
+      casing: UV_CASING, accent: CLEAN, frame: 'tungsten_steel',
       // items in: the InP wafer, four effusion-cell charges and the circuit; out: the wafer and the scraped arsenic;
       // fluid in: the cryoshroud's liquid nitrogen; out: the boiled-off nitrogen
       maxIO: { itemsIn: 6, itemsOut: 2, fluidsIn: 1, fluidsOut: 1 },
-      width: 5, height: 5, depth: 7
+      width: 7, height: 5, depth: 9
     },
     foundry: {
       name: 'photonic_foundry',
@@ -88,16 +89,29 @@
       type: 'photonic_foundry',
       dataKey: 'grindless_photonic_foundry',
       lang: 'Photonic Foundry',
+      casing: CLEAN, accent: UV_CASING, frame: 'stainless_steel',
       // items in: up to four parts, a neutraliser and the circuit (the optical processor takes four kinds and the circuit);
       // out: the product, the reused donor wafer and the fluorite; fluids in: ultrapure water, oxygen, HF (or the argon charge);
       // out: the rinse water
       maxIO: { itemsIn: 6, itemsOut: 3, fluidsIn: 3, fluidsOut: 1 },
-      width: 9, height: 5, depth: 9
+      width: 11, height: 5, depth: 9
     }
   }
 
-  // A hollow shell: row 0 (X) takes the parts, the top row and the walls are casing (F), S is the controller (front wall, row 1, middle).
-  function shell(m, inner, wall) {
+  // The wall skin: frame posts (Q) on the corners and the roof edges, an accent course (A) at the foot and ribs across the roof,
+  // and glass (L) between casing mullions (F) in the rows above.
+  function skin(m, r, si, c) {
+    var ex = c === 0 || c === m.width - 1
+    var ez = si === 0 || si === m.depth - 1
+    var top = r === m.height - 1
+    if ((ex && ez) || (top && (ex || ez))) return 'Q'
+    if (top) return si % 3 === 1 ? 'A' : 'F'
+    if (r === 1) return 'A'
+    return (ez ? c : si) % 3 === 0 ? 'F' : 'L'
+  }
+
+  // A shell: row 0 (X) takes the parts (frame feet on the corners), the walls are skinned, S is the controller (front wall, row 1, middle).
+  function shell(m, inner) {
     var slices = []
     var last = m.depth - 1
     var mid = (m.width - 1) / 2
@@ -108,10 +122,9 @@
         for (var c = 0; c < m.width; c++) {
           var ch
           var isWall = si === 0 || si === last || c === 0 || c === m.width - 1
-          if (r === 0) ch = 'X'
-          else if (r === m.height - 1) ch = 'F'
+          if (r === 0) ch = (si === 0 || si === last) && (c === 0 || c === m.width - 1) ? 'Q' : 'X'
           else if (si === last && r === 1 && c === mid) ch = 'S'
-          else if (isWall) ch = (wall && wall(r, si, c)) || 'F'
+          else if (r === m.height - 1 || isWall) ch = skin(m, r, si, c)
           else ch = inner(r, si, c)
           row += ch
         }
@@ -122,33 +135,32 @@
     return slices
   }
 
-  // effusion cells (T) across the back; the cryoshroud (K) on both sides of the beam path (column 2), which is vacuum
+  // effusion cells (T) across the back; the cryoshroud (K) on both sides of the beam path (column 3), which is vacuum; a transfer-arm
+  // gearbox (B) on each side of the load lock at the front
   function reactorInner(r, si, c) {
     if (si === 1) return 'T'
-    if (c === 1 || c === 3) return 'K'
+    if (c === 2 || c === 4) return 'K'
+    if (r === 2 && si === 6 && (c === 1 || c === 5)) return 'B'
     return '#'
   }
 
-  // a 3 x 2 window above the controller
-  function foundryWall(r, si, c) {
-    return si === 8 && (r === 2 || r === 3) && c >= 3 && c <= 5 ? 'L' : null
-  }
-
-  // filter casings under the ceiling; the wafer bonder (B) on the left, the sputter chamber (T) on the right, both at the back
+  // a filter ceiling in strips (P); the wafer bonders (B) on the left, the sputter chamber (T) on the right, both at the back
   function foundryInner(r, si, c) {
-    if (r === 3) return 'P'
+    if (r === 3 && si % 2 === 1) return 'P'
     if (si >= 2 && si <= 4 && c >= 1 && c <= 3 && r === 1) return 'B'
-    if (si >= 2 && si <= 4 && c >= 5 && c <= 7) return 'T'
+    if (si >= 2 && si <= 4 && c >= 7 && c <= 9) return 'T'
     return '#'
   }
 
-  function specOf(m, casing, inner, wall, parts) {
+  function specOf(m, inner, parts) {
     return {
-      slices: shell(m, inner, wall),
+      slices: shell(m, inner),
       symbols: {
         S: Pat.controller(),
-        X: Pat.oneOf.apply(null, [Pat.block(casing)].concat(parts)),
-        F: Pat.block(casing),
+        X: Pat.oneOf.apply(null, [Pat.block(m.casing)].concat(parts)),
+        F: Pat.block(m.casing),
+        Q: Pat.frame([m.frame]),
+        A: Pat.block(m.accent),
         T: Pat.block(TUNGSTEN_PIPE),
         K: Pat.block(FROST),
         B: Pat.block(BONDER),
@@ -158,14 +170,14 @@
       }
     }
   }
-  PH.machines.reactor.spec = specOf(PH.machines.reactor, UV_CASING, reactorInner, null, [
+  PH.machines.reactor.spec = specOf(PH.machines.reactor, reactorInner, [
     Pat.part('input_bus', { min: 1, max: 2 }),
     Pat.part('input_hatch', { min: 1, max: 1 }),
     Pat.part('output_bus', { min: 1, max: 1 }),
     Pat.part('output_hatch', { min: 1, max: 1 }),
     Pat.part('energy_input', { min: 1, max: 2 })
   ])
-  PH.machines.foundry.spec = specOf(PH.machines.foundry, CLEAN, foundryInner, foundryWall, [
+  PH.machines.foundry.spec = specOf(PH.machines.foundry, foundryInner, [
     Pat.part('input_bus', { min: 1, max: 3 }),
     Pat.part('input_hatch', { min: 1, max: 3 }),
     Pat.part('output_bus', { min: 1, max: 2 }),

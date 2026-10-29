@@ -37,6 +37,9 @@
   const TUNGSTEN_PIPE = 'gtceu:tungstensteel_pipe_casing'
   const PRESS = 'gtceu:stainless_steel_gearbox'
   const FILTER = 'gtceu:filter_casing'
+  const ROBUST = 'gtceu:robust_machine_casing'
+  const STABLE = 'gtceu:stable_machine_casing'
+  const GLASS = 'gtceu:laminated_glass'
 
   PD.table = 'kubejs/data/grindless/tables/power_devices.json'
   // item name -> stack size; every item carries two tooltip lines (tooltip.grindless.<name>.0 and .1)
@@ -82,7 +85,19 @@
     }
   }
 
-  // A hollow shell: row 0 (X) takes the parts, the top row and the walls are casing (F), S is the controller (front wall, row 1, middle).
+  // The wall skin: frame posts (Q) on the corners and the roof edges, an accent course (A) at the foot and ribs across the roof,
+  // and glass (L) between casing mullions (F) in the rows above.
+  function skin(m, r, si, c) {
+    var ex = c === 0 || c === m.width - 1
+    var ez = si === 0 || si === m.depth - 1
+    var top = r === m.height - 1
+    if ((ex && ez) || (top && (ex || ez))) return 'Q'
+    if (top) return si % 3 === 1 ? 'A' : 'F'
+    if (r === 1) return 'A'
+    return (ez ? c : si) % 3 === 0 ? 'F' : 'L'
+  }
+
+  // A shell: row 0 (X) takes the parts (frame feet on the corners), the walls are skinned, S is the controller (front wall, row 1, middle).
   function shell(m, inner) {
     var slices = []
     var last = m.depth - 1
@@ -94,10 +109,9 @@
         for (var c = 0; c < m.width; c++) {
           var ch
           var isWall = si === 0 || si === last || c === 0 || c === m.width - 1
-          if (r === 0) ch = 'X'
-          else if (r === m.height - 1) ch = 'F'
+          if (r === 0) ch = (si === 0 || si === last) && (c === 0 || c === m.width - 1) ? 'Q' : 'X'
           else if (si === last && r === 1 && c === mid) ch = 'S'
-          else if (isWall) ch = 'F'
+          else if (r === m.height - 1 || isWall) ch = skin(m, r, si, c)
           else ch = inner(r, si, c)
           row += ch
         }
@@ -114,20 +128,23 @@
     return '#'
   }
 
-  // filter casings under the ceiling; the lamination press (B) on the floor in the middle
+  // filter casings under the ceiling in strips; the lamination press (B) on the floor in the middle
   function arraysInner(r, si, c) {
-    if (r === 3) return 'P'
+    if (r === 3 && si % 2 === 1) return 'P'
     if (r === 1 && si >= 2 && si <= 4 && c >= 2 && c <= 4) return 'B'
     return '#'
   }
 
-  function specOf(m, casing, inner, parts) {
+  function specOf(m, casing, accent, frame, inner, parts) {
     return {
       slices: shell(m, inner),
       symbols: {
         S: Pat.controller(),
         X: Pat.oneOf.apply(null, [Pat.block(casing)].concat(parts)),
         F: Pat.block(casing),
+        Q: Pat.frame([frame]),
+        A: Pat.block(accent),
+        L: Pat.block(GLASS),
         T: Pat.block(TUNGSTEN_PIPE),
         B: Pat.block(PRESS),
         P: Pat.block(FILTER),
@@ -135,14 +152,14 @@
       }
     }
   }
-  PD.machines.fab.spec = specOf(PD.machines.fab, HEATPROOF, fabInner, [
+  PD.machines.fab.spec = specOf(PD.machines.fab, HEATPROOF, ROBUST, 'tungsten_steel', fabInner, [
     Pat.part('input_bus', { min: 1, max: 3 }),
     Pat.part('input_hatch', { min: 1, max: 3 }),
     Pat.part('output_bus', { min: 1, max: 1 }),
     Pat.part('output_hatch', { min: 1, max: 1 }),
     Pat.part('energy_input', { min: 1, max: 2 })
   ])
-  PD.machines.arrays.spec = specOf(PD.machines.arrays, CLEAN, arraysInner, [
+  PD.machines.arrays.spec = specOf(PD.machines.arrays, CLEAN, STABLE, 'stainless_steel', arraysInner, [
     Pat.part('input_bus', { min: 1, max: 3 }),
     Pat.part('input_hatch', { min: 1, max: 1 }),
     Pat.part('output_bus', { min: 1, max: 3 }),
