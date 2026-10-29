@@ -5,7 +5,7 @@
 // are published in global.grindless.uevFoundation. GTM already registers gtceu:uev_machine_casing and the UEV wires of its own metals,
 // and its calcium, potassium, lithium, hafnium, tantalum, rhenium, ruthenium, terbium, lanthanum, yttrium, curium, californium and
 // tennessine, so none of those is re-registered (S0-1 dump; tennessine is in GTM's lang, contract F1 lists it by mistake). The hull and
-// energy hatch builders also register the UIV ones (UIV-S0-1: a second create of the same id clashes), `.tiers(UEV, UIV)`.
+// energy hatch builders also register the UIV and UXV ones (S0-1: a second create of the same id clashes), `.tiers(UEV, UIV, UXV)`.
 //
 //   Components (grindless:, Monifactory's Post_UV_Components.js pattern, LGPL, credited): uev_electric_motor (A5), uev_robot_arm (A8),
 //     uev_field_generator (B4), uev_electric_pump, uev_conveyor_module, uev_electric_piston, uev_sensor, uev_emitter (A6).
@@ -168,7 +168,8 @@
   })
 
   // S0-1: the hull and the four hatches register and form with highTierContent off. UIV-F1 (S0-1 fallback): the builder key is the base
-  // id, so UIV's five gtceu:uiv_* come from these same builders (.tiers(UEV, UIV)); the labels are named by tier
+  // id, so the five gtceu:uiv_* and the five gtceu:uxv_* come from these same builders (.tiers(UEV, UIV, UXV), UXV-F1); the labels are
+  // named by tier
   GTCEuStartupEvents.registry('gtceu:machine', function (event) {
     var HullMachine = Java.loadClass('com.gregtechceu.gtceu.common.machine.electric.HullMachine')
     var EHPM = Java.loadClass('com.gregtechceu.gtceu.common.machine.multiblock.part.EnergyHatchPartMachine')
@@ -177,7 +178,7 @@
 
     function hatch(id, label, io, amps, ability, model) {
       event.create(id, 'custom')
-        .tiers(UEV, GTValues.UIV)
+        .tiers(UEV, GTValues.UIV, GTValues.UXV)
         .machine(function (holder, tier) { return new EHPM(holder, tier, io, amps) })
         .definition(function (tier, builder) {
           builder
@@ -190,7 +191,7 @@
     }
 
     event.create('machine_hull', 'custom')
-      .tiers(UEV, GTValues.UIV)
+      .tiers(UEV, GTValues.UIV, GTValues.UXV)
       .machine(function (holder, tier) { return new HullMachine(holder, tier) })
       .definition(function (tier, builder) {
         builder

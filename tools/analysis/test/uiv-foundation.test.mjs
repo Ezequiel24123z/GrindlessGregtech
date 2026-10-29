@@ -98,7 +98,7 @@ test('every shared UIV id is registered once by this script, and nothing of B1 o
     assert.ok(run.registry.machines.has(id), `${id} not registered by uev/foundation.js (.tiers(UEV, UIV))`);
     assert.ok(/(^|[\\/])uev[\\/]foundation\.js$/.test(String(run.registry.machines.get(id).file)), `${id} comes from the UEV builders`);
   }
-  assert.match(uevSrc, /\.tiers\(UEV, GTValues\.UIV\)/);
+  assert.match(uevSrc, /\.tiers\(UEV, GTValues\.UIV, GTValues\.UXV\)/);
   assert.doesNotMatch(src.replace(/^\s*\/\/.*$/gm, ''), /create\('(machine_hull|energy_|dynamo_)|\.tiers\(/, 'no hull or hatch builder of our own (a duplicate key crashes the boot)');
 });
 
