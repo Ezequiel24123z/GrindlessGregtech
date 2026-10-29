@@ -95,46 +95,11 @@
           }
         ]
 
-  // A hollow box: casing on every face, the floor row (X) takes the parts, S is the controller (rear wall, row 1, middle), # is air.
-  // Side walls carry the ring blocks, one per row from row 2 up (0, 1, ...); a vacuum machine leaves its front wall open (air).
+  // The RX J1856 machines (uiv/shapes.js): shaft, separator hall, cage, ziggurat, vault. Built in the machine registry callback: shapes.js
+  // may load after this file. The floor row (X) takes the parts.
   function spec(m) {
-    var slices = []
-    var last = m.depth - 1
-    var mid = (m.width - 1) / 2
-    for (var si = 0; si < m.depth; si++) {
-      var rows = []
-      for (var r = 0; r < m.height; r++) {
-        var row = ''
-        for (var c = 0; c < m.width; c++) {
-          var edge = si === 0 || si === last || c === 0 || c === m.width - 1
-          var ch
-          if (r === m.height - 1) ch = 'F'
-          else if (edge) {
-            var side = (c === 0 || c === m.width - 1) && si > 0 && si < last
-            if (si === last && r === 1 && c === mid) ch = 'S'
-            else if (m.vacuum && si === 0 && c > 0 && c < m.width - 1 && r >= 1) ch = '#'
-            else if (side && r >= 2 && r - 2 < m.rings.length) ch = String(r - 2)
-            else ch = 'F'
-          } else if (r === 0) ch = 'X'
-          else ch = '#'
-          row += ch
-        }
-        rows.push(row)
-      }
-      slices.push(rows)
-    }
-    var options = [Pat.block(m.casing)]
-    m.parts.forEach(function (p) { options.push(Pat.part(p[0], { min: p[1], max: p[2] })) })
-    var symbols = {
-      S: Pat.controller(),
-      X: Pat.oneOf.apply(null, options),
-      F: Pat.block(m.casing),
-      '#': Pat.air()
-    }
-    m.rings.forEach(function (id, i) { symbols[String(i)] = Pat.block(id) })
-    return { slices: slices, symbols: symbols }
+    return G.uivShapes.build(Pat, m.name, m.casing, m.parts.map(function (p) { return Pat.part(p[0], { min: p[1], max: p[2] }) }))
   }
-  RX.machines.forEach(function (m) { m.spec = spec(m) })
 
   // one EMI line per recipe, read from its data
   function infoOf(dataKey) {
@@ -189,6 +154,7 @@
       var type = GTRecipeTypes.get(m.type)
       if (type == null) throw new Error(LOG + 'recipe type gtceu:' + m.type + ' is not registered')
       type.addDataInfo(infoOf(m.dataKey))
+      m.spec = spec(m)
       Pat.register(m.machine, m.spec)
 
       var builder = event.create(m.name, 'multiblock')

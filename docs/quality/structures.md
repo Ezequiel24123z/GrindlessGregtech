@@ -62,8 +62,7 @@ declarations in 6 files (13 structures) were changed to `var`, and the test now 
 - UV 0/33: QR-S4 dressed the ZPM `ice_giant_siphon` (`zpm/uranus.js`), the last one.
 - UHV 0/32: done in QR-S4.
 - UEV 0/26: done in QR-S5 (`uev/shapes.js` silhouettes; all pass the gate without baseline entries).
-- UIV: almost all are hollow 5x5x7 / 7x7x7 single-casing boxes (`uiv/beuv_stm.js:53`, `matrioshka.js:83`, `tfln_femtosecond.js:65`,
-  `j0437.js:67`). Redesign with a shared per-era shell helper mixing frame posts, glass bands, pipes/coils and a second casing.
+- UIV 0/20: done in QR-S6 (`uiv/shapes.js` silhouettes; all pass the gate without baseline entries).
 
 ### QR-S2 release notes (reshaped structures; shape changes, same ids, no registrations removed)
 
@@ -121,3 +120,18 @@ Rebuild existing machines of these ids (all grew; silhouettes come from `uev/sha
   `heavy_ion_cyclotron` 9x5x9 -> 17x7x15; `recoil_separator` 5x5x11 -> 9x7x19. `barnard_core_drill` unchanged (already passes).
 - First-met blocks in UEV structures (all obtainable earlier): `gtceu:stable_machine_casing`, `laminated_glass`, `tungstensteel_pipe_casing`, `ptfe_pipe_casing`,
   `naquadah_coil_block`, `trinium_coil_block`, `superconducting_coil`, `tungstensteel_gearbox`, `tungsten_steel_frame`, `robust_machine_casing`.
+
+### QR-S6 release notes (UIV structures; same ids, no registrations removed; gate WxHxD, old -> new, blocks = cells)
+Rebuild existing machines of these ids (all grew; silhouettes come from `uiv/shapes.js`; controller, hatches, abilities, dimension conditions unchanged).
+Median 517 blocks, max 768 (UEV median 349).
+- Halls and beamlines: `beuv_scanner` 9x5x7 -> 15x10x13 (768); `stm_lithography_cell` 5x5x5 -> 9x8x9 (322); `tfln_fab` 7x5x7 -> 13x9x11 (549);
+  `femtosecond_writer` 5x5x7 -> 9x7x21 (597); `xray_pulse_profiler` 7x7x5 -> 7x9x17 (517); `polarised_proton_source` 7x5x7 -> 9x8x15 (586);
+  `positronium_condensate_lab` 7x5x7 -> 11x9x9 (327).
+- Towers and vessels: `millikelvin_cryostat_works` 5x7x5 -> 9x14x9 (544); `spectral_hole_burner` 5x5x5 -> 7x10x7 (204); `levitation_melter` 7x7x9 -> 9x11x9 (350);
+  `ramp_compression_pulser` 9x9x9 -> 13x12x13 (642); `droplet_radiator_works` 9x5x13 -> 13x9x13 (472); `pulsar_wind_trap` 9x9x9 -> 13x9x13 (680).
+- RX J1856: `crust_lift` 9x9x15 -> 9x13x9 (465); `neutron_drip_separator` 7x7x9 -> 9x8x11 (415); `neutronium_cage` 7x7x7 -> 9x9x9 (365);
+  `r_process_decompressor` 9x7x9 -> 11x10x13 (388); `decay_heat_vault` 7x7x7 -> 9x8x9 (321).
+- `matrioshka_computer` 11x9x11 -> 11x11x11 (597, nested lattice shells); `uiv_fusion_reactor` 5x5x3 -> 13x7x15 (756, annulus; GTM `fusion_reactor` tier 11 and 16-energy-hatch cap kept).
+- First-met blocks in UIV structures (all obtainable earlier): `gtceu:stable_machine_casing`, `laminated_glass`, `tungstensteel_pipe_casing`, `tungstensteel_gearbox`,
+  `trinium_coil_block`, `tungsten_block`, `tungsten_steel_frame`/`titanium_frame`/`stainless_steel_frame`, `uev_machine_casing` accents, `grindless:cryostat_casing`,
+  `coilgun_coil_casing`, `hftacn_coil_block`, `metallic_hydrogen_coil_block`, `photonic_casing`, `neutron_star_site_casing`, `droplet_radiator_module`.
