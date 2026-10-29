@@ -80,17 +80,9 @@
   "pendingRoutes": [
     { "id": "grindless:nitride_magnet_synthesis/uxv_smes_cell", "reason": "UXV-W landed before Wave A: grindless:strand_tape is held until UXV-A8 writes its producer;     A8 deletes this entry with its hold rule" },
     { "id": "grindless:assembly_line/uxv_parallel_hatch", "foreign": ["gtnn:spintronic_mainframe"], "reason": "UXV-M1 landed before Wave A: its inputs are held until A5 (GT--'s spintronic mainframe, held by our A5 rule until A5 writes its recipe), B3 (field generator, filtered disk plasma), B4 (hull) and B5 (emitter) write their producers; B5 lands last and deletes this entry with its hold rule" },
-    { "id": "grindless:solvent_extraction/ev/lpe_dross_lead", "reason": "UXV-A2 landed before A5: grindless:lpe_dross is held until A5's LPE furnace c3 gives it off; A5 deletes this entry with its hold rule" },
-    { "id": "grindless:powder_bed_fusion/print_cofeb_blank", "reason": "UXV-A2 landed before A3: grindless:cofeb_am_powder is held until A3 writes grindless:cofeb; A3 deletes this entry with its hold rule" },
-    { "id": "grindless:powder_bed_fusion/print_heusler_blank", "reason": "UXV-A2 landed before A3: grindless:heusler_am_powder is held until A3 writes grindless:heusler; A3 deletes this entry with its hold rule" }
+    { "id": "grindless:solvent_extraction/ev/lpe_dross_lead", "reason": "UXV-A2 landed before A5: grindless:lpe_dross is held until A5's LPE furnace c3 gives it off; A5 deletes this entry with its hold rule" }
       ],
       "pendingUses": [
-        { "id": "gtceu:dysco3_dust", "package": "UXV-A3", "reason": "UXV-A2 makes the oxide (IV fluorspar kiln); A3's DyScO3 Czochralski row (crystals.json c10-17, uxv.md:1245) uses it" },
-        { "id": "gtceu:ggg_dust", "package": "UXV-A3", "reason": "UXV-A2 makes the oxide (IV fluorspar kiln); A3's GGG Czochralski row (crystals.json c10-17, uxv.md:1245) uses it" },
-        { "id": "grindless:dysprosium_dust", "package": "UXV-A3", "reason": "UXV-A2 reduces it (ZPM Eu reductor); A3's Terfenol-D rod (crystals.json c10-17, uxv.md:1245) uses it" },
-        { "id": "grindless:seven_n_tellurium", "package": "UXV-A3", "reason": "UXV-A2 zone-refines it (UV zone refining); A3's WTe2 and FGT CVT rows (lines 13-14, uxv.md:1245) use it" },
-        { "id": "grindless:seven_n_germanium", "package": "UXV-A3", "reason": "UXV-A2 zone-refines it (UV zone refining); A3's FGT charge and CVT row (line 14, uxv.md:1245) use it" },
-        { "id": "grindless:five_n_iridium", "package": "UXV-A3", "reason": "UXV-A2 refines it (EV platinum plant c13); A3's Ga2O3 EFG row takes it as the Ir die, the worn die back to the platinum plant c5 (uxv.md:1245, :1257)" },
         { "id": "grindless:mgo_target", "package": "UXV-A4", "reason": "UXV-A2 sinters it (UV powder bed); A4's MTJ sputter cluster stacks use it (machine 1, uxv.md:732)" },
         { "id": "grindless:saf_target_set", "package": "UXV-A4", "reason": "UXV-A2 bonds it (UV powder bed); A4's MTJ sputter cluster c3 uses it (machine 1, uxv.md:734)" },
         { "id": "grindless:ta_seed_target", "package": "UXV-A4", "reason": "UXV-A2 bonds it (UV powder bed); A4's MTJ sputter cluster stacks use it (machine 1, uxv.md:735)" },
