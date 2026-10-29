@@ -1,3 +1,4 @@
+// priority: -8348
 // Gregtech Grindless - native fixture of package UIV-C3 (TEST-ONLY overlay, never shipped): the gate example of docs/eras/uiv.md
 // ("Power on the wireless network") on the wireless network at UIV, the station slots, the three arrival platforms' dimensions and a save mark
 // read back after a restart.
