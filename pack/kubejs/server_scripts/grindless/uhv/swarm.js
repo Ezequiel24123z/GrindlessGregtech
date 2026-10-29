@@ -108,8 +108,8 @@
     row('probe', BAY, 2,
       [item(AEROSHELL, 1), item(UHTC, 4), item(SIC, 1), item(BETAVOLTAIC, 2), item(HPGE, 1), item('gtceu:uv_sensor', 1)], [],
       [item(PROBE, 1)], [], UVA, 800, HERE),
-    row('sodium_potassium_heat_pipe', 'assembler', null, [item('gtceu:tungsten_steel_small_fluid_pipe', 1), item('gtceu:molybdenum_foil', 2)],
-      [fluid('gtceu:sodium_potassium', 250)], [item(HEAT_PIPE, 1)], [], ZPM, 200)
+    row('sodium_potassium_heat_pipe', 'assembler', null, [item('gtceu:tungsten_steel_small_fluid_pipe', 1), item('gtceu:molybdenum_foil', 2), item('grindless:silica_aerogel', 1), item('grindless:mu_metal_shield', 1)],
+      [fluid('gtceu:sodium_potassium', 250), fluid('gtceu:lubricant', 250)], [item(HEAT_PIPE, 1)], [], ZPM, 200)
   ]
 
   // UIV-A10 (uiv.md, Matrioshka computer): the Mercury swarm's feed run that carries the two UIV works (31,457,280 EU/t each); 16 x 2,097,152 =
@@ -211,24 +211,27 @@
     var SENSOR = 'gtceu:uv_sensor'
     var C = '#gtceu:circuits/uhv'
     var M = SW.machines || {}
-    // the other UHV controllers' shapes: grep "pattern: [" in server_scripts/grindless/uhv/*.js
     var defs = [
-      { machine: (M.foundry && M.foundry.machine) || 'gtceu:swarm_segment_foundry', name: 'swarm_segment_foundry', parts: [HULL, ARM],
-        pattern: ['A A', 'CHC'], ingredients: { A: ARM, C: C, H: HULL } },
-      { machine: (M.station && M.station.machine) || 'gtceu:swarm_control_station', name: 'swarm_control_station', parts: [HULL, FIELD],
-        pattern: ['C C', 'FHF'], ingredients: { C: C, F: FIELD, H: HULL } },
-      { machine: (M.bay && M.bay.machine) || 'gtceu:solar_probe_bay', name: 'solar_probe_bay', parts: [HULL, SENSOR],
-        pattern: ['S S', 'CHC'], ingredients: { S: SENSOR, C: C, H: HULL } }
+      { machine: (M.foundry && M.foundry.machine) || 'gtceu:swarm_segment_foundry', name: 'swarm_segment_foundry', parts: [HULL, ARM], research: 'grindless:sodium_potassium_heat_pipe', domain: ['4x grindless:propellant_tank', '2x grindless:thruster_pod', '2x grindless:silica_aerogel'] },
+      { machine: (M.station && M.station.machine) || 'gtceu:swarm_control_station', name: 'swarm_control_station', parts: [HULL, FIELD], research: 'grindless:uv_electromagnet', domain: ['2x grindless:srf_cryomodule', '4x grindless:fibre_laser_module', '2x grindless:nbn_coated_sic_plate'] },
+      { machine: (M.bay && M.bay.machine) || 'gtceu:solar_probe_bay', name: 'solar_probe_bay', parts: [HULL, SENSOR], research: 'grindless:thruster_pod', domain: ['2x grindless:sodium_potassium_heat_pipe', '4x grindless:mu_metal_shield', '2x grindless:propellant_tank'] }
     ]
     SW.crafting = []
     defs.forEach(function (d) {
-      var missing = d.parts.concat([d.machine]).filter(function (id) { return !Item.exists(id) })
+      var missing = d.parts.concat([d.machine, d.research], d.domain.map(function (s) { return s.replace(/^\d+x /, '') })).filter(function (id) { return !Item.exists(id) })
       if (missing.length > 0) {
         console.error(LOG + d.name + ' controller recipe skipped, unknown item(s): ' + missing.join(', '))
         return
       }
-      event.recipes.gtceu.shaped(d.machine, d.pattern, d.ingredients).id('grindless:crafting/' + d.name)
-      SW.crafting.push('grindless:crafting/' + d.name)
+      var b = event.recipes.gtceu.assembly_line('grindless:' + d.name)
+      d.parts.forEach(function (s, i) { b.itemInputs(i === 0 ? s : '2x ' + s) })
+      b.itemInputs('4x #gtceu:circuits/uhv')
+      d.domain.forEach(function (s) { b.itemInputs(s) })
+      b.inputFluids(Fluid.of('gtceu:soldering_alloy', 2304), Fluid.of('gtceu:lubricant', 2000), Fluid.of('gtceu:tritanium', 1152))
+      b.itemOutputs(d.machine)
+      b.stationResearch(function (r) { return r.researchStack(Item.of(d.research)).CWUt(64).EUt(1966080) })
+      b.EUt(1966080).duration(1500)
+      SW.crafting.push('grindless:assembly_line/' + d.name)
     })
   }
 

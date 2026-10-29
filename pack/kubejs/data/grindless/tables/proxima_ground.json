@@ -182,10 +182,12 @@
           "itemsIn": [
             { "id": "grindless:hss_s_drill_bit", "count": 1 },
             { "id": "gtceu:naquadah_alloy_plate", "count": 4 },
-            { "id": "gtceu:tungsten_carbide_plate", "count": 2 }
+            { "id": "gtceu:tungsten_carbide_plate", "count": 2 },
+            { "id": "grindless:nbn_coated_sic_plate", "count": 1 },
+            { "id": "grindless:mu_metal_shield", "count": 1 }
           ],
           "kept": [],
-          "fluidsIn": [],
+          "fluidsIn": [{ "id": "gtceu:soldering_alloy", "amount": 144 }, { "id": "gtceu:lubricant", "amount": 250 }],
           "itemsOut": [{ "id": "grindless:cold_trap_coring_head", "count": 1 }],
           "fluidsOut": []
         }

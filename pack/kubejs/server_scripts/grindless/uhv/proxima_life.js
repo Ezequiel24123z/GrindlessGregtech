@@ -14,7 +14,8 @@
 //                          melanin-chitosan composite and the flare shield panel; the rover; the Earth extracts' destinations;
 //                          and F1's two casings, 2 a craft: bsl4_casing (HSS-S, PTFE, a sterilising filter) and hangar_casing
 //                          (tungstensteel and naquadah alloy on a frame).
-//   crafting               the controllers: UHV hull + 2 UV parts + 2 UHV circuits, shaped recipes grindless:crafting/<machine>.
+//   crafting               the controllers: UHV hull + 2 UV parts + 2 UHV circuits, assembly lines grindless:assembly_line/<machine>.
+//                          Each is an assembly line: station research, tritanium + soldering alloy + lubricant, 3 domain items of its own line.
 //
 // The older rows of the package are read elsewhere: biofoundry.json circuits 11-16 (luv/biofoundry.js) and the algae bioreactor's
 // far-red row (luv/europa.js).
@@ -183,13 +184,12 @@
     var MOTOR = 'gtceu:uv_electric_motor'
     var PUMP = 'gtceu:uv_electric_pump'
     var M = PL.machines || {}
-    // the other UHV controllers' shapes: grep "pattern: [" and "shaped(" in server_scripts/grindless/uhv/*.js (mirrors match too)
     var defs = [
-      { key: 'facility', parts: [HULL, ARM], pattern: ['A A', ' H ', 'C C'], ingredients: { C: C, A: ARM, H: HULL } },
-      { key: 'rover', parts: [HULL, MOTOR], pattern: ['M M', 'CHC', 'M M'], ingredients: { C: C, M: MOTOR, H: HULL } },
-      { key: 'greenhouse', parts: [HULL, PUMP], pattern: ['P P', ' H ', 'C C'], ingredients: { C: C, P: PUMP, H: HULL } },
-      { key: 'plant', parts: [HULL, PUMP], pattern: ['C C', 'PHP'], ingredients: { C: C, P: PUMP, H: HULL } },
-      { key: 'vat', parts: [HULL, PUMP], pattern: [' P ', 'CHC', ' P '], ingredients: { C: C, P: PUMP, H: HULL } }
+      { key: 'facility', parts: [HULL, ARM], research: 'grindless:flare_shield_panel', domain: ['4x grindless:cladosporium_culture', '2x grindless:bsl4_casing', '2x grindless:srf_cryomodule'] },
+      { key: 'rover', parts: [HULL, MOTOR], research: 'grindless:proxima_rover', domain: ['4x grindless:thruster_pod', '2x grindless:hangar_casing', '2x grindless:mu_metal_shield'] },
+      { key: 'greenhouse', parts: [HULL, PUMP], research: 'grindless:sphingomonas_culture', domain: ['4x grindless:cladosporium_culture', '2x grindless:bsl4_casing', '2x grindless:silica_aerogel'] },
+      { key: 'plant', parts: [HULL, PUMP], research: 'grindless:chromobacterium_culture', domain: ['4x grindless:sporosarcina_culture', '2x grindless:bsl4_casing', '2x grindless:mu_metal_shield'] },
+      { key: 'vat', parts: [HULL, PUMP], research: 'grindless:hangar_casing', domain: ['4x grindless:sphingomonas_culture', '2x grindless:bsl4_casing', '2x grindless:srf_cryomodule'] }
     ]
     PL.controllerRecipes = []
     defs.forEach(function (d) {
@@ -198,13 +198,20 @@
         console.error(LOG + 'proxima life controller ' + d.key + ' skipped: no machine')
         return
       }
-      var missing = d.parts.concat([m.machine]).filter(function (id) { return !Item.exists(id) })
+      var missing = d.parts.concat([m.machine, d.research], d.domain.map(function (s) { return s.replace(/^\d+x /, '') })).filter(function (id) { return !Item.exists(id) })
       if (missing.length > 0) {
         console.error(LOG + m.name + ' controller recipe skipped, unknown item(s): ' + missing.join(', '))
         return
       }
-      event.recipes.gtceu.shaped(m.machine, d.pattern, d.ingredients).id('grindless:crafting/' + m.name)
-      PL.controllerRecipes.push('grindless:crafting/' + m.name)
+      var b = event.recipes.gtceu.assembly_line('grindless:' + m.name)
+      d.parts.forEach(function (s, i) { b.itemInputs(i === 0 ? s : '2x ' + s) })
+      b.itemInputs('4x #gtceu:circuits/uhv')
+      d.domain.forEach(function (s) { b.itemInputs(s) })
+      b.inputFluids(Fluid.of('gtceu:soldering_alloy', 2304), Fluid.of('gtceu:lubricant', 2000), Fluid.of('gtceu:tritanium', 1152))
+      b.itemOutputs(m.machine)
+      b.stationResearch(function (r) { return r.researchStack(Item.of(d.research)).CWUt(64).EUt(1966080) })
+      b.EUt(1966080).duration(1500)
+      PL.controllerRecipes.push('grindless:assembly_line/' + m.name)
     })
   }
 

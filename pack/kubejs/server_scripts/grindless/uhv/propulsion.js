@@ -108,8 +108,8 @@
   P.side = SIDE.map(publish)
   P.skipped = []
   P.clashes = []
-  P.crafting = { sinterer: 'grindless:crafting/spark_plasma_sinterer' }
-  var CRAFTING_PARTS = ['gtceu:uhv_machine_hull', 'gtceu:uv_electric_piston']
+  P.crafting = { sinterer: 'grindless:assembly_line/spark_plasma_sinterer' }
+  var CRAFTING_PARTS = ['gtceu:uhv_machine_hull', 'gtceu:uv_electric_piston', 'grindless:propellant_tank', 'grindless:silica_aerogel', 'grindless:nbn_coated_sic_plate', 'grindless:mu_metal_shield']
 
   function keysOf(r) {
     var keys = {}
@@ -171,7 +171,7 @@
     console.info(LOG + 'propulsion recipes added: ' + (all.length - P.skipped.length))
   }
 
-  // the controller: UHV hull + 2 UV pistons + 2 UHV circuits (no other UHV controller takes UV pistons)
+  // the controller: assembly line, station research, UHV hull + 2 UV pistons + 4 UHV circuits + 3 line items + soldering alloy, lubricant, tritanium
   function addCrafting(event) {
     var missing = CRAFTING_PARTS.filter(function (id) { return !Item.exists(id) })
     if (missing.length > 0) {
@@ -179,9 +179,17 @@
       console.error(LOG + 'sinterer controller crafting skipped, unknown item(s): ' + missing.join(', '))
       return
     }
-    event.recipes.gtceu.shaped(P.sinterer || 'gtceu:spark_plasma_sinterer', ['CPC', ' H ', ' P '], {
-      C: '#gtceu:circuits/uhv', P: 'gtceu:uv_electric_piston', H: 'gtceu:uhv_machine_hull'
-    }).id(P.crafting.sinterer)
+    var b = event.recipes.gtceu.assembly_line('grindless:spark_plasma_sinterer')
+    b.itemInputs('gtceu:uhv_machine_hull')
+    b.itemInputs('2x gtceu:uv_electric_piston')
+    b.itemInputs('4x #gtceu:circuits/uhv')
+    b.itemInputs('4x grindless:silica_aerogel')
+    b.itemInputs('2x grindless:nbn_coated_sic_plate')
+    b.itemInputs('2x grindless:mu_metal_shield')
+    b.inputFluids(Fluid.of('gtceu:soldering_alloy', 2304), Fluid.of('gtceu:lubricant', 2000), Fluid.of('gtceu:tritanium', 1152))
+    b.itemOutputs(P.sinterer || 'gtceu:spark_plasma_sinterer')
+    b.stationResearch(function (r) { return r.researchStack(Item.of('grindless:propellant_tank')).CWUt(64).EUt(1966080) })
+    b.EUt(1966080).duration(1500)
   }
 
   ServerEvents.recipes(function (event) {
