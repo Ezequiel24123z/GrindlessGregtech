@@ -916,19 +916,29 @@ Short, in English, each with a small reward. They never block a recipe (rule 5).
 | Circuit collisions on shared types | repairs | every contract names its circuits after `git grep` (Common) |
 | Far platforms on the 4 GB client | out of memory | one leg per run |
 | Fiction (stellar burning ring, pasta cable, Kerr sling, gamma laser) | realism | named fiction in the doc, EMI and quests |
+| **QR gates do not know tier 12** (`TIER_NAMES`, `TIER_PREFIX`, `eraTier`, `complexFloor`, process_audit `ERAS`/`TIER_ERA` stop at UIV) | UXV recipes and items are judged as no era or skipped; a package "passes" without being checked | F2 adds tier 12 before A1 (*Decisions proposed*); until then a package runs the gates with `--era uxv` and reads the findings |
+| **Mk6 on the lib ring** fails the structure rubric (casing share) | A7 cannot pass without a baseline | A7 runs structure-quality first; above 70% is an escalation to a lib change, never a baseline (open question 14) |
+| **Big structures** (up to 17x7x17 and 13x25x13) in Rhino | `const` in loops breaks the pattern; previews slow or wrong | `var` only, a package-local shell helper, `--static --check`; the preview is looked at in T3 |
+| **22 controllers and 13 parts by research** | a research station queue at `uxv`; a research item that is a previous controller costs one more controller | every research item is ours and made before its use (*Bootstrap check*); complexity, not quantity (rule 2) |
+| **20 new loops** (sound budget; about 2.0 MB for 55 loops now) | pack size about +0.7 MB | the Starter settings (6 s, `-q 0`); the integrator generates once per batch; open question 15 |
+| **Shared `sounds.js` and `tools/assets/sounds.json`** written by every multiblock package | one-line merge conflicts | each package appends its rows at the end; pairs never touch the same row; the integrator resolves at merge |
+| **BZ chain energy** (pre-existing, *(tune)*): skimmer, filter c2 and FRC c2 cost about 10x the EU the BZ dynamo returns at the draft numbers | the Cygnus generator loses energy, which is useless rather than free | B3 tunes so the chain returns more than it costs (product rule 8: generous, never free) and states the balance on the dynamo's info page; open question 17 |
+| **Process honesty amounts** (ballast, backings, buffer gases) | inputs too cheap or too dear | all *(tune)*; they add steps of complexity, never raw quantity |
 
 ### Bootstrap check (UEV-C1 lesson, DECISIONS.md:516-517)
 
 | Needed | Its inputs come from | Needed in | Cycle? |
 |---|---|---|---|
-| Controllers 1-6 | UIV hull, `gtnn:optical_mainframe`, UIV components | `uxv` | no |
+| Controllers 1-6 | UIV hull, `gtnn:optical_mainframe`, UIV components; `he_6n`; the research items and domain inputs of the controller table (home or UIV) | `uxv` | no |
+| `he_6n` (Earth era fluid) | helium + liquid nitrogen (EV cryogenic plant, A2) | `uxv` | no |
 | `mgo_target` (MTJ die, sensor) | magnesite through EV, IV, UV plants | `uxv` | no: never Mk6 ash (fixed in this design) |
 | `uxv_sensor` | `mtj_die`, SHeQUID gyro, `nv_diamond_chip` | `uxv` | no |
 | `gtnn:spintronic_mainframe` | machines 1-5, home older plants; `shielded_interposer` (mu-metal through UEV, EV plants; UIV `glass_interposer`); magnonic bus with `stno_array` (UIV Si-28 wafer, machine 1 c4) | `uxv` | no: every input is home or UIV |
 | `ga2o3_power_die` | ordinary Ga, UHV crystal growth, UV MOCVD, UEV electron beam furnace, UHV foundry | `uxv` | no |
 | `uxv_strain_wave_gear`, `tmr_encoder` (arm) | `six_n_niobium` (as built), UV powder bed, EV hot strip mill; LuV tetrataenite, ZPM magnet works, `mtj_die` | `uxv` (the arm at `uxv-vela`) | no |
 | `uxv_voltage_coil` (hatches) | `finemet_ribbon` (UIV levitation melter, ZPM quench caster c6), UEV nitride anneal, strand wire (Vela) | `uxv-vela` | no: the hatches are held there already |
-| Controllers 7, 8, 10-21 | UIV hull, 2 spintronic mainframes, `uxv_sensor`, UIV components | `uxv` (built at home, carried) | no |
+| Controllers 7, 8, 10-21 | UIV hull, 2 spintronic mainframes, `uxv_sensor`, UIV components; `he_6n` or a Cygnus fluid; the research items and domain inputs of the controller table (home, UIV, Cygnus, or `cage_part` and `neutronium_pellet` from RX J1856) | `uxv` (built at home, carried) | no: no Vela or Cas A product; the Vela controllers' research items are home records or earlier controllers built at home |
+| Cygnus era fluids (`stellar_hydrogen_cut`, `stellar_helium_cut`, `filtered_disk_plasma`) | machines 10, 11 and 13, whose controllers take `he_6n` (10, 11) or a cut made by 10 and 11 (13) | `uxv` | no |
 | `frc_cartridge` (Vela travel) | disk plasma skimmed on `mh_winding` (UIV), never pasta | `uxv` | no |
 | `cnt_whipple_shield` (Cas A travel) | UHV tether works, RHEA plate (UIV), `whipple_shield_casing` (LuV); no lasagna | `uxv` | no |
 | `launched_relay_seed` | UIV relay seed, probe bay mode | `uxv` | no |
@@ -937,7 +947,8 @@ Short, in English, each with a small reward. They never block a recipe (rule 5).
 | Cas A sweeper power | wireless case 11 (UIV): its recipe stays at or under 4 A x V[UIV] *(tune)*, so case 12 is not needed before Vela | `uxv-cas-a` | no |
 | `gtceu:uxv_machine_hull`, UXV hatches | `lasagna_plate` (Vela), UIV-B5's `uxv_machine_casing`, strand wire | `uxv-vela` | no |
 | UXV motor, pump, piston, conveyor, field generator, arm | strand tape and lasagna (Vela), natural Na, Cygnus cartridges | `uxv-vela` | no: the pump's Na is ordinary sodium, never Mk6 ash (fixed) |
-| Mk6 controller | UXV hull and motor, pump, field generator (not the emitter) | `uxv-vela` | no: the Mk6 is never needed for the hull or the parts |
+| Mk6 controller | UXV hull and motor, pump, field generator (not the emitter); the Mk5 controller as research; `stellar_hydrogen_cut`; `uxv_fusion_casing` | `uxv-vela` | no: the Mk6 is never needed for the hull or the parts |
+| `uxv_fusion_casing` | `wf_rhea_billet`, `w184_cvi_preform`, `mh_winding` (UIV and A3), `uxv_field_generator`, tritanium frame, `he_6n` | `uxv-vela` | no: no Mk6 product |
 | `uxv_emitter` | Ti-44 (Cas A), `mtj_die`, UIV gamma cavity | `uxv-cas-a` | no |
 | Gate c10 | cartridge, census III, island chart, arm chart, core sample, mainframes; 2^31 EU/t from BZ + taps or Mk6 | both substages | no |
 
@@ -1115,8 +1126,9 @@ Order: S0-1 first (it fixes F1's list); S0-3, S0-9 and S0-10 (they fix B1); then
   - F1's ids are class B until `uxv` in `tools/analysis/tiers/obtain.json`, one rule per producing package, named for it (each package deletes its own);
   - cuts by output (*Only from there and cuts*): GT--'s recipe for `gtnn:spintronic_mainframe`, the GT-- and extendedfeatures UXV-tier items a UXV part replaces (S0-1 list), the generic wiremill and extruder rows for `pasta_strand`;
   - the `#gtceu:circuits/uxv` tag if S0-5 failed;
-  - `script_order.json`: a band for `uxv/` and one for each older file in *Older machines* that gets a row reading a UXV id.
-- **Allowed:** `hidden_until.json`, `tools/analysis/tiers/obtain.json`, `script_order.json`, `server_scripts/grindless/uxv/cuts.js` (new), and a tag file only after a failed S0-5.
+  - `script_order.json`: a band for `uxv/` and one for each older file in *Older machines* that gets a row reading a UXV id;
+  - the QR gates learn tier 12 (*Decisions proposed*): `uxv` 12 in `TIER_NAMES` and `TIER_PREFIX` (`tools/analysis/lib/recipe_quality.mjs`), `eraTier` `uxv: 12` and `complexFloor` `"12": 9.5` in `tools/analysis/recipe_quality.json`, `uxv` in process_audit's `ERAS` and `TIER_ERA`.
+- **Allowed:** `hidden_until.json`, `tools/analysis/tiers/obtain.json`, `script_order.json`, `server_scripts/grindless/uxv/cuts.js` (new), the three gate files named above (tier entries only), and a tag file only after a failed S0-5.
 - **References:** *Only from there and cuts*; *Save compatibility*; UIV's F2 (uiv.md:1092-1105); DECISIONS.md:528.
 - **Acceptance:** the mainframe appears at `uxv`, in the same release as A5's row; no lib change.
 - **Tests:** T0. T1: none.
@@ -1621,6 +1633,14 @@ A3 ∥ A4 holds: A3's c27 row reads `stno_stack_wafer` by its F1 id and writes n
 - 2026-10-28 UXV OpV hooks: `si28_ash`, `island_nuclide`, `launched_relay_seed` with the Kerr sling, `shequid_gyro`, `bulge_chart`, `gtceu:opv_machine_casing` research (*Reserve for OpV*).
 - 2026-10-28 UXV component recipes live in each maker's own server file; there is no shared component table.
 - 2026-10-28 UXV named fiction: the stellar burning ring, pasta as conductor and plate, the Kerr sling, FRC and Whipple shields as jump consumables, the gamma laser.
+- QR-UXV: the UXV design meets the QR standards (DECISIONS.md:551-567).
+  - Every controller is an assembly line with station research on an item of ours from its own line or the previous machine, plus an era fluid and three domain inputs: `he_6n` for Earth 1-8; `stellar_hydrogen_cut`, `stellar_helium_cut` or `filtered_disk_plasma` for Cygnus, Vela, Cas A, Mk6 and M2.
+  - The hull, hatches, parallel hatch and components are assembly lines; `uxv_fusion_casing` is an assembler with `he_6n`; there is no crafting table.
+  - Each of the 22 structures passes the rubric (silhouettes from 5x5x23 to 13x25x13, at least 3 blocks, main casing ≤55%; the Mk6 on the lib ring, checked first by A7), with appearance and overlay.
+  - Each multiblock package ships its info pages; each of the 20 new types gets a `loop_<machine>`.
+- QR-UXV gate tiers (F2, integrator): `eraTier` `uxv: 12`; `complexFloor` `"12": 9.5` (the +0.5 step from UIV's 9); `uxv` 12 in `TIER_NAMES`/`TIER_PREFIX`; `uxv` in process_audit `ERAS`/`TIER_ERA`.
+- QR-UXV casings: the draft's `laser_safe`, lead-lined and `high_temperature_smelting` casings are dropped from the structures (not certain to exist), replaced by `laminated_glass` and `robust_machine_casing`.
+- QR-UXV process honesty: every older row that makes a UXV id takes a second consumed input or gives a real byproduct (*Process honesty (QR)*). FRC c2 also returns hydrogen. Elevator c2 needs a data module and stellar plasma. One new id, `grindless:multipole_encoder_ring` (magnet works c10 had magnetised the ring into itself). No line, step or crossing count changes.
 
 **CREDITS lines proposed:** the Monifactory (LGPL-3.0) `Post_UV_Components.js` pattern for the UXV components, with attribution (UIV's line extended to UXV). GTNH's mega distillation tower and GT Leisure's power figures are ideas only, no code. GT-- (AGPL) supplies `gtnn:spintronic_mainframe` in game; we use its item and none of its code.
 
@@ -1639,3 +1659,7 @@ A3 ∥ A4 holds: A3's c27 row reads `stno_stack_wafer` by its F1 id and writes n
 11. **The UIV gamma laser cavity's id** (uiv.md:439 names the item, not the id)? **Default: B5 reads the id UIV-B3 ships.**
 12. **The Cas A sweeper on wireless case 11?** **Default: yes**, at or under 4 A x V[UIV], so Cas A does not wait for Vela.
 13. **Planar flow casting (line 48) on the ZPM quench caster** (a new mode on a plasma-ash quencher)? **Default: yes, A7's c6**; fallback a UIV levitation melter row with a chill wheel, in A3.
+14. **A shared shell helper in `lib/patterns.js`** (cylinders, rings, columns) for big structures, and a casing-share fix for the lib fusion ring if the Mk6 fails the rubric? **Default: no lib change now**; each package keeps a local helper. A lib package is opened only if A7 escalates or three packages duplicate the same helper.
+15. **The sound budget:** 20 more loops (about +0.7 MB)? **Default: yes**, at the Starter settings; the integrator may share one loop between two types of the same family (the four pasta machines) if the budget binds.
+16. **The Earth era fluid:** `he_6n` (ours, made at home) or a GTM fluid that matches the gate's era-fluid list (molten tritanium or neutronium)? **Default: `he_6n`**; it is a domain fluid and ties the controllers to the cryogenic line. GTM fluids are the fallback.
+17. **The BZ chain's net energy** at the draft numbers is about -90%. **Default: B3 tunes the BZ dynamo's EU per run so the chain is net positive by a margin like other generators**; no free energy, and the skimmer and FRC costs stay as drafted.
