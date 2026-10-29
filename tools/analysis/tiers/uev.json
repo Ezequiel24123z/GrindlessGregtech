@@ -1058,42 +1058,6 @@
       ],
       "package": "A6",
       "note": "GCYM large assembler on exactly one UEV hatch: the 7,864,320 EU/t assembler rows."
-    },
-    {
-      "id": "gtceu:electric_blast_furnace@uv-zpm",
-      "machine": "gtceu:electric_blast_furnace",
-      "types": [
-        "gtceu:electric_blast_furnace"
-      ],
-      "energy": {
-        "voltage": 131072,
-        "hatches": 2
-      },
-      "needs": [
-        "eu:zpm"
-      ],
-      "coilTemp": 9001,
-      "parts": [
-        "gtceu:heatproof_machine_casing",
-        "gtceu:trinium_coil_block",
-        "gtceu:zpm_energy_input_hatch",
-        "gtceu:lv_input_bus",
-        "gtceu:lv_output_bus",
-        "gtceu:lv_input_hatch",
-        "gtceu:lv_output_hatch",
-        "gtceu:lv_muffler_hatch",
-        {
-          "anyOf": [
-            "gtceu:maintenance_hatch"
-          ],
-          "onlyIf": {
-            "config": "machines.enableMaintenance",
-            "equals": true
-          }
-        }
-      ],
-      "package": "A6",
-      "note": "Trinium-coil EBF on two ZPM hatches (UV voltage, 524,288 EU/t): the 491,520 EU/t orbit rows."
     }
   ],
   "synthetic": [
@@ -1474,7 +1438,7 @@
     },
     {
       "id": "site-warp-gate",
-      "label": "Site: the warp gate only at its four ends (Earth orbit, Proxima b, Alpha Centauri AB and Sirius B orbits)",
+      "label": "Site: the warp gate only at its ends (Earth, Proxima b, Alpha Centauri AB, Sirius B and the three UIV relay orbits)",
       "kind": "site",
       "types": [
         "gtceu:warp_gate"
@@ -1483,10 +1447,13 @@
         "${orbit:earth}",
         "${orbit:proxima_b}",
         "grindless:alpha_centauri_orbit",
-        "grindless:sirius_b_orbit"
+        "grindless:sirius_b_orbit",
+        "grindless:rx_j1856_orbit",
+        "grindless:psr_j0437_orbit",
+        "grindless:cygnus_x1_orbit"
       ],
       "package": "B5",
-      "note": "UHV's target with the two UEV orbits (tables/gate.json `orbits`)."
+      "note": "Every warp gate row, hold rows included (tables/gate.json `orbits` and relay_platforms.json). UHV's target checks that open and sustain name every end."
     },
     {
       "id": "site-mercury-orbit",

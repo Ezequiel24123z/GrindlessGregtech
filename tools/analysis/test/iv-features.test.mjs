@@ -142,6 +142,31 @@ test('research: the scanner\'s data stick carries research:<id>, which the assem
   assert.equal(verdicts(r.out.gate)['big-motor'], 'FAIL');
 });
 
+test('research: GTM\'s generated research (not in the dump) is synthesised, so a machine researched with what only it makes is a deadlock', () => {
+  const res = (id) => ({ type: 'research', research: [{ researchId: id, dataItem: { id: 'gtceu:data_orb', Count: 1 } }] });
+  const recipes = [
+    gt('t:line_big', 't:assembly_line', { ins: [gi('t:motor', 2)], outs: [gi('t:big_motor')], conditions: [res('1x_t_motor')] }),
+    gt('t:line_works', 't:assembly_line', { ins: [gi('t:motor')], outs: [gi('t:works_m')], conditions: [res('1x_t_ribbon')] }),
+    gt('t:ribbon', 't:ribbon_making', { ins: [gi('t:motor')], outs: [gi('t:ribbon')] }),
+  ];
+  const cfg = (research) => ({
+    tier: 'lv',
+    eraOrder: ['steam', 'lv'],
+    conditions: { research },
+    world: [{ id: 'w', mode: 'manual', bootstrap: true, items: ['gtceu:data_orb', 't:motor', 't:station_m', 't:line_m'] }],
+    machines: [{ machine: 't:station_m', types: ['gtceu:research_station'] }, { machine: 't:line_m', types: ['t:assembly_line'] },
+      { machine: 't:works_m', types: ['t:ribbon_making'] }],
+    targets: [{ id: 'big', item: 't:big_motor' }, { id: 'works', item: 't:works_m' }],
+  });
+  const dump = mkDump({ recipes, items: ['gtceu:data_orb', 't:motor', 't:big_motor', 't:ribbon', 't:works_m', 't:station_m', 't:line_m'] });
+  let r = run(dump, cfg({ researchKeys: true }));
+  assert.deepEqual(verdicts(r.out.gate), { big: 'PASS', works: 'FAIL' });
+  assert.ok(r.model.g.rules.some((x) => x.name === 'synthetic:gtm-research/1x_t_motor'), 'the station research rule');
+  assert.equal(r.model.stats.generatedResearch, 2);
+  r = run(dump, cfg({ researchKeys: true, noGenerated: true }));
+  assert.equal(verdicts(r.out.gate).big, 'FAIL', 'noGenerated: only the dump\'s research recipes count');
+});
+
 function siblingPack(siblings) {
   const recipes = [
     gt('t:make_naq', 't:drill', { ins: [gi('t:naq_sample', 1, 0)], outs: [gi('t:naquadah')], conditions: [dim('t:venus')] }),
