@@ -22,6 +22,7 @@ new era follows so it does not happen again. The per-area standards live in the 
 | 12 | Gate false positives that blocked fixes | Chain depth depended on recipe order (byproduct loops lowered depth); `observatory` forced to tier 7 | Depth is order-independent (3f1f1282); directories without a single era get no `eraTier` |
 | 13 | Cost raised by quantity instead of complexity | A 4:1 laser module block made a 32-block structure cost 128 modules (QR-R4, reverted) | Structure blocks wrap their component 1:1 plus a housing, a domain part and a fluid (product rule 2) |
 | 14 | Old shapes in comments, docs and tests | Reshapes updated the pattern but not the header comment | Each structure handoff lists stale comments; a mechanical pass (QR-M1) fixes them |
+| 15 | Each era reshaped file by file, with silhouettes that did not match from one machine to the next | No shared shape vocabulary per era; a helper used at script top level breaks when it loads after its user | One shape helper per era (`uev/shapes.js`: hall, tower, ring, gantry, dish, mast, dome, ridge), used only inside registry callbacks (QR-S5). Size grows with the era by silhouette, not by bulk: median blocks per UEV structure 349 (UV 273, UHV 211) |
 
 ## Checklist for every new era (UIV, UXV and later)
 
@@ -30,6 +31,7 @@ Design (`docs/eras/<era>.md`):
 - [ ] Each controller, hatch and part names its recipe form on the ladder: research item, era fluid, 3 domain inputs, 8+ distinct ingredients from UXV.
 - [ ] Each process step names its second input or byproduct and where every byproduct goes; nothing comes from nothing.
 - [ ] Structure blocks used in bulk wrap their component 1:1.
+- [ ] Shapes come from the era's shape helper (`<era>/shapes.js`), called inside registry callbacks; a new silhouette goes into the helper, not into one file.
 
 Build (each package):
 - [ ] `structure-quality.mjs --static --check`, `recipe-quality.mjs --check` and `process-audit.mjs` pass with **no new baseline entry**; new content never enters a baseline.

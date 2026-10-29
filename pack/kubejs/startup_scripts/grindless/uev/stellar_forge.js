@@ -1,4 +1,4 @@
-// priority: -7636
+// priority: -7630
 // -----------------------------------------------------------------------------------------------
 // UEV Stellar Forge, gtceu:stellar_forge (package UEV-M2, docs/eras/uev.md #### M2.): the massive electric blast furnace. It runs GTM's
 // gtceu:electric_blast_furnace recipes (no new recipe type) with a coil-heat parallel and an optional plasma boost. lib/mega.js and lib/coils.js
