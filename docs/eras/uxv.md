@@ -1262,7 +1262,7 @@ Two at a time, in the pairs of *Parallel and serial*. A row whose input is made 
   - machine 2 c1-c3 (`srruo3_electrode_wafer`, `bfo_film_wafer`, `me_switch_wafer`'s CoFe layer), with `krf_excimer_laser` as catalyst;
   - line 41's `kr_f2_premix` (mixer), discharge tube with `grindless:vuv_caf2_optic` windows (as built, `uhv/crystals.js:16`), pulsed-power head and the laser itself (own file, GTM types).
 - **Allowed (extra):** own files only.
-- **References:** machines 1-2 (uxv.md:174-192); lines 6-8, 10-11, 41; `lib/patterns.js`; `uiv/beuv_stm.js` (a UIV plain multiblock, the pattern).
+- **References:** machines 1-2 (uxv.md:238-262); lines 6-8, 10-11, 41; `lib/patterns.js`; `uiv/beuv_stm.js` (a UIV plain multiblock, the pattern).
 - **Depends on:** F1; A2 and A3 for inputs.
 - **Invariants:**
   - the controllers as *Voltages and controllers* (UIV hull, 2 `gtnn:optical_mainframe`);
@@ -1283,7 +1283,7 @@ Two at a time, in the pairs of *Parallel and serial*. A row whose input is made 
   - the `magnonic_bus` assembly takes A3's `stno_array` as its spin-wave source (line 17).
 - **`<name>`:** `spin_logic`.
 - **Allowed (extra):** `tables/photonics_uev.json` (1 row); pinned tests `uev-earth_orbit`, `uev-photonics`, `uhv-photonics`, `uiv-mainframe`.
-- **References:** machines 3-5 (uxv.md:193-219); lines 4, 8, 12-17, 42; *Family steps*; `uev/photonics.js:25`; S0-5.
+- **References:** machines 3-5 (uxv.md:263-300); lines 4, 8, 12-17, 42; *Family steps*; `uev/photonics.js:25`; S0-5.
 - **Depends on:** F1, F2 (mainframe unhidden, GT--'s recipe cut); A3, A4 for inputs.
 - **Invariants:**
   - the crucible is a catalyst;
@@ -1309,7 +1309,7 @@ Two at a time, in the pairs of *Parallel and serial*. A row whose input is made 
   - `iv/uranium_cycle.js` (`:44`) c10: depleted UF₆ + oxygen → `u238_ion_source` (sintered UO₂);
   - `tables/accelerators.json` (synchrotron) c8: `u238_ion_source` + liquid helium → `u238_beam_charge` + helium;
   - pinned tests `uv-cold`, `uev-electron_beam`, `uiv-memories_cryostat`, `uiv-metallic_hydrogen`, `uev-isotopes`, `uhv-transcurium`, `uiv-uiv_components`, `uhv-antimatter`, `uiv-tfln_femtosecond`, `uv-accelerators`, `uv-validator`.
-- **References:** machines 6-7 (uxv.md:220-238); lines 18, 24, 43; `uv/accelerators.js:34`; Monifactory's components pattern (CREDITS).
+- **References:** machines 6-7 (uxv.md:301-326); lines 18, 24, 43; `uv/accelerators.js:34`; Monifactory's components pattern (CREDITS).
 - **Depends on:** F1; A1 (`cm248_target`), A3 (`sin_membrane`, `rf_carpet_board`, `nanoaperture_array`), A4 (`mtj_die` comes from A4's stacks after A3's etch).
 - **Invariants:**
   - the sensor uses no Vela or Cas A product (bootstrap);
@@ -1337,7 +1337,7 @@ Two at a time, in the pairs of *Parallel and serial*. A row whose input is made 
   - quench caster c6 (same array; line 48, open question 13): A3's `finemet_melt` → 20 µm amorphous `finemet_ribbon` by planar flow casting; trim → re-melted.
 - **`<name>`:** `fusion_mk6`.
 - **Allowed (extra):** `zpm/fusion.js` (the two arrays); `tables/fusion_mk6.json` (new); pinned tests `zpm-fusion`, `uev-fusion` and UIV-A9's fusion test (tier list only).
-- **References:** machine 9 (uxv.md:249-258); *Fusion*; lines 26-29, 38; DECISIONS.md:500; FusionReactorMachine.java :185, :276, :294-298, :326-327 as uiv.md cites; S0-4.
+- **References:** machine 9 (uxv.md:340-351); *Fusion*; lines 26-29, 38; DECISIONS.md:500; FusionReactorMachine.java :185, :276, :294-298, :326-327 as uiv.md cites; S0-4.
 - **Depends on:** F1, S0-4, UIV-A9; A1 (W-184), A3 (CVI, c10 Finemet melt); reachable after A8, B3 and B4 (hull, motor, pump, field generator).
 - **Invariants:**
   - written final, not in `power/generators.js`;
@@ -1429,7 +1429,7 @@ B1 opens both places. B2 and B3 work at Cygnus X-1 orbit (UIV's platform) and ca
   - `hv/syngas_plant.js` (`:82`) c7: `volatile_condensate` → syngas;
   - `uv/edge.js` (`:46`) EHT c2: → `cygnus_vlbi_record`;
   - pinned tests `uev-barnard`, `uev-composites`, `uv-pluto-ices`, `uv-edge`.
-- **References:** machines 10-12 (uxv.md:259-284); lines 26-27; *Places and site rules* (Cygnus X-1); UIV-B4's platform.
+- **References:** machines 10-12 (uxv.md:352-387); lines 26-27; *Places and site rules* (Cygnus X-1); UIV-B4's platform.
 - **Depends on:** F1; A6 (`uxv_sensor` in controllers); UIV-B1, UIV-B4.
 - **Invariants:**
   - `.dimension` Cygnus on 10, 11 c1 and 12;
@@ -1438,7 +1438,7 @@ B1 opens both places. B2 and B3 work at Cygnus X-1 orbit (UIV's platform) and ca
 - **Acceptance:** the four cuts, the condensates, `elevator_log` and `cygnus_vlbi_record` are obtainable at `uxv`.
 - **QR:**
   - controllers 10-12 as the controller table; structures as machines 10-12's specs;
-  - elevator c2 as machine 10's honesty note (data module + stellar plasma → `elevator_log`);
+  - elevator c2 as machine 10's QR note (data module + stellar plasma → `elevator_log`);
   - info pages `stellar_elevator`, `plasma_mass_filter`, `stellar_condensation_tower` (each names Cygnus X-1 orbit as the source of its matter);
   - loops `loop_stellar_elevator`, `loop_plasma_mass_filter`, `loop_stellar_condensation_tower`; the four gates as *Common*.
 - **Tests:** T0. T1: `gg_test_uxv_cygnus_lift`, band assigned by integrator. Doubt: the stellar elevator runs at Cygnus X-1 orbit on wireless case 11 through two UIV hatches under its `.dimension` lock (the first UXV recipe on a far platform).
@@ -1452,7 +1452,7 @@ B1 opens both places. B2 and B3 work at Cygnus X-1 orbit (UIV's platform) and ca
   - the `uxv_field_generator` recipe (own file).
 - **`<name>`:** `cygnus_disk`.
 - **Allowed (extra):** `tables/magnet_works.json` c9 (after A8): `strand_tape` + `frc_cartridge` → strand coil; pinned magnet works tests as A8.
-- **References:** machines 13-15 (uxv.md:285-309); lines 30-31; *Power*; UIV `grindless:mh_winding` (`uiv_metallic_hydrogen`).
+- **References:** machines 13-15 (uxv.md:388-423); lines 30-31; *Power*; UIV `grindless:mh_winding` (`uiv_metallic_hydrogen`).
 - **Depends on:** F1; B2 (filter c2); A6; A8 (`magnet_works.json` order). The field generator is reachable after B4 (strand).
 - **Invariants:**
   - `.dimension` Cygnus on 13, 14 c1 and 15;
@@ -1461,7 +1461,7 @@ B1 opens both places. B2 and B3 work at Cygnus X-1 orbit (UIV's platform) and ca
 - **Acceptance:** `frc_cartridge` is obtainable at `uxv`; the BZ dynamo feeds the network; the field generator is obtainable at `uxv-vela`.
 - **QR:**
   - controllers 13-15 as the controller table; structures as machines 13-15's specs;
-  - FRC c2 as machine 14's honesty note (flux-loaded plasma + hydrogen);
+  - FRC c2 as machine 14's QR note (flux-loaded plasma + hydrogen);
   - `frc_cartridge` in machine form; `uxv_field_generator` by assembly line, researched with `frc_cartridge`, with `filtered_disk_plasma`;
   - info pages `accretion_disk_skimmer`, `frc_former`, `bz_dynamo` (the dynamo's page states its fuel and EU per run);
   - loops `loop_accretion_disk_skimmer`, `loop_frc_former`, `loop_bz_dynamo`; the four gates as *Common*.
@@ -1484,7 +1484,7 @@ B1 opens both places. B2 and B3 work at Cygnus X-1 orbit (UIV's platform) and ca
   - the UIV-B2 r-process decompressor's rows, 1 row: `gnocchi_fragment` → several r-process elements, as the UIV row;
   - `server_scripts/grindless/uxv/foundation.js` (new);
   - pinned tests `zpm-observatory`, `luv-ganymede`, `luv-foundation`, `luv-travel`, `luv-validator`, `luv-worlds`, `luv_b1_fixture`, `zpm-validator`, and UIV-B2's tests.
-- **References:** machines 16-20 (uxv.md:310-349); lines 32-33, 39, 48; *Mods and integration* (hull); uiv.md:1627 (`uxv_machine_casing`); S0-8.
+- **References:** machines 16-20 (uxv.md:424-480); lines 32-33, 39, 48; *Mods and integration* (hull); uiv.md:1627 (`uxv_machine_casing`); S0-8.
 - **Depends on:** F1, B1, A6; A3 (die, anneal), A7 (`finemet_ribbon`); UIV-B2, UIV-B5.
 - **Invariants:**
   - pasta only at Vela (`.dimension` on 16-20);
@@ -1496,7 +1496,7 @@ B1 opens both places. B2 and B3 work at Cygnus X-1 orbit (UIV's platform) and ca
   - the UXV hull and hatches are craftable; W's link and cell become reachable.
 - **QR:**
   - controllers 16-20 as the controller table; structures as machines 16-20's specs;
-  - sorter c2 as machine 17's honesty note;
+  - sorter c2 as machine 17's QR note;
   - `pasta_strand_repeater` and `uxv_voltage_coil` in machine form;
   - info pages `pasta_extractor`, `pasta_phase_sorter`, `pasta_draw_bench`, `pasta_laminator`, `polar_cap_tap` (Vela as the source; the tap's page states its EU per run);
   - loops `loop_pasta_extractor`, `loop_pasta_phase_sorter`, `loop_pasta_draw_bench`, `loop_pasta_laminator`, `loop_polar_cap_tap`; the four gates as *Common*.
@@ -1518,7 +1518,7 @@ B1 opens both places. B2 and B3 work at Cygnus X-1 orbit (UIV's platform) and ca
   - the UV antimatter trap row in `server_scripts/grindless/uxv/cas_a.js` (`.dimension` overworld, first free circuit, `uv/accelerators.js:146`'s type): slow positrons + 100 mB nitrogen buffer gas → `positron_stack`;
   - the UIV-B3 X-ray pulse profiler's rows, 1 row: knot dust → `ti44_map`;
   - pinned tests `uev-isotopes`, `uiv-isotopes`, the cascade tests as A2, `uev-superheavy`, `uhv-betavoltaics`, `uhv-transcurium`, `uv-fusion`, `zpm-qubits`, and UIV-B3's tests.
-- **References:** machines 8 and 21 (uxv.md:239-248, :350-358); line 25; *Places and site rules* (Cas A); uiv.md:439 (the gamma laser cavity: B5 reads the id UIV-B3 ships, open question 11).
+- **References:** machines 8 and 21 (uxv.md:327-339, :481-493); line 25; *Places and site rules* (Cas A); uiv.md:439 (the gamma laser cavity: B5 reads the id UIV-B3 ships, open question 11).
 - **Depends on:** F1, B1, A1, A2, A6; UIV-B3.
 - **Invariants:**
   - Ti-44 only from Cas A dust;
