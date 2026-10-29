@@ -8,7 +8,7 @@
 //                          the programmed circuit picks the recipe; every recipe carries the data key of its type = <name> (its EMI line).
 //   gtceu:chemical_reactor, mixer, assembler, compressor, macerator, electric_blast_furnace   the line steps GTM can run (ids grindless:<type>/<name>);
 //                          the EBF rows carry the table's temperature. The HfTaCN coil block, the heating element and the UEV motor are assembler rows.
-//   crafting               the controllers: UHV hull + 2 UV parts + 2 UHV circuits, shaped recipes grindless:crafting/<machine>.
+//   assembly line          the controllers: station research, UEV-era circuits, 3 domain parts of the line, soldering alloy and lubricant, grindless:assembly_line/<machine>.
 //
 // Byproducts are never voided: CH4 and H2 go to the ZPM pyrolyser (gtceu:methane_pyrolysis), HCl to the EV extraction cascade, HF to the IV fluorspar kiln,
 // CO to the HV syngas line. The UV BN reactor's interphase row is in uv/materials.js and the UHV sinterer's HfTaCN row in uhv/propulsion.js.

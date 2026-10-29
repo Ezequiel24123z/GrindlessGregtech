@@ -9,7 +9,7 @@
 //     on every tube and end station: the arms are dug into the crust and stay covered (spike S0-7).
 //   gtceu:coilgun_launcher  type gtceu:probe_launch. A horizontal barrel of 33 rings of eight grindless:coilgun_coil_casing
 //     around an open bore, a 5x5x4 breech of robust tungstensteel casing (controller on the rear face, hatches, loading
-//     chamber) and a 3x3x3 tungstensteel pulse bank beside it. 37 x 5 x 8.
+//     chamber) and a 3x3x3 tungstensteel pulse bank beside it. 8 x 5 x 37.
 // Both keep every output (G.noVoiding in the modifier and in beforeWorking) and run only on Ganymede (G.places, server side).
 // No parallel hatch: one catalogue is one observing run, and one probe is one launch.
 // Published as global.grindless.ganymede (machines, types, specs, blocks) for the server script and the tests.

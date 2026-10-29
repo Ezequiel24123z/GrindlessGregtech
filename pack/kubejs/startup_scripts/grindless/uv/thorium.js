@@ -21,7 +21,7 @@
 //   materials triton_nitric_oxide (the NO of Triton nitrogen), lead_bismuth_eutectic, polonium_210, thorium_uranium_metal,
 //             licl_salt, loaded_licl_salt
 // Geometry (lib/patterns.js: slices back -> front, rows bottom -> top): the cell is 7 x 7 x 7 (a PTFE column in a heatproof and glass
-// vessel), the reactor 11 x 11 x 13 (a UV-casing pool ring, a pipe column up the core, the 4 SRF cryomodules in the back wall).
+// vessel), the reactor 11 x 13 x 11 (a UV-casing pool ring, a pipe column up the core, the 4 SRF cryomodules in the back wall).
 // Textures: tools/assets/Build-UVThoriumTextures.ps1. Names: client_scripts/grindless/uv_thorium_lang.js.
 // Published for the recipe script and the smoke test: global.grindless.thorium.
 (function () {
