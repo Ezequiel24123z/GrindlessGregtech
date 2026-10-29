@@ -1,3 +1,4 @@
+// priority: 1514
 // Gregtech Grindless - names and tooltips of UXV's MTJ sputter cluster and oxide PLD chamber (startup_scripts/grindless/uxv/spin_deposition.js; package UXV-A4):
 //
 //   block.gtceu.<machine>, gtceu.<type>                machine and recipe type names

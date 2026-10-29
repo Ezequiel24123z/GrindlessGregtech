@@ -60,8 +60,12 @@
     { "id": "gtceu:metallic_hydrogen_dust", "role": "acquisition", "category": "gtceu:macerator", "source": "GTM's macerator recipe ingot -> dust, generated for the ingot material metallic_hydrogen (startup_scripts/grindless/uiv/foundation.js); the ingot comes only from UIV-A2's ramp-compression pulser (c1)" },
     { "id": "gtceu:metallic_hydrogen_dust", "role": "use", "category": "gtceu:ingot_molding", "source": "GTM's alloy smelter recipe 9 dust -> block (block casting mold), generated for the ingot material metallic_hydrogen (startup_scripts/grindless/uiv/foundation.js);     native dump 20261028-160615-obtain" },
         { "id": "gtceu:tungsten_184_ingot", "role": "acquisition", "category": "minecraft:smelting", "source": "GTM's furnace recipe dust -> ingot, generated for an ingot material with no blast temperature (startup_scripts/grindless/uxv/foundation.js); the dust comes from UXV-A1's isotope rows" },
-        { "id": "gtceu:tungsten_184_ingot", "role": "use", "category": "gtceu:wiremill", "source": "GTM's wiremill recipe ingot -> wire, generated from the material's cable properties (startup_scripts/grindless/uxv/foundation.js); the wire is line 38's CVI preform fibre (UXV-A3); native dump files/dump-uxv" }
-      ],
+        { "id": "gtceu:tungsten_184_ingot", "role": "use", "category": "gtceu:wiremill", "source": "GTM's wiremill recipe ingot -> wire, generated from the material's cable properties (startup_scripts/grindless/uxv/foundation.js);         the wire is line 38's CVI preform fibre (UXV-A3); native dump files/dump-uxv" },
+                { "id": "gtceu:terfenol_d_ingot", "role": "acquisition", "category": "minecraft:smelting", "source": "GTM's furnace recipe dust -> ingot, generated for an ingot material with no blast temperature (startup_scripts/grindless/uxv/foundation.js); the dust is UXV-A3's rod-end offcut (crystals c15), which the line re-melts into grindless:terfenol_d_ingot (levitation melter c15)" },
+                { "id": "gtceu:terfenol_d_ingot", "role": "use", "category": "gtceu:macerator", "source": "GTM's macerator recipe ingot -> dust, generated for the ingot material terfenol_d (startup_scripts/grindless/uxv/foundation.js); the dust goes back to the levitation melter c15" },
+                { "id": "gtceu:ni2mnga_ingot", "role": "acquisition", "category": "minecraft:smelting", "source": "GTM's furnace recipe dust -> ingot, generated for an ingot material with no blast temperature (startup_scripts/grindless/uxv/foundation.js); the dust is UXV-A3's crystal offcut (crystals c16), which the line re-melts into grindless:ni_mn_ga_ingot (levitation melter c16)" },
+                { "id": "gtceu:ni2mnga_ingot", "role": "use", "category": "gtceu:macerator", "source": "GTM's macerator recipe ingot -> dust, generated for the ingot material ni2mnga (startup_scripts/grindless/uxv/foundation.js); the dust goes back to the levitation melter c16" }
+              ],
   "derivedProcesses": [
     { "type": "gtceu:combined_cycle", "source": "server_scripts/grindless/ev/combined_cycle_and_hot_mill.js makes one run per live gas turbine fuel" },
     { "type": "gtceu:hot_rolling", "source": "server_scripts/grindless/ev/combined_cycle_and_hot_mill.js makes the mill's runs from the live recipes it stands in for" },
@@ -80,11 +84,30 @@
   "pendingRoutes": [
     { "id": "grindless:nitride_magnet_synthesis/uxv_smes_cell", "reason": "UXV-W landed before Wave A: grindless:strand_tape is held until UXV-A8 writes its producer;     A8 deletes this entry with its hold rule" },
     { "id": "grindless:assembly_line/uxv_parallel_hatch", "foreign": ["gtnn:spintronic_mainframe"], "reason": "UXV-M1 landed before Wave A: its inputs are held until A5 (GT--'s spintronic mainframe, held by our A5 rule until A5 writes its recipe), B3 (field generator, filtered disk plasma), B4 (hull) and B5 (emitter) write their producers; B5 lands last and deletes this entry with its hold rule" },
-    { "id": "grindless:solvent_extraction/ev/lpe_dross_lead", "reason": "UXV-A2 landed before A5: grindless:lpe_dross is held until A5's LPE furnace c3 gives it off; A5 deletes this entry with its hold rule" }
+    { "id": "grindless:solvent_extraction/ev/lpe_dross_lead", "reason": "UXV-A2 landed before A5: grindless:lpe_dross is held until A5's LPE furnace c3 gives it off; A5 deletes this entry with its hold rule" },
+    { "id": "grindless:electron_beam_refining/vdw_edge_contacts", "reason": "UXV-A3 landed before A5: grindless:sot_heterostack is held until A5's vdW stacking cell c4 makes it; A5 deletes this entry with its hold rule" },
+    { "id": "grindless:crystal_growth/crystal_growth/wte2_recrystallise", "reason": "UXV-A3 landed before A5: gtceu:wte2_dust is held until A5's vdW stacking cell gives off the broken WTe2 flakes (line 15); A5 deletes this entry with its hold rule" },
+    { "id": "grindless:photonic_foundry/meso_logic_die", "reason": "UXV-A3 landed before A5: grindless:sot_readout_stack comes from A5's sot_heterostack (vdW stacking cell c4) and is held until then; A5 deletes this entry with its hold rule" }
       ],
       "pendingUses": [
-        { "id": "grindless:pt_sheet", "package": "UXV-A5", "reason": "UXV-A2 rolls it (EV hot strip mill); A5's pt_lpe_crucible (line 42, uxv.md:1289) uses it" },
         { "id": "grindless:cm248_target", "package": "UXV-A6", "reason": "UXV-A2 makes it; A6's MNT collider uses it (uxv.md:1321)" },
-        { "id": "grindless:gum_metal_billet", "package": "UXV-A8", "reason": "UXV-A2 casts it; A8's hot strip mill makes gum_metal_blank from it (line 45, uxv.md:1371, :1379)" }
+        { "id": "grindless:gum_metal_billet", "package": "UXV-A8", "reason": "UXV-A2 casts it; A8's hot strip mill makes gum_metal_blank from it (line 45, uxv.md:1371, :1379)" },
+        { "id": "grindless:hbn_crystal", "package": "UXV-A5", "reason": "UXV-A3 makes it; A5's vdW stacking cell c1-c3 stacks it (machine 3, line 15)" },
+        { "id": "grindless:wte2_crystal", "package": "UXV-A5", "reason": "UXV-A3 makes it; A5's vdW stacking cell exfoliates it (line 15) and controller 3 is researched with it (uxv.md:186)" },
+        { "id": "grindless:fgt_crystal", "package": "UXV-A5", "reason": "UXV-A3 makes it; A5's vdW stacking cell exfoliates it (line 15)" },
+        { "id": "grindless:ggg_wafer", "package": "UXV-A5", "reason": "UXV-A3 makes it; A5's YIG LPE furnace c2 grows the film on it (line 17) and controller 5 is researched with it (uxv.md:188)" },
+        { "id": "grindless:written_track_wafer", "package": "UXV-A5", "reason": "UXV-A3's electron beam c16 writes it; A5's racetrack fab c1 reads it" },
+        { "id": "grindless:mtj_die", "package": "UXV-A5", "reason": "UXV-A3/A4 make it; A5's mainframe row and controller 4 use it (uxv.md:187, :1290); A6 and A8 use it too" },
+        { "id": "grindless:mram_wafer", "package": "UXV-A5", "reason": "UXV-A3's foundry c18 makes it; A5's mainframe row uses it (uxv.md:1290)" },
+        { "id": "grindless:shielded_interposer", "package": "UXV-A5", "reason": "UXV-A3's foundry c22 makes it; A5's mainframe row mounts the dies on it (uxv.md:1290)" },
+        { "id": "grindless:stno_array", "package": "UXV-A5", "reason": "UXV-A3's foundry c20 makes it; A5's magnonic_bus takes it as its spin-wave source (uxv.md:1291)" },
+        { "id": "grindless:ga2o3_power_die", "package": "UXV-A5", "reason": "UXV-A3's foundry c21 dices it; A5's controller 4 takes it (uxv.md:187); B-wave controllers 10-17 too" },
+        { "id": "grindless:w184_cvi_preform", "package": "UXV-A5", "reason": "UXV-A3's CVI c5 makes it; A5's controller 5 takes it (uxv.md:188); A7's uxv_fusion_casing too (line 38)" },
+        { "id": "grindless:terfenol_d_rod", "package": "UXV-A5", "reason": "UXV-A3's crystal growth c15 draws it; A5's controller 3 takes it (uxv.md:186); A8's uxv_electric_piston too (line 36)" },
+        { "id": "grindless:nanoaperture_array", "package": "UXV-A6", "reason": "UXV-A3 mills it; A6's SHeQUID works c1 makes weak_link_cell from it (uxv.md:304)" },
+        { "id": "grindless:rf_carpet_board", "package": "UXV-A6", "reason": "UXV-A3's foundry c19 makes it; A6's sensor chain uses it (uxv.md:1321)" },
+        { "id": "grindless:ni_mn_ga_crystal", "package": "UXV-A8", "reason": "UXV-A3's nitride works c13 twin-trains it; A8's uxv_conveyor_module drives it (line 37)" },
+        { "id": "fluid:gtceu:carbon_burning_fuel", "package": "UXV-A7", "reason": "UXV-A3's electron beam furnace purifies it (line 28); A7's Mk6 c3 burns it" },
+        { "id": "fluid:gtceu:finemet_melt", "package": "UXV-A7", "reason": "UXV-A3's levitation melter c13 melts it; A7's quench caster c6 casts it into finemet_ribbon (line 48)" }
       ]
     }

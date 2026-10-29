@@ -222,8 +222,10 @@ function components(nodes, adj) {
 /** steps from raw: 0 when nothing of ours makes it, else 1 + the shallowest recipe's deepest input. A fixed point over the
  *  whole graph (every step adds 1, so it is unique), never dependent on query order. Items our recipes only make inside a
  *  loop they never bootstrap (an ender pearl from a model made of ender pearls, a sample also brought back by hand) get
- *  the loop's edge back counted as raw. */
-export function depthMap(graph) {
+ *  the loop's edge back counted as raw. A loop holding another mod's stack (not one `ours` claims; a copper plate
+ *  returned by a spent sputter target) is cut at that stack first, since its mod makes it outside the loop: cutting
+ *  every edge of a large loop would undercut the depth of all it touches. */
+export function depthMap(graph, ours = (id) => !id.includes(':') || id.startsWith('grindless:')) {
   const d = new Map();
   for (const g of graph) for (const o of g.o) d.set(o, Infinity);
   const get = (id) => (d.has(id) ? d.get(id) : 0);
@@ -240,14 +242,18 @@ export function depthMap(graph) {
     }
   };
   relax(() => false);
-  const loose = [...d.keys()].filter((id) => d.get(id) === Infinity);
-  if (loose.length) {
-    const set = new Set(loose);
-    const adj = new Map(loose.map((id) => [id, new Set()]));
+  const sccCut = (ids, only) => {
+    const set = new Set(ids);
+    const adj = new Map(ids.map((id) => [id, new Set()]));
     for (const g of graph) for (const o of g.o) if (set.has(o)) for (const i of g.i) if (i !== o && set.has(i)) adj.get(o).add(i);
-    const comp = components(loose, adj);
-    relax((o, i) => set.has(o) && set.has(i) && comp.get(o) === comp.get(i));
-  }
+    const comp = components(ids, adj);
+    relax((o, i) => only(o) && set.has(o) && set.has(i) && comp.get(o) === comp.get(i));
+  };
+  const loose = () => [...d.keys()].filter((id) => d.get(id) === Infinity);
+  let rest = loose();
+  const strays = new Set(rest.filter((id) => !ours(id.replace(/^fluid:/, ''))));
+  if (strays.size) { sccCut(rest, (o) => strays.has(o)); rest = loose(); }
+  if (rest.length) sccCut(rest, () => true);
   return (id) => { const v = get(id); return Number.isFinite(v) ? v : 0; };
 }
 
@@ -289,7 +295,8 @@ function sosoRules(rec, t, output, cfg) {
 export function evaluate(rawFacts, cfg) {
   const facts = { ...rawFacts, controllers: [...rawFacts.controllers, ...(cfg.extraControllers || [])] };
   const out = [];
-  const ctx = { owned: new Set(facts.ours || []), depth: depthMap(facts.graph || []) };
+  const owned = new Set(facts.ours || []);
+  const ctx = { owned, depth: depthMap(facts.graph || [], (id) => isOwned(id, owned, cfg)) };
   for (const rec of facts.recipes) {
     for (const output of rec.outputs) {
       const cls = classify(output, facts);

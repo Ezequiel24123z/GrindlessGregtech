@@ -120,3 +120,19 @@ test('depthMap: order-independent, loops our recipes never bootstrap count their
   const rev = depthMap([...g].reverse());
   assert.deepEqual(Object.fromEntries(ids.map((id) => [id, rev(id)])), want);
 });
+
+test('depthMap: a loop through another mod\'s stack is cut at that stack, not across the whole loop', () => {
+  // a spent target returns the copper plate its mod makes outside the loop; cutting every loop edge would put target at 1
+  const g = [
+    { o: ['grindless:dust'], i: ['ore'] }, { o: ['grindless:powder'], i: ['grindless:dust', 'gtceu:copper_plate'] },
+    { o: ['grindless:blank'], i: ['grindless:powder'] }, { o: ['grindless:target'], i: ['gtceu:copper_plate', 'grindless:blank'] },
+    { o: ['grindless:spent'], i: ['grindless:target'] }, { o: ['gtceu:copper_plate', 'grindless:powder'], i: ['grindless:spent'] },
+  ];
+  const want = { 'grindless:dust': 1, 'gtceu:copper_plate': 1, 'grindless:powder': 2, 'grindless:blank': 3, 'grindless:target': 4, 'grindless:spent': 5 };
+  for (const graph of [g, [...g].reverse()]) {
+    const d = depthMap(graph);
+    assert.deepEqual(Object.fromEntries(Object.keys(want).map((id) => [id, d(id)])), want);
+  }
+  const owned = depthMap(g, () => true);
+  assert.equal(owned('grindless:target'), 1, 'with no foreign stack the whole loop is cut, as before');
+});

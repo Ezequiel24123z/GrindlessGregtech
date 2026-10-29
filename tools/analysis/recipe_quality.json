@@ -88,7 +88,6 @@
   "grindless:assembler/droplet_collector|grindless:droplet_collector": ["C-COMPLEX"],
   "grindless:assembler/droplet_wick|grindless:droplet_wick": ["C-COMPLEX"],
   "grindless:assembler/er_fibre_coil|grindless:er_fibre_coil": ["C-COMPLEX"],
-  "grindless:assembler/er_fibre|grindless:er_fibre": ["C-COMPLEX"],
   "grindless:assembler/es254_target|grindless:es254_target": ["C-COMPLEX"],
   "grindless:assembler/first_wall_tile|grindless:first_wall_tile": ["C-COMPLEX"],
   "grindless:assembler/gamma_bragg_mirror|grindless:gamma_bragg_mirror": ["C-COMPLEX"],

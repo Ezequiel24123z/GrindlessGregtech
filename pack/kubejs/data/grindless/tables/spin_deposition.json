@@ -106,7 +106,7 @@
           "fluidsOut": []
         },
         {
-          "_why": "line 11: a CoFe layer on the multiferroic film makes the magnetoelectric switch; the target offcut is cobalt dust",
+          "_why": "line 11: a CoFe layer on the multiferroic film, patterned into the magnetoelectric switch next (UEV electron beam furnace c19); the target offcut is cobalt dust",
           "name": "me_switch", "circuit": 3, "eut": 67108864, "duration": 600,
           "itemsIn": [
             { "id": "grindless:bfo_film_wafer", "count": 1 },
@@ -115,7 +115,7 @@
           "kept": [{ "id": "grindless:krf_excimer_laser", "count": 1 }], "charge": [],
           "fluidsIn": [{ "id": "gtceu:oxygen", "amount": 500 }],
           "itemsOut": [
-            { "id": "grindless:me_switch_wafer", "count": 1 },
+            { "id": "grindless:cofe_me_wafer", "count": 1 },
             { "id": "gtceu:small_cobalt_dust", "count": 2 }
           ],
           "fluidsOut": []

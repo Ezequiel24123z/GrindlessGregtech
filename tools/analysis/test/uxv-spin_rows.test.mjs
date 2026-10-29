@@ -100,10 +100,13 @@ test('crystals c10-17: the crucible and die wear 1 run in 32, the Ir die returns
   assert.ok(json('crystals.json').types.pgm_refining.recipes.some((r) => ids(r.itemsIn).includes('grindless:worn_iridium_crucible')));
 });
 
-test('levitation melter c9-14 under helium; megabar c6', () => {
+test('levitation melter c9-16 under helium; megabar c6', () => {
   const rows = mine('levitation_melter.json', 'levitation_melting');
   assert.deepEqual(rows.map((r) => [r.name, r.circuit]), [['cofeb_melt', 9], ['heusler_melt', 10], ['terfenol_d_melt', 11], ['ni_mn_ga_melt', 12], ['finemet_melt', 13],
-    ['stno_redeposit_remelt', 14]]);
+    ['stno_redeposit_remelt', 14], ['terfenol_d_remelt', 15], ['ni_mn_ga_remelt', 16]]);
+  // lines 36 and 37: the crystal growth offcuts come back as GT dust, and only the melter takes it
+  assert.deepEqual(ids(rows[6].itemsIn), ['gtceu:terfenol_d_dust']);
+  assert.deepEqual(ids(rows[7].itemsIn), ['gtceu:ni2mnga_dust']);
   for (const r of rows) {
     assert.equal(r.eut, 7864320, r.name);
     assert.ok(ids(r.fluidsIn)[0] === 'gtceu:helium' && r.fluidsIn.length === 1 && r.itemsIn.length + 1 <= 5 && r.itemsOut.length <= 3, r.name);
@@ -167,8 +170,8 @@ test('"only from": nothing else in the pack makes these ids', () => {
     'grindless:sot_readout_stack': 'sot_anneal', 'grindless:meso_logic_die': 'meso_logic_die', 'grindless:sin_membrane': 'sin_membrane',
     'grindless:nanoaperture_array': 'nanoaperture_array', 'grindless:rf_carpet_board': 'rf_carpet_board', 'grindless:stno_array': 'stno_contacts',
     'grindless:ga2o3_power_die': 'ga2o3_dicing', 'grindless:mu_metal_foil': 'mu_metal_foil', 'grindless:shielded_interposer': 'shielded_interposer',
-    'grindless:finemet_core': 'finemet_field_anneal', 'grindless:w184_cvi_preform': 'w184_fibre_preform', 'grindless:terfenol_d_ingot': 'terfenol_d_melt',
-    'grindless:ni_mn_ga_ingot': 'ni_mn_ga_melt' };
+    'grindless:finemet_core': 'finemet_field_anneal', 'grindless:w184_cvi_preform': 'w184_fibre_preform',     'grindless:terfenol_d_ingot': 'terfenol_d_melt|terfenol_d_remelt',
+        'grindless:ni_mn_ga_ingot': 'ni_mn_ga_melt|ni_mn_ga_remelt' };
   for (const [id, tails] of Object.entries(only)) {
     const ps = producers(id);
     assert.ok(ps.length >= 1, `${id} has a producer`);
@@ -184,7 +187,7 @@ test('older rows are appended, never edited: the pinned older rows keep their ci
   assert.equal(eb.filter((r) => (r._why || '').startsWith('UXV-A3')).length, 15);
   const n = (f, t) => mine(f, t).length;
   assert.equal(n('electron_beam.json', 'electron_beam_refining') + n('composites.json', 'nitride_magnet_synthesis') + n('composites.json', 'chemical_vapour_infiltration')
-    + n('crystals.json', 'crystal_growth') + n('levitation_melter.json', 'levitation_melting') + n('megabar.json', 'megabar_synthesis') + n('photonics.json', 'photonic_foundry'), 15 + 8 + 1 + 8 + 6 + 1 + 6);
+    + n('crystals.json', 'crystal_growth') + n('levitation_melter.json', 'levitation_melting') + n('megabar.json', 'megabar_synthesis') + n('photonics.json', 'photonic_foundry'), 15 + 8 + 1 + 8 + 8 + 1 + 6);
 });
 
 test('lang parity: every new table row has an EMI line in en_us and es_es', () => {
