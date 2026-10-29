@@ -56,7 +56,7 @@ test('names unique, figures positive, circuits unique per type (0 only for GTM t
 test('machines: three UIV multiblocks in the J0437 orbit, controllers shaped from hull + 2 optical mainframes', () => {
   for (const m of ['pulsar_wind_trap', 'positronium_condensate_lab', 'xray_pulse_profiler']) {
     assert.ok(startup.includes(`'${m}'`) || startup.includes(`${m}:`), m);
-    assert.ok(server.includes('grindless:crafting/'), m);
+    assert.ok(server.includes('grindless:assembly_line/'), m);
     assert.ok(lang.includes(`grindless.machine.${m}.tooltip.2`), m);
   }
   assert.ok(server.includes('gtceu:uiv_machine_hull') && server.includes('gtnn:optical_mainframe'));
@@ -123,7 +123,7 @@ test('line 38 chain: C-12 CVD plate -> HPHT -> (004) cut -> ion mill -> Bragg mi
   assert.match(mega._why, /^UIV-B3/);
   assert.deepEqual(ids(by('cutter', 'c12_004_cut').itemsIn), ['grindless:c12_hpht_plate']);
   assert.ok(ids(by('cutter', 'c12_004_cut').itemsOut).includes('grindless:c12_004_plate'));
-  assert.deepEqual(ids(by('laser_engraver', 'c12_ion_mill').itemsIn), ['grindless:c12_004_plate']);
+  assert.deepEqual(ids(by('laser_engraver', 'c12_ion_mill').itemsIn), ['grindless:c12_004_plate', 'gtceu:tungsten_foil']);
   assert.ok(inputs(by('assembler', 'gamma_bragg_mirror')).includes('grindless:c12_ion_milled_plate'));
   assert.deepEqual(outputs(by('assembler', 'gamma_bragg_mirror')), ['grindless:gamma_bragg_mirror']);
   assert.ok(read('server_scripts', 'grindless', 'zpm', 'qubits.js').includes('c12_cvd_plate'));
@@ -134,7 +134,7 @@ test('line 45 chain: 6N neon -> purified -> solid cone -> annealed -> cartridge;
   const cold = read('server_scripts', 'grindless', 'uv', 'cold.js');
   assert.ok(/solid_neon_cone[\s\S]*UIV-B3|UIV-B3[\s\S]*solid_neon_cone/.test(cold));
   assert.ok(cold.includes('gtceu:purified_neon') && cold.includes('grindless:solid_neon_cone'));
-  assert.deepEqual(inputs(by('vacuum_freezer', 'anneal_neon_cone')), ['grindless:solid_neon_cone']);
+  assert.deepEqual(inputs(by('vacuum_freezer', 'anneal_neon_cone')), ['grindless:solid_neon_cone', 'gtceu:helium']);
   assert.deepEqual(outputs(by('vacuum_freezer', 'anneal_neon_cone')), ['grindless:annealed_neon_cone']);
   assert.ok(inputs(by('assembler', 'neon_moderator_cartridge')).includes('grindless:annealed_neon_cone'));
   const cryo = read('server_scripts', 'grindless', 'ev', 'cryogenic_plant.js');

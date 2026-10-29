@@ -145,7 +145,7 @@ test('line 32: the flash target never makes Pu-244; its debris goes to the hot c
 test('line 33: yarn -> laminated -> braided -> tether -> electrode and lift tether', () => {
   assert.ok(inputs(by('assembler', 'mh_laminate')).includes('grindless:bn_coated_cnt_yarn'));
   assert.deepEqual(outputs(by('assembler', 'mh_laminate')), ['grindless:mh_laminated_yarn']);
-  assert.deepEqual(inputs(by('assembler', 'mh_braid')), ['grindless:mh_laminated_yarn']);
+  assert.deepEqual(inputs(by('assembler', 'mh_braid')), ['grindless:mh_laminated_yarn', 'gtceu:rhea_plate', 'gtceu:tungsten_foil', 'gtceu:epoxy']);
   assert.deepEqual(outputs(by('assembler', 'mh_braid')), ['grindless:braided_mh_tether']);
   assert.ok(inputs(by('assembler', 'polar_cap_electrode')).includes('grindless:mh_tether'));
   assert.ok(inputs(by('assembler', 'crust_lift_tether')).includes('grindless:mh_tether'));
@@ -216,10 +216,17 @@ test('lang: every item, fluid, machine and type named in en_us and es_es, every 
 test('controllers read the UIV hull, 2 UIV parts and 2 optical mainframes', () => {
   assert.match(server, /HULL = 'gtceu:uiv_machine_hull'/);
   assert.match(server, /MAINFRAME = 'gtnn:optical_mainframe'/);
-  assert.match(server, /\['OPO', 'PHP'\]/);
-  for (const m of ['crust_lift: \'grindless:uiv_electric_piston\'', 'neutron_drip_separator: \'grindless:uiv_electric_pump\'',
-    'neutronium_cage: \'grindless:uiv_robot_arm\'', 'r_process_decompressor: \'grindless:uiv_conveyor_module\'', 'decay_heat_vault: \'grindless:uiv_electric_motor\'']) {
-    assert.ok(server.includes(m), m);
+  assert.doesNotMatch(server, /\['OPO', 'PHP'\]|gtceu\.shaped/, 'no shaped controller recipe any more');
+  assert.match(server, /event\.recipes\.gtceu\.assembly_line\('grindless:' \+ d\.name\)/);
+  assert.match(server, /grindless:assembly_line\/' \+ d\.name/);
+  assert.match(server, /b\.itemInputs\('2x ' \+ d\.part\)/);
+  assert.match(server, /b\.itemInputs\('2x ' \+ MAINFRAME\)/);
+  assert.match(server, /b\.itemInputs\('4x #gtceu:circuits\/uiv'\)/);
+  assert.match(server, /inputFluids\(Fluid\.of\('gtceu:soldering_alloy', 2304\), Fluid\.of\('gtceu:lubricant', 2000\), Fluid\.of\('gtceu:neutronium', 576\)\)/);
+  assert.match(server, /stationResearch/);
+  for (const m of ['crust_lift\', part: \'grindless:uiv_electric_piston\'', 'neutron_drip_separator\', part: \'grindless:uiv_electric_pump\'',
+    'neutronium_cage\', part: \'grindless:uiv_robot_arm\'', 'r_process_decompressor\', part: \'grindless:uiv_conveyor_module\'', 'decay_heat_vault\', part: \'grindless:uiv_electric_motor\'']) {
+    assert.ok(server.includes('name: \'' + m), m);
   }
 });
 

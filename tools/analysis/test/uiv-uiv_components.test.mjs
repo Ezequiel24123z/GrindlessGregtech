@@ -47,8 +47,8 @@ test('line 8 steps: Kroll cake distils, suction casting reads the glass dust, ga
   assert.deepEqual(outputs(by('electric_blast_furnace', 'zr_sponge_distillation')), ['gtceu:zirconium_dust', 'gtceu:magnesium_chloride_dust']);
   assert.deepEqual(inputs(by('electric_blast_furnace', 'bmg_suction_casting')), ['gtceu:zrticunibe_glass_dust', 'gtceu:copper_plate']);
   assert.deepEqual(outputs(by('electric_blast_furnace', 'bmg_suction_casting')), ['grindless:bmg_blank', 'grindless:bmg_gate']);
-  assert.deepEqual(outputs(by('lathe', 'bmg_flexspline_machining')), ['grindless:bmg_flexspline']);
-  assert.deepEqual(inputs(by('assembler', 'strain_wave_gear')), ['grindless:bmg_flexspline', 'gtceu:rhea_plate']);
+  assert.deepEqual(outputs(by('lathe', 'bmg_flexspline_machining')), ['grindless:bmg_flexspline', 'gtceu:zrticunibe_glass_dust']); // QR-R7: swarf returns as glass dust
+  assert.deepEqual(inputs(by('assembler', 'strain_wave_gear')), ['grindless:bmg_flexspline', 'gtceu:rhea_plate', 'gtceu:stainless_steel_plate', 'gtceu:lubricant']);
   const gate = by('levitation_melting', 'bmg_gate_remelt');
   assert.deepEqual(inputs(gate), ['grindless:bmg_gate', 'gtceu:helium']);
   assert.ok(outputs(gate).includes('gtceu:zrticunibe_glass_dust') && outputs(gate).includes('grindless:beryllium_oxide_dust'));
@@ -60,7 +60,7 @@ test('line 8 steps: Kroll cake distils, suction casting reads the glass dust, ga
 test('line 6 steps: impeller from printed powder to balanced', () => {
   assert.deepEqual(inputs(by('lathe', 'rhea_impeller_machining')), ['grindless:dense_rhea_impeller']);
   assert.deepEqual(outputs(by('lathe', 'rhea_impeller_machining')), ['grindless:machined_rhea_impeller', 'grindless:rhea_swarf']);
-  assert.deepEqual(inputs(by('assembler', 'rhea_impeller_balancing')), ['grindless:machined_rhea_impeller', 'gtceu:tungsten_foil']);
+  assert.deepEqual(inputs(by('assembler', 'rhea_impeller_balancing')), ['grindless:machined_rhea_impeller', 'gtceu:tungsten_foil', 'gtceu:rhea_plate', 'gtceu:lubricant']);
   assert.deepEqual(outputs(by('assembler', 'rhea_impeller_balancing')), ['grindless:balanced_rhea_impeller']);
 });
 
@@ -69,7 +69,7 @@ test('line 23 steps: blend, oxygenation, impregnation', () => {
   assert.deepEqual(outputs(by('mixer', 'ba_cu_blend')), ['grindless:ba_cu_blend']);
   assert.deepEqual(inputs(by('chemical_reactor', 'gdbco_oxygenation')), ['grindless:bulk_gdbco', 'gtceu:oxygen']);
   assert.deepEqual(outputs(by('chemical_reactor', 'gdbco_oxygenation')), ['grindless:oxygenated_gdbco']);
-  assert.deepEqual(inputs(by('assembler', 'gdbco_impregnation')), ['grindless:oxygenated_gdbco', 'gtceu:epoxy']);
+  assert.deepEqual(inputs(by('assembler', 'gdbco_impregnation')), ['grindless:oxygenated_gdbco', 'gtceu:rhea_plate', 'gtceu:gold_plate', 'gtceu:epoxy', 'gtceu:argon']);
   assert.deepEqual(outputs(by('assembler', 'gdbco_impregnation')), ['grindless:impregnated_gdbco']);
 });
 
@@ -124,7 +124,7 @@ test('"only from" claims: no other table or script produces these', () => {
     for (const [f, txt] of sources) {
       const hits = [...txt.matchAll(new RegExp(`"(?:itemsOut|fluidsOut)"\\s*:\\s*\\[[^\\]]*"${id}"`, 'g'))].length;
       if (files.includes(f)) assert.equal(hits, 1, `${f} produces ${id}`);
-      else if (id !== 'gtceu:zrticunibe_glass_dust' || f !== 'levitation_melter.json') assert.equal(hits, 0, `${f} produces ${id}`);
+      else if (id !== 'gtceu:zrticunibe_glass_dust' || (f !== 'levitation_melter.json' && f !== 'uiv_components.json')) assert.equal(hits, 0, `${f} produces ${id}`);
     }
   }
   const melts = T.types.levitation_melting.recipes.filter((r) => outputs(r).includes('gtceu:zrticunibe_glass_dust')).map((r) => r.name);

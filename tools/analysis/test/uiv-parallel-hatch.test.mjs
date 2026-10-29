@@ -80,19 +80,41 @@ test('the recipe is the UEV one a tier up, guarded, with a stable id', () => {
   const context = vm.createContext({
     global: { grindless: G },
     console: { info() {}, warn() {}, log() {}, error() {} },
-    Item: { exists: () => true },
-    ServerEvents: { recipes: (cb) => cb({ shaped: (out, pattern, key) => { recipes.push({ out, pattern, key }); return { id: (i) => { recipes[recipes.length - 1].id = i; } }; } }) },
+    Item: { exists: () => true, of: (s) => ({ item: s }) },
+    Fluid: { of: (s, n) => s + ' ' + n },
+    ServerEvents: {
+      recipes: (cb) => cb({
+        recipes: { gtceu: { assembly_line: (id) => {
+          const r = { id, items: [], fluids: [], outs: [] };
+          recipes.push(r);
+          const b = {
+            itemInputs: (...a) => { r.items.push(...a); return b; },
+            inputFluids: (...a) => { r.fluids.push(...a); return b; },
+            itemOutputs: (...a) => { r.outs.push(...a); return b; },
+            stationResearch: (f) => { r.research = f({ researchStack: (s) => ({ CWUt: () => ({ EUt: () => s }) }) }); return b; },
+            EUt: (e) => { r.eut = e; return b; },
+            duration: (d) => { r.duration = d; return b; },
+          };
+          return b;
+        } } },
+      }),
+    },
   });
   vm.runInContext(src, context);
   assert.equal(recipes.length, 1);
-  assert.equal(recipes[0].out, 'gtceu:uiv_parallel_hatch');
-  assert.deepEqual(plain(recipes[0].pattern), ['SZE', 'ZHZ', 'CZC']);
-  assert.equal(recipes[0].key.H, 'gtceu:uiv_machine_hull');
-  assert.equal(recipes[0].key.Z, '#gtceu:circuits/uiv');
-  assert.equal(recipes[0].key.S, 'grindless:uiv_sensor');
-  assert.equal(recipes[0].key.E, 'grindless:uiv_emitter');
-  assert.equal(recipes[0].key.C, 'gtceu:metallic_hydrogen_double_cable');
-  assert.equal(recipes[0].id, 'grindless:assembly_line/uiv_parallel_hatch');
+  const r = recipes[0];
+  assert.deepEqual(plain(r.outs), ['gtceu:uiv_parallel_hatch']);
+  assert.equal(r.id, 'grindless:uiv_parallel_hatch', 'the builder id; GTM prefixes it as grindless:assembly_line/uiv_parallel_hatch');
+  assert.ok(r.items.includes('gtceu:uiv_machine_hull'));
+  assert.ok(r.items.includes('4x #gtceu:circuits/uiv'));
+  assert.ok(r.items.includes('grindless:uiv_sensor'));
+  assert.ok(r.items.includes('grindless:uiv_emitter'));
+  assert.ok(r.items.includes('2x gtceu:metallic_hydrogen_double_cable'));
+  assert.ok(r.items.includes('8x gtceu:rhea_plate'));
+  assert.ok(r.items.includes('4x grindless:ffkm_seal'));
+  assert.equal(r.fluids.length, 3);
+  assert.deepEqual(plain(r.research), { item: 'grindless:uiv_emitter' });
+  assert.equal(G.uivParallelHatch.recipeId, 'grindless:assembly_line/uiv_parallel_hatch');
   assert.equal(G.uivParallelHatch.done, true);
 });
 
