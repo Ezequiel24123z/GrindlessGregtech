@@ -29,7 +29,8 @@
 
   var CONTROLLER = 'gtceu:smelting_complex'
   var MACHINES = ['gtceu:electric_blast_furnace', 'gtceu:vacuum_freezer']
-  var INPUTS = ['4x gtceu:electric_blast_furnace', '4x gtceu:vacuum_freezer', '4x #gtceu:circuits/iv']
+  var INPUTS = ['4x gtceu:electric_blast_furnace', '4x gtceu:vacuum_freezer', '4x #gtceu:circuits/iv',
+  '2x grindless:sintered_regolith', '2x grindless:platinum_electrode']
   SC.crafting = 'grindless:smelting_complex'
   SC.craftingInputs = INPUTS.slice()
 
@@ -349,8 +350,9 @@
       console.error(LOG + 'smelting complex controller recipe skipped, unknown item(s): ' + missing.join(', '))
       return
     }
-    event.recipes.gtceu.assembler(SC.crafting)
-      .itemInputs(INPUTS[0], INPUTS[1], INPUTS[2])
+    var rc = event.recipes.gtceu.assembler(SC.crafting)
+    INPUTS.forEach(function (x) { rc.itemInputs(x) })
+    rc.inputFluids(Fluid.of('gtceu:soldering_alloy', 288), Fluid.of('gtceu:lubricant', 500))
       .itemOutputs(CONTROLLER)
       .EUt(1920)
       .duration(400)

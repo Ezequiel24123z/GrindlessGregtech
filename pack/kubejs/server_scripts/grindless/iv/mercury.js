@@ -69,8 +69,8 @@
     recording: 'grindless:deep_space_tracking/lunar_vlbi_recording',
     bit: 'grindless:lathe/tungsten_steel_drill_bit',
     copy: 'grindless:crafting/outer_system_chart_copy',
-    controllers: ['grindless:crafting/mercury_vein_drill', 'grindless:crafting/mercury_solar_works', 'grindless:crafting/mercury_solar_field',
-      'grindless:crafting/interferometer']
+    controllers: ['grindless:assembler/mercury_vein_drill', 'grindless:assembler/mercury_solar_works', 'grindless:assembler/mercury_solar_field',
+      'grindless:assembler/interferometer']
   }
 
   // the input step of iridium and osmium (iv.md: platinum plant mode 3, moved to the site); B3 composes mode 3 from the live recipe
@@ -247,41 +247,33 @@
         .EUt(BIT.eut)
         .duration(BIT.duration)
 
-      event.recipes.gtceu.shaped(D.machine, ['ALA', 'MHM', 'CPC'], {
-        A: '#forge:plates/tungsten_steel',
-        L: 'gtceu:ev_vein_drill',
-        M: 'gtceu:iv_electric_motor',
-        H: 'gtceu:iv_machine_hull',
-        C: '#gtceu:circuits/iv',
-        P: 'gtceu:iv_electric_pump'
-      }).id(M.recipes.controllers[0])
+      event.recipes.gtceu.assembler('grindless:mercury_vein_drill')
+        .itemInputs('gtceu:iv_machine_hull', 'gtceu:ev_vein_drill', '2x gtceu:iv_electric_motor', 'gtceu:iv_electric_pump',
+          '4x #gtceu:circuits/iv', '4x #forge:plates/tungsten_steel', '2x grindless:tungsten_steel_drill_bit', '2x grindless:platinum_electrode')
+        .inputFluids(Fluid.of('gtceu:soldering_alloy', 288), Fluid.of('gtceu:lubricant', 500))
+        .itemOutputs(D.machine)
+        .EUt(1920).duration(600)
 
-      event.recipes.gtceu.shaped(M.works.machine, ['CTC', 'FHA', 'C C'], {
-        C: '#gtceu:circuits/iv',
-        T: 'gtceu:heliostat_tower',
-        F: 'gtceu:iv_electric_furnace',
-        H: 'gtceu:iv_machine_hull',
-        A: 'gtceu:iv_assembler'
-      }).id(M.recipes.controllers[1])
+      event.recipes.gtceu.assembler('grindless:mercury_solar_works')
+        .itemInputs('gtceu:iv_machine_hull', 'gtceu:heliostat_tower', 'gtceu:iv_electric_furnace', 'gtceu:iv_assembler', '4x #gtceu:circuits/iv',
+          '4x grindless:hermean_heat_shield_brick', '2x grindless:zircaloy_cladding_tube')
+        .inputFluids(Fluid.of('gtceu:soldering_alloy', 288), Fluid.of('gtceu:lubricant', 500))
+        .itemOutputs(M.works.machine)
+        .EUt(1920).duration(600)
 
-      event.recipes.gtceu.shaped(M.field.machine, ['PHP', 'CAC', 'FWF'], {
-        P: PANEL,
-        H: 'gtceu:iv_machine_hull',
-        C: '#gtceu:circuits/iv',
-        A: 'gtceu:lunar_solar_array',
-        F: TS_FRAME,
-        W: 'gtceu:platinum_single_cable'
-      }).id(M.recipes.controllers[2])
+      event.recipes.gtceu.assembler('grindless:mercury_solar_field')
+        .itemInputs('2x ' + PANEL, 'gtceu:iv_machine_hull', '4x #gtceu:circuits/iv', 'gtceu:lunar_solar_array', '2x ' + TS_FRAME,
+          'gtceu:platinum_single_cable', '2x grindless:heliostat_mirror')
+        .inputFluids(Fluid.of('gtceu:soldering_alloy', 288), Fluid.of('gtceu:lubricant', 500))
+        .itemOutputs(M.field.machine)
+        .EUt(1920).duration(600)
 
-      event.recipes.gtceu.shaped(M.interferometer.machine, ['FEF', 'SHS', 'CDC'], {
-        F: TS_FRAME,
-        E: 'gtceu:iv_emitter',
-        S: 'gtceu:iv_sensor',
-        H: 'gtceu:iv_machine_hull',
-        C: '#gtceu:circuits/iv',
-        D: 'gtceu:deep_space_antenna'
-      }).id(M.recipes.controllers[3])
-    } catch (e) {
+      event.recipes.gtceu.assembler('grindless:interferometer')
+        .itemInputs('2x ' + TS_FRAME, 'gtceu:iv_emitter', 'gtceu:iv_sensor', 'gtceu:iv_machine_hull', '4x #gtceu:circuits/iv', 'gtceu:deep_space_antenna',
+          '2x grindless:night_sky_radiator', '2x grindless:sintered_regolith')
+        .inputFluids(Fluid.of('gtceu:soldering_alloy', 288), Fluid.of('gtceu:lubricant', 500))
+        .itemOutputs(M.interferometer.machine)
+        .EUt(1920).duration(600)    } catch (e) {
       console.error(LOG + 'Mercury controller or bit recipes failed: ' + e)
     }
 

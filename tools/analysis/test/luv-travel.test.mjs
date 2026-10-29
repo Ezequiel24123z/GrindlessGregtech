@@ -169,8 +169,12 @@ test('the travel recipes compose with only registered ids; seeds are made only o
     packRoot: PACK, scripts: [], recipes: {}, startup: ['kubejs/startup_scripts/grindless/luv/foundation.js'],
     before(sandbox) { sandbox.global.grindless.tables = {}; },
   }).G.luvFoundation;
+  const IV = runServerScripts({
+    packRoot: PACK, scripts: [], recipes: {}, startup: ['kubejs/startup_scripts/grindless/iv/foundation.js'],
+    before(sandbox) { sandbox.global.grindless.tables = {}; },
+  }).G.ivFoundation;
   for (const id of asked) if (id.startsWith('grindless:')) {
-    assert.ok(A1.items.includes(id) || A1.blocks.includes(id) || id === 'grindless:cryogenic_fuel_tank' || IDS.items.includes(id), id);
+    assert.ok(A1.items.includes(id) || IV.items.includes(id) || A1.blocks.includes(id) || id === 'grindless:cryogenic_fuel_tank' || IDS.items.includes(id), id);
   }
   for (const [tag, members] of Object.entries(IDS.tags)) assert.ok(members.length > 0, tag);
 

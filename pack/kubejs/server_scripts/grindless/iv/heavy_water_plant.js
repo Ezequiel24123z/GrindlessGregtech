@@ -16,7 +16,8 @@
 //   subset of another's can hide it. The recipes of the type are checked against each other at load (the circuit and the charge count as
 //   ingredients); a clash is logged as an error.
 //   crafting                 the controller (iv.md, "Controller"): IV hull + distillation tower + IV fluid heater + 2 IV electric pumps
-//                            + 4 IV circuits, in a crafting grid (grindless:crafting/heavy_water_plant, GTM's shaped recipe).
+//                            + 4 IV circuits + 2 platinum electrodes + 2 night-sky radiators + soldering alloy and distilled water, made in the
+//                            assembler (grindless:assembler/heavy_water_plant).
 //
 // Destinations: the heavy water goes to the fission reactor's heavy-water cores (IV-A2) and to IV-A1's electrolysis (deuterium for LuV,
 // and oxygen); the concentrate goes back into the plant (circuit 2); the distilled water to the network; the depleted water is inert
@@ -41,7 +42,7 @@
   var HEATER = 'gtceu:iv_fluid_heater'
   var PUMP = 'gtceu:iv_electric_pump'
   var CONTROLLER_PARTS = [HULL, TOWER, HEATER, PUMP, CONTROLLER]
-  HW.craftingRecipe = 'grindless:crafting/heavy_water_plant'
+  HW.craftingRecipe = 'grindless:assembler/heavy_water_plant'
   HW.craftingParts = CONTROLLER_PARTS
 
   function io() {
@@ -225,13 +226,11 @@
       console.error(LOG + 'heavy-water plant controller recipe skipped, unknown item(s): ' + missing.join(', '))
       return
     }
-    event.recipes.gtceu.shaped(CONTROLLER, ['CDC', 'PHP', 'CFC'], {
-      C: '#gtceu:circuits/iv',
-      D: TOWER,
-      P: PUMP,
-      H: HULL,
-      F: HEATER
-    }).id(HW.craftingRecipe)
+    event.recipes.gtceu.assembler('grindless:heavy_water_plant')
+      .itemInputs(HULL, TOWER, HEATER, '2x ' + PUMP, '4x #gtceu:circuits/iv', '2x grindless:platinum_electrode', '2x grindless:night_sky_radiator')
+      .inputFluids(Fluid.of('gtceu:soldering_alloy', 288), Fluid.of('gtceu:distilled_water', 4000))
+      .itemOutputs(CONTROLLER)
+      .EUt(1920).duration(600)
   }
 
   // an uncaught error here would stop KubeJS from running the recipe handlers of the scripts that load after this one

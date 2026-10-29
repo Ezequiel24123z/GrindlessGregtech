@@ -65,8 +65,8 @@
   var HIDDEN_TAG = 'c:hidden_from_recipe_viewers'
   var RECIPES_TAG = 'grindless:hidden_with_recipes'
   var RECIPES = {
-    tether: [TORUS, 'grindless:assembler/luv/tether_spool', 'grindless:crafting/flux_tube_tether'],
-    sulfur_iodine: [SULFUR_IODINE, 'grindless:crafting/sulfur_iodine_plant']
+    tether: [TORUS, 'grindless:assembly_line/luv/tether_spool', 'grindless:assembly_line/flux_tube_tether'],
+    sulfur_iodine: [SULFUR_IODINE, 'grindless:assembly_line/sulfur_iodine_plant']
   }
   var STAGES = {
     tether: ['tether_formed', 'tether_run', 'tether_formed_2a', 'tether_one_reel_dynamo', 'tether_no_regress', 'tether_off_site'],

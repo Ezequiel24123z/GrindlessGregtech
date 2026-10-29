@@ -94,78 +94,13 @@ Pilot added by the scope extension: `uev_parallel_hatch` (table shaped -> assemb
 
 All 47 controller rows of steam, lv, mv, hv and ev left the baseline. Steam-HV controllers got a domain input (drill bits, electrodes, catalysts of their own line); MV and HV ones also reach 5 distinct ingredients. The EV crafting controllers moved from the crafting table to the assembler with a fluid and 2+ domain inputs; ids are now grindless:assembler/NAME (combined_cycle_plant, hot_strip_mill, atmosphere_processor, extraction_cascade, regolith_cell, sealed_dome, ev_vein_drill, lunar_drill, lunar_solar_array, deep_space_antenna). ore_refinery and platinum_plant (already assembler) gained a fluid and domain inputs. Out of scope, in iv/: grindless:assembler/ev_rtg (C-FLUID).
 
-### iv
+### iv (QR-R2, done)
 
-| Output | Class | Now | Missing | File:line |
-|---|---|---|---|---|
-| `grindless:platinum_gauze` | component | assembler | C-COMPLEX | iv/foundation.js:76 |
-| `grindless:vein_sample_iridosmine_mercury` | component | crafting | C-COMPLEX C-MANUAL | iv/foundation.js:28 |
-| `grindless:vein_sample_naquadah_venus` | component | crafting | C-COMPLEX C-MANUAL | iv/foundation.js:28 |
-| `grindless:vein_sample_pitchblende_end` | component | crafting | C-COMPLEX C-MANUAL | iv/foundation.js:28 |
-| `gtca:mega_lcr` | component | assembler | C-COMPLEX | integration/gtca.js:81 |
-| `gtca:mega_oil_cracking_unit` | component | assembler | C-COMPLEX | integration/gtca.js:82 |
-| `alloy_blast_smelter` | controller | crafting | C-DISTINCT C-DOMAIN C-FLUID C-FORM | iv/mass_production.js:17 |
-| `composite_autoclave` | controller | crafting | C-DISTINCT C-DOMAIN C-FLUID C-FORM | launch_road/recipes.js:90 |
-| `engine_test_stand` | controller | crafting | C-DISTINCT C-DOMAIN C-FLUID C-FORM | launch_road/recipes.js:90 |
-| `ev_rtg` | single | assembler | S-FLUID | iv/travel_network.js:137 |
-| `fission_reactor` | controller | crafting | C-DISTINCT C-DOMAIN C-FLUID C-FORM | iv/fission_reactor.js:17 |
-| `fluorspar_kiln` | controller | crafting | C-DOMAIN C-FLUID C-FORM | iv/fluorspar_kiln.js:20 |
-| `fuel_fabrication_plant` | controller | crafting | C-DOMAIN C-FLUID C-FORM | iv/uranium_cycle.js:59 |
-| `heavy_water_plant` | controller | crafting | C-DOMAIN C-FLUID C-FORM | iv/heavy_water_plant.js:19 |
-| `hot_cell` | controller | assembler | C-DOMAIN C-FLUID | iv/hot_cell.js:18 |
-| `interferometer` | controller | crafting | C-DOMAIN C-FLUID C-FORM | iv/mercury.js:73 |
-| `isr_wellfield` | controller | crafting | C-DOMAIN C-FLUID C-FORM | iv/uranium_cycle.js:59 |
-| `iv_parallel_hatch` | hatch | crafting | H-FORM | iv/mass_production.js:11 |
-| `large_packer` | controller | crafting | C-DOMAIN C-FLUID C-FORM | iv/mass_production.js:16 |
-| `mercury_solar_field` | controller | crafting | C-FLUID C-FORM | iv/mercury.js:72 |
-| `mercury_solar_works` | controller | crafting | C-DOMAIN C-FLUID C-FORM | iv/mercury.js:72 |
-| `mercury_vein_drill` | controller | crafting | C-DOMAIN C-FLUID C-FORM | iv/mercury.js:72 |
-| `naquadah_plant` | controller | assembler | C-DOMAIN C-FLUID | iv/naquadah_plant.js:34 |
-| `pressurized_vein_drill` | controller | crafting | C-DOMAIN C-FLUID C-FORM | iv/venus.js:262 |
-| `smelting_complex` | controller | assembler | C-DISTINCT C-DOMAIN C-FLUID | iv/mega_smelting_complex.js:2 |
-| `tritium_removal_facility` | controller | crafting | C-DOMAIN C-FLUID C-FORM | iv/tritium_removal.js:21 |
-| `venus_acid_works` | controller | crafting | C-DOMAIN C-FLUID C-FORM | iv/venus.js:278 |
-| `venus_heat_engine` | controller | crafting | C-DOMAIN C-FLUID C-FORM | iv/venus.js:270 |
-| `gtnn:maceration_stack_controller` | controller | crafting | C-DISTINCT C-DOMAIN C-FLUID C-FORM | integration/gtnn.js:75 |
+All rows of the iv table, the launch_road rows (composite_autoclave, engine_test_stand), the IV integration rows (gtca mega_lcr, mega_oil_cracking_unit; gtnn maceration_stack_controller) and ev_rtg left the baseline. IV controllers, parts and components moved from the crafting table to the assembler with a fluid and domain inputs of their own line; ids grindless:crafting/NAME are now grindless:assembler/NAME (vein samples: grindless:assembler/vein_sample/VEIN; gtnn: grindless:assembler/gtnn/maceration_stack_controller).
 
-### luv
+### luv (QR-R2, done)
 
-| Output | Class | Now | Missing | File:line |
-|---|---|---|---|---|
-| `grindless:anchor_harpoon` | component | assembler | C-COMPLEX | luv/asteroid_belt.js:190 |
-| `grindless:capture_bag` | component | assembler | C-COMPLEX | luv/asteroid_belt.js:190 |
-| `grindless:heat_exchanger_bundle` | component | assembler | C-COMPLEX | luv/io_surface.js:15 |
-| `grindless:jupiter_entry_probe` | component | assembler | C-COMPLEX | luv/ganymede.js:35 |
-| `grindless:melt_head` | component | assembler | C-COMPLEX | luv/europa.js:31 |
-| `grindless:orbital_solar_panel` | part | assembler | P-FORM | luv/orbital_solar.js:11 |
-| `grindless:orbital_solar_panel` | part | assembler | P-FORM | luv/orbital_solar.js:14 |
-| `grindless:radiation_vault_casing` | part | assembler | P-DOMAIN P-FLUID | luv/io_surface.js:68 |
-| `grindless:station_truss_casing` | part | assembler | P-DOMAIN P-FLUID | luv/travel.js:8 |
-| `grindless:tether_spool` | component | assembler | C-COMPLEX | luv/io_orbit.js:10 |
-| `grindless:vein_sample_c_type_belt` | component | crafting | C-COMPLEX C-MANUAL | luv/asteroid_belt.js:10 |
-| `grindless:vein_sample_m_type_belt` | component | crafting | C-COMPLEX C-MANUAL | luv/asteroid_belt.js:10 |
-| `grindless:vein_sample_s_type_belt` | component | crafting | C-COMPLEX C-MANUAL | luv/asteroid_belt.js:10 |
-| `algae_bioreactor` | controller | crafting | C-DISTINCT C-DOMAIN C-FLUID C-FORM | luv/europa.js:32 |
-| `asteroid_processor` | controller | crafting | C-DISTINCT C-DOMAIN C-FLUID C-FORM | luv/asteroid_belt.js:223 |
-| `biofoundry` | controller | assembler | C-DISTINCT C-DOMAIN C-FLUID C-FORM | luv/biofoundry.js:18 |
-| `coated_conductor_line` | controller | crafting | C-DISTINCT C-DOMAIN C-FLUID C-FORM | luv/coated_conductor_line.js:17 |
-| `coilgun_launcher` | controller | crafting | C-DISTINCT C-DOMAIN C-FLUID C-FORM | luv/ganymede.js:39 |
-| `cryobot` | controller | crafting | C-DOMAIN C-FLUID C-FORM | luv/europa.js:32 |
-| `flux_tube_tether` | controller | crafting | C-DISTINCT C-DOMAIN C-FLUID C-FORM | luv/io_orbit.js:34 |
-| `fumarole_condenser` | controller | crafting | C-DISTINCT C-DOMAIN C-FLUID C-FORM | luv/io_surface.js:77 |
-| `gravitational_wave_detector` | controller | crafting | C-DISTINCT C-DOMAIN C-FLUID C-FORM | luv/ganymede.js:39 |
-| `harpoon_anchor_drill` | controller | crafting | C-DISTINCT C-DOMAIN C-FLUID C-FORM | luv/asteroid_belt.js:220 |
-| `helium_refrigerator` | controller | crafting | C-DISTINCT C-DOMAIN C-FLUID C-FORM | luv/helium_refrigerator.js:37 |
-| `hts_magnet_works` | controller | crafting | C-DISTINCT C-DOMAIN C-FLUID C-FORM | luv/hts_magnet_works.js:17 |
-| `hydroponic_ring` | controller | crafting | C-DISTINCT C-DOMAIN C-FLUID C-FORM | luv/orbital_biology.js:50 |
-| `mega_chemical_complex` | controller | assembler | C-DISTINCT C-DOMAIN C-FLUID C-FORM | luv/mega_chemical_complex.js:3 |
-| `microgravity_smelter` | controller | crafting | C-DISTINCT C-DOMAIN C-FLUID C-FORM | luv/orbital_industry.js:57 |
-| `optical_miner` | controller | crafting | C-DISTINCT C-DOMAIN C-FLUID C-FORM | luv/asteroid_belt.js:226 |
-| `orbital_solar_station` | controller | assembler | C-DISTINCT C-DOMAIN C-FLUID C-FORM | luv/orbital_solar.js:19 |
-| `organoid_lab` | controller | crafting | C-DISTINCT C-DOMAIN C-FLUID C-FORM | luv/orbital_biology.js:51 |
-| `volcanic_intake` | controller | crafting | C-DISTINCT C-DOMAIN C-FLUID C-FORM | luv/io_surface.js:80 |
-| `wake_shield_facility` | controller | crafting | C-DISTINCT C-DOMAIN C-FLUID C-FORM | luv/orbital_industry.js:60 |
-| `zero_g_crystal_grower` | controller | crafting | C-DISTINCT C-DOMAIN C-FLUID C-FORM | luv/orbital_biology.js:49 |
+All rows of the luv table left the baseline. LuV controllers, parts and components moved to the assembly line (grindless:assembly_line/NAME) with soldering alloy plus lubricant and domain inputs; belt vein samples and radiation_vault_casing are assemblers with fluids.
 
 ### zpm
 

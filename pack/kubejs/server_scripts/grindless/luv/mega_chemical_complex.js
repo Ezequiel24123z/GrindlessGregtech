@@ -43,7 +43,7 @@
 
   var CONTROLLER = 'gtceu:mega_chemical_complex'
   var MACHINES = ['gtceu:coil_chemical_plant', 'gtceu:luv_chemical_reactor', 'gtceu:polytetrafluoroethylene_frame']
-  var INPUTS = ['4x gtceu:coil_chemical_plant', '16x gtceu:luv_chemical_reactor', '4x #gtceu:circuits/luv', '16x gtceu:polytetrafluoroethylene_frame']
+  var INPUTS = ['4x gtceu:coil_chemical_plant', '16x gtceu:luv_chemical_reactor', '4x #gtceu:circuits/luv', '16x gtceu:polytetrafluoroethylene_frame', '2x grindless:ion_exchange_resin', '2x grindless:contact_catalyst']
   MC.crafting = 'grindless:mega_chemical_complex'
   MC.craftingInputs = INPUTS.slice()
 
@@ -227,8 +227,9 @@
       console.error(LOG + 'mega chemical complex controller recipe skipped, unknown item(s): ' + missing.join(', '))
       return
     }
-    event.recipes.gtceu.assembler(MC.crafting)
-      .itemInputs(INPUTS[0], INPUTS[1], INPUTS[2], INPUTS[3])
+    var rc = event.recipes.gtceu.assembly_line(MC.crafting)
+    INPUTS.forEach(function (x) { rc.itemInputs(x) })
+    rc.inputFluids(Fluid.of('gtceu:soldering_alloy', 1152), Fluid.of('gtceu:lubricant', 1000))
       .itemOutputs(CONTROLLER)
       .EUt(30720)
       .duration(1200)

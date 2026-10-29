@@ -30,7 +30,7 @@
 //     venus_sulfuric_acid   circuit 5, in the clouds (pos_y 240..319): 10,000 mB of sulfuric acid, 1,024 EU/t for 200 ticks
 //   gtceu:forge_hammer grindless:forge_hammer/venusian_regolith: 1 Venus cobblestone (the drill's stone) -> 1 Venusian regolith (the
 //     site casing), at GTM's cobblestone-to-gravel numbers (16 EU/t, 10 ticks), only on Venus.
-//   crafting (GTM shaped): the three controllers.
+//   assembler: the three controllers, each with soldering alloy, a fluid and domain items.
 //     Pressurized Vein Drill  EV Tripod Drill + IV hull + 2 IV motors + IV pump + 2 IV circuits + 2 PTFE plates (inert against acid)
 //     Venus Heat Engine       IV hull + Heliostat Tower + Large Steam Turbine + 2 IV pumps + 4 IV circuits
 //     Venus Acid Works        IV hull + IV chemical reactor + IV fluid heater + 2 platinum gauzes + 4 IV circuits
@@ -252,34 +252,29 @@
       console.error(LOG + 'Venus controller recipes skipped, unknown item(s): ' + missing.join(', '))
       return
     }
-    event.recipes.gtceu.shaped(T.drill.machine, ['ALA', 'MHM', 'CPC'], {
-      A: '#forge:plates/polytetrafluoroethylene',
-      L: 'gtceu:ev_vein_drill',
-      M: 'gtceu:iv_electric_motor',
-      H: 'gtceu:iv_machine_hull',
-      C: '#gtceu:circuits/iv',
-      P: 'gtceu:iv_electric_pump'
-    }).id('grindless:crafting/pressurized_vein_drill')
+    event.recipes.gtceu.assembler('grindless:pressurized_vein_drill')
+      .itemInputs('gtceu:iv_machine_hull', 'gtceu:ev_vein_drill', '2x gtceu:iv_electric_motor', 'gtceu:iv_electric_pump', '4x #gtceu:circuits/iv',
+        '4x #forge:plates/polytetrafluoroethylene', '2x grindless:stainless_steel_drill_bit', '2x grindless:platinum_electrode')
+      .inputFluids(Fluid.of('gtceu:soldering_alloy', 288), Fluid.of('gtceu:lubricant', 500))
+      .itemOutputs(T.drill.machine)
+      .EUt(1920).duration(600)
 
-    event.recipes.gtceu.shaped(T.heatEngine.machine, ['CPC', 'THS', 'CPC'], {
-      C: '#gtceu:circuits/iv',
-      P: 'gtceu:iv_electric_pump',
-      T: 'gtceu:heliostat_tower',
-      H: 'gtceu:iv_machine_hull',
-      S: 'gtceu:steam_large_turbine'
-    }).id('grindless:crafting/venus_heat_engine')
+    event.recipes.gtceu.assembler('grindless:venus_heat_engine')
+      .itemInputs('gtceu:iv_machine_hull', 'gtceu:heliostat_tower', 'gtceu:steam_large_turbine', '2x gtceu:iv_electric_pump', '4x #gtceu:circuits/iv',
+        '2x grindless:night_sky_radiator', '2x grindless:zircaloy_cladding_tube')
+      .inputFluids(Fluid.of('gtceu:soldering_alloy', 288), Fluid.of('gtceu:lubricant', 500))
+      .itemOutputs(T.heatEngine.machine)
+      .EUt(1920).duration(600)
 
-    event.recipes.gtceu.shaped(T.acidWorks.machine, ['CGC', 'RHF', 'CGC'], {
-      C: '#gtceu:circuits/iv',
-      G: T.acidWorks.gauze,
-      R: 'gtceu:iv_chemical_reactor',
-      H: 'gtceu:iv_machine_hull',
-      F: 'gtceu:iv_fluid_heater'
-    }).id('grindless:crafting/venus_acid_works')
+    event.recipes.gtceu.assembler('grindless:venus_acid_works')
+      .itemInputs('gtceu:iv_machine_hull', 'gtceu:iv_chemical_reactor', 'gtceu:iv_fluid_heater', '4x #gtceu:circuits/iv', '2x ' + T.acidWorks.gauze,
+        '2x grindless:contact_catalyst', '2x grindless:ion_exchange_resin')
+      .inputFluids(Fluid.of('gtceu:soldering_alloy', 288), Fluid.of('gtceu:sulfuric_acid', 1000))
+      .itemOutputs(T.acidWorks.machine)
+      .EUt(1920).duration(600)
 
-    out.controllers = ['grindless:crafting/pressurized_vein_drill', 'grindless:crafting/venus_heat_engine', 'grindless:crafting/venus_acid_works']
+    out.controllers = ['grindless:assembler/pressurized_vein_drill', 'grindless:assembler/venus_heat_engine', 'grindless:assembler/venus_acid_works']
   }
-
   // ---------------------------------------------------------------- load
 
   ServerEvents.recipes(function (event) {

@@ -1,4 +1,4 @@
-import test from 'node:test';
+﻿import test from 'node:test';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import path from 'node:path';
@@ -145,20 +145,19 @@ test('B9 recipe types, keep-everything machines and their controllers', () => {
     assert.equal(only(c, 'beforeWorking')({ voids: false }), true);
     assert.equal(call(c, 'workableCasingModel')[0][1], 'grindless:block/multiblock/' + name);
   }
-  const controllers = recipes.filter((r) => r.type === 'shaped');
+  const controllers = recipes.filter((r) => r.type === 'assembly_line' && names.includes(r.args[0].replace('grindless:', '')));
   assert.equal(controllers.length, 2);
-  const tally = (r) => {
-    const t = {};
-    for (const ch of r.args[1].join('')) if (r.args[2][ch]) t[r.args[2][ch]] = (t[r.args[2][ch]] || 0) + 1;
-    return t;
-  };
-  assert.deepEqual(tally(controllers[0]), { '#gtceu:circuits/luv': 4, 'gtceu:luv_emitter': 2, 'gtceu:luv_sensor': 2, 'gtceu:luv_machine_hull': 1 });
-  assert.deepEqual(tally(controllers[1]), { '#gtceu:circuits/luv': 4, 'gtceu:luv_field_generator': 1, 'gtceu:luv_emitter': 2, 'gtceu:luv_machine_hull': 1 });
+  const inputs = (r) => call(r, 'itemInputs').flat();
+  assert.deepEqual(inputs(controllers[0]), ['gtceu:luv_machine_hull', '2x gtceu:luv_emitter', '2x gtceu:luv_sensor', '4x #gtceu:circuits/luv',
+    '2x grindless:jupiter_entry_probe', '2x grindless:hermean_thin_film_panel']);
+  assert.deepEqual(inputs(controllers[1]), ['gtceu:luv_machine_hull', 'gtceu:luv_field_generator', '2x gtceu:luv_emitter', '4x #gtceu:circuits/luv',
+    '2x grindless:saturn_flyby_probe', '2x grindless:tungsten_steel_drill_bit']);
   controllers.forEach((r, i) => {
-    assert.equal(r.args[0], 'gtceu:' + names[i]);
-    assert.equal(only(r, 'id'), 'grindless:crafting/' + names[i]);
-  });
-});
+    assert.equal(r.args[0], 'grindless:' + names[i]);
+    assert.deepEqual(call(r, 'itemOutputs').flat(), ['gtceu:' + names[i]]);
+    assert.deepEqual(call(r, 'inputFluids').flat().map((x) => [x.id, x.amount]), [['gtceu:soldering_alloy', 576], ['gtceu:lubricant', 500]]);
+    assert.deepEqual([only(r, 'EUt'), only(r, 'duration')], [30720, 600]);
+  });});
 
 test('B9 the catalogue, the launches and the probes: Ganymede only, own circuits, the Sagittarius A* signal kept', () => {
   const { G, recipes } = harness();
@@ -189,9 +188,10 @@ test('B9 the catalogue, the launches and the probes: Ganymede only, own circuits
     assert.deepEqual(call(r, 'dimension').flat(), [ganymede]);
   });
 
-  const probes = recipes.filter((r) => r.type === 'assembler');
+  const probes = recipes.filter((r) => r.type === 'assembly_line' && /_probe$/.test(r.args[0]));
   assert.deepEqual(probes.map((r) => only(r, 'itemOutputs')), ['grindless:jupiter_entry_probe', 'grindless:saturn_flyby_probe']);
-  assert.deepEqual(call(probes[0], 'itemInputs')[0], ['4x gcyr:heat_shielding_fabric', 'gtceu:luv_sensor', 'gtceu:hv_lithium_battery', '4x gtceu:titanium_plate']);
+  assert.deepEqual(call(probes[0], 'itemInputs')[0], ['4x gcyr:heat_shielding_fabric', 'gtceu:luv_sensor', 'gtceu:hv_lithium_battery', '4x gtceu:titanium_plate',
+    '2x grindless:hermean_heat_shield_brick', '2x grindless:platinum_gauze']);
   assert.deepEqual(call(probes[1], 'itemInputs')[0], ['2x grindless:rtg_pellet', 'gtceu:luv_sensor', 'gtceu:luv_emitter', '4x gtceu:titanium_plate']);
   for (const r of probes) assert.equal(call(r, 'dimension').length, 0);
 
@@ -269,14 +269,15 @@ test('B9 every existing id matches the pinned native registry', () => {
     'gtceu:hv_lithium_battery', 'gtceu:titanium_plate', 'grindless:rtg_pellet', 'grindless:sagittarius_a_star_signal',
   ]);
   const a1 = script('startup_scripts', 'luv/foundation.js');
+  // the assembly line parts are IV's registrations (iv/foundation.js, iv/tungsten_steel_drill_bit.js)
+  const iv = script('startup_scripts', 'iv/foundation.js') + script('startup_scripts', 'iv/tungsten_steel_drill_bit.js');
   const known = (id) => nativeItems.has(id) || id.startsWith('#gtceu:circuits/') ||
-    (id.startsWith('grindless:') && a1.includes(id.split(':')[1] + ':'));
-  const check = (text) => { const id = text.replace(/^\d+x /, ''); assert.ok(known(id), 'not a pinned id: ' + id); };
+    (id.startsWith('grindless:') && (a1.includes(id.split(':')[1] + ':') || iv.includes(id)));
+  const check = (text) => { const id = text.replace(/^\d+x /, ''); if (names.includes(id.replace('gtceu:', ''))) return; assert.ok(known(id), 'not a pinned id: ' + id); };
   const { G, recipes } = harness();
   for (const r of recipes) {
     for (const m of ['itemInputs', 'itemOutputs', 'notConsumable']) call(r, m).flat().forEach(check);
-    for (const f of call(r, 'inputFluids').flat()) assert.equal(f.id, 'gtceu:liquid_helium');
-    if (r.type === 'shaped') Object.values(r.args[2]).forEach(check);
+    for (const f of call(r, 'inputFluids').flat()) assert.ok(['gtceu:liquid_helium', 'gtceu:soldering_alloy', 'gtceu:lubricant'].includes(f.id), f.id);
     if (r.type === 'shapeless') [r.args[0], ...r.args[1]].forEach(check);
   }
   const symbol = (s) => { (s.options || []).forEach(symbol); (s.blocks || []).forEach(check); };

@@ -7,7 +7,7 @@
 //   world generation   GTCEuServerEvents.oreVeins: the veins of data/grindless/tables/veins_belt.json on the belt's surface, in GTM's
 //                      layer 'asteroid_belt' (tuff). Only chunks generated from now on.
 //   vein samples       crafting: the empty vein probe + the two most common raw ores of the vein (a pair no other vein of the pack uses),
-//                      brought back by hand on the first visit. grindless:crafting/vein_sample/<vein>.
+//                      brought back by hand on the first visit. grindless:assembler/vein_sample/<vein>.
 //   drilling           gtceu:vein_drilling, vein_drilling/luv/harpoon_<vein>_hss_s, one per vein: the sample (never used up), the HSS-S
 //                      bit at 0.25 % a run and an anchor harpoon at 1 %, the belt only, 8 EU/t x 200 t like every drilling recipe; a tuff
 //                      and 11.25 raw ores a run (twice IV's 5.625), split by the vein's weights (the family's maths). The sample is the
@@ -125,8 +125,12 @@
   function addSamples(event) {
     var made = []
     beltVeins().forEach(function (vein) {
-      var id = 'grindless:crafting/vein_sample/' + vein.id
-      event.shapeless(vein.sample, [PROBE, vein.samplePair[0], vein.samplePair[1]]).id(id)
+      var id = 'grindless:assembler/vein_sample/' + vein.id
+      event.recipes.gtceu.assembler('grindless:vein_sample/' + vein.id)
+        .itemInputs(PROBE, vein.samplePair[0], vein.samplePair[1], 'grindless:stainless_steel_drill_bit', 'grindless:sintered_regolith')
+        .inputFluids(Fluid.of('gtceu:distilled_water', 250), Fluid.of('gtceu:lubricant', 100))
+        .itemOutputs(vein.sample)
+        .EUt(1920).duration(200)
       made.push(id)
     })
     return made
@@ -175,19 +179,22 @@
       .itemInputs(R.bit.rod)
       .itemOutputs(B.drill.bit.item)
       .EUt(R.bit.eut).duration(R.bit.duration)
-    event.recipes.gtceu.assembler('grindless:anchor_harpoon')
-      .itemInputs(R.harpoon.rods + 'x gtceu:hsss_rod', '1x ' + R.harpoon.tip)
+    event.recipes.gtceu.assembly_line('grindless:anchor_harpoon')
+      .itemInputs(R.harpoon.rods + 'x gtceu:hsss_rod', '1x ' + R.harpoon.tip, '2x grindless:tungsten_steel_drill_bit', '2x grindless:zircaloy_cladding_tube')
+      .inputFluids(Fluid.of('gtceu:soldering_alloy', 144), Fluid.of('gtceu:lubricant', 250))
       .itemOutputs(R.harpoon.out + 'x ' + B.drill.harpoon.item)
       .EUt(R.harpoon.eut).duration(R.harpoon.duration)
-    event.recipes.gtceu.assembler('grindless:capture_bag')
-      .itemInputs(R.bag.foils + 'x gcyr:para_aramid_foil', R.bag.plates + 'x gcyr:kapton_k_plate', R.bag.rods + 'x gtceu:titanium_rod')
+    event.recipes.gtceu.assembly_line('grindless:capture_bag')
+      .itemInputs(R.bag.foils + 'x gcyr:para_aramid_foil', R.bag.plates + 'x gcyr:kapton_k_plate', R.bag.rods + 'x gtceu:titanium_rod',
+        '2x grindless:hermean_heat_shield_brick', '2x grindless:platinum_gauze')
+      .inputFluids(Fluid.of('gtceu:soldering_alloy', 144), Fluid.of('gtceu:lubricant', 250))
       .itemOutputs('1x ' + R.boulder.bag)
       .EUt(R.bag.eut).duration(R.bag.duration)
     belt(event.recipes.gtceu.alloy_smelter('grindless:asteroid_regolith_casing')
       .itemInputs(R.casing.count + 'x ' + R.casing.stone, '1x ' + R.casing.binder)
       .itemOutputs(R.casing.out + 'x grindless:asteroid_regolith_casing'))
       .EUt(R.casing.eut).duration(R.casing.duration)
-    return ['grindless:lathe/hss_s_drill_bit', 'grindless:assembler/anchor_harpoon', 'grindless:assembler/capture_bag',
+    return ['grindless:lathe/hss_s_drill_bit', 'grindless:assembly_line/anchor_harpoon', 'grindless:assembly_line/capture_bag',
       'grindless:alloy_smelter/asteroid_regolith_casing']
   }
 
@@ -215,18 +222,23 @@
   }
 
   function addControllers(event) {
-    event.recipes.gtceu.shaped(B.drill.machine, ['CMC', 'PHP', 'C C'], {
-      C: '#gtceu:circuits/luv', M: 'gtceu:luv_electric_motor', P: 'gtceu:luv_electric_piston', H: 'gtceu:luv_machine_hull'
-    }).id('grindless:crafting/harpoon_anchor_drill')
-    event.recipes.gtceu.shaped(B.processor.machine, ['CRC', 'PHP', 'C C'], {
-      C: '#gtceu:circuits/luv', R: 'gtceu:luv_robot_arm', P: 'gtceu:luv_electric_pump', H: 'gtceu:luv_machine_hull'
-    }).id('grindless:crafting/asteroid_processor')
-    event.recipes.gtceu.shaped(B.miner.machine, ['CUC', 'SHS', 'C C'], {
-      C: '#gtceu:circuits/luv', U: 'gtceu:luv_electric_pump', S: 'gtceu:luv_sensor', H: 'gtceu:luv_machine_hull'
-    }).id('grindless:crafting/optical_miner')
-    return ['grindless:crafting/harpoon_anchor_drill', 'grindless:crafting/asteroid_processor', 'grindless:crafting/optical_miner']
+    var LINE = [Fluid.of('gtceu:soldering_alloy', 576), Fluid.of('gtceu:lubricant', 500)]
+    function line(name, machine, items) {
+      var b = event.recipes.gtceu.assembly_line('grindless:' + name)
+      items.forEach(function (s) { b.itemInputs(s) })
+      LINE.forEach(function (f) { b.inputFluids(f) })
+      b.itemOutputs(machine).EUt(30720).duration(600)
+      return 'grindless:assembly_line/' + name
+    }
+    return [
+      line('harpoon_anchor_drill', B.drill.machine, ['gtceu:luv_machine_hull', 'gtceu:luv_electric_motor', 'gtceu:luv_electric_piston',
+        '4x #gtceu:circuits/luv', '4x ' + B.drill.harpoon.item, '2x grindless:magnetic_bearing']),
+      line('asteroid_processor', B.processor.machine, ['gtceu:luv_machine_hull', 'gtceu:luv_robot_arm', 'gtceu:luv_electric_pump',
+        '4x #gtceu:circuits/luv', '2x ' + B.recipes.boulder.bag, '2x grindless:magnetic_bearing']),
+      line('optical_miner', B.miner.machine, ['gtceu:luv_machine_hull', '2x gtceu:luv_sensor', 'gtceu:luv_electric_pump',
+        '4x #gtceu:circuits/luv', '2x ' + B.drill.bit.item, '2x ' + B.recipes.boulder.bag])
+    ]
   }
-
   // one thrown error would stop the recipe handlers of every script that loads after this one
   ServerEvents.recipes(function (event) {
     var made = []

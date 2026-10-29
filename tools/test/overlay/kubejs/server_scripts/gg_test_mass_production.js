@@ -11,7 +11,7 @@
 //   helper                 global.grindless.parallelHatch is published (part, modifier) and GTM registers gtceu:iv_parallel_hatch
 //   plants_take_the_hatch  the hot cell, the fuel fabrication plant and the heavy-water plant: their part-cell symbol has the parallel
 //                          hatch option (at most one) and nothing else changed: same size, same number of part cells and of cells
-//   parallel_hatch_recipe  grindless:crafting/iv_parallel_hatch: IV sensor, emitter, hull, double platinum cables and 4 IV circuits; GTM's
+//   parallel_hatch_recipe  grindless:assembler/iv_parallel_hatch: IV sensor, emitter, hull, double platinum cables and 4 IV circuits; GTM's
 //                          LuV-circuit recipe is gone and nothing else (crafting, assembler, assembly line) makes the hatch
 //   gcym_iv                every GCYM controller's recipes take a circuit of IV or higher and none below; the large packer and the alloy
 //                          blast smelter are ours (IV circuits and the IV machine) and GTM's EV ones are gone
@@ -404,7 +404,7 @@
     'large_electromagnet', 'alloy_blast_smelter', 'mega_blast_furnace', 'mega_vacuum_freezer', 'large_autoclave', 'large_material_press',
     'large_brewer', 'large_cutter', 'large_distillery', 'large_extractor', 'large_extruder', 'large_solidifier', 'large_wiremill']
     .map(function (n) { return 'gtceu:' + n })
-  var MOVED = { 'gtceu:large_packer': 'grindless:crafting/large_packer', 'gtceu:alloy_blast_smelter': 'grindless:crafting/alloy_blast_smelter' }
+  var MOVED = { 'gtceu:large_packer': 'grindless:assembler/large_packer', 'gtceu:alloy_blast_smelter': 'grindless:assembler/alloy_blast_smelter' }
   var MEGAS = ['gtca:mega_lcr', 'gtca:mega_oil_cracking_unit', 'gtnn:maceration_stack_controller']
   var QUANTUM = ['gtceu:iv_quantum_chest', 'gtceu:iv_quantum_tank']
 

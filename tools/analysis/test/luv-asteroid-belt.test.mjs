@@ -146,7 +146,7 @@ test('B5 patterns validate through the real helper, at most 16 high, with their 
 });
 
 test('B5 drill: one harpoon recipe per belt vein, sample first, bit and harpoon wear, 11.25 ores, the belt only', () => {
-  const { recipes, G, shapeless } = harness();
+  const { recipes, G } = harness();
   const drills = recipes.filter((r) => r.type === 'vein_drilling');
   assert.deepEqual(drills.map((r) => r.args[0]), ['grindless:luv/harpoon_m_type_belt_hss_s', 'grindless:luv/harpoon_s_type_belt_hss_s',
     'grindless:luv/harpoon_c_type_belt_hss_s']);
@@ -167,8 +167,10 @@ test('B5 drill: one harpoon recipe per belt vein, sample first, bit and harpoon 
     '1x gtceu:raw_pentlandite']);
   // the family's lookup rule: no other belt sample, and the vein drilling type takes three item inputs
   assert.deepEqual([...G._widened], ['in', 'item', 3]);
-  assert.equal(shapeless.length, 3);
-  assert.deepEqual([...shapeless[0].ins], ['grindless:empty_vein_probe', '#forge:raw_materials/meteoric_iron', '#forge:raw_materials/tetrataenite']);
+  const samples = recipes.filter((r) => r.type === 'assembler' && r.args[0].startsWith('grindless:vein_sample/'));
+  assert.equal(samples.length, 3);
+  assert.deepEqual([...call(samples[0], 'itemInputs')[0]], ['grindless:empty_vein_probe', '#forge:raw_materials/meteoric_iron', '#forge:raw_materials/tetrataenite', 'grindless:stainless_steel_drill_bit', 'grindless:sintered_regolith']);
+  assert.deepEqual(call(samples[0], 'inputFluids')[0].map((f) => ({ ...f })), [{ id: 'gtceu:distilled_water', amount: 250 }, { id: 'gtceu:lubricant', amount: 100 }]);
 });
 
 test('B5 drill veto: only grindless vein_drilling/luv/harpoon_*; every lower drill already skips the luv folder', () => {
@@ -254,9 +256,10 @@ test('B5 optical miner: the boulder needs the sun at run start, Boudouard does n
 test('B5 parts, the belt-only casing and seed, the AE2 pair and the controllers', () => {
   const { recipes, customs } = harness();
   assert.equal(only(byId(recipes, 'lathe', 'grindless:hss_s_drill_bit'), 'itemInputs'), 'gtceu:long_hsss_rod');
-  assert.deepEqual(call(byId(recipes, 'assembler', 'grindless:anchor_harpoon'), 'itemInputs')[0], ['2x gtceu:hsss_rod', '1x gtceu:tungsten_carbide_plate']);
-  assert.deepEqual(call(byId(recipes, 'assembler', 'grindless:capture_bag'), 'itemInputs')[0],
-    ['8x gcyr:para_aramid_foil', '4x gcyr:kapton_k_plate', '2x gtceu:titanium_rod']);
+  assert.deepEqual(  call(byId(recipes, 'assembly_line', 'grindless:anchor_harpoon'), 'itemInputs')[0],
+      ['2x gtceu:hsss_rod', '1x gtceu:tungsten_carbide_plate', '2x grindless:tungsten_steel_drill_bit', '2x grindless:zircaloy_cladding_tube']);
+    assert.deepEqual(call(byId(recipes, 'assembly_line', 'grindless:capture_bag'), 'itemInputs')[0],
+      ['8x gcyr:para_aramid_foil', '4x gcyr:kapton_k_plate', '2x gtceu:titanium_rod', '2x grindless:hermean_heat_shield_brick', '2x grindless:platinum_gauze']);
   const casing = byId(recipes, 'alloy_smelter', 'grindless:asteroid_regolith_casing');
   assert.deepEqual(call(casing, 'itemInputs')[0], ['4x minecraft:tuff', '1x gtceu:titanium_dust']);
   assert.deepEqual(call(casing, 'dimension').flat(), ['grindless:asteroid_belt']);
@@ -268,14 +271,16 @@ test('B5 parts, the belt-only casing and seed, the AE2 pair and the controllers'
   assert.equal(customs.length, 1);
   assert.equal(customs[0].json.result.nbt.grindless_planet, 'belt');
   assert.equal(only(customs[0], 'id'), 'grindless:transform/asteroid_entangled_singularity');
-  const controllers = recipes.filter((r) => r.type === 'shaped');
-  assert.deepEqual(controllers.map((r) => r.args[0]), MACHINES.map((n) => 'gtceu:' + n));
-  for (const r of controllers) {
-    const [, pattern, keys] = r.args;
-    assert.equal(pattern.join('').split('C').length - 1, 4);
-    assert.equal(keys.C, '#gtceu:circuits/luv');
-    assert.equal(keys.H, 'gtceu:luv_machine_hull');
-  }
+  const controllers = recipes.filter((r) => r.type === 'assembly_line' && MACHINES.includes(r.args[0].replace('grindless:', '')));
+  assert.deepEqual(controllers.map((r) => r.args[0]), MACHINES.map((n) => 'grindless:' + n));
+  controllers.forEach((r, i) => {
+    assert.deepEqual(call(r, 'itemOutputs').flat(), ['gtceu:' + MACHINES[i]]);
+    const items = call(r, 'itemInputs').flat();
+    assert.equal(items[0], 'gtceu:luv_machine_hull');
+    assert.ok(items.includes('4x #gtceu:circuits/luv'));
+    assert.deepEqual(call(r, 'inputFluids').flat().map((x) => [x.id, x.amount]), [['gtceu:soldering_alloy', 576], ['gtceu:lubricant', 500]]);
+    assert.deepEqual([only(r, 'EUt'), only(r, 'duration')], [30720, 600]);
+  });
 });
 
 test('B5 dimension ids live in one table: places.json for the surface, planets.json agrees with places and orbits', () => {
@@ -374,11 +379,12 @@ test('B5 ids that are not ours match the pinned native registry (power-quests-1 
     'gtceu:robust_machine_casing', 'gtceu:frostproof_machine_casing', 'grindless:empty_vein_probe', 'ae2:singularity',
     'ae2:quantum_entangled_singularity',
   ]);
-  const nativeFluids = new Set(['minecraft:water', 'gtceu:carbon_dioxide', 'gtceu:carbon_monoxide', 'gtceu:helium_3']);
+  const nativeFluids = new Set(['minecraft:water', 'gtceu:carbon_dioxide', 'gtceu:carbon_monoxide', 'gtceu:helium_3',
+    'gtceu:distilled_water', 'gtceu:soldering_alloy', 'gtceu:lubricant']);
   const ours = /^(grindless:|gtceu:(raw_|crushed_|tuff_)?(meteoric_iron|tetrataenite)|gtceu:(meteoric_iron|tetrataenite)_dust)/;
   const checkItem = (text) => {
     const id = String(text).replace(/^\d+x /, '');
-    if (id.startsWith('#') || ours.test(id)) return;
+    if (id.startsWith('#') || ours.test(id) || MACHINES.includes(id.replace('gtceu:', ''))) return;
     assert.ok(nativeItems.has(id), `not a pinned native item: ${id}`);
   };
   const { G, recipes, customs, shapeless } = harness();
@@ -389,7 +395,6 @@ test('B5 ids that are not ours match the pinned native registry (power-quests-1 
     for (const method of ['inputFluids', 'outputFluids', 'notConsumableFluid']) {
       for (const fluid of call(r, method).flat()) assert.ok(nativeFluids.has(fluid.id), fluid.id);
     }
-    if (r.type === 'shaped') for (const ingredient of Object.values(r.args[2])) checkItem(ingredient);
   }
   for (const c of customs) for (const i of c.json.ingredients) checkItem(i.item);
   for (const s of shapeless) s.ins.forEach(checkItem);

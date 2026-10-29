@@ -13,8 +13,8 @@
 //                        The figures are final (iv.md): this type is NOT in power/generators.js's list of doubled generator types, and
 //                        that script only rebuilds datapack recipes (event.forEachRecipe never sees the ones scripts add), so nothing here
 //                        is doubled. The smoke test checks the live duration.
-//   crafting             the controller (GTM shaped recipe, iv.md "Built with"): IV hull + IV field generator + 2 IV electric pumps
-//                        + 4 IV circuits, grindless:crafting/fission_reactor.
+//   crafting             the controller (iv.md "Built with"), made in the assembler: IV hull + IV field generator + 2 IV electric pumps
+//                        + 4 IV circuits + 8 sintered regolith + 2 night-sky radiators + soldering alloy and water, grindless:assembler/fission_reactor.
 //
 // Destinations of the byproducts: the spent LEU and MOX assemblies and the spent breeder assembly go to the hot cell (reprocessing, IV-A3);
 // the tritiated heavy water to the tritium removal facility on the Moon (IV-B4), which returns the heavy water; the cooling water is gone
@@ -31,7 +31,7 @@
 
   var CONTROLLER = 'gtceu:fission_reactor'
   var CONTROLLER_PARTS = [CONTROLLER, 'gtceu:iv_machine_hull', 'gtceu:iv_field_generator', 'gtceu:iv_electric_pump']
-  FR.craftingRecipe = 'grindless:crafting/fission_reactor'
+  FR.craftingRecipe = 'grindless:assembler/fission_reactor'
   FR.craftingParts = CONTROLLER_PARTS
 
   function missingOf(core) {
@@ -89,13 +89,13 @@
       console.error(LOG + 'fission reactor controller recipe skipped, unknown item(s): ' + missing.join(', '))
       return
     }
-    // GTM shaped: lowercase letters are tool symbols, so ingredient keys are uppercase
-    event.recipes.gtceu.shaped(CONTROLLER, ['CFC', 'PHP', 'C C'], {
-      C: '#gtceu:circuits/iv',
-      F: 'gtceu:iv_field_generator',
-      P: 'gtceu:iv_electric_pump',
-      H: 'gtceu:iv_machine_hull'
-    }).id(FR.craftingRecipe)
+    // the vessel is lined with sintered regolith (shielding) and cooled by night-sky radiators; the field generator is soldered in
+    event.recipes.gtceu.assembler('grindless:fission_reactor')
+      .itemInputs('gtceu:iv_machine_hull', 'gtceu:iv_field_generator', '2x gtceu:iv_electric_pump', '4x #gtceu:circuits/iv',
+        '8x grindless:sintered_regolith', '2x grindless:night_sky_radiator')
+      .inputFluids(Fluid.of('gtceu:soldering_alloy', 288), Fluid.of('minecraft:water', 4000))
+      .itemOutputs(CONTROLLER)
+      .EUt(1920).duration(600)
   }
 
   // an uncaught error here would stop KubeJS from running the recipe handlers of the scripts that load after this one

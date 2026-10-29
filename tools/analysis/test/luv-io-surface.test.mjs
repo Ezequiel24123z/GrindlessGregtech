@@ -1,4 +1,4 @@
-// LuV B6, Io's surface: the fumarole condenser and the volcanic intake (startup_scripts/grindless/luv/io_surface.js and
+﻿// LuV B6, Io's surface: the fumarole condenser and the volcanic intake (startup_scripts/grindless/luv/io_surface.js and
 // server_scripts/grindless/luv/io_surface.js). Pins every id against a native registry snapshot (fixtures/luv-b6-registry-ids.json)
 // and A1's registrations, Io's id to the places table, the patterns' shape and radiation vault rule, the module count of the intake in
 // all four facings, the recipes' lookup keys and the generator contract (no regress, no fuel doubling, a fresh start every run).
@@ -27,8 +27,9 @@ function a1() {
 }
 const A1 = a1();
 const OURS = new Set(['gtceu:fumarole_condenser', 'gtceu:volcanic_intake']);
-const ITEMS = new Set([...IDS.items, ...A1.items, ...A1.blocks, A1.ids.denseTitaniumPlate, ...OURS]);
-const FLUIDS = new Set(IDS.fluids);
+const ITEMS = new Set([...IDS.items, ...A1.items, ...A1.blocks, A1.ids.denseTitaniumPlate, ...OURS,
+  'grindless:platinum_gauze', 'grindless:zircaloy_cladding_tube']); // IV's assembly line parts
+const FLUIDS = new Set([...IDS.fluids, 'gtceu:soldering_alloy', 'gtceu:lubricant']);
 
 const REMOVED = [];
 function run() {
@@ -79,7 +80,6 @@ test('every id is in the native registry snapshot or registered by A1/B6', () =>
     for (const m of ['itemInputs', 'itemOutputs', 'chancedInput']) for (const args of calls(r, m)) {
       (m === 'chancedInput' ? [args[0]] : args.flat()).forEach((s) => { const id = stackId(s); if (!id.startsWith('#')) used.add(id); });
     }
-    if (r.type === 'gtceu:shaped') used.add(r.id);
     for (const m of ['inputFluids', 'outputFluids', 'notConsumableFluid']) for (const args of calls(r, m)) {
       args.forEach((f) => assert.ok(FLUIDS.has(f.fluid), `${r.id}: fluid ${f.fluid}`));
     }
@@ -96,10 +96,10 @@ test('every id is in the native registry snapshot or registered by A1/B6', () =>
   }
 });
 
-test('shaped controller recipes use real parts', () => {
+test('assembly line controller recipes use real parts', () => {
   const src = read(SERVER);
   for (const id of ['gtceu:luv_electric_pump', 'gtceu:luv_electric_motor', 'gtceu:luv_machine_hull']) {
-    assert.match(src, new RegExp(`'${id}'`));
+    assert.match(src, new RegExp(`'(\\d+x )?${id}'`));
     assert.ok(ITEMS.has(id), id);
   }
 });
@@ -248,7 +248,18 @@ test('recipes: one lookup path each; the intake pays 32,768 EU/t per module from
   assert.equal(32768 * IO.intake.maxModules, 131072);
   assert.equal(Math.round(10000 / (3600 * 20 / 400)), 56);
   const vault = RUN.built.find((r) => r.id === 'grindless:luv/radiation_vault_casing');
-  assert.deepEqual(one(vault, 'itemInputs'), ['2x gtceu:dense_titanium_plate', '2x gtceu:tantalum_plate', 'gtceu:hsss_frame']);
+  assert.deepEqual(one(vault, 'itemInputs'), ['2x gtceu:dense_titanium_plate', '2x gtceu:tantalum_plate', 'gtceu:hsss_frame', '1x grindless:zircaloy_cladding_tube']);
+  assert.deepEqual(one(vault, 'inputFluids'), [{ fluid: 'gtceu:soldering_alloy', amount: 144 }, { fluid: 'gtceu:lubricant', amount: 250 }]);
+  const bundle = RUN.built.find((r) => r.id === 'grindless:luv/heat_exchanger_bundle');
+  assert.equal(bundle.type, 'gtceu:assembly_line');
+  assert.deepEqual(one(bundle, 'itemInputs').slice(-3), ['4x gtceu:tungsten_steel_small_fluid_pipe', '2x grindless:platinum_gauze', '2x grindless:zircaloy_cladding_tube']);
+  for (const [id, out] of [['grindless:fumarole_condenser', 'gtceu:fumarole_condenser'], ['grindless:volcanic_intake', 'gtceu:volcanic_intake']]) {
+    const line = RUN.built.find((r) => r.id === id);
+    assert.equal(line.type, 'gtceu:assembly_line', id);
+    assert.deepEqual(one(line, 'itemOutputs'), [out]);
+    assert.deepEqual(one(line, 'inputFluids'), [{ fluid: 'gtceu:soldering_alloy', amount: 576 }, { fluid: 'gtceu:lubricant', amount: 500 }]);
+    assert.deepEqual([one(line, 'EUt'), one(line, 'duration')], [[30720], [600]]);
+  }
 });
 
 test('germanium only from Io: the germanite electrolysis keeps everything but its germanium', () => {

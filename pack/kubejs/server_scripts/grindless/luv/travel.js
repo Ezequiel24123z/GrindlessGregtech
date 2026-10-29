@@ -38,7 +38,8 @@
       builderId: 'grindless:station_truss_casing',
       id: 'grindless:assembler/station_truss_casing',
       itemsIn: [{ id: '#forge:frames/titanium', n: 1, sample: 'gtceu:titanium_frame' },
-        { id: '#forge:plates/aluminium', n: 4, sample: 'gtceu:aluminium_plate' }],
+        { id: '#forge:plates/aluminium', n: 4, sample: 'gtceu:aluminium_plate' }, { id: 'grindless:zircaloy_cladding_tube', n: 1 }],
+      fluid: { id: 'gtceu:soldering_alloy', mb: 72 },
       out: 'grindless:station_truss_casing',
       count: 2,
       eut: 1920,
@@ -99,7 +100,8 @@
     }
     var recipe = event.recipes.gtceu.assembler(R.builderId)
     R.itemsIn.forEach(function (e) { recipe.itemInputs(e.n + 'x ' + e.id) })
-    recipe.itemOutputs(R.count + 'x ' + R.out)
+    recipe.inputFluids(Fluid.of(R.fluid.id, R.fluid.mb))
+      .itemOutputs(R.count + 'x ' + R.out)
       .EUt(R.eut)
       .duration(R.duration)
     return R.id

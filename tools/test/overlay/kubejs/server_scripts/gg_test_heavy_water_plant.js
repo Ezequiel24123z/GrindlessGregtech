@@ -21,7 +21,7 @@
 //   stages_live         the stage rates of the table against GTM's live recipes: snow block extraction 512 EU per 1 000 mB, distill_water_large
 //                       19 200 EU per 576 mB; hydrogen_separation is absent (EV removed it; its 3 200 EU per 40 mB is GTM 7.5.3's source)
 //   lookup_safety       neither recipe takes a subset of the other's ingredients (static; gg_test_recipe_lookup asks GTM's lookup)
-//   controller_recipe   grindless:crafting/heavy_water_plant exists and holds its parts
+//   controller_recipe   grindless:assembler/heavy_water_plant exists and holds its parts
 //   yield               NOTE: ice, steam and EU per mB of heavy water from the live recipes, next to the fission reactor's heavy-water need
 //   <copy>_PLACED / _FORMED / _PARTS   the two copies below
 //   charge_line_low     copy base: the controller line reads the H2S charge as missing (0 of 1 000 mB)

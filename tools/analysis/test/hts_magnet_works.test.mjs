@@ -199,7 +199,18 @@ function sandboxRun({ missing = [] } = {}) {
   for (const fn of handlers.recipes) {
     fn({ recipes: { gtceu: {
       magnet_winding: (id) => rec.builder('magnet_winding', id),
-      shaped: (out, pattern, key) => { const r = { out, pattern, key }; shaped.push(r); return { id: (x) => { r.id = x; } }; },
+      assembly_line: (id) => {
+        const r = { id, items: [], fluids: [], out: [] };
+        const b = {
+          itemInputs: (...a) => { r.items.push(...a); return b; },
+          inputFluids: (...a) => { r.fluids.push(...a); return b; },
+          itemOutputs: (...a) => { r.out.push(...a); return b; },
+          EUt: (v) => { r.eut = v; return b; },
+          duration: (v) => { r.duration = v; return b; },
+        };
+        shaped.push(r);
+        return b;
+      },
     } } });
   }
   return { G: sandbox.grindless, errors, infos, machineLog, recipes: rec.calls, shaped };
@@ -257,9 +268,12 @@ test('magnet works recipes: GTM recipes with the circuit, the helium not consume
   const keys = TABLE.recipes.map((r) => new Set([...r.itemsIn.map((x) => 'i:' + x.id), ...r.fluidsIn.map((x) => 'f:' + x.id), 'f:gtceu:liquid_helium', 'c:' + r.circuit]));
   keys.forEach((a, i) => keys.forEach((b, j) => { if (i !== j) assert.ok(![...a].every((k) => b.has(k)), TABLE.recipes[i].name + ' within ' + TABLE.recipes[j].name); }));
   assert.equal(shaped.length, 1);
-  assert.equal(shaped[0].out, 'gtceu:hts_magnet_works');
-  assert.equal(shaped[0].id, 'grindless:crafting/hts_magnet_works');
-  assert.deepEqual(Object.values(shaped[0].key).sort(), ['#gtceu:circuits/luv', 'gtceu:luv_electric_motor', 'gtceu:luv_machine_hull', 'gtceu:luv_sensor']);
+  assert.deepEqual(shaped[0].out, ['gtceu:hts_magnet_works']);
+  assert.equal(shaped[0].id, 'grindless:hts_magnet_works', 'GTM puts the type in front: grindless:assembly_line/hts_magnet_works');
+  assert.deepEqual(shaped[0].items, ['gtceu:luv_machine_hull', 'gtceu:luv_sensor', '2x gtceu:luv_electric_motor', '4x #gtceu:circuits/luv',
+    '2x grindless:platinum_electrode', '2x grindless:sintered_regolith']);
+  assert.deepEqual(plain(shaped[0].fluids), [{ id: 'gtceu:soldering_alloy', amount: 576 }, { id: 'gtceu:lubricant', amount: 500 }]);
+  assert.deepEqual([shaped[0].eut, shaped[0].duration], [30720, 600]);
 });
 
 test('magnet works recipes: an id the game lacks skips only its recipe, loudly (A1\'s items before they merge)', () => {
