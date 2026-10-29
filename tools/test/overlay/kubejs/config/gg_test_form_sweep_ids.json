@@ -243,6 +243,7 @@
    "gtceu:millikelvin_cryostat_works",
    "gtceu:neutron_drip_separator",
    "gtceu:neutronium_cage",
+   "gtceu:neutronium_compression_hall",
    "gtceu:penrose_engine",
    "gtceu:polarised_proton_source",
    "gtceu:positronium_condensate_lab",
