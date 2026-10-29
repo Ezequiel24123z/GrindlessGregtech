@@ -72,7 +72,7 @@
     lang: 'Calutron',
     // items in: the feed and the circuit; items out: the isotope, the depleted stream, a second tail
     maxIO: { itemsIn: 2, itemsOut: 3, fluidsIn: 0, fluidsOut: 0 },
-    width: 7, depth: 13, height: 5
+    width: 11, depth: 17, height: 7
   }
 
   // The racetrack: a stadium yoke 11 x 7 x 17 of coil, stable casing and a glass-and-pipe vacuum course round an open hall, with magnet

@@ -8,7 +8,7 @@
 //                          recipe; each carries the data key of the type = <name> (its EMI line).
 //   gtceu:chemical_reactor / mixer / assembler   the rows of types.<type> (id grindless:<type>/<name>): the chlorinations, oxidations,
 //                          MOX blend and targets round the calutron. Circuits 20 and up so GTM's own recipes cannot hide a row.
-//   crafting               the controller: UHV hull + 2 UV field generators + UV sensor + 4 UHV circuits, grindless:crafting/calutron.
+//   assembly line          the controller(s): station research, UEV-era circuits, 3 domain parts of the line, soldering alloy and lubricant, grindless:assembly_line/<machine>.
 //
 // The older rows of the package are read elsewhere: HFIR and facility rows by uhv/transcurium.js (isotopes_facility.json), the
 // depleted-plutonium MOX by iv/uranium_cycle.js (isotopes_fabrication.json), three partitioning rows in zpm/actinides.js.
