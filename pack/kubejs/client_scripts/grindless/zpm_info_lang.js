@@ -1,3 +1,4 @@
+// priority: 1050
 // Gregtech Grindless - EMI information pages of the ZPM era multiblocks (kubejs/assets/emi/recipe/additions/grindless/<id>.json, type emi:info).
 // One page per controller: what it does, what it is for, what it needs. Their recipes show in EMI under the controller itself.
 // Tooltips live in the zpm_*_lang.js files; every key is in en_us and es_es.
@@ -34,8 +35,8 @@ ClientEvents.lang('en_us', event => {
     add('emi.grindless.info.neutrino_observatory.0', "The Neutrino Observatory watches heavy water in a shielded vessel. Circuit 1: a data orb and heavy water give the Solar-Core Survey. Circuit 2: the same plus a Gravitational-Wave Catalogue give the Multi-Messenger Catalogue.")
     add('emi.grindless.info.neutrino_observatory.1', "The structure is a 15 x 15 x 15 shell of photomultiplier casing around a water shield. The UV energy hatch needs its survey. The catalogue is kept.")
 
-    add('emi.grindless.info.deep_space_network.0', "The Deep Space Network turns probe recordings into data. Circuit 1: a Neptune recording, a data orb and liquid helium give Neptune flyby data. Circuit 2: the same with a Triton recording. Circuit 3: both datasets and a Kuiper target list give the Pluto-Kuiper chart.")
-    add('emi.grindless.info.deep_space_network.1', "It needs a dish deck over a frostproof cryo-cabin. The recordings come from the Flyby Probe Bay and the target list from the Kuiper Survey Telescope.")
+    add('emi.grindless.info.deep_space_network.0', "The Deep Space Network turns probe recordings into data. Circuit 1: a Neptune recording, a data orb and liquid helium give Neptune flyby data. Circuit 2: the same with a Triton recording. Circuit 3: both datasets and a Kuiper target list give the Pluto-Kuiper chart. Circuit 4: a Titan probe recording, a data orb, a ZPM sensor and liquid helium give a lake sampler for the next Titan descent.")
+    add('emi.grindless.info.deep_space_network.1', "It needs a dish deck over a frostproof cryo-cabin. The Neptune and Triton recordings come from the Flyby Probe Bay, the Titan recording from the Entry Probe Bay's haze descent, and the target list from the Kuiper Survey Telescope.")
 
     add('emi.grindless.info.kuiper_survey_telescope.0', "The Kuiper Survey Telescope turns a data orb and a CVD diamond plate into a Kuiper target list. It works only in Earth orbit.")
     add('emi.grindless.info.kuiper_survey_telescope.1', "It needs a sapphire block as the secondary mirror in a tube of station truss casing. The list goes to the Deep Space Network.")
@@ -122,8 +123,8 @@ ClientEvents.lang('es_es', event => {
     add('emi.grindless.info.neutrino_observatory.0', "El observatorio de neutrinos vigila agua pesada en un recipiente blindado. Circuito 1: un orbe de datos y agua pesada dan el Sondeo del Núcleo Solar. Circuito 2: lo mismo más un Catálogo de Ondas Gravitacionales dan el Catálogo Multimensajero.")
     add('emi.grindless.info.neutrino_observatory.1', "La estructura es una cáscara de 15 x 15 x 15 de carcasa de fotomultiplicadores alrededor de un blindaje de agua. El hatch de energía UV necesita su sondeo. El catálogo se conserva.")
 
-    add('emi.grindless.info.deep_space_network.0', "La red de espacio profundo convierte grabaciones de sondas en datos. Circuito 1: una grabación de Neptuno, un orbe de datos y helio líquido dan datos del sobrevuelo de Neptuno. Circuito 2: igual con una grabación de Tritón. Circuito 3: ambos conjuntos y una lista de objetivos de Kuiper dan la carta Plutón-Kuiper.")
-    add('emi.grindless.info.deep_space_network.1', "Necesita una cubierta con antena sobre una cabina criogénica a prueba de escarcha. Las grabaciones salen de la bahía de sondas de sobrevuelo y la lista de objetivos, del telescopio de Kuiper.")
+    add('emi.grindless.info.deep_space_network.0', "La red de espacio profundo convierte grabaciones de sondas en datos. Circuito 1: una grabación de Neptuno, un orbe de datos y helio líquido dan datos del sobrevuelo de Neptuno. Circuito 2: igual con una grabación de Tritón. Circuito 3: ambos conjuntos y una lista de objetivos de Kuiper dan la carta Plutón-Kuiper. Circuito 4: una grabación de sonda de Titán, un orbe de datos, un sensor ZPM y helio líquido dan un muestreador de lagos para el siguiente descenso a Titán.")
+    add('emi.grindless.info.deep_space_network.1', "Necesita una cubierta con antena sobre una cabina criogénica a prueba de escarcha. Las grabaciones de Neptuno y Tritón salen de la bahía de sondas de sobrevuelo, la de Titán del descenso por la bruma de la bahía de sondas de entrada, y la lista de objetivos, del telescopio de Kuiper.")
 
     add('emi.grindless.info.kuiper_survey_telescope.0', "El telescopio de sondeo de Kuiper convierte un orbe de datos y una placa de diamante CVD en una lista de objetivos de Kuiper. Solo funciona en órbita terrestre.")
     add('emi.grindless.info.kuiper_survey_telescope.1', "Necesita un bloque de zafiro como espejo secundario dentro de un tubo de carcasa de cercha de estación. La lista va a la red de espacio profundo.")
