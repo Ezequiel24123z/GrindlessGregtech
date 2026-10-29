@@ -14,6 +14,7 @@ applyTo: "pack/pack.toml,pack/index.toml,pack/mods/**,pack/.gitattributes,tools/
 - Exception: `tools/test/overlay/kubejs/config/gg_test_emi_coverage_expect.json` (`node tools/analysis/emi-coverage.mjs --expect`). A package may regenerate it, because T0 fails while it is stale. On a merge conflict, the integrator takes either side and regenerates it.
 - Shared, hand-edited: `tools/analysis/tiers/*.json`, `tools/analysis/emi_coverage.json`, `pack/kubejs/assets/grindless/lang/*.json`, `client_scripts/grindless/emi_info_lang.js`. A package edits them only when its contract lists them.
 - A batch: merge packages in dependency order, regenerate, run T2, then update `docs/STATUS.md` (last accepted batch, next package). DECISIONS and CREDITS lines proposed in handoffs are appended here.
+- Before regenerating quests or tagging, run the gate and eras passes for every implemented tier on the batch dump (`node tools/analysis/reachability.mjs --tier <t> --dump <d>`, steam up to the implemented era). The obtain pass and `recipe-cycles.mjs` do not see per-era inversions or research deadlocks; a gate FAIL blocks the release.
 
 ## Versions
 - Before tagging `vX.Y.Z`, bump `version` in `pack/pack.toml` and run `tools/Update-PackIndex.ps1`. Only what has passed the tier's tests gets tagged.
