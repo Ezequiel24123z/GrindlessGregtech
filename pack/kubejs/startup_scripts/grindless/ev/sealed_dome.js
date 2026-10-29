@@ -26,7 +26,7 @@
 // Geometry (slices back -> front, rows bottom -> top; 7 wide, 5 high, 7 deep; the controller is in the front slice, row 1):
 //   row 0   floor: a ring of 24 `X` cells (sintered regolith or a part) around a 5x5 floor: 3x3 soil bed in a ring of 16 bricks
 //   row 1   the ring wall: 22 `X` cells, the controller and the lower half of the airlock door (front, right of the controller)
-//   row 2   the dome's wall: 23 tempered glass and the upper half of the door
+//   row 2   the dome's wall: 19 tempered glass, a titanium frame post on each corner and the upper half of the door
 //   row 3   the dome steps in: a 5x5 ring of tempered glass
 //   row 4   the cap: 3x3 LED panels (GTM lamps, any colour, with or without border)
 // The 46 `X` cells hold the parts: 1-2 energy hatches, 1 input bus (plant and circuit), 1-2 output buses, 1-2 input hatches (water,
@@ -83,10 +83,10 @@
 
   // ---------------------------------------------------------------- pattern (see lib/patterns.js)
 
-  const BACK = ['XXXXXXX', 'XXXXXXX', 'GGGGGGG', '       ', '       ']
+  const BACK = ['XXXXXXX', 'XXXXXXX', 'FGGGGGF', '       ', '       ']
   const EDGE = ['XBBBBBX', 'X     X', 'G     G', ' GGGGG ', '       ']
   const BED = ['XBDDDBX', 'X     X', 'G     G', ' G   G ', '  LLL  ']
-  const FRONT = ['XXXXXXX', 'XXXSAXX', 'GGGGAGG', '       ', '       ']
+  const FRONT = ['XXXXXXX', 'XXXSAXX', 'FGGGAGF', '       ', '       ']
   const SPEC = {
     slices: [BACK, EDGE, BED, BED, BED, EDGE, FRONT],
     symbols: {
@@ -102,6 +102,7 @@
       B: Pat.block(BRICK),
       D: Pat.block(SOIL),
       G: Pat.block(GLASS),
+      F: Pat.frame(['titanium']),
       L: Pat.block(LAMPS),
       A: Pat.block(DOOR)
     }

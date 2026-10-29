@@ -112,33 +112,42 @@
     }
   }
 
+  // QR-S1: a smelter hall instead of a 3x5x3 heatproof block: a firebrick hearth, a three-block-high furnace chamber between steel
+  // corner posts, three electrode columns (coil tip, steel frame stem) that go through the roof, the flue pipe in the roof centre
+  // and the muffler chimney on top. 72 'X' cells (floor ring, walls, roof) take the casing and the parts.
   const ARC_FURNACE_SPEC = {
     slices: [
       // back
-      ['XXX', 'XXX', 'XXX', 'XXX', '   '],
-      // middle: the furnace chamber (2 air cells), a flue pipe on the roof and the muffler chimney on top of it
-      ['XXX', 'X#X', 'X#X', 'XPX', ' M '],
+      ['XXXXX', 'FXXXF', 'FXXXF', 'FXXXF', 'XXXXX', '     '],
+      // electrode 1 rises from the middle of the left side of the chamber
+      ['XBBBX', 'X###X', 'X#C#X', 'X#F#X', 'XXFXX', '  F  '],
+      // middle: the flue pipe and the muffler chimney above the molten pool
+      ['XBBBX', 'X###X', 'X###X', 'X###X', 'XXPXX', '  M  '],
+      // electrodes 2 and 3
+      ['XBBBX', 'X###X', 'XC#CX', 'XF#FX', 'XFXFX', ' F F '],
       // front (controller)
-      ['XXX', 'XSX', 'XXX', 'XXX', '   ']
+      ['XXXXX', 'FXSXF', 'FXXXF', 'FXXXF', 'XXXXX', '     ']
     ],
     symbols: {
       S: Pat.controller(),
-      // 32 body cells: 6 are parts (2 energy hatches = 2 A each, input bus, fluid input hatch for the quench water,
+      // 72 body cells: 6 are parts (2 energy hatches = 2 A each, input bus, fluid input hatch for the quench water,
       // output bus, fluid output hatch for the CO2 / CO)
       X: Pat.oneOf(
-        Pat.block(HEAT_CASING, { min: 20 }),
+        Pat.block(HEAT_CASING, { min: 66 }),
         Pat.part('energy_input', { exact: 2 }),
         Pat.part('input_bus', { exact: 1 }),
         Pat.part('input_hatch', { exact: 1 }),
         Pat.part('output_bus', { exact: 1 }),
         Pat.part('output_hatch', { exact: 1 })
       ),
+      B: Pat.block('gtceu:firebricks'),
+      C: Pat.block('gtceu:cupronickel_coil_block'),
+      F: Pat.frame(['steel']),
       P: Pat.block('gtceu:steel_pipe_casing'),
       M: Pat.part('muffler', { exact: 1 }),
       '#': Pat.air()
     }
   }
-
   // ---------------------------------------------------------------- recipe modifiers (see the header)
 
   var LC = null
