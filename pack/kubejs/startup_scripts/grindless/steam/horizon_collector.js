@@ -1,10 +1,10 @@
 // priority: -7000
 // -----------------------------------------------------------------------------------------------
 // Steam era: the Horizon Collector (docs/eras/steam.md, "The Horizon Collector (the start)"; package STEAM-X1). The machine the
-// player arrives with: a shard (never used up) + a programmed circuit pull a trickle of ordinary matter (logs, cobblestone, sand,
-// gravel, clay, coal, raw copper, tin and iron) out of nowhere. It is never craftable; the Welcome quest gives it once per player.
+// player arrives with: a shard (never used up) + a programmed circuit pull a flood of ordinary matter (logs, cobblestone, sand,
+// gravel, clay, coal, flint, raw copper, tin and iron: several stacks every 8 s) out of nowhere. It is never craftable; the Welcome quest gives it once per player.
 //
-//   gtceu:horizon_collection      recipe type. in: grindless:horizon_shard (not consumed) + a programmed circuit   out: one stack.
+//   gtceu:horizon_collection      recipe type. in: grindless:horizon_shard (not consumed) + a programmed circuit   out: up to 4 stacks.
 //                                 The recipes are generated from data/grindless/tables/horizon_collector.json by
 //                                 server_scripts/grindless/steam/horizon_collector.js.
 //   gtceu:lv_horizon_collector    single-block machine, LV only (GTM's 'simple' builder). A GTM solar panel cover fits only on
@@ -18,11 +18,11 @@
 (function () {
   // ---------------------------------------------------------------- recipe type
   GTCEuStartupEvents.registry('gtceu:recipe_type', function (event) {
-    // 2 item inputs: the shard and the (ghost) circuit; 1 output. No fluids.
+    // 2 item inputs: the shard and the (ghost) circuit; 4 outputs (up to four full stacks per run). No fluids.
     event.create('horizon_collection')
       .category('electric')
       .setEUIO('in')
-      .setMaxIOSize(2, 1, 0, 0)
+      .setMaxIOSize(2, 4, 0, 0)
       .setSlotOverlay(false, false, true, GuiTextures.INT_CIRCUIT_OVERLAY)
       .setProgressBar(GuiTextures.PROGRESS_BAR_ARROW, FillDirection.LEFT_TO_RIGHT)
       .setSound(GTSoundEntries.SCIENCE)

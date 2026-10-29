@@ -22,25 +22,26 @@ The game starts here, without electricity. Coke, bricks, bronze, boilers and ste
 
 A user-directed exception (2026-10-27), inspired by GregTech Leisure's *Fragment World Collection Machine* (idea only: our code, numbers and textures). It replaces most of the very first hand gathering and fades out once steam mining arrives.
 
-- **Lore:** the machine was in your pack when you arrived. Nobody remembers building it. Its shard hums at the pitch of the black hole at the end of the journey, and it pulls a trickle of ordinary matter through a horizon the size of a pin. The quest says no more; the mirror shell at MAX (`docs/journey.md:54`) may be where it was made.
+- **Lore:** the machine was in your pack when you arrived. Nobody remembers building it. Its shard hums at the pitch of the black hole at the end of the journey, and it pulls a flood of ordinary matter through a horizon the size of a pin. The quest says no more; the mirror shell at MAX (`docs/journey.md:54`) may be where it was made.
 - **Machine:** `gtceu:lv_horizon_collector`, a single-block LV machine (GTM `simple` builder, LV only, no higher tier). Recipe type `gtceu:horizon_collection`. It is never craftable and has no upgrade, parallel or multiblock version.
 - **Catalyst:** `grindless:horizon_shard`, not consumed, never craftable.
 - **Power:** two GTM LV solar panel covers (`gtceu:lv_solar_panel`) come with it. GTM lets a solar cover go only on a top face, so one cover sits on the machine and runs it by day (32 EU/t for a 16 EU/t recipe); it stops at night. The second is a spare for any other LV machine. Energy is not free: the covers are a real GTM source.
-- **Recipes:** 16 EU/t, 1200 ticks (60 s), shard plus programmed circuit:
+- **Recipes:** 16 EU/t, 160 ticks (8 s), shard plus programmed circuit; up to 4 output slots, the count split into stacks of 64:
 
 | Circuit | Output per run |
 |---|---|
-| 1 | 16 oak logs |
-| 2 | 48 cobblestone |
-| 3 | 32 sand |
-| 4 | 32 gravel |
-| 5 | 32 clay balls |
-| 6 | 12 coal |
-| 7 | 8 raw copper |
-| 8 | 8 raw tin |
-| 9 | 8 raw iron |
+| 1 | 128 oak logs |
+| 2 | 256 cobblestone |
+| 3 | 192 sand |
+| 4 | 192 gravel |
+| 5 | 128 clay balls |
+| 6 | 64 coal |
+| 7 | 64 raw copper |
+| 8 | 64 raw tin |
+| 9 | 64 raw iron |
+| 10 | 64 flint (stone-age tools and the first fires: the only new row; redstone, gold and saplings are left to the drills and greenhouse) |
 
-- **Why these numbers:** a single machine running at LV with no overclock can never exceed one run a minute. Its ore rate, 8 a minute, is a sixth of the Steam Vein Drill's (40-60); its logs, 16 a minute, are a third of the steam greenhouse's. It carries the first hours and is quickly outgrown. It covers only what the Route's step 1 hand-mines; lead, nickel, gold, redstone and every later ore still need a drill.
+- **Why these numbers:** user-directed buff (2026-10-28, "muchisimo mas masivo"). Still 16 EU/t, so the one LV solar cover (32 EU/t) keeps running it by day, with no overclock; the run is 7.5 times shorter and 5 to 8 times bigger, 40 to 60 times the old rate. Ore is 8 a second, about 10 times the Steam Vein Drill's 40-60 a minute, but it is raw ore only: smelting, grinding, tin and iron plates and every later ore (lead, nickel, gold, redstone) still need the drills and the machine lines. It carries the steam era's first hours and is outgrown by the drills' reach, not by its rate.
 - **How you get it:** the Welcome chapter's quest *The Horizon Collector*, unlocked by *Arrival*, gives the machine, the shard and the two covers once per player.
 - **Saves:** new ids only; nothing is removed or renamed.
 
