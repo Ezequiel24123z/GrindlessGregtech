@@ -75,5 +75,6 @@
   "exceptions": [
   ],
   "pendingRoutes": [
+    { "id": "grindless:nitride_magnet_synthesis/uxv_smes_cell", "reason": "UXV-W landed before Wave A: grindless:strand_tape is held until UXV-A8 writes its producer; A8 deletes this entry with its hold rule" }
   ]
 }

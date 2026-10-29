@@ -1,4 +1,4 @@
-// priority: -9910
+// priority: -9931
 // TEST ONLY, UXV-S0 (bench overlay, never shipped; needs the startup overlay on: kubejs/config/gg_test_uxv_s0.json {"enabled": true}, and a pack
 // copy whose uev/foundation.js builders take .tiers(UEV, UIV, UXV)). Command: kubejs custom_command gg_test_uxv_s0_machines
 // Band ONLY: X 36128-36191, Z 0-63, Overworld Y 70-100. Everything placed is cleared before DONE.
