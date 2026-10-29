@@ -179,11 +179,14 @@
     var O = 'gtnn:optical_computer'
     var PISTON = 'grindless:uev_electric_piston'
     var PUMP = 'grindless:uev_electric_pump'
+    var C = '4x #gtceu:circuits/uhv'
     var M = BA.machines || {}
-    // the other UEV controllers' shapes: grep "pattern: [" and "shaped(" in server_scripts/grindless/uev/*.js
+    // QR-R6: assembly line with station research, the era fluid and domain inputs; the refinery follows the drill
     var defs = [
-      { key: 'drill', parts: [HULL, O, PISTON], pattern: ['OPO', 'PHP'], ingredients: { O: O, P: PISTON, H: HULL } },
-      { key: 'refinery', parts: [HULL, O, PUMP], pattern: ['OUO', 'UHU'], ingredients: { O: O, U: PUMP, H: HULL } }
+      { key: 'drill', research: 'grindless:ffkm_seal', era: 'gtceu:neutronium',
+        ins: [HULL, '2x ' + O, '2x ' + PISTON, C, '2x grindless:ffkm_seal', 'grindless:tantalum_pentoxide_dust', 'grindless:rhenium_pellet'] },
+      { key: 'refinery', research: 'gtceu:barnard_core_drill', era: 'gtceu:neutronium',
+        ins: [HULL, '2x ' + O, '2x ' + PUMP, C, '2x grindless:ffkm_seal', 'grindless:tantalum_pentoxide_dust'] }
     ]
     BA.controllerRecipes = []
     defs.forEach(function (d) {
@@ -192,13 +195,19 @@
         console.error(LOG + 'barnard controller ' + d.key + ' skipped: no machine')
         return
       }
-      var missing = d.parts.concat([m.machine]).filter(function (id) { return !Item.exists(id) })
+      var ids = d.ins.map(function (s) { return s.replace(/^[0-9]+x /, '') }).filter(function (id) { return id.charAt(0) !== '#' }).concat([m.machine, d.research])
+      var missing = ids.filter(function (id) { return !Item.exists(id) })
       if (missing.length > 0) {
         console.error(LOG + m.name + ' controller recipe skipped, unknown item(s): ' + missing.join(', '))
         return
       }
-      event.recipes.gtceu.shaped(m.machine, d.pattern, d.ingredients).id('grindless:crafting/' + m.name)
-      BA.controllerRecipes.push('grindless:crafting/' + m.name)
+      var b = event.recipes.gtceu.assembly_line('grindless:' + m.name)
+      b.itemInputs(d.ins)
+      b.inputFluids(Fluid.of('gtceu:soldering_alloy', 2304), Fluid.of('gtceu:lubricant', 1000), Fluid.of(d.era, 576))
+      b.itemOutputs(m.machine)
+      b.stationResearch(function (r) { return r.researchStack(Item.of(d.research)).CWUt(64).EUt(491520) })
+      b.EUt(491520).duration(2400)
+      BA.controllerRecipes.push('grindless:assembly_line/' + m.name)
     })
   }
 

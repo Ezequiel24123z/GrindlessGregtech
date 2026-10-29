@@ -12,38 +12,34 @@ ServerEvents.recipes(function (event) {
     .EUt(UHV_EUT)
     .duration(100)
 
-  event.recipes.gtceu.assembler('grindless:uev_machine_hull')
-    .itemInputs('gtceu:uev_machine_casing', '2x gtceu:lay_superhydride_single_cable', '4x grindless:sic_sic_plate')
-    .itemOutputs('gtceu:uev_machine_hull')
-    .EUt(UHV_EUT)
-    .duration(50)
+  function line(name, research, ins, out) {
+    event.recipes.gtceu.assembly_line('grindless:' + name)
+      .itemInputs(ins)
+      .inputFluids(Fluid.of('gtceu:soldering_alloy', 1152), Fluid.of('gtceu:lubricant', 500), Fluid.of('gtceu:helium_plasma', 576))
+      .itemOutputs(out)
+      .stationResearch(function (r) { return r.researchStack(Item.of(research)).CWUt(64).EUt(UHV_EUT) })
+      .EUt(UHV_EUT)
+      .duration(600)
+  }
 
-  // 2 A hatches take two single cables, the 16 A ones two quadruple cables; the circuit number keeps the four apart
-  event.recipes.gtceu.assembler('grindless:uev_energy_input_hatch')
-    .itemInputs('gtceu:uev_machine_hull', '2x gtceu:lay_superhydride_single_cable')
-    .circuit(1)
-    .itemOutputs('gtceu:uev_energy_input_hatch')
-    .EUt(UHV_EUT)
-    .duration(100)
+  line('uev_machine_hull', 'gtceu:uev_machine_casing',
+    ['gtceu:uev_machine_casing', '2x gtceu:lay_superhydride_single_cable', '4x grindless:sic_sic_plate', '2x grindless:hftacn_heating_element', '2x grindless:ule_cavity'],
+    'gtceu:uev_machine_hull')
 
-  event.recipes.gtceu.assembler('grindless:uev_energy_output_hatch')
-    .itemInputs('gtceu:uev_machine_hull', '2x gtceu:lay_superhydride_single_cable')
-    .circuit(2)
-    .itemOutputs('gtceu:uev_energy_output_hatch')
-    .EUt(UHV_EUT)
-    .duration(100)
+  // 2 A hatches take single cables, the 16 A ones quadruple cables; the domain part keeps the four apart
+  line('uev_energy_input_hatch', 'gtceu:uev_machine_hull',
+    ['gtceu:uev_machine_hull', '2x gtceu:lay_superhydride_single_cable', '2x grindless:faraday_isolator', '1x grindless:hftacn_heating_element'],
+    'gtceu:uev_energy_input_hatch')
 
-  event.recipes.gtceu.assembler('grindless:uev_energy_input_hatch_16a')
-    .itemInputs('gtceu:uev_machine_hull', '2x gtceu:lay_superhydride_quadruple_cable')
-    .circuit(3)
-    .itemOutputs('gtceu:uev_energy_input_hatch_16a')
-    .EUt(UHV_EUT)
-    .duration(200)
+  line('uev_energy_output_hatch', 'gtceu:uev_machine_hull',
+    ['gtceu:uev_machine_hull', '2x gtceu:lay_superhydride_single_cable', '2x grindless:faraday_isolator', '1x grindless:ule_cavity'],
+    'gtceu:uev_energy_output_hatch')
 
-  event.recipes.gtceu.assembler('grindless:uev_energy_output_hatch_16a')
-    .itemInputs('gtceu:uev_machine_hull', '2x gtceu:lay_superhydride_quadruple_cable')
-    .circuit(4)
-    .itemOutputs('gtceu:uev_energy_output_hatch_16a')
-    .EUt(UHV_EUT)
-    .duration(200)
+  line('uev_energy_input_hatch_16a', 'gtceu:uev_machine_hull',
+    ['gtceu:uev_machine_hull', '2x gtceu:lay_superhydride_quadruple_cable', '4x grindless:faraday_isolator', '2x grindless:hftacn_heating_element'],
+    'gtceu:uev_energy_input_hatch_16a')
+
+  line('uev_energy_output_hatch_16a', 'gtceu:uev_machine_hull',
+    ['gtceu:uev_machine_hull', '2x gtceu:lay_superhydride_quadruple_cable', '4x grindless:faraday_isolator', '2x grindless:ule_cavity'],
+    'gtceu:uev_energy_output_hatch_16a')
 })
