@@ -8,7 +8,7 @@
 //                          (recipe.dimension(ORBIT), the pattern of uhv/zblan.js); the programmed circuit picks the recipe; every recipe carries the
 //                          data key of its type = <name> (its EMI line). The ULE cavity is a kept input of the calibration: never consumed.
 //   gtceu:chemical_reactor, electric_blast_furnace, cutter, lathe, mixer, wiremill, polarizer, assembler   the line steps GTM can run (circuit 0).
-//   crafting               the controllers: UHV hull + 2 UV parts + 2 UHV circuits, shaped recipes grindless:crafting/<machine>.
+//   assembly line          the controller(s): station research, UEV-era circuits, 3 domain parts of the line, soldering alloy and lubricant, grindless:assembly_line/<machine>.
 //   The older machines' rows (fibre draw 6-8, crystal furnace 6-7, pyrolyser 3) are in their own scripts.
 //
 // Lookup safety: a recipe whose ingredients are a subset of another's of its type can hide it; checked at load (a clash is an error).

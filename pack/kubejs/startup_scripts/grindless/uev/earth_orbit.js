@@ -44,7 +44,7 @@
       casing: PHOTONIC, texture: PHOTONIC_TEXTURE,
       // items in: two isotopes or a sensor and rock, kept lasers or cavity, the circuit; out: the model, the survey or the gravimeter
       maxIO: { itemsIn: 6, itemsOut: 1, fluidsIn: 2, fluidsOut: 1 },
-      width: 5, height: 5, depth: 7
+      width: 9, height: 9, depth: 9
     },
     station: {
       name: 'entanglement_station',
@@ -55,7 +55,7 @@
       casing: PHOTONIC, texture: PHOTONIC_TEXTURE,
       // items in: source, memory, QD source, detectors, fibre and the circuit; out: the repeater node; fluids in: superfluid helium for the memory
       maxIO: { itemsIn: 7, itemsOut: 1, fluidsIn: 2, fluidsOut: 0 },
-      width: 5, height: 5, depth: 7
+      width: 15, height: 10, depth: 7
     }
   }
 
