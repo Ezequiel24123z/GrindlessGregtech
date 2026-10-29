@@ -179,6 +179,73 @@
       itemsOut: [{ id: 'grindless:niobium_oxyfluoride_dust', count: 1 }, { id: 'grindless:hafnium_chloride_dust', count: 1 }],
       fluidsOut: [{ id: KEROSENE, amount: 950 }, { id: 'minecraft:water', amount: 1000 }],
       eut: 1920, duration: 100
+    },
+    // UXV-A2 (circuits 14-21; c22 is B5's): the plant side of the spintronic feedstock. Destinations: arsenic and sulfur go to GTM's
+    // chemistry, CaCl2 to GTM's electrolyser or the recycle row (16), CO2 is inert and vented, the lead and B2O3 of the LPE dross go back
+    // to the YIG melt, the Fe of the BFO fume to the iron stock, the tungstic acid (the WO3 of the design) to c19.
+    {
+      name: 'cobaltite_split', mode: 'uxv', circuit: 14,
+      itemsIn: [{ id: 'gtceu:cobaltite_dust', count: 4 }],
+      fluidsIn: [{ id: HCL, amount: 3000 }, { id: KEROSENE, amount: 1000 }],
+      itemsOut: [{ id: 'gtceu:cobalt_dust', count: 4 }, { id: 'gtceu:arsenic_dust', count: 4 }, { id: 'gtceu:sulfur_dust', count: 4 }],
+      fluidsOut: [{ id: KEROSENE, amount: 950 }, { id: DILUTED_HCL, amount: 3000 }],
+      eut: 1920, duration: 100
+    },
+    {
+      name: 'magnesite_hydroxide', mode: 'uxv', circuit: 15,
+      itemsIn: [{ id: 'gtceu:magnesite_dust', count: 2 }],
+      fluidsIn: [{ id: 'minecraft:water', amount: 2000 }],
+      itemsOut: [{ id: 'grindless:magnesium_hydroxide_dust', count: 2 }],
+      fluidsOut: [{ id: 'gtceu:carbon_dioxide', amount: 2000 }],
+      eut: 1920, duration: 100
+    },
+    {
+      name: 'calcium_chloride_recycle', mode: 'uxv', circuit: 16,
+      itemsIn: [{ id: 'gtceu:calcium_chloride_dust', count: 2 }, { id: 'gtceu:soda_ash_dust', count: 2 }],
+      fluidsIn: [{ id: 'minecraft:water', amount: 1000 }],
+      itemsOut: [{ id: 'gtceu:calcite_dust', count: 1 }, { id: 'gtceu:salt_dust', count: 4 }, { id: 'grindless:strontium_carbonate_dust', count: 1 }],
+      fluidsOut: [],
+      eut: 1920, duration: 100
+    },
+    {
+      name: 'scandium_strip', mode: 'uxv', circuit: 17,
+      itemsIn: [{ id: MIX_CL, count: 32 }],
+      fluidsIn: [{ id: 'minecraft:water', amount: 3000 }, { id: KEROSENE, amount: 1000 }],
+      itemsOut: [{ id: 'grindless:scandium_oxide_dust', count: 5 }, { id: MIX_CL, count: 24 }],
+      fluidsOut: [{ id: KEROSENE, amount: 950 }, { id: HCL, amount: 6000 }],
+      eut: 1920, duration: 100
+    },
+    {
+      name: 'scheelite_tungstic_acid', mode: 'uxv', circuit: 18,
+      itemsIn: [{ id: 'gtceu:scheelite_dust', count: 2 }],
+      fluidsIn: [{ id: HCL, amount: 4000 }],
+      itemsOut: [{ id: 'gtceu:tungstic_acid_dust', count: 2 }, { id: 'gtceu:calcium_chloride_dust', count: 2 }],
+      fluidsOut: [],
+      eut: 1920, duration: 100
+    },
+    {
+      name: 'tungsten_charge', mode: 'uxv', circuit: 19,
+      itemsIn: [{ id: 'gtceu:tungstic_acid_dust', count: 2 }],
+      fluidsIn: [{ id: 'gtceu:hydrogen', amount: 6000 }],
+      itemsOut: [{ id: 'gtceu:tungsten_dust', count: 2 }],
+      fluidsOut: [{ id: 'minecraft:water', amount: 8000 }],
+      eut: 1920, duration: 100
+    },
+    {
+      name: 'bfo_fume_bismuth', mode: 'uxv', circuit: 20,
+      itemsIn: [{ id: 'grindless:bfo_fume', count: 2 }],
+      fluidsIn: [{ id: 'gtceu:hydrogen', amount: 3000 }],
+      itemsOut: [{ id: 'gtceu:bismuth_dust', count: 1 }, { id: 'gtceu:small_iron_dust', count: 2 }],
+      fluidsOut: [{ id: 'minecraft:water', amount: 3000 }],
+      eut: 1920, duration: 100
+    },
+    {
+      name: 'lpe_dross_lead', mode: 'uxv', circuit: 21,
+      itemsIn: [{ id: 'grindless:lpe_dross', count: 2 }],
+      fluidsIn: [{ id: 'gtceu:hydrogen', amount: 2000 }],
+      itemsOut: [{ id: 'gtceu:lead_dust', count: 2 }, { id: 'gtceu:boron_trioxide_dust', count: 1 }],
+      fluidsOut: [{ id: 'minecraft:water', amount: 2000 }],
+      eut: 1920, duration: 100
     }
   ]
 

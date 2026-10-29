@@ -147,6 +147,24 @@
       itemsOut: [{ id: 'gtceu:lanthanum_oxide_dust', count: 2 }, { id: 'gtceu:neodymium_dust', count: 1 }],
       fluidsOut: [{ id: DEPLETED, amount: 1000 }],
       eut: ZPM_VA, duration: 200
+    },
+    // UXV-A2: dysprosium out of the same depleted liquor (circuits 11-12; circuit 10 is the r-process ash row); the lanthanum loops as in circuit 6
+    {
+      name: 'dysprosium_oxide', circuit: 11,
+      itemsIn: [{ id: 'gtceu:sodium_hydroxide_dust', count: 6 }],
+      fluidsIn: [{ id: DEPLETED, amount: 4000 }],
+      notConsumed: [],
+      itemsOut: [{ id: 'grindless:dysprosium_oxide_dust', count: 5 }, { id: 'gtceu:salt_dust', count: 6 }],
+      fluidsOut: [{ id: DEPLETED, amount: 3000 }, { id: 'minecraft:water', amount: 3000 }],
+      eut: ZPM_VA, duration: 100
+    },
+    {
+      name: 'dysprosium_reduction', circuit: 12,
+      itemsIn: [{ id: 'grindless:dysprosium_oxide_dust', count: 1 }, { id: LANTHANUM, count: 2 }],
+      fluidsIn: [], notConsumed: [],
+      itemsOut: [{ id: 'grindless:dysprosium_dust', count: 2 }, { id: LA_OXIDE, count: 1 }],
+      fluidsOut: [],
+      eut: ZPM_VA, duration: 20
     }
   ]
 

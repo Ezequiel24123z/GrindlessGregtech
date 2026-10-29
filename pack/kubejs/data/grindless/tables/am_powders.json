@@ -16,7 +16,13 @@
     { "name": "neutronium", "ingot": "gtceu:neutronium_ingot", "powder": "grindless:neutronium_am_powder" },
     { "name": "darmstadtium", "ingot": "gtceu:darmstadtium_ingot", "powder": "grindless:darmstadtium_am_powder" },
     { "name": "tritanium", "ingot": "gtceu:tritanium_ingot", "powder": "grindless:tritanium_am_powder" },
-    { "name": "rhea", "ingot": "gtceu:rhea_ingot", "powder": "grindless:rhea_am_powder" }
+    { "name": "rhea", "ingot": "gtceu:rhea_ingot", "powder": "grindless:rhea_am_powder" },
+    { "name": "cofeb", "_why": "UXV-A2: the CoFeB sputter target.", "ingot": "grindless:cofeb_ingot", "powder": "grindless:cofeb_am_powder" },
+    { "name": "heusler", "ingot": "grindless:heusler_ingot", "powder": "grindless:heusler_am_powder" },
+    { "name": "mgo", "ingot": "grindless:five_n_magnesia_dust", "powder": "grindless:mgo_am_powder" },
+    { "name": "ruthenium", "ingot": "grindless:five_n_ruthenium", "powder": "grindless:ruthenium_am_powder" },
+    { "name": "srruo3", "ingot": "gtceu:srruo3_dust", "powder": "grindless:srruo3_am_powder" },
+    { "name": "la_bfo", "ingot": "gtceu:la_bfo_dust", "powder": "grindless:la_bfo_am_powder" }
   ],
   "parts": [
     { "name": "neutronium_gear", "metal": "neutronium", "circuit": 2, "powderIn": 4, "powderBack": 1,
@@ -39,6 +45,19 @@
       "nearNet": "grindless:near_net_rhea_impeller", "output": "grindless:printed_rhea_impeller", "gtm": false },
     { "name": "w_mesh", "metal": "rhea", "circuit": 8, "powderIn": 6, "powderBack": 2,
       "_why": "UIV-A9, line 29: the capillary porous mesh of the divertor, printed from the RHEA powder (no tungsten powder exists), then wetted with Li-Sn.",
-      "nearNet": "grindless:near_net_w_mesh", "output": "grindless:w_mesh", "gtm": false }
+      "nearNet": "grindless:near_net_w_mesh", "output": "grindless:w_mesh", "gtm": false },
+    { "name": "cofeb_blank", "metal": "cofeb", "circuit": 9, "powderIn": 6, "powderBack": 2,
+      "_why": "UXV-A2: the CoFeB sputter-target blank, printed near-net then HIPed (circuits 9-14; 8 is w_mesh).",
+      "nearNet": "grindless:near_net_cofeb_blank", "output": "grindless:cofeb_hip_blank", "gtm": false },
+    { "name": "heusler_blank", "metal": "heusler", "circuit": 10, "powderIn": 6, "powderBack": 2,
+      "nearNet": "grindless:near_net_heusler_blank", "output": "grindless:heusler_hip_blank", "gtm": false },
+    { "name": "mgo_blank", "metal": "mgo", "circuit": 11, "powderIn": 6, "powderBack": 2,
+      "nearNet": "grindless:near_net_mgo_blank", "output": "grindless:mgo_hip_blank", "gtm": false },
+    { "name": "saf_blank", "metal": "ruthenium", "circuit": 12, "powderIn": 6, "powderBack": 2,
+      "nearNet": "grindless:near_net_saf_blank", "output": "grindless:saf_hip_blank", "gtm": false },
+    { "name": "srruo3_blank", "metal": "srruo3", "circuit": 13, "powderIn": 6, "powderBack": 2,
+      "nearNet": "grindless:near_net_srruo3_blank", "output": "grindless:srruo3_hip_blank", "gtm": false },
+    { "name": "la_bfo_blank", "metal": "la_bfo", "circuit": 14, "powderIn": 6, "powderBack": 2,
+      "nearNet": "grindless:near_net_la_bfo_blank", "output": "grindless:la_bfo_hip_blank", "gtm": false }
   ]
 }
