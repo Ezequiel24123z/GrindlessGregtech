@@ -167,9 +167,9 @@
           var ch
           var isWall = si === 0 || si === last || c === 0 || c === m.width - 1
           if (r === 0) ch = 'X'
-          else if (r === m.height - 1) ch = 'F'
+          else if (r === m.height - 1) ch = (si === mid || c === mid) ? 'P' : (isWall ? 'Z' : 'F')
           else if (si === last && r === 1 && c === mid) ch = 'S'
-          else if (isWall) ch = (wall && wall(r, si, c)) || 'F'
+          else if (isWall) ch = (wall && wall(r, si, c)) || ((si === 0 || si === last) && (c === 0 || c === m.width - 1) ? 'Z' : (r === 2 && m.height > 5 ? 'F' : (r === 2 || (r === 3 && m.height > 5) ? 'L' : 'F')))
           else ch = inner(r, si, c)
           row += ch
         }
@@ -229,6 +229,7 @@
         X: Pat.oneOf.apply(null, [Pat.block(m.casing)].concat(parts)),
         F: Pat.block(m.casing),
         L: Pat.block(GLASS),
+        Z: Pat.frame(['stainless_steel']),
         H: Pat.block(HEAT),
         K: Pat.block(COMPUTER),
         D: Pat.block(SOIL),

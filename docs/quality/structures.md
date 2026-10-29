@@ -59,8 +59,8 @@ declarations in 6 files (13 structures) were changed to `var`, and the test now 
 
 - Steam 0/15, LV 0/7, MV 0/12, HV 0/6, EV 0/12, IV 0/16: done in QR-S1 (all pass the gate without baseline entries).
 - LuV 0/21, ZPM 0/27, launch_road and power 0: done in QR-S2 (all pass the gate without baseline entries).
-- UV 1/33: only the ZPM `ice_giant_siphon` (`zpm/uranus.js`, 7x7x13 pressure-hull box, gate attributes it to `uv/neptune.js:130`) is left; QR-S3 did the other 30 uv/ structures.
-- UHV 30/32: `xenoflora_rover_bay`, `biomining_heap`, `zblan_draw_tower`, `positron_accumulator`, `warp_gate`.
+- UV 0/33: QR-S4 dressed the ZPM `ice_giant_siphon` (`zpm/uranus.js`), the last one.
+- UHV 0/32: done in QR-S4.
 - UEV, UIV: almost all are hollow 5x5x7 / 7x7x7 single-casing boxes (`uev/*.js` shell helpers: `megabar`, `sirius`, `composites`,
   `electron_beam`, `earth_orbit`, `alpha_centauri`, `photonics`; `uiv/beuv_stm.js:53`, `matrioshka.js:83`, `tfln_femtosecond.js:65`,
   `j0437.js:67`). Redesign with a shared per-era shell helper mixing frame posts, glass bands, pipes/coils and a second casing.
@@ -99,3 +99,12 @@ First-met blocks in UV structures: no new block types. Blocks first used in a UV
 
 Process for each: redesign the spec, run `--static --check`, lower the baseline, update its T1 overlay test; from the next tier on
 every new structure must pass the gate without a baseline entry.
+
+### QR-S4 release notes (UHV structures; same ids, no registrations removed; gate WxHxD, old -> new)
+Rebuild existing machines of these ids. Same size (dressed only): the dress changes blocks, not the footprint.
+- `warp_gate` 15x3x15 -> 15x5x15 (ring keeps its 15x15 footprint); `baseline_astrometer` 7x5x7 -> 9x9x9
+- `zblan_draw_tower` 3x11x3 -> 5x15x5; `biomining_heap` 9x3x9 -> 11x6x11
+- `positron_accumulator` 9x3x5 -> 11x5x7; `casimir_array` 7x7x7 -> 9x9x9; `ultrapure_water_plant` 5x5x9 -> 7x5x11
+- `betavoltaic_fab` 5x5x5 -> 7x5x7; `crystal_growth_furnace` 5x5x9 -> 5x9x5; `mbe_reactor` 5x5x7 -> 7x5x9; `photonic_foundry` 9x5x9 -> 11x5x9
+- Same size: `quantum_fabricator` 11x10x12, `swarm_segment_foundry` 9x7x9, `swarm_control_station` 11x5x11, `solar_probe_bay` 7x5x7, `xenoflora_rover_bay` 7x5x7, `sample_receiving_facility` 9x5x9, `xenobotany_greenhouse` 9x6x9, `xenobiochem_plant` 7x5x7, `radiotrophic_vat` 5x5x5, `organoid_array` 7x5x7, `regolith_excavator` 9x3x5, `nuclear_clock_lab`, `tether_ribbon_works`, `pbo_plant`, `sic_device_fab`, `solar_array_fab`, `spark_plasma_sinterer`, `high_flux_reactor`, `transuranium_facility`, `ice_giant_siphon` 7x13x7 (ZPM, dressed like `neptune_deep_siphon`)
+- First-met blocks (all already in the pack): tungsten_steel and stainless_steel frames, laminated and fusion glass, superconducting coil, tungstensteel/ptfe pipe casings, plascrete, filter, clean, inert, heatproof, robust, uv machine casings.

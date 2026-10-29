@@ -70,19 +70,20 @@
   const WALL = 'PPPPPPP'
   const SPEC = {
     slices: [
-      [FLOOR, WALL, 'PPWWWPP', WALL, WALL],
+      [FLOOR, 'ZPPPPPZ', 'ZPWWWPZ', 'ZPPPPPZ', 'ZZZZZZZ'],
       [FLOOR, 'P#R#R#P', 'P#M#M#P', 'P#R#R#P', WALL],
       [FLOOR, 'P#R#R#P', 'W#M#M#W', 'P#R#R#P', 'PPFFFPP'],
       [FLOOR, 'P#R#R#P', 'W#M#M#W', 'P#R#R#P', 'PPFFFPP'],
       [FLOOR, 'P#R#R#P', 'W#M#M#W', 'P#R#R#P', 'PPFFFPP'],
       [FLOOR, 'P#####P', 'P#####P', 'P#####P', WALL],
-      [FLOOR, 'PPPSPPP', 'PPWWWPP', WALL, WALL]
+      [FLOOR, 'ZPPSPPZ', 'ZPWWWPZ', 'ZPPPPPZ', 'ZZZZZZZ']
     ],
     symbols: {
       S: Pat.controller(),
       X: cells(W.minCasings),
       P: Pat.block(PLASCRETE),
       W: Pat.block(WINDOW),
+      Z: Pat.frame(['stainless_steel']),
       F: Pat.block(FILTER),
       R: Pat.block(PERFUSION),
       M: Pat.block(READOUT),

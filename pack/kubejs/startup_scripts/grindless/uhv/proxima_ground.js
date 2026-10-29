@@ -82,7 +82,7 @@
       // items in: the regolith, urea, calcium chloride, the culture and the circuit; out: the liquor or biocement and the tailings or
       // ammonium chloride; fluid in: water
       maxIO: { itemsIn: 5, itemsOut: 2, fluidsIn: 1, fluidsOut: 1 },
-      width: 9, depth: 9, height: 3
+      width: 11, depth: 11, height: 6
     }
   }
 
@@ -113,8 +113,9 @@
     return slices
   }
 
-  // The heap: row 0 is the liner (X: inert casing or a part); rows 1-2 the berm (B), S the controller (front berm, row 1, middle);
-  // the drip lines (P) cross the top on slices 2, 4 and 6; the heap itself is air (#).
+  // The heap, 11 x 11 x 6: row 0 the liner (rim X: inert casing or a part; inside a filter-casing drain bed cut by PTFE drain channels), rows 1-2
+  // the inert berm with frame posts and a glass inspection band (S the controller, front berm, row 1, middle), rows 3-4 two plascrete
+  // terraces stepping in, row 5 the irrigation header ring and its cross of drip lines (P); the heap itself is air (#).
   function heapSlices(m) {
     var slices = []
     var last = m.depth - 1
@@ -124,13 +125,21 @@
       for (var r = 0; r < m.height; r++) {
         var row = ''
         for (var c = 0; c < m.width; c++) {
-          var edge = si === 0 || si === last || c === 0 || c === m.width - 1
-          var ch
-          if (r === 0) ch = 'X'
-          else if (si === last && r === 1 && c === mid) ch = 'S'
-          else if (edge) ch = 'B'
-          else if (r === 2 && (si === 2 || si === 4 || si === 6)) ch = 'P'
-          else ch = '#'
+          var dz = Math.abs(si - mid)
+          var dx = Math.abs(c - mid)
+          var ring = Math.max(dz, dx)
+          var corner = dz === mid && dx === mid
+          var ch = ' '
+          if (r === 0) ch = ring === mid ? 'X' : (dz === 0 || dx === 0 ? 'P' : 'N')
+          else if (r <= 2) {
+            if (ring < mid) ch = '#'
+            else if (r === 1 && si === last && c === mid) ch = 'S'
+            else if (corner) ch = 'F'
+            else if (r === 2 && (si === 0 || si === last) && dx <= 2) ch = 'W'
+            else ch = 'B'
+          } else if (r === 3) ch = ring < mid - 1 ? '#' : (ring === mid - 1 ? 'Q' : ' ')
+          else if (r === 4) ch = ring < mid - 2 ? '#' : (ring === mid - 2 ? 'Q' : ' ')
+          else if (ring <= mid - 3) ch = ring === mid - 3 || dz === 0 || dx === 0 ? 'P' : '#'
           row += ch
         }
         rows.push(row)
@@ -139,7 +148,6 @@
     }
     return slices
   }
-
   var M = PG.machines
   M.drill.spec = {
     slices: drillSlices(M.drill),
@@ -166,6 +174,10 @@
         Pat.part('energy_input', { min: 1, max: 2 })),
       B: Pat.block(INERT),
       P: Pat.block(PIPE),
+      N: Pat.block('gtceu:filter_casing'),
+      Q: Pat.block('gtceu:plascrete'),
+      F: Pat.frame(['steel']),
+      W: Pat.block('gtceu:laminated_glass'),
       '#': Pat.air()
     }
   }
