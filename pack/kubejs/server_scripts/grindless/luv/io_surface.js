@@ -80,9 +80,10 @@
         '2x grindless:platinum_gauze')
       .inputFluids(Fluid.of('gtceu:soldering_alloy', 576), Fluid.of('gtceu:lubricant', 500))
       .itemOutputs(IO.condenser.machine).EUt(30720).duration(600)
+    // Crafted before landing on Io, so no sulfur concrete: the bundles it wears are fed in on Io (R.intake).
     gt.assembly_line('grindless:volcanic_intake')
-      .itemInputs('gtceu:luv_machine_hull', 'gtceu:luv_electric_motor', '2x gtceu:luv_electric_pump', '4x #gtceu:circuits/luv', '4x ' + t.bundle,
-        '2x grindless:zircaloy_cladding_tube')
+      .itemInputs('gtceu:luv_machine_hull', 'gtceu:luv_electric_motor', '2x gtceu:luv_electric_pump', '4x #gtceu:circuits/luv',
+        '2x grindless:platinum_gauze', '2x grindless:zircaloy_cladding_tube')
       .inputFluids(Fluid.of('gtceu:soldering_alloy', 576), Fluid.of('gtceu:lubricant', 500))
       .itemOutputs(IO.intake.machine).EUt(30720).duration(600)  })
 })()

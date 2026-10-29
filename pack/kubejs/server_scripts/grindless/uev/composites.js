@@ -183,8 +183,10 @@
     var C = '4x #gtceu:circuits/uhv'
     // QR-R6: assembly line with station research (the previous machine of the line), the era fluid and domain inputs of the line
     var defs = [
-      { machine: CO.machines.works.machine, name: 'nitride_magnet_works', research: 'grindless:reduced_iron_powder', era: 'gtceu:neutronium',
-        ins: [HULL, '2x ' + MOTOR, C, '2x grindless:reduced_iron_powder', 'grindless:ffkm_seal', 'grindless:tantalum_pentoxide_dust'] },
+      // the works runs on Barnard b's carbonyl iron, but it's built before Barnard b (the SiC line and the UEV hull come after it):
+      // its controller takes the line's HfTaC retort lining, not the iron powder (QR, 2026-10-29)
+      { machine: CO.machines.works.machine, name: 'nitride_magnet_works', research: 'grindless:tantalum_pentoxide_dust', era: 'gtceu:neutronium',
+        ins: [HULL, '2x ' + MOTOR, C, '2x grindless:hftac_dust', 'grindless:ffkm_seal', 'grindless:tantalum_pentoxide_dust'] },
       { machine: CO.machines.fibre.machine, name: 'sic_fibre_plant', research: CO.machines.works.machine, era: 'gtceu:tritanium',
         ins: [HULL, PUMP, ARM, C, '2x grindless:polycarbosilane_dust', 'grindless:hftac_dust', 'grindless:ffkm_seal'] },
       { machine: CO.machines.cvi.machine, name: 'cvi_furnace', research: CO.machines.fibre.machine, era: 'gtceu:neutronium',

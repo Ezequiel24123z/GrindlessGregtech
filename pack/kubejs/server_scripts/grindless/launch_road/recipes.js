@@ -3,10 +3,12 @@
 // Recipes of the road to the first rocket that make our own parts (the ones that make a GCYR part are in
 // server_scripts/grindless/integration/gcyr_launch_road.js, one file for every GCYR part recipe change):
 //
-//   Engine Test Stand (gtceu:engine_test_stand)    CRAFTING TABLE (MV): MV hull + 2 MV pumps (they feed the run tanks) + 2 MV sensors
-//                                                  (the telemetry) + 4 MV circuits
-//   Composite Autoclave (gtceu:composite_autoclave) CRAFTING TABLE (HV): HV hull + 2 HV autoclaves + 2 HV pumps (the nitrogen pressure)
-//                                                  + 4 HV circuits
+//   Engine Test Stand (gtceu:engine_test_stand)    ASSEMBLER (MV, 120 EU/t): MV hull + 2 MV pumps (they feed the run tanks) + 2 MV sensors
+//                                                  (the telemetry) + 4 MV circuits + 2 graphite electrodes (machined graphite: the jet
+//                                                  vanes and the flame deflector insert) + 144 mB soldering alloy
+//   Composite Autoclave (gtceu:composite_autoclave) ASSEMBLER (HV, 480 EU/t): HV hull + HV autoclave + 2 HV pumps (the nitrogen pressure)
+//                                                  + 4 HV circuits + 2 graphite electrodes (the heating elements) + 144 mB soldering alloy
+//     Both come before the first rocket: no part from EV, titanium or the Moon (recipe_quality.json: launch_road is tier 3).
 //
 //   gtceu:static_fire, MV: the thruster cluster    4 power thrusters + 200 mB RP-1 + 300 mB oxygen -> 4 qualified power thrusters
 //                                                  + 200 mB CO2 + 200 mB water. 300 t at 120 EU/t (36 000 EU)
@@ -46,8 +48,9 @@
   const COPV = 'grindless:composite_overwrapped_tank'
   const DRUM = 'gtceu:stainless_steel_drum'
 
-  const STAND_PARTS = ['gtceu:mv_machine_hull', 'gtceu:mv_electric_pump', 'gtceu:mv_sensor', 'gtceu:engine_test_stand']
-  const AUTOCLAVE_PARTS = ['gtceu:hv_machine_hull', 'gtceu:hv_autoclave', 'gtceu:hv_electric_pump', 'gtceu:composite_autoclave']
+  const STAND_PARTS = ['gtceu:mv_machine_hull', 'gtceu:mv_electric_pump', 'gtceu:mv_sensor', 'grindless:graphite_electrode', 'gtceu:engine_test_stand']
+  const AUTOCLAVE_PARTS = ['gtceu:hv_machine_hull', 'gtceu:hv_autoclave', 'gtceu:hv_electric_pump', 'grindless:graphite_electrode',
+    'gtceu:composite_autoclave']
 
   LR.recipes = LR.recipes || {}
   LR.recipes.thrusters = {
@@ -130,11 +133,11 @@
       console.error(LOG + 'Engine Test Stand recipe skipped, unknown item(s): ' + missingStand.join(', '))
     } else {
       event.recipes.gtceu.assembler('grindless:engine_test_stand')
-        .itemInputs('gtceu:mv_machine_hull', 'gtceu:mv_electric_pump', '2x gtceu:mv_sensor', '4x #gtceu:circuits/mv',
-          '2x grindless:platinum_electrode', '2x grindless:sintered_regolith')
-        .inputFluids(Fluid.of('gtceu:soldering_alloy', 144), Fluid.of('gtceu:nitrogen', 1000))
+        .itemInputs('gtceu:mv_machine_hull', '2x gtceu:mv_electric_pump', '2x gtceu:mv_sensor', '4x #gtceu:circuits/mv',
+          '2x grindless:graphite_electrode')
+        .inputFluids(Fluid.of('gtceu:soldering_alloy', 144))
         .itemOutputs('gtceu:engine_test_stand')
-        .EUt(480).duration(400)
+        .EUt(120).duration(400)
       done.push('engine test stand')
     }
 
@@ -144,8 +147,8 @@
     } else {
       event.recipes.gtceu.assembler('grindless:composite_autoclave')
         .itemInputs('gtceu:hv_machine_hull', 'gtceu:hv_autoclave', '2x gtceu:hv_electric_pump', '4x #gtceu:circuits/hv',
-          '2x grindless:platinum_electrode', '2x grindless:sintered_regolith')
-        .inputFluids(Fluid.of('gtceu:soldering_alloy', 144), Fluid.of('gtceu:nitrogen', 1000))
+          '2x grindless:graphite_electrode')
+        .inputFluids(Fluid.of('gtceu:soldering_alloy', 144))
         .itemOutputs('gtceu:composite_autoclave')
         .EUt(480).duration(400)
       done.push('composite autoclave')
