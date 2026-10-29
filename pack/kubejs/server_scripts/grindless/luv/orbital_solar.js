@@ -18,9 +18,10 @@
         'gtceu:tempered_glass', '4x gtceu:fine_gold_wire', 'gtceu:titanium_frame')
       .inputFluids(Fluid.of('gtceu:soldering_alloy', 144), Fluid.of('gtceu:lubricant', 250))
       .itemOutputs('2x grindless:orbital_solar_panel').EUt(7680).duration(200)
+    // Crafted at home before the first launch, so no Io germanium (triple-junction cells): the SMES cells buffer each orbit's eclipse.
     event.recipes.gtceu.assembly_line('grindless:luv/orbital_solar_station')
       .itemInputs('gtceu:luv_machine_hull', '4x gcyr:photovoltaic_cell', '2x gtceu:luv_sensor',
-        '4x #gtceu:circuits/luv', '2x grindless:orbital_solar_panel', '2x grindless:triple_junction_cell')
+        '4x #gtceu:circuits/luv', '2x grindless:orbital_solar_panel', '2x grindless:luv_smes_cell')
       .inputFluids(Fluid.of('gtceu:soldering_alloy', 576), Fluid.of('gtceu:lubricant', 500))
       .itemOutputs(A.machine).EUt(30720).duration(600)  })
 })()

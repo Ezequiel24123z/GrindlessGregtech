@@ -180,7 +180,7 @@
   Q.crafting = [
     { id: 'grindless:assembly_line/diamond_lattice_fab', output: 'gtceu:diamond_lattice_fab', parts: ['2x gtceu:zpm_emitter'],
       domain: ['grindless:platinum_electrode', 'grindless:sapphire_test_mass'], research: 'grindless:solar_wing_panel' },
-    { id: 'grindless:assembly_line/ion_implanter', output: 'gtceu:ion_implanter', parts: ['gtceu:zpm_emitter', 'gtceu:zpm_field_generator'],
+    { id: 'grindless:assembly_line/ion_implanter', output: 'gtceu:ion_implanter', parts: ['gtceu:zpm_emitter', 'gtceu:zpm_field_generator', PLATE],
       domain: ['grindless:magnetic_bearing', 'grindless:whipple_shield_casing'], research: 'grindless:coilgun_coil_casing' },
     { id: 'grindless:assembly_line/qubit_fab', output: 'gtceu:qubit_fab', parts: ['2x gtceu:zpm_sensor'],
       domain: ['grindless:luv_smes_cell', 'grindless:anchor_harpoon'], research: 'grindless:hss_s_drill_bit' }
