@@ -86,9 +86,9 @@
 			icon: "gtceu:lv_horizon_collector"
 			id: "3E1C0D04479070D2"
 			rewards: [
-				{ id: "7A4EA4331D45813F", item: "gtceu:lv_horizon_collector", type: "item" }
-				{ id: "59CB02D975542719", item: "grindless:horizon_shard", type: "item" }
-				{ count: 2, id: "5942E056E1AF13B0", item: "gtceu:lv_solar_panel", type: "item" }
+				{ count: 4, id: "7A4EA4331D45813F", item: "gtceu:lv_horizon_collector", type: "item" }
+				{ count: 4, id: "59CB02D975542719", item: "grindless:horizon_shard", type: "item" }
+				{ count: 4, id: "5942E056E1AF13B0", item: "gtceu:lv_solar_panel", type: "item" }
 			]
 			tasks: [{ id: "5D417825FEC2B0C1", type: "checkmark" }]
 			title: "The Horizon Collector"
