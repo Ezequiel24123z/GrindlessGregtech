@@ -1,4 +1,4 @@
-﻿# Recipe quality ladder and audit (QR-C0)
+# Recipe quality ladder and audit (QR-C0)
 
 Why: the owner found controllers and multiblock parts at UEV and similar tiers crafted at a plain crafting table. Controllers, parts and tier machines
 must climb a ladder of crafting forms that gets harder with the tier. `node tools/analysis/recipe-quality.mjs` checks it, and
@@ -129,7 +129,7 @@ Process honesty: `sic_epi` returns 1800 mB of the 2000 mB hydrogen carrier; `sic
 
 ### uev
 
-Fixed, QR-R6: every uev row left the baseline. Controllers, hull and hatches are assembly lines with station research, an era fluid and domain inputs; components gained helium or argon plus `hftacn_heating_element` or `hbn_film` depth raisers.
+Fixed, QR-R6: the uev table rows left the baseline (own-line intermediate pending (follow-up package), still baselined: ca48_oven_charge, plutonium_244_target, ceramic_shell_mould, cnt_twisted_yarn, cnt_coiled_muscle, superhydride_scoop_coil; the five superheavy.js rows ca48_beam, polycarbonate_foil, sealed_capsule, target_wheel and target_wheel_blank were not in this table and remain). Controllers, hull and hatches are assembly lines with station research, an era fluid and domain inputs; hull and input hatches mirror the output hatches with superconductor cables and faraday_isolator/ule_cavity parts. Components earn their score from their own line: own-line intermediates (hbn_film as insulation or release layer, polycarbosilane, hftac blend, lead glass), a process fluid (epoxy, ethanol, oxygen) and argon or helium only where the process needs an inert or cryogenic gas (sputtering, CVD, annealing, superconducting parts). A machine heater (`hftacn_heating_element`) is consumed only by the coil block and the stellar forge.
 
 
 ### uiv

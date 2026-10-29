@@ -105,13 +105,13 @@
     "assembler": {
       "recipes": [
         { "name": "photonic_casing", "circuit": 0, "eut": 30720, "duration": 300,
-          "itemsIn": [{ "id": "gtceu:uv_machine_casing", "count": 1 }, { "id": "gtceu:tungsten_steel_plate", "count": 4 }, { "id": "grindless:fz_silicon_wafer", "count": 1 },           { "id": "gtceu:iridium_plate", "count": 2 }], "fluidsIn": [{ "id": "gtceu:helium", "amount": 1000 }],
+          "itemsIn": [{ "id": "gtceu:uv_machine_casing", "count": 1 }, { "id": "gtceu:tungsten_steel_plate", "count": 4 }, { "id": "grindless:fz_silicon_wafer", "count": 1 },           { "id": "gtceu:iridium_plate", "count": 2 }], "fluidsIn": [{ "id": "gtceu:epoxy", "amount": 144 }],
           "itemsOut": [{ "id": "grindless:photonic_casing", "count": 2 }] },
         { "name": "sdd_metallise", "circuit": 0, "eut": 30720, "duration": 300,
-          "itemsIn": [{ "id": "grindless:sdd_annealed_wafer", "count": 1 },           { "id": "gtceu:gold_dust", "count": 1 }], "fluidsIn": [{ "id": "gtceu:helium", "amount": 1000 }],
+          "itemsIn": [{ "id": "grindless:sdd_annealed_wafer", "count": 1 },           { "id": "gtceu:gold_dust", "count": 1 }], "fluidsIn": [{ "id": "gtceu:argon", "amount": 500 }],
           "itemsOut": [{ "id": "grindless:sdd", "count": 1 }] },
         { "name": "qd_source_mount", "circuit": 0, "eut": 30720, "duration": 300,
-          "itemsIn": [{ "id": "grindless:micropillar_wafer", "count": 1 },           { "id": "gtceu:gold_dust", "count": 1 }], "fluidsIn": [{ "id": "gtceu:helium", "amount": 1000 }],
+          "itemsIn": [{ "id": "grindless:micropillar_wafer", "count": 1 },           { "id": "gtceu:gold_dust", "count": 1 }, { "id": "gtceu:indium_dust", "count": 1 }], "fluidsIn": [],
           "itemsOut": [{ "id": "grindless:qd_source", "count": 1 }] },
         { "name": "uev_sensor", "circuit": 0, "eut": 1966080, "duration": 400,
           "itemsIn": [{ "id": "gtceu:uv_sensor", "count": 1 }, { "id": "grindless:snspd", "count": 2 }, { "id": "grindless:sdd", "count": 1 }, { "id": "grindless:six_n_niobium", "count": 4 }],
@@ -123,10 +123,10 @@
           "itemsIn": [{ "id": "gtceu:uv_electric_pump", "count": 1 }, { "id": "grindless:annealed_hbn_film", "count": 2 }, { "id": "grindless:six_n_hafnium", "count": 4 }],
           "itemsOut": [{ "id": "grindless:uev_electric_pump", "count": 1 }] },
         { "name": "uev_conveyor_module", "circuit": 0, "eut": 1966080, "duration": 400,
-          "itemsIn": [{ "id": "gtceu:uv_conveyor_module", "count": 1 }, { "id": "grindless:graphene_film", "count": 2 },           { "id": "grindless:six_n_tantalum", "count": 4 }, { "id": "grindless:hbn_film", "count": 1 }], "fluidsIn": [{ "id": "gtceu:helium", "amount": 1000 }],
+          "itemsIn": [{ "id": "gtceu:uv_conveyor_module", "count": 1 }, { "id": "grindless:graphene_film", "count": 2 },           { "id": "grindless:six_n_tantalum", "count": 4 }, { "id": "grindless:hbn_film", "count": 1 }], "fluidsIn": [],
           "itemsOut": [{ "id": "grindless:uev_conveyor_module", "count": 1 }] },
         { "name": "uev_electric_piston", "circuit": 0, "eut": 1966080, "duration": 400,
-          "itemsIn": [{ "id": "gtceu:uv_electric_piston", "count": 1 }, { "id": "grindless:graphene_film", "count": 2 },           { "id": "grindless:six_n_niobium", "count": 4 }, { "id": "grindless:hbn_film", "count": 1 }], "fluidsIn": [{ "id": "gtceu:helium", "amount": 1000 }],
+          "itemsIn": [{ "id": "gtceu:uv_electric_piston", "count": 1 }, { "id": "grindless:graphene_film", "count": 2 },           { "id": "grindless:six_n_niobium", "count": 4 }, { "id": "grindless:hbn_film", "count": 1 }], "fluidsIn": [],
           "itemsOut": [{ "id": "grindless:uev_electric_piston", "count": 1 }] }
       ]
     },
