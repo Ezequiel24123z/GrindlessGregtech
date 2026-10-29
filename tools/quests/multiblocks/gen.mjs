@@ -8,13 +8,14 @@
 // With --write: writes the chapter and its exceptions in tools/quests/lint-config.json (allowRoots, allowIsolated: it is a map,
 // nothing depends on anything). Run it after processing-lines/pl-gen.mjs, which rewrites the allowIsolated block.
 //
-// Which controllers: machines.json entries with mb = 1 whose item exists, minus every id hidden by tables/hidden_until.json.
+// Which controllers: machines.json entries with mb = 1 whose item exists, minus every id hidden by tables/hidden_until.json
+// and every controller whose tier is after the dump's implemented era (a later era's startup folder is registered but locked).
 // Where: ours (startup_scripts/grindless/<folder>/*.js, event.create(name, 'multiblock')) by folder when it is an era id; everyone else,
 // and ours in other folders, by the earliest tier whose gate reaches the controller (tools/analysis/reachability.mjs's model).
 import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath, pathToFileURL } from 'node:url';
-import { CHAPTER, GATE_TIERS, ERA_FOLDERS, TIERS, OVERRIDES } from './mb-data.mjs';
+import { CHAPTER, gateTiers, ERA_FOLDERS, TIERS, OVERRIDES } from './mb-data.mjs';
 import { layoutBands, chapterSnbt, tierName, hid } from './mb-lib.mjs';
 
 const here = path.dirname(fileURLToPath(import.meta.url));
@@ -39,7 +40,8 @@ export function findDump(dir) {
 // our multiblocks: machine id -> startup folder.
 // 1) literal event.create('name', 'multiblock'); 2) controllers registered through variables: for each script mentioning 'multiblock', every
 // dump multiblock gtceu:x whose name is a quoted token in the script (or in a data/grindless/tables/*.json the script names) AND that has a
-// block.gtceu.x name in client_scripts/grindless/*_lang.js (a GTM/addon id quoted in our script has none). Literal wins; conflicts are returned.
+// block.gtceu.x name in client_scripts/grindless/*_lang.js or a `name: 'x', ... lang: '...'` entry in the script (a GTM/addon id quoted in
+// our script has neither). Literal wins; conflicts are returned.
 export function oursFromScripts(root = STARTUP, candidates = [], langText = '', tablesDir = path.join(REPO, 'pack', 'kubejs', 'data', 'grindless', 'tables'), conflicts = []) {
   const out = new Map();
   const langOf = (f) => (langText instanceof Map ? langText.get(f) || '' : '');
@@ -63,7 +65,8 @@ export function oursFromScripts(root = STARTUP, candidates = [], langText = '', 
         const hasCreate = /\.create\(/.test(text);
         for (const id of candidates) {
           const n = id.split(':')[1];
-          if (id.startsWith('gtceu:') && new RegExp(`['"]${n}['"]`).test(hay) && langAll.includes(`block.gtceu.${n}'`)) {
+          const named = langAll.includes(`block.gtceu.${n}'`) || new RegExp(`\\bname:\\s*['"]${n}['"][^{}]*?\\blang:\\s*['"]`).test(text);
+          if (id.startsWith('gtceu:') && new RegExp(`['"]${n}['"]`).test(hay) && named) {
             if (!loose.has(id)) loose.set(id, []);
             loose.get(id).push({ folder, hasCreate });
           }
@@ -97,8 +100,8 @@ export function hiddenIds(table, implemented) {
   return ids;
 }
 
-// earliest gate tier that reaches each id: Map id -> tier (absent: none of GATE_TIERS)
-async function reachTiers(dumpDir, ids) {
+// earliest gate tier that reaches each id: Map id -> tier (absent: none of the gate tiers)
+async function reachTiers(dumpDir, ids, tiers) {
   const lib = (p) => import(pathToFileURL(path.join(REPO, 'tools', 'analysis', 'lib', p)).href);
   const { loadTierConfig } = await lib('config.mjs');
   const { loadDump } = await lib('dump.mjs');
@@ -109,7 +112,7 @@ async function reachTiers(dumpDir, ids) {
   const out = new Map();
   try {
     const dump = loadDump(dumpDir);
-    for (const tier of GATE_TIERS) {
+    for (const tier of tiers) {
       const { raw } = loadTierConfig({ tier }, path.join(REPO, 'tools', 'analysis', 'tiers'));
       const model = buildModel(dump, raw);
       const res = runPasses(model);
@@ -162,7 +165,7 @@ export function nominalTiers(recipes, ids) {
 }
 
 // ---------------------------------------------------------------- the decision, pure so the test can feed it
-export function classify({ machines, items, hidden, ours, reach, nominal = new Map() }) {
+export function classify({ machines, items, hidden, ours, reach, nominal = new Map(), implemented = null }) {
   const controllers = [];
   const excluded = [];
   const mismatches = [];
@@ -184,7 +187,8 @@ export function classify({ machines, items, hidden, ours, reach, nominal = new M
       tier = nom && TIERS.indexOf(nom) > TIERS.indexOf(reached) ? nom : reached;
       if (nom && nom !== reached) shifted.push({ id, reach: reached, nominal: nom, chosen: tier });
     }
-    else { excluded.push({ id, why: folder ? `ours in "${folder}": not an era folder and no gate reaches it` : 'no gate up to uhv reaches it' }); continue; }
+    else { excluded.push({ id, why: folder ? `ours in "${folder}": not an era folder and no gate reaches it` : `no gate up to ${implemented || 'the last tier'} reaches it` }); continue; }
+    if (implemented && TIERS.indexOf(tier) > TIERS.indexOf(implemented)) { excluded.push({ id, why: `${tier} is after the implemented era ${implemented}` }); continue; }
     controllers.push({ id, name: titleOf(id), tier, ours: !!folder });
   }
   return { controllers, excluded, mismatches, shifted };
@@ -240,9 +244,10 @@ async function main() {
   const ours = oursFromScripts(STARTUP, machines.filter((m) => m.mb === 1).map((m) => m.id), langByFolder, undefined, conflicts);
   for (const c of conflicts) console.log(`ownership conflict: ${c.id} in ${c.folders.join(', ')} -> ${c.chosen}`);
   const candidates = machines.filter((m) => m.mb === 1 && !hidden.has(m.id) && items.has(m.id)).map((m) => m.id);
-  const reach = await reachTiers(dumpDir, candidates);
+  const tiers = gateTiers(implemented, (t) => fs.existsSync(path.join(REPO, 'tools', 'analysis', 'tiers', `${t}.json`)));
+  const reach = await reachTiers(dumpDir, candidates, tiers);
   const nominal = nominalTiers(read('recipes.json').recipes, candidates);
-  const { controllers, excluded, mismatches, shifted } = classify({ machines, items, hidden, ours, reach, nominal });
+  const { controllers, excluded, mismatches, shifted } = classify({ machines, items, hidden, ours, reach, nominal, implemented });
   const bands = layoutBands(controllers);
   const out = chapterSnbt(bands);
 

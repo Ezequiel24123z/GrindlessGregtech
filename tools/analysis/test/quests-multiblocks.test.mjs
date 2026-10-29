@@ -1,7 +1,8 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { hid, layoutBands, COLS, PITCH_X, PITCH_Y } from '../../quests/multiblocks/mb-lib.mjs';
-import { oursFromScripts } from '../../quests/multiblocks/gen.mjs';
+import { oursFromScripts, classify } from '../../quests/multiblocks/gen.mjs';
+import { gateTiers } from '../../quests/multiblocks/mb-data.mjs';
 import fs from 'node:fs';
 import os from 'node:os';
 import path from 'node:path';
@@ -9,11 +10,12 @@ import path from 'node:path';
 test('variable-registered controller is ours, in its folder; built-in ids stay out', () => {
   const root = fs.mkdtempSync(path.join(os.tmpdir(), 'mbours-'));
   fs.mkdirSync(path.join(root, 'uev'));
-  fs.writeFileSync(path.join(root, 'uev', 'a.js'), "const L = [{ name: 'foo_lab' }, { name: 'cleanroom' }];\nL.forEach((m) => event.create(m.name, 'multiblock'));\n");
+  fs.writeFileSync(path.join(root, 'uev', 'a.js'), "const L = [{ name: 'foo_lab' }, { name: 'cleanroom' }, { name: 'bar_ring', type: 'x', lang: 'Bar Ring' }];\nL.forEach((m) => event.create(m.name, 'multiblock'));\n");
   const lang = new Map([['uev', "['block.gtceu.foo_lab', 'Foo Lab', 'x'],"]]);
   const conflicts = [];
-  const ours = oursFromScripts(root, ['gtceu:foo_lab', 'gtceu:cleanroom'], lang, path.join(root, 'none'), conflicts);
+  const ours = oursFromScripts(root, ['gtceu:foo_lab', 'gtceu:cleanroom', 'gtceu:bar_ring'], lang, path.join(root, 'none'), conflicts);
   assert.equal(ours.get('gtceu:foo_lab'), 'uev');
+  assert.equal(ours.get('gtceu:bar_ring'), 'uev', 'named by its own lang: field');
   assert.equal(ours.has('gtceu:cleanroom'), false);
   assert.equal(conflicts.length, 0);
   fs.rmSync(root, { recursive: true });
@@ -57,4 +59,15 @@ test('no overlapping cells', () => {
       seen.add(k);
     }
   }
+});
+
+test('a controller whose tier is after the implemented era gets no quest; gates stop at the implemented era', () => {
+  const machines = [{ id: 'gtceu:a', mb: 1 }, { id: 'gtceu:b', mb: 1 }, { id: 'x:c', mb: 1 }, { id: 'x:d', mb: 1 }];
+  const ours = new Map([['gtceu:a', 'uev'], ['gtceu:b', 'uiv']]);
+  const reach = new Map([['x:c', 'uhv']]);
+  const r = classify({ machines, items: null, hidden: new Set(), ours, reach, nominal: new Map([['x:c', 'uiv']]), implemented: 'uev' });
+  assert.deepEqual(r.controllers.map((c) => [c.id, c.tier]), [['gtceu:a', 'uev']]);
+  assert.deepEqual(r.excluded.map((e) => e.why), ['uiv is after the implemented era uev', 'uiv is after the implemented era uev', 'no gate up to uev reaches it']);
+  assert.equal(classify({ machines, items: null, hidden: new Set(), ours, reach }).controllers.length, 3, 'no implemented era: no cut');
+  assert.deepEqual(gateTiers('uev', (t) => t !== 'mv'), ['steam', 'lv', 'hv', 'ev', 'iv', 'luv', 'zpm', 'uv', 'uhv', 'uev']);
 });

@@ -13,8 +13,9 @@ export const CHAPTER = {
 // Band order, top to bottom. A band with no controllers is skipped; a later tier is added here when it lands.
 export const TIERS = ['steam', 'lv', 'mv', 'hv', 'ev', 'iv', 'luv', 'zpm', 'uv', 'uhv', 'uev', 'uiv', 'uxv', 'opv', 'max'];
 
-// The tiers whose gate (tools/analysis/tiers/<tier>.json) decides where a controller of the other mods goes
-export const GATE_TIERS = ['steam', 'lv', 'mv', 'hv', 'ev', 'iv', 'luv', 'zpm', 'uv', 'uhv'];
+// The tiers whose gate decides where a controller of the other mods goes: every tier up to the dump's implemented era
+// that has a tools/analysis/tiers/<tier>.json.
+export const gateTiers = (implemented, hasConfig) => TIERS.slice(0, TIERS.indexOf(implemented) + 1).filter(hasConfig);
 
 export const TIER_NAMES = {
   steam: 'Steam', lv: 'LV', mv: 'MV', hv: 'HV', ev: 'EV', iv: 'IV', luv: 'LuV', zpm: 'ZPM', uv: 'UV', uhv: 'UHV',
