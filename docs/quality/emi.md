@@ -575,6 +575,8 @@ Info pages done (QR-I4): the 14 controllers, the UEV/UIV hull and energy/dynamo 
 
 ### uiv
 
+Info pages done (QR-I5): the 17 multiblocks listed below plus `gtceu:xray_pulse_profiler` (registered in `uiv/j0437.js`, missing from this list); hulls, energy/dynamo hatches and the parallel hatch were QR-I4's, the wireless hatches QR-I2's.
+
 | Machine ID | Source |
 |---|---|
 | `gtceu:beuv_scanner` | `pack/kubejs/startup_scripts/grindless/uiv/beuv_stm.js:53` |
