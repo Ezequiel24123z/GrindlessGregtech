@@ -18,6 +18,7 @@
         {
           "name": "poled_lnoi", "circuit": 3, "eut": 31457280, "duration": 1200,
           "itemsIn": [{ "id": "grindless:lnoi_wafer", "count": 1 }],
+          "fluidsIn": [],
           "itemsOut": [{ "id": "grindless:poled_lnoi_wafer", "count": 1 }]
         },
         {
@@ -107,11 +108,13 @@
         {
           "name": "shg_486_stage", "circuit": 0, "eut": 1966080, "duration": 400,
           "itemsIn": [{ "id": "grindless:ppln_waveguide", "count": 1 }, { "id": "grindless:uev_emitter", "count": 1 }],
+          "fluidsIn": [],
           "itemsOut": [{ "id": "grindless:shg_486_stage", "count": 1 }]
         },
         {
           "name": "ps_cooling_laser", "circuit": 0, "eut": 1966080, "duration": 400,
           "itemsIn": [{ "id": "grindless:shg_486_stage", "count": 1 }, { "id": "grindless:ppln_waveguide", "count": 1 }],
+          "fluidsIn": [],
           "itemsOut": [{ "id": "grindless:ps_cooling_laser", "count": 1 }]
         }
       ]

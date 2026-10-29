@@ -167,10 +167,10 @@ test('MBE row: circuit 4, the multilayer grown on glass; the cage line from NiCl
   assert.deepEqual(ids(m.itemsOut), ['grindless:ni58_ti_multilayer']);
   const A = OWN.assembler.recipes;
   assert.deepEqual(A.map((r) => r.circuit), [29, 30, 31, 32]);
-  assert.deepEqual(ids(by(A, 'neutron_supermirror').itemsIn), ['grindless:ni58_ti_multilayer', 'gtceu:aluminium_plate']);
-  assert.deepEqual(ids(by(A, 'neutron_guide').itemsIn), ['grindless:neutron_supermirror', 'gtceu:aluminium_frame']);
-  assert.deepEqual(ids(by(A, 'cage_part').itemsIn), ['grindless:neutron_guide', 'gtceu:stainless_steel_plate']);
-  assert.deepEqual(ids(by(A, 'ti50_oven_charge').itemsIn), ['gtceu:titanium_50_dust', 'gtceu:titanium_foil']);
+  assert.deepEqual(ids(by(A, 'neutron_supermirror').itemsIn),   ['grindless:ni58_ti_multilayer',   'gtceu:aluminium_plate']);
+      assert.deepEqual(ids(by(A, 'neutron_guide').itemsIn), ['grindless:neutron_supermirror', 'gtceu:aluminium_frame']);
+      assert.deepEqual(ids(by(A, 'cage_part').itemsIn), ['grindless:neutron_guide', 'gtceu:stainless_steel_plate']);
+      assert.deepEqual(ids(by(A, 'ti50_oven_charge').itemsIn), ['gtceu:titanium_50_dust', 'gtceu:titanium_foil']);
   assert.deepEqual(ids(by(A, 'ti50_oven_charge').itemsOut), ['grindless:ti50_oven_charge']);
   assert.equal(by(OWN.chemical_reactor.recipes, 'nickel_chloride').circuit, 30);
   assert.equal(OWN.vacuum_freezer.recipes[0].circuit, 0);

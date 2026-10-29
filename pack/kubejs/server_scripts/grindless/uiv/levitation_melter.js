@@ -9,7 +9,7 @@
 //   gtceu:mixer, electrolyzer, chemical_reactor, electric_blast_furnace, assembler   the steps GTM can run (the master alloy, the BeO
 //                              electrolysis, the Nb2O5 reduction, the RHEA homogenisation, the coil block, the sled charge and the UIV conveyor).
 //   gtceu:hot_rolling          the RHEA slab to plate (circuit 4; EV's generated rows use 1 to 3); the hot strip mill's own type.
-//   crafting                   the controller: UEV hull + 2 UEV electric pistons + 2 optical computers, grindless:crafting/levitation_melter.
+//   assembly_line              the controller: UEV hull + 2 UEV electric pistons + 2 optical computers + UEV circuits + 3 line items, with soldering alloy, lubricant and neutronium, behind station research, grindless:assembly_line/levitation_melter.
 //
 // Lookup safety: a recipe whose ingredients are a subset of another's of its type can hide it; checked at load (a clash is an error).
 // Published for the smoke test: global.grindless.levitationMelter.recipes, .skipped, .clashes, .controllerRecipes.
@@ -172,13 +172,25 @@
     var COMPUTER = 'gtnn:optical_computer'
     var machine = LM.machine.machine
     LM.controllerRecipes = []
-    var missing = [HULL, PISTON, COMPUTER, machine].filter(function (id) { return !Item.exists(id) })
+    var research = 'grindless:maglev_stator'
+    var domain = ['2x grindless:strain_wave_gear', '2x grindless:impregnated_gdbco', '2x grindless:rhea_cased_halbach']
+    var ids = [HULL, PISTON, COMPUTER, machine, research].concat(domain.map(function (s) { return s.replace(/^\d+x /, '') }))
+    var missing = ids.filter(function (id) { return !Item.exists(id) })
     if (missing.length > 0) {
       console.error(LOG + 'levitation melter controller recipe skipped, unknown item(s): ' + missing.join(', '))
       return
     }
-    event.recipes.gtceu.shaped(machine, ['OPO', 'PHP'], { O: COMPUTER, P: PISTON, H: HULL }).id('grindless:crafting/levitation_melter')
-    LM.controllerRecipes.push('grindless:crafting/levitation_melter')
+    var b = event.recipes.gtceu.assembly_line('grindless:levitation_melter')
+    b.itemInputs(HULL)
+    b.itemInputs('2x ' + PISTON)
+    b.itemInputs('2x ' + COMPUTER)
+    b.itemInputs('4x #gtceu:circuits/uev')
+    domain.forEach(function (s) { b.itemInputs(s) })
+    b.inputFluids(Fluid.of('gtceu:soldering_alloy', 2304), Fluid.of('gtceu:lubricant', 2000), Fluid.of('gtceu:neutronium', 576))
+    b.itemOutputs(machine)
+    b.stationResearch(function (r) { return r.researchStack(Item.of(research)).CWUt(64).EUt(7864320) })
+    b.EUt(7864320).duration(1500)
+    LM.controllerRecipes.push('grindless:assembly_line/levitation_melter')
   }
 
   // an uncaught error here would stop KubeJS from running the recipe handlers of the scripts that load after this one

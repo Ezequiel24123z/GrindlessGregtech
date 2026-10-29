@@ -10,7 +10,8 @@
 //   gtceu:r_process_decompression     r-process decompressor. Only at grindless:rx_j1856_orbit.
 //   gtceu:decay_heat                  decay heat vault, a generator (EUt written negative). Only at grindless:rx_j1856_orbit.
 //   assembler, chemical_reactor, ...  the line steps GTM can run (ids grindless:<name>).
-//   crafting                          the controllers: UIV hull + 2 UIV parts + 2 optical mainframes, grindless:crafting/<machine>.
+//   assembly_line               the controllers: UIV hull + 2 UIV parts + 2 optical mainframes + UIV circuits + 3 line items, with
+//                               soldering alloy, lubricant and neutronium, behind station research, grindless:assembly_line/<machine>.
 //
 // Row keys: "site" true puts recipe.dimension(rx_j1856_orbit) on it; "wear" are chanced inputs (a tool that wears); "kept" are not consumed.
 // A type with "generator": true makes EU (the recipe's EUt is written negative).
@@ -175,20 +176,33 @@
   function addControllers(event) {
     var HULL = 'gtceu:uiv_machine_hull'
     var MAINFRAME = 'gtnn:optical_mainframe'
-    var parts = {
-      crust_lift: 'grindless:uiv_electric_piston', neutron_drip_separator: 'grindless:uiv_electric_pump',
-      neutronium_cage: 'grindless:uiv_robot_arm', r_process_decompressor: 'grindless:uiv_conveyor_module', decay_heat_vault: 'grindless:uiv_electric_motor'
-    }
+    var defs = [
+      { name: 'crust_lift', part: 'grindless:uiv_electric_piston', research: 'grindless:crust_lift_tether', domain: ['2x grindless:polar_cap_electrode', '2x grindless:braided_mh_tether', '2x grindless:mh_laminated_yarn'] },
+      { name: 'neutron_drip_separator', part: 'grindless:uiv_electric_pump', research: 'grindless:neutron_supermirror', domain: ['2x grindless:neutron_guide', '2x grindless:es254_target', '2x grindless:target_wheel_blank'] },
+      { name: 'neutronium_cage', part: 'grindless:uiv_robot_arm', research: 'grindless:cage_part', domain: ['2x grindless:neutron_guide', '2x grindless:neutron_supermirror', '2x grindless:target_wheel_blank'] },
+      { name: 'r_process_decompressor', part: 'grindless:uiv_conveyor_module', research: 'grindless:sealed_capsule', domain: ['2x grindless:es254_target', '2x grindless:neutron_guide', '2x grindless:target_wheel_blank'] },
+      { name: 'decay_heat_vault', part: 'grindless:uiv_electric_motor', research: 'grindless:mh_laminated_yarn', domain: ['2x grindless:braided_mh_tether', '2x grindless:polar_cap_electrode', '2x grindless:crust_lift_tether'] }
+    ]
     RX.controllerRecipes = []
-    Object.keys(parts).forEach(function (name) {
-      var machine = 'gtceu:' + name
-      var missing = [HULL, parts[name], MAINFRAME, machine].filter(function (id) { return !Item.exists(id) })
+    defs.forEach(function (d) {
+      var machine = 'gtceu:' + d.name
+      var ids = [HULL, d.part, MAINFRAME, machine, d.research].concat(d.domain.map(function (s) { return s.replace(/^\d+x /, '') }))
+      var missing = ids.filter(function (id) { return !Item.exists(id) })
       if (missing.length > 0) {
-        console.error(LOG + name + ' controller recipe skipped, unknown item(s): ' + missing.join(', '))
+        console.error(LOG + d.name + ' controller recipe skipped, unknown item(s): ' + missing.join(', '))
         return
       }
-      event.recipes.gtceu.shaped(machine, ['OPO', 'PHP'], { O: MAINFRAME, P: parts[name], H: HULL }).id('grindless:crafting/' + name)
-      RX.controllerRecipes.push('grindless:crafting/' + name)
+      var b = event.recipes.gtceu.assembly_line('grindless:' + d.name)
+      b.itemInputs(HULL)
+      b.itemInputs('2x ' + d.part)
+      b.itemInputs('2x ' + MAINFRAME)
+      b.itemInputs('4x #gtceu:circuits/uiv')
+      d.domain.forEach(function (s) { b.itemInputs(s) })
+      b.inputFluids(Fluid.of('gtceu:soldering_alloy', 2304), Fluid.of('gtceu:lubricant', 2000), Fluid.of('gtceu:neutronium', 576))
+      b.itemOutputs(machine)
+      b.stationResearch(function (r) { return r.researchStack(Item.of(d.research)).CWUt(64).EUt(7864320) })
+      b.EUt(7864320).duration(1500)
+      RX.controllerRecipes.push('grindless:assembly_line/' + d.name)
     })
   }
 

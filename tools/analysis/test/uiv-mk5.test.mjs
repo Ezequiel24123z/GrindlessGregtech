@@ -96,12 +96,12 @@ test('Mk5 ring: three fuels, three plasmas, starts above 2^31, within the tier-1
 });
 
 test('casing: resolves from the W fibre preform and Li-Sn; line 7 and 29 steps', () => {
-  assert.deepEqual(inputs(by('assembler', 'first_wall_tile')), ['grindless:plasma_sprayed_tile', 'gtceu:tungsten_steel_plate']);
-  assert.deepEqual(inputs(by('assembler', 'li_sn_armoured_tile')), ['grindless:first_wall_tile', 'gtceu:li_sn']);
-  assert.deepEqual(inputs(by('assembler', 'uiv_fusion_casing_wall')), ['grindless:li_sn_armoured_tile', 'grindless:w_fibre_preform', 'gtceu:li_sn']);
-  assert.deepEqual(inputs(by('assembler', 'cps_wetted_mesh')), ['grindless:w_mesh', 'gtceu:li_sn']);
-  assert.deepEqual(inputs(by('assembler', 'divertor_cassette')), ['grindless:cps_wetted_mesh', 'gtceu:tungsten_steel_plate']);
-  assert.deepEqual(inputs(by('assembler', 'divertor')), ['grindless:divertor_cassette', 'grindless:w_fibre_preform']);
+  assert.deepEqual(inputs(by('assembler', 'first_wall_tile')), ['grindless:plasma_sprayed_tile',   'gtceu:tungsten_steel_plate']);
+    assert.deepEqual(inputs(by('assembler', 'li_sn_armoured_tile')), ['grindless:first_wall_tile', 'gtceu:li_sn']);
+    assert.deepEqual(inputs(by('assembler', 'uiv_fusion_casing_wall')), ['grindless:li_sn_armoured_tile', 'grindless:w_fibre_preform', 'gtceu:li_sn']);
+    assert.deepEqual(inputs(by('assembler', 'cps_wetted_mesh')), ['grindless:w_mesh', 'gtceu:li_sn']);
+    assert.deepEqual(inputs(by('assembler', 'divertor_cassette')), ['grindless:cps_wetted_mesh', 'gtceu:tungsten_steel_plate']);
+    assert.deepEqual(inputs(by('assembler', 'divertor')), ['grindless:divertor_cassette', 'grindless:w_fibre_preform']);
   assert.deepEqual(ids(by('assembler', 'uiv_fusion_casing_divertor').itemsIn)[0], 'grindless:divertor');
   for (const n of ['uiv_fusion_casing_wall', 'uiv_fusion_casing_divertor']) assert.deepEqual(ids(by('assembler', n).itemsOut), ['grindless:uiv_fusion_casing']);
 });
@@ -188,9 +188,16 @@ test('controllers: UIV hull, 2 UIV parts and 2 optical mainframes', () => {
   const src = read('server_scripts', 'grindless', 'uiv', 'mk5.js');
   assert.match(src, /gtceu:uiv_machine_hull/);
   assert.match(src, /gtnn:optical_mainframe/);
-  assert.match(src, /\['OPO', 'PHP'\]/);
-  assert.match(src, /polarised_proton_source: 'grindless:uiv_electric_pump'/);
-  assert.match(src, /uiv_fusion_reactor: 'grindless:uiv_electric_piston'/);
+  assert.doesNotMatch(src, /\['OPO', 'PHP'\]|gtceu\.shaped/, 'no shaped controller recipe any more');
+  assert.match(src, /event\.recipes\.gtceu\.assembly_line\('grindless:' \+ d\.name\)/);
+  assert.match(src, /grindless:assembly_line\/' \+ d\.name/);
+  assert.match(src, /b\.itemInputs\('2x ' \+ d\.part\)/);
+  assert.match(src, /b\.itemInputs\('2x ' \+ MAINFRAME\)/);
+  assert.match(src, /b\.itemInputs\('4x #gtceu:circuits\/uiv'\)/);
+  assert.match(src, /inputFluids\(Fluid\.of\('gtceu:soldering_alloy', 2304\), Fluid\.of\('gtceu:lubricant', 2000\), Fluid\.of\('gtceu:neutronium', 576\)\)/);
+  assert.match(src, /stationResearch/);
+  assert.match(src, /name: 'polarised_proton_source', part: 'grindless:uiv_electric_pump', research: 'grindless:cps_wetted_mesh'/);
+  assert.match(src, /name: 'uiv_fusion_reactor', part: 'grindless:uiv_electric_piston', research: 'grindless:divertor'/);
 });
 
 test('lang parity: every ENTRY and ITEM has en_us and es_es, every item has a texture', () => {

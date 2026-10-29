@@ -39,6 +39,7 @@
         {
           "name": "six_hour_memory", "circuit": 20, "eut": 491520, "duration": 600,
           "itemsIn": [{ "id": "grindless:six_hour_memory_slab", "count": 1 }, { "id": "grindless:mk_cryostat_module", "count": 1 }, { "id": "grindless:uev_sensor", "count": 1 }],
+          "fluidsIn": [],
           "itemsOut": [{ "id": "grindless:six_hour_memory", "count": 1 }]
         },
         {
@@ -49,18 +50,20 @@
         },
         {
           "name": "er_fibre", "circuit": 22, "eut": 122880, "duration": 400,
-          "itemsIn": [{ "id": "grindless:er_preform", "count": 1 }],
+          "itemsIn": [{ "id": "grindless:er_preform", "count": 1 }, { "id": "gtceu:glass_dust", "count": 1 }, { "id": "gtceu:silicon_dust", "count": 1 }],
           "fluidsIn": [{ "id": "gtceu:acrylate_coating", "amount": 250 }],
           "itemsOut": [{ "id": "grindless:er_fibre", "count": 8 }]
         },
         {
           "name": "er_fibre_coil", "circuit": 23, "eut": 122880, "duration": 300,
           "itemsIn": [{ "id": "grindless:er_fibre", "count": 4 }, { "id": "grindless:ytterbium_fibre", "count": 1 }],
+          "fluidsIn": [{ "id": "gtceu:acrylate_coating", "amount": 100 }],
           "itemsOut": [{ "id": "grindless:er_fibre_coil", "count": 1 }]
         },
         {
           "name": "pumped_edfa", "circuit": 25, "eut": 491520, "duration": 400,
           "itemsIn": [{ "id": "grindless:er_fibre_coil", "count": 1 }, { "id": "grindless:ingaas_pump_module", "count": 2 }],
+          "fluidsIn": [],
           "itemsOut": [{ "id": "grindless:pumped_edfa", "count": 1 }]
         }
       ]

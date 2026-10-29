@@ -56,7 +56,7 @@ test('names unique, figures positive, circuits unique per type (0 only for GTM t
 test('machines: three UIV multiblocks in the J0437 orbit, controllers shaped from hull + 2 optical mainframes', () => {
   for (const m of ['pulsar_wind_trap', 'positronium_condensate_lab', 'xray_pulse_profiler']) {
     assert.ok(startup.includes(`'${m}'`) || startup.includes(`${m}:`), m);
-    assert.ok(server.includes('grindless:crafting/'), m);
+    assert.ok(server.includes('grindless:assembly_line/'), m);
     assert.ok(lang.includes(`grindless.machine.${m}.tooltip.2`), m);
   }
   assert.ok(server.includes('gtceu:uiv_machine_hull') && server.includes('gtnn:optical_mainframe'));
