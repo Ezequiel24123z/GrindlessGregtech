@@ -1,0 +1,5 @@
+{
+  "type": "emi:info",
+  "stacks": ["item:grindless:superheavy_census_iii", "item:grindless:spent_actinide_target", "item:gtceu:fermium_257_dust", "item:gtceu:tungsten_184_dust"],
+  "text": ["emi.grindless.info.uxv_superheavy_stock.0"]
+}
