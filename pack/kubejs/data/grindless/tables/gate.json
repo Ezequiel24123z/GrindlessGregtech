@@ -55,6 +55,19 @@
           ],
           "kept": [{ "id": "grindless:pulsar_navigation_chart", "count": 1 }],
           "itemsOut": []
+        },
+        {
+          "_why": "UIV-B5: c7 hold at Cygnus X-1, 16 A x V[UIV] for 60 s; the stored items stay in the bus (gate to UXV)",
+          "name": "hold_cygnus_ring",
+          "circuit": 7, "eut": 536870912, "duration": 1200, "site": "cygnus_x1_orbit",
+          "itemsIn": [{ "id": "grindless:neutronium_pellet", "count": 1 }],
+          "kept": [
+            { "id": "grindless:superheavy_census_ii", "count": 1 },
+            { "id": "grindless:ns_eos_chart", "count": 1 },
+            { "id": "grindless:recovered_half_sled", "count": 1 },
+            { "id": "gtnn:optical_mainframe", "count": 4 }
+          ],
+          "itemsOut": []
         }
       ]
     },
