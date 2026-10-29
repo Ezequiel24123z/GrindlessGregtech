@@ -88,6 +88,15 @@
       itemsOut: [{ id: 'grindless:synroc_liner', count: 1 }], chancedOut: [],
       fluidsOut: [{ id: 'gtceu:nitrogen_dioxide', amount: 500 }],
       eut: 30720, duration: 300
+    },
+    // UXV-A1 (line 21): the spent beam target's actinides go on to partitioning; the synroc is cast; circuit 6 (1-4 are taken)
+    {
+      name: 'spent_target_retrieve', circuit: 6,
+      itemsIn: [{ id: 'grindless:spent_actinide_target', count: 1 }], chancedIn: [], notConsumed: [],
+      fluidsIn: [{ id: 'gtceu:nitric_acid', amount: 1000 }],
+      itemsOut: [{ id: SYNROC, count: 1 }], chancedOut: [],
+      fluidsOut: [{ id: RAFFINATE, amount: 1000 }, { id: 'gtceu:nitrogen_dioxide', amount: 500 }],
+      eut: 30720, duration: 600
     }
   ]
 
@@ -140,6 +149,15 @@
       itemsOut: [{ id: 'gtceu:fermium_dust', count: 1 }], chancedOut: [],
       fluidsOut: [{ id: 'gtceu:es_254_solution', amount: 1000 }],
       eut: 30720, duration: 200
+    },
+    // UXV-A1 (line 24 and the MNT collider): the collider's fragment gas is split into lead, mercury and platinum; circuit 7 (6 is the Es/Fm cut)
+    {
+      name: 'mnt_fragments', circuit: 7,
+      itemsIn: [], chancedIn: [],
+      fluidsIn: [{ id: 'gtceu:mnt_product_gas', amount: 1000 }], notConsumed: [],
+      itemsOut: [{ id: LEAD, count: 2 }, { id: 'gtceu:platinum_dust', count: 1 }], chancedOut: [],
+      fluidsOut: [{ id: 'gtceu:mercury', amount: 500 }],
+      eut: 30720, duration: 300
     }
   ]
 

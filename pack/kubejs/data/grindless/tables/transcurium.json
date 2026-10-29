@@ -181,6 +181,38 @@
           "fluidsIn": [{ "id": "gtceu:es_254_solution", "amount": 1000 }],
           "itemsOut": [{ "id": "gtceu:einsteinium_dust", "count": 1 }],
           "fluidsOut": [{ "id": "gtceu:nitric_acid", "amount": 1000 }]
+        },
+        {
+          "_why": "UXV-A1 line 19: fermium-257 plated from the nitric bath onto a titanium backing (molecular plating); most of the bath is recovered",
+          "name": "fm257_plating",
+          "circuit": 10,
+          "eut": 1966080,
+          "duration": 600,
+          "itemsIn": [
+            { "id": "gtceu:fermium_257_dust", "count": 1 },
+            { "id": "gtceu:titanium_plate", "count": 1 }
+          ],
+          "kept": [],
+          "charge": [],
+          "fluidsIn": [{ "id": "gtceu:nitric_acid", "amount": 250 }],
+          "itemsOut": [{ "id": "grindless:fm257_plated_blank", "count": 1 }],
+          "fluidsOut": [{ "id": "gtceu:nitric_acid", "amount": 200 }]
+        },
+        {
+          "_why": "UXV-A1 line 23: curium-248 plated from the nitric bath onto a titanium backing (molecular plating); most of the bath is recovered",
+          "name": "cm248_plating",
+          "circuit": 11,
+          "eut": 1966080,
+          "duration": 600,
+          "itemsIn": [
+            { "id": "gtceu:curium_248_dust", "count": 1 },
+            { "id": "gtceu:titanium_plate", "count": 1 }
+          ],
+          "kept": [],
+          "charge": [],
+          "fluidsIn": [{ "id": "gtceu:nitric_acid", "amount": 250 }],
+          "itemsOut": [{ "id": "grindless:cm248_plated_blank", "count": 1 }],
+          "fluidsOut": [{ "id": "gtceu:nitric_acid", "amount": 200 }]
         }
       ]
     },
