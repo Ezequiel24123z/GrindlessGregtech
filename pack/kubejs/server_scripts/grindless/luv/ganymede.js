@@ -53,6 +53,14 @@
       .EUt(30720).duration(12000)
     event.shapeless('2x ' + I.catalogue, [I.catalogue, I.dataOrb]).id(GY.recipes.copy)
 
+    // UIV-B4 (line 35): the Kerr probe data read as gravitational waves, a ringdown record for the event-horizon interferometer
+    onGanymede('gravitational_wave_astronomy', 'kerr_ringdown_record').circuit(2)
+      .itemInputs('grindless:kerr_probe_data', I.dataOrb)
+      .notConsumable(I.signal)
+      .inputFluids(Fluid.of(I.helium, 100))
+      .itemOutputs('grindless:kerr_ringdown_record')
+      .EUt(30720).duration(12000)
+
     onGanymede('probe_launch', 'jovian_atmosphere_survey').circuit(1)
       .itemInputs(I.jupiterProbe)
       .itemOutputs(I.survey)
