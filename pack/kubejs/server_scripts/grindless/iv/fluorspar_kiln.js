@@ -106,6 +106,49 @@
     }
   ]
 
+  // UXV-A2 rows (docs/eras/uxv.md, "Fluorspar kiln"): the spintronic oxides, calcined from the charges the mixer makes (spin_feed.js: the
+  // two oxides kneaded wet, so each calcine gives off its water, or its CO2 for the SrCO3), and fluorine from hydrogen fluoride. The kiln
+  // has one item and one fluid out, so the fluorine row's hydrogen is flared off at the cathode (it is not a product) and the KF electrolyte
+  // comes back in full.
+  var UXV_ROWS = [
+    {
+      name: 'five_n_magnesia',
+      itemIn: { id: 'grindless:magnesium_hydroxide_dust', count: 2 }, fluidIn: { id: 'gtceu:argon', amount: 1000 },
+      itemOut: { id: 'grindless:five_n_magnesia_dust', count: 2 }, fluidOut: { id: 'gtceu:steam', amount: 2000 },
+      eut: 30, duration: 64
+    },
+    {
+      name: 'dysco3_calcine',
+      itemIn: { id: 'grindless:dysco3_charge_dust', count: 2 }, fluidIn: { id: 'gtceu:oxygen', amount: 1000 },
+      itemOut: { id: 'gtceu:dysco3_dust', count: 2 }, fluidOut: { id: 'gtceu:steam', amount: 1000 },
+      eut: 30, duration: 64
+    },
+    {
+      name: 'srruo3_calcine',
+      itemIn: { id: 'grindless:srruo3_charge_dust', count: 2 }, fluidIn: { id: 'gtceu:oxygen', amount: 1000 },
+      itemOut: { id: 'gtceu:srruo3_dust', count: 2 }, fluidOut: { id: 'gtceu:carbon_dioxide', amount: 1000 },
+      eut: 30, duration: 64
+    },
+    {
+      name: 'la_bfo_calcine',
+      itemIn: { id: 'grindless:la_bfo_charge_dust', count: 2 }, fluidIn: { id: 'gtceu:oxygen', amount: 1000 },
+      itemOut: { id: 'gtceu:la_bfo_dust', count: 2 }, fluidOut: { id: 'gtceu:steam', amount: 1000 },
+      eut: 30, duration: 64
+    },
+    {
+      name: 'ggg_calcine',
+      itemIn: { id: 'grindless:ggg_charge_dust', count: 2 }, fluidIn: { id: 'gtceu:oxygen', amount: 1000 },
+      itemOut: { id: 'gtceu:ggg_dust', count: 2 }, fluidOut: { id: 'gtceu:steam', amount: 1000 },
+      eut: 30, duration: 64
+    },
+    {
+      name: 'fluorine_from_hf',
+      itemIn: { id: 'grindless:alkali_fluoride_dust', count: 1 }, fluidIn: { id: 'gtceu:hydrofluoric_acid', amount: 2000 },
+      itemOut: { id: 'grindless:alkali_fluoride_dust', count: 1 }, fluidOut: { id: 'gtceu:fluorine', amount: 1000 },
+      eut: 30, duration: 64
+    }
+  ]
+
   function addUevRows(event, rows) {
     ;(rows || UEV_ROWS).forEach(function (r) {
       var missing = []
@@ -160,6 +203,11 @@
       addUevRows(event, UIV_ROWS)
     } catch (e4) {
       console.error(LOG + 'fluorspar kiln UIV rows failed: ' + e4)
+    }
+    try {
+      addUevRows(event, UXV_ROWS)
+    } catch (e5) {
+      console.error(LOG + 'fluorspar kiln UXV rows failed: ' + e5)
     }
     try {
       addController(event)

@@ -44,8 +44,10 @@ const UEV_A4 = ['grindless:sx_dross', 'grindless:eb_skull', 'gtceu:ruthenium_dus
 const UEV_B3 = ['grindless:barnard_residue', 'grindless:crude_ammonium_perrhenate', 'gtceu:platinum_dust', 'gtceu:tungsten_dust'];
 // UIV-B2's platinum plant row (circuit 10): the r-process ash (startup_scripts/grindless/uiv/rx_j1856.js)
 const UIV_B2 = ['grindless:r_process_ash'];
-const ITEMS = new Set([...IDS.items, ...A1, ...ZPM_A2, ...UEV_A4, ...UEV_B3, ...UIV_B2]);
-const FLUIDS = new Set([...IDS.fluids, 'gtceu:nitric_acid']);
+// UXV-A2's platinum plant rows (circuits 11-14): the three 5N metals (startup_scripts/grindless/uxv/spin_feed.js) and the sludge's two metals
+const UXV_A2 = ['grindless:five_n_platinum', 'grindless:five_n_ruthenium', 'grindless:five_n_iridium', 'gtceu:platinum_group_sludge_dust', 'gtceu:iridium_dust'];
+const ITEMS = new Set([...IDS.items, ...A1, ...ZPM_A2, ...UEV_A4, ...UEV_B3, ...UIV_B2, ...UXV_A2]);
+const FLUIDS = new Set([...IDS.fluids, 'gtceu:nitric_acid', 'gtceu:diluted_hydrochloric_acid']);
 
 function strictRun(scripts, startup, recipes, before) {
   const asked = { items: new Set(), fluids: new Set() };

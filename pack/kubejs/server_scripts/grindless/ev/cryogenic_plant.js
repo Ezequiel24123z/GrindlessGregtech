@@ -116,6 +116,36 @@
     addParaHydrogen(event)
     addLiquidParaHydrogen(event)
     addNeonSixN(event)
+    addSpinFeedRows(event)
+  }
+
+  // UXV-A2 (docs/eras/uxv.md, "Cryogenic plant"): four rows keyed by their one input. The plant has one fluid slot in, so the second inputs
+  // of the design are met by the input itself: liquid helium (already cooled with liquid nitrogen) and a real boil-off or tail in each cut.
+  var SPIN_FEED_ROWS = [
+    // line 27: the stellar helium cut, the Mk6 triple-alpha fuel; the cut's hydrogen and neon are real outputs
+    { name: 'triple_alpha_fuel', label: 'triple-alpha fuel', eut: 7680, duration: 400,
+      input: { id: 'gtceu:stellar_helium_cut', amount: 2000 },
+      outputs: [{ id: 'gtceu:triple_alpha_fuel', amount: 1500 }, { id: 'gtceu:hydrogen', amount: 300 }, { id: 'gtceu:neon', amount: 200 }] },
+    // line 29: O-16 to the oxygen-burning fuel; the uncondensed tail comes back as O-16 and goes into the next run
+    { name: 'oxygen_burning_fuel', label: 'oxygen-burning fuel', eut: 7680, duration: 400,
+      input: { id: 'gtceu:oxygen_16', amount: 1000 },
+      outputs: [{ id: 'gtceu:oxygen_burning_fuel', amount: 900 }, { id: 'gtceu:oxygen_16', amount: 100 }] },
+    // line 41 (KrF premix): air to krypton; nitrogen and oxygen go back to the air users
+    { name: 'krypton_from_air', label: 'krypton from air', eut: 7680, duration: 600,
+      input: { id: 'gtceu:liquid_air', amount: 10000 },
+      outputs: [{ id: 'gtceu:krypton', amount: 100 }, { id: 'gtceu:nitrogen', amount: 7800 }, { id: 'gtceu:oxygen', amount: 2000 }] },
+    // he_6n, the Earth controllers' era fluid: liquid helium (the precooled input; plain helium is the liquefier's) to the 6N grade; the boil-off goes back as helium
+    { name: 'he_6n', label: 'helium 6N', eut: 7680, duration: 400,
+      input: { id: 'gtceu:liquid_helium', amount: 1000 },
+      outputs: [{ id: 'gtceu:he_6n', amount: 950 }, { id: 'gtceu:helium', amount: 50 }] }
+  ]
+  CRYO.spinFeedRows = SPIN_FEED_ROWS
+
+  function addSpinFeedRows(event) {
+    SPIN_FEED_ROWS.forEach(function (row) {
+      addCryoRow(event, { id: 'grindless:cryogenic_processing/' + row.name, eut: row.eut, duration: row.duration, input: row.input, outputs: row.outputs },
+        row.name, row.label)
+    })
   }
 
   // UIV-B3 (docs/eras/uiv.md, line 45): the 5N neon of UHV's moderator is distilled once more to 6N, the grade of the solid-neon cone that
