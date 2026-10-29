@@ -20,7 +20,10 @@
           "itemsOut": [{ "id": "grindless:halbach_array", "count": 1 }], "fluidsOut": [] },
         { "_why": "UIV-A8, line 23: field-cooling of the impregnated GdBCO block.", "name": "gdbco_field_cool", "circuit": 6, "eut": 1966080, "duration": 600,
           "itemsIn": [{ "id": "grindless:impregnated_gdbco", "count": 1 }], "kept": [], "fluidsIn": [{ "id": "gtceu:liquid_helium", "amount": 1000 }], "charge": [],
-          "itemsOut": [{ "id": "grindless:field_cooled_gdbco", "count": 1 }], "fluidsOut": [{ "id": "gtceu:helium", "amount": 1000 }] }
+          "itemsOut": [{ "id": "grindless:field_cooled_gdbco", "count": 1 }], "fluidsOut": [{ "id": "gtceu:helium", "amount": 1000 }] },
+        { "_why": "UXV-W: the UXV wireless cell; the charge is the UV cold plant's He-II. Two items because the works holds 3 item slots with the circuit.", "name": "uxv_smes_cell", "circuit": 7, "eut": 1966080, "duration": 600,
+          "itemsIn": [{ "id": "grindless:uiv_smes_cell", "count": 4 }, { "id": "grindless:strand_tape", "count": 16 }], "kept": [], "fluidsIn": [], "charge": [{ "id": "gtceu:superfluid_helium", "amount": 1000 }],
+          "itemsOut": [{ "id": "grindless:uxv_smes_cell", "count": 1 }], "fluidsOut": [] }
       ]
     },
     "sic_fibre_spinning": {
