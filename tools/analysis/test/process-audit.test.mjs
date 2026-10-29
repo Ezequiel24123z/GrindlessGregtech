@@ -69,6 +69,22 @@ test('baseline: only keys absent from it are new', () => {
   assert.equal(newFindings(res, { keys: ['uncraftable|a', 'no_use|b'] }).length, 0);
 });
 
+test('a machine hidden with its recipes is not an empty type or a missing craft', () => {
+  const machines = [
+    { id: 'gtca:recycler', tier: 1, mb: false, types: ['gtca:recycling'] },
+    { id: 'gtca:shown', tier: 1, mb: false, types: ['gtca:shown_type'] },
+  ];
+  const run = (hidden) => auditProcesses({
+    dump: mkDump({ machines, recipeTypes: [{ id: 'gtca:recycling' }, { id: 'gtca:shown_type' }], tagsItem: { 'grindless:hidden_with_recipes': hidden } }),
+    registry: reg(),
+  }).findings.map((f) => f.key);
+  const open = run([]);
+  for (const k of ['type_empty|gtca:recycling', 'machine_empty_type|gtca:recycler', 'machine_no_craft|gtca:recycler']) assert.ok(open.includes(k), k);
+  const hid = run(['gtca:recycler']);
+  assert.ok(!hid.some((k) => k.endsWith('|gtca:recycling') || k.endsWith('|gtca:recycler')), hid.join());
+  assert.ok(hid.includes('type_empty|gtca:shown_type') && hid.includes('machine_no_craft|gtca:shown'));
+});
+
 test('M-INFO: a multiblock needs an info page; special ones a page of their own', () => {
   const dump = mkDump({ recipes: [gt('t/r', 't:p', { ins: [gi('grindless:a')], outs: [gi('grindless:b')] })], recipeTypes: ['t:p'] });
   const registry = reg({ items: ['grindless:a', 'grindless:b'], machines: [{ id: 'gtceu:writer_chart', types: ['t:p'] }] });
