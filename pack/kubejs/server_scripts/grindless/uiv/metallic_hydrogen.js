@@ -9,7 +9,7 @@
 //                            quench as fiction). Ids grindless:ramp_compression/<name>.
 //   gtceu:wiremill, assembler, chemical_reactor, laser_engraver   the line steps GTM can run (ids grindless:<type>/<name>): MH wire, the
 //                            FFKM cable, the lonsdaleite race, bearing and UIV piston, the DAC charge and the quenched cg-N.
-//   crafting                 the controller: UEV hull + 2 UEV electric pistons + 2 optical computers, grindless:crafting/ramp_compression_pulser.
+//   assembly_line            the controller: UEV hull + 2 UEV electric pistons + 2 optical computers + UEV circuits + 3 line items, with soldering alloy, lubricant and neutronium, behind station research, grindless:assembly_line/ramp_compression_pulser.
 //   removals                 GTM's wiremill and extruder routes to MH single wire (the table's wiremill row replaces them) and every
 //                            GTM assembler cable covering of MH wire: the cable gets one route, FFKM seals.
 //
@@ -169,13 +169,25 @@
     var COMPUTER = 'gtnn:optical_computer'
     var machine = MH.machine.machine
     MH.controllerRecipes = []
-    var missing = [HULL, PISTON, COMPUTER, machine].filter(function (id) { return !Item.exists(id) })
+    var research = 'grindless:dac_charge'
+    var domain = ['2x grindless:balanced_rhea_impeller', '2x grindless:strain_wave_gear', '2x grindless:ffkm_seal']
+    var ids = [HULL, PISTON, COMPUTER, machine, research].concat(domain.map(function (s) { return s.replace(/^\d+x /, '') }))
+    var missing = ids.filter(function (id) { return !Item.exists(id) })
     if (missing.length > 0) {
       console.error(LOG + 'ramp-compression pulser controller recipe skipped, unknown item(s): ' + missing.join(', '))
       return
     }
-    event.recipes.gtceu.shaped(machine, ['OPO', 'PHP'], { O: COMPUTER, P: PISTON, H: HULL }).id('grindless:crafting/ramp_compression_pulser')
-    MH.controllerRecipes.push('grindless:crafting/ramp_compression_pulser')
+    var b = event.recipes.gtceu.assembly_line('grindless:ramp_compression_pulser')
+    b.itemInputs(HULL)
+    b.itemInputs('2x ' + PISTON)
+    b.itemInputs('2x ' + COMPUTER)
+    b.itemInputs('4x #gtceu:circuits/uev')
+    domain.forEach(function (s) { b.itemInputs(s) })
+    b.inputFluids(Fluid.of('gtceu:soldering_alloy', 2304), Fluid.of('gtceu:lubricant', 2000), Fluid.of('gtceu:neutronium', 576))
+    b.itemOutputs(machine)
+    b.stationResearch(function (r) { return r.researchStack(Item.of(research)).CWUt(64).EUt(7864320) })
+    b.EUt(7864320).duration(1500)
+    MH.controllerRecipes.push('grindless:assembly_line/ramp_compression_pulser')
   }
 
   // GTM's own makers of MH single wire (wiremill, extruder) and of every MH cable (the assembler's rubber coverings)

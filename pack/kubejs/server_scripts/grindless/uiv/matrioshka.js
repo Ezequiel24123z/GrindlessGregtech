@@ -9,7 +9,8 @@
 //   gtceu:droplet_radiator_assembly   droplet radiator works, circuit 1 droplet radiator module, 2 TPV tile. Only at gcyr:mercury_orbit.
 //   assembler, lathe, mixer, ...      the line steps GTM can run (ids grindless:<name>).
 //   assembly_line                     the radiation-hardened controller, researchWithoutRecipe (the research is the Matrioshka's write).
-//   crafting                          the controllers: UIV hull + 2 UIV parts + 2 optical mainframes, grindless:crafting/<machine>.
+//   assembly_line                     the controllers: UIV hull + 2 UIV parts + 2 optical mainframes + UIV circuits + 3 line items, with
+//                                     soldering alloy, lubricant and neutronium, behind station research, grindless:assembly_line/<machine>.
 //
 // A recipe whose "site" is true gets dimension gcyr:mercury_orbit; an item stack with "nbt" carries that tag.
 // Lookup safety: a recipe whose ingredients are a subset of another's of its type can hide it; checked at load (a clash is an error).
@@ -60,7 +61,7 @@
           return { id: String(f.id), amount: Number(f.amount) }
         }
         var rec = { type: type, name: n, circuit: circuit, eut: eut, duration: duration, dataKey: def.dataKey ? String(def.dataKey) : '',
-          site: r.site === true, research: r.research ? String(r.research) : '',
+          site: r.site === true, research: r.research ? String(r.research) : '', station: r.station ? String(r.station) : '',
           itemsIn: list(r.itemsIn).map(stack), kept: list(r.kept).map(stack), fluidsIn: list(r.fluidsIn).map(fluid),
           itemsOut: list(r.itemsOut).map(stack), fluidsOut: list(r.fluidsOut).map(fluid) }
         if (bad || (rec.itemsOut.length === 0 && rec.fluidsOut.length === 0) || (rec.itemsIn.length === 0 && rec.fluidsIn.length === 0)) {
@@ -79,6 +80,7 @@
 
   function missingIds(rec) {
     var missing = []
+    if (rec.station !== '' && !Item.exists(rec.station)) missing.push(rec.station)
     rec.itemsIn.concat(rec.kept, rec.itemsOut).forEach(function (x) {
       if (x.id.charAt(0) === '#') return
       if (!Item.exists(x.id) && missing.indexOf(x.id) < 0) missing.push(x.id)
@@ -115,6 +117,7 @@
     if (rec.dataKey !== '') recipe.addDataString(rec.dataKey, rec.name)
     if (rec.site) recipe.dimension(MA.site || 'gcyr:mercury_orbit')
     if (rec.research !== '') recipe.researchWithoutRecipe(rec.research)
+    if (rec.station !== '') recipe.stationResearch(function (r) { return r.researchStack(Item.of(rec.station)).CWUt(64).EUt(rec.eut) })
     recipe.EUt(rec.eut).duration(rec.duration)
   }
 
@@ -171,17 +174,30 @@
   function addControllers(event) {
     var HULL = 'gtceu:uiv_machine_hull'
     var MAINFRAME = 'gtnn:optical_mainframe'
-    var parts = { matrioshka_computer: 'grindless:uiv_electric_piston', droplet_radiator_works: 'grindless:uiv_conveyor_module' }
+    var defs = [
+      { name: 'matrioshka_computer', part: 'grindless:uiv_electric_piston', research: 'grindless:matrioshka_node', domain: ['2x grindless:matrioshka_logic_tile', '2x grindless:diamond_schottky_die', '2x grindless:tipt_au_stack'] },
+      { name: 'droplet_radiator_works', part: 'grindless:uiv_conveyor_module', research: 'grindless:droplet_collector', domain: ['2x grindless:matrioshka_emitter_shell', '2x grindless:droplet_wick', '2x grindless:tipt_au_stack'] }
+    ]
     MA.controllerRecipes = []
-    Object.keys(parts).forEach(function (name) {
-      var machine = 'gtceu:' + name
-      var missing = [HULL, parts[name], MAINFRAME, machine].filter(function (id) { return !Item.exists(id) })
+    defs.forEach(function (d) {
+      var machine = 'gtceu:' + d.name
+      var ids = [HULL, d.part, MAINFRAME, machine, d.research].concat(d.domain.map(function (s) { return s.replace(/^\d+x /, '') }))
+      var missing = ids.filter(function (id) { return !Item.exists(id) })
       if (missing.length > 0) {
-        console.error(LOG + name + ' controller recipe skipped, unknown item(s): ' + missing.join(', '))
+        console.error(LOG + d.name + ' controller recipe skipped, unknown item(s): ' + missing.join(', '))
         return
       }
-      event.recipes.gtceu.shaped(machine, ['OPO', 'PHP'], { O: MAINFRAME, P: parts[name], H: HULL }).id('grindless:crafting/' + name)
-      MA.controllerRecipes.push('grindless:crafting/' + name)
+      var b = event.recipes.gtceu.assembly_line('grindless:' + d.name)
+      b.itemInputs(HULL)
+      b.itemInputs('2x ' + d.part)
+      b.itemInputs('2x ' + MAINFRAME)
+      b.itemInputs('4x #gtceu:circuits/uiv')
+      d.domain.forEach(function (s) { b.itemInputs(s) })
+      b.inputFluids(Fluid.of('gtceu:soldering_alloy', 2304), Fluid.of('gtceu:lubricant', 2000), Fluid.of('gtceu:neutronium', 576))
+      b.itemOutputs(machine)
+      b.stationResearch(function (r) { return r.researchStack(Item.of(d.research)).CWUt(64).EUt(7864320) })
+      b.EUt(7864320).duration(1500)
+      MA.controllerRecipes.push('grindless:assembly_line/' + d.name)
     })
   }
 
