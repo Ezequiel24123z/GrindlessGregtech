@@ -1,4 +1,4 @@
-// priority: -8370
+// priority: -8360
 // TEST ONLY, UIV-M2 (gtceu:neutronium_compression_hall). Command: kubejs custom_command gg_test_uiv_compression_hall
 // Band ONLY: X 35840-35903, Z 0-63, Overworld Y 98-112.
 //   T1 (named uncertainty: the pellet count read from an input bus inside a modifier; the implosion recipe keeps its explosive):
