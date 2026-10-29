@@ -1,17 +1,18 @@
 {
-  "_doc": "The Horizon Collector's recipes (docs/eras/steam.md, 'The Horizon Collector (the start)'). One recipe per row: catalyst (not consumed) + programmed circuit -> count x output, at eut for duration ticks. Read by server_scripts/grindless/steam/horizon_collector.js; recipe id grindless:horizon_collection/<name>.",
+  "_doc": "The Horizon Collector's recipes (docs/eras/steam.md, 'The Horizon Collector (the start)'). One recipe per row: catalyst (not consumed) + programmed circuit -> count x output (split into stacks of 64 over the machine's 4 output slots), at eut for duration ticks. Read by server_scripts/grindless/steam/horizon_collector.js; recipe id grindless:horizon_collection/<name>.",
   "catalyst": "grindless:horizon_shard",
   "eut": 16,
-  "duration": 1200,
+  "duration": 160,
   "rows": [
-    { "circuit": 1, "name": "oak_log", "output": "minecraft:oak_log", "count": 16 },
-    { "circuit": 2, "name": "cobblestone", "output": "minecraft:cobblestone", "count": 48 },
-    { "circuit": 3, "name": "sand", "output": "minecraft:sand", "count": 32 },
-    { "circuit": 4, "name": "gravel", "output": "minecraft:gravel", "count": 32 },
-    { "circuit": 5, "name": "clay_ball", "output": "minecraft:clay_ball", "count": 32 },
-    { "circuit": 6, "name": "coal", "output": "minecraft:coal", "count": 12 },
-    { "circuit": 7, "name": "raw_copper", "output": "minecraft:raw_copper", "count": 8 },
-    { "circuit": 8, "name": "raw_tin", "output": "gtceu:raw_tin", "count": 8 },
-    { "circuit": 9, "name": "raw_iron", "output": "minecraft:raw_iron", "count": 8 }
+    { "circuit": 1, "name": "oak_log", "output": "minecraft:oak_log", "count": 128 },
+    { "circuit": 2, "name": "cobblestone", "output": "minecraft:cobblestone", "count": 256 },
+    { "circuit": 3, "name": "sand", "output": "minecraft:sand", "count": 192 },
+    { "circuit": 4, "name": "gravel", "output": "minecraft:gravel", "count": 192 },
+    { "circuit": 5, "name": "clay_ball", "output": "minecraft:clay_ball", "count": 128 },
+    { "circuit": 6, "name": "coal", "output": "minecraft:coal", "count": 64 },
+    { "circuit": 7, "name": "raw_copper", "output": "minecraft:raw_copper", "count": 64 },
+    { "circuit": 8, "name": "raw_tin", "output": "gtceu:raw_tin", "count": 64 },
+    { "circuit": 9, "name": "raw_iron", "output": "minecraft:raw_iron", "count": 64 },
+    { "circuit": 10, "name": "flint", "output": "minecraft:flint", "count": 64 }
   ]
 }
