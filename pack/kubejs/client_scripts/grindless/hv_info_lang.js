@@ -1,3 +1,4 @@
+// priority: 9675
 // Gregtech Grindless - EMI information pages of the HV era multiblocks (kubejs/assets/emi/recipe/additions/grindless/<id>.json, type emi:info).
 // One page per controller: what it does, what it is for, what it needs. Their recipes show in EMI under the controller itself.
 // Tooltips live in hv_family_lang.js, hv_refinery_lang.js, hv_mega_coil_chemical_plant_lang.js and syngas_lang.js; every key is in en_us and es_es.
