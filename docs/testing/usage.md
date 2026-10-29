@@ -42,6 +42,36 @@ Proves every multiblock our startup scripts register forms from its own first EM
 - Markers: `GGTEST|form_sweep|<id>|PASS|WxHxD, N ticks` (`, forced` if only a forced pattern check formed it), `...|FAIL|<GTM error, refused cell>`, `...|NOTE|<reason>`, and `GGTEST|form_sweep|DONE|failures=N ids=M next=<cursor|none>`.
 - Zone `form_sweep` (X 36064-36127, Z 0-127); the cell is cleared after each id.
 
+### Mandatory EMI audit
+
+Every client suite holds the test player until EMI finishes reloading and audits the live recipe manager.
+An exit-0 client, a completed reload, or a vanilla crafting recipe alone is not proof of working GTM integration.
+The client suite requires `GGTEST|emi_coverage|all|PASS`, `DONE`, and the exported report; reload/plugin
+exceptions, missing workstation bindings, missing GT process displays, missing multiblock previews, missing
+acquisition/use routes and missing required info pages fail the run. There is no content-failure baseline.
+Only the static audit's explicitly hidden unreleased stacks and legacy conversions are exempted.
+
+The full report is collected as `results/client/kubejs-exported/gg_emi_coverage_report.json`: per-stack
+made/used counts and categories, all GTM machines and workstation bindings, all displayable GT categories,
+previews, info pages, and reload warnings. Read that JSON or the summary, not complete logs.
+Expectations are regenerated with `node tools/analysis/emi-coverage.mjs --expect` after content changes.
+The overlay is test-only; the pack shipped to players does not include it.
+
+For the named MEGA module preview proof, copy the overlay, add `"renderPreview": true` to its
+`kubejs/config/gg_test_emi_coverage.json`, and pass the copy with `-OverlayDir`.
+This opens `gtceu:mega_factory` for 40 client ticks, captures `gg_emi_mega_factory.png` in exported results,
+and restores the screen. The harness requires the image and `preview_render|PASS`; ordinary runs do not
+open a screen or interfere with other UI fixtures.
+
+`-EmiAuditTimeoutSec 1800` is an explicit, owner-approved extended audit option for `-Suite client` on
+the Linux backend only. Its default is 600, and it also extends the fixture hold deadline. Server, combined,
+home-PC and ordinary native/client limits do not change; the policy rejects other extended uses.
+
+The separately approved `-EmiAuditClientXmx 8G` option defaults to `4G`, accepts at most `8G`, and is
+restricted to client-only Linux audits with `-Slots 1`. Verify the VM slot locks are free before starting:
+the existing semaphore then excludes other holders throughout the run. The ordinary `-ClientXmx`,
+server and personal-PC caps stay 4G. Do not disable player search to make the audit fit the test heap.
+
 ## Choosing the backend
 
 - Default: `azure` (`Default` in `tools/test/backends.psd1`). `-ShowBackend` prints the resolved values and exits.

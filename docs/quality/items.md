@@ -58,6 +58,29 @@ Per the owner: no machine may stay empty. For each, either add the recipes, or r
 
 These ids come from the dump, not an assumption: `type_empty` lists exactly 20 recipe types.
 
+#### QR-X1 decisions (addon machines with no role)
+
+All 55 machines were checked against `data/grindless/tables/hidden_until.json` (group `until: never`, so both tags `c:hidden_from_recipe_viewers` and `grindless:hidden_with_recipes` apply: out of the EMI index and every recipe with them gone), `integration/gtca.js`, `extendedfeatures.js` and `gtnn.js` (their craft recipes and every recipe of their types are removed on the server). Every one is decision **(b) hide**: nothing is craftable and no process is left invisible, because the empty types have no machine a player can obtain, and EMI drops an empty category. Nothing is unregistered (saves). No code change was needed. Licences (CREDITS.md): GTCA LGPL-3.0, GT-- AGPL-3.0, Extended Features: only registered ids are used, nothing is copied.
+
+| id | decision | era | reason |
+|---|---|---|---|
+| `gtca:{lv..uhv}_recycler`, scrap, scrap box | hide | never | the scrap box drops a random item of the whole registry; stone to scrap at 1 EU/t |
+| `gtca:{ev..uhv}_matter_amplificator` | hide | never | UU matter from scrap: matter from nothing (rule 8) |
+| `gtca:{ev,iv}_chemical_generator` | hide | never | acids burn at 5-14x their cost: energy loop; GTM's generators stay |
+| `gtca:space_{assembler,miner,pump}_mk{i,ii,iii}` | hide | never | elevator modules: no recipes, the test ones are removed; a future elevator era may reopen them |
+| `gtca:green_house`, `extendedfeatures:{industrial_greenhouse,advanced_conservatory}` | hide | never | duplicates our greenhouse family (`gtceu:greenhouse`) with 64 crops or logs per run |
+| `gtca:{polymerizer,industrial_coke_oven}` | hide | never | 17-33 % more polymer, 2-3.4x the coke products than GTM's machines: duplicates that undercut GTM |
+| `gtca:steam_pressurizer` | hide | never | steam in, 2.5x the energy out: energy from nothing |
+| `gtca:{extreme_heat_exchanger,shd_turbine}` | hide | never | 3.4-3.7x GTM's plasma turbine, pahoehoe lava gives metals and energy |
+| `gtca:residual_decontamiant_degasser_purification_unit` | hide | never | purification unit with no recipes and no line to serve |
+| `extendedfeatures:rock_processing_plant` | hide | never | metals out of plain rock past the vein drills |
+| `extendedfeatures:synthesis_vessel` | hide | never | skips our platinum and naquadah plants with 2-4.5x yields |
+| `extendedfeatures:universal_disassembly_machine` | hide | never | returns every ingredient of any machine, better than GTM's recycling |
+| `gtnn:homemade_bedrock_ore_machine` | hide | never | ores out of stone |
+| `gtnn:uv_naquadah_reactor` | hide | never | no GT-- recipe and no fuel line of ours at UV; the LuV and ZPM reactors carry the naquadah power (luv.md:1194, zpm.md:772). A UV reactor needs its own fuel design (x2 rule 8) first |
+
+Baseline: the process audit still lists these 55 machines and 20 types because it does not consult the hidden tags. Proposed integrator change (`tools/analysis/lib/process_audit.mjs`, not in this package): skip `machine_empty_type`, `machine_no_craft` and `type_empty` when the machine's item is in the `until: never` hidden groups (or in `hiddenIndex`), and for a type, when every machine using it is skipped; then drop the 75 keys from `process_audit.json`.
+
 ### trivial_step (a real process should be more than "1 in, 1 out")
 Dedicated machines or conditions justify some of these; flag them to the era owner, not as bugs.
 - **uiv** `gtceu:he3he3_ash`, `pli6_ash`, `pn15_ash` (direct conversion, 1 plasma to 1 ash); `annealed_neon_cone`, `bmg_flexspline`, `c12_ion_milled_plate`, `laser_heated_n2_charge`, `lonsdaleite_race`, `p_si_processor`, `polarised_li6h`, `poled_lnoi_wafer`, `six_hour_memory_slab`, `telecom_memory_slab`, `verified_crystal`.

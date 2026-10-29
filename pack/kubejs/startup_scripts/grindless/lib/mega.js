@@ -246,7 +246,6 @@
         kind: 'blocks',
         blocks: ids.slice(),
         build: function () {
-          var BI = Java.loadClass('com.lowdragmc.lowdraglib.utils.BlockInfo')
           var HM = Java.loadClass('java.util.HashMap')
           var blocks = ids.map(function (id) { return Block.getBlock(id) })
           return Predicates.custom(function (state) {
@@ -259,12 +258,7 @@
               }
             }
             return false
-          }, function () {
-            // only the structure preview asks for these; formation never calls this supplier
-            var list = []
-            for (var i = 0; i < blocks.length; i++) list.push(BI.fromBlockState(blocks[i].defaultBlockState()))
-            return Java.to(list, BI)
-          })
+          }, Predicates['blocks(net.minecraft.world.level.block.Block[])'](blocks).common.get(0).candidates)
         }
       }
     }

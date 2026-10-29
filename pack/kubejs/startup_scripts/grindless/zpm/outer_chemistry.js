@@ -110,7 +110,7 @@
         F: Pat.block(m.casing),
         P: Pat.block(PIPE),
         '#': Pat.air(),
-        R: Pat.frame(['tungstensteel']),
+        R: Pat.frame(['tungsten_steel']),
         K: Pat.block(PY_COIL),
         G: Pat.block(PY_GLASS)
       }

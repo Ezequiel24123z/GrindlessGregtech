@@ -30,6 +30,26 @@ function Assert-GGResourceRequest {
             throw "$key must be an integer between $min and $($caps[$key]) under the personal-PC policy"
         }
     }
+    if ($null -eq $Req.PSObject.Properties['emiAuditTimeoutSec']) {
+        Add-Member -InputObject $Req -NotePropertyName emiAuditTimeoutSec -NotePropertyValue 600
+    }
+    $emiTimeout = [double]$Req.emiAuditTimeoutSec
+    if ([double]::IsNaN($emiTimeout) -or $emiTimeout -lt 600 -or $emiTimeout -gt 1800 -or $emiTimeout -ne [math]::Floor($emiTimeout)) {
+        throw 'emiAuditTimeoutSec must be an integer between 600 and 1800'
+    }
+    if ($null -eq $Req.PSObject.Properties['emiAuditClientXmx']) {
+        Add-Member -InputObject $Req -NotePropertyName emiAuditClientXmx -NotePropertyValue '4G'
+    }
+    if ([string]$Req.emiAuditClientXmx -notmatch '^[4-8][gG]$') {
+        throw 'emiAuditClientXmx must be a whole-GB heap from 4G to 8G'
+    }
+    if (($emiTimeout -gt 600 -or [string]$Req.emiAuditClientXmx -ne '4G') -and
+        ([string]$Req.suite -ne 'client' -or [string]$Req.os -ne 'linux')) {
+        throw 'Extended EMI audit resources are permitted only for a client-only Linux audit'
+    }
+    if ([string]$Req.emiAuditClientXmx -ne '4G' -and [double]$Req.slots -ne 1) {
+        throw 'An extended EMI audit heap requires slots=1 so no other bench run can hold a slot'
+    }
     # The Windows home PC runs one Minecraft JVM globally; a dedicated Linux VM (request os = linux) may run up to 8
     # concurrent slots, each bounded by its own systemd MemoryMax (gg-linux-run.sh). The runner re-caps per bench.
     $slotsMax = $(if ([string]$Req.os -eq 'linux') { 8 } else { 1 })
