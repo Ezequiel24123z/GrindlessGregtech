@@ -13,7 +13,7 @@
 // - One recipe type and one mode, so no mode veto.
 //
 // Structure (7 wide x 7 high x 9 deep, lib/patterns.js): stable titanium casing floor, roof, walls and both ends, with steel gearbox casings
-// along the floor of the hall (three rows of seven). The controller sits in the middle of the front wall. Parts go in any casing cell:
+// along the floor of the hall (three rows of seven), steel frame posts at the corners of both ends, glass windows on both sides and in the back wall, and a steel pipe run along the roof. The controller sits in the middle of the front wall. Parts go in any casing cell:
 // 1 or 2 energy hatches, 1 or 2 input buses, 1 or 2 output buses, 1 input hatch (the water) and 1 muffler.
 //
 // Textures: overlay dir grindless:block/multiblock/ore_refinery (tools/assets/Build-MegaOreRefineryTextures.ps1). Names / tooltips:
@@ -31,17 +31,18 @@
   // one raw ore + the water in; the dusts and up to eight byproducts out
   const MAX_IO = { itemsIn: 1, itemsOut: 9, fluidsIn: 1, fluidsOut: 0 }
 
-  // slices back -> front, rows bottom -> top; 265 casing-or-part cells, 21 gearboxes, 154 air, the controller
-  const END = ['XXXXXXX', 'XXXXXXX', 'XXXXXXX', 'XXXXXXX', 'XXXXXXX', 'XXXXXXX', 'XXXXXXX']
-  const HALL = ['XXXXXXX', 'X#BBB#X', 'X#####X', 'X#####X', 'X#####X', 'X#####X', 'XXXXXXX']
-  const FRONT = ['XXXXXXX', 'XXXXXXX', 'XXXXXXX', 'XXXSXXX', 'XXXXXXX', 'XXXXXXX', 'XXXXXXX']
+  // slices back -> front, rows bottom -> top; 212 casing-or-part cells, 20 steel frames, 26 glass, 7 steel pipe casings (a roof run), 21 gearboxes, 154 air, the controller
+  const BACK = ['XXXXXXX', 'FXXXXXF', 'FXGGGXF', 'FXGGGXF', 'FXXXXXF', 'FXXXXXF', 'XXXXXXX']
+  const NECK = ['XXXXXXX', 'X#BBB#X', 'X#####X', 'X#####X', 'X#####X', 'X#####X', 'XXXPXXX']
+  const HALL = ['XXXXXXX', 'X#BBB#X', 'G#####G', 'G#####G', 'X#####X', 'X#####X', 'XXXPXXX']
+  const FRONT = ['XXXXXXX', 'FXXXXXF', 'FXXXXXF', 'FXXSXXF', 'FXXXXXF', 'FXXXXXF', 'XXXXXXX']
   const SPEC = {
-    slices: [END, HALL, HALL, HALL, HALL, HALL, HALL, HALL, FRONT],
+    slices: [BACK, NECK, HALL, HALL, HALL, HALL, HALL, NECK, FRONT],
     symbols: {
       S: Pat.controller(),
-      // 265 cells: at most 8 are parts (2 + 2 + 2 + 1 + 1), the rest stable titanium casing
+      // 212 cells: at most 8 are parts (2 + 2 + 2 + 1 + 1), the rest stable titanium casing
       X: Pat.oneOf(
-        Pat.block(CASING, { min: 257 }),
+        Pat.block(CASING, { min: 204 }),
         Pat.part('energy_input', { min: 1, max: 2 }),
         Pat.part('input_bus', { min: 1, max: 2 }),
         Pat.part('output_bus', { min: 1, max: 2 }),
@@ -49,6 +50,9 @@
         Pat.part('muffler', { exact: 1 })
       ),
       B: Pat.block(GEARBOX),
+      F: Pat.frame(['steel']),
+      G: Pat.block('minecraft:glass'),
+      P: Pat.block('gtceu:steel_pipe_casing'),
       '#': Pat.air()
     }
   }
