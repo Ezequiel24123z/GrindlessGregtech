@@ -132,7 +132,12 @@ test('GTCA\'s elevator: its structure blocks and controller have our recipes, mo
   assert.ok(ctrl, 'elevator controller crafting');
   assert.match(outputsOf(ctrl), /gtca:space_elevator/);
   assert.match(JSON.stringify(ctrl.j), /grindless:tether_climber/);
-  for (const id of [E.crafting.plant, E.crafting.works]) assert.ok(recipes.find((x) => x.i === id), id);
+  for (const id of [E.crafting.plant, E.crafting.works, E.crafting.elevator]) {
+    const r = recipes.find((x) => x.i === id);
+    assert.ok(r, id);
+    assert.equal(r.t, 'gtceu:assembly_line', id);
+    assert.match(JSON.stringify(r.j), /"research"/, id);
+  }
 });
 
 test('the GEO lift: climber kept, one ribbon segment worn, the stage out, UHV power, no fluids', () => {

@@ -182,13 +182,13 @@ test('cryogenic plant: crude oganesson -> oganesson propellant, the A8 pod\'s fl
   if (fusion) assert.ok(JSON.stringify(fusion.j.outputs).includes('gtceu:oganesson'));
 });
 
-test('controllers: one unique shaped recipe each; lang keys in en_us and es_es', () => {
+test('controllers: one assembly line each; lang keys in en_us and es_es', () => {
   assert.deepEqual(SW.crafting,
-    ['grindless:crafting/swarm_segment_foundry', 'grindless:crafting/swarm_control_station', 'grindless:crafting/solar_probe_bay']);
+    ['grindless:assembly_line/swarm_segment_foundry', 'grindless:assembly_line/swarm_control_station', 'grindless:assembly_line/solar_probe_bay']);
   for (const id of SW.crafting) assert.ok(dump(id) || recipes.find((r) => r.i === id), id);
   const srv = read('server_scripts/grindless/uhv/swarm.js');
-  const pats = [...srv.matchAll(/pattern: \[([^\]]+)\]/g)].map((m) => m[1]);
-  assert.equal(new Set(pats).size, pats.length, 'patterns differ');
+  const researchIds = [...srv.matchAll(/research: '([^']+)'/g)].map((m) => m[1]);
+  assert.equal(new Set(researchIds).size, 3, 'a different research item each');
   const lang = read('client_scripts/grindless/uhv_swarm_lang.js');
   for (const k of ['swarm_segment_foundry', 'swarm_control_station', 'solar_probe_bay', 'sodium_potassium_heat_pipe', 'solar_probe']) {
     assert.ok(lang.includes(k), k);

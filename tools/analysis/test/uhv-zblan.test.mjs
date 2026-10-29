@@ -129,11 +129,11 @@ test('line 31: ZrO2 + 4 HF -> ZrF4 + 2 H2O on GTM\'s chemical reactor, from F1\'
   assert.deepEqual(makers.map((x) => x.i), [idOf(r)]);
 });
 
-test('controller: UHV hull + 2 UV motors + 2 UHV circuits', () => {
+test('controller: assembly line, UHV hull + 2 UV motors + UHV circuits + station research', () => {
   const r = dump(Z.crafting.tower);
   assert.ok(r, Z.crafting.tower);
   const text = JSON.stringify(r.j);
-  for (const id of ['gtceu:uhv_machine_hull', 'gtceu:uv_electric_motor', 'gtceu:circuits/uhv']) assert.ok(text.includes(id), id);
+  for (const id of ['gtceu:uhv_machine_hull', 'gtceu:uv_electric_motor', 'gtceu:circuits/uhv', 'gtceu:tritanium', '"research"']) assert.ok(text.includes(id), id);
 });
 
 test('names: en_us and es_es for the machine, the type, the preform and ZrF4', () => {

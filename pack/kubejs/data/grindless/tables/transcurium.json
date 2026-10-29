@@ -54,10 +54,13 @@
           "circuit": 3,
           "eut": 491520,
           "duration": 400,
-          "itemsIn": [{ "id": "grindless:californium_252", "count": 1 }],
+          "itemsIn": [
+            { "id": "grindless:californium_252", "count": 1 },
+            { "id": "gtceu:platinum_foil", "count": 2 }
+          ],
           "kept": [],
           "charge": [],
-          "fluidsIn": [],
+          "fluidsIn": [{ "id": "gtceu:helium", "amount": 500 }],
           "itemsOut": [{ "id": "grindless:californium_252_source", "count": 1 }],
           "fluidsOut": []
         }

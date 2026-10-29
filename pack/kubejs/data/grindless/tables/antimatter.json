@@ -116,10 +116,12 @@
           "itemsIn": [
             { "id": "gtceu:gold_plate", "count": 2 },
             { "id": "gtceu:niobium_titanium_foil", "count": 4 },
-            { "id": "gtceu:titanium_plate", "count": 1 }
+            { "id": "gtceu:titanium_plate", "count": 1 },
+            { "id": "grindless:nbn_coated_sic_plate", "count": 1 },
+            { "id": "grindless:mu_metal_shield", "count": 1 }
           ],
           "kept": [],
-          "fluidsIn": [],
+          "fluidsIn": [{ "id": "gtceu:soldering_alloy", "amount": 144 }, { "id": "gtceu:lubricant", "amount": 250 }],
           "charge": [],
           "itemsOut": [{ "id": "grindless:empty_penning_trap", "count": 1 }],
           "fluidsOut": []

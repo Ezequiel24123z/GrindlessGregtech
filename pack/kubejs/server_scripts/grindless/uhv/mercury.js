@@ -78,7 +78,8 @@
     row('iron_tube', 'extruder', null, [item('minecraft:iron_ingot', 1)], [], [item(IRON_TUBE, 1)], [], 480, 100,
       { notConsumed: ['gtceu:tiny_pipe_extruder_mold'] }),
     row('excavator_bucket_drum', 'assembler', null,
-      [item('gtceu:tungsten_steel_plate', 6), item('gtceu:naquadah_alloy_plate', 2), item('gtceu:tungsten_steel_frame', 1)], [],
+      [item('gtceu:tungsten_steel_plate', 6), item('gtceu:naquadah_alloy_plate', 2), item('gtceu:tungsten_steel_frame', 1), item('grindless:nbn_coated_sic_plate', 1), item('grindless:mu_metal_shield', 1)],
+      [fluid('gtceu:soldering_alloy', 144), fluid('gtceu:lubricant', 250)],
       [item(DRUM, 1)], [], 30720, 400)
   ]
 
@@ -180,20 +181,25 @@
     var SENSOR = 'gtceu:uv_sensor'
     var M = HM.machines || {}
     var defs = [
-      { machine: (M.excavator && M.excavator.machine) || 'gtceu:regolith_excavator', name: 'regolith_excavator', parts: [HULL, MOTOR],
-        pattern: ['MCM', ' H ', ' C '], ingredients: { M: MOTOR, C: '#gtceu:circuits/uhv', H: HULL } },
-      { machine: (M.furnace && M.furnace.machine) || 'gtceu:solar_vapour_furnace', name: 'solar_vapour_furnace', parts: [HULL, SENSOR],
-        pattern: [' S ', 'CHC', ' S '], ingredients: { S: SENSOR, C: '#gtceu:circuits/uhv', H: HULL } }
+      { machine: (M.excavator && M.excavator.machine) || 'gtceu:regolith_excavator', name: 'regolith_excavator', parts: [HULL, MOTOR], research: 'grindless:excavator_bucket_drum', domain: ['4x grindless:iron_tube', '2x grindless:mu_metal_shield', '2x grindless:thruster_pod'] },
+      { machine: (M.furnace && M.furnace.machine) || 'gtceu:solar_vapour_furnace', name: 'solar_vapour_furnace', parts: [HULL, SENSOR], research: 'grindless:silica_aerogel', domain: ['4x grindless:nbn_coated_sic_plate', '2x grindless:fused_silica_tube', '2x grindless:thruster_pod'] }
     ]
     HM.crafting = []
     defs.forEach(function (d) {
-      var missing = d.parts.concat([d.machine]).filter(function (id) { return !Item.exists(id) })
+      var missing = d.parts.concat([d.machine, d.research], d.domain.map(function (s) { return s.replace(/^\d+x /, '') })).filter(function (id) { return !Item.exists(id) })
       if (missing.length > 0) {
         console.error(LOG + d.name + ' controller recipe skipped, unknown item(s): ' + missing.join(', '))
         return
       }
-      event.recipes.gtceu.shaped(d.machine, d.pattern, d.ingredients).id('grindless:crafting/' + d.name)
-      HM.crafting.push('grindless:crafting/' + d.name)
+      var b = event.recipes.gtceu.assembly_line('grindless:' + d.name)
+      d.parts.forEach(function (s, i) { b.itemInputs(i === 0 ? s : '2x ' + s) })
+      b.itemInputs('4x #gtceu:circuits/uhv')
+      d.domain.forEach(function (s) { b.itemInputs(s) })
+      b.inputFluids(Fluid.of('gtceu:soldering_alloy', 2304), Fluid.of('gtceu:lubricant', 2000), Fluid.of('gtceu:tritanium', 1152))
+      b.itemOutputs(d.machine)
+      b.stationResearch(function (r) { return r.researchStack(Item.of(d.research)).CWUt(64).EUt(1966080) })
+      b.EUt(1966080).duration(1500)
+      HM.crafting.push('grindless:assembly_line/' + d.name)
     })
   }
 
