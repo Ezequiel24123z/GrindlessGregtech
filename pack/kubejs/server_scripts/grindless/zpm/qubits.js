@@ -145,6 +145,21 @@
     eut: 491520, duration: 600
   })
 
+  // UXV-A3 (uxv.md lines 6, 7, 44): the ion mill of the MTJ, MRAM and STNO stacks, an argon-beam etch (circuits 8-10; 1-2, 6-7 here, 3-5 in the photonics tables)
+  ;[
+    ['mtj_ion_etch', 8, 'annealed_mtj_wafer', 'etched_mtj_wafer'],
+    ['mram_ion_etch', 9, 'annealed_mram_wafer', 'etched_mram_wafer'],
+    ['stno_ion_mill', 10, 'stno_defined_wafer', 'stno_milled_wafer']
+  ].forEach(function (e) {
+    TABLE.push({
+      name: e[0], type: 'ion_implantation', circuit: e[1],
+      itemsIn: [{ id: 'grindless:' + e[2], count: 1 }], notConsumedItems: [],
+      fluidsIn: [{ id: 'gtceu:argon', amount: 100 }],
+      itemsOut: [{ id: 'grindless:' + e[3], count: 1 }], fluidsOut: [],
+      eut: 491520, duration: 600
+    })
+  })
+
   Q.recipes = TABLE.map(function (t) {
     return {
       name: t.name, type: t.type, recipeId: 'grindless:' + t.type + '/' + t.name, circuit: t.circuit,
