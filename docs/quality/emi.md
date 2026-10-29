@@ -541,6 +541,8 @@ Info pages written (QR-I3): every machine below has an emi:info page of its own;
 
 ### uev
 
+Info pages done (QR-I4): the 14 controllers, the UEV/UIV hull and energy/dynamo hatches (`uev_uiv_*`) and `uiv_parallel_hatch`; the wireless hatches are QR-I2's.
+
 | Machine ID | Source |
 |---|---|
 | `gtceu:calutron` | `pack/kubejs/startup_scripts/grindless/uev/isotopes.js:66` |
