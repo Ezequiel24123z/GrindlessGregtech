@@ -410,7 +410,7 @@ Every recipe has a programmed circuit (c*n*) or an input that no other recipe of
   - The bearing takes `gtceu:tetrataenite_rod` (A1 gives tetrataenite its rod).
   - EMI, with A1's hidden groups: the coilgun coil casings show now, with a page saying they are kept for Ganymede's coilgun; the bearing and its recipe show now (B4's ring needs it), with a page, because tetrataenite's B5 group is index-only (`keepRecipes`) until the belt; the SMES cell and the HTS coil recipe show when A3's tape does (the SMES cell has its own group until then, and `hts_magnet_works.test.mjs` fails if it outlives A3's).
   - The structure is 11 × 5 × 5 on a frostproof base: the cryostat (3×3×4, hollow), the impregnation tank (3×3×3: PTFE pipe casing floor and lid, laminated glass around the bath) and the mandrel (3×3×4 tungstensteel frame cage around a stainless gearbox spindle, on a gearbox turntable). The parts go in the base's front and back rows and in two cells of the cryostat's front wall: 1–2 energy hatches, 1–3 input buses, 1–3 input hatches, 1–2 output buses and the parallel hatch.
-  - Controller: crafting grid, LuV hull + 2 LuV motors + LuV sensor + 4 LuV circuits (`grindless:crafting/hts_magnet_works`).
+  - Controller: assembly line with soldering alloy and lubricant (`grindless:assembly_line/hts_magnet_works`, QR-R2; was a crafting grid).
 - **Source:** real: the CFS and MIT SPARC toroidal field model coil (20 T, 2021), SMES (BPA's 30 MJ unit, 1980s), and vacuum-pressure impregnation and cold testing in magnet manufacturing.
 
 ### 4. Biofoundry: `gtceu:biofoundry`, type `gtceu:sterile_culture` (Earth)

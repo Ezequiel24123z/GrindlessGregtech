@@ -181,9 +181,9 @@ What it gains: **the hands-free neutron window and the superacid inside.** The l
 
 ### As built (IV-B6)
 
-- **IV parallel hatch:** `grindless:crafting/iv_parallel_hatch`, GTM's shape with 4 IV circuits. Its sensor and emitter take iridium, so it comes after Mercury.
+- **IV parallel hatch:** `grindless:assembler/iv_parallel_hatch` (QR-R2; was a crafting shape with 4 IV circuits). Its sensor and emitter take iridium, so it comes after Mercury.
 - **Our plants take it:** the hot cell, the fuel fabrication plant and the heavy-water plant accept one in any part cell (`lib/parallel_hatch.js`; no shape changed). The platinum and naquadah plants take one too (IV-B3), and each of their copies wants its own electrode or Pu-Be source in the bus. Each copy pays the recipe's EU/t: one IV hatch runs 4 copies up to 2,048 EU/t, and 4 copies of an IV recipe need two IV hatches. Per batch, the hatch costs the recipe's own EU and an overclock twice that (heavy-water exchange: 110,606 against 221,212 EU). The H2S charge is needed once and never multiplied. The reactor, the fluorspar kiln and the drills keep their own parallel copies and take no hatch.
-- **GCYM:** the large packer and the alloy blast smelter moved up from EV (`grindless:crafting/large_packer`, `grindless:crafting/alloy_blast_smelter`). Every GCYM controller now takes IV circuits or better. Machines already built keep working.
+- **GCYM:** the large packer and the alloy blast smelter moved up from EV (`grindless:assembler/large_packer`, `grindless:assembler/alloy_blast_smelter`). Every GCYM controller now takes IV circuits or better. Machines already built keep working.
 - **The line from AE2 (proven on the bench):**
   - an export bus under each ULV input bus, set to its ingredient, in order; fluids through 1× hatches, in order;
   - GTM's ME output bus returns the product; it connects to AE2 on its front face only, so face it at the cable;

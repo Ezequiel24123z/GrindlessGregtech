@@ -4,7 +4,7 @@
 // between them. Recipes: server_scripts/grindless/zpm/qubits.js. Names / tooltips: client_scripts/grindless/zpm_qubits_lang.js.
 //
 //   gtceu:diamond_lattice_fab  type gtceu:diamond_cvd         5 x 5 x 5 of cleanroom-grade casing, a naquadah coil as the microwave cavity
-//   gtceu:ion_implanter        type gtceu:ion_implantation    3 x 3 x 11 beam line of cleanroom-grade casing, coils as the analysing magnet
+//   gtceu:ion_implanter        type gtceu:ion_implantation    5 x 5 x 15 beamline hall of cleanroom-grade casing, coils as the analysing magnet
 //   gtceu:qubit_fab            type gtceu:qubit_fabrication   5 x 5 x 9 of cryostat casing, a pipe column as the mixing chamber and still
 //
 // The controller sits in the middle of the front wall, one row up. Row 0 (the floor) takes the parts and at least `minCasings` casings.

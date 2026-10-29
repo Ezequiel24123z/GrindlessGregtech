@@ -10,7 +10,7 @@
             'The hydrogen loops back into the next run; the 5 % lost is the make-up. 30,720 EU/t for 60 s. The plates feed the ion implanter and the qubit fab.',
             'Needs, in the floor: 1 or 2 energy hatches (ZPM), 1 or 2 input buses, 1 or 2 output buses, 1 to 3 input hatches, 1 or 2 output hatches, and 12 or more cleanroom casings among them.']],
         ['ion_implanter', 'ion_implantation', 'Ion Implanter', 'Ion Implantation', [
-            'A 3 x 3 x 11 beam line: ion source, analysing magnet, target chamber. Circuit 1: 1 nitrogen-doped plate + 1 mB nitrogen -> 4 NV diamond chips.',
+            'A 5 x 5 x 15 beamline hall: ion source, analysing magnet, target chamber. Circuit 1: 1 nitrogen-doped plate + 1 mB nitrogen -> 4 NV diamond chips.',
             'Circuit 2: 1 silicon-28 wafer + 1 phosphorus dust -> 1 donor qubit wafer. Silicon-28 is spin-free: the hot cell\'s circuit 5 mode makes the dust. 30,720 EU/t. No byproducts.',
             'Needs, in the floor: 1 or 2 energy hatches (ZPM), 1 or 2 input buses, 1 or 2 output buses, 1 to 3 input hatches, 1 or 2 output hatches, and 15 or more cleanroom casings among them.']],
         ['qubit_fab', 'qubit_fabrication', 'Qubit Fab', 'Qubit Fabrication', [
@@ -24,7 +24,7 @@
             'El hidrógeno vuelve a la siguiente tanda; el 5 % perdido es la reposición. 30 720 EU/t durante 60 s. Las placas alimentan el implantador de iones y la fábrica de qubits.',
             'Necesita, en el suelo: 1 o 2 escotillas de energía (ZPM), 1 o 2 buses de entrada, 1 o 2 buses de salida, de 1 a 3 escotillas de entrada, 1 o 2 de salida, y 12 o más carcasas de sala blanca entre ellos.']],
         ['ion_implanter', 'ion_implantation', 'Implantador de iones', 'Implantación de iones', [
-            'Una línea de haz de 3 x 3 x 11: fuente de iones, imán analizador, cámara del blanco. Circuito 1: 1 placa dopada con nitrógeno + 1 mB de nitrógeno -> 4 chips de diamante NV.',
+            'Una sala de línea de haz de 5 x 5 x 15: fuente de iones, imán analizador, cámara del blanco. Circuito 1: 1 placa dopada con nitrógeno + 1 mB de nitrógeno -> 4 chips de diamante NV.',
             'Circuito 2: 1 oblea de silicio-28 + 1 de polvo de fósforo -> 1 oblea de qubits donantes. El silicio-28 no tiene espín: el modo de circuito 5 de la celda caliente hace el polvo. 30 720 EU/t. Sin subproductos.',
             'Necesita, en el suelo: 1 o 2 escotillas de energía (ZPM), 1 o 2 buses de entrada, 1 o 2 buses de salida, de 1 a 3 escotillas de entrada, 1 o 2 de salida, y 15 o más carcasas de sala blanca entre ellos.']],
         ['qubit_fab', 'qubit_fabrication', 'Fábrica de qubits', 'Fabricación de qubits', [

@@ -7,7 +7,7 @@
 //                                   duranium, tritanium and darmstadtium are cast into plate (circuit 1) or foil (circuit 2) in one step
 //                                   under an argon shroud, and the run's heat leaves as steam. The argon comes back from the output hatch
 //                                   (5 % make-up); the steam goes to a turbine. GTM's electric multiblock with a parallel hatch's copies.
-//   gtceu:direct_energy_converter   type gtceu:direct_conversion 9 x 5 x 5 of cryostat casing with three grids of tungstensteel frame
+//   gtceu:direct_energy_converter   type gtceu:direct_conversion 9 x 6 x 7 of cryostat casing with three grids of tungstensteel frame
 //                                   posts across the beam path. A GENERATOR (lib/generators.js): helium plasma (our D + He-3) and tin
 //                                   plasma (GTM's Ag + He-3) run at 1.25 x the plasma turbine's EU per mB, returning the cooled gas or
 //                                   molten tin. Its EU figures are final (the type is not in power/generators.js's doubling list).
