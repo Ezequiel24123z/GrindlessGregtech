@@ -175,6 +175,21 @@
       fluidsOut: [fluid('gtceu:hydrogen', 1500), fluid('gtceu:arsine', 250)], eut: 1966080, duration: 1200 }
   ]
 
+  // UXV-A3 (docs/eras/uxv.md, lines 6, 9, 40, 41, 44): the MOCVD reactor's spintronic films; silane + ammonia deposit the nitride, the hydrogen goes back
+  var UXV_ROWS = [
+    { name: 'mtj_die', type: 'mocvd', circuit: 13, itemsIn: [item('grindless:etched_mtj_wafer', 1)],
+      fluidsIn: [fluid('gtceu:silane', 750), fluid('gtceu:ammonia', 1000)], itemsOut: [item('grindless:mtj_die', 1)],
+      fluidsOut: [fluid('gtceu:hydrogen', 3000)], eut: 1966080, duration: 800 },
+    { name: 'sin_membrane', type: 'mocvd', circuit: 14, itemsIn: [item('gtceu:silicon_wafer', 1)],
+      fluidsIn: [fluid('gtceu:silane', 750), fluid('gtceu:ammonia', 1000)], itemsOut: [item('grindless:sin_membrane', 1)],
+      fluidsOut: [fluid('gtceu:hydrogen', 3000)], eut: 1966080, duration: 800 },
+    { name: 'stno_planarise', type: 'mocvd', circuit: 15, itemsIn: [item('grindless:stno_clean_wafer', 1)],
+      fluidsIn: [fluid('gtceu:silane', 750), fluid('gtceu:ammonia', 1000)], itemsOut: [item('grindless:stno_planarised_wafer', 1)],
+      fluidsOut: [fluid('gtceu:hydrogen', 3000)], eut: 1966080, duration: 800 },
+    { name: 'ga2o3_epi', type: 'mocvd', circuit: 16, itemsIn: [item('grindless:ga2o3_wafer', 1), item('gtceu:tin_dust', 1)],
+      fluidsIn: [fluid('gtceu:oxygen', 500)], itemsOut: [item('grindless:ga2o3_epi_wafer', 1)], fluidsOut: [], eut: 1966080, duration: 1200 }
+  ]
+
   // side steps on GTM's own machines
   var SIDE = [
     { name: 'arsine', type: 'chemical_reactor', circuit: null,
@@ -213,6 +228,7 @@
   P.uevRows = UEV_ROWS.map(function (t) { return publish(t, 'grindless:' + t.type + '/' + t.name) })
   P.a8Rows = A8_ROWS.map(function (t) { return publish(t, 'grindless:' + t.name) })
   P.uivRows = UIV_ROWS.map(function (t) { return publish(t, 'grindless:' + t.type + '/' + t.name) })
+  P.uxvRows = UXV_ROWS.map(function (t) { return publish(t, 'grindless:' + t.type + '/' + t.name) })
   P.skipped = []
   P.clashes = []
   P.crafting = {
@@ -276,10 +292,10 @@
   }
 
   function addMachines(event) {
-    P.clashes = clashesOf(P.recipes.concat(P.uhvRows, P.uevRows, P.a8Rows, P.uivRows))
+    P.clashes = clashesOf(P.recipes.concat(P.uhvRows, P.uevRows, P.a8Rows, P.uivRows, P.uxvRows))
     if (P.clashes.length > 0) console.error(LOG + 'photonics recipes clash in the lookup: ' + P.clashes.join(', '))
-    P.recipes.concat(P.uhvRows, P.uevRows, P.a8Rows, P.uivRows).forEach(function (r) { addRecipe(event, r) })
-    console.info(LOG + 'photonics recipes added: ' + (P.recipes.length + P.uhvRows.length + P.uevRows.length + P.a8Rows.length + P.uivRows.length - P.skipped.length))
+    P.recipes.concat(P.uhvRows, P.uevRows, P.a8Rows, P.uivRows, P.uxvRows).forEach(function (r) { addRecipe(event, r) })
+    console.info(LOG + 'photonics recipes added: ' + (P.recipes.length + P.uhvRows.length + P.uevRows.length + P.a8Rows.length + P.uivRows.length + P.uxvRows.length - P.skipped.length))
   }
 
   function addSide(event) {

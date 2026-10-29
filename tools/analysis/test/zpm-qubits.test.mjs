@@ -47,14 +47,14 @@ test('registration: three recipe types, three machines, one pattern each with on
 });
 
 test('the chain recipes (nine, plus UEV-A3\'s nanodiamond row and UIV-A5\'s H-implanted Si-28 wafer): one circuit per recipe in its type, ZPM VA or less, fits the IO sizes', () => {
-  assert.equal(Q.recipes.length, 13); // UIV-A10 adds c12_cvd_plate and c12_boron_diamond
+  assert.equal(Q.recipes.length, 16); // UIV-A10 adds c12_cvd_plate and c12_boron_diamond; UXV-A3 adds three argon ion mills (ion_implantation c8-10)
   for (const p of Q.recipes) {
     const r = byId(p.recipeId);
     assert.ok(r, p.recipeId + ' added');
     assert.equal(r.t, 'gtceu:' + p.type);
     assert.deepEqual(r.j.inputs.item.filter((i) => i.content.type === 'gtceu:circuit').map((i) => i.content.configuration), [p.circuit]);
     // UIV-A5's implanter row runs at 491,520 EU/t, as UHV's implanter rows c3-c4 in tables/photonics.json do
-    assert.ok(p.eut <= (['h_si28_wafer', 'c12_cvd_plate', 'c12_boron_diamond'].includes(p.name) ? 491520 : ZPM_VA) && Number.isInteger(p.duration), p.name);
+    assert.ok(p.eut <= (['h_si28_wafer', 'c12_cvd_plate', 'c12_boron_diamond', 'mtj_ion_etch', 'mram_ion_etch', 'stno_ion_mill'].includes(p.name) ? 491520 : ZPM_VA) && Number.isInteger(p.duration), p.name);
   }
   for (const t of TYPES) {
     const circuits = Q.recipes.filter((r) => r.type === t).map((r) => r.circuit);

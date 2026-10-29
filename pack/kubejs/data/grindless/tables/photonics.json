@@ -387,6 +387,48 @@
           "charge": [],
           "itemsOut": [{ "id": "grindless:w_photonic_crystal", "count": 1 }],
           "fluidsOut": [{ "id": "minecraft:water", "amount": 1000 }]
+        },
+        {
+          "_why": "UXV-A3 (uxv.md line 19): the MESO logic die, a magnetoelectric switch wafer bonded to the SOT readout stack under argon (returned). Circuits 17-22.",
+          "name": "meso_logic_die", "circuit": 17, "eut": 7864320, "duration": 600,
+          "itemsIn": [{ "id": "grindless:me_switch_wafer", "count": 1 }, { "id": "grindless:sot_readout_stack", "count": 1 }],
+          "kept": [], "fluidsIn": [{ "id": "gtceu:argon", "amount": 100 }, { "id": "gtceu:ultrapure_water", "amount": 1000 }], "charge": [],
+          "itemsOut": [{ "id": "grindless:meso_logic_die", "count": 1 }], "fluidsOut": [{ "id": "minecraft:water", "amount": 1000 }]
+        },
+        {
+          "_why": "UXV-A3 (uxv.md line 7): the etched MRAM wafer gets its copper wiring layer, rinsed in ultrapure water.",
+          "name": "mram_copper", "circuit": 18, "eut": 7864320, "duration": 600,
+          "itemsIn": [{ "id": "grindless:etched_mram_wafer", "count": 1 }, { "id": "gtceu:copper_foil", "count": 2 }],
+          "kept": [], "fluidsIn": [{ "id": "gtceu:ultrapure_water", "amount": 1000 }], "charge": [],
+          "itemsOut": [{ "id": "grindless:mram_wafer", "count": 1 }], "fluidsOut": [{ "id": "minecraft:water", "amount": 1000 }]
+        },
+        {
+          "_why": "UXV-A3 (uxv.md line 9): the RF carpet board, a silicon wafer gold-plated under argon.",
+          "name": "rf_carpet_board", "circuit": 19, "eut": 7864320, "duration": 400,
+          "itemsIn": [{ "id": "gtceu:silicon_wafer", "count": 1 }, { "id": "gtceu:gold_foil", "count": 4 }],
+          "kept": [], "fluidsIn": [{ "id": "gtceu:argon", "amount": 100 }, { "id": "gtceu:ultrapure_water", "amount": 1000 }], "charge": [],
+          "itemsOut": [{ "id": "grindless:rf_carpet_board", "count": 1 }], "fluidsOut": [{ "id": "minecraft:water", "amount": 1000 }]
+        },
+        {
+          "_why": "UXV-A3 (uxv.md line 44): the planarised STNO wafer gets its gold contacts.",
+          "name": "stno_contacts", "circuit": 20, "eut": 7864320, "duration": 600,
+          "itemsIn": [{ "id": "grindless:stno_planarised_wafer", "count": 1 }, { "id": "gtceu:gold_foil", "count": 2 }],
+          "kept": [], "fluidsIn": [{ "id": "gtceu:argon", "amount": 100 }, { "id": "gtceu:ultrapure_water", "amount": 1000 }], "charge": [],
+          "itemsOut": [{ "id": "grindless:stno_array", "count": 1 }], "fluidsOut": [{ "id": "minecraft:water", "amount": 1000 }]
+        },
+        {
+          "_why": "UXV-A3 (uxv.md line 41): the gated Ga2O3 wafer diced into power dies; the kerf returns as oxide dust.",
+          "name": "ga2o3_dicing", "circuit": 21, "eut": 7864320, "duration": 600,
+          "itemsIn": [{ "id": "grindless:ga2o3_gated_wafer", "count": 1 }, { "id": "gtceu:gold_foil", "count": 1 }],
+          "kept": [], "fluidsIn": [{ "id": "gtceu:lubricant", "amount": 100 }, { "id": "gtceu:ultrapure_water", "amount": 1000 }], "charge": [],
+          "itemsOut": [{ "id": "grindless:ga2o3_power_die", "count": 4 }, { "id": "grindless:gallium_oxide_dust", "count": 1 }], "fluidsOut": [{ "id": "minecraft:water", "amount": 1000 }]
+        },
+        {
+          "_why": "UXV-A3 (uxv.md line 47): the annealed mu-metal can soldered over a glass interposer.",
+          "name": "shielded_interposer", "circuit": 22, "eut": 7864320, "duration": 400,
+          "itemsIn": [{ "id": "grindless:mu_metal_shield_can", "count": 1 }, { "id": "grindless:glass_interposer", "count": 1 }],
+          "kept": [], "fluidsIn": [{ "id": "gtceu:soldering_alloy", "amount": 36 }, { "id": "gtceu:ultrapure_water", "amount": 1000 }], "charge": [],
+          "itemsOut": [{ "id": "grindless:shielded_interposer", "count": 1 }], "fluidsOut": [{ "id": "minecraft:water", "amount": 1000 }]
         }
       ]
     },
