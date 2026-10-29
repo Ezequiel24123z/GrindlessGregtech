@@ -10398,7 +10398,7 @@ hash = "1f4b256531a0b42a6ecf399e9b692d9e4730bd4102e53aab3e1fa2c999b69e9d"
 
 [[files]]
 file = "kubejs/data/grindless/tables/hidden_until.json"
-hash = "54d156460ea2c7b8be229e0b7a85870f7372dcf02c14809ffcfb37324e927abd"
+hash = "2bf4da630ae5d7fda81813fcaf25c03dde0ebb9ffd9cc499dc696c0414e3fe63"
 
 [[files]]
 file = "kubejs/data/grindless/tables/horizon_collector.json"
@@ -10842,7 +10842,7 @@ hash = "af38b127acf62804a58e1b09bf99bf49efb74a19c36b960c5b2b6e1b4b4399de"
 
 [[files]]
 file = "kubejs/server_scripts/grindless/integration/hidden.js"
-hash = "bd4abb496f9e370fe77d4d722be454bf5b7d4ce84a8e9a7d62ffa9384ef81164"
+hash = "eccae81b169c010dd3ce9b00d181da804f3a73b19f84bb1a28775844f12bad86"
 
 [[files]]
 file = "kubejs/server_scripts/grindless/integration/ironfurnaces.js"
