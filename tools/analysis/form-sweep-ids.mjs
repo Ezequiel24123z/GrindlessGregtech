@@ -12,7 +12,7 @@ const repo = path.resolve(here, '..', '..');
 export const IDS_FILE = path.join(repo, 'tools', 'test', 'overlay', 'kubejs', 'config', 'gg_test_form_sweep_ids.json');
 
 // folders in progression order; any other folder follows alphabetically
-const ORDER = ['steam', 'lv', 'mv', 'hv', 'ev', 'iv', 'luv', 'zpm', 'uv', 'uhv', 'uev', 'uiv'];
+const ORDER = ['steam', 'lv', 'mv', 'hv', 'ev', 'iv', 'luv', 'zpm', 'uv', 'uhv', 'uev', 'uiv', 'uxv'];
 
 export function eraOf(file) {
   const m = /startup_scripts[\\/]grindless[\\/]([^\\/]+)[\\/]/.exec(String(file));

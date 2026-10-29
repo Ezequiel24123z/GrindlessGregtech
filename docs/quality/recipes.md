@@ -6,7 +6,7 @@ must climb a ladder of crafting forms that gets harder with the tier. `node tool
 
 ## The ladder
 
-Tier numbers: steam 0, LV 1, MV 2, HV 3, EV 4, IV 5, LuV 6, ZPM 7, UV 8, UHV 9, UEV 10, UIV 11. The tier of a recipe is its era directory (`eraTier`
+Tier numbers: steam 0, LV 1, MV 2, HV 3, EV 4, IV 5, LuV 6, ZPM 7, UV 8, UHV 9, UEV 10, UIV 11, UXV 12. The tier of a recipe is its era directory (`eraTier`
 in `tools/analysis/recipe_quality.json`), else the tier prefix of the output, else the highest tier among its inputs.
 
 | Class | Tier | Required form | Code |
@@ -35,7 +35,7 @@ needs a native dump (see the handoff) and the integrator decides them separately
 
 **Complexity score (C-COMPLEX).** Per output of ours at IV+: steps from raw (depth over our recipe graph, cycles count as raw, capped at 6) + 0.5 per
 distinct input (cap 8) + 0.5 per fluid (cap 2) + form bonus (assembler/machine 1, assembly line 2) + 1 for research. Floors per tier in
-`complexFloor` (IV 5, LuV 6, ZPM 7, UV 7.5, UHV 8, UEV 8.5, UIV 9). Principle 2: more distinct steps and inputs count; quantity and duration do not.
+`complexFloor` (IV 5, LuV 6, ZPM 7, UV 7.5, UHV 8, UEV 8.5, UIV 9, UXV 9.5). Principle 2: more distinct steps and inputs count; quantity and duration do not.
 
 All controllers (any tier from MV) need at least 5 distinct ingredients (items plus fluids).
 

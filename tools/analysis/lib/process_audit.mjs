@@ -29,8 +29,8 @@ export const KINDS = [
   'cycle_gain',
   'trivial_step',
 ];
-const ERAS = ['steam', 'lv', 'mv', 'hv', 'ev', 'iv', 'luv', 'zpm', 'uv', 'uhv', 'uev', 'uiv'];
-const TIER_ERA = ['steam', 'lv', 'mv', 'hv', 'ev', 'iv', 'luv', 'zpm', 'uv', 'uhv', 'uev', 'uiv'];
+const ERAS = ['steam', 'lv', 'mv', 'hv', 'ev', 'iv', 'luv', 'zpm', 'uv', 'uhv', 'uev', 'uiv', 'uxv'];
+const TIER_ERA = ['steam', 'lv', 'mv', 'hv', 'ev', 'iv', 'luv', 'zpm', 'uv', 'uhv', 'uev', 'uiv', 'uxv'];
 const OURS_NS = ['grindless'];
 // GT forms that are used by placing or wearing them, not by a recipe: no use is expected.
 const PLACED_OR_WORN = /(_casing|_block|_glass|_coil_block|_frame|_fuel_tank|_cell|_vault|_radiator|_pipe|_wire|_cable|_hatch|_bus|_sword|_pickaxe|_axe|_shovel|_hoe|_helmet|_chestplate|_leggings|_boots|_key|_pump|_turbine_rotor|_drill|_antenna)$/;
@@ -219,7 +219,7 @@ export function auditProcesses({ dump, registry, cfg = {}, emi = { pages: [], di
   // A machine hidden with its recipes (hidden_until groups, `until: never` included) is not offered to the player, so an
   // empty type or a missing craft is not a gap; the audit catches it once the machine is released.
   const machineHidden = (id) => hiddenWith.has(id);
-  const eraOfTier = (t) => TIER_ERA[Math.max(0, Math.min(11, (t || 1) - 1 + 0))] || 'unknown';
+  const eraOfTier = (t) => TIER_ERA[Math.max(0, Math.min(TIER_ERA.length - 1, (t || 1) - 1 + 0))] || 'unknown';
   const emptyTypes = new Set([...gtTypes].filter((t) => !typeCount.get(t) && t !== 'gtceu:dummy'));
   for (const t of emptyTypes) {
     const users = [...dump.machines.values()].filter((m) => m.types.includes(t));
