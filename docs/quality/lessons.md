@@ -57,7 +57,7 @@ Design (`docs/eras/<era>.md`):
 
 Build (each package):
 - [ ] `structure-quality.mjs --static --check`, `recipe-quality.mjs --check` and `process-audit.mjs` pass with **no new baseline entry**; new content never enters a baseline.
-- [ ] `recipe-cycles.mjs` reports 0 unreachable controllers (it runs in T0; `--explain <id>` shows why one is stuck).
+- [ ] `recipe-cycles.mjs` reports 0 unreachable controllers and `era-order` finds no machine recipe taking a later-era item (both run in T0; `--explain <id>` shows why one is stuck).
 - [ ] Every recipe type has a recipe, every item a craft recipe and a use (or a stated future use), every multiblock an info page in both languages.
 - [ ] No `const` in loops, no `Java.to` in suppliers, no `console.error` for optional content.
 - [ ] Two recipes of one type differ in an ingredient; research ids are unique (check the dump). Rerun the bench lookup guard (`gg_test_recipe_lookup`) after any repair that changes inputs.
