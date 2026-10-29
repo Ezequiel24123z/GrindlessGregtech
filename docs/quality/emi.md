@@ -370,6 +370,8 @@ ID whose literal is not in that file; the cited declaration or registration call
 
 ### luv
 
+Info pages written (QR-I2): every machine below has an emi:info page of its own; the integrator's EMI audit proves them at runtime.
+
 | Machine ID | Source |
 |---|---|
 | `gtceu:algae_bioreactor` | `pack/kubejs/startup_scripts/grindless/luv/europa.js:97` |
@@ -402,6 +404,8 @@ ID whose literal is not in that file; the cited declaration or registration call
 | `gtceu:zero_g_crystal_grower` | `pack/kubejs/startup_scripts/grindless/luv/orbital_biology.js:8` |
 
 ### zpm
+
+Info pages written (QR-I2): every machine below has an emi:info page of its own; the integrator's EMI audit proves them at runtime.
 
 | Machine ID | Source |
 |---|---|
@@ -602,6 +606,8 @@ ID whose literal is not in that file; the cited declaration or registration call
 
 ### launch_road
 
+Info pages written (QR-I2): every machine below has an emi:info page of its own; the integrator's EMI audit proves them at runtime.
+
 | Machine ID | Source |
 |---|---|
 | `gtceu:composite_autoclave` | `pack/kubejs/startup_scripts/grindless/launch_road/composite_autoclave.js:89` |
@@ -609,11 +615,15 @@ ID whose literal is not in that file; the cited declaration or registration call
 
 ### moon
 
+Info pages written (QR-I2): every machine below has an emi:info page of its own; the integrator's EMI audit proves them at runtime.
+
 | Machine ID | Source |
 |---|---|
 | `gtceu:lunar_drill` | `pack/kubejs/startup_scripts/grindless/moon/lunar_drill.js:91` |
 
 ### observatory
+
+Info pages written (QR-I2): every machine below has an emi:info page of its own; the integrator's EMI audit proves them at runtime.
 
 | Machine ID | Source |
 |---|---|
@@ -622,6 +632,8 @@ ID whose literal is not in that file; the cited declaration or registration call
 | `gtceu:steam_observatory` | `pack/kubejs/startup_scripts/grindless/observatory/machines.js:208` |
 
 ### power
+
+Info pages written (QR-I2): every machine below has an emi:info page of its own; the integrator's EMI audit proves them at runtime.
 
 | Machine ID | Source |
 |---|---|
