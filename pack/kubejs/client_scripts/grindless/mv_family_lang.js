@@ -19,7 +19,7 @@ ClientEvents.lang('en_us', event => {
 
     add('grindless.machine.mv_greenhouse.tooltip.0', 'Grows trees, rubber trees, crops, mushrooms, berries, vines and flowers with a plant that is never used up. It runs every Steam and LV Greenhouse recipe.')
     add('grindless.machine.mv_greenhouse.tooltip.1', 'Runs as many crops at once as its energy hatches allow (voltage / 4 EU/t, up to 16). Water in an input hatch unlocks the extra plants.')
-    add('grindless.machine.mv_greenhouse.tooltip.2', 'Programmed circuit 2 + fertilizer in the input bus (and water): double output in half the time. Carbon dioxide in a second input hatch (200 mB per run) adds +50% and 100 mB of oxygen comes back out.')
+    add('grindless.machine.mv_greenhouse.tooltip.2', 'Programmed circuit 2 + fertilizer in the input bus (and water): double output in half the time. Circuit 4 + fertilizer and carbon dioxide in a second input hatch (200 mB per run) adds +50% and 100 mB of oxygen comes back out.')
     add('grindless.machine.mv_greenhouse.tooltip.3', 'Needs 1 or 2 energy hatches, 1 input bus, 1 or 2 output buses, 1 or 2 input hatches (water, carbon dioxide) and 1 output hatch (oxygen).')
 
     add('item.grindless.vanadium_steel_drill_bit', 'Vanadium Steel Drill Bit')
@@ -39,7 +39,7 @@ ClientEvents.lang('es_es', event => {
 
     add('grindless.machine.mv_greenhouse.tooltip.0', 'Cultiva árboles, árboles de caucho, cosechas, setas, bayas, enredaderas y flores con una planta que no se gasta. Hace todas las recetas de los invernaderos de vapor y LV.')
     add('grindless.machine.mv_greenhouse.tooltip.1', 'Hace tantos cultivos a la vez como permitan sus escotillas de energía (voltaje / 4 EU/t, hasta 16). Con agua en una escotilla de entrada se abren las plantas extra.')
-    add('grindless.machine.mv_greenhouse.tooltip.2', 'Circuito programado 2 + fertilizante en el bus de entrada (y agua): doble de producción en la mitad de tiempo. Con dióxido de carbono en una segunda escotilla de entrada (200 mB por ciclo) suma +50 % y vuelven 100 mB de oxígeno.')
+    add('grindless.machine.mv_greenhouse.tooltip.2', 'Circuito programado 2 + fertilizante en el bus de entrada (y agua): doble de producción en la mitad de tiempo. Con el circuito 4, fertilizante y dióxido de carbono en una segunda escotilla de entrada (200 mB por ciclo) suma +50 % y vuelven 100 mB de oxígeno.')
     add('grindless.machine.mv_greenhouse.tooltip.3', 'Necesita 1 o 2 escotillas de energía, 1 bus de entrada, 1 o 2 buses de salida, 1 o 2 escotillas de entrada (agua, dióxido de carbono) y 1 escotilla de salida (oxígeno).')
 
     add('item.grindless.vanadium_steel_drill_bit', 'Broca de acero vanádico')

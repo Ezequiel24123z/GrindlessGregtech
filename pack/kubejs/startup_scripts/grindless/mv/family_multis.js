@@ -16,8 +16,8 @@
 // Both machines skip the recipes of the tiers above MV (<type>/hv/, <type>/ev/ and up: rules.isAboveTier, lv/multis.js): the
 // stainless steel bit is the HV drill's. The End is MV: its veins with the vanadium
 // steel bit are <type>/mv/ recipes, so this drill runs them (with drilling fluid).
-// The greenhouse works like the LV one with programmed circuit 2 (fertilizer variants); with CO2 in a hatch as well the
-// fertilizer + CO2 variant runs instead of the fertilizer one: x1.5 output on top and 100 mB of O2 back per run. Circuit 1 or no
+// The greenhouse works like the LV one with programmed circuit 2 (fertilizer variants); with circuit 4 and CO2 in a hatch the
+// fertilizer + CO2 variant runs instead: x1.5 output on top and 100 mB of O2 back per run. Circuit 1 or no
 // circuit: CO2 is ignored and the base recipe runs. The greenhouse needs a fluid OUTPUT hatch for that O2 and takes one or two
 // input hatches (water, CO2). Circuit 3 is the booster family: the LV CO2 booster (x1.25) and this greenhouse's fermented biomass
 // booster (x2 at the base time), both run with or without CO2 in the hatch.
@@ -107,14 +107,12 @@
         (rules.isVanadiumBaseRecipe(recipe) && rules.machineHasFluid(machine, 'gtceu:sulfuric_acid'))
     }
 
-    // circuit 2 = fertilizer mode; with CO2 in a hatch too the fertilizer + CO2 variant is the one that runs. Circuit 3 = the
-    // boosters (LV CO2, MV fermented biomass), which run with or without CO2
+    // circuit 2 = the LV fertilizer variant, circuit 3 = the boosters (LV CO2, MV fermented biomass), circuit 4 = the fertilizer + CO2
+    // variant; the base recipes run with circuit 1 or none
     function greenhouseVeto(machine, recipe) {
       if (rules.isAboveTier(recipe, 'mv')) return true
       if (rules.machineCircuit(machine) < 2) return false
-      if (rules.isBoosterRecipe(recipe)) return false
-      if (!rules.isFertilizerRecipe(recipe)) return true
-      return !rules.isCo2Recipe(recipe) && rules.machineHasFluid(machine, 'gtceu:carbon_dioxide')
+      return !rules.isBoosterRecipe(recipe) && !rules.isFertilizerRecipe(recipe)
     }
 
     Pat.register(DRILL, DRILL_SPEC)

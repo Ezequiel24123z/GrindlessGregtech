@@ -365,7 +365,7 @@
 		{
 			dependencies: ["734B97375A3121C4"]
 			description: [
-				"The &6Sealed Dome&r is a greenhouse that brings its own soil and makes a sky out of lamps. On circuit 4 it grows crops on the Moon or Mars from water and carbon dioxide, and breathes out oxygen."
+				"The &6Sealed Dome&r is a greenhouse that brings its own soil and makes a sky out of lamps. On circuit 5 (Moon) or 6 (Mars) it grows crops from water and carbon dioxide, and breathes out oxygen."
 				"Mars supplies the carbon dioxide from its air; up here it has to come from home."
 			]
 			icon: "gtceu:sealed_dome"

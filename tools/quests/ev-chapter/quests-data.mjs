@@ -228,7 +228,7 @@ export const QUESTS = [
     key: "DOME", id: "56820468F118D3EA", title: "Sealed Dome", icon: "gtceu:sealed_dome", shape: "gear", size: 1.25,
     deps: ["LSA"], x: 14, y: -4.5,
     desc: [
-      "The &6Sealed Dome&r is a greenhouse that brings its own soil and makes a sky out of lamps. On circuit 4 it grows crops on the Moon or Mars from water and carbon dioxide, and breathes out oxygen.",
+      "The &6Sealed Dome&r is a greenhouse that brings its own soil and makes a sky out of lamps. On circuit 5 (Moon) or 6 (Mars) it grows crops from water and carbon dioxide, and breathes out oxygen.",
       "Mars supplies the carbon dioxide from its air; up here it has to come from home.",
     ],
     tasks: [it("gtceu:sealed_dome", 1, "7D87303BAEF28490")],
