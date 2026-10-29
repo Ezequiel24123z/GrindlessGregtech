@@ -1,13 +1,14 @@
 // priority: 12600
 // Gregtech Grindless - EMI coverage, client half (TEST-ONLY overlay: copied over the instance on the test PC, never shipped with the
-// pack). Read-only: no world band, no clicks, nothing placed. Once EMI has finished loading it asks EMI's recipe manager (EmiApi) for the
+// pack). No world band, clicks or placement; the optional named render proof only opens and restores a screen. Once EMI loads it asks
+// EMI's recipe manager (EmiApi) for the
 // recipes and uses of every item, block item, fluid and machine the pack registers, against the static audit's expectations in
 // kubejs/config/gg_test_emi_coverage_expect.json (written by `node tools/analysis/emi-coverage.mjs --expect`; the Node suite fails when
 // it is stale).
 //
 // Two ways to run it:
-//   standalone   kubejs/config/gg_test_emi_coverage.json = {"enabled": true} in a scratch overlay (the committed marker is false). It
-//                keeps mc-runtime-test in the world itself (the player's `age` is wound back) until it is done.
+//   standalone   kubejs/config/gg_test_emi_coverage.json = {"enabled": true} (the default);
+//                keeps mc-runtime-test in the world until the mandatory audit is done.
 //   integrated   a serial dispatcher (like gg_test_v071_integration.js) adds the stage ['emi_coverage', 'ggEmiCoverage',
 //                'ggTestEmiCoverageStart']: the server half's hook arms this script through global.ggEmiCoverage and marks serverDone; this
 //                half sets clientDone (and failed) when it is through, and stops on the dispatcher's `cancel`. The dispatcher holds the
@@ -20,6 +21,7 @@
 //   acquisition    every audited item, block and fluid has at least one EMI recipe or page that makes it
 //   use            every one that is not an end product (machines, tools) has at least one EMI recipe or page that uses it
 //   routes         every route the audit expects shows in its EMI category (GT categories, crafting, EMI info)
+//   plugins, workstations, processes, previews: hard failures against the live GTM and EMI registries.
 //   preview_routes NOTE: the blocks the audit expects in GTM's multiblock previews that EMI does not list (the audit's model of the
 //                  preview, BlockPattern#getPreview; those blocks also have pages)
 //   pages          our info pages are in EMI (emi:/generated/recipe/additions/grindless/...)
@@ -35,7 +37,7 @@
   var T = 'GGTEST|emi_coverage|'
   var HOLD_MAX_MS = 8 * 60 * 1000
   var MAX_LISTED = 30
-  var c = { standalone: null, since: 0, done: false, errors: 0, ageField: null, waitedLog: 0 }
+  var c = { standalone: null, since: 0, done: false, ageField: null, waitedLog: 0, renderPreview: false, preview: null, report: null }
 
   function log(check, status, detail) {
     var line = T + check + '|' + status
@@ -58,6 +60,12 @@
     if (c.standalone === null) {
       var m = readJson(MARKER)
       c.standalone = m !== null && String(m.enabled) === 'true'
+      c.renderPreview = m !== null && String(m.renderPreview) === 'true'
+      if (m !== null && m.holdTimeoutSec !== undefined) {
+        var hold = Number(m.holdTimeoutSec)
+        if (hold < 1 || hold > 1800 || Math.floor(hold) !== hold) throw new Error('holdTimeoutSec must be an integer between 1 and 1800')
+        HOLD_MAX_MS = hold * 1000
+      }
     }
     return c.standalone
   }
@@ -88,6 +96,7 @@
           break
         }
       }
+      if (c.ageField === '') throw new Error('cannot hold the test player: no accessible age field')
     }
     if (c.ageField !== '' && Number(p[c.ageField]) >= 80) p[c.ageField] = 20
   }
@@ -130,6 +139,11 @@
       var key = String(keys.get(i))
       if (key.indexOf('grindless:') === 0 && audited['item:' + key] !== true) unaudited.push(key)
     }
+    var fluidKeys = jlist(BI.FLUID.keySet())
+    for (var fi = 0; fi < fluidKeys.size(); fi++) {
+      var fluidKey = String(fluidKeys.get(fi))
+      if (fluidKey.indexOf('grindless:') === 0 && audited['fluid:' + fluidKey] !== true) unaudited.push('fluid:' + fluidKey)
+    }
     var unknown = exp.items.filter(function (e) {
       return !(e.kind === 'fluid' ? BI.FLUID.containsKey(new RL(e.id)) : BI.ITEM.containsKey(new RL(e.id)))
     }).map(function (e) { return e.id })
@@ -137,6 +151,83 @@
     ok = ok && regOk
     log('registry', regOk ? 'PASS' : 'FAIL', 'grindless items not audited: ' + (listed(unaudited) || 'none') + '; audited ids not registered: ' + (listed(unknown) || 'none') +
       (regOk ? '' : ' (regenerate the expectations with node tools/analysis/emi-coverage.mjs --expect)'))
+
+    // EMI catches plugin exceptions and still declares itself loaded: loaded alone is not a verdict.
+    var warnings = jlist(Java.loadClass('dev.emi.emi.runtime.EmiReloadLog').warnings)
+    var pluginErrors = []
+    for (var w = 0; w < warnings.size(); w++) {
+      var warning = String(warnings.get(w))
+      if (/exception|critical error|recipe loss|illegally self-mutated/i.test(warning)) pluginErrors.push(warning)
+    }
+    // The harness checks raw log exceptions too: JEMI's per-recipe catches do not enter this warning list.
+    ok = ok && pluginErrors.length === 0
+    log('plugins', pluginErrors.length ? 'FAIL' : 'PASS', pluginErrors.length ? listed(pluginErrors) : 'no reload exceptions or recipe-loss warnings')
+
+    var categories = {}
+    var stations = {}
+    var liveCategories = jlist(rm.getCategories())
+    for (var ci = 0; ci < liveCategories.size(); ci++) {
+      var category = liveCategories.get(ci)
+      var categoryId = String(category.getId())
+      categories[categoryId] = { displays: jlist(rm['getRecipes(dev.emi.emi.api.recipe.EmiRecipeCategory)'](category)).size() }
+      stations[categoryId] = {}
+      var workstations = jlist(rm.getWorkstations(category))
+      for (var wi = 0; wi < workstations.size(); wi++) {
+        var alternatives = jlist(workstations.get(wi).getEmiStacks())
+        for (var ai = 0; ai < alternatives.size(); ai++) stations[categoryId][String(alternatives.get(ai).getId())] = true
+      }
+    }
+    var GTR = Java.loadClass('com.gregtechceu.gtceu.api.registry.GTRegistries')
+    var MBD = Java.loadClass('com.gregtechceu.gtceu.api.machine.MultiblockMachineDefinition')
+    var machines = jlist(GTR.MACHINES.values())
+    var machineReport = []
+    var workstationMissing = []
+    var previewsMissing = []
+    for (var mi = 0; mi < machines.size(); mi++) {
+      var definition = machines.get(mi)
+      var machineId = String(definition.getId())
+      var machineHidden = hidden.indexOf(machineId) >= 0
+      var expectedCategories = []
+      var missingCategories = []
+      var types = definition.getRecipeTypes()
+      for (var ti = 0; ti < types.length; ti++) {
+        var typeCategories = jlist(types[ti].getCategories())
+        for (var tci = 0; tci < typeCategories.size(); tci++) {
+          var tc = typeCategories.get(tci)
+          // Respect GTM's intentional non-XEI categories; its furnace uses vanilla smelting.
+          if (!tc.isXEIVisible()) continue
+          var catId = String(tc.registryKey)
+          if (catId === 'gtceu:electric_furnace') catId = 'minecraft:smelting'
+          if (expectedCategories.indexOf(catId) < 0) expectedCategories.push(catId)
+          if (!machineHidden && (!stations[catId] || stations[catId][machineId] !== true)) missingCategories.push(catId)
+        }
+      }
+      var multiblock = definition instanceof MBD
+      var preview = !multiblock ? null : rm.getRecipe(new RL(machineId))
+      var hasPreview = preview !== null && String(preview.getCategory().getId()) === 'gtceu:multiblock_info'
+      if (multiblock && !machineHidden && !hasPreview) previewsMissing.push(machineId)
+      if (missingCategories.length) workstationMissing.push(machineId + ': ' + missingCategories.join(', '))
+      machineReport.push({ id: machineId, tier: Number(definition.getTier()), hidden: machineHidden, categories: expectedCategories,
+        missingCategories: missingCategories, multiblock: multiblock, preview: multiblock ? hasPreview : null })
+    }
+    var processReport = []
+    var processesMissing = []
+    var nativeCategories = jlist(GTR.RECIPE_CATEGORIES.values())
+    for (var nci = 0; nci < nativeCategories.size(); nci++) {
+      var nc = nativeCategories.get(nci)
+      if (!nc.shouldRegisterDisplays()) continue
+      var nativeCount = jlist(nc.getRecipeType().getRecipesInCategory(nc)).size()
+      var ncid = String(nc.registryKey)
+      var displayCount = categories[ncid] ? categories[ncid].displays : 0
+      var users = machineReport.filter(function (m) { return m.categories.indexOf(ncid) >= 0 })
+      var processHidden = users.length > 0 && users.every(function (m) { return m.hidden })
+      if (!processHidden && nativeCount > 0 && displayCount === 0) processesMissing.push(ncid)
+      processReport.push({ id: ncid, type: String(nc.getRecipeType().registryName), recipes: nativeCount, displays: displayCount, hidden: processHidden })
+    }
+    ok = ok && workstationMissing.length === 0 && previewsMissing.length === 0 && processesMissing.length === 0
+    log('workstations', workstationMissing.length ? 'FAIL' : 'PASS', machines.size() + ' machines; missing: ' + (listed(workstationMissing) || 'none'))
+    log('processes', processesMissing.length ? 'FAIL' : 'PASS', processReport.length + ' GT categories; no displays: ' + (listed(processesMissing) || 'none'))
+    log('previews', previewsMissing.length ? 'FAIL' : 'PASS', 'multiblocks without preview: ' + (listed(previewsMissing) || 'none'))
 
     // 2) every audited stack
     var categoriesOf = function (recipes) {
@@ -193,6 +284,19 @@
     ok = ok && pagesMissing.length === 0
     log('pages', pagesMissing.length === 0 ? 'PASS' : 'FAIL', ours + ' grindless info pages in EMI; expected ' + exp.pages.length +
       (pagesMissing.length ? '; missing: ' + listed(pagesMissing) : ''))
+    var machineInfoMissing = []
+    machineReport.forEach(function (m) {
+      var uses = jlist(rm.getRecipesByInput(new ItemEmiStack(Item.of(m.id))))
+      var makes = jlist(rm.getRecipesByOutput(new ItemEmiStack(Item.of(m.id))))
+      m.made = makes.size()
+      m.used = uses.size()
+      m.madeIn = categoriesOf(makes)
+      m.usedIn = categoriesOf(uses)
+      m.info = categoriesOf(uses).indexOf('emi:info') >= 0
+      if (!m.hidden && !m.info && exp.items.some(function (e) { return e.id === m.id })) machineInfoMissing.push(m.id)
+    })
+    ok = ok && machineInfoMissing.length === 0
+    log('machine_info', machineInfoMissing.length ? 'FAIL' : 'PASS', 'our machines without what-it-does pages: ' + (listed(machineInfoMissing) || 'none'))
 
     // 4) legacy items: out of the index, conversion in view
     var index = {}
@@ -207,19 +311,27 @@
     log('legacy', legacyBad.length === 0 ? 'PASS' : 'FAIL', exp.legacy.map(function (l) { return l.id }).join(', ') + (legacyBad.length ? '; ' + legacyBad.join('; ') : ''))
 
     try {
-      var doc = { format: 'gg-emi-coverage-report-1', expectations: exp.format, recipes: allRecipes.size(), pages: ours, items: report,
+      var doc = { format: 'gg-emi-coverage-report-2', expectations: exp.format, recipes: allRecipes.size(), pages: ours, items: report,
+        pluginErrors: pluginErrors, categories: categories, machines: machineReport, processes: processReport,
+        workstationMissing: workstationMissing, previewsMissing: previewsMissing, processesMissing: processesMissing, machineInfoMissing: machineInfoMissing,
         noMade: noMade, noUse: noUse, routeMissing: routeMissing, previewMissing: previewMissing, unaudited: unaudited, unknown: unknown,
         pagesMissing: pagesMissing, legacy: legacyBad }
+      c.report = doc
       // a fresh instance has no kubejs/exported yet (native run 20261026-024353-client-44b); same call as gg_test_recipe_lookup.js
       Java.loadClass('net.minecraft.FileUtil').createDirectoriesSafe('kubejs/exported')
       JsonIO.write(REPORT, Java.loadClass('com.google.gson.JsonParser').parseString(JSON.stringify(doc)))
     } catch (e) {
-      log('report', 'NOTE', 'could not write ' + REPORT + ': ' + e)
+      log('report', 'FAIL', 'could not write ' + REPORT + ': ' + e)
+      ok = false
     }
     return ok
   }
 
   function finish(ok, detail) {
+    if (c.preview !== null) {
+      Client.setScreen(c.preview.oldScreen)
+      c.preview = null
+    }
     c.done = true
     var S = shared()
     if (S !== null) {
@@ -230,9 +342,30 @@
     console.info(T + 'DONE')
   }
 
+  // Optional named T1 proof: open the shipped module machine on the real renderer, not during other UI fixtures.
+  function renderStep() {
+    c.preview.ticks++
+    var screen = Client.screen || Client.f_91080_
+    if (String(screen).indexOf('RecipeScreen') < 0) throw new Error('MEGA preview screen did not open: ' + screen)
+    if (c.preview.ticks === 20) {
+      var dir = Client.gameDirectory || Client.f_91069_
+      var target = typeof Client.getMainRenderTarget === 'function' ? Client.getMainRenderTarget() : Client.m_91385_()
+      Java.loadClass('net.minecraft.client.Screenshot').grab(dir, '../kubejs/exported/gg_emi_mega_factory.png', target, function (msg) {})
+    }
+    if (c.preview.ticks < 40) return
+    c.report.previewRender = { id: 'gtceu:mega_factory', screen: String(screen), screenshot: 'gg_emi_mega_factory.png' }
+    JsonIO.write(REPORT, Java.loadClass('com.google.gson.JsonParser').parseString(JSON.stringify(c.report)))
+    log('preview_render', 'PASS', 'gtceu:mega_factory displayed for 40 client ticks; screenshot gg_emi_mega_factory.png')
+    finish(c.preview.ok)
+  }
+
   function tick() {
-    if (c.done) return
     var integrated = requested()
+    if (c.done) {
+      if (!integrated || String(shared().get('clientDone')) === 'true') return
+      c.done = false
+      c.since = 0
+    }
     if (!integrated && !standalone()) return
     var p = Client.player
     if (p === null || p === undefined) return
@@ -244,6 +377,10 @@
     var S = shared()
     if (integrated && S.get('cancel')) {
       finish(false, 'cancelled by the dispatcher: ' + S.get('cancel'))
+      return
+    }
+    if (c.preview !== null) {
+      renderStep()
       return
     }
     var ERM = Java.loadClass('dev.emi.emi.runtime.EmiReloadManager')
@@ -265,6 +402,20 @@
     } catch (e) {
       log('script', 'FAIL', 'exception: ' + e)
     }
+    if (c.renderPreview && c.report !== null) {
+      var RL = Java.loadClass('net.minecraft.resources.ResourceLocation')
+      var EmiApi = Java.loadClass('dev.emi.emi.api.EmiApi')
+      var recipe = EmiApi.getRecipeManager().getRecipe(new RL('gtceu:mega_factory'))
+      if (recipe === null || String(recipe.getCategory().getId()) !== 'gtceu:multiblock_info') {
+        log('preview_render', 'FAIL', 'no preview display for gtceu:mega_factory')
+        finish(false)
+        return
+      }
+      c.preview = { oldScreen: Client.screen || Client.f_91080_ || null, ticks: 0, ok: ok }
+      c.done = false
+      EmiApi.displayRecipe(recipe)
+      return
+    }
     finish(ok)
   }
 
@@ -272,7 +423,8 @@
     try {
       tick()
     } catch (e) {
-      if (c.errors++ < 5) log('client_script', 'NOTE', 'exception: ' + e)
+      log('client_script', 'FAIL', 'exception: ' + e)
+      finish(false, 'client fixture could not complete')
     }
   })
 })()

@@ -2,6 +2,7 @@
 //   - synthetic fixtures prove measure / violations / compare;
 //   - no `const` declared inside a loop in startup_scripts: Rhino initialises it once per call, so a pattern builder that
 //     computes `const edge = ...` per cell collapses into a solid block in game while Node (T0) still sees the hollow shape;
+//   - every Pat.frame material is a GTM frame material seen natively (an unknown id aborts startup);
 //   - the pack's structures (static run) do not get worse than tools/analysis/structure_quality.json.
 import test from 'node:test';
 import assert from 'node:assert/strict';
@@ -61,8 +62,29 @@ test('startup_scripts declare no const inside a loop (Rhino keeps the first iter
   assert.deepEqual(hits.map((h) => `${h.file}:${h.line}`), []);
 });
 
+let packStructures = null;
+const loadPack = () => (packStructures ??= loadStructures(['--static']));
+
+// GTM material ids already seen as gtceu:<m>_frame in a native dump. Pat.frame throws at startup on an unknown id
+// ('tungstensteel' aborted every later GTM registration), and the Node stand-in cannot tell. Add a material only after
+// confirming its frame block in a dump; GTM ids use underscores (tungsten_steel, stainless_steel).
+const KNOWN_FRAME_MATERIALS = new Set([
+  'aluminium', 'bronze', 'hsss', 'naquadah_alloy', 'stainless_steel', 'steel', 'titanium', 'tungsten_steel',
+]);
+
+test('every Pat.frame material is a known GTM frame material', async () => {
+  const bad = [];
+  const walk = (o, id) => {
+    if (!o || typeof o !== 'object') return;
+    if (o.kind === 'frames') (o.materials || []).forEach((m) => KNOWN_FRAME_MATERIALS.has(m) || bad.push(`${id}: ${m}`));
+    else Object.values(o).forEach((v) => walk(v, id));
+  };
+  for (const s of Object.values(await loadPack())) walk(s.symbols, s.id);
+  assert.deepEqual(bad, []);
+});
+
 test('pack structures do not regress against the baseline', async () => {
-  const structures = await loadStructures(['--static']);
+  const structures = await loadPack();
   const analysis = analyzeAll(structures, PACK);
   const base = JSON.parse(fs.readFileSync(path.join(here, '..', 'structure_quality.json'), 'utf8'));
   assert.deepEqual(compare(analysis, base), []);

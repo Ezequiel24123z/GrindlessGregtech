@@ -216,16 +216,21 @@ export function auditProcesses({ dump, registry, cfg = {}, emi = { pages: [], di
   }
 
   // ---- recipe types and machines
+  // A machine hidden with its recipes (hidden_until groups, `until: never` included) is not offered to the player, so an
+  // empty type or a missing craft is not a gap; the audit catches it once the machine is released.
+  const machineHidden = (id) => hiddenWith.has(id);
   const eraOfTier = (t) => TIER_ERA[Math.max(0, Math.min(11, (t || 1) - 1 + 0))] || 'unknown';
   const emptyTypes = new Set([...gtTypes].filter((t) => !typeCount.get(t) && t !== 'gtceu:dummy'));
   for (const t of emptyTypes) {
     const users = [...dump.machines.values()].filter((m) => m.types.includes(t));
     if (users.length === 0 && !ourTypes.has(t)) continue;
+    if (users.length > 0 && users.every((m) => machineHidden(m.id))) continue;
     const reg = registry.recipeTypes.find((x) => x.id === t);
     add('type_empty', t, eraOfFile(reg && reg.file) || 'unknown', reg ? reg.file : null, `${ourTypes.has(t) ? 'our' : 'GTM/addon'} recipe type with 0 recipes; machines: ${users.slice(0, 6).map((m) => m.id).join(', ') || 'none'}`, { ours: ourTypes.has(t) });
   }
   const craftProducers = (id) => producers.get(id) || [];
   for (const m of dump.machines.values()) {
+    if (machineHidden(m.id)) continue;
     const reg = ours.machines.get(m.id);
     const era = (reg && eraOfFile(reg.file)) || eraOfTier(m.tier);
     const file = reg ? reg.file : null;
