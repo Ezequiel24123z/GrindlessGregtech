@@ -117,6 +117,26 @@ test('a pending route is dropped only for our stacks disabled until their era; a
   assert.ok(res.problems.some((p) => p.startsWith('t:assembler/other (gtceu:assembler): EMI drops it')), res.problems.join('\n'));
 });
 
+test('a pending route may name a foreign stack our table holds until the era; an unnamed one or a named one no longer disabled is a problem', () => {
+  const dump = mkDump({
+    recipes: [
+      gt('t:assembler/hatch', 'gtceu:assembler', { ins: [gi('t:hull'), gi('f:mainframe', 4), gi('t:seal')], outs: [gi('t:hatch')] }),
+      gt('t:assembler/plain', 'gtceu:assembler', { ins: [gi('t:hull'), gi('f:mainframe'), gi('t:seal')], outs: [gi('t:other')] }),
+    ],
+    tagsItem: { 't:hidden_with_recipes': ['t:hull', 't:hatch', 'f:mainframe'] },
+  });
+  const emi = { ...noEmi, disabled: [parseEmiStack('#item:t:hidden_with_recipes')] };
+  const registry = reg({ items: ['t:hull', 't:hatch', 't:seal', 't:other'], types: ['gtceu:assembler'] });
+  const pendingRoutes = [
+    { id: 't:assembler/hatch', foreign: ['f:mainframe', 'f:gone'] },
+    { id: 't:assembler/plain' },
+  ];
+  const res = audit({ dump, registry, emi, cfg: { ...cfg0, pendingRoutes } });
+  assert.deepEqual(res.pendingRoutes.map((d) => d.id), ['t:assembler/hatch']);
+  assert.deepEqual(res.droppedRoutes.map((d) => d.id), ['t:assembler/plain'], 'f:mainframe is not named in its entry');
+  assert.ok(res.problems.includes('pending route t:assembler/hatch: foreign stack f:gone is no longer disabled; drop it from the entry'), res.problems.join('\n'));
+});
+
 test('a pending route may be dropped for any form of our material (a wire the audit does not list), not for a look-alike name', () => {
   const dump = mkDump({
     recipes: [

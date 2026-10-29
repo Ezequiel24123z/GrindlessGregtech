@@ -1,3 +1,4 @@
+// priority: -9862
 // TEST ONLY, UXV-M1 (gtceu:uxv_parallel_hatch). Command: kubejs custom_command gg_test_uxv_parallel_hatch
 // Band ONLY: X 36416-36479, Z 0-63, Overworld Y 98-115 (the forge is 16 high; zones.json carries the same Y range).
 //   T1 (named uncertainty: tier 12 registration of ParallelHatchPartMachine with highTierContent off, and 65,536 copies still bound by energy as a long):
