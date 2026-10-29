@@ -12,6 +12,8 @@ const kube = path.join(root, 'pack', 'kubejs');
 const tables = path.join(kube, 'data', 'grindless', 'tables');
 const read = (...p) => fs.readFileSync(path.join(kube, ...p), 'utf8');
 const T = JSON.parse(fs.readFileSync(path.join(tables, 'levitation_melter.json'), 'utf8'));
+// UXV-A3's six melts (circuits 9-14) are pinned in uxv-spin_rows.test.mjs; this file pins UIV-A3's five
+T.types.levitation_melting.recipes = T.types.levitation_melting.recipes.filter((r) => !(r._why || '').startsWith('UXV-A3'));
 const MINE = 'levitation_melter.json';
 
 const ids = (xs) => (Array.isArray(xs) ? xs : []).map((x) => x.id);
@@ -149,7 +151,7 @@ test('the five older rows exist', () => {
   assert.equal(halbach[h - 1].name, 'uiv_smes_cell');
   assert.equal(halbach[h].circuit, 5);
   const cvi = comp.chemical_vapour_infiltration.recipes;
-  assert.deepEqual(cvi.map((r) => [r.name, r.circuit]), [['sic_sic_plate', 1], ['wf_w_tile', 2], ['w_preform_densify', 3], ['glassy_carbon_lattice', 4]]); // UIV-A10 appended c4
+  assert.deepEqual(cvi.map((r) => [r.name, r.circuit]), [['sic_sic_plate', 1], ['wf_w_tile', 2], ['w_preform_densify', 3], ['glassy_carbon_lattice', 4], ['w184_fibre_preform', 5]]); // UIV-A10 appended c4; UXV-A3 c5
   assert.ok(ids(cvi[2].itemsOut).includes('grindless:densified_w_preform'));
 });
 
