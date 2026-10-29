@@ -135,10 +135,11 @@ test('names, tooltips and the info page exist in both languages', () => {
   assert.deepEqual(emi.stacks, [`item:gtceu:${id}`]);
 });
 
-test('lib/mega.js and lib/parallel_hatch.js are untouched', () => {
+// UXV-M1 adds tier 12 to lib/parallel_hatch.js (uxv-parallel_hatch.test.mjs pins it), so only lib/mega.js stays pinned here
+test('lib/mega.js is untouched', () => {
   let base = null;
   try { base = execFileSync('git', ['rev-parse', '--verify', '-q', '998bc073^{commit}'], { cwd: ROOT, encoding: 'utf8' }).trim(); } catch (e) { base = null; }
   if (!base) return;
-  const diff = execFileSync('git', ['diff', '--name-only', base, '--', 'pack/kubejs/startup_scripts/grindless/lib/mega.js', 'pack/kubejs/startup_scripts/grindless/lib/parallel_hatch.js'], { cwd: ROOT, encoding: 'utf8' }).trim();
+  const diff = execFileSync('git', ['diff', '--name-only', base, '--', 'pack/kubejs/startup_scripts/grindless/lib/mega.js'], { cwd: ROOT, encoding: 'utf8' }).trim();
   assert.equal(diff, '');
 });
