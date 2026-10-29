@@ -66,6 +66,19 @@
             ch = 'X'
             if (y === RING_ROW && (edgeX || edgeZ)) ch = 'R'
             else if (edgeX && !edgeZ && z >= 3 && z <= 8 && GLASS_ROWS.indexOf(y) >= 0) ch = 'L'
+            else if ((edgeX || edgeZ) && y >= 1 && y <= H - 2) {
+              // field-hall dress: frame posts on the corners and every fifth column, a coil band, windows front and back, a pipe band
+              var corner = edgeX && edgeZ
+              var front = edgeZ && !edgeX
+              if (corner || (front && x % 5 === 0 && y !== 1)) ch = 'F'
+              else if (y === 7) ch = 'K'
+              else if (front && x >= 2 && x <= 8 && GLASS_ROWS.indexOf(y) >= 0) ch = 'L'
+              else if (y === 2 && (x + z) % 2 === 0) ch = 'P'
+            } else if (y === H - 1) {
+              var rim = edgeX || edgeZ
+              if (rim) ch = 'F'
+              else if (x >= 3 && x <= 7 && z >= 3 && z <= 8) ch = 'L'
+            }
           }
           if (ch === 'X') casingCells++
           if (ch === 'R') ringCells++
@@ -87,6 +100,9 @@
         S: Pat.controller(),
         R: Pat.block(RING),
         L: Pat.block(GLASS),
+        F: Pat.frame(['tungsten_steel']),
+        K: Pat.block('gtceu:superconducting_coil'),
+        P: Pat.block('gtceu:tungstensteel_pipe_casing'),
         X: Pat.oneOf(
           Pat.block(CASING, { min: BUILT.casingCells - PART_CELLS }),
           Pat.part('maintenance', { exact: 1 }),

@@ -102,9 +102,9 @@
       // back: the chassis' back wall
       ['  BBBBB  ', '  XXXXX  ', '  BBBBB  '],
       // the drums on their arms either side, the conveyor running through the chassis
-      ['G BBBBB G', 'GFXPPPXFG', '  BBBBB  '],
-      ['G BBBBB G', 'GFXPPPXFG', '  BBBBB  '],
-      ['G BBBBB G', 'GFXPPPXFG', '  BBBBB  '],
+      ['G BBBBB G', 'GFXPPPXFG', '  FHBHF  '],
+      ['G BBBBB G', 'GFXPPPXFG', '  FHBHF  '],
+      ['G BBBBB G', 'GFXPPPXFG', '  FHBHF  '],
       // front: the controller in the chassis' front wall
       ['  BBBBB  ', '  XXSXX  ', '  BBBBB  ']
     ],
@@ -115,7 +115,8 @@
       B: Pat.block(BRICK),
       G: Pat.block(GEARBOX),
       F: Pat.frame([FRAME]),
-      P: Pat.block(PIPE)
+      P: Pat.block(PIPE),
+      H: Pat.block(HEAT)
     }
   }
 

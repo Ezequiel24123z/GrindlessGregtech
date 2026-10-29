@@ -42,6 +42,7 @@
   const PIPE = 'gtceu:ptfe_pipe_casing'
   const GEARBOX = 'gtceu:tungstensteel_gearbox'
   const FRAME = 'tungsten_steel'
+  const GLASS = 'gtceu:laminated_glass'
 
   // item name -> stack size; two tooltip lines each (tooltip.grindless.<name>.0 and .1)
   const ITEMS = {
@@ -106,11 +107,37 @@
     rows.push('RRRRRRR')
     return rows
   }
+  // dress the casing walls: frame posts (Q) on the corners and roof edges, accent ribs (A) on the roof and an accent course at the foot,
+  // glass (L) between casing mullions in the rows above
+  function dress(slices) {
+    var depth = slices.length
+    var height = slices[0].length
+    var width = slices[0][0].length
+    return slices.map(function (rows, si) {
+      return rows.map(function (row, r) {
+        var out = ''
+        for (var c = 0; c < width; c++) {
+          var ch = row.charAt(c)
+          if (ch === 'R' && r > 0) {
+            var ex = c === 0 || c === width - 1
+            var ez = si === 0 || si === depth - 1
+            var top = r === height - 1
+            if ((ex && ez) || (top && (ex || ez))) ch = 'Q'
+            else if (top) ch = si % 3 === 1 ? 'A' : 'R'
+            else if (r === 1) ch = 'A'
+            else if ((ez ? c : si) % 3 !== 0) ch = 'L'
+          }
+          out += ch
+        }
+        return out
+      })
+    })
+  }
   const EMPTY = '#####'
   const TRAIN = ring(['PP#PP', 'PP#PP', EMPTY])
   const HALL = ring([EMPTY, EMPTY, EMPTY])
   const PLANT_SPEC = {
-    slices: [
+    slices: dress([
       ['XXXXXXX', 'RRRRRRR', 'RRRRRRR', 'RRRRRRR', 'RRRRRRR'],
       TRAIN,
       HALL,
@@ -120,11 +147,14 @@
       ring(['##G##', EMPTY, EMPTY]),
       HALL,
       ['XXXXXXX', 'RRRSRRR', 'RRRRRRR', 'RRRRRRR', 'RRRRRRR']
-    ],
+    ]),
     symbols: {
       S: Pat.controller(),
       X: cells(INERT, E.minCasings.plant, E.abilities.plant),
       R: Pat.block(INERT),
+      A: Pat.block(ROBUST),
+      L: Pat.block(GLASS),
+      Q: Pat.frame([FRAME]),
       P: Pat.block(PIPE),
       G: Pat.block(GEARBOX),
       '#': Pat.air()
@@ -135,17 +165,20 @@
   // the works: 11 x 5 x 5; the bobbin gearboxes in the outer slices, the tension frame along the middle one
   const BOBBINS = ['RRRRRRRRRRR', 'RG#######GR', 'RG#######GR', 'R#########R', 'RRRRRRRRRRR']
   const WORKS_SPEC = {
-    slices: [
+    slices: dress([
       ['XXXXXXXXXXX', 'RRRRRRRRRRR', 'RRRRRRRRRRR', 'RRRRRRRRRRR', 'RRRRRRRRRRR'],
       BOBBINS,
       ['RRRRRRRRRRR', 'R#########R', 'RFFFFFFFFFR', 'R#########R', 'RRRRRRRRRRR'],
       BOBBINS,
       ['XXXXXXXXXXX', 'RRRRRSRRRRR', 'RRRRRRRRRRR', 'RRRRRRRRRRR', 'RRRRRRRRRRR']
-    ],
+    ]),
     symbols: {
       S: Pat.controller(),
       X: cells(ROBUST, E.minCasings.works, E.abilities.works),
       R: Pat.block(ROBUST),
+      A: Pat.block(INERT),
+      L: Pat.block(GLASS),
+      Q: Pat.frame([FRAME]),
       G: Pat.block(GEARBOX),
       F: Pat.frame([FRAME]),
       '#': Pat.air()

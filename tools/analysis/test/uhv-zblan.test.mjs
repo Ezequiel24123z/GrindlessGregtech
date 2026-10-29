@@ -48,19 +48,20 @@ test('registration: the type, the machine, the preform and ZrF4 dust; F1\'s fibr
   assert.ok(run.registry.items.has('grindless:zblan_fibre'), 'F1 fibre');
 });
 
-test('pattern: 3 x 11 x 3 clean casing tower under a station truss roof, one controller, GTM part limits', () => {
+test('pattern: 5 x 15 x 5 draw tower (spool hall, glass and pipe shaft, heatproof furnace) under a station truss roof, one controller, GTM part limits', () => {
   const s = run.docs.structures.structures['gtceu:zblan_draw_tower'];
   assert.ok(s, 'described');
-  assert.equal(s.slices.length, 3);
-  assert.ok(s.slices.every((sl) => sl.length === 11 && sl.every((r) => r.length === 3)), 'uniform slices');
+  assert.equal(s.slices.length, 5);
+  assert.ok(s.slices.every((sl) => sl.length === 15 && sl.every((r) => r.length === 5)), 'uniform slices');
   assert.equal(s.slices.flat().join('').split('').filter((c) => c === 'S').length, 1, 'one controller');
-  for (const sl of s.slices) for (const r of sl) for (const c of r) assert.ok(s.symbols[c], `symbol ${c}`);
+  for (const sl of s.slices) for (const r of sl) for (const c of r) assert.ok(c === ' ' || s.symbols[c], `symbol ${c}`);
   const lim = Object.fromEntries(s.symbols.X.options.filter((o) => o.kind === 'part').map((o) => [o.ability, o.limits]));
   for (const a of ['energy_input', 'input_bus', 'input_hatch', 'output_bus', 'output_hatch']) assert.deepEqual(lim[a], { min: 1, max: 2 }, a);
   assert.ok(s.symbols.X.options.some((o) => o.kind === 'blocks' && o.blocks.includes('gtceu:clean_machine_casing')), 'floor casing');
   const truss = Object.entries(s.symbols).filter(([, v]) => (v.blocks || []).includes('grindless:station_truss_casing')).map(([k]) => k);
   assert.equal(truss.length, 1, 'station truss symbol');
-  for (const sl of s.slices) assert.equal(sl[10], truss[0].repeat(3), 'truss roof');
+  for (const sl of s.slices) for (const ch of sl[14]) assert.ok(ch === truss[0] || ch === s.slices[2][14][2], 'truss roof (the feed gearbox in the middle)');
+  assert.equal(s.slices[2][14][2], 'G', 'feed gearbox');
 });
 
 test('recipe lookup: unique circuits, every row in the dump with its circuit, figures within UHV', () => {

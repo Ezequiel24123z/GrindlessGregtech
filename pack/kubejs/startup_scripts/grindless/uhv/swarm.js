@@ -111,7 +111,7 @@
 
   // Every machine stands on a truss deck: row 0's rim (X) is truss or a part, its inside truss (T). cell(row, slice, column) fills the
   // rows above; the controller (S) is in the front slice, row 1, middle column.
-  function deck(m, cell) {
+  function deck(m, cell, floor) {
     var slices = []
     var last = m.depth - 1
     var mid = (m.width - 1) / 2
@@ -121,7 +121,7 @@
         var line = ''
         for (var c = 0; c < m.width; c++) {
           var rim = si === 0 || si === last || c === 0 || c === m.width - 1
-          if (r === 0) line += rim ? 'X' : 'T'
+          if (r === 0) line += rim ? 'X' : (floor ? floor(si, c) : 'T')
           else if (si === last && r === 1 && c === mid) line += 'S'
           else line += cell(r, si, c)
         }
@@ -143,6 +143,8 @@
       if (r === foundry.height - 1) return side ? 'F' : (midSlice ? 'G' : ' ')
       if (corner(foundry, si, c) || (midSlice && side)) return 'F'
       if (r === foundry.height - 2 && midSlice && c === (foundry.width - 1) / 2) return 'A'
+      if (side && (r === 1 || r === 2) && si >= 2 && si <= foundry.depth - 3) return 'W'
+      if (side && r === 3 && si >= 1 && si <= foundry.depth - 2) return 'P'
       return ' '
     }),
     symbols: {
@@ -151,7 +153,9 @@
       T: Pat.block(TRUSS),
       F: Pat.frame([FRAME]),
       G: Pat.block(GRATING),
-      A: Pat.block(HEAD)
+      A: Pat.block(HEAD),
+      W: Pat.block('gtceu:laminated_glass'),
+      P: Pat.block(RAIL)
     }
   }
 
@@ -166,6 +170,11 @@
       if (corner(station, si, c)) return 'F'
       if (si === (station.depth - 1) / 2 && c === (station.width - 1) / 2) return 'C'
       return ' '
+    }, function (si, c) {
+      var dz = Math.abs(si - (station.depth - 1) / 2)
+      var dx = Math.abs(c - (station.width - 1) / 2)
+      if (dz === 0 || dx === 0) return 'P'
+      return Math.max(dz, dx) === 2 ? 'K' : 'T'
     }),
     symbols: {
       S: Pat.controller(),
@@ -173,7 +182,9 @@
       T: Pat.block(TRUSS),
       F: Pat.frame([FRAME]),
       C: Pat.block(COMPUTER),
-      R: Pat.block(RECEIVER)
+      R: Pat.block(RECEIVER),
+      P: Pat.block(RAIL),
+      K: Pat.block('gtceu:superconducting_coil')
     }
   }
 
@@ -183,17 +194,23 @@
   bay.spec = {
     slices: deck(bay, function (r, si, c) {
       var rim = si === 0 || si === bay.depth - 1 || c === 0 || c === bay.width - 1
-      if (r === bay.height - 1) return rim ? 'T' : ' '
+      if (r === bay.height - 1) return rim ? (corner(bay, si, c) ? 'T' : 'K') : ' '
       if (corner(bay, si, c)) return 'F'
       if (r === 1 && c === (bay.width - 1) / 2) return 'R'
+      if (r === 2 && rim) return 'W'
       return ' '
+    }, function (si, c) {
+      return si === (bay.depth - 1) / 2 || c === (bay.width - 1) / 2 ? 'P' : 'T'
     }),
     symbols: {
       S: Pat.controller(),
       X: body(bay),
       T: Pat.block(TRUSS),
       F: Pat.frame([FRAME]),
-      R: Pat.block(RAIL)
+      R: Pat.block(RAIL),
+      P: Pat.block(RAIL),
+      K: Pat.block('gtceu:superconducting_coil'),
+      W: Pat.block('gtceu:laminated_glass')
     }
   }
 

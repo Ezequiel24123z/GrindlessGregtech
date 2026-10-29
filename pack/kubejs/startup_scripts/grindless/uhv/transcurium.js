@@ -64,7 +64,8 @@
       lang: 'High Flux Reactor',
       // items in: the target, the drivers and the circuit; out: the target, the spent drivers, the waste; fluid in: the pool charge
       maxIO: { itemsIn: 3, itemsOut: 3, fluidsIn: 1, fluidsOut: 0 },
-      width: 9, depth: 9, height: 11
+      width: 9, depth: 9, height: 11,
+      bands: [null, 'C', 'C', 'F', 'F', 'L', 'F', 'F', 'T', 'F', null]
     },
     facility: {
       name: 'transuranium_facility',
@@ -74,12 +75,26 @@
       lang: 'Transuranium Facility',
       // items in: curium, americium, aluminium and the circuit; fluids out: the solvent, the spent solvent and the nitric acid back
       maxIO: { itemsIn: 4, itemsOut: 3, fluidsIn: 2, fluidsOut: 3 },
-      width: 9, depth: 9, height: 7
+      width: 9, depth: 9, height: 7,
+      bands: [null, 'C', 'L', 'L', 'F', 'T', null]
     }
   }
 
-  // A hollow shell: row 0 (X) takes the parts, the top row and the walls are casing (F), S is the controller (front wall, row 1, middle).
-  function shell(m, inner, wall) {
+  // The wall skin: frame posts (Q) on the corners and the roof edges, ribs of heatproof casing (H) across the roof, and the wall rows of
+  // m.bands (bottom -> top): C concrete, F shield, T pipe, L glass between shield mullions.
+  function skin(m, r, si, c) {
+    var ex = c === 0 || c === m.width - 1
+    var ez = si === 0 || si === m.depth - 1
+    var top = r === m.height - 1
+    if ((ex && ez) || (top && (ex || ez))) return 'Q'
+    if (top) return si % 3 === 1 ? 'H' : 'F'
+    var band = m.bands[r]
+    if (band === 'L') return (ez ? c : si) % 3 === 0 ? 'F' : 'L'
+    return band
+  }
+
+  // A shell: row 0 (X) takes the parts (frame feet on the corners), the walls are skinned, S is the controller (front wall, row 1, middle).
+  function shell(m, inner) {
     var slices = []
     var last = m.depth - 1
     var mid = (m.width - 1) / 2
@@ -90,10 +105,9 @@
         for (var c = 0; c < m.width; c++) {
           var ch
           var isWall = si === 0 || si === last || c === 0 || c === m.width - 1
-          if (r === 0) ch = 'X'
-          else if (r === m.height - 1) ch = 'F'
+          if (r === 0) ch = (si === 0 || si === last) && (c === 0 || c === m.width - 1) ? 'Q' : 'X'
           else if (si === last && r === 1 && c === mid) ch = 'S'
-          else if (isWall) ch = (wall && wall(r, si, c)) || 'F'
+          else if (r === m.height - 1 || isWall) ch = skin(m, r, si, c)
           else ch = inner(r, si, c)
           row += ch
         }
@@ -104,7 +118,8 @@
     return slices
   }
 
-  // the flux trap (T) up the middle, the driver annulus (H) round it, the beryllium reflector (B) round that; the rest is the pool
+  // the flux trap (T) up the middle, the driver annulus (H) round it, the beryllium reflector (B) round that, a ring of pool-inlet
+  // manifold (P) on the floor; the rest is the pool
   function reactorInner(r, si, c) {
     var ring = Math.max(Math.abs(c - 4), Math.abs(si - 4))
     if (ring === 0) return 'T'
@@ -112,10 +127,11 @@
       if (ring === 1) return 'H'
       if (ring === 2) return 'B'
     }
+    if (r === 1 && ring === 3) return 'P'
     return '#'
   }
 
-  // four ion-exchange columns (P), the decay store vault (C) on the floor, the glovebox window (L) in the front wall
+  // four ion-exchange columns (P), the decay store vault (C) on the floor
   function facilityInner(r, si, c) {
     var dx = Math.abs(c - 4)
     var dz = Math.abs(si - 4)
@@ -124,17 +140,14 @@
     return '#'
   }
 
-  function facilityWall(r, si, c) {
-    return si === 8 && (r === 2 || r === 3) && c >= 2 && c <= 6 ? 'L' : null
-  }
-
-  function specOf(m, inner, wall, parts) {
+  function specOf(m, inner, parts) {
     return {
-      slices: shell(m, inner, wall),
+      slices: shell(m, inner),
       symbols: {
         S: Pat.controller(),
         X: Pat.oneOf.apply(null, [Pat.block(SHIELD)].concat(parts)),
         F: Pat.block(SHIELD),
+        Q: Pat.frame(['tungsten_steel']),
         T: Pat.block(TUNGSTEN_PIPE),
         H: Pat.block(HEAT),
         B: Pat.block(BERYLLIUM),
@@ -145,13 +158,13 @@
       }
     }
   }
-  TC.machines.reactor.spec = specOf(TC.machines.reactor, reactorInner, null, [
+  TC.machines.reactor.spec = specOf(TC.machines.reactor, reactorInner, [
     Pat.part('input_bus', { min: 1, max: 2 }),
     Pat.part('input_hatch', { min: 1, max: 1 }),
     Pat.part('output_bus', { min: 1, max: 2 }),
     Pat.part('energy_input', { min: 1, max: 2 })
   ])
-  TC.machines.facility.spec = specOf(TC.machines.facility, facilityInner, facilityWall, [
+  TC.machines.facility.spec = specOf(TC.machines.facility, facilityInner, [
     Pat.part('input_bus', { min: 1, max: 2 }),
     Pat.part('input_hatch', { min: 1, max: 2 }),
     Pat.part('output_bus', { min: 1, max: 2 }),
