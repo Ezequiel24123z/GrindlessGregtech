@@ -1,3 +1,4 @@
+// priority: -1974
 // TEST ONLY, QR-B1: the forming sweep. Proves every multiblock our startup scripts register forms from its own EMI preview.
 // Commands: kubejs custom_command gg_test_form_sweep            what kubejs/config/gg_test_form_sweep.json selects (default: every id)
 //           kubejs custom_command gg_test_form_sweep_all        every id
@@ -68,18 +69,23 @@
     try {
       var err = m.getMultiblockState().error
       if (err === null || err === undefined) return 'no pattern error recorded'
-      var text = 'pattern error ' + String(err.getErrorInfo().getString())
+      var raw = String(err.getErrorInfo().getString())
+      var names = []
+      var re = /key='block\.([a-z0-9_]+)\.([a-z0-9_.]+)'/g
+      var hit
+      while ((hit = re.exec(raw)) !== null) { if (names.length < 8) names.push(hit[1] + ':' + hit[2]) }
+      var text = ''
       try {
         var p = err.getPos()
         if (p) {
           var found = String(Block.getId(level.getBlockState(p).getBlock()))
-          text += ' at ' + p.getX() + ',' + p.getY() + ',' + p.getZ() + ' (' + (p.getX() - ctrlPos.getX()) + ',' + (p.getY() - ctrlPos.getY()) + ',' +
-            (p.getZ() - ctrlPos.getZ()) + ' from the controller) preview block ' + found
+          text += 'refused cell ' + (p.getX() - ctrlPos.getX()) + ',' + (p.getY() - ctrlPos.getY()) + ',' + (p.getZ() - ctrlPos.getZ()) +
+            ' from the controller, holds ' + found + '; '
         }
       } catch (e1) {
-        text += ' (no position: ' + e1 + ')'
+        text += '(no position: ' + e1 + ') '
       }
-      return text
+      return text + 'GTM expected one of ' + (names.length ? names.join(' ') : raw.substring(0, 200))
     } catch (e) {
       return 'could not read the pattern error: ' + e
     }
@@ -141,15 +147,32 @@
     shape.cells.forEach(function (c) {
       var p = pos(ORIGIN.x + c.x, ORIGIN.y + c.y, ORIGIN.z + c.z)
       if (c === shape.ctrl) { ctrlPos = p; return }
-      u.level.setBlock(p, c.state, 3)
+      u.level.setBlock(p, c.state, 18)
     })
     u.level.setBlock(ctrlPos, shape.ctrl.state, 3)
     return ctrlPos
   }
 
+  function plain(v) {
+    if (v === null || v === undefined) return null
+    var t = typeof v
+    if (t === 'string' || t === 'number' || t === 'boolean') return v
+    if (typeof v.entrySet === 'function') {
+      var o = {}
+      var it = v.entrySet().iterator()
+      while (it.hasNext()) { var en = it.next(); o[String(en.getKey())] = plain(en.getValue()) }
+      return o
+    }
+    if (typeof v.iterator === 'function') {
+      var a = []
+      var li = v.iterator()
+      while (li.hasNext()) a.push(plain(li.next()))
+      return a
+    }
+    return String(v)
+  }
   function readJson(path) {
-    var v = JsonIO.read(path)
-    return v === null || v === undefined ? null : JSON.parse(String(v))
+    return plain(JsonIO.read(path))
   }
   function strings(list) {
     var out = []
@@ -188,7 +211,7 @@
   function levelOf(dim) { return S.server.getLevel(dim) }
 
   function begin(server, request) {
-    S = { server: server, tick: 0, failed: 0, done: 0, finished: false, queue: [], cur: null, phase: 'warmup', maxW: 200, maxH: 200, maxD: 200 }
+    S = { server: server, tick: 0, failed: 0, done: 0, finished: false, queue: [], cur: null, phase: 'warmup', dims: ['minecraft:overworld'], maxW: 200, maxH: 200, maxD: 200 }
     var sel = select(request)
     if (sel.error !== null) {
       check('selection', false, sel.error)
@@ -240,16 +263,17 @@
         cur.ctrl = place(cur, shape)
         if (cur.ctrl === null) { S.cur = null; return }
         S.phase = 'check'
+        S.tick--
+        step()
       } catch (e) {
         check(u.id, false, 'exception while placing: ' + errText(e))
         S.cur = null
       }
       return
     }
-    // two ticks after the placement: formed by itself, or by our explicit check
+    // checked in the placing tick, before falling blocks (regolith, sand) settle or doors pop: formed by itself, or by our explicit check
     var c = S.cur
     var waited = S.tick - c.at
-    if (waited < 2) return
     var m = machineAt(c.level, c.ctrl)
     var size = c.shape.w + 'x' + c.shape.h + 'x' + c.shape.d
     if (!m) {
@@ -287,7 +311,7 @@
     try {
       var req = global[REQUEST]
       if (req && Date.now() - LOADED >= 10000) {
-        global[REQUEST] = null
+        global[REQUEST] = false
         begin(event.server, req)
       }
       if (S === null || S.finished) return
