@@ -1,3 +1,4 @@
+// priority: -9297
 // -----------------------------------------------------------------------------------------------
 // UIV structure shapes (QR-S6): the silhouettes of the UIV multiblocks that were boxes (docs/quality/structures.md). A shape is a function
 // fn(x, y, z) -> one char: x runs left to right, y bottom to top, z back (0) to front (depth - 1); the controller is forced to

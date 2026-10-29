@@ -1,4 +1,4 @@
-// priority: -9205
+// priority: -9212
 // -----------------------------------------------------------------------------------------------
 // UIV's Matrioshka computer and droplet radiator works (docs/eras/uiv.md, machines 11 and 12, lines 19, 20, 21, 37, 41, 43 and 46; package UIV-A10):
 // the machines, their recipe types, the five structure blocks and the package's own items. The recipes come from

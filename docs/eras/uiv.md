@@ -140,6 +140,8 @@ UEV's last packages land before UIV opens; this section is re-checked before F1.
 
 ## Our multiblocks
 
+The **Structure** sizes below are design sketches. The built shapes come from `uiv/shapes.js` (QR-S6): every machine grew, with a median of 517 blocks. The list of old and new sizes is in `docs/quality/structures.md` (QR-S6 release notes). Examples: the crust lift is a 9x13x9 shaft with a cage, the polarised proton source is a linac with a source bottle, and the Matrioshka computer is nested lattice shells.
+
 | Place | Machines | Count |
 |---|---|---|
 | Earth | 1 ramp-compression pulser, 2 levitation melter, 3 TFLN fab, 4 femtosecond writer, 5 BEUV scanner, 6 spectral hole burner, 7 STM lithography cell, 8 millikelvin cryostat works, 9 polarised proton source, 10 Mk5 fusion ring | 10 |

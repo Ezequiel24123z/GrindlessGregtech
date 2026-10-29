@@ -1,4 +1,4 @@
-// priority: -9300
+// priority: -9382
 // -----------------------------------------------------------------------------------------------
 // UV's cold works (docs/eras/uv.md, machines 5 and 6; package UV-A4): two machines, their recipe types, the five items and the two
 // fluids only they make. Every other UV id is F1's (global.grindless.uvFoundation).
