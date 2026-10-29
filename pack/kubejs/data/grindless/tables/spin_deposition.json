@@ -1,0 +1,212 @@
+{
+  "_how_it_is_used": "server_scripts/grindless/uxv/spin_deposition.js makes one recipe per entry, id grindless:<type>/<name>, with its programmed circuit (0 = none, GTM's own types only); 'kept' items and 'charge' fluids are not consumed; a 'chance' below 10000 makes a chanced output. mtj_sputtering and pulsed_laser_deposition are package UXV-A4's machine types (data key = dataKey, the EMI line); mixer, assembler and chemical_reactor are GTM's (line 41's steps). Package UXV-A4, docs/eras/uxv.md machines 1-2 and process line 41.",
+  "types": {
+    "mtj_sputtering": {
+      "dataKey": "grindless_mtj_sputtering",
+      "recipes": [
+        {
+          "_why": "line 10: CoFeB / MgO / Ta seed and a Ru spacer are sputtered on a hydrogen-terminated Si-28 wafer; the CoFeB target comes back as a spent target for the powder-bed re-press",
+          "name": "mtj_stack", "circuit": 1, "eut": 33554432, "duration": 600,
+          "itemsIn": [
+            { "id": "grindless:cofeb_target", "count": 1 },
+            { "id": "grindless:mgo_target", "count": 1 },
+            { "id": "grindless:ta_seed_target", "count": 1 },
+            { "id": "grindless:five_n_ruthenium", "count": 2 },
+            { "id": "grindless:h_si28_wafer", "count": 1 }
+          ],
+          "kept": [], "charge": [],
+          "fluidsIn": [{ "id": "gtceu:argon", "amount": 1000 }],
+          "itemsOut": [
+            { "id": "grindless:mtj_stack_wafer", "count": 1 },
+            { "id": "grindless:spent_cofeb_target", "count": 1 }
+          ],
+          "fluidsOut": [{ "id": "gtceu:argon", "amount": 800 }]
+        },
+        {
+          "_why": "line 10: a Heusler layer and an MgO barrier make the MRAM stack; the sputter shield returns Heusler overspray as powder",
+          "name": "mram_stack", "circuit": 2, "eut": 67108864, "duration": 800,
+          "itemsIn": [
+            { "id": "grindless:heusler_target", "count": 1 },
+            { "id": "grindless:mgo_target", "count": 1 },
+            { "id": "grindless:h_si28_wafer", "count": 1 }
+          ],
+          "kept": [], "charge": [],
+          "fluidsIn": [{ "id": "gtceu:argon", "amount": 1000 }],
+          "itemsOut": [
+            { "id": "grindless:mram_stack_wafer", "count": 1 },
+            { "id": "grindless:heusler_am_powder", "count": 1 }
+          ],
+          "fluidsOut": [{ "id": "gtceu:argon", "amount": 800 }]
+        },
+        {
+          "_why": "line 10: the synthetic antiferromagnet set (CoFeB / Ru / CoFeB) is sputtered into a racetrack stack; the Ru overspray returns as powder",
+          "name": "saf_track", "circuit": 3, "eut": 33554432, "duration": 600,
+          "itemsIn": [
+            { "id": "grindless:saf_target_set", "count": 1 },
+            { "id": "grindless:h_si28_wafer", "count": 1 }
+          ],
+          "kept": [], "charge": [],
+          "fluidsIn": [{ "id": "gtceu:argon", "amount": 1000 }],
+          "itemsOut": [
+            { "id": "grindless:saf_track_wafer", "count": 1 },
+            { "id": "grindless:ruthenium_am_powder", "count": 1 }
+          ],
+          "fluidsOut": [{ "id": "gtceu:argon", "amount": 800 }]
+        },
+        {
+          "_why": "line 10: a Heusler free layer, an MgO barrier and a Ta seed make the spin-torque oscillator stack (A3 reads stno_stack_wafer by this id)",
+          "name": "stno_stack", "circuit": 4, "eut": 33554432, "duration": 700,
+          "itemsIn": [
+            { "id": "grindless:heusler_target", "count": 1 },
+            { "id": "grindless:mgo_target", "count": 1 },
+            { "id": "grindless:ta_seed_target", "count": 1 },
+            { "id": "grindless:h_si28_wafer", "count": 1 }
+          ],
+          "kept": [], "charge": [],
+          "fluidsIn": [{ "id": "gtceu:argon", "amount": 1000 }],
+          "itemsOut": [
+            { "id": "grindless:stno_stack_wafer", "count": 1 },
+            { "id": "grindless:heusler_am_powder", "count": 1 }
+          ],
+          "fluidsOut": [{ "id": "gtceu:argon", "amount": 800 }]
+        }
+      ]
+    },
+    "pulsed_laser_deposition": {
+      "dataKey": "grindless_pulsed_laser_deposition",
+      "recipes": [
+        {
+          "_why": "line 11: the KrF laser ablates a SrRuO3 target onto a DyScO3 substrate in oxygen; the volatile RuO4 is the byproduct",
+          "name": "srruo3_electrode", "circuit": 1, "eut": 33554432, "duration": 400,
+          "itemsIn": [
+            { "id": "grindless:srruo3_target", "count": 1 },
+            { "id": "grindless:dysco3_substrate", "count": 1 }
+          ],
+          "kept": [{ "id": "grindless:krf_excimer_laser", "count": 1 }], "charge": [],
+          "fluidsIn": [{ "id": "gtceu:oxygen", "amount": 1000 }],
+          "itemsOut": [
+            { "id": "grindless:srruo3_electrode_wafer", "count": 1 },
+            { "id": "gtceu:ruthenium_tetroxide_dust", "count": 1 }
+          ],
+          "fluidsOut": []
+        },
+        {
+          "_why": "line 11: a La-doped BiFeO3 film grows on the electrode; the bismuth-rich plume condenses as BFO fume for the extraction cascade",
+          "name": "bfo_film", "circuit": 2, "eut": 67108864, "duration": 600,
+          "itemsIn": [
+            { "id": "grindless:srruo3_electrode_wafer", "count": 1 },
+            { "id": "grindless:la_bfo_target", "count": 1 }
+          ],
+          "kept": [{ "id": "grindless:krf_excimer_laser", "count": 1 }], "charge": [],
+          "fluidsIn": [{ "id": "gtceu:oxygen", "amount": 1000 }],
+          "itemsOut": [
+            { "id": "grindless:bfo_film_wafer", "count": 1 },
+            { "id": "grindless:bfo_fume", "count": 1 }
+          ],
+          "fluidsOut": []
+        },
+        {
+          "_why": "line 11: a CoFe layer on the multiferroic film makes the magnetoelectric switch; the target offcut is cobalt dust",
+          "name": "me_switch", "circuit": 3, "eut": 67108864, "duration": 600,
+          "itemsIn": [
+            { "id": "grindless:bfo_film_wafer", "count": 1 },
+            { "id": "grindless:cofe_target", "count": 1 }
+          ],
+          "kept": [{ "id": "grindless:krf_excimer_laser", "count": 1 }], "charge": [],
+          "fluidsIn": [{ "id": "gtceu:oxygen", "amount": 500 }],
+          "itemsOut": [
+            { "id": "grindless:me_switch_wafer", "count": 1 },
+            { "id": "gtceu:small_cobalt_dust", "count": 2 }
+          ],
+          "fluidsOut": []
+        }
+      ]
+    },
+    "mixer": {
+      "recipes": [
+        {
+          "_why": "line 41 step 1: krypton and fluorine are premixed in a glass tube for the excimer discharge",
+          "name": "kr_f2_premix", "circuit": 0, "eut": 33554432, "duration": 200,
+          "itemsIn": [{ "id": "gtceu:glass_tube", "count": 1 }],
+          "kept": [], "charge": [],
+          "fluidsIn": [{ "id": "gtceu:krypton", "amount": 1000 }, { "id": "gtceu:fluorine", "amount": 1000 }],
+          "itemsOut": [{ "id": "grindless:kr_f2_premix", "count": 1 }],
+          "fluidsOut": []
+        }
+      ]
+    },
+    "assembler": {
+      "recipes": [
+        {
+          "_why": "line 41 step 2: two VUV CaF2 windows and cupronickel electrodes in a tungsten steel body make the discharge tube blank",
+          "name": "krf_discharge_tube_blank", "circuit": 0, "eut": 33554432, "duration": 300,
+          "itemsIn": [
+            { "id": "grindless:vuv_caf2_optic", "count": 2 },
+            { "id": "gtceu:cupronickel_foil", "count": 4 },
+            { "id": "gtceu:tungsten_steel_plate", "count": 1 },
+            { "id": "gtceu:gold_foil", "count": 4 },
+            { "id": "gtceu:nichrome_plate", "count": 1 },
+            { "id": "gtceu:stainless_steel_rod", "count": 2 }
+          ],
+          "kept": [], "charge": [],
+          "fluidsIn": [{ "id": "gtceu:soldering_alloy", "amount": 144 }, { "id": "gtceu:lubricant", "amount": 250 }],
+          "itemsOut": [{ "id": "grindless:krf_discharge_tube_blank", "count": 1 }],
+          "fluidsOut": []
+        },
+        {
+          "_why": "line 41 step 3: capacitor banks, a UHV circuit and a field generator make the pulsed power head",
+          "name": "pulsed_power_head", "circuit": 0, "eut": 33554432, "duration": 300,
+          "itemsIn": [
+            { "id": "gtceu:advanced_smd_capacitor", "count": 16 },
+            { "id": "#gtceu:circuits/uhv", "count": 2 },
+            { "id": "gtceu:tungsten_steel_plate", "count": 2 },
+            { "id": "grindless:uev_emitter", "count": 1 },
+            { "id": "gtceu:platinum_foil", "count": 8 },
+            { "id": "gtceu:nichrome_plate", "count": 2 },
+            { "id": "gtceu:tungsten_steel_ring", "count": 4 }
+          ],
+          "kept": [], "charge": [],
+          "fluidsIn": [{ "id": "gtceu:soldering_alloy", "amount": 288 }, { "id": "gtceu:lubricant", "amount": 500 }],
+          "itemsOut": [{ "id": "grindless:pulsed_power_head", "count": 1 }],
+          "fluidsOut": []
+        },
+        {
+          "_why": "machine 2 and line 11: a cobalt, iron and copper backing plate bonded with indium is the CoFe target of the me_switch step",
+          "name": "cofe_target", "circuit": 0, "eut": 8388608, "duration": 200,
+          "itemsIn": [
+            { "id": "gtceu:cobalt_plate", "count": 2 },
+            { "id": "gtceu:iron_plate", "count": 2 },
+            { "id": "gtceu:copper_plate", "count": 1 },
+            { "id": "gtceu:indium_dust", "count": 1 },
+            { "id": "gtceu:nickel_plate", "count": 1 },
+            { "id": "gtceu:titanium_plate", "count": 1 },
+            { "id": "gtceu:copper_foil", "count": 4 },
+            { "id": "gtceu:ruthenium_plate", "count": 1 },
+            { "id": "grindless:mu_metal_foil", "count": 2 },
+            { "id": "grindless:uiv_sensor", "count": 1 }
+          ],
+          "kept": [], "charge": [],
+          "fluidsIn": [{ "id": "gtceu:soldering_alloy", "amount": 144 }, { "id": "gtceu:lubricant", "amount": 250 }],
+          "itemsOut": [{ "id": "grindless:cofe_target", "count": 1 }],
+          "fluidsOut": []
+        }
+      ]
+    },
+    "chemical_reactor": {
+      "recipes": [
+        {
+          "_why": "line 41 step 4: the blank is filled with the premix and conditioned by a test discharge; the spent fluorine goes back to the scrubbed gas",
+          "name": "krf_discharge_tube", "circuit": 0, "eut": 33554432, "duration": 400,
+          "itemsIn": [
+            { "id": "grindless:krf_discharge_tube_blank", "count": 1 },
+            { "id": "grindless:kr_f2_premix", "count": 1 }
+          ],
+          "kept": [], "charge": [],
+          "fluidsIn": [],
+          "itemsOut": [{ "id": "grindless:krf_discharge_tube", "count": 1 }],
+          "fluidsOut": [{ "id": "gtceu:fluorine", "amount": 500 }]
+        }
+      ]
+    }
+  }
+}
