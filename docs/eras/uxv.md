@@ -169,7 +169,71 @@ Keys: what the era needs the machine for. Policy: H home (runs on two UIV hatche
 
 ### Voltages and controllers
 
-UXV recipes run up to 1 A x V[UXV] = 134,217,728 EU/t on two UIV energy hatches, because a multiblock with two or more hatches of its highest tier runs one tier up (WorkableElectricMultiblockMachine.java:250-273, as uiv.md cites). UXV hatches are needed only for the Mk6 ring, the gate's 16 A hold and anything above 1 A UXV. Controllers: machines 1-6 (the mainframe and sensor chain) use `gtceu:uiv_machine_hull` + 2 `gtnn:optical_mainframe` + UIV components; machines 7, 8 and 10-21 use `gtceu:uiv_machine_hull` + 2 `gtnn:spintronic_mainframe` + `grindless:uxv_sensor` + UIV components; the Mk6 controller and the M2 hall use `gtceu:uxv_machine_hull` + UXV components. No Vela or Cas A controller uses a Vela or Cas A product (bootstrap, Risks). All EU/t and ticks below are *(tune)*; every structure uses only casings present in the S0-1 dump.
+UXV recipes run up to 1 A x V[UXV] = 134,217,728 EU/t on two UIV energy hatches, because a multiblock with two or more hatches of its highest tier runs one tier up (WorkableElectricMultiblockMachine.java:250-273, as uiv.md cites). UXV hatches are needed only for the Mk6 ring, the gate's 16 A hold and anything above 1 A UXV. All EU/t and ticks below are *(tune)*.
+
+**Controllers (QR ladder, `docs/quality/recipes.md`; DECISIONS.md:551-567).** Every controller is a GTM `assembly_line` recipe with station research (`data_module`). The research item is a product of the machine's own line or the machine before it, never a GTM component GTM already researches. Each recipe keeps the draft base:
+
+- machines 1-6: `gtceu:uiv_machine_hull` + 2 `gtnn:optical_mainframe` + UIV components;
+- machines 7, 8 and 10-21: `gtceu:uiv_machine_hull` + 2 `gtnn:spintronic_mainframe` + `grindless:uxv_sensor` + UIV components;
+- the Mk6 and the M2 hall: `gtceu:uxv_machine_hull` + UXV components.
+
+To the base it adds one era fluid (1,000 mB *(tune)*) and three domain inputs: ids only this pack makes, tied to the process, never the machine's own product. Every controller has 8 or more distinct ingredients (the gate asks for 5). Earth controllers 1-8 take `grindless:he_6n` (F1 fluid, A2's cryogenic row): the Cygnus fluids do not exist before B2. Controllers 10-21 and M2 take a Cygnus fluid once B2 or B3 has made it (`filtered_disk_plasma` also matches the gate's `plasma$`). No controller of 1-8 or 10-21 uses a Vela or Cas A product (bootstrap, Risks).
+
+| # | Research item | Era fluid | Domain inputs |
+|---|---|---|---|
+| 1 | `cofeb_target` | `he_6n` | `ta_seed_target`, `mgo_target`, `mu_metal_foil` |
+| 2 | `srruo3_target` | `he_6n` | `krf_excimer_laser`, `vuv_caf2_optic`, `pt_sheet` |
+| 3 | `wte2_crystal` | `he_6n` | `terfenol_d_rod`, `sin_membrane`, `vuv_caf2_optic` |
+| 4 | `saf_track_wafer` | `he_6n` | `mtj_die`, `pt_sheet`, `ga2o3_power_die` |
+| 5 | `ggg_wafer` | `he_6n` | `pt_lpe_crucible`, `w184_cvi_preform`, `pt_sheet` |
+| 6 | `nanoaperture_array` | `he_6n` | `mu_metal_foil`, `sin_membrane`, `mtj_die` |
+| 7 | `cm248_target` | `he_6n` (catcher buffer) | `gas_stopping_cell`, `u238_ion_source`, `mu_metal_foil` |
+| 8 | the UIV gamma cavity (UIV line 34 id, as built) | `he_6n` | `mtj_die`, `mu_metal_foil`, `w184_cvi_preform` |
+| 9 Mk6 | the Mk5 controller (UIV-A9 id, as built) | `stellar_hydrogen_cut` | `uxv_fusion_casing`, `uxv_field_generator`, `uxv_electric_pump` |
+| 10 | `mh_winding` | `he_6n` | `ga2o3_power_die`, `w184_cvi_preform`, `mu_metal_foil` |
+| 11 | `gtceu:stellar_elevator` | `he_6n` | `ga2o3_power_die`, `mh_winding`, `w184_cvi_preform` |
+| 12 | `gtceu:plasma_mass_filter` | `stellar_helium_cut` | `pt_sheet`, `w184_cvi_preform`, `grindless:iridium_crucible` |
+| 13 | `mh_winding` | `stellar_hydrogen_cut` | `ga2o3_power_die`, `w184_cvi_preform`, `shielded_interposer` |
+| 14 | `gtceu:accretion_disk_skimmer` | `stellar_hydrogen_cut` | `ga2o3_power_die`, `mh_winding`, `vuv_caf2_optic` |
+| 15 | `gtceu:frc_former` | `filtered_disk_plasma` | `frc_cartridge`, `ga2o3_power_die`, `mh_winding` |
+| 16 | `vela_glitch_timing` | `filtered_disk_plasma` | `cage_part`, `frc_cartridge`, `neutronium_pellet` |
+| 17 | `cage_part` | `filtered_disk_plasma` | `frc_cartridge`, `neutronium_pellet`, `ga2o3_power_die` |
+| 18 | `gtceu:pasta_phase_sorter` | `stellar_helium_cut` | `cage_part`, `frc_cartridge`, `uxv_strain_wave_gear` |
+| 19 | `wf_rhea_billet` | `filtered_disk_plasma` | `cage_part`, `frc_cartridge`, `w184_cvi_preform` |
+| 20 | `gtceu:pasta_laminator` | `filtered_disk_plasma` | `frc_cartridge`, `ga2o3_power_die`, `mh_winding` |
+| 21 | `cnt_whipple_shield` | `stellar_hydrogen_cut` | `cnt_bumper_weave`, `mh_winding`, `ga2o3_power_die` |
+| M2 | `gtceu:stellar_condensation_tower` | `stellar_helium_cut` | `lasagna_plate`, `uxv_electric_pump`, `pt_sheet` |
+
+The research items are all ours and none is a Vela or Cas A product: `vela_glitch_timing` is the ZPM DSN's home record, and `cage_part` is made at RX J1856. The M2 hall needs `lasagna_plate` and the UXV hull, so it stays at `uxv-vela`, as drafted.
+
+**Forms of everything else (QR; no crafting table anywhere in UXV).**
+
+- **Assembly line with station research:** the UXV hull, the four UXV energy hatches, M1's parallel hatch and the eight UXV components (sensor, motor, pump, piston, conveyor, arm, field generator, emitter). Each takes an era fluid and at least two domain inputs.
+- **Assembler, bulk casing:** `uxv_fusion_casing` is the only new casing block. Its recipe takes `wf_rhea_billet`, `w184_cvi_preform`, `mh_winding`, `uxv_field_generator` and `gtceu:tritanium_frame`, plus 1,000 mB `he_6n` backfill. That is 5 items and 1 domain fluid, scoring about 10 against the proposed 9.5 floor.
+- **Machine form (one of our multiblocks or an older type) or assembly line:** every other new part, as drafted:
+  - `pt_lpe_crucible`, `gas_stopping_cell`, `krf_excimer_laser`;
+  - `cnt_whipple_shield`, `pasta_strand_repeater`, `uxv_smes_cell`;
+  - `uxv_voltage_coil`, `tmr_encoder`, `uxv_strain_wave_gear`;
+  - `frc_cartridge`, `gamma_laser_module`.
+
+  An item made by an assembler or assembly line must clear the UXV C-COMPLEX floor. Plan for depth 6 or more with 5 items and 1 fluid.
+- **Crafting table:** none. The only exceptions are a save-compat 1:1 conversion or unpacking.
+
+**Structures (QR, `docs/quality/structures.md`).** Every structure below passes `structure-quality.mjs --static --check`:
+
+- **Rubric:** not a solid cuboid; at least 3 blocks; no block above 70% of the cells (designed at 60% or less, so hatches swapped into casing positions cannot push it over); at least 2 functional kinds (glass, pipe, frame, coil, machine).
+- **Shape:** UV and later are never a 5x5x7 box. The silhouette reads as the process, and every hatch sits on the outer skin within the player's reach.
+- **Controller model:** each controller sets `.appearanceBlock(<main casing>)` and `.workableCasingModel(<casing texture>, 'grindless:block/multiblock/<machine>')`, with an active emissive overlay (the package's texture script).
+- **Rhino:** pattern loops use `var`, never `const`, and `Predicates.custom` previews do not use `Java.to`.
+- **Shell helper:** each package builds its shell with a local helper in its own startup file. A shared helper would live in lib, which the integrator owns (open question 14).
+- **Blocks:** only these, all present by UIV:
+  - GTM: `plascrete`, `cleanroom_glass`, `laminated_glass`, `fusion_glass`, `superconducting_coil`, `tritanium_coil_block`, `high_power_casing`, `filter_casing`, `computer_casing`, `computer_heat_vent`, `robust_machine_casing`, `clean_machine_casing`, `uiv_machine_casing`, `uxv_machine_casing` (UIV-B5);
+  - GTM pipe casings and gearboxes: titanium and tungstensteel;
+  - frames from `Pat.frame`'s list only: stainless steel, tungsten steel, naquadah alloy and HSS-S;
+  - ours: `grindless:cryostat_casing`, `neutron_star_site_casing`, `whipple_shield_casing`, `uxv_fusion_casing`.
+- **Dropped dump-check casings:** the draft's three (`laser_safe`, lead-lined, `high_temperature_smelting`). None is certain to exist; each machine's spec names its replacement.
+
+Sizes grew where the draft had a box; the machines, types and recipes are unchanged.
 
 ### 1. MTJ sputter cluster: `gtceu:mtj_sputter_cluster`, type `gtceu:mtj_sputtering` (Earth)
 
