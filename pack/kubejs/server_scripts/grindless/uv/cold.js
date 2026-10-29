@@ -190,7 +190,7 @@
     }
     var lines = [
       { name: 'superfluid_helium_plant', machine: 'gtceu:superfluid_helium_plant', pump: 4, arm: 0, research: 'grindless:mu_metal_shield',
-        domain: ['2x grindless:mu_metal_shield', '4x grindless:rrr_niobium_sheet', '2x grindless:solid_neon_cone'] },
+        domain: ['2x grindless:mu_metal_shield', '4x grindless:rrr_niobium_sheet', '2x grindless:heat_exchanger_bundle'] },
       { name: 'srf_cavity_works', machine: 'gtceu:srf_cavity_works', pump: 1, arm: 2, research: 'grindless:silicon_nitride_film',
         domain: ['4x grindless:mu_metal_shield', '2x grindless:silicon_nitride_film', '2x grindless:tungsten_target'] }
     ]

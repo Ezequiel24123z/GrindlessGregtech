@@ -127,9 +127,9 @@
       { id: 'gtceu:precursor_probe_bay', recipe: 'precursor_probe_bay', research: 'grindless:printed_probe_frame',
         parts: [HULL, '4x gtceu:uv_robot_arm'],
         domain: ['2x grindless:precursor_probe', '4x grindless:printed_probe_frame', '2x grindless:hpge_crystal'] },
-      { id: 'gtceu:event_horizon_interferometer', recipe: 'event_horizon_interferometer', research: 'grindless:atom_interferometer',
+      { id: 'gtceu:event_horizon_interferometer', recipe: 'event_horizon_interferometer', research: 'grindless:sapphire_boule',
         parts: [HULL, '4x gtceu:uv_sensor'],
-        domain: ['2x grindless:atom_interferometer', '4x grindless:hpge_crystal', '2x grindless:multimessenger_catalogue'] }
+        domain: ['2x grindless:sapphire_boule', '4x grindless:hpge_crystal', '2x grindless:multimessenger_catalogue'] }
     ]
     list.forEach(function (m) {
       var ids = [m.id, m.research].concat(m.parts, m.domain).map(function (s) { return s.replace(/^\d+x /, '') })

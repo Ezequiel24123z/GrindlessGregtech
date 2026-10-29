@@ -168,9 +168,10 @@
       { machine: TH.machines.cell.machine, name: 'pyroprocessing_cell', research: 'grindless:thorium_oxide_fuel_assembly',
         parts: [HULL, '2x ' + ARM, '2x ' + SENSOR],
         domain: ['4x grindless:thorium_oxide_fuel_assembly', '4x grindless:thorium_nitride_fuel_assembly', '2x grindless:molten_salt_charge'] },
-      { machine: TH.machines.reactor.machine, name: 'accelerator_driven_reactor', research: 'grindless:spent_thorium_oxide_fuel',
+      // Inputs come before the reactor: its own products (spent fuel, U-233) would make a cycle
+      { machine: TH.machines.reactor.machine, name: 'accelerator_driven_reactor', research: 'grindless:activated_tungsten_target',
         parts: [HULL, '4x ' + FIELD],
-        domain: ['4x grindless:spent_thorium_oxide_fuel', '4x grindless:thorium_caf2_crystal', '2x grindless:u233_fuel_rod'] }
+        domain: ['4x grindless:thorium_oxide_fuel_assembly', '2x grindless:srf_cryomodule', '2x grindless:tungsten_target'] }
     ]
     TH.controllerRecipes = []
     defs.forEach(function (d) {
