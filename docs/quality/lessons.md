@@ -43,7 +43,7 @@ Deferred, with the reason (each stays baselined only until its fix lands):
 - 50 UIV parts below the UIV floor: they need a real intermediate of their own line, not filler; done in the UIV build (v0.14.0), `recipes.md` "UIV own-line intermediate pending".
 - UEV target wheel and its blank: titanium plus berkelium oxide has no honest deeper chain yet.
 - UIV one-in-one-out steps (poled LNOI wafer, annealed neon cone, C-12 ion-milled plate, MH braid) and the report-only fusion ash fluids (He-3/He-3, p-Li-6, p-N-15; shared ZPM fusion table).
-- UIV doubts for the UIV build: the decay heat vault has only generator recipes; the TFLN fab tooltip says cleanroom but its recipes do not require one; BMG flexspline machining is a second source of ZrTiCuNiBe glass dust.
+- UIV doubts for the UIV build: BMG flexspline machining is a second source of ZrTiCuNiBe glass dust. Settled after release: the decay heat vault is a generator by design; the TFLN fab tooltip no longer says cleanroom.
 - EMI: 9 addon multiblocks show no preview (GTM assembly line, cleanroom, data bank and others); the next client audit tells whether the mod turned the preview off on purpose.
 
 ## Checklist for every new era (UIV, UXV and later)
