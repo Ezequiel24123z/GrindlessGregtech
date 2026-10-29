@@ -13,5 +13,5 @@ ClientEvents.lang('es_es', event => {
     var add = function (key, value) { event.add('grindless', key, value) }
 
     add('emi.grindless.info.lunar_drill.0', "La perforadora lunar es la perforadora de vetas de la Luna y solo funciona allí. La veta lunar de ilmenita da ilmenita (el único titanio), olivino, cromita y hierro, 3,75 menas en bruto por ciclo. El regolito da helio-3, solo de día lunar.")
-    add('emi.grindless.info.lunar_drill.1', "Necesita una broca HV (cerca del 0,5 % de desgaste por ciclo) y un hatch de salida para el helio-3. Hace tantos ciclos a la vez como permitan sus hatches de energía (voltaje / 8 EU/t, hasta 32). En el vacío nada arde: lleva baterías cargadas desde la Tierra.")
+    add('emi.grindless.info.lunar_drill.1', "Necesita una broca HV (cerca del 0,5 % de desgaste por ciclo) y una escotilla de salida para el helio-3. Hace tantos ciclos a la vez como permitan sus escotillas de energía (voltaje / 8 EU/t, hasta 32). En el vacío nada arde: lleva baterías cargadas desde la Tierra.")
 })

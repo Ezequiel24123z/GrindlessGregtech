@@ -19,11 +19,11 @@ ClientEvents.lang('es_es', event => {
     var add = function (key, value) { event.add('grindless', key, value) }
 
     add('emi.grindless.info.steam_observatory.0', "El observatorio de relojería es un telescopio de bronce sobre una montura a la que da cuerda el vapor. Dibuja la Carta Lunar (borrador) y es la única fuente. Hace un borrador cada vez.")
-    add('emi.grindless.info.steam_observatory.1', "Solo funciona de noche con el cielo despejado y el controlador a Y 100 o más. Al amanecer o con lluvia espera y conserva su progreso. Necesita 1 hatch de vapor, 1 bus de entrada de vapor y 1 bus de salida de vapor.")
+    add('emi.grindless.info.steam_observatory.1', "Solo funciona de noche con el cielo despejado y el controlador a Y 100 o más. Al amanecer o con lluvia espera y conserva su progreso. Necesita 1 escotilla de vapor, 1 bus de entrada de vapor y 1 bus de salida de vapor.")
 
     add('emi.grindless.info.optical_observatory.0', "El observatorio óptico es una cúpula de acero con un refractor de motor. Tu borrador guía el telescopio y no se gasta. Hace el Mapa Lunar Fotográfico y las Efemérides Lunares, y es su única fuente.")
-    add('emi.grindless.info.optical_observatory.1', "Solo funciona de noche con el cielo despejado, a cualquier altura. Mantén abiertas las dos celdas de la rendija. Necesita 1 o 2 hatches de energía, 1 bus de entrada y 1 bus de salida.")
+    add('emi.grindless.info.optical_observatory.1', "Solo funciona de noche con el cielo despejado, a cualquier altura. Mantén abiertas las dos celdas de la rendija. Necesita 1 o 2 escotillas de energía, 1 bus de entrada y 1 bus de salida.")
 
     add('emi.grindless.info.radio_telescope.0', "El radiotelescopio hace rebotar radar en la Luna y escucha el eco. Hace la Carta de Sitios de Alunizaje y es su única fuente. El mapa y las efemérides orientan las antenas y no se gastan.")
-    add('emi.grindless.info.radio_telescope.1', "Funciona de noche con nubes y lluvia, pero no con tormenta eléctrica. Necesita 1 o 2 hatches de energía MV, 1 bus de entrada y 1 bus de salida.")
+    add('emi.grindless.info.radio_telescope.1', "Funciona de noche con nubes y lluvia, pero no con tormenta eléctrica. Necesita 1 o 2 escotillas de energía MV, 1 bus de entrada y 1 bus de salida.")
 })

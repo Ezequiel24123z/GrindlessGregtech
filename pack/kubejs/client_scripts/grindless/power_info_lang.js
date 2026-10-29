@@ -13,5 +13,5 @@ ClientEvents.lang('es_es', event => {
     var add = function (key, value) { event.add('grindless', key, value) }
 
     add('emi.grindless.info.generator_array.0', "La matriz de generadores ejecuta hasta 16 generadores en un salón: turbina de vapor, generador de combustión o turbina de gas, a elegir en la pestaña de modo del controlador. Usa las recetas de combustible de los bloques simples: el mismo EU por unidad de combustible, sin overclock ni bonificación.")
-    add('emi.grindless.info.generator_array.1', "El combustible entra por los hatches de entrada y el EU sale por hatches dinamo, que fijan cuántos generadores corren. El modo vapor devuelve agua destilada: dale un hatch de salida de fluido o pon el controlador en eliminar fluidos.")
+    add('emi.grindless.info.generator_array.1', "El combustible entra por las escotillas de entrada y el EU sale por escotillas dinamo, que fijan cuántos generadores corren. El modo vapor devuelve agua destilada: dale una escotilla de salida de fluido o pon el controlador en eliminar fluidos.")
 })

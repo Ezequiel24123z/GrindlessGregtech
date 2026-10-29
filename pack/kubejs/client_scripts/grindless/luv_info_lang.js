@@ -70,10 +70,10 @@ ClientEvents.lang('es_es', event => {
     var add = function (key, value) { event.add('grindless', key, value) }
 
     add('emi.grindless.info.harpoon_anchor_drill.0', "La perforadora anclada con arpones es la perforadora de vetas del cinturón de asteroides. Pon la muestra de veta tipo M, S o C y una broca HSS-S en el bus de entrada; da 11,25 menas en bruto por ciclo y desgasta la broca y un arpón de anclaje.")
-    add('emi.grindless.info.harpoon_anchor_drill.1', "Solo funciona en el cinturón y solo hace sus propias recetas. Sin fluido: es vacío. Hasta 256 ciclos a la vez, según permitan los hatches de energía.")
+    add('emi.grindless.info.harpoon_anchor_drill.1', "Solo funciona en el cinturón y solo hace sus propias recetas. Sin fluido: es vacío. Hasta 256 ciclos a la vez, según permitan las escotillas de energía.")
 
     add('emi.grindless.info.asteroid_processor.0', "El procesador de asteroides ejecuta el proceso Mond. Circuito 1: hierro meteórico triturado. Circuito 3: polvo de hierro meteórico. Ambos dan hierro, níquel y cobalto y dejan el concentrado de PGM de asteroide. Circuito 2: separa la tetrataenita triturada de su kamacita.")
-    add('emi.grindless.info.asteroid_processor.1', "Los circuitos 1 y 3 necesitan una carga de 1000 mB de monóxido de carbono en un hatch de entrada, que no se gasta. Conserva el concentrado y se niega a eliminar objetos. Funciona en cualquier sitio.")
+    add('emi.grindless.info.asteroid_processor.1', "Los circuitos 1 y 3 necesitan una carga de 1000 mB de monóxido de carbono en una escotilla de entrada, que no se gasta. Conserva el concentrado y se niega a eliminar objetos. Funciona en cualquier sitio.")
 
     add('emi.grindless.info.optical_miner.0', "El minero óptico solo funciona en el cinturón de asteroides. El circuito 1 embolsa un bloque de tipo C y lo descascara con luz solar: agua, dióxido de carbono, carbono y el extracto condrítico. El circuito 2 convierte dióxido de carbono y carbono en monóxido de carbono.")
     add('emi.grindless.info.optical_miner.1', "El circuito 1 solo arranca de día, con el sol sobre el receptor y los ocho espejos a cielo abierto. El circuito 2 no necesita sol. Lo conserva todo y se niega a eliminar. El monóxido de carbono alimenta el procesador de asteroides.")
@@ -112,20 +112,20 @@ ClientEvents.lang('es_es', event => {
     add('emi.grindless.info.volcanic_intake.1', "Da 32 768 EU/t por módulo de turbina completo, hasta 131 072 EU/t. Un haz intercambiador de calor por módulo se gasta más o menos una vez por hora.")
 
     add('emi.grindless.info.mega_chemical_complex.0', "El complejo químico mega tiene dos modos que se eligen en el controlador: todas las recetas del reactor químico y del reactor químico grande, o las líneas largas de PTFE, epoxi y para-aramida en un solo paso con cada subproducto como salida.")
-    add('emi.grindless.info.mega_chemical_complex.1', "El paralelo es 2^(temperatura de bobina / 900 K) por el parallel hatch. Cada copia paga su EU/t completo, así que los hatches de energía fijan cuántas corren. Las bobinas por encima de cuproníquel recortan la energía un 5 %, hasta el 80 %.")
+    add('emi.grindless.info.mega_chemical_complex.1', "El paralelo es 2^(temperatura de bobina / 900 K) por la escotilla de paralelos. Cada copia paga su EU/t completo, así que las escotillas de energía fijan cuántas corren. Las bobinas por encima de cuproníquel recortan la energía un 5 %, hasta el 80 %.")
 
     add('emi.grindless.info.hydroponic_ring.0', "El anillo hidropónico giratorio es cultivo molecular solo en órbita, no un multiplicador de cosechas. Circuito 5: semilla de cebada (se conserva), agua y CO2 dan factor neurotrófico. Circuito 6: semilla de tabaco (se conserva) da colágeno vegetal. Ambos dan también biomasa y oxígeno.")
     add('emi.grindless.info.hydroponic_ring.1', "La biomasa alimenta la biofundición y el factor neurotrófico, el laboratorio de organoides. El oxígeno sostiene la estación. Se niega a eliminar.")
 
-    add('emi.grindless.info.organoid_lab.0', "El laboratorio de organoides funciona solo en órbita, con sala limpia o un hatch de mantenimiento con limpieza. El circuito 1 cultiva un organoide neuronal con células madre, medio estéril y factor neurotrófico. El circuito 2 monta una unidad de procesamiento neuronal.")
+    add('emi.grindless.info.organoid_lab.0', "El laboratorio de organoides funciona solo en órbita, con sala limpia o una escotilla de mantenimiento con limpieza. El circuito 1 cultiva un organoide neuronal con células madre, medio estéril y factor neurotrófico. El circuito 2 monta una unidad de procesamiento neuronal.")
     add('emi.grindless.info.organoid_lab.1', "La unidad de procesamiento gasta 30 720 EU/t durante 1563 ticks. Las células madre vienen de la biofundición y el factor neurotrófico, del anillo hidropónico. Conserva todo y se niega a eliminar.")
 
-    add('emi.grindless.info.zero_g_crystal_grower.0', "El cultivador de cristales en gravedad cero funciona solo en órbita, con sala limpia o un hatch de mantenimiento con limpieza. Los circuitos 1-5 cultivan chips de cristal en bruto con 100 % de certeza en 3000 ticks, con las dosis de dopante de GregTech. El circuito 6 cultiva una masa de prueba de zafiro.")
+    add('emi.grindless.info.zero_g_crystal_grower.0', "El cultivador de cristales en gravedad cero funciona solo en órbita, con sala limpia o una escotilla de mantenimiento con limpieza. Los circuitos 1-5 cultivan chips de cristal en bruto con 100 % de certeza en 3000 ticks, con las dosis de dopante de GregTech. El circuito 6 cultiva una masa de prueba de zafiro.")
     add('emi.grindless.info.zero_g_crystal_grower.1', "La masa de prueba de zafiro es una pieza del detector de ondas gravitacionales.")
 
     add('emi.grindless.info.microgravity_smelter.0', "La fundición de microgravedad funciona en cualquier órbita. Circuito 1: tubos ópticos de ZBLAN. Circuito 2: espuma de escudo Whipple. Circuito 3: aleación de naquadah fría sin helio.")
-    add('emi.grindless.info.microgravity_smelter.1', "Mezcla el ZBLAN en el recipiente de mezcla grande. Los tubos ópticos no se pueden reciclar y piden un hatch de mantenimiento con limpieza. Admite un parallel hatch opcional.")
+    add('emi.grindless.info.microgravity_smelter.1', "Mezcla el ZBLAN en el recipiente de mezcla grande. Los tubos ópticos no se pueden reciclar y piden una escotilla de mantenimiento con limpieza. Admite una escotilla de paralelos opcional.")
 
-    add('emi.grindless.info.wake_shield_facility.0', "La instalación de escudo de estela funciona en cualquier órbita y siempre pide sala limpia o un hatch de mantenimiento con limpieza. Circuito 1: oblea UHPIC. Circuito 2: oblea HPIC. Circuito 3: oblea de triple unión.")
-    add('emi.grindless.info.wake_shield_facility.1', "Las obleas de potencia llevan la mitad de fuente y de tiempo. Una oblea de triple unión se puede cortar en cuatro células solares. Admite un parallel hatch opcional.")
+    add('emi.grindless.info.wake_shield_facility.0', "La instalación de escudo de estela funciona en cualquier órbita y siempre pide sala limpia o una escotilla de mantenimiento con limpieza. Circuito 1: oblea UHPIC. Circuito 2: oblea HPIC. Circuito 3: oblea de triple unión.")
+    add('emi.grindless.info.wake_shield_facility.1', "Las obleas de potencia llevan la mitad de fuente y de tiempo. Una oblea de triple unión se puede cortar en cuatro células solares. Admite una escotilla de paralelos opcional.")
 })
