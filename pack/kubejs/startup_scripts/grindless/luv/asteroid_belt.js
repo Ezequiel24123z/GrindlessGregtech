@@ -100,14 +100,14 @@
   }
 
   //   C steel pipe casing (the carbonyl column: reactor below, decomposer above, hollow inside)   # air   X magnetic separator: steel
-  //   casing or a part   G laminated glass (the CO gas holder)   S controller
+  //   casing or a part   G laminated glass (the CO gas holder)   F steel frame (the column's four corner posts)   S controller
   var processorSpec = {
     slices: [
-      ['CCCCC GGG', 'CCCCC GGG', 'CCCCC GGG', 'CCCCC    ', 'CCCCC    ', 'CCCCC    '],
+      ['FCCCF GGG', 'FCCCF GGG', 'FCCCF GGG', 'FCCCF    ', 'FCCCF    ', 'FCCCF    '],
       ['CCCCC GGG', 'C###C GGG', 'C###C GGG', 'C###C    ', 'C###C    ', 'CCCCC    '],
       ['CCCCC XXX', 'C###CCXXX', 'C###C XXX', 'C###C    ', 'C###C    ', 'CCCCC    '],
       ['CCCCC XXX', 'C###C XXX', 'C###C XXX', 'C###C    ', 'C###C    ', 'CCCCC    '],
-      ['CCCCC XXX', 'CCCCC XSX', 'CCCCC XXX', 'CCCCC    ', 'CCCCC    ', 'CCCCC    ']
+      ['FCCCF XXX', 'FCCCF XSX', 'FCCCF XXX', 'FCCCF    ', 'FCCCF    ', 'FCCCF    ']
     ],
     symbols: {
       S: Pat.controller(),
@@ -121,6 +121,7 @@
         G.parallelHatch.part()
       ),
       C: Pat.block(STEEL_PIPE),
+      F: Pat.frame(['steel']),
       G: Pat.block(GLASS),
       '#': Pat.air()
     }

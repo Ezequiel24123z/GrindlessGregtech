@@ -23,6 +23,8 @@
   var ROBUST = 'gtceu:robust_machine_casing'
   var MASS = 'grindless:sapphire_test_mass'
   var COIL = 'grindless:coilgun_coil_casing'
+  var PIPE = 'gtceu:tungstensteel_pipe_casing'
+  var GLASS = 'gtceu:borosilicate_glass_block'
   // packed and blue ice only: plain ice melts under block light, and a torch would unform the L
   var ICE = ['minecraft:packed_ice', 'minecraft:blue_ice']
 
@@ -66,11 +68,27 @@
           var wall = x === 0 || x === 4 || y === 0 || y === 4 || s === 28 || s === 32
           ch = wall ? 'X' : '#'
         } else if (inside(x, 1, 3) && inside(s, 0, 27)) {
+          // ring i along the arm (s 27 is the vertex side): every sixth ring is a pipe ring (vacuum pumps), the others are
+          // stainless frame posts on the four corners with clean panels between them and a glass viewport every sixth ring
+          var ringZ = 27 - s
           if (y === 4) ch = 'I'
-          else if (y >= 1) ch = s <= 2 ? 'F' : (x === 2 && y === 2 ? '#' : 'C')
+          else if (y >= 1) {
+            if (s <= 2) ch = 'F'
+            else if (x === 2 && y === 2) ch = '#'
+            else if (ringZ % 6 === 0) ch = 'P'
+            else if (x !== 2 && y !== 2) ch = 'T'
+            else ch = ringZ % 6 === 3 && y === 2 ? 'G' : 'C'
+          }
         } else if (inside(s, 29, 31) && inside(x, 5, 32)) {
+          var ringX = x - 5
           if (y === 4) ch = 'I'
-          else if (y >= 1) ch = x >= 30 ? 'F' : (s === 30 && y === 2 ? '#' : 'C')
+          else if (y >= 1) {
+            if (x >= 30) ch = 'F'
+            else if (s === 30 && y === 2) ch = '#'
+            else if (ringX % 6 === 0) ch = 'P'
+            else if (s !== 30 && y !== 2) ch = 'T'
+            else ch = ringX % 6 === 3 && y === 2 ? 'G' : 'C'
+          }
         }
         L.set(x, y, s, ch)
       }
@@ -84,7 +102,7 @@
   var detector = {
     slices: L.slices(),
     symbols: { S: Pat.controller(), X: hatches(FROST, 60, true), F: Pat.block(FROST), C: Pat.block(CLEAN), M: Pat.block(MASS),
-      I: Pat.block(ICE), '#': Pat.air() }
+      I: Pat.block(ICE), P: Pat.block(PIPE), T: Pat.frame(['stainless_steel']), G: Pat.block(GLASS), '#': Pat.air() }
   }
 
   // ---------------------------------------------------------------- the coilgun
@@ -96,7 +114,14 @@
         var c = ' '
         var bore = x2 === 2 && y2 === 2
         if (s2 <= 32) {
-          if (inside(x2, 1, 3) && inside(y2, 1, 3)) c = bore ? '#' : 'K'
+          if (inside(x2, 1, 3) && inside(y2, 1, 3)) {
+            // every third ring is a full accelerating coil; between them tungsten-steel frame posts with glass or robust panels
+            var ringK = s2 % 3
+            if (bore) c = '#'
+            else if (ringK === 0) c = 'K'
+            else if (x2 !== 2 && y2 !== 2) c = 'R'
+            else c = ringK === 1 ? 'G' : 'T'
+          }
         } else if (inside(x2, 0, 4)) {
           var shell = x2 === 0 || x2 === 4 || y2 === 0 || y2 === 4 || s2 === 33 || s2 === 36
           c = shell ? (bore && s2 === 33 ? '#' : 'X') : '#'
@@ -110,7 +135,8 @@
   K.set(2, 2, 36, 'S')
   var launcher = {
     slices: K.slices(),
-    symbols: { S: Pat.controller(), X: hatches(ROBUST, 50, false), T: Pat.block(ROBUST), K: Pat.block(COIL), '#': Pat.air() }
+    symbols: { S: Pat.controller(), X: hatches(ROBUST, 50, false), T: Pat.block(ROBUST), K: Pat.block(COIL),
+      R: Pat.frame(['tungsten_steel']), G: Pat.block(GLASS), '#': Pat.air() }
   }
 
   GY.specs = { detector: detector, launcher: launcher }

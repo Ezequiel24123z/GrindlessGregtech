@@ -38,18 +38,35 @@
   // ---------------------------------------------------------------- the observatory: 15 x 15 x 15
   // rows bottom -> top; the shell is the photomultiplier casing (ports in the floor and the front wall), the water shield is any block
   var OBS_PARTS = { energy_input: { min: 1, max: 2 }, input_bus: { min: 1, max: 2 }, output_bus: { min: 1, max: 2 }, input_hatch: { min: 1, max: 2 } }
+  // QR-S2: an octagonal drum. The footprint is a 15 x 15 square with its corners cut (|dx| + |dz| <= 10 from the middle), frame posts at the eight
+  // vertices, stable casing hoops at rows 4 and 10 and a glass window band at row 7 between the photomultiplier walls, stable casing slabs
+  // inside the floor and the roof, the 5 x 5 x 5 glass vessel in the middle. The front wall (controller side) stays flat.
   function observatorySlice(z) {
     var rows = []
     for (var y = 0; y < 15; y++) {
       var row = ''
       for (var x = 0; x < 15; x++) {
-        var shell = x === 0 || x === 14 || y === 0 || y === 14 || z === 0 || z === 14
+        var dx = Math.abs(x - 7)
+        var dz = Math.abs(z - 7)
+        var d = dx + dz
+        var inFoot = d <= 10
+        var rim = inFoot && (d === 10 || dx === 7 || dz === 7)
+        var vertex = rim && ((dx === 7 && dz === 3) || (dx === 3 && dz === 7))
         var inCore = x >= 5 && x <= 9 && y >= 5 && y <= 9 && z >= 5 && z <= 9
         var vessel = inCore && (x === 5 || x === 9 || y === 5 || y === 9 || z === 5 || z === 9)
         var c = ' '
-        if (z === 14 && y === 1 && x === 7) c = 'S'
-        else if (shell) c = (y === 0 || (z === 14 && y === 1)) ? 'X' : 'C'
-        else if (vessel) c = 'L'
+        if (!inFoot) c = ' '
+        else if (z === 14 && y === 1 && x === 7) c = 'S'
+        else if (y === 0) c = 'X'
+        else if (y === 1 && !rim && d <= 8) c = 'H'
+        else if (y === 14) c = rim ? 'R' : 'H'
+        else if (vertex) c = 'R'
+        else if (rim) {
+          if (z === 14 && y === 1) c = 'X'
+          else if (y === 4 || y === 10) c = 'H'
+          else if (y === 7) c = 'L'
+          else c = 'C'
+        } else if (vessel) c = 'L'
         row += c
       }
       rows.push(row)
@@ -62,7 +79,9 @@
       S: Pat.controller(),
       X: parts(PMT, 60, OBS_PARTS),
       C: Pat.block(PMT),
-      L: Pat.block(GLASS)
+      L: Pat.block(GLASS),
+      H: Pat.block('gtceu:stable_machine_casing'),
+      R: Pat.frame(['titanium'])
     }
   }
 
@@ -103,17 +122,25 @@
   // ---------------------------------------------------------------- the telescope: 5 x 5 x 11
   // rows bottom -> top: 0 the base (ports or truss), 1-9 the tube around the open light path, a sapphire secondary mirror at row 9, 10 the cap
   var TEL_PARTS = { energy_input: { min: 1, max: 2 }, input_bus: { min: 1, max: 2 }, output_bus: { min: 1, max: 2 } }
+  // QR-S2: a survey tube. Frame posts, glass sight rings at rows 3 and 6, frostproof hoops at rows 5 and 8, a frame spider at row 9 holding the
+  // sapphire secondary mirror, a gearbox pointing mount at the base and a glass cap.
   function telescopeSlice(z) {
     var rows = []
     for (var y = 0; y < 11; y++) {
       var row = ''
       for (var x = 0; x < 5; x++) {
         var edge = x === 0 || x === 4 || z === 0 || z === 4
+        var post = (x === 0 || x === 4) && (z === 0 || z === 4)
         var c = ' '
-        if (y === 0) c = 'X'
-        else if (y === 10) c = 'C'
-        else if (edge) c = z === 4 && y === 1 ? (x === 2 ? 'S' : 'X') : 'C'
-        else if (x === 2 && z === 2 && y === 9) c = 'M'
+        if (y === 0) c = edge ? 'X' : (x === 2 && z === 2 ? 'D' : 'C')
+        else if (y === 10) c = edge ? 'C' : 'L'
+        else if (post) c = 'R'
+        else if (edge) {
+          if (z === 4 && y === 1) c = x === 2 ? 'S' : 'X'
+          else if (y === 3 || y === 6) c = 'L'
+          else if (y === 5 || y === 8) c = 'K'
+          else c = 'C'
+        } else if (y === 9) c = (x === 2 && z === 2) ? 'M' : ((x === 2 || z === 2) ? 'R' : ' ')
         row += c
       }
       rows.push(row)
@@ -126,7 +153,11 @@
       S: Pat.controller(),
       X: parts(STATION, 10, TEL_PARTS),
       C: Pat.block(STATION),
-      M: Pat.block(SAPPHIRE)
+      M: Pat.block(SAPPHIRE),
+      L: Pat.block(GLASS),
+      K: Pat.block(FROST),
+      R: Pat.frame(['titanium']),
+      D: Pat.block('gtceu:tungstensteel_gearbox')
     }
   }
 

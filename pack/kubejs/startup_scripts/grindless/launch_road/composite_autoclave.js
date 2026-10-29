@@ -32,24 +32,25 @@
 
   // ---------------------------------------------------------------- pattern (see lib/patterns.js)
   //
-  //   C shell: clean stainless steel casing or a hatch   F stainless steel frame (saddles)   P nitrogen line   # the chamber (air)
+  //   C shell: clean stainless steel casing or a hatch   F stainless steel frame (the skid under the vessel)   P nitrogen line and the
+  //   steel pipe clamp ring around the middle of the vessel   G sight glass (back head, both flanks, door)   # the chamber (air)
   const SPEC = {
     slices: [
-      // back head
-      ['     ', ' CCC ', 'CCCCC', 'CCCCC', 'CCCCC', ' CCC ', '     '],
-      // shell on its saddles, the nitrogen line on top
-      [' F F ', ' CCC ', 'C###C', 'C###C', 'C###C', ' CCC ', '  P  '],
-      // shell on its saddles
-      [' F F ', ' CCC ', 'C###C', 'C###C', 'C###C', ' CCC ', '     '],
-      // the door, with the controller in the middle
-      ['     ', ' CCC ', 'CCCCC', 'CCSCC', 'CCCCC', ' CCC ', '     ']
+      // back head, with a sight glass in the middle of the dome
+      ['FFFFF', ' CCC ', 'CCCCC', 'CCGCC', 'CCCCC', ' CCC ', '     '],
+      // shell on its skid, a sight glass on each flank, the nitrogen line on top
+      ['FFFFF', ' CCC ', 'C###C', 'G###G', 'C###C', ' CCC ', '  P  '],
+      // the clamp ring of steel pipe casing
+      ['FFFFF', ' PPP ', 'P###P', 'P###P', 'P###P', ' PPP ', '     '],
+      // the door, with the controller in the middle and a porthole above it
+      ['FFFFF', ' CCC ', 'CCCCC', 'CCSCC', 'CCGCC', ' CCC ', '     ']
     ],
     symbols: {
       S: Pat.controller(),
-      // 65 shell cells: 5 or 6 are parts (energy 1-2, the input bus for fibres and liners, the output bus, the epoxy and the nitrogen
+      // 49 shell cells: 5 or 6 are parts (energy 1-2, the input bus for fibres and liners, the output bus, the epoxy and the nitrogen
       // hatches), the rest clean stainless steel casing
       C: Pat.oneOf(
-        Pat.block(CLEAN, { min: 50 }),
+        Pat.block(CLEAN, { min: 40 }),
         Pat.part('energy_input', { min: 1, max: 2 }),
         Pat.part('input_bus', { exact: 1 }),
         Pat.part('output_bus', { exact: 1 }),
@@ -57,6 +58,7 @@
       ),
       F: Pat.frame(['stainless_steel']),
       P: Pat.block(PIPE),
+      G: Pat.block('gtceu:laminated_glass'),
       '#': Pat.air()
     }
   }
@@ -66,7 +68,7 @@
     machine: MACHINE,
     recipeType: TYPE,
     casing: CLEAN,
-    blocks: [CLEAN, PIPE, 'gtceu:stainless_steel_frame']
+    blocks: [CLEAN, PIPE, 'gtceu:stainless_steel_frame', 'gtceu:laminated_glass']
   }
 
   // ---------------------------------------------------------------- recipe type

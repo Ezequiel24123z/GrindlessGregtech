@@ -17,10 +17,11 @@
 
   var smelter = []
   for (var z = 0; z < 7; z++) {
+    // A titanium truss frames the 3x3x7 hall; the station panels sit between the posts and the ports are on the end caps and the sides.
     var middle = z === 0 ? 'XXX' : z === 6 ? 'MSX' :
-      z === 2 || z === 4 ? 'KKK' : z === 3 ? 'KAK' : 'CAC'
-    var cap = z === 0 || z === 6 ? 'XXX' : 'CCC'
-    var rows = [cap, middle, z === 3 ? 'CGC' : cap]
+      z === 2 || z === 4 ? 'KKK' : z === 3 ? 'KAK' : 'XAX'
+    var cap = z === 0 || z === 6 ? 'FXF' : 'FCF'
+    var rows = [cap, middle, z === 3 ? 'FGF' : cap]
     // A six-block, one-cell drawing column rises from the levitation core's glass port.
     for (var y = 0; y < 6; y++) rows.push(z === 3 ? (y % 2 === 0 ? ' F ' : ' G ') : '   ')
     smelter.push(rows)
@@ -35,7 +36,22 @@
   }
   var disc = ['  WWWWW  ', ' WWWWWWW ', 'WWWWWWWWW', 'WWWWWWWWW', 'WWWWWWWWW',
     'WWWWWWWWW', 'WWWWWWWWW', ' WWWWWWW ', '  WWWWW  ']
-  var wake = [disc]
+  // The shield is a dish: titanium frame rim, whipple panels, and a 3x3 glass window at the centre where the wake is made.
+  var discRows = []
+  for (var dy = 0; dy < 9; dy++) {
+    var discRow = ''
+    for (var dx = 0; dx < 9; dx++) {
+      var dch = disc[dy].charAt(dx)
+      if (dch === 'W') {
+        var rim = disc[dy].charAt(dx - 1) !== 'W' || disc[dy].charAt(dx + 1) !== 'W' ||
+          dy === 0 || dy === 8 || disc[dy - 1].charAt(dx) !== 'W' || disc[dy + 1].charAt(dx) !== 'W'
+        dch = rim ? 'F' : (Math.abs(dx - 4) <= 1 && Math.abs(dy - 4) <= 1 ? 'G' : 'W')
+      }
+      discRow += dch
+    }
+    discRows.push(discRow)
+  }
+  var wake = [discRows]
   for (var depth = 0; depth < 3; depth++) {
     var carousel = []
     for (var height = 0; height < 9; height++) {
@@ -49,7 +65,8 @@
     slices: wake,
     symbols: {
       S: Pat.controller(), X: ports(INERT, 12), M: Pat.part('maintenance', { exact: 1 }),
-      A: Pat.air(), W: Pat.block('grindless:whipple_shield_casing')
+      A: Pat.air(), W: Pat.block('grindless:whipple_shield_casing'), F: Pat.frame(['titanium']),
+      G: Pat.block('gtceu:borosilicate_glass_block')
     }
   }
   var machines = [

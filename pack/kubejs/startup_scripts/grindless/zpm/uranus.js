@@ -76,14 +76,40 @@
   // rows bottom -> top: 0 floor, 1-5 the hull around the cyclone cascade, 6 the roof
   const SEPARATOR_PARTS = { energy_input: { min: 1, max: 2 }, input_bus: { min: 1, max: 2 }, input_hatch: { min: 1, max: 2 },
     output_bus: { min: 1, max: 2 }, output_hatch: { min: 1, max: 2 } }
+  // QR-S2: a cyclone tower. Frame posts, a laminated glass window ring between hull bands, the tungstensteel cyclone pipe up the middle with a
+  // four-way manifold at row 3, a station truss deck and roof.
+  function separatorSlice(z) {
+    var rows = []
+    for (var y = 0; y < 7; y++) {
+      var row = ''
+      for (var x = 0; x < 5; x++) {
+        var edge = x === 0 || x === 4 || z === 0 || z === 4
+        var post = (x === 0 || x === 4) && (z === 0 || z === 4)
+        var arm = y === 3 && ((x === 2 && (z === 1 || z === 3)) || (z === 2 && (x === 1 || x === 3)))
+        var c = ' '
+        if (y === 0) c = edge ? 'X' : 'T'
+        else if (y === 6) c = edge ? 'C' : (x === 2 && z === 2 ? 'P' : 'T')
+        else if (post) c = 'F'
+        else if (edge) {
+          if (y === 1) c = z === 4 ? (x === 2 ? 'S' : 'X') : 'C'
+          else if (y === 2 || y === 4) c = 'G'
+          else c = 'C'
+        } else if ((x === 2 && z === 2) || arm) c = 'P'
+        row += c
+      }
+      rows.push(row)
+    }
+    return rows
+  }
   const SEPARATOR = {
-    slices: [0, 1, 2, 3, 4].map(function (z) {
-      return shellSlice(5, 5, 7, z, function (x, zz) { return x === 2 && zz === 2 ? 'P' : ' ' })
-    }),
+    slices: [0, 1, 2, 3, 4].map(separatorSlice),
     symbols: {
       S: Pat.controller(),
       X: parts(HULL, 10, SEPARATOR_PARTS),
       C: Pat.block(HULL),
+      T: Pat.block('grindless:station_truss_casing'),
+      F: Pat.frame(['titanium']),
+      G: Pat.block('gtceu:laminated_glass'),
       P: Pat.block(CYCLONE)
     }
   }
@@ -92,15 +118,40 @@
   // rows bottom -> top: 0 floor, 1-7 the casing around the launch rail (a titanium frame beam along the bay, row 4), 8 the roof
   const BAY_PARTS = { energy_input: { min: 1, max: 2 }, input_bus: { min: 1, max: 2 }, output_bus: { min: 1, max: 2 },
     output_hatch: { min: 1, max: 2 } }
+  // QR-S2: a launch gantry. Frame posts at the corners, glass windows at rows 2 and 6, a station truss gantry level at row 4 carrying the
+  // titanium frame launch rail, and a roof with a truss ridge between two glass skylights.
+  function bayLayer(z) {
+    var rows = []
+    for (var y = 0; y < 9; y++) {
+      var row = ''
+      for (var x = 0; x < 7; x++) {
+        var edge = x === 0 || x === 6 || z === 0 || z === 4
+        var post = (x === 0 || x === 6) && (z === 0 || z === 4)
+        var c = ' '
+        if (y === 0) c = edge ? 'X' : 'T'
+        else if (y === 8) c = edge ? 'C' : (x === 3 ? 'T' : 'G')
+        else if (post) c = 'F'
+        else if (edge) {
+          if (y === 1) c = z === 4 ? (x === 3 ? 'S' : 'X') : 'C'
+          else if (y === 2 || y === 6) c = 'G'
+          else if (y === 4) c = 'T'
+          else c = 'C'
+        } else if (y === 4 && z === 2) c = 'F'
+        row += c
+      }
+      rows.push(row)
+    }
+    return rows
+  }
   const PROBE_BAY = {
-    slices: [0, 1, 2, 3, 4].map(function (z) {
-      return shellSlice(7, 5, 9, z, function (x, zz, y) { return zz === 2 && y === 4 ? 'F' : ' ' })
-    }),
+    slices: [0, 1, 2, 3, 4].map(bayLayer),
     symbols: {
       S: Pat.controller(),
       X: parts(BAY, 14, BAY_PARTS),
       C: Pat.block(BAY),
-      F: Pat.frame(['titanium'])
+      T: Pat.block('grindless:station_truss_casing'),
+      F: Pat.frame(['titanium']),
+      G: Pat.block('gtceu:laminated_glass')
     }
   }
 

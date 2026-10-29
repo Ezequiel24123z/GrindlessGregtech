@@ -83,13 +83,13 @@
     output_hatch: { min: 1, max: 2 } }
   function bioreactorSlice(z) {
     var rows = ['XXXXX', z === 0 ? 'XXXXX' : z === 4 ? 'XXSXX' : 'X###X', 'VVVVV']
-    for (var y = 3; y < 13; y++) rows.push(z === 2 ? 'TLTLT' : '     ')
+    for (var y = 3; y < 13; y++) rows.push(z === 2 ? (y === 3 ? 'PPPPP' : y === 12 ? 'FPPPF' : 'TLTLT') : '     ')
     return rows
   }
   E.bioreactorSpec = {
     slices: [0, 1, 2, 3, 4].map(bioreactorSlice),
     symbols: { S: Pat.controller(), X: parts(CONCRETE, 8, E.bioreactorParts), V: Pat.block(VAULT), T: Pat.block('gtceu:laminated_glass'),
-      L: Pat.block(LAMPS), '#': Pat.air() }
+      L: Pat.block(LAMPS), P: Pat.block('gtceu:titanium_pipe_casing'), F: Pat.frame(['tungsten_steel']), '#': Pat.air() }
   }
 
   E.noVoiding = {

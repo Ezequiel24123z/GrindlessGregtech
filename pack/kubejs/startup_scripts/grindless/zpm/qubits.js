@@ -22,6 +22,8 @@
   const CRYO_TEXTURE = 'grindless:block/zpm/cryostat_casing'
   const COIL = 'gtceu:naquadah_coil_block'
   const PIPE = 'gtceu:tungstensteel_pipe_casing'
+  const GLASS = 'gtceu:laminated_glass'
+  const FILTER = 'gtceu:filter_casing'
 
   Q.items = {
     nitrogen_doped_cvd_plate: { stack: 64 },
@@ -51,7 +53,7 @@
     implanter: {
       name: 'ion_implanter', machine: 'gtceu:ion_implanter', type: 'ion_implantation', lang: 'Ion Implanter',
       casing: CLEAN, texture: CLEAN_TEXTURE, appearance: true, minCasings: 15,
-      width: 3, depth: 11, height: 3,
+      width: 5, depth: 15, height: 5,
       // items in: plate or wafer, phosphorus, the circuit; out: chips or the wafer; fluids in: nitrogen ions
       maxIO: { itemsIn: 3, itemsOut: 1, fluidsIn: 1, fluidsOut: 0 }
     },
@@ -64,8 +66,9 @@
     }
   }
 
-  // A hollow box of casing: row 0 takes the parts, S is the controller (front slice, row 1, middle column), `inner` gives the interior.
-  function shell(m, inner) {
+  // A hall of casing: row 0 takes the parts, S is the controller (front slice, row 1, middle column), `cell(r, si, c, last)` gives every
+  // other cell (walls, roof and interior).
+  function shell(m) {
     var slices = []
     var last = m.depth - 1
     var mid = (m.width - 1) / 2
@@ -75,11 +78,9 @@
         var row = ''
         for (var c = 0; c < m.width; c++) {
           var ch
-          var wall = si === 0 || si === last || c === 0 || c === m.width - 1
           if (r === 0) ch = 'X'
           else if (si === last && r === 1 && c === mid) ch = 'S'
-          else if (wall) ch = 'F'
-          else ch = inner(r, si, c)
+          else ch = m.cell(r, si, c, last)
           row += ch
         }
         rows.push(row)
@@ -89,41 +90,82 @@
     return slices
   }
 
-  function diamondInner(r, si, c) {
-    // the microwave cavity: one coil in the middle of the chamber
-    return r === 2 && si === 2 && c === 2 ? 'C' : (r === 4 ? 'F' : '#')
-  }
-
-  function implanterInner(r, si, c) {
-    // the analysing magnet: coils in the ceiling over slices 4-6; the beam runs below, in row 1
-    if (r === 2) return si >= 4 && si <= 6 ? 'C' : 'F'
+  // the CVD reactor: frame posts, glass viewports into the chamber, a gas filter ceiling with the feed pipe, and a plus of naquadah
+  // coils (the microwave cavity) fed by pipes from the roof and the floor
+  function diamondCell(r, si, c, last) {
+    var inner = si >= 1 && si <= last - 1 && c >= 1 && c <= 3
+    if (!inner) {
+      if ((si === 0 || si === last) && (c === 0 || c === 4)) return 'R'
+      if (r === 4) return 'F'
+      if (r === 2) return 'G'
+      return 'F'
+    }
+    if (r === 4) return si === 2 && c === 2 ? 'P' : 'B'
+    if (si === 2 && c === 2) return r === 2 ? 'C' : 'P'
+    if (r === 2 && (si === 2 || c === 2)) return 'C'
     return '#'
   }
 
-  function qubitInner(r, si, c) {
-    // the mixing chamber and the still: a pipe column up the middle of the cryostat, ceiling closed
-    if (r === 4) return 'F'
-    return si === 4 && c === 2 ? 'P' : '#'
+  // the beamline: a 15-long accelerator hall with the beam tube (pipe casing) through its whole length at row 2, frame posts and glass
+  // bays along both sides, frame trusses over the roof, quadrupole coil rings at slices 3, 7 and 11 and getter-pump filter blocks
+  // (the 4 corners of slices 5 and 9) between them
+  function implanterCell(r, si, c, last) {
+    var inner = si >= 1 && si <= last - 1 && c >= 1 && c <= 3 && r >= 1 && r <= 3
+    if (!inner) {
+      if (r === 4) return si % 2 === 0 ? 'R' : 'F'
+      if (c === 0 || c === 4) {
+        if (si % 2 === 0) return 'R'
+        return r >= 2 ? 'G' : 'F'
+      }
+      // the two end walls: the ion source (back) and the target chamber (front), a viewport each
+      return r === 2 ? 'G' : 'F'
+    }
+    if (c === 2 && r === 2) return 'P'
+    if (si === 3 || si === 7 || si === 11) return 'C'
+    if ((si === 5 || si === 9) && c !== 2 && r !== 2) return 'B'
+    return '#'
   }
 
-  function specOf(m, inner) {
+  // the dilution refrigerator: posts at the ends and the middle, glass bays in the walls, pipes along the roof, and inside the
+  // coil-and-pipe stages of the cooling chain hung from the roof (a pipe column with a magnet at each stage)
+  function qubitCell(r, si, c, last) {
+    var inner = si >= 1 && si <= last - 1 && c >= 1 && c <= 3 && r >= 1 && r <= 3
+    if (!inner) {
+      if ((c === 0 || c === 4) && (si === 0 || si === last || si === 4)) return 'R'
+      if (r === 4) return c === 2 ? 'P' : 'F'
+      if (r === 2 && (si === 0 || si === last)) return 'G'
+      if (r === 2 && (c === 0 || c === 4)) return 'G'
+      return 'F'
+    }
+    if (c !== 2) return '#'
+    if (si === 2 || si === 4 || si === 6) return r === 2 ? 'C' : 'P'
+    return r === 3 ? 'P' : '#'
+  }
+
+  function specOf(m) {
     var oneOf = [Pat.block(m.casing, { min: m.minCasings })]
     Object.keys(PARTS).forEach(function (k) { oneOf.push(Pat.part(k, PARTS[k])) })
     return {
-      slices: shell(m, inner),
+      slices: shell(m),
       symbols: {
         S: Pat.controller(),
         X: Pat.oneOf.apply(null, oneOf),
         F: Pat.block(m.casing),
         C: Pat.block(COIL),
         P: Pat.block(PIPE),
+        G: Pat.block(GLASS),
+        R: Pat.frame(['tungsten_steel']),
+        B: Pat.block(FILTER),
         '#': Pat.air()
       }
     }
   }
-  Q.machines.diamond.spec = specOf(Q.machines.diamond, diamondInner)
-  Q.machines.implanter.spec = specOf(Q.machines.implanter, implanterInner)
-  Q.machines.qubit.spec = specOf(Q.machines.qubit, qubitInner)
+  Q.machines.diamond.cell = diamondCell
+  Q.machines.implanter.cell = implanterCell
+  Q.machines.qubit.cell = qubitCell
+  Q.machines.diamond.spec = specOf(Q.machines.diamond)
+  Q.machines.implanter.spec = specOf(Q.machines.implanter)
+  Q.machines.qubit.spec = specOf(Q.machines.qubit)
 
   StartupEvents.registry('item', function (event) {
     Object.keys(Q.items).forEach(function (name) {

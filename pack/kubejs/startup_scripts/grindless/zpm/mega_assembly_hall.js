@@ -18,8 +18,9 @@
 //   12 deep, which fits the largest cleanroom interior (13 x 13 x 13, CleanroomMachine radius scan 7, height scan 14), leaving one
 //   cell between the hall's front and the cleanroom wall so the controller stays reachable.
 //
-// Structure (11 x 9 x 12, lib/patterns.js): assembly line casing floor, roof and walls; assembly line unit casings in the four
-// vertical corners; a laminated glass band in the side walls; two assembly line grating strips on the floor inside; the controller
+// Structure (11 x 9 x 12, lib/patterns.js; QR-S2 layout, see build()): assembly line casing floor, roof borders and wall bases; stainless
+// steel frame trusses over the roof with laminated glass skylights between them; frame posts and glass bays in the walls; assembly line
+// unit casings in the four vertical corners; two assembly line grating conveyor strips on the floor; the controller
 // sits in the middle of the front wall, one row up. Parts go in any casing cell: 1 maintenance, 1 to 4 energy hatches, 1 to 6 input
 // buses, 1 to 6 output buses, 1 to 4 input hatches (the assemblers use solder), 0 or 1 parallel hatch.
 //
@@ -45,6 +46,10 @@
   const PART_CELLS = 22
 
   // slices back -> front, rows bottom -> top, one char per column
+  // QR-S2: a factory hall, not a casing box. Stainless frame trusses (T) over the roof every third slice with glass skylights (L)
+  // between them, frame posts and glass bays in the side walls, a big window in the back wall and two bays in the front one, assembly
+  // line units (U) in the four vertical corners and two grating conveyor strips (G) down the floor. Casing (X) stays on the floor,
+  // the roof borders and the wall bases, where the parts go.
   function build() {
     var slices = []
     var casingCells = 0
@@ -59,9 +64,21 @@
           if (z === D - 1 && x === 5 && y === 1) ch = 'S'
           else if (y === 0 || y === H - 1 || edgeZ || edgeX) {
             ch = 'X'
-            if (edgeX && edgeZ && y > 0 && y < H - 1) ch = 'U'
-            else if (edgeX && !edgeZ && z >= 3 && z <= 8 && y >= 3 && y <= 5) ch = 'L'
-          } else if (y === 1 && (x === 3 || x === 7) && z >= 2 && z <= D - 3) ch = 'G'
+            if (y === 0) {
+              if ((x === 3 || x === 7) && z >= 1 && z <= D - 2) ch = 'G'
+            } else if (y === H - 1) {
+              if (!edgeX && !edgeZ) {
+                if (z % 3 === 0) ch = 'T'
+                else if (x >= 2 && x <= W - 3) ch = 'L'
+              } else if (edgeX && edgeZ) ch = 'T'
+            } else if (edgeX && edgeZ) ch = 'U'
+            else if (edgeX) {
+              if (z % 3 === 0) ch = 'T'
+              else if (y >= 3 && y <= 5) ch = 'L'
+            } else if (z === 0) {
+              if (y >= 3 && y <= 5 && x >= 2 && x <= W - 3) ch = 'L'
+            } else if (y >= 3 && y <= 5 && (x >= 2 && x <= 4 || x >= 6 && x <= W - 3)) ch = 'L'
+          }
           if (ch === 'X') casingCells++
           row += ch
         }
@@ -81,6 +98,7 @@
         S: Pat.controller(),
         U: Pat.block(UNIT),
         L: Pat.block(GLASS),
+        T: Pat.frame(['stainless_steel']),
         G: Pat.block(GRATING),
         X: Pat.oneOf(
           Pat.block(CASING, { min: BUILT.casingCells - PART_CELLS }),

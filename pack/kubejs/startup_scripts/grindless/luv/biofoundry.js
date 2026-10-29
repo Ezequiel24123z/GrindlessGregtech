@@ -95,8 +95,29 @@
 
   // ---------------------------------------------------------------- pattern
 
+  // The bare plascrete shell is dressed as a hall: steel frame posts in the four corners, a truss rib over every second slice of the
+  // roof, and a clean-casing aisle down the floor. Only plain plascrete cells (P) are replaced, so every part, window and door stays.
+  function dress(slices) {
+    var last = slices.length - 1
+    return slices.map(function (rows, si) {
+      return rows.map(function (row, ri) {
+        var out = ''
+        for (var ci = 0; ci < row.length; ci++) {
+          var ch = row.charAt(ci)
+          if (ch === 'P') {
+            if ((si === 0 || si === last) && (ci === 0 || ci === row.length - 1)) ch = 'T'
+            else if (ri === rows.length - 1 && si % 2 === 0) ch = 'T'
+            else if (ri === 0 && ci === 4 && si > 0 && si < last) ch = 'C'
+          }
+          out += ch
+        }
+        return out
+      })
+    })
+  }
+
   const SPEC = {
-    slices: [
+    slices: dress([
       // the service wall: buses, hatches and the energy come in here
       ['PPPPPPPPP', 'PXXXXXXXP', 'PXXXXXXXP', 'PXXXXXXXP', 'PPPPPPPPP', 'PPPPPPPPP'],
       // the autoclave bay and its steam header
@@ -113,7 +134,7 @@
       ['PPPPPPPPP', 'P#P#####P', 'P#P#####W', 'PPP#####W', 'P#######P', 'PPPPPPPPP'],
       // the front: the outer door, the controller and the window
       ['PPPPPPPPP', 'PDPPSPPPP', 'PDPWWWWWP', 'PPPWWWWWP', 'PPPPPPPPP', 'PPPPPPPPP']
-    ],
+    ]),
     symbols: {
       S: Pat.controller(),
       X: Pat.oneOf(
@@ -133,6 +154,7 @@
       I: Pat.block(STEAM_HEADER),
       U: Pat.block(LAMPS),
       D: Pat.block(DOOR),
+      T: Pat.frame(['stainless_steel']),
       '#': Pat.air()
     }
   }

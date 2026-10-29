@@ -169,9 +169,12 @@ test('B8 patterns: the ice shaft under the cryobot, vault casing at both, lamps 
   assert.equal(cry.symbols.X.options[0].blocks[0], 'grindless:sulfur_concrete_casing');
   const bio = plain(G.structures['gtceu:algae_bioreactor']);
   assert.equal(bio.slices[0].length, 13);
-  const tubes = bio.slices[2].slice(3);
-  assert.equal(tubes.length, 10);
+  const tubes = bio.slices[2].slice(4, 12);
+  assert.equal(tubes.length, 8);
   for (const row of tubes) assert.equal(row, 'TLTLT');
+  assert.equal(bio.slices[2][3], 'PPPPP', 'pipe manifold under the tubes');
+  assert.equal(bio.slices[2][12], 'FPPPF', 'pipe manifold and frame posts over the tubes');
+  assert.equal(bio.symbols.P.blocks[0], 'gtceu:titanium_pipe_casing');
   assert.equal(bio.symbols.T.blocks[0], 'gtceu:laminated_glass');
   assert.ok(bio.symbols.L.blocks.includes('gtceu:white_lamp') && bio.symbols.L.blocks.includes('gtceu:black_borderless_lamp'));
   assert.equal(bio.symbols.V.blocks[0], 'grindless:radiation_vault_casing');
@@ -187,6 +190,7 @@ test('every id B8 names is in the pinned native registry, not a naming guess the
     'gtceu:tungsten_carbide_plate', 'gtceu:hsss_plate', 'gtceu:iv_electric_pump', 'gtceu:luv_sensor', 'gtceu:normal_optical_pipe',
     'gtceu:luv_electric_pump', 'gtceu:luv_machine_hull', 'gtceu:tungstensteel_gearbox', 'gtceu:salt_dust', 'gtceu:laminated_glass',
     'minecraft:packed_ice', 'minecraft:blue_ice', 'gtceu:white_lamp', 'gtceu:black_borderless_lamp', 'gtceu:tungsten_steel_frame',
+    'gtceu:titanium_pipe_casing',
   ]);
   const nativeFluids = new Set(['gtceu:hydrogen_peroxide', 'gtceu:hydrogen', 'gtceu:oxygen', 'gtceu:biomass', 'gtceu:bacteria',
     'gtceu:carbon_dioxide', 'minecraft:water', 'gtceu:soldering_alloy', 'gtceu:lubricant']);

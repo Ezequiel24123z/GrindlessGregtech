@@ -35,6 +35,8 @@
   const MOLD = 'gtceu:steel_pipe_casing'
   const DRUM = 'gtceu:titanium_pipe_casing'
   const FRAME = 'tungsten_steel'
+  const GLASS = 'gtceu:laminated_glass'
+  const COIL = 'gtceu:naquadah_coil_block'
 
   // 128 runs of 2,560 EU/t = 327,680 EU/t: two ZPM dynamo hatches (131,072 V x 2 A each)
   const CONVERTER_MAX_PARALLELS = 128
@@ -54,15 +56,39 @@
 
   // ---------------------------------------------------------------- patterns (slices back -> front, rows bottom -> top)
 
-  const CASTER_FLOOR = 'XXXXX'
+  // QR-S2: both are built cell by cell. Frame posts (T), laminated glass sight windows (G), a casing shell, plus what each does:
+  // the caster has a steel-pipe mold column and a titanium steam drum in its lid; the converter a naquadah coil nozzle at each end
+  // (the magnetic nozzles), three collector grids of frame across the beam and a titanium heat-rejection manifold along the roof.
+  function cellsOf(w, h, d, controllerX, fn) {
+    var slices = []
+    for (var z = 0; z < d; z++) {
+      var rows = []
+      for (var y = 0; y < h; y++) {
+        var row = ''
+        for (var x = 0; x < w; x++) row += (z === d - 1 && y === 1 && x === controllerX) ? 'S' : fn(x, y, z)
+        rows.push(row)
+      }
+      slices.push(rows)
+    }
+    return slices
+  }
+
+  // 5 wide, 7 high, 5 deep: x 0..4, y 0..6, z 0..4
+  function casterCell(x, y, z) {
+    var edge = x === 0 || x === 4 || z === 0 || z === 4
+    var corner = (x === 0 || x === 4) && (z === 0 || z === 4)
+    if (y === 0) return 'X'
+    if (corner) return 'T'
+    if (y === 6) return x === 2 && z === 2 ? 'P' : 'C'
+    if (edge) return y === 3 || y === 4 ? 'G' : 'C'
+    // the tundish (row 5) holds the steam drum; the mold column runs down from it
+    if (y === 5) return x === 2 && z === 2 ? 'P' : '#'
+    if (x === 2 && z === 2 && y <= 3) return 'M'
+    return '#'
+  }
+
   const CASTER_SPEC = {
-    slices: [
-      [CASTER_FLOOR, 'CCCCC', 'CCCCC', 'CCCCC', 'CCCCC', 'CCCCC', 'CCCCC'],
-      [CASTER_FLOOR, 'C###C', 'C###C', 'C###C', 'C###C', 'CCCCC', 'CCCCC'],
-      [CASTER_FLOOR, 'C#M#C', 'C#M#C', 'C###C', 'C###C', 'CCPCC', 'CCPCC'],
-      [CASTER_FLOOR, 'C###C', 'C###C', 'C###C', 'C###C', 'CCCCC', 'CCCCC'],
-      [CASTER_FLOOR, 'CCSCC', 'CCCCC', 'CCCCC', 'CCCCC', 'CCCCC', 'CCCCC']
-    ],
+    slices: cellsOf(5, 7, 5, 2, casterCell),
     symbols: {
       S: Pat.controller(),
       // 25 floor cells: 3 to 7 are parts, the rest casing
@@ -77,25 +103,32 @@
       C: Pat.block(TUNGSTENSTEEL),
       M: Pat.block(MOLD),
       P: Pat.block(DRUM),
+      G: Pat.block(GLASS),
+      T: Pat.frame([FRAME]),
       '#': Pat.air()
     }
   }
 
-  const CONV_FLOOR = 'XXXXXXXXX'
-  const CONV_WALL = 'CCCCCCCCC'
-  const CONV_SIDE = 'C#######C'
-  const CONV_GRID = 'C#T#T#T#C'
+  // 9 wide (the beam path), 6 high, 7 deep: x 0..8, y 0..5, z 0..6
+  function converterCell(x, y, z) {
+    var endWall = x === 0 || x === 8
+    var longWall = z === 0 || z === 6
+    var post = (x === 0 || x === 2 || x === 6 || x === 8) && longWall
+    if (y === 0) return 'X'
+    if (post) return 'T'
+    if (y === 5) return z === 3 && x >= 1 && x <= 7 ? 'P' : 'C'
+    if (endWall) return z >= 2 && z <= 4 && y >= 2 && y <= 3 ? 'K' : 'C'
+    if (longWall) return y === 2 || y === 3 ? 'G' : 'C'
+    // inside: a collector grid (a plus of frame across the beam) at x = 2, 4 and 6
+    if ((x === 2 || x === 4 || x === 6) && (z === 3 || y === 2)) return 'T'
+    return '#'
+  }
+
   const CONVERTER_SPEC = {
-    slices: [
-      [CONV_FLOOR, CONV_WALL, CONV_WALL, CONV_WALL, CONV_WALL],
-      [CONV_FLOOR, CONV_SIDE, CONV_SIDE, CONV_SIDE, CONV_WALL],
-      [CONV_FLOOR, CONV_GRID, CONV_GRID, CONV_GRID, CONV_WALL],
-      [CONV_FLOOR, CONV_SIDE, CONV_SIDE, CONV_SIDE, CONV_WALL],
-      [CONV_FLOOR, 'CCCCSCCCC', CONV_WALL, CONV_WALL, CONV_WALL]
-    ],
+    slices: cellsOf(9, 6, 7, 4, converterCell),
     symbols: {
       S: Pat.controller(),
-      // 45 floor cells: 3 to 8 are parts (dynamo hatches, wireless ones included), the rest casing
+      // 63 floor cells: 3 to 8 are parts (dynamo hatches, wireless ones included), the rest casing
       X: Pat.oneOf(
         Pat.block(CRYO, { min: 30 }),
         Pat.part('energy_output', F.converterParts.energy_output),
@@ -104,6 +137,9 @@
       ),
       C: Pat.block(CRYO),
       T: Pat.frame([FRAME]),
+      K: Pat.block(COIL),
+      G: Pat.block(GLASS),
+      P: Pat.block(DRUM),
       '#': Pat.air()
     }
   }

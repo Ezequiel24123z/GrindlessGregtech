@@ -58,14 +58,16 @@
 
   // ---------------------------------------------------------------- pattern
 
+  // A steel turbine hall: frame pillars at the back and every fourth column, a glass clerestory in the back wall, and an open roof
+  // truss (frame beams front and back, crossed by three ties), so the hall is not a solid block.
   const SPEC = {
     slices: [
-      // back
-      ['XXXXXXXXX', 'CCCCCCCCC', 'CCCCCCCCC', 'CCCCCCCCC'],
-      // middle: shaft and fuel header
-      ['XXXXXXXXX', 'PPPPPPPPP', 'PPPPPPPPP', 'CCCCCCCCC'],
-      // front: 16 generator units, the controller between the two rows
-      ['XXXXXXXXX', 'GGGGSGGGG', 'GGGGCGGGG', 'CCCCCCCCC']
+      // back: pillars, casing, a glass band, and the roof beam
+      ['XXXXXXXXX', 'FCCCFCCCF', 'FLLLFLLLF', 'FFFFFFFFF'],
+      // middle: shaft and fuel header, ties across the open roof
+      ['XXXXXXXXX', 'PPPPPPPPP', 'PPPPPPPPP', 'F   F   F'],
+      // front: 16 generator units, the controller between the two rows, the front roof beam
+      ['XXXXXXXXX', 'GGGGSGGGG', 'GGGGCGGGG', 'FFFFFFFFF']
     ],
     symbols: {
       S: Pat.controller(),
@@ -78,7 +80,9 @@
       ),
       G: Pat.block(GEARBOX),
       P: Pat.block(PIPE),
-      C: Pat.block(CASING)
+      C: Pat.block(CASING),
+      F: Pat.frame(['steel']),
+      L: Pat.block('minecraft:glass')
     }
   }
 

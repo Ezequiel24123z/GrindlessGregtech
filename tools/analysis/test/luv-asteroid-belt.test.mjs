@@ -373,7 +373,7 @@ test('B5 ids that are not ours match the pinned native registry (power-quests-1 
     'gtceu:raw_graphite', 'gtceu:tuff_olivine_ore', 'gtceu:tuff_chromite_ore', 'gtceu:tuff_magnetite_ore', 'gtceu:tuff_graphite_ore',
     'gtceu:tuff_pentlandite_ore', 'gtceu:iron_dust', 'gtceu:nickel_dust', 'gtceu:cobalt_dust', 'gtceu:carbon_dust',
     'gtceu:long_hsss_rod', 'gtceu:hsss_rod', 'gtceu:hsss_frame', 'gtceu:tungsten_carbide_plate', 'gtceu:titanium_rod',
-    'gtceu:titanium_dust', 'gtceu:titanium_frame', 'gcyr:para_aramid_foil', 'gcyr:kapton_k_plate', 'gtceu:luv_machine_hull',
+    'gtceu:titanium_dust', 'gtceu:titanium_frame', 'gtceu:steel_frame', 'gcyr:para_aramid_foil', 'gcyr:kapton_k_plate', 'gtceu:luv_machine_hull',
     'gtceu:luv_electric_motor', 'gtceu:luv_electric_piston', 'gtceu:luv_electric_pump', 'gtceu:luv_robot_arm', 'gtceu:luv_sensor',
     'gtceu:solid_machine_casing', 'gtceu:steel_pipe_casing', 'gtceu:tungstensteel_pipe_casing', 'gtceu:laminated_glass',
     'gtceu:robust_machine_casing', 'gtceu:frostproof_machine_casing', 'grindless:empty_vein_probe', 'ae2:singularity',
