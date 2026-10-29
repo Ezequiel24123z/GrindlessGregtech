@@ -53,6 +53,7 @@
     // ---- the Moon's half of an Earth-Moon quantum pair
     event.recipes.gtceu.chemical_reactor('grindless:lunar_quantum_seed')
       .itemInputs('#forge:ender_pearls')
+      .circuit(1)
       .inputFluids(Fluid.of('gtceu:helium_3', 250))
       .itemOutputs(SEED)
       .dimension(dimension)

@@ -7,21 +7,21 @@
 // sky or daytime").
 //
 // What it gains:
-//   - PROGRAMMED CIRCUIT 4, the sealed mode, only off-world (server_scripts/grindless/ev/sealed_dome.js): every plant of the family
+//   - PROGRAMMED CIRCUIT 5 (Moon) or 6 (Mars), the sealed mode, only off-world (server_scripts/grindless/ev/sealed_dome.js): every plant of the family
 //     grows from water and carbon dioxide under the LEDs and gives oxygen back, with the HV greenhouse's yield (x3 the base output,
 //     like its fertilizer + CO2 recipe) and no fertilizer. On the Moon the CO2 comes from home through the bridge (recipes
 //     grindless:greenhouse/ev/<plant>_sealed_moon, .dimension('gcyr:luna')); on Mars the dome breathes it from the air like the gas
 //     collector (grindless:greenhouse/ev/<plant>_sealed_mars, .dimension('gcyr:mars'), no CO2 input).
-//   - The family step: circuits 0 to 3 work exactly as in the HV Greenhouse (every steam, LV and MV recipe), up to 64 runs at once.
+//   - The family step: circuits 0 to 4 work exactly as in the HV Greenhouse (every steam, LV and MV recipe), up to 64 runs at once.
 //
 // No lower greenhouse can run the sealed recipes: their ids carry the ev/ segment (the family's tier veto skips higher tiers), and
-// they need circuit 4, which the LV, MV and HV vetoes already refuse (with a circuit of 2 or more in the bus they only take the
+// they need circuit 5 or 6, which the LV, MV and HV vetoes already refuse (with a circuit of 2 or more in the bus they only take the
 // fertilizer and booster recipes). The steam greenhouse has no fluid hatch, and every sealed recipe takes water.
 //
 // It uses `bores` (global.grindless.lv.bores, startup_scripts/grindless/lv/multis.js) with a cap of 64 runs, the EV cap of the
 // families: one EV energy hatch (2,048 V) fills the 64 runs of a sealed recipe (8 EU/t each) and GTM's overclock halves the time.
-// The veto below: circuit 4 = only the sealed recipes (so the plain recipe of the same plant waits); circuits 0 to 3 = the HV
-// greenhouse's rules; never a recipe of a tier above EV.
+// The veto below: a sealed recipe always passes (its circuit and dimension decide); otherwise the HV greenhouse's rules; never a
+// recipe of a tier above EV.
 //
 // Geometry (slices back -> front, rows bottom -> top; 7 wide, 5 high, 7 deep; the controller is in the front slice, row 1):
 //   row 0   floor: a ring of 24 `X` cells (sintered regolith or a part) around a 5x5 floor: 3x3 soil bed in a ring of 16 bricks
@@ -45,7 +45,6 @@
   const BRICK_TEXTURE = 'grindless:block/sintered_regolith'
   const GLASS = 'gtceu:tempered_glass'
   const DOOR = 'minecraft:iron_door'
-  const CO2 = 'gtceu:carbon_dioxide'
 
   const DYES = ['white', 'orange', 'magenta', 'light_blue', 'yellow', 'lime', 'pink', 'gray',
     'light_gray', 'cyan', 'purple', 'blue', 'brown', 'green', 'red', 'black']
@@ -55,12 +54,11 @@
     'minecraft:rooted_dirt', 'minecraft:farmland', 'minecraft:moss_block', 'minecraft:mud']
 
   const MAX_PARALLELS = 64
-  const SEALED_CIRCUIT = 4
 
   // published for the recipe script and the smoke test
   SD.machine = MACHINE
   SD.recipeType = 'gtceu:greenhouse'
-  SD.circuit = SEALED_CIRCUIT
+  SD.circuits = { moon: 5, mars: 6 }
   SD.cap = MAX_PARALLELS
   SD.blocks = { brick: BRICK, glass: GLASS, door: DOOR, lamps: LAMPS, soil: SOIL }
   SD.hatches = { energy: [1, 2], inputBus: 1, outputBus: [1, 2], inputHatch: [1, 2], outputHatch: 1 }
@@ -114,17 +112,13 @@
     var lv = global.grindless.lv
     var rules = lv.rules
 
-    // circuit 4 = the sealed mode: only the sealed recipes; circuits 0 to 3 = the HV greenhouse's rules (circuit 2 = fertilizer
-    // mode, with CO2 in a hatch the fertilizer + CO2 variant; circuit 3 = the boosters)
+    // circuit 5 / 6 = the sealed mode (Moon / Mars): a sealed recipe always runs (its own circuit and dimension condition decide);
+    // otherwise the HV greenhouse's rules
     function domeVeto(machine, recipe) {
       if (isAboveEv(recipe)) return true
-      var circuit = rules.machineCircuit(machine)
-      if (circuit >= SEALED_CIRCUIT) return !isSealedRecipe(recipe)
-      if (isSealedRecipe(recipe)) return true
-      if (circuit < 2) return false
-      if (rules.isBoosterRecipe(recipe)) return false
-      if (!rules.isFertilizerRecipe(recipe)) return true
-      return !rules.isCo2Recipe(recipe) && rules.machineHasFluid(machine, CO2)
+      if (isSealedRecipe(recipe)) return false
+      if (rules.machineCircuit(machine) < 2) return false
+      return !rules.isBoosterRecipe(recipe) && !rules.isFertilizerRecipe(recipe)
     }
 
     Pat.register(MACHINE, SPEC)

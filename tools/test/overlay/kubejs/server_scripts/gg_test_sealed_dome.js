@@ -10,7 +10,7 @@
 // sealed_dome@moon, hv_greenhouse@moon.
 //   static (no world)
 //     registry    the machine (recipe type gtceu:greenhouse), its structure description and the ids published by the scripts
-//     recipes     every plant of the family has its two sealed recipes: circuit 4, the plant not consumed, CO2 + water on the Moon and
+//     recipes     every plant of the family has its two sealed recipes: circuit 5 (Moon) or 6 (Mars), the plant not consumed, CO2 + water on the Moon and
 //                 water on Mars, x3 the base outputs, 100 mB of oxygen, 8 EU/t, 200 ticks, gcyr:luna / gcyr:mars
 //     lookup      GTM's recipe DB of gtceu:greenhouse finds EVERY recipe of the type from its own inputs: the sealed ones are there and
 //                 none of the old ones was pushed out by the prefix rule
@@ -19,11 +19,11 @@
 //                 prints and simulation recipes (amounts, EU/t, time) and their lookup
 //   in the world: on the Moon (gcyr:luna), band X 8960..9023, Z 0..15, Y 198..214
 //     sealed_dome@moon     DESCRIPTION, PLACED, FORMED, PATTERN, PREVIEW, then
-//                            PROCESS_sealed    circuit 4 + carrot + CO2 + water: 64 runs at once, x3 carrots and 100 mB of oxygen each
-//                            PROCESS_no_co2    circuit 4 + carrot + water only: nothing runs (the Mars recipe does not run on the Moon,
-//                                              and circuit 4 keeps the plain carrot recipe out)
+//                            PROCESS_sealed    circuit 5 + carrot + CO2 + water: 64 runs at once, x3 carrots and 100 mB of oxygen each
+//                            PROCESS_no_co2    circuit 6 + carrot + water only: nothing runs (the Mars recipe does not run on the Moon,
+//                                              and the circuit keeps the plain carrot recipe out)
 //                            PROCESS_family    no circuit, carrot only: the steam recipe runs (the dome is the family's step)
-//     hv_greenhouse@moon   the HV greenhouse beside it: PROCESS_sealed_refused (circuit 4 + carrot + CO2 + water: nothing), then
+//     hv_greenhouse@moon   the HV greenhouse beside it: PROCESS_sealed_refused (circuit 5 + carrot + CO2 + water: nothing), then
 //                          PROCESS_control (no circuit: the steam recipe runs, so the refusal comes from the veto, not a dead machine)
 // var + function everywhere: this Rhino throws "redeclaration of var" for const/let in functions that run more than once.
 (function () {
@@ -48,7 +48,8 @@
   var WATER = 'minecraft:water'
   var O2 = 'gtceu:oxygen'
   var DOOR = 'minecraft:iron_door'
-  var SEALED_CIRCUIT = 4
+  var MOON_CIRCUIT = 5
+  var MARS_CIRCUIT = 6
   var STEAM_CARROT = 'grindless:greenhouse/carrot'
   var SEALED_CARROT_MOON = 'grindless:greenhouse/ev/carrot_sealed_moon'
 
@@ -271,12 +272,13 @@
     var desc = global.grindless.patterns.describe(DOME)
     if (!desc) problems.push('no structure description')
     var SD = dome()
-    if (SD.machine !== DOME || SD.circuit !== SEALED_CIRCUIT || SD.cap !== 64) problems.push('global.grindless.sealedDome: machine=' + SD.machine +
-      ' circuit=' + SD.circuit + ' cap=' + SD.cap)
+    var circuits = SD.circuits || {}
+    if (SD.machine !== DOME || circuits.moon !== MOON_CIRCUIT || circuits.mars !== MARS_CIRCUIT || SD.cap !== 64) problems.push('global.grindless.sealedDome: machine=' + SD.machine +
+      ' circuits=' + circuits.moon + '/' + circuits.mars + ' cap=' + SD.cap)
     if (typeof SD.recipeId !== 'function') problems.push('global.grindless.sealedDome.recipeId is missing (server script not loaded?)')
     check(SCOPE, 'registry', problems.length === 0, problems.length > 0 ? problems.join('; ') :
       DOME + ' runs ' + types.join(',') + ', structure ' + desc.slices[0][0].length + 'x' + desc.slices[0].length + 'x' + desc.slices.length +
-      ', circuit ' + SD.circuit + ', cap ' + SD.cap)
+      ', circuits ' + circuits.moon + '/' + circuits.mars + ', cap ' + SD.cap)
   }
 
   function checkRecipes() {
@@ -297,7 +299,8 @@
         if (conds.indexOf('"' + site.dimension + '"') < 0) problems.push('no ' + site.dimension + ' condition (' + conds + ')')
         if (/"reverse":true/.test(conds)) problems.push('a reversed condition: ' + conds)
         var ins = itemContents(r, false)
-        var wantIns = ['circuit ' + SEALED_CIRCUIT + ' (not consumed)', entry.catalyst + ' x1 (not consumed)'].sort()
+        var wantIns = ['circuit ' + site.circuit + ' (not consumed)', entry.catalyst + ' x1 (not consumed)'].sort()
+        if (site.circuit !== (site.name === 'moon' ? MOON_CIRCUIT : MARS_CIRCUIT)) problems.push('site circuit ' + site.circuit)
         if (ins.join(' | ') !== wantIns.join(' | ')) problems.push('items in [' + ins.join(', ') + '] want [' + wantIns.join(', ') + ']')
         var fins = fluidStacks(lazy().RecipeHelper.getInputFluids(r))
         var wantFins = (site.co2 ? [CO2 + ' 200', WATER + ' 100'] : [WATER + ' 100']).sort()
@@ -785,9 +788,9 @@
 
   function domeScenarios() {
     return [
-      { name: 'sealed', ticks: 240, items: [{ id: CARROT, n: 1 }], circuit: SEALED_CIRCUIT,
+      { name: 'sealed', ticks: 240, items: [{ id: CARROT, n: 1 }], circuit: MOON_CIRCUIT,
         fluids: [{ id: CO2, mb: CO2_64 }, { id: WATER, mb: WATER_64 }], verify: sealedVerify },
-      { name: 'no_co2', ticks: 120, items: [{ id: CARROT, n: 1 }], circuit: SEALED_CIRCUIT,
+      { name: 'no_co2', ticks: 120, items: [{ id: CARROT, n: 1 }], circuit: MARS_CIRCUIT,
         fluids: [{ id: WATER, mb: WATER_64 }], verify: nothingVerify({ 'minecraft:water': WATER_64 }) },
       { name: 'family', ticks: 260, items: [{ id: CARROT, n: 1 }], circuit: 0, fluids: [], verify: familyVerify(64) }
     ]
@@ -795,7 +798,7 @@
 
   function hvScenarios() {
     return [
-      { name: 'sealed_refused', ticks: 120, items: [{ id: CARROT, n: 1 }], circuit: SEALED_CIRCUIT,
+      { name: 'sealed_refused', ticks: 120, items: [{ id: CARROT, n: 1 }], circuit: MOON_CIRCUIT,
         fluids: [{ id: CO2, mb: 32 * 200 }, { id: WATER, mb: 32 * 100 }],
         verify: nothingVerify({ 'gtceu:carbon_dioxide': 32 * 200, 'minecraft:water': 32 * 100 }) },
       { name: 'control', ticks: 260, items: [{ id: CARROT, n: 1 }], circuit: 0, fluids: [], verify: familyVerify(32) }

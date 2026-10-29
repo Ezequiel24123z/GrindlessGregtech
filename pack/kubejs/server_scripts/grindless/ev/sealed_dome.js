@@ -2,11 +2,11 @@
 // -----------------------------------------------------------------------------------------------
 // The Sealed Dome (gtceu:sealed_dome, startup_scripts/grindless/ev/sealed_dome.js): its sealed recipes and its crafting recipe.
 //
-//   gtceu:greenhouse, PROGRAMMED CIRCUIT 4 (the sealed mode), one pair per plant of the family (the steam table of
+//   gtceu:greenhouse, PROGRAMMED CIRCUIT 5 (Moon) or 6 (Mars), the sealed mode, one pair per plant of the family (the steam table of
 //   data/greenhouse.js and the LV extras of lv/greenhouse.js, global.grindless.lv.greenhouseExtras):
-//     grindless:greenhouse/ev/<plant>_sealed_moon   circuit 4 + plant (not consumed) + 200 mB carbon dioxide + 100 mB water
+//     grindless:greenhouse/ev/<plant>_sealed_moon   circuit 5 + plant (not consumed) + 200 mB carbon dioxide + 100 mB water
 //                                                    -> x3 the base output + 100 mB oxygen, .dimension('gcyr:luna')
-//     grindless:greenhouse/ev/<plant>_sealed_mars   circuit 4 + plant (not consumed) + 100 mB water
+//     grindless:greenhouse/ev/<plant>_sealed_mars   circuit 6 + plant (not consumed) + 100 mB water
 //                                                    -> x3 the base output + 100 mB oxygen, .dimension('gcyr:mars'): the CO2 is
 //                                                    breathed in from the Martian air, like the gas collector does
 //   Both run 200 ticks at 8 EU/t per run: the HV greenhouse's yield and time (its fertilizer + CO2 recipe, mv/family_greenhouse.js),
@@ -14,14 +14,14 @@
 //   Destinations: the oxygen goes to the suits, the cryogenic plant or the home network; the crops and the wood go home, where the
 //   brewery turns them into biomass (the wither's 400 mB per Nether Star, mobs.json) and food.
 //
-// The ids carry the ev/ segment: lower greenhouses skip a higher tier's recipes. They also need circuit 4, which the LV, MV and HV
+// The ids carry the ev/ segment: lower greenhouses skip a higher tier's recipes. They also need circuit 5 or 6, which the LV, MV and HV
 // vetoes already refuse (see the startup script).
 //
-// Lookup note (GTM's RecipeDB, api/recipe/lookup/StagingRecipeDB.java: ingredients sorted by how many recipes of the type use the same
-// one, ties in the order they were declared; every item ingredient of a KubeJS recipe is its own object, so items keep their order and
-// come before the shared fluids): the sealed recipes list the CIRCUIT first, then the plant, so no sealed recipe starts with the plant
-// alone (the steam recipe) or with the fertilizer. The Moon recipe declares the CO2 before the water, so the Mars recipe [circuit,
-// plant, water] is never a prefix of the Moon one [circuit, plant, CO2, water], whichever way the fluids sort.
+// Lookup note (GTM's RecipeDB drops a recipe whose ingredient path is a prefix of another's; the order of items vs fluids and of
+// the fluids themselves is not reliable, only the declared item order is): the sealed recipes list the CIRCUIT first, then the
+// plant, so no sealed recipe starts with the plant alone (the steam recipe) or with the fertilizer, and each site has its own circuit
+// so the Mars recipe [circuit 6, plant; water] is never a prefix of the Moon one [circuit 5, plant; CO2, water].
+// tools/analysis/test/recipe-twins.test.mjs (findPrefixHazards) checks the whole pack.
 //
 // Crafting table: HV greenhouse + EV hull + 2 EV pumps + 4 EV circuits (ev.md), GT shaped recipe with a wrench (w).
 (function () {
@@ -36,13 +36,13 @@
   const O2 = 'gtceu:oxygen'
   const O2_MB = 100
   const FACTOR = 3
-  const CIRCUIT = 4
   const EUT = 8
   const DURATION = 200
 
+  // one circuit per site, so the Mars recipe [circuit 6, plant; water] is never a prefix of the Moon one [circuit 5, plant; CO2, water]
   const SITES = [
-    { name: 'moon', dimension: 'gcyr:luna', co2: true },
-    { name: 'mars', dimension: 'gcyr:mars', co2: false }
+    { name: 'moon', dimension: 'gcyr:luna', co2: true, circuit: 5 },
+    { name: 'mars', dimension: 'gcyr:mars', co2: false, circuit: 6 }
   ]
 
   const PARTS = ['gtceu:hv_greenhouse', 'gtceu:ev_machine_hull', 'gtceu:ev_electric_pump', 'grindless:night_sky_radiator', 'grindless:stainless_steel_drill_bit']
@@ -51,7 +51,7 @@
     return 'grindless:greenhouse/ev/' + entryId + '_sealed_' + site
   }
   SD.sites = SITES
-  SD.numbers = { waterMb: WATER_MB, co2Mb: CO2_MB, o2Mb: O2_MB, factor: FACTOR, circuit: CIRCUIT, eut: EUT, duration: DURATION }
+  SD.numbers = { waterMb: WATER_MB, co2Mb: CO2_MB, o2Mb: O2_MB, factor: FACTOR, eut: EUT, duration: DURATION }
   SD.craftingId = 'grindless:assembler/sealed_dome'
 
   function addOutputs(recipe, outputs, factor) {
@@ -86,7 +86,7 @@
         SITES.forEach(function (site) {
           try {
             var recipe = event.recipes.gtceu.greenhouse('grindless:ev/' + entry.id + '_sealed_' + site.name)
-              .circuit(CIRCUIT)
+              .circuit(site.circuit)
               .notConsumable(entry.catalyst)
             if (site.co2) {
               recipe.inputFluids(Fluid.of(CO2, CO2_MB), Fluid.of(WATER, WATER_MB))

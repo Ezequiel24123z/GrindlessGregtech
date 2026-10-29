@@ -39,7 +39,7 @@ ClientEvents.lang('en_us', event => {
     add('emi.grindless.info.regolith_cell.1', "Electrolysis needs a platinum electrode in the input bus; titanium also needs a molten salt charge that is never used up. Each output hatch holds one gas, and if a bus or hatch fills up the cell stops.")
 
     add('emi.grindless.info.sealed_dome.0', "The Sealed Dome is a greenhouse sealed against the vacuum: it runs every Steam, LV, MV and HV Greenhouse recipe, many plants at once.")
-    add('emi.grindless.info.sealed_dome.1', "Programmed circuit 4 works only on the Moon and Mars: every plant grows from water and carbon dioxide with triple output and oxygen back. On the Moon the CO2 comes from home; on Mars the dome breathes it from the air.")
+    add('emi.grindless.info.sealed_dome.1', "Programmed circuit 5 (Moon) or 6 (Mars) works only there: every plant grows from water and carbon dioxide with triple output and oxygen back. On the Moon the CO2 comes from home; on Mars the dome breathes it from the air.")
 
     add('emi.grindless.info.ev_rtg.0', "The EV RTG is a radioisotope cell: put RTG pellets in its slot and it makes EV power for about an hour per pellet, with no fuel line and no sunlight.")
     add('emi.grindless.info.ev_rtg.1', "It works on every world, which makes it the steady power source for outposts such as Mercury's night.")
@@ -82,7 +82,7 @@ ClientEvents.lang('es_es', event => {
     add('emi.grindless.info.regolith_cell.1', "La electrólisis necesita un electrodo de platino en el bus de entrada; el titanio pide además una carga de sal fundida que nunca se gasta. Cada escotilla de salida guarda un solo gas, y si un bus o una escotilla se llena la celda se detiene.")
 
     add('emi.grindless.info.sealed_dome.0', "La cúpula sellada es un invernadero sellado contra el vacío: ejecuta todas las recetas de los invernaderos de vapor, LV, MV y HV, con muchas plantas a la vez.")
-    add('emi.grindless.info.sealed_dome.1', "El circuito programado 4 solo funciona en la Luna y Marte: cada planta crece con agua y dióxido de carbono, con triple producción y oxígeno de vuelta. En la Luna el CO2 viene de casa; en Marte la cúpula lo respira del aire.")
+    add('emi.grindless.info.sealed_dome.1', "El circuito programado 5 (Luna) o 6 (Marte) solo funciona allí: cada planta crece con agua y dióxido de carbono, con triple producción y oxígeno de vuelta. En la Luna el CO2 viene de casa; en Marte la cúpula lo respira del aire.")
 
     add('emi.grindless.info.ev_rtg.0', "El RTG EV es una celda de radioisótopos: pon pastillas RTG en su ranura y da energía EV durante cerca de una hora por pastilla, sin línea de combustible ni luz solar.")
     add('emi.grindless.info.ev_rtg.1', "Funciona en todos los mundos, lo que lo hace la fuente de energía constante para puestos como la noche de Mercurio.")

@@ -98,7 +98,7 @@
           "fluidsOut": [{ "id": "gtceu:nitrogen_15", "amount": 1000 }, { "id": "minecraft:water", "amount": 2000 }]
         },
         {
-          "name": "licl_salt", "circuit": 0, "eut": 1920, "duration": 100,
+          "name": "licl_salt", "circuit": 1, "eut": 1920, "duration": 100,
           "itemsIn": [{ "id": "gtceu:lithium_dust", "count": 1 }], "kept": [], "charge": [],
           "fluidsIn": [{ "id": "gtceu:chlorine", "amount": 500 }],
           "itemsOut": [],

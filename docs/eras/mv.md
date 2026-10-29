@@ -40,7 +40,7 @@ Same pattern as LV: a catalyst that is not used up, and inputs that come from an
 
 - **Registration:** `gtceu:mv_greenhouse`, type `gtceu:greenhouse`, the same spec as LV and `bores` with a cap of 16. Fertilizer per circuit and the same crop table: logs, rubber resin, sugar cane, potatoes, mushrooms and berries for pyrolysis, biomass and rubber.
 - **Decision:** no separate tree farm: the greenhouse already gathers logs, resin and crops, and there are no steps to join.
-- **Gains:** cap of 16 and an optional CO₂ input (200 mB per cycle): +50% output, and it returns 100 mB of O₂, which goes back to the EBF. CO₂ stays inert and can be drained (LV decision 9); the greenhouse and the methanol recipe (`methanol_from_dioxide`: 6,000 mB of H₂ per 1,000 of CO₂) give it a use. It comes from the arc furnace and from distilling wood gas and fermented biomass.
+- **Gains:** cap of 16 and an optional CO₂ input (200 mB per cycle, programmed circuit 4 with fertilizer): +50% output, and it returns 100 mB of O₂, which goes back to the EBF. CO₂ stays inert and can be drained (LV decision 9); the greenhouse and the methanol recipe (`methanol_from_dioxide`: 6,000 mB of H₂ per 1,000 of CO₂) give it a use. It comes from the arc furnace and from distilling wood gas and fermented biomass.
 - **Closes the loop:** sapling or seed at no cost, water from the pump, fertilizer from chemistry. Logs and crops feed pyrolysis, biomass and rubber.
 
 ### Creatures
