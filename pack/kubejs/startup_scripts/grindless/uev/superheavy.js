@@ -79,69 +79,89 @@
     m.noVoiding = 'grindless.machine.' + m.name + '.no_voiding'
   })
 
-  // A hollow shell: row 0 (X) takes the parts, the top row and the walls are casing (F), S is the controller (front wall, row 1, middle).
-  // Inside: air (#) with the shape's coils (M) and stable casing (T).
-  function inner(m, si, r, c) {
-    var last = m.depth - 1
-    if (m.shape === 'ring') {
-      var onRing = si >= 2 && si <= last - 2 && c >= 2 && c <= m.width - 3 &&
-        (si === 2 || si === last - 2 || c === 2 || c === m.width - 3)
-      if (!onRing) return '#'
-      return r === 2 ? 'M' : 'T'
-    }
-    if (m.shape === 'dipoles') {
-      if (r === 2 && (c === 1 || c === m.width - 2) && si % 2 === 0 && si >= 2 && si <= last - 2) return 'M'
-      return '#'
-    }
-    if (r === 1 && c >= 2 && c <= m.width - 3 && si >= 2 && si <= last - 2) return 'T'
-    return '#'
-  }
-
-  function slicesOf(m) {
-    var slices = []
-    var last = m.depth - 1
-    var mid = (m.width - 1) / 2
-    for (var si = 0; si < m.depth; si++) {
-      var rows = []
-      for (var r = 0; r < m.height; r++) {
-        var row = ''
-        for (var c = 0; c < m.width; c++) {
-          var ch
-          var isWall = si === 0 || si === last || c === 0 || c === m.width - 1
-          if (r === 0) ch = 'X'
-          else if (r === m.height - 1) ch = 'F'
-          else if (si === last && r === 1 && c === mid) ch = 'S'
-          else if (isWall) ch = 'F'
-          else ch = inner(m, si, r, c)
-          row += ch
-        }
-        rows.push(row)
+  // The cyclotron is a magnet ring with two dees in its gap, an injector stub on the left and the extraction line on the right; the
+  // separator a long gantry (beam tube, coil rings, a dipole pair mid-way, a beam dump); the lab a bench hall under a gas-line ridge.
+  // Built in the registry callback (shapes.js may load after this file).
+  function ringShape() {
+    var yoke = G.uevShapes.ring({
+      w: 13, d: 15, r1: 4, r2: 6,
+      prof: function (y, seg) {
+        if (y === 1 || y === 5) return 'A'
+        if (y === 2 || y === 4) return 'C'
+        if (y === 3) return seg % 2 === 0 ? 'P' : 'L'
+        return 'F'
+      },
+      hub: function (x, y, z, q) {
+        if (q >= 16) return ' '
+        if (y === 0) return 'A'
+        if (x !== 6 && y === 1) return 'B'
+        if (x !== 6 && y === 2) return 'A'
+        return y <= 5 ? '#' : ' '
       }
-      slices.push(rows)
+    })
+    return function (x, y, z) {
+      if (x < 2 || x > 14) {
+        if (z !== 7) return ' '
+        if (y === 1) return 'A'
+        if (y === 2) return x < 2 ? (x === 0 ? 'B' : 'C') : (x % 2 === 0 ? 'C' : 'P')
+        return ' '
+      }
+      return yoke(x - 2, y, z)
     }
-    return slices
   }
-
+  function gantryShape() {
+    var tube = G.uevShapes.gantry({
+      w: 9, h: 7, d: 19, ty: 3, pz: 4, ring: 2,
+      extra: function (x, y, z) {
+        var dx = x < 4 ? 4 - x : x - 4
+        if (z === 0 && dx <= 3 && y >= 1 && y <= 5) return 'F'
+        if (z === 1 && dx <= 2 && y >= 2 && y <= 4) return dx === 0 && y === 3 ? 'P' : 'A'
+        if (z >= 7 && z <= 11 && dx >= 2 && dx <= 3 && y >= 1 && y <= 5) return 'B'
+        if (z >= 7 && z <= 11 && dx <= 1 && (y === 1 || y === 5)) return 'C'
+        return null
+      }
+    })
+    return tube
+  }
+  function benchShape() {
+    return G.uevShapes.hall({
+      w: 9, d: 11, hh: 5, mull: 3, crown: G.uevShapes.ridge(9, 11),
+      inner: function (x, y, z) {
+        var dx = x < 4 ? 4 - x : x - 4
+        if (dx === 2 && y === 1 && z >= 2 && z <= 8) return z % 2 === 0 ? 'B' : 'A'
+        if (dx === 3 && y === 2 && z >= 2 && z <= 8 && z % 3 === 2) return 'L'
+        if (dx === 0 && z >= 3 && z <= 7 && y <= 3) return y === 3 ? 'C' : 'P'
+        return null
+      }
+    })
+  }
+  var SHAPES = {
+    heavy_ion_cyclotron: { w: 17, h: 7, d: 15, fn: ringShape },
+    recoil_separator: { w: 9, h: 7, d: 19, fn: gantryShape },
+    superheavy_chemistry_lab: { w: 9, h: 7, d: 11, fn: benchShape }
+  }
   SH.machines.forEach(function (m) {
-    m.spec = {
-      slices: slicesOf(m),
-      symbols: {
-        S: Pat.controller(),
-        X: Pat.oneOf(
-          Pat.block(SHIELD),
-          Pat.part('input_bus', { min: 1, max: 2 }),
-          Pat.part('output_bus', { min: 1, max: 2 }),
-          Pat.part('input_hatch', { min: 0, max: 2 }),
-          Pat.part('output_hatch', { min: 0, max: 2 }),
-          Pat.part('energy_input', { min: 1, max: m.energyMax })
-        ),
-        F: Pat.block(SHIELD),
-        T: Pat.block(TANK),
-        M: Pat.block(COIL),
-        '#': Pat.air()
-      }
-    }
+    m.width = SHAPES[m.name].w
+    m.height = SHAPES[m.name].h
+    m.depth = SHAPES[m.name].d
   })
+
+  function makeSpec(m) {
+    return G.uevShapes.spec(Pat, {
+      w: m.width, h: m.height, d: m.depth, fn: SHAPES[m.name].fn(),
+      parts: [
+        Pat.part('input_bus', { min: 1, max: 2 }),
+        Pat.part('output_bus', { min: 1, max: 2 }),
+        Pat.part('input_hatch', { min: 0, max: 2 }),
+        Pat.part('output_hatch', { min: 0, max: 2 }),
+        Pat.part('energy_input', { min: 1, max: m.energyMax })
+      ],
+      pal: {
+        F: SHIELD, A: TANK, L: 'gtceu:laminated_glass', P: 'gtceu:tungstensteel_pipe_casing',
+        C: COIL, B: 'gtceu:tungstensteel_gearbox', Q: 'tungsten_steel'
+      }
+    })
+  }
 
   // one EMI line per recipe, read from its data: what the circuit does
   function infoOf(dataKey) {
@@ -192,6 +212,7 @@
       var type = GTRecipeTypes.get(m.type)
       if (type == null) throw new Error(LOG + 'recipe type gtceu:' + m.type + ' is not registered')
       type.addDataInfo(infoOf(m.dataKey))
+      m.spec = makeSpec(m)
       Pat.register(m.machine, m.spec)
 
       event.create(m.name, 'multiblock')

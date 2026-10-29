@@ -1,9 +1,9 @@
-// priority: -7606
+// priority: -7586
 // -----------------------------------------------------------------------------------------------
 // UEV's megabar press (docs/eras/uev.md, machine 5, lines 7, 8 and 9; package UEV-A3): the multi-anvil press, its recipe type and the
 // package's own items. The recipes come from data/grindless/tables/megabar.json (server_scripts/grindless/uev/megabar.js).
 //
-//   gtceu:megabar_press       a 7 x 7 x 7 multi-anvil press (tungstensteel casing). The only maker of (La,Y)H10 superhydride
+//   gtceu:megabar_press       a 9 x 9 x 9 multi-anvil press (tungstensteel casing). The only maker of (La,Y)H10 superhydride
 //                             (gtceu:lay_superhydride_ingot) and of nanotwinned diamond. Its anvils wear.
 //   gtceu:megabar_synthesis   its recipe type (EU in). Circuit 1 superhydride (La-Y foil + pressed ammonia borane charge, a nanotwinned
 //                             diamond anvil that wears); circuit 2 nanotwinned diamond (a pellet of onion carbon).
@@ -49,48 +49,52 @@
     lang: 'Megabar Press',
     // items in: the foil, the charge, the anvil and the circuit; out: the ingot; fluid out: the hydrogen
     maxIO: { itemsIn: 4, itemsOut: 2, fluidsIn: 1, fluidsOut: 1 },
-    width: 7, height: 7, depth: 7
+    width: 9, height: 9, depth: 9
   }
 
-  // A hollow shell: row 0 (X) takes the parts, the top row and the walls are casing (F), S is the controller (front wall, row 1, middle).
-  function shell(m) {
-    var slices = []
-    var last = m.depth - 1
-    var mid = (m.width - 1) / 2
-    for (var si = 0; si < m.depth; si++) {
-      var rows = []
-      for (var r = 0; r < m.height; r++) {
-        var row = ''
-        for (var c = 0; c < m.width; c++) {
-          var ch
-          var isWall = si === 0 || si === last || c === 0 || c === m.width - 1
-          if (r === 0) ch = 'X'
-          else if (r === m.height - 1) ch = 'F'
-          else if (si === last && r === 1 && c === mid) ch = 'S'
-          else if (isWall) ch = 'F'
-          else ch = '#'
-          row += ch
-        }
-        rows.push(row)
-      }
-      slices.push(rows)
+  // A four-post press frame (9 x 9 x 9): a plinth (X: casing or a part) under the lower anvil (B) and a glass-caged press chamber; the
+  // upper anvil hangs from a crosshead (F ring, P beams, C coil) with the ram (P) on top; S is the controller on the front console (A).
+  function pressCell(x, y, z) {
+    var dx = x - 4
+    var dz = z - 4
+    var m = G.uevShapes.cheb(dx, dz)
+    var ax = dx < 0 ? -dx : dx
+    var az = dz < 0 ? -dz : dz
+    var post = ax === 3 && az === 3
+    if (y === 0) return m <= 3 || (z === 8 && ax <= 1) ? 'X' : ' '
+    if (z === 8) return y === 1 && ax <= 1 ? 'A' : ' '
+    if (post) return y === 1 ? 'A' : (y === 7 ? 'Q' : (y === 8 ? 'P' : 'Q'))
+    if (y === 1) return m <= 1 ? 'B' : (m === 2 ? 'A' : (m === 3 ? 'F' : ' '))
+    if (y === 2) return m <= 1 ? 'B' : ' '
+    if (y >= 3 && y <= 5) {
+      if (m <= 1) return '#'
+      if (m === 2 && (ax <= 1 || az <= 1)) return 'L'
+      if (m === 3 && (ax === 0 || az === 0) && y === 4) return 'P'
+      return ' '
     }
-    return slices
+    if (y === 6) return m <= 1 ? 'B' : (m === 2 && (ax === 0 || az === 0) ? 'F' : ' ')
+    if (y === 7) {
+      if (m === 3) return 'F'
+      if (m === 0) return 'C'
+      return ax === 0 || az === 0 ? 'P' : ' '
+    }
+    return m === 0 ? 'P' : ' '
   }
 
-  MB.machine.spec = {
-    slices: shell(MB.machine),
-    symbols: {
-      S: Pat.controller(),
-      X: Pat.oneOf.apply(null, [Pat.block(ROBUST)].concat([
+  function makeSpec(m) {
+    return G.uevShapes.spec(Pat, {
+      w: m.width, h: m.height, d: m.depth, fn: pressCell,
+      pal: {
+        F: ROBUST, A: 'gtceu:stable_machine_casing', B: 'gtceu:tungstensteel_gearbox', L: 'gtceu:laminated_glass',
+        P: 'gtceu:tungstensteel_pipe_casing', C: 'gtceu:naquadah_coil_block', Q: 'tungsten_steel'
+      },
+      parts: [
         Pat.part('input_bus', { min: 1, max: 2 }),
         Pat.part('output_bus', { min: 1, max: 2 }),
         Pat.part('output_hatch', { min: 0, max: 1 }),
         Pat.part('energy_input', { min: 1, max: 2 })
-      ])),
-      F: Pat.block(ROBUST),
-      '#': Pat.air()
-    }
+      ]
+    })
   }
 
   // one EMI line per recipe, read from its data: what the circuit does (and the named fiction)
@@ -131,6 +135,7 @@
     var type = GTRecipeTypes.get(m.type)
     if (type == null) throw new Error(LOG + 'recipe type gtceu:' + m.type + ' is not registered')
     type.addDataInfo(infoOf(m.dataKey))
+    m.spec = makeSpec(m)
     Pat.register(m.machine, m.spec)
 
     event.create(m.name, 'multiblock')

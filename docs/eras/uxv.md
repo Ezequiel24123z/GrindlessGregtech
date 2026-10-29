@@ -889,11 +889,11 @@ Short, in English, each with a small reward. They never block a recipe (rule 5).
 - Nothing registered is removed. New ids only.
 - The new dimension ids (`grindless:vela_pulsar_orbit`, `grindless:cas_a_remnant`) never change once shipped; `grindless:cygnus_x1_orbit` is UIV's and unchanged.
 - `highTierContent` stays off in the shipped `gtceu.yaml`. The release note lists the `gtceu:uxv_*` ids that would collide if it were turned on (S0-1).
-- **Widening UEV's builders** adds a tier; the UEV and UIV hulls and hatches keep their ids, labels and recipes (S0-1 reopens a v0.13.0 save).
+- **Widening UEV's builders** adds a tier; the UEV and UIV hulls and hatches keep their ids, labels and recipes (S0-1 reopens a v0.14.0 save).
 - **Older-file rows** add recipes only. The warp gate's rows and the swarm station's dimension list are widened, never narrowed.
 - **The Mk6's pattern is new.** GTM's rings, the Mk4 and the Mk5 are untouched.
 - **Arrival platforms** are placed once per world and never moved or rebuilt by a later version.
-- **C3 reopens a v0.13.0 save** and checks UIV machines, the Cygnus platform, the relays and the network.
+- **C3 reopens a v0.14.0 save** and checks UIV machines, the Cygnus platform, the relays and the network.
 
 ## Risks
 
@@ -954,7 +954,7 @@ Short, in English, each with a small reward. They never block a recipe (rule 5).
 
 ## Build order
 
-UXV is built in packages after v0.13.0, as UIV was. Each package below is one work-package issue (`.github/ISSUE_TEMPLATE/work-package.yml`), and its contract is written so the issue can be filled from this section alone. Each package's rationale is the machine sections and lines it cites.
+UXV is built in packages after v0.14.0, as UIV was. Each package below is one work-package issue (`.github/ISSUE_TEMPLATE/work-package.yml`), and its contract is written so the issue can be filled from this section alone. Each package's rationale is the machine sections and lines it cites.
 
 **Test bands** are assigned by the integrator when it opens each issue (`tools\test\Get-GGTestZone.ps1 -Next` after UIV-C3's row). The worker adds only that row to `tools/test/zones.json`. F1, F2, C1 and C2 have no native test and no band.
 
@@ -1106,7 +1106,7 @@ Order: S0-1 first (it fixes F1's list); S0-3, S0-9 and S0-10 (they fix B1); then
   - `startup_scripts/grindless/uev/foundation.js`: two lines, `:180` and `:193` → `.tiers(UEV, GTValues.UIV, GTValues.UXV)`, and the label ternaries beside them; the header comment at `:171`;
   - pinned tests: `tools/analysis/test/uiv-foundation.test.mjs` and the UEV foundation test, if they pin the tier list.
 - **References:** *Mods and integration*; `uev/foundation.js:165` (cable), `:172` (registry), `:178-180` (hatch helper), `:192-193` (hull); `startup_scripts/grindless/uiv/foundation.js:1-30` (header pattern); `uiv/uiv_components.js` (component pattern); Monifactory's `Post_UV_Components.js`.
-- **Depends on:** S0-1, S0-4 (casing), S0-8 (cable); UIV shipped (v0.13.0).
+- **Depends on:** S0-1, S0-4 (casing), S0-8 (cable); UIV shipped (v0.14.0).
 - **Invariants:**
   - no machine, no recipe;
   - the UEV and UIV hulls and hatches keep their ids, labels and recipes;
@@ -1596,9 +1596,9 @@ B1 opens both places. B2 and B3 work at Cygnus X-1 orbit (UIV's platform) and ca
 #### C3. Integration and release (integrator)
 
 - **Objective:**
-  - reopen a v0.13.0 save (*Save compatibility*);
+  - reopen a v0.14.0 save (*Save compatibility*);
   - T2 batch, then T3 (client legs one per run);
-  - `hidden_until.json` final; STATUS, DECISIONS and CREDITS lines; index; v0.14.0.
+  - `hidden_until.json` final; STATUS, DECISIONS and CREDITS lines; index; v0.15.0.
 - **Depends on:** C1, C2.
 
 ### Parallel and serial

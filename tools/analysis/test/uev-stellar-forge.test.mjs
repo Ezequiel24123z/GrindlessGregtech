@@ -83,7 +83,7 @@ test('plasma and ash: once per run, whatever the copies; nothing without plasma'
   assert.equal(C.heatOf(12600, true) - C.heatOf(12600, false), 900);
 });
 
-test('the pattern: 7 x 16 x 7 (<= 16 tall), four rings of 8 coils, one controller', () => {
+test('the pattern: 9 x 16 x 9 (<= 16 tall), four rings of 8 coils, one controller', () => {
   assert.ok(SF.size.height <= 16);
   assert.equal(SF.coilCells, 32);
   assert.equal(SF.type, 'gtceu:electric_blast_furnace');
