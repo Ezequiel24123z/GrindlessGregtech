@@ -206,6 +206,13 @@ function Invoke-GGClientSuite {
     $overlay = Join-Path $global:GG.RunDir 'overlay'
     New-Item -ItemType Directory -Force -Path $res | Out-Null
     $timeout = [int]$Req.clientTimeoutSec
+    $nativeTimeout = [int]$Req.nativeTimeoutSec
+    if ([int]$Req.emiAuditTimeoutSec -gt 600) {
+        $timeout = [int]$Req.emiAuditTimeoutSec
+        $nativeTimeout = $timeout
+    }
+    $clientXmx = [string]$Req.clientXmx
+    if ([string]$Req.emiAuditClientXmx -ne '4G') { $clientXmx = [string]$Req.emiAuditClientXmx }
     $renderer = [string]$Req.clientRenderer
     if ($renderer -ne 'stub') { $renderer = 'mesa' }
     $ctx = @{ Proc = $null; Hmc = $null }
@@ -240,6 +247,22 @@ function Invoke-GGClientSuite {
             $ok = Invoke-GGStage 'overlay-client' {
                 $rel = @(Add-GGOverlay $overlay $inst)
                 [IO.File]::WriteAllLines((Join-Path $res 'overlay-files.txt'), [string[]]$rel)
+                # Mandatory even when a caller supplies a custom overlay or disables its marker.
+                $emiMarker = Join-Path $inst 'kubejs\config\gg_test_emi_coverage.json'
+                [void][IO.Directory]::CreateDirectory((Split-Path -Parent $emiMarker))
+                $emiOptions = [pscustomobject]@{ enabled = $true }
+                if (Test-Path $emiMarker) {
+                    $emiOptions = [IO.File]::ReadAllText($emiMarker) | ConvertFrom-Json
+                    $emiOptions | Add-Member -NotePropertyName enabled -NotePropertyValue $true -Force
+                }
+                $ctx.EmiPreview = $emiOptions.renderPreview -eq $true
+                if ([int]$Req.emiAuditTimeoutSec -gt 600) {
+                    $emiOptions | Add-Member -NotePropertyName holdTimeoutSec -NotePropertyValue ([int]$Req.emiAuditTimeoutSec) -Force
+                }
+                [IO.File]::WriteAllText($emiMarker, ($emiOptions | ConvertTo-Json), (New-Object Text.UTF8Encoding($false)))
+                if (-not (Test-Path (Join-Path $inst 'kubejs\client_scripts\gg_test_emi_coverage.js'))) {
+                    throw 'client overlay is missing the mandatory EMI coverage fixture'
+                }
                 # optional test-only removal of mods (-ClientExclude); the default keeps the real client mod set
                 $excluded = @()
                 $patterns = @(Get-GGList $Req.clientExclude)
@@ -263,11 +286,11 @@ function Invoke-GGClientSuite {
 
         if ($ok) {
             $ok = Invoke-GGStage 'client-launch' {
-                if (-not $global:GG.NativeBudget) { $global:GG.NativeBudget = @{ Clock = [Diagnostics.Stopwatch]::StartNew(); TimeoutSec = [int]$Req.nativeTimeoutSec } }
+                if (-not $global:GG.NativeBudget) { $global:GG.NativeBudget = @{ Clock = [Diagnostics.Stopwatch]::StartNew(); TimeoutSec = $nativeTimeout } }
                 [void](Get-GGNativeTimeoutMs $global:GG.NativeBudget 1)
                 $lw = ''
                 if ($renderer -eq 'stub') { $lw = '-lwjgl ' }
-                $argLine = "launch --offline $($lw)--packwiz `"$inst`" client --jvm `"-Xms$($Req.clientXms) -Xmx$($Req.clientXmx) -Djava.awt.headless=true -DMcRuntimeGameTest=false`""
+                $argLine = "launch --offline $($lw)--packwiz `"$inst`" client --jvm `"-Xms$($Req.clientXms) -Xmx$clientXmx -Djava.awt.headless=true -DMcRuntimeGameTest=false`""
                 $envs = @("HMC_FILES_LOCATION=$($ctx.Hmc.Home)")
                 $file = $ctx.Hmc.Exe
                 if ($global:GGIsLinux) {
@@ -284,7 +307,7 @@ function Invoke-GGClientSuite {
                 $g = [GGProc]::Start($file, $argLine, $inst, (Join-Path $res 'client-hmc-stdout.log'), (Join-Path $res 'client-hmc-stderr.log'), $envs)
                 $ctx.Proc = $g
                 Set-GGSlotState $null $true
-                Write-GGLog "HeadlessMC started (pid $($g.Id), renderer $renderer); first run installs the Forge client (slow)"
+                Write-GGLog "HeadlessMC started (pid $($g.Id), renderer $renderer, Xmx=$clientXmx, native ceiling=$($nativeTimeout)s); first run installs the Forge client (slow)"
                 $sw = [Diagnostics.Stopwatch]::StartNew()
                 $lastPrint = 0
                 $lastProbe = -100
@@ -328,6 +351,34 @@ function Invoke-GGClientSuite {
                 }
                 if ($crashes.Count -gt 0) { throw ("client exited 0 but crash reports exist: {0}" -f ($crashes -join ', ')) }
                 if (-not $finished) { throw ("client exited 0 after {0}s but 'Successfully finished.' was not logged" -f [int]$sw.Elapsed.TotalSeconds) }
+                $emiReport = Join-Path $inst 'kubejs\exported\gg_emi_coverage_report.json'
+                # EmiLog.error(String, Throwable) omits the [EMI] prefix, unlike its info methods.
+                $emiPluginErrors = @($gameLog -split '\r?\n' | Where-Object {
+                    $_ -match 'Exception .*(plugin|JEI|JEMI|vanilla recipe)|Critical error occured during reload' -or
+                    $_ -match '\[EMI\].*(Exception|Critical error|Error .*recipe|Failed .*plugin|Stack illegally self-mutated)'
+                })
+                if (Test-Path $emiReport) {
+                    $emiDoc = [IO.File]::ReadAllText($emiReport) | ConvertFrom-Json
+                    $emiDoc | Add-Member -NotePropertyName pluginLogErrors -NotePropertyValue $emiPluginErrors -Force
+                    [IO.File]::WriteAllText($emiReport, ($emiDoc | ConvertTo-Json -Depth 100), (New-Object Text.UTF8Encoding($false)))
+                }
+                $emiFailures = @($emiPluginErrors) + @($gameLog -split '\r?\n' | Where-Object {
+                    $_ -match 'GGTEST\|emi_coverage\|[^|]+\|FAIL'
+                })
+                if ($emiFailures.Count -gt 0) {
+                    throw ('EMI reload/audit failed: ' + (($emiFailures | Select-Object -First 3) -join ' / '))
+                }
+                if ($gameLog -notmatch '\[EMI\] Reloaded EMI in ' -or
+                    $gameLog -notmatch 'GGTEST\|emi_coverage\|emi_loaded\|PASS' -or
+                    $gameLog -notmatch 'GGTEST\|emi_coverage\|all\|PASS' -or
+                    $gameLog -notmatch 'GGTEST\|emi_coverage\|DONE' -or
+                    -not (Test-Path $emiReport)) {
+                    throw 'client finished without a completed, passing EMI coverage audit and exported report'
+                }
+                if ($ctx.EmiPreview -and ($gameLog -notmatch 'GGTEST\|emi_coverage\|preview_render\|PASS' -or
+                    -not (Test-Path (Join-Path $inst 'kubejs\exported\gg_emi_mega_factory.png')))) {
+                    throw 'named MEGA preview render proof did not finish or save its screenshot'
+                }
                 $proofTxt = ''
                 $st = 'PASS'
                 if ($renderer -eq 'mesa') {
