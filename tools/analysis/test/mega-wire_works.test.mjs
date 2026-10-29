@@ -130,7 +130,7 @@ test('parallel figure: fixed ceiling 8, cut by the energy of the hatches (formul
   assert.equal(figure(256, 8, 3), 3);
 });
 
-test('controller recipe: 4 LV wiremills, 4 LV benders, 4 LV circuits, steel plates; ids exist in the jar names', () => {
+test('controller recipe: 4 LV wiremills, 4 LV benders, 4 LV circuits, steel plates, graphite electrodes (annealing); ids exist in the jar names', () => {
   const h = harness();
   const added = [];
   const chainable = (id, type) => {
@@ -149,7 +149,7 @@ test('controller recipe: 4 LV wiremills, 4 LV benders, 4 LV circuits, steel plat
   assert.equal(added.length, 1);
   const r = added[0];
   assert.equal(r.id, h.G.megaWireWorks.crafting);
-  assert.deepEqual(plain(r.inputs), ['4x gtceu:lv_wiremill', '4x gtceu:lv_bender', '4x #gtceu:circuits/lv', '8x #forge:plates/steel']);
+  assert.deepEqual(plain(r.inputs), ['4x gtceu:lv_wiremill', '4x gtceu:lv_bender', '4x #gtceu:circuits/lv', '8x #forge:plates/steel', '2x grindless:graphite_electrode']);
   assert.deepEqual(plain(r.outputs), ['gtceu:wire_works']);
   assert.equal(r.eut, 30);
   assert.ok(r.duration > 0);

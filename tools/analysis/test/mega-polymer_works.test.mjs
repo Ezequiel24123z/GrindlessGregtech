@@ -241,7 +241,7 @@ test('controller recipe: 2 MV chemical reactors, 2 MV fluid solidifiers, 2 MV mi
   assert.equal(out.assembler.length, 1);
   const r = out.assembler[0];
   assert.equal(r.id, h.G.megaPolymerWorks.crafting);
-  assert.deepEqual(plain(r.itemInputs), ['2x gtceu:mv_chemical_reactor', '2x gtceu:mv_fluid_solidifier', '2x gtceu:mv_mixer', '4x #gtceu:circuits/mv']);
+  assert.deepEqual(plain(r.itemInputs), ['2x gtceu:mv_chemical_reactor', '2x gtceu:mv_fluid_solidifier', '2x gtceu:mv_mixer', '4x #gtceu:circuits/mv', '2x grindless:contact_catalyst']);
   assert.deepEqual(plain(r.itemOutputs), ['gtceu:polymer_works']);
   assert.ok(r.eut <= 128 && r.eut > 0);
   assert.ok(r.duration > 0);

@@ -127,8 +127,8 @@
   const COLLECTOR = 'gtceu:ev_gas_collector'
   const ELECTROLYZER = 'gtceu:ev_electrolyzer'
   const REACTOR = 'gtceu:ev_chemical_reactor'
-  MS.craftingParts = [HULL, COLLECTOR, ELECTROLYZER, REACTOR, 'gtceu:atmosphere_processor']
-  MS.craftingRecipe = 'grindless:crafting/atmosphere_processor'
+  MS.craftingParts = [HULL, COLLECTOR, ELECTROLYZER, REACTOR, 'grindless:night_sky_radiator', 'grindless:contact_catalyst', 'gtceu:atmosphere_processor']
+  MS.craftingRecipe = 'grindless:assembler/atmosphere_processor'
 
   // an uncaught error here would stop KubeJS from running the recipe handlers of the scripts that load after this one
   ServerEvents.recipes(function (event) {
@@ -172,13 +172,11 @@
       console.error('[grindless/ev] atmosphere processor crafting skipped, unknown item(s): ' + missing.join(', '))
       return
     }
-    event.recipes.gtceu.shaped('gtceu:atmosphere_processor', ['CGC', 'EHR', 'C C'], {
-      C: '#gtceu:circuits/ev',
-      G: COLLECTOR,
-      E: ELECTROLYZER,
-      H: HULL,
-      R: REACTOR
-    }).id(MS.craftingRecipe)
+    event.recipes.gtceu.assembler('grindless:atmosphere_processor')
+      .itemInputs(HULL, COLLECTOR, ELECTROLYZER, REACTOR, '4x #gtceu:circuits/ev', '2x grindless:night_sky_radiator', '2x grindless:contact_catalyst')
+      .inputFluids(Fluid.of('gtceu:hydrogen', 2000))
+      .itemOutputs('gtceu:atmosphere_processor')
+      .EUt(120).duration(400)
     console.info('[grindless/ev] atmosphere processor crafting recipe added')
   }
 })()

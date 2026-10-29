@@ -51,7 +51,8 @@
         D: 'grindless:vanadium_steel_drill_bit'
       }).id('grindless:crafting/hv_vein_drill')
 
-      event.recipes.gtceu.shaped('gtceu:hv_greenhouse', ['GSG', 'MHP', 'CFC'], {
+      event.recipes.gtceu.shaped('gtceu:hv_greenhouse', ['DSG', 'MHP', 'CFC'], {
+        D: 'grindless:stainless_steel_drill_bit',
         G: '#forge:glass',
         S: '#minecraft:saplings',
         M: 'gtceu:hv_electric_motor',

@@ -37,7 +37,7 @@ Era is taken from the registering script's `grindless/<era>/` folder.
 Ore indicators, one per vein: `gtceu:merrillite_indicator` (ev), `iridosmine_indicator` (iv), `meteoric_iron_indicator` and `tetrataenite_indicator` (luv), `deuterium_rich_ice_indicator` (mars). Fix: give each an info page ("shows where the vein is; keep in the scanner") or consume it in the matching scanning recipe.
 
 ### hidden_with_recipes
-- **hv** `grindless:vein_sample_scheelite`: hidden from the index yet 1 recipe uses it. Add the item to `grindless:hidden_with_recipes` or drop the recipe.
+- **hv** `grindless:vein_sample_scheelite`: hidden from the index yet 1 recipe uses it. Add the item to `grindless:hidden_with_recipes` or drop the recipe. **QR-R1: kept on purpose.** The recipe is the old-save conversion into the empty vein probe (`keepRecipes: true` in hidden_until.json); hiding it with the tag would hide that recipe. The audit row is a false positive: allowlist it in process-audit (lib, not this package). The trivial_step rows below are all UV and later, none in steam to ev.
 
 ### machine_no_info
 - **iv** `gtceu:ev_rtg`: no tooltip and no EMI page. Add `grindless.machine.ev_rtg.tooltip.N` or a page.

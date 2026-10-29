@@ -347,7 +347,7 @@
   }
 
   function checkCrafting() {
-    var id = dome().craftingId || 'grindless:crafting/sealed_dome'
+    var id = dome().craftingId || 'grindless:assembler/sealed_dome'
     var r = byId(id)
     var result = '?'
     if (r !== null) {

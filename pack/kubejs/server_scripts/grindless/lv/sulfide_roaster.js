@@ -141,7 +141,8 @@
       .EUt(16).duration(200)
 
     // the controller: built with the LV chemical reactor it replaces
-    event.recipes.gtceu.shaped('gtceu:sulfide_roaster', ['CRC', 'PHP', 'BKB'], {
+    event.recipes.gtceu.shaped('gtceu:sulfide_roaster', ['CRC', 'PHP', 'BKT'], {
+      T: 'grindless:contact_catalyst',
       C: '#gtceu:circuits/lv',
       R: 'gtceu:lv_chemical_reactor',
       P: 'gtceu:lv_electric_pump',

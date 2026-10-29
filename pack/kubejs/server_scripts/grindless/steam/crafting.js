@@ -41,7 +41,8 @@
     })
 
     // ---- controllers
-    event.recipes.gtceu.shaped('gtceu:steam_vein_drill', ['PwP', 'GMG', 'SCS'], {
+    event.recipes.gtceu.shaped('gtceu:steam_vein_drill', ['DwP', 'GMG', 'SCS'], {
+      D: 'grindless:bronze_drill_bit',
       P: '#forge:plates/bronze',
       G: '#forge:gears/bronze',
       M: 'gtceu:lp_steam_miner',
@@ -49,9 +50,10 @@
       C: 'gtceu:steam_machine_casing'
     }).id('grindless:crafting/steam_vein_drill')
 
-    event.recipes.gtceu.shaped('gtceu:steam_greenhouse', ['GSG', 'PHP', 'CwC'], {
+    event.recipes.gtceu.shaped('gtceu:steam_greenhouse', ['GSG', 'DHP', 'CwC'], {
       G: '#forge:glass',
       S: '#minecraft:saplings',
+      D: 'grindless:bronze_drill_bit',
       P: '#forge:plates/bronze',
       H: 'gtceu:bronze_machine_casing',
       C: 'gtceu:steam_machine_casing'

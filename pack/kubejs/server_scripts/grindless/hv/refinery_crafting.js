@@ -29,8 +29,8 @@
   const SILICA = 'gtceu:silicon_dioxide_dust'
   const ASH = 'gtceu:ash_dust'
 
-  const REFINERY_PARTS = [HULL, DISTILLERY, REACTOR, PUMP, 'gtceu:refinery']
-  const REFORMER_PARTS = [HULL, REACTOR, PUMP, 'gtceu:reformer']
+  const REFINERY_PARTS = [HULL, DISTILLERY, REACTOR, PUMP, 'grindless:hydrotreating_catalyst', 'gtceu:refinery']
+  const REFORMER_PARTS = [HULL, REACTOR, PUMP, 'grindless:reforming_catalyst', 'gtceu:reformer']
   const CATALYST_PARTS = ['gtceu:cobalt_dust', 'gtceu:molybdenum_dust', 'gtceu:platinum_dust', SILICA, 'grindless:hydrotreating_catalyst',
     'grindless:reforming_catalyst']
   REF.craftingParts = REFINERY_PARTS
@@ -60,7 +60,7 @@
       console.error('[grindless/hv] Refinery recipe skipped, unknown item(s): ' + missingRefinery.join(', '))
     } else {
       event.recipes.gtceu.assembler('grindless:refinery')
-        .itemInputs(HULL, DISTILLERY, '2x ' + REACTOR, '2x ' + PUMP, '4x #gtceu:circuits/hv')
+        .itemInputs(HULL, DISTILLERY, '2x ' + REACTOR, '2x ' + PUMP, '4x #gtceu:circuits/hv', '2x grindless:hydrotreating_catalyst')
         .itemOutputs('gtceu:refinery')
         .EUt(120).duration(400)
     }
@@ -69,7 +69,8 @@
     if (missingReformer.length > 0) {
       console.error('[grindless/hv] Catalytic Reformer recipe skipped, unknown item(s): ' + missingReformer.join(', '))
     } else {
-      event.recipes.gtceu.shaped('gtceu:reformer', ['CRC', 'PHP', 'C C'], {
+      event.recipes.gtceu.shaped('gtceu:reformer', ['CRC', 'PHP', 'C K'], {
+        K: 'grindless:reforming_catalyst',
         C: '#gtceu:circuits/hv',
         R: REACTOR,
         P: PUMP,
