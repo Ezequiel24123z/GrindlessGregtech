@@ -14,7 +14,7 @@
 //
 // Voltage: UEV. New ids: the items below; the F1 ids (aerogel_tile, pulsar_navigation_chart, sdd, lobster_eye_mcp, uev_* parts, nuclear_clock,
 // photonic_casing) are not registered again.
-// Geometry (lib/patterns.js): 5 wide x 5 high x 7 deep, hollow shells. Textures: tools/assets/Build-UEVAlphaCentauriTextures.ps1.
+// Geometry (lib/patterns.js): a dish, a long bench hall and an antenna hall (shapes in uev/shapes.js). Textures: tools/assets/Build-UEVAlphaCentauriTextures.ps1.
 // Names: client_scripts/grindless/uev_alpha_centauri_lang.js. Published for the recipe script: global.grindless.uevAlphaCentauri.
 (function () {
   const G = global.grindless
@@ -70,50 +70,58 @@
     }
   }
 
-  // A hollow shell: row 0 (X) takes the parts, the top row and the walls are casing (F), S is the controller (front wall, row 1, middle).
-  function shell(m) {
-    var slices = []
-    var last = m.depth - 1
-    var mid = (m.width - 1) / 2
-    for (var si = 0; si < m.depth; si++) {
-      var rows = []
-      for (var r = 0; r < m.height; r++) {
-        var row = ''
-        for (var c = 0; c < m.width; c++) {
-          var ch
-          var isWall = si === 0 || si === last || c === 0 || c === m.width - 1
-          if (r === 0) ch = 'X'
-          else if (r === m.height - 1) ch = 'F'
-          else if (si === last && r === 1 && c === mid) ch = 'S'
-          else if (isWall) ch = 'F'
-          else ch = '#'
-          row += ch
-        }
-        rows.push(row)
+  // The collector is a dish (a glass hall under a big sky-facing bowl), the lab a long hall with benches under a pipe ridge, the timing
+  // station a hall under an antenna mast. Built in the registry callback (shapes.js may load after this file).
+  var SHAPES = {
+    collector: { w: 11, h: 12, d: 11, fn: function () { return G.uevShapes.hall({ w: 11, d: 11, hh: 5, crown: G.uevShapes.dish(11, 11, 4) }) } },
+    lab: {
+      w: 9, h: 7, d: 13,
+      fn: function () {
+        return G.uevShapes.hall({
+          w: 9, d: 13, hh: 5, crown: G.uevShapes.ridge(9, 13),
+          inner: function (x, y, z) {
+            var ax = x < 4 ? 4 - x : x - 4
+            if (ax === 2 && z % 2 === 0 && z >= 2 && z <= 8) return y === 1 ? 'B' : (y === 2 ? 'L' : null)
+            if (ax === 0 && z === 6 && y <= 3) return 'C'
+            return null
+          }
+        })
       }
-      slices.push(rows)
+    },
+    station: {
+      w: 7, h: 11, d: 9,
+      fn: function () {
+        return G.uevShapes.hall({
+          w: 7, d: 9, hh: 4, mull: 2, crown: G.uevShapes.mast(7, 9, 7),
+          inner: function (x, y, z) { return x === 3 && z === 4 && y <= 2 ? 'C' : null }
+        })
+      }
     }
-    return slices
   }
-
   Object.keys(AC.machines).forEach(function (k) {
     var m = AC.machines[k]
-    m.spec = {
-      slices: shell(m),
-      symbols: {
-        S: Pat.controller(),
-        X: Pat.oneOf.apply(null, [Pat.block(m.casing)].concat([
-          Pat.part('input_bus', { min: 1, max: 2 }),
-          Pat.part('input_hatch', { min: 0, max: 1 }),
-          Pat.part('output_hatch', { min: 0, max: 1 }),
-          Pat.part('output_bus', { min: 1, max: 2 }),
-          Pat.part('energy_input', { min: 1, max: 2 })
-        ])),
-        F: Pat.block(m.casing),
-        '#': Pat.air()
-      }
-    }
+    m.width = SHAPES[k].w
+    m.height = SHAPES[k].h
+    m.depth = SHAPES[k].d
   })
+
+  function makeSpec(k) {
+    var m = AC.machines[k]
+    return G.uevShapes.spec(Pat, {
+      w: m.width, h: m.height, d: m.depth, fn: SHAPES[k].fn(),
+      pal: {
+        F: m.casing, A: 'gtceu:stable_machine_casing', L: 'gtceu:laminated_glass', P: 'gtceu:tungstensteel_pipe_casing',
+        C: 'gtceu:trinium_coil_block', B: 'gtceu:tungstensteel_gearbox', Q: 'tungsten_steel'
+      },
+      parts: [
+        Pat.part('input_bus', { min: 1, max: 2 }),
+        Pat.part('input_hatch', { min: 0, max: 1 }),
+        Pat.part('output_hatch', { min: 0, max: 1 }),
+        Pat.part('output_bus', { min: 1, max: 2 }),
+        Pat.part('energy_input', { min: 1, max: 2 })
+      ]
+    })
+  }
 
   // one EMI line per recipe, read from its data: what the circuit does
   function infoOf(dataKey) {
@@ -162,6 +170,7 @@
       var type = GTRecipeTypes.get(m.type)
       if (type == null) throw new Error(LOG + 'recipe type gtceu:' + m.type + ' is not registered')
       type.addDataInfo(infoOf(m.dataKey))
+      m.spec = makeSpec(k)
       Pat.register(m.machine, m.spec)
       event.create(m.name, 'multiblock')
         .langValue(m.lang)

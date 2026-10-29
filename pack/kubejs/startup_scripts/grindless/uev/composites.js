@@ -12,7 +12,7 @@
 //                                the HCl goes to EV's extraction cascade), 2 W-fibre preform + WF6 -> grindless:wf_w_tile (the HF goes to the IV
 //                                fluorspar kiln). Refuses to void fluids.
 //
-// F1's ids (uev/foundation.js) are not registered again. Geometry (lib/patterns.js): 5 wide x 5 high x 5 deep hollow shells.
+// F1's ids (uev/foundation.js) are not registered again. Geometry (lib/patterns.js): towers (shapes in uev/shapes.js).
 // Textures: tools/assets/Build-UEVCompositesTextures.ps1. Names: client_scripts/grindless/uev_composites_lang.js.
 // Published for the recipe script: global.grindless.composites.
 (function () {
@@ -77,42 +77,56 @@
     }
   }
 
-  // A hollow shell: row 0 (X) takes the parts, the top row and the walls are casing (F), S is the controller (front wall, row 1, middle).
-  function shell(m) {
-    var slices = []
-    var last = m.depth - 1
-    var mid = (m.width - 1) / 2
-    for (var si = 0; si < m.depth; si++) {
-      var rows = []
-      for (var r = 0; r < m.height; r++) {
-        var row = ''
-        for (var c = 0; c < m.width; c++) {
-          var ch
-          var isWall = si === 0 || si === last || c === 0 || c === m.width - 1
-          if (r === 0) ch = 'X'
-          else if (r === m.height - 1) ch = 'F'
-          else if (si === last && r === 1 && c === mid) ch = 'S'
-          else if (isWall) ch = 'F'
-          else ch = '#'
-          row += ch
-        }
-        rows.push(row)
+  // The works is a coil-banded furnace tower, the fibre plant a tall spinning tower with a draw column, the CVI furnace a squat bell
+  // over a wide base. Built in the registry callback (shapes.js may load after this file).
+  var SHAPES = {
+    works: {
+      w: 7, h: 11, d: 7,
+      fn: function () {
+        return G.uevShapes.tower({
+          w: 7, d: 7, baseH: 3, th: 9, inset: 1, band: 3, bandChar: 'C',
+          core: function (x, y, z) { return x === 3 && z === 3 && y <= 5 ? 'B' : null },
+          crown: G.uevShapes.mast(7, 7, 2)
+        })
       }
-      slices.push(rows)
+    },
+    fibre: {
+      w: 7, h: 16, d: 7,
+      fn: function () {
+        return G.uevShapes.tower({
+          w: 7, d: 7, baseH: 3, th: 14, inset: 1, band: 4, bandChar: 'P',
+          core: function (x, y, z) { return x === 3 && z === 3 ? 'P' : null },
+          crown: G.uevShapes.mast(7, 7, 2)
+        })
+      }
+    },
+    cvi: {
+      w: 9, h: 9, d: 9,
+      fn: function () {
+        return G.uevShapes.tower({
+          w: 9, d: 9, baseH: 3, th: 8, inset: 2, band: 3, bandChar: 'C',
+          core: function (x, y, z) { return x === 4 && z === 4 && y <= 4 ? 'B' : null },
+          crown: G.uevShapes.mast(9, 9, 1)
+        })
+      }
     }
-    return slices
   }
+  Object.keys(CO.machines).forEach(function (k) {
+    var m = CO.machines[k]
+    m.width = SHAPES[k].w
+    m.height = SHAPES[k].h
+    m.depth = SHAPES[k].d
+  })
 
-  function specOf(m, casing, parts) {
-    return {
-      slices: shell(m),
-      symbols: {
-        S: Pat.controller(),
-        X: Pat.oneOf.apply(null, [Pat.block(casing)].concat(parts)),
-        F: Pat.block(casing),
-        '#': Pat.air()
+  function specOf(k, casing, parts) {
+    var m = CO.machines[k]
+    return G.uevShapes.spec(Pat, {
+      w: m.width, h: m.height, d: m.depth, fn: SHAPES[k].fn(), parts: parts,
+      pal: {
+        F: casing, A: 'gtceu:stable_machine_casing', L: 'gtceu:laminated_glass', P: 'gtceu:tungstensteel_pipe_casing',
+        C: 'gtceu:trinium_coil_block', B: 'gtceu:tungstensteel_gearbox', Q: 'tungsten_steel'
       }
-    }
+    })
   }
   function parts(fluidIn, fluidOut) {
     return [
@@ -123,9 +137,11 @@
       Pat.part('energy_input', { min: 1, max: 2 })
     ]
   }
-  CO.machines.works.spec = specOf(CO.machines.works, HEAT, parts(0, 0))
-  CO.machines.fibre.spec = specOf(CO.machines.fibre, CLEAN, parts(0, 1))
-  CO.machines.cvi.spec = specOf(CO.machines.cvi, HEAT, parts(1, 1))
+  function makeSpec(k) {
+    if (k === 'works') return specOf(k, HEAT, parts(0, 0))
+    if (k === 'fibre') return specOf(k, CLEAN, parts(0, 1))
+    return specOf(k, HEAT, parts(1, 1))
+  }
 
   // one EMI line per recipe, read from its data: what the circuit does
   function infoOf(dataKey) {
@@ -181,6 +197,7 @@
       var type = GTRecipeTypes.get(m.type)
       if (type == null) throw new Error(LOG + 'recipe type gtceu:' + m.type + ' is not registered')
       type.addDataInfo(infoOf(m.dataKey))
+      m.spec = makeSpec(k)
       Pat.register(m.machine, m.spec)
       var casing = casings[k][0]
       var builder = event.create(m.name, 'multiblock')

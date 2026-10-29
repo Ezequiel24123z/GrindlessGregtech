@@ -102,35 +102,32 @@
     return slices
   }
 
-  // The refinery: a lined retort. Row 0 the floor (X: casing or a part), rows 1-3 the walls (B) round an air chamber (#), a pipe column
-  // (P) up its middle for the CO feed, row 4 the roof; S is the controller (front wall, row 1, middle).
-  function retortSlices(m) {
-    var slices = []
-    var last = m.depth - 1
-    var mid = (m.width - 1) / 2
-    for (var si = 0; si < m.depth; si++) {
-      var rows = []
-      for (var r = 0; r < m.height; r++) {
-        var row = ''
-        for (var c = 0; c < m.width; c++) {
-          var wall = si === 0 || si === last || c === 0 || c === m.width - 1
-          var ch
-          if (r === 0) ch = 'X'
-          else if (r === m.height - 1) ch = 'B'
-          else if (si === last && r === 1 && c === mid) ch = 'S'
-          else if (wall) ch = 'B'
-          else if (si === mid && c === mid) ch = 'P'
-          else ch = '#'
-          row += ch
-        }
-        rows.push(row)
-      }
-      slices.push(rows)
-    }
-    return slices
-  }
-
   var M = BA.machines
+  // The refinery: a Mond-process column. A lined base hall carries a banded shaft (PTFE pipe course, glass, tungstensteel pipe rack, gearbox
+  // feed pumps in the base) under a coil-tipped vent mast. Built in the registry callback (shapes.js may load after this file).
+  M.refinery.width = 7
+  M.refinery.height = 12
+  M.refinery.depth = 7
+  M.refinery.makeSpec = function () {
+    var m = M.refinery
+    return G.uevShapes.spec(Pat, {
+      w: m.width, h: m.height, d: m.depth,
+      parts: [
+        Pat.part('input_bus', { min: 1, max: 2 }),
+        Pat.part('input_hatch', { min: 1, max: 1 }),
+        Pat.part('output_bus', { min: 1, max: 2 }),
+        Pat.part('output_hatch', { min: 1, max: 1 }),
+        Pat.part('energy_input', { min: 1, max: 2 })
+      ],
+      fn: G.uevShapes.tower({
+        w: 7, d: 7, baseH: 3, th: 10, inset: 1, band: 3, bandChar: 'P',
+        baseInner: function (x, y, z) { return (x === 2 || x === 4) && z === 3 && y === 1 ? 'B' : null },
+        core: function (x, y, z) { return x === 3 && z === 3 ? 'C' : null },
+        crown: G.uevShapes.mast(7, 7, 2)
+      }),
+      pal: { F: INERT, A: 'gtceu:stable_machine_casing', L: 'gtceu:laminated_glass', P: PIPE, C: TUNGSTEN_PIPE, B: GEARBOX, Q: 'tungsten_steel' }
+    })
+  }
   M.drill.spec = {
     slices: drillSlices(M.drill),
     symbols: {
@@ -142,21 +139,6 @@
       F: Pat.frame(['tungsten_steel']),
       T: Pat.block(TUNGSTEN_PIPE),
       D: Pat.block(GEARBOX)
-    }
-  }
-  M.refinery.spec = {
-    slices: retortSlices(M.refinery),
-    symbols: {
-      S: Pat.controller(),
-      X: Pat.oneOf(Pat.block(INERT),
-        Pat.part('input_bus', { min: 1, max: 2 }),
-        Pat.part('input_hatch', { min: 1, max: 1 }),
-        Pat.part('output_bus', { min: 1, max: 2 }),
-        Pat.part('output_hatch', { min: 1, max: 1 }),
-        Pat.part('energy_input', { min: 1, max: 2 })),
-      B: Pat.block(INERT),
-      P: Pat.block(PIPE),
-      '#': Pat.air()
     }
   }
   BA.order = ['drill', 'refinery']
@@ -202,6 +184,7 @@
       var type = GTRecipeTypes.get(m.type)
       if (type == null) throw new Error(LOG + 'recipe type gtceu:' + m.type + ' is not registered')
       if (m.ownType) type.addDataInfo(infoOf(m.dataKey))
+      if (m.makeSpec) m.spec = m.makeSpec()
       Pat.register(m.machine, m.spec)
 
       event.create(m.name, 'multiblock')
