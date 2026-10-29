@@ -40,7 +40,9 @@
     ca48_oven_charge: { stack: 16 },
     plutonium_oxide_target: { stack: 16 },
     irradiated_plutonium_target: { stack: 1 },
-    plutonium_244_target: { stack: 16 }
+    plutonium_244_target: { stack: 16 },
+    ca48_crucible_load: { stack: 16 },
+    pu244_plating_ampoule: { stack: 16 }
   }
 
   // name -> [form, colour, formula]; the liquids are acid and radioactive
@@ -70,7 +72,7 @@
     lang: 'Calutron',
     // items in: the feed and the circuit; items out: the isotope, the depleted stream, a second tail
     maxIO: { itemsIn: 2, itemsOut: 3, fluidsIn: 0, fluidsOut: 0 },
-    width: 7, depth: 13, height: 5
+    width: 11, depth: 17, height: 7
   }
 
   // The racetrack: a stadium yoke 11 x 7 x 17 of coil, stable casing and a glass-and-pipe vacuum course round an open hall, with magnet

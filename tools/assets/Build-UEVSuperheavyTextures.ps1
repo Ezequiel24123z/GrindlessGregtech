@@ -43,7 +43,8 @@ $FrameTime = 4
 $Frames = 4
 $Machines = @('heavy_ion_cyclotron', 'recoil_separator', 'superheavy_chemistry_lab')
 $Items = @('target_wheel_blank', 'activated_target_wheel', 'sealed_capsule', 'flerovium_atoms', 'livermorium_atoms', 'tennessine_atoms',
-    'oganesson_atoms', 'moscovium_atoms', 'polycarbonate_foil', 'ion_tracked_foil', 'etched_membrane', 'berkelium_oxide_dust')
+    'oganesson_atoms', 'moscovium_atoms', 'polycarbonate_foil', 'ion_tracked_foil', 'etched_membrane', 'berkelium_oxide_dust',
+    'cast_polycarbonate_film', 'lead_polymer_liner', 'ca48_plasma_bunch')
 
 $written = New-Object System.Collections.Generic.List[string]
 function Out-Tex {
@@ -144,6 +145,15 @@ function New-Item16 {
         'ion_tracked_foil' {
             Set-Rect $c 3 3 10 10 (Hex 'C8DCE4'); Set-Rect $c 3 3 10 1 (Hex 'F0FAFC'); Set-Rect $c 3 12 10 1 (Hex '8CA4AC')
             foreach ($p in @(@(5, 5), @(8, 6), @(6, 8), @(10, 9), @(7, 11), @(10, 5), @(5, 10))) { Set-Px $c $p[0] $p[1] (Hex '6C3CC0') }
+        }
+        'cast_polycarbonate_film' {
+            Set-Rect $c 3 4 10 8 (Hex 'D4E4EA'); Set-Rect $c 3 4 10 1 (Hex 'F4FCFE'); Set-Rect $c 3 11 10 1 (Hex '94ACB4'); Set-Px $c 8 7 (Hex 'F4FCFE')
+        }
+        'lead_polymer_liner' {
+            Set-Rect $c 3 3 10 10 (Hex '6C7480'); Set-Rect $c 3 3 10 1 (Hex '9CA4B0'); Set-Rect $c 4 5 8 6 (Hex 'C8DCE4'); Set-Rect $c 4 5 8 1 (Hex 'F0FAFC')
+        }
+        'ca48_plasma_bunch' {
+            Set-Rect $c 5 6 6 4 (Hex 'F0A878'); Set-Rect $c 6 7 4 2 (Hex 'FCE0C8'); Set-Rect $c 4 7 1 2 (Hex 'C87850'); Set-Rect $c 11 7 1 2 (Hex 'C87850'); Set-Px $c 7 4 (Hex 'F0A878'); Set-Px $c 8 11 (Hex 'F0A878')
         }
         'etched_membrane' {
             Set-Rect $c 3 3 10 10 (Hex 'D8E8D8'); Set-Rect $c 3 3 10 1 (Hex 'F8FFF8'); Set-Rect $c 3 12 10 1 (Hex '98AC98')

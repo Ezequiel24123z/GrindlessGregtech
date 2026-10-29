@@ -166,7 +166,7 @@ $shapes = @{
         '......KKKK......', '................', '................', '................')
 }
 $items = @(
-    @('cnt_sock', 'vial', '3A3A40'), @('cnt_densified_yarn', 'ingot', '2E2E34'), @('cnt_twisted_yarn', 'ingot', '44444C'), @('cnt_coiled_muscle', 'chip', '55555E'),
+    @('cnt_sock', 'vial', '3A3A40'), @('cnt_ribbon', 'ingot', '4A4A52'), @('cnt_annealed_yarn', 'ingot', '3A3A42'), @('cnt_sized_yarn', 'ingot', '50505A'), @('cnt_densified_yarn', 'ingot', '2E2E34'), @('cnt_twisted_yarn', 'ingot', '44444C'), @('cnt_coiled_muscle', 'chip', '55555E'),
     @('gallium_oxide_dust', 'dust', 'D8D8E0'), @('tgg_hydroxide_cake', 'dust', 'C8D8B8'), @('tgg_boule', 'vial', '9AD08A'), @('tgg_rod', 'ingot', '8AC87A'), @('tgg_polished_rod', 'ingot', 'A8E898'),
     @('fused_silica_tube', 'vial', 'DCE8F0'), @('hollow_capillaries', 'ingot', 'C8E0F0'), @('stacked_preform', 'chip', 'B8D0E8'), @('caned_preform', 'ingot', 'A8C8E8'), @('drawn_hollow_fibre', 'foil', '98C0E8'),
     @('mcp_lead_glass', 'dust', 'A0A8B8'), @('etchable_core_tube', 'vial', '8890A8'), @('mcp_multifibre', 'ingot', '7880A0'), @('mcp_boule', 'vial', '687098'),

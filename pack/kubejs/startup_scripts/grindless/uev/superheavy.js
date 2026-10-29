@@ -42,6 +42,9 @@
     oganesson_atoms: { stack: 64 },
     moscovium_atoms: { stack: 64 },
     polycarbonate_foil: { stack: 64 },
+    cast_polycarbonate_film: { stack: 64 },
+    lead_polymer_liner: { stack: 16 },
+    ca48_plasma_bunch: { stack: 64 },
     ion_tracked_foil: { stack: 64 },
     etched_membrane: { stack: 64 },
     berkelium_oxide_dust: { stack: 64 }
@@ -60,17 +63,17 @@
     {
       name: 'heavy_ion_cyclotron', type: 'heavy_ion_irradiation', lang: 'Heavy Ion Cyclotron', shape: 'ring',
       maxIO: { itemsIn: 4, itemsOut: 3, fluidsIn: 2, fluidsOut: 2 },
-      width: 9, depth: 9, height: 5, energyMax: 4, tips: 3, sound: 'ARC'
+      width: 17, depth: 15, height: 7, energyMax: 4, tips: 3, sound: 'ARC'
     },
     {
       name: 'recoil_separator', type: 'recoil_separation', lang: 'Recoil Separator', shape: 'dipoles',
       maxIO: { itemsIn: 2, itemsOut: 1, fluidsIn: 1, fluidsOut: 1 },
-      width: 5, depth: 11, height: 5, energyMax: 2, tips: 3, sound: 'ARC'
+      width: 9, depth: 19, height: 7, energyMax: 2, tips: 3, sound: 'ARC'
     },
     {
       name: 'superheavy_chemistry_lab', type: 'superheavy_chemistry', lang: 'Superheavy Chemistry Lab', shape: 'bench',
       maxIO: { itemsIn: 6, itemsOut: 1, fluidsIn: 0, fluidsOut: 0 },
-      width: 7, depth: 7, height: 5, energyMax: 2, tips: 3, sound: 'ARC'
+      width: 9, depth: 11, height: 7, energyMax: 2, tips: 3, sound: 'ARC'
     }
   ]
   SH.machines.forEach(function (m) {

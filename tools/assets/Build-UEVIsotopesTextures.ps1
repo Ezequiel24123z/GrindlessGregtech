@@ -42,7 +42,7 @@ $ScriptName = Split-Path -Leaf $PSCommandPath
 $FrameTime = 4
 $Frames = 4
 $Dir = 'block/multiblock/calutron'
-$Items = @('ca48_oven_charge', 'plutonium_oxide_target', 'irradiated_plutonium_target', 'plutonium_244_target')
+$Items = @('ca48_oven_charge', 'plutonium_oxide_target', 'irradiated_plutonium_target', 'plutonium_244_target', 'ca48_crucible_load', 'pu244_plating_ampoule')
 
 $written = New-Object System.Collections.Generic.List[string]
 function Out-Tex {
@@ -114,6 +114,14 @@ function New-Item16 {
                 if ($d -le 9) { Set-Px $c $x $y $(if ($x + $y -lt 13) { $pt[0] } elseif ($x + $y -lt 17) { $pt[1] } else { $pt[2] }) }
             } }
             Set-Rect $c 6 6 4 4 (Hex 'D8D0B0'); Set-Rect $c 7 7 2 2 (Hex 'F0E8CC')
+        }
+        'ca48_crucible_load' {
+            Set-Rect $c 4 4 8 9 (Hex '8C7A58'); Set-Rect $c 4 4 8 1 (Hex 'B8A47C'); Set-Rect $c 4 12 8 1 (Hex '5E5238')
+            Set-Rect $c 5 6 6 5 (Hex 'D8DCE0'); Set-Rect $c 6 7 2 2 (Hex 'F4F6F8')
+        }
+        'pu244_plating_ampoule' {
+            Set-Rect $c 6 2 4 12 (Hex 'B8E0E8'); Set-Rect $c 7 2 1 12 (Hex 'E8F8FC'); Set-Rect $c 6 1 4 1 (Hex '88A8B0'); Set-Rect $c 6 14 4 1 (Hex '88A8B0')
+            Set-Rect $c 7 7 2 6 (Hex 'C8A8B8'); Set-Px $c 8 8 (Hex 'F0D0DC')
         }
         'plutonium_oxide_target' {
             Set-Rect $c 7 2 2 12 (Hex '9AA0A4'); Set-Rect $c 7 2 1 12 (Hex 'C4C8CC'); Set-Rect $c 6 2 4 1 (Hex '70767C'); Set-Rect $c 6 13 4 1 (Hex '70767C')

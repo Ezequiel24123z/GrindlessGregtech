@@ -29,7 +29,7 @@
   AC.site = 'grindless:alpha_centauri_orbit'
   // item name -> stack size; every item carries two tooltip lines (tooltip.grindless.<name>.0 and .1)
   AC.items = {
-    superhydride_scoop_coil: { stack: 16 }, dust_laden_aerogel: { stack: 16 }, extracted_grains: { stack: 64 }, demineralised_grains: { stack: 64 },
+    superhydride_scoop_coil: { stack: 16 }, scoop_winding: { stack: 16 }, impregnated_scoop_winding: { stack: 16 }, dust_laden_aerogel: { stack: 16 }, extracted_grains: { stack: 64 }, demineralised_grains: { stack: 64 },
     fe60_record: { stack: 16 }, silicate_residue: { stack: 64 }, pulsar_timing_data: { stack: 16 }, alpha_coronal_field_map: { stack: 16 },
     teos_flask: { stack: 64 }, silica_sol: { stack: 64 }, silica_wet_gel: { stack: 64 }, silica_aged_gel: { stack: 64 }
   }

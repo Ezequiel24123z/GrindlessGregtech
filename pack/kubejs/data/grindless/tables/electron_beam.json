@@ -51,13 +51,19 @@
           "itemsOut": [{ "id": "grindless:sx_master_alloy_dust", "count": 9 }], "fluidsOut": [] },
         { "name": "ysz_powder", "circuit": 0, "eut": 480, "duration": 200,
           "itemsIn": [{ "id": "gtceu:zirconia_dust", "count": 8 }, { "id": "grindless:yttrium_oxide_dust", "count": 1 }], "kept": [], "fluidsIn": [], "charge": [],
-          "itemsOut": [{ "id": "grindless:ysz_powder", "count": 9 }], "fluidsOut": [] }
+          "itemsOut": [{ "id": "grindless:ysz_powder", "count": 9 }], "fluidsOut": [] },
+        { "name": "ceramic_slurry", "circuit": 1, "eut": 480, "duration": 200,
+          "itemsIn": [{ "id": "grindless:ysz_powder", "count": 4 }, { "id": "gtceu:zirconia_dust", "count": 2 }, { "id": "gtceu:sapphire_dust", "count": 2 }], "kept": [], "fluidsIn": [{ "id": "gtceu:polyvinyl_butyral", "amount": 200 }], "charge": [],
+          "itemsOut": [{ "id": "grindless:ceramic_slurry", "count": 2 }], "fluidsOut": [] },
+        { "name": "green_ceramic_shell", "circuit": 2, "eut": 480, "duration": 200,
+          "itemsIn": [{ "id": "grindless:ceramic_slurry", "count": 2 }, { "id": "gtceu:polyethylene_plate", "count": 1 }], "kept": [], "fluidsIn": [], "charge": [],
+          "itemsOut": [{ "id": "grindless:green_ceramic_shell", "count": 1 }], "fluidsOut": [] }
       ]
     },
     "assembler": {
       "recipes": [
         { "name": "ceramic_shell_mould", "circuit": 25, "eut": 480, "duration": 200,
-          "itemsIn": [{ "id": "gtceu:zirconia_dust", "count": 2 }, { "id": "gtceu:sapphire_dust", "count": 2 }], "kept": [], "fluidsIn": [], "charge": [],
+          "itemsIn": [{ "id": "grindless:fired_ceramic_shell", "count": 1 }, { "id": "gtceu:zirconia_dust", "count": 2 }, { "id": "gtceu:sapphire_dust", "count": 2 }], "kept": [], "fluidsIn": [], "charge": [],
           "itemsOut": [{ "id": "grindless:ceramic_shell_mould", "count": 1 }], "fluidsOut": [] },
         { "name": "bond_coat", "circuit": 26, "eut": 1920, "duration": 300,
           "itemsIn": [{ "id": "grindless:heat_treated_sx_blade", "count": 1 }, { "id": "gtceu:platinum_dust", "count": 1 }, { "id": "gtceu:aluminium_dust", "count": 1 }], "kept": [], "fluidsIn": [], "charge": [],
@@ -69,7 +75,10 @@
       "recipes": [
         { "name": "sx_heat_treatment", "circuit": 0, "eut": 1920, "duration": 400,
           "itemsIn": [{ "id": "grindless:sx_blade", "count": 1 }], "kept": [], "fluidsIn": [{ "id": "gtceu:argon", "amount": 1000 }], "charge": [],
-          "itemsOut": [{ "id": "grindless:heat_treated_sx_blade", "count": 1 }], "fluidsOut": [] }
+          "itemsOut": [{ "id": "grindless:heat_treated_sx_blade", "count": 1 }], "fluidsOut": [] },
+        { "name": "ceramic_shell_firing", "circuit": 1, "eut": 1920, "duration": 400,
+          "itemsIn": [{ "id": "grindless:green_ceramic_shell", "count": 1 }], "kept": [], "fluidsIn": [{ "id": "gtceu:oxygen", "amount": 1000 }], "charge": [],
+          "itemsOut": [{ "id": "grindless:fired_ceramic_shell", "count": 1 }], "fluidsOut": [{ "id": "gtceu:carbon_dioxide", "amount": 500 }] }
       ]
     },
     "macerator": {

@@ -9,7 +9,7 @@
 //                          programmed circuit picks the recipe; every recipe carries the data key of its type = <name> (its EMI line).
 //                          The scoop coil of the collector and the clock and sensor of the other two are kept inputs: never consumed.
 //   gtceu:chemical_reactor, mixer, autoclave, distillation_tower, electrolyzer, assembler   the line steps GTM can run (circuit 0).
-//   crafting               the controllers: UEV hull + 2 UEV parts + 2 UHV circuits, shaped recipes grindless:crafting/<machine>.
+//   assembly line          the controller(s): station research, UEV-era circuits, 3 domain parts of the line, soldering alloy and lubricant, grindless:assembly_line/<machine>.
 //   The cryogenic fractions of line 26 are in ev/cryogenic_plant.js (interstellar_gas); the swarm and probe rows in uhv/swarm.js.
 //
 // Lookup safety: a recipe whose ingredients are a subset of another's of its type can hide it; checked at load (a clash is an error).
