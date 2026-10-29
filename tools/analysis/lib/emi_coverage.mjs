@@ -436,6 +436,9 @@ export function auditEmiCoverage({ dump, registry, cfg, emi, lang = null, native
       fluids: results.filter((r) => r.kind === 'fluid').length, recipes: recipes.length, pages: emi.pages.length, invisible: invisible.length,
     },
     results, gaps, legacy, hiddenOurs, missingInDump, problems, previewWarnings, derivedChecks, processes, droppedRoutes, pendingRoutes,
+    // the item tags EMI disables: the native fixture exempts every machine in them (any namespace), not only ours
+    disabledTags: [...new Set(emi.disabled.filter((d) => d.tag && d.kind !== 'fluid').map((d) => d.tag))].sort(),
+    disabledItems: [...disabled].filter((k) => !k.startsWith(FLUID)).sort(),
     unknownTypes: [...unknownTypes.entries()].map(([type, n]) => ({ type, n })),
     viaPagesOnly: results.filter((r) => (r.made.length > 0 && r.made.every((m) => m.source === 'page')) || (!r.end && r.used.length > 0 && r.used.every((m) => m.source === 'page'))).map((r) => r.key),
     invisibleRoutes: results.filter((r) => r.invisibleMade.length > 0).map((r) => ({ key: r.key, routes: r.invisibleMade })),
@@ -492,7 +495,12 @@ export function renderExpectations(exp) {
   L.push('  ],');
   L.push(`  "pages": ${JSON.stringify(exp.pages)},`);
   L.push(`  "legacy": ${JSON.stringify(exp.legacy)},`);
-  L.push(`  "hidden": ${JSON.stringify(exp.hidden)}`);
+  L.push(`  "hidden": ${JSON.stringify(exp.hidden)},`);
+  L.push(`  "disabledTags": ${JSON.stringify(exp.disabledTags)},`);
+  L.push('  "known": {');
+  const kk = Object.keys(exp.known);
+  kk.forEach((k, i) => L.push(`    ${JSON.stringify(k)}: ${JSON.stringify(exp.known[k])}` + (i < kk.length - 1 ? ',' : '')));
+  L.push('  }');
   L.push('}');
   return L.join('\n') + '\n';
 }
@@ -515,5 +523,35 @@ export function fixtureExpectations(res) {
     pages: [...new Set(res.results.flatMap((r) => [...r.made, ...r.used]).filter((m) => m.source === 'page').map((m) => m.id))].sort(),
     legacy: res.legacy.map((l) => ({ id: l.key, conversions: l.conversions })),
     hidden: res.hiddenOurs.map((h) => h.key),
+    disabledTags: res.disabledTags || [],
+    known: knownGaps(res.runtimeKnown),
   };
+}
+
+/** The runtime gap kinds the native fixture ratchets: a gap listed here is a NOTE, a new one a FAIL. */
+export const KNOWN_GAP_KINDS = ['workstations', 'previews', 'noUse', 'routes', 'machineInfo'];
+
+/** emi_runtime_known.json's lists, sorted, every kind present (an absent file is no known gap). */
+export function knownGaps(doc) {
+  const out = {};
+  for (const k of KNOWN_GAP_KINDS) out[k] = [...new Set(((doc && doc[k]) || []).map(String))].sort();
+  return out;
+}
+
+/**
+ * The known-gap file from a native report (gg_emi_coverage_report.json): what the run found missing, minus machines whose info page
+ * the pack now has. Machine ids only for workstations; routes as the fixture prints them ("<id> made in <category>").
+ */
+export function knownFromReport(report, res) {
+  const pageNow = new Set(res.results.filter((r) => [...r.made, ...r.used].some((m) => m.source === 'page' && m.category === 'emi:info')).map((r) => r.key));
+  // a machine EMI disables now (an older fixture only exempted ours) is no gap
+  const off = new Set(res.disabledItems || []);
+  const machine = (w) => String(w).split(':').slice(0, 2).join(':').trim();
+  return knownGaps({
+    workstations: (report.workstationMissing || []).map(machine).filter((id) => !off.has(id)),
+    previews: (report.previewsMissing || []).filter((id) => !off.has(id)),
+    noUse: report.noUse || [],
+    routes: report.routeMissing || [],
+    machineInfo: (report.machineInfoMissing || []).filter((id) => !pageNow.has(id) && !off.has(id)),
+  });
 }
