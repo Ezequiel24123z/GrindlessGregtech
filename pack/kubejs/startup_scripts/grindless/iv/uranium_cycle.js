@@ -134,10 +134,10 @@
   const PLANT_SPEC = {
     slices: [
       // the pellet press bay: its back wall
-      ['XXX', 'CCC', 'CCC', 'CCC'],
+      ['XXX', 'CCC', 'CCC', 'FCF'],
       // the press: its gearbox drive over the die
-      ['XXX', 'C#C', 'CGC', 'CCC'],
-      ['XXX', 'C#C', 'C#C', 'CCC'],
+      ['XXX', 'C#C', 'CGC', 'FCF'],
+      ['XXX', 'C#C', 'C#C', 'FCF'],
       // the sintering tunnel: its mouth, two rings of coils around the bore, its exit
       ['CCC', 'C#C', 'C#C', 'CCC'],
       ['CKC', 'K#K', 'K#K', 'CKC'],
