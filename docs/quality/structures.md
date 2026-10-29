@@ -50,19 +50,14 @@ declarations in 6 files (13 structures) were changed to `var`, and the test now 
 - Large Steam macerator, thermal centrifuge, ore washer, chemical bath and centrifuge: new hollow 5x5x5 shape (glass, gearbox,
   bronze pipe).
 - Methane pyrolyser: new frame/coil/glass/pipe layout, same 3x12x3.
+- QR-S1 (steam to IV): six small steam machines (boiler house, 3x3x3), coking_battery 5x4x3 -> 5x6x3, wire_works 5x4x5 (new layout), submerged_arc_furnace 3x5x3 -> 5x6x5, biorefinery 3x9x3 -> 5x10x3, four universal factories 5x3x3 -> 7x4x5, lava_furnace 3x3x3 -> 5x6x5, advanced_multi_smelter 5x3x3 -> 5x4x5, polymer_works, reformer, refinery, coil_chemical_plant, ore_refinery, sealed_dome, heavy_water_plant, fuel_fabrication_plant, mercury_vein_drill: same size, frames/glass/pipes added.
 - Formed shape now matches the design (it was solid in game) for: event horizon interferometer, precursor probe bay, kuiper
   interceptor bay, amorphous ice annealer, entry probe bay, flyby probe bay, slurry separator, plume sampler, ring seismometer,
   gas giant siphon, isotope column, ring harvester, ice giant siphon.
 
 ## Backlog by era (failing / total; worst first)
 
-- Steam 7/15: six `steam_*` 3x3x3 mono boxes (`steam/small_family.js:111-116`), `coking_battery` (`steam/coking_battery.js:27`).
-- LV 2/7: `wire_works` (`lv/mega_wire_works.js:26`), `submerged_arc_furnace` (`lv/multis.js:371`).
-- MV 8/12: `biorefinery` (`mv/biorefinery.js:26`), four `universal_*_factory` (`mv/leisure_factories.js:72-100`), `lava_furnace`,
-  `advanced_multi_smelter` (`mv/leisure_utility.js:462-480`), `polymer_works` (`mv/mega_polymer_works.js:30`).
-- HV 3/6: `reformer` (`hv/reformer.js:32`), `refinery` (`hv/refinery.js:39`), `coil_chemical_plant`.
-- EV 2/12: `ore_refinery` (`ev/mega_ore_refinery.js:25`), `sealed_dome` (`ev/sealed_dome.js:43`).
-- IV 3/16: `heavy_water_plant` (`iv/heavy_water_plant.js:49`) and two light cases.
+- Steam 0/15, LV 0/7, MV 0/12, HV 0/6, EV 0/12, IV 0/16: done in QR-S1 (all pass the gate without baseline entries).
 - LuV 10/21: `wake_shield_facility`, `coilgun_launcher`, `gravitational_wave_detector`, `orbital_solar_station`, `algae_bioreactor`.
 - ZPM 24/27: `ion_implanter`, `kuiper_survey_telescope`, `flyby_probe_bay`, `neutrino_observatory` (15x15x15 near-solid),
   `aerogel_works`, `diamond_lattice_fab`, `qubit_fab`, `vent_bioreactor`.
