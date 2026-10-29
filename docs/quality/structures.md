@@ -58,14 +58,28 @@ declarations in 6 files (13 structures) were changed to `var`, and the test now 
 ## Backlog by era (failing / total; worst first)
 
 - Steam 0/15, LV 0/7, MV 0/12, HV 0/6, EV 0/12, IV 0/16: done in QR-S1 (all pass the gate without baseline entries).
-- LuV 10/21: `wake_shield_facility`, `coilgun_launcher`, `gravitational_wave_detector`, `orbital_solar_station`, `algae_bioreactor`.
-- ZPM 24/27: `ion_implanter`, `kuiper_survey_telescope`, `flyby_probe_bay`, `neutrino_observatory` (15x15x15 near-solid),
-  `aerogel_works`, `diamond_lattice_fab`, `qubit_fab`, `vent_bioreactor`.
+- LuV 0/21, ZPM 0/27, launch_road and power 0: done in QR-S2 (all pass the gate without baseline entries).
 - UV 31/33: `mega_factory` (15x12x21, 2 types), `laser_fusion_chamber`, `triton_geyser_sampler`, `powder_in_tube_line`, `zone_refining_tower`.
 - UHV 30/32: `xenoflora_rover_bay`, `biomining_heap`, `zblan_draw_tower`, `positron_accumulator`, `warp_gate`.
 - UEV, UIV: almost all are hollow 5x5x7 / 7x7x7 single-casing boxes (`uev/*.js` shell helpers: `megabar`, `sirius`, `composites`,
   `electron_beam`, `earth_orbit`, `alpha_centauri`, `photonics`; `uiv/beuv_stm.js:53`, `matrioshka.js:83`, `tfln_femtosecond.js:65`,
   `j0437.js:67`). Redesign with a shared per-era shell helper mixing frame posts, glass bands, pipes/coils and a second casing.
+
+### QR-S2 release notes (reshaped structures; shape changes, same ids, no registrations removed)
+
+Size changed: `ion_implanter` 3x3x11 -> 5x5x15 (beamline hall); `direct_energy_converter` 9x5x5 -> 9x6x7.
+Same WxHxD, new layout (frame posts, glass bands, pipes/coils, second casing; `neutrino_observatory` is now an octagonal drum in its 15x15x15 box):
+- LuV: `wake_shield_facility` 9x9x4, `microgravity_smelter` 3x9x7, `coilgun_launcher` 8x5x37 (coil ring every 3rd ring), `gravitational_wave_detector` 33x5x33,
+  `orbital_solar_station` 19x3x9, `algae_bioreactor` 5x13x5, `biofoundry` 9x6x9, `mega_chemical_complex` 15x15x15, `zero_g_crystal_grower` 5x5x5,
+  `asteroid_processor` 9x6x5.
+- launch_road / power: `composite_autoclave` 5x7x4 (casing min 50 -> 40), `generator_array` 9x4x3.
+- ZPM: `waste_retrieval_plant` and `actinide_partitioning_plant` 7x5x7, `vent_bioreactor` 5x7x5, `aerogel_works` 5x5x5, `assembly_hall` 11x9x12,
+  `diamond_lattice_fab` 5x5x5, `qubit_fab` 5x5x9, `plasma_quench_caster` 5x7x5, `naquadria_magnet_works` 7x5x7, `naquadria_refinery` 7x11x7,
+  `naquadah_fuel_works` 5x7x5, `entry_probe_bay` 7x5x9, `tholin_reformer` 5x7x5, `slurry_separator` 5x5x7, `flyby_probe_bay` 7x5x9,
+  `gas_giant_siphon` 7x7x11, `isotope_column` 5x5x15, `ring_harvester` 9x3x9, `neutrino_observatory` 15x15x15, `kuiper_survey_telescope` 5x11x5,
+  `plume_sampler` 7x5x7, `ring_seismometer` 5x5x5.
+First-met blocks: no new block types; only blocks already obtainable in their era (glass, frames, pipe casings, coil blocks, gearboxes, stable/frostproof casings,
+`grindless:station_truss_casing`, `probe_bay_casing`, `pressure_hull_casing`).
 
 Process for each: redesign the spec, run `--static --check`, lower the baseline, update its T1 overlay test; from the next tier on
 every new structure must pass the gate without a baseline entry.

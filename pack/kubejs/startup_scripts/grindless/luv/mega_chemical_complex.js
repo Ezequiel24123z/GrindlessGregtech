@@ -74,7 +74,12 @@
           var ch = '#'
           if (z === D - 1 && x === CENTER && y === 1) ch = 'S'
           else if (edges >= 2) ch = 'F'
-          else if (edges === 1) ch = ex && z >= 4 && z <= 10 && y >= 5 && y <= 9 ? 'L' : 'X'
+          else if (edges === 1) {
+            if (ex && z >= 4 && z <= 10 && y >= 5 && y <= 9) ch = 'L'
+            // girder bands of frames girdle the walls at the coil heights, so the shell reads as a tower of rings
+            else if (ey === false && RING_HEIGHTS.indexOf(y) >= 0) ch = 'F'
+            else ch = 'X'
+          }
           else if (x === CENTER && z === CENTER) ch = 'P'
           else if (RING_HEIGHTS.indexOf(y) >= 0 && inRing(x, z)) ch = 'K'
           if (ch === 'X') casingCells++

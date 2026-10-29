@@ -38,17 +38,25 @@
   // ---------------------------------------------------------------- the siphon: 7 wide, 7 deep, 11 high
   // rows bottom -> top: 0 floor (ports or truss), 1-9 the walls around the scoop bay and the winch, 10 the roof
   const SIPHON_PARTS = { energy_input: { min: 1, max: 2 }, input_bus: { min: 1, max: 2 }, output_hatch: { min: 1, max: 3 } }
+  // QR-S2: a tether station. Titanium frame posts, glass window rings between truss and probe bay casing bands, the winch (frame column
+  // topped by a gearbox) in the middle, a probe bay casing deck and roof.
   function siphonSlice(z) {
-    const rows = []
-    for (let y = 0; y < 11; y++) {
-      let row = ''
-      for (let x = 0; x < 7; x++) {
+    var rows = []
+    for (var y = 0; y < 11; y++) {
+      var row = ''
+      for (var x = 0; x < 7; x++) {
         var edge = x === 0 || x === 6 || z === 0 || z === 6
-        let c = ' '
-        if (y === 0) c = 'X'
-        else if (y === 10) c = 'C'
-        else if (edge) c = z === 6 && y === 1 ? (x === 3 ? 'S' : 'X') : 'C'
-        else if (x === 3 && z === 3) c = y === 9 ? 'D' : 'F'
+        var post = (x === 0 || x === 6) && (z === 0 || z === 6)
+        var c = ' '
+        if (y === 0) c = edge ? 'X' : 'B'
+        else if (y === 10) c = edge ? 'C' : 'B'
+        else if (post) c = 'F'
+        else if (edge) {
+          if (z === 6 && y === 1) c = x === 3 ? 'S' : 'X'
+          else if (y === 1 || y === 5 || y === 9) c = 'C'
+          else if (y === 3 || y === 7) c = 'B'
+          else c = 'L'
+        } else if (x === 3 && z === 3) c = y === 9 ? 'D' : 'F'
         row += c
       }
       rows.push(row)
@@ -61,6 +69,8 @@
       S: Pat.controller(),
       X: parts(STATION, 12, SIPHON_PARTS),
       C: Pat.block(STATION),
+      B: Pat.block('grindless:probe_bay_casing'),
+      L: Pat.block(GLASS),
       F: Pat.frame(['titanium']),
       D: Pat.block(GEARBOX)
     }
@@ -70,17 +80,25 @@
   // rows bottom -> top: 0 floor, 1-13 the frostproof shell around the titanium pipe heat exchanger, 14 the roof
   const COLUMN_PARTS = { energy_input: { min: 1, max: 2 }, input_bus: { min: 1, max: 2 }, input_hatch: { min: 1, max: 2 },
     output_hatch: { min: 1, max: 3 } }
+  // QR-S2: a cryogenic distillation tower. Frame posts, pressure hull bands at rows 5, 9 and 13, laminated glass sight rings at rows 3, 7 and 11,
+  // the titanium pipe heat exchanger up the middle and out of the roof.
   function columnSlice(z) {
-    const rows = []
-    for (let y = 0; y < 15; y++) {
-      let row = ''
-      for (let x = 0; x < 5; x++) {
+    var rows = []
+    for (var y = 0; y < 15; y++) {
+      var row = ''
+      for (var x = 0; x < 5; x++) {
         var edge = x === 0 || x === 4 || z === 0 || z === 4
-        let c = ' '
-        if (y === 0) c = 'X'
-        else if (y === 14) c = 'F'
-        else if (edge) c = z === 4 && y === 1 ? (x === 2 ? 'S' : 'X') : 'F'
-        else if (x === 2 && z === 2) c = 'P'
+        var post = (x === 0 || x === 4) && (z === 0 || z === 4)
+        var c = ' '
+        if (y === 0) c = edge ? 'X' : 'H'
+        else if (y === 14) c = edge ? 'F' : (x === 2 && z === 2 ? 'P' : 'H')
+        else if (post) c = 'R'
+        else if (edge) {
+          if (y === 1) c = z === 4 ? (x === 2 ? 'S' : 'X') : 'F'
+          else if (y % 4 === 1) c = 'H'
+          else if (y % 4 === 3) c = 'L'
+          else c = 'F'
+        } else if (x === 2 && z === 2) c = 'P'
         row += c
       }
       rows.push(row)
@@ -93,6 +111,9 @@
       S: Pat.controller(),
       X: parts(FROST, 8, COLUMN_PARTS),
       F: Pat.block(FROST),
+      H: Pat.block('grindless:pressure_hull_casing'),
+      L: Pat.block(GLASS),
+      R: Pat.frame(['titanium']),
       P: Pat.block(PIPE)
     }
   }
@@ -101,20 +122,23 @@
   // rows bottom -> top: 0 the deck, 1 the net booms (frames, left and right) and the melt tank (glass), 2 the roof edge and tank cover
   const HARVESTER_PARTS = { energy_input: { min: 1, max: 2 }, input_bus: { min: 1, max: 2 }, output_bus: { min: 1, max: 2 },
     output_hatch: { min: 1, max: 3 } }
+  // QR-S2: a ring skimmer. Truss rim and probe bay casing deck, a pressure hull plinth under the glass melt tank, pipe vents on its cover.
   function harvesterSlice(z) {
-    const rows = []
-    for (let y = 0; y < 3; y++) {
-      let row = ''
-      for (let x = 0; x < 9; x++) {
+    var rows = []
+    for (var y = 0; y < 3; y++) {
+      var row = ''
+      for (var x = 0; x < 9; x++) {
         var tank = x >= 3 && x <= 5 && z >= 3 && z <= 5
-        let c = ' '
-        if (y === 0) c = 'X'
+        var edge = x === 0 || x === 8 || z === 0 || z === 8
+        var c = ' '
+        if (y === 0) c = edge ? 'X' : (tank ? 'H' : 'B')
         else if (y === 1) {
           if (z === 8 && x === 4) c = 'S'
           else if (x === 0 || x === 8) c = 'F'
           else if (z === 8) c = 'X'
           else if (tank) c = 'L'
-        } else if (x === 0 || x === 8 || z === 0 || z === 8 || tank) c = 'C'
+        } else if (tank) c = 'P'
+        else if (edge) c = 'B'
         row += c
       }
       rows.push(row)
@@ -126,9 +150,11 @@
     symbols: {
       S: Pat.controller(),
       X: parts(STATION, 10, HARVESTER_PARTS),
-      C: Pat.block(STATION),
+      B: Pat.block('grindless:probe_bay_casing'),
+      H: Pat.block('grindless:pressure_hull_casing'),
       F: Pat.frame(['titanium']),
-      L: Pat.block(GLASS)
+      L: Pat.block(GLASS),
+      P: Pat.block(PIPE)
     }
   }
 

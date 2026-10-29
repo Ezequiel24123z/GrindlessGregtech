@@ -22,15 +22,17 @@
     if (maintenance) choices.push(Pat.part('maintenance', { exact: 1 }))
     return Pat.oneOf.apply(null, choices)
   }
+  // A titanium cage (frames on the twelve edges) around the growth chamber: the inert-lined bore is the melt, glass windows look in
+  // from every side, and every other shell cell takes the truss casing or a part.
   var grower = {
     slices: [
-      ['XXXXX', 'XXXXX', 'XXGXX', 'XXXXX', 'XXXXX'],
-      ['TTTTT', 'TIIIT', 'TI#IT', 'TIIIT', 'TTTTT'],
-      ['TTTTT', 'TI#IT', 'G###G', 'TI#IT', 'TTTTT'],
-      ['TTTTT', 'TIIIT', 'TI#IT', 'TIIIT', 'TTTTT'],
-      ['TTTTT', 'TGGGT', 'TGSGT', 'TGGGT', 'TTTTT']
+      ['FFFFF', 'FXXXF', 'FXGXF', 'FXXXF', 'FFFFF'],
+      ['FXXXF', 'XIIIX', 'XI#IX', 'XIIIX', 'FXXXF'],
+      ['FXXXF', 'XI#IX', 'G###G', 'XI#IX', 'FXXXF'],
+      ['FXXXF', 'XIIIX', 'XI#IX', 'XIIIX', 'FXXXF'],
+      ['FFFFF', 'FGGGF', 'FGSGF', 'FGGGF', 'FFFFF']
     ],
-    symbols: { S: Pat.controller(), X: parts(TRUSS, true), T: Pat.block(TRUSS),
+    symbols: { S: Pat.controller(), X: parts(TRUSS, true), F: Pat.frame(['titanium']),
       I: Pat.block('gtceu:inert_machine_casing'), G: Pat.block('gtceu:laminated_glass'), '#': Pat.air() }
   }
   // The annular bed uses squared-radius bounds: no floating-point geometry or Rhino Math.PI.

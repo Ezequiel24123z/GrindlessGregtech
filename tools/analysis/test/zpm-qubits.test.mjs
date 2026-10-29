@@ -42,7 +42,7 @@ test('registration: three recipe types, three machines, one pattern each with on
   });
   const dims = (m) => { const s = run.docs.structures.structures['gtceu:' + m]; return [s.slices[0][0].length, s.slices[0].length, s.slices.length]; };
   assert.deepEqual(dims('diamond_lattice_fab'), [5, 5, 5]);
-  assert.deepEqual(dims('ion_implanter'), [3, 3, 11]);
+  assert.deepEqual(dims('ion_implanter'), [5, 5, 15]);
   assert.deepEqual(dims('qubit_fab'), [5, 5, 9]);
 });
 

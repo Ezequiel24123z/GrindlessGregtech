@@ -83,8 +83,12 @@ test('B9 the buried L: 33x5x33, two hollow tubes under ice, four sapphire test m
   assert.deepEqual(plain(d.symbols.I.blocks), ['minecraft:packed_ice', 'minecraft:blue_ice']);
   assert.equal(d.symbols.C.blocks[0], 'gtceu:clean_machine_casing');
   assert.equal(d.symbols.F.blocks[0], 'gtceu:frostproof_machine_casing');
-  // two tubes of 25 rings of eight, two 3x3x3 end stations less their test mass, ice over every tube and end station
-  assert.equal(count(d, 'C'), 2 * 25 * 8);
+  // two tubes of 25 rings (five pipe rings, stainless frame posts on the corners, clean panels, glass viewports), two 3x3x3 end stations less their test mass, ice over every tube and end station
+  assert.equal(count(d, 'P'), 2 * 5 * 8);
+  assert.equal(count(d, 'T'), 2 * 20 * 4);
+  assert.equal(count(d, 'G'), 2 * 4 * 2);
+  assert.equal(count(d, 'C') + count(d, 'G') + count(d, 'T') + count(d, 'P'), 2 * 25 * 8);
+  assert.equal(d.symbols.T.materials[0], 'stainless_steel');
   assert.equal(count(d, 'F'), 2 * 26);
   assert.equal(count(d, 'I'), 2 * 28 * 3);
   // the beam line: air down the middle of each tube, from the vertex test mass to the end one
@@ -95,7 +99,7 @@ test('B9 the buried L: 33x5x33, two hollow tubes under ice, four sapphire test m
   assert.equal(d.slices[2][2][2], 'M');
   assert.equal(d.slices[30][2][30], 'M');
   // every ice cell has an arm cell under it
-  for (const c of cells(d).filter((c) => c.ch === 'I')) assert.match(d.slices[c.s][3][c.x], /[CF]/);
+  for (const c of cells(d).filter((c) => c.ch === 'I')) assert.match(d.slices[c.s][3][c.x], /[CFPTG]/);
   // only the vertex carries parts
   for (const c of cells(d).filter((c) => c.ch === 'X')) assert.ok(c.x <= 4 && c.s >= 28);
   const parts = d.symbols.X.options;
@@ -108,15 +112,18 @@ test('B9 the buried L: 33x5x33, two hollow tubes under ice, four sapphire test m
   assert.ok(!parts.some((p) => p.ability === 'parallel_hatch'));
 });
 
-test('B9 the coilgun: 33 rings of eight coil casings around an open bore, a 5x5x4 breech and a 3x3x3 pulse bank', () => {
+test('B9 the coilgun: 11 accelerating coil rings between frame-post sections around an open bore, a 5x5x4 breech and a 3x3x3 pulse bank', () => {
   const { G } = harness();
   const d = G.structures['gtceu:coilgun_launcher'];
   assert.equal(d.slices.length, 37);
   assert.equal(d.slices[0].length, 5);
   assert.equal(d.slices[0][0].length, 8);
-  assert.equal(count(d, 'K'), 33 * 8);
+  assert.equal(count(d, 'K'), 11 * 8);
+  assert.equal(count(d, 'R'), 22 * 4);
+  assert.equal(count(d, 'G'), 11 * 4);
   assert.equal(d.symbols.K.blocks[0], 'grindless:coilgun_coil_casing');
-  assert.equal(count(d, 'T'), 27);
+  assert.equal(d.symbols.R.materials[0], 'tungsten_steel');
+  assert.equal(count(d, 'T'), 27 + 11 * 4);
   assert.equal(d.symbols.T.blocks[0], 'gtceu:robust_machine_casing');
   for (let s = 0; s <= 35; s++) assert.equal(d.slices[s][2][2], '#', 'bore at slice ' + s);
   const ctrl = cells(d).find((c) => c.ch === 'S');
@@ -264,6 +271,7 @@ test('B9 every existing id matches the pinned native registry', () => {
   // Frozen subset of power-quests-1/results/server/kubejs-exported/items.json (gg-items-1); grindless: ids are LuV-A1's and IV's.
   const nativeItems = new Set([
     'gtceu:frostproof_machine_casing', 'gtceu:clean_machine_casing', 'gtceu:robust_machine_casing',
+    'gtceu:tungstensteel_pipe_casing', 'gtceu:borosilicate_glass_block',
     'minecraft:packed_ice', 'minecraft:blue_ice', 'gtceu:data_orb', 'gtceu:luv_sensor',
     'gtceu:luv_emitter', 'gtceu:luv_field_generator', 'gtceu:luv_machine_hull', 'gcyr:heat_shielding_fabric',
     'gtceu:hv_lithium_battery', 'gtceu:titanium_plate', 'grindless:rtg_pellet', 'grindless:sagittarius_a_star_signal',

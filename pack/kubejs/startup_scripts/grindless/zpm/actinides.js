@@ -79,50 +79,90 @@
     )
   }
 
-  const WALL = ['XXXXXXX', 'RRRRRRR', 'RRRRRRR', 'RRRRRRR', 'RRRRRRR']
-  const FLOOR_ROOF = 'RRRRRRR'
+  // QR-S2: both plants are built cell by cell (x left -> right 0..6, y bottom -> top 0..4, z back -> front 0..6). Row 0 and the front/back
+  // floor stay the parts' casing (X); frame posts (M) stand at the corners, laminated glass (L) in the walls and the roof.
+  function grid(fn) {
+    var slices = []
+    for (var z = 0; z < 7; z++) {
+      var rows = []
+      for (var y = 0; y < 5; y++) {
+        var row = ''
+        for (var x = 0; x < 7; x++) row += (z === 6 && y === 1 && x === 3) ? 'S' : fn(x, y, z)
+        rows.push(row)
+      }
+      slices.push(rows)
+    }
+    return slices
+  }
 
-  function slice(interior) {
-    return [FLOOR_ROOF].concat(interior.map(function (row) { return 'R' + row + 'R' }), [FLOOR_ROOF])
+  // the hot cell hall: corner posts and a roof gantry of tungstensteel frame, glass slits, the dissolver wall of PTFE pipe and the
+  // cold trap of frostproof casing on the back wall, the press (frame tower) and the cold trap's hollow cube inside
+  function retrievalCell(x, y, z) {
+    var edge = x === 0 || x === 6 || z === 0 || z === 6
+    var corner = (x === 0 || x === 6) && (z === 0 || z === 6)
+    if (y === 0) return 'X'
+    if (y === 4) {
+      if (corner || x === 3) return 'M'
+      if ((x === 2 || x === 4) && z >= 2 && z <= 4) return 'L'
+      return 'R'
+    }
+    if (edge) {
+      if (corner) return 'M'
+      if (z === 0) return x <= 2 ? 'P' : (x >= 4 ? 'F' : 'R')
+      if (z === 6) return y === 3 ? 'L' : 'R'
+      return y >= 2 && z >= 2 && z <= 4 ? 'L' : 'R'
+    }
+    // interior (x, z 1..5; y 1..3)
+    if (z <= 3 && x === 1) return 'P'
+    if (z <= 3 && x >= 3 && !(z === 2 && y === 2 && x === 4)) return 'F'
+    if (z === 4 && x <= 2 && y <= 2) return 'M'
+    return '#'
+  }
+
+  // the mixer-settler hall: frame trusses over every second slice, glass skylights between them, posts and glass bays in the side walls
+  function partitionCell(x, y, z) {
+    var edge = x === 0 || x === 6 || z === 0 || z === 6
+    var corner = (x === 0 || x === 6) && (z === 0 || z === 6)
+    if (y === 0) return 'X'
+    if (y === 4) {
+      if (z % 2 === 0) return 'M'
+      return x === 0 || x === 6 ? 'R' : 'L'
+    }
+    if (edge) {
+      if (corner) return 'M'
+      if (x === 0 || x === 6) return z % 2 === 0 ? 'M' : (y >= 2 ? 'L' : 'R')
+      if (z === 0) return y === 2 ? 'G' : 'R'
+      return y === 2 ? 'L' : 'R'
+    }
+    // the two banks of mixer-settlers (PTFE pipe casing), a walkway between them
+    if (z >= 1 && z <= 4 && y <= 2 && x !== 3) return 'P'
+    return '#'
   }
 
   const RETRIEVAL_SPEC = {
-    slices: [
-      WALL,
-      slice(['P#FFF', 'P#FFF', 'P#FFF']),
-      slice(['P#FFF', 'P#F#F', 'P#FFF']),
-      slice(['P#FFF', 'P#FFF', 'P#FFF']),
-      slice(['MM###', 'MM###', '#####']),
-      slice(['#####', '#####', '#####']),
-      ['XXXXXXX', 'RRRSRRR', 'RRRRRRR', 'RRRRRRR', 'RRRRRRR']
-    ],
+    slices: grid(retrievalCell),
     symbols: {
       S: Pat.controller(),
       X: cells(),
       R: Pat.block(SHIELD),
       P: Pat.block(PIPE),
       F: Pat.block(FROST),
+      L: Pat.block(GLASS),
       M: Pat.frame([PRESS]),
       '#': Pat.air()
     }
   }
 
   const PARTITION_SPEC = {
-    slices: [
-      WALL,
-      slice(['PP#PP', 'PP#PP', '#####']),
-      slice(['PP#PP', 'PP#PP', '#####']),
-      slice(['PP#PP', 'PP#PP', '#####']),
-      slice(['PP#PP', 'PP#PP', '#####']),
-      slice(['#####', '#####', '#####']),
-      ['XXXXXXX', 'RRRSRRR', 'RGGGGGR', 'RRRRRRR', 'RRRRRRR']
-    ],
+    slices: grid(partitionCell),
     symbols: {
       S: Pat.controller(),
       X: cells(),
       R: Pat.block(SHIELD),
       P: Pat.block(PIPE),
-      G: Pat.block(GLASS),
+      L: Pat.block(GLASS),
+      M: Pat.frame([PRESS]),
+      G: Pat.block(FROST),
       '#': Pat.air()
     }
   }

@@ -43,17 +43,23 @@
   // rows bottom -> top: 0 floor (ports or casing), 1-3 the walls around the hollow bay (rail along its floor, dock at its end), 4 the roof
   const BAY_PARTS = { energy_input: { min: 1, max: 2 },   input_bus: { min: 1, max: 2 }, input_hatch: { min: 1, max: 2 },
       output_bus: { min: 1, max: 2 }, output_hatch: { min: 1, max: 3 } }
+  // QR-S2: a hangar, not a box. Titanium frame posts at the four corners and round the roof, laminated glass windows in the side walls and
+  // a glass skylight either side of the roof ridge, a station truss deck under the launch rail.
   function bayLayer(z) {
-    const rows = []
-    for (let y = 0; y < 5; y++) {
-      let row = ''
-      for (let x = 0; x < 7; x++) {
+    var rows = []
+    for (var y = 0; y < 5; y++) {
+      var row = ''
+      for (var x = 0; x < 7; x++) {
         var edge = x === 0 || x === 6 || z === 0 || z === 8
-        let c = ' '
-        if (y === 0) c = 'X'
-        else if (y === 4) c = 'C'
-        else if (edge) c = z === 8 && y === 1 ? (x === 3 ? 'S' : 'X') : 'C'
-        else if (y === 1 && x === 3) c = z === 7 ? 'D' : 'R'
+        var post = (x === 0 || x === 6) && (z === 0 || z === 8)
+        var c = ' '
+        if (y === 0) c = edge ? 'X' : 'T'
+        else if (y === 4) c = edge ? 'F' : (x === 3 ? 'C' : 'D')
+        else if (post) c = 'F'
+        else if (edge) {
+          if (z === 8) c = y === 1 ? (x === 3 ? 'S' : 'X') : 'C'
+          else c = y === 2 ? 'D' : 'C'
+        } else if (y === 1 && x === 3) c = z === 7 ? 'D' : 'F'
         row += c
       }
       rows.push(row)
@@ -66,7 +72,8 @@
       S: Pat.controller(),
       X: parts(BAY, 12, BAY_PARTS),
       C: Pat.block(BAY),
-      R: Pat.frame(['titanium']),
+      F: Pat.frame(['titanium']),
+      T: Pat.block(STATION),
       D: Pat.block(GLASS)
     }
   }
@@ -75,17 +82,25 @@
   // rows bottom -> top: 0 the station truss deck (ports or truss), 1-5 the inert shell around the PTFE pipe core, 6 the roof
   const REFORMER_PARTS = { energy_input: { min: 1, max: 2 }, input_bus: { min: 1, max: 2 }, input_hatch: { min: 1, max: 2 },
     output_bus: { min: 1, max: 2 }, output_hatch: { min: 1, max: 2 } }
+  // QR-S2: a reaction tower: titanium frame posts, nichrome heater bands (rows 2 and 4), a laminated glass window ring in the middle and the PTFE
+  // pipe core rising through a station truss roof.
   function reformerLayer(z) {
-    const rows = []
-    for (let y = 0; y < 7; y++) {
-      let row = ''
-      for (let x = 0; x < 5; x++) {
+    var rows = []
+    for (var y = 0; y < 7; y++) {
+      var row = ''
+      for (var x = 0; x < 5; x++) {
         var edge = x === 0 || x === 4 || z === 0 || z === 4
-        let c = ' '
-        if (y === 0) c = 'X'
-        else if (y === 6) c = 'C'
-        else if (edge) c = z === 4 && y === 1 ? (x === 2 ? 'S' : 'X') : 'C'
-        else if (x === 2 && z === 2) c = 'P'
+        var post = (x === 0 || x === 4) && (z === 0 || z === 4)
+        var c = ' '
+        if (y === 0) c = edge ? 'X' : 'T'
+        else if (y === 6) c = edge ? 'C' : (x === 2 && z === 2 ? 'P' : 'T')
+        else if (post) c = 'F'
+        else if (edge) {
+          if (y === 1) c = z === 4 ? (x === 2 ? 'S' : 'X') : 'C'
+          else if (y === 2 || y === 4) c = 'K'
+          else if (y === 3) c = 'G'
+          else c = 'C'
+        } else if (x === 2 && z === 2) c = 'P'
         row += c
       }
       rows.push(row)
@@ -98,6 +113,10 @@
       S: Pat.controller(),
       X: parts(STATION, 8, REFORMER_PARTS),
       C: Pat.block(INERT),
+      T: Pat.block(STATION),
+      F: Pat.frame(['titanium']),
+      K: Pat.block('gtceu:nichrome_coil_block'),
+      G: Pat.block(GLASS),
       P: Pat.block(PTFE_PIPE)
     }
   }

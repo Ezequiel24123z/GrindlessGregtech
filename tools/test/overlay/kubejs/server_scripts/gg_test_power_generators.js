@@ -257,6 +257,7 @@
 
   function plainBlock(sym) {
     if (sym.kind === 'blocks') return sym.blocks[0]
+    if (sym.kind === 'frames') return 'gtceu:' + sym.materials[0] + '_frame'
     if (sym.kind === 'oneOf') {
       for (var i = 0; i < sym.options.length; i++) {
         if (sym.options[i].kind === 'blocks') return sym.options[i].blocks[0]
