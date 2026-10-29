@@ -1,4 +1,4 @@
-// priority: -9245
+// priority: -9280
 // -----------------------------------------------------------------------------------------------
 // RX J1856.5-3754: the crust lift, the neutron drip separator, the neutronium cage, the r-process decompressor and the decay heat vault
 // (docs/eras/uiv.md, machines 13-17, lines 30-33; package UIV-B2): the machines, their recipe types and the package's own items and fluids.
