@@ -155,11 +155,10 @@
           "duration": 300,
           "itemsIn": [
             { "id": "gtceu:terbium_dust", "count": 2 },
-            { "id": "gtceu:tin_dust", "count": 1 },
-            { "id": "gtceu:rhea_plate", "count": 1 }
+            { "id": "gtceu:tin_dust", "count": 1 }
           ],
           "kept": [],
-          "fluidsIn": [{ "id": "gtceu:argon", "amount": 250 }],
+          "fluidsIn": [],
           "charge": [],
           "itemsOut": [{ "id": "grindless:tb_droplet_target", "count": 1 }],
           "fluidsOut": []
@@ -172,11 +171,10 @@
           "duration": 400,
           "itemsIn": [
             { "id": "grindless:lan_barrier_mirror", "count": 1 },
-            { "id": "gtceu:ruthenium_dust", "count": 1 },
-            { "id": "gtceu:tungsten_foil", "count": 1 }
+            { "id": "gtceu:ruthenium_dust", "count": 1 }
           ],
           "kept": [],
-          "fluidsIn": [{ "id": "gtceu:argon", "amount": 250 }],
+          "fluidsIn": [],
           "charge": [],
           "itemsOut": [{ "id": "grindless:beuv_mirror", "count": 1 }],
           "fluidsOut": []

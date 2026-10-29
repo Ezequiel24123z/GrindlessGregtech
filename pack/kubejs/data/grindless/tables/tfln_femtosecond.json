@@ -17,8 +17,8 @@
         },
         {
           "name": "poled_lnoi", "circuit": 3, "eut": 31457280, "duration": 1200,
-          "itemsIn": [{ "id": "grindless:lnoi_wafer", "count": 1 }, { "id": "gtceu:gold_plate", "count": 1 }],
-          "fluidsIn": [{ "id": "gtceu:argon", "amount": 500 }],
+          "itemsIn": [{ "id": "grindless:lnoi_wafer", "count": 1 }],
+          "fluidsIn": [],
           "itemsOut": [{ "id": "grindless:poled_lnoi_wafer", "count": 1 }]
         },
         {
@@ -107,14 +107,14 @@
       "recipes": [
         {
           "name": "shg_486_stage", "circuit": 0, "eut": 1966080, "duration": 400,
-          "itemsIn": [{ "id": "grindless:ppln_waveguide", "count": 1 }, { "id": "grindless:uev_emitter", "count": 1 }, { "id": "gtceu:rhea_plate", "count": 1 }, { "id": "gtceu:gold_plate", "count": 1 }],
-          "fluidsIn": [{ "id": "gtceu:argon", "amount": 500 }],
+          "itemsIn": [{ "id": "grindless:ppln_waveguide", "count": 1 }, { "id": "grindless:uev_emitter", "count": 1 }],
+          "fluidsIn": [],
           "itemsOut": [{ "id": "grindless:shg_486_stage", "count": 1 }]
         },
         {
           "name": "ps_cooling_laser", "circuit": 0, "eut": 1966080, "duration": 400,
-          "itemsIn": [{ "id": "grindless:shg_486_stage", "count": 1 }, { "id": "grindless:ppln_waveguide", "count": 1 }, { "id": "gtceu:rhea_plate", "count": 1 }, { "id": "gtceu:gold_plate", "count": 1 }],
-          "fluidsIn": [{ "id": "gtceu:helium", "amount": 500 }],
+          "itemsIn": [{ "id": "grindless:shg_486_stage", "count": 1 }, { "id": "grindless:ppln_waveguide", "count": 1 }],
+          "fluidsIn": [],
           "itemsOut": [{ "id": "grindless:ps_cooling_laser", "count": 1 }]
         }
       ]
@@ -123,7 +123,7 @@
       "recipes": [
         {
           "name": "crystal_read_verify", "circuit": 0, "eut": 491520, "duration": 400,
-          "itemsIn": [{ "id": "grindless:written_crystal_blank", "count": 1 }, { "id": "gtceu:tungsten_foil", "count": 1 }],
+          "itemsIn": [{ "id": "grindless:written_crystal_blank", "count": 1 }],
           "itemsOut": [{ "id": "grindless:verified_crystal", "count": 1 }]
         }
       ]

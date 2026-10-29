@@ -57,7 +57,7 @@ test('polarised proton source: circuits 1-3, 31457280 EU/t, 800 t, slots', () =>
   }
   assert.deepEqual(inputs(rc[0]), ['gtceu:detritiated_protium']);
   assert.deepEqual(outputs(rc[0]), ['gtceu:polarised_h_gas', 'gtceu:hydrogen']);
-  assert.deepEqual(inputs(rc[1]), ['grindless:li6_hydride', 'gtceu:helium']);
+  assert.deepEqual(inputs(rc[1]), ['grindless:li6_hydride']);
   assert.deepEqual(outputs(rc[1]), ['grindless:polarised_li6h']);
   assert.deepEqual(inputs(rc[2]), ['gtceu:nitrogen_15_ammonia']);
   assert.deepEqual(outputs(rc[2]), ['grindless:polarised_15nh3_ice']);
@@ -96,12 +96,12 @@ test('Mk5 ring: three fuels, three plasmas, starts above 2^31, within the tier-1
 });
 
 test('casing: resolves from the W fibre preform and Li-Sn; line 7 and 29 steps', () => {
-  assert.deepEqual(inputs(by('assembler', 'first_wall_tile')), ['grindless:plasma_sprayed_tile', 'gtceu:tungsten_steel_plate', 'gtceu:rhea_plate', 'gtceu:argon']);
-  assert.deepEqual(inputs(by('assembler', 'li_sn_armoured_tile')), ['grindless:first_wall_tile', 'gtceu:tungsten_foil', 'gtceu:rhea_plate', 'gtceu:li_sn']);
-  assert.deepEqual(inputs(by('assembler', 'uiv_fusion_casing_wall')), ['grindless:li_sn_armoured_tile', 'grindless:w_fibre_preform', 'gtceu:tungsten_foil', 'gtceu:rhea_plate', 'gtceu:li_sn', 'gtceu:argon']);
-  assert.deepEqual(inputs(by('assembler', 'cps_wetted_mesh')), ['grindless:w_mesh', 'gtceu:rhea_plate', 'gtceu:tungsten_foil', 'gtceu:li_sn', 'gtceu:argon']);
-  assert.deepEqual(inputs(by('assembler', 'divertor_cassette')), ['grindless:cps_wetted_mesh', 'gtceu:tungsten_steel_plate', 'gtceu:rhea_plate', 'gtceu:helium']);
-  assert.deepEqual(inputs(by('assembler', 'divertor')), ['grindless:divertor_cassette', 'grindless:w_fibre_preform', 'gtceu:rhea_plate', 'gtceu:tungsten_foil', 'gtceu:argon']);
+  assert.deepEqual(inputs(by('assembler', 'first_wall_tile')), ['grindless:plasma_sprayed_tile',   'gtceu:tungsten_steel_plate']);
+    assert.deepEqual(inputs(by('assembler', 'li_sn_armoured_tile')), ['grindless:first_wall_tile', 'gtceu:li_sn']);
+    assert.deepEqual(inputs(by('assembler', 'uiv_fusion_casing_wall')), ['grindless:li_sn_armoured_tile', 'grindless:w_fibre_preform', 'gtceu:li_sn']);
+    assert.deepEqual(inputs(by('assembler', 'cps_wetted_mesh')), ['grindless:w_mesh', 'gtceu:li_sn']);
+    assert.deepEqual(inputs(by('assembler', 'divertor_cassette')), ['grindless:cps_wetted_mesh', 'gtceu:tungsten_steel_plate']);
+    assert.deepEqual(inputs(by('assembler', 'divertor')), ['grindless:divertor_cassette', 'grindless:w_fibre_preform']);
   assert.deepEqual(ids(by('assembler', 'uiv_fusion_casing_divertor').itemsIn)[0], 'grindless:divertor');
   for (const n of ['uiv_fusion_casing_wall', 'uiv_fusion_casing_divertor']) assert.deepEqual(ids(by('assembler', n).itemsOut), ['grindless:uiv_fusion_casing']);
 });

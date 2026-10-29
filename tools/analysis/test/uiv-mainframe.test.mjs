@@ -55,11 +55,11 @@ test('assembler rows: names unique, circuit 0, figures, ids', () => {
     assert.ok(Number.isInteger(r.eut) && r.eut > 0 && Number.isInteger(r.duration) && r.duration > 0, r.name);
     assert.equal(r.itemsOut.length, 1, r.name);
   }
-  assert.deepEqual(inputs(rc[0]), ['grindless:pcm_crossbar', 'grindless:glass_interposer', 'gtceu:rhea_plate', 'gtceu:gold_plate', 'gtceu:argon']);
+  assert.deepEqual(inputs(rc[0]), ['grindless:pcm_crossbar', 'grindless:glass_interposer']);
   assert.deepEqual(outputs(rc[0]), ['grindless:crossbar_on_interposer']);
-  assert.deepEqual(inputs(rc[1]), ['grindless:thf4_film', 'gtceu:glass_plate', 'gtceu:rhea_plate', 'gtceu:tungsten_foil', 'gtceu:argon']);
+  assert.deepEqual(inputs(rc[1]), ['grindless:thf4_film', 'gtceu:glass_plate']);
   assert.deepEqual(outputs(rc[1]), ['grindless:capped_thf4_film']);
-  assert.deepEqual(inputs(rc[2]), ['grindless:uev_sensor', 'grindless:eo_microcomb', 'grindless:chip_nuclear_clock', 'gtceu:gold_plate', 'gtceu:rhea_plate', 'gtceu:argon']);
+  assert.deepEqual(inputs(rc[2]), ['grindless:uev_sensor', 'grindless:eo_microcomb', 'grindless:chip_nuclear_clock']);
   assert.deepEqual(outputs(rc[2]), ['grindless:uiv_sensor']);
 });
 
