@@ -26,6 +26,24 @@ new era follows so it does not happen again. The per-area standards live in the 
 | 16 | Controllers that need their own product: 110 machines unreachable on main after QR-R2 and QR-R4 (mercury solar works, fumarole condenser, ark biosphere, BN reactor, PIT line, fibre draw tower, light sail fab, heat source works, zone refining tower and everything after them); QR-R5 repeated it once (the SiC device fab researched from a SiC plate only its own line makes, which stranded six UHV machines) | "Own-line" research and domain items were picked from what the machine makes; T0 had no reachability check and native reachability needs a dump | `recipe-cycles.mjs` (in T0) fails on any controller that cannot be built from what exists before it; research and domain inputs come from earlier machines (QR-F3). The integrator reruns it after every merge, because two packages that each pass alone can form a cycle together |
 | 17 | "Depth raisers": QR-R6's first handoff met the UEV complexity floor by pasting one deep part (the HfTaCN heating element) as a consumable into yarns, wafers, preforms and targets, and 1000 mB of helium into about 20 assembler rows | The complexity score counts depth and distinct inputs but cannot see whether an input belongs to the item's process | The review rejects it: a machine's heater or tool is never a per-item consumable, an inert gas only where the process needs one, and the score is raised by a real step or an intermediate of the item's own line (QR-R6 repair) |
 | 18 | Twin recipes: after QR-R6 the UEV energy and dynamo hatches of each amperage had the same inputs, so GTM's lookup always picked the energy hatch and the dynamo hatches could not be made; QR-R7 hit the same on UIV | The repair changed inputs after the bench lookup guard had run, and no static check compares input lists of one recipe type | Energy hatches take voltage coils and dynamo hatches springs (GTM's own split); the lookup guard reruns after any repair that changes inputs, and a static twin check joins T0 (QR-F4) |
+
+## Results (v0.13.0)
+
+| Area | When the review started | At release | Kept by |
+|---|---|---|---|
+| Structures | 173 of 234 fail the rubric | 0, no baseline (UIV included); 234 of 234 form in the world | `structure-quality.mjs`, forming sweep |
+| Recipes | 393 baselined recipe/output pairs | 52, all justified below; no controller unreachable | `recipe-quality.mjs`, `recipe-cycles.mjs`, `recipe-twins.test.mjs` |
+| Processes | 329 findings: 216 multiblocks without info, 39 machines and 20 recipe types with no recipe, 16 machines with no craft, 5 unused items | 30 on the last pre-release dump (3 self-gain, 27 trivial steps); the release dump drops those fixed in wave 2 | `process-audit.mjs` |
+| EMI | GTM's plugin aborted: no GT process, workstation or preview | Plugin loads; each multiblock of ours has an info page in English and Spanish | client EMI audit, `emi_runtime_known.json` |
+| Sounds | none of ours | 52 recipe types with a working loop | `sounds.md` |
+
+Deferred, with the reason (each stays baselined only until its fix lands):
+- 50 UIV parts below the UIV floor: they need a real intermediate of their own line, not filler; done in the UIV build (v0.14.0), `recipes.md` "UIV own-line intermediate pending".
+- UEV target wheel and its blank: titanium plus berkelium oxide has no honest deeper chain yet.
+- UIV one-in-one-out steps (poled LNOI wafer, annealed neon cone, C-12 ion-milled plate, MH braid) and the report-only fusion ash fluids (He-3/He-3, p-Li-6, p-N-15; shared ZPM fusion table).
+- UIV doubts for the UIV build: the decay heat vault has only generator recipes; the TFLN fab tooltip says cleanroom but its recipes do not require one; BMG flexspline machining is a second source of ZrTiCuNiBe glass dust.
+- EMI: 9 addon multiblocks show no preview (GTM assembly line, cleanroom, data bank and others); the next client audit tells whether the mod turned the preview off on purpose.
+
 ## Checklist for every new era (UIV, UXV and later)
 
 Design (`docs/eras/<era>.md`):
