@@ -197,8 +197,10 @@
     var greenhouse = GTRegistries.RECIPE_TYPES.get(rl('gtceu:greenhouse'))
     var machines = ['gtceu:hv_vein_drill', 'gtceu:hv_greenhouse']
     var missingMachines = machines.filter(function (id) { return !GTRegistries.MACHINES.get(rl(id)) })
+    // fluid outputs: at least the one oxygen output of the CO2 variants; LuV-B4 widened the shared type further (orbital_biology.js setMaxIOSize)
     var widened = !!drilling && !!greenhouse && drilling.getMaxInputs(fc) === 1 && greenhouse.getMaxInputs(ic) === 3 &&
-      greenhouse.getMaxInputs(fc) === 2 && greenhouse.getMaxOutputs(fc) === 1
+      greenhouse.getMaxInputs(fc) === 2 &&
+      greenhouse.getMaxOutputs(fc) >= 1
     check(SCOPE, 'recipe_types', widened && missingMachines.length === 0,
       'machines=' + (missingMachines.length === 0 ? 'registered' : 'missing ' + missingMachines.join(',')) +
       ' vein_drilling fluid in=' + (drilling ? drilling.getMaxInputs(fc) : '?') + ' greenhouse items in=' + (greenhouse ? greenhouse.getMaxInputs(ic) : '?') +

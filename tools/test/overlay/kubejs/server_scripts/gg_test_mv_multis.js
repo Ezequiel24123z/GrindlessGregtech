@@ -186,8 +186,10 @@
     var greenhouse = GTRegistries.RECIPE_TYPES.get(rl('gtceu:greenhouse'))
     var machines = ['gtceu:mv_vein_drill', 'gtceu:mv_greenhouse']
     var missingMachines = machines.filter(function (id) { return !GTRegistries.MACHINES.get(rl(id)) })
+    // fluid outputs: at least the one oxygen output of the CO2 variants; LuV-B4 widened the shared type further (orbital_biology.js setMaxIOSize)
     var widened = !!drilling && !!greenhouse && drilling.getMaxInputs(fc) === 1 && greenhouse.getMaxInputs(ic) === 3 &&
-      greenhouse.getMaxInputs(fc) === 2 && greenhouse.getMaxOutputs(fc) === 1
+      greenhouse.getMaxInputs(fc) === 2 &&
+      greenhouse.getMaxOutputs(fc) >= 1
     check(SCOPE, 'recipe_types', widened && missingMachines.length === 0,
       'machines=' + (missingMachines.length === 0 ? 'registered' : 'missing ' + missingMachines.join(',')) +
       ' vein_drilling fluid in=' + (drilling ? drilling.getMaxInputs(fc) : '?') + ' greenhouse items in=' + (greenhouse ? greenhouse.getMaxInputs(ic) : '?') +
@@ -200,12 +202,19 @@
     var wantDrilling = overworld + (overworld + nether)
     // the End is MV since v0.5.0: its vanadium steel bit recipes (hv/family_vein_drilling.js) live under mv/ too
     var endMv = G.hv && G.hv.drilling ? G.hv.drilling.endMv : -1
+    // later additions under mv/: the sulfuric acid leaching variant of every vein (Overworld, Nether and End) and the fermented
+    // biomass booster of every crop (the CO2 variant is the original row, one per crop)
+    var wantAcid = overworld + nether + endMv
     var wantGreenhouse = G.greenhouse.entries.length + LV.greenhouseExtras.length
+    var wantBiomass = wantGreenhouse
     var haveDrilling = countWithPath(drillRecipes, 'vein_drilling/mv/')
     var haveGreenhouse = countWithPath(greenRecipes, 'greenhouse/mv/')
-    check(SCOPE, 'recipes', haveDrilling === wantDrilling + endMv && endMv === G.hv.endVeins().length && haveGreenhouse === wantGreenhouse &&
-      MV.drilling.count === wantDrilling && MV.greenhouse.count === wantGreenhouse,
-      'mv vein_drilling=' + haveDrilling + '/' + (wantDrilling + endMv) + ' (End ' + endMv + ') mv greenhouse=' + haveGreenhouse + '/' + wantGreenhouse +
+    var wantDrillingAll = wantDrilling + endMv + wantAcid
+    var wantGreenhouseAll = wantGreenhouse + wantBiomass
+    check(SCOPE, 'recipes', haveDrilling === wantDrillingAll && endMv === G.hv.endVeins().length && haveGreenhouse === wantGreenhouseAll &&
+      MV.drilling.count === wantDrilling && MV.drilling.acid === wantAcid &&
+      MV.greenhouse.count === wantGreenhouse && !!MV.greenhouseBiomass && MV.greenhouseBiomass.count === wantBiomass,
+      'mv vein_drilling=' + haveDrilling + '/' + wantDrillingAll + ' (End ' + endMv + ', acid ' + wantAcid + ') mv greenhouse=' + haveGreenhouse + '/' + wantGreenhouseAll +
       ' (all of the type: vein_drilling=' + drillRecipes.length + ' greenhouse=' + greenRecipes.length + ')')
 
     var ids = ['grindless:crafting/mv_vein_drill', 'grindless:crafting/mv_greenhouse', 'grindless:crafting/vanadium_steel_drill_bit']

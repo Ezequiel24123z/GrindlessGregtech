@@ -435,9 +435,25 @@
       report.removed.length + '/' + table.remove.length + ': ' + notes.join(' ; ') + (bad.length > 0 ? ' problems=' + bad.join(' | ') : ''))
   }
 
+  // A recipe of a later era than the Moon is no early Earth source: the leak checks only guard what an MV-or-earlier player could
+  // do before the Moon. Later eras (their ids have an era directory, e.g. pgm_refining/uev/..., or their GT recipe runs above HV's
+  // 512 EU/t, or it is GTM's distillery copy of such a tower recipe) legitimately make helium-3 and the mercury-line metals from
+  // their own, later lines.
+  var LATE_ERA_DIR = /\/(iv|luv|zpm|uv|uhv|uev|uiv|uxv|opv|max)\//
+  function lateByEra(r, id, gt) {
+    if (LATE_ERA_DIR.test(id)) return true
+    if (!gt) return false
+    if (Number(r.getInputEUt().voltage()) > 512) return true
+    // GTM copies a distillation tower recipe into the distillery (gtceu:distillery/<name>_to_<output>) at a lower voltage:
+    // it belongs to the era of the tower recipe it copies
+    var copy = id.match(/^gtceu:distillery\/(.+)_to_[a-z0-9_]+$/)
+    var tower = copy === null ? null : byId('grindless:distillation_tower/' + copy[1])
+    return tower !== null && isGT(tower) && Number(tower.getInputEUt().voltage()) > 512
+  }
+
   // every loaded recipe that gives a watched output of another world (offworld_only.json worlds.<world>.watched: the Moon's
   // titanium-bearing items and helium-3; Mars' tungsten, samarium and deuterium) without one going in and without a condition that
-  // keeps it off Earth is a leak, unless allowedLate names it
+  // keeps it off Earth is a leak, unless allowedLate names it or it belongs to a later era (lateByEra)
   function earthScan() {
     var L = lazy()
     var G = global.grindless
@@ -521,7 +537,7 @@
               continue
             }
           }
-          if (isLate === null) isLate = late.some(function (re) { return re.test(id) })
+          if (isLate === null) isLate = late.some(function (re) { return re.test(id) }) || lateByEra(r, id, gt)
           if (isLate) {
             W.count.late++
             continue
