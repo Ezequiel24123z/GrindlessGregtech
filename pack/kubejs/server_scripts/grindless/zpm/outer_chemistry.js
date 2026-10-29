@@ -109,10 +109,15 @@
   OC.skipped = []
   OC.clashes = []
 
+  // ASSEMBLY LINE with scanner research: ZPM hull + 2 ZPM pumps + 4 ZPM circuits + two domain parts of the machine's own process +
+  // soldering alloy + lubricant (the shared fluid recipe is in addCrafting)
   OC.crafting = [
-    { id: 'grindless:crafting/methane_pyrolyser', output: 'gtceu:methane_pyrolyser', pattern: ['CPC', ' H ', 'CPC'], keys: { C: '#gtceu:circuits/zpm', P: 'gtceu:zpm_electric_pump', H: 'gtceu:zpm_machine_hull' } },
-    { id: 'grindless:crafting/vent_bioreactor', output: 'gtceu:vent_bioreactor', pattern: ['CPC', ' H ', 'CPC'], keys: { C: '#gtceu:circuits/zpm', P: 'gtceu:zpm_electric_pump', H: 'gtceu:zpm_machine_hull' } },
-    { id: 'grindless:crafting/aerogel_works', output: 'gtceu:aerogel_works', pattern: ['CPC', ' H ', 'C C'], keys: { C: '#gtceu:circuits/zpm', P: 'gtceu:zpm_electric_pump', H: 'gtceu:zpm_machine_hull' } }
+    { id: 'grindless:assembly_line/methane_pyrolyser', output: 'gtceu:methane_pyrolyser', pump: 'gtceu:zpm_electric_pump',
+      domain: ['grindless:platinum_electrode', 'grindless:ruthenium_catalyst'], research: 'grindless:titanium_drill_bit' },
+    { id: 'grindless:assembly_line/vent_bioreactor', output: 'gtceu:vent_bioreactor', pump: 'gtceu:zpm_electric_pump',
+      domain: ['grindless:molten_salt_charge', 'grindless:ion_exchange_resin'], research: 'grindless:sintered_regolith' },
+    { id: 'grindless:assembly_line/aerogel_works', output: 'gtceu:aerogel_works', pump: 'gtceu:zpm_electric_pump',
+      domain: ['grindless:zircaloy_cladding_tube', 'grindless:sulfur_concrete_casing'], research: 'grindless:cryogenic_fuel_tank' }
   ]
 
   function keysOf(r) {
@@ -177,14 +182,18 @@
 
   function addCrafting(event) {
     OC.crafting.forEach(function (c) {
-      var ids = [c.output]
-      Object.keys(c.keys).forEach(function (k) { if (c.keys[k].charAt(0) !== '#') ids.push(c.keys[k]) })
+      var ids = [c.output, 'gtceu:zpm_machine_hull', c.pump, c.research].concat(c.domain)
       var missing = ids.filter(function (id) { return !Item.exists(id) })
       if (missing.length > 0) {
         console.error(LOG + 'outer chemistry crafting ' + c.id + ' skipped, unknown item(s): ' + missing.join(', '))
         return
       }
-      event.recipes.gtceu.shaped(c.output, c.pattern, c.keys).id(c.id)
+      var b = event.recipes.gtceu.assembly_line(c.id.replace('assembly_line/', ''))
+      b.itemInputs('gtceu:zpm_machine_hull', '2x ' + c.pump, '4x #gtceu:circuits/zpm', '2x ' + c.domain[0], '2x ' + c.domain[1])
+      b.inputFluids(Fluid.of('gtceu:soldering_alloy', 1152), Fluid.of('gtceu:lubricant', 1000))
+      b.itemOutputs(c.output)
+      b.scannerResearch(Item.of(c.research))
+      b.EUt(ZPM_VA).duration(1200)
     })
   }
 

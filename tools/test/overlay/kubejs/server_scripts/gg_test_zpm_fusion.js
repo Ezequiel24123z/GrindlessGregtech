@@ -105,7 +105,7 @@
       check('a7_static_conv_' + p[0], Number(r.duration) === p[2] && Math.abs(conv - 1.25 * turbine) < 0.5 && fin['gtceu:' + p[0]] === 1 && fout['gtceu:' + p[1]] === 1,
         outEUt(r) + ' EU/t x ' + Number(r.duration) + ' t = ' + conv + ' EU/mB; turbine ' + turbine + ' EU/mB (x1.25 = ' + (1.25 * turbine) + ')')
     })
-    ;['grindless:crafting/plasma_quench_caster', 'grindless:crafting/direct_energy_converter'].forEach(function (id) {
+    ;['grindless:assembly_line/plasma_quench_caster', 'grindless:assembly_line/direct_energy_converter'].forEach(function (id) {
       check('a7_static_' + id.replace('grindless:crafting/', 'crafting_'), byId(id) !== null, id)
     })
   }

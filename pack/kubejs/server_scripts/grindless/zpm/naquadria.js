@@ -182,38 +182,48 @@
 
   // ---------------------------------------------------------------- the casing and the controllers
 
+  var VAULT = 'grindless:radiation_vault_casing'
+
+  // the containment casing: the table's inputs + a radiation vault casing (LuV) and soldering alloy for the shell's welds
   function addCasing(event) {
     var c = NQ.casing
-    var missing = c.itemsIn.map(function (x) { return x.id }).concat([c.id]).filter(function (id) { return !Item.exists(id) })
+    var missing = c.itemsIn.map(function (x) { return x.id }).concat([c.id, VAULT]).filter(function (id) { return !Item.exists(id) })
     if (missing.length > 0) {
       console.error(LOG + 'naquadria containment casing recipe skipped, unknown item(s): ' + missing.join(', '))
       return
     }
     var r = event.recipes.gtceu.assembler(c.id)
     c.itemsIn.forEach(function (x) { r.itemInputs(x.count + 'x ' + x.id) })
+    r.itemInputs('1x ' + VAULT).inputFluids(Fluid.of('gtceu:soldering_alloy', 144))
     r.itemOutputs(c.count + 'x ' + c.id).EUt(c.eut).duration(c.duration)
     NQ.casingRecipe = 'grindless:assembler/' + c.id.split(':')[1]
   }
 
+  // ASSEMBLY LINE with scanner research: ZPM hull + 2 pumps + the machine's part + 4 ZPM circuits + two domain parts of its own.
+  // Refinery: sensor + radiation vault casings (LuV) + RTG pellets; research: the containment casing. Fuel works: motor + LEU
+  // pellets + molten salt charge (EV); research: the RTG pellet.
   function addControllers(event) {
     var HULL = 'gtceu:zpm_machine_hull'
     var PUMP = 'gtceu:zpm_electric_pump'
     var defs = [
-      { machine: NQ.machines.refinery.machine, extra: 'gtceu:zpm_sensor', pattern: ['CSC', 'PHP', 'C C'], key: 'S', name: 'naquadria_refinery' },
-      { machine: NQ.machines.fuelWorks.machine, extra: 'gtceu:zpm_electric_motor', pattern: ['CMC', 'PHP', 'C C'], key: 'M', name: 'naquadah_fuel_works' }
+      { machine: NQ.machines.refinery.machine, extra: 'gtceu:zpm_sensor', domain: [VAULT, 'grindless:rtg_pellet'], research: 'grindless:naquadria_containment_casing', name: 'naquadria_refinery' },
+      { machine: NQ.machines.fuelWorks.machine, extra: 'gtceu:zpm_electric_motor', domain: ['grindless:leu_pellet', 'grindless:molten_salt_charge'], research: 'grindless:rtg_pellet', name: 'naquadah_fuel_works' }
     ]
     NQ.controllerRecipes = []
     defs.forEach(function (d) {
-      var parts = [HULL, PUMP, d.extra, d.machine]
+      var parts = [HULL, PUMP, d.extra, d.machine, d.research].concat(d.domain)
       var missing = parts.filter(function (id) { return !Item.exists(id) })
       if (missing.length > 0) {
         console.error(LOG + d.name + ' controller recipe skipped, unknown item(s): ' + missing.join(', '))
         return
       }
-      var ingredients = { C: '#gtceu:circuits/zpm', P: PUMP, H: HULL }
-      ingredients[d.key] = d.extra
-      event.recipes.gtceu.shaped(d.machine, d.pattern, ingredients).id('grindless:crafting/' + d.name)
-      NQ.controllerRecipes.push('grindless:crafting/' + d.name)
+      var b = event.recipes.gtceu.assembly_line('grindless:' + d.name)
+      b.itemInputs(HULL, '2x ' + PUMP, d.extra, '4x #gtceu:circuits/zpm', '2x ' + d.domain[0], '2x ' + d.domain[1])
+      b.inputFluids(Fluid.of('gtceu:soldering_alloy', 1152), Fluid.of('gtceu:lubricant', 1000))
+      b.itemOutputs(d.machine)
+      b.scannerResearch(Item.of(d.research))
+      b.EUt(122880).duration(1200)
+      NQ.controllerRecipes.push('grindless:assembly_line/' + d.name)
     })
   }
 

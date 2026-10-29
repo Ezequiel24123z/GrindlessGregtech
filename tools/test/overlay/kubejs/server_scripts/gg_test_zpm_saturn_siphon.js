@@ -178,7 +178,7 @@
       def.recipe + '; dims=' + dimIds.join(',') + '; circuits=' + circuit.length)
     })
     ;['grindless:gas_giant_siphon/siphon_ices', 'grindless:cryogenic_isotope_separation/deuterium', 'grindless:ring_harvesting/ring_ice',
-      'grindless:crafting/gas_giant_siphon', 'grindless:crafting/isotope_column', 'grindless:crafting/ring_harvester'].forEach(function (id) {
+      'grindless:assembly_line/gas_giant_siphon', 'grindless:assembly_line/isotope_column', 'grindless:assembly_line/ring_harvester'].forEach(function (id) {
       check('support_recipe', byId(id) !== null, id)
     })
   }
