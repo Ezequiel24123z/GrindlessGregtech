@@ -26,7 +26,7 @@
           "itemsOut": [{ "id": "grindless:machined_rhea_impeller", "count": 1 }, { "id": "grindless:rhea_swarf", "count": 1 }], "fluidsOut": [] },
         { "name": "bmg_flexspline_machining", "circuit": 0, "eut": 491520, "duration": 400,
           "itemsIn": [{ "id": "grindless:bmg_blank", "count": 1 }], "kept": [], "fluidsIn": [], "charge": [],
-          "itemsOut": [{ "id": "grindless:bmg_flexspline", "count": 1 }], "fluidsOut": [] }
+          "itemsOut": [{ "id": "grindless:bmg_flexspline", "count": 1 }, { "id": "gtceu:zrticunibe_glass_dust", "count": 1 }], "fluidsOut": [] }
       ]
     },
     "chemical_reactor": {

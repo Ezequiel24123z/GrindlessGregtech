@@ -83,14 +83,14 @@
     "assembler": {
       "recipes": [
         { "name": "first_wall_tile", "circuit": 0, "eut": 30720, "duration": 200,
-          "itemsIn": [{ "id": "grindless:plasma_sprayed_tile", "count": 1 }, { "id": "gtceu:tungsten_steel_plate", "count": 2 }], "kept": [], "charge": [],
+          "itemsIn": [{ "id": "grindless:plasma_sprayed_tile", "count": 1 },           { "id": "gtceu:tungsten_steel_plate", "count": 2 }], "kept": [], "charge": [],
           "fluidsIn": [], "itemsOut": [{ "id": "grindless:first_wall_tile", "count": 1 }], "fluidsOut": [] },
         { "name": "li_sn_armoured_tile", "circuit": 0, "eut": 30720, "duration": 200,
           "itemsIn": [{ "id": "grindless:first_wall_tile", "count": 1 }], "kept": [], "charge": [],
           "fluidsIn": [{ "id": "gtceu:li_sn", "amount": 144 }],
           "itemsOut": [{ "id": "grindless:li_sn_armoured_tile", "count": 1 }], "fluidsOut": [] },
         { "name": "uiv_fusion_casing_wall", "circuit": 0, "eut": 122880, "duration": 300,
-          "itemsIn": [{ "id": "grindless:li_sn_armoured_tile", "count": 1 }, { "id": "grindless:w_fibre_preform", "count": 1 }], "kept": [], "charge": [],
+          "itemsIn": [{ "id": "grindless:li_sn_armoured_tile", "count": 1 },           { "id": "grindless:w_fibre_preform", "count": 1 }], "kept": [], "charge": [],
           "fluidsIn": [{ "id": "gtceu:li_sn", "amount": 144 }],
           "itemsOut": [{ "id": "grindless:uiv_fusion_casing", "count": 1 }], "fluidsOut": [] },
         { "name": "cps_wetted_mesh", "circuit": 0, "eut": 30720, "duration": 200,
@@ -98,14 +98,14 @@
           "fluidsIn": [{ "id": "gtceu:li_sn", "amount": 250 }],
           "itemsOut": [{ "id": "grindless:cps_wetted_mesh", "count": 1 }], "fluidsOut": [] },
         { "name": "divertor_cassette", "circuit": 0, "eut": 30720, "duration": 200,
-          "itemsIn": [{ "id": "grindless:cps_wetted_mesh", "count": 4 }, { "id": "gtceu:tungsten_steel_plate", "count": 2 }], "kept": [], "charge": [],
+          "itemsIn": [{ "id": "grindless:cps_wetted_mesh", "count": 4 },           { "id": "gtceu:tungsten_steel_plate", "count": 2 }], "kept": [], "charge": [],
           "fluidsIn": [], "itemsOut": [{ "id": "grindless:divertor_cassette", "count": 1 }], "fluidsOut": [] },
         { "name": "divertor", "circuit": 0, "eut": 30720, "duration": 300,
-          "itemsIn": [{ "id": "grindless:divertor_cassette", "count": 2 }, { "id": "grindless:w_fibre_preform", "count": 1 }], "kept": [], "charge": [],
+          "itemsIn": [{ "id": "grindless:divertor_cassette", "count": 2 },           { "id": "grindless:w_fibre_preform", "count": 1 }], "kept": [], "charge": [],
           "fluidsIn": [], "itemsOut": [{ "id": "grindless:divertor", "count": 1 }], "fluidsOut": [] },
         { "name": "uiv_fusion_casing_divertor", "circuit": 0, "eut": 122880, "duration": 300,
-          "itemsIn": [{ "id": "grindless:divertor", "count": 1 }, { "id": "gtceu:fusion_casing_mk3", "count": 2 }], "kept": [], "charge": [],
-          "fluidsIn": [], "itemsOut": [{ "id": "grindless:uiv_fusion_casing", "count": 2 }], "fluidsOut": [] }
+          "itemsIn": [{ "id": "grindless:divertor", "count": 1 },           { "id": "gtceu:fusion_casing_mk3", "count": 2 }], "kept": [], "charge": [],
+          "fluidsIn": [{ "id": "gtceu:li_sn", "amount": 144 }], "itemsOut": [{ "id": "grindless:uiv_fusion_casing", "count": 2 }], "fluidsOut": [] }
       ]
     },
     "fusion_reactor": {

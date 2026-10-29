@@ -1,4 +1,4 @@
-﻿# Items and processes audit (QR-D0)
+# Items and processes audit (QR-D0)
 
 Static audit of every item, fluid, machine and recipe type that Grindless registers, against the native recipe dump. It answers the owner's complaints: uncraftable objects in EMI, machines with no information, and invisible processes.
 
@@ -83,7 +83,7 @@ Baseline: resolved. The audit already skips machines tagged `grindless:hidden_wi
 
 ### trivial_step (a real process should be more than "1 in, 1 out")
 Dedicated machines or conditions justify some of these; flag them to the era owner, not as bugs.
-- **uiv** `gtceu:he3he3_ash`, `pli6_ash`, `pn15_ash` (direct conversion, 1 plasma to 1 ash); `annealed_neon_cone`, `bmg_flexspline`, `c12_ion_milled_plate`, `laser_heated_n2_charge`, `lonsdaleite_race`, `p_si_processor`, `polarised_li6h`, `poled_lnoi_wafer`, `six_hour_memory_slab`, `telecom_memory_slab`, `verified_crystal`.
+- **uiv** `gtceu:he3he3_ash`, `pli6_ash`, `pn15_ash` (direct conversion, 1 plasma to 1 ash); `annealed_neon_cone`, `bmg_flexspline`, `c12_ion_milled_plate`, `laser_heated_n2_charge`, `lonsdaleite_race`, `p_si_processor`, `polarised_li6h`, `poled_lnoi_wafer`, `six_hour_memory_slab`, `telecom_memory_slab`, `verified_crystal`. QR-R7: the ash conversions stay (shared `fusion_mk5.json`, report-only); the rest gained a second input or a real step. Rows still 1 in 1 out after the filler removal (`poled_lnoi_wafer`, `annealed_neon_cone`, `c12_ion_milled_plate`, `mh_braid`) wait for UIV own-line intermediates (UIV build, v0.14.0).
 - **uev** (fixed, QR-R6: second ingredient or byproduct added) `cured_sic_fibre`, `green_sic_fibre`, `hftacn_powder`, `micropillar_wafer`, `sin_etched_wafer`, `strain_annealed_fe16n2_powder`.
 - **uhv** (fixed, QR-R5: graphite cap, platinum foil and helium fill added) `californium_252_source`, `sic_device_wafer`.
 - **uv** (fixed, QR-R4: second ingredient/fluid added or step merged) `exposed_wafer`, `patterned_wafer`, `fibre_bragg_grating`, `laser_module_block`, `srf_cryomodule_block`.
