@@ -13,12 +13,12 @@
 import { eraOfFile, tierOfEra, tierOfId } from './recipe_quality.mjs';
 import { parseRecipes } from './recipe_cycles.mjs';
 
-// Exceptions by input id -> one-line reason. These three are real inversions on main (13 machine recipes in uv/uhv) kept so T0 passes
-// until the content owner decides; remove an entry when its item moves to an earlier era or the recipe stops taking it.
+// Exceptions by input id -> one-line reason. Registration placement only: each item is made by an earlier machine with no dimension
+// or site lock, so the uv/uhv recipes that take it are reachable in their era. Remove an entry if its producer moves later.
 export const ALLOW = {
-  'grindless:fused_silica_tube': 'registered in the uev startup file but first made in uhv; 10 uv/uhv machine recipes take it (pending content decision)',
-  'grindless:iron_tube': 'registered in the uhv startup file; uv powder_in_tube_line takes it (pending content decision)',
-  'grindless:sporosarcina_culture': 'registered in the uhv startup file; uv ark_biosphere takes it (pending content decision)',
+  'grindless:fused_silica_tube': 'registered in uev/earth_orbit.js; made by the plain GTM EBF at UV voltage, 3600 K, no orbit lock (tables/earth_orbit.json:80)',
+  'grindless:iron_tube': 'registered in uhv/mercury.js; made by the GTM extruder at HV with a tiny pipe mold (server uhv/mercury.js:78)',
+  'grindless:sporosarcina_culture': 'registered in uhv/proxima_life.js; made by the LuV biofoundry, circuit 16, at IV voltage (tables/biofoundry.json:159)',
 };
 
 const STARTUP_ERA = /startup_scripts\/grindless\/([a-z_]+)\//;

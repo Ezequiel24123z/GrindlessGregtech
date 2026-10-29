@@ -21,8 +21,8 @@
         ['material.gtceu.uncured_photoresin', 'Uncured Photoresin', 'Fotorresina sin curar'],
 
         ['grindless.machine.tfln_fab.tooltip.0',
-            'A cleanroom that bonds, slices and poles thin-film lithium niobate: the only maker of LN-on-Si3N4 and Si-28 SOI wafers, poled LNOI and the EO microcomb.',
-            'Una sala limpia que une, corta y polariza niobato de litio de película delgada: la única que fabrica obleas LN sobre Si3N4 y SOI de Si-28, LNOI polarizado y el micropeine EO.'],
+            'A thin-film fab that bonds, slices and poles lithium niobate: the only maker of LN-on-Si3N4 and Si-28 SOI wafers, poled LNOI and the EO microcomb.',
+            'Una fábrica de película delgada que une, corta y polariza niobato de litio: la única que fabrica obleas LN sobre Si3N4 y SOI de Si-28, LNOI polarizado y el micropeine EO.'],
         ['grindless.machine.tfln_fab.tooltip.1',
             'Circuit 1 LN-on-Si3N4, 2 Si-28 SOI wafer and donor, 3 poled LNOI, 4 EO microcomb.',
             'Circuito 1 LN sobre Si3N4, 2 oblea SOI de Si-28 y donante, 3 LNOI polarizado, 4 micropeine EO.'],

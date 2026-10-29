@@ -69,7 +69,7 @@
     }
   ]
 
-  // TFLN fab: a cleanroom hall with process bays; femtosecond writer: a long beamline (uiv/shapes.js). Built in the machine registry
+  // TFLN fab: a hall with process bays (no GTM cleanroom condition); femtosecond writer: a long beamline (uiv/shapes.js). Built in the machine registry
   // callback: shapes.js may load after this file. The floor row (X) takes the parts.
   function spec(m) {
     return G.uivShapes.build(Pat, m.name, m.casing, [
