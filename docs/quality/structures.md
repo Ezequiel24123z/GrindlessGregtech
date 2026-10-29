@@ -61,8 +61,8 @@ declarations in 6 files (13 structures) were changed to `var`, and the test now 
 - LuV 0/21, ZPM 0/27, launch_road and power 0: done in QR-S2 (all pass the gate without baseline entries).
 - UV 0/33: QR-S4 dressed the ZPM `ice_giant_siphon` (`zpm/uranus.js`), the last one.
 - UHV 0/32: done in QR-S4.
-- UEV, UIV: almost all are hollow 5x5x7 / 7x7x7 single-casing boxes (`uev/*.js` shell helpers: `megabar`, `sirius`, `composites`,
-  `electron_beam`, `earth_orbit`, `alpha_centauri`, `photonics`; `uiv/beuv_stm.js:53`, `matrioshka.js:83`, `tfln_femtosecond.js:65`,
+- UEV 0/26: done in QR-S5 (`uev/shapes.js` silhouettes; all pass the gate without baseline entries).
+- UIV: almost all are hollow 5x5x7 / 7x7x7 single-casing boxes (`uiv/beuv_stm.js:53`, `matrioshka.js:83`, `tfln_femtosecond.js:65`,
   `j0437.js:67`). Redesign with a shared per-era shell helper mixing frame posts, glass bands, pipes/coils and a second casing.
 
 ### QR-S2 release notes (reshaped structures; shape changes, same ids, no registrations removed)
@@ -108,3 +108,16 @@ Rebuild existing machines of these ids. Same size (dressed only): the dress chan
 - `betavoltaic_fab` 5x5x5 -> 7x5x7; `crystal_growth_furnace` 5x5x9 -> 5x9x5; `mbe_reactor` 5x5x7 -> 7x5x9; `photonic_foundry` 9x5x9 -> 11x5x9
 - Same size: `quantum_fabricator` 11x10x12, `swarm_segment_foundry` 9x7x9, `swarm_control_station` 11x5x11, `solar_probe_bay` 7x5x7, `xenoflora_rover_bay` 7x5x7, `sample_receiving_facility` 9x5x9, `xenobotany_greenhouse` 9x6x9, `xenobiochem_plant` 7x5x7, `radiotrophic_vat` 5x5x5, `organoid_array` 7x5x7, `regolith_excavator` 9x3x5, `nuclear_clock_lab`, `tether_ribbon_works`, `pbo_plant`, `sic_device_fab`, `solar_array_fab`, `spark_plasma_sinterer`, `high_flux_reactor`, `transuranium_facility`, `ice_giant_siphon` 7x13x7 (ZPM, dressed like `neptune_deep_siphon`)
 - First-met blocks (all already in the pack): tungsten_steel and stainless_steel frames, laminated and fusion glass, superconducting coil, tungstensteel/ptfe pipe casings, plascrete, filter, clean, inert, heatproof, robust, uv machine casings.
+
+### QR-S5 release notes (UEV structures; same ids, no registrations removed; gate WxHxD, old -> new)
+Rebuild existing machines of these ids (all grew; silhouettes come from `uev/shapes.js`; controller, hatches and abilities unchanged).
+- Halls, dishes and masts: `megabar_press` 7x7x7 -> 9x9x9; `white_dwarf_spectrograph` 5x5x7 -> 9x11x9; `degenerate_harvester` 5x5x7 -> 9x8x13; `containment_works` 5x5x7 -> 9x7x11;
+  `nebula_collector` 5x5x7 -> 11x12x11; `interstellar_dust_lab` 5x5x7 -> 9x7x13; `pulsar_timing_station` 5x5x7 -> 7x11x9; `quantum_gas_lab` 5x5x7 -> 9x9x9;
+  `entanglement_station` 5x5x7 -> 15x10x7; `snspd_foundry` 5x5x7 -> 7x7x15; `vdw_stacker` 5x5x5 -> 7x11x7; `photonic_integration_hall` 5x5x7 -> 11x9x13;
+  `electron_beam_furnace` 5x5x7 -> 9x10x13; `helium3_polariser` 5x4x5 -> 7x7x9; `superheavy_chemistry_lab` 7x5x7 -> 9x7x11.
+- Towers: `nitride_magnet_works` 5x5x5 -> 7x11x7; `sic_fibre_plant` 5x5x5 -> 7x16x7; `cvi_furnace` 5x5x5 -> 9x9x9; `single_crystal_foundry` 5x6x5 -> 7x13x7;
+  `carbonyl_refinery` 5x5x5 -> 7x12x7; `stellar_forge` 7x16x7 -> 9x16x9 (still four rings of 8 coils).
+- Rings and beamlines: `uev_fusion_reactor` 5x3x5 -> 11x5x13 (annulus of coils, GTM `fusion_reactor` type and 16-energy-hatch cap kept); `calutron` 7x5x13 -> 11x7x17;
+  `heavy_ion_cyclotron` 9x5x9 -> 17x7x15; `recoil_separator` 5x5x11 -> 9x7x19. `barnard_core_drill` unchanged (already passes).
+- First-met blocks in UEV structures (all obtainable earlier): `gtceu:stable_machine_casing`, `laminated_glass`, `tungstensteel_pipe_casing`, `ptfe_pipe_casing`,
+  `naquadah_coil_block`, `trinium_coil_block`, `superconducting_coil`, `tungstensteel_gearbox`, `tungsten_steel_frame`, `robust_machine_casing`.

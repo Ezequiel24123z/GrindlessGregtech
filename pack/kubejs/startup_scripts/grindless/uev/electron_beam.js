@@ -15,8 +15,8 @@
 //   gtceu:single_crystal_casting  its recipe type (EU in). Circuit 1 SX blade, 2 pump impeller, 3 Brayton turbine wheel.
 //
 // New ids (the F1 ones are in uev/foundation.js and are not registered again): the items below (the table's grindless: ids).
-// Geometry (lib/patterns.js): the furnace is 5 wide x 5 high x 7 deep (clean casing), the foundry 5 wide x 6 high x 5 deep (heatproof
-// casing). No vacuum hatch is verified in this pack: ordinary buses and hatches take the parts.
+// Geometry (lib/patterns.js): the furnace is a 9 x 10 x 13 vacuum hall under a gun (clean casing), the foundry a 7 x 13 x 7 puller
+// tower (heatproof casing). No vacuum hatch is verified in this pack: ordinary buses and hatches take the parts.
 // Textures: tools/assets/Build-UEVElectronBeamTextures.ps1. Names: client_scripts/grindless/uev_electron_beam_lang.js.
 // Published for the recipe script: global.grindless.electronBeam.
 (function () {
@@ -92,55 +92,78 @@
     }
   }
 
-  // A hollow shell: row 0 (X) takes the parts, the top row and the walls are casing (F), S is the controller (front wall, row 1, middle).
-  function shell(m) {
-    var slices = []
-    var last = m.depth - 1
-    var mid = (m.width - 1) / 2
-    for (var si = 0; si < m.depth; si++) {
-      var rows = []
-      for (var r = 0; r < m.height; r++) {
-        var row = ''
-        for (var c = 0; c < m.width; c++) {
-          var ch
-          var isWall = si === 0 || si === last || c === 0 || c === m.width - 1
-          if (r === 0) ch = 'X'
-          else if (r === m.height - 1) ch = 'F'
-          else if (si === last && r === 1 && c === mid) ch = 'S'
-          else if (isWall) ch = 'F'
-          else ch = '#'
-          row += ch
-        }
-        rows.push(row)
-      }
-      slices.push(rows)
+  // The furnace is a vacuum chamber under a gun: a long hall with a crucible row and a column of gun coils on the roof. The foundry is a
+  // Czochralski puller: a banded tower with a pull rod down to a crucible. Built in the registry callback (shapes.js may load later).
+  function gunCrown(w, d) {
+    var ridge = G.uevShapes.ridge(w, d)
+    var cx = (w - 1) / 2
+    return function (x, k, z) {
+      if (x === cx && z === 4 && k < 5) return k % 2 === 1 ? 'C' : 'P'
+      if (z === 4 && k === 1 && (x === cx - 1 || x === cx + 1)) return 'A'
+      return ridge(x, k, z)
     }
-    return slices
   }
+  var SHAPES = {
+    furnace: {
+      w: 9, h: 10, d: 13,
+      fn: function () {
+        return G.uevShapes.hall({
+          w: 9, d: 13, hh: 5, mull: 2, crown: gunCrown(9, 13),
+          inner: function (x, y, z) {
+            var ax = x < 4 ? 4 - x : x - 4
+            if (z === 4 && ax <= 1 && y === 1) return 'B'
+            if (z === 4 && ax === 0 && y <= 3) return 'P'
+            if (ax === 3 && z % 3 === 0 && z >= 6 && y <= 2) return y === 1 ? 'B' : 'C'
+            return null
+          }
+        })
+      }
+    },
+    foundry: {
+      w: 7, h: 13, d: 7,
+      fn: function () {
+        return G.uevShapes.tower({
+          w: 7, d: 7, baseH: 3, th: 11, inset: 1, band: 3, bandChar: 'C',
+          baseInner: function (x, y, z) { return x === 3 && z === 3 && y === 1 ? 'B' : null },
+          core: function (x, y, z) { return x === 3 && z === 3 ? 'Q' : null },
+          crown: G.uevShapes.mast(7, 7, 2)
+        })
+      }
+    }
+  }
+  Object.keys(EB.machines).forEach(function (k) {
+    var m = EB.machines[k]
+    m.width = SHAPES[k].w
+    m.height = SHAPES[k].h
+    m.depth = SHAPES[k].d
+  })
 
-  function specOf(m, casing, parts) {
-    return {
-      slices: shell(m),
-      symbols: {
-        S: Pat.controller(),
-        X: Pat.oneOf.apply(null, [Pat.block(casing)].concat(parts)),
-        F: Pat.block(casing),
-        '#': Pat.air()
+  function specOf(k, casing, parts) {
+    var m = EB.machines[k]
+    return G.uevShapes.spec(Pat, {
+      w: m.width, h: m.height, d: m.depth, fn: SHAPES[k].fn(), parts: parts,
+      pal: {
+        F: casing, A: 'gtceu:stable_machine_casing', L: 'gtceu:laminated_glass', P: 'gtceu:tungstensteel_pipe_casing',
+        C: 'gtceu:trinium_coil_block', B: 'gtceu:tungstensteel_gearbox', Q: 'tungsten_steel'
       }
-    }
+    })
   }
-  EB.machines.furnace.spec = specOf(EB.machines.furnace, CLEAN, [
-    Pat.part('input_bus', { min: 1, max: 2 }),
-    Pat.part('input_hatch', { min: 0, max: 1 }),
-    Pat.part('output_bus', { min: 1, max: 2 }),
-    Pat.part('energy_input', { min: 1, max: 2 })
-  ])
-  EB.machines.foundry.spec = specOf(EB.machines.foundry, HEAT, [
-    Pat.part('input_bus', { min: 1, max: 2 }),
-    Pat.part('input_hatch', { min: 1, max: 1 }),
-    Pat.part('output_bus', { min: 1, max: 2 }),
-    Pat.part('energy_input', { min: 1, max: 2 })
-  ])
+  function makeSpec(k) {
+    if (k === 'furnace') {
+      return specOf(k, CLEAN, [
+        Pat.part('input_bus', { min: 1, max: 2 }),
+        Pat.part('input_hatch', { min: 0, max: 1 }),
+        Pat.part('output_bus', { min: 1, max: 2 }),
+        Pat.part('energy_input', { min: 1, max: 2 })
+      ])
+    }
+    return specOf(k, HEAT, [
+      Pat.part('input_bus', { min: 1, max: 2 }),
+      Pat.part('input_hatch', { min: 1, max: 1 }),
+      Pat.part('output_bus', { min: 1, max: 2 }),
+      Pat.part('energy_input', { min: 1, max: 2 })
+    ])
+  }
 
   // one EMI line per recipe, read from its data: what the circuit does
   function infoOf(dataKey) {
@@ -209,6 +232,8 @@
     if (dType == null) throw new Error(LOG + 'recipe type gtceu:' + d.type + ' is not registered')
     fType.addDataInfo(infoOf(f.dataKey))
     dType.addDataInfo(infoOf(d.dataKey))
+    f.spec = makeSpec('furnace')
+    d.spec = makeSpec('foundry')
     Pat.register(f.machine, f.spec)
     Pat.register(d.machine, d.spec)
 
