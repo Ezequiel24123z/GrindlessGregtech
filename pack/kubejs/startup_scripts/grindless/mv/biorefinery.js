@@ -2,7 +2,7 @@
 // -----------------------------------------------------------------------------------------------
 // The Biorefinery, the second multiblock of the MV era, and the recipe type it runs.
 //
-//   gtceu:biorefinery    3x3x9 column with seven output layers, runs the new gtceu:bio_distillation
+//   gtceu:biorefinery    5x10x3 column on a plinth with seven output layers, runs the new gtceu:bio_distillation
 //
 // What it wins: ALL THE FRACTIONS AT ONCE, from MV. The distillery pulls one fraction per pass; GTM's Distillation Tower (HV, EV circuits)
 // is the column that takes every fraction in one pass, and its recipes draw 120 to 640 EU/t. The biorefinery is that column for the
@@ -39,28 +39,34 @@
   BIO.layers = LAYERS.length
 
   // ---------------------------------------------------------------- pattern
-  // 3x3 footprint, 9 high: base (controller in the front row, energy, input hatch, output bus), seven layers of 8 casing cells around a
-  // steel pipe casing column (one output hatch per layer: the layer symbols a-g have `exact 1`), and a casing cap.
+  // QR-S1: a distillation column on a plinth instead of a solid 3x3x9 block. The plinth is 5x3 and holds the controller and the base
+  // parts (14 cells). The 3x3 column above has steel frame posts at its corners, a steel pipe casing core, a glass sight window above
+  // the controller on every layer and three hatch-or-casing cells per layer (back and both sides: the layer symbols a-g have
+  // exact 1, one output hatch per layer), a steel cap and a pipe vent on top. 5 wide, 3 deep, 10 high.
   // Slices are listed back -> front, rows bottom -> top.
   function towerSlice(kind) {
-    var rows = [kind === 'front' ? 'BSB' : 'BBB']
+    var rows = [kind === 'front' ? 'BBSBB' : 'BBBBB']
     LAYERS.forEach(function (ch) {
-      rows.push(kind === 'middle' ? ch + 'P' + ch : ch + ch + ch)
+      rows.push(kind === 'middle' ? ' ' + ch + 'P' + ch + ' ' : kind === 'back' ? ' F' + ch + 'F ' : ' FGF ')
     })
-    rows.push('CCC')
+    rows.push(' CCC ')
+    rows.push(kind === 'middle' ? '  V  ' : '     ')
     return rows
   }
 
   const TOWER_SYMBOLS = {
     S: Pat.controller(),
-    // 8 base cells: 1 or 2 energy hatches, the input hatch and the output bus, the rest steel casing
+    // 14 base cells: 1 or 2 energy hatches, the input hatch and the output bus, the rest steel casing
     B: Pat.oneOf(
-      Pat.block(STEEL_CASING, { min: 4 }),
+      Pat.block(STEEL_CASING, { min: 10 }),
       Pat.part('energy_input', { min: 1, max: 2 }),
       Pat.part('input_hatch', { exact: 1 }),
       Pat.part('output_bus', { exact: 1 })
     ),
     P: Pat.block(PIPE_CASING),
+    V: Pat.block(PIPE_CASING),
+    F: Pat.frame(['steel']),
+    G: Pat.block('minecraft:glass'),
     C: Pat.block(STEEL_CASING)
   }
   LAYERS.forEach(function (ch) {
@@ -69,7 +75,6 @@
       Pat.part('output_hatch', { exact: 1 })
     )
   })
-
   const TOWER_SPEC = {
     slices: [towerSlice('back'), towerSlice('middle'), towerSlice('front')],
     symbols: TOWER_SYMBOLS
