@@ -327,7 +327,8 @@ test('B5 un-hides its ids: no B5 rule or group is left, the bearing keeps its st
   assert.doesNotMatch(obtain, /LuV \(B5\)/);
   assert.doesNotMatch(obtain, /asteroid_quantum_seed/);
   const groups = table('hidden_until').groups.map((g) => g.material);
-  for (const m of ['meteoric_iron', 'tetrataenite', 'grindless:hss_s_drill_bit', 'grindless:anchor_harpoon', 'grindless:asteroid_pgm_concentrate',
+  // `tetrataenite` is not listed: UXV-F1's grindless:tetrataenite_rotor is a loose form of the material and has its own UXV-A8 group
+  for (const m of ['meteoric_iron', 'grindless:hss_s_drill_bit', 'grindless:anchor_harpoon', 'grindless:asteroid_pgm_concentrate',
     'grindless:capture_bag', 'grindless:chondritic_extract', 'grindless:asteroid_regolith_casing', 'grindless:asteroid_quantum_seed']) {
     assert.ok(!groups.includes(m), m);
   }
