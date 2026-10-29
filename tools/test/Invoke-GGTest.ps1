@@ -65,6 +65,8 @@ param(
     [ValidateRange(1, 60)][int]$CommandTimeoutSec = 60,
     [ValidateRange(1, 600)][int]$ClientTimeoutSec = 600,
     [ValidateRange(1, 600)][int]$NativeTimeoutSec = 600,
+    [ValidateRange(600, 1800)][int]$EmiAuditTimeoutSec = 600,
+    [ValidateSet('4G', '5G', '6G', '7G', '8G')][string]$EmiAuditClientXmx = '4G',
     [ValidateRange(1, 15)][int]$LockWaitMin = 5,
     [ValidateRange(1, 8)][int]$Slots = 1,
     [double]$SlotMinFreeGb = 0,
@@ -477,6 +479,8 @@ $request = [ordered]@{
     commandTimeoutSec = $CommandTimeoutSec
     clientTimeoutSec  = $ClientTimeoutSec
     nativeTimeoutSec  = $NativeTimeoutSec
+    emiAuditTimeoutSec = $EmiAuditTimeoutSec
+    emiAuditClientXmx = $EmiAuditClientXmx
     waitTimeoutSec    = $WaitTimeoutSec
     serverXms         = $ServerXms
     serverXmx         = $ServerXmx

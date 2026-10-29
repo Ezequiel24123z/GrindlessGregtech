@@ -1,5 +1,5 @@
 // EMI coverage audit (tools/analysis/emi-coverage.mjs): the static KubeJS stand-in that runs the pack's scripts, the EMI model, the
-// pack itself (zero gaps), and the native client fixture's contract (expectations current, Rhino-safe ES5, disabled by default).
+// pack itself (zero gaps), and the native client fixture's contract (expectations current, Rhino-safe ES5, mandatory in client runs).
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import path from 'node:path';
@@ -379,13 +379,13 @@ const clientFixture = fs.readFileSync(path.join(overlay, 'client_scripts', 'gg_t
 const serverFixture = fs.readFileSync(path.join(overlay, 'server_scripts', 'gg_test_emi_coverage.js'), 'utf8');
 const codeOnly = (src) => src.replace(/\/\*[\s\S]*?\*\//g, '').replace(/\/\/.*$/gm, '').replace(/'(?:\\.|[^'\\\n])*'/g, "''");
 
-test('the fixture is ES5 for Rhino, valid, disabled by default, and read-only (no clicks, no teleports, no blocks)', () => {
+test('the fixture is ES5 for Rhino, valid, enabled by default, and read-only (no clicks, no teleports, no blocks)', () => {
   for (const src of [clientFixture, serverFixture]) {
     assert.doesNotMatch(codeOnly(src), /\b(const|let|class)\b|=>|`/);
     assert.doesNotThrow(() => new vm.Script(src));
     assert.doesNotMatch(codeOnly(src), /setDown|teleport|setBlock|\.runCommand|keyUse/);
   }
-  assert.deepEqual(JSON.parse(fs.readFileSync(path.join(overlay, 'config', 'gg_test_emi_coverage.json'), 'utf8')), { enabled: false });
+  assert.deepEqual(JSON.parse(fs.readFileSync(path.join(overlay, 'config', 'gg_test_emi_coverage.json'), 'utf8')), { enabled: true });
   assert.match(clientFixture, /GGTEST\|emi_coverage\|/);
 });
 
@@ -420,16 +420,23 @@ test('the fixture\'s integration hook arms the client half and acknowledges the 
 
 // A stand-in EMI built from the expectations themselves (every route present), so the fixture's own checks run here: all PASS, then
 // one intermediate loses its uses, one route and one page go missing, and an unaudited item appears.
-function simulateFixture(exp, { dropUsesOf = null, dropRoute = null, dropPage = null, extraItem = null } = {}) {
+function simulateFixture(exp, { dropUsesOf = null, dropRoute = null, dropPage = null, extraItem = null,
+  warnings = [], missingWorkstation = false, missingPreview = false, missingProcess = false, reportError = false,
+  renderPreview = false, screenshotError = false, loaded = true, holdTimeoutSec, waitSeconds = 0 } = {}) {
   const recipes = [];
   const rec = (id, cat, ins, outs) => recipes.push({ id, cat, ins: new Set(ins), outs: new Set(outs) });
   let n = 0;
   for (const e of exp.items) {
+    if (e.needMade && e.made.length === 0) rec('sim:r' + n++, 'sim:acquisition', [], [e.id]);
+    if (e.needUse && e.used.length === 0 && e.id !== dropUsesOf) rec('sim:r' + n++, 'sim:use', [e.id], []);
     for (const cat of e.made) if (!(dropRoute && dropRoute.id === e.id && dropRoute.cat === cat)) rec('sim:r' + n++, cat, [], [e.id]);
     if (e.id !== dropUsesOf) for (const cat of e.used) if (!(dropRoute && dropRoute.id === e.id && dropRoute.cat === cat)) rec('sim:r' + n++, cat, [e.id], []);
   }
   for (const p of exp.pages) if (p !== dropPage) rec(p, 'emi:info', [], []);
   for (const l of exp.legacy) for (const c of l.conversions) rec(c, 'minecraft:crafting', [l.id], []);
+  if (!missingPreview) rec('gtceu:test_multiblock', 'gtceu:multiblock_info', [], ['gtceu:test_multiblock']);
+  if (renderPreview) rec('gtceu:mega_factory', 'gtceu:multiblock_info', [], ['gtceu:mega_factory']);
+  if (!missingProcess) rec('sim:process', 'gtceu:test_process', [], []);
   const wrap = (r) => ({ getId: () => (r.id.startsWith('sim:') ? null : { toString: () => r.id }), getCategory: () => ({ getId: () => ({ toString: () => r.cat }) }) });
   const list = (arr) => Object.assign(arr.slice(), { size() { return this.length; }, get(i) { return this[i]; } });
   const rm = {
@@ -437,44 +444,70 @@ function simulateFixture(exp, { dropUsesOf = null, dropRoute = null, dropPage = 
     getRecipesByInput: (s) => recipes.filter((r) => r.ins.has(s.id)).map(wrap),
     getRecipe: (rl) => { const r = recipes.find((x) => x.id === String(rl)); return r ? wrap(r) : null; },
     getRecipes: () => recipes.map(wrap),
+    getCategories: () => [...new Set(recipes.map((r) => r.cat))].map((id) => ({ getId: () => id })),
+    'getRecipes(dev.emi.emi.api.recipe.EmiRecipeCategory)': (cat) => recipes.filter((r) => r.cat === cat.getId()).map(wrap),
+    getWorkstations: () => missingWorkstation ? [] : [{ getEmiStacks: () => [{ getId: () => 'gtceu:test_multiblock' }] }],
   };
   const items = new Set(exp.items.filter((e) => e.kind === 'item').map((e) => e.id).concat(exp.legacy.map((l) => l.id)));
   if (extraItem) items.add(extraItem);
   const fluids = new Set(exp.items.filter((e) => e.kind === 'fluid').map((e) => e.id));
   class RL { constructor(s) { this.s = String(s); } toString() { return this.s; } }
+  const nativeCategory = { registryKey: 'gtceu:test_process', isXEIVisible: () => true, shouldRegisterDisplays: () => true,
+    getRecipeType: () => ({ registryName: 'gtceu:test_process', getRecipesInCategory: () => [{}] }) };
+  class Multiblock {
+    getId() { return 'gtceu:test_multiblock'; }
+    getTier() { return 1; }
+    getRecipeTypes() { return [{ getCategories: () => [nativeCategory] }]; }
+  }
   const classes = {
     'net.minecraft.resources.ResourceLocation': RL,
     'net.minecraft.core.registries.BuiltInRegistries': {
       ITEM: { keySet: () => [...items].map((i) => new RL(i)), containsKey: (rl) => items.has(String(rl)) },
-      FLUID: { containsKey: (rl) => fluids.has(String(rl)), get: (rl) => String(rl) },
+      FLUID: { keySet: () => [...fluids].map((i) => new RL(i)), containsKey: (rl) => fluids.has(String(rl)), get: (rl) => String(rl) },
     },
     'dev.emi.emi.api.stack.ItemEmiStack': class { constructor(st) { this.id = st.id; } },
     'dev.emi.emi.api.stack.FluidEmiStack': class { constructor(fl) { this.id = fl; } },
-    'dev.emi.emi.api.EmiApi': { getRecipeManager: () => rm },
+    'dev.emi.emi.api.EmiApi': { getRecipeManager: () => rm, displayRecipe: () => { ctx.Client.screen = 'dev.emi.emi.screen.RecipeScreen'; } },
     'dev.emi.emi.registry.EmiStackList': { stacks: [...items].filter((i) => !exp.legacy.some((l) => l.id === i)).map((i) => ({ getId: () => i })) },
-    'dev.emi.emi.runtime.EmiReloadManager': { isLoaded: () => true },
+    'dev.emi.emi.runtime.EmiReloadManager': { isLoaded: () => loaded },
+    'dev.emi.emi.runtime.EmiReloadLog': { warnings },
+    'com.gregtechceu.gtceu.api.registry.GTRegistries': {
+      MACHINES: { values: () => [new Multiblock()] }, RECIPE_CATEGORIES: { values: () => [nativeCategory] },
+    },
+    'com.gregtechceu.gtceu.api.machine.MultiblockMachineDefinition': Multiblock,
     'java.util.ArrayList': function (x) { return list(Array.from(x)); },
     'com.google.gson.JsonParser': { parseString: (s) => JSON.parse(s) },
     'net.minecraft.FileUtil': { createDirectoriesSafe: (dir) => { assert.equal(dir, 'kubejs/exported'); } },
+    'net.minecraft.client.Screenshot': { grab: (dir, name) => {
+      if (screenshotError) throw new Error('test screenshot failure');
+      written[name] = true;
+    } },
   };
   const logs = [];
   const written = {};
   const ticks = [];
+  let now = 1000;
   const ctx = {
-    global: {}, console: { info: (s) => logs.push(s) }, Date, Client: { player: { age: 90 } },
+    global: {}, console: { info: (s) => logs.push(s) }, Date: { now: () => now },
+    Client: { player: { age: 90 }, screen: null, gameDirectory: 'test-game', getMainRenderTarget: () => ({}),
+      setScreen: (screen) => { ctx.Client.screen = screen; } },
     Java: { loadClass: (name) => classes[name] },
     Item: { of: (id) => ({ id }) },
     JsonIO: {
-      readJson: (p) => (p === 'kubejs/config/gg_test_emi_coverage.json' ? { enabled: true } : p === 'kubejs/config/gg_test_emi_coverage_expect.json' ? exp : null),
+      readJson: (p) => (p === 'kubejs/config/gg_test_emi_coverage.json' ? { enabled: true, renderPreview, holdTimeoutSec } : p === 'kubejs/config/gg_test_emi_coverage_expect.json' ? exp : null),
       toPrettyString: (x) => JSON.stringify(x),
-      write: (p, x) => { written[p] = x; },
+      write: (p, x) => { if (reportError) throw new Error('test disk failure'); written[p] = x; },
     },
     ClientEvents: { tick: (fn) => ticks.push(fn) },
   };
   vm.runInNewContext(clientFixture, ctx);
-  ticks.forEach((fn) => fn({}));
+  for (let tick = 0; tick < (renderPreview ? 45 : 1); tick++) ticks.forEach((fn) => fn({}));
+  if (waitSeconds) {
+    now += waitSeconds * 1000;
+    ticks.forEach((fn) => fn({}));
+  }
   const status = Object.fromEntries(logs.filter((l) => l.split('|').length >= 4).map((l) => l.split('|')).map((p) => [p[2], p[3]]));
-  return { logs, status, report: written['kubejs/exported/gg_emi_coverage_report.json'], player: ctx.Client.player };
+  return { logs, status, report: written['kubejs/exported/gg_emi_coverage_report.json'], player: ctx.Client.player, screen: ctx.Client.screen, written };
 }
 
 test('the fixture\'s checks, against a stand-in EMI: all PASS when every expected route is there, and each kind of gap is caught', () => {
@@ -482,7 +515,8 @@ test('the fixture\'s checks, against a stand-in EMI: all PASS when every expecte
   let sim = simulateFixture(exp);
   assert.deepEqual(sim.status, {
     client_hold: 'NOTE', emi_loaded: 'PASS', expectations: 'NOTE', registry: 'PASS', acquisition: 'PASS', use: 'PASS', routes: 'PASS',
-    preview_routes: 'NOTE', pages: 'PASS', legacy: 'PASS', all: 'PASS',
+    plugins: 'PASS', workstations: 'PASS', processes: 'PASS', previews: 'PASS',
+    preview_routes: 'NOTE', pages: 'PASS', machine_info: 'PASS', legacy: 'PASS', all: 'PASS',
   }, sim.logs.join('\n'));
   assert.equal(sim.logs.at(-1), 'GGTEST|emi_coverage|DONE');
   assert.equal(sim.player.age, 20, 'standalone, it keeps mc-runtime-test in the world');
@@ -499,4 +533,119 @@ test('the fixture\'s checks, against a stand-in EMI: all PASS when every expecte
   assert.equal(sim.status.all, 'FAIL');
   assert.ok(sim.logs.some((l) => l.includes('grindless:mars_chart made in gtceu:deep_space_tracking')), sim.logs.join('\n'));
   assert.ok(sim.logs.some((l) => l.includes('none for: ' + sample.id)));
+});
+
+test('static temporary content waivers cannot suppress native acquisition/use failures', () => {
+  const res = audit({
+    dump: mkDump({}), registry: reg({ items: ['t:pending'] }),
+    cfg: { ...cfg0, exceptions: [{ id: 't:pending', role: 'use', reason: 'temporary package' },
+      { id: 't:pending', role: 'acquisition', reason: 'temporary package' }] },
+  });
+  const row = fixtureExpectations(res).items[0];
+  assert.equal(row.needMade, true);
+  assert.equal(row.needUse, true);
+});
+
+test('the runtime gate fails plugin exceptions, missing workstations, process displays, previews and unwritable reports', () => {
+  const exp = JSON.parse(fs.readFileSync(DEFAULT_EXPECT, 'utf8'));
+  for (const [options, check] of [
+    [{ warnings: ['Exception loading plugin provided by gtceu'] }, 'plugins'],
+    [{ missingWorkstation: true }, 'workstations'],
+    [{ missingProcess: true }, 'processes'],
+    [{ missingPreview: true }, 'previews'],
+    [{ reportError: true }, 'report'],
+  ]) {
+    const sim = simulateFixture(exp, options);
+    assert.equal(sim.status[check], 'FAIL', sim.logs.join('\n'));
+    assert.equal(sim.status.all, 'FAIL', sim.logs.join('\n'));
+    assert.equal(sim.logs.at(-1), 'GGTEST|emi_coverage|DONE');
+  }
+});
+
+test('a registered pack machine requires its own what-it-does info route, not just a preview', () => {
+  const exp = JSON.parse(fs.readFileSync(DEFAULT_EXPECT, 'utf8'));
+  exp.items.push({ id: 'gtceu:test_multiblock', kind: 'item', needMade: true, needUse: false,
+    made: ['gtceu:multiblock_info'], used: [] });
+  let sim = simulateFixture(exp);
+  assert.equal(sim.status.machine_info, 'FAIL', sim.logs.join('\n'));
+  assert.equal(sim.status.all, 'FAIL');
+  assert.deepEqual(Array.from(sim.report.machineInfoMissing), ['gtceu:test_multiblock']);
+  exp.items.at(-1).used.push('emi:info');
+  sim = simulateFixture(exp);
+  assert.equal(sim.status.machine_info, 'PASS', sim.logs.join('\n'));
+  assert.equal(sim.status.all, 'PASS');
+  assert.equal(sim.report.machines[0].preview, true);
+  assert.equal(sim.report.machines[0].info, true);
+  assert.equal(sim.report.processes[0].recipes, 1);
+  assert.equal(sim.report.processes[0].displays, 1);
+});
+
+test('MEGA module preview reuses GTM native candidates and preserves formation context', () => {
+  const file = path.join(root, 'pack', 'kubejs', 'startup_scripts', 'grindless', 'lib', 'mega.js');
+  const source = fs.readFileSync(file, 'utf8');
+  const spike = fs.readFileSync(path.join(overlay, 'startup_scripts', 'gg_test_mega_spike_machines.js'), 'utf8');
+  assert.doesNotMatch(source + spike, /Java\.to\s*\(/, 'KubeJS JavaWrapper has no Java.to; any supplier exception aborts the GTM EMI plugin');
+  const blocks = new Map(['t:module_a', 't:module_b'].map((id) => [id, { id }]));
+  const candidates = { get: () => [...blocks.values()] };
+  class HashMap extends Map { put(k, v) { this.set(k, v); } }
+  const context = {
+    global: {}, console,
+    Java: { loadClass: (name) => {
+      assert.equal(name, 'java.util.HashMap');
+      return HashMap;
+    } },
+    Block: { getBlock: (id) => blocks.get(id) },
+    Predicates: {
+      'blocks(net.minecraft.world.level.block.Block[])': (values) => {
+        assert.deepEqual(Array.from(values), [...blocks.values()]);
+        return { common: { get: () => ({ candidates }) } };
+      },
+      custom: (predicate, supplier) => ({ predicate, candidates: supplier }),
+    },
+  };
+  vm.runInNewContext(source, context);
+  const socket = context.global.grindless.mega.modules([...blocks.keys()]).socket().build();
+  assert.equal(socket.candidates, candidates, 'keep the typed native Supplier<BlockInfo[]>, not a JS array or Java List');
+  assert.equal(socket.candidates.get().length, 2, 'every socket option remains in the preview');
+  const match = new Map();
+  const state = (block) => ({
+    getBlockState: () => ({ is: (candidate) => candidate === block }),
+    getPos: () => ({ asLong: () => 7 }),
+    getMatchContext: () => ({ getOrCreate: (key, make) => {
+      if (!match.has(key)) match.set(key, make());
+      return match.get(key);
+    } }),
+  });
+  assert.equal(socket.predicate(state(blocks.get('t:module_b'))), true);
+  assert.equal(match.get('GGModules').get('7'), 't:module_b');
+  assert.equal(socket.predicate(state({ id: 't:not_a_module' })), false);
+  assert.equal(match.get('GGModules').size, 1);
+});
+
+test('named preview proof renders across ticks, saves evidence, restores the screen and fails capture errors', () => {
+  const exp = JSON.parse(fs.readFileSync(DEFAULT_EXPECT, 'utf8'));
+  let sim = simulateFixture(exp, { renderPreview: true });
+  assert.equal(sim.status.preview_render, 'PASS', sim.logs.join('\n'));
+  assert.equal(sim.status.all, 'PASS');
+  assert.equal(sim.report.previewRender.id, 'gtceu:mega_factory');
+  assert.equal(sim.written['../kubejs/exported/gg_emi_mega_factory.png'], true);
+  assert.equal(sim.screen, null);
+  sim = simulateFixture(exp, { renderPreview: true, screenshotError: true });
+  assert.equal(sim.status.client_script, 'FAIL', sim.logs.join('\n'));
+  assert.equal(sim.status.all, 'FAIL');
+  assert.equal(sim.screen, null);
+});
+
+test('the explicit extended EMI hold is bounded and does not change the default deadline', () => {
+  const exp = JSON.parse(fs.readFileSync(DEFAULT_EXPECT, 'utf8'));
+  let sim = simulateFixture(exp, { loaded: false, waitSeconds: 481 });
+  assert.equal(sim.status.emi_loaded, 'FAIL', sim.logs.join('\n'));
+  sim = simulateFixture(exp, { loaded: false, holdTimeoutSec: 1800, waitSeconds: 700 });
+  assert.equal(sim.status.all, undefined, sim.logs.join('\n'));
+  sim = simulateFixture(exp, { loaded: false, holdTimeoutSec: 1800, waitSeconds: 1801 });
+  assert.equal(sim.status.emi_loaded, 'FAIL', sim.logs.join('\n'));
+  for (const holdTimeoutSec of [0, 1801, 600.5, 'invalid']) {
+    sim = simulateFixture(exp, { holdTimeoutSec });
+    assert.equal(sim.status.client_script, 'FAIL', sim.logs.join('\n'));
+  }
 });
