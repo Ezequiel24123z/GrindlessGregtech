@@ -157,8 +157,8 @@
   AC.reactor = { name: REACTOR.name, recipeId: 'grindless:chemical_reactor/' + REACTOR.name, fluidsIn: REACTOR.fluidsIn, fluidsOut: REACTOR.fluidsOut, eut: REACTOR.eut, duration: REACTOR.duration }
   AC.skipped = []
   AC.clashes = []
-  AC.crafting = { retrieval: 'grindless:crafting/waste_retrieval_plant', partition: 'grindless:crafting/actinide_partitioning_plant' }
-  AC.craftingParts = ['gtceu:zpm_machine_hull', 'gtceu:zpm_electric_pump', 'gtceu:zpm_robot_arm']
+  AC.crafting = { retrieval: 'grindless:assembly_line/waste_retrieval_plant', partition: 'grindless:assembly_line/actinide_partitioning_plant' }
+  AC.craftingParts = ['gtceu:zpm_machine_hull', 'gtceu:zpm_electric_pump', 'gtceu:zpm_robot_arm', 'grindless:carbon_nanotube_yarn', 'grindless:cvd_diamond_plate', 'grindless:silica_aerogel']
 
   function keysOf(r) {
     var keys = {}
@@ -232,16 +232,26 @@
     recipe.EUt(REACTOR.eut).duration(REACTOR.duration)
   }
 
-  // CRAFTING TABLE: ZPM hull + 2 ZPM pumps + ZPM robot arm (remote handling) + 4 ZPM circuits; the two shapes differ
+  // ASSEMBLY LINE with scanner research (the ZPM robot arm scanned into a data stick): ZPM hull + 2 ZPM pumps + ZPM robot arm +
+  // 4 ZPM circuits + carbon nanotube yarn (the sealed gloves) + CVD diamond plate (the shield window) + silica aerogel (the hot-cell lining)
+  // + soldering alloy + lubricant; the two plants differ by the plate/yarn counts.
   function addCrafting(event) {
     var missing = AC.craftingParts.filter(function (id) { return !Item.exists(id) })
     if (missing.length > 0) {
       console.error(LOG + 'actinide plant crafting skipped, unknown item(s): ' + missing.join(', '))
       return
     }
-    var parts = { C: '#gtceu:circuits/zpm', P: 'gtceu:zpm_electric_pump', H: 'gtceu:zpm_machine_hull', R: 'gtceu:zpm_robot_arm' }
-    event.recipes.gtceu.shaped('gtceu:waste_retrieval_plant', ['CRC', 'PHP', 'C C'], parts).id(AC.crafting.retrieval)
-    event.recipes.gtceu.shaped('gtceu:actinide_partitioning_plant', ['PCP', 'CHC', 'RC '], parts).id(AC.crafting.partition)
+    function plant(id, machine, yarn, plate) {
+      var b = event.recipes.gtceu.assembly_line(id.replace('assembly_line/', ''))
+      b.itemInputs('gtceu:zpm_machine_hull', '2x gtceu:zpm_electric_pump', 'gtceu:zpm_robot_arm', '4x #gtceu:circuits/zpm',
+        yarn + 'x grindless:carbon_nanotube_yarn', plate + 'x grindless:cvd_diamond_plate', '4x grindless:silica_aerogel')
+      b.inputFluids(Fluid.of('gtceu:soldering_alloy', 1152), Fluid.of('gtceu:lubricant', 1000))
+      b.itemOutputs(machine)
+      b.scannerResearch(function (r) { return r.researchStack(Item.of('gtceu:zpm_robot_arm')).EUt(ZPM_VA) })
+      b.EUt(ZPM_VA).duration(1200)
+    }
+    plant(AC.crafting.retrieval, 'gtceu:waste_retrieval_plant', 8, 2)
+    plant(AC.crafting.partition, 'gtceu:actinide_partitioning_plant', 4, 4)
   }
 
   ServerEvents.recipes(function (event) {
