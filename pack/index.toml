@@ -9898,7 +9898,7 @@ hash = "cb2ac1402dfa0c1e62ec8244cbd2df0a4be31ba4da8e944eb232a7ad4e663b6b"
 
 [[files]]
 file = "kubejs/client_scripts/grindless/uiv_tfln_femtosecond_lang.js"
-hash = "1884bc7bcb0110c0e82e78705846e30d5ede1547109c46d3f8c40d4d055ee5c0"
+hash = "358119863f8e3d0c1e94be4faea709c0737cec4c7c2e645a33b30dbdece1afb8"
 
 [[files]]
 file = "kubejs/client_scripts/grindless/uiv_travel_lang.js"
@@ -12058,7 +12058,7 @@ hash = "cd8c69c21f0ae560371a145a86abbc11edab14c813d2b7543f8d1293a2b9cca0"
 
 [[files]]
 file = "kubejs/startup_scripts/grindless/uiv/tfln_femtosecond.js"
-hash = "a2a62d85935f3900409605e416fa62f296a3055286005f9274421415ef68972b"
+hash = "9290779abd086e9c17271586997b41e56a28109d8b59ef7d07febbf94ece5271"
 
 [[files]]
 file = "kubejs/startup_scripts/grindless/uiv/travel.js"
