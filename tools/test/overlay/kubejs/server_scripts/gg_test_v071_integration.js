@@ -1,4 +1,4 @@
-// priority: -9924
+// priority: -9993
 // TEST-ONLY, preparation for ONE fresh-world integrated client run via Invoke-GGTest.
 // Enable ONLY gg_test_v071_integration.json in a scratch overlay, after the parent's
 // final candidate/launch instruction. Individual player-fixture markers must be off.
