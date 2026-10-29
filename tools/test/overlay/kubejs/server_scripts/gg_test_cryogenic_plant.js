@@ -15,7 +15,7 @@
 //   recipes        exactly 3 recipes of the type, each under its final id (grindless:cryogenic_processing/<liquid>: GTM's builder puts the
 //                  type in front): 1,000 mB gas in, 1,000 mB liquid out, 1,920 EU/t, 240 ticks, the gcyr:luna dimension condition (not
 //                  reversed, no other condition) and the data key grindless_night_eut = 960
-//   crafting       grindless:crafting/cryogenic_plant (makes the plant) and grindless:assembler/night_sky_radiator (2 radiators)
+//   crafting       grindless:assembler/cryogenic_plant (makes the plant) and grindless:assembler/night_sky_radiator (2 radiators)
 //   night_info     the type's EMI data line reads a recipe's night EU/t
 //   sun_curve      the startup's sunIsDown (published in global): the sun is down from day time 12,786 to 23,214
 //   in the world, on the Moon:
@@ -64,7 +64,7 @@
   var TYPE = 'gtceu:cryogenic_processing'
   var RADIATOR = 'grindless:night_sky_radiator'
   var NIGHT_KEY = 'grindless_night_eut'
-  var PLANT_CRAFTING = 'grindless:crafting/cryogenic_plant'
+  var PLANT_CRAFTING = 'grindless:assembler/cryogenic_plant'
   var RADIATOR_CRAFTING = 'grindless:assembler/night_sky_radiator'
   // final recipe id -> [gas, liquid]
   var WANT_RECIPES = {
@@ -413,8 +413,8 @@
       problems.push(PLANT_CRAFTING + ' missing')
     } else {
       try {
-        var res = plant.getResultItem(S.server.registryAccess())
-        var made = String(res.getId()) + ' x' + res.getCount()
+        var res = asArray(L.Helper.getOutputItems(plant)).map(function (st) { return String(st.getId()) + ' x' + st.getCount() })
+        var made = res.join(', ')
         text.push(PLANT_CRAFTING + ' makes ' + made)
         if (made !== MACHINE + ' x1') problems.push(PLANT_CRAFTING + ' makes ' + made)
       } catch (e) {
