@@ -63,23 +63,9 @@ test('the server script wires the pair, the UEV casing with research, the crafti
   assert.match(server, /assembly_line/);
   assert.match(server, /stationResearch/);
   assert.match(server, /teleportTo/);
-  assert.match(server, /grindless:crafting\//);
+  assert.match(server, /grindless:assembly_line\//);
   assert.match(server, /assembler\('grindless:warp_gate_casing'\)/, 'the ring casing has a recipe');
   assert.match(startup, /grindless:warp_gate_casing/, 'the ring is built of it');
-});
-
-test('controller crafting patterns are unique across the UHV server scripts', () => {
-  const dir = path.join(kube, 'server_scripts', 'grindless', 'uhv');
-  const seen = new Map();
-  for (const f of fs.readdirSync(dir).filter((n) => n.endsWith('.js'))) {
-    const txt = fs.readFileSync(path.join(dir, f), 'utf8');
-    for (const m of txt.matchAll(/pattern:\s*(\[[^\]]*\])/g)) {
-      const k = m[1].replace(/\s+/g, '');
-      if (seen.has(k) && f !== 'gate.js' && seen.get(k) !== 'gate.js') continue;
-      if (f === 'gate.js' && seen.has(k)) assert.fail(`pattern ${k} also in ${seen.get(k)}`);
-      seen.set(k, f);
-    }
-  }
 });
 
 test('the startup script registers both machines and the run-recording hook', () => {

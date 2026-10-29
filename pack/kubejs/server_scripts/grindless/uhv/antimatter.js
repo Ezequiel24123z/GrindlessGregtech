@@ -14,9 +14,10 @@
 //     line 28: SiC mirror blank -> UV's MOCVD (circuit 8): NbN-coated plate -> cavity stack (c1) -> harvest (c2) -> exotic matter cell
 //   gtceu:assembler        GTM, no circuit: 4 magnesium dust pressed on a copper backing plate (natural magnesium is 79 % Mg-24);
 //                          the empty Penning trap (gold electrodes, a niobium-titanium winding, a titanium can).
-//   crafting               the controllers, shaped recipes grindless:crafting/<machine>: UHV hull + 2 UV electric pumps + 2 UHV circuits
+//   crafting               the controllers, assembly lines grindless:assembly_line/<machine>: UHV hull + 2 UV electric pumps + 2 UHV circuits
 //                          (accumulator); UHV hull + 2 UV field generators + 2 UHV circuits (array), in shapes no other UHV controller
 //                          uses.
+//                          Each is an assembly line: station research, tritanium + soldering alloy + lubricant, 3 domain items of its own line.
 //
 // Destinations (rule 3 of AGENTS.md):
 //   spent positron source  -> c3: the neon back (to the cryogenic plant's neon row), the sodium-22 as gtnn:radioactive_waste -> ZPM's waste
@@ -193,20 +194,26 @@
     var PUMP = 'gtceu:uv_electric_pump'
     var FIELD = 'gtceu:uv_field_generator'
     var C = '#gtceu:circuits/uhv'
-    // the other UHV controllers' shapes: grep "pattern: [" in server_scripts/grindless/uhv/*.js
     var defs = [
-      { machine: AM.machines.accumulator.machine, parts: [HULL, PUMP], pattern: ['PCP', ' H ', ' C '], ingredients: { C: C, P: PUMP, H: HULL }, name: 'positron_accumulator' },
-      { machine: AM.machines.array.machine, parts: [HULL, FIELD], pattern: ['CFC', ' H ', ' F '], ingredients: { C: C, F: FIELD, H: HULL }, name: 'casimir_array' }
+      { machine: AM.machines.accumulator.machine, parts: [HULL, PUMP], research: 'grindless:magnesium_target', domain: ['2x grindless:empty_penning_trap', '4x grindless:empty_antiproton_cartridge', 'grindless:lithium_breeder_blanket'], name: 'positron_accumulator' },
+      { machine: AM.machines.array.machine, parts: [HULL, FIELD], research: 'grindless:empty_penning_trap', domain: ['4x grindless:nbn_coated_sic_plate', '2x grindless:srf_cavity', '2x grindless:mu_metal_shield'], name: 'casimir_array' }
     ]
     AM.controllerRecipes = []
     defs.forEach(function (d) {
-      var missing = d.parts.concat([d.machine]).filter(function (id) { return !Item.exists(id) })
+      var missing = d.parts.concat([d.machine, d.research], d.domain.map(function (s) { return s.replace(/^\d+x /, '') })).filter(function (id) { return !Item.exists(id) })
       if (missing.length > 0) {
         console.error(LOG + d.name + ' controller recipe skipped, unknown item(s): ' + missing.join(', '))
         return
       }
-      event.recipes.gtceu.shaped(d.machine, d.pattern, d.ingredients).id('grindless:crafting/' + d.name)
-      AM.controllerRecipes.push('grindless:crafting/' + d.name)
+      var b = event.recipes.gtceu.assembly_line('grindless:' + d.name)
+      d.parts.forEach(function (s, i) { b.itemInputs(i === 0 ? s : '2x ' + s) })
+      b.itemInputs('4x #gtceu:circuits/uhv')
+      d.domain.forEach(function (s) { b.itemInputs(s) })
+      b.inputFluids(Fluid.of('gtceu:soldering_alloy', 2304), Fluid.of('gtceu:lubricant', 2000), Fluid.of('gtceu:tritanium', 1152))
+      b.itemOutputs(d.machine)
+      b.stationResearch(function (r) { return r.researchStack(Item.of(d.research)).CWUt(64).EUt(1966080) })
+      b.EUt(1966080).duration(1500)
+      AM.controllerRecipes.push('grindless:assembly_line/' + d.name)
     })
   }
 

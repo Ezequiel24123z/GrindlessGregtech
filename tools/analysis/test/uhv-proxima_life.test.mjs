@@ -175,26 +175,16 @@ test('every intermediate has a destination; the residues go to standing machines
   for (const id of ['grindless:americium_micro_source', 'grindless:betavoltaic_cell', 'grindless:hpge_crystal']) assert.ok(has(rover, id), id);
 });
 
-test('controllers: UHV hull and circuits, a shaped pattern no other crafting recipe uses (mirrors too)', () => {
+test('controllers: assembly lines with station research, UHV hull and circuits, an era fluid', () => {
   assert.equal(PL.controllerRecipes.length, 5);
-  const shaped = recipes.filter((r) => r.t === 'minecraft:crafting_shaped');
-  const norm = (j, mirror) => {
-    const pat = j.pattern.map((row) => (mirror ? row.split('').reverse().join('') : row));
-    const width = Math.max(...pat.map((x) => x.length));
-    const grid = pat.map((row) => row.padEnd(width, ' ').split('').map((c) => (c === ' ' ? '' : JSON.stringify(j.key[c]))));
-    return JSON.stringify(grid);
-  };
   for (const [key, [machine]] of Object.entries(MACHINES)) {
-    const id = `grindless:crafting/${PL.machines[key].name}`;
+    const id = `grindless:assembly_line/${PL.machines[key].name}`;
     const d = dump(id);
     assert.ok(d && PL.controllerRecipes.includes(id), id);
+    assert.equal(d.t, 'gtceu:assembly_line', id);
     assert.ok(outs(d).includes(machine), id);
     assert.ok(ins(d).includes('gtceu:uhv_machine_hull') && ins(d).includes('gtceu:circuits/uhv'), id);
-    const mine = norm(d.j, false);
-    for (const o of shaped) {
-      if (o.i === id) continue;
-      assert.ok(norm(o.j, false) !== mine && norm(o.j, true) !== mine, `${id} matches ${o.i}`);
-    }
+    assert.ok(JSON.stringify(d.j).includes('"research"') && JSON.stringify(d.j).includes('gtceu:tritanium'), id);
   }
 });
 

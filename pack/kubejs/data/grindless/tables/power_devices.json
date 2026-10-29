@@ -31,14 +31,17 @@
           ],
           "charge": [],
           "itemsOut": [{ "id": "grindless:sic_epi_wafer", "count": 1 }],
-          "fluidsOut": [{ "id": "gtceu:hydrogen", "amount": 2800 }]
+          "fluidsOut": [{ "id": "gtceu:hydrogen", "amount": 1800 }]
         },
         {
           "name": "sic_anneal",
           "circuit": 3,
           "eut": 122880,
           "duration": 300,
-          "itemsIn": [{ "id": "grindless:implanted_sic_wafer", "count": 1 }],
+          "itemsIn": [
+            { "id": "grindless:implanted_sic_wafer", "count": 1 },
+            { "id": "gtceu:graphite_dust", "count": 1 }
+          ],
           "kept": [],
           "fluidsIn": [],
           "charge": [{ "id": "gtceu:argon", "amount": 1000 }],
