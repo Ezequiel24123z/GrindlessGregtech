@@ -270,11 +270,12 @@
           "duration": 200,
           "itemsIn": [
             { "id": "gtceu:calcium_48_dust", "count": 4 },
-            { "id": "gtceu:platinum_foil", "count": 1 }
+            { "id": "gtceu:platinum_foil", "count": 1 },
+            { "id": "grindless:hftacn_heating_element", "count": 1 }
           ],
           "kept": [],
           "charge": [],
-          "fluidsIn": [],
+          "fluidsIn": [{ "id": "gtceu:argon", "amount": 1000 }],
           "itemsOut": [{ "id": "grindless:ca48_oven_charge", "count": 1 }],
           "fluidsOut": []
         },
@@ -289,7 +290,7 @@
           ],
           "kept": [],
           "charge": [],
-          "fluidsIn": [],
+          "fluidsIn": [{ "id": "gtceu:argon", "amount": 1000 }],
           "itemsOut": [{ "id": "grindless:plutonium_oxide_target", "count": 1 }],
           "fluidsOut": []
         },
@@ -300,11 +301,12 @@
           "duration": 200,
           "itemsIn": [
             { "id": "gtceu:plutonium_244_oxide_dust", "count": 1 },
-            { "id": "gtceu:aluminium_foil", "count": 2 }
+            { "id": "gtceu:aluminium_foil", "count": 2 },
+            { "id": "grindless:hftacn_heating_element", "count": 1 }
           ],
           "kept": [],
           "charge": [],
-          "fluidsIn": [],
+          "fluidsIn": [{ "id": "gtceu:argon", "amount": 1000 }],
           "itemsOut": [{ "id": "grindless:plutonium_244_target", "count": 1 }],
           "fluidsOut": []
         }

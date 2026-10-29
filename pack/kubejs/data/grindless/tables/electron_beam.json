@@ -57,7 +57,7 @@
     "assembler": {
       "recipes": [
         { "name": "ceramic_shell_mould", "circuit": 25, "eut": 480, "duration": 200,
-          "itemsIn": [{ "id": "gtceu:zirconia_dust", "count": 2 }, { "id": "gtceu:sapphire_dust", "count": 2 }], "kept": [], "fluidsIn": [], "charge": [],
+          "itemsIn": [{ "id": "gtceu:zirconia_dust", "count": 2 }, { "id": "gtceu:sapphire_dust", "count": 2 }, { "id": "grindless:hftacn_heating_element", "count": 1 }], "kept": [], "fluidsIn": [{ "id": "gtceu:helium", "amount": 1000 }], "charge": [],
           "itemsOut": [{ "id": "grindless:ceramic_shell_mould", "count": 1 }], "fluidsOut": [] },
         { "name": "bond_coat", "circuit": 26, "eut": 1920, "duration": 300,
           "itemsIn": [{ "id": "grindless:heat_treated_sx_blade", "count": 1 }, { "id": "gtceu:platinum_dust", "count": 1 }, { "id": "gtceu:aluminium_dust", "count": 1 }], "kept": [], "fluidsIn": [], "charge": [],
