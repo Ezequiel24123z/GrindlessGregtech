@@ -75,8 +75,8 @@
     }
   }
 
-  // The tower: a hollow shell of casing, row 0 (X) takes the parts, S is the controller. inner(row, back-front index, column) gives the
-  // interior's block symbol (' ' is air through '#').
+  // The tower: row 0 (X) takes the parts, S is the controller; `wall(row, back-front index, column, last)` gives the shell's walls and lid,
+  // inner(row, back-front index, column) the interior (' ' is air through '#').
   function shell(m, inner) {
     var slices = []
     var last = m.depth - 1
@@ -89,9 +89,8 @@
           var ch
           var wall = si === 0 || si === last || c === 0 || c === m.width - 1
           if (r === 0) ch = 'X'
-          else if (r === m.height - 1) ch = 'F'
           else if (si === last && r === 1 && c === mid) ch = 'S'
-          else if (wall) ch = 'F'
+          else if (wall || r === m.height - 1) ch = m.wall(r, si, c, last)
           else ch = inner(r, si, c)
           row += ch
         }
@@ -102,12 +101,36 @@
     return slices
   }
 
+  // QR-S2: frame posts at the corners, a tungstensteel pipe collar (the tray outlets) every third row, laminated glass sight windows
+  // in the middle of each face between the collars, and the distillation pipe stack leaving through the lid.
+  function refineryWall(r, si, c, last) {
+    var corner = (si === 0 || si === last) && (c === 0 || c === 6)
+    if (corner) return 'T'
+    if (r === 10) return si === 3 && c === 3 ? 'P' : 'F'
+    if (r % 3 === 0) return 'P'
+    if (r >= 4) {
+      var mid = (si === 0 || si === last) ? c >= 2 && c <= 4 : si >= 2 && si <= 4
+      return mid ? 'L' : 'F'
+    }
+    return 'F'
+  }
+
   function refineryInner(r, si, c) {
     var centre = si === 3 && c === 3
-    // rows 1-2: the centrifuge drum, a 3 x 3 of gearboxes; rows 3-7: the distillation stack's pipe column
+    // rows 1-2: the centrifuge drum, a 3 x 3 of gearboxes; rows 3-9: the distillation stack's pipe column
     if (r <= 2) return si >= 2 && si <= 4 && c >= 2 && c <= 4 ? 'G' : '#'
-    if (r <= 7) return centre ? 'P' : '#'
-    return '#'
+    return centre ? 'P' : '#'
+  }
+
+  // the works: frame posts, a glass gauge ribbon (rows 2-3) round the centrifuge and the mixing vessel, a pipe collar (row 4) and the
+  // vent stack through the lid
+  function worksWall(r, si, c, last) {
+    var corner = (si === 0 || si === last) && (c === 0 || c === 4)
+    if (corner) return 'T'
+    if (r === 6) return si === 2 && c === 2 ? 'P' : 'F'
+    if (r === 2 || r === 3) return 'L'
+    if (r === 4) return 'P'
+    return 'F'
   }
 
   function worksInner(r, si, c) {
@@ -136,10 +159,13 @@
         G: Pat.block(GEARBOX),
         P: Pat.block(PIPE),
         L: Pat.block(GLASS),
+        T: Pat.frame(['tungsten_steel']),
         '#': Pat.air()
       }
     }
   }
+  NQ.machines.refinery.wall = refineryWall
+  NQ.machines.fuelWorks.wall = worksWall
   NQ.machines.refinery.spec = specOf(NQ.machines.refinery, refineryInner)
   NQ.machines.fuelWorks.spec = specOf(NQ.machines.fuelWorks, worksInner)
 
