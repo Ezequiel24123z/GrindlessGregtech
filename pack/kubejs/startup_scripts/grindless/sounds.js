@@ -88,7 +88,8 @@
     Object.keys(WIRING).forEach(function (typeId) {
       var type = Registries.RECIPE_TYPES.get(new RL(typeId))
       if (type == null) {
-        console.error('[grindless sounds] recipe type not found: ' + typeId)
+        // Io's slot registers only one of thermochemical_hydrogen / electrodynamic_tether (tables/stations.json), or neither while pending
+        console.info('[grindless sounds] recipe type not registered, no sound: ' + typeId)
         return
       }
       var entry = new Entry(SoundEvent.createVariableRangeEvent(new RL(NS, WIRING[typeId])), SoundSource.BLOCKS)
