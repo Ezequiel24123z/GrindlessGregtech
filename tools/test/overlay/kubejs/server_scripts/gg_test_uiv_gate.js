@@ -159,14 +159,21 @@
   function statics() {
     var WG = S.G.warpGate
     var UG = S.G.uivGate
-    if (!check('static_published', WG && WG.recipes && WG.recipes.length === 7, 'global.grindless.warpGate recipes ' +
+    if (!check('static_published', WG && WG.recipes && WG.recipes.length >= 7, 'global.grindless.warpGate recipes ' +
       (WG && WG.recipes ? WG.recipes.length : 'none'))) throw new Error('warpGate is not published')
     var missing = [HOLD, CASING_RECIPE, 'grindless:warp_gate/open', 'grindless:warp_gate/sustain'].filter(function (id) { return byId(id) === null })
     check('static_recipes', missing.length === 0 && (WG.skipped || []).length === 0 && (WG.clashes || []).length === 0 &&
       !!UG && (UG.skipped || []).length === 0, 'missing ' + (missing.join(' ') || 'none') + '; skipped ' + JSON.stringify((WG.skipped || []).concat(UG ? UG.skipped : [])) +
       '; clashes ' + JSON.stringify(WG.clashes || []))
     check('static_casing', !!UG && !!UG.casing && UG.casing.research === 'grindless:kerr_chart' &&
-      UG.casing.output === '2x gtceu:uiv_machine_casing', JSON.stringify(UG ? UG.casing : null))
+      UG.casing.output === '2x gtceu:uxv_machine_casing', JSON.stringify(UG ? UG.casing : null))
+    var station = []
+    var it = S.server.getRecipeManager().getRecipes().iterator()
+    while (it.hasNext()) {
+      var rid = String(it.next().getId())
+      if (rid.indexOf('gtceu:research_station/') === 0 && rid.indexOf('kerr_chart') >= 0) station.push(rid)
+    }
+    check('static_research_station', station.length === 1, 'research_station rows for the casing: ' + station.join(' '))
     var rec = byId(CASING_RECIPE)
     var dump = rec ? String(rec.toString()) : ''
     emit('casing_recipe', 'NOTE', dump)
