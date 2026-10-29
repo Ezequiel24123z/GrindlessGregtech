@@ -9,7 +9,7 @@
 //
 //   gtceu:coking   in : coal                  out: coke + creosote + coal gas      max IO 1 item in, 1 item out, 2 fluids out
 //
-// Structure (5 wide x 4 tall x 3 deep), every pattern goes through global.grindless.patterns (lib/patterns.js):
+// Structure (5 wide x 6 tall x 3 deep, QR-S1: bronze frame girders at the roof corners and a two-block pipe chimney), every pattern goes through global.grindless.patterns (lib/patterns.js):
 //   y0      base: bronze plated bricks (gtceu:steam_machine_casing) with the steam hatch and 1-2 output buses (the coke)
 //   y1-y2   three chambers of coke oven bricks between two heating walls of bronze firebox casings; the controller is the
 //           middle chamber door on the front face
@@ -34,11 +34,11 @@
   const SPEC = {
     slices: [
       // back: base, chambers and heating walls, roof with parts
-      ['XXXXX', 'KWKWK', 'KWKWK', 'RRRRR'],
+      ['XXXXX', 'KWKWK', 'KWKWK', 'FRRRF', '     ', '     '],
       // middle: the gas collecting main runs along the roof
-      ['XXXXX', 'KWKWK', 'KWKWK', 'PPPPP'],
+      ['XXXXX', 'KWKWK', 'KWKWK', 'PPPPP', '  P  ', '  P  '],
       // front (pusher side): the controller is the middle chamber door
-      ['XXXXX', 'KWSWK', 'KWKWK', 'RRRRR']
+      ['XXXXX', 'KWSWK', 'KWKWK', 'FRRRF', '     ', '     ']
     ],
     symbols: {
       S: Pat.controller(),
@@ -48,15 +48,16 @@
         Pat.part('steam', { exact: 1 }),
         Pat.part('steam_output_bus', { min: 1, max: 2 })
       ),
-      // 10 roof cells: the charging bus and the two fluid outputs, the rest bronze plated bricks
+      // 6 roof cells (the corners are frame girders): the charging bus and the two fluid outputs, the rest bronze plated bricks
       R: Pat.oneOf(
-        Pat.block(CASING, { min: 7 }),
+        Pat.block(CASING, { min: 3 }),
         Pat.part('steam_input_bus', { exact: 1 }),
         Pat.part('output_hatch', { exact: 2 })
       ),
       K: Pat.block(COKE_BRICKS),
       W: Pat.block(FIREBOX),
-      P: Pat.block(PIPES)
+      P: Pat.block(PIPES),
+      F: Pat.frame(['bronze'])
     }
   }
 

@@ -15,7 +15,7 @@
 // - One recipe type and one mode, so no mode veto (MEGA-1's modifier is only for several modes).
 //
 // Structure (5 wide x 5 high x 7 deep, lib/patterns.js): steel solid casing floor, roof and walls, aluminium frame posts at the four
-// corners of both ends, tempered glass windows along both sides, a row of five heating coils on the floor of the hall (lib/coils.js:
+// corners of both ends, tempered glass windows along both sides and a porthole in the back wall, a steel pipe run along the roof, a row of five heating coils on the floor of the hall (lib/coils.js:
 // any coil, all of one type, Cupronickel or better; it changes nothing but the shape). The controller sits in the middle of the front wall.
 // Parts go in any casing cell: 1 maintenance, 1 or 2 energy hatches, 1 or 2 input buses, 1 to 3 input hatches, 1 or 2 output buses,
 // 1 or 2 output hatches.
@@ -36,20 +36,21 @@
   // the lines' contents: items in (raw rubber, sulfur), items out (plates), fluids in (ethanol, sulfuric acid, oxygen), fluids out (diluted acid)
   const MAX_IO = { itemsIn: 2, itemsOut: 2, fluidsIn: 3, fluidsOut: 2 }
 
-  // slices back -> front, rows bottom -> top; 97 casing-or-part cells, 12 frames, 20 glass, 5 coils, 40 air, the controller
+  // slices back -> front, rows bottom -> top; 89 casing-or-part cells, 12 frames, 23 glass, 5 steel pipes along the roof, 5 coils, 40 air, the controller
   const END = ['XXXXX', 'FXXXF', 'FXXXF', 'FXXXF', 'XXXXX']
-  const HALL = ['XXXXX', 'X#K#X', 'G###G', 'G###G', 'XXXXX']
+  const BACK = ['XXXXX', 'FXXXF', 'FGGGF', 'FXXXF', 'XXXXX']
+  const HALL = ['XXXXX', 'X#K#X', 'G###G', 'G###G', 'XXPXX']
   const SPEC = {
     slices: [
-      END,
+      BACK,
       HALL, HALL, HALL, HALL, HALL,
       ['XXXXX', 'FXSXF', 'FXXXF', 'FXXXF', 'XXXXX']
     ],
     symbols: {
       S: Pat.controller(),
-      // 97 cells: at most 12 are parts (1 + 2 + 2 + 3 + 2 + 2), the rest steel casing
+      // 89 cells: at most 12 are parts (1 + 2 + 2 + 3 + 2 + 2), the rest steel casing
       X: Pat.oneOf(
-        Pat.block(CASING, { min: 85 }),
+        Pat.block(CASING, { min: 77 }),
         Pat.part('maintenance', { exact: 1 }),
         Pat.part('energy_input', { min: 1, max: 2 }),
         Pat.part('input_bus', { min: 1, max: 2 }),
@@ -59,6 +60,7 @@
       ),
       F: Pat.frame(['aluminium']),
       G: Pat.block(GLASS),
+      P: Pat.block('gtceu:steel_pipe_casing'),
       K: Coils.predicate(),
       '#': Pat.air()
     }

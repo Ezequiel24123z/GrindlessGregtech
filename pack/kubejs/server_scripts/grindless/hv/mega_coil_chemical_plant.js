@@ -10,7 +10,7 @@
 
   const INPUTS = [
     '2x gtceu:large_chemical_reactor', '4x gtceu:hv_chemical_reactor', '4x #gtceu:circuits/hv',
-    '8x #forge:plates/polytetrafluoroethylene', '4x gtceu:kanthal_coil_block'
+    '8x #forge:plates/polytetrafluoroethylene', '4x gtceu:kanthal_coil_block', '2x grindless:reforming_catalyst'
   ]
   const MACHINES = ['gtceu:large_chemical_reactor', 'gtceu:hv_chemical_reactor', 'gtceu:kanthal_coil_block']
 
@@ -26,7 +26,7 @@
         return
       }
       event.recipes.gtceu.assembler(CP.crafting)
-        .itemInputs(INPUTS[0], INPUTS[1], INPUTS[2], INPUTS[3], INPUTS[4])
+        .itemInputs(INPUTS[0], INPUTS[1], INPUTS[2], INPUTS[3], INPUTS[4], INPUTS[5])
         .itemOutputs('gtceu:coil_chemical_plant')
         .EUt(120)
         .duration(600)

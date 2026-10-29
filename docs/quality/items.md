@@ -37,10 +37,10 @@ Era is taken from the registering script's `grindless/<era>/` folder.
 Ore indicators, one per vein: `gtceu:merrillite_indicator` (ev), `iridosmine_indicator` (iv), `meteoric_iron_indicator` and `tetrataenite_indicator` (luv), `deuterium_rich_ice_indicator` (mars). Fix: give each an info page ("shows where the vein is; keep in the scanner") or consume it in the matching scanning recipe.
 
 ### hidden_with_recipes
-- **hv** `grindless:vein_sample_scheelite`: hidden from the index yet 1 recipe uses it. Add the item to `grindless:hidden_with_recipes` or drop the recipe.
+- **hv** `grindless:vein_sample_scheelite`: hidden from the index yet 1 recipe uses it. Add the item to `grindless:hidden_with_recipes` or drop the recipe. **QR-R1: kept on purpose.** The recipe is the old-save conversion into the empty vein probe (`keepRecipes: true` in hidden_until.json); hiding it with the tag would hide that recipe. The audit row is a false positive: allowlist it in process-audit (lib, not this package). The trivial_step rows below are all UV and later, none in steam to ev.
 
 ### machine_no_info
-- **iv** `gtceu:ev_rtg`: no tooltip and no EMI page. Add `grindless.machine.ev_rtg.tooltip.N` or a page.
+- **iv** `gtceu:ev_rtg`: no tooltip and no EMI page. Add `grindless.machine.ev_rtg.tooltip.N` or a page. **Fixed (QR-I1): own EMI info page.**
 
 ### Machines with 0-recipe types or no craft recipe (invisible processes)
 Per the owner: no machine may stay empty. For each, either add the recipes, or register the machine hidden (EMI `c:hidden_from_recipe_viewers`; save rule: never remove), or give it a page that states what it does.
@@ -97,78 +97,10 @@ Fix: add a second ingredient or byproduct that makes the step a real process, or
 
 ## M-INFO: multiblocks without an info page of their own
 
-Owner rule: every multiblock controller needs an EMI info page that says what it does and what it is for; special-purpose machines (chart writers and readers, research and data machines, structure-only or dimension-locked machines, machines with hidden or synthetic recipes) need a page specific to that machine, not a shared one. Kinds: **missing** = multiblock with no info page; **generic** = special-purpose, covered only by a shared page (more than 3 machines on one page); **empty** = no visible recipe and no page, i.e. EMI would stay empty even with the EMI plugin fixed (QR-A0 Java.to bug). Current result: 0 empty, 1 generic (lv wireless_energy_tower), 216 missing (all have visible recipes, so none is blank once the plugin works). Rule: tooltips do not count; only an emi:info page listing the controller. The type shown is what the page text has to explain; Phase 2 writes the en_us and es_es text. Baselined: the audit fails only for new multiblocks. Limitation: recipes hidden by tag are not detected, so empty may under-report.
+Owner rule: every multiblock controller needs an EMI info page that says what it does and what it is for; special-purpose machines (chart writers and readers, research and data machines, structure-only or dimension-locked machines, machines with hidden or synthetic recipes) need a page specific to that machine, not a shared one. Kinds: **missing** = multiblock with no info page; **generic** = special-purpose, covered only by a shared page (more than 3 machines on one page); **empty** = no visible recipe and no page, i.e. EMI would stay empty even with the EMI plugin fixed (QR-A0 Java.to bug). Current result: 0 empty, 1 generic (lv wireless_energy_tower), 216 missing (all have visible recipes, so none is blank once the plugin works). Rule: tooltips do not count; only an emi:info page listing the controller. The type shown is what the page text has to explain; Phase 2 writes the en_us and es_es text. Baselined: the audit fails only for new multiblocks. Limitation: recipes hidden by tag are not detected, so empty may under-report. **QR-I1 done: pages with en_us and es_es text for steam to IV (rows removed below); LuV and later remain.**
 
 | id | era | script | kind | page must say (types shown) |
 |---|---|---|---|---|
-| gtceu:coking_battery | steam | kubejs/startup_scripts/grindless/steam/coking_battery.js:75 | missing | what it does and what for; processes gtceu:coking |
-| gtceu:large_steam_centrifuge | steam | kubejs/startup_scripts/grindless/steam/large_family.js:146 | missing | what it does and what for; processes gtceu:centrifuge |
-| gtceu:large_steam_chemical_bath | steam | kubejs/startup_scripts/grindless/steam/large_family.js:141 | missing | what it does and what for; processes gtceu:chemical_bath |
-| gtceu:large_steam_macerator | steam | kubejs/startup_scripts/grindless/steam/large_family.js:128 | missing | what it does and what for; processes gtceu:macerator |
-| gtceu:large_steam_ore_washer | steam | kubejs/startup_scripts/grindless/steam/large_family.js:136 | missing | what it does and what for; processes gtceu:ore_washer |
-| gtceu:large_steam_thermal_centrifuge | steam | kubejs/startup_scripts/grindless/steam/large_family.js:132 | missing | what it does and what for; processes gtceu:thermal_centrifuge |
-| gtceu:steam_alloy_smelter | steam | kubejs/startup_scripts/grindless/steam/small_family.js:113 | missing | what it does and what for; processes gtceu:alloy_smelter |
-| gtceu:steam_blast_furnace | steam | kubejs/startup_scripts/grindless/steam/blast_furnace.js:69 | missing | what it does and what for; processes gtceu:steelmaking |
-| gtceu:steam_chemical_bath | steam | kubejs/startup_scripts/grindless/steam/small_family.js:115 | missing | what it does and what for; processes gtceu:chemical_bath |
-| gtceu:steam_compressor | steam | kubejs/startup_scripts/grindless/steam/small_family.js:112 | missing | what it does and what for; processes gtceu:compressor |
-| gtceu:steam_forge_hammer | steam | kubejs/startup_scripts/grindless/steam/small_family.js:111 | missing | what it does and what for; processes gtceu:forge_hammer |
-| gtceu:steam_greenhouse | steam | kubejs/startup_scripts/grindless/steam/machines.js:114 | missing | what it does and what for; processes gtceu:greenhouse |
-| gtceu:steam_mixer | steam | kubejs/startup_scripts/grindless/steam/small_family.js:114 | missing | what it does and what for; processes gtceu:mixer |
-| gtceu:steam_ore_washer | steam | kubejs/startup_scripts/grindless/steam/small_family.js:116 | missing | what it does and what for; processes gtceu:ore_washer |
-| gtceu:steam_vein_drill | steam | kubejs/startup_scripts/grindless/steam/machines.js:99 | missing | what it does and what for; processes gtceu:vein_drilling |
-| gtceu:heliostat_tower | lv | kubejs/startup_scripts/grindless/lv/heliostat_tower.js:180 | missing | what it does and what for; processes gtceu:solar_steam |
-| gtceu:lv_greenhouse | lv | kubejs/startup_scripts/grindless/lv/multis.js:356 | missing | what it does and what for; processes gtceu:greenhouse |
-| gtceu:lv_vein_drill | lv | kubejs/startup_scripts/grindless/lv/multis.js:341 | missing | what it does and what for; processes gtceu:vein_drilling |
-| gtceu:submerged_arc_furnace | lv | kubejs/startup_scripts/grindless/lv/multis.js:371 | missing | what it does and what for; processes gtceu:arc_smelting |
-| gtceu:sulfide_roaster | lv | kubejs/startup_scripts/grindless/lv/sulfide_roaster.js:94 | missing | what it does and what for; processes gtceu:sulfide_roasting |
-| gtceu:wire_works | lv | kubejs/startup_scripts/grindless/lv/mega_wire_works.js:26 | missing | what it does and what for; processes gtceu:wiremill, gtceu:bender |
-| gtceu:wireless_energy_tower | lv | kubejs/startup_scripts/grindless/lv/wireless_energy.js:326 | generic | what it does and what for; no recipe types |
-| gtceu:advanced_multi_smelter | mv | kubejs/startup_scripts/grindless/mv/leisure_utility.js:462 | missing | what it does and what for; processes gtceu:electric_furnace |
-| gtceu:biorefinery | mv | kubejs/startup_scripts/grindless/mv/biorefinery.js:97 | missing | what it does and what for; processes gtceu:bio_distillation |
-| gtceu:lava_furnace | mv | kubejs/startup_scripts/grindless/mv/leisure_utility.js:480 | missing | what it does and what for; processes gtceu:electric_furnace |
-| gtceu:mv_greenhouse | mv | kubejs/startup_scripts/grindless/mv/family_multis.js:138 | missing | what it does and what for; processes gtceu:greenhouse |
-| gtceu:mv_vein_drill | mv | kubejs/startup_scripts/grindless/mv/family_multis.js:123 | missing | what it does and what for; processes gtceu:vein_drilling |
-| gtceu:ore_plant | mv | kubejs/startup_scripts/grindless/mv/ore_plant.js:174 | missing | what it does and what for; processes gtceu:ore_processing |
-| gtceu:polymer_works | mv | kubejs/startup_scripts/grindless/mv/mega_polymer_works.js:30 | missing | what it does and what for; processes gtceu:polymer_works |
-| gtceu:universal_assembly_factory | mv | kubejs/startup_scripts/grindless/mv/leisure_factories.js:82 | missing | what it does and what for; processes gtceu:assembler, gtceu:circuit_assembler |
-| gtceu:universal_mixing_factory | mv | kubejs/startup_scripts/grindless/mv/leisure_factories.js:100 | missing | what it does and what for; processes gtceu:mixer, gtceu:chemical_reactor, gtceu:chemical_bath, gtceu:ore_washer |
-| gtceu:universal_processing_factory | mv | kubejs/startup_scripts/grindless/mv/leisure_factories.js:72 | missing | what it does and what for; processes gtceu:bender, gtceu:wiremill, gtceu:lathe, gtceu:cutter, gtceu:extruder, gtceu:compressor, gtceu:forge_hammer, gtceu:forming_press, gtceu:polarizer, gtceu:laser_engraver, gtceu:fluid_solidifier |
-| gtceu:universal_separation_factory | mv | kubejs/startup_scripts/grindless/mv/leisure_factories.js:91 | missing | what it does and what for; processes gtceu:centrifuge, gtceu:electrolyzer, gtceu:thermal_centrifuge, gtceu:macerator, gtceu:sifter, gtceu:extractor, gtceu:electromagnetic_separator |
-| gtceu:weather_controller | mv | kubejs/startup_scripts/grindless/mv/leisure_utility.js:490 | missing | what it does and what for; processes gtceu:weather_control |
-| gtceu:coil_chemical_plant | hv | kubejs/startup_scripts/grindless/hv/mega_coil_chemical_plant.js:28 | missing | what it does and what for; processes gtceu:large_chemical_reactor |
-| gtceu:hv_greenhouse | hv | kubejs/startup_scripts/grindless/hv/family_multis.js:136 | missing | what it does and what for; processes gtceu:greenhouse |
-| gtceu:hv_vein_drill | hv | kubejs/startup_scripts/grindless/hv/family_multis.js:121 | missing | what it does and what for; processes gtceu:vein_drilling |
-| gtceu:refinery | hv | kubejs/startup_scripts/grindless/hv/refinery.js:137 | missing | what it does and what for; processes gtceu:refining |
-| gtceu:reformer | hv | kubejs/startup_scripts/grindless/hv/reformer.js:124 | missing | what it does and what for; processes gtceu:reforming |
-| gtceu:syngas_plant | hv | kubejs/startup_scripts/grindless/hv/syngas_plant.js:137 | missing | what it does and what for; processes gtceu:syngas |
-| gtceu:atmosphere_processor | ev | kubejs/startup_scripts/grindless/ev/mars_site.js:98 | missing | what it does and what for; processes gtceu:atmosphere_processing |
-| gtceu:combined_cycle_plant | ev | kubejs/startup_scripts/grindless/ev/combined_cycle_and_hot_mill.js:162 | missing | what it does and what for; processes gtceu:combined_cycle |
-| gtceu:cryogenic_plant | ev | kubejs/startup_scripts/grindless/ev/cryogenic_plant.js:260 | missing | what it does and what for; processes gtceu:cryogenic_processing |
-| gtceu:deep_space_antenna | ev | kubejs/startup_scripts/grindless/ev/lunar_power_and_antenna.js:321 | missing | what it does and what for; processes gtceu:deep_space_tracking |
-| gtceu:ev_vein_drill | ev | kubejs/startup_scripts/grindless/ev/tripod.js:210 | missing | what it does and what for; processes gtceu:vein_drilling |
-| gtceu:extraction_cascade | ev | kubejs/startup_scripts/grindless/ev/extraction_cascade.js:164 | missing | what it does and what for; processes gtceu:solvent_extraction |
-| gtceu:hot_strip_mill | ev | kubejs/startup_scripts/grindless/ev/combined_cycle_and_hot_mill.js:239 | missing | what it does and what for; processes gtceu:hot_rolling |
-| gtceu:lunar_solar_array | ev | kubejs/startup_scripts/grindless/ev/lunar_power_and_antenna.js:258 | missing | what it does and what for; processes gtceu:lunar_solar |
-| gtceu:ore_refinery | ev | kubejs/startup_scripts/grindless/ev/mega_ore_refinery.js:25 | missing | what it does and what for; processes gtceu:ore_refinery |
-| gtceu:platinum_plant | ev | kubejs/startup_scripts/grindless/ev/platinum_plant.js:162 | missing | what it does and what for; processes gtceu:pgm_refining |
-| gtceu:regolith_cell | ev | kubejs/startup_scripts/grindless/ev/regolith_cell.js:118 | missing | what it does and what for; processes gtceu:regolith_processing |
-| gtceu:sealed_dome | ev | kubejs/startup_scripts/grindless/ev/sealed_dome.js:131 | missing | what it does and what for; processes gtceu:greenhouse |
-| gtceu:fission_reactor | iv | kubejs/startup_scripts/grindless/iv/fission_reactor.js:232 | missing | what it does and what for; processes gtceu:fission_core |
-| gtceu:fluorspar_kiln | iv | kubejs/startup_scripts/grindless/iv/fluorspar_kiln.js:219 | missing | what it does and what for; processes gtceu:fluorspar_digestion |
-| gtceu:fuel_fabrication_plant | iv | kubejs/startup_scripts/grindless/iv/uranium_cycle.js:296 | missing | what it does and what for; processes gtceu:fuel_fabrication |
-| gtceu:heavy_water_plant | iv | kubejs/startup_scripts/grindless/iv/heavy_water_plant.js:217 | missing | what it does and what for; processes gtceu:isotope_exchange |
-| gtceu:hot_cell | iv | kubejs/startup_scripts/grindless/iv/hot_cell.js:54 | missing | what it does and what for; processes gtceu:hot_cell |
-| gtceu:interferometer | iv | kubejs/startup_scripts/grindless/iv/mercury.js:768 | missing | what it does and what for; processes gtceu:interferometry |
-| gtceu:isr_wellfield | iv | kubejs/startup_scripts/grindless/iv/uranium_cycle.js:278 | missing | what it does and what for; processes gtceu:in_situ_leaching |
-| gtceu:mercury_solar_field | iv | kubejs/startup_scripts/grindless/iv/mercury.js:725 | missing | what it does and what for; processes gtceu:mercury_solar |
-| gtceu:mercury_solar_works | iv | kubejs/startup_scripts/grindless/iv/mercury.js:705 | missing | what it does and what for; processes gtceu:solar_processing |
-| gtceu:mercury_vein_drill | iv | kubejs/startup_scripts/grindless/iv/mercury.js:653 | missing | what it does and what for; processes gtceu:vein_drilling |
-| gtceu:naquadah_plant | iv | kubejs/startup_scripts/grindless/iv/naquadah_plant.js:182 | missing | what it does and what for; processes gtceu:naquadah_refining |
-| gtceu:pressurized_vein_drill | iv | kubejs/startup_scripts/grindless/iv/venus.js:352 | missing | what it does and what for; processes gtceu:vein_drilling |
-| gtceu:smelting_complex | iv | kubejs/startup_scripts/grindless/iv/mega_smelting_complex.js:30 | missing | what it does and what for; processes gtceu:smelting_complex |
-| gtceu:tritium_removal_facility | iv | kubejs/startup_scripts/grindless/iv/tritium_removal.js:330 | missing | what it does and what for; processes gtceu:detritiation |
-| gtceu:venus_acid_works | iv | kubejs/startup_scripts/grindless/iv/venus.js:403 | missing | what it does and what for; processes gtceu:acid_cracking |
-| gtceu:venus_heat_engine | iv | kubejs/startup_scripts/grindless/iv/venus.js:370 | missing | what it does and what for; processes gtceu:venus_heat |
 | gtceu:algae_bioreactor | luv | kubejs/startup_scripts/grindless/luv/europa.js:97 | missing | what it does and what for; processes gtceu:bioreactor |
 | gtceu:asteroid_processor | luv | kubejs/startup_scripts/grindless/luv/asteroid_belt.js:377 | missing | what it does and what for; processes gtceu:asteroid_processing |
 | gtceu:biofoundry | luv | kubejs/startup_scripts/grindless/luv/biofoundry.js:142 | missing | what it does and what for; processes gtceu:sterile_culture |

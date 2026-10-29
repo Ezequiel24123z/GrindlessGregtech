@@ -80,7 +80,7 @@ test('modifier chain: coil parallel, discount, perfect overclock, batch (4 modif
   assert.equal(h.G.mega.chain({ parallel: 'coil', cap: 64, discount: { rate: 0.95, floor: 0.8, baseK: 1800 }, oc: 'perfect', batch: true }).length, 4);
 });
 
-test('structure: 5 x 6 x 7, one controller, 146 casing cells, 5 pipe casings, 16 coils in 2 rings, 18 glass, 24 air, height within 16', () => {
+test('structure: 5 x 6 x 7, one controller, 121 casing cells, 16 frames, 5 pipe casings, 16 coils in 2 rings, 27 glass, 24 air, height within 16', () => {
   const h = harness();
   registerMachine(h);
   const d = h.G.patterns.describe('gtceu:coil_chemical_plant');
@@ -97,8 +97,8 @@ test('structure: 5 x 6 x 7, one controller, 146 casing cells, 5 pipe casings, 16
     });
   });
   assert.ok(height <= 16);
-  assert.deepEqual(plain(count), { X: 146, G: 18, P: 5, K: 16, S: 1, '#': 24 });
-  assert.equal(d.slices[6][1], 'XXSXX', 'controller in the middle of the front wall');
+  assert.deepEqual(plain(count), { X: 121, F: 16, G: 27, P: 5, K: 16, S: 1, '#': 24 });
+  assert.equal(d.slices[6][1], 'FXSXF', 'controller in the middle of the front wall');
   const ringSlices = d.slices.filter((rows) => rows.join('').includes('K'));
   assert.equal(ringSlices.length, 2);
   ringSlices.forEach((rows) => assert.equal(rows.join('').split('K').length - 1, 8, 'a full ring of 8'));
@@ -119,7 +119,7 @@ test('structure: 5 x 6 x 7, one controller, 146 casing cells, 5 pipe casings, 16
   assert.equal(lim(5).max, 4, 'fluid input hatches');
   assert.equal(lim(6).max, 4, 'fluid output hatches');
   const maxParts = d.symbols.X.options.slice(1).reduce((n, o) => n + (o.limits.exact || o.limits.max), 0);
-  assert.equal(146 - maxParts, lim(0).min, 'the casing minimum is the cells minus the most parts');
+  assert.equal(121 - maxParts, lim(0).min, 'the casing minimum is the cells minus the most parts');
 });
 
 test('parallel and EU figures at Cupronickel and Kanthal (formulas of lib/mega.js), then the other coil tiers', () => {
@@ -178,7 +178,7 @@ test('controller recipe: 2 large chemical reactors, 4 HV chemical reactors, 4 HV
   assert.equal(out.length, 1);
   const r = out[0];
   assert.equal(r.id, h.G.megaCoilChemicalPlant.crafting);
-  assert.deepEqual(plain(r.itemInputs), ['2x gtceu:large_chemical_reactor', '4x gtceu:hv_chemical_reactor', '4x #gtceu:circuits/hv', '8x #forge:plates/polytetrafluoroethylene', '4x gtceu:kanthal_coil_block']);
+  assert.deepEqual(plain(r.itemInputs), ['2x gtceu:large_chemical_reactor', '4x gtceu:hv_chemical_reactor', '4x #gtceu:circuits/hv', '8x #forge:plates/polytetrafluoroethylene', '4x gtceu:kanthal_coil_block', '2x grindless:reforming_catalyst']);
   assert.deepEqual(plain(r.itemOutputs), ['gtceu:coil_chemical_plant']);
   assert.ok(r.eut <= 512 && r.eut > 0);
   assert.ok(r.duration > 0);

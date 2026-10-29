@@ -4,7 +4,7 @@
 // (docs/research/leisure.md 4.2: GTL's licence is not permissive, so no code, text or texture of it is used; the numbers, patterns
 // and art are ours). Convenience machines, counted apart from the per-era target of AGENTS.md rule 7.
 //
-//   gtceu:advanced_multi_smelter   5x3x3 heatproof furnace around 12 heating coils. Runs GTM's furnace recipes (gtceu:electric_furnace,
+//   gtceu:advanced_multi_smelter   5x4x5 heatproof furnace hall around 16 heating coils. Runs GTM's furnace recipes (gtceu:electric_furnace,
 //                                  every smelting recipe of the game) and smelts DIFFERENT items in the same run: each run gathers
 //                                  every kind of smeltable item in its input buses, up to its parallel limit. Parallels double with
 //                                  every 900 K of coil temperature (GTL's rule): 4 at 1,800 K (cupronickel), 8 kanthal, 16 nichrome,
@@ -12,7 +12,7 @@
 //                                  Each parallel costs a single electric furnace (the recipe's own EU/t and time), then GTM's
 //                                  non-perfect overclock. GTM's own HV multi smelter (32 x coil level, one recipe at a time) stays
 //                                  the bulk smelter; this one is the MV mixed-batch smelter.
-//   gtceu:lava_furnace             3x3x3 hearth of steel fireboxes under a steel chamber. No energy: it smelts the same furnace
+//   gtceu:lava_furnace             5x6x5 foundry: a hearth of steel fireboxes under a framed steel chamber. No energy: it smelts the same furnace
 //                                  recipes (mixed kinds, up to 8 at once) with lava from a fluid input hatch in the hearth, 10 mB
 //                                  per item, the heat a vanilla furnace takes from a bucket (100 items). GTL's machine of that name
 //                                  MAKES lava from cobblestone for 3,200 EU a bucket; here lava burned in a large boiler is worth far
@@ -90,49 +90,60 @@
 
   // ---------------------------------------------------------------- patterns
 
+  // QR-S1: the smelter is a 5x4x5 furnace hall (steel frame posts, a ring of heating coils round the glowing bay, glass windows,
+  // a pipe flue in the roof); the lava furnace a 5x6x5 foundry (firebox hearth, framed steel walls, glass windows, pipe chimney).
   const SMELTER_SPEC = {
     slices: [
-      ['XXXXX', 'KKKKK', 'XXXXX'],
-      ['XXXXX', 'K###K', 'XXXXX'],
-      ['XXSXX', 'KKKKK', 'XXXXX']
+      ['XXXXX', 'FKXKF', 'FKGKF', 'XXXXX'],
+      ['XXXXX', 'K###K', 'K###K', 'XXXXX'],
+      ['XXXXX', 'X###X', 'G###G', 'XXPXX'],
+      ['XXXXX', 'K###K', 'K###K', 'XXXXX'],
+      ['XXXXX', 'FKSKF', 'FKGKF', 'XXXXX']
     ],
     symbols: {
       S: Pat.controller(),
-      // 29 cells: 19 to 28 heatproof casings, the rest parts
+      // 51 cells: 41 to 50 heatproof casings, the rest parts
       X: Pat.oneOf(
-        Pat.block(HEATPROOF, { min: 19 }),
+        Pat.block(HEATPROOF, { min: 41 }),
         Pat.part('energy_input', { min: 1, max: 2 }),
         Pat.part('input_bus', { min: 1, max: 4 }),
         Pat.part('output_bus', { min: 1, max: 4 })
       ),
       K: Coils.predicate(),
+      F: Pat.frame(['steel']),
+      G: Pat.block('minecraft:glass'),
+      P: Pat.block(PIPE),
       '#': Pat.air()
     }
   }
 
   const FURNACE_SPEC = {
     slices: [
-      ['FFF', 'XXX', 'XXX'],
-      ['FFF', 'X#X', 'XXX'],
-      ['FFF', 'XSX', 'XXX']
+      ['FFFFF', 'MXXXM', 'MXGXM', 'MXXXM', 'XXXXX', '#####'],
+      ['FFFFF', 'X###X', 'X###X', 'X###X', 'XXXXX', '#####'],
+      ['FFFFF', 'X###X', 'G###G', 'X###X', 'XXPXX', '##P##'],
+      ['FFFFF', 'X###X', 'X###X', 'X###X', 'XXXXX', '#####'],
+      ['FFFFF', 'MXSXM', 'MXGXM', 'MXXXM', 'XXXXX', '#####']
     ],
     symbols: {
       S: Pat.controller(),
-      // the hearth: 9 cells, one of them the lava hatch
+      // the hearth: 25 cells, one of them the lava hatch
       F: Pat.oneOf(
-        Pat.block(FIREBOX, { min: 8 }),
+        Pat.block(FIREBOX, { min: 24 }),
         Pat.part('input_hatch', { exact: 1 })
       ),
-      // the chamber: 16 cells, 2 to 4 of them buses
+      // the walls and roof: 55 cells, 2 to 4 of them buses
       X: Pat.oneOf(
-        Pat.block(STEEL, { min: 12 }),
+        Pat.block(STEEL, { min: 51 }),
         Pat.part('input_bus', { min: 1, max: 2 }),
         Pat.part('output_bus', { min: 1, max: 2 })
       ),
+      M: Pat.frame(['steel']),
+      G: Pat.block('minecraft:glass'),
+      P: Pat.block(PIPE),
       '#': Pat.air()
     }
   }
-
   const WEATHER_SPEC = {
     slices: [
       ['XXX', 'F F', 'F F', '   ', '   ', '   '],

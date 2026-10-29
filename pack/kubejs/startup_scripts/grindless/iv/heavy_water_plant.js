@@ -31,6 +31,7 @@
 // Geometry (lib/patterns.js: slices back -> front, rows bottom -> top, columns left -> right seen from the front; 9 wide, 14 high,
 // 3 deep): columns 0-2 the cold tower (rows 0-9), 3-4 the gap, 5-7 the hot tower (rows 0-13), 8 the vacuum column (middle slice, rows
 // 0-7). Each tower is hollow (air inside) above its foot and closed by a cap; its foot (row 0) is a 3x3 whose middle is casing (the sump).
+// QR-S1: each tower is a framed column: titanium frame posts on its four corners and a glass sight strip down its front and back.
 // The bridge (P) is two titanium pipe casings high (rows 5-6) and two long, in the middle slice. The controller is in the middle of the
 // hot tower's foot, in the front face. The 14 X cells of the feet (the cold tower's 8, the hot tower's 6 that a pipe can reach) take
 // 1-2 energy hatches, 1-2 input buses, 1-4 input hatches, 1-4 output hatches and at most one parallel hatch (IV-B6, lib/parallel_hatch.js:
@@ -110,11 +111,11 @@
   const SPEC = {
     slices: [
       // back: the towers' back walls; their feet take parts
-      slice('XXX  XXX ', 'CCC  CCC ', 'CCC  CCC ', 'CCC  CCC ', '     CCC ', 'CCC  CCC ', '     CCC '),
+      slice('XXX  XXX ', 'FGF  FGF ', 'FGF  FGF ', 'FGF  FGF ', '     FGF ', 'CCC  CCC ', '     CCC '),
       // middle: the sumps, the hollow towers, the bridge at mid-height and the vacuum column against the hot tower (rows 0-7)
       slice('XCX  XCCV', 'C#C  C#CV', 'C#CPPC#CV', 'C#C  C#C ', '     C#C ', 'CCC  C#C ', '     CCC '),
       // front: the controller in the middle of the hot tower's foot
-      slice('XXX  XSX ', 'CCC  CCC ', 'CCC  CCC ', 'CCC  CCC ', '     CCC ', 'CCC  CCC ', '     CCC ')
+      slice('XXX  XSX ', 'FGF  FGF ', 'FGF  FGF ', 'FGF  FGF ', '     FGF ', 'CCC  CCC ', '     CCC ')
     ],
     symbols: {
       S: Pat.controller(),
@@ -127,6 +128,8 @@
         G.parallelHatch.part()
       ),
       C: Pat.block(CASING),
+      F: Pat.frame(['titanium']),
+      G: Pat.block('minecraft:glass'),
       P: Pat.block(BRIDGE),
       V: Pat.block(COLUMN),
       '#': Pat.air()

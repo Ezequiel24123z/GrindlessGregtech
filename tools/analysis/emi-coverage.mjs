@@ -1,28 +1,32 @@
 // EMI coverage audit (lib/emi_coverage.mjs): every item, block item, fluid and machine the pack registers must show in EMI how it is
 // obtained and, unless it is an end product, what it is for.
 //
-//   node tools/analysis/emi-coverage.mjs [--pack pack] [--dump <native dump dir>] [--json out.json] [--expect file] [--quiet]
+//   node tools/analysis/emi-coverage.mjs [--pack pack] [--dump <native dump dir>] [--json out.json] [--expect file] [--known-from report] [--quiet]
 //
 // Without --dump the recipes come from the pack's own scripts run in the static KubeJS stand-in (lib/kubejs_static.mjs): no
 // Minecraft, what the Node test suite runs. With --dump the recipes are a native server dump's (gg_dump.js), which also has what the
 // scripts derive from the mods' recipes, and the declared derived routes are checked against it. --expect writes the list the
-// native client fixture asks EMI about (tools/test/overlay/kubejs/config/gg_test_emi_coverage_expect.json).
+// native client fixture asks EMI about (tools/test/overlay/kubejs/config/gg_test_emi_coverage_expect.json), with the known runtime
+// gaps of emi_runtime_known.json. --known-from <gg_emi_coverage_report.json> rewrites that file from a native client report (only
+// shrink it: a gap that was fixed leaves the list; a new gap is fixed, not listed).
 // Exit code: 0 no gaps and no problems, 1 gaps or problems, 2 tool failure.
 import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { loadDump } from './lib/dump.mjs';
 import { staticDump } from './lib/kubejs_static.mjs';
-import { auditEmiCoverage, fixtureExpectations, loadEmiData, renderCoverageText, renderExpectations } from './lib/emi_coverage.mjs';
+import { auditEmiCoverage, fixtureExpectations, knownFromReport, loadEmiData, renderCoverageText, renderExpectations } from './lib/emi_coverage.mjs';
 import { readJson } from './lib/util.mjs';
 
 const here = path.dirname(fileURLToPath(import.meta.url));
 export const DEFAULT_CONFIG = path.join(here, 'emi_coverage.json');
 export const DEFAULT_PACK = path.resolve(here, '..', '..', 'pack');
 export const DEFAULT_EXPECT = path.resolve(here, '..', 'test', 'overlay', 'kubejs', 'config', 'gg_test_emi_coverage_expect.json');
+// the native client's known gaps (a ratchet: listed gaps are NOTEs, new ones FAIL); --known-from <report> rewrites it
+export const DEFAULT_KNOWN = path.join(here, 'emi_runtime_known.json');
 
 /** The whole audit: {res, run, dump}. */
-export function runCoverage({ pack = DEFAULT_PACK, dumpDir = null, config = DEFAULT_CONFIG } = {}) {
+export function runCoverage({ pack = DEFAULT_PACK, dumpDir = null, config = DEFAULT_CONFIG, known = DEFAULT_KNOWN } = {}) {
   const { dump: sdump, run } = staticDump(pack);
   const dump = dumpDir ? loadDump(dumpDir, { log: null }) : sdump;
   if (dumpDir) {
@@ -34,11 +38,12 @@ export function runCoverage({ pack = DEFAULT_PACK, dumpDir = null, config = DEFA
   }
   const res = auditEmiCoverage({ dump, registry: run.registry, cfg: readJson(config), emi: loadEmiData(pack), lang: run.lang, native: !!dumpDir });
   res.standInErrors = run.errors;
+  res.runtimeKnown = known && fs.existsSync(known) ? readJson(known) : null;
   return { res, run, dump };
 }
 
 function main(argv) {
-  const opt = { pack: DEFAULT_PACK, dumpDir: null, json: null, expect: null, quiet: false, config: DEFAULT_CONFIG };
+  const opt = { pack: DEFAULT_PACK, dumpDir: null, json: null, expect: null, quiet: false, config: DEFAULT_CONFIG, knownFrom: null };
   for (let i = 0; i < argv.length; i++) {
     const a = argv[i];
     if (a === '--pack') opt.pack = path.resolve(argv[++i]);
@@ -46,6 +51,7 @@ function main(argv) {
     else if (a === '--json') opt.json = path.resolve(argv[++i]);
     else if (a === '--config') opt.config = path.resolve(argv[++i]);
     else if (a === '--expect') opt.expect = argv[i + 1] && !argv[i + 1].startsWith('--') ? path.resolve(argv[++i]) : DEFAULT_EXPECT;
+    else if (a === '--known-from') opt.knownFrom = path.resolve(argv[++i]);
     else if (a === '--quiet') opt.quiet = true;
     else {
       process.stderr.write(`unknown option ${a}\n`);
@@ -56,6 +62,12 @@ function main(argv) {
   if (!opt.quiet) process.stdout.write(renderCoverageText(res) + '\n');
   else process.stdout.write(`EMI coverage: ${res.counts.audited} audited, ${res.gaps.length} gaps, ${res.problems.length} problems\n`);
   if (opt.json) fs.writeFileSync(opt.json, JSON.stringify(res, null, 2));
+  if (opt.knownFrom) {
+    res.runtimeKnown = knownFromReport(readJson(opt.knownFrom), res);
+    fs.writeFileSync(DEFAULT_KNOWN, JSON.stringify(res.runtimeKnown, null, 2) + '\n');
+    const n = Object.values(res.runtimeKnown).reduce((s, l) => s + l.length, 0);
+    process.stdout.write(`wrote ${path.relative(process.cwd(), DEFAULT_KNOWN)} (${n} known runtime gaps; regenerate --expect)\n`);
+  }
   if (opt.expect) {
     fs.writeFileSync(opt.expect, renderExpectations(fixtureExpectations(res)));
     process.stdout.write(`wrote ${path.relative(process.cwd(), opt.expect)}\n`);

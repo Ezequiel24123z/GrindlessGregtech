@@ -38,8 +38,13 @@ Every client suite holds the test player until EMI finishes reloading and audits
 An exit-0 client, a completed reload, or a vanilla crafting recipe alone is not proof of working GTM integration.
 The client suite requires `GGTEST|emi_coverage|all|PASS`, `DONE`, and the exported report; reload/plugin
 exceptions, missing workstation bindings, missing GT process displays, missing multiblock previews, missing
-acquisition/use routes and missing required info pages fail the run. There is no content-failure baseline.
-Only the static audit's explicitly hidden unreleased stacks and legacy conversions are exempted.
+acquisition/use routes and missing required info pages fail the run. Exempt: the static audit's hidden
+unreleased stacks and legacy conversions, machines under EMI's disabled tags (`grindless:hidden_with_recipes`),
+and multiblocks whose definition turns the XEI preview off (`isRenderXEIPreview()` false, listed as `previewsOff`).
+Gaps already in `tools/analysis/emi_runtime_known.json` are a `known` NOTE, not a FAIL; any new gap fails.
+That list only shrinks: after a fix, regenerate it from the new report with
+`node tools/analysis/emi-coverage.mjs --known-from <report> --expect` (the NOTE lists the fixed entries).
+The audit needs `-EmiAuditClientXmx 8G -Slots 1 -EmiAuditTimeoutSec 1800`: at 4G, EMI's reload stalls.
 
 The full report is collected as `results/client/kubejs-exported/gg_emi_coverage_report.json`: per-stack
 made/used counts and categories, all GTM machines and workstation bindings, all displayable GT categories,
