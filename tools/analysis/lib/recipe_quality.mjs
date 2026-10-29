@@ -203,28 +203,52 @@ function singleRules(rec, t) {
 
 const FORM_BONUS = { crafting: 0, machine: 1, assembler: 1, assembly_line: 2 };
 
-/** steps from raw: 0 when nothing of ours makes it, else 1 + the shallowest recipe's deepest input. Cycles count as raw. */
-export function depthMap(graph) {
-  const by = new Map();
-  for (const g of graph) for (const o of g.o) { if (!by.has(o)) by.set(o, []); by.get(o).push(g); }
-  const memo = new Map();
-  const walk = (id, stack) => {
-    if (memo.has(id)) return memo.get(id);
-    const recs = by.get(id);
-    if (!recs || stack.has(id) || stack.size > 12) return 0;
-    stack.add(id);
-    let best = Infinity;
-    for (const g of recs) {
-      let d = 0;
-      for (const i of g.i) if (i !== id) d = Math.max(d, walk(i, stack));
-      best = Math.min(best, d);
+/** Strongly connected components (Tarjan): node -> component number. The partition does not depend on visit order. */
+function components(nodes, adj) {
+  const index = new Map(), low = new Map(), comp = new Map(), stack = [], on = new Set();
+  let n = 0, c = 0;
+  const visit = (v) => {
+    index.set(v, n); low.set(v, n); n++; stack.push(v); on.add(v);
+    for (const w of adj.get(v)) {
+      if (!index.has(w)) { visit(w); low.set(v, Math.min(low.get(v), low.get(w))); }
+      else if (on.has(w)) low.set(v, Math.min(low.get(v), index.get(w)));
     }
-    stack.delete(id);
-    const r = 1 + best;
-    memo.set(id, r);
-    return r;
+    if (low.get(v) === index.get(v)) { let w; do { w = stack.pop(); on.delete(w); comp.set(w, c); } while (w !== v); c++; }
   };
-  return (id) => walk(id, new Set());
+  for (const v of nodes) if (!index.has(v)) visit(v);
+  return comp;
+}
+
+/** steps from raw: 0 when nothing of ours makes it, else 1 + the shallowest recipe's deepest input. A fixed point over the
+ *  whole graph (every step adds 1, so it is unique), never dependent on query order. Items our recipes only make inside a
+ *  loop they never bootstrap (an ender pearl from a model made of ender pearls, a sample also brought back by hand) get
+ *  the loop's edge back counted as raw. */
+export function depthMap(graph) {
+  const d = new Map();
+  for (const g of graph) for (const o of g.o) d.set(o, Infinity);
+  const get = (id) => (d.has(id) ? d.get(id) : 0);
+  const relax = (cut) => {
+    for (let changed = true; changed;) {
+      changed = false;
+      for (const g of graph) {
+        for (const o of g.o) {
+          let m = 0;
+          for (const i of g.i) if (i !== o && !cut(o, i)) { const v = get(i); if (v > m) m = v; if (m === Infinity) break; }
+          if (1 + m < d.get(o)) { d.set(o, 1 + m); changed = true; }
+        }
+      }
+    }
+  };
+  relax(() => false);
+  const loose = [...d.keys()].filter((id) => d.get(id) === Infinity);
+  if (loose.length) {
+    const set = new Set(loose);
+    const adj = new Map(loose.map((id) => [id, new Set()]));
+    for (const g of graph) for (const o of g.o) if (set.has(o)) for (const i of g.i) if (i !== o && set.has(i)) adj.get(o).add(i);
+    const comp = components(loose, adj);
+    relax((o, i) => set.has(o) && set.has(i) && comp.get(o) === comp.get(i));
+  }
+  return (id) => { const v = get(id); return Number.isFinite(v) ? v : 0; };
 }
 
 export function complexity(rec, depth) {

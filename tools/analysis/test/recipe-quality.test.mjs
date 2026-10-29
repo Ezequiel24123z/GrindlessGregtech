@@ -7,7 +7,7 @@ import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { compareBaseline, evaluate } from '../lib/recipe_quality.mjs';
+import { compareBaseline, depthMap, evaluate } from '../lib/recipe_quality.mjs';
 import { factsFromPack } from '../recipe-quality.mjs';
 
 const here = path.dirname(fileURLToPath(import.meta.url));
@@ -101,4 +101,22 @@ test('no script calls scannerResearch with a callback: Rhino hands the function 
   };
   walk(root);
   assert.deepEqual(hits, [], 'use scannerResearch(Item.of(<stack>)); GTM 7.5.3 overloads it with (UnaryOperator) and (ItemStack)');
+});
+
+test('depthMap: order-independent, loops our recipes never bootstrap count their edge back as raw', () => {
+  // ore -> dust (1) -> plate (2); a recycle loop catalyst <-> spent must not undercut the catalyst's bootstrap
+  const g = [
+    { o: ['dust'], i: ['ore'] }, { o: ['plate'], i: ['dust'] },
+    { o: ['catalyst'], i: ['plate', 'acid'] }, { o: ['spent'], i: ['catalyst'] }, { o: ['catalyst'], i: ['spent', 'acid'] },
+    // pearl <-> model, with no recipe of ours that starts the loop; the model also needs a plate
+    { o: ['pearl'], i: ['model'] }, { o: ['model'], i: ['pearl', 'plate'] }, { o: ['wand'], i: ['pearl'] },
+  ];
+  const ids = ['ore', 'dust', 'plate', 'catalyst', 'spent', 'model', 'pearl', 'wand'];
+  const want = { ore: 0, dust: 1, plate: 2, catalyst: 3, spent: 4, model: 3, pearl: 1, wand: 2 };
+  for (const order of [ids, [...ids].reverse(), ['wand', 'spent', 'pearl', 'catalyst', 'model', 'ore', 'plate', 'dust']]) {
+    const d = depthMap(g);
+    assert.deepEqual(Object.fromEntries(order.map((id) => [id, d(id)])), Object.fromEntries(order.map((id) => [id, want[id]])));
+  }
+  const rev = depthMap([...g].reverse());
+  assert.deepEqual(Object.fromEntries(ids.map((id) => [id, rev(id)])), want);
 });

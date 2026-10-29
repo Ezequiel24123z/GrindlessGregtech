@@ -871,8 +871,8 @@
  "gtceu:neutrino_observatory": {
   "v": [],
   "bt": 4,
-  "ds": 0.38,
-  "c": 988
+  "ds": 0.452,
+  "c": 1117
  },
  "gtceu:neutron_drip_separator": {
   "v": [

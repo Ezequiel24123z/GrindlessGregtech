@@ -431,7 +431,7 @@
       var veins = IVF.venusVeins().concat(IVF.mercuryVeins()).concat(IVF.leachVeins())
       var fluorite = global.grindless.lv.extraVeins().filter(function (v) { return v.id === 'fluorite' })
       veins.concat(fluorite).forEach(function (v) {
-        var id = 'grindless:crafting/vein_sample/' + v.id
+        var id = 'grindless:assembler/vein_sample/' + v.id
         var r = byId(server, id)
         if (r === null) {
           problems.push('missing ' + id)

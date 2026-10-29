@@ -1,3 +1,4 @@
+// priority: 2650
 // Gregtech Grindless - EMI information pages of the UV era multiblocks (kubejs/assets/emi/recipe/additions/grindless/<id>.json, type emi:info).
 // One page per controller: what it does, its circuit modes, what it needs. Their recipes show in EMI under the controller itself.
 // Every key is in en_us and es_es.
