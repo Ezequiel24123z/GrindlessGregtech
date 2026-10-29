@@ -36,7 +36,13 @@
           "itemsOut": [{ "id": "grindless:melter_dross", "count": 1 }], "fluidsOut": [{ "id": "gtceu:finemet_melt", "amount": 576 }] },
         { "_why": "UXV-A3 (uxv.md line 44): the STNO mill redeposit re-melted; it is Co, Fe and B from the free layers.", "name": "stno_redeposit_remelt", "circuit": 14, "eut": 7864320, "duration": 1200,
           "itemsIn": [{ "id": "grindless:stno_redeposit_dust", "count": 4 }], "kept": [], "fluidsIn": [{ "id": "gtceu:helium", "amount": 500 }], "charge": [],
-          "itemsOut": [{ "id": "grindless:cofeb_ingot", "count": 2 }, { "id": "grindless:melter_dross", "count": 1 }], "fluidsOut": [] }
+          "itemsOut": [{ "id": "grindless:cofeb_ingot", "count": 2 }, { "id": "grindless:melter_dross", "count": 1 }], "fluidsOut": [] },
+        { "_why": "UXV-A3 integration (uxv.md line 36): the Bridgman rod ends (crystals c15's Terfenol-D dust) re-melted; the surface oxide leaves as dross.", "name": "terfenol_d_remelt", "circuit": 15, "eut": 7864320, "duration": 1200,
+          "itemsIn": [{ "id": "gtceu:terfenol_d_dust", "count": 4 }], "kept": [], "fluidsIn": [{ "id": "gtceu:helium", "amount": 500 }], "charge": [],
+          "itemsOut": [{ "id": "grindless:terfenol_d_ingot", "count": 3 }, { "id": "grindless:melter_dross", "count": 1 }], "fluidsOut": [] },
+        { "_why": "UXV-A3 integration (uxv.md line 37): the Ni-Mn-Ga crystal offcuts (crystals c16's dust) re-melted; the surface oxide leaves as dross.", "name": "ni_mn_ga_remelt", "circuit": 16, "eut": 7864320, "duration": 1200,
+          "itemsIn": [{ "id": "gtceu:ni2mnga_dust", "count": 4 }], "kept": [], "fluidsIn": [{ "id": "gtceu:helium", "amount": 500 }], "charge": [],
+          "itemsOut": [{ "id": "grindless:ni_mn_ga_ingot", "count": 3 }, { "id": "grindless:melter_dross", "count": 1 }], "fluidsOut": [] }
       ]
     },
     "mixer": {

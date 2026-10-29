@@ -111,5 +111,4 @@ test('"only from": nothing else in the pack makes these ids', () => {
     assert.ok(ps.length >= 1, `${id} has a producer`);
     assert.ok(ps.every((r) => r.i.includes(tail)), `${id} only from ${tail}: ${ps.map((r) => r.i)}`);
   }
-  for (const id of ['grindless:spent_cofeb_target']) assert.deepEqual(producers(id).map((r) => r.i), [], `${id} is made by nobody in A2 (A3/A6)`);
 });

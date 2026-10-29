@@ -1,3 +1,4 @@
+// priority: -9946
 // TEST ONLY, UXV-A4 (gtceu:mtj_sputter_cluster, gtceu:oxide_pld_chamber). Command: kubejs custom_command gg_test_uxv_spin_deposition
 // Band ONLY: X 36480-36543, Z 0-63, Overworld Y 98-112.
 //   T1 (named uncertainty: a 67,108,864 EU/t row, twice V[UIV] and the first of the line, is accepted by two UIV energy hatches, and the

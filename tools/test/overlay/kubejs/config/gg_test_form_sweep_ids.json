@@ -256,6 +256,10 @@
    "gtceu:uiv_fusion_reactor",
    "gtceu:xray_pulse_profiler"
   ],
+  "uxv": [
+   "gtceu:mtj_sputter_cluster",
+   "gtceu:oxide_pld_chamber"
+  ],
   "launch_road": [
    "gtceu:composite_autoclave",
    "gtceu:engine_test_stand"

@@ -1,4 +1,4 @@
-// priority: -10866
+// priority: -10932
 // -----------------------------------------------------------------------------------------------
 // UXV spintronic feedstock (package UXV-A2, docs/eras/uxv.md "A2"): the intermediates of the older plants' new rows. Recipes: the older
 // machines' own files (ev/extraction_cascade.js, ev/platinum_plant.js, iv/fluorspar_kiln.js, zpm/europium.js, uv/detectors.js,

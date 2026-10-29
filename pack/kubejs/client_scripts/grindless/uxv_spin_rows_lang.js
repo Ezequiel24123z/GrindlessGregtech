@@ -1,3 +1,4 @@
+// priority: 1478
 // Gregtech Grindless - names and tooltips of the UXV spintronic rows (startup_scripts/grindless/uxv/spin_rows.js) and the EMI lines of the
 // new rows in the shared tables:
 //
@@ -85,6 +86,8 @@
         ['gtceu.recipe.grindless_levitation_melting.ni_mn_ga_melt', 'Circuit 12: Ni, Mn and Ga melted into Ni-Mn-Ga', 'Circuito 12: Ni, Mn y Ga fundidos en Ni-Mn-Ga'],
         ['gtceu.recipe.grindless_levitation_melting.finemet_melt', 'Circuit 13: the Finemet charge melted for planar flow casting', 'Circuito 13: la carga de Finemet fundida para colada de flujo plano'],
         ['gtceu.recipe.grindless_levitation_melting.stno_redeposit_remelt', 'Circuit 14: the STNO mill redeposit melted back into CoFeB', 'Circuito 14: el redep\u00f3sito del fresado STNO fundido de nuevo en CoFeB'],
+        ['gtceu.recipe.grindless_levitation_melting.terfenol_d_remelt', 'Circuit 15: Terfenol-D rod ends melted back into ingots', 'Circuito 15: los extremos de las barras de Terfenol-D fundidos de nuevo en lingotes'],
+        ['gtceu.recipe.grindless_levitation_melting.ni_mn_ga_remelt', 'Circuit 16: Ni-Mn-Ga crystal offcuts melted back into ingots', 'Circuito 16: los recortes de cristal de Ni-Mn-Ga fundidos de nuevo en lingotes'],
         ['gtceu.recipe.grindless_megabar.hbn_crystal', 'Circuit 6: hBN grown under pressure with barium. Anvil wear: 10 % per run.', 'Circuito 6: hBN crecido a presi\u00f3n con bario. Desgaste del yunque: 10 % por ciclo.'],
         ['gtceu.recipe.grindless_crystal_growth.ggg_boule', 'Circuit 10: a GGG boule pulled from the melt in an iridium crucible', 'Circuito 10: un boule de GGG extra\u00eddo del fundido en un crisol de iridio'],
         ['gtceu.recipe.grindless_crystal_growth.dysco3_boule', 'Circuit 11: a DyScO3 boule pulled from the melt in an iridium crucible', 'Circuito 11: un boule de DyScO3 extra\u00eddo del fundido en un crisol de iridio'],

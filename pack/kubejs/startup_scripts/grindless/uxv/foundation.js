@@ -1,4 +1,4 @@
-// priority: -10850
+// priority: -10900
 // -----------------------------------------------------------------------------------------------
 // UXV foundation (package UXV-F1, docs/eras/uxv.md "Build order", F1): the shared registrations the UXV packages build on. No machine of
 // our own, no recipe type, no worldgen, no dimension and no recipe. Every other UXV package uses exactly these ids; they are published in

@@ -73,7 +73,7 @@ test('the oxide PLD rows: circuits 1-3, the laser kept, RuO4 and BFO fume as byp
   const o = (n) => plain(rec('pulsed_laser_deposition', n).itemsOut.map((x) => x.id));
   assert.deepEqual(o('srruo3_electrode'), ['grindless:srruo3_electrode_wafer', 'gtceu:ruthenium_tetroxide_dust']);
   assert.deepEqual(o('bfo_film'), ['grindless:bfo_film_wafer', 'grindless:bfo_fume']);
-  assert.deepEqual(o('me_switch'), ['grindless:me_switch_wafer', 'gtceu:small_cobalt_dust']);
+  assert.deepEqual(o('me_switch'), ['grindless:cofe_me_wafer', 'gtceu:small_cobalt_dust']);
   assert.ok(rec('pulsed_laser_deposition', 'srruo3_electrode').itemsIn.some((x) => x.id === 'grindless:srruo3_target'));
   assert.ok(rec('pulsed_laser_deposition', 'bfo_film').itemsIn.some((x) => x.id === 'grindless:la_bfo_target'));
 });
@@ -110,7 +110,7 @@ test('"only from": nothing else in the pack makes these ids', () => {
     'grindless:mtj_stack_wafer': 'mtj_sputtering/mtj_stack', 'grindless:mram_stack_wafer': 'mtj_sputtering/mram_stack',
     'grindless:saf_track_wafer': 'mtj_sputtering/saf_track', 'grindless:stno_stack_wafer': 'mtj_sputtering/stno_stack',
     'grindless:srruo3_electrode_wafer': 'pulsed_laser_deposition/srruo3_electrode', 'grindless:bfo_film_wafer': 'pulsed_laser_deposition/bfo_film',
-    'grindless:me_switch_wafer': 'pulsed_laser_deposition/me_switch', 'grindless:kr_f2_premix': 'mixer/kr_f2_premix',
+    'grindless:cofe_me_wafer': 'pulsed_laser_deposition/me_switch', 'grindless:me_switch_wafer': 'electron_beam_refining/me_switch_pattern', 'grindless:kr_f2_premix': 'mixer/kr_f2_premix',
     'grindless:krf_excimer_laser': 'assembly_line/krf_excimer_laser', 'grindless:krf_discharge_tube': 'chemical_reactor/krf_discharge_tube',
     'grindless:krf_discharge_tube_blank': 'assembler/krf_discharge_tube_blank', 'grindless:pulsed_power_head': 'assembler/pulsed_power_head',
     'grindless:cofe_target': 'assembler/cofe_target', 'gtceu:mtj_sputter_cluster': 'assembly_line/mtj_sputter_cluster',

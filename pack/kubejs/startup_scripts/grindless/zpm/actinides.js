@@ -1,4 +1,4 @@
-// priority: -10900
+// priority: -10980
 // -----------------------------------------------------------------------------------------------
 // ZPM's stored-waste machines (docs/eras/zpm.md, "Machines 4-5"; package ZPM-A4): the waste retrieval plant, the actinide partitioning
 // plant, their two recipe types and the two GT materials of the partitioning line.
