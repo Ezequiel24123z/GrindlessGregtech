@@ -159,6 +159,7 @@
   AC.clashes = []
   AC.crafting = { retrieval: 'grindless:assembly_line/waste_retrieval_plant', partition: 'grindless:assembly_line/actinide_partitioning_plant' }
   AC.craftingParts = ['gtceu:zpm_machine_hull', 'gtceu:zpm_electric_pump', 'gtceu:zpm_robot_arm', 'grindless:carbon_nanotube_yarn', 'grindless:cvd_diamond_plate', 'grindless:silica_aerogel']
+  AC.craftingResearch = ['gtceu:hot_cell', 'gtceu:waste_retrieval_plant']
 
   function keysOf(r) {
     var keys = {}
@@ -232,26 +233,28 @@
     recipe.EUt(REACTOR.eut).duration(REACTOR.duration)
   }
 
-  // ASSEMBLY LINE with scanner research (the ZPM robot arm scanned into a data stick): ZPM hull + 2 ZPM pumps + ZPM robot arm +
-  // 4 ZPM circuits + carbon nanotube yarn (the sealed gloves) + CVD diamond plate (the shield window) + silica aerogel (the hot-cell lining)
-  // + soldering alloy + lubricant; the two plants differ by the plate/yarn counts.
+  // ASSEMBLY LINE with scanner research: ZPM hull + 2 ZPM pumps + ZPM robot arm + 4 ZPM circuits + carbon nanotube yarn (the sealed
+  // gloves) + CVD diamond plate (the shield window) + silica aerogel (the hot-cell lining) + soldering alloy + lubricant; the two plants
+  // differ by the plate/yarn counts. Research: the IV hot cell scanned for the retrieval plant, the retrieval plant for the partitioning
+  // plant. Not the ZPM robot arm: its research id is GTM's station research of the UV robot arm, which a scanner would then unlock.
+  // scannerResearch(ItemStack), not the callback form: Rhino passes a JS function to the ItemStack overload as an empty stack.
   function addCrafting(event) {
-    var missing = AC.craftingParts.filter(function (id) { return !Item.exists(id) })
+    var missing = AC.craftingParts.concat(AC.craftingResearch).filter(function (id) { return !Item.exists(id) })
     if (missing.length > 0) {
       console.error(LOG + 'actinide plant crafting skipped, unknown item(s): ' + missing.join(', '))
       return
     }
-    function plant(id, machine, yarn, plate) {
+    function plant(id, machine, yarn, plate, research) {
       var b = event.recipes.gtceu.assembly_line(id.replace('assembly_line/', ''))
       b.itemInputs('gtceu:zpm_machine_hull', '2x gtceu:zpm_electric_pump', 'gtceu:zpm_robot_arm', '4x #gtceu:circuits/zpm',
         yarn + 'x grindless:carbon_nanotube_yarn', plate + 'x grindless:cvd_diamond_plate', '4x grindless:silica_aerogel')
       b.inputFluids(Fluid.of('gtceu:soldering_alloy', 1152), Fluid.of('gtceu:lubricant', 1000))
       b.itemOutputs(machine)
-      b.scannerResearch(function (r) { return r.researchStack(Item.of('gtceu:zpm_robot_arm')).EUt(ZPM_VA) })
+      b.scannerResearch(Item.of(research))
       b.EUt(ZPM_VA).duration(1200)
     }
-    plant(AC.crafting.retrieval, 'gtceu:waste_retrieval_plant', 8, 2)
-    plant(AC.crafting.partition, 'gtceu:actinide_partitioning_plant', 4, 4)
+    plant(AC.crafting.retrieval, 'gtceu:waste_retrieval_plant', 8, 2, AC.craftingResearch[0])
+    plant(AC.crafting.partition, 'gtceu:actinide_partitioning_plant', 4, 4, AC.craftingResearch[1])
   }
 
   ServerEvents.recipes(function (event) {

@@ -362,7 +362,10 @@ test('our info pages live where EMI reads them (the emi namespace) and every pag
   // a page for a stack disabled until its era is used once that era's package lands
   const pending = new Set(exp.hidden);
   const waits = (p) => (p.stacks || []).some((s) => s.id && pending.has((s.kind === 'fluid' ? 'fluid:' : '') + s.id));
-  for (const p of emi.pages) assert.ok(used.has(p.id) || waits(p), p.file + ' covers no audited stack');
+  // an addon machine's page (GTM Extended Features' Expanded Assembly Line): the audit covers only our registry
+  const ADDON = /^(extendedfeatures|gtca|gtnn):/;
+  const addon = (p) => (p.stacks || []).length > 0 && p.stacks.every((s) => s.id && ADDON.test(s.id));
+  for (const p of emi.pages) assert.ok(used.has(p.id) || waits(p) || addon(p), p.file + ' covers no audited stack');
 });
 
 test('the native fixture\'s expectations are current (node tools/analysis/emi-coverage.mjs --expect)', () => {

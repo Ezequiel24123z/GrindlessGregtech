@@ -34,6 +34,8 @@ const NATIVE = new Set([
   'gtceu:polytetrafluoroethylene_ingot',
   // MEGA-track controller, registered by its own package (obtain dump 20261028-120239)
   'gtceu:mega_chemical_complex',
+  // GTM's data stick and GTM Extended Features 3.0.0's Expanded Assembly Line and Matrix Data Relay (QR-G0, obtain dump 20261029-012421)
+  'gtceu:data_stick', 'extendedfeatures:expanded_assembly_line', 'extendedfeatures:matrix_data_relay',
   // this pack's own, registered before LuV (same dump)
   'grindless:outer_system_chart', 'grindless:sagittarius_a_star_signal',
 ]);

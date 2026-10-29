@@ -807,6 +807,28 @@
 			y: 0.0d
 		}
 		{
+			dependencies: ["32CEA916CCFD8B21"]
+			description: [
+				"The &6Expanded Assembly Line&r runs the normal line's recipes in any input order. It is built in the normal Assembly Line, which takes the old controller as an ingredient."
+				"Research data reaches it only through a wireless data receptor, linked to a transmissor in a Matrix Data Relay that holds your data access hatches."
+			]
+			icon: "extendedfeatures:expanded_assembly_line"
+			id: "7AB2677E0B572226"
+			rewards: [
+				{ id: "362BC4E8075F9AA0", type: "xp", xp: 100 }
+				{ count: 2, id: "3E1BDF1939524572", item: "gtceu:data_stick", type: "item" }
+			]
+			shape: "gear"
+			size: 1.25d
+			tasks: [
+				{ id: "56C304EA12DE11B1", item: "extendedfeatures:expanded_assembly_line", type: "item" }
+				{ id: "71F721B6050FBDA5", item: "extendedfeatures:matrix_data_relay", type: "item" }
+			]
+			title: "Any Order"
+			x: 26.0d
+			y: 3.0d
+		}
+		{
 			dependencies: ["38F8454E1AEB4E72"]
 			description: ["The &6Mega Chemical Complex&r joins whole lines into one recipe: PTFE, epoxy and para-aramid each go from raw inputs to finished product without a single hand-off. The Coil Chemical Plants you built at HV go into it."]
 			icon: "gtceu:mega_chemical_complex"
