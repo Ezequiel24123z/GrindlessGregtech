@@ -1,4 +1,4 @@
-// priority: -26224
+// priority: -26294
 // -----------------------------------------------------------------------------------------------
 // Recipes of ZPM's waste retrieval plant (gtceu:waste_retrieval) and actinide partitioning plant (gtceu:actinide_partitioning), the
 // controllers' crafting recipes and the lanthanide nitrate's route back to the extraction cascade (machines, types and materials:

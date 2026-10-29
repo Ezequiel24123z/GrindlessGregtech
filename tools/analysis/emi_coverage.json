@@ -6,6 +6,7 @@
     "requirePages: an item made by a recipe of an invisible type, or whose only use is a place in a structure, also needs an info page (kubejs/assets/emi/recipe/additions/grindless/).",
     "derived: routes the static stand-in cannot see, because a script derives them from the mods' own recipes or GTM generates them from a material's flags. Each one is checked against a native dump with --dump (category = EMI category).",
     "exceptions: an item that genuinely has no acquisition or no use, with the reason. Keep it empty unless the design says so.",
+    "pendingUses: temporary, while an era is built. A stack of ours an earlier package of the era makes and a later one uses: its use is pending, not a gap. Each entry names the package (`package`) that deletes it when its row lands; an entry with no package, for no item, or for a stack EMI shows a use of is a problem.",
     "pendingRoutes: temporary, while an era is built. A recipe of ours EMI drops only because a stack of ours is disabled until its era (an input another package of the era makes). Each entry names the package that deletes it; an entry EMI no longer drops is a problem. `foreign` names another mod's stacks our own table holds until the era (GT--'s mainframe until A5 writes its recipe); an unnamed foreign stack, or a named one no longer disabled, is a problem."
   ],
   "invisibleTypes": ["gtceu:electric_furnace", "gtceu:dummy"],
@@ -55,10 +56,12 @@
     { "id": "gtceu:lay_superhydride_ingot", "role": "use", "category": "gtceu:macerator", "source": "GTM's macerator recipe ingot -> dust, generated for the ingot material lay_superhydride (startup_scripts/grindless/uev/foundation.js); GTM's bender also makes the plate of W's UEV SMES cell from it" },
     { "id": "gtceu:hftacn_dust", "role": "acquisition", "category": "gtceu:macerator", "source": "GTM's macerator recipe ingot -> dust, generated for the ingot material hftacn (startup_scripts/grindless/uev/foundation.js); the ingot comes only from UEV-A5's billet row in the UHV spark plasma sinterer (circuit 4)" },
     { "id": "gtceu:hftacn_dust", "role": "use", "category": "minecraft:smelting", "source": "GTM's furnace recipe dust -> ingot, generated for an ingot material with no blast temperature (startup_scripts/grindless/uev/foundation.js)" },
-  { "id": "gtceu:rhea_dust", "role": "use", "category": "minecraft:smelting", "source": "GTM's furnace recipe dust -> ingot, generated for an ingot material with no blast temperature (startup_scripts/grindless/uiv/foundation.js); the dust only comes from macerating the ingot, which comes only from UIV-A3's levitation melter (circuit 1)" },
+    { "id": "gtceu:rhea_dust", "role": "use", "category": "minecraft:smelting", "source": "GTM's furnace recipe dust -> ingot, generated for an ingot material with no blast temperature (startup_scripts/grindless/uiv/foundation.js); the dust only comes from macerating the ingot, which comes only from UIV-A3's levitation melter (circuit 1)" },
     { "id": "gtceu:metallic_hydrogen_dust", "role": "acquisition", "category": "gtceu:macerator", "source": "GTM's macerator recipe ingot -> dust, generated for the ingot material metallic_hydrogen (startup_scripts/grindless/uiv/foundation.js); the ingot comes only from UIV-A2's ramp-compression pulser (c1)" },
-    { "id": "gtceu:metallic_hydrogen_dust", "role": "use", "category": "gtceu:ingot_molding", "source": "GTM's alloy smelter recipe 9 dust -> block (block casting mold), generated for the ingot material metallic_hydrogen (startup_scripts/grindless/uiv/foundation.js); native dump 20261028-160615-obtain" }
-  ],
+    { "id": "gtceu:metallic_hydrogen_dust", "role": "use", "category": "gtceu:ingot_molding", "source": "GTM's alloy smelter recipe 9 dust -> block (block casting mold), generated for the ingot material metallic_hydrogen (startup_scripts/grindless/uiv/foundation.js);     native dump 20261028-160615-obtain" },
+        { "id": "gtceu:tungsten_184_ingot", "role": "acquisition", "category": "minecraft:smelting", "source": "GTM's furnace recipe dust -> ingot, generated for an ingot material with no blast temperature (startup_scripts/grindless/uxv/foundation.js); the dust comes from UXV-A1's isotope rows" },
+        { "id": "gtceu:tungsten_184_ingot", "role": "use", "category": "gtceu:wiremill", "source": "GTM's wiremill recipe ingot -> wire, generated from the material's cable properties (startup_scripts/grindless/uxv/foundation.js); the wire is line 38's CVI preform fibre (UXV-A3); native dump files/dump-uxv" }
+      ],
   "derivedProcesses": [
     { "type": "gtceu:combined_cycle", "source": "server_scripts/grindless/ev/combined_cycle_and_hot_mill.js makes one run per live gas turbine fuel" },
     { "type": "gtceu:hot_rolling", "source": "server_scripts/grindless/ev/combined_cycle_and_hot_mill.js makes the mill's runs from the live recipes it stands in for" },
@@ -76,6 +79,26 @@
   ],
   "pendingRoutes": [
     { "id": "grindless:nitride_magnet_synthesis/uxv_smes_cell", "reason": "UXV-W landed before Wave A: grindless:strand_tape is held until UXV-A8 writes its producer;     A8 deletes this entry with its hold rule" },
-        { "id": "grindless:assembly_line/uxv_parallel_hatch", "foreign": ["gtnn:spintronic_mainframe"], "reason": "UXV-M1 landed before Wave A: its inputs are held until A5 (GT--'s spintronic mainframe, held by our A5 rule until A5 writes its recipe), B3 (field generator, filtered disk plasma), B4 (hull) and B5 (emitter) write their producers; B5 lands last and deletes this entry with its hold rule" }
+    { "id": "grindless:assembly_line/uxv_parallel_hatch", "foreign": ["gtnn:spintronic_mainframe"], "reason": "UXV-M1 landed before Wave A: its inputs are held until A5 (GT--'s spintronic mainframe, held by our A5 rule until A5 writes its recipe), B3 (field generator, filtered disk plasma), B4 (hull) and B5 (emitter) write their producers; B5 lands last and deletes this entry with its hold rule" },
+    { "id": "grindless:solvent_extraction/ev/lpe_dross_lead", "reason": "UXV-A2 landed before A5: grindless:lpe_dross is held until A5's LPE furnace c3 gives it off; A5 deletes this entry with its hold rule" },
+    { "id": "grindless:powder_bed_fusion/print_cofeb_blank", "reason": "UXV-A2 landed before A3: grindless:cofeb_am_powder is held until A3 writes grindless:cofeb; A3 deletes this entry with its hold rule" },
+    { "id": "grindless:powder_bed_fusion/print_heusler_blank", "reason": "UXV-A2 landed before A3: grindless:heusler_am_powder is held until A3 writes grindless:heusler; A3 deletes this entry with its hold rule" }
+      ],
+      "pendingUses": [
+        { "id": "gtceu:dysco3_dust", "package": "UXV-A3", "reason": "UXV-A2 makes the oxide (IV fluorspar kiln); A3's DyScO3 Czochralski row (crystals.json c10-17, uxv.md:1245) uses it" },
+        { "id": "gtceu:ggg_dust", "package": "UXV-A3", "reason": "UXV-A2 makes the oxide (IV fluorspar kiln); A3's GGG Czochralski row (crystals.json c10-17, uxv.md:1245) uses it" },
+        { "id": "grindless:dysprosium_dust", "package": "UXV-A3", "reason": "UXV-A2 reduces it (ZPM Eu reductor); A3's Terfenol-D rod (crystals.json c10-17, uxv.md:1245) uses it" },
+        { "id": "grindless:seven_n_tellurium", "package": "UXV-A3", "reason": "UXV-A2 zone-refines it (UV zone refining); A3's WTe2 and FGT CVT rows (lines 13-14, uxv.md:1245) use it" },
+        { "id": "grindless:seven_n_germanium", "package": "UXV-A3", "reason": "UXV-A2 zone-refines it (UV zone refining); A3's FGT charge and CVT row (line 14, uxv.md:1245) use it" },
+        { "id": "grindless:five_n_iridium", "package": "UXV-A3", "reason": "UXV-A2 refines it (EV platinum plant c13); A3's Ga2O3 EFG row takes it as the Ir die, the worn die back to the platinum plant c5 (uxv.md:1245, :1257)" },
+        { "id": "grindless:mgo_target", "package": "UXV-A4", "reason": "UXV-A2 sinters it (UV powder bed); A4's MTJ sputter cluster stacks use it (machine 1, uxv.md:732)" },
+        { "id": "grindless:saf_target_set", "package": "UXV-A4", "reason": "UXV-A2 bonds it (UV powder bed); A4's MTJ sputter cluster c3 uses it (machine 1, uxv.md:734)" },
+        { "id": "grindless:ta_seed_target", "package": "UXV-A4", "reason": "UXV-A2 bonds it (UV powder bed); A4's MTJ sputter cluster stacks use it (machine 1, uxv.md:735)" },
+        { "id": "grindless:srruo3_target", "package": "UXV-A4", "reason": "UXV-A2 presses it (UV powder bed); A4's oxide PLD chamber c1 uses it (machine 2, uxv.md:740)" },
+        { "id": "grindless:la_bfo_target", "package": "UXV-A4", "reason": "UXV-A2 presses it (UV powder bed); A4's oxide PLD chamber c2 uses it (machine 2, uxv.md:741)" },
+        { "id": "fluid:gtceu:he_6n", "package": "UXV-A4", "reason": "UXV-A2's Moon cryogenic row makes it; Earth controllers 1-8 take it (uxv.md:181), A4's two first; A6's uxv_sensor also (uxv.md:1329)" },
+        { "id": "grindless:pt_sheet", "package": "UXV-A5", "reason": "UXV-A2 rolls it (EV hot strip mill); A5's pt_lpe_crucible (line 42, uxv.md:1289) uses it" },
+        { "id": "grindless:cm248_target", "package": "UXV-A6", "reason": "UXV-A2 makes it; A6's MNT collider uses it (uxv.md:1321)" },
+        { "id": "grindless:gum_metal_billet", "package": "UXV-A8", "reason": "UXV-A2 casts it; A8's hot strip mill makes gum_metal_blank from it (line 45, uxv.md:1371, :1379)" }
       ]
-}
+    }

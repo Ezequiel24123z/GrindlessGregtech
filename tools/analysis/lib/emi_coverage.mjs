@@ -282,6 +282,9 @@ export function auditEmiCoverage({ dump, registry, cfg, emi, lang = null, native
   const endProduct = makeGlobMatcher(cfg.endProducts ? cfg.endProducts.globs || [] : []);
   const endItems = new Map(((cfg.endProducts && cfg.endProducts.items) || []).map((e) => [e.id, e.reason || '']));
   const exceptions = new Map((cfg.exceptions || []).map((e) => [e.id + '|' + e.role, e]));
+  // pendingUses: what an earlier package of the era makes and a later one uses; its use is pending, not a gap, until that package merges
+  const pendingUses = new Map((cfg.pendingUses || []).map((p) => [p.id, p]));
+  const pendingUseHit = new Set();
   const derived = cfg.derived || [];
   const audited = [];
   for (const it of registry.items.values()) audited.push({ key: it.id, kind: 'item', file: it.file, material: it.material || null });
@@ -327,9 +330,13 @@ export function auditEmiCoverage({ dump, registry, cfg, emi, lang = null, native
       if (n > 0) continue;
       const ex = exceptions.get(k + '|' + role);
       const viaPending = ((role === 'acquisition' ? pendingMade : pendingUsed).get(k) || []).map((r) => r.id);
+      const later = role === 'use' ? pendingUses.get(k) : undefined;
       if (ex) row.excepted.push({ role, reason: ex.reason });
       else if (viaPending.length) row.pending.push({ role, routes: viaPending });
-      else row.gaps.push(role);
+      else if (later) {
+        pendingUseHit.add(k);
+        row.pending.push({ role, later: later.package || '', reason: later.reason || '' });
+      } else row.gaps.push(role);
     }
     // what EMI cannot draw needs words: a route of a type it never shows (GTM's electric furnace), and a block whose only use is a
     // place in a structure (the multiblock preview shows only the first block of each predicate, in at most 18 stacks)
@@ -365,6 +372,11 @@ export function auditEmiCoverage({ dump, registry, cfg, emi, lang = null, native
     if (!['acquisition', 'use'].includes(d.role)) problems.push(`derived route for ${d.id}: role ${d.role} is not acquisition or use`);
   }
   for (const e of cfg.exceptions || []) if (!ourKeys.has(e.id)) problems.push(`exception for ${e.id}: not an item of the pack`);
+  for (const p of pendingUses.values()) {
+    if (!p.package) problems.push(`pending use ${p.id}: no package named`);
+    if (!ourKeys.has(p.id)) problems.push(`pending use ${p.id}: not an item of the pack`);
+    else if (!pendingUseHit.has(p.id)) problems.push(`pending use ${p.id}: EMI shows a use now (or the stack is disabled until its era); delete the entry`);
+  }
   for (const e of (cfg.endProducts && cfg.endProducts.items) || []) if (!ourKeys.has(e.id)) problems.push(`end product ${e.id}: not an item of the pack`);
 
   // a declared derived route must show in a native dump (the stand-in cannot see it, the dump can)
@@ -465,10 +477,13 @@ export function renderCoverageText(res) {
   }
   const ex = res.results.filter((r) => r.excepted.length > 0);
   L.push(`Recipes of ours EMI drops for a disabled stack (assets/emi/index/stacks): ${res.droppedRoutes.length}`);
-  if (res.pendingRoutes && res.pendingRoutes.length) {
-    L.push(`Pending routes (dropped only for stacks disabled until their era): ${res.pendingRoutes.length}`);
-    for (const d of res.pendingRoutes) L.push(`  · ${d.id}: ${d.disabledBy.join(', ')} — ${d.reason}`);
-    for (const r of res.results.filter((x) => x.pending && x.pending.length)) L.push(`  · ${r.key}: ${r.pending.map((p) => p.role + ' only through ' + p.routes.join(', ')).join('; ')}`);
+  const pendingRows = res.results.filter((x) => x.pending && x.pending.length);
+  if ((res.pendingRoutes && res.pendingRoutes.length) || pendingRows.length) {
+    L.push(`Pending routes (dropped only for stacks disabled until their era): ${(res.pendingRoutes || []).length}`);
+    for (const d of res.pendingRoutes || []) L.push(`  · ${d.id}: ${d.disabledBy.join(', ')} — ${d.reason}`);
+    for (const r of pendingRows) {
+      L.push(`  · ${r.key}: ${r.pending.map((p) => (p.later !== undefined ? `${p.role} written by ${p.later} — ${p.reason}` : p.role + ' only through ' + p.routes.join(', '))).join('; ')}`);
+    }
   }
   if (ex.length) {
     L.push(`Justified exceptions: ${ex.length}`);

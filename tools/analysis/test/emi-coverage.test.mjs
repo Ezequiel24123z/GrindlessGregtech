@@ -171,6 +171,31 @@ test('what only a pending route gives is pending, not a gap, and a process whose
   assert.ok(!res.problems.some((p) => p.startsWith('process gtceu:cvd')), res.problems.join('\n'));
 });
 
+test('a pending use (a later package of the era uses it) is pending, not a gap; an entry with no package, for no item, or for a used stack is a problem', () => {
+  const dump = mkDump({
+    recipes: [
+      gt('t:press/target', 'gtceu:press', { ins: [gi('t:dust')], outs: [gi('t:target')] }),
+      gt('t:press/used', 'gtceu:press', { ins: [gi('t:dust')], outs: [gi('t:used')] }),
+      gt('t:sputter/film', 'gtceu:sputter', { ins: [gi('t:used')], outs: [gi('t:film')] }),
+    ],
+  });
+  const registry = reg({ items: ['t:target', 't:used'], types: ['gtceu:press', 'gtceu:sputter'] });
+  assert.deepEqual(gapsOf(audit({ dump, registry }))['t:target'], ['use']);
+  const pendingUses = [
+    { id: 't:target', package: 'UXV-A4', reason: 'the sputter rows' },
+    { id: 't:used', package: 'UXV-A4', reason: 'stale' },
+    { id: 't:nothing', package: 'UXV-A4' },
+    { id: 't:target2' },
+  ];
+  const res = audit({ dump, registry, cfg: { ...cfg0, pendingUses } });
+  assert.equal(gapsOf(res)['t:target'], undefined);
+  assert.deepEqual(res.results.find((r) => r.key === 't:target').pending, [{ role: 'use', later: 'UXV-A4', reason: 'the sputter rows' }]);
+  assert.ok(res.problems.includes('pending use t:used: EMI shows a use now (or the stack is disabled until its era); delete the entry'), res.problems.join('\n'));
+  assert.ok(res.problems.includes('pending use t:nothing: not an item of the pack'), res.problems.join('\n'));
+  assert.ok(res.problems.includes('pending use t:target2: no package named'), res.problems.join('\n'));
+  assert.match(renderCoverageText(res), /t:target: use written by UXV-A4 — the sputter rows/);
+});
+
 test('the multiblock preview places the first block of each predicate: later options are no use, and a structure-only block needs a page', () => {
   const structure = { symbols: { S: { kind: 'controller' }, C: { kind: 'oneOf', options: [{ kind: 'blocks', blocks: ['t:cell_1', 't:cell_2'] }, { kind: 'blocks', blocks: ['t:casing'] }] } } };
   assert.deepEqual(previewBlocks(structure), ['t:cell_1', 't:casing']);
@@ -341,8 +366,8 @@ test('the dimension markers of the old hidden table (disabled, not index-only) d
   // cryogenic plant's 6N helium-3 and helium-4 ash rows; 56 since UEV-B4: UEV-B2's interstellar gas row of the same plant (pending
   // until B4 made the UEV field generator); 58 since UIV-A2: the same plant's para hydrogen and liquid para hydrogen rows; 59 since
   // UIV-A9: the Moon tritium removal plant's detritiated protium row; 60 since UIV-B1: the laser sail launcher's relay seed launch (Moon);
-  // 61 since UIV-B3: the Moon cryogenic plant's 6N neon row
-  assert.equal(markerDropped.length, 61, markerDropped.map((d) => d.id).join('\n'));
+  // 61 since UIV-B3: the Moon cryogenic plant's 6N neon row; 62 since UXV-A2: the same plant's 6N helium-6 row (cryogenic_processing/he_6n)
+  assert.equal(markerDropped.length, 62, markerDropped.map((d) => d.id).join('\n'));
   assert.ok(markerDropped.every((d) => d.disabledBy.every((b) => b.startsWith('dimension marker '))));
   const now = new Map(fixtureExpectations(packRun.res).items.map((e) => [e.id, e]));
   const lost = [];
@@ -362,8 +387,9 @@ test('the dimension markers of the old hidden table (disabled, not index-only) d
   // interstellar gas used; hydrogen-deuterium and helium fractions made); + 4 since UIV-A2: the same plant's para hydrogen rows (protium
   // used, para hydrogen made and used, liquid para hydrogen made); + 2 since UIV-A9: the Moon tritium removal plant's detritiated
   // protium row (protium used, detritiated protium made); + 2 since UIV-B1: the laser sail launcher's relay seed launch (relay seed used,
-  // launched relay seed made); + 2 since UIV-B3: the Moon cryogenic plant's 6N neon row (99.999 % neon used, 6N neon made)
-  assert.equal(lost.length, 95, lost.join('\n'));
+  // launched relay seed made); + 2 since UIV-B3: the Moon cryogenic plant's 6N neon row (99.999 % neon used, 6N neon made);
+  // + 1 since UXV-A2: the same plant's 6N helium-6 row (6N helium-6 made)
+  assert.equal(lost.length, 96, lost.join('\n'));
   for (const route of ['grindless:mars_chart made in gtceu:deep_space_tracking', 'grindless:vein_sample_ice_mars used in gtceu:vein_drilling',
     'gtceu:liquid_nitrogen made in gtceu:cryogenic_processing', 'gtceu:heavy_water made in gtceu:detritiation',
     'grindless:titanium_drill_bit used in gtceu:vein_drilling', 'grindless:martian_quantum_seed made in gtceu:chemical_reactor']) {
