@@ -94,10 +94,28 @@
     return 'F'
   }
   function pyrolyserInner(r, si, c) { return r % 2 === 1 ? 'P' : '#' }
+  // QR-S2: the vent bioreactor is a sterile hall around a gas-lift loop: tungstensteel frame posts at the corners, a ribbon of
+  // glass sight windows in rows 2 and 4 with plascrete bands between them, and the pipe column (inner) rising through the roof.
+  function bioreactorWall(r, si, c, last) {
+    var corner = (si === 0 || si === last) && (c === 0 || c === 4)
+    if (corner) return 'R'
+    if (r === 6) return si === 2 && c === 2 ? 'P' : 'F'
+    if (r === 2 || r === 4) return 'G'
+    return 'F'
+  }
   // the gas-lift loop: a pipe column up the middle
   function bioreactorInner(r, si, c) { return si === 2 && c === 2 ? 'P' : '#' }
-  // the CO2 compressor: one pipe in the middle of the autoclave
-  function aerogelInner(r, si, c) { return r === 2 && si === 2 && c === 2 ? 'P' : '#' }
+  // QR-S2: the aerogel works is an autoclave: frame posts, a nichrome heater band (row 2), glass gauge windows (row 3) and the CO2
+  // compressor's pipe through the middle and out of the lid.
+  function aerogelWall(r, si, c, last) {
+    var corner = (si === 0 || si === last) && (c === 0 || c === 4)
+    if (corner) return 'R'
+    if (r === 4) return si === 2 && c === 2 ? 'P' : 'F'
+    if (r === 2) return 'K'
+    if (r === 3) return 'G'
+    return 'F'
+  }
+  function aerogelInner(r, si, c) { return si === 2 && c === 2 && r <= 3 ? 'P' : '#' }
 
   function specOf(m, inner) {
     var oneOf = [Pat.block(m.casing, { min: m.minCasings })]
@@ -118,6 +136,8 @@
   }
   OC.machines.pyrolyser.wallChar = pyrolyserWall
   OC.machines.pyrolyser.spec = specOf(OC.machines.pyrolyser, pyrolyserInner)
+  OC.machines.bioreactor.wallChar = bioreactorWall
+  OC.machines.aerogel.wallChar = aerogelWall
   OC.machines.bioreactor.spec = specOf(OC.machines.bioreactor, bioreactorInner)
   OC.machines.aerogel.spec = specOf(OC.machines.aerogel, aerogelInner)
 

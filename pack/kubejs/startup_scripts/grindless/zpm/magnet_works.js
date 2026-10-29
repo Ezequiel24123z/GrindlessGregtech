@@ -46,6 +46,8 @@
   const CASING_TEXTURE = 'grindless:block/zpm/cryostat_casing'
   const GEARBOX = 'gtceu:stainless_steel_gearbox'
   const FRAME = 'tungsten_steel'
+  const COIL = 'gtceu:naquadah_coil_block'
+  const GLASS = 'gtceu:laminated_glass'
   const INSERT = 'grindless:hts_insert'
 
   const DATA_KEY = 'grindless_naquadria_magnets'
@@ -82,22 +84,47 @@
 
   // ---------------------------------------------------------------- pattern
 
-  const WALL = 'FFFFFFF'
+  // QR-S2: built cell by cell (x 0..6 left -> right, y 0..4 bottom -> top, z 0..6 back -> front). The cryostat's roof is framed in
+  // tungstensteel and carries a ring of superconducting coil over the bore (and a glass lid on it); frame posts stand at the corners
+  // of both the shell and the ring, sight windows in the shell, the lathe's gearboxes on the ring's edges at row 2.
+  const SLICES = (function () {
+    var slices = []
+    for (var z = 0; z < 7; z++) {
+      var rows = []
+      for (var y = 0; y < 5; y++) {
+        var row = ''
+        for (var x = 0; x < 7; x++) row += (z === 6 && y === 1 && x === 3) ? 'S' : cellOf(x, y, z)
+        rows.push(row)
+      }
+      slices.push(rows)
+    }
+    return slices
+  })()
+
+  function cellOf(x, y, z) {
+    var d = Math.max(Math.abs(x - 3), Math.abs(z - 3))
+    var corner = (x === 0 || x === 6) && (z === 0 || z === 6)
+    var ringCorner = (x === 1 || x === 5) && (z === 1 || z === 5)
+    if (y === 0) return 'X'
+    if (y === 4) {
+      if (d === 3) return 'T'
+      if (d === 2) return 'K'
+      return 'L'
+    }
+    if (d === 3) {
+      if (corner) return 'T'
+      if (y === 2 && ((x >= 2 && x <= 4) || (z >= 2 && z <= 4))) return 'L'
+      return 'F'
+    }
+    if (d === 2) {
+      if (ringCorner) return 'T'
+      return y === 2 ? 'G' : 'F'
+    }
+    return '#'
+  }
+
   const SPEC = {
-    slices: [
-      // back: the base's back row takes parts
-      ['XXXXXXX', WALL, WALL, WALL, WALL],
-      // the ring's back side: frame posts in the corners, the lathe's gearboxes at row 2
-      ['FFFFFFF', 'FTFFFTF', 'FTGGGTF', 'FTFFFTF', WALL],
-      // the bore's slices: the ring's sides and the 3 x 3 x 3 bore
-      ['FFFFFFF', 'FF###FF', 'FG###GF', 'FF###FF', WALL],
-      ['FFFFFFF', 'FF###FF', 'FG###GF', 'FF###FF', WALL],
-      ['FFFFFFF', 'FF###FF', 'FG###GF', 'FF###FF', WALL],
-      // the ring's front side
-      ['FFFFFFF', 'FTFFFTF', 'FTGGGTF', 'FTFFFTF', WALL],
-      // front: the base's front row, the controller in the middle
-      ['XXXSXXX', WALL, WALL, WALL, WALL]
-    ],
+    slices: SLICES,
     symbols: {
       S: Pat.controller(),
       X: Pat.oneOf(
@@ -111,6 +138,8 @@
       F: Pat.block(CASING),
       G: Pat.block(GEARBOX),
       T: Pat.frame([FRAME]),
+      K: Pat.block(COIL),
+      L: Pat.block(GLASS),
       '#': Pat.air()
     }
   }

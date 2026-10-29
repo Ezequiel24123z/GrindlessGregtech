@@ -38,16 +38,21 @@
   const SAMPLER_PARTS = { energy_input: { min: 1, max: 2 }, input_bus: { min: 1, max: 2 }, output_bus: { min: 1, max: 2 },
     output_hatch: { min: 1, max: 3 } }
   function samplerSlice(z) {
-    const rows = []
-    for (let y = 0; y < 5; y++) {
-      let row = ''
-      for (let x = 0; x < 7; x++) {
+    var rows = []
+    for (var y = 0; y < 5; y++) {
+      var row = ''
+      for (var x = 0; x < 7; x++) {
         var edge = x === 0 || x === 6 || z === 0 || z === 6
-        let c = ' '
-        if (y === 0) c = 'X'
-        else if (y === 4) c = 'C'
-        else if (edge) c = z === 6 && y === 1 ? (x === 3 ? 'S' : 'X') : 'C'
-        else if (x === 3 && z === 3) c = y === 3 ? 'D' : 'F'
+        var post = (x === 0 || x === 6) && (z === 0 || z === 6)
+        var c = ' '
+        if (y === 0) c = edge ? 'X' : 'T'
+        else if (y === 4) c = edge ? 'T' : 'L'
+        else if (post) c = 'F'
+        else if (edge) {
+          if (z === 6 && y === 1) c = x === 3 ? 'S' : 'X'
+          else c = y === 2 ? 'L' : 'C'
+        } else if (x === 3 && z === 3) c = y === 3 ? 'D' : 'F'
+        else if (x === 3 && y === 3 && z < 3) c = 'F'
         row += c
       }
       rows.push(row)
@@ -60,6 +65,8 @@
       S: Pat.controller(),
       X: parts(BAY, 14, SAMPLER_PARTS),
       C: Pat.block(BAY),
+      T: Pat.block(STATION),
+      L: Pat.block(GLASS),
       F: Pat.frame(['titanium']),
       D: Pat.block(GEARBOX)
     }
@@ -70,16 +77,21 @@
   const SEISMOMETER_PARTS = { energy_input: { min: 1, max: 2 }, input_bus: { min: 1, max: 2 }, input_hatch: { min: 1, max: 2 },
     output_bus: { min: 1, max: 2 } }
   function seismometerSlice(z) {
-    const rows = []
-    for (let y = 0; y < 5; y++) {
-      let row = ''
-      for (let x = 0; x < 5; x++) {
+    var rows = []
+    for (var y = 0; y < 5; y++) {
+      var row = ''
+      for (var x = 0; x < 5; x++) {
         var edge = x === 0 || x === 4 || z === 0 || z === 4
-        let c = ' '
-        if (y === 0) c = 'X'
-        else if (y === 4) c = 'C'
-        else if (edge) c = z === 4 && y === 1 ? (x === 2 ? 'S' : 'X') : 'C'
-        else if (x === 2 && z === 2) c = 'L'
+        var post = (x === 0 || x === 4) && (z === 0 || z === 4)
+        var c = ' '
+        if (y === 0) c = edge ? 'X' : 'B'
+        else if (y === 4) c = edge ? 'C' : 'B'
+        else if (post) c = 'F'
+        else if (edge) {
+          if (z === 4 && y === 1) c = x === 2 ? 'S' : 'X'
+          else if (y === 2) c = 'L'
+          else c = y === 3 ? 'B' : 'C'
+        } else if (x === 2 && z === 2) c = 'L'
         row += c
       }
       rows.push(row)
@@ -92,7 +104,9 @@
       S: Pat.controller(),
       X: parts(STATION, 10, SEISMOMETER_PARTS),
       C: Pat.block(STATION),
-      L: Pat.block(GLASS)
+      B: Pat.block(BAY),
+      L: Pat.block(GLASS),
+      F: Pat.frame(['titanium'])
     }
   }
 

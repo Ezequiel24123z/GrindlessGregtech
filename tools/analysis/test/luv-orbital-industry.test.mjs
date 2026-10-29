@@ -53,7 +53,7 @@ function harness() {
 const calls = (r, key) => JSON.parse(JSON.stringify(r.calls[key] ?? []));
 const count = (spec, char) => spec.slices.join('').split(char).length - 1;
 
-test('smelter has a 3x3x7 shell, eight-coil hollow levitation core and six-block drawing tower', () => {
+test('smelter has a 3x3x7 titanium-frame truss, eight-coil hollow levitation core and six-block drawing tower', () => {
   const { G } = harness();
   const s = G.structures['gtceu:microgravity_smelter'];
   assert.equal(s.slices.length, 7);
@@ -61,18 +61,21 @@ test('smelter has a 3x3x7 shell, eight-coil hollow levitation core and six-block
   assert.equal(count(s, 'K'), 8);
   // Cached native registry: borosilicate_glass is a fluid; the structure uses its block item.
   assert.deepEqual(Array.from(s.symbols.G.blocks), ['gtceu:borosilicate_glass_block']);
+  assert.equal(s.slices[3][0], 'FCF');
   assert.equal(s.slices[3][1], 'KAK');
-  assert.equal(s.slices[3][2], 'CGC');
+  assert.equal(s.slices[3][2], 'FGF');
   assert.deepEqual(Array.from(s.slices[3].slice(3)), [' F ', ' G ', ' F ', ' G ', ' F ', ' G ']);
   s.slices.forEach((rows, z) => {
     if (z !== 3) assert.ok(rows.slice(3).every(row => row === '   '));
   });
 });
-test('wake shield is a 69-block octagonal 9x9 disc in front of a hollow 3x3x3 carousel', () => {
+test('wake shield is a 69-cell octagonal 9x9 dish (frame rim, glass window, whipple panels) in front of a hollow 3x3x3 carousel', () => {
   const { G } = harness();
   const s = G.structures['gtceu:wake_shield_facility'];
   assert.equal(s.slices.length, 4);
-  assert.equal(count(s, 'W'), 69);
+  assert.equal(count(s, 'W') + count(s, 'F') + count(s, 'G'), 69);
+  assert.equal(count(s, 'G'), 9);
+  assert.ok(count(s, 'F') >= 20 && count(s, 'W') >= 30);
   s.slices.forEach(rows => { assert.equal(rows.length, 9); rows.forEach(r => assert.equal(r.length, 9)); });
   assert.equal(s.slices[2][4], '   XAX   ');
   assert.equal(count(s, 'X') + count(s, 'S') + count(s, 'M'), 26);

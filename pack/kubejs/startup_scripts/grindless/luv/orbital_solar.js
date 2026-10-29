@@ -7,9 +7,11 @@
   // Two 8x4 wings around a three-wide spine, ending in a 3x3x3 service hub.
   for (var z = 0; z < 9; z++) {
     var spine = z >= 6 ? 'XXX' : ' T '
+    // glass viewports in the spine let the crew watch the wings unfold
+    var mid = z === 8 ? 'XSX' : (z < 6 && z % 2 === 1 ? ' G ' : spine)
     slices.push([
       '        ' + spine + '        ',
-      'FFFFFFFF' + (z === 8 ? 'XSX' : spine) + 'FFFFFFFF',
+      'FFFFFFFF' + mid + 'FFFFFFFF',
       (z >= 1 && z <= 4 ? 'PPPPPPPP' : '        ') +
         (z >= 6 ? 'XXX' : ' T ') +
         (z >= 1 && z <= 4 ? 'PPPPPPPP' : '        ')
@@ -24,6 +26,7 @@
         Pat.part('energy_output', { min: 1, max: 4 })),
       T: Pat.block(CASING),
       F: Pat.frame('titanium'),
+      G: Pat.block('gtceu:borosilicate_glass_block'),
       P: Pat.block('grindless:orbital_solar_panel')
     }
   }

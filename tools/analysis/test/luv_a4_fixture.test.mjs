@@ -57,7 +57,7 @@ const NATIVE_ITEMS = ['gtceu:hv_input_bus', 'gtceu:hv_output_bus', 'gtceu:hv_inp
   'gtceu:stainless_steel_gearbox', 'gtceu:ptfe_pipe_casing', 'gtceu:laminated_glass', 'gtceu:tungsten_steel_frame', 'gtceu:solid_machine_casing',
   'gtceu:steel_frame', 'gtceu:steel_gearbox', 'gtceu:steel_pipe_casing', 'gtceu:niobium_titanium_foil', 'gtceu:luv_machine_hull',
   'gtceu:mercury_barium_calcium_cuprate_single_wire', 'gtceu:hsss_frame', 'gtceu:hsss_ring', 'gtceu:titanium_plate',
-  'minecraft:air', 'minecraft:smooth_stone', 'minecraft:iron_ingot'];
+  'minecraft:air', 'minecraft:smooth_stone', 'minecraft:iron_ingot', 'minecraft:glass'];
 const NATIVE_FLUIDS = ['gtceu:trinium', 'gtceu:epoxy', 'gtceu:liquid_helium', 'gtceu:steam'];
 // GTM's machines the simulated registry answers for
 const GTM_MACHINES = ['gtceu:hv_input_bus', 'gtceu:hv_output_bus', 'gtceu:hv_input_hatch', 'gtceu:lv_output_hatch', 'gtceu:luv_macerator', 'gtceu:luv_battery_buffer_4x'];
