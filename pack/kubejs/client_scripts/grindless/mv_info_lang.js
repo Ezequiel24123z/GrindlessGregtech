@@ -49,13 +49,13 @@ ClientEvents.lang('es_es', event => {
     add('emi.grindless.info.advanced_multi_smelter.1', "Las bobinas calefactoras fijan los paralelos, desde 4 con cuproníquel hasta 64 con HSS-G. Cada paralelo cuesta un horno eléctrico. Para un solo objeto en cantidad, el multihorno HV de GTM es más rápido.")
 
     add('emi.grindless.info.biorefinery.0', "La biorrefinería es una columna de destilación para fluidos orgánicos: alquitrán de madera, vinagre, biomasa, biomasa fermentada, alquitrán de hulla, aceites, creosota y ácidos diluidos se separan en todas sus fracciones de una sola pasada.")
-    add('emi.grindless.info.biorefinery.1', "Mismas proporciones y energía que la torre de destilación de GTM. Cada fracción sale por el hatch de su capa, así que cada capa necesita un hatch y nada se elimina. El petróleo crudo y el aire líquido siguen pidiendo la torre HV.")
+    add('emi.grindless.info.biorefinery.1', "Mismas proporciones y energía que la torre de destilación de GTM. Cada fracción sale por la escotilla de su capa, así que cada capa necesita una escotilla y nada se elimina. El petróleo crudo y el aire líquido siguen pidiendo la torre HV.")
 
-    add('emi.grindless.info.lava_furnace.0', "El horno de lava es un horno calentado con lava en lugar de electricidad: no tiene hatch de energía. Funde cualquier receta de horno, varios objetos a la vez, de tipos mezclados con el mismo tiempo de cocción en la misma pasada.")
-    add('emi.grindless.info.lava_furnace.1', "Cada objeto gasta algo de lava de un hatch de entrada de fluido en el hogar. Nunca produce lava: es la forma compacta de fundir con lava bombeada del Nether.")
+    add('emi.grindless.info.lava_furnace.0', "El horno de lava es un horno calentado con lava en lugar de electricidad: no tiene escotilla de energía. Funde cualquier receta de horno, varios objetos a la vez, de tipos mezclados con el mismo tiempo de cocción en la misma pasada.")
+    add('emi.grindless.info.lava_furnace.1', "Cada objeto gasta algo de lava de una escotilla de entrada de fluido en el hogar. Nunca produce lava: es la forma compacta de fundir con lava bombeada del Nether.")
 
     add('emi.grindless.info.mv_greenhouse.0', "El invernadero MV cultiva árboles, árboles de caucho, cultivos, setas, bayas, enredaderas y flores con una planta que nunca se gasta. Ejecuta todas las recetas de los invernaderos de vapor y LV, con más cultivos a la vez.")
-    add('emi.grindless.info.mv_greenhouse.1', "El agua desbloquea las plantas extra; el circuito 2 con fertilizante duplica la producción. El dióxido de carbono en un segundo hatch de entrada suma producción y devuelve oxígeno.")
+    add('emi.grindless.info.mv_greenhouse.1', "El agua desbloquea las plantas extra; el circuito 2 con fertilizante duplica la producción. El dióxido de carbono en una segunda escotilla de entrada suma producción y devuelve oxígeno.")
 
     add('emi.grindless.info.mv_vein_drill.0', "La perforadora de vetas MV perfora la veta que marca la muestra, una y otra vez. Ejecuta todas las recetas de las perforadoras de vapor y LV, hasta 16 perforaciones a la vez.")
     add('emi.grindless.info.mv_vein_drill.1', "La broca de acero de vanadio solo funciona aquí y en perforadoras mejores. El fluido de perforación da más mena y menos desgaste; las vetas del Nether y del End solo se perforan con él.")
@@ -64,19 +64,19 @@ ClientEvents.lang('es_es', event => {
     add('emi.grindless.info.ore_plant.1', "Misma producción y energía por mena que las máquinas sueltas: ahorra pasos, buses y espacio. Los escombros son polvo de piedra, así que dales salida. El circuito programado 2 con agua destilada lava más rápido; el reactivo de la mena la pasa al baño químico.")
 
     add('emi.grindless.info.polymer_works.0', "La planta de polímeros ejecuta dos líneas completas de una pasada: placas de polietileno (etanol y ácido sulfúrico a etileno, luego polietileno, luego placa) y placas de caucho (caucho crudo y azufre a caucho, luego placa).")
-    add('emi.grindless.info.polymer_works.1', "El ácido sulfúrico diluido es su subproducto: devuélvelo a las recetas de ácido sulfúrico. La fila de bobinas solo completa la estructura; los hatches de energía fijan cuántas recetas corren a la vez.")
+    add('emi.grindless.info.polymer_works.1', "El ácido sulfúrico diluido es su subproducto: devuélvelo a las recetas de ácido sulfúrico. La fila de bobinas solo completa la estructura; las escotillas de energía fijan cuántas recetas corren a la vez.")
 
     add('emi.grindless.info.universal_assembly_factory.0', "La fábrica de ensamblaje universal son dos máquinas en una: ensambladora y ensambladora de circuitos. Elige la máquina en la pestaña de modo del controlador: corre un modo cada vez, con las recetas de los bloques simples.")
-    add('emi.grindless.info.universal_assembly_factory.1', "El soldador, el pegamento o el plástico entran por un hatch de entrada. Los buses de entrada en modo distinto mantienen separados los circuitos. Las recetas de sala limpia siguen necesitando una sala limpia.")
+    add('emi.grindless.info.universal_assembly_factory.1', "El soldador, el pegamento o el plástico entran por una escotilla de entrada. Los buses de entrada en modo distinto mantienen separados los circuitos. Las recetas de sala limpia siguen necesitando una sala limpia.")
 
     add('emi.grindless.info.universal_mixing_factory.0', "La fábrica de mezclas universal son cuatro máquinas en una: mezcladora, reactor químico, baño químico y lavador de menas. Elige la máquina en la pestaña de modo del controlador: corre un modo cada vez, con las recetas de los bloques simples.")
-    add('emi.grindless.info.universal_mixing_factory.1', "Las recetas de mezcladora solo de polvos no necesitan hatch. El reactor químico admite hasta tres fluidos y da hasta dos, cada uno en su hatch.")
+    add('emi.grindless.info.universal_mixing_factory.1', "Las recetas de mezcladora solo de polvos no necesitan escotilla. El reactor químico admite hasta tres fluidos y da hasta dos, cada uno en su escotilla.")
 
     add('emi.grindless.info.universal_processing_factory.0', "La fábrica de procesado universal son once máquinas en una: dobladora, laminador de cables, torno, cortadora, extrusora, compresor, martillo de forja, prensa de formas, polarizador, grabadora láser y solidificador de fluidos. Elige la máquina en la pestaña de modo del controlador; corre un modo cada vez, con las recetas de los bloques simples.")
-    add('emi.grindless.info.universal_processing_factory.1', "Los buses de entrada en modo distinto mantienen separados circuitos, moldes y lentes. El agua o lubricante de la cortadora y el fluido del solidificador entran por el hatch de entrada. Un modo nuevo empieza cuando termina la pasada en curso.")
+    add('emi.grindless.info.universal_processing_factory.1', "Los buses de entrada en modo distinto mantienen separados circuitos, moldes y lentes. El agua o lubricante de la cortadora y el fluido del solidificador entran por la escotilla de entrada. Un modo nuevo empieza cuando termina la pasada en curso.")
 
     add('emi.grindless.info.universal_separation_factory.0', "La fábrica de separación universal son siete máquinas en una: centrifugadora, electrolizador, centrifugadora térmica, macerador, tamiz, extractor y separador electromagnético. Elige la máquina en la pestaña de modo del controlador; corre un modo cada vez, con las recetas de los bloques simples.")
-    add('emi.grindless.info.universal_separation_factory.1', "Cada hatch de salida guarda un solo fluido, así que una receta que da dos gases necesita dos hatches. Añade buses de salida para los subproductos de las recetas largas. Un modo nuevo empieza cuando termina la pasada en curso.")
+    add('emi.grindless.info.universal_separation_factory.1', "Cada escotilla de salida guarda un solo fluido, así que una receta que da dos gases necesita dos escotillas. Añade buses de salida para los subproductos de las recetas largas. Un modo nuevo empieza cuando termina la pasada en curso.")
 
     add('emi.grindless.info.weather_controller.0', "El controlador del clima siembra las nubes desde el suelo. Circuito 1: cielo despejado un día (cloruro de calcio). Circuito 2: lluvia medio día (sal). Circuito 3: tormenta de cinco minutos (sal y cable de cobre).")
     add('emi.grindless.info.weather_controller.1', "Solo funciona en la Tierra. Si el mismo clima aún tiene más de la mitad de su tiempo, espera en lugar de sembrar otra vez. Sirve para noches despejadas en los observatorios y días secos para la torre de heliostatos.")

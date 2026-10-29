@@ -16,8 +16,8 @@ ClientEvents.lang('es_es', event => {
     var add = function (key, value) { event.add('grindless', key, value) }
 
     add('emi.grindless.info.composite_autoclave.0', "El autoclave de composites cura capas de fibra y epoxi con calor y presión de nitrógeno. Láminas de fibra de vidrio y epoxi dan losetas de escudo térmico ablativo. Un tambor de acero inoxidable envuelto en para-aramida y epoxi da un depósito envuelto en composite.")
-    add('emi.grindless.info.composite_autoclave.1', "Necesita epoxi y nitrógeno en sus dos hatches de entrada; el nitrógeno se ventea tras cada curado. HV: 1 o 2 hatches de energía HV. Las losetas van a los motores de cohete y dos depósitos hacen un depósito de combustible básico.")
+    add('emi.grindless.info.composite_autoclave.1', "Necesita epoxi y nitrógeno en sus dos escotillas de entrada; el nitrógeno se ventea tras cada curado. HV: 1 o 2 escotillas de energía HV. Las losetas van a los motores de cohete y dos depósitos hacen un depósito de combustible básico.")
 
     add('emi.grindless.info.engine_test_stand.0', "El banco de pruebas de motores es un puesto de encendido estático, y ninguna otra máquina califica un motor de cohete. MV: cuatro propulsores de potencia arden juntos con RP-1 y oxígeno y salen calificados. HV: un motor de cohete sin probar arde con combustible de cohete y pasa a ser un motor de cohete básico.")
-    add('emi.grindless.info.engine_test_stand.1', "El escape es CO2 y agua, un hatch de salida para cada uno. El encendido HV necesita un hatch de energía HV o dos MV. Combustible y oxidante entran por los hatches de los tanques.")
+    add('emi.grindless.info.engine_test_stand.1', "El escape es CO2 y agua, una escotilla de salida para cada uno. El encendido HV necesita una escotilla de energía HV o dos MV. Combustible y oxidante entran por las escotillas de los tanques.")
 })

@@ -52,7 +52,7 @@ ClientEvents.lang('es_es', event => {
     add('emi.grindless.info.atmosphere_processor.1', "El oxígeno va a los trajes y al metalox; el metano, al metalox, el combustible que lleva su propio oxígeno, o a casa; el CO2 alimenta una cúpula sellada. El circuito 1 necesita un catalizador de rutenio en el bus de entrada. Usa agua de casa: el hielo de Marte se reserva para IV.")
 
     add('emi.grindless.info.combined_cycle_plant.0', "La central de ciclo combinado es una turbina de gas cuyo escape caliente hierve agua: quema los combustibles de la turbina de gas con el mismo EU que ella y convierte agua destilada en vapor, que una turbina de vapor transforma en más energía.")
-    add('emi.grindless.info.combined_cycle_plant.1', "El vapor necesita adónde ir: si su hatch está lleno, la central se detiene y se niega a eliminar fluidos. Su EU sale por hatches dinamo. No lleva rotor.")
+    add('emi.grindless.info.combined_cycle_plant.1', "El vapor necesita adónde ir: si su escotilla está llena, la central se detiene y se niega a eliminar fluidos. Su EU sale por escotillas dinamo. No lleva rotor.")
 
     add('emi.grindless.info.cryogenic_plant.0', "La planta criogénica licúa gases en la Luna: oxígeno en oxígeno líquido, helio en helio líquido y nitrógeno en nitrógeno líquido, que GTM no puede fabricar. Solo funciona en la Luna.")
     add('emi.grindless.info.cryogenic_plant.1', "En la noche lunar, con los radiadores abiertos al cielo, cada pasada cuesta la mitad de energía que el congelador de vacío. El nitrógeno líquido enfría la perforadora trípode EV; el oxígeno y el helio líquidos se reservan para IV.")
@@ -61,7 +61,7 @@ ClientEvents.lang('es_es', event => {
     add('emi.grindless.info.deep_space_antenna.1', "Solo funciona en la Luna, de noche; si amanece a mitad de pasada espera y conserva su progreso. La carta anterior de cada una calibra el plato y nunca se gasta.")
 
     add('emi.grindless.info.ev_vein_drill.0', "La perforadora trípode EV es la perforadora de vetas de la Luna y Marte: perfora las vetas lunares y marcianas, cada una solo en su mundo, y nunca una veta de la Tierra. Pon la muestra y brocas de titanio en el bus de entrada.")
-    add('emi.grindless.info.ev_vein_drill.1', "El nitrógeno líquido en el hatch de entrada da más mena y menos desgaste de broca. Se apoya en ladrillos de regolito sinterizado, y sus alas solares pagan parte de la energía de día.")
+    add('emi.grindless.info.ev_vein_drill.1', "El nitrógeno líquido en la escotilla de entrada da más mena y menos desgaste de broca. Se apoya en ladrillos de regolito sinterizado, y sus alas solares pagan parte de la energía de día.")
 
     add('emi.grindless.info.extraction_cascade.0', "La cascada de extracción de tierras raras saca las tierras raras de Marte de la merrillita y las separa con etapas de mezclador-sedimentador. Circuito 1, lixiviación: merrillita y ácido clorhídrico dan una solución de cloruros de tierras raras. Circuito 2, extracción con disolvente: la solución da cloruros de samario, neodimio y tierras raras mezcladas.")
     add('emi.grindless.info.extraction_cascade.1', "Solo esta máquina separa la merrillita, así que el samario solo viene de Marte. Los ácidos vuelven: destila el ácido diluido y haz ácido clorhídrico con el cloro. El circuito 5 es su modo ZPM para el europio.")
@@ -70,16 +70,16 @@ ClientEvents.lang('es_es', event => {
     add('emi.grindless.info.hot_strip_mill.1', "Los lingotes que piden helio líquido siguen yendo al congelador de vacío. Si el vapor no tiene adónde ir, el tren se detiene y se niega a eliminar fluidos.")
 
     add('emi.grindless.info.lunar_solar_array.0', "El campo solar lunar convierte la luz del sol directamente en EU con 36 paneles solares: sin espejos, sin caldera y sin agua. Pon el circuito programado 1 en el bus de entrada en la Luna o el 2 en Marte.")
-    add('emi.grindless.info.lunar_solar_array.1', "Solo funciona de día, en la Luna o en Marte; de noche espera sin perder nada. Cada panel con cielo abierto encima suma una pasada. Su EU sale por hatches dinamo.")
+    add('emi.grindless.info.lunar_solar_array.1', "Solo funciona de día, en la Luna o en Marte; de noche espera sin perder nada. Cada panel con cielo abierto encima suma una pasada. Su EU sale por escotillas dinamo.")
 
     add('emi.grindless.info.ore_refinery.0', "La refinería de menas lleva una mena en bruto, lo que entregan las perforadoras, por toda la línea de menas de una pasada: macerador, lavador de menas, centrifugadora térmica y macerador otra vez, hasta el polvo con todos los subproductos de los cuatro pasos.")
-    add('emi.grindless.info.ore_refinery.1', "Una receta por mena, con muchas copias a la vez. Cada copia paga la energía de los cuatro pasos, así que los hatches de energía fijan cuántas corren. El agua entra por el hatch de entrada.")
+    add('emi.grindless.info.ore_refinery.1', "Una receta por mena, con muchas copias a la vez. Cada copia paga la energía de los cuatro pasos, así que las escotillas de energía fijan cuántas corren. El agua entra por la escotilla de entrada.")
 
     add('emi.grindless.info.platinum_plant.0', "La planta de platino es la línea del grupo del platino de una docena de máquinas sueltas en una, con sus ciclos cerrados por dentro. El circuito 1 ataca pentlandita o calcopirita y da lodo del grupo del platino; el circuito 2 separa el lodo en platino, paladio y oro.")
     add('emi.grindless.info.platinum_plant.1', "El circuito 3 refina la iridosmina de Mercurio (IV) y el 4 el concentrado de asteroide (LuV). Mismas proporciones y energía que las máquinas sueltas. Un electrodo de platino va en el bus de entrada; toda salida necesita adónde ir.")
 
     add('emi.grindless.info.regolith_cell.0', "La celda de regolito es la química de la base lunar y solo funciona en la Luna. Circuito 1: regolito lunar calentado hasta que sale el viento solar (hidrógeno, helio, nitrógeno, helio-3). Circuito 2: electrólisis a oxígeno, silicio y hierro, e ilmenita a titanio. Circuito 3: ladrillos de regolito sinterizado.")
-    add('emi.grindless.info.regolith_cell.1', "La electrólisis necesita un electrodo de platino en el bus de entrada; el titanio pide además una carga de sal fundida que nunca se gasta. Cada hatch de salida guarda un solo gas, y si un bus o hatch se llena la celda se detiene.")
+    add('emi.grindless.info.regolith_cell.1', "La electrólisis necesita un electrodo de platino en el bus de entrada; el titanio pide además una carga de sal fundida que nunca se gasta. Cada escotilla de salida guarda un solo gas, y si un bus o una escotilla se llena la celda se detiene.")
 
     add('emi.grindless.info.sealed_dome.0', "La cúpula sellada es un invernadero sellado contra el vacío: ejecuta todas las recetas de los invernaderos de vapor, LV, MV y HV, con muchas plantas a la vez.")
     add('emi.grindless.info.sealed_dome.1', "El circuito programado 4 solo funciona en la Luna y Marte: cada planta crece con agua y dióxido de carbono, con triple producción y oxígeno de vuelta. En la Luna el CO2 viene de casa; en Marte la cúpula lo respira del aire.")

@@ -28,8 +28,8 @@ ClientEvents.lang('es_es', event => {
 
     add('grindless.machine.laser_fusion_chamber.tooltip.0', 'Fusion proton-boro-11: tres particulas alfa y casi ningun neutron. Una capsula por ejecucion paga 2.621.440 EU/t (5 A UV). Circuito programado 1: 1 capsula p-B11, 400 ticks, 3.000 mB de helio. Circuito 2: 1 capsula D-He-3, 600 ticks, 1.000 mB de helio + 1.000 mB de hidrogeno.')
     add('grindless.machine.laser_fusion_chamber.tooltip.1', 'Cada ejecucion tiene un 2% de probabilidad de desgastar 1 modulo laser de fibra y dejarlo en un modulo laser gastado. El helio va al refrigerador de helio.')
-    add('grindless.machine.laser_fusion_chamber.tooltip.2', 'Una camara de 13x13x13 de carcasa UV con un anillo de 32 bloques de modulo laser en su cintura. En el suelo: 1-8 hatches de dinamo, 1 bus de entrada (el inyector de capsulas), 1-2 hatches de salida, 1 bus de salida.')
-    add('grindless.machine.laser_fusion_chamber.no_voiding', 'El helio y el hidrogeno deben salir por sus hatches: desactiva el vaciado de fluidos')
+    add('grindless.machine.laser_fusion_chamber.tooltip.2', 'Una camara de 13x13x13 de carcasa UV con un anillo de 32 bloques de modulo laser en su cintura. En el suelo: 1-8 escotillas dinamo, 1 bus de entrada (el inyector de capsulas), 1-2 escotillas de salida, 1 bus de salida.')
+    add('grindless.machine.laser_fusion_chamber.no_voiding', 'El helio y el hidrogeno deben salir por sus escotillas: desactiva el vaciado de fluidos')
 
     add('item.grindless.spent_laser_module', 'Modulo laser gastado')
     add('tooltip.grindless.spent_laser_module.0', 'Un modulo laser de fibra desgastado por los pulsos de la camara.')

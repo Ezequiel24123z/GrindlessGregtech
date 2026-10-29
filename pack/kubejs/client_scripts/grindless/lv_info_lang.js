@@ -40,31 +40,31 @@ ClientEvents.lang('es_es', event => {
     var add = function (key, value) { event.add('grindless', key, value) }
 
     add('emi.grindless.info.heliostat_tower.0', "La torre de heliostatos hierve agua con luz solar y sin combustible: un campo de espejos enfoca el sol en un receptor en lo alto. Entra agua y sale vapor, como una caldera grande de bronce a pleno fuego.")
-    add('emi.grindless.info.heliostat_tower.1', "Solo funciona de día, con cielo abierto sobre la torre y los espejos y sin lluvia. Guarda el vapor del día en un tanque multibloque para la noche. Los motores de los espejos gastan algo de EU, así que necesita un hatch de energía.")
+    add('emi.grindless.info.heliostat_tower.1', "Solo funciona de día, con cielo abierto sobre la torre y los espejos y sin lluvia. Guarda el vapor del día en un tanque multibloque para la noche. Los motores de los espejos gastan algo de EU, así que necesita una escotilla de energía.")
 
     add('emi.grindless.info.lv_greenhouse.0', "El invernadero LV cultiva árboles, árboles de caucho, cultivos, setas, bayas, enredaderas y flores: pon la planta en el bus de entrada y sale la cosecha. La planta nunca se gasta.")
-    add('emi.grindless.info.lv_greenhouse.1', "El agua en el hatch de fluido desbloquea las plantas extra. El circuito programado 2 con fertilizante da el doble de producción en la mitad de tiempo.")
+    add('emi.grindless.info.lv_greenhouse.1', "El agua en la escotilla de fluidos desbloquea las plantas extra. El circuito programado 2 con fertilizante da el doble de producción en la mitad de tiempo.")
 
     add('emi.grindless.info.lv_vein_drill.0', "La perforadora de vetas LV perfora la veta que marca la muestra, una y otra vez: muestra y brocas en el bus de entrada, mena en bruto a la salida. Ejecuta todas las recetas de la perforadora de vapor y añade más.")
-    add('emi.grindless.info.lv_vein_drill.1', "Sus hatches de energía fijan cuántas perforaciones corren a la vez. El fluido de perforación en el hatch de fluido da más mena y menos desgaste de broca; las vetas del Nether solo se perforan con él.")
+    add('emi.grindless.info.lv_vein_drill.1', "Sus escotillas de energía fijan cuántas perforaciones corren a la vez. El fluido de perforación en la escotilla de fluidos da más mena y menos desgaste de broca; las vetas del Nether solo se perforan con él.")
 
     add('emi.grindless.info.submerged_arc_furnace.0', "El horno de arco sumergido reduce y funde con un arco eléctrico, algo que ninguna máquina pequeña puede: silicio y polvo celeste para AE2, y obsidiana a partir de adoquín y agua.")
-    add('emi.grindless.info.submerged_arc_furnace.1', "Necesita un electrodo de grafito en el bus de entrada, que se desgasta por probabilidad. El dióxido de carbono sale por el hatch de salida de fluido: ventéalo poniendo el controlador en eliminar fluidos.")
+    add('emi.grindless.info.submerged_arc_furnace.1', "Necesita un electrodo de grafito en el bus de entrada, que se desgasta por probabilidad. El dióxido de carbono sale por la escotilla de salida de fluido: ventéalo poniendo el controlador en eliminar fluidos.")
 
     add('emi.grindless.info.sulfide_roaster.0', "El tostador de sulfuros tuesta menas sulfuradas con aire y convierte su dióxido de azufre en ácido sulfúrico en la misma pasada: entran mena, aire y agua; salen ácido, vapor y el metal. La galena da plata, y el azufre simple arde y da ácido.")
     add('emi.grindless.info.sulfide_roaster.1', "Sustituye a un alto horno alimentado con oxígeno y dos reactores químicos. Un catalizador de contacto de vanadio en el bus de entrada se desgasta por probabilidad.")
 
     add('emi.grindless.info.wire_works.0', "La fábrica de cables ejecuta el laminador de cables y la dobladora en un mismo salón, varias recetas a la vez. Elige la máquina en la pestaña de modo del controlador: corre un modo cada vez, con las recetas de los bloques simples.")
-    add('emi.grindless.info.wire_works.1', "Ahorra máquinas y buses, no energía: cada copia paga su energía completa, así que los hatches de energía fijan cuántas corren.")
+    add('emi.grindless.info.wire_works.1', "Ahorra máquinas y buses, no energía: cada copia paga su energía completa, así que las escotillas de energía fijan cuántas corren.")
 
     add('emi.grindless.info.wireless_energy_tower.0', "La torre de energía inalámbrica es el almacén de la red inalámbrica. No tiene recetas: sus 32 ranuras admiten celdas de condensador de cualquier tier, y cada torre formada suma a la red lo que guardan sus celdas; la red es la misma en todos los mundos.")
-    add('emi.grindless.info.wireless_energy_tower.1', "Los hatches y cubiertas dinamo inalámbricos meten EU; los hatches y cubiertas de energía inalámbricos del tier de la red o inferior lo sacan. Sin torre formada, no se mueve nada. Cambiar una celda desforma la torre; el EU guardado se conserva.")
+    add('emi.grindless.info.wireless_energy_tower.1', "Las escotillas y cubiertas dinamo inalámbricas meten EU; las escotillas y cubiertas de energía inalámbricas del tier de la red o inferior lo sacan. Sin torre formada, no se mueve nada. Cambiar una celda desforma la torre; el EU guardado se conserva.")
 
-    add('emi.grindless.info.wireless_energy_hatch.0', "El hatch de energía inalámbrico es una entrada de energía para multibloques sin cable: la red inalámbrica lo llena, siempre que el tier de la red sea al menos el del hatch. Existe en todos los tiers de LV a UIV, a 2 A (el normal), 4 A, 16 A y 64 A.")
+    add('emi.grindless.info.wireless_energy_hatch.0', "La escotilla de energía inalámbrica es una entrada de energía para multibloques sin cable: la red inalámbrica la llena, siempre que el tier de la red sea al menos el de la escotilla. Existe en todos los tiers de LV a UIV, a 2 A (la normal), 4 A, 16 A y 64 A.")
     add('emi.grindless.info.wireless_energy_hatch.1', "La red es la misma en todos los mundos y se guarda en torres de energía inalámbrica; sin torre formada, no se mueve nada. Su chunk debe estar cargado. Mayús + clic derecho con la mano vacía muestra el EU y el flujo de la red.")
 
-    add('emi.grindless.info.wireless_dynamo_hatch.0', "El hatch dinamo inalámbrico es la salida de energía de los multibloques generadores sin cable: todo lo que recibe va a la red inalámbrica, con un 5% de pérdida al entrar. Existe en todos los tiers de LV a UIV, a 2 A (el normal), 4 A, 16 A y 64 A.")
-    add('emi.grindless.info.wireless_dynamo_hatch.1', "Los de 64 A caben en cualquier multibloque generador. El EU se guarda en torres de energía inalámbrica, y los hatches y cubiertas de energía inalámbricos lo sacan. Sin torre formada, no se mueve nada.")
+    add('emi.grindless.info.wireless_dynamo_hatch.0', "La escotilla dinamo inalámbrica es la salida de energía de los multibloques generadores sin cable: todo lo que recibe va a la red inalámbrica, con un 5% de pérdida al entrar. Existe en todos los tiers de LV a UIV, a 2 A (la normal), 4 A, 16 A y 64 A.")
+    add('emi.grindless.info.wireless_dynamo_hatch.1', "Las de 64 A caben en cualquier multibloque generador. El EU se guarda en torres de energía inalámbrica, y las escotillas y cubiertas de energía inalámbricas lo sacan. Sin torre formada, no se mueve nada.")
 
     add('emi.grindless.info.creature_simulator.0', "El simulador de criaturas da el botín de una criatura sin criatura. Pon el modelo de la criatura (no se gasta), su mineral y biomasa; el circuito programado elige el botín, y el 1 es todo. Nadie sale herido.")
     add('emi.grindless.info.creature_simulator.1', "Existe en LV, MV, HV y EV. Una criatura de más tier pide un simulador de ese tier o mejor. Los modelos se imprimen a partir de un modelo en blanco en un ensamblador.")

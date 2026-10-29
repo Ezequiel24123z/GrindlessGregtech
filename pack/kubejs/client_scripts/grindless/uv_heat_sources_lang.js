@@ -40,7 +40,7 @@ ClientEvents.lang('es_es', event => {
     add('grindless.machine.heat_source_works.tooltip.0', 'Fuentes de calor de curio-244 tras muros de celda caliente. Circuito programado 1: 4 de oxido de curio -> 1 pastilla de curio-244 + 1 oxido de curio pesado (guardado para UHV). Circuito 2: 1 pastilla + 1 lamina de iridio + 1 aerocasco de carbono-carbono -> 1 modulo GPHS (+ chatarra de iridio, 25%).')
     add('grindless.machine.heat_source_works.tooltip.1', 'Circuito 3: 4 modulos GPHS + 8 de polvo de silicio + 8 de polvo de germanio + 1 casco de maquina UV -> 1 RTG de sonda. Circuito 4: 1 de polvo de americio -> 8 microfuentes de americio.')
     add('grindless.machine.heat_source_works.tooltip.2', 'Circuito 5: 1 pastilla de curio-244 -> 2 pastillas RTG de curio; la celda RTG de IV quema una durante 3 veces lo que una pastilla de plutonio. La chatarra vuelve a fundirse en la ruta de la lamina de iridio.')
-    add('grindless.machine.heat_source_works.tooltip.3', 'Necesita, en las filas delantera y trasera: 1 o 2 hatches de energia (ZPM), 1 o 2 buses de entrada, 1 o 2 buses de salida y 4 o mas carcasas a prueba de radiacion entre ellos. Se niega a funcionar mientras anula.')
+    add('grindless.machine.heat_source_works.tooltip.3', 'Necesita, en las filas delantera y trasera: 1 o 2 escotillas de energia (ZPM), 1 o 2 buses de entrada, 1 o 2 buses de salida y 4 o mas carcasas a prueba de radiacion entre ellos. Se niega a funcionar mientras anula.')
     add('grindless.machine.heat_source_works.no_voiding', 'Configura el controlador para no anular objetos: el curio pesado debe conservarse.')
 
     add('item.grindless.probe_rtg', 'RTG de sonda')

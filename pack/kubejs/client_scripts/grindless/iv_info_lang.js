@@ -79,13 +79,13 @@ ClientEvents.lang('es_es', event => {
     add('emi.grindless.info.isr_wellfield.1', "Solo funciona en el End. La uraninita alimenta la línea del uranio hacia el enriquecimiento.")
 
     add('emi.grindless.info.mercury_solar_field.0', "El campo solar de Mercurio convierte la luz solar de Mercurio en EU. Pon el circuito programado 1 en el bus de entrada.")
-    add('emi.grindless.info.mercury_solar_field.1', "Solo funciona en Mercurio y solo de día; de noche espera sin perder nada. Su EU sale por hatches dinamo.")
+    add('emi.grindless.info.mercury_solar_field.1', "Solo funciona en Mercurio y solo de día; de noche espera sin perder nada. Su EU sale por escotillas dinamo.")
 
     add('emi.grindless.info.mercury_solar_works.0', "La fábrica solar de Mercurio es la fábrica del planeta. Sinteriza ladrillos de escudo térmico, fabrica paneles solares de película fina y funde iridosmina.")
     add('emi.grindless.info.mercury_solar_works.1', "Solo funciona en Mercurio. Los ladrillos revisten las estructuras de Mercurio; la iridosmina va a la planta de platino.")
 
     add('emi.grindless.info.mercury_vein_drill.0', "La perforadora de vetas de Mercurio perfora las vetas de Mercurio, solo allí, y nunca una veta de la Tierra. Pon la muestra y brocas de acero de tungsteno en el bus de entrada.")
-    add('emi.grindless.info.mercury_vein_drill.1', "El nitrógeno líquido en el hatch de entrada da más mena y menos desgaste de broca de día.")
+    add('emi.grindless.info.mercury_vein_drill.1', "El nitrógeno líquido en la escotilla de entrada da más mena y menos desgaste de broca de día.")
 
     add('emi.grindless.info.naquadah_plant.0', "La planta de naquadah refina naquadah. El circuito 1 ejecuta la línea del naquadah; los circuitos 2 y 3 son modos LuV.")
     add('emi.grindless.info.naquadah_plant.1', "Necesita una fuente de neutrones de plutonio-berilio. Sus productos alimentan los materiales densos de las siguientes eras.")
@@ -96,12 +96,12 @@ ClientEvents.lang('es_es', event => {
     add('emi.grindless.info.smelting_complex.0', "El complejo de fundición es un alto horno y un congelador de vacío en uno. Ejecuta recetas de alto horno y el paso del congelador en una sola pasada.")
     add('emi.grindless.info.smelting_complex.1', "Sus bobinas fijan cuántas copias corren a la vez, así que es la vía de alto rendimiento para hacer lingotes de aleación.")
 
-    add('emi.grindless.info.tritium_removal_facility.0', "La instalación de retirada de tritio destritia agua pesada. Solo funciona en la Luna y necesita una carga de deuterio en el hatch de entrada.")
+    add('emi.grindless.info.tritium_removal_facility.0', "La instalación de retirada de tritio destritia agua pesada. Solo funciona en la Luna y necesita una carga de deuterio en la escotilla de entrada.")
     add('emi.grindless.info.tritium_removal_facility.1', "Es la fuente de tritio para el combustible de fusión de las eras posteriores.")
 
     add('emi.grindless.info.venus_acid_works.0', "La planta de ácido de Venus descompone ácido sulfúrico en agua y oxígeno. Solo funciona en Venus, donde el ácido abunda.")
     add('emi.grindless.info.venus_acid_works.1', "El agua y el oxígeno son lo que a Venus le falta para su propia industria.")
 
     add('emi.grindless.info.venus_heat_engine.0', "El motor térmico de Venus aprovecha el calor de Venus: no quema nada y da 8.192 EU/t más vapor. Solo funciona en Venus.")
-    add('emi.grindless.info.venus_heat_engine.1', "Su EU sale por hatches dinamo. El vapor necesita adónde ir o se detiene.")
+    add('emi.grindless.info.venus_heat_engine.1', "Su EU sale por escotillas dinamo. El vapor necesita adónde ir o se detiene.")
 })

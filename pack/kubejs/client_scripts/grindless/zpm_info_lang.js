@@ -105,14 +105,14 @@ ClientEvents.lang('es_es', event => {
     add('emi.grindless.info.plasma_quench_caster.0', "La fundidora de temple de plasma cuela duranio, tritanio y darmstadtio fundidos directamente en placa (circuito 1) o en cuatro láminas (circuito 2, no el darmstadtio) bajo un manto de argón.")
     add('emi.grindless.info.plasma_quench_caster.1', "Casi todo el argón vuelve. El calor sale como vapor: mándalo a una turbina y desactiva la eliminación de fluidos.")
 
-    add('emi.grindless.info.direct_energy_converter.0', "El convertidor directo de energía convierte plasma de helio y plasma de estaño en EU sin turbina, 1,25 veces lo que saca la turbina de plasma. El gas enfriado o el estaño fundido sale por el hatch de salida.")
-    add('emi.grindless.info.direct_energy_converter.1', "Necesita uno o más hatches de salida de energía, también inalámbricos, y ejecuta hasta 128 recetas a la vez. Desactiva la eliminación de fluidos.")
+    add('emi.grindless.info.direct_energy_converter.0', "El convertidor directo de energía convierte plasma de helio y plasma de estaño en EU sin turbina, 1,25 veces lo que saca la turbina de plasma. El gas enfriado o el estaño fundido sale por la escotilla de salida.")
+    add('emi.grindless.info.direct_energy_converter.1', "Necesita una o más escotillas de salida de energía, también inalámbricas, y ejecuta hasta 128 recetas a la vez. Desactiva la eliminación de fluidos.")
 
     add('emi.grindless.info.naquadria_magnet_works.0', "La fábrica de imanes de naquadria bobina los imanes de la red inalámbrica. Circuito 1: celda SMES ZPM. Circuito 2: cables simples de URhNq2. Circuito 3: inserto HTS. Circuito 4: celda SMES UV.")
-    add('emi.grindless.info.naquadria_magnet_works.1', "Las celdas necesitan una carga de 1.000 mB de helio líquido en un hatch de entrada para la prueba en frío; nunca se gasta. Las celdas llenan la torre de energía inalámbrica.")
+    add('emi.grindless.info.naquadria_magnet_works.1', "Las celdas necesitan una carga de 1.000 mB de helio líquido en una escotilla de entrada para la prueba en frío; nunca se gasta. Las celdas llenan la torre de energía inalámbrica.")
 
     add('emi.grindless.info.assembly_hall.0', "La sala de ensamblaje ejecuta el ensamblador y el ensamblador de circuitos, hasta 64 recetas a la vez. Elige la máquina en la pestaña de modo del controlador: corre un modo cada vez, con las recetas de los bloques simples. La línea de ensamblaje no está incluida.")
-    add('emi.grindless.info.assembly_hall.1', "Ahorra máquinas y buses, no energía: cada copia paga su EU/t completo, así que los hatches de energía fijan cuántas corren.")
+    add('emi.grindless.info.assembly_hall.1', "Ahorra máquinas y buses, no energía: cada copia paga su EU/t completo, así que las escotillas de energía fijan cuántas corren.")
 
     add('emi.grindless.info.naquadria_refinery.0', "La refinería de naquadria refina en una sola torre la solución de naquadria impura hasta naquadria. Circuito 1: solución e hidrógeno dan naquadria, sulfuro de galio y solución de naquadah enriquecida. Circuito 2: residuo de naquadria guardado.")
     add('emi.grindless.info.naquadria_refinery.1', "Necesita una carga de ácido sulfúrico que nunca se gasta y no elimina nada. La solución enriquecida alimenta la planta de naquadah y el sulfuro, la línea del galio.")
@@ -121,7 +121,7 @@ ClientEvents.lang('es_es', event => {
     add('emi.grindless.info.naquadah_fuel_works.1', "El naquadah va a la planta de naquadah, el europio a la línea de motores y el xenón a los usos del xenón de GTM.")
 
     add('emi.grindless.info.neutrino_observatory.0', "El observatorio de neutrinos vigila agua pesada en un recipiente blindado. Circuito 1: un orbe de datos y agua pesada dan el Sondeo del Núcleo Solar. Circuito 2: lo mismo más un Catálogo de Ondas Gravitacionales dan el Catálogo Multimensajero.")
-    add('emi.grindless.info.neutrino_observatory.1', "La estructura es una cáscara de 15 x 15 x 15 de carcasa de fotomultiplicadores alrededor de un blindaje de agua. El hatch de energía UV necesita su sondeo. El catálogo se conserva.")
+    add('emi.grindless.info.neutrino_observatory.1', "La estructura es una cáscara de 15 x 15 x 15 de carcasa de fotomultiplicadores alrededor de un blindaje de agua. La escotilla de energía UV necesita su sondeo. El catálogo se conserva.")
 
     add('emi.grindless.info.deep_space_network.0', "La red de espacio profundo convierte grabaciones de sondas en datos. Circuito 1: una grabación de Neptuno, un orbe de datos y helio líquido dan datos del sobrevuelo de Neptuno. Circuito 2: igual con una grabación de Tritón. Circuito 3: ambos conjuntos y una lista de objetivos de Kuiper dan la carta Plutón-Kuiper. Circuito 4: una grabación de sonda de Titán, un orbe de datos, un sensor ZPM y helio líquido dan un muestreador de lagos para el siguiente descenso a Titán.")
     add('emi.grindless.info.deep_space_network.1', "Necesita una cubierta con antena sobre una cabina criogénica a prueba de escarcha. Las grabaciones de Neptuno y Tritón salen de la bahía de sondas de sobrevuelo, la de Titán del descenso por la bruma de la bahía de sondas de entrada, y la lista de objetivos, del telescopio de Kuiper.")
