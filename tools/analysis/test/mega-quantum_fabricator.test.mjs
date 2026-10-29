@@ -33,7 +33,8 @@ function harness() {
     Block: { getBlock: (id) => id },
     GTRecipeModifiers: { OC_PERFECT_SUBTICK: 'OC_PERFECT_SUBTICK', OC_NON_PERFECT: 'OC_NON_PERFECT', BATCH_MODE: 'BATCH_MODE' },
     Text: { translate: (s) => s, gray: (s) => s },
-    Item: { exists: () => true },
+    Item: { exists: () => true, of: (id) => id },
+    Fluid: { of: (id, n) => ({ id, n }) },
     Java: { loadClass: () => ({}) },
   });
   vm.runInContext(read('startup_scripts', 'lib/patterns.js'), context);
@@ -148,7 +149,7 @@ test('recipes: controller from 16 UV assemblers, the hall, hulls, arms, field ge
   const chainable = (id) => {
     const r = { id, inputs: [], outputs: [] };
     const c = new Proxy({}, { get: (_, m) => (...a) => {
-      if (m === 'itemInputs') r.inputs = a;
+      if (m === 'itemInputs') r.inputs = (r.inputs || []).concat(a);
       if (m === 'itemOutputs') r.outputs = a;
       if (m === 'EUt') r.eut = a[0];
       if (m === 'duration') r.duration = a[0];
@@ -157,15 +158,15 @@ test('recipes: controller from 16 UV assemblers, the hall, hulls, arms, field ge
     added.push(r);
     return c;
   };
-  h.recipeHandlers.forEach((cb) => cb({ recipes: { gtceu: { assembler: (id) => chainable(id) } } }));
+  h.recipeHandlers.forEach((cb) => cb({ recipes: { gtceu: { assembler: (id) => chainable(id), assembly_line: (id) => chainable(id) } } }));
   assert.equal(added.length, 2);
   const [controller, ring] = added;
-  assert.equal(controller.id, h.G.megaQuantumFabricator.crafting);
-  assert.deepEqual(plain(controller.inputs), ['16x gtceu:uv_assembler', '1x gtceu:assembly_hall', '4x gtceu:uhv_machine_hull', '4x gtceu:uv_robot_arm', '4x gtceu:uv_field_generator', '4x #gtceu:circuits/uhv']);
+  assert.equal('grindless:assembly_line/' + controller.id.replace('grindless:', ''), h.G.megaQuantumFabricator.crafting);
+  assert.deepEqual(plain(controller.inputs), ['16x gtceu:uv_assembler', '1x gtceu:assembly_hall', '4x gtceu:uhv_machine_hull', '4x gtceu:uv_robot_arm', '4x gtceu:uv_field_generator', '4x #gtceu:circuits/uhv', '4x grindless:field_ring_casing', '2x grindless:srf_cryomodule', '2x grindless:uv_electromagnet']);
   assert.deepEqual(plain(controller.outputs), ['gtceu:quantum_fabricator']);
   assert.equal(controller.eut, 2097152, 'UHV EU/t');
   assert.ok(controller.duration > 0);
-  assert.deepEqual(plain(ring.inputs), ['1x gtceu:uv_field_generator', '1x gtceu:uhv_machine_casing', '1x gtceu:neutronium_plate']);
+  assert.deepEqual(plain(ring.inputs), ['1x gtceu:uv_field_generator', '1x gtceu:uhv_machine_casing', '1x gtceu:neutronium_plate', '1x grindless:srf_cavity']);
   assert.deepEqual(plain(ring.outputs), ['2x grindless:field_ring_casing']);
   assert.ok(ring.eut > 0 && ring.duration > 0);
   assert.deepEqual(plain(h.errors), []);

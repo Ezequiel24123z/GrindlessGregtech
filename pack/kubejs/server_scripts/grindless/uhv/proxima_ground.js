@@ -14,7 +14,8 @@
 //   gtceu:chemical_reactor / mixer / centrifuge / assembler   GTM rows (no circuit): the tailings' calcium, urea (Bosch-Meiser),
 //                          the ammonium chloride's fertiliser, the ice core's steam melt (Proxima b), the Proxima base casing and the
 //                          coring head.
-//   crafting               the controllers: UHV hull + 2 UV parts + 2 UHV circuits, shaped recipes grindless:crafting/<machine>.
+//   crafting               the controllers: UHV hull + 2 UV parts + 2 UHV circuits, assembly lines grindless:assembly_line/<machine>.
+//                          Each is an assembly line: station research, tritanium + soldering alloy + lubricant, 3 domain items of its own line.
 //   hosted rows (older machines' types, id grindless:<type>/<idPrefix><name>; uhv/crystals.js's precedent):
 //     gtceu:pgm_refining      EV's platinum plant, circuit 6: the PGM liquor electrowon (the plant's slots and its keep flag,
 //                          global.grindless.platinumPlant.maxIO / .keepKey: the recipe refuses voiding).
@@ -217,10 +218,9 @@
     var MOTOR = 'gtceu:uv_electric_motor'
     var PUMP = 'gtceu:uv_electric_pump'
     var M = PG.machines || {}
-    // the other UHV controllers' shapes: grep "pattern: [" and "shaped(" in server_scripts/grindless/uhv/*.js (mirrors match too)
     var defs = [
-      { key: 'drill', parts: [HULL, MOTOR], pattern: ['MCM', 'CHC'], ingredients: { C: C, M: MOTOR, H: HULL } },
-      { key: 'heap', parts: [HULL, PUMP], pattern: ['PCP', 'CHC'], ingredients: { C: C, P: PUMP, H: HULL } }
+      { key: 'drill', parts: [HULL, MOTOR], research: 'grindless:cold_trap_coring_head', domain: ['2x grindless:cold_trap_coring_head', '2x grindless:proxima_base_casing', '2x grindless:thruster_pod'] },
+      { key: 'heap', parts: [HULL, PUMP], research: 'grindless:proxima_base_casing', domain: ['4x grindless:sporosarcina_culture', '2x grindless:chromobacterium_culture', '2x grindless:propellant_tank'] }
     ]
     PG.controllerRecipes = []
     defs.forEach(function (d) {
@@ -229,13 +229,20 @@
         console.error(LOG + 'proxima ground controller ' + d.key + ' skipped: no machine')
         return
       }
-      var missing = d.parts.concat([m.machine]).filter(function (id) { return !Item.exists(id) })
+      var missing = d.parts.concat([m.machine, d.research], d.domain.map(function (s) { return s.replace(/^\d+x /, '') })).filter(function (id) { return !Item.exists(id) })
       if (missing.length > 0) {
         console.error(LOG + m.name + ' controller recipe skipped, unknown item(s): ' + missing.join(', '))
         return
       }
-      event.recipes.gtceu.shaped(m.machine, d.pattern, d.ingredients).id('grindless:crafting/' + m.name)
-      PG.controllerRecipes.push('grindless:crafting/' + m.name)
+      var b = event.recipes.gtceu.assembly_line('grindless:' + m.name)
+      d.parts.forEach(function (s, i) { b.itemInputs(i === 0 ? s : '2x ' + s) })
+      b.itemInputs('4x #gtceu:circuits/uhv')
+      d.domain.forEach(function (s) { b.itemInputs(s) })
+      b.inputFluids(Fluid.of('gtceu:soldering_alloy', 2304), Fluid.of('gtceu:lubricant', 2000), Fluid.of('gtceu:tritanium', 1152))
+      b.itemOutputs(m.machine)
+      b.stationResearch(function (r) { return r.researchStack(Item.of(d.research)).CWUt(64).EUt(1966080) })
+      b.EUt(1966080).duration(1500)
+      PG.controllerRecipes.push('grindless:assembly_line/' + m.name)
     })
   }
 

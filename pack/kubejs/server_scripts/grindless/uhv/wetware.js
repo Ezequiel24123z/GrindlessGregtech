@@ -76,8 +76,8 @@
   })
   W.skipped = []
   W.clashes = []
-  W.crafting = { array: 'grindless:crafting/organoid_array' }
-  W.craftingParts = ['gtceu:uhv_machine_hull', 'gtceu:uv_sensor']
+  W.crafting = { array: 'grindless:assembly_line/organoid_array' }
+  W.craftingParts = ['gtceu:uhv_machine_hull', 'gtceu:uv_sensor', 'grindless:srf_cavity', 'grindless:cladosporium_culture', 'grindless:chromobacterium_culture', 'grindless:silicon_nitride_film']
 
   function keysOf(r) {
     var keys = {}
@@ -144,9 +144,17 @@
       console.error(LOG + 'organoid array controller crafting skipped, unknown item(s): ' + missing.join(', '))
       return
     }
-    event.recipes.gtceu.shaped('gtceu:organoid_array', ['C C', 'SHS'], {
-      S: 'gtceu:uv_sensor', C: '#gtceu:circuits/uhv', H: 'gtceu:uhv_machine_hull'
-    }).id(W.crafting.array)
+    var b = event.recipes.gtceu.assembly_line('grindless:organoid_array')
+    b.itemInputs('gtceu:uhv_machine_hull')
+    b.itemInputs('2x gtceu:uv_sensor')
+    b.itemInputs('4x #gtceu:circuits/uhv')
+    b.itemInputs('4x grindless:cladosporium_culture')
+    b.itemInputs('2x grindless:chromobacterium_culture')
+    b.itemInputs('2x grindless:silicon_nitride_film')
+    b.inputFluids(Fluid.of('gtceu:soldering_alloy', 2304), Fluid.of('gtceu:lubricant', 2000), Fluid.of('gtceu:tritanium', 1152))
+    b.itemOutputs('gtceu:organoid_array')
+    b.stationResearch(function (r) { return r.researchStack(Item.of('grindless:srf_cavity')).CWUt(64).EUt(1966080) })
+    b.EUt(1966080).duration(1500)
   }
 
   ServerEvents.recipes(function (event) {

@@ -112,61 +112,11 @@ All zpm rows left the baseline. The integration dropped `eraTier.observatory = 7
 All uv rows left the baseline. UV controllers (accelerators x3, cold x2, detectors x2, edge x2, fusion, heat sources, kuiper x2, life x2, materials x3, neptune x2, pluto ices x2, photonics x2, propulsion x2, starshot x3, thorium x2, mega factory) moved to `grindless:assembly_line/NAME` (the mega factory keeps `gtceu:assembly_line/mega_factory`) with station research of a previous item of the same line, UV hull + parts, four UV circuits, three domain items, soldering alloy, lubricant and tritanium. Components (x_ray_mask, tungsten_target, empty antiproton cartridge and trap, lithium breeder blanket, sample canister, uv_electromagnet, propellant tank, mu_metal_shield, the five mega factory modules) stay assemblers, raised with silicon nitride film, plates and two fluids; the fibre Bragg grating moved to the assembler (germanium, hydrogen) and the laser module and cryomodule blocks became assembler rows (4 modules + plates + film), replacing the shapeless pairs.
 
 Process honesty: `culture_seed` keeps 2 out, paid by 2 consumed agar dust beside the biomass (a replication fed by nutrients); `exposed_wafer`, `patterned_wafer` (fluids added in the accelerators table), `fibre_bragg_grating`, `laser_module_block`, `srf_cryomodule_block` are no longer 1-in-1-out.
-### uhv
+### uhv (QR-R5, done)
 
-| Output | Class | Now | Missing | File:line |
-|---|---|---|---|---|
-| `grindless:bsl4_casing` | part | assembler | P-DOMAIN P-FLUID | uhv/proxima_life.js:15 |
-| `grindless:cold_trap_coring_head` | component | assembler | C-COMPLEX | uhv/proxima_ground.js:1 |
-| `grindless:empty_penning_trap` | component | assembler | C-COMPLEX | uhv/antimatter.js:1 |
-| `grindless:excavator_bucket_drum` | component | assembler | C-COMPLEX | uhv/mercury.js:45 |
-| `grindless:field_ring_casing` | part | assembler | P-DOMAIN P-FLUID | uhv/mega_quantum_fabricator.js:26 |
-| `grindless:hangar_casing` | part | assembler | P-DOMAIN P-FLUID | uhv/proxima_life.js:15 |
-| `grindless:iridium_crucible` | component | assembler | C-COMPLEX | uhv/crystals.js:12 |
-| `grindless:magnesium_target` | component | assembler | C-COMPLEX | uhv/antimatter.js:1 |
-| `grindless:proxima_rover` | component | assembler | C-COMPLEX | uhv/proxima_life.js:1 |
-| `grindless:sodium_potassium_heat_pipe` | component | assembler | C-COMPLEX | uhv/swarm.js:58 |
-| `grindless:warp_gate_casing` | part | assembler | P-FLUID | uhv/gate.js:269 |
-| `gtca:space_elevator` | controller | crafting | C-DOMAIN C-FLUID C-FORM C-RESEARCH | uhv/elevator.js:189 |
-| `gtca:space_elevator_base_casing` | component | assembler | C-COMPLEX | uhv/elevator.js:95 |
-| `gtca:space_elevator_cable` | component | assembler | C-COMPLEX | uhv/elevator.js:98 |
-| `gtca:space_elevator_internal_structure` | component | assembler | C-COMPLEX | uhv/elevator.js:97 |
-| `gtca:space_elevator_motor_mk_1` | component | assembler | C-COMPLEX | uhv/elevator.js:99 |
-| `gtca:space_elevator_support_structure` | component | assembler | C-COMPLEX | uhv/elevator.js:96 |
-| `gtca:ultra_high_strength_concrete_floor` | component | assembler | C-COMPLEX | uhv/elevator.js:94 |
-| `baseline_astrometer` | controller | crafting | C-DISTINCT C-DOMAIN C-FLUID C-FORM C-RESEARCH | uhv/gate.js:18 |
-| `betavoltaic_fab` | controller | crafting | C-DISTINCT C-DOMAIN C-FLUID C-FORM C-RESEARCH | uhv/betavoltaics.js:181 |
-| `biomining_heap` | controller | crafting | C-DISTINCT C-DOMAIN C-FLUID C-FORM C-RESEARCH | uhv/proxima_ground.js:17 |
-| `casimir_array` | controller | crafting | C-DISTINCT C-DOMAIN C-FLUID C-FORM C-RESEARCH | uhv/antimatter.js:199 |
-| `cold_trap_drill` | controller | crafting | C-DISTINCT C-DOMAIN C-FLUID C-FORM C-RESEARCH | uhv/proxima_ground.js:7 |
-| `crystal_growth_furnace` | controller | crafting | C-DISTINCT C-DOMAIN C-FLUID C-FORM C-RESEARCH | uhv/crystals.js:184 |
-| `high_flux_reactor` | controller | crafting | C-DISTINCT C-DOMAIN C-FLUID C-FORM C-RESEARCH | uhv/transcurium.js:172 |
-| `mbe_reactor` | controller | crafting | C-DISTINCT C-DOMAIN C-FLUID C-FORM C-RESEARCH | uhv/photonics.js:196 |
-| `nuclear_clock_lab` | controller | crafting | C-DISTINCT C-DOMAIN C-FLUID C-FORM C-RESEARCH | uhv/crystals.js:183 |
-| `organoid_array` | controller | crafting | C-DISTINCT C-DOMAIN C-FLUID C-FORM C-RESEARCH | uhv/wetware.js:79 |
-| `pbo_plant` | controller | crafting | C-DISTINCT C-DOMAIN C-FLUID C-FORM C-RESEARCH | uhv/elevator.js:187 |
-| `photonic_foundry` | controller | crafting | C-DISTINCT C-DOMAIN C-FLUID C-FORM C-RESEARCH | uhv/photonics.js:7 |
-| `positron_accumulator` | controller | crafting | C-DISTINCT C-DOMAIN C-FLUID C-FORM C-RESEARCH | uhv/antimatter.js:198 |
-| `quantum_fabricator` | controller | assembler | C-DOMAIN C-FLUID C-FORM C-RESEARCH | uhv/mega_quantum_fabricator.js:3 |
-| `radiotrophic_vat` | controller | crafting | C-DISTINCT C-DOMAIN C-FLUID C-FORM C-RESEARCH | uhv/proxima_life.js:17 |
-| `regolith_excavator` | controller | crafting | C-DISTINCT C-DOMAIN C-FLUID C-FORM C-RESEARCH | uhv/mercury.js:183 |
-| `sample_receiving_facility` | controller | crafting | C-DISTINCT C-DOMAIN C-FLUID C-FORM C-RESEARCH | uhv/proxima_life.js:17 |
-| `sic_device_fab` | controller | crafting | C-DISTINCT C-DOMAIN C-FLUID C-FORM C-RESEARCH | uhv/power_devices.js:193 |
-| `solar_array_fab` | controller | crafting | C-DISTINCT C-DOMAIN C-FLUID C-FORM C-RESEARCH | uhv/power_devices.js:194 |
-| `solar_probe_bay` | controller | crafting | C-DISTINCT C-DOMAIN C-FLUID C-FORM C-RESEARCH | uhv/swarm.js:220 |
-| `solar_vapour_furnace` | controller | crafting | C-DISTINCT C-DOMAIN C-FLUID C-FORM C-RESEARCH | uhv/mercury.js:185 |
-| `spark_plasma_sinterer` | controller | crafting | C-DISTINCT C-DOMAIN C-FLUID C-FORM C-RESEARCH | uhv/propulsion.js:111 |
-| `swarm_control_station` | controller | crafting | C-DISTINCT C-DOMAIN C-FLUID C-FORM C-RESEARCH | uhv/swarm.js:218 |
-| `swarm_segment_foundry` | controller | crafting | C-DISTINCT C-DOMAIN C-FLUID C-FORM C-RESEARCH | uhv/swarm.js:216 |
-| `tether_ribbon_works` | controller | crafting | C-DISTINCT C-DOMAIN C-FLUID C-FORM C-RESEARCH | uhv/elevator.js:188 |
-| `transuranium_facility` | controller | crafting | C-DISTINCT C-DOMAIN C-FLUID C-FORM C-RESEARCH | uhv/transcurium.js:173 |
-| `uhv_parallel_hatch` | hatch | crafting | H-FORM | uhv/parallel_hatch.js:4 |
-| `ultrapure_water_plant` | controller | crafting | C-DISTINCT C-DOMAIN C-FLUID C-FORM C-RESEARCH | uhv/betavoltaics.js:180 |
-| `warp_gate` | controller | crafting | C-DISTINCT C-DOMAIN C-FLUID C-FORM C-RESEARCH | uhv/gate.js:7 |
-| `xenobiochem_plant` | controller | crafting | C-DISTINCT C-DOMAIN C-FLUID C-FORM C-RESEARCH | uhv/proxima_life.js:17 |
-| `xenobotany_greenhouse` | controller | crafting | C-DISTINCT C-DOMAIN C-FLUID C-FORM C-RESEARCH | uhv/proxima_life.js:17 |
-| `xenoflora_rover_bay` | controller | crafting | C-DISTINCT C-DOMAIN C-FLUID C-FORM C-RESEARCH | uhv/proxima_life.js:17 |
-| `zblan_draw_tower` | controller | crafting | C-DISTINCT C-DOMAIN C-FLUID C-FORM C-RESEARCH | uhv/zblan.js:85 |
+All uhv rows left the baseline. The 33 UHV controllers (antimatter x2, betavoltaics x2, crystals x2, gate x2, mercury x2, photonics x2, power devices x2, proxima ground x2, proxima life x5, swarm x3, transcurium x2, wetware array, zblan tower, spark plasma sinterer, pbo plant, tether ribbon works, space elevator, quantum fabricator, parallel hatch) moved to `grindless:assembly_line/NAME` (the quantum fabricator was an assembler, the parallel hatch a shaped recipe; the GTCA elevator keeps its output `gtca:space_elevator`) with station research of a previous item of the same line, hull + parts, four UHV circuits, three domain items, soldering alloy, lubricant and tritanium. Casings (bsl4, hangar, field ring, warp gate) keep their 1:1 ratio and gain a fluid and a domain item (the warp gate casing only a fluid). Components (empty penning trap, iridium crucible, cold trap coring head, excavator bucket drum, sodium-potassium heat pipe and the six GTCA elevator blocks) stay assemblers, raised with a deep domain item of their line, a second domain item and two fluids.
+
+Process honesty: `sic_epi` returns 1800 mB of the 2000 mB hydrogen carrier; `sic_anneal` (sic_device_wafer) consumes a graphite cap; `californium_source` (californium_252_source) consumes 2 platinum foil and a 500 mB helium fill.
 
 ### uev
 

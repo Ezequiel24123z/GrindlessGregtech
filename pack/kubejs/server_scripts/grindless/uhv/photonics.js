@@ -17,7 +17,8 @@
 //   gtceu:large_chemical_reactor   GTM, no circuit: tellurium out of EV's platinum plant metal sludge (soda ash, sulfuric acid, SO2
 //                          reduction), with its nickel and copper; the acid leaves diluted.
 //   crafting               the controllers: UHV hull + 2 UV sensors + 2 UHV circuits (reactor) and UHV hull + 2 UV emitters +
-//                          2 UHV circuits (foundry), shaped recipes grindless:crafting/<machine>.
+//                          2 UHV circuits (foundry), assembly lines grindless:assembly_line/<machine>.
+//                          Each is an assembly line: station research, tritanium + soldering alloy + lubricant, 3 domain items of its own line.
 //
 // The older rows live in this package's table, not in the ZPM scripts, so the ZPM tables (and their tests) keep their rows.
 // Lookup safety: a recipe whose ingredients are a subset of another's of its type can hide it; checked at load (a clash is an error)
@@ -193,18 +194,25 @@
     var SENSOR = 'gtceu:uv_sensor'
     var EMITTER = 'gtceu:uv_emitter'
     var defs = [
-      { machine: PH.machines.reactor.machine, parts: [HULL, SENSOR], pattern: ['SCS', ' H ', ' C '], ingredients: { C: '#gtceu:circuits/uhv', S: SENSOR, H: HULL }, name: 'mbe_reactor' },
-      { machine: PH.machines.foundry.machine, parts: [HULL, EMITTER], pattern: ['ECE', ' H ', ' C '], ingredients: { C: '#gtceu:circuits/uhv', E: EMITTER, H: HULL }, name: 'photonic_foundry' }
+      { machine: PH.machines.reactor.machine, parts: [HULL, SENSOR], research: 'grindless:fibre_laser_module', domain: ['4x grindless:gallium_arsenide_wafer', '2x grindless:sapphire_wafer', '2x grindless:fibre_bragg_grating'], name: 'mbe_reactor' },
+      { machine: PH.machines.foundry.machine, parts: [HULL, EMITTER], research: 'grindless:ytterbium_fibre', domain: ['4x grindless:silicon_nitride_film', '2x grindless:fibre_bragg_grating', '2x grindless:fused_silica_tube'], name: 'photonic_foundry' }
     ]
     PH.controllerRecipes = []
     defs.forEach(function (d) {
-      var missing = d.parts.concat([d.machine]).filter(function (id) { return !Item.exists(id) })
+      var missing = d.parts.concat([d.machine, d.research], d.domain.map(function (s) { return s.replace(/^\d+x /, '') })).filter(function (id) { return !Item.exists(id) })
       if (missing.length > 0) {
         console.error(LOG + d.name + ' controller recipe skipped, unknown item(s): ' + missing.join(', '))
         return
       }
-      event.recipes.gtceu.shaped(d.machine, d.pattern, d.ingredients).id('grindless:crafting/' + d.name)
-      PH.controllerRecipes.push('grindless:crafting/' + d.name)
+      var b = event.recipes.gtceu.assembly_line('grindless:' + d.name)
+      d.parts.forEach(function (s, i) { b.itemInputs(i === 0 ? s : '2x ' + s) })
+      b.itemInputs('4x #gtceu:circuits/uhv')
+      d.domain.forEach(function (s) { b.itemInputs(s) })
+      b.inputFluids(Fluid.of('gtceu:soldering_alloy', 2304), Fluid.of('gtceu:lubricant', 2000), Fluid.of('gtceu:tritanium', 1152))
+      b.itemOutputs(d.machine)
+      b.stationResearch(function (r) { return r.researchStack(Item.of(d.research)).CWUt(64).EUt(1966080) })
+      b.EUt(1966080).duration(1500)
+      PH.controllerRecipes.push('grindless:assembly_line/' + d.name)
     })
   }
 
