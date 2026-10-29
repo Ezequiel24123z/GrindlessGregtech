@@ -322,7 +322,7 @@ test('B5 world gen: a tuff layer on the belt only, three veins in it, materials 
   }
 });
 
-test('B5 un-hides its ids: no B5 rule or group is left, the bearing keeps its structure page, the extract waits for B8', () => {
+test('B5 un-hides its ids: no B5 rule or group is left, the bearing keeps its structure page, the extract has its B8 use', () => {
   const obtain = fs.readFileSync(path.join(ROOT, 'tools/analysis/tiers/obtain.json'), 'utf8');
   assert.doesNotMatch(obtain, /LuV \(B5\)/);
   assert.doesNotMatch(obtain, /asteroid_quantum_seed/);
@@ -334,7 +334,8 @@ test('B5 un-hides its ids: no B5 rule or group is left, the bearing keeps its st
   const pages = path.join(PACK, 'kubejs/assets/emi/recipe/additions/grindless');
   for (const page of ['asteroid_regolith_casing', 'magnetic_bearing']) assert.ok(fs.existsSync(path.join(pages, page + '.json')), page);
   const cov = JSON.parse(fs.readFileSync(path.join(ROOT, 'tools/analysis/emi_coverage.json'), 'utf8'));
-  assert.ok(cov.exceptions.some((e) => e.id === 'grindless:chondritic_extract' && /B8/.test(e.reason)));
+  // LuV-B8 (the algae bioreactor's Europan culture) reads it, so its temporary use exception is gone
+  assert.ok(!cov.exceptions.some((e) => e.id === 'grindless:chondritic_extract'));
 });
 
 test('B5 language parity, every key the scripts use, and the three controller overlays', () => {
