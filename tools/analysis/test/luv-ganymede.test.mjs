@@ -171,7 +171,7 @@ test('B9 the catalogue, the launches and the probes: Ganymede only, own circuits
   const ganymede = JSON.parse(fs.readFileSync(path.join(ROOT, 'pack/kubejs/data/grindless/tables/places.json'), 'utf8')).surfaces.ganymede;
   assert.equal(G.places.surface('ganymede'), ganymede);
   const gw = recipes.filter((r) => r.type === 'gravitational_wave_astronomy');
-  assert.equal(gw.length, 1);
+  assert.equal(gw.length, 2); // UIV-B4 appended the Kerr ringdown record (circuit 2)
   assert.equal(gw[0].args[0], 'grindless:luv/gravitational_wave_catalogue');
   assert.equal(only(gw[0], 'circuit'), 1);
   assert.deepEqual(call(gw[0], 'itemInputs')[0], ['gtceu:data_orb']);
@@ -275,6 +275,7 @@ test('B9 every existing id matches the pinned native registry', () => {
     'minecraft:packed_ice', 'minecraft:blue_ice', 'gtceu:data_orb', 'gtceu:luv_sensor',
     'gtceu:luv_emitter', 'gtceu:luv_field_generator', 'gtceu:luv_machine_hull', 'gcyr:heat_shielding_fabric',
     'gtceu:hv_lithium_battery', 'gtceu:titanium_plate', 'grindless:rtg_pellet', 'grindless:sagittarius_a_star_signal',
+    'grindless:kerr_probe_data', 'grindless:kerr_ringdown_record', // UIV-B4's ringdown row on Ganymede
   ]);
   const a1 = script('startup_scripts', 'luv/foundation.js');
   // the assembly line parts are IV's registrations (iv/foundation.js, iv/tungsten_steel_drill_bit.js)
