@@ -2,11 +2,14 @@
  "format": "gg-process-audit-1",
  "_comment": "Findings of tools/analysis/process-audit.mjs known when QR-D0 ran; the audit fails only on keys not listed here. Remove a key when its finding is fixed. options.ignore: globs of ids the audit skips.",
  "options": {
-  "ignore": []
+  "ignore": [
+   "grindless:vein_sample_scheelite",
+   "gtceu:*_indicator"
+  ]
  },
  "counts": {
   "uncraftable": 0,
-  "no_use": 5,
+  "no_use": 0,
   "byproduct_no_destination": 0,
   "machine_no_craft": 0,
   "machine_empty_type": 0,
@@ -15,13 +18,12 @@
   "m_info_missing": 149,
   "m_info_generic": 0,
   "m_info_empty": 0,
-  "hidden_with_recipes": 1,
+  "hidden_with_recipes": 0,
   "self_gain": 3,
   "cycle_gain": 0,
   "trivial_step": 27
  },
  "keys": [
-  "hidden_with_recipes|grindless:vein_sample_scheelite",
   "m_info_missing|gtceu:accelerator_driven_reactor",
   "m_info_missing|gtceu:actinide_partitioning_plant",
   "m_info_missing|gtceu:aerogel_works",
@@ -171,11 +173,6 @@
   "m_info_missing|gtceu:zblan_draw_tower",
   "m_info_missing|gtceu:zero_g_crystal_grower",
   "m_info_missing|gtceu:zone_refining_tower",
-  "no_use|gtceu:deuterium_rich_ice_indicator",
-  "no_use|gtceu:iridosmine_indicator",
-  "no_use|gtceu:merrillite_indicator",
-  "no_use|gtceu:meteoric_iron_indicator",
-  "no_use|gtceu:tetrataenite_indicator",
   "self_gain|grindless:closed_ecosystem/culture_seed",
   "self_gain|grindless:closed_ecosystem/culture_seed",
   "self_gain|grindless:silicon_carbide/sic_epi",

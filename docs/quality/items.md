@@ -34,10 +34,10 @@ Era is taken from the registering script's `grindless/<era>/` folder.
 - **zpm / uv** `grindless:closed_ecosystem/culture_seed`: 1 culture in, 2 out (algae and archaeal cultures). Intended as replication? If yes, state it in the page and require a nutrient input that is consumed; if not, output 1.
 
 ### no_use (items nothing consumes)
-Ore indicators, one per vein: `gtceu:merrillite_indicator` (ev), `iridosmine_indicator` (iv), `meteoric_iron_indicator` and `tetrataenite_indicator` (luv), `deuterium_rich_ice_indicator` (mars). Fix: give each an info page ("shows where the vein is; keep in the scanner") or consume it in the matching scanning recipe.
+Ore indicators, one per vein: `gtceu:merrillite_indicator` (ev), `iridosmine_indicator` (iv), `meteoric_iron_indicator` and `tetrataenite_indicator` (luv), `deuterium_rich_ice_indicator` (mars). **Resolved (integrator, wave 1):** these are GTM surface-rock indicators, generated for every ore material and used by no GTM recipe by design (rule 6); `gtceu:*_indicator` is in `process_audit.json` `options.ignore`.
 
 ### hidden_with_recipes
-- **hv** `grindless:vein_sample_scheelite`: hidden from the index yet 1 recipe uses it. Add the item to `grindless:hidden_with_recipes` or drop the recipe. **QR-R1: kept on purpose.** The recipe is the old-save conversion into the empty vein probe (`keepRecipes: true` in hidden_until.json); hiding it with the tag would hide that recipe. The audit row is a false positive: allowlist it in process-audit (lib, not this package). The trivial_step rows below are all UV and later, none in steam to ev.
+- **hv** `grindless:vein_sample_scheelite`: hidden from the index yet 1 recipe uses it. Add the item to `grindless:hidden_with_recipes` or drop the recipe. **QR-R1: kept on purpose.** The recipe is the old-save conversion into the empty vein probe (`keepRecipes: true` in hidden_until.json); hiding it with the tag would hide that recipe. The audit row was a false positive: **allowlisted** in `process_audit.json` `options.ignore` (integrator, wave 1). The trivial_step rows below are all UV and later, none in steam to ev.
 
 ### machine_no_info
 - **iv** `gtceu:ev_rtg`: no tooltip and no EMI page. Add `grindless.machine.ev_rtg.tooltip.N` or a page. **Fixed (QR-I1): own EMI info page.**
@@ -79,7 +79,7 @@ All 55 machines were checked against `data/grindless/tables/hidden_until.json` (
 | `gtnn:homemade_bedrock_ore_machine` | hide | never | ores out of stone |
 | `gtnn:uv_naquadah_reactor` | hide | never | no GT-- recipe and no fuel line of ours at UV; the LuV and ZPM reactors carry the naquadah power (luv.md:1194, zpm.md:772). A UV reactor needs its own fuel design (x2 rule 8) first |
 
-Baseline: the process audit still lists these 55 machines and 20 types because it does not consult the hidden tags. Proposed integrator change (`tools/analysis/lib/process_audit.mjs`, not in this package): skip `machine_empty_type`, `machine_no_craft` and `type_empty` when the machine's item is in the `until: never` hidden groups (or in `hiddenIndex`), and for a type, when every machine using it is skipped; then drop the 75 keys from `process_audit.json`.
+Baseline: resolved. The audit already skips machines tagged `grindless:hidden_with_recipes` in the dump (and types whose machines are all skipped); with the current dump none of the 55 machines or 20 types is in `process_audit.json`.
 
 ### trivial_step (a real process should be more than "1 in, 1 out")
 Dedicated machines or conditions justify some of these; flag them to the era owner, not as bugs.
