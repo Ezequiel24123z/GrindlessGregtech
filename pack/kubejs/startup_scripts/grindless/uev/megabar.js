@@ -1,4 +1,4 @@
-// priority: -7606
+// priority: -7586
 // -----------------------------------------------------------------------------------------------
 // UEV's megabar press (docs/eras/uev.md, machine 5, lines 7, 8 and 9; package UEV-A3): the multi-anvil press, its recipe type and the
 // package's own items. The recipes come from data/grindless/tables/megabar.json (server_scripts/grindless/uev/megabar.js).
