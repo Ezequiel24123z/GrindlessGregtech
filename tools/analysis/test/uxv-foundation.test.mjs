@@ -130,7 +130,7 @@ test('the strand is a 4 A cable at V[UXV] with no loss; W-184 has a wire form; n
   const mine = run.docs.recipes.recipes.filter((r) => /(^|[\\/])uxv[\\/]foundation\.js$/.test(String(run.recipeFiles.get(r.i))));
   assert.deepEqual(mine, [], 'F1 adds no recipe');
   assert.ok(!fs.existsSync(path.join(pack, 'kubejs', 'server_scripts', 'grindless', 'uxv', 'foundation.js')), 'the hull and hatch recipes are B4\'s');
-  assert.doesNotMatch(src, /^\/\/ priority:/m, 'the integrator stamps the load order');
+  assert.match(src, /^\/\/ priority:/m, 'the integrator (UXV-F2) stamped the load order');
 });
 
 test('names and both tooltip lines in en_us and es_es; materials and machines named', () => {
