@@ -136,88 +136,56 @@ Fixed, QR-R6: the uev table rows left the baseline (the rows above were still pe
 
 ### uiv
 
+QR-R7: the 20 controllers, `uiv_parallel_hatch`, the 4 energy hatches and `uiv_machine_hull` are assembly lines (`grindless:assembly_line/<name>`) and left the baseline; the 4 matrioshka parts are assembly lines. The rows below stay in the baseline: each needs an own-line intermediate that does not exist yet. UIV own-line intermediate pending (UIV build, v0.14.0).
+
 | Output | Class | Now | Missing | File:line |
 |---|---|---|---|---|
-| `grindless:aqfp_module` | component | assembler | C-COMPLEX | uiv/matrioshka.js:1 |
-| `grindless:balanced_rhea_impeller` | component | assembler | C-COMPLEX | uiv/uiv_components.js:1 |
-| `grindless:beuv_mirror` | component | assembler | C-COMPLEX | uiv/beuv_stm.js:1 |
-| `grindless:braided_mh_tether` | component | assembler | C-COMPLEX | uiv/rx_j1856.js:1 |
-| `grindless:cage_part` | component | assembler | C-COMPLEX | uiv/isotopes.js:1 |
-| `grindless:capped_thf4_film` | component | assembler | C-COMPLEX | uiv/mainframe.js:5 |
-| `grindless:cold_plate` | component | assembler | C-COMPLEX | uiv/memories_cryostat.js:1 |
-| `grindless:cps_wetted_mesh` | component | assembler | C-COMPLEX | uiv/mk5.js:1 |
-| `grindless:crossbar_on_interposer` | component | assembler | C-COMPLEX | uiv/mainframe.js:5 |
-| `grindless:crust_lift_tether` | component | assembler | C-COMPLEX | uiv/rx_j1856.js:1 |
-| `grindless:dac_charge` | component | assembler | C-COMPLEX | uiv/metallic_hydrogen.js:1 |
-| `grindless:diamond_schottky_die` | component | assembler | C-COMPLEX | uiv/matrioshka.js:1 |
-| `grindless:divertor` | component | assembler | C-COMPLEX | uiv/mk5.js:1 |
-| `grindless:divertor_cassette` | component | assembler | C-COMPLEX | uiv/mk5.js:1 |
-| `grindless:droplet_collector` | component | assembler | C-COMPLEX | uiv/matrioshka.js:1 |
-| `grindless:droplet_wick` | component | assembler | C-COMPLEX | uiv/matrioshka.js:1 |
-| `grindless:er_fibre` | component | assembler | C-COMPLEX | uiv/memories_cryostat.js:1 |
-| `grindless:er_fibre_coil` | component | assembler | C-COMPLEX | uiv/memories_cryostat.js:1 |
-| `grindless:es254_target` | component | assembler | C-COMPLEX | uiv/rx_j1856.js:1 |
-| `grindless:first_wall_tile` | component | assembler | C-COMPLEX | uiv/mk5.js:1 |
-| `grindless:gamma_bragg_mirror` | component | assembler | C-COMPLEX | uiv/j0437.js:1 |
-| `grindless:impregnated_gdbco` | component | assembler | C-COMPLEX | uiv/uiv_components.js:1 |
-| `grindless:impregnated_mh_coil` | component | assembler | C-COMPLEX | uiv/levitation_melter.js:1 |
-| `grindless:kilonova_capsule` | component | assembler | C-COMPLEX | uiv/rx_j1856.js:1 |
-| `grindless:li_sn_armoured_tile` | component | assembler | C-COMPLEX | uiv/mk5.js:1 |
-| `grindless:lonsdaleite_bearing` | component | assembler | C-COMPLEX | uiv/metallic_hydrogen.js:1 |
-| `grindless:maglev_stator` | component | assembler | C-COMPLEX | uiv/levitation_melter.js:1 |
-| `grindless:matrioshka_emitter_shell` | part | assembler | P-FORM | uiv/matrioshka.js:1 |
-| `grindless:matrioshka_logic_tile` | part | assembler | P-FORM | uiv/matrioshka.js:1 |
-| `grindless:matrioshka_node` | part | assembler | P-FORM | uiv/matrioshka.js:1 |
-| `grindless:matrioshka_tpv_shell` | part | assembler | P-FORM | uiv/matrioshka.js:1 |
-| `grindless:metallic_hydrogen_coil_block` | part | assembler | P-FLUID | uiv/levitation_melter.js:1 |
-| `grindless:mh_laminated_yarn` | component | assembler | C-COMPLEX | uiv/rx_j1856.js:1 |
-| `grindless:neon_moderator_cartridge` | component | assembler | C-COMPLEX | uiv/j0437.js:1 |
-| `grindless:neutron_guide` | component | assembler | C-COMPLEX | uiv/isotopes.js:1 |
-| `grindless:neutron_supermirror` | component | assembler | C-COMPLEX | uiv/isotopes.js:1 |
-| `grindless:polar_cap_electrode` | component | assembler | C-COMPLEX | uiv/rx_j1856.js:1 |
-| `grindless:potted_mh_stator` | component | assembler | C-COMPLEX | uiv/levitation_melter.js:1 |
-| `grindless:ps_cooling_laser` | component | assembler | C-COMPLEX | uiv/tfln_femtosecond.js:1 |
-| `grindless:pumped_edfa` | component | assembler | C-COMPLEX | uiv/memories_cryostat.js:1 |
-| `grindless:rhea_cased_charge` | component | assembler | C-COMPLEX | uiv/levitation_melter.js:1 |
-| `grindless:rhea_cased_halbach` | component | assembler | C-COMPLEX | uiv/levitation_melter.js:1 |
-| `grindless:rhea_former` | component | assembler | C-COMPLEX | uiv/levitation_melter.js:1 |
-| `grindless:selective_emitter` | component | assembler | C-COMPLEX | uiv/matrioshka.js:1 |
-| `grindless:shg_486_stage` | component | assembler | C-COMPLEX | uiv/tfln_femtosecond.js:1 |
-| `grindless:six_hour_memory` | component | assembler | C-COMPLEX | uiv/memories_cryostat.js:1 |
-| `grindless:sled_charge` | component | assembler | C-COMPLEX | uiv/levitation_melter.js:1 |
-| `grindless:strain_wave_gear` | component | assembler | C-COMPLEX | uiv/uiv_components.js:1 |
-| `grindless:tb_droplet_target` | component | assembler | C-COMPLEX | uiv/beuv_stm.js:1 |
-| `grindless:ti50_oven_charge` | component | assembler | C-COMPLEX | uiv/isotopes.js:1 |
-| `grindless:tpv_segment` | component | assembler | C-COMPLEX | uiv/matrioshka.js:1 |
-| `grindless:uiv_conveyor_module` | component | assembler | C-COMPLEX | uiv/levitation_melter.js:1 |
-| `grindless:uiv_electric_piston` | component | assembler | C-COMPLEX | uiv/metallic_hydrogen.js:1 |
-| `grindless:uiv_emitter` | component | assembler | C-COMPLEX | uiv/j0437.js:1 |
-| `grindless:uiv_fusion_casing` | part | assembler | P-FLUID | uiv/mk5.js:1 |
-| `grindless:uiv_sensor` | component | assembler | C-COMPLEX | uiv/mainframe.js:5 |
-| `grindless:wound_rhea_former` | component | assembler | C-COMPLEX | uiv/levitation_melter.js:1 |
-| `beuv_scanner` | controller | crafting | C-DISTINCT C-FLUID C-FORM C-RESEARCH | uiv/beuv_stm.js:166 |
-| `crust_lift` | controller | crafting | C-DISTINCT C-FLUID C-FORM C-RESEARCH | uiv/rx_j1856.js:7 |
-| `decay_heat_vault` | controller | crafting | C-DISTINCT C-FLUID C-FORM C-RESEARCH | uiv/rx_j1856.js:180 |
-| `droplet_radiator_works` | controller | crafting | C-DISTINCT C-FLUID C-FORM C-RESEARCH | uiv/matrioshka.js:174 |
-| `femtosecond_writer` | controller | crafting | C-DISTINCT C-FLUID C-FORM C-RESEARCH | uiv/tfln_femtosecond.js:170 |
-| `levitation_melter` | controller | crafting | C-DISTINCT C-FLUID C-FORM C-RESEARCH | uiv/levitation_melter.js:12 |
-| `matrioshka_computer` | controller | crafting | C-DISTINCT C-FLUID C-FORM C-RESEARCH | uiv/matrioshka.js:174 |
-| `millikelvin_cryostat_works` | controller | crafting | C-DISTINCT C-FLUID C-FORM C-RESEARCH | uiv/memories_cryostat.js:168 |
-| `neutron_drip_separator` | controller | crafting | C-DISTINCT C-FLUID C-FORM C-RESEARCH | uiv/rx_j1856.js:179 |
-| `neutronium_cage` | controller | crafting | C-DISTINCT C-FLUID C-FORM C-RESEARCH | uiv/rx_j1856.js:180 |
-| `polarised_proton_source` | controller | crafting | C-DISTINCT C-FLUID C-FORM C-RESEARCH | uiv/mk5.js:165 |
-| `positronium_condensate_lab` | controller | crafting | C-DISTINCT C-FLUID C-FORM C-RESEARCH | uiv/j0437.js:181 |
-| `pulsar_wind_trap` | controller | crafting | C-DISTINCT C-FLUID C-FORM C-RESEARCH | uiv/j0437.js:7 |
-| `r_process_decompressor` | controller | crafting | C-DISTINCT C-FLUID C-FORM C-RESEARCH | uiv/rx_j1856.js:180 |
-| `ramp_compression_pulser` | controller | crafting | C-DISTINCT C-FLUID C-FORM C-RESEARCH | uiv/metallic_hydrogen.js:12 |
-| `spectral_hole_burner` | controller | crafting | C-DISTINCT C-FLUID C-FORM C-RESEARCH | uiv/memories_cryostat.js:168 |
-| `stm_lithography_cell` | controller | crafting | C-DISTINCT C-FLUID C-FORM C-RESEARCH | uiv/beuv_stm.js:166 |
-| `tfln_fab` | controller | crafting | C-DISTINCT C-FLUID C-FORM C-RESEARCH | uiv/tfln_femtosecond.js:170 |
-| `uiv_energy_input_hatch` | hatch | assembler | H-FORM | uiv/foundation.js:48 |
-| `uiv_energy_input_hatch_16a` | hatch | assembler | H-FORM | uiv/foundation.js:50 |
-| `uiv_energy_output_hatch` | hatch | assembler | H-FORM | uiv/foundation.js:49 |
-| `uiv_energy_output_hatch_16a` | hatch | assembler | H-FORM | uiv/foundation.js:51 |
-| `uiv_fusion_reactor` | controller | crafting | C-DISTINCT C-FLUID C-FORM C-RESEARCH | uiv/mk5.js:165 |
-| `uiv_machine_hull` | single | assembler | S-FORM | uiv/foundation.js:18 |
-| `uiv_parallel_hatch` | hatch | crafting | H-FORM | uiv/parallel_hatch.js:4 |
-| `xray_pulse_profiler` | controller | crafting | C-DISTINCT C-FLUID C-FORM C-RESEARCH | uiv/j0437.js:182 |
+| `grindless:aqfp_module` | component | assembler | C-COMPLEX (UIV own-line intermediate pending (UIV build, v0.14.0)) | uiv/matrioshka.js:1 |
+| `grindless:balanced_rhea_impeller` | component | assembler | C-COMPLEX (UIV own-line intermediate pending (UIV build, v0.14.0)) | uiv/uiv_components.js:1 |
+| `grindless:beuv_mirror` | component | assembler | C-COMPLEX (UIV own-line intermediate pending (UIV build, v0.14.0)) | uiv/beuv_stm.js:1 |
+| `grindless:braided_mh_tether` | component | assembler | C-COMPLEX (UIV own-line intermediate pending (UIV build, v0.14.0)) | uiv/rx_j1856.js:1 |
+| `grindless:cage_part` | component | assembler | C-COMPLEX (UIV own-line intermediate pending (UIV build, v0.14.0)) | uiv/isotopes.js:1 |
+| `grindless:capped_thf4_film` | component | assembler | C-COMPLEX (UIV own-line intermediate pending (UIV build, v0.14.0)) | uiv/mainframe.js:5 |
+| `grindless:cold_plate` | component | assembler | C-COMPLEX (UIV own-line intermediate pending (UIV build, v0.14.0)) | uiv/memories_cryostat.js:1 |
+| `grindless:cps_wetted_mesh` | component | assembler | C-COMPLEX (UIV own-line intermediate pending (UIV build, v0.14.0)) | uiv/mk5.js:1 |
+| `grindless:crossbar_on_interposer` | component | assembler | C-COMPLEX (UIV own-line intermediate pending (UIV build, v0.14.0)) | uiv/mainframe.js:5 |
+| `grindless:crust_lift_tether` | component | assembler | C-COMPLEX (UIV own-line intermediate pending (UIV build, v0.14.0)) | uiv/rx_j1856.js:1 |
+| `grindless:dac_charge` | component | assembler | C-COMPLEX (UIV own-line intermediate pending (UIV build, v0.14.0)) | uiv/metallic_hydrogen.js:1 |
+| `grindless:diamond_schottky_die` | component | assembler | C-COMPLEX (UIV own-line intermediate pending (UIV build, v0.14.0)) | uiv/matrioshka.js:1 |
+| `grindless:divertor` | component | assembler | C-COMPLEX (UIV own-line intermediate pending (UIV build, v0.14.0)) | uiv/mk5.js:1 |
+| `grindless:divertor_cassette` | component | assembler | C-COMPLEX (UIV own-line intermediate pending (UIV build, v0.14.0)) | uiv/mk5.js:1 |
+| `grindless:droplet_collector` | component | assembler | C-COMPLEX (UIV own-line intermediate pending (UIV build, v0.14.0)) | uiv/matrioshka.js:1 |
+| `grindless:droplet_wick` | component | assembler | C-COMPLEX (UIV own-line intermediate pending (UIV build, v0.14.0)) | uiv/matrioshka.js:1 |
+| `grindless:er_fibre_coil` | component | assembler | C-COMPLEX (UIV own-line intermediate pending (UIV build, v0.14.0)) | uiv/memories_cryostat.js:1 |
+| `grindless:es254_target` | component | assembler | C-COMPLEX (UIV own-line intermediate pending (UIV build, v0.14.0)) | uiv/rx_j1856.js:1 |
+| `grindless:first_wall_tile` | component | assembler | C-COMPLEX (UIV own-line intermediate pending (UIV build, v0.14.0)) | uiv/mk5.js:1 |
+| `grindless:gamma_bragg_mirror` | component | assembler | C-COMPLEX (UIV own-line intermediate pending (UIV build, v0.14.0)) | uiv/j0437.js:1 |
+| `grindless:impregnated_gdbco` | component | assembler | C-COMPLEX (UIV own-line intermediate pending (UIV build, v0.14.0)) | uiv/uiv_components.js:1 |
+| `grindless:impregnated_mh_coil` | component | assembler | C-COMPLEX (UIV own-line intermediate pending (UIV build, v0.14.0)) | uiv/levitation_melter.js:1 |
+| `grindless:kilonova_capsule` | component | assembler | C-COMPLEX (UIV own-line intermediate pending (UIV build, v0.14.0)) | uiv/rx_j1856.js:1 |
+| `grindless:li_sn_armoured_tile` | component | assembler | C-COMPLEX (UIV own-line intermediate pending (UIV build, v0.14.0)) | uiv/mk5.js:1 |
+| `grindless:lonsdaleite_bearing` | component | assembler | C-COMPLEX (UIV own-line intermediate pending (UIV build, v0.14.0)) | uiv/metallic_hydrogen.js:1 |
+| `grindless:maglev_stator` | component | assembler | C-COMPLEX (UIV own-line intermediate pending (UIV build, v0.14.0)) | uiv/levitation_melter.js:1 |
+| `grindless:mh_laminated_yarn` | component | assembler | C-COMPLEX (UIV own-line intermediate pending (UIV build, v0.14.0)) | uiv/rx_j1856.js:1 |
+| `grindless:neon_moderator_cartridge` | component | assembler | C-COMPLEX (UIV own-line intermediate pending (UIV build, v0.14.0)) | uiv/j0437.js:1 |
+| `grindless:neutron_guide` | component | assembler | C-COMPLEX (UIV own-line intermediate pending (UIV build, v0.14.0)) | uiv/isotopes.js:1 |
+| `grindless:neutron_supermirror` | component | assembler | C-COMPLEX (UIV own-line intermediate pending (UIV build, v0.14.0)) | uiv/isotopes.js:1 |
+| `grindless:polar_cap_electrode` | component | assembler | C-COMPLEX (UIV own-line intermediate pending (UIV build, v0.14.0)) | uiv/rx_j1856.js:1 |
+| `grindless:ps_cooling_laser` | component | assembler | C-COMPLEX (UIV own-line intermediate pending (UIV build, v0.14.0)) | uiv/tfln_femtosecond.js:1 |
+| `grindless:pumped_edfa` | component | assembler | C-COMPLEX (UIV own-line intermediate pending (UIV build, v0.14.0)) | uiv/memories_cryostat.js:1 |
+| `grindless:rhea_cased_charge` | component | assembler | C-COMPLEX (UIV own-line intermediate pending (UIV build, v0.14.0)) | uiv/levitation_melter.js:1 |
+| `grindless:rhea_cased_halbach` | component | assembler | C-COMPLEX (UIV own-line intermediate pending (UIV build, v0.14.0)) | uiv/levitation_melter.js:1 |
+| `grindless:rhea_former` | component | assembler | C-COMPLEX (UIV own-line intermediate pending (UIV build, v0.14.0)) | uiv/levitation_melter.js:1 |
+| `grindless:selective_emitter` | component | assembler | C-COMPLEX (UIV own-line intermediate pending (UIV build, v0.14.0)) | uiv/matrioshka.js:1 |
+| `grindless:shg_486_stage` | component | assembler | C-COMPLEX (UIV own-line intermediate pending (UIV build, v0.14.0)) | uiv/tfln_femtosecond.js:1 |
+| `grindless:six_hour_memory` | component | assembler | C-COMPLEX (UIV own-line intermediate pending (UIV build, v0.14.0)) | uiv/memories_cryostat.js:1 |
+| `grindless:sled_charge` | component | assembler | C-COMPLEX (UIV own-line intermediate pending (UIV build, v0.14.0)) | uiv/levitation_melter.js:1 |
+| `grindless:strain_wave_gear` | component | assembler | C-COMPLEX (UIV own-line intermediate pending (UIV build, v0.14.0)) | uiv/uiv_components.js:1 |
+| `grindless:tb_droplet_target` | component | assembler | C-COMPLEX (UIV own-line intermediate pending (UIV build, v0.14.0)) | uiv/beuv_stm.js:1 |
+| `grindless:ti50_oven_charge` | component | assembler | C-COMPLEX (UIV own-line intermediate pending (UIV build, v0.14.0)) | uiv/isotopes.js:1 |
+| `grindless:tpv_segment` | component | assembler | C-COMPLEX (UIV own-line intermediate pending (UIV build, v0.14.0)) | uiv/matrioshka.js:1 |
+| `grindless:uiv_conveyor_module` | component | assembler | C-COMPLEX (UIV own-line intermediate pending (UIV build, v0.14.0)) | uiv/levitation_melter.js:1 |
+| `grindless:uiv_electric_piston` | component | assembler | C-COMPLEX (UIV own-line intermediate pending (UIV build, v0.14.0)) | uiv/metallic_hydrogen.js:1 |
+| `grindless:uiv_emitter` | component | assembler | C-COMPLEX (UIV own-line intermediate pending (UIV build, v0.14.0)) | uiv/j0437.js:1 |
+| `grindless:uiv_sensor` | component | assembler | C-COMPLEX (UIV own-line intermediate pending (UIV build, v0.14.0)) | uiv/mainframe.js:5 |
+| `grindless:wound_rhea_former` | component | assembler | C-COMPLEX (UIV own-line intermediate pending (UIV build, v0.14.0)) | uiv/levitation_melter.js:1 |

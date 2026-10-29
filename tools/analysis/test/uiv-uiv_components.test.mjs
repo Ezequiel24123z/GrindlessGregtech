@@ -47,7 +47,7 @@ test('line 8 steps: Kroll cake distils, suction casting reads the glass dust, ga
   assert.deepEqual(outputs(by('electric_blast_furnace', 'zr_sponge_distillation')), ['gtceu:zirconium_dust', 'gtceu:magnesium_chloride_dust']);
   assert.deepEqual(inputs(by('electric_blast_furnace', 'bmg_suction_casting')), ['gtceu:zrticunibe_glass_dust', 'gtceu:copper_plate']);
   assert.deepEqual(outputs(by('electric_blast_furnace', 'bmg_suction_casting')), ['grindless:bmg_blank', 'grindless:bmg_gate']);
-  assert.deepEqual(outputs(by('lathe', 'bmg_flexspline_machining')), ['grindless:bmg_flexspline']);
+  assert.deepEqual(outputs(by('lathe', 'bmg_flexspline_machining')), ['grindless:bmg_flexspline', 'gtceu:zrticunibe_glass_dust']); // QR-R7: swarf returns as glass dust
   assert.deepEqual(inputs(by('assembler', 'strain_wave_gear')), ['grindless:bmg_flexspline', 'gtceu:rhea_plate']);
   const gate = by('levitation_melting', 'bmg_gate_remelt');
   assert.deepEqual(inputs(gate), ['grindless:bmg_gate', 'gtceu:helium']);
@@ -124,7 +124,7 @@ test('"only from" claims: no other table or script produces these', () => {
     for (const [f, txt] of sources) {
       const hits = [...txt.matchAll(new RegExp(`"(?:itemsOut|fluidsOut)"\\s*:\\s*\\[[^\\]]*"${id}"`, 'g'))].length;
       if (files.includes(f)) assert.equal(hits, 1, `${f} produces ${id}`);
-      else if (id !== 'gtceu:zrticunibe_glass_dust' || f !== 'levitation_melter.json') assert.equal(hits, 0, `${f} produces ${id}`);
+      else if (id !== 'gtceu:zrticunibe_glass_dust' || (f !== 'levitation_melter.json' && f !== 'uiv_components.json')) assert.equal(hits, 0, `${f} produces ${id}`);
     }
   }
   const melts = T.types.levitation_melting.recipes.filter((r) => outputs(r).includes('gtceu:zrticunibe_glass_dust')).map((r) => r.name);

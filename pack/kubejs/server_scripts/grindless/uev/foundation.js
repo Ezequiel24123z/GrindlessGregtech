@@ -26,20 +26,21 @@ ServerEvents.recipes(function (event) {
     ['gtceu:uev_machine_casing', '2x gtceu:lay_superhydride_single_cable', '4x grindless:sic_sic_plate', '2x grindless:faraday_isolator', '2x grindless:ule_cavity'],
     'gtceu:uev_machine_hull')
 
-  // 2 A hatches take single cables, the 16 A ones quadruple cables; the domain part keeps the four apart
+  // 2 A hatches take single cables, the 16 A ones quadruple cables; as in GTM, energy (input) hatches take voltage coils and dynamo
+  // (output) hatches springs, so no two of the four share an input list (the assembly line lookup would shadow one)
   line('uev_energy_input_hatch', 'gtceu:uev_machine_hull',
-    ['gtceu:uev_machine_hull', '2x gtceu:lay_superhydride_single_cable', '2x grindless:faraday_isolator', '1x grindless:ule_cavity'],
+    ['gtceu:uev_machine_hull', '2x gtceu:lay_superhydride_single_cable', '2x grindless:faraday_isolator', '1x grindless:ule_cavity', '2x gtceu:uv_voltage_coil'],
     'gtceu:uev_energy_input_hatch')
 
   line('uev_energy_output_hatch', 'gtceu:uev_machine_hull',
-    ['gtceu:uev_machine_hull', '2x gtceu:lay_superhydride_single_cable', '2x grindless:faraday_isolator', '1x grindless:ule_cavity'],
+    ['gtceu:uev_machine_hull', '2x gtceu:lay_superhydride_single_cable', '2x grindless:faraday_isolator', '1x grindless:ule_cavity', '2x gtceu:trinium_spring'],
     'gtceu:uev_energy_output_hatch')
 
   line('uev_energy_input_hatch_16a', 'gtceu:uev_machine_hull',
-    ['gtceu:uev_machine_hull', '2x gtceu:lay_superhydride_quadruple_cable', '4x grindless:faraday_isolator', '2x grindless:ule_cavity'],
+    ['gtceu:uev_machine_hull', '2x gtceu:lay_superhydride_quadruple_cable', '4x grindless:faraday_isolator', '2x grindless:ule_cavity', '4x gtceu:uv_voltage_coil'],
     'gtceu:uev_energy_input_hatch_16a')
 
   line('uev_energy_output_hatch_16a', 'gtceu:uev_machine_hull',
-    ['gtceu:uev_machine_hull', '2x gtceu:lay_superhydride_quadruple_cable', '4x grindless:faraday_isolator', '2x grindless:ule_cavity'],
+    ['gtceu:uev_machine_hull', '2x gtceu:lay_superhydride_quadruple_cable', '4x grindless:faraday_isolator', '2x grindless:ule_cavity', '4x gtceu:trinium_spring'],
     'gtceu:uev_energy_output_hatch_16a')
 })
