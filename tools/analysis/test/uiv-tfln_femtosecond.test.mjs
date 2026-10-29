@@ -57,7 +57,7 @@ test('TFLN fab: ion_slicing circuits 1-4, figures and slots', () => {
   assert.deepEqual(inputs(by('ion_slicing', 'ln_on_sin')), ['grindless:lnoi_wafer', 'grindless:sin_coated_wafer']);
   assert.deepEqual(inputs(by('ion_slicing', 'si28_soi')), ['grindless:h_si28_wafer', 'grindless:oxidised_wafer']);
   assert.deepEqual(outputs(by('ion_slicing', 'si28_soi')), ['grindless:si28_soi_wafer', 'grindless:si28_donor_wafer', 'gtceu:hydrogen']);
-  assert.deepEqual(inputs(by('ion_slicing', 'poled_lnoi')), ['grindless:lnoi_wafer']);
+  assert.deepEqual(inputs(by('ion_slicing', 'poled_lnoi')), ['grindless:lnoi_wafer', 'gtceu:gold_plate', 'gtceu:argon']);
   assert.deepEqual(inputs(by('ion_slicing', 'eo_microcomb')), ['grindless:annealed_damascene_ring', 'grindless:lnoi_wafer']);
 });
 
@@ -95,7 +95,7 @@ test('the lines chain: every intermediate has a producer and a consumer', () => 
   assert.ok(used.has('grindless:written_crystal_blank') && used.has('grindless:verified_crystal'));
   assert.deepEqual(outputs(by('electric_blast_furnace', 'crystal_anneal')), ['grindless:data_crystal_5d']);
   assert.deepEqual(outputs(by('assembler', 'ps_cooling_laser')), ['grindless:ps_cooling_laser']);
-  assert.deepEqual(inputs(by('assembler', 'shg_486_stage')), ['grindless:ppln_waveguide', 'grindless:uev_emitter']);
+  assert.deepEqual(inputs(by('assembler', 'shg_486_stage')), ['grindless:ppln_waveguide', 'grindless:uev_emitter', 'gtceu:rhea_plate', 'gtceu:gold_plate', 'gtceu:argon']);
   assert.equal(by('chemical_reactor', 'sin_trench_fill').circuit, 0);
   assert.ok(by('electric_blast_furnace', 'crystal_anneal').temp > 0);
   assert.ok(by('assembler', 'ps_cooling_laser').eut <= 1966080 && by('assembler', 'shg_486_stage').eut <= 1966080);
