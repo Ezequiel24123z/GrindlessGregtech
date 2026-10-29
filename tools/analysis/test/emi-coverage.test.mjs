@@ -7,7 +7,7 @@ import { test } from 'node:test';
 import vm from 'node:vm';
 import { fileURLToPath } from 'node:url';
 import { DEFAULT_EXPECT, runCoverage } from '../emi-coverage.mjs';
-import { auditEmiCoverage, conditionStacks, DIMENSION_MARKERS, fixtureExpectations, loadEmiData, parseEmiStack, previewBlocks, renderCoverageText, renderExpectations } from '../lib/emi_coverage.mjs';
+import { auditEmiCoverage, conditionStacks, DIMENSION_MARKERS, fixtureExpectations, KNOWN_GAP_KINDS, knownFromReport, knownGaps, loadEmiData, parseEmiStack, previewBlocks, renderCoverageText, renderExpectations } from '../lib/emi_coverage.mjs';
 import { runPackScripts } from '../lib/kubejs_static.mjs';
 import { gf, gi, gt, mkDump, shaped } from './helpers.mjs';
 
@@ -422,7 +422,7 @@ test('the fixture\'s integration hook arms the client half and acknowledges the 
 // one intermediate loses its uses, one route and one page go missing, and an unaudited item appears.
 function simulateFixture(exp, { dropUsesOf = null, dropRoute = null, dropPage = null, extraItem = null,
   warnings = [], missingWorkstation = false, missingPreview = false, missingProcess = false, reportError = false,
-  renderPreview = false, screenshotError = false, loaded = true, holdTimeoutSec, waitSeconds = 0 } = {}) {
+  renderPreview = false, screenshotError = false, loaded = true, holdTimeoutSec, waitSeconds = 0, disabledTag = null, xeiPreview } = {}) {
   const recipes = [];
   const rec = (id, cat, ins, outs) => recipes.push({ id, cat, ins: new Set(ins), outs: new Set(outs) });
   let n = 0;
@@ -459,6 +459,7 @@ function simulateFixture(exp, { dropUsesOf = null, dropRoute = null, dropPage = 
     getTier() { return 1; }
     getRecipeTypes() { return [{ getCategories: () => [nativeCategory] }]; }
   }
+  if (xeiPreview !== undefined) Multiblock.prototype.isRenderXEIPreview = () => xeiPreview;
   const classes = {
     'net.minecraft.resources.ResourceLocation': RL,
     'net.minecraft.core.registries.BuiltInRegistries': {
@@ -493,6 +494,7 @@ function simulateFixture(exp, { dropUsesOf = null, dropRoute = null, dropPage = 
       setScreen: (screen) => { ctx.Client.screen = screen; } },
     Java: { loadClass: (name) => classes[name] },
     Item: { of: (id) => ({ id }) },
+    Ingredient: { of: (tag) => ({ getItemIds: () => (disabledTag && tag === '#' + disabledTag.tag ? disabledTag.ids : []) }) },
     JsonIO: {
       readJson: (p) => (p === 'kubejs/config/gg_test_emi_coverage.json' ? { enabled: true, renderPreview, holdTimeoutSec } : p === 'kubejs/config/gg_test_emi_coverage_expect.json' ? exp : null),
       toPrettyString: (x) => JSON.stringify(x),
@@ -516,7 +518,7 @@ test('the fixture\'s checks, against a stand-in EMI: all PASS when every expecte
   assert.deepEqual(sim.status, {
     client_hold: 'NOTE', emi_loaded: 'PASS', expectations: 'NOTE', registry: 'PASS', acquisition: 'PASS', use: 'PASS', routes: 'PASS',
     plugins: 'PASS', workstations: 'PASS', processes: 'PASS', previews: 'PASS',
-    preview_routes: 'NOTE', pages: 'PASS', machine_info: 'PASS', legacy: 'PASS', all: 'PASS',
+    preview_routes: 'NOTE', pages: 'PASS', machine_info: 'PASS', known: 'NOTE', legacy: 'PASS', all: 'PASS',
   }, sim.logs.join('\n'));
   assert.equal(sim.logs.at(-1), 'GGTEST|emi_coverage|DONE');
   assert.equal(sim.player.age, 20, 'standalone, it keeps mc-runtime-test in the world');
@@ -560,6 +562,48 @@ test('the runtime gate fails plugin exceptions, missing workstations, process di
     assert.equal(sim.status.all, 'FAIL', sim.logs.join('\n'));
     assert.equal(sim.logs.at(-1), 'GGTEST|emi_coverage|DONE');
   }
+});
+
+test('the runtime gate exempts machines EMI disables and previews a definition turns off, and ratchets known gaps', () => {
+  const exp = JSON.parse(fs.readFileSync(DEFAULT_EXPECT, 'utf8'));
+  const empty = Object.fromEntries(Object.keys(exp.known).map((k) => [k, []]));
+  let sim = simulateFixture({ ...exp, known: empty, disabledTags: ['grindless:hidden_with_recipes'] },
+    { missingWorkstation: true, missingPreview: true, disabledTag: { tag: 'grindless:hidden_with_recipes', ids: ['gtceu:test_multiblock'] } });
+  assert.equal(sim.status.workstations, 'PASS', sim.logs.join('\n'));
+  assert.equal(sim.status.previews, 'PASS', sim.logs.join('\n'));
+  assert.equal(sim.report.machines[0].hidden, true);
+
+  sim = simulateFixture({ ...exp, known: empty }, { missingPreview: true, xeiPreview: false });
+  assert.equal(sim.status.previews, 'PASS', sim.logs.join('\n'));
+  assert.deepEqual(Array.from(sim.report.previewsOff), ['gtceu:test_multiblock']);
+  assert.equal(sim.report.machines[0].xeiPreview, false);
+
+  sim = simulateFixture({ ...exp, known: { ...empty, previews: ['gtceu:test_multiblock'], workstations: ['gtceu:test_multiblock'] } },
+    { missingWorkstation: true, missingPreview: true });
+  assert.equal(sim.status.previews, 'PASS', sim.logs.join('\n'));
+  assert.equal(sim.status.workstations, 'PASS', sim.logs.join('\n'));
+  assert.equal(sim.status.known, 'NOTE');
+  assert.equal(sim.status.all, 'PASS');
+  assert.equal(sim.report.knownOpen.length, 2);
+
+  sim = simulateFixture({ ...exp, known: { ...empty, previews: ['gtceu:test_multiblock'] } });
+  assert.equal(sim.status.all, 'PASS', sim.logs.join('\n'));
+  assert.deepEqual(Array.from(sim.report.knownFixed), ['previews gtceu:test_multiblock']);
+  assert.ok(sim.logs.some((l) => /\|known\|NOTE\|.*1 fixed/.test(l)), sim.logs.join('\n'));
+});
+
+test('--known-from keeps only open gaps: a page the pack now has and a machine EMI now disables leave the list', () => {
+  const res = { results: [{ key: 'grindless:has_page', made: [], used: [{ source: 'page', category: 'emi:info' }] }], disabledItems: ['gtca:off'] };
+  const known = knownFromReport({
+    workstationMissing: ['gtca:off: gtceu:x', 'gtca:on: gtceu:y, gtceu:z'], previewsMissing: ['gtca:off', 'gtceu:p'],
+    noUse: ['grindless:b', 'grindless:a'], routeMissing: ['grindless:r made in gtceu:assembly_line'],
+    machineInfoMissing: ['grindless:has_page', 'grindless:no_page', 'gtca:off'],
+  }, res);
+  assert.deepEqual(known, {
+    workstations: ['gtca:on'], previews: ['gtceu:p'], noUse: ['grindless:a', 'grindless:b'],
+    routes: ['grindless:r made in gtceu:assembly_line'], machineInfo: ['grindless:no_page'],
+  });
+  assert.deepEqual(Object.keys(knownGaps(null)), KNOWN_GAP_KINDS);
 });
 
 test('a registered pack machine requires its own what-it-does info route, not just a preview', () => {

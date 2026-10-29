@@ -183,11 +183,16 @@ caps remain 4G. Neither the shipped EMI search configuration nor its features ar
 
 Authority: run `20261029-021359-client-a24`, report `gg-emi-coverage-report-2`.
 
-**Global blocker first:** the GTM plugin aborts before processing/workstation registration. Its 803
-acquisition gaps, 610 use gaps, 688 missing workstation bindings, 289 empty processing categories,
-325 missing preview displays and 2,530 missing expected routes are recorded completely in the JSON,
-but are **not independent per-item content defects**. Repair the new frame-material failure and rerun
-at integration before assigning recipe/preview packages from these poisoned lists.
+**Global blocker: resolved.** The B0 frame-material abort was fixed (`37621ded`), and run
+`20261029-025512-client` (8G) loaded the GTM plugin and rendered the MEGA preview. Its remaining gaps were
+13 workstations and 38 previews of addon machines hidden through `grindless:hidden_with_recipes` (now exempt),
+9 visible multiblocks with no preview display, 3 noUse items, 1 route (the actinide plant, a lookup collision
+fixed in `zpm/actinides.js`) and the 321 info pages below. All except the exempt ones are recorded in
+`tools/analysis/emi_runtime_known.json`, the known-gap ratchet (see `docs/testing/usage.md`).
+The 9 no-preview multiblocks (`extendedfeatures:expanded_assembly_line`, `extendedfeatures:matrix_data_relay`,
+`gtceu:assembly_line`, `gtceu:cleanroom`, `gtceu:data_bank`, `gtceu:central_monitor`, `gcyr:space_elevator`,
+`gcyr:dyson_system_controller`, `gtca:tegmark_forge`) need the audit's `xeiPreview` flag from the next run:
+if it is false, the mod turned the preview off on purpose and the gap moves to `previewsOff`.
 
 **Independent content backlog:** all 75 expected pages load (76 pack pages are visible), so the 321
 pack machines below genuinely lack a what-it-does info route, independently of the GTM plugin abort.
