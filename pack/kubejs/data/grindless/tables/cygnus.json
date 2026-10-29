@@ -1,0 +1,59 @@
+{
+  "_why": "UIV-B4 (docs/eras/uiv.md, machines 21 and 22, line 35): the ergosphere probe bay and the Penrose engine at Cygnus X-1, and the sled hull's assembler row. Penrose 1969: a split charge dropped into the ergosphere returns more energy than it carried; the best case is about 20.7% (Chandrasekhar). Cygnus X-1: spin a* > 0.9985 (Zhao 2021), mass 21.2 solar masses (Miller-Jones 2021).",
+  "types": {
+    "ergosphere_probing": {
+      "dataKey": "grindless_ergosphere_probing",
+      "recipes": [
+        {
+          "name": "kerr_probe", "circuit": 1, "eut": 31457280, "duration": 1600, "site": true,
+          "_why": "UIV-B4 line 35: the probe is dropped through the ergosphere and writes the Kerr metric on a 5D data crystal (kept); the probe burns up.",
+          "itemsIn": [ { "id": "grindless:ergosphere_probe", "count": 1 } ],
+          "kept": [ { "id": "grindless:data_crystal_5d", "count": 1 } ],
+          "itemsOut": [ { "id": "grindless:kerr_probe_data", "count": 1 } ]
+        },
+        {
+          "name": "split_sled", "circuit": 2, "eut": 31457280, "duration": 1200, "site": true,
+          "_why": "UIV-B4 line 35: a sled hull is loaded with a charge and a compacted waste canister as ballast; the Penrose engine splits the charge in flight.",
+          "itemsIn": [
+            { "id": "grindless:compacted_waste_canister", "count": 1 },
+            { "id": "grindless:sled_charge", "count": 1 },
+            { "id": "grindless:sled_hull", "count": 1 }
+          ],
+          "itemsOut": [ { "id": "grindless:split_charge_sled", "count": 1 } ]
+        },
+        {
+          "name": "refit_sled", "circuit": 3, "eut": 31457280, "duration": 800, "site": true,
+          "_why": "UIV-B4 line 35, the refit loop: the half-sled the engine recovers is reloaded with a fresh canister and charge. The hull is reused; only the charge and the ballast are new.",
+          "itemsIn": [
+            { "id": "grindless:recovered_half_sled", "count": 1 },
+            { "id": "grindless:compacted_waste_canister", "count": 1 },
+            { "id": "grindless:sled_charge", "count": 1 }
+          ],
+          "itemsOut": [ { "id": "grindless:split_charge_sled", "count": 1 } ]
+        },
+        {
+          "name": "sled_hull", "circuit": 4, "eut": 7864320, "duration": 400, "site": true,
+          "_why": "UIV-B4 line 35: the sled hull, plated on the bay's rail (a far-machine row: a plain assembler row would fall under the C-COMPLEX floor). The plates are carried out; nothing here is gathered.",
+          "itemsIn": [
+            { "id": "gtceu:rhea_plate", "count": 4 },
+            { "id": "gtceu:tungsten_steel_plate", "count": 2 }
+          ],
+          "itemsOut": [ { "id": "grindless:sled_hull", "count": 1 } ]
+        }
+      ]
+    },
+    "penrose_extraction": {
+      "dataKey": "grindless_penrose_extraction",
+      "generator": true,
+      "recipes": [
+        {
+          "name": "penrose_drop", "circuit": 1, "eut": 268435456, "duration": 2400, "site": true,
+          "_why": "UIV-B4 line 35: the sled drops into the ergosphere, the charge splits, one half falls into the hole and the other returns with more energy than it left with: 8 A at UIV (268,435,456 EU/t) for 2,400 ticks. The Kerr chart (kept) times the drop.",
+          "itemsIn": [ { "id": "grindless:split_charge_sled", "count": 1 } ],
+          "kept": [ { "id": "grindless:kerr_chart", "count": 1 } ],
+          "itemsOut": [ { "id": "grindless:recovered_half_sled", "count": 1 } ]
+        }
+      ]
+    }
+  }
+}

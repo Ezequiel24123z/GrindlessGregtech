@@ -1,4 +1,4 @@
-// priority: -24549
+// priority: -24520
 // UIV foundation recipes (package UIV-F1, raised by QR-R7): only the hull and the four hatches every UIV machine needs, all assembly lines behind
 // station research. gtceu:uiv_machine_casing is GTM's own
 // block; its assembly-line recipe is UEV's gate (uev/gate.js, researched with the pulsar navigation chart), so it is not made twice here.
