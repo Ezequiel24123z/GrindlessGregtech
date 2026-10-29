@@ -5,6 +5,7 @@
   "defaults": { "z": [0, 63], "y": [98, 112] },
   "zones": [
     { "id": "steam", "x": [0, 31], "tests": ["steam"] },
+    { "id": "horizon_collector", "x": [36000, 36031], "tests": ["horizon_collector"] },
     { "id": "creatures", "x": [64, 95], "tests": ["lv_creatures"] },
     { "id": "ae2", "x": [64, 79], "z": [64, 79], "tests": ["ae2"] },
     { "id": "lv_multis", "x": [256, 319], "tests": ["lv_multis"] },
