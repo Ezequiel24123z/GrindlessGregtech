@@ -151,8 +151,9 @@ test('chamber recipes: capsule + circuit, 2 % module wear in and out, helium (an
 
 test('chamber crafting recipe and decaborane row are added; unknown ids skip with an error instead of a half recipe', () => {
   const { added } = serverHarness([]);
-  const craft = added.find(r => r.id === 'grindless:crafting/laser_fusion_chamber');
-  assert.ok(craft && craft.shaped.out === 'gtceu:laser_fusion_chamber');
+  const craft = added.find(r => r.id === 'grindless:laser_fusion_chamber' && r.type === 'assembly_line');
+  assert.ok(craft && craft.calls.itemOutputs[0][0] === 'gtceu:laser_fusion_chamber');
+  assert.ok(craft.calls.stationResearch);
   const d = added.find(r => r.id === 'grindless:decaborane');
   assert.ok(d);
   assert.deepEqual(d.calls.inputFluids.map(x => [x[0].id, x[0].amount]), [['gtceu:boron_11_trifluoride', 3000], ['gtceu:hydrogen', 6000]]);

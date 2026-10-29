@@ -88,7 +88,7 @@ test('the penetrator: printed frame, GPHS module, HPGe crystal and melt head in 
   const s = JSON.stringify(r.j.inputs);
   for (const id of ['grindless:printed_probe_frame', 'grindless:gphs_module', 'grindless:hpge_crystal', 'grindless:melt_head']) assert.ok(s.includes(id), id);
   assert.match(JSON.stringify(r.j.outputs), /grindless:penetrator_probe/);
-  for (const m of Object.keys(MACHINES)) assert.ok(byId('grindless:crafting/' + m), m + ' crafting recipe');
+  for (const m of Object.keys(MACHINES)) assert.ok(byId('grindless:assembly_line/' + m), m + ' assembly line recipe');
 });
 
 test('acceptance: the Sputnik and Charon cores only from the penetrator bay; the Plutonian seed reads the Sputnik core', () => {

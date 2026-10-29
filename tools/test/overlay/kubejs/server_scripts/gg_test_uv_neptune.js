@@ -201,7 +201,7 @@
     live('grindless:ice_giant_siphon/uranus_ices', URANUS, 2, ZPM_VA)
     live('grindless:ice_giant_siphon/diamond_rain', URANUS, 3, ZPM_VA)
     live('grindless:ice_giant_siphon/atmosphere_sample', URANUS, 4, ZPM_VA)
-    ;['grindless:crafting/neptune_deep_siphon', 'grindless:crafting/triton_geyser_sampler'].forEach(function (id) {
+    ;['grindless:assembly_line/neptune_deep_siphon', 'grindless:assembly_line/triton_geyser_sampler'].forEach(function (id) {
       check('support_recipe', byId(id) !== null, id)
     })
   }

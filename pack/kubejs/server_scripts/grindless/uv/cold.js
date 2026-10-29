@@ -18,10 +18,11 @@
 //     scrap               macerator: 1 niobium scrap -> 1 niobium dust (GTM's own dust -> ingot recipe takes it back to step 1)
 //     spent acid          electrolyser: 1,000 mB spent acid -> 1 niobium dust + 500 mB hydrofluoric acid + 500 mB sulfuric acid
 //                         (the dissolved niobium plates out and the two acids go back to the mixer)
-//     mu-metal shield     assembler: 6 nickel plates + 2 iron plates + 1 copper foil -> 1 mu-metal shield
-//     block               crafting: 1 SRF cryomodule <-> 1 SRF cryomodule block (the linacs' structure block; the helium returns on
-//                         deconstruction only, so the block-to-module recipe is the deconstruction)
-//   controllers (crafting grid): UV hull + 4 UV pumps + 4 UV circuits (plant); UV hull + 2 UV robot arms + UV pump + 4 UV circuits (works)
+//     mu-metal shield     assembler: 6 nickel plates + 2 iron plates + 1 copper foil + 1 silicon nitride film + 1 molybdenum plate
+//                         + 500 mB hydrogen + 72 mB soldering alloy -> 1 mu-metal shield
+//     block               assembler: 1 SRF cryomodule + 4 tritanium plates + 1 mu-metal shield + 144 mB soldering alloy + 1,000 mB liquid
+//                         helium -> 1 SRF cryomodule block (the linacs' structure block; there is no way back)
+//   controllers (assembly line, station research, UV hull + pumps + UV circuits + 3 line items + soldering alloy, lubricant, tritanium)
 //
 // Lookup: every works recipe has its own circuit and the plant's recipes differ in their one fluid, so no recipe's keys contain another's
 // (checked at load). Published in global.grindless.cold: .recipes [{ name, type, recipeId, circuit, itemsIn, fluidsIn, itemsOut, fluidsOut,
@@ -92,8 +93,14 @@
     { name: 'spent_acid_niobium', type: 'electrolyzer', circuit: null, itemsIn: [], fluidsIn: [fluid(SPENT, 1000)],
       itemsOut: [item('gtceu:niobium_dust', 1)], fluidsOut: [fluid('gtceu:hydrofluoric_acid', 500), fluid('gtceu:sulfuric_acid', 500)], eut: 480, duration: 300 },
     { name: 'mu_metal_shield', type: 'assembler', circuit: null,
-      itemsIn: [item('gtceu:nickel_plate', 6), item('gtceu:iron_plate', 2), item('gtceu:copper_foil', 1)], fluidsIn: [],
-      itemsOut: [item(SHIELD, 1)], fluidsOut: [], eut: 480, duration: 200 }
+      itemsIn: [item('gtceu:nickel_plate', 6), item('gtceu:iron_plate', 2), item('gtceu:copper_foil', 1), item('grindless:silicon_nitride_film', 1),
+        item('gtceu:molybdenum_plate', 1)], fluidsIn: [fluid('gtceu:hydrogen', 500), fluid('gtceu:soldering_alloy', 72)],
+      itemsOut: [item(SHIELD, 1)], fluidsOut: [], eut: 480, duration: 200 },
+    // the linacs' structure block: a finished cryomodule in a welded tritanium housing, sealed under a liquid helium fill
+    { name: 'srf_cryomodule_block', type: 'assembler', circuit: null,
+      itemsIn: [item(CRYOMODULE, 1), item('gtceu:tritanium_plate', 4), item(SHIELD, 1)],
+      fluidsIn: [fluid('gtceu:soldering_alloy', 144), fluid(LIQUID_HELIUM, 1000)],
+      itemsOut: [item(CRYOMODULE_BLOCK, 1)], fluidsOut: [], eut: VA, duration: 300 }
   ]
 
   C.recipes = TABLE.map(function (t) {
@@ -111,10 +118,8 @@
   C.skipped = []
   C.clashes = []
   C.crafting = {
-    plant: 'grindless:crafting/superfluid_helium_plant',
-    works: 'grindless:crafting/srf_cavity_works',
-    moduleToBlock: 'grindless:crafting/srf_cryomodule_block',
-    blockToModule: 'grindless:crafting/srf_cryomodule_from_block'
+    plant: 'grindless:assembly_line/superfluid_helium_plant',
+    works: 'grindless:assembly_line/srf_cavity_works'
   }
   C.craftingParts = ['gtceu:uv_machine_hull', 'gtceu:uv_electric_pump', 'gtceu:uv_robot_arm']
 
@@ -183,16 +188,23 @@
       console.error(LOG + 'cold controller crafting skipped, unknown item(s): ' + missing.join(', '))
       return
     }
-    event.recipes.gtceu.shaped('gtceu:superfluid_helium_plant', ['CPC', 'PHP', 'CPC'], {
-      C: '#gtceu:circuits/uv', P: 'gtceu:uv_electric_pump', H: 'gtceu:uv_machine_hull'
-    }).id(C.crafting.plant)
-    event.recipes.gtceu.shaped('gtceu:srf_cavity_works', ['CRC', 'PHR', 'C C'], {
-      C: '#gtceu:circuits/uv', R: 'gtceu:uv_robot_arm', P: 'gtceu:uv_electric_pump', H: 'gtceu:uv_machine_hull'
-    }).id(C.crafting.works)
-    if (Item.exists(CRYOMODULE) && Item.exists(CRYOMODULE_BLOCK)) {
-      event.shapeless(CRYOMODULE_BLOCK, [CRYOMODULE]).id(C.crafting.moduleToBlock)
-      event.shapeless(CRYOMODULE, [CRYOMODULE_BLOCK]).id(C.crafting.blockToModule)
-    }
+    var lines = [
+      { name: 'superfluid_helium_plant', machine: 'gtceu:superfluid_helium_plant', pump: 4, arm: 0, research: 'grindless:mu_metal_shield',
+        domain: ['2x grindless:mu_metal_shield', '4x grindless:rrr_niobium_sheet', '2x grindless:solid_neon_cone'] },
+      { name: 'srf_cavity_works', machine: 'gtceu:srf_cavity_works', pump: 1, arm: 2, research: 'grindless:silicon_nitride_film',
+        domain: ['4x grindless:mu_metal_shield', '2x grindless:silicon_nitride_film', '2x grindless:tungsten_target'] }
+    ]
+    lines.forEach(function (d) {
+      var b = event.recipes.gtceu.assembly_line('grindless:' + d.name)
+      b.itemInputs('gtceu:uv_machine_hull', d.pump + 'x gtceu:uv_electric_pump')
+      if (d.arm > 0) b.itemInputs(d.arm + 'x gtceu:uv_robot_arm')
+      b.itemInputs('4x #gtceu:circuits/uv')
+      d.domain.forEach(function (s) { b.itemInputs(s) })
+      b.inputFluids(Fluid.of('gtceu:soldering_alloy', 1152), Fluid.of('gtceu:lubricant', 1000), Fluid.of('gtceu:tritanium', 576))
+      b.itemOutputs(d.machine)
+      b.stationResearch(function (r) { return r.researchStack(Item.of(d.research)).CWUt(64).EUt(491520) })
+      b.EUt(491520).duration(1200)
+    })
   }
 
   ServerEvents.recipes(function (event) {

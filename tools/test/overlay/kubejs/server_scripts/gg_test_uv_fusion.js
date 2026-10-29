@@ -120,7 +120,7 @@ ServerEvents.recipes(function (event) {
       var r = byId('grindless:diamond_cvd/' + n)
       check('a3_static_' + n, r !== null, r === null ? 'absent' : eut(r, 'in') + ' EU/t x ' + Number(r.duration) + ' t')
     })
-    check('a3_static_crafting', byId('grindless:crafting/laser_fusion_chamber') !== null, 'grindless:crafting/laser_fusion_chamber')
+    check('a3_static_crafting', byId('grindless:assembly_line/laser_fusion_chamber') !== null, 'grindless:assembly_line/laser_fusion_chamber')
     check('a3_static_machine', !!classes().Machines.MACHINES.get(new (classes().RL)('gtceu:laser_fusion_chamber')), 'gtceu:laser_fusion_chamber registered')
     var mine = byId(CUSTOM)
     check('a3_static_640m', mine !== null && startOf(mine) === 640000000, mine === null ? 'absent' : 'start ' + startOf(mine) + ', ' + eut(mine, 'in') + ' EU/t')
