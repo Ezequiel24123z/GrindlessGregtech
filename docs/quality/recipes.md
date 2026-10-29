@@ -74,7 +74,7 @@ and drill bits, which are exempt. It keeps the door shut for new ones.
 | Controller | Was | Now |
 |---|---|---|
 | `cryogenic_plant` (EV) | shaped, hull + freezer + 2 pumps + circuits | `grindless:assembler/cryogenic_plant`: + 4 night-sky radiators, 8 sintered regolith, 2 B ammonia |
-| `waste_retrieval_plant`, `actinide_partitioning_plant` (ZPM) | shaped, hull + pumps + arm + circuits | `grindless:assembly_line/<machine>`: scanner research (ZPM robot arm), carbon nanotube yarn, CVD diamond plate, silica aerogel, soldering alloy, lubricant |
+| `waste_retrieval_plant`, `actinide_partitioning_plant` (ZPM) | shaped, hull + pumps + arm + circuits | `grindless:assembly_line/<machine>`: scanner research (IV hot cell for the retrieval plant, the retrieval plant for the partitioning plant; never a GTM component, whose id GTM already researches), carbon nanotube yarn, CVD diamond plate, silica aerogel, soldering alloy, lubricant |
 | `electron_beam_furnace`, `single_crystal_foundry` (UEV) | shaped, hull + UV tool + circuits | `grindless:assembly_line/<machine>`: station research (UV emitter / robot arm), SRF cryomodule and cavities, neutronium gear, soldering alloy, neutronium |
 
 No multiblock shape changed; only the recipe ids changed (`grindless:crafting/<machine>` -> `grindless:assembler/` or `grindless:assembly_line/<machine>`), and

@@ -84,3 +84,21 @@ test('the pack has no recipe-quality violation outside the baseline, and the pil
   const pilots = ['cryogenic_plant', 'waste_retrieval_plant', 'actinide_partitioning_plant', 'electron_beam_furnace', 'single_crystal_foundry'];
   for (const p of pilots) assert.ok(!all.some((f) => f.output === `gtceu:${p}`), p + ' meets the ladder');
 });
+
+test('no script calls scannerResearch with a callback: Rhino hands the function to the ItemStack overload as an empty stack', () => {
+  const root = path.join(here, '..', '..', '..', 'pack', 'kubejs');
+  const hits = [];
+  const walk = (d) => {
+    for (const e of fs.readdirSync(d, { withFileTypes: true })) {
+      const p = path.join(d, e.name);
+      if (e.isDirectory()) walk(p);
+      else if (e.name.endsWith('.js')) {
+        fs.readFileSync(p, 'utf8').split('\n').forEach((l, i) => {
+          if (/scannerResearch\s*\(\s*(function\b|\(?\s*[a-zA-Z_$]*\s*\)?\s*=>)/.test(l)) hits.push(`${path.relative(root, p)}:${i + 1}`);
+        });
+      }
+    }
+  };
+  walk(root);
+  assert.deepEqual(hits, [], 'use scannerResearch(Item.of(<stack>)); GTM 7.5.3 overloads it with (UnaryOperator) and (ItemStack)');
+});

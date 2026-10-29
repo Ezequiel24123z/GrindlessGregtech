@@ -72,7 +72,7 @@ var GG_QUESTS_EXPECTED = {
   hv_age: [33, 41],
   ev_age: [56, 64],
   iv_age: [54, 75],
-  luv_age: [47, 50],
+  luv_age: [48, 51],
   zpm_age: [45, 45],
   uv_age: [50, 53],
   uhv_age: [58, 60],
@@ -98,10 +98,10 @@ GG_QUESTS_EXPECTED.multiblocks = [314, 0]
 // The LuV chapters follow tables/stations.json (tools/quests/luv-stations.mjs adds S03, B7T or B7S; lib/stations.js gives the same
 // mode in game). After flipping the table and regenerating them (docs/quests.md), these are the counts of each mode.
 var GG_QUESTS_LUV_MODES = {
-  pending: { luv_age: [35, 38], pl_luv: [175, 176], power: [100, 111] },
-  tether: { luv_age: [47, 50], pl_luv: [178, 178], power: [103, 114] },
-  sulfur_iodine_stations_off: { luv_age: [36, 39], pl_luv: [181, 181], power: [103, 113] },
-  sulfur_iodine_stations_on: { luv_age: [47, 50], pl_luv: [181, 181], power: [103, 114] }
+  pending: { luv_age: [36, 39], pl_luv: [175, 176], power: [100, 111] },
+  tether: { luv_age: [48, 51], pl_luv: [178, 178], power: [103, 114] },
+  sulfur_iodine_stations_off: { luv_age: [37, 40], pl_luv: [181, 181], power: [103, 113] },
+  sulfur_iodine_stations_on: { luv_age: [48, 51], pl_luv: [181, 181], power: [103, 114] }
 }
 ;(function () {
   var st = global.grindless && global.grindless.stations

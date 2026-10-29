@@ -20,7 +20,7 @@ applyTo: "pack/kubejs/**,tools/test/overlay/kubejs/**,tools/analysis/lib/kubejs_
 
 ## Rhino and KubeJS 2001.6.5
 - Script load order: never write or edit `// priority:` by hand (line 1 of every script is a generated header). To make a script load earlier or later, set a band in `tools/analysis/script_order.json`; the integrator stamps the headers (`Update-PackIndex.ps1`). A `// requires:`/`// ignored:`/`// priority` comment anywhere else is a KubeJS property: avoid it. `script-order.mjs --check` is part of T0.
-- Inside functions or callbacks that run more than once, use `var`, not `const`/`let` ("redeclaration of var").
+- Inside functions, callbacks or loop bodies that run more than once, use `var`, not `const`/`let` ("redeclaration of var"; in a loop Rhino keeps the first iteration's `const`, which turned 13 pattern builders into solid cuboids).
 - Renamed members (the Mojang name does not exist): `getYRot`/`getXRot` -> `getYaw`/`getPitch`, `getStringUUID` -> `getStringUuid`, `tickCount` -> `age`, `Level#getGameTime` -> `getTime`, `ItemStack#getTag` -> `getNbt`; `Entity#level()` is hidden (use `getLevel()`). Full list in `tools/test/README.md`. Anything that uses a player is tested in the `client` suite.
 - An empty `ItemStack` (`ItemStack.EMPTY` included) compares `=== null`. Test stacks with `isEmpty()`, never against null.
 - `Math.PI` is undefined (code using it silently becomes NaN); `Math.cos`, `Math.floor`, `Math.round` work. Use a literal or precomputed bounds.
@@ -29,6 +29,7 @@ applyTo: "pack/kubejs/**,tools/test/overlay/kubejs/**,tools/analysis/lib/kubejs_
 - `charCodeAt` returns a Java `Character`; arithmetic on it gives NaN. Use `charAt` with `indexOf` over a known table.
 - NightConfig: concatenated paths are `ConsString`s that match `get(String)` and `get(List)`. Call `config['get(java.lang.String)'](path)` / `config['getOptional(java.lang.String)'](path)`, fixtures included.
 - Overloads Rhino can't pick: `RecipeDB#find(holder, predicate)` with a JS function is "ambiguous". Call `db['find(com.gregtechceu.gtceu.api.capability.recipe.IRecipeCapabilityHolder,java.util.function.Predicate)'](ctrl, fn)`.
+- `scannerResearch` is overloaded `(UnaryOperator)`/`(ItemStack)`: a JS callback becomes an empty stack ("Research recipe must have an item or fluid stack") and aborts every later recipe in the same try. Pass `scannerResearch(Item.of(stack))` (T0 forbids the callback; `stationResearch(fn)` is fine). Research a stack only we research: a GTM component's id (`1x_gtceu_zpm_robot_arm`) is GTM's own research for the next tier, and our scanner recipe would unlock it.
 
 ## GTM 7.5.3 traps (each one cost a bench run)
 - Recipe ids: the GT builder prefixes the recipe type: `event.recipes.gtceu.assembler('grindless:x')` is saved as `grindless:assembler/x`.
