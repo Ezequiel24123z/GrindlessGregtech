@@ -1,5 +1,5 @@
 // STEAM-X1 (docs/eras/steam.md, "The Horizon Collector (the start)"): the Horizon Collector, its recipe type, the Horizon Shard and the
-// nine recipes of data/grindless/tables/horizon_collector.json as the stand-in sees them, without Minecraft. The machine and the shard
+// ten recipes of data/grindless/tables/horizon_collector.json as the stand-in sees them, without Minecraft. The machine and the shard
 // come only from the Welcome quest: no recipe may make them.
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
@@ -19,15 +19,16 @@ const TYPE = 'gtceu:horizon_collection';
 const SHARD = 'grindless:horizon_shard';
 // the design table (steam.md): circuit -> output, count
 const EXPECTED = [
-  [1, 'minecraft:oak_log', 16],
-  [2, 'minecraft:cobblestone', 48],
-  [3, 'minecraft:sand', 32],
-  [4, 'minecraft:gravel', 32],
-  [5, 'minecraft:clay_ball', 32],
-  [6, 'minecraft:coal', 12],
-  [7, 'minecraft:raw_copper', 8],
-  [8, 'gtceu:raw_tin', 8],
-  [9, 'minecraft:raw_iron', 8],
+  [1, 'minecraft:oak_log', 128],
+  [2, 'minecraft:cobblestone', 256],
+  [3, 'minecraft:sand', 192],
+  [4, 'minecraft:gravel', 192],
+  [5, 'minecraft:clay_ball', 128],
+  [6, 'minecraft:coal', 64],
+  [7, 'minecraft:raw_copper', 64],
+  [8, 'gtceu:raw_tin', 64],
+  [9, 'minecraft:raw_iron', 64],
+  [10, 'minecraft:flint', 64],
 ];
 
 const run = runPackScripts(pack);
@@ -47,9 +48,9 @@ test('the machine (LV only), its recipe type and the shard are registered, witho
   assert.match(src, /\.recipeType\('horizon_collection'\)/);
 });
 
-test('the nine rows: circuit, output and count, 16 EU/t, 1200 ticks, the shard never consumed, no fluids', () => {
+test('the ten rows: circuit, output and count (stacks of 64 over at most 4 slots), 16 EU/t, 160 ticks, the shard never consumed, no fluids', () => {
   assert.equal(table.eut, 16);
-  assert.equal(table.duration, 1200);
+  assert.equal(table.duration, 160);
   assert.equal(table.catalyst, SHARD);
   assert.deepEqual(table.rows.map((r) => [r.circuit, r.output, r.count]), EXPECTED);
   assert.equal(ours.length, EXPECTED.length);
@@ -65,22 +66,29 @@ test('the nine rows: circuit, output and count, 16 EU/t, 1200 ticks, the shard n
     assert.equal(shard.content.count, 1);
     const circ = ins.find((x) => x.content.type === 'gtceu:circuit');
     assert.equal(circ && circ.content.configuration, circuit, `${name}: circuit`);
-    assert.equal(r.j.outputs.item.length, 1);
-    assert.equal(r.j.outputs.item[0].content.ingredient.item, output);
-    assert.equal(r.j.outputs.item[0].content.count, count);
-    assert.equal(r.j.outputs.item[0].chance, 10000);
+    const outs = r.j.outputs.item;
+    assert.equal(outs.length, Math.ceil(count / 64), name);
+    assert.ok(outs.length <= 4, `${name}: at most 4 output slots`);
+    assert.equal(outs.reduce((n, o) => n + o.content.count, 0), count, name);
+    for (const o of outs) {
+      assert.equal(o.content.ingredient.item, output);
+      assert.ok(o.content.count <= 64);
+      assert.equal(o.chance, 10000);
+    }
     assert.deepEqual(r.j.inputs.fluid, []);
     assert.deepEqual(r.j.outputs.fluid, []);
     assert.deepEqual(r.j.tickInputs.eu.map((e) => e.content), [16]);
     assert.ok(r.j.tickInputs.eu[0].content <= 32, 'LV');
   }
-  assert.equal(new Set(ours.map((r) => r.j.inputs.item.find((x) => x.content.type === 'gtceu:circuit').content.configuration)).size, 9);
+  assert.equal(new Set(ours.map((r) => r.j.inputs.item.find((x) => x.content.type === 'gtceu:circuit').content.configuration)).size, EXPECTED.length);
 });
 
-test('the duration of every row is 1200 ticks', () => {
+test('the duration of every row is 160 ticks and the recipe type has 4 output slots', () => {
   const src = fs.readFileSync(path.join(kubejs, 'server_scripts', 'grindless', 'steam', 'horizon_collector.js'), 'utf8');
   assert.match(src, /\.duration\(t\.duration\)/);
   assert.match(src, /\.EUt\(t\.eut\)/);
+  const start = fs.readFileSync(path.join(kubejs, 'startup_scripts', 'grindless', 'steam', 'horizon_collector.js'), 'utf8');
+  assert.match(start, /\.setMaxIOSize\(2, 4, 0, 0\)/);
 });
 
 test('no recipe outputs the machine or the shard', () => {

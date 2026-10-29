@@ -9,7 +9,7 @@
     event.add('grindless', 'grindless.machine.horizon_collector.tooltip.0',
       'Nobody built it, and nobody can make another. It was in your pack when you arrived.')
     event.add('grindless', 'grindless.machine.horizon_collector.tooltip.1',
-      'Horizon Shard (never used up) + a programmed circuit: the circuit picks what comes through.')
+      'Horizon Shard (never used up) + a programmed circuit: the circuit picks what comes through, several stacks every 8 seconds.')
     event.add('grindless', 'grindless.machine.horizon_collector.tooltip.2',
       'A solar panel cover on its top face runs it by day. At night it waits.')
 
@@ -25,7 +25,7 @@
     event.add('grindless', 'grindless.machine.horizon_collector.tooltip.0',
       'Nadie la construyó y nadie puede hacer otra. Estaba en tu mochila cuando llegaste.')
     event.add('grindless', 'grindless.machine.horizon_collector.tooltip.1',
-      'Fragmento del horizonte (no se gasta) + un circuito programado: el circuito elige qué pasa al otro lado.')
+      'Fragmento del horizonte (no se gasta) + un circuito programado: el circuito elige qué pasa al otro lado, varias pilas cada 8 segundos.')
     event.add('grindless', 'grindless.machine.horizon_collector.tooltip.2',
       'Una cubierta de panel solar en su cara superior la alimenta de día. De noche espera.')
 
