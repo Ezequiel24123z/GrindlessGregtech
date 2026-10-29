@@ -684,7 +684,8 @@
       console.error(LOG + 'Platinum Plant recipe skipped, unknown item(s): ' + missingPlant.join(', '))
     } else {
       event.recipes.gtceu.assembler('grindless:platinum_plant')
-        .itemInputs(HULL, REACTOR, CENTRIFUGE, ELECTROLYZER, SIFTER, MIXER, '2x ' + PUMP, '4x #gtceu:circuits/ev')
+        .itemInputs(HULL, REACTOR, CENTRIFUGE, ELECTROLYZER, SIFTER, MIXER, '2x ' + PUMP, '4x #gtceu:circuits/ev', '2x ' + ELECTRODE, '2x grindless:reforming_catalyst')
+        .inputFluids(Fluid.of('gtceu:hydrochloric_acid', 2000))
         .itemOutputs('gtceu:platinum_plant')
         .EUt(480).duration(600)
     }

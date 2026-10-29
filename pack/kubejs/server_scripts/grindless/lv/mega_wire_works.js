@@ -8,7 +8,7 @@
   const G = global.grindless
   const WW = G.megaWireWorks || (G.megaWireWorks = {})
 
-  const INPUTS = ['4x gtceu:lv_wiremill', '4x gtceu:lv_bender', '4x #gtceu:circuits/lv', '8x #forge:plates/steel']
+  const INPUTS = ['4x gtceu:lv_wiremill', '4x gtceu:lv_bender', '4x #gtceu:circuits/lv', '8x #forge:plates/steel', '2x grindless:graphite_electrode']
   const MACHINES = ['gtceu:lv_wiremill', 'gtceu:lv_bender']
 
   // read by the bench test
@@ -23,7 +23,7 @@
         return
       }
       event.recipes.gtceu.assembler(WW.crafting)
-        .itemInputs(INPUTS[0], INPUTS[1], INPUTS[2], INPUTS[3])
+        .itemInputs(INPUTS[0], INPUTS[1], INPUTS[2], INPUTS[3], INPUTS[4])
         .itemOutputs('gtceu:wire_works')
         .EUt(30)
         .duration(400)

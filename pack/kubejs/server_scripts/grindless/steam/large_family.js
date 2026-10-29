@@ -41,7 +41,8 @@
     SPECS.forEach(function (spec) {
       var machineId = 'gtceu:' + spec.id
       var recipeId = 'grindless:crafting/' + spec.id
-      event.recipes.gtceu.shaped(machineId, ['PFP', 'FBF', 'CwC'], {
+      event.recipes.gtceu.shaped(machineId, ['DFP', 'FBF', 'CwC'], {
+        D: 'grindless:steel_drill_bit',
         P: PLATE,
         F: FRAME,
         B: spec.core,

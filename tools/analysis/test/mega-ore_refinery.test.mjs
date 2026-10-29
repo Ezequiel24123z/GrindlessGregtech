@@ -139,7 +139,7 @@ test('modifier chain: fixed parallel, non-perfect overclock, batch (three modifi
   assert.equal(mods.slice(2).length, 3, 'parallel, overclock, batch');
 });
 
-test('structure: 7 x 7 x 9, one controller, 265 casing cells, 21 gearboxes, 154 air, height within 16', () => {
+test('structure: 7 x 7 x 9, one controller, 196 casing cells, 20 frames, 42 glass, 7 pipes, 21 gearboxes, 154 air, height within 16', () => {
   const h = harness();
   registerMachine(h);
   const d = h.G.patterns.describe('gtceu:ore_refinery');
@@ -156,19 +156,19 @@ test('structure: 7 x 7 x 9, one controller, 265 casing cells, 21 gearboxes, 154 
     });
   });
   assert.ok(height <= 16);
-  assert.deepEqual(plain(count), { X: 265, B: 21, S: 1, '#': 154 });
-  assert.equal(d.slices[8][3], 'XXXSXXX', 'controller in the middle of the front wall');
+  assert.deepEqual(plain(count), { X: 196, F: 20, G: 42, P: 7, B: 21, S: 1, '#': 154 });
+  assert.equal(d.slices[8][3], 'FXGSGXF', 'controller in the middle of the front wall');
   assert.deepEqual(plain(d.symbols.B.blocks), ['gtceu:steel_gearbox']);
   assert.equal(d.symbols.X.kind, 'oneOf');
   const kinds = d.symbols.X.options.map((o) => o.kind + ':' + (o.ability || o.blocks));
   assert.deepEqual(plain(kinds), ['blocks:gtceu:stable_machine_casing', 'part:energy_input', 'part:input_bus', 'part:output_bus', 'part:input_hatch', 'part:muffler']);
   const lim = (i) => d.symbols.X.options[i].limits;
-  assert.equal(lim(0).min, 257);
+  assert.equal(lim(0).min, 188);
   assert.equal(lim(1).max, 2);
   assert.equal(lim(1).min, 1);
   assert.equal(lim(4).exact, 1);
   const maxParts = d.symbols.X.options.slice(1).reduce((n, o) => n + (o.limits.exact || o.limits.max), 0);
-  assert.equal(265 - maxParts, lim(0).min, 'the casing minimum is the cells minus the most parts');
+  assert.equal(196 - maxParts, lim(0).min, 'the casing minimum is the cells minus the most parts');
 });
 
 test('composed ore lines equal the sum of their four stage recipes (inputs, outputs, total EU), tin and galena', () => {
@@ -263,7 +263,7 @@ test('controller recipe: 4 EV macerators, 4 EV ore washers, 4 EV thermal centrif
   assert.equal(out.assembler.length, 1);
   const r = out.assembler[0];
   assert.equal(r.id, h.G.megaOreRefinery.crafting);
-  assert.deepEqual(plain(r.itemInputs), ['4x gtceu:ev_macerator', '4x gtceu:ev_ore_washer', '4x gtceu:ev_thermal_centrifuge', '4x gtceu:ev_sifter', '4x #gtceu:circuits/ev']);
+  assert.deepEqual(plain(r.itemInputs), ['4x gtceu:ev_macerator', '4x gtceu:ev_ore_washer', '4x gtceu:ev_thermal_centrifuge', '4x gtceu:ev_sifter', '4x #gtceu:circuits/ev', '2x grindless:titanium_drill_bit', '2x grindless:contact_catalyst']);
   assert.deepEqual(plain(r.itemOutputs), ['gtceu:ore_refinery']);
   assert.ok(r.eut > 0 && r.duration > 0);
 });

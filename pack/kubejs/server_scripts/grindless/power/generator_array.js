@@ -25,7 +25,8 @@
       console.error('[grindless/power] generator array controller recipe skipped, unknown item(s): ' + missing.join(', '))
       return
     }
-    event.recipes.gtceu.shaped('gtceu:generator_array', ['CTC', 'GHB', 'CWC'], {
+    event.recipes.gtceu.shaped('gtceu:generator_array', ['CTC', 'GHB', 'EWC'], {
+      E: 'grindless:graphite_electrode',
       C: '#gtceu:circuits/lv',
       T: 'gtceu:lv_steam_turbine',
       G: 'gtceu:lv_gas_turbine',

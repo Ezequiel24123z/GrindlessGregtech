@@ -137,7 +137,7 @@ test('the Universal Assembly Factory runs GTM\'s NPU recipe only on a ZPM hatch,
   });
   const ctx = {
     global: { grindless: {
-      patterns: { controller: () => ({}), block: () => ({}), frame: () => ({}), part: () => ({}), oneOf: () => ({}), register: () => {}, build: () => {} },
+      patterns: { controller: () => ({}), block: () => ({}), frame: () => ({}), air: () => ({}), part: () => ({}), oneOf: () => ({}), register: () => {}, build: () => {} },
       lv: { bores: (veto) => veto },
     } },
     GTCEuStartupEvents: { registry: (kind, cb) => cb({ create: (id) => chain(id) }) },

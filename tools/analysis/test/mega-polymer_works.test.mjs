@@ -130,7 +130,7 @@ test('modifier chain: fixed parallel, non-perfect overclock, batch (three modifi
   assert.equal(mods.slice(2).length, 3, 'parallel, overclock, batch');
 });
 
-test('structure: 5 x 5 x 7, one controller, 97 casing cells, 12 frames, 20 glass, 5 coils, 40 air, height within 16', () => {
+test('structure: 5 x 5 x 7, one controller, 89 casing cells, 12 frames, 23 glass, 5 pipes, 5 coils, 40 air, height within 16', () => {
   const h = harness();
   registerMachine(h);
   const d = h.G.patterns.describe('gtceu:polymer_works');
@@ -147,7 +147,7 @@ test('structure: 5 x 5 x 7, one controller, 97 casing cells, 12 frames, 20 glass
     });
   });
   assert.ok(height <= 16);
-  assert.deepEqual(plain(count), { X: 97, F: 12, S: 1, G: 20, K: 5, '#': 40 });
+  assert.deepEqual(plain(count), { X: 89, F: 12, S: 1, G: 23, P: 5, K: 5, '#': 40 });
   assert.equal(d.slices[6][1], 'FXSXF', 'controller in the middle of the front wall');
   assert.equal(d.symbols.F.kind, 'frames');
   assert.deepEqual(plain(d.symbols.F.materials), ['aluminium']);
@@ -158,12 +158,12 @@ test('structure: 5 x 5 x 7, one controller, 97 casing cells, 12 frames, 20 glass
   const kinds = d.symbols.X.options.map((o) => o.kind + ':' + (o.ability || o.blocks));
   assert.deepEqual(plain(kinds), ['blocks:gtceu:solid_machine_casing', 'part:maintenance', 'part:energy_input', 'part:input_bus', 'part:input_hatch', 'part:output_bus', 'part:output_hatch']);
   const lim = (i) => d.symbols.X.options[i].limits;
-  assert.equal(lim(0).min, 85);
+  assert.equal(lim(0).min, 77);
   assert.equal(lim(1).exact, 1);
   assert.equal(lim(2).max, 2);
   assert.equal(lim(2).min, 1);
   const maxParts = d.symbols.X.options.slice(1).reduce((n, o) => n + (o.limits.exact || o.limits.max), 0);
-  assert.equal(97 - maxParts, lim(0).min, 'the casing minimum is the cells minus the most parts');
+  assert.equal(89 - maxParts, lim(0).min, 'the casing minimum is the cells minus the most parts');
 });
 
 test('the two composed lines equal the sum of their stage recipes (inputs, outputs, total EU)', () => {
@@ -241,7 +241,7 @@ test('controller recipe: 2 MV chemical reactors, 2 MV fluid solidifiers, 2 MV mi
   assert.equal(out.assembler.length, 1);
   const r = out.assembler[0];
   assert.equal(r.id, h.G.megaPolymerWorks.crafting);
-  assert.deepEqual(plain(r.itemInputs), ['2x gtceu:mv_chemical_reactor', '2x gtceu:mv_fluid_solidifier', '2x gtceu:mv_mixer', '4x #gtceu:circuits/mv']);
+  assert.deepEqual(plain(r.itemInputs), ['2x gtceu:mv_chemical_reactor', '2x gtceu:mv_fluid_solidifier', '2x gtceu:mv_mixer', '4x #gtceu:circuits/mv', '2x grindless:contact_catalyst']);
   assert.deepEqual(plain(r.itemOutputs), ['gtceu:polymer_works']);
   assert.ok(r.eut <= 128 && r.eut > 0);
   assert.ok(r.duration > 0);

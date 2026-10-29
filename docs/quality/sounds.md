@@ -68,6 +68,12 @@ Signature multiblocks with their own recipe type (`startup_scripts/grindless/<er
 
 Files that create several types in a loop (`k === ...`, `uev/composites.js`) get one loop per type or share one.
 
+### QR-E1 status (steam to uev, done)
+
+52 further loops generated on the Starter plan (6 s, `-q 0`, 22-50 KB each; pack total about 2.0 MB for 55 loops; about 3100 credits). All wired in `sounds.js`; rows in `tools/assets/sounds.json`. One loop per signature type (steam: horizon_collection, coking, steelmaking; lv: sulfide_roasting, solar_steam; mv: ore_processing, bio_distillation, polymer_works; hv: refining, reforming, syngas; ev: solvent_extraction, cryogenic_processing, combined_cycle, hot_rolling, pgm_refining, lunar_solar, deep_space_tracking; iv: fission_core, hot_cell, isotope_exchange, fluorspar_digestion, naquadah_refining, in_situ_leaching, fuel_fabrication, detritiation; luv: magnet_winding, closed_loop_cooling, electrodynamic_tether, thermochemical_hydrogen, asteroid_processing, optical_mining, sterile_culture; zpm: naquadria_magnets, gas_giant_siphon, qubit_fabrication, naquadria_refining; uv: laser_fusion, light_sail, pyroprocessing, synchrotron, superfluid_helium, fibre_draw; uhv: dyson_swarm, positron_accumulation, warp_gate, silicon_carbide, pbo_synthesis; uev: megabar_synthesis, electron_beam_refining, quantum_degenerate_gas, chemical_vapour_infiltration).
+
+Left without a loop: secondary types of multi-type files (e.g. conversion/second-stage types), `uev` fusion (its type `fusion_reactor` is GTM's own, shared with the stock reactor), looped families in `uev/composites.js` other than the CVI furnace, UIV (parked), and the budget-limited remainder of uhv/uev lines. Multi-mode controllers keep GTM sounds for GTM types.
+
 ## T3 check
 
 See the handoff for the run id: the client log must show no `Unable to play unknown soundEvent` / missing-sound warning for `grindless:loop_*`, and a working pilot machine must start its loop.

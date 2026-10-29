@@ -13,7 +13,7 @@
 //   RTM alloy 0.857, HSS-G 0.815). Then GTM's perfect subtick overclock (GTM's LCR rule, family rule 3) and batch mode (rule 4).
 // - No parallel hatch (the LuV Mega Chemical Complex takes it), no new recipe, no generator.
 //
-// Structure (5 wide x 6 high x 7 deep, lib/patterns.js): PTFE inert casing shell; five PTFE pipe casings down the core; two full
+// Structure (5 wide x 6 high x 7 deep, lib/patterns.js): PTFE inert casing shell with steel frame posts at the corners of both end walls and a glass window band in each; five PTFE pipe casings down the core; two full
 // rings of 8 heating coils (16) in the 2nd and 4th core slices; tempered glass windows in the three slices between. The controller
 // sits in the middle of the front wall, one row above the floor. Parts go in any casing cell: 1 maintenance, 1 or 2 energy hatches,
 // up to 4 fluid input and 4 fluid output hatches, up to 2 input buses and 2 output buses.
@@ -35,21 +35,22 @@
   const DISCOUNT = { rate: 0.95, floor: 0.80, baseK: 1800 }
   const HATCHES = { energy: [1, 2], inputBus: 2, outputBus: 2, inputHatch: 4, outputHatch: 4 }
 
-  // slices back -> front, rows bottom -> top; 146 casing-or-part cells, 18 glass, 5 pipe casings, 16 coils, 24 air, the controller
-  const WALL = ['XXXXX', 'XXXXX', 'XXXXX', 'XXXXX', 'XXXXX', 'XXXXX']
+  // slices back -> front, rows bottom -> top; 121 casing-or-part cells, 16 steel frames, 27 glass, 5 pipe casings, 16 coils, 24 air, the controller
+  const WALL = ['XXXXX', 'FXXXF', 'FGGGF', 'FGGGF', 'FXXXF', 'XXXXX']
   const RING = ['XXXXX', 'XKKKX', 'XKPKX', 'XKKKX', 'XXXXX', 'XXXXX']
   const MID = ['XXXXX', 'G###G', 'G#P#G', 'G###G', 'XXXXX', 'XXXXX']
+  const FRONT = ['XXXXX', 'FXSXF', 'FXXXF', 'FGGGF', 'FXXXF', 'XXXXX']
   const SPEC = {
     slices: [
       WALL,
       MID, RING, MID, RING, MID,
-      ['XXXXX', 'XXSXX', 'XXXXX', 'XXXXX', 'XXXXX', 'XXXXX']
+      FRONT
     ],
     symbols: {
       S: Pat.controller(),
-      // 146 cells: at most 15 are parts (1 + 2 + 2 + 2 + 4 + 4), the rest PTFE casing
+      // 121 cells: at most 15 are parts (1 + 2 + 2 + 2 + 4 + 4), the rest PTFE casing
       X: Pat.oneOf(
-        Pat.block(CASING, { min: 131 }),
+        Pat.block(CASING, { min: 106 }),
         Pat.part('maintenance', { exact: 1 }),
         Pat.part('energy_input', { min: HATCHES.energy[0], max: HATCHES.energy[1] }),
         Pat.part('input_bus', { max: HATCHES.inputBus }),
@@ -58,6 +59,7 @@
         Pat.part('output_hatch', { max: HATCHES.outputHatch })
       ),
       P: Pat.block(PIPE),
+      F: Pat.frame(['steel']),
       G: Pat.block(GLASS),
       K: Coils.predicate(),
       '#': Pat.air()

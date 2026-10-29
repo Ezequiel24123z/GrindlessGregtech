@@ -33,10 +33,10 @@
 //   NPU recipe needs one ZPM hatch here; two LuV hatches do not run it (HATCH_VOLTAGE_LOCKED below).
 // - Several input buses in distinct mode keep different circuits, molds or lenses apart (GTM's own distinct-bus logic).
 //
-// Structure: one hall for the four (5 wide x 3 high x 3 deep), aluminium frost-proof casing like the rest of the MV family, the
+// Structure: one hall for the four (7 wide x 4 high x 5 deep), aluminium frost-proof casing like the rest of the MV family, the
 // controller in the middle of the front with a glass window on each side, and a 3-block core behind the windows that tells the four
 // apart: steel gearboxes (processing), aluminium frames (assembly: the gantry of the arms), steel pipe casings (separation) and glass
-// (mixing: the vats). Parts go in any casing cell (39 cells); the limits are per factory, see FACTORIES.
+// (mixing: the vats). Parts go in any casing cell (76 cells); the limits are per factory, see FACTORIES.
 //
 // Textures: overlay dirs grindless:block/multiblock/<machine> (tools/assets/Build-LeisureFactoriesTextures.ps1). Names / tooltips:
 // client_scripts/grindless/mv_leisure_factories_lang.js. Controller recipes: server_scripts/grindless/mv/leisure_factories.js.
@@ -55,18 +55,47 @@
     DYES.map(function (dye) { return 'minecraft:' + dye + '_stained_glass' }))
 
   // ---------------------------------------------------------------- the shared hall (lib/patterns.js: slices back -> front,
-  // rows bottom -> top). 45 cells: 39 casing-or-part cells (X), the 3-block core (K), 2 windows (W) and the controller (S).
-  const HALL = [
-    // back
-    ['XXXXX', 'XXXXX', 'XXXXX'],
-    // middle: the core
-    ['XXXXX', 'XKKKX', 'XXXXX'],
-    // front: controller between two windows
-    ['XXXXX', 'XWSWX', 'XXXXX']
-  ]
-  const PART_CELLS = 39
-
-  // parts: [name, min, max]. Casing fills every other X cell, so its minimum is 39 minus the most parts the factory takes.
+  // rows bottom -> top). QR-S1: 7 wide x 4 high x 5 deep factory hall: frost-proof floor and walls, aluminium frame posts at the
+  // corners of the walls and of the roof, glass sight windows in the walls and a glass skylight over the machine bay, the 3-block
+  // core on the floor behind the controller's windows with a single core block on top of its middle. 76 casing-or-part cells (X).
+  function buildHall() {
+    var W = 7, D = 5, H = 4
+    var slices = []
+    for (var z = 0; z < D; z++) {
+      var rows = []
+      for (var y = 0; y < H; y++) {
+        var row = ''
+        for (var x = 0; x < W; x++) {
+          var onX = (x === 0 || x === W - 1)
+          var onZ = (z === 0 || z === D - 1)
+          var ch
+          if (y === 0) ch = 'X'
+          else if (y === H - 1) {
+            if (onX && onZ) ch = 'F'
+            else if (!onX && !onZ && x >= 2 && x <= 4) ch = 'W'
+            else ch = 'X'
+          } else if (onX || onZ) {
+            if (onX && onZ) ch = 'F'
+            else if (onZ && (x === 2 || x === 4)) ch = 'W'
+            else if (onX && z === 2) ch = 'W'
+            else ch = 'X'
+          } else if (z === 2 && x >= 2 && x <= 4) {
+            ch = (y === 1 || x === 3) ? 'K' : '#'
+          } else ch = '#'
+          row += ch
+        }
+        rows.push(row)
+      }
+      slices.push(rows)
+    }
+    var c = slices[D - 1][1].split('')
+    c[3] = 'S'
+    slices[D - 1][1] = c.join('')
+    return slices
+  }
+  const HALL = buildHall()
+  const PART_CELLS = 76
+  // parts: [name, min, max]. Casing fills every other X cell, so its minimum is 76 minus the most parts the factory takes.
   const FACTORIES = [
     {
       id: 'universal_processing_factory',
@@ -121,7 +150,9 @@
         S: Pat.controller(),
         X: Pat.oneOf.apply(null, options),
         K: f.core(),
-        W: Pat.block(GLASS)
+        W: Pat.block(GLASS),
+        F: Pat.frame(['aluminium']),
+        '#': Pat.air()
       }
     }
   }

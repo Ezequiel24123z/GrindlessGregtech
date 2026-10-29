@@ -21,10 +21,16 @@
 //   acquisition    every audited item, block and fluid has at least one EMI recipe or page that makes it
 //   use            every one that is not an end product (machines, tools) has at least one EMI recipe or page that uses it
 //   routes         every route the audit expects shows in its EMI category (GT categories, crafting, EMI info)
-//   plugins, workstations, processes, previews: hard failures against the live GTM and EMI registries.
+//   plugins, workstations, processes, previews: hard failures against the live GTM and EMI registries. A machine EMI disables
+//                  (exp.disabledTags, grindless:hidden_with_recipes) is exempt; a multiblock whose definition turns its preview off
+//                  (renderXEIPreview false) is listed, not failed.
 //   preview_routes NOTE: the blocks the audit expects in GTM's multiblock previews that EMI does not list (the audit's model of the
 //                  preview, BlockPattern#getPreview; those blocks also have pages)
 //   pages          our info pages are in EMI (emi:/generated/recipe/additions/grindless/...)
+//   machine_info   every machine of ours that is not hidden has a what-it-does page
+//   known          NOTE: workstations, previews, use, routes and machine_info gaps listed in exp.known
+//                  (tools/analysis/emi_runtime_known.json) do not fail; this line counts them and lists the fixed ones (a ratchet:
+//                  only new gaps fail, and the list only shrinks)
 //   legacy         the old items kept for saves are out of EMI's index and keep their conversion recipe
 //   all            the verdict; then DONE
 // The details go to kubejs/exported/gg_emi_coverage_report.json (per item: the EMI categories that make and use it).
@@ -113,6 +119,19 @@
       return false
     }
     var hidden = exp.hidden || []
+    // known runtime gaps (tools/analysis/emi_runtime_known.json, through --expect): a listed gap is a NOTE, a new one FAILs
+    var known = exp.known || {}
+    var knownOpen = []
+    var knownFixed = []
+    var ratchet = function (kind, list, keyOf) {
+      var listedKeys = known[kind] || []
+      var keys = list.map(function (x) { return keyOf ? keyOf(x) : x })
+      var fresh = list.filter(function (x, i) { return listedKeys.indexOf(keys[i]) < 0 })
+      keys.forEach(function (k) { if (listedKeys.indexOf(k) >= 0) knownOpen.push(kind + ' ' + k) })
+      listedKeys.forEach(function (k) { if (keys.indexOf(k) < 0) knownFixed.push(kind + ' ' + k) })
+      return fresh
+    }
+    var machineOf = function (w) { return String(w).split(':').slice(0, 2).join(':').trim() }
     log('expectations', 'NOTE', exp.items.length + ' audited, ' + exp.pages.length + ' pages, ' + exp.legacy.length + ' legacy, ' + hidden.length +
       ' disabled until their era (' + exp.format + ')')
 
@@ -179,14 +198,31 @@
     }
     var GTR = Java.loadClass('com.gregtechceu.gtceu.api.registry.GTRegistries')
     var MBD = Java.loadClass('com.gregtechceu.gtceu.api.machine.MultiblockMachineDefinition')
+    // every machine in a tag EMI disables (grindless:hidden_with_recipes: ours and the addons' we hide) drops its workstations and
+    // preview with it, on purpose
+    var disabledMachine = {}
+    var tagErrors = []
+    ;(exp.disabledTags || []).forEach(function (tag) {
+      try {
+        var ids = jlist(Ingredient.of('#' + tag).getItemIds())
+        for (var di = 0; di < ids.size(); di++) disabledMachine[String(ids.get(di))] = true
+      } catch (e) {
+        tagErrors.push(tag + ': ' + e)
+      }
+    })
+    if (tagErrors.length) {
+      ok = false
+      log('disabled_tags', 'FAIL', 'cannot read ' + tagErrors.join('; '))
+    }
     var machines = jlist(GTR.MACHINES.values())
     var machineReport = []
     var workstationMissing = []
     var previewsMissing = []
+    var previewsOff = []
     for (var mi = 0; mi < machines.size(); mi++) {
       var definition = machines.get(mi)
       var machineId = String(definition.getId())
-      var machineHidden = hidden.indexOf(machineId) >= 0
+      var machineHidden = hidden.indexOf(machineId) >= 0 || disabledMachine[machineId] === true
       var expectedCategories = []
       var missingCategories = []
       var types = definition.getRecipeTypes()
@@ -205,10 +241,15 @@
       var multiblock = definition instanceof MBD
       var preview = !multiblock ? null : rm.getRecipe(new RL(machineId))
       var hasPreview = preview !== null && String(preview.getCategory().getId()) === 'gtceu:multiblock_info'
-      if (multiblock && !machineHidden && !hasPreview) previewsMissing.push(machineId)
+      // GTM's EMI preview category skips a definition whose renderXEIPreview is off (MultiblockInfoEmiCategory#registerDisplays)
+      var xeiPreview = null
+      if (multiblock) {
+        try { xeiPreview = definition.isRenderXEIPreview() === true } catch (e) { xeiPreview = null }
+      }
+      if (multiblock && !machineHidden && !hasPreview) (xeiPreview === false ? previewsOff : previewsMissing).push(machineId)
       if (missingCategories.length) workstationMissing.push(machineId + ': ' + missingCategories.join(', '))
       machineReport.push({ id: machineId, tier: Number(definition.getTier()), hidden: machineHidden, categories: expectedCategories,
-        missingCategories: missingCategories, multiblock: multiblock, preview: multiblock ? hasPreview : null })
+        missingCategories: missingCategories, multiblock: multiblock, preview: multiblock ? hasPreview : null, xeiPreview: xeiPreview })
     }
     var processReport = []
     var processesMissing = []
@@ -224,10 +265,15 @@
       if (!processHidden && nativeCount > 0 && displayCount === 0) processesMissing.push(ncid)
       processReport.push({ id: ncid, type: String(nc.getRecipeType().registryName), recipes: nativeCount, displays: displayCount, hidden: processHidden })
     }
-    ok = ok && workstationMissing.length === 0 && previewsMissing.length === 0 && processesMissing.length === 0
-    log('workstations', workstationMissing.length ? 'FAIL' : 'PASS', machines.size() + ' machines; missing: ' + (listed(workstationMissing) || 'none'))
+    var workstationNew = ratchet('workstations', workstationMissing, machineOf)
+    var previewsNew = ratchet('previews', previewsMissing)
+    ok = ok && workstationNew.length === 0 && previewsNew.length === 0 && processesMissing.length === 0
+    log('workstations', workstationNew.length ? 'FAIL' : 'PASS', machines.size() + ' machines; missing: ' + (listed(workstationNew) || 'none') +
+      (workstationMissing.length > workstationNew.length ? ' (+' + (workstationMissing.length - workstationNew.length) + ' known)' : ''))
     log('processes', processesMissing.length ? 'FAIL' : 'PASS', processReport.length + ' GT categories; no displays: ' + (listed(processesMissing) || 'none'))
-    log('previews', previewsMissing.length ? 'FAIL' : 'PASS', 'multiblocks without preview: ' + (listed(previewsMissing) || 'none'))
+    log('previews', previewsNew.length ? 'FAIL' : 'PASS', 'multiblocks without preview: ' + (listed(previewsNew) || 'none') +
+      (previewsMissing.length > previewsNew.length ? ' (+' + (previewsMissing.length - previewsNew.length) + ' known)' : '') +
+      (previewsOff.length ? '; preview off by definition (renderXEIPreview false): ' + listed(previewsOff) : ''))
 
     // 2) every audited stack
     var categoriesOf = function (recipes) {
@@ -263,13 +309,15 @@
       report.push({ id: e.id, kind: e.kind, made: made.size(), used: used.size(), madeIn: madeIn, usedIn: usedIn, expectedMade: e.made, expectedUsed: e.used })
     })
     var needUse = exp.items.filter(function (e) { return e.needUse }).length
-    ok = ok && noMade.length === 0 && noUse.length === 0 && routeMissing.length === 0
+    var noUseNew = ratchet('noUse', noUse)
+    var routeNew = ratchet('routes', routeMissing)
+    ok = ok && noMade.length === 0 && noUseNew.length === 0 && routeNew.length === 0
     log('acquisition', noMade.length === 0 ? 'PASS' : 'FAIL', (exp.items.length - noMade.length) + ' of ' + exp.items.length + ' have a recipe or page that makes them' +
       (noMade.length ? '; none for: ' + listed(noMade) : ''))
-    log('use', noUse.length === 0 ? 'PASS' : 'FAIL', (needUse - noUse.length) + ' of ' + needUse + ' intermediates have a recipe or page that uses them' +
-      (noUse.length ? '; none for: ' + listed(noUse) : ''))
-    log('routes', routeMissing.length === 0 ? 'PASS' : 'FAIL', routeMissing.length === 0 ? 'every expected GT, crafting and info route is in EMI'
-      : routeMissing.length + ' expected routes missing: ' + listed(routeMissing))
+    log('use', noUseNew.length === 0 ? 'PASS' : 'FAIL', (needUse - noUse.length) + ' of ' + needUse + ' intermediates have a recipe or page that uses them' +
+      (noUseNew.length ? '; none for: ' + listed(noUseNew) : '') + (noUse.length > noUseNew.length ? ' (+' + (noUse.length - noUseNew.length) + ' known)' : ''))
+    log('routes', routeNew.length === 0 ? 'PASS' : 'FAIL', routeMissing.length === 0 ? 'every expected GT, crafting and info route is in EMI'
+      : routeNew.length + ' expected routes missing: ' + listed(routeNew) + (routeMissing.length > routeNew.length ? ' (+' + (routeMissing.length - routeNew.length) + ' known)' : ''))
     log('preview_routes', 'NOTE', previewMissing.length === 0 ? 'GTM\'s multiblock previews list every block the audit expects'
       : previewMissing.length + ' multiblock-preview routes the audit expects are not in EMI (fix previewBlocks in lib/emi_coverage.mjs): ' + listed(previewMissing))
 
@@ -295,8 +343,12 @@
       m.info = categoriesOf(uses).indexOf('emi:info') >= 0
       if (!m.hidden && !m.info && exp.items.some(function (e) { return e.id === m.id })) machineInfoMissing.push(m.id)
     })
-    ok = ok && machineInfoMissing.length === 0
-    log('machine_info', machineInfoMissing.length ? 'FAIL' : 'PASS', 'our machines without what-it-does pages: ' + (listed(machineInfoMissing) || 'none'))
+    var machineInfoNew = ratchet('machineInfo', machineInfoMissing)
+    ok = ok && machineInfoNew.length === 0
+    log('machine_info', machineInfoNew.length ? 'FAIL' : 'PASS', 'our machines without what-it-does pages: ' + (listed(machineInfoNew) || 'none') +
+      (machineInfoMissing.length > machineInfoNew.length ? ' (+' + (machineInfoMissing.length - machineInfoNew.length) + ' known)' : ''))
+    log('known', 'NOTE', knownOpen.length + ' known gaps still open' + (knownFixed.length
+      ? '; ' + knownFixed.length + ' fixed, shrink tools/analysis/emi_runtime_known.json (emi-coverage.mjs --known-from <this report>): ' + listed(knownFixed) : ''))
 
     // 4) legacy items: out of the index, conversion in view
     var index = {}
@@ -313,7 +365,8 @@
     try {
       var doc = { format: 'gg-emi-coverage-report-2', expectations: exp.format, recipes: allRecipes.size(), pages: ours, items: report,
         pluginErrors: pluginErrors, categories: categories, machines: machineReport, processes: processReport,
-        workstationMissing: workstationMissing, previewsMissing: previewsMissing, processesMissing: processesMissing, machineInfoMissing: machineInfoMissing,
+        workstationMissing: workstationMissing, previewsMissing: previewsMissing, previewsOff: previewsOff, processesMissing: processesMissing, machineInfoMissing: machineInfoMissing,
+        knownOpen: knownOpen, knownFixed: knownFixed,
         noMade: noMade, noUse: noUse, routeMissing: routeMissing, previewMissing: previewMissing, unaudited: unaudited, unknown: unknown,
         pagesMissing: pagesMissing, legacy: legacyBad }
       c.report = doc

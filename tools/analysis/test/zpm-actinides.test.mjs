@@ -105,13 +105,15 @@ test('every product has its destination; synroc is the sealed end', () => {
   for (const id of ['radium_capsule', 'curium_oxide', 'synroc_block']) assert.ok(!hidden.includes('grindless:' + id), id + ' no longer hidden');
 });
 
-test('crafting recipes use ZPM parts', () => {
-  for (const [id, machine] of [[AC.crafting.retrieval, 'waste_retrieval_plant'], [AC.crafting.partition, 'actinide_partitioning_plant']]) {
+test('crafting recipes use ZPM parts, and the two plants differ by an ingredient (GTM lookup ignores counts)', () => {
+  for (const [id, machine, pump, other] of [[AC.crafting.retrieval, 'waste_retrieval_plant', AC.craftingPumps.retrieval, AC.craftingPumps.partition],
+    [AC.crafting.partition, 'actinide_partitioning_plant', AC.craftingPumps.partition, AC.craftingPumps.retrieval]]) {
     const r = byId(id);
     assert.ok(r, id + ' added');
     const text = JSON.stringify(r.j);
     assert.match(text, new RegExp('gtceu:' + machine));
-    for (const part of AC.craftingParts) assert.ok(text.includes(part), part);
+    for (const part of AC.craftingParts.concat([pump])) assert.ok(text.includes(part), part);
+    assert.ok(!text.includes(other), id + ' does not take ' + other);
   }
 });
 
