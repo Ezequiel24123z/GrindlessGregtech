@@ -61,19 +61,53 @@
     return rows
   }
 
+  // QR-S3: dress(slices, wall, rule) rewrites plain wall cells (char `wall`) through rule(x, y, z, W, H, D) -> char or null. Row 0 is never touched.
+  function dress(slices, wall, rule) {
+    var D = slices.length
+    var H = slices[0].length
+    var W = slices[0][0].length
+    return slices.map(function (rows, z) {
+      return rows.map(function (row, y) {
+        if (y === 0) return row
+        var out = ''
+        for (var x = 0; x < W; x++) {
+          var ch = row.charAt(x)
+          var r = ch === wall ? rule(x, y, z, W, H, D) : null
+          out += r || ch
+        }
+        return out
+      })
+    })
+  }
+
   // ---------------------------------------------------------------- the penetrator probe bay: 7 wide, 7 deep, 9 high
   // rows bottom -> top: 0 floor, 1-6 the probe rail, 7 the canister catcher, 8 the roof
+  // dressed as a drill derrick: titanium frame posts and roof ring, window bands, a steel pipe collar and a gearbox-lit skylight
+  function bayRule(x, y, z, W, H, D) {
+    var cx = x === 0 || x === W - 1
+    var cz = z === 0 || z === D - 1
+    if (y === H - 1) {
+      if (cx || cz) return 'F'
+      return Math.abs(x - 3) <= 1 && Math.abs(z - 3) <= 1 ? 'G' : null
+    }
+    if (cx && cz) return 'F'
+    if (y === 3 || y === 4) return 'G'
+    if (y === 6) return 'P'
+    return null
+  }
   const BAY_PARTS = { energy_input: { min: 1, max: 2 }, input_bus: { min: 1, max: 2 }, output_bus: { min: 1, max: 2 } }
   const BAY = {
-    slices: [0, 1, 2, 3, 4, 5, 6].map(function (z) {
+    slices: dress([0, 1, 2, 3, 4, 5, 6].map(function (z) {
       return shellSlice(7, 7, 9, z, function (x, zz, y) { return x === 3 && zz === 3 ? (y === 7 ? 'D' : 'F') : ' ' })
-    }),
+    }), 'C', bayRule),
     symbols: {
       S: Pat.controller(),
       X: parts(14, BAY_PARTS),
       C: Pat.block(TRUSS),
       F: Pat.frame(['titanium']),
-      D: Pat.block(GEARBOX)
+      D: Pat.block(GEARBOX),
+      G: Pat.block('gtceu:laminated_glass'),
+      P: Pat.block(PIPE)
     }
   }
 
@@ -81,20 +115,38 @@
   // rows bottom -> top: 0 floor, 1 the cold finger's 3 x 3 pipe foot, 2-5 its column (frame, pipe, frame, pipe), 6 the roof
   const FRACTION_PARTS = { energy_input: { min: 1, max: 2 }, input_bus: { min: 1, max: 2 }, output_bus: { min: 1, max: 2 },
     output_hatch: { min: 1, max: 3 } }
+  // dressed as a cold tower: frame posts and roof ring, a frostproof condenser band round the middle, glass sight windows above and below
+  // it on the middle three cells of each side, a pipe manifold under the roof and a skylight vent over the cold finger
+  function fractionRule(x, y, z, W, H, D) {
+    var cx = x === 0 || x === W - 1
+    var cz = z === 0 || z === D - 1
+    var along = cx ? z : x
+    if (y === H - 1) {
+      if (cx || cz) return 'F'
+      return x === 3 && z === 3 ? 'P' : null
+    }
+    if (cx && cz) return 'F'
+    if (y === 3) return 'Z'
+    if (y === 5) return 'P'
+    if ((y === 2 || y === 4) && along >= 2 && along <= 4) return 'G'
+    return null
+  }
   const FRACTIONATOR = {
-    slices: [0, 1, 2, 3, 4, 5, 6].map(function (z) {
+    slices: dress([0, 1, 2, 3, 4, 5, 6].map(function (z) {
       return shellSlice(7, 7, 7, z, function (x, zz, y) {
         if (y === 1) return x >= 2 && x <= 4 && zz >= 2 && zz <= 4 ? 'P' : ' '
         if (x !== 3 || zz !== 3) return ' '
         return y % 2 === 0 ? 'F' : 'P'
       })
-    }),
+    }), 'C', fractionRule),
     symbols: {
       S: Pat.controller(),
       X: parts(14, FRACTION_PARTS),
       C: Pat.block(TRUSS),
       F: Pat.frame(['titanium']),
-      P: Pat.block(PIPE)
+      P: Pat.block(PIPE),
+      Z: Pat.block('gtceu:frostproof_machine_casing'),
+      G: Pat.block('gtceu:laminated_glass')
     }
   }
 

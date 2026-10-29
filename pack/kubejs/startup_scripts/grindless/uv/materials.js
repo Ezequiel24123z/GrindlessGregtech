@@ -139,12 +139,75 @@
   const TORCH = ['##K##', '##K##', '##K##', '##P##', '##P##']
   const BENCHES = ['GG#GG', EMPTY5, EMPTY5, EMPTY5, EMPTY5]
 
+  // QR-S3: dress(slices, wall, rule) rewrites plain wall cells (char `wall`) through rule(x, y, z, W, H, D) -> char or null. Row 0 is never touched.
+  function dress(slices, wall, rule) {
+    var D = slices.length
+    var H = slices[0].length
+    var W = slices[0][0].length
+    return slices.map(function (rows, z) {
+      return rows.map(function (row, y) {
+        if (y === 0) return row
+        var out = ''
+        for (var x = 0; x < W; x++) {
+          var ch = row.charAt(x)
+          var r = ch === wall ? rule(x, y, z, W, H, D) : null
+          out += r || ch
+        }
+        return out
+      })
+    })
+  }
+  function isEdge(x, z, W, D) { return (x === 0 || x === W - 1) && (z === 0 || z === D - 1) }
+  // reactor: frame posts, a naquadah induction coil band, glass sight windows, a ptfe/glass stripe over the roof
+  function reactorRule(x, y, z, W, H, D) {
+    var onX = x === 0 || x === W - 1
+    var onZ = z === 0 || z === D - 1
+    if (isEdge(x, z, W, D)) return 'Z'
+    if (y === H - 1) {
+      if (onX || onZ) return 'Z'
+      if (x === 3) return 'P'
+      return (x === 1 || x === 5) ? 'W' : null
+    }
+    var idx = onX ? z : x
+    if (y === 3) return 'K'
+    if (y === 2 || y === 5) return idx % 2 === 1 ? 'W' : null
+    return null
+  }
+  // line: a long hall: frame rails along the roof edges, frame posts every fourth cell, glass windows, a pipe run on the roof
+  function lineRule(x, y, z, W, H, D) {
+    if (y === 4) {
+      if (x !== 1) return 'Z'
+      return z % 3 === 0 ? 'P' : null
+    }
+    if (y === 1) return null
+    if (z % 4 === 0) return 'Z'
+    if (y === 2) return 'W'
+    return null
+  }
+  // printer: frame posts and roof edges, a heatproof band, glass print windows, a glass skylight
+  function printerRule(x, y, z, W, H, D) {
+    var onX = x === 0 || x === W - 1
+    var onZ = z === 0 || z === D - 1
+    if (isEdge(x, z, W, D)) return 'Z'
+    if (y === H - 1) {
+      if (onX || onZ) return 'Z'
+      return (x >= 2 && x <= 4 && z >= 2 && z <= 4) ? 'W' : null
+    }
+    var idx = onX ? z : x
+    if (y === 2) return 'H'
+    if (y === 3) return 'K'
+    if (y === 4) return idx % 2 === 1 ? 'W' : null
+    return null
+  }
+
   const REACTOR_SPEC = {
-    slices: [wall7(), ring7(HOLLOW), ring7(TORCH), ring7(TORCH), ring7(HOLLOW), ring7(BENCHES), ring7(BENCHES), ring7(HOLLOW), front7()],
+    slices: dress([wall7(), ring7(HOLLOW), ring7(TORCH), ring7(TORCH), ring7(HOLLOW), ring7(BENCHES), ring7(BENCHES), ring7(HOLLOW), front7()], 'R', reactorRule),
     symbols: {
       S: Pat.controller(),
       X: cells(true),
       R: Pat.block(CASING),
+      Z: Pat.frame(['tungsten_steel']),
+      W: Pat.block('gtceu:fusion_glass'),
       K: Pat.block(TORCH_COIL),
       P: Pat.block(PTFE),
       G: Pat.block(GEARBOX),
@@ -156,18 +219,21 @@
   // 3 x 5 line: floor parts at both ends and along the sides, one interior column three high (bottom -> top)
   function line(interior) { return ['XRX', 'R' + interior[0] + 'R', 'R' + interior[1] + 'R', 'R' + interior[2] + 'R', 'RRR'] }
   const LINE_SPEC = {
-    slices: [
+    slices: dress([
       ['XXX', 'RRR', 'RRR', 'RRR', 'RRR'],
       line(['F', 'F', '#']), line(['F', '#', '#']), line(['#', '#', '#']),
       line(['G', '#', '#']), line(['G', '#', '#']), line(['#', '#', '#']),
       line(['A', '#', '#']), line(['A', '#', '#']), line(['A', '#', '#']), line(['#', '#', '#']),
       line(['K', 'K', '#']), line(['K', 'K', '#']), line(['K', 'K', '#']),
       ['XXX', 'RSR', 'RRR', 'RRR', 'RRR']
-    ],
+    ], 'R', lineRule),
     symbols: {
       S: Pat.controller(),
       X: cells(false),
       R: Pat.block(CASING),
+      Z: Pat.frame(['tungsten_steel']),
+      W: Pat.block('gtceu:fusion_glass'),
+      P: Pat.block('gtceu:tungstensteel_pipe_casing'),
       F: Pat.block(FILLER),
       G: Pat.block(GEARBOX),
       A: Pat.block(BENCH),
@@ -178,7 +244,7 @@
   M.lineSpec = LINE_SPEC
 
   const PRINTER_SPEC = {
-    slices: [
+    slices: dress([
       wall7(),
       ring7(['K####', 'K####', 'K####', 'P####', 'P####']),
       ring7(['KBBB#', 'K####', 'K####', 'P####', 'P####']),
@@ -186,11 +252,14 @@
       ring7(['#BBBF', '####F', '####M', '####M', EMPTY5]),
       ring7(['####F', '####F', EMPTY5, EMPTY5, EMPTY5]),
       front7()
-    ],
+    ], 'R', printerRule),
     symbols: {
       S: Pat.controller(),
       X: cells(true),
       R: Pat.block(CASING),
+      Z: Pat.frame(['tungsten_steel']),
+      W: Pat.block('gtceu:fusion_glass'),
+      H: Pat.block('gtceu:heatproof_machine_casing'),
       K: Pat.block(TORCH_COIL),
       P: Pat.block(PTFE),
       B: Pat.block(BED),

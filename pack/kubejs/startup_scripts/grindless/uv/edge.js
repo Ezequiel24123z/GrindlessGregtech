@@ -35,9 +35,53 @@
   E.items = Object.keys(ITEMS).map(function (name) { return 'grindless:' + name })
 
   function parts(casing, min, limits) {
-    const choices = [Pat.block(casing, { min: min })]
+    var choices = [Pat.block(casing, { min: min })]
     Object.keys(limits).forEach(function (name) { choices.push(Pat.part(name, limits[name])) })
     return Pat.oneOf.apply(null, choices)
+  }
+
+  // QR-S3: dress(slices, wall, rule) rewrites plain wall cells (char `wall`) through rule(x, y, z, W, H, D) -> char or null. Row 0 is never touched.
+  function dress(slices, wall, rule) {
+    var D = slices.length
+    var H = slices[0].length
+    var W = slices[0][0].length
+    return slices.map(function (rows, z) {
+      return rows.map(function (row, y) {
+        if (y === 0) return row
+        var out = ''
+        for (var x = 0; x < W; x++) {
+          var ch = row.charAt(x)
+          var r = ch === wall ? rule(x, y, z, W, H, D) : null
+          out += r || ch
+        }
+        return out
+      })
+    })
+  }
+  function isEdge(x, z, W, D) { return (x === 0 || x === W - 1) && (z === 0 || z === D - 1) }
+  // bay: a launch hall: frame posts and ribs, a pressure hull band, glass viewing windows, a glass roof ridge
+  function bayRule(x, y, z, W, H, D) {
+    var onX = x === 0 || x === W - 1
+    var onZ = z === 0 || z === D - 1
+    if (isEdge(x, z, W, D)) return 'F'
+    if (y === H - 1) {
+      if (onX || onZ) return 'F'
+      return x === 3 ? 'W' : null
+    }
+    var idx = onX ? z : x
+    if (y === 5) return 'F'
+    if (y === 2) return 'H'
+    if (y === 3 || y === 4) return idx % 2 === 1 ? 'W' : null
+    return null
+  }
+  // interferometer: hull plinth, a wide glass band with frame mullions, a truss ring and a frame rim
+  function ehiRule(x, y, z, W, H, D) {
+    var onX = x === 0 || x === W - 1
+    var idx = onX ? z : x
+    if (isEdge(x, z, W, D) || y === 4) return 'F'
+    if (y === 1) return 'H'
+    if (y === 2) return idx % 4 === 0 ? 'F' : 'W'
+    return null
   }
 
   // ---------------------------------------------------------------- the bay: 7 wide, 11 deep, 7 high
@@ -45,12 +89,12 @@
   // 6 the roof. The controller sits in the front wall (z 10).
   const BAY_PARTS = { energy_input: { min: 1, max: 2 }, input_bus: { min: 1, max: 2 }, output_bus: { min: 1, max: 2 } }
   function bayLayer(z) {
-    const rows = []
-    for (let y = 0; y < 7; y++) {
-      let row = ''
-      for (let x = 0; x < 7; x++) {
+    var rows = []
+    for (var y = 0; y < 7; y++) {
+      var row = ''
+      for (var x = 0; x < 7; x++) {
         var edge = x === 0 || x === 6 || z === 0 || z === 10
-        let c = ' '
+        var c = ' '
         if (y === 0) c = 'X'
         else if (y === 6) c = 'C'
         else if (edge) c = z === 10 && y === 1 ? (x === 3 ? 'S' : 'X') : 'C'
@@ -63,12 +107,15 @@
     return rows
   }
   const BAY_SPEC = {
-    slices: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map(bayLayer),
+    slices: dress([0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map(bayLayer), 'C', bayRule),
     symbols: {
       S: Pat.controller(),
       X: parts(STATION, 16, BAY_PARTS),
       C: Pat.block(STATION),
       R: Pat.frame(['titanium']),
+      F: Pat.frame(['tungsten_steel']),
+      W: Pat.block('gtceu:fusion_glass'),
+      H: Pat.block('grindless:pressure_hull_casing'),
       D: Pat.block(RELAY)
     }
   }
@@ -78,12 +125,12 @@
   // 3 the 7 x 7 dish inside a truss ring, 4 the rim
   const EHI_PARTS = { energy_input: { min: 1, max: 2 }, input_bus: { min: 1, max: 2 }, output_bus: { min: 1, max: 2 } }
   function ehiLayer(z) {
-    const rows = []
-    for (let y = 0; y < 5; y++) {
-      let row = ''
-      for (let x = 0; x < 9; x++) {
+    var rows = []
+    for (var y = 0; y < 5; y++) {
+      var row = ''
+      for (var x = 0; x < 9; x++) {
         var edge = x === 0 || x === 8 || z === 0 || z === 8
-        let c = ' '
+        var c = ' '
         if (y === 0) c = 'X'
         else if (edge) c = z === 8 && y === 1 ? (x === 4 ? 'S' : 'X') : 'C'
         else if (y === 3) c = 'A'
@@ -95,11 +142,14 @@
     return rows
   }
   const EHI_SPEC = {
-    slices: [0, 1, 2, 3, 4, 5, 6, 7, 8].map(ehiLayer),
+    slices: dress([0, 1, 2, 3, 4, 5, 6, 7, 8].map(ehiLayer), 'C', ehiRule),
     symbols: {
       S: Pat.controller(),
       X: parts(STATION, 20, EHI_PARTS),
       C: Pat.block(STATION),
+      F: Pat.frame(['tungsten_steel']),
+      W: Pat.block('gtceu:fusion_glass'),
+      H: Pat.block('grindless:pressure_hull_casing'),
       A: Pat.block(DISH),
       M: Pat.block(MASER)
     }

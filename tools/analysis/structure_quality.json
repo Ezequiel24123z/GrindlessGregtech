@@ -1,10 +1,8 @@
 {
  "gtceu:accelerator_driven_reactor": {
-  "v": [
-   "dominant-share"
-  ],
-  "bt": 4,
-  "ds": 0.935,
+  "v": [],
+  "bt": 8,
+  "ds": 0.377,
   "c": 725
  },
  "gtceu:actinide_partitioning_plant": {
@@ -32,20 +30,15 @@
   "c": 116
  },
  "gtceu:amorphous_ice_annealer": {
-  "v": [
-   "dominant-share"
-  ],
-  "bt": 3,
-  "ds": 0.963,
+  "v": [],
+  "bt": 5,
+  "ds": 0.343,
   "c": 135
  },
  "gtceu:antimatter_trap": {
-  "v": [
-   "mono-block",
-   "dominant-share"
-  ],
-  "bt": 3,
-  "ds": 0.853,
+  "v": [],
+  "bt": 6,
+  "ds": 0.433,
   "c": 218
  },
  "gtceu:ark_biosphere": {
@@ -129,11 +122,9 @@
   "c": 88
  },
  "gtceu:boron_nitride_reactor": {
-  "v": [
-   "dominant-share"
-  ],
-  "bt": 4,
-  "ds": 0.936,
+  "v": [],
+  "bt": 6,
+  "ds": 0.509,
   "c": 284
  },
  "gtceu:calutron": {
@@ -240,11 +231,9 @@
   "c": 96
  },
  "gtceu:cryotank_winder": {
-  "v": [
-   "dominant-share"
-  ],
-  "bt": 4,
-  "ds": 0.877,
+  "v": [],
+  "bt": 7,
+  "ds": 0.368,
   "c": 303
  },
  "gtceu:crystal_growth_furnace": {
@@ -370,12 +359,9 @@
   "c": 67
  },
  "gtceu:event_horizon_interferometer": {
-  "v": [
-   "dominant-share",
-   "no-functional-detail"
-  ],
-  "bt": 3,
-  "ds": 0.803,
+  "v": [],
+  "bt": 6,
+  "ds": 0.452,
   "c": 260
  },
  "gtceu:extraction_cascade": {
@@ -396,11 +382,9 @@
   "c": 130
  },
  "gtceu:fibre_draw_tower": {
-  "v": [
-   "dominant-share"
-  ],
-  "bt": 5,
-  "ds": 0.945,
+  "v": [],
+  "bt": 6,
+  "ds": 0.295,
   "c": 272
  },
  "gtceu:fission_reactor": {
@@ -464,11 +448,9 @@
   "c": 90
  },
  "gtceu:heat_source_works": {
-  "v": [
-   "dominant-share"
-  ],
+  "v": [],
   "bt": 4,
-  "ds": 0.876,
+  "ds": 0.434,
   "c": 146
  },
  "gtceu:heavy_ion_cyclotron": {
@@ -596,11 +578,9 @@
   "c": 85
  },
  "gtceu:kuiper_interceptor_bay": {
-  "v": [
-   "dominant-share"
-  ],
-  "bt": 3,
-  "ds": 0.946,
+  "v": [],
+  "bt": 5,
+  "ds": 0.486,
   "c": 281
  },
  "gtceu:kuiper_survey_telescope": {
@@ -640,14 +620,9 @@
   "c": 101
  },
  "gtceu:laser_fusion_chamber": {
-  "v": [
-   "hollow-box",
-   "dominant-share",
-   "few-block-types",
-   "no-functional-detail"
-  ],
-  "bt": 2,
-  "ds": 0.963,
+  "v": [],
+  "bt": 5,
+  "ds": 0.569,
   "c": 866
  },
  "gtceu:laser_sail_launcher": {
@@ -672,12 +647,9 @@
   "c": 296
  },
  "gtceu:light_sail_fab": {
-  "v": [
-   "dominant-share",
-   "no-functional-detail"
-  ],
-  "bt": 3,
-  "ds": 0.865,
+  "v": [],
+  "bt": 6,
+  "ds": 0.446,
   "c": 252
  },
  "gtceu:lunar_drill": {
@@ -728,14 +700,9 @@
   "c": 1319
  },
  "gtceu:mega_factory": {
-  "v": [
-   "hollow-box",
-   "dominant-share",
-   "few-block-types",
-   "no-functional-detail"
-  ],
-  "bt": 2,
-  "ds": 0.997,
+  "v": [],
+  "bt": 6,
+  "ds": 0.597,
   "c": 1310
  },
  "gtceu:megabar_press": {
@@ -790,19 +757,15 @@
   "c": 130
  },
  "gtceu:mocvd_reactor": {
-  "v": [
-   "dominant-share"
-  ],
-  "bt": 5,
-  "ds": 0.889,
+  "v": [],
+  "bt": 8,
+  "ds": 0.365,
   "c": 245
  },
  "gtceu:muon_fusion_cell": {
-  "v": [
-   "dominant-share"
-  ],
-  "bt": 4,
-  "ds": 0.976,
+  "v": [],
+  "bt": 6,
+  "ds": 0.541,
   "c": 459
  },
  "gtceu:mv_greenhouse": {
@@ -853,19 +816,15 @@
   "c": 130
  },
  "gtceu:neptune_deep_siphon": {
-  "v": [
-   "dominant-share"
-  ],
-  "bt": 3,
-  "ds": 0.969,
+  "v": [],
+  "bt": 5,
+  "ds": 0.441,
   "c": 423
  },
  "gtceu:neural_culture_vat": {
-  "v": [
-   "dominant-share"
-  ],
-  "bt": 5,
-  "ds": 0.745,
+  "v": [],
+  "bt": 6,
+  "ds": 0.468,
   "c": 232
  },
  "gtceu:neutrino_observatory": {
@@ -915,12 +874,9 @@
   "c": 251
  },
  "gtceu:optical_ground_station": {
-  "v": [
-   "dominant-share",
-   "no-functional-detail"
-  ],
-  "bt": 3,
-  "ds": 0.911,
+  "v": [],
+  "bt": 5,
+  "ds": 0.408,
   "c": 317
  },
  "gtceu:optical_miner": {
@@ -976,11 +932,9 @@
   "c": 230
  },
  "gtceu:penetrator_probe_bay": {
-  "v": [
-   "dominant-share"
-  ],
-  "bt": 3,
-  "ds": 0.974,
+  "v": [],
+  "bt": 5,
+  "ds": 0.537,
   "c": 273
  },
  "gtceu:photonic_foundry": {
@@ -1057,28 +1011,21 @@
   "c": 170
  },
  "gtceu:powder_bed_printer": {
-  "v": [
-   "dominant-share"
-  ],
-  "bt": 6,
-  "ds": 0.882,
+  "v": [],
+  "bt": 8,
+  "ds": 0.455,
   "c": 247
  },
  "gtceu:powder_in_tube_line": {
-  "v": [
-   "mono-block",
-   "dominant-share"
-  ],
-  "bt": 5,
-  "ds": 0.93,
+  "v": [],
+  "bt": 8,
+  "ds": 0.548,
   "c": 200
  },
  "gtceu:precursor_probe_bay": {
-  "v": [
-   "dominant-share"
-  ],
-  "bt": 3,
-  "ds": 0.948,
+  "v": [],
+  "bt": 6,
+  "ds": 0.503,
   "c": 331
  },
  "gtceu:pressurized_vein_drill": {
@@ -1107,11 +1054,9 @@
   "c": 386
  },
  "gtceu:pyroprocessing_cell": {
-  "v": [
-   "dominant-share"
-  ],
-  "bt": 4,
-  "ds": 0.854,
+  "v": [],
+  "bt": 5,
+  "ds": 0.35,
   "c": 255
  },
  "gtceu:quantum_fabricator": {
@@ -1332,20 +1277,15 @@
   "c": 98
  },
  "gtceu:srf_cavity_works": {
-  "v": [
-   "dominant-share"
-  ],
-  "bt": 5,
-  "ds": 0.911,
+  "v": [],
+  "bt": 7,
+  "ds": 0.543,
   "c": 292
  },
  "gtceu:starchip_fab": {
-  "v": [
-   "dominant-share",
-   "no-functional-detail"
-  ],
-  "bt": 3,
-  "ds": 0.898,
+  "v": [],
+  "bt": 5,
+  "ds": 0.49,
   "c": 99
  },
  "gtceu:steam_alloy_smelter": {
@@ -1442,11 +1382,9 @@
   "c": 72
  },
  "gtceu:superfluid_helium_plant": {
-  "v": [
-   "dominant-share"
-  ],
-  "bt": 3,
-  "ds": 0.974,
+  "v": [],
+  "bt": 6,
+  "ds": 0.544,
   "c": 273
  },
  "gtceu:superheavy_chemistry_lab": {
@@ -1476,11 +1414,9 @@
   "c": 138
  },
  "gtceu:synchrotron": {
-  "v": [
-   "dominant-share"
-  ],
-  "bt": 4,
-  "ds": 0.977,
+  "v": [],
+  "bt": 6,
+  "ds": 0.631,
   "c": 1138
  },
  "gtceu:syngas_plant": {
@@ -1515,11 +1451,9 @@
   "c": 135
  },
  "gtceu:thruster_works": {
-  "v": [
-   "dominant-share"
-  ],
-  "bt": 4,
-  "ds": 0.779,
+  "v": [],
+  "bt": 7,
+  "ds": 0.453,
   "c": 341
  },
  "gtceu:transuranium_facility": {
@@ -1537,14 +1471,9 @@
   "c": 143
  },
  "gtceu:triton_geyser_sampler": {
-  "v": [
-   "hollow-box",
-   "dominant-share",
-   "few-block-types",
-   "no-functional-detail"
-  ],
-  "bt": 2,
-  "ds": 0.977,
+  "v": [],
+  "bt": 5,
+  "ds": 0.477,
   "c": 223
  },
  "gtceu:uev_fusion_reactor": {
@@ -1629,11 +1558,9 @@
   "c": 163
  },
  "gtceu:volatile_ice_fractionator": {
-  "v": [
-   "dominant-share"
-  ],
-  "bt": 3,
-  "ds": 0.943,
+  "v": [],
+  "bt": 5,
+  "ds": 0.478,
   "c": 231
  },
  "gtceu:volcanic_intake": {
@@ -1748,12 +1675,9 @@
   "c": 118
  },
  "gtceu:zone_refining_tower": {
-  "v": [
-   "mono-block",
-   "dominant-share"
-  ],
-  "bt": 3,
-  "ds": 0.92,
+  "v": [],
+  "bt": 6,
+  "ds": 0.389,
   "c": 114
  }
 }
