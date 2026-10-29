@@ -672,6 +672,56 @@
     })
   }
 
+  // UXV-A2 rows (circuits 11-14; 10 is UIV's r-process ash, so the design's 10-13 moved up by one): the 5N platinum metals of the spintronic
+  // targets (lines 4 and 10) and the recovery of the etch residue and sputter redeposit (lines 4, 6-8, 10), which is GTM's platinum group
+  // sludge. Same electrode wear and no voiding of the cargo, as the plans. The acid the metals are dissolved in comes back diluted.
+  var UXV_ROWS = [
+    {
+      name: 'five_n_platinum', circuit: 11,
+      itemIn: 'gtceu:platinum_dust', fluidsIn: [['gtceu:hydrochloric_acid', 2000], ['gtceu:chlorine', 1000]],
+      itemsOut: [['grindless:five_n_platinum', 1]], fluidsOut: [['gtceu:diluted_hydrochloric_acid', 2000]],
+      eut: 1920, duration: 300
+    },
+    {
+      name: 'five_n_ruthenium', circuit: 12,
+      itemIn: 'gtceu:ruthenium_dust', fluidsIn: [['gtceu:chlorine', 3000], ['gtceu:hydrogen', 3000]],
+      itemsOut: [['grindless:five_n_ruthenium', 1]], fluidsOut: [['gtceu:hydrochloric_acid', 3000]],
+      eut: 1920, duration: 300
+    },
+    {
+      name: 'five_n_iridium', circuit: 13,
+      itemIn: 'gtceu:iridium_dust', fluidsIn: [['gtceu:chlorine', 1000], ['gtceu:hydrogen', 1000]],
+      itemsOut: [['grindless:five_n_iridium', 1]], fluidsOut: [['gtceu:hydrochloric_acid', 1000]],
+      eut: 1920, duration: 300
+    },
+    {
+      name: 'etch_residue', circuit: 14,
+      itemIn: 'gtceu:platinum_group_sludge_dust', fluidsIn: [['gtceu:hydrochloric_acid', 3000], ['gtceu:nitric_acid', 1000]],
+      itemsOut: [['gtceu:platinum_dust', 1], ['gtceu:ruthenium_dust', 1]], fluidsOut: [['minecraft:water', 2000]],
+      eut: 1920, duration: 300
+    }
+  ]
+
+  function addUxvRows(event) {
+    UXV_ROWS.forEach(function (r) {
+      var missing = [r.itemIn].concat(r.itemsOut.map(function (o) { return o[0] })).filter(function (id) { return !Item.exists(id) })
+        .concat(r.fluidsIn.concat(r.fluidsOut).map(function (f) { return f[0] }).filter(function (id) { return !Fluid.exists(id) }))
+      if (missing.length > 0) {
+        console.error(LOG + 'pgm_refining row ' + r.name + ' skipped, unknown id(s): ' + missing.join(', '))
+        return
+      }
+      var recipe = event.recipes.gtceu.pgm_refining('grindless:uxv/' + r.name)
+      recipe.itemInputs('1x ' + r.itemIn)
+      recipe.chancedInput('1x ' + ELECTRODE, ELECTRODE_WEAR, 0)
+      recipe.circuit(r.circuit)
+      r.fluidsIn.forEach(function (f) { recipe.inputFluids(Fluid.of(f[0], f[1])) })
+      r.itemsOut.forEach(function (o) { recipe.itemOutputs(o[1] + 'x ' + o[0]) })
+      r.fluidsOut.forEach(function (f) { recipe.outputFluids(Fluid.of(f[0], f[1])) })
+      recipe.EUt(r.eut).duration(r.duration)
+      recipe.addDataBool(KEEP_KEY, true)
+    })
+  }
+
   // ---------------------------------------------------------------- crafting
 
   function missingOf(ids) {
@@ -718,6 +768,11 @@
       addUivRows(event)
     } catch (e4) {
       console.error(LOG + 'platinum plant UIV rows failed: ' + e4)
+    }
+    try {
+      addUxvRows(event)
+    } catch (e5) {
+      console.error(LOG + 'platinum plant UXV rows failed: ' + e5)
     }
     try {
       addCrafting(event)

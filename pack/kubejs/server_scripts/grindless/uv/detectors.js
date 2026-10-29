@@ -73,6 +73,14 @@
   TABLE.push({ name: 'si28_donor_regrow', type: 'zone_refining', circuit: 7, itemsIn: [item('grindless:si28_donor_wafer', 10)],
     fluidsIn: [fluid('gtceu:argon', 1000)], itemsOut: [item('grindless:si28_fz_ingot', 1)], fluidsOut: [], eut: UVA, duration: 800 })
 
+  // UXV-A2: 7N tellurium and germanium for the spintronic stacks (circuits 8-9; 4-7 are taken); the head and tail are returned as dust
+  TABLE.push({ name: 'seven_n_tellurium', type: 'zone_refining', circuit: 8, itemsIn: [item('gtceu:tellurium_dust', 2)],
+    fluidsIn: [fluid('gtceu:argon', 1000)], itemsOut: [item('grindless:seven_n_tellurium', 1), item('gtceu:small_tellurium_dust', 4)],
+    fluidsOut: [], eut: UVA, duration: 800 })
+  TABLE.push({ name: 'seven_n_germanium', type: 'zone_refining', circuit: 9, itemsIn: [item(GE_DUST, 2)],
+    fluidsIn: [fluid('gtceu:argon', 1000)], itemsOut: [item('grindless:seven_n_germanium', 1), item('gtceu:small_germanium_dust', 4)],
+    fluidsOut: [], eut: UVA, duration: 800 })
+
   D.recipes = TABLE.map(function (t) {
     return {
       name: t.name, type: t.type, recipeId: 'grindless:' + t.type + '/' + t.name, circuit: t.circuit, itemsIn: t.itemsIn,
