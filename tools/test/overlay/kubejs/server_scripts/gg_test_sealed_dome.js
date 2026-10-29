@@ -350,29 +350,38 @@
   }
 
   function checkCrafting() {
-    var id = dome().craftingId || 'grindless:assembler/sealed_dome'
-    var r = byId(id)
-    var result = '?'
-    if (r !== null) {
+    // The controller's recipe may move between recipe types and ids as the quality reviews rework it: find it by what it makes
+    // (any type, GT or vanilla) and check that it exists and needs nothing from after the EV era of the dome. Its published id
+    // is only the first guess.
+    var guess = dome().craftingId
+    var found = []
+    asArray(S.server.getRecipeManager().getRecipes()).forEach(function (r) {
       try {
-        result = itemIdOf(r.getResultItem(S.server.registryAccess()))
-      } catch (e) {
-        result = 'unreadable (' + e + ')'
+        var out
+        if (isGT(r)) out = itemContents(r, true).map(function (t) { return t.replace(/ x\d+.*$/, '') })
+        else out = [itemIdOf(r.getResultItem(S.server.registryAccess()))]
+        if (out.indexOf(DOME) >= 0) found.push(r)
+      } catch (e) { /* not an item recipe */ }
+    })
+    var r = found.length > 0 ? found[0] : null
+    var id = r === null ? String(guess) : String(r.getId())
+    var inputs = []
+    if (r !== null) {
+      if (isGT(r)) {
+        inputs = itemContents(r, false).map(function (t) { return t.replace(/ x\d+.*$/, '') })
+      } else {
+        asArray(r.getIngredients()).forEach(function (ing) {
+          try {
+            var ids = asArray(ing.getItemIds()).map(String)
+            if (ids.length > 0) inputs.push(ids[0])
+          } catch (e) { /* tool or empty slot */ }
+        })
       }
     }
-    var ingredients = []
-    if (r !== null) {
-      asArray(r.getIngredients()).forEach(function (ing) {
-        try {
-          var ids = asArray(ing.getItemIds()).map(String)
-          if (ids.length > 0) ingredients.push(ids.length === 1 ? ids[0] : ids[0] + '(+' + (ids.length - 1) + ')')
-        } catch (e) { /* tool or empty slot */ }
-      })
-    }
-    var need = ['gtceu:hv_greenhouse', 'gtceu:ev_machine_hull', 'gtceu:ev_electric_pump']
-    var lacking = need.filter(function (n) { return ingredients.join(' ').indexOf(n) < 0 })
-    check(SCOPE, 'crafting', r !== null && result === DOME && lacking.length === 0, id + (r === null ? ' missing' : ' -> ' + result +
-      ' from [' + ingredients.join(', ') + ']' + (lacking.length > 0 ? ' lacking ' + lacking.join(',') : '')))
+    var later = /(^|[:_/])(iv|luv|zpm|uv|uhv|uev|uiv|uxv|opv|max)(_|$)/
+    var tooLate = inputs.filter(function (n) { return later.test(n.replace(/^#/, '')) })
+    check(SCOPE, 'crafting', r !== null && inputs.length > 0 && tooLate.length === 0, id + (r === null ? ' missing: no recipe makes ' + DOME : ' -> ' + DOME +
+      ' (' + found.length + ' recipe(s)) from [' + inputs.join(', ') + ']' + (tooLate.length > 0 ? ' needs later-era input ' + tooLate.join(',') : '')))
   }
 
   function checkCreatures() {
