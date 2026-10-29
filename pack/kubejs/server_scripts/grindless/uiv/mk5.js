@@ -7,7 +7,8 @@
 //   gtceu:proton_polarisation   polarised proton source, circuit 1 detritiated protium, 2 Li-6H, 3 15NH3.
 //   gtceu:fusion_reactor        the Mk5 ring: three premixed fuels, one plasma each (a row with "start" gets fusionStartEU).
 //   chemical_reactor, compressor, mixer, centrifuge, assembler   the line steps GTM can run (ids grindless:<type>/<name>).
-//   crafting                    the controllers: UIV hull + 2 UIV parts + 2 optical mainframes, grindless:crafting/<machine>.
+//   assembly_line               the controllers: UIV hull + 2 UIV parts + 2 optical mainframes + UIV circuits + 3 line items, with
+//                               soldering alloy, lubricant and neutronium, behind station research, grindless:assembly_line/<machine>.
 //
 // Lookup safety: a recipe whose ingredients are a subset of another's of its type can hide it; checked at load (a clash is an error).
 // Published for the smoke test: global.grindless.mk5.recipes, .skipped, .clashes, .controllerRecipes.
@@ -158,21 +159,34 @@
     console.info(LOG + 'mk5: ' + MK.recipes.length + ' recipes; skipped ' + MK.skipped.length)
   }
 
-  // docs/eras/uiv.md "Voltages and controllers": UIV hull + 2 UIV components + 2 optical mainframes
+  // docs/eras/uiv.md "Voltages and controllers": UIV hull + 2 UIV components + 2 optical mainframes, here raised to an assembly line
   function addControllers(event) {
     var HULL = 'gtceu:uiv_machine_hull'
     var MAINFRAME = 'gtnn:optical_mainframe'
-    var parts = { polarised_proton_source: 'grindless:uiv_electric_pump', uiv_fusion_reactor: 'grindless:uiv_electric_piston' }
+    var defs = [
+      { name: 'polarised_proton_source', part: 'grindless:uiv_electric_pump', research: 'grindless:cps_wetted_mesh', domain: ['2x grindless:li6_hydride', '2x grindless:first_wall_tile', '2x grindless:divertor_cassette'] },
+      { name: 'uiv_fusion_reactor', part: 'grindless:uiv_electric_piston', research: 'grindless:divertor', domain: ['2x grindless:first_wall_tile', '2x grindless:li_sn_armoured_tile', '2x grindless:cps_wetted_mesh'] }
+    ]
     MK.controllerRecipes = []
-    Object.keys(parts).forEach(function (name) {
-      var machine = 'gtceu:' + name
-      var missing = [HULL, parts[name], MAINFRAME, machine].filter(function (id) { return !Item.exists(id) })
+    defs.forEach(function (d) {
+      var machine = 'gtceu:' + d.name
+      var ids = [HULL, d.part, MAINFRAME, machine, d.research].concat(d.domain.map(function (s) { return s.replace(/^\d+x /, '') }))
+      var missing = ids.filter(function (id) { return !Item.exists(id) })
       if (missing.length > 0) {
-        console.error(LOG + name + ' controller recipe skipped, unknown item(s): ' + missing.join(', '))
+        console.error(LOG + d.name + ' controller recipe skipped, unknown item(s): ' + missing.join(', '))
         return
       }
-      event.recipes.gtceu.shaped(machine, ['OPO', 'PHP'], { O: MAINFRAME, P: parts[name], H: HULL }).id('grindless:crafting/' + name)
-      MK.controllerRecipes.push('grindless:crafting/' + name)
+      var b = event.recipes.gtceu.assembly_line('grindless:' + d.name)
+      b.itemInputs(HULL)
+      b.itemInputs('2x ' + d.part)
+      b.itemInputs('2x ' + MAINFRAME)
+      b.itemInputs('4x #gtceu:circuits/uiv')
+      d.domain.forEach(function (s) { b.itemInputs(s) })
+      b.inputFluids(Fluid.of('gtceu:soldering_alloy', 2304), Fluid.of('gtceu:lubricant', 2000), Fluid.of('gtceu:neutronium', 576))
+      b.itemOutputs(machine)
+      b.stationResearch(function (r) { return r.researchStack(Item.of(d.research)).CWUt(64).EUt(7864320) })
+      b.EUt(7864320).duration(1500)
+      MK.controllerRecipes.push('grindless:assembly_line/' + d.name)
     })
   }
 

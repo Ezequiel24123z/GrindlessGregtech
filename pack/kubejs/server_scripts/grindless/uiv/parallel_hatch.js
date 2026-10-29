@@ -1,8 +1,9 @@
 // priority: -24649
 // Gregtech Grindless - the UIV parallel hatch's recipe (package UIV-M1; the hatch is registered in startup_scripts/grindless/lib/parallel_hatch.js).
 //
-//   gtceu:uiv_parallel_hatch (Insane Parallel Control Hatch, up to 16384 copies of a recipe) -> grindless:crafting/uiv_parallel_hatch
-//   The UEV hatch's shape one tier up: a UIV sensor and emitter (UIV-F1), 4 UIV circuits, a UIV hull and 2 double metallic hydrogen cables.
+//   gtceu:uiv_parallel_hatch (Insane Parallel Control Hatch, up to 16384 copies of a recipe) -> grindless:assembly_line/uiv_parallel_hatch
+//   The UEV hatch's shape one tier up, now an assembly line behind station research: a UIV sensor and emitter (UIV-F1), UIV circuits, a UIV hull,
+//   2 double metallic hydrogen cables, FFKM seals and rhea plate, with soldering alloy, lubricant and neutronium.
 //   GTM has no recipe for it, so nothing is removed.
 //
 // Published for the smoke test: global.grindless.uivParallelHatch { recipeId, output, missing, done }.
@@ -13,10 +14,10 @@
   var H = G.uivParallelHatch || (G.uivParallelHatch = {})
 
   var OUTPUT = 'gtceu:uiv_parallel_hatch'
-  var PATTERN = ['SZE', 'ZHZ', 'CZC']
-  var KEY = { S: 'grindless:uiv_sensor', E: 'grindless:uiv_emitter', Z: '#gtceu:circuits/uiv', H: 'gtceu:uiv_machine_hull', C: 'gtceu:metallic_hydrogen_double_cable' }
+  var RESEARCH = 'grindless:uiv_emitter'
+  var KEY = { S: 'grindless:uiv_sensor', E: 'grindless:uiv_emitter', Z: '#gtceu:circuits/uiv', H: 'gtceu:uiv_machine_hull', C: 'gtceu:metallic_hydrogen_double_cable', P: 'gtceu:rhea_plate', F: 'grindless:ffkm_seal' }
 
-  H.recipeId = 'grindless:crafting/uiv_parallel_hatch'
+  H.recipeId = 'grindless:assembly_line/uiv_parallel_hatch'
   H.output = OUTPUT
   H.missing = []
   H.done = false
@@ -32,7 +33,18 @@
         H.missing = missing
         console.error(LOG + H.recipeId + ' skipped, unknown item(s): ' + missing.join(', '))
       } else {
-        event.shaped(OUTPUT, PATTERN, KEY).id(H.recipeId)
+        var b = event.recipes.gtceu.assembly_line('grindless:uiv_parallel_hatch')
+        b.itemInputs(KEY.H)
+        b.itemInputs(KEY.S)
+        b.itemInputs(KEY.E)
+        b.itemInputs('2x ' + KEY.C)
+        b.itemInputs('4x ' + KEY.Z)
+        b.itemInputs('8x ' + KEY.P)
+        b.itemInputs('4x ' + KEY.F)
+        b.inputFluids(Fluid.of('gtceu:soldering_alloy', 2304), Fluid.of('gtceu:lubricant', 2000), Fluid.of('gtceu:neutronium', 576))
+        b.itemOutputs(OUTPUT)
+        b.stationResearch(function (r) { return r.researchStack(Item.of(RESEARCH)).CWUt(64).EUt(7864320) })
+        b.EUt(7864320).duration(1500)
       }
     } catch (e) {
       console.error(LOG + H.recipeId + ' failed: ' + e)

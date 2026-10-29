@@ -133,7 +133,9 @@ test('the only recipes are the hull and the four hatches, assembled at UEV volta
   const ids = mine.map((r) => short(r.i).replace(/^[a-z_]+\//, '')).sort();
   assert.deepEqual(ids, [...RECIPE_IDS].sort());
   for (const r of mine) {
-    assert.equal(r.t, 'gtceu:assembler', `${r.i} is not an assembler recipe`);
+    assert.equal(r.t, 'gtceu:assembly_line', `${r.i} is not an assembly line recipe`);
+    assert.match(r.i, /^grindless:assembly_line\//, `${r.i} has the assembly_line id`);
+    assert.ok((r.j.recipeConditions || []).some((c) => c.type === 'research'), `${r.i} has station research`);
     assert.deepEqual(r.j.tickInputs.eu.map((e) => e.content), [UEV_EUT], `${r.i} runs at V[UEV]`);
     const out = JSON.stringify(r.j.outputs.item);
     const name = short(r.i).replace(/^[a-z_]+\//, '');

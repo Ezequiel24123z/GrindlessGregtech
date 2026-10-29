@@ -79,6 +79,7 @@ test('RHEA, Wf/RHEA, Ti-50, the glass and PrNi5 come only from the melter', () =
     'gtceu:prni5_dust': 'prni5_melt'
   };
   for (const [id, name] of Object.entries(claims)) {
+    // QR-R7: the flexspline lathe returns BMG swarf as glass dust (a trivial-step scrap return), the melter stays the only source of fresh glass
     const mine = Object.entries(T.types).flatMap(([type, t]) => t.recipes.filter((r) => outputs(r).includes(id)).map((r) => `${type}/${r.name}`));
     assert.deepEqual(mine, [`levitation_melting/${name}`], id);
     for (const f of OTHER_TABLES) {
@@ -88,6 +89,7 @@ test('RHEA, Wf/RHEA, Ti-50, the glass and PrNi5 come only from the melter', () =
       if (tbl.types && tbl.types.levitation_melting) {
         const types = { ...tbl.types };
         delete types.levitation_melting;
+        if (id === 'gtceu:zrticunibe_glass_dust' && f === 'uiv_components.json') delete types.lathe;
         txt = JSON.stringify({ ...tbl, types });
       }
       assert.ok(!new RegExp(`"(?:itemsOut|fluidsOut)"\\s*:\\s*\\[[^\\]]*"${id}"`).test(txt), `${f} produces ${id}`);

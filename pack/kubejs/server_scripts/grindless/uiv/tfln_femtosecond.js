@@ -8,7 +8,8 @@
 //   gtceu:femtosecond_writing   femtosecond writer, circuit 1 interposer blank, 2 2PP lattice, 3 orifice plate, 4 5D-crystal blank.
 //   chemical_reactor, distillery, cutter, assembler, laser_engraver, electric_blast_furnace   the line steps GTM can run
 //                               (ids grindless:<type>/<name>).
-//   crafting                    the controllers: UIV hull + 2 UEV parts + 2 optical computers, grindless:crafting/<machine>.
+//   assembly_line               the controllers: UIV hull + 2 UEV parts + 2 optical computers + UIV circuits + 3 line items, with
+//                               soldering alloy, lubricant and neutronium, behind station research, grindless:assembly_line/<machine>.
 //
 // Lookup safety: a recipe whose ingredients are a subset of another's of its type can hide it; checked at load (a clash is an error).
 // Published for the smoke test: global.grindless.tflnFemtosecond.recipes, .skipped, .clashes, .controllerRecipes.
@@ -167,17 +168,30 @@
   function addControllers(event) {
     var HULL = 'gtceu:uiv_machine_hull'
     var COMPUTER = 'gtnn:optical_computer'
-    var parts = { tfln_fab: 'grindless:uev_electric_motor', femtosecond_writer: 'grindless:uev_emitter' }
+    var defs = [
+      { name: 'tfln_fab', part: 'grindless:uev_electric_motor', research: 'grindless:pumped_edfa', domain: ['2x grindless:silica_storage_preform', '2x grindless:er_fibre', '2x grindless:ule_boule'] },
+      { name: 'femtosecond_writer', part: 'grindless:uev_emitter', research: 'grindless:ps_cooling_laser', domain: ['2x grindless:shg_486_stage', '2x grindless:ppln_waveguide', '2x grindless:silica_storage_preform'] }
+    ]
     TF.controllerRecipes = []
-    Object.keys(parts).forEach(function (name) {
-      var machine = 'gtceu:' + name
-      var missing = [HULL, parts[name], COMPUTER, machine].filter(function (id) { return !Item.exists(id) })
+    defs.forEach(function (d) {
+      var machine = 'gtceu:' + d.name
+      var ids = [HULL, d.part, COMPUTER, machine, d.research].concat(d.domain.map(function (s) { return s.replace(/^\d+x /, '') }))
+      var missing = ids.filter(function (id) { return !Item.exists(id) })
       if (missing.length > 0) {
-        console.error(LOG + name + ' controller recipe skipped, unknown item(s): ' + missing.join(', '))
+        console.error(LOG + d.name + ' controller recipe skipped, unknown item(s): ' + missing.join(', '))
         return
       }
-      event.recipes.gtceu.shaped(machine, ['OPO', 'PHP'], { O: COMPUTER, P: parts[name], H: HULL }).id('grindless:crafting/' + name)
-      TF.controllerRecipes.push('grindless:crafting/' + name)
+      var b = event.recipes.gtceu.assembly_line('grindless:' + d.name)
+      b.itemInputs(HULL)
+      b.itemInputs('2x ' + d.part)
+      b.itemInputs('2x ' + COMPUTER)
+      b.itemInputs('4x #gtceu:circuits/uiv')
+      d.domain.forEach(function (s) { b.itemInputs(s) })
+      b.inputFluids(Fluid.of('gtceu:soldering_alloy', 2304), Fluid.of('gtceu:lubricant', 2000), Fluid.of('gtceu:neutronium', 576))
+      b.itemOutputs(machine)
+      b.stationResearch(function (r) { return r.researchStack(Item.of(d.research)).CWUt(64).EUt(7864320) })
+      b.EUt(7864320).duration(1500)
+      TF.controllerRecipes.push('grindless:assembly_line/' + d.name)
     })
   }
 
