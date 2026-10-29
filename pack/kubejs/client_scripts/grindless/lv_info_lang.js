@@ -25,6 +25,15 @@ ClientEvents.lang('en_us', event => {
 
     add('emi.grindless.info.wireless_energy_tower.0', "The Wireless Energy Tower is the store of the wireless network. It has no recipes: its 32 slots take capacitor cells of any tier, and every formed tower adds what its cells hold to the network, which is shared by every world.")
     add('emi.grindless.info.wireless_energy_tower.1', "Wireless dynamo hatches and covers put EU in; wireless energy hatches and covers at or below the network's tier take it out. With no tower formed, nothing moves. Swapping a cell unforms the tower; the stored EU stays.")
+
+    add('emi.grindless.info.wireless_energy_hatch.0', "The Wireless Energy Hatch is an energy input for multiblocks with no cable: the wireless network fills it, as long as the network's tier is at least the hatch's. It comes in every tier from LV to UIV, at 2 A (the plain one), 4 A, 16 A and 64 A.")
+    add('emi.grindless.info.wireless_energy_hatch.1', "The network is one for every world, stored in Wireless Energy Towers; with no tower formed, nothing moves. Its chunk must be loaded. Shift + right-click with an empty hand reads the network's EU and flow.")
+
+    add('emi.grindless.info.wireless_dynamo_hatch.0', "The Wireless Dynamo Hatch is the energy output of generator multiblocks with no cable: everything it gets goes into the wireless network, with 5% lost on the way in. It comes in every tier from LV to UIV, at 2 A (the plain one), 4 A, 16 A and 64 A.")
+    add('emi.grindless.info.wireless_dynamo_hatch.1', "The 64 A ones go in any generator multiblock. The EU is stored in Wireless Energy Towers, and wireless energy hatches and covers take it out. With no tower formed, nothing moves.")
+
+    add('emi.grindless.info.creature_simulator.0', "The Creature Simulator yields a creature's drops without a creature. Put the creature model (never used up), the creature's mineral and biomass in; the programmed circuit picks the drops, circuit 1 being all of them. Nobody gets hurt.")
+    add('emi.grindless.info.creature_simulator.1', "It comes in LV, MV, HV and EV. A creature of a higher tier needs a simulator of that tier or better. Models are printed from a blank model in an assembler.")
 })
 
 ClientEvents.lang('es_es', event => {
@@ -50,4 +59,13 @@ ClientEvents.lang('es_es', event => {
 
     add('emi.grindless.info.wireless_energy_tower.0', "La torre de energía inalámbrica es el almacén de la red inalámbrica. No tiene recetas: sus 32 ranuras admiten celdas de condensador de cualquier tier, y cada torre formada suma a la red lo que guardan sus celdas; la red es la misma en todos los mundos.")
     add('emi.grindless.info.wireless_energy_tower.1', "Los hatches y cubiertas dinamo inalámbricos meten EU; los hatches y cubiertas de energía inalámbricos del tier de la red o inferior lo sacan. Sin torre formada, no se mueve nada. Cambiar una celda desforma la torre; el EU guardado se conserva.")
+
+    add('emi.grindless.info.wireless_energy_hatch.0', "El hatch de energía inalámbrico es una entrada de energía para multibloques sin cable: la red inalámbrica lo llena, siempre que el tier de la red sea al menos el del hatch. Existe en todos los tiers de LV a UIV, a 2 A (el normal), 4 A, 16 A y 64 A.")
+    add('emi.grindless.info.wireless_energy_hatch.1', "La red es la misma en todos los mundos y se guarda en torres de energía inalámbrica; sin torre formada, no se mueve nada. Su chunk debe estar cargado. Mayús + clic derecho con la mano vacía muestra el EU y el flujo de la red.")
+
+    add('emi.grindless.info.wireless_dynamo_hatch.0', "El hatch dinamo inalámbrico es la salida de energía de los multibloques generadores sin cable: todo lo que recibe va a la red inalámbrica, con un 5% de pérdida al entrar. Existe en todos los tiers de LV a UIV, a 2 A (el normal), 4 A, 16 A y 64 A.")
+    add('emi.grindless.info.wireless_dynamo_hatch.1', "Los de 64 A caben en cualquier multibloque generador. El EU se guarda en torres de energía inalámbrica, y los hatches y cubiertas de energía inalámbricos lo sacan. Sin torre formada, no se mueve nada.")
+
+    add('emi.grindless.info.creature_simulator.0', "El simulador de criaturas da el botín de una criatura sin criatura. Pon el modelo de la criatura (no se gasta), su mineral y biomasa; el circuito programado elige el botín, y el 1 es todo. Nadie sale herido.")
+    add('emi.grindless.info.creature_simulator.1', "Existe en LV, MV, HV y EV. Una criatura de más tier pide un simulador de ese tier o mejor. Los modelos se imprimen a partir de un modelo en blanco en un ensamblador.")
 })

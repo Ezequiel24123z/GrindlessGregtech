@@ -1,4 +1,4 @@
-# Items and processes audit (QR-D0)
+﻿# Items and processes audit (QR-D0)
 
 Static audit of every item, fluid, machine and recipe type that Grindless registers, against the native recipe dump. It answers the owner's complaints: uncraftable objects in EMI, machines with no information, and invisible processes.
 
@@ -101,54 +101,54 @@ Owner rule: every multiblock controller needs an EMI info page that says what it
 
 | id | era | script | kind | page must say (types shown) |
 |---|---|---|---|---|
-| gtceu:algae_bioreactor | luv | kubejs/startup_scripts/grindless/luv/europa.js:97 | missing | what it does and what for; processes gtceu:bioreactor |
-| gtceu:asteroid_processor | luv | kubejs/startup_scripts/grindless/luv/asteroid_belt.js:377 | missing | what it does and what for; processes gtceu:asteroid_processing |
-| gtceu:biofoundry | luv | kubejs/startup_scripts/grindless/luv/biofoundry.js:142 | missing | what it does and what for; processes gtceu:sterile_culture |
-| gtceu:coated_conductor_line | luv | kubejs/startup_scripts/grindless/luv/coated_conductor_line.js:169 | missing | what it does and what for; processes gtceu:coated_conductor |
-| gtceu:coilgun_launcher | luv | kubejs/startup_scripts/grindless/luv/ganymede.js:136 | missing | what it does and what for; processes gtceu:probe_launch |
-| gtceu:cryobot | luv | kubejs/startup_scripts/grindless/luv/europa.js:96 | missing | what it does and what for; processes gtceu:vein_drilling |
-| gtceu:flux_tube_tether | luv | kubejs/startup_scripts/grindless/luv/io_orbit.js:314 | missing | what it does and what for; processes gtceu:electrodynamic_tether |
-| gtceu:fumarole_condenser | luv | kubejs/startup_scripts/grindless/luv/io_surface.js:253 | missing | what it does and what for; processes gtceu:fumarole_condensing |
-| gtceu:gravitational_wave_detector | luv | kubejs/startup_scripts/grindless/luv/ganymede.js:134 | missing | what it does and what for; processes gtceu:gravitational_wave_astronomy |
-| gtceu:harpoon_anchor_drill | luv | kubejs/startup_scripts/grindless/luv/asteroid_belt.js:356 | missing | what it does and what for; processes gtceu:vein_drilling |
-| gtceu:helium_refrigerator | luv | kubejs/startup_scripts/grindless/luv/helium_refrigerator.js:262 | missing | what it does and what for; processes gtceu:closed_loop_cooling |
-| gtceu:hts_magnet_works | luv | kubejs/startup_scripts/grindless/luv/hts_magnet_works.js:208 | missing | what it does and what for; processes gtceu:magnet_winding |
-| gtceu:hydroponic_ring | luv | kubejs/startup_scripts/grindless/luv/orbital_biology.js:8 | missing | what it does and what for; processes gtceu:greenhouse |
-| gtceu:mega_chemical_complex | luv | kubejs/startup_scripts/grindless/luv/mega_chemical_complex.js:34 | missing | what it does and what for; processes gtceu:large_chemical_reactor, gtceu:mega_chemical_complex |
-| gtceu:microgravity_smelter | luv | kubejs/startup_scripts/grindless/luv/orbital_industry.js:56 | missing | what it does and what for; processes gtceu:microgravity_processing |
-| gtceu:optical_miner | luv | kubejs/startup_scripts/grindless/luv/asteroid_belt.js:414 | missing | what it does and what for; processes gtceu:optical_mining |
-| gtceu:organoid_lab | luv | kubejs/startup_scripts/grindless/luv/orbital_biology.js:8 | missing | what it does and what for; processes gtceu:organoid_assembly |
-| gtceu:volcanic_intake | luv | kubejs/startup_scripts/grindless/luv/io_surface.js:271 | missing | what it does and what for; processes gtceu:volcanic_heat |
-| gtceu:wake_shield_facility | luv | kubejs/startup_scripts/grindless/luv/orbital_industry.js:58 | missing | what it does and what for; processes gtceu:wake_epitaxy |
-| gtceu:zero_g_crystal_grower | luv | kubejs/startup_scripts/grindless/luv/orbital_biology.js:8 | missing | what it does and what for; processes gtceu:microgravity_crystal_growth |
-| gtceu:actinide_partitioning_plant | zpm | kubejs/startup_scripts/grindless/zpm/actinides.js:204 | missing | what it does and what for; processes gtceu:actinide_partitioning |
-| gtceu:aerogel_works | zpm | kubejs/startup_scripts/grindless/zpm/outer_chemistry.js:50 | missing | what it does and what for; processes gtceu:supercritical_drying |
-| gtceu:assembly_hall | zpm | kubejs/startup_scripts/grindless/zpm/mega_assembly_hall.js:32 | missing | what it does and what for; processes gtceu:assembler, gtceu:circuit_assembler |
-| gtceu:deep_space_network | zpm | kubejs/startup_scripts/grindless/zpm/observatory.js:137 | missing | what it does and what for; processes gtceu:telemetry_decoding |
-| gtceu:diamond_lattice_fab | zpm | kubejs/startup_scripts/grindless/zpm/qubits.js:44 | missing | what it does and what for; processes gtceu:diamond_cvd |
-| gtceu:direct_energy_converter | zpm | kubejs/startup_scripts/grindless/zpm/fusion.js:120 | missing | what it does and what for; processes gtceu:direct_conversion |
-| gtceu:entry_probe_bay | zpm | kubejs/startup_scripts/grindless/zpm/titan_probes.js:107 | missing | what it does and what for; processes gtceu:titan_entry |
-| gtceu:europium_reductor | zpm | kubejs/startup_scripts/grindless/zpm/europium.js:145 | missing | what it does and what for; processes gtceu:valence_reduction |
-| gtceu:flyby_probe_bay | zpm | kubejs/startup_scripts/grindless/zpm/uranus.js:113 | missing | what it does and what for; processes gtceu:outer_flyby |
-| gtceu:gas_giant_siphon | zpm | kubejs/startup_scripts/grindless/zpm/saturn_siphon.js:137 | missing | what it does and what for; processes gtceu:gas_giant_siphon |
-| gtceu:ice_giant_siphon | zpm | kubejs/startup_scripts/grindless/zpm/uranus.js:109 | missing | what it does and what for; processes gtceu:ice_giant_siphon |
-| gtceu:ion_implanter | zpm | kubejs/startup_scripts/grindless/zpm/qubits.js:52 | missing | what it does and what for; processes gtceu:ion_implantation |
-| gtceu:isotope_column | zpm | kubejs/startup_scripts/grindless/zpm/saturn_siphon.js:139 | missing | what it does and what for; processes gtceu:cryogenic_isotope_separation |
-| gtceu:kuiper_survey_telescope | zpm | kubejs/startup_scripts/grindless/zpm/observatory.js:139 | missing | what it does and what for; processes gtceu:kuiper_survey |
-| gtceu:methane_pyrolyser | zpm | kubejs/startup_scripts/grindless/zpm/outer_chemistry.js:36 | missing | what it does and what for; processes gtceu:methane_pyrolysis |
-| gtceu:naquadah_fuel_works | zpm | kubejs/startup_scripts/grindless/zpm/naquadria.js:60 | missing | what it does and what for; processes gtceu:naquadah_fuel |
-| gtceu:naquadria_magnet_works | zpm | kubejs/startup_scripts/grindless/zpm/magnet_works.js:209 | missing | what it does and what for; processes gtceu:naquadria_magnets |
-| gtceu:naquadria_refinery | zpm | kubejs/startup_scripts/grindless/zpm/naquadria.js:43 | missing | what it does and what for; processes gtceu:naquadria_refining |
-| gtceu:neutrino_observatory | zpm | kubejs/startup_scripts/grindless/zpm/observatory.js:135 | missing | what it does and what for; processes gtceu:neutrino_detection |
-| gtceu:plasma_quench_caster | zpm | kubejs/startup_scripts/grindless/zpm/fusion.js:148 | missing | what it does and what for; processes gtceu:plasma_quench |
-| gtceu:plume_sampler | zpm | kubejs/startup_scripts/grindless/zpm/saturn_science.js:101 | missing | what it does and what for; processes gtceu:plume_sampling |
-| gtceu:qubit_fab | zpm | kubejs/startup_scripts/grindless/zpm/qubits.js:59 | missing | what it does and what for; processes gtceu:qubit_fabrication |
-| gtceu:ring_harvester | zpm | kubejs/startup_scripts/grindless/zpm/saturn_siphon.js:141 | missing | what it does and what for; processes gtceu:ring_harvesting |
-| gtceu:ring_seismometer | zpm | kubejs/startup_scripts/grindless/zpm/saturn_science.js:103 | missing | what it does and what for; processes gtceu:kronoseismology |
-| gtceu:slurry_separator | zpm | kubejs/startup_scripts/grindless/zpm/uranus.js:111 | missing | what it does and what for; processes gtceu:slurry_separation |
-| gtceu:tholin_reformer | zpm | kubejs/startup_scripts/grindless/zpm/titan_probes.js:109 | missing | what it does and what for; processes gtceu:tholin_reforming |
-| gtceu:vent_bioreactor | zpm | kubejs/startup_scripts/grindless/zpm/outer_chemistry.js:43 | missing | what it does and what for; processes gtceu:chemosynthesis |
-| gtceu:waste_retrieval_plant | zpm | kubejs/startup_scripts/grindless/zpm/actinides.js:188 | missing | what it does and what for; processes gtceu:waste_retrieval |
+| gtceu:algae_bioreactor | luv | kubejs/startup_scripts/grindless/luv/europa.js:97 | done (QR-I2) | what it does and what for; processes gtceu:bioreactor |
+| gtceu:asteroid_processor | luv | kubejs/startup_scripts/grindless/luv/asteroid_belt.js:377 | done (QR-I2) | what it does and what for; processes gtceu:asteroid_processing |
+| gtceu:biofoundry | luv | kubejs/startup_scripts/grindless/luv/biofoundry.js:142 | done (QR-I2) | what it does and what for; processes gtceu:sterile_culture |
+| gtceu:coated_conductor_line | luv | kubejs/startup_scripts/grindless/luv/coated_conductor_line.js:169 | done (QR-I2) | what it does and what for; processes gtceu:coated_conductor |
+| gtceu:coilgun_launcher | luv | kubejs/startup_scripts/grindless/luv/ganymede.js:136 | done (QR-I2) | what it does and what for; processes gtceu:probe_launch |
+| gtceu:cryobot | luv | kubejs/startup_scripts/grindless/luv/europa.js:96 | done (QR-I2) | what it does and what for; processes gtceu:vein_drilling |
+| gtceu:flux_tube_tether | luv | kubejs/startup_scripts/grindless/luv/io_orbit.js:314 | done (QR-I2) | what it does and what for; processes gtceu:electrodynamic_tether |
+| gtceu:fumarole_condenser | luv | kubejs/startup_scripts/grindless/luv/io_surface.js:253 | done (QR-I2) | what it does and what for; processes gtceu:fumarole_condensing |
+| gtceu:gravitational_wave_detector | luv | kubejs/startup_scripts/grindless/luv/ganymede.js:134 | done (QR-I2) | what it does and what for; processes gtceu:gravitational_wave_astronomy |
+| gtceu:harpoon_anchor_drill | luv | kubejs/startup_scripts/grindless/luv/asteroid_belt.js:356 | done (QR-I2) | what it does and what for; processes gtceu:vein_drilling |
+| gtceu:helium_refrigerator | luv | kubejs/startup_scripts/grindless/luv/helium_refrigerator.js:262 | done (QR-I2) | what it does and what for; processes gtceu:closed_loop_cooling |
+| gtceu:hts_magnet_works | luv | kubejs/startup_scripts/grindless/luv/hts_magnet_works.js:208 | done (QR-I2) | what it does and what for; processes gtceu:magnet_winding |
+| gtceu:hydroponic_ring | luv | kubejs/startup_scripts/grindless/luv/orbital_biology.js:8 | done (QR-I2) | what it does and what for; processes gtceu:greenhouse |
+| gtceu:mega_chemical_complex | luv | kubejs/startup_scripts/grindless/luv/mega_chemical_complex.js:34 | done (QR-I2) | what it does and what for; processes gtceu:large_chemical_reactor, gtceu:mega_chemical_complex |
+| gtceu:microgravity_smelter | luv | kubejs/startup_scripts/grindless/luv/orbital_industry.js:56 | done (QR-I2) | what it does and what for; processes gtceu:microgravity_processing |
+| gtceu:optical_miner | luv | kubejs/startup_scripts/grindless/luv/asteroid_belt.js:414 | done (QR-I2) | what it does and what for; processes gtceu:optical_mining |
+| gtceu:organoid_lab | luv | kubejs/startup_scripts/grindless/luv/orbital_biology.js:8 | done (QR-I2) | what it does and what for; processes gtceu:organoid_assembly |
+| gtceu:volcanic_intake | luv | kubejs/startup_scripts/grindless/luv/io_surface.js:271 | done (QR-I2) | what it does and what for; processes gtceu:volcanic_heat |
+| gtceu:wake_shield_facility | luv | kubejs/startup_scripts/grindless/luv/orbital_industry.js:58 | done (QR-I2) | what it does and what for; processes gtceu:wake_epitaxy |
+| gtceu:zero_g_crystal_grower | luv | kubejs/startup_scripts/grindless/luv/orbital_biology.js:8 | done (QR-I2) | what it does and what for; processes gtceu:microgravity_crystal_growth |
+| gtceu:actinide_partitioning_plant | zpm | kubejs/startup_scripts/grindless/zpm/actinides.js:204 | done (QR-I2) | what it does and what for; processes gtceu:actinide_partitioning |
+| gtceu:aerogel_works | zpm | kubejs/startup_scripts/grindless/zpm/outer_chemistry.js:50 | done (QR-I2) | what it does and what for; processes gtceu:supercritical_drying |
+| gtceu:assembly_hall | zpm | kubejs/startup_scripts/grindless/zpm/mega_assembly_hall.js:32 | done (QR-I2) | what it does and what for; processes gtceu:assembler, gtceu:circuit_assembler |
+| gtceu:deep_space_network | zpm | kubejs/startup_scripts/grindless/zpm/observatory.js:137 | done (QR-I2) | what it does and what for; processes gtceu:telemetry_decoding |
+| gtceu:diamond_lattice_fab | zpm | kubejs/startup_scripts/grindless/zpm/qubits.js:44 | done (QR-I2) | what it does and what for; processes gtceu:diamond_cvd |
+| gtceu:direct_energy_converter | zpm | kubejs/startup_scripts/grindless/zpm/fusion.js:120 | done (QR-I2) | what it does and what for; processes gtceu:direct_conversion |
+| gtceu:entry_probe_bay | zpm | kubejs/startup_scripts/grindless/zpm/titan_probes.js:107 | done (QR-I2) | what it does and what for; processes gtceu:titan_entry |
+| gtceu:europium_reductor | zpm | kubejs/startup_scripts/grindless/zpm/europium.js:145 | done (QR-I2) | what it does and what for; processes gtceu:valence_reduction |
+| gtceu:flyby_probe_bay | zpm | kubejs/startup_scripts/grindless/zpm/uranus.js:113 | done (QR-I2) | what it does and what for; processes gtceu:outer_flyby |
+| gtceu:gas_giant_siphon | zpm | kubejs/startup_scripts/grindless/zpm/saturn_siphon.js:137 | done (QR-I2) | what it does and what for; processes gtceu:gas_giant_siphon |
+| gtceu:ice_giant_siphon | zpm | kubejs/startup_scripts/grindless/zpm/uranus.js:109 | done (QR-I2) | what it does and what for; processes gtceu:ice_giant_siphon |
+| gtceu:ion_implanter | zpm | kubejs/startup_scripts/grindless/zpm/qubits.js:52 | done (QR-I2) | what it does and what for; processes gtceu:ion_implantation |
+| gtceu:isotope_column | zpm | kubejs/startup_scripts/grindless/zpm/saturn_siphon.js:139 | done (QR-I2) | what it does and what for; processes gtceu:cryogenic_isotope_separation |
+| gtceu:kuiper_survey_telescope | zpm | kubejs/startup_scripts/grindless/zpm/observatory.js:139 | done (QR-I2) | what it does and what for; processes gtceu:kuiper_survey |
+| gtceu:methane_pyrolyser | zpm | kubejs/startup_scripts/grindless/zpm/outer_chemistry.js:36 | done (QR-I2) | what it does and what for; processes gtceu:methane_pyrolysis |
+| gtceu:naquadah_fuel_works | zpm | kubejs/startup_scripts/grindless/zpm/naquadria.js:60 | done (QR-I2) | what it does and what for; processes gtceu:naquadah_fuel |
+| gtceu:naquadria_magnet_works | zpm | kubejs/startup_scripts/grindless/zpm/magnet_works.js:209 | done (QR-I2) | what it does and what for; processes gtceu:naquadria_magnets |
+| gtceu:naquadria_refinery | zpm | kubejs/startup_scripts/grindless/zpm/naquadria.js:43 | done (QR-I2) | what it does and what for; processes gtceu:naquadria_refining |
+| gtceu:neutrino_observatory | zpm | kubejs/startup_scripts/grindless/zpm/observatory.js:135 | done (QR-I2) | what it does and what for; processes gtceu:neutrino_detection |
+| gtceu:plasma_quench_caster | zpm | kubejs/startup_scripts/grindless/zpm/fusion.js:148 | done (QR-I2) | what it does and what for; processes gtceu:plasma_quench |
+| gtceu:plume_sampler | zpm | kubejs/startup_scripts/grindless/zpm/saturn_science.js:101 | done (QR-I2) | what it does and what for; processes gtceu:plume_sampling |
+| gtceu:qubit_fab | zpm | kubejs/startup_scripts/grindless/zpm/qubits.js:59 | done (QR-I2) | what it does and what for; processes gtceu:qubit_fabrication |
+| gtceu:ring_harvester | zpm | kubejs/startup_scripts/grindless/zpm/saturn_siphon.js:141 | done (QR-I2) | what it does and what for; processes gtceu:ring_harvesting |
+| gtceu:ring_seismometer | zpm | kubejs/startup_scripts/grindless/zpm/saturn_science.js:103 | done (QR-I2) | what it does and what for; processes gtceu:kronoseismology |
+| gtceu:slurry_separator | zpm | kubejs/startup_scripts/grindless/zpm/uranus.js:111 | done (QR-I2) | what it does and what for; processes gtceu:slurry_separation |
+| gtceu:tholin_reformer | zpm | kubejs/startup_scripts/grindless/zpm/titan_probes.js:109 | done (QR-I2) | what it does and what for; processes gtceu:tholin_reforming |
+| gtceu:vent_bioreactor | zpm | kubejs/startup_scripts/grindless/zpm/outer_chemistry.js:43 | done (QR-I2) | what it does and what for; processes gtceu:chemosynthesis |
+| gtceu:waste_retrieval_plant | zpm | kubejs/startup_scripts/grindless/zpm/actinides.js:188 | done (QR-I2) | what it does and what for; processes gtceu:waste_retrieval |
 | gtceu:accelerator_driven_reactor | uv | kubejs/startup_scripts/grindless/uv/thorium.js:76 | missing | what it does and what for; processes gtceu:accelerator_driven |
 | gtceu:amorphous_ice_annealer | uv | kubejs/startup_scripts/grindless/uv/kuiper.js:116 | missing | what it does and what for; processes gtceu:ice_annealing |
 | gtceu:antimatter_trap | uv | kubejs/startup_scripts/grindless/uv/accelerators.js:96 | missing | what it does and what for; processes gtceu:antimatter_storage |
@@ -243,10 +243,10 @@ Owner rule: every multiblock controller needs an EMI info page that says what it
 | gtceu:stm_lithography_cell | uiv | kubejs/startup_scripts/grindless/uiv/beuv_stm.js:58 | missing | what it does and what for; processes gtceu:stm_lithography |
 | gtceu:tfln_fab | uiv | kubejs/startup_scripts/grindless/uiv/tfln_femtosecond.js:60 | missing | what it does and what for; processes gtceu:ion_slicing |
 | gtceu:xray_pulse_profiler | uiv | kubejs/startup_scripts/grindless/uiv/j0437.js:75 | missing | what it does and what for; processes gtceu:xray_pulse_profiling |
-| gtceu:composite_autoclave | launch_road | kubejs/startup_scripts/grindless/launch_road/composite_autoclave.js:89 | missing | what it does and what for; processes gtceu:composite_curing |
-| gtceu:engine_test_stand | launch_road | kubejs/startup_scripts/grindless/launch_road/engine_test_stand.js:106 | missing | what it does and what for; processes gtceu:static_fire |
-| gtceu:lunar_drill | moon | kubejs/startup_scripts/grindless/moon/lunar_drill.js:91 | missing | what it does and what for; processes gtceu:lunar_drilling |
-| gtceu:optical_observatory | observatory | kubejs/startup_scripts/grindless/observatory/machines.js:225 | missing | what it does and what for; processes gtceu:astrophotography |
-| gtceu:radio_telescope | observatory | kubejs/startup_scripts/grindless/observatory/machines.js:240 | missing | what it does and what for; processes gtceu:radio_astronomy |
-| gtceu:steam_observatory | observatory | kubejs/startup_scripts/grindless/observatory/machines.js:208 | missing | what it does and what for; processes gtceu:stargazing |
-| gtceu:generator_array | power | kubejs/startup_scripts/grindless/power/generator_array.js:96 | missing | what it does and what for; processes gtceu:steam_turbine, gtceu:combustion_generator, gtceu:gas_turbine |
+| gtceu:composite_autoclave | launch_road | kubejs/startup_scripts/grindless/launch_road/composite_autoclave.js:89 | done (QR-I2) | what it does and what for; processes gtceu:composite_curing |
+| gtceu:engine_test_stand | launch_road | kubejs/startup_scripts/grindless/launch_road/engine_test_stand.js:106 | done (QR-I2) | what it does and what for; processes gtceu:static_fire |
+| gtceu:lunar_drill | moon | kubejs/startup_scripts/grindless/moon/lunar_drill.js:91 | done (QR-I2) | what it does and what for; processes gtceu:lunar_drilling |
+| gtceu:optical_observatory | observatory | kubejs/startup_scripts/grindless/observatory/machines.js:225 | done (QR-I2) | what it does and what for; processes gtceu:astrophotography |
+| gtceu:radio_telescope | observatory | kubejs/startup_scripts/grindless/observatory/machines.js:240 | done (QR-I2) | what it does and what for; processes gtceu:radio_astronomy |
+| gtceu:steam_observatory | observatory | kubejs/startup_scripts/grindless/observatory/machines.js:208 | done (QR-I2) | what it does and what for; processes gtceu:stargazing |
+| gtceu:generator_array | power | kubejs/startup_scripts/grindless/power/generator_array.js:96 | done (QR-I2) | what it does and what for; processes gtceu:steam_turbine, gtceu:combustion_generator, gtceu:gas_turbine |
