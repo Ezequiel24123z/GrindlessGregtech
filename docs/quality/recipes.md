@@ -64,8 +64,9 @@ and drill bits, which are exempt. It keeps the door shut for new ones.
 from everything that is not ours. It tracks `grindless:` items and fluids and our controllers; a recipe of one of our recipe types runs only once one
 of its machines can be made, and research items count as inputs. It fails if any controller cannot be made, and prints the root cycles (a controller
 that needs its own product, directly or through later steps). `--explain id,id` shows the missing inputs of each recipe for an id; `--all` lists every
-unreachable id. `ASSUMED` in the script lists ids obtained without a recipe (loot, events); it is empty. Limit: GTM material items that only our chains
-make are treated as obtainable.
+unreachable id. `ASSUMED` in the script lists ids obtained without a recipe (loot, events); it is empty. Foreign ids (GTM materials, optical circuits, circuit tags) that only
+our recipes lead to come from `recipe_bridge.json`, generated from a release obtain dump: `node tools/analysis/recipe-cycles.mjs --bridge-from <dump> --write` (regenerate once per release).
+`era-order` (`lib/era_order.mjs`, T0) fails a machine recipe that takes an item registered in a later era.
 
 ## What other packs do (research, ideas only, no code reused)
 
