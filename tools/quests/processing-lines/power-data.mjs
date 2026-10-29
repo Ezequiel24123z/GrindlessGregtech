@@ -97,7 +97,7 @@ export default gate({
     ['luvIo', 'luvTether', 'luvSI'],
     ['zpmNaq', 'zpmMk2'],
     ['uvThorium', 'uvLaser', 'uvMuon', 'uvMk3'],
-    ['uhvSwarm', 'laterDyson'],
+    ['uhvSwarm', 'laterDyson', 'uivStars'],
     ['gHull', 'gBat', 'gCable', 'gFar', 'gBig'],
     ...(WITH_WIRELESS ? [['gWireless']] : []),
   ],
@@ -634,6 +634,25 @@ export default gate({
         }),
       ],
     },
+    // ---------------------------------------------------------------- UIV
+    // figures wait for a bench measurement (as UHV's row): EU/t of the plants is in docs/eras/uiv.md, "Power"
+    uivStars: {
+      name: 'Dead stars (UIV)',
+      nodes: [
+        n('uivRing', 2.25, -1.5, M('gtceu:uiv_fusion_reactor'), 'Mk5 Fusion Ring', {
+          kind: 'info', tier: 'uiv', sub: 'Three polarised fuels, and a direct converter takes the power off the ash',
+          desc: 'Each fuel is its own recipe on the ring, and the ash of one is the feed of another.',
+        }),
+        n('uivVault', 2.25, 0, M('gtceu:decay_heat_vault'), 'Decay Heat Vault', {
+          kind: 'info', tier: 'uiv', sub: 'Aged kilonova capsules give their heat back as power',
+          desc: 'It only makes power; nothing comes out of it but heat and the ash of the capsule.',
+        }),
+        n('uivPenrose', 2.25, 1.5, M('gtceu:penrose_engine'), 'Penrose Engine', {
+          kind: 'info', tier: 'uiv', sub: 'A sled dropped into the ergosphere comes back lighter, and the engine keeps the difference',
+          desc: 'It runs at Cygnus X-1 only; the half-sled that returns is refitted into the next charge.',
+        }),
+      ],
+    },
     // ---------------------------------------------------------------- later
     laterDyson: {
       name: 'Dyson sphere',
@@ -739,20 +758,27 @@ export default gate({
           desc: 'The network jumps to UEV only when every formed tower holds these.',
           figs: [P.wcell('grindless:uev_smes_cell', 'UEV SMES', 251658240000)],
         }),
+        // UIV's cell: four UEV cells' worth
+        // (the links to the uiv_age quests 5FB006B879741A02 'UIV SMES Cell', 72D797E3DDE7ED0E, 7AB8B56ED4A5C759 and 773D4D794D1EA7A1 go in once that chapter is in the book)
+        n('wuiv', 2.25, 10, I('grindless:uiv_smes_cell'), 'UIV SMES Cell', {
+          kind: 'info', sub: 'Three hundred and eighty-four UV batteries\' worth, wound in metallic hydrogen',
+          desc: 'The network jumps to UIV only when every formed tower holds these.',
+          figs: [P.wcell('grindless:uiv_smes_cell', 'UIV SMES', 1006632960000)],
+        }),
         n('wdynH', 6.75, -2.25, I('gtceu:lv_wireless_dynamo_hatch'), 'Wireless Dynamo Hatch', {
           kind: 'info', from: [network('wtower')], sub: 'Generator multiblocks feed the network through it',
-          desc: 'Energy goes in at any voltage; the cells only limit what comes out.', figs: [P.wamps([2, 4, 16, 64], 'lv', 'uev')],
+          desc: 'Energy goes in at any voltage; the cells only limit what comes out.', figs: [P.wamps([2, 4, 16, 64], 'lv', 'uiv')],
         }),
         n('wdynC', 6.75, -0.75, I('grindless:lv_wireless_dynamo_cover'), 'Wireless Dynamo Cover', {
-          kind: 'info', from: [network('wtower')], sub: 'On a generator or a battery buffer, it feeds the network', figs: [P.wcover(2, 'lv', 'uev')],
+          kind: 'info', from: [network('wtower')], sub: 'On a generator or a battery buffer, it feeds the network', figs: [P.wcover(2, 'lv', 'uiv')],
         }),
         n('wenH', 6.75, 0.75, I('gtceu:lv_wireless_energy_hatch'), 'Wireless Energy Hatch', {
           kind: 'info', from: [network('wtower')], sub: 'Multiblocks draw from the network through it',
-          desc: 'Above the network\'s voltage it gets nothing; shift-right-click it with an empty hand to see why.', figs: [P.wamps([2, 4, 16, 64], 'lv', 'uev')],
+          desc: 'Above the network\'s voltage it gets nothing; shift-right-click it with an empty hand to see why.', figs: [P.wamps([2, 4, 16, 64], 'lv', 'uiv')],
         }),
         n('wenC', 6.75, 2.25, I('grindless:lv_wireless_energy_cover'), 'Wireless Energy Cover', {
           kind: 'info', from: [network('wtower')], sub: 'Single machines draw through it, on any side but the front',
-          desc: 'GTM machines, chargers and battery buffers, not converters or multiblock controllers; shift-right-click with an empty hand for the readout.', figs: [P.wcover(2, 'lv', 'uev')],
+          desc: 'GTM machines, chargers and battery buffers, not converters or multiblock controllers; shift-right-click with an empty hand for the readout.', figs: [P.wcover(2, 'lv', 'uiv')],
         }),
       ],
     } } : {}),
