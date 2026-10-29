@@ -40,7 +40,8 @@
 
   // A hollow shell, as zpm/uranus.js: row 0 the floor (ports or casing), the top row the roof, the walls between, the controller at the
   // middle of the front wall's first row; centre(x, z, y) says what stands inside (' ' for air).
-  function shellSlice(w, d, h, z, centre) {
+  // wall(x, z, y, w, d, h) may swap a plain wall or roof cell (QR-S3 dress) for another char; null keeps the casing
+  function shellSlice(w, d, h, z, centre, wall) {
     var rows = []
     for (var y = 0; y < h; y++) {
       var row = ''
@@ -51,6 +52,7 @@
         else if (y === h - 1) c = 'C'
         else if (edge) c = z === d - 1 && y === 1 ? (x === (w - 1) / 2 ? 'S' : 'X') : 'C'
         else c = centre(x, z, y)
+        if (c === 'C' && wall) c = wall(x, z, y, w, d, h) || c
         row += c
       }
       rows.push(row)
@@ -58,18 +60,47 @@
     return rows
   }
 
+  // posts on the four corners (and the roof edge), then bands by row
+  function isPost(x, z, y, w, d, h) {
+    var cx = x === 0 || x === w - 1
+    var cz = z === 0 || z === d - 1
+    return (cx && cz) || (y === h - 1 && (cx || cz))
+  }
+
+  // deep siphon: a derrick-like tower, glass over the scoop bay and a pipe collar at the intake
+  function siphonWall(x, z, y, w, d, h) {
+    if (isPost(x, z, y, w, d, h)) return 'F'
+    if (y === h - 1) return (x + z) % 2 === 0 ? 'G' : null
+    if (y >= 5 && y <= 9) return (x + z) % 3 === 0 ? null : 'G'
+    if (y === 3 || y === 12) return 'P'
+    if (y === 2 || y === 11) return (x + z) % 2 === 0 ? 'F' : null
+    return null
+  }
+
+  // sampler: a launch hangar with glass slits, a pipe band and a heatproof sampler-pad band
+  function samplerWall(x, z, y, w, d, h) {
+    if (isPost(x, z, y, w, d, h)) return 'F'
+    if (y === h - 1) return (x + z) % 2 === 0 ? 'G' : null
+    if (y === 2) return 'H'
+    if (y === 4 || y === 3) return (x + z) % 2 === 0 ? 'G' : null
+    if (y === 5) return 'P'
+    return null
+  }
+
   // ---------------------------------------------------------------- the deep siphon: 7 wide, 7 deep, 15 high
   // rows bottom -> top: 0 floor, 1-13 the walls around the scoop bay and the winch (two blocks longer than ZPM's), 14 the roof
   const SIPHON_PARTS = { energy_input: { min: 1, max: 2 }, input_bus: { min: 1, max: 2 }, output_hatch: { min: 1, max: 3 } }
   const SIPHON = {
     slices: [0, 1, 2, 3, 4, 5, 6].map(function (z) {
-      return shellSlice(7, 7, 15, z, function (x, zz, y) { return x === 3 && zz === 3 ? (y === 13 ? 'D' : 'F') : ' ' })
+      return shellSlice(7, 7, 15, z, function (x, zz, y) { return x === 3 && zz === 3 ? (y === 13 ? 'D' : 'F') : ' ' }, siphonWall)
     }),
     symbols: {
       S: Pat.controller(),
       X: parts(14, SIPHON_PARTS),
       C: Pat.block(TRUSS),
       F: Pat.frame(['titanium']),
+      G: Pat.block('gtceu:laminated_glass'),
+      P: Pat.block('gtceu:tungstensteel_pipe_casing'),
       D: Pat.block(GEARBOX)
     }
   }
@@ -80,13 +111,16 @@
     output_hatch: { min: 1, max: 2 } }
   const SAMPLER = {
     slices: [0, 1, 2, 3, 4, 5, 6].map(function (z) {
-      return shellSlice(7, 7, 7, z, function (x, zz, y) { return zz === 3 && y === 3 ? 'F' : ' ' })
+      return shellSlice(7, 7, 7, z, function (x, zz, y) { return zz === 3 && y === 3 ? 'F' : ' ' }, samplerWall)
     }),
     symbols: {
       S: Pat.controller(),
       X: parts(14, SAMPLER_PARTS),
       C: Pat.block(TRUSS),
-      F: Pat.frame(['titanium'])
+      F: Pat.frame(['titanium']),
+      G: Pat.block('gtceu:laminated_glass'),
+      H: Pat.block('gtceu:heatproof_machine_casing'),
+      P: Pat.block('gtceu:tungstensteel_pipe_casing')
     }
   }
 

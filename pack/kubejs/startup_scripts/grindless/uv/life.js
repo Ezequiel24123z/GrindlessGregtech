@@ -136,11 +136,13 @@
         var sideX = x === 0 || x === 6
         var sideZ = z === 0 || z === 6
         if (y === 0) c = 'X'
-        else if (y === 6) c = (x >= 2 && x <= 4 && z >= 2 && z <= 4) ? 'F' : 'P'
+        else if (y === 6) c = (x >= 2 && x <= 4 && z >= 2 && z <= 4) ? 'F' : ((sideX || sideZ) ? 'M' : 'P')
         else if (sideX || sideZ) {
           var along = sideZ ? x : z
           if (z === 6 && y === 1 && x === 3) c = 'S'
+          else if (sideX && sideZ) c = 'M'
           else if (!(sideX && sideZ) && y >= 2 && y <= 4 && along >= 2 && along <= 4) c = 'W'
+          else if (y === 5) c = 'M'
           else c = 'P'
         } else if ((x === 1 || x === 5) && (z === 1 || z === 5) && y <= 3) c = 'I'
         else if (x === 3 && z === 3 && y <= 2) c = 'B'
@@ -157,6 +159,7 @@
       X: cells(PLASCRETE, L.minCasings.vat, L.vatParts),
       P: Pat.block(PLASCRETE),
       W: Pat.block(WINDOW),
+      M: Pat.frame(['stainless_steel']),
       F: Pat.block(FILTER),
       I: Pat.block(INCUBATOR),
       B: Pat.block(PRINTER)
