@@ -77,14 +77,14 @@ test('modifier chain: mode veto + fixed parallel, non-perfect overclock, batch (
   assert.equal(list[0](machine, { getType: () => ({ registryName: 'gtceu:wiremill' }) }), 'IDENTITY');
 });
 
-test('structure: 5 x 4 x 5, one controller, 73 casing cells, 8 frames, 18 air, height within 16', () => {
+test('structure: 5 x 4 x 5, one controller, 56 casing cells, 8 frames, 14 glass, 2 coils, 3 pipes, 16 air, height within 16', () => {
   const h = harness();
   register(h);
   const d = h.G.patterns.describe('gtceu:wire_works');
   assert.ok(d, 'pattern described');
   assert.equal(d.slices.length, 5);
   let height = 0;
-  const count = { S: 0, X: 0, F: 0, '#': 0 };
+  const count = { S: 0, X: 0, F: 0, G: 0, C: 0, P: 0, '#': 0 };
   d.slices.forEach((rows) => {
     assert.equal(rows.length, 4);
     height = Math.max(height, rows.length);
@@ -94,7 +94,7 @@ test('structure: 5 x 4 x 5, one controller, 73 casing cells, 8 frames, 18 air, h
     });
   });
   assert.ok(height <= 16);
-  assert.deepEqual(plain(count), { S: 1, X: 73, F: 8, '#': 18 });
+  assert.deepEqual(plain(count), { S: 1, X: 56, F: 8, G: 14, C: 2, P: 3, '#': 16 });
   // controller in the middle of the front wall
   assert.equal(d.slices[4][1], 'FXSXF');
   assert.equal(d.symbols.F.kind, 'frames');
@@ -103,7 +103,7 @@ test('structure: 5 x 4 x 5, one controller, 73 casing cells, 8 frames, 18 air, h
   const kinds = d.symbols.X.options.map((o) => o.kind + ':' + (o.ability || o.blocks));
   assert.deepEqual(plain(kinds), ['blocks:gtceu:solid_machine_casing', 'part:maintenance', 'part:energy_input', 'part:input_bus', 'part:output_bus']);
   const lim = (i) => d.symbols.X.options[i].limits;
-  assert.equal(lim(0).min, 64);
+  assert.equal(lim(0).min, 47);
   assert.equal(lim(1).exact, 1);
   assert.equal(lim(2).max, 2);
   assert.equal(lim(2).min, 1);

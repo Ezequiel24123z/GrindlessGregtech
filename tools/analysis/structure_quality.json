@@ -16,14 +16,10 @@
   "c": 202
  },
  "gtceu:advanced_multi_smelter": {
-  "v": [
-   "hollow-box",
-   "dominant-share",
-   "few-block-types"
-  ],
-  "bt": 2,
-  "ds": 0.707,
-  "c": 42
+  "v": [],
+  "bt": 5,
+  "ds": 0.642,
+  "c": 82
  },
  "gtceu:aerogel_works": {
   "v": [
@@ -142,14 +138,10 @@
   "c": 166
  },
  "gtceu:biorefinery": {
-  "v": [
-   "solid-cuboid",
-   "dominant-share",
-   "few-block-types"
-  ],
-  "bt": 2,
-  "ds": 0.913,
-  "c": 81
+  "v": [],
+  "bt": 4,
+  "ds": 0.506,
+  "c": 88
  },
  "gtceu:boron_nitride_reactor": {
   "v": [
@@ -193,11 +185,9 @@
   "c": 139
  },
  "gtceu:coil_chemical_plant": {
-  "v": [
-   "dominant-share"
-  ],
-  "bt": 4,
-  "ds": 0.789,
+  "v": [],
+  "bt": 5,
+  "ds": 0.654,
   "c": 186
  },
  "gtceu:coilgun_launcher": {
@@ -210,12 +200,10 @@
   "c": 372
  },
  "gtceu:coking_battery": {
-  "v": [
-   "solid-cuboid"
-  ],
-  "bt": 4,
-  "ds": 0.424,
-  "c": 60
+  "v": [],
+  "bt": 5,
+  "ds": 0.344,
+  "c": 62
  },
  "gtceu:cold_trap_drill": {
   "v": [],
@@ -474,11 +462,9 @@
   "c": 215
  },
  "gtceu:fuel_fabrication_plant": {
-  "v": [
-   "dominant-share"
-  ],
+  "v": [],
   "bt": 5,
-  "ds": 0.723,
+  "ds": 0.679,
   "c": 138
  },
  "gtceu:fumarole_condenser": {
@@ -534,11 +520,9 @@
   "c": 306
  },
  "gtceu:heavy_water_plant": {
-  "v": [
-   "dominant-share"
-  ],
-  "bt": 3,
-  "ds": 0.942,
+  "v": [],
+  "bt": 5,
+  "ds": 0.391,
   "c": 208
  },
  "gtceu:heliostat_tower": {
@@ -726,14 +710,10 @@
   "c": 506
  },
  "gtceu:lava_furnace": {
-  "v": [
-   "hollow-box",
-   "few-block-types",
-   "no-functional-detail"
-  ],
-  "bt": 2,
-  "ds": 0.64,
-  "c": 26
+  "v": [],
+  "bt": 5,
+  "ds": 0.561,
+  "c": 99
  },
  "gtceu:levitation_melter": {
   "v": [
@@ -837,11 +817,9 @@
   "c": 82
  },
  "gtceu:mercury_vein_drill": {
-  "v": [
-   "dominant-share"
-  ],
+  "v": [],
   "bt": 4,
-  "ds": 0.726,
+  "ds": 0.607,
   "c": 85
  },
  "gtceu:methane_pyrolyser": {
@@ -1041,13 +1019,9 @@
   "c": 72
  },
  "gtceu:ore_refinery": {
-  "v": [
-   "dominant-share",
-   "few-block-types",
-   "no-functional-detail"
-  ],
-  "bt": 2,
-  "ds": 0.927,
+  "v": [],
+  "bt": 5,
+  "ds": 0.685,
   "c": 287
  },
  "gtceu:organoid_array": {
@@ -1132,11 +1106,9 @@
   "c": 170
  },
  "gtceu:polymer_works": {
-  "v": [
-   "dominant-share"
-  ],
-  "bt": 4,
-  "ds": 0.724,
+  "v": [],
+  "bt": 5,
+  "ds": 0.664,
   "c": 135
  },
  "gtceu:positron_accumulator": {
@@ -1290,21 +1262,15 @@
   "c": 202
  },
  "gtceu:refinery": {
-  "v": [
-   "dominant-share",
-   "few-block-types"
-  ],
-  "bt": 2,
-  "ds": 0.941,
+  "v": [],
+  "bt": 4,
+  "ds": 0.619,
   "c": 240
  },
  "gtceu:reformer": {
-  "v": [
-   "dominant-share",
-   "few-block-types"
-  ],
-  "bt": 2,
-  "ds": 0.966,
+  "v": [],
+  "bt": 4,
+  "ds": 0.65,
   "c": 118
  },
  "gtceu:regolith_cell": {
@@ -1348,10 +1314,8 @@
   "c": 304
  },
  "gtceu:sealed_dome": {
-  "v": [
-   "no-functional-detail"
-  ],
-  "bt": 5,
+  "v": [],
+  "bt": 6,
   "ds": 0.512,
   "c": 122
  },
@@ -1473,14 +1437,9 @@
   "c": 99
  },
  "gtceu:steam_alloy_smelter": {
-  "v": [
-   "hollow-box",
-   "mono-block",
-   "few-block-types",
-   "no-functional-detail"
-  ],
-  "bt": 1,
-  "ds": 1,
+  "v": [],
+  "bt": 4,
+  "ds": 0.68,
   "c": 26
  },
  "gtceu:steam_blast_furnace": {
@@ -1490,36 +1449,21 @@
   "c": 51
  },
  "gtceu:steam_chemical_bath": {
-  "v": [
-   "hollow-box",
-   "mono-block",
-   "few-block-types",
-   "no-functional-detail"
-  ],
-  "bt": 1,
-  "ds": 1,
+  "v": [],
+  "bt": 4,
+  "ds": 0.68,
   "c": 26
  },
  "gtceu:steam_compressor": {
-  "v": [
-   "hollow-box",
-   "mono-block",
-   "few-block-types",
-   "no-functional-detail"
-  ],
-  "bt": 1,
-  "ds": 1,
+  "v": [],
+  "bt": 4,
+  "ds": 0.68,
   "c": 26
  },
  "gtceu:steam_forge_hammer": {
-  "v": [
-   "hollow-box",
-   "mono-block",
-   "few-block-types",
-   "no-functional-detail"
-  ],
-  "bt": 1,
-  "ds": 1,
+  "v": [],
+  "bt": 4,
+  "ds": 0.68,
   "c": 26
  },
  "gtceu:steam_greenhouse": {
@@ -1529,14 +1473,9 @@
   "c": 98
  },
  "gtceu:steam_mixer": {
-  "v": [
-   "hollow-box",
-   "mono-block",
-   "few-block-types",
-   "no-functional-detail"
-  ],
-  "bt": 1,
-  "ds": 1,
+  "v": [],
+  "bt": 4,
+  "ds": 0.68,
   "c": 26
  },
  "gtceu:steam_observatory": {
@@ -1546,14 +1485,9 @@
   "c": 26
  },
  "gtceu:steam_ore_washer": {
-  "v": [
-   "hollow-box",
-   "mono-block",
-   "few-block-types",
-   "no-functional-detail"
-  ],
-  "bt": 1,
-  "ds": 1,
+  "v": [],
+  "bt": 4,
+  "ds": 0.68,
   "c": 26
  },
  "gtceu:steam_vein_drill": {
@@ -1584,13 +1518,10 @@
   "c": 98
  },
  "gtceu:submerged_arc_furnace": {
-  "v": [
-   "dominant-share",
-   "few-block-types"
-  ],
-  "bt": 2,
-  "ds": 0.97,
-  "c": 35
+  "v": [],
+  "bt": 5,
+  "ds": 0.679,
+  "c": 108
  },
  "gtceu:sulfide_roaster": {
   "v": [],
@@ -1735,41 +1666,28 @@
   "c": 204
  },
  "gtceu:universal_assembly_factory": {
-  "v": [
-   "solid-cuboid",
-   "dominant-share"
-  ],
+  "v": [],
   "bt": 3,
-  "ds": 0.886,
-  "c": 45
+  "ds": 0.673,
+  "c": 114
  },
  "gtceu:universal_mixing_factory": {
-  "v": [
-   "solid-cuboid",
-   "dominant-share",
-   "few-block-types"
-  ],
-  "bt": 2,
-  "ds": 0.886,
-  "c": 45
+  "v": [],
+  "bt": 3,
+  "ds": 0.673,
+  "c": 114
  },
  "gtceu:universal_processing_factory": {
-  "v": [
-   "solid-cuboid",
-   "dominant-share"
-  ],
-  "bt": 3,
-  "ds": 0.886,
-  "c": 45
+  "v": [],
+  "bt": 4,
+  "ds": 0.673,
+  "c": 114
  },
  "gtceu:universal_separation_factory": {
-  "v": [
-   "solid-cuboid",
-   "dominant-share"
-  ],
-  "bt": 3,
-  "ds": 0.886,
-  "c": 45
+  "v": [],
+  "bt": 4,
+  "ds": 0.673,
+  "c": 114
  },
  "gtceu:vdw_stacker": {
   "v": [
@@ -1865,14 +1783,10 @@
   "c": 130
  },
  "gtceu:wire_works": {
-  "v": [
-   "hollow-box",
-   "dominant-share",
-   "few-block-types"
-  ],
-  "bt": 2,
-  "ds": 0.901,
-  "c": 82
+  "v": [],
+  "bt": 5,
+  "ds": 0.675,
+  "c": 84
  },
  "gtceu:wireless_energy_tower": {
   "v": [],

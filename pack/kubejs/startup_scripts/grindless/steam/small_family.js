@@ -48,20 +48,29 @@
   const PARALLELS = 8
 
   // shared 3x3x3 hollow cube (controller on the front face), same shape GTM uses for Steam Grinder/Oven
+  // QR-S1: a small boiler house instead of a mono casing box: bronze frame posts, glass sight windows on three sides and a
+  // bronze pipe chimney in the roof. 17 'X' cells (floor and roof ring) take the casing and the parts.
   const CUBE_SLICES = [
-    ['XXX', 'XXX', 'XXX'],
-    ['XXX', 'X#X', 'XXX'],
-    ['XXX', 'XSX', 'XXX']
+    ['XXX', 'FGF', 'XXX'],
+    ['XXX', 'G#G', 'XPX'],
+    ['XXX', 'FSF', 'XXX']
   ]
+
+  function decor(symbols) {
+    symbols.F = Pat.frame(['bronze'])
+    symbols.G = Pat.block('minecraft:glass')
+    symbols.P = Pat.block('gtceu:bronze_pipe_casing')
+    return symbols
+  }
 
   // item-only trio: forge hammer, compressor, alloy smelter (none of the three recipe types takes a fluid at all)
   const ITEM_SPEC = {
     slices: CUBE_SLICES,
     symbols: {
       S: Pat.controller(),
-      // 25 cells: 22 casing + 1 steam hatch + 1 steam input bus + 1 steam output bus
+      // 17 X cells: 14 casing + 1 steam hatch + 1 steam input bus + 1 steam output bus
       X: Pat.oneOf(
-        Pat.block(CASING, { min: 22 }),
+        Pat.block(CASING, { min: 14 }),
         Pat.part('steam', { exact: 1 }),
         Pat.part('steam_input_bus', { exact: 1 }),
         Pat.part('steam_output_bus', { exact: 1 })
@@ -75,9 +84,9 @@
     slices: CUBE_SLICES,
     symbols: {
       S: Pat.controller(),
-      // 25 cells: 21 casing + 1 steam hatch + 1 steam input bus + 1 steam output bus + 1 fluid input hatch
+      // 17 X cells: 13 casing + 1 steam hatch + 1 steam input bus + 1 steam output bus + 1 fluid input hatch
       X: Pat.oneOf(
-        Pat.block(CASING, { min: 21 }),
+        Pat.block(CASING, { min: 13 }),
         Pat.part('steam', { exact: 1 }),
         Pat.part('steam_input_bus', { exact: 1 }),
         Pat.part('steam_output_bus', { exact: 1 }),
@@ -93,9 +102,9 @@
     slices: CUBE_SLICES,
     symbols: {
       S: Pat.controller(),
-      // 25 cells: 19-22 casing + 1 steam hatch + 1 steam input bus + 1 steam output bus + 0-2 fluid in + 0-1 fluid out
+      // 17 X cells: 11-14 casing + 1 steam hatch + 1 steam input bus + 1 steam output bus + 0-2 fluid in + 0-1 fluid out
       X: Pat.oneOf(
-        Pat.block(CASING, { min: 19 }),
+        Pat.block(CASING, { min: 11 }),
         Pat.part('steam', { exact: 1 }),
         Pat.part('steam_input_bus', { exact: 1 }),
         Pat.part('steam_output_bus', { exact: 1 }),
@@ -105,6 +114,10 @@
       '#': Pat.air()
     }
   }
+
+  decor(ITEM_SPEC.symbols)
+  decor(FLUID_SPEC.symbols)
+  decor(MIXER_SPEC.symbols)
 
   // id, display name, GTM recipe type id, pattern spec, how many tooltip lines (client_scripts/grindless/steam_small_family_lang.js)
   const MACHINES = [

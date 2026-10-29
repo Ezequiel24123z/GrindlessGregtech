@@ -90,15 +90,15 @@
   const DRILL_SPEC = {
     slices: [
       // back: the two back posts on their footings, the sunshade
-      ['B     B', 'F     F', 'F     F', 'F     F', 'BBBBBBB'],
+      ['B     B', 'F     F', 'F     F', 'F     F', 'FBBBBBF'],
       // the radiators hang under the shade's edges, between the posts
-      ['       ', '       ', '       ', 'N     N', 'BBBBBBB'],
+      ['       ', '       ', '       ', 'N     N', 'FBBBBBF'],
       // the body's back row on the collar
-      ['  BBB  ', '  XXX  ', '  XXX  ', 'N     N', 'BBBBBBB'],
+      ['  BBB  ', '  XXX  ', '  XXX  ', 'N     N', 'FBBBBBF'],
       // the drill string from the collar up through the body and the shade
-      ['  BPB  ', '  XPX  ', '  XPX  ', 'N  P  N', 'BBBPBBB'],
+      ['  BPB  ', '  XPX  ', '  XPX  ', 'N  P  N', 'FBBPBBF'],
       // front: the front posts, the collar and the body with the controller
-      ['B BBB B', 'F XSX F', 'F XXX F', 'F     F', 'BBBBBBB']
+      ['B BBB B', 'F XSX F', 'F XXX F', 'F     F', 'FBBBBBF']
     ],
     symbols: {
       S: Pat.controller(),

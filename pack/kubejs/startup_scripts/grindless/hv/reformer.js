@@ -17,6 +17,7 @@
 //
 // Geometry (slices back -> front, rows bottom -> top; the controller is in the front slice, middle column, row 1):
 //   row 0      floor
+//   QR-S1: steel frame posts at the corners, glass windows in the middle of each wall, a glass and pipe roof.
 //   row 1      walls around a 3x3 chamber with a steel pipe column in the middle
 //   rows 2-4   three layers of the same walls, one output hatch in each (symbols a, b, c)
 //   row 5      roof
@@ -58,14 +59,14 @@
   function patternRow(si, ri) {
     if (ri === 0) return 'XXXXX'
     if (ri === 1) {
-      if (si === 0) return 'XXXXX'
-      if (si === 4) return 'XXSXX'
+      if (si === 0) return 'FXXXF'
+      if (si === 4) return 'FXSXF'
       return si === 2 ? 'X#P#X' : 'X###X'
     }
-    if (ri === ROWS - 1) return 'CCCCC'
+    if (ri === ROWS - 1) return si === 0 || si === 4 ? 'FCGCF' : (si === 2 ? 'GCPCG' : 'CCCCC')
     var layer = LETTERS.charAt(ri - FIRST_LAYER_ROW)
-    if (si === 0 || si === 4) return layer + layer + layer + layer + layer
-    return si === 2 ? layer + '#P#' + layer : layer + '###' + layer
+    if (si === 0 || si === 4) return 'F' + layer + 'G' + layer + 'F'
+    return si === 2 ? 'G#P#G' : layer + '###' + layer
   }
 
   function patternSlices() {
@@ -81,14 +82,16 @@
   function patternSymbols() {
     var symbols = {
       S: Pat.controller(),
-      // 40 cells of floor and the lowest ring of walls: 3 are parts (the energy hatch, the catalyst bus, the naphtha hatch), the rest casing
+      // 36 cells of floor and the lowest ring of walls (the corner posts are frames): 3 are parts (the energy hatch, the catalyst bus, the naphtha hatch), the rest casing
       X: Pat.oneOf(
-        Pat.block(CLEAN, { min: 36 }),
+        Pat.block(CLEAN, { min: 32 }),
         Pat.part('energy_input', { exact: 1 }),
         Pat.part('input_bus', { exact: 1 }),
         Pat.part('input_hatch', { exact: 1 })
       ),
       P: Pat.block(PIPE),
+      F: Pat.frame(['steel']),
+      G: Pat.block('minecraft:glass'),
       C: Pat.block(CLEAN),
       '#': Pat.air()
     }
