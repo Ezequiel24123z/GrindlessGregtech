@@ -40,7 +40,9 @@
     ca48_oven_charge: { stack: 16 },
     plutonium_oxide_target: { stack: 16 },
     irradiated_plutonium_target: { stack: 1 },
-    plutonium_244_target: { stack: 16 }
+    plutonium_244_target: { stack: 16 },
+    ca48_crucible_load: { stack: 16 },
+    pu244_plating_ampoule: { stack: 16 }
   }
 
   // name -> [form, colour, formula]; the liquids are acid and radioactive

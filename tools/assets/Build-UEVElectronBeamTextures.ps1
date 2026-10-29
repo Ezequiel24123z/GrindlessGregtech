@@ -187,7 +187,8 @@ $items = @(
     @('yttrium_oxide_dust', 'dust', 'F4F0DC'), @('terbium_oxide_dust', 'dust', 'C8A878'), @('ysz_powder', 'dust', 'F8F4E8'), @('ysz_ingot', 'ingot', 'F0ECDC'),
     @('sx_master_alloy_dust', 'dust', '7A8494'), @('ceramic_shell_mould', 'mould', 'D8C8A8'), @('sx_gate', 'ingot', '6A7484'), @('sx_dross', 'dust', '5A4E48'),
     @('heat_treated_sx_blade', 'blade', '8A94A4'), @('bond_coated_sx_blade', 'blade', 'B8B0A0'), @('coated_sx_blade', 'blade', 'F0E4C0'),
-    @('sx_pump_impeller', 'disk', '7A8898'), @('brayton_turbine_wheel', 'disk', 'D8CCA8'), @('nb3sn_srf_cavity', 'tube', 'C0C8D8')
+    @('sx_pump_impeller', 'disk', '7A8898'), @('brayton_turbine_wheel', 'disk', 'D8CCA8'), @('nb3sn_srf_cavity', 'tube', 'C0C8D8'),
+    @('ceramic_slurry', 'dust', 'D8D0B8'), @('green_ceramic_shell', 'mould', 'B8B098'), @('fired_ceramic_shell', 'mould', 'ECE0C4')
 )
 foreach ($it in $items) {
     $map = $shapes[$it[1]]

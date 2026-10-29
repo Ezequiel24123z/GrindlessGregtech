@@ -42,6 +42,9 @@
     oganesson_atoms: { stack: 64 },
     moscovium_atoms: { stack: 64 },
     polycarbonate_foil: { stack: 64 },
+    cast_polycarbonate_film: { stack: 64 },
+    lead_polymer_liner: { stack: 16 },
+    ca48_plasma_bunch: { stack: 64 },
     ion_tracked_foil: { stack: 64 },
     etched_membrane: { stack: 64 },
     berkelium_oxide_dust: { stack: 64 }
