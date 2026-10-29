@@ -49,6 +49,7 @@ ServerEvents.recipes(function (event) {
     b.itemInputs('2x #gtceu:circuits/uiv')
     b.itemInputs('4x grindless:ffkm_seal')
     b.itemInputs('2x grindless:uiv_sensor')
+    b.itemInputs(research)
     b.inputFluids(Fluid.of('gtceu:soldering_alloy', 1152), Fluid.of('gtceu:lubricant', 1000), Fluid.of('gtceu:neutronium', 288))
     b.itemOutputs('gtceu:' + name)
     b.stationResearch(function (r) { return r.researchStack(Item.of(research)).CWUt(64).EUt(7864320) })
