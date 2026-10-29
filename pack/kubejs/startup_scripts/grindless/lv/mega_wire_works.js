@@ -14,7 +14,7 @@
 //   MV universal factories, mv/leisure_factories.js).
 //
 // Structure (5 wide x 4 high x 5 deep, lib/patterns.js): steel solid casing floor and roof, steel casing walls, four steel frame
-// posts in the corners, an empty 3 x 3 x 2 hall inside; the controller sits in the middle of the front wall. Parts go in any casing
+// posts in the corners, glass windows, two spool coils and a roof pipe line around a 3 x 3 x 2 hall; the controller sits in the middle of the front wall. Parts go in any casing
 // cell: 1 maintenance, 1 or 2 energy hatches, 1 to 4 input buses, 1 or 2 output buses.
 //
 // Textures: overlay dir grindless:block/multiblock/wire_works (tools/assets/Build-MegaWireWorksTextures.ps1). Names / tooltips:
@@ -30,30 +30,33 @@
   // every recipeType() call appends one mode; the first one is the mode a new controller starts in
   const TYPES = ['wiremill', 'bender']
 
-  // slices back -> front, rows bottom -> top; 73 casing-or-part cells, 8 frames, 18 air, the controller
+  // slices back -> front, rows bottom -> top; 56 casing-or-part cells, 8 frames, 14 glass, 2 coil spools, 3 pipe, 16 air, the controller
+  // (QR-S1: glass sight windows into the mill hall, two cupronickel spool coils on the hall floor and a steel pipe line in the roof)
   const SPEC = {
     slices: [
-      ['XXXXX', 'FXXXF', 'FXXXF', 'XXXXX'],
-      ['XXXXX', 'X###X', 'X###X', 'XXXXX'],
-      ['XXXXX', 'X###X', 'X###X', 'XXXXX'],
-      ['XXXXX', 'X###X', 'X###X', 'XXXXX'],
+      ['XXXXX', 'FGGGF', 'FGGGF', 'XXXXX'],
+      ['XXXXX', 'G###G', 'G###G', 'XXPXX'],
+      ['XXXXX', 'X#C#X', 'X#C#X', 'XXPXX'],
+      ['XXXXX', 'G###G', 'G###G', 'XXPXX'],
       ['XXXXX', 'FXSXF', 'FXXXF', 'XXXXX']
     ],
     symbols: {
       S: Pat.controller(),
-      // 73 cells: at most 9 are parts (1 + 2 + 4 + 2), the rest steel casing
+      // 56 cells: at most 9 are parts (1 + 2 + 4 + 2), the rest steel casing
       X: Pat.oneOf(
-        Pat.block(CASING, { min: 64 }),
+        Pat.block(CASING, { min: 47 }),
         Pat.part('maintenance', { exact: 1 }),
         Pat.part('energy_input', { min: 1, max: 2 }),
         Pat.part('input_bus', { min: 1, max: 4 }),
         Pat.part('output_bus', { min: 1, max: 2 })
       ),
       F: Pat.frame(['steel']),
+      G: Pat.block('minecraft:glass'),
+      C: Pat.block('gtceu:cupronickel_coil_block'),
+      P: Pat.block('gtceu:steel_pipe_casing'),
       '#': Pat.air()
     }
   }
-
   // true = the recipe belongs to another mode than the active one
   function otherMode(machine, recipe) {
     return String(recipe.getType().registryName) !== String(machine.getRecipeType().registryName)
