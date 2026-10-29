@@ -107,59 +107,11 @@ All rows of the luv table left the baseline. LuV controllers, parts and componen
 All zpm rows left the baseline. The integration dropped `eraTier.observatory = 7` (observatory/ is Steam to MV, so its tier is now inferred); the optical observatory takes a photographic plate and the radio telescope a lunar ephemeris as their domain input, so the four observatory/ rows left too. ZPM controllers (europium reductor, plasma caster, energy converter, magnet works, naquadria refinery and fuel works, assembly hall, three outer-chemistry plants, three qubit machines, three survey instruments, two Saturn science, three siphon, two Titan, three Uranus) moved to `grindless:assembly_line/NAME` with scanner research of an earlier-era item, two domain parts, soldering alloy and lubricant. Casings and probes (cryostat, naquadria containment, photomultiplier, probe bay, pressure hull) and components (aerogel cartridge x2, scoop head, ring sail net, titan entry probe, Neptune flyby probe) stay assemblers with a fluid and domain items.
 
 
-### uv
+### uv (QR-R4, done)
 
-| Output | Class | Now | Missing | File:line |
-|---|---|---|---|---|
-| `grindless:cutting_module` | component | assembler | C-COMPLEX | uv/mega_factory.js:18 |
-| `grindless:empty_antiproton_cartridge` | component | assembler | C-COMPLEX | uv/accelerators.js:50 |
-| `grindless:empty_antiproton_trap` | component | assembler | C-COMPLEX | uv/accelerators.js:1 |
-| `grindless:fibre_laser_module` | component | crafting | C-COMPLEX C-MANUAL | uv/photonics.js:219 |
-| `grindless:forming_module` | component | assembler | C-COMPLEX | uv/mega_factory.js:17 |
-| `grindless:heat_module` | component | assembler | C-COMPLEX | uv/mega_factory.js:20 |
-| `grindless:laser_module_block` | part | crafting | P-FORM | uv/photonics.js:218 |
-| `grindless:lithium_breeder_blanket` | component | assembler | C-COMPLEX | uv/accelerators.js:1 |
-| `grindless:mixing_module` | component | assembler | C-COMPLEX | uv/mega_factory.js:19 |
-| `grindless:propellant_tank` | component | assembler | C-COMPLEX | uv/propulsion.js:67 |
-| `grindless:sample_canister` | component | assembler | C-COMPLEX | uv/kuiper.js:34 |
-| `grindless:separation_module` | component | assembler | C-COMPLEX | uv/mega_factory.js:16 |
-| `grindless:srf_cryomodule_block` | part | crafting | P-FORM | uv/cold.js:116 |
-| `grindless:tungsten_target` | component | assembler | C-COMPLEX | uv/accelerators.js:1 |
-| `grindless:uv_electromagnet` | component | assembler | C-COMPLEX | uv/propulsion.js:66 |
-| `grindless:x_ray_mask` | component | assembler | C-COMPLEX | uv/accelerators.js:1 |
-| `accelerator_driven_reactor` | controller | crafting | C-DISTINCT C-DOMAIN C-FLUID C-FORM C-RESEARCH | uv/thorium.js:169 |
-| `amorphous_ice_annealer` | controller | crafting | C-DISTINCT C-DOMAIN C-FLUID C-FORM C-RESEARCH | uv/kuiper.js:72 |
-| `antimatter_trap` | controller | crafting | C-DISTINCT C-DOMAIN C-FLUID C-FORM C-RESEARCH | uv/accelerators.js:229 |
-| `ark_biosphere` | controller | crafting | C-DISTINCT C-DOMAIN C-FLUID C-FORM C-RESEARCH | uv/life.js:80 |
-| `boron_nitride_reactor` | controller | crafting | C-DISTINCT C-DOMAIN C-FLUID C-FORM C-RESEARCH | uv/materials.js:171 |
-| `cryotank_winder` | controller | crafting | C-DISTINCT C-DOMAIN C-FLUID C-FORM C-RESEARCH | uv/propulsion.js:147 |
-| `event_horizon_interferometer` | controller | crafting | C-DISTINCT C-DOMAIN C-FLUID C-FORM C-RESEARCH | uv/edge.js:70 |
-| `fibre_draw_tower` | controller | crafting | C-DISTINCT C-DOMAIN C-FLUID C-FORM C-RESEARCH | uv/photonics.js:216 |
-| `heat_source_works` | controller | crafting | C-DISTINCT C-DOMAIN C-FLUID C-FORM C-RESEARCH | uv/heat_sources.js:87 |
-| `kuiper_interceptor_bay` | controller | crafting | C-DISTINCT C-DOMAIN C-FLUID C-FORM C-RESEARCH | uv/kuiper.js:71 |
-| `laser_fusion_chamber` | controller | crafting | C-DISTINCT C-DOMAIN C-FLUID C-FORM C-RESEARCH | uv/fusion.js:79 |
-| `laser_sail_launcher` | controller | assembler | C-DOMAIN C-FLUID C-FORM C-RESEARCH | uv/starshot.js:158 |
-| `light_sail_fab` | controller | crafting | C-DISTINCT C-DOMAIN C-FLUID C-FORM C-RESEARCH | uv/starshot.js:157 |
-| `mega_factory` | controller | assembler | C-DOMAIN C-FLUID C-FORM C-RESEARCH | uv/mega_factory.js:3 |
-| `mocvd_reactor` | controller | crafting | C-DISTINCT C-DOMAIN C-FLUID C-FORM C-RESEARCH | uv/photonics.js:217 |
-| `muon_fusion_cell` | controller | crafting | C-DISTINCT C-DOMAIN C-FLUID C-FORM C-RESEARCH | uv/accelerators.js:228 |
-| `neptune_deep_siphon` | controller | crafting | C-DISTINCT C-DOMAIN C-FLUID C-FORM C-RESEARCH | uv/neptune.js:131 |
-| `neural_culture_vat` | controller | crafting | C-DISTINCT C-DOMAIN C-FLUID C-FORM C-RESEARCH | uv/life.js:80 |
-| `optical_ground_station` | controller | crafting | C-DISTINCT C-DOMAIN C-FLUID C-FORM C-RESEARCH | uv/detectors.js:86 |
-| `penetrator_probe_bay` | controller | crafting | C-DISTINCT C-DOMAIN C-FLUID C-FORM C-RESEARCH | uv/pluto_ices.js:128 |
-| `powder_bed_printer` | controller | crafting | C-DISTINCT C-DOMAIN C-FLUID C-FORM C-RESEARCH | uv/materials.js:173 |
-| `powder_in_tube_line` | controller | crafting | C-DISTINCT C-DOMAIN C-FLUID C-FORM C-RESEARCH | uv/materials.js:172 |
-| `precursor_probe_bay` | controller | crafting | C-DISTINCT C-DOMAIN C-FLUID C-FORM C-RESEARCH | uv/edge.js:69 |
-| `pyroprocessing_cell` | controller | crafting | C-DISTINCT C-DOMAIN C-FLUID C-FORM C-RESEARCH | uv/thorium.js:168 |
-| `srf_cavity_works` | controller | crafting | C-DISTINCT C-DOMAIN C-FLUID C-FORM C-RESEARCH | uv/cold.js:115 |
-| `starchip_fab` | controller | crafting | C-DISTINCT C-DOMAIN C-FLUID C-FORM C-RESEARCH | uv/starshot.js:157 |
-| `superfluid_helium_plant` | controller | crafting | C-DISTINCT C-DOMAIN C-FLUID C-FORM C-RESEARCH | uv/cold.js:114 |
-| `synchrotron` | controller | crafting | C-DISTINCT C-DOMAIN C-FLUID C-FORM C-RESEARCH | uv/accelerators.js:3 |
-| `thruster_works` | controller | crafting | C-DISTINCT C-DOMAIN C-FLUID C-FORM C-RESEARCH | uv/propulsion.js:148 |
-| `triton_geyser_sampler` | controller | crafting | C-DISTINCT C-DOMAIN C-FLUID C-FORM C-RESEARCH | uv/neptune.js:132 |
-| `volatile_ice_fractionator` | controller | crafting | C-DISTINCT C-DOMAIN C-FLUID C-FORM C-RESEARCH | uv/pluto_ices.js:129 |
-| `zone_refining_tower` | controller | crafting | C-DISTINCT C-DOMAIN C-FLUID C-FORM C-RESEARCH | uv/detectors.js:86 |
+All uv rows left the baseline. UV controllers (accelerators x3, cold x2, detectors x2, edge x2, fusion, heat sources, kuiper x2, life x2, materials x3, neptune x2, pluto ices x2, photonics x2, propulsion x2, starshot x3, thorium x2, mega factory) moved to `grindless:assembly_line/NAME` (the mega factory keeps `gtceu:assembly_line/mega_factory`) with station research of a previous item of the same line, UV hull + parts, four UV circuits, three domain items, soldering alloy, lubricant and tritanium. Components (x_ray_mask, tungsten_target, empty antiproton cartridge and trap, lithium breeder blanket, sample canister, uv_electromagnet, propellant tank, mu_metal_shield, the five mega factory modules) stay assemblers, raised with silicon nitride film, plates and two fluids; the fibre Bragg grating moved to the assembler (germanium, hydrogen) and the laser module and cryomodule blocks became assembler rows (4 modules + plates + film), replacing the shapeless pairs.
 
+Process honesty: `culture_seed` keeps 2 out, paid by 2 consumed agar dust beside the biomass (a replication fed by nutrients); `exposed_wafer`, `patterned_wafer` (fluids added in the accelerators table), `fibre_bragg_grating`, `laser_module_block`, `srf_cryomodule_block` are no longer 1-in-1-out.
 ### uhv
 
 | Output | Class | Now | Missing | File:line |

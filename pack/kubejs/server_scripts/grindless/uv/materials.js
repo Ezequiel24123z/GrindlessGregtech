@@ -36,8 +36,7 @@
 //     boron trioxide  electric blast furnace (1,000 K): 2 boric acid -> 1 boron trioxide + 3,000 mB steam
 //     silver tube     extruder: 1 silver ingot (tiny pipe mould, kept) -> 1 silver tube
 //   steam (reactor step 1, the blast furnace) goes to GTM's steam turbines.
-//   controllers (crafting grid): UV hull + 2 UV emitters + UV pump + 4 UV circuits (reactor); UV hull + 2 UV motors + UV conveyor +
-//     4 UV circuits (line); UV hull + 2 UV emitters + 2 UV robot arms + 4 UV circuits (printer)
+//   controllers (assembly line, station research, UV hull + parts + 4 UV circuits + 3 line items + soldering alloy, lubricant, tritanium)
 //
 // Lookup: every recipe of a machine has its own circuit or its own items, so no recipe's keys contain another's (checked at load).
 // Published in global.grindless.materials: .recipes [{ name, type, recipeId, circuit, itemsIn, fluidsIn, itemsOut, fluidsOut, notConsumed,
@@ -168,9 +167,9 @@
   M.skipped = []
   M.clashes = []
   M.crafting = {
-    reactor: 'grindless:crafting/boron_nitride_reactor',
-    line: 'grindless:crafting/powder_in_tube_line',
-    printer: 'grindless:crafting/powder_bed_printer'
+    reactor: 'grindless:assembly_line/boron_nitride_reactor',
+    line: 'grindless:assembly_line/powder_in_tube_line',
+    printer: 'grindless:assembly_line/powder_bed_printer'
   }
   M.craftingParts = ['gtceu:uv_machine_hull', 'gtceu:uv_emitter', 'gtceu:uv_electric_pump', 'gtceu:uv_electric_motor', 'gtceu:uv_conveyor_module',
     'gtceu:uv_robot_arm']
@@ -262,20 +261,33 @@
   }
 
   function addCrafting(event) {
-    var missing = M.craftingParts.filter(function (id) { return !Item.exists(id) })
-    if (missing.length > 0) {
-      console.error(LOG + 'materials controller crafting skipped, unknown item(s): ' + missing.join(', '))
-      return
-    }
-    event.recipes.gtceu.shaped(M.reactor || 'gtceu:boron_nitride_reactor', ['CEC', 'EHP', 'C C'], {
-      C: '#gtceu:circuits/uv', E: 'gtceu:uv_emitter', P: 'gtceu:uv_electric_pump', H: 'gtceu:uv_machine_hull'
-    }).id(M.crafting.reactor)
-    event.recipes.gtceu.shaped(M.line || 'gtceu:powder_in_tube_line', ['CMC', 'MHV', 'C C'], {
-      C: '#gtceu:circuits/uv', M: 'gtceu:uv_electric_motor', V: 'gtceu:uv_conveyor_module', H: 'gtceu:uv_machine_hull'
-    }).id(M.crafting.line)
-    event.recipes.gtceu.shaped(M.printer || 'gtceu:powder_bed_printer', ['CEC', 'RHR', 'CEC'], {
-      C: '#gtceu:circuits/uv', E: 'gtceu:uv_emitter', R: 'gtceu:uv_robot_arm', H: 'gtceu:uv_machine_hull'
-    }).id(M.crafting.printer)
+    var list = [
+      { id: M.reactor || 'gtceu:boron_nitride_reactor', recipe: 'boron_nitride_reactor', research: 'grindless:hbn_dust',
+        parts: ['gtceu:uv_machine_hull', '2x gtceu:uv_emitter', '2x gtceu:uv_electric_pump'],
+        domain: ['8x grindless:hbn_dust', '4x grindless:bnnt_dust', '2x grindless:sic_fibre'] },
+      { id: M.line || 'gtceu:powder_in_tube_line', recipe: 'powder_in_tube_line', research: 'grindless:pit_billet',
+        parts: ['gtceu:uv_machine_hull', '2x gtceu:uv_electric_motor', '2x gtceu:uv_conveyor_module'],
+        domain: ['4x grindless:pit_billet', '4x grindless:silver_tube', '4x grindless:iron_tube'] },
+      { id: M.printer || 'gtceu:powder_bed_printer', recipe: 'powder_bed_printer', research: 'grindless:ented_powder',
+        parts: ['gtceu:uv_machine_hull', '2x gtceu:uv_emitter', '2x gtceu:uv_robot_arm'],
+        domain: ['8x grindless:ented_powder', '4x grindless:sic_fibre', '4x grindless:bnnt_dust'] }
+    ]
+    list.forEach(function (m) {
+      var ids = [m.id, m.research].concat(m.parts, m.domain).map(function (s) { return s.replace(/^\d+x /, '') })
+      var missing = ids.filter(function (id) { return !Item.exists(id) })
+      if (missing.length > 0) {
+        console.error(LOG + 'materials controller recipe of ' + m.id + ' skipped, unknown item(s): ' + missing.join(', '))
+        return
+      }
+      var b = event.recipes.gtceu.assembly_line('grindless:' + m.recipe)
+      m.parts.forEach(function (s) { b.itemInputs(s) })
+      b.itemInputs('4x #gtceu:circuits/uv')
+      m.domain.forEach(function (s) { b.itemInputs(s) })
+      b.inputFluids(Fluid.of('gtceu:soldering_alloy', 1152), Fluid.of('gtceu:lubricant', 1000), Fluid.of('gtceu:tritanium', 576))
+      b.itemOutputs(m.id)
+      b.stationResearch(function (r) { return r.researchStack(Item.of(m.research)).CWUt(64).EUt(491520) })
+      b.EUt(491520).duration(1200)
+    })
   }
 
   ServerEvents.recipes(function (event) {

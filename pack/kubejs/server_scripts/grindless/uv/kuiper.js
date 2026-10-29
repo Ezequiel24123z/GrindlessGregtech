@@ -50,8 +50,9 @@
 
   var SUPPORT = [
     { name: 'sample_canister', type: 'assembler', circuit: 9,
-      itemsIn: [item('gtceu:titanium_plate', 4), item('gtceu:polytetrafluoroethylene_plate', 2), item('gtceu:zpm_sensor', 1)],
-      notConsumed: [], fluidsIn: [], itemsOut: [item(CANISTER, 1)], fluidsOut: [], eut: VA_ZPM, duration: 400 },
+      itemsIn: [item('gtceu:titanium_plate', 4), item('gtceu:polytetrafluoroethylene_plate', 2), item('gtceu:zpm_sensor', 1),
+        item('grindless:silicon_nitride_film', 1), item('gtceu:tritanium_plate', 1)],
+      notConsumed: [], fluidsIn: [fluid('gtceu:soldering_alloy', 144), fluid('gtceu:liquid_helium', 500)], itemsOut: [item(CANISTER, 1)], fluidsOut: [], eut: VA_ZPM, duration: 400 },
     { name: 'kuiper_interceptor', type: 'assembler', circuit: null,
       itemsIn: [item(POD, 1), item(RTG, 1), item(CANISTER, 1)],
       notConsumed: [], fluidsIn: [], itemsOut: [item(INTERCEPTOR, 1)], fluidsOut: [], eut: VA_UV, duration: 600 }
@@ -68,8 +69,8 @@
   K.recipes = TABLE.map(publish)
   K.support = SUPPORT.map(publish)
   K.crafting = {
-    bay: 'grindless:crafting/kuiper_interceptor_bay',
-    annealer: 'grindless:crafting/amorphous_ice_annealer'
+    bay: 'grindless:assembly_line/kuiper_interceptor_bay',
+    annealer: 'grindless:assembly_line/amorphous_ice_annealer'
   }
   K.craftingParts = ['gtceu:uv_machine_hull', 'gtceu:uv_robot_arm', 'gtceu:uv_electric_pump']
   K.skipped = []
@@ -119,24 +120,31 @@
     console.info(LOG + 'kuiper recipes added: ' + (K.recipes.length + K.support.length - K.skipped.length))
   }
 
-  // CRAFTING TABLE: UV hull + the machine's own parts + 4 UV circuits
+  // ASSEMBLY LINE: UV hull + the machine's own parts + 4 UV circuits + 3 line items, researched at the station from a line component
   function addCrafting(event) {
     var HULL = 'gtceu:uv_machine_hull'
     var list = [
-      { id: 'gtceu:kuiper_interceptor_bay', recipe: K.crafting.bay, pattern: ['CAC', ' H ', 'CAC'], extra: { A: 'gtceu:uv_robot_arm' } },
-      { id: 'gtceu:amorphous_ice_annealer', recipe: K.crafting.annealer, pattern: ['CPC', ' H ', 'CPC'], extra: { P: 'gtceu:uv_electric_pump' } }
+      { id: 'gtceu:kuiper_interceptor_bay', recipe: 'kuiper_interceptor_bay', research: POD,
+        parts: [HULL, '4x gtceu:uv_robot_arm'], domain: ['4x ' + POD, '2x ' + RTG, '4x ' + CANISTER] },
+      { id: 'gtceu:amorphous_ice_annealer', recipe: 'amorphous_ice_annealer', research: RTG,
+        parts: [HULL, '4x gtceu:uv_electric_pump'], domain: ['4x ' + RTG, '2x ' + POD, '4x ' + CANISTER] }
     ]
     list.forEach(function (m) {
-      var keys = { C: '#gtceu:circuits/uv', H: HULL }
-      Object.keys(m.extra).forEach(function (k) { keys[k] = m.extra[k] })
-      var need = [m.id].concat(Object.keys(keys).map(function (k) { return keys[k] }).filter(function (v) { return v.charAt(0) !== '#' }))
-      var missing = need.filter(function (id) { return !Item.exists(id) })
+      var ids = [m.id, m.research].concat(m.parts, m.domain).map(function (s) { return s.replace(/^\d+x /, '') })
+      var missing = ids.filter(function (id) { return !Item.exists(id) })
       if (missing.length > 0) {
         K.skipped.push({ name: m.recipe, reason: 'unknown id(s) ' + missing.join(', ') })
-        console.error(LOG + 'kuiper crafting of ' + m.id + ' skipped, unknown item(s): ' + missing.join(', '))
+        console.error(LOG + 'kuiper controller recipe of ' + m.id + ' skipped, unknown item(s): ' + missing.join(', '))
         return
       }
-      event.recipes.gtceu.shaped(m.id, m.pattern, keys).id(m.recipe)
+      var b = event.recipes.gtceu.assembly_line('grindless:' + m.recipe)
+      m.parts.forEach(function (s) { b.itemInputs(s) })
+      b.itemInputs('4x #gtceu:circuits/uv')
+      m.domain.forEach(function (s) { b.itemInputs(s) })
+      b.inputFluids(Fluid.of('gtceu:soldering_alloy', 1152), Fluid.of('gtceu:lubricant', 1000), Fluid.of('gtceu:tritanium', 576))
+      b.itemOutputs(m.id)
+      b.stationResearch(function (r) { return r.researchStack(Item.of(m.research)).CWUt(64).EUt(491520) })
+      b.EUt(491520).duration(1200)
     })
   }
 

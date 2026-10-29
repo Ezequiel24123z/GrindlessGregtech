@@ -105,7 +105,7 @@ test('acceptance: Neptune helium and hydrogen only from the deep siphon, the Tri
 });
 
 test('crafting of the two controllers', () => {
-  for (const m of Object.keys(MACHINES)) assert.ok(byId('grindless:crafting/' + m), m + ' crafting recipe');
+  for (const m of Object.keys(MACHINES)) assert.ok(byId('grindless:assembly_line/' + m), m + ' assembly line recipe');
 });
 
 test('every new name and tooltip has en_us and es_es text, and the reused overlays exist', () => {

@@ -18,7 +18,7 @@
 //                   medium)                                                                                         491,520 x 1,200 t
 //     2 neuro       8 stem cells + 1 wetware printed circuit board + 1,000 mB sterilised growth medium (GTM's fluid heater or LuV's
 //                   biofoundry circuit 7) -> 4 neuro processing units + 250 mB biomass (the spent medium)         491,520 x 1,200 t
-//   controllers (crafting grid): UV hull + 2 UV pumps + 4 UV circuits (ark); UV hull + 2 UV pumps + UV sensor + 4 UV circuits (vat)
+//   controllers (assembly line, station research, UV hull + pumps/sensors + 4 UV circuits + 3 culture items + soldering alloy, lubricant, tritanium)
 //
 // The vat is a batch route only: GTM's stem cell (chemical reactor) and NPU (circuit assembler) recipes stay, and so does the rest of
 // the wetware chain to the UHV wetware mainframe. The CO2 is GTM's carbon dioxide from its existing routes until UV-B3's Pluto shift;
@@ -57,7 +57,8 @@
     { name: 'closed_cycle', type: 'closed_ecosystem', circuit: 1, notConsumable: [ALGAE, ARCHAEA], itemsIn: [],
       fluidsIn: [fluid('gtceu:carbon_dioxide', 1000), fluid('gtceu:ammonia', 250), fluid('minecraft:water', 1000)],
       itemsOut: [], fluidsOut: [fluid('gtceu:oxygen', 500), fluid(RAW_MEDIUM, 500), fluid(BIOMASS, 250)], eut: ZPM, duration: 1200 },
-    { name: 'culture_seed', type: 'closed_ecosystem', circuit: 2, itemsIn: [item(ALGAE, 1), item(ARCHAEA, 1)],
+    // replication paid for by the nutrients it consumes: 1,000 mB biomass + 2 agar dust (the plate the new colonies grow on)
+    { name: 'culture_seed', type: 'closed_ecosystem', circuit: 2, itemsIn: [item(ALGAE, 1), item(ARCHAEA, 1), item('gtceu:agar_dust', 2)],
       fluidsIn: [fluid(BIOMASS, 1000)], itemsOut: [item(ALGAE, 2), item(ARCHAEA, 2)], fluidsOut: [], eut: ZPM, duration: 600 },
     { name: 'algae_inoculation', type: 'closed_ecosystem', circuit: 3, itemsIn: [item('gtceu:agar_dust', 1)],
       fluidsIn: [fluid(BIOMASS, 1000), fluid('minecraft:water', 1000)], itemsOut: [item(ALGAE, 1)], fluidsOut: [], eut: ZPM, duration: 600 },
@@ -77,7 +78,7 @@
   })
   L.skipped = []
   L.clashes = []
-  L.crafting = { ark: 'grindless:crafting/ark_biosphere', vat: 'grindless:crafting/neural_culture_vat' }
+  L.crafting = { ark: 'grindless:assembly_line/ark_biosphere', vat: 'grindless:assembly_line/neural_culture_vat' }
   L.craftingParts = ['gtceu:uv_machine_hull', 'gtceu:uv_electric_pump', 'gtceu:uv_sensor']
 
   function keysOf(r) {
@@ -139,17 +140,30 @@
   }
 
   function addCrafting(event) {
-    var missing = L.craftingParts.filter(function (id) { return !Item.exists(id) })
-    if (missing.length > 0) {
-      console.error(LOG + 'life controller crafting skipped, unknown item(s): ' + missing.join(', '))
-      return
-    }
-    event.recipes.gtceu.shaped('gtceu:ark_biosphere', ['CPC', ' H ', 'CPC'], {
-      C: '#gtceu:circuits/uv', P: 'gtceu:uv_electric_pump', H: 'gtceu:uv_machine_hull'
-    }).id(L.crafting.ark)
-    event.recipes.gtceu.shaped('gtceu:neural_culture_vat', ['CSC', 'CHC', 'P P'], {
-      C: '#gtceu:circuits/uv', S: 'gtceu:uv_sensor', P: 'gtceu:uv_electric_pump', H: 'gtceu:uv_machine_hull'
-    }).id(L.crafting.vat)
+    var list = [
+      { id: 'gtceu:ark_biosphere', recipe: 'ark_biosphere', research: ARCHAEA,
+        parts: ['gtceu:uv_machine_hull', '4x gtceu:uv_electric_pump'],
+        domain: ['8x ' + ALGAE, '8x ' + ARCHAEA, '2x ' + ORGANOID] },
+      { id: 'gtceu:neural_culture_vat', recipe: 'neural_culture_vat', research: ORGANOID,
+        parts: ['gtceu:uv_machine_hull', '2x gtceu:uv_electric_pump', '2x gtceu:uv_sensor'],
+        domain: ['4x ' + ORGANOID, '4x ' + ALGAE, '4x ' + ARCHAEA] }
+    ]
+    list.forEach(function (m) {
+      var ids = [m.id, m.research].concat(m.parts, m.domain).map(function (s) { return s.replace(/^\d+x /, '') })
+      var missing = ids.filter(function (id) { return !Item.exists(id) })
+      if (missing.length > 0) {
+        console.error(LOG + 'life controller recipe of ' + m.id + ' skipped, unknown item(s): ' + missing.join(', '))
+        return
+      }
+      var b = event.recipes.gtceu.assembly_line('grindless:' + m.recipe)
+      m.parts.forEach(function (s) { b.itemInputs(s) })
+      b.itemInputs('4x #gtceu:circuits/uv')
+      m.domain.forEach(function (s) { b.itemInputs(s) })
+      b.inputFluids(Fluid.of('gtceu:soldering_alloy', 1152), Fluid.of('gtceu:lubricant', 1000), Fluid.of('gtceu:tritanium', 576))
+      b.itemOutputs(m.id)
+      b.stationResearch(function (r) { return r.researchStack(Item.of(m.research)).CWUt(64).EUt(491520) })
+      b.EUt(491520).duration(1200)
+    })
   }
 
   ServerEvents.recipes(function (event) {
