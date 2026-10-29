@@ -11,7 +11,7 @@
 //                          in photonics.json (server_scripts/grindless/uhv/photonics.js).
 //   gtceu:cutter, electric_blast_furnace, chemical_reactor, assembler   the line steps GTM can run (ids grindless:<type>/<name>); the
 //                          assembler also makes the UEV sensor, emitter, pump, conveyor module and piston from the UV parts.
-//   crafting               the controllers: UHV hull + 2 UV parts + 2 UHV circuits, shaped recipes grindless:crafting/<machine>.
+//   assembly line          the controllers: station research, UEV-era circuits, 3 domain parts of the line, soldering alloy and lubricant, grindless:assembly_line/<machine>.
 //   gtnn:optical_computer  GT--'s own recipe is removed; the hall's circuit 3 is the only recipe that makes it. gtnn:optical_mainframe is untouched.
 //
 // Arsine: no recipe here makes or vents it; the MBE row (circuit 3) takes it from UV's arsine step and consumes all of it.

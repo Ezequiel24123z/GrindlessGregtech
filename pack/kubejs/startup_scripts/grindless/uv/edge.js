@@ -6,7 +6,7 @@
 //                                      (titanium frames) along its floor and a DSN relay (computer casing) at its far end. The probe
 //                                      leaves Pluto's orbit with an ICAN kick and reaches the heliopause, as the Interstellar Probe study
 //                                      (JHU/APL, 2021) planned after Voyager 1's crossing (2012).
-//   gtceu:event_horizon_interferometer type event_horizon_imaging (the observatory family's step 8). 9 x 9 x 5 station truss casing
+//   gtceu:event_horizon_interferometer type event_horizon_imaging (the observatory family's step 8). 9 x 5 x 9 station truss casing
 //                                      under a 7 x 7 dish (aluminium blocks) with a hydrogen maser clock (advanced computer casing) at
 //                                      its core: a Pluto-Earth baseline resolves Sgr A*'s shadow (a fictional extrapolation of space VLBI).
 //
