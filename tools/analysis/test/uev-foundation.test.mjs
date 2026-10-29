@@ -43,9 +43,10 @@ const RECIPE_IDS = [
   'uev_energy_output_hatch_16a',
 ];
 // the DFD motors are B1's (S0-2), the optical computers have no recipe here. The UIV hull and hatches come from these same builders
-// (UIV-F1, S0-1 fallback: .tiers(UEV, UIV)), so they are checked apart
+// (UIV-F1, UXV-F1, S0-1 fallback: .tiers(UEV, UIV, UXV)), so they are checked apart
 const NOT_F1 = ['grindless:dfd_motor_mk1', 'grindless:dfd_motor_mk2', 'gtceu:uev_machine_casing'];
 const UIV_MACHINES = MACHINES.map((id) => id.replace('gtceu:uev_', 'gtceu:uiv_'));
+const UXV_MACHINES = MACHINES.map((id) => id.replace('gtceu:uev_', 'gtceu:uxv_'));
 const UHV_EUT = 2097152; // V[UHV]
 
 const run = runPackScripts(pack);
@@ -88,17 +89,17 @@ test('every shared UEV id is registered once by this script, and nothing of B1',
     assert.ok(run.registry.machines.has(id), `${id} not registered`);
     assert.ok(ours(run.registry.machines.get(id).file), `${id} is registered by another script`);
   }
-  for (const id of UIV_MACHINES) {
-    assert.ok(run.registry.machines.has(id), `${id} not registered (.tiers(UEV, UIV))`);
+  for (const id of [...UIV_MACHINES, ...UXV_MACHINES]) {
+    assert.ok(run.registry.machines.has(id), `${id} not registered (.tiers(UEV, UIV, UXV))`);
     assert.ok(ours(run.registry.machines.get(id).file), `${id} is registered by another script`);
   }
-  assert.equal([...run.registry.machines.values()].filter((m) => ours(m.file)).length, MACHINES.length + UIV_MACHINES.length, 'F1 registers no other machine');
+  assert.equal([...run.registry.machines.values()].filter((m) => ours(m.file)).length, MACHINES.length + UIV_MACHINES.length + UXV_MACHINES.length, 'F1 registers no other machine');
   for (const id of NOT_F1) {
     const it = run.registry.items.get(id) || run.registry.machines.get(id);
     assert.ok(!it || !ours(it.file), `${id} is not F1's`);
   }
-  assert.doesNotMatch(src, /'(gtceu|grindless):uiv_|create\('uiv_/, 'no UIV id of its own: the hull and hatches are the UEV builders at two tiers');
-  assert.match(src, /\.tiers\(UEV, GTValues\.UIV\)/);
+  assert.doesNotMatch(src, /'(gtceu|grindless):(uiv|uxv)_|create\('u(iv|xv)_/, 'no UIV or UXV id of its own: the hull and hatches are the UEV builders at three tiers');
+  assert.match(src, /\.tiers\(UEV, GTValues\.UIV, GTValues\.UXV\)/);
   assert.ok(!src.includes("'gtceu:uev_machine_casing'") && !/create\('(machine_casing|uev_machine_casing)'/.test(src), 'gtceu:uev_machine_casing exists already');
 });
 
