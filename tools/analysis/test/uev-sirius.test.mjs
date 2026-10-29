@@ -129,16 +129,10 @@ test('the EOS model, the clock and the impeller exist as producers elsewhere', (
   assert.match(JSON.stringify(table('electron_beam.json')), /grindless:sx_pump_impeller/);
 });
 
-test('the controllers have a unique shaped pattern and the machines are registered', () => {
+test('the controllers are assembly lines with station research and the machines are registered', () => {
   const srv = read('server_scripts', 'grindless', 'uev', 'sirius.js');
-  const patterns = [...srv.matchAll(/pattern: (\['[^\]]*'\])/g)].map((x) => x[1]);
-  assert.equal(patterns.length, 3);
-  assert.equal(new Set(patterns).size, 3);
-  const others = new Set();
-  for (const f of fs.readdirSync(path.join(kube, 'server_scripts', 'grindless', 'uev')).filter((n) => n !== 'sirius.js' && n.endsWith('.js'))) {
-    for (const x of read('server_scripts', 'grindless', 'uev', f).matchAll(/\[('[^'\]]*'(?:, '[^'\]]*')*)\]/g)) others.add(x[1].replace(/ /g, ''));
-  }
-  for (const p of patterns) assert.ok(!others.has(p.slice(1, -1).replace(/ /g, '')), p);
+  assert.equal((srv.match(/gtceu\.assembly_line\(/g) || []).length, 1);
+  assert.match(srv, /stationResearch/);
   const st = read('startup_scripts', 'grindless', 'uev', 'sirius.js');
   for (const m of ['white_dwarf_spectrograph', 'degenerate_harvester', 'containment_works']) assert.match(st, new RegExp(`gtceu:${m}`));
   for (const t of ['gravitational_redshift', 'degenerate_harvesting', 'degenerate_containment']) assert.match(st, new RegExp(`type: '${t}'`));

@@ -166,29 +166,36 @@
     console.info(LOG + 'alpha centauri: ' + AC.recipes.length + ' recipes; skipped ' + AC.skipped.length)
   }
 
+  // QR-R6: assembly line with station research (the previous machine or a component of the line), the era fluid and three domain inputs;
+  // ids grindless:assembly_line/<machine>. Domain inputs are items of the Alpha Centauri line made without the controller they build.
   function addControllers(event) {
     var HULL = 'gtceu:uev_machine_hull'
-    var C = '#gtceu:circuits/uhv'
+    var C = '4x #gtceu:circuits/uhv'
     var defs = [
-      { machine: AC.machines.collector.machine, name: AC.machines.collector.name, pattern: ['CFC', 'PHP', 'C C'], keys: { F: 'gtceu:uv_field_generator', P: 'grindless:uev_electric_pump' } },
-      { machine: AC.machines.lab.machine, name: AC.machines.lab.name, pattern: ['PCP', 'AHA', ' C '], keys: { A: 'grindless:uev_robot_arm', P: 'grindless:uev_electric_pump' } },
-      { machine: AC.machines.station.machine, name: AC.machines.station.name, pattern: ['ECS', ' H ', 'CSC'], keys: { E: 'grindless:uev_emitter', S: 'grindless:uev_sensor' } }
+      { machine: AC.machines.collector.machine, name: AC.machines.collector.name, research: 'grindless:superhydride_scoop_coil', era: 'gtceu:tritanium',
+        ins: [HULL, '2x gtceu:uv_field_generator', '2x grindless:uev_electric_pump', C, '2x grindless:superhydride_scoop_coil', '2x grindless:aerogel_tile', 'grindless:uev_sensor'] },
+      { machine: AC.machines.lab.machine, name: AC.machines.lab.name, research: AC.machines.collector.machine, era: 'gtceu:tritanium',
+        ins: [HULL, '2x grindless:uev_robot_arm', '2x grindless:uev_electric_pump', C, '2x grindless:aerogel_tile', 'grindless:teos_flask', 'grindless:uev_sensor'] },
+      { machine: AC.machines.station.machine, name: AC.machines.station.name, research: AC.machines.lab.machine, era: 'gtceu:neutronium',
+        ins: [HULL, '2x grindless:uev_emitter', '2x grindless:uev_sensor', C, 'grindless:lobster_eye_mcp', '2x grindless:sdd', 'grindless:nuclear_clock'] }
     ]
     AC.controllerRecipes = []
     defs.forEach(function (d) {
-      var ids = [HULL, d.machine].concat(Object.keys(d.keys).map(function (k) { return d.keys[k] }))
+      var ids = d.ins.map(function (s) { return s.replace(/^[0-9]+x /, '') }).filter(function (id) { return id.charAt(0) !== '#' }).concat([d.machine, d.research])
       var missing = ids.filter(function (id) { return !Item.exists(id) })
       if (missing.length > 0) {
         console.error(LOG + d.name + ' controller recipe skipped, unknown item(s): ' + missing.join(', '))
         return
       }
-      var key = { C: C, H: HULL }
-      Object.keys(d.keys).forEach(function (k) { key[k] = d.keys[k] })
-      event.recipes.gtceu.shaped(d.machine, d.pattern, key).id('grindless:crafting/' + d.name)
-      AC.controllerRecipes.push('grindless:crafting/' + d.name)
+      var b = event.recipes.gtceu.assembly_line('grindless:' + d.name)
+      b.itemInputs(d.ins)
+      b.inputFluids(Fluid.of('gtceu:soldering_alloy', 2304), Fluid.of('gtceu:lubricant', 1000), Fluid.of(d.era, 576))
+      b.itemOutputs(d.machine)
+      b.stationResearch(function (r) { return r.researchStack(Item.of(d.research)).CWUt(64).EUt(491520) })
+      b.EUt(491520).duration(2400)
+      AC.controllerRecipes.push('grindless:assembly_line/' + d.name)
     })
   }
-
   // an uncaught error here would stop KubeJS from running the recipe handlers of the scripts that load after this one
   ServerEvents.recipes(function (event) {
     var steps = [['recipes', generate], ['controllers', addControllers]]

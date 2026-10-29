@@ -154,13 +154,21 @@
     var FIELD = 'gtceu:uv_field_generator'
     var machine = 'gtceu:calutron'
     ISO.controllerRecipes = []
-    var missing = [HULL, SENSOR, FIELD, machine].filter(function (id) { return !Item.exists(id) })
+    // QR-R6: assembly line with station research (the SRF cryomodule), the era fluid and domain inputs that need no calutron product
+    var ins = [HULL, '2x ' + SENSOR, '2x ' + FIELD, '4x #gtceu:circuits/uhv', '2x grindless:srf_cryomodule', 'grindless:nb3sn_srf_cavity', 'grindless:zircaloy_cladding_tube']
+    var research = 'grindless:srf_cryomodule'
+    var missing = ins.map(function (s) { return s.replace(/^[0-9]+x /, '') }).filter(function (id) { return id.charAt(0) !== '#' }).concat([machine, research]).filter(function (id) { return !Item.exists(id) })
     if (missing.length > 0) {
       console.error(LOG + 'calutron controller recipe skipped, unknown item(s): ' + missing.join(', '))
       return
     }
-    event.recipes.gtceu.shaped(machine, ['CSC', 'FHF', 'C C'], { C: '#gtceu:circuits/uhv', S: SENSOR, F: FIELD, H: HULL }).id('grindless:crafting/calutron')
-    ISO.controllerRecipes.push('grindless:crafting/calutron')
+    var b = event.recipes.gtceu.assembly_line('grindless:calutron')
+    b.itemInputs(ins)
+    b.inputFluids(Fluid.of('gtceu:soldering_alloy', 2304), Fluid.of('gtceu:lubricant', 1000), Fluid.of('gtceu:neutronium', 576))
+    b.itemOutputs(machine)
+    b.stationResearch(function (r) { return r.researchStack(Item.of(research)).CWUt(64).EUt(491520) })
+    b.EUt(491520).duration(2400)
+    ISO.controllerRecipes.push('grindless:assembly_line/calutron')
   }
 
   // an uncaught error here would stop KubeJS from running the recipe handlers of the scripts that load after this one

@@ -174,19 +174,29 @@
 
   function addControllers(event) {
     var HULL = 'gtceu:uhv_machine_hull'
+    var C = '4x #gtceu:circuits/uhv'
+    // QR-R6: assembly line with station research (a component of the line, then the previous machine), the era fluid and domain inputs
     var defs = [
-      { machine: EO.machines.gas_lab.machine, part: 'gtceu:uv_sensor', name: EO.machines.gas_lab.name },
-      { machine: EO.machines.station.machine, part: 'gtceu:uv_emitter', name: EO.machines.station.name }
+      { machine: EO.machines.gas_lab.machine, name: EO.machines.gas_lab.name, research: 'grindless:atom_interferometer', era: 'gtceu:neutronium',
+        ins: [HULL, '2x gtceu:uv_sensor', C, 'grindless:li_cooling_laser', 'grindless:k_cooling_laser', 'grindless:ule_cavity'] },
+      { machine: EO.machines.station.machine, name: EO.machines.station.name, research: EO.machines.gas_lab.machine, era: 'gtceu:tritanium',
+        ins: [HULL, '2x gtceu:uv_emitter', C, 'grindless:spdc_source', 'grindless:hollow_core_fibre', 'grindless:snspd'] }
     ]
     EO.controllerRecipes = []
     defs.forEach(function (d) {
-      var missing = [HULL, d.part, d.machine].filter(function (id) { return !Item.exists(id) })
+      var ids = d.ins.map(function (s) { return s.replace(/^[0-9]+x /, '') }).filter(function (id) { return id.charAt(0) !== '#' }).concat([d.machine, d.research])
+      var missing = ids.filter(function (id) { return !Item.exists(id) })
       if (missing.length > 0) {
         console.error(LOG + d.name + ' controller recipe skipped, unknown item(s): ' + missing.join(', '))
         return
       }
-      event.recipes.gtceu.shaped(d.machine, [' C ', 'PHP', ' C '], { C: '#gtceu:circuits/uhv', P: d.part, H: HULL }).id('grindless:crafting/' + d.name)
-      EO.controllerRecipes.push('grindless:crafting/' + d.name)
+      var b = event.recipes.gtceu.assembly_line('grindless:' + d.name)
+      b.itemInputs(d.ins)
+      b.inputFluids(Fluid.of('gtceu:soldering_alloy', 2304), Fluid.of('gtceu:lubricant', 1000), Fluid.of(d.era, 576))
+      b.itemOutputs(d.machine)
+      b.stationResearch(function (r) { return r.researchStack(Item.of(d.research)).CWUt(64).EUt(491520) })
+      b.EUt(491520).duration(2400)
+      EO.controllerRecipes.push('grindless:assembly_line/' + d.name)
     })
   }
 
