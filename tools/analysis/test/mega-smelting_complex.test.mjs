@@ -303,7 +303,7 @@ test('controller recipe: 4 electric blast furnaces, 4 vacuum freezers, 4 IV circ
   assert.equal(out.assembler.length, 1);
   const r = out.assembler[0];
   assert.equal(r.id, h.G.megaSmeltingComplex.crafting);
-  assert.deepEqual(plain(r.itemInputs), ['4x gtceu:electric_blast_furnace', '4x gtceu:vacuum_freezer', '4x #gtceu:circuits/iv']);
+  assert.deepEqual(plain(r.itemInputs), ['4x gtceu:electric_blast_furnace', '4x gtceu:vacuum_freezer', '4x #gtceu:circuits/iv', '2x grindless:sintered_regolith', '2x grindless:platinum_electrode']);
   assert.deepEqual(plain(r.itemOutputs), ['gtceu:smelting_complex']);
   assert.ok(r.eut > 0 && r.duration > 0);
 });

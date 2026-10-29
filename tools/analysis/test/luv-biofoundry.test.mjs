@@ -1,4 +1,4 @@
-// LuV biofoundry (package LuV-A5, startup_scripts/grindless/luv/biofoundry.js, server_scripts/grindless/luv/biofoundry.js,
+﻿// LuV biofoundry (package LuV-A5, startup_scripts/grindless/luv/biofoundry.js, server_scripts/grindless/luv/biofoundry.js,
 // data/grindless/tables/biofoundry.json): the machine, its sealed hall and its recipes as the stand-in sees them, every outside id they
 // name pinned to the list checked against the native registry (Node mocks accept any id; a wrong GT id only fails in game), the step
 // names in both languages, and the Universal Assembly Factory's guard that keeps GTM's NPU recipe off two LuV hatches (spike S0-4).
@@ -99,8 +99,9 @@ test('one circuit per step, the seeds as the table writes them, and the controll
   const ours = recipes.filter((r) => r.t === 'gtceu:sterile_culture' && !xeno.includes(r.i)).map((r) => r.i).sort();
   // the composed steps need GTM's live recipes (event.originalRecipes is empty here): only the seeds come out
   assert.deepEqual(ours, ['grindless:sterile_culture/engineered_barley_seed', 'grindless:sterile_culture/engineered_tobacco_seed']);
-  const ctrl = recipes.find((r) => r.i === 'grindless:assembler/biofoundry');
-  assert.ok(ctrl, 'grindless:assembler/biofoundry');
+  const ctrl = recipes.find((r) => r.i === 'grindless:assembly_line/biofoundry');
+  assert.ok(ctrl, 'grindless:assembly_line/biofoundry');
+  assert.equal(ctrl.t, 'gtceu:assembly_line');
   assert.equal(ctrl.j.tickInputs.eu[0].content, 7680);
 });
 

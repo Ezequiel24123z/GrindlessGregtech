@@ -25,8 +25,10 @@ const STARTUP = 'kubejs/startup_scripts/grindless/luv/io_orbit.js';
 const SERVER = 'kubejs/server_scripts/grindless/luv/io_orbit.js';
 const FIXTURE = path.join(ROOT, 'tools/test/overlay/kubejs/server_scripts/gg_test_luv_io_orbit.js');
 const OURS = new Set(['gtceu:flux_tube_tether', 'gtceu:sulfur_iodine_plant']);
-const ITEMS = new Set([...IDS.items, ...OURS]);
-const FLUIDS = new Set(IDS.fluids);
+// the assembly line parts are IV's registrations; the line's fluids are GTM's (soldering alloy, lubricant)
+const LINE_ITEMS = ['grindless:platinum_gauze', 'grindless:zircaloy_cladding_tube', 'grindless:contact_catalyst', 'grindless:magnetic_bearing'];
+const ITEMS = new Set([...IDS.items, ...OURS, ...LINE_ITEMS]);
+const FLUIDS = new Set([...IDS.fluids, 'gtceu:soldering_alloy', 'gtceu:lubricant']);
 
 const TABLES = {
   pending: { ...STATIONS, enabled: false, second: 'grindless:io_orbit' },
@@ -277,7 +279,7 @@ test('recipes follow the switch: none while pending', () => {
 
 test('tether mode: Io orbit only, two reels of 65,536 EU/t, a spool an hour, 50 mB of argon a run; the spool and the controller', () => {
   const byId = Object.fromEntries(RUNS.tether.built.map((r) => [r.id, r]));
-  assert.deepEqual(Object.keys(byId).sort(), ['grindless:luv/tether_spool', 'grindless:plasma_torus', 'gtceu:flux_tube_tether']);
+  assert.deepEqual(Object.keys(byId).sort(), ['grindless:flux_tube_tether', 'grindless:luv/tether_spool', 'grindless:plasma_torus']);
   const t = byId['grindless:plasma_torus'];
   assert.equal(t.type, 'gtceu:electrodynamic_tether');
   assert.deepEqual(one(t, 'circuit'), [1]);
@@ -292,18 +294,25 @@ test('tether mode: Io orbit only, two reels of 65,536 EU/t, a spool an hour, 50 
   const runsPerHour = (3600 * 20) / 400;
   assert.ok(Math.abs((28 * reels / 10000) * runsPerHour - 1) < 0.01);
   const s = byId['grindless:luv/tether_spool'];
-  assert.equal(s.type, 'gtceu:assembler');
-  assert.deepEqual(one(s, 'itemInputs'), ['64x gtceu:aluminium_foil', '8x gcyr:para_aramid_foil', 'grindless:whipple_shield_casing']);
+  assert.equal(s.type, 'gtceu:assembly_line');
+  assert.deepEqual(one(s, 'itemInputs'), ['64x gtceu:aluminium_foil', '8x gcyr:para_aramid_foil', 'grindless:whipple_shield_casing',
+    '2x grindless:platinum_gauze', '2x grindless:zircaloy_cladding_tube']);
+  assert.deepEqual(one(s, 'inputFluids'), [{ fluid: 'gtceu:soldering_alloy', amount: 144 }, { fluid: 'gtceu:lubricant', amount: 250 }]);
   assert.deepEqual(one(s, 'itemOutputs'), ['grindless:tether_spool']);
   assert.deepEqual(one(s, 'EUt'), [7680]);
   assert.deepEqual(one(s, 'duration'), [400]);
-  assert.equal(byId['gtceu:flux_tube_tether'].type, 'gtceu:shaped');
-  assert.deepEqual(one(byId['gtceu:flux_tube_tether'], 'id'), ['grindless:crafting/flux_tube_tether']);
+  const ft = byId['grindless:flux_tube_tether'];
+  assert.equal(ft.type, 'gtceu:assembly_line');
+  assert.deepEqual(one(ft, 'itemInputs'), ['gtceu:luv_machine_hull', '2x gtceu:luv_electric_motor', 'gtceu:luv_sensor', '4x #gtceu:circuits/luv',
+    '4x grindless:tether_spool', '2x grindless:magnetic_bearing']);
+  assert.deepEqual(one(ft, 'itemOutputs'), ['gtceu:flux_tube_tether']);
+  assert.deepEqual(one(ft, 'inputFluids'), [{ fluid: 'gtceu:soldering_alloy', amount: 576 }, { fluid: 'gtceu:lubricant', amount: 500 }]);
+  assert.deepEqual([one(ft, 'EUt'), one(ft, 'duration')], [[30720], [600]]);
 });
 
 test('sulfur-iodine mode: Io only, water to hydrogen and oxygen over kept charges, 20 mB of hydrogen a tick with four modules', () => {
   const byId = Object.fromEntries(RUNS.sulfur_iodine.built.map((r) => [r.id, r]));
-  assert.deepEqual(Object.keys(byId).sort(), ['grindless:sulfur_iodine', 'gtceu:sulfur_iodine_plant']);
+  assert.deepEqual(Object.keys(byId).sort(), ['grindless:sulfur_iodine', 'grindless:sulfur_iodine_plant']);
   const r = byId['grindless:sulfur_iodine'];
   assert.equal(r.type, 'gtceu:thermochemical_hydrogen');
   assert.deepEqual(one(r, 'circuit'), [1]);
@@ -315,7 +324,11 @@ test('sulfur-iodine mode: Io only, water to hydrogen and oxygen over kept charge
   assert.deepEqual(one(r, 'duration'), [400]);
   assert.deepEqual(calls(r, 'dimension'), [[PLACES.surfaces.io]]);
   assert.equal(2000 / 400 * RUNS.sulfur_iodine.G.ioOrbit.plant.maxModules, 20);
-  assert.deepEqual(one(byId['gtceu:sulfur_iodine_plant'], 'id'), ['grindless:crafting/sulfur_iodine_plant']);
+  const plant = byId['grindless:sulfur_iodine_plant'];
+  assert.equal(plant.type, 'gtceu:assembly_line');
+  assert.deepEqual(one(plant, 'itemInputs'), ['gtceu:luv_machine_hull', '2x gtceu:luv_electric_pump', 'gtceu:luv_sensor', '4x #gtceu:circuits/luv',
+    '2x grindless:zircaloy_cladding_tube', '2x grindless:contact_catalyst']);
+  assert.deepEqual(one(plant, 'itemOutputs'), ['gtceu:sulfur_iodine_plant']);
   // no spool in this mode: it stays an A1 registration with no route, hidden (its group says unless tether)
   assert.ok(!JSON.stringify(RUNS.sulfur_iodine.built).includes('tether_spool'));
 });
@@ -327,7 +340,6 @@ test('every id is in the native registry snapshot (luv-c3-s1); dimension ids onl
       for (const m of ['itemInputs', 'itemOutputs', 'chancedInput', 'notConsumable']) for (const args of calls(r, m)) {
         (m === 'chancedInput' ? [args[0]] : args.flat()).forEach((s) => { const id = stackId(s); if (!id.startsWith('#')) used.add(id); });
       }
-      if (r.type === 'gtceu:shaped') used.add(r.id);
       for (const m of ['inputFluids', 'outputFluids', 'notConsumableFluid']) for (const args of calls(r, m)) {
         args.forEach((f) => assert.ok(FLUIDS.has(f.fluid), `${r.id}: fluid ${f.fluid}`));
       }
@@ -338,7 +350,7 @@ test('every id is in the native registry snapshot (luv-c3-s1); dimension ids onl
   for (const id of used) assert.ok(ITEMS.has(id), `unknown id ${id}`);
   const src = read(SERVER);
   for (const id of ['gtceu:luv_electric_motor', 'gtceu:luv_electric_pump', 'gtceu:luv_sensor', 'gtceu:luv_machine_hull']) {
-    assert.match(src, new RegExp(`'${id}'`));
+    assert.match(src, new RegExp(`'(\\d+x )?${id}'`));
     assert.ok(ITEMS.has(id), id);
   }
   // the traps: the LuV dynamo is an energy output hatch; GTM has no quadruple output hatch id
@@ -346,17 +358,17 @@ test('every id is in the native registry snapshot (luv-c3-s1); dimension ids onl
   for (const f of [STARTUP, SERVER]) assert.doesNotMatch(read(f), /'grindless:io(_orbit)?'/, f);
 });
 
-test('controller recipes match no other shaped recipe of the pack', () => {
+test('the controllers are assembly line recipes, not crafting-grid shapes, and no other script writes their outputs', () => {
   const dir = path.join(PACK, 'kubejs/server_scripts');
   const files = [];
   const walk = (d) => fs.readdirSync(d, { withFileTypes: true }).forEach((e) => (e.isDirectory() ? walk(path.join(d, e.name)) : files.push(path.join(d, e.name))));
   walk(dir);
-  for (const shape of ["['MSM', 'CHC', 'C C']", "['PSP', 'CHC', 'C C']"]) {
-    const hits = files.filter((f) => f.endsWith('.js') && fs.readFileSync(f, 'utf8').includes(shape));
-    assert.deepEqual(hits.map((f) => path.relative(dir, f).replace(/\\/g, '/')), ['grindless/luv/io_orbit.js'], shape);
+  assert.doesNotMatch(read(SERVER), /\bshaped\(/);
+  for (const name of ['flux_tube_tether', 'sulfur_iodine_plant']) {
+    const hits = files.filter((f) => f.endsWith('.js') && fs.readFileSync(f, 'utf8').includes("assembly_line('grindless:" + name + "')"));
+    assert.deepEqual(hits.map((f) => path.relative(dir, f).replace(/\\/g, '/')), ['grindless/luv/io_orbit.js'], name);
   }
 });
-
 test('names: en_us and es_es carry the same keys, every key the machines translate', () => {
   const src = read('kubejs/client_scripts/grindless/luv_io_orbit_lang.js');
   const [en, es] = src.split("ClientEvents.lang('es_es'");
@@ -382,8 +394,8 @@ test('the native fixture uses only registered ids and its own band', { skip: !fs
   assert.doesNotThrow(() => new vm.Script(src));
   const literal = new Set([...src.matchAll(/'([a-z0-9_]+:[a-z0-9_/]+)'/g)].map((m) => m[1]));
   const known = new Set([...ITEMS, ...FLUIDS, 'grindless:io_orbit', 'gtceu:electrodynamic_tether', 'gtceu:thermochemical_hydrogen',
-    'minecraft:air', 'minecraft:overworld', 'grindless:sulfur_iodine', 'grindless:plasma_torus', 'grindless:luv/tether_spool', 'grindless:crafting/flux_tube_tether',
-    'grindless:crafting/sulfur_iodine_plant', 'grindless:hidden_with_recipes', 'c:hidden_from_recipe_viewers']);
+    'minecraft:air', 'minecraft:overworld', 'grindless:sulfur_iodine', 'grindless:plasma_torus', 'grindless:luv/tether_spool', 'grindless:assembly_line/flux_tube_tether', 'grindless:assembly_line/luv/tether_spool',
+    'grindless:assembly_line/sulfur_iodine_plant', 'grindless:hidden_with_recipes', 'c:hidden_from_recipe_viewers']);
   for (const id of literal) {
     if (/^(gtceu|grindless):(electrodynamic_tether|thermochemical_hydrogen|assembler|shaped)\//.test(id)) continue;
     assert.ok(known.has(id), `fixture id ${id}`);

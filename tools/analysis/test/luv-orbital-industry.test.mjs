@@ -179,18 +179,18 @@ test('ground cutter keeps cleanroom; both controllers have exact LuV design part
   assert.deepEqual(calls(cut, 'itemOutputs'), [['4x grindless:triple_junction_cell']]);
   assert.deepEqual(calls(cut, 'cleanroom'), [['cleanroom']]);
   assert.equal(cut.calls.dimension, undefined);
-  const shaped = recipes.filter(r => r.type === 'shaped');
-  assert.equal(shaped.length, 2);
-  for (const r of shaped) {
-    const [output, pattern, keys] = r.args;
-    const histogram = {};
-    pattern.join('').split('').filter(c => c !== ' ').forEach(c => { histogram[keys[c]] = (histogram[keys[c]] ?? 0) + 1; });
-    assert.equal(histogram['#gtceu:circuits/luv'], 4);
-    assert.equal(histogram['gtceu:luv_machine_hull'], 1);
-    if (output.endsWith('microgravity_smelter')) {
-      assert.equal(histogram['gtceu:luv_field_generator'], 1);
-      assert.equal(histogram['gtceu:luv_electric_pump'], 2);
-    } else assert.equal(histogram['gtceu:luv_emitter'], 2);
+  const lines = recipes.filter(r => r.type === 'assembly_line');
+  assert.equal(lines.length, 2);
+  const byName = Object.fromEntries(lines.map(r => [r.args[0], r]));
+  assert.deepEqual(calls(byName['grindless:microgravity_smelter'], 'itemInputs'), [['gtceu:luv_machine_hull', 'gtceu:luv_field_generator', 'gtceu:luv_electric_pump',
+    '4x #gtceu:circuits/luv', '2x grindless:zircaloy_cladding_tube', '2x grindless:hermean_heat_shield_brick']]);
+  assert.deepEqual(calls(byName['grindless:wake_shield_facility'], 'itemInputs'), [['gtceu:luv_machine_hull', '2x gtceu:luv_emitter', '4x #gtceu:circuits/luv',
+    '2x grindless:hermean_thin_film_panel', '2x grindless:heliostat_mirror']]);
+  for (const [id, output] of [['grindless:microgravity_smelter', 'gtceu:microgravity_smelter'], ['grindless:wake_shield_facility', 'gtceu:wake_shield_facility']]) {
+    const r = byName[id];
+    assert.deepEqual(calls(r, 'itemOutputs'), [[output]]);
+    assert.deepEqual(calls(r, 'inputFluids'), [[{ id: 'gtceu:soldering_alloy', amount: 576 }, { id: 'gtceu:lubricant', amount: 500 }]]);
+    assert.deepEqual([calls(r, 'EUt')[0][0], calls(r, 'duration')[0][0]], [30720, 600]);
   }
 });
 test('controller faces exist and every English tooltip has a Spanish translation', () => {

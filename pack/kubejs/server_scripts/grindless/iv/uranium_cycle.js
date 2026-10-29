@@ -56,7 +56,7 @@
   var CIRCUIT = '#gtceu:circuits/iv'
   var FIELD_PARTS = [FIELD, HULL, 'gtceu:hv_fluid_drilling_rig', 'gtceu:iv_electric_pump', 'gtceu:iv_chemical_bath']
   var PLANT_PARTS = [PLANT, HULL, 'gtceu:iv_forming_press', 'gtceu:iv_extruder', 'gtceu:iv_assembler']
-  UC.craftingRecipes = { field: 'grindless:crafting/isr_wellfield', plant: 'grindless:crafting/fuel_fabrication_plant' }
+  UC.craftingRecipes = { field: 'grindless:assembler/isr_wellfield', plant: 'grindless:assembler/fuel_fabrication_plant' }
   UC.craftingParts = { field: FIELD_PARTS, plant: PLANT_PARTS }
 
   function list(x) {
@@ -378,22 +378,19 @@
       console.error(LOG + 'uranium cycle controller recipes skipped, unknown item(s): ' + missing.join(', '))
       return
     }
-    // GTM shaped: lowercase letters are tool symbols, so ingredient keys are uppercase
-    event.recipes.gtceu.shaped(FIELD, ['CRC', 'PHP', 'CBC'], {
-      C: CIRCUIT,
-      R: 'gtceu:hv_fluid_drilling_rig',
-      P: 'gtceu:iv_electric_pump',
-      H: HULL,
-      B: 'gtceu:iv_chemical_bath'
-    }).id(UC.craftingRecipes.field)
+    event.recipes.gtceu.assembler('grindless:isr_wellfield')
+      .itemInputs(HULL, 'gtceu:hv_fluid_drilling_rig', '2x gtceu:iv_electric_pump', 'gtceu:iv_chemical_bath', '4x ' + CIRCUIT,
+        '2x grindless:stainless_steel_drill_bit', '2x grindless:platinum_electrode')
+      .inputFluids(Fluid.of('gtceu:soldering_alloy', 288), Fluid.of('gtceu:sulfuric_acid', 1000))
+      .itemOutputs(FIELD)
+      .EUt(1920).duration(600)
 
-    event.recipes.gtceu.shaped(PLANT, ['CFC', 'EHA', 'C C'], {
-      C: CIRCUIT,
-      F: 'gtceu:iv_forming_press',
-      E: 'gtceu:iv_extruder',
-      A: 'gtceu:iv_assembler',
-      H: HULL
-    }).id(UC.craftingRecipes.plant)
+    event.recipes.gtceu.assembler('grindless:fuel_fabrication_plant')
+      .itemInputs(HULL, 'gtceu:iv_forming_press', 'gtceu:iv_extruder', 'gtceu:iv_assembler', '4x ' + CIRCUIT,
+        '2x grindless:sintered_regolith', '2x grindless:platinum_electrode')
+      .inputFluids(Fluid.of('gtceu:soldering_alloy', 288), Fluid.of('gtceu:helium', 1000))
+      .itemOutputs(PLANT)
+      .EUt(1920).duration(600)
   }
 
   // an uncaught error here would stop KubeJS from running the recipe handlers of the scripts that load after this one

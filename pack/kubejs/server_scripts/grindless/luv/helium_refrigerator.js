@@ -34,7 +34,7 @@
 //   the returned helium.
 //
 // Controller (crafting table, luv.md "Controller"): LuV hull + 2 LuV electric pumps + 2 LuV electric motors (the expanders) + 4 LuV
-// circuits, grindless:crafting/helium_refrigerator.
+// circuits, grindless:assembly_line/helium_refrigerator.
 //
 // Destinations: the nitrogen goes back to the EV cryogenic plant or into the air (voidable); the helium never leaves.
 //
@@ -55,7 +55,7 @@
   var PUMP = 'gtceu:luv_electric_pump'
   var MOTOR = 'gtceu:luv_electric_motor'
   var CONTROLLER_PARTS = [CONTROLLER, HULL, PUMP, MOTOR]
-  HR.craftingRecipe = 'grindless:crafting/helium_refrigerator'
+  HR.craftingRecipe = 'grindless:assembly_line/helium_refrigerator'
   HR.craftingParts = CONTROLLER_PARTS
 
   // the startup script's table (startup_scripts/grindless/luv/helium_refrigerator.js), or GTM 7.5.3's defaults
@@ -325,12 +325,11 @@
       console.error(LOG + 'helium refrigerator controller recipe skipped, unknown item(s): ' + missing.join(', '))
       return
     }
-    event.recipes.gtceu.shaped(CONTROLLER, ['CMC', 'PHP', 'CMC'], {
-      C: '#gtceu:circuits/luv',
-      M: MOTOR,
-      P: PUMP,
-      H: HULL
-    }).id(HR.craftingRecipe)
+    event.recipes.gtceu.assembly_line('grindless:helium_refrigerator')
+      .itemInputs(HULL, '2x ' + MOTOR, '2x ' + PUMP, '4x #gtceu:circuits/luv', '2x grindless:platinum_gauze', '2x grindless:hermean_heat_shield_brick')
+      .inputFluids(Fluid.of('gtceu:soldering_alloy', 576), Fluid.of('gtceu:lubricant', 500))
+      .itemOutputs(CONTROLLER)
+      .EUt(30720).duration(600)
   }
 
   // an uncaught error here would stop KubeJS from running the recipe handlers of the scripts that load after this one

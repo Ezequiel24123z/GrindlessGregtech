@@ -228,7 +228,7 @@ test('the destinations: the radioprotectant comes from Proxima b, the spent medi
 test('the controller crafting: UHV hull, 2 UV sensors, 2 UHV circuits, a shape no other UHV controller uses', () => {
   const { W, recipes } = harness();
   const shaped = recipes.filter((r) => r.type === 'shaped');
-  assert.equal(shaped.length, 4, 'LuV\'s three + this one');
+  assert.equal(shaped.length, 1, 'the LuV controllers are assembly-line recipes now');
   const mine = shaped.find((r) => r.args[0] === 'gtceu:organoid_array');
   assert.ok(mine);
   assert.equal(only(mine.calls, 'id'), W.crafting.array);

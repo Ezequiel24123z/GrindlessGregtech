@@ -165,7 +165,7 @@
       id + '; orbits=' + dimIds.join(',') + '; cleanroom=' + clean.length)
     })
     ;['grindless:mixer/zblan', 'grindless:cutter/triple_junction_cells',
-      'grindless:crafting/microgravity_smelter', 'grindless:crafting/wake_shield_facility'].forEach(function (id) {
+      'grindless:assembly_line/microgravity_smelter', 'grindless:assembly_line/wake_shield_facility'].forEach(function (id) {
       check('support_recipe', byId(id) !== null, id)
     })
     var glass = GTMaterials.get('zblan')

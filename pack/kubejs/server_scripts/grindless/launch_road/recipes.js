@@ -87,7 +87,7 @@
     eut: 480,
     duration: 300
   }
-  LR.craftingRecipes = { testStand: 'grindless:crafting/engine_test_stand', autoclave: 'grindless:crafting/composite_autoclave' }
+  LR.craftingRecipes = { testStand: 'grindless:assembler/engine_test_stand', autoclave: 'grindless:assembler/composite_autoclave' }
 
   function ingredient(e) {
     return e.n + 'x ' + e.id
@@ -129,12 +129,12 @@
     if (missingStand.length > 0) {
       console.error(LOG + 'Engine Test Stand recipe skipped, unknown item(s): ' + missingStand.join(', '))
     } else {
-      event.recipes.gtceu.shaped('gtceu:engine_test_stand', ['CSC', 'PHP', 'CSC'], {
-        C: '#gtceu:circuits/mv',
-        S: 'gtceu:mv_sensor',
-        P: 'gtceu:mv_electric_pump',
-        H: 'gtceu:mv_machine_hull'
-      }).id(LR.craftingRecipes.testStand)
+      event.recipes.gtceu.assembler('grindless:engine_test_stand')
+        .itemInputs('gtceu:mv_machine_hull', 'gtceu:mv_electric_pump', '2x gtceu:mv_sensor', '4x #gtceu:circuits/mv',
+          '2x grindless:platinum_electrode', '2x grindless:sintered_regolith')
+        .inputFluids(Fluid.of('gtceu:soldering_alloy', 144), Fluid.of('gtceu:nitrogen', 1000))
+        .itemOutputs('gtceu:engine_test_stand')
+        .EUt(480).duration(400)
       done.push('engine test stand')
     }
 
@@ -142,12 +142,12 @@
     if (missingAutoclave.length > 0) {
       console.error(LOG + 'Composite Autoclave recipe skipped, unknown item(s): ' + missingAutoclave.join(', '))
     } else {
-      event.recipes.gtceu.shaped('gtceu:composite_autoclave', ['CPC', 'AHA', 'CPC'], {
-        C: '#gtceu:circuits/hv',
-        P: 'gtceu:hv_electric_pump',
-        A: 'gtceu:hv_autoclave',
-        H: 'gtceu:hv_machine_hull'
-      }).id(LR.craftingRecipes.autoclave)
+      event.recipes.gtceu.assembler('grindless:composite_autoclave')
+        .itemInputs('gtceu:hv_machine_hull', 'gtceu:hv_autoclave', '2x gtceu:hv_electric_pump', '4x #gtceu:circuits/hv',
+          '2x grindless:platinum_electrode', '2x grindless:sintered_regolith')
+        .inputFluids(Fluid.of('gtceu:soldering_alloy', 144), Fluid.of('gtceu:nitrogen', 1000))
+        .itemOutputs('gtceu:composite_autoclave')
+        .EUt(480).duration(400)
       done.push('composite autoclave')
     }
 

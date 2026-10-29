@@ -186,8 +186,9 @@
         return
       }
       event.recipes.gtceu.assembler('grindless:gtca/' + m.name)
-        .itemInputs('64x ' + m.machine, 'gtceu:iv_machine_hull', '4x #gtceu:circuits/iv')
-        .inputFluids(Fluid.of('gtceu:soldering_alloy', 9216))
+        .itemInputs('64x ' + m.machine, 'gtceu:iv_machine_hull', '4x #gtceu:circuits/iv', '2x grindless:platinum_electrode',
+          '2x grindless:night_sky_radiator', '2x grindless:zircaloy_cladding_tube')
+        .inputFluids(Fluid.of('gtceu:soldering_alloy', 9216), Fluid.of('gtceu:lubricant', 1000))
         .itemOutputs(m.output)
         .EUt(IV_EUT).duration(1200)
       mega++

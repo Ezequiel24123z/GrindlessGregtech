@@ -20,7 +20,7 @@
 //                         structure description of the design's size (refrigerator 8 x 9 x 5, line 21 x 4 x 3) whose part cells take
 //                         the parallel hatch, and are in global.grindless.parallelHatch.machines; LuV-A1's grindless:nickel_tungsten_tape
 //                         and grindless:itbtc_coated_conductor exist
-//   controller_recipes    grindless:crafting/helium_refrigerator and grindless:crafting/coated_conductor_line exist, make their controller
+//   controller_recipes    grindless:assembly_line/helium_refrigerator and grindless:assembly_line/coated_conductor_line exist, make their controller
 //                         and hold their parts
 //   hr_recipes            heliumRefrigerator.recipes is not empty, nothing skipped, and it is exactly one recipe per live vacuum freezer
 //                         recipe that takes liquid helium (same sources); every one is in the recipe manager under its recipeId with its

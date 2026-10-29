@@ -19,7 +19,7 @@
 //                       to hide)
 //   reference           GTM's chemical_reactor/phosphoric_acid_from_apatite, read live, gives the same EU, ticks, water and gypsum per
 //                       1 000 mB of sulfuric acid as a charge (1 920 EU, 64 t, 2 000 mB water, 8 gypsum)
-//   controller_recipe   grindless:crafting/fluorspar_kiln exists and holds its parts
+//   controller_recipe   grindless:assembler/fluorspar_kiln exists and holds its parts
 //   balance             NOTE: fluorite per naquadah pair and per LEU enrichment, gypsum per concrete
 //   kiln_PLACED / _FORMED / _PARTS   the copy below
 //   PROCESS_one         3 fluorite + 1 000 mB acid + 2 000 mB water -> exactly 2 000 mB HF and 8 gypsum, 1 charge, 64 t, exactly 1 920 EU

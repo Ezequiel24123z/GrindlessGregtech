@@ -497,9 +497,9 @@
 
   function checkControllers() {
     var want = [
-      ['grindless:crafting/pressurized_vein_drill', DRILL, ['gtceu:ev_vein_drill', 'gtceu:iv_machine_hull', 'gtceu:iv_electric_motor', 'gtceu:iv_electric_pump', 'gtceu:polytetrafluoroethylene_plate']],
-      ['grindless:crafting/venus_heat_engine', ENGINE, ['gtceu:heliostat_tower', 'gtceu:steam_large_turbine', 'gtceu:iv_machine_hull', 'gtceu:iv_electric_pump']],
-      ['grindless:crafting/venus_acid_works', WORKS, [GAUZE, 'gtceu:iv_chemical_reactor', 'gtceu:iv_fluid_heater', 'gtceu:iv_machine_hull']]
+      ['grindless:assembler/pressurized_vein_drill', DRILL, ['gtceu:ev_vein_drill', 'gtceu:iv_machine_hull', 'gtceu:iv_electric_motor', 'gtceu:iv_electric_pump', 'gtceu:polytetrafluoroethylene_plate']],
+      ['grindless:assembler/venus_heat_engine', ENGINE, ['gtceu:heliostat_tower', 'gtceu:steam_large_turbine', 'gtceu:iv_machine_hull', 'gtceu:iv_electric_pump']],
+      ['grindless:assembler/venus_acid_works', WORKS, [GAUZE, 'gtceu:iv_chemical_reactor', 'gtceu:iv_fluid_heater', 'gtceu:iv_machine_hull']]
     ]
     var problems = []
     want.forEach(function (w) {

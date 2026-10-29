@@ -52,11 +52,14 @@
       .itemInputs('grindless:triple_junction_wafer').itemOutputs('4x grindless:triple_junction_cell')
       .cleanroom(Java.loadClass('com.gregtechceu.gtceu.api.machine.multiblock.CleanroomType').CLEANROOM).EUt(7680).duration(200)
 
-    event.recipes.gtceu.shaped('gtceu:microgravity_smelter', ['CFC', 'PHP', 'C C'], {
-      C: '#gtceu:circuits/luv', F: 'gtceu:luv_field_generator', P: 'gtceu:luv_electric_pump', H: 'gtceu:luv_machine_hull'
-    }).id('grindless:crafting/microgravity_smelter')
-    event.recipes.gtceu.shaped('gtceu:wake_shield_facility', ['CEC', ' H ', 'CEC'], {
-      C: '#gtceu:circuits/luv', E: 'gtceu:luv_emitter', H: 'gtceu:luv_machine_hull'
-    }).id('grindless:crafting/wake_shield_facility')
-  })
+    event.recipes.gtceu.assembly_line('grindless:microgravity_smelter')
+      .itemInputs('gtceu:luv_machine_hull', 'gtceu:luv_field_generator', 'gtceu:luv_electric_pump', '4x #gtceu:circuits/luv',
+        '2x grindless:zircaloy_cladding_tube', '2x grindless:hermean_heat_shield_brick')
+      .inputFluids(Fluid.of('gtceu:soldering_alloy', 576), Fluid.of('gtceu:lubricant', 500))
+      .itemOutputs('gtceu:microgravity_smelter').EUt(30720).duration(600)
+    event.recipes.gtceu.assembly_line('grindless:wake_shield_facility')
+      .itemInputs('gtceu:luv_machine_hull', '2x gtceu:luv_emitter', '4x #gtceu:circuits/luv', '2x grindless:hermean_thin_film_panel',
+        '2x grindless:heliostat_mirror')
+      .inputFluids(Fluid.of('gtceu:soldering_alloy', 576), Fluid.of('gtceu:lubricant', 500))
+      .itemOutputs('gtceu:wake_shield_facility').EUt(30720).duration(600)  })
 })()
