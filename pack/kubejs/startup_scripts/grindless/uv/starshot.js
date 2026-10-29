@@ -125,14 +125,50 @@
     }
     return rows
   }
+  // QR-S3: dress(slices, wall, rule) rewrites plain wall cells (char `wall`) through rule(x, y, z, W, H, D) -> char or null. Row 0 is never touched.
+  function dress(slices, wall, rule) {
+    var D = slices.length
+    var H = slices[0].length
+    var W = slices[0][0].length
+    return slices.map(function (rows, z) {
+      return rows.map(function (row, y) {
+        if (y === 0) return row
+        var out = ''
+        for (var x = 0; x < W; x++) {
+          var ch = row.charAt(x)
+          var r = ch === wall ? rule(x, y, z, W, H, D) : null
+          out += r || ch
+        }
+        return out
+      })
+    })
+  }
+
+  // the sail fab, a deposition vault: titanium frame posts and roof ring, fusion glass viewing bands, a tungstensteel pipe gas line round
+  // the middle, a glass skylight over the sail bay
+  function sailRule(x, y, z, W, H, D) {
+    var cx = x === 0 || x === W - 1
+    var cz = z === 0 || z === D - 1
+    if (y === H - 1) {
+      if (cx || cz) return 'R'
+      return x >= 2 && x <= 4 && z >= 2 && z <= 4 ? 'G' : null
+    }
+    if (cx && cz) return 'R'
+    if (y === 3) return 'N'
+    if ((y === 2 || y === 4) && (cx ? z : x) >= 1 && (cx ? z : x) <= 5 && (cx ? z : x) !== 3) return 'G'
+    return null
+  }
   const SAIL_SPEC = {
-    slices: [0, 1, 2, 3, 4, 5, 6].map(sailSlice),
+    slices: dress([0, 1, 2, 3, 4, 5, 6].map(sailSlice), 'C', sailRule),
     symbols: {
       S: Pat.controller(),
       X: cells(TRUSS, S.minCasings.sail, S.sailParts),
       C: Pat.block(TRUSS),
       W: Pat.block(SHIELD),
       T: Pat.block(HEATER),
+      R: Pat.frame(['titanium']),
+      G: Pat.block('gtceu:fusion_glass'),
+      N: Pat.block(PIPE),
       '#': Pat.air()
     }
   }
@@ -157,14 +193,25 @@
     }
     return rows
   }
+  // the clean room: stainless steel frame posts and roof ring, a laminated glass window band, the filter ceiling stays
+  function chipRule(x, y, z, W, H, D) {
+    var cx = x === 0 || x === W - 1
+    var cz = z === 0 || z === D - 1
+    if (y === H - 1) return 'R'
+    if (cx && cz) return 'R'
+    if (y === 2) return 'G'
+    return null
+  }
   const CHIP_SPEC = {
-    slices: [0, 1, 2, 3, 4].map(chipSlice),
+    slices: dress([0, 1, 2, 3, 4].map(chipSlice), 'C', chipRule),
     symbols: {
       S: Pat.controller(),
       X: cells(CLEAN, S.minCasings.chip, S.chipParts),
       C: Pat.block(CLEAN),
       F: Pat.block(FILTER),
       B: Pat.block(BONDER),
+      R: Pat.frame(['stainless_steel']),
+      G: Pat.block('gtceu:laminated_glass'),
       '#': Pat.air()
     }
   }

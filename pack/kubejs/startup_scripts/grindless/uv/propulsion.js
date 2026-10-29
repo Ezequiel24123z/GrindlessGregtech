@@ -115,9 +115,43 @@
   const MANDREL_ONLY = [EMPTY5, EMPTY5, '##M##', EMPTY5, EMPTY5]
   const WINDING = ['#AAA#', EMPTY5, '##M##', EMPTY5, EMPTY5]
   const CURING = ['#KKK#', 'K###K', 'K#M#K', 'K###K', '#KKK#']
+  // QR-S3: dress(slices, wall, rule) rewrites plain wall cells (char `wall`) through rule(x, y, z, W, H, D) -> char or null. Row 0 is never touched.
+  function dress(slices, wall, rule) {
+    var D = slices.length
+    var H = slices[0].length
+    var W = slices[0][0].length
+    return slices.map(function (rows, z) {
+      return rows.map(function (row, y) {
+        if (y === 0) return row
+        var out = ''
+        for (var x = 0; x < W; x++) {
+          var ch = row.charAt(x)
+          var r = ch === wall ? rule(x, y, z, W, H, D) : null
+          out += r || ch
+        }
+        return out
+      })
+    })
+  }
+
+  // the winder, a long cold hall: tungsten steel ribs every four slices (frames up the corners and across the roof), frostproof bands
+  // above and below the glass observation windows, a PTFE duct along the roof's spine
+  function winderRule(x, y, z, W, H, D) {
+    var side = x === 0 || x === W - 1
+    var rib = z === 0 || z === 4 || z === D - 1
+    if (y === H - 1) {
+      if (side || rib) return 'M'
+      return x === 3 ? 'P' : null
+    }
+    if (side && rib) return 'M'
+    if (y === 1 || y === 5) return 'Z'
+    if (y >= 2 && y <= 4 && side) return 'L'
+    if (y === 3 && (z === 0 || z === D - 1) && x >= 2 && x <= 4) return 'L'
+    return null
+  }
   const WINDER_SPEC = {
-    slices: [wall7(), ring7(MANDREL_ONLY), ring7(CURING), ring7(CURING), ring7(MANDREL_ONLY), ring7(WINDING), ring7(WINDING),
-      ring7(MANDREL_ONLY), front7()],
+    slices: dress([wall7(), ring7(MANDREL_ONLY), ring7(CURING), ring7(CURING), ring7(MANDREL_ONLY), ring7(WINDING), ring7(WINDING),
+      ring7(MANDREL_ONLY), front7()], 'R', winderRule),
     symbols: {
       S: Pat.controller(),
       X: cells(P.winderParts),
@@ -125,24 +159,46 @@
       M: Pat.frame([MANDREL]),
       A: Pat.block(HEAD),
       K: Pat.block(OVEN),
+      Z: Pat.block('gtceu:frostproof_machine_casing'),
+      P: Pat.block('gtceu:ptfe_pipe_casing'),
+      L: Pat.block(CELL),
       '#': Pat.air()
     }
   }
   P.winderSpec = WINDER_SPEC
 
   // the vacuum test cell: a laminated glass box at the back; the assembly bay: grating floor and robot units along the walls
+  // the works: a thruster bench. A heatproof nozzle plate on the back wall, tungsten steel ribs, glass over the test cell, a tungstensteel
+  // pipe line (propellant feed) along the assembly bay and the roof
+  function worksRule(x, y, z, W, H, D) {
+    var side = x === 0 || x === W - 1
+    var rib = z === 0 || z === 4 || z === D - 1
+    if (y === H - 1) {
+      if (side || rib) return 'M'
+      return x === 3 || (z <= 3 && x === 2) ? 'N' : null
+    }
+    if (side && rib) return 'M'
+    if (z === 0 && y >= 2 && y <= 4 && x >= 2 && x <= 4) return 'H'
+    if (z < 4 && side && y >= 2 && y <= 4) return 'L'
+    if (z > 4 && side && y === 5) return 'N'
+    if (z > 4 && side && y === 1) return 'H'
+    return null
+  }
   const TEST_CELL = ['LLLLL', 'L###L', 'L###L', 'L###L', 'LLLLL']
   const ASSEMBLY = ['BBBBB', 'A###A', 'A###A', EMPTY5, EMPTY5]
   const WORKS_SPEC = {
-    slices: [wall7(), ring7(TEST_CELL), ring7(TEST_CELL), ring7(TEST_CELL), ring7(HOLLOW), ring7(ASSEMBLY), ring7(ASSEMBLY),
-      ring7(ASSEMBLY), front7()],
+    slices: dress([wall7(), ring7(TEST_CELL), ring7(TEST_CELL), ring7(TEST_CELL), ring7(HOLLOW), ring7(ASSEMBLY), ring7(ASSEMBLY),
+      ring7(ASSEMBLY), front7()], 'R', worksRule),
     symbols: {
       S: Pat.controller(),
       X: cells(P.worksParts),
       R: Pat.block(CASING),
+      M: Pat.frame([MANDREL]),
       L: Pat.block(CELL),
       B: Pat.block(BAY),
       A: Pat.block(HEAD),
+      H: Pat.block('gtceu:heatproof_machine_casing'),
+      N: Pat.block('gtceu:tungstensteel_pipe_casing'),
       '#': Pat.air()
     }
   }

@@ -75,6 +75,22 @@
     return false
   }
 
+  // QR-S3: factory hall look. F frame posts and ribs, G window bands, K coil band, P pipe band; X stays casing or a part
+  function decor(x, y, z) {
+    var edgeX = x === 0 || x === W - 1
+    var edgeZ = z === 0 || z === D - 1
+    var edgeY = y === 0 || y === H - 1
+    var n = (edgeX ? 1 : 0) + (edgeZ ? 1 : 0) + (edgeY ? 1 : 0)
+    if (n >= 2) return 'F'
+    if (y === H - 1) return z % 3 === 1 ? 'F' : 'X'
+    if (y === 0) return z % 4 === 2 && x % 2 === 1 ? 'F' : 'X'
+    if (z === D - 1 && y <= 3 && x >= 5 && x <= 9) return 'X'
+    if (y === 3) return 'K'
+    if (y === 9) return 'P'
+    if ((y === 6 || y === 7) && (x + z) % 4 !== 0) return 'G'
+    return 'X'
+  }
+
   // slices back -> front, rows bottom -> top, one char per column
   function build() {
     var slices = []
@@ -88,7 +104,10 @@
           var ch = '#'
           if (z === D - 1 && x === 7 && y === 1) ch = 'S'
           else if (y === SOCKET_ROW && socketCell(x, z)) ch = 'M'
-          else if (shell) { ch = 'X'; casingCells++ }
+          else if (shell) {
+            ch = decor(x, y, z)
+            if (ch === 'X') casingCells++
+          }
           row += ch
         }
         rows.push(row)
@@ -160,6 +179,10 @@
       slices: BUILT.slices,
       symbols: {
         S: Pat.controller(),
+        F: Pat.frame(['tungsten_steel']),
+        G: Pat.block('gtceu:fusion_glass'),
+        K: Pat.block('gtceu:naquadah_coil_block'),
+        P: Pat.block('gtceu:tungstensteel_pipe_casing'),
         M: Pat.oneOf(M.socket(), Pat.air()),
         X: Pat.oneOf(
           Pat.block(CASING, { min: BUILT.casingCells - PART_CELLS }),

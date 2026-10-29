@@ -59,7 +59,7 @@ declarations in 6 files (13 structures) were changed to `var`, and the test now 
 
 - Steam 0/15, LV 0/7, MV 0/12, HV 0/6, EV 0/12, IV 0/16: done in QR-S1 (all pass the gate without baseline entries).
 - LuV 0/21, ZPM 0/27, launch_road and power 0: done in QR-S2 (all pass the gate without baseline entries).
-- UV 31/33: `mega_factory` (15x12x21, 2 types), `laser_fusion_chamber`, `triton_geyser_sampler`, `powder_in_tube_line`, `zone_refining_tower`.
+- UV 1/33: only the ZPM `ice_giant_siphon` (`zpm/uranus.js`, 7x7x13 pressure-hull box, gate attributes it to `uv/neptune.js:130`) is left; QR-S3 did the other 30 uv/ structures.
 - UHV 30/32: `xenoflora_rover_bay`, `biomining_heap`, `zblan_draw_tower`, `positron_accumulator`, `warp_gate`.
 - UEV, UIV: almost all are hollow 5x5x7 / 7x7x7 single-casing boxes (`uev/*.js` shell helpers: `megabar`, `sirius`, `composites`,
   `electron_beam`, `earth_orbit`, `alpha_centauri`, `photonics`; `uiv/beuv_stm.js:53`, `matrioshka.js:83`, `tfln_femtosecond.js:65`,
@@ -80,6 +80,22 @@ Same WxHxD, new layout (frame posts, glass bands, pipes/coils, second casing; `n
   `plume_sampler` 7x5x7, `ring_seismometer` 5x5x5.
 First-met blocks: no new block types; only blocks already obtainable in their era (glass, frames, pipe casings, coil blocks, gearboxes, stable/frostproof casings,
 `grindless:station_truss_casing`, `probe_bay_casing`, `pressure_hull_casing`).
+
+### QR-S3 release notes (UV structures; same ids, same WxHxD, new layout; no registrations removed)
+
+Frame posts and roof edges, window bands, pipe/coil/second-casing bands; the controller, hatch cells and abilities are unchanged. Casing minimums
+are unchanged except `mega_factory`, whose casing count is computed from the shell cells that remain casing (still shell cells minus 24 parts).
+- `mega_factory` 15x12x21, `laser_fusion_chamber` 13x13x13, `neptune_deep_siphon` 7x15x7, `triton_geyser_sampler` 7x7x7, `synchrotron` 23x5x23,
+  `muon_fusion_cell` 9x11x9, `antimatter_trap` 5x5x9.
+- `superfluid_helium_plant`, `srf_cavity_works` 7x7x9; `zone_refining_tower` 3x13x3; `optical_ground_station` 9x9x9; `precursor_probe_bay` 7x7x11;
+  `event_horizon_interferometer` 9x5x9; `kuiper_interceptor_bay` 7x7x9; `amorphous_ice_annealer` 5x7x5; `heat_source_works` 5x5x7;
+  `neural_culture_vat` 7x7x7; `boron_nitride_reactor` 7x7x9; `powder_in_tube_line` 3x5x15; `powder_bed_printer` 7x7x7;
+  `penetrator_probe_bay` 7x9x7; `volatile_ice_fractionator` 7x7x7; `cryotank_winder`, `thruster_works` 7x7x9; `starchip_fab` 5x5x5; `light_sail_fab` 7x7x7;
+  `accelerator_driven_reactor` 11x13x11; `pyroprocessing_cell` 7x7x7; `fibre_draw_tower` 5x15x5; `mocvd_reactor` 7x7x7.
+First-met blocks in UV structures: no new block types. Blocks first used in a UV structure (already obtainable earlier): `gtceu:fusion_glass`,
+`gtceu:laminated_glass`, `gtceu:tungsten_steel_frame`/`titanium_frame`/`stainless_steel_frame`, `gtceu:tungstensteel_pipe_casing`, `gtceu:ptfe_pipe_casing`,
+`gtceu:steel_pipe_casing`, `gtceu:naquadah_coil_block`, `gtceu:superconducting_coil`, `gtceu:heatproof_machine_casing`, `gtceu:frostproof_machine_casing`,
+`gtceu:filter_casing`, `grindless:pressure_hull_casing`, `grindless:cryostat_casing`.
 
 Process for each: redesign the spec, run `--static --check`, lower the baseline, update its T1 overlay test; from the next tier on
 every new structure must pass the gate without a baseline entry.
