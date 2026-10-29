@@ -182,9 +182,10 @@
     var C = '4x #gtceu:circuits/uhv'
     var M = BA.machines || {}
     // QR-R6: assembly line with station research, the era fluid and domain inputs; the refinery follows the drill
+    // the drill opens Barnard core rock (rhenium, iron pentacarbonyl), so it takes the UHV coring head, not rhenium
     var defs = [
       { key: 'drill', research: 'grindless:ffkm_seal', era: 'gtceu:neutronium',
-        ins: [HULL, '2x ' + O, '2x ' + PISTON, C, '2x grindless:ffkm_seal', 'grindless:tantalum_pentoxide_dust', 'grindless:rhenium_pellet'] },
+        ins: [HULL, '2x ' + O, '2x ' + PISTON, C, '2x grindless:ffkm_seal', 'grindless:tantalum_pentoxide_dust', 'grindless:cold_trap_coring_head'] },
       { key: 'refinery', research: 'gtceu:barnard_core_drill', era: 'gtceu:neutronium',
         ins: [HULL, '2x ' + O, '2x ' + PUMP, C, '2x grindless:ffkm_seal', 'grindless:tantalum_pentoxide_dust'] }
     ]

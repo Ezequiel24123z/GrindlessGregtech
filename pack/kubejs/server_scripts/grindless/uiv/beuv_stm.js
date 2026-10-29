@@ -8,7 +8,7 @@
 //   gtceu:stm_lithography    STM cell, circuit 1 H termination, 2 STM patterning, 3 phosphine dosing.
 //   chemical_reactor, assembler, cutter   the line steps GTM can run (ids grindless:<type>/<name>): phosphine and its scrubber to
 //                            phosphoric acid, the LaN barrier, the Tb droplet target, the mirror cap, the Si-28 wafers.
-//   assembly_line            the controllers: UIV hull + 2 UEV parts + 2 optical computers + UIV circuits + 3 line items, with
+//   assembly_line            the controllers: UIV hull + 2 UEV parts + 2 optical computers + UEV circuits + 3 line items, with
 //                            soldering alloy, lubricant and neutronium, behind station research, grindless:assembly_line/<machine>.
 //
 // Lookup safety: a recipe whose ingredients are a subset of another's of its type can hide it; checked at load (a clash is an error).
@@ -181,7 +181,8 @@
       b.itemInputs(HULL)
       b.itemInputs('2x ' + d.part)
       b.itemInputs('2x ' + COMPUTER)
-      b.itemInputs('4x #gtceu:circuits/uiv')
+      // UEV circuits: these machines make the optical mainframe's parts, and the mainframe is the first UIV circuit
+      b.itemInputs('4x #gtceu:circuits/uev')
       d.domain.forEach(function (s) { b.itemInputs(s) })
       b.inputFluids(Fluid.of('gtceu:soldering_alloy', 2304), Fluid.of('gtceu:lubricant', 2000), Fluid.of('gtceu:neutronium', 576))
       b.itemOutputs(machine)

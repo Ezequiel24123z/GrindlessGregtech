@@ -172,8 +172,9 @@
     var COMPUTER = 'gtnn:optical_computer'
     var machine = LM.machine.machine
     LM.controllerRecipes = []
-    var research = 'grindless:maglev_stator'
-    var domain = ['2x grindless:strain_wave_gear', '2x grindless:impregnated_gdbco', '2x grindless:rhea_cased_halbach']
+    // pre-rhea parts only: the melter makes the first rhea, and metallic hydrogen needs rhea
+    var research = 'grindless:halbach_array'
+    var domain = ['2x grindless:halbach_array', '2x grindless:impregnated_gdbco', '2x grindless:iridium_crucible']
     var ids = [HULL, PISTON, COMPUTER, machine, research].concat(domain.map(function (s) { return s.replace(/^\d+x /, '') }))
     var missing = ids.filter(function (id) { return !Item.exists(id) })
     if (missing.length > 0) {
