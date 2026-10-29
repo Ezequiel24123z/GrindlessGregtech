@@ -57,51 +57,16 @@
     width: 9, height: 9, depth: 9
   }
 
-  // A cylinder: a ring of casing, its pulsed-power coils on rows 2 to 6, row 0 (X) takes the parts, the top row is casing, S is the controller
-  // (front wall, row 1, middle). The corners outside the ring are free.
-  function shell(m) {
-    var slices = []
-    var last = m.depth - 1
-    var mid = (m.width - 1) / 2
-    for (var si = 0; si < m.depth; si++) {
-      var rows = []
-      for (var r = 0; r < m.height; r++) {
-        var row = ''
-        for (var c = 0; c < m.width; c++) {
-          var d2 = (si - mid) * (si - mid) + (c - mid) * (c - mid)
-          var ch
-          if (d2 > 20) ch = 'A'
-          else if (r === 0) ch = d2 > 12 ? 'F' : 'X'
-          else if (r === m.height - 1) ch = 'F'
-          else if (d2 <= 12) ch = '#'
-          else if (si === last && r === 1 && c === mid) ch = 'S'
-          else if (r >= 2 && r <= 6) ch = 'C'
-          else ch = 'F'
-          row += ch
-        }
-        rows.push(row)
-      }
-      slices.push(rows)
-    }
-    return slices
-  }
-
-  MH.machine.spec = {
-    slices: shell(MH.machine),
-    symbols: {
-      S: Pat.controller(),
-      X: Pat.oneOf.apply(null, [Pat.block(CASING)].concat([
-        Pat.part('input_bus', { min: 1, max: 2 }),
-        Pat.part('output_bus', { min: 1, max: 2 }),
-        Pat.part('input_hatch', { min: 0, max: 1 }),
-        Pat.part('output_hatch', { min: 0, max: 1 }),
-        Pat.part('energy_input', { min: 1, max: 2 })
-      ])),
-      F: Pat.block(CASING),
-      C: Pat.block(COIL),
-      A: Pat.any(),
-      '#': Pat.air()
-    }
+  // A pressure vessel (uiv/shapes.js): a ribbed drum with pulsed-power coil rings, four rams ending in anvils, a stepped lid. Built in the
+  // machine registry callback: shapes.js may load after this file. Row 0 (X) takes the parts.
+  function spec(m) {
+    return G.uivShapes.build(Pat, m.name, CASING, [
+      Pat.part('input_bus', { min: 1, max: 2 }),
+      Pat.part('output_bus', { min: 1, max: 2 }),
+      Pat.part('input_hatch', { min: 0, max: 1 }),
+      Pat.part('output_hatch', { min: 0, max: 1 }),
+      Pat.part('energy_input', { min: 1, max: 2 })
+    ])
   }
 
   // one EMI line per recipe, read from its data: what the circuit does (and the named fiction)
@@ -152,6 +117,7 @@
     var type = GTRecipeTypes.get(m.type)
     if (type == null) throw new Error(LOG + 'recipe type gtceu:' + m.type + ' is not registered')
     type.addDataInfo(infoOf(m.dataKey))
+    m.spec = spec(m)
     Pat.register(m.machine, m.spec)
 
     event.create(m.name, 'multiblock')

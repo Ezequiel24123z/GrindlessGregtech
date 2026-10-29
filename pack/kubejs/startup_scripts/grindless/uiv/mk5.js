@@ -74,64 +74,36 @@
 
   // ---------------------------------------------------------------- geometry
 
-  // A hollow box of cryostat casing; the floor row (X) takes the parts, S is the controller (front wall, row 1, middle), # is air; a belt of
-  // coil blocks (M) runs on row 3 of the walls
+  // Both shapes come from uiv/shapes.js and are built in the machine registry callback: shapes.js may load after this file.
   function sourceSpec(m) {
-    var slices = []
-    var last = m.depth - 1
-    var mid = (m.width - 1) / 2
-    for (var si = 0; si < m.depth; si++) {
-      var rows = []
-      for (var r = 0; r < m.height; r++) {
-        var row = ''
-        for (var c = 0; c < m.width; c++) {
-          var edge = si === 0 || si === last || c === 0 || c === m.width - 1
-          var ch
-          if (r === m.height - 1) ch = 'F'
-          else if (edge) ch = (si === last && r === 1 && c === mid) ? 'S' : (r === 3 ? 'M' : 'F')
-          else if (r === 0) ch = 'X'
-          else ch = '#'
-          row += ch
-        }
-        rows.push(row)
-      }
-      slices.push(rows)
-    }
+    return G.uivShapes.build(Pat, m.name, CRYO, [
+      Pat.part('input_bus', { min: 1, max: 2 }),
+      Pat.part('output_bus', { min: 1, max: 2 }),
+      Pat.part('input_hatch', { min: 0, max: 1 }),
+      Pat.part('output_hatch', { min: 0, max: 2 }),
+      Pat.part('energy_input', { min: 1, max: 2 })
+    ])
+  }
+
+  // the Mk5 ring: an octagonal annulus of fusion casing lined with the metallic hydrogen coil; at most 16 energy hatches:
+  // 16 x 2^5 x 10,000,000 = 5,120,000,000 EU
+  function ringSpec() {
+    var lay = G.uivShapes.layouts.uiv_fusion_reactor()
     return {
-      slices: slices,
+      slices: G.uivShapes.slices(lay.w, lay.h, lay.d, lay.fn),
       symbols: {
         S: Pat.controller(),
-        X: Pat.oneOf(Pat.block(CRYO),
-          Pat.part('input_bus', { min: 1, max: 2 }),
-          Pat.part('output_bus', { min: 1, max: 2 }),
-          Pat.part('input_hatch', { min: 0, max: 1 }),
-          Pat.part('output_hatch', { min: 0, max: 2 }),
-          Pat.part('energy_input', { min: 1, max: 2 })),
-        F: Pat.block(CRYO),
-        M: Pat.block(COIL),
+        C: Pat.block(CASING),
+        K: Pat.block(COIL),
+        A: Pat.block('gtceu:stable_machine_casing'),
+        L: Pat.block('gtceu:laminated_glass'),
+        P: Pat.block('gtceu:tungstensteel_pipe_casing'),
+        Q: Pat.frame(['tungsten_steel']),
+        E: Pat.oneOf(Pat.block(CASING), Pat.part('energy_input', { min: 1, max: 16 })),
+        I: Pat.oneOf(Pat.block(CASING), Pat.part('input_hatch', { min: 1, max: 3 })),
+        O: Pat.oneOf(Pat.block(CASING), Pat.part('output_hatch', { min: 1, max: 3 })),
         '#': Pat.air()
       }
-    }
-  }
-  MK.source.spec = sourceSpec(MK.source)
-
-  // the Mk4's spike with our casing and the metallic hydrogen coil; at most 16 energy hatches: 16 x 2^5 x 10,000,000 = 5,120,000,000 EU
-  MK.ring.spec = {
-    slices: [
-      ['EEEEE', 'CKKKC', 'EEEEE'],
-      ['EKKKE', 'I###C', 'EKKKE'],
-      ['EKKKE', 'I###C', 'EKKKE'],
-      ['EKKKE', 'C###O', 'EKKKE'],
-      ['EEEEE', 'CCSCC', 'EEEEE']
-    ],
-    symbols: {
-      S: Pat.controller(),
-      C: Pat.block(CASING),
-      K: Pat.block(COIL),
-      E: Pat.oneOf(Pat.block(CASING), Pat.part('energy_input', { min: 1, max: 16 })),
-      I: Pat.oneOf(Pat.block(CASING), Pat.part('input_hatch', { min: 1, max: 3 })),
-      O: Pat.oneOf(Pat.block(CASING), Pat.part('output_hatch', { min: 1, max: 3 })),
-      '#': Pat.air()
     }
   }
 
@@ -180,6 +152,7 @@
     var type = GTRecipeTypes.get(m.type)
     if (type == null) throw new Error(LOG + 'recipe type gtceu:' + m.type + ' is not registered')
     type.addDataInfo(infoOf(m.dataKey))
+    m.spec = sourceSpec(m)
     Pat.register(m.machine, m.spec)
     event.create(m.name, 'multiblock')
       .langValue(m.lang)
@@ -200,6 +173,7 @@
       return
     }
     var r = MK.ring
+    r.spec = ringSpec()
     Pat.register(r.machine, r.spec)
     event.create(r.name, 'multiblock')
       .langValue(r.lang)
