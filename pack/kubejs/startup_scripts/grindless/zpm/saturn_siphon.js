@@ -43,7 +43,7 @@
     for (let y = 0; y < 11; y++) {
       let row = ''
       for (let x = 0; x < 7; x++) {
-        const edge = x === 0 || x === 6 || z === 0 || z === 6
+        var edge = x === 0 || x === 6 || z === 0 || z === 6
         let c = ' '
         if (y === 0) c = 'X'
         else if (y === 10) c = 'C'
@@ -75,7 +75,7 @@
     for (let y = 0; y < 15; y++) {
       let row = ''
       for (let x = 0; x < 5; x++) {
-        const edge = x === 0 || x === 4 || z === 0 || z === 4
+        var edge = x === 0 || x === 4 || z === 0 || z === 4
         let c = ' '
         if (y === 0) c = 'X'
         else if (y === 14) c = 'F'
@@ -106,7 +106,7 @@
     for (let y = 0; y < 3; y++) {
       let row = ''
       for (let x = 0; x < 9; x++) {
-        const tank = x >= 3 && x <= 5 && z >= 3 && z <= 5
+        var tank = x >= 3 && x <= 5 && z >= 3 && z <= 5
         let c = ' '
         if (y === 0) c = 'X'
         else if (y === 1) {
