@@ -95,8 +95,35 @@
   }
   const JACKET = ring(['WWW', '###', 'WWW'])
   const RAM = ring(['#F#', '###', '#F#'])
+
+  // dress the casing walls: frame posts (Q) on the corners and roof edges, heatproof ribs (A) on the roof and a course at the foot,
+  // glass (L) between casing mullions in the rows above
+  function dress(slices) {
+    var depth = slices.length
+    var height = slices[0].length
+    var width = slices[0][0].length
+    return slices.map(function (rows, si) {
+      return rows.map(function (row, r) {
+        var out = ''
+        for (var c = 0; c < width; c++) {
+          var ch = row.charAt(c)
+          if (ch === 'R' && r > 0) {
+            var ex = c === 0 || c === width - 1
+            var ez = si === 0 || si === depth - 1
+            var top = r === height - 1
+            if ((ex && ez) || (top && (ex || ez))) ch = 'Q'
+            else if (top) ch = si % 2 === 1 ? 'A' : 'R'
+            else if (r === 1) ch = 'A'
+            else if ((ez ? c : si) % 2 === 1) ch = 'L'
+          }
+          out += ch
+        }
+        return out
+      })
+    })
+  }
   const SPEC = {
-    slices: [
+    slices: dress([
       ['XXXXX', 'RRRRR', 'RRRRR', 'RRRRR', 'RRRRR'],
       JACKET,
       RAM,
@@ -104,11 +131,14 @@
       RAM,
       JACKET,
       ['XXXXX', 'RRSRR', 'RRRRR', 'RRRRR', 'RRRRR']
-    ],
+    ]),
     symbols: {
       S: Pat.controller(),
       X: cells(ROBUST, P.minCasings, P.abilities),
       R: Pat.block(ROBUST),
+      A: Pat.block('gtceu:heatproof_machine_casing'),
+      L: Pat.block('gtceu:laminated_glass'),
+      Q: Pat.frame([FRAME]),
       W: Pat.block(PIPE),
       G: Pat.block(GEARBOX),
       F: Pat.frame([FRAME]),

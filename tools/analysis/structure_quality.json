@@ -72,21 +72,16 @@
   "c": 62
  },
  "gtceu:baseline_astrometer": {
-  "v": [
-   "dominant-share"
-  ],
-  "bt": 3,
-  "ds": 0.847,
-  "c": 86
+  "v": [],
+  "bt": 5,
+  "ds": 0.607,
+  "c": 151
  },
  "gtceu:betavoltaic_fab": {
-  "v": [
-   "mono-block",
-   "dominant-share"
-  ],
-  "bt": 3,
-  "ds": 0.858,
-  "c": 107
+  "v": [],
+  "bt": 6,
+  "ds": 0.34,
+  "c": 201
  },
  "gtceu:beuv_scanner": {
   "v": [
@@ -106,14 +101,10 @@
   "c": 325
  },
  "gtceu:biomining_heap": {
-  "v": [
-   "hollow-box",
-   "dominant-share",
-   "few-block-types"
-  ],
-  "bt": 2,
-  "ds": 0.873,
-  "c": 166
+  "v": [],
+  "bt": 6,
+  "ds": 0.365,
+  "c": 278
  },
  "gtceu:biorefinery": {
   "v": [],
@@ -145,14 +136,10 @@
   "c": 101
  },
  "gtceu:casimir_array": {
-  "v": [
-   "dominant-share",
-   "few-block-types",
-   "no-functional-detail"
-  ],
-  "bt": 2,
-  "ds": 0.889,
-  "c": 245
+  "v": [],
+  "bt": 7,
+  "ds": 0.354,
+  "c": 433
  },
  "gtceu:coated_conductor_line": {
   "v": [],
@@ -237,12 +224,10 @@
   "c": 303
  },
  "gtceu:crystal_growth_furnace": {
-  "v": [
-   "dominant-share"
-  ],
-  "bt": 3,
-  "ds": 0.767,
-  "c": 211
+  "v": [],
+  "bt": 7,
+  "ds": 0.234,
+  "c": 219
  },
  "gtceu:cvi_furnace": {
   "v": [
@@ -491,12 +476,10 @@
   "c": 262
  },
  "gtceu:high_flux_reactor": {
-  "v": [
-   "dominant-share"
-  ],
-  "bt": 4,
-  "ds": 0.777,
-  "c": 579
+  "v": [],
+  "bt": 8,
+  "ds": 0.42,
+  "c": 603
  },
  "gtceu:hot_cell": {
   "v": [],
@@ -535,11 +518,9 @@
   "c": 375
  },
  "gtceu:ice_giant_siphon": {
-  "v": [
-   "dominant-share"
-  ],
-  "bt": 3,
-  "ds": 0.97,
+  "v": [],
+  "bt": 5,
+  "ds": 0.559,
   "c": 373
  },
  "gtceu:interferometer": {
@@ -686,12 +667,10 @@
   "c": 522
  },
  "gtceu:mbe_reactor": {
-  "v": [
-   "dominant-share"
-  ],
-  "bt": 3,
-  "ds": 0.796,
-  "c": 163
+  "v": [],
+  "bt": 7,
+  "ds": 0.347,
+  "c": 263
  },
  "gtceu:mega_chemical_complex": {
   "v": [],
@@ -866,12 +845,10 @@
   "c": 98
  },
  "gtceu:nuclear_clock_lab": {
-  "v": [
-   "dominant-share"
-  ],
-  "bt": 4,
-  "ds": 0.812,
-  "c": 251
+  "v": [],
+  "bt": 7,
+  "ds": 0.361,
+  "c": 253
  },
  "gtceu:optical_ground_station": {
   "v": [],
@@ -910,11 +887,9 @@
   "c": 287
  },
  "gtceu:organoid_array": {
-  "v": [
-   "dominant-share"
-  ],
-  "bt": 5,
-  "ds": 0.767,
+  "v": [],
+  "bt": 6,
+  "ds": 0.632,
   "c": 194
  },
  "gtceu:organoid_lab": {
@@ -924,11 +899,9 @@
   "c": 118
  },
  "gtceu:pbo_plant": {
-  "v": [
-   "dominant-share"
-  ],
-  "bt": 3,
-  "ds": 0.913,
+  "v": [],
+  "bt": 6,
+  "ds": 0.415,
   "c": 230
  },
  "gtceu:penetrator_probe_bay": {
@@ -938,12 +911,10 @@
   "c": 273
  },
  "gtceu:photonic_foundry": {
-  "v": [
-   "dominant-share"
-  ],
-  "bt": 5,
-  "ds": 0.754,
-  "c": 334
+  "v": [],
+  "bt": 7,
+  "ds": 0.404,
+  "c": 375
  },
  "gtceu:photonic_integration_hall": {
   "v": [
@@ -991,13 +962,10 @@
   "c": 135
  },
  "gtceu:positron_accumulator": {
-  "v": [
-   "mono-block",
-   "dominant-share"
-  ],
-  "bt": 3,
-  "ds": 0.914,
-  "c": 129
+  "v": [],
+  "bt": 7,
+  "ds": 0.373,
+  "c": 312
  },
  "gtceu:positronium_condensate_lab": {
   "v": [
@@ -1060,11 +1028,9 @@
   "c": 255
  },
  "gtceu:quantum_fabricator": {
-  "v": [
-   "dominant-share"
-  ],
-  "bt": 3,
-  "ds": 0.89,
+  "v": [],
+  "bt": 6,
+  "ds": 0.573,
   "c": 600
  },
  "gtceu:quantum_gas_lab": {
@@ -1102,11 +1068,9 @@
   "c": 62
  },
  "gtceu:radiotrophic_vat": {
-  "v": [
-   "dominant-share"
-  ],
-  "bt": 3,
-  "ds": 0.91,
+  "v": [],
+  "bt": 5,
+  "ds": 0.49,
   "c": 101
  },
  "gtceu:ramp_compression_pulser": {
@@ -1146,11 +1110,9 @@
   "c": 99
  },
  "gtceu:regolith_excavator": {
-  "v": [
-   "dominant-share"
-  ],
-  "bt": 4,
-  "ds": 0.707,
+  "v": [],
+  "bt": 5,
+  "ds": 0.576,
   "c": 93
  },
  "gtceu:ring_harvester": {
@@ -1166,11 +1128,9 @@
   "c": 101
  },
  "gtceu:sample_receiving_facility": {
-  "v": [
-   "dominant-share"
-  ],
-  "bt": 3,
-  "ds": 0.848,
+  "v": [],
+  "bt": 5,
+  "ds": 0.568,
   "c": 304
  },
  "gtceu:sealed_dome": {
@@ -1180,12 +1140,9 @@
   "c": 122
  },
  "gtceu:sic_device_fab": {
-  "v": [
-   "dominant-share",
-   "few-block-types"
-  ],
-  "bt": 2,
-  "ds": 0.904,
+  "v": [],
+  "bt": 5,
+  "ds": 0.364,
   "c": 188
  },
  "gtceu:sic_fibre_plant": {
@@ -1234,21 +1191,16 @@
   "c": 130
  },
  "gtceu:solar_array_fab": {
-  "v": [
-   "dominant-share",
-   "no-functional-detail"
-  ],
-  "bt": 3,
-  "ds": 0.833,
-  "c": 204
+  "v": [],
+  "bt": 6,
+  "ds": 0.352,
+  "c": 194
  },
  "gtceu:solar_probe_bay": {
-  "v": [
-   "dominant-share"
-  ],
-  "bt": 3,
-  "ds": 0.802,
-  "c": 92
+  "v": [],
+  "bt": 5,
+  "ds": 0.396,
+  "c": 112
  },
  "gtceu:solar_vapour_furnace": {
   "v": [],
@@ -1257,12 +1209,9 @@
   "c": 143
  },
  "gtceu:spark_plasma_sinterer": {
-  "v": [
-   "mono-block",
-   "dominant-share"
-  ],
-  "bt": 4,
-  "ds": 0.854,
+  "v": [],
+  "bt": 6,
+  "ds": 0.351,
   "c": 152
  },
  "gtceu:spectral_hole_burner": {
@@ -1398,20 +1347,16 @@
   "c": 179
  },
  "gtceu:swarm_control_station": {
-  "v": [
-   "dominant-share"
-  ],
-  "bt": 4,
-  "ds": 0.782,
+  "v": [],
+  "bt": 6,
+  "ds": 0.669,
   "c": 258
  },
  "gtceu:swarm_segment_foundry": {
-  "v": [
-   "no-functional-detail"
-  ],
-  "bt": 4,
-  "ds": 0.591,
-  "c": 138
+  "v": [],
+  "bt": 6,
+  "ds": 0.491,
+  "c": 166
  },
  "gtceu:synchrotron": {
   "v": [],
@@ -1426,11 +1371,9 @@
   "c": 151
  },
  "gtceu:tether_ribbon_works": {
-  "v": [
-   "dominant-share"
-  ],
-  "bt": 3,
-  "ds": 0.919,
+  "v": [],
+  "bt": 5,
+  "ds": 0.424,
   "c": 211
  },
  "gtceu:tfln_fab": {
@@ -1457,11 +1400,9 @@
   "c": 341
  },
  "gtceu:transuranium_facility": {
-  "v": [
-   "dominant-share"
-  ],
-  "bt": 4,
-  "ds": 0.866,
+  "v": [],
+  "bt": 7,
+  "ds": 0.415,
   "c": 360
  },
  "gtceu:tritium_removal_facility": {
@@ -1497,12 +1438,10 @@
   "c": 66
  },
  "gtceu:ultrapure_water_plant": {
-  "v": [
-   "dominant-share"
-  ],
-  "bt": 4,
-  "ds": 0.793,
-  "c": 204
+  "v": [],
+  "bt": 6,
+  "ds": 0.333,
+  "c": 358
  },
  "gtceu:universal_assembly_factory": {
   "v": [],
@@ -1576,14 +1515,10 @@
   "c": 95
  },
  "gtceu:warp_gate": {
-  "v": [
-   "dominant-share",
-   "few-block-types",
-   "no-functional-detail"
-  ],
-  "bt": 2,
-  "ds": 0.964,
-  "c": 168
+  "v": [],
+  "bt": 5,
+  "ds": 0.545,
+  "c": 280
  },
  "gtceu:waste_retrieval_plant": {
   "v": [],
@@ -1621,30 +1556,21 @@
   "c": 56
  },
  "gtceu:xenobiochem_plant": {
-  "v": [
-   "dominant-share"
-  ],
-  "bt": 3,
-  "ds": 0.923,
+  "v": [],
+  "bt": 5,
+  "ds": 0.568,
   "c": 184
  },
  "gtceu:xenobotany_greenhouse": {
-  "v": [
-   "no-functional-detail"
-  ],
-  "bt": 4,
-  "ds": 0.599,
+  "v": [],
+  "bt": 6,
+  "ds": 0.421,
   "c": 343
  },
  "gtceu:xenoflora_rover_bay": {
-  "v": [
-   "hollow-box",
-   "dominant-share",
-   "few-block-types",
-   "no-functional-detail"
-  ],
-  "bt": 2,
-  "ds": 0.983,
+  "v": [],
+  "bt": 5,
+  "ds": 0.605,
   "c": 173
  },
  "gtceu:xray_pulse_profiler": {
@@ -1659,14 +1585,10 @@
   "c": 170
  },
  "gtceu:zblan_draw_tower": {
-  "v": [
-   "mono-block",
-   "dominant-share",
-   "no-functional-detail"
-  ],
-  "bt": 4,
-  "ds": 0.879,
-  "c": 92
+  "v": [],
+  "bt": 7,
+  "ds": 0.33,
+  "c": 195
  },
  "gtceu:zero_g_crystal_grower": {
   "v": [],

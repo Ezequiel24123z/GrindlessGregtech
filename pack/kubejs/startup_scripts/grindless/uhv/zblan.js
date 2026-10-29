@@ -74,19 +74,51 @@
     )
   }
 
-  // 11 rows: the floor, nine tower rows, the truss roof; `over` replaces rows by index
-  function towerSlice(fill, over) {
-    var rows = ['XXX']
-    for (var i = 1; i < 10; i++) rows.push(over[i] || fill)
-    rows.push('TTT')
-    return rows
+  // 5 x 15 x 5: row 0 the floor (parts), rows 1-2 a spool hall (the controller in its front wall, a gearbox spool drive), rows 3-10 a 3 x 3
+  // cooling shaft (frame posts, pipe collars, glass windows) round the fibre's air path, rows 11-13 the preform furnace (heatproof, with
+  // glass windows and frame posts), row 14 the truss roof with the feed gearbox. ' ' is anything.
+  function towerCell(x, z, y) {
+    var rim = x === 0 || x === 4 || z === 0 || z === 4
+    var corner = (x === 0 || x === 4) && (z === 0 || z === 4)
+    var inShaft = x >= 1 && x <= 3 && z >= 1 && z <= 3
+    var shaftRing = inShaft && !(x === 2 && z === 2)
+    var shaftCorner = (x === 1 || x === 3) && (z === 1 || z === 3)
+    if (y === 0) return 'X'
+    if (y === 14) return x === 2 && z === 2 ? 'G' : 'T'
+    if (y <= 2) {
+      if (x === 2 && z === 2) return y === 1 ? 'G' : '#'
+      if (y === 1 && z === 4 && x === 2) return 'S'
+      if (rim) return corner ? 'F' : 'R'
+      return '#'
+    }
+    if (y <= 10) {
+      if (!shaftRing) return x === 2 && z === 2 ? '#' : ' '
+      if (shaftCorner) return 'F'
+      if (y === 5 || y === 8) return 'P'
+      if (y === 6 || y === 7) return 'W'
+      return 'R'
+    }
+    if (x === 2 && z === 2) return '#'
+    if (!rim) return '#'
+    if (corner) return 'F'
+    if (y === 11 || y === 13) return 'H'
+    return 'W'
+  }
+  function towerSlices() {
+    var slices = []
+    for (var z = 0; z < 5; z++) {
+      var rows = []
+      for (var y = 0; y < 15; y++) {
+        var row = ''
+        for (var x = 0; x < 5; x++) row += towerCell(x, z, y)
+        rows.push(row)
+      }
+      slices.push(rows)
+    }
+    return slices
   }
   const TOWER_SPEC = {
-    slices: [
-      towerSlice('RRR', {}),
-      towerSlice('R#R', { 1: 'RGR', 8: 'RHR' }),
-      towerSlice('RRR', { 1: 'RSR' })
-    ],
+    slices: towerSlices(),
     symbols: {
       S: Pat.controller(),
       X: cells(Z.minCasings),
@@ -94,6 +126,9 @@
       T: Pat.block(TRUSS),
       G: Pat.block(GEARBOX),
       H: Pat.block(HEAT),
+      F: Pat.frame(['tungsten_steel']),
+      P: Pat.block('gtceu:tungstensteel_pipe_casing'),
+      W: Pat.block('gtceu:laminated_glass'),
       '#': Pat.air()
     }
   }

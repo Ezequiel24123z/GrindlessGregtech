@@ -20,9 +20,9 @@
 // nickel_62_target, nickel_63_target, ultrapure_water):
 //   item      grindless:diamond_diode
 //   materials carbon_12_monoxide, carbon_12_methane (gases, line 22); nickel_63_plating_liquor, depleted_nickel_plating_liquor (line 4)
-// Geometry (lib/patterns.js: slices back -> front, rows bottom -> top): the plant is 5 wide, 5 high, 9 deep (clean stainless casing:
+// Geometry (lib/patterns.js: slices back -> front, rows bottom -> top): the plant is 7 wide, 5 high, 11 deep (clean stainless casing:
 // GTM has no water treatment casing; PTFE membrane racks, a laminated-glass UV-ozone chamber, filter casings for the ultrafiltration);
-// the fab 5 x 5 x 5 (inert PTFE casing, a PTFE plating bath on the floor, a laminated-glass glovebox window in the front wall).
+// the fab 7 x 5 x 7 (inert PTFE casing, a PTFE plating bath on the floor, gearbox arms in the glovebox, laminated-glass windows all round).
 // Textures: tools/assets/Build-UHVBetavoltaicsTextures.ps1. Names: client_scripts/grindless/uhv_betavoltaics_lang.js.
 // Published for the recipe script: global.grindless.betavoltaics.
 (function () {
@@ -38,6 +38,7 @@
   const PIPE = 'gtceu:ptfe_pipe_casing'
   const FILTER = 'gtceu:filter_casing'
   const GLASS = 'gtceu:laminated_glass'
+  const GEARBOX = 'gtceu:stainless_steel_gearbox'
 
   BV.table = 'kubejs/data/grindless/tables/betavoltaics.json'
   BV.fabNoVoiding = 'grindless.machine.betavoltaic_fab.no_voiding'
@@ -56,10 +57,10 @@
       type: 'ultrapure_water',
       dataKey: 'grindless_ultrapure_water',
       lang: 'Ultrapure Water Plant',
-      casing: CLEAN, texture: CLEAN_TEXTURE,
+      casing: CLEAN, texture: CLEAN_TEXTURE, accent: INERT, frame: 'stainless_steel',
       // items in: the NaOH, the kept resin and the circuit; fluids in: water and HCl; out: the ultrapure water and the RO concentrate
       maxIO: { itemsIn: 3, itemsOut: 0, fluidsIn: 2, fluidsOut: 2 },
-      width: 5, depth: 9, height: 5
+      width: 7, depth: 11, height: 5
     },
     fab: {
       name: 'betavoltaic_fab',
@@ -67,15 +68,27 @@
       type: 'betavoltaic',
       dataKey: 'grindless_betavoltaic',
       lang: 'Betavoltaic Fab',
-      casing: INERT, texture: INERT_TEXTURE,
+      casing: INERT, texture: INERT_TEXTURE, accent: CLEAN, frame: 'tungsten_steel',
       // items in: the targets or the diodes and the circuit; out: the cells or the nickel; fluids: one liquor or acid in, one out
       maxIO: { itemsIn: 2, itemsOut: 1, fluidsIn: 1, fluidsOut: 1 },
-      width: 5, depth: 5, height: 5
+      width: 7, depth: 7, height: 5
     }
   }
 
-  // A hollow shell: row 0 (X) takes the parts, the top row and the walls are casing (F), S is the controller (front wall, row 1, middle).
-  function shell(m, inner, wall) {
+  // The wall skin: frame posts (Q) on the corners and the roof edges, an accent course (A) at the foot and ribs across the roof,
+  // and glass (L) between casing mullions (F) in the rows above.
+  function skin(m, r, si, c) {
+    var ex = c === 0 || c === m.width - 1
+    var ez = si === 0 || si === m.depth - 1
+    var top = r === m.height - 1
+    if ((ex && ez) || (top && (ex || ez))) return 'Q'
+    if (top) return si % 3 === 1 ? 'A' : 'F'
+    if (r === 1) return 'A'
+    return (ez ? c : si) % 3 === 0 ? 'F' : 'L'
+  }
+
+  // A shell: row 0 (X) takes the parts (frame feet on the corners), the walls are skinned, S is the controller (front wall, row 1, middle).
+  function shell(m, inner) {
     var slices = []
     var last = m.depth - 1
     var mid = (m.width - 1) / 2
@@ -86,10 +99,9 @@
         for (var c = 0; c < m.width; c++) {
           var ch
           var isWall = si === 0 || si === last || c === 0 || c === m.width - 1
-          if (r === 0) ch = 'X'
-          else if (r === m.height - 1) ch = 'F'
+          if (r === 0) ch = (si === 0 || si === last) && (c === 0 || c === m.width - 1) ? 'Q' : 'X'
           else if (si === last && r === 1 && c === mid) ch = 'S'
-          else if (isWall) ch = (wall && wall(r, si, c)) || 'F'
+          else if (r === m.height - 1 || isWall) ch = skin(m, r, si, c)
           else ch = inner(r, si, c)
           row += ch
         }
@@ -100,45 +112,47 @@
     return slices
   }
 
-  // back to front: reverse-osmosis and EDI membrane racks (P) on both sides, the UV-ozone chamber (L), the ultrafiltration (U)
+  // back to front, a centre aisle (c = 3) between the racks: reverse-osmosis and EDI membrane racks (P pipe, U filter between them) on
+  // both sides, the UV-ozone chamber (L, glass) across slice 5, the ultrafiltration (U) behind it
   function waterInner(r, si, c) {
-    if (c === 2) return '#'
-    if (si <= 3) return 'P'
-    if (si === 4) return 'L'
+    if (c === 3) return '#'
+    if (si <= 4) return r === 2 ? 'U' : 'P'
+    if (si === 5) return 'L'
     return 'U'
   }
 
-  // the plating bath (P) fills the floor; the glovebox is open above it
+  // the plating bath (P) fills the floor; a gearbox arm (G) on each side of the glovebox, a PTFE pipe feed at the back; air above
   function fabInner(r, si, c) {
-    return r === 1 ? 'P' : '#'
+    if (r === 1) return 'P'
+    if (r === 2 && (c === 1 || c === 5) && si >= 2 && si <= 4) return 'G'
+    return '#'
   }
 
-  function fabWall(r, si, c) {
-    return si === 4 && (r === 2 || r === 3) && c >= 1 && c <= 3 ? 'L' : null
-  }
-
-  function specOf(m, inner, wall, parts) {
+  function specOf(m, inner, parts) {
     return {
-      slices: shell(m, inner, wall),
+      slices: shell(m, inner),
       symbols: {
         S: Pat.controller(),
         X: Pat.oneOf.apply(null, [Pat.block(m.casing)].concat(parts)),
         F: Pat.block(m.casing),
+        Q: Pat.frame([m.frame]),
+        A: Pat.block(m.accent),
         P: Pat.block(PIPE),
         U: Pat.block(FILTER),
         L: Pat.block(GLASS),
+        G: Pat.block(GEARBOX),
         '#': Pat.air()
       }
     }
   }
-  BV.machines.water.spec = specOf(BV.machines.water, waterInner, null, [
+  BV.machines.water.spec = specOf(BV.machines.water, waterInner, [
     Pat.part('input_bus', { min: 1, max: 2 }),
     Pat.part('input_hatch', { min: 1, max: 2 }),
     Pat.part('output_hatch', { min: 1, max: 2 }),
     Pat.part('energy_input', { min: 1, max: 2 }),
     G.parallelHatch.part()
   ])
-  BV.machines.fab.spec = specOf(BV.machines.fab, fabInner, fabWall, [
+  BV.machines.fab.spec = specOf(BV.machines.fab, fabInner, [
     Pat.part('input_bus', { min: 1, max: 2 }),
     Pat.part('input_hatch', { min: 1, max: 1 }),
     Pat.part('output_bus', { min: 1, max: 1 }),

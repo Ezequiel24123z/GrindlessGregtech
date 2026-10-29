@@ -22,9 +22,10 @@
 //   items vuv_frequency_comb (c1 of the lab), vuv_caf2_optic (line 8: the VUV CaF2 boule cut in GTM's cutter), iridium_crucible
 //         (GTM's assembler, 8 iridium ingots), worn_iridium_crucible (back to iridium in EV's platinum plant, circuit 5)
 // Geometry (lib/patterns.js: slices back -> front, rows bottom -> top): the lab is 7 wide x 5 high x 9 deep (clean casing; an optical
-// table of computer casing, a tungstensteel vacuum chamber in the middle, a laminated-glass window in the front wall); the furnace
-// 5 wide x 5 high x 9 deep (robust casing; a tungstensteel hearth on the floor, tritanium induction coils on both sides of the growth
-// channel). The design's iridium hearth is the crucible itself (an input): no iridium block is verified in this pack.
+// table of computer casing, a tungstensteel vacuum chamber in the middle, framed glass walls); the furnace
+// 5 wide x 9 high x 5 deep, a puller tower (robust casing; a tungstensteel hearth on the floor, a ring of tritanium induction coils round
+// the growth channel, pull-head gearboxes at the top). The design's iridium hearth is the crucible itself (an input): no iridium block is
+// verified in this pack.
 // Textures: tools/assets/Build-UHVCrystalsTextures.ps1. Names: client_scripts/grindless/uhv_crystals_lang.js.
 // Published for the recipe script: global.grindless.crystals.
 (function () {
@@ -41,6 +42,8 @@
   const BENCH = 'gtceu:computer_casing'
   const GLASS = 'gtceu:laminated_glass'
   const COIL = 'gtceu:tritanium_coil_block'
+  const GEARBOX = 'gtceu:tungstensteel_gearbox'
+  const HEATPROOF = 'gtceu:heatproof_machine_casing'
 
   CR.table = 'kubejs/data/grindless/tables/crystals.json'
   CR.furnaceNoVoiding = 'grindless.machine.crystal_growth_furnace.no_voiding'
@@ -65,6 +68,7 @@
       type: 'nuclear_clock',
       dataKey: 'grindless_nuclear_clock',
       lang: 'Nuclear Clock Lab',
+      casing: CLEAN, accent: ROBUST, frame: 'stainless_steel',
       // items in: the crystal, the comb, the UHV circuit and the programmed circuit; out: the clock; fluid in: the xenon charge
       maxIO: { itemsIn: 4, itemsOut: 1, fluidsIn: 1, fluidsOut: 0 },
       width: 7, height: 5, depth: 9
@@ -75,15 +79,28 @@
       type: 'crystal_growth',
       dataKey: 'grindless_crystal_growth',
       lang: 'Crystal Growth Furnace',
+      casing: ROBUST, accent: HEATPROOF, frame: 'tungsten_steel',
       // items in: three feeds or two and a kept one, the crucible and the circuit; out: the boule and the worn crucible;
       // fluids in: oxygen and the argon charge
       maxIO: { itemsIn: 5, itemsOut: 2, fluidsIn: 2, fluidsOut: 0 },
-      width: 5, height: 5, depth: 9
+      width: 5, height: 9, depth: 5
     }
   }
 
-  // A hollow shell: row 0 (X) takes the parts, the top row and the walls are casing (F), S is the controller (front wall, row 1, middle).
-  function shell(m, inner, wall) {
+  // The wall skin: frame posts (Q) on the corners and the roof edges, an accent course (A) at the foot and ribs across the roof,
+  // and glass (L) between casing mullions (F) in the rows above.
+  function skin(m, r, si, c) {
+    var ex = c === 0 || c === m.width - 1
+    var ez = si === 0 || si === m.depth - 1
+    var top = r === m.height - 1
+    if ((ex && ez) || (top && (ex || ez))) return 'Q'
+    if (top) return si % 3 === 1 ? 'A' : 'F'
+    if (r === 1) return 'A'
+    return (ez ? c : si) % 3 === 0 ? 'F' : 'L'
+  }
+
+  // A shell: row 0 (X) takes the parts (frame feet on the corners), the walls are skinned, S is the controller (front wall, row 1, middle).
+  function shell(m, inner) {
     var slices = []
     var last = m.depth - 1
     var mid = (m.width - 1) / 2
@@ -94,10 +111,9 @@
         for (var c = 0; c < m.width; c++) {
           var ch
           var isWall = si === 0 || si === last || c === 0 || c === m.width - 1
-          if (r === 0) ch = 'X'
-          else if (r === m.height - 1) ch = 'F'
+          if (r === 0) ch = (si === 0 || si === last) && (c === 0 || c === m.width - 1) ? 'Q' : 'X'
           else if (si === last && r === 1 && c === mid) ch = 'S'
-          else if (isWall) ch = (wall && wall(r, si, c)) || 'F'
+          else if (r === m.height - 1 || isWall) ch = skin(m, r, si, c)
           else ch = inner(r, si, c)
           row += ch
         }
@@ -108,47 +124,50 @@
     return slices
   }
 
-  // the optical table (B) on the floor, the vacuum chamber (T) up the middle (column 3, slices 3-5); the rest is clean air
+  // the optical table (B) on the floor, the vacuum chamber (T) up the middle (column 3, slices 3-5) with a gearbox mount (G) on
+  // each side of it; the rest is clean air
   function labInner(r, si, c) {
     if (c === 3 && si >= 3 && si <= 5) return 'T'
     if (r === 1) return 'B'
+    if (r === 2 && si === 4 && (c === 2 || c === 4)) return 'G'
     return '#'
   }
 
-  // a 3 x 2 window above the controller
-  function labWall(r, si, c) {
-    return si === 8 && (r === 2 || r === 3) && c >= 2 && c <= 4 ? 'L' : null
-  }
-
-  // the hearth (T) on the floor; induction coils (K) on both sides of the growth channel (column 2), which is argon
+  // a puller tower: the hearth (T) on the floor, a ring of induction coils (K) round the growth channel (the centre, argon) in the
+  // rows above it, the pull-head gearboxes (G) at the top
   function furnaceInner(r, si, c) {
     if (r === 1) return 'T'
-    if (c === 2) return '#'
-    return 'K'
+    if (si === 2 && c === 2) return '#'
+    if (r >= 2 && r <= 6) return 'K'
+    if (r === 7) return 'G'
+    return '#'
   }
 
-  function specOf(m, casing, inner, wall, parts) {
+  function specOf(m, inner, parts) {
     return {
-      slices: shell(m, inner, wall),
+      slices: shell(m, inner),
       symbols: {
         S: Pat.controller(),
-        X: Pat.oneOf.apply(null, [Pat.block(casing)].concat(parts)),
-        F: Pat.block(casing),
+        X: Pat.oneOf.apply(null, [Pat.block(m.casing)].concat(parts)),
+        F: Pat.block(m.casing),
+        Q: Pat.frame([m.frame]),
+        A: Pat.block(m.accent),
         T: Pat.block(TUNGSTEN_PIPE),
         B: Pat.block(BENCH),
         K: Pat.block(COIL),
         L: Pat.block(GLASS),
+        G: Pat.block(GEARBOX),
         '#': Pat.air()
       }
     }
   }
-  CR.machines.lab.spec = specOf(CR.machines.lab, CLEAN, labInner, labWall, [
+  CR.machines.lab.spec = specOf(CR.machines.lab, labInner, [
     Pat.part('input_bus', { min: 1, max: 2 }),
     Pat.part('input_hatch', { min: 1, max: 1 }),
     Pat.part('output_bus', { min: 1, max: 1 }),
     Pat.part('energy_input', { min: 1, max: 2 })
   ])
-  CR.machines.furnace.spec = specOf(CR.machines.furnace, ROBUST, furnaceInner, null, [
+  CR.machines.furnace.spec = specOf(CR.machines.furnace, furnaceInner, [
     Pat.part('input_bus', { min: 1, max: 2 }),
     Pat.part('input_hatch', { min: 1, max: 2 }),
     Pat.part('output_bus', { min: 1, max: 2 }),

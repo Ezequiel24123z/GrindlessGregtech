@@ -59,15 +59,39 @@
   // ---------------------------------------------------------------- the siphon: 7 wide, 7 deep, 13 high
   // rows bottom -> top: 0 floor, 1-11 the walls around the scoop bay and the winch, 12 the roof
   const SIPHON_PARTS = { energy_input: { min: 1, max: 2 }, input_bus: { min: 1, max: 2 }, output_hatch: { min: 1, max: 3 } }
-  const SIPHON = {
-    slices: [0, 1, 2, 3, 4, 5, 6].map(function (z) {
-      return shellSlice(7, 7, 13, z, function (x, zz, y) { return x === 3 && zz === 3 ? (y === 11 ? 'D' : 'F') : ' ' })
-    }),
+  // QR-S4: a deep-drawing siphon. Frame posts at the corners, laminated glass bands at rows 3-4 and 8-9, a pipe band at row 6, a hull roof with
+  // a pipe cross, and the frame winch up the middle to its gearbox.
+  function siphonSlice(z) {
+    var rows = []
+    for (var y = 0; y < 13; y++) {
+      var row = ''
+      for (var x = 0; x < 7; x++) {
+        var edge = x === 0 || x === 6 || z === 0 || z === 6
+        var post = (x === 0 || x === 6) && (z === 0 || z === 6)
+        var c = ' '
+        if (y === 0) c = 'X'
+        else if (y === 12) c = edge ? 'C' : (x === 3 || z === 3 ? 'P' : 'C')
+        else if (post) c = 'F'
+        else if (edge) {
+          if (z === 6 && y === 1) c = x === 3 ? 'S' : 'X'
+          else if (y === 3 || y === 4 || y === 8 || y === 9) c = 'G'
+          else if (y === 6) c = 'P'
+          else c = 'C'
+        } else if (x === 3 && z === 3) c = y === 11 ? 'D' : 'F'
+        row += c
+      }
+      rows.push(row)
+    }
+    return rows
+  }  const SIPHON = {
+    slices: [0, 1, 2, 3, 4, 5, 6].map(siphonSlice),
     symbols: {
       S: Pat.controller(),
       X: parts(HULL, 14, SIPHON_PARTS),
       C: Pat.block(HULL),
       F: Pat.frame(['titanium']),
+      G: Pat.block('gtceu:laminated_glass'),
+      P: Pat.block(CYCLONE),
       D: Pat.block(GEARBOX)
     }
   }

@@ -26,7 +26,7 @@
 //             spent_positron_source (accumulator c2), empty_penning_trap (GTM assembler), casimir_cavity_stack (array c1),
 //             worn_casimir_cavity_stack (array c2)
 //   material  high_purity_neon (gas; the cryogenic plant's neon row)
-// Geometry (lib/patterns.js: slices back -> front, rows bottom -> top): the accumulator is 9 wide x 3 high x 5 deep, the array 7 x 7 x 7.
+// Geometry (lib/patterns.js: slices back -> front, rows bottom -> top): the accumulator is 11 wide x 5 high x 7 deep, the array 9 x 9 x 9.
 // Textures: tools/assets/Build-UHVAntimatterTextures.ps1. Names: client_scripts/grindless/uhv_antimatter_lang.js.
 // Published for the recipe script: global.grindless.uhvAntimatter.
 (function () {
@@ -42,6 +42,9 @@
   const CRYOSTAT = 'grindless:cryostat_casing'
   const COIL = 'gtceu:superconducting_coil'
   const PIPE = 'gtceu:tungstensteel_pipe_casing'
+  const ROBUST = 'gtceu:robust_machine_casing'
+  const GLASS = 'gtceu:laminated_glass'
+  const FUSION_GLASS = 'gtceu:fusion_glass'
 
   AM.table = 'kubejs/data/grindless/tables/antimatter.json'
   AM.accumulatorNoVoiding = 'grindless.machine.positron_accumulator.no_voiding'
@@ -69,7 +72,7 @@
       // c2: the source (chanced), the empty Penning trap and the circuit; out: the cartridge and the spent source (chanced), or the
       // waste; fluid in: neon (c1) or the nitrogen charge (c2); out: the neon (c3)
       maxIO: { itemsIn: 3, itemsOut: 2, fluidsIn: 1, fluidsOut: 1 },
-      width: 9, height: 3, depth: 5
+      width: 11, height: 5, depth: 7
     },
     array: {
       name: 'casimir_array',
@@ -80,11 +83,23 @@
       // c2: the 16 stacks (chanced), the nuclear clock (kept) and the circuit; out: the cell and the worn stacks (chanced);
       // fluid in: helium II (c1); out: the helium
       maxIO: { itemsIn: 3, itemsOut: 2, fluidsIn: 1, fluidsOut: 1 },
-      width: 7, height: 7, depth: 7
+      width: 9, height: 9, depth: 9
     }
   }
 
-  // A hollow shell: row 0 (X) takes the parts, the top row and the walls are casing (F), S is the controller (front wall, row 1, middle).
+  // The wall skin: frame posts (Q) on the corners and the roof edges, an accent course (A) at the foot and ribs across the roof,
+  // and glass (N) between casing mullions (F) in the rows above.
+  function skin(m, r, si, c) {
+    var ex = c === 0 || c === m.width - 1
+    var ez = si === 0 || si === m.depth - 1
+    var top = r === m.height - 1
+    if ((ex && ez) || (top && (ex || ez))) return 'Q'
+    if (top) return si % 3 === 1 ? 'A' : 'F'
+    if (r === 1) return 'A'
+    return (ez ? c : si) % 3 === 0 ? 'F' : 'N'
+  }
+
+  // A shell: row 0 (X) takes the parts (frame feet on the corners), the walls are skinned, S is the controller (front wall, row 1, middle).
   function shell(m, inner) {
     var slices = []
     var last = m.depth - 1
@@ -96,10 +111,9 @@
         for (var c = 0; c < m.width; c++) {
           var ch
           var isWall = si === 0 || si === last || c === 0 || c === m.width - 1
-          if (r === 0) ch = 'X'
-          else if (r === m.height - 1) ch = 'F'
+          if (r === 0) ch = isWall && (si === 0 || si === last) && (c === 0 || c === m.width - 1) ? 'Q' : 'X'
           else if (si === last && r === 1 && c === mid) ch = 'S'
-          else if (isWall) ch = 'F'
+          else if (r === m.height - 1 || isWall) ch = skin(m, r, si, c)
           else ch = inner(r, si, c)
           row += ch
         }
@@ -110,17 +124,24 @@
     return slices
   }
 
-  // the beamline runs across the machine on the middle slice: the source end (T, tungstensteel pipe) at the left, the bore (air)
-  // through the solenoid, whose coils (M) line it on the slices before and behind
+  // the beamline runs across the machine on the middle slice and middle row: the source end (T, tungstensteel pipe cage) at the left, the
+  // bore (air) through the solenoid, whose coils (M) wrap it on the slices before and behind and the rows above and below, a cryostat
+  // detector (K) at the far end
   function accumulatorInner(r, si, c) {
-    if (si === 2) return c === 1 ? 'T' : '#'
-    if (c >= 2 && c <= 6) return 'M'
-    return 'F'
+    var w = AM.machines.accumulator.width
+    if (si === 3 && c === 1) return 'T'
+    if (si === 3 && c === w - 2) return 'K'
+    if (c >= 2 && c <= w - 3 && si >= 2 && si <= 4 && r >= 1 && r <= 3) return si === 3 && r === 2 ? '#' : 'M'
+    return '#'
   }
 
-  // the cryostat (K): a 3 x 3 x 3 block in the middle of the station's vacuum
+  // the cryostat (K): a 3 x 3 x 3 core in the middle of the station's vacuum, a helium riser (T) above and below it and a ring of
+  // solenoid coils (M) around its waist
   function arrayInner(r, si, c) {
-    if (r >= 2 && r <= 4 && si >= 2 && si <= 4 && c >= 2 && c <= 4) return 'K'
+    var core = r >= 3 && r <= 5 && si >= 3 && si <= 5 && c >= 3 && c <= 5
+    if (core) return 'K'
+    if (si === 4 && c === 4 && r !== 4) return 'T'
+    if (r === 4 && si >= 2 && si <= 6 && c >= 2 && c <= 6 && (si === 2 || si === 6 || c === 2 || c === 6)) return 'M'
     return '#'
   }
 
@@ -136,6 +157,10 @@
         Pat.part('output_hatch', { min: 1, max: 1 })
       ])),
       F: Pat.block(UV_CASING),
+      Q: Pat.frame(['tungsten_steel']),
+      A: Pat.block(ROBUST),
+      N: Pat.block(GLASS),
+      K: Pat.block(CRYOSTAT),
       M: Pat.block(COIL),
       T: Pat.block(PIPE),
       '#': Pat.air()
@@ -153,6 +178,11 @@
         Pat.part('output_hatch', { min: 1, max: 1 })
       ])),
       F: Pat.block(TRUSS),
+      Q: Pat.frame(['stainless_steel']),
+      A: Pat.block(ROBUST),
+      N: Pat.block(FUSION_GLASS),
+      M: Pat.block(COIL),
+      T: Pat.block(PIPE),
       K: Pat.block(CRYOSTAT),
       '#': Pat.air()
     }
