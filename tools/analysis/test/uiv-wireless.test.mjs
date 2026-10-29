@@ -36,7 +36,7 @@ test('the UIV row: tier 11, 384 UV naquadria batteries (four UEV cells, past 2^3
   const rows = WIRELESS.tiers.filter((r) => r.name === 'uiv');
   assert.equal(rows.length, 1);
   const uiv = rows[0];
-  assert.equal(WIRELESS.tiers[WIRELESS.tiers.length - 1], uiv, 'the last row');
+  assert.equal(WIRELESS.tiers[10], uiv, 'the eleventh row (UXV-W appends uxv after it)');
   assert.deepEqual([uiv.tier, uiv.cell, uiv.capacity, uiv.referenceBattery, uiv.referenceCount],
     [UIV, CELL, CELL_EU, 'gtceu:uv_naquadria_battery', 384]);
   assert.equal(uiv.capacity, uiv.referenceCount * 2621440000);
@@ -52,7 +52,7 @@ test('the UIV row: tier 11, 384 UV naquadria batteries (four UEV cells, past 2^3
 test('withTiers case 11 is spelled out and the default message says 1 to 11 tiers', () => {
   const src = fs.readFileSync(path.join(pack, 'kubejs', 'startup_scripts', 'grindless', 'lv', 'wireless_energy.js'), 'utf8');
   assert.match(src, /case 11:\s*return b\.tiers\(t\[0\], t\[1\], t\[2\], t\[3\], t\[4\], t\[5\], t\[6\], t\[7\], t\[8\], t\[9\], t\[10\]\)/);
-  assert.match(src, /1 to 11 tiers/);
+  assert.match(src, /1 to 1\d tiers/);
 });
 
 test('registration: the cell is a block, eight hatches and two covers, all from lv/wireless_energy.js', () => {
@@ -110,7 +110,7 @@ test('the UIV hatches and covers: assembler recipes with the link on the 2 A hat
 
 test('tiers 1-10 are untouched', () => {
   assert.deepEqual(WIRELESS.tiers.map((r) => r.name).slice(0, 10), ['lv', 'mv', 'hv', 'ev', 'iv', 'luv', 'zpm', 'uv', 'uhv', 'uev']);
-  assert.equal(WIRELESS.tiers.length, 11);
+  assert.equal(WIRELESS.tiers.length, 12); // UXV-W appends the twelfth
   assert.equal(WIRELESS.tiers.find((r) => r.name === 'uev').capacity, 251658240000);
   assert.equal(WIRELESS.tiers.find((r) => r.name === 'uhv').capacity, 62914560000);
 });
