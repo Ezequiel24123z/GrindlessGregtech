@@ -69,7 +69,9 @@
     'gtceu:megabar_synthesis': 'loop_megabar_press',
     'gtceu:electron_beam_refining': 'loop_electron_beam_furnace',
     'gtceu:quantum_degenerate_gas': 'loop_earth_orbit_lab',
-    'gtceu:chemical_vapour_infiltration': 'loop_cvi_furnace'
+    'gtceu:chemical_vapour_infiltration': 'loop_cvi_furnace',
+    'gtceu:mtj_sputtering': 'loop_mtj_sputter_cluster',
+    'gtceu:pulsed_laser_deposition': 'loop_oxide_pld_chamber'
   }
 
   StartupEvents.registry('sound_event', function (event) {

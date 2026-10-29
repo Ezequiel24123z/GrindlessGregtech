@@ -607,6 +607,28 @@
       "volume": 0.65,
       "attenuation": 24,
       "quality": 0
+    },
+    {
+      "id": "loop_mtj_sputter_cluster",
+      "recipeType": "gtceu:mtj_sputtering",
+      "prompt": "Seamless looping sound of a magnetron sputtering cluster tool: a steady vacuum pump drone, a soft argon plasma hiss and slow robotic wafer handler clicks, no voices, no music",
+      "duration": 6,
+      "loop": true,
+      "promptInfluence": 0.5,
+      "volume": 0.65,
+      "attenuation": 24,
+      "quality": 0
+    },
+    {
+      "id": "loop_oxide_pld_chamber",
+      "recipeType": "gtceu:pulsed_laser_deposition",
+      "prompt": "Seamless looping sound of a pulsed laser deposition chamber: rhythmic excimer laser pulses with a crackling plasma plume, a low turbopump hum, no voices, no music",
+      "duration": 6,
+      "loop": true,
+      "promptInfluence": 0.5,
+      "volume": 0.65,
+      "attenuation": 24,
+      "quality": 0
     }
   ]
 }
