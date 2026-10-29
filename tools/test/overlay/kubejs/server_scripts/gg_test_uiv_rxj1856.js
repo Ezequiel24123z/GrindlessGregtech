@@ -84,6 +84,7 @@
   }
   function plain(sym) {
     if (sym.kind === 'blocks') return String(sym.blocks[0])
+    if (sym.kind === 'frames') return 'gtceu:' + sym.materials[0] + '_frame'
     for (var i = 0; i < sym.options.length; i++) if (sym.options[i].kind === 'blocks') return String(sym.options[i].blocks[0])
     throw new Error('unsupported symbol ' + sym.kind)
   }

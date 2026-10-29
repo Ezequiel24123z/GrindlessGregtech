@@ -137,6 +137,7 @@
       if (!block) {
         if (sym.kind === 'controller') block = id
         else if (sym.kind === 'blocks') block = sym.blocks[0]
+        else if (sym.kind === 'frames') block = 'gtceu:' + sym.materials[0] + '_frame'
         else if (sym.kind === 'part') block = DEFAULT_PART[sym.ability]
         else if (sym.kind === 'oneOf') {
           sym.options.forEach(function (o) { if (!block && o.kind === 'blocks') block = o.blocks[0] })
