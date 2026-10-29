@@ -211,20 +211,20 @@ Owner rule: every multiblock controller needs an EMI info page that says what it
 | gtceu:xenobotany_greenhouse | uhv | kubejs/startup_scripts/grindless/uhv/proxima_life.js:120 | done (QR-I3) | what it does and what for; processes gtceu:xenobotany |
 | gtceu:xenoflora_rover_bay | uhv | kubejs/startup_scripts/grindless/uhv/proxima_life.js:96 | done (QR-I3) | what it does and what for; processes gtceu:xenoflora_rover |
 | gtceu:zblan_draw_tower | uhv | kubejs/startup_scripts/grindless/uhv/zblan.js:119 | done (QR-I3) | what it does and what for; processes gtceu:zblan_draw |
-| gtceu:calutron | uev | kubejs/startup_scripts/grindless/uev/isotopes.js:66 | missing | what it does and what for; processes gtceu:calutron_separation |
-| gtceu:electron_beam_furnace | uev | kubejs/startup_scripts/grindless/uev/electron_beam.js:74 | missing | what it does and what for; processes gtceu:electron_beam_refining |
-| gtceu:entanglement_station | uev | kubejs/startup_scripts/grindless/uev/earth_orbit.js:50 | missing | what it does and what for; processes gtceu:entanglement_distribution |
-| gtceu:heavy_ion_cyclotron | uev | kubejs/startup_scripts/grindless/uev/superheavy.js:61 | missing | what it does and what for; processes gtceu:heavy_ion_irradiation |
-| gtceu:helium3_polariser | uev | kubejs/startup_scripts/grindless/uev/fusion.js:36 | missing | what it does and what for; processes gtceu:spin_polarisation |
-| gtceu:megabar_press | uev | kubejs/startup_scripts/grindless/uev/megabar.js:45 | missing | what it does and what for; processes gtceu:megabar_synthesis |
-| gtceu:photonic_integration_hall | uev | kubejs/startup_scripts/grindless/uev/photonics.js:87 | missing | what it does and what for; processes gtceu:photonic_integration |
-| gtceu:quantum_gas_lab | uev | kubejs/startup_scripts/grindless/uev/earth_orbit.js:39 | missing | what it does and what for; processes gtceu:quantum_degenerate_gas |
-| gtceu:recoil_separator | uev | kubejs/startup_scripts/grindless/uev/superheavy.js:66 | missing | what it does and what for; processes gtceu:recoil_separation |
-| gtceu:single_crystal_foundry | uev | kubejs/startup_scripts/grindless/uev/electron_beam.js:84 | missing | what it does and what for; processes gtceu:single_crystal_casting |
-| gtceu:snspd_foundry | uev | kubejs/startup_scripts/grindless/uev/photonics.js:65 | missing | what it does and what for; processes gtceu:snspd_fabrication |
-| gtceu:superheavy_chemistry_lab | uev | kubejs/startup_scripts/grindless/uev/superheavy.js:71 | missing | what it does and what for; processes gtceu:superheavy_chemistry |
-| gtceu:uev_fusion_reactor | uev | kubejs/startup_scripts/grindless/uev/fusion.js:37 | missing | what it does and what for; processes gtceu:fusion_reactor |
-| gtceu:vdw_stacker | uev | kubejs/startup_scripts/grindless/uev/photonics.js:76 | missing | what it does and what for; processes gtceu:vdw_assembly |
+| gtceu:calutron | uev | kubejs/startup_scripts/grindless/uev/isotopes.js:66 | done (QR-I4) | what it does and what for; processes gtceu:calutron_separation |
+| gtceu:electron_beam_furnace | uev | kubejs/startup_scripts/grindless/uev/electron_beam.js:74 | done (QR-I4) | what it does and what for; processes gtceu:electron_beam_refining |
+| gtceu:entanglement_station | uev | kubejs/startup_scripts/grindless/uev/earth_orbit.js:50 | done (QR-I4) | what it does and what for; processes gtceu:entanglement_distribution |
+| gtceu:heavy_ion_cyclotron | uev | kubejs/startup_scripts/grindless/uev/superheavy.js:61 | done (QR-I4) | what it does and what for; processes gtceu:heavy_ion_irradiation |
+| gtceu:helium3_polariser | uev | kubejs/startup_scripts/grindless/uev/fusion.js:36 | done (QR-I4) | what it does and what for; processes gtceu:spin_polarisation |
+| gtceu:megabar_press | uev | kubejs/startup_scripts/grindless/uev/megabar.js:45 | done (QR-I4) | what it does and what for; processes gtceu:megabar_synthesis |
+| gtceu:photonic_integration_hall | uev | kubejs/startup_scripts/grindless/uev/photonics.js:87 | done (QR-I4) | what it does and what for; processes gtceu:photonic_integration |
+| gtceu:quantum_gas_lab | uev | kubejs/startup_scripts/grindless/uev/earth_orbit.js:39 | done (QR-I4) | what it does and what for; processes gtceu:quantum_degenerate_gas |
+| gtceu:recoil_separator | uev | kubejs/startup_scripts/grindless/uev/superheavy.js:66 | done (QR-I4) | what it does and what for; processes gtceu:recoil_separation |
+| gtceu:single_crystal_foundry | uev | kubejs/startup_scripts/grindless/uev/electron_beam.js:84 | done (QR-I4) | what it does and what for; processes gtceu:single_crystal_casting |
+| gtceu:snspd_foundry | uev | kubejs/startup_scripts/grindless/uev/photonics.js:65 | done (QR-I4) | what it does and what for; processes gtceu:snspd_fabrication |
+| gtceu:superheavy_chemistry_lab | uev | kubejs/startup_scripts/grindless/uev/superheavy.js:71 | done (QR-I4) | what it does and what for; processes gtceu:superheavy_chemistry |
+| gtceu:uev_fusion_reactor | uev | kubejs/startup_scripts/grindless/uev/fusion.js:37 | done (QR-I4) | what it does and what for; processes gtceu:fusion_reactor |
+| gtceu:vdw_stacker | uev | kubejs/startup_scripts/grindless/uev/photonics.js:76 | done (QR-I4) | what it does and what for; processes gtceu:vdw_assembly |
 | gtceu:beuv_scanner | uiv | kubejs/startup_scripts/grindless/uiv/beuv_stm.js:53 | missing | what it does and what for; processes gtceu:beuv_lithography |
 | gtceu:crust_lift | uiv | kubejs/startup_scripts/grindless/uiv/rx_j1856.js:64 | missing | what it does and what for; processes gtceu:crust_lifting |
 | gtceu:decay_heat_vault | uiv | kubejs/startup_scripts/grindless/uiv/rx_j1856.js:91 | missing | what it does and what for; processes gtceu:decay_heat |
