@@ -18,7 +18,25 @@
           "itemsOut": [{ "id": "gtceu:zrticunibe_glass_dust", "count": 4 }, { "id": "grindless:beryllium_oxide_dust", "count": 1 }, { "id": "grindless:melter_dross", "count": 1 }], "fluidsOut": [] },
         { "name": "prni5_melt", "circuit": 5, "eut": 7864320, "duration": 1800,
           "itemsIn": [{ "id": "gtceu:praseodymium_dust", "count": 1 }, { "id": "gtceu:nickel_dust", "count": 5 }], "kept": [], "fluidsIn": [{ "id": "gtceu:helium", "amount": 1000 }], "charge": [],
-          "itemsOut": [{ "id": "gtceu:prni5_dust", "count": 6 }], "fluidsOut": [] }
+          "itemsOut": [{ "id": "gtceu:prni5_dust", "count": 6 }], "fluidsOut": [] },
+        { "_why": "UXV-A3 (uxv.md line 1): the CoFeB melt (Co 60, Fe 20, B 20) under helium, the powder bed's feed. Circuits 9-14 (6-8 are uiv_components.json's).", "name": "cofeb_melt", "circuit": 9, "eut": 7864320, "duration": 1800,
+          "itemsIn": [{ "id": "grindless:five_n_cobalt", "count": 3 }, { "id": "grindless:five_n_iron", "count": 1 }, { "id": "gtceu:boron_dust", "count": 1 }], "kept": [], "fluidsIn": [{ "id": "gtceu:helium", "amount": 1000 }], "charge": [],
+          "itemsOut": [{ "id": "grindless:cofeb_ingot", "count": 5 }, { "id": "grindless:melter_dross", "count": 1 }], "fluidsOut": [] },
+        { "_why": "UXV-A3 (uxv.md line 3): the Co2MnSi melt; the cast ingot is homogenised in the nitride magnet works (circuit 11) into the F1 heusler_ingot.", "name": "heusler_melt", "circuit": 10, "eut": 7864320, "duration": 1800,
+          "itemsIn": [{ "id": "grindless:five_n_cobalt", "count": 2 }, { "id": "grindless:five_n_manganese", "count": 1 }, { "id": "grindless:five_n_silicon", "count": 1 }], "kept": [], "fluidsIn": [{ "id": "gtceu:helium", "amount": 1000 }], "charge": [],
+          "itemsOut": [{ "id": "grindless:heusler_cast_ingot", "count": 4 }, { "id": "grindless:melter_dross", "count": 1 }], "fluidsOut": [] },
+        { "_why": "UXV-A3 (uxv.md line 36): the Terfenol-D melt (Tb 0.3, Dy 0.7, Fe 2).", "name": "terfenol_d_melt", "circuit": 11, "eut": 7864320, "duration": 2400,
+          "itemsIn": [{ "id": "gtceu:terbium_dust", "count": 1 }, { "id": "grindless:dysprosium_dust", "count": 2 }, { "id": "grindless:five_n_iron", "count": 4 }], "kept": [], "fluidsIn": [{ "id": "gtceu:helium", "amount": 1000 }], "charge": [],
+          "itemsOut": [{ "id": "grindless:terfenol_d_ingot", "count": 7 }, { "id": "grindless:melter_dross", "count": 1 }], "fluidsOut": [] },
+        { "_why": "UXV-A3 (uxv.md line 37): the Ni2MnGa melt.", "name": "ni_mn_ga_melt", "circuit": 12, "eut": 7864320, "duration": 1800,
+          "itemsIn": [{ "id": "grindless:five_n_nickel", "count": 2 }, { "id": "grindless:five_n_manganese", "count": 1 }, { "id": "grindless:five_n_gallium", "count": 1 }], "kept": [], "fluidsIn": [{ "id": "gtceu:helium", "amount": 1000 }], "charge": [],
+          "itemsOut": [{ "id": "grindless:ni_mn_ga_ingot", "count": 4 }, { "id": "grindless:melter_dross", "count": 1 }], "fluidsOut": [] },
+        { "_why": "UXV-A3 (uxv.md line 48): the Fe-Si-B-Nb-Cu charge melted for planar flow casting; the melt is the F1 fluid (GTM registers it under gtceu:).", "name": "finemet_melt", "circuit": 13, "eut": 7864320, "duration": 1800,
+          "itemsIn": [{ "id": "grindless:finemet_charge_dust", "count": 4 }], "kept": [], "fluidsIn": [{ "id": "gtceu:helium", "amount": 1000 }], "charge": [],
+          "itemsOut": [{ "id": "grindless:melter_dross", "count": 1 }], "fluidsOut": [{ "id": "gtceu:finemet_melt", "amount": 576 }] },
+        { "_why": "UXV-A3 (uxv.md line 44): the STNO mill redeposit re-melted; it is Co, Fe and B from the free layers.", "name": "stno_redeposit_remelt", "circuit": 14, "eut": 7864320, "duration": 1200,
+          "itemsIn": [{ "id": "grindless:stno_redeposit_dust", "count": 4 }], "kept": [], "fluidsIn": [{ "id": "gtceu:helium", "amount": 500 }], "charge": [],
+          "itemsOut": [{ "id": "grindless:cofeb_ingot", "count": 2 }, { "id": "grindless:melter_dross", "count": 1 }], "fluidsOut": [] }
       ]
     },
     "mixer": {
