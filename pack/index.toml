@@ -34,7 +34,7 @@ hash = "4316279bd5d50156936d2635bbbe2063e65b4b8f58b754ed918ad2de046320e5"
 
 [[files]]
 file = "config/ftbquests/quests/chapters/multiblocks.snbt"
-hash = "a42265b68737e72eb96ded07bc6e60fa3a21b27fd4de71cf8c62192667771771"
+hash = "6466752b117677ea3a9ab2775e28bd710c5d7024f979a9bcb41fb5d1ce0f8564"
 
 [[files]]
 file = "config/ftbquests/quests/chapters/mv_age.snbt"
@@ -54,7 +54,7 @@ hash = "feacd3ebc647179416de5c6f7cd376316fb40575c566b8b5e2bea5f43b22d2fc"
 
 [[files]]
 file = "config/ftbquests/quests/chapters/pl_luv.snbt"
-hash = "48d6dd0c74793c23cf95c01f88f9fecdedd698e74a356f23638fca7bc83e0796"
+hash = "9cfba3dbc7e4bf3dd8d9eab074ad425bcfe6aba7031e5ad660bb3ea13bac2f07"
 
 [[files]]
 file = "config/ftbquests/quests/chapters/pl_lv.snbt"
@@ -77,6 +77,10 @@ file = "config/ftbquests/quests/chapters/pl_uhv.snbt"
 hash = "1f345a2bbcafe435c1f3aa55e70e999c933782d3a96b992130a2a82a434060af"
 
 [[files]]
+file = "config/ftbquests/quests/chapters/pl_uiv.snbt"
+hash = "9d9d0c8dbd08d0bb3ad717cf23a092fed3b2633a16e200b32eee9802a717c4de"
+
+[[files]]
 file = "config/ftbquests/quests/chapters/pl_uv.snbt"
 hash = "b72d2d3c17c265726d00165002f9e011dcb57e4e8e842104858a82ef985796e3"
 
@@ -86,7 +90,7 @@ hash = "085581c14090bcf12bf1837b4bbb142422b3b2525703f9f61a3393ed76be803b"
 
 [[files]]
 file = "config/ftbquests/quests/chapters/power.snbt"
-hash = "0c3e9eeba62056a9d310e1584b4e5931528e1e83b4318da02efff54bd6898e19"
+hash = "7a4a74057682fb546bcbca601df348ad3aa72aa4489cf91b34d2796005d81d16"
 
 [[files]]
 file = "config/ftbquests/quests/chapters/productive_bees.snbt"
@@ -111,6 +115,10 @@ hash = "f3d8c83124584b44352cce776010e0cea0a237d6d3464f87407a22f798fb357d"
 [[files]]
 file = "config/ftbquests/quests/chapters/uhv_age.snbt"
 hash = "6152c1b83df41be25acb8bb24fda67f2f67a4871afa735c28b08d2d81461b5c9"
+
+[[files]]
+file = "config/ftbquests/quests/chapters/uiv_age.snbt"
+hash = "734fed0553475e15a34351e885963fee2accbbcbf013b85ddf97afe66aa64eba"
 
 [[files]]
 file = "config/ftbquests/quests/chapters/uv_age.snbt"

@@ -661,7 +661,7 @@
 			icon: "grindless:orbital_solar_panel"
 			id: "351308A02FD2CE45"
 			size: 1.0d
-			subtitle: "Assembler; triple-junction cells go further"
+			subtitle: "Assembly line; triple-junction cells go further"
 			tasks: [
 				{ id: "3D95D78B1FEF30AD", item: "grindless:orbital_solar_panel", optional_task: true, type: "item" }
 				{ id: "7C3E1D41840D4FC7", type: "checkmark" }
