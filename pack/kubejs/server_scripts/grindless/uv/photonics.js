@@ -43,7 +43,7 @@
 //     sapphire wafers  cutter: 1 sapphire boule + 100 mB lubricant -> 8 sapphire wafers                                 1,920 x 200 t
 //     Bragg grating  assembler, purple lens kept: 1 ytterbium fibre spool + 1 germanium dust + 100 mB hydrogen (hydrogen loading) ->
 //                  1 fibre Bragg grating                                                                              30,720 x 200 t
-//   block: assembler: 4 fibre laser modules + 4 tritanium plates + 1 silicon nitride film + 2 tungsten steel plates + 144 mB soldering alloy
+//   block: assembler: 1 fibre laser module + 4 tritanium plates + 1 silicon nitride film + 2 tungsten steel plates + 144 mB soldering alloy
 //   + 100 mB lubricant -> 1 laser module block (the laser fusion chamber's and Starshot's structure block; there is no way back)
 //   controllers (assembly line, station research, UV hull + parts + 4 UV circuits + 3 line items + soldering alloy, lubricant, tritanium)
 //
@@ -290,7 +290,7 @@
     if (Item.exists(FIBRE_MODULE) && Item.exists(MODULE_BLOCK) && Item.exists('grindless:silicon_nitride_film')) {
       // the structure block is built, not folded: modules in a tritanium frame with nitride film shielding, soldered and cooled
       event.recipes.gtceu.assembler('grindless:laser_module_block')
-        .itemInputs('4x ' + FIBRE_MODULE, '4x gtceu:tritanium_plate', 'grindless:silicon_nitride_film', '2x gtceu:tungsten_steel_plate')
+        .itemInputs(FIBRE_MODULE, '4x gtceu:tritanium_plate', 'grindless:silicon_nitride_film', '2x gtceu:tungsten_steel_plate')
         .inputFluids(Fluid.of('gtceu:soldering_alloy', 144), Fluid.of('gtceu:lubricant', 100))
         .itemOutputs(MODULE_BLOCK)
         .EUt(ZPM).duration(300)
