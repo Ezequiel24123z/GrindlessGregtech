@@ -143,7 +143,7 @@
     var list = [
       { id: 'gtceu:ark_biosphere', recipe: 'ark_biosphere', research: ARCHAEA,
         parts: ['gtceu:uv_machine_hull', '4x gtceu:uv_electric_pump'],
-        domain: ['8x ' + ALGAE, '8x ' + ARCHAEA, '2x ' + ORGANOID] },
+        domain: ['8x grindless:sporosarcina_culture', '8x ' + ARCHAEA, '2x ' + ORGANOID] },
       { id: 'gtceu:neural_culture_vat', recipe: 'neural_culture_vat', research: ORGANOID,
         parts: ['gtceu:uv_machine_hull', '2x gtceu:uv_electric_pump', '2x gtceu:uv_sensor'],
         domain: ['4x ' + ORGANOID, '4x ' + ALGAE, '4x ' + ARCHAEA] }

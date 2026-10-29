@@ -18,8 +18,8 @@
 //             plutonium_244_rich_chloride, plutonium_244_oxide, depleted_plutonium_oxide, mox_blend_powder (dusts);
 //             plutonium_nitrate, curium_californium_nitrate, berkelium_californium_nitrate, curium_nitrate, californium_nitrate,
 //             berkelium_nitrate (liquids)
-// Geometry (lib/patterns.js: slices back -> front, rows bottom -> top): 7 x 5 x 13 (tune): a shielded shell, a racetrack of stable
-// casing and superconducting coil round an air channel.
+// Geometry (lib/patterns.js: slices back -> front, rows bottom -> top): 11 x 7 x 17: a stadium yoke of stable casing,
+// superconducting coil and a glass-and-pipe vacuum course round an open hall.
 // Textures: tools/assets/Build-UEVIsotopesTextures.ps1. Names: client_scripts/grindless/uev_isotopes_lang.js.
 // Published for the recipe script: global.grindless.isotopes.
 (function () {
@@ -73,50 +73,39 @@
     width: 7, depth: 13, height: 5
   }
 
-  // A hollow shell: row 0 (X) takes the parts, the top row and the walls are casing (F), S is the controller (front wall, row 1, middle).
-  // The racetrack is a 3 x 9 loop of coil (M) on the middle row, stable casing (T) above and below it, air inside and outside.
-  function calutronSlices(m) {
-    var slices = []
-    var last = m.depth - 1
-    var mid = (m.width - 1) / 2
-    for (var si = 0; si < m.depth; si++) {
-      var rows = []
-      for (var r = 0; r < m.height; r++) {
-        var row = ''
-        for (var c = 0; c < m.width; c++) {
-          var ch
-          var isWall = si === 0 || si === last || c === 0 || c === m.width - 1
-          var onLoop = ((c === 2 || c === 4) && si >= 2 && si <= last - 2) || ((si === 2 || si === last - 2) && c >= 2 && c <= 4)
-          if (r === 0) ch = 'X'
-          else if (r === m.height - 1) ch = 'F'
-          else if (si === last && r === 1 && c === mid) ch = 'S'
-          else if (isWall) ch = 'F'
-          else if (onLoop) ch = r === 2 ? 'M' : 'T'
-          else ch = '#'
-          row += ch
-        }
-        rows.push(row)
-      }
-      slices.push(rows)
-    }
-    return slices
-  }
-
-  ISO.machine.spec = {
-    slices: calutronSlices(ISO.machine),
-    symbols: {
-      S: Pat.controller(),
-      X: Pat.oneOf(
-        Pat.block(SHIELD),
+  // The racetrack: a stadium yoke 11 x 7 x 17 of coil, stable casing and a glass-and-pipe vacuum course round an open hall, with magnet
+  // poles along the beam on a stable floor plate. Built in the registry callback (shapes.js may load after this file).
+  ISO.machine.width = 11
+  ISO.machine.height = 7
+  ISO.machine.depth = 17
+  function makeSpec() {
+    return G.uevShapes.spec(Pat, {
+      w: 11, h: 7, d: 17,
+      parts: [
         Pat.part('input_bus', { min: 1, max: 2 }),
         Pat.part('output_bus', { min: 1, max: 3 }),
         Pat.part('energy_input', { min: 1, max: 2 })
-      ),
-      F: Pat.block(SHIELD),
-      T: Pat.block(TANK),
-      M: Pat.block(COIL),
-      '#': Pat.air()
-    }
+      ],
+      fn: G.uevShapes.ring({
+        w: 11, d: 17, r1: 3, r2: 5,
+        prof: function (y, seg) {
+          if (y === 1 || y === 5) return 'A'
+          if (y === 2 || y === 4) return 'C'
+          if (y === 3) return seg % 2 === 0 ? 'P' : 'L'
+          return 'F'
+        },
+        hub: function (x, y, z, q) {
+          if (q >= 9) return ' '
+          if (y === 0) return 'A'
+          if (y === 1 && x === 5 && z % 2 === 0) return 'B'
+          return y <= 5 ? '#' : ' '
+        }
+      }),
+      pal: {
+        F: SHIELD, A: TANK, L: 'gtceu:laminated_glass', P: 'gtceu:tungstensteel_pipe_casing',
+        C: COIL, B: 'gtceu:tungstensteel_gearbox', Q: 'tungsten_steel'
+      }
+    })
   }
 
   // one EMI line per recipe, read from its data: what the circuit does
@@ -173,6 +162,7 @@
     var type = GTRecipeTypes.get(m.type)
     if (type == null) throw new Error(LOG + 'recipe type gtceu:' + m.type + ' is not registered')
     type.addDataInfo(infoOf(m.dataKey))
+    m.spec = makeSpec()
     Pat.register(m.machine, m.spec)
 
     event.create(m.name, 'multiblock')

@@ -943,7 +943,7 @@ Short, in English, each with a small reward. They never block a recipe (rule 5).
 - **Older-file rows** add recipes only. The swarm station's dimension list and the warp gate's rows are widened, never narrowed.
 - **The Mk5's pattern is new.** GTM's rings and the Mk4 are untouched.
 - **Arrival platforms** are placed once per world; a placed platform is never moved or rebuilt by a later version.
-- **C3 reopens a v0.12.0 save** and checks that UEV machines, stations 9 and 10, the relays and the network are intact.
+- **C3 reopens a v0.13.0 save** (the quality-review release, which already carries the hidden UIV packages A1 to B3) and checks that UEV machines, stations 9 and 10, the relays and the network are intact.
 
 ## Risks
 
@@ -1010,6 +1010,17 @@ UEV's *Common to every package* (`docs/eras/uev.md:913-946`) applies with `uev` 
   - our neutronium is `grindless:neutronium_pellet`; GTM's `gtceu:neutronium` keeps its own route and is never an input of ours;
   - UEV's invariants hold: one recipe per lookup path, written byproduct destinations, no removed or renamed id, *(tune)* figures free while routes, catalysts and sites stay fixed.
 - **Controllers** as *Voltages and controllers*: machines 1–2 a UEV hull, 2 UEV components and 2 `gtnn:optical_computer`; machines 3–8 a UIV hull, 2 UEV components and 2 optical computers; machines 9–22 a UIV hull, 2 UIV components and 2 `gtnn:optical_mainframe`. Only machines 21 and 22 take the UIV emitter or field generator.
+- **Forms and structures (quality review).** B4, B5, M2 and C1–C3 are written after the quality review and follow its checklist (`docs/quality/lessons.md`). Where it conflicts with an ingredient list above, the checklist wins; the hull, components and circuits above stay in the recipe.
+  - **Recipe forms** (`docs/quality/recipes.md`, "The ladder"):
+    - controllers, hatches and complex parts: assembly line with station research of an earlier item of the same line that our pack makes, plus an era fluid and 3 domain inputs;
+    - bulk casings: assembler with an era fluid and a domain component;
+    - components and intermediates: machine-made, above the UIV C-COMPLEX floor;
+    - no crafting table, except a save-compat 1:1 conversion or unpacking;
+    - structure blocks wrap their component 1:1.
+  - **Process steps:** each step has a real second input, fluid or byproduct, and nothing comes from nothing (`docs/quality/items.md`).
+  - **Structures:** pass `structure-quality.mjs --static --check` with no baseline entry (`docs/quality/structures.md`). Gravity blocks sit on the bottom layer or on a pattern block.
+  - **Info pages:** every multiblock ships an EMI info page in en_us and es_es in the package's lang file (`docs/quality/emi.md`).
+  - **Gates:** `recipe-quality.mjs --check` and `process-audit.mjs` report nothing new for the package's ids.
 - **Tests:** T0 is `powershell -NoProfile -ExecutionPolicy Bypass -File tools\Check-Fast.ps1`. T1 is the one native test the contract names, run once in its band, on the Linux VM first (`docs/testing/`), one JVM per slot, client legs one per run.
 - **Repairs and agent:** at most 2 repairs, then escalate with the triage output, the suspected `path:line` and the attempts. The implementer (Sonnet) runs each package; Opus only for a cross-system contradiction.
 - **Proof reuse:**
@@ -1714,18 +1725,19 @@ Wave B opens after every wave A package has merged, and after UEV's B1 (the Siri
 - **Objective:** one run with:
   - every package;
   - the three arrival platforms and UEV's stations loaded;
-  - a v0.12.0 save;
+  - a v0.13.0 save;
   - the release notes.
 - **Allowed:** `tools/test/overlay/kubejs/server_scripts/gg_test_uiv_c3.js`, its zones row, and the release notes file the integrator names.
 - **References:** *Save compatibility*, *Gate to UXV*, *Power* (the gate example); pattern `gg_test_uev_c3.js`.
 - **Depends on:** C1, C2, and the integrator's regeneration: index, `hidden_until.json`, chapters, `emi-coverage --expect`, script order.
 - **Acceptance:**
   - the gate example runs: at least 565,127,276 EU/t in (the design gives 639,106,096, with 607,150,791 into the bank) and 536,870,912 out for 60 s;
-  - a v0.12.0 save opens with its UEV machines, stations 9 and 10, relays and network;
+  - a v0.13.0 save opens with its UEV machines, stations 9 and 10, relays and network;
   - one save and reopen is reported, and the platforms survive it;
   - the shipped `gtceu.yaml` still has `highTierContent` off;
-  - the validator, the Node suite, `gg_test_recipe_lookup` and the quest tests pass.
-- **Tests:** T0; T2 by the integrator in its band. **Commits:** 1. **Then v0.13.0.**
+  - the validator, the Node suite, `gg_test_recipe_lookup` and the quest tests pass;
+  - `gg_test_form_sweep_uiv` forms every UIV controller, and the structure, recipe and process gates have no UIV baseline entry left.
+- **Tests:** T0; T2 by the integrator in its band. **Commits:** 1. **Then v0.14.0** (v0.13.0 is the quality-review release).
 
 ### Parallel and serial
 

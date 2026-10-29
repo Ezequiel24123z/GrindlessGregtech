@@ -1,4 +1,4 @@
-// priority: -7626
+// priority: -7619
 // -----------------------------------------------------------------------------------------------
 // UEV's Sirius B machines (docs/eras/uev.md, machines 23-25 and line 28; package UEV-B4): the white dwarf spectrograph, the degenerate harvester,
 // the containment works and their recipe types. The recipes come from data/grindless/tables/sirius.json (server_scripts/grindless/uev/sirius.js);
@@ -64,53 +64,74 @@
   }
   SI.order = ['spectrograph', 'harvester', 'works']
 
-  // A hollow shell: row 0 (X) takes the parts, the top row and the walls are casing (F), S is the controller (front wall, row 1, middle).
-  function shell(m) {
-    var slices = []
-    var last = m.depth - 1
-    var mid = (m.width - 1) / 2
-    for (var si = 0; si < m.depth; si++) {
-      var rows = []
-      for (var r = 0; r < m.height; r++) {
-        var row = ''
-        for (var c = 0; c < m.width; c++) {
-          var ch
-          var isWall = si === 0 || si === last || c === 0 || c === m.width - 1
-          if (r === 0) ch = 'X'
-          else if (r === m.height - 1) ch = 'F'
-          else if (si === last && r === 1 && c === mid) ch = 'S'
-          else if (isWall) ch = 'F'
-          else ch = '#'
-          row += ch
-        }
-        rows.push(row)
+  // The spectrograph is a telescope: a glass hall under a dish on a mast. The harvester is a magnetic scoop: a funnel of rings narrowing from
+  // the mouth to a tank. The works is a vault: a heavy hall with a row of stasis cells (B/L/C) down each side and a pipe ridge.
+  function funnelCell(w, d) {
+    var cx = (w - 1) / 2
+    return function (x, y, z) {
+      var dx = x - cx
+      var ax = dx < 0 ? -dx : dx
+      var m = G.uevShapes.cheb(dx, y - 4)
+      if (y === 0) return ax <= 2 ? 'X' : ' '
+      if (z >= 5) {
+        var r = 1 + Math.floor((z - 5) / 3)
+        if (z === d - 1) r = 3
+        if (m < r) return '#'
+        if (m > r) return ' '
+        if (z === d - 1) return 'C'
+        if (z === d - 2) return 'A'
+        return z % 3 === 1 && (ax === r || y === 4 + r) ? 'L' : 'F'
       }
-      slices.push(rows)
+      if (z === 4) return m <= 1 ? '#' : (m <= 3 ? 'A' : ' ')
+      if (m === 3) return (z === 0 || ((ax === 3) && (y === 1 || y === 7))) ? (ax === 3 && (y === 1 || y === 7) ? 'Q' : 'F') : (z % 2 === 1 ? 'L' : 'F')
+      if (z === 0 && m < 3) return 'F'
+      if (m === 0 && z > 0) return 'P'
+      return m < 3 ? '#' : ' '
     }
-    return slices
   }
 
+  function vaultCell(w, d) {
+    var cx = (w - 1) / 2
+    return G.uevShapes.hall({
+      w: w, d: d, hh: 6, mull: 2,
+      crown: G.uevShapes.ridge(w, d),
+      inner: function (x, y, z) {
+        var dx = x - cx
+        var ax = dx < 0 ? -dx : dx
+        if (ax === 2 && z % 2 === 1 && z > 1 && z < d - 3) return y === 1 ? 'B' : (y === 2 ? 'L' : (y === 3 ? 'C' : null))
+        return null
+      }
+    })
+  }
+
+  var SHAPES = {
+    spectrograph: { w: 9, h: 11, d: 9, fn: function () { return G.uevShapes.hall({ w: 9, d: 9, hh: 5, crown: G.uevShapes.dish(9, 9, 3) }) } },
+    harvester: { w: 9, h: 8, d: 13, fn: function () { return funnelCell(9, 13) } },
+    works: { w: 9, h: 7, d: 11, fn: function () { return vaultCell(9, 11) } }
+  }
   SI.order.forEach(function (k) {
     var m = SI.machines[k]
-    var fluids = m.maxIO.fluidsIn > 0
+    m.width = SHAPES[k].w
+    m.height = SHAPES[k].h
+    m.depth = SHAPES[k].d
+  })
+
+  function makeSpec(k) {
+    var m = SI.machines[k]
     var parts = [
-      Pat.block(m.casing),
       Pat.part('input_bus', { min: 1, max: 2 }),
       Pat.part('output_bus', { min: 1, max: 2 }),
       Pat.part('energy_input', { min: 1, max: 2 })
     ]
-    if (fluids) parts.push(Pat.part('input_hatch', { min: 0, max: 1 }))
-    m.spec = {
-      slices: shell(m),
-      symbols: {
-        S: Pat.controller(),
-        X: Pat.oneOf.apply(null, parts),
-        F: Pat.block(m.casing),
-        '#': Pat.air()
+    if (m.maxIO.fluidsIn > 0) parts.push(Pat.part('input_hatch', { min: 0, max: 1 }))
+    return G.uevShapes.spec(Pat, {
+      w: m.width, h: m.height, d: m.depth, fn: SHAPES[k].fn(), parts: parts,
+      pal: {
+        F: m.casing, A: 'gtceu:stable_machine_casing', L: 'gtceu:laminated_glass', P: 'gtceu:tungstensteel_pipe_casing',
+        C: 'gtceu:trinium_coil_block', B: 'gtceu:tungstensteel_gearbox', Q: 'tungsten_steel'
       }
-    }
-  })
-
+    })
+  }
   // one EMI line per recipe, read from its data: what the circuit does
   function infoOf(dataKey) {
     return function (data) {
@@ -146,6 +167,7 @@
       var type = GTRecipeTypes.get(m.type)
       if (type == null) throw new Error(LOG + 'recipe type gtceu:' + m.type + ' is not registered')
       type.addDataInfo(infoOf(m.dataKey))
+      m.spec = makeSpec(k)
       Pat.register(m.machine, m.spec)
       event.create(m.name, 'multiblock')
         .langValue(m.lang)

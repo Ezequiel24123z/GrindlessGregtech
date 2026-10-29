@@ -152,9 +152,9 @@
     }
     // station research of a component of each line; different parts and research so GTM's lookup (which ignores counts) tells them apart
     var defs = [
-      { id: 'zone_refining_tower', name: 'gtceu:zone_refining_tower', research: 'grindless:si28_donor_wafer',
+      { id: 'zone_refining_tower', name: 'gtceu:zone_refining_tower', research: 'grindless:silicon_28_dust',
         parts: ['gtceu:uv_machine_hull', '2x gtceu:uv_emitter', '2x gtceu:uv_electric_motor'],
-        domain: ['4x grindless:si28_donor_wafer', '8x grindless:silicon_28_dust', '2x grindless:hpge_crystal'] },
+        domain: ['8x grindless:silicon_28_dust', '4x grindless:fused_silica_tube', '2x grindless:sapphire_wafer'] },
       { id: 'optical_ground_station', name: 'gtceu:optical_ground_station', research: 'grindless:snspd_array',
         parts: ['gtceu:uv_machine_hull', '4x gtceu:uv_sensor'],
         domain: ['4x grindless:snspd_array', '2x grindless:hpge_crystal', '4x grindless:silicon_28_dust'] }

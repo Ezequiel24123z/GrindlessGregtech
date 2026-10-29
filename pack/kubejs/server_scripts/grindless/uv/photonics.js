@@ -298,9 +298,9 @@
       console.error(LOG + 'laser module block recipe skipped: ' + FIBRE_MODULE + ', ' + MODULE_BLOCK + ' or the nitride film unknown')
     }
     var list = [
-      { id: 'gtceu:fibre_draw_tower', research: FIBRE,
+      { id: 'gtceu:fibre_draw_tower', research: 'grindless:fused_silica_tube',
         parts: ['gtceu:uv_machine_hull', '2x gtceu:uv_electric_motor', '2x gtceu:uv_sensor'],
-        domain: ['4x ' + FIBRE, '4x grindless:fused_silica_tube', '2x ' + GRATING] },
+        domain: ['8x grindless:fused_silica_tube', '2x grindless:cvd_diamond_plate', '2x ' + SAPPHIRE_WAFER] },
       { id: 'gtceu:mocvd_reactor', research: GAAS_WAFER,
         parts: ['gtceu:uv_machine_hull', '2x gtceu:uv_electric_pump', '2x gtceu:uv_sensor'],
         domain: ['4x ' + GAAS_WAFER, '4x ' + SAPPHIRE_WAFER, '2x ' + GRATING] }

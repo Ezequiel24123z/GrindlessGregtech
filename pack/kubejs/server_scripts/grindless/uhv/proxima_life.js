@@ -185,7 +185,7 @@
     var PUMP = 'gtceu:uv_electric_pump'
     var M = PL.machines || {}
     var defs = [
-      { key: 'facility', parts: [HULL, ARM], research: 'grindless:flare_shield_panel', domain: ['4x grindless:cladosporium_culture', '2x grindless:bsl4_casing', '2x grindless:srf_cryomodule'] },
+      { key: 'facility', parts: [HULL, ARM], research: 'grindless:carbon_nanotube_yarn', domain: ['4x grindless:cladosporium_culture', '2x grindless:bsl4_casing', '2x grindless:srf_cryomodule'] },
       { key: 'rover', parts: [HULL, MOTOR], research: 'grindless:proxima_rover', domain: ['4x grindless:thruster_pod', '2x grindless:hangar_casing', '2x grindless:mu_metal_shield'] },
       { key: 'greenhouse', parts: [HULL, PUMP], research: 'grindless:sphingomonas_culture', domain: ['4x grindless:cladosporium_culture', '2x grindless:bsl4_casing', '2x grindless:silica_aerogel'] },
       { key: 'plant', parts: [HULL, PUMP], research: 'grindless:chromobacterium_culture', domain: ['4x grindless:sporosarcina_culture', '2x grindless:bsl4_casing', '2x grindless:mu_metal_shield'] },

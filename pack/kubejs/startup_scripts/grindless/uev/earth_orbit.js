@@ -59,49 +59,70 @@
     }
   }
 
-  // A hollow shell: row 0 (X) takes the parts, the top row and the walls are casing (F), S is the controller (front wall, row 1, middle).
-  function shell(m) {
-    var slices = []
-    var last = m.depth - 1
-    var mid = (m.width - 1) / 2
-    for (var si = 0; si < m.depth; si++) {
-      var rows = []
-      for (var r = 0; r < m.height; r++) {
-        var row = ''
-        for (var c = 0; c < m.width; c++) {
-          var ch
-          var isWall = si === 0 || si === last || c === 0 || c === m.width - 1
-          if (r === 0) ch = 'X'
-          else if (r === m.height - 1) ch = 'F'
-          else if (si === last && r === 1 && c === mid) ch = 'S'
-          else if (isWall) ch = 'F'
-          else ch = '#'
-          row += ch
-        }
-        rows.push(row)
+  // The gas lab is a vacuum chamber: a glass hall under a dome with a trap coil in the middle. The entanglement station is two banded
+  // towers joined by a glass bridge (the link). Built in the registry callback (shapes.js may load after this file).
+  function twinCell(w, d) {
+    var cz = (d - 1) / 2
+    var cx = (w - 1) / 2
+    return function (x, y, z) {
+      var lx = x < 5 ? x : (x > w - 6 ? x - (w - 5) : -1)
+      if (lx < 0) {
+        var ax = x - cx < 0 ? cx - x : x - cx
+        if (y === 0) return z >= 1 ? 'X' : ' '
+        if (y === 1) return 'A'
+        var bz = z - cz < 0 ? cz - z : z - cz
+        var ring = G.uevShapes.cheb(bz, y - 6)
+        if (ring === 1 && y >= 5 && y <= 7) return ax === 0 ? 'C' : (ax === 2 ? 'P' : 'L')
+        if (ring === 0) return '#'
+        return ' '
       }
-      slices.push(rows)
+      var ex = lx === 0 || lx === 4
+      var ez = z === 0 || z === d - 1
+      var ct = lx === 2 && z === cz
+      if (y === 0) return 'X'
+      if (y === 9) return ex || ez ? 'A' : (ct ? 'C' : 'A')
+      if (ex && ez) return 'Q'
+      if (!(ex || ez)) return ct ? (y % 3 === 1 ? 'C' : 'P') : '#'
+      if (y === 1) return 'A'
+      return y % 3 === 0 ? 'F' : 'L'
     }
-    return slices
   }
 
+  var SHAPES = {
+    gas_lab: {
+      w: 9, h: 9, d: 9,
+      fn: function () {
+        return G.uevShapes.hall({
+          w: 9, d: 9, hh: 6, crown: G.uevShapes.dome(9, 9, 3),
+          inner: function (x, y, z) { return x === 4 && z === 4 ? (y === 1 ? 'B' : (y <= 4 ? 'C' : null)) : null }
+        })
+      }
+    },
+    station: { w: 15, h: 10, d: 7, fn: function () { return twinCell(15, 7) } }
+  }
   Object.keys(EO.machines).forEach(function (k) {
     var m = EO.machines[k]
-    m.spec = {
-      slices: shell(m),
-      symbols: {
-        S: Pat.controller(),
-        X: Pat.oneOf.apply(null, [Pat.block(m.casing)].concat([
-          Pat.part('input_bus', { min: 1, max: 2 }),
-          Pat.part('input_hatch', { min: 0, max: 1 }),
-          Pat.part('output_bus', { min: 1, max: 2 }),
-          Pat.part('energy_input', { min: 1, max: 2 })
-        ])),
-        F: Pat.block(m.casing),
-        '#': Pat.air()
-      }
-    }
+    m.width = SHAPES[k].w
+    m.height = SHAPES[k].h
+    m.depth = SHAPES[k].d
   })
+
+  function makeSpec(k) {
+    var m = EO.machines[k]
+    return G.uevShapes.spec(Pat, {
+      w: m.width, h: m.height, d: m.depth, fn: SHAPES[k].fn(),
+      pal: {
+        F: m.casing, A: 'gtceu:stable_machine_casing', L: 'gtceu:laminated_glass', P: 'gtceu:tungstensteel_pipe_casing',
+        C: 'gtceu:trinium_coil_block', B: 'gtceu:tungstensteel_gearbox', Q: 'tungsten_steel'
+      },
+      parts: [
+        Pat.part('input_bus', { min: 1, max: 2 }),
+        Pat.part('input_hatch', { min: 0, max: 1 }),
+        Pat.part('output_bus', { min: 1, max: 2 }),
+        Pat.part('energy_input', { min: 1, max: 2 })
+      ]
+    })
+  }
 
   // one EMI line per recipe, read from its data: what the circuit does
   function infoOf(dataKey) {
@@ -150,6 +171,7 @@
       var type = GTRecipeTypes.get(m.type)
       if (type == null) throw new Error(LOG + 'recipe type gtceu:' + m.type + ' is not registered')
       type.addDataInfo(infoOf(m.dataKey))
+      m.spec = makeSpec(k)
       Pat.register(m.machine, m.spec)
       event.create(m.name, 'multiblock')
         .langValue(m.lang)

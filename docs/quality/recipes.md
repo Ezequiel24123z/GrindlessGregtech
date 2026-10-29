@@ -58,6 +58,15 @@ and drill bits, which are exempt. It keeps the door shut for new ones.
 - Limits: recipes in `lib/`, `integration/`, `data/` and `power/` have no era, so their tier is inferred from output/inputs. Only the crafting form is checked
   for soso. A custom multiblock is a controller only if its structure is registered; `extraControllers` lists the exceptions.
 
+## Reachability gate (QR-F3)
+
+`node tools/analysis/recipe-cycles.mjs` (in T0 via `test/recipe-cycles.test.mjs`) runs the same static stand-in and computes what can be made, starting
+from everything that is not ours. It tracks `grindless:` items and fluids and our controllers; a recipe of one of our recipe types runs only once one
+of its machines can be made, and research items count as inputs. It fails if any controller cannot be made, and prints the root cycles (a controller
+that needs its own product, directly or through later steps). `--explain id,id` shows the missing inputs of each recipe for an id; `--all` lists every
+unreachable id. `ASSUMED` in the script lists ids obtained without a recipe (loot, events); it is empty. Limit: GTM material items that only our chains
+make are treated as obtainable.
+
 ## What other packs do (research, ideas only, no code reused)
 
 - **GTNH** (GT5-Unofficial; custom licence, reference only): LV-IV tier machines and hatches come from the Assembler, with fluids from EV (molten PTFE, glass); from LuV the Assembly Line with a

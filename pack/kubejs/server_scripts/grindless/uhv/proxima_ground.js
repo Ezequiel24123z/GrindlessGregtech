@@ -219,8 +219,8 @@
     var PUMP = 'gtceu:uv_electric_pump'
     var M = PG.machines || {}
     var defs = [
-      { key: 'drill', parts: [HULL, MOTOR], research: 'grindless:cold_trap_coring_head', domain: ['2x grindless:cold_trap_coring_head', '2x grindless:proxima_base_casing', '2x grindless:thruster_pod'] },
-      { key: 'heap', parts: [HULL, PUMP], research: 'grindless:proxima_base_casing', domain: ['4x grindless:sporosarcina_culture', '2x grindless:chromobacterium_culture', '2x grindless:propellant_tank'] }
+      { key: 'drill', parts: [HULL, MOTOR], research: 'grindless:cold_trap_coring_head', domain: ['2x grindless:cold_trap_coring_head', '2x grindless:mu_metal_shield', '2x grindless:thruster_pod'] },
+      { key: 'heap', parts: [HULL, PUMP], research: 'grindless:bnnt_yarn', domain: ['4x grindless:sporosarcina_culture', '2x grindless:chromobacterium_culture', '2x grindless:propellant_tank'] }
     ]
     PG.controllerRecipes = []
     defs.forEach(function (d) {
