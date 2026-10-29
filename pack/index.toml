@@ -237,6 +237,10 @@ file = "kubejs/assets/emi/recipe/additions/grindless/bsl4_casing.json"
 hash = "150351d8d1578002add5dffd560202c0bd18ff2dc65bb3e98c975570da6aa5cf"
 
 [[files]]
+file = "kubejs/assets/emi/recipe/additions/grindless/calutron.json"
+hash = "19087d440b69e17720c1fafa5779ab4c66793626892ae8a9f101397d7ca17c5b"
+
+[[files]]
 file = "kubejs/assets/emi/recipe/additions/grindless/capacitor_cells.json"
 hash = "fa0f5a1d85e0763a4d03c970314779aa9c76b032f455696bf9bb6f2606dec164"
 
@@ -313,12 +317,20 @@ file = "kubejs/assets/emi/recipe/additions/grindless/direct_energy_converter.jso
 hash = "f33104181814468b14b53b4a7e48039ee3c53d5ce10890f8ec53d6cde999360e"
 
 [[files]]
+file = "kubejs/assets/emi/recipe/additions/grindless/electron_beam_furnace.json"
+hash = "bb0da541c10e31402281698d1dd7219d5151cbd64e1acc30c97112847146212a"
+
+[[files]]
 file = "kubejs/assets/emi/recipe/additions/grindless/engine_test_stand.json"
 hash = "73ac814cf4a560c343fdec620044441580d66a7e55a416425d4a85d94035e664"
 
 [[files]]
 file = "kubejs/assets/emi/recipe/additions/grindless/engineered_seeds.json"
 hash = "500883fe01437d75e4a8b6f8cf01ec6489c5726899a9bae68c94412817345405"
+
+[[files]]
+file = "kubejs/assets/emi/recipe/additions/grindless/entanglement_station.json"
+hash = "d4155570f76fab005d822536afec101c4b3c9626950e335230fd3f2365584cf2"
 
 [[files]]
 file = "kubejs/assets/emi/recipe/additions/grindless/entry_probe_bay.json"
@@ -401,6 +413,10 @@ file = "kubejs/assets/emi/recipe/additions/grindless/heat_source_works.json"
 hash = "88b71d8573b3f459d5595ec4bce45b148d3d609f99056534423a9c956ec65f2b"
 
 [[files]]
+file = "kubejs/assets/emi/recipe/additions/grindless/heavy_ion_cyclotron.json"
+hash = "7f69a46d982e3a335fa0440cc5c2eb585ef0d89eb8877186d65d6e2cf320f1ba"
+
+[[files]]
 file = "kubejs/assets/emi/recipe/additions/grindless/heavy_water_plant.json"
 hash = "7569c5f45b0d8e746c6e6892d7552a5f50d2a12b26bc78a00e7925e46ab96209"
 
@@ -411,6 +427,10 @@ hash = "735bbc0646777b07c438bba4743516bb0f29cb4944c29db5d2b94d643c1f9b3d"
 [[files]]
 file = "kubejs/assets/emi/recipe/additions/grindless/heliostat_tower.json"
 hash = "92cf4a94d28965531d97572f585b9e5c400f89bde85139dbe75a35306fb49423"
+
+[[files]]
+file = "kubejs/assets/emi/recipe/additions/grindless/helium3_polariser.json"
+hash = "5709e0a85a8bd67b1e18715bdbf396e1a6b764806959eecf8a6b6cc377dc36cf"
 
 [[files]]
 file = "kubejs/assets/emi/recipe/additions/grindless/helium_refrigerator.json"
@@ -553,6 +573,10 @@ file = "kubejs/assets/emi/recipe/additions/grindless/mega_chemical_complex.json"
 hash = "4c4d98e35cc0d9d3fe8c77af7d54f57d0b23ca5379a114bc6cbd46df0a00f75e"
 
 [[files]]
+file = "kubejs/assets/emi/recipe/additions/grindless/megabar_press.json"
+hash = "b68de8d57f6b66d2b67df71cbd6e106a053be16bed2cf3a162079f999a1339c8"
+
+[[files]]
 file = "kubejs/assets/emi/recipe/additions/grindless/mercury_solar_field.json"
 hash = "a988dd6bb5de1e53b78742b9ebeea1a0ec903e38fcb5a5b19ea2b5eaeaf11e52"
 
@@ -673,6 +697,10 @@ file = "kubejs/assets/emi/recipe/additions/grindless/photonic_foundry.json"
 hash = "4387ba34ddb83e53b712da33a1363411b392edf660991d615e5bad15e24396b0"
 
 [[files]]
+file = "kubejs/assets/emi/recipe/additions/grindless/photonic_integration_hall.json"
+hash = "30d28fae5639260b5b76a319b6f780d542c993b3c76eae719b8b313ff168479b"
+
+[[files]]
 file = "kubejs/assets/emi/recipe/additions/grindless/plasma_quench_caster.json"
 hash = "e279b93c56d228469a68fa9ba86f32217c9087743f9bcc174e677e88e0f3c206"
 
@@ -717,6 +745,10 @@ file = "kubejs/assets/emi/recipe/additions/grindless/quantum_fabricator.json"
 hash = "0c16f5770fe04429ff68f3092f2a1cbda5ba01620b759fb3677c7e7955cb5516"
 
 [[files]]
+file = "kubejs/assets/emi/recipe/additions/grindless/quantum_gas_lab.json"
+hash = "60f04c1bea207ef8fa17ea694e9719a96abd8e78f720a45c5cae97e4e27c2007"
+
+[[files]]
 file = "kubejs/assets/emi/recipe/additions/grindless/qubit_fab.json"
 hash = "a97e8237a238a973c2440b16bd8d39be18617add8b22604ef04082be981e3e9d"
 
@@ -731,6 +763,10 @@ hash = "668cba95a7c679767092876597d575c236096a1d603b84d41c36a181148615ee"
 [[files]]
 file = "kubejs/assets/emi/recipe/additions/grindless/radiotrophic_vat.json"
 hash = "e128c62ed80c7106dd4f91c8024994e5fe14899e6ab08f40ec273b64b50c0d9f"
+
+[[files]]
+file = "kubejs/assets/emi/recipe/additions/grindless/recoil_separator.json"
+hash = "08465aaccb4f1d123036f988b2ac973ef8f68d9097adcd8a18c7a8efdf60f681"
 
 [[files]]
 file = "kubejs/assets/emi/recipe/additions/grindless/refinery.json"
@@ -781,6 +817,10 @@ file = "kubejs/assets/emi/recipe/additions/grindless/sic_device_fab.json"
 hash = "9243113c1a9085921fbc8c732418ced7de3cb2065a935ef3910e81006c197b1f"
 
 [[files]]
+file = "kubejs/assets/emi/recipe/additions/grindless/single_crystal_foundry.json"
+hash = "f5025e016770e3e41e2cf0dc51c8c051672e6715d04de1d31e7b7e66a79050ff"
+
+[[files]]
 file = "kubejs/assets/emi/recipe/additions/grindless/sintered_regolith.json"
 hash = "ec734f19d60ca0a41edb365f8d8b6eda3bc817296e6f8bf893f66e90558b00d9"
 
@@ -791,6 +831,10 @@ hash = "6b265f460049b9f327b63ee5452247fc79b2cad98155d91dbe76759f625567e4"
 [[files]]
 file = "kubejs/assets/emi/recipe/additions/grindless/smelting_complex.json"
 hash = "f9939077f0737ac7a3c8b12bf0aecd99e67635a707d7961570257b7c1eb4197e"
+
+[[files]]
+file = "kubejs/assets/emi/recipe/additions/grindless/snspd_foundry.json"
+hash = "5949da6e60a72c80a7dae34bce96c046e594832611937d1b2050f6838a7ca389"
 
 [[files]]
 file = "kubejs/assets/emi/recipe/additions/grindless/solar_array_fab.json"
@@ -889,6 +933,10 @@ file = "kubejs/assets/emi/recipe/additions/grindless/superfluid_helium_plant.jso
 hash = "1e4d4666ff3224b5a02cfa6cdb507dddfcfe9c7f272a8fd7d332b687434a2687"
 
 [[files]]
+file = "kubejs/assets/emi/recipe/additions/grindless/superheavy_chemistry_lab.json"
+hash = "5bd318334fe5bd18489124aaf7ca1741ee199058a4c3782ea3e1dc3e642474df"
+
+[[files]]
 file = "kubejs/assets/emi/recipe/additions/grindless/swarm_control_station.json"
 hash = "e31ad7d45146f19b85ccf4ee6b826d35ebec2be62f665a7c8f798aece353e67c"
 
@@ -969,6 +1017,10 @@ file = "kubejs/assets/emi/recipe/additions/grindless/uev_fusion_casing.json"
 hash = "4b155d61464eb0816d82ba92508eba3ff41bb583a550097aa559f42d76991bfc"
 
 [[files]]
+file = "kubejs/assets/emi/recipe/additions/grindless/uev_fusion_reactor.json"
+hash = "7335aa9d23918d2ab94faf3922623b7b8564722981c8b05c5840435d598034e5"
+
+[[files]]
 file = "kubejs/assets/emi/recipe/additions/grindless/uev_hftacn_coil_block.json"
 hash = "35e12404aeb6b79d91b7297ffe75dae6f623cda0d692f85d1b08490241c649c0"
 
@@ -999,6 +1051,18 @@ hash = "02b2235d64c1e125bc46f1a3f2ae35c893e063c27f39bd5e4dcec316d6edd2eb"
 [[files]]
 file = "kubejs/assets/emi/recipe/additions/grindless/uev_travel_dfd_motors.json"
 hash = "db728bbe7953a03d4cbc79b03c583d35702252a133c3713b7d8a5671e4084108"
+
+[[files]]
+file = "kubejs/assets/emi/recipe/additions/grindless/uev_uiv_dynamo_hatch.json"
+hash = "eb389a28f56eb1ae558e3466f313cd6f68f89830ee950e33e82c779cda18e373"
+
+[[files]]
+file = "kubejs/assets/emi/recipe/additions/grindless/uev_uiv_energy_hatch.json"
+hash = "7d357cf8a2da8e096b4b63c18176ab6635ea6022a178d33077ebd15fcdecf586"
+
+[[files]]
+file = "kubejs/assets/emi/recipe/additions/grindless/uev_uiv_machine_hull.json"
+hash = "344bc2d4af374217f94bb970218bfbff210d0bfe0a33791c0f328e9af3b88be6"
 
 [[files]]
 file = "kubejs/assets/emi/recipe/additions/grindless/uhv_antimatter_casimir_fiction.json"
@@ -1047,6 +1111,10 @@ hash = "1742bb7efc848e2c155de3d6ab200baf6381a38eac6f1a3d7ba21efee6f3497e"
 [[files]]
 file = "kubejs/assets/emi/recipe/additions/grindless/uiv_mk5_fuels.json"
 hash = "47517b24d7358f4230fcc09f69cdf9ae6f6372742b401f9a8bb331a36919ee3f"
+
+[[files]]
+file = "kubejs/assets/emi/recipe/additions/grindless/uiv_parallel_hatch.json"
+hash = "b78b52b70a317f0894516f0b7ee033b9fa146ee928f895dd55c66a3e1a67ca99"
 
 [[files]]
 file = "kubejs/assets/emi/recipe/additions/grindless/uiv_rx_j1856_capsule.json"
@@ -1107,6 +1175,10 @@ hash = "4e8d885ae34e2a09a2d19d31841d62c71be141b8937db35fd834e87edaf4ad9d"
 [[files]]
 file = "kubejs/assets/emi/recipe/additions/grindless/uv_travel_plutonian_quantum_seed.json"
 hash = "8cb9c44c2c3b57adf38b98ac1a316a555df447021758c2978ecc4240190b87d5"
+
+[[files]]
+file = "kubejs/assets/emi/recipe/additions/grindless/vdw_stacker.json"
+hash = "80be7599b065281096774724399363ef8afd4163ed1e64c9787539dc9ea70f1d"
 
 [[files]]
 file = "kubejs/assets/emi/recipe/additions/grindless/vent_bioreactor.json"
@@ -9445,8 +9517,12 @@ file = "kubejs/client_scripts/grindless/uev_gate_lang.js"
 hash = "7b3ab36aba6a69a4d061901f05ddb549d9e47e837245ed85509ec11d118f09fb"
 
 [[files]]
+file = "kubejs/client_scripts/grindless/uev_info_lang.js"
+hash = "a62dd9be261ed4e7f33fedc1d2395fb8f2537db6e4a57715c87a190a4a5223e2"
+
+[[files]]
 file = "kubejs/client_scripts/grindless/uev_isotopes_lang.js"
-hash = "3c0f014ca411116e083d1729ce6037bc4ba008126f1b1749520dd72652964621"
+hash = "936dca821f200296195e866d0bfd77014fc37ec930ab1febdfbd541ca307b64a"
 
 [[files]]
 file = "kubejs/client_scripts/grindless/uev_megabar_lang.js"

@@ -1,3 +1,4 @@
+// priority: 5014
 // Gregtech Grindless - EMI information pages of the UEV era machines and the UEV and UIV hatches (kubejs/assets/emi/recipe/additions/grindless/<id>.json, type emi:info).
 // One page per controller (one per hatch family): what it does, what it is for, what it needs. Their recipes show in EMI under the controller itself.
 // Tooltips live in the uev_*_lang.js files; every key is in en_us and es_es.
