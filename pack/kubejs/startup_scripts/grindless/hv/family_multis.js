@@ -16,7 +16,7 @@
 //
 // The vetoes are the MV ones: the drill vetoes a base recipe while drilling fluid is present in its hatch (the fluid recipe is the
 // better one) and the vanadium steel base while sulfuric acid is (the leaching variant takes its place); the greenhouse follows the
-// programmed circuit (2 = fertilizer mode, with CO2 in a hatch too the fertilizer + CO2 variant; 3 = the boosters). Both run every
+// programmed circuit (2 = the LV fertilizer variant; 3 = the boosters; 4 = the fertilizer + CO2 variant). Both run every
 // recipe the lower machines run and skip the ones of the tiers above HV (<type>/ev/ and up: rules.isAboveTier, lv/multis.js): the
 // titanium bit and the lunar and Martian veins are the EV Tripod Drill's.
 //
@@ -106,13 +106,11 @@
         (rules.isVanadiumBaseRecipe(recipe) && rules.machineHasFluid(machine, 'gtceu:sulfuric_acid'))
     }
 
-    // circuit 2 = fertilizer mode; with CO2 in a hatch too the fertilizer + CO2 variant is the one that runs; circuit 3 = boosters
+    // circuit 2 = the LV fertilizer variant, circuit 3 = boosters, circuit 4 = the fertilizer + CO2 variant
     function greenhouseVeto(machine, recipe) {
       if (rules.isAboveTier(recipe, 'hv')) return true
       if (rules.machineCircuit(machine) < 2) return false
-      if (rules.isBoosterRecipe(recipe)) return false
-      if (!rules.isFertilizerRecipe(recipe)) return true
-      return !rules.isCo2Recipe(recipe) && rules.machineHasFluid(machine, 'gtceu:carbon_dioxide')
+      return !rules.isBoosterRecipe(recipe) && !rules.isFertilizerRecipe(recipe)
     }
 
     Pat.register(DRILL, DRILL_SPEC)

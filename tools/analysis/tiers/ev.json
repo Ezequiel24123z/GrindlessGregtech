@@ -156,7 +156,7 @@
       "partsFromStructure": true,
       "partAbilities": { "energy_input": ["gtceu:ev_energy_input_hatch"] },
       "parts": ["grindless:sintered_regolith", "minecraft:dirt", "gtceu:tempered_glass", "gtceu:white_lamp", "minecraft:iron_door", "gtceu:ev_energy_input_hatch", "gtceu:ev_input_bus", "gtceu:ev_output_bus", "gtceu:ev_input_hatch", "gtceu:ev_output_hatch"],
-      "note": "Sealed dome (ev/sealed_dome.js, Moon and Mars): the greenhouse family's EV step, gtceu:greenhouse with circuits 0-3 as the HV greenhouse and circuit 4 for its sealed recipes (greenhouse/ev/*_sealed_moon with CO2 from home, *_sealed_mars with the air's), each with its dimension; it skips any folder above ev. Sintered regolith rings, a soil bed, tempered glass, GT lamps and an iron door."
+      "note": "Sealed dome (ev/sealed_dome.js, Moon and Mars): the greenhouse family's EV step, gtceu:greenhouse with circuits 0-4 as the HV greenhouse and circuit 5 (Moon) or 6 (Mars) for its sealed recipes (greenhouse/ev/*_sealed_moon with CO2 from home, *_sealed_mars with the air's), each with its dimension; it skips any folder above ev. Sintered regolith rings, a soil bed, tempered glass, GT lamps and an iron door."
     },
     {
       "machine": "gtceu:extraction_cascade",

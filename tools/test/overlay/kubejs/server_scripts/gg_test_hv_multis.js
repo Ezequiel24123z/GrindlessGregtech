@@ -1074,9 +1074,9 @@
         }
       },
       {
-        // circuit 2 + fertilizer + water + CO2: the fertilizer + CO2 variant (x3), 100 mB of O2 back per run; the LV variant waits
+        // circuit 4 + fertilizer + water + CO2: the fertilizer + CO2 variant (x3), 100 mB of O2 back per run
         name: 'co2', ticks: 260,
-        items: [{ id: 'minecraft:oak_sapling', n: 1 }, { id: 'gtceu:fertilizer', n: 64 }], circuit: 2,
+        items: [{ id: 'minecraft:oak_sapling', n: 1 }, { id: 'gtceu:fertilizer', n: 64 }], circuit: 4,
         fluids: [{ id: WATER, mb: 8000 }, { id: CO2, mb: 8000 }],
         verify: function (r) {
           var logs = r.items['minecraft:oak_log'] || 0
@@ -1120,7 +1120,7 @@
       {
         // the same crop with fertilizer and CO2
         name: 'extra_co2', ticks: 260,
-        items: [{ id: 'minecraft:red_mushroom', n: 1 }, { id: 'gtceu:fertilizer', n: 64 }], circuit: 2,
+        items: [{ id: 'minecraft:red_mushroom', n: 1 }, { id: 'gtceu:fertilizer', n: 64 }], circuit: 4,
         fluids: [{ id: WATER, mb: 8000 }, { id: CO2, mb: 8000 }],
         verify: function (r) {
           var n = r.items['minecraft:red_mushroom'] || 0
@@ -1209,13 +1209,13 @@
     G.greenhouse.entries.forEach(function (e) {
       cases.push({ label: e.id + ' (steam)', items: [{ id: e.catalyst, n: 1 }], circuit: 0, fluids: [], want: 'grindless:greenhouse/' + e.id })
       cases.push({ label: e.id + ' (fertilizer)', items: fertilizerItems(e), circuit: 2, fluids: [water], want: 'grindless:greenhouse/lv/' + e.id + '_fertilizer' })
-      cases.push({ label: e.id + ' (fertilizer + CO2)', items: fertilizerItems(e), circuit: 2, fluids: [water, co2],
+      cases.push({ label: e.id + ' (fertilizer + CO2)', items: fertilizerItems(e), circuit: 4, fluids: [water, co2],
         want: 'grindless:greenhouse/mv/' + e.id + '_fertilizer_co2' })
     })
     G.lv.greenhouseExtras.forEach(function (e) {
       cases.push({ label: e.id, items: [{ id: e.catalyst, n: 1 }], circuit: 0, fluids: [water], want: 'grindless:greenhouse/lv/' + e.id })
       cases.push({ label: e.id + ' (fertilizer)', items: fertilizerItems(e), circuit: 2, fluids: [water], want: 'grindless:greenhouse/lv/' + e.id + '_fertilizer' })
-      cases.push({ label: e.id + ' (fertilizer + CO2)', items: fertilizerItems(e), circuit: 2, fluids: [water, co2],
+      cases.push({ label: e.id + ' (fertilizer + CO2)', items: fertilizerItems(e), circuit: 4, fluids: [water, co2],
         want: 'grindless:greenhouse/mv/' + e.id + '_fertilizer_co2' })
     })
     return cases
