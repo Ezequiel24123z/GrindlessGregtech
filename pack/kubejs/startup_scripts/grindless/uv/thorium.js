@@ -41,6 +41,7 @@
   const POOL = 'gtceu:uv_machine_casing'
   const CRYO = 'grindless:srf_cryomodule_block'
   const TUNGSTEN_PIPE = 'gtceu:tungstensteel_pipe_casing'
+  const COIL = 'gtceu:superconducting_coil'
 
   TH.table = 'kubejs/data/grindless/tables/thorium.json'
   TH.fabricationTable = 'kubejs/data/grindless/tables/thorium_fabrication.json'
@@ -134,7 +135,58 @@
     return si === 0 && r === 6 && c >= 4 && c <= 7 ? 'C' : null
   }
 
-  function specOf(m, casing, inner, wall, extraParts) {
+  // QR-S3: dress(slices, wall, rule) rewrites plain wall cells (char `wall`) through rule(x, y, z, W, H, D) -> char or null. Row 0 is never touched.
+  function dress(slices, wall, rule) {
+    var D = slices.length
+    var H = slices[0].length
+    var W = slices[0][0].length
+    return slices.map(function (rows, z) {
+      return rows.map(function (row, y) {
+        if (y === 0) return row
+        var out = ''
+        for (var x = 0; x < W; x++) {
+          var ch = row.charAt(x)
+          var r = ch === wall ? rule(x, y, z, W, H, D) : null
+          out += r || ch
+        }
+        return out
+      })
+    })
+  }
+
+  // the pyroprocessing cell, an electrorefiner vessel: tungsten steel posts and roof ring, a heatproof furnace band at the foot and
+  // under the roof, glass sight windows between, a PTFE salt duct on the roof
+  function cellRule(x, y, z, W, H, D) {
+    var cx = x === 0 || x === W - 1
+    var cz = z === 0 || z === D - 1
+    if (y === H - 1) {
+      if (cx || cz) return 'M'
+      return Math.abs(x - 3) <= 1 && Math.abs(z - 3) <= 1 ? 'P' : null
+    }
+    if (cx && cz) return 'M'
+    if (y === 1 || y === 5) return 'H'
+    if ((y === 2 || y === 3 || y === 4) && (cx ? z : x) >= 2 && (cx ? z : x) <= 4) return 'L'
+    return null
+  }
+
+  // the reactor, a subcritical drum: tungsten steel posts and roof ring, a stack of heatproof blanket bands, two superconducting beam-ring
+  // coil bands, fusion glass viewing windows between them, a coil ring on the roof round the beam entry
+  function reactorRule(x, y, z, W, H, D) {
+    var cx = x === 0 || x === W - 1
+    var cz = z === 0 || z === D - 1
+    var along = cx ? z : x
+    if (y === H - 1) {
+      if (cx || cz) return 'M'
+      return Math.max(Math.abs(x - 5), Math.abs(z - 5)) === 3 ? 'K' : null
+    }
+    if (cx && cz) return 'M'
+    if (y === 2 || y === 3 || y === 9 || y === 10) return 'H'
+    if (y === 4 || y === 8) return 'K'
+    if (y >= 5 && y <= 7 && along >= 2 && along <= 8) return 'G'
+    return null
+  }
+
+  function specOf(m, casing, inner, wall, extraParts, rule) {
     var parts = [
       Pat.block(casing),
       Pat.part('input_bus', { min: 1, max: 1 }),
@@ -143,7 +195,7 @@
       Pat.part('output_hatch', { min: 1, max: m.generator ? 1 : 2 })
     ].concat(extraParts)
     return {
-      slices: shell(m, inner, wall),
+      slices: dress(shell(m, inner, wall), 'F', rule),
       symbols: {
         S: Pat.controller(),
         X: Pat.oneOf.apply(null, parts),
@@ -153,13 +205,16 @@
         L: Pat.block(GLASS),
         H: Pat.block(HEAT),
         U: Pat.block(POOL),
+        M: Pat.frame(['tungsten_steel']),
+        K: Pat.block(COIL),
+        G: Pat.block('gtceu:fusion_glass'),
         C: Pat.block(CRYO, { min: 4 }),
         '#': Pat.air()
       }
     }
   }
-  TH.machines.cell.spec = specOf(TH.machines.cell, SHIELD, cellInner, null, [Pat.part('energy_input', { min: 1, max: 2 }), G.parallelHatch.part()])
-  TH.machines.reactor.spec = specOf(TH.machines.reactor, ROBUST, reactorInner, reactorWall, [Pat.part('energy_output', { min: 1, max: 4 })])
+  TH.machines.cell.spec = specOf(TH.machines.cell, SHIELD, cellInner, null, [Pat.part('energy_input', { min: 1, max: 2 }), G.parallelHatch.part()], cellRule)
+  TH.machines.reactor.spec = specOf(TH.machines.reactor, ROBUST, reactorInner, reactorWall, [Pat.part('energy_output', { min: 1, max: 4 })], reactorRule)
 
   // ---------------------------------------------------------------- containment
 

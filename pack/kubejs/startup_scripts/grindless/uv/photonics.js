@@ -102,6 +102,38 @@
     )
   }
 
+  // QR-S3: dress(slices, wall, rule) rewrites plain wall cells (char `wall`) through rule(x, y, z, W, H, D) -> char or null. Row 0 is never touched.
+  function dress(slices, wall, rule) {
+    var D = slices.length
+    var H = slices[0].length
+    var W = slices[0][0].length
+    return slices.map(function (rows, z) {
+      return rows.map(function (row, y) {
+        if (y === 0) return row
+        var out = ''
+        for (var x = 0; x < W; x++) {
+          var ch = row.charAt(x)
+          var r = ch === wall ? rule(x, y, z, W, H, D) : null
+          out += r || ch
+        }
+        return out
+      })
+    })
+  }
+
+  // the draw tower: tungsten steel posts the whole height and a frame cap, a heatproof furnace section at the top, glass inspection
+  // windows between a PTFE cooling jacket and the coating stage, clean casing in between
+  function towerRule(x, y, z, W, H, D) {
+    var cx = x === 0 || x === W - 1
+    var cz = z === 0 || z === D - 1
+    if (y === H - 1) return cx || cz ? 'M' : null
+    if (cx && cz) return 'M'
+    if (y === 12 || y === 13) return 'H'
+    if (y === 10 || y === 6 || y === 2) return 'P'
+    if (y === 3 || y === 4 || y === 8 || y === 9) return 'W'
+    return null
+  }
+
   // the tower: 15 rows; `over` replaces rows by index
   function towerSlice(floor, fill, over) {
     var rows = [floor]
@@ -110,13 +142,13 @@
   }
   const STOCK = towerSlice('XRRRX', 'R###R', { 1: 'R#G#R', 12: 'RHHHR', 14: 'RRRRR' })
   const TOWER_SPEC = {
-    slices: [
+    slices: dress([
       towerSlice('XXXXX', 'RRRRR', {}),
       STOCK,
       towerSlice('XRRRX', 'R###R', { 1: 'RHM#R', 3: 'R#G#R', 6: 'R#P#R', 12: 'RH#HR', 14: 'RRGRR' }),
       STOCK,
       towerSlice('XXXXX', 'RRRRR', { 1: 'RRSRR' })
-    ],
+    ], 'R', towerRule),
     symbols: {
       S: Pat.controller(),
       X: cells(P.minCasings.tower),
@@ -125,6 +157,7 @@
       H: Pat.block(HEAT),
       P: Pat.block(PIPE),
       M: Pat.frame([BED]),
+      W: Pat.block('gtceu:laminated_glass'),
       '#': Pat.air()
     }
   }
@@ -138,9 +171,24 @@
     rows.push('RRRRRRR')
     return rows
   }
+  // the reactor, a growth chamber: stainless steel posts and roof ring, a heatproof susceptor band at the foot, glass windows into the
+  // chamber, a PTFE gas manifold under the roof and a filter casing hood
+  function reactorRule(x, y, z, W, H, D) {
+    var cx = x === 0 || x === W - 1
+    var cz = z === 0 || z === D - 1
+    if (y === H - 1) {
+      if (cx || cz) return 'F'
+      return Math.abs(x - 3) <= 1 && Math.abs(z - 3) <= 1 ? 'Y' : null
+    }
+    if (cx && cz) return 'F'
+    if (y === 1) return 'H'
+    if (y === 5) return 'P'
+    if ((y === 2 || y === 3 || y === 4) && (cx ? z : x) >= 2 && (cx ? z : x) <= 4) return 'W'
+    return null
+  }
   const EMPTY = '#####'
   const REACTOR_SPEC = {
-    slices: [
+    slices: dress([
       wall('XXXXXXX'),
       ring(['CC#HH', 'CC#HH', 'CC###', EMPTY, EMPTY]),
       ring(['CC###', 'CC###', 'CC###', '#PPP#', EMPTY]),
@@ -148,7 +196,7 @@
       ring([EMPTY, EMPTY, EMPTY, '#PPP#', EMPTY]),
       ring([EMPTY, EMPTY, EMPTY, EMPTY, EMPTY]),
       ['XXXXXXX', 'RRRSRRR', 'RRRRRRR', 'RRRRRRR', 'RRRRRRR', 'RRRRRRR', 'RRRRRRR']
-    ],
+    ], 'R', reactorRule),
     symbols: {
       S: Pat.controller(),
       X: cells(P.minCasings.reactor),
@@ -157,6 +205,9 @@
       G: Pat.block(GEARBOX),
       H: Pat.block(HEAT),
       P: Pat.block(PIPE),
+      F: Pat.frame(['stainless_steel']),
+      W: Pat.block('gtceu:laminated_glass'),
+      Y: Pat.block('gtceu:filter_casing'),
       '#': Pat.air()
     }
   }

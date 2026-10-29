@@ -78,16 +78,45 @@
     if (core) { rows[1] = 'R#R'; rows[2] = 'R#R' }
     return rows
   }
+  // QR-S3: dress(slices, wall, rule) rewrites plain wall cells (char `wall`) through rule(x, y, z, W, H, D) -> char or null. Row 0 is never touched.
+  function dress(slices, wall, rule) {
+    var D = slices.length
+    var H = slices[0].length
+    var W = slices[0][0].length
+    return slices.map(function (rows, z) {
+      return rows.map(function (row, y) {
+        if (y === 0) return row
+        var out = ''
+        for (var x = 0; x < W; x++) {
+          var ch = row.charAt(x)
+          var r = ch === wall ? rule(x, y, z, W, H, D) : null
+          out += r || ch
+        }
+        return out
+      })
+    })
+  }
+  // tower: frame posts on the four edges, then glass sight windows, tungstensteel pipe runs and clean casing in turn
+  function towerRule(x, y, z, W, H, D) {
+    if ((x === 0 || x === W - 1) && (z === 0 || z === D - 1)) return 'F'
+    var m = y % 3
+    if (m === 0) return 'W'
+    if (m === 1) return 'P'
+    return null
+  }
   const TOWER_SPEC = {
-    slices: [
+    slices: dress([
       towerSlice('XXX', 'XXX', 'XXX', false),
       towerSlice('XRX', null, null, true),
       towerSlice('XXX', 'RSR', 'RRR', false)
-    ],
+    ], 'R', towerRule),
     symbols: {
       S: Pat.controller(),
       X: cells(CLEAN, D.minCasings.tower, D.towerParts),
       R: Pat.block(CLEAN),
+      F: Pat.frame(['tungsten_steel']),
+      W: Pat.block('gtceu:fusion_glass'),
+      P: Pat.block('gtceu:tungstensteel_pipe_casing'),
       C: Pat.block(COIL),
       G: Pat.block(GEARBOX),
       '#': Pat.air()
@@ -123,12 +152,27 @@
     }
     return rows
   }
+  // dome: frame ribs every four cells and a frame ring at the shoulder, a two-row glass aperture band, glass roof windows
+  function stationRule(x, y, z, W, H, D) {
+    if (y <= 5) {
+      var corner = (x === 0 || x === 8) && (z === 0 || z === 8)
+      var idx = (x === 0 || x === 8) ? z : x
+      if (y === 5 || corner || idx % 4 === 0) return 'F'
+      if (y === 3 || y === 4) return 'W'
+      return null
+    }
+    if (y === 6) return 'F'
+    if (y === 7) return ((x === 2 || x === 6) && (z === 2 || z === 6)) ? 'F' : 'W'
+    return ((x === 3 || x === 5) && (z === 3 || z === 5)) ? 'F' : 'W'
+  }
   const STATION_SPEC = {
-    slices: [0, 1, 2, 3, 4, 5, 6, 7, 8].map(stationSlice),
+    slices: dress([0, 1, 2, 3, 4, 5, 6, 7, 8].map(stationSlice), 'C', stationRule),
     symbols: {
       S: Pat.controller(),
       X: cells(UV_CASING, D.minCasings.station, D.stationParts),
       C: Pat.block(UV_CASING),
+      F: Pat.frame(['tungsten_steel']),
+      W: Pat.block('gtceu:fusion_glass'),
       M: Pat.block(MIRROR),
       B: Pat.block(BENCH),
       '#': Pat.air()

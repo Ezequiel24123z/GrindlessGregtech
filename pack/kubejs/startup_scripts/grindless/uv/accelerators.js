@@ -128,11 +128,12 @@
             var corner = Math.abs(dx) === 10 && Math.abs(dz) === 10
             var midpoint = d === 10 && (dx === 0 || dz === 0)
             if (r === 0) ch = 'X'
-            else if (r === 4) ch = 'F'
+            else if (r === 4) ch = d === 10 ? 'R' : ((c + si) % 2 === 0 ? 'G' : 'F')
             else if (si === N - 1 && c === M && r === 2) ch = 'S'
             else if (d === 10 && r === 2) ch = (dz === 0 && dx !== 0) ? 'C' : '#'
             else if (d === 10 && (r === 1 || r === 3) && (corner || midpoint)) ch = 'D'
-            else ch = 'F'
+            else if (r === 2) ch = (c + si) % 2 === 0 ? 'G' : 'F'
+            else ch = (c + si) % 3 === 0 ? 'R' : 'F'
           } else if (dx === 0 && Math.abs(dz) >= 5) {
             ch = r === 2 ? 'T' : (r === 1 ? 'F' : ' ')
           }
@@ -159,9 +160,9 @@
           var ch
           var isWall = si === 0 || si === last || c === 0 || c === m.width - 1
           if (r === 0) ch = 'X'
-          else if (r === m.height - 1) ch = 'F'
+          else if (r === m.height - 1) ch = (wall && wall(r, si, c, m)) || 'F'
           else if (si === last && r === 1 && c === mid) ch = 'S'
-          else if (isWall) ch = (wall && wall(r, si, c)) || 'F'
+          else if (isWall) ch = (wall && wall(r, si, c, m)) || 'F'
           else ch = inner(r, si, c)
           row += ch
         }
@@ -177,8 +178,16 @@
     if (c === 4 && si === 4) return r === 1 ? 'W' : (r <= 9 ? 'T' : '#')
     return '#'
   }
-  function cellWall(r, si, c) {
-    return si === 0 && c === 4 && (r === 5 || r === 6) ? 'C' : null
+  function cellWall(r, si, c, m) {
+    if (si === 0 && c === 4 && (r === 5 || r === 6)) return 'C'
+    var cx = c === 0 || c === m.width - 1
+    var cz = si === 0 || si === m.depth - 1
+    if (cx && cz) return 'R'
+    if (r === m.height - 1) return (cx || cz) ? 'R' : ((c + si) % 2 === 0 ? 'G' : null)
+    if (r === 2 || r === 8) return 'R'
+    if (r >= 4 && r <= 6) return (c + si) % 2 === 0 ? 'G' : null
+    if (r === 3 || r === 7) return (c + si) % 4 === 1 ? 'T' : null
+    return null
   }
 
   // the trap: the bore along the axis (row 2, column 2) is free; the HTS solenoid rings it for slices 3-5, the electron cooler at slice 1
@@ -187,6 +196,17 @@
     if (si >= 3 && si <= 5) return 'M'
     if (si === 1) return 'T'
     return 'F'
+  }
+
+  function trapWall(r, si, c, m) {
+    var cx = c === 0 || c === m.width - 1
+    var cz = si === 0 || si === m.depth - 1
+    if (cx && cz) return 'R'
+    if (r === m.height - 1) return (cx || cz) ? 'R' : (si % 2 === 1 ? 'G' : null)
+    if (si % 4 === 0) return 'R'
+    if (r === 2) return 'G'
+    if (r === 3 && si % 2 === 1) return 'K'
+    return null
   }
 
   function partsOf(casing, extra) {
@@ -205,6 +225,8 @@
         Pat.part('output_hatch', { min: 1, max: 1 })
       ])),
       F: Pat.block(UV_CASING),
+      R: Pat.frame(['tungsten_steel']),
+      G: Pat.block('gtceu:fusion_glass'),
       D: Pat.block(COIL),
       C: Pat.block(CRYO, { min: 2 }),
       T: Pat.block(PIPE),
@@ -222,6 +244,8 @@
         Pat.part('output_hatch', { min: 1, max: 2 })
       ])),
       F: Pat.block(CRYOSTAT),
+      R: Pat.frame(['tungsten_steel']),
+      G: Pat.block('gtceu:fusion_glass'),
       W: Pat.block(TARGET),
       T: Pat.block(PIPE),
       C: Pat.block(CRYO, { min: 2 }),
@@ -229,7 +253,7 @@
     }
   }
   AC.machines.trap.spec = {
-    slices: shell(AC.machines.trap, trapInner, null),
+    slices: shell(AC.machines.trap, trapInner, trapWall),
     symbols: {
       S: Pat.controller(),
       X: Pat.oneOf.apply(null, partsOf(TRUSS, [
@@ -241,6 +265,9 @@
       ])),
       F: Pat.block(TRUSS),
       M: Pat.block(COIL),
+      R: Pat.frame(['tungsten_steel']),
+      G: Pat.block('gtceu:fusion_glass'),
+      K: Pat.block('gtceu:heatproof_machine_casing'),
       T: Pat.block(PIPE),
       '#': Pat.air()
     }

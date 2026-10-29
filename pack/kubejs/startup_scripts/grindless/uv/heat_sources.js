@@ -73,12 +73,44 @@
 
   const FLOOR_ROOF = 'RRRRR'
 
+  // QR-S3: dress(slices, wall, rule) rewrites plain wall cells (char `wall`) through rule(x, y, z, W, H, D) -> char or null. Row 0 is never touched.
+  function dress(slices, wall, rule) {
+    var D = slices.length
+    var H = slices[0].length
+    var W = slices[0][0].length
+    return slices.map(function (rows, z) {
+      return rows.map(function (row, y) {
+        if (y === 0) return row
+        var out = ''
+        for (var x = 0; x < W; x++) {
+          var ch = row.charAt(x)
+          var r = ch === wall ? rule(x, y, z, W, H, D) : null
+          out += r || ch
+        }
+        return out
+      })
+    })
+  }
+  // hot cell: frame posts and roof edges, a heatproof band, lead-glass windows, heatproof roof ribs
+  function cellRule(x, y, z, W, H, D) {
+    var onX = x === 0 || x === W - 1
+    var onZ = z === 0 || z === D - 1
+    if (onX && onZ) return 'F'
+    if (y === H - 1) {
+      if (onX || onZ) return 'F'
+      return z % 2 === 0 ? 'H' : null
+    }
+    if (y === 2) return 'H'
+    if (y === 3) return ((onX ? z : x) % 2 === 1) ? 'G' : null
+    return null
+  }
+
   function slice(interior) {
     return [FLOOR_ROOF].concat(interior.map(function (row) { return 'R' + row + 'R' }), [FLOOR_ROOF])
   }
 
   const SPEC = {
-    slices: [
+    slices: dress([
       ['XXXXX', 'RRRRR', 'RRRRR', 'RRRRR', 'RRRRR'],
       slice(['MM#', 'MM#', '###']),
       slice(['MM#', 'MM#', '###']),
@@ -86,11 +118,12 @@
       slice(['#HH', '#HH', '###']),
       slice(['#HH', '#HH', '###']),
       ['XXXXX', 'RGSGR', 'RRRRR', 'RRRRR', 'RRRRR']
-    ],
+    ], 'R', cellRule),
     symbols: {
       S: Pat.controller(),
       X: cells(),
       R: Pat.block(SHIELD),
+      F: Pat.frame([PRESS]),
       H: Pat.block(HEAT),
       G: Pat.block(GLASS),
       M: Pat.frame([PRESS]),

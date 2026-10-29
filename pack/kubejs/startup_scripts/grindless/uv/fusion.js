@@ -52,6 +52,23 @@
 
   // ---------------------------------------------------------------- pattern (slices back -> front, rows bottom -> top)
 
+  // QR-S3: torus-hall look. F frame posts and roof ring, K superconducting coil bands, G glass windows, C casing
+  function dress(x, y, z, edge) {
+    var last = SIZE - 1
+    var cx = x === 0 || x === last
+    var cz = z === 0 || z === last
+    if (y === last) {
+      if (cx || cz) return 'F'
+      return (x + z) % 2 === 0 ? 'G' : 'C'
+    }
+    if (!edge) return 'C'
+    if (cx && cz) return 'F'
+    if (y === 3 || y === 9) return 'K'
+    if (y === 2 || y === 10) return (x + z) % 2 === 0 ? 'F' : 'C'
+    if ((y === 4 || y === 8) && (x + z) % 3 !== 0) return 'G'
+    return 'C'
+  }
+
   function build() {
     var slices = []
     for (var z = 0; z < SIZE; z++) {
@@ -66,6 +83,7 @@
           else if (y === SIZE - 1 || edge) {
             c = 'C'
             if (y === RING_Y && edge) c = (z === 0 || z === SIZE - 1) ? EDGE.charAt(x) : EDGE.charAt(z)
+            else c = dress(x, y, z, edge)
           } else c = '#'
           row += c
         }
@@ -88,6 +106,9 @@
         Pat.part('output_bus', LF.parts.output_bus)
       ),
       C: Pat.block(CASING),
+      F: Pat.frame(['tungsten_steel']),
+      K: Pat.block('gtceu:superconducting_coil'),
+      G: Pat.block('gtceu:fusion_glass'),
       L: Pat.block(BEAM),
       '#': Pat.air()
     }
