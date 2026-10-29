@@ -87,7 +87,7 @@ test('support recipes: probe, casing, sample flask, machine crafting', () => {
   for (const id of ['grindless:assembler/neptune_flyby_probe', 'grindless:assembler/pressure_hull_casing', 'grindless:centrifuge/neptune_sample_flask']) {
     assert.ok(byId(id), id);
   }
-  for (const m of MACHINES) assert.ok(byId('grindless:crafting/' + m), m + ' crafting recipe');
+  for (const m of MACHINES) assert.ok(byId('grindless:assembly_line/' + m), m + ' crafting recipe');
 });
 
 test('the F1 ids are un-hidden and their obtain rule is gone', () => {

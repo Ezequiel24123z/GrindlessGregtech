@@ -184,8 +184,8 @@
     })
     ;['grindless:ice_giant_siphon/uranus_ices', 'grindless:ice_giant_siphon/diamond_rain', 'grindless:ice_giant_siphon/atmosphere_sample',
       'grindless:outer_flyby/triton_flyby', 'grindless:cryogenic_isotope_separation/uranus_deuterium', 'grindless:assembler/neptune_flyby_probe',
-      'grindless:assembler/pressure_hull_casing', 'grindless:centrifuge/neptune_sample_flask', 'grindless:crafting/ice_giant_siphon',
-      'grindless:crafting/slurry_separator', 'grindless:crafting/flyby_probe_bay'].forEach(function (id) {
+      'grindless:assembler/pressure_hull_casing', 'grindless:centrifuge/neptune_sample_flask', 'grindless:assembly_line/ice_giant_siphon',
+      'grindless:assembly_line/slurry_separator', 'grindless:assembly_line/flyby_probe_bay'].forEach(function (id) {
       check('support_recipe', byId(id) !== null, id)
     })
   }

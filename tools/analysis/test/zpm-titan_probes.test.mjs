@@ -92,7 +92,7 @@ test('the PICA heat shield has a use, the casing and the controllers have recipe
   const probe = byId('grindless:assembler/titan_entry_probe');
   assert.ok(probe && /pica_heat_shield/.test(JSON.stringify(probe.j.inputs.item)), 'probe assembler consumes the PICA shield');
   assert.ok(byId('grindless:assembler/probe_bay_casing'), 'casing recipe');
-  for (const m of MACHINES) assert.ok(byId('grindless:crafting/' + m), m + ' crafting recipe');
+  for (const m of MACHINES) assert.ok(byId('grindless:assembly_line/' + m), m + ' crafting recipe');
 });
 
 test('the F1 ids are un-hidden and their obtain rule is gone', () => {

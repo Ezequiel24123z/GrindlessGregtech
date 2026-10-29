@@ -103,38 +103,44 @@
     console.info(LOG + 'survey network recipes added: ' + (OB.recipes.length - OB.skipped.length))
   }
 
-  // ASSEMBLER: the observatory shell's casing (a multi-output recipe: the shell is about 1,100 blocks)
+  // ASSEMBLER: the observatory shell's casing (a multi-output recipe: the shell is about 1,100 blocks); a sapphire test mass (LuV) is
+  // its optical datum and soldering alloy seals the shell's PMT mounts
   function addCasing(event) {
-    var need = ['gtceu:laminated_glass', 'gtceu:zpm_sensor', 'gtceu:aluminium_plate', 'gtceu:sapphire_lens', 'grindless:photomultiplier_casing']
+    var need = ['gtceu:laminated_glass', 'gtceu:zpm_sensor', 'gtceu:aluminium_plate', 'gtceu:sapphire_lens', 'grindless:photomultiplier_casing', 'grindless:sapphire_test_mass']
     var missing = need.filter(function (id) { return !Item.exists(id) })
     if (missing.length > 0) {
       console.error(LOG + 'photomultiplier casing recipe skipped, unknown item(s): ' + missing.join(', '))
       return
     }
     event.recipes.gtceu.assembler('grindless:photomultiplier_casing')
-      .itemInputs('4x gtceu:laminated_glass', '1x gtceu:zpm_sensor', '4x gtceu:aluminium_plate', '2x gtceu:sapphire_lens')
+      .itemInputs('4x gtceu:laminated_glass', '1x gtceu:zpm_sensor', '4x gtceu:aluminium_plate', '2x gtceu:sapphire_lens', '1x grindless:sapphire_test_mass')
+      .inputFluids(Fluid.of('gtceu:soldering_alloy', 144))
       .circuit(1).itemOutputs('16x grindless:photomultiplier_casing').EUt(ZPM_VA).duration(200)
   }
 
-  // CRAFTING TABLE: hull + the machine's own parts + ZPM circuits
+  // ASSEMBLY LINE with scanner research: ZPM hull + 2 parts + 4 ZPM circuits + two domain parts + soldering alloy + lubricant
   function addCrafting(event) {
     var HULL = 'gtceu:zpm_machine_hull'
     var list = [
-      { id: 'gtceu:neutrino_observatory', pattern: ['CSC', 'SHS', 'CSC'], extra: { S: 'gtceu:zpm_sensor' } },
-      { id: 'gtceu:deep_space_network', pattern: ['CSC', 'EHS', 'CWC'],
-        extra: { S: 'gtceu:zpm_sensor', E: 'gtceu:zpm_emitter', W: 'gtceu:mercury_barium_calcium_cuprate_double_wire' } },
-      { id: 'gtceu:kuiper_survey_telescope', pattern: ['CSC', ' H ', 'CSC'], extra: { S: 'gtceu:zpm_sensor' } }
+      { id: 'gtceu:neutrino_observatory', parts: ['2x gtceu:zpm_sensor'], domain: ['2x grindless:photomultiplier_casing', '2x grindless:sapphire_test_mass'], research: 'grindless:photomultiplier_casing' },
+      { id: 'gtceu:deep_space_network', parts: ['gtceu:zpm_sensor', 'gtceu:zpm_emitter', '2x gtceu:mercury_barium_calcium_cuprate_double_wire'],
+        domain: ['2x grindless:sapphire_test_mass', '2x grindless:whipple_shield_casing'], research: 'grindless:station_truss_casing' },
+      { id: 'gtceu:kuiper_survey_telescope', parts: ['2x gtceu:zpm_sensor'], domain: ['2x grindless:night_sky_radiator', '2x grindless:heliostat_mirror'], research: 'grindless:asteroid_regolith_casing' }
     ]
     list.forEach(function (m) {
-      var keys = { C: '#gtceu:circuits/zpm', H: HULL }
-      Object.keys(m.extra).forEach(function (k) { keys[k] = m.extra[k] })
-      var parts = Object.keys(keys).map(function (k) { return keys[k] }).filter(function (v) { return v.charAt(0) !== '#' })
+      var inputs = [HULL].concat(m.parts, ['4x #gtceu:circuits/zpm'], m.domain)
+      var parts = inputs.concat([m.research, m.id]).map(function (v) { return v.replace(/^\d+x /, '') }).filter(function (v) { return v.charAt(0) !== '#' })
       var missing = parts.filter(function (id) { return !Item.exists(id) })
       if (missing.length > 0) {
         console.error(LOG + 'survey network crafting of ' + m.id + ' skipped, unknown item(s): ' + missing.join(', '))
         return
       }
-      event.recipes.gtceu.shaped(m.id, m.pattern, keys).id('grindless:crafting/' + m.id.split(':')[1])
+      var b = event.recipes.gtceu.assembly_line('grindless:' + m.id.split(':')[1])
+      inputs.forEach(function (x) { b.itemInputs(x) })
+      b.inputFluids(Fluid.of('gtceu:soldering_alloy', 1152), Fluid.of('gtceu:lubricant', 1000))
+      b.itemOutputs(m.id)
+      b.scannerResearch(Item.of(m.research))
+      b.EUt(ZPM_VA).duration(1200)
     })
   }
 

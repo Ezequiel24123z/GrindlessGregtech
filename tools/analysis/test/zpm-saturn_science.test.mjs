@@ -83,7 +83,7 @@ test('outputs fit the consumers: brine, nanograins, interior model, Uranus chart
 test('the cartridge has an Earth bootstrap and an aerogel path; machines and copies have crafting recipes', () => {
   assert.ok(byId('grindless:assembler/aerogel_cartridge'), 'aerogel cartridge');
   assert.ok(byId('grindless:assembler/aerogel_cartridge_first'), 'first cartridge from silica dust');
-  for (const m of MACHINES) assert.ok(byId('grindless:crafting/' + m), m + ' crafting recipe');
+  for (const m of MACHINES) assert.ok(byId('grindless:assembly_line/' + m), m + ' crafting recipe');
   assert.ok(byId('grindless:crafting/saturn_interior_model_copy'));
   assert.ok(byId('grindless:crafting/uranus_transfer_chart_copy'));
 });

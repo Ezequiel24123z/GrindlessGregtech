@@ -102,51 +102,10 @@ All rows of the iv table, the launch_road rows (composite_autoclave, engine_test
 
 All rows of the luv table left the baseline. LuV controllers, parts and components moved to the assembly line (grindless:assembly_line/NAME) with soldering alloy plus lubricant and domain inputs; belt vein samples and radiation_vault_casing are assemblers with fluids.
 
-### zpm
+### zpm (QR-R3, done)
 
-| Output | Class | Now | Missing | File:line |
-|---|---|---|---|---|
-| `grindless:aerogel_cartridge` | component | assembler | C-COMPLEX | zpm/saturn_science.js:26 |
-| `grindless:aerogel_cartridge` | component | assembler | C-COMPLEX | zpm/saturn_science.js:110 |
-| `grindless:cryostat_casing` | part | assembler | P-DOMAIN P-FLUID | zpm/magnet_works.js:14 |
-| `grindless:naquadria_containment_casing` | part | assembler | P-DOMAIN P-FLUID | zpm/naquadria.js:15 |
-| `grindless:neptune_flyby_probe` | component | assembler | C-COMPLEX | zpm/uranus.js:37 |
-| `grindless:photographic_plate` | component | assembler | C-COMPLEX | observatory/recipes.js:32 |
-| `grindless:photomultiplier_casing` | part | assembler | P-DOMAIN P-FLUID | zpm/observatory.js:108 |
-| `grindless:pressure_hull_casing` | part | assembler | P-FLUID | zpm/uranus.js:140 |
-| `grindless:probe_bay_casing` | part | assembler | P-FLUID | zpm/titan_probes.js:112 |
-| `grindless:ring_sail_net` | component | assembler | C-COMPLEX | zpm/saturn_siphon.js:30 |
-| `grindless:scoop_head` | component | assembler | C-COMPLEX | zpm/saturn_siphon.js:29 |
-| `grindless:titan_entry_probe` | component | assembler | C-COMPLEX | zpm/titan_probes.js:28 |
-| `aerogel_works` | controller | crafting | C-DISTINCT C-DOMAIN C-FORM C-RESEARCH | zpm/outer_chemistry.js:115 |
-| `assembly_hall` | controller | assembler | C-DISTINCT C-DOMAIN C-FORM C-RESEARCH | zpm/mega_assembly_hall.js:3 |
-| `deep_space_network` | controller | crafting | C-DOMAIN C-FORM C-RESEARCH | zpm/observatory.js:124 |
-| `diamond_lattice_fab` | controller | crafting | C-DISTINCT C-DOMAIN C-FORM C-RESEARCH | zpm/qubits.js:180 |
-| `direct_energy_converter` | controller | crafting | C-DISTINCT C-DOMAIN C-FORM C-RESEARCH | zpm/fusion.js:36 |
-| `entry_probe_bay` | controller | crafting | C-DISTINCT C-DOMAIN C-FORM C-RESEARCH | zpm/titan_probes.js:130 |
-| `europium_reductor` | controller | crafting | C-DISTINCT C-DOMAIN C-FORM C-RESEARCH | zpm/europium.js:166 |
-| `flyby_probe_bay` | controller | crafting | C-DISTINCT C-DOMAIN C-FORM C-RESEARCH | zpm/uranus.js:174 |
-| `gas_giant_siphon` | controller | crafting | C-DISTINCT C-DOMAIN C-FORM C-RESEARCH | zpm/saturn_siphon.js:6 |
-| `ice_giant_siphon` | controller | crafting | C-DISTINCT C-DOMAIN C-FORM C-RESEARCH | zpm/uranus.js:6 |
-| `ion_implanter` | controller | crafting | C-DOMAIN C-FORM C-RESEARCH | zpm/qubits.js:181 |
-| `isotope_column` | controller | crafting | C-DISTINCT C-DOMAIN C-FORM C-RESEARCH | zpm/saturn_siphon.js:152 |
-| `kuiper_survey_telescope` | controller | crafting | C-DISTINCT C-DOMAIN C-FORM C-RESEARCH | zpm/observatory.js:126 |
-| `methane_pyrolyser` | controller | crafting | C-DISTINCT C-DOMAIN C-FORM C-RESEARCH | zpm/outer_chemistry.js:113 |
-| `naquadah_fuel_works` | controller | crafting | C-DISTINCT C-DOMAIN C-FORM C-RESEARCH | zpm/naquadria.js:203 |
-| `naquadria_magnet_works` | controller | crafting | C-DISTINCT C-DOMAIN C-FORM C-RESEARCH | zpm/magnet_works.js:17 |
-| `naquadria_refinery` | controller | crafting | C-DISTINCT C-DOMAIN C-FORM C-RESEARCH | zpm/naquadria.js:202 |
-| `neutrino_observatory` | controller | crafting | C-DISTINCT C-DOMAIN C-FORM C-RESEARCH | zpm/observatory.js:123 |
-| `optical_observatory` | controller | crafting | C-DOMAIN C-FORM C-RESEARCH | observatory/crafting.js:20 |
-| `plasma_quench_caster` | controller | crafting | C-DISTINCT C-DOMAIN C-FORM C-RESEARCH | zpm/fusion.js:36 |
-| `plume_sampler` | controller | crafting | C-DISTINCT C-DOMAIN C-FORM C-RESEARCH | zpm/saturn_science.js:119 |
-| `qubit_fab` | controller | crafting | C-DISTINCT C-DOMAIN C-FORM C-RESEARCH | zpm/qubits.js:182 |
-| `radio_telescope` | controller | crafting | C-DOMAIN C-FORM C-RESEARCH | observatory/crafting.js:21 |
-| `ring_harvester` | controller | crafting | C-DISTINCT C-DOMAIN C-FORM C-RESEARCH | zpm/saturn_siphon.js:153 |
-| `ring_seismometer` | controller | crafting | C-DISTINCT C-DOMAIN C-FORM C-RESEARCH | zpm/saturn_science.js:120 |
-| `slurry_separator` | controller | crafting | C-DISTINCT C-DOMAIN C-FORM C-RESEARCH | zpm/uranus.js:173 |
-| `steam_observatory` | controller | crafting | C-DOMAIN C-FORM C-RESEARCH | observatory/crafting.js:20 |
-| `tholin_reformer` | controller | crafting | C-DISTINCT C-DOMAIN C-FORM C-RESEARCH | zpm/titan_probes.js:131 |
-| `vent_bioreactor` | controller | crafting | C-DISTINCT C-DOMAIN C-FORM C-RESEARCH | zpm/outer_chemistry.js:114 |
+All zpm rows left the baseline except four observatory/ rows the gate mis-tiers: `grindless:photographic_plate` (an LV assembler), `optical_observatory`, `radio_telescope` and `steam_observatory`. `recipe_quality.json` has `eraTier.observatory = 7`, but observatory/ has no era; those recipes are LV to HV. Proposed fix for the integrator: drop the `"observatory": 7` entry so the tier is inferred. ZPM controllers (europium reductor, plasma caster, energy converter, magnet works, naquadria refinery and fuel works, assembly hall, three outer-chemistry plants, three qubit machines, three survey instruments, two Saturn science, three siphon, two Titan, three Uranus) moved to `grindless:assembly_line/NAME` with scanner research of an earlier-era item, two domain parts, soldering alloy and lubricant. Casings and probes (cryostat, naquadria containment, photomultiplier, probe bay, pressure hull) and components (aerogel cartridge x2, scoop head, ring sail net, titan entry probe, Neptune flyby probe) stay assemblers with a fluid and domain items.
+
 
 ### uv
 

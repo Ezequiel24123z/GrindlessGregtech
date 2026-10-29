@@ -176,10 +176,14 @@
   Q.skipped = []
   Q.clashes = []
 
+  // ASSEMBLY LINE with scanner research: hull + the machine's ZPM parts + 4 ZPM circuits + two domain parts + soldering alloy + lubricant
   Q.crafting = [
-    { id: 'grindless:crafting/diamond_lattice_fab', output: 'gtceu:diamond_lattice_fab', pattern: ['CEC', ' H ', 'CCC'], keys: { C: '#gtceu:circuits/zpm', E: 'gtceu:zpm_emitter', H: 'gtceu:zpm_machine_hull' } },
-    { id: 'grindless:crafting/ion_implanter', output: 'gtceu:ion_implanter', pattern: ['CEC', 'FHD', 'CCC'], keys: { C: '#gtceu:circuits/zpm', D: PLATE, E: 'gtceu:zpm_emitter', F: 'gtceu:zpm_field_generator', H: 'gtceu:zpm_machine_hull' } },
-    { id: 'grindless:crafting/qubit_fab', output: 'gtceu:qubit_fab', pattern: ['CSC', ' H ', 'CSC'], keys: { C: '#gtceu:circuits/zpm', S: 'gtceu:zpm_sensor', H: 'gtceu:zpm_machine_hull' } }
+    { id: 'grindless:assembly_line/diamond_lattice_fab', output: 'gtceu:diamond_lattice_fab', parts: ['2x gtceu:zpm_emitter'],
+      domain: ['grindless:platinum_electrode', 'grindless:sapphire_test_mass'], research: 'grindless:solar_wing_panel' },
+    { id: 'grindless:assembly_line/ion_implanter', output: 'gtceu:ion_implanter', parts: ['gtceu:zpm_emitter', 'gtceu:zpm_field_generator'],
+      domain: ['grindless:magnetic_bearing', 'grindless:whipple_shield_casing'], research: 'grindless:coilgun_coil_casing' },
+    { id: 'grindless:assembly_line/qubit_fab', output: 'gtceu:qubit_fab', parts: ['2x gtceu:zpm_sensor'],
+      domain: ['grindless:luv_smes_cell', 'grindless:anchor_harpoon'], research: 'grindless:hss_s_drill_bit' }
   ]
 
   function keysOf(r) {
@@ -286,14 +290,19 @@
 
   function addCrafting(event) {
     Q.crafting.forEach(function (c) {
-      var ids = [c.output]
-      Object.keys(c.keys).forEach(function (k) { if (c.keys[k].charAt(0) !== '#') ids.push(c.keys[k]) })
+      var inputs = ['gtceu:zpm_machine_hull'].concat(c.parts, ['4x #gtceu:circuits/zpm'], c.domain.map(function (d) { return '2x ' + d }))
+      var ids = inputs.concat([c.output, c.research]).map(function (v) { return v.replace(/^\d+x /, '') }).filter(function (v) { return v.charAt(0) !== '#' })
       var missing = ids.filter(function (id) { return !Item.exists(id) })
       if (missing.length > 0) {
         console.error(LOG + 'qubit chain crafting ' + c.id + ' skipped, unknown item(s): ' + missing.join(', '))
         return
       }
-      event.recipes.gtceu.shaped(c.output, c.pattern, c.keys).id(c.id)
+      var b = event.recipes.gtceu.assembly_line(c.id.replace('assembly_line/', ''))
+      inputs.forEach(function (x) { b.itemInputs(x) })
+      b.inputFluids(Fluid.of('gtceu:soldering_alloy', 1152), Fluid.of('gtceu:lubricant', 1000))
+      b.itemOutputs(c.output)
+      b.scannerResearch(Item.of(c.research))
+      b.EUt(ZPM_VA).duration(1200)
     })
   }
 
