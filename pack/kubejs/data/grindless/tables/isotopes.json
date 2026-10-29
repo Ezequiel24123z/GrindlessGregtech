@@ -148,6 +148,38 @@
             { "id": "gtceu:nickel_chloride_dust", "count": 1 }
           ],
           "fluidsOut": []
+        },
+        {
+          "_": "UXV-A1: fermium-257 out of the Es/Fm cut's fermium (line 19); the Fm-255 rest goes back to stock, never voided",
+          "name": "fermium_257",
+          "circuit": 10,
+          "eut": 1966080,
+          "duration": 6000,
+          "itemsIn": [{ "id": "gtceu:fermium_dust", "count": 4 }],
+          "kept": [],
+          "charge": [],
+          "fluidsIn": [],
+          "itemsOut": [
+            { "id": "gtceu:fermium_257_dust", "count": 1 },
+            { "id": "gtceu:fermium_dust", "count": 3 }
+          ],
+          "fluidsOut": []
+        },
+        {
+          "_": "UXV-A1: tungsten-184 (the Mk6 casing and line 38); W-182 and W-186 go back to stock as tungsten dust",
+          "name": "tungsten_184",
+          "circuit": 13,
+          "eut": 1966080,
+          "duration": 4000,
+          "itemsIn": [{ "id": "gtceu:tungsten_dust", "count": 4 }],
+          "kept": [],
+          "charge": [],
+          "fluidsIn": [],
+          "itemsOut": [
+            { "id": "gtceu:tungsten_184_dust", "count": 1 },
+            { "id": "gtceu:tungsten_dust", "count": 3 }
+          ],
+          "fluidsOut": []
         }
       ]
     },
