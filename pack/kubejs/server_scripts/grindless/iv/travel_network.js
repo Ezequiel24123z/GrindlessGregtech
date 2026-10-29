@@ -214,7 +214,8 @@
 
     var craft = event.recipes.gtceu.assembler(R.craftingBuilderId)
     TN.rtgCrafting.itemsIn.forEach(function (e) { craft.itemInputs(e.n + 'x ' + e.id) })
-    craft.itemOutputs('1x ' + R.machine)
+    craft.inputFluids(Fluid.of('gtceu:soldering_alloy', 144))
+      .itemOutputs('1x ' + R.machine)
       .EUt(TN.rtgCrafting.eut)
       .duration(TN.rtgCrafting.duration)
     return true

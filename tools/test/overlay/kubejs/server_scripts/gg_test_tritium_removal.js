@@ -22,7 +22,7 @@
 //                         110,080 EU in all, paid exactly at an IV EU/t, and the night price is exactly half
 //     night_info          the type's EMI data line reads the night EU/t
 //     sun_curve           the facility's sunIsDown: the sun is down from day time 12,786 to 23,214 (the cryogenic plant's)
-//     controller_recipe   grindless:crafting/tritium_removal_facility gives the controller from its parts (the cryogenic plant and GTM's EV
+//     controller_recipe   grindless:assembler/tritium_removal_facility gives the controller from its parts (the cryogenic plant and GTM's EV
 //                         electrolyzer among them)
 //     tritium_balance     NOTE: the reactor's heavy-water cores against this recipe: tritium an hour from a full reactor
 //   in the world (band X 12032-12095, Z 0-15: the Moon at Y 198-214, or above its ground if that is higher; the Overworld at Y 98-112
@@ -79,7 +79,7 @@
   var MACHINE = 'gtceu:tritium_removal_facility'
   var TYPE = 'gtceu:detritiation'
   var RECIPE_ID = 'grindless:detritiation/tritiated_heavy_water'
-  var CRAFTING = 'grindless:crafting/tritium_removal_facility'
+  var CRAFTING = 'grindless:assembler/tritium_removal_facility'
   var FREEZER_STAGE = 'gtceu:vacuum_freezer/liquid_oxygen'
   var REMOVED_STAGE = 'gtceu:centrifuge/deuterium_separation'
 

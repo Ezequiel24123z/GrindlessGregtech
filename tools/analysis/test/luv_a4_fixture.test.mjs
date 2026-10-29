@@ -922,7 +922,7 @@ test('every item, block and fluid id it uses is in the native dump exactly or, n
   const code = fs.readFileSync(FIXTURE, 'utf8').split('\n').map((l) => l.replace(/^\s*\/\/.*$/, '')).join('\n');
   const named = [...new Set([...code.matchAll(/'((?:gtceu|grindless|minecraft|gcyr):[a-z0-9_./]+)'/g)].map((m) => m[1]))].filter((id) => !/[_/]$/.test(id));
   // the controller's crafting recipe id (server_scripts/grindless/luv/hts_magnet_works.js publishes it; mw_recipes reads it live)
-  const other = new Set([EARTH, ORBIT, MW.recipeType, 'grindless:crafting/hts_magnet_works']);
+  const other = new Set([EARTH, ORBIT, MW.recipeType, 'grindless:assembly_line/hts_magnet_works']);
   named.forEach((id) => { if (!other.has(id)) (fluids.has(id) ? fluids : items).add(id); });
   assert.deepEqual(named.filter((id) => /[/.]/.test(id) && !other.has(id)), [], 'no other recipe or definition id is written in the fixture');
   assert.equal(MW.recipeType, 'gtceu:magnet_winding');

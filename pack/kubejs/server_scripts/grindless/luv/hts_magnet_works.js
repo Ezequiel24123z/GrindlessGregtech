@@ -14,7 +14,7 @@
 //   subset of another's can hide it. The recipes of the type are checked against each other at load (the circuit and the charge count as
 //   ingredients); a clash is logged as an error.
 //   crafting               the controller (luv.md, "Controller"): LuV hull + 2 LuV motors + LuV sensor (the quench detector) + 4 LuV
-//                          circuits, in a crafting grid (grindless:crafting/hts_magnet_works, GTM's shaped recipe).
+//                          circuits, in the assembly line (grindless:assembly_line/hts_magnet_works).
 //
 // Destinations: the HTS coil is GTM's superconducting coil block (the Mk1's fusion casings and coils); the SMES cell is the wireless
 // network's LuV cell (it goes in a Wireless Energy Tower); the coilgun coil casings build the coilgun probe launcher (Ganymede); the
@@ -38,7 +38,7 @@
   var MOTOR = 'gtceu:luv_electric_motor'
   var SENSOR = 'gtceu:luv_sensor'
   var CONTROLLER_PARTS = [HULL, MOTOR, SENSOR, CONTROLLER]
-  MW.craftingRecipe = 'grindless:crafting/hts_magnet_works'
+  MW.craftingRecipe = 'grindless:assembly_line/hts_magnet_works'
   MW.craftingParts = CONTROLLER_PARTS
 
   function io() {
@@ -205,12 +205,11 @@
       console.error(LOG + 'HTS magnet works controller recipe skipped, unknown item(s): ' + missing.join(', '))
       return
     }
-    event.recipes.gtceu.shaped(CONTROLLER, ['CSC', 'MHM', 'C C'], {
-      C: '#gtceu:circuits/luv',
-      S: SENSOR,
-      M: MOTOR,
-      H: HULL
-    }).id(MW.craftingRecipe)
+    event.recipes.gtceu.assembly_line('grindless:hts_magnet_works')
+      .itemInputs(HULL, SENSOR, '2x ' + MOTOR, '4x #gtceu:circuits/luv', '2x grindless:platinum_electrode', '2x grindless:sintered_regolith')
+      .inputFluids(Fluid.of('gtceu:soldering_alloy', 576), Fluid.of('gtceu:lubricant', 500))
+      .itemOutputs(CONTROLLER)
+      .EUt(30720).duration(600)
   }
 
   // an uncaught error here would stop KubeJS from running the recipe handlers of the scripts that load after this one

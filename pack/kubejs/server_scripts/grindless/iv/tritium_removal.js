@@ -18,8 +18,8 @@
 //                        the lunar night with every radiator open to the sky), read by the EMI line of the type.
 //                        The type has only this recipe, so GTM's lookup cannot hide it (one recipe per ingredient path).
 //   crafting             the controller (iv.md, "Controller", with the orchestrator's change): IV hull + cryogenic plant + EV electrolyzer
-//                        + 2 IV electric pumps + 4 IV circuits, in a crafting grid (grindless:crafting/tritium_removal_facility, GTM's shaped
-//                        recipe). GTM's IV electrolyzer needs osmium wire, which only comes from Mercury: the facility must not wait for
+//                        + 2 IV electric pumps + 4 IV circuits + sintered regolith + night-sky radiators + soldering alloy and helium, made in the
+//                        assembler (grindless:assembler/tritium_removal_facility). GTM's IV electrolyzer needs osmium wire, which only comes from Mercury: the facility must not wait for
 //                        Mercury (the hot cell did the same).
 //
 // Balance: the reactor's heavy-water cores (IV-A2) turn 5 mB of heavy water into tritiated heavy water per channel and 400-tick cycle,
@@ -95,7 +95,7 @@
   var ELECTROLYZER = 'gtceu:ev_electrolyzer'
   var PUMP = 'gtceu:iv_electric_pump'
   var CONTROLLER_PARTS = [CONTROLLER, HULL, PLANT, ELECTROLYZER, PUMP]
-  TRF.craftingRecipe = 'grindless:crafting/tritium_removal_facility'
+  TRF.craftingRecipe = 'grindless:assembler/tritium_removal_facility'
   TRF.craftingParts = CONTROLLER_PARTS
 
   function addRun(event) {
@@ -142,14 +142,11 @@
       console.error(LOG + 'tritium removal facility controller recipe skipped, unknown item(s): ' + missing.join(', '))
       return
     }
-    // GTM shaped: lowercase letters are tool symbols, so ingredient keys are uppercase
-    event.recipes.gtceu.shaped(CONTROLLER, ['CKC', 'PHP', 'CEC'], {
-      C: '#gtceu:circuits/iv',
-      K: PLANT,
-      P: PUMP,
-      H: HULL,
-      E: ELECTROLYZER
-    }).id(TRF.craftingRecipe)
+    event.recipes.gtceu.assembler('grindless:tritium_removal_facility')
+      .itemInputs(HULL, PLANT, ELECTROLYZER, '2x ' + PUMP, '4x #gtceu:circuits/iv', '4x grindless:sintered_regolith', '2x grindless:night_sky_radiator')
+      .inputFluids(Fluid.of('gtceu:soldering_alloy', 288), Fluid.of('gtceu:helium', 1000))
+      .itemOutputs(CONTROLLER)
+      .EUt(1920).duration(600)
   }
 
   // an uncaught error here would stop KubeJS from running the recipe handlers of the scripts that load after this one

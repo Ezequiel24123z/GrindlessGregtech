@@ -105,7 +105,7 @@ function runRecipes(h) {
   };
   const event = {
     originalRecipes: { values: () => h.originals },
-    recipes: { gtceu: { assembler: (id) => builder(id, 'assembler'), mega_chemical_complex: (id) => builder(id, 'complex') } },
+    recipes: { gtceu: { assembly_line: (id) => builder(id, 'assembler'), mega_chemical_complex: (id) => builder(id, 'complex') } },
   };
   h.recipeHandlers.forEach((cb) => cb(event));
   return out;
@@ -323,8 +323,9 @@ test('controller recipe: 4 coil chemical plants, 16 LuV chemical reactors, 4 LuV
   assert.equal(out.assembler.length, 1);
   const r = out.assembler[0];
   assert.equal(r.id, h.G.megaChemicalComplex.crafting);
-  assert.deepEqual(plain(r.itemInputs), ['4x gtceu:coil_chemical_plant', '16x gtceu:luv_chemical_reactor', '4x #gtceu:circuits/luv', '16x gtceu:polytetrafluoroethylene_frame']);
+  assert.deepEqual(plain(r.itemInputs), ['4x gtceu:coil_chemical_plant', '16x gtceu:luv_chemical_reactor', '4x #gtceu:circuits/luv', '16x gtceu:polytetrafluoroethylene_frame', '2x grindless:ion_exchange_resin', '2x grindless:contact_catalyst']);
   assert.deepEqual(plain(r.itemOutputs), ['gtceu:mega_chemical_complex']);
+  assert.deepEqual(fluidMap(r.inputFluids), { 'gtceu:soldering_alloy': 1152, 'gtceu:lubricant': 1000 });
   assert.ok(r.eut > 0 && r.duration > 0);
   assert.deepEqual(plain(h.errors), []);
 });

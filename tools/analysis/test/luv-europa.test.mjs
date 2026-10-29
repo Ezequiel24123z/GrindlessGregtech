@@ -1,4 +1,4 @@
-// LuV-B8 (docs/eras/luv.md, machines 17 and 18): the cryobot and the algae bioreactor (startup_scripts/grindless/luv/europa.js and its
+﻿// LuV-B8 (docs/eras/luv.md, machines 17 and 18): the cryobot and the algae bioreactor (startup_scripts/grindless/luv/europa.js and its
 // server script), Europa's brine and its processing, and the bacteria cut. The pack's scripts run in the static stand-in
 // (lib/kubejs_static.mjs). Every id the recipes and patterns name is pinned to a native registry (power-quests-1): the stand-in accepts
 // any id, so a naming guess would only fail in game.
@@ -23,8 +23,8 @@ const E = G.europa;
 const plain = (x) => JSON.parse(JSON.stringify(x));
 const byId = new Map(run.docs.recipes.recipes.map((r) => [r.i, r]));
 const RECIPES = ['grindless:vein_drilling/luv/cryobot_ocean_sample', 'grindless:vein_drilling/luv/cryobot_brine', 'grindless:bioreactor/luv/algae',
-  'grindless:bioreactor/luv/europan_culture', 'grindless:centrifuge/europan_brine_separation', 'grindless:assembler/melt_head',
-  'grindless:assembler/cryobot_probe', 'grindless:crafting/cryobot', 'grindless:crafting/algae_bioreactor'];
+  'grindless:bioreactor/luv/europan_culture', 'grindless:centrifuge/europan_brine_separation', 'grindless:assembly_line/melt_head',
+  'grindless:assembly_line/cryobot_probe', 'grindless:assembly_line/cryobot', 'grindless:assembly_line/algae_bioreactor'];
 const ours = RECIPES.map((id) => byId.get(id));
 
 const itemOf = (e) => {
@@ -189,11 +189,12 @@ test('every id B8 names is in the pinned native registry, not a naming guess the
     'minecraft:packed_ice', 'minecraft:blue_ice', 'gtceu:white_lamp', 'gtceu:black_borderless_lamp', 'gtceu:tungsten_steel_frame',
   ]);
   const nativeFluids = new Set(['gtceu:hydrogen_peroxide', 'gtceu:hydrogen', 'gtceu:oxygen', 'gtceu:biomass', 'gtceu:bacteria',
-    'gtceu:carbon_dioxide', 'minecraft:water']);
+    'gtceu:carbon_dioxide', 'minecraft:water', 'gtceu:soldering_alloy', 'gtceu:lubricant']);
   // ours: the controllers and magnesium sulfate (this package), A1's items and brine, IV's RTG pellet
   const registered = new Set(['gtceu:cryobot', 'gtceu:algae_bioreactor', 'gtceu:magnesium_sulfate_dust', 'grindless:cryobot_probe',
     'grindless:melt_head', 'grindless:europan_ocean_sample', 'grindless:chondritic_extract', 'grindless:rtg_pellet',
-    'grindless:sulfur_concrete_casing', 'grindless:radiation_vault_casing']);
+    'grindless:sulfur_concrete_casing', 'grindless:radiation_vault_casing', 'grindless:platinum_gauze', 'grindless:zircaloy_cladding_tube',
+    'grindless:ion_exchange_resin']);
   for (const id of registered) assert.ok(run.registry.items.has(id) || run.registry.machines.has(id), `${id} is not registered by the pack`);
   assert.ok(run.registry.fluids.has('gtceu:europan_brine'));
   const problems = [];

@@ -25,7 +25,7 @@
 //                             plates + a tungsten steel frame + 1,296 mB concrete, 7,680 EU/t): it is already what iv.md asks for.
 //   vein samples              crafting table: empty vein probe + the two most common raw ores of the vein, for every vein of
 //                             veins_venus.json, veins_mercury.json and veins_leach.json (the pair is unique among every vein of the
-//                             pack). Recipe ids grindless:crafting/vein_sample/<vein>.
+//                             pack). Recipe ids grindless:assembler/vein_sample/<vein>.
 //
 //   world generation          GTCEuServerEvents.oreVeins (it only changes chunks generated from now on):
 //                               - Venus (gcyr:venus, GCYR's 'venus' layer) gets veins_venus.json: GTM's naquadah vein, moved from the End
@@ -248,7 +248,8 @@
       console.error(LOG + 'platinum gauze skipped, unknown item(s): ' + gauzeItems.join(', '))
     } else {
       event.recipes.gtceu.assembler('grindless:platinum_gauze')
-        .itemInputs('16x gtceu:fine_platinum_wire', '2x gtceu:fine_rhodium_wire')
+        .itemInputs('16x gtceu:fine_platinum_wire', '2x gtceu:fine_rhodium_wire', '2x grindless:ion_exchange_resin', '2x grindless:platinum_electrode')
+        .inputFluids(Fluid.of('gtceu:hydrochloric_acid', 1000), Fluid.of('gtceu:soldering_alloy', 144))
         .itemOutputs(ids.platinumGauze)
         .EUt(1920).duration(200)
       added.push('platinum gauze')
@@ -282,8 +283,12 @@
     var pairs = []
     TABLES.forEach(function (t) {
       allTables()[t.name].forEach(function (vein) {
-        var id = 'grindless:crafting/vein_sample/' + vein.id
-        event.shapeless(vein.sample, [PROBE, vein.samplePair[0], vein.samplePair[1]]).id(id)
+        var id = 'grindless:assembler/vein_sample/' + vein.id
+        event.recipes.gtceu.assembler('grindless:vein_sample/' + vein.id)
+          .itemInputs(PROBE, vein.samplePair[0], vein.samplePair[1])
+          .inputFluids(Fluid.of('gtceu:distilled_water', 250))
+          .itemOutputs(vein.sample)
+          .EUt(480).duration(200)
         made.push(id)
         pairs.push(vein.id + ' = ' + vein.samplePair.join(' + '))
       })

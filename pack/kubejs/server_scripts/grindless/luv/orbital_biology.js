@@ -46,14 +46,16 @@
       .itemOutputs('gtceu:neuro_processing_unit')
       .cleanroom(CleanroomType.CLEANROOM).EUt(30720).duration(1563)
     ;[
-      ['zero_g_crystal_grower', 'gtceu:luv_electric_pump', 'gtceu:luv_sensor'],
-      ['hydroponic_ring', 'gtceu:luv_electric_motor', null],
-      ['organoid_lab', 'gtceu:luv_robot_arm', 'gtceu:luv_sensor']
+      ['zero_g_crystal_grower', ['gtceu:luv_electric_pump', 'gtceu:luv_sensor'], ['2x grindless:platinum_gauze', '2x grindless:contact_catalyst']],
+      ['hydroponic_ring', ['2x gtceu:luv_electric_motor'], ['2x grindless:ion_exchange_resin', '2x grindless:platinum_gauze']],
+      ['organoid_lab', ['gtceu:luv_robot_arm', 'gtceu:luv_sensor'], ['2x grindless:ion_exchange_resin', '2x grindless:zircaloy_cladding_tube']]
     ].forEach(function (r) {
-      var keys = { C: '#gtceu:circuits/luv', P: r[1], H: 'gtceu:luv_machine_hull' }
-      if (r[2]) keys.S = r[2]
-      event.recipes.gtceu.shaped('gtceu:' + r[0], [r[2] ? 'CSC' : 'C C', 'PHP', 'CwC'], keys)
-        .id('grindless:crafting/' + r[0])
-    })
-  })
+      var b = event.recipes.gtceu.assembly_line('grindless:' + r[0])
+      b.itemInputs('gtceu:luv_machine_hull')
+      r[1].forEach(function (s) { b.itemInputs(s) })
+      b.itemInputs('4x #gtceu:circuits/luv')
+      r[2].forEach(function (s) { b.itemInputs(s) })
+      b.inputFluids(Fluid.of('gtceu:soldering_alloy', 576), Fluid.of('gtceu:lubricant', 500))
+        .itemOutputs('gtceu:' + r[0]).EUt(30720).duration(600)
+    })  })
 })()

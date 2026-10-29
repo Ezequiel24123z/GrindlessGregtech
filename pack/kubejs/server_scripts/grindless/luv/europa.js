@@ -28,8 +28,8 @@
   E.recipes = [
     'grindless:vein_drilling/luv/cryobot_ocean_sample', 'grindless:vein_drilling/luv/cryobot_brine',
     'grindless:bioreactor/luv/algae', 'grindless:bioreactor/luv/europan_culture', 'grindless:bioreactor/uhv/far_red_algae',
-    'grindless:centrifuge/europan_brine_separation', 'grindless:assembler/melt_head', 'grindless:assembler/cryobot_probe',
-    'grindless:crafting/cryobot', 'grindless:crafting/algae_bioreactor'
+    'grindless:centrifuge/europan_brine_separation', 'grindless:assembly_line/melt_head', 'grindless:assembly_line/cryobot_probe',
+    'grindless:assembly_line/cryobot', 'grindless:assembly_line/algae_bioreactor'
   ]
 
   ServerEvents.recipes(function (event) {
@@ -82,21 +82,27 @@
       .outputFluids(Fluid.of('minecraft:water', 1000))
       .EUt(120).duration(160)
 
-    event.recipes.gtceu.assembler('grindless:melt_head')
-      .itemInputs('4x gtceu:tungsten_carbide_plate', '2x gtceu:hsss_plate', 'gtceu:iv_electric_pump')
+    event.recipes.gtceu.assembly_line('grindless:melt_head')
+      .itemInputs('4x gtceu:tungsten_carbide_plate', '2x gtceu:hsss_plate', 'gtceu:iv_electric_pump', '2x grindless:platinum_gauze',
+        '2x grindless:zircaloy_cladding_tube')
+      .inputFluids(Fluid.of('gtceu:soldering_alloy', 144), Fluid.of('gtceu:lubricant', 250))
       .itemOutputs('grindless:melt_head')
       .EUt(7680).duration(400)
-    event.recipes.gtceu.assembler('grindless:cryobot_probe')
+    event.recipes.gtceu.assembly_line('grindless:cryobot_probe')
       .itemInputs('grindless:melt_head', 'grindless:rtg_pellet', 'gtceu:luv_sensor', '8x gtceu:normal_optical_pipe', '4x gtceu:hsss_plate')
+      .inputFluids(Fluid.of('gtceu:soldering_alloy', 144), Fluid.of('gtceu:lubricant', 250))
       .itemOutputs('grindless:cryobot_probe')
       .EUt(7680).duration(600)
 
-    event.recipes.gtceu.shaped('gtceu:cryobot', ['CSC', 'PHP', 'CDC'], {
-      C: '#gtceu:circuits/luv', S: 'gtceu:luv_sensor', P: 'gtceu:luv_electric_pump', H: 'gtceu:luv_machine_hull',
-      D: 'gtceu:tungstensteel_gearbox'
-    }).id('grindless:crafting/cryobot')
-    event.recipes.gtceu.shaped('gtceu:algae_bioreactor', ['C C', 'PHP', 'CwC'], {
-      C: '#gtceu:circuits/luv', P: 'gtceu:luv_electric_pump', H: 'gtceu:luv_machine_hull'
-    }).id('grindless:crafting/algae_bioreactor')
-  })
+    var LINE = [Fluid.of('gtceu:soldering_alloy', 576), Fluid.of('gtceu:lubricant', 500)]
+    function line(name, machine, items) {
+      var b = event.recipes.gtceu.assembly_line('grindless:' + name)
+      items.forEach(function (s) { b.itemInputs(s) })
+      LINE.forEach(function (f) { b.inputFluids(f) })
+      b.itemOutputs(machine).EUt(30720).duration(600)
+    }
+    line('cryobot', 'gtceu:cryobot', ['gtceu:luv_machine_hull', 'gtceu:luv_sensor', 'gtceu:luv_electric_pump', 'gtceu:tungstensteel_gearbox',
+      '4x #gtceu:circuits/luv', '2x grindless:cryobot_probe', '2x grindless:melt_head'])
+    line('algae_bioreactor', 'gtceu:algae_bioreactor', ['gtceu:luv_machine_hull', '2x gtceu:luv_electric_pump', '4x #gtceu:circuits/luv',
+      '2x grindless:melt_head', '2x grindless:ion_exchange_resin'])  })
 })()

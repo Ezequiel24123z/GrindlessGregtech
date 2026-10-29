@@ -15,7 +15,7 @@
 //   Lookup safety: every recipe of the type is checked against every other at load: none may take a subset of another's ingredients
 //   (the programmed circuit counts as one). A clash is logged as an error.
 //   assembler               the controller (luv.md: LuV hull + 2 LuV pumps + LuV sensor + 4 LuV circuits), made in the IV assembler at
-//                           7,680 EU/t, grindless:assembler/biofoundry. Eight items, but the pack's controllers of this size are
+//                           7,680 EU/t, grindless:assembly_line/biofoundry (soldering alloy + lubricant, 2 resin, 2 gauze). Eight items, but the pack's controllers of this size are
 //                           assembled (the hot cell, the naquadah plant).
 //
 // Destinations: collagen, gelatin and agar stay in the chain (gelatin and agar; the medium); the diluted sulfuric acid goes back to
@@ -48,7 +48,7 @@
   var PUMP = 'gtceu:luv_electric_pump'
   var SENSOR = 'gtceu:luv_sensor'
   var CONTROLLER_PARTS = [HULL, PUMP, SENSOR, CONTROLLER]
-  BF.craftingRecipe = 'grindless:assembler/biofoundry'
+  BF.craftingRecipe = 'grindless:assembly_line/biofoundry'
   BF.craftingParts = CONTROLLER_PARTS
 
   function io() {
@@ -290,8 +290,9 @@
       console.error(LOG + 'biofoundry controller recipe skipped, unknown item(s): ' + missing.join(', '))
       return
     }
-    event.recipes.gtceu.assembler('grindless:biofoundry')
-      .itemInputs(HULL, '2x ' + PUMP, SENSOR, '4x #gtceu:circuits/luv')
+    event.recipes.gtceu.assembly_line('grindless:biofoundry')
+      .itemInputs(HULL, '2x ' + PUMP, SENSOR, '4x #gtceu:circuits/luv', '2x grindless:ion_exchange_resin', '2x grindless:platinum_gauze')
+      .inputFluids(Fluid.of('gtceu:soldering_alloy', 576), Fluid.of('gtceu:lubricant', 500))
       .itemOutputs(CONTROLLER)
       .EUt(7680).duration(600)
   }
