@@ -24,7 +24,7 @@
   EO.table = 'kubejs/data/grindless/tables/earth_orbit.json'
   // item name -> stack size; every item carries two tooltip lines (tooltip.grindless.<name>.0 and .1)
   EO.items = {
-    cnt_sock: { stack: 16 }, cnt_densified_yarn: { stack: 64 }, cnt_twisted_yarn: { stack: 64 }, cnt_coiled_muscle: { stack: 64 },
+    cnt_sock: { stack: 16 }, cnt_ribbon: { stack: 64 }, cnt_annealed_yarn: { stack: 64 }, cnt_sized_yarn: { stack: 64 }, cnt_densified_yarn: { stack: 64 }, cnt_twisted_yarn: { stack: 64 }, cnt_coiled_muscle: { stack: 64 },
     gallium_oxide_dust: { stack: 64 }, tgg_hydroxide_cake: { stack: 64 }, tgg_boule: { stack: 16 }, tgg_rod: { stack: 64 }, tgg_polished_rod: { stack: 64 },
     fused_silica_tube: { stack: 64 }, hollow_capillaries: { stack: 64 }, stacked_preform: { stack: 16 }, caned_preform: { stack: 16 }, drawn_hollow_fibre: { stack: 64 },
     mcp_lead_glass: { stack: 64 }, etchable_core_tube: { stack: 64 }, mcp_multifibre: { stack: 64 }, mcp_boule: { stack: 16 }, mcp_plate: { stack: 64 },
@@ -44,7 +44,7 @@
       casing: PHOTONIC, texture: PHOTONIC_TEXTURE,
       // items in: two isotopes or a sensor and rock, kept lasers or cavity, the circuit; out: the model, the survey or the gravimeter
       maxIO: { itemsIn: 6, itemsOut: 1, fluidsIn: 2, fluidsOut: 1 },
-      width: 5, height: 5, depth: 7
+      width: 9, height: 9, depth: 9
     },
     station: {
       name: 'entanglement_station',
@@ -55,7 +55,7 @@
       casing: PHOTONIC, texture: PHOTONIC_TEXTURE,
       // items in: source, memory, QD source, detectors, fibre and the circuit; out: the repeater node; fluids in: superfluid helium for the memory
       maxIO: { itemsIn: 7, itemsOut: 1, fluidsIn: 2, fluidsOut: 0 },
-      width: 5, height: 5, depth: 7
+      width: 15, height: 10, depth: 7
     }
   }
 

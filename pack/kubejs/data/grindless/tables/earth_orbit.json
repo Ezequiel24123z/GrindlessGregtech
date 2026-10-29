@@ -38,8 +38,11 @@
     "chemical_reactor": {
       "recipes": [
         { "name": "cnt_densify", "circuit": 0, "eut": 122880, "duration": 300,
-          "itemsIn": [{ "id": "grindless:cnt_sock", "count": 1 }], "kept": [], "fluidsIn": [{ "id": "gtceu:ethanol", "amount": 500 }], "charge": [],
+          "itemsIn": [{ "id": "grindless:cnt_ribbon", "count": 1 }], "kept": [], "fluidsIn": [{ "id": "gtceu:ethanol", "amount": 500 }], "charge": [],
           "itemsOut": [{ "id": "grindless:cnt_densified_yarn", "count": 1 }, { "id": "gtceu:iron_dust", "count": 1 }], "fluidsOut": [] },
+        { "name": "cnt_sizing", "circuit": 0, "eut": 122880, "duration": 300,
+          "itemsIn": [{ "id": "grindless:cnt_annealed_yarn", "count": 1 }], "kept": [], "fluidsIn": [{ "id": "gtceu:epoxy", "amount": 72 }], "charge": [],
+          "itemsOut": [{ "id": "grindless:cnt_sized_yarn", "count": 1 }], "fluidsOut": [] },
         { "name": "gallium_oxide", "circuit": 0, "eut": 122880, "duration": 200,
           "itemsIn": [{ "id": "gtceu:gallium_dust", "count": 2 }], "kept": [], "fluidsIn": [{ "id": "gtceu:oxygen", "amount": 3000 }], "charge": [],
           "itemsOut": [{ "id": "grindless:gallium_oxide_dust", "count": 1 }], "fluidsOut": [] },
@@ -68,6 +71,9 @@
     "electric_blast_furnace": {
       "temp": 3600,
       "recipes": [
+        { "name": "cnt_anneal", "circuit": 0, "eut": 491520, "duration": 400,
+          "itemsIn": [{ "id": "grindless:cnt_densified_yarn", "count": 1 }], "kept": [], "fluidsIn": [], "charge": [{ "id": "gtceu:argon", "amount": 1000 }],
+          "itemsOut": [{ "id": "grindless:cnt_annealed_yarn", "count": 1 }], "fluidsOut": [] },
         { "name": "tgg_calcine", "circuit": 0, "eut": 491520, "duration": 400,
           "itemsIn": [{ "id": "grindless:tgg_hydroxide_cake", "count": 1 }], "kept": [], "fluidsIn": [{ "id": "gtceu:oxygen", "amount": 1000 }], "charge": [],
           "itemsOut": [{ "id": "gtceu:tgg_dust", "count": 1 }], "fluidsOut": [{ "id": "minecraft:water", "amount": 500 }] },
@@ -106,6 +112,9 @@
     },
     "lathe": {
       "recipes": [
+        { "name": "cnt_ribbon_draw", "circuit": 0, "eut": 122880, "duration": 200,
+          "itemsIn": [{ "id": "grindless:cnt_sock", "count": 1 }], "kept": [], "fluidsIn": [], "charge": [],
+          "itemsOut": [{ "id": "grindless:cnt_ribbon", "count": 2 }, { "id": "gtceu:carbon_dust", "count": 1 }], "fluidsOut": [] },
         { "name": "tgg_polish", "circuit": 0, "eut": 122880, "duration": 200,
           "itemsIn": [{ "id": "grindless:tgg_rod", "count": 1 }], "kept": [], "fluidsIn": [], "charge": [],
           "itemsOut": [{ "id": "grindless:tgg_polished_rod", "count": 1 }, { "id": "gtceu:tgg_dust", "count": 1 }], "fluidsOut": [] },
@@ -137,11 +146,11 @@
     },
     "assembler": {
       "recipes": [
-        { "name": "cnt_twist", "circuit": 0, "eut": 491520, "duration": 200,
-          "itemsIn": [{ "id": "grindless:cnt_densified_yarn", "count": 4 }], "kept": [], "fluidsIn": [{ "id": "gtceu:ethanol", "amount": 250 }], "charge": [],
+        { "name": "cnt_twist", "circuit": 1, "eut": 491520, "duration": 200,
+          "itemsIn": [{ "id": "grindless:cnt_sized_yarn", "count": 4 }, { "id": "gtceu:molybdenum_foil", "count": 1 }], "kept": [], "fluidsIn": [{ "id": "gtceu:ethanol", "amount": 250 }], "charge": [],
           "itemsOut": [{ "id": "grindless:cnt_twisted_yarn", "count": 1 }], "fluidsOut": [] },
-        { "name": "cnt_coil", "circuit": 0, "eut": 491520, "duration": 200,
-          "itemsIn": [{ "id": "grindless:cnt_twisted_yarn", "count": 2 }, { "id": "gtceu:polytetrafluoroethylene_foil", "count": 1 }], "kept": [], "fluidsIn": [], "charge": [],
+        { "name": "cnt_coil", "circuit": 2, "eut": 491520, "duration": 200,
+          "itemsIn": [{ "id": "grindless:cnt_twisted_yarn", "count": 2 }, { "id": "gtceu:polytetrafluoroethylene_foil", "count": 1 }], "kept": [], "fluidsIn": [{ "id": "gtceu:epoxy", "amount": 72 }], "charge": [],
           "itemsOut": [{ "id": "grindless:cnt_coiled_muscle", "count": 1 }], "fluidsOut": [] },
         { "name": "uev_robot_arm", "circuit": 0, "eut": 491520, "duration": 400,
           "itemsIn": [{ "id": "gtceu:uv_robot_arm", "count": 1 }, { "id": "grindless:cnt_coiled_muscle", "count": 4 }, { "id": "grindless:uev_sensor", "count": 1 }, { "id": "grindless:uev_emitter", "count": 1 }],

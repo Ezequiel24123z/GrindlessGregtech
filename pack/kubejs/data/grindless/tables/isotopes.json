@@ -154,6 +154,21 @@
     "chemical_reactor": {
       "recipes": [
         {
+          "name": "pu244_plating_ampoule",
+          "circuit": 27,
+          "eut": 1920,
+          "duration": 200,
+          "itemsIn": [
+            { "id": "gtceu:plutonium_244_oxide_dust", "count": 1 },
+            { "id": "gtceu:glass_tube", "count": 1 }
+          ],
+          "kept": [],
+          "charge": [],
+          "fluidsIn": [{ "id": "gtceu:nitric_acid", "amount": 250 }],
+          "itemsOut": [{ "id": "grindless:pu244_plating_ampoule", "count": 1 }],
+          "fluidsOut": []
+        },
+        {
           "name": "calcite_to_calcium_chloride",
           "circuit": 20,
           "eut": 480,
@@ -245,6 +260,21 @@
     "mixer": {
       "recipes": [
         {
+          "name": "ca48_crucible_load",
+          "circuit": 21,
+          "eut": 1920,
+          "duration": 200,
+          "itemsIn": [
+            { "id": "gtceu:calcium_48_dust", "count": 4 },
+            { "id": "gtceu:tantalum_foil", "count": 2 }
+          ],
+          "kept": [],
+          "charge": [],
+          "fluidsIn": [],
+          "itemsOut": [{ "id": "grindless:ca48_crucible_load", "count": 1 }],
+          "fluidsOut": []
+        },
+        {
           "name": "mox_blend",
           "circuit": 20,
           "eut": 1920,
@@ -269,7 +299,7 @@
           "eut": 1920,
           "duration": 200,
           "itemsIn": [
-            { "id": "gtceu:calcium_48_dust", "count": 4 },
+            { "id": "grindless:ca48_crucible_load", "count": 1 },
             { "id": "gtceu:platinum_foil", "count": 1 }
           ],
           "kept": [],
@@ -299,7 +329,7 @@
           "eut": 1920,
           "duration": 200,
           "itemsIn": [
-            { "id": "gtceu:plutonium_244_oxide_dust", "count": 1 },
+            { "id": "grindless:pu244_plating_ampoule", "count": 1 },
             { "id": "gtceu:aluminium_foil", "count": 2 }
           ],
           "kept": [],

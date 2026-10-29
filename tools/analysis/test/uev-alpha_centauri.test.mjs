@@ -39,8 +39,8 @@ test('every recipe has a unique name, positive EU/t and duration; circuits are u
       assert.ok(GTM.has(type) ? r.circuit >= 0 : r.circuit >= 1 && r.circuit <= 32, `${type}/${r.name}: circuit`);
     }
   }
-  // 19 of UEV-B2's own and UIV-A7's pulsar_timing c3 repeater_discipline
-  assert.equal(mine.length, 20);
+  // 19 of UEV-B2's own and UIV-A7's pulsar_timing c3 repeater_discipline, plus QR-R8's scoop winding and impregnation
+  assert.equal(mine.length, 22);
 });
 
 test('the dimension allowlist: the three own types are flagged and the script applies the Alpha Centauri orbit', () => {
@@ -130,7 +130,7 @@ test('the three machines register their types and shell with an output hatch for
 
 test('every item has a name, tooltips in en_us and es_es form, and a texture; the scoop tooltip says the yield is fiction', () => {
   const names = [...startup.matchAll(/(\w+): \{ stack: \d+ \}/g)].map((m) => m[1]);
-  assert.equal(names.length, 12);
+  assert.equal(names.length, 14);
   for (const n of names) {
     assert.ok(lang.includes(`['${n}',`), `lang ${n}`);
     assert.ok(fs.existsSync(path.join(kube, 'assets', 'grindless', 'textures', 'item', `${n}.png`)), `texture ${n}`);

@@ -10,7 +10,7 @@
 //   gtceu:assembler / chemical_reactor   the rows of types.<type> (id grindless:<type>/<name>): the beam, the wheel, the capsule, the
 //                          foils, the nitrate -> dust conversions, phosgene and polycarbonate. Circuits 20 and up so GTM's own recipes
 //                          cannot hide a row.
-//   crafting               each controller: UHV hull + 2 UV field generators + UV sensor + 4 UHV circuits, grindless:crafting/<machine>.
+//   assembly line          the controller(s): station research, UEV-era circuits, 3 domain parts of the line, soldering alloy and lubricant, grindless:assembly_line/<machine>.
 //
 // Published for the smoke test: global.grindless.superheavy.recipes [{ type, name, recipeId, ... }], .skipped, .clashes, .controllerRecipes.
 // Rhino: var + function inside every callback that runs more than once (this Rhino throws "redeclaration of var").

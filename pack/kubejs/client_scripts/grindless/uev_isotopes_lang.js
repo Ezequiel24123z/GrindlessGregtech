@@ -21,6 +21,12 @@
         ['item', 'irradiated_plutonium_target',
             ['Irradiated Plutonium Target', 'A plutonium target out of the high flux reactor, hot and rich in plutonium-244.', 'Dissolve it in the transuranium facility.'],
             ['Blanco de plutonio irradiado', 'Un blanco de plutonio fuera del reactor de alto flujo, caliente y rico en plutonio-244.', 'Disuélvelo en la instalación de transuránidos.']],
+        ['item', 'ca48_crucible_load',
+            ['Calcium-48 Crucible Load', 'Calcium-48 metal packed in a tantalum-foil liner, so the hot calcium never touches the oven wall.', 'Pressed on platinum foil into an oven charge.'],
+            ['Carga de crisol de calcio-48', 'Calcio-48 met\u00e1lico empaquetado en un forro de l\u00e1mina de tantalio, para que el calcio caliente no toque la pared del horno.', 'Se prensa sobre l\u00e1mina de platino como carga de horno.']],
+        ['item', 'pu244_plating_ampoule',
+            ['Plutonium-244 Plating Ampoule', 'Plutonium-244 oxide dissolved in nitric acid inside a sealed glass tube, ready for electrodeposition.', 'Plated onto aluminium foil as a target.'],
+            ['Ampolla de deposici\u00f3n de plutonio-244', '\u00d3xido de plutonio-244 disuelto en \u00e1cido n\u00edtrico dentro de un tubo de vidrio sellado, listo para electrodeposici\u00f3n.', 'Se deposita sobre l\u00e1mina de aluminio como blanco.']],
         ['item', 'plutonium_244_target',
             ['Plutonium-244 Target', 'Plutonium-244 oxide electrodeposited on aluminium foil.', 'Feeds the superheavy facility.'],
             ['Blanco de plutonio-244', 'Óxido de plutonio-244 electrodepositado sobre lámina de aluminio.', 'Alimenta la instalación de superpesados.']]
