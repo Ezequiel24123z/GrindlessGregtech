@@ -1,0 +1,5 @@
+{
+  "loop_mega_chemical_complex": { "sounds": [ { "name": "grindless:loop_mega_chemical_complex", "volume": 0.7, "attenuation_distance": 32, "stream": false } ] },
+  "loop_observatory": { "sounds": [ { "name": "grindless:loop_observatory", "volume": 0.6, "attenuation_distance": 24, "stream": false } ] },
+  "loop_plasma_quench_caster": { "sounds": [ { "name": "grindless:loop_plasma_quench_caster", "volume": 0.7, "attenuation_distance": 32, "stream": false } ] }
+}
