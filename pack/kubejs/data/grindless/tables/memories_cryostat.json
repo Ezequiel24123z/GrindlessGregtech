@@ -5,14 +5,14 @@
       "dataKey": "grindless_spectral_hole_burning",
       "recipes": [
         {
-          "name": "six_hour_slab", "circuit": 0, "eut": 31457280, "duration": 1200,
-          "itemsIn": [{ "id": "grindless:eu151_yso_slab", "count": 1 }, { "id": "grindless:cold_plate", "count": 1 }],
+          "name": "six_hour_slab", "circuit": 1, "eut": 31457280, "duration": 1200,
+          "itemsIn": [{ "id": "grindless:eu151_yso_slab", "count": 1 }],
           "charge": [{ "id": "gtceu:superfluid_helium", "amount": 1000 }],
           "itemsOut": [{ "id": "grindless:six_hour_memory_slab", "count": 1 }]
         },
         {
-          "name": "telecom_slab", "circuit": 0, "eut": 31457280, "duration": 1200,
-          "itemsIn": [{ "id": "grindless:er_yso_slab", "count": 1 }, { "id": "grindless:cold_plate", "count": 1 }],
+          "name": "telecom_slab", "circuit": 2, "eut": 31457280, "duration": 1200,
+          "itemsIn": [{ "id": "grindless:er_yso_slab", "count": 1 }],
           "charge": [{ "id": "gtceu:superfluid_helium", "amount": 1000 }],
           "itemsOut": [{ "id": "grindless:telecom_memory_slab", "count": 1 }]
         }
@@ -105,8 +105,8 @@
           "fluidsOut": [{ "id": "gtceu:he3_he4_mixture", "amount": 200 }]
         },
         {
-          "name": "p_si_processor", "circuit": 0, "eut": 31457280, "duration": 1200,
-          "itemsIn": [{ "id": "grindless:p_si_die", "count": 1 }, { "id": "gtceu:gold_plate", "count": 1 }],
+          "name": "p_si_processor", "circuit": 3, "eut": 31457280, "duration": 1200,
+          "itemsIn": [{ "id": "grindless:p_si_die", "count": 1 }],
           "kept": [{ "id": "grindless:mk_cryostat_module", "count": 1 }],
           "itemsOut": [{ "id": "grindless:p_si_processor", "count": 1 }]
         }

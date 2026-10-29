@@ -86,7 +86,7 @@
           "itemsIn": [{ "id": "grindless:plasma_sprayed_tile", "count": 1 },           { "id": "gtceu:tungsten_steel_plate", "count": 2 }, { "id": "gtceu:rhea_plate", "count": 1 }], "kept": [], "charge": [],
           "fluidsIn": [{ "id": "gtceu:argon", "amount": 500 }], "itemsOut": [{ "id": "grindless:first_wall_tile", "count": 1 }], "fluidsOut": [] },
         { "name": "li_sn_armoured_tile", "circuit": 0, "eut": 30720, "duration": 200,
-          "itemsIn": [{ "id": "grindless:first_wall_tile", "count": 1 }, { "id": "gtceu:tungsten_foil", "count": 1 }], "kept": [], "charge": [],
+          "itemsIn": [{ "id": "grindless:first_wall_tile", "count": 1 }, { "id": "gtceu:tungsten_foil", "count": 1 }, { "id": "gtceu:rhea_plate", "count": 1 }], "kept": [], "charge": [],
           "fluidsIn": [{ "id": "gtceu:li_sn", "amount": 144 }],
           "itemsOut": [{ "id": "grindless:li_sn_armoured_tile", "count": 1 }], "fluidsOut": [] },
         { "name": "uiv_fusion_casing_wall", "circuit": 0, "eut": 122880, "duration": 300,

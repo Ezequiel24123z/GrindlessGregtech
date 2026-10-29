@@ -1,8 +1,9 @@
 // priority: -24549
-// UIV foundation recipes (package UIV-F1): only the hull and the four hatches every UIV machine needs. gtceu:uiv_machine_casing is GTM's own
+// UIV foundation recipes (package UIV-F1, raised by QR-R7): only the hull and the four hatches every UIV machine needs, all assembly lines behind
+// station research. gtceu:uiv_machine_casing is GTM's own
 // block; its assembly-line recipe is UEV's gate (uev/gate.js, researched with the pulsar navigation chart), so it is not made twice here.
-// Every other UIV recipe is made by the package that makes its parts. Ids: startup_scripts/grindless/uiv/foundation.js. All run in GTM's
-// assembler at UEV voltage (V[UEV] = 8,388,608 EU/t, one tier under the UIV hull they make).
+// Every other UIV recipe is made by the package that makes its parts. Ids: startup_scripts/grindless/uiv/foundation.js. All run at
+// UEV voltage (V[UEV] = 8,388,608 EU/t, one tier under the UIV hull they make).
 ServerEvents.recipes(function (event) {
   const UEV_EUT = 8388608
 
@@ -24,29 +25,38 @@ ServerEvents.recipes(function (event) {
   if (CASING == null || SINGLE == null || PLATE == null) {
     skip('uiv_machine_hull', [CASING == null ? 'gtceu:uiv_machine_casing' : null, SINGLE == null ? 'metallic hydrogen single cable' : null, PLATE == null ? 'gtceu:rhea_plate' : null].filter(Boolean).join(', '))
   } else {
-    event.recipes.gtceu.assembler('grindless:uiv_machine_hull')
-      .itemInputs(CASING, '2x ' + SINGLE, '4x ' + PLATE)
-      .itemOutputs('gtceu:uiv_machine_hull')
-      .EUt(UEV_EUT)
-      .duration(50)
+    var hb = event.recipes.gtceu.assembly_line('grindless:uiv_machine_hull')
+    hb.itemInputs(CASING)
+    hb.itemInputs('2x ' + SINGLE)
+    hb.itemInputs('4x ' + PLATE)
+    hb.itemInputs('2x grindless:ffkm_seal')
+    hb.inputFluids(Fluid.of('gtceu:soldering_alloy', 576), Fluid.of('gtceu:lubricant', 500), Fluid.of('gtceu:neutronium', 144))
+    hb.itemOutputs('gtceu:uiv_machine_hull')
+    hb.stationResearch(function (r) { return r.researchStack(Item.of('grindless:ffkm_seal')).CWUt(64).EUt(7864320) })
+    hb.EUt(UEV_EUT).duration(250)
   }
 
-  // 2 A hatches take two single cables, the 16 A ones two quadruple cables; the circuit number keeps the four apart
-  function hatch(name, cable, circuit, duration) {
-    if (HULL == null || cable == null) {
-      skip(name, HULL == null ? 'gtceu:uiv_machine_hull' : 'metallic hydrogen cable')
+  // 2 A hatches take two single cables, the 16 A ones two quadruple cables; each is its own assembly line with its own research
+  function hatch(name, cable, research, plateCount, duration) {
+    if (HULL == null || cable == null || !Item.exists(research) || !Item.exists('grindless:ffkm_seal')) {
+      skip(name, HULL == null ? 'gtceu:uiv_machine_hull' : cable == null ? 'metallic hydrogen cable' : research)
       return
     }
-    event.recipes.gtceu.assembler('grindless:' + name)
-      .itemInputs(HULL, '2x ' + cable)
-      .circuit(circuit)
-      .itemOutputs('gtceu:' + name)
-      .EUt(UEV_EUT)
-      .duration(duration)
+    var b = event.recipes.gtceu.assembly_line('grindless:' + name)
+    b.itemInputs(HULL)
+    b.itemInputs('2x ' + cable)
+    b.itemInputs(plateCount + 'x ' + PLATE)
+    b.itemInputs('2x #gtceu:circuits/uiv')
+    b.itemInputs('4x grindless:ffkm_seal')
+    b.itemInputs('2x grindless:uiv_sensor')
+    b.inputFluids(Fluid.of('gtceu:soldering_alloy', 1152), Fluid.of('gtceu:lubricant', 1000), Fluid.of('gtceu:neutronium', 288))
+    b.itemOutputs('gtceu:' + name)
+    b.stationResearch(function (r) { return r.researchStack(Item.of(research)).CWUt(64).EUt(7864320) })
+    b.EUt(UEV_EUT).duration(duration * 5)
   }
 
-  hatch('uiv_energy_input_hatch', SINGLE, 1, 100)
-  hatch('uiv_energy_output_hatch', SINGLE, 2, 100)
-  hatch('uiv_energy_input_hatch_16a', QUADRUPLE, 3, 200)
-  hatch('uiv_energy_output_hatch_16a', QUADRUPLE, 4, 200)
+  hatch('uiv_energy_input_hatch', SINGLE, 'grindless:uiv_electric_motor', 4, 100)
+  hatch('uiv_energy_output_hatch', SINGLE, 'grindless:uiv_electric_pump', 4, 100)
+  hatch('uiv_energy_input_hatch_16a', QUADRUPLE, 'grindless:uiv_robot_arm', 8, 200)
+  hatch('uiv_energy_output_hatch_16a', QUADRUPLE, 'grindless:uiv_conveyor_module', 8, 200)
 })

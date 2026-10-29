@@ -107,13 +107,6 @@
           "itemsOut": [ { "id": "grindless:droplet_collector", "count": 1 } ]
         },
         {
-          "name": "matrioshka_node", "circuit": 0, "eut": 1966080, "duration": 400,
-          "_why": "UIV-A10 line 21: two metallised C-12 plates and a tungsten plate make a computing node block.",
-          "itemsIn": [ { "id": "grindless:c12_metallised_plate", "count": 2 }, { "id": "gtceu:tungsten_plate", "count": 1 }, { "id": "gtceu:rhea_plate", "count": 1 } ],
-          "fluidsIn": [ { "id": "gtceu:argon", "amount": 250 } ],
-          "itemsOut": [ { "id": "grindless:matrioshka_node", "count": 1 } ]
-        },
-        {
           "name": "tpv_segment", "circuit": 0, "eut": 1966080, "duration": 300,
           "_why": "UIV-A10 line 37: four TPV tiles and gold plates make a segment.",
           "itemsIn": [ { "id": "grindless:tpv_tile", "count": 4 }, { "id": "gtceu:gold_plate", "count": 2 }, { "id": "gtceu:titanium_plate", "count": 1 } ],
@@ -121,25 +114,11 @@
           "itemsOut": [ { "id": "grindless:tpv_segment", "count": 1 } ]
         },
         {
-          "name": "matrioshka_tpv_shell", "circuit": 0, "eut": 1966080, "duration": 400,
-          "_why": "UIV-A10 line 37: four segments and tungsten plates make a TPV shell block.",
-          "itemsIn": [ { "id": "grindless:tpv_segment", "count": 4 }, { "id": "gtceu:tungsten_plate", "count": 2 }, { "id": "gtceu:gold_plate", "count": 1 } ],
-          "fluidsIn": [ { "id": "gtceu:polybenzimidazole", "amount": 144 } ],
-          "itemsOut": [ { "id": "grindless:matrioshka_tpv_shell", "count": 1 } ]
-        },
-        {
           "name": "aqfp_bond", "circuit": 0, "eut": 1966080, "duration": 300,
           "_why": "UIV-A10 line 41: an AQFP die is bonded to a glass interposer.",
           "itemsIn": [ { "id": "grindless:aqfp_die", "count": 1 }, { "id": "grindless:glass_interposer", "count": 1 }, { "id": "gtceu:niobium_ingot", "count": 1 } ],
           "fluidsIn": [ { "id": "gtceu:helium", "amount": 250 } ],
           "itemsOut": [ { "id": "grindless:aqfp_module", "count": 1 } ]
-        },
-        {
-          "name": "logic_tile_block", "circuit": 0, "eut": 1966080, "duration": 400,
-          "_why": "UIV-A10 line 41: four AQFP modules and niobium make a logic tile block.",
-          "itemsIn": [ { "id": "grindless:aqfp_module", "count": 4 }, { "id": "gtceu:niobium_ingot", "count": 2 }, { "id": "gtceu:tungsten_foil", "count": 2 } ],
-          "fluidsIn": [ { "id": "gtceu:helium", "amount": 500 } ],
-          "itemsOut": [ { "id": "grindless:matrioshka_logic_tile", "count": 1 } ]
         },
         {
           "name": "schottky_die", "circuit": 0, "eut": 1966080, "duration": 300,
@@ -154,13 +133,6 @@
           "itemsIn": [ { "id": "grindless:hfo2_passivated_crystal", "count": 1 }, { "id": "gtceu:tungsten_foil", "count": 2 }, { "id": "gtceu:gold_plate", "count": 1 } ],
           "fluidsIn": [ { "id": "gtceu:argon", "amount": 250 } ],
           "itemsOut": [ { "id": "grindless:selective_emitter", "count": 1 } ]
-        },
-        {
-          "name": "emitter_shell", "circuit": 0, "eut": 1966080, "duration": 400,
-          "_why": "UIV-A10 line 46: four selective emitters and titanium plates make an emitter shell block.",
-          "itemsIn": [ { "id": "grindless:selective_emitter", "count": 4 }, { "id": "gtceu:titanium_plate", "count": 2 }, { "id": "gtceu:gold_plate", "count": 1 } ],
-          "fluidsIn": [ { "id": "gtceu:polybenzimidazole", "amount": 144 } ],
-          "itemsOut": [ { "id": "grindless:matrioshka_emitter_shell", "count": 1 } ]
         }
       ]
     },
@@ -220,6 +192,34 @@
           "itemsIn": [ { "id": "grindless:diamond_schottky_die", "count": 4 }, { "id": "gtceu:tungsten_plate", "count": 4 }, { "id": "gtnn:optical_mainframe", "count": 1 } ],
           "fluidsIn": [ { "id": "gtceu:lubricant", "amount": 1000 } ],
           "itemsOut": [ { "id": "grindless:rad_hard_controller", "count": 1 } ]
+        },
+        {
+          "name": "matrioshka_node", "circuit": 0, "eut": 1966080, "duration": 800, "station": "grindless:c12_metallised_plate",
+          "_why": "UIV-A10 line 21: metallised C-12 plates, tungsten and rhea plate are assembled into a computing node block, behind station research.",
+          "itemsIn": [ { "id": "grindless:c12_metallised_plate", "count": 4 }, { "id": "gtceu:tungsten_plate", "count": 2 }, { "id": "gtceu:rhea_plate", "count": 2 }, { "id": "gtceu:tungsten_foil", "count": 2 } ],
+          "fluidsIn": [ { "id": "gtceu:argon", "amount": 500 }, { "id": "gtceu:lubricant", "amount": 250 } ],
+          "itemsOut": [ { "id": "grindless:matrioshka_node", "count": 1 } ]
+        },
+        {
+          "name": "matrioshka_tpv_shell", "circuit": 0, "eut": 1966080, "duration": 800, "station": "grindless:tpv_segment",
+          "_why": "UIV-A10 line 37: TPV segments, tungsten and gold plates are assembled into a TPV shell block, behind station research.",
+          "itemsIn": [ { "id": "grindless:tpv_segment", "count": 4 }, { "id": "gtceu:tungsten_plate", "count": 2 }, { "id": "gtceu:gold_plate", "count": 1 }, { "id": "gtceu:rhea_plate", "count": 2 } ],
+          "fluidsIn": [ { "id": "gtceu:polybenzimidazole", "amount": 288 }, { "id": "gtceu:lubricant", "amount": 250 } ],
+          "itemsOut": [ { "id": "grindless:matrioshka_tpv_shell", "count": 1 } ]
+        },
+        {
+          "name": "logic_tile_block", "circuit": 0, "eut": 1966080, "duration": 800, "station": "grindless:aqfp_module",
+          "_why": "UIV-A10 line 41: AQFP modules, niobium and tungsten foil are assembled into a logic tile block, behind station research.",
+          "itemsIn": [ { "id": "grindless:aqfp_module", "count": 4 }, { "id": "gtceu:niobium_ingot", "count": 2 }, { "id": "gtceu:tungsten_foil", "count": 2 }, { "id": "gtceu:rhea_plate", "count": 2 } ],
+          "fluidsIn": [ { "id": "gtceu:helium", "amount": 500 }, { "id": "gtceu:lubricant", "amount": 250 } ],
+          "itemsOut": [ { "id": "grindless:matrioshka_logic_tile", "count": 1 } ]
+        },
+        {
+          "name": "emitter_shell", "circuit": 0, "eut": 1966080, "duration": 800, "station": "grindless:selective_emitter",
+          "_why": "UIV-A10 line 46: selective emitters, titanium and gold plates are assembled into an emitter shell block, behind station research.",
+          "itemsIn": [ { "id": "grindless:selective_emitter", "count": 4 }, { "id": "gtceu:titanium_plate", "count": 2 }, { "id": "gtceu:gold_plate", "count": 1 }, { "id": "gtceu:rhea_plate", "count": 2 } ],
+          "fluidsIn": [ { "id": "gtceu:polybenzimidazole", "amount": 288 }, { "id": "gtceu:lubricant", "amount": 250 } ],
+          "itemsOut": [ { "id": "grindless:matrioshka_emitter_shell", "count": 1 } ]
         }
       ]
     }

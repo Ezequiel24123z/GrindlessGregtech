@@ -92,7 +92,7 @@ test('the recipe is the UEV one a tier up, guarded, with a stable id', () => {
   assert.equal(recipes[0].key.S, 'grindless:uiv_sensor');
   assert.equal(recipes[0].key.E, 'grindless:uiv_emitter');
   assert.equal(recipes[0].key.C, 'gtceu:metallic_hydrogen_double_cable');
-  assert.equal(recipes[0].id, 'grindless:crafting/uiv_parallel_hatch');
+  assert.equal(recipes[0].id, 'grindless:assembly_line/uiv_parallel_hatch');
   assert.equal(G.uivParallelHatch.done, true);
 });
 

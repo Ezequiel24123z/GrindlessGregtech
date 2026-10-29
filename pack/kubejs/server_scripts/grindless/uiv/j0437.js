@@ -12,7 +12,8 @@
 //   gtceu:antimatter_storage         positrons) and on UV's antimatter trap (laser-cooled Ps -> Ps BEC). Both carry the J0437 dimension,
 //                                    so they are not in tables/antimatter.json or tables/accelerators.json (their orbit flag is Earth orbit).
 //   assembler, cutter, laser_engraver, distillery, vacuum_freezer   the GTM steps of lines 34, 38 and 45 and the UIV emitter (ids grindless:<name>).
-//   crafting                         the controllers: UIV hull + 2 UIV parts + 2 optical mainframes, grindless:crafting/<machine>.
+//   assembly_line                    the controllers: UIV hull + 2 UIV parts + 2 optical mainframes + UIV circuits + 3 line items, with
+//                                    soldering alloy, lubricant and neutronium, behind station research, grindless:assembly_line/<machine>.
 //
 // A recipe whose "site" is true gets dimension grindless:psr_j0437_orbit. Lookup safety: a recipe whose ingredients are a subset of another's
 // of its type can hide it; checked at load (a clash is an error). Published for the smoke test: global.grindless.j0437.recipes, .skipped,
@@ -176,21 +177,31 @@
   function addControllers(event) {
     var HULL = 'gtceu:uiv_machine_hull'
     var MAINFRAME = 'gtnn:optical_mainframe'
-    var parts = {
-      pulsar_wind_trap: 'grindless:uiv_electric_motor',
-      positronium_condensate_lab: 'grindless:uiv_electric_pump',
-      xray_pulse_profiler: 'grindless:uiv_sensor'
-    }
+    var defs = [
+      { name: 'pulsar_wind_trap', part: 'grindless:uiv_electric_motor', research: 'grindless:gamma_bragg_mirror', domain: ['2x grindless:neon_moderator_cartridge', '2x grindless:c12_ion_milled_plate', '2x grindless:annealed_neon_cone'] },
+      { name: 'positronium_condensate_lab', part: 'grindless:uiv_electric_pump', research: 'grindless:neon_moderator_cartridge', domain: ['2x grindless:gamma_bragg_mirror', '2x grindless:c12_004_plate', '2x grindless:annealed_neon_cone'] },
+      { name: 'xray_pulse_profiler', part: 'grindless:uiv_sensor', research: 'grindless:c12_ion_milled_plate', domain: ['2x grindless:gamma_bragg_mirror', '2x grindless:neon_moderator_cartridge', '2x grindless:c12_004_plate'] }
+    ]
     J.controllerRecipes = []
-    Object.keys(parts).forEach(function (name) {
-      var machine = 'gtceu:' + name
-      var missing = [HULL, parts[name], MAINFRAME, machine].filter(function (id) { return !Item.exists(id) })
+    defs.forEach(function (d) {
+      var machine = 'gtceu:' + d.name
+      var ids = [HULL, d.part, MAINFRAME, machine, d.research].concat(d.domain.map(function (s) { return s.replace(/^\d+x /, '') }))
+      var missing = ids.filter(function (id) { return !Item.exists(id) })
       if (missing.length > 0) {
-        console.error(LOG + name + ' controller recipe skipped, unknown item(s): ' + missing.join(', '))
+        console.error(LOG + d.name + ' controller recipe skipped, unknown item(s): ' + missing.join(', '))
         return
       }
-      event.recipes.gtceu.shaped(machine, ['OPO', 'PHP'], { O: MAINFRAME, P: parts[name], H: HULL }).id('grindless:crafting/' + name)
-      J.controllerRecipes.push('grindless:crafting/' + name)
+      var b = event.recipes.gtceu.assembly_line('grindless:' + d.name)
+      b.itemInputs(HULL)
+      b.itemInputs('2x ' + d.part)
+      b.itemInputs('2x ' + MAINFRAME)
+      b.itemInputs('4x #gtceu:circuits/uiv')
+      d.domain.forEach(function (s) { b.itemInputs(s) })
+      b.inputFluids(Fluid.of('gtceu:soldering_alloy', 2304), Fluid.of('gtceu:lubricant', 2000), Fluid.of('gtceu:neutronium', 576))
+      b.itemOutputs(machine)
+      b.stationResearch(function (r) { return r.researchStack(Item.of(d.research)).CWUt(64).EUt(7864320) })
+      b.EUt(7864320).duration(1500)
+      J.controllerRecipes.push('grindless:assembly_line/' + d.name)
     })
   }
 
