@@ -8,7 +8,7 @@
 //                          (1 superhydride, 2 nanotwinned diamond); each carries the data key = <name> (its EMI line, which names the
 //                          superhydride quench as fiction). The anvil of circuit 1 is a 10 % chanced input: it wears.
 //   gtceu:chemical_reactor, electric_blast_furnace, bender, compressor, assembler   the line steps GTM can run (ids grindless:<type>/<name>)
-//   crafting               the controller: UHV hull + 2 UV electric pistons + 2 UHV circuits, grindless:crafting/megabar_press.
+//   assembly line          the controller: station research, UEV-era circuits, 3 domain parts of the line, soldering alloy and lubricant, grindless:assembly_line/megabar_press.
 //   removals               GTM makes (La,Y)H10 wire from the metal by wiremill, extruder or a plate and a wire cutter; the superhydride
 //                          has no ingot outside the press, but the wire gets one real route only: the powder-in-tube line (uv/materials.js,
 //                          row lay_wire). GTM's cable covering recipes then turn that wire into the cable of the F1 hull, hatches and casing.

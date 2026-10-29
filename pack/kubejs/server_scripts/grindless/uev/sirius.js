@@ -8,7 +8,7 @@
 //                          Sirius B orbit only (recipe.dimension(grindless:sirius_b_orbit), the pattern of uev/earth_orbit.js); every recipe carries
 //                          the data key of its type = <name> (its EMI line). The nuclear clock, the chart and the helium are kept inputs.
 //   gtceu:assembler        the degenerate containment casing and the UEV field generator (circuit 0, anywhere: the pellet inside is the orbit-only part).
-//   crafting               the controllers: UEV hull + 2 UEV parts + 2 optical computers, shaped recipes grindless:crafting/<machine>.
+//   assembly line          the controllers: station research, UEV-era circuits, 3 domain parts of the line, soldering alloy and lubricant, grindless:assembly_line/<machine>.
 //
 // Lookup safety: a recipe whose ingredients are a subset of another's of its type can hide it; checked at load (a clash is an error).
 // Published for the smoke test: global.grindless.uevSirius.recipes, .skipped, .clashes, .controllerRecipes.

@@ -3,7 +3,7 @@
 // Marker: GGTEST|uhv_gate|DONE|failures=N (well within 180 seconds).
 // Band ONLY: X 29440-29503, Z 0-63, Y 60-120, in gcyr:overworld_orbit and grindless:proxima_b_orbit (the two ends of the gate). All
 // blocks and chunk tickets are owned and removed before DONE.
-// Doubt: the player transit and the c2 load. A real warp gate (15 x 15 x 3) is built at each end with four UHV 4 A energy hatches
+// Doubt: the player transit and the c2 load. A real warp gate (15 x 5 x 15) is built at each end with four UHV 4 A energy hatches
 // (c2 is 16 A UHV = 31,457,280 EU/t) and an input bus holding circuit 2 and exotic matter cells:
 //   static_*    every B7 row loads under its id; the machines and the AE2 pair and the UEV casing are published and load
 //   formed      GTM forms both rings with the chosen parts

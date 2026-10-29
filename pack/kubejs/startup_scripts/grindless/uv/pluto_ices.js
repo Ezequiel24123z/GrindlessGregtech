@@ -2,7 +2,7 @@
 // -----------------------------------------------------------------------------------------------
 // UV's Pluto ices (docs/eras/uv.md, machines 26 and 27; package UV-B3): two multiblocks of grindless:pluto_orbit and the penetrator.
 //
-//   gtceu:penetrator_probe_bay        type gtceu:penetrator_probe (new), DRILL FAMILY step 11. 7 x 7 x 9 station truss casing around a
+//   gtceu:penetrator_probe_bay        type gtceu:penetrator_probe (new), DRILL FAMILY step 11. 7 x 9 x 7 station truss casing around a
 //                                     hollow bay: a titanium frame probe rail down its middle, a tungstensteel gearbox (the ascent canister
 //                                     catcher) on top of it. A penetrator falls into Sputnik Planitia or onto Charon, melts in on its
 //                                     GPHS module (the probe stays in the ice) and sends a core up. The Triton ice core is kept: it
