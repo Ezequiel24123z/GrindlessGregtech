@@ -1,4 +1,4 @@
-// priority: -9137
+// priority: -9136
 // -----------------------------------------------------------------------------------------------
 // Cygnus X-1: the ergosphere probe bay and the Penrose engine (docs/eras/uiv.md, machines 21 and 22, line 35; package UIV-B4): the machines,
 // their recipe types and the package's own items. The recipes come from data/grindless/tables/cygnus.json (server_scripts/grindless/uiv/cygnus.js).

@@ -1169,6 +1169,10 @@ file = "kubejs/assets/emi/recipe/additions/grindless/uhv_travel_hermean_quantum_
 hash = "2408d1e6914dc05c3b8327420bdacfd151daed336e8282e58555bca70a7b6307"
 
 [[files]]
+file = "kubejs/assets/emi/recipe/additions/grindless/uiv_compression_hall_info.json"
+hash = "a7ffd67e47efa17faa6814ef3cea986661667d0a929678ac08cf3ba03545962c"
+
+[[files]]
 file = "kubejs/assets/emi/recipe/additions/grindless/uiv_cygnus_sled.json"
 hash = "8cd8b53c6c11ce7782441ae3b606a0afa68b164afc2bc694b6689160d88544cd"
 
@@ -4187,6 +4191,18 @@ hash = "5025cb93aac46de7455937a23372411e5e89f885239046a2c49f676ac9d60c75"
 [[files]]
 file = "kubejs/assets/grindless/textures/block/multiblock/neutronium_cage/overlay_front_active_emissive.png.mcmeta"
 hash = "491ea51d46bc1f0c0ff11ed9293461cc67de293c7672abbc45f67563f8fe1f1a"
+
+[[files]]
+file = "kubejs/assets/grindless/textures/block/multiblock/neutronium_compression_hall/overlay_front.png"
+hash = "bcbe5bb7cf585ce4973dcf558e4a046b344a9c3ef82a9eeff37d2bd4fb9f749e"
+
+[[files]]
+file = "kubejs/assets/grindless/textures/block/multiblock/neutronium_compression_hall/overlay_front_active.png"
+hash = "46832d14abe428d278ba4f9e5d6c24f74d54bec3612c8af80cd6c3e5295d8a4f"
+
+[[files]]
+file = "kubejs/assets/grindless/textures/block/multiblock/neutronium_compression_hall/overlay_front_active_emissive.png"
+hash = "168cd930ce5026998fc4e7195a6f6bc7619da57aae06940e117c720054f969de"
 
 [[files]]
 file = "kubejs/assets/grindless/textures/block/multiblock/nitride_magnet_works/overlay_front.png"
@@ -9845,6 +9861,10 @@ file = "kubejs/client_scripts/grindless/uiv_beuv_stm_lang.js"
 hash = "9c778331ca74821d22ee68e070b45675ec9bde848555e462f016fdcdda875ad3"
 
 [[files]]
+file = "kubejs/client_scripts/grindless/uiv_compression_hall_lang.js"
+hash = "0e5936c45cee7d2b38fabe380a749ef4b9795dd9df0e3d2ae07fdf4bb8d22338"
+
+[[files]]
 file = "kubejs/client_scripts/grindless/uiv_cygnus_lang.js"
 hash = "f0cb0f852c7ac7ac225e33bb4d5eda475e2dccf5f71e4716dfec243e751fe3b1"
 
@@ -11317,6 +11337,10 @@ file = "kubejs/server_scripts/grindless/uiv/beuv_stm.js"
 hash = "b059cbf03c515819876babdf92435f0b7ac9ed7dbe73aa4a569a8971bb645a08"
 
 [[files]]
+file = "kubejs/server_scripts/grindless/uiv/compression_hall.js"
+hash = "0ef57235cc00ba41e6c47a77f1a68918ce9856b6aaf8390fe20d8bdcf78c34c3"
+
+[[files]]
 file = "kubejs/server_scripts/grindless/uiv/cygnus.js"
 hash = "9f4508a0536916652e0731a4c677936ff05672687d444659bb86f08aa08234eb"
 
@@ -12014,11 +12038,15 @@ hash = "755b726dd4083c1db92e9be9c28de36703efc5b3ec687a6be60a09734babb5e7"
 
 [[files]]
 file = "kubejs/startup_scripts/grindless/uiv/beuv_stm.js"
-hash = "5cd7a3ad33ed49c8abf9a065fe02448e6f958261621951be3c913b20eb2b82d5"
+hash = "820de6eb3d621976a68eceebda01caa5275adea8b05d14dd76104dc68d621a7f"
+
+[[files]]
+file = "kubejs/startup_scripts/grindless/uiv/compression_hall.js"
+hash = "2f7653470bbb36fe86e39c741fd089131043f973388d52df32d9863d2facd7d1"
 
 [[files]]
 file = "kubejs/startup_scripts/grindless/uiv/cygnus.js"
-hash = "a34a1649b5792b4e53c00a6c6d1bfd51a2bd54d1b7be5fa768d34641033df035"
+hash = "60abef5ff57efe5c61f4abf624efe9490fa7b44e40df9161dbfd966944031265"
 
 [[files]]
 file = "kubejs/startup_scripts/grindless/uiv/foundation.js"

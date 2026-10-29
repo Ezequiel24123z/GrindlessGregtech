@@ -1,4 +1,4 @@
-// priority: -9125
+// priority: -9112
 // -----------------------------------------------------------------------------------------------
 // UIV's BEUV scanner and STM lithography cell (docs/eras/uiv.md, machines 5 and 7, lines 11 (up to the overgrown P:Si die), 13 and 14;
 // package UIV-A5): the two machines, their recipe types, the package's own items and the phosphine gas. The recipes come from
