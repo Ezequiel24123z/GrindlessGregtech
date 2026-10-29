@@ -22,7 +22,7 @@
 //     mw_recipes    the four magnet-winding recipes (grindless:magnet_winding/hts_coil c1, luv_smes_cell c2, coilgun_coil_casing c3,
 //                   magnetic_bearing c4) in the recipe manager as published: items, the circuit (chance 0), consumed fluids, the
 //                   1,000 mB gtceu:liquid_helium charge at chance 0, outputs, EU/t, duration, data key; none skipped; no clash; as many
-//                   live recipes of the type as the table publishes (later eras add rows); the controller's grindless:crafting/hts_magnet_works
+//                   live recipes of the type as the table publishes (later eras add rows); the controller's grindless:assembly_line/hts_magnet_works
 //   in the world: the Overworld X 15360-15423, Z 0-63, Y 98-112 (roof at Y 112; the magnet works at X 15370-15380, the towers and the
 //   LuV machines at X 15396-15412) and Earth orbit (gcyr:overworld_orbit) X 15392-15423, Z 0-63, Y 98-112 (the generator array at
 //   X 15396-15404, roof at Y 112), both force-loaded while it runs
@@ -745,8 +745,8 @@
     // later eras add rows to the table (UIV-A8: seeded_gdbco_growth c5): every published recipe is live, and nothing else
     var publishedCount = (MW.recipes || []).length
     if (live !== publishedCount) problems.push(live + ' live ' + TYPE + ' recipes (want ' + publishedCount + ', the published table)')
-    var crafting = MW.craftingRecipe || 'grindless:crafting/hts_magnet_works'
-    if (crafting !== 'grindless:crafting/hts_magnet_works' || liveRecipe(crafting) === null) problems.push('the controller recipe ' + crafting + ' is missing')
+    var crafting = MW.craftingRecipe || 'grindless:assembly_line/hts_magnet_works'
+    if (crafting !== 'grindless:assembly_line/hts_magnet_works' || liveRecipe(crafting) === null) problems.push('the controller recipe ' + crafting + ' is missing')
     check('mw_recipes', problems.length === 0, lines.join(' ; ') + '; every one keeps ' + charge.amount + ' mB ' + short(charge.id) + ' at chance 0; ' + live +
       ' live recipes of ' + TYPE + '; ' + crafting + (problems.length > 0 ? ' | problems: ' + problems.join('; ') : ''))
   }

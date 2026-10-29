@@ -25,7 +25,8 @@ function harness() {
   const context = vm.createContext({
     global: { grindless: G },
     GTCEuStartupEvents: { registry(kind, fn) { registry[kind] = fn; } },
-    GuiTextures: {}, FillDirection: {}, RotationState: {}, Text: { translate: x => x }
+    GuiTextures: {}, FillDirection: {}, RotationState: {}, Text: { translate: x => x },
+    Fluid: { of: (id, amount) => ({ id, amount }) }
   });
   vm.runInContext(source('pack/kubejs/startup_scripts/grindless/lib/orbits.js'), context);
   vm.runInContext(source('pack/kubejs/startup_scripts/grindless/luv/orbital_solar.js'), context);
@@ -110,6 +111,12 @@ test('solar output derives from authoritative sunlight; no nighttime or fuel dou
   assert.deepEqual(Array.from(solar.calls.dimension), [table.earth]);
   const upgraded = recipes.find(r => r.id === 'grindless:luv/orbital_solar_panel_triple_junction');
   assert.ok(upgraded.calls.itemInputs.includes('4x gtceu:fine_gold_wire'));
+  assert.equal(upgraded.type, 'assembly_line');
+  assert.ok(upgraded.calls.inputFluids.some(f => f.id === 'gtceu:soldering_alloy' && f.amount === 144));
+  const station = recipes.find(r => r.id === 'grindless:luv/orbital_solar_station');
+  assert.equal(station.type, 'assembly_line');
+  assert.ok(station.calls.itemInputs.includes('4x #gtceu:circuits/luv'));
+  assert.deepEqual(Array.from(station.calls.duration), [600]);
   assert.equal(recipes.length, 4);
 });
 test('solar generator uses proven helper, no fuel multiplier and current run-start pricing', () => {

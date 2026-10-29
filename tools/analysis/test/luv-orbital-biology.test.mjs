@@ -1,4 +1,4 @@
-import test from 'node:test';
+﻿import test from 'node:test';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import path from 'node:path';
@@ -176,16 +176,17 @@ test('B4 NPU preserves GTM materials and 48 M EU at LuV; all controllers have ex
     assert.equal(only(r, 'itemOutputs'), i ? 'gtceu:neuro_processing_unit' : 'grindless:neural_organoid');
   });
   assert.equal(30720 * 1563, 48015360);
-  const controllers = recipes.filter((r) => r.type === 'shaped');
+  const controllers = recipes.filter((r) => r.type === 'assembly_line');
   assert.equal(controllers.length, 3);
+  const EXTRA = [['2x grindless:platinum_gauze', '2x grindless:contact_catalyst'], ['2x grindless:ion_exchange_resin', '2x grindless:platinum_gauze'],
+    ['2x grindless:ion_exchange_resin', '2x grindless:zircaloy_cladding_tube']];
+  const MIDDLE = [['gtceu:luv_electric_pump', 'gtceu:luv_sensor'], ['2x gtceu:luv_electric_motor'], ['gtceu:luv_robot_arm', 'gtceu:luv_sensor']];
   controllers.forEach((r, i) => {
-    assert.equal(r.args[0], 'gtceu:' + names[i]);
-    const [, pattern, keys] = r.args;
-    assert.equal(pattern.join('').split('C').length - 1, 4);
-    assert.equal(pattern.join('').split('P').length - 1, 2);
-    assert.equal(keys.H, 'gtceu:luv_machine_hull');
-    assert.equal(keys.C, '#gtceu:circuits/luv');
-    assert.equal(only(r, 'id'), 'grindless:crafting/' + names[i]);
+    assert.equal(r.args[0], 'grindless:' + names[i]);
+    assert.deepEqual(call(r, 'itemOutputs').flat(), ['gtceu:' + names[i]]);
+    assert.deepEqual(call(r, 'itemInputs').flat(), ['gtceu:luv_machine_hull', ...MIDDLE[i], '4x #gtceu:circuits/luv', ...EXTRA[i]]);
+    assert.deepEqual(call(r, 'inputFluids').flat().map((f) => [f.id, f.amount]), [['gtceu:soldering_alloy', 576], ['gtceu:lubricant', 500]]);
+    assert.deepEqual([only(r, 'EUt'), only(r, 'duration')], [30720, 600]);
   });
 });
 
@@ -270,9 +271,10 @@ test('B4 preexisting item/fluid IDs match the pinned native registry, not naming
   ]);
   const nativeFluids = new Set(['minecraft:water', 'gtceu:europium', 'gtceu:bacterial_sludge',
     'gtceu:mutagen', 'gtceu:carbon_dioxide', 'gtceu:biomass', 'gtceu:oxygen',
-    'gtceu:sterilized_growth_medium']);
+    'gtceu:sterilized_growth_medium', 'gtceu:soldering_alloy', 'gtceu:lubricant']);
   const checkItem = (text) => {
     const id = text.replace(/^\d+x /, '');
+    if (names.includes(id.replace('gtceu:', ''))) return; // the controllers this package registers
     if (id.startsWith('gtceu:')) assert.ok(nativeItems.has(id), `not a pinned native item: ${id}`);
   };
   const { G, recipes } = harness();
@@ -283,7 +285,6 @@ test('B4 preexisting item/fluid IDs match the pinned native registry, not naming
     for (const method of ['inputFluids', 'outputFluids']) {
       for (const fluid of call(r, method).flat()) assert.ok(nativeFluids.has(fluid.id), fluid.id);
     }
-    if (r.type === 'shaped') for (const ingredient of Object.values(r.args[2])) checkItem(ingredient);
   }
   function checkSymbol(symbol) {
     if (symbol.options) symbol.options.forEach(checkSymbol);

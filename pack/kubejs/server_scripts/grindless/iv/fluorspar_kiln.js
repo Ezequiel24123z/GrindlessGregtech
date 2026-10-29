@@ -16,8 +16,9 @@
 //                               a charge gives the full 2,000 mB. The kiln runs up to 256 charges at once with no overclock (its
 //                               modifier), so every charge costs 1,920 EU at any feed and hatch: one IV hatch draws 7,680 EU/t at full
 //                               feed.
-//   crafting                    the controller (GTM shaped recipe, iv.md "Built with"): IV hull + IV electric furnace + IV chemical reactor +
-//                               2 IV electric pumps + 4 IV circuits, grindless:crafting/fluorspar_kiln.
+//   crafting                    the controller (iv.md "Built with"), made in the assembler: IV hull + IV electric furnace + IV chemical reactor +
+//                               2 IV electric pumps + 4 IV circuits + 2 platinum electrodes + 4 sintered regolith + soldering alloy and sulfuric
+//                               acid, grindless:assembler/fluorspar_kiln.
 //
 // Destinations: the HF goes to the naquadah plant, the hot cell's enrichment (40,000 mB per LEU assembly's uranium) and GTM's PTFE line;
 // the gypsum to GTM's concrete (mixer/concrete_from_calcite and concrete_from_marble: 1 gypsum dust per 1,152 mB), and through it to the
@@ -52,7 +53,7 @@
 
   var CONTROLLER = 'gtceu:fluorspar_kiln'
   var CONTROLLER_PARTS = [CONTROLLER, 'gtceu:iv_machine_hull', 'gtceu:iv_electric_furnace', 'gtceu:iv_chemical_reactor', 'gtceu:iv_electric_pump']
-  FK.craftingRecipe = 'grindless:crafting/fluorspar_kiln'
+  FK.craftingRecipe = 'grindless:assembler/fluorspar_kiln'
   FK.craftingParts = CONTROLLER_PARTS
 
   function addCharge(event) {
@@ -134,14 +135,12 @@
       console.error(LOG + 'fluorspar kiln controller recipe skipped, unknown item(s): ' + missing.join(', '))
       return
     }
-    // GTM shaped: lowercase letters are tool symbols, so ingredient keys are uppercase
-    event.recipes.gtceu.shaped(CONTROLLER, ['CFC', 'PHP', 'CRC'], {
-      C: '#gtceu:circuits/iv',
-      F: 'gtceu:iv_electric_furnace',
-      P: 'gtceu:iv_electric_pump',
-      H: 'gtceu:iv_machine_hull',
-      R: 'gtceu:iv_chemical_reactor'
-    }).id(FK.craftingRecipe)
+    event.recipes.gtceu.assembler('grindless:fluorspar_kiln')
+      .itemInputs('gtceu:iv_machine_hull', 'gtceu:iv_electric_furnace', 'gtceu:iv_chemical_reactor', '2x gtceu:iv_electric_pump',
+        '4x #gtceu:circuits/iv', '2x grindless:platinum_electrode', '4x grindless:sintered_regolith')
+      .inputFluids(Fluid.of('gtceu:soldering_alloy', 288), Fluid.of('gtceu:sulfuric_acid', 1000))
+      .itemOutputs(CONTROLLER)
+      .EUt(1920).duration(600)
   }
 
   // an uncaught error here would stop KubeJS from running the recipe handlers of the scripts that load after this one

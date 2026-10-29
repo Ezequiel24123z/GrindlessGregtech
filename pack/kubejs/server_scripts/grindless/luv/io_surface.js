@@ -66,17 +66,22 @@
       .EUt(-t.eut).duration(t.duration), IO.place)
 
     gt.assembler('grindless:luv/radiation_vault_casing')
-      .itemInputs('2x gtceu:dense_titanium_plate', '2x gtceu:tantalum_plate', 'gtceu:hsss_frame')
+      .itemInputs('2x gtceu:dense_titanium_plate', '2x gtceu:tantalum_plate', 'gtceu:hsss_frame', '1x grindless:zircaloy_cladding_tube')
+      .inputFluids(Fluid.of('gtceu:soldering_alloy', 144), Fluid.of('gtceu:lubricant', 250))
       .itemOutputs('2x ' + IO.blocks.vault).EUt(7680).duration(100)
-    gt.assembler('grindless:luv/heat_exchanger_bundle')
-      .itemInputs(IO.blocks.concrete, '4x gtceu:tungsten_steel_small_fluid_pipe')
+    gt.assembly_line('grindless:luv/heat_exchanger_bundle')
+      .itemInputs(IO.blocks.concrete, '4x gtceu:tungsten_steel_small_fluid_pipe', '2x grindless:platinum_gauze',
+        '2x grindless:zircaloy_cladding_tube')
+      .inputFluids(Fluid.of('gtceu:soldering_alloy', 144), Fluid.of('gtceu:lubricant', 250))
       .itemOutputs(t.bundle).EUt(7680).duration(200)
 
-    gt.shaped(IO.condenser.machine, ['CPC', ' H ', 'CPC'], {
-      C: '#gtceu:circuits/luv', P: 'gtceu:luv_electric_pump', H: 'gtceu:luv_machine_hull'
-    }).id('grindless:crafting/fumarole_condenser')
-    gt.shaped(IO.intake.machine, ['CMC', 'PHP', 'C C'], {
-      C: '#gtceu:circuits/luv', M: 'gtceu:luv_electric_motor', P: 'gtceu:luv_electric_pump', H: 'gtceu:luv_machine_hull'
-    }).id('grindless:crafting/volcanic_intake')
-  })
+    gt.assembly_line('grindless:fumarole_condenser')
+      .itemInputs('gtceu:luv_machine_hull', '2x gtceu:luv_electric_pump', '4x #gtceu:circuits/luv', '4x ' + t.bundle, '2x grindless:platinum_gauze')
+      .inputFluids(Fluid.of('gtceu:soldering_alloy', 576), Fluid.of('gtceu:lubricant', 500))
+      .itemOutputs(IO.condenser.machine).EUt(30720).duration(600)
+    gt.assembly_line('grindless:volcanic_intake')
+      .itemInputs('gtceu:luv_machine_hull', 'gtceu:luv_electric_motor', '2x gtceu:luv_electric_pump', '4x #gtceu:circuits/luv', '4x ' + t.bundle,
+        '2x grindless:zircaloy_cladding_tube')
+      .inputFluids(Fluid.of('gtceu:soldering_alloy', 576), Fluid.of('gtceu:lubricant', 500))
+      .itemOutputs(IO.intake.machine).EUt(30720).duration(600)  })
 })()

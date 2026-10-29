@@ -26,12 +26,16 @@
         .EUt(-t.eut).duration(t.duration)
         .dimension(IOO.tether.site)
       var s = R.spool
-      gt.assembler('grindless:luv/tether_spool')
-        .itemInputs(s.foils + 'x gtceu:aluminium_foil', s.aramid + 'x gcyr:para_aramid_foil', s.endMass)
+      gt.assembly_line('grindless:luv/tether_spool')
+        .itemInputs(s.foils + 'x gtceu:aluminium_foil', s.aramid + 'x gcyr:para_aramid_foil', s.endMass, '2x grindless:platinum_gauze',
+          '2x grindless:zircaloy_cladding_tube')
+        .inputFluids(Fluid.of('gtceu:soldering_alloy', 144), Fluid.of('gtceu:lubricant', 250))
         .itemOutputs(t.spool).EUt(s.eut).duration(s.duration)
-      gt.shaped(IOO.tether.machine, ['MSM', 'CHC', 'C C'], {
-        C: '#gtceu:circuits/luv', M: 'gtceu:luv_electric_motor', S: 'gtceu:luv_sensor', H: 'gtceu:luv_machine_hull'
-      }).id('grindless:crafting/flux_tube_tether')
+      gt.assembly_line('grindless:flux_tube_tether')
+        .itemInputs('gtceu:luv_machine_hull', '2x gtceu:luv_electric_motor', 'gtceu:luv_sensor', '4x #gtceu:circuits/luv', '4x ' + t.spool,
+          '2x grindless:magnetic_bearing')
+      .inputFluids(Fluid.of('gtceu:soldering_alloy', 576), Fluid.of('gtceu:lubricant', 500))
+        .itemOutputs(IOO.tether.machine).EUt(30720).duration(600)
     }
     if (IOO.plant.active) {
       var p = R.plant
@@ -42,9 +46,11 @@
         .notConsumable(p.iodine + 'x gtceu:iodine_dust')
         .outputFluids(Fluid.of('gtceu:hydrogen', p.hydrogen), Fluid.of('gtceu:oxygen', p.oxygen))
         .EUt(p.eut).duration(p.duration), IOO.plant.place)
-      gt.shaped(IOO.plant.machine, ['PSP', 'CHC', 'C C'], {
-        C: '#gtceu:circuits/luv', P: 'gtceu:luv_electric_pump', S: 'gtceu:luv_sensor', H: 'gtceu:luv_machine_hull'
-      }).id('grindless:crafting/sulfur_iodine_plant')
+      gt.assembly_line('grindless:sulfur_iodine_plant')
+        .itemInputs('gtceu:luv_machine_hull', '2x gtceu:luv_electric_pump', 'gtceu:luv_sensor', '4x #gtceu:circuits/luv',
+          '2x grindless:zircaloy_cladding_tube', '2x grindless:contact_catalyst')
+      .inputFluids(Fluid.of('gtceu:soldering_alloy', 576), Fluid.of('gtceu:lubricant', 500))
+        .itemOutputs(IOO.plant.machine).EUt(30720).duration(600)
     }
   })
 })()

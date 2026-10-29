@@ -209,7 +209,7 @@
       ' composite_curing recipes=' + recipesOf('gtceu:composite_curing').length + ' thruster fuel=' + fuelThruster() +
       (missingOurs.length > 0 ? ' missing=' + missingOurs.join(',') : ''))
 
-    var ctrls = ['grindless:crafting/engine_test_stand', 'grindless:crafting/composite_autoclave']
+    var ctrls = ['grindless:assembler/engine_test_stand', 'grindless:assembler/composite_autoclave']
     var missingCtrls = ctrls.filter(function (id) { return !recipeExists(id) })
     check(SCOPE, 'controllers', missingCtrls.length === 0, ctrls.join(', ') + (missingCtrls.length > 0 ? ' missing=' + missingCtrls.join(',') : ''))
 

@@ -14,7 +14,7 @@
 //   subset of another's can hide it. The recipes of the type are checked against each other at load (the circuit counts as an
 //   ingredient); a clash is logged as an error.
 //   crafting                 the controller (luv.md, "Controller"): LuV hull + LuV emitter (the deposition laser) + 2 LuV conveyor
-//                            modules + 4 LuV circuits, in a crafting grid (grindless:crafting/coated_conductor_line, GTM's shaped recipe).
+//                            modules + 4 LuV circuits + 2 platinum gauzes + 2 zircaloy cladding tubes, in the assembly line (grindless:assembly_line/coated_conductor_line).
 //
 // The tape and the coated conductor are LuV-A1's items (no GTM material info, so GTM makes no recycling for them). Until they are
 // registered, the recipes that need them are skipped with an error that names them. Destinations: the coated conductor goes to the HTS
@@ -38,7 +38,7 @@
   var EMITTER = 'gtceu:luv_emitter'
   var CONVEYOR = 'gtceu:luv_conveyor_module'
   var CONTROLLER_PARTS = [CONTROLLER, HULL, EMITTER, CONVEYOR]
-  CCL.craftingRecipe = 'grindless:crafting/coated_conductor_line'
+  CCL.craftingRecipe = 'grindless:assembly_line/coated_conductor_line'
   CCL.craftingParts = CONTROLLER_PARTS
 
   function io() {
@@ -194,12 +194,11 @@
       console.error(LOG + 'coated conductor line controller recipe skipped, unknown item(s): ' + missing.join(', '))
       return
     }
-    event.recipes.gtceu.shaped(CONTROLLER, ['CEC', 'VHV', 'C C'], {
-      C: '#gtceu:circuits/luv',
-      E: EMITTER,
-      V: CONVEYOR,
-      H: HULL
-    }).id(CCL.craftingRecipe)
+    event.recipes.gtceu.assembly_line('grindless:coated_conductor_line')
+      .itemInputs(HULL, EMITTER, '2x ' + CONVEYOR, '4x #gtceu:circuits/luv', '2x grindless:platinum_gauze', '2x grindless:zircaloy_cladding_tube')
+      .inputFluids(Fluid.of('gtceu:soldering_alloy', 576), Fluid.of('gtceu:lubricant', 500))
+      .itemOutputs(CONTROLLER)
+      .EUt(30720).duration(600)
   }
 
   // an uncaught error here would stop KubeJS from running the recipe handlers of the scripts that load after this one

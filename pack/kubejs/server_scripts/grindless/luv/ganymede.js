@@ -32,11 +32,11 @@
     catalogue: 'grindless:gravitational_wave_astronomy/luv/gravitational_wave_catalogue',
     survey: 'grindless:probe_launch/luv/jovian_atmosphere_survey',
     chart: 'grindless:probe_launch/luv/saturn_transfer_chart',
-    jupiterProbe: 'grindless:assembler/luv/jupiter_entry_probe',
-    saturnProbe: 'grindless:assembler/luv/saturn_flyby_probe',
+    jupiterProbe: 'grindless:assembly_line/luv/jupiter_entry_probe',
+    saturnProbe: 'grindless:assembly_line/luv/saturn_flyby_probe',
     copy: 'grindless:crafting/gravitational_wave_catalogue_copy',
     chartCopy: 'grindless:crafting/saturn_transfer_chart_copy',
-    controllers: ['grindless:crafting/gravitational_wave_detector', 'grindless:crafting/coilgun_launcher']
+    controllers: ['grindless:assembly_line/gravitational_wave_detector', 'grindless:assembly_line/coilgun_launcher']
   }
   var I = GY.items
 
@@ -63,20 +63,28 @@
       .EUt(30720).duration(12000)
     event.shapeless('2x ' + I.chart, [I.chart, I.dataOrb]).id(GY.recipes.chartCopy)
 
-    event.recipes.gtceu.assembler('grindless:luv/jupiter_entry_probe')
-      .itemInputs('4x gcyr:heat_shielding_fabric', 'gtceu:luv_sensor', 'gtceu:hv_lithium_battery', '4x gtceu:titanium_plate')
+    event.recipes.gtceu.assembly_line('grindless:luv/jupiter_entry_probe')
+      .itemInputs('4x gcyr:heat_shielding_fabric', 'gtceu:luv_sensor', 'gtceu:hv_lithium_battery', '4x gtceu:titanium_plate',
+        '2x grindless:hermean_heat_shield_brick', '2x grindless:platinum_gauze')
+      .inputFluids(Fluid.of('gtceu:soldering_alloy', 144), Fluid.of('gtceu:lubricant', 250))
       .itemOutputs(I.jupiterProbe)
       .EUt(30720).duration(200)
-    event.recipes.gtceu.assembler('grindless:luv/saturn_flyby_probe')
+    event.recipes.gtceu.assembly_line('grindless:luv/saturn_flyby_probe')
       .itemInputs('2x grindless:rtg_pellet', 'gtceu:luv_sensor', 'gtceu:luv_emitter', '4x gtceu:titanium_plate')
+      .inputFluids(Fluid.of('gtceu:soldering_alloy', 144), Fluid.of('gtceu:lubricant', 250))
       .itemOutputs(I.saturnProbe)
       .EUt(30720).duration(200)
 
-    event.recipes.gtceu.shaped('gtceu:gravitational_wave_detector', ['CEC', 'SHS', 'CEC'], {
-      C: '#gtceu:circuits/luv', E: 'gtceu:luv_emitter', S: 'gtceu:luv_sensor', H: 'gtceu:luv_machine_hull'
-    }).id(GY.recipes.controllers[0])
-    event.recipes.gtceu.shaped('gtceu:coilgun_launcher', ['CFC', 'EHE', 'CwC'], {
-      C: '#gtceu:circuits/luv', F: 'gtceu:luv_field_generator', E: 'gtceu:luv_emitter', H: 'gtceu:luv_machine_hull'
-    }).id(GY.recipes.controllers[1])
+    var LINE = [Fluid.of('gtceu:soldering_alloy', 576), Fluid.of('gtceu:lubricant', 500)]
+    function line(name, machine, items) {
+      var b = event.recipes.gtceu.assembly_line('grindless:' + name)
+      items.forEach(function (s) { b.itemInputs(s) })
+      LINE.forEach(function (f) { b.inputFluids(f) })
+      b.itemOutputs(machine).EUt(30720).duration(600)
+    }
+    line('gravitational_wave_detector', 'gtceu:gravitational_wave_detector', ['gtceu:luv_machine_hull', '2x gtceu:luv_emitter',
+      '2x gtceu:luv_sensor', '4x #gtceu:circuits/luv', '2x ' + I.jupiterProbe, '2x grindless:hermean_thin_film_panel'])
+    line('coilgun_launcher', 'gtceu:coilgun_launcher', ['gtceu:luv_machine_hull', 'gtceu:luv_field_generator', '2x gtceu:luv_emitter',
+      '4x #gtceu:circuits/luv', '2x ' + I.saturnProbe, '2x grindless:tungsten_steel_drill_bit'])
   })
 })()
