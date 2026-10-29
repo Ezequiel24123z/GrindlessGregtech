@@ -145,7 +145,7 @@ test('line 32: the flash target never makes Pu-244; its debris goes to the hot c
 test('line 33: yarn -> laminated -> braided -> tether -> electrode and lift tether', () => {
   assert.ok(inputs(by('assembler', 'mh_laminate')).includes('grindless:bn_coated_cnt_yarn'));
   assert.deepEqual(outputs(by('assembler', 'mh_laminate')), ['grindless:mh_laminated_yarn']);
-  assert.deepEqual(inputs(by('assembler', 'mh_braid')), ['grindless:mh_laminated_yarn', 'gtceu:rhea_plate', 'gtceu:tungsten_foil', 'gtceu:epoxy']);
+  assert.deepEqual(inputs(by('assembler', 'mh_braid')), ['grindless:mh_laminated_yarn']);
   assert.deepEqual(outputs(by('assembler', 'mh_braid')), ['grindless:braided_mh_tether']);
   assert.ok(inputs(by('assembler', 'polar_cap_electrode')).includes('grindless:mh_tether'));
   assert.ok(inputs(by('assembler', 'crust_lift_tether')).includes('grindless:mh_tether'));

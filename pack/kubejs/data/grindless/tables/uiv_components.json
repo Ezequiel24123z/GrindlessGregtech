@@ -53,13 +53,13 @@
     "assembler": {
       "recipes": [
         { "name": "rhea_impeller_balancing", "circuit": 0, "eut": 491520, "duration": 300,
-          "itemsIn": [{ "id": "grindless:machined_rhea_impeller", "count": 1 }, { "id": "gtceu:tungsten_foil", "count": 2 }, { "id": "gtceu:rhea_plate", "count": 1 }], "kept": [], "fluidsIn": [{ "id": "gtceu:lubricant", "amount": 250 }], "charge": [],
+          "itemsIn": [{ "id": "grindless:machined_rhea_impeller", "count": 1 }, { "id": "gtceu:tungsten_foil", "count": 2 }], "kept": [], "fluidsIn": [], "charge": [],
           "itemsOut": [{ "id": "grindless:balanced_rhea_impeller", "count": 1 }], "fluidsOut": [] },
         { "name": "strain_wave_gear", "circuit": 0, "eut": 491520, "duration": 300,
-          "itemsIn": [{ "id": "grindless:bmg_flexspline", "count": 1 }, { "id": "gtceu:rhea_plate", "count": 2 }, { "id": "gtceu:stainless_steel_plate", "count": 1 }], "kept": [], "fluidsIn": [{ "id": "gtceu:lubricant", "amount": 250 }], "charge": [],
+          "itemsIn": [{ "id": "grindless:bmg_flexspline", "count": 1 }, { "id": "gtceu:rhea_plate", "count": 2 }], "kept": [], "fluidsIn": [], "charge": [],
           "itemsOut": [{ "id": "grindless:strain_wave_gear", "count": 1 }], "fluidsOut": [] },
         { "name": "gdbco_impregnation", "circuit": 0, "eut": 122880, "duration": 300,
-          "itemsIn": [{ "id": "grindless:oxygenated_gdbco", "count": 1 }, { "id": "gtceu:rhea_plate", "count": 1 }, { "id": "gtceu:gold_plate", "count": 1 }], "kept": [], "fluidsIn": [{ "id": "gtceu:epoxy", "amount": 144 }, { "id": "gtceu:argon", "amount": 500 }], "charge": [],
+          "itemsIn": [{ "id": "grindless:oxygenated_gdbco", "count": 1 }], "kept": [], "fluidsIn": [{ "id": "gtceu:epoxy", "amount": 144 }], "charge": [],
           "itemsOut": [{ "id": "grindless:impregnated_gdbco", "count": 1 }], "fluidsOut": [] },
         { "name": "uiv_electric_pump", "circuit": 0, "eut": 7864320, "duration": 400,
           "itemsIn": [{ "id": "grindless:uev_electric_pump", "count": 1 }, { "id": "grindless:balanced_rhea_impeller", "count": 1 }, { "id": "gtceu:rhea_plate", "count": 2 }, { "id": "#gtceu:circuits/uiv", "count": 1 }], "kept": [], "fluidsIn": [], "charge": [],

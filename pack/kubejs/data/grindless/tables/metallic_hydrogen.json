@@ -36,50 +36,50 @@
       "recipes": [
         {
           "name": "mh_cable_single", "circuit": 1, "eut": 1966080, "duration": 100,
-          "itemsIn": [ { "id": "gtceu:metallic_hydrogen_single_wire", "count": 1 }, { "id": "grindless:ffkm_seal", "count": 1 }, { "id": "gtceu:rhea_plate", "count": 1 } ],
-          "fluidsIn": [ { "id": "gtceu:epoxy", "amount": 144 } ],
+          "itemsIn": [ { "id": "gtceu:metallic_hydrogen_single_wire", "count": 1 }, { "id": "grindless:ffkm_seal", "count": 1 } ],
+          "fluidsIn": [ ],
           "itemsOut": [ { "id": "gtceu:metallic_hydrogen_single_cable", "count": 1 }, { "id": "gtceu:tiny_ffkm_dust", "count": 1, "chance": 2500 } ]
         },
         {
           "name": "mh_cable_double", "circuit": 2, "eut": 1966080, "duration": 100,
-          "itemsIn": [ { "id": "gtceu:metallic_hydrogen_double_wire", "count": 1 }, { "id": "grindless:ffkm_seal", "count": 1 }, { "id": "gtceu:rhea_plate", "count": 1 } ],
-          "fluidsIn": [ { "id": "gtceu:epoxy", "amount": 144 } ],
+          "itemsIn": [ { "id": "gtceu:metallic_hydrogen_double_wire", "count": 1 }, { "id": "grindless:ffkm_seal", "count": 1 } ],
+          "fluidsIn": [ ],
           "itemsOut": [ { "id": "gtceu:metallic_hydrogen_double_cable", "count": 1 }, { "id": "gtceu:tiny_ffkm_dust", "count": 1, "chance": 2500 } ]
         },
         {
           "name": "mh_cable_quadruple", "circuit": 4, "eut": 1966080, "duration": 100,
-          "itemsIn": [ { "id": "gtceu:metallic_hydrogen_quadruple_wire", "count": 1 }, { "id": "grindless:ffkm_seal", "count": 2 }, { "id": "gtceu:rhea_plate", "count": 1 } ],
-          "fluidsIn": [ { "id": "gtceu:epoxy", "amount": 144 } ],
+          "itemsIn": [ { "id": "gtceu:metallic_hydrogen_quadruple_wire", "count": 1 }, { "id": "grindless:ffkm_seal", "count": 2 } ],
+          "fluidsIn": [ ],
           "itemsOut": [ { "id": "gtceu:metallic_hydrogen_quadruple_cable", "count": 1 }, { "id": "gtceu:tiny_ffkm_dust", "count": 2, "chance": 2500 } ]
         },
         {
           "name": "mh_cable_octal", "circuit": 8, "eut": 1966080, "duration": 100,
-          "itemsIn": [ { "id": "gtceu:metallic_hydrogen_octal_wire", "count": 1 }, { "id": "grindless:ffkm_seal", "count": 3 }, { "id": "gtceu:rhea_plate", "count": 1 } ],
-          "fluidsIn": [ { "id": "gtceu:epoxy", "amount": 144 } ],
+          "itemsIn": [ { "id": "gtceu:metallic_hydrogen_octal_wire", "count": 1 }, { "id": "grindless:ffkm_seal", "count": 3 } ],
+          "fluidsIn": [ ],
           "itemsOut": [ { "id": "gtceu:metallic_hydrogen_octal_cable", "count": 1 }, { "id": "gtceu:tiny_ffkm_dust", "count": 3, "chance": 2500 } ]
         },
         {
           "name": "mh_cable_hex", "circuit": 16, "eut": 1966080, "duration": 100,
-          "itemsIn": [ { "id": "gtceu:metallic_hydrogen_hex_wire", "count": 1 }, { "id": "grindless:ffkm_seal", "count": 5 }, { "id": "gtceu:rhea_plate", "count": 1 } ],
-          "fluidsIn": [ { "id": "gtceu:epoxy", "amount": 144 } ],
+          "itemsIn": [ { "id": "gtceu:metallic_hydrogen_hex_wire", "count": 1 }, { "id": "grindless:ffkm_seal", "count": 5 } ],
+          "fluidsIn": [ ],
           "itemsOut": [ { "id": "gtceu:metallic_hydrogen_hex_cable", "count": 1 }, { "id": "gtceu:tiny_ffkm_dust", "count": 5, "chance": 2500 } ]
         },
         {
           "name": "lonsdaleite_bearing", "circuit": 5, "eut": 1966080, "duration": 200,
-          "itemsIn": [ { "id": "grindless:lonsdaleite_race", "count": 2 }, { "id": "gtceu:tungsten_plate", "count": 1 }, { "id": "gtceu:rhea_plate", "count": 1 } ],
-          "fluidsIn": [ { "id": "gtceu:lubricant", "amount": 100 }, { "id": "gtceu:argon", "amount": 500 } ],
+          "itemsIn": [ { "id": "grindless:lonsdaleite_race", "count": 2 }, { "id": "gtceu:tungsten_plate", "count": 1 } ],
+          "fluidsIn": [ { "id": "gtceu:lubricant", "amount": 100 } ],
           "itemsOut": [ { "id": "grindless:lonsdaleite_bearing", "count": 1 } ]
         },
         {
           "name": "uiv_electric_piston", "circuit": 6, "eut": 7864320, "duration": 300,
           "itemsIn": [ { "id": "grindless:uev_electric_piston", "count": 1 }, { "id": "grindless:lonsdaleite_bearing", "count": 2 },
-                       { "id": "gtceu:metallic_hydrogen_single_cable", "count": 2 }, { "id": "gtceu:rhea_plate", "count": 1 } ],
-          "fluidsIn": [ { "id": "gtceu:lubricant", "amount": 250 } ],
+                       { "id": "gtceu:metallic_hydrogen_single_cable", "count": 2 } ],
+          "fluidsIn": [ ],
           "itemsOut": [ { "id": "grindless:uiv_electric_piston", "count": 1 } ]
         },
         {
           "name": "dac_charge", "circuit": 7, "eut": 1966080, "duration": 200,
-          "itemsIn": [ { "id": "gtceu:diamond_plate", "count": 2 }, { "id": "gtceu:rhea_plate", "count": 1 }, { "id": "gtceu:tungsten_foil", "count": 1 } ],
+          "itemsIn": [ { "id": "gtceu:diamond_plate", "count": 2 } ],
           "fluidsIn": [ { "id": "gtceu:nitrogen", "amount": 1000 } ],
           "itemsOut": [ { "id": "grindless:dac_charge", "count": 1 } ]
         }
@@ -107,13 +107,13 @@
       "recipes": [
         {
           "name": "lonsdaleite_race", "circuit": 0, "eut": 1966080, "duration": 200,
-          "itemsIn": [ { "id": "grindless:leached_lonsdaleite", "count": 1 }, { "id": "gtceu:tungsten_foil", "count": 1 } ],
+          "itemsIn": [ { "id": "grindless:leached_lonsdaleite", "count": 1 } ],
           "kept": [],
           "itemsOut": [ { "id": "grindless:lonsdaleite_race", "count": 1 } ]
         },
         {
           "name": "laser_heated_n2", "circuit": 0, "eut": 1966080, "duration": 200,
-          "itemsIn": [ { "id": "grindless:dac_charge", "count": 1 }, { "id": "gtceu:tungsten_foil", "count": 1 } ],
+          "itemsIn": [ { "id": "grindless:dac_charge", "count": 1 } ],
           "kept": [],
           "itemsOut": [ { "id": "grindless:laser_heated_n2_charge", "count": 1 } ]
         }

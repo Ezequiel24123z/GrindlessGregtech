@@ -67,7 +67,7 @@ test('lines 15 and 16 chain: boule, slab, memory', () => {
   assert.deepEqual(outputs(by('cutter', 'eu151_yso_slabs')), ['grindless:eu151_yso_slab']);
   assert.deepEqual(outputs(by('cutter', 'er_yso_slabs')), ['grindless:er_yso_slab']);
   const six = by('assembler', 'six_hour_memory');
-  assert.deepEqual(inputs(six), ['grindless:six_hour_memory_slab', 'grindless:mk_cryostat_module', 'grindless:uev_sensor', 'gtceu:gold_plate', 'gtceu:helium']);
+  assert.deepEqual(inputs(six), ['grindless:six_hour_memory_slab', 'grindless:mk_cryostat_module', 'grindless:uev_sensor']);
   assert.deepEqual(outputs(six), ['grindless:six_hour_memory']);
   assert.ok(six.eut <= 1966080);
 });
@@ -136,7 +136,7 @@ test('line 42 and 44 steps: Pr metal is the oxide only consumer, ErCl3, cold pla
   assert.deepEqual(outputs(by('assembler', 'cold_plate')), ['grindless:cold_plate']);
   assert.deepEqual(outputs(by('assembler', 'er_fibre')), ['grindless:er_fibre']);
   assert.deepEqual(outputs(by('assembler', 'er_fibre_coil')), ['grindless:er_fibre_coil']);
-  assert.deepEqual(inputs(by('assembler', 'pumped_edfa')), ['grindless:er_fibre_coil', 'grindless:ingaas_pump_module', 'gtceu:gold_plate', 'gtceu:helium']);
+  assert.deepEqual(inputs(by('assembler', 'pumped_edfa')), ['grindless:er_fibre_coil', 'grindless:ingaas_pump_module']);
   assert.deepEqual(outputs(by('assembler', 'pumped_edfa')), ['grindless:pumped_edfa']);
   for (const f of scripts(path.join(kube, 'server_scripts')).concat(OTHER_TABLES.map((n) => path.join(tables, n)))) {
     if (f.endsWith(path.join('uiv', 'memories_cryostat.js')) || f.endsWith(path.join('zpm', 'europium.js'))) continue; // europium.js is the producer
