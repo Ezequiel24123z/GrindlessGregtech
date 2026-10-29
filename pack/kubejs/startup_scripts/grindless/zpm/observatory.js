@@ -57,7 +57,8 @@
         var c = ' '
         if (!inFoot) c = ' '
         else if (z === 14 && y === 1 && x === 7) c = 'S'
-        else if (y === 0) c = rim ? 'X' : (d <= 8 ? 'H' : 'X')
+        else if (y === 0) c = 'X'
+        else if (y === 1 && !rim && d <= 8) c = 'H'
         else if (y === 14) c = rim ? 'R' : 'H'
         else if (vertex) c = 'R'
         else if (rim) {
