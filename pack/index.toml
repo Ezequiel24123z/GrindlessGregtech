@@ -9853,6 +9853,10 @@ file = "kubejs/client_scripts/grindless/uiv_foundation_lang.js"
 hash = "247eb2a00a58d602b1b84b5446330004ff243f6e0a33fe0845519e7e518b7a4e"
 
 [[files]]
+file = "kubejs/client_scripts/grindless/uiv_gate_lang.js"
+hash = "96b4bd4a61c8a00fc217c97b9501e44bdcf04783cf6e81831da06cc869128135"
+
+[[files]]
 file = "kubejs/client_scripts/grindless/uiv_info_lang.js"
 hash = "ad89d41235cd7974e1eeeff76b31011d23f225de87732f8e81fde91ef61a02ae"
 
@@ -10362,7 +10366,7 @@ hash = "4bb9d000c0874cbecc02c42fd58119ad93ea3069b85ba59694905b802f13ec07"
 
 [[files]]
 file = "kubejs/data/grindless/tables/gate.json"
-hash = "f0fd55006d51d381630ded2e2581cda0c952fa8efa027ba85be5739b688e6da1"
+hash = "51c46a0ead6bd11885f51c15bfe6611d582e4f1009393c038d9ed758cf87ab80"
 
 [[files]]
 file = "kubejs/data/grindless/tables/heavy_water_plant.json"
@@ -10374,7 +10378,7 @@ hash = "1f4b256531a0b42a6ecf399e9b692d9e4730bd4102e53aab3e1fa2c999b69e9d"
 
 [[files]]
 file = "kubejs/data/grindless/tables/hidden_until.json"
-hash = "427c1911df5d41f114527cd57ec046f7db9c300dd4ef5bc78476defc0f891eb5"
+hash = "54d156460ea2c7b8be229e0b7a85870f7372dcf02c14809ffcfb37324e927abd"
 
 [[files]]
 file = "kubejs/data/grindless/tables/horizon_collector.json"
@@ -11319,6 +11323,10 @@ hash = "9f4508a0536916652e0731a4c677936ff05672687d444659bb86f08aa08234eb"
 [[files]]
 file = "kubejs/server_scripts/grindless/uiv/foundation.js"
 hash = "128307b9e5cd407dc03b05e0d137038ec207cdefb768c1b4340396a9072cf484"
+
+[[files]]
+file = "kubejs/server_scripts/grindless/uiv/gate.js"
+hash = "4d03d5f41cd28d4c6c632591e4f97f6b38d11bda2ad12b88a27ac1bb760a79ba"
 
 [[files]]
 file = "kubejs/server_scripts/grindless/uiv/isotopes.js"

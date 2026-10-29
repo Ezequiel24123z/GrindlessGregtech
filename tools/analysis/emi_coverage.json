@@ -73,7 +73,6 @@
     { "type": "gtceu:mega_chemical_complex", "source": "server_scripts/grindless/luv/mega_chemical_complex.js composes GTM's and Gregicality's live chemical reactor lines (PTFE, epoxy, para-aramid) into one recipe each (tables/mega_chemical_complex.json, lib/compose.js)" }
   ],
   "exceptions": [
-  { "id": "grindless:superheavy_census_ii", "role": "use", "reason": "temporary (UIV-B2, superheavy chemistry): it is kept by the warp gate's c7 hold row, written by UIV-B5 (docs/eras/uiv.md 'B5. Gate'); delete this exception when B5 merges" }
   ],
   "pendingRoutes": [
   ]
