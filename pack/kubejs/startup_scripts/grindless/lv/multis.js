@@ -29,8 +29,10 @@
 // Tripod Drill's (<type>/ev/); the sealed dome's crops will be <type>/ev/ too.
 // The Lunar Drill (startup_scripts/grindless/moon/lunar_drill.js) uses `bores` too, with no veto: its type has only lunar recipes.
 //
-// Lookup note (GTM's RecipeDB): a recipe whose ingredient list is a prefix of another recipe's list makes one of the two
-// disappear. The generated LV recipes therefore list the ingredient that the steam recipe does NOT start with first
+// Lookup note (GTM's RecipeDB): a recipe whose ingredient path is a prefix of another recipe's path makes one of the two
+// disappear. The order of items vs fluids is not reliable (it changes per JVM); only the declared item order is. So two recipes of
+// a type must never have comparable ingredient sets (tools/analysis/test/recipe-twins.test.mjs, findPrefixHazards). The generated
+// LV recipes list the ingredient that the steam recipe does NOT start with first
 // (drill: drill bit before sample; greenhouse: fertilizer before catalyst, the CO2 boosters: circuit before catalyst).
 // See server_scripts/grindless/lv/*.js.
 //
@@ -205,7 +207,7 @@
     return /_fluid$/.test(recipePath(recipe))
   }
 
-  // greenhouse fertilizer variants: LV .../lv/<crop>_fertilizer, MV .../mv/<crop>_fertilizer_co2
+  // greenhouse fertilizer variants: LV .../lv/<crop>_fertilizer (circuit 2), MV .../mv/<crop>_fertilizer_co2 (circuit 4)
   function isFertilizerRecipe(recipe) {
     return /\/(lv|mv)\/.+_fertilizer(_co2)?$/.test(recipePath(recipe))
   }

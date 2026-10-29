@@ -260,9 +260,9 @@ What it gains: **several steps in one, and energy back.** Hot ingots go straight
 What it gains: **crops where there is no sky, no soil and no air.** LED panels grow plants through the 14-day lunar night, and the plants turn CO₂ into O₂. The idea comes from Leisure's large greenhouse (no sky needed) and the catalog's sealed lunar dome. The physics is real: BIOS-3 and Lunar Palace 1.
 
 - **Recipe type:** `gtceu:greenhouse`, the family's own type. It was checked on 2026-10-25 (run `b8-sealed-dome-2`, on the Moon): neither the type nor any of its old recipes checks sky, daytime or dimension.
-  - **Programmed circuit 4 is the sealed mode,** off-world only. Each plant + 100 mB water + 200 mB CO₂ (Moon, `.dimension('gcyr:luna')`), or water alone (Mars, `.dimension('gcyr:mars')`, CO₂ from the air), gives ×3 the base output + 100 mB O₂, at 8 EU/t for 200 ticks. That is the HV greenhouse's best yield, with LEDs and no fertilizer. There are two recipes per plant (86 in all), because the Mars one has no CO₂ input.
-  - Circuits 0–3 work as in the HV greenhouse. The cap is 64 runs.
-  - Lower greenhouses never run the sealed recipes, which have `/ev/` ids and need circuit 4.
+  - **Programmed circuit 5 (Moon) or 6 (Mars) is the sealed mode,** off-world only. Each plant + 100 mB water + 200 mB CO₂ (Moon, circuit 5, `.dimension('gcyr:luna')`), or water alone (Mars, circuit 6, `.dimension('gcyr:mars')`, CO₂ from the air), gives ×3 the base output + 100 mB O₂, at 8 EU/t for 200 ticks. That is the HV greenhouse's best yield, with LEDs and no fertilizer. There are two recipes per plant (86 in all), because the Mars one has no CO₂ input. Each site has its own circuit so that neither recipe's ingredients are a prefix of the other's in GTM's lookup.
+  - Circuits 0–4 work as in the HV greenhouse (circuit 4 is the fertilizer + CO₂ variant). The cap is 64 runs.
+  - Lower greenhouses never run the sealed recipes, which have `/ev/` ids and need circuit 5 or 6.
 - **CO₂:** on Mars, it comes straight from the outside air, like the gas collector. On the Moon, it comes from home through the bridge. Home sources include the engine test stand's exhaust (MV), which gives that CO₂ a destination two eras later.
 - **Structure:** 7×5×7.
   - Two rings of sintered regolith (the hatches plus at least 38 bricks) and a 3×3 soil bed in a brick floor.

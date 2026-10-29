@@ -38,13 +38,15 @@
     Object.keys(t.types || {}).forEach(function (type) {
       var names = {}
       var circuits = {}
-      var noCircuit = type === 'chemical_reactor' || type === 'accelerator_driven'
+      var noCircuit = type === 'accelerator_driven'
+      // GTM's chemical reactor rows may carry a circuit (0 = none) that keeps them apart from other recipes' ingredient paths
+      var freeCircuit = type === 'chemical_reactor'
       list(t.types[type].recipes).forEach(function (r) {
         var n = String(r.name || '')
         var eut = Number(r.eut)
         var duration = Number(r.duration)
         var circuit = Number(r.circuit)
-        var circuitOk = noCircuit ? circuit === 0 : (circuit >= 1 && circuit <= 32 && !circuits[circuit])
+        var circuitOk = noCircuit ? circuit === 0 : freeCircuit ? (circuit >= 0 && circuit <= 32) : (circuit >= 1 && circuit <= 32 && !circuits[circuit])
         if (!/^[a-z0-9_]+$/.test(n) || names[n] || !circuitOk || !(eut > 0) || eut % 1 !== 0 || !(duration > 0) || duration % 1 !== 0) {
           problems.push(type + '/' + n + ': name, circuit ' + r.circuit + ', eut ' + r.eut + ', duration ' + r.duration)
           return

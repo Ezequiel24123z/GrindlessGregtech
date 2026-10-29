@@ -27,7 +27,7 @@ ClientEvents.lang('en_us', event => {
     add('tooltip.grindless.vein_sample.moon', 'Moon: craft it with an empty vein probe and two things of the vein brought back by hand on the first visit.')
 
     add('item.grindless.lunar_quantum_seed', 'Lunar Quantum Seed')
-    add('tooltip.grindless.lunar_quantum_seed.0', 'The Moon\'s half of an Earth-Moon quantum pair. Made only on the Moon: chemical reactor, ender pearl + helium-3.')
+    add('tooltip.grindless.lunar_quantum_seed.0', 'The Moon\'s half of an Earth-Moon quantum pair. Made only on the Moon: chemical reactor, programmed circuit 1 + ender pearl + helium-3.')
     add('tooltip.grindless.lunar_quantum_seed.1', 'Throw it into an explosion with an AE2 singularity (the Earth half): two entangled singularities that also link the Earth and the Moon.')
     add('tooltip.grindless.entangled_planet.moon', 'Earth-Moon pair: one end may sit on the Moon.')
 
@@ -53,7 +53,7 @@ ClientEvents.lang('es_es', event => {
     add('tooltip.grindless.vein_sample.moon', 'Luna: se hace con una sonda de vetas vacía y dos cosas de la veta traídas a mano en la primera visita.')
 
     add('item.grindless.lunar_quantum_seed', 'Semilla cuántica lunar')
-    add('tooltip.grindless.lunar_quantum_seed.0', 'La mitad lunar de un par cuántico Tierra-Luna. Solo se hace en la Luna: reactor químico, perla de ender + helio-3.')
+    add('tooltip.grindless.lunar_quantum_seed.0', 'La mitad lunar de un par cuántico Tierra-Luna. Solo se hace en la Luna: reactor químico, circuito programado 1 + perla de ender + helio-3.')
     add('tooltip.grindless.lunar_quantum_seed.1', 'Échala a una explosión con una singularidad de AE2 (la mitad de la Tierra): salen dos singularidades entrelazadas que también unen la Tierra y la Luna.')
     add('tooltip.grindless.entangled_planet.moon', 'Par Tierra-Luna: un extremo puede estar en la Luna.')
 

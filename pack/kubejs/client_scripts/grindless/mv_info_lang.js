@@ -15,7 +15,7 @@ ClientEvents.lang('en_us', event => {
     add('emi.grindless.info.lava_furnace.1', "Every item takes a little lava from a fluid input hatch in the hearth. It never makes lava: it is the compact way to smelt with lava pumped from the Nether.")
 
     add('emi.grindless.info.mv_greenhouse.0', "The MV Greenhouse grows trees, rubber trees, crops, mushrooms, berries, vines and flowers with a plant that is never used up. It runs every Steam and LV Greenhouse recipe, with more crops at once.")
-    add('emi.grindless.info.mv_greenhouse.1', "Water unlocks the extra plants; circuit 2 plus fertilizer doubles the output. Carbon dioxide in a second input hatch adds output and gives oxygen back.")
+    add('emi.grindless.info.mv_greenhouse.1', "Water unlocks the extra plants; circuit 2 plus fertilizer doubles the output. Circuit 4 with fertilizer and carbon dioxide in a second input hatch adds output and gives oxygen back.")
 
     add('emi.grindless.info.mv_vein_drill.0', "The MV Vein Drill drills the vein marked by the vein sample, over and over. It runs every Steam and LV Vein Drill recipe, up to 16 bores at once.")
     add('emi.grindless.info.mv_vein_drill.1', "The vanadium steel bit only works here and in better drills. Drilling fluid gives more ore and less wear; Nether and End veins only drill with it.")
@@ -55,7 +55,7 @@ ClientEvents.lang('es_es', event => {
     add('emi.grindless.info.lava_furnace.1', "Cada objeto gasta algo de lava de una escotilla de entrada de fluido en el hogar. Nunca produce lava: es la forma compacta de fundir con lava bombeada del Nether.")
 
     add('emi.grindless.info.mv_greenhouse.0', "El invernadero MV cultiva árboles, árboles de caucho, cultivos, setas, bayas, enredaderas y flores con una planta que nunca se gasta. Ejecuta todas las recetas de los invernaderos de vapor y LV, con más cultivos a la vez.")
-    add('emi.grindless.info.mv_greenhouse.1', "El agua desbloquea las plantas extra; el circuito 2 con fertilizante duplica la producción. El dióxido de carbono en una segunda escotilla de entrada suma producción y devuelve oxígeno.")
+    add('emi.grindless.info.mv_greenhouse.1', "El agua desbloquea las plantas extra; el circuito 2 con fertilizante duplica la producción. El circuito 4 con fertilizante y dióxido de carbono en una segunda escotilla de entrada suma producción y devuelve oxígeno.")
 
     add('emi.grindless.info.mv_vein_drill.0', "La perforadora de vetas MV perfora la veta que marca la muestra, una y otra vez. Ejecuta todas las recetas de las perforadoras de vapor y LV, hasta 16 perforaciones a la vez.")
     add('emi.grindless.info.mv_vein_drill.1', "La broca de acero de vanadio solo funciona aquí y en perforadoras mejores. El fluido de perforación da más mena y menos desgaste; las vetas del Nether y del End solo se perforan con él.")

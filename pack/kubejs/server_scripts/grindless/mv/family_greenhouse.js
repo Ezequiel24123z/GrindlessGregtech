@@ -5,26 +5,26 @@
 // are grindless:greenhouse/mv/...).
 //
 // One per crop, with the same shape as the LV fertilizer variant: sapling or seed (not consumed) + 1 gtceu:fertilizer + 100 mB of
-// water + PROGRAMMED CIRCUIT 2, plus 200 mB of carbon dioxide  ->  x3 the output of the base recipe (the fertilizer's x2 and the
+// water + PROGRAMMED CIRCUIT 4, plus 200 mB of carbon dioxide  ->  x3 the output of the base recipe (the fertilizer's x2 and the
 // CO2's x1.5) in half the time (200 ticks, 8 EU/t per run), and 100 mB of OXYGEN back per run (the EBF, the air line and the
-// hazmat line take it). Without CO2 in a hatch the LV fertilizer variant runs; with circuit 1 or none the base recipe.
+// hazmat line take it). Circuit 2 is still the LV fertilizer variant (CO2 or not); with circuit 1 or none the base recipe.
 // CO2 comes from the Submerged Arc Furnace (silicon, circuit 1), from distilling wood gas and from fermented biomass.
 //
 // The FERMENTED BIOMASS booster (grindless:greenhouse/mv/<crop>_biomass, circuit 3): sapling or seed (not consumed) + 50 mB of
 // gtceu:fermented_biomass (the biorefinery's brewery line) -> x2 the output in the base time and EU/t (400 ticks, 4 EU/t per run),
 // with no fertilizer, no CO2 and no oxygen. It is the path for a greenhouse that ferments but has no fertilizer or CO2 line. It runs
-// with or without CO2 in a hatch (the CO2 variants need circuit 2, so the two never compete for one circuit).
+// with or without CO2 in a hatch (the CO2 variants need circuit 4, so the two never compete for one circuit).
 //
 // Why only on top of the fertilizer: the steam recipes are [sapling] alone, and GTM's recipe lookup cannot hold "sapling" and
 // "sapling + CO2" as two recipes of one type (the first is a prefix of the second and the lookup drops one of them). The
-// fertilizer goes first in the ingredient list, like in the LV variants, so these never clash. The CO2 is optional in the sense
-// that the LV fertilizer variant still runs without it.
+// fertilizer goes first in the ingredient list, like in the LV variants.
 //
-// Lookup note (GTM's RecipeDB): ingredient lists are ordered by how often each ingredient appears in the type, items that
-// appear once first: [fertilizer, catalyst, CO2 (43 recipes), circuit 2 (86), water (111)] against the LV variants' [fertilizer,
-// catalyst, circuit 2, water]: they differ at the third ingredient, so neither is a prefix of the other. The biomass boosters list
-// the CIRCUIT first, then the catalyst, then the biomass, the same order as the LV CO2 boosters (lv/greenhouse.js): no booster
-// starts with the catalyst alone (the steam recipe) or with the fertilizer.
+// Lookup note (GTM's RecipeDB drops a recipe whose ingredient path is a prefix of another's; the order of items vs fluids and of
+// the fluids themselves is not reliable, only the declared item order is): the LV fertilizer variant [fertilizer, catalyst,
+// circuit 2; water] and this one would be a prefix pair with the same circuit, so this one takes circuit 4: the item lists differ
+// at the third item and neither is a prefix of the other. The biomass boosters list the CIRCUIT first, then the catalyst, then the
+// biomass, the same order as the LV CO2 boosters (lv/greenhouse.js): no booster starts with the catalyst alone (the steam recipe)
+// or with the fertilizer. tools/analysis/test/recipe-twins.test.mjs (findPrefixHazards) checks the whole pack.
 (function () {
   const G = global.grindless
   const LV = G.lv || (G.lv = {})
@@ -39,6 +39,7 @@
   const O2_MB = 100
   // the fertilizer's x2 times the CO2's x1.5
   const FACTOR = 3
+  const CIRCUIT = 4
   // the biomass booster: x2 the output, circuit 3, no fertilizer, CO2 or oxygen
   const BIOMASS = 'gtceu:fermented_biomass'
   const BIOMASS_MB = 50
@@ -80,7 +81,7 @@
       var recipe = event.recipes.gtceu.greenhouse('grindless:mv/' + entry.id + '_fertilizer_co2')
         .itemInputs('1x ' + FERTILIZER)
         .notConsumable(entry.catalyst)
-        .circuit(2)
+        .circuit(CIRCUIT)
         .inputFluids(Fluid.of(WATER, WATER_MB), Fluid.of(CO2, CO2_MB))
         .outputFluids(Fluid.of(O2, O2_MB))
       addOutputs(recipe, entry.outputs, FACTOR)
@@ -89,7 +90,7 @@
     })
 
     // published for the smoke test
-    MV.greenhouse = { count: count, co2: CO2, co2Mb: CO2_MB, o2: O2, o2Mb: O2_MB, waterMb: WATER_MB, factor: FACTOR, duration: duration, eut: eut }
+    MV.greenhouse = { count: count, co2: CO2, co2Mb: CO2_MB, o2: O2, o2Mb: O2_MB, waterMb: WATER_MB, factor: FACTOR, circuit: CIRCUIT, duration: duration, eut: eut }
     console.info('[grindless/mv] greenhouse fertilizer + CO2 recipes added: ' + count)
 
     // the fermented biomass boosters: the base time and EU/t, x2 the output (see the header). Own check: a missing biomass only

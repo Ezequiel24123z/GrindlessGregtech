@@ -9,7 +9,7 @@ ClientEvents.lang('en_us', event => {
     add('emi.grindless.info.coil_chemical_plant.1', "Better coils mean more copies, up to 64 with HSS-G, and each coil step above cupronickel also trims the energy. Each copy pays its full EU/t, so the energy hatches set how many run.")
 
     add('emi.grindless.info.hv_greenhouse.0', "The HV Greenhouse grows trees, rubber trees, crops, mushrooms, berries, vines and flowers with a plant that is never used up. It runs every Steam, LV and MV Greenhouse recipe, with more crops at once.")
-    add('emi.grindless.info.hv_greenhouse.1', "Water unlocks the extra plants; circuit 2 plus fertilizer doubles the output. Carbon dioxide in a second input hatch adds output and gives oxygen back.")
+    add('emi.grindless.info.hv_greenhouse.1', "Water unlocks the extra plants; circuit 2 plus fertilizer doubles the output. Circuit 4 with fertilizer and carbon dioxide in a second input hatch adds output and gives oxygen back.")
 
     add('emi.grindless.info.hv_vein_drill.0', "The HV Vein Drill drills the vein marked by the vein sample, over and over. It runs every Steam, LV and MV Vein Drill recipe, the End veins too with drilling fluid, up to 32 bores at once.")
     add('emi.grindless.info.hv_vein_drill.1', "It takes the stainless steel bit, which only works here and in better drills. Drilling fluid in the fluid hatch gives more ore and less wear.")
@@ -31,7 +31,7 @@ ClientEvents.lang('es_es', event => {
     add('emi.grindless.info.coil_chemical_plant.1', "Mejores bobinas dan más copias, hasta 64 con HSS-G, y cada escalón sobre el cuproníquel recorta además la energía. Cada copia paga su EU/t completo, así que las escotillas de energía fijan cuántas corren.")
 
     add('emi.grindless.info.hv_greenhouse.0', "El invernadero HV cultiva árboles, árboles de caucho, cultivos, setas, bayas, enredaderas y flores con una planta que nunca se gasta. Ejecuta todas las recetas de los invernaderos de vapor, LV y MV, con más cultivos a la vez.")
-    add('emi.grindless.info.hv_greenhouse.1', "El agua desbloquea las plantas extra; el circuito 2 con fertilizante duplica la producción. El dióxido de carbono en una segunda escotilla de entrada suma producción y devuelve oxígeno.")
+    add('emi.grindless.info.hv_greenhouse.1', "El agua desbloquea las plantas extra; el circuito 2 con fertilizante duplica la producción. El circuito 4 con fertilizante y dióxido de carbono en una segunda escotilla de entrada suma producción y devuelve oxígeno.")
 
     add('emi.grindless.info.hv_vein_drill.0', "La perforadora de vetas HV perfora la veta que marca la muestra, una y otra vez. Ejecuta todas las recetas de las perforadoras de vapor, LV y MV, también las vetas del End con fluido de perforación, hasta 32 perforaciones a la vez.")
     add('emi.grindless.info.hv_vein_drill.1', "Usa la broca de acero inoxidable, que solo funciona aquí y en perforadoras mejores. El fluido de perforación en la escotilla de fluidos da más mena y menos desgaste.")
