@@ -14,7 +14,7 @@
 //   assembler                 the cryostat casing (grindless:assembler/cryostat_casing): the table's "casing" entry. The design's aerogel
 //                             is package A8's, so the casing takes a frostproof casing with gold and copper plates.
 //   crafting                  the controller (zpm.md, "Controller"): ZPM hull + 2 ZPM motors + ZPM sensor + 4 ZPM circuits, in a crafting
-//                             grid (grindless:crafting/naquadria_magnet_works).
+//                             grid (grindless:assembly_line/naquadria_magnet_works).
 //
 // Published for the smoke test: global.grindless.magnetWorks.recipes [{ name, id, recipeId, circuit, charge, itemsIn, fluidsIn, itemsOut,
 // eut, duration }], .skipped, .clashes, .casingRecipe, .craftingRecipe, .craftingParts.
@@ -33,8 +33,12 @@
   var MOTOR = 'gtceu:zpm_electric_motor'
   var SENSOR = 'gtceu:zpm_sensor'
   var CONTROLLER_PARTS = [HULL, MOTOR, SENSOR, CONTROLLER]
-  MW.craftingRecipe = 'grindless:crafting/naquadria_magnet_works'
-  MW.craftingParts = CONTROLLER_PARTS
+  var BEARING = 'grindless:magnetic_bearing'
+  var COIL_CASING = 'grindless:coilgun_coil_casing'
+  var RESEARCH = 'grindless:cryostat_casing'
+  MW.craftingRecipe = 'grindless:assembly_line/naquadria_magnet_works'
+  MW.craftingParts = CONTROLLER_PARTS.concat([BEARING, COIL_CASING])
+  MW.craftingResearch = RESEARCH
   MW.casingRecipe = 'grindless:assembler/cryostat_casing'
 
   function io() {
@@ -195,29 +199,34 @@
     addCasing(event, table.casing)
   }
 
+  // the cryostat casing: the table's inputs + a coilgun coil casing (the winding's former, LuV) and liquid helium for the shell
   function addCasing(event, c) {
-    var missing = c.itemsIn.map(function (x) { return x.id }).concat([c.output]).filter(function (id) { return !Item.exists(id) })
+    var missing = c.itemsIn.map(function (x) { return x.id }).concat([c.output, COIL_CASING]).filter(function (id) { return !Item.exists(id) })
+      .concat(['gtceu:liquid_helium'].filter(function (id) { return !Fluid.exists(id) }))
     if (missing.length > 0) {
       console.error(LOG + 'cryostat casing recipe skipped, unknown item(s): ' + missing.join(', '))
       return
     }
     var recipe = event.recipes.gtceu.assembler('grindless:cryostat_casing')
     c.itemsIn.forEach(function (x) { recipe.itemInputs(x.count + 'x ' + x.id) })
+    recipe.itemInputs('1x ' + COIL_CASING).inputFluids(Fluid.of('gtceu:liquid_helium', 500))
     recipe.itemOutputs(c.count + 'x ' + c.output).EUt(c.eut).duration(c.duration)
   }
 
+  // ASSEMBLY LINE with scanner research: ZPM hull + 2 ZPM motors (the winding drive) + sensor + 4 ZPM circuits + magnetic bearings
+  // (LuV) + coilgun coil casings (LuV); research: the cryostat casing it will house.
   function addController(event) {
-    var missing = CONTROLLER_PARTS.filter(function (id) { return !Item.exists(id) })
+    var missing = MW.craftingParts.concat([RESEARCH]).filter(function (id) { return !Item.exists(id) })
     if (missing.length > 0) {
       console.error(LOG + 'naquadria magnet works controller recipe skipped, unknown item(s): ' + missing.join(', '))
       return
     }
-    event.recipes.gtceu.shaped(CONTROLLER, ['CSC', 'MHM', 'C C'], {
-      C: '#gtceu:circuits/zpm',
-      S: SENSOR,
-      M: MOTOR,
-      H: HULL
-    }).id(MW.craftingRecipe)
+    var b = event.recipes.gtceu.assembly_line('grindless:naquadria_magnet_works')
+    b.itemInputs(HULL, '2x ' + MOTOR, SENSOR, '4x #gtceu:circuits/zpm', '2x ' + BEARING, '2x ' + COIL_CASING)
+    b.inputFluids(Fluid.of('gtceu:soldering_alloy', 1152), Fluid.of('gtceu:lubricant', 1000))
+    b.itemOutputs(CONTROLLER)
+    b.scannerResearch(Item.of(RESEARCH))
+    b.EUt(122880).duration(1200)
   }
 
   // an uncaught error here would stop KubeJS from running the recipe handlers of the scripts that load after this one

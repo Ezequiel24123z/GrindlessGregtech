@@ -33,7 +33,12 @@
   var HULL = 'gtceu:zpm_machine_hull'
   var PUMP = 'gtceu:zpm_electric_pump'
   var FIELD = 'gtceu:zpm_field_generator'
-  F.craftingRecipes = { caster: 'grindless:crafting/plasma_quench_caster', converter: 'grindless:crafting/direct_energy_converter' }
+  F.craftingRecipes = { caster: 'grindless:assembly_line/plasma_quench_caster', converter: 'grindless:assembly_line/direct_energy_converter' }
+  F.craftingDomain = {
+    caster: ['grindless:hermean_heat_shield_brick', 'grindless:zircaloy_cladding_tube'],
+    converter: ['grindless:hermean_thin_film_panel', 'grindless:solar_wing_panel']
+  }
+  F.craftingResearch = { caster: 'grindless:heliostat_mirror', converter: 'grindless:orbital_solar_panel' }
 
   function fluidOf(id, amount) {
     return Fluid.of(id, amount)
@@ -209,17 +214,27 @@
 
   // ---------------------------------------------------------------- the controllers
 
+  // ASSEMBLY LINE with scanner research. Caster: hull + 2 pumps + 4 circuits + a hermean heat-shield brick (the quench chamber's lining)
+  // + zircaloy cladding tube (the plasma-facing sleeve); research: the IV heliostat mirror. Converter: hull + 2 field generators +
+  // 4 circuits + a hermean thin-film panel (the collector) + a solar wing panel (the radiator); research: the LuV orbital solar panel.
   function addControllers(event) {
-    var parts = [HULL, PUMP, FIELD, CASTER, CONVERTER]
+    var parts = [HULL, PUMP, FIELD, CASTER, CONVERTER].concat(F.craftingDomain.caster, F.craftingDomain.converter,
+      [F.craftingResearch.caster, F.craftingResearch.converter])
     var missing = missingItems(parts)
     if (missing.length > 0) {
       console.error(LOG + 'controller recipes skipped, unknown item(s): ' + missing.join(', '))
       return
     }
-    // ZPM hull + 2 ZPM pumps + 4 ZPM circuits
-    event.recipes.gtceu.shaped(CASTER, ['CPC', 'CHC', ' P '], { C: '#gtceu:circuits/zpm', P: PUMP, H: HULL }).id(F.craftingRecipes.caster)
-    // ZPM hull + 2 ZPM field generators + 4 ZPM circuits
-    event.recipes.gtceu.shaped(CONVERTER, ['CFC', 'CHC', ' F '], { C: '#gtceu:circuits/zpm', F: FIELD, H: HULL }).id(F.craftingRecipes.converter)
+    function line(id, output, part, domain, research) {
+      var b = event.recipes.gtceu.assembly_line(id.replace('assembly_line/', ''))
+      b.itemInputs(HULL, '2x ' + part, '4x #gtceu:circuits/zpm', '2x ' + domain[0], '2x ' + domain[1])
+      b.inputFluids(Fluid.of('gtceu:soldering_alloy', 1152), Fluid.of('gtceu:lubricant', 1000))
+      b.itemOutputs(output)
+      b.scannerResearch(Item.of(research))
+      b.EUt(122880).duration(1200)
+    }
+    line(F.craftingRecipes.caster, CASTER, PUMP, F.craftingDomain.caster, F.craftingResearch.caster)
+    line(F.craftingRecipes.converter, CONVERTER, FIELD, F.craftingDomain.converter, F.craftingResearch.converter)
   }
 
   // an uncaught error here would stop KubeJS from running the recipe handlers of the scripts that load after this one

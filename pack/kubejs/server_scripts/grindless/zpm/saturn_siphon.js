@@ -137,31 +137,37 @@
       return
     }
     event.recipes.gtceu.assembler('grindless:scoop_head')
-      .itemInputs('4x gtceu:hsss_plate', '2x gtceu:naquadah_plate', '1x gtceu:zpm_electric_pump')
+      .itemInputs('4x gtceu:hsss_plate', '2x gtceu:naquadah_plate', '1x gtceu:zpm_electric_pump', '1x grindless:hss_s_drill_bit', '1x grindless:anchor_harpoon')
+      .inputFluids(Fluid.of('gtceu:soldering_alloy', 144))
       .circuit(1).itemOutputs('1x ' + SCOOP).EUt(ZPM_VA).duration(200)
     event.recipes.gtceu.assembler('grindless:ring_sail_net')
-      .itemInputs('8x gcyr:para_aramid_foil', '4x gtceu:titanium_plate')
+      .itemInputs('8x gcyr:para_aramid_foil', '4x gtceu:titanium_plate', '1x grindless:anchor_harpoon', '1x grindless:whipple_shield_casing', '1x grindless:night_sky_radiator')
+      .inputFluids(Fluid.of('gtceu:polyethylene', 144), Fluid.of('gtceu:lubricant', 100))
       .circuit(2).itemOutputs('1x ' + NET).EUt(ZPM_VA).duration(200)
   }
 
-  // CRAFTING TABLE: hull + the machine's own parts + 4 ZPM circuits
+  // ASSEMBLY LINE with scanner research: hull + the machine's own parts + 4 ZPM circuits + two domain parts + soldering alloy + lubricant
   function addCrafting(event) {
     var HULL = 'gtceu:zpm_machine_hull'
     var list = [
-      { id: 'gtceu:gas_giant_siphon', pattern: ['CPC', 'MHM', 'CPC'], extra: { P: 'gtceu:zpm_electric_pump', M: 'gtceu:zpm_electric_motor' } },
-      { id: 'gtceu:isotope_column', pattern: ['CPC', ' H ', 'CPC'], extra: { P: 'gtceu:zpm_electric_pump' } },
-      { id: 'gtceu:ring_harvester', pattern: ['CVC', ' H ', 'CVC'], extra: { V: 'gtceu:zpm_conveyor_module' } }
+      { id: 'gtceu:gas_giant_siphon', parts: ['2x gtceu:zpm_electric_pump', '2x gtceu:zpm_electric_motor'], domain: ['grindless:cryogenic_fuel_tank', 'grindless:magnetic_bearing'], research: 'grindless:radiation_vault_casing' },
+      { id: 'gtceu:isotope_column', parts: ['2x gtceu:zpm_electric_pump'], domain: ['grindless:ion_exchange_resin', 'grindless:leu_pellet'], research: 'grindless:molten_salt_charge' },
+      { id: 'gtceu:ring_harvester', parts: ['2x gtceu:zpm_conveyor_module'], domain: ['grindless:anchor_harpoon', 'grindless:asteroid_regolith_casing'], research: 'grindless:platinum_gauze' }
     ]
     list.forEach(function (m) {
-      var keys = { C: '#gtceu:circuits/zpm', H: HULL }
-      Object.keys(m.extra).forEach(function (k) { keys[k] = m.extra[k] })
-      var parts = Object.keys(keys).map(function (k) { return keys[k] }).filter(function (v) { return v.charAt(0) !== '#' })
+      var inputs = [HULL].concat(m.parts, ['4x #gtceu:circuits/zpm'], m.domain.map(function (d) { return '2x ' + d }))
+      var parts = inputs.concat([m.research, m.id]).map(function (v) { return v.replace(/^\d+x /, '') }).filter(function (v) { return v.charAt(0) !== '#' })
       var missing = parts.filter(function (id) { return !Item.exists(id) })
       if (missing.length > 0) {
         console.error(LOG + 'saturn siphon crafting of ' + m.id + ' skipped, unknown item(s): ' + missing.join(', '))
         return
       }
-      event.recipes.gtceu.shaped(m.id, m.pattern, keys).id('grindless:crafting/' + m.id.split(':')[1])
+      var b = event.recipes.gtceu.assembly_line('grindless:' + m.id.split(':')[1])
+      inputs.forEach(function (x) { b.itemInputs(x) })
+      b.inputFluids(Fluid.of('gtceu:soldering_alloy', 1152), Fluid.of('gtceu:lubricant', 1000))
+      b.itemOutputs(m.id)
+      b.scannerResearch(Item.of(m.research))
+      b.EUt(ZPM_VA).duration(1200)
     })
   }
 

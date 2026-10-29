@@ -162,8 +162,12 @@
 
   var HULL = 'gtceu:zpm_machine_hull'
   var PUMP = 'gtceu:zpm_electric_pump'
-  ER.craftingParts = [HULL, PUMP, ER.machine || 'gtceu:europium_reductor']
-  ER.craftingRecipe = 'grindless:crafting/europium_reductor'
+  var RESIN = 'grindless:ion_exchange_resin'
+  var GAUZE = 'grindless:platinum_gauze'
+  var RESEARCH = 'grindless:ruthenium_catalyst'
+  ER.craftingParts = [HULL, PUMP, RESIN, GAUZE, ER.machine || 'gtceu:europium_reductor']
+  ER.craftingResearch = RESEARCH
+  ER.craftingRecipe = 'grindless:assembly_line/europium_reductor'
 
   var FROTH_ORIGINAL = 'gtceu:thermal_reactor/monazite_froth'
   var FROTH_NEW = 'grindless:thermal_reactor/monazite_froth_no_europium'
@@ -222,18 +226,20 @@
     console.info(LOG + 'europium reductor recipes added: ' + (ER.recipes.length - ER.skipped.length))
   }
 
-  // CRAFTING TABLE: ZPM hull + 2 ZPM pumps (the column's circulation) + 4 ZPM circuits
+  // ASSEMBLY LINE with scanner research: ZPM hull + 2 ZPM pumps (the column's circulation) + 4 ZPM circuits + ion-exchange resin
+  // (the extraction cascade's bed) + platinum gauze (the valence cell's catalyst); research: the ruthenium catalyst (EV).
   function addCrafting(event) {
-    var missing = ER.craftingParts.filter(function (id) { return !Item.exists(id) })
+    var missing = ER.craftingParts.concat([RESEARCH]).filter(function (id) { return !Item.exists(id) })
     if (missing.length > 0) {
       console.error(LOG + 'europium reductor crafting skipped, unknown item(s): ' + missing.join(', '))
       return
     }
-    event.recipes.gtceu.shaped('gtceu:europium_reductor', ['CPC', ' H ', 'CPC'], {
-      C: '#gtceu:circuits/zpm',
-      P: PUMP,
-      H: HULL
-    }).id(ER.craftingRecipe)
+    var b = event.recipes.gtceu.assembly_line('grindless:europium_reductor')
+    b.itemInputs(HULL, '2x ' + PUMP, '4x #gtceu:circuits/zpm', '4x ' + RESIN, '2x ' + GAUZE)
+    b.inputFluids(Fluid.of('gtceu:soldering_alloy', 1152), Fluid.of('gtceu:lubricant', 1000))
+    b.itemOutputs('gtceu:europium_reductor')
+    b.scannerResearch(Item.of(RESEARCH))
+    b.EUt(ZPM_VA).duration(1200)
   }
 
   // GTCA's froth reactor without the europium

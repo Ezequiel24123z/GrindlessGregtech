@@ -74,7 +74,7 @@ test('the telescope uses the CVD diamond plate; the catalogue is kept; the recor
 
 test('the casing and the controllers have recipes', () => {
   assert.ok(recipes.some((r) => /photomultiplier_casing/.test(r.i)), 'casing recipe');
-  for (const m of MACHINES) assert.ok(byId('grindless:crafting/' + m), m + ' crafting recipe');
+  for (const m of MACHINES) assert.ok(byId('grindless:assembly_line/' + m), m + ' crafting recipe');
 });
 
 test('the UV hatch is re-added under its own id with the survey as a kept input', () => {

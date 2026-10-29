@@ -176,7 +176,7 @@
     })
     ;['grindless:titan_entry/lake_sampling', 'grindless:tholin_reforming/nitrile_fibres', 'grindless:tholin_reforming/nitrile_diaminobenzidine',
       'grindless:telemetry_decoding/titan_lake_sampler', 'grindless:assembler/titan_entry_probe', 'grindless:assembler/probe_bay_casing',
-      'grindless:crafting/entry_probe_bay', 'grindless:crafting/tholin_reformer'].forEach(function (id) {
+      'grindless:assembly_line/entry_probe_bay', 'grindless:assembly_line/tholin_reformer'].forEach(function (id) {
       check('support_recipe', byId(id) !== null, id)
     })
   }  function finish() {

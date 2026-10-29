@@ -90,7 +90,7 @@ test('bulk deuterium and helium-3 come only from the isotope column', () => {
 test('tools and controllers have crafting or assembler recipes', () => {
   assert.ok(byId('grindless:scoop_head') || recipes.some((r) => /scoop_head/.test(r.i)), 'scoop head recipe');
   assert.ok(recipes.some((r) => /ring_sail_net/.test(r.i)), 'ring sail net recipe');
-  for (const m of MACHINES) assert.ok(byId('grindless:crafting/' + m), m + ' crafting recipe');
+  for (const m of MACHINES) assert.ok(byId('grindless:assembly_line/' + m), m + ' crafting recipe');
   assert.ok(byId('grindless:distillery/ring_ice_melt'), 'ring ice has a use');
 });
 
