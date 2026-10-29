@@ -202,7 +202,7 @@
     live('grindless:syngas/hv/pluto_shift', PLUTO, 5, 480)
     var old = byId('grindless:syngas/hv/shift')
     check('old_shift_unlocked', old !== null && dimsOf(old).length === 0, 'grindless:syngas/hv/shift has no dimension condition')
-    ;['grindless:crafting/penetrator_probe_bay', 'grindless:crafting/volatile_ice_fractionator', 'grindless:assembler/penetrator_probe']
+    ;['grindless:assembly_line/penetrator_probe_bay', 'grindless:assembly_line/volatile_ice_fractionator', 'grindless:assembler/penetrator_probe']
       .forEach(function (id) { check('support_recipe', byId(id) !== null, id) })
   }
   function finish() {

@@ -121,23 +121,32 @@
       .EUt(ZPM_VA).duration(200)
   }
 
-  // CRAFTING TABLE: UV hull + the machine's own parts + 4 UV circuits
+  // ASSEMBLY LINE: UV hull + the machine's own parts + 4 UV circuits + 3 line items, researched at the station from a line component
   function addCrafting(event) {
     var HULL = 'gtceu:uv_machine_hull'
     var list = [
-      { id: 'gtceu:penetrator_probe_bay', pattern: ['CRC', ' H ', 'CRC'], extra: { R: 'gtceu:uv_robot_arm' } },
-      { id: 'gtceu:volatile_ice_fractionator', pattern: ['CPC', ' H ', 'CPC'], extra: { P: 'gtceu:uv_electric_pump' } }
+      { id: 'gtceu:penetrator_probe_bay', research: 'grindless:penetrator_probe',
+        parts: [HULL, '4x gtceu:uv_robot_arm'],
+        domain: ['2x grindless:penetrator_probe', '4x grindless:printed_probe_frame', '2x grindless:gphs_module'] },
+      { id: 'gtceu:volatile_ice_fractionator', research: 'grindless:melt_head',
+        parts: [HULL, '4x gtceu:uv_electric_pump'],
+        domain: ['4x grindless:melt_head', '2x grindless:gphs_module', '2x grindless:printed_probe_frame'] }
     ]
     list.forEach(function (m) {
-      var keys = { C: '#gtceu:circuits/uv', H: HULL }
-      Object.keys(m.extra).forEach(function (k) { keys[k] = m.extra[k] })
-      var parts = Object.keys(keys).map(function (k) { return keys[k] }).filter(function (v) { return v.charAt(0) !== '#' })
-      var missing = parts.filter(function (id) { return !Item.exists(id) })
+      var ids = [m.id, m.research].concat(m.parts, m.domain).map(function (s) { return s.replace(/^\d+x /, '') })
+      var missing = ids.filter(function (id) { return !Item.exists(id) })
       if (missing.length > 0) {
-        console.error(LOG + 'pluto ices crafting of ' + m.id + ' skipped, unknown item(s): ' + missing.join(', '))
+        console.error(LOG + 'pluto ices controller recipe of ' + m.id + ' skipped, unknown item(s): ' + missing.join(', '))
         return
       }
-      event.recipes.gtceu.shaped(m.id, m.pattern, keys).id('grindless:crafting/' + m.id.split(':')[1])
+      var b = event.recipes.gtceu.assembly_line('grindless:' + m.id.split(':')[1])
+      m.parts.forEach(function (s) { b.itemInputs(s) })
+      b.itemInputs('4x #gtceu:circuits/uv')
+      m.domain.forEach(function (s) { b.itemInputs(s) })
+      b.inputFluids(Fluid.of('gtceu:soldering_alloy', 1152), Fluid.of('gtceu:lubricant', 1000), Fluid.of('gtceu:tritanium', 576))
+      b.itemOutputs(m.id)
+      b.stationResearch(function (r) { return r.researchStack(Item.of(m.research)).CWUt(64).EUt(491520) })
+      b.EUt(491520).duration(1200)
     })
   }
 

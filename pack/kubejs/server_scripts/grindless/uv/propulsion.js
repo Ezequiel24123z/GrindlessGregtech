@@ -31,8 +31,7 @@
 //                       high-temperature insulation) -> 1 electromagnet
 //     propellant tank   assembler (circuit 8): 4 titanium plates (the liner) + 8 carbon nanotube yarn (the overwrap) + 1 UV electric pump
 //                       (the flow control) + 288 mB epoxy -> 1 propellant tank
-//   controllers (crafting grid): UV hull + 2 UV robot arms + UV motor + 4 UV circuits (winder); UV hull + 2 UV robot arms + UV pump +
-//     4 UV circuits (works)
+//   controllers (assembly line, station research, UV hull + parts + 4 UV circuits + 3 line items + soldering alloy, lubricant, tritanium)
 //
 // Lookup: every recipe of a machine has its own circuit and its own items, so no recipe's keys contain another's (checked at load).
 // Published in global.grindless.propulsion: .recipes and .side [{ name, type, recipeId, circuit, itemsIn, fluidsIn, itemsOut, fluidsOut,
@@ -124,10 +123,12 @@
       [fluid('gtceu:argon', 1000)], [item(CATHODE, 1)], [], VA_IV, 600),
     row('bn_discharge_channel', 'forming_press', null, [item(HBN, 3), item('gtceu:silicon_dioxide_dust', 1)], [], [item(CHANNEL, 1)], [],
       VA_IV, 300),
-    row('uv_electromagnet', 'assembler', 7, [item('gtceu:iron_rod', 1), item('gtceu:fine_annealed_copper_wire', 16)],
-      [fluid('gtceu:polybenzimidazole', 144)], [item(MAGNET, 1)], [], VA_LUV, 200),
-    row('propellant_tank', 'assembler', 8, [item('gtceu:titanium_plate', 4), item(CNT_YARN, 8), item('gtceu:uv_electric_pump', 1)],
-      [fluid(EPOXY, 288)], [item(PROPELLANT_TANK, 1)], [], VA_ZPM, 400)
+    row('uv_electromagnet', 'assembler', 7, [item('gtceu:iron_rod', 1), item('gtceu:fine_annealed_copper_wire', 16),
+      item('grindless:silicon_nitride_film', 1), item('gtceu:molybdenum_plate', 1), item('gtceu:tungsten_steel_plate', 1)],
+      [fluid('gtceu:polybenzimidazole', 144), fluid('gtceu:soldering_alloy', 72)], [item(MAGNET, 1)], [], VA_LUV, 200),
+    row('propellant_tank', 'assembler', 8, [item('gtceu:titanium_plate', 4), item(CNT_YARN, 8), item('gtceu:uv_electric_pump', 1),
+      item('grindless:silicon_nitride_film', 1), item('gtceu:tritanium_plate', 1)],
+      [fluid(EPOXY, 288), fluid('gtceu:soldering_alloy', 144)], [item(PROPELLANT_TANK, 1)], [], VA_ZPM, 400)
   ]
   SIDE[0].notConsumed = ['gtceu:sapphire_lens']
   SIDE[1].temp = 2500
@@ -144,8 +145,8 @@
   P.skipped = []
   P.clashes = []
   P.crafting = {
-    winder: 'grindless:crafting/cryotank_winder',
-    works: 'grindless:crafting/thruster_works'
+    winder: 'grindless:assembly_line/cryotank_winder',
+    works: 'grindless:assembly_line/thruster_works'
   }
   P.craftingParts = ['gtceu:uv_machine_hull', 'gtceu:uv_robot_arm', 'gtceu:uv_electric_motor', 'gtceu:uv_electric_pump']
 
@@ -216,17 +217,30 @@
   }
 
   function addCrafting(event) {
-    var missing = P.craftingParts.filter(function (id) { return !Item.exists(id) })
-    if (missing.length > 0) {
-      console.error(LOG + 'propulsion controller crafting skipped, unknown item(s): ' + missing.join(', '))
-      return
-    }
-    event.recipes.gtceu.shaped(P.winder || 'gtceu:cryotank_winder', ['CRC', 'RHM', 'C C'], {
-      C: '#gtceu:circuits/uv', R: 'gtceu:uv_robot_arm', M: 'gtceu:uv_electric_motor', H: 'gtceu:uv_machine_hull'
-    }).id(P.crafting.winder)
-    event.recipes.gtceu.shaped(P.works || 'gtceu:thruster_works', ['RCR', 'PHC', 'C C'], {
-      C: '#gtceu:circuits/uv', R: 'gtceu:uv_robot_arm', P: 'gtceu:uv_electric_pump', H: 'gtceu:uv_machine_hull'
-    }).id(P.crafting.works)
+    var list = [
+      { id: P.winder || 'gtceu:cryotank_winder', recipe: 'cryotank_winder', research: YARN,
+        parts: ['gtceu:uv_machine_hull', '2x gtceu:uv_robot_arm', '2x gtceu:uv_electric_motor'],
+        domain: ['4x ' + YARN, '4x ' + CNT_YARN, '2x ' + AEROGEL_TANK] },
+      { id: P.works || 'gtceu:thruster_works', recipe: 'thruster_works', research: GRID,
+        parts: ['gtceu:uv_machine_hull', '2x gtceu:uv_robot_arm', '2x gtceu:uv_electric_pump'],
+        domain: ['4x ' + GRID, '4x ' + CATHODE, '4x ' + CHANNEL] }
+    ]
+    list.forEach(function (m) {
+      var ids = [m.id, m.research].concat(m.parts, m.domain).map(function (s) { return s.replace(/^\d+x /, '') })
+      var missing = ids.filter(function (id) { return !Item.exists(id) })
+      if (missing.length > 0) {
+        console.error(LOG + 'propulsion controller recipe of ' + m.id + ' skipped, unknown item(s): ' + missing.join(', '))
+        return
+      }
+      var b = event.recipes.gtceu.assembly_line('grindless:' + m.recipe)
+      m.parts.forEach(function (s) { b.itemInputs(s) })
+      b.itemInputs('4x #gtceu:circuits/uv')
+      m.domain.forEach(function (s) { b.itemInputs(s) })
+      b.inputFluids(Fluid.of('gtceu:soldering_alloy', 1152), Fluid.of('gtceu:lubricant', 1000), Fluid.of('gtceu:tritanium', 576))
+      b.itemOutputs(m.id)
+      b.stationResearch(function (r) { return r.researchStack(Item.of(m.research)).CWUt(64).EUt(491520) })
+      b.EUt(491520).duration(1200)
+    })
   }
 
   ServerEvents.recipes(function (event) {

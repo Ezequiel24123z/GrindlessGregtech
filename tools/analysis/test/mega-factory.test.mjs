@@ -39,7 +39,8 @@ function harness() {
     GTRecipeModifiers: { OC_NON_PERFECT: 'OC_NON_PERFECT', BATCH_MODE: 'BATCH_MODE' },
     Block: { getBlock: (id) => id },
     Text: { translate: (s) => s, gray: (s) => s, literal: (s) => s },
-    Item: { exists: () => true },
+    Item: { exists: () => true, of: (id) => id },
+    Fluid: { of: (id, amount) => id + ':' + amount },
     Java: { loadClass: () => ({}) },
   });
   vm.runInContext(read('startup_scripts', 'lib/patterns.js'), context);
@@ -153,7 +154,7 @@ test('recipes: five module assemblers (8 machines, casings, 1 circuit) and the c
     added.push(r);
     return c;
   };
-  h.recipeHandlers.forEach((cb) => cb({ recipes: { gtceu: { assembler: (id) => chainable(id) } } }));
+  h.recipeHandlers.forEach((cb) => cb({ recipes: { gtceu: { assembler: (id) => chainable(id), assembly_line: (id) => chainable(id) } } }));
   assert.equal(added.length, 6);
   const machines = (r) => r.inputs.filter((i) => /gtceu:uv_(?!machine_casing)/.test(i)).reduce((s, i) => s + parseInt(i, 10), 0);
   for (const name of Object.keys(MODULES)) {
@@ -167,8 +168,9 @@ test('recipes: five module assemblers (8 machines, casings, 1 circuit) and the c
   }
   const c = added.find((x) => x.id === h.G.megaFactory.crafting);
   assert.equal(machines(c), 64);
-  assert.ok(c.inputs.length <= 9, 'fits the assembler slots');
+  assert.ok(c.inputs.length <= 16, 'fits the assembly line slots');
   assert.ok(c.inputs.includes('4x #gtceu:circuits/uv'));
+  for (const name of Object.keys(MODULES)) assert.ok(c.inputs.includes('grindless:' + name), name);
   assert.deepEqual(plain(c.outputs), ['gtceu:mega_factory']);
   assert.ok(c.eut > 0 && c.duration > 0);
   assert.deepEqual(plain(h.errors), []);

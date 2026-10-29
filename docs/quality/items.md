@@ -31,7 +31,7 @@ Era is taken from the registering script's `grindless/<era>/` folder.
 
 ### Blocker-level (principle 8: energy or matter from nothing)
 - **uhv** `grindless:silicon_carbide/sic_epi`: 2000 mB hydrogen in, 2800 out. Fix: output at most the input, or add the missing reagent as input.
-- **zpm / uv** `grindless:closed_ecosystem/culture_seed`: 1 culture in, 2 out (algae and archaeal cultures). Intended as replication? If yes, state it in the page and require a nutrient input that is consumed; if not, output 1.
+- **zpm / uv** `grindless:closed_ecosystem/culture_seed` (uv fixed, QR-R4): replication, paid by 2 consumed agar dust beside the biomass (nutrients pay for the second culture).
 
 ### no_use (items nothing consumes)
 Ore indicators, one per vein: `gtceu:merrillite_indicator` (ev), `iridosmine_indicator` (iv), `meteoric_iron_indicator` and `tetrataenite_indicator` (luv), `deuterium_rich_ice_indicator` (mars). **Resolved (integrator, wave 1):** these are GTM surface-rock indicators, generated for every ore material and used by no GTM recipe by design (rule 6); `gtceu:*_indicator` is in `process_audit.json` `options.ignore`.
@@ -86,7 +86,7 @@ Dedicated machines or conditions justify some of these; flag them to the era own
 - **uiv** `gtceu:he3he3_ash`, `pli6_ash`, `pn15_ash` (direct conversion, 1 plasma to 1 ash); `annealed_neon_cone`, `bmg_flexspline`, `c12_ion_milled_plate`, `laser_heated_n2_charge`, `lonsdaleite_race`, `p_si_processor`, `polarised_li6h`, `poled_lnoi_wafer`, `six_hour_memory_slab`, `telecom_memory_slab`, `verified_crystal`.
 - **uev** `cured_sic_fibre`, `green_sic_fibre`, `hftacn_powder`, `micropillar_wafer`, `sin_etched_wafer`, `strain_annealed_fe16n2_powder`.
 - **uhv** `californium_252_source`, `sic_device_wafer`.
-- **uv** `exposed_wafer`, `patterned_wafer`, `fibre_bragg_grating`, `laser_module_block`, `srf_cryomodule_block`.
+- **uv** (fixed, QR-R4: second ingredient/fluid added or step merged) `exposed_wafer`, `patterned_wafer`, `fibre_bragg_grating`, `laser_module_block`, `srf_cryomodule_block`.
 Fix: add a second ingredient or byproduct that makes the step a real process, or merge it with its neighbour (principle 2).
 
 ## Learned, to apply from the next tier

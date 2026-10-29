@@ -32,9 +32,8 @@
 //     chemical_reactor  1,000 mB xenon + 2,000 mB fluorine -> 1,000 mB xenon difluoride                            7,680 x 200 t
 //     chemical_reactor  1,000 mB silicon tetrafluoride + 2,000 mB water -> 3 silicon dioxide dust + 4,000 mB hydrofluoric acid
 //                       (SiF4 + 2 H2O -> SiO2 + 4 HF)                                                              1,920 x 200 t
-//   controllers: light sail fab (grid) UV hull + 2 UV robot arms + UV emitter + 4 UV circuits; starchip fab (grid) UV hull + 2 UV robot
-//   arms + 4 UV circuits; launcher (GTM assembler) UV hull + 4 UV emitters + 4 UV circuits + 4 printed array mounts (UV-A8) + 1,152 mB
-//   soldering alloy
+//   controllers (assembly lines, station research, UV hull + parts + 4 UV circuits + 3 line items, soldering alloy, lubricant,
+//   tritanium): light sail fab, starchip fab, laser sail launcher
 //
 // Destinations (rule 3 of AGENTS.md):
 //   hydrogen (film)                  -> the station's fuel and GTM's chemistry (ammonia: the film's other gas)
@@ -154,8 +153,8 @@
   ].map(row)
   S.skipped = []
   S.clashes = []
-  S.crafting = { sailFab: 'grindless:crafting/light_sail_fab', chipFab: 'grindless:crafting/starchip_fab',
-    launcher: 'grindless:assembler/laser_sail_launcher' }
+  S.crafting = { sailFab: 'grindless:assembly_line/light_sail_fab', chipFab: 'grindless:assembly_line/starchip_fab',
+    launcher: 'grindless:assembly_line/laser_sail_launcher' }
   S.craftingParts = ['gtceu:uv_machine_hull', 'gtceu:uv_robot_arm', 'gtceu:uv_emitter', MOUNT]
 
   function keysOf(r) {
@@ -232,17 +231,33 @@
       console.error(LOG + 'starshot controller crafting skipped, unknown item(s): ' + missing.join(', '))
       return
     }
-    event.recipes.gtceu.shaped('gtceu:light_sail_fab', ['CEC', 'RHR', 'C C'], {
-      C: '#gtceu:circuits/uv', E: 'gtceu:uv_emitter', R: 'gtceu:uv_robot_arm', H: 'gtceu:uv_machine_hull'
-    }).id(S.crafting.sailFab)
-    event.recipes.gtceu.shaped('gtceu:starchip_fab', ['CRC', 'CHC', ' R '], {
-      C: '#gtceu:circuits/uv', R: 'gtceu:uv_robot_arm', H: 'gtceu:uv_machine_hull'
-    }).id(S.crafting.chipFab)
-    event.recipes.gtceu.assembler('grindless:laser_sail_launcher')
-      .itemInputs('gtceu:uv_machine_hull', '4x gtceu:uv_emitter', '4x #gtceu:circuits/uv', '4x ' + MOUNT)
-      .inputFluids(Fluid.of('gtceu:soldering_alloy', 1152))
-      .itemOutputs('gtceu:laser_sail_launcher')
-      .EUt(ZPM).duration(1200)
+    var fabs = [
+      { id: 'gtceu:light_sail_fab', recipe: 'light_sail_fab', research: COATED,
+        parts: ['gtceu:uv_machine_hull', '2x gtceu:uv_robot_arm', '2x gtceu:uv_emitter'],
+        domain: ['4x ' + MASK, '4x ' + COATED, '4x ' + MOUNT] },
+      { id: 'gtceu:starchip_fab', recipe: 'starchip_fab', research: MASK,
+        parts: ['gtceu:uv_machine_hull', '4x gtceu:uv_robot_arm', '2x gtceu:uv_sensor'],
+        domain: ['4x ' + MASK, '4x ' + COATED, '4x ' + MOUNT] },
+      { id: 'gtceu:laser_sail_launcher', recipe: 'laser_sail_launcher', research: NV,
+        parts: ['gtceu:uv_machine_hull', '4x gtceu:uv_emitter', '2x gtceu:uv_field_generator'],
+        domain: ['4x ' + MOUNT, '2x ' + SAIL, '2x ' + PHOTONIC] }
+    ]
+    fabs.forEach(function (m) {
+      var ids = [m.id, m.research].concat(m.parts, m.domain).map(function (s) { return s.replace(/^\d+x /, '') })
+      var absent = ids.filter(function (id) { return !Item.exists(id) })
+      if (absent.length > 0) {
+        console.error(LOG + 'starshot controller recipe of ' + m.id + ' skipped, unknown item(s): ' + absent.join(', '))
+        return
+      }
+      var b = event.recipes.gtceu.assembly_line('grindless:' + m.recipe)
+      m.parts.forEach(function (s) { b.itemInputs(s) })
+      b.itemInputs('4x #gtceu:circuits/uv')
+      m.domain.forEach(function (s) { b.itemInputs(s) })
+      b.inputFluids(Fluid.of('gtceu:soldering_alloy', 1152), Fluid.of('gtceu:lubricant', 1000), Fluid.of('gtceu:tritanium', 576))
+      b.itemOutputs(m.id)
+      b.stationResearch(function (r) { return r.researchStack(Item.of(m.research)).CWUt(64).EUt(491520) })
+      b.EUt(491520).duration(1200)
+    })
   }
 
   ServerEvents.recipes(function (event) {

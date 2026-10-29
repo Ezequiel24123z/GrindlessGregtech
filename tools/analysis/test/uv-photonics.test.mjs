@@ -119,13 +119,10 @@ test('byproduct destinations: arsine scrubbed to arsenic, chlorine and methane o
   for (const word of ['chlorine', 'methane', 'salt', 'magnesium chloride', 'glass']) assert.match(src, new RegExp(word, 'i'), word);
 });
 
-test('refurbish takes A3\'s spent laser module; the module and its block convert 1:1', () => {
+test('refurbish takes A3\'s spent laser module; the module block is an assembler recipe', () => {
   assert.deepEqual(row('refurbish').itemsIn, [{ id: 'grindless:spent_laser_module', count: 1 }, { id: 'grindless:ytterbium_fibre', count: 1 }]);
-  for (const id of [P.crafting.moduleToBlock, P.crafting.blockToModule]) {
-    const r = recipes.find((x) => x.i === id);
-    assert.ok(r, id);
-    assert.equal(r.t, 'minecraft:crafting_shapeless');
-  }
+  const blk = recipes.find((x) => x.i === P.crafting.moduleBlock);
+  assert.ok(blk, P.crafting.moduleBlock);
   for (const id of [P.crafting.tower, P.crafting.reactor]) assert.ok(recipes.find((x) => x.i === id), id);
 });
 
