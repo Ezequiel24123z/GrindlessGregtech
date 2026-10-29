@@ -79,7 +79,7 @@
 
     check('casing', byId(server, 'grindless:assembler/photomultiplier_casing') !== null, 'grindless:assembler/photomultiplier_casing')
     ;['neutrino_observatory', 'deep_space_network', 'kuiper_survey_telescope'].forEach(function (m) {
-      check('controller_' + m, byId(server, 'grindless:crafting/' + m) !== null, 'grindless:crafting/' + m)
+      check('controller_' + m, byId(server, 'grindless:assembly_line/' + m) !== null, 'grindless:assembly_line/' + m)
     })
 
     var hatch = byId(server, 'gtceu:assembly_line/energy_hatch_uv')

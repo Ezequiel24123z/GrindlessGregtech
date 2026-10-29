@@ -105,30 +105,36 @@
       return
     }
     event.recipes.gtceu.assembler('grindless:aerogel_cartridge')
-      .itemInputs('1x grindless:silica_aerogel', '1x gtceu:titanium_plate', '1x gcyr:para_aramid_foil')
+      .itemInputs('1x grindless:silica_aerogel', '1x gtceu:titanium_plate', '1x gcyr:para_aramid_foil', '1x grindless:platinum_gauze', '1x grindless:zircaloy_cladding_tube')
+      .inputFluids(Fluid.of('gtceu:polyethylene', 144))
       .circuit(1).itemOutputs('1x ' + CARTRIDGE).EUt(ZPM_VA).duration(100)
     event.recipes.gtceu.assembler('grindless:aerogel_cartridge_first')
-      .itemInputs('16x gtceu:silicon_dioxide_dust', '1x gtceu:titanium_plate', '2x gcyr:para_aramid_foil')
+      .itemInputs('16x gtceu:silicon_dioxide_dust', '1x gtceu:titanium_plate', '2x gcyr:para_aramid_foil', '1x grindless:platinum_gauze', '1x grindless:zircaloy_cladding_tube')
+      .inputFluids(Fluid.of('gtceu:polyethylene', 144))
       .circuit(2).itemOutputs('1x ' + CARTRIDGE).EUt(ZPM_VA).duration(600)
   }
 
-  // CRAFTING TABLE: hull + the machine's own parts + 4 ZPM circuits, and the data copies
+  // ASSEMBLY LINE with scanner research: hull + the machine's own parts + 4 ZPM circuits + two domain parts + soldering alloy + lubricant; plus the data copies
   function addCrafting(event) {
     var HULL = 'gtceu:zpm_machine_hull'
     var list = [
-      { id: 'gtceu:plume_sampler', pattern: ['CRC', ' H ', 'CSC'], extra: { R: 'gtceu:zpm_robot_arm', S: 'gtceu:zpm_sensor' } },
-      { id: 'gtceu:ring_seismometer', pattern: ['CSC', ' H ', 'CSC'], extra: { S: 'gtceu:zpm_sensor' } }
+      { id: 'gtceu:plume_sampler', parts: ['gtceu:zpm_robot_arm', 'gtceu:zpm_sensor'], domain: ['grindless:cryogenic_fuel_tank', 'grindless:night_sky_radiator'], research: 'grindless:orbital_solar_panel' },
+      { id: 'gtceu:ring_seismometer', parts: ['2x gtceu:zpm_sensor'], domain: ['grindless:sapphire_test_mass', 'grindless:anchor_harpoon'], research: 'grindless:hermean_heat_shield_brick' }
     ]
     list.forEach(function (m) {
-      var keys = { C: '#gtceu:circuits/zpm', H: HULL }
-      Object.keys(m.extra).forEach(function (k) { keys[k] = m.extra[k] })
-      var parts = Object.keys(keys).map(function (k) { return keys[k] }).filter(function (v) { return v.charAt(0) !== '#' })
+      var inputs = [HULL].concat(m.parts, ['4x #gtceu:circuits/zpm'], m.domain.map(function (d) { return '2x ' + d }))
+      var parts = inputs.concat([m.research, m.id]).map(function (v) { return v.replace(/^\d+x /, '') }).filter(function (v) { return v.charAt(0) !== '#' })
       var missing = parts.filter(function (id) { return !Item.exists(id) })
       if (missing.length > 0) {
         console.error(LOG + 'saturn science crafting of ' + m.id + ' skipped, unknown item(s): ' + missing.join(', '))
         return
       }
-      event.recipes.gtceu.shaped(m.id, m.pattern, keys).id('grindless:crafting/' + m.id.split(':')[1])
+      var b = event.recipes.gtceu.assembly_line('grindless:' + m.id.split(':')[1])
+      inputs.forEach(function (x) { b.itemInputs(x) })
+      b.inputFluids(Fluid.of('gtceu:soldering_alloy', 1152), Fluid.of('gtceu:lubricant', 1000))
+      b.itemOutputs(m.id)
+      b.scannerResearch(Item.of(m.research))
+      b.EUt(ZPM_VA).duration(1200)
     })
     ;[[MODEL, 'saturn_interior_model_copy'], [URANUS_CHART, 'uranus_transfer_chart_copy']].forEach(function (c) {
       if (!Item.exists(c[0]) || !Item.exists(ORB)) {

@@ -116,7 +116,7 @@ test('the chemistry balances: 2 EuCl3 + Zn + 3 H2SO4 -> 2 EuSO4 + ZnSO4 + 6 HCl;
 });
 
 test('the controller has a crafting recipe from ZPM parts and no ingot of any kind', () => {
-  assert.equal(ER.craftingRecipe, 'grindless:crafting/europium_reductor');
+  assert.equal(ER.craftingRecipe, 'grindless:assembly_line/europium_reductor');
   const r = byId(ER.craftingRecipe);
   assert.ok(r, 'crafting recipe added');
   const text = JSON.stringify(r.j);

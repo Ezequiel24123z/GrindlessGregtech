@@ -174,7 +174,7 @@
       def.recipe + '; dims=' + dimIds.join(',') + '; circuits=' + circuit.length)
     })
     ;['grindless:kronoseismology/uranus_transfer_chart', 'grindless:assembler/aerogel_cartridge', 'grindless:assembler/aerogel_cartridge_first',
-      'grindless:crafting/plume_sampler', 'grindless:crafting/ring_seismometer', 'grindless:crafting/saturn_interior_model_copy',
+      'grindless:assembly_line/plume_sampler', 'grindless:assembly_line/ring_seismometer', 'grindless:crafting/saturn_interior_model_copy',
       'grindless:crafting/uranus_transfer_chart_copy'].forEach(function (id) {
       check('support_recipe', byId(id) !== null, id)
     })

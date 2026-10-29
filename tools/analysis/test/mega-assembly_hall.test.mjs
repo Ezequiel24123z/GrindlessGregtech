@@ -31,7 +31,8 @@ function harness() {
     GTBlocks: { CASING_ASSEMBLY_CONTROL: 'CASING_ASSEMBLY_CONTROL' },
     GTRecipeModifiers: { OC_NON_PERFECT: 'OC_NON_PERFECT', BATCH_MODE: 'BATCH_MODE' },
     Text: { translate: (s) => s },
-    Item: { exists: () => true },
+    Item: { exists: () => true, of: (x) => x },
+    Fluid: { of: (id, n) => id + ' ' + n },
     Java: { loadClass: () => ({}) },
   });
   vm.runInContext(read('startup_scripts', 'lib/patterns.js'), context);
@@ -146,11 +147,12 @@ test('controller recipe: 16 ZPM assemblers, 16 ZPM circuit assemblers, 4 ZPM cir
     added.push(r);
     return c;
   };
-  h.recipeHandlers.forEach((cb) => cb({ recipes: { gtceu: { assembler: (id) => chainable(id) } } }));
+  h.recipeHandlers.forEach((cb) => cb({ recipes: { gtceu: { assembly_line: (id) => chainable(id) } } }));
   assert.equal(added.length, 1);
   const r = added[0];
-  assert.equal(r.id, h.G.megaAssemblyHall.crafting);
-  assert.deepEqual(plain(r.inputs), ['16x gtceu:zpm_assembler', '16x gtceu:zpm_circuit_assembler', '4x #gtceu:circuits/zpm', '16x gtceu:assembly_line_casing']);
+  assert.equal(r.id.replace('grindless:', 'grindless:assembly_line/'), h.G.megaAssemblyHall.crafting);
+  assert.deepEqual(plain(r.inputs), plain(h.G.megaAssemblyHall.craftingInputs));
+  assert.deepEqual(plain(r.inputs).slice(0, 4), ['16x gtceu:zpm_assembler', '16x gtceu:zpm_circuit_assembler', '4x #gtceu:circuits/zpm', '16x gtceu:assembly_line_casing']);
   assert.deepEqual(plain(r.outputs), ['gtceu:assembly_hall']);
   assert.ok(r.eut > 0 && r.duration > 0);
   assert.deepEqual(plain(h.errors), []);

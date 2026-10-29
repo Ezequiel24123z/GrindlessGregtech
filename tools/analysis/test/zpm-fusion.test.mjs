@@ -84,7 +84,7 @@ function serverHarness(liveIds) {
     global: { grindless: G },
     console: { info: s => logs.info.push(s), warn: s => logs.warn.push(s), error: s => logs.error.push(s) },
     Fluid: { of: (id, amount) => ({ id, amount }), exists: () => true },
-    Item: { exists: () => true },
+    Item: { exists: () => true, of: x => x },
     ServerEvents: { recipes(fn) {
       fn({
         forEachRecipe(q, cb) { assert.equal(q.type, 'gtceu:fusion_reactor'); live.forEach(cb); },
@@ -114,7 +114,7 @@ test('fusion.js adds our recipe, five caster recipes, two converter recipes and 
   const d = added.filter(a => a.type === 'direct_conversion');
   assert.deepEqual(d.map(a => a.calls.duration[0][0]), [80, 256, 2, 2, 2, 2, 2, 2]); // UIV-A9 adds the three Mk5 rows
   for (const a of d.slice(0, 2)) assert.deepEqual(a.calls.EUt, [[-2560]]);
-  assert.deepEqual(shaped.map(s => s[s.length - 1]).sort(), ['grindless:crafting/direct_energy_converter', 'grindless:crafting/plasma_quench_caster']);
+  assert.deepEqual(added.filter(a => a.type === 'assembly_line').map(a => 'grindless:' + a.id.replace('grindless:', 'assembly_line/')).sort(), ['grindless:assembly_line/direct_energy_converter', 'grindless:assembly_line/plasma_quench_caster']);
   assert.deepEqual(Array.from(G.zpmFusion.unaudited), []);
   assert.deepEqual(Array.from(G.zpmFusion.missing), []);
   assert.deepEqual(Array.from(G.zpmFusion.luvCutsLive), []);
