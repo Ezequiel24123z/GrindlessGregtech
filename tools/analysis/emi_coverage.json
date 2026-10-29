@@ -83,12 +83,6 @@
     { "id": "grindless:solvent_extraction/ev/lpe_dross_lead", "reason": "UXV-A2 landed before A5: grindless:lpe_dross is held until A5's LPE furnace c3 gives it off; A5 deletes this entry with its hold rule" }
       ],
       "pendingUses": [
-        { "id": "grindless:mgo_target", "package": "UXV-A4", "reason": "UXV-A2 sinters it (UV powder bed); A4's MTJ sputter cluster stacks use it (machine 1, uxv.md:732)" },
-        { "id": "grindless:saf_target_set", "package": "UXV-A4", "reason": "UXV-A2 bonds it (UV powder bed); A4's MTJ sputter cluster c3 uses it (machine 1, uxv.md:734)" },
-        { "id": "grindless:ta_seed_target", "package": "UXV-A4", "reason": "UXV-A2 bonds it (UV powder bed); A4's MTJ sputter cluster stacks use it (machine 1, uxv.md:735)" },
-        { "id": "grindless:srruo3_target", "package": "UXV-A4", "reason": "UXV-A2 presses it (UV powder bed); A4's oxide PLD chamber c1 uses it (machine 2, uxv.md:740)" },
-        { "id": "grindless:la_bfo_target", "package": "UXV-A4", "reason": "UXV-A2 presses it (UV powder bed); A4's oxide PLD chamber c2 uses it (machine 2, uxv.md:741)" },
-        { "id": "fluid:gtceu:he_6n", "package": "UXV-A4", "reason": "UXV-A2's Moon cryogenic row makes it; Earth controllers 1-8 take it (uxv.md:181), A4's two first; A6's uxv_sensor also (uxv.md:1329)" },
         { "id": "grindless:pt_sheet", "package": "UXV-A5", "reason": "UXV-A2 rolls it (EV hot strip mill); A5's pt_lpe_crucible (line 42, uxv.md:1289) uses it" },
         { "id": "grindless:cm248_target", "package": "UXV-A6", "reason": "UXV-A2 makes it; A6's MNT collider uses it (uxv.md:1321)" },
         { "id": "grindless:gum_metal_billet", "package": "UXV-A8", "reason": "UXV-A2 casts it; A8's hot strip mill makes gum_metal_blank from it (line 45, uxv.md:1371, :1379)" }
