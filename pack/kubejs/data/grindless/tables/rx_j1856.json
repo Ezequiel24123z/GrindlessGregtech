@@ -116,38 +116,43 @@
         {
           "name": "mh_laminate", "circuit": 0, "eut": 1966080, "duration": 400,
           "_why": "UIV-B2 line 33: the BN-coated nanotube yarn is laminated with metallic-hydrogen foil.",
-          "itemsIn": [ { "id": "grindless:bn_coated_cnt_yarn", "count": 2 }, { "id": "gtceu:metallic_hydrogen_foil", "count": 2 } ],
+          "itemsIn": [ { "id": "grindless:bn_coated_cnt_yarn", "count": 2 }, { "id": "gtceu:metallic_hydrogen_foil", "count": 2 }, { "id": "gtceu:rhea_plate", "count": 1 }, { "id": "gtceu:tungsten_foil", "count": 1 } ],
+          "fluidsIn": [ { "id": "gtceu:epoxy", "amount": 144 } ],
           "itemsOut": [ { "id": "grindless:mh_laminated_yarn", "count": 1 } ]
         },
         {
           "name": "mh_braid", "circuit": 0, "eut": 1966080, "duration": 400,
           "_why": "UIV-B2 line 33: four laminated yarns braid into the tether strand.",
-          "itemsIn": [ { "id": "grindless:mh_laminated_yarn", "count": 4 } ],
+          "itemsIn": [ { "id": "grindless:mh_laminated_yarn", "count": 4 }, { "id": "gtceu:rhea_plate", "count": 1 }, { "id": "gtceu:tungsten_foil", "count": 1 } ],
+          "fluidsIn": [ { "id": "gtceu:epoxy", "amount": 144 } ],
           "itemsOut": [ { "id": "grindless:braided_mh_tether", "count": 1 } ]
         },
         {
           "name": "polar_cap_electrode", "circuit": 0, "eut": 1966080, "duration": 600,
           "_why": "UIV-B2 line 33: the metallic-hydrogen tether wound on iridium plates is the polar-cap electrode (kept by the crust lift).",
-          "itemsIn": [ { "id": "grindless:mh_tether", "count": 1 }, { "id": "gtceu:iridium_plate", "count": 4 } ],
+          "itemsIn": [ { "id": "grindless:mh_tether", "count": 1 }, { "id": "gtceu:iridium_plate", "count": 4 }, { "id": "gtceu:rhea_plate", "count": 1 } ],
+          "fluidsIn": [ { "id": "gtceu:argon", "amount": 500 } ],
           "itemsOut": [ { "id": "grindless:polar_cap_electrode", "count": 1 } ]
         },
         {
           "name": "crust_lift_tether", "circuit": 0, "eut": 1966080, "duration": 600,
           "_why": "UIV-B2 line 33: two metallic-hydrogen tethers and tungsten-carbide plates make the crust lift tether.",
-          "itemsIn": [ { "id": "grindless:mh_tether", "count": 2 }, { "id": "gtceu:tungsten_carbide_plate", "count": 2 } ],
+          "itemsIn": [ { "id": "grindless:mh_tether", "count": 2 }, { "id": "gtceu:tungsten_carbide_plate", "count": 2 }, { "id": "gtceu:rhea_plate", "count": 1 } ],
+          "fluidsIn": [ { "id": "gtceu:argon", "amount": 500 } ],
           "itemsOut": [ { "id": "grindless:crust_lift_tether", "count": 1 } ]
         },
         {
           "name": "kilonova_capsule", "circuit": 0, "eut": 1966080, "duration": 300,
           "_why": "UIV-B2 line 31: the hot r-process mix sealed into a capsule for the decay heat vault.",
-          "itemsIn": [ { "id": "grindless:sealed_capsule", "count": 1 } ],
+          "itemsIn": [ { "id": "grindless:sealed_capsule", "count": 1 }, { "id": "gtceu:rhea_plate", "count": 1 }, { "id": "gtceu:tungsten_foil", "count": 1 } ],
           "fluidsIn": [ { "id": "gtceu:hot_r_process_mix", "amount": 1000 } ],
           "itemsOut": [ { "id": "grindless:kilonova_capsule", "count": 1 } ]
         },
         {
           "name": "es254_target", "circuit": 0, "eut": 1966080, "duration": 300,
           "_why": "UIV-B2 line 32: einsteinium dust pressed into a target wheel blank (the element 119 target).",
-          "itemsIn": [ { "id": "grindless:target_wheel_blank", "count": 1 }, { "id": "gtceu:einsteinium_dust", "count": 1 } ],
+          "itemsIn": [ { "id": "grindless:target_wheel_blank", "count": 1 }, { "id": "gtceu:einsteinium_dust", "count": 1 }, { "id": "gtceu:rhea_plate", "count": 1 }, { "id": "gtceu:tungsten_foil", "count": 1 } ],
+          "fluidsIn": [ { "id": "gtceu:helium", "amount": 500 } ],
           "itemsOut": [ { "id": "grindless:es254_target", "count": 1 } ]
         },
         {

@@ -5,14 +5,14 @@
       "dataKey": "grindless_spectral_hole_burning",
       "recipes": [
         {
-          "name": "six_hour_slab", "circuit": 1, "eut": 31457280, "duration": 1200,
-          "itemsIn": [{ "id": "grindless:eu151_yso_slab", "count": 1 }],
+          "name": "six_hour_slab", "circuit": 0, "eut": 31457280, "duration": 1200,
+          "itemsIn": [{ "id": "grindless:eu151_yso_slab", "count": 1 }, { "id": "grindless:cold_plate", "count": 1 }],
           "charge": [{ "id": "gtceu:superfluid_helium", "amount": 1000 }],
           "itemsOut": [{ "id": "grindless:six_hour_memory_slab", "count": 1 }]
         },
         {
-          "name": "telecom_slab", "circuit": 2, "eut": 31457280, "duration": 1200,
-          "itemsIn": [{ "id": "grindless:er_yso_slab", "count": 1 }],
+          "name": "telecom_slab", "circuit": 0, "eut": 31457280, "duration": 1200,
+          "itemsIn": [{ "id": "grindless:er_yso_slab", "count": 1 }, { "id": "grindless:cold_plate", "count": 1 }],
           "charge": [{ "id": "gtceu:superfluid_helium", "amount": 1000 }],
           "itemsOut": [{ "id": "grindless:telecom_memory_slab", "count": 1 }]
         }
@@ -38,29 +38,32 @@
       "recipes": [
         {
           "name": "six_hour_memory", "circuit": 20, "eut": 491520, "duration": 600,
-          "itemsIn": [{ "id": "grindless:six_hour_memory_slab", "count": 1 }, { "id": "grindless:mk_cryostat_module", "count": 1 }, { "id": "grindless:uev_sensor", "count": 1 }],
+          "itemsIn": [{ "id": "grindless:six_hour_memory_slab", "count": 1 }, { "id": "grindless:mk_cryostat_module", "count": 1 }, { "id": "grindless:uev_sensor", "count": 1 }, { "id": "gtceu:gold_plate", "count": 1 }],
+          "fluidsIn": [{ "id": "gtceu:helium", "amount": 250 }],
           "itemsOut": [{ "id": "grindless:six_hour_memory", "count": 1 }]
         },
         {
           "name": "cold_plate", "circuit": 21, "eut": 122880, "duration": 300,
-          "itemsIn": [{ "id": "gtceu:copper_plate", "count": 6 }],
+          "itemsIn": [{ "id": "gtceu:copper_plate", "count": 6 }, { "id": "gtceu:rhea_plate", "count": 1 }, { "id": "gtceu:niobium_ingot", "count": 1 }],
           "fluidsIn": [{ "id": "gtceu:superfluid_helium", "amount": 500 }],
           "itemsOut": [{ "id": "grindless:cold_plate", "count": 1 }]
         },
         {
           "name": "er_fibre", "circuit": 22, "eut": 122880, "duration": 400,
-          "itemsIn": [{ "id": "grindless:er_preform", "count": 1 }],
+          "itemsIn": [{ "id": "grindless:er_preform", "count": 1 }, { "id": "gtceu:glass_dust", "count": 1 }, { "id": "gtceu:silicon_dust", "count": 1 }],
           "fluidsIn": [{ "id": "gtceu:acrylate_coating", "amount": 250 }],
           "itemsOut": [{ "id": "grindless:er_fibre", "count": 8 }]
         },
         {
           "name": "er_fibre_coil", "circuit": 23, "eut": 122880, "duration": 300,
-          "itemsIn": [{ "id": "grindless:er_fibre", "count": 4 }, { "id": "grindless:ytterbium_fibre", "count": 1 }],
+          "itemsIn": [{ "id": "grindless:er_fibre", "count": 4 }, { "id": "grindless:ytterbium_fibre", "count": 1 }, { "id": "gtceu:tungsten_foil", "count": 1 }],
+          "fluidsIn": [{ "id": "gtceu:acrylate_coating", "amount": 100 }],
           "itemsOut": [{ "id": "grindless:er_fibre_coil", "count": 1 }]
         },
         {
           "name": "pumped_edfa", "circuit": 25, "eut": 491520, "duration": 400,
-          "itemsIn": [{ "id": "grindless:er_fibre_coil", "count": 1 }, { "id": "grindless:ingaas_pump_module", "count": 2 }],
+          "itemsIn": [{ "id": "grindless:er_fibre_coil", "count": 1 }, { "id": "grindless:ingaas_pump_module", "count": 2 }, { "id": "gtceu:gold_plate", "count": 1 }],
+          "fluidsIn": [{ "id": "gtceu:helium", "amount": 250 }],
           "itemsOut": [{ "id": "grindless:pumped_edfa", "count": 1 }]
         }
       ]
@@ -102,8 +105,8 @@
           "fluidsOut": [{ "id": "gtceu:he3_he4_mixture", "amount": 200 }]
         },
         {
-          "name": "p_si_processor", "circuit": 3, "eut": 31457280, "duration": 1200,
-          "itemsIn": [{ "id": "grindless:p_si_die", "count": 1 }],
+          "name": "p_si_processor", "circuit": 0, "eut": 31457280, "duration": 1200,
+          "itemsIn": [{ "id": "grindless:p_si_die", "count": 1 }, { "id": "gtceu:gold_plate", "count": 1 }],
           "kept": [{ "id": "grindless:mk_cryostat_module", "count": 1 }],
           "itemsOut": [{ "id": "grindless:p_si_processor", "count": 1 }]
         }
