@@ -262,12 +262,12 @@
 
   function addCrafting(event) {
     var list = [
-      { id: M.reactor || 'gtceu:boron_nitride_reactor', recipe: 'boron_nitride_reactor', research: 'grindless:hbn_dust',
+      { id: M.reactor || 'gtceu:boron_nitride_reactor', recipe: 'boron_nitride_reactor', research: 'grindless:sic_fibre',
         parts: ['gtceu:uv_machine_hull', '2x gtceu:uv_emitter', '2x gtceu:uv_electric_pump'],
-        domain: ['8x grindless:hbn_dust', '4x grindless:bnnt_dust', '2x grindless:sic_fibre'] },
-      { id: M.line || 'gtceu:powder_in_tube_line', recipe: 'powder_in_tube_line', research: 'grindless:pit_billet',
+        domain: ['4x grindless:fused_silica_tube', '2x grindless:sic_fibre', '2x grindless:platinum_electrode'] },
+      { id: M.line || 'gtceu:powder_in_tube_line', recipe: 'powder_in_tube_line', research: 'grindless:silver_tube',
         parts: ['gtceu:uv_machine_hull', '2x gtceu:uv_electric_motor', '2x gtceu:uv_conveyor_module'],
-        domain: ['4x grindless:pit_billet', '4x grindless:silver_tube', '4x grindless:iron_tube'] },
+        domain: ['4x grindless:hbn_dust', '4x grindless:silver_tube', '4x grindless:iron_tube'] },
       { id: M.printer || 'gtceu:powder_bed_printer', recipe: 'powder_bed_printer', research: 'grindless:ented_powder',
         parts: ['gtceu:uv_machine_hull', '2x gtceu:uv_emitter', '2x gtceu:uv_robot_arm'],
         domain: ['8x grindless:ented_powder', '4x grindless:sic_fibre', '4x grindless:bnnt_dust'] }

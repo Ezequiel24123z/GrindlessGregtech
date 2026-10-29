@@ -155,8 +155,8 @@
 
   // ASSEMBLY LINE: ZPM hull + 4 UV robot arms (the manipulators) + 4 UV circuits + 3 line items, station research from the GPHS module
   function addCrafting(event) {
-    var domain = ['4x grindless:curium_oxide', '2x grindless:carbon_carbon_aeroshell', '4x grindless:gphs_module']
-    var ids = HS.craftingParts.concat(['gtceu:heat_source_works', 'grindless:curium_oxide', 'grindless:carbon_carbon_aeroshell', 'grindless:gphs_module'])
+    var domain = ['4x grindless:curium_oxide', '2x grindless:carbon_carbon_aeroshell', '4x grindless:radiation_vault_casing']
+    var ids = HS.craftingParts.concat(['gtceu:heat_source_works', 'grindless:curium_oxide', 'grindless:carbon_carbon_aeroshell', 'grindless:radiation_vault_casing'])
     var missing = ids.filter(function (id) { return !Item.exists(id) })
     if (missing.length > 0) {
       console.error(LOG + 'heat source works crafting skipped, unknown item(s): ' + missing.join(', '))
@@ -167,7 +167,7 @@
     domain.forEach(function (s) { b.itemInputs(s) })
     b.inputFluids(Fluid.of('gtceu:soldering_alloy', 1152), Fluid.of('gtceu:lubricant', 1000), Fluid.of('gtceu:tritanium', 576))
     b.itemOutputs('gtceu:heat_source_works')
-    b.stationResearch(function (r) { return r.researchStack(Item.of('grindless:gphs_module')).CWUt(64).EUt(491520) })
+    b.stationResearch(function (r) { return r.researchStack(Item.of('grindless:curium_oxide')).CWUt(64).EUt(491520) })
     b.EUt(491520).duration(1200)
   }
 

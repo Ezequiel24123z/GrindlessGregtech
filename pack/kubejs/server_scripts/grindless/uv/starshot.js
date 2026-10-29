@@ -232,9 +232,9 @@
       return
     }
     var fabs = [
-      { id: 'gtceu:light_sail_fab', recipe: 'light_sail_fab', research: COATED,
+      { id: 'gtceu:light_sail_fab', recipe: 'light_sail_fab', research: EPI,
         parts: ['gtceu:uv_machine_hull', '2x gtceu:uv_robot_arm', '2x gtceu:uv_emitter'],
-        domain: ['4x ' + MASK, '4x ' + COATED, '4x ' + MOUNT] },
+        domain: ['4x ' + MASK, '4x ' + EPI, '4x ' + MOUNT] },
       { id: 'gtceu:starchip_fab', recipe: 'starchip_fab', research: MASK,
         parts: ['gtceu:uv_machine_hull', '4x gtceu:uv_robot_arm', '2x gtceu:uv_sensor'],
         domain: ['4x ' + MASK, '4x ' + COATED, '4x ' + MOUNT] },

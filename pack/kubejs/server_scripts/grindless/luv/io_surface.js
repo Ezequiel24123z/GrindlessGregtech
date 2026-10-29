@@ -76,7 +76,8 @@
       .itemOutputs(t.bundle).EUt(7680).duration(200)
 
     gt.assembly_line('grindless:fumarole_condenser')
-      .itemInputs('gtceu:luv_machine_hull', '2x gtceu:luv_electric_pump', '4x #gtceu:circuits/luv', '4x ' + t.bundle, '2x grindless:platinum_gauze')
+      .itemInputs('gtceu:luv_machine_hull', '2x gtceu:luv_electric_pump', '4x #gtceu:circuits/luv', '4x grindless:zircaloy_cladding_tube',
+        '2x grindless:platinum_gauze')
       .inputFluids(Fluid.of('gtceu:soldering_alloy', 576), Fluid.of('gtceu:lubricant', 500))
       .itemOutputs(IO.condenser.machine).EUt(30720).duration(600)
     gt.assembly_line('grindless:volcanic_intake')

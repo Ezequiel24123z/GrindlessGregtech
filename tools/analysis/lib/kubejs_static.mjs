@@ -257,6 +257,17 @@ function resultOf(x, problems) {
   return first.ingredient.item ? { item: first.ingredient.item, count: first.count } : null;
 }
 
+/** Research items of station/scannerResearch: an item argument or a builder callback's researchStack/researchItem. */
+function researchItems(x) {
+  const seen = [];
+  const sink = [];
+  if (typeof x === 'function') {
+    const b = new Proxy({}, { get: (t, k) => (k === 'researchStack' || k === 'researchItem' ? (s) => { seen.push(...itemArgs(s, sink)); return b; } : () => b) });
+    try { x(b); } catch (e) { /* the recipe itself still registers */ }
+  } else seen.push(...itemArgs(x, sink));
+  return seen.map((c) => c.ingredient);
+}
+
 // ------------------------------------------------------------------------------------------------ script files
 
 /** Files of one script type, in KubeJS 6's order: `// priority:` (higher first), then path. */
@@ -702,8 +713,8 @@ export function runPackScripts(packDir, { originals = [] } = {}) {
       daytime: cond('daytime'), rain: cond('rain'), thunder: cond('thunder'), posY: cond('pos_y'), cleanroom: cond('cleanroom'),
       biome: cond('biome'), environmentalHazard: cond('environmental_hazard'),
       researchWithoutRecipe: (p, a) => { j.recipeConditions.push({ type: 'research', research: String(a[0]) }); },
-      stationResearch: () => { j.recipeConditions.push({ type: 'research', research: [{ researchId: 'station', dataItem: { id: 'gtceu:data_module', Count: 1 } }] }); },
-      scannerResearch: () => { j.recipeConditions.push({ type: 'research', research: [{ researchId: 'scanner', dataItem: { id: 'gtceu:data_stick', Count: 1 } }] }); },
+      stationResearch: (p, a) => { j.recipeConditions.push({ type: 'research', research: [{ researchId: 'station', dataItem: { id: 'gtceu:data_module', Count: 1 } }], researchItems: researchItems(a[0]) }); },
+      scannerResearch: (p, a) => { j.recipeConditions.push({ type: 'research', research: [{ researchId: 'scanner', dataItem: { id: 'gtceu:data_stick', Count: 1 } }], researchItems: researchItems(a[0]) }); },
       id: (p, a) => { rec.i = String(a[0]); },
     }, { __recipe: rec });
     add(rec, file);

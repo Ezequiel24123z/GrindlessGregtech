@@ -23,18 +23,21 @@ new era follows so it does not happen again. The per-area standards live in the 
 | 13 | Cost raised by quantity instead of complexity | A 4:1 laser module block made a 32-block structure cost 128 modules (QR-R4, reverted) | Structure blocks wrap their component 1:1 plus a housing, a domain part and a fluid (product rule 2) |
 | 14 | Old shapes in comments, docs and tests | Reshapes updated the pattern but not the header comment | Each structure handoff lists stale comments; a mechanical pass (QR-M1) fixes them |
 | 15 | Each era reshaped file by file, with silhouettes that did not match from one machine to the next | No shared shape vocabulary per era; a helper used at script top level breaks when it loads after its user | One shape helper per era (`uev/shapes.js`: hall, tower, ring, gantry, dish, mast, dome, ridge), used only inside registry callbacks (QR-S5). Size grows with the era by silhouette, not by bulk: median blocks per UEV structure 349 (UV 273, UHV 211) |
+| 16 | Controllers that need their own product: 110 machines unreachable on main after QR-R2 and QR-R4 (mercury solar works, fumarole condenser, ark biosphere, BN reactor, PIT line, fibre draw tower, light sail fab, heat source works, zone refining tower and everything after them) | "Own-line" research and domain items were picked from what the machine makes; T0 had no reachability check and native reachability needs a dump | `recipe-cycles.mjs` (in T0) fails on any controller that cannot be built from what exists before it; research and domain inputs come from earlier machines (QR-F3) |
 
 ## Checklist for every new era (UIV, UXV and later)
 
 Design (`docs/eras/<era>.md`):
 - [ ] Each multiblock has a silhouette that says its process, with sizes and the blocks it uses; none is a box of one casing.
 - [ ] Each controller, hatch and part names its recipe form on the ladder: research item, era fluid, 3 domain inputs, 8+ distinct ingredients from UXV.
+- [ ] A controller's research item and domain inputs come from machines built before it, never from the machine itself or anything after it.
 - [ ] Each process step names its second input or byproduct and where every byproduct goes; nothing comes from nothing.
 - [ ] Structure blocks used in bulk wrap their component 1:1.
 - [ ] Shapes come from the era's shape helper (`<era>/shapes.js`), called inside registry callbacks; a new silhouette goes into the helper, not into one file.
 
 Build (each package):
 - [ ] `structure-quality.mjs --static --check`, `recipe-quality.mjs --check` and `process-audit.mjs` pass with **no new baseline entry**; new content never enters a baseline.
+- [ ] `recipe-cycles.mjs` reports 0 unreachable controllers (it runs in T0; `--explain <id>` shows why one is stuck).
 - [ ] Every recipe type has a recipe, every item a craft recipe and a use (or a stated future use), every multiblock an info page in both languages.
 - [ ] No `const` in loops, no `Java.to` in suppliers, no `console.error` for optional content.
 - [ ] Two recipes of one type differ in an ingredient; research ids are unique (check the dump).
