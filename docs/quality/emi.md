@@ -448,6 +448,8 @@ Info pages written (QR-I2): every machine below has an emi:info page of its own;
 
 ### uv
 
+Info pages written (QR-I3): every machine below has an emi:info page of its own; the integrator's EMI audit proves them at runtime.
+
 | Machine ID | Source |
 |---|---|
 | `gtceu:accelerator_driven_reactor` | `pack/kubejs/startup_scripts/grindless/uv/thorium.js:76` |
@@ -491,6 +493,8 @@ Info pages written (QR-I2): every machine below has an emi:info page of its own;
 | `gtceu:zone_refining_tower` | `pack/kubejs/startup_scripts/grindless/uv/detectors.js:164` |
 
 ### uhv
+
+Info pages written (QR-I3): every machine below has an emi:info page of its own; the integrator's EMI audit proves them at runtime.
 
 | Machine ID | Source |
 |---|---|
