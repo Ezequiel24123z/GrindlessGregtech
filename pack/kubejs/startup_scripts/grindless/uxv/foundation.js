@@ -145,7 +145,6 @@
     'gtceu:pasta_strand': { form: 'ingot', colour: 0xF0D890, formula: 'Pa(str)', cable: true },
     'gtceu:titanium_44': { form: 'dust', colour: 0xB4B8C8, formula: '44Ti' },
     'gtceu:fermium_257': { form: 'dust', colour: 0xC8A0B8, formula: '257Fm' },
-    'gtceu:einsteinium_254': { form: 'dust', colour: 0xA8C8B0, formula: '254Es' },
     'gtceu:tungsten_184': { form: 'ingot', colour: 0x4A4E5C, formula: '184W', wire: true },
     'gtceu:oxygen_16': { form: 'gas', colour: 0xA8D8F0, formula: '16O' },
     'gtceu:cofeb': { form: 'ingot', colour: 0x7A88A8, formula: 'CoFeB' },

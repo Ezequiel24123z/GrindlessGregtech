@@ -134,7 +134,6 @@
         ['material', 'pasta_strand', 'Pasta Strand', 'Hebra de pasta'],
         ['material', 'titanium_44', 'Titanium-44', 'Titanio-44'],
         ['material', 'fermium_257', 'Fermium-257', 'Fermio-257'],
-        ['material', 'einsteinium_254', 'Einsteinium-254', 'Einstenio-254'],
         ['material', 'tungsten_184', 'Tungsten-184', 'Wolframio-184'],
         ['material', 'oxygen_16', 'Oxygen-16', 'Oxígeno-16'],
         ['material', 'cofeb', 'CoFeB', 'CoFeB'],

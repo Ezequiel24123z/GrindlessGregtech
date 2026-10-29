@@ -34,7 +34,7 @@ const DATA = ['vela_glitch_timing', 'vela_glitch_record', 'cygnus_vlbi_record', 
 const ITEMS = [...COMPONENTS, ...SPINTRONICS, ...LINES_44_49, ...SUPERHEAVY, ...PARTS, ...FAR, ...DATA].map((n) => 'grindless:' + n);
 const BLOCKS = ['grindless:uxv_fusion_casing'];
 const MATERIALS = {
-  'gtceu:pasta_strand': 'ingot', 'gtceu:titanium_44': 'dust', 'gtceu:fermium_257': 'dust', 'gtceu:einsteinium_254': 'dust',
+  'gtceu:pasta_strand': 'ingot', 'gtceu:titanium_44': 'dust', 'gtceu:fermium_257': 'dust',
   'gtceu:tungsten_184': 'ingot', 'gtceu:oxygen_16': 'gas', 'gtceu:cofeb': 'ingot', 'gtceu:co2mnsi': 'ingot', 'gtceu:terfenol_d': 'ingot',
   'gtceu:ni2mnga': 'ingot', 'gtceu:dysco3': 'dust', 'gtceu:srruo3': 'dust', 'gtceu:la_bfo': 'dust', 'gtceu:ggg': 'dust', 'gtceu:yig': 'dust',
   'gtceu:hbn': 'dust', 'gtceu:wte2': 'dust', 'gtceu:fe3gete2': 'dust',
@@ -70,7 +70,7 @@ test('the stand-in runs the UXV foundation without errors', () => {
 
 test('the id list is pinned: count and every id', () => {
   assert.equal(ITEMS.length, 106);
-  assert.equal(Object.keys(MATERIALS).length, 38);
+  assert.equal(Object.keys(MATERIALS).length, 37);
   assert.equal(Object.values(MATERIALS).filter((f, i) => Object.keys(MATERIALS)[i].startsWith('grindless:')).length, 20, '20 fluids');
   const got = run.global.grindless.uxvFoundation;
   assert.deepEqual([...got.items], ITEMS);
