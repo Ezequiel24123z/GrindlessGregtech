@@ -64,7 +64,8 @@
 
     // the controller is built around GTM's Primitive Blast Furnace (the machine it replaces): steel plates, the steam blast
     // pipe and two bronze gears for the blowing engine
-    event.recipes.gtceu.shaped('gtceu:steam_blast_furnace', ['PTP', 'GBG', 'CwC'], {
+    event.recipes.gtceu.shaped('gtceu:steam_blast_furnace', ['DTP', 'GBG', 'CwC'], {
+      D: 'grindless:steel_drill_bit',
       P: '#forge:plates/steel',
       T: 'gtceu:bronze_normal_fluid_pipe',
       G: '#forge:gears/bronze',

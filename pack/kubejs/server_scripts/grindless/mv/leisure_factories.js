@@ -22,27 +22,27 @@
   const RECIPES = [
     {
       machine: 'gtceu:universal_processing_factory',
-      rows: ['PEP', 'BHW', 'CGC'],
+      rows: ['PEP', 'BHW', 'CGD'],
       keys: { P: 'gtceu:mv_electric_piston', E: 'gtceu:mv_emitter', B: 'gtceu:mv_bender', H: HULL, W: 'gtceu:mv_wiremill',
-        C: CIRCUIT, G: 'gtceu:steel_gearbox' }
+        C: CIRCUIT, G: 'gtceu:steel_gearbox', D: 'grindless:vanadium_steel_drill_bit' }
     },
     {
       machine: 'gtceu:universal_assembly_factory',
-      rows: ['RFR', 'AHK', 'CVC'],
+      rows: ['RFR', 'AHK', 'CVD'],
       keys: { R: 'gtceu:mv_robot_arm', F: 'gtceu:aluminium_frame', A: 'gtceu:mv_assembler', H: HULL, K: 'gtceu:mv_circuit_assembler',
-        C: CIRCUIT, V: 'gtceu:mv_conveyor_module' }
+        C: CIRCUIT, V: 'gtceu:mv_conveyor_module', D: 'grindless:graphite_electrode' }
     },
     {
       machine: 'gtceu:universal_separation_factory',
-      rows: ['MTM', 'NHE', 'CPC'],
+      rows: ['MTM', 'NHE', 'CPD'],
       keys: { M: 'gtceu:mv_electric_motor', T: 'gtceu:steel_pipe_casing', N: 'gtceu:mv_centrifuge', H: HULL, E: 'gtceu:mv_electrolyzer',
-        C: CIRCUIT, P: 'gtceu:mv_electric_pump' }
+        C: CIRCUIT, P: 'gtceu:mv_electric_pump', D: 'grindless:vanadium_steel_drill_bit' }
     },
     {
       machine: 'gtceu:universal_mixing_factory',
-      rows: ['MGM', 'XHR', 'CPC'],
+      rows: ['MGM', 'XHR', 'CPD'],
       keys: { M: 'gtceu:mv_electric_motor', G: '#forge:glass', X: 'gtceu:mv_mixer', H: HULL, R: 'gtceu:mv_chemical_reactor',
-        C: CIRCUIT, P: 'gtceu:mv_electric_pump' }
+        C: CIRCUIT, P: 'gtceu:mv_electric_pump', D: 'grindless:contact_catalyst' }
     }
   ]
 

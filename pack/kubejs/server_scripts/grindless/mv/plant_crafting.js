@@ -14,8 +14,8 @@
   const BIO = G.biorefinery || (G.biorefinery = {})
 
   const PLANT_PARTS = ['gtceu:mv_machine_hull', 'gtceu:mv_macerator', 'gtceu:mv_ore_washer', 'gtceu:mv_thermal_centrifuge',
-    'gtceu:mv_centrifuge', 'gtceu:ore_plant']
-  const BIO_PARTS = ['gtceu:mv_machine_hull', 'gtceu:mv_distillery', 'gtceu:mv_electric_pump', 'gtceu:steel_pipe_casing', 'gtceu:biorefinery']
+    'gtceu:mv_centrifuge', 'grindless:vanadium_steel_drill_bit', 'gtceu:ore_plant']
+  const BIO_PARTS = ['gtceu:mv_machine_hull', 'gtceu:mv_distillery', 'gtceu:mv_electric_pump', 'gtceu:steel_pipe_casing', 'grindless:contact_catalyst', 'gtceu:biorefinery']
   OP.craftingParts = PLANT_PARTS
   BIO.craftingParts = BIO_PARTS
 
@@ -33,7 +33,8 @@
     if (missingPlant.length > 0) {
       console.error('[grindless/mv] Ore Plant crafting recipe skipped, unknown item(s): ' + missingPlant.join(', '))
     } else {
-      event.recipes.gtceu.shaped('gtceu:ore_plant', ['CMC', 'WHT', 'CZC'], {
+      event.recipes.gtceu.shaped('gtceu:ore_plant', ['DMC', 'WHT', 'CZC'], {
+        D: 'grindless:vanadium_steel_drill_bit',
         C: '#gtceu:circuits/mv',
         M: 'gtceu:mv_macerator',
         W: 'gtceu:mv_ore_washer',
@@ -47,7 +48,8 @@
     if (missingBio.length > 0) {
       console.error('[grindless/mv] Biorefinery crafting recipe skipped, unknown item(s): ' + missingBio.join(', '))
     } else {
-      event.recipes.gtceu.shaped('gtceu:biorefinery', ['CDC', 'PHP', 'TDT'], {
+      event.recipes.gtceu.shaped('gtceu:biorefinery', ['CDC', 'PHP', 'TDK'], {
+        K: 'grindless:contact_catalyst',
         C: '#gtceu:circuits/mv',
         D: 'gtceu:mv_distillery',
         P: 'gtceu:mv_electric_pump',

@@ -340,7 +340,7 @@
   }
 
   function checkCrafting() {
-    var ids = ['grindless:crafting/lunar_drill', 'grindless:crafting/vein_sample/ilmenite_moon', 'grindless:crafting/vein_sample/regolith_moon',
+    var ids = ['grindless:assembler/lunar_drill', 'grindless:crafting/vein_sample/ilmenite_moon', 'grindless:crafting/vein_sample/regolith_moon',
       'grindless:chemical_reactor/lunar_quantum_seed', 'grindless:transform/lunar_entangled_singularity']
     var missing = ids.filter(function (id) { return byId(id) === null })
     var seed = byId('grindless:chemical_reactor/lunar_quantum_seed')

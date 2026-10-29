@@ -133,14 +133,11 @@
       .EUt(1920)
       .duration(200)
 
-    event.recipes.gtceu.shaped(T.machine, ['ALA', 'MHM', 'CPC'], {
-      A: '#forge:plates/titanium',
-      L: 'gtceu:lunar_drill',
-      M: 'gtceu:ev_electric_motor',
-      H: 'gtceu:ev_machine_hull',
-      C: '#gtceu:circuits/ev',
-      P: 'gtceu:ev_electric_pump'
-    }).id('grindless:crafting/ev_vein_drill')
+    event.recipes.gtceu.assembler('grindless:ev_vein_drill')
+      .itemInputs('gtceu:lunar_drill', 'gtceu:ev_machine_hull', '2x gtceu:ev_electric_motor', 'gtceu:ev_electric_pump', '4x #gtceu:circuits/ev', '2x #forge:plates/titanium', '2x ' + bit.item)
+      .inputFluids(Fluid.of('gtceu:lubricant', 1000))
+      .itemOutputs(T.machine)
+      .EUt(120).duration(400)
 
     event.recipes.gtceu.assembler('grindless:solar_wing_panel')
       .itemInputs('gtceu:titanium_frame', '2x gtceu:silicon_wafer', 'gtceu:tempered_glass')

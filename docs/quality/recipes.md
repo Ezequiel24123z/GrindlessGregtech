@@ -1,4 +1,4 @@
-﻿# Recipe quality ladder and audit (QR-C0)
+# Recipe quality ladder and audit (QR-C0)
 
 Why: the owner found controllers and multiblock parts at UEV and similar tiers crafted at a plain crafting table. Controllers, parts and tier machines
 must climb a ladder of crafting forms that gets harder with the tier. `node tools/analysis/recipe-quality.mjs` checks it, and
@@ -90,77 +90,9 @@ are not table-crafted in the dump in the form claimed. Trust the table below and
 Pilot added by the scope extension: `uev_parallel_hatch` (table shaped -> assembly line with station research, fluids, neutronium gear).
 
 
-### steam
+### steam to ev (QR-R1, done)
 
-| Output | Class | Now | Missing | File:line |
-|---|---|---|---|---|
-| `coking_battery` | controller | crafting | C-DOMAIN | steam/coking_battery.js:77 |
-| `large_steam_centrifuge` | controller | crafting | C-DOMAIN | steam/large_family.js:33 |
-| `large_steam_chemical_bath` | controller | crafting | C-DOMAIN | steam/large_family.js:35 |
-| `large_steam_macerator` | controller | crafting | C-DOMAIN | steam/large_family.js:32 |
-| `large_steam_ore_washer` | controller | crafting | C-DOMAIN | steam/large_family.js:36 |
-| `large_steam_thermal_centrifuge` | controller | crafting | C-DOMAIN | steam/large_family.js:34 |
-| `steam_alloy_smelter` | controller | crafting | C-DOMAIN | steam/small_family.js:27 |
-| `steam_blast_furnace` | controller | crafting | C-DOMAIN | steam/blast_furnace.js:73 |
-| `steam_chemical_bath` | controller | crafting | C-DOMAIN | steam/small_family.js:29 |
-| `steam_compressor` | controller | crafting | C-DOMAIN | steam/small_family.js:26 |
-| `steam_forge_hammer` | controller | crafting | C-DOMAIN | steam/small_family.js:25 |
-| `steam_greenhouse` | controller | crafting | C-DOMAIN | steam/crafting.js:58 |
-| `steam_mixer` | controller | crafting | C-DOMAIN | steam/small_family.js:28 |
-| `steam_ore_washer` | controller | crafting | C-DOMAIN | steam/small_family.js:30 |
-| `steam_vein_drill` | controller | crafting | C-DOMAIN | steam/crafting.js:50 |
-
-### lv
-
-| Output | Class | Now | Missing | File:line |
-|---|---|---|---|---|
-| `generator_array` | controller | crafting | C-DOMAIN | power/generator_array.js:15 |
-| `lv_greenhouse` | controller | crafting | C-DOMAIN | lv/crafting_multis.js:46 |
-| `sulfide_roaster` | controller | crafting | C-DOMAIN | lv/sulfide_roaster.js:86 |
-| `wire_works` | controller | assembler | C-DOMAIN | lv/mega_wire_works.js:3 |
-
-### mv
-
-| Output | Class | Now | Missing | File:line |
-|---|---|---|---|---|
-| `advanced_multi_smelter` | controller | crafting | C-DISTINCT C-DOMAIN | mv/leisure_utility.js:41 |
-| `biorefinery` | controller | crafting | C-DOMAIN | mv/plant_crafting.js:56 |
-| `lava_furnace` | controller | crafting | C-DOMAIN | mv/leisure_utility.js:42 |
-| `mv_greenhouse` | controller | crafting | C-DOMAIN | mv/family_crafting.js:44 |
-| `ore_plant` | controller | crafting | C-DOMAIN | mv/plant_crafting.js:43 |
-| `polymer_works` | controller | assembler | C-DISTINCT C-DOMAIN | mv/mega_polymer_works.js:3 |
-| `universal_assembly_factory` | controller | crafting | C-DOMAIN | mv/leisure_factories.js:30 |
-| `universal_mixing_factory` | controller | crafting | C-DOMAIN | mv/leisure_factories.js:42 |
-| `universal_processing_factory` | controller | crafting | C-DOMAIN | mv/leisure_factories.js:24 |
-| `universal_separation_factory` | controller | crafting | C-DOMAIN | mv/leisure_factories.js:36 |
-| `weather_controller` | controller | crafting | C-DOMAIN | mv/leisure_utility.js:43 |
-
-### hv
-
-| Output | Class | Now | Missing | File:line |
-|---|---|---|---|---|
-| `coil_chemical_plant` | controller | assembler | C-DOMAIN | hv/mega_coil_chemical_plant.js:3 |
-| `hv_greenhouse` | controller | crafting | C-DOMAIN | hv/family_crafting.js:62 |
-| `refinery` | controller | assembler | C-DOMAIN | hv/refinery_crafting.js:8 |
-| `reformer` | controller | crafting | C-DISTINCT C-DOMAIN | hv/refinery_crafting.js:41 |
-| `syngas_plant` | controller | crafting | C-DOMAIN | hv/syngas_plant.js:175 |
-
-### ev
-
-| Output | Class | Now | Missing | File:line |
-|---|---|---|---|---|
-| `atmosphere_processor` | controller | crafting | C-DOMAIN C-FLUID C-FORM | ev/mars_site.js:131 |
-| `combined_cycle_plant` | controller | crafting | C-DISTINCT C-DOMAIN C-FLUID C-FORM | ev/combined_cycle_and_hot_mill.js:51 |
-| `deep_space_antenna` | controller | crafting | C-DOMAIN C-FLUID C-FORM | ev/lunar_power_and_antenna.js:42 |
-| `ev_vein_drill` | controller | crafting | C-DOMAIN C-FLUID C-FORM | ev/tripod.js:21 |
-| `extraction_cascade` | controller | crafting | C-DOMAIN C-FLUID C-FORM | ev/extraction_cascade.js:217 |
-| `hot_strip_mill` | controller | crafting | C-DOMAIN C-FLUID C-FORM | ev/combined_cycle_and_hot_mill.js:52 |
-| `lunar_drill` | controller | crafting | C-DOMAIN C-FLUID C-FORM | moon/crafting.js:45 |
-| `lunar_solar_array` | controller | crafting | C-DOMAIN C-FLUID C-FORM | ev/lunar_power_and_antenna.js:42 |
-| `ore_refinery` | controller | assembler | C-DOMAIN C-FLUID | ev/mega_ore_refinery.js:2 |
-| `platinum_plant` | controller | assembler | C-DOMAIN C-FLUID | ev/platinum_plant.js:95 |
-| `regolith_cell` | controller | crafting | C-DOMAIN C-FLUID C-FORM | ev/regolith_cell.js:167 |
-| `sealed_dome` | controller | crafting | C-DISTINCT C-DOMAIN C-FLUID C-FORM | ev/sealed_dome.js:55 |
+All 47 controller rows of steam, lv, mv, hv and ev left the baseline. Steam-HV controllers got a domain input (drill bits, electrodes, catalysts of their own line); MV and HV ones also reach 5 distinct ingredients. The EV crafting controllers moved from the crafting table to the assembler with a fluid and 2+ domain inputs; ids are now grindless:assembler/NAME (combined_cycle_plant, hot_strip_mill, atmosphere_processor, extraction_cascade, regolith_cell, sealed_dome, ev_vein_drill, lunar_drill, lunar_solar_array, deep_space_antenna). ore_refinery and platinum_plant (already assembler) gained a fluid and domain inputs. Out of scope, in iv/: grindless:assembler/ev_rtg (C-FLUID).
 
 ### iv
 

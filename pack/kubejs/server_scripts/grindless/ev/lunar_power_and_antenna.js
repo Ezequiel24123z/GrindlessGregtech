@@ -39,7 +39,7 @@
     solar: ['grindless:lunar_solar/moon', 'grindless:lunar_solar/mars'],
     chart: 'grindless:deep_space_tracking/mars_chart',
     copy: 'grindless:crafting/mars_chart_copy',
-    controllers: ['grindless:crafting/lunar_solar_array', 'grindless:crafting/deep_space_antenna']
+    controllers: ['grindless:assembler/lunar_solar_array', 'grindless:assembler/deep_space_antenna']
   }
 
   // the Proxima b row (package UHV-B1): 0.65 x the Moon's 420 EU/t per panel (tables/sunlight.json, gcyr:proxima_centauri_b 0.91)
@@ -117,22 +117,17 @@
       event.shapeless('2x ' + CHART, [CHART, STICK]).id(LP.recipes.copy)
 
       // ---- controllers (GTM shaped: lowercase letters are tool symbols, so ingredient keys are uppercase)
-      event.recipes.gtceu.shaped(A.machine, ['PPP', 'CHC', 'FWF'], {
-        P: PANEL,
-        C: '#gtceu:circuits/ev',
-        H: 'gtceu:ev_machine_hull',
-        F: 'gtceu:titanium_frame',
-        W: 'gtceu:aluminium_single_cable'
-      }).id(LP.recipes.controllers[0])
+      event.recipes.gtceu.assembler(LP.recipes.controllers[0].replace('assembler/', ''))
+        .itemInputs('3x ' + PANEL, '4x #gtceu:circuits/ev', 'gtceu:ev_machine_hull', '2x gtceu:titanium_frame', '2x gtceu:aluminium_single_cable', '2x grindless:platinum_electrode')
+        .inputFluids(Fluid.of('gtceu:distilled_water', 1000))
+        .itemOutputs(A.machine)
+        .EUt(120).duration(400)
 
-      event.recipes.gtceu.shaped(N.machine, ['FEF', 'SHS', 'CAC'], {
-        F: 'gtceu:titanium_frame',
-        E: 'gtceu:hv_emitter',
-        S: 'gtceu:hv_sensor',
-        H: 'gtceu:ev_machine_hull',
-        C: '#gtceu:circuits/ev',
-        A: '#forge:plates/titanium'
-      }).id(LP.recipes.controllers[1])
+      event.recipes.gtceu.assembler(LP.recipes.controllers[1].replace('assembler/', ''))
+        .itemInputs('2x gtceu:titanium_frame', 'gtceu:hv_emitter', 'gtceu:hv_sensor', 'gtceu:ev_machine_hull', '4x #gtceu:circuits/ev', '2x #forge:plates/titanium', '2x grindless:platinum_electrode', '2x grindless:graphite_electrode')
+        .inputFluids(Fluid.of('gtceu:lubricant', 1000))
+        .itemOutputs(N.machine)
+        .EUt(120).duration(400)
 
       console.info(LOG + 'lunar power and antenna: 2 solar site recipes, the Mars chart observation, the chart copy and 2 controllers added')
     } catch (e) {

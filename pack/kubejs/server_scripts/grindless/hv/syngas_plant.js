@@ -228,7 +228,8 @@
       console.error('[grindless/hv] syngas plant crafting skipped, unknown item(s): ' + missing.join(', '))
       return
     }
-    event.recipes.gtceu.shaped('gtceu:syngas_plant', ['CRC', 'PHP', 'CGC'], {
+    event.recipes.gtceu.shaped('gtceu:syngas_plant', ['CRC', 'PHP', 'CGK'], {
+      K: CATALYST,
       C: '#gtceu:circuits/hv',
       R: REACTOR,
       P: PUMP,

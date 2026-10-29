@@ -35,14 +35,11 @@
     if (hv === null || missing.length > 0) {
       console.error('[grindless/moon] Lunar Drill recipe skipped: ' + (hv === null ? 'no HV drill bit' : 'unknown item(s) ' + missing.join(', ')))
     } else {
-      event.recipes.gtceu.shaped('gtceu:lunar_drill', ['WSW', 'MHM', 'CBC'], {
-        W: 'minecraft:daylight_detector',
-        S: 'gtceu:hv_sensor',
-        M: 'gtceu:hv_electric_motor',
-        H: 'gtceu:hv_machine_hull',
-        C: '#gtceu:circuits/hv',
-        B: hv.bit.item
-      }).id('grindless:crafting/lunar_drill')
+      event.recipes.gtceu.assembler('grindless:lunar_drill')
+        .itemInputs('gtceu:hv_machine_hull', '2x minecraft:daylight_detector', 'gtceu:hv_sensor', '2x gtceu:hv_electric_motor', '4x #gtceu:circuits/hv', '2x ' + hv.bit.item, 'grindless:empty_vein_probe')
+        .inputFluids(Fluid.of('gtceu:lubricant', 500))
+        .itemOutputs('gtceu:lunar_drill')
+        .EUt(120).duration(400)
     }
 
     // ---- lunar vein samples
