@@ -331,7 +331,7 @@
   }
 
   function checkCrafting() {
-    var r = byId('grindless:crafting/ev_vein_drill')
+    var r = byId('grindless:assembler/ev_vein_drill')
     var panel = byId('grindless:assembler/solar_wing_panel')
     var problems = []
     if (r === null) problems.push('controller recipe missing')

@@ -35,7 +35,8 @@
 
   ServerEvents.recipes(function (event) {
     // item-only trio: controller built around the GTM Steam single-block machine it replaces
-    event.recipes.gtceu.shaped('gtceu:steam_forge_hammer', ['PTP', 'GBG', 'CwC'], {
+    event.recipes.gtceu.shaped('gtceu:steam_forge_hammer', ['DTP', 'GBG', 'CwC'], {
+      D: 'grindless:steel_drill_bit',
       P: '#forge:plates/steel',
       T: 'gtceu:bronze_normal_fluid_pipe',
       G: '#forge:gears/steel',
@@ -43,7 +44,8 @@
       C: 'gtceu:steam_machine_casing'
     }).id('grindless:crafting/steam_forge_hammer')
 
-    event.recipes.gtceu.shaped('gtceu:steam_compressor', ['PTP', 'GBG', 'CwC'], {
+    event.recipes.gtceu.shaped('gtceu:steam_compressor', ['DTP', 'GBG', 'CwC'], {
+      D: 'grindless:bronze_drill_bit',
       P: '#forge:plates/bronze',
       T: 'gtceu:bronze_normal_fluid_pipe',
       G: '#forge:gears/bronze',
@@ -51,7 +53,8 @@
       C: 'gtceu:steam_machine_casing'
     }).id('grindless:crafting/steam_compressor')
 
-    event.recipes.gtceu.shaped('gtceu:steam_alloy_smelter', ['PTP', 'GBG', 'CwC'], {
+    event.recipes.gtceu.shaped('gtceu:steam_alloy_smelter', ['DTP', 'GBG', 'CwC'], {
+      D: 'grindless:steel_drill_bit',
       P: '#forge:plates/steel',
       T: 'gtceu:bronze_normal_fluid_pipe',
       G: '#forge:gears/bronze',
@@ -60,23 +63,25 @@
     }).id('grindless:crafting/steam_alloy_smelter')
 
     // mixer / chemical bath / ore washer: no Steam single block to replace, built from plates, gears, pipe and casing
-    event.recipes.gtceu.shaped('gtceu:steam_mixer', ['PGP', 'TwT', 'CGC'], {
+    event.recipes.gtceu.shaped('gtceu:steam_mixer', ['DGP', 'TwT', 'CGC'], {
+      D: 'grindless:bronze_drill_bit',
       P: '#forge:plates/bronze',
       G: '#forge:gears/bronze',
       T: 'gtceu:bronze_normal_fluid_pipe',
       C: 'gtceu:steam_machine_casing'
     }).id('grindless:crafting/steam_mixer')
 
-    event.recipes.gtceu.shaped('gtceu:steam_chemical_bath', ['PGP', 'TwT', 'CGC'], {
+    event.recipes.gtceu.shaped('gtceu:steam_chemical_bath', ['DGP', 'TwT', 'CGC'], {
+      D: 'grindless:steel_drill_bit',
       P: '#forge:plates/steel',
       G: '#forge:glass',
       T: 'gtceu:bronze_normal_fluid_pipe',
       C: 'gtceu:steam_machine_casing'
     }).id('grindless:crafting/steam_chemical_bath')
 
-    event.recipes.gtceu.shaped('gtceu:steam_ore_washer', ['GPG', 'TwT', 'CGC'], {
+    event.recipes.gtceu.shaped('gtceu:steam_ore_washer', ['GDG', 'TwT', 'CGC'], {
       G: '#forge:gears/bronze',
-      P: '#forge:plates/steel',
+      D: 'grindless:steel_drill_bit',
       T: 'gtceu:bronze_normal_fluid_pipe',
       C: 'gtceu:steam_machine_casing'
     }).id('grindless:crafting/steam_ore_washer')

@@ -45,14 +45,14 @@
     { name: 'mars', dimension: 'gcyr:mars', co2: false }
   ]
 
-  const PARTS = ['gtceu:hv_greenhouse', 'gtceu:ev_machine_hull', 'gtceu:ev_electric_pump']
+  const PARTS = ['gtceu:hv_greenhouse', 'gtceu:ev_machine_hull', 'gtceu:ev_electric_pump', 'grindless:night_sky_radiator', 'grindless:stainless_steel_drill_bit']
 
   SD.recipeId = function (entryId, site) {
     return 'grindless:greenhouse/ev/' + entryId + '_sealed_' + site
   }
   SD.sites = SITES
   SD.numbers = { waterMb: WATER_MB, co2Mb: CO2_MB, o2Mb: O2_MB, factor: FACTOR, circuit: CIRCUIT, eut: EUT, duration: DURATION }
-  SD.craftingId = 'grindless:crafting/sealed_dome'
+  SD.craftingId = 'grindless:assembler/sealed_dome'
 
   function addOutputs(recipe, outputs, factor) {
     outputs.forEach(function (o) {
@@ -115,12 +115,11 @@
     if (missingParts.length > 0) {
       console.error('[grindless/ev] sealed dome crafting recipe skipped, unknown item(s): ' + missingParts.join(', '))
     } else {
-      event.recipes.gtceu.shaped('gtceu:sealed_dome', ['CGC', 'PHP', 'CwC'], {
-        C: '#gtceu:circuits/ev',
-        G: 'gtceu:hv_greenhouse',
-        P: 'gtceu:ev_electric_pump',
-        H: 'gtceu:ev_machine_hull'
-      }).id(SD.craftingId)
+      event.recipes.gtceu.assembler('grindless:sealed_dome')
+        .itemInputs('gtceu:ev_machine_hull', 'gtceu:hv_greenhouse', '2x gtceu:ev_electric_pump', '4x #gtceu:circuits/ev', '2x grindless:night_sky_radiator', '2x grindless:stainless_steel_drill_bit')
+        .inputFluids(Fluid.of('gtceu:distilled_water', 2000))
+        .itemOutputs('gtceu:sealed_dome')
+        .EUt(120).duration(400)
     }
   })
 })()

@@ -44,7 +44,7 @@
   }
   const CRAFTING_PARTS = [
     'gtceu:mv_machine_hull', 'gtceu:mv_electric_furnace', 'gtceu:cupronickel_coil_block', 'gtceu:steel_firebox_casing',
-    'gtceu:mv_electric_pump', 'minecraft:furnace', 'minecraft:lightning_rod', 'gtceu:mv_sensor'
+    'gtceu:mv_electric_pump', 'minecraft:furnace', 'minecraft:lightning_rod', 'gtceu:mv_sensor', 'grindless:graphite_electrode'
   ]
   const HATCH_RECIPE = 'grindless:assembler/cleaning_maintenance_hatch'
   const HATCH_PARTS = ['gtceu:auto_maintenance_hatch', 'gtceu:filter_casing', 'gtceu:hv_electric_motor', HATCH]
@@ -94,14 +94,16 @@
       console.error(LOG + 'leisure utility controllers skipped, unknown item(s): ' + missing.join(', '))
       return
     }
-    event.recipes.gtceu.shaped('gtceu:advanced_multi_smelter', ['CFC', 'KHK', 'CFC'], {
+    event.recipes.gtceu.shaped('gtceu:advanced_multi_smelter', ['CFC', 'KHK', 'EFC'], {
+      E: 'grindless:graphite_electrode',
       C: '#gtceu:circuits/mv',
       F: 'gtceu:mv_electric_furnace',
       K: 'gtceu:cupronickel_coil_block',
       H: 'gtceu:mv_machine_hull'
     }).id(CRAFTING.smelter)
 
-    event.recipes.gtceu.shaped('gtceu:lava_furnace', ['BCB', 'PHP', 'BFB'], {
+    event.recipes.gtceu.shaped('gtceu:lava_furnace', ['BCB', 'PHP', 'BFE'], {
+      E: 'grindless:graphite_electrode',
       B: 'gtceu:steel_firebox_casing',
       C: '#gtceu:circuits/mv',
       P: 'gtceu:mv_electric_pump',
@@ -109,7 +111,8 @@
       F: 'minecraft:furnace'
     }).id(CRAFTING.furnace)
 
-    event.recipes.gtceu.shaped('gtceu:weather_controller', ['RSR', 'CHC', 'PCP'], {
+    event.recipes.gtceu.shaped('gtceu:weather_controller', ['RSR', 'CHC', 'ECP'], {
+      E: 'grindless:graphite_electrode',
       R: 'minecraft:lightning_rod',
       S: 'gtceu:mv_sensor',
       C: '#gtceu:circuits/mv',
