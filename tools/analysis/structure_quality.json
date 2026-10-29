@@ -84,15 +84,10 @@
   "c": 201
  },
  "gtceu:beuv_scanner": {
-  "v": [
-   "hollow-box",
-   "dominant-share",
-   "few-block-types",
-   "no-functional-detail"
-  ],
-  "bt": 1,
-  "ds": 1,
-  "c": 210
+  "v": [],
+  "bt": 6,
+  "ds": 0.443,
+  "c": 768
  },
  "gtceu:biofoundry": {
   "v": [],
@@ -185,15 +180,10 @@
   "c": 395
  },
  "gtceu:crust_lift": {
-  "v": [
-   "hollow-box",
-   "dominant-share",
-   "few-block-types",
-   "no-functional-detail"
-  ],
-  "bt": 2,
-  "ds": 0.902,
-  "c": 529
+  "v": [],
+  "bt": 6,
+  "ds": 0.345,
+  "c": 465
  },
  "gtceu:cryobot": {
   "v": [],
@@ -226,15 +216,10 @@
   "c": 286
  },
  "gtceu:decay_heat_vault": {
-  "v": [
-   "hollow-box",
-   "dominant-share",
-   "few-block-types",
-   "no-functional-detail"
-  ],
-  "bt": 2,
-  "ds": 0.908,
-  "c": 218
+  "v": [],
+  "bt": 7,
+  "ds": 0.419,
+  "c": 321
  },
  "gtceu:deep_space_antenna": {
   "v": [],
@@ -267,15 +252,10 @@
   "c": 262
  },
  "gtceu:droplet_radiator_works": {
-  "v": [
-   "hollow-box",
-   "dominant-share",
-   "few-block-types",
-   "no-functional-detail"
-  ],
-  "bt": 1,
-  "ds": 1,
-  "c": 333
+  "v": [],
+  "bt": 6,
+  "ds": 0.31,
+  "c": 472
  },
  "gtceu:electron_beam_furnace": {
   "v": [],
@@ -326,15 +306,10 @@
   "c": 61
  },
  "gtceu:femtosecond_writer": {
-  "v": [
-   "hollow-box",
-   "dominant-share",
-   "few-block-types",
-   "no-functional-detail"
-  ],
-  "bt": 1,
-  "ds": 1,
-  "c": 130
+  "v": [],
+  "bt": 4,
+  "ds": 0.322,
+  "c": 597
  },
  "gtceu:fibre_draw_tower": {
   "v": [],
@@ -577,13 +552,10 @@
   "c": 99
  },
  "gtceu:levitation_melter": {
-  "v": [
-   "dominant-share",
-   "few-block-types"
-  ],
-  "bt": 2,
-  "ds": 0.898,
-  "c": 296
+  "v": [],
+  "bt": 6,
+  "ds": 0.653,
+  "c": 350
  },
  "gtceu:light_sail_fab": {
   "v": [],
@@ -616,13 +588,10 @@
   "c": 34
  },
  "gtceu:matrioshka_computer": {
-  "v": [
-   "dominant-share",
-   "no-functional-detail"
-  ],
-  "bt": 6,
-  "ds": 0.827,
-  "c": 522
+  "v": [],
+  "bt": 7,
+  "ds": 0.342,
+  "c": 597
  },
  "gtceu:mbe_reactor": {
   "v": [],
@@ -679,14 +648,10 @@
   "c": 66
  },
  "gtceu:millikelvin_cryostat_works": {
-  "v": [
-   "hollow-box",
-   "dominant-share",
-   "few-block-types"
-  ],
-  "bt": 2,
-  "ds": 0.876,
-  "c": 130
+  "v": [],
+  "bt": 7,
+  "ds": 0.335,
+  "c": 544
  },
  "gtceu:mocvd_reactor": {
   "v": [],
@@ -761,25 +726,16 @@
   "c": 1117
  },
  "gtceu:neutron_drip_separator": {
-  "v": [
-   "hollow-box",
-   "dominant-share",
-   "few-block-types",
-   "no-functional-detail"
-  ],
-  "bt": 2,
-  "ds": 0.894,
-  "c": 266
+  "v": [],
+  "bt": 7,
+  "ds": 0.36,
+  "c": 415
  },
  "gtceu:neutronium_cage": {
-  "v": [
-   "hollow-box",
-   "dominant-share",
-   "few-block-types"
-  ],
-  "bt": 2,
-  "ds": 0.816,
-  "c": 218
+  "v": [],
+  "bt": 5,
+  "ds": 0.662,
+  "c": 365
  },
  "gtceu:nitride_magnet_works": {
   "v": [],
@@ -884,14 +840,10 @@
   "c": 175
  },
  "gtceu:polarised_proton_source": {
-  "v": [
-   "hollow-box",
-   "dominant-share",
-   "few-block-types"
-  ],
-  "bt": 2,
-  "ds": 0.858,
-  "c": 170
+  "v": [],
+  "bt": 7,
+  "ds": 0.28,
+  "c": 586
  },
  "gtceu:polymer_works": {
   "v": [],
@@ -906,15 +858,10 @@
   "c": 312
  },
  "gtceu:positronium_condensate_lab": {
-  "v": [
-   "hollow-box",
-   "dominant-share",
-   "few-block-types",
-   "no-functional-detail"
-  ],
-  "bt": 1,
-  "ds": 1,
-  "c": 170
+  "v": [],
+  "bt": 6,
+  "ds": 0.681,
+  "c": 327
  },
  "gtceu:powder_bed_printer": {
   "v": [],
@@ -947,12 +894,10 @@
   "c": 197
  },
  "gtceu:pulsar_wind_trap": {
-  "v": [
-   "dominant-share"
-  ],
-  "bt": 3,
-  "ds": 0.782,
-  "c": 386
+  "v": [],
+  "bt": 6,
+  "ds": 0.377,
+  "c": 680
  },
  "gtceu:pyroprocessing_cell": {
   "v": [],
@@ -979,15 +924,10 @@
   "c": 175
  },
  "gtceu:r_process_decompressor": {
-  "v": [
-   "hollow-box",
-   "dominant-share",
-   "few-block-types",
-   "no-functional-detail"
-  ],
-  "bt": 2,
-  "ds": 0.913,
-  "c": 322
+  "v": [],
+  "bt": 6,
+  "ds": 0.289,
+  "c": 388
  },
  "gtceu:radio_telescope": {
   "v": [],
@@ -1002,12 +942,10 @@
   "c": 101
  },
  "gtceu:ramp_compression_pulser": {
-  "v": [
-   "few-block-types"
-  ],
-  "bt": 2,
-  "ds": 0.557,
-  "c": 362
+  "v": [],
+  "bt": 6,
+  "ds": 0.618,
+  "c": 642
  },
  "gtceu:recoil_separator": {
   "v": [],
@@ -1124,15 +1062,10 @@
   "c": 152
  },
  "gtceu:spectral_hole_burner": {
-  "v": [
-   "hollow-box",
-   "dominant-share",
-   "few-block-types",
-   "no-functional-detail"
-  ],
-  "bt": 1,
-  "ds": 1,
-  "c": 98
+  "v": [],
+  "bt": 6,
+  "ds": 0.419,
+  "c": 204
  },
  "gtceu:srf_cavity_works": {
   "v": [],
@@ -1213,15 +1146,10 @@
   "c": 535
  },
  "gtceu:stm_lithography_cell": {
-  "v": [
-   "hollow-box",
-   "dominant-share",
-   "few-block-types",
-   "no-functional-detail"
-  ],
-  "bt": 1,
-  "ds": 1,
-  "c": 98
+  "v": [],
+  "bt": 5,
+  "ds": 0.564,
+  "c": 322
  },
  "gtceu:submerged_arc_furnace": {
   "v": [],
@@ -1278,15 +1206,10 @@
   "c": 211
  },
  "gtceu:tfln_fab": {
-  "v": [
-   "hollow-box",
-   "dominant-share",
-   "few-block-types",
-   "no-functional-detail"
-  ],
-  "bt": 1,
-  "ds": 1,
-  "c": 170
+  "v": [],
+  "bt": 7,
+  "ds": 0.418,
+  "c": 549
  },
  "gtceu:tholin_reformer": {
   "v": [],
@@ -1325,14 +1248,10 @@
   "c": 480
  },
  "gtceu:uiv_fusion_reactor": {
-  "v": [
-   "hollow-box",
-   "few-block-types",
-   "no-functional-detail"
-  ],
-  "bt": 2,
-  "ds": 0.677,
-  "c": 66
+  "v": [],
+  "bt": 6,
+  "ds": 0.403,
+  "c": 756
  },
  "gtceu:ultrapure_water_plant": {
   "v": [],
@@ -1461,15 +1380,10 @@
   "c": 173
  },
  "gtceu:xray_pulse_profiler": {
-  "v": [
-   "hollow-box",
-   "dominant-share",
-   "few-block-types",
-   "no-functional-detail"
-  ],
-  "bt": 1,
-  "ds": 1,
-  "c": 170
+  "v": [],
+  "bt": 6,
+  "ds": 0.269,
+  "c": 517
  },
  "gtceu:zblan_draw_tower": {
   "v": [],

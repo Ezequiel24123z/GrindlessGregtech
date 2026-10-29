@@ -61,45 +61,17 @@
     }
   ]
 
-  // A hollow box: casing on every face, the floor row (X) takes the parts, S is the controller (front wall, row 1, middle), # is air;
-  // a machine with a magnet has a belt of it on row 3 of the side walls (M)
+  // Cryostat stacks (uiv/shapes.js): a vacuum can round stage plates on a central rod; the millikelvin works wears a magnet band. Built in
+  // the machine registry callback: shapes.js may load after this file. The floor row (X) takes the parts.
   function spec(m) {
-    var slices = []
-    var last = m.depth - 1
-    var mid = (m.width - 1) / 2
-    for (var si = 0; si < m.depth; si++) {
-      var rows = []
-      for (var r = 0; r < m.height; r++) {
-        var row = ''
-        for (var c = 0; c < m.width; c++) {
-          var edge = si === 0 || si === last || c === 0 || c === m.width - 1
-          var ch
-          if (r === m.height - 1) ch = 'F'
-          else if (edge) ch = (si === last && r === 1 && c === mid) ? 'S' : ((m.magnet && r === 3) ? 'M' : 'F')
-          else if (r === 0) ch = 'X'
-          else ch = '#'
-          row += ch
-        }
-        rows.push(row)
-      }
-      slices.push(rows)
-    }
-    var symbols = {
-      S: Pat.controller(),
-      X: Pat.oneOf.apply(null, [Pat.block(m.casing)].concat([
-        Pat.part('input_bus', { min: 1, max: 2 }),
-        Pat.part('output_bus', { min: 1, max: 2 }),
-        Pat.part('input_hatch', { min: 0, max: 1 }),
-        Pat.part('output_hatch', { min: 0, max: 1 }),
-        Pat.part('energy_input', { min: 1, max: 2 })
-      ])),
-      F: Pat.block(m.casing),
-      '#': Pat.air()
-    }
-    if (m.magnet) symbols.M = Pat.block(m.magnet)
-    return { slices: slices, symbols: symbols }
+    return G.uivShapes.build(Pat, m.name, m.casing, [
+      Pat.part('input_bus', { min: 1, max: 2 }),
+      Pat.part('output_bus', { min: 1, max: 2 }),
+      Pat.part('input_hatch', { min: 0, max: 1 }),
+      Pat.part('output_hatch', { min: 0, max: 1 }),
+      Pat.part('energy_input', { min: 1, max: 2 })
+    ])
   }
-  MC.machines.forEach(function (m) { m.spec = spec(m) })
 
   // one EMI line per recipe, read from its data
   function infoOf(dataKey) {
@@ -149,6 +121,7 @@
       var type = GTRecipeTypes.get(m.type)
       if (type == null) throw new Error(LOG + 'recipe type gtceu:' + m.type + ' is not registered')
       type.addDataInfo(infoOf(m.dataKey))
+      m.spec = spec(m)
       Pat.register(m.machine, m.spec)
 
       event.create(m.name, 'multiblock')
