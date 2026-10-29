@@ -3487,6 +3487,281 @@
 			x: 4.0d
 			y: 70.0d
 		}
+		{
+			icon: "gtceu:uiv_machine_hull"
+			id: "21DDE868D8C52D06"
+			shape: "rsquare"
+			size: 1.5d
+			subtitle: "UIV multiblocks"
+			tasks: [{ id: "55ED727F4D968169", type: "checkmark" }]
+			title: "UIV"
+			x: 0.0d
+			y: 73.0d
+		}
+		{
+			icon: "gtceu:beuv_scanner"
+			id: "3B9EA9080872DA81"
+			rewards: [{ id: "3BBE530150A5AE32", type: "xp", xp: 10 }]
+			shape: "gear"
+			size: 1.5d
+			subtitle: "UIV, Grindless"
+			tasks: [{ id: "5D273E9B85DCB6CF", item: "gtceu:beuv_scanner", type: "item" }]
+			x: 2.0d
+			y: 73.0d
+		}
+		{
+			icon: "gtceu:crust_lift"
+			id: "52E67DA6FA6C21CA"
+			rewards: [{ id: "585E5886CDA6F674", type: "xp", xp: 10 }]
+			shape: "gear"
+			size: 1.5d
+			subtitle: "UIV, Grindless"
+			tasks: [{ id: "45DB19AF94A52494", item: "gtceu:crust_lift", type: "item" }]
+			x: 4.0d
+			y: 73.0d
+		}
+		{
+			icon: "gtceu:decay_heat_vault"
+			id: "74263932D8E53893"
+			rewards: [{ id: "475597ECD2A4F295", type: "xp", xp: 10 }]
+			shape: "gear"
+			size: 1.5d
+			subtitle: "UIV, Grindless"
+			tasks: [{ id: "6EDF7953C81FE9A8", item: "gtceu:decay_heat_vault", type: "item" }]
+			x: 6.0d
+			y: 73.0d
+		}
+		{
+			icon: "gtceu:droplet_radiator_works"
+			id: "2F2835A39B64F014"
+			rewards: [{ id: "1F8E933F18A9C603", type: "xp", xp: 10 }]
+			shape: "gear"
+			size: 1.5d
+			subtitle: "UIV, Grindless"
+			tasks: [{ id: "49A817987444FE29", item: "gtceu:droplet_radiator_works", type: "item" }]
+			x: 8.0d
+			y: 73.0d
+		}
+		{
+			icon: "gtceu:ergosphere_probe_bay"
+			id: "12554A7B4104DDAD"
+			rewards: [{ id: "508D53C049092210", type: "xp", xp: 10 }]
+			shape: "gear"
+			size: 1.5d
+			subtitle: "UIV, Grindless"
+			tasks: [{ id: "56A2E6F488D88AF0", item: "gtceu:ergosphere_probe_bay", type: "item" }]
+			x: 10.0d
+			y: 73.0d
+		}
+		{
+			icon: "gtceu:femtosecond_writer"
+			id: "59FADD0217D5CC80"
+			rewards: [{ id: "618911E69DE34141", type: "xp", xp: 10 }]
+			shape: "gear"
+			size: 1.5d
+			subtitle: "UIV, Grindless"
+			tasks: [{ id: "218527C66F26587E", item: "gtceu:femtosecond_writer", type: "item" }]
+			x: 12.0d
+			y: 73.0d
+		}
+		{
+			icon: "gtceu:levitation_melter"
+			id: "6CE3D8736C2EDDC5"
+			rewards: [{ id: "7E8D2EC673952BAE", type: "xp", xp: 10 }]
+			shape: "gear"
+			size: 1.5d
+			subtitle: "UIV, Grindless"
+			tasks: [{ id: "44BAC498444F6E5F", item: "gtceu:levitation_melter", type: "item" }]
+			x: 14.0d
+			y: 73.0d
+		}
+		{
+			icon: "gtceu:matrioshka_computer"
+			id: "287D485514E73276"
+			rewards: [{ id: "79CFB9BD58F8D57A", type: "xp", xp: 10 }]
+			shape: "gear"
+			size: 1.5d
+			subtitle: "UIV, Grindless"
+			tasks: [{ id: "7DC7AEB95553A9E8", item: "gtceu:matrioshka_computer", type: "item" }]
+			x: 16.0d
+			y: 73.0d
+		}
+		{
+			icon: "gtceu:millikelvin_cryostat_works"
+			id: "545BC95B868B0261"
+			rewards: [{ id: "113BB3E27BD2D615", type: "xp", xp: 10 }]
+			shape: "gear"
+			size: 1.5d
+			subtitle: "UIV, Grindless"
+			tasks: [{ id: "22AB06643BDA2F69", item: "gtceu:millikelvin_cryostat_works", type: "item" }]
+			x: 18.0d
+			y: 73.0d
+		}
+		{
+			icon: "gtceu:neutron_drip_separator"
+			id: "5D11E30183005226"
+			rewards: [{ id: "71F4BEE42AB86649", type: "xp", xp: 10 }]
+			shape: "gear"
+			size: 1.5d
+			subtitle: "UIV, Grindless"
+			tasks: [{ id: "137D6D06AFA8AA25", item: "gtceu:neutron_drip_separator", type: "item" }]
+			x: 20.0d
+			y: 73.0d
+		}
+		{
+			icon: "gtceu:neutronium_cage"
+			id: "1A6C8D9C581E6464"
+			rewards: [{ id: "6B41AF82AA760064", type: "xp", xp: 10 }]
+			shape: "gear"
+			size: 1.5d
+			subtitle: "UIV, Grindless"
+			tasks: [{ id: "6CDFFA81301B3D71", item: "gtceu:neutronium_cage", type: "item" }]
+			x: 22.0d
+			y: 73.0d
+		}
+		{
+			icon: "gtceu:neutronium_compression_hall"
+			id: "126090DAE68EF02F"
+			rewards: [{ id: "13F2318C8392A6C5", type: "xp", xp: 10 }]
+			shape: "gear"
+			size: 1.5d
+			subtitle: "UIV, Grindless"
+			tasks: [{ id: "7E0C89EF21B2BD4C", item: "gtceu:neutronium_compression_hall", type: "item" }]
+			x: 24.0d
+			y: 73.0d
+		}
+		{
+			icon: "gtceu:penrose_engine"
+			id: "353F4D555EE89D3A"
+			rewards: [{ id: "3D26DA706495B497", type: "xp", xp: 10 }]
+			shape: "gear"
+			size: 1.5d
+			subtitle: "UIV, Grindless"
+			tasks: [{ id: "20DA3CC8D6BE40F6", item: "gtceu:penrose_engine", type: "item" }]
+			x: 2.0d
+			y: 75.0d
+		}
+		{
+			icon: "gtceu:polarised_proton_source"
+			id: "79B5E5BABC023F25"
+			rewards: [{ id: "2CE444529B54954A", type: "xp", xp: 10 }]
+			shape: "gear"
+			size: 1.5d
+			subtitle: "UIV, Grindless"
+			tasks: [{ id: "56807A64AE20012C", item: "gtceu:polarised_proton_source", type: "item" }]
+			x: 4.0d
+			y: 75.0d
+		}
+		{
+			icon: "gtceu:positronium_condensate_lab"
+			id: "4F030A74FE5A3902"
+			rewards: [{ id: "2D084FDF00E0E1E4", type: "xp", xp: 10 }]
+			shape: "gear"
+			size: 1.5d
+			subtitle: "UIV, Grindless"
+			tasks: [{ id: "4F57978989D532DD", item: "gtceu:positronium_condensate_lab", type: "item" }]
+			x: 6.0d
+			y: 75.0d
+		}
+		{
+			icon: "gtceu:pulsar_wind_trap"
+			id: "701AAF9C24D8F7AC"
+			rewards: [{ id: "76C0426E51C91A83", type: "xp", xp: 10 }]
+			shape: "gear"
+			size: 1.5d
+			subtitle: "UIV, Grindless"
+			tasks: [{ id: "36F10CF651963F45", item: "gtceu:pulsar_wind_trap", type: "item" }]
+			x: 8.0d
+			y: 75.0d
+		}
+		{
+			icon: "gtceu:r_process_decompressor"
+			id: "5A55489EBE6F0B79"
+			rewards: [{ id: "33B0C027C5A99B83", type: "xp", xp: 10 }]
+			shape: "gear"
+			size: 1.5d
+			subtitle: "UIV, Grindless"
+			tasks: [{ id: "6E80318EE3750225", item: "gtceu:r_process_decompressor", type: "item" }]
+			x: 10.0d
+			y: 75.0d
+		}
+		{
+			icon: "gtceu:ramp_compression_pulser"
+			id: "76E4AF66980635DD"
+			rewards: [{ id: "42C4A63C10561A7E", type: "xp", xp: 10 }]
+			shape: "gear"
+			size: 1.5d
+			subtitle: "UIV, Grindless"
+			tasks: [{ id: "28372C68C837902F", item: "gtceu:ramp_compression_pulser", type: "item" }]
+			x: 12.0d
+			y: 75.0d
+		}
+		{
+			icon: "gtceu:spectral_hole_burner"
+			id: "45A1595D11B05224"
+			rewards: [{ id: "14C909970CFB0532", type: "xp", xp: 10 }]
+			shape: "gear"
+			size: 1.5d
+			subtitle: "UIV, Grindless"
+			tasks: [{ id: "45BB596332FFD584", item: "gtceu:spectral_hole_burner", type: "item" }]
+			x: 14.0d
+			y: 75.0d
+		}
+		{
+			icon: "gtceu:stm_lithography_cell"
+			id: "73421B5583CFCA60"
+			rewards: [{ id: "573B1357EC4CA4FF", type: "xp", xp: 10 }]
+			shape: "gear"
+			size: 1.5d
+			subtitle: "UIV, Grindless"
+			tasks: [{ id: "55EBE92D39F835C2", item: "gtceu:stm_lithography_cell", type: "item" }]
+			x: 16.0d
+			y: 75.0d
+		}
+		{
+			icon: "gtceu:tfln_fab"
+			id: "226D66FFB335CC61"
+			rewards: [{ id: "268312757F96F70F", type: "xp", xp: 10 }]
+			shape: "gear"
+			size: 1.5d
+			subtitle: "UIV, Grindless"
+			tasks: [{ id: "12A8D25073787598", item: "gtceu:tfln_fab", type: "item" }]
+			x: 18.0d
+			y: 75.0d
+		}
+		{
+			icon: "gtceu:uiv_fusion_reactor"
+			id: "1694C4059E64A148"
+			rewards: [{ id: "51C956B4A606EC58", type: "xp", xp: 10 }]
+			shape: "gear"
+			size: 1.5d
+			subtitle: "UIV, Grindless"
+			tasks: [{ id: "45DB41EDFA6BFFBF", item: "gtceu:uiv_fusion_reactor", type: "item" }]
+			x: 20.0d
+			y: 75.0d
+		}
+		{
+			icon: "gtceu:xray_pulse_profiler"
+			id: "575E79057A445BB3"
+			rewards: [{ id: "7A4E1172A563A987", type: "xp", xp: 10 }]
+			shape: "gear"
+			size: 1.5d
+			subtitle: "UIV, Grindless"
+			tasks: [{ id: "7AE78A4AFB501923", item: "gtceu:xray_pulse_profiler", type: "item" }]
+			x: 22.0d
+			y: 75.0d
+		}
+		{
+			icon: "gtnn:neutron_activator"
+			id: "2445731692C89B49"
+			rewards: [{ id: "2343350B51AD3894", type: "xp", xp: 10 }]
+			shape: "gear"
+			size: 1.25d
+			subtitle: "UIV, GT--"
+			tasks: [{ id: "7E933A4932485653", item: "gtnn:neutron_activator", type: "item" }]
+			x: 24.0d
+			y: 75.0d
+		}
 	]
 	subtitle: ["Every multiblock controller you can build, tier by tier"]
 	title: "Multiblocks"

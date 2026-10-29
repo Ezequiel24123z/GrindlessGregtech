@@ -122,7 +122,7 @@ export default {
         n('pvcell', 2.25, -1.5, I('gcyr:photovoltaic_cell'), 'Photovoltaic Cell', { from: ['nqwafer'], sub: 'GCYR\'s cell, at the crafting table' }),
         n('tjc', 2.25, 0, I('grindless:triple_junction_cell'), 'Triple-Junction Cell', { kind: 'raw', sub: 'The wake shield\'s wafer, cut' }),
         n('panel', 4.5, -0.75, I('grindless:orbital_solar_panel'), 'Orbital Solar Panel', {
-          from: ['pvcell', 'tjc'], by: ['gtceu:assembler'], sub: 'Assembler; triple-junction cells go further',
+          from: ['pvcell', 'tjc'], by: ['gtceu:assembly_line'], sub: 'Assembly line; triple-junction cells go further',
         }),
         n('station', 7, -0.75, M('gtceu:orbital_solar_station', 'gtceu:orbital_solar'), 'Orbital Solar Station', {
           kind: 'ours', from: [structure('panel')],

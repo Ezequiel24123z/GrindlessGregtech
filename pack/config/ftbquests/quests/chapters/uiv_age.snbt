@@ -1,0 +1,776 @@
+{
+	autofocus_id: "7B955176F4E8579C"
+	default_hide_dependency_lines: false
+	default_quest_shape: ""
+	filename: "uiv_age"
+	group: "3F021F40CD26BF57"
+	icon: "gtceu:uiv_machine_casing"
+	id: "19D3A63D234D284C"
+	order_index: 11
+	quest_links: [ ]
+	quests: [
+		{
+			dependencies: ["5316E435F8496672"]
+			description: [
+				"The warp gate left you the &6UIV Machine Hull&r and a stack of casings. The stars you can reach now are the ones that already died: a neutron star, a pulsar and a black hole."
+				"Home first. Nothing out there is built without metallic hydrogen and a very hard alloy."
+			]
+			icon: "gtceu:uiv_machine_hull"
+			id: "7B955176F4E8579C"
+			rewards: [{ id: "71F6AAE8444EDFE3", type: "xp", xp: 50 }]
+			shape: "rsquare"
+			size: 1.5d
+			tasks: [
+				{ id: "3260891837D92C37", item: "gtceu:uiv_machine_hull", type: "item" }
+				{ id: "1848D2F73920097E", item: "gtceu:uiv_machine_casing", type: "item" }
+			]
+			title: "Dead Stars"
+			x: 0.0d
+			y: 0.0d
+		}
+		{
+			dependencies: ["7B955176F4E8579C"]
+			description: ["Hydrogen squeezed until it conducts, drawn into wire and wrapped in a seal that survives it. The &6Metallic Hydrogen Cable&r carries the UIV hull and everything after it."]
+			icon: "gtceu:metallic_hydrogen_single_cable"
+			id: "105026C81961076A"
+			rewards: [{ id: "50B2B0E886915667", type: "xp", xp: 100 }]
+			tasks: [{ id: "106FB619A1669286", item: "gtceu:metallic_hydrogen_single_cable", type: "item" }]
+			title: "Metallic Hydrogen Cable"
+			x: 2.5d
+			y: 0.0d
+		}
+		{
+			dependencies: ["105026C81961076A"]
+			description: ["The same wire, wound on a refractory former and soaked in resin, makes the &6Metallic Hydrogen Coil Block&r. It lines the Mk5 ring, and a lot of magnets besides."]
+			icon: "grindless:metallic_hydrogen_coil_block"
+			id: "1EEF7433993D39D5"
+			rewards: [{ id: "53102691DAB49A6C", type: "xp", xp: 100 }]
+			tasks: [{ id: "53DDD2D2DE525364", item: "grindless:metallic_hydrogen_coil_block", type: "item" }]
+			title: "Metallic Hydrogen Coil"
+			x: 5.0d
+			y: 0.0d
+		}
+		{
+			dependencies: ["1EEF7433993D39D5"]
+			description: ["Five refractory metals melted together in a cold crucible and forged flat: the &6RHEA Plate&r. It is what the UIV parts are cased in."]
+			icon: "gtceu:rhea_plate"
+			id: "79F47DC75835B292"
+			rewards: [{ id: "56542E783C030BED", type: "xp", xp: 100 }]
+			tasks: [{ id: "17A5E3D58CC66CB3", item: "gtceu:rhea_plate", type: "item" }]
+			title: "RHEA Plate"
+			x: 7.5d
+			y: 0.0d
+		}
+		{
+			dependencies: ["79F47DC75835B292"]
+			description: ["The &6UIV Electric Pump&r has a printed impeller, pressed at a megabar and balanced by hand-me-down machines. The other UIV parts wait for stars further out."]
+			icon: "grindless:uiv_electric_pump"
+			id: "17C0F46C21B9CD13"
+			rewards: [{ id: "366424FA6A7C7F5A", type: "xp", xp: 150 }]
+			tasks: [{ id: "727882A96A81D31A", item: "grindless:uiv_electric_pump", type: "item" }]
+			title: "UIV Parts"
+			x: 10.0d
+			y: 0.0d
+		}
+		{
+			dependencies: ["17C0F46C21B9CD13"]
+			description: ["The &6UIV SMES Cell&r holds four times what the UEV cell does, in metallic hydrogen windings. It is what the wireless grid stores its surplus in from here on."]
+			icon: "grindless:uiv_smes_cell"
+			id: "5FB006B879741A02"
+			rewards: [{ id: "34D47AB6E85C7F74", type: "xp", xp: 100 }]
+			tasks: [{ id: "58CF3B6EE938CE16", item: "grindless:uiv_smes_cell", type: "item" }]
+			title: "UIV SMES Cell"
+			x: 10.0d
+			y: 1.75d
+		}
+		{
+			dependencies: ["105026C81961076A"]
+			description: [
+				"The &6Ramp Compression Pulser&r squeezes cold hydrogen until it turns metallic."
+				"The squeeze is real, the quench is fiction: nobody has ever kept metallic hydrogen once the pressure is gone. Here it comes out as a rod."
+			]
+			icon: "gtceu:ramp_compression_pulser"
+			id: "13765E3D3D991767"
+			rewards: [{ id: "331AA54A80D9B591", type: "xp", xp: 150 }]
+			shape: "gear"
+			size: 1.25d
+			tasks: [
+				{ id: "1DC5B07407AA12E3", item: "gtceu:ramp_compression_pulser", type: "item" }
+				{ id: "1121DA0EBD1887D8", item: "gtceu:metallic_hydrogen_ingot", type: "item" }
+			]
+			title: "Ramp Compression"
+			x: 3.0d
+			y: -3.0d
+		}
+		{
+			dependencies: ["13765E3D3D991767"]
+			description: ["Shock graphite and you get lonsdaleite, a harder cousin of diamond. Race and bearing are cut from it for the UIV piston."]
+			icon: "grindless:lonsdaleite_bearing"
+			id: "329015743E97925E"
+			rewards: [{ id: "3706367CADC0EEA0", type: "xp", xp: 100 }]
+			tasks: [
+				{ id: "79E898EDF9E4B223", item: "gtceu:lonsdaleite_dust", type: "item" }
+				{ id: "5067B626C77B827F", item: "grindless:lonsdaleite_bearing", type: "item" }
+			]
+			title: "Lonsdaleite"
+			x: 5.5d
+			y: -3.0d
+		}
+		{
+			dependencies: ["13765E3D3D991767"]
+			description: [
+				"Nitrogen laser-heated at crushing pressure becomes a single-bonded solid that stores a fearful amount of energy."
+				"Keeping it at ordinary pressure is fiction, the same trick as the hydrogen. The &6Quenched cg-N&r is the filling of every sled charge."
+			]
+			icon: "grindless:quenched_cg_nitrogen"
+			id: "10043C725AE1EEC6"
+			rewards: [{ id: "5EB7302B70034344", type: "xp", xp: 150 }]
+			tasks: [{ id: "5FECF5FC78FCCD6C", item: "grindless:quenched_cg_nitrogen", type: "item" }]
+			title: "Cubic Gauche Nitrogen"
+			x: 5.5d
+			y: -5.0d
+		}
+		{
+			dependencies: ["79F47DC75835B292"]
+			description: ["A melt held in the air by a magnetic field never touches a crucible, so nothing dissolves into it. The &6Levitation Melter&r pours the RHEA ingot and a few worse-tempered alloys."]
+			icon: "gtceu:levitation_melter"
+			id: "386B4A8A0B37927E"
+			rewards: [{ id: "1424676B3192C7DE", type: "xp", xp: 150 }]
+			shape: "gear"
+			size: 1.25d
+			tasks: [
+				{ id: "1C06CBDA9422C0AD", item: "gtceu:levitation_melter", type: "item" }
+				{ id: "5336EB9246CEB62E", item: "gtceu:rhea_ingot", type: "item" }
+			]
+			title: "Levitation Melter"
+			x: 8.0d
+			y: -3.0d
+		}
+		{
+			dependencies: ["386B4A8A0B37927E"]
+			description: ["Cool a zirconium alloy too fast to crystallise and it is a glass that behaves like a spring. A flexspline cast from it makes a &6Strain Wave Gear&r with no backlash."]
+			icon: "grindless:strain_wave_gear"
+			id: "532FA00FC05351E3"
+			rewards: [{ id: "5F5AE99CA7661DFE", type: "xp", xp: 150 }]
+			tasks: [
+				{ id: "5DEDE73AFD1666C3", item: "grindless:bmg_flexspline", type: "item" }
+				{ id: "542116D290E67B58", item: "grindless:strain_wave_gear", type: "item" }
+			]
+			title: "Metallic Glass Gear"
+			x: 10.5d
+			y: -3.0d
+		}
+		{
+			dependencies: ["386B4A8A0B37927E"]
+			description: ["Tungsten fibre in an RHEA matrix, sprayed as plasma into a tile that can face a fusion fire. It is the first &6First Wall Tile&r of the Mk5 casing."]
+			icon: "grindless:first_wall_tile"
+			id: "114A551966AEF0C3"
+			rewards: [{ id: "185DD1D82A230147", type: "xp", xp: 150 }]
+			tasks: [
+				{ id: "1959707827720F74", item: "grindless:wf_rhea_billet", type: "item" }
+				{ id: "798B8699A93A7D1A", item: "grindless:first_wall_tile", type: "item" }
+			]
+			title: "Fibre-Reinforced Tile"
+			x: 10.5d
+			y: -5.0d
+		}
+		{
+			dependencies: ["13765E3D3D991767"]
+			description: ["The calutron sorts the titanium isotopes just as it sorted calcium. Only one of them is the next bullet."]
+			icon: "gtceu:titanium_50_chloride_dust"
+			id: "58E1D2159F9011CD"
+			rewards: [{ id: "16F2ED70ED3BDC0B", type: "xp", xp: 100 }]
+			tasks: [{ id: "59F61D06793569D8", item: "gtceu:titanium_50_chloride_dust", type: "item" }]
+			title: "Titanium-50 Chloride"
+			x: 3.5d
+			y: -6.0d
+		}
+		{
+			dependencies: ["58E1D2159F9011CD"]
+			description: ["Sponge, then melt, then an oven charge for the cyclotron. The &6Titanium-50&r goes through the melter once and comes out as pure as the beam needs."]
+			icon: "gtceu:titanium_50_dust"
+			id: "36B5D6C7BAD96707"
+			rewards: [{ id: "7D45FA73AE1027D9", type: "xp", xp: 100 }]
+			tasks: [
+				{ id: "1968731ED3BC3194", item: "gtceu:titanium_50_dust", type: "item" }
+				{ id: "1C15361B3A9C7253", item: "grindless:ti50_oven_charge", type: "item" }
+			]
+			title: "Titanium-50 Metal"
+			x: 5.5d
+			y: -7.5d
+		}
+		{
+			dependencies: ["36B5D6C7BAD96707"]
+			description: ["Californium-249 comes from berkelium that sat in the hot cell and decayed. A thin layer on a spinning wheel makes the &6Cf-249 Target Wheel&r."]
+			icon: "grindless:cf249_target_wheel"
+			id: "7FB34D2E453AE24E"
+			rewards: [{ id: "16F7301A94853CF0", type: "xp", xp: 150 }]
+			tasks: [{ id: "17F572EAB3ADF371", item: "grindless:cf249_target_wheel", type: "item" }]
+			title: "Californium Target Wheel"
+			x: 8.0d
+			y: -7.5d
+		}
+		{
+			dependencies: ["7FB34D2E453AE24E"]
+			description: ["A titanium beam on a californium wheel throws out a gas with a few atoms of something new in it. The cyclotron and the separator you already have do the rest."]
+			icon: "gtceu:element_120_recoil_gas_bucket"
+			id: "10AAB9F9128D4396"
+			rewards: [{ id: "50F49A9B0EA514DD", type: "xp", xp: 150 }]
+			tasks: [{ id: "5AE29D82E5EBF57A", item: "gtceu:element_120_recoil_gas_bucket", type: "item" }]
+			title: "Element 120 Recoil Gas"
+			x: 10.5d
+			y: -7.5d
+		}
+		{
+			dependencies: ["10AAB9F9128D4396"]
+			description: ["One more entry for the census: the &6Element 120 Recoil&r record. Real element 120 has never been made, so this one is a recipe and a hope."]
+			icon: "grindless:element_120_recoil"
+			id: "15768CF69A20F736"
+			rewards: [{ id: "789CAAB84BD0C8B7", type: "xp", xp: 200 }]
+			tasks: [{ id: "5A3A79B88B9907F6", item: "grindless:element_120_recoil", type: "item" }]
+			title: "Element 120"
+			x: 13.0d
+			y: -7.5d
+		}
+		{
+			dependencies: ["7B955176F4E8579C"]
+			description: ["The &6TFLN Fab&r bonds a thin crystal of lithium niobate onto a silicon nitride chip, so one wafer steers light and tunes it."]
+			icon: "gtceu:tfln_fab"
+			id: "512711409DE69322"
+			rewards: [{ id: "73647ED04344133A", type: "xp", xp: 150 }]
+			shape: "gear"
+			size: 1.25d
+			tasks: [
+				{ id: "3514408137D6C074", item: "gtceu:tfln_fab", type: "item" }
+				{ id: "1F52EC263282FAD5", item: "grindless:ln_on_sin_wafer", type: "item" }
+			]
+			title: "Lithium Niobate on Nitride"
+			x: 2.5d
+			y: 3.5d
+		}
+		{
+			dependencies: ["512711409DE69322"]
+			description: ["A laser pulse a millionth of a millionth of a second long can write inside glass. The &6Femtosecond Writer&r etches a &65D Data Crystal&r that keeps its data longer than the Sun."]
+			icon: "gtceu:femtosecond_writer"
+			id: "1BE7613A33089960"
+			rewards: [{ id: "3FDC583BABA9474C", type: "xp", xp: 150 }]
+			shape: "gear"
+			size: 1.25d
+			tasks: [
+				{ id: "1AB6EA3FDDCCA38A", item: "gtceu:femtosecond_writer", type: "item" }
+				{ id: "36C4950F0AA783F9", item: "grindless:data_crystal_5d", type: "item" }
+			]
+			title: "Five-Dimensional Crystal"
+			x: 5.0d
+			y: 3.5d
+		}
+		{
+			dependencies: ["1BE7613A33089960"]
+			description: ["A terbium plasma gives light at a wavelength nobody built a scanner for before. The &6BEUV Scanner&r exposes a wafer and the driver ASIC comes out of it. The debris is caught and recycled."]
+			icon: "gtceu:beuv_scanner"
+			id: "3BD8AB33F973A029"
+			rewards: [{ id: "33C99DE86066A9E9", type: "xp", xp: 150 }]
+			shape: "gear"
+			size: 1.25d
+			tasks: [
+				{ id: "5D3CB1111ADE49F8", item: "gtceu:beuv_scanner", type: "item" }
+				{ id: "1177340214ADCD2F", item: "grindless:beuv_exposed_wafer", type: "item" }
+			]
+			title: "Beyond Extreme UV"
+			x: 7.5d
+			y: 3.5d
+		}
+		{
+			dependencies: ["3BD8AB33F973A029"]
+			description: ["A crystal of a single europium isotope remembers a light pulse for hours when you burn the right comb into it. The &6Spectral Hole Burner&r makes the &6Six-Hour Memory&r."]
+			icon: "gtceu:spectral_hole_burner"
+			id: "5EA79DAD9574D598"
+			rewards: [{ id: "7495E19AEDFFF02B", type: "xp", xp: 150 }]
+			shape: "gear"
+			size: 1.25d
+			tasks: [
+				{ id: "323FFE550EC1A8CB", item: "gtceu:spectral_hole_burner", type: "item" }
+				{ id: "1FD9C19F05D6B5A5", item: "grindless:six_hour_memory", type: "item" }
+			]
+			title: "Six-Hour Memory"
+			x: 10.0d
+			y: 3.5d
+		}
+		{
+			dependencies: ["5EA79DAD9574D598"]
+			description: ["A scanning tip peels hydrogen off a silicon surface one atom at a time, and phosphine fills the holes. The &6STM Lithography Cell&r writes a &6P:Si Die&r. It has to be cold before it works."]
+			icon: "gtceu:stm_lithography_cell"
+			id: "7C69DFF0AE7530B7"
+			rewards: [{ id: "52F31FA5843D6624", type: "xp", xp: 150 }]
+			shape: "gear"
+			size: 1.25d
+			tasks: [
+				{ id: "5F51C0DD359AD68D", item: "gtceu:stm_lithography_cell", type: "item" }
+				{ id: "5A5BBAFB4E097AE0", item: "grindless:p_si_die", type: "item" }
+			]
+			title: "Phosphorus in Silicon"
+			x: 12.5d
+			y: 3.5d
+		}
+		{
+			dependencies: ["7C69DFF0AE7530B7"]
+			description: ["Colder than the superfluid helium plant ever gets. The &6Millikelvin Cryostat Works&r wets a rare-earth stage with helium-3 and finishes the P:Si processor."]
+			icon: "gtceu:millikelvin_cryostat_works"
+			id: "5B6546A94A7A177E"
+			rewards: [{ id: "575ABBA6D471C1AF", type: "xp", xp: 200 }]
+			shape: "gear"
+			size: 1.25d
+			tasks: [
+				{ id: "30E9EDBAB33FDBF2", item: "gtceu:millikelvin_cryostat_works", type: "item" }
+				{ id: "53D0E28150B84740", item: "grindless:mk_cryostat_module", type: "item" }
+				{ id: "76EF2444A2234C07", item: "grindless:p_si_processor", type: "item" }
+			]
+			title: "Millikelvin Cryostat"
+			x: 15.0d
+			y: 3.5d
+		}
+		{
+			dependencies: ["5B6546A94A7A177E"]
+			description: ["The Photonic Integration Hall puts a crossbar, a glass interposer and a comb together into a &6Optical Mainframe&r. It is the only place that mainframe comes from now."]
+			icon: "gtnn:optical_mainframe"
+			id: "58A76179A3648724"
+			rewards: [{ count: 4, id: "361FAAA5F5056260", item: "gtceu:wetware_processor_assembly", type: "item" }]
+			tasks: [{ id: "35FB3D880CCE335E", item: "gtnn:optical_mainframe", type: "item" }]
+			title: "Optical Mainframe"
+			x: 17.5d
+			y: 3.5d
+		}
+		{
+			dependencies: ["512711409DE69322"]
+			description: ["Fuse nuclei with their spins lined up and you get about half as much again. The &6Polarised Proton Source&r freezes hydrogen, lithium hydride and ammonia into pellets that remember."]
+			icon: "gtceu:polarised_proton_source"
+			id: "57862F697D22D7F2"
+			rewards: [{ id: "3234C39466F5E62F", type: "xp", xp: 150 }]
+			shape: "gear"
+			size: 1.25d
+			tasks: [
+				{ id: "1EE4D6060BC86BDC", item: "gtceu:polarised_proton_source", type: "item" }
+				{ id: "1387B4814BC3706A", item: "grindless:polarised_h_pellet", type: "item" }
+			]
+			title: "Polarised Protons"
+			x: 3.0d
+			y: 7.0d
+		}
+		{
+			dependencies: ["57862F697D22D7F2"]
+			description: ["The &6Mk5 Fusion Ring&r has an octagon of casing round an empty channel, lined with metallic hydrogen coils. It holds a very large buffer and takes sixteen hatches."]
+			icon: "gtceu:uiv_fusion_reactor"
+			id: "72D797E3DDE7ED0E"
+			rewards: [{ id: "1FC1422722F775DB", type: "xp", xp: 250 }]
+			shape: "gear"
+			size: 1.25d
+			tasks: [
+				{ id: "1A652572858A4F0D", item: "gtceu:uiv_fusion_reactor", type: "item" }
+				{ id: "53473C5B47FD0440", item: "grindless:uiv_fusion_casing", type: "item" }
+			]
+			title: "Mk5 Fusion Ring"
+			x: 5.5d
+			y: 7.0d
+		}
+		{
+			dependencies: ["72D797E3DDE7ED0E"]
+			description: ["Two helium-3 nuclei and two protons come out. The direct energy converter turns the plasma into power, and the protons go back to the polarised source."]
+			icon: "gtceu:he3he3_ash_bucket"
+			id: "339EA2E1AC6141F2"
+			rewards: [{ id: "1AC53E5B4165E577", type: "xp", xp: 200 }]
+			tasks: [{ id: "5561AB33A70D3CD7", item: "gtceu:he3he3_ash_bucket", type: "item" }]
+			title: "Helium-3 on Helium-3"
+			x: 8.0d
+			y: 5.5d
+		}
+		{
+			dependencies: ["72D797E3DDE7ED0E"]
+			description: ["Pellets of polarised lithium hydride burn to helium. The ash still holds helium-3, so a second pass at the superfluid plant keeps it out of the bin."]
+			icon: "gtceu:pli6_ash_bucket"
+			id: "3AB7C489B248C624"
+			rewards: [{ id: "16E770B46D58662D", type: "xp", xp: 200 }]
+			tasks: [{ id: "53D429875A4592DC", item: "gtceu:pli6_ash_bucket", type: "item" }]
+			title: "Proton on Lithium-6"
+			x: 8.0d
+			y: 7.0d
+		}
+		{
+			dependencies: ["72D797E3DDE7ED0E"]
+			description: ["The hottest fuel, and the best returns. It leaves carbon-12 behind, and the diamond lines take every bit of it."]
+			icon: "gtceu:pn15_ash_bucket"
+			id: "148E0F6309BE1DCA"
+			rewards: [{ id: "7F4655C803E11C8E", type: "xp", xp: 250 }]
+			tasks: [{ id: "3EDD5EA89AE5B35A", item: "gtceu:pn15_ash_bucket", type: "item" }]
+			title: "Proton on Nitrogen-15"
+			x: 8.0d
+			y: 8.5d
+		}
+		{
+			dependencies: ["17C0F46C21B9CD13"]
+			description: ["A computer built in shells, in nine times Earth's sunlight, running logic that barely makes heat. The &6Matrioshka Computer&r is where UIV research is written, and its logic tiles are among the longest things to build here."]
+			icon: "gtceu:matrioshka_computer"
+			id: "7E2EF99503F9DB02"
+			rewards: [{ id: "79DC492E9F485905", type: "xp", xp: 250 }]
+			shape: "gear"
+			size: 1.25d
+			tasks: [
+				{ id: "3FA8AB714439F04F", item: "gtceu:matrioshka_computer", type: "item" }
+				{ id: "7B09F784A1042BFF", item: "grindless:matrioshka_logic_tile", type: "item" }
+			]
+			title: "Matrioshka Computer"
+			x: 13.0d
+			y: 0.0d
+		}
+		{
+			dependencies: ["7E2EF99503F9DB02"]
+			description: ["Heat has nowhere to go in space but out. A sheet of liquid tin droplets falling in free fall carries it away, which only works in orbit. The &6Droplet Radiator Works&r makes the modules and the TPV tiles."]
+			icon: "gtceu:droplet_radiator_works"
+			id: "582C5EF34B1CF2D0"
+			rewards: [{ id: "1DCB16BA2FB047FA", type: "xp", xp: 200 }]
+			shape: "gear"
+			size: 1.25d
+			tasks: [
+				{ id: "383AB123F0016727", item: "gtceu:droplet_radiator_works", type: "item" }
+				{ id: "32D19CDC94A087EE", item: "grindless:droplet_radiator_module", type: "item" }
+			]
+			title: "Droplet Radiators"
+			x: 15.5d
+			y: 0.0d
+		}
+		{
+			dependencies: ["582C5EF34B1CF2D0"]
+			description: ["A tile of indium gallium arsenide antimonide turns hot glow into power. Enough of them wrapped round a computer make the &6Matrioshka TPV Shell&r."]
+			icon: "grindless:matrioshka_tpv_shell"
+			id: "510D744971D43851"
+			rewards: [{ id: "1DBFC26233C2E133", type: "xp", xp: 200 }]
+			tasks: [
+				{ id: "71971E9DFB28F03C", item: "grindless:tpv_tile", type: "item" }
+				{ id: "1423C71B6B6CAB1E", item: "grindless:matrioshka_tpv_shell", type: "item" }
+			]
+			title: "Thermophotovoltaic Shell"
+			x: 18.0d
+			y: 0.0d
+		}
+		{
+			dependencies: ["5FA8F7F32C81B302"]
+			description: ["Pulse profiles from a pulsar go into the Matrioshka, and the &6Neutron Star EOS Chart&r comes out. It tells you how hard a star pushes back. The computer decides on a long run."]
+			icon: "grindless:ns_eos_chart"
+			id: "13EE47D6E75307D4"
+			rewards: [{ id: "3FFDC8CF597C8D76", type: "xp", xp: 250 }]
+			tasks: [{ id: "577A0FC574DF3E4B", item: "grindless:ns_eos_chart", type: "item" }]
+			title: "Equation of State"
+			x: 38.0d
+			y: -3.0d
+		}
+		{
+			dependencies: ["510D744971D43851"]
+			description: [
+				"The first jump. A drive built from your new alloys carries a seed to a lone neutron star and opens a ring there."
+				"The jump is fiction, as every jump is: the distance is a few hundred light years and the drive does not exist. The star, a cold X-ray emitter, is real."
+			]
+			icon: "grindless:neutron_star_site_casing"
+			id: "1A781FD07AF49721"
+			rewards: [{ id: "38A31944C93F515E", type: "xp", xp: 250 }]
+			size: 1.25d
+			tasks: [{ dimension: "grindless:rx_j1856_orbit", id: "7CC771BCEE5E29E2", type: "dimension" }]
+			title: "RX J1856.5-3754"
+			x: 21.0d
+			y: 0.0d
+		}
+		{
+			dependencies: ["1A781FD07AF49721"]
+			description: ["A tether down to the poles and the star's own electric field carry a little of the crust up. The &6Crust Lift&r is fiction: no tether survives that gravity, and the yield is a game number."]
+			icon: "gtceu:crust_lift"
+			id: "3DF069B74A45CB2C"
+			rewards: [{ id: "5504CF031F7F42F0", type: "xp", xp: 250 }]
+			shape: "gear"
+			size: 1.25d
+			tasks: [
+				{ id: "750DDD0127C441C3", item: "gtceu:crust_lift", type: "item" }
+				{ id: "72FE7BD11D4E35F0", item: "grindless:neutron_star_crust", type: "item" }
+			]
+			title: "Crust Lift"
+			x: 23.5d
+			y: 0.0d
+		}
+		{
+			dependencies: ["3DF069B74A45CB2C"]
+			description: ["Deep in the crust the nuclei are so crowded that neutrons leak out between them. The &6Neutron Drip Separator&r takes them away before the matter relaxes. They decay if you wait, so don't."]
+			icon: "gtceu:neutron_drip_separator"
+			id: "3B397C1EFE90548C"
+			rewards: [{ id: "7155E482279A087A", type: "xp", xp: 250 }]
+			shape: "gear"
+			size: 1.25d
+			tasks: [
+				{ id: "5C23A1C234D96D2D", item: "gtceu:neutron_drip_separator", type: "item" }
+				{ id: "7A0B342103365FC5", item: "gtceu:drip_neutrons_bucket", type: "item" }
+			]
+			title: "Drip Neutrons"
+			x: 26.0d
+			y: 0.0d
+		}
+		{
+			dependencies: ["3B397C1EFE90548C"]
+			description: ["Cool the drip neutrons into a superfluid and shut it in a cage. The &6Neutronium Pellet&r is fiction: a spoonful of neutron matter held at ordinary pressure by a field. It is not the neutronium of the other mods."]
+			icon: "gtceu:neutronium_cage"
+			id: "7B6BAE4236338966"
+			rewards: [{ id: "5116545605605FDD", type: "xp", xp: 300 }]
+			shape: "gear"
+			size: 1.25d
+			tasks: [
+				{ id: "76533E1207F2D473", item: "gtceu:neutronium_cage", type: "item" }
+				{ id: "17EACB2734565EEA", item: "grindless:neutronium_pellet", type: "item" }
+			]
+			title: "Neutronium Pellet"
+			x: 28.5d
+			y: 0.0d
+		}
+		{
+			dependencies: ["7B6BAE4236338966"]
+			description: ["The &6Neutronium Compression Hall&r reads the pellets in its bus as parallels, and the pellets are never used up. Its implosion mode keeps the explosive, so switch the hall to implosion in its own window first."]
+			icon: "gtceu:neutronium_compression_hall"
+			id: "569C4366D8C6AE1E"
+			rewards: [{ id: "1B7B1E6C3D0170F7", type: "xp", xp: 250 }]
+			shape: "gear"
+			size: 1.25d
+			tasks: [{ id: "180288F3784407FC", item: "gtceu:neutronium_compression_hall", type: "item" }]
+			title: "Neutronium Compression Hall"
+			x: 31.0d
+			y: -2.5d
+		}
+		{
+			dependencies: ["3B397C1EFE90548C"]
+			description: ["Decompress a bit of crust and the heavy elements are born, as in a kilonova. A uranium target hit by the same neutrons gives einsteinium and fermium, and from them the &6Element 119 Recoil&r and &6Census II&r."]
+			icon: "gtceu:r_process_decompressor"
+			id: "1993F92869A4278F"
+			rewards: [{ id: "752A42505F5B10F8", type: "xp", xp: 300 }]
+			shape: "gear"
+			size: 1.25d
+			tasks: [
+				{ id: "52151A0BDB43594E", item: "gtceu:r_process_decompressor", type: "item" }
+				{ id: "77304E853F0997A3", item: "grindless:element_119_recoil", type: "item" }
+				{ id: "78ADD1407919ACB6", item: "grindless:superheavy_census_ii", type: "item" }
+			]
+			title: "Element 119"
+			x: 28.5d
+			y: 3.0d
+		}
+		{
+			dependencies: ["1993F92869A4278F"]
+			description: ["Fresh r-process matter keeps on decaying and giving off heat. The &6Decay Heat Vault&r burns a sealed kilonova capsule for power, and the ash goes back to the platinum plant. Its power is local to the site."]
+			icon: "gtceu:decay_heat_vault"
+			id: "7AB8B56ED4A5C759"
+			rewards: [{ id: "7579C1C62D92837D", type: "xp", xp: 250 }]
+			shape: "gear"
+			size: 1.25d
+			tasks: [{ id: "5200B27682FF66C1", item: "gtceu:decay_heat_vault", type: "item" }]
+			title: "Decay Heat Vault"
+			x: 31.0d
+			y: 3.0d
+		}
+		{
+			dependencies: ["7B6BAE4236338966"]
+			description: ["The second jump: a pulsar close enough to time. A seed rides there on a course you worked out with the neutron star, and the jump is fiction here too."]
+			icon: "grindless:rad_hard_controller"
+			id: "5E8A4728A85047DF"
+			rewards: [{ id: "5278320F4FD6E8F7", type: "xp", xp: 250 }]
+			size: 1.25d
+			tasks: [{ dimension: "grindless:psr_j0437_orbit", id: "14379713FBEE2CA9", type: "dimension" }]
+			title: "PSR J0437-4715"
+			x: 33.0d
+			y: 0.0d
+		}
+		{
+			dependencies: ["5E8A4728A85047DF"]
+			description: ["A pulsar blows a wind of electrons and positrons. The &6Pulsar Wind Trap&r catches a sample in a tungsten-lined magnet, and the gamma rays heat the lining."]
+			icon: "gtceu:pulsar_wind_trap"
+			id: "7149EBF20BBEB79E"
+			rewards: [{ id: "598C9344942B439E", type: "xp", xp: 250 }]
+			shape: "gear"
+			size: 1.25d
+			tasks: [
+				{ id: "14EB02A0C060EE86", item: "gtceu:pulsar_wind_trap", type: "item" }
+				{ id: "7667EAD649B4445A", item: "gtceu:pair_plasma_bucket", type: "item" }
+			]
+			title: "Pair Wind"
+			x: 35.5d
+			y: 0.0d
+		}
+		{
+			dependencies: ["7149EBF20BBEB79E"]
+			description: ["An electron and a positron orbiting each other, laser-cooled in aerogel until they act as one. The &6Positronium Condensate Lab&r makes the &6Ps BEC&r. Nobody has made a condensate of it yet, so this one is a proposal."]
+			icon: "gtceu:positronium_condensate_lab"
+			id: "15DA4D85FDEE4E90"
+			rewards: [{ id: "718D3B1964A9F5F5", type: "xp", xp: 250 }]
+			shape: "gear"
+			size: 1.25d
+			tasks: [
+				{ id: "3BCBBC78B323526A", item: "gtceu:positronium_condensate_lab", type: "item" }
+				{ id: "14B157924BE01CB7", item: "grindless:ps_bec", type: "item" }
+			]
+			title: "Positronium"
+			x: 38.0d
+			y: 0.0d
+		}
+		{
+			dependencies: ["15DA4D85FDEE4E90"]
+			description: ["Let the condensate annihilate all at once and you get a gamma-ray laser. It is fiction: nobody has built one. The &6Gamma Laser Cavity&r is the core of the UIV emitter."]
+			icon: "grindless:gamma_laser_cavity"
+			id: "7D914530B001FB81"
+			rewards: [{ id: "75D45F75D6883283", type: "xp", xp: 300 }]
+			tasks: [{ id: "167C8FC101B420C5", item: "grindless:gamma_laser_cavity", type: "item" }]
+			title: "Gamma Laser Cavity"
+			x: 40.5d
+			y: 0.0d
+		}
+		{
+			dependencies: ["5E8A4728A85047DF"]
+			description: ["A pulsar blinks hundreds of times a second. The &6X-ray Pulse Profiler&r folds the blinks into a profile and times it against a clock at home."]
+			icon: "gtceu:xray_pulse_profiler"
+			id: "5FA8F7F32C81B302"
+			rewards: [{ id: "3599E9DCADC81D5E", type: "xp", xp: 250 }]
+			shape: "gear"
+			size: 1.25d
+			tasks: [
+				{ id: "7EFC7C8E10637F36", item: "gtceu:xray_pulse_profiler", type: "item" }
+				{ id: "309E2EFE39BFD1FA", item: "grindless:xray_pulse_timed", type: "item" }
+			]
+			title: "Pulse Profile"
+			x: 35.5d
+			y: -3.0d
+		}
+		{
+			dependencies: ["13EE47D6E75307D4"]
+			description: ["Four timed profiles and the equation of state give a position in space. The &6Pulsar Navigation Solution&r is what points the seed at the black hole."]
+			icon: "grindless:pulsar_navigation_solution"
+			id: "7DFD7F7638FC1526"
+			rewards: [{ id: "5AF6E557BAB52582", type: "xp", xp: 300 }]
+			tasks: [{ id: "56B40613D8B8E921", item: "grindless:pulsar_navigation_solution", type: "item" }]
+			title: "Navigation Solution"
+			x: 40.5d
+			y: -3.0d
+		}
+		{
+			dependencies: ["7DFD7F7638FC1526", "7D914530B001FB81"]
+			description: ["The last jump: a black hole as massive as a small galaxy's core is not, but spinning fast enough to matter. The jump is fiction, and the black hole is real."]
+			icon: "grindless:probe_bay_casing"
+			id: "1E0EB4DDEE39CB3B"
+			rewards: [{ id: "37702A5CBB519885", type: "xp", xp: 300 }]
+			size: 1.25d
+			tasks: [{ dimension: "grindless:cygnus_x1_orbit", id: "7129BD4386E26A15", type: "dimension" }]
+			title: "Cygnus X-1"
+			x: 43.0d
+			y: -1.5d
+		}
+		{
+			dependencies: ["1E0EB4DDEE39CB3B"]
+			description: ["Drop a probe into the ergosphere and read how fast the hole spins. The probe doesn't come back, and nobody needs it to. The &6Ergosphere Probe Bay&r also loads the sleds."]
+			icon: "gtceu:ergosphere_probe_bay"
+			id: "5F1E7272AA2A4023"
+			rewards: [{ id: "5DEAD2129C2B6A69", type: "xp", xp: 250 }]
+			shape: "gear"
+			size: 1.25d
+			tasks: [
+				{ id: "39F2425CA668EA16", item: "gtceu:ergosphere_probe_bay", type: "item" }
+				{ id: "7831DE3E85052310", item: "grindless:kerr_probe_data", type: "item" }
+			]
+			title: "Probe Run"
+			x: 45.5d
+			y: -1.5d
+		}
+		{
+			dependencies: ["5F1E7272AA2A4023"]
+			description: ["The probe data goes home, and the gravitational-wave detector and the interferometer correlate it. The Matrioshka turns it into a &6Kerr Chart&r."]
+			icon: "grindless:kerr_chart"
+			id: "566EAB127E413589"
+			rewards: [{ id: "367AAA4F4CA07FD8", type: "xp", xp: 300 }]
+			tasks: [
+				{ id: "57A64482F81563BC", item: "grindless:correlated_kerr_data", type: "item" }
+				{ id: "5BC37E182428EC7E", item: "grindless:kerr_chart", type: "item" }
+			]
+			title: "Kerr Chart"
+			x: 48.0d
+			y: -1.5d
+		}
+		{
+			dependencies: ["1E0EB4DDEE39CB3B"]
+			description: ["A compacted waste canister, a charge of cg-N and a hull. Every era's waste goes in: it is the last place anything is put."]
+			icon: "grindless:split_charge_sled"
+			id: "12FFA92FECF3F365"
+			rewards: [{ id: "195721532747940F", type: "xp", xp: 250 }]
+			tasks: [{ id: "7655385072E8E0DC", item: "grindless:split_charge_sled", type: "item" }]
+			title: "Split-Charge Sled"
+			x: 45.5d
+			y: 1.5d
+		}
+		{
+			dependencies: ["12FFA92FECF3F365", "566EAB127E413589"]
+			description: [
+				"The &6Penrose Engine&r drops the sled in, the sled splits, one half falls into the hole and the other comes out with more energy than it took in. The hole spins a little slower."
+				"The half you get back is the &6Recovered Half-Sled&r. It goes back to the bay for a refit."
+			]
+			icon: "gtceu:penrose_engine"
+			id: "773D4D794D1EA7A1"
+			rewards: [{ id: "5E099A93A33BE6B5", type: "xp", xp: 300 }]
+			shape: "gear"
+			size: 1.25d
+			tasks: [
+				{ id: "58D39C26797BB09F", item: "gtceu:penrose_engine", type: "item" }
+				{ id: "55B4EC1045BF94C0", item: "grindless:recovered_half_sled", type: "item" }
+			]
+			title: "Drop a Sled into the Ergosphere"
+			x: 48.0d
+			y: 1.5d
+		}
+		{
+			dependencies: ["773D4D794D1EA7A1"]
+			description: [
+				"Hold the warp gate open at the UIV load for sixty seconds in Cygnus X-1 orbit, then tick this box. Take care of your power first: the Penrose engine is the cheaper way to pay for it, not the only one."
+				"The gate's casing is never a reward: it is a product of the run."
+			]
+			icon: "gtceu:warp_gate"
+			id: "58ADF60AC2BD2DD7"
+			rewards: [{ id: "17D1275E9DB77E3C", type: "xp", xp: 300 }]
+			shape: "diamond"
+			size: 1.75d
+			tasks: [{ id: "58A3BA5AB23D6BF4", type: "checkmark" }]
+			title: "Open the Cygnus Gate"
+			x: 51.0d
+			y: 0.0d
+		}
+		{
+			dependencies: ["58ADF60AC2BD2DD7"]
+			description: ["Keep a neutronium pellet, census II, the equation of state chart, a half-sled and an optical mainframe in the store. The gate looks for them before it opens further."]
+			icon: "grindless:neutronium_pellet"
+			id: "1724E39CDD53C2A2"
+			rewards: [{ id: "5FA246B7981D85E4", type: "xp", xp: 300 }]
+			tasks: [
+				{ id: "5C619E1ADFDD6672", item: "grindless:neutronium_pellet", type: "item" }
+				{ id: "1153A2B225D2307E", item: "grindless:superheavy_census_ii", type: "item" }
+				{ id: "739C938489F02D10", item: "grindless:ns_eos_chart", type: "item" }
+				{ id: "3C42246EBD6F3CED", item: "grindless:recovered_half_sled", type: "item" }
+				{ id: "36CBAFCCE90931F0", item: "gtnn:optical_mainframe", type: "item" }
+			]
+			title: "Stored Proof"
+			x: 53.5d
+			y: 0.0d
+		}
+		{
+			dependencies: ["1724E39CDD53C2A2"]
+			description: ["The &6Kerr Chart&r is the research for the UXV machine casing. Build it and the next voltage is open."]
+			icon: "gtceu:uxv_machine_casing"
+			id: "1433B6EB4860DF3C"
+			rewards: [{ id: "5AD37D60450403DA", type: "xp", xp: 400 }]
+			size: 1.5d
+			tasks: [
+				{ id: "768C87B1017D0E58", item: "gtceu:uxv_machine_casing", type: "item" }
+				{ id: "38CE384CBD0C17BC", item: "grindless:kerr_chart", type: "item" }
+			]
+			title: "Gate to UXV"
+			x: 56.0d
+			y: 0.0d
+		}
+	]
+	subtitle: ["Metallic hydrogen, superheavy atoms, light for computers and a fusion ring at home, then a neutron star, a pulsar and a black hole, and a gate held open."]
+	title: "UIV - Dead Stars"
+}
