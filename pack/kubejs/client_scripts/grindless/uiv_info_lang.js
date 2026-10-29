@@ -1,3 +1,4 @@
+// priority: 3150
 // Gregtech Grindless - EMI information pages of the UIV era machines (kubejs/assets/emi/recipe/additions/grindless/<id>.json, type emi:info).
 // One page per controller: what it does, what it is for, what it needs. Their recipes show in EMI under the controller itself.
 // Tooltips live in the uiv_*_lang.js files; every key is in en_us and es_es.
