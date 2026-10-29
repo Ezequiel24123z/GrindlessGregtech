@@ -11058,7 +11058,7 @@ hash = "560aa48ef805c8c58422b48dbcc56f0ae62ac440ad173a6ba5fad62671ef1606"
 
 [[files]]
 file = "kubejs/server_scripts/grindless/uev/foundation.js"
-hash = "dc433435915ff7f956917870e42e471f88c6a879cd5260ef65403cd5f46b488c"
+hash = "01159bfe04ca8be9b17412a322d8560fea84110f7a40896e42a2056581a022e0"
 
 [[files]]
 file = "kubejs/server_scripts/grindless/uev/fusion.js"
@@ -11178,7 +11178,7 @@ hash = "e2ba402dfe99931d64d4b85e0af69e15f953c0a635d102dd8ca2050fec681164"
 
 [[files]]
 file = "kubejs/server_scripts/grindless/uiv/foundation.js"
-hash = "9df971f79616d728750a9ba84347c1d939c6ee3ef041ee04587fac8300fb2151"
+hash = "52c20105dd660ce74c48169c18c392c7f012a6cf4ebe34c4b3744915ac1c0626"
 
 [[files]]
 file = "kubejs/server_scripts/grindless/uiv/isotopes.js"
