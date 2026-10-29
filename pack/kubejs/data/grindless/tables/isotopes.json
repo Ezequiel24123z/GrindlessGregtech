@@ -274,7 +274,7 @@
           ],
           "kept": [],
           "charge": [],
-          "fluidsIn": [],
+          "fluidsIn": [{ "id": "gtceu:argon", "amount": 1000 }],
           "itemsOut": [{ "id": "grindless:ca48_oven_charge", "count": 1 }],
           "fluidsOut": []
         },
@@ -289,7 +289,7 @@
           ],
           "kept": [],
           "charge": [],
-          "fluidsIn": [],
+          "fluidsIn": [{ "id": "gtceu:argon", "amount": 1000 }],
           "itemsOut": [{ "id": "grindless:plutonium_oxide_target", "count": 1 }],
           "fluidsOut": []
         },
@@ -304,7 +304,7 @@
           ],
           "kept": [],
           "charge": [],
-          "fluidsIn": [],
+          "fluidsIn": [{ "id": "gtceu:argon", "amount": 1000 }],
           "itemsOut": [{ "id": "grindless:plutonium_244_target", "count": 1 }],
           "fluidsOut": []
         }

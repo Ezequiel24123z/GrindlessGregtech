@@ -69,20 +69,28 @@
   // docs/eras/uev.md "Voltages and controllers": the polariser (14) is an early machine (UHV hull, two UV parts, two UHV circuits);
   // the ring (15) comes after the UEV hull (UEV hull, two UEV parts of UEV-A6, two optical computers from the photonic hall)
   function addControllers(event) {
+    // QR-R6: both are assembly lines with station research, an era fluid and domain inputs of the Wf/W and SiC/SiC first-wall line
+    var C = '4x #gtceu:circuits/uhv'
     var defs = [
-      { machine: table.polariser.machine, parts: ['gtceu:uhv_machine_hull', 'gtceu:uv_emitter'], pattern: [' C ', 'EHE', ' C '],
-        ingredients: { C: '#gtceu:circuits/uhv', E: 'gtceu:uv_emitter', H: 'gtceu:uhv_machine_hull' }, name: 'helium3_polariser' },
-      { machine: table.ring.machine, parts: ['gtceu:uev_machine_hull', 'grindless:uev_emitter', 'grindless:uev_sensor', 'gtnn:optical_computer'], pattern: [' O ', 'EHS', ' O '],
-        ingredients: { O: 'gtnn:optical_computer', E: 'grindless:uev_emitter', S: 'grindless:uev_sensor', H: 'gtceu:uev_machine_hull' }, name: 'uev_fusion_reactor' }
+      { machine: table.polariser.machine, name: 'helium3_polariser', research: 'grindless:laser_1083nm', era: 'gtceu:neutronium',
+        ins: ['gtceu:uhv_machine_hull', '2x gtceu:uv_emitter', C, 'grindless:laser_1083nm', '2x grindless:wf_w_tile', 'grindless:sic_sic_plate'] },
+      { machine: table.ring.machine, name: 'uev_fusion_reactor', research: table.polariser.machine, era: 'gtceu:tritanium',
+        ins: ['gtceu:uev_machine_hull', 'grindless:uev_emitter', 'grindless:uev_sensor', '2x gtnn:optical_computer', C, 'grindless:uev_fusion_casing', 'grindless:hftacn_coil_block', 'grindless:wf_w_tile'] }
     ]
     defs.forEach(function (d) {
-      var missing = d.parts.concat([d.machine]).filter(function (id) { return !Item.exists(id) })
+      var ids = d.ins.map(function (s) { return s.replace(/^[0-9]+x /, '') }).filter(function (id) { return id.charAt(0) !== '#' }).concat([d.machine, d.research])
+      var missing = ids.filter(function (id) { return !Item.exists(id) })
       if (missing.length > 0) {
         console.error(LOG + d.name + ' controller recipe skipped, unknown item(s): ' + missing.join(', '))
         return
       }
-      event.recipes.gtceu.shaped(d.machine, d.pattern, d.ingredients).id('grindless:crafting/' + d.name)
-      UF.controllerRecipes.push('grindless:crafting/' + d.name)
+      var b = event.recipes.gtceu.assembly_line('grindless:' + d.name)
+      b.itemInputs(d.ins)
+      b.inputFluids(Fluid.of('gtceu:soldering_alloy', 2304), Fluid.of('gtceu:lubricant', 1000), Fluid.of(d.era, 576))
+      b.itemOutputs(d.machine)
+      b.stationResearch(function (r) { return r.researchStack(Item.of(d.research)).CWUt(64).EUt(491520) })
+      b.EUt(491520).duration(2400)
+      UF.controllerRecipes.push('grindless:assembly_line/' + d.name)
     })
   }
 
@@ -96,6 +104,7 @@
     }
     var b = event.recipes.gtceu.assembler('grindless:' + c.name)
     c.itemsIn.forEach(function (x) { b.itemInputs(x.count + 'x ' + x.id) })
+    b.inputFluids(Fluid.of('gtceu:tritanium', 144))
     b.itemOutputs(c.count + 'x ' + c.output).EUt(c.eut).duration(c.duration)
     UF.casingRecipe = 'grindless:assembler/' + c.name
   }

@@ -198,7 +198,7 @@ test('every new item is named and tooltipped in en_us and es_es, and every item 
   // UIV-A3 appends c7 (nb_ta_button) and registers its items in its own startup
   const a3 = read(path.join(kube, 'startup_scripts', 'grindless', 'uiv', 'levitation_melter.js'));
   // UIV-A10 appends tin_distill (c8) and registers eb_distilled_tin in its own startup
-  const a10 = read(path.join(kube, 'startup_scripts', 'grindless', 'uiv', 'matrioshka.js'));
+  const a10 = read(path.join(kube, 'startup_scripts', 'grindless', 'uev', 'composites.js')) + read(path.join(kube, 'startup_scripts', 'grindless', 'uiv', 'matrioshka.js'));
   for (const [, r] of allRows().filter(([w]) => w.startsWith('electron_beam.json'))) {
     for (const id of outputs(r).concat(ids(r.itemsIn))) {
       if (!id.startsWith('grindless:')) continue;

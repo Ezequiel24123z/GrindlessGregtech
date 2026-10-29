@@ -125,7 +125,7 @@ test('the only recipes are the casing, the hull and the four hatches, assembled 
   const ids = mine.map((r) => short(r.i).replace(/^[a-z_]+\//, '')).sort();
   assert.deepEqual(ids, [...RECIPE_IDS].sort());
   for (const r of mine) {
-    assert.equal(r.t, 'gtceu:assembler', `${r.i} is not an assembler recipe`);
+    assert.equal(r.t, /uev_machine_casing$/.test(r.i) ? 'gtceu:assembler' : 'gtceu:assembly_line', `${r.i} has the wrong recipe type`);
     assert.deepEqual(r.j.tickInputs.eu.map((e) => e.content), [UHV_EUT], `${r.i} runs at V[UHV]`);
     const out = JSON.stringify(r.j.outputs.item);
     const name = short(r.i).replace(/^[a-z_]+\//, '');
