@@ -2475,17 +2475,26 @@
     },
     {
       "id": "site-warp-gate",
-      "label": "Site: the warp gate only at its two ends (Earth orbit and Proxima b orbit)",
+      "label": "Site: the warp gate's open and sustain rows run at every end (tables/gate.json orbits: Earth, Proxima b and the later eras' ends)",
       "kind": "site",
       "types": [
         "gtceu:warp_gate"
       ],
       "dimensions": [
         "${orbit:earth}",
-        "${orbit:proxima_b}"
+        "${orbit:proxima_b}",
+        "grindless:alpha_centauri_orbit",
+        "grindless:sirius_b_orbit",
+        "grindless:rx_j1856_orbit",
+        "grindless:psr_j0437_orbit",
+        "grindless:cygnus_x1_orbit"
+      ],
+      "exceptRecipes": [
+        "grindless:warp_gate/hold*"
       ],
       "package": "B7",
-      "exact": true
+      "exact": true,
+      "note": "The dump holds every era: open and sustain share one ends list (gate.json `orbits`). The hold rows are UEV's (Sirius B) and UIV's (relays); uev.json checks them."
     },
     {
       "id": "site-proxima-orbit",
@@ -2544,7 +2553,12 @@
       "dimensions": [
         "gcyr:mercury_orbit"
       ],
-      "package": "B3"
+      "exceptRecipes": [
+        "grindless:dyson_swarm/alpha_full_swarm",
+        "grindless:solar_probe/alpha_corona"
+      ],
+      "package": "B3",
+      "note": "The two Alpha Centauri rows are UEV's; uev.json checks them."
     },
     {
       "id": "b5-proxima-tailings",

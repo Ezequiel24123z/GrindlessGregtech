@@ -100,3 +100,12 @@ test('site check: a missing condition, an extra dimension, a reversed condition 
   assert.ok(!/t:burn\/peat/.test(lines('air-exact')), 'the recipe globs narrow the scope');
   assert.ok(/there's no recipe of t:missing in the pack/.test(lines('nothing')));
 });
+
+test('site check: exceptRecipes leaves a later era\'s row out of the check', () => {
+  const targets = [
+    { id: 'loose', kind: 'site', type: 't:burner', dimensions: ['t:earth'], allowAnywhere: ['t:burn/lava'] },
+    { id: 'except', kind: 'site', type: 't:burner', dimensions: ['t:earth'], allowAnywhere: ['t:burn/lava'], exceptRecipes: ['t:burn/coal', 't:burn/pe*'] },
+  ];
+  const r = run(...Object.values(sitePack(targets)));
+  assert.deepEqual(verdicts(r.out.gate), { loose: 'FAIL', except: 'PASS' });
+});

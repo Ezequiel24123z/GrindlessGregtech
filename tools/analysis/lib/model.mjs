@@ -163,7 +163,7 @@ export function buildModel(dump, rawCfg0) {
   const stats = {
     recipes: dump.recipes.size, ignoredByType: {}, deadByType: {}, emptyIngredient: 0, badIngredient: 0,
     templateMissing: 0, rules: 0, structureMachines: 0, structureMachineIds: [], rolledMachines: [], veinTargets: 0, veinsWithoutItem: [],
-    partsNotRequired: [], packages: pk.packages,
+    partsNotRequired: [], packages: pk.packages, generatedResearch: 0,
   };
 
   // 1) Normalized recipes
@@ -652,6 +652,48 @@ export function buildModel(dump, rawCfg0) {
       count++;
     }
     if (count === 0) warnings.push(`synthetic ${s.id}: no recipe of ${[...types].join(', ')}${s.recipe ? ` matching ${asArray(s.recipe).join(', ')}` : ''} in the pack`);
+  }
+
+  // 5c) GTM's generated research recipes (QR, 2026-10-29): a KubeJS assembly line recipe with scannerResearch/stationResearch makes
+  // GTM add its scanner or research station recipe at load, and the dump doesn't list those. For each research id a recipe needs
+  // that no recipe or synthetic produces, a rule like GTM's: the research item and the empty data item (data stick: the scanner;
+  // data orb or module: the research station) give the research:<id> key. GTM names the id <count>x_<namespace>_<path>. Synthetic
+  // kind, so the obtain table never lists it among the recipes to remove.
+  const researchCfg = cfg.conditions.research;
+  if (researchCfg && researchCfg.researchKeys && !researchCfg.noGenerated) {
+    const produced = new Set();
+    for (const n of norm) for (const o of n.outputs) if (o.key.startsWith('research:')) produced.add(o.key);
+    for (const s of cfg.synthetic) for (const p of asArray(s.produces)) if (typeof p === 'string') produced.add(p);
+    const itemOfResearch = (rid) => {
+      const body = rid.replace(/^\d+x_/, '');
+      for (let i = body.indexOf('_'); i > 0; i = body.indexOf('_', i + 1)) {
+        const id = body.slice(0, i) + ':' + body.slice(i + 1);
+        if (dump.items.has(id)) return id;
+      }
+      return null;
+    };
+    for (const n of norm) {
+      for (const c of n.conditions) {
+        if (c.type !== 'research' || c.reverse === true) continue;
+        for (const x of asArray(c.research)) {
+          if (!x || typeof x.researchId !== 'string') continue;
+          const key = 'research:' + x.researchId;
+          if (produced.has(key)) continue;
+          produced.add(key);
+          const data = x.dataItem && typeof x.dataItem.id === 'string' ? x.dataItem.id : 'gtceu:data_stick';
+          const type = data === 'gtceu:data_stick' ? 'gtceu:scanner' : 'gtceu:research_station';
+          const machines = typeIndex.get(type) || [];
+          const item = itemOfResearch(x.researchId);
+          const slots = [
+            slotOf(machines.map((e) => 'run:' + (e.id || e.machine)), false, machines.length > 0 ? `machine for ${type}` : `there's no machine for ${type} in this tier`, 'machine'),
+            slotOf(item ? [item] : [], false, item ? item : `the item of research ${x.researchId}`, 'input'),
+            slotOf([data], false, data, 'input'),
+          ];
+          addRule(`synthetic:gtm-research/${x.researchId}`, 'synthetic', 'synthetic', slots, [key], { note: `GTM's generated ${type} research for ${n.id}` });
+          stats.generatedResearch++;
+        }
+      }
+    }
   }
   stats.rules = g.rules.length;
 

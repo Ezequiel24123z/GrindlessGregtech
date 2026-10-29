@@ -152,12 +152,14 @@ function evalSite(model, t) {
   const types = new Set([...asArray(t.type), ...asArray(t.types)]);
   const nameMatch = t.recipe ? makeGlobMatcher(asArray(t.recipe)) : null;
   const anywhere = makeGlobMatcher(asArray(t.allowAnywhere));
+  const except = makeGlobMatcher(asArray(t.exceptRecipes));
   const site = asArray(t.dimensions);
   const defined = [];
   const offenders = [];
   let unconditioned = 0;
   for (const rule of g.rules) {
     if (rule.kind !== 'recipe' || (types.size > 0 && !types.has(rule.type)) || (nameMatch && !nameMatch(rule.name))) continue;
+    if (except(rule.name)) continue;
     defined.push(rule.id);
     const dims = rule.meta.dims || [];
     const notDims = rule.meta.notDims || [];
