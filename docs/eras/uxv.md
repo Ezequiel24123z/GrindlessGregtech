@@ -509,7 +509,7 @@ Placement per DECISIONS.md:508. Circuits are taken by each package after `git gr
 | Coated conductor line (LuV, `luv/coated_conductor_line.js:32`) | strand tape | strand wire → `strand_tape` | field generator, SMES |
 | GW detector (LuV, `luv/ganymede.js:48`) | Vela strain record | `vela_glitch_timing` → `vela_glitch_record` (data) | arm chart |
 | Eu reductor (ZPM, `zpm/europium.js:105`) | Dy oxide; Dy metal | depleted liquor → Dy₂O₃ (c10); Dy₂O₃ + La → Dy (c11, as c6 does for Tb; Tb and Gd rows exist, `:107-119`; Y₂O₃ and La₂O₃ are the cascade's c11, as built) | DyScO₃, Terfenol-D |
-| Magnet works (ZPM, `zpm/magnet_works.js:27`) | rotor; encoder ring | `tetrataenite_lamination` → `tetrataenite_rotor`; `encoder_ring` → multipole-magnetised | motor, encoder |
+| Magnet works (ZPM, `zpm/magnet_works.js:27`) | rotor; encoder ring | `tetrataenite_lamination` → `tetrataenite_rotor`; `encoder_ring` → `multipole_encoder_ring` | motor, encoder |
 | Quench caster (ZPM, `zpm/fusion.js:97`) | Mk6 ash x3; planar flow casting | He-burning ash → C-12 + O-16; C ash → Ne-20, Na-23, Mg-24; O ash → Si-28, S-32, P-31; Fe-Si-B-Nb-Cu melt → 20 µm `finemet_ribbon` (open question 13) | Mk6 c3, c4; stock; voltage coil |
 | Ion implanter (ZPM, `zpm/qubits.js:47`) | ion-beam etch; STNO milling | annealed `mtj_stack_wafer`, `mram_stack_wafer` → etched; defined `stno_stack_wafer` → milled pillars | `mtj_die`, `mram_wafer`, `stno_array` |
 | Actinide partitioning (ZPM, `zpm/actinides.js:85`) | fragments | MNT fragments → Pb, Hg, Pt (the Cm and Es/Fm cuts are as built, UIV-B2) | MNT |
@@ -543,6 +543,51 @@ Placement per DECISIONS.md:508. Circuits are taken by each package after `git gr
 | R-process decompressor (UIV-B2) | gnocchi | `gnocchi_fragment` → r-process stock | by-product |
 | Levitation melter (UIV-A3) | CoFeB, Heusler, Terfenol-D, Ni-Mn-Ga, Finemet | five melts → `cofeb_ingot`, `heusler_ingot`, `terfenol_d_ingot`, `ni_mn_ga_ingot`, Finemet melt; STNO mill redeposit re-melted | targets, piston, conveyor, voltage coil |
 | X-ray pulse profiler (UIV-B3) | Ti-44 line map | knot dust sample → `ti44_map` (data) | arm chart |
+
+**Process honesty (QR, `docs/quality/items.md` trivial_step; product rules 3 and 8).** Every older row of ours that makes a new UXV id takes a second consumed ingredient or yields a real byproduct, and no row makes data or matter from nothing. The package that owns the row writes it as follows:
+- **Cryogenic plant:**
+  - He → `he_6n`: 1,000 mB helium + 100 mB liquid nitrogen precool → 990 mB `he_6n` + 100 mB nitrogen. Its input key also differs from the liquid-helium row.
+  - He-4 polish: the stellar cut's H and Ne are real outputs (line 27).
+  - O-16: + 250 mB liquid nitrogen, back as nitrogen.
+  - Kr: air → Kr + nitrogen + oxygen.
+- **Extraction cascade:**
+  - magnesite + water → Mg(OH)₂ + CO₂;
+  - LPE dross → Pb + B₂O₃ (back to YIG c1);
+  - BFO fume → Bi + an Fe small dust.
+- **Hot strip mill:** every row follows the generated pattern, water in and steam out (`ev/combined_cycle_and_hot_mill.js:464-469`).
+- **Syngas plant:** volatiles go in as a `tables` row with steam (the `hv/syngas_plant.js` pattern).
+- **Fuel fabrication:** depleted U + oxygen → `u238_ion_source`, a sintered UO₂ charge.
+- **Hot cell:** Ti-44 + a `gtceu:tungsten_plate` capsule → `ti44_core`; spent core → Ca-44 + a tungsten small dust.
+- **Fluorspar kiln:** each calcine gives off its water or CO₂; HF → F₂ + H₂.
+- **Coated conductor line:** strand wire + `gtceu:copper_foil` stabiliser → `strand_tape`.
+- **Data rows** (GW detector, DSN, EHT, X-ray profiler): they follow the as-built data pattern (a data orb + 1,000 mB helium, `zpm/observatory.js:30-53`, `luv/ganymede.js:49-51`).
+- **Eu reductor:** Dy₂O₃ + La → Dy + La₂O₃ (as c6).
+- **Magnet works:**
+  - rotor: + a `gtceu:tungsten_steel_rod` shaft.
+  - encoder: `encoder_ring` → `grindless:multipole_encoder_ring` + 10% tetrataenite small dust (the "ring scrap" of line 49, re-melted). This is **one new id**: the draft magnetised the ring into itself, which is a self-loop.
+- **Quench caster:** planar flow casting takes 100 mB argon.
+- **Ion implanter:** each etch takes 100 mB argon.
+- **Waste retrieval:** the activated target gives back recovered Cm-248 (50% *(tune)*) and the row's as-built waste.
+- **Cold:** the heat flush is 1,000 mB He-II → 990 mB pure He-II + 10 mB He-3 concentrate (the superleak pattern, `uv/cold.js:9`).
+- **Powder bed:**
+  - each target is bonded to a `gtceu:copper_plate` backing;
+  - re-pressing a spent target returns the plate;
+  - gum metal sinters under 100 mB argon.
+- **Zone refining:** + an impure-tail small dust.
+- **MOCVD:** the rows take their precursor gases as the as-built rows do.
+- **Synchrotron:** + 100 mB liquid helium, back as helium.
+- **Antimatter trap:** + 100 mB nitrogen buffer gas (the Surko trap), consumed.
+- **Crystal growth:** the CVT and recrystallise rows take an iodine transport charge.
+- **Transuranium:** molecular plating onto a titanium backing.
+- **Tether works:** + 2 `gtceu:aluminium_foil` interleaf.
+- **Nitride magnet works:** each anneal consumes 100 mB of its atmosphere (argon, or hydrogen for mu-metal, which gives steam).
+- **CVI:** 1,000 mB methane in, 2,000 mB hydrogen out (pyrolytic interphase; the `tables/composites.json` fluidsIn/fluidsOut pattern).
+- **Recoil separator:** the spent beam is an output.
+- **Probe bay:** `relay_seed` + 1 `gtceu:tungsten_steel_block` (the ballast that falls in, the Penrose split) → `launched_relay_seed`.
+- **Neutronium cage:** `neutronium_pellet` + 1 `grindless:mh_winding` (the cage's field coil) → `cage_part`.
+- **R-process decompressor:** several r-process elements, as the UIV row.
+
+All amounts are *(tune)*. None of these changes a crossing or a step count.
 
 **Count:** 46 older machines take about 135 rows (40 UEV-and-older machines, 6 UIV). UIV counted 58 machines; UXV leans on fewer machines but harder: its lines meet 44 UEV-and-older machines, as-built upstream included, for 178 crossings (Crossings).
 
@@ -731,7 +776,7 @@ Steps count item nodes as uiv.md does: from the first raw or older product, with
 | 46 | Ga₂O₃ power die: gallium → `gallium_oxide_dust` (chemical reactor, `earth_orbit.json:43`) → EFG crystal from an Ir die (UHV crystal growth) → (010) wafer → Sn-doped homoepitaxy (UV MOCVD) → gates patterned (UEV electron beam furnace) → diced, packaged `ga2o3_power_die` (UHV foundry) | 7 | 5 | worn Ir die → EV platinum plant c5; kerf → re-melted |
 | 47 | Shielded interposer: Ni, Fe, Mo → mu-metal ingot (UEV electron beam furnace) → hot band (EV hot strip mill) → `mu_metal_foil` → H₂-annealed (UEV nitride magnet works) → drawn shield can → `shielded_interposer`: the can bonded over UIV's `glass_interposer` (UIV line 12; UHV foundry) | 7 | 4 | trim → re-melted |
 | 48 | UXV voltage coil: Fe-Si-B-Nb-Cu charge → melt (UIV levitation melter) → 20 µm amorphous `finemet_ribbon` by planar flow casting (ZPM quench caster, new mode) → wound toroid → nanocrystallised in a field (UEV nitride magnet works) → strand-wound `uxv_voltage_coil` | 6 | 2 | ribbon trim → re-melted |
-| 49 | TMR encoder: line 34's tetrataenite prefix to `gtceu:tetrataenite_ingot` → rolled ring (EV hot strip mill) → multipole-magnetised ring (ZPM magnet works) → `tmr_encoder` with an `mtj_die` bridge | 7 | 3 | ring scrap → re-melted |
+| 49 | TMR encoder: line 34's tetrataenite prefix to `gtceu:tetrataenite_ingot` → rolled ring (EV hot strip mill) → `multipole_encoder_ring` (ZPM magnet works) → `tmr_encoder` with an `mtj_die` bridge | 7 | 3 | ring scrap → re-melted (a real output, QR) |
 
 **Totals:** 49 lines, 359 steps, an average of 7.33 (UIV 7.2), none under 5 (rule 7's floor is 4); 178 crossings.
 
@@ -1010,7 +1055,7 @@ Order: S0-1 first (it fixes F1's list); S0-3, S0-9 and S0-10 (they fix B1); then
   - fluids (`grindless:`): `stellar_plasma`, `disk_plasma`, `filtered_disk_plasma`, `flux_loaded_plasma`, the four cuts (`stellar_hydrogen_cut`, `stellar_helium_cut`, `stellar_cno_cut`, `stellar_heavy_cut`), `triple_alpha_fuel`, `carbon_burning_fuel`, `oxygen_burning_fuel`, the four ash plasmas (`cno_ash_plasma`, `helium_burning_ash_plasma`, `carbon_burning_ash_plasma`, `oxygen_burning_ash_plasma`), `lpe_flux`, `he_6n`, `mnt_product_gas`, `finemet_melt`. They are here because older files (`zpm/fusion.js`, `ev/cryogenic_plant.js`) read them;
   - items made by one package and used by another:
     - spintronics: `cofeb_target`, `mgo_target`, `heusler_target`, `saf_target_set`, `ta_seed_target`, `srruo3_target`, `la_bfo_target`, `cofeb_ingot`, `heusler_ingot`, `terfenol_d_ingot`, `ni_mn_ga_ingot`, `ta_foil`, `pt_sheet`, `dysco3_substrate`, `ggg_wafer`, `hbn_crystal`, `wte2_crystal`, `fgt_crystal`, `mtj_stack_wafer`, `mram_stack_wafer`, `saf_track_wafer`, `mtj_die`, `mram_wafer`, `srruo3_electrode_wafer`, `me_switch_wafer`, `sot_readout_stack`, `meso_logic_die`, `racetrack_chip`, `magnonic_bus`, `sin_membrane`, `nanoaperture_array`, `rf_carpet_board`, `kr_f2_premix`, `krf_excimer_laser`, `pt_lpe_crucible`, `gas_stopping_cell`, `shequid_gyro`, `nv_diamond_chip` if S0-1 shows it missing;
-    - lines 44-49: `stno_stack_wafer`, `stno_array`, `gum_metal_billet` (A2 → A8), `gum_metal_blank`, `gum_metal_flexspline`, `uxv_strain_wave_gear`, `encoder_ring`, `tmr_encoder`, `ga2o3_wafer`, `ga2o3_power_die`, `mu_metal_foil`, `shielded_interposer`, `finemet_ribbon` (A7 → B4), `finemet_toroid` (B4 → A3), `finemet_core` (A3 → B4), `uxv_voltage_coil` (the KrF laser reuses `grindless:vuv_caf2_optic`; no new window id);
+    - lines 44-49: `stno_stack_wafer`, `stno_array`, `gum_metal_billet` (A2 → A8), `gum_metal_blank`, `gum_metal_flexspline`, `uxv_strain_wave_gear`, `encoder_ring`, `multipole_encoder_ring` (QR), `tmr_encoder`, `ga2o3_wafer`, `ga2o3_power_die`, `mu_metal_foil`, `shielded_interposer`, `finemet_ribbon` (A7 → B4), `finemet_toroid` (B4 → A3), `finemet_core` (A3 → B4), `uxv_voltage_coil` (the KrF laser reuses `grindless:vuv_caf2_optic`; no new window id);
     - superheavy: `fm257_target`, `es254_target`, `cm248_target`, `element_121_recoil`, `element_122_recoil`, `superheavy_census_iii`, `spent_actinide_target` (every spent Fm, Es and Cm target: A1's cyclotron rows and A6's collider make it, A1's waste retrieval row takes it), `u238_ion_source`, `u238_beam_charge`, `island_nuclide`, `island_chart`;
     - parts: `tetrataenite_lamination`, `tetrataenite_rotor`, `strand_stator`, `strand_tape`, `alip_duct`, `w184_cvi_preform`, `terfenol_d_rod`, `ni_mn_ga_crystal`, `cnt_bumper_weave`, `cnt_whipple_shield`, `frc_cartridge`, `gamma_laser_module`, `positron_stack`, `ti44_core`, `si28_ash`;
     - far products: `raw_pasta`, `spaghetti_phase`, `lasagna_phase`, `gnocchi_fragment`, `anti_phase_residue`, `cage_part`, `lasagna_plate`, `pasta_core_sample`, `polar_cap_electrode`, `ejecta_knot_dust`, the four condensates;
@@ -1261,11 +1306,11 @@ Two at a time, in the pairs of *Parallel and serial*. A row whose input is made 
 - **Objective:**
   - `uxv_electric_motor`, `uxv_electric_pump`, `uxv_electric_piston`, `uxv_conveyor_module` and `uxv_robot_arm` (the arm drives on `uxv_strain_wave_gear` with a `tmr_encoder`, the UIV-A8 strain-wave pattern, DECISIONS.md:539), in `server_scripts/grindless/uxv/uxv_parts.js` (assembly line, the Monifactory pattern);
   - line 45 after A2's `gum_metal_billet`: hot-forged `gum_metal_blank`, cold-swaged cup, hobbed and shot-peened `gum_metal_flexspline`, `uxv_strain_wave_gear`;
-  - line 49: `gtceu:tetrataenite_ingot` → rolled `encoder_ring`, multipole-magnetised, `tmr_encoder` with an `mtj_die` bridge;
+  - line 49: `gtceu:tetrataenite_ingot` → rolled `encoder_ring` → `multipole_encoder_ring` → `tmr_encoder` with an `mtj_die` bridge;
   - their older rows.
 - **`<name>`:** `uxv_parts`.
 - **Allowed (extra):**
-  - `tables/magnet_works.json` c8: `tetrataenite_lamination` → `tetrataenite_rotor`; c10: `encoder_ring` → multipole-magnetised (c9 is B3's);
+  - `tables/magnet_works.json` c8: `tetrataenite_lamination` → `tetrataenite_rotor`; c10: `encoder_ring` → `multipole_encoder_ring` + 10% tetrataenite small dust (c9 is B3's);
   - `luv/hts_magnet_works.js` (`:32`) c6: strand wire + lamination → `strand_stator`;
   - `luv/coated_conductor_line.js` (`:32`) c4: strand wire → `strand_tape`;
   - in the own file: hot strip mill (`gtceu:tetrataenite_ingot` → `tetrataenite_lamination`; `lasagna_plate` → `alip_duct`; `gum_metal_billet` → `gum_metal_blank`; tetrataenite ingot → `encoder_ring`), the swage, hob and gear rows (GTM types), NaK (UHV's `sodium_potassium`, `uhv/mercury.js`, reused if its recipe exists; else a mixer row from ordinary Na and K);
