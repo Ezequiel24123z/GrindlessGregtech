@@ -15,7 +15,10 @@
           "itemsOut": [{ "id": "grindless:dense_rhea_impeller", "count": 1 }], "fluidsOut": [] },
         { "_why": "UIV-B3: HPHT anneal of the C-12 CVD diamond plate (line 38).", "name": "c12_hpht", "circuit": 4, "eut": 3932160, "duration": 1600,
           "itemsIn": [{ "id": "grindless:c12_cvd_plate", "count": 1 }, { "id": "grindless:nanotwinned_diamond_anvil", "count": 1, "chance": 1000 }], "kept": [], "fluidsIn": [], "charge": [],
-          "itemsOut": [{ "id": "grindless:c12_hpht_plate", "count": 1 }], "fluidsOut": [] }
+          "itemsOut": [{ "id": "grindless:c12_hpht_plate", "count": 1 }], "fluidsOut": [] },
+        { "_why": "UIV-B4: a filled waste canister compacted under the anvil into the sled's ballast (line 35).", "name": "canister_compaction", "circuit": 5, "eut": 3932160, "duration": 1200,
+          "itemsIn": [{ "id": "grindless:filled_waste_canister", "count": 1 }, { "id": "grindless:nanotwinned_diamond_anvil", "count": 1, "chance": 1000 }], "kept": [], "fluidsIn": [], "charge": [],
+          "itemsOut": [{ "id": "grindless:compacted_waste_canister", "count": 1 }], "fluidsOut": [] }
       ]
     },
     "electric_blast_furnace": {

@@ -79,6 +79,15 @@
       itemsOut: [{ id: CAPSULE, count: 1 }], chancedOut: [],
       fluidsOut: [],
       eut: 7680, duration: 100
+    },
+    // UIV-B4 (line 35): the retrieval plant's synroc is cast into a liner, the shell of a waste canister (hot cell mode 15 fills it)
+    {
+      name: 'synroc_liner', circuit: 4,
+      itemsIn: [{ id: SYNROC, count: 2 }], chancedIn: [], notConsumed: [],
+      fluidsIn: [{ id: 'gtceu:nitric_acid', amount: 500 }],
+      itemsOut: [{ id: 'grindless:synroc_liner', count: 1 }], chancedOut: [],
+      fluidsOut: [{ id: 'gtceu:nitrogen_dioxide', amount: 500 }],
+      eut: 30720, duration: 300
     }
   ]
 

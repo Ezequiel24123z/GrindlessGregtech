@@ -256,6 +256,17 @@
       "fluidsIn": [{ "id": "gtceu:nitric_acid", "amount": 1000 }],
       "itemsOut": [{ "id": "gtceu:curium_248_dust", "count": 1 }],
       "fluidsOut": []
+    },
+    {
+      "_why": "UIV-B4: radioactive waste sealed into a synroc liner, a filled waste canister (line 35); compacted in the megabar press and used as the sled's ballast",
+      "name": "waste_canister_fill",
+      "circuit": 15,
+      "eut": 7680,
+      "duration": 600,
+      "itemsIn": [{ "id": "grindless:synroc_liner", "count": 1 }, { "id": "gtnn:radioactive_waste", "count": 4 }],
+      "fluidsIn": [],
+      "itemsOut": [{ "id": "grindless:filled_waste_canister", "count": 1 }],
+      "fluidsOut": []
     }
   ]
 }
