@@ -165,7 +165,7 @@ test('older rows exist, each marked UIV-A9', () => {
   assert.deepEqual(inputs(row), ['gtceu:lithium_dust', 'gtceu:tin_dust']);
   assert.deepEqual(outputs(row), ['gtceu:li_sn']);
   const am = json('am_powders.json').parts;
-  const w = am[am.length - 1];
+  const w = am.find((p) => p.name === 'w_mesh'); // UXV-A2 appends six parts after it (circuits 9-14)
   assert.deepEqual([w.name, w.metal, w.circuit, w.nearNet, w.output], ['w_mesh', 'rhea', 8, 'grindless:near_net_w_mesh', 'grindless:w_mesh']);
   assert.match(w._why, /^UIV-A9/);
   assert.equal(am.filter((p) => p.circuit === 8).length, 1);
