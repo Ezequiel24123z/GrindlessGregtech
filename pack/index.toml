@@ -10890,7 +10890,7 @@ hash = "c61d7c1479f0c3b3a387a6ee72a7db0d854af1580fa48d286077fe5ada9efa50"
 
 [[files]]
 file = "kubejs/server_scripts/grindless/observatory/crafting.js"
-hash = "b930d16c1ccf61b4d86ee2098c9bd86549bca206f35a814ab3a7046bec4ea12e"
+hash = "7740d4062865e6b9aad833d1d71743fc616f914774853ca9c0bfa134244e7dfa"
 
 [[files]]
 file = "kubejs/server_scripts/grindless/observatory/recipes.js"
@@ -11230,47 +11230,47 @@ hash = "3eb00cc8913fe7ca23b9224722b7fc9e14ca1c9e237496108ae1c4be4632d155"
 
 [[files]]
 file = "kubejs/server_scripts/grindless/zpm/europium.js"
-hash = "244c7cd3c23de52798241425dcae302abbf7b14f71e8ddd1b7e9944a95cb4e77"
+hash = "8bb87f11d1e576273ce8087836885d20d0a4cc45eb82de4f4370940342f3a690"
 
 [[files]]
 file = "kubejs/server_scripts/grindless/zpm/fusion.js"
-hash = "874776c59221385002a8e31f0fe6ea869afcd10ae6ce0d000c7bd6aa3cd1bf4d"
+hash = "084b9737772a7913539a871517ab656ad1c73992c2986717e572363ae28064b3"
 
 [[files]]
 file = "kubejs/server_scripts/grindless/zpm/magnet_works.js"
-hash = "c8df24feca452a950cef3ce88aec842447ef9a8647937bce7a6b5b7f18d4f91a"
+hash = "00730ee931c9633b463494636698f8f8293416b63446bcf30611314a713788a3"
 
 [[files]]
 file = "kubejs/server_scripts/grindless/zpm/mega_assembly_hall.js"
-hash = "58270d480f8b32478c8eed51591d0c75d1bef45c65de024bb54e962d959311a6"
+hash = "c39333ba4b2168f0886aebf351d3907dab26093dbdd1d0c5193e9659516db44d"
 
 [[files]]
 file = "kubejs/server_scripts/grindless/zpm/naquadria.js"
-hash = "3a68111424e78e36e5c3767c6fce006956468dd3cfbe4489a9eed8739bff6e60"
+hash = "91e67cf35ac9532678272ad51addb0e0b3cb2e873c8c19540faada18450fd9df"
 
 [[files]]
 file = "kubejs/server_scripts/grindless/zpm/observatory.js"
-hash = "c49f9569bd7c58496c407c4b6016275f568144b98ebd746288904a35f7691ec7"
+hash = "7bddbab937561f316493d37bdb6888d839b50386223fae3cb83e39e5f3b1b6d8"
 
 [[files]]
 file = "kubejs/server_scripts/grindless/zpm/outer_chemistry.js"
-hash = "91eb736feba0b07ec14687a5ba04f4633628a69aeb2bca2736d4008ee9bd8dfd"
+hash = "cbfaa97f0324dee487df32a040c07021547324e5da277cad5af10a96868cc59e"
 
 [[files]]
 file = "kubejs/server_scripts/grindless/zpm/qubits.js"
-hash = "9eb498dcc3bf465c4297eb68e4540cbbfb6cfe672b1f00b3b4ff5c840e1999e2"
+hash = "c25ee1ded8266b1ecdc8551c6cccc8982a2bca20231f092ed9ea99b0322d3acc"
 
 [[files]]
 file = "kubejs/server_scripts/grindless/zpm/saturn_science.js"
-hash = "b7d8c0841c4a4881853d59d943fb5e6cd87baf0a204a385105414410277b6373"
+hash = "c30702ca29a4d74d2a497fe8826f95675717106d926011bb9bbdef4f00d4bfdb"
 
 [[files]]
 file = "kubejs/server_scripts/grindless/zpm/saturn_siphon.js"
-hash = "27a44e5c4241cf031a47a580ea9d2a1547b716b3ec75729eb3a5a5277a50c7ac"
+hash = "2f2ea1ddc7d8be7ac7c4778fb93f71d8bb314aca71b5c5452489741b95761545"
 
 [[files]]
 file = "kubejs/server_scripts/grindless/zpm/titan_probes.js"
-hash = "402c34d2210eb4e9abcee69e04cc9cfa7f7d82adda542a645642a2a92ce65bc9"
+hash = "9d7e072a8a827cafa2af1c0e066c37be779b154b9da7c90750a2c31fc43f6438"
 
 [[files]]
 file = "kubejs/server_scripts/grindless/zpm/travel.js"
@@ -11278,7 +11278,7 @@ hash = "23cd6385cc27106e38c74dbb9ac04c47597ce1630d6099ee0e43cc2393334633"
 
 [[files]]
 file = "kubejs/server_scripts/grindless/zpm/uranus.js"
-hash = "acd9c9b58ced91cef0a51febf41ace0ad54928f7638f9a7ad1153ea0f9885c97"
+hash = "a9046d10b5f38017a7294fe32ddd04125f5847d6419c85f71ab21da9f035201b"
 
 [[files]]
 file = "kubejs/startup_scripts/grindless/dimensions.js"
