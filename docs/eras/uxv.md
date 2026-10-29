@@ -1081,6 +1081,14 @@ As UIV's (uiv.md:1020-1026): bench overlay and the S0 row of `zones.json` only, 
 
 Order: S0-1 first (it fixes F1's list); S0-3, S0-9 and S0-10 (they fix B1); then S0-2, S0-4, S0-5, S0-7 and S0-8; S0-6 any time (UIV-M1 is merged).
 
+**S0 results** (merged d71d3557; evidence `docs/research/uxv-s0.md`). PASS: S0-1 (`highTierContent` stays off: +5 ids, the five above), S0-3, S0-4, S0-8, S0-9, S0-7 (math and registration). These contract changes are binding:
+
+- **S0-6 FAIL as built, mechanism PASS:** a tier 12 hatch reports 65,536, but `lib/parallel_hatch.js:81` hard-codes `.tiers(9, 10, 11)` and `:85` names every other tier `uhv_parallel_hatch`. M1 is a lib package: `.tiers(9, 10, 11, 12)`, a `uxv_parallel_hatch` name branch and its model path. M2's T1 proves the stellar forge forms at x65,536.
+- **S0-5 tag PASS, recipe id OPEN:** `#gtceu:circuits/uxv` already holds `gtnn:spintronic_mainframe`; F2 finds GT--'s recipe by output (no id contains `spintronic`) before A5 writes a recipe. F2 adds no tag.
+- **S0-2 hatch leg PASS, wireless leg not run:** 2,147,483,648 EU/t stays; B6's T1 runs the wireless feed (UXV wireless hatch on a tier 12 network row).
+- **S0-10 PARTIAL:** both dimensions load; B1's T1 runs the thrown-seed platform and the `@restart` persistence check for both new rows.
+- **W:** `withTiers` gets `case 12` and `tables/wireless_energy.json` a tier 12 row (as E2 in the evidence).
+
 ### Foundation (serial)
 
 #### F1. Registrations
