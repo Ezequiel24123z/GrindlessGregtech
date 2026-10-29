@@ -179,13 +179,21 @@
     var PISTON = 'gtceu:uv_electric_piston'
     var machine = MB.machine.machine
     MB.controllerRecipes = []
-    var missing = [HULL, PISTON, machine].filter(function (id) { return !Item.exists(id) })
+    // QR-R6: assembly line with station research (the La-Y alloy), the era fluid and domain inputs of the (La,Y)H10 line
+    var ins = [HULL, '2x ' + PISTON, '4x #gtceu:circuits/uhv', '2x grindless:la_y_foil', '2x grindless:ammonia_borane_charge', 'grindless:nanodiamond_pellet']
+    var research = 'grindless:la_y_alloy_ingot'
+    var missing = ins.map(function (s) { return s.replace(/^[0-9]+x /, '') }).filter(function (id) { return id.charAt(0) !== '#' }).concat([machine, research]).filter(function (id) { return !Item.exists(id) })
     if (missing.length > 0) {
       console.error(LOG + 'megabar controller recipe skipped, unknown item(s): ' + missing.join(', '))
       return
     }
-    event.recipes.gtceu.shaped(machine, [' C ', 'PHP', ' C '], { C: '#gtceu:circuits/uhv', P: PISTON, H: HULL }).id('grindless:crafting/megabar_press')
-    MB.controllerRecipes.push('grindless:crafting/megabar_press')
+    var b = event.recipes.gtceu.assembly_line('grindless:megabar_press')
+    b.itemInputs(ins)
+    b.inputFluids(Fluid.of('gtceu:soldering_alloy', 2304), Fluid.of('gtceu:lubricant', 1000), Fluid.of('gtceu:tritanium', 576))
+    b.itemOutputs(machine)
+    b.stationResearch(function (r) { return r.researchStack(Item.of(research)).CWUt(64).EUt(491520) })
+    b.EUt(491520).duration(2400)
+    MB.controllerRecipes.push('grindless:assembly_line/megabar_press')
   }
 
   // GTM's own makers of (La,Y)H10 wire: the wiremill and the extruder (every size) and the single wire from a plate

@@ -108,19 +108,20 @@ test('the controller recipe: N blast furnaces, coils and circuits, no new type',
   const context = vm.createContext({
     global: { grindless: Gs },
     console: { info() {}, warn() {}, log() {}, error() {} },
-    Item: { exists: () => true },
     ServerEvents: {
       recipes: (cb) => {
-        const chain = (id) => { const r = { id, inputs: [], outs: [] }; recs.push(r); const o = { itemInputs: (...a) => { r.inputs = a; return o; }, itemOutputs: (...a) => { r.outs = a; return o; }, EUt: () => o, duration: () => o }; return o; };
-        cb({ recipes: { gtceu: { assembler: chain } } });
+        const chain = (id) => { const r = { id, inputs: [], outs: [] }; recs.push(r); const o = { itemInputs: (...a) => { r.inputs = a; return o; }, itemOutputs: (...a) => { r.outs = a; return o; }, inputFluids: () => o, stationResearch: () => o, EUt: () => o, duration: () => o }; return o; };
+        cb({ recipes: { gtceu: { assembly_line: chain } } });
       },
     },
+    Fluid: { of: (id, n) => id + ' ' + n },
+    Item: { exists: () => true, of: (id) => id },
   });
   vm.runInContext(read('server_scripts', 'uev/stellar_forge.js'), context);
   assert.equal(recs.length, 1);
   assert.equal(recs[0].id, 'grindless:stellar_forge');
   assert.deepEqual(plain(recs[0].outs), ['gtceu:stellar_forge']);
-  assert.deepEqual(plain(recs[0].inputs), ['8x gtceu:electric_blast_furnace', '16x grindless:hftacn_coil_block', '4x #gtceu:circuits/uev']);
+  assert.deepEqual(plain(recs[0].inputs), ['8x gtceu:electric_blast_furnace', '16x grindless:hftacn_coil_block', '4x #gtceu:circuits/uev', '2x grindless:ule_cavity', '2x grindless:hftacn_heating_element']);
 });
 
 test('names and tooltips exist in both languages', () => {

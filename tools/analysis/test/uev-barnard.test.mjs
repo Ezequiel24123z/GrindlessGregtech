@@ -149,15 +149,9 @@ test('every by-product has a destination: nickel, cobalt, residue, ammonium chlo
   assert.ok(ids(by('chemical_reactor', 'perrhenate_recrystallise').itemsOut).includes('gtceu:ammonium_chloride_dust'));
 });
 
-test('the controllers have a unique shaped pattern and the machines are registered', () => {
+test('the controllers are assembly lines with station research and the machines are registered', () => {
   const srv = read('server_scripts', 'grindless', 'uev', 'barnard.js');
-  const patterns = [...srv.matchAll(/pattern: (\['[^\]]*\])/g)].map((x) => x[1]);
-  assert.equal(patterns.length, 2);
-  const others = new Set();
-  for (const f of fs.readdirSync(path.join(kube, 'server_scripts', 'grindless', 'uev')).filter((n) => n !== 'barnard.js' && n.endsWith('.js'))) {
-    for (const x of read('server_scripts', 'grindless', 'uev', f).matchAll(/\[('[^'\]]*'(?:, '[^'\]]*')*)\]/g)) others.add(x[1].replace(/ /g, ''));
-  }
-  for (const p of patterns) assert.ok(!others.has(p.slice(1, -1).replace(/ /g, '')), p);
+  assert.equal((srv.match(/gtceu\.assembly_line\(/g) || []).length, 1);
   const st = read('startup_scripts', 'grindless', 'uev', 'barnard.js');
   assert.match(st, /gtceu:barnard_core_drill/);
   assert.match(st, /gtceu:carbonyl_refinery/);

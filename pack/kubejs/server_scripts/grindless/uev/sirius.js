@@ -172,21 +172,31 @@
     var ARM = 'grindless:uev_robot_arm'
     var PUMP = 'grindless:uev_electric_pump'
     var M = SI.machines
-    // shapes differ from every other UEV controller's: grep "pattern: [" and "shaped(" in server_scripts/grindless/uev/*.js
+    var C = '4x #gtceu:circuits/uhv'
+    // QR-R6: assembly line with station research (a component of the line, then the previous machine), the era fluid and domain inputs
     var defs = [
-      { m: M.spectrograph, parts: [SENSOR, EMITTER], pattern: ['OSO', 'EHE'], ingredients: { O: O, S: SENSOR, E: EMITTER, H: HULL } },
-      { m: M.harvester, parts: [ARM, PUMP], pattern: ['OAO', 'PHP'], ingredients: { O: O, A: ARM, P: PUMP, H: HULL } },
-      { m: M.works, parts: [EMITTER, PUMP], pattern: ['OEO', 'PHP'], ingredients: { O: O, E: EMITTER, P: PUMP, H: HULL } }
+      { m: M.spectrograph, research: 'grindless:snspd', era: 'gtceu:neutronium',
+        ins: [HULL, '2x ' + O, SENSOR, EMITTER, C, 'grindless:ule_cavity', '2x grindless:snspd', 'grindless:nuclear_clock'] },
+      { m: M.harvester, research: M.spectrograph.machine, era: 'gtceu:neutronium',
+        ins: [HULL, '2x ' + O, ARM, PUMP, C, 'grindless:degenerate_eos_model', 'grindless:mass_radius_chart', 'grindless:hollow_core_fibre'] },
+      { m: M.works, research: M.harvester.machine, era: 'gtceu:tritanium',
+        ins: [HULL, '2x ' + O, EMITTER, PUMP, C, 'grindless:degenerate_containment_casing', 'grindless:faraday_isolator', 'grindless:spdc_source'] }
     ]
     SI.controllerRecipes = []
     defs.forEach(function (d) {
-      var missing = [HULL, O, d.m.machine].concat(d.parts).filter(function (id) { return !Item.exists(id) })
+      var ids = d.ins.map(function (s) { return s.replace(/^[0-9]+x /, '') }).filter(function (id) { return id.charAt(0) !== '#' }).concat([d.m.machine, d.research])
+      var missing = ids.filter(function (id) { return !Item.exists(id) })
       if (missing.length > 0) {
         console.error(LOG + d.m.name + ' controller recipe skipped, unknown item(s): ' + missing.join(', '))
         return
       }
-      event.recipes.gtceu.shaped(d.m.machine, d.pattern, d.ingredients).id('grindless:crafting/' + d.m.name)
-      SI.controllerRecipes.push('grindless:crafting/' + d.m.name)
+      var b = event.recipes.gtceu.assembly_line('grindless:' + d.m.name)
+      b.itemInputs(d.ins)
+      b.inputFluids(Fluid.of('gtceu:soldering_alloy', 2304), Fluid.of('gtceu:lubricant', 1000), Fluid.of(d.era, 576))
+      b.itemOutputs(d.m.machine)
+      b.stationResearch(function (r) { return r.researchStack(Item.of(d.research)).CWUt(64).EUt(491520) })
+      b.EUt(491520).duration(2400)
+      SI.controllerRecipes.push('grindless:assembly_line/' + d.m.name)
     })
   }
 
