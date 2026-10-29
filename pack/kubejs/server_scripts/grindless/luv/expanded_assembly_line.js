@@ -59,7 +59,7 @@
     PARTS.forEach(function (p) {
       if (!Item.exists(p.out)) { console.error(LOG + p.out + ' does not exist: no recipe'); return }
       event.remove({ output: p.out })
-      var b = event.recipes.gtceu.assembly_line(p.name)
+      var b = event.recipes.gtceu.assembly_line('grindless:' + p.name)
       p.items.forEach(function (s) { b.itemInputs(s) })
       p.fluids.forEach(function (f) { b.inputFluids(Fluid.of('gtceu:' + f[0], f[1])) })
       b.itemOutputs(p.out).EUt(EUT).duration(p.duration)

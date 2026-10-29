@@ -1,3 +1,4 @@
+// priority: -1674
 // Package QR-G0 bench test (scope expanded_assembly_line, band X 36032-36063, Z 0-63, Y 98-112, Overworld).
 //   kubejs custom_command gg_test_expanded_assembly_line      then wait for GGTEST|expanded_assembly_line|DONE
 // Checks (all against the live registry and live machines):
@@ -273,7 +274,7 @@
           if (ch === ' ') continue
           var x = MDR.cx + c - 6
           var y = MDR.cy + r - 2
-          var z = MDR.cz + a - 10
+          var z = MDR.cz + 10 - a
           if (ch === '@') cells.push(cell(x, y, z, B.mdr, '[facing=north]', 'controller'))
           else if (ch === 'H') cells.push(cell(x, y, z, B.tx, '[facing=north]', 'tx'))
           else if (ch === 'X') {
@@ -303,27 +304,61 @@
       var got = blockIdAt(c.x, c.y, c.z)
       if (got !== c.id) wrong.push(at(c) + ' wanted ' + c.id + ' got ' + got)
     })
-    var ok = failed.length === 0 && wrong.length === 0
+    // setblock can report 0 for a block that did take (read back below), so only the read-back decides
+    var ok = wrong.length === 0 && ctrlCell !== null
     check(m.key + '_PLACED', ok, cells.length + ' blocks, controller ' + (m.ctrlPos ? at(m.ctrlPos) : 'none') +
       (failed.length > 0 ? ' setblock failed: ' + failed.slice(0, 5).join('; ') : '') + (wrong.length > 0 ? ' wrong blocks: ' + wrong.slice(0, 5).join('; ') : ''))
     return ok
   }
 
-  function findParts(m, ctrl) {
-    var P = { ids: [] }
-    asArray(ctrl.getParts()).forEach(function (p) {
-      var pos = p.self().getPos()
-      var role = m.roles[pos.getX() + ',' + pos.getY() + ',' + pos.getZ()]
-      P.ids.push(short(p.getDefinition().getId()) + (role ? '=' + role : ''))
-      if (role) P[role] = p
+  // the addon's machine classes mention client-only types, so Rhino cannot list their members on a dedicated server: parts are
+  // looked up by position (static call) and the addon's objects are only ever passed as arguments to reflection
+  function findParts(m) {
+    var P = { ids: [], pos: {} }
+    Object.keys(m.roles).forEach(function (k) {
+      var role = m.roles[k]
+      var q = k.split(',')
+      var pos = { x: Number(q[0]), y: Number(q[1]), z: Number(q[2]) }
+      P.pos[role] = pos
+      P[role] = machineAt(pos)
+      P.ids.push(role)
     })
     return P
+  }
+  var JClass = null
+  function jc(name) {
+    if (JClass === null) JClass = Java.loadClass('java.lang.Class')
+    return JClass.forName(name)
+  }
+  var WOH = 'com.extendedfeatures.client.core.logic.machine.WirelessOpticalHatch'
+  function fieldOf(obj, owner, name) {
+    var f = jc(owner).getDeclaredField(name)
+    f.setAccessible(true)
+    return f.get(obj)
+  }
+  // controllers joined to a part: the part's own list (a GTM class) shows whether the structure formed
+  function joined(part) {
+    try { return Number(part.getControllers().size()) } catch (e) { return -1 }
   }
 
   // waits for the controller to form (GTM checks the pattern asynchronously), forces one synchronous check after FORM_TIMEOUT
   function formStep(m) {
     var waited = S.t - m.t0
     var ctrl = machineAt(m.ctrlPos)
+    if (m.opaque) {
+      m.P = findParts(m)
+      var j = joined(m.P.energy)
+      if (j > 0) {
+        check(m.key + '_FORMED', true, 'the energy hatch joined ' + j + ' controller after ' + waited + ' ticks (the addon controller cannot be introspected: judged by its parts)')
+        m.ctrl = ctrl
+        return true
+      }
+      if (waited >= FORM_TIMEOUT) {
+        check(m.key + '_FORMED', false, 'the energy hatch joined no controller in ' + waited + ' ticks (' + j + ')')
+        m.phase = 'done'
+      }
+      return false
+    }
     if (ctrl === null || ctrl === undefined) {
       check(m.key + '_FORMED', false, 'no machine at ' + at(m.ctrlPos))
       m.phase = 'done'
@@ -406,23 +441,38 @@
   // ---------------------------------------------------------------- scenarios
 
   function scenario(key) {
-    return { key: key, phase: 'forming', t0: S.t, ctrl: null, P: null, forced: false, roles: {}, ctrlPos: null }
+    return { key: key, opaque: key === 'eal', phase: 'forming', t0: S.t, ctrl: null, P: null, forced: false, roles: {}, ctrlPos: null }
   }
 
   function startRun(m, id, order) {
     var rec = recipeInputs(id)
     load(m, rec, order)
     m.rec = rec
+    m.loaded = rec.items.reduce(function (a, x) { return a + x.count }, 0)
     m.runId = id
     m.t0 = S.t
-    wake(m.ctrl)
+    wakeOf(m)
   }
 
-  function working(m) { return statusOf(m.ctrl) === 'WORKING' }
+  function totalItems(m) {
+    var n = 0
+    for (var i = 0; i < 6; i++) {
+      if (!m.P['bus' + i]) continue
+      var c = readBus(m.P['bus' + i])
+      Object.keys(c).forEach(function (k) { n += c[k] })
+    }
+    return n
+  }
+  // an addon controller cannot be read: it has started when it has taken the inputs
+  function working(m) { return m.opaque ? (m.loaded > 0 && totalItems(m) < m.loaded) : statusOf(m.ctrl) === 'WORKING' }
+  function lastOf(m) { return m.opaque ? (working(m) ? m.runId : 'none') : lastId(m.ctrl) }
+  function stateOf(m) { return m.opaque ? 'items in buses ' + totalItems(m) + ' of ' + m.loaded : state(m.ctrl) }
+  function reasonsOf(m) { return m.opaque ? 'unreadable (addon controller)' : reasons(m.ctrl) }
+  function wakeOf(m) { if (!m.opaque) wake(m.ctrl) }
 
   function ctlStep(m, age) {
     if (m.phase === 'formed') {
-      m.P = findParts(m, m.ctrl)
+      m.P = findParts(m)
       var missing = ['bus0', 'bus1', 'bus2', 'bus3', 'bus4', 'fluid0', 'fluid1', 'energy', 'data', 'out'].filter(function (r) { return !m.P[r] })
       check('ctl_PARTS', missing.length === 0, '[' + m.P.ids.join(' ') + ']' + (missing.length > 0 ? ' missing: ' + missing.join(', ') : ''))
       if (missing.length > 0) { m.phase = 'done'; return }
@@ -434,10 +484,10 @@
     topUp(m)
     if (m.phase === 'refusing') {
       if (working(m)) {
-        check('ctl_REFUSES_WRONG_ORDER', false, 'the normal line started ' + lastId(m.ctrl) + ' with reversed inputs | ' + busSummary(m))
+        check('ctl_REFUSES_WRONG_ORDER', false, 'the normal line started ' + lastOf(m) + ' with reversed inputs | ' + busSummary(m))
         m.phase = 'done'
       } else if (age >= REFUSE_TICKS) {
-        check('ctl_REFUSES_WRONG_ORDER', true, 'idle for ' + age + ' ticks with the inputs of ' + short(DYNAMO) + ' in reverse bus order | ' + state(m.ctrl) + ' | ' + busSummary(m))
+        check('ctl_REFUSES_WRONG_ORDER', true, 'idle for ' + age + ' ticks with the inputs of ' + short(DYNAMO) + ' in reverse bus order | ' + stateOf(m) + ' | ' + busSummary(m))
         startRun(m, DYNAMO, inOrder(5))
         m.phase = 'ordered'
       }
@@ -445,10 +495,10 @@
     }
     if (m.phase === 'ordered') {
       if (working(m)) {
-        check('ctl_RUNS_RIGHT_ORDER', lastId(m.ctrl) === DYNAMO, 'started ' + lastId(m.ctrl) + ' ' + age + ' ticks after the same inputs went into recipe order')
+        check('ctl_RUNS_RIGHT_ORDER', lastOf(m) === DYNAMO, 'started ' + lastOf(m) + ' ' + age + ' ticks after the same inputs went into recipe order')
         m.phase = 'done'
       } else if (age >= START_TIMEOUT) {
-        check('ctl_RUNS_RIGHT_ORDER', false, 'did not start in ' + age + ' ticks | ' + state(m.ctrl) + ' | reasons=[' + reasons(m.ctrl) + '] | ' + busSummary(m))
+        check('ctl_RUNS_RIGHT_ORDER', false, 'did not start in ' + age + ' ticks | ' + stateOf(m) + ' | reasons=[' + reasonsOf(m) + '] | ' + busSummary(m))
         m.phase = 'done'
       }
     }
@@ -456,7 +506,7 @@
 
   function mdrStep(m) {
     if (m.phase === 'formed') {
-      m.P = findParts(m, m.ctrl)
+      m.P = findParts(m)
       var missing = ['tx', 'data0', 'data1'].filter(function (r) { return !m.P[r] })
       check('mdr_PARTS', missing.length === 0, '[' + m.P.ids.join(' ') + ']' + (missing.length > 0 ? ' missing: ' + missing.join(', ') : ''))
       m.phase = missing.length > 0 ? 'done' : 'ready'
@@ -468,15 +518,16 @@
     var GP = Java.loadClass('com.mojang.authlib.GameProfile')
     var UUID = Java.loadClass('java.util.UUID')
     var fp = FPF.get(S.level, new GP(UUID.randomUUID(), 'gg_test_scan'))
-    m.P.tx.handleScanRequest(fp)
-    return { data: asArray(m.P.tx.getLinkedDataHatchPositions()).length, recv: asArray(m.P.tx.getLinkedReceptorPositions()).length,
-      eal: eal.P.recv.isLinked() }
+    var meth = jc(WOH).getMethod('handleScanRequest', jc('net.minecraft.server.level.ServerPlayer'))
+    var err = null
+    try { meth.invoke(m.P.tx, fp) } catch (e) { err = String(e) }
+    return { err: err, data: Number(fieldOf(m.P.tx, WOH, 'linkedDataHatchPositions').size()), recv: Number(fieldOf(m.P.tx, WOH, 'linkedReceptorPositions').size()),
+      eal: fieldOf(eal.P.recv, WOH, 'linkedTransmissorPos') !== null }
   }
-
   function ealStep(m, age) {
     var mdr = S.byKey.mdr
     if (m.phase === 'formed') {
-      m.P = findParts(m, m.ctrl)
+      m.P = findParts(m)
       var missing = ['bus0', 'bus1', 'bus2', 'bus3', 'bus4', 'fluid0', 'fluid1', 'energy', 'recv', 'out'].filter(function (r) { return !m.P[r] })
       check('eal_PARTS', missing.length === 0, '[' + m.P.ids.join(' ') + ']' + (missing.length > 0 ? ' missing: ' + missing.join(', ') : ''))
       if (missing.length > 0) { m.phase = 'done'; return }
@@ -488,12 +539,12 @@
     topUp(m)
     if (m.phase === 'wrong') {
       if (working(m)) {
-        var ran = lastId(m.ctrl)
+        var ran = lastOf(m)
         check('eal_RUNS_WRONG_ORDER_start', ran === DYNAMO, 'started ' + ran + ' ' + age + ' ticks after the inputs went into reverse bus order | ' + busSummary(m))
         m.phase = 'wrongRun'
         m.t1 = S.t
       } else if (age >= START_TIMEOUT) {
-        check('eal_RUNS_WRONG_ORDER_start', false, 'did not start in ' + age + ' ticks | ' + state(m.ctrl) + ' | reasons=[' + reasons(m.ctrl) + '] | ' + busSummary(m))
+        check('eal_RUNS_WRONG_ORDER_start', false, 'did not start in ' + age + ' ticks | ' + stateOf(m) + ' | reasons=[' + reasonsOf(m) + '] | ' + busSummary(m))
         m.phase = 'done'
       }
       return
@@ -506,17 +557,17 @@
         m.phase = 'blocked'
         startRun(m, RESEARCH_RECIPE, inOrder(5))
       } else if (S.t - m.t1 >= m.rec.duration + RUN_SLACK) {
-        check('eal_RUNS_WRONG_ORDER', false, 'no output after ' + (S.t - m.t1) + ' ticks | ' + state(m.ctrl))
+        check('eal_RUNS_WRONG_ORDER', false, 'no output after ' + (S.t - m.t1) + ' ticks | ' + stateOf(m))
         m.phase = 'done'
       }
       return
     }
     if (m.phase === 'blocked') {
       if (working(m)) {
-        check('eal_RESEARCH_BLOCKED', false, 'the research recipe started without any data: ' + lastId(m.ctrl))
+        check('eal_RESEARCH_BLOCKED', false, 'the research recipe started without any data: ' + lastOf(m))
         m.phase = 'done'
       } else if (age >= REFUSE_TICKS) {
-        check('eal_RESEARCH_BLOCKED', true, short(RESEARCH_RECIPE) + ' did not start in ' + age + ' ticks with no data path | ' + state(m.ctrl) + ' | reasons=[' + reasons(m.ctrl) + ']')
+        check('eal_RESEARCH_BLOCKED', true, short(RESEARCH_RECIPE) + ' did not start in ' + age + ' ticks with no data path | ' + stateOf(m) + ' | reasons=[' + reasonsOf(m) + ']')
         m.phase = 'waitMdr'
       }
       return
@@ -533,20 +584,20 @@
       try { res = scan(mdr, m) } catch (e) { err = String(e) }
       var linkOk = res !== null && res.data >= 1 && res.recv >= 1 && res.eal === true
       check('eal_RESEARCH_LINK', st.ok && linkOk, 'research stick in the relay\'s data access hatch: ' + st.ok + ' (' + st.detail + '); the transmissor\'s scan linked ' +
-        (res === null ? 'nothing (' + err + ')' : res.data + ' data access hatch(es) and ' + res.recv + ' receptor(s); the line\'s receptor is linked: ' + res.eal))
+        (res === null ? 'nothing (' + err + ')' : res.data + ' data access hatch(es) and ' + res.recv + ' receptor(s); the line\'s receptor is linked: ' + res.eal + (res.err ? ' (then the call threw: ' + res.err + ')' : '')))
       if (!st.ok || !linkOk) { m.phase = 'done'; return }
       m.phase = 'research'
       m.t0 = S.t
-      wake(m.ctrl)
+      wakeOf(m)
       return
     }
     if (m.phase === 'research') {
       if (working(m)) {
-        check('eal_RUNS_RESEARCH_start', lastId(m.ctrl) === RESEARCH_RECIPE, 'started ' + lastId(m.ctrl) + ' ' + age + ' ticks after the link')
+        check('eal_RUNS_RESEARCH_start', lastOf(m) === RESEARCH_RECIPE, 'started ' + lastOf(m) + ' ' + age + ' ticks after the link')
         m.phase = 'researchRun'
         m.t1 = S.t
       } else if (age >= START_TIMEOUT) {
-        check('eal_RUNS_RESEARCH_start', false, 'did not start in ' + age + ' ticks after the link | ' + state(m.ctrl) + ' | reasons=[' + reasons(m.ctrl) + '] | ' + busSummary(m))
+        check('eal_RUNS_RESEARCH_start', false, 'did not start in ' + age + ' ticks after the link | ' + stateOf(m) + ' | reasons=[' + reasonsOf(m) + '] | ' + busSummary(m))
         m.phase = 'done'
       }
       return
@@ -557,7 +608,7 @@
         check('eal_RUNS_RESEARCH', true, made + ' ' + short(RESEARCH_OUT) + ' in the output bus ' + (S.t - m.t1) + ' ticks after the start (recipe ' + m.rec.eut + ' EU/t x ' + m.rec.duration + ' t)')
         m.phase = 'done'
       } else if (S.t - m.t1 >= m.rec.duration + RUN_SLACK) {
-        check('eal_RUNS_RESEARCH', false, 'no output after ' + (S.t - m.t1) + ' ticks | ' + state(m.ctrl))
+        check('eal_RUNS_RESEARCH', false, 'no output after ' + (S.t - m.t1) + ' ticks | ' + stateOf(m))
         m.phase = 'done'
       }
     }
