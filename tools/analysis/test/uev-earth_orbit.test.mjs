@@ -132,7 +132,7 @@ test('both machines are registered with their types and Earth-orbit casing; ever
     assert.ok(lang.includes(`'${k}'`), k);
   }
   const names = [...startup.matchAll(/(\w+): \{ stack: \d+ \}/g)].map((m) => m[1]);
-  assert.equal(names.length, 36);
+  assert.equal(names.length, 39);
   for (const n of names) {
     assert.ok(lang.includes(`['${n}',`), `lang ${n}`);
     assert.ok(fs.existsSync(path.join(kube, 'assets', 'grindless', 'textures', 'item', `${n}.png`)), `texture ${n}`);

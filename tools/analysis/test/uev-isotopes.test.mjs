@@ -122,11 +122,12 @@ test('line 2 closes: oxide feed -> Pu-242 -> target -> HFIR -> dissolve -> recov
     [ISO.types.chemical_reactor.recipes, 'plutonium_244_chlorination', 'gtceu:plutonium_244_rich_chloride_dust'],
     [CAL, 'plutonium_244', 'gtceu:plutonium_244_dust'],
     [ISO.types.chemical_reactor.recipes, 'plutonium_244_oxidation', 'gtceu:plutonium_244_oxide_dust'],
+    [ISO.types.chemical_reactor.recipes, 'pu244_plating_ampoule', 'grindless:pu244_plating_ampoule'],
     [ISO.types.assembler.recipes, 'plutonium_244_target', 'grindless:plutonium_244_target']
   ];
   for (const [rs, name, out] of chain) assert.ok(outputs(by(rs, name)).includes(out), `${name} -> ${out}`);
   // each link's output is the next link's input
-  const feeds = [[0, 1], [1, 2], [2, 3], [3, 4], [6, 7], [7, 8]];
+  const feeds = [[0, 1], [1, 2], [2, 3], [3, 4], [6, 7], [7, 8], [8, 9]];
   for (const [a, b] of feeds) {
     const out = outputs(by(chain[a][0], chain[a][1]));
     assert.ok(inputs(by(chain[b][0], chain[b][1])).some((i) => out.includes(i)), `${chain[a][1]} -> ${chain[b][1]}`);
@@ -140,7 +141,8 @@ test('line 1, 29 and 30 chains: calcite -> CaCl2 -> Ca-48 passes -> oven charge;
   assert.ok(outputs(by(CAL, 'calcium_pass_1')).includes('gtceu:calcium_48_enriched_dust'));
   assert.ok(outputs(by(cr, 'calcium_48_chlorination')).includes('gtceu:calcium_48_enriched_chloride_dust'));
   assert.ok(inputs(by(CAL, 'calcium_pass_2')).includes('gtceu:calcium_48_enriched_chloride_dust'));
-  assert.ok(inputs(by(ISO.types.assembler.recipes, 'ca48_oven_charge')).includes('gtceu:calcium_48_dust'));
+  assert.ok(inputs(by(ISO.types.mixer.recipes, 'ca48_crucible_load')).includes('gtceu:calcium_48_dust'));
+  assert.ok(inputs(by(ISO.types.assembler.recipes, 'ca48_oven_charge')).includes('grindless:ca48_crucible_load'));
   assert.ok(outputs(by(cr, 'lithium_to_lithium_chloride')).includes('gtceu:lithium_chloride_dust'));
   assert.ok(outputs(by(cr, 'potassium_chloride_feed')).includes('gtceu:rock_salt_dust'));
 });

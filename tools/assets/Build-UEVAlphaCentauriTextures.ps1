@@ -166,7 +166,7 @@ $shapes = @{
         '......KKKK......', '................', '................', '................')
 }
 $items = @(
-    @('superhydride_scoop_coil', 'chip', '8A6AC8'), @('dust_laden_aerogel', 'wafer', 'C8D8E8'), @('extracted_grains', 'dust', 'A88868'),
+    @('superhydride_scoop_coil', 'chip', '8A6AC8'), @('scoop_winding', 'chip', '7A5AB0'), @('impregnated_scoop_winding', 'chip', '9C80D8'), @('dust_laden_aerogel', 'wafer', 'C8D8E8'), @('extracted_grains', 'dust', 'A88868'),
     @('demineralised_grains', 'dust', 'C8A878'), @('fe60_record', 'foil', 'C86848'), @('silicate_residue', 'dust', '9A9088'),
     @('pulsar_timing_data', 'foil', '6A88C8'), @('alpha_coronal_field_map', 'foil', 'E8A848'),
     @('teos_flask', 'vial', 'D8E8D8'), @('silica_sol', 'vial', 'C8D8F0'), @('silica_wet_gel', 'vial', 'B8C8E0'), @('silica_aged_gel', 'vial', 'A8B8D8')

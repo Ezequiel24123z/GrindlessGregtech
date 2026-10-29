@@ -70,6 +70,8 @@
 
     // [name, en, es, tooltip 0 en, es, tooltip 1 en, es]
     var ITEMS = [
+        ['scoop_winding', 'Scoop Winding', 'Bobinado de colector', 'Superhydride wire wound on a plate former.', 'Hilo de superhidruro bobinado sobre un molde de placas.', 'Impregnated with epoxy in a chemical reactor.', 'Se impregna con epoxi en un reactor químico.'],
+        ['impregnated_scoop_winding', 'Impregnated Scoop Winding', 'Bobinado de colector impregnado', 'A winding set solid in epoxy so it survives the field.', 'Un bobinado fijado con epoxi para resistir el campo.', 'Fitted with a UV field generator in the assembler (circuit 2).', 'Se monta con un generador de campo UV en el ensamblador (circuito 2).'],
         ['superhydride_scoop_coil', 'Superhydride Scoop Coil', 'Bobina colectora de superhidruro', 'A superconducting loop that funnels the interstellar medium.', 'Un lazo superconductor que canaliza el medio interestelar.', 'Never used up in the nebula collector. The yield is named fiction.', 'No se gasta en el colector de nebulosa. El rendimiento es ficción declarada.'],
         ['dust_laden_aerogel', 'Dust-laden Aerogel', 'Aerogel cargado de polvo', 'An aerogel tile that caught interstellar grains.', 'Una baldosa de aerogel que atrapó granos interestelares.', 'Washed in the interstellar dust lab.', 'Se lava en el laboratorio de polvo interestelar.'],
         ['extracted_grains', 'Extracted Grains', 'Granos extraídos', 'Grains washed out of the aerogel.', 'Granos lavados del aerogel.', 'Demineralised or reduced to residue.', 'Se desmineralizan o se reducen a residuo.'],

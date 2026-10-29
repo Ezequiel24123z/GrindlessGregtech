@@ -283,9 +283,9 @@
           "circuit": 20,
           "eut": 131072,
           "duration": 400,
-          "itemsIn": [{ "id": "grindless:ca48_oven_charge", "count": 1 }],
+          "itemsIn": [{ "id": "grindless:ca48_plasma_bunch", "count": 1 }],
           "kept": [{ "id": "gtceu:uv_emitter", "count": 1 }],
-          "charge": [],
+          "charge": [{ "id": "gtceu:helium", "amount": 500 }],
           "fluidsIn": [],
           "itemsOut": [{ "id": "grindless:ca48_beam", "count": 4 }],
           "fluidsOut": []
@@ -326,12 +326,12 @@
           "eut": 131072,
           "duration": 200,
           "itemsIn": [
-            { "id": "gtceu:lead_foil", "count": 4 },
+            { "id": "grindless:lead_polymer_liner", "count": 1 },
             { "id": "gtceu:titanium_plate", "count": 1 }
           ],
           "kept": [],
           "charge": [],
-          "fluidsIn": [],
+          "fluidsIn": [{ "id": "gtceu:helium", "amount": 500 }],
           "itemsOut": [{ "id": "grindless:sealed_capsule", "count": 1 }],
           "fluidsOut": []
         },
@@ -340,10 +340,13 @@
           "circuit": 24,
           "eut": 131072,
           "duration": 200,
-          "itemsIn": [{ "id": "gtceu:polycarbonate_dust", "count": 2 }],
+          "itemsIn": [
+            { "id": "grindless:cast_polycarbonate_film", "count": 2 },
+            { "id": "gtceu:polytetrafluoroethylene_foil", "count": 1 }
+          ],
           "kept": [],
           "charge": [],
-          "fluidsIn": [],
+          "fluidsIn": [{ "id": "gtceu:acetone", "amount": 100 }],
           "itemsOut": [{ "id": "grindless:polycarbonate_foil", "count": 4 }],
           "fluidsOut": []
         }
@@ -351,6 +354,45 @@
     },
     "chemical_reactor": {
       "recipes": [
+        {
+          "name": "capsule_liner",
+          "circuit": 28,
+          "eut": 131072,
+          "duration": 200,
+          "itemsIn": [
+            { "id": "gtceu:lead_foil", "count": 4 },
+            { "id": "grindless:cast_polycarbonate_film", "count": 1 }
+          ],
+          "kept": [],
+          "charge": [],
+          "fluidsIn": [{ "id": "gtceu:acetone", "amount": 100 }],
+          "itemsOut": [{ "id": "grindless:lead_polymer_liner", "count": 1 }],
+          "fluidsOut": []
+        },
+        {
+          "name": "polycarbonate_film_cast",
+          "circuit": 26,
+          "eut": 131072,
+          "duration": 200,
+          "itemsIn": [{ "id": "gtceu:polycarbonate_dust", "count": 2 }],
+          "kept": [],
+          "charge": [],
+          "fluidsIn": [{ "id": "gtceu:acetone", "amount": 250 }],
+          "itemsOut": [{ "id": "grindless:cast_polycarbonate_film", "count": 2 }],
+          "fluidsOut": []
+        },
+        {
+          "name": "ca48_ionisation",
+          "circuit": 27,
+          "eut": 131072,
+          "duration": 300,
+          "itemsIn": [{ "id": "grindless:ca48_oven_charge", "count": 1 }],
+          "kept": [],
+          "charge": [],
+          "fluidsIn": [{ "id": "gtceu:helium", "amount": 500 }],
+          "itemsOut": [{ "id": "grindless:ca48_plasma_bunch", "count": 2 }],
+          "fluidsOut": []
+        },
         {
           "name": "curium_248",
           "circuit": 20,

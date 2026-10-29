@@ -61,14 +61,17 @@
     },
     "assembler": {
       "recipes": [
-        { "name": "superhydride_scoop_coil", "circuit": 0, "eut": 491520, "duration": 400,
-          "itemsIn": [{ "id": "gtceu:lay_superhydride_single_wire", "count": 16 }, { "id": "gtceu:lay_superhydride_plate", "count": 4 }, { "id": "gtceu:uv_field_generator", "count": 1 }],
+        { "name": "superhydride_scoop_coil", "circuit": 2, "eut": 491520, "duration": 400,
+          "itemsIn": [{ "id": "grindless:impregnated_scoop_winding", "count": 1 }, { "id": "gtceu:lay_superhydride_plate", "count": 2 }, { "id": "gtceu:lay_superhydride_single_wire", "count": 2 }, { "id": "gtceu:uv_field_generator", "count": 1 }],
           "kept": [], "fluidsIn": [{ "id": "gtceu:helium", "amount": 1000 }], "charge": [],
           "itemsOut": [{ "id": "grindless:superhydride_scoop_coil", "count": 1 }], "fluidsOut": [] }
       ]
     },
     "chemical_reactor": {
       "recipes": [
+        { "name": "scoop_impregnation", "circuit": 0, "eut": 7680, "duration": 300,
+          "itemsIn": [{ "id": "grindless:scoop_winding", "count": 1 }], "kept": [], "fluidsIn": [{ "id": "gtceu:epoxy", "amount": 144 }], "charge": [],
+          "itemsOut": [{ "id": "grindless:impregnated_scoop_winding", "count": 1 }], "fluidsOut": [] },
         { "name": "compress_interstellar_gas", "circuit": 0, "eut": 7680, "duration": 300,
           "itemsIn": [], "kept": [], "fluidsIn": [{ "id": "gtceu:interstellar_gas", "amount": 8000 }], "charge": [],
           "itemsOut": [], "fluidsOut": [{ "id": "gtceu:compressed_interstellar_gas", "amount": 4000 }] },
@@ -88,6 +91,10 @@
     },
     "mixer": {
       "recipes": [
+        { "name": "scoop_winding", "circuit": 1, "eut": 491520, "duration": 300,
+          "itemsIn": [{ "id": "gtceu:lay_superhydride_single_wire", "count": 16 }, { "id": "gtceu:lay_superhydride_plate", "count": 2 }],
+          "kept": [], "fluidsIn": [], "charge": [],
+          "itemsOut": [{ "id": "grindless:scoop_winding", "count": 1 }], "fluidsOut": [] },
         { "name": "silica_sol", "circuit": 0, "eut": 480, "duration": 200,
           "itemsIn": [{ "id": "grindless:teos_flask", "count": 1 }], "kept": [], "fluidsIn": [{ "id": "minecraft:water", "amount": 2000 }], "charge": [],
           "itemsOut": [{ "id": "grindless:silica_sol", "count": 1 }], "fluidsOut": [] }
