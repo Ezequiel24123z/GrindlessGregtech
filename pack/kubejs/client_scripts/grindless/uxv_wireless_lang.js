@@ -1,4 +1,4 @@
-// priority: 1525
+// priority: 1510
 // Gregtech Grindless - names of the UXV wireless tier (package UXV-W; the UXV row of kubejs/data/grindless/tables/wireless_energy.json,
 // registered by startup_scripts/grindless/lv/wireless_energy.js) and the EMI line of the nitride magnet works' circuit 7:
 //

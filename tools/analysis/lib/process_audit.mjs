@@ -124,7 +124,7 @@ export function questMentions(packDir) {
  * The audit. Inputs: dump (lib/dump.mjs), registry (cached stand-in registry), cfg (process_audit.json options and
  * emi_coverage.json's endProducts via `endProducts`), emi (loadEmiData), packDir, quests (a Set from questMentions).
  */
-export function auditProcesses({ dump, registry, cfg = {}, emi = { pages: [], disabled: [] }, endProducts = {}, worldItems = new Set(), quests = new Set(), packDir = 'pack' }) {
+export function auditProcesses({ dump, registry, cfg = {}, emi = { pages: [], disabled: [] }, endProducts = {}, pendingUses = [], worldItems = new Set(), quests = new Set(), packDir = 'pack' }) {
   const st = { unresolved: new Set() };
   const gtTypes = new Set([...dump.recipeTypes.keys()]);
   const ctx = { tags: dump.tags, st, cfg: { typeAliases: {}, toolTagSet: new Set() }, gtTypes };
@@ -134,6 +134,8 @@ export function auditProcesses({ dump, registry, cfg = {}, emi = { pages: [], di
   const hiddenWith = new Set(dump.tags.items('grindless:hidden_with_recipes'));
   const endItems = new Map((endProducts.items || []).map((e) => [e.id, e.reason || '']));
   const endGlob = makeGlobMatcher(endProducts.globs || []);
+  // emi_coverage.json's pendingUses: a later package of the era writes the use (the EMI audit fails once the entry is stale)
+  const laterUse = new Set(pendingUses.map((p) => p.id));
   const allow = makeGlobMatcher(cfg.ignore || []);
 
   // ---- recipes
@@ -195,7 +197,7 @@ export function auditProcesses({ dump, registry, cfg = {}, emi = { pages: [], di
     if (!hidden) {
       if (prod.length === 0 && !given && !s.fluid) add('uncraftable', k, era, file, 'no recipe makes it and no world, loot or quest source is known');
       else if (prod.length === 0 && s.fluid && !given) add('uncraftable', k, era, file, 'no recipe makes this fluid');
-      const used = cons.length > 0 || structBlocks.has(k) || pageStacks.has(k) || endItems.has(k) || endGlob(k) || (!s.fluid && PLACED_OR_WORN.test(local));
+      const used = cons.length > 0 || structBlocks.has(k) || pageStacks.has(k) || endItems.has(k) || endGlob(k) || laterUse.has(k) || (!s.fluid && PLACED_OR_WORN.test(local));
       const onlyBy = prod.length > 0 && prod.every((p) => p.byproduct);
       if (!used && !given) {
         if (onlyBy) add('byproduct_no_destination', k, era, file, `only a byproduct of ${prod.slice(0, 3).map((p) => p.id).join(', ')}; nothing consumes, voids or explains it`);

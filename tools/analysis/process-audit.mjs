@@ -46,8 +46,9 @@ export function runAudit({ dumpDir, registryFile = DEFAULT_REGISTRY, pack = DEFA
   const dump = loadDump(dumpDir, { log: null });
   const registry = readJson(registryFile);
   const cfg = fs.existsSync(DEFAULT_BASELINE) ? readJson(DEFAULT_BASELINE).options || {} : {};
-  const endProducts = readJson(path.join(here, 'emi_coverage.json')).endProducts || {};
-  const res = auditProcesses({ dump, registry, cfg, emi: loadEmiData(pack), endProducts, worldItems: worldItemsOf(), quests: questMentions(pack), packDir: pack });
+  const coverage = readJson(path.join(here, 'emi_coverage.json'));
+  const endProducts = coverage.endProducts || {};
+  const res = auditProcesses({ dump, registry, cfg, emi: loadEmiData(pack), endProducts, pendingUses: coverage.pendingUses || [], worldItems: worldItemsOf(), quests: questMentions(pack), packDir: pack });
   return { res, dump, registry };
 }
 

@@ -1,3 +1,4 @@
+// priority: 1520
 // Gregtech Grindless - names and tooltips of UXV's superheavies III (startup_scripts/grindless/uxv/superheavy.js; package UXV-A1):
 //   item.grindless.<n>, tooltip.grindless.<n>.0/.1               the four items
 //   material.gtceu.<n>                                           the two recoil gases

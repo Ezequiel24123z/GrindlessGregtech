@@ -141,7 +141,7 @@ test('sintering: two targets, circuits 8 and 9 of the sinterer, argon', () => {
   assert.match(SINT, /name: 'fm257_target', circuit: 8, input: 'grindless:fm257_plated_blank', output: 'grindless:fm257_target'/);
   assert.match(SINT, /name: 'cm248_target', circuit: 9, input: 'grindless:cm248_plated_blank', output: 'grindless:cm248_target'/);
   assert.match(SINT, /spark_plasma_sintering/);
-  assert.doesNotMatch(SINT, /\/\/ priority:/);
+  assert.match(SINT, /^\/\/ priority:/m, 'the integrator stamped the load order');
   const prop = text('server_scripts', 'grindless', 'uhv', 'propulsion.js');
   const used = [...prop.matchAll(/circuit: (\d+)/g)].map((m) => Number(m[1]));
   assert.ok(!used.includes(8) && !used.includes(9));
@@ -190,10 +190,10 @@ test('lang parity: every key in en_us and es_es, every item and gas named, EMI i
   assert.ok(lang.includes(info.text[0]));
 });
 
-test('F1 rule for A1 is gone and the older pinned ids are untouched', () => {
+test('the F1 rules for A1 and A2 are gone and the older pinned ids are untouched', () => {
   const obtain = fs.readFileSync(path.join(root, 'tools', 'analysis', 'tiers', 'obtain.json'), 'utf8');
   assert.ok(!obtain.includes('"era": "UXV (A1)"'));
-  assert.ok(obtain.includes('"era": "UXV (A2)"'));
+  assert.ok(!obtain.includes('"era": "UXV (A2)"'));
   assert.equal(by(IRR, 'es254_bombard').circuit, 8);
   assert.equal(by(TRANS, 'es254_extraction').circuit, 9);
 });

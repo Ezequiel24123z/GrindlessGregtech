@@ -1,3 +1,4 @@
+// priority: -26264
 // -----------------------------------------------------------------------------------------------
 // UXV's superheavies III (docs/eras/uxv.md, process lines 19-23; package UXV-A1). Every row of the package is an older machine's row:
 // tables/isotopes.json (calutron), tables/superheavy.json (cyclotron, recoil separator, chem lab), tables/transcurium.json (plating),

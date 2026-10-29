@@ -1,3 +1,4 @@
+// priority: -10882
 // -----------------------------------------------------------------------------------------------
 // UXV's superheavies III (docs/eras/uxv.md, process lines 19-23; package UXV-A1). No new machine: the rows go to older machines
 // (see server_scripts/grindless/uxv/superheavy.js). F1's ids (uxv/foundation.js) are not registered again.

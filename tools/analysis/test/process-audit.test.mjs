@@ -69,6 +69,17 @@ test('baseline: only keys absent from it are new', () => {
   assert.equal(newFindings(res, { keys: ['uncraftable|a', 'no_use|b'] }).length, 0);
 });
 
+test('a made item nothing uses is no_use, unless emi_coverage.json lists it as a pending use of a later package', () => {
+  const dump = mkDump({
+    recipes: [{ ...gt('grindless:press/target', 'gtceu:mixer', { ins: [gi('gtceu:iron_dust', 1)], outs: [gi('grindless:target', 1)] }), added: true }],
+    recipeTypes: ['gtceu:mixer'],
+  });
+  const registry = reg({ items: ['grindless:target'] });
+  assert.ok(auditProcesses({ dump, registry }).findings.some((f) => f.key === 'no_use|grindless:target'));
+  const res = auditProcesses({ dump, registry, pendingUses: [{ id: 'grindless:target', package: 'UXV-A4' }] });
+  assert.ok(!kinds(res).has('no_use'), [...kinds(res)].join());
+});
+
 test('a machine hidden with its recipes is not an empty type or a missing craft', () => {
   const machines = [
     { id: 'gtca:recycler', tier: 1, mb: false, types: ['gtca:recycling'] },
