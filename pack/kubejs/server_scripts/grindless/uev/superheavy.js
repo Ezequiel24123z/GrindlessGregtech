@@ -157,15 +157,31 @@
     var SENSOR = 'gtceu:uv_sensor'
     var FIELD = 'gtceu:uv_field_generator'
     SH.controllerRecipes = []
+    // QR-R6: assembly line with station research (the previous machine, the calutron for the cyclotron), the era fluid and domain inputs
+    var ins = {
+      heavy_ion_cyclotron: { research: 'gtceu:calutron', era: 'gtceu:neutronium',
+        ins: [HULL, '2x ' + SENSOR, '2x ' + FIELD, '4x #gtceu:circuits/uhv', '2x grindless:ca48_beam', 'grindless:target_wheel', 'grindless:nb3sn_srf_cavity'] },
+      recoil_separator: { research: 'gtceu:heavy_ion_cyclotron', era: 'gtceu:tritanium',
+        ins: [HULL, '2x ' + SENSOR, '2x ' + FIELD, '4x #gtceu:circuits/uhv', '2x grindless:etched_membrane', 'grindless:ion_tracked_foil', 'grindless:nb3sn_srf_cavity'] },
+      superheavy_chemistry_lab: { research: 'gtceu:recoil_separator', era: 'gtceu:neutronium',
+        ins: [HULL, '2x ' + SENSOR, '2x ' + FIELD, '4x #gtceu:circuits/uhv', '2x grindless:sealed_capsule', 'grindless:polycarbonate_foil', 'grindless:etched_membrane'] }
+    }
     CONTROLLERS.forEach(function (name) {
       var machine = 'gtceu:' + name
-      var missing = [HULL, SENSOR, FIELD, machine].filter(function (id) { return !Item.exists(id) })
+      var d = ins[name]
+      var ids = d.ins.map(function (s) { return s.replace(/^[0-9]+x /, '') }).filter(function (id) { return id.charAt(0) !== '#' }).concat([machine, d.research])
+      var missing = ids.filter(function (id) { return !Item.exists(id) })
       if (missing.length > 0) {
         console.error(LOG + name + ' controller recipe skipped, unknown item(s): ' + missing.join(', '))
         return
       }
-      event.recipes.gtceu.shaped(machine, ['CSC', 'FHF', 'C C'], { C: '#gtceu:circuits/uhv', S: SENSOR, F: FIELD, H: HULL }).id('grindless:crafting/' + name)
-      SH.controllerRecipes.push('grindless:crafting/' + name)
+      var b = event.recipes.gtceu.assembly_line('grindless:' + name)
+      b.itemInputs(d.ins)
+      b.inputFluids(Fluid.of('gtceu:soldering_alloy', 2304), Fluid.of('gtceu:lubricant', 1000), Fluid.of(d.era, 576))
+      b.itemOutputs(machine)
+      b.stationResearch(function (r) { return r.researchStack(Item.of(d.research)).CWUt(64).EUt(491520) })
+      b.EUt(491520).duration(2400)
+      SH.controllerRecipes.push('grindless:assembly_line/' + name)
     })
   }
 

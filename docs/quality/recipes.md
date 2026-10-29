@@ -129,68 +129,8 @@ Process honesty: `sic_epi` returns 1800 mB of the 2000 mB hydrogen carrier; `sic
 
 ### uev
 
-| Output | Class | Now | Missing | File:line |
-|---|---|---|---|---|
-| `grindless:bond_coated_sx_blade` | component | assembler | C-COMPLEX | uev/electron_beam.js:1 |
-| `grindless:ca48_beam` | component | assembler | C-COMPLEX | uev/superheavy.js:1 |
-| `grindless:ca48_oven_charge` | component | assembler | C-COMPLEX | uev/isotopes.js:1 |
-| `grindless:ceramic_shell_mould` | component | assembler | C-COMPLEX | uev/electron_beam.js:1 |
-| `grindless:cnt_coiled_muscle` | component | assembler | C-COMPLEX | uev/earth_orbit.js:1 |
-| `grindless:cnt_twisted_yarn` | component | assembler | C-COMPLEX | uev/earth_orbit.js:1 |
-| `grindless:degenerate_containment_casing` | part | assembler | P-FLUID | uev/sirius.js:1 |
-| `grindless:etchable_core_tube` | component | assembler | C-COMPLEX | uev/earth_orbit.js:1 |
-| `grindless:faraday_isolator` | component | assembler | C-COMPLEX | uev/earth_orbit.js:1 |
-| `grindless:hftacn_coil_block` | part | assembler | P-FLUID | uev/composites.js:1 |
-| `grindless:hftacn_heating_element` | component | assembler | C-COMPLEX | uev/composites.js:1 |
-| `grindless:ktp_electroded_wafer` | component | assembler | C-COMPLEX | uev/earth_orbit.js:1 |
-| `grindless:lobster_eye_mcp` | component | assembler | C-COMPLEX | uev/earth_orbit.js:1 |
-| `grindless:nanotwinned_diamond_anvil` | component | assembler | C-COMPLEX | uev/megabar.js:1 |
-| `grindless:nanotwinned_diamond_bit` | component | assembler | C-COMPLEX | uev/megabar.js:1 |
-| `grindless:photonic_casing` | part | assembler | P-FLUID | uev/photonics.js:1 |
-| `grindless:plutonium_244_target` | component | assembler | C-COMPLEX | uev/isotopes.js:1 |
-| `grindless:plutonium_oxide_target` | component | assembler | C-COMPLEX | uev/isotopes.js:1 |
-| `grindless:polycarbonate_foil` | component | assembler | C-COMPLEX | uev/superheavy.js:1 |
-| `grindless:qd_source` | component | assembler | C-COMPLEX | uev/photonics.js:1 |
-| `grindless:sdd` | component | assembler | C-COMPLEX | uev/photonics.js:1 |
-| `grindless:sealed_capsule` | component | assembler | C-COMPLEX | uev/superheavy.js:1 |
-| `grindless:sic_fibre_preform` | component | assembler | C-COMPLEX | uev/composites.js:1 |
-| `grindless:stacked_preform` | component | assembler | C-COMPLEX | uev/earth_orbit.js:1 |
-| `grindless:superhydride_scoop_coil` | component | assembler | C-COMPLEX | uev/alpha_centauri.js:1 |
-| `grindless:target_wheel` | component | assembler | C-COMPLEX | uev/superheavy.js:1 |
-| `grindless:target_wheel_blank` | component | assembler | C-COMPLEX | uev/superheavy.js:1 |
-| `grindless:uev_fusion_casing` | part | assembler | P-FLUID | uev/fusion.js:10 |
-| `grindless:ule_cavity` | component | assembler | C-COMPLEX | uev/earth_orbit.js:1 |
-| `grindless:ule_mirrored_spacer` | component | assembler | C-COMPLEX | uev/earth_orbit.js:1 |
-| `grindless:w_fibre_preform` | component | assembler | C-COMPLEX | uev/composites.js:1 |
-| `barnard_core_drill` | controller | crafting | C-DISTINCT C-FLUID C-FORM C-RESEARCH | uev/barnard.js:6 |
-| `calutron` | controller | crafting | C-DISTINCT C-DOMAIN C-FLUID C-FORM C-RESEARCH | uev/isotopes.js:11 |
-| `carbonyl_refinery` | controller | crafting | C-DISTINCT C-FLUID C-FORM C-RESEARCH | uev/barnard.js:13 |
-| `containment_works` | controller | crafting | C-DISTINCT C-FLUID C-FORM C-RESEARCH | uev/sirius.js:11 |
-| `cvi_furnace` | controller | crafting | C-DISTINCT C-DOMAIN C-FLUID C-FORM C-RESEARCH | uev/composites.js:186 |
-| `degenerate_harvester` | controller | crafting | C-DISTINCT C-FLUID C-FORM C-RESEARCH | uev/sirius.js:11 |
-| `entanglement_station` | controller | crafting | C-DISTINCT C-DOMAIN C-FLUID C-FORM C-RESEARCH | uev/earth_orbit.js:11 |
-| `heavy_ion_cyclotron` | controller | crafting | C-DISTINCT C-DOMAIN C-FLUID C-FORM C-RESEARCH | uev/superheavy.js:27 |
-| `helium3_polariser` | controller | crafting | C-DISTINCT C-DOMAIN C-FLUID C-FORM C-RESEARCH | uev/fusion.js:74 |
-| `interstellar_dust_lab` | controller | crafting | C-DISTINCT C-FLUID C-FORM C-RESEARCH | uev/alpha_centauri.js:12 |
-| `megabar_press` | controller | crafting | C-DISTINCT C-DOMAIN C-FLUID C-FORM C-RESEARCH | uev/megabar.js:11 |
-| `nebula_collector` | controller | crafting | C-DISTINCT C-DOMAIN C-FLUID C-FORM C-RESEARCH | uev/alpha_centauri.js:12 |
-| `nitride_magnet_works` | controller | crafting | C-DISTINCT C-DOMAIN C-FLUID C-FORM C-RESEARCH | uev/composites.js:184 |
-| `photonic_integration_hall` | controller | crafting | C-DISTINCT C-DOMAIN C-FLUID C-FORM C-RESEARCH | uev/photonics.js:14 |
-| `pulsar_timing_station` | controller | crafting | C-DISTINCT C-FLUID C-FORM C-RESEARCH | uev/alpha_centauri.js:12 |
-| `quantum_gas_lab` | controller | crafting | C-DISTINCT C-DOMAIN C-FLUID C-FORM C-RESEARCH | uev/earth_orbit.js:11 |
-| `recoil_separator` | controller | crafting | C-DISTINCT C-DOMAIN C-FLUID C-FORM C-RESEARCH | uev/superheavy.js:27 |
-| `sic_fibre_plant` | controller | crafting | C-DISTINCT C-DOMAIN C-FLUID C-FORM C-RESEARCH | uev/composites.js:185 |
-| `snspd_foundry` | controller | crafting | C-DISTINCT C-DOMAIN C-FLUID C-FORM C-RESEARCH | uev/photonics.js:14 |
-| `stellar_forge` | controller | assembler | C-DISTINCT C-DOMAIN C-FLUID C-FORM C-RESEARCH | uev/stellar_forge.js:2 |
-| `superheavy_chemistry_lab` | controller | crafting | C-DISTINCT C-DOMAIN C-FLUID C-FORM C-RESEARCH | uev/superheavy.js:27 |
-| `uev_energy_input_hatch` | hatch | assembler | H-FORM | uev/foundation.js:22 |
-| `uev_energy_input_hatch_16a` | hatch | assembler | H-FORM | uev/foundation.js:36 |
-| `uev_energy_output_hatch` | hatch | assembler | H-FORM | uev/foundation.js:29 |
-| `uev_energy_output_hatch_16a` | hatch | assembler | H-FORM | uev/foundation.js:43 |
-| `uev_fusion_reactor` | controller | crafting | C-DISTINCT C-FLUID C-FORM C-RESEARCH | uev/fusion.js:76 |
-| `uev_machine_hull` | single | assembler | S-FORM | uev/foundation.js:15 |
-| `vdw_stacker` | controller | crafting | C-DISTINCT C-DOMAIN C-FLUID C-FORM C-RESEARCH | uev/photonics.js:14 |
-| `white_dwarf_spectrograph` | controller | crafting | C-DISTINCT C-FLUID C-FORM C-RESEARCH | uev/sirius.js:11 |
+Fixed, QR-R6: the uev table rows left the baseline (own-line intermediate pending (follow-up package), still baselined: ca48_oven_charge, plutonium_244_target, ceramic_shell_mould, cnt_twisted_yarn, cnt_coiled_muscle, superhydride_scoop_coil; the five superheavy.js rows ca48_beam, polycarbonate_foil, sealed_capsule, target_wheel and target_wheel_blank were not in this table and remain). Controllers, hull and hatches are assembly lines with station research, an era fluid and domain inputs; hull and input hatches mirror the output hatches with superconductor cables and faraday_isolator/ule_cavity parts. Components earn their score from their own line: own-line intermediates (hbn_film as insulation or release layer, polycarbosilane, hftac blend, lead glass), a process fluid (epoxy, ethanol, oxygen) and argon or helium only where the process needs an inert or cryogenic gas (sputtering, CVD, annealing, superconducting parts). A machine heater (`hftacn_heating_element`) is consumed only by the coil block and the stellar forge.
+
 
 ### uiv
 

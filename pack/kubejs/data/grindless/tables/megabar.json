@@ -68,10 +68,10 @@
     "assembler": {
       "recipes": [
         { "name": "nanotwinned_diamond_anvil", "circuit": 0, "eut": 1966080, "duration": 400,
-          "itemsIn": [{ "id": "grindless:nanotwinned_diamond", "count": 4 }, { "id": "gtceu:tungsten_steel_plate", "count": 2 }], "kept": [], "fluidsIn": [], "charge": [],
+          "itemsIn": [{ "id": "grindless:nanotwinned_diamond", "count": 4 }, { "id": "gtceu:tungsten_steel_plate", "count": 2 }, { "id": "grindless:ammonia_borane_charge", "count": 1 }], "kept": [], "fluidsIn": [], "charge": [],
           "itemsOut": [{ "id": "grindless:nanotwinned_diamond_anvil", "count": 1 }], "fluidsOut": [] },
         { "name": "nanotwinned_diamond_bit", "circuit": 0, "eut": 1966080, "duration": 300,
-          "itemsIn": [{ "id": "grindless:nanotwinned_diamond", "count": 2 }, { "id": "gtceu:tungsten_steel_rod", "count": 2 }], "kept": [], "fluidsIn": [], "charge": [],
+          "itemsIn": [{ "id": "grindless:nanotwinned_diamond", "count": 2 }, { "id": "gtceu:tungsten_steel_rod", "count": 2 }, { "id": "grindless:ammonia_borane_charge", "count": 1 }], "kept": [], "fluidsIn": [], "charge": [],
           "itemsOut": [{ "id": "grindless:nanotwinned_diamond_bit", "count": 1 }], "fluidsOut": [] }
       ]
     }

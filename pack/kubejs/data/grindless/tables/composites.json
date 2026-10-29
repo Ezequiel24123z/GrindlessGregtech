@@ -7,7 +7,7 @@
           "itemsIn": [{ "id": "grindless:reduced_iron_powder", "count": 16 }], "kept": [], "fluidsIn": [{ "id": "gtceu:ammonia", "amount": 2000 }], "charge": [],
           "itemsOut": [{ "id": "gtceu:fe16n2_dust", "count": 1 }], "fluidsOut": [{ "id": "gtceu:hydrogen", "amount": 3000 }] },
         { "name": "strain_anneal", "circuit": 2, "eut": 1966080, "duration": 400,
-          "itemsIn": [{ "id": "gtceu:fe16n2_dust", "count": 1 }], "kept": [], "fluidsIn": [], "charge": [],
+          "itemsIn": [{ "id": "gtceu:fe16n2_dust", "count": 1 }, { "id": "grindless:reduced_iron_powder", "count": 1 }], "kept": [], "fluidsIn": [{ "id": "gtceu:nitrogen", "amount": 1000 }], "charge": [],
           "itemsOut": [{ "id": "grindless:strain_annealed_fe16n2_powder", "count": 1 }], "fluidsOut": [] },
         { "name": "bonded_magnet", "circuit": 3, "eut": 1966080, "duration": 300,
           "itemsIn": [{ "id": "grindless:strain_annealed_fe16n2_powder", "count": 4 }, { "id": "gtceu:polycarbonate_dust", "count": 1 }], "kept": [], "fluidsIn": [], "charge": [],
@@ -27,11 +27,11 @@
       "dataKey": "grindless_sic_fibre_spinning",
       "recipes": [
         { "name": "green_fibre", "circuit": 1, "eut": 1966080, "duration": 300,
-          "itemsIn": [{ "id": "grindless:polycarbosilane_dust", "count": 1 }], "kept": [], "fluidsIn": [], "charge": [],
-          "itemsOut": [{ "id": "grindless:green_sic_fibre", "count": 1 }], "fluidsOut": [] },
+          "itemsIn": [{ "id": "grindless:polycarbosilane_dust", "count": 1 }], "kept": [], "fluidsIn": [{ "id": "gtceu:argon", "amount": 1000 }], "charge": [],
+          "itemsOut": [{ "id": "grindless:green_sic_fibre", "count": 1 }], "fluidsOut": [{ "id": "gtceu:methane", "amount": 300 }] },
         { "name": "ebeam_cure", "circuit": 2, "eut": 1966080, "duration": 200,
-          "itemsIn": [{ "id": "grindless:green_sic_fibre", "count": 1 }], "kept": [], "fluidsIn": [], "charge": [],
-          "itemsOut": [{ "id": "grindless:cured_sic_fibre", "count": 1 }], "fluidsOut": [] },
+          "itemsIn": [{ "id": "grindless:green_sic_fibre", "count": 1 }], "kept": [], "fluidsIn": [{ "id": "gtceu:nitrogen", "amount": 500 }], "charge": [],
+          "itemsOut": [{ "id": "grindless:cured_sic_fibre", "count": 1 }], "fluidsOut": [{ "id": "gtceu:hydrogen", "amount": 200 }] },
         { "name": "sic_fibre", "circuit": 3, "eut": 1966080, "duration": 400,
           "itemsIn": [{ "id": "grindless:cured_sic_fibre", "count": 1 }], "kept": [], "fluidsIn": [], "charge": [],
           "itemsOut": [{ "id": "grindless:sic_fibre", "count": 1 }], "fluidsOut": [{ "id": "gtceu:methane", "amount": 500 }, { "id": "gtceu:hydrogen", "amount": 1000 }] }
@@ -98,7 +98,10 @@
       "recipes": [
         { "name": "hftac_blend", "circuit": 0, "eut": 7680, "duration": 200,
           "itemsIn": [{ "id": "grindless:hafnia_dust", "count": 2 }, { "id": "grindless:tantalum_pentoxide_dust", "count": 1 }, { "id": "gtceu:carbon_dust", "count": 5 }], "kept": [], "fluidsIn": [], "charge": [],
-          "itemsOut": [{ "id": "grindless:hftac_blend_dust", "count": 8 }], "fluidsOut": [] }
+          "itemsOut": [{ "id": "grindless:hftac_blend_dust", "count": 8 }], "fluidsOut": [] },
+        { "name": "hftacn_milling", "circuit": 0, "eut": 7680, "duration": 200,
+          "itemsIn": [{ "id": "grindless:hftacn_crude_dust", "count": 1 }, { "id": "gtceu:carbon_dust", "count": 1 }], "kept": [], "fluidsIn": [], "charge": [],
+          "itemsOut": [{ "id": "grindless:hftacn_powder", "count": 1 }], "fluidsOut": [] }
       ]
     },
     "electric_blast_furnace": {
@@ -112,13 +115,6 @@
           "itemsOut": [{ "id": "grindless:reduced_iron_powder", "count": 1 }], "fluidsOut": [{ "id": "gtceu:steam", "amount": 2000 }] }
       ]
     },
-    "macerator": {
-      "recipes": [
-        { "name": "hftacn_milling", "circuit": 0, "eut": 1920, "duration": 200,
-          "itemsIn": [{ "id": "grindless:hftacn_crude_dust", "count": 1 }], "kept": [], "fluidsIn": [], "charge": [],
-          "itemsOut": [{ "id": "grindless:hftacn_powder", "count": 1 }], "fluidsOut": [] }
-      ]
-    },
     "compressor": {
       "recipes": [
         { "name": "ffkm_seal", "circuit": 0, "eut": 480, "duration": 200,
@@ -129,16 +125,16 @@
     "assembler": {
       "recipes": [
         { "name": "hftacn_heating_element", "circuit": 0, "eut": 30720, "duration": 200,
-          "itemsIn": [{ "id": "gtceu:hftacn_ingot", "count": 2 }, { "id": "gtceu:tritanium_foil", "count": 4 }], "kept": [], "fluidsIn": [], "charge": [],
+          "itemsIn": [{ "id": "gtceu:hftacn_ingot", "count": 2 },           { "id": "gtceu:tritanium_foil", "count": 4 }], "kept": [], "fluidsIn": [{ "id": "gtceu:helium", "amount": 1000 }], "charge": [],
           "itemsOut": [{ "id": "grindless:hftacn_heating_element", "count": 1 }], "fluidsOut": [] },
         { "name": "hftacn_coil_block", "circuit": 0, "eut": 122880, "duration": 300,
-          "itemsIn": [{ "id": "grindless:hftacn_heating_element", "count": 8 }, { "id": "gtceu:tritanium_plate", "count": 2 }], "kept": [], "fluidsIn": [], "charge": [],
+          "itemsIn": [{ "id": "grindless:hftacn_heating_element", "count": 8 }, { "id": "gtceu:tritanium_plate", "count": 2 }], "kept": [], "fluidsIn": [{ "id": "gtceu:helium", "amount": 1000 }], "charge": [],
           "itemsOut": [{ "id": "grindless:hftacn_coil_block", "count": 1 }], "fluidsOut": [] },
         { "name": "sic_fibre_preform", "circuit": 0, "eut": 30720, "duration": 300,
-          "itemsIn": [{ "id": "grindless:bn_coated_sic_fibre", "count": 8 }], "kept": [], "fluidsIn": [], "charge": [],
+          "itemsIn": [{ "id": "grindless:bn_coated_sic_fibre", "count": 8 }, { "id": "gtceu:tritanium_foil", "count": 2 }, { "id": "grindless:polycarbosilane_dust", "count": 1 }], "kept": [], "fluidsIn": [], "charge": [],
           "itemsOut": [{ "id": "grindless:sic_fibre_preform", "count": 1 }], "fluidsOut": [] },
         { "name": "w_fibre_preform", "circuit": 0, "eut": 30720, "duration": 300,
-          "itemsIn": [{ "id": "grindless:coated_w_wire", "count": 16 }], "kept": [], "fluidsIn": [], "charge": [],
+          "itemsIn": [{ "id": "grindless:coated_w_wire", "count": 16 }, { "id": "grindless:hftac_blend_dust", "count": 1 }], "kept": [], "fluidsIn": [{ "id": "gtceu:argon", "amount": 500 }], "charge": [],
           "itemsOut": [{ "id": "grindless:w_fibre_preform", "count": 1 }], "fluidsOut": [] },
         { "name": "uev_electric_motor", "circuit": 0, "eut": 2097152, "duration": 300,
           "itemsIn": [{ "id": "grindless:bonded_fe16n2_magnet", "count": 2 }, { "id": "gtceu:lay_superhydride_single_cable", "count": 4 }, { "id": "grindless:sic_sic_plate", "count": 2 }, { "id": "grindless:ffkm_seal", "count": 2 }], "kept": [], "fluidsIn": [], "charge": [],
