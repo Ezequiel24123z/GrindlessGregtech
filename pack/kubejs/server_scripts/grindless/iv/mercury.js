@@ -256,7 +256,7 @@
 
       event.recipes.gtceu.assembler('grindless:mercury_solar_works')
         .itemInputs('gtceu:iv_machine_hull', 'gtceu:heliostat_tower', 'gtceu:iv_electric_furnace', 'gtceu:iv_assembler', '4x #gtceu:circuits/iv',
-          '4x grindless:hermean_heat_shield_brick', '2x grindless:zircaloy_cladding_tube')
+          '4x grindless:heliostat_mirror', '2x grindless:zircaloy_cladding_tube')
         .inputFluids(Fluid.of('gtceu:soldering_alloy', 288), Fluid.of('gtceu:lubricant', 500))
         .itemOutputs(M.works.machine)
         .EUt(1920).duration(600)
