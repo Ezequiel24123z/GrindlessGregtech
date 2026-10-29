@@ -69,7 +69,7 @@
           var wall = si === 0 || si === last || c === 0 || c === m.width - 1
           if (r === 0) ch = 'X'
           else if (si === last && r === 1 && c === mid) ch = 'S'
-          else if (wall || r === m.height - 1) ch = 'F'
+          else if (wall || r === m.height - 1) ch = m.wallChar ? m.wallChar(r, si, c, last) : 'F'
           else ch = inner(r, si, c)
           row += ch
         }
@@ -81,7 +81,19 @@
   }
 
   // the bubble column: an open 1 x 1 shaft up the middle
-  function pyrolyserInner(r, si, c) { return '#' }
+  // QR-B0 pilot: a reactor tower, not a plain column. Tungstensteel frame posts at the four corners, a coil band every four rows
+  // (the heaters of the tin-nickel bath), glass sight windows between the bands, and a pipe riser inside (the bubble column).
+  var PY_COIL = 'gtceu:nichrome_coil_block'
+  var PY_GLASS = 'gtceu:fusion_glass'
+  function pyrolyserWall(r, si, c, last) {
+    var corner = (si === 0 || si === last) && (c === 0 || c === 2)
+    if (r === 11) return corner ? 'R' : 'F'
+    if (corner) return 'R'
+    if (r % 4 === 0) return 'K'
+    if (r % 4 === 2) return 'G'
+    return 'F'
+  }
+  function pyrolyserInner(r, si, c) { return r % 2 === 1 ? 'P' : '#' }
   // the gas-lift loop: a pipe column up the middle
   function bioreactorInner(r, si, c) { return si === 2 && c === 2 ? 'P' : '#' }
   // the CO2 compressor: one pipe in the middle of the autoclave
@@ -97,10 +109,14 @@
         X: Pat.oneOf.apply(null, oneOf),
         F: Pat.block(m.casing),
         P: Pat.block(PIPE),
-        '#': Pat.air()
+        '#': Pat.air(),
+        R: Pat.frame(['tungstensteel']),
+        K: Pat.block(PY_COIL),
+        G: Pat.block(PY_GLASS)
       }
     }
   }
+  OC.machines.pyrolyser.wallChar = pyrolyserWall
   OC.machines.pyrolyser.spec = specOf(OC.machines.pyrolyser, pyrolyserInner)
   OC.machines.bioreactor.spec = specOf(OC.machines.bioreactor, bioreactorInner)
   OC.machines.aerogel.spec = specOf(OC.machines.aerogel, aerogelInner)
