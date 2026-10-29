@@ -270,8 +270,7 @@
           "duration": 200,
           "itemsIn": [
             { "id": "gtceu:calcium_48_dust", "count": 4 },
-            { "id": "gtceu:platinum_foil", "count": 1 },
-            { "id": "grindless:hftacn_heating_element", "count": 1 }
+            { "id": "gtceu:platinum_foil", "count": 1 }
           ],
           "kept": [],
           "charge": [],
@@ -301,8 +300,7 @@
           "duration": 200,
           "itemsIn": [
             { "id": "gtceu:plutonium_244_oxide_dust", "count": 1 },
-            { "id": "gtceu:aluminium_foil", "count": 2 },
-            { "id": "grindless:hftacn_heating_element", "count": 1 }
+            { "id": "gtceu:aluminium_foil", "count": 2 }
           ],
           "kept": [],
           "charge": [],

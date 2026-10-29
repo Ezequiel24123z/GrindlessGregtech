@@ -71,6 +71,12 @@
   "_to_"
  ],
  "baseline": {
+  "grindless:assembler/ca48_oven_charge|grindless:ca48_oven_charge": ["C-COMPLEX"],
+  "grindless:assembler/ceramic_shell_mould|grindless:ceramic_shell_mould": ["C-COMPLEX"],
+  "grindless:assembler/cnt_coil|grindless:cnt_coiled_muscle": ["C-COMPLEX"],
+  "grindless:assembler/cnt_twist|grindless:cnt_twisted_yarn": ["C-COMPLEX"],
+  "grindless:assembler/plutonium_244_target|grindless:plutonium_244_target": ["C-COMPLEX"],
+  "grindless:assembler/superhydride_scoop_coil|grindless:superhydride_scoop_coil": ["C-COMPLEX"],
   "grindless:assembler/aqfp_bond|grindless:aqfp_module": ["C-COMPLEX"],
   "grindless:assembler/assembler/cage_part|grindless:cage_part": ["C-COMPLEX"],
   "grindless:assembler/assembler/neutron_guide|grindless:neutron_guide": ["C-COMPLEX"],

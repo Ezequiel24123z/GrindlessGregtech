@@ -37,7 +37,7 @@
       "recipes": [
         { "name": "degenerate_containment_casing", "circuit": 0, "eut": 1966080, "duration": 300,
           "itemsIn": [{ "id": "gtceu:uev_machine_casing", "count": 1 }, { "id": "grindless:sic_sic_plate", "count": 4 }, { "id": "grindless:hollow_core_fibre", "count": 1 }],
-          "kept": [], "fluidsIn": [{ "id": "gtceu:helium", "amount": 1000 }], "charge": [],
+          "kept": [], "fluidsIn": [{ "id": "gtceu:epoxy", "amount": 144 }], "charge": [],
           "itemsOut": [{ "id": "grindless:degenerate_containment_casing", "count": 1 }], "fluidsOut": [] },
         { "name": "uev_field_generator", "circuit": 0, "eut": 7864320, "duration": 600,
           "itemsIn": [{ "id": "grindless:degenerate_pellet", "count": 1 }, { "id": "grindless:sx_pump_impeller", "count": 1 }, { "id": "grindless:uev_emitter", "count": 2 }, { "id": "grindless:uev_sensor", "count": 2 }],

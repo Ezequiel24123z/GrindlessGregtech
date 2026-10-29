@@ -62,7 +62,7 @@
     "assembler": {
       "recipes": [
         { "name": "superhydride_scoop_coil", "circuit": 0, "eut": 491520, "duration": 400,
-          "itemsIn": [{ "id": "gtceu:lay_superhydride_single_wire", "count": 16 }, { "id": "gtceu:lay_superhydride_plate", "count": 4 }, { "id": "gtceu:uv_field_generator", "count": 1 }, { "id": "grindless:hftacn_heating_element", "count": 1 }],
+          "itemsIn": [{ "id": "gtceu:lay_superhydride_single_wire", "count": 16 }, { "id": "gtceu:lay_superhydride_plate", "count": 4 }, { "id": "gtceu:uv_field_generator", "count": 1 }],
           "kept": [], "fluidsIn": [{ "id": "gtceu:helium", "amount": 1000 }], "charge": [],
           "itemsOut": [{ "id": "grindless:superhydride_scoop_coil", "count": 1 }], "fluidsOut": [] }
       ]

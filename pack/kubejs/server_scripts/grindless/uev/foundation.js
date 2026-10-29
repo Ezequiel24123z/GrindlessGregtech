@@ -23,12 +23,12 @@ ServerEvents.recipes(function (event) {
   }
 
   line('uev_machine_hull', 'gtceu:uev_machine_casing',
-    ['gtceu:uev_machine_casing', '2x gtceu:lay_superhydride_single_cable', '4x grindless:sic_sic_plate', '2x grindless:hftacn_heating_element', '2x grindless:ule_cavity'],
+    ['gtceu:uev_machine_casing', '2x gtceu:lay_superhydride_single_cable', '4x grindless:sic_sic_plate', '2x grindless:faraday_isolator', '2x grindless:ule_cavity'],
     'gtceu:uev_machine_hull')
 
   // 2 A hatches take single cables, the 16 A ones quadruple cables; the domain part keeps the four apart
   line('uev_energy_input_hatch', 'gtceu:uev_machine_hull',
-    ['gtceu:uev_machine_hull', '2x gtceu:lay_superhydride_single_cable', '2x grindless:faraday_isolator', '1x grindless:hftacn_heating_element'],
+    ['gtceu:uev_machine_hull', '2x gtceu:lay_superhydride_single_cable', '2x grindless:faraday_isolator', '1x grindless:ule_cavity'],
     'gtceu:uev_energy_input_hatch')
 
   line('uev_energy_output_hatch', 'gtceu:uev_machine_hull',
@@ -36,7 +36,7 @@ ServerEvents.recipes(function (event) {
     'gtceu:uev_energy_output_hatch')
 
   line('uev_energy_input_hatch_16a', 'gtceu:uev_machine_hull',
-    ['gtceu:uev_machine_hull', '2x gtceu:lay_superhydride_quadruple_cable', '4x grindless:faraday_isolator', '2x grindless:hftacn_heating_element'],
+    ['gtceu:uev_machine_hull', '2x gtceu:lay_superhydride_quadruple_cable', '4x grindless:faraday_isolator', '2x grindless:ule_cavity'],
     'gtceu:uev_energy_input_hatch_16a')
 
   line('uev_energy_output_hatch_16a', 'gtceu:uev_machine_hull',
