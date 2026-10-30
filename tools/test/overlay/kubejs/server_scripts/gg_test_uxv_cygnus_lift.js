@@ -28,8 +28,8 @@
   var HV = ['gtceu:hv_input_bus', 'gtceu:hv_output_bus', 'gtceu:hv_input_hatch', 'gtceu:hv_output_hatch']
 
   var UNITS = [
-    { name: 'elevator', id: 'gtceu:stellar_elevator', cx: 36808, z: 2, parts: [ENERGY, ENERGY].concat(HV), run: true },
-    { name: 'filter', id: 'gtceu:plasma_mass_filter', cx: 36824, z: 2, parts: [ENERGY, ENERGY].concat(HV), run: false },
+    { name: 'elevator', id: 'gtceu:stellar_elevator', cx: 36808, z: 2, parts: [ENERGY, ENERGY].concat(HV, ['gtceu:hv_output_hatch']), run: true },
+    { name: 'filter', id: 'gtceu:plasma_mass_filter', cx: 36824, z: 2, parts: [ENERGY, ENERGY, 'gtceu:hv_input_bus', 'gtceu:hv_input_hatch', 'gtceu:hv_output_hatch'], run: false },
     { name: 'tower', id: 'gtceu:stellar_condensation_tower', cx: 36840, z: 2, parts: [ENERGY, ENERGY].concat(HV), run: false }
   ]
 
@@ -168,8 +168,9 @@
     u.bus = partsLike(m, /input_bus/)[0]
     u.out = partsLike(m, /output_bus/)[0]
     u.hatch = partsLike(m, /^(?!.*energy).*input_hatch/)[0]
-    u.outHatch = partsLike(m, /output_hatch/)[0]
-    var ok = !!u.bus && !!u.out && !!u.hatch && !!u.outHatch && u.energy.length === 2
+    u.outHatches = partsLike(m, /output_hatch/)
+    u.outHatch = u.outHatches[0]
+    var ok = !!u.bus && (!!u.out || u.name === 'filter') && !!u.hatch && !!u.outHatch && u.energy.length === 2
     check(u.name + '_formed', ok, 'class ' + m.getClass().getSimpleName() + ', UIV energy hatches ' + u.energy.length + ', parts ' + array(m.getParts()).length)
     return ok
   }
@@ -214,9 +215,10 @@
       return
     }
     if (u.phase === 'wait') {
-      var plasma = tankAmount(u.outHatch, 'gtceu:stellar_plasma')
+      var plasma = 0
+      var warm = 0
+      u.outHatches.forEach(function (h) { plasma += tankAmount(h, 'gtceu:stellar_plasma'); warm += tankAmount(h, 'gtceu:helium') })
       if (plasma >= 1000) {
-        var warm = tankAmount(u.outHatch, 'gtceu:helium')
         check(u.name + '_output', warm >= 900, 'stellar plasma ' + plasma + ' mB, warm helium ' + warm + ' mB')
         u.phase = 'done'
       } else if (waited > 1800) {
