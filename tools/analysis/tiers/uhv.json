@@ -2487,14 +2487,16 @@
         "grindless:sirius_b_orbit",
         "grindless:rx_j1856_orbit",
         "grindless:psr_j0437_orbit",
-        "grindless:cygnus_x1_orbit"
+        "grindless:cygnus_x1_orbit",
+        "grindless:vela_pulsar_orbit",
+        "grindless:cas_a_remnant"
       ],
       "exceptRecipes": [
         "grindless:warp_gate/hold*"
       ],
       "package": "B7",
       "exact": true,
-      "note": "The dump holds every era: open and sustain share one ends list (gate.json `orbits`). The hold rows are UEV's (Sirius B) and UIV's (relays); uev.json checks them."
+      "note": "The dump holds every era: open and sustain share one ends list (gate.json `orbits`; UXV-B1 adds the Vela pulsar orbit and Cassiopeia A, uhv/gate.js:36). The hold rows are UEV's (Sirius B) and UIV's (relays); uev.json checks them."
     },
     {
       "id": "site-proxima-orbit",
