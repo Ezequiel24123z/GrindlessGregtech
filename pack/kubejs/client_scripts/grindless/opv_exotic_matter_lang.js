@@ -1,3 +1,4 @@
+// priority: 5975
 (function () {
   var entries = [
     ['block.gtceu.strangelet_vault', 'Strangelet Vault', 'Bóveda de strangelets'],
@@ -17,8 +18,8 @@
     ['tooltip.grindless.grown_strangelet.0', 'Trap-held strange matter; stabilise it with a field-frozen plate.', 'Materia extraña retenida en una trampa; estabilízala con una placa congelada por campo.'],
     ['tooltip.grindless.strangelet_tailings.0', 'Beta-active: decay storage in the hot cell returns inert lead.', 'Activos beta: el almacenamiento de desintegración en la celda caliente devuelve plomo inerte.'],
     ['tooltip.grindless.negative_strangelet_residue.0', 'Dangerous: only the Cygnus X-1 distiller can discard it into the black hole.', 'Peligroso: solo el destilador de Cygnus X-1 puede desecharlo en el agujero negro.'],
-    ['grindless.machine.strangelet_vault.tooltip.0', 'Grows and stabilises positive strangelets in a shielded trap.', 'Hace crecer y estabiliza strangelets positivos en una trampa blindada.'],
-    ['grindless.machine.strangelet_distiller.tooltip.0', 'Distils strangelet seeds from a baryon-rich fireball.', 'Destila semillas de strangelets de una bola de fuego rica en bariones.'],
+    ['grindless.machine.strangelet_vault.tooltip.0', '\u00a77Grows and stabilises positive strangelets in a shielded trap.', '\u00a77Hace crecer y estabiliza strangelets positivos en una trampa blindada.'],
+    ['grindless.machine.strangelet_distiller.tooltip.0', '\u00a77Distils strangelet seeds from a baryon-rich fireball.', '\u00a77Destila semillas de strangelets de una bola de fuego rica en bariones.'],
     ['grindless.machine.strangelet_distiller.tooltip.1', 'Discards only negative residue into Cygnus X-1.', 'Desecha solo residuos negativos en Cygnus X-1.'],
     ['grindless.machine.strangelet_vault.no_voiding', 'Keep the matter and beta-active tailings: disable output voiding.', 'Conserva la materia y los residuos activos beta: desactiva el descarte de salidas.'],
     ['grindless.machine.strangelet_distiller.no_voiding', 'Keep the seeds and residue: only the disposal recipe may discard.', 'Conserva semillas y residuos: solo la receta de eliminación puede descartar.'],
