@@ -722,20 +722,22 @@
     })
   }
 
-  // OpV-D1 rows (opv.md line 21; circuits 15-16): a spent spallation target's iridium core, declad in the hot cell (c17), dissolved and
-  // refined back to 5N iridium (13 of the 16 that went in); the 3 transmuted by spallation leave as a residue, whose aqua regia leach
-  // gives back the iridium left in it with the osmium, rhenium and tungsten it became. Same electrode wear and no voiding of the cargo.
+  // OpV-D1 rows (opv.md line 21; circuits 15-16): a spent spallation target's iridium core, declad in the hot cell (c18), dissolved and
+  // reduced back to iridium dust (13 of the 16 that went in), which circuit 13 refines to 5N again (grindless:five_n_iridium stays
+  // UXV-A2's alone); the 3 transmuted by spallation leave as a residue, whose aqua regia leach gives back the iridium left in it with
+  // the osmium and tungsten it became (no rhenium: gtceu:rhenium_dust is Barnard's alone).
+  // Same electrode wear and no voiding of the cargo.
   var OPV_ROWS = [
     {
       name: 'ir_core_recovery', circuit: 15,
       itemIn: 'grindless:decladded_ir_core', fluidsIn: [['gtceu:chlorine', 4000], ['gtceu:hydrogen', 4000]],
-      itemsOut: [['grindless:five_n_iridium', 13], ['grindless:ir_spallation_residue', 1]], fluidsOut: [['gtceu:hydrochloric_acid', 4000]],
+      itemsOut: [['gtceu:iridium_dust', 13], ['grindless:ir_spallation_residue', 1]], fluidsOut: [['gtceu:hydrochloric_acid', 4000]],
       eut: 1920, duration: 1200
     },
     {
       name: 'ir_spallation_residue', circuit: 16,
       itemIn: 'grindless:ir_spallation_residue', fluidsIn: [['gtceu:hydrochloric_acid', 3000], ['gtceu:nitric_acid', 1000]],
-      itemsOut: [['gtceu:iridium_dust', 1], ['gtceu:osmium_dust', 1], ['gtceu:rhenium_dust', 1], ['gtceu:tungsten_dust', 1]],
+      itemsOut: [['gtceu:iridium_dust', 1], ['gtceu:osmium_dust', 1], ['gtceu:tungsten_dust', 1]],
       fluidsOut: [['minecraft:water', 2000]],
       eut: 1920, duration: 600
     }

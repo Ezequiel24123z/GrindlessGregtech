@@ -141,9 +141,7 @@ test('the five older rows exist', () => {
   const eb = JSON.parse(fs.readFileSync(path.join(tables, 'electron_beam.json'), 'utf8')).types.electron_beam_refining.recipes;
   const button = eb.find((r) => r.name === 'nb_ta_button');
   assert.equal(button.circuit, 7);
-  // OpV-F3 lets an EB circuit repeat when the item inputs differ (OpV-D1's c25 pair): circuit plus item inputs stay unique
-  const ebKey = (r) => `${r.circuit}|${ids(r.itemsIn).concat(ids(r.kept)).sort().join(',')}`;
-  assert.equal(new Set(eb.map(ebKey)).size, eb.length);
+  assert.equal(new Set(eb.map((r) => r.circuit)).size, eb.length);
   assert.ok(ids(button.itemsOut).includes('grindless:nb_ta_button'));
   const comp = JSON.parse(fs.readFileSync(path.join(tables, 'composites.json'), 'utf8')).types;
   const halbach = comp.nitride_magnet_synthesis.recipes;
