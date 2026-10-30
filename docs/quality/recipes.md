@@ -212,3 +212,8 @@ QR-R7: the 20 controllers, `uiv_parallel_hatch`, the 4 energy hatches and `uiv_m
 | `grindless:uiv_emitter` | component | assembler | C-COMPLEX (UIV own-line intermediate pending (UIV build, v0.14.0)) | uiv/j0437.js:1 |
 | `grindless:uiv_sensor` | component | assembler | C-COMPLEX (UIV own-line intermediate pending (UIV build, v0.14.0)) | uiv/mainframe.js:5 |
 | `grindless:wound_rhea_former` | component | assembler | C-COMPLEX (UIV own-line intermediate pending (UIV build, v0.14.0)) | uiv/levitation_melter.js:1 |
+
+### uxv
+
+Fixed, TP-R-uxv: 8 of the 108 T-* findings (the fractionation hall, the fusion reactor, the hull, the parallel hatch and the fusion casing) use UXV components, circuits, hull and EU/t.
+Still baselined (100 findings, 20 recipes): the other 20 controllers are upstream of the component chain: the UXV hull needs filtered disk, which needs the plasma mass filter and its spintronic mainframe, so every machine in that chain (mainframe, strand, plasma, shequid, MTJ) keeps UIV parts and hull; re-tiering them made obtain cyclic (three runs). They need a second pass that splits the chain.
