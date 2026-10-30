@@ -717,6 +717,39 @@
       "volume": 0.65,
       "attenuation": 24,
       "quality": 0
+    },
+    {
+      "id": "loop_accretion_disk_skimmer",
+      "recipeType": "gtceu:disk_skimming",
+      "prompt": "Seamless looping sound of a huge magnetic scoop drawing hot plasma: a rising electromagnetic whine, a deep rushing suction and crackling ionised gas, no voices, no music",
+      "duration": 6,
+      "loop": true,
+      "promptInfluence": 0.5,
+      "volume": 0.65,
+      "attenuation": 24,
+      "quality": 0
+    },
+    {
+      "id": "loop_frc_former",
+      "recipeType": "gtceu:frc_forming",
+      "prompt": "Seamless looping sound of a theta-pinch plasma former: a rapid heavy capacitor discharge thump, a high electric ring and a hum of superconducting coils, no voices, no music",
+      "duration": 6,
+      "loop": true,
+      "promptInfluence": 0.5,
+      "volume": 0.65,
+      "attenuation": 24,
+      "quality": 0
+    },
+    {
+      "id": "loop_bz_dynamo",
+      "recipeType": "gtceu:blandford_znajek",
+      "prompt": "Seamless looping sound of a colossal power generator: a very deep steady turbine-like hum, a slow throbbing pulse and a high humming electric field, no voices, no music",
+      "duration": 6,
+      "loop": true,
+      "promptInfluence": 0.5,
+      "volume": 0.65,
+      "attenuation": 24,
+      "quality": 0
     }
   ]
 }

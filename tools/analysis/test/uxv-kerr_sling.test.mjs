@@ -200,5 +200,6 @@ test('the zone row: band X 36736-36799, Z 0-63, Y 98-115, its test and a note na
 test('F1 ids now produced: the B1 obtain rule is gone, the others stay', () => {
   const o = fs.readFileSync(path.join(root, 'tools', 'analysis', 'tiers', 'obtain.json'), 'utf8');
   assert.ok(!/UXV \(B1\)/.test(o));
-  assert.ok(/UXV \(B3\)/.test(o), 'B3 rule (frc_cartridge) untouched');
+  // UXV-B3 deleted its own rule (the cartridge, disk plasma, flux plasma and field generator now have producers)
+  assert.ok(!/UXV \(B3\)/.test(o), 'B3 rule deleted by UXV-B3');
 });
