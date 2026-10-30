@@ -289,6 +289,13 @@
       "fluidsIn": [],
       "itemsOut": [{ "id": "gtceu:calcium_dust", "count": 1 }, { "id": "gtceu:small_tungsten_dust", "count": 2 }],
       "fluidsOut": []
+    },
+    {
+      "_why": "OpV-D2: beta-active strangelet tailings decay in shielded storage; inert lead returns to stock",
+      "name": "strangelet_tailings_decay", "circuit": 19, "eut": 268435456, "duration": 1200,
+      "itemsIn": [{"id": "grindless:strangelet_tailings", "count": 1}],
+      "itemsOut": [{"id": "gtceu:lead_dust", "count": 1}],
+      "fluidsIn": [], "fluidsOut": []
     }
   ]
 }
