@@ -186,7 +186,7 @@
     b.inputFluids(Fluid.of('gtceu:soldering_alloy', 2304), Fluid.of('gtceu:lubricant', 2000), Fluid.of('gtceu:neutronium', 576))
     b.itemOutputs(machine)
     b.stationResearch(function (r) { return r.researchStack(Item.of(research)).CWUt(64).EUt(7864320) })
-    b.EUt(7864320).duration(1500)
+    b.EUt(31457280).duration(1500)
     MH.controllerRecipes.push('grindless:assembly_line/ramp_compression_pulser')
   }
 
