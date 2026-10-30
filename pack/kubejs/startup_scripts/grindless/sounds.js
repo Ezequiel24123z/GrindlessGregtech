@@ -76,7 +76,10 @@
     'gtceu:racetrack_patterning': 'loop_racetrack_fab',
     'gtceu:liquid_phase_epitaxy': 'loop_yig_lpe_furnace',
     'gtceu:shequid_assembly': 'loop_shequid_works',
-    'gtceu:multinucleon_transfer': 'loop_mnt_collider'
+    'gtceu:multinucleon_transfer': 'loop_mnt_collider',
+    'gtceu:star_lifting': 'loop_stellar_elevator',
+    'gtceu:plasma_mass_filtering': 'loop_plasma_mass_filter',
+    'gtceu:stellar_condensation': 'loop_stellar_condensation_tower'
   }
 
   StartupEvents.registry('sound_event', function (event) {
