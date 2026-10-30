@@ -176,7 +176,8 @@ test('every id A3 names is in the pinned native registry, not a naming guess the
   const later = (r) => /^U[IX][VX]-/.test((r && r._why) || '');
   const laterIds = new Set(JSON.parse(fs.readFileSync(path.join(pack, 'kubejs', 'data', 'grindless', 'tables', 'coated_conductor_line.json'), 'utf8'))
     .recipes.filter(later).map((r) => 'grindless:coated_conductor/' + r.name));
-  for (const r of ours.filter((x) => !laterIds.has(x.i))) {
+  // OpV-D1's two refrigerator rows (server_scripts/grindless/luv/helium_refrigerator.js, opv_*): opv-beam_hardware.test proves their ids
+  for (const r of ours.filter((x) => !laterIds.has(x.i) && !/^grindless:closed_loop_cooling\/opv_/.test(x.i))) {
     const walk = (o, key) => {
       if (Array.isArray(o)) return o.forEach((x) => walk(x, key));
       if (!o || typeof o !== 'object') return;

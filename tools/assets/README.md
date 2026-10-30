@@ -1645,3 +1645,12 @@ Procedural, drawn by `Build-OpVWirelessTextures.ps1` with the routines and palet
 powershell -NoProfile -ExecutionPolicy Bypass -File tools\assets\Build-OpVWirelessTextures.ps1
 powershell -NoProfile -ExecutionPolicy Bypass -File tools\assets\Build-OpVWirelessTextures.ps1 -Credits
 ```
+
+## OpV beam hardware (OpV-D1)
+
+Procedural, drawn by `Build-OpVBeamHardwareTextures.ps1` with the shape routines of the OpV foundation script and a new palette per item; nothing is copied from another mod. It writes the 22 item icons that `startup_scripts/grindless/opv/beam_hardware.js` registers (`item/<id>.png`). Bred tritium gas needs no PNG (GregTech draws it from its colour).
+
+```powershell
+powershell -NoProfile -ExecutionPolicy Bypass -File tools\assets\Build-OpVBeamHardwareTextures.ps1
+powershell -NoProfile -ExecutionPolicy Bypass -File tools\assets\Build-OpVBeamHardwareTextures.ps1 -Credits
+```
