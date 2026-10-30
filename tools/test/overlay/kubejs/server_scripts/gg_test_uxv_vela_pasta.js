@@ -21,13 +21,13 @@
   var EUT = 536870912
   var ENERGY = 'gtceu:uxv_energy_input_hatch'
   var DYNAMO = 'gtceu:uiv_energy_output_hatch_16a'
-  var WIRE = 'gtceu:pasta_strand_single_wire'
+  var WIRE = 'gtceu:pasta_strand_single_cable'
   var CIRCUIT = 'gtceu:programmed_circuit'
 
   var IDS = [
     'pasta_extraction/pasta_extraction', 'pasta_sorting/phase_sorting', 'pasta_sorting/core_sample', 'pasta_drawing/strand_drawing',
     'pasta_lamination/plate_pressing', 'pasta_lamination/polar_cap_electrode', 'polar_cap_tapping/polar_cap_tap', 'neutronium_caging/cage_part_pressing',
-    'telemetry_decoding/vela_glitch_timing', 'luv/vela_glitch_record', 'assembler/finemet_toroid', 'assembler/uxv_voltage_coil',
+    'telemetry_decoding/vela_glitch_timing', 'gravitational_wave_astronomy/luv/vela_glitch_record', 'assembler/finemet_toroid', 'assembler/uxv_voltage_coil',
     'assembler/pasta_strand_repeater', 'assembly_line/uxv_machine_hull', 'assembly_line/uxv_energy_input_hatch', 'assembly_line/uxv_energy_output_hatch',
     'assembly_line/uxv_energy_input_hatch_16a', 'assembly_line/uxv_energy_output_hatch_16a', 'assembly_line/pasta_extractor',
     'assembly_line/pasta_phase_sorter', 'assembly_line/pasta_draw_bench', 'assembly_line/pasta_laminator', 'assembly_line/polar_cap_tap'
@@ -174,8 +174,8 @@
     var h = u.energy[0]
     var hp = h.getPos()
     var f = h.getFrontFacing()
-    var dx = f.getStepX()
-    var dz = f.getStepZ()
+    var dx = f.getNormal().getX()
+    var dz = f.getNormal().getZ()
     u.wire = []
     for (var i = 1; i <= 3; i++) {
       put(hp.getX() + dx * i, hp.getY(), hp.getZ() + dz * i, WIRE)
@@ -190,7 +190,7 @@
   }
 
   function startRun(u) {
-    topUp(u.energy)
+    // a generator needs room to put its power: the dynamo hatch starts empty
     setBus(u.bus, [[CIRCUIT, 1, '{Configuration:1}'], ['grindless:polar_cap_electrode', 1]])
     try { wireUp(u) } catch (e) { check('wire_build', false, errText(e)) }
     u.last = u.m.getRecipeLogic().getLastRecipe()
