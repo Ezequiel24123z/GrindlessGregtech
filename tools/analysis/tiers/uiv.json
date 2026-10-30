@@ -4,7 +4,7 @@
   "extends": "uev",
   "inheritTargets": true,
   "dropTargets": [],
-  "note": "UIV-C1 (docs/eras/uiv.md \"Validator\", \"Gate to UXV\"): UEV's pack plus the 22 UIV machines and M2's hall, the three jumps, the UIV wireless tier and the checks of the Validator. Substages: uiv (Earth and Earth orbit, Mercury orbit), uiv-rxj1856 and uiv-j0437 (parallel siblings after the jump), uiv-cygnus (after both).",
+  "note": "UIV-C1 (docs/eras/uiv.md \"Validator\", \"Gate to UXV\"): UEV's pack plus the 22 UIV machines and M2's hall, the three jumps, the UIV wireless tier and the checks of the Validator. Substages: uiv (Earth and Earth orbit, Mercury orbit), uiv-rxj1856 and uiv-j0437 (parallel siblings after the jump), uiv-cygnus (after both). TP-V (as built after TP-R, the same grouping as uxv.json:7): the Mk5 takes the UIV field generator (uiv/mk5.js:168, made from the RX J1856 neutronium pellet, tables/rx_j1856.json:168), so it is checked in uiv-rxj1856; the polarised proton source (uiv/mk5.js:167) and the Matrioshka (uiv/matrioshka.js:178) take the field generator and the J0437 emitter, and the droplet radiator works follows them, so the three are checked in uiv-cygnus; the UIV assembler rows get two-UEV-hatch UAF @uiv2; the rad-hard research cycle has the KNOWN PACK DEFECT bootstrap of uxv.json:1203.",
   "conditions": {
     "dimension": {
       "asKeysFor": [
@@ -1051,6 +1051,35 @@
       "note": "UEV-voltage assembly line rows (7,864,320 and 8,388,608 EU/t): two UEV hatches, as UV's @uv2."
     },
     {
+      "id": "gtceu:universal_assembly_factory@uiv2",
+      "machine": "gtceu:universal_assembly_factory",
+      "types": [
+        "gtceu:assembler",
+        "gtceu:circuit_assembler"
+      ],
+      "energy": {
+        "voltage": 8388608,
+        "hatches": 2
+      },
+      "needs": [
+        "eu:uev"
+      ],
+      "partsFromStructure": true,
+      "partAbilities": {
+        "energy_input": [
+          "gtceu:uev_energy_input_hatch",
+          "gtceu:uev_energy_input_hatch_4a",
+          "gtceu:uev_energy_input_hatch_16a",
+          "gtceu:uev_wireless_energy_hatch",
+          "gtceu:uev_wireless_energy_hatch_4a",
+          "gtceu:uev_wireless_energy_hatch_16a",
+          "gtceu:uev_wireless_energy_hatch_64a"
+        ]
+      },
+      "package": "M2",
+      "note": "TP-V, as uxv.json:238: two UEV hatches give UIV voltage (GTM 7.5.3's two-hatch rule, as uev.json's @uev2) for the 31,457,280 EU/t assembler rows, e.g. the metallic hydrogen coil block (tables/levitation_melter.json:95). The one-UIV-hatch large assembler alone is a cycle: the UIV hatch takes UIV circuits (uiv/foundation.js:49), which need the optical mainframe and so the millikelvin cryostat works, whose belt is that coil."
+    },
+    {
       "machine": "gtceu:warp_gate",
       "types": [
         "gtceu:warp_gate"
@@ -1083,6 +1112,13 @@
     }
   ],
   "synthetic": [
+    {
+      "id": "bootstrap-rad-hard-research",
+      "produces": [
+        "research:rad_hard_controller"
+      ],
+      "note": "KNOWN PACK DEFECT (TP-R-uiv 1943b5f4): research rad_hard_controller is written only by the Matrioshka computer (tables/matrioshka.json:8); the computer now takes UIV field generators (uiv/matrioshka.js:178), made from the neutronium pellet (tables/rx_j1856.json:168), made only in the neutronium cage, whose neutron star site casing takes the rad-hard controller. Remove once the cycle is broken in the pack. TP-V: the same bootstrap as uxv.json:1203."
+    },
     {
       "id": "wireless-uiv",
       "package": "W",
@@ -1491,7 +1527,7 @@
     },
     {
       "id": "site-j0437",
-      "label": "Site: the wind trap, the condensate lab and the X-ray profiler only at PSR J0437-4715",
+      "label": "Site: the wind trap, the condensate lab and the X-ray profiler only at PSR J0437-4715 (except UXV-B5's Ti-44 map row)",
       "kind": "site",
       "types": [
         "gtceu:pulsar_wind_trapping",
@@ -1501,7 +1537,11 @@
       "dimensions": [
         "grindless:psr_j0437_orbit"
       ],
-      "package": "B3"
+      "exceptRecipes": [
+        "grindless:xray_pulse_profiling/ti44_map"
+      ],
+      "package": "B3",
+      "note": "TP-V, as uxv.json's site-j0437: the dump holds UXV-B5's older-mode row (tables/j0437.json:55, knot dust -> ti44_map) with no dimension condition, as built (the profiler's controller is carried home); its input is Cas A knot dust, so UXV's checks hold it to uxv-cas-a."
     },
     {
       "id": "site-cygnus",
@@ -1749,10 +1789,6 @@
         "m:gtceu:stm_lithography_cell",
         "m:gtceu:spectral_hole_burner",
         "m:gtceu:millikelvin_cryostat_works",
-        "m:gtceu:polarised_proton_source",
-        "m:gtceu:uiv_fusion_reactor",
-        "m:gtceu:matrioshka_computer",
-        "m:gtceu:droplet_radiator_works",
         "gtceu:uiv_electric_motor",
         "gtceu:uiv_electric_pump",
         "gtceu:uiv_robot_arm",
@@ -1773,7 +1809,8 @@
         "m:gtceu:r_process_decompressor",
         "m:gtceu:decay_heat_vault",
         "grindless:neutronium_pellet",
-        "gtceu:uiv_field_generator"
+        "gtceu:uiv_field_generator",
+        "m:gtceu:uiv_fusion_reactor"
       ]
     },
     {
@@ -1801,7 +1838,10 @@
         "m:gtceu:penrose_engine",
         "grindless:kerr_probe_data",
         "grindless:kerr_chart",
-        "grindless:sled_hull"
+        "grindless:sled_hull",
+        "m:gtceu:polarised_proton_source",
+        "m:gtceu:matrioshka_computer",
+        "m:gtceu:droplet_radiator_works"
       ]
     },
     {
