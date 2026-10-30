@@ -50,7 +50,12 @@
     // profile; circuits 1-3 are A9's, 4 the Titan probes'
     { name: 'j0437_pulse_timed', type: 'telemetry_decoding', circuit: 5, orbit: true,
       itemsIn: [{ id: 'grindless:j0437_pulse_raw', count: 1 }, { id: ORB, count: 1 }], notConsumed: [],
-      fluidsIn: [{ id: HELIUM, amount: 1000 }], itemsOut: [{ id: 'grindless:xray_pulse_timed', count: 1 }], eut: ZPM_VA, duration: 1200 }
+      fluidsIn: [{ id: HELIUM, amount: 1000 }], itemsOut: [{ id: 'grindless:xray_pulse_timed', count: 1 }], eut: ZPM_VA, duration: 1200 },
+    // UXV-B4 (docs/eras/uxv.md, machine 16's timing record): the X-ray pulse profile timed against the Vela glitch record; circuit 6 (1-3 are
+    // A9's, 4 the Titan probes', 5 UIV-B3's)
+    { name: 'vela_glitch_timing', type: 'telemetry_decoding', circuit: 6,
+      itemsIn: [{ id: 'grindless:xray_pulse_timed', count: 1 }, { id: ORB, count: 1 }], notConsumed: [],
+      fluidsIn: [{ id: HELIUM, amount: 1000 }], itemsOut: [{ id: 'grindless:vela_glitch_timing', count: 1 }], eut: ZPM_VA, duration: 1200 }
   ]
 
   OB.recipes = TABLE.map(function (t) {
