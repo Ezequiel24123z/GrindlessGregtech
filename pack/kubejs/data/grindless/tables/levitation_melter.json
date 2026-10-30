@@ -110,7 +110,7 @@
         { "name": "maglev_stator", "circuit": 0, "eut": 491520, "duration": 300,
           "itemsIn": [{ "id": "grindless:potted_mh_stator", "count": 1 }, { "id": "gtceu:metallic_hydrogen_single_cable", "count": 2 }], "kept": [], "fluidsIn": [], "charge": [],
           "itemsOut": [{ "id": "grindless:maglev_stator", "count": 1 }], "fluidsOut": [] },
-        { "name": "uiv_conveyor_module", "circuit": 0, "eut": 491520, "duration": 400,
+        { "name": "uiv_conveyor_module", "circuit": 0, "eut": 7864320, "duration": 400,
           "itemsIn": [{ "id": "grindless:maglev_stator", "count": 1 }, { "id": "gtceu:uev_conveyor_module", "count": 1 }], "kept": [], "fluidsIn": [], "charge": [],
           "itemsOut": [{ "id": "gtceu:uiv_conveyor_module", "count": 1 }], "fluidsOut": [] }
       ]

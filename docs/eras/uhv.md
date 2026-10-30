@@ -1372,3 +1372,10 @@ All eleven were accepted as proposed, with the architect's recommended answers t
 9. `- 2026-10-27 · UHV Mk3 keeps oganesson (line 30); no fourth fusion ring until UEV (registerFusionTier, Monifactory's LGPL pattern).`
 10. `- 2026-10-27 · UHV nickel-62 is a hot cell row (IV's enrichment cascade stayed a reserve); the platinum plant rows are EV's.`
 11. `- 2026-10-27 · UHV substages: uhv, then uhv-mercury and uhv-proxima in parallel; the gate needs both.`
+
+## Components (TP-C)
+
+- `gtceu:uhv_<family>` (nine): assembly line, station research of the UV part, 491,520 EU/t, UHV materials (`data/grindless/tables/uhv_components.json`, `server_scripts/grindless/uhv/components.js`).
+- Fluid regulators UHV-UXV: assembler, the tier's pump plus its circuits, at VA of the tier below.
+- UEV-UXV components are raised to VA of the tier below and take the tier below's same part.
+- UHV basic machines, laser hatches and muffler hatch, the UEV-UXV 4x/9x hatches, quantum chests and tanks, and the UXV circuit assembler and scanner (`#gtceu:circuits/uxv`): assembly lines in `integration/high_tier_machines.js`, researched on the tier below's same machine. The rotor holders stay held.

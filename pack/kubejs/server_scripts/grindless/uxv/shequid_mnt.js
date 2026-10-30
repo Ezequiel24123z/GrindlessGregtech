@@ -213,8 +213,8 @@
     b.itemInputs('2x #gtceu:circuits/uiv')
     b.inputFluids(Fluid.of('gtceu:he_6n', 1000), Fluid.of('gtceu:soldering_alloy', 1152), Fluid.of('gtceu:lubricant', 1000))
     b.itemOutputs(out)
-    b.stationResearch(function (r) { return r.researchStack(Item.of('grindless:shequid_gyro')).CWUt(64).EUt(7864320) })
-    b.EUt(7864320).duration(1200)
+    b.stationResearch(function (r) { return r.researchStack(Item.of('grindless:shequid_gyro')).CWUt(64).EUt(31457280) })
+    b.EUt(31457280).duration(1200)
     SM.sensorRecipe = 'grindless:assembly_line/uxv_sensor'
   }
 
