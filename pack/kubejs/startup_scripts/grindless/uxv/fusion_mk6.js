@@ -52,7 +52,7 @@
     var e = ex < ez ? ex : ez
     if (e > 2) return y >= 1 && y <= H - 2 ? '#' : ' '
     if (ex + ez === 3) return 'Q'
-    if (x === 0 && z === (D - 1) / 2 && y === 2) return 'I'
+    if (x === 0 && z === (D - 1) / 2 && (y === 2 || y === 4)) return 'I'
     if (x === W - 1 && z === (D - 1) / 2 && y === 2) return 'O'
     if (y === 0) return e === 0 ? 'E' : 'C'
     if (y === H - 1) return e === 1 ? 'A' : 'C'
