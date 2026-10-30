@@ -1,4 +1,4 @@
-// priority: 1562
+// priority: 1567
 // Gregtech Grindless - names, tooltips and EMI info pages of UXV's Mk6 fusion ring (startup_scripts/grindless/uxv/fusion_mk6.js; package UXV-A7):
 //
 //   block.gtceu.uxv_fusion_reactor, material.gtceu.<id>   machine and ash gas names
