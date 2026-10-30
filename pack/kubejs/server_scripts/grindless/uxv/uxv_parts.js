@@ -62,19 +62,19 @@
     { name: 'uxv_electric_motor', research: 'gtceu:uiv_electric_motor',
       itemsIn: ['gtceu:uiv_electric_motor', '2x grindless:strand_stator', '2x grindless:tetrataenite_rotor', '2x grindless:mh_winding',
         '2x grindless:field_cooled_gdbco', CIRCUITS],
-      fluidsIn: [fluid(HE, 1000), fluid(SOLDER, 1152), fluid(LUBRICANT, 1000)], eut: 7864320, duration: 1200 },
+      fluidsIn: [fluid(HE, 1000), fluid(SOLDER, 1152), fluid(LUBRICANT, 1000)], eut: 31457280, duration: 1200 },
     { name: 'uxv_electric_pump', research: 'gtceu:uiv_electric_pump',
       itemsIn: ['gtceu:uiv_electric_pump', '2x grindless:alip_duct', '3x grindless:strand_tape', '2x grindless:balanced_rhea_impeller', CIRCUITS],
-      fluidsIn: [fluid(HE, 1000), fluid('gtceu:sodium_potassium', 1000), fluid(SOLDER, 1152)], eut: 7864320, duration: 1200 },
+      fluidsIn: [fluid(HE, 1000), fluid('gtceu:sodium_potassium', 1000), fluid(SOLDER, 1152)], eut: 31457280, duration: 1200 },
     { name: 'uxv_electric_piston', research: 'gtceu:uiv_electric_piston',
       itemsIn: ['gtceu:uiv_electric_piston', '2x grindless:terfenol_d_rod', '2x grindless:lasagna_plate', '2x grindless:strand_tape', CIRCUITS],
-      fluidsIn: [fluid(HE, 1000), fluid(SOLDER, 1152), fluid(LUBRICANT, 1000)], eut: 7864320, duration: 1200 },
+      fluidsIn: [fluid(HE, 1000), fluid(SOLDER, 1152), fluid(LUBRICANT, 1000)], eut: 31457280, duration: 1200 },
     { name: 'uxv_conveyor_module', research: 'gtceu:uiv_conveyor_module',
       itemsIn: ['gtceu:uiv_conveyor_module', '3x grindless:ni_mn_ga_crystal', '3x grindless:strand_tape', '2x gtceu:tungsten_steel_plate', CIRCUITS],
-      fluidsIn: [fluid(HE, 1000), fluid(SOLDER, 1152), fluid(LUBRICANT, 1000)], eut: 7864320, duration: 1200 },
+      fluidsIn: [fluid(HE, 1000), fluid(SOLDER, 1152), fluid(LUBRICANT, 1000)], eut: 31457280, duration: 1200 },
     { name: 'uxv_robot_arm', research: 'gtceu:uiv_robot_arm',
       itemsIn: ['gtceu:uiv_robot_arm', '3x grindless:uxv_strain_wave_gear', '2x grindless:tmr_encoder', 'gtceu:uxv_electric_piston', CIRCUITS],
-      fluidsIn: [fluid(HE, 1000), fluid(SOLDER, 1152), fluid(LUBRICANT, 1000)], eut: 7864320, duration: 1500 }
+      fluidsIn: [fluid(HE, 1000), fluid(SOLDER, 1152), fluid(LUBRICANT, 1000)], eut: 31457280, duration: 1500 }
   ]
 
   UP.skipped = []
@@ -104,7 +104,7 @@
   }
 
   function addPart(event, p) {
-    var out = 'grindless:' + p.name
+    var out = 'gtceu:' + p.name
     var strip = function (s) { return s.replace(/^\d+x /, '') }
     var missing = [out, p.research].concat(p.itemsIn.filter(function (s) { return s.indexOf('#') < 0 }).map(strip)).filter(function (id) { return !Item.exists(id) })
     p.fluidsIn.forEach(function (f) { if (!Fluid.exists(f.id)) missing.push(f.id) })
@@ -117,7 +117,7 @@
     p.itemsIn.forEach(function (s) { b.itemInputs(s) })
     p.fluidsIn.forEach(function (f) { b.inputFluids(Fluid.of(f.id, f.amount)) })
     b.itemOutputs(out)
-    b.stationResearch(function (r) { return r.researchStack(Item.of(p.research)).CWUt(64).EUt(7864320) })
+    b.stationResearch(function (r) { return r.researchStack(Item.of(p.research)).CWUt(64).EUt(31457280) })
     b.EUt(p.eut).duration(p.duration)
     UP.partRecipes.push('grindless:assembly_line/' + p.name)
   }
