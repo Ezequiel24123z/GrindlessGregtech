@@ -1,3 +1,4 @@
+// priority: -26204
 // -----------------------------------------------------------------------------------------------
 // Recipes of UXV's SHeQUID works and MNT collider (machines and recipe types: startup_scripts/grindless/uxv/shequid_mnt.js; docs/eras/uxv.md,
 // machines 6 and 7, process lines 18, 24 and 43; package UXV-A6), generated at every server load from data/grindless/tables/shequid_mnt.json,

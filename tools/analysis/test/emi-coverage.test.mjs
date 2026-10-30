@@ -330,14 +330,15 @@ test('EMI shows how every item, block, fluid and machine of the pack is obtained
   const gtRecipe = (list) => list.some((m) => m.source === 'recipe' && m.category.startsWith('gtceu:'));
   const charts = res.results.filter((x) => /_chart$|chart_draft$|lunar_map$|lunar_ephemeris$|vlbi_recording$/.test(x.key));
   const samples = res.results.filter((x) => x.key.startsWith('grindless:vein_sample_'));
-  assert.equal(charts.length, 16); // 16 since UIV-B4: the Kerr chart (Matrioshka c3, kept by the Penrose engine)
+  assert.equal(charts.length, 17); // 17 since UXV-A6: the island chart (MNT collider c4)
   assert.ok(samples.length > 40);
   // LuV B9: the Saturn Transfer Chart is made by the coilgun (a GT recipe) and is the ZPM trip: until ZPM its use is its copy and a page
   const nextEra = new Set(['grindless:saturn_transfer_chart']);
   // ZPM-A9's Pluto-Kuiper chart got its GT use in UV-B4 (the Kuiper interceptor bay holds it). UHV-B7's stellar neighbourhood chart is
   // used only as the UEV casing's station research, which GTM generates and the stand-in cannot see (an emi_coverage.json end item);
   // UEV-B2's pulsar navigation chart likewise researches the UIV casing (UEV-B5). UEV-B4's mass-radius chart is a kept GT catalyst
-  const pending = new Set(['grindless:stellar_neighbourhood_chart', 'grindless:pulsar_navigation_chart']);
+  // UXV-A6's island chart is kept by the gate's c10 row (UXV-B6); until then its use is A6's "stock for OpV" page, which B6 deletes with this entry
+  const pending = new Set(['grindless:stellar_neighbourhood_chart', 'grindless:pulsar_navigation_chart', 'grindless:island_chart']);
   for (const r of charts.filter((x) => !pending.has(x.key))) {
     // an info page lists its stack as both made and used, so the chart's page shows on both sides
     assert.ok(gtRecipe(r.made) && (nextEra.has(r.key) || !r.made.some((m) => m.source === 'page')), r.key);
