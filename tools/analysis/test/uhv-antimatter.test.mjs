@@ -211,7 +211,7 @@ test('no UEV input; every item has a texture; every lang key is written in en_us
     for (const f of ['overlay_front.png', 'overlay_front_active.png', 'overlay_front_active_emissive.png']) {
       assert.ok(fs.existsSync(path.join(kube, 'assets', 'grindless', 'textures', 'block', 'multiblock', m, f)), `${m}/${f}`);
     }
-    for (const k of [`block.gtceu.${m}`, ...[0, 1, 2].map((i) => `grindless.machine.${m}.tooltip.${i}`)]) assert.ok(LANG.includes(`'${k}'`), k);
+    for (const k of [`block.gtceu.${m}`, `grindless.machine.${m}.tooltip.0`]) assert.ok(LANG.includes(`'${k}'`), k);
   }
   for (const [type, t] of Object.entries(T.types)) {
     if (!t.dataKey) continue;

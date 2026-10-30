@@ -177,8 +177,7 @@
       .pattern(function (def) { return Pat.build(def, m.spec) })
       ["tooltips(net.minecraft.network.chat.Component[])"]([
         Text.translate('grindless.machine.calutron.tooltip.0'),
-        Text.translate('grindless.machine.calutron.tooltip.1'),
-        Text.translate('grindless.machine.calutron.tooltip.2')
+        Text.translate('gtceu.machine.available_recipe_map_1.tooltip', Text.translate('gtceu.calutron_separation'))
       ])
       .workableCasingModel(SHIELD_TEXTURE, 'grindless:block/multiblock/calutron')
   })

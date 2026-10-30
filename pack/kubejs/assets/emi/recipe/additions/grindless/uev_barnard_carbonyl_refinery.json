@@ -1,5 +1,5 @@
 {
   "type": "emi:info",
   "stacks": ["item:gtceu:carbonyl_refinery"],
-  "text": ["emi.grindless.info.carbonyl_refinery.0"]
+  "text": ["emi.grindless.info.carbonyl_refinery.0", "emi.grindless.info.carbonyl_refinery.1", "emi.grindless.info.carbonyl_refinery.2", "emi.grindless.info.carbonyl_refinery.3"]
 }

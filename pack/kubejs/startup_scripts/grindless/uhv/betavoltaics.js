@@ -240,8 +240,8 @@
       .pattern(function (def) { return Pat.build(def, water.spec) })
       ["tooltips(net.minecraft.network.chat.Component[])"]([
         Text.translate('grindless.machine.ultrapure_water_plant.tooltip.0'),
-        Text.translate('grindless.machine.ultrapure_water_plant.tooltip.1'),
-        Text.translate('grindless.machine.ultrapure_water_plant.tooltip.2')
+        Text.translate('gtceu.machine.available_recipe_map_1.tooltip', Text.translate('gtceu.ultrapure_water')),
+        Text.translate('gtceu.multiblock.parallelizable.tooltip')
       ])
       .workableCasingModel(CLEAN_TEXTURE, 'grindless:block/multiblock/ultrapure_water_plant')
 
@@ -256,8 +256,7 @@
       .pattern(function (def) { return Pat.build(def, fab.spec) })
       ["tooltips(net.minecraft.network.chat.Component[])"]([
         Text.translate('grindless.machine.betavoltaic_fab.tooltip.0'),
-        Text.translate('grindless.machine.betavoltaic_fab.tooltip.1'),
-        Text.translate('grindless.machine.betavoltaic_fab.tooltip.2')
+        Text.translate('gtceu.machine.available_recipe_map_1.tooltip', Text.translate('gtceu.betavoltaic'))
       ])
       .workableCasingModel(INERT_TEXTURE, 'grindless:block/multiblock/betavoltaic_fab')
   })

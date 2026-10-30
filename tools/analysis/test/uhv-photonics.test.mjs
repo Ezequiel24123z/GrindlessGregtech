@@ -195,7 +195,7 @@ test('no UEV input, and every lang key the package needs is written in en_us and
   }
   const keys = ['block.gtceu.mbe_reactor', 'block.gtceu.photonic_foundry', 'gtceu.molecular_beam_epitaxy', 'gtceu.photonic_foundry',
     'grindless.machine.mbe_reactor.no_voiding'];
-  for (const m of ['mbe_reactor', 'photonic_foundry']) for (let i = 0; i <= 2; i++) keys.push(`grindless.machine.${m}.tooltip.${i}`);
+  for (const m of ['mbe_reactor', 'photonic_foundry']) keys.push(`grindless.machine.${m}.tooltip.0`);
   for (const name of Object.keys(PH.items)) keys.push(`item.grindless.${name}`, `tooltip.grindless.${name}.0`, `tooltip.grindless.${name}.1`);
   for (const k of keys) assert.ok(lang.includes(`'${k}'`), k);
   // each item has a texture

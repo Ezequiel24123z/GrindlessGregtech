@@ -1,5 +1,5 @@
 {
   "type": "emi:info",
   "stacks": ["item:gtceu:stellar_forge"],
-  "text": ["emi.grindless.info.stellar_forge.0"]
+  "text": ["emi.grindless.info.stellar_forge.0", "emi.grindless.info.stellar_forge.1", "emi.grindless.info.stellar_forge.2", "emi.grindless.info.stellar_forge.3", "emi.grindless.info.stellar_forge.4"]
 }

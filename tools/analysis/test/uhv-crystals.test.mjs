@@ -190,7 +190,7 @@ test('no UEV input, and every lang key is written in en_us and es_es', () => {
   for (const t of Object.values(T.types)) if (t.dataKey) for (const r of t.recipes) keys.push(`gtceu.recipe.${t.dataKey}.${r.name}`);
   for (const m of ['nuclear_clock_lab', 'crystal_growth_furnace']) {
     keys.push(`block.gtceu.${m}`);
-    for (let i = 0; i < 3; i++) keys.push(`grindless.machine.${m}.tooltip.${i}`);
+    keys.push(`grindless.machine.${m}.tooltip.0`);
   }
   keys.push('gtceu.nuclear_clock', 'gtceu.crystal_growth', 'grindless.machine.crystal_growth_furnace.no_voiding');
   for (const n of ['vuv_frequency_comb', 'vuv_caf2_optic', 'iridium_crucible', 'worn_iridium_crucible']) keys.push(`item.grindless.${n}`, `tooltip.grindless.${n}.0`, `tooltip.grindless.${n}.1`);

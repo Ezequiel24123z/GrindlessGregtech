@@ -253,8 +253,8 @@
       .pattern(function (def) { return Pat.build(def, reactor.spec) })
       ["tooltips(net.minecraft.network.chat.Component[])"]([
         Text.translate('grindless.machine.mbe_reactor.tooltip.0'),
-        Text.translate('grindless.machine.mbe_reactor.tooltip.1'),
-        Text.translate('grindless.machine.mbe_reactor.tooltip.2')
+        Text.translate('gtceu.machine.available_recipe_map_1.tooltip', Text.translate('gtceu.molecular_beam_epitaxy')),
+        Text.translate('gtceu.multiblock.parallelizable.tooltip')
       ])
       .workableCasingModel(UV_TEXTURE, 'grindless:block/multiblock/mbe_reactor')
 
@@ -267,8 +267,8 @@
       .pattern(function (def) { return Pat.build(def, foundry.spec) })
       ["tooltips(net.minecraft.network.chat.Component[])"]([
         Text.translate('grindless.machine.photonic_foundry.tooltip.0'),
-        Text.translate('grindless.machine.photonic_foundry.tooltip.1'),
-        Text.translate('grindless.machine.photonic_foundry.tooltip.2')
+        Text.translate('gtceu.machine.available_recipe_map_1.tooltip', Text.translate('gtceu.photonic_foundry')),
+        Text.translate('gtceu.multiblock.parallelizable.tooltip')
       ])
       .workableCasingModel(CLEAN_TEXTURE, 'grindless:block/multiblock/photonic_foundry')
   })
