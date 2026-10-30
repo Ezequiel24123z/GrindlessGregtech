@@ -1,4 +1,3 @@
-// priority: -6202
 // TEST ONLY: OpV-D2, X 38272-38335, Z 0-63, Y 98-115, Cygnus X-1 orbit.
 // Doubt: the distiller forms here, c2 refuses voiding, and exact c3 alone consumes negative residue without outputs.
 (function () {

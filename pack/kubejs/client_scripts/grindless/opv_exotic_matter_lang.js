@@ -1,4 +1,3 @@
-// priority: 5975
 (function () {
   var entries = [
     ['block.gtceu.strangelet_vault', 'Strangelet Vault', 'Bóveda de strangelets'],
