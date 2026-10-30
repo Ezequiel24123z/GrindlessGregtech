@@ -16,7 +16,7 @@ const ISO = table('isotopes.json');
 const FAC = table('isotopes_facility.json');
 const FAB = table('isotopes_fabrication.json');
 // UEV's calutron rows; UIV-A1 appended its own (marked "_": "UIV-...") and pins them in uiv-isotopes.test.mjs
-const CAL = ISO.types.calutron_separation.recipes.filter((r) => !/^U(IV|XV)-/.test(String(r._ || ''))); // UXV-A1 rows are pinned in uxv-superheavy.test.mjs
+const CAL = ISO.types.calutron_separation.recipes.filter((r) => !/^(U(IV|XV)|OpV)-/.test(String(r._ || ''))); // OpV-D2 pins its Pb-208 row separately.
 
 const ids = (xs) => (Array.isArray(xs) ? xs : []).map((x) => x.id);
 const inputs = (r) => ids(r.itemsIn).concat(ids(r.kept), ids(r.fluidsIn), ids(r.charge));

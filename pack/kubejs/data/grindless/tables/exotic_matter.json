@@ -1,0 +1,59 @@
+{
+  "_source": "OpV-D2: Witten (1984), Farhi and Jaffe (1984), Greiner, Koch and Stoecker (1987). Stable strange matter is a hypothesis; surviving industrial strangelets and the yield are named fiction. Coordinator resolution: synchrotron c9 makes the fireball; distiller keeps c2 and c3, never c1.",
+  "types": {
+    "chemical_reactor": {
+      "recipes": [
+        {
+          "name": "pb208_ion_source", "circuit": 0, "eut": 268435456, "duration": 400,
+          "itemsIn": [{"id": "grindless:lead_208_dust", "count": 1}, {"id": "gtceu:glass_tube", "count": 1}],
+          "fluidsIn": [{"id": "gtceu:chlorine", "amount": 2000}],
+          "itemsOut": [{"id": "grindless:pb208_ion_source", "count": 1}]
+        }
+      ]
+    },
+    "strangelet_distillation": {
+      "recipes": [
+        {
+          "name": "strangelet_seed", "circuit": 2, "eut": 268435456, "duration": 1600,
+          "site": "grindless:cygnus_x1_orbit",
+          "_wear": "Nominal 1/32 catalyst wear, rounded to 312/10000 (3.12%) by GTM's integer chance API.",
+          "chancedIn": [{"id": "grindless:pasta_core_sample", "count": 1, "chance": 312}],
+          "fluidsIn": [{"id": "grindless:fireball_distillate", "amount": 1000}],
+          "itemsOut": [{"id": "grindless:strangelet_seed", "count": 1}],
+          "chancedOut": [{"id": "grindless:negative_strangelet_residue", "count": 1, "chance": 2000}]
+        },
+        {
+          "name": "dispose_negative_strangelets", "circuit": 3, "eut": 268435456, "duration": 400,
+          "site": "grindless:cygnus_x1_orbit",
+          "itemsIn": [{"id": "grindless:negative_strangelet_residue", "count": 1}],
+          "disposal": true
+        }
+      ]
+    },
+    "strangelet_growth": {
+      "recipes": [
+        {
+          "name": "fed_strangelet", "circuit": 1, "eut": 268435456, "duration": 1600,
+          "itemsIn": [{"id": "grindless:strangelet_seed", "count": 1}, {"id": "grindless:neutronium_pellet", "count": 4}],
+          "kept": [{"id": "gtceu:boron_dust", "count": 1}],
+          "charge": [{"id": "minecraft:water", "amount": 1000}],
+          "itemsOut": [{"id": "grindless:fed_strangelet", "count": 1}]
+        },
+        {
+          "name": "grown_strangelet", "circuit": 2, "eut": 503316480, "duration": 2400,
+          "itemsIn": [{"id": "grindless:fed_strangelet", "count": 1}],
+          "kept": [{"id": "gtceu:boron_dust", "count": 1}],
+          "charge": [{"id": "minecraft:water", "amount": 1000}],
+          "itemsOut": [{"id": "grindless:grown_strangelet", "count": 1}, {"id": "grindless:strangelet_tailings", "count": 1}]
+        },
+        {
+          "name": "stable_exotic_matter", "circuit": 3, "eut": 503316480, "duration": 2400,
+          "itemsIn": [{"id": "grindless:grown_strangelet", "count": 1}, {"id": "grindless:field_frozen_plate", "count": 1}],
+          "kept": [{"id": "gtceu:boron_dust", "count": 1}],
+          "charge": [{"id": "minecraft:water", "amount": 1000}],
+          "itemsOut": [{"id": "grindless:stable_exotic_matter", "count": 1}]
+        }
+      ]
+    }
+  }
+}
