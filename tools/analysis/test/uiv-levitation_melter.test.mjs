@@ -12,8 +12,8 @@ const kube = path.join(root, 'pack', 'kubejs');
 const tables = path.join(kube, 'data', 'grindless', 'tables');
 const read = (...p) => fs.readFileSync(path.join(kube, ...p), 'utf8');
 const T = JSON.parse(fs.readFileSync(path.join(tables, 'levitation_melter.json'), 'utf8'));
-// UXV-A3's six melts (circuits 9-14) are pinned in uxv-spin_rows.test.mjs; this file pins UIV-A3's five
-T.types.levitation_melting.recipes = T.types.levitation_melting.recipes.filter((r) => !(r._why || '').startsWith('UXV-A3'));
+// UXV-A3's six melts (circuits 9-14) are pinned in uxv-spin_rows.test.mjs; OpV-D1's c17-18 in opv-beam_hardware.test.mjs; this file pins UIV-A3's five
+T.types.levitation_melting.recipes = T.types.levitation_melting.recipes.filter((r) => !/^(UXV-A3|OpV-D1)/.test(r._why || ''));
 const MINE = 'levitation_melter.json';
 
 const ids = (xs) => (Array.isArray(xs) ? xs : []).map((x) => x.id);
@@ -141,7 +141,9 @@ test('the five older rows exist', () => {
   const eb = JSON.parse(fs.readFileSync(path.join(tables, 'electron_beam.json'), 'utf8')).types.electron_beam_refining.recipes;
   const button = eb.find((r) => r.name === 'nb_ta_button');
   assert.equal(button.circuit, 7);
-  assert.equal(new Set(eb.map((r) => r.circuit)).size, eb.length);
+  // OpV-F3 lets an EB circuit repeat when the item inputs differ (OpV-D1's c25 pair): circuit plus item inputs stay unique
+  const ebKey = (r) => `${r.circuit}|${ids(r.itemsIn).concat(ids(r.kept)).sort().join(',')}`;
+  assert.equal(new Set(eb.map(ebKey)).size, eb.length);
   assert.ok(ids(button.itemsOut).includes('grindless:nb_ta_button'));
   const comp = JSON.parse(fs.readFileSync(path.join(tables, 'composites.json'), 'utf8')).types;
   const halbach = comp.nitride_magnet_synthesis.recipes;
