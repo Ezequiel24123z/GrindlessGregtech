@@ -115,6 +115,21 @@
             { "id": "grindless:niobium_scrap", "count": 1 }
           ],
           "fluidsOut": [{ "id": "gtceu:nitrogen", "amount": 800 }]
+        },
+        {
+          "_why": "OpV-A2 (opv.md line 18): aluminium anode and ring contacts sputtered on, then the wafer diced into four silicon drift detector dies; the kerf goes back as silicon dust",
+          "name": "sdd_metal", "circuit": 8, "eut": 33554432, "duration": 600,
+          "itemsIn": [
+            { "id": "grindless:sdd_anode_wafer", "count": 1 },
+            { "id": "gtceu:aluminium_dust", "count": 1 }
+          ],
+          "kept": [], "charge": [],
+          "fluidsIn": [{ "id": "gtceu:argon", "amount": 1000 }],
+          "itemsOut": [
+            { "id": "grindless:sdd_die", "count": 4 },
+            { "id": "gtceu:silicon_dust", "count": 1 }
+          ],
+          "fluidsOut": [{ "id": "gtceu:argon", "amount": 800 }]
         }
       ]
     },

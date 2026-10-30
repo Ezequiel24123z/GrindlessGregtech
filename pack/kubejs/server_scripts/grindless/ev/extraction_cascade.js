@@ -275,6 +275,16 @@
       itemsOut: [{ id: 'gtceu:indium_dust', count: 2 }],
       fluidsOut: [{ id: 'gtceu:phosphine', amount: 2000 }, { id: 'gtceu:chlorine', amount: 6000 }],
       eut: 1920, duration: 100
+    },
+    // OpV-A2 (opv.md line 17): the GaN MOCVD exhaust (excess ammonia carrying unreacted gallium) scrubbed in HCl: the gallium is won
+    // back, the ammonia stripped off for the reactor or stock, the spent acid leaves diluted
+    {
+      name: 'gan_exhaust_gallium', mode: 'opv', circuit: 27,
+      itemsIn: [],
+      fluidsIn: [{ id: 'gtceu:gan_mocvd_exhaust', amount: 3000 }, { id: 'gtceu:hydrochloric_acid', amount: 1000 }],
+      itemsOut: [{ id: 'gtceu:small_gallium_dust', count: 1 }],
+      fluidsOut: [{ id: 'gtceu:ammonia', amount: 2250 }, { id: 'gtceu:diluted_hydrochloric_acid', amount: 1000 }],
+      eut: 1920, duration: 100
     }
   ]
 

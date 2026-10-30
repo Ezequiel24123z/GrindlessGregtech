@@ -151,7 +151,11 @@
         { "_why": "UIV-A10, line 41: Nb/AlOx/Nb trilayer patterned into Josephson junctions on the SNSPD foundry (circuit 5).", "name": "nb_jj_wafer", "circuit": 5, "eut": 1966080, "duration": 600,
           "itemsIn": [{ "id": "grindless:nb_trilayer", "count": 1 }],
           "fluidsIn": [{ "id": "gtceu:pmma_resist", "amount": 100 }],
-          "itemsOut": [{ "id": "grindless:nb_jj_wafer", "count": 1 }] }
+          "itemsOut": [{ "id": "grindless:nb_jj_wafer", "count": 1 }] },
+        { "_why": "OpV-A2 (opv.md line 15): NbN nanowire detectors written over the LN-on-SOI waveguides, so the link reads its own light at 4 K (circuit 6).", "name": "snspd_link", "circuit": 6, "eut": 1966080, "duration": 800,
+          "itemsIn": [{ "id": "grindless:ln_soi_waveguide_wafer", "count": 1 }, { "id": "gtceu:niobium_dust", "count": 1 }],
+          "fluidsIn": [{ "id": "gtceu:nitrogen", "amount": 100 }, { "id": "gtceu:pmma_resist", "amount": 100 }],
+          "itemsOut": [{ "id": "grindless:snspd_link_wafer", "count": 1 }] }
       ]
     },
     "vdw_assembly": {
