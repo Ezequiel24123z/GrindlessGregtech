@@ -1,0 +1,5 @@
+{
+  "type": "emi:info",
+  "stacks": ["item:grindless:cnt_whipple_shield"],
+  "text": ["emi.grindless.info.uxv_kerr_sling.cas_a"]
+}

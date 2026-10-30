@@ -12,6 +12,8 @@
   "platforms": [
     { "place": "rx_j1856", "jump": "hold_rx_j1856", "dimension": "grindless:rx_j1856_orbit", "x": 64, "y": 100, "z": 64 },
     { "place": "psr_j0437", "jump": "hold_psr_j0437", "dimension": "grindless:psr_j0437_orbit", "x": 64, "y": 100, "z": 64 },
-    { "place": "cygnus_x1", "jump": "hold_cygnus_x1", "dimension": "grindless:cygnus_x1_orbit", "x": 64, "y": 100, "z": 64 }
+    { "place": "cygnus_x1", "jump": "hold_cygnus_x1", "dimension": "grindless:cygnus_x1_orbit", "x": 64, "y": 100, "z": 64 },
+    { "_why": "UXV-B1: the c8 and c9 jumps leave from Cygnus X-1's orbit (server_scripts/grindless/uxv/kerr_sling.js places these two)", "place": "vela_pulsar", "jump": "hold_vela_pulsar", "dimension": "grindless:vela_pulsar_orbit", "source": "grindless:cygnus_x1_orbit", "x": 64, "y": 100, "z": 64 },
+    { "place": "cas_a", "jump": "hold_cas_a", "dimension": "grindless:cas_a_remnant", "source": "grindless:cygnus_x1_orbit", "x": 64, "y": 100, "z": 64 }
   ]
 }

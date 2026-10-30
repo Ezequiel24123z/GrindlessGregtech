@@ -1,0 +1,5 @@
+{
+  "type": "emi:info",
+  "stacks": ["item:grindless:frc_cartridge"],
+  "text": ["emi.grindless.info.uxv_kerr_sling.vela"]
+}

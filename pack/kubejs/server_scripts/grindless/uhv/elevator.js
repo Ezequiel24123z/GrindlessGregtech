@@ -125,7 +125,10 @@
     { name: 'mh_tether', type: 'tether_ribbon', circuit: 3, itemsIn: [item('grindless:braided_mh_tether', 1), item(SEGMENT, 1)], fluidsIn: [],
       itemsOut: [item('grindless:mh_tether', 1)], fluidsOut: [], eut: UHVA, duration: 800 },
     { name: 'worn_tether_scrap', type: 'tether_ribbon', circuit: 4, itemsIn: [item('grindless:worn_crust_lift_tether', 1)], fluidsIn: [],
-      itemsOut: [item(CNT, 4)], fluidsOut: [], eut: UHVA, duration: 400 }
+      itemsOut: [item(CNT, 4)], fluidsOut: [], eut: UHVA, duration: 400 },
+    // UXV-B1: the Whipple bumper, a densified yarn interleaved with aluminium foil (circuit 7; 5 and 6 stay free for the other UXV rows)
+    { name: 'bumper_weave', type: 'tether_ribbon', circuit: 7, itemsIn: [item('grindless:cnt_densified_yarn', 1), item('gtceu:aluminium_foil', 2)], fluidsIn: [],
+      itemsOut: [item('grindless:cnt_bumper_weave', 1)], fluidsOut: [], eut: UHVA, duration: 600 }
   ]
 
   // line 24's side steps on GTM's own machines
