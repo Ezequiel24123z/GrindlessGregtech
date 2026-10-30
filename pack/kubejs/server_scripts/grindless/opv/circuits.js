@@ -13,7 +13,7 @@
 // implanter (c12-14), UHV crystal growth (c21), MBE (c9-10), SiC device fab (c6), UEV CVI (c8), SNSPD foundry (c6), UIV ion slicing
 // (c5-6), femtosecond writer (c6), BEUV scanner (c4-8), STM lithography (c4), UXV MTJ sputtering (c5-8). The join is the UEV photonic
 // integration hall's c8 (tables/photonics_uev.json): cryo_cmos_die + nb_tsv_interposer + cryo_optical_link + hemt_amplifier ->
-// gtnn:cosmic_mainframe, the only recipe that makes it (GT--'s own recipe and its cosmic SMDs are cut by OpV-F2).
+// gtnn:cosmic_mainframe, the only recipe that makes it (GT-- 1.3.10 ships no recipe for it, checked in its jar; OpV-F2 cuts its cosmic SMDs).
 //
 // Published for the tests: global.grindless.opvCircuits.recipes, .skipped, .fridgeRecipes (the closed_loop_cooling ids this script adds).
 // Rhino: var + function inside every callback that runs more than once.

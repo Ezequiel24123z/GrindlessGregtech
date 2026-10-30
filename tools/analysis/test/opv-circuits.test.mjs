@@ -66,6 +66,7 @@ const TABLE_ROWS = [
   ['tfln_femtosecond.json', 'ion_slicing', 'ln_on_soi', 6, 'uiv/tfln_femtosecond.js'],
   ['tfln_femtosecond.json', 'femtosecond_writing', 'ln_soi_waveguides', 6, 'uiv/tfln_femtosecond.js'],
   ['photonics_uev.json', 'snspd_fabrication', 'snspd_link', 6, 'uev/photonics.js'],
+  ['photonics_uev.json', 'photonic_integration', 'cosmic_mainframe', 8, 'uev/photonics.js'],
   ['composites.json', 'chemical_vapour_infiltration', 'hpsi_sic', 8, 'uev/composites.js'],
   ['power_devices.json', 'silicon_carbide', 'gan_mmic', 6, 'uhv/power_devices.js']
 ];
@@ -174,4 +175,18 @@ test('the lines chain: every intermediate is made and used, the fluids too', () 
   assert.ok(producers('grindless:hemt_amplifier').some((r) => r.i === 'grindless:cutter/hemt_amplifiers'));
   assert.ok(producers('grindless:gan_mmic').some((r) => r.i === 'grindless:silicon_carbide/gan_mmic'));
   assert.ok(producers('grindless:sdd_die').some((r) => r.i === 'grindless:mtj_sputtering/sdd_metal'));
+});
+
+test('the join: one photonic hall row, circuit 8, the only maker of gtnn:cosmic_mainframe, from the four parts of lines 13-16', () => {
+  const hall = table('photonics_uev.json').types.photonic_integration.recipes;
+  const r = hall.find((x) => x.name === 'cosmic_mainframe');
+  assert.ok(r);
+  assert.equal(r.circuit, 8);
+  assert.deepEqual(r.itemsIn.map((x) => x.id), ['grindless:cryo_cmos_die', 'grindless:nb_tsv_interposer', 'grindless:cryo_optical_link', 'grindless:hemt_amplifier']);
+  assert.ok(r.itemsIn.length + 1 <= 8 && r.itemsOut.length <= 2, 'within the hall slots');
+  assert.deepEqual(r.itemsOut, [{ id: 'gtnn:cosmic_mainframe', count: 1 }]);
+  assert.equal(new Set(hall.map((x) => x.circuit)).size, hall.length, 'no circuit twice');
+  assert.equal(OC.joinRecipe, 'grindless:photonic_integration/cosmic_mainframe');
+  assert.deepEqual(plain(producers('gtnn:cosmic_mainframe').map((x) => x.i)), [OC.joinRecipe]);
+  for (const p of r.itemsIn) assert.ok(producers(p.id).length >= 1, `${p.id} has a producer`);
 });
