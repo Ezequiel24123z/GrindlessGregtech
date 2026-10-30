@@ -4,7 +4,8 @@
 //   gtceu:mega_chemical_complex   (machine name + 4 tooltip lines, en_us and es_es)
 //   gtceu:mega_chemical_complex   (the recipe type name, the second mode)
 //
-// The first mode runs GTM's large chemical reactor recipes, so gtceu.large_chemical_reactor is GTM's own, already translated.
+// The first mode runs GTM's large chemical reactor recipes, so gtceu.large_chemical_reactor is GTM's own; GTM 7.5.3 ships no es_es,
+// so it shows in English in both languages, like every other GTM name.
 ClientEvents.lang('en_us', event => {
     var add = function (key, value) { event.add('grindless', key, value) }
 
